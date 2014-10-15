@@ -1,0 +1,31 @@
+{
+    "name": "cap-collectif-SF2",
+    "version": "0.0.1",
+    "description": "Cap-Collectif version Symfony2",
+    "main": "Gulpfile.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/jolicode/CapCollectif-SF2"
+    },
+    "author": "lbrunet@jolicode.com",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/jolicode/CapCollectif-SF2/issues"
+    },
+    "homepage": "https://github.com/jolicode/CapCollectif-SF2",
+    "dependencies": {
+        "gulp": "^3.8.8",
+        "gulp-ruby-sass": "^0.7.1",
+        "gulp-minify-css": "^0.3.10",
+        "gulp-plumber": "^0.6.6",
+        "gulp-rename": "^1.2.0",
+        "gulp-watch": "^1.1.0",
+        "gulp-concat": "^2.4.1",
+        "gulp-copy": "0.0.2",
+        "gulp-load-plugins": "^0.7.0",
+        "gulp-uglify": "^1.0.1"
+    }
+}

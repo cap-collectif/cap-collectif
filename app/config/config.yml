@@ -1,0 +1,46 @@
+imports:
+    - 
+        resource: parameters.yml
+    - 
+        resource: security.yml
+framework:
+    secret: "%secret%"
+    router:
+        resource: "%kernel.root_dir%/config/routing.yml"
+        strict_requirements: null
+    form: null
+    csrf_protection: null
+    validation:
+        enable_annotations: true
+    templating:
+        engines:
+            - twig
+    default_locale: "%locale%"
+    trusted_hosts: null
+    trusted_proxies: null
+    session:
+        handler_id: null
+    fragments: null
+    http_method_override: true
+twig:
+    debug: "%kernel.debug%"
+    strict_variables: "%kernel.debug%"
+doctrine:
+    dbal:
+        driver: "%database_driver%"
+        host: "%database_host%"
+        port: "%database_port%"
+        dbname: "%database_name%"
+        user: "%database_user%"
+        password: "%database_password%"
+        charset: UTF8
+    orm:
+        auto_generate_proxy_classes: "%kernel.debug%"
+        auto_mapping: true
+swiftmailer:
+    transport: "%mailer_transport%"
+    host: "%mailer_host%"
+    username: "%mailer_user%"
+    password: "%mailer_password%"
+    spool:
+        type: memory

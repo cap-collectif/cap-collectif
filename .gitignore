@@ -1,0 +1,42 @@
+# Symfony directories
+/web/bundles/
+/web/images/*
+/web/fonts/*
+/web/css/*
+/web/js/*
+
+/app/bootstrap.php.cache
+/app/cache/*
+/app/logs/*
+!app/cache/.gitkeep
+!app/logs/.gitkeep
+/build/
+/vendor/
+/bin/
+/composer.phar
+
+
+# Configuration files
+app/config/parameters.ini
+app/config/parameters.yml
+app/config/parameters/*
+
+# Node / grunt / bower
+/node_modules/
+/app/Resources/libs
+
+# OS X
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon
+# OS X - Thumbnails
+._*
+.sass-cache/*
+
+# OS X - Files that might appear on external disk
+.Spotlight-V100
+.Trashes
+
+# PHPStorm configuration
+.idea
