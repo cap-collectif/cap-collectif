@@ -1,16 +1,24 @@
 /* ===============================================================
     $Variables Custom
 ================================================================*/
-$white: #fff;
-$font-size-base:  14px;
 
+// = Colors
+// -----------------------------
+$white: #fff;
+$gray-primary: #c0c0c0;
+
+// = Base
+// -----------------------------
+$font-size-base:  14px;
+$body-bg: #ebebeb;
+
+
+// = Custom
+// -----------------------------
 $custom-jumbotron: #0088CC;
 $custom-jumbotron-text: $white;
-
 
 $custom-footer: #0088CC;
 $custom-footer-text: $white;
 $custom-footer-links: #13a7cc;
 $custom-footer-links-text: $white;
-
-

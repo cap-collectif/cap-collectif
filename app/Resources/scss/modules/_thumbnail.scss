@@ -1,0 +1,21 @@
+ /* ===============================================================
+   $Thumbnail
+================================================================*/
+.thumbnail--custom {
+  padding: 15px;
+  margin-bottom: 30px;
+  background-color: $white;
+  @include border-radius(0);
+  @include box-shadow(0 2px 4px rgba(0,0,0,.15), 0 1px 2px rgba(0,0,0,.05));
+
+  .progress {
+    @include progress-bar-variant($gray-primary);
+    @include border-radius(0);
+  }
+
+  .progress-bar--custom {
+    text-align: left;
+    padding-left: 15px;
+  }
+
+}

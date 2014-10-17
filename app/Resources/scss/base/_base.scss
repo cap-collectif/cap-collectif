@@ -1,7 +1,10 @@
 /* ===============================================================
    $BASE
 ================================================================*/
-body {font-family: $font-family-sans-serif}
+body {
+  background-color: $body-bg;
+  font-family: $font-family-sans-serif
+}
 .h1 { font-size: $font-size-h1 }
 .h2 { font-size: $font-size-h2 }
 .h3 { font-size: $font-size-h3 }
