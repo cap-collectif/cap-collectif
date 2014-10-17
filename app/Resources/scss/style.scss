@@ -1,10 +1,55 @@
+/**
+ * CSS GUIDELINE
+ * https://github.com/flexbox/CSS-Guidelines/blob/master/README.md
+ * TYPOGRAPHIE GUIDELINE
+ * http://csswizardry.com/2012/02/pragmatic-practical-font-sizing-in-css/
+ * VARIABLES GUIDELINE BOOTSTRAP 3
+ * https://github.com/twbs/bootstrap-sass/blob/v3.2.0/assets/stylesheets/bootstrap/_variables.scss
+ * https://github.com/twbs/bootstrap-sass/tree/v3.2.0/assets/stylesheets/bootstrap/mixins
+ */
+
+/* ===============================================================
+    $INDEX
+================================================================*/
+/**
+ * BOOTSTRAP 3..........Bootstrap 3 SASS
+ * FONTS................Fonts Icon Cap-Collectif
+ * VARIABLES............Environment variables
+ * BASE.................Environment global
+ * HEADER...............Header
+ * FOOTER...............Footer
+ * FILTER...............Filter Form
+ * MACRO................Macro vision - media object
+ * NEWS.................News - media object
+ * THUMBNAIL............Thumbnail
+ */
+
+/* ===============================================================
+    $BOOTSTRAP
+================================================================*/
 @import "../libs/bootstrap/assets/stylesheets/bootstrap";
+
+/* ===============================================================
+    $FONTS
+================================================================*/
 @import "base/fonts";
+
+/* ===============================================================
+    $VARIABLES
+================================================================*/
 @import "base/variables";
+
+/* ===============================================================
+    $BASE
+================================================================*/
 @import "base/base";
 @import "base/header";
 @import "base/footer";
 
+
+/* ===============================================================
+    $MODULES
+================================================================*/
 @import "modules/filter";
 @import "modules/macro";
 @import "modules/news";
