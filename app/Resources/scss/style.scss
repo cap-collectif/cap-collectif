@@ -15,6 +15,7 @@
  * BOOTSTRAP 3..........Bootstrap 3 SASS
  * FONTS................Fonts Icon Cap-Collectif
  * VARIABLES............Environment variables
+ * TOOLS................Tools - mixins - function - helper
  * BASE.................Environment global
  * HEADER...............Header
  * FOOTER...............Footer
@@ -42,6 +43,7 @@
 /* ===============================================================
     $BASE
 ================================================================*/
+@import "base/tools";
 @import "base/base";
 @import "base/header";
 @import "base/footer";

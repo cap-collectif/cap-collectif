@@ -1,0 +1,39 @@
+/* ===============================================================
+   $Footer
+================================================================*/
+.footer {
+  background-color: $custom-footer;
+  color: $custom-footer-text;
+
+  .social-network {
+    @include reset-ul();
+
+    li {
+      margin-bottom: 10px;
+
+      & a { color: $white }
+    }
+  }
+
+  .footer__links {
+    @include reset-ul();
+    @include ul-list-inline();
+    background-color: $custom-footer-links;
+    color: $custom-footer-text;
+    text-align: center;
+
+    li {
+      @include inline-block();
+      height: 45px;
+      line-height: 45px;
+      color: $custom-footer-links-text;
+
+      & a {
+        padding: 0 5px;
+        @include inline-block();
+        color: $custom-footer-links-text;
+      }
+    }
+  }
+}
+
