@@ -4,6 +4,10 @@
 .footer {
   background-color: $custom-footer;
   color: $custom-footer-text;
+  
+  h3 {
+    color: $custom-footer-text;
+  }
 
   .social-network {
     @include reset-ul();

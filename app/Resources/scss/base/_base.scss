@@ -3,7 +3,7 @@
 ================================================================*/
 body {
   background-color: $body-bg;
-  font-family: $font-family-sans-serif
+  font-family: $font-family-sans-serif;
 }
 .h1 { font-size: $font-size-h1 }
 .h2 { font-size: $font-size-h2 }
@@ -11,3 +11,18 @@ body {
 .h4 { font-size: $font-size-h4 }
 .h5 { font-size: $font-size-h5 }
 .h6 { font-size: $font-size-h6 }
+
+h2 {
+  padding-bottom: 10px;
+  border-bottom: 1px $dark-blue solid;
+  color: $dark-blue;
+}
+
+h3 {
+  color: $light-blue;  
+}
+
+.excerpt {
+  font-size: $font-size-h4;
+  color: $gray-light;
+}
