@@ -1,0 +1,27 @@
+/* ===============================================================
+  $News
+================================================================*/
+.media--news {
+  padding: 15px;
+  background-color: $custom-news-background;
+  @include box-shadow(0 2px 4px rgba(0,0,0,.15), 0 1px 2px rgba(0,0,0,.05));
+
+  .media-object {
+    width: $custom-news-height;
+  }
+
+  .media-title {
+    margin-top: 0;
+  }
+
+  @media (max-width: $screen-sm-min) {
+    .pull-left {
+      float: none !important;
+      margin-right: 0;
+      margin-bottom: 15px;
+    }
+    .media-object {
+      width: 260px;
+    }
+  }
+}
