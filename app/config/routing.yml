@@ -1,0 +1,5 @@
+cap_collectif_app:
+    resource: "@CapCollectifAppBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
