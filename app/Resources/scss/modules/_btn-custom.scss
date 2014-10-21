@@ -1,0 +1,48 @@
+/* ===============================================================
+   $Button custom
+================================================================*/
+$btn-customs:
+        (custom-1 $custom-btn-1-bg $custom-btn-1-text)
+        (custom-2 $custom-btn-2-bg $custom-btn-2-text);
+@each $btn-custom in $btn-customs {
+  $name: nth($btn-custom, 1);
+  $bg: nth($btn-custom, 2);
+  $color: nth($btn-custom, 3);
+
+  .btn-#{$name} {
+    @include button-variant($color, $bg, darken($bg, 5%));
+  }
+}
+
+
+.btn--outline {
+  background-color: transparent;
+  background-image: none;
+  text-shadow: none;
+
+  $buttons-outline:
+          (default $btn-default-color $btn-default-color $btn-default-bg)
+          (success $btn-success-bg $btn-success-bg $btn-default-bg)
+          (info $btn-info-bg $btn-info-bg $btn-default-bg)
+          (warning $btn-warning-bg $btn-warning-bg $btn-default-bg)
+          (danger $btn-danger-bg $btn-danger-bg $btn-default-bg)
+          (custom-1 $custom-btn-1-bg $custom-btn-1-bg $custom-btn-1-text)
+          (custom-2 $custom-btn-2-bg $custom-btn-2-bg $custom-btn-2-text)
+          (primary $btn-primary-bg $btn-primary-bg $btn-default-bg);
+  @each $btn-outline in $buttons-outline {
+    $name: nth($btn-outline, 1);
+    $border: nth($btn-outline, 2);
+    $bg: nth($btn-outline, 3);
+    $color: nth($btn-outline, 4);
+
+    &.btn-#{$name} {
+      border: 1px solid $border;
+      color: $bg;
+      &:hover {
+        background-color: $bg;
+        color: $color;
+      }
+    }
+  }
+
+}

@@ -12,18 +12,31 @@ $gray-primary: #c0c0c0;
 $font-size-base:  14px;
 $body-bg: #ebebeb;
 
-
-// = Custom
+// = Custom jumbotron
 // -----------------------------
 $custom-jumbotron: #0088CC;
 $custom-jumbotron-text: $white;
 
+// = Custom footer
+// -----------------------------
 $custom-footer: #0088CC;
 $custom-footer-text: $white;
 $custom-footer-links: #13a7cc;
 $custom-footer-links-text: $white;
 
+// = Custom module news
+// -----------------------------
 $custom-news-height: 220px;
 $custom-news-background: $white;
 
+// = Custom module filter search
+// -----------------------------
 $custom-filter-background: $white;
+
+// = Custom btn
+// -----------------------------
+$custom-btn-1-bg: #d07bfc;
+$custom-btn-1-text: #fff;
+
+$custom-btn-2-bg: #9acbf7;
+$custom-btn-2-text: #fff;
