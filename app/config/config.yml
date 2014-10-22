@@ -36,6 +36,13 @@ doctrine:
         charset: UTF8
     orm:
         auto_generate_proxy_classes: "%kernel.debug%"
+        mappings:
+            model:
+                type: annotation
+                dir: "%kernel.root_dir%/../src/Model"
+                prefix: Model
+                alias: Model
+                is_bundle: false
         auto_mapping: true
 swiftmailer:
     transport: "%mailer_transport%"
