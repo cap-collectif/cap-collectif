@@ -18,4 +18,10 @@
     padding-left: 15px;
   }
 
+  @media (max-width: $screen-sm-min) {
+    img {
+      width: 100%;
+    }
+  }
+
 }
