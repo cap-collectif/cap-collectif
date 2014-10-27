@@ -1,0 +1,31 @@
+/* ===============================================================
+   $Login Page
+================================================================*/
+.login {
+	
+	.login__form, .login__social {
+		background-color: $white;
+		padding: 15px;
+		margin-bottom: 15px;
+	}
+
+	.login__social__btns {
+		text-align: center;
+		margin-bottom: 10px;
+
+		button {
+			margin-left: 10px;
+		}
+
+		button:first-child {
+			margin-left: 0;
+		}
+	}
+}
+
+@media (max-width: $screen-xs-max) {
+	.login__social__btns button {
+		font-size: 25px;
+		padding: 6px 12px;
+	}
+}
