@@ -1,6 +1,6 @@
 <?php
 
-namespace CapCollectif\AppBundle\DependencyInjection;
+namespace Capco\AppBundle\DependencyInjection;
 
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;

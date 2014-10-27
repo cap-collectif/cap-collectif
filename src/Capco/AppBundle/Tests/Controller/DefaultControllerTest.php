@@ -1,6 +1,6 @@
 <?php
 
-namespace CapCollectif\AppBundle\Tests\Controller;
+namespace Capco\AppBundle\Tests\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace CapCollectif\AppBundle\Controller;
+namespace Capco\AppBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;

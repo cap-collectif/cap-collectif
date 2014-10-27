@@ -6,7 +6,7 @@
 
     <!--
     <services>
-        <service id="cap_collectif_app.example" class="CapCollectif\AppBundle\Example">
+        <service id="capco_app.example" class="Capco\AppBundle\Example">
             <argument type="service" id="service_id" />
             <argument>plain_value</argument>
             <argument>%parameter_name%</argument>
