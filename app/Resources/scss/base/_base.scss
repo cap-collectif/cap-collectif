@@ -4,6 +4,7 @@
 body {
   background-color: $body-bg;
   font-family: $font-family-sans-serif;
+  font-size: $font-size-base;
 }
 
 h2 {
@@ -21,39 +22,12 @@ h3 {
 }
 
 .pull-abs {
-	position: absolute;
-	top: 0px;
-	right: 0px;
+  position: absolute;
+  top: 0px;
+  right: 0px;
 }
 
 .pull-rel {
-	position: relative;
-}
-
-.inner-addon {
   position: relative;
-}
-
-.inner-addon .icon {
-  position: absolute;
-  padding: 10px;
-  pointer-events: none;
-}
-
-.left-addon {
-  .icon  {
-    left:  0px;
-  }
-  input {
-    padding-left: 30px;
-  }
-}
-.right-addon {
-  .icon  {
-    right:  0px;
-  }
-  input {
-    padding-right: 30px;
-  }
 }
 
