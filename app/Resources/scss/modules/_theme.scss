@@ -1,0 +1,44 @@
+/* ===============================================================
+$THEME
+================================================================*/
+.theme {
+
+  > a {
+    display: block;
+  }
+
+  .theme__body {
+    background: no-repeat;
+    background-position: center center;
+    background-size: cover;
+    background-color: $white;
+    @include box-shadow(0 2px 4px rgba(0,0,0,.15), 0 1px 2px rgba(0,0,0,.05));
+    text-align: center;
+    margin-bottom: 30px;
+    padding: 20px;
+    color: $gray-light;
+  }
+
+  .theme__title {
+    font-size: 21px;
+  }
+
+  a:hover {
+    text-decoration: none;
+
+    .theme__title {
+      text-decoration: underline;
+    }
+  }
+}
+
+.theme--img {
+
+  a,
+  .theme__title,
+  .theme__body {
+    color: $white;
+  }
+
+}
+

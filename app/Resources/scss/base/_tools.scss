@@ -50,3 +50,14 @@
   margin: 0;
   padding: 0;
 }
+
+// = Lightness BG-color > Text-Color
+// -----------------------------
+@function set-link-text-color($color) {
+  @if (lightness( $color ) > 50) {
+    @return $link-color;
+  }
+  @else {
+    @return #FFFFFF;
+  }
+}
