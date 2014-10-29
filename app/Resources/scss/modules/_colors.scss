@@ -1,0 +1,76 @@
+/* ==|================
+   Module/Color
+   =================== */
+.color-swatches .swatches {
+  @include border-radius(4px);
+  background-color: #FFF;
+  width: 100%;
+  @include box-shadow(0 1px 2px rgba(0,0,0,.2));
+  margin-bottom: 15px;
+}
+
+.color-swatches .dark, .color-swatches .light {
+  width: 50%;
+  height: 50px;
+}
+
+.color-swatches .light {
+  @include border-top-left-radius(4px);
+}
+
+.color-swatches .dark {
+  @include border-top-right-radius(4px);
+}
+
+.color-swatches .infos {
+  padding: 5px 10px;
+}
+
+.color-swatches .infos h4 {
+  margin-bottom: 5px;
+  font-weight: 700;
+  font-size: 14px;
+}
+
+.color-swatches .infos p {
+  font-size: 12px;
+  margin: 0;
+  @extend .excerpt;
+}
+
+$color-swatches:
+        //Components colors
+        (bodybg $body-bg)
+        (jumbo $custom-jumbotron)
+        (footer1 $custom-footer)
+        (footer2 $custom-footer-links)
+        (event $custom-event)
+        (formborder $custom-form-border)
+        (btn1 $custom-btn-1-bg)
+        (btn2 $custom-btn-2-bg)
+        //Bootstrap colors
+        (primary $brand-primary)
+        (success $brand-success)
+        (info $brand-info)
+        (warning $brand-warning)
+        (danger $brand-danger)
+        //Other colors
+        (whitec $white)
+        (gray-primary $gray-primary)
+        (light-gray $light-gray)
+        (dark-blue $dark-blue)
+        (light-blue $light-blue);
+@each $color-swatch in $color-swatches {
+  $name: nth($color-swatch, 1);
+  $color: nth($color-swatch, 2);
+
+  .color-swatch--#{$name} {
+    .light {
+      background-color: $color;
+    }
+    .dark {
+      background-color: darken($color, 10%);
+    }
+  }
+}
+
