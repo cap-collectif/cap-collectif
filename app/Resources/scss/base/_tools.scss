@@ -61,3 +61,32 @@
     @return #FFFFFF;
   }
 }
+
+/* ===============================================================
+    triangle
+================================================================*/
+@mixin triangle($background: $gray, $position: 'left', $width: 40px) {
+    width: 0;
+    height: 0;
+
+    @if $position == 'bottom' {
+        border-top: $width solid $background;
+        border-left: $width/2 solid transparent;
+        border-right: $width/2 solid transparent;
+    }
+    @if $position == 'top' {
+        border-bottom: $width solid $background;
+        border-left: $width/2 solid transparent;
+        border-right: $width/2 solid transparent;
+    }
+    @if $position == 'right' {
+        border-top: $width/2 solid transparent;
+        border-right: $width solid $background;
+        border-bottom: $width/2 solid transparent;
+    }
+    @if $position == 'left' {
+        border-top: $width/2 solid transparent;
+        border-left: $width solid $background;
+        border-bottom: $width/2 solid transparent;
+    }
+}

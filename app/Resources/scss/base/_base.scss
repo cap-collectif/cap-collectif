@@ -31,3 +31,37 @@ h3 {
   position: relative;
 }
 
+// Class .play
+.play {
+  display: block;
+  position: relative;
+}
+  
+// Show a play icon on top of images
+.play:after {
+  content: '';
+  display: block;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-top: -($custom-video-play/2);
+  margin-left: -($custom-video-play/2);
+  @include triangle($white, 'left', $custom-video-play);
+}
+
+// Show length of video, stored in link's data-length attribute
+.play[data-length]:before {
+  content: attr(data-length);
+  display: block;
+  position: absolute;
+  top: 90%;
+  left: 90%;
+  font-size: 18px;
+  line-height: 20px;
+  padding: 5px;
+  margin-top: -15px;
+  margin-left: -30px;
+  color: $white;
+  background-color: $black;
+}
+
