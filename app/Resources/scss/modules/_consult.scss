@@ -22,6 +22,12 @@
     margin-bottom: 20px;
   }
 
+  .media--consult__attachments {
+    list-style-type: none;
+    padding-left: 0;
+    font-size: 14px;
+  }
+
   button {
     margin: 10px 5px 15px 10px;
   }
@@ -68,6 +74,7 @@
   .votes__num {
     border: 1px solid $gray-primary;
     padding: 9px 8px 6px 8px;
+    background-color: $light-gray;
   }
 
   .media--form {
