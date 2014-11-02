@@ -1,3 +1,4 @@
+var glob = require('glob');
 var gulp = require('gulp'),
     gulpLoadPlugins = require('gulp-load-plugins'),
     plugins = gulpLoadPlugins();
@@ -31,7 +32,8 @@ gulp.task('copy', function() {
 gulp.task('concat', function() {
     gulp.src([
         app + '/libs/jquery/dist/jquery.js',
-        app + '/libs/bootstrap/assets/javascripts/bootstrap.js'
+        app + '/libs/bootstrap/assets/javascripts/bootstrap.js',
+        app + '/js/app.js'
     ])
         .pipe(plugins.concat('app.js'))
         .pipe(plugins.uglify({mangle: true}))
@@ -43,6 +45,16 @@ gulp.task('watch', function() {
     gulp.watch(app + '/scss/**/*.scss', ['styles']);
 });
 
+gulp.task('uncss', function() {
+    return gulp.src('web/css/style.min.css')
+        .pipe(plugins.uncss({
+            html: glob.sync('web/styleguide/**/*.php')
+        }))
+        .pipe(plugins.minifyCss({keepSpecialComments:0}))
+        .pipe(plugins.rename({basename: "clear",suffix: '.min'}))
+        .pipe(gulp.dest('web/styleguide/.out'));
+});
+
 gulp.task('build', [
     'copy',
     'concat',
@@ -51,4 +63,8 @@ gulp.task('build', [
 
 gulp.task('default', [
     'styles'
+]);
+
+gulp.task('clean', [
+    'uncss'
 ]);

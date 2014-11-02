@@ -85,3 +85,14 @@
     {% endif %}
 
 {% endblock %}
+
+{% block javascripts %}
+    <script src="{{ asset('js/app.min.js') }}"></script>
+    {{ parent() }}
+    <script type="text/javascript">
+        $(function() {
+            App.module.equalheight('.thumbnail--custom');
+            window.onresize = App.module.rezised('.thumbnail--custom');
+        });
+    </script>
+{% endblock %}
