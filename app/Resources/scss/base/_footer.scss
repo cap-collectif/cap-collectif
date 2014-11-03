@@ -4,6 +4,11 @@
 .footer {
   background-color: $custom-footer;
   color: $custom-footer-text;
+  text-align: center;
+
+  .container {
+    margin-bottom: 30px;
+  }
   
   h3 {
     color: $custom-footer-text;
@@ -24,7 +29,6 @@
     @include ul-list-inline();
     background-color: $custom-footer-links;
     color: $custom-footer-text;
-    text-align: center;
 
     li {
       @include inline-block();
