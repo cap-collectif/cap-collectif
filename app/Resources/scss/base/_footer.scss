@@ -16,11 +16,22 @@
 
   .social-network {
     @include reset-ul();
+    @include ul-list-inline();
+    text-align: center;
+    margin-top: 15px;
+    margin-bottom: 15px;
 
     li {
-      margin-bottom: 10px;
 
-      & a { color: $white }
+        padding-left: 15px;
+
+        &:first-child {
+          padding-left: 0;
+        }
+
+      & a {
+        color: $white
+      }
     }
   }
 
@@ -40,6 +51,34 @@
         padding: 0 5px;
         @include inline-block();
         color: $custom-footer-links-text;
+      }
+    }
+  }
+}
+
+@media (max-width: $screen-xs-max){
+  .social-network li a {
+    @include button-size($padding-large-vertical, $padding-large-horizontal, $font-size-base, $line-height-base, $border-radius-base);
+    font-size: 25px;
+    display: block;
+    margin-bottom: 15px;
+
+    &:hover {
+      text-decoration: none;
+    }
+
+    $social-btns:
+          (facebook $social-facebook)
+          (twitter $social-twitter)
+          (googleplus $social-gplus)
+          (linkedin $social-linkedin)
+          (rss $social-rss);
+    @each $social-btn in $social-btns {
+      $name: nth($social-btn, 1);
+      $color: nth($social-btn, 2);
+
+      &.social-network--#{$name} {
+        @include button-variant($white, $color, $color);
       }
     }
   }
