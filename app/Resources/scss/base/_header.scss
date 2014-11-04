@@ -2,6 +2,7 @@
     $Jumbotron
 ================================================================*/
 .jumbotron--custom {
-   background-color: $custom-jumbotron;
-   color: $custom-jumbotron-text;
+  text-align: center;
+  background-color: $custom-jumbotron;
+  color: $custom-jumbotron-text;
 }
