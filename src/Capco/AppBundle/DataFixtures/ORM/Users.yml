@@ -1,0 +1,16 @@
+Model\User:
+    user1:
+        username: <email()>
+        password: <md5()>
+        salt: <sha1()>
+        roles: <words(3)>
+    user2:
+        username: <email()>
+        password: <md5()>
+        salt: <sha1()>
+        roles: <words(3)>
+    user3:
+        username: <email()>
+        password: <md5()>
+        salt: <sha1()>
+        roles: <words(3)>

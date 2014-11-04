@@ -1,0 +1,25 @@
+Model\Source:
+    source1:
+        title: <text(35)>
+        path: <url()>
+        content: <text(1000)>
+        avis: @avis1
+        category: @category2
+    source2:
+        title: <text(35)>
+        path: <url()>
+        content: <text(1000)>
+        avis: @avis3
+        category: @category1
+    source3:
+        title: <text(35)>
+        path: <url()>
+        content: <text(1000)>
+        avis: @avis6
+        category: @category3
+    source4:
+        title: <text(35)>
+        path: <url()>
+        content: <text(1000)>
+        avis: @avis5
+        category: @category5

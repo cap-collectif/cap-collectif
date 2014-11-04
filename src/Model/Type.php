@@ -4,6 +4,7 @@ namespace Model;
 
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * Type
@@ -41,6 +42,31 @@ class Type
      * @ORM\Column(length=75)
      */
     private $slug;
+
+    /**
+     * @var \datetime $update
+     *
+     * @Gedmo\Timestampable(on="create")
+     * @ORM\Column(type="datetime")
+     */
+    private $created;
+
+    /**
+     * @var \datetime $updated
+     * @Gedmo\Timestampable(on="update")
+     * @ORM\Column(type="datetime")
+     */
+    private $updated;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Model\Avis", mappedBy="type",  cascade={"persist", "remove"})
+     */
+    private $allAvis;
+
+    public function __construct()
+    {
+        $this->allAvis = new ArrayCollection();
+    }
 
     /**
      * Get id
@@ -120,4 +146,48 @@ class Type
     {
         return $this->weight;
     }
+
+    /**
+     * @return \datetime
+     */
+    public function getCreated()
+    {
+        return $this->created;
+    }
+
+    /**
+     * @return \datetime
+     */
+    public function getUpdated()
+    {
+        return $this->updated;
+    }
+
+    /**
+     * @param \Model\Avis $allAvis
+     * @return Avis
+     */
+    public function addAllAvis(Avis $allAvis)
+    {
+        $this->allAvis[] = $allAvis;
+
+        return $this;
+    }
+
+    /**
+     * @param \Model\Avis $allAvis
+     */
+    public function removeAllAvis(Avis $allAvis)
+    {
+        $this->allAvis->removeElement($allAvis);
+    }
+
+    /**
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getAllAvis()
+    {
+        return $this->allAvis;
+    }
+
 }

@@ -54,9 +54,13 @@ swiftmailer:
 
 # Stof\DoctrineExtensionBundle configuration
 stof_doctrine_extensions:
-        default_locale: fr_FR
-        orm:
-            default:
-              timestampable: true
-              translatable: true
-              sluggable : true
+    default_locale: fr_FR
+    orm:
+        default:
+            timestampable: true
+            translatable: true
+            sluggable : true
+
+hautelook_alice:
+    locale: fr_FR   # default
+    seed: 1         # default
