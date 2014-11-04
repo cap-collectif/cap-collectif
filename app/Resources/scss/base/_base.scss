@@ -2,6 +2,7 @@
    $BASE
 ================================================================*/
 body {
+  padding-top: $navbar-height;
   background-color: $body-bg;
   font-family: $font-family-sans-serif;
   font-size: $font-size-base;

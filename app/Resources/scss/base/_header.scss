@@ -2,7 +2,9 @@
     $Jumbotron
 ================================================================*/
 .jumbotron--custom {
-  text-align: center;
+  padding: 20px 30px;
+  margin-bottom: 0;
   background-color: $custom-jumbotron;
+  text-align: center;
   color: $custom-jumbotron-text;
 }
