@@ -62,9 +62,8 @@
   }
 }
 
-/* ===============================================================
-    triangle
-================================================================*/
+// = Triangle
+// -----------------------------
 @mixin triangle($background: $gray, $position: 'left', $width: 40px) {
     width: 0;
     height: 0;
@@ -90,3 +89,4 @@
         border-bottom: $width/2 solid transparent;
     }
 }
+

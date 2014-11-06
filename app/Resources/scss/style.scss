@@ -28,6 +28,10 @@
  * COLOR................Module Color
  * THEME................Module Theme
  * PROFILE..............Module Profile
+ * SOCIAL_BLOCK.........Module Social Block
+ * FORM.................Module Form
+ * CONSULT..............Module Consult
+ * SUB-NAVBAR...........Module Sub-Navbar
  */
 
 /* ===============================================================
@@ -70,4 +74,4 @@
 @import "modules/theme";
 @import "modules/login";
 @import "modules/profile";
-
+@import "modules/sub-navbar";
