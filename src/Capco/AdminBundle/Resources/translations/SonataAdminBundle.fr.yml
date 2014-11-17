@@ -1,8 +1,10 @@
 # Dashboard groups
 admin.group.content: Content
+admin.group.consultation: Consultation
 admin.group.navigation: Navigation
 
 # Dashboard names
 admin.label.page: Page
 admin.label.menu: Menu
 admin.label.menu_item: Élément de menu
+admin.label.opinion: Opinion

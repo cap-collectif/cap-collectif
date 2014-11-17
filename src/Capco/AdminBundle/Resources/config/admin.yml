@@ -22,3 +22,11 @@ services:
             - {name: sonata.admin, manager_type: orm, group: admin.group.navigation, label: admin.label.menu_item}
         calls:
             - [ setTranslationDomain, [SonataAdminBundle]]
+
+    capco_admin.admin.opinion:
+        class: Capco\AdminBundle\Admin\OpinionAdmin
+        arguments: [~, Capco\AppBundle\Entity\Opinion, SonataAdminBundle:CRUD]
+        tags:
+            - {name: sonata.admin, manager_type: orm, group: admin.group.consultation, label: admin.label.opinion}
+        calls:
+            - [ setTranslationDomain, [SonataAdminBundle]]
