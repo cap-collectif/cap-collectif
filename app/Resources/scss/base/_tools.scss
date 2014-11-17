@@ -54,11 +54,11 @@
 // = Lightness BG-color > Text-Color
 // -----------------------------
 @function set-link-text-color($color) {
-  @if (lightness( $color ) > 65) {
-    @return $link-color;
+  @if (lightness( $color ) > 76) {
+    @return $black;
   }
   @else {
-    @return #FFFFFF;
+    @return $white;
   }
 }
 
