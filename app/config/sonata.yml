@@ -1,10 +1,16 @@
-# app/config/config.yml
+sonata_admin:
+    title:      Cap Collectif
+    options:
+        pager_links: 5 # pager max links to display
+
 sonata_block:
     default_contexts: [cms]
     blocks:
         # Enable the SonataAdminBundle block
         sonata.admin.block.admin_list:
             contexts:   [admin]
+        sonata.admin.block.search_result:
+            contexts:   [ admin ]
 
         sonata.block.service.text:
         sonata.block.service.rss:
@@ -12,26 +18,55 @@ sonata_block:
         sonata.user.block.menu:    # used to display the menu in profile pages
         sonata.user.block.account: # used to display menu option (login option)
 
-        sonata.admin.block.search_result:
-            contexts:   [ admin ]
+        sonata.media.block.media:
+        sonata.media.block.gallery:
+        sonata.media.block.feature_media:
 
-sonata_admin:
-    title:      Cap Collectif
+
+sonata_classification:
+    class:
+        tag:          Capco\ClassificationBundle\Entity\Tag
+        category:     Capco\ClassificationBundle\Entity\Category
+        collection:   Capco\ClassificationBundle\Entity\Collection
+        context:      Capco\ClassificationBundle\Entity\Context
+        media:        Capco\MediaBundle\Entity\Media
+
+sonata_intl:
+    locale: ~
+    timezone:
+        # if service is left blank, the chain detector will be used with detectors
+        # defined in the dedicated section
+        service:    ~
+        detectors:
+            - sonata.intl.timezone_detector.user    # default value if SonataUserBundle is available
+            - sonata.intl.timezone_detector.locale  # default value
+
+sonata_media:
+    class:
+        media:             Capco\MediaBundle\Entity\Media
+        gallery:           Capco\MediaBundle\Entity\Gallery
+        gallery_has_media: Capco\MediaBundle\Entity\GalleryHasMedia
+        category:          Capco\ClassificationBundle\Entity\Category
+    default_context: default
+    db_driver: doctrine_orm # or doctrine_mongodb, doctrine_phpcr
+    contexts:
+        default:  # the default context is mandatory
+            providers:
+                - sonata.media.provider.dailymotion
+                - sonata.media.provider.youtube
+                - sonata.media.provider.image
+                - sonata.media.provider.file
+            formats:
+                small: { width: 100 , quality: 70 }
+                big:   { width: 500 , quality: 70 }
+    cdn:
+        server:
+            path: /uploads/media # http://media.sonata-project.org/
+    filesystem:
+        local:
+            directory:  %kernel.root_dir%/../web/uploads/media
+            create:     false
 
 sonata_user:
     security_acl: true
     manager_type: orm
-
-fos_user:
-    db_driver:      orm
-    firewall_name:  main
-    user_class:     Capco\UserBundle\Entity\User
-
-
-    group:
-        group_class:   Capco\UserBundle\Entity\Group
-        group_manager: sonata.user.orm.group_manager                    # If you're using doctrine orm (use sonata.user.mongodb.user_manager for mongodb)
-
-    service:
-        user_manager: sonata.user.orm.user_manager
-

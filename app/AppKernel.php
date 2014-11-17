@@ -13,24 +13,38 @@ class AppKernel extends Kernel
             new Symfony\Bundle\TwigBundle\TwigBundle(),
             new Symfony\Bundle\MonologBundle\MonologBundle(),
             new Symfony\Bundle\SwiftmailerBundle\SwiftmailerBundle(),
-            new Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle(),
-            new Hautelook\AliceBundle\HautelookAliceBundle(),
             new Doctrine\Bundle\DoctrineBundle\DoctrineBundle(),
             new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
-            new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
-            new Capco\AppBundle\CapcoAppBundle(),
+            new JMS\SerializerBundle\JMSSerializerBundle(),
 
+            // Doctrine candies
+            new Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle(),
+            new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
+            new Hautelook\AliceBundle\HautelookAliceBundle(),
+
+            // sonata admin
             new Sonata\CoreBundle\SonataCoreBundle(),
+            new Sonata\IntlBundle\SonataIntlBundle(),
             new Sonata\BlockBundle\SonataBlockBundle(),
             new Knp\Bundle\MenuBundle\KnpMenuBundle(),
             new Sonata\DoctrineORMAdminBundle\SonataDoctrineORMAdminBundle(),
             new Sonata\AdminBundle\SonataAdminBundle(),
-            new Capco\AdminBundle\CapcoAdminBundle(),
 
+            // sonata user admin
             new Sonata\EasyExtendsBundle\SonataEasyExtendsBundle(),
             new FOS\UserBundle\FOSUserBundle(),
             new Sonata\UserBundle\SonataUserBundle('FOSUserBundle'),
+
+            // sonata media
+            new Sonata\MediaBundle\SonataMediaBundle(),
+            new Sonata\ClassificationBundle\SonataClassificationBundle(),
+
+            // project bundles
+            new Capco\AppBundle\CapcoAppBundle(),
+            new Capco\AdminBundle\CapcoAdminBundle(),
             new Capco\UserBundle\CapcoUserBundle(),
+            new Capco\MediaBundle\CapcoMediaBundle(),
+            new Capco\ClassificationBundle\CapcoClassificationBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {
