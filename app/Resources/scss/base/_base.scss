@@ -18,8 +18,16 @@ h3 {
   color: $light-blue;  
 }
 
+.h4 {
+  font-size: 16px;
+}
+
 .excerpt {
-  color: $gray-light;
+  color: $excerpt;
+}
+
+.pagination {
+  margin: 0;
 }
 
 .pull-abs {
@@ -55,14 +63,19 @@ h3 {
   content: attr(data-length);
   display: block;
   position: absolute;
-  top: 90%;
-  left: 90%;
-  font-size: 18px;
-  line-height: 20px;
+  bottom: 10px;
+  right: 10px;
+  font-size: 15px;
   padding: 5px;
-  margin-top: -15px;
-  margin-left: -30px;
   color: $white;
   background-color: $black;
+}
+
+// Icon circled
+.icon--circled {
+  color: $black;
+  background-color: $white;
+  padding: 5px 7px;
+  @include border-radius(50%);
 }
 

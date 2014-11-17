@@ -54,7 +54,7 @@
 // = Lightness BG-color > Text-Color
 // -----------------------------
 @function set-link-text-color($color) {
-  @if (lightness( $color ) > 50) {
+  @if (lightness( $color ) > 65) {
     @return $link-color;
   }
   @else {
@@ -62,9 +62,8 @@
   }
 }
 
-/* ===============================================================
-    triangle
-================================================================*/
+// = Triangle
+// -----------------------------
 @mixin triangle($background: $gray, $position: 'left', $width: 40px) {
     width: 0;
     height: 0;

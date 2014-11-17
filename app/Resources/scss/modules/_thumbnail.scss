@@ -1,16 +1,28 @@
  /* ===============================================================
    $Thumbnail
 ================================================================*/
+ /* ===============================================================
+   $Thumbnail
+================================================================*/
 .thumbnail--custom {
-  padding: 15px;
+  padding: 0;
   margin-bottom: 30px;
   background-color: $white;
   @include border-radius(0);
   @include box-shadow(0 2px 4px rgba(0,0,0,.15), 0 1px 2px rgba(0,0,0,.05));
 
+  @media (max-width: $screen-xs-max) {
+    margin-bottom: 15px;
+  }
+
+  & > div {
+    padding: 15px;
+  }
+
   .progress {
     @include progress-bar-variant($gray-primary);
-    @include border-radius(0);
+    margin: 0 15px;
+    padding: 0;
   }
 
   .progress-bar--custom {
@@ -18,10 +30,62 @@
     padding-left: 15px;
   }
 
-  @media (max-width: $screen-sm-min) {
+  .thumbnail--custom__number {
+    font-size: 16px;
+    font-weight: bold;
+    color: $black;
+  }
+
+  @media (max-width: $screen-xs-max) {
     img {
       width: 100%;
     }
   }
+}
 
+.thumbnail--sidebar {
+  overflow: hidden;
+
+  & > div {
+    padding-top: 0;
+  }
+
+  @media (max-width: $screen-xs-max) {
+    .sub-navbar {
+      padding-top: 0;
+    }
+  }
+
+  .thumbnail--sidebar__media {
+    padding-left: 0;
+    padding-right: 0;
+    padding-bottom: 0;
+    padding-top: 0;
+  }
+
+  .form-group {
+    margin-top: 0;
+    margin-bottom: 0;
+
+    label {
+      text-align: right;
+      margin-bottom: 0;
+      padding-top: 7px;
+      padding-bottom: 7px;
+    }
+
+    @media (max-width: $screen-md-max){
+      label {
+        padding-bottom: 0;
+      }
+      p {
+        padding-top: 0;
+      }
+    }
+  }
+  @media (max-width: $screen-xs-max) {
+    .thumbnail--sidebar__media {
+      padding: 5px;
+    }
+  }
 }
