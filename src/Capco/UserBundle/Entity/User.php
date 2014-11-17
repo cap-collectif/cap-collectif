@@ -80,7 +80,7 @@ class User extends BaseUser
      *
      * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\ArgumentVote", mappedBy="Voter")
      */
-    private $ArgumentVoters;
+    private $ArgumentVotes;
 
     /**
      * @var
