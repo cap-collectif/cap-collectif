@@ -19,13 +19,21 @@
     padding: 15px 30px;
   }
   .container {
+
     padding: 0;
-  }
-  h2, .h2, h1, .h1 {
-    padding-top: 0;
-    margin-bottom: 30px;
-    @media (max-width: $screen-xs-max) {
-      margin-bottom: 15px;
+
+    h2, .h2, h1, .h1 {
+
+      font-size: 30px;
+      padding-top: 0;
+      margin-bottom: 30px;
+      @media (max-width: $screen-xs-max) {
+        margin-bottom: 15px;
+      }
+
+      &:only-child {
+        margin-bottom: 0;
+      }
     }
   }
   p {
