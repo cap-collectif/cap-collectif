@@ -4,4 +4,21 @@ Capco\UserBundle\Entity\User:
         email: lbrunet@jolicode.com
         enabled: true
         plainPassword: toto
-        roles: [ ROLE_SUPER_ADMIN ]
+        roles:
+         - 'ROLE_SUPER_ADMIN'
+
+    user2:
+        username: sfavot
+        email: sfavot@jolicode.com
+        enabled: true
+        plainPassword: toto
+        roles:
+         - 'ROLE_SUPER_ADMIN'
+
+    user3:
+        username: xlacot
+        email: xlacot@jolicode.com
+        enabled: true
+        plainPassword: toto
+        roles:
+         - 'ROLE_SUPER_ADMIN'

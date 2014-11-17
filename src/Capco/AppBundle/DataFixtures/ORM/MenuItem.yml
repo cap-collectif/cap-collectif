@@ -14,28 +14,28 @@ Capco\AppBundle\Entity\MenuItem:
         isDeletable: 0
         position: 2
         parent: @MenuItem1
-        menu: @menu2
+        menu: @menu1
     MenuItem3:
         title: <text(10)>
         link: <url()>
         isEnabled: 1
         isDeletable: 1
-        position: 3
+        position: 1
         parent: null
-        menu: @menu3
+        menu: @menu2
     MenuItem4:
         title: <text(10)>
         link: <url()>
         isEnabled: 1
         isDeletable: 0
-        position: 4
+        position: 2
         parent: null
-        menu: @menu4
+        menu: @menu2
     MenuItem5:
         title: <text(10)>
         link: <url()>
         isEnabled: 0
         isDeletable: 0
-        position: 5
-        parent: @MenuItem3
-        menu: @menu5
+        position: 3
+        parent: null
+        menu: @menu2

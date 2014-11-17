@@ -1,17 +1,17 @@
 Capco\AppBundle\Entity\Problem:
-    contribution1:
+    contribution4:
         title: <text(20)>
         body: <text(1000)>
         isEnabled: <boolean()>
         isTrashed: <boolean(30)>
         trashedReason: <text(100)>
-    contribution2:
+    contribution5:
         title: <text(20)>
         body: <text(1000)>
         isEnabled: <boolean()>
         isTrashed: <boolean(30)>
         trashedReason: <text(100)>
-    contribution3:
+    contribution6:
         title: <text(20)>
         body: <text(1000)>
         isEnabled: <boolean()>
