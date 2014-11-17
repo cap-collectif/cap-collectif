@@ -1,6 +1,6 @@
 <?php
 
-namespace Model;
+namespace Capco\AppBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Menu
  *
- * @ORM\Table()
+ * @ORM\Table(name="menu")
  * @ORM\Entity
  */
 class Menu
@@ -36,7 +36,7 @@ class Menu
     /**
      * @var \Doctrine\Common\Collections\ArrayCollection
      *
-     * @ORM\OneToMany(targetEntity="Model\MenuItem", mappedBy="Menu", cascade={"persist", "remove"})
+     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\MenuItem", mappedBy="Menu", cascade={"persist", "remove"})
      *
      */
     private $MenuItems;
@@ -50,7 +50,7 @@ class Menu
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -73,7 +73,7 @@ class Menu
     /**
      * Get type
      *
-     * @return string 
+     * @return string
      */
     public function getType()
     {
@@ -89,7 +89,7 @@ class Menu
     }
 
     /**
-     * @param \Model\MenuItem $MenuItem
+     * @param Capco\AppBundle\Entity\MenuItem $MenuItem
      * @return Menu
      */
     public function addMenuItem(MenuItem $MenuItem)
@@ -100,7 +100,7 @@ class Menu
     }
 
     /**
-     * @param \Model\MenuItem $MenuItem
+     * @param Capco\AppBundle\Entity\MenuItem $MenuItem
      *
      */
     public function removeOpinionType(MenuItem $MenuItem)

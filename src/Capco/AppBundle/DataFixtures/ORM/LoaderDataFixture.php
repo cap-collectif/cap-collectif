@@ -25,12 +25,13 @@ class LoaderDataFixture extends DataFixtureLoader
             __DIR__ . '/Consultation.yml',
             __DIR__ . '/Step.yml',
             __DIR__ . '/Theme.yml',
-            __DIR__ . '/Ideas.yml',
-            __DIR__ . '/Contribution.yml',
+            __DIR__ . '/Idea.yml',
+            __DIR__ . '/Opinion.yml',
+            __DIR__ . '/Problem.yml',
             __DIR__ . '/Vote.yml',
             __DIR__ . '/Argument.yml',
             __DIR__ . '/ArgumentVote.yml',
-            __DIR__ . '/Signalement.yml',
+            __DIR__ . '/Reporting.yml',
             __DIR__ . '/IdeaVote.yml',
         );
     }

@@ -1,4 +1,4 @@
-Model\SiteParameter:
+Capco\AppBundle\Entity\SiteParameter:
     SiteParameter1:
         keyname: homepage.title
         title: Titre sur la homepage

@@ -1,6 +1,6 @@
 <?php
 
-namespace Model;
+namespace Capco\AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
@@ -8,10 +8,10 @@ use Gedmo\Mapping\Annotation as Gedmo;
 /**
  * ArgumentVote
  *
- * @ORM\Table()
+ * @ORM\Table(name="idea_vote")
  * @ORM\Entity
  */
-class ArgumentVote
+class IdeaVote
 {
     /**
      * @var integer
@@ -31,21 +31,21 @@ class ArgumentVote
 
     /**
      * @var
-     * @ORM\ManyToOne(targetEntity="Model\Vote")
+     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Vote")
      */
     private $vote;
 
     /**
      * @var
      *
-     * @ORM\ManyToOne(targetEntity="Model\Argument")
+     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Idea")
      */
-    private $argument;
+    private $idea;
 
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -55,7 +55,7 @@ class ArgumentVote
     /**
      * Get createdAt
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getCreatedAt()
     {
@@ -65,17 +65,17 @@ class ArgumentVote
     /**
      * @return mixed
      */
-    public function getArgument()
+    public function getIdea()
     {
-        return $this->argument;
+        return $this->idea;
     }
 
     /**
-     * @param mixed $argument
+     * @param mixed $idea
      */
-    public function setArgument($argument)
+    public function setIdea($idea)
     {
-        $this->argument = $argument;
+        $this->idea = $idea;
     }
 
     /**

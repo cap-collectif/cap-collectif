@@ -1,4 +1,4 @@
-Model\ArgumentVote:
+Capco\AppBundle\Entity\ArgumentVote:
     ArgVote1:
         vote: @vote1
         argument: @argument2

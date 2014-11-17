@@ -1,4 +1,4 @@
-Model\Contribution:
+Capco\AppBundle\Entity\Problem:
     contribution1:
         title: <text(20)>
         body: <text(1000)>

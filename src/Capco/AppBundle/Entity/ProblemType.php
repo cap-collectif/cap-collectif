@@ -1,6 +1,6 @@
 <?php
 
-namespace Model;
+namespace Capco\AppBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
@@ -9,7 +9,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
 /**
  * ProblemType
  *
- * @ORM\Table()
+ * @ORM\Table(name="problem_type")
  * @ORM\Entity
  */
 class ProblemType
@@ -75,7 +75,7 @@ class ProblemType
     /**
      * @var
      *
-     * @ORM\OneToMany(targetEntity="Model\OpinionType", mappedBy="ProblemType", cascade={"persist", "remove"})
+     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\OpinionType", mappedBy="ProblemType", cascade={"persist", "remove"})
      *
      */
     private $OpinionTypes;
@@ -89,7 +89,7 @@ class ProblemType
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -112,7 +112,7 @@ class ProblemType
     /**
      * Get title
      *
-     * @return string 
+     * @return string
      */
     public function getTitle()
     {
@@ -135,7 +135,7 @@ class ProblemType
     /**
      * Get problemTitle
      *
-     * @return string 
+     * @return string
      */
     public function getProblemTitle()
     {
@@ -158,7 +158,7 @@ class ProblemType
     /**
      * Get trashTitle
      *
-     * @return string 
+     * @return string
      */
     public function getTrashTitle()
     {
@@ -181,7 +181,7 @@ class ProblemType
     /**
      * Get voteWidgetType
      *
-     * @return integer 
+     * @return integer
      */
     public function getVoteWidgetType()
     {
@@ -191,7 +191,7 @@ class ProblemType
     /**
      * Get createdAt
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getCreatedAt()
     {
@@ -201,7 +201,7 @@ class ProblemType
     /**
      * Get updatedAt
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getUpdatedAt()
     {
@@ -217,7 +217,7 @@ class ProblemType
     }
 
     /**
-     * @param \Model\OpinionType $opinionType
+     * @param Capco\AppBundle\Entity\OpinionType $opinionType
      * @return ProblemType
      */
     public function addOpinionType(OpinionType $opinionType)
@@ -228,7 +228,7 @@ class ProblemType
     }
 
     /**
-     * @param \Model\OpinionType $opinionType
+     * @param Capco\AppBundle\Entity\OpinionType $opinionType
      *
      */
     public function removeOpinionType(OpinionType $opinionType)

@@ -1,6 +1,6 @@
 <?php
 
-namespace Model;
+namespace Capco\AppBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
@@ -9,8 +9,11 @@ use Gedmo\Mapping\Annotation as Gedmo;
 /**
  * Contribution
  *
- * @ORM\Table()
+ * @ORM\Table(name="contribution")
  * @ORM\Entity
+ * @ORM\InheritanceType("JOINED")
+ * @ORM\DiscriminatorColumn(name="type", type="string")
+ * @ORM\DiscriminatorMap({"opinion" = "Opinion", "problem" = "Problem"})
  */
 class Contribution
 {
@@ -87,14 +90,14 @@ class Contribution
 
     /**
      * @var
-     * @ORM\OneToMany(targetEntity="Model\Argument", mappedBy="contribution",  cascade={"persist", "remove"})
+     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\Argument", mappedBy="contribution",  cascade={"persist", "remove"})
      */
     private $arguments;
 
     /**
      * @var string
      *
-     * @ORM\ManyToMany(targetEntity="Model\Vote", mappedBy="contributions", cascade={"persist", "remove"})
+     * @ORM\ManyToMany(targetEntity="Capco\AppBundle\Entity\Vote", mappedBy="contributions", cascade={"persist", "remove"})
      */
     private $votes;
 
@@ -108,7 +111,7 @@ class Contribution
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -131,7 +134,7 @@ class Contribution
     /**
      * Get title
      *
-     * @return string 
+     * @return string
      */
     public function getTitle()
     {
@@ -154,7 +157,7 @@ class Contribution
     /**
      * Get slug
      *
-     * @return string 
+     * @return string
      */
     public function getSlug()
     {
@@ -177,7 +180,7 @@ class Contribution
     /**
      * Get body
      *
-     * @return string 
+     * @return string
      */
     public function getBody()
     {
@@ -200,7 +203,7 @@ class Contribution
     /**
      * Get isEnabled
      *
-     * @return boolean 
+     * @return boolean
      */
     public function getIsEnabled()
     {
@@ -210,7 +213,7 @@ class Contribution
     /**
      * Get createdAt
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getCreatedAt()
     {
@@ -220,7 +223,7 @@ class Contribution
     /**
      * Get updatedAt
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getUpdatedAt()
     {
@@ -243,7 +246,7 @@ class Contribution
     /**
      * Get isTrashed
      *
-     * @return boolean 
+     * @return boolean
      */
     public function getIsTrashed()
     {
@@ -266,7 +269,7 @@ class Contribution
     /**
      * Get trashedAt
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getTrashedAt()
     {
@@ -289,7 +292,7 @@ class Contribution
     /**
      * Get trashedReason
      *
-     * @return string 
+     * @return string
      */
     public function getTrashedReason()
     {
@@ -299,7 +302,7 @@ class Contribution
     /**
      * Get votes
      *
-     * @return string 
+     * @return string
      */
     public function getVotes()
     {

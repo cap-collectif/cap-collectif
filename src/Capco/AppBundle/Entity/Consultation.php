@@ -1,6 +1,6 @@
 <?php
 
-namespace Model;
+namespace Capco\AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
@@ -8,8 +8,8 @@ use Gedmo\Mapping\Annotation as Gedmo;
 /**
  * Consultation
  *
- * @ORM\Table()
- * @ORM\Entity(repositoryClass="Repository\ConsultationRepository")
+ * @ORM\Table(name="consultation")
+ * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\ConsultationRepository")
  */
 class Consultation
 {

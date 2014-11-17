@@ -1,6 +1,6 @@
 <?php
 
-namespace Model;
+namespace Capco\AppBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
@@ -9,7 +9,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
 /**
  * Vote
  *
- * @ORM\Table()
+ * @ORM\Table(name="vote")
  * @ORM\Entity
  */
 class Vote
@@ -40,7 +40,7 @@ class Vote
     /**
      * @var
      *
-     * @ORM\ManyToMany(targetEntity="Model\Contribution", inversedBy="votes")
+     * @ORM\ManyToMany(targetEntity="Capco\AppBundle\Entity\Contribution", inversedBy="votes")
      */
     private $contributions;
 
@@ -52,7 +52,7 @@ class Vote
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -62,7 +62,7 @@ class Vote
     /**
      * Get createdAt
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getCreatedAt()
     {
@@ -85,7 +85,7 @@ class Vote
     /**
      * Get value
      *
-     * @return integer 
+     * @return integer
      */
     public function getValue()
     {

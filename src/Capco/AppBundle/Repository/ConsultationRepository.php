@@ -1,6 +1,6 @@
 <?php
 
-namespace Repository;
+namespace Capco\AppBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
 

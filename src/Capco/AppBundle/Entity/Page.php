@@ -1,17 +1,17 @@
 <?php
 
-namespace Model;
+namespace Capco\AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
- * Argument
+ * Page
  *
- * @ORM\Table()
+ * @ORM\Table(name="page")
  * @ORM\Entity
  */
-class Argument
+class Page
 {
     /**
      * @var integer
@@ -25,12 +25,26 @@ class Argument
     /**
      * @var string
      *
+     * @ORM\Column(name="title", type="string", length=255)
+     */
+    private $title;
+
+    /**
+     * @Gedmo\Slug(fields={"title"})
+     * @ORM\Column(length=255)
+     */
+    private $slug;
+
+    /**
+     * @var string
+     *
      * @ORM\Column(name="body", type="text")
      */
     private $body;
 
     /**
      * @var \DateTime
+     *
      * @Gedmo\Timestampable(on="create")
      * @ORM\Column(name="created_at", type="datetime")
      */
@@ -38,29 +52,24 @@ class Argument
 
     /**
      * @var \DateTime
+     *
      * @Gedmo\Timestampable(on="update")
      * @ORM\Column(name="updated_at", type="datetime")
      */
     private $updatedAt;
 
     /**
-     * @var integer
+     * @var boolean
      *
-     * @ORM\Column(name="vote_count", type="integer")
+     * @ORM\Column(name="is_enabled", type="boolean")
      */
-    private $voteCount;
+    private $isEnabled;
 
-    /**
-     * @var
-     *
-     * @ORM\ManyToOne(targetEntity="Model\Contribution", inversedBy="arguments")
-     */
-    private $contribution;
 
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -68,10 +77,56 @@ class Argument
     }
 
     /**
+     * Set title
+     *
+     * @param string $title
+     * @return Page
+     */
+    public function setTitle($title)
+    {
+        $this->title = $title;
+
+        return $this;
+    }
+
+    /**
+     * Get title
+     *
+     * @return string
+     */
+    public function getTitle()
+    {
+        return $this->title;
+    }
+
+    /**
+     * Set slug
+     *
+     * @param string $slug
+     * @return Page
+     */
+    public function setSlug($slug)
+    {
+        $this->slug = $slug;
+
+        return $this;
+    }
+
+    /**
+     * Get slug
+     *
+     * @return string
+     */
+    public function getSlug()
+    {
+        return $this->slug;
+    }
+
+    /**
      * Set body
      *
      * @param string $body
-     * @return Argument
+     * @return Page
      */
     public function setBody($body)
     {
@@ -83,7 +138,7 @@ class Argument
     /**
      * Get body
      *
-     * @return string 
+     * @return string
      */
     public function getBody()
     {
@@ -93,7 +148,7 @@ class Argument
     /**
      * Get createdAt
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getCreatedAt()
     {
@@ -103,7 +158,7 @@ class Argument
     /**
      * Get updatedAt
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getUpdatedAt()
     {
@@ -111,42 +166,25 @@ class Argument
     }
 
     /**
-     * Set voteCount
+     * Set isEnabled
      *
-     * @param integer $voteCount
-     * @return Argument
+     * @param boolean $isEnabled
+     * @return Page
      */
-    public function setVoteCount($voteCount)
+    public function setIsEnabled($isEnabled)
     {
-        $this->voteCount = $voteCount;
+        $this->isEnabled = $isEnabled;
 
         return $this;
     }
 
     /**
-     * Get voteCount
+     * Get isEnabled
      *
-     * @return integer 
+     * @return boolean
      */
-    public function getVoteCount()
+    public function getIsEnabled()
     {
-        return $this->voteCount;
+        return $this->isEnabled;
     }
-
-    /**
-     * @return mixed
-     */
-    public function getContribution()
-    {
-        return $this->contribution;
-    }
-
-    /**
-     * @param mixed $contribution
-     */
-    public function setContribution($contribution)
-    {
-        $this->contribution = $contribution;
-    }
-
 }

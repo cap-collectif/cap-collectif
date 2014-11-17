@@ -1,4 +1,4 @@
-Model\Signalement:
-    signalement1:
+Capco\AppBundle\Entity\Reporting:
+    reporting1:
         status: 1
         contribution: [@contribution1]

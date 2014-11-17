@@ -1,6 +1,6 @@
 <?php
 
-namespace Model;
+namespace Capco\AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
@@ -8,7 +8,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
 /**
  * OpinionType
  *
- * @ORM\Table()
+ * @ORM\Table(name="opinion_type")
  * @ORM\Entity
  */
 class OpinionType
@@ -77,7 +77,7 @@ class OpinionType
     /**
      * @var
      *
-     * @ORM\ManyToOne(targetEntity="Model\ProblemType", inversedBy="OpinionTypes")
+     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\ProblemType", inversedBy="OpinionTypes")
      * @ORM\JoinColumn(name="opinion_type_id", referencedColumnName="id")
      */
     private $ProblemType;
@@ -91,7 +91,7 @@ class OpinionType
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -114,7 +114,7 @@ class OpinionType
     /**
      * Get title
      *
-     * @return string 
+     * @return string
      */
     public function getTitle()
     {
@@ -137,7 +137,7 @@ class OpinionType
     /**
      * Get shortName
      *
-     * @return string 
+     * @return string
      */
     public function getShortName()
     {
@@ -160,7 +160,7 @@ class OpinionType
     /**
      * Get slug
      *
-     * @return string 
+     * @return string
      */
     public function getSlug()
     {
@@ -183,7 +183,7 @@ class OpinionType
     /**
      * Get position
      *
-     * @return integer 
+     * @return integer
      */
     public function getPosition()
     {
@@ -206,7 +206,7 @@ class OpinionType
     /**
      * Get voteWidgetType
      *
-     * @return integer 
+     * @return integer
      */
     public function getVoteWidgetType()
     {
@@ -216,7 +216,7 @@ class OpinionType
     /**
      * Get createdAt
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getCreatedAt()
     {
@@ -226,7 +226,7 @@ class OpinionType
     /**
      * Get updatedAt
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getUpdatedAt()
     {

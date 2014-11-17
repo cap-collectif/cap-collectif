@@ -1,4 +1,4 @@
-Model\Step:
+Capco\AppBundle\Entity\Step:
     step1:
         title: <sentence(3)>
         isEnabled: <boolean()>

@@ -1,6 +1,6 @@
 <?php
 
-namespace Model;
+namespace Capco\AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
@@ -8,7 +8,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
 /**
  * Step
  *
- * @ORM\Table()
+ * @ORM\Table(name="step")
  * @ORM\Entity
  */
 class Step
@@ -66,7 +66,7 @@ class Step
     /**
      * @var string
      *
-     * @ORM\ManyToOne(targetEntity="Model\Consultation")
+     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Consultation")
      * @ORM\JoinColumn(nullable=false)
      */
     private $consultation;
@@ -74,7 +74,7 @@ class Step
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -97,7 +97,7 @@ class Step
     /**
      * Get title
      *
-     * @return string 
+     * @return string
      */
     public function getTitle()
     {
@@ -120,7 +120,7 @@ class Step
     /**
      * Get slug
      *
-     * @return string 
+     * @return string
      */
     public function getSlug()
     {
@@ -143,7 +143,7 @@ class Step
     /**
      * Get startAt
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getStartAt()
     {
@@ -166,7 +166,7 @@ class Step
     /**
      * Get endAt
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getEndAt()
     {
@@ -189,7 +189,7 @@ class Step
     /**
      * Get position
      *
-     * @return integer 
+     * @return integer
      */
     public function getPosition()
     {
@@ -212,7 +212,7 @@ class Step
     /**
      * Get isEnabled
      *
-     * @return boolean 
+     * @return boolean
      */
     public function getIsEnabled()
     {
@@ -222,7 +222,7 @@ class Step
     /**
      * Get consultation
      *
-     * @return string 
+     * @return string
      */
     public function getConsultation()
     {

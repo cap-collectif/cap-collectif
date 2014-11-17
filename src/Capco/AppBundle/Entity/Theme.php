@@ -1,6 +1,6 @@
 <?php
 
-namespace Model;
+namespace Capco\AppBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
@@ -9,7 +9,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
 /**
  * Theme
  *
- * @ORM\Table()
+ * @ORM\Table(name="theme")
  * @ORM\Entity
  */
 class Theme
@@ -78,27 +78,27 @@ class Theme
 
     /**
      * @var
-     * @ORM\ManyToMany(targetEntity="Model\Consultation", cascade={"persist"})
+     * @ORM\ManyToMany(targetEntity="Capco\AppBundle\Entity\Consultation", cascade={"persist"})
      */
-    private $consultations;
+    private $Consultations;
 
     /**
      * @var
-     * @ORM\OneToMany(targetEntity="Model\Ideas", mappedBy="Theme")
+     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\Idea", mappedBy="Theme")
      */
-    private $ideas;
+    private $Ideas;
 
     function __construct()
     {
-        $this->consultations = new ArrayCollection();
-        $this->ideas = new ArrayCollection();
+        $this->Consultations = new ArrayCollection();
+        $this->Ideas = new ArrayCollection();
         $this->status = self::STATUS_CLOSED;
     }
 
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -121,7 +121,7 @@ class Theme
     /**
      * Get title
      *
-     * @return string 
+     * @return string
      */
     public function getTitle()
     {
@@ -144,7 +144,7 @@ class Theme
     /**
      * Get teaser
      *
-     * @return string 
+     * @return string
      */
     public function getTeaser()
     {
@@ -216,22 +216,22 @@ class Theme
     }
 
     /**
-     * @param \Model\Consultation $consultation
+     * @param Capco\AppBundle\Entity\Consultation $Consultation
      * @return Theme
      */
-    public function addConsultation(Consultation $consultation)
+    public function addConsultation(Consultation $Consultation)
     {
-        $this->consultations[] = $consultation;
+        $this->Consultations[] = $Consultation;
 
         return $this;
     }
 
     /**
-     * @param \Model\Consultation $consultation
+     * @param Capco\AppBundle\Entity\Consultation $Consultation
      */
-    public function removeConsultation(Consultation $consultation)
+    public function removeConsultation(Consultation $Consultation)
     {
-        $this->consultations->removeElement($consultation);
+        $this->Consultations->removeElement($Consultation);
     }
 
     /**
@@ -239,26 +239,26 @@ class Theme
      */
     public function getConsultations()
     {
-        return $this->consultations;
+        return $this->Consultations;
     }
 
     /**
-     * @param \Model\Ideas $ideas
+     * @param Capco\AppBundle\Entity\Idea $Ideas
      * @return Theme
      */
-    public function addIdeas(Ideas $ideas)
+    public function addIdeas(Ideas $Idea)
     {
-        $this->ideas[] = $ideas;
+        $this->Ideas[] = $Idea;
 
         return $this;
     }
 
     /**
-     * @param \Model\Ideas $ideas
+     * @param Capco\AppBundle\Entity\Idea $Ideas
      */
-    public function removeIdeas(Ideas $ideas)
+    public function removeIdeas(Ideas $Idea)
     {
-        $this->ideas->removeElement($ideas);
+        $this->Ideas->removeElement($Idea);
     }
 
     /**
@@ -266,7 +266,7 @@ class Theme
      */
     public function getIdeas()
     {
-        return $this->ideas;
+        return $this->Ideas;
     }
 
     /**

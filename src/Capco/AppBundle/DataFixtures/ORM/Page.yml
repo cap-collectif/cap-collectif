@@ -1,4 +1,4 @@
-Model\Page:
+Capco\AppBundle\Entity\Page:
     page{1..5}:
         title: <text(20)>
         body: <text(1000)>

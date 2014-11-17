@@ -1,4 +1,4 @@
-Model\FooterSocialNetwork:
+Capco\AppBundle\Entity\FooterSocialNetwork:
     FooterSocialNetwork{1..6}:
         title: <text(10)>
         link: <url()>

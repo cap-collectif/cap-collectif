@@ -1,6 +1,6 @@
 <?php
 
-namespace Model;
+namespace Capco\AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
@@ -8,7 +8,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
 /**
  * FooterSocialNetwork
  *
- * @ORM\Table()
+ * @ORM\Table(name="footer_social_network")
  * @ORM\Entity
  */
 class FooterSocialNetwork
@@ -70,7 +70,7 @@ class FooterSocialNetwork
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -93,7 +93,7 @@ class FooterSocialNetwork
     /**
      * Get title
      *
-     * @return string 
+     * @return string
      */
     public function getTitle()
     {
@@ -116,7 +116,7 @@ class FooterSocialNetwork
     /**
      * Get link
      *
-     * @return string 
+     * @return string
      */
     public function getLink()
     {
@@ -139,7 +139,7 @@ class FooterSocialNetwork
     /**
      * Get position
      *
-     * @return integer 
+     * @return integer
      */
     public function getPosition()
     {
@@ -162,7 +162,7 @@ class FooterSocialNetwork
     /**
      * Get isEnabled
      *
-     * @return boolean 
+     * @return boolean
      */
     public function getIsEnabled()
     {
@@ -172,7 +172,7 @@ class FooterSocialNetwork
     /**
      * Get createdAt
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getCreatedAt()
     {
@@ -182,7 +182,7 @@ class FooterSocialNetwork
     /**
      * Get updatedAt
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getUpdatedAt()
     {

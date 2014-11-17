@@ -1,4 +1,4 @@
-Model\MenuItem:
+Capco\AppBundle\Entity\MenuItem:
     MenuItem1:
         title: <text(10)>
         link: <url()>

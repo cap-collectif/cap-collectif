@@ -1,16 +1,16 @@
 <?php
 
-namespace Model;
+namespace Capco\AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Opinion
+ * ConsultationStep
  *
- * @ORM\Table()
+ * @ORM\Table(name="consultation_step")
  * @ORM\Entity
  */
-class Opinion extends Contribution
+class ConsultationStep extends Step
 {
     /**
      * @var integer
@@ -25,11 +25,10 @@ class Opinion extends Contribution
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
         return $this->id;
     }
-    
 }

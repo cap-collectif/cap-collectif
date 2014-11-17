@@ -1,13 +1,13 @@
 <?php
 
-namespace Model;
+namespace Capco\AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * Problem
  *
- * @ORM\Table()
+ * @ORM\Table(name="problem")
  * @ORM\Entity
  */
 class Problem extends Contribution
@@ -25,7 +25,7 @@ class Problem extends Contribution
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {

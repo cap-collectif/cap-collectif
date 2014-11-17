@@ -1,4 +1,4 @@
-Model\Argument:
+Capco\AppBundle\Entity\Argument:
     argument1:
         body: <text(1000)>
         voteCount: <numberBetween(0, 582)>

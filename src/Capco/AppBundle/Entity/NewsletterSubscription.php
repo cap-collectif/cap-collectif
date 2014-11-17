@@ -1,6 +1,6 @@
 <?php
 
-namespace Model;
+namespace Capco\AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
@@ -8,7 +8,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
 /**
  * NewsletterSubscription
  *
- * @ORM\Table()
+ * @ORM\Table(name="newsletter_subscription")
  * @ORM\Entity
  */
 class NewsletterSubscription
@@ -47,7 +47,7 @@ class NewsletterSubscription
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -70,7 +70,7 @@ class NewsletterSubscription
     /**
      * Get email
      *
-     * @return string 
+     * @return string
      */
     public function getEmail()
     {
@@ -80,7 +80,7 @@ class NewsletterSubscription
     /**
      * Get createdAt
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getCreatedAt()
     {
@@ -103,7 +103,7 @@ class NewsletterSubscription
     /**
      * Get isEnabled
      *
-     * @return boolean 
+     * @return boolean
      */
     public function getIsEnabled()
     {

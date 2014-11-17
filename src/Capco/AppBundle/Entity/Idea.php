@@ -1,17 +1,17 @@
 <?php
 
-namespace Model;
+namespace Capco\AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
- * Page
+ * Idea
  *
- * @ORM\Table()
+ * @ORM\Table(name="idea")
  * @ORM\Entity
  */
-class Page
+class Idea
 {
     /**
      * @var integer
@@ -59,17 +59,21 @@ class Page
     private $updatedAt;
 
     /**
-     * @var boolean
+     * @var integer
      *
-     * @ORM\Column(name="is_enabled", type="boolean")
+     * @ORM\Column(name="vote_count", type="integer")
      */
-    private $isEnabled;
+    private $voteCount;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Theme", inversedBy="ideas")
+     */
+    private $Theme;
 
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -80,7 +84,7 @@ class Page
      * Set title
      *
      * @param string $title
-     * @return Page
+     * @return Ideas
      */
     public function setTitle($title)
     {
@@ -92,7 +96,7 @@ class Page
     /**
      * Get title
      *
-     * @return string 
+     * @return string
      */
     public function getTitle()
     {
@@ -103,7 +107,7 @@ class Page
      * Set slug
      *
      * @param string $slug
-     * @return Page
+     * @return Ideas
      */
     public function setSlug($slug)
     {
@@ -115,7 +119,7 @@ class Page
     /**
      * Get slug
      *
-     * @return string 
+     * @return string
      */
     public function getSlug()
     {
@@ -126,7 +130,7 @@ class Page
      * Set body
      *
      * @param string $body
-     * @return Page
+     * @return Ideas
      */
     public function setBody($body)
     {
@@ -138,7 +142,7 @@ class Page
     /**
      * Get body
      *
-     * @return string 
+     * @return string
      */
     public function getBody()
     {
@@ -148,7 +152,7 @@ class Page
     /**
      * Get createdAt
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getCreatedAt()
     {
@@ -158,7 +162,7 @@ class Page
     /**
      * Get updatedAt
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getUpdatedAt()
     {
@@ -166,25 +170,43 @@ class Page
     }
 
     /**
-     * Set isEnabled
+     * Set voteCount
      *
-     * @param boolean $isEnabled
-     * @return Page
+     * @param integer $voteCount
+     * @return Ideas
      */
-    public function setIsEnabled($isEnabled)
+    public function setVoteCount($voteCount)
     {
-        $this->isEnabled = $isEnabled;
+        $this->voteCount = $voteCount;
 
         return $this;
     }
 
     /**
-     * Get isEnabled
+     * Get voteCount
      *
-     * @return boolean 
+     * @return integer
      */
-    public function getIsEnabled()
+    public function getVoteCount()
     {
-        return $this->isEnabled;
+        return $this->voteCount;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getTheme()
+    {
+        return $this->Theme;
+    }
+
+    /**
+     * @param mixed $Theme
+     */
+    public function setTheme($Theme)
+    {
+        $this->Theme = $Theme;
+    }
+
+
 }

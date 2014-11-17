@@ -1,13 +1,13 @@
 <?php
 
-namespace Model;
+namespace Capco\AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * ContentStep
  *
- * @ORM\Table()
+ * @ORM\Table(name="content_step")
  * @ORM\Entity
  */
 class ContentStep extends Step
@@ -31,7 +31,7 @@ class ContentStep extends Step
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {

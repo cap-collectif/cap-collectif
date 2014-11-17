@@ -1,18 +1,18 @@
 <?php
 
-namespace Model;
+namespace Capco\AppBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
- * Signalement
+ * Reporting
  *
- * @ORM\Table()
+ * @ORM\Table(name="reporting")
  * @ORM\Entity
  */
-class Signalement
+class Reporting
 {
 
     const SIGNALEMENT_NOT_DONE = 0;
@@ -51,7 +51,7 @@ class Signalement
 
     /**
      * @var
-     * @ORM\ManyToMany(targetEntity="Model\Contribution", cascade={"persist"})
+     * @ORM\ManyToMany(targetEntity="Capco\AppBundle\Entity\Contribution", cascade={"persist"})
      */
     private $contributions;
 
@@ -63,7 +63,7 @@ class Signalement
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -86,7 +86,7 @@ class Signalement
     /**
      * Get status
      *
-     * @return integer 
+     * @return integer
      */
     public function getStatus()
     {
@@ -96,7 +96,7 @@ class Signalement
     /**
      * Get createdAt
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getCreatedAt()
     {
@@ -106,7 +106,7 @@ class Signalement
     /**
      * Get updatedAt
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getUpdatedAt()
     {

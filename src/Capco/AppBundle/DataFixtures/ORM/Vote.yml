@@ -1,4 +1,4 @@
-Model\Vote:
+Capco\AppBundle\Entity\Vote:
     vote1:
         value: <numberBetween(0, 3)>
         contributions: [@contribution1]

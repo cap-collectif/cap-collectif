@@ -1,4 +1,4 @@
-Model\Consultation:
+Capco\AppBundle\Entity\Consultation:
     cs1:
         title: <sentence(3)>
         openedAt: <dateTimeBetween('-1 years','now')>

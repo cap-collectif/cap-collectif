@@ -1,10 +1,10 @@
-Model\IdeaVote:
+Capco\AppBundle\Entity\IdeaVote:
     IdeaVote1:
         vote: @vote1
-        idea: @ideas3
+        idea: @idea3
     IdeaVote2:
         vote: @vote3
-        idea: @ideas7
+        idea: @idea7
     IdeaVote3:
         vote: @vote2
-        idea: @ideas10
+        idea: @idea10

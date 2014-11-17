@@ -2,7 +2,7 @@
 
 namespace Capco\AppBundle\Controller;
 
-use Model\Media;
+use Capco\AppBundle\Entity\Media;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;

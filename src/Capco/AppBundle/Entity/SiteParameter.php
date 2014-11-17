@@ -1,6 +1,6 @@
 <?php
 
-namespace Model;
+namespace Capco\AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
@@ -8,7 +8,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
 /**
  * SiteParameter
  *
- * @ORM\Table()
+ * @ORM\Table(name="site_parameter")
  * @ORM\Entity
  */
 class SiteParameter
@@ -53,7 +53,7 @@ class SiteParameter
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -76,7 +76,7 @@ class SiteParameter
     /**
      * Get keyname
      *
-     * @return string 
+     * @return string
      */
     public function getKeyname()
     {
@@ -99,7 +99,7 @@ class SiteParameter
     /**
      * Get title
      *
-     * @return string 
+     * @return string
      */
     public function getTitle()
     {
@@ -122,7 +122,7 @@ class SiteParameter
     /**
      * Get value
      *
-     * @return string 
+     * @return string
      */
     public function getValue()
     {

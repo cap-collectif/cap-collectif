@@ -1,4 +1,4 @@
-Model\SocialNetwork:
+Capco\AppBundle\Entity\SocialNetwork:
     SocialNetwork{1..6}:
         title: <text(10)>
         link: <url()>

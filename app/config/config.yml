@@ -1,8 +1,7 @@
 imports:
-    - 
-        resource: parameters.yml
-    - 
-        resource: security.yml
+    - { resource: parameters.yml }
+    - { resource: security.yml }
+
 framework:
     secret: "%secret%"
     router:
@@ -22,9 +21,11 @@ framework:
         handler_id: null
     fragments: null
     http_method_override: true
+
 twig:
     debug: "%kernel.debug%"
     strict_variables: "%kernel.debug%"
+
 doctrine:
     dbal:
         driver: "%database_driver%"
@@ -36,14 +37,8 @@ doctrine:
         charset: UTF8
     orm:
         auto_generate_proxy_classes: "%kernel.debug%"
-        mappings:
-            model:
-                type: annotation
-                dir: "%kernel.root_dir%/../src/Model"
-                prefix: Model
-                alias: Model
-                is_bundle: false
         auto_mapping: true
+
 swiftmailer:
     transport: "%mailer_transport%"
     host: "%mailer_host%"

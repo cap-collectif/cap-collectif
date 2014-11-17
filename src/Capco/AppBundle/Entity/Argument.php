@@ -1,17 +1,17 @@
 <?php
 
-namespace Model;
+namespace Capco\AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
- * Ideas
+ * Argument
  *
- * @ORM\Table()
+ * @ORM\Table(name="argument")
  * @ORM\Entity
  */
-class Ideas
+class Argument
 {
     /**
      * @var integer
@@ -25,26 +25,12 @@ class Ideas
     /**
      * @var string
      *
-     * @ORM\Column(name="title", type="string", length=255)
-     */
-    private $title;
-
-    /**
-     * @Gedmo\Slug(fields={"title"})
-     * @ORM\Column(length=255)
-     */
-    private $slug;
-
-    /**
-     * @var string
-     *
      * @ORM\Column(name="body", type="text")
      */
     private $body;
 
     /**
      * @var \DateTime
-     *
      * @Gedmo\Timestampable(on="create")
      * @ORM\Column(name="created_at", type="datetime")
      */
@@ -52,7 +38,6 @@ class Ideas
 
     /**
      * @var \DateTime
-     *
      * @Gedmo\Timestampable(on="update")
      * @ORM\Column(name="updated_at", type="datetime")
      */
@@ -66,14 +51,16 @@ class Ideas
     private $voteCount;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Model\Theme", inversedBy="ideas")
+     * @var
+     *
+     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Contribution", inversedBy="arguments")
      */
-    private $Theme;
+    private $contribution;
 
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -81,56 +68,10 @@ class Ideas
     }
 
     /**
-     * Set title
-     *
-     * @param string $title
-     * @return Ideas
-     */
-    public function setTitle($title)
-    {
-        $this->title = $title;
-
-        return $this;
-    }
-
-    /**
-     * Get title
-     *
-     * @return string 
-     */
-    public function getTitle()
-    {
-        return $this->title;
-    }
-
-    /**
-     * Set slug
-     *
-     * @param string $slug
-     * @return Ideas
-     */
-    public function setSlug($slug)
-    {
-        $this->slug = $slug;
-
-        return $this;
-    }
-
-    /**
-     * Get slug
-     *
-     * @return string 
-     */
-    public function getSlug()
-    {
-        return $this->slug;
-    }
-
-    /**
      * Set body
      *
      * @param string $body
-     * @return Ideas
+     * @return Argument
      */
     public function setBody($body)
     {
@@ -142,7 +83,7 @@ class Ideas
     /**
      * Get body
      *
-     * @return string 
+     * @return string
      */
     public function getBody()
     {
@@ -152,7 +93,7 @@ class Ideas
     /**
      * Get createdAt
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getCreatedAt()
     {
@@ -162,7 +103,7 @@ class Ideas
     /**
      * Get updatedAt
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getUpdatedAt()
     {
@@ -173,7 +114,7 @@ class Ideas
      * Set voteCount
      *
      * @param integer $voteCount
-     * @return Ideas
+     * @return Argument
      */
     public function setVoteCount($voteCount)
     {
@@ -185,7 +126,7 @@ class Ideas
     /**
      * Get voteCount
      *
-     * @return integer 
+     * @return integer
      */
     public function getVoteCount()
     {
@@ -195,18 +136,17 @@ class Ideas
     /**
      * @return mixed
      */
-    public function getTheme()
+    public function getContribution()
     {
-        return $this->Theme;
+        return $this->contribution;
     }
 
     /**
-     * @param mixed $Theme
+     * @param mixed $contribution
      */
-    public function setTheme($Theme)
+    public function setContribution($contribution)
     {
-        $this->Theme = $Theme;
+        $this->contribution = $contribution;
     }
-
 
 }

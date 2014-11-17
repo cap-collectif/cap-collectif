@@ -1,17 +1,17 @@
 <?php
 
-namespace Model;
+namespace Capco\AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
- * MenuItem
+ * SocialNetwork
  *
- * @ORM\Table()
+ * @ORM\Table(name="social_network")
  * @ORM\Entity
  */
-class MenuItem
+class SocialNetwork
 {
     /**
      * @var integer
@@ -37,33 +37,18 @@ class MenuItem
     private $link;
 
     /**
-     * @var boolean
-     *
-     * @ORM\Column(name="is_enabled", type="boolean")
-     */
-    private $isEnabled;
-
-    /**
-     * @var boolean
-     *
-     * @ORM\Column(name="is_deletable", type="boolean")
-     */
-    private $isDeletable = true;
-
-    /**
      * @var integer
-     * @Gedmo\SortablePosition
+     *
      * @ORM\Column(name="position", type="integer")
      */
     private $position;
 
     /**
-     * @var MenuItem
+     * @var boolean
      *
-     * @ORM\OneToOne(targetEntity="Model\MenuItem")
-     * @ORM\JoinColumn(name="parent_id", referencedColumnName="id")
+     * @ORM\Column(name="is_enabled", type="boolean")
      */
-    private $parent;
+    private $isEnabled;
 
     /**
      * @var \DateTime
@@ -81,20 +66,11 @@ class MenuItem
      */
     private $updatedAt;
 
-    /**
-     * @var
-     *
-     * @Gedmo\SortableGroup
-     * @ORM\ManyToOne(targetEntity="Model\Menu", inversedBy="MenuItems")
-     * @ORM\JoinColumn(name="menu_id", referencedColumnName="id")
-     *
-     */
-    private $Menu;
 
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -105,7 +81,7 @@ class MenuItem
      * Set title
      *
      * @param string $title
-     * @return MenuItem
+     * @return SocialNetwork
      */
     public function setTitle($title)
     {
@@ -117,7 +93,7 @@ class MenuItem
     /**
      * Get title
      *
-     * @return string 
+     * @return string
      */
     public function getTitle()
     {
@@ -128,7 +104,7 @@ class MenuItem
      * Set link
      *
      * @param string $link
-     * @return MenuItem
+     * @return SocialNetwork
      */
     public function setLink($link)
     {
@@ -140,7 +116,7 @@ class MenuItem
     /**
      * Get link
      *
-     * @return string 
+     * @return string
      */
     public function getLink()
     {
@@ -148,56 +124,10 @@ class MenuItem
     }
 
     /**
-     * Set isEnabled
-     *
-     * @param boolean $isEnabled
-     * @return MenuItem
-     */
-    public function setIsEnabled($isEnabled)
-    {
-        $this->isEnabled = $isEnabled;
-
-        return $this;
-    }
-
-    /**
-     * Get isEnabled
-     *
-     * @return boolean 
-     */
-    public function getIsEnabled()
-    {
-        return $this->isEnabled;
-    }
-
-    /**
-     * Set isDeletable
-     *
-     * @param boolean $isDeletable
-     * @return MenuItem
-     */
-    public function setIsDeletable($isDeletable)
-    {
-        $this->isDeletable = $isDeletable;
-
-        return $this;
-    }
-
-    /**
-     * Get isDeletable
-     *
-     * @return boolean 
-     */
-    public function getIsDeletable()
-    {
-        return $this->isDeletable;
-    }
-
-    /**
      * Set position
      *
      * @param integer $position
-     * @return MenuItem
+     * @return SocialNetwork
      */
     public function setPosition($position)
     {
@@ -209,7 +139,7 @@ class MenuItem
     /**
      * Get position
      *
-     * @return integer 
+     * @return integer
      */
     public function getPosition()
     {
@@ -217,38 +147,31 @@ class MenuItem
     }
 
     /**
-     * @return mixed
+     * Set isEnabled
+     *
+     * @param boolean $isEnabled
+     * @return SocialNetwork
      */
-    public function getMenu()
+    public function setIsEnabled($isEnabled)
     {
-        return $this->Menu;
+        $this->isEnabled = $isEnabled;
+
+        return $this;
     }
 
     /**
-     * @param mixed $Menu
+     * Get isEnabled
+     *
+     * @return boolean
      */
-    public function setMenu($Menu)
+    public function getIsEnabled()
     {
-        $this->Menu = $Menu;
+        return $this->isEnabled;
     }
 
     /**
-     * @return MenuItem
-     */
-    public function getParent()
-    {
-        return $this->parent;
-    }
-
-    /**
-     * @param MenuItem $parent
-     */
-    public function setParent($parent)
-    {
-        $this->parent = $parent;
-    }
-
-    /**
+     * Get createdAt
+     *
      * @return \DateTime
      */
     public function getCreatedAt()
@@ -257,11 +180,12 @@ class MenuItem
     }
 
     /**
+     * Get updatedAt
+     *
      * @return \DateTime
      */
     public function getUpdatedAt()
     {
         return $this->updatedAt;
     }
-
 }
