@@ -1,0 +1,49 @@
+/* ===============================================================
+   $Dialog
+================================================================*/
+.dialog {
+  padding: 0;
+  @include border-radius(6px);
+}
+
+.dialog__header {
+  border-bottom: 1px solid $gray-primary;
+  @include border-top-radius(6px);
+  .dialog__title {
+    margin: 0;
+  }
+}
+
+@each $type in $opinion-types {
+  $name: nth($type, 1);
+  $color: nth($type, 2);
+  $text: set-link-text-color($color);
+
+  .dialog.dialog--#{$name} {
+    .dialog__header {
+      background-color: $color;
+      color: $text;
+    }
+  }
+}
+
+.dialog__excerpt {
+  border-bottom: 1px solid $gray-primary;
+  background-color: $alert-warning-bg;
+  text-align: center;
+  font-size: 15px;
+  p {
+    margin-bottom: 0;
+  }
+}
+
+.dialog__body {
+  textarea {
+    resize: vertical;
+  }
+}
+
+.dialog__footer {
+  overflow: hidden;
+  border-top: 1px solid $gray-primary;
+}

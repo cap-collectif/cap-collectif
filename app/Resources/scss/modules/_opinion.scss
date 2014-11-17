@@ -36,7 +36,7 @@
         background-color: $text;
         color: $color;
       }
-      a:hover {
+      a, a:hover {
         color: set-link-text-color($color);
       }
     }

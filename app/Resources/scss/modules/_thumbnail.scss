@@ -56,6 +56,10 @@
 
 .thumbnail--sidebar {
 
+  &:hover {
+    background-color: $white;
+  }
+
   .box .h4 {
     margin-top: 30px;
     &:first-child {
