@@ -9,24 +9,29 @@ $black: #000;
 $gray-primary: #c0c0c0;
 $excerpt: #999999;
 $light-gray: #f7f7f9;
+$dark-gray: #999999;
 $dark-blue: #2a6496;
 $light-blue: #428bca;
+$brand-color-1: #334A6B;
+$brand-color-2: #6C8EA3;
+$excerpt: #999999;
 
 // = Base
 // -----------------------------
 $font-size-base:  16px;
 $body-bg: #ebebeb;
+$border: #ddd;
 
 // = Custom jumbotron
 // -----------------------------
-$custom-jumbotron: #334A6B;
+$custom-jumbotron: $brand-color-1;
 $custom-jumbotron-text: $white;
 
 // = Custom footer
 // -----------------------------
-$custom-footer: #334A6B;
+$custom-footer: $brand-color-1;
 $custom-footer-text: $white;
-$custom-footer-links: #6C8EA3;
+$custom-footer-links: $brand-color-2;
 $custom-footer-links-text: $white;
 
 // = Custom module news
@@ -41,9 +46,9 @@ $custom-filter-background: $white;
 // = Custom btn
 // -----------------------------
 $custom-btn-1-bg: #fff;
-$custom-btn-1-text: #334A6B;
+$custom-btn-1-text: $brand-color-1;
 
-$custom-btn-2-bg: #334A6B;
+$custom-btn-2-bg: $brand-color-1;
 $custom-btn-2-text: #fff;
 
 // = Custom calendar event
@@ -68,3 +73,14 @@ $social-twitter: #55acee;
 $social-gplus: #d73d32;
 $social-linkedin: #1279B3;
 $social-rss: #FDAC61;
+
+// = Consultation
+// -------------------------------
+$consultation-problemes: $brand-danger;
+$consultation-causes: $brand-warning;
+$consultation-enjeux: $brand-primary;
+$consultation-solutions: $brand-success;
+$consultation-corbeille: $gray-primary;
+$consultation-sources: $brand-primary;
+
+

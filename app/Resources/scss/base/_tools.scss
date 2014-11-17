@@ -54,7 +54,7 @@
 // = Lightness BG-color > Text-Color
 // -----------------------------
 @function set-link-text-color($color) {
-  @if (lightness( $color ) > 50) {
+  @if (lightness( $color ) > 65) {
     @return $link-color;
   }
   @else {
@@ -89,4 +89,3 @@
         border-bottom: $width/2 solid transparent;
     }
 }
-
