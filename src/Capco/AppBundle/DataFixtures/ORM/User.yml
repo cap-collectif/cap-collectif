@@ -1,0 +1,7 @@
+Capco\UserBundle\Entity\User:
+    user1:
+        username: lbrunet
+        email: lbrunet@jolicode.com
+        enabled: true
+        plainPassword: toto
+        roles: [ ROLE_SUPER_ADMIN ]

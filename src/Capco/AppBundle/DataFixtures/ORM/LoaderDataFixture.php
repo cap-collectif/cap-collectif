@@ -13,6 +13,7 @@ class LoaderDataFixture extends DataFixtureLoader
     protected function getFixtures()
     {
         return array(
+            __DIR__ . '/User.yml',
             __DIR__ . '/Menu.yml',
             __DIR__ . '/MenuItem.yml',
             __DIR__ . '/SiteParameter.yml',
