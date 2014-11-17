@@ -17,6 +17,11 @@ class Menu
     const TYPE_HEADER = 1;
     const TYPE_FOOTER = 2;
 
+    public static $types = array(
+        self::TYPE_HEADER => 'menu.type.header',
+        self::TYPE_FOOTER => 'menu.type.footer',
+    );
+
     /**
      * @var integer
      *
@@ -45,6 +50,11 @@ class Menu
     {
         $this->type = self::TYPE_HEADER;
         $this->MenuItems = new ArrayCollection();
+    }
+
+    public function __toString()
+    {
+        return self::$types[$this->getType()];
     }
 
     /**

@@ -60,6 +60,7 @@ class MenuItem
     /**
      * @var MenuItem
      *
+     * @Gedmo\SortableGroup
      * @ORM\OneToOne(targetEntity="Capco\AppBundle\Entity\MenuItem")
      * @ORM\JoinColumn(name="parent_id", referencedColumnName="id")
      */

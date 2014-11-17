@@ -1,11 +1,24 @@
 services:
-    sonata.admin.page:
+    capco_admin.admin.page:
         class: Capco\AdminBundle\Admin\PageAdmin
+        arguments: [~, Capco\AppBundle\Entity\Page, SonataAdminBundle:CRUD]
         tags:
-            - { name: sonata.admin, manager_type: orm, group: "Content", label: "admin.label.page" }
-        arguments:
-            - ~
-            - Capco\AppBundle\Entity\Page
-            - ~
+            - {name: sonata.admin, manager_type: orm, group: admin.group.content, label: admin.label.page}
+        calls:
+            - [ setTranslationDomain, [SonataAdminBundle]]
+
+    capco_admin.admin.menu:
+        class: Capco\AdminBundle\Admin\MenuAdmin
+        arguments: [~, Capco\AppBundle\Entity\Menu, SonataAdminBundle:CRUD]
+        tags:
+            - {name: sonata.admin, manager_type: orm, group: admin.group.navigation, label: admin.label.menu}
+        calls:
+            - [ setTranslationDomain, [SonataAdminBundle]]
+
+    capco_admin.admin.menu_item:
+        class: Capco\AdminBundle\Admin\MenuItemAdmin
+        arguments: [~, Capco\AppBundle\Entity\MenuItem, SonataAdminBundle:CRUD]
+        tags:
+            - {name: sonata.admin, manager_type: orm, group: admin.group.navigation, label: admin.label.menu_item}
         calls:
             - [ setTranslationDomain, [SonataAdminBundle]]
