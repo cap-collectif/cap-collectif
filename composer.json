@@ -22,7 +22,11 @@
         "incenteev/composer-parameter-handler": "~2.0",
         "doctrine/doctrine-fixtures-bundle": "2.2.*",
         "stof/doctrine-extensions-bundle": "~1.2@dev",
-        "hautelook/alice-bundle": "~0.2"
+        "hautelook/alice-bundle": "~0.2",
+        "elao/web-profiler-extra-bundle": "dev-master",
+        "sonata-project/core-bundle": "dev-master",
+        "sonata-project/admin-bundle": "dev-master",
+        "sonata-project/doctrine-orm-admin-bundle": "dev-master"
     },
     "require-dev": {
         "sensio/generator-bundle": "~2.3"

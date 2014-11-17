@@ -21,3 +21,17 @@ monolog:
         console:
             type: console
             bubble: false
+
+web_profiler_extra:
+    routing:
+        enabled:        true
+        display_in_wdt: true
+    container:
+        enabled:        true
+        display_in_wdt: true
+    assetic:
+        enabled:        false
+        display_in_wdt: false
+    twig:
+        enabled:        true
+        display_in_wdt: true

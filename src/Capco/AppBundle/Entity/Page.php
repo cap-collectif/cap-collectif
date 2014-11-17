@@ -76,6 +76,15 @@ class Page
         return $this->id;
     }
 
+    public function __toString()
+    {
+        if ($this->id) {
+            return $this->getTitle();
+        } else {
+            return "New page";
+        }
+    }
+
     /**
      * Set title
      *

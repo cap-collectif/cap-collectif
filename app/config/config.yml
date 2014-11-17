@@ -1,6 +1,7 @@
 imports:
     - { resource: parameters.yml }
     - { resource: security.yml }
+    - { resource: sonata.yml }
 
 framework:
     secret: "%secret%"
@@ -21,6 +22,7 @@ framework:
         handler_id: null
     fragments: null
     http_method_override: true
+    translator: { fallback: fr }
 
 twig:
     debug: "%kernel.debug%"

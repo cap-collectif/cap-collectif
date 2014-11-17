@@ -1,0 +1,19 @@
+# app/config/config.yml
+sonata_block:
+    default_contexts: [cms]
+    blocks:
+        # Enable the SonataAdminBundle block
+        sonata.admin.block.admin_list:
+            contexts:   [admin]
+
+        sonata.block.service.text:
+        sonata.block.service.rss:
+
+        sonata.user.block.menu:    # used to display the menu in profile pages
+        sonata.user.block.account: # used to display menu option (login option)
+
+        sonata.admin.block.search_result:
+            contexts:   [ admin ]
+
+sonata_admin:
+    title:      Cap Collectif
