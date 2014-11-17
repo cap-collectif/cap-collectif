@@ -11,20 +11,11 @@ body {
 .main {
   background-color: $main-bg;
   padding-bottom: 30px;
-
-  @media (max-width: $screen-xs-max) {
-    padding-bottom: 15px;
-  }
-}
-
-.p-alone {
   padding-top: 30px;
-  padding-bottom: 30px;
-  margin-top: 0;
-  margin-bottom: 0;
+
   @media (max-width: $screen-xs-max) {
-    padding-top: 15px;
     padding-bottom: 15px;
+    padding-top: 15px;
   }
 }
 
