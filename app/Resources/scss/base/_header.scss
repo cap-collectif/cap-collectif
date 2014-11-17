@@ -4,7 +4,35 @@
 .jumbotron--custom {
   padding: 20px 30px;
   margin-bottom: 0;
-  background-color: $custom-jumbotron;
-  text-align: center;
-  color: $custom-jumbotron-text;
 }
+
+.jumbotron--centered {
+  text-align: center;
+}
+
+$backgrounds:
+        (1 $custom-jumbotron-1)
+        (2 $custom-jumbotron-2);
+@each $bg in $backgrounds {
+  $name: nth($bg, 1);
+  $color: nth($bg, 2);
+  $text: set-link-text-color($color);
+
+  .jumbotron--bg-#{$name} {
+    background-color: $color;
+    color: $text;
+    h1, h2, h3, h4, a, a:hover {
+      color: $text;
+      border-color: $text;
+    }
+  }
+}
+
+.jumbotron--small p{
+  font-size: 17px;
+}
+
+.jumbotron h2, .jumbotron .h2 {
+  margin-top: 30px;
+}
+

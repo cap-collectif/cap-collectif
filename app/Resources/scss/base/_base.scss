@@ -8,14 +8,18 @@ body {
   font-size: $font-size-base;
 }
 
-h2 {
+h2, .h2 {
   padding-bottom: 10px;
-  border-bottom: 1px $dark-blue solid;
-  color: $dark-blue;
+  margin-bottom: 30px;
+  margin-top: 50px;
+  border-bottom: 1px $gray-primary solid;
+  color: $brand-color-1;
 }
 
-h3 {
-  color: $light-blue;  
+h3, .h3 {
+  color: $brand-color-2;
+  margin-bottom: 15px;
+  margin-top: 30px;
 }
 
 .h4 {

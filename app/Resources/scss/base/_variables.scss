@@ -16,6 +16,11 @@ $brand-color-1: #334A6B;
 $brand-color-2: #6C8EA3;
 $excerpt: #999999;
 
+// = Brand colors
+// -----------------------------
+$brand-color-1: #334A6B;
+$brand-color-2: #6C8EA3;
+
 // = Base
 // -----------------------------
 $font-size-base:  16px;
@@ -26,13 +31,14 @@ $border: #ddd;
 // -----------------------------
 $custom-jumbotron: $brand-color-1;
 $custom-jumbotron-text: $white;
+$custom-jumbotron-1: $brand-color-1;
+$custom-jumbotron-2: $brand-color-2;
 
 // = Custom footer
 // -----------------------------
 $custom-footer: $brand-color-1;
 $custom-footer-text: $white;
 $custom-footer-links: $brand-color-2;
-$custom-footer-links-text: $white;
 
 // = Custom module news
 // -----------------------------

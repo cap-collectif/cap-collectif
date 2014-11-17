@@ -3,7 +3,7 @@
 ================================================================*/
 .footer {
   background-color: $custom-footer;
-  color: $custom-footer-text;
+  color: set-link-text-color($custom-footer);
   text-align: center;
 
   .container {
@@ -11,7 +11,7 @@
   }
   
   h3 {
-    color: $custom-footer-text;
+    color: set-link-text-color($custom-footer);
   }
 
   .social-network {
@@ -39,18 +39,18 @@
     @include reset-ul();
     @include ul-list-inline();
     background-color: $custom-footer-links;
-    color: $custom-footer-text;
+    color: set-link-text-color($custom-footer-links);
 
     li {
       @include inline-block();
       height: 45px;
       line-height: 45px;
-      color: $custom-footer-links-text;
+      color: set-link-text-color($custom-footer-links);
 
       & a {
         padding: 0 5px;
         @include inline-block();
-        color: $custom-footer-links-text;
+        color: set-link-text-color($custom-footer-links);
       }
     }
   }
