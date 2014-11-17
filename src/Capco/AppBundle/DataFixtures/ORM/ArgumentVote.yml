@@ -1,0 +1,10 @@
+Model\ArgumentVote:
+    ArgVote1:
+        vote: @vote1
+        argument: @argument2
+    ArgVote2:
+        vote: @vote3
+        argument: @argument1
+    ArgVote3:
+        vote: @vote2
+        argument: @argument3

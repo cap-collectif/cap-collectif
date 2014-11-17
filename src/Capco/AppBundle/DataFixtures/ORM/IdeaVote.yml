@@ -1,0 +1,10 @@
+Model\IdeaVote:
+    IdeaVote1:
+        vote: @vote1
+        idea: @ideas3
+    IdeaVote2:
+        vote: @vote3
+        idea: @ideas7
+    IdeaVote3:
+        vote: @vote2
+        idea: @ideas10

@@ -1,0 +1,13 @@
+Model\Argument:
+    argument1:
+        body: <text(1000)>
+        voteCount: <numberBetween(0, 582)>
+        contribution: @contribution1
+    argument2:
+        body: <text(1000)>
+        voteCount: <numberBetween(0, 582)>
+        contribution: @contribution2
+    argument3:
+        body: <text(1000)>
+        voteCount: <numberBetween(0, 582)>
+        contribution: @contribution2

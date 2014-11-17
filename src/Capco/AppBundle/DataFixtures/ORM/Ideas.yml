@@ -1,0 +1,6 @@
+Model\Ideas:
+    ideas{1..15}:
+        title: <text(20)>
+        body: <text(1000)>
+        voteCount: <numberBetween(0, 356)>
+        theme: @theme*

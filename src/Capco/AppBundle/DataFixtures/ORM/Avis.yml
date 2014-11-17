@@ -1,6 +1,0 @@
-Model\Avis:
-    avis{1..6}:
-        title: <text(55)>
-        content: <text(200)>
-        consultation: @cs*
-        type: @type*

@@ -1,0 +1,17 @@
+Model\SiteParameter:
+    SiteParameter1:
+        keyname: homepage.title
+        title: Titre sur la homepage
+        value: Bienvenue sur le site
+    SiteParameter2:
+        keyname: homepage.body
+        title: Description sur la homepage
+        value: |
+               Praeterea iter est quasdam res quas ex communi. Plura mihi bona sunt, inclinet, amari petere vellent. Inmensae subtilitatis, obscuris et malesuada fames. Non equidem invideo, miror magis posuere velit aliquet. Sed haec quis possit intrepidus aestimare tellus. Cum ceteris in veneratione tui montes, nascetur mus.
+               Petierunt uti sibi concilium totius Galliae in diem certam indicere. Vivamus sagittis lacus vel augue laoreet rutrum faucibus. Quam diu etiam furor iste tuus nos eludet? Cum sociis natoque penatibus et magnis dis parturient. Fabio vel iudice vincam, sunt in culpa qui officia. Quisque placerat facilisis egestas cillum dolore.
+               Quis aute iure reprehenderit in voluptate velit esse. Inmensae subtilitatis, obscuris et malesuada fames. Quisque placerat facilisis egestas cillum dolore. At nos hinc posthac, sitientis piros Afros. Cum ceteris in veneratione tui montes, nascetur mus.
+    SiteParameter3:
+        keyname: homepage.jumbotron.description
+        title: Description du jumbotron sur la homepage
+        value: |
+                Excepteur sint obcaecat cupiditat non proident culpa. A communi observantia non est recedendum. Curabitur est gravida et libero vitae dictum. Inmensae subtilitatis, obscuris et malesuada fames.

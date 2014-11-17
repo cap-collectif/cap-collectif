@@ -1,7 +1,0 @@
-Model\Media:
-    media1:
-        file: <createMedia("media-1.jpg")>
-    media2:
-        file: <createMedia("media-2.jpg")>
-    media3:
-        file: <createMedia("media-3.jpg")>

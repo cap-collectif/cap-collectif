@@ -1,0 +1,25 @@
+Model\Theme:
+    theme1:
+        title: <text(36)>
+        teaser: <sentence(3)>
+        isEnabled: <boolean()>
+        position: <numberBetween(1, 10)>
+        status: <numberBetween(0, 2)>
+        body: <text(1000)>
+        consultations: [@cs1, @cs2]
+    theme2:
+        title: <text(36)>
+        teaser: <sentence(3)>
+        isEnabled: <boolean()>
+        position: <numberBetween(1, 10)>
+        status: <numberBetween(0, 2)>
+        body: <text(1000)>
+        consultations: [@cs2, @cs3]
+    theme3:
+        title: <text(36)>
+        teaser: <sentence(3)>
+        isEnabled: <boolean()>
+        position: <numberBetween(1, 10)>
+        status: <numberBetween(0, 2)>
+        body: <text(1000)>
+        consultations: [@cs1, @cs3]

@@ -1,3 +1,0 @@
-Model\Category:
-    category{1..6}:
-        title: <sentence(3)>

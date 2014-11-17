@@ -1,0 +1,4 @@
+Model\Signalement:
+    signalement1:
+        status: 1
+        contribution: [@contribution1]

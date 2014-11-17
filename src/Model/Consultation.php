@@ -4,7 +4,6 @@ namespace Model;
 
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
-use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * Consultation
@@ -33,55 +32,37 @@ class Consultation
     /**
      * @var \DateTime
      * @Gedmo\Timestampable(on="create")
-     * @ORM\Column(name="created", type="datetime")
+     * @ORM\Column(name="created_at", type="datetime")
      */
-    private $created;
+    private $createdAt;
 
     /**
      * @var \DateTime
      * @Gedmo\Timestampable(on="update")
-     * @ORM\Column(name="updated", type="datetime")
+     * @ORM\Column(name="updated_at", type="datetime")
      */
-    private $updated;
-
-    /**
-     * @var boolean
-     *
-     * @ORM\Column(name="enabled", type="boolean")
-     */
-    private $enabled;
+    private $updatedAt;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="openDate", type="datetime")
+     * @ORM\Column(name="opened_at", type="datetime")
      */
-    private $openDate;
+    private $openedAt;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="closeDate", type="datetime")
+     * @ORM\Column(name="closed_at", type="datetime")
      */
-    private $closeDate;
+    private $closeddAt;
 
     /**
-     * @ORM\OneToMany(targetEntity="Model\Avis", mappedBy="consultation",  cascade={"persist", "remove"})
+     * @var integer
+     *
+     * @ORM\Column(name="opinion_count", type="integer")
      */
-    private $avis;
-
-
-    /**
-     * @ORM\OneToOne(targetEntity="Model\Media", cascade={"persist", "remove"})
-     */
-    private $image;
-
-
-
-    public function __construct()
-    {
-        $this->avis = new ArrayCollection();
-    }
+    private $opinionCount;
 
     /**
      * Get id
@@ -117,137 +98,67 @@ class Consultation
     }
 
     /**
-     * Get created
-     *
      * @return \DateTime
      */
-    public function getCreated()
+    public function getCloseddAt()
     {
-        return $this->created;
+        return $this->closeddAt;
     }
 
     /**
-     * Get updated
-     *
+     * @param \DateTime $closeddAt
+     */
+    public function setCloseddAt($closeddAt)
+    {
+        $this->closeddAt = $closeddAt;
+    }
+
+    /**
      * @return \DateTime
      */
-    public function getUpdated()
+    public function getCreatedAt()
     {
-        return $this->updated;
+        return $this->createdAt;
     }
 
     /**
-     * Set enabled
-     *
-     * @param boolean $enabled
-     * @return Consultation
-     */
-    public function setEnabled($enabled)
-    {
-        $this->enabled = $enabled;
-
-        return $this;
-    }
-
-    /**
-     * Get enabled
-     *
-     * @return boolean
-     */
-    public function getEnabled()
-    {
-        return $this->enabled;
-    }
-
-    /**
-     * Set openDate
-     *
-     * @param \DateTime $openDate
-     * @return Consultation
-     */
-    public function setOpenDate($openDate)
-    {
-        $this->openDate = $openDate;
-
-        return $this;
-    }
-
-    /**
-     * Get openDate
-     *
      * @return \DateTime
      */
-    public function getOpenDate()
+    public function getOpenedAt()
     {
-        return $this->openDate;
+        return $this->openedAt;
     }
 
     /**
-     * Set closeDate
-     *
-     * @param \DateTime $closeDate
-     * @return Consultation
+     * @param \DateTime $openedAt
      */
-    public function setCloseDate($closeDate)
+    public function setOpenedAt($openedAt)
     {
-        $this->closeDate = $closeDate;
-
-        return $this;
+        $this->openedAt = $openedAt;
     }
 
     /**
-     * Get closeDate
-     *
+     * @return int
+     */
+    public function getOpinionCount()
+    {
+        return $this->opinionCount;
+    }
+
+    /**
+     * @param int $opinionCount
+     */
+    public function setOpinionCount($opinionCount)
+    {
+        $this->opinionCount = $opinionCount;
+    }
+
+    /**
      * @return \DateTime
      */
-    public function getCloseDate()
+    public function getUpdatedAt()
     {
-        return $this->closeDate;
-    }
-
-    /**
-     * @param \Model\Avis $avis
-     * @return Avis
-     */
-    public function addAvis(Avis $avis)
-    {
-        $this->avis[] = $avis;
-
-        return $this;
-    }
-
-    /**
-     * @param \Model\Avis $avis
-     */
-    public function removeAvis(Avis $avis)
-    {
-        $this->avis->removeElement($avis);
-    }
-
-    /**
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getAvis()
-    {
-        return $this->avis;
-    }
-
-    /**
-     * @param \Model\Media $image
-     * @return Consultation
-     */
-    public function setImage(\Model\Media $image = null)
-    {
-        $this->image = $image;
-        return $this;
-    }
-
-    /**
-     * @return \Model\Media
-     */
-    public function getImage()
-    {
-        return $this->image;
+        return $this->updatedAt;
     }
 
 }

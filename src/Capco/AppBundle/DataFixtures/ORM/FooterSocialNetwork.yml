@@ -1,0 +1,6 @@
+Model\FooterSocialNetwork:
+    FooterSocialNetwork{1..6}:
+        title: <text(10)>
+        link: <url()>
+        position: <numberBetween(1, 10)>
+        isEnabled: <boolean()>

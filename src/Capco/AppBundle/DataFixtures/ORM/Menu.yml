@@ -1,0 +1,11 @@
+Model\Menu:
+    menu1:
+        type: 1
+    menu2:
+        type: 2
+    menu3:
+        type: 2
+    menu4:
+        type: 2
+    menu5:
+        type: 1

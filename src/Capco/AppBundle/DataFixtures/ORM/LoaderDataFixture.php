@@ -1,11 +1,9 @@
 <?php
 
-namespace Acme\DemoBundle\DataFixtures\ORM;
+namespace Capco\AppBundle\DataFixtures\ORM;
 
 use Hautelook\AliceBundle\Alice\DataFixtureLoader;
 use Nelmio\Alice\Fixtures;
-use Model\Media;
-use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 class LoaderDataFixture extends DataFixtureLoader
 {
@@ -15,29 +13,26 @@ class LoaderDataFixture extends DataFixtureLoader
     protected function getFixtures()
     {
         return array(
-            __DIR__ . '/Categories.yml',
-//            __DIR__ . '/Media.yml',
-            __DIR__ . '/Inbox.yml',
-            __DIR__ . '/Users.yml',
-            __DIR__ . '/Types.yml',
-            __DIR__ . '/Consultations.yml',
-            __DIR__ . '/Themes.yml',
-            __DIR__ . '/Avis.yml',
-            __DIR__ . '/Sources.yml',
+            __DIR__ . '/Menu.yml',
+            __DIR__ . '/MenuItem.yml',
+            __DIR__ . '/SiteParameter.yml',
+            __DIR__ . '/NewsletterSubscription.yml',
+            __DIR__ . '/SocialNetwork.yml',
+            __DIR__ . '/FooterSocialNetwork.yml',
+            __DIR__ . '/ProblemType.yml',
+            __DIR__ . '/OpinionType.yml',
+            __DIR__ . '/Page.yml',
+            __DIR__ . '/Consultation.yml',
+            __DIR__ . '/Step.yml',
+            __DIR__ . '/Theme.yml',
+            __DIR__ . '/Ideas.yml',
+            __DIR__ . '/Contribution.yml',
+            __DIR__ . '/Vote.yml',
+            __DIR__ . '/Argument.yml',
+            __DIR__ . '/ArgumentVote.yml',
+            __DIR__ . '/Signalement.yml',
+            __DIR__ . '/IdeaVote.yml',
         );
     }
 
-
-    /**
-     * Fixtures Upload file
-     * @param $fileName
-     * @return UploadedFile
-     */
-    public function createMedia($fileName)
-    {
-        $media = new Media();
-        $file = new UploadedFile($media->getFixturesPath() . $fileName, $fileName, null, null, null, true);
-        return $file;
-
-    }
 }

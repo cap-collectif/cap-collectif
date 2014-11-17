@@ -1,0 +1,10 @@
+Model\Vote:
+    vote1:
+        value: <numberBetween(0, 3)>
+        contributions: [@contribution1]
+    vote2:
+        value: <numberBetween(0, 3)>
+        contributions: [@contribution2]
+    vote3:
+        value: <numberBetween(0, 3)>
+        contributions: [@contribution3]

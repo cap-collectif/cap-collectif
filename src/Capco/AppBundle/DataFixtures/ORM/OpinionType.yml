@@ -1,0 +1,31 @@
+Model\OpinionType:
+    opinionType1:
+        title: Cause
+        shortName: <text(10)>
+        position: <numberBetween(1, 10)>
+        voteWidgetType: 1
+        ProblemType: @problemType1
+    opinionType2:
+        title: Tomate
+        shortName: <text(10)>
+        position: <numberBetween(1, 10)>
+        voteWidgetType: 2
+        ProblemType: @problemType2
+    opinionType3:
+        title: Salade
+        shortName: <text(10)>
+        position: <numberBetween(1, 10)>
+        voteWidgetType: 2
+        ProblemType: @problemType2
+    opinionType4:
+        title: Enjeux
+        shortName: <text(10)>
+        position: <numberBetween(1, 10)>
+        voteWidgetType: 2
+        ProblemType: @problemType1
+    opinionType5:
+        title: Concombre
+        shortName: <text(10)>
+        position: <numberBetween(1, 10)>
+        voteWidgetType: 3
+        ProblemType: @problemType2

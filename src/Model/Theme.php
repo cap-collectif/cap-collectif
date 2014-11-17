@@ -4,6 +4,7 @@ namespace Model;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * Theme
@@ -13,6 +14,11 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Theme
 {
+
+    const STATUS_CLOSED = 0;
+    const STATUS_OPENED = 1;
+    const STATUS_FUTURE = 2;
+
     /**
      * @var integer
      *
@@ -25,9 +31,15 @@ class Theme
     /**
      * @var string
      *
-     * @ORM\Column(name="title", type="string", length=100)
+     * @ORM\Column(name="title", type="string", length=255)
      */
     private $title;
+
+    /**
+     * @Gedmo\Slug(fields={"title"})
+     * @ORM\Column(length=255)
+     */
+    private $slug;
 
     /**
      * @var string
@@ -39,21 +51,30 @@ class Theme
     /**
      * @var boolean
      *
-     * @ORM\Column(name="enabled", type="boolean")
+     * @ORM\Column(name="is_enabled", type="boolean")
      */
-    private $enabled;
+    private $isEnabled;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="position", type="integer")
+     */
+    private $position;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="status", type="integer")
+     */
+    private $status;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="content", type="text")
+     * @ORM\Column(name="body", type="text")
      */
-    private $content;
-
-    /**
-     * @ORM\OneToOne(targetEntity="Model\Media", cascade={"persist", "remove"})
-     */
-    private $image;
+    private $body;
 
     /**
      * @var
@@ -61,11 +82,18 @@ class Theme
      */
     private $consultations;
 
+    /**
+     * @var
+     * @ORM\OneToMany(targetEntity="Model\Ideas", mappedBy="Theme")
+     */
+    private $ideas;
+
     function __construct()
     {
         $this->consultations = new ArrayCollection();
+        $this->ideas = new ArrayCollection();
+        $this->status = self::STATUS_CLOSED;
     }
-
 
     /**
      * Get id
@@ -124,49 +152,67 @@ class Theme
     }
 
     /**
-     * Set enabled
-     *
-     * @param boolean $enabled
-     * @return Theme
+     * @return boolean
      */
-    public function setEnabled($enabled)
+    public function isIsEnabled()
     {
-        $this->enabled = $enabled;
-
-        return $this;
+        return $this->isEnabled;
     }
 
     /**
-     * Get enabled
-     *
-     * @return boolean 
+     * @param boolean $isEnabled
      */
-    public function getEnabled()
+    public function setIsEnabled($isEnabled)
     {
-        return $this->enabled;
+        $this->isEnabled = $isEnabled;
     }
 
     /**
-     * Set content
-     *
-     * @param string $content
-     * @return Theme
+     * @return mixed
      */
-    public function setContent($content)
+    public function getPosition()
     {
-        $this->content = $content;
-
-        return $this;
+        return $this->position;
     }
 
     /**
-     * Get content
-     *
-     * @return string 
+     * @param mixed $position
      */
-    public function getContent()
+    public function setPosition($position)
     {
-        return $this->content;
+        $this->position = $position;
+    }
+
+    /**
+     * @return int
+     */
+    public function getStatus()
+    {
+        return $this->status;
+    }
+
+    /**
+     * @param int $status
+     */
+    public function setStatus($status)
+    {
+        $this->status = $status;
+    }
+
+    /**
+     * @return string
+     */
+    public function getBody()
+    {
+        return $this->body;
+    }
+
+    /**
+     * @param string $body
+     */
+    public function setBody($body)
+    {
+        $this->body = $body;
     }
 
     /**
@@ -197,20 +243,46 @@ class Theme
     }
 
     /**
-     * @param \Model\Media $image
+     * @param \Model\Ideas $ideas
      * @return Theme
      */
-    public function setImage(\Model\Media $image = null)
+    public function addIdeas(Ideas $ideas)
     {
-        $this->image = $image;
+        $this->ideas[] = $ideas;
+
         return $this;
     }
 
     /**
-     * @return \Model\Media
+     * @param \Model\Ideas $ideas
      */
-    public function getImage()
+    public function removeIdeas(Ideas $ideas)
     {
-        return $this->image;
+        $this->ideas->removeElement($ideas);
     }
+
+    /**
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getIdeas()
+    {
+        return $this->ideas;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getSlug()
+    {
+        return $this->slug;
+    }
+
+    /**
+     * @param mixed $slug
+     */
+    public function setSlug($slug)
+    {
+        $this->slug = $slug;
+    }
+
 }

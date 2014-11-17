@@ -1,0 +1,11 @@
+Model\ProblemType:
+    problemType1:
+        title: <text(20)>
+        problemTitle: <text(10)>
+        trashTitle: corbeille
+        voteWidgetType: 1
+    problemType2:
+        title: <text(20)>
+        problemTitle: <text(10)>
+        trashTitle: déchets
+        voteWidgetType: 2
