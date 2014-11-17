@@ -106,6 +106,7 @@ class User extends BaseUser
 
     function __construct()
     {
+        parent::__construct();
         $this->Contributions = new ArrayCollection();
         $this->Consultations = new ArrayCollection();
         $this->Votes = new ArrayCollection();
