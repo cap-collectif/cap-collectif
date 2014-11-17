@@ -43,6 +43,14 @@ class ArgumentVote
     private $argument;
 
     /**
+     * @var
+     *
+     * @ORM\ManyToOne(targetEntity="Capco\UserBundle\Entity\User", inversedBy="ArgumentVoters")
+     * @ORM\JoinColumn(name="voter_id", referencedColumnName="id")
+     */
+    private $Voter;
+
+    /**
      * Get id
      *
      * @return integer
@@ -94,5 +102,20 @@ class ArgumentVote
         $this->vote = $vote;
     }
 
+    /**
+     * @return mixed
+     */
+    public function getVoter()
+    {
+        return $this->Voter;
+    }
+
+    /**
+     * @param mixed $Voter
+     */
+    public function setVoter($Voter)
+    {
+        $this->Voter = $Voter;
+    }
 
 }

@@ -11,6 +11,15 @@
 
 namespace Capco\UserBundle\Entity;
 
+use Capco\AppBundle\Entity\Argument;
+use Capco\AppBundle\Entity\ArgumentVote;
+use Capco\AppBundle\Entity\Consultation;
+use Capco\AppBundle\Entity\Contribution;
+use Capco\AppBundle\Entity\Idea;
+use Capco\AppBundle\Entity\Page;
+use Capco\AppBundle\Entity\Reporting;
+use Capco\AppBundle\Entity\Vote;
+use Doctrine\Common\Collections\ArrayCollection;
 use Sonata\UserBundle\Entity\BaseUser as BaseUser;
 
 /**
@@ -37,4 +46,291 @@ class User extends BaseUser
     {
         return $this->id;
     }
+
+    /**
+     * @var string
+     *
+     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\Contribution", mappedBy="Author")
+     */
+    private $Contributions;
+
+    /**
+     * @var string
+     *
+     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\Consultation", mappedBy="Author")
+     */
+    private $Consultations;
+
+    /**
+     * @var
+     *
+     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\Vote", mappedBy="Voter")
+     */
+    private $Votes;
+
+    /**
+     * @var
+     *
+     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\Argument", mappedBy="Author")
+     */
+    private $Arguments;
+
+    /**
+     * @var
+     *
+     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\ArgumentVote", mappedBy="Voter")
+     */
+    private $ArgumentVoters;
+
+    /**
+     * @var
+     *
+     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\Idea", mappedBy="Author")
+     */
+    private $Ideas;
+
+    /**
+     * @var
+     *
+     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\Page", mappedBy="Author")
+     */
+    private $Pages;
+
+    /**
+     * @var
+     *
+     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\Reporting", mappedBy="moderator")
+     */
+    private $Reportings;
+
+
+    function __construct()
+    {
+        $this->Contributions = new ArrayCollection();
+        $this->Consultations = new ArrayCollection();
+        $this->Votes = new ArrayCollection();
+        $this->Arguments = new ArrayCollection();
+        $this->ArgumentVoters = new ArrayCollection();
+        $this->Ideas = new ArrayCollection();
+        $this->Pages = new ArrayCollection();
+        $this->Reportings = new ArrayCollection();
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getContributions()
+    {
+        return $this->Contributions;
+    }
+
+    /**
+     * @param  Contribution $Contribution
+     * @return $this
+     */
+    public function addContribution(Contribution $Contribution)
+    {
+        $this->Contributions[] = $Contribution;
+
+        return $this;
+    }
+
+    /**
+     * @param Contribution $Contribution
+     */
+    public function removeContribution(Contribution $Contribution)
+    {
+        $this->Contributions->removeElement($Contribution);
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getConsultations()
+    {
+        return $this->Consultations;
+    }
+
+    /**
+     * @param  Consultation $Consultation
+     * @return $this
+     */
+    public function addConsultation(Consultation $Consultation)
+    {
+        $this->Consultations[] = $Consultation;
+
+        return $this;
+    }
+
+    /**
+     * @param Consultation $Consultation
+     */
+    public function removeConsultation(Consultation $Consultation)
+    {
+        $this->Consultations->removeElement($Consultation);
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getVotes()
+    {
+        return $this->Votes;
+    }
+
+    /**
+     * @param  Vote $Vote
+     * @return $this
+     */
+    public function addVote(Vote $Vote)
+    {
+        $this->Votes[] = $Vote;
+
+        return $this;
+    }
+
+    /**
+     * @param Vote $Vote
+     */
+    public function removeVote(Vote $Vote)
+    {
+        $this->Votes->removeElement($Vote);
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getArguments()
+    {
+        return $this->Arguments;
+    }
+
+    /**
+     * @param  Argument $Argument
+     * @return $this
+     */
+    public function addArgument(Argument $Argument)
+    {
+        $this->Arguments[] = $Argument;
+
+        return $this;
+    }
+
+    /**
+     * @param Argument $Argument
+     */
+    public function removeArgument(Argument $Argument)
+    {
+        $this->Arguments->removeElement($Argument);
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getArgumentVoters()
+    {
+        return $this->ArgumentVoters;
+    }
+
+    /**
+     * @param  ArgumentVote $ArgumentVoter
+     * @return $this
+     */
+    public function addArgumentVoter(ArgumentVote $ArgumentVoter)
+    {
+        $this->Arguments[] = $ArgumentVoter;
+
+        return $this;
+    }
+
+    /**
+     * @param ArgumentVote $ArgumentVoter
+     */
+    public function removeArgumentVoter(ArgumentVote $ArgumentVoter)
+    {
+        $this->Arguments->removeElement($ArgumentVoter);
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getIdeas()
+    {
+        return $this->Ideas;
+    }
+
+    /**
+     * @param  Idea $Idea
+     * @return $this
+     */
+    public function addIdea(Idea $Idea)
+    {
+        $this->Arguments[] = $Idea;
+
+        return $this;
+    }
+
+    /**
+     * @param Idea $Idea
+     */
+    public function removeIdea(Idea $Idea)
+    {
+        $this->Arguments->removeElement($Idea);
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPages()
+    {
+        return $this->Pages;
+    }
+
+    /**
+     * @param  Page $Page
+     * @return $this
+     */
+    public function addPage(Page $Page)
+    {
+        $this->Pages[] = $Page;
+
+        return $this;
+    }
+
+    /**
+     * @param Page $Page
+     */
+    public function removePage(Page $Page)
+    {
+        $this->Pages->removeElement($Page);
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getReportings()
+    {
+        return $this->Reportings;
+    }
+
+
+    /**
+     * @param  Reporting $Reporting
+     * @return $this
+     */
+    public function addReporting(Reporting $Reporting)
+    {
+        $this->Reportings[] = $Reporting;
+
+        return $this;
+    }
+
+    /**
+     * @param Reporting $Reporting
+     */
+    public function removeReporting(Reporting $Reporting)
+    {
+        $this->Reportings->removeElement($Reporting);
+    }
+
 }

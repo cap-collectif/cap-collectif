@@ -65,6 +65,14 @@ class Consultation
     private $opinionCount;
 
     /**
+     * @var string
+     *
+     * @ORM\ManyToOne(targetEntity="Capco\UserBundle\Entity\User", inversedBy="Consultation")
+     * @ORM\JoinColumn(name="author_id", referencedColumnName="id")
+     */
+    private $Author;
+
+    /**
      * Get id
      *
      * @return integer
@@ -159,6 +167,22 @@ class Consultation
     public function getUpdatedAt()
     {
         return $this->updatedAt;
+    }
+
+    /**
+     * @return string
+     */
+    public function getAuthor()
+    {
+        return $this->Author;
+    }
+
+    /**
+     * @param string $Author
+     */
+    public function setAuthor($Author)
+    {
+        $this->Author = $Author;
     }
 
 }

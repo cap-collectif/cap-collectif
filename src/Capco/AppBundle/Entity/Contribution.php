@@ -97,13 +97,21 @@ class Contribution
     /**
      * @var string
      *
-     * @ORM\ManyToMany(targetEntity="Capco\AppBundle\Entity\Vote", mappedBy="contributions", cascade={"persist", "remove"})
+     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\Vote", mappedBy="Contribution")
      */
-    private $votes;
+    private $Votes;
+
+    /**
+     * @var string
+     *
+     * @ORM\ManyToOne(targetEntity="Capco\UserBundle\Entity\User", inversedBy="Contributions")
+     * @ORM\JoinColumn(name="author_id", referencedColumnName="id")
+     */
+    private $Author;
 
     function __construct()
     {
-        $this->votes = new ArrayCollection();
+        $this->Votes = new ArrayCollection();
         $this->arguments = new ArrayCollection();
     }
 
@@ -306,7 +314,7 @@ class Contribution
      */
     public function getVotes()
     {
-        return $this->votes;
+        return $this->Votes;
     }
 
     /**
@@ -315,7 +323,7 @@ class Contribution
      */
     public function addVote(Vote $vote)
     {
-        $this->votes[] = $vote;
+        $this->Votes[] = $vote;
 
         return $this;
     }
@@ -325,7 +333,7 @@ class Contribution
      */
     public function removeVote(Vote $vote)
     {
-        $this->votes->removeElement($vote);
+        $this->Votes->removeElement($vote);
     }
 
     /**
@@ -354,5 +362,22 @@ class Contribution
     {
         $this->arguments->removeElement($argument);
     }
+
+    /**
+     * @return string
+     */
+    public function getAuthor()
+    {
+        return $this->Author;
+    }
+
+    /**
+     * @param string $Author
+     */
+    public function setAuthor($Author)
+    {
+        $this->Author = $Author;
+    }
+
 
 }

@@ -65,6 +65,13 @@ class Page
      */
     private $isEnabled;
 
+    /**
+     * @var
+     *
+     * @ORM\ManyToOne(targetEntity="Capco\UserBundle\Entity\User", inversedBy="Pages")
+     * @ORM\JoinColumn(name="author_id", referencedColumnName="id")
+     */
+    private $Author;
 
     /**
      * Get id
@@ -196,4 +203,21 @@ class Page
     {
         return $this->isEnabled;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getAuthor()
+    {
+        return $this->Author;
+    }
+
+    /**
+     * @param mixed $Author
+     */
+    public function setAuthor($Author)
+    {
+        $this->Author = $Author;
+    }
+
 }

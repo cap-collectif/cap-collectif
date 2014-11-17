@@ -40,14 +40,18 @@ class Vote
     /**
      * @var
      *
-     * @ORM\ManyToMany(targetEntity="Capco\AppBundle\Entity\Contribution", inversedBy="votes")
+     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Contribution", inversedBy="Votes")
+     * @ORM\JoinColumn(name="contribution_id", referencedColumnName="id")
      */
-    private $contributions;
+    private $Contribution;
 
-    function __construct()
-    {
-        $this->contributions = new ArrayCollection();
-    }
+    /**
+     * @var
+     *
+     * @ORM\ManyToOne(targetEntity="Capco\UserBundle\Entity\User", inversedBy="Votes")
+     * @ORM\JoinColumn(name="voter_id", referencedColumnName="id")
+     */
+    private $Voter;
 
     /**
      * Get id
@@ -95,30 +99,34 @@ class Vote
     /**
      * @return mixed
      */
-    public function getContributions()
+    public function getContribution()
     {
-        return $this->contributions;
+        return $this->Contribution;
     }
 
     /**
-     * @param $contribution
-     * @return $this
+     * @param mixed $Contribution
      */
-    public function addContribution($contribution)
+    public function setContribution($Contribution)
     {
-        $this->contributions[] = $contribution;
-
-        return $this;
-
+        $this->Contribution = $Contribution;
     }
 
     /**
-     * @param $contribution
+     * @return mixed
      */
-    public function removeContribution($contribution)
+    public function getVoter()
     {
-        $this->contributions->removeElement($contribution);
-
+        return $this->Voter;
     }
+
+    /**
+     * @param mixed $Voter
+     */
+    public function setVoter($Voter)
+    {
+        $this->Voter = $Voter;
+    }
+
 
 }

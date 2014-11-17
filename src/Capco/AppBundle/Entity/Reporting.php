@@ -55,6 +55,13 @@ class Reporting
      */
     private $contributions;
 
+    /**
+     * @var
+     * @ORM\ManyToOne(targetEntity="Capco\UserBundle\Entity\User", inversedBy="Reportings")
+     * @ORM\JoinColumn(name="moderator_id", referencedColumnName="id")
+     */
+    private $moderator;
+
     function __construct()
     {
         $this->contributions = new ArrayCollection();
@@ -74,7 +81,7 @@ class Reporting
      * Set status
      *
      * @param integer $status
-     * @return Signalement
+     * @return Reporting
      */
     public function setStatus($status)
     {
@@ -138,5 +145,21 @@ class Reporting
     public function removeContribution(Contribution $contribution)
     {
         $this->contributions->removeElement($contribution);
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getModerator()
+    {
+        return $this->moderator;
+    }
+
+    /**
+     * @param mixed $moderator
+     */
+    public function setModerator($moderator)
+    {
+        $this->moderator = $moderator;
     }
 }

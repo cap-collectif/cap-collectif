@@ -13,6 +13,10 @@ use Gedmo\Mapping\Annotation as Gedmo;
  */
 class Argument
 {
+
+    const TYPE_AGAINST = 0;
+    const TYPE_FOR  = 1;
+
     /**
      * @var integer
      *
@@ -56,6 +60,21 @@ class Argument
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Contribution", inversedBy="arguments")
      */
     private $contribution;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="type", type="integer")
+     */
+    private $type = 1;
+
+    /**
+     * @var
+     *
+     * @ORM\ManyToOne(targetEntity="Capco\UserBundle\Entity\User", inversedBy="Arguments")
+     * @ORM\JoinColumn(name="author_id", referencedColumnName="id")
+     */
+    private $Author;
 
     /**
      * Get id
@@ -148,5 +167,38 @@ class Argument
     {
         $this->contribution = $contribution;
     }
+
+    /**
+     * @return int
+     */
+    public function getType()
+    {
+        return $this->type;
+    }
+
+    /**
+     * @param int $type
+     */
+    public function setType($type)
+    {
+        $this->type = $type;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getAuthor()
+    {
+        return $this->Author;
+    }
+
+    /**
+     * @param mixed $Author
+     */
+    public function setAuthor($Author)
+    {
+        $this->Author = $Author;
+    }
+
 
 }
