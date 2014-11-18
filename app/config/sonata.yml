@@ -2,6 +2,49 @@ sonata_admin:
     title:      Cap Collectif
     options:
         pager_links: 5 # pager max links to display
+    dashboard:
+        blocks:
+            - { position: left,  type: sonata.admin.block.admin_list, settings: { groups: [sonata.admin.group.user, admin.group.content, admin.group.navigation, admin.group.marketing, admin.group.ideas] } }
+            - { position: right, type: sonata.admin.block.admin_list, settings: { groups: [admin.group.consultation, admin.group.reference] } }
+        groups:
+            sonata.admin.group.user:
+                items:
+                    - sonata.user.admin.user
+                    - sonata.user.admin.group
+            admin.group.navigation:
+                items:
+                    - capco_admin.admin.menu
+                    - capco_admin.admin.menu_item
+            admin.group.content:
+                items:
+                    - capco_admin.admin.page
+                    - sonata.media.admin.media
+            admin.group.marketing:
+                items:
+                    - capco_admin.admin.newsletter_subscription
+                    - capco_admin.admin.social_network
+                    - capco_admin.admin.footer_social_network
+            admin.group.ideas:
+                items:
+                    - capco_admin.admin.idea
+                    - capco_admin.admin.idea_vote
+            admin.group.consultation:
+                items:
+                    - capco_admin.admin.consultation
+                    - capco_admin.admin.step
+                    - capco_admin.admin.consultation_step
+                    - capco_admin.admin.problem
+                    - capco_admin.admin.opinion
+                    - capco_admin.admin.vote
+                    - capco_admin.admin.argument
+                    - capco_admin.admin.argument_vote
+                    - capco_admin.admin.reporting
+            admin.group.reference:
+                items:
+                    - capco_admin.admin.theme
+                    - capco_admin.admin.opinion_type
+                    - capco_admin.admin.problem_type
+                    - capco_admin.admin.site_parameter
 
 sonata_block:
     default_contexts: [cms]
