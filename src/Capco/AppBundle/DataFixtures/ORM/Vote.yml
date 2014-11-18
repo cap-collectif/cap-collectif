@@ -2,3 +2,4 @@ Capco\AppBundle\Entity\Vote:
     vote{1..50}:
         value: <numberBetween(0, 3)>
         Contribution: @contribution<numberBetween(1, 6)>
+        Voter: @user*

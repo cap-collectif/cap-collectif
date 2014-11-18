@@ -77,6 +77,20 @@ class Theme
     private $body;
 
     /**
+     * @var \DateTime
+     * @Gedmo\Timestampable(on="create")
+     * @ORM\Column(name="created_at", type="datetime")
+     */
+    private $createdAt;
+
+    /**
+     * @var \DateTime
+     * @Gedmo\Timestampable(on="update")
+     * @ORM\Column(name="updated_at", type="datetime")
+     */
+    private $updatedAt;
+
+    /**
      * @var
      * @ORM\ManyToMany(targetEntity="Capco\AppBundle\Entity\Consultation", cascade={"persist"})
      */
@@ -84,14 +98,15 @@ class Theme
 
     /**
      * @var
-     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\Idea", mappedBy="Theme")
+     *
+     * @ORM\OneToOne(targetEntity="Capco\MediaBundle\Entity\Media", cascade={"persist", "remove"})
+     * @ORM\JoinColumn(name="media_id", referencedColumnName="id")
      */
-    private $Ideas;
+    private $media;
 
     function __construct()
     {
         $this->Consultations = new ArrayCollection();
-        $this->Ideas = new ArrayCollection();
         $this->status = self::STATUS_CLOSED;
     }
 
@@ -243,33 +258,6 @@ class Theme
     }
 
     /**
-     * @param Capco\AppBundle\Entity\Idea $Ideas
-     * @return Theme
-     */
-    public function addIdeas(Ideas $Idea)
-    {
-        $this->Ideas[] = $Idea;
-
-        return $this;
-    }
-
-    /**
-     * @param Capco\AppBundle\Entity\Idea $Ideas
-     */
-    public function removeIdeas(Ideas $Idea)
-    {
-        $this->Ideas->removeElement($Idea);
-    }
-
-    /**
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getIdeas()
-    {
-        return $this->Ideas;
-    }
-
-    /**
      * @return mixed
      */
     public function getSlug()
@@ -283,6 +271,38 @@ class Theme
     public function setSlug($slug)
     {
         $this->slug = $slug;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getCreatedAt()
+    {
+        return $this->createdAt;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getUpdatedAt()
+    {
+        return $this->updatedAt;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getMedia()
+    {
+        return $this->media;
+    }
+
+    /**
+     * @param mixed $media
+     */
+    public function setMedia($media)
+    {
+        $this->media = $media;
     }
 
 }

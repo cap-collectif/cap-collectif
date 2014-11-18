@@ -48,7 +48,7 @@ class Vote
     /**
      * @var
      *
-     * @ORM\ManyToOne(targetEntity="Capco\UserBundle\Entity\User", inversedBy="Votes")
+     * @ORM\ManyToOne(targetEntity="Capco\UserBundle\Entity\User")
      * @ORM\JoinColumn(name="voter_id", referencedColumnName="id")
      */
     private $Voter;

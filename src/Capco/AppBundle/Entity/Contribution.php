@@ -104,7 +104,7 @@ class Contribution
     /**
      * @var string
      *
-     * @ORM\ManyToOne(targetEntity="Capco\UserBundle\Entity\User", inversedBy="Contributions")
+     * @ORM\ManyToOne(targetEntity="Capco\UserBundle\Entity\User")
      * @ORM\JoinColumn(name="author_id", referencedColumnName="id")
      */
     private $Author;

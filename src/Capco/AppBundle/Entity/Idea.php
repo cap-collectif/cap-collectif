@@ -66,17 +66,25 @@ class Idea
     private $voteCount;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Theme", inversedBy="ideas")
+     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Theme")
      */
     private $Theme;
 
     /**
      * @var
      *
-     * @ORM\ManyToOne(targetEntity="Capco\UserBundle\Entity\User", inversedBy="Ideas")
+     * @ORM\ManyToOne(targetEntity="Capco\UserBundle\Entity\User")
      * @ORM\JoinColumn(name="author_id", referencedColumnName="id")
      */
     private $Author;
+
+    /**
+     * @var
+     *
+     * @ORM\OneToOne(targetEntity="Capco\MediaBundle\Entity\Media", cascade={"persist", "remove"})
+     * @ORM\JoinColumn(name="media_id", referencedColumnName="id")
+     */
+    private $media;
 
     /**
      * Get id
@@ -92,7 +100,7 @@ class Idea
      * Set title
      *
      * @param string $title
-     * @return Ideas
+     * @return Idea
      */
     public function setTitle($title)
     {
@@ -115,7 +123,7 @@ class Idea
      * Set slug
      *
      * @param string $slug
-     * @return Ideas
+     * @return Idea
      */
     public function setSlug($slug)
     {
@@ -138,7 +146,7 @@ class Idea
      * Set body
      *
      * @param string $body
-     * @return Ideas
+     * @return Idea
      */
     public function setBody($body)
     {
@@ -181,7 +189,7 @@ class Idea
      * Set voteCount
      *
      * @param integer $voteCount
-     * @return Ideas
+     * @return Idea
      */
     public function setVoteCount($voteCount)
     {
@@ -230,6 +238,22 @@ class Idea
     public function setAuthor($Author)
     {
         $this->Author = $Author;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getMedia()
+    {
+        return $this->media;
+    }
+
+    /**
+     * @param mixed $media
+     */
+    public function setMedia($media)
+    {
+        $this->media = $media;
     }
 
 }

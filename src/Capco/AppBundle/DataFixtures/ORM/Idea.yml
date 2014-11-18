@@ -4,3 +4,4 @@ Capco\AppBundle\Entity\Idea:
         body: <text(1000)>
         voteCount: <numberBetween(0, 356)>
         theme: @theme*
+        Author: @user*

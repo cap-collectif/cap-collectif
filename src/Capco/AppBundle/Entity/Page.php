@@ -68,10 +68,18 @@ class Page
     /**
      * @var
      *
-     * @ORM\ManyToOne(targetEntity="Capco\UserBundle\Entity\User", inversedBy="Pages")
+     * @ORM\ManyToOne(targetEntity="Capco\UserBundle\Entity\User")
      * @ORM\JoinColumn(name="author_id", referencedColumnName="id")
      */
     private $Author;
+
+    /**
+     * @var
+     *
+     * @ORM\OneToOne(targetEntity="Capco\MediaBundle\Entity\Media", cascade={"persist", "remove"})
+     * @ORM\JoinColumn(name="media_id", referencedColumnName="id")
+     */
+    private $media;
 
     /**
      * Get id
@@ -218,6 +226,22 @@ class Page
     public function setAuthor($Author)
     {
         $this->Author = $Author;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getMedia()
+    {
+        return $this->media;
+    }
+
+    /**
+     * @param mixed $media
+     */
+    public function setMedia($media)
+    {
+        $this->media = $media;
     }
 
 }

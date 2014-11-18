@@ -82,6 +82,14 @@ class OpinionType
      */
     private $ProblemType;
 
+    /**
+     * @var
+     *
+     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Opinion", inversedBy="OpinionTypes")
+     * @ORM\JoinColumn(name="opinion_id", referencedColumnName="id", nullable=false)
+     */
+    private $Opinion;
+
     function __construct()
     {
         $this->voteWidgetType = self::VOTE_WIDGET_TYPE_ACCORD;
@@ -249,5 +257,20 @@ class OpinionType
         $this->ProblemType = $ProblemType;
     }
 
+    /**
+     * @return mixed
+     */
+    public function getOpinion()
+    {
+        return $this->Opinion;
+    }
+
+    /**
+     * @param mixed $Opinion
+     */
+    public function setOpinion($Opinion)
+    {
+        $this->Opinion = $Opinion;
+    }
 
 }

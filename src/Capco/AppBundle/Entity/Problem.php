@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -21,6 +22,13 @@ class Problem extends Contribution
      */
     private $id;
 
+    /**
+     * @var
+     *
+     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\ProblemType", inversedBy="Problems")
+     * @ORM\JoinColumn(name="problemType_id", referencedColumnName="id", nullable=false)
+     */
+    private $ProblemType;
 
     /**
      * Get id
@@ -31,4 +39,21 @@ class Problem extends Contribution
     {
         return $this->id;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getProblemType()
+    {
+        return $this->ProblemType;
+    }
+
+    /**
+     * @param mixed $ProblemType
+     */
+    public function setProblemType($ProblemType)
+    {
+        $this->ProblemType = $ProblemType;
+    }
+
 }

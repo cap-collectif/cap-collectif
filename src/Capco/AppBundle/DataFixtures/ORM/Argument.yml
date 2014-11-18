@@ -3,11 +3,14 @@ Capco\AppBundle\Entity\Argument:
         body: <text(1000)>
         voteCount: <numberBetween(0, 582)>
         contribution: @contribution1
+        Author: @user1
     argument2:
         body: <text(1000)>
         voteCount: <numberBetween(0, 582)>
         contribution: @contribution2
+        Author: @user1
     argument3:
         body: <text(1000)>
         voteCount: <numberBetween(0, 582)>
         contribution: @contribution2
+        Author: @user1

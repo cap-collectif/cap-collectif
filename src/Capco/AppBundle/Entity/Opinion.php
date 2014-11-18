@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -21,6 +22,26 @@ class Opinion extends Contribution
      */
     private $id;
 
+    /**
+     * @var
+     *
+     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Problem")
+     * @ORM\JoinColumn(name="problem_id", referencedColumnName="id", nullable=false)
+     */
+    private $Problem;
+
+    /**
+     * @var
+     *
+     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\OpinionType", mappedBy="Opinion")
+     */
+    private $OpinionTypes;
+
+    function __construct()
+    {
+        $this->OpinionTypes = new ArrayCollection();
+    }
+
 
     /**
      * Get id
@@ -32,4 +53,46 @@ class Opinion extends Contribution
         return $this->id;
     }
 
+    /**
+     * @return mixed
+     */
+    public function getProblem()
+    {
+        return $this->Problem;
+    }
+
+    /**
+     * @param mixed $Problem
+     */
+    public function setProblem($Problem)
+    {
+        $this->Problem = $Problem;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getOpinionTypes()
+    {
+        return $this->OpinionTypes;
+    }
+
+    /**
+     * @param OpinionType $OpinioType
+     * @return $this
+     */
+    public function addOpinionType(OpinionType $opinionType)
+    {
+        $this->OpinionTypes[] = $opinionType;
+
+        return $this;
+    }
+
+    /**
+     * @param OpinionType $OpinioType
+     */
+    public function removeOpinionType(OpinionType $opinionType)
+    {
+        $this->OpinionTypes->removeElement($opinionType);
+    }
 }

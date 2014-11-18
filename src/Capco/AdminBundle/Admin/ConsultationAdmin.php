@@ -18,10 +18,13 @@ class ConsultationAdmin extends Admin
         $datagridMapper
             ->add('id')
             ->add('title')
+            ->add('slug')
+            ->add('teaser')
+            ->add('body')
             ->add('createdAt')
             ->add('updatedAt')
             ->add('openedAt')
-            ->add('closeddAt')
+            ->add('closedAt')
             ->add('opinionCount')
         ;
     }
@@ -34,10 +37,13 @@ class ConsultationAdmin extends Admin
         $listMapper
             ->add('id')
             ->add('title')
+            ->add('slug')
+            ->add('teaser')
+            ->add('body')
             ->add('createdAt')
             ->add('updatedAt')
             ->add('openedAt')
-            ->add('closeddAt')
+            ->add('closedAt')
             ->add('opinionCount')
             ->add('_action', 'actions', array(
                 'actions' => array(
@@ -57,10 +63,13 @@ class ConsultationAdmin extends Admin
         $formMapper
             ->add('id')
             ->add('title')
+            ->add('slug')
+            ->add('teaser')
+            ->add('body')
             ->add('createdAt')
             ->add('updatedAt')
             ->add('openedAt')
-            ->add('closeddAt')
+            ->add('closedAt')
             ->add('opinionCount')
         ;
     }
@@ -73,10 +82,13 @@ class ConsultationAdmin extends Admin
         $showMapper
             ->add('id')
             ->add('title')
+            ->add('slug')
+            ->add('teaser')
+            ->add('body')
             ->add('createdAt')
             ->add('updatedAt')
             ->add('openedAt')
-            ->add('closeddAt')
+            ->add('closedAt')
             ->add('opinionCount')
         ;
     }

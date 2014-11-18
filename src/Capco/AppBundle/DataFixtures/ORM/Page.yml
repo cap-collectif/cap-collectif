@@ -3,3 +3,4 @@ Capco\AppBundle\Entity\Page:
         title: <text(20)>
         body: <text(1000)>
         isEnabled: <boolean()>
+        Author: @user*

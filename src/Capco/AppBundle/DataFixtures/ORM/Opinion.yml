@@ -5,15 +5,21 @@ Capco\AppBundle\Entity\Opinion:
         isEnabled: <boolean()>
         isTrashed: <boolean(30)>
         trashedReason: <text(100)>
+        Problem: @contribution4
+        Author: @user1
     contribution2:
         title: <text(20)>
         body: <text(1000)>
         isEnabled: <boolean()>
         isTrashed: <boolean(30)>
         trashedReason: <text(100)>
+        Problem: @contribution5
+        Author: @user1
     contribution3:
         title: <text(20)>
         body: <text(1000)>
         isEnabled: <boolean()>
         isTrashed: <boolean(30)>
         trashedReason: <text(100)>
+        Problem: @contribution6
+        Author: @user1

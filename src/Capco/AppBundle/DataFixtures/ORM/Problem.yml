@@ -5,15 +5,21 @@ Capco\AppBundle\Entity\Problem:
         isEnabled: <boolean()>
         isTrashed: <boolean(30)>
         trashedReason: <text(100)>
+        ProblemType: @problemType*
+        Author: @user*
     contribution5:
         title: <text(20)>
         body: <text(1000)>
         isEnabled: <boolean()>
         isTrashed: <boolean(30)>
         trashedReason: <text(100)>
+        ProblemType: @problemType*
+        Author: @user*
     contribution6:
         title: <text(20)>
         body: <text(1000)>
         isEnabled: <boolean()>
         isTrashed: <boolean(30)>
         trashedReason: <text(100)>
+        ProblemType: @problemType*
+        Author: @user*

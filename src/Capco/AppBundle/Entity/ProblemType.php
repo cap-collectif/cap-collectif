@@ -80,10 +80,19 @@ class ProblemType
      */
     private $OpinionTypes;
 
+    /**
+     * @var
+     *
+     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\Problem", mappedBy="ProblemType")
+     *
+     */
+    private $Problems;
+
     function __construct()
     {
         $this->voteWidgetType = self::VOTE_WIDGET_TYPE_ACCORD;
         $this->OpinionTypes = new ArrayCollection();
+        $this->Problems = new ArrayCollection();
     }
 
     /**
@@ -236,5 +245,20 @@ class ProblemType
         $this->OpinionTypes->removeElement($opinionType);
     }
 
+    /**
+     * @return mixed
+     */
+    public function getProblems()
+    {
+        return $this->Problems;
+    }
+
+    /**
+     * @param Problem $Problems
+     */
+    public function setProblems(Problem $Problems)
+    {
+        $this->Problems = $Problems;
+    }
 
 }

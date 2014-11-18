@@ -30,6 +30,26 @@ class Consultation
     private $title;
 
     /**
+     * @Gedmo\Slug(fields={"title"})
+     * @ORM\Column(length=255)
+     */
+    private $slug;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="teaser", type="text")
+     */
+    private $teaser;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="body", type="text")
+     */
+    private $body;
+
+    /**
      * @var \DateTime
      * @Gedmo\Timestampable(on="create")
      * @ORM\Column(name="created_at", type="datetime")
@@ -55,7 +75,7 @@ class Consultation
      *
      * @ORM\Column(name="closed_at", type="datetime")
      */
-    private $closeddAt;
+    private $closedAt;
 
     /**
      * @var integer
@@ -65,12 +85,27 @@ class Consultation
     private $opinionCount;
 
     /**
+     * @var integer
+     *
+     * @ORM\Column(name="argument_count", type="integer")
+     */
+    private $argument_count;
+
+    /**
      * @var string
      *
-     * @ORM\ManyToOne(targetEntity="Capco\UserBundle\Entity\User", inversedBy="Consultation")
+     * @ORM\ManyToOne(targetEntity="Capco\UserBundle\Entity\User")
      * @ORM\JoinColumn(name="author_id", referencedColumnName="id")
      */
     private $Author;
+
+    /**
+     * @var
+     *
+     * @ORM\OneToOne(targetEntity="Capco\MediaBundle\Entity\Media", cascade={"persist", "remove"})
+     * @ORM\JoinColumn(name="media_id", referencedColumnName="id")
+     */
+    private $media;
 
     /**
      * Get id
@@ -108,17 +143,17 @@ class Consultation
     /**
      * @return \DateTime
      */
-    public function getCloseddAt()
+    public function getClosedAt()
     {
-        return $this->closeddAt;
+        return $this->closedAt;
     }
 
     /**
-     * @param \DateTime $closeddAt
+     * @param \DateTime $closedAt
      */
-    public function setCloseddAt($closeddAt)
+    public function setClosedAt($closedAt)
     {
-        $this->closeddAt = $closeddAt;
+        $this->closedAt = $closedAt;
     }
 
     /**
@@ -183,6 +218,86 @@ class Consultation
     public function setAuthor($Author)
     {
         $this->Author = $Author;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getSlug()
+    {
+        return $this->slug;
+    }
+
+    /**
+     * @param mixed $slug
+     */
+    public function setSlug($slug)
+    {
+        $this->slug = $slug;
+    }
+
+    /**
+     * @return string
+     */
+    public function getBody()
+    {
+        return $this->body;
+    }
+
+    /**
+     * @param string $body
+     */
+    public function setBody($body)
+    {
+        $this->body = $body;
+    }
+
+    /**
+     * @return string
+     */
+    public function getTeaser()
+    {
+        return $this->teaser;
+    }
+
+    /**
+     * @param string $teaser
+     */
+    public function setTeaser($teaser)
+    {
+        $this->teaser = $teaser;
+    }
+
+    /**
+     * @return int
+     */
+    public function getArgumentCount()
+    {
+        return $this->argument_count;
+    }
+
+    /**
+     * @param int $argument_count
+     */
+    public function setArgumentCount($argument_count)
+    {
+        $this->argument_count = $argument_count;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getMedia()
+    {
+        return $this->media;
+    }
+
+    /**
+     * @param mixed $media
+     */
+    public function setMedia($media)
+    {
+        $this->media = $media;
     }
 
 }

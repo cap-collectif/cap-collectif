@@ -21,6 +21,12 @@ class ConsultationStep extends Step
      */
     private $id;
 
+    /**
+     * @var
+     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Problem", cascade={"persist"})
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $problem;
 
     /**
      * Get id
@@ -31,4 +37,21 @@ class ConsultationStep extends Step
     {
         return $this->id;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getProblem()
+    {
+        return $this->problem;
+    }
+
+    /**
+     * @param mixed $problem
+     */
+    public function setProblem($problem)
+    {
+        $this->problem = $problem;
+    }
+
 }

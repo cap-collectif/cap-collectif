@@ -57,7 +57,7 @@ class Reporting
 
     /**
      * @var
-     * @ORM\ManyToOne(targetEntity="Capco\UserBundle\Entity\User", inversedBy="Reportings")
+     * @ORM\ManyToOne(targetEntity="Capco\UserBundle\Entity\User")
      * @ORM\JoinColumn(name="moderator_id", referencedColumnName="id")
      */
     private $moderator;
