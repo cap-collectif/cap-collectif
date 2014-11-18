@@ -39,7 +39,13 @@ class PageAdmin extends Admin
         $listMapper
             ->addIdentifier('title')
             ->add('createdAt')
-            ->add('isEnabled')
+            ->add('isEnabled', null, array('editable' => true))
+            ->add('_action', 'actions', array(
+                    'actions' => array(
+                        'edit' => array(),
+                        'delete' => array(),
+                    )
+                ))
         ;
     }
 }

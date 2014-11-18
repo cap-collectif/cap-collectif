@@ -16,8 +16,6 @@ class ArgumentAdmin extends Admin
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
         $datagridMapper
-            ->add('id')
-            ->add('body')
             ->add('createdAt')
             ->add('updatedAt')
             ->add('voteCount')
@@ -31,10 +29,8 @@ class ArgumentAdmin extends Admin
     protected function configureListFields(ListMapper $listMapper)
     {
         $listMapper
-            ->add('id')
             ->add('body')
             ->add('createdAt')
-            ->add('updatedAt')
             ->add('voteCount')
             ->add('type')
             ->add('_action', 'actions', array(
@@ -53,11 +49,7 @@ class ArgumentAdmin extends Admin
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
-            ->add('id')
             ->add('body')
-            ->add('createdAt')
-            ->add('updatedAt')
-            ->add('voteCount')
             ->add('type')
         ;
     }
@@ -68,7 +60,6 @@ class ArgumentAdmin extends Admin
     protected function configureShowFields(ShowMapper $showMapper)
     {
         $showMapper
-            ->add('id')
             ->add('body')
             ->add('createdAt')
             ->add('updatedAt')

@@ -30,6 +30,15 @@ class Problem extends Contribution
      */
     private $ProblemType;
 
+    public function __toString()
+    {
+        if ($this->id) {
+            return $this->getTitle();
+        } else {
+            return "New problem";
+        }
+    }
+
     /**
      * Get id
      *

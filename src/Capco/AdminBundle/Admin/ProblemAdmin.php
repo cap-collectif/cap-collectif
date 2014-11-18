@@ -16,16 +16,11 @@ class ProblemAdmin extends Admin
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
         $datagridMapper
-            ->add('id')
-            ->add('title')
-            ->add('slug')
-            ->add('body')
             ->add('isEnabled')
             ->add('createdAt')
             ->add('updatedAt')
             ->add('isTrashed')
             ->add('trashedAt')
-            ->add('trashedReason')
         ;
     }
 
@@ -35,14 +30,10 @@ class ProblemAdmin extends Admin
     protected function configureListFields(ListMapper $listMapper)
     {
         $listMapper
-            ->add('id')
-            ->add('title')
-            ->add('slug')
-            ->add('body')
-            ->add('isEnabled')
+            ->addIdentifier('title')
+            ->add('isEnabled', null, array('editable' => true))
             ->add('createdAt')
-            ->add('updatedAt')
-            ->add('isTrashed')
+            ->add('isTrashed', null, array('editable' => true))
             ->add('trashedAt')
             ->add('trashedReason')
             ->add('_action', 'actions', array(
@@ -61,15 +52,9 @@ class ProblemAdmin extends Admin
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
-            ->add('id')
             ->add('title')
-            ->add('slug')
             ->add('body')
             ->add('isEnabled')
-            ->add('createdAt')
-            ->add('updatedAt')
-            ->add('isTrashed')
-            ->add('trashedAt')
             ->add('trashedReason')
         ;
     }
@@ -80,7 +65,6 @@ class ProblemAdmin extends Admin
     protected function configureShowFields(ShowMapper $showMapper)
     {
         $showMapper
-            ->add('id')
             ->add('title')
             ->add('slug')
             ->add('body')

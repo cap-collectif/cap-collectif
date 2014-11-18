@@ -43,6 +43,14 @@ class NewsletterSubscription
      */
     private $isEnabled;
 
+    public function __toString()
+    {
+        if ($this->id) {
+            return $this->getEmail();
+        } else {
+            return "New newsletter";
+        }
+    }
 
     /**
      * Get id

@@ -16,9 +16,6 @@ class StepAdmin extends Admin
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
         $datagridMapper
-            ->add('id')
-            ->add('title')
-            ->add('slug')
             ->add('startAt')
             ->add('endAt')
             ->add('position')
@@ -32,13 +29,11 @@ class StepAdmin extends Admin
     protected function configureListFields(ListMapper $listMapper)
     {
         $listMapper
-            ->add('id')
             ->add('title')
-            ->add('slug')
             ->add('startAt')
             ->add('endAt')
             ->add('position')
-            ->add('isEnabled')
+            ->add('isEnabled', null, array('editable' => true))
             ->add('_action', 'actions', array(
                 'actions' => array(
                     'show' => array(),
@@ -55,9 +50,7 @@ class StepAdmin extends Admin
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
-            ->add('id')
             ->add('title')
-            ->add('slug')
             ->add('startAt')
             ->add('endAt')
             ->add('position')
@@ -71,7 +64,6 @@ class StepAdmin extends Admin
     protected function configureShowFields(ShowMapper $showMapper)
     {
         $showMapper
-            ->add('id')
             ->add('title')
             ->add('slug')
             ->add('startAt')

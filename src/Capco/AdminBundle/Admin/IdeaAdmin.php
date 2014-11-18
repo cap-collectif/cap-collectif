@@ -16,12 +16,7 @@ class IdeaAdmin extends Admin
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
         $datagridMapper
-            ->add('id')
-            ->add('title')
-            ->add('slug')
-            ->add('body')
             ->add('createdAt')
-            ->add('updatedAt')
             ->add('voteCount')
         ;
     }
@@ -32,12 +27,8 @@ class IdeaAdmin extends Admin
     protected function configureListFields(ListMapper $listMapper)
     {
         $listMapper
-            ->add('id')
             ->add('title')
-            ->add('slug')
-            ->add('body')
             ->add('createdAt')
-            ->add('updatedAt')
             ->add('voteCount')
             ->add('_action', 'actions', array(
                 'actions' => array(
@@ -55,13 +46,8 @@ class IdeaAdmin extends Admin
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
-            ->add('id')
             ->add('title')
-            ->add('slug')
             ->add('body')
-            ->add('createdAt')
-            ->add('updatedAt')
-            ->add('voteCount')
         ;
     }
 
@@ -71,7 +57,6 @@ class IdeaAdmin extends Admin
     protected function configureShowFields(ShowMapper $showMapper)
     {
         $showMapper
-            ->add('id')
             ->add('title')
             ->add('slug')
             ->add('body')

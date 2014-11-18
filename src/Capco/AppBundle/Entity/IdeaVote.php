@@ -42,6 +42,15 @@ class IdeaVote
      */
     private $idea;
 
+    public function __toString()
+    {
+        if ($this->id) {
+            return $this->getId();
+        } else {
+            return "New idea vote";
+        }
+    }
+
     /**
      * Get id
      *

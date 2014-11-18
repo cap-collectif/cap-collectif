@@ -16,13 +16,8 @@ class FooterSocialNetworkAdmin extends Admin
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
         $datagridMapper
-            ->add('id')
-            ->add('title')
-            ->add('link')
             ->add('position')
             ->add('isEnabled')
-            ->add('createdAt')
-            ->add('updatedAt')
         ;
     }
 
@@ -32,16 +27,12 @@ class FooterSocialNetworkAdmin extends Admin
     protected function configureListFields(ListMapper $listMapper)
     {
         $listMapper
-            ->add('id')
             ->add('title')
-            ->add('link')
             ->add('position')
-            ->add('isEnabled')
+            ->add('isEnabled', null, array('editable' => true))
             ->add('createdAt')
-            ->add('updatedAt')
             ->add('_action', 'actions', array(
                 'actions' => array(
-                    'show' => array(),
                     'edit' => array(),
                     'delete' => array(),
                 )
@@ -55,13 +46,10 @@ class FooterSocialNetworkAdmin extends Admin
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
-            ->add('id')
             ->add('title')
             ->add('link')
             ->add('position')
             ->add('isEnabled')
-            ->add('createdAt')
-            ->add('updatedAt')
         ;
     }
 
@@ -71,7 +59,6 @@ class FooterSocialNetworkAdmin extends Admin
     protected function configureShowFields(ShowMapper $showMapper)
     {
         $showMapper
-            ->add('id')
             ->add('title')
             ->add('link')
             ->add('position')

@@ -29,13 +29,11 @@ class NewsletterSubscriptionAdmin extends Admin
     protected function configureListFields(ListMapper $listMapper)
     {
         $listMapper
-            ->add('id')
             ->add('email')
             ->add('createdAt')
-            ->add('isEnabled')
+            ->add('isEnabled', null, array('editable' => true))
             ->add('_action', 'actions', array(
                 'actions' => array(
-                    'show' => array(),
                     'edit' => array(),
                     'delete' => array(),
                 )
@@ -49,9 +47,7 @@ class NewsletterSubscriptionAdmin extends Admin
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
-            ->add('id')
             ->add('email')
-            ->add('createdAt')
             ->add('isEnabled')
         ;
     }

@@ -107,6 +107,15 @@ class Consultation
      */
     private $media;
 
+    public function __toString()
+    {
+        if ($this->id) {
+            return $this->getTitle();
+        } else {
+            return "New consultation";
+        }
+    }
+
     /**
      * Get id
      *

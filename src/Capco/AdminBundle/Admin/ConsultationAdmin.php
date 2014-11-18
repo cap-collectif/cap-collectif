@@ -16,13 +16,7 @@ class ConsultationAdmin extends Admin
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
         $datagridMapper
-            ->add('id')
-            ->add('title')
-            ->add('slug')
-            ->add('teaser')
-            ->add('body')
             ->add('createdAt')
-            ->add('updatedAt')
             ->add('openedAt')
             ->add('closedAt')
             ->add('opinionCount')
@@ -35,13 +29,8 @@ class ConsultationAdmin extends Admin
     protected function configureListFields(ListMapper $listMapper)
     {
         $listMapper
-            ->add('id')
-            ->add('title')
-            ->add('slug')
-            ->add('teaser')
-            ->add('body')
+            ->addIdentifier('title')
             ->add('createdAt')
-            ->add('updatedAt')
             ->add('openedAt')
             ->add('closedAt')
             ->add('opinionCount')
@@ -61,16 +50,11 @@ class ConsultationAdmin extends Admin
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
-            ->add('id')
             ->add('title')
-            ->add('slug')
             ->add('teaser')
             ->add('body')
-            ->add('createdAt')
-            ->add('updatedAt')
             ->add('openedAt')
             ->add('closedAt')
-            ->add('opinionCount')
         ;
     }
 
@@ -80,7 +64,6 @@ class ConsultationAdmin extends Admin
     protected function configureShowFields(ShowMapper $showMapper)
     {
         $showMapper
-            ->add('id')
             ->add('title')
             ->add('slug')
             ->add('teaser')
