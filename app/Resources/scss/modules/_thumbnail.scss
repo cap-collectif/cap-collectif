@@ -1,28 +1,14 @@
  /* ===============================================================
    $Thumbnail
 ================================================================*/
- /* ===============================================================
-   $Thumbnail
-================================================================*/
 .thumbnail--custom {
   padding: 0;
-  margin-bottom: 30px;
   background-color: $white;
   @include border-radius(0);
   @include box-shadow(0 2px 4px rgba(0,0,0,.15), 0 1px 2px rgba(0,0,0,.05));
 
-  @media (max-width: $screen-xs-max) {
-    margin-bottom: 15px;
-  }
-
-  & > div {
-    padding: 15px;
-  }
-
   .progress {
     @include progress-bar-variant($gray-primary);
-    margin: 0 15px;
-    padding: 0;
   }
 
   .progress-bar--custom {
@@ -46,21 +32,16 @@
 .thumbnail--sidebar {
   overflow: hidden;
 
-  & > div {
-    padding-top: 0;
-  }
-
-  @media (max-width: $screen-xs-max) {
-    .sub-navbar {
-      padding-top: 0;
+  .box .h4 {
+    margin-top: 30px;
+    &:first-child {
+      margin-top: 15px;
     }
   }
 
-  .thumbnail--sidebar__media {
-    padding-left: 0;
-    padding-right: 0;
-    padding-bottom: 0;
-    padding-top: 0;
+  .navbar {
+    margin-left: -15px;
+    margin-right: -15px;
   }
 
   .form-group {
@@ -81,11 +62,6 @@
       p {
         padding-top: 0;
       }
-    }
-  }
-  @media (max-width: $screen-xs-max) {
-    .thumbnail--sidebar__media {
-      padding: 5px;
     }
   }
 }

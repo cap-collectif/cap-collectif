@@ -4,8 +4,9 @@
 .navbar--sub {
   font-size: 15px;
   background-color: $white;
-  border-top: 1px solid $gray-primary;
-  border-bottom: 1px solid $gray-primary;
+  border-top: 1px solid $border;
+  border-bottom: 1px solid $border;
+  margin-bottom: 0;
   padding-left: 0;
   padding-right: 0;
 
@@ -16,7 +17,7 @@
 
     li {
       overflow: hidden;
-      border-top: 1px solid $gray-primary;
+      border-top: 1px solid $border;
       padding-top: 0;
       padding-bottom: 0;
       width: 100%;

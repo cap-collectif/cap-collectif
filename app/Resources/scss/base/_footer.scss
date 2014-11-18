@@ -40,6 +40,8 @@
     @include ul-list-inline();
     background-color: $custom-footer-links;
     color: set-link-text-color($custom-footer-links);
+    padding-left: 15px;
+    padding-right: 15px;
 
     li {
       @include inline-block();

@@ -2,16 +2,36 @@
    $Filter
 ================================================================*/
 .filter {
-  padding-top: 15px;
-  padding-bottom: 15px;
-  margin-bottom: 15px;
+  margin-bottom: 30px;
 
   label {
-    display: inline-block;
     cursor: pointer;
     font-size: 13px;
     margin-left: 30px;
     margin-right: 10px;
+  }
+
+  @media (max-width: $screen-xs-max) {
+    margin-bottom: 15px;
+    label {
+      margin-left: 0;
+    }
+    .pull-right {
+      float: none !important;
+    }
+    .filter__formgroup--inline {
+      text-align: right;
+      label {
+        margin-right: 0;
+        text-align: left;
+        display: inline-block;
+        width: 15%;
+      }
+      select, input {
+        display: inline-block;
+        width: 83%;
+      }
+    }
   }
 
 }
