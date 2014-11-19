@@ -6,6 +6,7 @@ Capco\AppBundle\Entity\Step:
         endAt: <dateTimeBetween('-10 days','now')>
         position: <numberBetween(1, 10)>
         consultation: @cs1
+        body: <text(1000)>
     step2:
         title: <sentence(3)>
         isEnabled: <boolean()>
@@ -13,6 +14,7 @@ Capco\AppBundle\Entity\Step:
         endAt: <dateTimeBetween('-10 days','now')>
         position: <numberBetween(1, 10)>
         consultation: @cs1
+        body: <text(1000)>
     step3:
         title: <sentence(3)>
         isEnabled: <boolean()>
@@ -20,6 +22,7 @@ Capco\AppBundle\Entity\Step:
         endAt: <dateTimeBetween('-10 days','now')>
         position: <numberBetween(1, 10)>
         consultation: @cs1
+        body: <text(1000)>
     step4:
         title: <sentence(3)>
         isEnabled: <boolean()>
@@ -27,6 +30,7 @@ Capco\AppBundle\Entity\Step:
         endAt: <dateTimeBetween('-10 days','now')>
         position: <numberBetween(1, 10)>
         consultation: @cs2
+        body: <text(1000)>
     step5:
         title: <sentence(3)>
         isEnabled: <boolean()>
@@ -34,3 +38,4 @@ Capco\AppBundle\Entity\Step:
         endAt: <dateTimeBetween('-10 days','now')>
         position: <numberBetween(1, 10)>
         consultation: @cs3
+        body: <text(1000)>

@@ -32,7 +32,6 @@ sonata_admin:
                 items:
                     - capco_admin.admin.consultation
                     - capco_admin.admin.step
-                    - capco_admin.admin.consultation_step
                     - capco_admin.admin.problem
                     - capco_admin.admin.opinion
                     - capco_admin.admin.vote

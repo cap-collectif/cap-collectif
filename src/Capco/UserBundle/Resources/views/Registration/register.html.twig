@@ -1,0 +1,6 @@
+{% extends "CapcoUserBundle::layout.html.twig" %}
+{% block title %} Se connecter sur son profil {{ parent() }} {% endblock %}
+
+{% block fos_user_content %}
+    {% include "CapcoUserBundle:Registration:register_content.html.twig" %}
+{% endblock fos_user_content %}

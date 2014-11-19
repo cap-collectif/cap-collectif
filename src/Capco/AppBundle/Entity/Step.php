@@ -66,6 +66,13 @@ class Step
     /**
      * @var string
      *
+     * @ORM\Column(name="body", type="text")
+     */
+    private $body;
+
+    /**
+     * @var string
+     *
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Consultation")
      * @ORM\JoinColumn(nullable=false)
      */
@@ -244,6 +251,22 @@ class Step
     public function setConsultation($consultation)
     {
         $this->consultation = $consultation;
+    }
+
+    /**
+     * @return string
+     */
+    public function getBody()
+    {
+        return $this->body;
+    }
+
+    /**
+     * @param string $body
+     */
+    public function setBody($body)
+    {
+        $this->body = $body;
     }
 
 }

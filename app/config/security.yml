@@ -49,6 +49,7 @@ security:
                 use_forward:    false
                 check_path:     /login_check
                 failure_path:   null
+                default_target_path: /profile
             logout:             true
             anonymous:          true
 

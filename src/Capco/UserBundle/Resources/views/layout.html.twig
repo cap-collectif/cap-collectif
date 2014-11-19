@@ -1,0 +1,14 @@
+{% extends 'CapcoAppBundle::base.html.twig' %}
+
+{% block body %}
+
+    <div class="container">
+        <div class="row">
+            {% include 'SonataCoreBundle:FlashMessage:render.html.twig' %}
+        </div>
+    </div>
+
+    {% block fos_user_content %}
+    {% endblock fos_user_content %}
+
+{% endblock body %}

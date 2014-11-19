@@ -73,3 +73,19 @@ fos_user:
         group_manager: sonata.user.orm.group_manager                    # If you're using doctrine orm (use sonata.user.mongodb.user_manager for mongodb)
     service:
         user_manager: sonata.user.orm.user_manager
+        mailer: fos_user.mailer.default
+    registration:
+        confirmation:
+            enabled:    true
+            from_email:
+                address: lbrunet@jolicode.com
+                sender_name: lbrunet
+services:
+    twig.extension.text:
+       class: Twig_Extensions_Extension_Text
+       tags:
+            - { name: twig.extension }
+    twig.extension.intl:
+        class: Twig_Extensions_Extension_Intl
+        tags:
+            - { name: twig.extension }

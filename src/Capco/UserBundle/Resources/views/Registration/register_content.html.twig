@@ -1,0 +1,58 @@
+
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4 col-lg-offset-4 col-md-6  col-md-offset-3  col-sm-8  col-sm-offset-2  col-xs-12  login">
+                <div class="login__social">
+                    <h4>Inscrivez-vous en un clic</h4>
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox"> J'accepte la <a href="#">charte</a>.
+                        </label>
+                    </div>
+                    <p>Toutes les contributions soumises sur la plateforme sont rendues publiques.</p>
+                    <div class="login__social__btns">
+                        <button class="btn  btn-primary"><i class="cap-facebook"></i><span class="sr-only">Facebook</span><span class="hidden-xs"> Facebook</span></button>
+                        <button class="btn  btn-danger"><i class="cap-gplus"></i><span class="sr-only">Google Plus</span><span class="hidden-xs"> Google+</span></button>
+                        <button class="btn  btn-info"><i class="cap-twitter"></i><span class="sr-only">Twitter</span><span class="hidden-xs"> Twitter</span></button>
+                    </div>
+                    <p class="excerpt">Nous ne publierons jamais sur votre mur.</p>
+                </div>
+                <p class="text-center">ou</p>
+                <div class="login__form">
+                    <h4>{{ 'title_user_registration'|trans({}, 'SonataUserBundle') }}</h4>
+                    <form role="form" action="{{ path('fos_user_registration_register') }}" {{ form_enctype(form) }} method="POST">
+                        <div class="form-group">
+                            <label for="username" class="control-label">{{ 'security.login.username'|trans({}, 'SonataUserBundle') }}</label>
+                            {#<input type="text" id="username" class="form-control" required="required">#}
+                            {{ form_widget(form.username, {'attr': {'placeholder': 'Votre pseudo', 'class': 'form-control'} }) }}
+                            <p class="excerpt">Votre nom d'utilisateur est rendu public sur la plateforme.</p>
+                        </div>
+                        <div class="form-group">
+                            <label for="email" class="control-label">{{ 'form.email'|trans({}, 'SonataUserBundle') }}</label>
+                            {{ form_widget(form.email, {'attr': {'placeholder': 'pseudo@exemple.fr', 'class': 'form-control'} }) }}
+                        </div>
+                        <div class="form-group">
+                            <label for="password" class="control-label">{{ 'security.login.password'|trans({}, 'SonataUserBundle') }}</label>
+                            {{ form_widget(form.plainPassword.first, {'attr': {'class': 'form-control'} }) }}
+                        </div>
+                        <div class="form-group">
+                            <label for="password" class="control-label">{{ 'form.password_confirmation'|trans({}, 'SonataUserBundle') }}</label>
+                            {{ form_widget(form.plainPassword.second, {'attr': {'class': 'form-control'} }) }}
+                        </div>
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox" required="required"> J'accepte la <a href="#">charte</a>.
+                            </label>
+                        </div>
+                        {{ form_rest(form) }}
+                        <p class="excerpt">Toutes les contributions soumises sur la plateforme sont rendues publiques.</p>
+                        <button type="submit" class="btn  btn-success  btn-block">{{ 'registration.submit'|trans({}, 'FOSUserBundle') }}</button>
+                        <hr>
+                        <p><a href="{{ path('fos_user_security_login') }}" class="btn  btn-default  btn-block">{{ 'link_login'|trans({}, 'SonataUserBundle') }}</a></p>
+                    </form>
+                </div>
+                <p class="text-center">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam inventore consequatur dignissimos, molestias reiciendis rem veniam omnis! Quo nihil debitis consectetur neque, atque molestias quam, architecto, maxime illum unde expedita.</p>
+            </div>
+        </div>
+    </div>
+

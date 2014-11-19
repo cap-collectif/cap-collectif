@@ -14,7 +14,6 @@ admin.label.menu_item: Élément de menu
 admin.label.argument: Argument
 admin.label.argument_vote: "Vote d'argument"
 admin.label.consultation: Consultation
-admin.label.consultation_step: Étape de consultation
 admin.label.footer_social_network: Réseau social du footer
 admin.label.idea: Idée
 admin.label.idea_vote: "Vote d'idée"

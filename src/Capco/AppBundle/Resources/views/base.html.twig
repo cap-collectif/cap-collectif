@@ -35,6 +35,9 @@
 
         <!--Navbar brand and toggle -->
         <div class="navbar-header">
+            <a class="navbar-brand" href="#">
+                <img alt="Brand" src="http://dummyimage.com/80x40/333/FFF">
+            </a>
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
                     data-target="#navbar-collapse-1">
                 <span class="sr-only">Toggle navigation</span>
@@ -48,52 +51,62 @@
         <div class="collapse  navbar-collapse" id="navbar-collapse-1">
 
             <ul class="nav navbar-nav">
-                <li class="active"><a href="#">Accueil</a></li>
-                <li><a href="#">Consultations</a></li>
-                <li><a href="#">Actualités</a></li>
+                <li class="active"><a href="home.html">Accueil</a></li>
+                <li><a href="consultations.html">Consultations</a></li>
+                <li><a href="ideas.html">Boîte à idées</a></li>
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">A propos <span class="caret"></span></a>
                     <ul class="dropdown-menu" role="menu">
                         <li><a href="#">Comment ça marche ?</a></li>
-                        <li><a href="#">Charte</a></li>
-                        <li><a href="#">FAQ</a></li>
-                        <li><a href="#">Proposer un événement</a></li>
-                        <li><a href="#">Proposer une consultation</a></li>
-                        <li><a href="#">Technologie et licence</a></li>
-                        <li><a href="#">Qui sommes-nous ?</a></li>
-                        <li><a href="#">Partenaires</a></li>
-                        <li><a href="#">Contact</a></li>
+                        <li><a href="#">La charte</a></li>
+                        <li><a href="#">Nous contacter</a></li>
                     </ul>
                 </li>
             </ul>
 
             <!-- Connection button -->
-            <button type="button" class="btn  btn-custom-2  btn-brand  navbar-btn  navbar-right">Connexion</button>
+            {% if app.user and is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+            <ul class="nav navbar-nav pull-right">
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Hey {{ user.username }}<span class="caret"></span></a>
+                    <ul class="dropdown-menu" role="menu">
+                        {% if is_granted('ROLE_SUPER_ADMIN') %}
+                        <li><a href="{{ path('sonata_admin_dashboard') }}">adminitration</a></li>
+                        {% endif %}
+                        <li><a href="{{ path('fos_user_profile_show') }}">compte</a></li>
+                        <li><a href="{{ path('fos_user_security_logout') }}"> {{ 'layout.logout'|trans({}, 'FOSUserBundle') }} </a></li>
+                    </ul>
+                </li>
+            </ul>
+            {% else %}
+            <p><a href="{{ path('fos_user_security_login') }}" class="btn  btn-custom-2  btn-brand  navbar-btn  navbar-right">Connexion</a></p>
+            {% endif %}
+
+
         </div>
         <!-- /.navbar-collapse -->
+
+
     </div>
 </nav>
 
 <!-- Main jumbotron for a primary marketing message or call to action -->
 {% block jumbotron %}
-    <div class="jumbotron  jumbotron--custom">
+    <div class="jumbotron  jumbotron--custom  jumbotron--bg-1">
         <div class="container">
-            {% block jumbotron_content %}
-                <h1>Hello, world!</h1>
-                <p>
-                    This is a template for a simple marketing or informational website. It includes a large callout called a
-                    jumbotron and three supporting pieces of content. Use it as a starting point to create something more
-                    unique.
-                </p>
-                <p><a class="btn  btn--outline btn-custom-1  btn-lg" role="button">Comment ça marche ?</a></p>
-            {% endblock %}
+            <h1>Hello, world!</h1>
+            <p>This is a template for a simple marketing or informational website. It includes a large callout called a
+                jumbotron and three supporting pieces of content. Use it as a starting point to create something more
+                unique.
+            </p>
+            <p><a class="btn  btn--outline btn-custom-1  btn-lg" role="button">Comment ça marche ?</a></p>
         </div>
     </div>
 {% endblock %}
 
-
+<div class="main">
 {% block body %}{% endblock %}
-
+</div>
 
 
 <!-- Footer -->
@@ -132,7 +145,9 @@
     </ul>
 </footer>
 
-{% block javascripts %}{% endblock %}
+{% block javascripts %}
+    <script src="{{ asset('js/app.min.js') }}"></script>
+{% endblock %}
 </body>
 </html>
 

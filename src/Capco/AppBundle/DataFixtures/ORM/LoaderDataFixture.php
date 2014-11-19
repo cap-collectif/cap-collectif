@@ -34,8 +34,6 @@ class LoaderDataFixture extends DataFixtureLoader
             __DIR__ . '/ArgumentVote.yml',
             __DIR__ . '/Reporting.yml',
             __DIR__ . '/IdeaVote.yml',
-//            __DIR__ . '/ConsultationStep.yml',
-//            __DIR__ . '/ContentStep.yml',
         );
     }
 

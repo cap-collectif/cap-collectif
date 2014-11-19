@@ -55,14 +55,6 @@ services:
         calls:
             - [ setTranslationDomain, [SonataAdminBundle]]
 
-    capco_admin.admin.consultation_step:
-        class: Capco\AdminBundle\Admin\ConsultationStepAdmin
-        arguments: [~, Capco\AppBundle\Entity\ConsultationStep, SonataAdminBundle:CRUD]
-        tags:
-            - {name: sonata.admin, manager_type: orm, group: admin.group.consultation, label: admin.label.consultation_step}
-        calls:
-            - [ setTranslationDomain, [SonataAdminBundle]]
-
     capco_admin.admin.footer_social_network:
         class: Capco\AdminBundle\Admin\FooterSocialNetworkAdmin
         arguments: [~, Capco\AppBundle\Entity\FooterSocialNetwork, SonataAdminBundle:CRUD]

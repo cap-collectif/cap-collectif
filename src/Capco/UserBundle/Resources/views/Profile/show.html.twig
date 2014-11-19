@@ -1,0 +1,37 @@
+{% extends "CapcoUserBundle::layout.html.twig" %}
+
+{% block title %} Compte {{ parent() }} {% endblock %}
+{% block jumbotron %}{% endblock %}
+
+{% block fos_user_content %}
+    <div class="profile">
+        <img class="profile__picture  img-circle" src="http://rdjpg.com/200/200">
+        <div class="profile__infos">
+            <h2>{{ user.username }}</h2>
+            <ul class="excerpt">
+                <li><i class="cap-marker-1"></i> Paris</li>
+                <li><i class="cap-marker-1"></i> Inscrit depuis le {{ user.createdAt | localizeddate('full', 'none') }}</li>
+                <li><i class="cap-link-2"></i> <a href="mailto:{{ user.email }}">{{ user.email }}</a></li>
+            </ul>
+        </div>
+        <div class="profile__figures">
+            <div class="profile__figure">
+                <h5 class="excerpt h5">CONTRIBUTIONS</h5>
+                <p>134</p>
+            </div>
+            <div class="profile__figure">
+                <h5 class="excerpt h5">ABONNEMENTS</h5>
+                <p>14</p>
+            </div>
+            <div class="profile__figure">
+                <h5 class="excerpt h5">ABONNÉS</h5>
+                <p>22</p>
+            </div>
+            <div class="profile__figure">
+                <h5 class="excerpt h5">FAVORIS</h5>
+                <p>5</p>
+            </div>
+        </div>
+    </div>
+
+{% endblock fos_user_content %}
