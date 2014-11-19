@@ -95,6 +95,14 @@ class OpinionType
         $this->voteWidgetType = self::VOTE_WIDGET_TYPE_ACCORD;
     }
 
+    public function __toString()
+    {
+        if ($this->id) {
+            return $this->getTitle();
+        } else {
+            return "New opinion type";
+        }
+    }
 
     /**
      * Get id

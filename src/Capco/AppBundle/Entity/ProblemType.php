@@ -95,6 +95,15 @@ class ProblemType
         $this->Problems = new ArrayCollection();
     }
 
+    public function __toString()
+    {
+        if ($this->id) {
+            return $this->getTitle();
+        } else {
+            return "New problem type";
+        }
+    }
+
     /**
      * Get id
      *

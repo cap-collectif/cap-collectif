@@ -16,10 +16,6 @@ class SiteParameterAdmin extends Admin
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
         $datagridMapper
-            ->add('id')
-            ->add('keyname')
-            ->add('title')
-            ->add('value')
             ->add('updatedAt')
         ;
     }
@@ -30,8 +26,6 @@ class SiteParameterAdmin extends Admin
     protected function configureListFields(ListMapper $listMapper)
     {
         $listMapper
-            ->add('id')
-            ->add('keyname')
             ->add('title')
             ->add('value')
             ->add('updatedAt')
@@ -51,11 +45,9 @@ class SiteParameterAdmin extends Admin
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
-            ->add('id')
             ->add('keyname')
             ->add('title')
             ->add('value')
-            ->add('updatedAt')
         ;
     }
 
@@ -66,7 +58,6 @@ class SiteParameterAdmin extends Admin
     {
         $showMapper
             ->add('id')
-            ->add('keyname')
             ->add('title')
             ->add('value')
             ->add('updatedAt')

@@ -16,13 +16,8 @@ class ProblemTypeAdmin extends Admin
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
         $datagridMapper
-            ->add('id')
-            ->add('title')
-            ->add('problemTitle')
-            ->add('trashTitle')
             ->add('voteWidgetType')
             ->add('createdAt')
-            ->add('updatedAt')
         ;
     }
 
@@ -32,13 +27,11 @@ class ProblemTypeAdmin extends Admin
     protected function configureListFields(ListMapper $listMapper)
     {
         $listMapper
-            ->add('id')
             ->add('title')
             ->add('problemTitle')
             ->add('trashTitle')
             ->add('voteWidgetType')
             ->add('createdAt')
-            ->add('updatedAt')
             ->add('_action', 'actions', array(
                 'actions' => array(
                     'show' => array(),
@@ -55,13 +48,10 @@ class ProblemTypeAdmin extends Admin
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
-            ->add('id')
             ->add('title')
             ->add('problemTitle')
             ->add('trashTitle')
             ->add('voteWidgetType')
-            ->add('createdAt')
-            ->add('updatedAt')
         ;
     }
 
@@ -71,7 +61,6 @@ class ProblemTypeAdmin extends Admin
     protected function configureShowFields(ShowMapper $showMapper)
     {
         $showMapper
-            ->add('id')
             ->add('title')
             ->add('problemTitle')
             ->add('trashTitle')

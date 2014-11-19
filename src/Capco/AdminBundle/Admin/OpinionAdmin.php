@@ -16,13 +16,8 @@ class OpinionAdmin extends Admin
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
         $datagridMapper
-            ->add('id')
-            ->add('title')
             ->add('isEnabled')
-            ->add('createdAt')
-            ->add('updatedAt')
             ->add('isTrashed')
-            ->add('trashedAt')
         ;
     }
 
@@ -33,9 +28,9 @@ class OpinionAdmin extends Admin
     {
         $listMapper
             ->add('title')
-            ->add('isEnabled')
+            ->add('isEnabled', null, array('editable' => true))
             ->add('createdAt')
-            ->add('isTrashed')
+            ->add('isTrashed', null, array('editable' => true))
             ->add('_action', 'actions', array(
                 'actions' => array(
                     'show' => array(),

@@ -110,6 +110,15 @@ class Theme
         $this->status = self::STATUS_CLOSED;
     }
 
+    public function __toString()
+    {
+        if ($this->id) {
+            return $this->getTitle();
+        } else {
+            return "New theme";
+        }
+    }
+
     /**
      * Get id
      *
