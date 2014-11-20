@@ -42,6 +42,14 @@ class Opinion extends Contribution
         $this->OpinionTypes = new ArrayCollection();
     }
 
+    public function __toString()
+    {
+        if ($this->id) {
+            return $this->getTitle();
+        } else {
+            return "New opinion";
+        }
+    }
 
     /**
      * Get id

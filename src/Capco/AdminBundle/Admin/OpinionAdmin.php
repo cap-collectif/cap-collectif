@@ -54,4 +54,18 @@ class OpinionAdmin extends Admin
             ->add('trashedReason')
         ;
     }
+
+    /**
+     * @param ShowMapper $showMapper
+     */
+    protected function configureShowFields(ShowMapper $showMapper)
+    {
+        $showMapper
+            ->add('title')
+            ->add('body')
+            ->add('isEnabled')
+            ->add('isTrashed')
+            ->add('trashedReason')
+        ;
+    }
 }

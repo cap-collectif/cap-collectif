@@ -13,7 +13,6 @@ sonata_admin:
                     - sonata.user.admin.group
             admin.group.navigation:
                 items:
-                    - capco_admin.admin.menu
                     - capco_admin.admin.menu_item
             admin.group.content:
                 items:
