@@ -2,7 +2,6 @@
    $Filter
 ================================================================*/
 .filter {
-  margin-bottom: 30px;
 
   label {
     cursor: pointer;
@@ -12,7 +11,7 @@
   }
 
   @media (max-width: $screen-xs-max) {
-    margin-bottom: 15px;
+    
     label {
       margin-left: 0;
     }

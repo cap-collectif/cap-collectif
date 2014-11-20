@@ -2,25 +2,48 @@
   $News
 ================================================================*/
 .media--news {
-  padding: 15px;
-  background-color: $custom-news-background;
-  @include box-shadow(0 2px 4px rgba(0,0,0,.15), 0 1px 2px rgba(0,0,0,.05));
+
+  &:hover {
+    background-color: $light-gray;
+  }
+
+  a {
+    color: $link-color;
+  }
 
   .media-object {
-    width: $custom-news-height;
+    width: $custom-news-width;
+  }
+  .pull-left {
+    margin-right: 0;
+  }
+
+  .media-body {
+    padding-left: 15px;
+  }
+
+  .media--news__meta {
+    margin-top: 5px;
+  }
+
+  .media__news__text {
+    margin-bottom: 0;
   }
 
   .media-title {
     margin-top: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+    margin-bottom: 0;
   }
 
   @media (max-width: $screen-sm-min) {
+    .media-object {
+      width: 100%;
+    }
     .pull-left {
       float: none !important;
-      margin-right: 0;
       margin-bottom: 15px;
-    }
-    .media-object {
       width: 100%;
     }
   }

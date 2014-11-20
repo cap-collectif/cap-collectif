@@ -1,383 +1,81 @@
 /* ===============================================================
    $Consultation
 ================================================================*/
-.consultation {
 
-  font-size: 15px;
+// Navbar
+.consultation__nav {
+  background-color: $white;
 
+  .nav {
+    text-align: center;
+
+    li {
+      float: none;
+      display: inline-block;
+
+      &.active a, a:hover {
+        color: $black;
+        background-color: transparent;
+        @include border-radius(0px);
+      }
+
+      a {
+        color: $dark-gray;
+      }
+    }
+  }
+  
   // Colors depending on opinion type
-  $opinion-types:
-          (probleme $consultation-problemes)
-          (cause $consultation-causes)
-          (enjeu $consultation-enjeux)
-          (solution $consultation-solutions)
-          (corbeille $consultation-corbeille);
   @each $type in $opinion-types {
     $name: nth($type, 1);
     $color: nth($type, 2);
     $text: set-link-text-color($color);
 
-    .media--consult__header.consultation__header--#{$name} {
-      background-color: $color;
-      color: $text;
-      button {
-        color: $text;
-      }
-      .icon--circled {
-        color: $color;
-        background-color: $text;
-      }
-      a:hover {
-        color: set-link-text-color($color);
-      }
-    }
-
-    .media--consult__nav .nav li.consultation__nav--#{$name} {
+    li.consultation__nav--#{$name} {
       &.active a {
         @include box-shadow(0 -3px 0 $color inset);
       }
     }
   }
+}
 
-  //Title block
-  .media--consult.consultation__title-block {
+//Title block
+.consultation__title {
 
-    margin-top: 30px;
-
-    @media (max-width: $screen-xs-max){
-      margin-top: 15px;
-      .consultation__share {
-        float: none !important;
-        margin-left: 15px;
-      }
-    }
-
-    .media--consult__content {
-      padding-top: 15px;
-      padding-right: 15px;
-      padding-bottom: 15px;
-    }
-
-    .consultation__cover-image {
-      width: 100%;
-      height: auto;
-    }
+  .consultation__title__cover-image {
+    width: 100%;
+    height: auto;
   }
 
-  .consultation__share {
-    display: inline-block;
-    position: static;
-
-    .dropdown-menu {
-      position: absolute;
-      top: auto;
-      right: auto;
-      left: auto;
-
-    }
+  .consultation__title__body {
+    overflow: hidden;
+    padding: 15px;
   }
 
-
-  // Content blocks
-  .media--consult {
-    padding-bottom: 0;
-    margin-bottom: 30px;
+  .consultation__title__title {
+    color: $black;
+    padding-top: 0px;
     margin-top: 0;
-    background-color: $white;
-    @include box-shadow(0 2px 4px rgba(0,0,0,.15), 0 1px 2px rgba(0,0,0,.05));
-
-    @media (max-width: $screen-xs-max){
-      margin-bottom: 15px;
-    }
-
-    .media-body {
-      padding-left: 15px;
-    }
-
-    .media--consult__header {
-      padding: 1px 15px;
-      overflow: hidden;
-      border-bottom: 1px solid $border;
-
-      .neutral-hover:hover {
-        text-decoration: none;
-      }
-
-      .pull-right {
-        padding-top: 2px;
-      }
-
-      select {
-        display: inline-block;
-        width: auto;
-      }
-
-      @media (max-width: $screen-xs-max) {
-        .consultation__header__title, .consultation__header__filter {
-          float: none !important;
-        }
-        .consultation__header__filter {
-          margin-bottom: 10px;
-        }
-      }
-    }
-
-    .media--consult__content {
-      overflow: hidden;
-    }
-
-    .media--consult--centered {
-      text-align: center;
-
-      .media--consult__tocenter {
-        display: inline-block;
-      }
-
-    }
+    margin-bottom: 0;
   }
 
-
-  // Navbar
-  .media--consult__nav {
-    background-color: $white;
-
-    .nav {
-      text-align: center;
-
-      li {
-        float: none;
-        display: inline-block;
-
-        &.active a, a:hover {
-          color: $black;
-          background-color: transparent;
-          @include border-radius(0px);
-        }
-
-        a {
-          color: $dark-gray;
-        }
-      }
-    }
-  }
-
-  .consultation__body {
-    @media (max-width: $screen-xs-max) {
+  @media (max-width: $screen-xs-max) {
+    .dropdown--social {
+      float: none !important;
       margin-top: 15px;
     }
   }
-
-  // Opinion block
-  .consultation__opinion {
-    display: block;
-
-    .consultation__opinion__body {
-      overflow: hidden;
-      padding: 15px;
-
-      .consultation__opinion__user a {
-        @extend .excerpt;
-      }
-
-      .consultation__opinion__title {
-        margin-bottom: 5px;
-        a {
-          color: black;
-        }
-      }
-
-      .consultation__opinion__votes {
-        margin-top: 0;
-        margin-bottom: 0;
-        line-height: 20px;
-      }
-    }
-
-    .consultation__opinion__body:hover {
-      background-color: $light-gray;
-
-    }
-
-    &.consultation__opinion--current {
-    .consultation__opinion__title {
-      font-weight: bold;
-    }
-    .consultation__opinion__body:hover {
-      background-color: white;
-    }
-  }
-
-
-  }
-
-  .consultation__opinions__list {
-    margin-bottom: 0;
-
-    .consultation__opinion__item {
-      @extend .consultation__opinion;
-      border-top: 1px solid $border;
-    }
-
-    .consultation__opinion__item:first-child {
-      border-top: 0px solid $border;
-    }
-  }
-
-  .consultation__description {
-    padding: 15px;
-    border-top: 1px solid $border;
-
-    @media (max-width: $screen-sm-max) {
-      .consultation__action-buttons {
-        float: none !important;
-      }
-      button {
-        margin-top: 10px;
-      } 
-    }
-  }
-
-  .consultation__attachments {
-    border-bottom: 0px solid $border;
-    margin-bottom: 15px;
-
-    @media (max-width: $screen-sm-max) {
-      margin-bottom: 5px;
-    }
-
-    .consultation__attachment {
-      display: block;
-    }
-
-    .icon {
-      color: $excerpt;
-    }
-
-    @media (max-width: $screen-xs-max) {
-      margin-left: -15px;
-      margin-right: -15px;
-      border-bottom: 1px solid $border;
-      .consultation__attachment {
-        padding: 15px;
-        border-top: 1px solid $border;
-        color: $black;
-        &:hover {
-          color: $black;
-          text-decoration: none;
-        }
-      }
-    }
-  }
-
-  .consultation__resources {
-    border-top: 1px solid $border;
-    padding: 15px;
-
-    .consultation__resources__sep {
-      padding-left: 15px;
-      padding-right: 15px;
-    }
-
-    @media (max-width: $screen-xs-max) {
-
-      padding: 0;
-
-      .consultation__resource {
-        display: block;
-        padding: 15px;
-        border-top: 1px solid $border;
-
-        .icon {
-          color: $excerpt;
-        }
-
-        &:hover {
-          text-decoration: none;
-        }
-      }
-
-      .consultation__resource:first-child {
-        border-top: 0px solid $border;
-      }
-
-      $resource-types:
-              (solutions $consultation-solutions)
-              (sources $consultation-sources);
-      @each $type in $resource-types {
-        $name: nth($type, 1);
-        $color: nth($type, 2);
-
-        .consultation__resource--#{$name} {
-          color: $color;
-        }
-      }
-    }
-  }
-
-  .consultation__arguments {
-
-    .media--consult {
-      background-color: $light-gray;
-    }
-
-    .consultation__arguments__add {
-
-      padding: 15px;
-
-      .form-group {
-        margin: 0;
-      }
-      textarea {
-        resize: vertical;
-      }
-      button {
-        margin-top: 10px;
-      }
-      button:first-child {
-        margin-right: 10px;
-      }
-    }
-
-    .consultation__arguments--yes {
-      .consultation__arguments__title {
-        color: $brand-success;
-      }
-    }
-
-    .consultation__arguments--no {
-      .consultation__arguments__title {
-        color: $brand-danger;
-      }
-    }
-
-    .consultation__arguments__title {
-      margin: 0;
-      padding-top: 15px;
-      padding-bottom: 15px;
-    }
-
-    .consultation__argument {
-      padding: 15px;
-      border-top: 1px solid $border;
-
-      .media-body {
-        padding: 0;
-        padding-top: 10px;
-      }
-      @media (max-width: $screen-xs-max) {
-        .btn {
-          margin-top: 10px;
-        }
-      }
-    }
-  }
 }
 
-// = Icon rotate
-// -----------------------------
-.icon-rotate {
+// Social dropdown
+.dropdown--social {
   display: inline-block;
-  @include rotate(-90deg);
+  position: static;
+
+  .dropdown-menu {
+    position: absolute;
+    top: auto;
+    right: auto;
+    left: auto;
+  }
 }
-
-

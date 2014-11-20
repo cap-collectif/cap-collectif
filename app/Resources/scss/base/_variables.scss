@@ -43,8 +43,7 @@ $custom-footer-links: $brand-color-2;
 
 // = Custom module news
 // -----------------------------
-$custom-news-height: 220px;
-$custom-news-background: $white;
+$custom-news-width: 220px;
 
 // = Custom module filter search
 // -----------------------------
@@ -81,13 +80,13 @@ $social-gplus: #d73d32;
 $social-linkedin: #1279B3;
 $social-rss: #FDAC61;
 
-// = Consultation
+// = Opinion types
 // -------------------------------
-$consultation-problemes: $brand-danger;
-$consultation-causes: $brand-warning;
-$consultation-enjeux: $brand-primary;
-$consultation-solutions: $brand-success;
-$consultation-corbeille: $gray-primary;
-$consultation-sources: $brand-primary;
-
+$opinion-types:
+  (probleme $brand-danger)
+  (cause $brand-warning)
+  (enjeu $brand-primary)
+  (solution $brand-success)
+  (corbeille $gray-primary)
+  (source $brand-primary);
 

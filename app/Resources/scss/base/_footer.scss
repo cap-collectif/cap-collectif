@@ -14,6 +14,10 @@
     color: set-link-text-color($custom-footer);
   }
 
+  p {
+    margin-bottom: 0;
+  }
+
   .social-network {
     @include reset-ul();
     @include ul-list-inline();
@@ -89,6 +93,3 @@
     }
   }
 }
-
-
-
