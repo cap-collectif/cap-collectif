@@ -1,12 +1,20 @@
 /* ===============================================================
     $Navbar
 ================================================================*/
-.navbar .navbar-brand {
-  padding: 5px;
-  img {
-    height: 100%;
-    width: auto;
-    vertical-align: middle;
+.navbar {
+  .navbar-brand {
+    padding: 5px;
+    img {
+      height: 100%;
+      width: auto;
+      vertical-align: middle;
+    }
+  }
+  .navbar__toggle-icon, .navbar__toggle-label {
+    display: inline-block;
+  }
+  .navbar__toggle-label {
+    padding-left: 5px;
   }
 }
 /* ===============================================================
