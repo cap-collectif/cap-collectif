@@ -7,7 +7,11 @@
     background-color: $light-gray;
   }
 
-  a {
+  .media--news__user a {
+    color: $black;
+  }
+
+  a, a:hover {
     color: $link-color;
   }
 

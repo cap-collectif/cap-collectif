@@ -77,6 +77,11 @@
       }
     }
 
+    &.opinion__header--end {
+      border-bottom: 0;
+      border-top: 1px solid $border;
+    }
+
     @media (max-width: $screen-xs-max) {
       .opinion__header__title, .opinion__header__filter {
         float: none !important;
@@ -114,13 +119,8 @@
   }
 
   // Special case : current opinion
-  &.opinion--current {
-    .opinion__title {
-      font-weight: bold;
-    }
-    &:hover {
-      background-color: white;
-    }
+  &.opinion--current:hover {
+    background-color: white;
   }
 
   // Special cases : add an argument

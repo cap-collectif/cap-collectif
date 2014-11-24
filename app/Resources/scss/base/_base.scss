@@ -19,6 +19,12 @@ body {
   }
 }
 
+#details {
+  border-top: $navbar-height solid transparent;
+  margin-top: -$navbar-height;
+  @include background-clip(padding-box);
+}
+
 .block {
   margin-bottom: 30px;
   @media (max-width: $screen-xs-max) {
@@ -62,14 +68,14 @@ h2, .h2 {
 
 h3, .h3 {
   color: $brand-color-2;
-  padding-top: 30px;
+  padding-top: 40px;
   padding-bottom: 0;
   margin-top: 0;
-  margin-bottom: 30px;
+  margin-bottom: 10px;
   
   @media (max-width: $screen-xs-max) {
-    padding-top: 15px;
-    margin-bottom: 15px;
+    padding-top: 20px;
+    margin-bottom: 5px;
   }
 }
 

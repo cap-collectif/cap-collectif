@@ -7,7 +7,10 @@
   text-align: center;
 
   .container {
-    margin-bottom: 0;
+    padding: 30px;
+    @media(max-width: $screen-xs-max) {
+      padding: 15px;
+    }
   }
   
   h3 {
@@ -23,7 +26,6 @@
     @include ul-list-inline();
     text-align: center;
     margin-top: 15px;
-    margin-bottom: 15px;
 
     li {
 
@@ -40,23 +42,31 @@
   }
 
   .footer__links {
-    @include reset-ul();
-    @include ul-list-inline();
     background-color: $custom-footer-links;
     color: set-link-text-color($custom-footer-links);
-    padding-left: 15px;
-    padding-right: 15px;
 
-    li {
-      @include inline-block();
-      height: 45px;
-      line-height: 45px;
-      color: set-link-text-color($custom-footer-links);
+    .container {
+      padding: 0 30px;
+      @media (max-width:$screen-xs-max) {
+        padding: 0 15px;
+      }
+    }
 
-      & a {
-        padding: 0 5px;
+    ul {
+      @include reset-ul();
+      @include ul-list-inline();
+
+      li {
         @include inline-block();
+        height: 45px;
+        line-height: 45px;
         color: set-link-text-color($custom-footer-links);
+
+        & a {
+          padding: 0 5px;
+          @include inline-block();
+          color: set-link-text-color($custom-footer-links);
+        }
       }
     }
   }

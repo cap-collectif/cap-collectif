@@ -21,10 +21,10 @@
     $Jumbotron
 ================================================================*/
 .jumbotron--custom {
-  padding: 30px 30px;
+  padding: 30px;
   margin-bottom: 0;
   @media (max-width: $screen-xs-max) {
-    padding: 15px 30px;
+    padding: 15px;
   }
   .container {
 
@@ -44,16 +44,18 @@
       }
     }
   }
+  h2, .h2 {
+    margin-bottom: 15px;
+    @media (max-width: $screen-xs-max) {
+      margin-bottom: 5px;
+    }
+  }
   p {
     margin-bottom: 0;
   }
   .btn {
     margin-top: 15px;
   }
-}
-
-.jumbotron--centered {
-  text-align: center;
 }
 
 $backgrounds:

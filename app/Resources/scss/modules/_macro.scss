@@ -13,6 +13,10 @@
     color: $excerpt;
   }
 
+  .media--macro__user a {
+    color: $black;
+  }
+
   a:hover {
     color: $link-color;
   }
