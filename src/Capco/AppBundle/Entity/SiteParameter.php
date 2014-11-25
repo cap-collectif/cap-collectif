@@ -9,7 +9,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
  * SiteParameter
  *
  * @ORM\Table(name="site_parameter")
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\SiteParameterRepository")
  */
 class SiteParameter
 {
