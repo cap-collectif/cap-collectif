@@ -161,6 +161,9 @@
     .opinion__votes {
       margin-top: 10px;
     }
+    .opinion__user {
+      margin-bottom: 0;
+    }
     .opinion__votes {
       display: inline-block;
       border: 1px solid $gray-primary;
@@ -171,7 +174,7 @@
     }
   }
 
-  // Special case : argument
+  // Special case : comment
   &.opinion--commentaire {
     @extend .opinion--argument;
     background-color: transparent;
@@ -215,7 +218,11 @@
 .media-list {
   .opinion--commentaire {
     .media-list {
+      padding-top: 30px;
       padding-left: 40px;
+      @media (max-width: $screen-xs-max) {
+        padding-top: 15px;
+      }
     }
   }
 }
