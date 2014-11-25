@@ -61,7 +61,6 @@
 
   @media (max-width: $screen-xs-max) {
     .dropdown--social {
-      float: none !important;
       margin-top: 15px;
     }
   }
@@ -77,5 +76,9 @@
     top: auto;
     right: auto;
     left: auto;
+  }
+
+  @media (max-width: $screen-xs-max) {
+    float: none !important;
   }
 }

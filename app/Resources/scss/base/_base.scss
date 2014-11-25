@@ -88,6 +88,12 @@ h3, .h3 {
   color: $excerpt;
 }
 
+.nb-bordered {
+  border: 1px solid $gray-primary;
+  padding: 6px 12px;
+  vertical-align: middle;
+}
+
 .pull-abs {
   position: absolute;
   top: 0px;
@@ -154,3 +160,7 @@ h3, .h3 {
   margin: 0;
 }
 
+.media--aligned {
+  margin-bottom: 0;
+  line-height: 30px;
+}

@@ -96,7 +96,6 @@
   .opinion__body {
 
     overflow: hidden;
-    padding: 15px;
 
     .opinion__data {
       padding-left: 15px;
@@ -105,6 +104,10 @@
 
     .opinion__user {
       margin: 0px 0px 5px;
+    }
+
+    .opinion__date {
+      margin-bottom: 0;
     }
 
     .opinion__title {
@@ -150,6 +153,9 @@
     .btn, .opinion__votes {
       margin-top: 10px;
     }
+    .opinion__user {
+      margin-bottom: 0;
+    }
     .opinion__votes {
       display: inline-block;
       border: 1px solid $gray-primary;
@@ -158,6 +164,12 @@
       padding: 1px 5px;
       vertical-align: middle;
     }
+  }
+
+  // Special case : argument
+  &.opinion--commentaire {
+    @extend .opinion--argument;
+    background-color: transparent;
   }
 }
 
@@ -191,6 +203,15 @@
   }
   .opinion:first-child {
     border-top: 0;
+  }
+}
+
+// List of comments
+.media-list {
+  .opinion--commentaire {
+    .media-list {
+      padding-left: 40px;
+    }
   }
 }
 
