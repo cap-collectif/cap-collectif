@@ -2,6 +2,7 @@
     $Navbar
 ================================================================*/
 .navbar {
+
   .navbar-brand {
     padding: 5px;
     img {
@@ -10,6 +11,7 @@
       vertical-align: middle;
     }
   }
+  
   .navbar__toggle-icon,
   .navbar__toggle-label {
     display: inline-block;
