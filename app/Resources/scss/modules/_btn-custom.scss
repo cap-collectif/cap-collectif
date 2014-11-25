@@ -4,7 +4,8 @@
 $btn-customs:
         (custom-1 $custom-btn-1-bg $custom-btn-1-text)
         (custom-2 $custom-btn-2-bg $custom-btn-2-text)
-        (dark-gray $dark-gray $white);
+        (dark-gray $dark-gray $white)
+        (light-gray $light-gray $black);
 @each $btn-custom in $btn-customs {
   $name: nth($btn-custom, 1);
   $bg: nth($btn-custom, 2);
@@ -30,7 +31,8 @@ $btn-customs:
           (custom-1 $custom-btn-1-bg $custom-btn-1-bg $custom-btn-1-text)
           (custom-2 $custom-btn-2-bg $custom-btn-2-bg $custom-btn-2-text)
           (primary $btn-primary-bg $btn-primary-bg $btn-default-bg)
-          (dark-gray $dark-gray $dark-gray $white);
+          (dark-gray $dark-gray $dark-gray $white)
+          (light-gray $light-gray $light-gray $black);
   @each $btn-outline in $buttons-outline {
     $name: nth($btn-outline, 1);
     $border: nth($btn-outline, 2);
