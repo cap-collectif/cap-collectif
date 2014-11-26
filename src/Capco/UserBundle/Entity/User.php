@@ -11,15 +11,6 @@
 
 namespace Capco\UserBundle\Entity;
 
-use Capco\AppBundle\Entity\Argument;
-use Capco\AppBundle\Entity\ArgumentVote;
-use Capco\AppBundle\Entity\Consultation;
-use Capco\AppBundle\Entity\Contribution;
-use Capco\AppBundle\Entity\Idea;
-use Capco\AppBundle\Entity\Page;
-use Capco\AppBundle\Entity\Reporting;
-use Capco\AppBundle\Entity\Vote;
-use Doctrine\Common\Collections\ArrayCollection;
 use Sonata\UserBundle\Entity\BaseUser as BaseUser;
 
 /**
@@ -38,6 +29,33 @@ class User extends BaseUser
     protected $id;
 
     /**
+     * @var integer $facebook_id
+     */
+    protected $facebook_id;
+
+    /**
+     * @var integer $facebook_access_token
+     */
+    protected $facebook_access_token;
+
+    /**
+     * @var integer $google_id
+     */
+    protected $google_id;
+
+    /**
+     * @var integer $google_access_token
+     */
+    protected $google_access_token;
+
+    function __construct()
+    {
+        parent::__construct();
+
+        $this->roles = array('ROLE_USER');
+    }
+
+    /**
      * Get id
      *
      * @return integer $id
@@ -47,5 +65,68 @@ class User extends BaseUser
         return $this->id;
     }
 
+    /**
+     * @return int
+     */
+    public function getGoogleId()
+    {
+        return $this->google_id;
+    }
+
+    /**
+     * @param int $google_id
+     */
+    public function setGoogleId($google_id)
+    {
+        $this->google_id = $google_id;
+    }
+
+    /**
+     * @return int
+     */
+    public function getFacebookAccessToken()
+    {
+        return $this->facebook_access_token;
+    }
+
+    /**
+     * @param int $facebook_access_token
+     */
+    public function setFacebookAccessToken($facebook_access_token)
+    {
+        $this->facebook_access_token = $facebook_access_token;
+    }
+
+    /**
+     * @return int
+     */
+    public function getFacebookId()
+    {
+        return $this->facebook_id;
+    }
+
+    /**
+     * @param int $facebook_id
+     */
+    public function setFacebookId($facebook_id)
+    {
+        $this->facebook_id = $facebook_id;
+    }
+
+    /**
+     * @return int
+     */
+    public function getGoogleAccessToken()
+    {
+        return $this->google_access_token;
+    }
+
+    /**
+     * @param int $google_access_token
+     */
+    public function setGoogleAccessToken($google_access_token)
+    {
+        $this->google_access_token = $google_access_token;
+    }
 
 }

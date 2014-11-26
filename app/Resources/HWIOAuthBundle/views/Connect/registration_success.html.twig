@@ -1,0 +1,19 @@
+{% extends 'HWIOAuthBundle::layout.html.twig' %}
+
+{% block hwi_oauth_content %}
+
+    <div class="container">
+        <div class="row">
+
+            <h2>Enregistrement</h2>
+
+            <div class="alert alert-success alert-dismissible  block" role="alert">
+                <p>{{ 'header.registration_success' | trans({'%username%': app.user.username}, 'HWIOAuthBundle') }}</p>
+            </div>
+
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. A ab, architecto autem dolor ducimus et harum hic incidunt ipsa ipsam laboriosam maxime modi nostrum omnis pariatur quae quod ratione veritatis.</p>
+
+        </div>
+    </div>
+
+{% endblock hwi_oauth_content %}

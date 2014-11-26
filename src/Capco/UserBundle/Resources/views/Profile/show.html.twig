@@ -4,34 +4,281 @@
 {% block jumbotron %}{% endblock %}
 
 {% block fos_user_content %}
-    <div class="profile">
-        <img class="profile__picture  img-circle" src="http://rdjpg.com/200/200">
-        <div class="profile__infos">
-            <h2>{{ user.username }}</h2>
-            <ul class="excerpt">
-                <li><i class="cap-marker-1"></i> Paris</li>
-                <li><i class="cap-marker-1"></i> Inscrit depuis le {{ user.createdAt | localizeddate('full', 'none') }}</li>
-                <li><i class="cap-link-2"></i> <a href="mailto:{{ user.email }}">{{ user.email }}</a></li>
-            </ul>
+    <div class="profile  block">
+        <div class="container">
+            <div class="row">
+                <div class="profile__picture  box  col-xs-12  col-sm-3">
+                    <img class="img-circle" src="http://rdjpg.com/200/200" alt="Prénom Nom">
+                </div>
+                <div class="box  col-xs-12  col-sm-9">
+                    <h3 class="h3  profile__name">{{ user.username }}</h3>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Molestias culpa ipsam recusandae, nostrum quos, fuga, dolorem quibusdam doloremque saepe ullam dicta delectus cumque vel illum illo asperiores sed quaerat nam.</p>
+                    <ul class="excerpt  profile__infos">
+                        <li><i class="cap-marker-1"></i> Paris</li>
+                        <li><i class="cap-gun"></i> Inscrit depuis le {{ user.createdAt | localizeddate('full', 'none') }}</li>
+                        <li><i class="cap-link-2"></i> <a href="#">www.cnnumerique.fr</a></li>
+                        <li><i class="cap-gun"></i> Fait partie du groupe <a href="#">Bureau du CNNum</a></li>
+                    </ul>
+                    <form role="form" class="profile__values--mobile  form-inline  visible-xs">
+                        <div class="form-group">
+                            <label class="control-label  sr-only" for="contrib-select">Contributions</label>
+                            <select class="form-control" id="contrib-select">
+                                <option value="contributions">134 contributions</option>
+                                <option value="votes">14 votes</option>
+                                <option value="propositions">22 propositions</option>
+                                <option value="arguments">5 arguments</option>
+                                <option value="idees">5 idées</option>
+                            </select>
+                        </div>
+                    </form>
+                </div>
+            </div>
         </div>
-        <div class="profile__figures">
-            <div class="profile__figure">
-                <h5 class="excerpt h5">CONTRIBUTIONS</h5>
-                <p>134</p>
-            </div>
-            <div class="profile__figure">
-                <h5 class="excerpt h5">ABONNEMENTS</h5>
-                <p>14</p>
-            </div>
-            <div class="profile__figure">
-                <h5 class="excerpt h5">ABONNÉS</h5>
-                <p>22</p>
-            </div>
-            <div class="profile__figure">
-                <h5 class="excerpt h5">FAVORIS</h5>
-                <p>5</p>
+        <div class="profile__values  hidden-xs">
+            <div class="container">
+                <ul class="nav  nav-pills">
+                    <li class="profile__value  active">
+                        <a href="#">
+                            <h5 class="excerpt  profile__value__label">CONTRIBUTIONS</h5>
+                            <p class="profile__value__number">46</p>
+                        </a>
+                    </li>
+                    <li class="profile__value">
+                        <a href="#">
+                            <h5 class="excerpt  profile__value__label">VOTES</h5>
+                            <p class="profile__value__number">14</p>
+                        </a>
+                    </li>
+                    <li class="profile__value">
+                        <a href="#">
+                            <h5 class="excerpt  profile__value__label">PROPOSITIONS</h5>
+                            <p class="profile__value__number">22</p>
+                        </a>
+                    </li>
+                    <li class="profile__value">
+                        <a href="#">
+                            <h5 class="excerpt  profile__value__label">ARGUMENTS</h5>
+                            <p class="profile__value__number">5</p>
+                        </a>
+                    </li>
+                    <li class="profile__value">
+                        <a href="#">
+                            <h5 class="excerpt  profile__value__label">IDÉES</h5>
+                            <p class="profile__value__number">5</p>
+                        </a>
+                    </li>
+                </ul>
             </div>
         </div>
     </div>
+
+    <div class="container">
+    <div class="block  block--shadowed  profile__contribution">
+        <div class="profile__contribution__header">
+            <p class="profile__contribution__title"><a href="profile.html">Prénom Nom</a> a publié <a href="idea.html">une idée</a> dans le thème <a href="theme.html">La transformation numérique de l'action publique</a>.</p>
+            <p class="excerpt  h5  profile__contribution__date">21 avril 2014</p>
+        </div>
+        <ul class="profile__contribution__list">
+            <li class="opinion  opinion--idee">
+                <div class="opinion__header">
+                    <p class="h4  opinion__header__title"><span class="cap-gun"> Idée</span></p>
+                </div>
+                <div class="opinion__body  box">
+                    <a href="profile.html">
+                        <img class="img-circle  pull-left" src="http://rdjpg.com/32/32" alt="Prénom Nom"/>
+                    </a>
+                    <div class="opinion__data">
+                        <p class="opinion__user  h5"><a href="profile.html">Prénom Nom</a> <span class="pull-right  excerpt">3 nov.</span></p>
+                        <p class="opinion__title"><a href="idea.html">Les citoyens français se détournent de leurs représentants et ne leur font plus confiance.</a></p>
+                        <p class="opinion__votes  excerpt h5">12 votes • 45 arguments</p>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+    <div class="block  block--first  block--shadowed  profile__contribution">
+        <div class="profile__contribution__header">
+            <p class="profile__contribution__title"><a href="profile.html">Prénom Nom</a> a publié <a href="opinion.html#current">une cause</a> dans la consultation <a href="consultation.html">Restaurer la confiance entre citoyens et parlementaires</a>.</p>
+            <p class="excerpt  h5  profile__contribution__date">21 avril 2014</p>
+        </div>
+        <ul class="profile__contribution__list">
+            <li class="opinion  opinion--cause">
+                <div class="opinion__header">
+                    <p class="h4  opinion__header__title">Cause</p>
+                </div>
+                <div class="opinion__body  box">
+                    <a href="profile.html">
+                        <img class="img-circle  pull-left" src="http://rdjpg.com/32/32" alt="Prénom Nom"/>
+                    </a>
+                    <div class="opinion__data">
+                        <p class="opinion__user  h5"><a href="profile.html">Prénom Nom</a> <span class="pull-right  excerpt">3 nov.</span></p>
+                        <p class="opinion__title"><a href="opinion.html#current">Les citoyens français se détournent de leurs représentants et ne leur font plus confiance.</a></p>
+                        <p class="opinion__votes  excerpt h5">12 votes • 45 arguments</p>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+    <div class="block  block--first  block--shadowed  profile__contribution">
+        <div class="profile__contribution__header">
+            <p class="profile__contribution__title"><a href="profile.html">Prénom Nom</a> a publié <a href="consultation.html">une consultation</a> dans le thème <a href="theme.html">La transformation numérique de l'action publique</a>.</p>
+            <p class="excerpt  h5  profile__contribution__date">21 avril 2014</p>
+        </div>
+        <ul class="profile__contribution__list">
+            <li class="opinion  opinion--consultation">
+                <div class="opinion__header">
+                    <p class="h4  opinion__header__title"><span class="cap-bubble-conversation-5"></span> Consultation</p>
+                </div>
+                <div class="opinion__body  box">
+                    <a href="profile.html">
+                        <img class="img-circle  pull-left" src="http://rdjpg.com/32/32" alt="Prénom Nom"/>
+                    </a>
+                    <div class="opinion__data">
+                        <p class="opinion__user  h5"><a href="profile.html">Prénom Nom</a> <span class="pull-right  excerpt">3 nov.</span></p>
+                        <p class="opinion__title"><a href="consultation.html">Les citoyens français se détournent de leurs représentants et ne leur font plus confiance.</a></p>
+                        <p class="opinion__votes  excerpt h5">12 votes • 45 arguments</p>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+    <div class="block  block--first  block--shadowed  profile__contribution">
+        <div class="profile__contribution__header">
+            <p class="profile__contribution__title"><a href="profile.html">Prénom Nom</a> a publié <a href="idea.html#comments">une motivation</a> dans le thème <a href="theme.html">La transformation numérique de l'action publique</a>.</p>
+            <p class="excerpt  h5  profile__contribution__date">21 avril 2014</p>
+        </div>
+        <ul class="profile__contribution__list">
+            <li class="opinion  opinion--idee">
+                <div class="opinion__header">
+                    <p class="h4  opinion__header__title"><span class="cap-gun"></span> Idée</p>
+                </div>
+                <div class="opinion__body  box">
+                    <a href="profile.html">
+                        <img class="img-circle  pull-left" src="http://rdjpg.com/32/32" alt="Prénom Nom"/>
+                    </a>
+                    <div class="opinion__data">
+                        <p class="opinion__user  h5"><a href="profile.html">Prénom Nom</a> <span class="pull-right  excerpt">3 nov.</span></p>
+                        <p class="opinion__title"><a href="idea.html">Les citoyens français se détournent de leurs représentants et ne leur font plus confiance.</a></p>
+                        <p class="opinion__votes  excerpt h5">12 votes • 45 arguments</p>
+                    </div>
+                </div>
+            </li>
+            <li class="opinion  opinion--argument  profile__contribution--argument">
+                <div class="opinion__body  box">
+                    <h5 class="h5  opinion__header__title">Motivation</h5>
+                    <a class="pull-left" href="profile.html">
+                        <img class="img-circle" src="http://rdjpg.com/35/35" alt="Prénom Nom">
+                    </a>
+                    <div class="opinion__data">
+                        <p class="opinion__text"><a href="idea.html#motivation1">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                                tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+                                quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                                consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+                                cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+                                proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</a></p>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+    <div class="block  block--first  block--shadowed  profile__contribution">
+        <div class="profile__contribution__header">
+            <p class="profile__contribution__title"><a href="profile.html">Prénom Nom</a> a publié <a href="opinion.html#argno1">un argument</a> dans la consultation <a href="consultation.html">Restaurer la confiance entre citoyens et parlementaires</a>.</p>
+            <p class="excerpt  h5  profile__contribution__date">21 avril 2014</p>
+        </div>
+        <ul class="profile__contribution__list">
+            <li class="opinion  opinion--enjeu">
+                <div class="opinion__header">
+                    <p class="h4  opinion__header__title">Enjeu</p>
+                </div>
+                <div class="opinion__body  box">
+                    <a href="profile.html">
+                        <img class="img-circle  pull-left" src="http://rdjpg.com/32/32" alt="Prénom Nom"/>
+                    </a>
+                    <div class="opinion__data">
+                        <p class="opinion__user  h5"><a href="profile.html">Prénom Nom</a> <span class="pull-right excerpt">3 nov.</span></p>
+                        <p class="opinion__title"><a href="opinion.html#current">Améliorer le fonctionnement démocratique français</a></p>
+                        <p class="opinion__votes  excerpt h5">12 votes • 45 arguments</p>
+                    </div>
+                </div>
+            </li>
+            <li class="opinion  opinion--argument  opinion__arguments--no  profile__contribution--argument">
+                <div class="opinion__body  box">
+                    <h5 class="h5  opinion__user"><a href="profile.html">Prénom Nom</a> <span class="label label-danger">Contre</span> <span class="pull-right  excerpt">3 nov.</h5>
+                    <a class="pull-left" href="opinion.html#argno1">
+                        <img class="img-circle" src="http://rdjpg.com/35/35" alt="Prénom Nom">
+                    </a>
+                    <div class="opinion__data">
+                        <p class="opinion__text"><a href="opinion.html#argno1">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                                tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.</a></p>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+    <div class="block  block--first  block--shadowed  profile__contribution">
+        <div class="profile__contribution__header">
+            <p class="profile__contribution__title"><a href="profile.html">Prénom Nom</a> est d'accord avec <a href="opinion.html#current">une solution</a> de la consultation <a href="consultation.html">Restaurer la confiance entre citoyens et parlementaires</a>.</p>
+            <p class="excerpt  h5  profile__contribution__date">21 avril 2014</p>
+        </div>
+        <ul class="profile__contribution__list">
+            <li class="opinion  opinion--solution">
+                <div class="opinion__header">
+                    <p class="h4  opinion__header__title">Solution</p>
+                </div>
+                <div class="opinion__body  box">
+                    <a href="profile.html">
+                        <img class="img-circle  pull-left" src="http://rdjpg.com/32/32" alt="Prénom Nom"/>
+                    </a>
+                    <div class="opinion__data">
+                        <p class="opinion__user  h5"><a href="profile.html">Prénom Nom</a> <span class="pull-right  excerpt">3 nov.</span></p>
+                        <p class="opinion__title"><a href="opinion.html#current">Améliorer le fonctionnement démocratique français</a></p>
+                        <p class="opinion__votes  excerpt h5">12 votes • 45 arguments</p>
+                    </div>
+                </div>
+            </li>
+        </ul>
+        <div class="media">
+            <a href="profile.html" class="pull-left">
+                <img class="img-circle  pull-left" src="http://rdjpg.com/32/32" alt="Prénom Nom"/>
+            </a>
+            <div class="media-body">
+                <p class="media--aligned"><a href="profile.html">Prénom Nom</a> est <span class="label label-success">D'accord</span> avec cette proposition.</p>
+            </div>
+        </div>
+    </div>
+    <div class="block  block--first  block--shadowed  profile__contribution">
+        <div class="profile__contribution__header">
+            <p class="profile__contribution__title"><a href="profile.html">Prénom Nom</a> a voté pour <a href="idea.html">une idée</a> dans le thème <a href="theme.html">La transformation numérique de l'action publique</a>.</p>
+            <p class="excerpt  h5  profile__contribution__date">21 avril 2014</p>
+        </div>
+        <ul class="profile__contribution__list">
+            <li class="opinion  opinion--enjeu">
+                <div class="opinion__header">
+                    <p class="h4  opinion__header__title"><span class="cap-gun"></span> Idée</p>
+                </div>
+                <div class="opinion__body  box">
+                    <a href="profile.html">
+                        <img class="img-circle  pull-left" src="http://rdjpg.com/32/32" alt="Prénom Nom"/>
+                    </a>
+                    <div class="opinion__data">
+                        <p class="opinion__user  h5"><a href="profile.html">Prénom Nom</a> <span class="pull-right  excerpt">3 nov.</span></p>
+                        <p class="opinion__title"><a href="idea.html">Améliorer le fonctionnement démocratique français</a></p>
+                        <p class="opinion__votes  excerpt h5">12 votes • 45 arguments</p>
+                    </div>
+                </div>
+            </li>
+        </ul>
+        <div class="media">
+            <a href="profile.html" class="pull-left">
+                <img class="img-circle  pull-left" src="http://rdjpg.com/32/32" alt="Prénom Nom"/>
+            </a>
+            <div class="media-body">
+                <p class="media--aligned"><a href="profile.html">Prénom Nom</a> a <span class="label label-success">Voté</span> pour cette idée.</p>
+            </div>
+        </div>
+    </div>
+    </div>
+
 
 {% endblock fos_user_content %}

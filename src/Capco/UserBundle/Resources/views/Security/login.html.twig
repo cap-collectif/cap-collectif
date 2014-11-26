@@ -6,30 +6,30 @@
 
     <div class="container">
         <div class="row">
-            <div class="col-lg-4 col-lg-offset-4 col-md-6  col-md-offset-3  col-sm-8  col-sm-offset-2  col-xs-12  login">
-
-                {% block sonata_user_login_error %}
-                    {% if error %}
-                        <div class="alert alert-danger alert-dismissible" role="alert">
-                            <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                            <span>{{ error|trans({}, 'FOSUserBundle') }}</span>
-                        </div>
-                    {% endif %}
-                {% endblock %}
-
-                <div class="login__social">
+            <div class="col-lg-4  col-lg-offset-4  col-md-6  col-md-offset-3  col-sm-8  col-sm-offset-2  col-xs-12">
+                <div class="block--shadowed  box">
                     <h4>{{ 'title_user_authentication'|trans({}, 'SonataUserBundle') }}</h4>
                     <p>Toutes les contributions soumises sur la plateforme sont rendues publiques.</p>
                     <div class="login__social__btns">
-                        <button class="btn  btn-primary"><i class="cap-facebook"></i><span class="sr-only">Facebook</span><span class="hidden-xs"> Facebook</span></button>
-                        <button class="btn  btn-danger"><i class="cap-gplus"></i><span class="sr-only">Google Plus</span><span class="hidden-xs"> Google+</span></button>
-                        <button class="btn  btn-info"><i class="cap-twitter"></i><span class="sr-only">Twitter</span><span class="hidden-xs"> Twitter</span></button>
+                        <p>
+                            <a href="{{ path('hwi_oauth_service_redirect', {'service': 'facebook' }) }}" title="Sign in with Facebook" class="btn  btn-primary"><i class="cap-facebook"></i> <span class="sr-only">Facebook</span><span class="hidden-xs"> Facebook</span></a>
+                            <a href="{{ path('hwi_oauth_service_redirect', {'service': 'google' }) }}" title="Sign in with Google" class="btn  btn-danger"><i class="cap-gplus"></i> <span class="sr-only">Google plus</span><span class="hidden-xs"> Google +</span></a>
+                        </p>
                     </div>
-                    <p class="excerpt">Nous ne publierons jamais sur votre mur.</p>
                 </div>
                 <p class="text-center">ou</p>
-                <div class="login__form">
+                <div class="block--shadowed  box">
                     <h4>Inscrivez-vous par la méthode classique</h4>
+
+                    {% block sonata_user_login_error %}
+                        {% if error %}
+                            <div class="alert alert-danger alert-dismissible" role="alert">
+                                <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                                <span>{{ error|trans({}, 'FOSUserBundle') }}</span>
+                            </div>
+                        {% endif %}
+                    {% endblock %}
+
                     {% block sonata_user_login_form %}
 
                         <form role="form" action="{{ path("fos_user_security_check") }}" method="post">
@@ -42,6 +42,7 @@
                                 <label for="password">{{ 'security.login.password'|trans({}, 'SonataUserBundle') }}</label>
                                 <input type="password" class="form-control"  id="password" name="_password" placeholder="Password" required="required">
                             </div>
+                            <p><a href="{{ path('fos_user_resetting_request') }}">{{ 'forgotten_password'|trans({}, 'SonataUserBundle') }}</a></p>
                             <p class="excerpt">Toutes les contributions soumises sur la plateforme sont rendues publiques.</p>
                             <div class="checkbox">
                                 <label>

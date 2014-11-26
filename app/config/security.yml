@@ -13,7 +13,7 @@ security:
 
     providers:
         fos_userbundle:
-            id: fos_user.user_manager
+            id: fos_user.user_provider.username_email
 
     firewalls:
         dev:
@@ -45,11 +45,22 @@ security:
             context:             user
             form_login:
                 provider:       fos_userbundle
+                csrf_provider: form.csrf_provider
                 login_path:     /login
-                use_forward:    false
                 check_path:     /login_check
+                use_forward:    false
                 failure_path:   null
                 default_target_path: /profile
+            oauth:
+                resource_owners:
+                    facebook: "/login/check-facebook"
+                    google: "/login/check-google"
+                    twitter: "/login/check-twitter"
+                login_path: /login
+                default_target_path: /profile
+
+                oauth_user_provider:
+                    service: my_user_provider
             logout:             true
             anonymous:          true
 

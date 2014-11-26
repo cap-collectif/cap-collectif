@@ -35,3 +35,8 @@ web_profiler_extra:
     twig:
         enabled:        true
         display_in_wdt: true
+
+swiftmailer:
+    transport: gmail
+    username:  "%mailer_gmail_username%"
+    password:  "%mailer_gmail_password%"

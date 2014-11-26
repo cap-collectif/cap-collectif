@@ -1,0 +1,5 @@
+Capco\UserBundle\Entity\User:
+    properties:
+        email:
+            - NotNull: ~
+            - NotBlank: ~
