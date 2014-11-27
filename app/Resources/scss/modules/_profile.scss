@@ -35,7 +35,9 @@
     display: inline-block;
     text-align: center;
 
-    &.active a, &.active a:hover, a:hover {
+    &.active a,
+    &.active a:hover,
+    a:hover {
       color: $black;
       background-color: $white;
       @include border-radius(0px);
@@ -51,7 +53,8 @@
     font-size: 12px;
   }
 
-  .profile__value__number, .profile__value__label {
+  .profile__value__number,
+  .profile__value__label {
     margin-top: 0;
     margin-bottom: 0;
   }
@@ -59,6 +62,7 @@
   @media (max-width: $screen-xs-max) {
 
     .profile__picture {
+      padding-bottom: 0;
       text-align: center;
       img {
         margin-left: auto;

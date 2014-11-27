@@ -7,26 +7,21 @@
   border-top: 1px solid $border;
   border-bottom: 1px solid $border;
   margin-bottom: 0;
-  padding-left: 0;
-  padding-right: 0;
 
   .nav {
-
-    margin-top: 0;
-    margin-bottom: 0;
 
     li {
       overflow: hidden;
       border-top: 1px solid $border;
-      padding-top: 0;
-      padding-bottom: 0;
       width: 100%;
 
       &:first-child {
         border-top: none;
       }
 
-      &.active a, &:hover a,  &.active:hover a{
+      &.active a,
+      &:hover a, 
+      &.active:hover a{
         background-color: $light-gray;
       }
     }
@@ -44,7 +39,6 @@
     padding-top: 0;
     color: $black;
     font-size: 16px;
-    display: block;
   }
 
   .navbar__step {
@@ -61,14 +55,6 @@
   }
 }
 
-@media (max-width: $screen-xs-max){
-  .navbar--sub {
-    .nav {
-      margin: 0;
-    }
-  }
-}
-
 @media (min-width: $screen-sm-min) and (max-width: $screen-sm-max) {
   .navbar--sub {
 
@@ -78,10 +64,9 @@
 
     .navbar__step-nb {
       padding-top: 0;
-      padding-bottom: 10px;
+      padding-bottom: 5px;
     }
     .navbar__step {
-      padding-left: 0;
       margin-left: 0;
     }
 

@@ -6,37 +6,39 @@
   label {
     cursor: pointer;
     font-size: 13px;
-    margin-right: 10px;
   }
-  form .form-group {
-    margin-left: 20px;
-    &:first-child, &.pull-right {
-      margin-left: 0;
+
+  .formgroup--inline {
+    display: table;
+    width: 100%;
+
+    label {
+      display: table-cell;
+      width: 1px;
+      white-space: nowrap;
+    }
+    .formgroup--inline__control {
+      display: table-cell;
+      padding-left: 10px;
+    }
+    select,
+    input {
+      width: 100%;
     }
   }
 
   @media (max-width: $screen-sm-max) {
-    .pull-right {
-      float: none !important;
+    .filter__down-sm {
       margin-top: 15px;
     }
   }
 
   @media (max-width: $screen-xs-max) {
-    form .form-group {
-      margin-left: 0;
-    }
-    .filter__formgroup--inline {
-      text-align: right;
-      label {
-        margin-right: 0;
-        text-align: left;
-        display: inline-block;
-        width: 15%;
-      }
-      select, input {
-        display: inline-block;
-        width: 83%;
+    form,
+    .filter__down-sm {
+      margin-top: 10px;
+      &:first-child {
+        margin-top: 0;
       }
     }
   }

@@ -31,6 +31,19 @@ $body-bg: $brand-color-2;
 $main-bg: #ebebeb;
 $border: #ddd;
 
+// = Navbar
+// ------------------------------
+$navbar-custom-breakpoint: $screen-sm-max;
+$navbar-collapsed-height: 60px;
+
+// = Titles
+// -------------------------------
+$titles:
+	//nb  padding-top  margin-bottom
+	(h1 60px 30px)
+	(h2 60px 30px)
+	(h3 40px 10px);
+
 // = Custom jumbotron
 // -----------------------------
 $custom-jumbotron-1: $brand-color-1;

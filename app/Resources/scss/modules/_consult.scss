@@ -13,7 +13,8 @@
       float: none;
       display: inline-block;
 
-      &.active a, a:hover {
+      &.active a,
+      a:hover {
         color: $black;
         background-color: transparent;
         @include border-radius(0px);

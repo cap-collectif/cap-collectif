@@ -10,12 +10,7 @@
     background-color: $light-gray;
   }
 
-  a {
-    color: black;
-  }
-  .excerpt a {
-    color: $excerpt;
-  }
+  a,  
   a:hover {
     color: $link-color;
   }
@@ -36,7 +31,8 @@
         background-color: $text;
         color: $color;
       }
-      a, a:hover {
+      a,
+      a:hover {
         color: set-link-text-color($color);
       }
     }
@@ -83,7 +79,8 @@
     }
 
     @media (max-width: $screen-xs-max) {
-      .opinion__header__title, .opinion__header__filter {
+      .opinion__header__title,
+      .opinion__header__filter {
         float: none !important;
       }
       .opinion__header__filter {
@@ -104,6 +101,16 @@
 
     .opinion__user {
       margin: 0px 0px 5px;
+    }
+
+    .opinion__user,
+    .opinion__title {
+      a {
+        color: black;
+      }
+      a:hover {
+        color: $link-color;
+      }
     }
 
     .opinion__date {
@@ -150,7 +157,8 @@
       padding-top: 10px;
       margin-bottom: 0;
     }
-    .btn, .opinion__votes {
+    .btn,
+    .opinion__votes {
       margin-top: 10px;
     }
     .opinion__votes {
@@ -221,7 +229,7 @@
     .opinion__action-buttons {
       float: none !important;
     }
-    button {
+    .btn {
       margin-top: 10px;
     } 
   }

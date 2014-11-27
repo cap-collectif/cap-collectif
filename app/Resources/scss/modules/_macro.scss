@@ -5,6 +5,10 @@
   padding: 15px;
   color: $black;
 
+  &:hover {
+    background-color: $light-gray;
+  }
+
   .media-heading {
     margin-bottom: 0;
   }
