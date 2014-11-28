@@ -85,6 +85,10 @@
 
 .profile__contribution {
   padding: 15px;
+
+  .opinion__header {
+    border-bottom: 1px solid $border;
+  }
 }
 
 .profile__contribution__list {
