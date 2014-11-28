@@ -84,15 +84,9 @@
           text-decoration: none;
         }
 
-        $social-btns:
-                (facebook $social-facebook)
-                (twitter $social-twitter)
-                (googleplus $social-gplus)
-                (linkedin $social-linkedin)
-                (rss $social-rss);
-        @each $social-btn in $social-btns {
-          $name: nth($social-btn, 1);
-          $color: nth($social-btn, 2);
+        @each $social-color in $social-colors {
+          $name: nth($social-color, 1);
+          $color: nth($social-color, 2);
 
           &.social-network--#{$name} {
             @include button-variant($white, $color, $color);

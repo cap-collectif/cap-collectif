@@ -89,3 +89,14 @@
         border-bottom: $width/2 solid transparent;
     }
 }
+
+@mixin iconize() {
+  font-family: "cap-collectif" !important;
+  font-style: normal !important;
+  font-weight: normal !important;
+  font-variant: normal !important;
+  text-transform: none !important;
+  speak: none;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}

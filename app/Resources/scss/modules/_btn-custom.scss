@@ -1,12 +1,7 @@
 /* ===============================================================
    $Button custom
 ================================================================*/
-$btn-customs:
-        (custom-1 $custom-btn-1-bg $custom-btn-1-text)
-        (custom-2 $custom-btn-2-bg $custom-btn-2-text)
-        (dark-gray $dark-gray $white)
-        (light-gray $light-gray $black);
-@each $btn-custom in $btn-customs {
+@each $btn-custom in $btns-custom {
   $name: nth($btn-custom, 1);
   $bg: nth($btn-custom, 2);
   $color: nth($btn-custom, 3);
@@ -22,18 +17,7 @@ $btn-customs:
   background-image: none;
   text-shadow: none;
 
-  $buttons-outline:
-          ("default" $btn-default-color $btn-default-color $btn-default-bg)
-          (success $btn-success-bg $btn-success-bg $btn-default-bg)
-          (info $btn-info-bg $btn-info-bg $btn-default-bg)
-          (warning $btn-warning-bg $btn-warning-bg $btn-default-bg)
-          (danger $btn-danger-bg $btn-danger-bg $btn-default-bg)
-          (custom-1 $custom-btn-1-bg $custom-btn-1-bg $custom-btn-1-text)
-          (custom-2 $custom-btn-2-bg $custom-btn-2-bg $custom-btn-2-text)
-          (primary $btn-primary-bg $btn-primary-bg $btn-default-bg)
-          (dark-gray $dark-gray $dark-gray $white)
-          (light-gray $light-gray $light-gray $black);
-  @each $btn-outline in $buttons-outline {
+  @each $btn-outline in $btns-outline {
     $name: nth($btn-outline, 1);
     $border: nth($btn-outline, 2);
     $bg: nth($btn-outline, 3);

@@ -8,7 +8,7 @@ $white: #fff;
 $black: #000;
 $gray-primary: #c0c0c0;
 $excerpt: #999999;
-$light-gray: #f7f7f9;
+$light-gray: #f6f6f6;
 $dark-gray: #999999;
 $dark-blue: #2a6496;
 $light-blue: #428bca;
@@ -62,18 +62,26 @@ $custom-news-width: 220px;
 // -----------------------------
 $custom-filter-background: $white;
 
-// = Custom btn
+// = Custom buttons
 // -----------------------------
-$custom-btn-1-bg: #fff;
-$custom-btn-1-text: $brand-color-1;
+$btns-custom:
+  (custom-1 $white $brand-color-1)
+  (custom-2 $brand-color-1 $white)
+  (dark-gray $dark-gray $white)
+  (light-gray $light-gray $black);
 
-$custom-btn-2-bg: $brand-color-1;
-$custom-btn-2-text: #fff;
+$btns-outline:
+  ("default" $btn-default-color $btn-default-color $btn-default-bg)
+  (success $btn-success-bg $btn-success-bg $btn-default-bg)
+  (info $btn-info-bg $btn-info-bg $btn-default-bg)
+  (warning $btn-warning-bg $btn-warning-bg $btn-default-bg)
+  (danger $btn-danger-bg $btn-danger-bg $btn-default-bg)
+  (custom-1 $white $white $brand-color-1)
+  (custom-2 $brand-color-1 $brand-color-1 $white)
+  (primary $btn-primary-bg $btn-primary-bg $btn-default-bg)
+  (dark-gray $dark-gray $dark-gray $white)
+  (light-gray $light-gray $light-gray $black);
 
-// = Custom calendar event
-// -----------------------------
-$custom-event: #f6f6f6;
-$custom-event-month: #08c;
 
 // = Custom form
 // -----------------------------
@@ -81,17 +89,24 @@ $custom-form-border: #00cc66;
 $custom-form-bg: #fff;
 $custom-form-legend: #00cc66;
 
+// = Custom calendar event
+// -----------------------------
+$custom-event: $light-gray;
+$custom-event-month: #08c;
+
 // = Custom video
 // ------------------------------
 $custom-video-play: 50px;
 
 // = Social Colors
 // ------------------------------
-$social-facebook: #3b5998;
-$social-twitter: #55acee;
-$social-gplus: #d73d32;
-$social-linkedin: #1279B3;
-$social-rss: #FDAC61;
+$social-colors:
+  // name color icon
+  (facebook #3b5998 "\e00a")
+  (twitter #55acee "\e001")
+  (googleplus #d73d32 "\e00b")
+  (linkedin #1279B3 "\e00d")
+  (rss #FDAC61 "\e0c3");
 
 // = Opinion types
 // -------------------------------

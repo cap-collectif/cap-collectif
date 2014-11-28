@@ -37,6 +37,9 @@
 }
 
 $color-swatches:
+        //Brand colors
+        (brand-1 $brand-color-1)
+        (brand-2 $brand-color-2)
         //Components colors
         (bodybg $body-bg)
         (jumbo $brand-color-1)
@@ -44,8 +47,6 @@ $color-swatches:
         (footer2 $custom-footer-links)
         (event $custom-event)
         (formborder $custom-form-border)
-        (btn1 $custom-btn-1-bg)
-        (btn2 $custom-btn-2-bg)
         //Bootstrap colors
         (primary $brand-primary)
         (success $brand-success)

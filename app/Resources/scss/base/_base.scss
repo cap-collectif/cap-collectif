@@ -120,8 +120,6 @@ h2 + h3 {
   padding-bottom: 0;
 }
 
-
-
 .excerpt {
   color: $excerpt;
 }
@@ -137,6 +135,32 @@ a.excerpt {
   border: 1px solid $gray-primary;
   padding: 6px 12px;
   vertical-align: middle;
+}
+
+.p--lined {
+  position: relative;
+  margin: 15px auto;
+  text-align: center;
+  color: $dark-gray;
+  &:after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    background-color: $border;
+    height: 1px;
+    z-index: 1;
+  }
+  span {
+    position: relative;
+    padding: 0 10px;
+    font-weight: bold;
+    background-color: $white;
+    max-width: 60%;
+    display: inline-block;
+    z-index: 2;
+  }
 }
 
 .pull-abs {
