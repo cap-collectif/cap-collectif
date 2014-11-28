@@ -42,7 +42,6 @@
   .opinion__header {
     padding: 2px 15px;
     overflow: hidden;
-    border-bottom: 1px solid $border;
 
     .neutral-hover:hover {
       text-decoration: none;
@@ -74,7 +73,6 @@
     }
 
     &.opinion__header--end {
-      border-bottom: 0;
       border-top: 1px solid $border;
     }
 
@@ -208,9 +206,6 @@
   
   .opinion {
     border-top: 1px solid $border;
-  }
-  .opinion:first-child {
-    border-top: 0;
   }
 }
 
