@@ -7,7 +7,6 @@
 }
 
 .dialog__header {
-  border-bottom: 1px solid $gray-primary;
   @include border-top-radius(6px);
   .dialog__title {
     margin: 0;
@@ -28,7 +27,7 @@
 }
 
 .dialog__excerpt {
-  border-bottom: 1px solid $gray-primary;
+  border-top: 1px solid $gray-primary;
   background-color: $alert-warning-bg;
   text-align: center;
   font-size: 15px;
@@ -38,6 +37,7 @@
 }
 
 .dialog__body {
+  border-top: 1px solid $gray-primary;
   textarea {
     resize: vertical;
   }
