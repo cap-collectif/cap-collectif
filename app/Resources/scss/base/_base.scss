@@ -126,6 +126,13 @@ h2 + h3 {
   color: $excerpt;
 }
 
+a.excerpt {
+  color: $excerpt;
+  &:hover {
+    color: $link-color;
+  }
+}
+
 .nb-bordered {
   border: 1px solid $gray-primary;
   padding: 6px 12px;

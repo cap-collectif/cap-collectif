@@ -8,10 +8,6 @@
   &:hover {
     background-color: $light-gray;
   }
-  
-  a {
-    color: $link-color;
-  }
 
   .progress {
     @include progress-bar-variant($gray-primary);
