@@ -20,8 +20,22 @@
       }
 
       &.active a,
-      &:hover a, 
-      &.active:hover a{
+      &.active:hover a {
+        background-color: $brand-primary;
+
+        .navbar__step-nb,
+        .navbar__step-title,
+        .excerpt {
+          color: $white;
+        }
+
+        .label {
+          color: $brand-primary;
+          background-color: $white;
+        }
+      }
+
+      &:hover a{
         background-color: $light-gray;
       }
     }
