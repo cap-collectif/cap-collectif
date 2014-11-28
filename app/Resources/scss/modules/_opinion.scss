@@ -24,16 +24,14 @@
     &.opinion--#{$name} .opinion__header {
       background-color: $color;
       color: $text;
-      button {
-        color: $text;
-      }
-      .icon--circled {
-        background-color: $text;
-        color: $color;
-      }
+
       a,
       a:hover {
         color: set-link-text-color($color);
+      }
+      .btn,
+      .btn:hover {
+        color: $black;
       }
     }
   }
