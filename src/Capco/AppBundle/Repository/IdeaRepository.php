@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\Tools\Pagination\Paginator;
 
 /**
  * IdeaRepository
@@ -31,4 +32,39 @@ class IdeaRepository extends EntityRepository
             ->getQuery()
             ->getScalarResult();
     }
+
+    public function getIdeasWithUser($nbByPage, $page)
+    {
+        if ((int) $page < 1) {
+            throw new \InvalidArgumentException('L\'argument $page ne peut être inférieur à 1 (valeur : "'.$page.'").');
+        }
+
+        $query = $this->createQueryBuilder('i')
+            ->leftJoin('i.Author', 'a')
+            ->addSelect('a')
+            ->orderBy('i.createdAt', 'DESC')
+            ->getQuery();
+
+        $query->setFirstResult(($page-1) * $nbByPage)
+            ->setMaxResults($nbByPage);
+
+        return new Paginator($query);
+    }
+
+    public function getOneIdeaWithUserAndTheme($id)
+    {
+
+        $query = $this->createQueryBuilder('i')
+            ->leftJoin('i.Author', 'a')
+            ->addSelect('a')
+            ->leftJoin('i.Theme', 't')
+            ->addSelect('t')
+            ->andWhere('i.id = :id')
+            ->setParameter('id', $id)
+            ->getQuery();
+
+        return $query->getOneOrNullResult();
+
+    }
+
 }

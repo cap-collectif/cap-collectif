@@ -1,0 +1,38 @@
+{% extends '@CapcoApp/base.html.twig' %}
+{% form_theme form '@CapcoApp/Form/bootstrap_3_layout.html.twig' %}
+
+{% block jumbotron %}
+{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2">
+                <div class="dialog  dialog--cause  block--shadowed">
+                    <div class="dialog__header  box">
+                        <h4 class="h4  dialog__title">Proposer une idée</h4>
+                    </div>
+                    <div class="dialog__excerpt  excerpt  box">
+                        <p>Merci d'examiner les idées existantes en premier lieu afin de ne pas soumettre de doublon. Vous pouvez voter pour celles existantes !</p>
+                    </div>
+                    <form method="post" {{ form_enctype(form) }}>
+                        <div class="dialog__body  box">
+                            <div class="media">
+                                <img class="media-object  img-circle  pull-left" src="http://rdjpg.com/45/45" alt=""/>
+                                <div class="media-body">
+                                    {{ form_rest(form) }}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="dialog__footer  box">
+                            <div class="pull-right">
+                                <button class="btn  btn-default">Annuler</button>
+                                <button type="submit" class="btn  btn-success">Publier</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

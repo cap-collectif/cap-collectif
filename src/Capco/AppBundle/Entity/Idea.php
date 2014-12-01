@@ -4,6 +4,7 @@ namespace Capco\AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Idea
@@ -26,6 +27,7 @@ class Idea
      * @var string
      *
      * @ORM\Column(name="title", type="string", length=255)
+     * @Assert\Length(min=3)
      */
     private $title;
 
@@ -39,6 +41,7 @@ class Idea
      * @var string
      *
      * @ORM\Column(name="body", type="text")
+     * @Assert\NotBlank()
      */
     private $body;
 
@@ -70,7 +73,7 @@ class Idea
      *
      * @ORM\Column(name="vote_count", type="integer")
      */
-    private $voteCount;
+    private $voteCount = 0;
 
     /**
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Theme", inversedBy="Ideas")
@@ -89,7 +92,7 @@ class Idea
     /**
      * @var
      *
-     * @ORM\OneToOne(targetEntity="Capco\MediaBundle\Entity\Media", cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity="Capco\MediaBundle\Entity\Media", cascade={"persist"}, fetch="LAZY")
      * @ORM\JoinColumn(name="media_id", referencedColumnName="id")
      */
     private $Media;
@@ -270,7 +273,7 @@ class Idea
      */
     public function getMedia()
     {
-        return $this->media;
+        return $this->Media;
     }
 
     /**
@@ -278,7 +281,7 @@ class Idea
      */
     public function setMedia($media)
     {
-        $this->media = $media;
+        $this->Media = $media;
     }
 
     /**

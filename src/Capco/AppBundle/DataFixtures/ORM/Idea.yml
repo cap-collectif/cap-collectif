@@ -5,3 +5,4 @@ Capco\AppBundle\Entity\Idea:
         voteCount: <numberBetween(0, 356)>
         Theme: @theme*
         Author: @user*
+        createdAt: <dateTimeBetween('-1 years','now')>

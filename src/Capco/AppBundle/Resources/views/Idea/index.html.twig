@@ -1,0 +1,82 @@
+{% extends '@CapcoApp/base.html.twig' %}
+
+{% block jumbotron %}
+    <div class="jumbotron  jumbotron--custom  jumbotron--bg-1 text-center">
+        <div class="container">
+            <h1>Liste des idées</h1>
+        </div>
+    </div>
+{% endblock %}
+
+{% block body %}
+    <div class="container">
+
+        <p class="block">{{ 'idea.index.text_info'|trans({}, 'CapcoAppBundle') }}</p>
+
+        <div class="filter  block">
+            <div class="row">
+                <form role="form" class="col-xs-12  col-sm-4  col-md-3  col-lg-3">
+                    <label class="control-label  sr-only" for="themes-select">Thèmes</label>
+                    <select class="form-control" id="themes-select">
+                        <option value="all">Tous les thèmes</option>
+                        <option value="theme1">Theme 1</option>
+                        <option value="theme2">Theme 2</option>
+                        <option value="theme3">Theme 3</option>
+                    </select>
+                </form>
+                <form role="form" class="col-xs-12  col-sm-4  col-md-3  col-lg-3">
+                    <div class="formgroup--inline">
+                        <label class="control-label" for="tri-select">{{ 'idea.index.filter'|trans({}, 'CapcoAppBundle') }} : </label>
+                    <span class="formgroup--inline__control">
+                        <select class="form-control" id="tri-select">
+                            <option value="tri-votes">Nombre de votes</option>
+                            <option value="tri-popularité">Popularité</option>
+                        </select>
+                    </span>
+                    </div>
+                </form>
+                <form role="form" class="col-xs-12  col-sm-4  col-md-3  col-lg-3">
+                    <label class="control-label  sr-only" for="filter-searchbar">{{ 'idea.index.search'|trans({}, 'CapcoAppBundle') }}</label>
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="cap-magnifier"></i></span>
+                        <input id="filter-searchbar" type="text" class="form-control" placeholder="Rechercher">
+                    </div>
+                </form>
+                <div class="filter__down-sm  col-xs-12  col-sm-3  col-md-3  col-lg-3">
+                    <a href="{{ path('app_idea_create') }}" class="form-control  btn  btn-primary">Proposer une idée</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            {% for idea in ideas %}
+            <div class="col-xs-12  col-sm-6  col-md-4  col-lg-3">
+                <div class="media  media--macro  block  block--shadowed">
+                    <a class="pull-left" href="#">
+                        <img class="media-object  img-circle" src="http://rdjpg.com/45/45" alt="">
+                    </a>
+                    <div class="media-body">
+                        <p class="media-heading h5  media--macro__user"><a href="#">{{ idea.Author.username }}</a></p>
+                        <span class="excerpt">{{ idea.createdAt | localizeddate('medium', 'none') }}</span>
+                    </div>
+                    <h4 class="h4"><a href="{{ path('app_idea_show', {'slug': idea.slug}) }}">{{ idea.title }}</a></h4>
+                    <span class="excerpt">{{ idea.voteCount }} votes</span>
+                </div>
+            </div>
+            {% else %}
+                <p>pas d'idée dans la base de donnée</p>
+            {% endfor %}
+        </div>
+    </div>
+
+    <div class="pagination--custom  text-center">
+        <ul class="pagination">
+            {% for p in range(1, nbPage) %}
+                <li{% if p == page %} class="active"{% endif %}>
+                    <a href="{{ path('app_idea_filtered', {'page': p}) }}">{{ p }}</a>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+
+{% endblock %}

@@ -127,7 +127,6 @@ sonata_media:
             thumbnail:  sonata.media.thumbnail.liip_imagine
         dailymotion:
             thumbnail:  sonata.media.thumbnail.liip_imagine
-
     cdn:
         server:
             path: / # http://media.sonata-project.org/
