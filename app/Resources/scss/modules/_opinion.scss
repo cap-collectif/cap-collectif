@@ -10,11 +10,6 @@
     background-color: $light-gray;
   }
 
-  a,  
-  a:hover {
-    color: $link-color;
-  }
-
   // Colors depending on opinion type
   @each $type in $opinion-types {
     $name: nth($type, 1);
