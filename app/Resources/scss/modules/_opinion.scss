@@ -92,6 +92,14 @@
 
     .opinion__user {
       margin: 0px 0px 5px;
+      position: relative;
+    }
+
+    .label {
+      position: absolute;
+      left: auto;
+      top: auto;
+      margin-left: 5px;
     }
 
     .opinion__user,
