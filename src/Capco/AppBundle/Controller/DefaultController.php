@@ -14,33 +14,15 @@ class DefaultController extends Controller
      * @Cache(expires="+1 minutes", maxage="60", smaxage="0", public="false")
      * @Template()
      */
-    public function headerAction($max = 4, $offset = 0)
+    public function footerAction($max = 4, $offset = 0)
     {
     }
 
     /**
-     * @Route("/add")
+     * @Cache(expires="+1 minutes", maxage="60", smaxage="0", public="false")
      * @Template()
      */
-    public function uploadAction()
+    public function headerAction($max = 4, $offset = 0)
     {
-        $document = new Media();
-        $form = $this->createFormBuilder($document)
-            ->add('file')
-            ->getForm()
-        ;
-
-        if ($this->getRequest()->isMethod('POST')) {
-            $form->handleRequest($this->getRequest());
-            if ($form->isValid()) {
-                $em = $this->getDoctrine()->getManager();
-
-                $em->persist($document);
-                $em->flush();
-
-            }
-        }
-
-        return array('form' => $form->createView());
     }
 }
