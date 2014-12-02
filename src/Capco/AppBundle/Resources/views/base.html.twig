@@ -1,158 +1,97 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="">
+        <meta name="author" content="">
 
-    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="{{ asset('favicon.ico') }}"/>
-    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="{{ asset('apple-touch-icon-114x114-precomposed.png') }}"/>
-    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="{{ asset('apple-touch-icon-72x72-precomposed.png') }}"/>
-    <link rel="apple-touch-icon-precomposed" href="{{ asset('apple-touch-icon-precomposed.png') }}"/>
-    <link rel="icon" type="image/png" href="{{ asset('speed-dial-icon.png') }}"/>
-    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('favicon.ico') }}"/>
-    <link rel="shortcut icon" type="image/png" href="{{ asset('favicon.png') }}"/>
+        <link rel="apple-touch-icon-precomposed" sizes="114x114" href="{{ asset('favicon.ico') }}"/>
+        <link rel="apple-touch-icon-precomposed" sizes="114x114" href="{{ asset('apple-touch-icon-114x114-precomposed.png') }}"/>
+        <link rel="apple-touch-icon-precomposed" sizes="72x72" href="{{ asset('apple-touch-icon-72x72-precomposed.png') }}"/>
+        <link rel="apple-touch-icon-precomposed" href="{{ asset('apple-touch-icon-precomposed.png') }}"/>
+        <link rel="icon" type="image/png" href="{{ asset('speed-dial-icon.png') }}"/>
+        <link rel="shortcut icon" type="image/x-icon" href="{{ asset('favicon.ico') }}"/>
+        <link rel="shortcut icon" type="image/png" href="{{ asset('favicon.png') }}"/>
 
-    <title>{% block title %}Cap Collectif{% endblock %}</title>
-    {% block stylesheets %}
-        <link href="{{ asset('css/style.min.css') }}" rel="stylesheet">
-    {% endblock %}
+        <title>{% block title %}Cap Collectif{% endblock %}</title>
+        {% block stylesheets %}
+            <link href="{{ asset('css/style.min.css') }}" rel="stylesheet">
+        {% endblock %}
 
-    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!--[if lt IE 9]>
-    <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <![endif]-->
-</head>
+        {# HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries  #}
+        <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+        <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+        <![endif]-->
+    </head>
 
-<body>
+    <body{% if page_class is defined %} class="{{ page_class }}"{% endif %}>
+        {# Header  #}
+        {{ render_esi(controller('CapcoAppBundle:Default:header')) }}
 
-<!-- Header -->
-<nav class="navbar  navbar-default  navbar-fixed-top" role="navigation">
-    <div class="container">
+        {# Main jumbotron for a primary marketing message or call to action #}
+        {% block jumbotron %}
+            <div class="jumbotron  jumbotron--custom  jumbotron--bg-1 text-center">
+                <div class="container">
+                    <h1>Hello, world!</h1>
+                    <p>
+                        This is a template for a simple marketing or informational website. It includes a large callout called a
+                        jumbotron and three supporting pieces of content. Use it as a starting point to create something more
+                        unique.
+                    </p>
+                    <p><a class="btn  btn--outline btn-custom-1  btn-lg" role="button">Comment ça marche ?</a></p>
+                </div>
+            </div>
+        {% endblock %}
 
-        <!--Navbar brand and toggle -->
-        <div class="navbar-header">
-            <a class="navbar-brand" href="#">
-                <img alt="Logo" src="http://dummyimage.com/80x40/333/FFF">
-            </a>
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
-                    data-target="#navbar-collapse-1">
-                <span class="navbar__toggle-icon">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </span>
-                <span class="navbar__toggle-label">Menu</span>
-            </button>
+        <div class="main">
+            {% block body %}{% endblock %}
         </div>
 
-        <!-- Navbar content -->
-        <div class="collapse  navbar-collapse" id="navbar-collapse-1">
+        {# Footer #}
+        <footer class="footer">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xs-12  col-sm-12  col-md-12  col-lg-12">
+                        <h4 class="h4">À propos</h4>
+                        <p>
+                            Le Conseil national du numérique est une commission consultative indépendante qui a pour mission de
+                            formuler de manière indépendant et de rendre publics des avis et des recommandations sur toute question
+                            relative à l'impact du numérique sur la société et sur l'économie.
+                        </p>
+                    </div>
 
-            <ul class="nav navbar-nav">
-                <li class="active"><a href="home.html">Accueil</a></li>
-                <li><a href="consultations.html">Consultations</a></li>
-                <li><a href="ideas.html">Boîte à idées</a></li>
-                <li><a href="news-list.html">Actualités</a></li>
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">A propos <span class="caret"></span></a>
-                    <ul class="dropdown-menu" role="menu">
-                        <li><a href="#">Comment ça marche ?</a></li>
-                        <li><a href="#">La charte</a></li>
-                        <li><a href="#">Nous contacter</a></li>
-                    </ul>
-                </li>
-            </ul>
-
-            <!-- Connection button -->
-            {% if app.user and is_granted("IS_AUTHENTICATED_REMEMBERED") %}
-            <ul class="nav navbar-nav pull-right">
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Hey {{ app.user.username }}<span class="caret"></span></a>
-                    <ul class="dropdown-menu" role="menu">
-                        {% if is_granted('ROLE_SUPER_ADMIN') %}
-                        <li><a href="{{ path('sonata_admin_dashboard') }}">adminitration</a></li>
-                        {% endif %}
-                        <li><a href="{{ path('fos_user_profile_show') }}">compte</a></li>
-                        <li><a href="{{ path('fos_user_security_logout') }}"> {{ 'layout.logout'|trans({}, 'FOSUserBundle') }} </a></li>
-                    </ul>
-                </li>
-            </ul>
-            {% else %}
-            <p><a href="{{ path('fos_user_security_login') }}" class="btn  btn-custom-2  btn-brand  navbar-btn  navbar-right">Connexion</a></p>
-            {% endif %}
-
-
-        </div>
-    </div>
-</nav>
-
-<!-- Main jumbotron for a primary marketing message or call to action -->
-{% block jumbotron %}
-    <div class="jumbotron  jumbotron--custom  jumbotron--bg-1 text-center">
-        <div class="container">
-            <h1>Hello, world!</h1>
-            <p>
-                This is a template for a simple marketing or informational website. It includes a large callout called a
-                jumbotron and three supporting pieces of content. Use it as a starting point to create something more
-                unique.
-            </p>
-            <p><a class="btn  btn--outline btn-custom-1  btn-lg" role="button">Comment ça marche ?</a></p>
-        </div>
-    </div>
-{% endblock %}
-
-<div class="main">
-{% block body %}{% endblock %}
-</div>
-
-
-<!-- Footer -->
-<footer class="footer">
-    <div class="container">
-        <div class="row">
-            <div class="col-xs-12  col-sm-12  col-md-12  col-lg-12">
-                <h4 class="h4">À propos</h4>
-                <p>
-                    Le Conseil national du numérique est une commission consultative indépendante qui a pour mission de
-                    formuler de manière indépendant et de rendre publics des avis et des recommandations sur toute question
-                    relative à l'impact du numérique sur la société et sur l'économie.
-                </p>
+                    <div class="col-xs-12  col-sm-12  col-md-10  col-md-offset-1  col-lg-8  col-lg-offset-2">
+                        <ul class="social-network">
+                            <li><a href="#" class="social-network--facebook"><span class="icon cap-facebook"></span><span class="hidden-xs"> Facebook</span></a></li>
+                            <li><a href="#" class="social-network--twitter"><span class="icon cap-twitter"></span><span class="hidden-xs"> Twitter</span></a></li>
+                            <li><a href="#" class="social-network--googleplus"><span class="icon cap-gplus"></span><span class="hidden-xs"> Google +</span></a></li>
+                            <li><a href="#" class="social-network--linkedin"><span class="icon cap-linkedin"></span><span class="hidden-xs"> Linked In</span></a></li>
+                            <li><a href="#" class="social-network--rss"><span class="icon cap-rss-1"></span><span class="hidden-xs"> Flux RSS</span></a></li>
+                        </ul>
+                    </div>
+                </div>
             </div>
 
-            <div class="col-xs-12  col-sm-12  col-md-10  col-md-offset-1  col-lg-8  col-lg-offset-2">
-                <ul class="social-network">
-                    <li><a href="#" class="social-network--facebook"><span class="icon cap-facebook"></span><span class="hidden-xs"> Facebook</span></a></li>
-                    <li><a href="#" class="social-network--twitter"><span class="icon cap-twitter"></span><span class="hidden-xs"> Twitter</span></a></li>
-                    <li><a href="#" class="social-network--googleplus"><span class="icon cap-gplus"></span><span class="hidden-xs"> Google +</span></a></li>
-                    <li><a href="#" class="social-network--linkedin"><span class="icon cap-linkedin"></span><span class="hidden-xs"> Linked In</span></a></li>
-                    <li><a href="#" class="social-network--rss"><span class="icon cap-rss-1"></span><span class="hidden-xs"> Flux RSS</span></a></li>
-                </ul>
+            <div class="footer__links">
+                <div class="container">
+                    <ul>
+                        <li> <a href="#">Conseil national du numérique</a> |</li>
+                        <li> <a href="#">Nos partenaires</a> |</li>
+                        <li> <a href="#">Ils parlent de nous</a> |</li>
+                        <li> <a href="#">Mentions légales</a> |</li>
+                        <li> <a href="contact.php">Contact</a> |</li>
+                        <li> <a href="#">Charte</a> |</li>
+                        <li> <a href="#">FAQ</a></li>
+                    </ul>
+                </div>
             </div>
-        </div>
-    </div>
+        </footer>
 
-    <div class="footer__links">
-        <div class="container">
-            <ul>
-                <li> <a href="#">Conseil national du numérique</a> |</li>
-                <li> <a href="#">Nos partenaires</a> |</li>
-                <li> <a href="#">Ils parlent de nous</a> |</li>
-                <li> <a href="#">Mentions légales</a> |</li>
-                <li> <a href="contact.php">Contact</a> |</li>
-                <li> <a href="#">Charte</a> |</li>
-                <li> <a href="#">FAQ</a></li>
-            </ul>
-        </div>
-    </div>
-</footer>
-
-
-{% block javascripts %}
-    <script src="{{ asset('js/app.min.js') }}"></script>
-{% endblock %}
-</body>
+        {% block javascripts %}
+            <script src="{{ asset('js/app.min.js') }}"></script>
+        {% endblock %}
+    </body>
 </html>
