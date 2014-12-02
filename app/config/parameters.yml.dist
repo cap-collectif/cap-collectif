@@ -17,3 +17,8 @@ parameters:
     debug_toolbar:          true
     debug_redirects:        false
     use_assetic_controller: true
+
+    facebook_app_id:      xxxx
+    facebook_app_secret:  xxxx
+    google_app_id:        xxxx
+    google_app_secret:    xxxx
