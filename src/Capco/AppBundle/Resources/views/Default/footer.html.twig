@@ -12,11 +12,9 @@
 
             <div class="col-xs-12  col-sm-12  col-md-10  col-md-offset-1  col-lg-8  col-lg-offset-2">
                 <ul class="social-network">
-                    <li><a href="#" class="social-network--facebook"><span class="icon cap-facebook"></span><span class="hidden-xs"> Facebook</span></a></li>
-                    <li><a href="#" class="social-network--twitter"><span class="icon cap-twitter"></span><span class="hidden-xs"> Twitter</span></a></li>
-                    <li><a href="#" class="social-network--googleplus"><span class="icon cap-gplus"></span><span class="hidden-xs"> Google +</span></a></li>
-                    <li><a href="#" class="social-network--linkedin"><span class="icon cap-linkedin"></span><span class="hidden-xs"> Linked In</span></a></li>
-                    <li><a href="#" class="social-network--rss"><span class="icon cap-rss-1"></span><span class="hidden-xs"> Flux RSS</span></a></li>
+                    {% for socialNetwork in socialNetworks %}
+                        <li><a href="{{ socialNetwork.link }}"><span class="icon cap-{{ socialNetwork.style }}"></span><span class="hidden-xs"> {{ socialNetwork.title }}</span></a></li>
+                    {% endfor %}
                 </ul>
             </div>
         </div>
@@ -25,13 +23,9 @@
     <div class="footer__links">
         <div class="container">
             <ul>
-                <li> <a href="#">Conseil national du numérique</a> |</li>
-                <li> <a href="#">Nos partenaires</a> |</li>
-                <li> <a href="#">Ils parlent de nous</a> |</li>
-                <li> <a href="#">Mentions légales</a> |</li>
-                <li> <a href="contact.php">Contact</a> |</li>
-                <li> <a href="#">Charte</a> |</li>
-                <li> <a href="#">FAQ</a></li>
+                {% for footerLink in footerLinks %}
+                    <li> <a href="{{ footerLink.link }}">{{ footerLink.title }}</a>{% if not loop.last %} |{% endif %}</li>
+                {% endfor %}
             </ul>
         </div>
     </div>

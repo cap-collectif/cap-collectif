@@ -9,7 +9,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
  * FooterSocialNetwork
  *
  * @ORM\Table(name="footer_social_network")
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\FooterSocialNetworkRepository")
  */
 class FooterSocialNetwork
 {
@@ -35,6 +35,13 @@ class FooterSocialNetwork
      * @ORM\Column(name="link", type="string", length=255)
      */
     private $link;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="style", type="string", length=20)
+     */
+    private $style;
 
     /**
      * @var integer
@@ -137,6 +144,29 @@ class FooterSocialNetwork
     public function getLink()
     {
         return $this->link;
+    }
+
+    /**
+     * Set style
+     *
+     * @param string $style
+     * @return FooterSocialNetwork
+     */
+    public function setStyle($style)
+    {
+        $this->style = $style;
+
+        return $this;
+    }
+
+    /**
+     * Get style
+     *
+     * @return string
+     */
+    public function getStyle()
+    {
+        return $this->style;
     }
 
     /**

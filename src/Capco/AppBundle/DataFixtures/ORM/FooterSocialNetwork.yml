@@ -1,6 +1,35 @@
 Capco\AppBundle\Entity\FooterSocialNetwork:
-    FooterSocialNetwork{1..6}:
-        title: <text(10)>
-        link: <url()>
-        position: <numberBetween(1, 10)>
-        isEnabled: <boolean()>
+    FooterSocialNetwork1:
+        title: Facebook
+        link: http://facebook.com
+        position: 1
+        isEnabled: true
+        style: facebook
+
+    FooterSocialNetwork2:
+        title: Twitter
+        link: http://twitter.com
+        position: 2
+        isEnabled: true
+        style: twitter
+
+    FooterSocialNetwork3:
+        title: Linkedin
+        link: http://linkedin.com
+        position: 3
+        isEnabled: true
+        style: linkedin
+
+    FooterSocialNetwork4:
+        title: Google+
+        link: http://plus.google.com
+        position: 4
+        isEnabled: true
+        style: gplus
+
+    FooterSocialNetwork5:
+        title: RSS feed
+        link: '#'
+        position: 5
+        isEnabled: false
+        style: rss-1
