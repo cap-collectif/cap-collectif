@@ -4,6 +4,7 @@ namespace Capco\AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * Consultation
@@ -13,6 +14,16 @@ use Gedmo\Mapping\Annotation as Gedmo;
  */
 class Consultation
 {
+    const OPENING_STATUS_FUTURE = 0;
+    const OPENING_STATUS_OPENED = 1;
+    const OPENING_STATUS_ENDED = 2;
+
+    public static $openingStatuses = [
+        'future' => self::OPENING_STATUS_FUTURE,
+        'opened' => self::OPENING_STATUS_OPENED,
+        'ended' => self::OPENING_STATUS_ENDED,
+    ];
+
     /**
      * @var integer
      *
@@ -48,6 +59,13 @@ class Consultation
      * @ORM\Column(name="body", type="text")
      */
     private $body;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="is_enabled", type="boolean")
+     */
+    private $isEnabled = true;
 
     /**
      * @var \DateTime
@@ -101,11 +119,17 @@ class Consultation
 
     /**
      * @var
+     * @ORM\ManyToMany(targetEntity="Capco\AppBundle\Entity\Theme", mappedBy="Consultations", cascade={"persist"})
+     */
+    private $Themes;
+
+    /**
+     * @var
      *
      * @ORM\OneToOne(targetEntity="Capco\MediaBundle\Entity\Media", cascade={"persist", "remove"})
      * @ORM\JoinColumn(name="media_id", referencedColumnName="id")
      */
-    private $media;
+    private $Media;
 
     public function __toString()
     {
@@ -114,6 +138,8 @@ class Consultation
         } else {
             return "New consultation";
         }
+
+        $this->Themes = new ArrayCollection();
     }
 
     /**
@@ -309,4 +335,133 @@ class Consultation
         $this->media = $media;
     }
 
+    public function getRemainingDays()
+    {
+        return $this->getClosedAt()->diff(new \DateTime())->format('%a');
+    }
+
+    public function getOpeningStatus()
+    {
+        $now = new \DateTime();
+
+        if ($now > $this->getClosedAt()) {
+            return self::OPENING_STATUS_ENDED;
+        }
+
+        if ($now < $this->getOpenedAt()) {
+            return self::OPENING_STATUS_FUTURE;
+        }
+
+        return self::OPENING_STATUS_OPENED;
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->Themes = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Set isEnabled
+     *
+     * @param boolean $isEnabled
+     *
+     * @return Consultation
+     */
+    public function setIsEnabled($isEnabled)
+    {
+        $this->isEnabled = $isEnabled;
+
+        return $this;
+    }
+
+    /**
+     * Get isEnabled
+     *
+     * @return boolean
+     */
+    public function getIsEnabled()
+    {
+        return $this->isEnabled;
+    }
+
+    /**
+     * Set createdAt
+     *
+     * @param \DateTime $createdAt
+     *
+     * @return Consultation
+     */
+    public function setCreatedAt($createdAt)
+    {
+        $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    /**
+     * Set updatedAt
+     *
+     * @param \DateTime $updatedAt
+     *
+     * @return Consultation
+     */
+    public function setUpdatedAt($updatedAt)
+    {
+        $this->updatedAt = $updatedAt;
+
+        return $this;
+    }
+
+    /**
+     * Add theme
+     *
+     * @param \Capco\AppBundle\Entity\Theme $theme
+     *
+     * @return Consultation
+     */
+    public function addTheme(\Capco\AppBundle\Entity\Theme $theme)
+    {
+        $this->Themes[] = $theme;
+
+        return $this;
+    }
+
+    /**
+     * Remove theme
+     *
+     * @param \Capco\AppBundle\Entity\Theme $theme
+     */
+    public function removeTheme(\Capco\AppBundle\Entity\Theme $theme)
+    {
+        $this->Themes->removeElement($theme);
+    }
+
+    /**
+     * Get themes
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getThemes()
+    {
+        return $this->Themes;
+    }
+
+    /**
+     * Get theme names
+     *
+     * @return array
+     */
+    public function getThemeNames()
+    {
+        $return = array();
+
+        foreach ($this->Themes as $theme) {
+            $return[] = $theme->getTitle();
+        }
+
+        sort($return);
+        return $return;
+    }
 }

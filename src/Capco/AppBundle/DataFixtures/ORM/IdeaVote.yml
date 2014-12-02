@@ -1,10 +1,4 @@
 Capco\AppBundle\Entity\IdeaVote:
-    IdeaVote1:
-        vote: @vote1
-        idea: @idea3
-    IdeaVote2:
-        vote: @vote3
-        idea: @idea7
-    IdeaVote3:
-        vote: @vote2
-        idea: @idea10
+    IdeaVote{1..30}:
+        Idea: @Idea<numberBetween(1, 15)>
+        Voter: @user<numberBetween(1, 3)>

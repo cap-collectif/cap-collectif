@@ -118,4 +118,18 @@ class ArgumentVote
         $this->Voter = $Voter;
     }
 
+
+    /**
+     * Set createdAt
+     *
+     * @param \DateTime $createdAt
+     *
+     * @return ArgumentVote
+     */
+    public function setCreatedAt($createdAt)
+    {
+        $this->createdAt = $createdAt;
+
+        return $this;
+    }
 }

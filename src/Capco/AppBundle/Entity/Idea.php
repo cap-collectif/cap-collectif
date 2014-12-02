@@ -9,7 +9,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
  * Idea
  *
  * @ORM\Table(name="idea")
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\IdeaRepository")
  */
 class Idea
 {
@@ -43,6 +43,13 @@ class Idea
     private $body;
 
     /**
+     * @var boolean
+     *
+     * @ORM\Column(name="is_enabled", type="boolean")
+     */
+    private $isEnabled = true;
+
+    /**
      * @var \DateTime
      *
      * @Gedmo\Timestampable(on="create")
@@ -66,7 +73,8 @@ class Idea
     private $voteCount;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Theme")
+     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Theme", inversedBy="Ideas")
+     * @ORM\JoinColumn(name="theme_id", referencedColumnName="id")
      */
     private $Theme;
 
@@ -84,7 +92,13 @@ class Idea
      * @ORM\OneToOne(targetEntity="Capco\MediaBundle\Entity\Media", cascade={"persist", "remove"})
      * @ORM\JoinColumn(name="media_id", referencedColumnName="id")
      */
-    private $media;
+    private $Media;
+
+    /**
+     * @var
+     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\IdeaVote", mappedBy="Idea", cascade={"persist"})
+     */
+    private $IdeaVotes;
 
     public function __toString()
     {
@@ -93,6 +107,8 @@ class Idea
         } else {
             return "New idea";
         }
+
+        $this->IdeaVotes = new ArrayCollection();
     }
 
     /**
@@ -265,4 +281,97 @@ class Idea
         $this->media = $media;
     }
 
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->IdeaVotes = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Set isEnabled
+     *
+     * @param boolean $isEnabled
+     *
+     * @return Idea
+     */
+    public function setIsEnabled($isEnabled)
+    {
+        $this->isEnabled = $isEnabled;
+
+        return $this;
+    }
+
+    /**
+     * Get isEnabled
+     *
+     * @return boolean
+     */
+    public function getIsEnabled()
+    {
+        return $this->isEnabled;
+    }
+
+    /**
+     * Set createdAt
+     *
+     * @param \DateTime $createdAt
+     *
+     * @return Idea
+     */
+    public function setCreatedAt($createdAt)
+    {
+        $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    /**
+     * Set updatedAt
+     *
+     * @param \DateTime $updatedAt
+     *
+     * @return Idea
+     */
+    public function setUpdatedAt($updatedAt)
+    {
+        $this->updatedAt = $updatedAt;
+
+        return $this;
+    }
+
+    /**
+     * Add ideaVote
+     *
+     * @param \Capco\AppBundle\Entity\IdeaVote $ideaVote
+     *
+     * @return Idea
+     */
+    public function addIdeaVote(\Capco\AppBundle\Entity\IdeaVote $ideaVote)
+    {
+        $this->IdeaVotes[] = $ideaVote;
+
+        return $this;
+    }
+
+    /**
+     * Remove ideaVote
+     *
+     * @param \Capco\AppBundle\Entity\IdeaVote $ideaVote
+     */
+    public function removeIdeaVote(\Capco\AppBundle\Entity\IdeaVote $ideaVote)
+    {
+        $this->IdeaVotes->removeElement($ideaVote);
+    }
+
+    /**
+     * Get ideaVotes
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getIdeaVotes()
+    {
+        return $this->IdeaVotes;
+    }
 }

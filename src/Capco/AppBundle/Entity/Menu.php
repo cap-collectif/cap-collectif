@@ -117,4 +117,14 @@ class Menu
     {
         $this->MenuItems->removeElement($MenuItem);
     }
+
+    /**
+     * Remove menuItem
+     *
+     * @param \Capco\AppBundle\Entity\MenuItem $menuItem
+     */
+    public function removeMenuItem(\Capco\AppBundle\Entity\MenuItem $menuItem)
+    {
+        $this->MenuItems->removeElement($menuItem);
+    }
 }

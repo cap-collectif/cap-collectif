@@ -31,16 +31,18 @@ class IdeaVote
 
     /**
      * @var
-     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Vote")
+     *
+     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Idea", inversedBy="IdeaVotes")
      */
-    private $vote;
+    private $Idea;
 
     /**
      * @var
      *
-     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Idea")
+     * @ORM\ManyToOne(targetEntity="Capco\UserBundle\Entity\User")
+     * @ORM\JoinColumn(name="voter_id", referencedColumnName="id")
      */
-    private $idea;
+    private $Voter;
 
     public function __toString()
     {
@@ -88,20 +90,40 @@ class IdeaVote
     }
 
     /**
-     * @return mixed
+     * Set createdAt
+     *
+     * @param \DateTime $createdAt
+     *
+     * @return IdeaVote
      */
-    public function getVote()
+    public function setCreatedAt($createdAt)
     {
-        return $this->vote;
+        $this->createdAt = $createdAt;
+
+        return $this;
     }
 
     /**
-     * @param mixed $vote
+     * Set voter
+     *
+     * @param \Capco\UserBundle\Entity\User $voter
+     *
+     * @return IdeaVote
      */
-    public function setVote($vote)
+    public function setVoter(\Capco\UserBundle\Entity\User $voter = null)
     {
-        $this->vote = $vote;
+        $this->Voter = $voter;
+
+        return $this;
     }
 
-
+    /**
+     * Get voter
+     *
+     * @return \Capco\UserBundle\Entity\User
+     */
+    public function getVoter()
+    {
+        return $this->Voter;
+    }
 }

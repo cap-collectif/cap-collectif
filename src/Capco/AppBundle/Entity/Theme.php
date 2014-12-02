@@ -10,7 +10,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
  * Theme
  *
  * @ORM\Table(name="theme")
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\ThemeRepository")
  */
 class Theme
 {
@@ -53,7 +53,7 @@ class Theme
      *
      * @ORM\Column(name="is_enabled", type="boolean")
      */
-    private $isEnabled;
+    private $isEnabled = true;
 
     /**
      * @var integer
@@ -92,9 +92,15 @@ class Theme
 
     /**
      * @var
-     * @ORM\ManyToMany(targetEntity="Capco\AppBundle\Entity\Consultation", cascade={"persist"})
+     * @ORM\ManyToMany(targetEntity="Capco\AppBundle\Entity\Consultation", inversedBy="Themes", cascade={"persist"})
      */
     private $Consultations;
+
+    /**
+     * @var
+     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\Idea", mappedBy="Theme", cascade={"persist"})
+     */
+    private $Ideas;
 
     /**
      * @var
@@ -102,11 +108,12 @@ class Theme
      * @ORM\OneToOne(targetEntity="Capco\MediaBundle\Entity\Media", cascade={"persist", "remove"})
      * @ORM\JoinColumn(name="media_id", referencedColumnName="id")
      */
-    private $media;
+    private $Media;
 
     function __construct()
     {
         $this->Consultations = new ArrayCollection();
+        $this->Ideas = new ArrayCollection();
         $this->status = self::STATUS_CLOSED;
     }
 
@@ -314,4 +321,76 @@ class Theme
         $this->media = $media;
     }
 
+
+    /**
+     * Get isEnabled
+     *
+     * @return boolean
+     */
+    public function getIsEnabled()
+    {
+        return $this->isEnabled;
+    }
+
+    /**
+     * Set createdAt
+     *
+     * @param \DateTime $createdAt
+     *
+     * @return Theme
+     */
+    public function setCreatedAt($createdAt)
+    {
+        $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    /**
+     * Set updatedAt
+     *
+     * @param \DateTime $updatedAt
+     *
+     * @return Theme
+     */
+    public function setUpdatedAt($updatedAt)
+    {
+        $this->updatedAt = $updatedAt;
+
+        return $this;
+    }
+
+    /**
+     * Add idea
+     *
+     * @param \Capco\AppBundle\Entity\Idea $idea
+     *
+     * @return Theme
+     */
+    public function addIdea(\Capco\AppBundle\Entity\Idea $idea)
+    {
+        $this->Ideas[] = $idea;
+
+        return $this;
+    }
+
+    /**
+     * Remove idea
+     *
+     * @param \Capco\AppBundle\Entity\Idea $idea
+     */
+    public function removeIdea(\Capco\AppBundle\Entity\Idea $idea)
+    {
+        $this->Ideas->removeElement($idea);
+    }
+
+    /**
+     * Get ideas
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getIdeas()
+    {
+        return $this->Ideas;
+    }
 }

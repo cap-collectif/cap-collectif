@@ -1,0 +1,50 @@
+<div class="container">
+    <h2>{% trans %}Consultations{% endtrans %}</h2>
+    <div class="row">
+        {% for consultation in consultations %}
+            <div class="col-xs-12  col-sm-6  col-md-4  col-lg-3">
+                <div class="thumbnail  thumbnail--custom  block  block--shadowed">
+                    <a href="consultation.php">
+                        <img class="img-responsive" src="http://lorempixel.com/400/300/people" alt="image de la consultation">
+                    </a>
+                    <div class="box">
+                        <div class="figcaption">
+                            <span class="excerpt  h5">{{ consultation.themeNames | join(', ') }}</span>
+                            <h4 class="h4"><a href="" title="">{{ consultation.title }}</a></h4>
+                        </div>
+                        <div class="thumbnail__status">
+                            <p>
+                                {% if consultation.openingStatus == statuses.opened %}
+                                    <span class="label label-success">{% trans %}Consultation opened{% endtrans %}</span>
+                                {% elseif consultation.openingStatus == statuses.ended %}
+                                    <span class="label label-danger">{% trans %}Consultation ended{% endtrans %}</span>
+                                {% elseif consultation.openingStatus == statuses.future %}
+                                    <span class="label label-info">{% trans %}Not opened for the moment{% endtrans %}</span>
+                                {% endif %}
+                            </p>
+                            {% set remainingDays = consultation.remainingDays %}
+                            {% if remainingDays > 0 %}
+                                <p class="excerpt  h5"><i class="cap-gun"></i>
+                                    {% transchoice remainingDays %}
+                                        {0} no consultation|{1} last day|]1,Inf] %remainingDays% remaining days
+                                    {% endtranschoice %}
+                                </p>
+                            {% endif %}
+                        </div>
+                        <div class="thumbnail__numbers">
+                            <div class="thumbnail__number-block">
+                                <p  class="thumbnail__number">134</p>
+                                <h5 class="thumbnail__number__label  excerpt h5">participants</h5>
+                            </div>
+                            <div class="thumbnail__number-block">
+                                <p  class="thumbnail__number">249</p>
+                                <h5 class="thumbnail__number__label  excerpt h5">contributions</h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+    <a href="" class="btn  btn-primary  btn--outline">{% trans %}See all consultations{% endtrans %}</a>
+</div>

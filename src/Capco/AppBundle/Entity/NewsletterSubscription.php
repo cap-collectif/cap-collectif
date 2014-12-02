@@ -117,4 +117,18 @@ class NewsletterSubscription
     {
         return $this->isEnabled;
     }
+
+    /**
+     * Set createdAt
+     *
+     * @param \DateTime $createdAt
+     *
+     * @return NewsletterSubscription
+     */
+    public function setCreatedAt($createdAt)
+    {
+        $this->createdAt = $createdAt;
+
+        return $this;
+    }
 }

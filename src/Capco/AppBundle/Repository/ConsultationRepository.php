@@ -12,4 +12,23 @@ use Doctrine\ORM\EntityRepository;
  */
 class ConsultationRepository extends EntityRepository
 {
+    public function getLast($limit = 1, $offset = 0)
+    {
+        $qb = $this->createQueryBuilder('c')
+            ->andWhere('c.isEnabled = :isEnabled')
+            ->addOrderBy('c.createdAt', 'DESC')
+            ->setParameter('isEnabled', true);
+
+        if ($limit) {
+            $qb->setMaxResults($limit);
+        }
+
+        if ($offset) {
+            $qb->setFirstResult($offset);
+        }
+
+        return $qb
+            ->getQuery()
+            ->execute();
+    }
 }

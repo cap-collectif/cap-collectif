@@ -270,4 +270,56 @@ class ProblemType
         $this->Problems = $Problems;
     }
 
+
+    /**
+     * Set createdAt
+     *
+     * @param \DateTime $createdAt
+     *
+     * @return ProblemType
+     */
+    public function setCreatedAt($createdAt)
+    {
+        $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    /**
+     * Set updatedAt
+     *
+     * @param \DateTime $updatedAt
+     *
+     * @return ProblemType
+     */
+    public function setUpdatedAt($updatedAt)
+    {
+        $this->updatedAt = $updatedAt;
+
+        return $this;
+    }
+
+    /**
+     * Add problem
+     *
+     * @param \Capco\AppBundle\Entity\Problem $problem
+     *
+     * @return ProblemType
+     */
+    public function addProblem(\Capco\AppBundle\Entity\Problem $problem)
+    {
+        $this->Problems[] = $problem;
+
+        return $this;
+    }
+
+    /**
+     * Remove problem
+     *
+     * @param \Capco\AppBundle\Entity\Problem $problem
+     */
+    public function removeProblem(\Capco\AppBundle\Entity\Problem $problem)
+    {
+        $this->Problems->removeElement($problem);
+    }
 }

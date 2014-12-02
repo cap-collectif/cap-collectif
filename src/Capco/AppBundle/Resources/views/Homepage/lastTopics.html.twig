@@ -1,0 +1,24 @@
+<div class="container">
+    <h2>{% trans %}Topics{% endtrans %}</h2>
+    <div class="row">
+        {% for topic in topics %}
+            <div class="col-lg-3  col-md-4  col-sm-6  col-xs-12">
+                <div class="theme  block  block--shadowed">
+                    <h3 class="theme__title"><a href="">{{ topic.title }}</a></h3>
+                    <p class="excerpt">
+                        {% set consultationsCount = topic.consultationsCount %}
+                        {% set ideasCount = topic.ideasCount %}
+                        {% transchoice consultationsCount %}
+                            {0} no consultation|{1} 1 consultation|]1,Inf] %consultationsCount% consultations
+                        {% endtranschoice %}
+                         •
+                        {% transchoice ideasCount %}
+                            {0} no idea|{1} 1 idea|]1,Inf] %ideasCount% ideas
+                        {% endtranschoice %}
+                    </p>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+    <a href="" class="btn  btn-primary  btn--outline">{% trans %}See all topics{% endtrans %}</a>
+</div>
