@@ -9,10 +9,10 @@
                     </a>
                     <div class="media-body">
                         <p class="media-heading h5  media--macro__user"><a href="profile.php">{{ idea.firstname }} {{ idea.lastname }}</a></p>
-                        <span class="excerpt h5">{{ idea.createdAt }}</span>
+                        <span class="excerpt h5">{{ idea.createdAt | localizeddate('long', 'none') }}</span>
                     </div>
                     <div class="media__content">
-                        <h4 class="h4"><a href="idea.php">{{ idea.title }}</a></h4>
+                        <h4 class="h4"><a href="{{ path('app_idea_show', {'slug': idea.slug}) }}">{{ idea.title }}</a></h4>
                         <span class="excerpt  h5">
                             {% set voteCount = idea.voteCount %}
                             {% transchoice voteCount %}
