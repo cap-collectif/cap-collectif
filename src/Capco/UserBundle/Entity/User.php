@@ -44,6 +44,11 @@ class User extends BaseUser
     protected $google_id;
 
     /**
+     * @var Capco\MediaBundle\Entity\Media
+     */
+    protected $Media;
+
+    /**
      * @var integer $google_access_token
      */
     protected $google_access_token;
@@ -129,4 +134,37 @@ class User extends BaseUser
         $this->google_access_token = $google_access_token;
     }
 
+
+    /**
+     * Set media
+     *
+     * @param \Capco\MediaBundle\Entity\Media $media
+     *
+     * @return User
+     */
+    public function setMedia(\Capco\MediaBundle\Entity\Media $media = null)
+    {
+        $this->Media = $media;
+
+        return $this;
+    }
+
+    /**
+     * Get media
+     *
+     * @return \Capco\MediaBundle\Entity\Media
+     */
+    public function getMedia()
+    {
+        return $this->Media;
+    }
+
+    public function getFullname()
+    {
+        return sprintf(
+            '%s %s',
+            $this->getFirstname(),
+            $this->getLastname()
+        );
+    }
 }

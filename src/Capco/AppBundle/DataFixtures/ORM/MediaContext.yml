@@ -3,3 +3,8 @@ Capco\ClassificationBundle\Entity\Context:
         id: default
         name: Default
         enabled: true
+
+    MediaContext2:
+        id: avatar
+        name: Avatar
+        enabled: true

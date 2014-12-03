@@ -1,12 +1,34 @@
 Capco\MediaBundle\Entity\Media:
+
+    # consultations
     MediaConsultation1:
         binaryContent: ../files/consultation-1.jpg
         enabled:       true
         name:          Titre du média
-        authorName:    @user1
+        context:       @MediaContext1
 
     MediaConsultation2:
         binaryContent: ../files/consultation-2.jpg
         enabled:       true
         name:          Titre du média 2
-        authorName:    @user1
+        context:       @MediaContext1
+
+
+    # users
+    MediaUser1:
+        binaryContent: ../files/user/sfavot.jpg
+        enabled:       true
+        name:          Suzanne Favot
+        context:       @MediaContext2
+
+    MediaUser2:
+        binaryContent: ../files/user/lbrunet.jpg
+        enabled:       true
+        name:          Laurent Brunet
+        context:       @MediaContext2
+
+    MediaUser3:
+        binaryContent: ../files/user/xlacot.jpg
+        enabled:       true
+        name:          Xavier Lacot
+        context:       @MediaContext2

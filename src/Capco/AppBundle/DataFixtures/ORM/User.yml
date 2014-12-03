@@ -1,24 +1,33 @@
 Capco\UserBundle\Entity\User:
     user1:
         username: lbrunet
+        firstname: Laurent
+        lastname: Brunet
         email: lbrunet@jolicode.com
         enabled: true
         plainPassword: toto
         roles:
          - 'ROLE_SUPER_ADMIN'
+        Media: @MediaUser2
 
     user2:
         username: sfavot
+        firstname: Suzanne
+        lastname: Favot
         email: sfavot@jolicode.com
         enabled: true
         plainPassword: toto
         roles:
          - 'ROLE_SUPER_ADMIN'
+        Media: @MediaUser1
 
     user3:
         username: xlacot
+        firstname: Xavier
+        lastname: Lacot
         email: xlacot@jolicode.com
         enabled: true
         plainPassword: toto
         roles:
          - 'ROLE_SUPER_ADMIN'
+        Media: @MediaUser3

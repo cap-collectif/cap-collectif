@@ -16,8 +16,6 @@ class MediaProcessor implements ProcessorInterface
     protected $contextManager;
     protected $mediaManager;
 
-    protected $context;
-
     /**
      * @param ContainerInterface $container
      */
@@ -40,8 +38,7 @@ class MediaProcessor implements ProcessorInterface
             $media->setBinaryContent(realpath(dirname(__FILE__)).'/'.$object->getBinaryContent());
             $media->setEnabled($object->getEnabled());
             $media->setName($object->getName());
-            $media->setAuthorName($object->getAuthorName());
-            $media->setContext($this->context);
+            $media->setContext($object->getContext());
 
             $this->mediaManager->save($media, 'default', 'sonata.media.provider.image');
             return $media;
@@ -52,14 +49,13 @@ class MediaProcessor implements ProcessorInterface
             $context->setName($object->getName());
 
             $this->contextManager->save($context);
-            $this->context = $context;
             return $context;
         } else if ($object instanceof \Capco\ClassificationBundle\Entity\Category) {
             $category = $this->categoryManager->create();
             $category->setName($object->getName());
             $category->setEnabled($object->getEnabled());
             $category->setName($object->getName());
-            $category->setContext($this->context);
+            $category->setContext($object->getContext());
 
             $this->categoryManager->save($category);
             return $category;
