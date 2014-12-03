@@ -5,7 +5,6 @@
                   http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
 
     <entity name="Capco\UserBundle\Entity\User" table="fos_user_user">
-
         <id name="id" column="id" type="integer">
             <generator strategy="AUTO" />
         </id>
@@ -15,17 +14,6 @@
 
         <field name="google_id" column="google_id" type="string" length="255" nullable="true" />
         <field name="google_access_token" column="google_access_token" type="string" length="255" nullable="true" />
-
-        <!-- Problem social network -->
-        <attribute-overrides>
-            <attribute-override name="password">
-                <field column="password" type="string" nullable="true" />
-            </attribute-override>
-            <attribute-override name="usernameCanonical">
-                <field column="username_canonical" type="string" length="255" unique="false" />
-            </attribute-override>
-        </attribute-overrides>
-
     </entity>
 
 </doctrine-mapping>

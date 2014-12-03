@@ -6,7 +6,7 @@ Capco\AppBundle\Entity\Consultation:
         openedAt: <dateTimeBetween('-1 years','+10 days')>
         closedAt: <dateTimeBetween('-10 days','+10 days')>
         opinionCount: <numberBetween(0, 582)>
-        argument_count: <numberBetween(0, 582)>
+        argumentCount: <numberBetween(0, 582)>
         Author: @user*
         Media: @MediaConsultation1
     cs2:
@@ -16,7 +16,7 @@ Capco\AppBundle\Entity\Consultation:
         openedAt: <dateTimeBetween('-1 years','+10 days')>
         closedAt: <dateTimeBetween('-10 days','+10 days')>
         opinionCount: <numberBetween(0, 582)>
-        argument_count: <numberBetween(0, 582)>
+        argumentCount: <numberBetween(0, 582)>
         Author: @user*
         Media: @MediaConsultation2
     cs3:
@@ -26,6 +26,6 @@ Capco\AppBundle\Entity\Consultation:
         openedAt: <dateTimeBetween('-1 years','+10 days')>
         closedAt: <dateTimeBetween('-10 days','+10 days')>
         opinionCount: <numberBetween(0, 582)>
-        argument_count: <numberBetween(0, 582)>
+        argumentCount: <numberBetween(0, 582)>
         Author: @user*
         Media: @MediaConsultation1

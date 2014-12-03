@@ -107,7 +107,21 @@ class Consultation
      *
      * @ORM\Column(name="argument_count", type="integer")
      */
-    private $argument_count;
+    private $argumentCount;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="participant_count", type="integer")
+     */
+    private $participantCount = 0;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="contribution_count", type="integer")
+     */
+    private $contributionCount = 0;
 
     /**
      * @var string
@@ -308,15 +322,15 @@ class Consultation
      */
     public function getArgumentCount()
     {
-        return $this->argument_count;
+        return $this->argumentCount;
     }
 
     /**
-     * @param int $argument_count
+     * @param int $argumentCount
      */
-    public function setArgumentCount($argument_count)
+    public function setArgumentCount($argumentCount)
     {
-        $this->argument_count = $argument_count;
+        $this->argumentCount = $argumentCount;
     }
 
     /**
@@ -463,5 +477,53 @@ class Consultation
 
         sort($return);
         return $return;
+    }
+
+    /**
+     * Set participantCount
+     *
+     * @param integer $participantCount
+     *
+     * @return Consultation
+     */
+    public function setParticipantCount($participantCount)
+    {
+        $this->participantCount = $participantCount;
+
+        return $this;
+    }
+
+    /**
+     * Get participantCount
+     *
+     * @return integer
+     */
+    public function getParticipantCount()
+    {
+        return $this->participantCount;
+    }
+
+    /**
+     * Set contributionCount
+     *
+     * @param integer $contributionCount
+     *
+     * @return Consultation
+     */
+    public function setContributionCount($contributionCount)
+    {
+        $this->contributionCount = $contributionCount;
+
+        return $this;
+    }
+
+    /**
+     * Get contributionCount
+     *
+     * @return integer
+     */
+    public function getContributionCount()
+    {
+        return $this->contributionCount;
     }
 }

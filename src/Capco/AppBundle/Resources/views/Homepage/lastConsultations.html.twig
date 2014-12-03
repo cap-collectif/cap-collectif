@@ -33,16 +33,33 @@
                                 </p>
                             {% endif %}
                         </div>
-                        <div class="thumbnail__numbers">
-                            <div class="thumbnail__number-block">
-                                <p  class="thumbnail__number">134</p>
-                                <h5 class="thumbnail__number__label  excerpt h5">participants</h5>
+
+                        {% set participantCount = consultation.participantCount %}
+                        {% set contributionCount = consultation.contributionCount %}
+                        {% if participantCount + contributionCount > 0 %}
+                            <div class="thumbnail__numbers">
+                                {% if participantCount > 0 %}
+                                    <div class="thumbnail__number-block">
+                                        <p  class="thumbnail__number">{{ participantCount }}</p>
+                                        <h5 class="thumbnail__number__label  excerpt h5">
+                                            {% transchoice participantCount %}
+                                                [0,1]participant|]1,Inf] participants
+                                            {% endtranschoice %}
+                                        </h5>
+                                    </div>
+                                {% endif %}
+                                {% if contributionCount > 0 %}
+                                    <div class="thumbnail__number-block">
+                                        <p  class="thumbnail__number">{{ contributionCount }}</p>
+                                        <h5 class="thumbnail__number__label  excerpt h5">
+                                            {% transchoice contributionCount %}
+                                                [0,1]contribution|]1,Inf] contributions
+                                            {% endtranschoice %}
+                                        </h5>
+                                    </div>
+                                {% endif %}
                             </div>
-                            <div class="thumbnail__number-block">
-                                <p  class="thumbnail__number">249</p>
-                                <h5 class="thumbnail__number__label  excerpt h5">contributions</h5>
-                            </div>
-                        </div>
+                        {% endif %}
                     </div>
                 </div>
             </div>

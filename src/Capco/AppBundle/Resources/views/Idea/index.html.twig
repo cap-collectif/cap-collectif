@@ -50,19 +50,19 @@
 
         <div class="row">
             {% for idea in ideas %}
-            <div class="col-xs-12  col-sm-6  col-md-4  col-lg-3">
-                <div class="media  media--macro  block  block--shadowed">
-                    <a class="pull-left" href="#">
-                        <img class="media-object  img-circle" src="http://rdjpg.com/45/45" alt="">
-                    </a>
-                    <div class="media-body">
-                        <p class="media-heading h5  media--macro__user"><a href="#">{{ idea.Author.username }}</a></p>
-                        <span class="excerpt">{{ idea.createdAt | localizeddate('medium', 'none') }}</span>
+                <div class="col-xs-12  col-sm-6  col-md-4  col-lg-3">
+                    <div class="media  media--macro  block  block--shadowed">
+                        <a class="pull-left" href="#">
+                            <img class="media-object  img-circle" src="http://rdjpg.com/45/45" alt="">
+                        </a>
+                        <div class="media-body">
+                            <p class="media-heading h5  media--macro__user"><a href="#">{{ idea.Author.username }}</a></p>
+                            <span class="excerpt">{{ idea.createdAt | localizeddate('medium', 'none') }}</span>
+                        </div>
+                        <h4 class="h4"><a href="{{ path('app_idea_show', {'slug': idea.slug}) }}">{{ idea.title }}</a></h4>
+                        <span class="excerpt">{{ idea.voteCount }} votes</span>
                     </div>
-                    <h4 class="h4"><a href="{{ path('app_idea_show', {'slug': idea.slug}) }}">{{ idea.title }}</a></h4>
-                    <span class="excerpt">{{ idea.voteCount }} votes</span>
                 </div>
-            </div>
             {% else %}
                 <p>pas d'idée dans la base de donnée</p>
             {% endfor %}
