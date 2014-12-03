@@ -13,8 +13,9 @@ class IdeaRepository extends EntityRepository
     public function getLast($limit = 1, $offset = 0)
     {
         $qb = $this->createQueryBuilder('i')
-            ->select('i.title, i.slug, i.createdAt, i.voteCount, a.firstname, a.lastname, a.email')
+            ->select('i, a, m')
             ->leftJoin('i.Author', 'a')
+            ->leftJoin('a.Media', 'm')
             ->andWhere('i.isEnabled = :isEnabled')
             ->addOrderBy('i.createdAt', 'DESC')
             ->addGroupBy('i.id')
@@ -30,7 +31,7 @@ class IdeaRepository extends EntityRepository
 
         return $qb
             ->getQuery()
-            ->getScalarResult();
+            ->execute();
     }
 
     public function getIdeasWithUser($nbByPage, $page)
