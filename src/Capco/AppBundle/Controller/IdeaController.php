@@ -3,8 +3,10 @@
 namespace Capco\AppBundle\Controller;
 
 use Capco\AppBundle\Entity\Idea;
+use Capco\AppBundle\Entity\IdeaVote;
 use Capco\AppBundle\Form\IdeaType;
 use Capco\AppBundle\Form\IdeaUpdateType;
+use Capco\AppBundle\Form\IdeaVoteType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
@@ -14,6 +16,87 @@ use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 class IdeaController extends Controller
 {
+    /**
+     * @Route("/ideas/new", name="app_idea_create")
+     * @Template()
+     * @param $request
+     * @return array
+     */
+    public function createAction(Request $request)
+    {
+        if (!$this->get('security.context')->isGranted('ROLE_USER')) {
+            throw new AccessDeniedException($this->get('translator')->trans('Access restricted to authenticated users'));
+        }
+
+        $idea = new Idea;
+
+        if ($this->getUser()) {
+            $idea->setAuthor($this->getUser());
+        }
+
+        $form = $this->createForm(new IdeaType(), $idea);
+
+        if ($request->getMethod() == 'POST') {
+            $form->handleRequest($request);
+
+            if ($form->isValid()) {
+
+                $em = $this->getDoctrine()->getManager();
+                $em->persist($idea);
+                $em->flush();
+                $this->get('session')->getFlashBag()->add('success', $this->get('translator')->trans('Your idea has been saved'));
+                return $this->redirect($this->generateUrl('app_idea_show', array('slug' => $idea->getSlug())));
+            }
+
+        }
+
+        return array('form' => $form->createView());
+    }
+
+    /**
+     * @Route("/ideas/{slug}/delete", name="app_idea_delete")
+     * @Template()
+     * @param $request
+     * @param $idea
+     * @return array
+     */
+    public function deleteAction(Idea $idea, Request $request)
+    {
+
+        if (!$this->get('security.context')->isGranted('ROLE_USER')) {
+            throw new AccessDeniedException($this->get('translator')->trans('Access restricted to authenticated users'));
+        }
+
+        $userCurrent = $this->getUser()->getId();
+        $userPostIdea = $idea->getAuthor()->getId();
+
+        if ($userCurrent !== $userPostIdea) {
+            throw new AccessDeniedException($this->get('translator')->trans('You cannot delete this contribution'));
+        }
+
+        //Champ CSRF
+        $form = $this->createFormBuilder()->getForm();
+
+        if ($request->getMethod() == 'POST') {
+            $form->handleRequest($request);
+
+            if ($form->isValid()) {
+
+                //vérifie donc que le CSRF
+                $em = $this->getDoctrine()->getManager();
+                $em->remove($idea);
+                $em->flush();
+                $this->get('session')->getFlashBag()->add('info', $this->get('translator')->trans('The idea has been deleted'));
+
+                return $this->redirect($this->generateUrl('app_idea', array()));
+            }
+        }
+
+        return array(
+            'idea' => $idea,
+            'form' => $form->createView()
+        );
+    }
 
     /**
      * @Route("/ideas/{page}", name="app_idea", requirements={"page" = "\d+"}, defaults={"page" = 1} )
@@ -44,50 +127,53 @@ class IdeaController extends Controller
     public function showAction(Idea $idea)
     {
         $em = $this->getDoctrine()->getManager();
+        $currentUrl = $this->generateUrl('app_idea_show', [ 'slug' => $idea->getSlug() ]);
+        $translator = $this->get('translator');
         $idea = $em->getRepository('CapcoAppBundle:Idea')->getOneIdeaWithUserAndTheme($idea);
 
-        return array(
-            'idea' => $idea
-        );
-    }
-
-    /**
-     * @Route("/ideas/new", name="app_idea_create")
-     * @Template()
-     * @param $request
-     * @return array
-     */
-    public function createAction(Request $request)
-    {
-
-        if (!$this->get('security.context')->isGranted('ROLE_USER')) {
-            throw new AccessDeniedException("Accès limité aux utilisateurs connectés");
+        if ($this->get('security.context')->isGranted('ROLE_USER')) {
+            $userVoteCount = $em->getRepository('CapcoAppBundle:IdeaVote')->countForUserAndIdea($this->getUser(), $idea);
+        } else {
+            $userVoteCount = 0;
         }
 
-        $idea = new Idea;
-
-        if ($this->getUser()) {
-            $idea->setAuthor($this->getUser());
-        }
-
-        $form = $this->createForm(new IdeaType(), $idea);
+        $form = $this->createForm(new IdeaVoteType(), $idea, array(
+            'action' => $currentUrl,
+            'method' => 'POST'
+        ));
+        $request = $this->getRequest();
 
         if ($request->getMethod() == 'POST') {
+            if (!$this->get('security.context')->isGranted('ROLE_USER')) {
+                throw new AccessDeniedException($translator->trans('Please log in or create an account to vote for this idea!'));
+            }
+
             $form->handleRequest($request);
 
             if ($form->isValid()) {
+                if ($userVoteCount == 0) {
+                    $vote = new IdeaVote();
+                    $vote->setVoter($this->getUser());
+                    $vote->setIdea($idea);
+                    $idea->addIdeaVote($vote);
+                    $em->persist($idea);
+                    $em->flush();
 
-                $em = $this->getDoctrine()->getManager();
-                $em->persist($idea);
-                $em->flush();
-                $this->get('session')->getFlashBag()->add('success', 'Votre idée à bien été enregistré');
-                return $this->redirect($this->generateUrl('app_idea_show', array('slug' => $idea->getSlug())));
+                    $this->get('session')->getFlashBag()->add('success', $translator->trans('Your vote has been saved.'));
+                } else {
+                    $this->get('session')->getFlashBag()->add('error', $translator->trans('You have already voted for this idea.'));
+                }
+
+                // redirect (avoids reload alerts)
+                return $this->redirect($currentUrl);
             }
-
         }
 
-        return array('form' => $form->createView());
-
+        return array(
+            'idea' => $idea,
+            'userVoteCount' => $userVoteCount,
+            'form' => $form->createView()
+        );
     }
 
     /**
@@ -99,16 +185,15 @@ class IdeaController extends Controller
      */
     public function updateAction(Idea $idea,  Request $request)
     {
-
         if (!$this->get('security.context')->isGranted('ROLE_USER')) {
-            throw new AccessDeniedException("Accès limité aux utilisateurs connectés");
+            throw new AccessDeniedException($this->get('translator')->trans('Access restricted to authenticated users'));
         }
 
         $userCurrent = $this->getUser()->getId();
         $userPostIdea = $idea->getAuthor()->getId();
 
         if ($userCurrent !== $userPostIdea) {
-            throw new AccessDeniedException("vous ne pouvez pas modifier cette contribution car vous en êtes pas l'auteur");
+            throw new AccessDeniedException($this->get('translator')->trans('You cannot edit this idea, as you are not its author'));
         }
 
         $form = $this->createForm(new IdeaUpdateType(), $idea);
@@ -120,7 +205,7 @@ class IdeaController extends Controller
                 $em->persist($idea);
                 $em->flush();
 
-                $this->get('session')->getFlashBag()->add('success', 'l\'idée à bien été modifié');
+                $this->get('session')->getFlashBag()->add('success', $this->get('translator')->trans('The idea has been edited'));
 
                 return $this->redirect($this->generateUrl('app_idea_show', array('slug' => $idea->getSlug())));
             }
@@ -131,50 +216,4 @@ class IdeaController extends Controller
             'idea' => $idea
         );
     }
-
-    /**
-     * @Route("/ideas/{slug}/delete", name="app_idea_delete")
-     * @Template()
-     * @param $request
-     * @param $idea
-     * @return array
-     */
-    public function deleteAction(Idea $idea, Request $request)
-    {
-
-        if (!$this->get('security.context')->isGranted('ROLE_USER')) {
-            throw new AccessDeniedException("Accès limité aux utilisateurs connectés");
-        }
-
-        $userCurrent = $this->getUser()->getId();
-        $userPostIdea = $idea->getAuthor()->getId();
-
-        if ($userCurrent !== $userPostIdea) {
-            throw new AccessDeniedException("vous ne pouvez pas supprimer cette contribution");
-        }
-
-        //Champ CSRF
-        $form = $this->createFormBuilder()->getForm();
-
-        if ($request->getMethod() == 'POST') {
-            $form->handleRequest($request);
-
-            if ($form->isValid()) {
-
-                //vérifie donc que le CSRF
-                $em = $this->getDoctrine()->getManager();
-                $em->remove($idea);
-                $em->flush();
-                $this->get('session')->getFlashBag()->add('info', 'L\'idée à bien été supprimé');
-
-                return $this->redirect($this->generateUrl('app_idea', array()));
-            }
-        }
-
-        return array(
-            'idea' => $idea,
-            'form' => $form->createView()
-        );
-    }
-
 }

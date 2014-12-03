@@ -9,7 +9,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
  * ArgumentVote
  *
  * @ORM\Table(name="idea_vote")
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\IdeaVoteRepository")
  */
 class IdeaVote
 {
@@ -74,19 +74,27 @@ class IdeaVote
     }
 
     /**
-     * @return mixed
+     * Get idea
+     *
+     * @return \Capco\AppBundle\Entity\Idea
      */
     public function getIdea()
     {
-        return $this->idea;
+        return $this->Idea;
     }
 
     /**
-     * @param mixed $idea
+     * set idea
+     *
+     * @param \Capco\AppBundle\Entity\Idea $Idea
+     *
+     * @return IdeaVote
      */
-    public function setIdea($idea)
+    public function setIdea(\Capco\AppBundle\Entity\Idea $Idea)
     {
-        $this->idea = $idea;
+        $this->Idea = $Idea;
+
+        return $this;
     }
 
     /**

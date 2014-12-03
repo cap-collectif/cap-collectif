@@ -1,6 +1,6 @@
 liip_imagine:
     filter_sets:
-        default_admin:
+        admin:
             quality: 100
             controller_action: 'SonataMediaBundle:Media:liipImagineFilter'
             filters:

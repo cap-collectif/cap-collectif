@@ -7,9 +7,10 @@ idea:
         text_info: Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eos, perspiciatis, cupiditate. Nesciunt eos nam ullam iste iusto similique officia sit enim excepturi numquam natus, ab eum sint perspiciatis repudiandae dolorem.
     show:
         vote: Voter
-        share_button: Partager
-        reporting_button: Signaler
-        update_button: Modifier
+        votes: Votes
+        share: Partager
+        report: Signaler
+        edit: Modifier
     create:
         title_block: Proposer une idée
         button: Publier
@@ -18,7 +19,7 @@ idea:
     update:
         remove_button: Supprimer
         title_block: Modifier une idée
-        text_info: Vous éditez un idée déjà existant, ne le changez pas trop pour éviter aux membres de ne pas comprendre.
+        text_info: Vous éditez un idée déjà existante, ne le changez pas trop pour éviter aux membres de ne pas comprendre.
         text_alert: Attention ! En modifiant votre idée, vous perdrez les votes qui lui sont associés.
     delete:
         title_block: Supprimer une idée

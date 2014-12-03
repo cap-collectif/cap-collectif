@@ -1,15 +1,16 @@
 # Idea
 idea:
     index:
-        filter: Trier
+        filter: Filter
         search: search
         button: Create idea
         text_info: Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eos, perspiciatis, cupiditate. Nesciunt eos nam ullam iste iusto similique officia sit enim excepturi numquam natus, ab eum sint perspiciatis repudiandae dolorem.
     show:
-        vote: Voter
-        share_button: Share
-        reporting_button: Reporting
-        update_button: Update
+        vote: Vote
+        votes: Votes
+        share: Share
+        report: Report
+        edit: Update
     create:
         title_block: Create idea
         button: Published

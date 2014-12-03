@@ -92,14 +92,14 @@ class Idea
     /**
      * @var
      *
-     * @ORM\OneToOne(targetEntity="Capco\MediaBundle\Entity\Media", cascade={"persist"}, fetch="LAZY")
+     * @ORM\OneToOne(targetEntity="Capco\MediaBundle\Entity\Media", fetch="LAZY")
      * @ORM\JoinColumn(name="media_id", referencedColumnName="id")
      */
     private $Media;
 
     /**
      * @var
-     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\IdeaVote", mappedBy="Idea", cascade={"persist"})
+     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\IdeaVote", mappedBy="Idea", cascade={"persist", "remove"})
      */
     private $IdeaVotes;
 
@@ -354,6 +354,7 @@ class Idea
     public function addIdeaVote(\Capco\AppBundle\Entity\IdeaVote $ideaVote)
     {
         $this->IdeaVotes[] = $ideaVote;
+        $this->voteCount++;
 
         return $this;
     }
