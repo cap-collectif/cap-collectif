@@ -12,7 +12,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 class HomepageController extends Controller
 {
     /**
-     * @Route("/")
+     * @Route("/", name="app_homepage")
      * @Template()
      */
     public function homepageAction()
