@@ -1,0 +1,13 @@
+<div class="container">
+    <h2>{{ 'consultation.title'|trans({}, 'CapcoAppBundle') }}</h2>
+    {% if consultations|length  > 0 %}
+    <div class="row">
+        {% for consultation in consultations %}
+             {% include '@CapcoApp/Consultation/consultation-block.html.twig' %}
+        {% endfor %}
+    </div>
+    {% else %}
+    <p>{{ 'theme.show.consultations.none'|trans({}, 'CapcoAppBundle') }}</p>
+    {% endif %}
+    <a href="" class="btn  btn-primary  btn--outline">{{ 'consultation.see_all'|trans({}, 'CapcoAppBundle') }}</a>
+</div>

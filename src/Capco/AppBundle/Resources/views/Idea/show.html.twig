@@ -12,7 +12,7 @@
                     <img class="img-circle  pull-left" src="http://rdjpg.com/32/32" alt=""/>
                 </a>
                 <div class="media-body">
-                    <p class="media--aligned  excerpt"><a href="#">{{ idea.Author.username }}</a> dans <a href="#">{{ idea.Theme.title }}</a> le {{ idea.createdAt | localizeddate('long', 'none') }}</p>
+                    <p class="media--aligned  excerpt"><a href="#">{{ idea.Author.username }}</a> dans <a href="{{ path('app_theme_show', {'slug': idea.Theme.slug}) }}">{{ idea.Theme.title }}</a> le {{ idea.createdAt | localizeddate('long', 'none') }}</p>
                 </div>
             </div>
         </div>
@@ -31,7 +31,7 @@
                 <span class="nb-bordered">{{ idea.voteCount }}</span>
             {{ form_end(form) }}
         {% else %}
-            <button class="btn btn-disabled"><i class="cap-hand-like-1"></i> {{ 'idea.show.votes'|trans({}, 'CapcoAppBundle') }}</button>
+            <button class="btn btn-disabled"><i class="cap-hand-like-1"></i> {{ 'idea.show.voted'|trans({}, 'CapcoAppBundle') }}</button>
             <span class="nb-bordered">{{ idea.voteCount }}</span>
         {% endif %}
 

@@ -71,6 +71,24 @@ class IdeaRepository extends EntityRepository
             ->execute();
     }
 
+    public function findByTheme($theme)
+    {
+        $qb = $this->createQueryBuilder('i')
+            ->select('i, a, m, t')
+            ->leftJoin('i.Author', 'a')
+            ->leftJoin('a.Media', 'm')
+            ->leftJoin('i.Theme', 't')
+            ->andWhere('i.isEnabled = :isEnabled')
+            ->setParameter('isEnabled', true)
+            ->andWhere('t.id = :theme')
+            ->setParameter('theme', $theme)
+            ->orderBy('i.createdAt', 'DESC');
+            
+        return $qb
+            ->getQuery()
+            ->execute();
+    }
+
     public function getOneIdeaWithUserAndTheme($id)
     {
         $query = $this->getIsEnabledQueryBuilder()

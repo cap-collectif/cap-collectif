@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
+use Capco\AppBundle\Entity\Theme;
 
 /**
  * ConsultationRepository
@@ -27,6 +28,24 @@ class ConsultationRepository extends EntityRepository
         if ($offset) {
             $qb->setFirstResult($offset);
         }
+
+        return $qb
+            ->getQuery()
+            ->execute();
+    }
+
+    public function findByTheme($theme)
+    {
+        $qb = $this->createQueryBuilder('c')
+            ->leftJoin('c.Media', 'm')
+            ->addSelect('m')
+            ->leftJoin('c.Themes' , 't')
+            ->addSelect('t')
+            ->andWhere(':theme MEMBER OF c.Themes')
+            ->setParameter('theme', $theme)
+            ->andWhere('c.isEnabled = :isEnabled')
+            ->setParameter('isEnabled', true)
+            ->orderBy('c.createdAt', 'DESC');
 
         return $qb
             ->getQuery()

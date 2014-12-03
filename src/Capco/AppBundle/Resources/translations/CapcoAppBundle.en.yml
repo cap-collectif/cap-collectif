@@ -1,34 +1,73 @@
 # Idea
 idea:
-    index:
-        filter: Filter
-        search: search
-        button: Create idea
-        text_info: Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eos, perspiciatis, cupiditate. Nesciunt eos nam ullam iste iusto similique officia sit enim excepturi numquam natus, ab eum sint perspiciatis repudiandae dolorem.
-    show:
-        vote: Vote
-        votes: Votes
-        share: Share
-        report: Report
-        edit: Update
-    create:
-        title_block: Create idea
-        button: Published
-        reset_submit: Cancel
-        text_info: Merci d'examiner les idées existantes en premier lieu afin de ne pas soumettre de doublon. Vous pouvez voter pour celles existantes !
-    update:
-        remove_button: Remove
-        title_block: Update idea
-        text_info: Vous éditez un idée déjà existant, ne le changez pas trop pour éviter aux membres de ne pas comprendre.
-        text_alert: Attention ! En modifiant votre idée, vous perdrez les votes qui lui sont associés.
-    delete:
-        title_block: Remove idea
-        text_alert: Êtes-vous certain de vouloir supprimer le contenu ?
-    searchform:
-        search: Search
-        sort: 'Sort by:'
-        all_themes: All the themes
-        no_result:  There's no idea matching this search
-    sort:
-        created_at: Creation date
-        popularity: Popularity
+  title: Ideas
+  see_all: See all ideas
+  index:
+    filter: Filter
+    search: search
+    button: Create idea
+    text_info: Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eos, perspiciatis, cupiditate. Nesciunt eos nam ullam iste iusto similique officia sit enim excepturi numquam natus, ab eum sint perspiciatis repudiandae dolorem.
+  show:
+    vote: Vote
+    voted: Voted
+    votes: "{0} No vote | {1} 1 vote | ]1,Inf[ %count% votes"
+    share: Share
+    report: Report
+    edit: Update
+    views: See all ideas
+  create:
+    title_block: Create idea
+    button: Published
+    reset_submit: Cancel
+    text_info: Merci d'examiner les idées existantes en premier lieu afin de ne pas soumettre de doublon. Vous pouvez voter pour celles existantes !
+  update:
+    remove_button: Remove
+    title_block: Update idea
+    text_info: Vous éditez un idée déjà existant, ne le changez pas trop pour éviter aux membres de ne pas comprendre.
+    text_alert: Attention ! En modifiant votre idée, vous perdrez les votes qui lui sont associés.
+  delete:
+    title_block: Remove idea
+    text_alert: Êtes-vous certain de vouloir supprimer le contenu ?
+  searchform:
+    search: Search
+    sort: 'Sort by:'
+    all_themes: All the themes
+    no_result:  There's no idea matching this search
+  sort:
+    created_at: Creation date
+    popularity: Popularity
+
+#Theme
+theme:
+  index:
+    title: Topics
+    description: Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eos, perspiciatis, cupiditate.
+    text_info: Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eos, perspiciatis, cupiditate. Nesciunt eos nam ullam iste iusto similique officia sit enim excepturi numquam natus, ab eum sint perspiciatis repudiandae dolorem.
+    search: Search
+    consultations: "{0} No consultation | {1} 1 consultation | ]1,Inf[ %count% consultations"
+    ideas: "{0} No idea | {1} 1 idea | ]1,Inf[ %count% ideas"
+    none: No theme
+  show:
+    body_title: Context
+    status:
+      title: "Topic status : "
+      opened: "Opened"
+      closed: "Closed"
+      future: "Coming soon"
+    consultations:
+      none: No consultation related to this topic
+    ideas:
+      none: No idea related to this topic
+
+#Consultation
+consultation:
+  title: Consultations
+  see_all: See all consultations
+  show:
+    status:
+      opened: Consultation opened
+      ended: Consultation closed
+      future: Consultation coming soon
+    remaining_days: "{0} Consultation ended | {1} Last day | ]1,Inf[ %count% remaining days"
+    participants: "{0} No participant | {1} 1 participant | ]1,Inf[ %count% participants"
+    contributions: "{0} No contribution | {1} 1 contribution | ]1,Inf[ %count% contributions"

@@ -1,0 +1,13 @@
+<div class="container">
+    <h2>{{ 'idea.title'|trans({}, 'CapcoAppBundle') }}</h2>
+    {% if ideas|length > 0 %}
+    <div class="row">
+        {% for idea in ideas %}
+            {% include '@CapcoApp/Idea/idea-block.html.twig' %}
+        {% endfor %}
+    </div>
+    {% else %}
+    <p>{{ 'theme.show.ideas.none'|trans({}, 'CapcoAppBundle') }}</p>
+    {% endif %}
+    <a href="{{ path('app_idea') }}" class="btn  btn-primary  btn--outline">{{ 'idea.see_all'|trans({}, 'CapcoAppBundle') }}</a>
+</div>

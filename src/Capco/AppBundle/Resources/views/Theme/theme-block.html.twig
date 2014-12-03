@@ -1,0 +1,16 @@
+<div class="col-lg-3  col-md-4  col-sm-6  col-xs-12">
+    <div class="theme  block  block--shadowed">
+        <h3 class="theme__title"><a href="{{ path('app_theme_show', {'slug': theme.slug}) }}">{{ theme.title }}</a></h3>
+        {% set nbConsultations = (theme.Consultations|length) %}
+        {% set nbIdeas = (theme.Ideas|length) %}
+        <p class="excerpt">
+            {% transchoice nbConsultations with {'%count%': nbConsultations} from 'CapcoAppBundle' %}
+                theme.index.consultations
+            {% endtranschoice %}
+             •
+            {% transchoice nbIdeas with {'%count%': nbIdeas} from 'CapcoAppBundle' %}
+                theme.index.ideas
+            {% endtranschoice %}
+        </p>
+    </div>
+</div>

@@ -1,0 +1,59 @@
+{% extends '@CapcoApp/base.html.twig' %}
+
+{% block jumbotron %}
+    <div class="jumbotron  jumbotron--custom jumbotron--bg-1  text-center">
+        <div class="container">
+            <h1 class="h2  h--no-border">{{ 'theme.index.title'|trans({}, 'CapcoAppBundle') }}</h1>
+            <p>{{ 'theme.index.description'|trans({}, 'CapcoAppBundle') }}</p>
+        </div>
+    </div>
+{% endblock %}
+
+{% block body %}
+    <div class="container">
+
+        <p class="block">{{ 'theme.index.text_info'|trans({}, 'CapcoAppBundle') }}</p>
+
+        <div class="filter  block">
+            <div class="row">
+                {{ form_start(form) }}
+                    {{ form_errors(form) }}
+                    <div role="form" class="pull-right col-xs-12  col-sm-5  col-md-4  col-lg-3">
+                        {{ form_label(form.term, null, {'label_attr':{"class":"control-label sr-only"} }) }}
+                        <div class="input-group">
+                            {{ form_errors(form.term) }}
+                            <span class="input-group-btn">
+                                <button type="submit" class="btn  btn-default"><i class="cap-magnifier"></i></button>
+                            </span>
+                            {{ form_widget(form.term, {'attr':{"class":"form-control", "placeholder": 'theme.index.search'|trans({}, 'CapcoAppBundle') } }) }}
+                        </div>
+                    </div>
+                {{ form_end(form) }}
+            </div>
+        </div>
+
+        {% if themes|length > 0 %}
+            <div class="row">
+                {% for theme in themes %}
+                    {% include '@CapcoApp/Theme/theme-block.html.twig' %}
+                {% endfor %}
+            </div>
+        {% else %}
+            <p>{{ 'theme.index.none'|trans({}, 'CapcoAppBundle') }}</p>
+        {% endif %}
+
+        {% if nbPage > 1 %}
+        <div class="pagination--custom  text-center">
+            <ul class="pagination">
+                {% for p in range(1, nbPage) %}
+                    <li{% if p == page %} class="active"{% endif %}>
+                        <a href="{{ path('app_theme_filtered', {'page': p}) }}">{{ p }}</a>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    {% endif %}
+
+    </div>
+
+{% endblock %}

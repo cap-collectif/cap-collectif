@@ -1,35 +1,73 @@
 # Idea
 idea:
-    index:
-        filter: Trier
-        search: Rechercher
-        button: Proposer une idée
-        text_info: Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eos, perspiciatis, cupiditate. Nesciunt eos nam ullam iste iusto similique officia sit enim excepturi numquam natus, ab eum sint perspiciatis repudiandae dolorem.
-    show:
-        vote: Voter
-        votes: Votes
-        share: Partager
-        report: Signaler
-        edit: Modifier
-        views: Voir tous les sujets proposés
-    create:
-        title_block: Proposer une idée
-        button: Publier
-        reset_submit: Annuler
-        text_info: Merci d'examiner les idées existantes en premier lieu afin de ne pas soumettre de doublon. Vous pouvez voter pour celles existantes !
-    update:
-        remove_button: Supprimer
-        title_block: Modifier une idée
-        text_info: Vous éditez un idée déjà existante, ne le changez pas trop pour éviter aux membres de ne pas comprendre.
-        text_alert: Attention ! En modifiant votre idée, vous perdrez les votes qui lui sont associés.
-    delete:
-        title_block: Supprimer une idée
-        text_alert: Êtes-vous certain de vouloir supprimer le contenu ?
-    searchform:
-        search: Rechercher
-        sort: 'Trier :'
-        all_themes: Tous les thèmes
-        no_result:  Aucune idée ne correspond à ces critères de recherche
-    sort:
-        created_at: Date de création
-        popularity: Popularité
+  title: Idées
+  see_all: Voir toutes les idées
+  index:
+    filter: Trier
+    search: Rechercher
+    button: Proposer une idée
+    text_info: Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eos, perspiciatis, cupiditate. Nesciunt eos nam ullam iste iusto similique officia sit enim excepturi numquam natus, ab eum sint perspiciatis repudiandae dolorem.
+  show:
+    vote: Voter
+    voted: Vous avez voté
+    votes: "{0} Aucun vote | {1} 1 vote | ]1,Inf[ %count% votes"
+    share: Partager
+    report: Signaler
+    edit: Modifier
+    views: Voir tous les sujets proposés
+  create:
+    title_block: Proposer une idée
+    button: Publier
+    reset_submit: Annuler
+    text_info: Merci d'examiner les idées existantes en premier lieu afin de ne pas soumettre de doublon. Vous pouvez voter pour celles existantes !
+  update:
+    remove_button: Supprimer
+    title_block: Modifier une idée
+    text_info: Vous éditez un idée déjà existante, ne le changez pas trop pour éviter aux membres de ne pas comprendre.
+    text_alert: Attention ! En modifiant votre idée, vous perdrez les votes qui lui sont associés.
+  delete:
+    title_block: Supprimer une idée
+    text_alert: Êtes-vous certain de vouloir supprimer le contenu ?
+  searchform:
+    search: Rechercher
+    sort: 'Trier :'
+    all_themes: Tous les thèmes
+    no_result:  Aucune idée ne correspond à ces critères de recherche
+  sort:
+    created_at: Date de création
+    popularity: Popularité
+
+#Theme
+theme:
+  index:
+    title: Thèmes
+    description: Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eos, perspiciatis, cupiditate.
+    text_info: Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eos, perspiciatis, cupiditate. Nesciunt eos nam ullam iste iusto similique officia sit enim excepturi numquam natus, ab eum sint perspiciatis repudiandae dolorem.
+    search: Rechercher
+    consultations: "{0} Aucune consultation | {1} 1 consultation | ]1,Inf[ %count% consultations"
+    ideas: "{0} Aucune idée | {1} 1 idée | ]1,Inf[ %count% idées"
+    none: Aucun thème
+  show:
+    body_title: Contexte
+    status:
+      title: "Statut du thème : "
+      opened: "Ouvert"
+      closed: "Fermé"
+      future: "À venir"
+    consultations:
+      none: Aucune consultation associée à ce thème
+    ideas:
+      none: Aucune idée associé à ce thème
+
+#Consultation
+consultation:
+  title: Consultations
+  see_all: Voir toutes les consultations
+  show:
+    status:
+      opened: Consultation ouverte
+      ended: Consultation fermée
+      future: Consultation à venir
+    remaining_days: "{0} Consultation terminée | {1} Dernier jour | ]1,Inf[ %count% jours restants"
+    participants: "{0} Aucun participant | {1} 1 participant | ]1,Inf[ %count% participants"
+    contributions: "{0} Aucune contribution | {1} 1 contribution | ]1,Inf[ %count% contributions"

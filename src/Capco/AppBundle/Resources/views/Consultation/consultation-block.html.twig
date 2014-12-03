@@ -1,0 +1,68 @@
+<div class="col-xs-12  col-sm-6  col-md-4  col-lg-3">
+    <div class="thumbnail  thumbnail--custom  block  block--shadowed">
+        {% if consultation.Media %}
+            <a href="#">
+                {% thumbnail consultation.Media, 'consultation' with {'title': consultation.Media.name, 'alt': consultation.Media.name, 'class': 'img-responsive'} %}
+            </a>
+        {% endif %}
+        <div class="box">
+            <div class="figcaption">
+                <span class="excerpt  h5">
+                    {% for theme in consultation.Themes %}
+                        <a class="excerpt" href="{{ path('app_theme_show', {'slug': theme.slug}) }}">
+                            {{ theme.title }}
+                        </a>
+                        {% if loop.last == false %}, {% endif %}
+                    {% endfor %}
+                </span>
+                <h4 class="h4"><a href="" title="">{{ consultation.title }}</a></h4>
+            </div>
+            <div class="thumbnail__status">
+                <p>
+                    {% if consultation.openingStatus == statuses.opened %}
+                        <span class="label label-success">{{ 'consultation.show.status.opened'|trans({}, 'CapcoAppBundle') }}</span>
+                    {% elseif consultation.openingStatus == statuses.ended %}
+                        <span class="label label-danger">{{ 'consultation.show.status.ended'|trans({}, 'CapcoAppBundle') }}</span>
+                    {% elseif consultation.openingStatus == statuses.future %}
+                        <span class="label label-info">{{ 'consultation.show.status.future'|trans({}, 'CapcoAppBundle') }}</span>
+                    {% endif %}
+                </p>
+                {% set remainingDays = consultation.remainingDays %}
+                {% if remainingDays > 0 %}
+                    <p class="excerpt  h5"><i class="cap-gun"></i>
+                        {% transchoice remainingDays with {'%count%': remainingDays} from 'CapcoAppBundle' %}
+                            consultation.show.remaining_days
+                        {% endtranschoice %}
+                    </p>
+                {% endif %}
+            </div>
+
+            {% set participantCount = consultation.participantCount %}
+            {% set contributionCount = consultation.contributionCount %}
+            {% if participantCount + contributionCount > 0 %}
+                <div class="thumbnail__numbers">
+                    {% if participantCount > 0 %}
+                        <div class="thumbnail__number-block">
+                            <p  class="thumbnail__number">{{ participantCount }}</p>
+                            <h5 class="thumbnail__number__label  excerpt h5">
+                                {% transchoice participantCount with {'%count%': participantCount} from 'CapcoAppBundle' %}
+                                    consultation.show.participants
+                                {% endtranschoice %}
+                            </h5>
+                        </div>
+                    {% endif %}
+                    {% if contributionCount > 0 %}
+                        <div class="thumbnail__number-block">
+                            <p  class="thumbnail__number">{{ contributionCount }}</p>
+                            <h5 class="thumbnail__number__label  excerpt h5">
+                                {% transchoice contributionCount with {'%count%': contributionCount} from 'CapcoAppBundle' %}
+                                    consultation.show.contributions
+                                {% endtranschoice %}
+                            </h5>
+                        </div>
+                    {% endif %}
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</div>

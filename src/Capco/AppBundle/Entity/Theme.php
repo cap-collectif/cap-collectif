@@ -20,6 +20,12 @@ class Theme
 
     const FILTER_ALL = 'all';
 
+    public static $statuses = [
+        'closed' => self::STATUS_CLOSED,
+        'opened' => self::STATUS_OPENED,
+        'future' => self::STATUS_FUTURE,
+    ];
+
     /**
      * @var integer
      *
