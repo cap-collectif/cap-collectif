@@ -11,25 +11,30 @@
     },
     "require": {
         "php": ">=5.3.3",
-        "symfony/symfony": "2.5.*",
+        "symfony/symfony": "2.6.*",
         "doctrine/orm": "~2.2,>=2.2.3",
         "doctrine/doctrine-bundle": "~1.2",
         "twig/extensions": "~1.0",
+        "symfony/assetic-bundle": "~2.3",
         "symfony/swiftmailer-bundle": "~2.3",
         "symfony/monolog-bundle": "~2.4",
         "sensio/distribution-bundle": "~3.0",
         "sensio/framework-extra-bundle": "~3.0",
         "incenteev/composer-parameter-handler": "~2.0",
+
         "doctrine/doctrine-fixtures-bundle": "2.2.*",
         "stof/doctrine-extensions-bundle": "~1.2@dev",
         "hautelook/alice-bundle": "~0.2",
+        
         "elao/web-profiler-extra-bundle": "dev-master",
+        
         "sonata-project/core-bundle": "dev-master",
         "sonata-project/admin-bundle": "dev-master",
         "sonata-project/doctrine-orm-admin-bundle": "dev-master",
         "sonata-project/user-bundle": "dev-master",
         "sonata-project/easy-extends-bundle": "dev-master",
         "sonata-project/media-bundle": "~2.4@dev",
+
         "hwi/oauth-bundle": "0.4.*@dev",
         "liip/imagine-bundle": "~0.9"
     },

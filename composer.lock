@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "57bbe7254a7e5ad0419ee9cb1331be57",
+    "hash": "90ac16feec476360e8d5bef2a189924f",
     "packages": [
         {
             "name": "behat/transliterator",
@@ -12,25 +12,13 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Behat/Transliterator.git",
-                "reference": "2fd406df003d18fc53eb5fa3e89da52068fad6c6",
-                "mirrors": [
-                    {
-                        "url": "/%package%/%normalizedUrl%.%type%",
-                        "preferred": true
-                    }
-                ]
+                "reference": "2fd406df003d18fc53eb5fa3e89da52068fad6c6"
             },
             "dist": {
                 "type": "zip",
                 "url": "https://api.github.com/repos/Behat/Transliterator/zipball/2fd406df003d18fc53eb5fa3e89da52068fad6c6",
                 "reference": "2fd406df003d18fc53eb5fa3e89da52068fad6c6",
-                "shasum": "",
-                "mirrors": [
-                    {
-                        "url": "http://local.toran.org/repo/packagist/dists/%package%/%version%/%reference%.%type%",
-                        "preferred": true
-                    }
-                ]
+                "shasum": ""
             },
             "require": {
                 "php": ">=5.3.3"
@@ -64,25 +52,13 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/cocur/slugify.git",
-                "reference": "2c929c56997e663747be9bb635e58db918a0134f",
-                "mirrors": [
-                    {
-                        "url": "/%package%/%normalizedUrl%.%type%",
-                        "preferred": true
-                    }
-                ]
+                "reference": "2c929c56997e663747be9bb635e58db918a0134f"
             },
             "dist": {
                 "type": "zip",
                 "url": "https://api.github.com/repos/cocur/slugify/zipball/2c929c56997e663747be9bb635e58db918a0134f",
                 "reference": "2c929c56997e663747be9bb635e58db918a0134f",
-                "shasum": "",
-                "mirrors": [
-                    {
-                        "url": "http://local.toran.org/repo/packagist/dists/%package%/%version%/%reference%.%type%",
-                        "preferred": true
-                    }
-                ]
+                "shasum": ""
             },
             "require": {
                 "php": ">=5.3.3"
@@ -136,25 +112,13 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/annotations.git",
-                "reference": "3b6668f54ad3f95d68b64a742f6b0de55d6caeb1",
-                "mirrors": [
-                    {
-                        "url": "/%package%/%normalizedUrl%.%type%",
-                        "preferred": true
-                    }
-                ]
+                "reference": "3b6668f54ad3f95d68b64a742f6b0de55d6caeb1"
             },
             "dist": {
                 "type": "zip",
                 "url": "https://api.github.com/repos/doctrine/annotations/zipball/3b6668f54ad3f95d68b64a742f6b0de55d6caeb1",
                 "reference": "3b6668f54ad3f95d68b64a742f6b0de55d6caeb1",
-                "shasum": "",
-                "mirrors": [
-                    {
-                        "url": "http://local.toran.org/repo/packagist/dists/%package%/%version%/%reference%.%type%",
-                        "preferred": true
-                    }
-                ]
+                "shasum": ""
             },
             "require": {
                 "doctrine/lexer": "1.*",
@@ -216,25 +180,13 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/cache.git",
-                "reference": "9354b720cc97db4a914ab5aa28dbaa822cb3d300",
-                "mirrors": [
-                    {
-                        "url": "/%package%/%normalizedUrl%.%type%",
-                        "preferred": true
-                    }
-                ]
+                "reference": "9354b720cc97db4a914ab5aa28dbaa822cb3d300"
             },
             "dist": {
                 "type": "zip",
                 "url": "https://api.github.com/repos/doctrine/cache/zipball/9354b720cc97db4a914ab5aa28dbaa822cb3d300",
                 "reference": "9354b720cc97db4a914ab5aa28dbaa822cb3d300",
-                "shasum": "",
-                "mirrors": [
-                    {
-                        "url": "http://local.toran.org/repo/packagist/dists/%package%/%version%/%reference%.%type%",
-                        "preferred": true
-                    }
-                ]
+                "shasum": ""
             },
             "require": {
                 "php": ">=5.3.2"
@@ -298,25 +250,13 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/collections.git",
-                "reference": "38ed66e6606309bec203a9df506ffa26d956d21d",
-                "mirrors": [
-                    {
-                        "url": "/%package%/%normalizedUrl%.%type%",
-                        "preferred": true
-                    }
-                ]
+                "reference": "38ed66e6606309bec203a9df506ffa26d956d21d"
             },
             "dist": {
                 "type": "zip",
                 "url": "https://api.github.com/repos/doctrine/collections/zipball/38ed66e6606309bec203a9df506ffa26d956d21d",
                 "reference": "38ed66e6606309bec203a9df506ffa26d956d21d",
-                "shasum": "",
-                "mirrors": [
-                    {
-                        "url": "http://local.toran.org/repo/packagist/dists/%package%/%version%/%reference%.%type%",
-                        "preferred": true
-                    }
-                ]
+                "shasum": ""
             },
             "require": {
                 "php": ">=5.3.2"
@@ -376,25 +316,13 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/common.git",
-                "reference": "559a805125524b0bb6742638784c2979a5c5e607",
-                "mirrors": [
-                    {
-                        "url": "/%package%/%normalizedUrl%.%type%",
-                        "preferred": true
-                    }
-                ]
+                "reference": "559a805125524b0bb6742638784c2979a5c5e607"
             },
             "dist": {
                 "type": "zip",
                 "url": "https://api.github.com/repos/doctrine/common/zipball/559a805125524b0bb6742638784c2979a5c5e607",
                 "reference": "559a805125524b0bb6742638784c2979a5c5e607",
-                "shasum": "",
-                "mirrors": [
-                    {
-                        "url": "http://local.toran.org/repo/packagist/dists/%package%/%version%/%reference%.%type%",
-                        "preferred": true
-                    }
-                ]
+                "shasum": ""
             },
             "require": {
                 "doctrine/annotations": "1.*",
@@ -461,25 +389,13 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/data-fixtures.git",
-                "reference": "ac36ccc812454e057aec564e0725509e74ce6b35",
-                "mirrors": [
-                    {
-                        "url": "/%package%/%normalizedUrl%.%type%",
-                        "preferred": true
-                    }
-                ]
+                "reference": "ac36ccc812454e057aec564e0725509e74ce6b35"
             },
             "dist": {
                 "type": "zip",
                 "url": "https://api.github.com/repos/doctrine/data-fixtures/zipball/ac36ccc812454e057aec564e0725509e74ce6b35",
                 "reference": "ac36ccc812454e057aec564e0725509e74ce6b35",
-                "shasum": "",
-                "mirrors": [
-                    {
-                        "url": "http://local.toran.org/repo/packagist/dists/%package%/%version%/%reference%.%type%",
-                        "preferred": true
-                    }
-                ]
+                "shasum": ""
             },
             "require": {
                 "doctrine/common": "~2.2",
@@ -527,25 +443,13 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/dbal.git",
-                "reference": "ea3715a100f20741d8a2088896f94c09dfeea920",
-                "mirrors": [
-                    {
-                        "url": "/%package%/%normalizedUrl%.%type%",
-                        "preferred": true
-                    }
-                ]
+                "reference": "ea3715a100f20741d8a2088896f94c09dfeea920"
             },
             "dist": {
                 "type": "zip",
                 "url": "https://api.github.com/repos/doctrine/dbal/zipball/ea3715a100f20741d8a2088896f94c09dfeea920",
                 "reference": "ea3715a100f20741d8a2088896f94c09dfeea920",
-                "shasum": "",
-                "mirrors": [
-                    {
-                        "url": "http://local.toran.org/repo/packagist/dists/%package%/%version%/%reference%.%type%",
-                        "preferred": true
-                    }
-                ]
+                "shasum": ""
             },
             "require": {
                 "doctrine/common": ">=2.4,<2.6-dev",
@@ -610,25 +514,13 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/DoctrineBundle.git",
-                "reference": "3beb3a780485ab01f86941f4892cd23ef8c39c6b",
-                "mirrors": [
-                    {
-                        "url": "/%package%/%normalizedUrl%.%type%",
-                        "preferred": true
-                    }
-                ]
+                "reference": "3beb3a780485ab01f86941f4892cd23ef8c39c6b"
             },
             "dist": {
                 "type": "zip",
                 "url": "https://api.github.com/repos/doctrine/DoctrineBundle/zipball/3beb3a780485ab01f86941f4892cd23ef8c39c6b",
                 "reference": "3beb3a780485ab01f86941f4892cd23ef8c39c6b",
-                "shasum": "",
-                "mirrors": [
-                    {
-                        "url": "http://local.toran.org/repo/packagist/dists/%package%/%version%/%reference%.%type%",
-                        "preferred": true
-                    }
-                ]
+                "shasum": ""
             },
             "require": {
                 "doctrine/dbal": "~2.3",
@@ -702,25 +594,13 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/DoctrineCacheBundle.git",
-                "reference": "e4b6f810aa047f9cbfe41c3d6a3d7e83d7477a9d",
-                "mirrors": [
-                    {
-                        "url": "/%package%/%normalizedUrl%.%type%",
-                        "preferred": true
-                    }
-                ]
+                "reference": "e4b6f810aa047f9cbfe41c3d6a3d7e83d7477a9d"
             },
             "dist": {
                 "type": "zip",
                 "url": "https://api.github.com/repos/doctrine/DoctrineCacheBundle/zipball/e4b6f810aa047f9cbfe41c3d6a3d7e83d7477a9d",
                 "reference": "e4b6f810aa047f9cbfe41c3d6a3d7e83d7477a9d",
-                "shasum": "",
-                "mirrors": [
-                    {
-                        "url": "http://local.toran.org/repo/packagist/dists/%package%/%version%/%reference%.%type%",
-                        "preferred": true
-                    }
-                ]
+                "shasum": ""
             },
             "require": {
                 "doctrine/cache": "~1.3",
@@ -798,25 +678,13 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/DoctrineFixturesBundle.git",
-                "reference": "9a5b5289eb22079ec139ba1eb06043d4b89c6677",
-                "mirrors": [
-                    {
-                        "url": "/%package%/%normalizedUrl%.%type%",
-                        "preferred": true
-                    }
-                ]
+                "reference": "9a5b5289eb22079ec139ba1eb06043d4b89c6677"
             },
             "dist": {
                 "type": "zip",
                 "url": "https://api.github.com/repos/doctrine/DoctrineFixturesBundle/zipball/9a5b5289eb22079ec139ba1eb06043d4b89c6677",
                 "reference": "9a5b5289eb22079ec139ba1eb06043d4b89c6677",
-                "shasum": "",
-                "mirrors": [
-                    {
-                        "url": "http://local.toran.org/repo/packagist/dists/%package%/%version%/%reference%.%type%",
-                        "preferred": true
-                    }
-                ]
+                "shasum": ""
             },
             "require": {
                 "doctrine/data-fixtures": "~1.0",
@@ -867,25 +735,13 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/inflector.git",
-                "reference": "8a0b96e65d2399d6f95b75de11134843a2c61feb",
-                "mirrors": [
-                    {
-                        "url": "/%package%/%normalizedUrl%.%type%",
-                        "preferred": true
-                    }
-                ]
+                "reference": "8a0b96e65d2399d6f95b75de11134843a2c61feb"
             },
             "dist": {
                 "type": "zip",
                 "url": "https://api.github.com/repos/doctrine/inflector/zipball/8a0b96e65d2399d6f95b75de11134843a2c61feb",
                 "reference": "8a0b96e65d2399d6f95b75de11134843a2c61feb",
-                "shasum": "",
-                "mirrors": [
-                    {
-                        "url": "http://local.toran.org/repo/packagist/dists/%package%/%version%/%reference%.%type%",
-                        "preferred": true
-                    }
-                ]
+                "shasum": ""
             },
             "require": {
                 "php": ">=5.3.2"
@@ -946,25 +802,13 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/instantiator.git",
-                "reference": "f976e5de371104877ebc89bd8fecb0019ed9c119",
-                "mirrors": [
-                    {
-                        "url": "/%package%/%normalizedUrl%.%type%",
-                        "preferred": true
-                    }
-                ]
+                "reference": "f976e5de371104877ebc89bd8fecb0019ed9c119"
             },
             "dist": {
                 "type": "zip",
                 "url": "https://api.github.com/repos/doctrine/instantiator/zipball/f976e5de371104877ebc89bd8fecb0019ed9c119",
                 "reference": "f976e5de371104877ebc89bd8fecb0019ed9c119",
-                "shasum": "",
-                "mirrors": [
-                    {
-                        "url": "http://local.toran.org/repo/packagist/dists/%package%/%version%/%reference%.%type%",
-                        "preferred": true
-                    }
-                ]
+                "shasum": ""
             },
             "require": {
                 "php": ">=5.3,<8.0-DEV"
@@ -1012,25 +856,13 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/lexer.git",
-                "reference": "83893c552fd2045dd78aef794c31e694c37c0b8c",
-                "mirrors": [
-                    {
-                        "url": "/%package%/%normalizedUrl%.%type%",
-                        "preferred": true
-                    }
-                ]
+                "reference": "83893c552fd2045dd78aef794c31e694c37c0b8c"
             },
             "dist": {
                 "type": "zip",
                 "url": "https://api.github.com/repos/doctrine/lexer/zipball/83893c552fd2045dd78aef794c31e694c37c0b8c",
                 "reference": "83893c552fd2045dd78aef794c31e694c37c0b8c",
-                "shasum": "",
-                "mirrors": [
-                    {
-                        "url": "http://local.toran.org/repo/packagist/dists/%package%/%version%/%reference%.%type%",
-                        "preferred": true
-                    }
-                ]
+                "shasum": ""
             },
             "require": {
                 "php": ">=5.3.2"
@@ -1078,25 +910,13 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/doctrine2.git",
-                "reference": "30bf192cf4a7e0289ab113f44e80b16e6e02e456",
-                "mirrors": [
-                    {
-                        "url": "/%package%/%normalizedUrl%.%type%",
-                        "preferred": true
-                    }
-                ]
+                "reference": "30bf192cf4a7e0289ab113f44e80b16e6e02e456"
             },
             "dist": {
                 "type": "zip",
                 "url": "https://api.github.com/repos/doctrine/doctrine2/zipball/30bf192cf4a7e0289ab113f44e80b16e6e02e456",
                 "reference": "30bf192cf4a7e0289ab113f44e80b16e6e02e456",
-                "shasum": "",
-                "mirrors": [
-                    {
-                        "url": "http://local.toran.org/repo/packagist/dists/%package%/%version%/%reference%.%type%",
-                        "preferred": true
-                    }
-                ]
+                "shasum": ""
             },
             "require": {
                 "doctrine/collections": "~1.2",
@@ -1165,25 +985,13 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Elao/WebProfilerExtraBundle.git",
-                "reference": "082755c2af114ead713259ec7472782917605aaf",
-                "mirrors": [
-                    {
-                        "url": "/%package%/%normalizedUrl%.%type%",
-                        "preferred": true
-                    }
-                ]
+                "reference": "082755c2af114ead713259ec7472782917605aaf"
             },
             "dist": {
                 "type": "zip",
                 "url": "https://api.github.com/repos/Elao/WebProfilerExtraBundle/zipball/082755c2af114ead713259ec7472782917605aaf",
                 "reference": "082755c2af114ead713259ec7472782917605aaf",
-                "shasum": "",
-                "mirrors": [
-                    {
-                        "url": "http://local.toran.org/repo/packagist/dists/%package%/%version%/%reference%.%type%",
-                        "preferred": true
-                    }
-                ]
+                "shasum": ""
             },
             "require": {
                 "symfony/framework-bundle": "~2.1",
@@ -1232,25 +1040,13 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/FriendsOfSymfony/FOSRestBundle.git",
-                "reference": "6bae13c309ea474041ae868f3648f0e2c5452a14",
-                "mirrors": [
-                    {
-                        "url": "/%package%/%normalizedUrl%.%type%",
-                        "preferred": true
-                    }
-                ]
+                "reference": "6bae13c309ea474041ae868f3648f0e2c5452a14"
             },
             "dist": {
                 "type": "zip",
                 "url": "https://api.github.com/repos/FriendsOfSymfony/FOSRestBundle/zipball/6bae13c309ea474041ae868f3648f0e2c5452a14",
                 "reference": "6bae13c309ea474041ae868f3648f0e2c5452a14",
-                "shasum": "",
-                "mirrors": [
-                    {
-                        "url": "http://local.toran.org/repo/packagist/dists/%package%/%version%/%reference%.%type%",
-                        "preferred": true
-                    }
-                ]
+                "shasum": ""
             },
             "require": {
                 "doctrine/inflector": "~1.0",
@@ -1388,25 +1184,13 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/fzaninotto/Faker.git",
-                "reference": "420851d62126509a5444fdd06f15f57ac05ab29a",
-                "mirrors": [
-                    {
-                        "url": "/%package%/%normalizedUrl%.%type%",
-                        "preferred": true
-                    }
-                ]
+                "reference": "420851d62126509a5444fdd06f15f57ac05ab29a"
             },
             "dist": {
                 "type": "zip",
                 "url": "https://api.github.com/repos/fzaninotto/Faker/zipball/420851d62126509a5444fdd06f15f57ac05ab29a",
                 "reference": "420851d62126509a5444fdd06f15f57ac05ab29a",
-                "shasum": "",
-                "mirrors": [
-                    {
-                        "url": "http://local.toran.org/repo/packagist/dists/%package%/%version%/%reference%.%type%",
-                        "preferred": true
-                    }
-                ]
+                "shasum": ""
             },
             "require": {
                 "php": ">=5.3.3"
@@ -1432,7 +1216,7 @@
             ],
             "authors": [
                 {
-                    "name": "François Zaninotto"
+                    "name": "Francois Zaninotto"
                 }
             ],
             "description": "Faker is a PHP library that generates fake data for you.",
@@ -1449,25 +1233,13 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Atlantic18/DoctrineExtensions.git",
-                "reference": "b1c364389992c248fcf50d6793e2fe4042021682",
-                "mirrors": [
-                    {
-                        "url": "/%package%/%normalizedUrl%.%type%",
-                        "preferred": true
-                    }
-                ]
+                "reference": "b1c364389992c248fcf50d6793e2fe4042021682"
             },
             "dist": {
                 "type": "zip",
                 "url": "https://api.github.com/repos/Atlantic18/DoctrineExtensions/zipball/b1c364389992c248fcf50d6793e2fe4042021682",
                 "reference": "b1c364389992c248fcf50d6793e2fe4042021682",
-                "shasum": "",
-                "mirrors": [
-                    {
-                        "url": "http://local.toran.org/repo/packagist/dists/%package%/%version%/%reference%.%type%",
-                        "preferred": true
-                    }
-                ]
+                "shasum": ""
             },
             "require": {
                 "behat/transliterator": "~1.0",
@@ -1596,25 +1368,13 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/hwi/HWIOAuthBundle.git",
-                "reference": "309d802f8de9f39e30851a145a7fc0de69b94076",
-                "mirrors": [
-                    {
-                        "url": "/%package%/%normalizedUrl%.%type%",
-                        "preferred": true
-                    }
-                ]
+                "reference": "309d802f8de9f39e30851a145a7fc0de69b94076"
             },
             "dist": {
                 "type": "zip",
                 "url": "https://api.github.com/repos/hwi/HWIOAuthBundle/zipball/309d802f8de9f39e30851a145a7fc0de69b94076",
                 "reference": "309d802f8de9f39e30851a145a7fc0de69b94076",
-                "shasum": "",
-                "mirrors": [
-                    {
-                        "url": "http://local.toran.org/repo/packagist/dists/%package%/%version%/%reference%.%type%",
-                        "preferred": true
-                    }
-                ]
+                "shasum": ""
             },
             "require": {
                 "kriswallsmith/buzz": "~0.7",
@@ -1718,29 +1478,17 @@
         },
         {
             "name": "imagine/imagine",
-            "version": "0.6.2",
+            "version": "0.5.x-dev",
             "source": {
                 "type": "git",
                 "url": "https://github.com/avalanche123/Imagine.git",
-                "reference": "83ca8babede0e54f935ec09d55a726bf4b0a3f7c",
-                "mirrors": [
-                    {
-                        "url": "/%package%/%normalizedUrl%.%type%",
-                        "preferred": true
-                    }
-                ]
+                "reference": "343580fceed1f89220481ac98480e92f47d91e6c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/avalanche123/Imagine/zipball/83ca8babede0e54f935ec09d55a726bf4b0a3f7c",
-                "reference": "83ca8babede0e54f935ec09d55a726bf4b0a3f7c",
-                "shasum": "",
-                "mirrors": [
-                    {
-                        "url": "http://local.toran.org/repo/packagist/dists/%package%/%version%/%reference%.%type%",
-                        "preferred": true
-                    }
-                ]
+                "url": "https://api.github.com/repos/avalanche123/Imagine/zipball/343580fceed1f89220481ac98480e92f47d91e6c",
+                "reference": "343580fceed1f89220481ac98480e92f47d91e6c",
+                "shasum": ""
             },
             "require": {
                 "php": ">=5.3.2"
@@ -1756,7 +1504,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-develop": "0.7-dev"
+                    "dev-develop": "0.5-dev"
                 }
             },
             "autoload": {
@@ -1783,7 +1531,7 @@
                 "image manipulation",
                 "image processing"
             ],
-            "time": "2014-11-11 11:36:02"
+            "time": "2014-06-13 10:54:04"
         },
         {
             "name": "incenteev/composer-parameter-handler",
@@ -1792,25 +1540,13 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Incenteev/ParameterHandler.git",
-                "reference": "ea15f3dd22e5720eec244afb9bf2d5737a0b6c76",
-                "mirrors": [
-                    {
-                        "url": "/%package%/%normalizedUrl%.%type%",
-                        "preferred": true
-                    }
-                ]
+                "reference": "ea15f3dd22e5720eec244afb9bf2d5737a0b6c76"
             },
             "dist": {
                 "type": "zip",
                 "url": "https://api.github.com/repos/Incenteev/ParameterHandler/zipball/ea15f3dd22e5720eec244afb9bf2d5737a0b6c76",
                 "reference": "ea15f3dd22e5720eec244afb9bf2d5737a0b6c76",
-                "shasum": "",
-                "mirrors": [
-                    {
-                        "url": "http://local.toran.org/repo/packagist/dists/%package%/%version%/%reference%.%type%",
-                        "preferred": true
-                    }
-                ]
+                "shasum": ""
             },
             "require": {
                 "php": ">=5.3.3",
@@ -1855,25 +1591,13 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/jdorn/sql-formatter.git",
-                "reference": "ff0515fa8ce7d97d6cba279e8ed9d51d3eaa0316",
-                "mirrors": [
-                    {
-                        "url": "/%package%/%normalizedUrl%.%type%",
-                        "preferred": true
-                    }
-                ]
+                "reference": "ff0515fa8ce7d97d6cba279e8ed9d51d3eaa0316"
             },
             "dist": {
                 "type": "zip",
                 "url": "https://api.github.com/repos/jdorn/sql-formatter/zipball/ff0515fa8ce7d97d6cba279e8ed9d51d3eaa0316",
                 "reference": "ff0515fa8ce7d97d6cba279e8ed9d51d3eaa0316",
-                "shasum": "",
-                "mirrors": [
-                    {
-                        "url": "http://local.toran.org/repo/packagist/dists/%package%/%version%/%reference%.%type%",
-                        "preferred": true
-                    }
-                ]
+                "shasum": ""
             },
             "require": {
                 "php": ">=5.2.4"
@@ -1920,25 +1644,13 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/schmittjoh/metadata.git",
-                "reference": "22b72455559a25777cfd28c4ffda81ff7639f353",
-                "mirrors": [
-                    {
-                        "url": "/%package%/%normalizedUrl%.%type%",
-                        "preferred": true
-                    }
-                ]
+                "reference": "22b72455559a25777cfd28c4ffda81ff7639f353"
             },
             "dist": {
                 "type": "zip",
                 "url": "https://api.github.com/repos/schmittjoh/metadata/zipball/22b72455559a25777cfd28c4ffda81ff7639f353",
                 "reference": "22b72455559a25777cfd28c4ffda81ff7639f353",
-                "shasum": "",
-                "mirrors": [
-                    {
-                        "url": "http://local.toran.org/repo/packagist/dists/%package%/%version%/%reference%.%type%",
-                        "preferred": true
-                    }
-                ]
+                "shasum": ""
             },
             "require": {
                 "php": ">=5.3.0"
@@ -1984,25 +1696,13 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/schmittjoh/parser-lib.git",
-                "reference": "6067cc609074ae215b96dc51047affee65f77b0f",
-                "mirrors": [
-                    {
-                        "url": "/%package%/%normalizedUrl%.%type%",
-                        "preferred": true
-                    }
-                ]
+                "reference": "6067cc609074ae215b96dc51047affee65f77b0f"
             },
             "dist": {
                 "type": "zip",
                 "url": "https://api.github.com/repos/schmittjoh/parser-lib/zipball/6067cc609074ae215b96dc51047affee65f77b0f",
                 "reference": "6067cc609074ae215b96dc51047affee65f77b0f",
-                "shasum": "",
-                "mirrors": [
-                    {
-                        "url": "http://local.toran.org/repo/packagist/dists/%package%/%version%/%reference%.%type%",
-                        "preferred": true
-                    }
-                ]
+                "shasum": ""
             },
             "require": {
                 "phpoption/phpoption": ">=0.9,<2.0-dev"
@@ -2031,25 +1731,13 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/schmittjoh/serializer.git",
-                "reference": "ba3f4401b5a7b697da18c39968fd9b16cdd2d720",
-                "mirrors": [
-                    {
-                        "url": "/%package%/%normalizedUrl%.%type%",
-                        "preferred": true
-                    }
-                ]
+                "reference": "47cb819658f0c2d1672eb8e3613db562eafb2d75"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/schmittjoh/serializer/zipball/ba3f4401b5a7b697da18c39968fd9b16cdd2d720",
-                "reference": "ba3f4401b5a7b697da18c39968fd9b16cdd2d720",
-                "shasum": "",
-                "mirrors": [
-                    {
-                        "url": "http://local.toran.org/repo/packagist/dists/%package%/%version%/%reference%.%type%",
-                        "preferred": true
-                    }
-                ]
+                "url": "https://api.github.com/repos/schmittjoh/serializer/zipball/47cb819658f0c2d1672eb8e3613db562eafb2d75",
+                "reference": "47cb819658f0c2d1672eb8e3613db562eafb2d75",
+                "shasum": ""
             },
             "require": {
                 "doctrine/annotations": "1.*",
@@ -2062,6 +1750,7 @@
                 "doctrine/orm": "~2.1",
                 "doctrine/phpcr-odm": "~1.0.1",
                 "jackalope/jackalope-doctrine-dbal": "1.0.*",
+                "phpunit/phpunit": "~4.0",
                 "propel/propel1": "~1.7",
                 "symfony/filesystem": "2.*",
                 "symfony/form": "~2.1",
@@ -2103,7 +1792,7 @@
                 "serialization",
                 "xml"
             ],
-            "time": "2014-11-16 21:01:59"
+            "time": "2014-12-03 15:35:26"
         },
         {
             "name": "jms/serializer-bundle",
@@ -2112,25 +1801,13 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/schmittjoh/JMSSerializerBundle.git",
-                "reference": "05965e02bad0922846f010e6ea4c7508549cf20b",
-                "mirrors": [
-                    {
-                        "url": "/%package%/%normalizedUrl%.%type%",
-                        "preferred": true
-                    }
-                ]
+                "reference": "05965e02bad0922846f010e6ea4c7508549cf20b"
             },
             "dist": {
                 "type": "zip",
                 "url": "https://api.github.com/repos/schmittjoh/JMSSerializerBundle/zipball/05965e02bad0922846f010e6ea4c7508549cf20b",
                 "reference": "05965e02bad0922846f010e6ea4c7508549cf20b",
-                "shasum": "",
-                "mirrors": [
-                    {
-                        "url": "http://local.toran.org/repo/packagist/dists/%package%/%version%/%reference%.%type%",
-                        "preferred": true
-                    }
-                ]
+                "shasum": ""
             },
             "require": {
                 "jms/serializer": "~0.11",
@@ -2191,25 +1868,13 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/KnpLabs/Gaufrette.git",
-                "reference": "12376684828a013acfdc20bc29a64155d07e0ddf",
-                "mirrors": [
-                    {
-                        "url": "/%package%/%normalizedUrl%.%type%",
-                        "preferred": true
-                    }
-                ]
+                "reference": "12376684828a013acfdc20bc29a64155d07e0ddf"
             },
             "dist": {
                 "type": "zip",
                 "url": "https://api.github.com/repos/KnpLabs/Gaufrette/zipball/12376684828a013acfdc20bc29a64155d07e0ddf",
                 "reference": "12376684828a013acfdc20bc29a64155d07e0ddf",
-                "shasum": "",
-                "mirrors": [
-                    {
-                        "url": "http://local.toran.org/repo/packagist/dists/%package%/%version%/%reference%.%type%",
-                        "preferred": true
-                    }
-                ]
+                "shasum": ""
             },
             "require": {
                 "php": ">=5.3.2"
@@ -2285,25 +1950,13 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/KnpLabs/KnpMenu.git",
-                "reference": "d6f3cc426c949d9a41925db2be5ffa0e5833f15a",
-                "mirrors": [
-                    {
-                        "url": "/%package%/%normalizedUrl%.%type%",
-                        "preferred": true
-                    }
-                ]
+                "reference": "d6f3cc426c949d9a41925db2be5ffa0e5833f15a"
             },
             "dist": {
                 "type": "zip",
                 "url": "https://api.github.com/repos/KnpLabs/KnpMenu/zipball/d6f3cc426c949d9a41925db2be5ffa0e5833f15a",
                 "reference": "d6f3cc426c949d9a41925db2be5ffa0e5833f15a",
-                "shasum": "",
-                "mirrors": [
-                    {
-                        "url": "http://local.toran.org/repo/packagist/dists/%package%/%version%/%reference%.%type%",
-                        "preferred": true
-                    }
-                ]
+                "shasum": ""
             },
             "require": {
                 "php": ">=5.3.0"
@@ -2362,25 +2015,13 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/KnpLabs/KnpMenuBundle.git",
-                "reference": "bdfc95da5ff7e4e67f948aaa9ea5da835a3a9088",
-                "mirrors": [
-                    {
-                        "url": "/%package%/%normalizedUrl%.%type%",
-                        "preferred": true
-                    }
-                ]
+                "reference": "bdfc95da5ff7e4e67f948aaa9ea5da835a3a9088"
             },
             "dist": {
                 "type": "zip",
                 "url": "https://api.github.com/repos/KnpLabs/KnpMenuBundle/zipball/bdfc95da5ff7e4e67f948aaa9ea5da835a3a9088",
                 "reference": "bdfc95da5ff7e4e67f948aaa9ea5da835a3a9088",
-                "shasum": "",
-                "mirrors": [
-                    {
-                        "url": "http://local.toran.org/repo/packagist/dists/%package%/%version%/%reference%.%type%",
-                        "preferred": true
-                    }
-                ]
+                "shasum": ""
             },
             "require": {
                 "knplabs/knp-menu": "~2.0",
@@ -2422,30 +2063,92 @@
             "time": "2014-08-01 09:57:23"
         },
         {
+            "name": "kriswallsmith/assetic",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/kriswallsmith/assetic.git",
+                "reference": "0db20de988b7adc79375d33b2a566183af83c930"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/kriswallsmith/assetic/zipball/0db20de988b7adc79375d33b2a566183af83c930",
+                "reference": "0db20de988b7adc79375d33b2a566183af83c930",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.1",
+                "symfony/process": "~2.1"
+            },
+            "require-dev": {
+                "cssmin/cssmin": "*",
+                "joliclic/javascript-packer": "*",
+                "kamicane/packager": "*",
+                "leafo/lessphp": "*",
+                "leafo/scssphp": "*",
+                "leafo/scssphp-compass": "*",
+                "mrclay/minify": "*",
+                "patchwork/jsqueeze": "~1.0",
+                "phpunit/phpunit": "~4",
+                "psr/log": "~1.0",
+                "ptachoire/cssembed": "*",
+                "twig/twig": "~1.6"
+            },
+            "suggest": {
+                "leafo/lessphp": "Assetic provides the integration with the lessphp LESS compiler",
+                "leafo/scssphp": "Assetic provides the integration with the scssphp SCSS compiler",
+                "leafo/scssphp-compass": "Assetic provides the integration with the SCSS compass plugin",
+                "patchwork/jsqueeze": "Assetic provides the integration with the JSqueeze JavaScript compressor",
+                "ptachoire/cssembed": "Assetic provides the integration with phpcssembed to embed data uris",
+                "twig/twig": "Assetic provides the integration with the Twig templating engine"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.2-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Assetic": "src/"
+                },
+                "files": [
+                    "src/functions.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Kris Wallsmith",
+                    "email": "kris.wallsmith@gmail.com",
+                    "homepage": "http://kriswallsmith.net/"
+                }
+            ],
+            "description": "Asset Management for PHP",
+            "homepage": "https://github.com/kriswallsmith/assetic",
+            "keywords": [
+                "assets",
+                "compression",
+                "minification"
+            ],
+            "time": "2014-11-25 17:50:26"
+        },
+        {
             "name": "kriswallsmith/buzz",
             "version": "v0.13",
             "source": {
                 "type": "git",
                 "url": "https://github.com/kriswallsmith/Buzz.git",
-                "reference": "487760b05d6269a4c2c374364325326cfa65b12c",
-                "mirrors": [
-                    {
-                        "url": "/%package%/%normalizedUrl%.%type%",
-                        "preferred": true
-                    }
-                ]
+                "reference": "487760b05d6269a4c2c374364325326cfa65b12c"
             },
             "dist": {
                 "type": "zip",
                 "url": "https://api.github.com/repos/kriswallsmith/Buzz/zipball/487760b05d6269a4c2c374364325326cfa65b12c",
                 "reference": "487760b05d6269a4c2c374364325326cfa65b12c",
-                "shasum": "",
-                "mirrors": [
-                    {
-                        "url": "http://local.toran.org/repo/packagist/dists/%package%/%version%/%reference%.%type%",
-                        "preferred": true
-                    }
-                ]
+                "shasum": ""
             },
             "require": {
                 "php": ">=5.3.0"
@@ -2483,33 +2186,21 @@
         },
         {
             "name": "liip/imagine-bundle",
-            "version": "v0.21.0",
+            "version": "0.x-dev",
             "target-dir": "Liip/ImagineBundle",
             "source": {
                 "type": "git",
                 "url": "https://github.com/liip/LiipImagineBundle.git",
-                "reference": "b50e1b6e8720b8f4e3cd0dac7f95c0418ae951b1",
-                "mirrors": [
-                    {
-                        "url": "/%package%/%normalizedUrl%.%type%",
-                        "preferred": true
-                    }
-                ]
+                "reference": "e39b7c1d5a969605690ef5f9ab1f837bf4083b5f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/liip/LiipImagineBundle/zipball/b50e1b6e8720b8f4e3cd0dac7f95c0418ae951b1",
-                "reference": "b50e1b6e8720b8f4e3cd0dac7f95c0418ae951b1",
-                "shasum": "",
-                "mirrors": [
-                    {
-                        "url": "http://local.toran.org/repo/packagist/dists/%package%/%version%/%reference%.%type%",
-                        "preferred": true
-                    }
-                ]
+                "url": "https://api.github.com/repos/liip/LiipImagineBundle/zipball/e39b7c1d5a969605690ef5f9ab1f837bf4083b5f",
+                "reference": "e39b7c1d5a969605690ef5f9ab1f837bf4083b5f",
+                "shasum": ""
             },
             "require": {
-                "imagine/imagine": "0.6.*",
+                "imagine/imagine": "0.5.*",
                 "php": ">=5.3.2",
                 "symfony/filesystem": ">=2.0.16,~2.0",
                 "symfony/finder": ">=2.0.16,~2.0",
@@ -2546,7 +2237,7 @@
                 "image",
                 "imagine"
             ],
-            "time": "2014-03-14 16:06:59"
+            "time": "2014-03-23 14:00:21"
         },
         {
             "name": "michelf/php-markdown",
@@ -2554,25 +2245,13 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/michelf/php-markdown.git",
-                "reference": "a8c56ecd5e9e7c7d37d00c814c864c3bc8b32694",
-                "mirrors": [
-                    {
-                        "url": "/%package%/%normalizedUrl%.%type%",
-                        "preferred": true
-                    }
-                ]
+                "reference": "a8c56ecd5e9e7c7d37d00c814c864c3bc8b32694"
             },
             "dist": {
                 "type": "zip",
                 "url": "https://api.github.com/repos/michelf/php-markdown/zipball/a8c56ecd5e9e7c7d37d00c814c864c3bc8b32694",
                 "reference": "a8c56ecd5e9e7c7d37d00c814c864c3bc8b32694",
-                "shasum": "",
-                "mirrors": [
-                    {
-                        "url": "http://local.toran.org/repo/packagist/dists/%package%/%version%/%reference%.%type%",
-                        "preferred": true
-                    }
-                ]
+                "shasum": ""
             },
             "require": {
                 "php": ">=5.3.0"
@@ -2617,25 +2296,13 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Seldaek/monolog.git",
-                "reference": "ab41ed9a94196ce2793f400b88313918b4fc64dc",
-                "mirrors": [
-                    {
-                        "url": "/%package%/%normalizedUrl%.%type%",
-                        "preferred": true
-                    }
-                ]
+                "reference": "ab41ed9a94196ce2793f400b88313918b4fc64dc"
             },
             "dist": {
                 "type": "zip",
                 "url": "https://api.github.com/repos/Seldaek/monolog/zipball/ab41ed9a94196ce2793f400b88313918b4fc64dc",
                 "reference": "ab41ed9a94196ce2793f400b88313918b4fc64dc",
-                "shasum": "",
-                "mirrors": [
-                    {
-                        "url": "http://local.toran.org/repo/packagist/dists/%package%/%version%/%reference%.%type%",
-                        "preferred": true
-                    }
-                ]
+                "shasum": ""
             },
             "require": {
                 "php": ">=5.3.0",
@@ -2701,25 +2368,13 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/nelmio/alice.git",
-                "reference": "0fe63893b561871d6c9f42b0d00d5bb4ddb9c0f8",
-                "mirrors": [
-                    {
-                        "url": "/%package%/%normalizedUrl%.%type%",
-                        "preferred": true
-                    }
-                ]
+                "reference": "0fe63893b561871d6c9f42b0d00d5bb4ddb9c0f8"
             },
             "dist": {
                 "type": "zip",
                 "url": "https://api.github.com/repos/nelmio/alice/zipball/0fe63893b561871d6c9f42b0d00d5bb4ddb9c0f8",
                 "reference": "0fe63893b561871d6c9f42b0d00d5bb4ddb9c0f8",
-                "shasum": "",
-                "mirrors": [
-                    {
-                        "url": "http://local.toran.org/repo/packagist/dists/%package%/%version%/%reference%.%type%",
-                        "preferred": true
-                    }
-                ]
+                "shasum": ""
             },
             "require": {
                 "fzaninotto/faker": "~1.0",
@@ -2771,25 +2426,13 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/nelmio/NelmioApiDocBundle.git",
-                "reference": "847b1fe757c6b4eb79db7bcff0d423da4d193e59",
-                "mirrors": [
-                    {
-                        "url": "/%package%/%normalizedUrl%.%type%",
-                        "preferred": true
-                    }
-                ]
+                "reference": "847b1fe757c6b4eb79db7bcff0d423da4d193e59"
             },
             "dist": {
                 "type": "zip",
                 "url": "https://api.github.com/repos/nelmio/NelmioApiDocBundle/zipball/847b1fe757c6b4eb79db7bcff0d423da4d193e59",
                 "reference": "847b1fe757c6b4eb79db7bcff0d423da4d193e59",
-                "shasum": "",
-                "mirrors": [
-                    {
-                        "url": "http://local.toran.org/repo/packagist/dists/%package%/%version%/%reference%.%type%",
-                        "preferred": true
-                    }
-                ]
+                "shasum": ""
             },
             "require": {
                 "michelf/php-markdown": "~1.4",
@@ -2857,25 +2500,13 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/schmittjoh/php-collection.git",
-                "reference": "94a2c04376f49c12d5936b16d846579a1b3605bc",
-                "mirrors": [
-                    {
-                        "url": "/%package%/%normalizedUrl%.%type%",
-                        "preferred": true
-                    }
-                ]
+                "reference": "94a2c04376f49c12d5936b16d846579a1b3605bc"
             },
             "dist": {
                 "type": "zip",
                 "url": "https://api.github.com/repos/schmittjoh/php-collection/zipball/94a2c04376f49c12d5936b16d846579a1b3605bc",
                 "reference": "94a2c04376f49c12d5936b16d846579a1b3605bc",
-                "shasum": "",
-                "mirrors": [
-                    {
-                        "url": "http://local.toran.org/repo/packagist/dists/%package%/%version%/%reference%.%type%",
-                        "preferred": true
-                    }
-                ]
+                "shasum": ""
             },
             "require": {
                 "phpoption/phpoption": "1.*"
@@ -2919,25 +2550,13 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/schmittjoh/php-option.git",
-                "reference": "5d099bcf0393908bf4ad69cc47dafb785d51f7f5",
-                "mirrors": [
-                    {
-                        "url": "/%package%/%normalizedUrl%.%type%",
-                        "preferred": true
-                    }
-                ]
+                "reference": "5d099bcf0393908bf4ad69cc47dafb785d51f7f5"
             },
             "dist": {
                 "type": "zip",
                 "url": "https://api.github.com/repos/schmittjoh/php-option/zipball/5d099bcf0393908bf4ad69cc47dafb785d51f7f5",
                 "reference": "5d099bcf0393908bf4ad69cc47dafb785d51f7f5",
-                "shasum": "",
-                "mirrors": [
-                    {
-                        "url": "http://local.toran.org/repo/packagist/dists/%package%/%version%/%reference%.%type%",
-                        "preferred": true
-                    }
-                ]
+                "shasum": ""
             },
             "require": {
                 "php": ">=5.3.0"
@@ -2980,25 +2599,13 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-fig/log.git",
-                "reference": "a78d6504ff5d4367497785ab2ade91db3a9fbe11",
-                "mirrors": [
-                    {
-                        "url": "/%package%/%normalizedUrl%.%type%",
-                        "preferred": true
-                    }
-                ]
+                "reference": "a78d6504ff5d4367497785ab2ade91db3a9fbe11"
             },
             "dist": {
                 "type": "zip",
                 "url": "https://api.github.com/repos/php-fig/log/zipball/a78d6504ff5d4367497785ab2ade91db3a9fbe11",
                 "reference": "a78d6504ff5d4367497785ab2ade91db3a9fbe11",
-                "shasum": "",
-                "mirrors": [
-                    {
-                        "url": "http://local.toran.org/repo/packagist/dists/%package%/%version%/%reference%.%type%",
-                        "preferred": true
-                    }
-                ]
+                "shasum": ""
             },
             "type": "library",
             "extra": {
@@ -3036,25 +2643,13 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sensiolabs/SensioDistributionBundle.git",
-                "reference": "ca188a500a7bef815a46f19f8616f0a775e7dbf2",
-                "mirrors": [
-                    {
-                        "url": "/%package%/%normalizedUrl%.%type%",
-                        "preferred": true
-                    }
-                ]
+                "reference": "fcb1b0d52c5b5396228e52e65bc6924e9797ee84"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sensiolabs/SensioDistributionBundle/zipball/ca188a500a7bef815a46f19f8616f0a775e7dbf2",
-                "reference": "ca188a500a7bef815a46f19f8616f0a775e7dbf2",
-                "shasum": "",
-                "mirrors": [
-                    {
-                        "url": "http://local.toran.org/repo/packagist/dists/%package%/%version%/%reference%.%type%",
-                        "preferred": true
-                    }
-                ]
+                "url": "https://api.github.com/repos/sensiolabs/SensioDistributionBundle/zipball/fcb1b0d52c5b5396228e52e65bc6924e9797ee84",
+                "reference": "fcb1b0d52c5b5396228e52e65bc6924e9797ee84",
+                "shasum": ""
             },
             "require": {
                 "php": ">=5.3.3",
@@ -3092,7 +2687,7 @@
                 "configuration",
                 "distribution"
             ],
-            "time": "2014-11-23 18:30:35"
+            "time": "2014-12-03 13:51:42"
         },
         {
             "name": "sensio/framework-extra-bundle",
@@ -3101,25 +2696,13 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sensiolabs/SensioFrameworkExtraBundle.git",
-                "reference": "b3bc3e67c8b6b68b18d727012183520d35ee762a",
-                "mirrors": [
-                    {
-                        "url": "/%package%/%normalizedUrl%.%type%",
-                        "preferred": true
-                    }
-                ]
+                "reference": "b3bc3e67c8b6b68b18d727012183520d35ee762a"
             },
             "dist": {
                 "type": "zip",
                 "url": "https://api.github.com/repos/sensiolabs/SensioFrameworkExtraBundle/zipball/b3bc3e67c8b6b68b18d727012183520d35ee762a",
                 "reference": "b3bc3e67c8b6b68b18d727012183520d35ee762a",
-                "shasum": "",
-                "mirrors": [
-                    {
-                        "url": "http://local.toran.org/repo/packagist/dists/%package%/%version%/%reference%.%type%",
-                        "preferred": true
-                    }
-                ]
+                "shasum": ""
             },
             "require": {
                 "doctrine/common": "~2.2",
@@ -3168,25 +2751,13 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sensiolabs/SensioGeneratorBundle.git",
-                "reference": "29e6fff09198f98196e6223fc78bf0c70a89ffac",
-                "mirrors": [
-                    {
-                        "url": "/%package%/%normalizedUrl%.%type%",
-                        "preferred": true
-                    }
-                ]
+                "reference": "29e6fff09198f98196e6223fc78bf0c70a89ffac"
             },
             "dist": {
                 "type": "zip",
                 "url": "https://api.github.com/repos/sensiolabs/SensioGeneratorBundle/zipball/29e6fff09198f98196e6223fc78bf0c70a89ffac",
                 "reference": "29e6fff09198f98196e6223fc78bf0c70a89ffac",
-                "shasum": "",
-                "mirrors": [
-                    {
-                        "url": "http://local.toran.org/repo/packagist/dists/%package%/%version%/%reference%.%type%",
-                        "preferred": true
-                    }
-                ]
+                "shasum": ""
             },
             "require": {
                 "symfony/console": "~2.0",
@@ -3227,25 +2798,13 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sensiolabs/security-checker.git",
-                "reference": "5b4eb4743ebe68276c911c84101ecdf4a9ae76ee",
-                "mirrors": [
-                    {
-                        "url": "/%package%/%normalizedUrl%.%type%",
-                        "preferred": true
-                    }
-                ]
+                "reference": "5b4eb4743ebe68276c911c84101ecdf4a9ae76ee"
             },
             "dist": {
                 "type": "zip",
                 "url": "https://api.github.com/repos/sensiolabs/security-checker/zipball/5b4eb4743ebe68276c911c84101ecdf4a9ae76ee",
                 "reference": "5b4eb4743ebe68276c911c84101ecdf4a9ae76ee",
-                "shasum": "",
-                "mirrors": [
-                    {
-                        "url": "http://local.toran.org/repo/packagist/dists/%package%/%version%/%reference%.%type%",
-                        "preferred": true
-                    }
-                ]
+                "shasum": ""
             },
             "require": {
                 "ext-curl": "*",
@@ -3284,25 +2843,13 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sonata-project/SonataAdminBundle.git",
-                "reference": "4aa1f63a360f786a3e8898de5c5984ca24fd43d3",
-                "mirrors": [
-                    {
-                        "url": "/%package%/%normalizedUrl%.%type%",
-                        "preferred": true
-                    }
-                ]
+                "reference": "4aa1f63a360f786a3e8898de5c5984ca24fd43d3"
             },
             "dist": {
                 "type": "zip",
                 "url": "https://api.github.com/repos/sonata-project/SonataAdminBundle/zipball/4aa1f63a360f786a3e8898de5c5984ca24fd43d3",
                 "reference": "4aa1f63a360f786a3e8898de5c5984ca24fd43d3",
-                "shasum": "",
-                "mirrors": [
-                    {
-                        "url": "http://local.toran.org/repo/packagist/dists/%package%/%version%/%reference%.%type%",
-                        "preferred": true
-                    }
-                ]
+                "shasum": ""
             },
             "require": {
                 "doctrine/common": "~2.2",
@@ -3375,25 +2922,13 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sonata-project/SonataBlockBundle.git",
-                "reference": "254f05b01b0de0665bb5de9bff7d9e2e71fcb8a6",
-                "mirrors": [
-                    {
-                        "url": "/%package%/%normalizedUrl%.%type%",
-                        "preferred": true
-                    }
-                ]
+                "reference": "254f05b01b0de0665bb5de9bff7d9e2e71fcb8a6"
             },
             "dist": {
                 "type": "zip",
                 "url": "https://api.github.com/repos/sonata-project/SonataBlockBundle/zipball/254f05b01b0de0665bb5de9bff7d9e2e71fcb8a6",
                 "reference": "254f05b01b0de0665bb5de9bff7d9e2e71fcb8a6",
-                "shasum": "",
-                "mirrors": [
-                    {
-                        "url": "http://local.toran.org/repo/packagist/dists/%package%/%version%/%reference%.%type%",
-                        "preferred": true
-                    }
-                ]
+                "shasum": ""
             },
             "require": {
                 "doctrine/common": "~2.3",
@@ -3451,25 +2986,13 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sonata-project/cache.git",
-                "reference": "13f37c714edf559d5674633add3dce172e6b6ad2",
-                "mirrors": [
-                    {
-                        "url": "/%package%/%normalizedUrl%.%type%",
-                        "preferred": true
-                    }
-                ]
+                "reference": "13f37c714edf559d5674633add3dce172e6b6ad2"
             },
             "dist": {
                 "type": "zip",
                 "url": "https://api.github.com/repos/sonata-project/cache/zipball/13f37c714edf559d5674633add3dce172e6b6ad2",
                 "reference": "13f37c714edf559d5674633add3dce172e6b6ad2",
-                "shasum": "",
-                "mirrors": [
-                    {
-                        "url": "http://local.toran.org/repo/packagist/dists/%package%/%version%/%reference%.%type%",
-                        "preferred": true
-                    }
-                ]
+                "shasum": ""
             },
             "require-dev": {
                 "doctrine/orm": "~2.2",
@@ -3524,25 +3047,13 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sonata-project/SonataClassificationBundle.git",
-                "reference": "2012b9733e38ef67b1373d7deab06eb3dc0206b6",
-                "mirrors": [
-                    {
-                        "url": "/%package%/%normalizedUrl%.%type%",
-                        "preferred": true
-                    }
-                ]
+                "reference": "2012b9733e38ef67b1373d7deab06eb3dc0206b6"
             },
             "dist": {
                 "type": "zip",
                 "url": "https://api.github.com/repos/sonata-project/SonataClassificationBundle/zipball/2012b9733e38ef67b1373d7deab06eb3dc0206b6",
                 "reference": "2012b9733e38ef67b1373d7deab06eb3dc0206b6",
-                "shasum": "",
-                "mirrors": [
-                    {
-                        "url": "http://local.toran.org/repo/packagist/dists/%package%/%version%/%reference%.%type%",
-                        "preferred": true
-                    }
-                ]
+                "shasum": ""
             },
             "require": {
                 "sonata-project/datagrid-bundle": "~2.2@dev",
@@ -3598,25 +3109,13 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sonata-project/SonataCoreBundle.git",
-                "reference": "c4b5743bb66b28b97a9f87c18cc81930bb37a344",
-                "mirrors": [
-                    {
-                        "url": "/%package%/%normalizedUrl%.%type%",
-                        "preferred": true
-                    }
-                ]
+                "reference": "c4b5743bb66b28b97a9f87c18cc81930bb37a344"
             },
             "dist": {
                 "type": "zip",
                 "url": "https://api.github.com/repos/sonata-project/SonataCoreBundle/zipball/c4b5743bb66b28b97a9f87c18cc81930bb37a344",
                 "reference": "c4b5743bb66b28b97a9f87c18cc81930bb37a344",
-                "shasum": "",
-                "mirrors": [
-                    {
-                        "url": "http://local.toran.org/repo/packagist/dists/%package%/%version%/%reference%.%type%",
-                        "preferred": true
-                    }
-                ]
+                "shasum": ""
             },
             "require": {
                 "cocur/slugify": "*",
@@ -3675,25 +3174,13 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sonata-project/SonataDatagridBundle.git",
-                "reference": "dba166c6c52591f1bfafa8514b848a3bae23a557",
-                "mirrors": [
-                    {
-                        "url": "/%package%/%normalizedUrl%.%type%",
-                        "preferred": true
-                    }
-                ]
+                "reference": "dba166c6c52591f1bfafa8514b848a3bae23a557"
             },
             "dist": {
                 "type": "zip",
                 "url": "https://api.github.com/repos/sonata-project/SonataDatagridBundle/zipball/dba166c6c52591f1bfafa8514b848a3bae23a557",
                 "reference": "dba166c6c52591f1bfafa8514b848a3bae23a557",
-                "shasum": "",
-                "mirrors": [
-                    {
-                        "url": "http://local.toran.org/repo/packagist/dists/%package%/%version%/%reference%.%type%",
-                        "preferred": true
-                    }
-                ]
+                "shasum": ""
             },
             "require-dev": {
                 "doctrine/orm": "~2.4"
@@ -3738,25 +3225,13 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sonata-project/sonata-doctrine-extensions.git",
-                "reference": "4c6e9bd3ac9ef4c2f19e552a63d4926db5a9400f",
-                "mirrors": [
-                    {
-                        "url": "/%package%/%normalizedUrl%.%type%",
-                        "preferred": true
-                    }
-                ]
+                "reference": "4c6e9bd3ac9ef4c2f19e552a63d4926db5a9400f"
             },
             "dist": {
                 "type": "zip",
                 "url": "https://api.github.com/repos/sonata-project/sonata-doctrine-extensions/zipball/4c6e9bd3ac9ef4c2f19e552a63d4926db5a9400f",
                 "reference": "4c6e9bd3ac9ef4c2f19e552a63d4926db5a9400f",
-                "shasum": "",
-                "mirrors": [
-                    {
-                        "url": "http://local.toran.org/repo/packagist/dists/%package%/%version%/%reference%.%type%",
-                        "preferred": true
-                    }
-                ]
+                "shasum": ""
             },
             "require": {
                 "doctrine/dbal": "~2.2",
@@ -3799,25 +3274,13 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sonata-project/SonataDoctrineORMAdminBundle.git",
-                "reference": "3027353a6d27eb2be3674f1887e470e410a8a57d",
-                "mirrors": [
-                    {
-                        "url": "/%package%/%normalizedUrl%.%type%",
-                        "preferred": true
-                    }
-                ]
+                "reference": "3027353a6d27eb2be3674f1887e470e410a8a57d"
             },
             "dist": {
                 "type": "zip",
                 "url": "https://api.github.com/repos/sonata-project/SonataDoctrineORMAdminBundle/zipball/3027353a6d27eb2be3674f1887e470e410a8a57d",
                 "reference": "3027353a6d27eb2be3674f1887e470e410a8a57d",
-                "shasum": "",
-                "mirrors": [
-                    {
-                        "url": "http://local.toran.org/repo/packagist/dists/%package%/%version%/%reference%.%type%",
-                        "preferred": true
-                    }
-                ]
+                "shasum": ""
             },
             "require": {
                 "doctrine/orm": "~2.3",
@@ -3881,25 +3344,13 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sonata-project/SonataEasyExtendsBundle.git",
-                "reference": "d9020db119d6a0030272d163d14f419084561830",
-                "mirrors": [
-                    {
-                        "url": "/%package%/%normalizedUrl%.%type%",
-                        "preferred": true
-                    }
-                ]
+                "reference": "d9020db119d6a0030272d163d14f419084561830"
             },
             "dist": {
                 "type": "zip",
                 "url": "https://api.github.com/repos/sonata-project/SonataEasyExtendsBundle/zipball/d9020db119d6a0030272d163d14f419084561830",
                 "reference": "d9020db119d6a0030272d163d14f419084561830",
-                "shasum": "",
-                "mirrors": [
-                    {
-                        "url": "http://local.toran.org/repo/packagist/dists/%package%/%version%/%reference%.%type%",
-                        "preferred": true
-                    }
-                ]
+                "shasum": ""
             },
             "require": {
                 "php": ">=5.3.2",
@@ -3950,25 +3401,13 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sonata-project/exporter.git",
-                "reference": "8a88328ccdd1ca1471dd14483a4396350fbda91c",
-                "mirrors": [
-                    {
-                        "url": "/%package%/%normalizedUrl%.%type%",
-                        "preferred": true
-                    }
-                ]
+                "reference": "8a88328ccdd1ca1471dd14483a4396350fbda91c"
             },
             "dist": {
                 "type": "zip",
                 "url": "https://api.github.com/repos/sonata-project/exporter/zipball/8a88328ccdd1ca1471dd14483a4396350fbda91c",
                 "reference": "8a88328ccdd1ca1471dd14483a4396350fbda91c",
-                "shasum": "",
-                "mirrors": [
-                    {
-                        "url": "http://local.toran.org/repo/packagist/dists/%package%/%version%/%reference%.%type%",
-                        "preferred": true
-                    }
-                ]
+                "shasum": ""
             },
             "require": {
                 "php": ">=5.3.0"
@@ -4023,25 +3462,13 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sonata-project/GoogleAuthenticator.git",
-                "reference": "72f47caddd09d09c0d3c3e046f6b435e0c004cd4",
-                "mirrors": [
-                    {
-                        "url": "/%package%/%normalizedUrl%.%type%",
-                        "preferred": true
-                    }
-                ]
+                "reference": "72f47caddd09d09c0d3c3e046f6b435e0c004cd4"
             },
             "dist": {
                 "type": "zip",
                 "url": "https://api.github.com/repos/sonata-project/GoogleAuthenticator/zipball/72f47caddd09d09c0d3c3e046f6b435e0c004cd4",
                 "reference": "72f47caddd09d09c0d3c3e046f6b435e0c004cd4",
-                "shasum": "",
-                "mirrors": [
-                    {
-                        "url": "http://local.toran.org/repo/packagist/dists/%package%/%version%/%reference%.%type%",
-                        "preferred": true
-                    }
-                ]
+                "shasum": ""
             },
             "require": {
                 "php": ">=5.3.0"
@@ -4085,25 +3512,13 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sonata-project/SonataIntlBundle.git",
-                "reference": "292fad908cd6a02d48bdd8ac9ac76d4cbffd0e59",
-                "mirrors": [
-                    {
-                        "url": "/%package%/%normalizedUrl%.%type%",
-                        "preferred": true
-                    }
-                ]
+                "reference": "292fad908cd6a02d48bdd8ac9ac76d4cbffd0e59"
             },
             "dist": {
                 "type": "zip",
                 "url": "https://api.github.com/repos/sonata-project/SonataIntlBundle/zipball/292fad908cd6a02d48bdd8ac9ac76d4cbffd0e59",
                 "reference": "292fad908cd6a02d48bdd8ac9ac76d4cbffd0e59",
-                "shasum": "",
-                "mirrors": [
-                    {
-                        "url": "http://local.toran.org/repo/packagist/dists/%package%/%version%/%reference%.%type%",
-                        "preferred": true
-                    }
-                ]
+                "shasum": ""
             },
             "require": {
                 "symfony/dependency-injection": "~2.2",
@@ -4159,25 +3574,13 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sonata-project/SonataMediaBundle.git",
-                "reference": "ee84fbe02f15e770db9435f7d56f18e0269593b2",
-                "mirrors": [
-                    {
-                        "url": "/%package%/%normalizedUrl%.%type%",
-                        "preferred": true
-                    }
-                ]
+                "reference": "ee84fbe02f15e770db9435f7d56f18e0269593b2"
             },
             "dist": {
                 "type": "zip",
                 "url": "https://api.github.com/repos/sonata-project/SonataMediaBundle/zipball/ee84fbe02f15e770db9435f7d56f18e0269593b2",
                 "reference": "ee84fbe02f15e770db9435f7d56f18e0269593b2",
-                "shasum": "",
-                "mirrors": [
-                    {
-                        "url": "http://local.toran.org/repo/packagist/dists/%package%/%version%/%reference%.%type%",
-                        "preferred": true
-                    }
-                ]
+                "shasum": ""
             },
             "require": {
                 "friendsofsymfony/rest-bundle": "~1.1",
@@ -4258,25 +3661,13 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sonata-project/SonataNotificationBundle.git",
-                "reference": "b3faa4623998688b893ffcf191dfe79ff72df8a2",
-                "mirrors": [
-                    {
-                        "url": "/%package%/%normalizedUrl%.%type%",
-                        "preferred": true
-                    }
-                ]
+                "reference": "b3faa4623998688b893ffcf191dfe79ff72df8a2"
             },
             "dist": {
                 "type": "zip",
                 "url": "https://api.github.com/repos/sonata-project/SonataNotificationBundle/zipball/b3faa4623998688b893ffcf191dfe79ff72df8a2",
                 "reference": "b3faa4623998688b893ffcf191dfe79ff72df8a2",
-                "shasum": "",
-                "mirrors": [
-                    {
-                        "url": "http://local.toran.org/repo/packagist/dists/%package%/%version%/%reference%.%type%",
-                        "preferred": true
-                    }
-                ]
+                "shasum": ""
             },
             "require": {
                 "friendsofsymfony/rest-bundle": "~1.1",
@@ -4341,25 +3732,13 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sonata-project/SonataUserBundle.git",
-                "reference": "923b8199cdce1b51f7c4fb845211f16a9402fab2",
-                "mirrors": [
-                    {
-                        "url": "/%package%/%normalizedUrl%.%type%",
-                        "preferred": true
-                    }
-                ]
+                "reference": "923b8199cdce1b51f7c4fb845211f16a9402fab2"
             },
             "dist": {
                 "type": "zip",
                 "url": "https://api.github.com/repos/sonata-project/SonataUserBundle/zipball/923b8199cdce1b51f7c4fb845211f16a9402fab2",
                 "reference": "923b8199cdce1b51f7c4fb845211f16a9402fab2",
-                "shasum": "",
-                "mirrors": [
-                    {
-                        "url": "http://local.toran.org/repo/packagist/dists/%package%/%version%/%reference%.%type%",
-                        "preferred": true
-                    }
-                ]
+                "shasum": ""
             },
             "require": {
                 "friendsofsymfony/rest-bundle": "~1.1",
@@ -4486,25 +3865,13 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/swiftmailer/swiftmailer.git",
-                "reference": "e1f77dd0109e1137bcdeaccb9197c95d17624cab",
-                "mirrors": [
-                    {
-                        "url": "/%package%/%normalizedUrl%.%type%",
-                        "preferred": true
-                    }
-                ]
+                "reference": "e1f77dd0109e1137bcdeaccb9197c95d17624cab"
             },
             "dist": {
                 "type": "zip",
                 "url": "https://api.github.com/repos/swiftmailer/swiftmailer/zipball/e1f77dd0109e1137bcdeaccb9197c95d17624cab",
                 "reference": "e1f77dd0109e1137bcdeaccb9197c95d17624cab",
-                "shasum": "",
-                "mirrors": [
-                    {
-                        "url": "http://local.toran.org/repo/packagist/dists/%package%/%version%/%reference%.%type%",
-                        "preferred": true
-                    }
-                ]
+                "shasum": ""
             },
             "require": {
                 "php": ">=5.3.3"
@@ -4545,30 +3912,82 @@
             "time": "2014-11-30 16:14:17"
         },
         {
+            "name": "symfony/assetic-bundle",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/AsseticBundle.git",
+                "reference": "90ea7fb66d6d5245fd4afc16e4c8070214254fec"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/AsseticBundle/zipball/90ea7fb66d6d5245fd4afc16e4c8070214254fec",
+                "reference": "90ea7fb66d6d5245fd4afc16e4c8070214254fec",
+                "shasum": ""
+            },
+            "require": {
+                "kriswallsmith/assetic": "~1.2",
+                "php": ">=5.3.0",
+                "symfony/console": "~2.1",
+                "symfony/framework-bundle": "~2.1",
+                "symfony/yaml": "~2.1"
+            },
+            "require-dev": {
+                "kriswallsmith/spork": "~0.2",
+                "patchwork/jsqueeze": "~1.0",
+                "symfony/class-loader": "~2.1",
+                "symfony/css-selector": "~2.1",
+                "symfony/dom-crawler": "~2.1",
+                "symfony/twig-bundle": "~2.1"
+            },
+            "suggest": {
+                "kriswallsmith/spork": "to be able to dump assets in parallel",
+                "symfony/twig-bundle": "to use the Twig integration"
+            },
+            "type": "symfony-bundle",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.5-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Symfony\\Bundle\\AsseticBundle\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Kris Wallsmith",
+                    "email": "kris.wallsmith@gmail.com",
+                    "homepage": "http://kriswallsmith.net/"
+                }
+            ],
+            "description": "Integrates Assetic into Symfony2",
+            "homepage": "https://github.com/symfony/AsseticBundle",
+            "keywords": [
+                "assets",
+                "compression",
+                "minification"
+            ],
+            "time": "2014-10-15 12:03:38"
+        },
+        {
             "name": "symfony/monolog-bundle",
             "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/MonologBundle.git",
-                "reference": "cff4dc5326530b1abdde7a2369645d8599c24dd3",
-                "mirrors": [
-                    {
-                        "url": "/%package%/%normalizedUrl%.%type%",
-                        "preferred": true
-                    }
-                ]
+                "reference": "cff4dc5326530b1abdde7a2369645d8599c24dd3"
             },
             "dist": {
                 "type": "zip",
                 "url": "https://api.github.com/repos/symfony/MonologBundle/zipball/cff4dc5326530b1abdde7a2369645d8599c24dd3",
                 "reference": "cff4dc5326530b1abdde7a2369645d8599c24dd3",
-                "shasum": "",
-                "mirrors": [
-                    {
-                        "url": "http://local.toran.org/repo/packagist/dists/%package%/%version%/%reference%.%type%",
-                        "preferred": true
-                    }
-                ]
+                "shasum": ""
             },
             "require": {
                 "monolog/monolog": "~1.8",
@@ -4621,25 +4040,13 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/SwiftmailerBundle.git",
-                "reference": "970b13d01871207e81d17b17ddda025e7e21e797",
-                "mirrors": [
-                    {
-                        "url": "/%package%/%normalizedUrl%.%type%",
-                        "preferred": true
-                    }
-                ]
+                "reference": "970b13d01871207e81d17b17ddda025e7e21e797"
             },
             "dist": {
                 "type": "zip",
                 "url": "https://api.github.com/repos/symfony/SwiftmailerBundle/zipball/970b13d01871207e81d17b17ddda025e7e21e797",
                 "reference": "970b13d01871207e81d17b17ddda025e7e21e797",
-                "shasum": "",
-                "mirrors": [
-                    {
-                        "url": "http://local.toran.org/repo/packagist/dists/%package%/%version%/%reference%.%type%",
-                        "preferred": true
-                    }
-                ]
+                "shasum": ""
             },
             "require": {
                 "php": ">=5.3.2",
@@ -4686,29 +4093,17 @@
         },
         {
             "name": "symfony/symfony",
-            "version": "2.5.x-dev",
+            "version": "2.6.x-dev",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/symfony.git",
-                "reference": "b8a37bdf3467c3157c7de6741496989cb3f1e63a",
-                "mirrors": [
-                    {
-                        "url": "/%package%/%normalizedUrl%.%type%",
-                        "preferred": true
-                    }
-                ]
+                "reference": "0999ea74b7f5ab8019866aa2994ca35903010b2b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/symfony/zipball/b8a37bdf3467c3157c7de6741496989cb3f1e63a",
-                "reference": "b8a37bdf3467c3157c7de6741496989cb3f1e63a",
-                "shasum": "",
-                "mirrors": [
-                    {
-                        "url": "http://local.toran.org/repo/packagist/dists/%package%/%version%/%reference%.%type%",
-                        "preferred": true
-                    }
-                ]
+                "url": "https://api.github.com/repos/symfony/symfony/zipball/0999ea74b7f5ab8019866aa2994ca35903010b2b",
+                "reference": "0999ea74b7f5ab8019866aa2994ca35903010b2b",
+                "shasum": ""
             },
             "require": {
                 "doctrine/common": "~2.2",
@@ -4723,6 +4118,7 @@
                 "symfony/console": "self.version",
                 "symfony/css-selector": "self.version",
                 "symfony/debug": "self.version",
+                "symfony/debug-bundle": "self.version",
                 "symfony/dependency-injection": "self.version",
                 "symfony/doctrine-bridge": "self.version",
                 "symfony/dom-crawler": "self.version",
@@ -4757,23 +4153,25 @@
                 "symfony/twig-bridge": "self.version",
                 "symfony/twig-bundle": "self.version",
                 "symfony/validator": "self.version",
+                "symfony/var-dumper": "self.version",
                 "symfony/web-profiler-bundle": "self.version",
                 "symfony/yaml": "self.version"
             },
             "require-dev": {
                 "doctrine/data-fixtures": "1.0.*",
                 "doctrine/dbal": "~2.2",
+                "doctrine/doctrine-bundle": "~1.2",
                 "doctrine/orm": "~2.2,>=2.2.3",
                 "egulias/email-validator": "~1.2",
                 "ircmaxell/password-compat": "~1.0",
-                "monolog/monolog": "~1.3",
+                "monolog/monolog": "~1.11",
                 "ocramius/proxy-manager": ">=0.3.1,<0.6-dev",
                 "propel/propel1": "~1.6"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.5-dev"
+                    "dev-master": "2.6-dev"
                 }
             },
             "autoload": {
@@ -4807,7 +4205,7 @@
             "keywords": [
                 "framework"
             ],
-            "time": "2014-12-02 21:48:32"
+            "time": "2014-12-03 10:02:59"
         },
         {
             "name": "twig/extensions",
@@ -4815,25 +4213,13 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/twigphp/Twig-extensions.git",
-                "reference": "8cf4b9fe04077bd54fc73f4fde83347040c3b8cd",
-                "mirrors": [
-                    {
-                        "url": "/%package%/%normalizedUrl%.%type%",
-                        "preferred": true
-                    }
-                ]
+                "reference": "8cf4b9fe04077bd54fc73f4fde83347040c3b8cd"
             },
             "dist": {
                 "type": "zip",
                 "url": "https://api.github.com/repos/twigphp/Twig-extensions/zipball/8cf4b9fe04077bd54fc73f4fde83347040c3b8cd",
                 "reference": "8cf4b9fe04077bd54fc73f4fde83347040c3b8cd",
-                "shasum": "",
-                "mirrors": [
-                    {
-                        "url": "http://local.toran.org/repo/packagist/dists/%package%/%version%/%reference%.%type%",
-                        "preferred": true
-                    }
-                ]
+                "shasum": ""
             },
             "require": {
                 "twig/twig": "~1.12"
@@ -4936,25 +4322,13 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/willdurand/JsonpCallbackValidator.git",
-                "reference": "1a7d388bb521959e612ef50c5c7b1691b097e909",
-                "mirrors": [
-                    {
-                        "url": "/%package%/%normalizedUrl%.%type%",
-                        "preferred": true
-                    }
-                ]
+                "reference": "1a7d388bb521959e612ef50c5c7b1691b097e909"
             },
             "dist": {
                 "type": "zip",
                 "url": "https://api.github.com/repos/willdurand/JsonpCallbackValidator/zipball/1a7d388bb521959e612ef50c5c7b1691b097e909",
                 "reference": "1a7d388bb521959e612ef50c5c7b1691b097e909",
-                "shasum": "",
-                "mirrors": [
-                    {
-                        "url": "http://local.toran.org/repo/packagist/dists/%package%/%version%/%reference%.%type%",
-                        "preferred": true
-                    }
-                ]
+                "shasum": ""
             },
             "require": {
                 "php": ">=5.3.0"
@@ -4988,25 +4362,13 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/willdurand/Negotiation.git",
-                "reference": "17b357c97175840200699012c8c536b4f6d43034",
-                "mirrors": [
-                    {
-                        "url": "/%package%/%normalizedUrl%.%type%",
-                        "preferred": true
-                    }
-                ]
+                "reference": "17b357c97175840200699012c8c536b4f6d43034"
             },
             "dist": {
                 "type": "zip",
                 "url": "https://api.github.com/repos/willdurand/Negotiation/zipball/17b357c97175840200699012c8c536b4f6d43034",
                 "reference": "17b357c97175840200699012c8c536b4f6d43034",
-                "shasum": "",
-                "mirrors": [
-                    {
-                        "url": "http://local.toran.org/repo/packagist/dists/%package%/%version%/%reference%.%type%",
-                        "preferred": true
-                    }
-                ]
+                "shasum": ""
             },
             "require": {
                 "php": ">=5.3.0"
