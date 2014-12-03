@@ -41,6 +41,7 @@ class AppKernel extends Kernel
             // sonata media
             new Sonata\MediaBundle\SonataMediaBundle(),
             new Sonata\ClassificationBundle\SonataClassificationBundle(),
+            new Liip\ImagineBundle\LiipImagineBundle(),
 
             // project bundles
             new Capco\AppBundle\CapcoAppBundle(),

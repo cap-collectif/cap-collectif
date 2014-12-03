@@ -1,0 +1,12 @@
+Capco\MediaBundle\Entity\Media:
+    MediaConsultation1:
+        binaryContent: ../files/consultation-1.jpg
+        enabled:       true
+        name:          Titre du média
+        authorName:    @user1
+
+    MediaConsultation2:
+        binaryContent: ../files/consultation-2.jpg
+        enabled:       true
+        name:          Titre du média 2
+        authorName:    @user1

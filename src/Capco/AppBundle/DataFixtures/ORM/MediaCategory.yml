@@ -1,0 +1,5 @@
+Capco\ClassificationBundle\Entity\Category:
+    MediaCategory1:
+        name: root
+        enabled: true
+        context: @MediaContext1

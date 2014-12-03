@@ -15,6 +15,7 @@ class ConsultationRepository extends EntityRepository
     public function getLast($limit = 1, $offset = 0)
     {
         $qb = $this->createQueryBuilder('c')
+            ->leftJoin('c.Media', 'm')
             ->andWhere('c.isEnabled = :isEnabled')
             ->addOrderBy('c.createdAt', 'DESC')
             ->setParameter('isEnabled', true);

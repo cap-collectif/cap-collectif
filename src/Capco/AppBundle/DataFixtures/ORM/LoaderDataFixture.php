@@ -4,9 +4,22 @@ namespace Capco\AppBundle\DataFixtures\ORM;
 
 use Hautelook\AliceBundle\Alice\DataFixtureLoader;
 use Nelmio\Alice\Fixtures;
+use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 
-class LoaderDataFixture extends DataFixtureLoader
+class LoaderDataFixture extends DataFixtureLoader implements OrderedFixtureInterface
 {
+    protected function getProcessors()
+    {
+        return array(
+            new MediaProcessor($this->container)
+        );
+    }
+
+    public function getOrder()
+    {
+        return 2;
+    }
+
     /**
      * {@inheritDoc}
      */
@@ -14,6 +27,9 @@ class LoaderDataFixture extends DataFixtureLoader
     {
         return array(
             __DIR__ . '/User.yml',
+            __DIR__ . '/MediaContext.yml',
+            __DIR__ . '/MediaCategory.yml',
+            __DIR__ . '/Media.yml',
             __DIR__ . '/Menu.yml',
             __DIR__ . '/MenuItem.yml',
             __DIR__ . '/SiteParameter.yml',

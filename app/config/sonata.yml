@@ -95,18 +95,47 @@ sonata_media:
             providers:
                 - sonata.media.provider.dailymotion
                 - sonata.media.provider.youtube
+                - sonata.media.provider.vimeo
                 - sonata.media.provider.image
                 - sonata.media.provider.file
             formats:
-                small: { width: 100 , quality: 70 }
-                big:   { width: 500 , quality: 70 }
+                small:          { width: 100, quality: 70 }
+                big:            { width: 500, quality: 70 }
+                consultation:   { width: 400, height: 300, quality: 70 }
+
+        sonata_collection:
+            providers:
+              - sonata.media.provider.image
+
+            formats:
+                preview: { width: 100, quality: 100}
+                wide:    { width: 820, quality: 100}
+
+        sonata_category:
+            providers:
+              - sonata.media.provider.image
+
+            formats:
+                preview: { width: 100, quality: 100}
+                wide:    { width: 820, quality: 100}
+    providers:
+        image:
+            thumbnail:  sonata.media.thumbnail.liip_imagine
+        vimeo:
+            thumbnail:  sonata.media.thumbnail.liip_imagine
+        youtube:
+            thumbnail:  sonata.media.thumbnail.liip_imagine
+        dailymotion:
+            thumbnail:  sonata.media.thumbnail.liip_imagine
+
     cdn:
         server:
-            path: /uploads/media # http://media.sonata-project.org/
+            path: / # http://media.sonata-project.org/
+
     filesystem:
         local:
-            directory:  %kernel.root_dir%/../web/uploads/media
-            create:     false
+            directory:  %kernel.root_dir%/../web/media
+            create:     true
 
 sonata_user:
     security_acl: true

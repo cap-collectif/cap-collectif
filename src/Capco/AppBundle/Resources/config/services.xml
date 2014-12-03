@@ -4,13 +4,16 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
-    <!--
+    <parameters>
+        <parameter key="hautelook_alice.loader.class">Capco\AppBundle\DataFixtures\Loader</parameter>
+    </parameters>
+
     <services>
-        <service id="capco_app.example" class="Capco\AppBundle\Example">
-            <argument type="service" id="service_id" />
-            <argument>plain_value</argument>
-            <argument>%parameter_name%</argument>
+        <service id="hautelook_alice.loader" class="%hautelook_alice.loader.class%">
+            <argument type="collection">
+                <argument key="yaml" type="service" id="hautelook_alice.loader.yaml" />
+            </argument>
+            <argument type="service" id="logger" on-invalid="null"/>
         </service>
     </services>
-    -->
 </container>

@@ -126,7 +126,7 @@ class Consultation
     /**
      * @var
      *
-     * @ORM\OneToOne(targetEntity="Capco\MediaBundle\Entity\Media", cascade={"persist", "remove"})
+     * @ORM\ManyToOne(targetEntity="Capco\MediaBundle\Entity\Media")
      * @ORM\JoinColumn(name="media_id", referencedColumnName="id")
      */
     private $Media;
@@ -324,15 +324,15 @@ class Consultation
      */
     public function getMedia()
     {
-        return $this->media;
+        return $this->Media;
     }
 
     /**
      * @param mixed $media
      */
-    public function setMedia($media)
+    public function setMedia($Media)
     {
-        $this->media = $media;
+        $this->Media = $Media;
     }
 
     public function getRemainingDays()

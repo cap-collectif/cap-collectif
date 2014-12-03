@@ -30,7 +30,8 @@
         "sonata-project/user-bundle": "dev-master",
         "sonata-project/easy-extends-bundle": "dev-master",
         "sonata-project/media-bundle": "~2.4@dev",
-        "hwi/oauth-bundle": "0.4.*@dev"
+        "hwi/oauth-bundle": "0.4.*@dev",
+        "liip/imagine-bundle": "~0.9"
     },
     "require-dev": {
         "sensio/generator-bundle": "~2.3"

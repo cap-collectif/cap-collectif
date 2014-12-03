@@ -1,0 +1,5 @@
+Capco\ClassificationBundle\Entity\Context:
+    MediaContext1:
+        id: default
+        name: Default
+        enabled: true
