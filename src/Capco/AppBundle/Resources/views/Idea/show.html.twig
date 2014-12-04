@@ -25,7 +25,7 @@
         </div>
 
         {% if userVoteCount == 0 %}
-            {{ form_start(form) }}
+            {{ form_start(form, {'attr':{"class":"inline"} } ) }}
                 {{ form_errors(form) }}
                 <button class="btn btn-success"><i class="cap-hand-like-1"></i> {{ 'idea.show.vote'|trans({}, 'CapcoAppBundle') }}</button>
                 <span class="nb-bordered">{{ idea.voteCount }}</span>
@@ -52,5 +52,7 @@
             {% endif %}
         </div>
     </div>
+
+    {{ render_esi(controller('CapcoAppBundle:Homepage:lastIdeas', {'max': 4, 'offset': 0})) }}
 
 {% endblock %}

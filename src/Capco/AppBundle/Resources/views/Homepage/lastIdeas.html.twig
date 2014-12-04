@@ -2,29 +2,8 @@
     <h2>{% trans %}Ideas{% endtrans %}</h2>
     <div class="row">
         {% for idea in ideas %}
-            <div class="col-xs-12  col-sm-6  col-md-4  col-lg-3">
-                <div class="media  media--macro  block  block--shadowed">
-                    {% if idea.Author and idea.Author.Media %}
-                        <a class="pull-left" href="#">
-                            {% thumbnail idea.Author.Media, 'avatar' with {'title': idea.Author.fullname, 'alt': idea.Author.fullname, 'class': 'media-object img-circle'} %}
-                        </a>
-                    {% endif %}
-                    <div class="media-body">
-                        <p class="media-heading h5  media--macro__user"><a href="#">{{ idea.Author.fullname }}</a></p>
-                        <span class="excerpt h5">{{ idea.createdAt | localizeddate('long', 'none') }}</span>
-                    </div>
-                    <div class="media__content">
-                        <h4 class="h4"><a href="{{ path('app_idea_show', {'slug': idea.slug}) }}">{{ idea.title }}</a></h4>
-                        <span class="excerpt  h5">
-                            {% set voteCount = idea.voteCount %}
-                            {% transchoice voteCount %}
-                                {0} no vote|{1} 1 vote|]1,Inf] %voteCount% votes
-                            {% endtranschoice %}
-                        </span>
-                    </div>
-                </div>
-            </div>
+            {% include '@CapcoApp/Idea/lastIdeas.html.twig' %}
         {% endfor %}
     </div>
-    <a href="{{ path('app_idea') }}" class="btn  btn-primary  btn--outline">{% trans %}See all ideas{% endtrans %}</a>
+    <a href="{{ path('app_idea') }}" class="btn  btn-primary  btn--outline">{{ 'idea.show.views'|trans({}, 'CapcoAppBundle') }}</a>
 </div>

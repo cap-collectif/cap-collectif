@@ -26,6 +26,8 @@ body {
   padding-top: 0;
 }
 
+.inline { display: inline-block}
+
 #details {
   border-top: $navbar-height solid transparent;
   margin-top: -$navbar-height;

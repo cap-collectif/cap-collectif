@@ -11,6 +11,7 @@ idea:
         share: Partager
         report: Signaler
         edit: Modifier
+        views: Voir tous les sujets proposés
     create:
         title_block: Proposer une idée
         button: Publier
