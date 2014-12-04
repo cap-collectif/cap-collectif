@@ -56,6 +56,7 @@ class UserProvider extends FOSUBUserProvider
             $user = $this->userManager->createUser();
             $user->setUsername($response->getNickname());
             $user->setEmail($response->getEmail());
+            $user->setPlainPassword(self::random_string(20));
             $user->setEnabled(true);
         }
 
@@ -69,6 +70,21 @@ class UserProvider extends FOSUBUserProvider
         $this->userManager->updateUser($user);
 
         return $user;
+    }
+
+    /**
+     * @param $length
+     * @return string
+     */
+    protected function random_string($length) {
+        $key = '';
+        $keys = array_merge(range(0, 9), range('a', 'Z'));
+
+        for ($i = 0; $i < $length; $i++) {
+            $key .= $keys[array_rand($keys)];
+        }
+
+        return $key;
     }
 
 }
