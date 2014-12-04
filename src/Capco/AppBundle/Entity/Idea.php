@@ -14,6 +14,19 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class Idea
 {
+    const SORT_ORDER_CREATED_AT = 0;
+    const SORT_ORDER_VOTES_COUNT = 1;
+
+    public static $openingStatuses = [
+        'date' => self::SORT_ORDER_CREATED_AT,
+        'popularity' => self::SORT_ORDER_VOTES_COUNT,
+    ];
+    public static $openingStatusesLabels = [
+        'date' => 'idea.sort.created_at',
+        'popularity' => 'idea.sort.popularity',
+    ];
+
+
     /**
      * @var integer
      *

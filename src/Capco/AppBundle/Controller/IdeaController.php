@@ -4,9 +4,11 @@ namespace Capco\AppBundle\Controller;
 
 use Capco\AppBundle\Entity\Idea;
 use Capco\AppBundle\Entity\IdeaVote;
+use Capco\AppBundle\Entity\Theme;
 use Capco\AppBundle\Form\IdeaType;
 use Capco\AppBundle\Form\IdeaUpdateType;
 use Capco\AppBundle\Form\IdeaVoteType;
+use Capco\AppBundle\Form\IdeaSearchType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
@@ -100,19 +102,48 @@ class IdeaController extends Controller
 
     /**
      * @Route("/ideas/{page}", name="app_idea", requirements={"page" = "\d+"}, defaults={"page" = 1} )
-     * @Route("/ideas/page/{page}", name="app_idea_filtered", requirements={"page" = "\d+"}, defaults={"page" = 1} )
-     * @Cache(expires="+1 minutes", maxage="60", smaxage="60", public="true")
+     * @Route("/ideas/{theme}/{sort}/{term}/{page}", name="app_idea_search", requirements={"page" = "\d+"}, defaults={"page" = 1} )
      * @Template()
      * @param $page
      * @return array
      */
-    public function indexAction($page)
+    public function indexAction($page, $theme = null, $sort = null, $term = null)
     {
         $em = $this->getDoctrine()->getManager();
-        $ideas = $em->getRepository('CapcoAppBundle:Idea')->getIdeasWithUser(8, $page);
+        $currentUrl = $this->generateUrl('app_idea');
+
+        $form = $this->createForm(new IdeaSearchType(), null, array(
+            'action' => $currentUrl,
+            'method' => 'POST'
+        ));
+        $request = $this->getRequest();
+
+        if ($request->getMethod() == 'POST') {
+            $form->handleRequest($request);
+
+            if ($form->isValid()) {
+                // redirect to the results page (avoids reload alerts)
+                $data = $form->getData();
+
+                return $this->redirect($this->generateUrl('app_idea_search', array(
+                    'theme' => $data['theme'] ? $data['theme']->getSLug() : Theme::FILTER_ALL,
+                    'sort' => $data['sort'],
+                    'term' => $data['term']
+                )));
+            }
+        } else {
+            $form->setData(array(
+                'theme' => $em->getRepository('CapcoAppBundle:Theme')->findOneBySlug($theme),
+                'sort' => $sort,
+                'term' => $term,
+            ));
+        }
+
+        $ideas = $em->getRepository('CapcoAppBundle:Idea')->getSearchResultsWithUser(8, $page, $theme, $sort, $term);
 
         return array(
             'ideas' => $ideas,
+            'form' => $form->createView(),
             'page' => $page,
             'nbPage' => ceil(count($ideas) / 8)
         );

@@ -25,3 +25,11 @@ idea:
     delete:
         title_block: Supprimer une idée
         text_alert: Êtes-vous certain de vouloir supprimer le contenu ?
+    searchform:
+        search: Rechercher
+        sort: 'Trier :'
+        all_themes: Tous les thèmes
+        no_result:  Aucune idée ne correspond à ces critères de recherche
+    sort:
+        created_at: Date de création
+        popularity: Popularité

@@ -24,3 +24,11 @@ idea:
     delete:
         title_block: Remove idea
         text_alert: Êtes-vous certain de vouloir supprimer le contenu ?
+    searchform:
+        search: Search
+        sort: 'Sort by:'
+        all_themes: All the themes
+        no_result:  There's no idea matching this search
+    sort:
+        created_at: Creation date
+        popularity: Popularity

@@ -14,10 +14,11 @@ use Gedmo\Mapping\Annotation as Gedmo;
  */
 class Theme
 {
-
     const STATUS_CLOSED = 0;
     const STATUS_OPENED = 1;
     const STATUS_FUTURE = 2;
+
+    const FILTER_ALL = 'all';
 
     /**
      * @var integer
