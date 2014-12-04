@@ -12,6 +12,12 @@
 
 }
 
+.cap {
+  position: relative;
+  top: 1px;
+  right: 2px;
+}
+
 [data-icon]:before {
   font-family: "cap-collectif" !important;
   content: attr(data-icon);

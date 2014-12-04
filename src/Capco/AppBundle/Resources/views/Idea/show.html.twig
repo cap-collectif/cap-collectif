@@ -8,9 +8,11 @@
         <h1 class="h1">{{ idea.title }}</h1>
         <div class="block">
             <div class="media">
-                <a href="#" class="pull-left">
-                    <img class="img-circle  pull-left" src="http://rdjpg.com/32/32" alt=""/>
-                </a>
+                {% if idea.Author and idea.Author.Media %}
+                    <a class="pull-left" href="#">
+                        {% thumbnail idea.Author.Media, 'avatar' with {'title': idea.Author.fullname, 'alt': idea.Author.fullname, 'class': 'media-object img-circle'} %}
+                    </a>
+                {% endif %}
                 <div class="media-body">
                     <p class="media--aligned  excerpt"><a href="#">{{ idea.Author.username }}</a> dans <a href="{{ path('app_theme_show', {'slug': idea.Theme.slug}) }}">{{ idea.Theme.title }}</a> le {{ idea.createdAt | localizeddate('long', 'none') }}</p>
                 </div>
@@ -46,7 +48,7 @@
         </div>
 
         <div class="pull-right no-float-mobile">
-            <a href="#" class="btn  btn-dark-gray  btn--outline"><i class="cap-gun"></i> {{ 'idea.show.report'|trans({}, 'CapcoAppBundle') }}</a>
+            <a href="#" class="btn  btn-dark-gray  btn--outline"><i class="cap cap-gun"></i> {{ 'idea.show.report'|trans({}, 'CapcoAppBundle') }}</a>
             {% if app.user.id is defined and app.user.id == idea.Author.id %}
                 <a href="{{ path('app_idea_update', {'slug': idea.slug}) }}" class="btn  btn-dark-gray  btn--outline"><i class="cap-gun"></i> {{ 'idea.show.edit'|trans({}, 'CapcoAppBundle') }}</a>
             {% endif %}

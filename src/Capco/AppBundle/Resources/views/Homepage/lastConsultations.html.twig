@@ -26,7 +26,7 @@
                             </p>
                             {% set remainingDays = consultation.remainingDays %}
                             {% if remainingDays > 0 %}
-                                <p class="excerpt  h5"><i class="cap-gun"></i>
+                                <p class="excerpt  h5"><i class="cap cap-gun"></i>
                                     {% transchoice remainingDays %}
                                         {0} no consultation|{1} last day|]1,Inf] %remainingDays% remaining days
                                     {% endtranschoice %}
