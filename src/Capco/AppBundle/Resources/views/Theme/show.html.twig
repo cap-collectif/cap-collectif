@@ -4,6 +4,7 @@
 	<div class="jumbotron  jumbotron--custom  jumbotron--bg-1  text-center">
 	    <div class="container">
 	        <h1 class="h2  h--no-border">{{ theme.title }}</h1>
+            <p>{{ theme.teaser }}</p>
 	    </div>
 	</div>
 {% endblock %}
@@ -21,11 +22,14 @@
                 {% endif %}
             </span>
         </h2>
-        <p>{{ theme.teaser }}</p>
-        <p<{{ theme.body }}</p>
+        <p>{{ theme.body }}</p>
     </div>
 
-    {{ render_esi(controller('CapcoAppBundle:Theme:lastConsultations', {'theme': theme})) }}
-    {{ render_esi(controller('CapcoAppBundle:Theme:lastIdeas', {'theme': theme})) }}
+    {% if theme.Consultations|length > 0 %}
+        {{ render_esi(controller('CapcoAppBundle:Theme:lastConsultations', {'theme': theme})) }}
+    {% endif %}
+    {% if theme.Ideas|length > 0 %}
+        {{ render_esi(controller('CapcoAppBundle:Theme:lastIdeas', {'theme': theme})) }}
+    {% endif %}
 
 {% endblock %}
