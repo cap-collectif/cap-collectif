@@ -18,7 +18,11 @@
                     <form method="post" {{ form_enctype(form) }}>
                         <div class="dialog__body  box">
                             <div class="media">
-                                <img class="media-object  img-circle  pull-left" src="http://rdjpg.com/45/45" alt=""/>
+                                {% if idea.Author and idea.Author.Media %}
+                                    <a class="pull-left" href="#">
+                                        {% thumbnail idea.Author.Media, 'avatar' with {'title': idea.Author.fullname, 'alt': idea.Author.fullname, 'class': 'media-object img-circle'} %}
+                                    </a>
+                                {% endif %}
                                 <div class="media-body">
                                     {{ form_rest(form) }}
                                 </div>
@@ -28,7 +32,7 @@
                             <a href="{{ path('app_idea_delete', {'slug': idea.slug}) }}" class="btn btn-danger">{{ 'idea.update.remove_button'|trans({}, 'CapcoAppBundle') }}</a>
                             <div class="pull-right">
                                 <a href="{{ path('app_idea_show', {'slug': idea.slug}) }}" class="btn  btn-default">{{ 'idea.create.reset_submit'|trans({}, 'CapcoAppBundle') }}</a>
-                                <button type="submit" class="btn  btn-warning">{{ 'idea.show.update_button'|trans({}, 'CapcoAppBundle') }}</button>
+                                <button type="submit" class="btn  btn-warning">{{ 'idea.show.edit'|trans({}, 'CapcoAppBundle') }}</button>
                             </div>
                         </div>
                     </form>

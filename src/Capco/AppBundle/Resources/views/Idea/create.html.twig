@@ -18,7 +18,11 @@
                     <form method="post" {{ form_enctype(form) }}>
                         <div class="dialog__body  box">
                             <div class="media">
-                                <img class="media-object  img-circle  pull-left" src="http://rdjpg.com/45/45" alt=""/>
+                                {% if app.user.Media %}
+                                    <a class="pull-left" href="#">
+                                        {% thumbnail app.user.Media, 'avatar' with {'title': app.user.fullname, 'alt': app.user.fullname, 'class': 'media-object img-circle'} %}
+                                    </a>
+                                {% endif %}
                                 <div class="media-body">
                                     {{ form_rest(form) }}
                                 </div>
@@ -26,7 +30,7 @@
                         </div>
                         <div class="dialog__footer  box">
                             <div class="pull-right">
-                                <button class="btn  btn-default">Annuler</button>
+                                <a href="{{ path('app_idea') }}" class="btn  btn-default">{{ 'idea.create.reset_submit'|trans({}, 'CapcoAppBundle') }}</a>
                                 <button type="submit" class="btn  btn-success">Publier</button>
                             </div>
                         </div>

@@ -102,7 +102,7 @@ class IdeaController extends Controller
 
     /**
      * @Route("/ideas/{page}", name="app_idea", requirements={"page" = "\d+"}, defaults={"page" = 1} )
-     * @Route("/ideas/{theme}/{sort}/{term}/{page}", name="app_idea_search", requirements={"page" = "\d+"}, defaults={"page" = 1} )
+     * @Route("/ideas/{theme}/{sort}/{term}/{page}", name="app_idea_search", requirements={"term" = "\D+", "page" = "\d+"}, defaults={"page" = 1} )
      * @Template()
      * @param $page
      * @return array
@@ -208,7 +208,7 @@ class IdeaController extends Controller
     }
 
     /**
-     * @Route("/ideas/{slug}/edit", name="app_idea_update")
+     * @Route("/idea/edit/{slug}", name="app_idea_update")
      * @Template()
      * @param $request
      * @param $idea

@@ -50,7 +50,7 @@
         <div class="pull-right no-float-mobile">
             <a href="#" class="btn  btn-dark-gray  btn--outline"><i class="cap cap-gun"></i> {{ 'idea.show.report'|trans({}, 'CapcoAppBundle') }}</a>
             {% if app.user.id is defined and app.user.id == idea.Author.id %}
-                <a href="{{ path('app_idea_update', {'slug': idea.slug}) }}" class="btn  btn-dark-gray  btn--outline"><i class="cap-gun"></i> {{ 'idea.show.edit'|trans({}, 'CapcoAppBundle') }}</a>
+                <a href="{{ path('app_idea_update', {'slug': idea.slug}) }}" class="btn  btn-warning"><i class="cap-gun"></i> {{ 'idea.show.edit'|trans({}, 'CapcoAppBundle') }}</a>
             {% endif %}
         </div>
     </div>
