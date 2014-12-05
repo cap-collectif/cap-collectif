@@ -3,7 +3,7 @@
 namespace Capco\AppBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
-use Capco\AppBundle\Entity\Theme;
+use Doctrine\ORM\Tools\Pagination\Paginator;
 
 /**
  * ConsultationRepository
@@ -13,6 +13,31 @@ use Capco\AppBundle\Entity\Theme;
  */
 class ConsultationRepository extends EntityRepository
 {
+    public function findByTheme($theme)
+    {
+        $qb = $this->createQueryBuilder('c')
+            ->leftJoin('c.Media', 'm')
+            ->addSelect('m')
+            ->leftJoin('c.Themes' , 't')
+            ->addSelect('t')
+            ->andWhere(':theme MEMBER OF c.Themes')
+            ->setParameter('theme', $theme)
+            ->andWhere('c.isEnabled = :isEnabled')
+            ->setParameter('isEnabled', true)
+            ->orderBy('c.createdAt', 'DESC');
+
+        return $qb
+            ->getQuery()
+            ->execute();
+    }
+
+    protected function getIsEnabledQueryBuilder()
+    {
+        return $this->createQueryBuilder('c')
+            ->andWhere('c.isEnabled = :isEnabled')
+            ->setParameter('isEnabled', true);
+    }
+
     public function getLast($limit = 1, $offset = 0)
     {
         $qb = $this->createQueryBuilder('c')
@@ -34,21 +59,25 @@ class ConsultationRepository extends EntityRepository
             ->execute();
     }
 
-    public function findByTheme($theme)
+    public function getSearchResultsWithTheme($nbByPage = 8, $page = 1)
     {
-        $qb = $this->createQueryBuilder('c')
-            ->leftJoin('c.Media', 'm')
-            ->addSelect('m')
-            ->leftJoin('c.Themes' , 't')
-            ->addSelect('t')
-            ->andWhere(':theme MEMBER OF c.Themes')
-            ->setParameter('theme', $theme)
-            ->andWhere('c.isEnabled = :isEnabled')
-            ->setParameter('isEnabled', true)
-            ->orderBy('c.createdAt', 'DESC');
+        if ((int) $page < 1) {
+            throw new \InvalidArgumentException(sprintf(
+                    'The argument "page" cannot be lower than 1 (current value: "%s")',
+                    $page
+                ));
+        }
 
-        return $qb
-            ->getQuery()
-            ->execute();
+        $qb = $this->getIsEnabledQueryBuilder()
+            ->leftJoin('c.Themes', 't')
+            ->addSelect('t')
+            ->addOrderBy('c.createdAt', 'DESC')
+        ;
+
+        $query = $qb->getQuery()
+            ->setFirstResult(($page - 1) * $nbByPage)
+            ->setMaxResults($nbByPage);
+
+        return new Paginator($query);
     }
 }

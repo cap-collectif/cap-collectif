@@ -1,0 +1,74 @@
+{% extends '@CapcoApp/base.html.twig' %}
+
+{% block jumbotron %}
+    <div class="jumbotron  jumbotron--custom  jumbotron--bg-1 text-center">
+        <div class="container">
+            <h1>Liste des consultations</h1>
+        </div>
+    </div>
+{% endblock %}
+
+{% block body %}
+    <div class="container">
+
+        {#<div class="filter  block">#}
+            {#<div class="row">#}
+                {#{{ form_start(form) }}#}
+                {#{{ form_errors(form) }}#}
+                {#<div class="col-xs-12  col-sm-4  col-md-3  col-lg-3">#}
+                    {#{{ form_label(form.theme, null, {'label_attr':{"class":"control-label  sr-only"} }) }}#}
+                    {#{{ form_errors(form.theme) }}#}
+                    {#{{ form_widget(form.theme, {'attr':{"class":"form-control"} }) }}#}
+                {#</div>#}
+                {#<div class="col-xs-12  col-sm-4  col-md-3  col-lg-3">#}
+                    {#<div class="formgroup--inline">#}
+                        {#{{ form_label(form.sort, null, {'label_attr':{"class":"control-label"} }) }}#}
+                        {#<span class="formgroup--inline__control">#}
+                                {#{{ form_errors(form.sort) }}#}
+                            {#{{ form_widget(form.sort, {'attr':{"class":"form-control"} }) }}#}
+                            {#</span>#}
+                    {#</div>#}
+                {#</div>#}
+
+                {#<div role="form" class="col-xs-12  col-sm-4  col-md-3  col-lg-3">#}
+                    {#{{ form_label(form.term, null, {'label_attr':{"class":"control-label sr-only"} }) }}#}
+                    {#<div class="input-group">#}
+                        {#{{ form_errors(form.term) }}#}
+                        {#{{ form_widget(form.term, {'attr':{"class":"form-control", "placeholder": 'idea.searchform.search'|trans({}, 'CapcoAppBundle')} }) }}#}
+                        {#<span class="input-group-btn">#}
+                                {#<button type="submit" class="btn  btn-primary"> <i class="cap cap-magnifier"></i> {{ 'idea.searchform.search'|trans({}, 'CapcoAppBundle') }}</button>#}
+                            {#</span>#}
+                    {#</div>#}
+                {#</div>#}
+
+                {#{{ form_end(form) }}#}
+
+            {#</div>#}
+        {#</div>#}
+
+        <div class="row">
+            {% if consultations|length > 0 %}
+                {% for consultation in consultations %}
+                    {% include '@CapcoApp/Consultation/lastConsultations.html.twig' %}
+                {% endfor %}
+            {% else %}
+                <p>
+                    {{ 'idea.searchform.no_result'|trans({}, 'CapcoAppBundle') }}
+                </p>
+            {% endif %}
+        </div>
+    </div>
+
+    {% if nbPage > 1 %}
+        <div class="pagination--custom  text-center">
+            <ul class="pagination">
+                {% for p in range(1, nbPage) %}
+                    <li{% if p == page %} class="active"{% endif %}>
+                        <a href="{{ path('app_consultation', {'page': p}) }}">{{ p }}</a>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    {% endif %}
+
+{% endblock %}
