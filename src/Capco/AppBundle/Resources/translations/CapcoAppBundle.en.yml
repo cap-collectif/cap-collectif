@@ -1,3 +1,8 @@
+# Homepage
+contact:
+  message: -----
+  button: Send
+
 # Idea
 idea:
   title: Ideas
@@ -19,15 +24,15 @@ idea:
     title_block: Create idea
     button: Published
     reset_submit: Cancel
-    text_info: Merci d'examiner les idées existantes en premier lieu afin de ne pas soumettre de doublon. Vous pouvez voter pour celles existantes !
+    text_info: -----
   update:
     remove_button: Remove
     title_block: Update idea
-    text_info: Vous éditez un idée déjà existant, ne le changez pas trop pour éviter aux membres de ne pas comprendre.
-    text_alert: Attention ! En modifiant votre idée, vous perdrez les votes qui lui sont associés.
+    text_info: -----
+    text_alert: -----
   delete:
     title_block: Remove idea
-    text_alert: Êtes-vous certain de vouloir supprimer le contenu ?
+    text_alert: -----
   searchform:
     search: Search
     sort: 'Sort by:'
