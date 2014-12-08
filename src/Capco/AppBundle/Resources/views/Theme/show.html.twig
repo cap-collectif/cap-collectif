@@ -11,18 +11,20 @@
 
 {% block body %}
     <div class="container">
-        <h2 class="h2">{{ 'theme.show.body_title'|trans({}, 'CapcoAppBundle') }}
-            <span class="h5  excerpt  pull-right">{{ 'theme.show.status.title'|trans({}, 'CapcoAppBundle') }}
-                {% if theme.status == statuses.opened %}
-                    <span class="label label-success">{{ 'theme.show.status.opened'|trans({}, 'CapcoAppBundle') }}</span>
-                {% elseif theme.status == statuses.closed %}
-                    <span class="label label-danger">{{ 'theme.show.status.closed'|trans({}, 'CapcoAppBundle') }}</span>
-                {% elseif theme.status == statuses.future %}
-                    <span class="label label-info">{{ 'theme.show.status.future'|trans({}, 'CapcoAppBundle') }}</span>
-                {% endif %}
-            </span>
-        </h2>
-        <p>{{ theme.body }}</p>
+        {% if theme.body %}
+            <h2 class="h2">{{ 'theme.show.body_title'|trans({}, 'CapcoAppBundle') }}
+            </h2>
+            <p>{{ theme.body }}</p>
+        {% endif %}
+        <span class="h5">{{ 'theme.show.status.title'|trans({}, 'CapcoAppBundle') }}
+            {% if theme.status == statuses.opened %}
+                <span class="label label-success">{{ 'theme.show.status.opened'|trans({}, 'CapcoAppBundle') }}</span>
+            {% elseif theme.status == statuses.closed %}
+                <span class="label label-danger">{{ 'theme.show.status.closed'|trans({}, 'CapcoAppBundle') }}</span>
+            {% elseif theme.status == statuses.future %}
+                <span class="label label-info">{{ 'theme.show.status.future'|trans({}, 'CapcoAppBundle') }}</span>
+            {% endif %}
+        </span>
     </div>
 
     {% if theme.Consultations|length > 0 %}
