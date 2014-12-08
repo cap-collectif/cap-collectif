@@ -105,7 +105,7 @@ class Idea
     /**
      * @var
      *
-     * @ORM\OneToOne(targetEntity="Capco\MediaBundle\Entity\Media", fetch="LAZY")
+     * @ORM\OneToOne(targetEntity="Capco\MediaBundle\Entity\Media", fetch="LAZY", cascade={"persist", "remove"})
      * @ORM\JoinColumn(name="media_id", referencedColumnName="id")
      */
     private $Media;
