@@ -7,6 +7,7 @@ use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Show\ShowMapper;
+use Capco\AppBundle\Entity\FooterSocialNetwork;
 
 class FooterSocialNetworkAdmin extends Admin
 {
@@ -18,6 +19,7 @@ class FooterSocialNetworkAdmin extends Admin
         $datagridMapper
             ->add('position')
             ->add('isEnabled')
+            ->add('style')
         ;
     }
 
@@ -31,6 +33,7 @@ class FooterSocialNetworkAdmin extends Admin
             ->add('position')
             ->add('isEnabled', null, array('editable' => true))
             ->add('createdAt')
+            ->add('style', 'string', array('template'=>'CapcoAdminBundle:FooterSocialNetwork:style_list_field.html.twig'))
             ->add('_action', 'actions', array(
                 'actions' => array(
                     'edit' => array(),
@@ -50,6 +53,7 @@ class FooterSocialNetworkAdmin extends Admin
             ->add('link')
             ->add('position')
             ->add('isEnabled')
+            ->add('style', 'choice', array('choices'=>FooterSocialNetwork::$socialIcons))
         ;
     }
 
@@ -63,6 +67,7 @@ class FooterSocialNetworkAdmin extends Admin
             ->add('link')
             ->add('position')
             ->add('isEnabled')
+            ->add('style')
             ->add('createdAt')
             ->add('updatedAt')
         ;

@@ -126,3 +126,7 @@ hwi_oauth:
                 approval_prompt: auto
                 display: page
                 login_hint: email address
+
+sonata_admin:
+    templates:
+        layout: CapcoAdminBundle::standard_layout.html.twig

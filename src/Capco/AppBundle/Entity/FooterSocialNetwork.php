@@ -13,6 +13,21 @@ use Gedmo\Mapping\Annotation as Gedmo;
  */
 class FooterSocialNetwork
 {
+    public static $socialIcons = [
+        'link-2' => 'Site externe',
+        'facebook' => 'Facebook',
+        'twitter' => 'Twitter',
+        'gplus' => 'Google+',
+        'pinterest' => 'Pinterest',
+        'github' => 'Github',
+        'linkedin' => 'Linkedin',
+        'picasa' => 'Picasa',
+        'vimeo' => 'Vimeo',
+        'instagram' => 'Instagram',
+        'flickr' => 'Flickr',
+        'tumblr' => 'Tumblr',
+   ];
+
     /**
      * @var integer
      *
