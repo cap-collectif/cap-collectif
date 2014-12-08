@@ -1,0 +1,9 @@
+namespace :symfony2 do
+    desc 'Install parameters.yml'
+    task :parameters do
+        on roles(:web) do
+            execute "mkdir -p #{shared_path}/app/config"
+            upload! fetch(:parameters_yml_file), "#{shared_path}/app/config/parameters.yml"
+        end
+    end
+end

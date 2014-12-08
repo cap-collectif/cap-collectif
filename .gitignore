@@ -27,6 +27,9 @@ app/config/parameters/*
 /node_modules/
 /app/Resources/libs
 
+# deployment
+.capistrano
+
 # OS X
 .DS_Store
 .AppleDouble

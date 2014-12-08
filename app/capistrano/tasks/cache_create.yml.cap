@@ -1,0 +1,9 @@
+namespace :symfony2 do
+    desc 'create cache dir'
+    task :cache_create do
+        on roles(:web) do
+            print "mkdir -p #{release_path}/#{fetch(:cache_path)}"
+            execute "mkdir -p #{release_path}/#{fetch(:cache_path)}"
+        end
+    end
+end
