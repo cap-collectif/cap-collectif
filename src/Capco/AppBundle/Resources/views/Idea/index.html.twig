@@ -50,7 +50,7 @@
 
         <div class="row">
             <div class="col-xs-12  col-sm-3  col-md-3  col-lg-2  block">
-                <a href="{{ path('app_idea_create') }}" class="form-control  btn  btn-success"><i class="cap cap-gun"></i> Proposer une idée</a>
+                <a href="{{ path('app_idea_create') }}" class="form-control  btn  btn-success"><i class="cap cap-gun"></i> {{ 'idea.index.button'|trans({}, 'CapcoAppBundle') }}</a>
             </div>
         </div>
 
@@ -70,13 +70,24 @@
     {% if nbPage > 1 %}
         <div class="pagination--custom  text-center">
             <ul class="pagination">
+                {% set theme = form.vars.data.theme %}
+                {% if theme is null %}
+                    {% set theme = 'all' %}
+                {% endif %}
                 {% for p in range(1, nbPage) %}
                     <li{% if p == page %} class="active"{% endif %}>
-                        <a href="{{ path('app_idea', {'page': p}) }}">{{ p }}</a>
+                        {% if (form.vars.data.sort is not null) or (form.vars.data.theme is not null) %}
+                            {% if form.vars.data.term is not null %}
+                                <a href="{{ path('app_idea_search_term', {'page': p, 'sort': form.vars.data.sort, 'theme': theme, 'term': form.vars.data.term }) }}">{{ p }}</a>
+                            {% else %}
+                                <a href="{{ path('app_idea_search', {'page': p, 'sort': form.vars.data.sort, 'theme': theme }) }}">{{ p }}</a>
+                            {% endif %}
+                        {% else %}
+                            <a href="{{ path('app_idea', {'page': p}) }}">{{ p }}</a>
+                        {% endif %}
                     </li>
                 {% endfor %}
             </ul>
         </div>
     {% endif %}
-
 {% endblock %}

@@ -102,12 +102,17 @@ class IdeaController extends Controller
 
     /**
      * @Route("/ideas/{page}", name="app_idea", requirements={"page" = "\d+"}, defaults={"page" = 1} )
-     * @Route("/ideas/{theme}/{sort}/{term}/{page}", name="app_idea_search", requirements={"term" = "\D+", "page" = "\d+"}, defaults={"page" = 1} )
+     * @Route("/ideas/{theme}/{sort}/{page}", name="app_idea_search", requirements={"page" = "\d+"}, defaults={"page" = 1, "theme" = "all"} )
+     * @Route("/ideas/{theme}/{sort}/{term}/{page}", name="app_idea_search_term", requirements={"page" = "\d+"}, defaults={"page" = 1, "theme" = "all"} )
      * @Template()
      * @param $page
+     * @param $request
+     * @param $theme
+     * @param $sort
+     * @param $term
      * @return array
      */
-    public function indexAction($page, $theme = null, $sort = null, $term = null)
+    public function indexAction(Request $request, $page, $theme = null, $sort = null, $term = null)
     {
         $em = $this->getDoctrine()->getManager();
         $currentUrl = $this->generateUrl('app_idea');
@@ -116,7 +121,6 @@ class IdeaController extends Controller
             'action' => $currentUrl,
             'method' => 'POST'
         ));
-        $request = $this->getRequest();
 
         if ($request->getMethod() == 'POST') {
             $form->handleRequest($request);
@@ -125,8 +129,8 @@ class IdeaController extends Controller
                 // redirect to the results page (avoids reload alerts)
                 $data = $form->getData();
 
-                return $this->redirect($this->generateUrl('app_idea_search', array(
-                    'theme' => $data['theme'] ? $data['theme']->getSLug() : Theme::FILTER_ALL,
+                return $this->redirect($this->generateUrl('app_idea_search_term', array(
+                    'theme' => $data['theme'] ? $data['theme']->getSlug() : Theme::FILTER_ALL,
                     'sort' => $data['sort'],
                     'term' => $data['term']
                 )));
