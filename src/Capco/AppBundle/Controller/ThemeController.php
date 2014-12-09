@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\Controller;
 
 use Capco\AppBundle\Entity\Consultation;
+use Capco\AppBundle\Entity\Idea;
 use Capco\AppBundle\Entity\Theme;
 use Capco\AppBundle\Form\ThemeSearchType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -76,11 +77,11 @@ class ThemeController extends Controller
 
     /**
      * @Cache(expires="+1 minutes", maxage="60", smaxage="60", public="true")
+     * @Template("CapcoAppBundle:Consultation:lastConsultations.html.twig")
      * @param $theme
      * @return array
-     * @Template()
      */
-    public function lastConsultationsAction(Theme $theme = null)
+    public function themeConsultationsAction(Theme $theme = null)
     {
         $consultations = $this->getDoctrine()->getRepository('CapcoAppBundle:Consultation')->findByTheme($theme->getId());
 
@@ -92,9 +93,11 @@ class ThemeController extends Controller
 
     /**
      * @Cache(expires="+1 minutes", maxage="60", smaxage="60", public="true")
-     * @Template()
+     * @Template("CapcoAppBundle:Idea:lastIdeas.html.twig")
+     * @param $theme
+     * @return array
      */
-    public function lastIdeasAction(Theme $theme = null)
+    public function themeIdeasAction(Theme $theme = null)
     {
         $ideas = $this->getDoctrine()->getRepository('CapcoAppBundle:Idea')->findByTheme($theme->getId());
 
