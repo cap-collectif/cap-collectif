@@ -3,8 +3,8 @@
 
         {# Navbar brand and toggle  #}
         <div class="navbar-header">
-            <a class="navbar-brand" href="#">
-                <img alt="Logo" src="http://dummyimage.com/80x40/333/FFF">
+            <a class="navbar-brand" href="{{ path('app_homepage' )}}">
+                <img alt="Logo" src="http://placekitten.com/g/80/40">
             </a>
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
                     data-target="#navbar-collapse-1">
@@ -17,42 +17,6 @@
             </button>
         </div>
 
-        {# Navbar content  #}
-        <div class="collapse navbar-collapse" id="navbar-collapse-1">
-            
-            <ul class="nav navbar-nav">
-                <li class="active"><a href="{{ path('app_homepage') }}">Accueil</a></li>
-                <li><a href="{{ path('app_consultation') }}">Consultations</a></li>
-                <li><a href="{{ path('app_idea') }}">Boîte à idées</a></li>
-                <li><a href="news-list.html">Actualités</a></li>
-                <li><a href="{{ path('app_theme') }}">Thèmes</a></li>
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">A propos <span class="caret"></span></a>
-                    <ul class="dropdown-menu" role="menu">
-                        <li><a href="#">Comment ça marche ?</a></li>
-                        <li><a href="#">La charte</a></li>
-                        <li><a href="{{ path('app_contact') }}">Nous contacter</a></li>
-                    </ul>
-                </li>
-            </ul>
-
-            {# Connection button #}
-            {% if app.user and is_granted("IS_AUTHENTICATED_REMEMBERED") %}
-                <ul class="nav navbar-nav pull-right">
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Hey {{ app.user.username }}<span class="caret"></span></a>
-                        <ul class="dropdown-menu" role="menu">
-                            {% if is_granted('ROLE_SUPER_ADMIN') %}
-                            <li><a href="{{ path('sonata_admin_dashboard') }}">adminitration</a></li>
-                            {% endif %}
-                            <li><a href="{{ path('fos_user_profile_show') }}">compte</a></li>
-                            <li><a href="{{ path('fos_user_security_logout') }}"> {{ 'layout.logout'|trans({}, 'FOSUserBundle') }} </a></li>
-                        </ul>
-                    </li>
-                </ul>
-            {% else %}
-                <p><a href="{{ path('fos_user_security_login') }}" class="btn  btn-custom-2  btn-brand  navbar-btn  navbar-right">Connexion</a></p>
-            {% endif %}
-        </div>
+        {% include '@CapcoApp/Default/navigation.html.twig' %}
     </div>
 </nav>

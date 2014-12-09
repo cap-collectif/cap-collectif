@@ -14,7 +14,6 @@ use Symfony\Component\HttpFoundation\Request;
 
 class DefaultController extends Controller
 {
-
     /**
      * @Route("/contact", name="app_contact")
      * @Template()
@@ -69,13 +68,5 @@ class DefaultController extends Controller
             'socialNetworks' => $socialNetworks,
             'footerLinks' => $footerLinks
         ];
-    }
-
-    /**
-     * @Cache(expires="+1 minutes", maxage="60", smaxage="0", public="false")
-     * @Template()
-     */
-    public function headerAction($max = 4, $offset = 0)
-    {
     }
 }

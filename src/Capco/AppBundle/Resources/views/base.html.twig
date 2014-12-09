@@ -29,7 +29,7 @@
 
 <body{% if page_class is defined %} class="{{ page_class }}"{% endif %}>
 {# Header  #}
-{{ render_esi(controller('CapcoAppBundle:Default:header')) }}
+{% include '@CapcoApp/Default/header.html.twig' %}
 
 {# Main jumbotron for a primary marketing message or call to action #}
 {% block jumbotron %}

@@ -3,6 +3,17 @@ contact:
   message: Nous serons heureux d’échanger avec vous et de vous rencontrer pour aborder vos projets de développement.
   button: Envoyer
 
+header:
+  account: Mon compte
+  administration: Administration
+
+menu:
+  homepage: Accueil
+  themes: Thèmes
+  consultations: Consultations
+  ideas_box: Boîte à idées
+  news: Actualités
+
 # Idea
 idea:
   title: Idées

@@ -3,6 +3,17 @@ contact:
   message: -----
   button: Send
 
+header:
+  account: My account
+  administration: Administration
+
+menu:
+  homepage: Home
+  themes: Themes
+  consultations: Consultations
+  ideas_box: Ideas box
+  news: News
+
 # Idea
 idea:
   title: Ideas

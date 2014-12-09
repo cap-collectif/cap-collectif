@@ -1,0 +1,41 @@
+{% macro nav_item(route, text, route_match) %}
+    <li{% if app.request.attributes.get('_route') starts with route_match %} class="active"{% endif %}><a href="{{ path(route) }}">{{ text }}</a></li>
+{% endmacro %}
+{% from _self import nav_item %}
+
+{# Navbar content  #}
+<div class="collapse navbar-collapse" id="navbar-collapse-1">
+    <ul class="nav navbar-nav">
+        {{ nav_item('app_homepage', 'menu.homepage'|trans({}, 'CapcoAppBundle'), 'app_homepage') }}
+        {{ nav_item('app_consultation', 'menu.consultations'|trans({}, 'CapcoAppBundle'), 'app_consultation') }}
+        {{ nav_item('app_idea', 'menu.ideas_box'|trans({}, 'CapcoAppBundle'), 'app_idea') }}
+        {{ nav_item('app_news', 'menu.news'|trans({}, 'CapcoAppBundle'), 'app_news') }}
+        {{ nav_item('app_theme', 'menu.themes'|trans({}, 'CapcoAppBundle'), 'app_theme') }}
+        <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">A propos <span class="caret"></span></a>
+            <ul class="dropdown-menu" role="menu">
+                <li><a href="#">Comment ça marche ?</a></li>
+                <li><a href="#">La charte</a></li>
+                <li><a href="{{ path('app_contact') }}">Nous contacter</a></li>
+            </ul>
+        </li>
+    </ul>
+
+    {# Connection button #}
+    {% if app.user and is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+        <ul class="nav navbar-nav pull-right">
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Hey {{ app.user.fullName }}<span class="caret"></span></a>
+                <ul class="dropdown-menu" role="menu">
+                    {% if is_granted('ROLE_SUPER_ADMIN') %}
+                    <li><a href="{{ path('sonata_admin_dashboard') }}">{{ 'header.administration'|trans({}, 'CapcoAppBundle') }}</a></li>
+                    {% endif %}
+                    <li><a href="{{ path('fos_user_profile_show') }}">{{ 'header.account'|trans({}, 'CapcoAppBundle') }}</a></li>
+                    <li><a href="{{ path('fos_user_security_logout') }}"> {{ 'layout.logout'|trans({}, 'FOSUserBundle') }} </a></li>
+                </ul>
+            </li>
+        </ul>
+    {% else %}
+        <p><a href="{{ path('fos_user_security_login') }}" class="btn  btn-custom-2  btn-brand  navbar-btn  navbar-right">Connexion</a></p>
+    {% endif %}
+</div>
