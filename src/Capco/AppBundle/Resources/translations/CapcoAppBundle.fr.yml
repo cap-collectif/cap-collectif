@@ -15,6 +15,7 @@ idea:
   show:
     vote: Voter
     voted: Vous avez voté
+    cancel: Annuler mon vote
     votes: "{0} Aucun vote | {1} 1 vote | ]1,Inf[ %count% votes"
     share: Partager
     report: Signaler

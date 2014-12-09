@@ -380,6 +380,7 @@ class Idea
     public function removeIdeaVote(\Capco\AppBundle\Entity\IdeaVote $ideaVote)
     {
         $this->IdeaVotes->removeElement($ideaVote);
+        $this->voteCount--;
     }
 
     /**

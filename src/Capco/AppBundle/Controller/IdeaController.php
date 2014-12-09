@@ -215,7 +215,13 @@ class IdeaController extends Controller
 
                     $this->get('session')->getFlashBag()->add('success', $translator->trans('Your vote has been saved.'));
                 } else {
-                    $this->get('session')->getFlashBag()->add('error', $translator->trans('You have already voted for this idea.'));
+                    $ideaVote = $em->getRepository('CapcoAppBundle:IdeaVote')->hasVote($this->getUser(), $idea);
+                    $em = $this->getDoctrine()->getManager();
+                    $idea->removeIdeaVote($ideaVote);
+                    $em->remove($ideaVote);
+                    $em->flush();
+
+                    $this->get('session')->getFlashBag()->add('success', $translator->trans('Your vote has been removed'));
                 }
 
                 // redirect (avoids reload alerts)

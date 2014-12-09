@@ -26,4 +26,18 @@ class IdeaVoteRepository extends EntityRepository
             ->getQuery()
             ->getSingleScalarResult();
     }
+
+    public function hasVote(User $user, Idea $idea)
+    {
+        $qb = $this->createQueryBuilder('v')
+            ->andWhere('v.Voter = :user')
+            ->andWhere('v.Idea = :idea')
+            ->setParameter('user', $user)
+            ->setParameter('idea', $idea);
+
+        return $qb
+            ->getQuery()
+            ->getOneOrNullResult();
+
+    }
 }
