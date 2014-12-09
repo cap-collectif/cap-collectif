@@ -29,7 +29,7 @@
                 </p>
                 {% set remainingDays = consultation.remainingDays %}
                 {% if remainingDays > 0 %}
-                    <p class="excerpt  h5"><i class="cap-gun"></i>
+                    <p class="excerpt  h5"><i class="cap cap-gun"></i>
                         {% transchoice remainingDays with {'%count%': remainingDays} from 'CapcoAppBundle' %}
                             consultation.show.remaining_days
                         {% endtranschoice %}

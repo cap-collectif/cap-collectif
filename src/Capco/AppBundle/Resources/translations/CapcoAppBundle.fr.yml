@@ -46,6 +46,7 @@ idea:
 theme:
   index:
     title: Thèmes
+    see_all: Voir tout les thèmes
     description: Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eos, perspiciatis, cupiditate.
     text_info: Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eos, perspiciatis, cupiditate. Nesciunt eos nam ullam iste iusto similique officia sit enim excepturi numquam natus, ab eum sint perspiciatis repudiandae dolorem.
     search: Rechercher

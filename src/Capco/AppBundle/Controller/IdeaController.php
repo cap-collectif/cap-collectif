@@ -14,6 +14,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Cache;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 class IdeaController extends Controller
@@ -154,12 +155,31 @@ class IdeaController extends Controller
     }
 
     /**
+     * @Cache(expires="+1 minutes", maxage="60", smaxage="60", public="true")
+     * @param $max
+     * @param $offset
+     * @return array
+     * @Template()
+     */
+    public function lastIdeasAction($max = 4, $offset = 0)
+    {
+        $ideas = $this->getDoctrine()->getRepository('CapcoAppBundle:Idea')->getLast($max, $offset);
+
+        if (!isset($ideas[0])) {
+            return new Response('');
+        }
+
+        return [ 'ideas' => $ideas ];
+    }
+
+    /**
      * @Route("/idea/{slug}", name="app_idea_show")
      * @Template()
      * @param Idea $idea
+     * @param Request $request
      * @return array
      */
-    public function showAction(Idea $idea)
+    public function showAction(Request $request, Idea $idea)
     {
         $em = $this->getDoctrine()->getManager();
         $currentUrl = $this->generateUrl('app_idea_show', [ 'slug' => $idea->getSlug() ]);
@@ -176,7 +196,6 @@ class IdeaController extends Controller
             'action' => $currentUrl,
             'method' => 'POST'
         ));
-        $request = $this->getRequest();
 
         if ($request->getMethod() == 'POST') {
             if (!$this->get('security.context')->isGranted('ROLE_USER')) {

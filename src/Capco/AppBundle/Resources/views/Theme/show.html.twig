@@ -28,10 +28,10 @@
     </div>
 
     {% if theme.Consultations|length > 0 %}
-        {{ render_esi(controller('CapcoAppBundle:Theme:lastConsultations', {'theme': theme})) }}
+        {{ render_esi(controller('CapcoAppBundle:Consultation:lastConsultations', {'theme': theme})) }}
     {% endif %}
     {% if theme.Ideas|length > 0 %}
-        {{ render_esi(controller('CapcoAppBundle:Theme:lastIdeas', {'theme': theme})) }}
+        {{ render_esi(controller('CapcoAppBundle:Idea:lastIdeas', {'theme': theme})) }}
     {% endif %}
 
 {% endblock %}

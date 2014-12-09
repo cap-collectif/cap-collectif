@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\Controller;
 
+use Capco\AppBundle\Entity\Consultation;
 use Capco\AppBundle\Entity\Theme;
 use Capco\AppBundle\Form\ThemeSearchType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -19,9 +20,10 @@ class ThemeController extends Controller
      * @Route("/themes/search/{term}/{page}", name="app_theme_search", requirements={"page" = "\d+"}, defaults={"page" = 1} )
      * @Template()
      * @param $page
+     * @param $request
      * @return array
      */
-    public function indexAction($page, $term = null)
+    public function indexAction(Request $request, $page, $term = null)
     {
         $em = $this->getDoctrine()->getManager();
         $currentUrl = $this->generateUrl('app_theme');
@@ -30,7 +32,6 @@ class ThemeController extends Controller
             'action' => $currentUrl,
             'method' => 'POST'
         ));
-        $request = $this->getRequest();
 
         if ($request->getMethod() == 'POST') {
             $form->handleRequest($request);
@@ -69,21 +70,23 @@ class ThemeController extends Controller
     {
         return array(
             'theme' => $theme,
-            'statuses' => \Capco\AppBundle\Entity\Theme::$statuses
+            'statuses' => Theme::$statuses
         );
     }
 
     /**
      * @Cache(expires="+1 minutes", maxage="60", smaxage="60", public="true")
+     * @param $theme
+     * @return array
      * @Template()
      */
-    public function lastConsultationsAction($theme = null)
+    public function lastConsultationsAction(Theme $theme = null)
     {
         $consultations = $this->getDoctrine()->getRepository('CapcoAppBundle:Consultation')->findByTheme($theme->getId());
 
         return [
             'consultations' => $consultations,
-            'statuses' => \Capco\AppBundle\Entity\Consultation::$openingStatuses
+            'statuses' => Consultation::$openingStatuses
         ];
     }
 
@@ -91,7 +94,7 @@ class ThemeController extends Controller
      * @Cache(expires="+1 minutes", maxage="60", smaxage="60", public="true")
      * @Template()
      */
-    public function lastIdeasAction($theme = null)
+    public function lastIdeasAction(Theme $theme = null)
     {
         $ideas = $this->getDoctrine()->getRepository('CapcoAppBundle:Idea')->findByTheme($theme->getId());
 

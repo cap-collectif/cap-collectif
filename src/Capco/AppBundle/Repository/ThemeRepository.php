@@ -13,17 +13,8 @@ class ThemeRepository extends EntityRepository
 {
     public function getLast($limit = 1, $offset = 0)
     {
-        $qb = $this->createQueryBuilder('t')
-            ->select('t.title, t.slug, count(c.id) as consultationsCount, count(i.id) as ideasCount')
-            ->leftJoin('t.Consultations', 'c')
-            ->leftJoin('t.Ideas', 'i');
-
-        $this->whereIsEnabled($qb);
-        $this->whereIsEnabled($qb, 'c');
-        $this->whereIsEnabled($qb, 'i');
-
-        $qb->addOrderBy('t.createdAt', 'DESC')
-            ->addGroupBy('t.id');
+        $qb = $this->createQueryBuilder('t');
+        $qb->addOrderBy('t.createdAt', 'DESC');
 
         if ($limit) {
             $qb->setMaxResults($limit);
@@ -35,7 +26,7 @@ class ThemeRepository extends EntityRepository
 
         return $qb
             ->getQuery()
-            ->getScalarResult();
+            ->getResult();
     }
 
     public function getSearchResultsWithconsultationsAndIdeas($nbByPage = 8, $page = 1, $term = null)
