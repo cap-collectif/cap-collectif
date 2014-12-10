@@ -1,0 +1,4 @@
+capco_user:
+  register:
+    terms:
+      not_checked: Vous devez accepter la charte pour continuer.

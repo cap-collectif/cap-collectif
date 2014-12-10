@@ -41,11 +41,11 @@
   textarea {
     resize: vertical;
   }
-}
 
-.opinion__list {
-  .opinion:first-child {
-    border-top: 0px;
+  .opinion__list {
+    .opinion:first-child {
+      border-top: 0px;
+    }
   }
 }
 

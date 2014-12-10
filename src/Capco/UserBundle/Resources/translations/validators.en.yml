@@ -1,0 +1,4 @@
+capco_user:
+  register:
+    terms:
+      not_checked: You need to accept the terms and conditions to continue.

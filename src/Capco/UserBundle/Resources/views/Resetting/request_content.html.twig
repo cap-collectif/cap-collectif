@@ -1,7 +1,6 @@
 <div class="container">
     <div class="row">
         <div class="col-lg-4  col-lg-offset-4  col-md-6  col-md-offset-3  col-sm-8  col-sm-offset-2  col-xs-12">
-            <h2>{{ 'resetting.request.submit'|trans({}, 'FOSUserBundle') }}</h2>
             <div class="block--shadowed  box">
                 <form action="{{ path('fos_user_resetting_send_email') }}" method="POST" class="fos_user_resetting_request">
                     <div class="form-group">
@@ -11,7 +10,7 @@
                         <label for="username" class="control-label">{{ 'resetting.request.username'|trans({}, 'FOSUserBundle') }}</label>
                         <input type="text" id="username" name="username" required="required" class="form-control"  />
                     </div>
-                    <button type="submit" class="btn  btn-success  btn-block">{{ 'resetting.reset.submit'|trans({}, 'FOSUserBundle') }}</button>
+                    <button type="submit" class="btn  btn-success  btn-block  login__submit">{{ 'resetting.reset.submit'|trans({}, 'FOSUserBundle') }}</button>
                 </form>
             </div>
         </div>

@@ -1,5 +1,13 @@
 {% extends "CapcoUserBundle::layout.html.twig" %}
-{% block title %} Se connecter sur son profil {{ parent() }} {% endblock %}
+{% block title %} {{ 'user.register.title'|trans({}, 'CapcoAppBundle') }} {{ parent() }} {% endblock %}
+
+{% block jumbotron %}
+    <div class="jumbotron  jumbotron--custom  jumbotron--bg-1  text-center">
+        <div class="container">
+            <h1 class="h2  h--no-border">{{ 'layout.register'|trans({}, 'FOSUserBundle') }}</h1>
+        </div>
+    </div>
+{% endblock %}
 
 {% block fos_user_content %}
     {% include "CapcoUserBundle:Registration:register_content.html.twig" %}

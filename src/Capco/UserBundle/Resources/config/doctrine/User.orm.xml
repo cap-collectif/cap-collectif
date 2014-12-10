@@ -24,6 +24,8 @@
         <many-to-one field="Media" target-entity="Capco\MediaBundle\Entity\Media">
             <join-column name="media_id" referenced-column-name="id" />
         </many-to-one>
+
+        <field name="isTermsAccepted" column="is_terms_accepted" type="boolean" nullable="false" />
     </entity>
 
 </doctrine-mapping>

@@ -53,6 +53,11 @@ class User extends BaseUser
      */
     protected $google_access_token;
 
+    /**
+     * @var boolean $isTermsAccepted
+     */
+    protected $isTermsAccepted = false;
+
     function __construct()
     {
         parent::__construct();
@@ -157,6 +162,22 @@ class User extends BaseUser
     public function getMedia()
     {
         return $this->Media;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function getIsTermsAccepted()
+    {
+        return $this->isTermsAccepted;
+    }
+
+    /**
+     * @param boolean $is_terms_accepted
+     */
+    public function setIsTermsAccepted($isTermsAccepted)
+    {
+        $this->isTermsAccepted = $isTermsAccepted;
     }
 
     public function getFullname()

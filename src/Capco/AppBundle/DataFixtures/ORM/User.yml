@@ -9,6 +9,7 @@ Capco\UserBundle\Entity\User:
         roles:
          - 'ROLE_SUPER_ADMIN'
         Media: @MediaUser2
+        isTermsAccepted: true
 
     user2:
         username: sfavot
@@ -20,6 +21,7 @@ Capco\UserBundle\Entity\User:
         roles:
          - 'ROLE_SUPER_ADMIN'
         Media: @MediaUser1
+        isTermsAccepted: true
 
     user3:
         username: xlacot
@@ -31,3 +33,4 @@ Capco\UserBundle\Entity\User:
         roles:
          - 'ROLE_SUPER_ADMIN'
         Media: @MediaUser3
+        isTermsAccepted: true

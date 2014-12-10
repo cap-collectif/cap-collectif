@@ -1,14 +1,19 @@
 {% extends 'CapcoAppBundle::base.html.twig' %}
 
-{% block body %}
-
-    <div class="container">
-        <div class="row">
-            {% include 'SonataCoreBundle:FlashMessage:render.html.twig' %}
+{% block jumbotron %}
+    <div class="jumbotron  jumbotron--custom  jumbotron--bg-1  text-center">
+        <div class="container">
+            <h1 class="h2  h--no-border">{{ 'layout.login'|trans({}, 'FOSUserBundle') }}</h1>
         </div>
     </div>
+{% endblock %}
 
-    {% block fos_user_content %}
-    {% endblock fos_user_content %}
+{% block error_message %}
+    {{ message | trans({}, 'SonataUserBundle') }}
+{% endblock %}
+
+{% block body %}
+
+    {% block fos_user_content %}{% endblock fos_user_content %}
 
 {% endblock body %}

@@ -5,6 +5,7 @@
   display: block;
   position: relative;
   margin-top: 10px;
+  height: 34px;
 
   &:first-child {
     margin-top: 0;
@@ -56,6 +57,9 @@
 .login__checkbox,
 .login__p {
   font-size: 14px;
+}
+
+.login_p {
   margin-bottom: 0;
 }
 
@@ -63,4 +67,19 @@
   margin-top: 15px;
 }
 
-
+// Alerts for sonata
+.alert-sonata_flash_success,
+.alert-sonata_user_success,
+.alert-fos_user_success {
+ @include alert-variant($alert-success-bg, $alert-success-border, $alert-success-text);
+}
+.alert-sonata_flash_info,
+.alert-sonata_user_info,
+.alert-fos_user_info {
+ @include alert-variant($alert-info-bg, $alert-info-border, $alert-info-text);
+}
+.alert-sonata_flash_error,
+.alert-sonata_user_error,
+.alert-fos_user_error {
+ @include alert-variant($alert-danger-bg, $alert-danger-border, $alert-danger-text);
+}

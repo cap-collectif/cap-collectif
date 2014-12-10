@@ -58,6 +58,7 @@ class UserProvider extends FOSUBUserProvider
             $user->setEmail($response->getEmail());
             $user->setPlainPassword(self::random_string(20));
             $user->setEnabled(true);
+            $user->setIsTermsAccepted(true);
         }
 
         $service = $response->getResourceOwner()->getName();

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -46,13 +46,12 @@
     </div>
 {% endblock %}
 
-{# On affiche les messages flash que définissent les controleurs du bundle #}
 {% for key, messages in app.session.flashbag.all() %}
     {% for message in messages %}
-        <div class="alert alert-{{ key }} alert-dismissible" role="alert" style="margin-bottom: 0">
-            <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-            <span>{{ message }}</span>
-        </div>
+    <div class="alert alert-{{ key }} alert-dismissible  alert--no-radius" role="alert" style="margin-bottom: 0">
+        <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <span>{% block error_message %}{{ message | trans({}, 'CapcoAppBundle') }}{% endblock %}</span>
+    </div>
     {% endfor %}
 {% endfor %}
 

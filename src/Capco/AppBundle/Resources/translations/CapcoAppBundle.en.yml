@@ -1,3 +1,8 @@
+#Général
+global:
+  alert:
+    close: Close
+
 # Homepage
 contact:
   message: -----
@@ -88,3 +93,27 @@ consultation:
     remaining_days: "{0} Consultation ended | {1} Last day | ]1,Inf[ %count% remaining days"
     participants: "{0} No participant | {1} 1 participant | ]1,Inf[ %count% participants"
     contributions: "{0} No contribution | {1} 1 contribution | ]1,Inf[ %count% contributions"
+
+#Users
+user:
+  login:
+    title: Connect to
+    social:
+      facebook: Connect with Facebook
+      gplus: Connect with Google+
+    or: or
+  register:
+    title: Sign in to
+    social:
+      facebook: Sign in with Facebook
+      gplus: Sign in with Google+
+    or: or
+    username:
+      is_public: Your username will be publicly visible on the platform.
+    terms:
+      label: "I agree with %startlink%the terms and conditions%endlink%."
+    legal_text: "----"
+
+#SonataUser errors
+"Bad credentials.": Username and/or password are invalid
+

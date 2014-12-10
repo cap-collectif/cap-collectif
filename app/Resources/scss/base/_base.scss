@@ -91,7 +91,8 @@ hr {
     }
 
     // fix top padding of a title when page content starts with it
-    .main > .container:first-child > #{$name}:first-child {
+    .main > .container:first-child > #{$name}:first-child,
+    .title--first {
       padding-top: 0;
       @media (max-width: $screen-xs-max) {
         padding-top: 0;
@@ -241,4 +242,8 @@ a.excerpt {
     margin-top: 10px;
     float: none !important;
   }
+}
+
+.alert--no-radius {
+  @include border-radius(0);
 }

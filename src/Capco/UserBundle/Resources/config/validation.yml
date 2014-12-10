@@ -1,5 +1,6 @@
 Capco\UserBundle\Entity\User:
-    properties:
-        email:
-            - NotNull: ~
-            - NotBlank: ~
+  properties:
+    isTermsAccepted:
+      - NotNull: ~
+      - "True": { message: capco_user.register.terms.not_checked }
+

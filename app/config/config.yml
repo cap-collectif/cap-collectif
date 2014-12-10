@@ -31,8 +31,7 @@ twig:
     strict_variables: "%kernel.debug%"
     form:
         resources:
-            - 'CapcoAppBundle:Form:fields.html.twig'
-            - 'bootstrap_3_layout.html.twig'
+            - 'CapcoAppBundle:Form:bootstrap.html.twig'
 
 doctrine:
     dbal:
@@ -126,7 +125,3 @@ hwi_oauth:
                 approval_prompt: auto
                 display: page
                 login_hint: email address
-
-sonata_admin:
-    templates:
-        layout: CapcoAdminBundle::standard_layout.html.twig

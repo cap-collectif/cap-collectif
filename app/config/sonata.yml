@@ -2,6 +2,8 @@ sonata_admin:
     title:      Cap Collectif
     options:
         pager_links: 5 # pager max links to display
+    templates:
+        layout: CapcoAdminBundle::standard_layout.html.twig
     dashboard:
         blocks:
             - { position: left,  type: sonata.admin.block.admin_list, settings: { groups: [sonata.admin.group.user, admin.group.content, admin.group.navigation, admin.group.marketing, admin.group.ideas] } }
@@ -143,3 +145,7 @@ sonata_user:
     class:
         group:                Capco\UserBundle\Entity\Group
         user:                 Capco\UserBundle\Entity\User
+    profile:
+        register:
+            form:
+                type: capco_user_registration

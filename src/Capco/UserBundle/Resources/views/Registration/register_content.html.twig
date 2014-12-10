@@ -1,54 +1,76 @@
+<div class="container">
+    <div class="row">
+        <div class="col-lg-4  col-lg-offset-4  col-md-6  col-md-offset-3  col-sm-8  col-sm-offset-2  col-xs-12">
+            <div class="block  block--shadowed  box">
+                    
+                <a href="{{ path('hwi_oauth_service_redirect', {'service': 'facebook' }) }}" title="Sign in with Facebook" class="btn  login__social-btn  login__social-btn--facebook">{{ 'user.register.social.facebook'|trans({}, 'CapcoAppBundle') }}</a>
+                <a href="{{ path('hwi_oauth_service_redirect', {'service': 'google' }) }}" title="Sign in with Google" class="btn  login__social-btn  login__social-btn--googleplus">{{ 'user.register.social.gplus'|trans({}, 'CapcoAppBundle') }}</a>
 
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-4  col-lg-offset-4  col-md-6  col-md-offset-3  col-sm-8  col-sm-offset-2  col-xs-12">
-                <div class="block--shadowed  box">
-                    <h4>Inscrivez-vous en un clic</h4>
-                    <p>Toutes les contributions soumises sur la plateforme sont rendues publiques.</p>
-                    <div class="login__social__btns">
-                        <p>
-                            <a href="{{ path('hwi_oauth_service_redirect', {'service': 'facebook' }) }}" title="Sign in with Facebook" class="btn  btn-primary"><i class="cap-facebook"></i> <span class="sr-only">Facebook</span><span class="hidden-xs"> Facebook</span></a>
-                            <a href="{{ path('hwi_oauth_service_redirect', {'service': 'google' }) }}" title="Sign in with Google" class="btn  btn-danger"><i class="cap-gplus"></i> <span class="sr-only">Google plus</span><span class="hidden-xs"> Google +</span></a>
-                        </p>
-                    </div>
+                <p class="p--lined"><span>{{ 'user.register.or'|trans({}, 'CapcoAppBundle') }}</span></p>
 
-                </div>
-
-                <p class="text-center">ou</p>
-
-                <div class="block--shadowed  box">
-                    <h4>{{ 'title_user_registration'|trans({}, 'SonataUserBundle') }}</h4>
+                {% block capco_user_registration %}
                     <form role="form" action="{{ path('fos_user_registration_register') }}" {{ form_enctype(form) }} method="POST">
-                        <div class="form-group">
-                            <label for="username" class="control-label">{{ 'security.login.username'|trans({}, 'SonataUserBundle') }}</label>
-                            {{ form_widget(form.username, {'attr': {'placeholder': 'Votre pseudo', 'class': 'form-control'} }) }}
+                        <div class="row">
+                            <div class="col-sm-6  form-group">
+                                <label for="firstname" class="control-label  h5" style="margin-top:0;">{{ 'filter.label_firstname'|trans({}, 'SonataUserBundle') }}</label>
+                                {{ form_widget(form.firstname) }}
+                            </div>
+                            {{ form_errors(form.firstname) }}
+
+                            <div class="col-sm-6  form-group">
+                                <label for="lastname" class="control-label  h5" style="margin-top:0;">{{ 'filter.label_lastname'|trans({}, 'SonataUserBundle') }}</label>
+                                {{ form_widget(form.lastname) }}
+                            </div>
+                            {{ form_errors(form.lastname) }}
                         </div>
+
                         <div class="form-group">
-                            <label for="email" class="control-label">{{ 'form.email'|trans({}, 'SonataUserBundle') }}</label>
-                            {{ form_widget(form.email, {'attr': {'placeholder': 'pseudo@exemple.fr', 'class': 'form-control'} }) }}
+                            <label for="username" class="control-label  h5">{{ 'security.login.username'|trans({}, 'SonataUserBundle') }}</label>
+                            {{ form_widget(form.username) }}
+                            <p class="excerpt  h5">{{ 'user.register.username.is_public'|trans({}, 'CapcoAppBundle') }}</p>
                         </div>
+                        {{ form_errors(form.username) }}
+
                         <div class="form-group">
-                            <label for="password" class="control-label">{{ 'security.login.password'|trans({}, 'SonataUserBundle') }}</label>
-                            {{ form_widget(form.plainPassword.first, {'attr': {'class': 'form-control'} }) }}
+                            <label for="email" class="control-label  h5">{{ 'form.email'|trans({}, 'SonataUserBundle') }}</label>
+                            {{ form_widget(form.email) }}
                         </div>
+                        {{ form_errors(form.email) }}
+
                         <div class="form-group">
-                            <label for="password" class="control-label">{{ 'form.password_confirmation'|trans({}, 'SonataUserBundle') }}</label>
-                            {{ form_widget(form.plainPassword.second, {'attr': {'class': 'form-control'} }) }}
+                            <label for="password" class="control-label  h5">
+                                {{ 'security.login.password'|trans({}, 'SonataUserBundle') }}
+                            </label>
+                            {{ form_widget(form.plainPassword.first) }}
                         </div>
-                        <div class="checkbox">
+                        {{ form_errors(form.plainPassword.first) }}
+
+                        <div class="form-group">
+                            <label for="password-confirm" class="control-label  h5">
+                                {{ 'form.password_confirmation'|trans({}, 'SonataUserBundle') }}
+                            </label>
+                            {{ form_widget(form.plainPassword.second) }}
+                        </div>
+                        {{ form_errors(form.plainPassword.second) }}
+
+                        <div class="checkbox  login__checkbox">
                             <label>
-                                <input type="checkbox" required="required"> J'accepte la <a href="#">charte</a>.
+                                {{ form_widget(form.isTermsAccepted) }}
+                                {{ 'user.register.terms.label'|trans({'%startlink%': '<a href="#">', '%endlink%': '</a>'}, 'CapcoAppBundle') | raw }}
                             </label>
                         </div>
+                        {{ form_errors(form.isTermsAccepted) }}
+
                         {{ form_rest(form) }}
-                        <p class="excerpt">Toutes les contributions soumises sur la plateforme sont rendues publiques.</p>
-                        <button type="submit" class="btn  btn-success  btn-block">{{ 'registration.submit'|trans({}, 'FOSUserBundle') }}</button>
-                        <hr>
-                        <p><a href="{{ path('fos_user_security_login') }}" class="btn  btn-default  btn-block">{{ 'link_login'|trans({}, 'SonataUserBundle') }}</a></p>
+                        <button type="submit" class="btn  btn-success  btn-block  login__submit">{{ 'registration.submit'|trans({}, 'FOSUserBundle') }}</button>
+
                     </form>
-                </div>
-                <p class="text-center">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam inventore consequatur dignissimos, molestias reiciendis rem veniam omnis! Quo nihil debitis consectetur neque, atque molestias quam, architecto, maxime illum unde expedita.</p>
+                {% endblock %}
+                <hr>
+                <a href="{{ path('fos_user_security_login') }}" class="btn  btn-light-gray  btn-block">{{ 'link_login'|trans({}, 'SonataUserBundle') }}</a>
+
             </div>
         </div>
     </div>
-
+    <p class="text-center  login__p">{{ 'user.register.legal_text'|trans({'%startlink%': '<a href="#">', '%endlink%': '</a>'}, 'CapcoAppBundle') | raw }}</p>
+</div>
