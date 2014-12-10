@@ -139,6 +139,18 @@ class Consultation
 
     /**
      * @var
+     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\Opinion", mappedBy="Consultation",  cascade={"persist", "remove"})
+     */
+    private $Opinions;
+
+    /**
+     * @var
+     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\Problem", mappedBy="Consultation",  cascade={"persist", "remove"})
+     */
+    private $Problems;
+
+    /**
+     * @var
      *
      * @ORM\ManyToOne(targetEntity="Capco\MediaBundle\Entity\Media")
      * @ORM\JoinColumn(name="media_id", referencedColumnName="id")
@@ -373,7 +385,9 @@ class Consultation
      */
     public function __construct()
     {
-        $this->Themes = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->Themes = new ArrayCollection();
+        $this->Opinions = new ArrayCollection();
+        $this->Problems = new ArrayCollection();
     }
 
     /**
@@ -461,6 +475,68 @@ class Consultation
     {
         return $this->Themes;
     }
+
+    /**
+     *
+     * @param \Capco\AppBundle\Entity\Opinion $opinion
+     *
+     * @return Opinion
+     */
+    public function addOpinion(Opinion $opinion)
+    {
+        $this->Opinions[] = $opinion;
+
+        return $this;
+    }
+
+    /**
+     *
+     * @param \Capco\AppBundle\Entity\Opinion $opinion
+     */
+    public function removeOpinion(Opinion $opinion)
+    {
+        $this->Opinions->removeElement($opinion);
+    }
+
+    /**
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getOpinions()
+    {
+        return $this->Opinions;
+    }
+
+    /**
+     *
+     * @param \Capco\AppBundle\Entity\Problem $problem
+     *
+     * @return Consultation
+     */
+    public function addProblem(Problem $problem)
+    {
+        $this->Problems[] = $problem;
+
+        return $this;
+    }
+
+    /**
+     *
+     * @param \Capco\AppBundle\Entity\Problem $problem
+     */
+    public function removeProblem(Problem $problem)
+    {
+        $this->Problems->removeElement($problem);
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getProblems()
+    {
+        return $this->Problems;
+    }
+
 
     /**
      * Get theme names

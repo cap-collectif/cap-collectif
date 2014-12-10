@@ -3,11 +3,13 @@
 namespace Capco\AppBundle\Controller;
 
 use Capco\AppBundle\Entity\Consultation;
+use Capco\AppBundle\Entity\Theme;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Cache;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 class ConsultationController extends Controller
@@ -33,31 +35,6 @@ class ConsultationController extends Controller
     }
 
     /**
-     * @Cache(expires="+1 minutes", maxage="60", smaxage="60", public="true")
-     * @Template()
-     */
-    public function lastConsultationsAction($theme = null)
-    {
-        $consultations = $this->getDoctrine()->getRepository('CapcoAppBundle:Consultation')->findByTheme($theme->getId());
-
-        return [
-            'consultations' => $consultations,
-            'statuses' => \Capco\AppBundle\Entity\Consultation::$openingStatuses
-        ];
-    }
-
-    /**
-     * @Cache(expires="+1 minutes", maxage="60", smaxage="60", public="true")
-     * @Template()
-     */
-    public function lastIdeasAction($theme = null)
-    {
-        $ideas = $this->getDoctrine()->getRepository('CapcoAppBundle:Idea')->findByTheme($theme->getId());
-
-        return [ 'ideas' => $ideas ];
-    }
-
-    /**
      * @Route("/consultation/{slug}", name="app_consultation_show")
      * @Template()
      * @param Consultation $consultation
@@ -65,10 +42,46 @@ class ConsultationController extends Controller
      */
     public function showAction(Consultation $consultation)
     {
-        return array(
-            'theme' => $consultation,
-            'statuses' => \Capco\AppBundle\Entity\Theme::$statuses
-        );
+        $em = $this->getDoctrine()->getManager();
+        $consultation = $em->getRepository('CapcoAppBundle:Consultation')->getFirstResultWithMedia($consultation->getSlug());
+
+        return [
+            'consultation' => $consultation,
+            'statuses' => Theme::$statuses
+        ];
     }
 
+    /**
+     * @Template()
+     * @param $consultation
+     * @param $offset
+     * @param $limit
+     * @return array
+     */
+    public function getOpinionsAction(Consultation $consultation, $offset, $limit)
+    {
+        $blocks = $this->getDoctrine()->getRepository('CapcoAppBundle:OpinionType')->findByType($consultation, $offset, $limit);
+
+        if (!isset($blocks[0])) {
+            return new Response('');
+        }
+
+        return [ 'blocks' => $blocks ];
+    }
+
+    /**
+     * @Template()
+     * @param $slug
+     * @return array
+     */
+    public function getProblemsAction($slug)
+    {
+        $items = $this->getDoctrine()->getRepository('CapcoAppBundle:Consultation')->getProblems($slug);
+
+        if (!isset($items[0])) {
+            return new Response('');
+        }
+
+        return [ 'items' => $items ];
+    }
 }

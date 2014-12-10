@@ -7,6 +7,8 @@ Capco\AppBundle\Entity\Opinion:
         trashedReason: <text(100)>
         Problem: @contribution4
         Author: @user1
+        Consultation: @cs1
+        OpinionType: @opinionType1
     contribution2:
         title: <text(20)>
         body: <text(1000)>
@@ -15,6 +17,8 @@ Capco\AppBundle\Entity\Opinion:
         trashedReason: <text(100)>
         Problem: @contribution5
         Author: @user1
+        Consultation: @cs2
+        OpinionType: @opinionType2
     contribution3:
         title: <text(20)>
         body: <text(1000)>
@@ -23,3 +27,45 @@ Capco\AppBundle\Entity\Opinion:
         trashedReason: <text(100)>
         Problem: @contribution6
         Author: @user1
+        Consultation: @cs3
+        OpinionType: @opinionType2
+    contribution7:
+        title: <text(20)>
+        body: <text(1000)>
+        isEnabled: <boolean()>
+        isTrashed: <boolean(30)>
+        trashedReason: <text(100)>
+        Problem: @contribution6
+        Author: @user2
+        Consultation: @cs2
+        OpinionType: @opinionType3
+    contribution8:
+        title: <text(20)>
+        body: <text(1000)>
+        isEnabled: <boolean()>
+        isTrashed: <boolean(30)>
+        trashedReason: <text(100)>
+        Problem: @contribution6
+        Author: @user3
+        Consultation: @cs2
+        OpinionType: @opinionType4
+    contribution9:
+        title: <text(20)>
+        body: <text(1000)>
+        isEnabled: <boolean()>
+        isTrashed: <boolean(30)>
+        trashedReason: <text(100)>
+        Problem: @contribution6
+        Author: @user3
+        Consultation: @cs2
+        OpinionType: @opinionType5
+    contribution10:
+        title: <text(20)>
+        body: <text(1000)>
+        isEnabled: <boolean()>
+        isTrashed: <boolean(30)>
+        trashedReason: <text(100)>
+        Problem: @contribution6
+        Author: @user3
+        Consultation: @cs2
+        OpinionType: @opinionType5

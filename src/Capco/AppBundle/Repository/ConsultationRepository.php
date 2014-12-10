@@ -3,6 +3,8 @@
 namespace Capco\AppBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\Query;
+use Doctrine\ORM\QueryBuilder;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 
 /**
@@ -80,4 +82,41 @@ class ConsultationRepository extends EntityRepository
 
         return new Paginator($query);
     }
+
+    public function getFirstResultWithMedia($slug)
+    {
+        $qb = $this->getIsEnabledQueryBuilder('c')
+            ->leftJoin('c.Media', 'm')
+            ->addSelect('m')
+            ->leftJoin('c.Opinions', 'o')
+            ->addSelect('o')
+            ->addOrderBy('o.createdAt', 'DESC')
+            ->andWhere('c.slug = :slug')
+            ->setParameter('slug', $slug);
+
+        return $qb
+            ->getQuery()
+            ->getOneOrNullResult();
+    }
+
+    public function getProblems($slug)
+    {
+        $qb = $this->getIsEnabledQueryBuilder('c')
+            ->leftJoin('c.Problems', 'p')
+            ->addSelect('p')
+            ->leftJoin('p.ProblemType', 'pt')
+            ->addSelect('pt')
+            ->leftJoin('p.Author', 'a')
+            ->addSelect('a')
+            ->addOrderBy('p.createdAt', 'DESC')
+            ->andWhere('c.slug = :slug')
+            ->setParameter('slug', $slug);
+
+        $query =  $qb
+            ->getQuery()
+            ->getResult();
+
+        return $query;
+    }
+
 }

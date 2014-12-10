@@ -2,14 +2,13 @@
 
 namespace Capco\AppBundle\Entity;
 
-use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * Opinion
  *
  * @ORM\Table(name="opinion")
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\OpinionRepository")
  */
 class Opinion extends Contribution
 {
@@ -25,7 +24,7 @@ class Opinion extends Contribution
     /**
      * @var
      *
-     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Problem")
+     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Problem", inversedBy="Opinions")
      * @ORM\JoinColumn(name="problem_id", referencedColumnName="id", nullable=false)
      */
     private $Problem;
@@ -33,14 +32,17 @@ class Opinion extends Contribution
     /**
      * @var
      *
-     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\OpinionType", mappedBy="Opinion")
+     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\OpinionType", inversedBy="Opinions")
+     * @ORM\JoinColumn(name="opinion_type_id", referencedColumnName="id", nullable=false)
      */
-    private $OpinionTypes;
+    private $OpinionType;
 
-    function __construct()
-    {
-        $this->OpinionTypes = new ArrayCollection();
-    }
+    /**
+     * @var
+     *
+     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Consultation", inversedBy="Opinions")
+     */
+    private $Consultation;
 
     public function __toString()
     {
@@ -80,27 +82,34 @@ class Opinion extends Contribution
     /**
      * @return mixed
      */
-    public function getOpinionTypes()
+    public function getOpinionType()
     {
-        return $this->OpinionTypes;
+        return $this->OpinionType;
     }
 
     /**
-     * @param OpinionType $OpinioType
-     * @return $this
+     * @param mixed $OpinionType
      */
-    public function addOpinionType(OpinionType $opinionType)
+    public function setOpinionType($OpinionType)
     {
-        $this->OpinionTypes[] = $opinionType;
+        $this->OpinionType = $OpinionType;
+    }
 
-        return $this;
+
+    /**
+     * @return mixed
+     */
+    public function getConsultation()
+    {
+        return $this->Consultation;
     }
 
     /**
-     * @param OpinionType $OpinioType
+     * @param mixed $Consultation
      */
-    public function removeOpinionType(OpinionType $opinionType)
+    public function setConsultation($Consultation)
     {
-        $this->OpinionTypes->removeElement($opinionType);
+        $this->Consultation = $Consultation;
     }
+
 }

@@ -105,6 +105,7 @@ sonata_media:
                 big:            { width: 500, quality: 70 }
                 consultation:   { width: 400, height: 300, quality: 70 }
                 idea:           { height: 250, quality: 70 }
+                blockHeader:    { width: 1140, height: 200, quality: 70 }
 
         sonata_collection:
             providers:

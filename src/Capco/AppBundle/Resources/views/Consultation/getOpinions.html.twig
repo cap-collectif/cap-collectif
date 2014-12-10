@@ -1,0 +1,50 @@
+<div class="block  block--shadowed">
+    <div class="consultation__nav">
+        <ul class="nav  nav-pills">
+            <li class="active consultation__nav--enjeu"><a href="#all">Vue d'ensemble</a></li>
+            {% for block in blocks %}
+            <li class="consultation__nav--{{ block.slug }}"><a href="#causes">{{ block.title }}</a></li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+{% for block in blocks %}
+    <div class="block  block--shadowed">
+    <div class="opinion  opinion--{{ block.slug }}  opinion--default">
+        <div class="opinion__header  opinion__header--mobile-centered">
+            <h4 class="pull-left  h4  opinion__header__title">{{ block.Opinions|length }} {{ block.title }}</h4>
+            <div class="pull-right  opinion__header__filter">
+                <a href="#" class="btn  btn-default">
+                    <i class="cap cap-add-1"></i>
+                    <span class="hidden-xs  hidden-sm"> Proposer</span>
+                </a>
+            </div>
+        </div>
+    </div>
+    <ul class="media-list  opinion__list"  id="#{{ block.slug }}">
+        {% for opinion in block.Opinions %}
+        <li class="opinion  opinion--{{ block.slug }}">
+            <div class="row">
+                <div class="col-xs-12  col-sm-10">
+                    <div class="opinion__body  box">
+                        {% if opinion.Author.Media %}
+                            <a class="pull-left" href="#">
+                                {% thumbnail opinion.Author.Media, 'avatar' with {'title': opinion.Author.fullname, 'alt': opinion.Author.fullname, 'class': 'img-circle  pull-left'} %}
+                            </a>
+                        {% endif %}
+                        <div class="opinion__data">
+                            <p class="opinion__user  h5"><a href="#">{{ opinion.Author.getFullname }}</a> <span class="pull-right  excerpt">{{ opinion.createdAt | localizeddate('short', 'none', null, null, 'dd MMM') }}</span></p>
+                            <p class="opinion__title"><a href="#">{{ opinion.title }}</a></p>
+                            <p class="opinion__votes  excerpt h5">12 votes • {{ opinion.arguments|length }} arguments</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="hidden-xs col-sm-2 opinion__chart-block">
+                    <div class="center-block  opinion__chart" style="background-color:green; border-radius: 50%;"></div>
+                </div>
+            </div>
+        </li>
+        {% endfor %}
+    </ul>
+</div>
+{% endfor %}

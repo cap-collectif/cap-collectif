@@ -15,7 +15,7 @@
                         {% if loop.last == false %}, {% endif %}
                     {% endfor %}
                 </span>
-                <h4 class="h4"><a href="" title="">{{ consultation.title }}</a></h4>
+                <h4 class="h4"><a href="{{ path('app_consultation_show', {'slug': consultation.slug}) }}" title="">{{ consultation.title }}</a></h4>
             </div>
             <div class="thumbnail__status">
                 <p>

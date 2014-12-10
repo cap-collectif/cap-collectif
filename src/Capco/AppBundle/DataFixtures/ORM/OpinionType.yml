@@ -4,33 +4,23 @@ Capco\AppBundle\Entity\OpinionType:
         shortName: <text(10)>
         position: <numberBetween(1, 10)>
         voteWidgetType: 1
-        ProblemType: @problemType1
-        opinion: @contribution1
     opinionType2:
-        title: Tomate
+        title: Enjeu
         shortName: <text(10)>
         position: <numberBetween(1, 10)>
         voteWidgetType: 2
-        ProblemType: @problemType2
-        opinion: @contribution2
     opinionType3:
-        title: Salade
+        title: Solution
         shortName: <text(10)>
         position: <numberBetween(1, 10)>
         voteWidgetType: 2
-        ProblemType: @problemType2
-        opinion: @contribution3
     opinionType4:
-        title: Enjeux
+        title: Corbeille
         shortName: <text(10)>
         position: <numberBetween(1, 10)>
         voteWidgetType: 2
-        ProblemType: @problemType1
-        opinion: @contribution1
     opinionType5:
         title: Concombre
         shortName: <text(10)>
         position: <numberBetween(1, 10)>
         voteWidgetType: 3
-        ProblemType: @problemType2
-        opinion: @contribution2

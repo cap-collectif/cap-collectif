@@ -30,6 +30,25 @@ class Problem extends Contribution
      */
     private $ProblemType;
 
+    /**
+     * @var
+     *
+     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Consultation", inversedBy="Problems")
+     * @ORM\JoinColumn(name="consultation_id", referencedColumnName="id", nullable=false)
+     */
+    private $Consultation;
+
+    /**
+     * @var
+     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\Opinion", mappedBy="Problem",  cascade={"persist", "remove"})
+     */
+    private $Opinions;
+
+    function __construct()
+    {
+        $this->Opinions = new ArrayCollection();
+    }
+
     public function __toString()
     {
         if ($this->id) {
@@ -38,6 +57,7 @@ class Problem extends Contribution
             return "New problem";
         }
     }
+
 
     /**
      * Get id
@@ -63,6 +83,51 @@ class Problem extends Contribution
     public function setProblemType($ProblemType)
     {
         $this->ProblemType = $ProblemType;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getConsultation()
+    {
+        return $this->Consultation;
+    }
+
+    /**
+     * @param mixed $Consultation
+     */
+    public function setConsultation($Consultation)
+    {
+        $this->Consultation = $Consultation;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getOpinions()
+    {
+        return $this->Opinions;
+    }
+
+    /**
+     * @param \Capco\AppBundle\Entity\Opinion $opinion
+     *
+     * @return Consultation
+     */
+    public function addOpinion(Opinion $opinion)
+    {
+        $this->Opinions[] = $opinion;
+
+        return $this;
+    }
+
+    /**
+     *
+     * @param \Capco\AppBundle\Entity\Opinion $opinion
+     */
+    public function removeOpinion(Opinion $opinion)
+    {
+        $this->Opinions->removeElement($opinion);
     }
 
 }

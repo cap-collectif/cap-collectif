@@ -25,6 +25,12 @@ liip_imagine:
             filters:
                 thumbnail: { size: [400, 300], mode: inbound }
 
+        default_blockHeader:
+            quality: 100
+            controller_action: 'SonataMediaBundle:Media:liipImagineFilter'
+            filters:
+                thumbnail: { size: [1140, 200], mode: inbound }
+
         default_avatar:
             quality: 70
             controller_action: 'SonataMediaBundle:Media:liipImagineFilter'

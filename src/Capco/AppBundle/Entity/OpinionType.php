@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 
@@ -9,7 +10,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
  * OpinionType
  *
  * @ORM\Table(name="opinion_type")
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\OpinionTypeRepository")
  */
 class OpinionType
 {
@@ -77,22 +78,14 @@ class OpinionType
     /**
      * @var
      *
-     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\ProblemType", inversedBy="OpinionTypes")
-     * @ORM\JoinColumn(name="opinion_type_id", referencedColumnName="id")
+     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\Opinion", mappedBy="OpinionType")
      */
-    private $ProblemType;
-
-    /**
-     * @var
-     *
-     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Opinion", inversedBy="OpinionTypes")
-     * @ORM\JoinColumn(name="opinion_id", referencedColumnName="id", nullable=false)
-     */
-    private $Opinion;
+    private $Opinions;
 
     function __construct()
     {
         $this->voteWidgetType = self::VOTE_WIDGET_TYPE_ACCORD;
+        $this->Opinions = new ArrayCollection();
     }
 
     public function __toString()
@@ -252,35 +245,31 @@ class OpinionType
     /**
      * @return mixed
      */
-    public function getProblemType()
+    public function getOpinions()
     {
-        return $this->ProblemType;
+        return $this->Opinions;
     }
 
     /**
-     * @param mixed $ProblemType
+     *
+     * @param \Capco\AppBundle\Entity\Opinion $opinion
+     * @return Consultation
      */
-    public function setProblemType($ProblemType)
+    public function addOpinion(Opinion $opinion)
     {
-        $this->ProblemType = $ProblemType;
+        $this->Opinions[] = $opinion;
+
+        return $this;
     }
 
     /**
-     * @return mixed
+     *
+     * @param \Capco\AppBundle\Entity\Opinion $opinion
      */
-    public function getOpinion()
+    public function removeOpinion(Opinion $opinion)
     {
-        return $this->Opinion;
+        $this->Opinions->removeElement($opinion);
     }
-
-    /**
-     * @param mixed $Opinion
-     */
-    public function setOpinion($Opinion)
-    {
-        $this->Opinion = $Opinion;
-    }
-
 
     /**
      * Set createdAt

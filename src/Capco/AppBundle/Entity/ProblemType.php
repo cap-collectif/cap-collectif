@@ -75,14 +75,6 @@ class ProblemType
     /**
      * @var
      *
-     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\OpinionType", mappedBy="ProblemType", cascade={"persist", "remove"})
-     *
-     */
-    private $OpinionTypes;
-
-    /**
-     * @var
-     *
      * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\Problem", mappedBy="ProblemType")
      *
      */
@@ -91,7 +83,6 @@ class ProblemType
     function __construct()
     {
         $this->voteWidgetType = self::VOTE_WIDGET_TYPE_ACCORD;
-        $this->OpinionTypes = new ArrayCollection();
         $this->Problems = new ArrayCollection();
     }
 
@@ -224,34 +215,6 @@ class ProblemType
     public function getUpdatedAt()
     {
         return $this->updatedAt;
-    }
-
-    /**
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getOpinionTypes()
-    {
-        return $this->OpinionTypes;
-    }
-
-    /**
-     * @param Capco\AppBundle\Entity\OpinionType $opinionType
-     * @return ProblemType
-     */
-    public function addOpinionType(OpinionType $opinionType)
-    {
-        $this->OpinionTypes[] = $opinionType;
-
-        return $this;
-    }
-
-    /**
-     * @param Capco\AppBundle\Entity\OpinionType $opinionType
-     *
-     */
-    public function removeOpinionType(OpinionType $opinionType)
-    {
-        $this->OpinionTypes->removeElement($opinionType);
     }
 
     /**
