@@ -1,26 +1,26 @@
 Capco\AppBundle\Entity\OpinionType:
     opinionType1:
-        title: Cause
-        shortName: <text(10)>
+        title: Les causes
+        shortName: Causes
         position: <numberBetween(1, 10)>
         voteWidgetType: 1
     opinionType2:
-        title: Enjeu
-        shortName: <text(10)>
+        title: Les enjeux
+        shortName: Enjeux
         position: <numberBetween(1, 10)>
         voteWidgetType: 2
     opinionType3:
-        title: Solution
-        shortName: <text(10)>
+        title: Les solutions
+        shortName: Solution
         position: <numberBetween(1, 10)>
         voteWidgetType: 2
     opinionType4:
         title: Corbeille
-        shortName: <text(10)>
-        position: <numberBetween(1, 10)>
+        shortName: Éléments
+        position: 100
         voteWidgetType: 2
     opinionType5:
-        title: Concombre
-        shortName: <text(10)>
+        title: Toutes les tomates
+        shortName: Tomates
         position: <numberBetween(1, 10)>
         voteWidgetType: 3

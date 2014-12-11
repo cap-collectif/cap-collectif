@@ -28,6 +28,7 @@ class OpinionTypeRepository extends EntityRepository
             ->addSelect('a')
             ->andWhere('o.Consultation = :consultation')
             ->setParameter('consultation', $consultation)
+            ->orderBy('ot.position', 'DESC')
             ->orderBy('o.createdAt', 'DESC');
 
         if ($limit) {
@@ -42,5 +43,23 @@ class OpinionTypeRepository extends EntityRepository
             ->getQuery()
             ->getResult();
     }
+
+//    public function getOpinionWithConsultation($consultation, $slug)
+//    {
+//        $qb = $this->createQueryBuilder('ot')
+//            ->leftJoin('ot.Opinions','o')
+//            ->addSelect('o')
+//            ->leftJoin('o.Consultation', 'c')
+//            ->addSelect('c')
+//            ->andWhere('o.Consultation = :consultation')
+//            ->setParameter('consultation', $consultation)
+//            ->andWhere('ot.slug = :slug')
+//            ->setParameter('slug', $slug)
+//            ->orderBy('ot.position', 'ASC');
+//
+//        return $qb
+//            ->getQuery()
+//            ->getResult();
+//    }
 
 }

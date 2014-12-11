@@ -16,29 +16,31 @@ use Doctrine\ORM\Tools\Pagination\Paginator;
 class OpinionRepository extends EntityRepository
 {
     //Récupère toutes les opinions par Type d'une consultation, avec la possibilité de définir un offset et un limit
-//    public function getOpinionByType($consultation, $offset = 1, $limit = 10)
-//    {
-//        $qb = $this->createQueryBuilder('o')
-//            ->leftJoin('o.OpinionType', 'ot')
-//            ->addSelect('ot')
-//            ->leftJoin('o.Consultation', 'c')
-//            ->addSelect('c')
-//            ->leftJoin('o.Author', 'a')
-//            ->addSelect('a')
-//            ->andWhere('o.Consultation = :consultation')
-//            ->setParameter('consultation', $consultation)
-//            ->orderBy('o.createdAt', 'DESC');
-//
-//        if ($limit) {
-//            $qb->setMaxResults($limit);
-//        }
-//
-//        if ($offset) {
-//            $qb->setFirstResult($offset);
-//        }
-//
-//        return $qb
-//            ->getQuery()
-//            ->getResult();
-//    }
+    public function getOpinionsByType($opinionType_slug, $offset = 1, $limit = 10)
+    {
+        $qb = $this->createQueryBuilder('o')
+            ->leftJoin('o.OpinionType', 'ot')
+            ->addSelect('ot')
+            ->leftJoin('o.Consultation', 'c')
+            ->addSelect('c')
+            ->leftJoin('o.Author', 'a')
+            ->addSelect('a')
+//            ->andWhere('c.slug = :slug')
+//            ->setParameter('slug', $consultation)
+            ->andWhere('ot.slug = :opinionType_slug')
+            ->setParameter('opinionType_slug', $opinionType_slug)
+            ->orderBy('o.createdAt', 'DESC');
+
+        if ($limit) {
+            $qb->setMaxResults($limit);
+        }
+
+        if ($offset) {
+            $qb->setFirstResult($offset);
+        }
+
+        return $qb
+            ->getQuery()
+            ->getResult();
+    }
 }

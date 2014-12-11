@@ -1,24 +1,25 @@
+{% for item in items %}
 <div class="block  block--first--mobile  block--shadowed">
     <div class="opinion opinion--probleme">
         <div class="opinion__header">
-            <h4 class="h4">Le problème constaté</h4>
+            <h4 class="h4">{{ item.problemTitle }}</h4>
         </div>
     </div>
     <ul class="media-list  opinion__list">
-        {% for item in items %}
+        {% for problem in item.Problems %}
         <li class="opinion  opinion--probleme">
             <div class="row">
                 <div class="col-xs-12  col-sm-10">
                     <div class="opinion__body  box">
-                        {% if item.Author.Media %}
+                        {% if problem.Author.Media %}
                             <a class="pull-left" href="#">
-                                {% thumbnail item.Author.Media, 'avatar' with {'title': item.Author.fullname, 'alt': item.Author.fullname, 'class': 'img-circle  pull-left'} %}
+                                {% thumbnail problem.Author.Media, 'avatar' with {'title': problem.Author.fullname, 'alt': problem.Author.fullname, 'class': 'img-circle  pull-left'} %}
                             </a>
                         {% endif %}
                         <div class="opinion__data">
-                            <p class="opinion__user  h5"><a href="#">{{ item.Author.getFullname }}</a> <span class="pull-right  excerpt">{{ item.createdAt | localizeddate('short', 'none', null, null, 'dd MMM') }}</span></p>
-                            <p class="opinion__title"><a href="#">{{ item.title }}</a></p>
-                            <p class="opinion__votes  excerpt h5">12 votes • 45 arguments</p>
+                            <p class="opinion__user  h5"><a href="#">{{ problem.Author.getFullname }}</a> <span class="pull-right  excerpt">{{ problem.createdAt | localizeddate('short', 'none', null, null, 'dd MMM') }}</span></p>
+                            <p class="opinion__title"><a href="#">{{ problem.title }}</a></p>
+                            <p class="opinion__votes  excerpt h5">12 votes • {{ problem.arguments|length }} arguments</p>
                         </div>
                     </div>
                 </div>
@@ -30,3 +31,4 @@
         {% endfor %}
     </ul>
 </div>
+{% endfor %}

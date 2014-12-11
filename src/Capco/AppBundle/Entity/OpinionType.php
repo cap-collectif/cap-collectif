@@ -42,7 +42,7 @@ class OpinionType
     private $shortName;
 
     /**
-     * @Gedmo\Slug(fields={"title"})
+     * @Gedmo\Slug(fields={"shortName"})
      * @ORM\Column(length=255)
      */
     private $slug;

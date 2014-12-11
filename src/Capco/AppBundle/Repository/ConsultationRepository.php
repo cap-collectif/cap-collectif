@@ -98,25 +98,4 @@ class ConsultationRepository extends EntityRepository
             ->getQuery()
             ->getOneOrNullResult();
     }
-
-    public function getProblems($slug)
-    {
-        $qb = $this->getIsEnabledQueryBuilder('c')
-            ->leftJoin('c.Problems', 'p')
-            ->addSelect('p')
-            ->leftJoin('p.ProblemType', 'pt')
-            ->addSelect('pt')
-            ->leftJoin('p.Author', 'a')
-            ->addSelect('a')
-            ->addOrderBy('p.createdAt', 'DESC')
-            ->andWhere('c.slug = :slug')
-            ->setParameter('slug', $slug);
-
-        $query =  $qb
-            ->getQuery()
-            ->getResult();
-
-        return $query;
-    }
-
 }

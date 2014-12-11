@@ -69,3 +69,14 @@ Capco\AppBundle\Entity\Opinion:
         Author: @user3
         Consultation: @cs2
         OpinionType: @opinionType5
+    contribution{11..25}:
+        title: <text(20)>
+        body: <text(1000)>
+        isEnabled: <boolean()>
+        isTrashed: <boolean(30)>
+        trashedReason: <text(100)>
+        Problem: @contribution6
+        Author: @user*
+        Consultation: @cs2
+        OpinionType: @opinionType*
+        createdAt: <dateTimeBetween('-1 years','+10 days')>

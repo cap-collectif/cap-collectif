@@ -10,7 +10,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
  * ProblemType
  *
  * @ORM\Table(name="problem_type")
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\ProblemTypeRepository")
  */
 class ProblemType
 {

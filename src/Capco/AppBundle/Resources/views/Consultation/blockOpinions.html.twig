@@ -31,7 +31,7 @@
             <div class="col-xs-12  col-sm-4  col-md-3">
                 <div class="thumbnail--custom  thumbnail--sidebar  block--shadowed">
                     {#<a href="#" class="play" data-length="3:50">#}
-                        {#<img class="img-responsive  center-block" src="http://lorempixel.com/400/300/technics" alt="image de la consultation">#}
+                    {#<img class="img-responsive  center-block" src="http://lorempixel.com/400/300/technics" alt="image de la consultation">#}
                     {#</a>#}
                     <div class="box">
                         <h4 class="h4">Introduction</h4>
@@ -100,9 +100,47 @@
             </div>
 
             <div class="col-xs-12  col-sm-8  col-md-9" id="details">
+
                 {{ render(controller('CapcoAppBundle:Consultation:getNavOpinionType', {'consultation': consultation.id, 'type': app.request.attributes.get('opinion_type_slug')})) }}
-                {{ render(controller('CapcoAppBundle:Consultation:getProblems', {'consultation': consultation.id})) }}
-                {{ render(controller('CapcoAppBundle:Consultation:getOpinions', {'consultation': consultation.id, 'offset': 0, 'limit': 10})) }}
+
+                <div class="block  block--shadowed">
+                    <div class="opinion  opinion--{{ app.request.attributes.get('opinion_type_slug') }} opinion--default">
+                        <div class="opinion__header  opinion__header--mobile-centered">
+                            <h4 class="pull-left  h4  opinion__header__title">{{ opinions|length }} {{ app.request.attributes.get('opinion_type_slug') }}</h4>
+                            <div class="pull-right  opinion__header__filter">
+                                <a href="#" class="btn  btn-default">
+                                    <i class="cap cap-add-1"></i>
+                                    <span class="hidden-xs  hidden-sm"> Proposer</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <ul class="media-list  opinion__list">
+                        {% for opinion in opinions %}
+                            <li class="opinion  opinion--{{ opinion.slug }}">
+                                <div class="row">
+                                    <div class="col-xs-12  col-sm-10">
+                                        <div class="opinion__body  box">
+                                            {% if opinion.Author.Media %}
+                                                <a class="pull-left" href="#">
+                                                    {% thumbnail opinion.Author.Media, 'avatar' with {'title': opinion.Author.fullname, 'alt': opinion.Author.fullname, 'class': 'img-circle  pull-left'} %}
+                                                </a>
+                                            {% endif %}
+                                            <div class="opinion__data">
+                                                <p class="opinion__user  h5"><a href="#">{{ opinion.Author.getFullname }}</a> <span class="pull-right  excerpt">{{ opinion.createdAt | localizeddate('short', 'none', app.request.locale, null , 'dd MMM YYYY') }}</span></p>
+                                                <p class="opinion__title"><a href="#">{{ opinion.title }}</a></p>
+                                                <p class="opinion__votes  excerpt h5">12 votes • {{ opinion.arguments|length }} arguments</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="hidden-xs col-sm-2 opinion__chart-block">
+                                        <div class="center-block  opinion__chart" style="background-color:green; border-radius: 50%;"></div>
+                                    </div>
+                                </div>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>
             </div> <!-- col-xs-12  col-sm-8  col-md-9 -->
         </div> <!-- .row -->
     </div>
