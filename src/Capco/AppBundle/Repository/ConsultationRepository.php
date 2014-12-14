@@ -2,9 +2,10 @@
 
 namespace Capco\AppBundle\Repository;
 
+use Capco\AppBundle\Entity\Consultation;
+use Capco\AppBundle\Entity\Theme;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\Query;
-use Doctrine\ORM\QueryBuilder;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 
 /**
@@ -61,7 +62,7 @@ class ConsultationRepository extends EntityRepository
             ->execute();
     }
 
-    public function getSearchResultsWithTheme($nbByPage = 8, $page = 1)
+    public function getSearchResultsWithTheme($nbByPage = 8, $page = 1, $theme = null, $sort = null, $term = null)
     {
         if ((int) $page < 1) {
             throw new \InvalidArgumentException(sprintf(
@@ -75,6 +76,24 @@ class ConsultationRepository extends EntityRepository
             ->addSelect('t')
             ->addOrderBy('c.createdAt', 'DESC')
         ;
+
+        if ($theme !== null && $theme !== Theme::FILTER_ALL) {
+            $qb->andWhere('t.slug = :theme')
+                ->setParameter('theme', $theme)
+            ;
+        }
+
+        if ($term !== null) {
+            $qb->andWhere('c.title LIKE :term')
+                ->setParameter('term', '%'.$term.'%')
+            ;
+        }
+
+        if (isset(Consultation::$sortOrder[$sort]) && Consultation::$sortOrder[$sort] == Consultation::SORT_ORDER_VOTES_COUNT) {
+            $qb->orderBy('c.contributionCount', 'DESC');
+        } else {
+            $qb->orderBy('c.createdAt', 'DESC');
+        }
 
         $query = $qb->getQuery()
             ->setFirstResult(($page - 1) * $nbByPage)

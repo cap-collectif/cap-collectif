@@ -2,6 +2,7 @@
 
 namespace Capco\AdminBundle\Admin;
 
+use Capco\AppBundle\Entity\OpinionType;
 use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
@@ -19,6 +20,7 @@ class OpinionTypeAdmin extends Admin
             ->add('position')
             ->add('voteWidgetType')
             ->add('createdAt')
+            ->add('color')
         ;
     }
 
@@ -31,6 +33,7 @@ class OpinionTypeAdmin extends Admin
             ->add('title')
             ->add('shortName')
             ->add('position')
+            ->add('color')
             ->add('voteWidgetType')
             ->add('createdAt')
             ->add('_action', 'actions', array(
@@ -53,6 +56,7 @@ class OpinionTypeAdmin extends Admin
             ->add('shortName')
             ->add('position')
             ->add('voteWidgetType')
+            ->add('color', 'choice', array('choices' => OpinionType::$colorsType))
         ;
     }
 
@@ -68,6 +72,7 @@ class OpinionTypeAdmin extends Admin
             ->add('voteWidgetType')
             ->add('createdAt')
             ->add('updatedAt')
+            ->add('color')
         ;
     }
 }

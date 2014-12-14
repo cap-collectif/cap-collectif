@@ -4,23 +4,28 @@ Capco\AppBundle\Entity\OpinionType:
         shortName: Causes
         position: <numberBetween(1, 10)>
         voteWidgetType: 1
+        color: orange
     opinionType2:
         title: Les enjeux
         shortName: Enjeux
         position: <numberBetween(1, 10)>
         voteWidgetType: 2
+        color: blue
     opinionType3:
         title: Les solutions
         shortName: Solution
         position: <numberBetween(1, 10)>
         voteWidgetType: 2
+        color: green
     opinionType4:
-        title: Corbeille
-        shortName: Éléments
+        title: Toutes les fraises
+        shortName: fraises
         position: 100
         voteWidgetType: 2
+        color: graylight
     opinionType5:
         title: Toutes les tomates
         shortName: Tomates
         position: <numberBetween(1, 10)>
         voteWidgetType: 3
+        color: bluelight

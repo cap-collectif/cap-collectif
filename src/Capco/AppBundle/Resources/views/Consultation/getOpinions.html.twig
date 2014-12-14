@@ -1,8 +1,9 @@
 {% for block in blocks %}
     <div class="block  block--shadowed">
-    <div class="opinion  opinion--{{ block.slug }}  opinion--default">
+    <div class="opinion  opinion--{{ block.color }}  opinion--default">
         <div class="opinion__header  opinion__header--mobile-centered">
-            <h4 class="pull-left  h4  opinion__header__title"> {{ block.title }} <span class="label label-default">{{ block.Opinions|length }}</span></h4>
+
+            <h4 class="pull-left  h4  opinion__header__title"> {{ block.title }} <span class="badge">{{ block.Opinions|length }}</span></h4>
             <div class="pull-right  opinion__header__filter">
                 <a href="#" class="btn  btn-default">
                     <i class="cap cap-add-1"></i>
@@ -13,6 +14,8 @@
     </div>
     <ul class="media-list  opinion__list"  id="#{{ block.slug }}">
         {% for opinion in block.Opinions %}
+        {% set nbVotes = (opinion.Votes|length) %}
+        {% set nbArguments = (opinion.arguments|length) %}
         <li class="opinion  opinion--{{ block.slug }}">
             <div class="row">
                 <div class="col-xs-12  col-sm-10">
@@ -23,9 +26,17 @@
                             </a>
                         {% endif %}
                         <div class="opinion__data">
-                            <p class="opinion__user  h5"><a href="#">{{ opinion.Author.getFullname }}</a> <span class="pull-right  excerpt">{{ opinion.createdAt | localizeddate('short', 'none', null, null, 'dd MMM') }}</span></p>
+                            <p class="opinion__user  h5"><a href="#">{{ opinion.Author.getFullname }}</a> <span class="pull-right  excerpt">{{ opinion.createdAt | localizeddate('medium', 'none', app.request.locale) }}</span></p>
                             <p class="opinion__title"><a href="#">{{ opinion.title }}</a> </p>
-                            <p class="opinion__votes  excerpt h5">12 votes • {{ opinion.arguments|length }} arguments</p>
+                            <p class="opinion__votes  excerpt h5">
+                                {% transchoice nbVotes with {'%count%': nbVotes} from 'CapcoAppBundle' %}
+                                consultation.show.votes
+                                {% endtranschoice %}
+                                •
+                                {% transchoice nbArguments with {'%count%': nbArguments} from 'CapcoAppBundle' %}
+                                consultation.show.arguments
+                                {% endtranschoice %}
+                            </p>
                         </div>
                     </div>
                 </div>

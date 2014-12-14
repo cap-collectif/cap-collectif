@@ -15,7 +15,7 @@ use Doctrine\ORM\Tools\Pagination\Paginator;
  */
 class OpinionTypeRepository extends EntityRepository
 {
-    public function findByType($consultation, $offset = 0, $limit = 10)
+    public function findByType($consultation)
     {
         $qb = $this->createQueryBuilder('ot')
             ->leftJoin('ot.Opinions','o')
@@ -26,40 +26,18 @@ class OpinionTypeRepository extends EntityRepository
             ->addSelect('c')
             ->leftJoin('o.Author', 'a')
             ->addSelect('a')
+            ->leftJoin('o.arguments', 'arg')
+            ->addSelect('arg')
+            ->leftJoin('o.Votes', 'v')
+            ->addSelect('v')
             ->andWhere('o.Consultation = :consultation')
             ->setParameter('consultation', $consultation)
             ->orderBy('ot.position', 'DESC')
             ->orderBy('o.createdAt', 'DESC');
 
-        if ($limit) {
-            $qb->setMaxResults($limit);
-        }
-
-        if ($offset) {
-            $qb->setFirstResult($offset);
-        }
-
         return $qb
             ->getQuery()
             ->getResult();
     }
-
-//    public function getOpinionWithConsultation($consultation, $slug)
-//    {
-//        $qb = $this->createQueryBuilder('ot')
-//            ->leftJoin('ot.Opinions','o')
-//            ->addSelect('o')
-//            ->leftJoin('o.Consultation', 'c')
-//            ->addSelect('c')
-//            ->andWhere('o.Consultation = :consultation')
-//            ->setParameter('consultation', $consultation)
-//            ->andWhere('ot.slug = :slug')
-//            ->setParameter('slug', $slug)
-//            ->orderBy('ot.position', 'ASC');
-//
-//        return $qb
-//            ->getQuery()
-//            ->getResult();
-//    }
 
 }

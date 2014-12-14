@@ -94,6 +94,10 @@ consultation:
     remaining_days: "{0} Consultation terminée | {1} Dernier jour | ]1,Inf[ %count% jours restants"
     participants: "{0} Aucun participant | {1} 1 participant | ]1,Inf[ %count% participants"
     contributions: "{0} Aucune contribution | {1} 1 contribution | ]1,Inf[ %count% contributions"
+    votes: "{0} Aucun vote | {1} 1 vote | ]1,Inf[ %count% votes"
+    arguments: "{0} Aucun argument | {1} 1 argument | ]1,Inf[ %count% arguments"
+  searchform:
+    no_result:  Aucune consultation ne correspond à ces critères de recherche
 
 #Users
 user:

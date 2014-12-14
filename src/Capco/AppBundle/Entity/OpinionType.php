@@ -14,6 +14,16 @@ use Gedmo\Mapping\Annotation as Gedmo;
  */
 class OpinionType
 {
+    public static $colorsType = [
+        'red' => 'rouge',
+        'green' => 'vert',
+        'blue' => 'bleu',
+        'orange' => 'orange',
+        'bluelight' => 'bleu clair',
+        'gray' => 'gris',
+        'graylight' => 'gris clair',
+    ];
+
     const VOTE_WIDGET_TYPE_DISABLED = 0;
     const VOTE_WIDGET_TYPE_ACCORD = 1;
     const VOTE_WIDGET_TYPE_FAVORABLE = 2;
@@ -81,6 +91,13 @@ class OpinionType
      * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\Opinion", mappedBy="OpinionType")
      */
     private $Opinions;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="color", type="string", length=50)
+     */
+    private $color;
 
     function __construct()
     {
@@ -298,4 +315,21 @@ class OpinionType
 
         return $this;
     }
+
+    /**
+     * @return string
+     */
+    public function getColor()
+    {
+        return $this->color;
+    }
+
+    /**
+     * @param string $color
+     */
+    public function setColor($color)
+    {
+        $this->color = $color;
+    }
+
 }

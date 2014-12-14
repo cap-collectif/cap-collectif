@@ -28,6 +28,11 @@
       .btn:hover {
         color: $black;
       }
+
+      .badge {
+        background-color: $text;
+        color: $color;
+      }
     }
   }
 

@@ -112,11 +112,13 @@ $social-colors:
 // -------------------------------
 $opinion-types:
   ("default" $light-gray)
-  (probleme $brand-danger)
-  (cause $brand-warning)
-  (enjeu $brand-primary)
-  (solution $brand-success)
-  (corbeille $gray-primary)
+  ("red" $brand-danger)
+  ("orange" $brand-warning)
+  ("blue" $brand-primary)
+  ("bluelight" $brand-info)
+  ("green" $brand-success)
+  ("gray" $gray-primary)
+  ("graylight" $light-gray)
   (source $brand-primary)
   (idee $light-gray)
   (consultation $light-gray);

@@ -49,8 +49,9 @@ class OpinionAdmin extends Admin
         $formMapper
             ->add('title')
             ->add('body')
-            ->add('isEnabled')
-            ->add('isTrashed')
+            ->add('isEnabled', null, array(
+                    'label'     => 'Afficher publiquement ?',
+                    'required'  => false,))
             ->add('trashedReason')
         ;
     }

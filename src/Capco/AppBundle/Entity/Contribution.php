@@ -84,7 +84,7 @@ class Contribution
     /**
      * @var string
      *
-     * @ORM\Column(name="trashed_reason", type="text")
+     * @ORM\Column(name="trashed_reason", type="text", nullable=true)
      */
     private $trashedReason;
 

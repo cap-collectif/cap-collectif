@@ -22,6 +22,7 @@ class ThemeController extends Controller
      * @Template()
      * @param $page
      * @param $request
+     * @param $term
      * @return array
      */
     public function indexAction(Request $request, $page, $term = null)

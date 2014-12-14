@@ -93,6 +93,9 @@ consultation:
     remaining_days: "{0} Consultation ended | {1} Last day | ]1,Inf[ %count% remaining days"
     participants: "{0} No participant | {1} 1 participant | ]1,Inf[ %count% participants"
     contributions: "{0} No contribution | {1} 1 contribution | ]1,Inf[ %count% contributions"
+    votes: ----
+    arguments: ---
+    no_result:  There's no consultation matching this search
 
 #Users
 user:

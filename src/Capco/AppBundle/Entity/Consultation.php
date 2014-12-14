@@ -14,6 +14,19 @@ use Doctrine\Common\Collections\ArrayCollection;
  */
 class Consultation
 {
+
+    const SORT_ORDER_CREATED_AT = 0;
+    const SORT_ORDER_VOTES_COUNT = 1;
+
+    public static $sortOrder = [
+        'date' => self::SORT_ORDER_CREATED_AT,
+        'popularity' => self::SORT_ORDER_VOTES_COUNT,
+    ];
+    public static $sortOrderLabels = [
+        'date' => 'idea.sort.created_at',
+        'popularity' => 'idea.sort.popularity',
+    ];
+
     const OPENING_STATUS_FUTURE = 0;
     const OPENING_STATUS_OPENED = 1;
     const OPENING_STATUS_ENDED = 2;
@@ -100,14 +113,14 @@ class Consultation
      *
      * @ORM\Column(name="opinion_count", type="integer")
      */
-    private $opinionCount;
+    private $opinionCount = 0;
 
     /**
      * @var integer
      *
      * @ORM\Column(name="argument_count", type="integer")
      */
-    private $argumentCount;
+    private $argumentCount = 0;
 
     /**
      * @var integer

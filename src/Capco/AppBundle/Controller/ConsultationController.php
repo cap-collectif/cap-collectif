@@ -6,6 +6,7 @@ use Capco\AppBundle\Entity\Consultation;
 use Capco\AppBundle\Entity\Opinion;
 use Capco\AppBundle\Entity\OpinionType;
 use Capco\AppBundle\Entity\Theme;
+use Capco\AppBundle\Form\ConsultationSearchType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
@@ -20,20 +21,55 @@ class ConsultationController extends Controller
 
     /**
      * @Route("/consultations/{page}", name="app_consultation", requirements={"page" = "\d+"}, defaults={"page" = 1} )
+     * @Route("/consultations/{theme}/{sort}/{page}", name="app_consultation_search", requirements={"page" = "\d+"}, defaults={"page" = 1, "theme" = "all"} )
+     * @Route("/consultations/{theme}/{sort}/{term}/{page}", name="app_consultation_search_term", requirements={"page" = "\d+"}, defaults={"page" = 1, "theme" = "all"} )
      * @Template()
      * @param $page
+     * @param $request
+     * @param $theme
+     * @param $sort
+     * @param $term
      * @return array
      */
-    public function indexAction($page)
+    public function indexAction(Request $request, $page, $theme = null, $sort = null, $term = null)
     {
         $em = $this->getDoctrine()->getManager();
-        $consultations = $em->getRepository('CapcoAppBundle:Consultation')->getSearchResultsWithTheme(4, $page);
+        $currentUrl = $this->generateUrl('app_consultation');
+
+        $form = $this->createForm(new ConsultationSearchType(), null, array(
+                'action' => $currentUrl,
+                'method' => 'POST'
+            ));
+
+        if ($request->getMethod() == 'POST') {
+            $form->handleRequest($request);
+
+            if ($form->isValid()) {
+                // redirect to the results page (avoids reload alerts)
+                $data = $form->getData();
+
+                return $this->redirect($this->generateUrl('app_consultation_search_term', array(
+                            'theme' => $data['theme'] ? $data['theme']->getSlug() : Theme::FILTER_ALL,
+                            'sort' => $data['sort'],
+                            'term' => $data['term']
+                        )));
+            }
+        } else {
+            $form->setData(array(
+                    'theme' => $em->getRepository('CapcoAppBundle:Theme')->findOneBySlug($theme),
+                    'sort' => $sort,
+                    'term' => $term,
+                ));
+        }
+
+        $consultations = $em->getRepository('CapcoAppBundle:Consultation')->getSearchResultsWithTheme(4, $page, $theme, $sort, $term);
 
         return [
             'consultations' => $consultations,
-            'statuses' => \Capco\AppBundle\Entity\Consultation::$openingStatuses,
+            'statuses' => Consultation::$openingStatuses,
             'page' => $page,
-            'nbPage' => ceil(count($consultations) / 4)
+            'nbPage' => ceil(count($consultations) / 4),
+            'form' => $form->createView()
         ];
     }
 
@@ -57,13 +93,11 @@ class ConsultationController extends Controller
     /**
      * @Template()
      * @param $consultation
-     * @param $offset
-     * @param $limit
      * @return array
      */
-    public function getOpinionsAction(Consultation $consultation, $offset, $limit)
+    public function getOpinionsAction(Consultation $consultation)
     {
-        $blocks = $this->getDoctrine()->getRepository('CapcoAppBundle:OpinionType')->findByType($consultation, $offset, $limit);
+        $blocks = $this->getDoctrine()->getRepository('CapcoAppBundle:OpinionType')->findByType($consultation);
 
         if (!isset($blocks[0])) {
             return new Response('');
@@ -107,26 +141,26 @@ class ConsultationController extends Controller
     }
 
     /**
-     * @Route("/consultation/{consultation_slug}/{opinion_type_slug}", name="app_consultation_show_opinions")
+     * @Route("/consultation/{consultation_slug}/{opinion_type_slug}/{page}", name="app_consultation_show_opinions", requirements={"page" = "\d+"}, defaults={"page" = 1})
      * @ParamConverter("consultation", class="CapcoAppBundle:Consultation", options={"mapping": {"consultation_slug": "slug"}})
      * @ParamConverter("opiniontype", class="CapcoAppBundle:OpinionType", options={"mapping": {"opinion_type_slug": "slug"}})
      * @Template("CapcoAppBundle:Consultation:blockOpinions.html.twig")
      * @param Consultation $consultation
      * @param OpinionType $opiniontype
+     * @param $page
      * @return array
      */
-    public function getOpinionsTypeAction(Consultation $consultation, OpinionType $opiniontype)
+    public function getOpinionsTypeAction(Consultation $consultation, OpinionType $opiniontype, $page)
     {
         $currentUrl = $this->generateUrl('app_consultation_show_opinions', ['consultation_slug' => $consultation->getSlug(), 'opinion_type_slug' => $opiniontype->getSlug() ]);
-        $opinions = $this->getDoctrine()->getRepository('CapcoAppBundle:Opinion')->findBy(
-            array('Consultation' => $consultation, 'OpinionType' => $opiniontype),
-            array('createdAt' => 'desc')
-        );
+        $opinions = $this->getDoctrine()->getRepository('CapcoAppBundle:Opinion')->getOpinionsByOpinionTypeAndConsultation($consultation, $opiniontype, 10, $page);
 
         return [
             'currentUrl' => $currentUrl,
             'consultation' => $consultation,
             'opinions' => $opinions,
+            'page' => $page,
+            'nbPage' => ceil(count($opinions) / 10),
         ];
     }
 }

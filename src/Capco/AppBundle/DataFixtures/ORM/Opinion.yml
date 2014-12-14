@@ -69,7 +69,7 @@ Capco\AppBundle\Entity\Opinion:
         Author: @user3
         Consultation: @cs2
         OpinionType: @opinionType5
-    contribution{11..25}:
+    contribution{11..35}:
         title: <text(20)>
         body: <text(1000)>
         isEnabled: <boolean()>

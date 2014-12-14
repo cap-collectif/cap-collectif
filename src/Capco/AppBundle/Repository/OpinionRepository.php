@@ -15,32 +15,31 @@ use Doctrine\ORM\Tools\Pagination\Paginator;
  */
 class OpinionRepository extends EntityRepository
 {
-    //Récupère toutes les opinions par Type d'une consultation, avec la possibilité de définir un offset et un limit
-    public function getOpinionsByType($opinionType_slug, $offset = 1, $limit = 10)
+    public function getOpinionsByOpinionTypeAndConsultation($consultation, $opinionType, $nbByPage = 10, $page = 1)
     {
+        if ((int) $page < 1) {
+            throw new \InvalidArgumentException(sprintf(
+                    'The argument "page" cannot be lower than 1 (current value: "%s")',
+                    $page
+                ));
+        }
+
         $qb = $this->createQueryBuilder('o')
-            ->leftJoin('o.OpinionType', 'ot')
-            ->addSelect('ot')
-            ->leftJoin('o.Consultation', 'c')
-            ->addSelect('c')
-            ->leftJoin('o.Author', 'a')
-            ->addSelect('a')
-//            ->andWhere('c.slug = :slug')
-//            ->setParameter('slug', $consultation)
-            ->andWhere('ot.slug = :opinionType_slug')
-            ->setParameter('opinionType_slug', $opinionType_slug)
-            ->orderBy('o.createdAt', 'DESC');
+                ->leftJoin('o.OpinionType', 'ot')
+                ->addSelect('ot')
+                ->leftJoin('o.Consultation', 'c')
+                ->addSelect('c')
+                ->andWhere('o.Consultation = :consultation')
+                ->setParameter('consultation', $consultation)
+                ->andWhere('o.OpinionType = :opinionType')
+                ->setParameter('opinionType', $opinionType)
+                ->orderBy('o.createdAt', 'DESC');
 
-        if ($limit) {
-            $qb->setMaxResults($limit);
-        }
+        $query = $qb->getQuery()
+            ->setFirstResult(($page - 1) * $nbByPage)
+            ->setMaxResults($nbByPage);
 
-        if ($offset) {
-            $qb->setFirstResult($offset);
-        }
+        return new Paginator($query);
 
-        return $qb
-            ->getQuery()
-            ->getResult();
     }
 }
