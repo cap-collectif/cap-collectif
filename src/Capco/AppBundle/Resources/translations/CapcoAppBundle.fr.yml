@@ -3,6 +3,19 @@ global:
   alert:
     close: Fermer
 
+#Errors
+error:
+  404:
+    title: "Désolé, cette page n'existe pas"
+  500:
+    title: "Erreur sur le serveur"
+  other:
+    title: Erreur
+  actions: Vous pouvez :
+  to_homepage: Aller à la page d'Accueil
+  report: Signaler un problème
+  contribute: Profiez-en pour contribuer à une consultation
+
 # Homepage
 contact:
   button: Envoyer

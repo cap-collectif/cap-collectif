@@ -1,0 +1,22 @@
+{% extends "CapcoAppBundle::base.html.twig" %}
+
+{% block jumbotron %}
+    <div class="jumbotron  jumbotron--custom  jumbotron--bg-1  text-center">
+        <div class="container">
+            <h1>{{ 'error.404.title'|trans({}, 'CapcoAppBundle') }}</h1>
+        </div>
+    </div>
+{% endblock %}
+
+{% block body %}
+	<div class="container text-center">
+		<p><strong>{{ 'error.actions'|trans({}, 'CapcoAppBundle') }}</strong></p>
+		<p>
+			<a href="{{ path('app_homepage') }}">{{ 'error.to_homepage'|trans({}, 'CapcoAppBundle') }}</a><br/>
+			<a href="">{{ 'error.report'|trans({}, 'CapcoAppBundle') }}</a>
+		</p>
+	</div>
+
+	{{ render_esi(controller('CapcoAppBundle:Consultation:lastOpenConsultations', {'max': 4, 'offset': 0})) }}
+
+{% endblock %}

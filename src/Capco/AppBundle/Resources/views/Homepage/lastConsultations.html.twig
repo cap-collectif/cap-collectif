@@ -1,9 +1,0 @@
-<div class="container">
-    <h2>{% trans %}Consultations{% endtrans %}</h2>
-    <div class="row">
-        {% for consultation in consultations %}
-            {% include '@CapcoApp/Consultation/blockConsultation.html.twig' %}
-        {% endfor %}
-    </div>
-    <a href="{{ path('app_consultation') }}" class="btn  btn-primary  btn--outline">{{ 'consultation.see_all'|trans({}, 'CapcoAppBundle') }}</a>
-</div>

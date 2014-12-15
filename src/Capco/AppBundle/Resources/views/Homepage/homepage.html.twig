@@ -20,7 +20,7 @@
 
 {% block body %}
     {{ render_esi(controller('CapcoAppBundle:Homepage:lastTopics', {'max': 4, 'offset': 0})) }}
-    {{ render_esi(controller('CapcoAppBundle:Homepage:lastConsultations', {'max': 4, 'offset': 0})) }}
+    {{ render_esi(controller('CapcoAppBundle:Consultation:lastOpenConsultations', {'max': 4, 'offset': 0})) }}
     {{ render_esi(controller('CapcoAppBundle:Homepage:lastIdeas', {'max': 4, 'offset': 0})) }}
 {% endblock %}
 

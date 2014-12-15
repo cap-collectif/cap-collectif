@@ -26,24 +26,6 @@ class HomepageController extends Controller
      * @Cache(expires="+1 minutes", maxage="60", smaxage="60", public="true")
      * @Template()
      */
-    public function lastConsultationsAction($max = 4, $offset = 0)
-    {
-        $consultations = $this->getDoctrine()->getRepository('CapcoAppBundle:Consultation')->getLast($max, $offset);
-
-        if (!isset($consultations[0])) {
-            return new Response('');
-        }
-
-        return [
-            'consultations' => $consultations,
-            'statuses' => \Capco\AppBundle\Entity\Consultation::$openingStatuses
-        ];
-    }
-
-    /**
-     * @Cache(expires="+1 minutes", maxage="60", smaxage="60", public="true")
-     * @Template()
-     */
     public function lastIdeasAction($max = 4, $offset = 0)
     {
         $ideas = $this->getDoctrine()->getRepository('CapcoAppBundle:Idea')->getLast($max, $offset);

@@ -6,6 +6,7 @@ use Capco\AppBundle\Entity\Consultation;
 use Capco\AppBundle\Entity\Theme;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\Query;
+use Doctrine\ORM\QueryBuilder;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 
 /**
@@ -48,6 +49,29 @@ class ConsultationRepository extends EntityRepository
             ->andWhere('c.isEnabled = :isEnabled')
             ->addOrderBy('c.createdAt', 'DESC')
             ->setParameter('isEnabled', true);
+
+        if ($limit) {
+            $qb->setMaxResults($limit);
+        }
+
+        if ($offset) {
+            $qb->setFirstResult($offset);
+        }
+
+        return $qb
+            ->getQuery()
+            ->execute();
+    }
+
+    public function getLastOpen($limit = 1, $offset = 0)
+    {
+        $qb = $this->createQueryBuilder('c')
+            ->leftJoin('c.Media', 'm')
+            ->andWhere('c.isEnabled = :isEnabled')
+            ->setParameter('isEnabled', true)
+            ->addOrderBy('c.createdAt', 'DESC');
+
+        $qb = $this->whereIsOpen($qb);
 
         if ($limit) {
             $qb->setMaxResults($limit);
@@ -116,5 +140,12 @@ class ConsultationRepository extends EntityRepository
         return $qb
             ->getQuery()
             ->getOneOrNullResult();
+    }
+
+    private function whereIsOpen(QueryBuilder $qb, $consultation = 'c')
+    {
+        $qb->andWhere(':now BETWEEN c.openedAt AND c.closedAt')
+            ->setParameter('now', new \DateTime(date("Y-m-d")));
+        return $qb;
     }
 }

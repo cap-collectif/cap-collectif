@@ -95,6 +95,24 @@ class ConsultationController extends Controller
     }
 
     /**
+     * @Cache(expires="+1 minutes", maxage="60", smaxage="60", public="true")
+     * @Template("CapcoAppBundle:Consultation:lastConsultations.html.twig")
+     */
+    public function lastOpenConsultationsAction($max = 4, $offset = 0)
+    {
+        $consultations = $this->getDoctrine()->getRepository('CapcoAppBundle:Consultation')->getLastOpen($max, $offset);
+
+        if (!isset($consultations[0])) {
+            return new Response('');
+        }
+
+        return [
+            'consultations' => $consultations,
+            'statuses' => \Capco\AppBundle\Entity\Consultation::$openingStatuses
+        ];
+    }
+
+    /**
      * @Template()
      * @param $consultation
      * @return array
