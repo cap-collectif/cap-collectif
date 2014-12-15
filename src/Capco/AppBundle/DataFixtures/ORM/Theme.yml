@@ -23,3 +23,12 @@ Capco\AppBundle\Entity\Theme:
         status: <numberBetween(0, 2)>
         body: <text(1000)>
         Consultations: [@cs1, @cs3]
+    theme{4..10}:
+        title: <text(36)>
+        teaser: <sentence(3)>
+        isEnabled: <boolean()>
+        position: <numberBetween(1, 10)>
+        status: <numberBetween(0, 2)>
+        body: <text(1000)>
+        Consultations: [@cs1, @cs3]
+
