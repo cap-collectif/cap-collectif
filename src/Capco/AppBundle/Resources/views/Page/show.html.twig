@@ -1,0 +1,15 @@
+{% extends "CapcoAppBundle::base.html.twig" %}
+
+{% block jumbotron %}
+    <div class="jumbotron  jumbotron--custom  jumbotron--bg-1  text-center">
+        <div class="container">
+            <h1>{{ page.title }}</h1>
+        </div>
+    </div>
+{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <p>{{ page.body }}</p>
+    </div>
+{% endblock %}

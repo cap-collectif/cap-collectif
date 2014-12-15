@@ -66,6 +66,13 @@ class Page
     private $isEnabled;
 
     /**
+     * @var MenuItem
+     *
+     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\MenuItem", mappedBy="Page", cascade={"persist", "remove"})
+     */
+    private $MenuItems;
+
+    /**
      * @var
      *
      * @ORM\ManyToOne(targetEntity="Capco\UserBundle\Entity\User")
@@ -271,5 +278,21 @@ class Page
         $this->updatedAt = $updatedAt;
 
         return $this;
+    }
+
+    /**
+     * @return MenuItem
+     */
+    public function getMenuItem()
+    {
+        return $this->MenuItem;
+    }
+
+    /**
+     * @param MenuItem $MenuItem
+     */
+    public function setMenuItem($MenuItem)
+    {
+        $this->MenuItem = $MenuItem;
     }
 }

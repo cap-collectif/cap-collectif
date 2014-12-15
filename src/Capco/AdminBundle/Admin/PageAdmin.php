@@ -40,6 +40,7 @@ class PageAdmin extends Admin
             ->addIdentifier('title')
             ->add('createdAt')
             ->add('isEnabled', null, array('editable' => true))
+            ->add('MenuItems')
             ->add('_action', 'actions', array(
                     'actions' => array(
                         'edit' => array(),

@@ -14,8 +14,9 @@ class MenuItemRepository extends EntityRepository
     {
         $qb = $this->createQueryBuilder('i')
             ->select('i.title, i.link')
-            ->andWhere('i.isEnabled = :isEnabled')
+            ->leftJoin('i.Page', 'p')
             ->andWhere('i.Menu = :menu')
+            ->andWhere('(p.id IS NULL AND i.isEnabled = :isEnabled) OR (p.id IS NOT NULL AND p.isEnabled = :isEnabled)')
             ->addOrderBy('i.position', 'ASC')
             ->setParameter('isEnabled', true)
             ->setParameter('menu', $menu);

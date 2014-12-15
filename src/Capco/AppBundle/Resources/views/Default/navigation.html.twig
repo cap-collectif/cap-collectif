@@ -11,6 +11,9 @@
         {{ nav_item('app_idea', 'menu.ideas_box'|trans({}, 'CapcoAppBundle'), 'app_idea') }}
         {{ nav_item('app_news', 'menu.news'|trans({}, 'CapcoAppBundle'), 'app_news') }}
         {{ nav_item('app_theme', 'menu.themes'|trans({}, 'CapcoAppBundle'), 'app_theme') }}
+        {% for headerLink in headerLinks %}
+            <li{% if app.request.attributes.get('_route') starts with headerLink.link %} class="active"{% endif %}> <a href="{{ headerLink.link }}">{{ headerLink.title }}</a></li>
+        {% endfor %}
         <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">A propos <span class="caret"></span></a>
             <ul class="dropdown-menu" role="menu">

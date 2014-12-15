@@ -40,6 +40,8 @@ class MenuItemAdmin extends Admin
             ->add('isEnabled', null, array('editable' => true))
             ->add('position')
             ->add('updatedAt')
+            ->add('Page')
+            ->add('link')
             ->add('_action', 'actions', array(
                 'actions' => array(
                     'edit' => array('template' => 'CapcoAdminBundle:MenuItem:list__action_edit.html.twig'),
@@ -57,9 +59,35 @@ class MenuItemAdmin extends Admin
         $formMapper
             ->add('Menu')
             ->add('title')
-            ->add('link')
+            ->add('link', null, array('required' => false))
             ->add('isEnabled')
             ->add('position')
+            ->add('Page', 'sonata_type_model', array(
+                                                'help' => 'Si vous associez une page à l\'élément de menu, le lien sera défini automatiquement.',
+                                                'required' => false,
+                                                'preferred_choices' => array()
+                                                ))
         ;
+    }
+
+    public function prePersist($menuItem)
+    {
+        $this->manageLink($menuItem);
+    }
+
+    public function preUpdate($menuItem)
+    {
+        $this->manageLink($menuItem);
+    }
+
+    private function manageLink($menuItem) {
+        $page = $menuItem->getPage();
+        if(null != $page){
+            $link = $this->routeGenerator->generate('app_page_show', array('slug' => $page->getSlug()));
+            $menuItem->setLink($link);
+        }
+        else {
+            $menuItem->setLink(null);
+        }
     }
 }

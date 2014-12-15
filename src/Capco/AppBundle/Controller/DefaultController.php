@@ -69,4 +69,23 @@ class DefaultController extends Controller
             'footerLinks' => $footerLinks
         ];
     }
+
+    /**
+     * @Cache(expires="+1 minutes", maxage="60", smaxage="0", public="false")
+     * @Template()
+     */
+    public function navigationAction()
+    {
+        $headerMenu = $this->getDoctrine()->getRepository('CapcoAppBundle:Menu')->findIdForType(Menu::TYPE_HEADER);
+
+        if (null !== $headerMenu) {
+            $headerLinks = $this->getDoctrine()->getRepository('CapcoAppBundle:MenuItem')->getEnabled($headerMenu);
+        } else {
+            $headerLinks = array();
+        }
+
+        return [
+            'headerLinks' => $headerLinks
+        ];
+    }
 }

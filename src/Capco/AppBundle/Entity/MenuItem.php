@@ -37,11 +37,18 @@ class MenuItem
     private $link;
 
     /**
+     * @var Page
+     *
+     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Page", inversedBy="MenuItems", cascade={"persist"})
+     */
+    private $Page;
+
+    /**
      * @var boolean
      *
      * @ORM\Column(name="is_enabled", type="boolean")
      */
-    private $isEnabled;
+    private $isEnabled = true;
 
     /**
      * @var boolean
@@ -301,5 +308,21 @@ class MenuItem
         $this->updatedAt = $updatedAt;
 
         return $this;
+    }
+
+    /**
+     * @return Page
+     */
+    public function getPage()
+    {
+        return $this->Page;
+    }
+
+    /**
+     * @param Page $page
+     */
+    public function setPage($page)
+    {
+        $this->Page = $page;
     }
 }
