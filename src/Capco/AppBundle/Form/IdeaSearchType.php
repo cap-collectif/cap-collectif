@@ -25,6 +25,7 @@ class IdeaSearchType extends AbstractType
                 'translation_domain' => 'CapcoAppBundle',
                 'label' => 'idea.searchform.sort',
                 'empty_value' => false,
+                'attr' => array('onchange' => 'this.form.submit()')
             ))
             ->add('theme', 'entity', array(
                 'required' => false,
@@ -32,6 +33,7 @@ class IdeaSearchType extends AbstractType
                 'property' => 'title',
                 'translation_domain' => 'CapcoAppBundle',
                 'empty_value' => 'idea.searchform.all_themes',
+                'attr' => array('onchange' => 'this.form.submit()')
             ))
         ;
     }
