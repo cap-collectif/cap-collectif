@@ -32,7 +32,7 @@ class MenuItem
     /**
      * @var string
      *
-     * @ORM\Column(name="link", type="string", length=255)
+     * @ORM\Column(name="link", type="string", length=255, nullable=true)
      */
     private $link;
 
@@ -68,8 +68,7 @@ class MenuItem
      * @var MenuItem
      *
      * @Gedmo\SortableGroup
-     * @ORM\OneToOne(targetEntity="Capco\AppBundle\Entity\MenuItem")
-     * @ORM\JoinColumn(name="parent_id", referencedColumnName="id")
+     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\MenuItem")
      */
     private $parent;
 

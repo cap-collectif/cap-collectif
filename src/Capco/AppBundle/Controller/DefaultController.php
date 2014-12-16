@@ -57,7 +57,7 @@ class DefaultController extends Controller
         $footerMenu = $this->getDoctrine()->getRepository('CapcoAppBundle:Menu')->findIdForType(Menu::TYPE_FOOTER);
 
         if (null !== $footerMenu) {
-            $footerLinks = $this->getDoctrine()->getRepository('CapcoAppBundle:MenuItem')->getEnabled($footerMenu);
+            $footerLinks = $this->getDoctrine()->getRepository('CapcoAppBundle:MenuItem')->getParentItems($footerMenu);
         } else {
             $footerLinks = array();
         }
@@ -79,7 +79,7 @@ class DefaultController extends Controller
         $headerMenu = $this->getDoctrine()->getRepository('CapcoAppBundle:Menu')->findIdForType(Menu::TYPE_HEADER);
 
         if (null !== $headerMenu) {
-            $headerLinks = $this->getDoctrine()->getRepository('CapcoAppBundle:MenuItem')->getEnabled($headerMenu);
+            $headerLinks = $this->getDoctrine()->getRepository('CapcoAppBundle:MenuItem')->getParentsItemsWithChildrenItems($headerMenu);
         } else {
             $headerLinks = array();
         }

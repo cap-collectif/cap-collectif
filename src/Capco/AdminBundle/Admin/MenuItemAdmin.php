@@ -40,6 +40,7 @@ class MenuItemAdmin extends Admin
             ->add('isEnabled', null, array('editable' => true))
             ->add('position')
             ->add('updatedAt')
+            ->add('parent')
             ->add('Page')
             ->add('link')
             ->add('_action', 'actions', array(
@@ -56,12 +57,19 @@ class MenuItemAdmin extends Admin
      */
     protected function configureFormFields(FormMapper $formMapper)
     {
+
         $formMapper
             ->add('Menu')
             ->add('title')
             ->add('link', null, array('required' => false))
             ->add('isEnabled')
             ->add('position')
+            ->add('parent', 'sonata_type_model', array(
+                                                'help' => 'Non applicable pour les éléments du footer',
+                                                'required' => false,
+                                                'query' => $this->createParentsItemQuery(),
+                                                'preferred_choices' => array()
+                                                ))
             ->add('Page', 'sonata_type_model', array(
                                                 'help' => 'Si vous associez une page à l\'élément de menu, le lien sera défini automatiquement.',
                                                 'required' => false,
@@ -89,5 +97,13 @@ class MenuItemAdmin extends Admin
         else {
             $menuItem->setLink(null);
         }
+    }
+
+    private function createParentsItemQuery()
+    {
+        $query = $this->modelManager
+                            ->createQuery($this->getClass(), 'p');
+        $query->where('p.parent IS NULL');
+        return $query;
     }
 }
