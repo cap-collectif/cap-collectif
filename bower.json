@@ -1,21 +1,22 @@
 {
-    "name": "cap-collectif-SF2",
-    "version": "0.0.1",
-    "authors": [
-        "Laurent Brunet <lbrunet@jolicode.com>",
-        "Suzanne Favot <sfavott@jolicode.com>"
-    ],
-    "description": "Cap-Collectif version Symfony2",
-    "license": "MIT",
-    "ignore": [
-        "**/.*",
-        "node_modules",
-        "bower_components",
-        "app/Resources/libs",
-        "test",
-        "tests"
-    ],
-    "dependencies": {
-        "bootstrap": "https://github.com/twbs/bootstrap-sass/archive/v3.2.0.tar.gz"
-    }
+  "name": "cap-collectif-SF2",
+  "version": "0.0.1",
+  "authors": [
+    "Laurent Brunet <lbrunet@jolicode.com>",
+    "Suzanne Favot <sfavott@jolicode.com>"
+  ],
+  "description": "Cap-Collectif version Symfony2",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "app/Resources/libs",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "https://github.com/twbs/bootstrap-sass/archive/v3.2.0.tar.gz",
+    "ckeditor": "~4.4.6"
+  }
 }

@@ -18,7 +18,7 @@ class IdeaType extends AbstractType
         $builder
             ->add('title', 'text')
             ->add('body', 'textarea', array(
-                    'attr' => array('class' => 'texarea')
+                    'attr' => array('class' => 'ckeditor')
                 ))
             ->add('Theme', 'entity', array(
                     'class' => 'CapcoAppBundle:Theme',
@@ -32,13 +32,6 @@ class IdeaType extends AbstractType
                     'required' => false,
                     'label' => 'Image'
                 ))
-//            ->add('media', 'sonata_type_model_list', array(), array(
-//                    'link_parameters' => array(
-//                        'provider' => 'sonata.media.provider.image',
-//                        'context' => 'default',
-//                        'required' => false,
-//                        'label' => 'Image'
-//                )))
         ;
     }
     

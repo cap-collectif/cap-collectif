@@ -17,6 +17,7 @@ gulp.task('styles', function() {
         }))
         .pipe(plugins.rubySass({
             compass: true,
+            'sourcemap=none': true,
             style: 'compressed',
             check: true}))
         .pipe(plugins.minifyCss({keepSpecialComments:0}))
@@ -25,6 +26,9 @@ gulp.task('styles', function() {
 });
 
 gulp.task('copy', function() {
+    gulp.src(app + '/libs/ckeditor/**/*')
+        .pipe(gulp.dest('web/js/ckeditor'));
+
     gulp.src(app + '/fonts/*.{ttf,woff,eof,svg,eot}')
         .pipe(gulp.dest('web/fonts/'));
 });

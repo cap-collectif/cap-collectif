@@ -24,3 +24,14 @@
     {{ render_esi(controller('CapcoAppBundle:Homepage:lastConsultations', {'max': 4, 'offset': 0})) }}
     {{ render_esi(controller('CapcoAppBundle:Homepage:lastIdeas', {'max': 4, 'offset': 0})) }}
 {% endblock %}
+
+{% block javascripts %}
+    <script src="{{ asset('js/app.min.js') }}"></script>
+    {{ parent() }}
+    <script type="text/javascript">
+        $(window).on('load', function() {
+            App.module.equalheight('.thumbnail--custom');
+            window.onresize = App.module.rezised('.thumbnail--custom');
+        });
+    </script>
+{% endblock %}

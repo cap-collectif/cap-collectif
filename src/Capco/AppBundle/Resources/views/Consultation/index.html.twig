@@ -90,7 +90,7 @@
     <script src="{{ asset('js/app.min.js') }}"></script>
     {{ parent() }}
     <script type="text/javascript">
-        $(function() {
+        $(window).on('load', function() {
             App.module.equalheight('.thumbnail--custom');
             window.onresize = App.module.rezised('.thumbnail--custom');
         });

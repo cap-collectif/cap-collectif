@@ -1,5 +1,4 @@
 {% extends '@CapcoApp/base.html.twig' %}
-{% form_theme form '@CapcoApp/Form/bootstrap_3_layout.html.twig' %}
 
 {% block jumbotron %}
 {% endblock %}
@@ -8,7 +7,7 @@
     <div class="container">
         <div class="row">
             <div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2">
-                <div class="dialog  dialog--cause  block--shadowed">
+                <div class="dialog  dialog--orange  block--shadowed">
                     <div class="dialog__header  box">
                         <h4 class="h4  dialog__title">{{ 'idea.update.title_block'|trans({}, 'CapcoAppBundle') }}</h4>
                     </div>
@@ -40,4 +39,14 @@
             </div>
         </div>
     </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('js/ckeditor/ckeditor.js') }}"></script>
+    <script type="text/javascript">
+        $(function() {
+            App.module.ckEditor('ckeditor');
+        });
+    </script>
 {% endblock %}

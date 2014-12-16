@@ -23,7 +23,7 @@
         {% endif %}
 
         <div class="block">
-            {{ idea.body }}
+            {{ idea.body|raw }}
         </div>
 
         {% if userVoteCount == 0 %}

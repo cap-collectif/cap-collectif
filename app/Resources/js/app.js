@@ -6,6 +6,11 @@ App.module = function ($) {
         console.log('Init...');
     };
 
+    var ckEditor = function(el) {
+        var $el = $(el);
+        CKEDITOR.replace($el);
+    };
+
     var equalheight = function(container) {
 
         var currentTallest = 0;
@@ -52,7 +57,8 @@ App.module = function ($) {
     var AppPublic = {
         init: init,
         equalheight: equalheight,
-        rezised: rezised
+        rezised: rezised,
+        ckEditor: ckEditor
     };
 
     return AppPublic;
