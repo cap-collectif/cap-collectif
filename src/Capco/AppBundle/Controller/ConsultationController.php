@@ -2,11 +2,15 @@
 
 namespace Capco\AppBundle\Controller;
 
+use Capco\AppBundle\Entity\Argument;
 use Capco\AppBundle\Entity\Consultation;
 use Capco\AppBundle\Entity\Opinion;
 use Capco\AppBundle\Entity\OpinionType;
+use Capco\AppBundle\Entity\Problem;
+use Capco\AppBundle\Entity\ProblemType;
 use Capco\AppBundle\Entity\Theme;
 use Capco\AppBundle\Form\ConsultationSearchType;
+use Capco\AppBundle\Form\OpinionsType as OpinionForm;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
@@ -109,22 +113,6 @@ class ConsultationController extends Controller
     /**
      * @Template()
      * @param $consultation
-     * @return array
-     */
-    public function getProblemsAction($consultation)
-    {
-        $items = $this->getDoctrine()->getRepository('CapcoAppBundle:ProblemType')->findByType($consultation);
-
-        if (!isset($items[0])) {
-            return new Response('');
-        }
-
-        return [ 'items' => $items ];
-    }
-
-    /**
-     * @Template()
-     * @param $consultation
      * @param $type
      * @return array
      */
@@ -160,7 +148,55 @@ class ConsultationController extends Controller
             'consultation' => $consultation,
             'opinions' => $opinions,
             'page' => $page,
-            'nbPage' => ceil(count($opinions) / 10),
+            'nbPage' => ceil(count($opinions) / 10)
         ];
     }
+
+    /**
+     * @Route("/consultation/{consultation_slug}/{opinion_type_slug}/{opinion_slug}", name="app_consultation_show_opinion")
+     * @ParamConverter("consultation", class="CapcoAppBundle:Consultation", options={"mapping": {"consultation_slug": "slug"}})
+     * @ParamConverter("opiniontype", class="CapcoAppBundle:OpinionType", options={"mapping": {"opinion_type_slug": "slug"}})
+     * @ParamConverter("opinion", class="CapcoAppBundle:Opinion", options={"mapping": {"opinion_slug": "slug"}})
+     * @Template("CapcoAppBundle:Consultation:opinion.html.twig")
+     * @param Consultation $consultation
+     * @param OpinionType $opiniontype
+     * @param Opinion $opinion
+     * @return array
+     */
+    public function getOpinionAction(Consultation $consultation, OpinionType $opiniontype, Opinion $opinion)
+    {
+        $currentUrl = $this->generateUrl('app_consultation_show_opinion', ['consultation_slug' => $consultation->getSlug(), 'opinion_type_slug' => $opiniontype->getSlug(), 'opinion_slug' => $opinion->getSlug() ]);
+        $opinion = $this->getDoctrine()->getRepository('CapcoAppBundle:Opinion')->getOpinionWithArguments($opinion->getSlug());
+
+        return [
+            'currentUrl' => $currentUrl,
+            'consultation' => $consultation,
+            'opinion' => $opinion
+        ];
+    }
+
+    /**
+     * @Template("CapcoAppBundle:Consultation:arguments.html.twig")
+     * @param Opinion $opinion
+     * @param $type
+     * @return array
+     */
+    public function getArgumentsByTypeAction(Opinion $opinion, $type)
+    {
+        if($type === 0){
+            $typeArgt = "no";
+        } else {
+            $typeArgt = "yes";
+        }
+
+        $argumentsType = $this->getDoctrine()->getRepository('CapcoAppBundle:Argument')->findBy(
+            array('type' => $type, 'contribution' => $opinion)
+        );
+
+        return [
+            'argumentsType' => $argumentsType,
+            'typeArgt' => $typeArgt
+        ];
+    }
+
 }

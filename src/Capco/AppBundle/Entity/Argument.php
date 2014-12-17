@@ -9,7 +9,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
  * Argument
  *
  * @ORM\Table(name="argument")
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\ArgumentRepository")
  */
 class Argument
 {

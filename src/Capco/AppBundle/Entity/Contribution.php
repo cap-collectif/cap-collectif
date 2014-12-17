@@ -102,6 +102,27 @@ class Contribution
     private $Votes;
 
     /**
+     * @var integer
+     *
+     * @ORM\Column(name="vote_count_nok", type="integer")
+     */
+    private $voteCountNok = 0;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="vote_count_ok", type="integer")
+     */
+    private $voteCountOk = 0;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="vote_count_mitige", type="integer")
+     */
+    private $voteCountMitige = 0;
+
+    /**
      * @var string
      *
      * @ORM\ManyToOne(targetEntity="Capco\UserBundle\Entity\User")
@@ -408,4 +429,58 @@ class Contribution
 
         return $this;
     }
+
+    /**
+     * @return int
+     */
+    public function getVoteCountNok()
+    {
+        return $this->voteCountNok;
+    }
+
+    /**
+     * @param int $voteCountNok
+     */
+    public function setVoteCountNok($voteCountNok)
+    {
+        $this->voteCountNok = $voteCountNok;
+    }
+
+    /**
+     * @return int
+     */
+    public function getVoteCountOk()
+    {
+        return $this->voteCountOk;
+    }
+
+    /**
+     * @param int $voteCountOk
+     */
+    public function setVoteCountOk($voteCountOk)
+    {
+        $this->voteCountOk = $voteCountOk;
+    }
+
+    /**
+     * @return int
+     */
+    public function getVoteCountMitige()
+    {
+        return $this->voteCountMitige;
+    }
+
+    /**
+     * @param int $voteCountMitige
+     */
+    public function setVoteCountMitige($voteCountMitige)
+    {
+        $this->voteCountMitige = $voteCountMitige;
+    }
+
+    public function getVotesAll()
+    {
+        return $this->getVoteCountMitige() + $this->getVoteCountNok() + $this->getVoteCountOk();
+    }
+
 }

@@ -1,7 +1,7 @@
 <div class="block  block--shadowed">
     <div class="consultation__nav">
         <ul class="nav  nav-pills">
-            <li class="{% if (app.request.attributes.get('consultation').slug == consultationCurrent) and (opinionTypeCurrent is null ) %}active{% endif %} consultation__nav--red"><a href="{{ path('app_consultation_show', {'slug':app.request.attributes.get('consultation').slug}) }}">Vue d'ensemble</a></li>
+            <li class="{% if (app.request.attributes.get('consultation').slug == consultationCurrent) and (opinionTypeCurrent is null ) %}active{% endif %} consultation__nav--blue"><a href="{{ path('app_consultation_show', {'slug':app.request.attributes.get('consultation').slug}) }}">Vue d'ensemble</a></li>
             {% for opinionsType in opinionsTypes %}
                 <li class="{% if opinionsType.slug == opinionTypeCurrent %}active{% endif %} consultation__nav--{{ opinionsType.color }}"><a href="{{ path('app_consultation_show_opinions', {'consultation_slug':app.request.attributes.get('consultation').slug ,'opinion_type_slug': opinionsType.slug}) }}">{{ opinionsType.shortName }}</a></li>
             {% endfor %}

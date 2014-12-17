@@ -20,6 +20,7 @@ class OpinionType
         'blue' => 'bleu',
         'orange' => 'orange',
         'bluelight' => 'bleu clair',
+        'bluedark' => 'bleu foncé',
         'gray' => 'gris',
         'graylight' => 'gris clair',
     ];
@@ -98,6 +99,13 @@ class OpinionType
      * @ORM\Column(name="color", type="string", length=50)
      */
     private $color;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="is_enabled", type="boolean")
+     */
+    private $isEnabled;
 
     function __construct()
     {
@@ -330,6 +338,22 @@ class OpinionType
     public function setColor($color)
     {
         $this->color = $color;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function isIsEnabled()
+    {
+        return $this->isEnabled;
+    }
+
+    /**
+     * @param boolean $isEnabled
+     */
+    public function setIsEnabled($isEnabled)
+    {
+        $this->isEnabled = $isEnabled;
     }
 
 }

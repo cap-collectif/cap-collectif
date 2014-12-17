@@ -43,6 +43,12 @@ class ProblemType
     private $problemTitle;
 
     /**
+     * @Gedmo\Slug(fields={"problemTitle"})
+     * @ORM\Column(length=255)
+     */
+    private $slug;
+
+    /**
      * @var string
      *
      * @ORM\Column(name="trashTitle", type="string", length=255)
@@ -284,5 +290,21 @@ class ProblemType
     public function removeProblem(\Capco\AppBundle\Entity\Problem $problem)
     {
         $this->Problems->removeElement($problem);
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getSlug()
+    {
+        return $this->slug;
+    }
+
+    /**
+     * @param mixed $slug
+     */
+    public function setSlug($slug)
+    {
+        $this->slug = $slug;
     }
 }

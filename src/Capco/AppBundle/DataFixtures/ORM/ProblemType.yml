@@ -1,11 +1,11 @@
 Capco\AppBundle\Entity\ProblemType:
     problemType1:
         title: Le problème constaté
-        problemTitle: <text(30)>
+        problemTitle: Problème
         trashTitle: corbeille
         voteWidgetType: 1
     problemType2:
         title: Le scénario futur
-        problemTitle: <text(30)>
+        problemTitle: scénario
         trashTitle: déchets
         voteWidgetType: 2

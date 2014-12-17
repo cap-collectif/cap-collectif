@@ -10,7 +10,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
  * Vote
  *
  * @ORM\Table(name="vote")
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\VoteRepository")
  */
 class Vote
 {
@@ -33,7 +33,7 @@ class Vote
     /**
      * @var integer
      *
-     * @ORM\Column(name="Value", type="integer")
+     * @ORM\Column(name="value", type="integer")
      */
     private $value;
 

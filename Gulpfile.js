@@ -26,6 +26,15 @@ gulp.task('styles', function() {
 });
 
 gulp.task('copy', function() {
+    gulp.src(app + '/libs/readmore/**/*')
+        .pipe(gulp.dest('web/js/readmore'));
+
+    gulp.src(app + '/libs/Snap.svg/**/*')
+        .pipe(gulp.dest('web/js/Snap.svg'));
+
+    gulp.src(app + '/libs/pizza/**/*')
+        .pipe(gulp.dest('web/js/pizza'));
+
     gulp.src(app + '/libs/ckeditor/**/*')
         .pipe(gulp.dest('web/js/ckeditor'));
 
@@ -37,6 +46,7 @@ gulp.task('concat', function() {
     gulp.src([
         app + '/libs/jquery/dist/jquery.js',
         app + '/libs/bootstrap/assets/javascripts/bootstrap.js',
+        app + '/libs/readmore/readmore.js',
         app + '/js/app.js'
     ])
         .pipe(plugins.concat('app.js'))

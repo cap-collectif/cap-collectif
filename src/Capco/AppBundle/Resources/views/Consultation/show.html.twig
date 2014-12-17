@@ -35,8 +35,7 @@
                     {#</a>#}
                     <div class="box">
                         <h4 class="h4">Introduction</h4>
-                        <p>{{ consultation.body | striptags | truncate(200, true, '.') }}</p>
-                        <a href="#" class="collapse  in  sidebar__description" data-toggle="collapse">Lire la suite</a>
+                        <p class="more">{{ consultation.body | striptags }}</p>
                         <h4 class="h4">Étapes</h4>
                         <div class="navbar--sub">
                             <ul class="nav">
@@ -101,9 +100,23 @@
 
             <div class="col-xs-12  col-sm-8  col-md-9" id="details">
                 {{ render(controller('CapcoAppBundle:Consultation:getNavOpinionType', {'consultation': consultation.id, 'type': app.request.attributes.get('opinion_type_slug')})) }}
-                {{ render(controller('CapcoAppBundle:Consultation:getProblems', {'consultation': consultation.id})) }}
                 {{ render(controller('CapcoAppBundle:Consultation:getOpinions', {'consultation': consultation.id})) }}
             </div> <!-- col-xs-12  col-sm-8  col-md-9 -->
         </div> <!-- .row -->
     </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('js/Snap.svg/dist/snap.svg-min.js') }}"></script>
+    <script src="{{ asset('js/pizza/dist/js/pizza.js') }}"></script>
+    <script src="{{ asset('js/readmore/readmore.min.js') }}"></script>
+    <script type="text/javascript">
+        Pizza.init();
+        $('.more').readmore({
+            maxHeight: 90,
+            moreLink: '<a href="#">Lire la suite</a>', //BazingaJsTranslationBundle
+            lessLink: '<a href="#">Fermer</a>'
+        });
+    </script>
 {% endblock %}

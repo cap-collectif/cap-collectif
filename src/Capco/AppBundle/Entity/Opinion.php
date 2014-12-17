@@ -13,23 +13,6 @@ use Doctrine\ORM\Mapping as ORM;
 class Opinion extends Contribution
 {
     /**
-     * @var integer
-     *
-     * @ORM\Column(name="id", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
-     */
-    private $id;
-
-    /**
-     * @var
-     *
-     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Problem", inversedBy="Opinions")
-     * @ORM\JoinColumn(name="problem_id", referencedColumnName="id", nullable=false)
-     */
-    private $Problem;
-
-    /**
      * @var
      *
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\OpinionType", inversedBy="Opinions")
@@ -43,41 +26,6 @@ class Opinion extends Contribution
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Consultation", inversedBy="Opinions")
      */
     private $Consultation;
-
-    public function __toString()
-    {
-        if ($this->id) {
-            return $this->getTitle();
-        } else {
-            return "New opinion";
-        }
-    }
-
-    /**
-     * Get id
-     *
-     * @return integer
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getProblem()
-    {
-        return $this->Problem;
-    }
-
-    /**
-     * @param mixed $Problem
-     */
-    public function setProblem($Problem)
-    {
-        $this->Problem = $Problem;
-    }
 
     /**
      * @return mixed

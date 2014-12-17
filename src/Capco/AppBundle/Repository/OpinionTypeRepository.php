@@ -20,8 +20,6 @@ class OpinionTypeRepository extends EntityRepository
         $qb = $this->createQueryBuilder('ot')
             ->leftJoin('ot.Opinions','o')
             ->addSelect('o')
-            ->leftJoin('o.Problem', 'p')
-            ->addSelect('p')
             ->leftJoin('o.Consultation', 'c')
             ->addSelect('c')
             ->leftJoin('o.Author', 'a')
@@ -32,8 +30,8 @@ class OpinionTypeRepository extends EntityRepository
             ->addSelect('v')
             ->andWhere('o.Consultation = :consultation')
             ->setParameter('consultation', $consultation)
-            ->orderBy('ot.position', 'DESC')
-            ->orderBy('o.createdAt', 'DESC');
+            ->orderBy('ot.position', 'ASC')
+            ->addOrderBy('o.createdAt', 'DESC');
 
         return $qb
             ->getQuery()

@@ -2,30 +2,42 @@ Capco\AppBundle\Entity\OpinionType:
     opinionType1:
         title: Les causes
         shortName: Causes
-        position: <numberBetween(1, 10)>
+        position: <numberBetween(2, 10)>
         voteWidgetType: 1
         color: orange
+        isEnabled: <boolean(100)>
     opinionType2:
         title: Les enjeux
         shortName: Enjeux
-        position: <numberBetween(1, 10)>
+        position: <numberBetween(2, 10)>
         voteWidgetType: 2
-        color: blue
+        color: bluedark
+        isEnabled: <boolean(100)>
     opinionType3:
         title: Les solutions
         shortName: Solution
-        position: <numberBetween(1, 10)>
+        position: <numberBetween(2, 10)>
         voteWidgetType: 2
         color: green
+        isEnabled: <boolean(100)>
     opinionType4:
         title: Toutes les fraises
-        shortName: fraises
+        shortName: Fraises
         position: 100
         voteWidgetType: 2
         color: graylight
+        isEnabled: <boolean(100)>
     opinionType5:
         title: Toutes les tomates
         shortName: Tomates
-        position: <numberBetween(1, 10)>
+        position: <numberBetween(2, 10)>
         voteWidgetType: 3
         color: bluelight
+        isEnabled: <boolean(100)>
+    opinionType6:
+        title: Le problème constaté
+        shortName: Problèmes
+        position: 1
+        voteWidgetType: 3
+        color: red
+        isEnabled: <boolean(100)>

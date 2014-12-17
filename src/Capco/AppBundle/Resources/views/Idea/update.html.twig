@@ -45,7 +45,7 @@
     {{ parent() }}
     <script src="{{ asset('js/ckeditor/ckeditor.js') }}"></script>
     <script type="text/javascript">
-        $(function() {
+        $(window).on('load', function() {
             App.module.ckEditor('ckeditor');
         });
     </script>

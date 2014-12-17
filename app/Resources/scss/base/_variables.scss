@@ -115,10 +115,12 @@ $opinion-types:
   ("red" $brand-danger)
   ("orange" $brand-warning)
   ("blue" $brand-primary)
+  ("bluedark" darken($brand-primary, 15%))
   ("bluelight" $brand-info)
   ("green" $brand-success)
   ("gray" $gray-primary)
   ("graylight" $light-gray)
+  ("black" $black)
   (source $brand-primary)
   (idee $light-gray)
   (consultation $light-gray);

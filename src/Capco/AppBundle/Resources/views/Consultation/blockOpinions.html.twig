@@ -117,7 +117,7 @@
                     </div>
                     <ul class="media-list  opinion__list">
                         {% for opinion in opinions %}
-                            {% set nbVotes = (opinion.Votes|length) %}
+                            {% set nbVotes = (opinion.getVotesAll) %}
                             {% set nbArguments = (opinion.arguments|length) %}
                             <li class="opinion  opinion--{{ opinion.slug }}">
                                 <div class="row">
@@ -130,7 +130,7 @@
                                             {% endif %}
                                             <div class="opinion__data">
                                                 <p class="opinion__user  h5"><a href="#">{{ opinion.Author.getFullname }}</a> <span class="pull-right  excerpt">{{ opinion.createdAt | localizeddate('medium', 'none', app.request.locale) }}</span></p>
-                                                <p class="opinion__title"><a href="#">{{ opinion.title }}</a></p>
+                                                <p class="opinion__title"><a href="{{ path('app_consultation_show_opinion', {'consultation_slug': consultation.slug, 'opinion_type_slug': app.request.attributes.get('opinion_type_slug'), 'opinion_slug': opinion.slug}) }}">{{ opinion.title }}</a></p>
                                                 <p class="opinion__votes  excerpt h5">
                                                     {% transchoice nbVotes with {'%count%': nbVotes} from 'CapcoAppBundle' %}
                                                     consultation.show.votes
@@ -144,9 +144,14 @@
                                         </div>
                                     </div>
                                     <div class="hidden-xs col-sm-2 opinion__chart-block">
-                                        <div class="center-block  opinion__chart" style="background-color:green; border-radius: 50%;"></div>
+                                        <div id="pie-{{ opinion.id }}"></div>
                                     </div>
                                 </div>
+                                <ul class="sr-only" data-pie-id="pie-{{ opinion.id }}" data-options='{"percent_offset": "15"}'>
+                                    <li data-value="{{ opinion.voteCountOk }}"></li>
+                                    <li data-value="{{ opinion.voteCountMitige }}"></li>
+                                    <li data-value="{{ opinion.voteCountNok }}"></li>
+                                </ul>
                             </li>
                         {% endfor %}
                     </ul>
@@ -168,3 +173,13 @@
         </div> <!-- .row -->
     </div>
 {% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('js/Snap.svg/dist/snap.svg-min.js') }}"></script>
+    <script src="{{ asset('js/pizza/dist/js/pizza.js') }}"></script>
+    <script type="text/javascript">
+        Pizza.init();
+    </script>
+{% endblock %}
+

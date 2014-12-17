@@ -8,6 +8,9 @@ Capco\AppBundle\Entity\Problem:
         ProblemType: @problemType*
         Consultation: @cs1
         Author: @user*
+        voteCountMitige: <numberBetween(0, 50)>
+        voteCountOk: <numberBetween(0, 50)>
+        voteCountNok: <numberBetween(0, 50)>
     contribution5:
         title: <text(20)>
         body: <text(1000)>
@@ -17,6 +20,9 @@ Capco\AppBundle\Entity\Problem:
         ProblemType: @problemType*
         Consultation: @cs2
         Author: @user*
+        voteCountMitige: <numberBetween(0, 50)>
+        voteCountOk: <numberBetween(0, 50)>
+        voteCountNok: <numberBetween(0, 50)>
     contribution6:
         title: <text(20)>
         body: <text(1000)>
@@ -26,3 +32,6 @@ Capco\AppBundle\Entity\Problem:
         ProblemType: @problemType*
         Consultation: @cs3
         Author: @user*
+        voteCountMitige: <numberBetween(0, 50)>
+        voteCountOk: <numberBetween(0, 50)>
+        voteCountNok: <numberBetween(0, 50)>

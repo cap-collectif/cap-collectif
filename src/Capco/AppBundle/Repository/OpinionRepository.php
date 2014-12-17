@@ -42,4 +42,24 @@ class OpinionRepository extends EntityRepository
         return new Paginator($query);
 
     }
+
+    public function getOpinionWithArguments($opinion)
+    {
+        $qb = $this->createQueryBuilder('o')
+                ->leftJoin('o.arguments', 'arg')
+                ->addSelect('arg')
+                ->leftJoin('o.Author', 'a')
+                ->addSelect('a')
+                ->leftJoin('arg.Author', 'aArg')
+                ->addSelect('aArg')
+                ->leftJoin('arg.contribution', 'aCont')
+                ->addSelect('aCont')
+                ->andWhere('o.slug = :opinion')
+                ->setParameter('opinion', $opinion);
+
+        return $qb->getQuery()
+            ->getOneOrNullResult();
+
+    }
+
 }
