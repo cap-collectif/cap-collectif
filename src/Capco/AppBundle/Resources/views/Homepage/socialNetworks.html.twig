@@ -1,0 +1,11 @@
+<h3 class="h3">Suivre l'actualité sur les réseaux sociaux</h3>
+<ul class="social__icons">
+    {% for socialNetwork in socialNetworks %}
+        <li>
+            <a href="{{ socialNetwork.link }}">
+                {% thumbnail socialNetwork.Media, 'socialIcon' with {'title': socialNetwork.title, 'alt': socialNetwork.title, 'class': 'social__icon'} %}
+                {{ socialNetwork.title }}
+            </a>
+        </li>
+    {% endfor %}
+</ul>

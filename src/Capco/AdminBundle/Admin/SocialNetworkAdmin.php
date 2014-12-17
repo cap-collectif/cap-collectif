@@ -7,6 +7,7 @@ use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Show\ShowMapper;
+use Capco\AppBundle\Entity\SocialNetwork;
 
 class SocialNetworkAdmin extends Admin
 {
@@ -18,6 +19,7 @@ class SocialNetworkAdmin extends Admin
         $datagridMapper
             ->add('position')
             ->add('isEnabled')
+            ->add('media')
         ;
     }
 
@@ -31,6 +33,9 @@ class SocialNetworkAdmin extends Admin
             ->add('position')
             ->add('isEnabled', null, array('editable' => true))
             ->add('createdAt')
+            ->add('media', 'sonata_media_type', array(
+                'template' => 'CapcoAdminBundle:SocialNetwork:media_list_field.html.twig',
+                'provider' => 'sonata.media.provider.image'))
             ->add('_action', 'actions', array(
                 'actions' => array(
                     'edit' => array(),
@@ -50,6 +55,7 @@ class SocialNetworkAdmin extends Admin
             ->add('link')
             ->add('position')
             ->add('isEnabled')
+            ->add('media', 'sonata_type_model')
         ;
     }
 

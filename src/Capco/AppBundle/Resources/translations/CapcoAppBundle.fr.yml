@@ -17,6 +17,12 @@ error:
   contribute: Profiez-en pour contribuer à une consultation
 
 # Homepage
+homepage:
+  newsletter:
+    title: Lettre d'information
+    description: Inscrivez vous à la lettre d'information pour rester informé de l'actualité de la concertation.
+    enter_email: Entrez votre adresse électronique
+
 contact:
   button: Envoyer
 

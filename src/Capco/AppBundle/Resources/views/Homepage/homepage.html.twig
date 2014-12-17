@@ -19,9 +19,22 @@
 {% endblock %}
 
 {% block body %}
+
     {{ render_esi(controller('CapcoAppBundle:Homepage:lastTopics', {'max': 4, 'offset': 0})) }}
     {{ render_esi(controller('CapcoAppBundle:Consultation:lastOpenConsultations', {'max': 4, 'offset': 0})) }}
     {{ render_esi(controller('CapcoAppBundle:Homepage:lastIdeas', {'max': 4, 'offset': 0})) }}
+
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12  col-sm-6">
+                {% include '@CapcoApp/Homepage/newsletter.html.twig' %}
+            </div>
+            <div class="col-xs-12  col-sm-6">
+                {{ render_esi(controller('CapcoAppBundle:Homepage:socialNetworks', {})) }}
+            </div>
+        </div>
+    </div>
+
 {% endblock %}
 
 {% block javascripts %}

@@ -106,6 +106,7 @@ sonata_media:
                 consultation:   { width: 400, height: 300, quality: 70 }
                 idea:           { height: 250, quality: 70 }
                 blockHeader:    { width: 1140, height: 200, quality: 70 }
+                socialIcon:     { width: 50, height: 50, quality: 70 }
 
         sonata_collection:
             providers:

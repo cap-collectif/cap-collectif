@@ -4,6 +4,7 @@ namespace Capco\AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * NewsletterSubscription
@@ -25,7 +26,10 @@ class NewsletterSubscription
     /**
      * @var string
      *
-     * @ORM\Column(name="email", type="string", length=255)
+     * @ORM\Column(name="email", type="string", length=255, unique=true, nullable=false)
+     * @Assert\NotBlank()
+     * @Assert\NotNull()
+     * @Assert\Email()
      */
     private $email;
 
@@ -41,7 +45,7 @@ class NewsletterSubscription
      *
      * @ORM\Column(name="is_enabled", type="boolean")
      */
-    private $isEnabled;
+    private $isEnabled = true;
 
     public function __toString()
     {

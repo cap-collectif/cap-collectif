@@ -4,18 +4,21 @@ Capco\AppBundle\Entity\SocialNetwork:
         link: http://facebook.com
         position: 1
         isEnabled: true
+        media: @MediaUser2
 
     SocialNetwork2:
         title: Twitter
         link: http://twitter.com
         position: 2
         isEnabled: true
+        media: @MediaUser2
 
     SocialNetwork3:
         title: Linkedin
         link: http://linkedin.com
         position: 3
         isEnabled: true
+        media: @MediaUser1
 
     SocialNetwork4:
         title: Flickr

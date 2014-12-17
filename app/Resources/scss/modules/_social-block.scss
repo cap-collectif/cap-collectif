@@ -12,28 +12,9 @@
     a {
       display: block;
     }
-
-    .social__icon {
-      display: inline-block;
-      width: 50px;
-      height: 50px;
-      margin-bottom: 5px;
-    }
-
-    .social__icon--facebook {
-      background: transparent url(/img/icon-social.png) -233px 0 no-repeat;
-    }
-    .social__icon--twitter {
-      background: transparent url(/img/icon-social.png) -174px 0 no-repeat;
-    }
-    .social__icon--linkedin {
-      background: transparent url(/img/icon-social.png) -58px 0 no-repeat;
-    }
-    .social__icon--flickr {
-      background: transparent url(/img/icon-social.png) 0px 0 no-repeat;
-    }
-    .social__icon--rss {
-      background: transparent url(/img/icon-social.png) -291px 0 no-repeat;
-    }
   }
+}
+
+.social__icon {
+  margin-bottom: 5px;
 }

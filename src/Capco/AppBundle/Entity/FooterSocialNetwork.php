@@ -14,7 +14,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
 class FooterSocialNetwork
 {
     public static $socialIcons = [
-        'link-2' => 'Site externe',
+        'link-1' => 'Site externe',
         'facebook' => 'Facebook',
         'twitter' => 'Twitter',
         'gplus' => 'Google+',

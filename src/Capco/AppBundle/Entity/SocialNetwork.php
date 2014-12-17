@@ -9,7 +9,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
  * SocialNetwork
  *
  * @ORM\Table(name="social_network")
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\SocialNetworkRepository")
  */
 class SocialNetwork
 {
@@ -69,7 +69,7 @@ class SocialNetwork
     /**
      * @var
      *
-     * @ORM\OneToOne(targetEntity="Capco\MediaBundle\Entity\Media", cascade={"persist", "remove"})
+     * @ORM\ManyToOne(targetEntity="Capco\MediaBundle\Entity\Media", cascade={"persist"})
      * @ORM\JoinColumn(name="media_id", referencedColumnName="id")
      */
     private $media;
