@@ -31,7 +31,6 @@ class SiteParameterAdmin extends Admin
             ->add('updatedAt')
             ->add('_action', 'actions', array(
                 'actions' => array(
-                    'show' => array(),
                     'edit' => array(),
                     'delete' => array(),
                 )
@@ -45,8 +44,6 @@ class SiteParameterAdmin extends Admin
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
-            ->add('keyname')
-            ->add('title')
             ->add('value')
         ;
     }
@@ -57,7 +54,6 @@ class SiteParameterAdmin extends Admin
     protected function configureShowFields(ShowMapper $showMapper)
     {
         $showMapper
-            ->add('id')
             ->add('title')
             ->add('value')
             ->add('updatedAt')

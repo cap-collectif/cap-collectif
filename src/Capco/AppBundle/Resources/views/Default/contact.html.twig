@@ -5,27 +5,19 @@
     <div class="jumbotron  jumbotron--custom  jumbotron--bg-1  text-center">
         <div class="container">
             <h1>Contact</h1>
-            <p>{{ 'contact.message'|trans({}, 'CapcoAppBundle') }}</p>
+            <p>{{ capco_site_parameter_value('contact.jumbotron.body')}}</p>
         </div>
     </div>
 {% endblock %}
 
 {% block body %}
     <div class="container">
-        <p>Une question, une remarque, une suggestion ou une lettre d'amour ? Nous sommes là pour vous répondre.</p>
-        <ul>
-            <li>Service client</li>
-            <li>Presse</li>
-            <li>Emplois</li>
-            <li>Partenariats</li>
-        </ul>
-        <p>Pour toute autre question ou juste nous dire bonjour, utilisez le formulaire ou nos coordonnées ci-dessous :</p>
+        <p>{{ capco_site_parameter_value('contact.content.body')}}</p>
         <address>
             <strong>Adresse</strong><br/>
-            16 bis avenue Parmentier<br/>
-            75011 Paris<br/>
+            {{ capco_site_parameter_value('contact.content.address')}}<br/>
             <br/><strong>Teléphone</strong><br/>
-            00 00 00 00 00
+            {{ capco_site_parameter_value('contact.content.phone_number')}}
         </address>
 
         <hr/>

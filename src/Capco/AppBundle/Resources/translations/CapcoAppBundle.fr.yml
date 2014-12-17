@@ -5,7 +5,6 @@ global:
 
 # Homepage
 contact:
-  message: Nous serons heureux d’échanger avec vous et de vous rencontrer pour aborder vos projets de développement.
   button: Envoyer
 
 header:

@@ -5,7 +5,6 @@ global:
 
 # Homepage
 contact:
-  message: -----
   button: Send
 
 header:

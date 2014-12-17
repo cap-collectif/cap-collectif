@@ -4,17 +4,16 @@
 {% block jumbotron %}
     <div class="jumbotron  jumbotron--custom  jumbotron--bg-1  text-center">
         <div class="container">
-            <h1>Nom du site</h1>
-            <p>Texte d'introduction du site
-            </p>
-            <p><a href="#" class="btn  btn--outline btn-custom-1  btn-lg" role="button">Comment ça marche ?</a></p>
+            <h1>{{ capco_site_parameter_value('homepage.jumbotron.title')}}</h1>
+            <p>{{ capco_site_parameter_value('homepage.jumbotron.body')}}</p>
+            <p><a href="#" class="btn  btn--outline btn-custom-1  btn-lg" role="button">{{ capco_site_parameter_value('homepage.jumbotron.button')}}</a></p>
         </div>
     </div>
 
     <div class="jumbotron  jumbotron--custom  jumbotron--bg-2  jumbotron--small">
         <div class="container">
-            <h2>Introduction</h2>
-            <p>Le Premier ministre a saisi le Conseil national du numérique pour organiser une concertation citoyenne sur les enjeux sociétaux et économiques liés aux transformations numériques. Dans son rôle d’interface entre la société civile, les acteurs économiques et les pouvoirs publics, le Conseil propose une plateforme collaborative afin de construire des équilibres pérennes autour de 4 axes: croissance et innovation, droits et libertés, enjeux sociétaux et modernisation de l’Etat. Vos propositions alimenteront notamment le futur projet de loi sur le numérique et participeront à la construction de la stratégie numérique de la France.</p>
+            <h2>{{ capco_site_parameter_value('homepage.jumbotron2.title')}}</h2>
+            <p>{{ capco_site_parameter_value('homepage.jumbotron2.body')}}</p>
         </div>
     </div>
 {% endblock %}
