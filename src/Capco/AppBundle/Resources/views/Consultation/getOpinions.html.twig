@@ -5,10 +5,12 @@
 
             <h4 class="pull-left  h4  opinion__header__title"> {{ block.title }} <span class="badge">{{ block.Opinions|length }}</span></h4>
             <div class="pull-right  opinion__header__filter">
-                <a href="#" class="btn  btn-default">
+                {% if block.isEnabled == true %}
+                <a href="{{ path('app_consultation_new_opinion' ,{'consultation_slug': app.request.attributes.get('consultation').slug, 'opinion_type_slug': block.slug} ) }}" class="btn  btn-default">
                     <i class="cap cap-add-1"></i>
                     <span class="hidden-xs  hidden-sm"> Proposer</span>
                 </a>
+                {% endif %}
             </div>
         </div>
     </div>
@@ -45,8 +47,11 @@
                         </ul>
                     </div>
                 </div>
+
                 <div class="hidden-xs col-sm-2">
+                    {% if opinion.Votes|length > 0  %}
                     <div id="pie-{{ opinion.id }}"></div>
+                    {% endif %}
                 </div>
             </div>
         </li>

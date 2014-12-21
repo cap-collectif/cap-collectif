@@ -158,12 +158,6 @@ class Consultation
 
     /**
      * @var
-     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\Problem", mappedBy="Consultation",  cascade={"persist", "remove"})
-     */
-    private $Problems;
-
-    /**
-     * @var
      *
      * @ORM\ManyToOne(targetEntity="Capco\MediaBundle\Entity\Media")
      * @ORM\JoinColumn(name="media_id", referencedColumnName="id")
@@ -519,37 +513,6 @@ class Consultation
     {
         return $this->Opinions;
     }
-
-    /**
-     *
-     * @param \Capco\AppBundle\Entity\Problem $problem
-     *
-     * @return Consultation
-     */
-    public function addProblem(Problem $problem)
-    {
-        $this->Problems[] = $problem;
-
-        return $this;
-    }
-
-    /**
-     *
-     * @param \Capco\AppBundle\Entity\Problem $problem
-     */
-    public function removeProblem(Problem $problem)
-    {
-        $this->Problems->removeElement($problem);
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getProblems()
-    {
-        return $this->Problems;
-    }
-
 
     /**
      * Get theme names

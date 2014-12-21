@@ -2,24 +2,24 @@ Capco\AppBundle\Entity\Argument:
     argument1:
         body: <text(1000)>
         voteCount: <numberBetween(0, 582)>
-        contribution: @contribution1
+        opinion: @opinion1
         Author: @user1
         type: <numberBetween(0, 1)>
     argument2:
         body: <text(1000)>
         voteCount: <numberBetween(0, 582)>
-        contribution: @contribution2
+        opinion: @opinion2
         Author: @user2
         type: <numberBetween(0, 1)>
     argument3:
         body: <text(1000)>
         voteCount: <numberBetween(0, 582)>
-        contribution: @contribution2
+        opinion: @opinion2
         Author: @user3
         type: <numberBetween(0, 1)>
-    argument{4..35}:
+    argument{4..15}:
         body: <text(1000)>
         voteCount: <numberBetween(0, 582)>
-        contribution: @contribution*
+        opinion: @opinion<numberBetween(1, 20)>
         Author: @user*
         type: <numberBetween(0, 1)>

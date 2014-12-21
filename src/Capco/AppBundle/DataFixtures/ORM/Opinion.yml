@@ -1,5 +1,5 @@
 Capco\AppBundle\Entity\Opinion:
-    contribution1:
+    opinion1:
         title: <text(20)>
         body: <text(1000)>
         isEnabled: <boolean()>
@@ -11,7 +11,7 @@ Capco\AppBundle\Entity\Opinion:
         voteCountMitige: <numberBetween(0, 50)>
         voteCountOk: <numberBetween(0, 50)>
         voteCountNok: <numberBetween(0, 50)>
-    contribution2:
+    opinion2:
         title: <text(20)>
         body: <text(1000)>
         isEnabled: <boolean()>
@@ -23,7 +23,7 @@ Capco\AppBundle\Entity\Opinion:
         voteCountMitige: <numberBetween(0, 50)>
         voteCountOk: <numberBetween(0, 50)>
         voteCountNok: <numberBetween(0, 50)>
-    contribution3:
+    opinion3:
         title: <text(20)>
         body: <text(1000)>
         isEnabled: <boolean()>
@@ -35,7 +35,7 @@ Capco\AppBundle\Entity\Opinion:
         voteCountMitige: <numberBetween(0, 50)>
         voteCountOk: <numberBetween(0, 50)>
         voteCountNok: <numberBetween(0, 50)>
-    contribution7:
+    opinion4:
         title: <text(20)>
         body: <text(1000)>
         isEnabled: <boolean()>
@@ -47,7 +47,43 @@ Capco\AppBundle\Entity\Opinion:
         voteCountMitige: <numberBetween(0, 50)>
         voteCountOk: <numberBetween(0, 50)>
         voteCountNok: <numberBetween(0, 50)>
-    contribution8:
+    opinion5:
+        title: <text(20)>
+        body: <text(1000)>
+        isEnabled: <boolean()>
+        isTrashed: <boolean(30)>
+        trashedReason: <text(100)>
+        Author: @user2
+        Consultation: @cs2
+        OpinionType: @opinionType3
+        voteCountMitige: <numberBetween(0, 50)>
+        voteCountOk: <numberBetween(0, 50)>
+        voteCountNok: <numberBetween(0, 50)>
+    opinion6:
+        title: <text(20)>
+        body: <text(1000)>
+        isEnabled: <boolean()>
+        isTrashed: <boolean(30)>
+        trashedReason: <text(100)>
+        Author: @user2
+        Consultation: @cs2
+        OpinionType: @opinionType3
+        voteCountMitige: <numberBetween(0, 50)>
+        voteCountOk: <numberBetween(0, 50)>
+        voteCountNok: <numberBetween(0, 50)>
+    opinion7:
+        title: <text(20)>
+        body: <text(1000)>
+        isEnabled: <boolean()>
+        isTrashed: <boolean(30)>
+        trashedReason: <text(100)>
+        Author: @user2
+        Consultation: @cs2
+        OpinionType: @opinionType3
+        voteCountMitige: <numberBetween(0, 50)>
+        voteCountOk: <numberBetween(0, 50)>
+        voteCountNok: <numberBetween(0, 50)>
+    opinion8:
         title: <text(20)>
         body: <text(1000)>
         isEnabled: <boolean()>
@@ -59,7 +95,7 @@ Capco\AppBundle\Entity\Opinion:
         voteCountMitige: <numberBetween(0, 50)>
         voteCountOk: <numberBetween(0, 50)>
         voteCountNok: <numberBetween(0, 50)>
-    contribution9:
+    opinion9:
         title: <text(20)>
         body: <text(1000)>
         isEnabled: <boolean()>
@@ -71,7 +107,7 @@ Capco\AppBundle\Entity\Opinion:
         voteCountMitige: <numberBetween(0, 50)>
         voteCountOk: <numberBetween(0, 50)>
         voteCountNok: <numberBetween(0, 50)>
-    contribution10:
+    opinion10:
         title: <text(20)>
         body: <text(1000)>
         isEnabled: <boolean()>
@@ -83,7 +119,7 @@ Capco\AppBundle\Entity\Opinion:
         voteCountMitige: <numberBetween(0, 50)>
         voteCountOk: <numberBetween(0, 50)>
         voteCountNok: <numberBetween(0, 50)>
-    contribution{11..35}:
+    opinion{11..35}:
         title: <text(20)>
         body: <text(1000)>
         isEnabled: <boolean()>

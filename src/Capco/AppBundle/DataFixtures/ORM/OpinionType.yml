@@ -40,4 +40,4 @@ Capco\AppBundle\Entity\OpinionType:
         position: 1
         voteWidgetType: 3
         color: red
-        isEnabled: <boolean(100)>
+        isEnabled: 0

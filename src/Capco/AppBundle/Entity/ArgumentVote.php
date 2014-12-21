@@ -31,12 +31,6 @@ class ArgumentVote
 
     /**
      * @var
-     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Vote")
-     */
-    private $vote;
-
-    /**
-     * @var
      *
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Argument")
      */

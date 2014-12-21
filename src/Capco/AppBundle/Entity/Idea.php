@@ -12,7 +12,8 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Table(name="idea")
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\IdeaRepository")
  */
-class Idea
+class
+Idea
 {
     const SORT_ORDER_CREATED_AT = 0;
     const SORT_ORDER_VOTES_COUNT = 1;

@@ -7,19 +7,19 @@
     <div class="container">
         <div class="row">
             <div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2">
-                <div class="dialog  dialog--{{ opinionType.color }}  block--shadowed">
+                <div class="dialog  dialog--orange  block--shadowed">
                     <div class="dialog__header  box">
-                        <h4 class="h4  dialog__title">Proposer une proposition</h4>
+                        <h4 class="h4  dialog__title">{{ 'idea.update.title_block'|trans({}, 'CapcoAppBundle') }}</h4>
                     </div>
                     <div class="dialog__excerpt  excerpt  box">
-                        <p>Merci d'examiner les {{ opinionType.slug }} existantes en premier lieu afin de ne pas soumettre de doublon. Vous pouvez voter pour celles existantes !</p>
+                        <p>{{ 'idea.update.text_alert'|trans({}, 'CapcoAppBundle') }}</p>
                     </div>
-                    <form method="post">
+                    <form method="post" {{ form_enctype(form) }}>
                         <div class="dialog__body  box">
                             <div class="media">
-                                {% if app.user.Media %}
+                                {% if opinion.Author and opinion.Author.Media %}
                                     <a class="pull-left" href="#">
-                                        {% thumbnail app.user.Media, 'avatar' with {'title': app.user.fullname, 'alt': app.user.fullname, 'class': 'media-object img-circle'} %}
+                                        {% thumbnail opinion.Author.Media, 'avatar' with {'title': opinion.Author.fullname, 'alt': opinion.Author.fullname, 'class': 'media-object img-circle'} %}
                                     </a>
                                 {% endif %}
                                 <div class="media-body">

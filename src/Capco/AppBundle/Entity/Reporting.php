@@ -51,9 +51,9 @@ class Reporting
 
     /**
      * @var
-     * @ORM\ManyToMany(targetEntity="Capco\AppBundle\Entity\Contribution", cascade={"persist"})
+     * @ORM\ManyToMany(targetEntity="Capco\AppBundle\Entity\Opinion", cascade={"persist"})
      */
-    private $contributions;
+    private $Opinions;
 
     /**
      * @var
@@ -64,7 +64,7 @@ class Reporting
 
     function __construct()
     {
-        $this->contributions = new ArrayCollection();
+        $this->Opinions = new ArrayCollection();
     }
 
     /**
@@ -123,28 +123,28 @@ class Reporting
     /**
      * @return mixed
      */
-    public function getContributions()
+    public function getOpinions()
     {
-        return $this->contributions;
+        return $this->Opinions;
     }
 
     /**
-     * @param Contribution $contribution
+     * @param opinion $Opinion
      * @return $this
      */
-    public function addContribution(Contribution $contribution)
+    public function addOpinion(Opinion $Opinion)
     {
-        $this->contributions[] = $contribution;
+        $this->Opinions[] = $Opinion;
 
         return $this;
     }
 
     /**
-     * @param Contribution $contribution
+     * @param Opinion $Opinion
      */
-    public function removeContribution(Contribution $contribution)
+    public function removeOpinion(Opinion $Opinion)
     {
-        $this->contributions->removeElement($contribution);
+        $this->Opinions->removeElement($Opinion);
     }
 
     /**

@@ -9,28 +9,28 @@
             <div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2">
                 <div class="dialog  dialog--{{ opinionType.color }}  block--shadowed">
                     <div class="dialog__header  box">
-                        <h4 class="h4  dialog__title">Proposer une proposition</h4>
+                        <h4 class="h4  dialog__title">{{ 'consultation.delete.title_block'|trans({}, 'CapcoAppBundle') }}</h4>
                     </div>
                     <div class="dialog__excerpt  excerpt  box">
-                        <p>Merci d'examiner les {{ opinionType.slug }} existantes en premier lieu afin de ne pas soumettre de doublon. Vous pouvez voter pour celles existantes !</p>
+                        <p>{{ 'consultation.delete.text_alert'|trans({}, 'CapcoAppBundle') }}</p>
                     </div>
-                    <form method="post">
+
+                    <form method="post" {{ form_enctype(form) }}>
                         <div class="dialog__body  box">
                             <div class="media">
-                                {% if app.user.Media %}
-                                    <a class="pull-left" href="#">
-                                        {% thumbnail app.user.Media, 'avatar' with {'title': app.user.fullname, 'alt': app.user.fullname, 'class': 'media-object img-circle'} %}
-                                    </a>
-                                {% endif %}
                                 <div class="media-body">
                                     {{ form_rest(form) }}
+                                    <h4>{{ opinion.title }}</h4>
+                                    <div>
+                                        {{ opinion.body|truncate(300, true, ' [...]')|raw }}
+                                    </div>
                                 </div>
                             </div>
                         </div>
                         <div class="dialog__footer  box">
                             <div class="pull-right">
                                 <a href="{{ path('app_consultation_show_opinions', {'consultation_slug': consultation.slug, 'opinion_type_slug': opinionType.slug}) }}" class="btn  btn-default">{{ 'idea.create.reset_submit'|trans({}, 'CapcoAppBundle') }}</a>
-                                <button type="submit" class="btn  btn-primary">Publier</button>
+                                <button type="submit" class="btn  btn-danger">{{ 'idea.update.remove_button'|trans({}, 'CapcoAppBundle') }}</button>
                             </div>
                         </div>
                     </form>
@@ -38,14 +38,4 @@
             </div>
         </div>
     </div>
-{% endblock %}
-
-{% block javascripts %}
-    {{ parent() }}
-    <script src="{{ asset('js/ckeditor/ckeditor.js') }}"></script>
-    <script type="text/javascript">
-        $(window).on('load', function() {
-            App.module.ckEditor('ckeditor');
-        });
-    </script>
 {% endblock %}

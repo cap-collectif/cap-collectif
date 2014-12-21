@@ -9,10 +9,10 @@ use Gedmo\Mapping\Annotation as Gedmo;
 /**
  * Vote
  *
- * @ORM\Table(name="vote")
- * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\VoteRepository")
+ * @ORM\Table(name="opinion_vote")
+ * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\OpinionVoteRepository")
  */
-class Vote
+class OpinionVote
 {
     /**
      * @var integer
@@ -40,10 +40,10 @@ class Vote
     /**
      * @var
      *
-     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Contribution", inversedBy="Votes")
-     * @ORM\JoinColumn(name="contribution_id", referencedColumnName="id")
+     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Opinion", inversedBy="Votes")
+     * @ORM\JoinColumn(name="opinion_id", referencedColumnName="id")
      */
-    private $Contribution;
+    private $opinion;
 
     /**
      * @var
@@ -99,17 +99,17 @@ class Vote
     /**
      * @return mixed
      */
-    public function getContribution()
+    public function getOpinion()
     {
-        return $this->Contribution;
+        return $this->opinion;
     }
 
     /**
-     * @param mixed $Contribution
+     * @param mixed $Opinion
      */
-    public function setContribution($Contribution)
+    public function setOpinion($Opinion)
     {
-        $this->Contribution = $Contribution;
+        $this->opinion = $Opinion;
     }
 
     /**

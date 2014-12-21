@@ -57,9 +57,9 @@ class Argument
     /**
      * @var
      *
-     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Contribution", inversedBy="arguments")
+     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Opinion", inversedBy="arguments")
      */
-    private $contribution;
+    private $opinion;
 
     /**
      * @var integer
@@ -155,17 +155,17 @@ class Argument
     /**
      * @return mixed
      */
-    public function getContribution()
+    public function getOpinion()
     {
-        return $this->contribution;
+        return $this->opinion;
     }
 
     /**
-     * @param mixed $contribution
+     * @param mixed $opinion
      */
-    public function setContribution($contribution)
+    public function setOpinion($opinion)
     {
-        $this->contribution = $contribution;
+        $this->opinion = $opinion;
     }
 
     /**

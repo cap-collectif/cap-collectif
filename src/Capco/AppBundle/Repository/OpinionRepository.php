@@ -50,10 +50,8 @@ class OpinionRepository extends EntityRepository
                 ->addSelect('arg')
                 ->leftJoin('o.Author', 'a')
                 ->addSelect('a')
-                ->leftJoin('arg.Author', 'aArg')
-                ->addSelect('aArg')
-                ->leftJoin('arg.contribution', 'aCont')
-                ->addSelect('aCont')
+                ->leftJoin('o.Consultation', 'c')
+                ->addSelect('c')
                 ->andWhere('o.slug = :opinion')
                 ->setParameter('opinion', $opinion);
 
