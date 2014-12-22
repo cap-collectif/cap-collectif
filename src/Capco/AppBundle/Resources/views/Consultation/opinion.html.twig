@@ -151,7 +151,9 @@
 
                             <div class="col-xs-12 col-lg-4 pull-right  opinion__action-buttons">
                                 <a href="#" class="btn  btn-dark-gray  btn--outline"><i class="cap-gun"></i> Signaler</a>
-                                <a href="{{ path('app_consultation_edit_opinion' ,{'consultation_slug': consultation.slug, 'opinion_type_slug': app.request.attributes.get('opiniontype').slug, 'opinion_slug': opinion.slug } ) }}" class="btn  btn-dark-gray  btn--outline"><i class="cap-gun"></i> Modifier</a>
+                                {% if app.user is not null and app.user == opinion.Author %}
+                                    <a href="{{ path('app_consultation_edit_opinion' ,{'consultation_slug': consultation.slug, 'opinion_type_slug': app.request.attributes.get('opiniontype').slug, 'opinion_slug': opinion.slug } ) }}" class="btn  btn-dark-gray  btn--outline"><i class="cap-gun"></i> Modifier</a>
+                                {% endif %}
                             </div>
                         </div>
                     </div>
