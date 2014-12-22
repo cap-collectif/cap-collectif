@@ -38,9 +38,12 @@
 
 {% block body %}
 
-    {{ render_esi(controller('CapcoAppBundle:Homepage:lastTopics', {'max': 4, 'offset': 0})) }}
-    {{ render_esi(controller('CapcoAppBundle:Consultation:lastOpenConsultations', {'max': 4, 'offset': 0})) }}
-    {{ render_esi(controller('CapcoAppBundle:Homepage:lastIdeas', {'max': 4, 'offset': 0})) }}
+    {{ render(controller('CapcoAppBundle:Homepage:lastTopics', {'max': 4, 'offset': 0})) }}
+    <div class="container">
+        <h2 class="h2">{{ 'homepage.consultations.last'|trans({}, 'CapcoAppBundle') }}</h2>
+        {{ render(controller('CapcoAppBundle:Consultation:lastOpenConsultations', {'max': 4, 'offset': 0})) }}
+    </div>
+    {{ render(controller('CapcoAppBundle:Homepage:lastIdeas', {'max': 4, 'offset': 0})) }}
 
     <div class="container">
         <div class="row">
@@ -48,7 +51,7 @@
                 {% include '@CapcoApp/Homepage/newsletter.html.twig' %}
             </div>
             <div class="col-xs-12  col-sm-6">
-                {{ render_esi(controller('CapcoAppBundle:Homepage:socialNetworks', {})) }}
+                {{ render(controller('CapcoAppBundle:Homepage:socialNetworks', {})) }}
             </div>
         </div>
     </div>

@@ -12,6 +12,7 @@ error:
   other:
     title: Erreur
   actions: Vous pouvez :
+  to_previous_page: Retourner à la page précédente
   to_homepage: Aller à la page d'Accueil
   report: Signaler un problème
   contribute: Profiez-en pour contribuer à une consultation
@@ -22,6 +23,8 @@ homepage:
     title: Lettre d'information
     description: Inscrivez vous à la lettre d'information pour rester informé de l'actualité de la concertation.
     enter_email: Entrez votre adresse électronique
+  consultations:
+    last: Dernières consultations
 
 contact:
   button: Envoyer
