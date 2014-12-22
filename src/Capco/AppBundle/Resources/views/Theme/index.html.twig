@@ -1,10 +1,13 @@
 {% extends '@CapcoApp/base.html.twig' %}
 
 {% block jumbotron %}
-    <div class="jumbotron  jumbotron--custom jumbotron--bg-1  text-center">
+    <div class="jumbotron  jumbotron--custom  jumbotron--bg-1 text-center">
         <div class="container">
-            <h1 class="h2  h--no-border">{{ 'theme.index.title'|trans({}, 'CapcoAppBundle') }}</h1>
-            <p>{{ 'theme.index.description'|trans({}, 'CapcoAppBundle') }}</p>
+            <h1>{{ capco_site_parameter_value('themes.jumbotron.title')}}</h1>
+            {% set jumbotron_body = capco_site_parameter_value('themes.jumbotron.body') %}
+            {% if null != jumbotron_body %}
+                <p>{{ jumbotron_body }}</p>
+            {% endif %}
         </div>
     </div>
 {% endblock %}
@@ -12,7 +15,10 @@
 {% block body %}
     <div class="container">
 
-        <p class="block">{{ 'theme.index.text_info'|trans({}, 'CapcoAppBundle') }}</p>
+        {% set content_body = capco_site_parameter_value('themes.content.body') %}
+        {% if null != content_body %}
+            <p class="block">{{ content_body }}</p>
+        {% endif %}
 
         <div class="filter  block">
             <div class="row">

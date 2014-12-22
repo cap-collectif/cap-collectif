@@ -136,12 +136,9 @@ class IdeaRepository extends EntityRepository
             $qb->orderBy('i.createdAt', 'DESC');
         }
 
-        $query = $qb->getQuery();
-
-        if($nbByPage > 0){
-            $query->setFirstResult(($page - 1) * $nbByPage)
-                ->setMaxResults($nbByPage);
-        }
+        $query = $qb->getQuery()
+            ->setFirstResult(($page - 1) * $nbByPage)
+            ->setMaxResults($nbByPage);
 
         return new Paginator($query);
     }

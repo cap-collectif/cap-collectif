@@ -3,7 +3,11 @@
 {% block jumbotron %}
     <div class="jumbotron  jumbotron--custom  jumbotron--bg-1 text-center">
         <div class="container">
-            <h1>Liste des idées</h1>
+            <h1>{{ capco_site_parameter_value('ideas.jumbotron.title')}}</h1>
+            {% set jumbotron_body = capco_site_parameter_value('ideas.jumbotron.body') %}
+            {% if null != jumbotron_body %}
+                <p>{{ jumbotron_body }}</p>
+            {% endif %}
         </div>
     </div>
 {% endblock %}
@@ -11,7 +15,10 @@
 {% block body %}
     <div class="container">
 
-        <p class="block">{{ 'idea.index.text_info'|trans({}, 'CapcoAppBundle') }}</p>
+        {% set content_body = capco_site_parameter_value('ideas.content.body') %}
+        {% if null != content_body %}
+            <p class="block">{{ content_body }}</p>
+        {% endif %}
 
         <div class="filter  block">
             <div class="row">

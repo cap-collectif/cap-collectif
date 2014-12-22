@@ -9,7 +9,6 @@ use Capco\AppBundle\Entity\OpinionType;
 use Capco\AppBundle\Entity\Theme;
 use Capco\AppBundle\Form\ConsultationSearchType;
 use Capco\AppBundle\Form\OpinionsType as OpinionForm;
-
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
@@ -233,25 +232,13 @@ class ConsultationController extends Controller
                 ));
         }
 
-        $pagination = $this->get('capco.site_parameter.resolver')->getValue('consultations.pagination');
-        if (!is_numeric($pagination)){
-            $pagination = 0;
-        } else {
-            $pagination = (int)$pagination;
-        }
-
-        $consultations = $em->getRepository('CapcoAppBundle:Consultation')->getSearchResultsWithTheme($pagination, $page, $theme, $sort, $term);
-
-        //Avoid division by 0 in nbPage calculation
-        if($pagination == 0){
-            $pagination = ceil(count($consultations));
-        }
+        $consultations = $em->getRepository('CapcoAppBundle:Consultation')->getSearchResultsWithTheme(4, $page, $theme, $sort, $term);
 
         return [
             'consultations' => $consultations,
             'statuses' => Consultation::$openingStatuses,
             'page' => $page,
-            'nbPage' => ceil(count($consultations) / $pagination),
+            'nbPage' => ceil(count($consultations) / 4),
             'form' => $form->createView()
         ];
     }

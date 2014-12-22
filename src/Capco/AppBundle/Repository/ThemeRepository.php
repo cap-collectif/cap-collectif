@@ -53,14 +53,11 @@ class ThemeRepository extends EntityRepository
             ;
         }
 
-        $query = $qb->getQuery();
+        $qb->getQuery()
+            ->setFirstResult(($page-1) * $nbByPage)
+            ->setMaxResults($nbByPage);
 
-        if($nbByPage > 0){
-            $query->setFirstResult(($page - 1) * $nbByPage)
-                ->setMaxResults($nbByPage);
-        }
-
-        return new Paginator($query);
+        return new Paginator($qb);
     }
 
     //Helpers

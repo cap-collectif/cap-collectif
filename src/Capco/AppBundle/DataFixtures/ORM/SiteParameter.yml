@@ -23,6 +23,7 @@ Capco\AppBundle\Entity\SiteParameter:
                Praeterea iter est quasdam res quas ex communi. Plura mihi bona sunt, inclinet, amari petere vellent. Inmensae subtilitatis, obscuris et malesuada fames. Non equidem invideo, miror magis posuere velit aliquet. Sed haec quis possit intrepidus aestimare tellus. Cum ceteris in veneratione tui montes, nascetur mus.
                Petierunt uti sibi concilium totius Galliae in diem certam indicere. Vivamus sagittis lacus vel augue laoreet rutrum faucibus. Quam diu etiam furor iste tuus nos eludet? Cum sociis natoque penatibus et magnis dis parturient. Fabio vel iudice vincam, sunt in culpa qui officia. Quisque placerat facilisis egestas cillum dolore.
                Quis aute iure reprehenderit in voluptate velit esse. Inmensae subtilitatis, obscuris et malesuada fames. Quisque placerat facilisis egestas cillum dolore. At nos hinc posthac, sitientis piros Afros. Cum ceteris in veneratione tui montes, nascetur mus.
+
     SiteParameter6:
         keyname: footer.text.title
         title: Titre du texte dans le footer
@@ -31,40 +32,63 @@ Capco\AppBundle\Entity\SiteParameter:
         keyname: footer.text.body
         title: Texte dans le footer
         value: Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolor reprehenderit temporibus iusto fugiat at nam eligendi ducimus molestias voluptates ad rerum natus similique quibusdam, eum sint quisquam magnam quidem aliquam!
+
     SiteParameter8:
         keyname: consultations.jumbotron.title
         title: Titre du jumbotron sur la page "Liste des consultations"
         value: Liste des consultations
     SiteParameter9:
+        keyname: consultations.jumbotron.body
+        title: Description du jumbotron dans la page "Liste des consultations"
+        value: Lorem ipsum dolor sit amet, consectetur adipisicing elit. Esse delectus earum vero iure hic ratione quasi nisi possimus commodi, reprehenderit optio sit in, laudantium adipisci quidem aliquid quis, ullam nobis.
+    SiteParameter10:
+        keyname: consultations.content.body
+        title: Texte dans la page "Liste des consultations"
+        value: Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nulla dicta ab corrupti hic repellat corporis culpa tenetur enim eveniet iste rem dolor debitis labore sunt omnis inventore, consequuntur praesentium modi.
+
+    SiteParameter11:
+        keyname: ideas.jumbotron.title
+        title: Titre du jumbotron sur la page "Liste des idées"
+        value: Boîte à idées
+    SiteParameter12:
+        keyname: ideas.jumbotron.body
+        title: Description du jumbotron dans la page "Liste des idées"
+        value: Lorem ipsum dolor sit amet, consectetur adipisicing elit. Esse delectus earum vero iure hic ratione quasi nisi possimus commodi, reprehenderit optio sit in, laudantium adipisci quidem aliquid quis, ullam nobis.
+    SiteParameter13:
+        keyname: ideas.content.body
+        title: Texte dans la page "Liste des idées"
+        value: Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nulla dicta ab corrupti hic repellat corporis culpa tenetur enim eveniet iste rem dolor debitis labore sunt omnis inventore, consequuntur praesentium modi.
+
+    SiteParameter14:
+        keyname: themes.jumbotron.title
+        title: Titre du jumbotron sur la page "Liste des thèmes"
+        value: Thèmes
+    SiteParameter15:
+        keyname: themes.jumbotron.body
+        title: Description du jumbotron dans la page "Liste des thèmes"
+        value: Lorem ipsum dolor sit amet, consectetur adipisicing elit. Esse delectus earum vero iure hic ratione quasi nisi possimus commodi, reprehenderit optio sit in, laudantium adipisci quidem aliquid quis, ullam nobis.
+    SiteParameter16:
+        keyname: themes.content.body
+        title: Texte dans la page "Liste des thèmes"
+        value: Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nulla dicta ab corrupti hic repellat corporis culpa tenetur enim eveniet iste rem dolor debitis labore sunt omnis inventore, consequuntur praesentium modi.
+
+    SiteParameter17:
         keyname: contact.jumbotron.body
         title: Description du jumbotron dans la page contact
         value: Nous serons heureux d'échanger avec vous !
-    SiteParameter10:
+    SiteParameter18:
         keyname: contact.content.body
         title: Texte dans la page contact
         value: |
                 Une question, une remarque, une suggestion ou une lettre d'amour ? Nous sommes là pour vous répondre.
                 Pour toute autre question ou juste nous dire bonjour, utilisez le formulaire ou nos coordonnées ci-dessous :
-    SiteParameter11:
+    SiteParameter19:
         keyname: contact.content.address
         title: Adresse affichée dans la page contact
         value: |
                 16 bis Avenue Parmentier
                 75011 Paris
-    SiteParameter12:
+    SiteParameter20:
         keyname: contact.content.phone_number
         title: Numéro de téléphone affiché dans la page contact
         value: 00 00 00 00 00
-
-    SiteParameter21:
-        keyname: consultations.pagination
-        title: Nombre d'éléments pour la pagination des consultations
-        value: 8
-    SiteParameter22:
-        keyname: ideas.pagination
-        title: Nombre d'éléments pour la pagination des idées
-        value: 8
-    SiteParameter23:
-        keyname: themes.pagination
-        title: Nombre d'éléments pour la pagination des thèmes
-        value: 2

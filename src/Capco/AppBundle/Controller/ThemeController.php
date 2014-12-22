@@ -52,25 +52,13 @@ class ThemeController extends Controller
             ));
         }
 
-        $pagination = $this->get('capco.site_parameter.resolver')->getValue('themes.pagination');
-        if (!is_numeric($pagination)){
-            $pagination = 0;
-        } else {
-            $pagination = (int)$pagination;
-        }
-
-        $themes = $em->getRepository('CapcoAppBundle:Theme')->getSearchResultsWithConsultationsAndIdeas($pagination, $page, $term);
-
-        //Avoid division by 0 in nbPage calculation
-        if($pagination == 0){
-            $pagination = ceil(count($themes));
-        }
+        $themes = $em->getRepository('CapcoAppBundle:Theme')->getSearchResultsWithConsultationsAndIdeas(8, $page, $term);
 
         return array(
             'themes' => $themes,
             'form' => $form->createView(),
             'page' => $page,
-            'nbPage' => ceil(count($themes) / $pagination)
+            'nbPage' => ceil(count($themes) / 8)
         );
     }
 
