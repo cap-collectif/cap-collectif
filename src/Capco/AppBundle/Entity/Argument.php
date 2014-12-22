@@ -57,6 +57,13 @@ class Argument
     /**
      * @var
      *
+     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\ArgumentVote", mappedBy="argument", cascade={"persist", "remove"})
+     */
+    private $Votes;
+
+    /**
+     * @var
+     *
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Opinion", inversedBy="arguments")
      */
     private $opinion;

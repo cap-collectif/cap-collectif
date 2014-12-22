@@ -111,11 +111,13 @@ class ConsultationController extends Controller
             if ($form->isValid()) {
 
                 $em = $this->getDoctrine()->getManager();
+                
                 $em->remove($opinion);
                 $em->flush();
+
                 $this->get('session')->getFlashBag()->add('info', $this->get('translator')->trans('The proposition has been deleted'));
 
-                return $this->redirect($this->generateUrl('app_consultation_show', ['consultation_slug' => $consultation->getSlug() ]));
+                return $this->redirect($this->generateUrl('app_consultation_show', ['slug' => $consultation->getSlug() ]));
             }
         }
 
@@ -157,8 +159,20 @@ class ConsultationController extends Controller
             $form->handleRequest($request);
 
             if ($form->isValid()) {
+
                 $em = $this->getDoctrine()->getManager();
+
+                // Get votes on opinion
+                $linkedVotes = $em->getRepository('CapcoAppBundle:OpinionVote')->findByOpinion($opinion);
+
+                foreach($linkedVotes as $vote){
+                    $em->remove($vote);
+                }
+
+                $opinion->resetVotes();
+
                 $em->persist($opinion);
+
                 $em->flush();
 
                 $this->get('session')->getFlashBag()->add('success', $this->get('translator')->trans('The opinion has been edited'));

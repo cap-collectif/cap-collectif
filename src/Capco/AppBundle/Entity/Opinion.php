@@ -530,4 +530,11 @@ class Opinion
         return $this->getVoteCountMitige() + $this->getVoteCountNok() + $this->getVoteCountOk();
     }
 
+    public function resetVotes(){
+        $this->voteCountMitige = 0;
+        $this->voteCountOk = 0;
+        $this->voteCountNok = 0;
+        return $this;
+    }
+
 }
