@@ -48,3 +48,9 @@ liip_imagine:
             controller_action: 'SonataMediaBundle:Media:liipImagineFilter'
             filters:
                 thumbnail: { size: [50, 50], mode: inbound }
+
+        default_logo:
+            quality: 70
+            controller_action: 'SonataMediaBundle:Media:liipImagineFilter'
+            filters:
+                relative_resize: {heighten: 50 }

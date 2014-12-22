@@ -2,6 +2,9 @@ parameters:
     capco.site_parameter.repository.class: Capco\AppBundle\Repository\SiteParameterRepository
     capco.site_parameter.resolver.class: Capco\AppBundle\SiteParameter\Resolver
     capco.twig_extension.site_parameter.class: Capco\AppBundle\Twig\SiteParameterExtension
+    capco.site_image.repository.class: Capco\AppBundle\Repository\SiteImageRepository
+    capco.site_image.resolver.class: Capco\AppBundle\SiteImage\Resolver
+    capco.twig_extension.site_image.class: Capco\AppBundle\Twig\SiteImageExtension
 
 services:
     capco.site_parameter.repository:
@@ -20,5 +23,24 @@ services:
     capco.twig.site_parameter:
         class: %capco.twig_extension.site_parameter.class%
         arguments: [ @capco.site_parameter.resolver ]
+        tags:
+            - { name: twig.extension }
+
+    capco.site_image.repository:
+        class: %capco.site_image.repository.class%
+        factory_service: doctrine.orm.default_entity_manager
+        factory_method: getRepository
+        arguments:
+            - Capco\AppBundle\Entity\SiteImage
+
+    capco.site_image.resolver:
+        class: %capco.site_image.resolver.class%
+        arguments:
+            - @capco.site_image.repository
+            - @logger
+
+    capco.twig.site_image:
+        class: %capco.twig_extension.site_image.class%
+        arguments: [ @capco.site_image.resolver ]
         tags:
             - { name: twig.extension }

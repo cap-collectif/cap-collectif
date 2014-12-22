@@ -32,3 +32,11 @@ Capco\MediaBundle\Entity\Media:
         enabled:       true
         name:          Xavier Lacot
         context:       @MediaContext2
+
+
+    #SiteImages
+    Logo:
+        binaryContent: ../files/logo.png
+        enabled:       true
+        name:          Logo
+        context:       @MediaContext3

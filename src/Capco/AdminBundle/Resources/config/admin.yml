@@ -158,3 +158,11 @@ services:
             - {name: sonata.admin, manager_type: orm, group: admin.group.marketing, label: admin.label.social_network}
         calls:
             - [ setTranslationDomain, [SonataAdminBundle]]
+
+    capco_admin.admin.site_image:
+        class: Capco\AdminBundle\Admin\SiteImageAdmin
+        arguments: [~, Capco\AppBundle\Entity\SiteImage, SonataAdminBundle:CRUD]
+        tags:
+            - {name: sonata.admin, manager_type: orm, group: admin.group.reference, label: admin.label.site_image}
+        calls:
+            - [ setTranslationDomain, [SonataAdminBundle]]

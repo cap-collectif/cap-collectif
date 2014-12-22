@@ -3,9 +3,12 @@
 
         {# Navbar brand and toggle  #}
         <div class="navbar-header">
-            <a class="navbar-brand" href="{{ path('app_homepage' )}}">
-                <img alt="Logo" src="http://placekitten.com/g/80/40">
-            </a>
+            {% set logo = capco_site_image_media('image.logo') %}
+            {% if(logo != null) %}
+                <a class="navbar-brand" href="{{ path('app_homepage' )}}">
+                    {% thumbnail logo, 'logo' with {'title': logo.name, 'alt': logo.name} %}
+                </a>
+            {% endif %}
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
                     data-target="#navbar-collapse-1">
                 <span class="navbar__toggle-icon">
