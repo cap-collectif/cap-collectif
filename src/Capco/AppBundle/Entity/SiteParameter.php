@@ -50,6 +50,14 @@ class SiteParameter
      */
     private $updatedAt;
 
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="is_enabled", type="boolean")
+     */
+    private $isEnabled = true;
+
+
     public function __toString()
     {
         if ($this->id) {
@@ -159,5 +167,29 @@ class SiteParameter
         $this->updatedAt = $updatedAt;
 
         return $this;
+    }
+
+    /**
+     * Set isEnabled
+     *
+     * @param boolean $isEnabled
+     *
+     * @return Consultation
+     */
+    public function setIsEnabled($isEnabled)
+    {
+        $this->isEnabled = $isEnabled;
+
+        return $this;
+    }
+
+    /**
+     * Get isEnabled
+     *
+     * @return boolean
+     */
+    public function getIsEnabled()
+    {
+        return $this->isEnabled;
     }
 }

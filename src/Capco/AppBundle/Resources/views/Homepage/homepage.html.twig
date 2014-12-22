@@ -4,18 +4,35 @@
 {% block jumbotron %}
     <div class="jumbotron  jumbotron--custom  jumbotron--bg-1  text-center">
         <div class="container">
-            <h1>{{ capco_site_parameter_value('homepage.jumbotron.title')}}</h1>
-            <p>{{ capco_site_parameter_value('homepage.jumbotron.body')}}</p>
-            <p><a href="#" class="btn  btn--outline btn-custom-1  btn-lg" role="button">{{ capco_site_parameter_value('homepage.jumbotron.button')}}</a></p>
+            {% set jumbotron_title = capco_site_parameter_value('homepage.jumbotron.title') %}
+            {% if null != jumbotron_title %}
+                <h1>{{ jumbotron_title }}</h1>
+            {% endif %}
+            {% set jumbotron_body = capco_site_parameter_value('homepage.jumbotron.body') %}
+            {% if null != jumbotron_body %}
+                <p>{{ jumbotron_body }}</p>
+            {% endif %}
+            {% set jumbotron_button = capco_site_parameter_value('homepage.jumbotron.button') %}
+            {% if null != jumbotron_button %}
+                <p><a href="#" class="btn  btn--outline btn-custom-1  btn-lg" role="button">{{ jumbotron_button }}</a></p>
+            {% endif %}
         </div>
     </div>
 
-    <div class="jumbotron  jumbotron--custom  jumbotron--bg-2  jumbotron--small">
-        <div class="container">
-            <h2>{{ capco_site_parameter_value('homepage.jumbotron2.title')}}</h2>
-            <p>{{ capco_site_parameter_value('homepage.jumbotron2.body')}}</p>
+    {% set jumbotron2_title = capco_site_parameter_value('homepage.jumbotron2.title') %}
+    {% set jumbotron2_body = capco_site_parameter_value('homepage.jumbotron2.body') %}
+    {% if null != jumbotron2_title or null != jumbotron2_body %}
+        <div class="jumbotron  jumbotron--custom  jumbotron--bg-2  jumbotron--small">
+            <div class="container">
+                {% if null != jumbotron2_title %}
+                    <h2>{{ jumbotron2_title }}</h2>
+                {% endif %}
+                {% if null != jumbotron2_body %}
+                    <p>{{ jumbotron2_body }}</p>
+                {% endif %}
+            </div>
         </div>
-    </div>
+    {% endif %}
 {% endblock %}
 
 {% block body %}

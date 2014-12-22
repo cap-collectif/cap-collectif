@@ -2,8 +2,14 @@
     <div class="container">
         <div class="row">
             <div class="col-xs-12  col-sm-12  col-md-12  col-lg-12">
-                <h4 class="h4">{{ capco_site_parameter_value('footer.text.title')}}</h4>
-                <p>{{ capco_site_parameter_value('footer.text.body')}}</p>
+                {% set footer_title = capco_site_parameter_value('footer.text.title') %}
+                {% if null != footer_title %}
+                    <h4 class="h4">{{ footer_title }}</h4>
+                {% endif %}
+                {% set footer_body = capco_site_parameter_value('footer.text.body') %}
+                {% if null != footer_body %}
+                    <p>{{ footer_body }}</p>
+                {% endif %}
             </div>
 
             <div class="col-xs-12  col-sm-12  col-md-10  col-md-offset-1  col-lg-8  col-lg-offset-2">

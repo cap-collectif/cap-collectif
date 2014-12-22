@@ -8,6 +8,8 @@ use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Show\ShowMapper;
 
+use Sonata\AdminBundle\Route\RouteCollection;
+
 class SiteParameterAdmin extends Admin
 {
     /**
@@ -28,6 +30,7 @@ class SiteParameterAdmin extends Admin
         $listMapper
             ->add('title')
             ->add('value')
+            ->add('isEnabled', null, array('editable' => true))
             ->add('updatedAt')
             ->add('_action', 'actions', array(
                 'actions' => array(
@@ -45,6 +48,7 @@ class SiteParameterAdmin extends Admin
     {
         $formMapper
             ->add('value')
+            ->add('isEnabled')
         ;
     }
 
@@ -58,5 +62,11 @@ class SiteParameterAdmin extends Admin
             ->add('value')
             ->add('updatedAt')
         ;
+    }
+
+    protected function configureRoutes(RouteCollection $collection)
+    {
+        $collection->remove('delete');
+        $collection->remove('create');
     }
 }

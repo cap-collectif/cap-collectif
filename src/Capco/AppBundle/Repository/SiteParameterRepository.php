@@ -9,12 +9,14 @@ use Doctrine\ORM\EntityRepository;
  */
 class SiteParameterRepository extends EntityRepository
 {
-    public function getValueByKey($key)
+    public function getValueByKeyIfEnabled($key)
     {
         return $this->createQueryBuilder('p')
             ->select('p.value')
             ->andWhere('p.keyname = :key')
+            ->andWhere('p.isEnabled = :enabled')
             ->setParameter('key', $key)
+            ->setParameter('enabled', true)
             ->getQuery()
             ->getSingleScalarResult();
     }

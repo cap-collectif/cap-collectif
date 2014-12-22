@@ -22,7 +22,7 @@ class Resolver
         $value = null;
 
         try {
-            $value = $this->repository->getValueByKey($key);
+            $value = $this->repository->getValueByKeyIfEnabled($key);
         } catch (NoResultException $e) {
             $this->logger->error($e->getMessage() . ' Tried to access undefined site parameter.', array(
                 'key' => $key
