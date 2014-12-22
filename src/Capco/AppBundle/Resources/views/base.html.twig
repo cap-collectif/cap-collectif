@@ -31,6 +31,15 @@
 {# Header  #}
 {% include '@CapcoApp/Default/header.html.twig' %}
 
+{% for key, messages in app.session.flashbag.all() %}
+    {% for message in messages %}
+    <div class="alert alert-{{ key }} alert-dismissible  alert--no-radius" role="alert" style="margin-bottom: 0">
+        <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <span>{% block error_message %}{{ message | trans({}, 'CapcoAppBundle') }}{% endblock %}</span>
+    </div>
+    {% endfor %}
+{% endfor %}
+
 {# Main jumbotron for a primary marketing message or call to action #}
 {% block jumbotron %}
     <div class="jumbotron  jumbotron--custom  jumbotron--bg-1 text-center">
@@ -45,15 +54,6 @@
         </div>
     </div>
 {% endblock %}
-
-{% for key, messages in app.session.flashbag.all() %}
-    {% for message in messages %}
-    <div class="alert alert-{{ key }} alert-dismissible  alert--no-radius" role="alert" style="margin-bottom: 0">
-        <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-        <span>{% block error_message %}{{ message | trans({}, 'CapcoAppBundle') }}{% endblock %}</span>
-    </div>
-    {% endfor %}
-{% endfor %}
 
 <div class="main">
     {% block body %}{% endblock %}
