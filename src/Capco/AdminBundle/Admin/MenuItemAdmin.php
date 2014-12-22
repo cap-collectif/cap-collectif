@@ -62,7 +62,7 @@ class MenuItemAdmin extends Admin
             ->add('Menu')
             ->add('title')
             ->add('link', null, array('required' => false))
-            ->add('isEnabled')
+            ->add('isEnabled', 'checkbox', array())
             ->add('position')
             ->add('parent', 'sonata_type_model', array(
                                                 'help' => 'Non applicable pour les éléments du footer',

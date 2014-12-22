@@ -46,6 +46,10 @@ sonata_admin:
                     - capco_admin.admin.problem_type
                     - capco_admin.admin.site_parameter
 
+sonata_doctrine_orm_admin:
+    templates:
+        form: [ CapcoAdminBundle:Form:form_admin_fields.html.twig ]
+
 sonata_block:
     default_contexts: [cms]
     blocks:
