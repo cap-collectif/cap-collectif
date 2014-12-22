@@ -55,3 +55,16 @@ Capco\AppBundle\Entity\SiteParameter:
         keyname: contact.content.phone_number
         title: Numéro de téléphone affiché dans la page contact
         value: 00 00 00 00 00
+
+    SiteParameter21:
+        keyname: consultations.pagination
+        title: Nombre d'éléments pour la pagination des consultations
+        value: 8
+    SiteParameter22:
+        keyname: ideas.pagination
+        title: Nombre d'éléments pour la pagination des idées
+        value: 8
+    SiteParameter23:
+        keyname: themes.pagination
+        title: Nombre d'éléments pour la pagination des thèmes
+        value: 2
