@@ -144,13 +144,25 @@ class IdeaController extends Controller
             ));
         }
 
-        $ideas = $em->getRepository('CapcoAppBundle:Idea')->getSearchResultsWithUser(8, $page, $theme, $sort, $term);
+        $pagination = $this->get('capco.site_parameter.resolver')->getValue('ideas.pagination');
+        if (!is_numeric($pagination)){
+            $pagination = 0;
+        } else {
+            $pagination = (int)$pagination;
+        }
 
+        $ideas = $em->getRepository('CapcoAppBundle:Idea')->getSearchResultsWithUser($pagination, $page, $theme, $sort, $term);
+
+        //Avoid division by 0 in nbPage calculation
+        if($pagination == 0){
+            $pagination = ceil(count($ideas));
+        }
+        
         return array(
             'ideas' => $ideas,
             'form' => $form->createView(),
             'page' => $page,
-            'nbPage' => ceil(count($ideas) / 8)
+            'nbPage' => ceil(count($ideas) / $pagination)
         );
     }
 
