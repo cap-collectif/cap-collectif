@@ -8,6 +8,8 @@ use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Show\ShowMapper;
 
+use Capco\AppBundle\Entity\Menu;
+
 class MenuItemAdmin extends Admin
 {
     protected $datagridValues = array(
@@ -60,8 +62,11 @@ class MenuItemAdmin extends Admin
         $formMapper
             ->add('Menu')
             ->add('title')
-            ->add('link', null, array('required' => false))
-            ->add('isEnabled', 'checkbox', array())
+            ->add('link', null, array(
+                'required' => false,
+                'help' => 'Si vous associez une page à l\'élément de menu, le lien sera défini automatiquement.',
+                ))
+            ->add('isEnabled')
             ->add('position')
             ->add('parent', 'sonata_type_model', array(
                                                 'help' => 'Non applicable pour les éléments du footer',
@@ -111,7 +116,10 @@ class MenuItemAdmin extends Admin
     {
         $query = $this->modelManager
                             ->createQuery($this->getClass(), 'p');
-        $query->where('p.parent IS NULL');
+        $query->where('p.parent IS NULL')
+            ->leftJoin('p.Menu', 'm')
+            ->andWhere('m.type = :header')
+            ->setParameter('header', Menu::TYPE_HEADER);
         return $query;
     }
 }
