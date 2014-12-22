@@ -6,11 +6,6 @@
 {# Navbar content  #}
 <div class="collapse navbar-collapse" id="navbar-collapse-1">
     <ul class="nav navbar-nav">
-        {{ nav_item('app_homepage', 'menu.homepage'|trans({}, 'CapcoAppBundle'), 'app_homepage') }}
-        {{ nav_item('app_consultation', 'menu.consultations'|trans({}, 'CapcoAppBundle'), 'app_consultation') }}
-        {{ nav_item('app_idea', 'menu.ideas_box'|trans({}, 'CapcoAppBundle'), 'app_idea') }}
-        {{ nav_item('app_news', 'menu.news'|trans({}, 'CapcoAppBundle'), 'app_news') }}
-        {{ nav_item('app_theme', 'menu.themes'|trans({}, 'CapcoAppBundle'), 'app_theme') }}
         {% for headerLink in headerLinks %}
             {% if headerLink.children|length > 0 %}
                 <li class="dropdown">
@@ -29,14 +24,6 @@
                 </li>
             {% endif %}
         {% endfor %}
-        <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown">A propos <span class="caret"></span></a>
-            <ul class="dropdown-menu" role="menu">
-                <li><a href="#">Comment ça marche ?</a></li>
-                <li><a href="#">La charte</a></li>
-                <li><a href="{{ path('app_contact') }}">Nous contacter</a></li>
-            </ul>
-        </li>
     </ul>
 
     {# Connection button #}

@@ -58,6 +58,13 @@ class MenuItem
     private $isDeletable = true;
 
     /**
+     * @var boolean
+     *
+     * @ORM\Column(type="boolean")
+     */
+    private $isFullyModifiable = true;
+
+    /**
      * @var integer
      * @Gedmo\SortablePosition
      * @ORM\Column(name="position", type="integer")
@@ -207,6 +214,29 @@ class MenuItem
     public function getIsDeletable()
     {
         return $this->isDeletable;
+    }
+
+    /**
+     * Set isFullyModifiable
+     *
+     * @param boolean $isFullyModifiable
+     * @return MenuItem
+     */
+    public function setIsFullyModifiable($isFullyModifiable)
+    {
+        $this->isFullyModifiable = $isFullyModifiable;
+
+        return $this;
+    }
+
+    /**
+     * Get isFullyModifiable
+     *
+     * @return boolean
+     */
+    public function getIsFullyModifiable()
+    {
+        return $this->isFullyModifiable;
     }
 
     /**

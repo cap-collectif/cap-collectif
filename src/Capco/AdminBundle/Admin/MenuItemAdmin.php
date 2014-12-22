@@ -37,15 +37,14 @@ class MenuItemAdmin extends Admin
         $listMapper
             ->add('title')
             ->add('Menu')
-            ->add('isEnabled', null, array('editable' => true))
+            ->add('isEnabled', null, array('editable' => false))
             ->add('position')
-            ->add('updatedAt')
             ->add('parent')
             ->add('Page')
             ->add('link')
             ->add('_action', 'actions', array(
                 'actions' => array(
-                    'edit' => array('template' => 'CapcoAdminBundle:MenuItem:list__action_edit.html.twig'),
+                    'edit' => array(),
                     'delete' => array('template' => 'CapcoAdminBundle:MenuItem:list__action_delete.html.twig'),
                 )
             ))
@@ -70,12 +69,21 @@ class MenuItemAdmin extends Admin
                                                 'query' => $this->createParentsItemQuery(),
                                                 'preferred_choices' => array()
                                                 ))
-            ->add('Page', 'sonata_type_model', array(
+        ;
+
+        $subject = $this->getSubject();
+
+        if ($subject->getIsFullyModifiable()) {
+            $formMapper
+                ->add('link', null, array('required' => false))
+                ->add('isEnabled')
+                ->add('Page', 'sonata_type_model', array(
                                                 'help' => 'Si vous associez une page à l\'élément de menu, le lien sera défini automatiquement.',
                                                 'required' => false,
                                                 'preferred_choices' => array()
                                                 ))
-        ;
+            ;
+        }
     }
 
     public function prePersist($menuItem)
