@@ -1,0 +1,72 @@
+{% extends '@CapcoApp/Consultation/show.html.twig' %}
+
+{% block opinions_list %}
+<div class="block  block--shadowed">
+    <div class="opinion  opinion--{{ app.request.attributes.get('opiniontype').color }} opinion--default">
+        <div class="opinion__header  opinion__header--mobile-centered">
+            <h4 class="pull-left  h4  opinion__header__title">{{ app.request.attributes.get('opiniontype').title }} <span class="badge">{{ opinions|length }}</span></h4>
+            <div class="pull-right  opinion__header__filter">
+                {% if app.request.attributes.get('opiniontype').isEnabled == true %}
+                    <a href="{{ path('app_consultation_new_opinion' ,{'consultation_slug': consultation.slug, 'opinion_type_slug': app.request.attributes.get('opiniontype').slug } ) }}" class="btn  btn-default">
+                        <i class="cap cap-add-1"></i>
+                        <span class="hidden-xs  hidden-sm"> Proposer</span>
+                    </a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    <ul class="media-list  opinion__list">
+        {% for opinion in opinions %}
+            {% set nbVotes = (opinion.getVotesAll) %}
+            {% set nbArguments = (opinion.arguments|length) %}
+            <li class="opinion  opinion--{{ opinion.slug }}">
+                <div class="row">
+                    <div class="col-xs-12  col-sm-10">
+                        <div class="opinion__body  box">
+                            {% if opinion.Author.Media %}
+                                <a class="pull-left" href="#">
+                                    {% thumbnail opinion.Author.Media, 'avatar' with {'title': opinion.Author.fullname, 'alt': opinion.Author.fullname, 'class': 'img-circle  pull-left'} %}
+                                </a>
+                            {% endif %}
+                            <div class="opinion__data">
+                                <p class="opinion__user  h5"><a href="#">{{ opinion.Author.getFullname }}</a> <span class="pull-right  excerpt">{{ opinion.createdAt | localizeddate('medium', 'none', app.request.locale) }}</span></p>
+                                <p class="opinion__title"><a href="{{ path('app_consultation_show_opinion', {'consultation_slug': consultation.slug, 'opinion_type_slug': app.request.attributes.get('opinion_type_slug'), 'opinion_slug': opinion.slug}) }}">{{ opinion.title }}</a></p>
+                                <p class="opinion__votes  excerpt h5">
+                                    {% transchoice nbVotes with {'%count%': nbVotes} from 'CapcoAppBundle' %}
+                                    consultation.show.votes
+                                    {% endtranschoice %}
+                                    •
+                                    {% transchoice nbArguments with {'%count%': nbArguments} from 'CapcoAppBundle' %}
+                                    consultation.show.arguments
+                                    {% endtranschoice %}
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="hidden-xs col-sm-2 opinion__chart-block">
+                        <div id="pie-{{ opinion.id }}"></div>
+                    </div>
+                </div>
+                <ul class="sr-only" data-pie-id="pie-{{ opinion.id }}" data-options='{"percent_offset": "15"}'>
+                    <li data-value="{{ opinion.voteCountOk }}"></li>
+                    <li data-value="{{ opinion.voteCountMitige }}"></li>
+                    <li data-value="{{ opinion.voteCountNok }}"></li>
+                </ul>
+            </li>
+        {% endfor %}
+    </ul>
+</div>
+
+{% if nbPage > 1 %}
+    <div class="pagination--custom  text-center">
+        <ul class="pagination">
+            {% for p in range(1, nbPage) %}
+                <li{% if p == page %} class="active"{% endif %}>
+                    <a href="{{ path('app_consultation_show_opinions', {'consultation_slug': consultation.slug, 'opinion_type_slug': app.request.attributes.get('opinion_type_slug'), 'page': p}) }}">{{ p }}</a>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+{% endif %}
+{% endblock %}
+

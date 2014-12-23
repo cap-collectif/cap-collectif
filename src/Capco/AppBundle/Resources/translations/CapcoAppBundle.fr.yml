@@ -121,6 +121,19 @@ consultation:
     no_result:  Aucune consultation ne correspond à ces critères de recherche
   arguments: "{0} Aucun argument | {1} 1 argument | ]1,Inf[ %count% arguments"
 
+argument:
+  update:
+    title_block: Modifier un argument
+    text_alert: Attention ! En modifiant votre argument, vous perdrez tous les votes qui lui sont associés.
+    remove_button: Supprimer
+    reset_submit: Annuler
+    edit_submit: Modifier
+  delete:
+    title_block: Supprimer un argument
+    text_alert: Êtes-vous sûr de vouloir supprimer cet argument ?
+    reset_submit: Annuler
+    remove_submit: Supprimer
+
 #Users
 user:
   login:

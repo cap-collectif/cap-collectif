@@ -1,0 +1,134 @@
+{% extends '@CapcoApp/base.html.twig' %}
+
+{% block jumbotron %}
+{% endblock %}
+
+{% block body %}
+    <div class="container">
+
+        {% include '@CapcoApp/Consultation/show_title.html.twig' %}
+
+        <div class="row">
+
+            <div class="col-xs-12  col-sm-4  col-md-3">
+                {% include '@CapcoApp/Consultation/show_meta.html.twig' %}
+            </div>
+
+            {% set nbVotes = (opinion.getVotesAll) %}
+            {% set nbArguments = (opinion.arguments|length) %}
+            <div class="col-xs-12  col-sm-8  col-md-9" id="details">
+                <div class="block  block--shadowed  opinion__details">
+                    <div class="opinion  opinion--{{ app.request.attributes.get('opinionType').color }}  opinion--current">
+                        <div class="opinion__header  opinion__header--centered">
+                            <a class="neutral-hover  pull-left  h4" href="{{ path('app_consultation_show_opinions', {'consultation_slug': consultation.slug, 'opinion_type_slug': app.request.attributes.get('opinion_type_slug')}) }}"><i class="cap-arrow-61"></i><span class="hidden-xs  hidden-sm"> Retour</span></a>
+                            <p class="h4  opinion__header__title">{{ app.request.attributes.get('opinionType').slug|capitalize }} </p>
+                        </div>
+                        <div class="opinion__body  box">
+                            {% if opinion.Author.Media %}
+                                <a class="pull-left" href="#">
+                                    {% thumbnail opinion.Author.Media, 'avatar' with {'title': opinion.Author.fullname, 'alt': opinion.Author.fullname, 'class': 'img-circle  pull-left'} %}
+                                </a>
+                            {% endif %}
+                            <div class="opinion__data">
+                                <p class="opinion__user  h5"><a href="#">{{ opinion.Author.getFullname }}</a> <span class="pull-right  excerpt">{{ opinion.createdAt | localizeddate('medium', 'none', app.request.locale) }}</span></p>
+                                <p class="opinion__title">{{ opinion.title }}</p>
+                                <p class="opinion__votes  excerpt h5">
+                                    {% transchoice nbVotes with {'%count%': nbVotes} from 'CapcoAppBundle' %}
+                                    consultation.show.votes
+                                    {% endtranschoice %}
+                                    •
+                                    {% transchoice nbArguments with {'%count%': nbArguments} from 'CapcoAppBundle' %}
+                                    consultation.show.arguments
+                                    {% endtranschoice %}
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="opinion__description">
+                        <div id="pie" class="opinion__chart  center-block"></div>
+                        {{ opinion.body|raw }}
+                        <h5 class="h5">2 pièces jointes</h5>
+                        <div class="nav  nav-tabs  opinion__attachments">
+                            <a class="opinion__attachment" href="#">
+                                <span class="cap-clip-2"></span> Fichier 1
+                                <span class="icon  visible-xs  pull-right  cap-arrow-66"></span>
+                            </a>
+                            <a class="opinion__attachment" href="#">
+                                <span class="cap-clip-2"></span> Fichier 2
+                                <span class="icon  visible-xs  pull-right  cap-arrow-66"></span>
+                            </a>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-12 col-lg-7 pull-left">
+                                <button class="btn  btn-success  btn--outline"><i class="cap cap-hand-like-2"></i> D'accord</button>
+                                <span class="nb-bordered  opinion__votes-nb" data-value="{{ opinion.voteCountOk }}">{{ opinion.voteCountOk }}</span>
+                                <button type="button" class="btn  btn-warning  btn--outline"><i class="icon-rotate cap cap-hand-like-2"></i> Mitigé</button>
+                                <span class="nb-bordered  opinion__votes-nb" data-value="{{ opinion.voteCountMitige }}">{{ opinion.voteCountMitige }}</span>
+                                <button type="button" class="btn  btn-danger  btn--outline"><i class="cap cap-hand-unlike-2"></i> Pas d'accord</button>
+                                <span class="nb-bordered  opinion__votes-nb" data-value="{{ opinion.voteCountNok }}">{{ opinion.voteCountNok }}</span>
+                                <ul class="sr-only" data-pie-id="pie" data-options='{"animation_speed": 100}'>
+                                    <li data-value="{{ opinion.voteCountOk }}"></li>
+                                    <li data-value="{{ opinion.voteCountMitige }}"></li>
+                                    <li data-value="{{ opinion.voteCountNok }}"></li>
+                                </ul>
+                            </div>
+
+                            <div class="col-xs-12 col-lg-4 pull-right  opinion__action-buttons">
+                                <a href="#" class="btn  btn-dark-gray  btn--outline"><i class="cap-gun"></i> Signaler</a>
+                                {% if app.user is not null and app.user == opinion.Author %}
+                                    <a href="{{ path('app_consultation_edit_opinion' ,{'consultation_slug': consultation.slug, 'opinion_type_slug': app.request.attributes.get('opinionType').slug, 'opinion_slug': opinion.slug } ) }}" class="btn  btn-dark-gray  btn--outline"><i class="cap-gun"></i> Modifier</a>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="nav  nav-tabs  opinion__resources">
+                        <a class="opinion__resource  opinion__resource--solution" href="sources.php">
+                            3 solutions liées
+                            <span class="icon  visible-xs  pull-right  cap-arrow-66"></span>
+                        </a>
+                        <span class="hidden-xs  opinion__resources__separator  excerpt">|</span>
+                        <a class="opinion__resource  opinion__resource--source" href="sources.php">
+                            2 sources
+                            <span class="icon  visible-xs  pull-right  cap-arrow-66"></span>
+                        </a>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12  col-md-6">
+                        {% if app.user is not null %}
+                            {% set argType = 1 %}
+                            {% set form = argumentFormYes %}
+                            {% include '@CapcoApp/Argument/create.html.twig' %}
+                        {% endif %}
+                        {{ render(controller('CapcoAppBundle:Opinion:showArguments', {'consultation': consultation, 'opinionType': app.request.attributes.get('opinionType'), 'opinion': opinion, 'type': 1})) }}
+                    </div>
+                    <div class="col-sm-12  col-md-6">
+                        {% if app.user is not null %}
+                            {% set argType = 0 %}
+                            {% set form = argumentFormNo %}
+                            {% include '@CapcoApp/Argument/create.html.twig' %}
+                        {% endif %}
+                        {{ render(controller('CapcoAppBundle:Opinion:showArguments', {'consultation': consultation, 'opinionType': app.request.attributes.get('opinionType'), 'opinion': opinion, 'type': 0})) }}
+                    </div>
+                </div>
+            </div> <!-- col-xs-12  col-sm-4  col-md-3 -->
+        </div> <!-- .row -->
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('js/Snap.svg/dist/snap.svg-min.js') }}"></script>
+    <script src="{{ asset('js/pizza/dist/js/pizza.js') }}"></script>
+    <script src="{{ asset('js/readmore/readmore.min.js') }}"></script>
+    <script type="text/javascript">
+        Pizza.init();
+        $('.more').readmore({
+            maxHeight: 90,
+            moreLink: '<a href="#">Lire la suite</a>', //BazingaJsTranslationBundle
+            lessLink: '<a href="#">Fermer</a>'
+        });
+    </script>
+{% endblock %}
+

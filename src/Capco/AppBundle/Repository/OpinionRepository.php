@@ -15,7 +15,7 @@ use Doctrine\ORM\Tools\Pagination\Paginator;
  */
 class OpinionRepository extends EntityRepository
 {
-    public function getOpinionsByOpinionTypeAndConsultation($consultation, $opinionType, $nbByPage = 10, $page = 1)
+    public function getEnabledOpinionsByOpinionTypeAndConsultation($consultation, $opinionType, $nbByPage = 10, $page = 1)
     {
         if ((int) $page < 1) {
             throw new \InvalidArgumentException(sprintf(
@@ -25,6 +25,8 @@ class OpinionRepository extends EntityRepository
         }
 
         $qb = $this->createQueryBuilder('o')
+                ->andWhere('o.isEnabled = :enabled')
+                ->setParameter('enabled', true)
                 ->leftJoin('o.OpinionType', 'ot')
                 ->addSelect('ot')
                 ->leftJoin('o.Consultation', 'c')

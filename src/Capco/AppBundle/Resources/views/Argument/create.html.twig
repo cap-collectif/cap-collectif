@@ -1,0 +1,30 @@
+{% set type_text = argumentTypes[argType] %}
+{% set type_display = '' %}
+{% if argType == 0 %}
+    {% set type_display = 'contre' %}
+{% elseif argType == 1 %}
+    {% set type_display = 'pour' %}
+{% endif %}
+<div class="opinion  opinion--add-argument  block  block--shadowed">
+    <div class="opinion__body  box">
+        {% if app.user.Media %}
+            <a class="pull-left" href="#">
+                {% thumbnail app.user.Media, 'avatar' with {'title': app.user.fullname, 'alt': app.user.fullname, 'class': 'media-object img-circle'} %}
+            </a>
+        {% endif %}
+        <div class="opinion__data">
+            <form method="post" {{ form_enctype(form) }}>
+                <div class="form-group">
+                    <label class="sr-only" for="arg{{ type_text }}-input">Ajouter un argument {{ type_display }}</label>
+                    {{ form_widget(form.body, {'id': 'arg' ~ type_text ~ '-input', 'attr': {'data-toggle': 'collapse', 'href': '.arg' ~ type_text ~ '-btns', 'rows': 1, 'placeholder':'Ajouter un argument ' ~ type_display, } }) }}
+                    {{ form_errors(form.body) }}
+                    {{ form_rest(form) }}
+                    <div class="collapse  arg{{ type_text }}-btns">
+                        <button type="submit" class="btn  btn-success">Publier</button>
+                        <button type="button" class=" btn  btn-default" data-toggle="collapse" href=".arg{{ type_text }}-btns">Annuler</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

@@ -29,6 +29,8 @@ class OpinionTypeRepository extends EntityRepository
             ->leftJoin('o.Votes', 'v')
             ->addSelect('v')
             ->andWhere('o.Consultation = :consultation')
+            ->andWhere('o.isEnabled = :enabled')
+            ->setParameter('enabled', true)
             ->setParameter('consultation', $consultation)
             ->orderBy('ot.position', 'ASC')
             ->addOrderBy('o.createdAt', 'DESC');

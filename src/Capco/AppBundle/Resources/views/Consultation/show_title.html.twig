@@ -1,0 +1,20 @@
+<div class="consultation__title  block  block--shadowed">
+    {% if consultation.Media %}
+        {% thumbnail consultation.Media, 'blockHeader' with {'title': consultation.Media.name, 'alt': consultation.Media.name, 'class': 'img-responsive'} %}
+    {% endif %}
+    <div class="consultation__title__body">
+        <div class="pull-left">
+            <h3 class="consultation__title__title  h3">{{ consultation.title }}</h3>
+        </div>
+        <div class="dropdown  pull-right  dropdown--social">
+            <button class="btn  btn-default" type="button" data-toggle="dropdown"><i class="cap-network-1"></i> Partager <span class="caret"></span></button>
+            <ul class="dropdown-menu" role="menu">
+                <li><a href="#"><i class="cap-facebook"></i> Facebook</a></li>
+                <li><a href="#"><i class="cap-twitter"></i> Twitter</a></li>
+                <li><a href="#"><i class="cap-gplus"></i> Google+</a></li>
+                <li><a href="#"><i class="cap-mail-1"></i> Mail</a></li>
+                <li><a class="copy-link"><i class="cap-link-1"></i> Copier le lien</a></li>
+            </ul>
+        </div>
+    </div>
+</div>

@@ -4,6 +4,7 @@ namespace Capco\AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Argument
@@ -16,6 +17,11 @@ class Argument
 
     const TYPE_AGAINST = 0;
     const TYPE_FOR  = 1;
+
+    public static $argumentTypes = [
+        self::TYPE_FOR => 'yes',
+        self::TYPE_AGAINST => 'no'
+   ];
 
     /**
      * @var integer
@@ -30,6 +36,7 @@ class Argument
      * @var string
      *
      * @ORM\Column(name="body", type="text")
+     * @Assert\NotBlank()
      */
     private $body;
 
@@ -52,7 +59,7 @@ class Argument
      *
      * @ORM\Column(name="vote_count", type="integer")
      */
-    private $voteCount;
+    private $voteCount = 0;
 
     /**
      * @var
@@ -234,6 +241,11 @@ class Argument
     {
         $this->updatedAt = $updatedAt;
 
+        return $this;
+    }
+
+    public function resetVotes(){
+        $this->voteCount = 0;
         return $this;
     }
 }
