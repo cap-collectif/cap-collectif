@@ -38,9 +38,10 @@ class PageAdmin extends Admin
     {
         $listMapper
             ->addIdentifier('title')
-            ->add('createdAt')
             ->add('isEnabled', null, array('editable' => true))
+            ->add('URL', null, array('template' => 'CapcoAdminBundle:Page:url_list_field.html.twig'))
             ->add('MenuItems')
+            ->add('createdAt')
             ->add('_action', 'actions', array(
                     'actions' => array(
                         'edit' => array(),

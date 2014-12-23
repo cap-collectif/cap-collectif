@@ -13,8 +13,9 @@
                 <p>{{ jumbotron_body }}</p>
             {% endif %}
             {% set jumbotron_button = capco_site_parameter_value('homepage.jumbotron.button') %}
-            {% if null != jumbotron_button %}
-                <p><a href="#" class="btn  btn--outline btn-custom-1  btn-lg" role="button">{{ jumbotron_button }}</a></p>
+            {% set jumbotron_button_link = capco_site_parameter_value('homepage.jumbotron.button_link') %}
+            {% if null != jumbotron_button and null != jumbotron_button_link %}
+                <p><a href="{{ jumbotron_button_link }}" class="btn  btn--outline btn-custom-1  btn-lg" role="button">{{ jumbotron_button }}</a></p>
             {% endif %}
         </div>
     </div>
