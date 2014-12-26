@@ -42,7 +42,7 @@
 
                 <div role="form" class="col-xs-12  col-sm-4  col-md-3  col-lg-4">
                     {{ form_label(form.term, null, {'label_attr':{"class":"control-label sr-only"} }) }}
-                    <div class="input-group">
+                    <div class="input-group  filter__search">
                         {{ form_errors(form.term) }}
                         {{ form_widget(form.term, {'attr':{"class":"form-control", "placeholder": 'idea.searchform.search'|trans({}, 'CapcoAppBundle')} }) }}
                         <span class="input-group-btn">

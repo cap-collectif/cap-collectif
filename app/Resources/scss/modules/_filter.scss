@@ -27,6 +27,12 @@
     }
   }
 
+  .filter__search {
+    .input-group-btn button {
+      height: 34px;
+    }
+  }
+
   @media (max-width: $screen-sm-max) {
     .filter__down-sm {
       margin-top: 15px;
