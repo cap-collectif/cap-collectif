@@ -62,11 +62,6 @@ class MenuItemAdmin extends Admin
         $formMapper
             ->add('Menu')
             ->add('title')
-            ->add('link', null, array(
-                'required' => false,
-                'help' => 'Si vous associez une page à l\'élément de menu, le lien sera défini automatiquement.',
-                ))
-            ->add('isEnabled')
             ->add('position')
             ->add('parent', 'sonata_type_model', array(
                                                 'help' => 'Non applicable pour les éléments du footer',
@@ -80,13 +75,15 @@ class MenuItemAdmin extends Admin
 
         if ($subject->getIsFullyModifiable()) {
             $formMapper
-                ->add('link', null, array('required' => false))
                 ->add('isEnabled')
                 ->add('Page', 'sonata_type_model', array(
-                                                'help' => 'Si vous associez une page à l\'élément de menu, le lien sera défini automatiquement.',
-                                                'required' => false,
-                                                'preferred_choices' => array()
-                                                ))
+                    'required' => false,
+                    'preferred_choices' => array()
+                ))
+                ->add('link', null, array(
+                    'required' => false,
+                    'help' => 'Si vous avez associé une page à l\'élément de menu, le lien sera défini automatiquement.',
+                ))
             ;
         }
     }
