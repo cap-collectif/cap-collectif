@@ -274,6 +274,11 @@ class IdeaController extends Controller
 
             if ($form->isValid()) {
                 $em = $this->getDoctrine()->getManager();
+                $linkedVotes = $this->getDoctrine()->getRepository("CapcoAppBundle:IdeaVote")->findBy(array('Idea'=>$idea));
+                foreach($linkedVotes as $vote){
+                    $em->remove($vote);
+                }
+                $idea->resetVotes();
                 $em->persist($idea);
                 $em->flush();
 

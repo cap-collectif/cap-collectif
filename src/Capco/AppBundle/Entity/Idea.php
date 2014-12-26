@@ -393,4 +393,8 @@ Idea
     {
         return $this->IdeaVotes;
     }
+
+    public function resetVotes(){
+        $this->voteCount = 0;
+    }
 }
