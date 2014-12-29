@@ -20,7 +20,7 @@
                         {% endif %}
                         <div class="opinion__data">
                             <p class="h5  opinion__user"><a href="#">{{ argument.Author.getFullname }}</a></p>
-                            <p class="excerpt  opinion__date"><a class="excerpt" href="#">{{ argument.createdAt | localizeddate('long', 'none', app.request.locale) }}</a></p>
+                            <p class="excerpt  opinion__date"><a class="excerpt" href="#">{{ argument.createdAt | localizeddate('long', 'short', app.request.locale) }}</a></p>
                         </div>
                         <p class="opinion__text">
                             {{ argument.body }}
