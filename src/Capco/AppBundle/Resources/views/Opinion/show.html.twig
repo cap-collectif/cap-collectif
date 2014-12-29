@@ -16,7 +16,7 @@
 
             {% set nbVotes = (opinion.getVotesAll) %}
             {% set nbArguments = (opinion.arguments|length) %}
-            <div class="col-xs-12  col-sm-8  col-md-9" id="details">
+            <div class="col-xs-12  col-sm-8  col-md-9 has-chart" id="details" data-ok="{{ opinion.voteCountOk }}" data-nok="{{ opinion.voteCountNok }}" data-mitige="{{ opinion.voteCountMitige }}" data-opinion-id="{{ opinion.id }}">
                 <div class="block  block--shadowed  opinion__details">
                     <div class="opinion  opinion--{{ app.request.attributes.get('opinionType').color }}  opinion--current">
                         <div class="opinion__header  opinion__header--centered">
@@ -46,7 +46,7 @@
                     </div>
 
                     <div class="opinion__description">
-                        <div id="pie" class="opinion__chart  center-block"></div>
+                        <div id="piechart-{{ opinion.id }}" class="opinion__chart  center-block"></div>
                         {{ opinion.body|raw }}
                         <h5 class="h5">2 pièces jointes</h5>
                         <div class="nav  nav-tabs  opinion__attachments">
@@ -67,11 +67,6 @@
                                 <span class="nb-bordered  opinion__votes-nb" data-value="{{ opinion.voteCountMitige }}">{{ opinion.voteCountMitige }}</span>
                                 <button type="button" class="btn  btn-danger  btn--outline"><i class="cap cap-hand-unlike-2"></i> Pas d'accord</button>
                                 <span class="nb-bordered  opinion__votes-nb" data-value="{{ opinion.voteCountNok }}">{{ opinion.voteCountNok }}</span>
-                                <ul class="sr-only" data-pie-id="pie" data-options='{"animation_speed": 100}'>
-                                    <li data-value="{{ opinion.voteCountOk }}"></li>
-                                    <li data-value="{{ opinion.voteCountMitige }}"></li>
-                                    <li data-value="{{ opinion.voteCountNok }}"></li>
-                                </ul>
                             </div>
 
                             <div class="col-xs-12 col-lg-4 pull-right  opinion__action-buttons">
@@ -119,11 +114,10 @@
 
 {% block javascripts %}
     {{ parent() }}
-    <script src="{{ asset('js/Snap.svg/dist/snap.svg-min.js') }}"></script>
-    <script src="{{ asset('js/pizza/dist/js/pizza.js') }}"></script>
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
     <script src="{{ asset('js/readmore/readmore.min.js') }}"></script>
     <script type="text/javascript">
-        Pizza.init();
+        App.module.pieChart();
         $('.more').readmore({
             maxHeight: 90,
             moreLink: '<a href="#">Lire la suite</a>', //BazingaJsTranslationBundle
@@ -131,4 +125,3 @@
         });
     </script>
 {% endblock %}
-

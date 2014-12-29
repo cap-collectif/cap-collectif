@@ -18,7 +18,6 @@
   "dependencies": {
     "bootstrap": "https://github.com/twbs/bootstrap-sass/archive/v3.2.0.tar.gz",
     "ckeditor": "~4.4.6",
-    "pizza": "~0.2.1",
     "readmore": "*"
   }
 }

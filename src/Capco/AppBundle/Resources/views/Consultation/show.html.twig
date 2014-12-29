@@ -25,11 +25,10 @@
 
 {% block javascripts %}
     {{ parent() }}
-    <script src="{{ asset('js/Snap.svg/dist/snap.svg-min.js') }}"></script>
-    <script src="{{ asset('js/pizza/dist/js/pizza.js') }}"></script>
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
     <script src="{{ asset('js/readmore/readmore.min.js') }}"></script>
     <script type="text/javascript">
-        Pizza.init();
+        App.module.pieChart();
         $('.more').readmore({
             maxHeight: 90,
             moreLink: '<a href="#">Lire la suite</a>', //BazingaJsTranslationBundle

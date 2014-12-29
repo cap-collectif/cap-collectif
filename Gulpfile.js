@@ -47,6 +47,7 @@ gulp.task('concat', function() {
         app + '/libs/jquery/dist/jquery.js',
         app + '/libs/bootstrap/assets/javascripts/bootstrap.js',
         app + '/libs/readmore/readmore.js',
+        app + '/js/googleCharts.js',
         app + '/js/app.js'
     ])
         .pipe(plugins.concat('app.js'))

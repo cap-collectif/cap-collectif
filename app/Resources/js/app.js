@@ -2,17 +2,12 @@ var App = App || {};
 
 App.module = function ($) {
 
-    var init = function() {
-        console.log('Init...');
-    };
-
     var ckEditor = function(el) {
         var $el = $(el);
         CKEDITOR.replace($el);
     };
 
     var equalheight = function(container) {
-
         var currentTallest = 0;
         var currentRowStart = 0;
         var rowDivs = [];
@@ -20,7 +15,6 @@ App.module = function ($) {
         var topPosition = 0;
 
         $(container).each(function() {
-
             $el = $(this);
             $($el).height('auto');
             topPostion = $el.position().top;
@@ -45,7 +39,6 @@ App.module = function ($) {
     };
 
     var rezised = function(el) {
-
         var $el = $(el);
 
         $(window).resize(function(){
@@ -53,12 +46,20 @@ App.module = function ($) {
         });
     };
 
+    var pieChart = function() {
+        if (typeof(google) != "undefined") {
+            google.load("visualization", "1", {packages: ["corechart"]});
+            google.setOnLoadCallback(function() {
+                $('.has-chart').googleCharts();
+            });
+        }
+    };
 
     var AppPublic = {
-        init: init,
         equalheight: equalheight,
         rezised: rezised,
-        ckEditor: ckEditor
+        ckEditor: ckEditor,
+        pieChart: pieChart
     };
 
     return AppPublic;
