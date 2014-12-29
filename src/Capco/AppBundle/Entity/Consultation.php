@@ -5,6 +5,9 @@ namespace Capco\AppBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
+
+use Capco\AppBundle\Entity\Step;
 
 /**
  * Consultation
@@ -95,20 +98,6 @@ class Consultation
     private $updatedAt;
 
     /**
-     * @var \DateTime
-     *
-     * @ORM\Column(name="opened_at", type="datetime")
-     */
-    private $openedAt;
-
-    /**
-     * @var \DateTime
-     *
-     * @ORM\Column(name="closed_at", type="datetime")
-     */
-    private $closedAt;
-
-    /**
      * @var integer
      *
      * @ORM\Column(name="opinion_count", type="integer")
@@ -155,6 +144,12 @@ class Consultation
      * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\Opinion", mappedBy="Consultation",  cascade={"persist", "remove"})
      */
     private $Opinions;
+
+    /**
+     * @var
+     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\Step", mappedBy="consultation",  cascade={"persist", "remove"}, orphanRemoval = true)
+     */
+    private $Steps;
 
     /**
      * @var
@@ -211,41 +206,9 @@ class Consultation
     /**
      * @return \DateTime
      */
-    public function getClosedAt()
-    {
-        return $this->closedAt;
-    }
-
-    /**
-     * @param \DateTime $closedAt
-     */
-    public function setClosedAt($closedAt)
-    {
-        $this->closedAt = $closedAt;
-    }
-
-    /**
-     * @return \DateTime
-     */
     public function getCreatedAt()
     {
         return $this->createdAt;
-    }
-
-    /**
-     * @return \DateTime
-     */
-    public function getOpenedAt()
-    {
-        return $this->openedAt;
-    }
-
-    /**
-     * @param \DateTime $openedAt
-     */
-    public function setOpenedAt($openedAt)
-    {
-        $this->openedAt = $openedAt;
     }
 
     /**
@@ -368,24 +331,59 @@ class Consultation
         $this->Media = $Media;
     }
 
+    public function getConsultationStep() {
+        foreach ($this->Steps as $step) {
+            if($step->isConsultationStep()) {
+                return $step;
+            }
+        }
+        return null;
+    }
+
+    public function getOpenedAt(){
+        $consultationStep = $this->getConsultationStep();
+        if(null != $consultationStep){
+            return $consultationStep->getStartAt();
+        }
+        return null;
+    }
+
+    public function getClosedAt(){
+        $consultationStep = $this->getConsultationStep();
+        if(null != $consultationStep){
+            return $consultationStep->getEndAt();
+        }
+        return null;
+    }
+
     public function getRemainingDays()
     {
-        return $this->getClosedAt()->diff(new \DateTime())->format('%a');
+        $closedAt = $this->getClosedAt();
+        $now = new \DateTime();
+        if(null != $closedAt && $closedAt > $now){
+            return $closedAt->diff($now)->format('%a');
+        }
+        else {
+            return null;
+        }
     }
 
     public function getOpeningStatus()
     {
         $now = new \DateTime();
+        $closedAt = $this->getClosedAt();
+        $openedAt = $this->getOpenedAt();
 
-        if ($now > $this->getClosedAt()) {
+        if (null != $closedAt && $now > $closedAt) {
             return self::OPENING_STATUS_ENDED;
         }
-
-        if ($now < $this->getOpenedAt()) {
+        else if (null != $openedAt && $now < $openedAt) {
             return self::OPENING_STATUS_FUTURE;
         }
-
-        return self::OPENING_STATUS_OPENED;
+        else if(null != $openedAt && null!= $closedAt && $openedAt < $now && $now < $closedAt) {
+            return self::OPENING_STATUS_OPENED;
+        }
+        return null;
     }
     /**
      * Constructor
@@ -395,6 +393,7 @@ class Consultation
         $this->Themes = new ArrayCollection();
         $this->Opinions = new ArrayCollection();
         $this->Problems = new ArrayCollection();
+        $this->Steps = new ArrayCollection();
     }
 
     /**
@@ -481,6 +480,62 @@ class Consultation
     public function getThemes()
     {
         return $this->Themes;
+    }
+
+    /**
+     * Add step
+     *
+     * @param \Capco\AppBundle\Entity\Step $step
+     *
+     * @return Consultation
+     */
+    public function addStep(Step $step)
+    {
+        $step->setConsultation($this);
+        $this->Steps->add($step);
+
+        return $this;
+    }
+
+    /**
+     * Remove step
+     *
+     * @param \Capco\AppBundle\Entity\Step $step
+     */
+    public function removeStep(Step $step)
+    {
+        $step->setConsultation(null);
+        $this->Steps->removeElement($step);
+    }
+
+    /**
+     * Get steps
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getSteps()
+    {
+        return $this->Steps;
+    }
+
+    /**
+     * Set steps
+     *
+     * @param \Doctrine\Common\Collections\ArrayCollection $steps
+     * @return Consultation
+     */
+    public function setSteps($steps)
+    {
+        if (gettype($steps) == "array") {
+            $steps = new ArrayCollection($steps);
+        }
+
+        foreach($steps as $step)
+        {
+            $step->setConsultation($this);
+        }
+        $this->Steps = $steps;
+        return $this;
     }
 
     /**

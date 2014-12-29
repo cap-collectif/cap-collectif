@@ -8,6 +8,7 @@ use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\Query;
 use Doctrine\ORM\QueryBuilder;
 use Doctrine\ORM\Tools\Pagination\Paginator;
+use Doctrine\Common\Collections\Collection;
 
 /**
  * ConsultationRepository
@@ -17,7 +18,7 @@ use Doctrine\ORM\Tools\Pagination\Paginator;
  */
 class ConsultationRepository extends EntityRepository
 {
-    public function findByTheme($theme)
+    public function findEnabledByTheme($theme)
     {
         $qb = $this->createQueryBuilder('c')
             ->leftJoin('c.Media', 'm')
@@ -26,9 +27,9 @@ class ConsultationRepository extends EntityRepository
             ->addSelect('t')
             ->andWhere(':theme MEMBER OF c.Themes')
             ->setParameter('theme', $theme)
-            ->andWhere('c.isEnabled = :isEnabled')
-            ->setParameter('isEnabled', true)
             ->orderBy('c.createdAt', 'DESC');
+
+        $qb = $this->whereIsEnabled($qb);
 
         return $qb
             ->getQuery()
@@ -44,11 +45,10 @@ class ConsultationRepository extends EntityRepository
 
     public function getLast($limit = 1, $offset = 0)
     {
-        $qb = $this->createQueryBuilder('c')
-            ->leftJoin('c.Media', 'm')
-            ->andWhere('c.isEnabled = :isEnabled')
-            ->addOrderBy('c.createdAt', 'DESC')
-            ->setParameter('isEnabled', true);
+
+        $qb = $this->getQBAll();
+
+        $qb = $this->whereIsEnabled($qb);
 
         if ($limit) {
             $qb->setMaxResults($limit);
@@ -58,32 +58,15 @@ class ConsultationRepository extends EntityRepository
             $qb->setFirstResult($offset);
         }
 
-        return $qb
-            ->getQuery()
-            ->execute();
+        return new Paginator($qb, $fetchJoin = true);
     }
+
 
     public function getLastOpen($limit = 1, $offset = 0)
     {
-        $qb = $this->createQueryBuilder('c')
-            ->leftJoin('c.Media', 'm')
-            ->andWhere('c.isEnabled = :isEnabled')
-            ->setParameter('isEnabled', true)
-            ->addOrderBy('c.createdAt', 'DESC');
+        $result = $this->getLast($limit, $offset);
 
-        $qb = $this->whereIsOpen($qb);
-
-        if ($limit) {
-            $qb->setMaxResults($limit);
-        }
-
-        if ($offset) {
-            $qb->setFirstResult($offset);
-        }
-
-        return $qb
-            ->getQuery()
-            ->execute();
+        return $this->getOpenedOnly($result);
     }
 
     public function getSearchResultsWithTheme($nbByPage = 8, $page = 1, $theme = null, $sort = null, $term = null)
@@ -98,8 +81,12 @@ class ConsultationRepository extends EntityRepository
         $qb = $this->getIsEnabledQueryBuilder()
             ->leftJoin('c.Themes', 't')
             ->addSelect('t')
+            ->leftJoin('c.Steps', 's')
+            ->addSelect('s')
             ->addOrderBy('c.createdAt', 'DESC')
         ;
+
+        $qb = $this->whereIsEnabled($qb);
 
         if ($theme !== null && $theme !== Theme::FILTER_ALL) {
             $qb->andWhere('t.slug = :theme')
@@ -145,10 +132,35 @@ class ConsultationRepository extends EntityRepository
             ->getOneOrNullResult();
     }
 
-    private function whereIsOpen(QueryBuilder $qb, $consultation = 'c')
-    {
-        $qb->andWhere(':now BETWEEN c.openedAt AND c.closedAt')
-            ->setParameter('now', new \DateTime(date("Y-m-d")));
+    private function getQBAll(){
+
+        $qb = $this->createQueryBuilder('c')
+            ->leftJoin('c.Themes', 't')
+            ->addSelect('t')
+            ->leftJoin('c.Steps', 's')
+            ->addSelect('s')
+            ->addOrderBy('c.createdAt', 'DESC')
+        ;
+
         return $qb;
+    }
+
+
+
+    private function whereIsEnabled(QueryBuilder $qb)
+    {
+        $qb->andWhere('c.isEnabled = :enabled')
+            ->setParameter('enabled', true);
+        return $qb;
+    }
+
+    private function getOpenedOnly($array){
+        $result = array();
+        foreach ($array as $c) {
+            if($c->getOpeningStatus() == Consultation::OPENING_STATUS_OPENED){
+                array_push($result, $c);
+            }
+        }
+        return $result;
     }
 }

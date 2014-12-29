@@ -86,6 +86,8 @@ sonata_intl:
         detectors:
             - sonata.intl.timezone_detector.user    # default value if SonataUserBundle is available
             - sonata.intl.timezone_detector.locale  # default value
+        locales:
+            fr: Europe/Paris
 
 sonata_media:
     class:

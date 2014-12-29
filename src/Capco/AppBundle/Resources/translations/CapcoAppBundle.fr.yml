@@ -107,6 +107,7 @@ theme:
 consultation:
   title: Consultations
   see_all: Voir toutes les consultations
+  none: Aucune consultation.
   delete:
     title_block: Supprimer une contribution
     text_alert: Êtes-vous certain de vouloir supprimer le contenu ?

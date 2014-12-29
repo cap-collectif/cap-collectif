@@ -1,0 +1,8 @@
+{% extends 'SonataAdminBundle:CRUD:base_list_field.html.twig' %}
+
+{% block field %}
+    <div>
+    	{% set stepTypeLabels = field_description.options.stepTypeLabels %}
+        <p>{{ stepTypeLabels[object.type] }}</p>
+    </div>
+{% endblock %}

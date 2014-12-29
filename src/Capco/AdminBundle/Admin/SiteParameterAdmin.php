@@ -47,9 +47,7 @@ class SiteParameterAdmin extends Admin
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
-            ->add('value', null, array(
-                'attr' => array('class' => 'ckeditor')
-            ))
+            ->add('value')
             ->add('isEnabled')
         ;
     }

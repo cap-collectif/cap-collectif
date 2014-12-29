@@ -97,7 +97,7 @@ class ThemeController extends Controller
      */
     public function themeConsultationsAction(Theme $theme = null)
     {
-        $consultations = $this->getDoctrine()->getRepository('CapcoAppBundle:Consultation')->findByTheme($theme->getId());
+        $consultations = $this->getDoctrine()->getRepository('CapcoAppBundle:Consultation')->findEnabledByTheme($theme->getId());
 
         return [
             'consultations' => $consultations,

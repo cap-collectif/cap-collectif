@@ -6,6 +6,7 @@ use Capco\AppBundle\Entity\Consultation;
 use Capco\AppBundle\Entity\Opinion;
 use Capco\AppBundle\Entity\OpinionType;
 use Capco\AppBundle\Entity\Theme;
+use Capco\AppBundle\Entity\Step;
 use Capco\AppBundle\Form\ConsultationSearchType;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -98,10 +99,6 @@ class ConsultationController extends Controller
     {
         $consultations = $this->getDoctrine()->getRepository('CapcoAppBundle:Consultation')->getLastOpen($max, $offset);
 
-        if (!isset($consultations[0])) {
-            return new Response('');
-        }
-
         return [
             'consultations' => $consultations,
             'statuses' => Consultation::$openingStatuses
@@ -123,7 +120,7 @@ class ConsultationController extends Controller
 
         return [
             'consultation' => $consultation,
-            'statuses' => Theme::$statuses
+            'statuses' => Theme::$statuses,
         ];
     }
 
@@ -181,7 +178,7 @@ class ConsultationController extends Controller
             'consultation' => $consultation,
             'opinions' => $opinions,
             'page' => $page,
-            'nbPage' => ceil(count($opinions) / 10)
+            'nbPage' => ceil(count($opinions) / 10),
         ];
     }
 

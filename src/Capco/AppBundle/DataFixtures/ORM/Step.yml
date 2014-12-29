@@ -2,40 +2,57 @@ Capco\AppBundle\Entity\Step:
     step1:
         title: <sentence(3)>
         isEnabled: <boolean()>
+        type: <numberBetween(0, 1)>
         startAt: <dateTimeBetween('-1 years','now')>
         endAt: <dateTimeBetween('-10 days','now')>
         position: <numberBetween(1, 10)>
         consultation: @cs1
-        body: <text(1000)>
     step2:
         title: <sentence(3)>
         isEnabled: <boolean()>
+        type: <numberBetween(0, 1)>
         startAt: <dateTimeBetween('-1 years','now')>
         endAt: <dateTimeBetween('-10 days','now')>
         position: <numberBetween(1, 10)>
         consultation: @cs1
-        body: <text(1000)>
     step3:
         title: <sentence(3)>
         isEnabled: <boolean()>
+        type: <numberBetween(0, 1)>
         startAt: <dateTimeBetween('-1 years','now')>
         endAt: <dateTimeBetween('-10 days','now')>
         position: <numberBetween(1, 10)>
         consultation: @cs1
-        body: <text(1000)>
     step4:
         title: <sentence(3)>
         isEnabled: <boolean()>
+        type: <numberBetween(0, 1)>
         startAt: <dateTimeBetween('-1 years','now')>
         endAt: <dateTimeBetween('-10 days','now')>
         position: <numberBetween(1, 10)>
         consultation: @cs2
-        body: <text(1000)>
     step5:
         title: <sentence(3)>
-        isEnabled: <boolean()>
-        startAt: <dateTimeBetween('-1 years','now')>
-        endAt: <dateTimeBetween('-10 days','now')>
-        position: <numberBetween(1, 10)>
+        isEnabled: true
+        type: 0
+        startAt: <(new \DateTime('2014-01-01'))>
+        endAt: <(new \DateTime('2015-03-03'))>
+        position: 1
         consultation: @cs3
-        body: <text(1000)>
+    step6:
+        title: <sentence(3)>
+        isEnabled: true
+        type: 1
+        startAt: <(new \DateTime('2014-03-04'))>
+        endAt: <(new \DateTime('2014-04-04'))>
+        position: 2
+        consultation: @cs3
+    step7:
+        title: <sentence(3)>
+        isEnabled: true
+        type: 0
+        startAt: <(new \DateTime('2015-04-05'))>
+        endAt: <(new \DateTime('2015-05-05'))>
+        position: 2
+        Page: @page5
+        consultation: @cs3

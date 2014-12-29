@@ -8,6 +8,8 @@ use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Show\ShowMapper;
 
+use Capco\AppBundle\Entity\Step;
+
 class StepAdmin extends Admin
 {
     /**
@@ -20,6 +22,9 @@ class StepAdmin extends Admin
             ->add('endAt')
             ->add('position')
             ->add('isEnabled')
+            ->add('type')
+            ->add('consultation')
+            ->add('Page')
         ;
     }
 
@@ -34,14 +39,20 @@ class StepAdmin extends Admin
             ->add('endAt')
             ->add('position')
             ->add('isEnabled', null, array('editable' => true))
+            ->add('consultation')
+            ->add('type', null, array(
+                'template' => 'CapcoAdminBundle:Step:type_list_field.html.twig',
+                'stepTypeLabels' => Step::$stepTypeLabels
+            ))
+            ->add('Page')
             ->add('_action', 'actions', array(
                 'actions' => array(
-                    'show' => array(),
                     'edit' => array(),
-                    'delete' => array(),
+                    'delete' => array('template' => 'CapcoAdminBundle:Step:list__action_delete.html.twig'),
                 )
             ))
         ;
+
     }
 
     /**
@@ -49,13 +60,26 @@ class StepAdmin extends Admin
      */
     protected function configureFormFields(FormMapper $formMapper)
     {
+        $subject = $this->getSubject();
         $formMapper
             ->add('title')
-            ->add('startAt')
-            ->add('endAt')
             ->add('position')
-            ->add('isEnabled')
         ;
+        if($subject->isOtherStep()){
+            $formMapper
+                ->add('startAt', 'date')
+                ->add('endAt', 'date', array(
+                    'help' => 'admin.help.step.endAt',
+                ))
+                ->add('isEnabled')
+                ->add('type', 'choice', array(
+                    'required' => true,
+                    'choices' => Step::$stepTypeLabels,
+                ))
+                ->add('Page')
+                ->add('consultation')
+            ;
+        }
     }
 
     /**
@@ -70,6 +94,9 @@ class StepAdmin extends Admin
             ->add('endAt')
             ->add('position')
             ->add('isEnabled')
+            ->add('type')
+            ->add('Page')
+            ->add('consultation')
         ;
     }
 }

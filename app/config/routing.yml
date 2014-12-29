@@ -8,6 +8,7 @@ capco_app:
     type:     annotation
     prefix:   /
 
+
 # sonata admin...
 admin:
     resource: '@SonataAdminBundle/Resources/config/routing/sonata_admin.xml'

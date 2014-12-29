@@ -5,6 +5,8 @@ namespace Capco\AppBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 
+use Capco\AppBundle\Entity\Consultation;
+
 /**
  * Step
  *
@@ -13,6 +15,20 @@ use Gedmo\Mapping\Annotation as Gedmo;
  */
 class Step
 {
+
+    const TYPE_OTHER = 0;
+    const TYPE_CONSULTATION = 1;
+
+    public static $stepTypes = [
+        'consultation' => self::TYPE_CONSULTATION,
+        'other' => self::TYPE_OTHER,
+    ];
+
+    public static $stepTypeLabels = [
+        self::TYPE_CONSULTATION => 'Consultation',
+        self::TYPE_OTHER => 'Autre',
+    ];
+
     /**
      * @var integer
      *
@@ -56,27 +72,35 @@ class Step
      */
     private $position;
 
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="type", type="integer")
+     */
+    private $type = self::TYPE_OTHER;
+
     /**
      * @var boolean
      *
      * @ORM\Column(name="is_enabled", type="boolean")
      */
-    private $isEnabled;
+    private $isEnabled = true;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="body", type="text")
+     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Consultation", inversedBy="Steps", cascade={"persist"})
+     * @ORM\JoinColumn(nullable=true)
      */
-    private $body;
+    private $consultation = null;
 
     /**
-     * @var string
+     * @var Page
      *
-     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Consultation")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\OneToOne(targetEntity="Capco\AppBundle\Entity\Page", cascade={"persist", "remove"})
      */
-    private $consultation;
+    private $Page = null;
 
     public function __toString()
     {
@@ -236,6 +260,29 @@ class Step
     }
 
     /**
+     * Set type
+     *
+     * @param integer $type
+     * @return Step
+     */
+    public function setType($type)
+    {
+        $this->type = $type;
+
+        return $this;
+    }
+
+    /**
+     * Get type
+     *
+     * @return integer
+     */
+    public function getType()
+    {
+        return $this->type;
+    }
+
+    /**
      * Get consultation
      *
      * @return string
@@ -248,25 +295,45 @@ class Step
     /**
      * @param string $consultation
      */
-    public function setConsultation($consultation)
+    public function setConsultation(Consultation $consultation = null)
     {
         $this->consultation = $consultation;
     }
 
     /**
-     * @return string
+     * @return boolean
      */
-    public function getBody()
-    {
-        return $this->body;
+    public function isOtherStep(){
+        if($this->type == self::TYPE_OTHER){
+            return true;
+        }
+        return false;
     }
 
     /**
-     * @param string $body
+     * @return boolean
      */
-    public function setBody($body)
+    public function isConsultationStep(){
+        if($this->type == self::TYPE_CONSULTATION){
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * @return Page
+     */
+    public function getPage()
     {
-        $this->body = $body;
+        return $this->Page;
+    }
+
+    /**
+     * @param Page $page
+     */
+    public function setPage($page)
+    {
+        $this->Page = $page;
     }
 
 }

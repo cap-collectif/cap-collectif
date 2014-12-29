@@ -3,8 +3,6 @@ Capco\AppBundle\Entity\Consultation:
         title: <sentence(3)>
         teaser: <text(35)>
         body: <text(1000)>
-        openedAt: <dateTimeBetween('-1 years','+10 days')>
-        closedAt: <dateTimeBetween('-10 days','+10 days')>
         opinionCount: <numberBetween(0, 582)>
         argumentCount: <numberBetween(0, 582)>
         Author: @user*
@@ -13,8 +11,6 @@ Capco\AppBundle\Entity\Consultation:
         title: <sentence(3)>
         teaser: <text(35)>
         body: <text(1000)>
-        openedAt: <dateTimeBetween('-1 years','+10 days')>
-        closedAt: <dateTimeBetween('-10 days','+10 days')>
         opinionCount: <numberBetween(0, 582)>
         argumentCount: <numberBetween(0, 582)>
         Author: @user*
@@ -23,8 +19,6 @@ Capco\AppBundle\Entity\Consultation:
         title: <sentence(3)>
         teaser: <text(35)>
         body: <text(1000)>
-        openedAt: <dateTimeBetween('-1 years','+10 days')>
-        closedAt: <dateTimeBetween('-10 days','+10 days')>
         opinionCount: <numberBetween(0, 582)>
         argumentCount: <numberBetween(0, 582)>
         Author: @user*

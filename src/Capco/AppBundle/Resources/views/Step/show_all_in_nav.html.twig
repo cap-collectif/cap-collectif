@@ -1,0 +1,34 @@
+<h4 class="h4">Étapes</h4>
+<div class="navbar--sub">
+    <ul class="nav">
+        {% set nb = 1 %}
+        {% set now = date("now") %}
+        {% for step in steps %}
+            <li {% if step.isConsultationStep %} class="active" {% endif %}>
+                <a href="{{ path('app_consultation_show_step', {'consultation_slug':consultation.slug ,'step_slug': step.slug}) }}">
+                    <div class="navbar__step-nb">{{ nb }}</div>
+                    <div class="navbar__step">
+                        <h3 class="navbar__step-title">{{ step.title}}  <i class="pull-right  excerpt  cap-arrow-66"></i></h3>
+                        <p class="excerpt h5">
+                            {% if step.startAt == step.endAt %}
+                                Le {{ step.startAt | localizeddate('full', 'none', app.request.locale) }}
+                            {% else %}
+                                Du {{ step.startAt | localizeddate('full', 'none', app.request.locale) }} au {{ step.endAt | localizeddate('full', 'none', app.request.locale) }}
+                            {% endif %}
+                        </p>
+                        <p class="label label-default">
+                            {% if now < step.startAt %}
+                                À venir
+                            {% elseif now > step.endAt %}
+                                Fermé
+                            {% else %}
+                                En cours
+                            {% endif %}
+                        </p>
+                    </div>
+                </a>
+            </li>
+            {% set nb = (nb + 1) %}
+        {% endfor %}
+    </ul>
+</div>

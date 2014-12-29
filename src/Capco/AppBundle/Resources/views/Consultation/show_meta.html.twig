@@ -5,41 +5,9 @@
     <div class="box">
         <h4 class="h4">Introduction</h4>
         <p class="more">{{ consultation.body | striptags }}</p>
-        <h4 class="h4">Étapes</h4>
-        <div class="navbar--sub">
-            <ul class="nav">
-                <li class="active">
-                    <a href="#">
-                        <div class="navbar__step-nb">1</div>
-                        <div class="navbar__step">
-                            <h3 class="navbar__step-title">Consultation  <i class="pull-right  excerpt  cap-arrow-66"></i></h3>
-                            <p class="excerpt h5">Du 30 septembre 2014 au 22 novembre 2014</p>
-                            <p class="label label-success">En cours</p>
-                        </div>
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        <div class="navbar__step-nb">2</div>
-                        <div class="navbar__step">
-                            <h3 class="navbar__step-title">Synthèse  <i class="pull-right  excerpt  cap-arrow-66"></i></h3>
-                            <p class="excerpt h5">Le 2 juillet 2014</p>
-                            <p class="label label-default">À venir</p>
-                        </div>
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        <div class="navbar__step-nb">3</div>
-                        <div class="navbar__step">
-                            <h3 class="navbar__step-title">Décisions  <i class="pull-right  excerpt  cap-arrow-66"></i></h3>
-                            <p class="excerpt h5">Le 2 août 2014</p>
-                            <p class="label label-default">À venir</p>
-                        </div>
-                    </a>
-                </li>
-            </ul>
-        </div>
+
+        {{ render(controller('CapcoAppBundle:Step:showAllInNav', {'consultation': consultation.id, 'type': app.request.attributes.get('opinion_type_slug')})) }}
+
         <h4 class="h4">Informations</h4>
         <p class="excerpt">Thème(s)</p>
         <p>

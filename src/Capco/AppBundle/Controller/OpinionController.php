@@ -93,6 +93,10 @@ class OpinionController extends Controller
         $currentUrl = $this->generateUrl('app_consultation_show_opinion', ['consultation_slug' => $consultation->getSlug(), 'opinion_type_slug' => $opinionType->getSlug(), 'opinion_slug' => $opinion->getSlug() ]);
         $opinion = $this->getDoctrine()->getRepository('CapcoAppBundle:Opinion')->getOpinionWithArguments($opinion->getSlug());
         $Votes = $this->getDoctrine()->getRepository('CapcoAppBundle:OpinionVote')->getByOpinion($opinion->getSlug());
+        $steps = $this->getDoctrine()->getRepository('CapcoAppBundle:Step')->findBy(array(
+            'consultation' => $consultation,
+            'isEnabled' => true
+        ));
 
         // Argument forms
         $argument = new Argument();
@@ -156,6 +160,7 @@ class OpinionController extends Controller
             'consultation' => $consultation,
             'opinion' => $opinion,
             'votes' => $Votes,
+            'consultation_steps' => $steps,
             'argumentFormYes' => $argumentFormYes->createView(),
             'argumentFormNo' => $argumentFormNo->createView(),
             'argumentTypes' => Argument::$argumentTypes,
@@ -281,7 +286,6 @@ class OpinionController extends Controller
      * @param $opinionVote
      * @param $form
      * @param $request
-     * @param $type
      * @param $alreadyVoted
      * @return array
      */
