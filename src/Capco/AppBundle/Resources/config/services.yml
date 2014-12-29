@@ -44,3 +44,8 @@ services:
         arguments: [ @capco.site_image.resolver ]
         tags:
             - { name: twig.extension }
+
+    capco.form.type_extension.media:
+        class: Capco\AppBundle\Form\Extension\MediaTypeExtension
+        tags:
+            - { name: form.type_extension, alias: sonata_media_type }

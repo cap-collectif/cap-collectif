@@ -112,13 +112,8 @@ sonata_media:
                 idea:           { height: 250, quality: 70 }
                 blockHeader:    { width: 1140, height: 200, quality: 70 }
                 socialIcon:     { width: 50, height: 50, quality: 70 }
-        site_image:
-            providers:
-                - sonata.media.provider.image
-            formats:
-                navbarLogo:     { height: 50, quality: 70 }
-                small:          { width: 100, quality: 70 }
-                big:            { width: 500, quality: 70 }
+                logo:           { height: 50, quality: 70 }
+
         sonata_collection:
             providers:
               - sonata.media.provider.image

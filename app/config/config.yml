@@ -32,6 +32,7 @@ twig:
     form:
         resources:
             - 'CapcoAppBundle:Form:bootstrap.html.twig'
+            - 'CapcoAppBundle:Form:media_widgets.html.twig'
 
 doctrine:
     dbal:

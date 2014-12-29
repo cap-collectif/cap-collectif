@@ -34,7 +34,7 @@ class SiteImageAdmin extends Admin
             ->add('Media', 'sonata_media_type', array(
                 'template' => 'CapcoAdminBundle:SiteImage:media_list_field.html.twig',
                 'provider' => 'sonata.media.provider.image',
-                'context' => 'site_image'))
+                'context' => 'default'))
             ->add('_action', 'actions', array(
                 'actions' => array(
                     'edit' => array(),
@@ -53,7 +53,7 @@ class SiteImageAdmin extends Admin
             ->add('isEnabled')
             ->add('Media', 'sonata_media_type', array(
                 'provider' => 'sonata.media.provider.image',
-                'context' => 'site_image'))
+                'context' => 'default'))
         ;
     }
 
@@ -67,7 +67,7 @@ class SiteImageAdmin extends Admin
             ->add('Media', 'sonata_type_media', array(
                 'template' => 'CapcoAdminBundle:SiteImage:media_list_field.html.twig',
                 'provider' => 'sonata.media.provider.image',
-                'context' => 'site_image'))
+                'context' => 'default'))
             ->add('isEnabled')
         ;
         ;
