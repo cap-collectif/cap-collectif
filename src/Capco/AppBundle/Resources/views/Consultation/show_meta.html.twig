@@ -41,27 +41,19 @@
             </ul>
         </div>
         <h4 class="h4">Informations</h4>
-        <form class="form-horizontal">
-            <div class="form-group">
-                <label class="col-lg-5  control-label  excerpt">Thème</label>
-                <p class="col-lg-7  form-control-static">
-                    {% for theme in consultation.Themes %}
-                        <a href="{{ path('app_theme_show', {'slug': theme.slug}) }}">{{theme}}</a> {% if loop.last == false %} , {% endif %}
-                    {% endfor %}
-                </p>
-            </div>
-            <div class="form-group">
-                <label class="col-lg-5  control-label  excerpt">Publication</label>
-                <p class="col-lg-7  form-control-static">{{ consultation.openedAt | localizeddate('long', 'none') }}</p>
-            </div>
-            <div class="form-group">
-                <label class="col-lg-5  control-label  excerpt">Contributions</label>
-                <p class="col-lg-7  form-control-static">
-                    {{ consultation.contributionCount }} votes<br/>
-                    37 propositions<br/>
-                    {{ consultation.argumentCount }} arguments
-                </p>
-            </div>
-        </form>
+        <p class="excerpt">Thème(s)</p>
+        <p>
+            {% for theme in consultation.Themes %}
+                <a href="{{ path('app_theme_show', {'slug': theme.slug}) }}">{{theme}}</a> {% if loop.last == false %} , {% endif %}
+            {% endfor %}
+        </p>
+        <p class="excerpt">Publication</p>
+        <p>{{ consultation.openedAt | localizeddate('long', 'none') }}</p>
+        <p class="excerpt">Contributions</p>
+        <p>
+            {{ consultation.contributionCount }} votes<br/>
+            37 propositions<br/>
+            {{ consultation.argumentCount }} arguments
+        </p>
     </div>
 </div>
