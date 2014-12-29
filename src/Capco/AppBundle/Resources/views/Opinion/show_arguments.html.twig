@@ -27,9 +27,9 @@
                         </p>
                         <button class="btn  btn-success  btn--outline  btn-xs"><i class="cap-hand-like-1"></i> D'accord</button>
                         <span class="opinion__votes-nb">{{ argument.VoteCount }}</span>
-                        <a href="#" class="btn  btn-dark-gray  btn--outline  btn-xs"><i class="cap-gun"></i> Signaler</a>
+                        <a href="#" class="btn  btn-dark-gray  btn--outline  btn-xs"><i class="cap cap-flag-1"></i> Signaler</a>
                         {% if app.user is not null and app.user == argument.Author %}
-                            <a href="{{ path('app_consultation_edit_argument' ,{'consultation_slug': consultation.slug, 'opinion_type_slug': opinionType.slug, 'opinion_slug': opinion.slug, 'argument_id': argument.id } ) }}" class="btn  btn-dark-gray  btn--outline  btn-xs"><i class="cap-gun"></i> Modifier</a>
+                            <a href="{{ path('app_consultation_edit_argument' ,{'consultation_slug': consultation.slug, 'opinion_type_slug': opinionType.slug, 'opinion_slug': opinion.slug, 'argument_id': argument.id } ) }}" class="btn  btn-dark-gray  btn--outline  btn-xs"><i class="cap cap-pencil-1"></i> Modifier</a>
                         {% endif %}
                     </div>
                 </li>

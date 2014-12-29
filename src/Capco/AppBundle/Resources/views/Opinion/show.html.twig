@@ -20,7 +20,7 @@
                 <div class="block  block--shadowed  opinion__details">
                     <div class="opinion  opinion--{{ app.request.attributes.get('opinionType').color }}  opinion--current">
                         <div class="opinion__header  opinion__header--centered">
-                            <a class="neutral-hover  pull-left  h4" href="{{ path('app_consultation_show_opinions', {'consultation_slug': consultation.slug, 'opinion_type_slug': app.request.attributes.get('opinion_type_slug')}) }}"><i class="cap-arrow-61"></i><span class="hidden-xs  hidden-sm"> Retour</span></a>
+                            <a class="neutral-hover  pull-left  h4" href="{{ path('app_consultation_show_opinions', {'consultation_slug': consultation.slug, 'opinion_type_slug': app.request.attributes.get('opinion_type_slug')}) }}"><i class="cap cap-arrow-1"></i><span class="hidden-xs  hidden-sm"> Retour</span></a>
                             <p class="h4  opinion__header__title">{{ app.request.attributes.get('opinionType').slug|capitalize }} </p>
                         </div>
                         <div class="opinion__body  box">
@@ -70,9 +70,9 @@
                             </div>
 
                             <div class="col-xs-12 col-lg-4 pull-right  opinion__action-buttons">
-                                <a href="#" class="btn  btn-dark-gray  btn--outline"><i class="cap-gun"></i> Signaler</a>
+                                <a href="#" class="btn  btn-dark-gray  btn--outline"><i class="cap cap-flag-1"></i> Signaler</a>
                                 {% if app.user is not null and app.user == opinion.Author %}
-                                    <a href="{{ path('app_consultation_edit_opinion' ,{'consultation_slug': consultation.slug, 'opinion_type_slug': app.request.attributes.get('opinionType').slug, 'opinion_slug': opinion.slug } ) }}" class="btn  btn-dark-gray  btn--outline"><i class="cap-gun"></i> Modifier</a>
+                                    <a href="{{ path('app_consultation_edit_opinion' ,{'consultation_slug': consultation.slug, 'opinion_type_slug': app.request.attributes.get('opinionType').slug, 'opinion_slug': opinion.slug } ) }}" class="btn  btn-dark-gray  btn--outline"><i class="cap cap-pencil-1"></i> Modifier</a>
                                 {% endif %}
                             </div>
                         </div>
