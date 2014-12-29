@@ -29,7 +29,7 @@
         {% if userVoteCount == 0 %}
             {{ form_start(form, {'attr':{"class":"inline"} } ) }}
                 {{ form_errors(form) }}
-                <button class="btn btn-success btn--outline"><i class="cap cap-hand-like-2-1"></i> {{ 'idea.show.vote'|trans({}, 'CapcoAppBundle') }}</button>
+                <button class="btn btn-success"><i class="cap cap-hand-like-2-1"></i> {{ 'idea.show.vote'|trans({}, 'CapcoAppBundle') }}</button>
                 <span class="nb-bordered">{{ idea.voteCount }}</span>
             {{ form_end(form) }}
         {% else %}
@@ -54,7 +54,7 @@
         <div class="pull-right no-float-mobile">
             <a href="#" class="btn  btn-dark-gray  btn--outline"><i class="cap cap-flag-1-1"></i> {{ 'idea.show.report'|trans({}, 'CapcoAppBundle') }}</a>
             {% if app.user.id is defined and app.user.id == idea.Author.id %}
-                <a href="{{ path('app_idea_update', {'slug': idea.slug}) }}" class="btn  btn-warning btn--outline"><i class="cap cap-pencil-1-1"></i> {{ 'idea.show.edit'|trans({}, 'CapcoAppBundle') }}</a>
+                <a href="{{ path('app_idea_update', {'slug': idea.slug}) }}" class="btn  btn-dark-gray  btn--outline"><i class="cap cap-pencil-1-1"></i> {{ 'idea.show.edit'|trans({}, 'CapcoAppBundle') }}</a>
             {% endif %}
         </div>
     </div>

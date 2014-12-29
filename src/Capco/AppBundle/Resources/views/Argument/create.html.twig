@@ -16,7 +16,7 @@
             <form method="post" {{ form_enctype(form) }}>
                 <div class="form-group">
                     <label class="sr-only" for="arg{{ type_text }}-input">Ajouter un argument {{ type_display }}</label>
-                    {{ form_widget(form.body, {'id': 'arg' ~ type_text ~ '-input', 'attr': {'data-toggle': 'collapse', 'href': '.arg' ~ type_text ~ '-btns', 'rows': 1, 'placeholder':'Ajouter un argument ' ~ type_display, } }) }}
+                    {{ form_widget(form.body, {'id': 'arg' ~ type_text ~ '-input', 'attr': {'data-toggle': 'collapse', 'href': '.arg' ~ type_text ~ '-btns', 'rows': 2, 'placeholder':'Ajouter un argument ' ~ type_display, } }) }}
                     {{ form_errors(form.body) }}
                     {{ form_rest(form) }}
                     <div class="collapse  arg{{ type_text }}-btns">
