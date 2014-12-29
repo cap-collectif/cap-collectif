@@ -62,15 +62,16 @@ class ThemeController extends Controller
         $themes = $em->getRepository('CapcoAppBundle:Theme')->getSearchResultsWithConsultationsAndIdeas($pagination, $page, $term);
 
         //Avoid division by 0 in nbPage calculation
-        if($pagination == 0){
-            $pagination = ceil(count($themes));
+        $nbPage = 1;
+        if($pagination != 0){
+            $nbPage = ceil(count($themes) / $pagination);
         }
 
         return array(
             'themes' => $themes,
             'form' => $form->createView(),
             'page' => $page,
-            'nbPage' => ceil(count($themes) / $pagination)
+            'nbPage' => $nbPage,
         );
     }
 

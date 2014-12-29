@@ -104,7 +104,8 @@ Capco\AppBundle\Entity\SiteParameter:
     SiteParameter23:
         keyname: themes.pagination
         title: Nombre d'éléments pour la pagination des thèmes
-        value: 2
+        value: 8
+
     SiteParameter24:
         keyname: homepage.jumbotron.button_link
         title: Lien du bouton du jumbotron sur la page d'accueil

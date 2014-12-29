@@ -73,15 +73,16 @@ class ConsultationController extends Controller
         $consultations = $em->getRepository('CapcoAppBundle:Consultation')->getSearchResultsWithTheme($pagination, $page, $theme, $sort, $term);
 
         //Avoid division by 0 in nbPage calculation
-        if($pagination == 0){
-            $pagination = ceil(count($consultations));
+        $nbPage = 1;
+        if($pagination != 0){
+            $nbPage = ceil(count($consultations) / $pagination);
         }
 
         return [
             'consultations' => $consultations,
             'statuses' => Consultation::$openingStatuses,
             'page' => $page,
-            'nbPage' => ceil(count($consultations) / $pagination),
+            'nbPage' => $nbPage,
             'form' => $form->createView()
         ];
     }

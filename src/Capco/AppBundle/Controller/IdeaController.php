@@ -154,15 +154,16 @@ class IdeaController extends Controller
         $ideas = $em->getRepository('CapcoAppBundle:Idea')->getSearchResultsWithUser($pagination, $page, $theme, $sort, $term);
 
         //Avoid division by 0 in nbPage calculation
-        if($pagination == 0){
-            $pagination = ceil(count($ideas));
+        $nbPage = 1;
+        if($pagination != 0){
+            $nbPage = ceil(count($ideas) / $pagination);
         }
         
         return array(
             'ideas' => $ideas,
             'form' => $form->createView(),
             'page' => $page,
-            'nbPage' => ceil(count($ideas) / $pagination)
+            'nbPage' => $nbPage,
         );
     }
 
