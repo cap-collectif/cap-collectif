@@ -1,6 +1,6 @@
 Capco\AppBundle\Entity\Idea:
     Idea{1..15}:
-        title: <text(20)>
+        title: <text(38)>
         body: <text(1000)>
         voteCount: <numberBetween(0, 356)>
         Theme: @theme*

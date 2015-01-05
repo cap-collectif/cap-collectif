@@ -35,3 +35,15 @@
     {% endif %}
 
 {% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script type="text/javascript">
+        $(window).on('load', function() {
+            App.module.equalheight('.theme');window.onresize = App.module.rezised('.theme');
+            App.module.equalheight('.thumbnail--custom');window.onresize = App.module.rezised('.thumbnail--custom');
+            App.module.equalheight('.media--macro');window.onresize = App.module.rezised('.media--macro');
+        });
+    </script>
+{% endblock %}
+

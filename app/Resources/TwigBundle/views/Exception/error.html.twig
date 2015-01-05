@@ -24,3 +24,12 @@
     </div>
 
 {% endblock %}
+
+{% block javascripts %}
+	{{ parent() }}
+	<script type="text/javascript">
+		$(window).on('load', function() {
+			App.module.equalheight('.thumbnail--custom');window.onresize = App.module.rezised('.thumbnail--custom');
+		});
+	</script>
+{% endblock %}

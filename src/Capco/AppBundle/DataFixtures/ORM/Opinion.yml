@@ -110,7 +110,7 @@ Capco\AppBundle\Entity\Opinion:
     opinion10:
         title: <text(20)>
         body: <text(1000)>
-        isEnabled: <boolean()>
+        isEnabled: <boolean(100)>
         isTrashed: <boolean(30)>
         trashedReason: <text(100)>
         Author: @user3

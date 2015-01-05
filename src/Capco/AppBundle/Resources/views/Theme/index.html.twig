@@ -67,3 +67,12 @@
     </div>
 
 {% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script type="text/javascript">
+        $(window).on('load', function() {
+            App.module.equalheight('.theme');window.onresize = App.module.rezised('.theme');
+        });
+    </script>
+{% endblock %}
