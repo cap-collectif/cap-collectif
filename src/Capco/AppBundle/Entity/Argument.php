@@ -2,6 +2,8 @@
 
 namespace Capco\AppBundle\Entity;
 
+use Capco\UserBundle\Entity\User;
+
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -247,5 +249,26 @@ class Argument
     public function resetVotes(){
         $this->voteCount = 0;
         return $this;
+    }
+
+    public function addVote(){
+        $this->voteCount++;
+        return $this;
+    }
+
+    public function removeVote(){
+        $this->voteCount--;
+        return $this;
+    }
+
+    public function userHasVote(User $user = null){
+        if($user != null){
+            foreach($this->Votes as $vote){
+                if($vote->getVoter() == $user){
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 }

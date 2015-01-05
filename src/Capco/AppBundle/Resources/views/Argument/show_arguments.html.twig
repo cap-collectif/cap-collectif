@@ -1,0 +1,48 @@
+{% set nbArguments = arguments|length %}
+{% set token = csrf_token('argument_vote') %}
+<div class="block--shadowed  opinion__arguments--{{ argumentType }}">
+    <div class="opinion__arguments__header  row">
+        <h4 class="col-xs-6  h4  opinion__header__title">{% transchoice nbArguments with {'%count%': nbArguments} from 'CapcoAppBundle' %}consultation.arguments{% endtranschoice %} {% if argumentType == "yes" %} pour {% else %} contre {% endif %} </h4>
+        <div class="col-xs-6">
+            <select class="form-control">
+                <option>Les plus utiles</option>
+                <option>Les plus récents</option>
+            </select>
+        </div>
+    </div>
+    <ul class="media-list  opinion__list">
+        {% for argument in arguments %}
+            <li class="opinion  opinion--argument" id="arg-{{ argument.id }}">
+                <div class="opinion__body  box">
+                    {% if argument.Author.Media %}
+                        <a class="pull-left" href="#">
+                            {% thumbnail argument.Author.Media, 'avatar' with {'title': argument.Author.fullname, 'alt': argument.Author.fullname, 'class': 'img-circle  pull-left'} %}
+                        </a>
+                    {% endif %}
+                    <div class="opinion__data">
+                        <p class="h5  opinion__user"><a href="#">{{ argument.Author.getFullname }}</a></p>
+                        <p class="excerpt  opinion__date"><a class="excerpt" href="#">{{ argument.createdAt | localizeddate('long', 'short', app.request.locale) }}</a></p>
+                    </div>
+                    <p class="opinion__text">
+                        {{ argument.body }}
+                    </p>
+                    
+                    <form method="POST" style="display: inline-block;" action="{{ path('app_consultation_vote_argument' ,{'consultation_slug': consultation.slug, 'opinion_type_slug': opinionType.slug, 'opinion_slug': opinion.slug, 'argument_id': argument.id } ) }}">
+                        {% if argument.userHasVote(app.user) %}
+                            <button class="btn  btn-danger  btn-xs">Annuler mon vote</button>
+                        {% else %}
+                            <button class="btn  btn-success  btn--outline  btn-xs"><i class="cap-hand-like-2"></i> D'accord</button>
+                        {% endif %}
+                        <input type="hidden" name="_csrf_token" value="{{ token }}">
+                    </form>
+                    <span class="opinion__votes-nb">{{ argument.VoteCount }}</span>
+
+                    <a href="#" class="btn  btn-dark-gray  btn--outline  btn-xs"><i class="cap cap-flag-1"></i> Signaler</a>
+                    {% if app.user is not null and app.user == argument.Author %}
+                        <a href="{{ path('app_consultation_edit_argument' ,{'consultation_slug': consultation.slug, 'opinion_type_slug': opinionType.slug, 'opinion_slug': opinion.slug, 'argument_id': argument.id } ) }}" class="btn  btn-dark-gray  btn--outline  btn-xs"><i class="cap cap-pencil-1"></i> Modifier</a>
+                    {% endif %}
+                </div>
+            </li>
+        {% endfor %}
+    </ul>
+</div>

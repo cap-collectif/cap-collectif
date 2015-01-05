@@ -14,6 +14,17 @@ use Gedmo\Mapping\Annotation as Gedmo;
  */
 class OpinionVote
 {
+
+    const VOTE_OK = 1;
+    const VOTE_NOK = -1;
+    const VOTE_MITIGE = 0;
+
+    public static $voteTypes = [
+        'ok' => self::VOTE_OK,
+        'nok' => self::VOTE_NOK,
+        'mitige' => self::VOTE_MITIGE,
+   ];
+
     /**
      * @var integer
      *
@@ -40,7 +51,7 @@ class OpinionVote
     /**
      * @var
      *
-     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Opinion", inversedBy="Votes")
+     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Opinion", inversedBy="Votes", cascade={"persist"})
      * @ORM\JoinColumn(name="opinion_id", referencedColumnName="id")
      */
     private $opinion;
@@ -127,8 +138,6 @@ class OpinionVote
     {
         $this->Voter = $Voter;
     }
-
-
 
     /**
      * Set createdAt

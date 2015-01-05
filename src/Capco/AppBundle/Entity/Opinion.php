@@ -537,4 +537,48 @@ class Opinion
         return $this;
     }
 
+    /**
+     * Add vote
+     *
+     * @param type
+     *
+     * @return Opinion
+     */
+    public function addVoteWithType($type)
+    {
+        if($type == OpinionVote::VOTE_MITIGE){
+            $this->voteCountMitige++;
+        }
+        else if($type == OpinionVote::VOTE_NOK){
+            $this->voteCountNok++;
+        }
+        else if($type == OpinionVote::VOTE_OK){
+            $this->voteCountOk++;
+        }
+
+        return $this;
+    }
+
+    /**
+     * Remove vote
+     *
+     * @param type
+     *
+     * @return Opinion
+     */
+    public function removeVoteWithType($type)
+    {
+        if($type == OpinionVote::VOTE_MITIGE){
+            $this->voteCountMitige--;
+        }
+        else if($type == OpinionVote::VOTE_NOK){
+            $this->voteCountNok--;
+        }
+        else if($type == OpinionVote::VOTE_OK){
+            $this->voteCountOk--;
+        }
+
+        return $this;
+    }
+
 }

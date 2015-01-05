@@ -59,23 +59,82 @@
                                 <span class="icon  visible-xs  pull-right  cap-arrow-66"></span>
                             </a>
                         </div>
-                        <div class="row">
-                            <div class="col-xs-12 col-lg-7 pull-left">
-                                <button class="btn  btn-success  btn--outline"><i class="cap cap-hand-like-2"></i> D'accord</button>
+                        <div class="opinion__buttons">
+
+                            {% set userHasVoted = false %}
+                            {% set userHasVotedOk = false %}
+                            {% set userHasVotedNok = false %}
+                            {% set userHasVotedMitige = false %}
+                            {% if userVote is not null %}
+                                {% set userHasVoted = true %}
+                                {% if userVote.value == opinionVoteTypes['ok'] %}
+                                    {% set userHasVotedOk = true %}
+                                {% elseif userVote.value == opinionVoteTypes['nok'] %}
+                                    {% set userHasVotedNok = true %}
+                                {% elseif userVote.value == opinionVoteTypes['mitige'] %}
+                                    {% set userHasVotedMitige = true %}
+                                {% endif %}
+                            {% endif %}
+                            
+                            <div class="opinion__vote-group">
+                                {% if userHasVotedOk %}
+                                    {{ form_start(opinionVoteOkForm, {'attr':{"class":"inline"} } ) }}
+                                    {{ form_errors(opinionVoteOkForm) }}
+                                    <button type="submit" class="btn btn-success"><i class="cap cap-hand-like-2-1"></i> {{ 'opinion.show.vote.ok'|trans({}, 'CapcoAppBundle') }}</button>
+                                    {{ form_end(opinionVoteOkForm) }}
+                                {% elseif userHasVoted %}
+                                    <button disabled="true" class="btn btn-default btn--outline"><i class="cap cap-hand-like-2"></i> {{ 'opinion.show.vote.ok'|trans({}, 'CapcoAppBundle') }}</button>
+                                {% else %}
+                                    {{ form_start(opinionVoteOkForm, {'attr':{"class":"inline"} } ) }}
+                                    {{ form_errors(opinionVoteOkForm) }}
+                                    <button type="submit" class="btn btn-success btn--outline"><i class="cap cap-hand-like-2"></i> {{ 'opinion.show.vote.ok'|trans({}, 'CapcoAppBundle') }}</button>
+                                    {{ form_end(opinionVoteOkForm) }}
+                                {% endif %}
                                 <span class="nb-bordered  opinion__votes-nb" data-value="{{ opinion.voteCountOk }}">{{ opinion.voteCountOk }}</span>
-                                <button type="button" class="btn  btn-warning  btn--outline"><i class="icon-rotate cap cap-hand-like-2"></i> Mitigé</button>
+                            </div>
+
+                            <div class="opinion__vote-group">
+                                {% if userHasVotedMitige %}
+                                    {{ form_start(opinionVoteMitigeForm, {'attr':{"class":"inline"} } ) }}
+                                    {{ form_errors(opinionVoteMitigeForm) }}
+                                    <button type="submit" class="btn btn-warning"><i class="icon-rotate cap cap-hand-like-2-1"></i> {{ 'opinion.show.vote.mitige'|trans({}, 'CapcoAppBundle') }}</button>
+                                    {{ form_end(opinionVoteMitigeForm) }}
+                                {% elseif userHasVoted %}
+                                    <button disabled="true" class="btn btn-default btn--outline"><i class="icon-rotate cap cap-hand-like-2"></i> {{ 'opinion.show.vote.mitige'|trans({}, 'CapcoAppBundle') }}</button>
+                                {% else %}
+                                    {{ form_start(opinionVoteMitigeForm, {'attr':{"class":"inline"} } ) }}
+                                    {{ form_errors(opinionVoteMitigeForm) }}
+                                    <button type="submit" class="btn btn-warning btn--outline"><i class="icon-rotate cap cap-hand-like-2"></i> {{ 'opinion.show.vote.mitige'|trans({}, 'CapcoAppBundle') }}</button>
+                                    {{ form_end(opinionVoteMitigeForm) }}
+                                {% endif %}
                                 <span class="nb-bordered  opinion__votes-nb" data-value="{{ opinion.voteCountMitige }}">{{ opinion.voteCountMitige }}</span>
-                                <button type="button" class="btn  btn-danger  btn--outline"><i class="cap cap-hand-unlike-2"></i> Pas d'accord</button>
+                            </div>
+
+                            <div class="opinion__vote-group">
+                                {% if userHasVotedNok %}
+                                    {{ form_start(opinionVoteNokForm, {'attr':{"class":"inline"} } ) }}
+                                    {{ form_errors(opinionVoteNokForm) }}
+                                    <button type="submit" class="btn btn-danger"><i class="cap cap-hand-unlike-2-1"></i> {{ 'opinion.show.vote.nok'|trans({}, 'CapcoAppBundle') }}</button>
+                                    {{ form_end(opinionVoteNokForm) }}
+                                {% elseif userHasVoted %}
+                                    <button disabled="true" class="btn btn-default  btn--outline"><i class="cap cap-hand-unlike-2"></i> {{ 'opinion.show.vote.nok'|trans({}, 'CapcoAppBundle') }}</button>
+                                {% else %}
+                                    {{ form_start(opinionVoteNokForm, {'attr':{"class":"inline"} } ) }}
+                                    {{ form_errors(opinionVoteNokForm) }}
+                                    <button type="submit" class="btn btn-danger btn--outline"><i class="cap cap-hand-unlike-2"></i> {{ 'opinion.show.vote.nok'|trans({}, 'CapcoAppBundle') }}</button>
+                                    {{ form_end(opinionVoteNokForm) }}
+                                {% endif %}
                                 <span class="nb-bordered  opinion__votes-nb" data-value="{{ opinion.voteCountNok }}">{{ opinion.voteCountNok }}</span>
                             </div>
 
-                            <div class="col-xs-12 col-lg-4 pull-right  opinion__action-buttons">
+                            <div class="pull-right  opinion__action-buttons">
                                 <a href="#" class="btn  btn-dark-gray  btn--outline"><i class="cap cap-flag-1"></i> Signaler</a>
                                 {% if app.user is not null and app.user == opinion.Author %}
                                     <a href="{{ path('app_consultation_edit_opinion' ,{'consultation_slug': consultation.slug, 'opinion_type_slug': app.request.attributes.get('opinionType').slug, 'opinion_slug': opinion.slug } ) }}" class="btn  btn-dark-gray  btn--outline"><i class="cap cap-pencil-1"></i> Modifier</a>
                                 {% endif %}
                             </div>
                         </div>
+
                     </div>
                     <div class="nav  nav-tabs  opinion__resources">
                         <a class="opinion__resource  opinion__resource--solution" href="sources.php">
@@ -96,7 +155,7 @@
                             {% set form = argumentFormYes %}
                             {% include '@CapcoApp/Argument/create.html.twig' %}
                         {% endif %}
-                        {{ render(controller('CapcoAppBundle:Opinion:showArguments', {'consultation': consultation, 'opinionType': app.request.attributes.get('opinionType'), 'opinion': opinion, 'type': 1})) }}
+                        {{ render(controller('CapcoAppBundle:Argument:showArguments', {'consultation': consultation, 'opinionType': app.request.attributes.get('opinionType'), 'opinion': opinion, 'type': 1})) }}
                     </div>
                     <div class="col-sm-12  col-md-6">
                         {% if app.user is not null %}
@@ -104,7 +163,7 @@
                             {% set form = argumentFormNo %}
                             {% include '@CapcoApp/Argument/create.html.twig' %}
                         {% endif %}
-                        {{ render(controller('CapcoAppBundle:Opinion:showArguments', {'consultation': consultation, 'opinionType': app.request.attributes.get('opinionType'), 'opinion': opinion, 'type': 0})) }}
+                        {{ render(controller('CapcoAppBundle:Argument:showArguments', {'consultation': consultation, 'opinionType': app.request.attributes.get('opinionType'), 'opinion': opinion, 'type': 0})) }}
                     </div>
                 </div>
             </div> <!-- col-xs-12  col-sm-4  col-md-3 -->

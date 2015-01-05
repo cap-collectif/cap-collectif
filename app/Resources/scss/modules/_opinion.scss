@@ -252,13 +252,20 @@
   padding: 15px;
   border-top: 1px solid $border;
 
+  .opinion__buttons {
+    overflow: hidden;
+  }
+
+  .opinion__vote-group {
+    float: left;
+    margin-right: 10px;
+  }
+
   @media (max-width: $screen-sm-max) {
-    .opinion__action-buttons {
+    .opinion__action-buttons, .opinion__vote-group {
       float: none !important;
-    }
-    .btn {
       margin-top: 10px;
-    } 
+    }
   }
 }
 

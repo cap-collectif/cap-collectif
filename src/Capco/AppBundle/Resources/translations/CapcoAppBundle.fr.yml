@@ -137,6 +137,14 @@ argument:
     reset_submit: Annuler
     remove_submit: Supprimer
 
+opinion:
+  show:
+    vote:
+      cancel: Annuler mon vote
+      ok: D'accord
+      nok: Pas d'accord
+      mitige: Mitigé
+
 #Users
 user:
   login:
