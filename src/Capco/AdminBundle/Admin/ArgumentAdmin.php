@@ -49,7 +49,9 @@ class ArgumentAdmin extends Admin
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
-            ->add('body')
+            ->add('body', null, array(
+                'attr' => array('class' => 'ckeditor')
+            ))
             ->add('type')
         ;
     }

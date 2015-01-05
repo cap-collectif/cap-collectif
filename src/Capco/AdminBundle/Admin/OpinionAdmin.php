@@ -48,11 +48,15 @@ class OpinionAdmin extends Admin
     {
         $formMapper
             ->add('title')
-            ->add('body')
+            ->add('body', null, array(
+                'attr' => array('class' => 'ckeditor')
+            ))
             ->add('isEnabled', null, array(
                     'label'     => 'Afficher publiquement ?',
                     'required'  => false,))
-            ->add('trashedReason')
+            ->add('trashedReason', null, array(
+                'attr' => array('class' => 'ckeditor')
+            ))
         ;
     }
 

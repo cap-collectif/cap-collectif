@@ -47,7 +47,9 @@ class IdeaAdmin extends Admin
     {
         $formMapper
             ->add('title')
-            ->add('body')
+            ->add('body', null, array(
+                'attr' => array('class' => 'ckeditor')
+            ))
         ;
     }
 

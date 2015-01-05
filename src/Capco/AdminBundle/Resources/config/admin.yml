@@ -95,22 +95,6 @@ services:
         calls:
             - [ setTranslationDomain, [SonataAdminBundle]]
 
-    capco_admin.admin.problem:
-        class: Capco\AdminBundle\Admin\ProblemAdmin
-        arguments: [~, Capco\AppBundle\Entity\Problem, SonataAdminBundle:CRUD]
-        tags:
-            - {name: sonata.admin, manager_type: orm, group: admin.group.consultation, label: admin.label.problem}
-        calls:
-            - [ setTranslationDomain, [SonataAdminBundle]]
-
-    capco_admin.admin.problem_type:
-        class: Capco\AdminBundle\Admin\ProblemTypeAdmin
-        arguments: [~, Capco\AppBundle\Entity\ProblemType, SonataAdminBundle:CRUD]
-        tags:
-            - {name: sonata.admin, manager_type: orm, group: admin.group.reference, label: admin.label.problem_type}
-        calls:
-            - [ setTranslationDomain, [SonataAdminBundle]]
-
     capco_admin.admin.reporting:
         class: Capco\AdminBundle\Admin\ReportingAdmin
         arguments: [~, Capco\AppBundle\Entity\Reporting, SonataAdminBundle:CRUD]

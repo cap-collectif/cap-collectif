@@ -33,7 +33,6 @@ sonata_admin:
                 items:
                     - capco_admin.admin.consultation
                     - capco_admin.admin.step
-                    - capco_admin.admin.problem
                     - capco_admin.admin.opinion
                     - capco_admin.admin.vote
                     - capco_admin.admin.argument
@@ -43,7 +42,6 @@ sonata_admin:
                 items:
                     - capco_admin.admin.theme
                     - capco_admin.admin.opinion_type
-                    - capco_admin.admin.problem_type
                     - capco_admin.admin.site_parameter
                     - capco_admin.admin.site_image
 

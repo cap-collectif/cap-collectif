@@ -4,3 +4,13 @@
 	{{ parent() }}
 	<link href="/css/style-admin.min.css" rel="stylesheet">
 {% endblock %}
+
+{% block javascripts %}
+	{{ parent() }}
+	<script src="{{ asset('js/ckeditor/ckeditor.js') }}"></script>
+	<script type="text/javascript">
+		$(window).on('load', function() {
+			App.module.ckEditor('ckeditor');
+		});
+	</script>
+{% endblock %}

@@ -49,11 +49,15 @@ class ThemeAdmin extends Admin
     {
         $formMapper
             ->add('title')
-            ->add('teaser')
+            ->add('teaser', 'textarea', array(
+                'attr' => array('class' => 'ckeditor')
+            ))
             ->add('isEnabled')
             ->add('position')
             ->add('status')
-            ->add('body')
+            ->add('body', 'textarea', array(
+                'attr' => array('class' => 'ckeditor')
+            ))
         ;
     }
 

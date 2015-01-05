@@ -51,8 +51,12 @@ class ConsultationAdmin extends Admin
     {
         $formMapper
             ->add('title')
-            ->add('teaser')
-            ->add('body')
+            ->add('teaser', null, array(
+                'attr' => array('class' => 'ckeditor')
+            ))
+            ->add('body', null, array(
+                'attr' => array('class' => 'ckeditor')
+            ))
             ->add('openedAt')
             ->add('closedAt')
         ;
