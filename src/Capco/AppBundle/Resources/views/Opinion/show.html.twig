@@ -48,17 +48,6 @@
                     <div class="opinion__description">
                         <div id="piechart-{{ opinion.id }}" class="opinion__chart  center-block"></div>
                         {{ opinion.body|raw }}
-                        <h5 class="h5">2 pièces jointes</h5>
-                        <div class="nav  nav-tabs  opinion__attachments">
-                            <a class="opinion__attachment" href="#">
-                                <span class="cap-clip-2"></span> Fichier 1
-                                <span class="icon  visible-xs  pull-right  cap-arrow-66"></span>
-                            </a>
-                            <a class="opinion__attachment" href="#">
-                                <span class="cap-clip-2"></span> Fichier 2
-                                <span class="icon  visible-xs  pull-right  cap-arrow-66"></span>
-                            </a>
-                        </div>
                         <div class="opinion__buttons">
 
                             {% set opinionVoteCounts = { (opinionVoteTypes['ok']): opinion.voteCountOk, (opinionVoteTypes['nok']): opinion.voteCountNOk, (opinionVoteTypes['mitige']): opinion.voteCountMitige } %}
@@ -80,20 +69,59 @@
                                     <a href="{{ path('app_consultation_edit_opinion' ,{'consultation_slug': consultation.slug, 'opinion_type_slug': app.request.attributes.get('opinionType').slug, 'opinion_slug': opinion.slug } ) }}" class="btn  btn-dark-gray  btn--outline"><i class="cap cap-pencil-1"></i> Modifier</a>
                                 {% endif %}
                             </div>
-                        </div>
+                        </div> <!-- .opinion__buttons -->
 
-                    </div>
-                    <div class="nav  nav-tabs  opinion__resources">
-                        <a class="opinion__resource  opinion__resource--solution" href="sources.php">
-                            3 solutions liées
-                            <span class="icon  visible-xs  pull-right  cap-arrow-66"></span>
-                        </a>
-                        <span class="hidden-xs  opinion__resources__separator  excerpt">|</span>
-                        <a class="opinion__resource  opinion__resource--source" href="sources.php">
-                            2 sources
-                            <span class="icon  visible-xs  pull-right  cap-arrow-66"></span>
-                        </a>
-                    </div>
+                        <div class="panel-group" id="accordion">
+                            {% set tokenSource = csrf_token('source_vote') %}
+                            <div class="panel panel-default">
+                                <div class="panel-heading" data-toggle="collapse" data-target="#collapseOne" style="cursor:pointer;">
+                                    <h4 class="panel-title">{% transchoice sources|length with {'%count%': sources|length} from 'CapcoAppBundle' %}source.show.count{% endtranschoice %} <i class="cap cap-add-1 pull-right"></i></h4>
+                                </div>
+                                <div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+                                    <div class="panel-body">
+                                        <p><a href="{{ path('app_new_source' ,{'opinion_slug': opinion.slug} ) }}" class="btn-sm btn btn-default"><i class="cap cap-pencil-1"></i>{{ 'source.show.add'|trans({}, 'CapcoAppBundle') }}</a></p>
+                                        {% for source in sources %}
+                                            <div class="media" id="source{{ source.id }}">
+                                                {% if source.Author.Media %}
+                                                    <a class="pull-left media-middle" href="#">
+                                                        {% thumbnail source.Author.Media, 'avatar_source' with {'title': source.Author.fullname, 'alt': source.Author.fullname, 'class': 'img-circle  pull-left'} %}
+                                                    </a>
+                                                {% endif %}
+                                                <div class="media-body">
+                                                    <h4 class="media-heading h4" id="source{{ source.id }}"><span class="label label-info">{{ source.Category.title }}</span>
+                                                        {% if source.Media %}
+                                                            <a href="{{ path('sonata_media_download', {'id': source.Media|sonata_urlsafeid }) }}">{{ source.title }}</a>
+                                                        {% endif %}
+                                                        {% if source.link %}
+                                                            <a href="{{ source.link }}" target="_blank">{{ source.title }}</a>
+                                                        {% endif %}
+                                                    </h4>
+                                                    <p class="excerpt">
+                                                        {{ source.body }}
+                                                    </p>
+                                                    <form method="POST" style="display: inline-block;" action="{{ path('app_consultation_vote_source' ,{'consultation_slug': consultation.slug, 'opinion_type_slug': opinionType.slug, 'opinion_slug': opinion.slug, 'source_id': source.id } ) }}">
+                                                        {% if source.userHasVote(app.user) %}
+                                                        <button class="btn  btn-danger  btn-xs">Annuler mon vote</button>
+                                                        {% else %}
+                                                        <button class="btn  btn-success  btn--outline  btn-xs"><i class="cap cap-hand-like-2"></i>Pertinent</button>
+                                                        {% endif %}
+                                                        <input type="hidden" name="_csrf_token" value="{{ tokenSource }}">
+                                                    </form>
+                                                    <span class="nb-votes">{{ source.voteCountSource }}</span>
+                                                    <a href="#" class="btn  btn-dark-gray  btn--outline  btn-xs"><i class="cap cap-flag-1"></i> Signaler</a>
+                                                    {% if app.user is not null and app.user == source.Author %}
+                                                        <a href="{{ path('app_edit_source' ,{'opinion_slug': opinion.slug, 'source_slug': source.slug} ) }}" class="btn  btn-dark-gray  btn--outline  btn-xs"><i class="cap cap-pencil-1"></i> Modifier</a>
+                                                    {% endif %}
+                                                </div>
+                                            </div>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                            </div>
+                        </div> <!-- .panel-group -->
+
+                    </div> <!-- .opinion__description -->
+
                 </div>
                 <div class="row">
                     <div class="col-sm-12  col-md-6">

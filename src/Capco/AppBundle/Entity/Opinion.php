@@ -121,6 +121,13 @@ class Opinion
     private $voteCountMitige = 0;
 
     /**
+     * @var integer
+     *
+     * @ORM\Column(name="source_count", type="integer")
+     */
+    private $sourceCount = 0;
+
+    /**
      * @var string
      *
      * @ORM\ManyToOne(targetEntity="Capco\UserBundle\Entity\User")
@@ -142,6 +149,22 @@ class Opinion
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Consultation", inversedBy="Opinions")
      */
     private $Consultation;
+
+    /**
+     * @var
+     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\Source", mappedBy="Opinion",  cascade={"persist", "remove"})
+     */
+    private $Sources;
+
+    public function __toString()
+    {
+        if ($this->id) {
+            return $this->getTitle();
+        } else {
+            return "New opinion";
+        }
+
+    }
 
     /**
      * @return mixed
@@ -181,6 +204,7 @@ class Opinion
     {
         $this->Votes = new ArrayCollection();
         $this->arguments = new ArrayCollection();
+        $this->Sources = new ArrayCollection();
     }
 
 
@@ -432,6 +456,33 @@ class Opinion
     }
 
     /**
+     * @return mixed
+     */
+    public function getSources()
+    {
+        return $this->Sources;
+    }
+
+    /**
+     * @param Source $source
+     * @return $this
+     */
+    public function addSource(Source $source)
+    {
+        $this->Sources[] = $source;
+
+        return $this;
+    }
+
+    /**
+     * @param Source $source
+     */
+    public function removeSource(Source $source)
+    {
+        $this->Sources->removeElement($source);
+    }
+
+    /**
      * @return string
      */
     public function getAuthor()
@@ -447,34 +498,20 @@ class Opinion
         $this->Author = $Author;
     }
 
-
-
     /**
-     * Set createdAt
-     *
-     * @param \DateTime $createdAt
-     *
-     * @return Contribution
+     * @return int
      */
-    public function setCreatedAt($createdAt)
+    public function getSourceCount()
     {
-        $this->createdAt = $createdAt;
-
-        return $this;
+        return $this->sourceCount;
     }
 
     /**
-     * Set updatedAt
-     *
-     * @param \DateTime $updatedAt
-     *
-     * @return Contribution
+     * @param int $sourceCount
      */
-    public function setUpdatedAt($updatedAt)
+    public function setSourceCount($sourceCount)
     {
-        $this->updatedAt = $updatedAt;
-
-        return $this;
+        $this->sourceCount = $sourceCount;
     }
 
     /**

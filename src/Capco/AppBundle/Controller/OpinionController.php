@@ -97,6 +97,9 @@ class OpinionController extends Controller
             'consultation' => $consultation,
             'isEnabled' => true
         ));
+        $sources = $this->getDoctrine()->getRepository('CapcoAppBundle:Source')->findBy(
+            array('Opinion' => $opinion)
+        );
 
         // Argument forms
         $argument = new Argument();
@@ -157,8 +160,10 @@ class OpinionController extends Controller
 
         return [
             'currentUrl' => $currentUrl,
+            'sources' => $sources,
             'consultation' => $consultation,
             'opinion' => $opinion,
+            'opinionType' => $opinion->getOpinionType(),
             'votes' => $Votes,
             'consultation_steps' => $steps,
             'argumentFormYes' => $argumentFormYes->createView(),

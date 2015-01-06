@@ -1,0 +1,62 @@
+{% extends '@CapcoApp/base.html.twig' %}
+
+{% block jumbotron %}
+{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2">
+                <div class="dialog  dialog--{{ opinionType.color }}  block--shadowed">
+                    <div class="dialog__header  box">
+                        <h4 class="h4  dialog__title">modification d'une source</h4>
+                    </div>
+                    <div class="dialog__excerpt  excerpt  box">
+                        <p>Merci d'examiner les sources existantes en premier lieu afin de ne pas soumettre de doublon. Vous pouvez voter pour celles existantes !</p>
+                    </div>
+                    <form method="post" {{ form_enctype(form) }}>
+                        <div class="dialog__body  box">
+                            <div class="media">
+                                {% if app.user.Media %}
+                                    <a class="pull-left" href="#">
+                                        {% thumbnail app.user.Media, 'avatar' with {'title': app.user.fullname, 'alt': app.user.fullname, 'class': 'media-object img-circle'} %}
+                                    </a>
+                                {% endif %}
+                                <div class="media-body">
+                                    {{ form_errors(form) }}
+                                    {{ form_widget(form.type, {'buttonActive': buttonActive}) }}
+                                    <div class="box">
+                                        {{ form_row(form.type) }}
+                                    </div>
+                                    <div class="block_link" {% if buttonActive != 0 %} style="display: none"{% endif %}>
+                                        {{ form_row(form.link) }}
+                                    </div>
+                                    <div class="block_media" {% if buttonActive != 1  %} style="display: none"{% endif %}>
+                                        {{ form_row(form.media) }}
+                                    </div>
+                                    {{ form_rest(form) }}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="dialog__footer  box">
+                            <a href="{{ path('app_delete_source', {'opinion_slug': opinion.slug, 'source_slug': source.slug}) }}" class="btn btn-danger">{{ 'idea.update.remove_button'|trans({}, 'CapcoAppBundle') }}</a>
+                            <div class="pull-right">
+                                <a href="{{ path('app_consultation_show_opinion', {'consultation_slug': consultation.slug, 'opinion_type_slug': opinionType.slug, 'opinion_slug': opinion.slug}) }}" class="btn  btn-default">{{ 'idea.create.reset_submit'|trans({}, 'CapcoAppBundle') }}</a>
+                                <button type="submit" class="btn  btn-primary">Publier</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script src="{{ asset('js/readmore/readmore.min.js') }}"></script>
+    <script type="text/javascript">
+        App.module.checkButton('.typeBtn');
+    </script>
+{% endblock %}

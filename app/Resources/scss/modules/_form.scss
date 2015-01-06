@@ -1,0 +1,22 @@
+/* ===============================================================
+   $FORMS
+================================================================*/
+/*
+Hack form button - radio check
+*/
+[data-toggle=buttons] > .btn > div > label > input[type=checkbox],
+[data-toggle=buttons] > .btn > div > label > input[type=radio] {
+  position: absolute;
+  z-index: -1;
+  opacity: 0;
+  filter: alpha(opacity=0);
+}
+[data-toggle=buttons] > .btn > .checkbox,
+[data-toggle=buttons] > .btn > .radio {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+[data-toggle=buttons] > .btn > .checkbox label,
+[data-toggle=buttons] > .btn > .radio label {
+  padding-left: 0;
+}

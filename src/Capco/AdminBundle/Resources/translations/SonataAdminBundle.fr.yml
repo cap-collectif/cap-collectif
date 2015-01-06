@@ -29,6 +29,8 @@ admin.label.vote: Vote
 admin.label.site_parameter: Paramètre du site
 admin.label.site_image: Images du site
 admin.label.social_network: Réseau social
+admin.label.category: Catégorie
+admin.label.source: Source
 
 # Messages
 admin:

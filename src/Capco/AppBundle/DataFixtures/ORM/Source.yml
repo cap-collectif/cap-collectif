@@ -1,0 +1,89 @@
+Capco\AppBundle\Entity\Source:
+    source1:
+        title: <text(20)>
+        body: <text(1000)>
+        Author: @user1
+        Opinion: @opinion1
+        Category: @Category1
+        link: <url()>
+        voteCountSource: <numberBetween(0, 50)>
+    source2:
+        title: <text(20)>
+        body: <text(1000)>
+        Author: @user1
+        Opinion: @opinion2
+        Category: @Category2
+        link: <url()>
+        voteCountSource: <numberBetween(0, 50)>
+    source3:
+        title: <text(20)>
+        body: <text(1000)>
+        Author: @user1
+        Opinion: @opinion3
+        Category: @Category3
+        link: <url()>
+        voteCountSource: <numberBetween(0, 50)>
+    source4:
+        title: <text(20)>
+        body: <text(1000)>
+        Author: @user3
+        Opinion: @opinion1
+        Category: @Category4
+        link: <url()>
+        voteCountSource: <numberBetween(0, 50)>
+    source5:
+        title: <text(20)>
+        body: <text(1000)>
+        Author: @user2
+        Opinion: @opinion2
+        Category: @Category5
+        link: <url()>
+        voteCountSource: <numberBetween(0, 50)>
+    source6:
+        title: <text(20)>
+        body: <text(1000)>
+        Author: @user1
+        Opinion: @opinion3
+        Category: @Category*
+        link: <url()>
+        voteCountSource: <numberBetween(0, 50)>
+    source7:
+        title: <text(20)>
+        body: <text(1000)>
+        Author: @user1
+        Opinion: @opinion1
+        Category: @Category*
+        link: <url()>
+        voteCountSource: <numberBetween(0, 50)>
+    source8:
+        title: <text(20)>
+        body: <text(1000)>
+        Author: @user3
+        Opinion: @opinion1
+        Category: @Category*
+        link: <url()>
+        voteCountSource: <numberBetween(0, 50)>
+    source9:
+        title: <text(20)>
+        body: <text(1000)>
+        Author: @user2
+        Opinion: @opinion2
+        Category: @Category*
+        link: <url()>
+        voteCountSource: <numberBetween(0, 50)>
+    source10:
+        title: <text(20)>
+        body: <text(1000)>
+        Author: @user3
+        Opinion: @opinion2
+        Category: @Category*
+        link: <url()>
+        voteCountSource: <numberBetween(0, 50)>
+    source{11..35}:
+        title: <text(20)>
+        body: <text(1000)>
+        Author: @user*
+        Category: @Category*
+        Opinion: @opinion<numberBetween(1, 30)>
+        link: <url()>
+        voteCountSource: <numberBetween(0, 50)>

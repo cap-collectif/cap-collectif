@@ -150,3 +150,19 @@ services:
             - {name: sonata.admin, manager_type: orm, group: admin.group.reference, label: admin.label.site_image}
         calls:
             - [ setTranslationDomain, [SonataAdminBundle]]
+
+    capco_admin.admin.category:
+        class: Capco\AdminBundle\Admin\CategoryAdmin
+        arguments: [~, Capco\AppBundle\Entity\Category, SonataAdminBundle:CRUD]
+        tags:
+            - {name: sonata.admin, manager_type: orm, group: admin.group.consultation, label: admin.label.category}
+        calls:
+            - [ setTranslationDomain, [SonataAdminBundle]]
+
+    capco_admin.admin.source:
+        class: Capco\AdminBundle\Admin\SourceAdmin
+        arguments: [~, Capco\AppBundle\Entity\Source, SonataAdminBundle:CRUD]
+        tags:
+            - {name: sonata.admin, manager_type: orm, group: admin.group.consultation, label: admin.label.source}
+        calls:
+            - [ setTranslationDomain, [SonataAdminBundle]]

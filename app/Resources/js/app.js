@@ -55,11 +55,22 @@ App.module = function ($) {
         }
     };
 
+    var checkButton = function(el) {
+        var $el = $(el);
+
+        $($el).on('change', function(){
+            var test = $(this).val();
+            test == 0 ? $(".block_link").toggle() :  $(".block_link").hide();
+            test == 1 ? $(".block_media").toggle() :  $(".block_media").hide();
+        });
+    };
+
     var AppPublic = {
         equalheight: equalheight,
         rezised: rezised,
         ckEditor: ckEditor,
-        pieChart: pieChart
+        pieChart: pieChart,
+        checkButton: checkButton
     };
 
     return AppPublic;

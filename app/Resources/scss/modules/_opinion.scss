@@ -251,9 +251,11 @@
 .opinion__description {
   padding: 15px;
   border-top: 1px solid $border;
+  overflow: hidden;
 
   .opinion__buttons {
     overflow: hidden;
+    margin-bottom: 30px;
   }
 
   .opinion__vote-group {
@@ -368,4 +370,13 @@
   .opinion__header__title {
     color: $brand-danger;
   }
+}
+
+.nb-votes {
+  display: inline-block;
+  border: 1px solid silver;
+  font-size: 12px;
+  line-height: 1.5;
+  padding: 1px 5px;
+  vertical-align: middle;
 }

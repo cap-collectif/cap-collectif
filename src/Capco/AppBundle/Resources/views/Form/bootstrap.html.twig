@@ -123,6 +123,17 @@
     {% endif %}
 {%- endblock radio_widget %}
 
+{% block _capco_app_source_type_widget %}
+    <div class="btn-group" data-toggle="buttons">
+        {% for child in form %}
+            {% set sourceType = child.vars['value'] %}
+            <label class="btn btn-primary {% if sourceType == buttonActive %}active{% endif %}">
+                {{ form_widget(child, { 'attr': {'class': 'typeBtn'} }) }}
+            </label>
+        {% endfor %}
+    </div>
+{% endblock %}
+
 {# Labels #}
 
 {% block form_label -%}
@@ -230,5 +241,3 @@
         </label>
     {% endspaceless %}
 {% endblock %}
-
-

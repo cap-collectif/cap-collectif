@@ -1,0 +1,21 @@
+Capco\AppBundle\Entity\Category:
+    Category1:
+        title: Études
+        isEnabled: <boolean(100)>
+        createdAt: <dateTimeBetween('-1 years','now')>
+    Category2:
+        title: Politique
+        isEnabled: <boolean(100)>
+        createdAt: <dateTimeBetween('-1 years','now')>
+    Category3:
+        title: Commerces
+        isEnabled: <boolean(100)>
+        createdAt: <dateTimeBetween('-1 years','now')>
+    Category4:
+        title: Financements
+        isEnabled: <boolean(5)>
+        createdAt: <dateTimeBetween('-1 years','now')>
+    Category5:
+        title: Transports
+        isEnabled: <boolean(5)>
+        createdAt: <dateTimeBetween('-1 years','now')>

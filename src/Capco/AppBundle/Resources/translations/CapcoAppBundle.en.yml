@@ -80,6 +80,31 @@ theme:
     ideas:
       none: No idea related to this topic
 
+source:
+  update:
+    title_block: Modifier une source
+    text_alert: Attention ! En modifiant votre source, vous perdrez tous les votes qui lui sont associés.
+    remove_button: Supprimer
+    reset_submit: Annuler
+    edit_submit: Modifier
+  delete:
+    title_block: Supprimer une source
+    text_alert: Êtes-vous sûr de vouloir supprimer cette source ?
+    reset_submit: Annuler
+    remove_submit: Supprimer
+  form:
+    title: Title
+    link: Link
+    body: Text
+    category: Category
+    file: File
+  type:
+    link: Link
+    file: File
+  show:
+    add: Add source
+    count: "{0} Aucune source | {1} 1 source | ]1,Inf[ %count% sources"
+
 #Consultation
 consultation:
   title: Consultations

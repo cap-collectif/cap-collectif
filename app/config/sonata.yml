@@ -38,6 +38,8 @@ sonata_admin:
                     - capco_admin.admin.argument
                     - capco_admin.admin.argument_vote
                     - capco_admin.admin.reporting
+                    - capco_admin.admin.category
+                    - capco_admin.admin.source
             admin.group.reference:
                 items:
                     - capco_admin.admin.theme
@@ -146,6 +148,17 @@ sonata_media:
         local:
             directory:  %kernel.root_dir%/../web/media
             create:     true
+
+    providers:
+        file:
+            service:    sonata.media.provider.file
+            resizer:    false
+            filesystem: sonata.media.filesystem.local
+            cdn:        sonata.media.cdn.server
+            generator:  sonata.media.generator.default
+            thumbnail:  sonata.media.thumbnail.format
+            allowed_extensions: ['pdf', 'txt', 'rtf', 'doc', 'docx', 'xls', 'xlsx', 'ppt', 'pttx', 'odt', 'odg', 'odp', 'ods', 'odc', 'odf', 'odb', 'csv', 'xml']
+            allowed_mime_types: ['application/pdf', 'application/x-pdf', 'application/rtf', 'text/html', 'text/rtf', 'text/plain']
 
 sonata_user:
     security_acl: true

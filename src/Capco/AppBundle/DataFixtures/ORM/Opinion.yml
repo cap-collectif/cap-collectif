@@ -11,6 +11,7 @@ Capco\AppBundle\Entity\Opinion:
         voteCountMitige: <numberBetween(0, 50)>
         voteCountOk: <numberBetween(0, 50)>
         voteCountNok: <numberBetween(0, 50)>
+        sourceCount: <numberBetween(0, 50)>
     opinion2:
         title: <text(20)>
         body: <text(1000)>
@@ -23,6 +24,7 @@ Capco\AppBundle\Entity\Opinion:
         voteCountMitige: <numberBetween(0, 50)>
         voteCountOk: <numberBetween(0, 50)>
         voteCountNok: <numberBetween(0, 50)>
+        sourceCount: <numberBetween(0, 50)>
     opinion3:
         title: <text(20)>
         body: <text(1000)>
@@ -35,6 +37,7 @@ Capco\AppBundle\Entity\Opinion:
         voteCountMitige: <numberBetween(0, 50)>
         voteCountOk: <numberBetween(0, 50)>
         voteCountNok: <numberBetween(0, 50)>
+        sourceCount: <numberBetween(0, 50)>
     opinion4:
         title: <text(20)>
         body: <text(1000)>
@@ -47,6 +50,7 @@ Capco\AppBundle\Entity\Opinion:
         voteCountMitige: <numberBetween(0, 50)>
         voteCountOk: <numberBetween(0, 50)>
         voteCountNok: <numberBetween(0, 50)>
+        sourceCount: <numberBetween(0, 50)>
     opinion5:
         title: <text(20)>
         body: <text(1000)>
@@ -59,6 +63,7 @@ Capco\AppBundle\Entity\Opinion:
         voteCountMitige: <numberBetween(0, 50)>
         voteCountOk: <numberBetween(0, 50)>
         voteCountNok: <numberBetween(0, 50)>
+        sourceCount: <numberBetween(0, 50)>
     opinion6:
         title: <text(20)>
         body: <text(1000)>
@@ -71,6 +76,7 @@ Capco\AppBundle\Entity\Opinion:
         voteCountMitige: <numberBetween(0, 50)>
         voteCountOk: <numberBetween(0, 50)>
         voteCountNok: <numberBetween(0, 50)>
+        sourceCount: <numberBetween(0, 50)>
     opinion7:
         title: <text(20)>
         body: <text(1000)>
@@ -83,6 +89,7 @@ Capco\AppBundle\Entity\Opinion:
         voteCountMitige: <numberBetween(0, 50)>
         voteCountOk: <numberBetween(0, 50)>
         voteCountNok: <numberBetween(0, 50)>
+        sourceCount: <numberBetween(0, 50)>
     opinion8:
         title: <text(20)>
         body: <text(1000)>
@@ -95,6 +102,7 @@ Capco\AppBundle\Entity\Opinion:
         voteCountMitige: <numberBetween(0, 50)>
         voteCountOk: <numberBetween(0, 50)>
         voteCountNok: <numberBetween(0, 50)>
+        sourceCount: <numberBetween(0, 50)>
     opinion9:
         title: <text(20)>
         body: <text(1000)>
@@ -107,6 +115,7 @@ Capco\AppBundle\Entity\Opinion:
         voteCountMitige: <numberBetween(0, 50)>
         voteCountOk: <numberBetween(0, 50)>
         voteCountNok: <numberBetween(0, 50)>
+        sourceCount: <numberBetween(0, 50)>
     opinion10:
         title: <text(20)>
         body: <text(1000)>
@@ -119,6 +128,7 @@ Capco\AppBundle\Entity\Opinion:
         voteCountMitige: <numberBetween(0, 50)>
         voteCountOk: <numberBetween(0, 50)>
         voteCountNok: <numberBetween(0, 50)>
+        sourceCount: <numberBetween(0, 50)>
     opinion{11..35}:
         title: <text(20)>
         body: <text(1000)>
@@ -132,3 +142,4 @@ Capco\AppBundle\Entity\Opinion:
         voteCountMitige: <numberBetween(0, 50)>
         voteCountOk: <numberBetween(0, 50)>
         voteCountNok: <numberBetween(0, 50)>
+        sourceCount: <numberBetween(0, 50)>
