@@ -2,7 +2,7 @@ Capco\AppBundle\Entity\MenuItem:
 
   MenuItem1:
     title: Accueil
-    link: /app_dev.php/
+    link: "/"
     isEnabled: 1
     isDeletable: 0
     isFullyModifiable: 0
@@ -12,7 +12,7 @@ Capco\AppBundle\Entity\MenuItem:
 
   MenuItem2:
     title: Thèmes
-    link: /app_dev.php/themes
+    link: themes
     isEnabled: 1
     isDeletable: 0
     isFullyModifiable: 0
@@ -22,7 +22,7 @@ Capco\AppBundle\Entity\MenuItem:
 
   MenuItem3:
     title: Consultations
-    link: /app_dev.php/consultations
+    link: consultations
     isEnabled: 1
     isDeletable: 0
     isFullyModifiable: 0
@@ -32,7 +32,7 @@ Capco\AppBundle\Entity\MenuItem:
 
   MenuItem4:
     title: Boîte à idées
-    link: /app_dev.php/ideas
+    link: ideas
     isEnabled: 1
     isDeletable: 0
     isFullyModifiable: 0
@@ -52,7 +52,7 @@ Capco\AppBundle\Entity\MenuItem:
 
   MenuItem6:
     title: Contact
-    link: /app_dev.php/contact
+    link: contact
     isEnabled: 1
     isDeletable: 0
     isFullyModifiable: 0

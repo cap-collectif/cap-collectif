@@ -19,7 +19,6 @@
                 <span class="navbar__toggle-label">Menu</span>
             </button>
         </div>
-
-        {{ render_esi(controller('CapcoAppBundle:Default:navigation')) }}
+        {{ render_esi(controller('CapcoAppBundle:Default:navigation', { pathInfo: app.request.pathInfo })) }}
     </div>
 </nav>

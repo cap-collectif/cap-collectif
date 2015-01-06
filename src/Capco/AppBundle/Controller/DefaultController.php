@@ -74,7 +74,7 @@ class DefaultController extends Controller
      * @Cache(expires="+1 minutes", maxage="60", smaxage="0", public="false")
      * @Template()
      */
-    public function navigationAction()
+    public function navigationAction($pathInfo = null)
     {
         $headerMenu = $this->getDoctrine()->getRepository('CapcoAppBundle:Menu')->findIdForType(Menu::TYPE_HEADER);
 
@@ -85,6 +85,7 @@ class DefaultController extends Controller
         }
 
         return [
+            'pathInfo' => $pathInfo,
             'headerLinks' => $headerLinks
         ];
     }

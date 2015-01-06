@@ -5,6 +5,7 @@ parameters:
     capco.site_image.repository.class: Capco\AppBundle\Repository\SiteImageRepository
     capco.site_image.resolver.class: Capco\AppBundle\SiteImage\Resolver
     capco.twig_extension.site_image.class: Capco\AppBundle\Twig\SiteImageExtension
+    capco.twig_extension.menu_url.class: Capco\AppBundle\Twig\MenuLinkExtension
 
 services:
     capco.site_parameter.repository:
@@ -42,6 +43,12 @@ services:
     capco.twig.site_image:
         class: %capco.twig_extension.site_image.class%
         arguments: [ @capco.site_image.resolver ]
+        tags:
+            - { name: twig.extension }
+
+    capco.twig.menu_url:
+        class: %capco.twig_extension.menu_url.class%
+        arguments: [ @router, @validator ]
         tags:
             - { name: twig.extension }
 

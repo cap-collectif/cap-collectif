@@ -1,5 +1,5 @@
-{% macro nav_item(route, text, route_match) %}
-    <li{% if app.request.attributes.get('_route') starts with route_match %} class="active"{% endif %}><a href="{{ path(route) }}">{{ text }}</a></li>
+{% macro nav_item(pathInfo, link, text) %}
+    <li{% if pathInfo == link or pathInfo starts with '/' ~ link %} class="active"{% endif %}><a href="{{ menu_url(link) }}">{{ text }}</a></li>
 {% endmacro %}
 {% from _self import nav_item %}
 
@@ -12,16 +12,12 @@
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{ headerLink.title}} <span class="caret"></span></a>
                     <ul class="dropdown-menu" role="menu">
                         {% for child in headerLink.children %}
-                        <li><a href="{{ child.link }}">{{ child.title }}</a></li>
+                        {{ nav_item(pathInfo, child.link, child.title) }}
                         {% endfor %}
                     </ul>
                 </li>
             {% else %}
-                <li{% if app.request.attributes.get('_route') starts with headerLink.link %} class="active"{% endif %}>
-                    <a href="{{ headerLink.link }}">
-                        {{ headerLink.title }}
-                    </a>
-                </li>
+                {{ nav_item(pathInfo, headerLink.link, headerLink.title) }}
             {% endif %}
         {% endfor %}
     </ul>

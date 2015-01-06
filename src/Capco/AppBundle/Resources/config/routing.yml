@@ -1,0 +1,6 @@
+capco_app_cms:
+    pattern:  /{url}
+    defaults: { } # no default, only use for generation...
+    requirements:
+        _method: GET
+        url: "^.*$"
