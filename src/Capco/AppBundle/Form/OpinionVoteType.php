@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\Form;
 
+use Capco\AppBundle\Entity\OpinionVote;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
@@ -14,6 +15,15 @@ class OpinionVoteType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        $builder
+            ->add('value', 'choice', array(
+                'choices' => OpinionVote::$voteTypesLabels,
+                'translation_domain' => 'CapcoAppBundle',
+                'multiple' => false,
+                'expanded' => true,
+                'attr' => array('onchange' => "document.getElementById('opinion_vote_form').submit()")
+            ))
+        ;
     }
 
     /**

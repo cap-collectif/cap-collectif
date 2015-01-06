@@ -104,18 +104,18 @@ class OpinionController extends Controller
 
         // OpinionVote forms
         $opinionVote = null;
-        $userVote = null;
+        $previousVote = null;
         $userHasVoted = false;
 
         if ($this->get('security.authorization_checker')->isGranted('ROLE_USER')) {
-            $userVote = $this->getDoctrine()->getRepository('CapcoAppBundle:OpinionVote')->findOneBy(array(
+            $previousVote = $this->getDoctrine()->getRepository('CapcoAppBundle:OpinionVote')->findOneBy(array(
                 'Voter' => $this->getUser(),
                 'opinion' => $opinion
             ));
         }
 
-        if ( $userVote != null ){
-            $opinionVote = $userVote;
+        if ( $previousVote != null ){
+            $opinionVote = $previousVote;
             $userHasVoted = true;
         } else {
             $opinionVote = new OpinionVote();
@@ -123,9 +123,7 @@ class OpinionController extends Controller
             $opinionVote->setVoter($this->getUser());
         }
 
-        $opinionVoteNokForm = $this->get('form.factory')->createNamedBuilder('opinionVoteNokForm', new OpinionVoteForm(), $opinionVote)->getForm();
-        $opinionVoteOkForm = $this->get('form.factory')->createNamedBuilder('opinionVoteOkForm', new OpinionVoteForm(), $opinionVote)->getForm();
-        $opinionVoteMitigeForm = $this->get('form.factory')->createNamedBuilder('opinionVoteMitigeForm', new OpinionVoteForm(), $opinionVote)->getForm();
+        $opinionVoteForm = $this->get('form.factory')->createNamedBuilder('opinionVoteForm', new OpinionVoteForm(), $opinionVote, ['attr' => ['id' => 'opinion_vote_form']])->getForm();
 
 
         if ('POST' === $request->getMethod()) {
@@ -144,19 +142,9 @@ class OpinionController extends Controller
                 $this->handleCreateArgumentForm($opinion, $argument, $form, $request);
             }
 
-            if ($request->request->has('opinionVoteNokForm')) {
-                $form = $opinionVoteNokForm;
-                $this->handleOpinionVoteForm($opinion, $opinionVote, OpinionVote::VOTE_NOK, $userHasVoted, $form, $request);
-            }
-
-            if ($request->request->has('opinionVoteOkForm')) {
-                $form = $opinionVoteOkForm;
-                $this->handleOpinionVoteForm($opinion, $opinionVote, OpinionVote::VOTE_OK, $userHasVoted, $form, $request);
-            }
-
-            if ($request->request->has('opinionVoteMitigeForm')) {
-                $form = $opinionVoteMitigeForm;
-                $this->handleOpinionVoteForm($opinion, $opinionVote, OpinionVote::VOTE_MITIGE, $userHasVoted, $form, $request);
+            if ($request->request->has('opinionVoteForm')) {
+                $form = $opinionVoteForm;
+                $this->handleOpinionVoteForm($opinion, $opinionVote, $userHasVoted, $form, $request);
             }
 
             return $this->redirect($this->generateUrl('app_consultation_show_opinion', ['consultation_slug' => $consultation->getSlug(), 'opinion_type_slug' => $opinionType->getSlug(), 'opinion_slug' => $opinion->getSlug() ]));
@@ -171,11 +159,10 @@ class OpinionController extends Controller
             'argumentFormYes' => $argumentFormYes->createView(),
             'argumentFormNo' => $argumentFormNo->createView(),
             'argumentTypes' => Argument::$argumentTypes,
-            'userVote' => $userVote,
+            'previousVote' => $previousVote,
             'opinionVoteTypes' => OpinionVote::$voteTypes,
-            'opinionVoteNokForm' => $opinionVoteNokForm->createView(),
-            'opinionVoteOkForm' => $opinionVoteOkForm->createView(),
-            'opinionVoteMitigeForm' => $opinionVoteMitigeForm->createView(),
+            'opinionVoteStyles' => OpinionVote::$voteTypesStyles,
+            'opinionVoteForm' => $opinionVoteForm->createView(),
         ];
     }
 
@@ -298,7 +285,7 @@ class OpinionController extends Controller
      * @param $alreadyVoted
      * @return array
      */
-    private function handleOpinionVoteForm(Opinion $opinion, OpinionVote $opinionVote, $type, $alreadyVoted, Form $form, Request $request)
+    private function handleOpinionVoteForm(Opinion $opinion, OpinionVote $opinionVote, $alreadyVoted = false, Form $form, Request $request)
     {
         if (false === $this->get('security.authorization_checker')->isGranted('ROLE_USER')) {
             throw new AccessDeniedException('Access restricted to authenticated users');
@@ -310,23 +297,33 @@ class OpinionController extends Controller
 
             $em = $this->getDoctrine()->getManager();
 
-            if ($alreadyVoted == false) {
-                $opinionVote->setValue($type);
-                $opinion->addVoteWithType($type);
+            if (!$alreadyVoted) {
+                $opinion->addVoteWithType($opinionVote->getValue());
                 $em->persist($opinionVote);
                 $em->persist($opinion);
                 $em->flush();
                 $this->get('session')->getFlashBag()->add('success', $this->get('translator')->trans('Your vote has been saved.'));
             } else {
-                $opinion->removeVoteWithType($type);
-                $em->persist($opinion);
-                $em->remove($opinionVote);
-                $em->flush();
-                $this->get('session')->getFlashBag()->add('info', $this->get('translator')->trans('Your vote has been removed.'));
+                $previousVote = $em->getUnitOfWork()->getOriginalEntityData($opinionVote);
+                if($previousVote['value'] == $opinionVote->getValue()){
+                    $opinion->removeVoteWithType($opinionVote->getValue());
+                    $em->persist($opinion);
+                    $em->remove($opinionVote);
+                    $em->flush();
+                    $this->get('session')->getFlashBag()->add('info', $this->get('translator')->trans('Your vote has been removed.'));
+                }
+                else {
+                    $opinion->removeVoteWithType($previousVote['value']);
+                    $opinion->addVoteWithType($opinionVote->getValue());
+                    $em->persist($opinion);
+                    $em->persist($opinionVote);
+                    $em->flush();
+                    $this->get('session')->getFlashBag()->add('success', $this->get('translator')->trans('Your vote has been updated.'));
+                }
             }
 
         } else {
-            $this->get('session')->getFlashBag()->add('danger', $this->get('translator')->trans('Your vote has not been saved.'));
+            $this->get('session')->getFlashBag()->add('danger', $this->get('translator')->trans('Error. Your vote has not been saved.'));
         }
     }
 
