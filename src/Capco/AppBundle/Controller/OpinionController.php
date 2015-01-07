@@ -303,7 +303,6 @@ class OpinionController extends Controller
      */
     public function showOpinionAction($consultation_slug, $opinion_type_slug, $opinion_slug, Request $request, $argumentSort = null)
     {
-
         $opinion = $this->getDoctrine()->getRepository('CapcoAppBundle:Opinion')->getOpinion($consultation_slug, $opinion_type_slug, $opinion_slug);
 
         if (empty($opinion)) {
@@ -422,6 +421,7 @@ class OpinionController extends Controller
             'argumentFormYes' => $argumentFormYes->createView(),
             'argumentFormNo' => $argumentFormNo->createView(),
             'argumentTypes' => Argument::$argumentTypes,
+            'argumentTypesLabels' => Argument::$argumentTypesLabels,
             'previousVote' => $previousVote,
             'opinionVoteTypes' => OpinionVote::$voteTypes,
             'opinionVoteStyles' => OpinionVote::$voteTypesStyles,

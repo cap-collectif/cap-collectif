@@ -17,7 +17,7 @@ class ReportingType extends AbstractType
     {
         $builder
             ->add('status', 'choice', array(
-                'choices' => Reporting::$openingStatusesLabels,
+                'choices' => Reporting::$statusesLabels,
                 'translation_domain' => 'CapcoAppBundle',
                 'label' => 'reporting.form.status',
             ))

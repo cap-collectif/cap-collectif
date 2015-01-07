@@ -2,35 +2,33 @@
 admin.group.content: Contenu
 admin.group.consultation: Consultations
 admin.group.navigation: Navigation
-admin.group.marketing: Marketing
+admin.group.marketing: Communication
 admin.group.ideas: Boite à idées
-admin.group.reference: Données de référence
+admin.group.parameters: Paramètres
 sonata.admin.group.user: Utilisateurs et groupes
+admin.group.moderation: Contributions
 
 # Dashboard names
-admin.label.page: Page
-admin.label.menu: Menu
-admin.label.menu_item: Élément de menu
-admin.label.argument: Argument
-admin.label.argument_vote: "Vote d'argument"
-admin.label.consultation: Consultation
-admin.label.footer_social_network: Réseau social du footer
-admin.label.idea: Idée
-admin.label.idea_vote: "Vote d'idée"
-admin.label.newsletter_subscription: "Abonnement à la lettre d'information"
-admin.label.opinion: Opinion
-admin.label.opinion_type: "Type d'opinion"
-admin.label.problem: Problème
-admin.label.problem_type: Type de problème
-admin.label.reporting: Signalement
-admin.label.step: Étape
-admin.label.theme: Thème
-admin.label.vote: Vote
-admin.label.site_parameter: Paramètre du site
-admin.label.site_image: Images du site
-admin.label.social_network: Réseau social
-admin.label.category: Catégorie
-admin.label.source: Source
+admin.label.page: Pages
+admin.label.menu_item: Navigation
+admin.label.argument: Arguments
+admin.label.argument_vote: "Vote sur les arguments"
+admin.label.consultation: Consultations
+admin.label.footer_social_network: Réseaux sociaux (pied de page)
+admin.label.idea: Idées
+admin.label.idea_vote: "Votes sur les idées"
+admin.label.newsletter_subscription: "Lettre d'information"
+admin.label.opinion: Propositions
+admin.label.opinion_type: "Types de propositions"
+admin.label.opinion_vote: "Votes sur les propositions"
+admin.label.reporting: Signalements
+admin.label.step: Étapes
+admin.label.theme: Thèmes
+admin.label.site_parameter: Informations
+admin.label.site_image: Apparence
+admin.label.social_network: Réseaux sociaux (page d'accueil)
+admin.label.category: Types de sources
+admin.label.source: Sources
 
 # Messages
 admin:
@@ -38,7 +36,203 @@ admin:
     step:
       endAt: Si l'étape ne dure qu'une journée, renseignez la même date que pour la date de début.
     consultation:
-      closedAt: Si la consultation ne dure qu'une journée, renseignez la même date que pour la date de début.
+      closed_at: Si la consultation ne dure qu'une journée, renseignez la même date que pour la date de début.
       steps: |
                 Ajoutez ici les étapes postérieures ou antérieures à la consultation (synthèse finale, présentation préliminaire...). L'étape correspondant à la consultation elle-même sera créée automatiquement en fonction des dates renseignées.
                 Vous pouvez ajouter des étapes créées au préalable ou les ajouter ultérieurement via le menu de création d'étapes.
+      video: Entre l'URL embed de la vidéo souhaitée. Ex: //www.youtube.com/embed/wTcNtgA6gHs
+    menu_item:
+      parent: Non applicable pour les éléments du menu de bas de page (footer).
+      link: Si vous avez associé une page à l'élément de menu, le lien sera défini automatiquement.
+
+  fields:
+    argument:
+      body: Contenu
+      type: Type d'argument
+      author: Auteur
+      opinion: Proposition
+      updated_at: Mise à jour
+      created_at: Création
+      vote_count: Nombre de votes
+      is_enabled: Publié
+      is_trashed: Dans la corbeille
+    argument_vote:
+      argument: Argument
+      voter: Auteur
+      updated_at: Mise à jour
+      created_at: Création
+    category:
+      title: Titre
+      sources: Sources
+      is_enabled: Publié
+      updated_at: Mise à jour
+      created_at: Création
+    consultation:
+      title: Titre
+      author: Auteur
+      teaser: Accroche
+      body: Contenu
+      themes: Thèmes
+      steps: Étapes
+      opening_status: Statut
+      opened_at: Ouvert
+      closed_at: Fermé
+      opinion_count: Propositions
+      trashed_opinion_count: Propositions dans la corbeille
+      argument_count: Arguments
+      trashed_argument_count: Arguments dans la corbeille
+      is_enabled: Publié
+      updated_at: Mise à jour
+      created_at: Création
+      cover: Image de couverture
+      video: Vidéo
+    footer_social_network:
+      title: Titre
+      is_enabled: Publié
+      style: Icône
+      link: Lien
+      position: Position
+      updated_at: Mise à jour
+    idea:
+      title: Titre
+      body: Contenu
+      theme: Thème
+      vote_count: Nombre de votes
+      author: Auteur
+      is_enabled: Publié
+      is_trashed: Dans la corbeille
+      updated_at: Mise à jour
+      media: Image
+    idea_vote:
+      idea: Idée
+      voter: Auteur
+      created_at: Création
+      updated_at: Mise à jour
+    menu_item:
+      title: Titre
+      menu: Type de menu
+      is_enabled: Publié
+      position: Position
+      parent: Parent
+      page: Page
+      link: Lien
+      updated_at: Mise à jour
+      created_at: Création
+    newsletter_subscription:
+      email: Email
+      is_enabled: Abonné
+      created_at: Création
+    opinion:
+      title: Titre
+      author: Auteur
+      body: Contenu
+      consultation: Consultation
+      opinion_type: Type de proposition
+      is_enabled: Publié
+      is_trashed: Dans la corbeille
+      updated_at: Mise à jour
+      created_at: Création
+      trashed_reason: Raison de la mise en corbeille
+      vote_count_total: Votes
+      vote_count_ok: Votes pour
+      vote_count_nok: Votes contre
+      vote_count_mitige: Votes mitigés
+      trashed_at: Mise à la corbeille
+      argument_count: Arguments
+      source_count: Sources
+    opinion_type:
+      title: Titre
+      short_name: Nom court
+      vote_widget_type: Type de vote
+      color: Couleur
+      opinions: Propositions
+      is_enabled: Contribuable
+      updated_at: Mise à jour
+    opinion_vote:
+      opinion: Proposition
+      voter: Auteur
+      value: Valeur
+      updated_at: Mise à jour
+      created_at: Création
+    page:
+      title: Titre
+      body: Contenu
+      is_enabled: Publié
+      url: URL
+      menu_items: Menus
+      updated_at: Mise à jour
+    reporting:
+      status: Type de problème
+      reporter: Auteur
+      object: Contenu
+      type: Type de contenu
+      updated_at: Mise à jour
+      created_at: Création
+      opinion: Proposition
+      source: Source
+      argument: Argument
+      idea: Idée
+      is_archived: Archivé
+    site_image:
+      title: Description
+      media: Image
+      is_enabled: Publié
+      updated_at: Mise à jour
+    site_parameter:
+      title: Description
+      value: Valeur
+      is_enabled: Publié
+      updated_at: Mise à jour
+    social_network:
+      title: Titre
+      is_enabled: Publié
+      link: Lien
+      media: Image
+      position: Position
+      updated_at: Mise à jour
+    source:
+      title: Titre
+      author: Auteur
+      opinion: Proposition
+      link: Lien
+      vote_count_source: Nombre de votes
+      created_at: Création
+      updated_at: Mise à jour
+      body: Contenu
+      category: Type
+      is_enabled: Publié
+      is_trashed: Dans la corbeille
+    step:
+      title: Titre
+      start_at: Commence
+      end_at: Termine
+      position: Position
+      is_enabled: Publié
+      consultation: Consultation
+      type: Type d'étape
+      body: Contenu
+    theme:
+      title: Titre
+      is_enabled: Publié
+      teaser: Accroche
+      body: Contenu
+      consultations: Consultations
+      ideas: Idées
+      media: Image
+      updated_at: Mise à jour
+      created_at: Création
+    user:
+      username: Nom d'utilisateur
+      email: Email
+      groups: Groupes
+      enabled: Activé
+      locked: Verrouillé
+      created_at: Créé le
+  action:
+    reporting:
+      disable:
+        label: Désactiver le contenu
+        success: Le contenu a été désactivé.
+      trash:
+        label: Mettre le contenu à la corbeille
+        success: Le contenu a été placé dans la corbeille.

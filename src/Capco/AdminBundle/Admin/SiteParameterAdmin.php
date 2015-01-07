@@ -12,13 +12,30 @@ use Sonata\AdminBundle\Route\RouteCollection;
 
 class SiteParameterAdmin extends Admin
 {
+
+    protected $datagridValues = array(
+        '_sort_order' => 'ASC',
+        '_sort_by' => 'title'
+    );
+
     /**
      * @param DatagridMapper $datagridMapper
      */
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
         $datagridMapper
-            ->add('updatedAt')
+            ->add('title', null, array(
+                'label' => 'admin.fields.site_parameter.title',
+            ))
+            ->add('value', null, array(
+                'label' => 'admin.fields.site_parameter.value',
+            ))
+            ->add('isEnabled', null, array(
+                'label' => 'admin.fields.site_parameter.is_enabled',
+            ))
+            ->add('updatedAt', null, array(
+                'label' => 'admin.fields.site_parameter.updated_at',
+            ))
         ;
     }
 
@@ -28,14 +45,23 @@ class SiteParameterAdmin extends Admin
     protected function configureListFields(ListMapper $listMapper)
     {
         $listMapper
-            ->add('title')
-            ->add('value')
-            ->add('isEnabled', null, array('editable' => true))
-            ->add('updatedAt')
+            ->addIdentifier('title', null, array(
+                'label' => 'admin.fields.site_parameter.title',
+            ))
+            ->add('value', null, array(
+                'label' => 'admin.fields.site_parameter.value',
+            ))
+            ->add('isEnabled', null, array(
+                'editable' => true,
+                'label' => 'admin.fields.site_parameter.is_enabled',
+            ))
+            ->add('updatedAt', null, array(
+                'label' => 'admin.fields.site_parameter.updated_at',
+            ))
             ->add('_action', 'actions', array(
                 'actions' => array(
+                    'show' => array(),
                     'edit' => array(),
-                    'delete' => array(),
                 )
             ))
         ;
@@ -47,8 +73,13 @@ class SiteParameterAdmin extends Admin
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
-            ->add('value')
-            ->add('isEnabled')
+            ->add('isEnabled', null, array(
+                'label' => 'admin.fields.site_parameter.is_enabled',
+                'required' => false,
+            ))
+            ->add('value', null, array(
+                'label' => 'admin.fields.site_parameter.value',
+            ))
         ;
     }
 
@@ -58,15 +89,24 @@ class SiteParameterAdmin extends Admin
     protected function configureShowFields(ShowMapper $showMapper)
     {
         $showMapper
-            ->add('title')
-            ->add('value')
-            ->add('updatedAt')
+            ->add('title', null, array(
+                'label' => 'admin.fields.site_parameter.title',
+            ))
+            ->add('value', null, array(
+                'label' => 'admin.fields.site_parameter.value',
+            ))
+            ->add('isEnabled', null, array(
+                'label' => 'admin.fields.site_parameter.is_enabled',
+            ))
+            ->add('updatedAt', null, array(
+                'label' => 'admin.fields.site_parameter.updated_at',
+            ))
         ;
     }
 
     protected function configureRoutes(RouteCollection $collection)
     {
-        $collection->remove('delete');
         $collection->remove('create');
+        $collection->remove('delete');
     }
 }

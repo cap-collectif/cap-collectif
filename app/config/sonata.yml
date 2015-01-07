@@ -6,46 +6,50 @@ sonata_admin:
         layout: CapcoAdminBundle::standard_layout.html.twig
     dashboard:
         blocks:
-            - { position: left,  type: sonata.admin.block.admin_list, settings: { groups: [sonata.admin.group.user, admin.group.content, admin.group.navigation, admin.group.marketing, admin.group.ideas] } }
-            - { position: right, type: sonata.admin.block.admin_list, settings: { groups: [admin.group.consultation, admin.group.reference] } }
+            - { position: left,  type: sonata.admin.block.admin_list, settings: { groups: [admin.group.moderation, admin.group.content, admin.group.consultation, admin.group.ideas] } }
+            - { position: right, type: sonata.admin.block.admin_list, settings: { groups: [sonata.admin.group.user, admin.group.marketing, admin.group.parameters] } }
         groups:
-            sonata.admin.group.user:
+            admin.group.moderation:
                 items:
-                    - sonata.user.admin.user
-                    - sonata.user.admin.group
-            admin.group.navigation:
-                items:
-                    - capco_admin.admin.menu_item
+                    - capco_admin.admin.reporting
+                    - capco_admin.admin.opinion
+                    - capco_admin.admin.argument
+                    - capco_admin.admin.source
+                    - capco_admin.admin.idea
             admin.group.content:
                 items:
+                    - capco_admin.admin.theme
                     - capco_admin.admin.page
                     - sonata.media.admin.media
-            admin.group.marketing:
-                items:
-                    - capco_admin.admin.newsletter_subscription
-                    - capco_admin.admin.social_network
-                    - capco_admin.admin.footer_social_network
-            admin.group.ideas:
-                items:
-                    - capco_admin.admin.idea
-                    - capco_admin.admin.idea_vote
             admin.group.consultation:
                 items:
                     - capco_admin.admin.consultation
                     - capco_admin.admin.step
                     - capco_admin.admin.opinion
-                    - capco_admin.admin.vote
+                    - capco_admin.admin.opinion_vote
                     - capco_admin.admin.argument
                     - capco_admin.admin.argument_vote
-                    - capco_admin.admin.reporting
-                    - capco_admin.admin.category
                     - capco_admin.admin.source
-            admin.group.reference:
+            admin.group.ideas:
                 items:
-                    - capco_admin.admin.theme
-                    - capco_admin.admin.opinion_type
+                    - capco_admin.admin.idea
+                    - capco_admin.admin.idea_vote
+            sonata.admin.group.user:
+                items:
+                    - sonata.user.admin.user
+                    - sonata.user.admin.group
+            admin.group.marketing:
+                items:
+                    - capco_admin.admin.newsletter_subscription
+                    - capco_admin.admin.social_network
+                    - capco_admin.admin.footer_social_network
+            admin.group.parameters:
+                items:
                     - capco_admin.admin.site_parameter
                     - capco_admin.admin.site_image
+                    - capco_admin.admin.menu_item
+                    - capco_admin.admin.opinion_type
+                    - capco_admin.admin.category
 
 sonata_doctrine_orm_admin:
     templates:
@@ -116,6 +120,7 @@ sonata_media:
                 profile:        { width: 200, quality: 70 }
                 socialIcon:     { width: 50, height: 50, quality: 70 }
                 logo:           { height: 50, quality: 70 }
+                form:           { height: 150, quality 70 }
 
         sonata_collection:
             providers:
@@ -173,3 +178,6 @@ sonata_user:
         register:
             form:
                 type: capco_user_registration
+    admin:
+        user:
+            class: Capco\AdminBundle\Admin\UserAdmin

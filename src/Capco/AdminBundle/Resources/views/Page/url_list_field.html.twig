@@ -1,7 +1,7 @@
 {% extends 'SonataAdminBundle:CRUD:base_list_field.html.twig' %}
 
 {% block field %}
-    <div>
-    	<span>{{ path('app_page_show', {'slug': object.slug }) }}</span>
-    </div>
+    <p>
+        <a href="{{ path('app_page_show', {'slug': object.slug }) }}">{{ path('app_page_show', {'slug': object.slug }) }}</a>
+    </p>
 {% endblock %}

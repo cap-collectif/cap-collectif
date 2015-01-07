@@ -41,6 +41,9 @@ menu:
   consultations: Consultations
   ideas_box: Boîte à idées
   news: Actualités
+  type:
+    header: Principal
+    footer: Pied de page
 
 # Idea
 idea:
@@ -54,11 +57,11 @@ idea:
     appendices:
       trashed:
         title: Corbeille des idées
-        number: "{0} Aucune idée à la corbeille. | {1} 1 idée à la corbeille. | ]1,Inf[ %count% idées à la corbeille."
+        number: "]-Inf, 0] Aucune idée à la corbeille. | {1} 1 idée à la corbeille. | ]1,Inf[ %count% idées à la corbeille."
         button: Voir la corbeille
       index:
         title: Boîte à idées
-        number: "{0} Aucune idée publiée. | {1} 1 idée publiée. | ]1,Inf[ %count% idées publiées."
+        number: "]-Inf, 0] Aucune idée publiée. | {1} 1 idée publiée. | ]1,Inf[ %count% idées publiées."
         button: Voir toutes les idées
   trashed:
     jumbotron:
@@ -68,7 +71,7 @@ idea:
     vote: Voter
     voted: Vous avez voté
     cancel: Annuler mon vote
-    votes: "{0} Aucun vote | {1} 1 vote | ]1,Inf[ %count% votes"
+    votes: "]-Inf, 0] Aucun vote | {1} 1 vote | ]1,Inf[ %count% votes"
     share: Partager
     report: Signaler
     edit: Modifier
@@ -106,8 +109,8 @@ theme:
     description: Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eos, perspiciatis, cupiditate.
     text_info: Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eos, perspiciatis, cupiditate. Nesciunt eos nam ullam iste iusto similique officia sit enim excepturi numquam natus, ab eum sint perspiciatis repudiandae dolorem.
     search: Rechercher
-    consultations: "{0} Aucune consultation | {1} 1 consultation | ]1,Inf[ %count% consultations"
-    ideas: "{0} Aucune idée | {1} 1 idée | ]1,Inf[ %count% idées"
+    consultations: "]-Inf, 0] Aucune consultation | {1} 1 consultation | ]1,Inf[ %count% consultations"
+    ideas: "]-Inf, 0] Aucune idée | {1} 1 idée | ]1,Inf[ %count% idées"
     none: Aucun thème
   show:
     body_title: Contexte
@@ -134,18 +137,18 @@ consultation:
       opened: Consultation ouverte
       ended: Consultation fermée
       future: Consultation à venir
-    remaining_days: "{0} Consultation terminée | {1} Dernier jour | ]1,Inf[ %count% jours restants"
-    opinions: "{0} Aucune opinion | {1} 1 opinion | ]1,Inf[ %count% opinions"
-    arguments: "{0} Aucun argument | {1} 1 argument | ]1,Inf[ %count% arguments"
-    votes: "{0} Aucun vote | {1} 1 vote | ]1,Inf[ %count% votes"
-    sources: "{0} Aucune source | {1} 1 source | ]1,Inf[ %count% sources"
+    remaining_days: "]-Inf, 0] Consultation terminée | {1} Dernier jour | ]1,Inf[ %count% jours restants"
+    opinions: "]-Inf, 0] Aucune opinion | {1} 1 opinion | ]1,Inf[ %count% opinions"
+    arguments: "]-Inf, 0] Aucun argument | {1} 1 argument | ]1,Inf[ %count% arguments"
+    votes: "]-Inf, 0] Aucun vote | {1} 1 vote | ]1,Inf[ %count% votes"
+    sources: "]-Inf, 0] Aucune source | {1} 1 source | ]1,Inf[ %count% sources"
     trashed:
       title: Corbeille
       short_name: Corbeille
       none: Aucun élèment dans la corbeille
   searchform:
     no_result:  Aucune consultation ne correspond à ces critères de recherche
-  arguments: "{0} Aucun argument | {1} 1 argument | ]1,Inf[ %count% arguments"
+  arguments: "]-Inf, 0] Aucun argument | {1} 1 argument | ]1,Inf[ %count% arguments"
 
 argument:
   update:
@@ -194,7 +197,7 @@ source:
     file: Fichier
   show:
     add: Ajouter une source
-    count: "{0} Aucune source | {1} 1 source | ]1,Inf[ %count% sources"
+    count: "]-Inf, 0] Aucune source | {1} 1 source | ]1,Inf[ %count% sources"
   trashed:
     linked_proposition: Liée à la proposition :
   none: Il n' y a pas de sources.
@@ -214,6 +217,23 @@ reporting:
   form:
     status: Quelle est la nature du problème ?
     body: Message
+  status:
+    sexual: Contenu à caractère sexuel
+    offending: Contenu raciste, offensant ou haineux
+    spam: Spam ou contenu trompeur
+    error: Information erronée
+    off_topic: Propos hors-sujet
+
+opinion_type:
+  colors:
+    red: Rouge
+    green: Vert
+    blue: Bleu
+    orange: Orange
+    bluelight: Bleu clair
+    bluedark: Bleu foncé
+    gray: Gris
+    graylight: Gris clair
 
 #Users
 user:
@@ -258,13 +278,13 @@ user:
           opinions:
             title: Opinions
             published: a publié %startlink%une opinion%endlink%
-            votes: "{0} Aucun vote | {1} 1 vote | ]1,Inf[ %count% votes"
-            arguments: "{0} Aucun argument | {1} 1 argument | ]1,Inf[ %count% arguments"
+            votes: "]-Inf, 0] Aucun vote | {1} 1 vote | ]1,Inf[ %count% votes"
+            arguments: "]-Inf, 0] Aucun argument | {1} 1 argument | ]1,Inf[ %count% arguments"
           problems:
             title: Problèmes
             published: a ajouté %startlink%un problème%endlink%
-            votes: "{0} Aucun vote | {1} 1 vote | ]1,Inf[ %count% votes"
-            arguments: "{0} Aucun argument | {1} 1 argument | ]1,Inf[ %count% arguments"
+            votes: "]-Inf, 0] Aucun vote | {1} 1 vote | ]1,Inf[ %count% votes"
+            arguments: "]-Inf, 0] Aucun argument | {1} 1 argument | ]1,Inf[ %count% arguments"
         arguments:
           title: Arguments
           published: a publié %startlink%un argument%endlink%

@@ -1,0 +1,14 @@
+{% extends 'SonataAdminBundle:CRUD:base_list_field.html.twig' %}
+
+{% block field %}
+
+    {%  set labels = field_description.options.labels %}
+    {%  set styles = field_description.options.styles %}
+    <div>
+        <p>
+            <span class="label label-{{ styles[object.value]['color'] }}">
+                {{ labels[object.value] | trans({}, 'CapcoAppBundle')  }}
+            </span>
+        </p>
+    </div>
+{% endblock %}

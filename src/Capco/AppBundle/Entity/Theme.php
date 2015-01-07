@@ -318,7 +318,7 @@ class Theme
      */
     public function getMedia()
     {
-        return $this->media;
+        return $this->Media;
     }
 
     /**
@@ -326,7 +326,7 @@ class Theme
      */
     public function setMedia($media)
     {
-        $this->media = $media;
+        $this->Media = $media;
     }
 
 
@@ -400,5 +400,17 @@ class Theme
     public function getIdeas()
     {
         return $this->Ideas;
+    }
+
+    public function getBodyExcerpt($nb = 100){
+        $excerpt = substr($this->body, 0, $nb);
+        $excerpt = $excerpt.'...';
+        return $excerpt;
+    }
+
+    public function getTeaserExcerpt($nb = 100){
+        $excerpt = substr($this->teaser, 0, $nb);
+        $excerpt = $excerpt.'...';
+        return $excerpt;
     }
 }

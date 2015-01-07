@@ -1,10 +1,5 @@
 {% set type_text = argumentTypes[argType] %}
-{% set type_display = '' %}
-{% if argType == 0 %}
-    {% set type_display = 'contre' %}
-{% elseif argType == 1 %}
-    {% set type_display = 'pour' %}
-{% endif %}
+{% set type_display = argumentTypesLabels[argType] %}
 <div class="opinion  opinion--add-argument  block  block--shadowed">
     <div class="opinion__body  box">
         {% if app.user.Media %}
@@ -15,8 +10,8 @@
         <div class="opinion__data">
             <form method="post" {{ form_enctype(form) }}>
                 <div class="form-group">
-                    <label class="sr-only" for="arg{{ type_text }}-input">Ajouter un argument {{ type_display }}</label>
-                    {{ form_widget(form.body, {'id': 'arg' ~ type_text ~ '-input', 'attr': {'data-toggle': 'collapse', 'href': '.arg' ~ type_text ~ '-btns', 'rows': 2, 'placeholder':'Ajouter un argument ' ~ type_display, } }) }}
+                    <label class="sr-only" for="arg{{ type_text }}-input">Ajouter un argument {{ type_display|trans({}, 'CapcoAppBundle') }}</label>
+                    {{ form_widget(form.body, {'id': 'arg' ~ type_text ~ '-input', 'attr': {'data-toggle': 'collapse', 'href': '.arg' ~ type_text ~ '-btns', 'rows': 2, 'placeholder':'Ajouter un argument ' ~ type_display|trans({}, 'CapcoAppBundle'), } }) }}
                     {{ form_errors(form.body) }}
                     {{ form_rest(form) }}
                     <div class="collapse  arg{{ type_text }}-btns">

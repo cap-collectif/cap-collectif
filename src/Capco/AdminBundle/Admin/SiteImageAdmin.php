@@ -11,15 +11,26 @@ use Sonata\AdminBundle\Route\RouteCollection;
 
 class SiteImageAdmin extends Admin
 {
+    protected $datagridValues = array(
+        '_sort_order' => 'ASC',
+        '_sort_by' => 'title'
+    );
+
     /**
      * @param DatagridMapper $datagridMapper
      */
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
         $datagridMapper
-            ->add('title')
-            ->add('isEnabled')
-            ->add('Media');
+            ->add('title', null, array(
+                'label' => 'admin.fields.site_image.title',
+            ))
+            ->add('isEnabled', null, array(
+                'label' => 'admin.fields.site_image.is_enabled',
+            ))
+            ->add('updatedAt', null, array(
+                'label' => 'admin.fields.site_image.updated_at',
+            ))
         ;
     }
 
@@ -29,14 +40,25 @@ class SiteImageAdmin extends Admin
     protected function configureListFields(ListMapper $listMapper)
     {
         $listMapper
-            ->add('title')
-            ->add('isEnabled', null, array('editable' => true))
+            ->addIdentifier('title', null, array(
+                'label' => 'admin.fields.site_image.title',
+            ))
             ->add('Media', 'sonata_media_type', array(
+                'label' => 'admin.fields.site_image.media',
                 'template' => 'CapcoAdminBundle:SiteImage:media_list_field.html.twig',
                 'provider' => 'sonata.media.provider.image',
-                'context' => 'default'))
+                'context' => 'default'
+            ))
+            ->add('isEnabled', null, array(
+                'editable' => true,
+                'label' => 'admin.fields.site_image.is_enabled',
+            ))
+            ->add('updatedAt', null, array(
+                'label' => 'admin.fields.site_image.updated_at',
+            ))
             ->add('_action', 'actions', array(
                 'actions' => array(
+                    'show' => array(),
                     'edit' => array(),
                 )
             ))
@@ -49,11 +71,19 @@ class SiteImageAdmin extends Admin
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
-            ->add('title')
-            ->add('isEnabled')
+            ->add('title', null, array(
+                'label' => 'admin.fields.site_image.title',
+            ))
+            ->add('isEnabled', null, array(
+                'label' => 'admin.fields.site_image.is_enabled',
+                'required' => false,
+            ))
             ->add('Media', 'sonata_media_type', array(
+                'label' => 'admin.fields.site_image.media',
                 'provider' => 'sonata.media.provider.image',
-                'context' => 'default'))
+                'context' => 'default',
+                'required' => false,
+            ))
         ;
     }
 
@@ -63,24 +93,25 @@ class SiteImageAdmin extends Admin
     protected function configureShowFields(ShowMapper $showMapper)
     {
         $showMapper
-            ->add('title')
-            ->add('Media', 'sonata_type_media', array(
-                'template' => 'CapcoAdminBundle:SiteImage:media_list_field.html.twig',
-                'provider' => 'sonata.media.provider.image',
-                'context' => 'default'))
-            ->add('isEnabled')
-        ;
+            ->add('title', null, array(
+                'label' => 'admin.fields.site_image.title',
+            ))
+            ->add('Media', 'sonata_media_type', array(
+                'label' => 'admin.fields.site_image.media',
+                'template' => 'CapcoAdminBundle:SiteImage:media_show_field.html.twig',
+            ))
+            ->add('isEnabled', null, array(
+                'label' => 'admin.fields.site_image.is_enabled',
+            ))
+            ->add('updatedAt', null, array(
+                'label' => 'admin.fields.site_image.updated_at',
+            ))
         ;
     }
 
     protected function configureRoutes(RouteCollection $collection)
     {
-        $collection->clearExcept(array('list', 'edit'));
-    }
-
-
-    public function getBatchActions()
-    {
-        return array();
+        $collection->remove('create');
+        $collection->remove('delete');
     }
 }

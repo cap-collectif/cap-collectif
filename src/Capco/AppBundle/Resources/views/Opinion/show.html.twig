@@ -14,7 +14,7 @@
                 {% include '@CapcoApp/Consultation/show_meta.html.twig' %}
             </div>
 
-            {% set nbVotes = (opinion.getVotesAll) %}
+            {% set nbVotes = (opinion.getVoteCountAll) %}
             {% set nbArguments = (opinion.argumentsCount) %}
             {% set nbSources = (opinion.sourcesCount) %}
             <div class="col-xs-12  col-sm-8  col-md-9 has-chart" id="details" data-ok="{{ opinion.voteCountOk }}" data-nok="{{ opinion.voteCountNok }}" data-mitige="{{ opinion.voteCountMitige }}" data-opinion-id="{{ opinion.id }}">

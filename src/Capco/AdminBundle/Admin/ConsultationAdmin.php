@@ -8,19 +8,47 @@ use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Show\ShowMapper;
 
+use Capco\AppBundle\Entity\Consultation;
 use Capco\AppBundle\Entity\Step;
 
 class ConsultationAdmin extends Admin
 {
+
+    protected $datagridValues = array(
+        '_sort_order' => 'ASC',
+        '_sort_by' => 'title'
+    );
+
     /**
      * @param DatagridMapper $datagridMapper
      */
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
         $datagridMapper
-            ->add('createdAt')
-            ->add('opinionCount')
-            ->add('Steps')
+            ->add('title', null, array(
+                'label' => 'admin.fields.consultation.title',
+            ))
+            ->add('Author', null, array(
+                'label' => 'admin.fields.consultation.author',
+            ))
+            ->add('Themes', null, array(
+                'label' => 'admin.fields.consultation.themes',
+            ))
+            ->add('Steps', null, array(
+                'label' => 'admin.fields.consultation.steps',
+            ))
+            ->add('opinionCount', null, array(
+                'label' => 'admin.fields.consultation.opinion_count',
+            ))
+            ->add('argumentCount', null, array(
+                'label' => 'admin.fields.consultation.argument_count',
+            ))
+            ->add('isEnabled', null, array(
+                'label' => 'admin.fields.consultation.is_enabled',
+            ))
+            ->add('updatedAt', null, array(
+                'label' => 'admin.fields.consultation.updated_at',
+            ))
         ;
     }
 
@@ -30,17 +58,44 @@ class ConsultationAdmin extends Admin
     protected function configureListFields(ListMapper $listMapper)
     {
         $listMapper
-            ->addIdentifier('title')
-            ->add('createdAt')
-            ->add('opinionCount')
-            ->add('Steps')
+            ->addIdentifier('title', null, array(
+                'label' => 'admin.fields.consultation.title',
+            ))
+            ->add('Author', 'sonata_type_model', array(
+                'label' => 'admin.fields.consultation.author',
+            ))
+            ->add('Themes', 'sonata_type_collection', array(
+                'label' => 'admin.fields.consultation.themes',
+            ))
+            ->add('openingStatus', null, array(
+                'label' => 'admin.fields.consultation.opening_status',
+                'mapped' => false,
+                'template' => 'CapcoAdminBundle:Consultation:openingStatus_list_field.html.twig',
+                'statuses' => Consultation::$openingStatuses,
+            ))
             ->add('openedAt', null, array(
+                'label' => 'admin.fields.consultation.opened_at',
                 'mapped' => false,
-                'template' => 'CapcoAdminBundle:Consultation:openedAt_list_field.html.twig'))
+                'template' => 'CapcoAdminBundle:Consultation:openedAt_list_field.html.twig'
+            ))
             ->add('closedAt', null, array(
+                'label' => 'admin.fields.consultation.closed_at',
                 'mapped' => false,
-                'template' => 'CapcoAdminBundle:Consultation:closedAt_list_field.html.twig'))
-            ->add('isEnabled', null, array('editable' => true))
+                'template' => 'CapcoAdminBundle:Consultation:closedAt_list_field.html.twig'
+            ))
+            ->add('opinionCount', null, array(
+                'label' => 'admin.fields.consultation.opinion_count',
+            ))
+            ->add('argumentCount', null, array(
+                'label' => 'admin.fields.consultation.argument_count',
+            ))
+            ->add('isEnabled', null, array(
+                'editable' => true,
+                'label' => 'admin.fields.consultation.is_enabled',
+            ))
+            ->add('updatedAt', null, array(
+                'label' => 'admin.fields.consultation.updated_at',
+            ))
             ->add('_action', 'actions', array(
                 'actions' => array(
                     'show' => array(),
@@ -65,35 +120,65 @@ class ConsultationAdmin extends Admin
         }
 
         $formMapper
-            ->add('title')
+            ->add('title', null, array(
+                'label' => 'admin.fields.consultation.title',
+            ))
             ->add('isEnabled', null, array(
+                'label' => 'admin.fields.consultation.is_enabled',
                 'required' => false,
             ))
-            ->add('teaser', null, array(
-                'attr' => array('class' => 'ckeditor')
+            ->add('Author', 'sonata_type_model', array(
+                'label' => 'admin.fields.consultation.author',
             ))
-            ->add('body', null, array(
-                'attr' => array('class' => 'ckeditor')
+            ->add('Themes', null, array(
+                'label' => 'admin.fields.consultation.themes',
+                'required' => false,
+                'by_reference' => false,
             ))
-            ->add('openedAt', 'sonata_type_date_picker', array(
+            ->add('openedAt', 'sonata_type_datetime_picker', array(
                 'required' => true,
                 'mapped' => false,
                 'datepicker_use_button' => false,
                 'data' => $open,
+                'label' => 'admin.fields.consultation.opened_at',
             ))
-             ->add('closedAt', 'sonata_type_date_picker', array(
+             ->add('closedAt', 'sonata_type_datetime_picker', array(
                 'required' => true,
                 'mapped' => false,
                  'datepicker_use_button' => false,
                 'data' => $close,
                  'help' => 'admin.help.consultation.closedAt',
+                 'label' => 'admin.fields.consultation.closed_at',
              ))
             ->add('Steps', null, array(
                 'required' => false,
                 'by_reference' => false,
                 'query_builder' => $this->createStepsQuery('other'),
                 'help' => 'admin.help.consultation.steps',
+                'label' => 'admin.fields.consultation.steps',
             ))
+            ->add('teaser', null, array(
+                'attr' => array('class' => 'ckeditor'),
+                'label' => 'admin.fields.consultation.teaser',
+            ))
+            ->add('body', null, array(
+                'attr' => array('class' => 'ckeditor'),
+                'label' => 'admin.fields.consultation.body',
+            ))
+            ->add('Cover', 'sonata_media_type', array(
+                'provider' => 'sonata.media.provider.image',
+                'context' => 'default',
+                'label' => 'admin.fields.consultation.cover',
+                'required' => false,
+            ))
+            ->add('video', null, array(
+                'label' => 'admin.fields.consultation.video',
+                'required' => false,
+                'help' => 'admin.help.consultation.video',
+                ),
+                array(
+                    'link_parameters' => array('context' => 'consultation'),
+                ))
         ;
     }
 
@@ -102,14 +187,72 @@ class ConsultationAdmin extends Admin
      */
     protected function configureShowFields(ShowMapper $showMapper)
     {
+        $subject = $this->getSubject();
+
         $showMapper
-            ->add('title')
-            ->add('slug')
-            ->add('teaser')
-            ->add('body')
-            ->add('createdAt')
-            ->add('updatedAt')
-            ->add('opinionCount')
+            ->add('title', null, array(
+                'label' => 'admin.fields.consultation.title',
+            ))
+            ->add('Author', null, array(
+                'label' => 'admin.fields.consultation.author',
+            ))
+            ->add('teaser', null, array(
+                'label' => 'admin.fields.consultation.teaser',
+            ))
+            ->add('body', null, array(
+                'label' => 'admin.fields.consultation.body',
+            ))
+            ->add('Cover', null, array(
+                'template' => 'CapcoAdminBundle:Consultation:cover_show_field.html.twig',
+                'label' => 'admin.fields.consultation.cover',
+            ))
+            ->add('video', null, array(
+                'label' => 'admin.fields.consultation.video',
+            ))
+            ->add('Themes', null, array(
+                'label' => 'admin.fields.consultation.themes',
+            ))
+            ->add('Steps', null, array(
+                'label' => 'admin.fields.consultation.steps',
+            ))
+            ->add('openingStatus', null, array(
+                'label' => 'admin.fields.consultation.opening_status',
+                'mapped' => false,
+                'data' => $subject->getOpeningStatus(),
+                'template' => 'CapcoAdminBundle:Consultation:openingStatus_show_field.html.twig',
+                'statuses' => Consultation::$openingStatuses,
+            ))
+            ->add('openedAt', 'datetime', array(
+                'label' => 'admin.fields.consultation.opened_at',
+                'mapped' => false,
+                'data' => $subject->getOpenedAt(),
+            ))
+            ->add('closedAt', 'datetime', array(
+                'label' => 'admin.fields.consultation.closed_at',
+                'mapped' => false,
+                'data' => $subject->getClosedAt(),
+            ))
+            ->add('opinionCount', null, array(
+                'label' => 'admin.fields.consultation.opinion_count',
+            ))
+            ->add('argumentCount', null, array(
+                'label' => 'admin.fields.consultation.argument_count',
+            ))
+            ->add('trashedOpinionCount', null, array(
+                'label' => 'admin.fields.consultation.trashed_opinion_count',
+            ))
+            ->add('trashedArgumentCount', null, array(
+                'label' => 'admin.fields.consultation.trashed_argument_count',
+            ))
+            ->add('isEnabled', 'boolean', array(
+                'label' => 'admin.fields.consultation.is_enabled',
+            ))
+            ->add('createdAt', null, array(
+                'label' => 'admin.fields.consultation.created_at',
+            ))
+            ->add('updatedAt', null, array(
+                'label' => 'admin.fields.consultation.updated_at',
+            ))
         ;
     }
 

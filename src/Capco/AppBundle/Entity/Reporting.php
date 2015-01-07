@@ -20,12 +20,12 @@ class Reporting
     const SIGNALEMENT_ERROR = 3;
     const SIGNALEMENT_OFF_TOPIC = 4;
 
-    public static $openingStatusesLabels = [
-        self::SIGNALEMENT_SEX => 'Contenu à caractère sexuel',
-        self::SIGNALEMENT_OFF => 'Contenu raciste, offensant ou haineux',
-        self::SIGNALEMENT_SPAM => 'Spam ou contenu trompeur',
-        self::SIGNALEMENT_ERROR => 'Information erronée',
-        self::SIGNALEMENT_OFF_TOPIC => 'Propos hors-sujet',
+    public static $statusesLabels = [
+        self::SIGNALEMENT_SEX => 'reporting.status.sexual',
+        self::SIGNALEMENT_OFF => 'reporting.status.offending',
+        self::SIGNALEMENT_SPAM => 'reporting.status.spam',
+        self::SIGNALEMENT_ERROR => 'reporting.status.error',
+        self::SIGNALEMENT_OFF_TOPIC => 'reporting.status.off_topic',
     ];
 
     /**
@@ -109,6 +109,29 @@ class Reporting
     function __construct()
     {
         $this->updatedAt = new \Datetime;
+    }
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="is_archived", type="boolean")
+     */
+    private $isArchived = false;
+
+    /**
+     * @return boolean
+     */
+    public function getIsArchived()
+    {
+        return $this->isArchived;
+    }
+
+    /**
+     * @param boolean $isArchived
+     */
+    public function setIsArchived($isArchived)
+    {
+        $this->isArchived = $isArchived;
     }
 
     /**
@@ -258,6 +281,19 @@ class Reporting
     public function setIdea($Idea)
     {
         $this->Idea = $Idea;
+    }
+
+    public function getRelatedObject(){
+        if ($this->Opinion != null) {
+            return $this->Opinion;
+        } elseif ($this->Source != null) {
+            return $this->Source;
+        } elseif ($this->Argument != null) {
+            return $this->Argument;
+        } elseif ($this->Idea != null) {
+            return $this->Idea;
+        }
+        return null;
     }
 
 }

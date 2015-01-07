@@ -29,6 +29,10 @@ class Step
         self::TYPE_OTHER => 'Autre',
     ];
 
+    public static $stepTypeLabelsNoConsultation = [
+        self::TYPE_OTHER => 'Autre',
+    ];
+
     /**
      * @var integer
      *

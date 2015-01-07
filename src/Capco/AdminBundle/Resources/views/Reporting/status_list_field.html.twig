@@ -1,0 +1,9 @@
+{% extends 'SonataAdminBundle:CRUD:base_list_field.html.twig' %}
+
+{% block field %}
+
+    {%  set labels = field_description.options.statusLabels %}
+    <div>
+        <span>{{ labels[object.status] | trans({}, 'CapcoAppBundle')  }}</span>
+    </div>
+{% endblock %}

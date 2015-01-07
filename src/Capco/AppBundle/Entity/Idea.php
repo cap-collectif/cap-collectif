@@ -91,9 +91,9 @@ class Idea
 
     /**
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Theme", inversedBy="Ideas")
-     * @ORM\JoinColumn(name="theme_id", referencedColumnName="id")
+     * @ORM\JoinColumn(name="theme_id", referencedColumnName="id", nullable=true)
      */
-    private $Theme;
+    private $Theme = null;
 
     /**
      * @var
@@ -549,4 +549,9 @@ class Idea
         return ($this->isEnabled() && !$this->isTrashed);
     }
 
+    public function getExcerpt($nb = 100){
+        $excerpt = substr($this->body, 0, $nb);
+        $excerpt = $excerpt.'...';
+        return $excerpt;
+    }
 }

@@ -8,6 +8,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 
 use Capco\AppBundle\Entity\Step;
+use Capco\AppBundle\Entity\Theme;
 
 /**
  * Consultation
@@ -154,10 +155,15 @@ class Consultation
     /**
      * @var
      *
-     * @ORM\ManyToOne(targetEntity="Capco\MediaBundle\Entity\Media")
-     * @ORM\JoinColumn(name="media_id", referencedColumnName="id")
+     * @ORM\ManyToOne(targetEntity="Capco\MediaBundle\Entity\Media", cascade={"persist"})
+     * @ORM\JoinColumn(name="cover_id", referencedColumnName="id")
      */
-    private $Media;
+    private $Cover;
+
+    /**
+     * @ORM\Column(name="video", type="string", nullable = true)
+     */
+    private $video = null;
 
     public function __toString()
     {
@@ -236,6 +242,14 @@ class Consultation
         $this->opinionCount = $opinionCount;
     }
 
+    public function increaseOpinionCount($nb) {
+        $this->opinionCount+=$nb;
+    }
+
+    public function decreaseOpinionCount($nb) {
+        $this->opinionCount-=$nb;
+    }
+
     /**
      * @return int
      */
@@ -251,6 +265,15 @@ class Consultation
     {
         $this->trashedOpinionCount = $trashedOpinionCount;
     }
+
+    public function increaseTrashedOpinionCount($nb) {
+        $this->trashedOpinionCount+=$nb;
+    }
+
+    public function decreaseTrashedOpinionCount($nb) {
+        $this->trashedOpinionCount-=$nb;
+    }
+
 
     /**
      * @return \DateTime
@@ -340,13 +363,15 @@ class Consultation
         $this->argumentCount = $argumentCount;
     }
 
-    public function addToArgumentCount($nb){
+    public function increaseArgumentCount($nb){
         $this->argumentCount+=$nb;
         return $this;
     }
 
-    public function removeFromArgumentCount($nb){
-        $this->argumentCount-=$nb;
+    public function decreaseArgumentCount($nb)
+    {
+        $this->argumentCount -= $nb;
+
         return $this;
     }
 
@@ -366,20 +391,44 @@ class Consultation
         $this->trashedArgumentCount = $trashedArgumentCount;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getMedia()
-    {
-        return $this->Media;
+    public function increaseTrashedArgumentCount($nb) {
+        $this->trashedArgumentCount+=$nb;
+    }
+
+    public function decreaseTrashedArgumentCount($nb) {
+        $this->trashedArgumentCount-=$nb;
     }
 
     /**
-     * @param mixed $media
+     * @return mixed
      */
-    public function setMedia($Media)
+    public function getCover()
     {
-        $this->Media = $Media;
+        return $this->Cover;
+    }
+
+    /**
+     * @param mixed $cover
+     */
+    public function setCover($cover)
+    {
+        $this->Cover = $cover;
+    }
+
+    /**
+     * @return string
+     */
+    public function getVideo()
+    {
+        return $this->video;
+    }
+
+    /**
+     * @param string $video
+     */
+    public function setVideo($video)
+    {
+        $this->video = $video;
     }
 
     public function getConsultationStep() {
@@ -496,9 +545,10 @@ class Consultation
      *
      * @return Consultation
      */
-    public function addTheme(\Capco\AppBundle\Entity\Theme $theme)
+    public function addTheme(Theme $theme)
     {
-        $this->Themes[] = $theme;
+        $theme->addConsultation($this);
+        $this->Themes->add($theme);
 
         return $this;
     }
@@ -508,9 +558,11 @@ class Consultation
      *
      * @param \Capco\AppBundle\Entity\Theme $theme
      */
-    public function removeTheme(\Capco\AppBundle\Entity\Theme $theme)
+    public function removeTheme(Theme $theme)
     {
+        $theme->removeConsultation($this);
         $this->Themes->removeElement($theme);
+        return $this;
     }
 
     /**
@@ -521,6 +573,26 @@ class Consultation
     public function getThemes()
     {
         return $this->Themes;
+    }
+
+    /**
+     * Set themes
+     *
+     * @param \Doctrine\Common\Collections\ArrayCollection $themes
+     * @return Consultation
+     */
+    public function setThemes($themes)
+    {
+        if (gettype($themes) == "array") {
+            $themes = new ArrayCollection($themes);
+        }
+
+        foreach($themes as $theme)
+        {
+            $theme->addConsultation($this);
+        }
+        $this->Themes = $themes;
+        return $this;
     }
 
     /**
@@ -547,6 +619,7 @@ class Consultation
     {
         $step->setConsultation(null);
         $this->Steps->removeElement($step);
+        return $this;
     }
 
     /**
@@ -639,7 +712,20 @@ class Consultation
         return ($this->isEnabled);
     }
 
-    public function canContribute() {
+    public function canContribute()
+    {
         return ($this->isEnabled && ($this->getOpeningStatus() == $this::OPENING_STATUS_OPENED));
+    }
+
+    public function getBodyExcerpt($nb = 100){
+        $excerpt = substr($this->body, 0, $nb);
+        $excerpt = $excerpt.'...';
+        return $excerpt;
+    }
+
+    public function getTeaserExcerpt($nb = 100){
+        $excerpt = substr($this->teaser, 0, $nb);
+        $excerpt = $excerpt.'...';
+        return $excerpt;
     }
 }

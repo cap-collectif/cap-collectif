@@ -7,19 +7,30 @@ use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Show\ShowMapper;
+use Sonata\AdminBundle\Route\RouteCollection;
 
 class NewsletterSubscriptionAdmin extends Admin
 {
+    protected $datagridValues = array(
+        '_sort_order' => 'ASC',
+        '_sort_by' => 'email'
+    );
+
     /**
      * @param DatagridMapper $datagridMapper
      */
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
         $datagridMapper
-            ->add('id')
-            ->add('email')
-            ->add('createdAt')
-            ->add('isEnabled')
+            ->add('email', null, array(
+                'label' => 'admin.fields.newsletter_subscription.email',
+            ))
+            ->add('isEnabled', null, array(
+                'label' => 'admin.fields.newsletter_subscription.is_enabled',
+            ))
+            ->add('createdAt', null, array(
+                'label' => 'admin.fields.newsletter_subscription.created_at',
+            ))
         ;
     }
 
@@ -29,11 +40,19 @@ class NewsletterSubscriptionAdmin extends Admin
     protected function configureListFields(ListMapper $listMapper)
     {
         $listMapper
-            ->add('email')
-            ->add('createdAt')
-            ->add('isEnabled', null, array('editable' => true))
+            ->addIdentifier('email', null, array(
+                'label' => 'admin.fields.newsletter_subscription.email',
+            ))
+            ->add('isEnabled', null, array(
+                'editable' => true,
+                'label' => 'admin.fields.newsletter_subscription.is_enabled',
+            ))
+            ->add('createdAt', null, array(
+                'label' => 'admin.fields.newsletter_subscription.created_at',
+            ))
             ->add('_action', 'actions', array(
                 'actions' => array(
+                    'show' => array(),
                     'edit' => array(),
                     'delete' => array(),
                 )
@@ -47,8 +66,13 @@ class NewsletterSubscriptionAdmin extends Admin
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
-            ->add('email')
-            ->add('isEnabled')
+            ->add('email', null, array(
+                'label' => 'admin.fields.newsletter_subscription.email',
+            ))
+            ->add('isEnabled', null, array(
+                'label' => 'admin.fields.newsletter_subscription.is_enabled',
+                'required' => false,
+            ))
         ;
     }
 
@@ -58,10 +82,20 @@ class NewsletterSubscriptionAdmin extends Admin
     protected function configureShowFields(ShowMapper $showMapper)
     {
         $showMapper
-            ->add('id')
-            ->add('email')
-            ->add('createdAt')
-            ->add('isEnabled')
+            ->add('email', null, array(
+                'label' => 'admin.fields.newsletter_subscription.email',
+            ))
+            ->add('isEnabled', null, array(
+                'editable' => true,
+                'label' => 'admin.fields.newsletter_subscription.is_enabled',
+            ))
+            ->add('createdAt', null, array(
+                'label' => 'admin.fields.newsletter_subscription.created_at',
+            ))
         ;
+    }
+
+    protected function configureRoutes(RouteCollection $collection)
+    {
     }
 }

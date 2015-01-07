@@ -117,8 +117,19 @@ class Argument
      */
     private $Author;
 
+    public function __toString()
+    {
+        if ($this->id) {
+            return $this->getBodyExcerpt(50);
+        } else {
+            return "New opinion";
+        }
+    }
+
     function __construct()
     {
+        $this->Votes = new ArrayCollection();
+        $this->voteCount = 0;
         $this->Reports = new ArrayCollection();
         $this->Votes = new ArrayCollection();
         $this->voteCount = 0;
@@ -308,8 +319,18 @@ class Argument
      */
     public function setIsTrashed($isTrashed)
     {
+        if ($isTrashed != $this->isTrashed) {
+            if($this->isEnabled) {
+                if ($isTrashed) {
+                    $this->opinion->getConsultation()->increaseTrashedArgumentCount(1);
+                    $this->opinion->decreaseArgumentsCount(1);
+                } else {
+                    $this->opinion->increaseArgumentsCount(1);
+                    $this->opinion->getConsultation()->decreaseTrashedArgumentCount(1);
+                }
+            }
+        }
         $this->isTrashed = $isTrashed;
-
         return $this;
     }
 
@@ -377,8 +398,22 @@ class Argument
      */
     public function setIsEnabled($isEnabled)
     {
+        if ($isEnabled != $this->isEnabled) {
+            if($isEnabled) {
+                if($this->isTrashed) {
+                    $this->opinion->getConsultation()->increaseTrashedArgumentCount(1);
+                } else {
+                    $this->opinion->increaseArgumentsCount(1);
+                }
+            } else {
+                if($this->isTrashed) {
+                    $this->opinion->getConsultation()->decreaseArgumentCount(1);
+                } else {
+                    $this->opinion->decreaseArgumentsCount(1);
+                }
+            }
+        }
         $this->isEnabled = $isEnabled;
-
         return $this;
     }
 
@@ -474,7 +509,14 @@ class Argument
         return ($this->isEnabled && $this->opinion->canDisplay());
     }
 
-    public function canContribute() {
+    public function canContribute()
+    {
         return ($this->isEnabled && !$this->isTrashed && $this->opinion->canContribute());
+    }
+
+    public function getBodyExcerpt($nb = 100){
+        $excerpt = substr($this->body, 0, $nb);
+        $excerpt = $excerpt.'...';
+        return $excerpt;
     }
 }

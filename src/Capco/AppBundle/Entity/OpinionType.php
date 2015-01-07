@@ -15,14 +15,14 @@ use Gedmo\Mapping\Annotation as Gedmo;
 class OpinionType
 {
     public static $colorsType = [
-        'red' => 'rouge',
-        'green' => 'vert',
-        'blue' => 'bleu',
-        'orange' => 'orange',
-        'bluelight' => 'bleu clair',
-        'bluedark' => 'bleu foncé',
-        'gray' => 'gris',
-        'graylight' => 'gris clair',
+        'red' => 'opinion_type.colors.red',
+        'green' => 'opinion_type.colors.green',
+        'blue' => 'opinion_type.colors.blue',
+        'orange' => 'opinion_type.colors.orange',
+        'bluelight' => 'opinion_type.colors.bluelight',
+        'bluedark' => 'opinion_type.colors.bluedark',
+        'gray' => 'opinion_type.colors.gray',
+        'graylight' => 'opinion_type.colors.graylight',
     ];
 
     const VOTE_WIDGET_TYPE_DISABLED = 0;

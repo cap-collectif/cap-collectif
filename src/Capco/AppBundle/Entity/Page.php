@@ -76,14 +76,6 @@ class Page
     /**
      * @var
      *
-     * @ORM\ManyToOne(targetEntity="Capco\UserBundle\Entity\User")
-     * @ORM\JoinColumn(name="author_id", referencedColumnName="id")
-     */
-    private $Author;
-
-    /**
-     * @var
-     *
      * @ORM\OneToOne(targetEntity="Capco\MediaBundle\Entity\Media", cascade={"persist", "remove"})
      * @ORM\JoinColumn(name="media_id", referencedColumnName="id")
      */
@@ -233,22 +225,6 @@ class Page
     /**
      * @return mixed
      */
-    public function getAuthor()
-    {
-        return $this->Author;
-    }
-
-    /**
-     * @param mixed $Author
-     */
-    public function setAuthor($Author)
-    {
-        $this->Author = $Author;
-    }
-
-    /**
-     * @return mixed
-     */
     public function getMedia()
     {
         return $this->media;
@@ -305,5 +281,11 @@ class Page
     public function setMenuItem($MenuItem)
     {
         $this->MenuItem = $MenuItem;
+    }
+
+    public function getExcerpt($nb = 100){
+        $excerpt = substr($this->body, 0, $nb);
+        $excerpt = $excerpt.'...';
+        return $excerpt;
     }
 }

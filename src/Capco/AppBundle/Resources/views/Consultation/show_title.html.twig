@@ -1,6 +1,6 @@
 <div class="consultation__title  block  block--shadowed">
-    {% if consultation.Media %}
-        {% thumbnail consultation.Media, 'blockHeader' with {'title': consultation.Media.name, 'alt': consultation.Media.name, 'class': 'img-responsive'} %}
+    {% if consultation.Cover %}
+        {% thumbnail consultation.Cover, 'blockHeader' with {'title': consultation.Cover.name, 'alt': consultation.Cover.name, 'class': 'img-responsive'} %}
     {% endif %}
     <div class="consultation__title__body">
         <div class="pull-left">

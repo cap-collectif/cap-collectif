@@ -212,7 +212,6 @@ class Opinion
         $this->Consultation = $Consultation;
     }
 
-
     function __construct()
     {
         $this->Votes = new ArrayCollection();
@@ -223,6 +222,9 @@ class Opinion
         $this->sourcesCount = 0;
         $this->resetVoteCount();
         $this->updatedAt = new \Datetime;
+        $this->voteCountMitige = 0;
+        $this->voteCountNok = 0;
+        $this->voteCountOk = 0;
     }
 
 
@@ -634,6 +636,16 @@ class Opinion
         return $this->argumentsCount;
     }
 
+    public function increaseArgumentsCount($nb) {
+        $this->argumentsCount+=$nb;
+        $this->getConsultation()->increaseArgumentCount($nb);
+    }
+
+    public function decreaseArgumentsCount($nb) {
+        $this->argumentsCount-=$nb;
+        $this->getConsultation()->decreaseArgumentCount($nb);
+    }
+
     /**
      * @return int
      */
@@ -648,6 +660,14 @@ class Opinion
     public function setSourcesCount($sourcesCount)
     {
         $this->sourcesCount = $sourcesCount;
+    }
+
+    public function increaseSourcesCount($nb) {
+        $this->sourcesCount+=$nb;
+    }
+
+    public function decreaseSourcesCount($nb) {
+        $this->sourcesCount-=$nb;
     }
 
     /**
@@ -698,7 +718,7 @@ class Opinion
         $this->voteCountMitige = $voteCountMitige;
     }
 
-    public function getVotesAll()
+    public function getVoteCountAll()
     {
         return $this->getVoteCountMitige() + $this->getVoteCountNok() + $this->getVoteCountOk();
     }
@@ -752,7 +772,14 @@ class Opinion
         return ($this->isEnabled && $this->Consultation->canDisplay());
     }
 
-    public function canContribute() {
+    public function canContribute()
+    {
         return ($this->isEnabled && !$this->isTrashed && $this->Consultation->canContribute());
+    }
+
+    public function getBodyExcerpt($nb = 100){
+        $excerpt = substr($this->body, 0, $nb);
+        $excerpt = $excerpt.'...';
+        return $excerpt;
     }
 }

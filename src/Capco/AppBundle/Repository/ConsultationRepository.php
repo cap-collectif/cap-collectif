@@ -21,8 +21,8 @@ class ConsultationRepository extends EntityRepository
     public function findEnabledByTheme($theme)
     {
         $qb = $this->createQueryBuilder('c')
-            ->leftJoin('c.Media', 'm')
-            ->addSelect('m')
+            ->leftJoin('c.Cover', 'cov')
+            ->addSelect('cov')
             ->leftJoin('c.Themes' , 't')
             ->addSelect('t')
             ->andWhere(':theme MEMBER OF c.Themes')
@@ -83,6 +83,8 @@ class ConsultationRepository extends EntityRepository
             ->addSelect('t')
             ->leftJoin('c.Steps', 's')
             ->addSelect('s')
+            ->leftJoin('c.Cover', 'cov')
+            ->addSelect('cov')
             ->addOrderBy('c.createdAt', 'DESC')
         ;
 
@@ -101,7 +103,7 @@ class ConsultationRepository extends EntityRepository
         }
 
         if (isset(Consultation::$sortOrder[$sort]) && Consultation::$sortOrder[$sort] == Consultation::SORT_ORDER_VOTES_COUNT) {
-            $qb->orderBy('c.contributionCount', 'DESC');
+            $qb->orderBy('c.opinionCount', 'DESC');
         } else {
             $qb->orderBy('c.createdAt', 'DESC');
         }
@@ -116,11 +118,11 @@ class ConsultationRepository extends EntityRepository
         return new Paginator($query);
     }
 
-    public function getFirstResultWithMedia($slug)
+    public function getFirstResultWithCover($slug)
     {
         $qb = $this->getIsEnabledQueryBuilder('c')
-            ->leftJoin('c.Media', 'm')
-            ->addSelect('m')
+            ->leftJoin('c.Cover', 'cov')
+            ->addSelect('cov')
             ->leftJoin('c.Opinions', 'o')
             ->addSelect('o')
             ->andWhere('c.isEnabled = :enabled')
@@ -141,6 +143,8 @@ class ConsultationRepository extends EntityRepository
             ->addSelect('t')
             ->leftJoin('c.Steps', 's')
             ->addSelect('s')
+            ->leftJoin('c.Cover', 'cov')
+            ->addSelect('cov')
             ->addOrderBy('c.createdAt', 'DESC')
         ;
 

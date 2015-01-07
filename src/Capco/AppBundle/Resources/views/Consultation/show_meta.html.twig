@@ -3,8 +3,13 @@
         {#<img class="img-responsive  center-block" src="http://lorempixel.com/400/300/technics" alt="image de la consultation">#}
     {#</a>#}
     <div class="box">
+
+        {% if consultation.video %}
+            <a href="{{ consultation.video }}">Video</a>
+        {% endif %}
+
         <h4 class="h4">Introduction</h4>
-        <p class="more">{{ consultation.body | striptags }}</p>
+        <div class="more">{{ consultation.body | raw }}</div>
         {%  if currentStep is not defined %}
             {% set currentStep = null %}
         {% endif %}

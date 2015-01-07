@@ -1,5 +1,5 @@
 {% extends 'SonataAdminBundle:CRUD:base_list_field.html.twig' %}
 
 {% block field %}
-    {{ capco_display_type(object.type) }}
+    {{ object.menu|trans({}, 'CapcoAppBundle') }}
 {% endblock %}

@@ -3,15 +3,7 @@ services:
         class: Capco\AdminBundle\Admin\PageAdmin
         arguments: [~, Capco\AppBundle\Entity\Page, SonataAdminBundle:CRUD]
         tags:
-            - {name: sonata.admin, manager_type: orm, group: admin.group.content, label: admin.label.page}
-        calls:
-            - [ setTranslationDomain, [SonataAdminBundle]]
-
-    capco_admin.admin.menu:
-        class: Capco\AdminBundle\Admin\MenuAdmin
-        arguments: [~, Capco\AppBundle\Entity\Menu, SonataAdminBundle:CRUD]
-        tags:
-            - {name: sonata.admin, manager_type: orm, group: admin.group.navigation, label: admin.label.menu}
+            - {name: sonata.admin, manager_type: orm, group: admin.group.content, label: admin.label.page, show_in_dashboard: true}
         calls:
             - [ setTranslationDomain, [SonataAdminBundle]]
 
@@ -97,7 +89,7 @@ services:
 
     capco_admin.admin.reporting:
         class: Capco\AdminBundle\Admin\ReportingAdmin
-        arguments: [~, Capco\AppBundle\Entity\Reporting, SonataAdminBundle:CRUD]
+        arguments: [~, Capco\AppBundle\Entity\Reporting, CapcoAdminBundle:CRUD]
         tags:
             - {name: sonata.admin, manager_type: orm, group: admin.group.consultation, label: admin.label.reporting}
         calls:
@@ -119,11 +111,11 @@ services:
         calls:
             - [ setTranslationDomain, [SonataAdminBundle]]
 
-    capco_admin.admin.vote:
-        class: Capco\AdminBundle\Admin\VoteAdmin
-        arguments: [~, Capco\AppBundle\Entity\Vote, SonataAdminBundle:CRUD]
+    capco_admin.admin.opinion_vote:
+        class: Capco\AdminBundle\Admin\OpinionVoteAdmin
+        arguments: [~, Capco\AppBundle\Entity\OpinionVote, SonataAdminBundle:CRUD]
         tags:
-            - {name: sonata.admin, manager_type: orm, group: admin.group.consultation, label: admin.label.vote}
+            - {name: sonata.admin, manager_type: orm, group: admin.group.consultation, label: admin.label.opinion_vote}
         calls:
             - [ setTranslationDomain, [SonataAdminBundle]]
 

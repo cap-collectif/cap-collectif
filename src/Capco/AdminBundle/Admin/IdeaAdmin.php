@@ -10,14 +10,39 @@ use Sonata\AdminBundle\Show\ShowMapper;
 
 class IdeaAdmin extends Admin
 {
+
+    protected $datagridValues = array(
+        '_sort_order' => 'ASC',
+        '_sort_by' => 'title'
+    );
+
     /**
      * @param DatagridMapper $datagridMapper
      */
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
         $datagridMapper
-            ->add('createdAt')
-            ->add('voteCount')
+            ->add('title', null, array(
+                'label' => 'admin.fields.idea.title',
+            ))
+            ->add('Theme', null, array(
+                'label' => 'admin.fields.idea.theme',
+            ))
+            ->add('voteCount', null, array(
+                'label' => 'admin.fields.idea.vote_count',
+            ))
+            ->add('Author', null, array(
+                'label' => 'admin.fields.idea.author',
+            ))
+            ->add('isEnabled', null, array(
+                'label' => 'admin.fields.idea.is_enabled',
+            ))
+            ->add('isTrashed', null, array(
+                'label' => 'admin.fields.idea.is_trashed',
+            ))
+            ->add('updatedAt', null, array(
+                'label' => 'admin.fields.idea.updated_at',
+            ))
         ;
     }
 
@@ -27,14 +52,28 @@ class IdeaAdmin extends Admin
     protected function configureListFields(ListMapper $listMapper)
     {
         $listMapper
-            ->add('title')
-            ->add('createdAt')
-            ->add('voteCount')
+            ->addIdentifier('title', null, array(
+                'label' => 'admin.fields.idea.title',
+            ))
+            ->add('Theme', 'sonata_type_model', array(
+                'label' => 'admin.fields.idea.theme',
+            ))
+            ->add('voteCount', null, array(
+                'label' => 'admin.fields.idea.vote_count',
+            ))
+            ->add('Author', 'sonata_type_model', array(
+                'label' => 'admin.fields.idea.author',
+            ))
             ->add('isEnabled', null, array(
+                'label' => 'admin.fields.idea.is_enabled',
                 'editable' => true,
             ))
             ->add('isTrashed', null, array(
+                'label' => 'admin.fields.idea.is_trashed',
                 'editable' => true,
+            ))
+            ->add('updatedAt', null, array(
+                'label' => 'admin.fields.idea.updated_at',
             ))
             ->add('_action', 'actions', array(
                 'actions' => array(
@@ -52,9 +91,31 @@ class IdeaAdmin extends Admin
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
-            ->add('title')
+            ->add('title', null, array(
+                'label' => 'admin.fields.idea.title',
+            ))
+            ->add('isEnabled', null, array(
+                'label' => 'admin.fields.idea.is_enabled',
+                'required' => false,
+            ))
+            ->add('isTrashed', null, array(
+                'label' => 'admin.fields.idea.is_trashed',
+            ))
+            ->add('Author', 'sonata_type_model', array(
+                'label' => 'admin.fields.idea.author',
+            ))
+            ->add('Theme', 'sonata_type_model', array(
+                'label' => 'admin.fields.idea.theme',
+                'required' => false,
+            ))
             ->add('body', null, array(
-                'attr' => array('class' => 'ckeditor')
+                'label' => 'admin.fields.idea.body',
+                'attr' => array('class' => 'ckeditor'),
+            ))
+            ->add('Media', 'sonata_media_type', array(
+                'provider' => 'sonata.media.provider.image',
+                'context' => 'default',
+                'label' => 'admin.fields.idea.media',
             ))
         ;
     }
@@ -65,12 +126,36 @@ class IdeaAdmin extends Admin
     protected function configureShowFields(ShowMapper $showMapper)
     {
         $showMapper
-            ->add('title')
-            ->add('slug')
-            ->add('body')
-            ->add('createdAt')
-            ->add('updatedAt')
-            ->add('voteCount')
+            ->add('title', null, array(
+                'label' => 'admin.fields.idea.title',
+            ))
+            ->add('body', null, array(
+                'label' => 'admin.fields.idea.body',
+            ))
+            ->add('Theme', 'sonata_type_model', array(
+                'label' => 'admin.fields.idea.theme',
+            ))
+            ->add('voteCount', null, array(
+                'label' => 'admin.fields.idea.vote_count',
+            ))
+            ->add('Author', null, array(
+                'label' => 'admin.fields.idea.author',
+            ))
+            ->add('Media', 'sonata_media_type', array(
+                'template' => 'CapcoAdminBundle:Idea:media_show_field.html.twig',
+                'provider' => 'sonata.media.provider.image',
+                'label' => 'admin.fields.idea.media',
+            ))
+            ->add('isEnabled', null, array(
+                'label' => 'admin.fields.idea.is_enabled',
+                'editable' => true,
+            ))
+            ->add('isTrashed', null, array(
+                'label' => 'admin.fields.idea.is_trashed',
+            ))
+            ->add('updatedAt', null, array(
+                'label' => 'admin.fields.idea.updated_at',
+            ))
         ;
     }
 }

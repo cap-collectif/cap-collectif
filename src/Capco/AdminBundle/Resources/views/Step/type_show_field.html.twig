@@ -1,0 +1,8 @@
+{% extends 'SonataAdminBundle:CRUD:base_show_field.html.twig' %}
+
+{% block field %}
+    {%  if value is not null %}
+        {% set stepTypeLabels = field_description.options.stepTypeLabels %}
+        {{ stepTypeLabels[value] }}
+    {% endif %}
+{% endblock %}

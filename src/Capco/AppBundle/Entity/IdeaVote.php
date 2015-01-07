@@ -46,8 +46,8 @@ class IdeaVote
 
     public function __toString()
     {
-        if ($this->id) {
-            return $this->getId();
+        if ($this->Idea && $this->Voter) {
+            return $this->getVoter()." - ".$this->getIdea();
         } else {
             return "New idea vote";
         }

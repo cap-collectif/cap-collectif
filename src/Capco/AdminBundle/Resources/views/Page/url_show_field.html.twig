@@ -1,0 +1,7 @@
+{% extends 'SonataAdminBundle:CRUD:base_show_field.html.twig' %}
+
+{% block field %}
+    {%  if object.slug is not null %}
+        <a href="{{ path('app_page_show', {'slug': object.slug }) }}">{{ path('app_page_show', {'slug': object.slug }) }}</a>
+    {%  endif %}
+{% endblock %}

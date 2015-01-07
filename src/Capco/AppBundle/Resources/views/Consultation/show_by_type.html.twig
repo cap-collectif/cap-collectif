@@ -18,7 +18,7 @@
     {% if(opinions|length > 0) %}
         <ul class="media-list  opinion__list">
             {% for opinion in opinions %}
-                {% set nbVotes = (opinion.getVotesAll) %}
+                {% set nbVotes = (opinion.getVoteCountAll) %}
                 {% set nbArguments = (opinion.argumentsCount) %}
                 {% set nbSources = (opinion.sourcesCount) %}
                 <li class="opinion  opinion--{{ opinion.slug }}  has-chart" data-ok="{{ opinion.voteCountOk }}" data-nok="{{ opinion.voteCountNok }}" data-mitige="{{ opinion.voteCountMitige }}" data-opinion-id="{{ opinion.id }}">
@@ -54,14 +54,14 @@
                         </div>
                     </div>
                 </li>
-            {% endfor %}
-        </ul>
-    {% else %}
-        <div class="consultation__empty-block  text-center">
-            <p class="icon  cap-bubble-attention-6"></p>
-            <p>{{ 'opinion.show.none'|trans({}, 'CapcoAppBundle') }}</p>
-        </div>
-    {% endif %}
+                {% endfor %}
+            </ul>
+        {% else %}
+            <div class="consultation__empty-block  text-center">
+                <p class="icon  cap-bubble-attention-6"></p>
+                <p>{{ 'opinion.show.none'|trans({}, 'CapcoAppBundle') }}</p>
+            </div>
+        {% endif %}
     </div>
 
     {% if nbPage > 1 %}

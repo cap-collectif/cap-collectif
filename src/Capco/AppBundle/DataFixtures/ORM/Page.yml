@@ -2,9 +2,7 @@ Capco\AppBundle\Entity\Page:
   page1:
     title: Charte
     body: <text(1000)>
-    Author: @user*
   page{2..5}:
     title: <text(20)>
     body: <text(1000)>
     isEnabled: <boolean()>
-    Author: @user*

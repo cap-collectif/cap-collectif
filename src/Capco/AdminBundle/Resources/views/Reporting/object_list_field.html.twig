@@ -1,0 +1,15 @@
+{% extends 'SonataAdminBundle:CRUD:base_list_field.html.twig' %}
+
+{% block field %}
+    <div>
+        {% if(object.Opinion is not null) %}
+            <span><a href="{{ path('admin_capco_app_opinion_show', {'id': object.Opinion.id}) }}">{{ object.Opinion.title }}</a></span>
+        {% elseif (object.Source is not null) %}
+            <span><a href="{{ path('admin_capco_app_source_show', {'id': object.Source.id}) }}">{{ object.Source.title }}</a></span>
+        {% elseif (object.Argument is not null) %}
+            <span><a href="{{ path('admin_capco_app_argument_show', {'id': object.Argument.id}) }}">{{ object.Argument.getBodyExcerpt(100) }}</a></span>
+        {% elseif (object.Idea is not null) %}
+            <span><a href="{{ path('admin_capco_app_idea_show', {'id': object.Idea.id}) }}">{{ object.Idea.title }}</a></span>
+        {% endif %}
+    </div>
+{% endblock %}

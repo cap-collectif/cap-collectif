@@ -35,6 +35,7 @@ class ArgumentController extends Controller
     public function showArgumentsAction(Consultation $consultation, OpinionType $opinionType, Opinion $opinion, $type, Form $form, $argumentSort = null)
     {
         $argumentType = Argument::$argumentTypes[$type];
+        $argumentTypeLabel = Argument::$argumentTypesLabels[$type];
 
         $arguments = $this->getDoctrine()
             ->getRepository('CapcoAppBundle:Argument')
@@ -49,6 +50,7 @@ class ArgumentController extends Controller
             'userReportingArgument' => $reportingArgument,
             'arguments' => $arguments,
             'argumentType' => $argumentType,
+            'argumentTypeLabel' => $argumentTypeLabel,
             'consultation' => $consultation,
             'opinionType' => $opinionType,
             'opinion' => $opinion,

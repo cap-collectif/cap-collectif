@@ -117,7 +117,7 @@ class ConsultationController extends Controller
     public function showAction(Consultation $consultation)
     {
         $em = $this->getDoctrine()->getManager();
-        $consultation = $em->getRepository('CapcoAppBundle:Consultation')->getFirstResultWithMedia($consultation->getSlug());
+        $consultation = $em->getRepository('CapcoAppBundle:Consultation')->getFirstResultWithCover($consultation->getSlug());
 
         if (false == $consultation->canDisplay() ) {
             throw $this->createNotFoundException();

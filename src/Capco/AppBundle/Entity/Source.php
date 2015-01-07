@@ -404,8 +404,16 @@ class Source
      */
     public function setIsTrashed($isTrashed)
     {
+        if ($isTrashed != $this->isTrashed) {
+            if($this->isEnabled) {
+                if ($isTrashed) {
+                    $this->Opinion->decreaseSourcesCount(1);
+                } else {
+                    $this->Opinion->increaseSourcesCount(1);
+                }
+            }
+        }
         $this->isTrashed = $isTrashed;
-
         return $this;
     }
 
@@ -549,8 +557,19 @@ class Source
      */
     public function setIsEnabled($isEnabled)
     {
+        if ($isEnabled != $this->isEnabled) {
+            if($isEnabled) {
+                if(!$this->isTrashed) {
+                    $this->Opinion->increaseSourcesCount(1);
+                }
+            } else {
+                if(!$this->isTrashed) {
+                    $this->Opinion->decreaseSourcesCount(1);
+                }
+            }
+        }
         $this->isEnabled = $isEnabled;
-
+        return $this;
         return $this;
     }
 

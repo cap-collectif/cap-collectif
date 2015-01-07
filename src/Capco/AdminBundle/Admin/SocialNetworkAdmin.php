@@ -8,18 +8,36 @@ use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Show\ShowMapper;
 use Capco\AppBundle\Entity\SocialNetwork;
+use Sonata\AdminBundle\Route\RouteCollection;
 
 class SocialNetworkAdmin extends Admin
 {
+    protected $datagridValues = array(
+        '_sort_order' => 'ASC',
+        '_sort_by' => 'title'
+    );
+
     /**
      * @param DatagridMapper $datagridMapper
      */
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
         $datagridMapper
-            ->add('position')
-            ->add('isEnabled')
-            ->add('media')
+            ->add('title', null, array(
+                'label' => 'admin.fields.social_network.title',
+            ))
+            ->add('isEnabled', null, array(
+                'label' => 'admin.fields.social_network.is_enabled',
+            ))
+            ->add('link', null, array(
+                'label' => 'admin.fields.social_network.link',
+            ))
+            ->add('position', null, array(
+                'label' => 'admin.fields.social_network.position',
+            ))
+            ->add('updatedAt', null, array(
+                'label' => 'admin.fields.social_network.updated_at',
+            ))
         ;
     }
 
@@ -29,15 +47,30 @@ class SocialNetworkAdmin extends Admin
     protected function configureListFields(ListMapper $listMapper)
     {
         $listMapper
-            ->add('title')
-            ->add('position')
-            ->add('isEnabled', null, array('editable' => true))
-            ->add('createdAt')
+            ->addIdentifier('title', null, array(
+                'label' => 'admin.fields.social_network.title',
+            ))
+            ->add('isEnabled', null, array(
+                'editable' => true,
+                'label' => 'admin.fields.social_network.is_enabled',
+            ))
+            ->add('link', null, array(
+                'label' => 'admin.fields.social_network.link',
+            ))
             ->add('media', 'sonata_media_type', array(
                 'template' => 'CapcoAdminBundle:SocialNetwork:media_list_field.html.twig',
-                'provider' => 'sonata.media.provider.image'))
+                'provider' => 'sonata.media.provider.image',
+                'label' => 'admin.fields.social_network.media',
+            ))
+            ->add('position', null, array(
+                'label' => 'admin.fields.social_network.position',
+            ))
+            ->add('updatedAt', null, array(
+                'label' => 'admin.fields.social_network.updated_at',
+            ))
             ->add('_action', 'actions', array(
                 'actions' => array(
+                    'show' => array(),
                     'edit' => array(),
                     'delete' => array(),
                 )
@@ -51,11 +84,24 @@ class SocialNetworkAdmin extends Admin
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
-            ->add('title')
-            ->add('link')
-            ->add('position')
-            ->add('isEnabled')
-            ->add('media', 'sonata_type_model')
+            ->add('title', null, array(
+                'label' => 'admin.fields.social_network.title',
+            ))
+            ->add('isEnabled', null, array(
+                'label' => 'admin.fields.social_network.is_enabled',
+                'required' => false,
+            ))
+            ->add('link', null, array(
+                'label' => 'admin.fields.social_network.link',
+            ))
+            ->add('position', null, array(
+                'label' => 'admin.fields.social_network.position',
+            ))
+            ->add('media', 'sonata_media_type', array(
+                'provider' => 'sonata.media.provider.image',
+                'context' => 'default',
+                'label' => 'admin.fields.social_network.media',
+            ))
         ;
     }
 
@@ -65,12 +111,29 @@ class SocialNetworkAdmin extends Admin
     protected function configureShowFields(ShowMapper $showMapper)
     {
         $showMapper
-            ->add('title')
-            ->add('link')
-            ->add('position')
-            ->add('isEnabled')
-            ->add('createdAt')
-            ->add('updatedAt')
+            ->add('title', null, array(
+                'label' => 'admin.fields.social_network.title',
+            ))
+            ->add('isEnabled', null, array(
+                'label' => 'admin.fields.social_network.is_enabled',
+            ))
+            ->add('link', null, array(
+                'label' => 'admin.fields.social_network.link',
+            ))
+            ->add('media', 'sonata_media_type', array(
+                'template' => 'CapcoAdminBundle:SocialNetwork:media_show_field.html.twig',
+                'label' => 'admin.fields.social_network.media',
+            ))
+            ->add('position', null, array(
+                'label' => 'admin.fields.social_network.position',
+            ))
+            ->add('updatedAt', null, array(
+                'label' => 'admin.fields.social_network.updated_at',
+            ))
         ;
+    }
+
+    protected function configureRoutes(RouteCollection $collection)
+    {
     }
 }

@@ -4,35 +4,28 @@ Capco\AppBundle\Entity\Consultation:
         teaser: <text(35)>
         body: <text(1000)>
         Author: @user*
-        Media: @MediaConsultation1
+        Cover: @MediaConsultation1
     cs2:
         title: <sentence(3)>
         teaser: <text(35)>
         body: <text(1000)>
         Author: @user*
-        Media: @MediaConsultation2
+        Cover: @MediaConsultation2
     cs3:
         title: <sentence(3)>
         teaser: <text(35)>
         body: <text(1000)>
         Author: @user*
-        Media: @MediaConsultation1
+        Cover: @MediaConsultation1
     cs4:
         title: <sentence(3)>
         teaser: <text(35)>
         body: <text(1000)>
         Author: @user*
-        Media: @MediaConsultation2
-    cs4:
-        title: <sentence(3)>
-        teaser: <text(35)>
-        body: <text(1000)>
-        Author: @user*
-        Media: @MediaConsultation2
+        Cover: @MediaConsultation2
     cs5:
-        title: Une consultation désactivé
+        title: <sentence(3)>
         teaser: <text(35)>
         body: <text(1000)>
         Author: @user*
-        Media: @MediaConsultation2
-        isEnabled: false
+        Cover: @MediaConsultation1

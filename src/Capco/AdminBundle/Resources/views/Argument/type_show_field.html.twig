@@ -1,0 +1,8 @@
+{% extends 'SonataAdminBundle:CRUD:base_show_field.html.twig' %}
+
+{% block field %}
+    {%  set labels = field_description.options.typesLabels %}
+    {%  if value is not null %}
+        {{ labels[value] | trans({}, 'CapcoAppBundle')  }}
+    {%  endif %}
+{% endblock %}

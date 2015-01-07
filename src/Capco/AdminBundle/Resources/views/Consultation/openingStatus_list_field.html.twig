@@ -1,0 +1,15 @@
+{% extends 'SonataAdminBundle:CRUD:base_list_field.html.twig' %}
+
+{% block field %}
+    {%  set status = object.openingStatus %}
+    {%  set statuses = field_description.options.statuses %}
+    <div>
+        {% if status == statuses.opened %}
+            <span class="label label-success">{{ 'consultation.show.status.opened'|trans({}, 'CapcoAppBundle') }}</span>
+        {% elseif status == statuses.ended %}
+            <span class="label label-danger">{{ 'consultation.show.status.ended'|trans({}, 'CapcoAppBundle') }}</span>
+        {% elseif status == statuses.future %}
+            <span class="label label-info">{{ 'consultation.show.status.future'|trans({}, 'CapcoAppBundle') }}</span>
+        {% endif %}
+    </div>
+{% endblock %}
