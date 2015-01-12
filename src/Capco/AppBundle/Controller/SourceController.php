@@ -29,7 +29,7 @@ class SourceController extends Controller
      * @Template("CapcoAppBundle:Source:create.html.twig")
      * @return array
      */
-    public function createOpinionAction(Opinion $opinion, Request $request)
+    public function createSourceAction(Opinion $opinion, Request $request)
     {
         if (false === $this->get('security.authorization_checker')->isGranted('ROLE_USER')) {
             throw new AccessDeniedException($this->get('translator')->trans('Access restricted to authenticated users'));
@@ -37,7 +37,7 @@ class SourceController extends Controller
 
         $source = new Source();
         $source->setAuthor($this->getUser());
-        $source->setOpinion($opinion);
+        $opinion->addSource($source);
 
         $form = $this->createForm(new SourcesType(), $source);
 
@@ -72,7 +72,7 @@ class SourceController extends Controller
      * @Template("CapcoAppBundle:Source:delete.html.twig")
      * @return array
      */
-    public function deleteOpinionAction(Opinion $opinion, Source $source, Request $request)
+    public function deleteSourceAction(Opinion $opinion, Source $source, Request $request)
     {
         if (false === $this->get('security.authorization_checker')->isGranted('ROLE_USER')) {
             throw new AccessDeniedException($this->get('translator')->trans('Access restricted to authenticated users'));
@@ -93,6 +93,7 @@ class SourceController extends Controller
 
             if ($form->isValid()) {
                 $em = $this->getDoctrine()->getManager();
+                $opinion->removeSource($source);
                 $em->remove($source);
                 $em->flush();
 
@@ -119,7 +120,7 @@ class SourceController extends Controller
      * @param $opinion
      * @return array
      */
-    public function updateOpinionAction(Opinion $opinion, Source $source, Request $request)
+    public function updateSourceAction(Opinion $opinion, Source $source, Request $request)
     {
         if (false === $this->get('security.authorization_checker')->isGranted('ROLE_USER')) {
             throw new AccessDeniedException($this->get('translator')->trans('Access restricted to authenticated users'));

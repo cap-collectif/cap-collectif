@@ -152,7 +152,7 @@ class Opinion
 
     /**
      * @var
-     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\Source", mappedBy="Opinion",  cascade={"persist", "remove"})
+     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\Source", mappedBy="Opinion",  cascade={"persist", "remove"}, orphanRemoval=true)
      */
     private $Sources;
 
@@ -470,16 +470,21 @@ class Opinion
     public function addSource(Source $source)
     {
         $this->Sources[] = $source;
-
+        $this->sourceCount++;
+        $source->setOpinion($this);
         return $this;
     }
 
     /**
      * @param Source $source
+     * @return $this
      */
     public function removeSource(Source $source)
     {
         $this->Sources->removeElement($source);
+        $this->sourceCount--;
+        $source->setOpinion(null);
+        return $this;
     }
 
     /**

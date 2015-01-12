@@ -16,6 +16,7 @@
 
             {% set nbVotes = (opinion.getVotesAll) %}
             {% set nbArguments = (opinion.arguments|length) %}
+            {% set nbSources = (opinion.sourceCount) %}
             <div class="col-xs-12  col-sm-8  col-md-9 has-chart" id="details" data-ok="{{ opinion.voteCountOk }}" data-nok="{{ opinion.voteCountNok }}" data-mitige="{{ opinion.voteCountMitige }}" data-opinion-id="{{ opinion.id }}">
                 <div class="block  block--shadowed  opinion__details">
                     <div class="opinion  opinion--{{ app.request.attributes.get('opinionType').color }}  opinion--current">
@@ -39,6 +40,10 @@
                                     •
                                     {% transchoice nbArguments with {'%count%': nbArguments} from 'CapcoAppBundle' %}
                                     consultation.show.arguments
+                                    {% endtranschoice %}
+                                    •
+                                    {% transchoice nbSources with {'%count%': nbSources} from 'CapcoAppBundle' %}
+                                    consultation.show.sources
                                     {% endtranschoice %}
                                 </p>
                             </div>
@@ -77,11 +82,11 @@
                             {% set tokenSource = csrf_token('source_vote') %}
                             <div class="panel panel-default">
                                 <div class="panel-heading" data-toggle="collapse" data-target="#collapseOne" style="cursor:pointer;">
-                                    <h4 class="panel-title">{% transchoice sources|length with {'%count%': sources|length} from 'CapcoAppBundle' %}source.show.count{% endtranschoice %} <i class="cap cap-add-1 pull-right"></i></h4>
+                                    <h4 class="panel-title">{% transchoice nbSources with {'%count%': nbSources} from 'CapcoAppBundle' %}source.show.count{% endtranschoice %} <i class="cap cap-arrow-67 pull-right"></i></h4>
                                 </div>
                                 <div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
                                     <div class="panel-body">
-                                        <p><a href="{{ path('app_new_source' ,{'opinion_slug': opinion.slug} ) }}" class="btn-sm btn btn-default">{{ 'source.show.add'|trans({}, 'CapcoAppBundle') }}</a></p>
+                                        <p><a href="{{ path('app_new_source' ,{'opinion_slug': opinion.slug} ) }}" class="btn-sm btn btn-default"><i class="cap cap-add-1"></i> {{ 'source.show.add'|trans({}, 'CapcoAppBundle') }}</a></p>
                                         {% for source in sources %}
                                             <div class="media" id="source{{ source.id }}">
                                                 {% if source.Author.Media %}
