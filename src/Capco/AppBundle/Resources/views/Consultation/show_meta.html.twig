@@ -5,8 +5,10 @@
     <div class="box">
         <h4 class="h4">Introduction</h4>
         <p class="more">{{ consultation.body | striptags }}</p>
-
-        {{ render(controller('CapcoAppBundle:Step:showAllInNav', {'consultation': consultation.id, 'type': app.request.attributes.get('opinion_type_slug')})) }}
+        {%  if currentStep is not defined %}
+            {% set currentStep = null %}
+        {% endif %}
+        {{ render(controller('CapcoAppBundle:Step:showAllInNav', {'consultation': consultation, 'currentStep': currentStep})) }}
 
         <h4 class="h4">Informations</h4>
         <p class="excerpt">Thème(s)</p>

@@ -155,7 +155,7 @@ class ConsultationController extends Controller
     }
 
     /**
-     * @Route("/consultation/{consultation_slug}/{opinion_type_slug}/{page}", name="app_consultation_show_opinions", requirements={"page" = "\d+"}, defaults={"page" = 1})
+     * @Route("/consultation/{consultation_slug}/opinions/{opinion_type_slug}/{page}", name="app_consultation_show_opinions", requirements={"page" = "\d+"}, defaults={"page" = 1})
      * @ParamConverter("consultation", class="CapcoAppBundle:Consultation", options={"mapping": {"consultation_slug": "slug"}})
      * @ParamConverter("opiniontype", class="CapcoAppBundle:OpinionType", options={"mapping": {"opinion_type_slug": "slug"}})
      * @Template("CapcoAppBundle:Consultation:show_by_type.html.twig")

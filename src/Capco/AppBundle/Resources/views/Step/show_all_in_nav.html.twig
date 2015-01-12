@@ -3,9 +3,21 @@
     <ul class="nav">
         {% set nb = 1 %}
         {% set now = date("now") %}
+        {% if currentStep is not defined %}
+            {%  set currentStep = null %}
+        {%  endif %}
+        {%  set isConsultationPage = false %}
+        {% if currentStep == null or currentStep.isConsultationStep %}
+            {%  set isConsultationPage = true %}
+        {% endif %}
         {% for step in steps %}
-            <li {% if step.isConsultationStep %} class="active" {% endif %}>
-                <a href="{{ path('app_consultation_show_step', {'consultation_slug':consultation.slug ,'step_slug': step.slug}) }}">
+            {% if step.isConsultationStep %}
+                {%  set stepPath = path('app_consultation_show', {'slug': consultation.slug}) %}
+            {% else %}
+                {%  set stepPath = path('app_consultation_show_step', {'consultation_slug': consultation.slug, 'step_slug': step.slug}) %}
+            {%  endif %}
+            <li {% if (isConsultationPage and step.isConsultationStep) or (currentStep == step) %} class="active" {% endif %}>
+                <a href="{{ stepPath }}">
                     <div class="navbar__step-nb">{{ nb }}</div>
                     <div class="navbar__step">
                         <h3 class="navbar__step-title">{{ step.title}}  <i class="pull-right  excerpt  cap-arrow-66"></i></h3>

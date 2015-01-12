@@ -88,19 +88,17 @@ class Step
     private $isEnabled = true;
 
     /**
-     * @var string
-     *
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Consultation", inversedBy="Steps", cascade={"persist"})
      * @ORM\JoinColumn(nullable=true)
      */
     private $consultation = null;
 
     /**
-     * @var Page
+     * @var string
      *
-     * @ORM\OneToOne(targetEntity="Capco\AppBundle\Entity\Page", cascade={"persist", "remove"})
+     * @ORM\Column(name="body", type="text", nullable=true)
      */
-    private $Page = null;
+    private $body = null;
 
     public function __toString()
     {
@@ -321,19 +319,24 @@ class Step
     }
 
     /**
-     * @return Page
+     * Get body
+     *
+     * @return string
      */
-    public function getPage()
+    public function getBody()
     {
-        return $this->Page;
+        return $this->body;
     }
 
     /**
-     * @param Page $page
+     * Set body
+     *
+     * @return Step
      */
-    public function setPage($page)
+    public function setBody($body)
     {
-        $this->Page = $page;
+        $this->body = $body;
+        return $this;
     }
 
 }

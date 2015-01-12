@@ -4,6 +4,7 @@ namespace Capco\AppBundle\Controller;
 
 use Capco\AppBundle\Entity\Consultation;
 use Capco\AppBundle\Entity\Step;
+use Capco\AppBundle\Entity\Theme;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -21,9 +22,10 @@ class StepController extends Controller
     /**
      * @Template("CapcoAppBundle:Step:show_all_in_nav.html.twig")
      * @param Consultation $consultation
+     * @param Step $current
      * @return array
      */
-    public function showAllInNavAction(Consultation $consultation)
+    public function showAllInNavAction(Consultation $consultation, $currentStep = null)
     {
         $em = $this->getDoctrine();
         $steps = $em->getRepository('CapcoAppBundle:Step')->findBy(
@@ -40,34 +42,29 @@ class StepController extends Controller
         return [
             'consultation' => $consultation,
             'steps' => $steps,
+            'currentStep' => $currentStep,
         ];
     }
 
     /**
-     * @Route("/secure/consultation/{consultation_slug}/step/{step_slug}", name="app_consultation_show_step")
+     * @Route("/consultation/{consultation_slug}/step/{step_slug}", name="app_consultation_show_step")
+     * @Template("CapcoAppBundle:Step:show.html.twig")
      * @ParamConverter("consultation", class="CapcoAppBundle:Consultation", options={"mapping": {"consultation_slug": "slug"}})
      * @ParamConverter("step", class="CapcoAppBundle:Step", options={"mapping": {"step_slug": "slug"}})
-     * @Template()
      * @param Consultation $consultation
      * @param Step $step
      * @return array
      */
     public function showStepAction(Consultation $consultation, Step $step)
     {
-        $stepTypes = Step::$stepTypes;
-        switch ($step->getType()) {
+        $em = $this->getDoctrine()->getManager();
+        $consultation = $em->getRepository('CapcoAppBundle:Consultation')->getFirstResultWithMedia($consultation->getSlug());
 
-            case $stepTypes['consultation']:
-                return $this->redirect($this->generateUrl('app_consultation_show', array('slug' => $consultation->getSlug())));
-                break;
-            
-            default:
-                if (null != $step->getPage()) {
-                    return $this->redirect($this->generateUrl('app_page_show', array('slug' => $step->getPage()->getSlug())));
-                }
-                break;
-        }
-        return $this->redirect($this->generateUrl('app_consultation_show', array('slug' => $consultation->getSlug())));
+        return [
+            'consultation' => $consultation,
+            'statuses' => Theme::$statuses,
+            'currentStep' => $step,
+        ];
     }
 
 }

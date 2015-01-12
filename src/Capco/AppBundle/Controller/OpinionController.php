@@ -25,7 +25,7 @@ class OpinionController extends Controller
 {
 
     /**
-     * @Route("/consultation/{consultation_slug}/{opinion_type_slug}/add", name="app_consultation_new_opinion")
+     * @Route("/consultation/{consultation_slug}/opinion/{opinion_type_slug}/add", name="app_consultation_new_opinion")
      * @ParamConverter("consultation", class="CapcoAppBundle:Consultation", options={"mapping": {"consultation_slug": "slug"}})
      * @ParamConverter("opinionType", class="CapcoAppBundle:OpinionType", options={"mapping": {"opinion_type_slug": "slug"}})
      * @param $opinionType
@@ -73,7 +73,7 @@ class OpinionController extends Controller
 
     /**
      * Page opinion
-     * @Route("/consultation/{consultation_slug}/{opinion_type_slug}/{opinion_slug}", name="app_consultation_show_opinion")
+     * @Route("/consultation/{consultation_slug}/opinion/{opinion_type_slug}/{opinion_slug}", name="app_consultation_show_opinion")
      * @ParamConverter("consultation", class="CapcoAppBundle:Consultation", options={"mapping": {"consultation_slug": "slug"}})
      * @ParamConverter("opinionType", class="CapcoAppBundle:OpinionType", options={"mapping": {"opinion_type_slug": "slug"}})
      * @ParamConverter("opinion", class="CapcoAppBundle:Opinion", options={"mapping": {"opinion_slug": "slug"}})
@@ -177,7 +177,7 @@ class OpinionController extends Controller
     }
 
     /**
-     * @Route("/consultation/{consultation_slug}/{opinion_type_slug}/delete/{opinion_slug}", name="app_consultation_delete_opinion")
+     * @Route("/consultation/{consultation_slug}/opinion/{opinion_type_slug}/delete/{opinion_slug}", name="app_consultation_delete_opinion")
      * @ParamConverter("consultation", class="CapcoAppBundle:Consultation", options={"mapping": {"consultation_slug": "slug"}})
      * @ParamConverter("opinionType", class="CapcoAppBundle:OpinionType", options={"mapping": {"opinion_type_slug": "slug"}})
      * @ParamConverter("opinion", class="CapcoAppBundle:Opinion", options={"mapping": {"opinion_slug": "slug"}})
@@ -230,7 +230,7 @@ class OpinionController extends Controller
     }
 
     /**
-     * @Route("/consultation/{consultation_slug}/{opinion_type_slug}/edit/{opinion_slug}", name="app_consultation_edit_opinion")
+     * @Route("/consultation/{consultation_slug}/opinion/{opinion_type_slug}/edit/{opinion_slug}", name="app_consultation_edit_opinion")
      * @ParamConverter("consultation", class="CapcoAppBundle:Consultation", options={"mapping": {"consultation_slug": "slug"}})
      * @ParamConverter("opinionType", class="CapcoAppBundle:OpinionType", options={"mapping": {"opinion_type_slug": "slug"}})
      * @ParamConverter("opinion", class="CapcoAppBundle:Opinion", options={"mapping": {"opinion_slug": "slug"}})

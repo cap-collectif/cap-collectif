@@ -24,7 +24,7 @@ class StepAdmin extends Admin
             ->add('isEnabled')
             ->add('type')
             ->add('consultation')
-            ->add('Page')
+            ->add('body')
         ;
     }
 
@@ -44,7 +44,7 @@ class StepAdmin extends Admin
                 'template' => 'CapcoAdminBundle:Step:type_list_field.html.twig',
                 'stepTypeLabels' => Step::$stepTypeLabels
             ))
-            ->add('Page')
+            ->add('body')
             ->add('_action', 'actions', array(
                 'actions' => array(
                     'edit' => array(),
@@ -76,7 +76,7 @@ class StepAdmin extends Admin
                     'required' => true,
                     'choices' => Step::$stepTypeLabels,
                 ))
-                ->add('Page')
+                ->add('body')
                 ->add('consultation')
             ;
         }
@@ -95,7 +95,7 @@ class StepAdmin extends Admin
             ->add('position')
             ->add('isEnabled')
             ->add('type')
-            ->add('Page')
+            ->add('body')
             ->add('consultation')
         ;
     }
