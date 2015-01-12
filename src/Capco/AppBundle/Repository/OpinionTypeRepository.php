@@ -40,4 +40,14 @@ class OpinionTypeRepository extends EntityRepository
             ->getResult();
     }
 
+    public function findAllByPosition()
+    {
+        $qb = $this->createQueryBuilder('ot')
+            ->orderBy('ot.position', 'ASC');
+
+        return $qb
+            ->getQuery()
+            ->getResult();
+    }
+
 }

@@ -170,6 +170,7 @@ opinion:
       ok: D'accord
       nok: Pas d'accord
       mitige: Mitigé
+    none: Il n' y a pas de propositions.
 
 #Users
 user:

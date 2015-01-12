@@ -46,7 +46,9 @@
                     </div>
 
                     <div class="opinion__description">
+                        {% if(nbVotes > 0) %}
                         <div id="piechart-{{ opinion.id }}" class="opinion__chart  center-block"></div>
+                        {% endif %}
                         {{ opinion.body|raw }}
                         <div class="opinion__buttons">
 
@@ -79,7 +81,7 @@
                                 </div>
                                 <div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
                                     <div class="panel-body">
-                                        <p><a href="{{ path('app_new_source' ,{'opinion_slug': opinion.slug} ) }}" class="btn-sm btn btn-default"><i class="cap cap-pencil-1"></i>{{ 'source.show.add'|trans({}, 'CapcoAppBundle') }}</a></p>
+                                        <p><a href="{{ path('app_new_source' ,{'opinion_slug': opinion.slug} ) }}" class="btn-sm btn btn-default">{{ 'source.show.add'|trans({}, 'CapcoAppBundle') }}</a></p>
                                         {% for source in sources %}
                                             <div class="media" id="source{{ source.id }}">
                                                 {% if source.Author.Media %}

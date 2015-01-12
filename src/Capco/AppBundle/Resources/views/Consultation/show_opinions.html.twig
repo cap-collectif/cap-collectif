@@ -1,54 +1,61 @@
-{% for block in blocks %}
-    <div class="block  block--shadowed">
-    <div class="opinion  opinion--{{ block.color }}  opinion--default">
-        <div class="opinion__header  opinion__header--mobile-centered">
+{% if(blocks|length > 0) %}
+    {% for block in blocks %}
+        <div class="block  block--shadowed">
+        <div class="opinion  opinion--{{ block.color }}  opinion--default">
+            <div class="opinion__header  opinion__header--mobile-centered">
 
-            <h4 class="pull-left  h4  opinion__header__title"> {{ block.title }} <span class="badge">{{ block.Opinions|length }}</span></h4>
-            <div class="pull-right  opinion__header__filter">
-                {% if block.isEnabled == true %}
-                <a href="{{ path('app_consultation_new_opinion' ,{'consultation_slug': app.request.attributes.get('consultation').slug, 'opinion_type_slug': block.slug} ) }}" class="btn  btn-default">
-                    <i class="cap cap-add-1"></i>
-                    <span class="hidden-xs  hidden-sm"> Proposer</span>
-                </a>
-                {% endif %}
+                <h4 class="pull-left  h4  opinion__header__title"> {{ block.title }} <span class="badge">{{ block.Opinions|length }}</span></h4>
+                <div class="pull-right  opinion__header__filter">
+                    {% if block.isEnabled == true %}
+                    <a href="{{ path('app_consultation_new_opinion' ,{'consultation_slug': app.request.attributes.get('consultation').slug, 'opinion_type_slug': block.slug} ) }}" class="btn  btn-default">
+                        <i class="cap cap-add-1"></i>
+                        <span class="hidden-xs  hidden-sm"> Proposer</span>
+                    </a>
+                    {% endif %}
+                </div>
             </div>
         </div>
-    </div>
-    <ul class="media-list  opinion__list">
-        {% for opinion in block.Opinions %}
-        {% set nbVotes = (opinion.getVotesAll) %}
-        {% set nbArguments = (opinion.arguments|length) %}
-        <li class="opinion  opinion--{{ block.slug }}  has-chart" data-ok="{{ opinion.voteCountOk }}" data-nok="{{ opinion.voteCountNok }}" data-mitige="{{ opinion.voteCountMitige }}" data-opinion-id="{{ opinion.id }}">
-            <div class="row">
-                <div class="col-xs-12  col-sm-8  col-md-9  col-lg-10">
-                    <div class="opinion__body  box">
-                        {% if opinion.Author.Media %}
-                            <a class="pull-left" href="#">
-                                {% thumbnail opinion.Author.Media, 'avatar' with {'title': opinion.Author.fullname, 'alt': opinion.Author.fullname, 'class': 'img-circle  pull-left'} %}
-                            </a>
-                        {% endif %}
-                        <div class="opinion__data">
-                            <p class="opinion__user  h5"><a href="#">{{ opinion.Author.getFullname }}</a> <span class="pull-right  excerpt">{{ opinion.createdAt | localizeddate('medium', 'none', app.request.locale) }}</span></p>
-                            <p class="opinion__title"><a href="{{ path('app_consultation_show_opinion', {'consultation_slug': app.request.attributes.get('consultation').slug, 'opinion_type_slug': block.slug, 'opinion_slug': opinion.slug}) }}">{{ opinion.title }}</a> </p>
-                            <p class="opinion__votes  excerpt h5">
-                                {% transchoice nbVotes with {'%count%': nbVotes} from 'CapcoAppBundle' %}
-                                consultation.show.votes
-                                {% endtranschoice %}
-                                •
-                                {% transchoice nbArguments with {'%count%': nbArguments} from 'CapcoAppBundle' %}
-                                consultation.show.arguments
-                                {% endtranschoice %}
-                            </p>
+        <ul class="media-list  opinion__list">
+            {% for opinion in block.Opinions %}
+            {% set nbVotes = (opinion.getVotesAll) %}
+            {% set nbArguments = (opinion.arguments|length) %}
+            <li class="opinion  opinion--{{ block.slug }}  has-chart" data-ok="{{ opinion.voteCountOk }}" data-nok="{{ opinion.voteCountNok }}" data-mitige="{{ opinion.voteCountMitige }}" data-opinion-id="{{ opinion.id }}">
+                <div class="row">
+                    <div class="col-xs-12  col-sm-8  col-md-9  col-lg-10">
+                        <div class="opinion__body  box">
+                            {% if opinion.Author.Media %}
+                                <a class="pull-left" href="#">
+                                    {% thumbnail opinion.Author.Media, 'avatar' with {'title': opinion.Author.fullname, 'alt': opinion.Author.fullname, 'class': 'img-circle  pull-left'} %}
+                                </a>
+                            {% endif %}
+                            <div class="opinion__data">
+                                <p class="opinion__user  h5"><a href="#">{{ opinion.Author.getFullname }}</a> <span class="pull-right  excerpt">{{ opinion.createdAt | localizeddate('medium', 'none', app.request.locale) }}</span></p>
+                                <p class="opinion__title"><a href="{{ path('app_consultation_show_opinion', {'consultation_slug': app.request.attributes.get('consultation').slug, 'opinion_type_slug': block.slug, 'opinion_slug': opinion.slug}) }}">{{ opinion.title }}</a> </p>
+                                <p class="opinion__votes  excerpt h5">
+                                    {% transchoice nbVotes with {'%count%': nbVotes} from 'CapcoAppBundle' %}
+                                    consultation.show.votes
+                                    {% endtranschoice %}
+                                    •
+                                    {% transchoice nbArguments with {'%count%': nbArguments} from 'CapcoAppBundle' %}
+                                    consultation.show.arguments
+                                    {% endtranschoice %}
+                                </p>
+                            </div>
                         </div>
                     </div>
-                </div>
 
-                <div class="hidden-xs col-sm-4  col-md-3  col-lg-2">
-                    <div id="piechart-{{ opinion.id }}" style="width: 145px; height: 95px;"></div>
+                    <div class="hidden-xs col-sm-4  col-md-3  col-lg-2">
+                        <div id="piechart-{{ opinion.id }}" style="width: 145px; height: 95px;"></div>
+                    </div>
                 </div>
-            </div>
-        </li>
-        {% endfor %}
-    </ul>
-</div>
-{% endfor %}
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+    {% endfor %}
+{% else %}
+    <div class="consultation__empty-block  text-center">
+        <p class="icon  cap-bubble-attention-6"></p>
+        <p>{{ 'opinion.show.none'|trans({}, 'CapcoAppBundle') }}</p>
+    </div>
+{% endif %}

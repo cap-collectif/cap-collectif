@@ -252,10 +252,12 @@
   padding: 15px;
   border-top: 1px solid $border;
   overflow: hidden;
+  word-wrap: break-word;
 
   .opinion__buttons {
     overflow: hidden;
     margin-bottom: 30px;
+    clear: both;
   }
 
   .opinion__vote-group {
