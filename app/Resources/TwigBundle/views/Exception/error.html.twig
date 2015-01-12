@@ -12,16 +12,16 @@
 	<div class="container text-center">
 		<p><strong>{{ 'error.actions'|trans({}, 'CapcoAppBundle') }}</strong></p>
 		<p>
-			<button class="btn  btn-link" onclick="history.go(-1);">{{ 'error.to_previous_page'|trans({}, 'CapcoAppBundle') }}</button><br/>
+			<button class="btn  btn-link" style="padding:0; font-size: 16px;" onclick="history.go(-1);">{{ 'error.to_previous_page'|trans({}, 'CapcoAppBundle') }}</button><br/>
 			<a href="{{ path('app_homepage') }}">{{ 'error.to_homepage'|trans({}, 'CapcoAppBundle') }}</a><br/>
-			<a href="">{{ 'error.report'|trans({}, 'CapcoAppBundle') }}</a>
+			<a href="{{ menu_url('contact') }}">{{ 'error.report'|trans({}, 'CapcoAppBundle') }}</a>
 		</p>
 	</div>
 
 	<div class="container">
-        <h2 class="h2">{{ 'error.contribute'|trans({}, 'CapcoAppBundle') }}</h2>
-        {{ render(controller('CapcoAppBundle:Consultation:lastOpenConsultations', {'max': 4, 'offset': 0})) }}
-    </div>
+		<h2 class="h2">{{ 'error.contribute'|trans({}, 'CapcoAppBundle') }}</h2>
+		{{ render(controller('CapcoAppBundle:Consultation:lastOpenConsultations', {'max': 4, 'offset': 0})) }}
+	</div>
 
 {% endblock %}
 
