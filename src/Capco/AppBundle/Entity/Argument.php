@@ -4,6 +4,7 @@ namespace Capco\AppBundle\Entity;
 
 use Capco\UserBundle\Entity\User;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -78,6 +79,13 @@ class Argument
     private $opinion;
 
     /**
+     * @var string
+     *
+     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\Reporting", mappedBy="Argument", cascade={"persist", "remove"})
+     */
+    private $Reports;
+
+    /**
      * @var integer
      *
      * @ORM\Column(name="type", type="integer")
@@ -91,6 +99,11 @@ class Argument
      * @ORM\JoinColumn(name="author_id", referencedColumnName="id")
      */
     private $Author;
+
+    function __construct()
+    {
+        $this->Reports = new ArrayCollection();
+    }
 
     /**
      * Get id
@@ -270,5 +283,32 @@ class Argument
             }
         }
         return false;
+    }
+
+    /**
+     * @return string
+     */
+    public function getReports()
+    {
+        return $this->Reports;
+    }
+
+    /**
+     * @param Reporting $report
+     * @return $this
+     */
+    public function addReport(Reporting $report)
+    {
+        $this->Reports[] = $report;
+
+        return $this;
+    }
+
+    /**
+     * @param Reporting $report
+     */
+    public function removeReport(Reporting $report)
+    {
+        $this->Reports->removeElement($report);
     }
 }

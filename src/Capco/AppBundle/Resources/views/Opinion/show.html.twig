@@ -71,9 +71,15 @@
                             {{ form_end(opinionVoteForm) }}
 
                             <div class="pull-right  opinion__action-buttons">
-                                <a href="#" class="btn  btn-dark-gray  btn--outline"><i class="cap cap-flag-1"></i> Signaler</a>
+
+                                {% if(userReportingOpinion == false) %}
+                                <a href="{{ path('app_report_opinion' ,{'consultation_slug': consultation.slug, 'opinion_type_slug': opinionType.slug, 'opinion_slug': opinion.slug } ) }}" class="btn  btn-dark-gray  btn--outline"><i class="cap cap-flag-1"></i> Signaler</a>
+                                {% else %}
+                                <button disabled="disabled" class="btn  btn-dark-gray"><i class="cap cap-flag-1"></i> opinion signalé</button>
+                                {% endif %}
+
                                 {% if app.user is not null and app.user == opinion.Author %}
-                                    <a href="{{ path('app_consultation_edit_opinion' ,{'consultation_slug': consultation.slug, 'opinion_type_slug': app.request.attributes.get('opinionType').slug, 'opinion_slug': opinion.slug } ) }}" class="btn  btn-dark-gray  btn--outline"><i class="cap cap-pencil-1"></i> Modifier</a>
+                                <a href="{{ path('app_consultation_edit_opinion' ,{'consultation_slug': consultation.slug, 'opinion_type_slug': app.request.attributes.get('opinionType').slug, 'opinion_slug': opinion.slug } ) }}" class="btn  btn-dark-gray  btn--outline"><i class="cap cap-pencil-1"></i> Modifier</a>
                                 {% endif %}
                             </div>
                         </div> <!-- .opinion__buttons -->
@@ -115,7 +121,13 @@
                                                         <input type="hidden" name="_csrf_token" value="{{ tokenSource }}">
                                                     </form>
                                                     <span class="nb-votes">{{ source.voteCountSource }}</span>
-                                                    <a href="#" class="btn  btn-dark-gray  btn--outline  btn-xs"><i class="cap cap-flag-1"></i> Signaler</a>
+
+                                                    {% if(userReportingSource == false) %}
+                                                        <a href="{{ path('app_report_source' ,{'consultation_slug': consultation.slug, 'opinion_type_slug': opinionType.slug, 'opinion_slug': opinion.slug, 'source_slug': source.slug } ) }}" class="btn btn-xs btn-dark-gray  btn--outline"><i class="cap cap-flag-1"></i> Signaler</a>
+                                                    {% else %}
+                                                        <button disabled="disabled" class="btn btn-xs btn-dark-gray"><i class="cap cap-flag-1"></i> source signalé</button>
+                                                    {% endif %}
+
                                                     {% if app.user is not null and app.user == source.Author %}
                                                         <a href="{{ path('app_edit_source' ,{'opinion_slug': opinion.slug, 'source_slug': source.slug} ) }}" class="btn  btn-dark-gray  btn--outline  btn-xs"><i class="cap cap-pencil-1"></i> Modifier</a>
                                                     {% endif %}

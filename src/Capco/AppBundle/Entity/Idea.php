@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -110,6 +111,13 @@ Idea
      * @ORM\JoinColumn(name="media_id", referencedColumnName="id")
      */
     private $Media;
+
+    /**
+     * @var string
+     *
+     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\Reporting", mappedBy="Idea", cascade={"persist", "remove"})
+     */
+    private $Reports;
 
     /**
      * @var
@@ -303,7 +311,8 @@ Idea
      */
     public function __construct()
     {
-        $this->IdeaVotes = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->IdeaVotes = new ArrayCollection();
+        $this->Reports = new ArrayCollection();
     }
 
     /**
@@ -397,4 +406,33 @@ Idea
     public function resetVotes(){
         $this->voteCount = 0;
     }
+
+    /**
+     *
+     * @return string
+     */
+    public function getReports()
+    {
+        return $this->Reports;
+    }
+
+    /**
+     * @param Reporting $report
+     * @return $this
+     */
+    public function addReport(Reporting $report)
+    {
+        $this->Reports[] = $report;
+
+        return $this;
+    }
+
+    /**
+     * @param Reporting $report
+     */
+    public function removeReport(Reporting $report)
+    {
+        $this->Reports->removeElement($report);
+    }
+
 }

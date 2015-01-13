@@ -37,7 +37,19 @@
                     </form>
                     <span class="opinion__votes-nb">{{ argument.VoteCount }}</span>
 
-                    <a href="#" class="btn  btn-dark-gray  btn--outline  btn-xs"><i class="cap cap-flag-1"></i> Signaler</a>
+                    {% if(userReportingArgument is empty) %}
+                    <a href="{{ path('app_report_argument' ,{'consultation_slug': consultation.slug, 'opinion_type_slug': opinionType.slug, 'opinion_slug': opinion.slug, 'argument_id': argument.id } ) }}" class="btn btn-xs btn-dark-gray  btn--outline"><i class="cap cap-flag-1"></i> Signaler</a>
+                    {% else %}
+                        {% for userReport in userReportingArgument %}
+                            {% if(userReport.Argument.id == argument.id ) %}
+                                <button disabled="disabled" class="btn btn-xs btn-dark-gray"><i class="cap cap-flag-1"></i> source signalé</button>
+                            {% else %}
+                                <a href="{{ path('app_report_argument' ,{'consultation_slug': consultation.slug, 'opinion_type_slug': opinionType.slug, 'opinion_slug': opinion.slug, 'argument_id': argument.id } ) }}" class="btn btn-xs btn-dark-gray  btn--outline"><i class="cap cap-flag-1"></i> Signaler</a>
+                            {% endif %}
+                        {% endfor %}
+                    {% endif  %}
+
+
                     {% if app.user is not null and app.user == argument.Author %}
                         <a href="{{ path('app_consultation_edit_argument' ,{'consultation_slug': consultation.slug, 'opinion_type_slug': opinionType.slug, 'opinion_slug': opinion.slug, 'argument_id': argument.id } ) }}" class="btn  btn-dark-gray  btn--outline  btn-xs"><i class="cap cap-pencil-1"></i> Modifier</a>
                     {% endif %}

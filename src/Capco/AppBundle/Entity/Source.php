@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\Entity;
 
 use Capco\UserBundle\Entity\User;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -124,6 +125,13 @@ class Source
     private $Votes;
 
     /**
+     * @var string
+     *
+     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\Reporting", mappedBy="Source", cascade={"persist", "remove"})
+     */
+    private $Reports;
+
+    /**
      * @var integer
      *
      * @ORM\Column(name="vote_count_source", type="integer")
@@ -143,6 +151,7 @@ class Source
     function __construct()
     {
         $this->type = self::LINK;
+        $this->Reports = new ArrayCollection();
     }
 
     /**
@@ -379,6 +388,34 @@ class Source
             }
         }
         return false;
+    }
+
+    /**
+     *
+     * @return string
+     */
+    public function getReports()
+    {
+        return $this->Reports;
+    }
+
+    /**
+     * @param Reporting $report
+     * @return $this
+     */
+    public function addReport(Reporting $report)
+    {
+        $this->Reports[] = $report;
+
+        return $this;
+    }
+
+    /**
+     * @param Reporting $report
+     */
+    public function removeReport(Reporting $report)
+    {
+        $this->Reports->removeElement($report);
     }
 
 }

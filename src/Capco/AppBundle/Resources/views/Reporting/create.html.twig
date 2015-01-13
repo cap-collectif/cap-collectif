@@ -1,0 +1,40 @@
+{% extends '@CapcoApp/base.html.twig' %}
+
+{% block jumbotron %}
+{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2">
+                <div class="dialog  dialog--white  block--shadowed">
+                    <div class="dialog__header  box">
+                        <h4 class="h4  dialog__title">Signaler un contenu</h4>
+                    </div>
+                    <form method="post" {{ form_enctype(form) }}>
+                        <div class="dialog__body  box">
+                            <div class="media">
+                                {% if app.user.Media %}
+                                    <a class="pull-left" href="#">
+                                        {% thumbnail app.user.Media, 'avatar' with {'title': app.user.fullname, 'alt': app.user.fullname, 'class': 'media-object img-circle'} %}
+                                    </a>
+                                {% endif %}
+                                <div class="media-body">
+                                    {{ form_rest(form) }}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="dialog__excerpt  excerpt  box">
+                            <p>L'équipe du site évalue les contenus et les utilisateurs signalés régulièrement pour déterminer s'ils portent atteinte au règlement de la communauté. Les comptes sont sanctionnés pour toute infraction au règlement de la communauté et peuvent être clôturés en cas de violations graves ou répétées.</p>
+                        </div>
+                        <div class="dialog__footer  box">
+                            <div class="pull-right">
+                                <button type="submit" class="btn  btn-primary">Signaler</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -41,18 +41,14 @@
 
         {% endif %}
 
-        <div class="dropdown dropdown--social">
-            <button class="btn  btn-default" type="button" data-toggle="dropdown"><i class="cap cap-link"></i> {{ 'idea.show.share'|trans({}, 'CapcoAppBundle') }} <span class="caret"></span></button>
-            <ul class="dropdown-menu" role="menu">
-                <li><a href="#"><i class="cap-facebook"></i> Facebook</a></li>
-                <li><a href="#"><i class="cap-twitter"></i> Twitter</a></li>
-                <li><a href="#"><i class="cap-gplus"></i> Google+</a></li>
-                <li><a href="#"><i class="cap-mail-1"></i> Mail</a></li>
-            </ul>
-        </div>
-
         <div class="pull-right no-float-mobile">
-            <a href="#" class="btn  btn-dark-gray  btn--outline"><i class="cap cap-flag-1-1"></i> {{ 'idea.show.report'|trans({}, 'CapcoAppBundle') }}</a>
+
+            {% if(userReportingIdea == false) %}
+                <a href="{{ path('app_report_idea' ,{'idea_slug': idea.slug } ) }}" class="btn btn-dark-gray  btn--outline"><i class="cap cap-flag-1"></i> {{ 'idea.show.report'|trans({}, 'CapcoAppBundle') }}</a>
+            {% else %}
+                <button disabled="disabled" class="btn btn-dark-gray"><i class="cap cap-flag-1"></i> source signalé</button>
+            {% endif %}
+
             {% if app.user.id is defined and app.user.id == idea.Author.id %}
                 <a href="{{ path('app_idea_update', {'slug': idea.slug}) }}" class="btn  btn-dark-gray  btn--outline"><i class="cap cap-pencil-1-1"></i> {{ 'idea.show.edit'|trans({}, 'CapcoAppBundle') }}</a>
             {% endif %}

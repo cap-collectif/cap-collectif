@@ -100,6 +100,13 @@ class Opinion
     private $Votes;
 
     /**
+     * @var string
+     *
+     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\Reporting", mappedBy="Opinion", cascade={"persist", "remove"})
+     */
+    private $Reports;
+
+    /**
      * @var integer
      *
      * @ORM\Column(name="vote_count_nok", type="integer")
@@ -203,6 +210,7 @@ class Opinion
     function __construct()
     {
         $this->Votes = new ArrayCollection();
+        $this->Reports = new ArrayCollection();
         $this->arguments = new ArrayCollection();
         $this->Sources = new ArrayCollection();
     }
@@ -426,6 +434,34 @@ class Opinion
     public function removeVote(OpinionVote $vote)
     {
         $this->Votes->removeElement($vote);
+    }
+
+    /**
+     *
+     * @return string
+     */
+    public function getReports()
+    {
+        return $this->Reports;
+    }
+
+    /**
+     * @param Reporting $report
+     * @return $this
+     */
+    public function addReport(Reporting $report)
+    {
+        $this->Reports[] = $report;
+
+        return $this;
+    }
+
+    /**
+     * @param Reporting $report
+     */
+    public function removeReport(Reporting $report)
+    {
+        $this->Reports->removeElement($report);
     }
 
     /**

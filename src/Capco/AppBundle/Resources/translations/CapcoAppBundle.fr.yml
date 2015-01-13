@@ -173,6 +173,11 @@ opinion:
       mitige: Mitigé
     none: Il n' y a pas de propositions.
 
+reporting:
+  form:
+    status: Quelle est la nature du problème ?
+    body: Message
+
 #Users
 user:
   login:

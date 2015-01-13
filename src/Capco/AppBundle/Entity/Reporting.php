@@ -2,9 +2,9 @@
 
 namespace Capco\AppBundle\Entity;
 
-use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Reporting
@@ -14,10 +14,19 @@ use Gedmo\Mapping\Annotation as Gedmo;
  */
 class Reporting
 {
+    const SIGNALEMENT_SEX = 0;
+    const SIGNALEMENT_OFF = 1;
+    const SIGNALEMENT_SPAM = 2;
+    const SIGNALEMENT_ERROR = 3;
+    const SIGNALEMENT_OFF_TOPIC = 4;
 
-    const SIGNALEMENT_NOT_DONE = 0;
-    const SIGNALEMENT_TRASHED = 1;
-    const SIGNALEMENT_ABUSSIF = 2;
+    public static $openingStatusesLabels = [
+        self::SIGNALEMENT_SEX => 'Contenu à caractère sexuel',
+        self::SIGNALEMENT_OFF => 'Contenu raciste, offensant ou haineux',
+        self::SIGNALEMENT_SPAM => 'Spam ou contenu trompeur',
+        self::SIGNALEMENT_ERROR => 'Information erronée',
+        self::SIGNALEMENT_OFF_TOPIC => 'Propos hors-sujet',
+    ];
 
     /**
      * @var integer
@@ -31,7 +40,7 @@ class Reporting
     /**
      * @var integer
      *
-     * @ORM\Column(name="status", type="integer", nullable=true)
+     * @ORM\Column(name="status", type="integer")
      */
     private $status;
 
@@ -50,22 +59,52 @@ class Reporting
     private $updatedAt;
 
     /**
-     * @var
-     * @ORM\ManyToMany(targetEntity="Capco\AppBundle\Entity\Opinion", cascade={"persist"})
+     * @var string
+     *
+     * @ORM\Column(name="body", type="text")
+     * @Assert\NotBlank()
      */
-    private $Opinions;
+    private $body;
 
     /**
      * @var
+     *
      * @ORM\ManyToOne(targetEntity="Capco\UserBundle\Entity\User")
-     * @ORM\JoinColumn(name="moderator_id", referencedColumnName="id")
+     * @ORM\JoinColumn(name="reporter_id", referencedColumnName="id")
      */
-    private $moderator;
+    private $Reporter;
 
-    function __construct()
-    {
-        $this->Opinions = new ArrayCollection();
-    }
+    /**
+     * @var
+     *
+     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Opinion", inversedBy="Reports")
+     * @ORM\JoinColumn(name="opinion_id", referencedColumnName="id")
+     */
+    private $Opinion;
+
+    /**
+     * @var
+     *
+     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Source", inversedBy="Reports")
+     * @ORM\JoinColumn(name="source_id", referencedColumnName="id")
+     */
+    private $Source;
+
+    /**
+     * @var
+     *
+     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Argument", inversedBy="Reports")
+     * @ORM\JoinColumn(name="argument_id", referencedColumnName="id")
+     */
+    private $Argument;
+
+    /**
+     * @var
+     *
+     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Idea", inversedBy="Reports")
+     * @ORM\JoinColumn(name="idea_id", referencedColumnName="id")
+     */
+    private $Idea;
 
     /**
      * Get id
@@ -121,73 +160,99 @@ class Reporting
     }
 
     /**
-     * @return mixed
+     * @return string
      */
-    public function getOpinions()
+    public function getBody()
     {
-        return $this->Opinions;
+        return $this->body;
     }
 
     /**
-     * @param opinion $Opinion
-     * @return $this
+     * @param string $body
      */
-    public function addOpinion(Opinion $Opinion)
+    public function setBody($body)
     {
-        $this->Opinions[] = $Opinion;
-
-        return $this;
-    }
-
-    /**
-     * @param Opinion $Opinion
-     */
-    public function removeOpinion(Opinion $Opinion)
-    {
-        $this->Opinions->removeElement($Opinion);
+        $this->body = $body;
     }
 
     /**
      * @return mixed
      */
-    public function getModerator()
+    public function getReporter()
     {
-        return $this->moderator;
+        return $this->Reporter;
     }
 
     /**
-     * @param mixed $moderator
+     * @param mixed $reporter
      */
-    public function setModerator($moderator)
+    public function setReporter($reporter)
     {
-        $this->moderator = $moderator;
+        $this->Reporter = $reporter;
     }
 
     /**
-     * Set createdAt
-     *
-     * @param \DateTime $createdAt
-     *
-     * @return Reporting
+     * @return mixed
      */
-    public function setCreatedAt($createdAt)
+    public function getOpinion()
     {
-        $this->createdAt = $createdAt;
-
-        return $this;
+        return $this->Opinion;
     }
 
     /**
-     * Set updatedAt
-     *
-     * @param \DateTime $updatedAt
-     *
-     * @return Reporting
+     * @param mixed $Opinion
      */
-    public function setUpdatedAt($updatedAt)
+    public function setOpinion($Opinion)
     {
-        $this->updatedAt = $updatedAt;
-
-        return $this;
+        $this->Opinion = $Opinion;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getSource()
+    {
+        return $this->Source;
+    }
+
+    /**
+     * @param mixed $Source
+     */
+    public function setSource($Source)
+    {
+        $this->Source = $Source;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getArgument()
+    {
+        return $this->Argument;
+    }
+
+    /**
+     * @param mixed $Argument
+     */
+    public function setArgument($Argument)
+    {
+        $this->Argument = $Argument;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getIdea()
+    {
+        return $this->Idea;
+    }
+
+    /**
+     * @param mixed $Idea
+     */
+    public function setIdea($Idea)
+    {
+        $this->Idea = $Idea;
+    }
+
 }

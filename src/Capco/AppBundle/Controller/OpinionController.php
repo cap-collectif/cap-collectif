@@ -101,6 +101,19 @@ class OpinionController extends Controller
             array('Opinion' => $opinion)
         );
 
+        $reportingOpinion = $this->getDoctrine()->getRepository('CapcoAppBundle:Reporting')->findBy(array(
+            'Reporter' => $this->getUser(),
+            'Opinion' => $opinion
+        ));
+
+        $reportingSource = $this->getDoctrine()->getRepository('CapcoAppBundle:Reporting')->findBy(array(
+            'Reporter' => $this->getUser(),
+            'Source' => $sources
+        ));
+
+        $userReportingOpinion = (count($reportingOpinion) > 0) ? true : false;
+        $userReportingSource = (count($reportingSource) > 0) ? true : false;
+
         // Argument forms
         $argument = new Argument();
         $argument->setOpinion($opinion);
@@ -159,6 +172,8 @@ class OpinionController extends Controller
         }
 
         return [
+            'userReportingOpinion' => $userReportingOpinion,
+            'userReportingSource' => $userReportingSource,
             'currentUrl' => $currentUrl,
             'sources' => $sources,
             'consultation' => $consultation,

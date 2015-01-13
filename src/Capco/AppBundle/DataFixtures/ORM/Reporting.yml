@@ -1,4 +1,20 @@
 Capco\AppBundle\Entity\Reporting:
     reporting1:
-        status: 1
-        opinion: [@opinion1]
+        status: <numberBetween(0, 2)>
+        Opinion: @opinion1
+        Reporter: @user1
+        body: |
+                Morbi fringilla convallis sapien, id pulvinar odio volutpat. Idque Caesaris facere voluntate liceret: sese habere. Cum sociis natoque penatibus et magnis dis parturient. Prima luce, cum quibus mons aliud  consensu ab eo. Quam temere in vitiis, legem sancimus haerentia.
+                Unam incolunt Belgae, aliam Aquitani, tertiam. Unam incolunt Belgae, aliam Aquitani, tertiam. Etiam habebis sem dicantur magna mollis euismod. Quam temere in vitiis, legem sancimus haerentia. At nos hinc posthac, sitientis piros Afros. Etiam habebis sem dicantur magna mollis euismod.
+                Quam temere in vitiis, legem sancimus haerentia. Curabitur blandit tempus ardua ridiculus sed magna. Qui ipsorum lingua Celtae, nostra Galli appellantur. Cum ceteris in veneratione tui montes, nascetur mus. Ambitioni dedisse scripsisse iudicaretur.
+                Quisque ut dolor gravida, placerat libero vel, euismod. Qui ipsorum lingua Celtae, nostra Galli appellantur. Curabitur est gravida et libero vitae dictum. Quisque placerat facilisis egestas cillum dolore. Quae vero auctorem tractata ab fiducia dicuntur. Magna pars studiorum, prodita quaerimus.
+
+    reporting2:
+        status: <numberBetween(0, 2)>
+        Source: @source1
+        Reporter: @user1
+        body: |
+                Morbi fringilla convallis sapien, id pulvinar odio volutpat. Idque Caesaris facere voluntate liceret: sese habere. Cum sociis natoque penatibus et magnis dis parturient. Prima luce, cum quibus mons aliud  consensu ab eo. Quam temere in vitiis, legem sancimus haerentia.
+                Unam incolunt Belgae, aliam Aquitani, tertiam. Unam incolunt Belgae, aliam Aquitani, tertiam. Etiam habebis sem dicantur magna mollis euismod. Quam temere in vitiis, legem sancimus haerentia. At nos hinc posthac, sitientis piros Afros. Etiam habebis sem dicantur magna mollis euismod.
+                Quam temere in vitiis, legem sancimus haerentia. Curabitur blandit tempus ardua ridiculus sed magna. Qui ipsorum lingua Celtae, nostra Galli appellantur. Cum ceteris in veneratione tui montes, nascetur mus. Ambitioni dedisse scripsisse iudicaretur.
+                Quisque ut dolor gravida, placerat libero vel, euismod. Qui ipsorum lingua Celtae, nostra Galli appellantur. Curabitur est gravida et libero vitae dictum. Quisque placerat facilisis egestas cillum dolore. Quae vero auctorem tractata ab fiducia dicuntur. Magna pars studiorum, prodita quaerimus.

@@ -198,6 +198,12 @@ class IdeaController extends Controller
         $currentUrl = $this->generateUrl('app_idea_show', [ 'slug' => $idea->getSlug() ]);
         $translator = $this->get('translator');
         $idea = $em->getRepository('CapcoAppBundle:Idea')->getOneIdeaWithUserAndTheme($idea);
+        $reportingIdea = $this->getDoctrine()->getRepository('CapcoAppBundle:Reporting')->findBy(array(
+            'Reporter' => $this->getUser(),
+            'Idea' => $idea
+        ));
+
+        $userReportingIdea = (count($reportingIdea) > 0) ? true : false;
 
         if ($this->get('security.context')->isGranted('ROLE_USER')) {
             $userVoteCount = $em->getRepository('CapcoAppBundle:IdeaVote')->countForUserAndIdea($this->getUser(), $idea);
@@ -244,6 +250,7 @@ class IdeaController extends Controller
 
         return array(
             'idea' => $idea,
+            'userReportingIdea' => $userReportingIdea,
             'userVoteCount' => $userVoteCount,
             'form' => $form->createView()
         );
