@@ -125,6 +125,27 @@ Idea
      */
     private $IdeaVotes;
 
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="is_trashed", type="boolean")
+     */
+    private $isTrashed = false;
+
+    /**
+     * @var \DateTime
+     * @Gedmo\Timestampable(on="change", field={"isTrashed"})
+     * @ORM\Column(name="trashed_at", type="datetime", nullable=true)
+     */
+    private $trashedAt = null;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="trashed_reason", type="text", nullable=true)
+     */
+    private $trashedReason = null;
+
     public function __toString()
     {
         if ($this->id) {
@@ -365,6 +386,75 @@ Idea
         $this->updatedAt = $updatedAt;
 
         return $this;
+    }
+
+    /**
+     * Set isTrashed
+     *
+     * @param boolean $isTrashed
+     * @return Idea
+     */
+    public function setIsTrashed($isTrashed)
+    {
+        $this->isTrashed = $isTrashed;
+
+        return $this;
+    }
+
+    /**
+     * Get isTrashed
+     *
+     * @return boolean
+     */
+    public function getIsTrashed()
+    {
+        return $this->isTrashed;
+    }
+
+    /**
+     * Set trashedAt
+     *
+     * @param \DateTime $trashedAt
+     * @return Idea
+     */
+    public function setTrashedAt($trashedAt)
+    {
+        $this->trashedAt = $trashedAt;
+
+        return $this;
+    }
+
+    /**
+     * Get trashedAt
+     *
+     * @return \DateTime
+     */
+    public function getTrashedAt()
+    {
+        return $this->trashedAt;
+    }
+
+    /**
+     * Set trashedReason
+     *
+     * @param string $trashedReason
+     * @return Idea
+     */
+    public function setTrashedReason($trashedReason)
+    {
+        $this->trashedReason = $trashedReason;
+
+        return $this;
+    }
+
+    /**
+     * Get trashedReason
+     *
+     * @return string
+     */
+    public function getTrashedReason()
+    {
+        return $this->trashedReason;
     }
 
     /**

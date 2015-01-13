@@ -87,3 +87,4 @@ Capco\AppBundle\Entity\Source:
         Opinion: @opinion<numberBetween(1, 30)>
         link: <url()>
         voteCountSource: <numberBetween(0, 50)>
+        isTrashed: <boolean()>

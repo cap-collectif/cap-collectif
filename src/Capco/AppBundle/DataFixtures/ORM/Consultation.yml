@@ -3,31 +3,23 @@ Capco\AppBundle\Entity\Consultation:
         title: <sentence(3)>
         teaser: <text(35)>
         body: <text(1000)>
-        opinionCount: <numberBetween(0, 582)>
-        argumentCount: <numberBetween(0, 582)>
         Author: @user*
         Media: @MediaConsultation1
     cs2:
         title: <sentence(3)>
         teaser: <text(35)>
         body: <text(1000)>
-        opinionCount: <numberBetween(0, 582)>
-        argumentCount: <numberBetween(0, 582)>
         Author: @user*
         Media: @MediaConsultation2
     cs3:
         title: <sentence(3)>
         teaser: <text(35)>
         body: <text(1000)>
-        opinionCount: <numberBetween(0, 582)>
-        argumentCount: <numberBetween(0, 582)>
         Author: @user*
         Media: @MediaConsultation1
     cs4:
         title: <sentence(3)>
         teaser: <text(35)>
         body: <text(1000)>
-        opinionCount: 0
-        argumentCount: 0
         Author: @user*
         Media: @MediaConsultation2

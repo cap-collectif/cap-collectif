@@ -35,9 +35,9 @@ class ArgumentController extends Controller
     {
         $argumentType = Argument::$argumentTypes[$type];
 
-        $arguments = $this->getDoctrine()->getRepository('CapcoAppBundle:Argument')->findBy(
-            array('type' => $type, 'opinion' => $opinion)
-        );
+        $arguments = $this->getDoctrine()
+            ->getRepository('CapcoAppBundle:Argument')
+            ->getEnabledArgumentsByTypeAndOpinion($type, $opinion);
 
         $reportingArgument = $this->getDoctrine()->getRepository('CapcoAppBundle:Reporting')->findBy(array(
             'Reporter' => $this->getUser(),

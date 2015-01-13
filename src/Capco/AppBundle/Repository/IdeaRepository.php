@@ -18,6 +18,8 @@ class IdeaRepository extends EntityRepository
         return $this->getIsEnabledQueryBuilder()
             ->andWhere('i.title LIKE :term')
             ->setParameter('term', '%'. $term .'%')
+            ->andWhere('i.isTrashed = :notTrashed')
+            ->setParameter('notTrashed', false)
             ->getQuery()
             ->getResult();
     }
@@ -29,6 +31,8 @@ class IdeaRepository extends EntityRepository
         }
 
         $query = $this->getIsEnabledQueryBuilder()
+            ->andWhere('i.isTrashed = :notTrashed')
+            ->setParameter('notTrashed', false)
             ->leftJoin('i.Author', 'a')
             ->addSelect('a')
             ->orderBy('i.createdAt', 'DESC')
@@ -54,9 +58,11 @@ class IdeaRepository extends EntityRepository
             ->leftJoin('i.Author', 'a')
             ->leftJoin('a.Media', 'm')
             ->andWhere('i.isEnabled = :isEnabled')
+            ->andWhere('i.isTrashed = :notTrashed')
+            ->setParameter('isEnabled', true)
+            ->setParameter('notTrashed', false)
             ->addOrderBy('i.createdAt', 'DESC')
-            ->addGroupBy('i.id')
-            ->setParameter('isEnabled', true);
+            ->addGroupBy('i.id');
 
         if ($limit) {
             $qb->setMaxResults($limit);
@@ -80,6 +86,8 @@ class IdeaRepository extends EntityRepository
             ->leftJoin('i.Theme', 't')
             ->andWhere('i.isEnabled = :isEnabled')
             ->setParameter('isEnabled', true)
+            ->andWhere('i.isTrashed = :notTrashed')
+            ->setParameter('notTrashed', false)
             ->andWhere('t.id = :theme')
             ->setParameter('theme', $theme)
             ->orderBy('i.createdAt', 'DESC');
@@ -113,6 +121,8 @@ class IdeaRepository extends EntityRepository
         }
 
         $qb = $this->getIsEnabledQueryBuilder()
+            ->andWhere('i.isTrashed = :notTrashed')
+            ->setParameter('notTrashed', false)
             ->leftJoin('i.Author', 'a')
             ->addSelect('a')
         ;

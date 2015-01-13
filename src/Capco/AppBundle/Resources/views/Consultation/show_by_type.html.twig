@@ -19,8 +19,8 @@
         <ul class="media-list  opinion__list">
             {% for opinion in opinions %}
                 {% set nbVotes = (opinion.getVotesAll) %}
-                {% set nbArguments = (opinion.arguments|length) %}
-                {% set nbSources = (opinion.sourceCount) %}
+                {% set nbArguments = (opinion.argumentsCount) %}
+                {% set nbSources = (opinion.sourcesCount) %}
                 <li class="opinion  opinion--{{ opinion.slug }}  has-chart" data-ok="{{ opinion.voteCountOk }}" data-nok="{{ opinion.voteCountNok }}" data-mitige="{{ opinion.voteCountMitige }}" data-opinion-id="{{ opinion.id }}">
                     <div class="row">
                         <div class="col-xs-12  col-sm-8  col-md-9  col-lg-10">

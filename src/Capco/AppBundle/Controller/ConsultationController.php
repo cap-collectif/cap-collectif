@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\Controller;
 
+use Capco\AppBundle\Entity\Argument;
 use Capco\AppBundle\Entity\Consultation;
 use Capco\AppBundle\Entity\Opinion;
 use Capco\AppBundle\Entity\OpinionType;
@@ -175,6 +176,28 @@ class ConsultationController extends Controller
             'opinions' => $opinions,
             'page' => $page,
             'nbPage' => ceil(count($opinions) / 10),
+        ];
+    }
+
+    /**
+     * @Route("/consultation/{consultation_slug}/trashed", name="app_consultation_show_trashed")
+     * @ParamConverter("consultation", class="CapcoAppBundle:Consultation", options={"mapping": {"consultation_slug": "slug"}})
+     * @Template("CapcoAppBundle:Consultation:show_trashed.html.twig")
+     * @param Consultation $consultation
+     * @return array
+     */
+    public function showTrashedAction(Consultation $consultation)
+    {
+        $opinions = $this->getDoctrine()->getRepository('CapcoAppBundle:Opinion')->getTrashedOpinionsByConsultation($consultation);
+        $arguments = $this->getDoctrine()->getRepository('CapcoAppBundle:Argument')->getTrashedArgumentsByConsultation($consultation);
+        $sources = $this->getDoctrine()->getRepository('CapcoAppBundle:Source')->getTrashedSourcesByConsultation($consultation);
+
+        return [
+            'consultation' => $consultation,
+            'opinions' => $opinions,
+            'arguments' => $arguments,
+            'sources' => $sources,
+            'argumentsLabels' => Argument::$argumentTypesLabels,
         ];
     }
 

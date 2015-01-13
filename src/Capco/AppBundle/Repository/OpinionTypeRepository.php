@@ -31,6 +31,8 @@ class OpinionTypeRepository extends EntityRepository
             ->andWhere('o.Consultation = :consultation')
             ->andWhere('o.isEnabled = :enabled')
             ->setParameter('enabled', true)
+            ->andWhere('o.isTrashed = :notTrashed')
+            ->setParameter('notTrashed', false)
             ->setParameter('consultation', $consultation)
             ->orderBy('ot.position', 'ASC')
             ->addOrderBy('o.createdAt', 'DESC');

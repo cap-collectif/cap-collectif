@@ -107,6 +107,13 @@ class Consultation
     /**
      * @var integer
      *
+     * @ORM\Column(name="trashed_opinion_count", type="integer")
+     */
+    private $trashedOpinionCount = 0;
+
+    /**
+     * @var integer
+     *
      * @ORM\Column(name="argument_count", type="integer")
      */
     private $argumentCount = 0;
@@ -114,16 +121,9 @@ class Consultation
     /**
      * @var integer
      *
-     * @ORM\Column(name="participant_count", type="integer")
+     * @ORM\Column(name="trashed_argument_count", type="integer")
      */
-    private $participantCount = 0;
-
-    /**
-     * @var integer
-     *
-     * @ORM\Column(name="contribution_count", type="integer")
-     */
-    private $contributionCount = 0;
+    private $trashedArgumentCount = 0;
 
     /**
      * @var string
@@ -228,6 +228,22 @@ class Consultation
     }
 
     /**
+     * @return int
+     */
+    public function getTrashedOpinionCount()
+    {
+        return $this->trashedOpinionCount;
+    }
+
+    /**
+     * @param int $trashedOpinionCount
+     */
+    public function setTrashedOpinionCount($trashedOpinionCount)
+    {
+        $this->trashedOpinionCount = $trashedOpinionCount;
+    }
+
+    /**
      * @return \DateTime
      */
     public function getUpdatedAt()
@@ -313,6 +329,22 @@ class Consultation
     public function setArgumentCount($argumentCount)
     {
         $this->argumentCount = $argumentCount;
+    }
+
+    /**
+     * @return int
+     */
+    public function getTrashedArgumentCount()
+    {
+        return $this->trashedArgumentCount;
+    }
+
+    /**
+     * @param int $trashedArgumentCount
+     */
+    public function setTrashedArgumentCount($trashedArgumentCount)
+    {
+        $this->trashedArgumentCount = $trashedArgumentCount;
     }
 
     /**
@@ -584,53 +616,5 @@ class Consultation
 
         sort($return);
         return $return;
-    }
-
-    /**
-     * Set participantCount
-     *
-     * @param integer $participantCount
-     *
-     * @return Consultation
-     */
-    public function setParticipantCount($participantCount)
-    {
-        $this->participantCount = $participantCount;
-
-        return $this;
-    }
-
-    /**
-     * Get participantCount
-     *
-     * @return integer
-     */
-    public function getParticipantCount()
-    {
-        return $this->participantCount;
-    }
-
-    /**
-     * Set contributionCount
-     *
-     * @param integer $contributionCount
-     *
-     * @return Consultation
-     */
-    public function setContributionCount($contributionCount)
-    {
-        $this->contributionCount = $contributionCount;
-
-        return $this;
-    }
-
-    /**
-     * Get contributionCount
-     *
-     * @return integer
-     */
-    public function getContributionCount()
-    {
-        return $this->contributionCount;
     }
 }

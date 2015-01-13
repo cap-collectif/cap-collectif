@@ -26,6 +26,11 @@ class Argument
         self::TYPE_AGAINST => 'no'
    ];
 
+    public static $argumentTypesLabels = [
+        self::TYPE_FOR => 'argument.show.type.for',
+        self::TYPE_AGAINST => 'argument.show.type.against',
+    ];
+
     /**
      * @var integer
      *
@@ -56,6 +61,13 @@ class Argument
      * @ORM\Column(name="updated_at", type="datetime")
      */
     private $updatedAt;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="is_enabled", type="boolean")
+     */
+    private $isEnabled = true;
 
     /**
      * @var integer
@@ -104,6 +116,27 @@ class Argument
     {
         $this->Reports = new ArrayCollection();
     }
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="is_trashed", type="boolean")
+     */
+    private $isTrashed = false;
+
+    /**
+     * @var \DateTime
+     * @Gedmo\Timestampable(on="change", field={"isTrashed"})
+     * @ORM\Column(name="trashed_at", type="datetime", nullable=true)
+     */
+    private $trashedAt = null;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="trashed_reason", type="text", nullable=true)
+     */
+    private $trashedReason = null;
 
     /**
      * Get id
@@ -257,6 +290,98 @@ class Argument
         $this->updatedAt = $updatedAt;
 
         return $this;
+    }
+
+    /**
+     * Set isTrashed
+     *
+     * @param boolean $isTrashed
+     * @return Argument
+     */
+    public function setIsTrashed($isTrashed)
+    {
+        $this->isTrashed = $isTrashed;
+
+        return $this;
+    }
+
+    /**
+     * Get isTrashed
+     *
+     * @return boolean
+     */
+    public function getIsTrashed()
+    {
+        return $this->isTrashed;
+    }
+
+    /**
+     * Set trashedAt
+     *
+     * @param \DateTime $trashedAt
+     * @return Argument
+     */
+    public function setTrashedAt($trashedAt)
+    {
+        $this->trashedAt = $trashedAt;
+
+        return $this;
+    }
+
+    /**
+     * Get trashedAt
+     *
+     * @return \DateTime
+     */
+    public function getTrashedAt()
+    {
+        return $this->trashedAt;
+    }
+
+    /**
+     * Set trashedReason
+     *
+     * @param string $trashedReason
+     * @return Argument
+     */
+    public function setTrashedReason($trashedReason)
+    {
+        $this->trashedReason = $trashedReason;
+
+        return $this;
+    }
+
+    /**
+     * Get trashedReason
+     *
+     * @return string
+     */
+    public function getTrashedReason()
+    {
+        return $this->trashedReason;
+    }
+
+    /**
+     * Set isEnabled
+     *
+     * @param boolean $isEnabled
+     * @return Argument
+     */
+    public function setIsEnabled($isEnabled)
+    {
+        $this->isEnabled = $isEnabled;
+
+        return $this;
+    }
+
+    /**
+     * Get isEnabled
+     *
+     * @return boolean
+     */
+    public function getIsEnabled()
+    {
+        return $this->isEnabled;
     }
 
     public function resetVotes(){

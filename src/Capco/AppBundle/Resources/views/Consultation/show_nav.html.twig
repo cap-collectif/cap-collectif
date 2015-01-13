@@ -5,6 +5,7 @@
             {% for opinionsType in opinionsTypes %}
                 <li class="{% if opinionsType.slug == opinionTypeCurrent %}active{% endif %} consultation__nav--{{ opinionsType.color }}"><a href="{{ path('app_consultation_show_opinions', {'consultation_slug':app.request.attributes.get('consultation').slug ,'opinion_type_slug': opinionsType.slug}) }}">{{ opinionsType.shortName }}</a></li>
             {% endfor %}
+            <li class="{% if (app.request.attributes.get('consultation').slug == consultationCurrent) and (opinionTypeCurrent == 'trashed') %}active{% endif %} consultation__nav--gray"><a href="{{ path('app_consultation_show_trashed', {'consultation_slug': app.request.attributes.get('consultation').slug}) }}">{{ 'consultation.show.trashed.short_name'|trans({}, 'CapcoAppBundle') }}</a></li>
         </ul>
     </div>
 </div>

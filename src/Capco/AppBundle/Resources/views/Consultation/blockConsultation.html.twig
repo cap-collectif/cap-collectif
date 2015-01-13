@@ -37,26 +37,26 @@
                 {% endif %}
             </div>
 
-            {% set participantCount = consultation.participantCount %}
-            {% set contributionCount = consultation.contributionCount %}
-            {% if participantCount + contributionCount > 0 %}
+            {% set opinionCount = consultation.opinionCount %}
+            {% set argumentCount = consultation.argumentCount %}
+            {% if opinionCount + argumentCount > 0 %}
                 <div class="thumbnail__numbers">
-                    {% if participantCount > 0 %}
+                    {% if opinionCount > 0 %}
                         <div class="thumbnail__number-block">
-                            <p  class="thumbnail__number">{{ participantCount }}</p>
+                            <p  class="thumbnail__number">{{ opinionCount }}</p>
                             <h5 class="thumbnail__number__label  excerpt h5">
-                                {% transchoice participantCount with {'%count%': participantCount} from 'CapcoAppBundle' %}
+                                {% transchoice opinionCount with {'%count%': opinionCount} from 'CapcoAppBundle' %}
                                     consultation.show.participants
                                 {% endtranschoice %}
                             </h5>
                         </div>
                     {% endif %}
-                    {% if contributionCount > 0 %}
+                    {% if argumentCount > 0 %}
                         <div class="thumbnail__number-block">
-                            <p  class="thumbnail__number">{{ contributionCount }}</p>
+                            <p  class="thumbnail__number">{{ argumentCount }}</p>
                             <h5 class="thumbnail__number__label  excerpt h5">
-                                {% transchoice contributionCount with {'%count%': contributionCount} from 'CapcoAppBundle' %}
-                                    consultation.show.contributions
+                                {% transchoice argumentCount with {'%count%': argumentCount} from 'CapcoAppBundle' %}
+                                    consultation.show.arguments
                                 {% endtranschoice %}
                             </h5>
                         </div>

@@ -12,7 +12,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * Source
  *
  * @ORM\Table(name="source")
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\SourceRepository")
  */
 class Source
 {
@@ -80,6 +80,13 @@ class Source
     private $updatedAt;
 
     /**
+     * @var boolean
+     *
+     * @ORM\Column(name="is_enabled", type="boolean")
+     */
+    private $isEnabled = true;
+
+    /**
      * @var string
      *
      * @ORM\ManyToOne(targetEntity="Capco\UserBundle\Entity\User")
@@ -137,6 +144,27 @@ class Source
      * @ORM\Column(name="vote_count_source", type="integer")
      */
     private $voteCountSource = 0;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="is_trashed", type="boolean")
+     */
+    private $isTrashed = false;
+
+    /**
+     * @var \DateTime
+     * @Gedmo\Timestampable(on="change", field={"isTrashed"})
+     * @ORM\Column(name="trashed_at", type="datetime", nullable=true)
+     */
+    private $trashedAt = null;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="trashed_reason", type="text", nullable=true)
+     */
+    private $trashedReason = null;
 
     public function __toString()
     {
@@ -364,6 +392,75 @@ class Source
         $this->type = $type;
     }
 
+    /**
+     * Set isTrashed
+     *
+     * @param boolean $isTrashed
+     * @return Source
+     */
+    public function setIsTrashed($isTrashed)
+    {
+        $this->isTrashed = $isTrashed;
+
+        return $this;
+    }
+
+    /**
+     * Get isTrashed
+     *
+     * @return boolean
+     */
+    public function getIsTrashed()
+    {
+        return $this->isTrashed;
+    }
+
+    /**
+     * Set trashedAt
+     *
+     * @param \DateTime $trashedAt
+     * @return Source
+     */
+    public function setTrashedAt($trashedAt)
+    {
+        $this->trashedAt = $trashedAt;
+
+        return $this;
+    }
+
+    /**
+     * Get trashedAt
+     *
+     * @return \DateTime
+     */
+    public function getTrashedAt()
+    {
+        return $this->trashedAt;
+    }
+
+    /**
+     * Set trashedReason
+     *
+     * @param string $trashedReason
+     * @return Source
+     */
+    public function setTrashedReason($trashedReason)
+    {
+        $this->trashedReason = $trashedReason;
+
+        return $this;
+    }
+
+    /**
+     * Get trashedReason
+     *
+     * @return string
+     */
+    public function getTrashedReason()
+    {
+        return $this->trashedReason;
+    }
+
     public function resetVotes(){
         $this->voteCountSource = 0;
         return $this;
@@ -416,6 +513,29 @@ class Source
     public function removeReport(Reporting $report)
     {
         $this->Reports->removeElement($report);
+    }
+
+    /**
+     * Set isEnabled
+     *
+     * @param boolean $isEnabled
+     * @return Source
+     */
+    public function setIsEnabled($isEnabled)
+    {
+        $this->isEnabled = $isEnabled;
+
+        return $this;
+    }
+
+    /**
+     * Get isEnabled
+     *
+     * @return boolean
+     */
+    public function getIsEnabled()
+    {
+        return $this->isEnabled;
     }
 
 }

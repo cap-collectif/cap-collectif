@@ -1,0 +1,117 @@
+{% extends '@CapcoApp/Consultation/show.html.twig' %}
+
+{% block opinions_list %}
+    {% set trashedNb = (arguments|length + opinions|length + sources|length) %}
+    <div class="block  block--shadowed">
+        <div class="opinion  opinion--gray opinion--default">
+            <div class="opinion__header  opinion__header--mobile-centered">
+                <h4 class="pull-left  h4  opinion__header__title">{{ 'consultation.show.trashed.title'|trans({}, 'CapcoAppBundle') }} <span class="badge">{{ trashedNb }}</span></h4>
+                <div class="pull-right  opinion__header__filter">
+                </div>
+            </div>
+        </div>
+        {% if trashedNb > 0 %}
+            {% if(opinions|length > 0) %}
+                <ul class="media-list  opinion__list">
+                    {% for opinion in opinions %}
+                        {% set nbVotes = (opinion.getVotesAll) %}
+                        {% set nbArguments = (opinion.argumentsCount) %}
+                        {% set nbSources = (opinion.sourcesCount) %}
+                        <li class="opinion  opinion--{{ opinion.slug }}  has-chart" data-ok="{{ opinion.voteCountOk }}" data-nok="{{ opinion.voteCountNok }}" data-mitige="{{ opinion.voteCountMitige }}" data-opinion-id="{{ opinion.id }}">
+                            <div class="row">
+                                <div class="col-xs-12  col-sm-8  col-md-9  col-lg-10">
+                                    <div class="opinion__body  box">
+                                        {% if opinion.Author.Media %}
+                                            <a class="pull-left" href="#">
+                                                {% thumbnail opinion.Author.Media, 'avatar' with {'title': opinion.Author.fullname, 'alt': opinion.Author.fullname, 'class': 'img-circle  pull-left'} %}
+                                            </a>
+                                        {% endif %}
+                                        <div class="opinion__data">
+                                            <p class="opinion__user  h5"><a href="#">{{ opinion.Author.username }}</a> <span class="pull-right  excerpt">{{ opinion.createdAt | localizeddate('medium', 'none', app.request.locale) }}</span></p>
+                                            <p class="opinion__title"><a href="{{ path('app_consultation_show_opinion', {'consultation_slug': consultation.slug, 'opinion_type_slug': opinion.opinionType.slug, 'opinion_slug': opinion.slug}) }}">{{ opinion.title }}</a></p>
+                                            <p class="opinion__votes  excerpt h5">
+                                                {% transchoice nbVotes with {'%count%': nbVotes} from 'CapcoAppBundle' %}
+                                                consultation.show.votes
+                                                {% endtranschoice %}
+                                                •
+                                                {% transchoice nbArguments with {'%count%': nbArguments} from 'CapcoAppBundle' %}
+                                                consultation.show.arguments
+                                                {% endtranschoice %}
+                                                •
+                                                {% transchoice nbSources with {'%count%': nbSources} from 'CapcoAppBundle' %}
+                                                consultation.show.sources
+                                                {% endtranschoice %}
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="hidden-xs col-sm-4  col-md-3  col-lg-2">
+                                    <div id="piechart-{{ opinion.id }}" style="width: 145px; height: 95px;"></div>
+                                </div>
+                            </div>
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+            {% if arguments|length > 0 %}
+                <ul class="media-list  opinion__list">
+                    {% for argument in arguments %}
+                        <li class="opinion  opinion--argument" id="arg-{{ argument.id }}">
+                            <div class="opinion__body  box">
+                                {% if argument.Author.Media %}
+                                    <a class="pull-left" href="#">
+                                        {% thumbnail argument.Author.Media, 'avatar' with {'title': argument.Author.fullname, 'alt': argument.Author.fullname, 'class': 'img-circle  pull-left'} %}
+                                    </a>
+                                {% endif %}
+                                <div class="opinion__data">
+                                    <p class="h5  opinion__user"><a href="#">{{ argument.Author.getFullname }}</a> <span class="label {% if argument.type == 0 %}label-danger{% elseif argument.type == 1 %}label-success{% endif %}">{{ argumentsLabels[argument.type] | trans({}, 'CapcoAppBundle') | capitalize }}</span></p>
+                                    <p class="excerpt  opinion__date"><a class="excerpt" href="#">{{ argument.createdAt | localizeddate('long', 'short', app.request.locale) }}</a></p>
+                                    <p>{{ 'argument.trashed.linked_proposition' | trans({}, 'CapcoAppBundle') }} <a href="{{ path('app_consultation_show_opinion', {'consultation_slug': consultation.slug, 'opinion_type_slug': argument.Opinion.OpinionType.slug, 'opinion_slug': argument.Opinion.slug}) }}">{{ argument.Opinion.title }}</a></p>
+                                </div>
+                                <p class="opinion__text">
+                                    {{ argument.body }}
+                                </p>
+                                <button disabled="disabled" class="btn  btn-default btn-xs"><i class="cap cap-hand-like-2"></i>D'accord</button>
+                                <span class="opinion__votes-nb">{{ argument.VoteCount }}</span>
+                            </div>
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+            {% if sources|length > 0 %}
+                <ul class="media-list  opinion__list">
+                    {% for source in sources %}
+                        <li class="opinion  media  box" id="source{{ source.id }}">
+                            {% if source.Author.Media %}
+                                <a class="pull-left media-middle" href="#">
+                                    {% thumbnail source.Author.Media, 'avatar_source' with {'title': source.Author.fullname, 'alt': source.Author.fullname, 'class': 'img-circle  pull-left'} %}
+                                </a>
+                            {% endif %}
+                            <div class="media-body">
+                                <h4 class="media-heading h4" id="source{{ source.id }}"><span class="label label-info">{{ source.Category.title }}</span>
+                                    {% if source.Media %}
+                                        <a href="{{ path('sonata_media_download', {'id': source.Media|sonata_urlsafeid }) }}">{{ source.title }}</a>
+                                    {% endif %}
+                                    {% if source.link %}
+                                        <a href="{{ source.link }}" target="_blank">{{ source.title }}</a>
+                                    {% endif %}
+                                </h4>
+                                <p>{{ 'source.trashed.linked_proposition' | trans({}, 'CapcoAppBundle') }} <a href="{{ path('app_consultation_show_opinion', {'consultation_slug': consultation.slug, 'opinion_type_slug': source.Opinion.OpinionType.slug, 'opinion_slug': source.Opinion.slug}) }}">{{ source.Opinion.title }}</a></p>
+                                <p class="excerpt">
+                                    {{ source.body }}
+                                </p>
+                                <button disabled="disabled" class="btn  btn-default btn-xs"><i class="cap cap-hand-like-2"></i>Pertinent</button>
+                                <span class="nb-votes">{{ source.voteCountSource }}</span>
+                            </div>
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        {% else %}
+            <div class="consultation__empty-block  text-center">
+                <p class="icon  cap-bubble-attention-6"></p>
+                <p>{{ 'consultation.show.trashed.none'|trans({}, 'CapcoAppBundle') }}</p>
+            </div>
+        {% endif %}
+    </div>
+{% endblock %}

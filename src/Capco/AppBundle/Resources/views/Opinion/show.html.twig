@@ -15,13 +15,13 @@
             </div>
 
             {% set nbVotes = (opinion.getVotesAll) %}
-            {% set nbArguments = (opinion.arguments|length) %}
-            {% set nbSources = (opinion.sourceCount) %}
+            {% set nbArguments = (opinion.argumentsCount) %}
+            {% set nbSources = (opinion.sourcesCount) %}
             <div class="col-xs-12  col-sm-8  col-md-9 has-chart" id="details" data-ok="{{ opinion.voteCountOk }}" data-nok="{{ opinion.voteCountNok }}" data-mitige="{{ opinion.voteCountMitige }}" data-opinion-id="{{ opinion.id }}">
                 <div class="block  block--shadowed  opinion__details">
                     <div class="opinion  opinion--{{ app.request.attributes.get('opinionType').color }}  opinion--current">
                         <div class="opinion__header  opinion__header--centered">
-                            <a class="neutral-hover  pull-left  h4" href="{{ path('app_consultation_show_opinions', {'consultation_slug': consultation.slug, 'opinion_type_slug': app.request.attributes.get('opinion_type_slug')}) }}"><i class="cap cap-arrow-1"></i><span class="hidden-xs  hidden-sm"> Retour</span></a>
+                            <a class="neutral-hover  pull-left  h4" href="{% if opinion.isTrashed %}{{ path('app_consultation_show_trashed', {'consultation_slug': consultation.slug,}) }}{% else %}{{ path('app_consultation_show_opinions', {'consultation_slug': consultation.slug, 'opinion_type_slug': app.request.attributes.get('opinion_type_slug')}) }}{% endif %}"><i class="cap cap-arrow-1"></i><span class="hidden-xs  hidden-sm"> Retour</span></a>
                             <p class="h4  opinion__header__title">{{ app.request.attributes.get('opinionType').slug|capitalize }} </p>
                         </div>
                         <div class="opinion__body  box">
@@ -31,7 +31,7 @@
                                 </a>
                             {% endif %}
                             <div class="opinion__data">
-                                <p class="opinion__user  h5"><a href="#">{{ opinion.Author.getFullname }}</a> <span class="pull-right  excerpt">{{ opinion.createdAt | localizeddate('medium', 'none', app.request.locale) }}</span></p>
+                                <p class="opinion__user  h5"><a href="#">{{ opinion.Author.username }}</a> <span class="pull-right  excerpt">{{ opinion.createdAt | localizeddate('medium', 'none', app.request.locale) }}</span></p>
                                 <p class="opinion__title">{{ opinion.title }}</p>
                                 <p class="opinion__votes  excerpt h5">
                                     {% transchoice nbVotes with {'%count%': nbVotes} from 'CapcoAppBundle' %}
@@ -88,7 +88,7 @@
                             {% set tokenSource = csrf_token('source_vote') %}
                             <div class="panel panel-default">
                                 <div class="panel-heading" data-toggle="collapse" data-target="#collapseOne" style="cursor:pointer;">
-                                    <h4 class="panel-title">{% transchoice nbSources with {'%count%': nbSources} from 'CapcoAppBundle' %}source.show.count{% endtranschoice %} <i class="cap cap-arrow-67 pull-right"></i></h4>
+                                    <h4 class="panel-title">{% transchoice (sources|length) with {'%count%': (sources|length)} from 'CapcoAppBundle' %}source.show.count{% endtranschoice %} <i class="cap cap-arrow-67 pull-right"></i></h4>
                                 </div>
                                 <div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
                                     <div class="panel-body">

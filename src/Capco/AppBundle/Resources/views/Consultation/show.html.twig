@@ -12,9 +12,12 @@
             <div class="col-xs-12  col-sm-4  col-md-3">
                 {% include '@CapcoApp/Consultation/show_meta.html.twig' %}
             </div>
-
+            {% set opinionTypeCurrent = app.request.attributes.get('opinion_type_slug') %}
+            {% if app.request.attributes.get('_route') == 'app_consultation_show_trashed' %}
+                {% set opinionTypeCurrent = 'trashed' %}
+            {% endif %}
             <div class="col-xs-12  col-sm-8  col-md-9" id="details">
-                {{ render(controller('CapcoAppBundle:Consultation:showNavOpinionTypes', {'consultation': consultation.id, 'type': app.request.attributes.get('opinion_type_slug')})) }}
+                {{ render(controller('CapcoAppBundle:Consultation:showNavOpinionTypes', {'consultation': consultation.id, 'type': opinionTypeCurrent})) }}
                 {% block opinions_list %}
                     {{ render(controller('CapcoAppBundle:Consultation:showOpinions', {'consultation': consultation.id})) }}
                 {% endblock %}

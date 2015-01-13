@@ -117,11 +117,14 @@ consultation:
       ended: Consultation fermée
       future: Consultation à venir
     remaining_days: "{0} Consultation terminée | {1} Dernier jour | ]1,Inf[ %count% jours restants"
-    participants: "{0} Aucun participant | {1} 1 participant | ]1,Inf[ %count% participants"
-    contributions: "{0} Aucune contribution | {1} 1 contribution | ]1,Inf[ %count% contributions"
-    votes: "{0} Aucun vote | {1} 1 vote | ]1,Inf[ %count% votes"
+    opinions: "{0} Aucune opinion | {1} 1 opinion | ]1,Inf[ %count% opinions"
     arguments: "{0} Aucun argument | {1} 1 argument | ]1,Inf[ %count% arguments"
+    votes: "{0} Aucun vote | {1} 1 vote | ]1,Inf[ %count% votes"
     sources: "{0} Aucune source | {1} 1 source | ]1,Inf[ %count% sources"
+    trashed:
+      title: Corbeille
+      short_name: Corbeille
+      none: Aucun élèment dans la corbeille
   searchform:
     no_result:  Aucune consultation ne correspond à ces critères de recherche
   arguments: "{0} Aucun argument | {1} 1 argument | ]1,Inf[ %count% arguments"
@@ -138,6 +141,12 @@ argument:
     text_alert: Êtes-vous sûr de vouloir supprimer cet argument ?
     reset_submit: Annuler
     remove_submit: Supprimer
+  show:
+    type:
+      for: pour
+      against: contre
+  trashed:
+    linked_proposition: Lié à la proposition :
 
 source:
   update:
@@ -163,6 +172,8 @@ source:
   show:
     add: Ajouter une source
     count: "{0} Aucune source | {1} 1 source | ]1,Inf[ %count% sources"
+  trashed:
+    linked_proposition: Liée à la proposition :
 
 opinion:
   show:

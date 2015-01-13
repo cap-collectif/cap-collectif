@@ -91,15 +91,13 @@ class OpinionController extends Controller
         }
 
         $currentUrl = $this->generateUrl('app_consultation_show_opinion', ['consultation_slug' => $consultation->getSlug(), 'opinion_type_slug' => $opinionType->getSlug(), 'opinion_slug' => $opinion->getSlug() ]);
-        $opinion = $this->getDoctrine()->getRepository('CapcoAppBundle:Opinion')->getOpinionWithArguments($opinion->getSlug());
+        $opinion = $this->getDoctrine()->getRepository('CapcoAppBundle:Opinion')->getOpinion($opinion->getSlug());
+        $sources = $this->getDoctrine()->getRepository('CapcoAppBundle:Source')->getEnabledSourcesByOpinion($opinion);
         $Votes = $this->getDoctrine()->getRepository('CapcoAppBundle:OpinionVote')->getByOpinion($opinion->getSlug());
         $steps = $this->getDoctrine()->getRepository('CapcoAppBundle:Step')->findBy(array(
             'consultation' => $consultation,
             'isEnabled' => true
         ));
-        $sources = $this->getDoctrine()->getRepository('CapcoAppBundle:Source')->findBy(
-            array('Opinion' => $opinion)
-        );
 
         $reportingOpinion = $this->getDoctrine()->getRepository('CapcoAppBundle:Reporting')->findBy(array(
             'Reporter' => $this->getUser(),
@@ -108,7 +106,7 @@ class OpinionController extends Controller
 
         $reportingSource = $this->getDoctrine()->getRepository('CapcoAppBundle:Reporting')->findBy(array(
             'Reporter' => $this->getUser(),
-            'Source' => $sources
+            'Source' => $sources,
         ));
 
         $userReportingOpinion = (count($reportingOpinion) > 0) ? true : false;
@@ -175,9 +173,9 @@ class OpinionController extends Controller
             'userReportingOpinion' => $userReportingOpinion,
             'userReportingSource' => $userReportingSource,
             'currentUrl' => $currentUrl,
-            'sources' => $sources,
             'consultation' => $consultation,
             'opinion' => $opinion,
+            'sources' => $sources,
             'opinionType' => $opinion->getOpinionType(),
             'votes' => $Votes,
             'consultation_steps' => $steps,

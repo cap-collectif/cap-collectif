@@ -27,10 +27,16 @@ class OpinionRepository extends EntityRepository
         $qb = $this->createQueryBuilder('o')
                 ->andWhere('o.isEnabled = :enabled')
                 ->setParameter('enabled', true)
+                ->andWhere('o.isTrashed = :notTrashed')
+                ->setParameter('notTrashed', false)
                 ->leftJoin('o.OpinionType', 'ot')
                 ->addSelect('ot')
                 ->leftJoin('o.Consultation', 'c')
                 ->addSelect('c')
+                ->leftJoin('o.Author', 'aut')
+                ->addSelect('aut')
+                ->leftJoin('aut.Media', 'm')
+                ->addSelect('m')
                 ->andWhere('o.Consultation = :consultation')
                 ->setParameter('consultation', $consultation)
                 ->andWhere('o.OpinionType = :opinionType')
@@ -45,13 +51,38 @@ class OpinionRepository extends EntityRepository
 
     }
 
-    public function getOpinionWithArguments($opinion)
+    public function getTrashedOpinionsByConsultation($consultation)
     {
         $qb = $this->createQueryBuilder('o')
-                ->leftJoin('o.arguments', 'arg')
-                ->addSelect('arg')
+            ->andWhere('o.isEnabled = :enabled')
+            ->setParameter('enabled', true)
+            ->andWhere('o.isTrashed = :trashed')
+            ->setParameter('trashed', true)
+            ->leftJoin('o.OpinionType', 'ot')
+            ->addSelect('ot')
+            ->leftJoin('o.Consultation', 'c')
+            ->addSelect('c')
+            ->leftJoin('o.Author', 'aut')
+            ->addSelect('aut')
+            ->leftJoin('aut.Media', 'm')
+            ->addSelect('m')
+            ->andWhere('o.Consultation = :consultation')
+            ->setParameter('consultation', $consultation)
+            ->orderBy('o.trashedAt', 'DESC');
+
+        return $qb->getQuery()->getResult();
+
+    }
+
+    public function getOpinion($opinion)
+    {
+        $qb = $this->createQueryBuilder('o')
                 ->leftJoin('o.Author', 'a')
                 ->addSelect('a')
+                ->leftJoin('a.Media', 'm')
+                ->addSelect('m')
+                ->leftJoin('o.OpinionType', 'ot')
+                ->addSelect('ot')
                 ->leftJoin('o.Consultation', 'c')
                 ->addSelect('c')
                 ->andWhere('o.slug = :opinion')

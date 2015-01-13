@@ -21,9 +21,8 @@
         <p>{{ consultation.openedAt | localizeddate('long', 'none') }}</p>
         <p class="excerpt">Contributions</p>
         <p>
-            {{ consultation.contributionCount }} votes<br/>
-            37 propositions<br/>
-            {{ consultation.argumentCount }} arguments
+            {{ consultation.opinionCount + consultation.trashedOpinionCount }} propositions<br/>
+            {{ consultation.argumentCount + consultation.trashedArgumentCount }} arguments
         </p>
     </div>
 </div>

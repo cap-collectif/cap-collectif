@@ -77,14 +77,14 @@ class Opinion
      * @Gedmo\Timestampable(on="change", field={"isTrashed"})
      * @ORM\Column(name="trashed_at", type="datetime", nullable=true)
      */
-    private $trashedAt;
+    private $trashedAt = null;
 
     /**
      * @var string
      *
      * @ORM\Column(name="trashed_reason", type="text", nullable=true)
      */
-    private $trashedReason;
+    private $trashedReason = null;
 
     /**
      * @var
@@ -130,9 +130,16 @@ class Opinion
     /**
      * @var integer
      *
-     * @ORM\Column(name="source_count", type="integer")
+     * @ORM\Column(name="sources_count", type="integer")
      */
-    private $sourceCount = 0;
+    private $sourcesCount = 0;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="arguments_count", type="integer")
+     */
+    private $argumentsCount = 0;
 
     /**
      * @var string
@@ -479,7 +486,8 @@ class Opinion
     public function addArgument(Argument $argument)
     {
         $this->arguments[] = $argument;
-
+        $this->argumentsCount++;
+        $argument->setOpinion($this);
         return $this;
     }
 
@@ -489,6 +497,9 @@ class Opinion
     public function removeArgument(Argument $argument)
     {
         $this->arguments->removeElement($argument);
+        $this->argumentsCount--;
+        $argument->setOpinion(null);
+        return $this;
     }
 
     /**
@@ -506,7 +517,7 @@ class Opinion
     public function addSource(Source $source)
     {
         $this->Sources[] = $source;
-        $this->sourceCount++;
+        $this->sourcesCount++;
         $source->setOpinion($this);
         return $this;
     }
@@ -518,7 +529,7 @@ class Opinion
     public function removeSource(Source $source)
     {
         $this->Sources->removeElement($source);
-        $this->sourceCount--;
+        $this->sourcesCount--;
         $source->setOpinion(null);
         return $this;
     }
@@ -540,19 +551,35 @@ class Opinion
     }
 
     /**
-     * @return int
+     * @param int $argumentsCount
      */
-    public function getSourceCount()
+    public function setArgumentsCount($argumentsCount)
     {
-        return $this->sourceCount;
+        $this->argumentsCount = $argumentsCount;
     }
 
     /**
-     * @param int $sourceCount
+     * @return int
      */
-    public function setSourceCount($sourceCount)
+    public function getArgumentsCount()
     {
-        $this->sourceCount = $sourceCount;
+        return $this->argumentsCount;
+    }
+
+    /**
+     * @return int
+     */
+    public function getSourcesCount()
+    {
+        return $this->sourcesCount;
+    }
+
+    /**
+     * @param int $sourcesCount
+     */
+    public function setSourcesCount($sourcesCount)
+    {
+        $this->sourcesCount = $sourcesCount;
     }
 
     /**
