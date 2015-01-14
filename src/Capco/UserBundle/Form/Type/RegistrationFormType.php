@@ -12,9 +12,8 @@ class RegistrationFormType extends AbstractType
         $builder->add('firstname', 'text', array('required' => false))
                 ->add('lastname', 'text', array('required' => false))
                 ->add('isTermsAccepted', 'checkbox', array(
-                                                    'label' => 'user.register.terms.label',
+                                                    'label' => null,
                                                     'required' => true,
-                                                    'translation_domain' => 'CapcoAppBundle'
                                                 ) )
         ;
     }

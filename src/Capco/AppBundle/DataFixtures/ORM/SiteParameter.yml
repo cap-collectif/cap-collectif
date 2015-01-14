@@ -110,3 +110,12 @@ Capco\AppBundle\Entity\SiteParameter:
         keyname: homepage.jumbotron.button_link
         title: Lien du bouton du jumbotron sur la page d'accueil
         value: http://www.google.fr
+
+    SiteParameter25:
+        keyname: signin.cgu.name
+        title: Nom de la charte ou des CGU sur la page d'inscription
+        value: la charte
+    SiteParameter26:
+        keyname: signin.cgu.link
+        title: Lien de la charte ou des CGU sur la page d'inscription
+        value: /pages/charte

@@ -62,12 +62,13 @@ Capco\AppBundle\Entity\MenuItem:
 
   MenuItem8:
     title: Charte
-    link: <url()>
     isEnabled: 1
-    isDeletable: 1
+    isDeletable: 0
     position: 6
     parent: null
     menu: @menu1
+    link: pages/charte
+
   MenuItem9:
     title: FAQ
     link: <url()>

@@ -54,10 +54,8 @@
                         {{ form_errors(form.plainPassword.second) }}
 
                         <div class="checkbox  login__checkbox">
-                            <label>
-                                {{ form_widget(form.isTermsAccepted) }}
-                                {{ 'user.register.terms.label'|trans({'%startlink%': '<a href="#">', '%endlink%': '</a>'}, 'CapcoAppBundle') | raw }}
-                            </label>
+                            {{ form_widget(form.isTermsAccepted, {'attr': {'style': 'position: static'}}) }}
+                            <p style="display: inline">{{ 'user.register.terms.label'|trans({'%cgu%': '<a href="'~ app.request.baseUrl ~ capco_site_parameter_value('signin.cgu.link') ~ '">' ~ ( capco_site_parameter_value('signin.cgu.name') | lower ) ~ '</a>'}, 'CapcoAppBundle') | raw }}</p>
                         </div>
                         {{ form_errors(form.isTermsAccepted) }}
 
