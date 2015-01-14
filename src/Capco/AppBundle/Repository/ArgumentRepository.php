@@ -13,22 +13,36 @@ use Doctrine\ORM\Query;
  */
 class ArgumentRepository extends EntityRepository
 {
-    public function getEnabledArgumentsByTypeAndOpinion($type, $opinion)
+    public function getEnabledArgumentsByTypeAndOpinionWithSort($type, $opinion, $argumentSort = null)
     {
-        return $this->getIsEnabledQueryBuilder()
+        $qb = $this->getIsEnabledQueryBuilder()
             ->leftJoin('a.opinion', 'o')
             ->addSelect('o')
             ->leftJoin('o.Author', 'aut')
             ->addSelect('aut')
             ->leftJoin('aut.Media', 'm')
             ->addSelect('m')
+            ->leftJoin('a.Votes', 'v')
+            ->addSelect('v')
             ->andWhere('a.isTrashed = :notTrashed')
             ->setParameter('notTrashed', false)
             ->andWhere('a.type = :type')
             ->setParameter('type', $type)
             ->andWhere('a.opinion = :opinion')
-            ->setParameter('opinion', $opinion)
-            ->getQuery()
+            ->setParameter('opinion', $opinion);
+
+        if (null != $argumentSort) {
+            if ($argumentSort == 'popularity') {
+                $qb->orderBy('a.voteCount', 'DESC');
+            }
+            else if ($argumentSort == 'date') {
+                $qb->orderBy('a.updatedAt', 'DESC');
+            }
+        }
+
+        $qb->addOrderBy('a.updatedAt', 'DESC');
+
+        return $qb->getQuery()
             ->getResult();
     }
 
@@ -41,6 +55,8 @@ class ArgumentRepository extends EntityRepository
             ->addSelect('aut')
             ->leftJoin('aut.Media', 'm')
             ->addSelect('m')
+            ->leftJoin('a.Votes', 'v')
+            ->addSelect('v')
             ->andWhere('a.isTrashed = :notTrashed')
             ->setParameter('notTrashed', false)
             ->andWhere('a.opinion = :opinion')
@@ -56,6 +72,8 @@ class ArgumentRepository extends EntityRepository
             ->setParameter('trashed', true)
             ->leftJoin('a.opinion', 'o')
             ->addSelect('o')
+            ->leftJoin('a.Votes', 'v')
+            ->addSelect('v')
             ->leftJoin('o.Author', 'aut')
             ->addSelect('aut')
             ->leftJoin('aut.Media', 'm')

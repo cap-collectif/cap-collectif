@@ -119,7 +119,7 @@ Capco\AppBundle\Entity\Opinion:
         voteCountMitige: <numberBetween(0, 50)>
         voteCountOk: <numberBetween(0, 50)>
         voteCountNok: <numberBetween(0, 50)>
-    opinion{11..35}:
+    opinion{11..50}:
         title: <text(20)>
         body: <text(1000)>
         isEnabled: <boolean()>

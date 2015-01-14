@@ -147,6 +147,10 @@ argument:
       against: contre
   trashed:
     linked_proposition: Lié à la proposition :
+  sort:
+    date: Date
+    popularity: Nombre de votes
+    label: Trier par
 
 source:
   update:

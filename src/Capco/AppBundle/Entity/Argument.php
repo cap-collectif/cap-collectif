@@ -31,6 +31,11 @@ class Argument
         self::TYPE_AGAINST => 'argument.show.type.against',
     ];
 
+    public static $sortCriterias = [
+        'date' => 'argument.sort.date',
+        'popularity' => 'argument.sort.popularity',
+    ];
+
     /**
      * @var integer
      *

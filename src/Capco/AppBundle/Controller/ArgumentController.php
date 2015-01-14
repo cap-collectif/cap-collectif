@@ -29,15 +29,16 @@ class ArgumentController extends Controller
      * @param $opinionType
      * @param $opinion
      * @param $type
+     * @param $argumentSort
      * @return array
      */
-    public function showArgumentsAction(Consultation $consultation, OpinionType $opinionType, Opinion $opinion, $type)
+    public function showArgumentsAction(Consultation $consultation, OpinionType $opinionType, Opinion $opinion, $type, $argumentSort = null)
     {
         $argumentType = Argument::$argumentTypes[$type];
 
         $arguments = $this->getDoctrine()
             ->getRepository('CapcoAppBundle:Argument')
-            ->getEnabledArgumentsByTypeAndOpinion($type, $opinion);
+            ->getEnabledArgumentsByTypeAndOpinionWithSort($type, $opinion, $argumentSort);
 
         $reportingArgument = $this->getDoctrine()->getRepository('CapcoAppBundle:Reporting')->findBy(array(
             'Reporter' => $this->getUser(),

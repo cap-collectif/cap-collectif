@@ -138,10 +138,22 @@
                                 </div>
                             </div>
                         </div> <!-- .panel-group -->
-
                     </div> <!-- .opinion__description -->
-
                 </div>
+
+                <div class="filter  block">
+                    {{ form_start(sortArgumentsForm) }}
+                    {{ form_errors(sortArgumentsForm) }}
+                    <div class="formgroup--inline">
+                        {{ form_label(sortArgumentsForm.argumentSort, null, {'label_attr':{"class":"control-label"} }) }}
+                        <span class="formgroup--inline__control">
+                            {{ form_errors(sortArgumentsForm.argumentSort) }}
+                            {{ form_widget(sortArgumentsForm.argumentSort, {'attr':{"class":"form-control"} }) }}
+                        </span>
+                    </div>
+                    {{ form_end(sortArgumentsForm) }}
+                </div>
+
                 <div class="row">
                     <div class="col-sm-12  col-md-6">
                         {% if app.user is not null %}
@@ -149,7 +161,7 @@
                             {% set form = argumentFormYes %}
                             {% include '@CapcoApp/Argument/create.html.twig' %}
                         {% endif %}
-                        {{ render(controller('CapcoAppBundle:Argument:showArguments', {'consultation': consultation, 'opinionType': app.request.attributes.get('opinionType'), 'opinion': opinion, 'type': 1})) }}
+                        {{ render(controller('CapcoAppBundle:Argument:showArguments', {'consultation': consultation, 'opinionType': app.request.attributes.get('opinionType'), 'opinion': opinion, 'type': 1, 'argumentSort': argumentSort})) }}
                     </div>
                     <div class="col-sm-12  col-md-6">
                         {% if app.user is not null %}
@@ -157,7 +169,7 @@
                             {% set form = argumentFormNo %}
                             {% include '@CapcoApp/Argument/create.html.twig' %}
                         {% endif %}
-                        {{ render(controller('CapcoAppBundle:Argument:showArguments', {'consultation': consultation, 'opinionType': app.request.attributes.get('opinionType'), 'opinion': opinion, 'type': 0})) }}
+                        {{ render(controller('CapcoAppBundle:Argument:showArguments', {'consultation': consultation, 'opinionType': app.request.attributes.get('opinionType'), 'opinion': opinion, 'type': 0, 'argumentSort': argumentSort})) }}
                     </div>
                 </div>
             </div> <!-- col-xs-12  col-sm-4  col-md-3 -->

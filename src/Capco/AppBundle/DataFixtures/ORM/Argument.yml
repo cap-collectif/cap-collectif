@@ -20,10 +20,10 @@ Capco\AppBundle\Entity\Argument:
         Author: @user3
         type: <numberBetween(0, 1)>
         isTrashed: <boolean(30)>
-    argument{4..15}:
+    argument{4..2000}:
         body: <text(1000)>
         voteCount: <numberBetween(0, 582)>
-        opinion: @opinion<numberBetween(1, 20)>
+        opinion: @opinion<numberBetween(1, 50)>
         Author: @user*
         type: <numberBetween(0, 1)>
         isTrashed: <boolean(30)>

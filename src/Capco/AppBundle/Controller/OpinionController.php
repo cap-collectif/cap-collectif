@@ -10,6 +10,7 @@ use Capco\AppBundle\Entity\OpinionVote;
 use Capco\AppBundle\Form\OpinionsType as OpinionForm;
 use Capco\AppBundle\Form\ArgumentType as ArgumentForm;
 use Capco\AppBundle\Form\OpinionVoteType as OpinionVoteForm;
+use Capco\AppBundle\Form\ArgumentsSortType;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -74,6 +75,7 @@ class OpinionController extends Controller
     /**
      * Page opinion
      * @Route("/consultation/{consultation_slug}/opinion/{opinion_type_slug}/{opinion_slug}", name="app_consultation_show_opinion")
+     * @Route("/consultation/{consultation_slug}/opinion/{opinion_type_slug}/{opinion_slug}/{argumentSort}", name="app_consultation_show_opinion_sortarguments")
      * @ParamConverter("consultation", class="CapcoAppBundle:Consultation", options={"mapping": {"consultation_slug": "slug"}})
      * @ParamConverter("opinionType", class="CapcoAppBundle:OpinionType", options={"mapping": {"opinion_type_slug": "slug"}})
      * @ParamConverter("opinion", class="CapcoAppBundle:Opinion", options={"mapping": {"opinion_slug": "slug"}})
@@ -82,9 +84,10 @@ class OpinionController extends Controller
      * @param OpinionType $opinionType
      * @param Opinion $opinion
      * @param Request $request
+     * @param $argumentSort
      * @return array
      */
-    public function showOpinionAction(Consultation $consultation, OpinionType $opinionType, Opinion $opinion, Request $request)
+    public function showOpinionAction(Consultation $consultation, OpinionType $opinionType, Opinion $opinion, Request $request, $argumentSort = null)
     {
         if (false === $opinion->getIsEnabled()) {
             throw new AccessDeniedException($this->get('translator')->trans('Access restricted'));
@@ -143,6 +146,11 @@ class OpinionController extends Controller
 
         $opinionVoteForm = $this->get('form.factory')->createNamedBuilder('opinionVoteForm', new OpinionVoteForm(), $opinionVote, ['attr' => ['id' => 'opinion_vote_form']])->getForm();
 
+        $sortArgumentsForm = $this->get('form.factory')->createNamedBuilder('sortArgumentsForm', new ArgumentsSortType(), array(
+                'action' => $currentUrl,
+                'method' => 'POST'
+            ))
+            ->getForm();
 
         if ('POST' === $request->getMethod()) {
 
@@ -165,8 +173,24 @@ class OpinionController extends Controller
                 $this->handleOpinionVoteForm($opinion, $opinionVote, $userHasVoted, $form, $request);
             }
 
+            if ($request->request->has('sortArgumentsForm')) {
+                $form = $sortArgumentsForm;
+                $form->handleRequest($request);
+                if($form->isValid()) {
+                    $data = $form->getData();
+                    return $this->redirect($this->generateUrl('app_consultation_show_opinion_sortarguments',array(
+                        'argumentSort' => $data['argumentSort'],
+                        'consultation_slug' => $consultation->getSlug(),
+                        'opinion_type_slug' => $opinionType->getSlug(),
+                        'opinion_slug' => $opinion->getSlug(),
+                    )));
+                }
+            }
+
             return $this->redirect($this->generateUrl('app_consultation_show_opinion', ['consultation_slug' => $consultation->getSlug(), 'opinion_type_slug' => $opinionType->getSlug(), 'opinion_slug' => $opinion->getSlug() ]));
 
+        } else {
+            $sortArgumentsForm->get('argumentSort')->setData($argumentSort);
         }
 
         return [
@@ -186,6 +210,8 @@ class OpinionController extends Controller
             'opinionVoteTypes' => OpinionVote::$voteTypes,
             'opinionVoteStyles' => OpinionVote::$voteTypesStyles,
             'opinionVoteForm' => $opinionVoteForm->createView(),
+            'sortArgumentsForm' => $sortArgumentsForm->createView(),
+            'argumentSort' => $argumentSort,
         ];
     }
 
