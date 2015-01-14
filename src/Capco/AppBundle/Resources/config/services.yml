@@ -6,6 +6,7 @@ parameters:
     capco.site_image.resolver.class: Capco\AppBundle\SiteImage\Resolver
     capco.twig_extension.site_image.class: Capco\AppBundle\Twig\SiteImageExtension
     capco.twig_extension.menu_url.class: Capco\AppBundle\Twig\MenuLinkExtension
+    capco.notify.manager.class: Capco\AppBundle\Manager\Notify
 
 services:
     capco.site_parameter.repository:
@@ -56,3 +57,7 @@ services:
         class: Capco\AppBundle\Form\Extension\MediaTypeExtension
         tags:
             - { name: form.type_extension, alias: sonata_media_type }
+
+    capco.notify_manager:
+        class:     %capco.notify.manager.class%
+        arguments: [@mailer, @templating, @capco.site_parameter.resolver]

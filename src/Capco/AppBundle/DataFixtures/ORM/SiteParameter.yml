@@ -115,7 +115,13 @@ Capco\AppBundle\Entity\SiteParameter:
         keyname: signin.cgu.name
         title: Nom de la charte ou des CGU sur la page d'inscription
         value: la charte
+
     SiteParameter26:
         keyname: signin.cgu.link
         title: Lien de la charte ou des CGU sur la page d'inscription
         value: /pages/charte
+
+    SiteParameter27:
+        keyname: mail.admin
+        title: Email pour recevoir les notifications
+        value: brunet.laurent60@yahoo.fr

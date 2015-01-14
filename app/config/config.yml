@@ -83,8 +83,9 @@ fos_user:
         confirmation:
             enabled:    true
             from_email:
-                address: lbrunet@jolicode.com
-                sender_name: lbrunet
+                address: "%mailer_user%"
+                sender_name: laurent Brunet
+
 services:
     twig.extension.text:
        class: Twig_Extensions_Extension_Text

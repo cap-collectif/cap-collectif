@@ -1,0 +1,10 @@
+{% block body_text %}
+    {% autoescape false %}
+    <p>
+        Bonjour, un contenu vient d’être signalé par <strong><a href="mailto:{{ user.email }}">{{ user.fullName }}</a></strong> comme abusif sur Cap-Collectif.
+    </p>
+    <p>message: </p>
+    <p>{{ message }}</p>
+    {% endautoescape %}
+{% endblock %}
+{% block body_html %}{% endblock %}
