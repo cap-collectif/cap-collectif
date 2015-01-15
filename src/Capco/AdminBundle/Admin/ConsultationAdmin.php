@@ -57,10 +57,18 @@ class ConsultationAdmin extends Admin
     protected function configureFormFields(FormMapper $formMapper)
     {
         $subject = $this->getSubject();
+        $open = null;
+        $close = null;
+        if($subject != null){
+            $open = $subject->getOpenedAt();
+            $close = $subject->getClosedAt();
+        }
 
         $formMapper
             ->add('title')
-            ->add('isEnabled')
+            ->add('isEnabled', null, array(
+                'required' => false,
+            ))
             ->add('teaser', null, array(
                 'attr' => array('class' => 'ckeditor')
             ))
@@ -71,13 +79,13 @@ class ConsultationAdmin extends Admin
                 'required' => true,
                 'mapped' => false,
                 'datepicker_use_button' => false,
-                'data' => $subject->getOpenedAt(),
+                'data' => $open,
             ))
              ->add('closedAt', 'sonata_type_date_picker', array(
                 'required' => true,
                 'mapped' => false,
                  'datepicker_use_button' => false,
-                'data' => $subject->getClosedAt(),
+                'data' => $close,
                  'help' => 'admin.help.consultation.closedAt',
              ))
             ->add('Steps', null, array(

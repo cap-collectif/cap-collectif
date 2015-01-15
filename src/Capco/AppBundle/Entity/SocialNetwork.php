@@ -61,7 +61,7 @@ class SocialNetwork
     /**
      * @var \DateTime
      *
-     * @Gedmo\Timestampable(on="update")
+     * @Gedmo\Timestampable(on="change", field={"title", "link", "position", "media"})
      * @ORM\Column(name="updated_at", type="datetime")
      */
     private $updatedAt;
@@ -81,6 +81,14 @@ class SocialNetwork
         } else {
             return "New social network";
         }
+    }
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->updatedAt = new \Datetime;
     }
 
     /**

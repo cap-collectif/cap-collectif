@@ -53,7 +53,7 @@ class Reporting
 
     /**
      * @var \DateTime
-     * @Gedmo\Timestampable(on="update")
+     * @Gedmo\Timestampable(on="change", field={"status", "body", "Reporter", "Opinion", "Source", "Argument", "Idea"})
      * @ORM\Column(name="updated_at", type="datetime")
      */
     private $updatedAt;
@@ -105,6 +105,11 @@ class Reporting
      * @ORM\JoinColumn(name="idea_id", referencedColumnName="id")
      */
     private $Idea;
+
+    function __construct()
+    {
+        $this->updatedAt = new \Datetime;
+    }
 
     /**
      * Get id

@@ -47,7 +47,7 @@ class SiteImage
 
     /**
      * @var \DateTime
-     * @Gedmo\Timestampable(on="update")
+     * @Gedmo\Timestampable(on="change", field={"Media"})
      * @ORM\Column(name="updated_at", type="datetime")
      */
     private $updatedAt;
@@ -58,6 +58,15 @@ class SiteImage
      * @ORM\Column(name="is_enabled", type="boolean")
      */
     private $isEnabled = true;
+
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->updatedAt = new \Datetime;
+    }
 
     /**
      * Get id

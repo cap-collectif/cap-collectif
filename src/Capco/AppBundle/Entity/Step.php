@@ -100,6 +100,20 @@ class Step
      */
     private $body = null;
 
+    /**
+     * @var \DateTime
+     * @Gedmo\Timestampable(on="create")
+     * @ORM\Column(name="created_at", type="datetime")
+     */
+    private $createdAt;
+
+    /**
+     * @var \DateTime
+     * @Gedmo\Timestampable(on="change", field={"title", "startAt", "endAt", "position", "type", "consultation", "body"})
+     * @ORM\Column(name="updated_at", type="datetime")
+     */
+    private $updatedAt;
+
     public function __toString()
     {
         if ($this->id) {
@@ -107,6 +121,14 @@ class Step
         } else {
             return "New step";
         }
+    }
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->updatedAt = new \Datetime;
     }
 
     /**
@@ -336,6 +358,50 @@ class Step
     public function setBody($body)
     {
         $this->body = $body;
+        return $this;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getCreatedAt()
+    {
+        return $this->createdAt;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getUpdatedAt()
+    {
+        return $this->updatedAt;
+    }
+
+    /**
+     * Set createdAt
+     *
+     * @param \DateTime $createdAt
+     *
+     * @return Step
+     */
+    public function setCreatedAt($createdAt)
+    {
+        $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    /**
+     * Set updatedAt
+     *
+     * @param \DateTime $updatedAt
+     *
+     * @return Step
+     */
+    public function setUpdatedAt($updatedAt)
+    {
+        $this->updatedAt = $updatedAt;
+
         return $this;
     }
 

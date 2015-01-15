@@ -92,7 +92,7 @@ class Theme
 
     /**
      * @var \DateTime
-     * @Gedmo\Timestampable(on="update")
+     * @Gedmo\Timestampable(on="change", field={"title", "teaser", "position", "status", "body", "Media"})
      * @ORM\Column(name="updated_at", type="datetime")
      */
     private $updatedAt;
@@ -122,6 +122,7 @@ class Theme
         $this->Consultations = new ArrayCollection();
         $this->Ideas = new ArrayCollection();
         $this->status = self::STATUS_CLOSED;
+        $this->updatedAt = new \Datetime;
     }
 
     public function __toString()

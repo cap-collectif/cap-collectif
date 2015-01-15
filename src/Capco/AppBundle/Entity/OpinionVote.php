@@ -66,6 +66,13 @@ class OpinionVote
     private $createdAt;
 
     /**
+     * @var \DateTime
+     * @Gedmo\Timestampable(on="change", field={"value"})
+     * @ORM\Column(name="updated_at", type="datetime")
+     */
+    private $updatedAt;
+
+    /**
      * @var integer
      *
      * @ORM\Column(name="value", type="integer")
@@ -89,6 +96,14 @@ class OpinionVote
     private $Voter;
 
     /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->updatedAt = new \Datetime;
+    }
+
+    /**
      * Get id
      *
      * @return integer
@@ -106,6 +121,16 @@ class OpinionVote
     public function getCreatedAt()
     {
         return $this->createdAt;
+    }
+
+    /**
+     * Get updatedAt
+     *
+     * @return \DateTime
+     */
+    public function getUpdatedAt()
+    {
+        return $this->updatedAt;
     }
 
     /**
@@ -173,6 +198,20 @@ class OpinionVote
     public function setCreatedAt($createdAt)
     {
         $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    /**
+     * Set updatedAt
+     *
+     * @param \DateTime $updatedAt
+     *
+     * @return Vote
+     */
+    public function setUpdatedAt($updatedAt)
+    {
+        $this->updatedAt = $updatedAt;
 
         return $this;
     }

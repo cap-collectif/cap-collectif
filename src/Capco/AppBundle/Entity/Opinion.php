@@ -60,7 +60,7 @@ class Opinion
 
     /**
      * @var \DateTime
-     * @Gedmo\Timestampable(on="update")
+     * @Gedmo\Timestampable(on="change", field={"title", "body", "Author", "OpinionType", "Consultation"})
      * @ORM\Column(name="updated_at", type="datetime")
      */
     private $updatedAt;
@@ -177,7 +177,6 @@ class Opinion
         } else {
             return "New opinion";
         }
-
     }
 
     /**
@@ -223,6 +222,7 @@ class Opinion
         $this->argumentsCount = 0;
         $this->sourcesCount = 0;
         $this->resetVoteCount();
+        $this->updatedAt = new \Datetime;
     }
 
 

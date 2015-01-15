@@ -81,7 +81,7 @@ class OpinionType
 
     /**
      * @var \DateTime
-     * @Gedmo\Timestampable(on="update")
+     * @Gedmo\Timestampable(on="change", field={"title", "shortName", "position", "voteWidgetType", "color"})
      * @ORM\Column(name="updated_at", type="datetime")
      */
     private $updatedAt;
@@ -111,6 +111,7 @@ class OpinionType
     {
         $this->voteWidgetType = self::VOTE_WIDGET_TYPE_ACCORD;
         $this->Opinions = new ArrayCollection();
+        $this->updatedAt = new \Datetime;
     }
 
     public function __toString()

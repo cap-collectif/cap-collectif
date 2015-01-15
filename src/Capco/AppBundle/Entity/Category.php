@@ -52,7 +52,7 @@ class Category
 
     /**
      * @var \DateTime
-     * @Gedmo\Timestampable(on="update")
+     * @Gedmo\Timestampable(on="change", field={"title"})
      * @ORM\Column(name="updated_at", type="datetime")
      */
     private $updatedAt;
@@ -70,14 +70,12 @@ class Category
         } else {
             return "New category";
         }
-
-        $this->Sources = new ArrayCollection();
-
     }
 
     function __construct()
     {
         $this->Sources = new ArrayCollection();
+        $this->updatedAt = new \Datetime;
     }
 
     /**

@@ -92,7 +92,7 @@ class Consultation
 
     /**
      * @var \DateTime
-     * @Gedmo\Timestampable(on="update")
+     * @Gedmo\Timestampable(on="change", field={"title", "teaser", "body", "Author", "Themes", "Steps", "Media"})
      * @ORM\Column(name="updated_at", type="datetime")
      */
     private $updatedAt;
@@ -166,8 +166,17 @@ class Consultation
         } else {
             return "New consultation";
         }
+    }
 
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
         $this->Themes = new ArrayCollection();
+        $this->Opinions = new ArrayCollection();
+        $this->Steps = new ArrayCollection();
+        $this->updatedAt = new \Datetime;
     }
 
     /**
@@ -426,16 +435,6 @@ class Consultation
             return self::OPENING_STATUS_OPENED;
         }
         return null;
-    }
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->Themes = new ArrayCollection();
-        $this->Opinions = new ArrayCollection();
-        $this->Problems = new ArrayCollection();
-        $this->Steps = new ArrayCollection();
     }
 
     /**

@@ -13,8 +13,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Table(name="idea")
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\IdeaRepository")
  */
-class
-Idea
+class Idea
 {
     const SORT_ORDER_CREATED_AT = 0;
     const SORT_ORDER_VOTES_COUNT = 1;
@@ -78,7 +77,7 @@ Idea
     /**
      * @var \DateTime
      *
-     * @Gedmo\Timestampable(on="update")
+     * @Gedmo\Timestampable(on="change", field={"title", "body", "Theme", "Author", "Media"})
      * @ORM\Column(name="updated_at", type="datetime")
      */
     private $updatedAt;
@@ -153,8 +152,6 @@ Idea
         } else {
             return "New idea";
         }
-
-        $this->IdeaVotes = new ArrayCollection();
     }
 
     /**
@@ -335,6 +332,7 @@ Idea
         $this->IdeaVotes = new ArrayCollection();
         $this->Reports = new ArrayCollection();
         $this->voteCount = 0;
+        $this->updatedAt = new \Datetime;
     }
 
     /**

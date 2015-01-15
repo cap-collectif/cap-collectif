@@ -62,7 +62,7 @@ class Argument
 
     /**
      * @var \DateTime
-     * @Gedmo\Timestampable(on="update")
+     * @Gedmo\Timestampable(on="change", field={"body"})
      * @ORM\Column(name="updated_at", type="datetime")
      */
     private $updatedAt;
@@ -122,6 +122,7 @@ class Argument
         $this->Reports = new ArrayCollection();
         $this->Votes = new ArrayCollection();
         $this->voteCount = 0;
+        $this->updatedAt = new \Datetime;
     }
 
     /**

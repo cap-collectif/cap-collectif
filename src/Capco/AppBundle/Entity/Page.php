@@ -4,6 +4,7 @@ namespace Capco\AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * Page
@@ -53,7 +54,7 @@ class Page
     /**
      * @var \DateTime
      *
-     * @Gedmo\Timestampable(on="update")
+     * @Gedmo\Timestampable(on="change", field={"title", "body", "Author", "media"})
      * @ORM\Column(name="updated_at", type="datetime")
      */
     private $updatedAt;
@@ -105,6 +106,16 @@ class Page
         } else {
             return "New page";
         }
+    }
+
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->MenuItems = new ArrayCollection();
+        $this->updatedAt = new \Datetime;
     }
 
     /**

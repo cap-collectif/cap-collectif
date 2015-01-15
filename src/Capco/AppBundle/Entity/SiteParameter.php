@@ -45,7 +45,7 @@ class SiteParameter
 
     /**
      * @var \DateTime
-     * @Gedmo\Timestampable(on="update")
+     * @Gedmo\Timestampable(on="change", field={"value"})
      * @ORM\Column(name="updated_at", type="datetime")
      */
     private $updatedAt;
@@ -65,6 +65,14 @@ class SiteParameter
         } else {
             return "New parameter";
         }
+    }
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->updatedAt = new \Datetime;
     }
 
     /**

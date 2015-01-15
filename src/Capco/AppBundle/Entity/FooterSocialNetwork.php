@@ -83,18 +83,10 @@ class FooterSocialNetwork
     /**
      * @var \DateTime
      *
-     * @Gedmo\Timestampable(on="update")
+     * @Gedmo\Timestampable(on="change", field={"title", "link", "style", "position"})
      * @ORM\Column(name="updated_at", type="datetime")
      */
     private $updatedAt;
-
-    /**
-     * @var
-     *
-     * @ORM\OneToOne(targetEntity="Capco\MediaBundle\Entity\Media", cascade={"persist", "remove"})
-     * @ORM\JoinColumn(name="media_id", referencedColumnName="id")
-     */
-    private $media;
 
     public function __toString()
     {
@@ -103,6 +95,14 @@ class FooterSocialNetwork
         } else {
             return "New footer social network";
         }
+    }
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->updatedAt = new \Datetime;
     }
 
     /**
@@ -249,23 +249,6 @@ class FooterSocialNetwork
     {
         return $this->updatedAt;
     }
-
-    /**
-     * @return mixed
-     */
-    public function getMedia()
-    {
-        return $this->media;
-    }
-
-    /**
-     * @param mixed $media
-     */
-    public function setMedia($media)
-    {
-        $this->media = $media;
-    }
-
 
     /**
      * Set createdAt

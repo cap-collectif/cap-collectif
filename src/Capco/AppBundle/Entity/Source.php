@@ -74,7 +74,7 @@ class Source
 
     /**
      * @var \DateTime
-     * @Gedmo\Timestampable(on="update")
+     * @Gedmo\Timestampable(on="change", field={"title", "link", "body", "Author", "Opinion", "Category", "Media", "type"})
      * @ORM\Column(name="updated_at", type="datetime")
      */
     private $updatedAt;
@@ -181,6 +181,7 @@ class Source
         $this->type = self::LINK;
         $this->Reports = new ArrayCollection();
         $this->voteCountSource = 0;
+        $this->updatedAt = new \DateTime;
     }
 
     /**

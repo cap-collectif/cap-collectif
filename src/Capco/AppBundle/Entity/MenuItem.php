@@ -90,7 +90,7 @@ class MenuItem
     /**
      * @var \DateTime
      *
-     * @Gedmo\Timestampable(on="update")
+     * @Gedmo\Timestampable(on="change", field={"title", "link", "Page", "position", "parent", "Menu"})
      * @ORM\Column(name="updated_at", type="datetime")
      */
     private $updatedAt;
@@ -112,6 +112,15 @@ class MenuItem
         } else {
             return "New menu item";
         }
+    }
+
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->updatedAt = new \Datetime;
     }
 
     /**
