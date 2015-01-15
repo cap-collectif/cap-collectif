@@ -83,8 +83,8 @@ fos_user:
         confirmation:
             enabled:    true
             from_email:
-                address: "%mailer_user%"
-                sender_name: laurent Brunet
+                address: "%registration_email_address%"
+                sender_name: "%registration_sender_name%"
 
 services:
     twig.extension.text:

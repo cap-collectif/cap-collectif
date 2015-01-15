@@ -22,3 +22,6 @@ parameters:
     facebook_app_secret:  xxxx
     google_app_id:        xxxx
     google_app_secret:    xxxx
+
+    registration_email_address: no-reply@cap-collectif.com
+    registration_sender_name: Cap Collectif
