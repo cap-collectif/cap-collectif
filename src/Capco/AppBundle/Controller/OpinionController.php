@@ -371,7 +371,7 @@ class OpinionController extends Controller
             'opinionVoteTypes' => OpinionVote::$voteTypes,
             'opinionVoteStyles' => OpinionVote::$voteTypesStyles,
             'opinionVoteForm' => $opinionVoteForm->createView(),
-            'sortArgumentsForm' => $sortArgumentsForm->createView(),
+            'sortArgumentsForm' => $sortArgumentsForm,
             'argumentSort' => $argumentSort,
         ];
     }

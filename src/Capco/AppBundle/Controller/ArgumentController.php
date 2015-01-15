@@ -32,7 +32,7 @@ class ArgumentController extends Controller
      * @param $argumentSort
      * @return array
      */
-    public function showArgumentsAction(Consultation $consultation, OpinionType $opinionType, Opinion $opinion, $type, $argumentSort = null)
+    public function showArgumentsAction(Consultation $consultation, OpinionType $opinionType, Opinion $opinion, $type, Form $form = null, $argumentSort = null)
     {
         $argumentType = Argument::$argumentTypes[$type];
 
@@ -51,7 +51,8 @@ class ArgumentController extends Controller
             'argumentType' => $argumentType,
             'consultation' => $consultation,
             'opinionType' => $opinionType,
-            'opinion' => $opinion
+            'opinion' => $opinion,
+            'sortArgumentsForm' => $form->createView(),
         ];
     }
 
