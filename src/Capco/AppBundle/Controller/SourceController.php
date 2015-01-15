@@ -149,13 +149,14 @@ class SourceController extends Controller
                 $source->resetVotes();
 
                 if ($type === 0) {
+                    $source->setMedia(null);
                     $mediaManager = $this->container->get('sonata.media.manager.media');
                     $media = $mediaManager->findOneBy(array('id' => $source->getMedia()));
-                    $source->setMedia(null);
-
-                    $provider = $this->get($media->getProviderName());
-                    $provider->removeThumbnails($media);
-                    $mediaManager->delete($media);
+                    if(null != $media) {
+                        $provider = $this->get($media->getProviderName());
+                        $provider->removeThumbnails($media);
+                        $mediaManager->delete($media);
+                    }
                 }
                 if ($type === 1) {
                     $source->setLink(null);
@@ -207,7 +208,6 @@ class SourceController extends Controller
 
                 $sourceVote = new SourceVote();
                 $sourceVote->setVoter($user);
-                $sourceVote->setSource($source);
 
                 $userVote = $em->getRepository('CapcoAppBundle:SourceVote')->findOneBy(array(
                     'Voter' => $user,
@@ -219,7 +219,7 @@ class SourceController extends Controller
                 }
 
                 if($userVote == null ){
-                    $source->addVote();
+                    $source->addVote($sourceVote);
                     $em->persist($source);
                     $em->persist($sourceVote);
                     $em->flush();
@@ -227,7 +227,7 @@ class SourceController extends Controller
                     $this->get('session')->getFlashBag()->add('success', $this->get('translator')->trans('Your vote has been saved.'));
                 }
                 else {
-                    $source->removeVote();
+                    $source->removeVote($sourceVote);
                     $em->persist($source);
                     $em->remove($sourceVote);
                     $em->flush();

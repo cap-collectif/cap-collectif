@@ -85,7 +85,6 @@ class ArgumentController extends Controller
 
                 $argumentVote = new ArgumentVote();
                 $argumentVote->setVoter($user);
-                $argumentVote->setArgument($argument);
 
                 $userVote = $em->getRepository('CapcoAppBundle:ArgumentVote')->findOneBy(array(
                         'Voter' => $user,
@@ -97,7 +96,7 @@ class ArgumentController extends Controller
                 }
 
                 if($userVote == null ){
-                    $argument->addVote();
+                    $argument->addVote($argumentVote);
                     $em->persist($argument);
                     $em->persist($argumentVote);
                     $em->flush();
@@ -105,7 +104,7 @@ class ArgumentController extends Controller
                     $this->get('session')->getFlashBag()->add('success', $this->get('translator')->trans('Your vote has been saved.'));
                 }
                 else {
-                    $argument->removeVote();
+                    $argument->removeVote($argumentVote);
                     $em->persist($argument);
                     $em->remove($argumentVote);
                     $em->flush();
@@ -216,8 +215,8 @@ class ArgumentController extends Controller
             $form->handleRequest($request);
 
             if ($form->isValid()) {
-
                 $em = $this->getDoctrine()->getManager();
+                $opinion->removeArgument($argument);
                 $em->remove($argument);
                 $em->flush();
 

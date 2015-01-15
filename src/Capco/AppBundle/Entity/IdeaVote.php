@@ -86,11 +86,11 @@ class IdeaVote
     /**
      * set idea
      *
-     * @param \Capco\AppBundle\Entity\Idea $Idea
+     * @param $Idea
      *
      * @return IdeaVote
      */
-    public function setIdea(\Capco\AppBundle\Entity\Idea $Idea)
+    public function setIdea($Idea)
     {
         $this->Idea = $Idea;
 

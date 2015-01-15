@@ -21,8 +21,15 @@
         <p>{{ consultation.openedAt | localizeddate('long', 'none') }}</p>
         <p class="excerpt">Contributions</p>
         <p>
-            {{ consultation.opinionCount + consultation.trashedOpinionCount }} propositions<br/>
-            {{ consultation.argumentCount + consultation.trashedArgumentCount }} arguments
+            {% set opinionCount = (consultation.opinionCount + consultation.trashedOpinionCount) %}
+            {% set argumentCount = (consultation.argumentCount + consultation.trashedArgumentCount) %}
+            {% transchoice opinionCount with {'%count%': opinionCount} from 'CapcoAppBundle' %}
+            consultation.show.opinions
+            {% endtranschoice %}
+            <br/>
+            {% transchoice argumentCount with {'%count%': argumentCount} from 'CapcoAppBundle' %}
+            consultation.show.arguments
+            {% endtranschoice %}
         </p>
     </div>
 </div>

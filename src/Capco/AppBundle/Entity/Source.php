@@ -127,7 +127,7 @@ class Source
     /**
      * @var
      *
-     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\SourceVote", mappedBy="source", cascade={"persist", "remove"})
+     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\SourceVote", mappedBy="source", cascade={"persist", "remove"}, orphanRemoval=true)
      */
     private $Votes;
 
@@ -180,6 +180,7 @@ class Source
     {
         $this->type = self::LINK;
         $this->Reports = new ArrayCollection();
+        $this->voteCountSource = 0;
     }
 
     /**
@@ -461,19 +462,41 @@ class Source
         return $this->trashedReason;
     }
 
-    public function resetVotes(){
+    public function setVotes($votes){
+        foreach($votes as $vote){
+            $vote->setSource($this);
+        }
+        $this->Votes = $votes;
+        $this->voteCountSource = $votes->count();
+        return $this;
+    }
+
+    public function resetVotes() {
+        foreach($this->Votes as $vote){
+            $vote->setSource(null);
+        }
         $this->voteCountSource = 0;
+        $this->setVotes(new ArrayCollection());
         return $this;
     }
 
-    public function addVote(){
+    public function addVote($vote){
         $this->voteCountSource++;
+        $this->Votes->add($vote);
+        $vote->setSource($this);
         return $this;
     }
 
-    public function removeVote(){
-        $this->voteCountSource--;
+    public function removeVote($vote){
+        if($this->Votes->removeElement($vote)){
+            $this->voteCountSource--;
+            $vote->setSource(null);
+        }
         return $this;
+    }
+
+    public function getVotes(){
+        return $this->Votes;
     }
 
     public function userHasVote(User $user = null){

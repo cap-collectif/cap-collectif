@@ -32,7 +32,7 @@ class ArgumentVote
     /**
      * @var
      *
-     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Argument", inversedBy="Votes")
+     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Argument", inversedBy="Votes", cascade={"persist"})
      */
     private $argument;
 
@@ -78,22 +78,6 @@ class ArgumentVote
     public function setArgument($argument)
     {
         $this->argument = $argument;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getVote()
-    {
-        return $this->vote;
-    }
-
-    /**
-     * @param mixed $vote
-     */
-    public function setVote($vote)
-    {
-        $this->vote = $vote;
     }
 
     /**

@@ -30,7 +30,7 @@
                         {% endif %}
                         <input type="hidden" name="_csrf_token" value="{{ token }}">
                     </form>
-                    <span class="opinion__votes-nb">{{ argument.VoteCount }}</span>
+                    <span class="opinion__votes-nb">{{ argument.voteCount }}</span>
 
                     {% if(userReportingArgument is empty) %}
                     <a href="{{ path('app_report_argument' ,{'consultation_slug': consultation.slug, 'opinion_type_slug': opinionType.slug, 'opinion_slug': opinion.slug, 'argument_id': argument.id } ) }}" class="btn btn-xs btn-dark-gray  btn--outline"><i class="cap cap-flag-1"></i> Signaler</a>

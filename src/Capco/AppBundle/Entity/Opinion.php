@@ -88,21 +88,21 @@ class Opinion
 
     /**
      * @var
-     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\Argument", mappedBy="opinion",  cascade={"persist", "remove"})
+     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\Argument", mappedBy="opinion",  cascade={"persist", "remove"}, orphanRemoval=true)
      */
     private $arguments;
 
     /**
      * @var string
      *
-     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\OpinionVote", mappedBy="opinion", cascade={"persist", "remove"})
+     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\OpinionVote", mappedBy="opinion", cascade={"persist", "remove"}, orphanRemoval=true)
      */
     private $Votes;
 
     /**
      * @var string
      *
-     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\Reporting", mappedBy="Opinion", cascade={"persist", "remove"})
+     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\Reporting", mappedBy="Opinion", cascade={"persist", "remove"}, orphanRemoval=true)
      */
     private $Reports;
 
@@ -220,6 +220,9 @@ class Opinion
         $this->Reports = new ArrayCollection();
         $this->arguments = new ArrayCollection();
         $this->Sources = new ArrayCollection();
+        $this->argumentsCount = 0;
+        $this->sourcesCount = 0;
+        $this->resetVoteCount();
     }
 
 
@@ -424,14 +427,24 @@ class Opinion
         return $this->Votes;
     }
 
+    public function setVotes($votes){
+        foreach($votes as $vote){
+            $vote->setOpinion($this);
+            $this->addToCount($vote->getValue());
+        }
+        $this->Votes = $votes;
+        return $this;
+    }
+
     /**
      * @param OpinionVote $vote
      * @return $this
      */
-    public function addVote(OpinionVote $vote)
+    public function addVote($vote)
     {
-        $this->Votes[] = $vote;
-
+        $this->Votes->add($vote);
+        $this->addToCount($vote->getValue());
+        $vote->setOpinion($this);
         return $this;
     }
 
@@ -440,7 +453,46 @@ class Opinion
      */
     public function removeVote(OpinionVote $vote)
     {
-        $this->Votes->removeElement($vote);
+        if($this->Votes->removeElement($vote)){
+            $this->removeFromCount($vote->getValue());
+            $vote->setOpinion($this);
+        }
+        return $this;
+    }
+
+    public function resetVotes() {
+        foreach($this->Votes as $vote){
+            $vote->setOpinion(null);
+        }
+        $this->resetVoteCount();
+        $this->setVotes(new ArrayCollection());
+        return $this;
+    }
+
+    public function addToCount($type) {
+        if($type == OpinionVote::$voteTypes['ok']) {
+            $this->voteCountOk++;
+        } else if($type == OpinionVote::$voteTypes['nok']) {
+            $this->voteCountNok++;
+        } else if($type == OpinionVote::$voteTypes['mitige']) {
+            $this->voteCountMitige++;
+        }
+    }
+
+    public function removeFromCount($type) {
+        if($type == OpinionVote::$voteTypes['ok']) {
+            $this->voteCountOk--;
+        } else if($type == OpinionVote::$voteTypes['nok']) {
+            $this->voteCountNok--;
+        } else if($type == OpinionVote::$voteTypes['mitige']) {
+            $this->voteCountMitige--;
+        }
+    }
+
+    public function resetVoteCount() {
+        $this->voteCountOk = 0;
+        $this->voteCountNok = 0;
+        $this->voteCountMitige = 0;
     }
 
     /**
@@ -471,66 +523,82 @@ class Opinion
         $this->Reports->removeElement($report);
     }
 
-    /**
-     * @return mixed
-     */
-    public function getArguments()
-    {
+    public function setArguments($arguments){
+        $this->Consultation->removeFromArgumentCount($this->arguments->count());
+        foreach($arguments as $argument){
+            $argument->setOpinion($this);
+        }
+        $this->arguments = $arguments;
+        $this->argumentsCount = $arguments->count();
+        $this->Consultation->addToArgumentCount($arguments->count());
+        return $this;
+    }
+
+    public function getArguments(){
         return $this->arguments;
     }
 
-    /**
-     * @param Argument $argument
-     * @return $this
-     */
-    public function addArgument(Argument $argument)
-    {
-        $this->arguments[] = $argument;
+    public function resetArguments() {
+        $this->Consultation->removeFromArgumentCount($this->arguments->count());
+        foreach($this->arguments as $argument){
+            $argument->setOpinion(null);
+        }
+        $this->argumentsCount = 0;
+        $this->setArguments(new ArrayCollection());
+        return $this;
+    }
+
+    public function addArgument($argument){
         $this->argumentsCount++;
+        $this->arguments->add($argument);
         $argument->setOpinion($this);
+        $this->Consultation->addToArgumentCount(1);
         return $this;
     }
 
-    /**
-     * @param Argument $argument
-     */
-    public function removeArgument(Argument $argument)
-    {
-        $this->arguments->removeElement($argument);
-        $this->argumentsCount--;
-        $argument->setOpinion(null);
+    public function removeArgument($argument){
+        if($this->arguments->removeElement($argument)){
+            $this->argumentsCount--;
+            $argument->setOpinion(null);
+            $this->Consultation->removeFromArgumentCount(1);
+        }
         return $this;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getSources()
-    {
+    public function setSources($sources){
+        foreach($sources as $source){
+            $source->setOpinion($this);
+        }
+        $this->Sources = $sources;
+        $this->sourcesCount = $sources->count();
+        return $this;
+    }
+
+    public function getSources(){
         return $this->Sources;
     }
 
-    /**
-     * @param Source $source
-     * @return $this
-     */
-    public function addSource(Source $source)
-    {
-        $this->Sources[] = $source;
+    public function resetSources() {
+        foreach($this->Sources as $source){
+            $source->setOpinion(null);
+        }
+        $this->sourcesCount = 0;
+        $this->setSources(new ArrayCollection());
+        return $this;
+    }
+
+    public function addSource($source){
         $this->sourcesCount++;
+        $this->Sources->add($source);
         $source->setOpinion($this);
         return $this;
     }
 
-    /**
-     * @param Source $source
-     * @return $this
-     */
-    public function removeSource(Source $source)
-    {
-        $this->Sources->removeElement($source);
-        $this->sourcesCount--;
-        $source->setOpinion(null);
+    public function removeSource($source){
+        if($this->Sources->removeElement($source)){
+            $this->sourcesCount--;
+            $source->setOpinion(null);
+        }
         return $this;
     }
 
@@ -635,12 +703,6 @@ class Opinion
         return $this->getVoteCountMitige() + $this->getVoteCountNok() + $this->getVoteCountOk();
     }
 
-    public function resetVotes(){
-        $this->voteCountMitige = 0;
-        $this->voteCountOk = 0;
-        $this->voteCountNok = 0;
-        return $this;
-    }
 
     /**
      * Add vote

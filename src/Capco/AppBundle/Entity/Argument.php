@@ -84,7 +84,7 @@ class Argument
     /**
      * @var
      *
-     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\ArgumentVote", mappedBy="argument", cascade={"persist", "remove"})
+     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\ArgumentVote", mappedBy="argument", cascade={"persist", "remove"}, orphanRemoval=true)
      */
     private $Votes;
 
@@ -120,6 +120,8 @@ class Argument
     function __construct()
     {
         $this->Reports = new ArrayCollection();
+        $this->Votes = new ArrayCollection();
+        $this->voteCount = 0;
     }
 
     /**
@@ -389,18 +391,43 @@ class Argument
         return $this->isEnabled;
     }
 
-    public function resetVotes(){
+    public function setVotes($votes){
+        foreach($votes as $vote){
+            $vote->setArgument($this);
+        }
+        $this->Votes = $votes;
+        $this->voteCount = $votes->count();
+        return $this;
+    }
+
+    public function getVotes(){
+        return $this->Votes;
+    }
+
+    public function resetVotes() {
+        foreach($this->Votes as $vote){
+            $vote->setArgument(null);
+        }
         $this->voteCount = 0;
+        $this->setVotes(new ArrayCollection());
         return $this;
     }
 
-    public function addVote(){
+    public function addVote($vote){
         $this->voteCount++;
+        $this->Votes->add($vote);
+        $vote->setArgument($this);
+
         return $this;
     }
 
-    public function removeVote(){
-        $this->voteCount--;
+    public function removeVote($vote)
+    {
+        if ($this->Votes->removeElement($vote)) {
+            $this->voteCount--;
+            $vote->setArgument(null);
+        }
+
         return $this;
     }
 

@@ -121,7 +121,7 @@ Idea
 
     /**
      * @var
-     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\IdeaVote", mappedBy="Idea", cascade={"persist", "remove"})
+     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\IdeaVote", mappedBy="Idea", cascade={"persist", "remove"}, orphanRemoval=true)
      */
     private $IdeaVotes;
 
@@ -334,6 +334,7 @@ Idea
     {
         $this->IdeaVotes = new ArrayCollection();
         $this->Reports = new ArrayCollection();
+        $this->voteCount = 0;
     }
 
     /**
@@ -466,9 +467,9 @@ Idea
      */
     public function addIdeaVote(\Capco\AppBundle\Entity\IdeaVote $ideaVote)
     {
-        $this->IdeaVotes[] = $ideaVote;
+        $this->IdeaVotes->add($ideaVote);
         $this->voteCount++;
-
+        $ideaVote->setIdea($this);
         return $this;
     }
 
@@ -479,8 +480,11 @@ Idea
      */
     public function removeIdeaVote(\Capco\AppBundle\Entity\IdeaVote $ideaVote)
     {
-        $this->IdeaVotes->removeElement($ideaVote);
-        $this->voteCount--;
+        if($this->IdeaVotes->removeElement($ideaVote)){
+            $this->voteCount--;
+            $ideaVote->setIdea(null);
+        }
+        return $this;
     }
 
     /**
@@ -493,8 +497,22 @@ Idea
         return $this->IdeaVotes;
     }
 
-    public function resetVotes(){
+    public function resetIdeaVotes() {
+        foreach($this->IdeaVotes as $vote){
+            $vote->setIdea(null);
+        }
         $this->voteCount = 0;
+        $this->setIdeaVotes(new ArrayCollection());
+        return $this;
+    }
+
+    public function setIdeaVotes($votes){
+        foreach($votes as $vote){
+            $vote->setIdea($this);
+        }
+        $this->IdeaVotes = $votes;
+        $this->voteCount = $votes->count();
+        return $this;
     }
 
     /**

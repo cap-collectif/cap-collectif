@@ -46,10 +46,10 @@ class OpinionController extends Controller
         }
 
         $opinion = new Opinion();
-        $opinion->setConsultation($consultation);
         $opinion->setAuthor($this->getUser());
         $opinion->setOpinionType($opinionType);
         $opinion->setIsEnabled(true);
+        $consultation->addOpinion($opinion);
 
         $form = $this->createForm(new OpinionForm(), $opinion);
 
@@ -69,149 +69,6 @@ class OpinionController extends Controller
             'consultation' => $consultation,
             'opinionType' => $opinionType,
             'form' => $form->createView()
-        ];
-    }
-
-    /**
-     * Page opinion
-     * @Route("/consultation/{consultation_slug}/opinion/{opinion_type_slug}/{opinion_slug}", name="app_consultation_show_opinion")
-     * @Route("/consultation/{consultation_slug}/opinion/{opinion_type_slug}/{opinion_slug}/{argumentSort}", name="app_consultation_show_opinion_sortarguments")
-     * @ParamConverter("consultation", class="CapcoAppBundle:Consultation", options={"mapping": {"consultation_slug": "slug"}})
-     * @ParamConverter("opinionType", class="CapcoAppBundle:OpinionType", options={"mapping": {"opinion_type_slug": "slug"}})
-     * @ParamConverter("opinion", class="CapcoAppBundle:Opinion", options={"mapping": {"opinion_slug": "slug"}})
-     * @Template("CapcoAppBundle:Opinion:show.html.twig")
-     * @param Consultation $consultation
-     * @param OpinionType $opinionType
-     * @param Opinion $opinion
-     * @param Request $request
-     * @param $argumentSort
-     * @return array
-     */
-    public function showOpinionAction(Consultation $consultation, OpinionType $opinionType, Opinion $opinion, Request $request, $argumentSort = null)
-    {
-        if (false === $opinion->getIsEnabled()) {
-            throw new AccessDeniedException($this->get('translator')->trans('Access restricted'));
-        }
-
-        $currentUrl = $this->generateUrl('app_consultation_show_opinion', ['consultation_slug' => $consultation->getSlug(), 'opinion_type_slug' => $opinionType->getSlug(), 'opinion_slug' => $opinion->getSlug() ]);
-        $opinion = $this->getDoctrine()->getRepository('CapcoAppBundle:Opinion')->getOpinion($opinion->getSlug());
-        $sources = $this->getDoctrine()->getRepository('CapcoAppBundle:Source')->getEnabledSourcesByOpinion($opinion);
-        $Votes = $this->getDoctrine()->getRepository('CapcoAppBundle:OpinionVote')->getByOpinion($opinion->getSlug());
-        $steps = $this->getDoctrine()->getRepository('CapcoAppBundle:Step')->findBy(array(
-            'consultation' => $consultation,
-            'isEnabled' => true
-        ));
-
-        $reportingOpinion = $this->getDoctrine()->getRepository('CapcoAppBundle:Reporting')->findBy(array(
-            'Reporter' => $this->getUser(),
-            'Opinion' => $opinion
-        ));
-
-        $reportingSource = $this->getDoctrine()->getRepository('CapcoAppBundle:Reporting')->findBy(array(
-            'Reporter' => $this->getUser(),
-            'Source' => $sources,
-        ));
-
-        $userReportingOpinion = (count($reportingOpinion) > 0) ? true : false;
-        $userReportingSource = (count($reportingSource) > 0) ? true : false;
-
-        // Argument forms
-        $argument = new Argument();
-        $argument->setOpinion($opinion);
-        $argument->setAuthor($this->getUser());
-
-        $argumentFormYes = $this->get('form.factory')->createNamedBuilder('argumentFormYes', new ArgumentForm(), $argument)->getForm();
-        $argumentFormNo = $this->get('form.factory')->createNamedBuilder('argumentFormNo', new ArgumentForm(), $argument)->getForm();
-
-        // OpinionVote forms
-        $opinionVote = null;
-        $previousVote = null;
-        $userHasVoted = false;
-
-        if ($this->get('security.authorization_checker')->isGranted('ROLE_USER')) {
-            $previousVote = $this->getDoctrine()->getRepository('CapcoAppBundle:OpinionVote')->findOneBy(array(
-                'Voter' => $this->getUser(),
-                'opinion' => $opinion
-            ));
-        }
-
-        if ( $previousVote != null ){
-            $opinionVote = $previousVote;
-            $userHasVoted = true;
-        } else {
-            $opinionVote = new OpinionVote();
-            $opinionVote->setOpinion($opinion);
-            $opinionVote->setVoter($this->getUser());
-        }
-
-        $opinionVoteForm = $this->get('form.factory')->createNamedBuilder('opinionVoteForm', new OpinionVoteForm(), $opinionVote, ['attr' => ['id' => 'opinion_vote_form']])->getForm();
-
-        $sortArgumentsForm = $this->get('form.factory')->createNamedBuilder('sortArgumentsForm', new ArgumentsSortType(), array(
-                'action' => $currentUrl,
-                'method' => 'POST'
-            ))
-            ->getForm();
-
-        if ('POST' === $request->getMethod()) {
-
-            $form = null;
- 
-            if ($request->request->has('argumentFormYes')) {
-                $argument->setType(Argument::TYPE_FOR);
-                $form = $argumentFormYes;
-                $this->handleCreateArgumentForm($opinion, $argument, $form, $request);
-            }
-
-            if ($request->request->has('argumentFormNo')) {
-                $argument->setType(Argument::TYPE_AGAINST);
-                $form = $argumentFormNo;
-                $this->handleCreateArgumentForm($opinion, $argument, $form, $request);
-            }
-
-            if ($request->request->has('opinionVoteForm')) {
-                $form = $opinionVoteForm;
-                $this->handleOpinionVoteForm($opinion, $opinionVote, $userHasVoted, $form, $request);
-            }
-
-            if ($request->request->has('sortArgumentsForm')) {
-                $form = $sortArgumentsForm;
-                $form->handleRequest($request);
-                if($form->isValid()) {
-                    $data = $form->getData();
-                    return $this->redirect($this->generateUrl('app_consultation_show_opinion_sortarguments',array(
-                        'argumentSort' => $data['argumentSort'],
-                        'consultation_slug' => $consultation->getSlug(),
-                        'opinion_type_slug' => $opinionType->getSlug(),
-                        'opinion_slug' => $opinion->getSlug(),
-                    )));
-                }
-            }
-
-            return $this->redirect($this->generateUrl('app_consultation_show_opinion', ['consultation_slug' => $consultation->getSlug(), 'opinion_type_slug' => $opinionType->getSlug(), 'opinion_slug' => $opinion->getSlug() ]));
-
-        } else {
-            $sortArgumentsForm->get('argumentSort')->setData($argumentSort);
-        }
-
-        return [
-            'userReportingOpinion' => $userReportingOpinion,
-            'userReportingSource' => $userReportingSource,
-            'currentUrl' => $currentUrl,
-            'consultation' => $consultation,
-            'opinion' => $opinion,
-            'sources' => $sources,
-            'opinionType' => $opinion->getOpinionType(),
-            'votes' => $Votes,
-            'consultation_steps' => $steps,
-            'argumentFormYes' => $argumentFormYes->createView(),
-            'argumentFormNo' => $argumentFormNo->createView(),
-            'argumentTypes' => Argument::$argumentTypes,
-            'previousVote' => $previousVote,
-            'opinionVoteTypes' => OpinionVote::$voteTypes,
-            'opinionVoteStyles' => OpinionVote::$voteTypesStyles,
-            'opinionVoteForm' => $opinionVoteForm->createView(),
-            'sortArgumentsForm' => $sortArgumentsForm->createView(),
-            'argumentSort' => $argumentSort,
         ];
     }
 
@@ -252,6 +109,7 @@ class OpinionController extends Controller
 
             if ($form->isValid()) {
                 $em = $this->getDoctrine()->getManager();
+                $consultation->removeOpinion($opinion);
                 $em->remove($opinion);
                 $em->flush();
 
@@ -376,6 +234,149 @@ class OpinionController extends Controller
     }
 
     /**
+     * Page opinion
+     * @Route("/consultation/{consultation_slug}/opinion/{opinion_type_slug}/{opinion_slug}", name="app_consultation_show_opinion")
+     * @Route("/consultation/{consultation_slug}/opinion/{opinion_type_slug}/{opinion_slug}/{argumentSort}", name="app_consultation_show_opinion_sortarguments")
+     * @ParamConverter("consultation", class="CapcoAppBundle:Consultation", options={"mapping": {"consultation_slug": "slug"}})
+     * @ParamConverter("opinionType", class="CapcoAppBundle:OpinionType", options={"mapping": {"opinion_type_slug": "slug"}})
+     * @ParamConverter("opinion", class="CapcoAppBundle:Opinion", options={"mapping": {"opinion_slug": "slug"}})
+     * @Template("CapcoAppBundle:Opinion:show.html.twig")
+     * @param Consultation $consultation
+     * @param OpinionType $opinionType
+     * @param Opinion $opinion
+     * @param Request $request
+     * @param $argumentSort
+     * @return array
+     */
+    public function showOpinionAction(Consultation $consultation, OpinionType $opinionType, Opinion $opinion, Request $request, $argumentSort = null)
+    {
+        if (false === $opinion->getIsEnabled()) {
+            throw new AccessDeniedException($this->get('translator')->trans('Access restricted'));
+        }
+
+        $currentUrl = $this->generateUrl('app_consultation_show_opinion', ['consultation_slug' => $consultation->getSlug(), 'opinion_type_slug' => $opinionType->getSlug(), 'opinion_slug' => $opinion->getSlug() ]);
+        $opinion = $this->getDoctrine()->getRepository('CapcoAppBundle:Opinion')->getOpinion($opinion->getSlug());
+        $sources = $this->getDoctrine()->getRepository('CapcoAppBundle:Source')->getEnabledSourcesByOpinion($opinion);
+        $Votes = $this->getDoctrine()->getRepository('CapcoAppBundle:OpinionVote')->getByOpinion($opinion->getSlug());
+        $steps = $this->getDoctrine()->getRepository('CapcoAppBundle:Step')->findBy(array(
+            'consultation' => $consultation,
+            'isEnabled' => true
+        ));
+
+        $reportingOpinion = $this->getDoctrine()->getRepository('CapcoAppBundle:Reporting')->findBy(array(
+            'Reporter' => $this->getUser(),
+            'Opinion' => $opinion
+        ));
+
+        $reportingSource = $this->getDoctrine()->getRepository('CapcoAppBundle:Reporting')->findBy(array(
+            'Reporter' => $this->getUser(),
+            'Source' => $sources,
+        ));
+
+        $userReportingOpinion = (count($reportingOpinion) > 0) ? true : false;
+        $userReportingSource = (count($reportingSource) > 0) ? true : false;
+
+        // Argument forms
+        $argument = new Argument();
+        $argument->setOpinion($opinion);
+        $argument->setAuthor($this->getUser());
+
+        $argumentFormYes = $this->get('form.factory')->createNamedBuilder('argumentFormYes', new ArgumentForm(), $argument)->getForm();
+        $argumentFormNo = $this->get('form.factory')->createNamedBuilder('argumentFormNo', new ArgumentForm(), $argument)->getForm();
+
+        // OpinionVote forms
+        $opinionVote = null;
+        $previousVote = null;
+        $userHasVoted = false;
+
+        if ($this->get('security.authorization_checker')->isGranted('ROLE_USER')) {
+            $previousVote = $this->getDoctrine()->getRepository('CapcoAppBundle:OpinionVote')->findOneBy(array(
+                'Voter' => $this->getUser(),
+                'opinion' => $opinion
+            ));
+        }
+
+        if ( $previousVote != null ){
+            $opinionVote = $previousVote;
+            $userHasVoted = true;
+        } else {
+            $opinionVote = new OpinionVote();
+            $opinionVote->setOpinion($opinion);
+            $opinionVote->setVoter($this->getUser());
+        }
+
+        $opinionVoteForm = $this->get('form.factory')->createNamedBuilder('opinionVoteForm', new OpinionVoteForm(), $opinionVote, ['attr' => ['id' => 'opinion_vote_form']])->getForm();
+
+        $sortArgumentsForm = $this->get('form.factory')->createNamedBuilder('sortArgumentsForm', new ArgumentsSortType(), array(
+            'action' => $currentUrl,
+            'method' => 'POST'
+        ))
+            ->getForm();
+
+        if ('POST' === $request->getMethod()) {
+
+            $form = null;
+
+            if ($request->request->has('argumentFormYes')) {
+                $argument->setType(Argument::TYPE_FOR);
+                $form = $argumentFormYes;
+                $this->handleCreateArgumentForm($opinion, $argument, $form, $request);
+            }
+
+            if ($request->request->has('argumentFormNo')) {
+                $argument->setType(Argument::TYPE_AGAINST);
+                $form = $argumentFormNo;
+                $this->handleCreateArgumentForm($opinion, $argument, $form, $request);
+            }
+
+            if ($request->request->has('opinionVoteForm')) {
+                $form = $opinionVoteForm;
+                $this->handleOpinionVoteForm($opinion, $opinionVote, $userHasVoted, $form, $request);
+            }
+
+            if ($request->request->has('sortArgumentsForm')) {
+                $form = $sortArgumentsForm;
+                $form->handleRequest($request);
+                if($form->isValid()) {
+                    $data = $form->getData();
+                    return $this->redirect($this->generateUrl('app_consultation_show_opinion_sortarguments',array(
+                        'argumentSort' => $data['argumentSort'],
+                        'consultation_slug' => $consultation->getSlug(),
+                        'opinion_type_slug' => $opinionType->getSlug(),
+                        'opinion_slug' => $opinion->getSlug(),
+                    )));
+                }
+            }
+
+            return $this->redirect($this->generateUrl('app_consultation_show_opinion', ['consultation_slug' => $consultation->getSlug(), 'opinion_type_slug' => $opinionType->getSlug(), 'opinion_slug' => $opinion->getSlug() ]));
+
+        } else {
+            $sortArgumentsForm->get('argumentSort')->setData($argumentSort);
+        }
+
+        return [
+            'userReportingOpinion' => $userReportingOpinion,
+            'userReportingSource' => $userReportingSource,
+            'currentUrl' => $currentUrl,
+            'consultation' => $consultation,
+            'opinion' => $opinion,
+            'sources' => $sources,
+            'opinionType' => $opinion->getOpinionType(),
+            'votes' => $Votes,
+            'consultation_steps' => $steps,
+            'argumentFormYes' => $argumentFormYes->createView(),
+            'argumentFormNo' => $argumentFormNo->createView(),
+            'argumentTypes' => Argument::$argumentTypes,
+            'previousVote' => $previousVote,
+            'opinionVoteTypes' => OpinionVote::$voteTypes,
+            'opinionVoteStyles' => OpinionVote::$voteTypesStyles,
+            'opinionVoteForm' => $opinionVoteForm->createView(),
+            'sortArgumentsForm' => $sortArgumentsForm->createView(),
+            'argumentSort' => $argumentSort,
+        ];
+    }
+
+    /**
      * Argument CRUD
      * @Template("CapcoAppBundle:Argument:create.html.twig")
      * @param $opinion
@@ -395,6 +396,7 @@ class OpinionController extends Controller
         if ($form->isValid()) {
 
             $em = $this->getDoctrine()->getManager();
+            $opinion->addArgument($argument);
             $em->persist($argument);
             $em->flush();
             $this->get('session')->getFlashBag()->add('success', $this->get('translator')->trans('Your argument has been saved'));

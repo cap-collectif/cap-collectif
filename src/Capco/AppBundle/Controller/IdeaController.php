@@ -263,7 +263,6 @@ class IdeaController extends Controller
                 if ($userVoteCount == 0) {
                     $vote = new IdeaVote();
                     $vote->setVoter($this->getUser());
-                    $vote->setIdea($idea);
                     $idea->addIdeaVote($vote);
                     $em->persist($idea);
                     $em->flush();
@@ -322,7 +321,7 @@ class IdeaController extends Controller
                 foreach($linkedVotes as $vote){
                     $em->remove($vote);
                 }
-                $idea->resetVotes();
+                $idea->resetIdeaVotes();
                 $em->persist($idea);
                 $em->flush();
 

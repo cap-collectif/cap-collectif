@@ -141,7 +141,7 @@ class Consultation
 
     /**
      * @var
-     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\Opinion", mappedBy="Consultation",  cascade={"persist", "remove"})
+     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\Opinion", mappedBy="Consultation",  cascade={"persist", "remove"}, orphanRemoval=true)
      */
     private $Opinions;
 
@@ -329,6 +329,16 @@ class Consultation
     public function setArgumentCount($argumentCount)
     {
         $this->argumentCount = $argumentCount;
+    }
+
+    public function addToArgumentCount($nb){
+        $this->argumentCount+=$nb;
+        return $this;
+    }
+
+    public function removeFromArgumentCount($nb){
+        $this->argumentCount-=$nb;
+        return $this;
     }
 
     /**
@@ -571,37 +581,6 @@ class Consultation
     }
 
     /**
-     *
-     * @param \Capco\AppBundle\Entity\Opinion $opinion
-     *
-     * @return Opinion
-     */
-    public function addOpinion(Opinion $opinion)
-    {
-        $this->Opinions[] = $opinion;
-
-        return $this;
-    }
-
-    /**
-     *
-     * @param \Capco\AppBundle\Entity\Opinion $opinion
-     */
-    public function removeOpinion(Opinion $opinion)
-    {
-        $this->Opinions->removeElement($opinion);
-    }
-
-    /**
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getOpinions()
-    {
-        return $this->Opinions;
-    }
-
-    /**
      * Get theme names
      *
      * @return array
@@ -616,5 +595,42 @@ class Consultation
 
         sort($return);
         return $return;
+    }
+
+    public function setOpinions($opinions){
+        foreach($opinions as $opinion){
+            $opinion->setConsultation($this);
+        }
+        $this->Opinions = $opinions;
+        $this->opinionCount = $opinions->count();
+        return $this;
+    }
+
+    public function getOpinions(){
+        return $this->Opinions;
+    }
+
+    public function resetOpinions() {
+        foreach($this->Opinions as $opinion){
+            $opinion->setConsultation(null);
+        }
+        $this->opinionCount = 0;
+        $this->setOpinions(new ArrayCollection());
+        return $this;
+    }
+
+    public function addOpinion($opinion){
+        $this->opinionCount++;
+        $this->Opinions->add($opinion);
+        $opinion->setconsultation($this);
+        return $this;
+    }
+
+    public function removeOpinion($opinion){
+        if($this->Opinions->removeElement($opinion)){
+            $this->opinionCount--;
+            $opinion->setConsultation(null);
+        }
+        return $this;
     }
 }

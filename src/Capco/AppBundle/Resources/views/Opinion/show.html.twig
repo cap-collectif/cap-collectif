@@ -57,7 +57,7 @@
                         {{ opinion.body|raw }}
                         <div class="opinion__buttons">
 
-                            {% set opinionVoteCounts = { (opinionVoteTypes['ok']): opinion.voteCountOk, (opinionVoteTypes['nok']): opinion.voteCountNOk, (opinionVoteTypes['mitige']): opinion.voteCountMitige } %}
+                            {% set opinionVoteCounts = { (opinionVoteTypes['ok']): opinion.voteCountOk, (opinionVoteTypes['nok']): opinion.voteCountNok, (opinionVoteTypes['mitige']): opinion.voteCountMitige } %}
                             {% set previousValue = null %}
                             {% if previousVote is not null %}
                                 {% set previousValue = previousVote.value %}
@@ -83,7 +83,6 @@
                                 {% endif %}
                             </div>
                         </div> <!-- .opinion__buttons -->
-
                         <div class="panel-group" id="accordion">
                             {% set tokenSource = csrf_token('source_vote') %}
                             <div class="panel panel-default">
