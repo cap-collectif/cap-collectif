@@ -102,6 +102,40 @@ class IdeaController extends Controller
     }
 
     /**
+     * @Route("/ideas/trashed/{page}", name="app_idea_trashed", requirements={"page" = "\d+"}, defaults={"page" = 1} )
+     * @Template("CapcoAppBundle:Idea:show_trashed.html.twig")
+     * @param $page
+     * @return array
+     */
+    public function showTrashedAction($page)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $pagination = $this->get('capco.site_parameter.resolver')->getValue('ideas.pagination');
+        if (!is_numeric($pagination)){
+            $pagination = 0;
+        } else {
+            $pagination = (int)$pagination;
+        }
+
+        $ideas = $em->getRepository('CapcoAppBundle:Idea')->getTrashedIdeas($pagination, $page);
+        $publishedIdeasNb = $em->getRepository('CapcoAppBundle:Idea')->getPublishedIdeasNb();
+
+        //Avoid division by 0 in nbPage calculation
+        $nbPage = 1;
+        if($pagination != 0){
+            $nbPage = ceil(count($ideas) / $pagination);
+        }
+
+        return array(
+            'ideas' => $ideas,
+            'publishedIdeasNb' => $publishedIdeasNb,
+            'page' => $page,
+            'nbPage' => $nbPage,
+        );
+    }
+
+    /**
      * @Route("/ideas/{page}", name="app_idea", requirements={"page" = "\d+"}, defaults={"page" = 1} )
      * @Route("/ideas/{theme}/{sort}/{page}", name="app_idea_search", requirements={"page" = "\d+"}, defaults={"page" = 1, "theme" = "all"} )
      * @Route("/ideas/{theme}/{sort}/{term}/{page}", name="app_idea_search_term", requirements={"page" = "\d+"}, defaults={"page" = 1, "theme" = "all"} )
@@ -152,6 +186,7 @@ class IdeaController extends Controller
         }
 
         $ideas = $em->getRepository('CapcoAppBundle:Idea')->getSearchResultsWithUser($pagination, $page, $theme, $sort, $term);
+        $trashedIdeasNb = $em->getRepository('CapcoAppBundle:Idea')->getTrashedIdeasNb();
 
         //Avoid division by 0 in nbPage calculation
         $nbPage = 1;
@@ -164,6 +199,7 @@ class IdeaController extends Controller
             'form' => $form->createView(),
             'page' => $page,
             'nbPage' => $nbPage,
+            'trashedIdeasNb' => $trashedIdeasNb,
         );
     }
 

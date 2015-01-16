@@ -49,6 +49,19 @@ idea:
     search: Rechercher
     button: Proposer une idée
     text_info: Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eos, perspiciatis, cupiditate. Nesciunt eos nam ullam iste iusto similique officia sit enim excepturi numquam natus, ab eum sint perspiciatis repudiandae dolorem.
+    appendices:
+      trashed:
+        title: Corbeille des idées
+        number: "{0} Aucune idée à la corbeille. | {1} 1 idée à la corbeille. | ]1,Inf[ %count% idées à la corbeille."
+        button: Voir la corbeille
+      index:
+        title: Boîte à idées
+        number: "{0} Aucune idée publiée. | {1} 1 idée publiée. | ]1,Inf[ %count% idées publiées."
+        button: Voir toutes les idées
+  trashed:
+    jumbotron:
+      title: Corbeille des idées
+    none: Aucune idée dans la corbeille
   show:
     vote: Voter
     voted: Vous avez voté
@@ -58,6 +71,8 @@ idea:
     report: Signaler
     edit: Modifier
     views: Voir tous les sujets proposés
+    trashed:
+      label: Dans la corbeille
   create:
     title_block: Proposer une idée
     button: Publier

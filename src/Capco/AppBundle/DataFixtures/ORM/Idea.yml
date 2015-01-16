@@ -1,8 +1,9 @@
 Capco\AppBundle\Entity\Idea:
-    Idea{1..15}:
+    Idea{1..50}:
         title: <text(38)>
         body: <text(1000)>
         voteCount: <numberBetween(0, 356)>
         Theme: @theme*
         Author: @user*
         createdAt: <dateTimeBetween('-1 years','now')>
+        isTrashed: <boolean()>

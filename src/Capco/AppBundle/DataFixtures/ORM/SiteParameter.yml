@@ -125,3 +125,11 @@ Capco\AppBundle\Entity\SiteParameter:
         keyname: mail.admin
         title: Email pour recevoir les notifications
         value: brunet.laurent60@yahoo.fr
+
+    SiteParameter28:
+        keyname: ideas.trashed.content.body
+        title: Texte dans la corbeille des idées
+        value: |
+                Les messages se trouvant dans la corbeille sont des contenus signalés abusifs par les utilisateurs ou l'administrateur du site.
+                Les contenus signalés sont examinés afin de déterminer s'ils enfreignent la charte.
+                En cas de non-respect de la charte, les comptes concernés sont pénalisés et des infractions graves ou répétées peuvent entraîner leur fermeture.

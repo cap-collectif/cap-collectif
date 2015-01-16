@@ -30,6 +30,12 @@ class IdeaAdmin extends Admin
             ->add('title')
             ->add('createdAt')
             ->add('voteCount')
+            ->add('isEnabled', null, array(
+                'editable' => true,
+            ))
+            ->add('isTrashed', null, array(
+                'editable' => true,
+            ))
             ->add('_action', 'actions', array(
                 'actions' => array(
                     'show' => array(),

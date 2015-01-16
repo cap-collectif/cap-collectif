@@ -1,0 +1,65 @@
+{% extends '@CapcoApp/base.html.twig' %}
+
+{% block jumbotron %}
+    <div class="jumbotron  jumbotron--custom  jumbotron--bg-1 text-center">
+        <div class="container">
+            <h1>{{ 'idea.trashed.jumbotron.title'|trans({}, 'CapcoAppBundle') }}</h1>
+        </div>
+    </div>
+{% endblock %}
+
+{% block body %}
+    <div class="container">
+
+        {% set content_body = capco_site_parameter_value('ideas.trashed.content.body') %}
+        {% if null != content_body %}
+            <p class="block">{{ content_body }}</p>
+        {% endif %}
+
+        <div class="row">
+            {% if ideas|length > 0 %}
+                {% for idea in ideas %}
+                    {% include '@CapcoApp/Idea/blockIdea.html.twig' %}
+                {% endfor %}
+            {% else %}
+                <p>
+                    {{ 'idea.trashed.none'|trans({}, 'CapcoAppBundle') }}
+                </p>
+            {% endif %}
+        </div>
+    </div>
+
+    {% if nbPage > 1 %}
+        <div class="pagination--custom  text-center block">
+            <ul class="pagination">
+                {% for p in range(1, nbPage) %}
+                    <li{% if p == page %} class="active"{% endif %}>
+                        <a href="{{ path('app_idea_trashed', {'page': p}) }}">{{ p }}</a>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    {% endif %}
+
+    <div class="appendices__container">
+        <div class="row">
+            <div class="col-xs-12 col-md-4 col-md-offset-4 text-center  appendices__item  box">
+                <h4 class="h4">{{ 'idea.index.appendices.index.title'|trans({}, 'CapcoAppBundle') }}</h4>
+                <p class="excerpt">{% transchoice publishedIdeasNb with {'%count%': publishedIdeasNb} from 'CapcoAppBundle' %}
+                    idea.index.appendices.index.number
+                {% endtranschoice %}</p>
+                <p><a href="{{ path('app_idea') }}" class="btn  btn-primary  btn--outline">{{ 'idea.index.appendices.index.button'|trans({}, 'CapcoAppBundle') }}</a></p>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script type="text/javascript">
+        $(window).on('load', function() {
+            App.module.equalheight('.media--macro');window.onresize = App.module.rezised('.media--macro');
+        });
+    </script>
+{% endblock %}

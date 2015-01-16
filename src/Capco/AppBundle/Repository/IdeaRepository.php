@@ -35,6 +35,8 @@ class IdeaRepository extends EntityRepository
             ->setParameter('notTrashed', false)
             ->leftJoin('i.Author', 'a')
             ->addSelect('a')
+            ->leftJoin('a.Media', 'm')
+            ->addSelect('m')
             ->orderBy('i.createdAt', 'DESC')
             ->getQuery();
 
@@ -49,6 +51,30 @@ class IdeaRepository extends EntityRepository
         return $this->createQueryBuilder('i')
             ->andWhere('i.isEnabled = :isEnabled')
             ->setParameter('isEnabled', true);
+    }
+
+    public function getTrashedIdeasNb(){
+
+        return $this->createQueryBuilder('i')
+            ->select('COUNT(i)')
+            ->andWhere('i.isEnabled = :enabled')
+            ->andWhere('i.isTrashed = :trashed')
+            ->setParameter('trashed', true)
+            ->setParameter('enabled', true)
+            ->getQuery()
+            ->getSingleScalarResult();
+    }
+
+    public function getPublishedIdeasNb(){
+
+        return $this->createQueryBuilder('i')
+            ->select('COUNT(i)')
+            ->andWhere('i.isEnabled = :enabled')
+            ->andWhere('i.isTrashed = :notTrashed')
+            ->setParameter('notTrashed', false)
+            ->setParameter('enabled', true)
+            ->getQuery()
+            ->getSingleScalarResult();
     }
 
     public function getLast($limit = 1, $offset = 0)
@@ -102,6 +128,8 @@ class IdeaRepository extends EntityRepository
         $query = $this->getIsEnabledQueryBuilder()
             ->leftJoin('i.Author', 'a')
             ->addSelect('a')
+            ->leftJoin('a.Media', 'm')
+            ->addSelect('m')
             ->leftJoin('i.Theme', 't')
             ->addSelect('t')
             ->andWhere('i.id = :id')
@@ -125,6 +153,8 @@ class IdeaRepository extends EntityRepository
             ->setParameter('notTrashed', false)
             ->leftJoin('i.Author', 'a')
             ->addSelect('a')
+            ->leftJoin('a.Media', 'm')
+            ->addSelect('m')
         ;
 
         if ($theme !== null && $theme !== Theme::FILTER_ALL) {
@@ -145,6 +175,34 @@ class IdeaRepository extends EntityRepository
         } else {
             $qb->orderBy('i.createdAt', 'DESC');
         }
+
+        $query = $qb->getQuery();
+
+        if($nbByPage > 0){
+            $query->setFirstResult(($page - 1) * $nbByPage)
+                ->setMaxResults($nbByPage);
+        }
+
+        return new Paginator($query);
+    }
+
+    public function getTrashedIdeas($nbByPage = 8, $page = 1)
+    {
+        if ((int) $page < 1) {
+            throw new \InvalidArgumentException(sprintf(
+                'The argument "page" cannot be lower than 1 (current value: "%s")',
+                $page
+            ));
+        }
+
+        $qb = $this->getIsEnabledQueryBuilder()
+            ->andWhere('i.isTrashed = :trashed')
+            ->setParameter('trashed', true)
+            ->leftJoin('i.Author', 'a')
+            ->addSelect('a')
+            ->leftJoin('a.Media', 'm')
+            ->addSelect('m')
+        ;
 
         $query = $qb->getQuery();
 
