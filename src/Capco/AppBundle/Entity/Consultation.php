@@ -625,11 +625,21 @@ class Consultation
         return $this;
     }
 
-    public function removeOpinion($opinion){
-        if($this->Opinions->removeElement($opinion)){
+    public function removeOpinion($opinion)
+    {
+        if ($this->Opinions->removeElement($opinion)) {
             $this->opinionCount--;
             $opinion->setConsultation(null);
         }
+
         return $this;
+    }
+
+    public function canDisplay() {
+        return ($this->isEnabled);
+    }
+
+    public function canContribute() {
+        return ($this->isEnabled && ($this->getOpeningStatus() == $this::OPENING_STATUS_OPENED));
     }
 }

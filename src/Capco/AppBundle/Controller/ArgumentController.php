@@ -32,7 +32,7 @@ class ArgumentController extends Controller
      * @param $argumentSort
      * @return array
      */
-    public function showArgumentsAction(Consultation $consultation, OpinionType $opinionType, Opinion $opinion, $type, Form $form = null, $argumentSort = null)
+    public function showArgumentsAction(Consultation $consultation, OpinionType $opinionType, Opinion $opinion, $type, Form $form, $argumentSort = null)
     {
         $argumentType = Argument::$argumentTypes[$type];
 
@@ -74,6 +74,9 @@ class ArgumentController extends Controller
     {
         if (false === $this->get('security.authorization_checker')->isGranted('ROLE_USER')) {
             throw new AccessDeniedException($this->get('translator')->trans('Access restricted to authenticated users'));
+        }
+        if (false == $argument->canContribute()) {
+            throw new AccessDeniedException($this->get('translator')->trans('Access restricted'));
         }
 
         $user = $this->getUser();
@@ -142,6 +145,10 @@ class ArgumentController extends Controller
             throw new AccessDeniedException($this->get('translator')->trans('Access restricted to authenticated users'));
         }
 
+        if (false == $argument->canContribute()) {
+            throw new AccessDeniedException($this->get('translator')->trans('Access restricted'));
+        }
+
         $userCurrent = $this->getUser()->getId();
         $userPostArgument = $argument->getAuthor()->getId();
 
@@ -200,6 +207,10 @@ class ArgumentController extends Controller
     {
         if (false === $this->get('security.authorization_checker')->isGranted('ROLE_USER')) {
             throw new AccessDeniedException($this->get('translator')->trans('Access restricted to authenticated users'));
+        }
+
+        if (false == $argument->canContribute()) {
+            throw new AccessDeniedException($this->get('translator')->trans('Access restricted'));
         }
 
         $userCurrent = $this->getUser()->getId();

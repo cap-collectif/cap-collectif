@@ -35,6 +35,22 @@ class SourceController extends Controller
             throw new AccessDeniedException($this->get('translator')->trans('Access restricted to authenticated users'));
         }
 
+        if (false == $opinion->getConsultation()->getIsEnabled()) {
+            throw new AccessDeniedException($this->get('translator')->trans('Access restricted'));
+        }
+
+        if (Consultation::OPENING_STATUS_OPENED != $opinion->getConsultation()->getOpeningStatus()) {
+            throw new AccessDeniedException($this->get('translator')->trans('Access restricted'));
+        }
+
+        if (false == $opinion->getIsEnabled()) {
+            throw new AccessDeniedException($this->get('translator')->trans('Access restricted'));
+        }
+
+        if ($opinion->getIsTrashed()) {
+            throw new AccessDeniedException($this->get('translator')->trans('Access restricted'));
+        }
+
         $source = new Source();
         $source->setAuthor($this->getUser());
         $opinion->addSource($source);
@@ -76,6 +92,30 @@ class SourceController extends Controller
     {
         if (false === $this->get('security.authorization_checker')->isGranted('ROLE_USER')) {
             throw new AccessDeniedException($this->get('translator')->trans('Access restricted to authenticated users'));
+        }
+
+        if (false == $opinion->getConsultation()->getIsEnabled()) {
+            throw new AccessDeniedException($this->get('translator')->trans('Access restricted'));
+        }
+
+        if (Consultation::OPENING_STATUS_OPENED != $opinion->getConsultation()->getOpeningStatus()) {
+            throw new AccessDeniedException($this->get('translator')->trans('Access restricted'));
+        }
+
+        if (false == $opinion->getIsEnabled()) {
+            throw new AccessDeniedException($this->get('translator')->trans('Access restricted'));
+        }
+
+        if ($opinion->getIsTrashed()) {
+            throw new AccessDeniedException($this->get('translator')->trans('Access restricted'));
+        }
+
+        if (false == $source->getIsEnabled()) {
+            throw new AccessDeniedException($this->get('translator')->trans('Access restricted'));
+        }
+
+        if ($source->getIsTrashed()) {
+            throw new AccessDeniedException($this->get('translator')->trans('Access restricted'));
         }
 
         $userCurrent = $this->getUser()->getId();
@@ -124,6 +164,30 @@ class SourceController extends Controller
     {
         if (false === $this->get('security.authorization_checker')->isGranted('ROLE_USER')) {
             throw new AccessDeniedException($this->get('translator')->trans('Access restricted to authenticated users'));
+        }
+
+        if (false == $opinion->getConsultation()->getIsEnabled()) {
+            throw new AccessDeniedException($this->get('translator')->trans('Access restricted'));
+        }
+
+        if (Consultation::OPENING_STATUS_OPENED != $opinion->getConsultation()->getOpeningStatus()) {
+            throw new AccessDeniedException($this->get('translator')->trans('Access restricted'));
+        }
+
+        if (false == $opinion->getIsEnabled()) {
+            throw new AccessDeniedException($this->get('translator')->trans('Access restricted'));
+        }
+
+        if ($opinion->getIsTrashed()) {
+            throw new AccessDeniedException($this->get('translator')->trans('Access restricted'));
+        }
+
+        if (false == $source->getIsEnabled()) {
+            throw new AccessDeniedException($this->get('translator')->trans('Access restricted'));
+        }
+
+        if ($source->getIsTrashed()) {
+            throw new AccessDeniedException($this->get('translator')->trans('Access restricted'));
         }
 
         $userCurrent = $this->getUser()->getId();
@@ -196,6 +260,30 @@ class SourceController extends Controller
     {
         if (false === $this->get('security.authorization_checker')->isGranted('ROLE_USER')) {
             throw new AccessDeniedException($this->get('translator')->trans('Access restricted to authenticated users'));
+        }
+
+        if (false == $opinion->getConsultation()->getIsEnabled()) {
+            throw new AccessDeniedException($this->get('translator')->trans('Access restricted'));
+        }
+
+        if (Consultation::OPENING_STATUS_OPENED != $opinion->getConsultation()->getOpeningStatus()) {
+            throw new AccessDeniedException($this->get('translator')->trans('Access restricted'));
+        }
+
+        if (false == $opinion->getIsEnabled()) {
+            throw new AccessDeniedException($this->get('translator')->trans('Access restricted'));
+        }
+
+        if ($opinion->getIsTrashed()) {
+            throw new AccessDeniedException($this->get('translator')->trans('Access restricted'));
+        }
+
+        if (false == $source->getIsEnabled()) {
+            throw new AccessDeniedException($this->get('translator')->trans('Access restricted'));
+        }
+
+        if ($source->getIsTrashed()) {
+            throw new AccessDeniedException($this->get('translator')->trans('Access restricted'));
         }
 
         $user = $this->getUser();

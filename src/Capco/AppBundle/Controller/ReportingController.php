@@ -42,6 +42,22 @@ class ReportingController extends Controller
             throw new AccessDeniedException($this->get('translator')->trans('Access restricted to authenticated users'));
         }
 
+        if (false == $opinion->getConsultation()->getIsEnabled()) {
+            throw new AccessDeniedException($this->get('translator')->trans('Access restricted'));
+        }
+
+        if (Consultation::OPENING_STATUS_OPENED != $opinion->getConsultation()->getOpeningStatus()) {
+            throw new AccessDeniedException($this->get('translator')->trans('Access restricted'));
+        }
+
+        if (false == $opinion->getIsEnabled()) {
+            throw new AccessDeniedException($this->get('translator')->trans('Access restricted'));
+        }
+
+        if ($opinion->getIsTrashed()) {
+            throw new AccessDeniedException($this->get('translator')->trans('Access restricted'));
+        }
+
         $reporting = new Reporting();
         $form = $this->createForm(new ReportingType(), $reporting);
 
@@ -95,6 +111,30 @@ class ReportingController extends Controller
     {
         if (false === $this->get('security.authorization_checker')->isGranted('ROLE_USER')) {
             throw new AccessDeniedException($this->get('translator')->trans('Access restricted to authenticated users'));
+        }
+
+        if (false == $opinion->getConsultation()->getIsEnabled()) {
+            throw new AccessDeniedException($this->get('translator')->trans('Access restricted'));
+        }
+
+        if (Consultation::OPENING_STATUS_OPENED != $opinion->getConsultation()->getOpeningStatus()) {
+            throw new AccessDeniedException($this->get('translator')->trans('Access restricted'));
+        }
+
+        if (false == $opinion->getIsEnabled()) {
+            throw new AccessDeniedException($this->get('translator')->trans('Access restricted'));
+        }
+
+        if ($opinion->getIsTrashed()) {
+            throw new AccessDeniedException($this->get('translator')->trans('Access restricted'));
+        }
+
+        if (false == $source->getIsEnabled()) {
+            throw new AccessDeniedException($this->get('translator')->trans('Access restricted'));
+        }
+
+        if ($source->getIsTrashed()) {
+            throw new AccessDeniedException($this->get('translator')->trans('Access restricted'));
         }
 
         $reporting = new Reporting();
@@ -153,6 +193,30 @@ class ReportingController extends Controller
             throw new AccessDeniedException($this->get('translator')->trans('Access restricted to authenticated users'));
         }
 
+        if (false == $opinion->getConsultation()->getIsEnabled()) {
+            throw new AccessDeniedException($this->get('translator')->trans('Access restricted'));
+        }
+
+        if (Consultation::OPENING_STATUS_OPENED != $opinion->getConsultation()->getOpeningStatus()) {
+            throw new AccessDeniedException($this->get('translator')->trans('Access restricted'));
+        }
+
+        if (false == $opinion->getIsEnabled()) {
+            throw new AccessDeniedException($this->get('translator')->trans('Access restricted'));
+        }
+
+        if ($opinion->getIsTrashed()) {
+            throw new AccessDeniedException($this->get('translator')->trans('Access restricted'));
+        }
+
+        if (false == $argument->getIsEnabled()) {
+            throw new AccessDeniedException($this->get('translator')->trans('Access restricted'));
+        }
+
+        if ($argument->getIsTrashed()) {
+            throw new AccessDeniedException($this->get('translator')->trans('Access restricted'));
+        }
+
         $reporting = new Reporting();
         $form = $this->createForm(new ReportingType(), $reporting);
 
@@ -201,6 +265,14 @@ class ReportingController extends Controller
     {
         if (false === $this->get('security.authorization_checker')->isGranted('ROLE_USER')) {
             throw new AccessDeniedException($this->get('translator')->trans('Access restricted to authenticated users'));
+        }
+
+        if (false == $idea->getIsEnabled()) {
+            throw new AccessDeniedException($this->get('translator')->trans('Access restricted'));
+        }
+
+        if ($idea->getIsTrashed()) {
+            throw new AccessDeniedException($this->get('translator')->trans('Access restricted'));
         }
 
         $reporting = new Reporting();

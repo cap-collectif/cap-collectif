@@ -564,5 +564,13 @@ class Source
         return $this->isEnabled;
     }
 
+    public function canDisplay() {
+        return ($this->isEnabled && $this->Opinion->canDisplay());
+    }
+
+    public function canContribute() {
+        return ($this->isEnabled() && !$this->isTrashed && $this->Opinion->canContribute());
+    }
+
 }
 

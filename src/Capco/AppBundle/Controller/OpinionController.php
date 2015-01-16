@@ -45,6 +45,14 @@ class OpinionController extends Controller
             throw new AccessDeniedException($this->get('translator')->trans('Access restricted'));
         }
 
+        if(false == $consultation->getIsEnabled()) {
+            throw new AccessDeniedException($this->get('translator')->trans('Access restricted'));
+        }
+
+        if (Consultation::OPENING_STATUS_OPENED != $consultation->getOpeningStatus()) {
+            throw new AccessDeniedException($this->get('translator')->trans('Access restricted'));
+        }
+
         $opinion = new Opinion();
         $opinion->setAuthor($this->getUser());
         $opinion->setOpinionType($opinionType);
@@ -91,6 +99,22 @@ class OpinionController extends Controller
         }
 
         if (false === $opinionType->isIsEnabled()) {
+            throw new AccessDeniedException($this->get('translator')->trans('Access restricted'));
+        }
+
+        if(false == $consultation->getIsEnabled()) {
+            throw new AccessDeniedException($this->get('translator')->trans('Access restricted'));
+        }
+
+        if (Consultation::OPENING_STATUS_OPENED != $consultation->getOpeningStatus()) {
+            throw new AccessDeniedException($this->get('translator')->trans('Access restricted'));
+        }
+
+        if(false == $opinion->getIsEnabled()) {
+            throw new AccessDeniedException($this->get('translator')->trans('Access restricted'));
+        }
+
+        if($opinion->getIsTrashed()) {
             throw new AccessDeniedException($this->get('translator')->trans('Access restricted'));
         }
 
@@ -144,6 +168,22 @@ class OpinionController extends Controller
             throw new AccessDeniedException($this->get('translator')->trans('Access restricted to authenticated users'));
         }
 
+        if (false == $consultation->getIsEnabled()) {
+            throw new AccessDeniedException($this->get('translator')->trans('Access restricted'));
+        }
+
+        if (Consultation::OPENING_STATUS_OPENED != $consultation->getOpeningStatus()) {
+            throw new AccessDeniedException($this->get('translator')->trans('Access restricted'));
+        }
+
+        if (false == $opinion->getIsEnabled()) {
+            throw new AccessDeniedException($this->get('translator')->trans('Access restricted'));
+        }
+
+        if ($opinion->getIsTrashed()) {
+            throw new AccessDeniedException($this->get('translator')->trans('Access restricted'));
+        }
+
         $userCurrent = $this->getUser()->getId();
         $userPostOpinion = $opinion->getAuthor()->getId();
 
@@ -195,6 +235,22 @@ class OpinionController extends Controller
     {
         if (false === $this->get('security.authorization_checker')->isGranted('ROLE_USER')) {
             throw new AccessDeniedException('Access restricted to authenticated users');
+        }
+
+        if (false == $opinion->getConsultation()->getIsEnabled()) {
+            throw new AccessDeniedException($this->get('translator')->trans('Access restricted'));
+        }
+
+        if (Consultation::OPENING_STATUS_OPENED != $opinion->getConsultation()->getOpeningStatus()) {
+            throw new AccessDeniedException($this->get('translator')->trans('Access restricted'));
+        }
+
+        if (false == $opinion->getIsEnabled()) {
+            throw new AccessDeniedException($this->get('translator')->trans('Access restricted'));
+        }
+
+        if ($opinion->getIsTrashed()) {
+            throw new AccessDeniedException($this->get('translator')->trans('Access restricted'));
         }
 
         $form->handleRequest($request);
@@ -264,7 +320,7 @@ class OpinionController extends Controller
 
         $reportingOpinion = $this->getDoctrine()->getRepository('CapcoAppBundle:Reporting')->findBy(array(
             'Reporter' => $this->getUser(),
-            'Opinion' => $opinion->getSlug()
+            'Opinion' => $opinion
         ));
 
         $reportingSource = $this->getDoctrine()->getRepository('CapcoAppBundle:Reporting')->findBy(array(
@@ -309,7 +365,8 @@ class OpinionController extends Controller
         $sortArgumentsForm = $this->get('form.factory')->createNamedBuilder('sortArgumentsForm', new ArgumentsSortType(), array(
             'action' => $currentUrl,
             'method' => 'POST'
-        ))->getForm();
+        ))
+            ->getForm();
 
         if ('POST' === $request->getMethod()) {
 
@@ -387,6 +444,18 @@ class OpinionController extends Controller
     {
         if (false === $this->get('security.authorization_checker')->isGranted('ROLE_USER')) {
             throw new AccessDeniedException($this->get('translator')->trans('Access restricted to authenticated users'));
+        }
+        if (false == $opinion->getConsultation()->getIsEnabled()) {
+            throw new AccessDeniedException($this->get('translator')->trans('Access restricted'));
+        }
+        if (Consultation::OPENING_STATUS_OPENED != $opinion->getConsultation()->getOpeningStatus()) {
+            throw new AccessDeniedException($this->get('translator')->trans('Access restricted'));
+        }
+        if (false == $opinion->getIsEnabled()) {
+            throw new AccessDeniedException($this->get('translator')->trans('Access restricted'));
+        }
+        if ($opinion->getIsTrashed()) {
+            throw new AccessDeniedException($this->get('translator')->trans('Access restricted'));
         }
 
         $form->handleRequest($request);

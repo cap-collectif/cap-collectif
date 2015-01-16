@@ -119,8 +119,8 @@ class ConsultationController extends Controller
         $em = $this->getDoctrine()->getManager();
         $consultation = $em->getRepository('CapcoAppBundle:Consultation')->getFirstResultWithMedia($consultation->getSlug());
 
-        if (empty($consultation)) {
-            throw $this->createNotFoundException($this->get('translator')->trans('Consultation not found'));
+        if (false == $consultation->canDisplay() ) {
+            throw $this->createNotFoundException();
         }
 
         return [
@@ -156,7 +156,10 @@ class ConsultationController extends Controller
     {
         $blocks = $this->getDoctrine()->getRepository('CapcoAppBundle:OpinionType')->findByType($consultation);
 
-        return [ 'blocks' => $blocks ];
+        return [
+            'blocks' => $blocks,
+            'consultation' => $consultation,
+        ];
     }
 
     /**

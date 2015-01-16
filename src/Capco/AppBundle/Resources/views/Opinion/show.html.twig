@@ -32,7 +32,7 @@
                             {% endif %}
                             <div class="opinion__data">
                                 <p class="opinion__user  h5"><a href="{{ path('capco_user_profile_show_all', {'username': opinion.Author}) }}">{{ opinion.Author.username }}</a> <span class="pull-right  excerpt">{{ opinion.createdAt | localizeddate('medium', 'none', app.request.locale) }}</span></p>
-                                <p class="opinion__title">{{ opinion.title }}</p>
+                                <p class="opinion__title">{% if opinion.isTrashed %}<span class="label label-default" style="position: static">{{ 'opinion.show.trashed.label'|trans({}, 'CapcoAppBundle') }}</span> {% endif %}{{ opinion.title }}</p>
                                 <p class="opinion__votes  excerpt h5">
                                     {% transchoice nbVotes with {'%count%': nbVotes} from 'CapcoAppBundle' %}
                                     consultation.show.votes
@@ -56,32 +56,59 @@
                         {% endif %}
                         {{ opinion.body|raw }}
                         <div class="opinion__buttons">
-
                             {% set opinionVoteCounts = { (opinionVoteTypes['ok']): opinion.voteCountOk, (opinionVoteTypes['nok']): opinion.voteCountNok, (opinionVoteTypes['mitige']): opinion.voteCountMitige } %}
                             {% set previousValue = null %}
                             {% if previousVote is not null %}
                                 {% set previousValue = previousVote.value %}
                             {% endif %}
                             
-                            {% form_theme opinionVoteForm 'CapcoAppBundle:Form:opinion_vote.html.twig' %}
-                            {{ form_start(opinionVoteForm ) }}
-                                {{ form_errors(opinionVoteForm) }}
-                                {{ form_widget(opinionVoteForm.value, {'previousType': previousValue, 'typeStyles': opinionVoteStyles, 'voteCounts': opinionVoteCounts}) }}
-                                {{ form_rest(opinionVoteForm) }}
-                            {{ form_end(opinionVoteForm) }}
+                            {% if opinion.canContribute %}
 
-                            <div class="pull-right  opinion__action-buttons">
+                                {% form_theme opinionVoteForm 'CapcoAppBundle:Form:opinion_vote.html.twig' %}
+                                {{ form_start(opinionVoteForm ) }}
+                                    {{ form_errors(opinionVoteForm) }}
+                                    {{ form_widget(opinionVoteForm.value, {'previousType': previousValue, 'typeStyles': opinionVoteStyles, 'voteCounts': opinionVoteCounts}) }}
+                                    {{ form_rest(opinionVoteForm) }}
+                                {{ form_end(opinionVoteForm) }}
 
-                                {% if(userReportingOpinion == false) %}
-                                <a href="{{ path('app_report_opinion' ,{'consultation_slug': consultation.slug, 'opinion_type_slug': opinionType.slug, 'opinion_slug': opinion.slug } ) }}" class="btn  btn-dark-gray  btn--outline"><i class="cap cap-flag-1"></i> Signaler</a>
-                                {% else %}
-                                <button disabled="disabled" class="btn  btn-dark-gray"><i class="cap cap-flag-1"></i> opinion signalé</button>
-                                {% endif %}
+                                <div class="pull-right  opinion__action-buttons">
 
-                                {% if app.user is not null and app.user == opinion.Author %}
-                                <a href="{{ path('app_consultation_edit_opinion' ,{'consultation_slug': consultation.slug, 'opinion_type_slug': opinion.opinionType.slug, 'opinion_slug': opinion.slug } ) }}" class="btn  btn-dark-gray  btn--outline"><i class="cap cap-pencil-1"></i> Modifier</a>
-                                {% endif %}
-                            </div>
+                                    {% if(userReportingOpinion == false) %}
+                                    <a href="{{ path('app_report_opinion' ,{'consultation_slug': consultation.slug, 'opinion_type_slug': opinionType.slug, 'opinion_slug': opinion.slug } ) }}" class="btn  btn-dark-gray  btn--outline"><i class="cap cap-flag-1"></i> Signaler</a>
+                                    {% else %}
+                                    <button disabled="disabled" class="btn  btn-dark-gray"><i class="cap cap-flag-1"></i> opinion signalé</button>
+                                    {% endif %}
+
+                                    {% if app.user is not null and app.user == opinion.Author %}
+                                    <a href="{{ path('app_consultation_edit_opinion' ,{'consultation_slug': consultation.slug, 'opinion_type_slug': opinion.opinionType.slug, 'opinion_slug': opinion.slug } ) }}" class="btn  btn-dark-gray  btn--outline"><i class="cap cap-pencil-1"></i> Modifier</a>
+                                    {% endif %}
+                                </div>
+
+                            {% endif %}
+
+                            {% if opinion.canContribute %}
+                                {% form_theme opinionVoteForm 'CapcoAppBundle:Form:opinion_vote.html.twig' %}
+                                {{ form_start(opinionVoteForm ) }}
+                                    {{ form_errors(opinionVoteForm) }}
+                                    {{ form_widget(opinionVoteForm.value, {'previousType': previousValue, 'typeStyles': opinionVoteStyles, 'voteCounts': opinionVoteCounts}) }}
+                                    {{ form_rest(opinionVoteForm) }}
+                                {{ form_end(opinionVoteForm) }}
+                            {% endif %}
+
+                            {% if opinion.canContribute %}
+                                <div class="pull-right  opinion__action-buttons">
+
+                                    {% if(userReportingOpinion == false) %}
+                                    <a href="{{ path('app_report_opinion' ,{'consultation_slug': consultation.slug, 'opinion_type_slug': opinionType.slug, 'opinion_slug': opinion.slug } ) }}" class="btn  btn-dark-gray  btn--outline"><i class="cap cap-flag-1"></i> Signaler</a>
+                                    {% else %}
+                                    <button disabled="disabled" class="btn  btn-dark-gray"><i class="cap cap-flag-1"></i> opinion signalé</button>
+                                    {% endif %}
+
+                                    {% if app.user is not null and app.user == opinion.Author %}
+                                    <a href="{{ path('app_consultation_edit_opinion' ,{'consultation_slug': consultation.slug, 'opinion_type_slug': app.request.attributes.get('opinionType').slug, 'opinion_slug': opinion.slug } ) }}" class="btn  btn-dark-gray  btn--outline"><i class="cap cap-pencil-1"></i> Modifier</a>
+                                    {% endif %}
+                                </div>
+                            {% endif %}
                         </div> <!-- .opinion__buttons -->
                         <div class="panel-group" id="accordion">
                             {% set tokenSource = csrf_token('source_vote') %}
@@ -91,7 +118,9 @@
                                 </div>
                                 <div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
                                     <div class="panel-body">
-                                        <p><a href="{{ path('app_new_source' ,{'opinion_slug': opinion.slug} ) }}" class="btn-sm btn btn-default"><i class="cap cap-add-1"></i> {{ 'source.show.add'|trans({}, 'CapcoAppBundle') }}</a></p>
+                                        {% if opinion.canContribute %}
+                                            <p><a href="{{ path('app_new_source' ,{'opinion_slug': opinion.slug} ) }}" class="btn-sm btn btn-default"><i class="cap cap-add-1"></i> {{ 'source.show.add'|trans({}, 'CapcoAppBundle') }}</a></p>
+                                        {% endif %}
                                         {% for source in sources %}
                                             <div class="media" id="source{{ source.id }}">
                                                 {% if source.Author.Media %}
@@ -111,24 +140,30 @@
                                                     <p class="excerpt">
                                                         {{ source.body }}
                                                     </p>
-                                                    <form method="POST" style="display: inline-block;" action="{{ path('app_consultation_vote_source' ,{'consultation_slug': consultation.slug, 'opinion_type_slug': opinionType.slug, 'opinion_slug': opinion.slug, 'source_id': source.id } ) }}">
-                                                        {% if source.userHasVote(app.user) %}
-                                                        <button class="btn  btn-danger  btn-xs">Annuler mon vote</button>
-                                                        {% else %}
-                                                        <button class="btn  btn-success  btn--outline  btn-xs"><i class="cap cap-hand-like-2"></i>Pertinent</button>
-                                                        {% endif %}
-                                                        <input type="hidden" name="_csrf_token" value="{{ tokenSource }}">
-                                                    </form>
+                                                    {% if false == opinion.canContribute %}
+                                                        <button disabled="disabled" class="btn  btn-dark-gray  btn-xs"><i class="cap cap-hand-like-2"></i>Pertinent</button>
+                                                    {% else %}
+                                                        <form method="POST" style="display: inline-block;" action="{{ path('app_consultation_vote_source' ,{'consultation_slug': consultation.slug, 'opinion_type_slug': opinionType.slug, 'opinion_slug': opinion.slug, 'source_id': source.id } ) }}">
+                                                            {% if source.userHasVote(app.user) %}
+                                                            <button class="btn  btn-danger  btn-xs">Annuler mon vote</button>
+                                                            {% else %}
+                                                            <button class="btn  btn-success  btn--outline  btn-xs"><i class="cap cap-hand-like-2"></i>Pertinent</button>
+                                                            {% endif %}
+                                                            <input type="hidden" name="_csrf_token" value="{{ tokenSource }}">
+                                                        </form>
+                                                    {% endif %}
                                                     <span class="nb-votes">{{ source.voteCountSource }}</span>
 
-                                                    {% if(userReportingSource == false) %}
-                                                        <a href="{{ path('app_report_source' ,{'consultation_slug': consultation.slug, 'opinion_type_slug': opinionType.slug, 'opinion_slug': opinion.slug, 'source_slug': source.slug } ) }}" class="btn btn-xs btn-dark-gray  btn--outline"><i class="cap cap-flag-1"></i> Signaler</a>
-                                                    {% else %}
-                                                        <button disabled="disabled" class="btn btn-xs btn-dark-gray"><i class="cap cap-flag-1"></i> source signalé</button>
-                                                    {% endif %}
+                                                    {% if opinion.canContribute %}
+                                                        {% if(userReportingSource == false) %}
+                                                            <a href="{{ path('app_report_source' ,{'consultation_slug': consultation.slug, 'opinion_type_slug': opinionType.slug, 'opinion_slug': opinion.slug, 'source_slug': source.slug } ) }}" class="btn btn-xs btn-dark-gray  btn--outline"><i class="cap cap-flag-1"></i> Signaler</a>
+                                                        {% else %}
+                                                            <button disabled="disabled" class="btn btn-xs btn-dark-gray"><i class="cap cap-flag-1"></i> source signalé</button>
+                                                        {% endif %}
 
-                                                    {% if app.user is not null and app.user == source.Author %}
-                                                        <a href="{{ path('app_edit_source' ,{'opinion_slug': opinion.slug, 'source_slug': source.slug} ) }}" class="btn  btn-dark-gray  btn--outline  btn-xs"><i class="cap cap-pencil-1"></i> Modifier</a>
+                                                        {% if app.user is not null and app.user == source.Author %}
+                                                            <a href="{{ path('app_edit_source' ,{'opinion_slug': opinion.slug, 'source_slug': source.slug} ) }}" class="btn  btn-dark-gray  btn--outline  btn-xs"><i class="cap cap-pencil-1"></i> Modifier</a>
+                                                        {% endif %}
                                                     {% endif %}
                                                 </div>
                                             </div>
@@ -141,7 +176,7 @@
                 </div>
                 <div class="row">
                     <div class="col-sm-12  col-md-6">
-                        {% if app.user is not null %}
+                        {% if app.user is not null and opinion.canContribute %}
                             {% set argType = 1 %}
                             {% set form = argumentFormYes %}
                             {% include '@CapcoApp/Argument/create.html.twig' %}
@@ -149,7 +184,7 @@
                         {{ render(controller('CapcoAppBundle:Argument:showArguments', {'consultation': consultation, 'opinionType': opinionType, 'opinion': opinion, 'type': 1, 'form': sortArgumentsForm, 'argumentSort': argumentSort})) }}
                     </div>
                     <div class="col-sm-12  col-md-6">
-                        {% if app.user is not null %}
+                        {% if app.user is not null  and opinion.canContribute %}
                             {% set argType = 0 %}
                             {% set form = argumentFormNo %}
                             {% include '@CapcoApp/Argument/create.html.twig' %}

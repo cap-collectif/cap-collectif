@@ -541,4 +541,12 @@ class Idea
         $this->Reports->removeElement($report);
     }
 
+    public function canDisplay() {
+        return ($this->isEnabled);
+    }
+
+    public function canContribute() {
+        return ($this->isEnabled() && !$this->isTrashed);
+    }
+
 }

@@ -469,4 +469,12 @@ class Argument
     {
         $this->Reports->removeElement($report);
     }
+
+    public function canDisplay() {
+        return ($this->isEnabled && $this->opinion->canDisplay());
+    }
+
+    public function canContribute() {
+        return ($this->isEnabled && !$this->isTrashed && $this->opinion->canContribute());
+    }
 }

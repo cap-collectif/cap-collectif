@@ -748,11 +748,11 @@ class Opinion
         return $this;
     }
 
-    /**
-     * @return string
-     */
-    public function getType()
-    {
-        return $this->Author;
+    public function canDisplay() {
+        return ($this->isEnabled && $this->Consultation->canDisplay());
+    }
+
+    public function canContribute() {
+        return ($this->isEnabled && !$this->isTrashed && $this->Consultation->canContribute());
     }
 }

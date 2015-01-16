@@ -6,7 +6,7 @@
             <div class="opinion__header  opinion__header--mobile-centered">
                 <h4 class="pull-left  h4  opinion__header__title">{{ app.request.attributes.get('opiniontype').title }} <span class="badge">{{ opinions|length }}</span></h4>
                 <div class="pull-right  opinion__header__filter">
-                    {% if app.request.attributes.get('opiniontype').isEnabled == true %}
+                    {% if app.request.attributes.get('opiniontype').isEnabled == true and consultation.canContribute %}
                         <a href="{{ path('app_consultation_new_opinion' ,{'consultation_slug': consultation.slug, 'opinion_type_slug': app.request.attributes.get('opiniontype').slug } ) }}" class="btn  btn-default">
                             <i class="cap cap-add-1"></i>
                             <span class="hidden-xs  hidden-sm"> Proposer</span>
