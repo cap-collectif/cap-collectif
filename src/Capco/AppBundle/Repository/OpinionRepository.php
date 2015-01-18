@@ -74,7 +74,52 @@ class OpinionRepository extends EntityRepository
 
     }
 
-    public function getOpinion($opinion)
+    public function getOpinionsByUser($user)
+    {
+        $qb = $this->createQueryBuilder('o')
+            ->leftJoin('o.OpinionType', 'ot')
+            ->addSelect('ot')
+            ->leftJoin('o.Consultation', 'c')
+            ->addSelect('c')
+            ->leftJoin('o.Author', 'aut')
+            ->addSelect('aut')
+            ->leftJoin('aut.Media', 'm')
+            ->addSelect('m')
+            ->andWhere('o.Author = :author')
+            ->setParameter('author', $user)
+            ->orderBy('o.createdAt', 'DESC');
+
+        return $qb->getQuery()->getResult();
+
+    }
+
+    /**
+     * Profil, count all opinions
+     * @param $user
+     * @return mixed
+     */
+    public function countOpinionsByUser($user)
+    {
+        $qb = $this->createQueryBuilder('o')
+            ->select('COUNT(o) as totalOpinions')
+            ->leftJoin('o.Consultation', 'c')
+            ->andWhere('c.isEnabled = :enabledConsul')
+            ->setParameter('enabledConsul', true)
+            ->andWhere('o.isEnabled = :enabled')
+            ->setParameter('enabled', true)
+            ->andWhere('o.isTrashed = :notTrashed')
+            ->setParameter('notTrashed', false)
+            ->andWhere('o.Author = :author')
+            ->setParameter('author', $user);
+
+        return $qb
+            ->getQuery()
+            ->getSingleScalarResult();
+    }
+
+
+
+    public function getOpinion($consultationSlug, $opinionTypeSlug, $opinionSlug)
     {
         $qb = $this->createQueryBuilder('o')
                 ->leftJoin('o.Author', 'a')
@@ -85,8 +130,19 @@ class OpinionRepository extends EntityRepository
                 ->addSelect('ot')
                 ->leftJoin('o.Consultation', 'c')
                 ->addSelect('c')
+                ->andWhere('o.isEnabled = :enabled')
+                ->setParameter('enabled', true)
+                ->andWhere('o.isTrashed = :notTrashed')
+                ->setParameter('notTrashed', false)
+                ->andWhere('c.slug = :consultationSlug')
+                ->setParameter('consultationSlug', $consultationSlug)
+                ->andWhere('ot.slug = :opinionTypeSlug')
+                ->setParameter('opinionTypeSlug', $opinionTypeSlug)
                 ->andWhere('o.slug = :opinion')
-                ->setParameter('opinion', $opinion);
+                ->setParameter('opinion', $opinionSlug)
+                ->andWhere('c.isEnabled = :enabled')
+                ->setParameter('enabled', true)
+                ;
 
         return $qb->getQuery()
             ->getOneOrNullResult();

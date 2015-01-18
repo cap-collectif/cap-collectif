@@ -35,6 +35,26 @@ class SourceRepository extends EntityRepository
         return $qb->getQuery()->getResult();
 
     }
+    public function getByUser($user)
+    {
+        $qb = $this->getIsEnabledAndTrasedByUserQueryBuilder()
+            ->leftJoin('s.Category', 'ca')
+            ->addSelect('ca')
+            ->leftJoin('s.Opinion', 'o')
+            ->addSelect('o')
+            ->leftJoin('o.Consultation', 'c')
+            ->addSelect('c')
+            ->leftJoin('s.Author', 'aut')
+            ->addSelect('aut')
+            ->leftJoin('aut.Media', 'm')
+            ->addSelect('m')
+            ->andWhere('s.Author = :author')
+            ->setParameter('author', $user)
+            ->orderBy('s.createdAt', 'DESC');
+
+        return $qb->getQuery()->getResult();
+
+    }
 
     public function getEnabledSourcesByOpinion($opinion)
     {
@@ -57,6 +77,44 @@ class SourceRepository extends EntityRepository
 
         return $qb->getQuery()->getResult();
 
+    }
+
+    /**
+     * Count all arguments
+     * @param $user
+     * @return mixed
+     */
+    public function countSourcesByUser($user)
+    {
+        $qb = $this->getIsEnabledAndTrasedByUserQueryBuilder()
+            ->select('COUNT(s) as TotalSources')
+            ->leftJoin('s.Opinion', 'o')
+            ->leftJoin('o.Consultation', 'c')
+            ->andWhere('s.Author = :author')
+            ->setParameter('author', $user);
+
+        return $qb
+            ->getQuery()
+            ->getSingleScalarResult();
+    }
+
+    /**
+     * Condition by QueryBuilder - isEnabled, isTrashed
+     * @return \Doctrine\ORM\QueryBuilder
+     */
+    protected function getIsEnabledAndTrasedByUserQueryBuilder()
+    {
+        return $this->createQueryBuilder('s')
+            ->andWhere('s.isEnabled = :enabledSource')
+            ->setParameter('enabledSource', true)
+            ->andWhere('s.isTrashed = :trashed')
+            ->setParameter('trashed', false)
+            ->andWhere('o.isEnabled = :enabledOpi')
+            ->setParameter('enabledOpi', true)
+            ->andWhere('o.isTrashed = :trashedOpi')
+            ->setParameter('trashedOpi', false)
+            ->andWhere('c.isEnabled = :isEnabled')
+            ->setParameter('isEnabled', true);
     }
 
 }

@@ -1,0 +1,32 @@
+{% if sources|length > 0 %}
+    {% for source in sources %}
+        <div class="media" id="source{{ source.id }}">
+            {% if source.Author.Media %}
+                <a class="pull-left media-middle" href="{{ path('capco_user_profile_show_all', {'username': source.Author}) }}">
+                    {% thumbnail source.Author.Media, 'avatar_source' with {'title': source.Author.username, 'alt': source.Author.username, 'class': 'img-circle  pull-left'} %}
+                </a>
+            {% endif %}
+            <div class="media-body">
+                <h4 class="media-heading h4" id="source{{ source.id }}"><span class="label label-info">{{ source.Category.title }}</span>
+                    {% if source.Media %}
+                        <a href="{{ path('sonata_media_download', {'id': source.Media|sonata_urlsafeid }) }}">{{ source.title }}</a>
+                    {% endif %}
+                    {% if source.link %}
+                        <a href="{{ source.link }}" target="_blank">{{ source.title }}</a>
+                    {% endif %}
+                </h4>
+                <p class="excerpt">
+                    <strong>{{ 'argument.trashed.linked_proposition' | trans({}, 'CapcoAppBundle') }} </strong><a href="{{ path('app_consultation_show_opinion', {'consultation_slug': source.Opinion.consultation.slug, 'opinion_type_slug': source.Opinion.OpinionType.slug, 'opinion_slug': source.Opinion.slug}) }}">{{ source.Opinion.title }}</a><br/>
+                    {{ source.body }}
+                </p>
+                <button disabled="disabled" class="btn  btn-default btn-xs"><i class="cap cap-hand-like-2"></i>Pertinent</button>
+                <span class="nb-votes">{{ source.voteCountSource }}</span>
+            </div>
+        </div>
+    {% endfor %}
+{% else %}
+    <div class="consultation__empty-block  text-center">
+        <p class="icon  cap-bubble-attention-6"></p>
+        <p>{{ 'source.none'|trans({}, 'CapcoAppBundle') }}</p>
+    </div>
+{% endif %}

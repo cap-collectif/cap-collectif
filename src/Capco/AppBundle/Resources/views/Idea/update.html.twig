@@ -18,7 +18,7 @@
                         <div class="dialog__body  box">
                             <div class="media">
                                 {% if idea.Author and idea.Author.Media %}
-                                    <a class="pull-left" href="#">
+                                    <a class="pull-left" href="{{ path('capco_user_profile_show_all', {'username': idea.Author}) }}">
                                         {% thumbnail idea.Author.Media, 'avatar' with {'title': idea.Author.fullname, 'alt': idea.Author.fullname, 'class': 'media-object img-circle'} %}
                                     </a>
                                 {% endif %}

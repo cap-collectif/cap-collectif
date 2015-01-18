@@ -26,12 +26,12 @@
                         <div class="col-xs-12  col-sm-8  col-md-9  col-lg-10">
                             <div class="opinion__body  box">
                                 {% if opinion.Author.Media %}
-                                    <a class="pull-left" href="#">
-                                        {% thumbnail opinion.Author.Media, 'avatar' with {'title': opinion.Author.fullname, 'alt': opinion.Author.fullname, 'class': 'img-circle  pull-left'} %}
+                                    <a class="pull-left" href="{{ path('capco_user_profile_show_all', {'username': opinion.Author}) }}">
+                                        {% thumbnail opinion.Author.Media, 'avatar' with {'title': opinion.Author.username, 'alt': opinion.Author.username, 'class': 'img-circle  pull-left'} %}
                                     </a>
                                 {% endif %}
                                 <div class="opinion__data">
-                                    <p class="opinion__user  h5"><a href="#">{{ opinion.Author.getFullname }}</a> <span class="pull-right  excerpt">{{ opinion.createdAt | localizeddate('medium', 'none', app.request.locale) }}</span></p>
+                                    <p class="opinion__user  h5"><a href="{{ path('capco_user_profile_show_all', {'username': opinion.Author}) }}">{{ opinion.Author.username }}</a> <span class="pull-right  excerpt">{{ opinion.createdAt | localizeddate('medium', 'none', app.request.locale) }}</span></p>
                                     <p class="opinion__title"><a href="{{ path('app_consultation_show_opinion', {'consultation_slug': consultation.slug, 'opinion_type_slug': app.request.attributes.get('opinion_type_slug'), 'opinion_slug': opinion.slug}) }}">{{ opinion.title }}</a></p>
                                     <p class="opinion__votes  excerpt h5">
                                         {% transchoice nbVotes with {'%count%': nbVotes} from 'CapcoAppBundle' %}

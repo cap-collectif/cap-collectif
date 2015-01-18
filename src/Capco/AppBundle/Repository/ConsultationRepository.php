@@ -123,6 +123,8 @@ class ConsultationRepository extends EntityRepository
             ->addSelect('m')
             ->leftJoin('c.Opinions', 'o')
             ->addSelect('o')
+            ->andWhere('c.isEnabled = :enabled')
+            ->setParameter('enabled', true)
             ->addOrderBy('o.createdAt', 'DESC')
             ->andWhere('c.slug = :slug')
             ->setParameter('slug', $slug);
@@ -163,4 +165,20 @@ class ConsultationRepository extends EntityRepository
         }
         return $result;
     }
+
+//    protected function getIsEnabledAndTrasedByUserQueryBuilder()
+//    {
+//        return $this->createQueryBuilder('c')
+//            ->andWhere('s.isEnabled = :enabledSource')
+//            ->setParameter('enabledSource', true)
+//            ->andWhere('s.isTrashed = :trashed')
+//            ->setParameter('trashed', false)
+//            ->andWhere('o.isEnabled = :enabledOpi')
+//            ->setParameter('enabledOpi', true)
+//            ->andWhere('o.isTrashed = :trashedOpi')
+//            ->setParameter('trashedOpi', false)
+//            ->andWhere('c.isEnabled = :isEnabled')
+//            ->setParameter('isEnabled', true);
+//    }
+
 }

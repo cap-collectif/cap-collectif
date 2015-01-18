@@ -53,6 +53,10 @@ class IdeaRepository extends EntityRepository
             ->setParameter('isEnabled', true);
     }
 
+    /**
+     * Count all ideas trashed
+     * @return mixed
+     */
     public function getTrashedIdeasNb(){
 
         return $this->createQueryBuilder('i')
@@ -61,6 +65,25 @@ class IdeaRepository extends EntityRepository
             ->andWhere('i.isTrashed = :trashed')
             ->setParameter('trashed', true)
             ->setParameter('enabled', true)
+            ->getQuery()
+            ->getSingleScalarResult();
+    }
+
+    /**
+     * Count all ideas notTrashed and Enabled
+     * @param $user
+     * @return mixed
+     */
+    public function countIdeasEnabledAndNotTrashedByUser($user){
+
+        return $this->createQueryBuilder('i')
+            ->select('COUNT(i)')
+            ->andWhere('i.isEnabled = :enabled')
+            ->andWhere('i.isTrashed = :trashed')
+            ->setParameter('trashed', false)
+            ->setParameter('enabled', true)
+            ->andWhere('i.Author = :author')
+            ->setParameter('author', $user)
             ->getQuery()
             ->getSingleScalarResult();
     }
@@ -185,7 +208,7 @@ class IdeaRepository extends EntityRepository
 
         return new Paginator($query);
     }
-
+    
     public function getTrashedIdeas($nbByPage = 8, $page = 1)
     {
         if ((int) $page < 1) {
@@ -212,5 +235,24 @@ class IdeaRepository extends EntityRepository
         }
 
         return new Paginator($query);
+    }
+
+    public function getUser($user)
+    {
+        $qb = $this->getIsEnabledQueryBuilder()
+            ->select('i')
+            ->leftJoin('i.Author', 'a')
+            ->addSelect('a')
+            ->leftJoin('a.Media', 'm')
+            ->addSelect('m')
+            ->andWhere('i.Author = :user')
+            ->setParameter('user', $user)
+            ->andWhere('i.isTrashed = :notTrashed')
+            ->setParameter('notTrashed', false)
+            ->orderBy('i.createdAt', 'DESC');
+
+        return $qb
+            ->getQuery()
+            ->execute();
     }
 }

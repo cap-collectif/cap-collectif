@@ -7,8 +7,10 @@
   background-color: $light-gray;
 
   .profile__picture img {
-    width: 100%;
-    max-width: 200px;
+    max-width: 100%;
+    height: auto;
+    width: auto;
+    box-sizing: border-box;
   }
 
   .profile__name {

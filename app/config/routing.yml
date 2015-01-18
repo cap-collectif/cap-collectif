@@ -8,6 +8,10 @@ capco_app:
     type:     annotation
     prefix:   /
 
+capco_user:
+    resource: "@CapcoUserBundle/Controller/"
+    type: annotation
+    prefix: /
 
 # sonata admin...
 admin:

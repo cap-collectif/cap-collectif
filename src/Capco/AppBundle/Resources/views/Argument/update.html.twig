@@ -18,8 +18,8 @@
                         <div class="dialog__body  box">
                             <div class="media">
                                 {% if argument.Author and argument.Author.Media %}
-                                    <a class="pull-left" href="#">
-                                        {% thumbnail argument.Author.Media, 'avatar' with {'title': argument.Author.fullname, 'alt': argument.Author.fullname, 'class': 'media-object img-circle'} %}
+                                    <a class="pull-left" href="{{ path('capco_user_profile_show_all', {'username': argument.Author}) }}">
+                                        {% thumbnail argument.Author.Media, 'avatar' with {'title': argument.Author.username, 'alt': argument.Author.username, 'class': 'media-object img-circle'} %}
                                     </a>
                                 {% endif %}
                                 <div class="media-body">

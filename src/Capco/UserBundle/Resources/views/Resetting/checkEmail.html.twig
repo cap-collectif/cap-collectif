@@ -11,7 +11,6 @@
 
 {% block fos_user_content %}
     <div class="container">
-        <h2 class="h2  title--first">{{ 'resetting.email.subject'|trans({}, 'FOSUserBundle') }}</h2>
         <div class="alert alert-success alert-dismissible  block" role="alert">
             <p>{{ 'resetting.check_email'|trans({'%email%': email}, 'FOSUserBundle') }}</p>
         </div>

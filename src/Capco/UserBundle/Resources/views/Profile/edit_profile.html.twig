@@ -1,40 +1,109 @@
-{#
-
-This file is part of the Sonata package.
-
-(c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
-
-For the full copyright and license information, please view the LICENSE
-file that was distributed with this source code.
-
-#}
-
-{% extends "SonataUserBundle:Profile:action.html.twig" %}
+{% extends "CapcoUserBundle::layout.html.twig" %}
 
 {% block sonata_profile_title %}
     {{ "title_user_account" | trans({}, 'SonataUserBundle')}} - {{ "title_user_edit_profile" | trans({}, 'SonataUserBundle')}}
 {% endblock %}
 
-{% block sonata_profile_content %}
-    {% sonata_template_box 'This is the user profile edition template. Feel free to override it.' %}
+{% block title %} Paramètre {% endblock %}
 
-    {{ form_errors(form) }}
+{% block fos_user_content %}
+    <div class="container">
+        <div class="row">
 
-    {% form_theme form _self %}
+            {% include '@CapcoUser/Profile/action.html.twig' %}
 
-    <div class="panel panel-info">
-        <div class="panel-heading">
-            <h3 class="panel-title">{{ "title_user_account" | trans({}, 'SonataUserBundle')}}</h3>
-        </div>
-        <div class="panel-body">
-            <form action="{{ path('sonata_user_profile_edit') }}" method="POST" class="form-horizontal">
-                {{ form_widget(form) }}
-                <div class="form-actions">
-                    <button type="submit" name="submit"  class="btn btn-primary pull-right">{{ 'sonata_user_submit'|trans({}, 'SonataUserBundle') }}</button>
+            <div class="col-xs-12 col-sm-8 col-md-9">
+                <div class="block--shadowed  block--first-mobile  box">
+                    <h4 class="h4">{{ "title_user_account" | trans({}, 'SonataUserBundle')}}</h4>
+                    <hr/>
+                    {{ form_errors(form) }}
+                    <form action="{{ path('sonata_user_profile_edit') }}" method="POST" enctype="multipart/form-data" class="form-horizontal settings__form" role="form">
+
+                        <div class="form-group">
+                            {{ form_errors(form.username) }}
+                            {{ form_label(form.username, null, {'label_attr': {'class': 'col-sm-3 control-label'}}) }}
+                            <div class="col-sm-9">{{ form_widget(form.username) }}</div>
+                        </div>
+
+                        <div class="form-group">
+                            {{ form_errors(form.gender) }}
+                            {{ form_label(form.gender, null, {'label_attr': {'class': 'col-sm-3 control-label'}}) }}
+                            <div class="col-sm-9">{{ form_widget(form.gender) }}</div>
+                        </div>
+
+                        <div class="form-group">
+                            {{ form_errors(form.dateOfBirth) }}
+                            {{ form_label(form.dateOfBirth, null, {'label_attr': {'class': 'col-sm-3 control-label'}}) }}
+                            <div class="col-sm-9">{{ form_widget(form.dateOfBirth) }}</div>
+                        </div>
+
+                        <div class="form-group">
+                            {{ form_errors(form.website) }}
+                            {{ form_label(form.website, null, {'label_attr': {'class': 'col-sm-3 control-label'}}) }}
+                            <div class="col-sm-9">{{ form_widget(form.website) }}</div>
+                        </div>
+
+                        <div class="form-group">
+                            {{ form_errors(form.biography) }}
+                            {{ form_label(form.biography, null, {'label_attr': {'class': 'col-sm-3 control-label'}}) }}
+                            <div class="col-sm-9">{{ form_widget(form.biography, {'attr':  {'rows': '4', 'cols': '30', 'style':'height:350px'} }) }}</div>
+                        </div>
+
+                        <div class="form-group">
+                            {{ form_errors(form.locale) }}
+                            {{ form_label(form.locale, null, {'label_attr': {'class': 'col-sm-3 control-label'}}) }}
+                            <div class="col-sm-9">{{ form_widget(form.locale) }}</div>
+                        </div>
+
+                        <div class="form-group">
+                            {{ form_errors(form.timezone) }}
+                            {{ form_label(form.timezone, null, {'label_attr': {'class': 'col-sm-3 control-label'}}) }}
+                            <div class="col-sm-9">{{ form_widget(form.timezone) }}</div>
+                        </div>
+
+                        <div class="form-group">
+                            {{ form_errors(form.phone) }}
+                            {{ form_label(form.phone, null, {'label_attr': {'class': 'col-sm-3 control-label'}}) }}
+                            <div class="col-sm-9">{{ form_widget(form.phone) }}</div>
+                        </div>
+
+                        <div class="form-group">
+                            {{ form_errors(form.twitterName) }}
+                            {{ form_label(form.twitterName, null, {'label_attr': {'class': 'col-sm-3 control-label'}}) }}
+                            <div class="col-sm-9">{{ form_widget(form.twitterName, {'attr':  {'placeholder': 'https://twitter.com/jolicode'} }) }}</div>
+                        </div>
+
+                        <div class="form-group">
+                            {{ form_errors(form.gplusName) }}
+                            {{ form_label(form.gplusName, null, {'label_attr': {'class': 'col-sm-3 control-label'}}) }}
+                            <div class="col-sm-9">{{ form_widget(form.gplusName, {'attr':  {'placeholder': 'https://plus.google.com/+Jolicode/posts'} }) }}</div>
+                        </div>
+
+                        <div class="form-group">
+                            {{ form_errors(form.facebookName) }}
+                            {{ form_label(form.facebookName, null, {'label_attr': {'class': 'col-sm-3 control-label'}}) }}
+                            <div class="col-sm-9">{{ form_widget(form.facebookName, {'attr':  {'placeholder': 'https://www.facebook.com/JoliCode'} }) }}</div>
+                        </div>
+
+                        <div class="form-group">
+                            {{ form_errors(form.media) }}
+                            {{ form_label(form.media, null, {'label_attr': {'class': 'col-sm-3 control-label'}}) }}
+                            <div class="col-sm-9">{{ form_widget(form.media) }}</div>
+                        </div>
+
+                        {{ form_rest(form) }}
+
+                        <div class="form-group form-actions">
+                            <div class="col-sm-offset-6 col-sm-6">
+                                <button type="submit" name="submit"  class="btn btn-primary pull-right">Enregistrer les modifications</button>
+                            </div>
+                            {#<div class="col-sm-3">#}
+                                {#<button type="button" class="btn btn-danger btn--outline pull-right">Supprimer mon compte</button>#}
+                            {#</div>#}
+                        </div>
+                    </form>
                 </div>
-            </form>
-        </div>
-    </div>
-
-    {% render url("sonata_user_profile_edit_authentication") %}
-{% endblock %}
+            </div> <!-- col-xs-12 col-sm-8 col-md-9 -->
+        </div> <!-- row -->
+    </div> <!-- container -->
+{% endblock fos_user_content %}

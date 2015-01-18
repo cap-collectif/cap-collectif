@@ -23,3 +23,16 @@ Capco\AppBundle\Entity\Consultation:
         body: <text(1000)>
         Author: @user*
         Media: @MediaConsultation2
+    cs4:
+        title: <sentence(3)>
+        teaser: <text(35)>
+        body: <text(1000)>
+        Author: @user*
+        Media: @MediaConsultation2
+    cs5:
+        title: Une consultation désactivé
+        teaser: <text(35)>
+        body: <text(1000)>
+        Author: @user*
+        Media: @MediaConsultation2
+        isEnabled: false

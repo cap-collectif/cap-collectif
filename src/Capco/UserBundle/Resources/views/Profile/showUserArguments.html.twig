@@ -1,0 +1,16 @@
+{% set page_class = "profile-page" %}
+{% extends "CapcoUserBundle::layout.html.twig" %}
+
+{% block title %} {{ 'user.profile.show.title'|trans({'%name%': user.username }, 'CapcoAppBundle') }} - {{ parent() }} {% endblock %}
+{% block jumbotron %}{% endblock %}
+
+{% block fos_user_content %}
+    {% include '@CapcoUser/Profile/showProfile.html.twig' %}
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12  col-sm-12  col-md-12 col-lg-12" id="details">
+                {% include '@CapcoUser/Profile/arguments.html.twig' %}
+            </div>
+        </div>
+    </div>
+{% endblock fos_user_content %}

@@ -1,12 +1,19 @@
 parameters:
-    my_user_provider.class: Capco\UserBundle\Security\Core\User\UserProvider
+  my_user_provider.class: Capco\UserBundle\Security\Core\User\UserProvider
 
 services:
-    my_user_provider:
-        class: "%my_user_provider.class%"
-        #this is the place where the properties are passed to the UserProvider - see config.yml
-        arguments: [@fos_user.user_manager,{facebook: facebook_id, google: google_id}]
-    capco_user.registration.form.type:
-      class: Capco\UserBundle\Form\Type\RegistrationFormType
-      tags:
-        - { name: form.type, alias: capco_user_registration }
+  my_user_provider:
+      class: "%my_user_provider.class%"
+      #this is the place where the properties are passed to the UserProvider - see config.yml
+      arguments: [@fos_user.user_manager,{facebook: facebook_id, google: google_id}]
+
+  capco_user.registration.form.type:
+    class: Capco\UserBundle\Form\Type\RegistrationFormType
+    tags:
+      - { name: form.type, alias: capco_user_registration }
+
+  capco_user.profile.form.type:
+    class: Capco\UserBundle\Form\Type\ProfileFormType
+    tags:
+      - { name: form.type, alias: capco_user_profile }
+  

@@ -119,6 +119,10 @@ class ConsultationController extends Controller
         $em = $this->getDoctrine()->getManager();
         $consultation = $em->getRepository('CapcoAppBundle:Consultation')->getFirstResultWithMedia($consultation->getSlug());
 
+        if (empty($consultation)) {
+            throw $this->createNotFoundException($this->get('translator')->trans('Consultation not found'));
+        }
+
         return [
             'consultation' => $consultation,
             'statuses' => Theme::$statuses,

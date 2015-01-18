@@ -8,7 +8,9 @@ contact:
   button: Send
 
 header:
-  account: My account
+  hello: Hello
+  profile: My profile
+  user_settings: My settings
   administration: Administration
 
 menu:
@@ -143,6 +145,20 @@ user:
     terms:
       label: "I agree with %startlink%the terms and conditions%endlink%."
     legal_text: "----"
+  profile:
+    show:
+      title: %name%'s profile
+      since: Member since the
+      propositions:
+        all: Contributions
+        votes:
+          all: Votes
+          contributions: Votes on contributions
+          arguments: Votes on arguments
+          ideas: Votes on ideas
+        contributions: Opinions
+        arguments: Arguments
+        ideas: Ideas
 
 #SonataUser errors
 "Bad credentials.": Username and/or password are invalid

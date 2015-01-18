@@ -1,0 +1,15 @@
+<div class="block  block--shadowed  profile__contribution">
+	<div class="profile__contribution__header">
+	    <p class="profile__contribution__title">
+	    	<a href="{{ path('capco_user_profile_show_all', {'username': user.username}) }}">
+	    		{{ user.userName }}
+	    	</a>
+	    	{% if vote.vote.value == 1 %}
+	    		{{ 'user.profile.show.propositions.votes.agree'|trans({'%startlabel%': '<span class="label label-success">', '%endlabel%': '</span>'}, 'CapcoAppBundle') | raw }}
+	    	{% else %}
+	    		{{ 'user.profile.show.propositions.votes.disagree'|trans({'%startlabel%': '<span class="label label-danger">', '%endlabel%': '</span>'}, 'CapcoAppBundle') | raw }}
+	    	{% endif %}
+	    	{{ 'user.profile.show.propositions.votes.on.argument'|trans({'%startlink%': '<a href="">', '%endlink%': '</a>'}, 'CapcoAppBundle') | raw }}.</p>
+	    <p class="excerpt  h5  profile__contribution__date" style="margin-bottom: 0">{{ vote.createdAt|localizeddate('medium', 'none', app.request.locale) }}</p>
+	</div>
+</div>

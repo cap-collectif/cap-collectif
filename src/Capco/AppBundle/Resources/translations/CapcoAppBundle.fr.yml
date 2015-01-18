@@ -30,7 +30,9 @@ contact:
   button: Envoyer
 
 header:
-  account: Mon compte
+  hello: Bonjour
+  profile: Mon profil
+  user_settings: Mes préférences
   administration: Administration
 
 menu:
@@ -94,6 +96,7 @@ idea:
   sort:
     created_at: Date de création
     popularity: Popularité
+  none: Il n' y a pas d'idées.
 
 #Theme
 theme:
@@ -166,6 +169,7 @@ argument:
     date: Date
     popularity: Nombre de votes
     label: Trier par
+  none: Il n' y a pas d'arguments.
 
 source:
   update:
@@ -193,6 +197,7 @@ source:
     count: "{0} Aucune source | {1} 1 source | ]1,Inf[ %count% sources"
   trashed:
     linked_proposition: Liée à la proposition :
+  none: Il n' y a pas de sources.
 
 opinion:
   show:
@@ -223,10 +228,52 @@ user:
       gplus: S'inscrire avec Google+
     or: ou
     username:
+      username: Adresse électronique
+      title: Nom complet
       is_public: Votre nom d'utilisateur est rendu public sur la plateforme.
     terms:
       label: "J'ai lu et j'accepte %cgu%."
     legal_text: "Les informations recueillies font l’objet d’un traitement informatique destiné au fonctionnement de la plateforme contributive. Le Conseil national du numérique est l’unique destinataire de ces données. Conformément à la loi « informatique et libertés » du 6 janvier 1978 modifiée en 2004, vous bénéficiez d’un droit d’accès et de rectification aux informations qui vous concernent, que vous pouvez exercer en vous adressant à %startlink%concertation@cnnumerique.fr%endlink%. Vous pouvez également, pour des motifs légitimes, vous opposer au traitement des données vous concernant."
+  profile:
+    show:
+      title: Profil de %name%
+      since: Inscrit depuis le
+      propositions:
+        all: Contributions
+        votes:
+          all: Votes
+          contributions: Votes sur les contributions
+          arguments: Votes sur les arguments
+          ideas: Votes sur les idées
+          agree: est %startlabel%D'accord%endlabel%
+          disagree: n'est %startlabel%Pas d'accord%endlabel%
+          on:
+            contribution: avec %startlink%une contribution%endlink%
+            argument: avec %startlink%un argument%endlink%
+            idea: avec %startlink%une idée%endlink%
+        contributions:
+          title: Opinions
+          opinions:
+            title: Opinions
+            published: a publié %startlink%une opinion%endlink%
+            votes: "{0} Aucun vote | {1} 1 vote | ]1,Inf[ %count% votes"
+            arguments: "{0} Aucun argument | {1} 1 argument | ]1,Inf[ %count% arguments"
+          problems:
+            title: Problèmes
+            published: a ajouté %startlink%un problème%endlink%
+            votes: "{0} Aucun vote | {1} 1 vote | ]1,Inf[ %count% votes"
+            arguments: "{0} Aucun argument | {1} 1 argument | ]1,Inf[ %count% arguments"
+        arguments:
+          title: Arguments
+          published: a publié %startlink%un argument%endlink%
+          agree: %startlabel%Pour%endlabel%
+          disagree: %startLabel%Contre%endlable%
+        ideas:
+          title: Idées
+          published: a publié %startlink%une idée%endlink%
+          name: Idée
+        sources:
+          title: Sources
 
 #SonataUser errors
 "Bad credentials.": Nom d'utilisateur ou mot de passe incorrect

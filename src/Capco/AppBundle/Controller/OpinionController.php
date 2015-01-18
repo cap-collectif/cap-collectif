@@ -237,35 +237,34 @@ class OpinionController extends Controller
      * Page opinion
      * @Route("/consultation/{consultation_slug}/opinion/{opinion_type_slug}/{opinion_slug}", name="app_consultation_show_opinion")
      * @Route("/consultation/{consultation_slug}/opinion/{opinion_type_slug}/{opinion_slug}/{argumentSort}", name="app_consultation_show_opinion_sortarguments")
-     * @ParamConverter("consultation", class="CapcoAppBundle:Consultation", options={"mapping": {"consultation_slug": "slug"}})
-     * @ParamConverter("opinionType", class="CapcoAppBundle:OpinionType", options={"mapping": {"opinion_type_slug": "slug"}})
-     * @ParamConverter("opinion", class="CapcoAppBundle:Opinion", options={"mapping": {"opinion_slug": "slug"}})
-     * @Template("CapcoAppBundle:Opinion:show.html.twig")
-     * @param Consultation $consultation
-     * @param OpinionType $opinionType
-     * @param Opinion $opinion
-     * @param Request $request
+     * @param $consultation_slug
+     * @param $opinion_type_slug
+     * @param $opinion_slug
+     * @param $request
      * @param $argumentSort
+     * @Template("CapcoAppBundle:Opinion:show.html.twig")
      * @return array
      */
-    public function showOpinionAction(Consultation $consultation, OpinionType $opinionType, Opinion $opinion, Request $request, $argumentSort = null)
+    public function showOpinionAction($consultation_slug, $opinion_type_slug, $opinion_slug, Request $request, $argumentSort = null)
     {
-        if (false === $opinion->getIsEnabled()) {
-            throw new AccessDeniedException($this->get('translator')->trans('Access restricted'));
+
+        $opinion = $this->getDoctrine()->getRepository('CapcoAppBundle:Opinion')->getOpinion($consultation_slug, $opinion_type_slug, $opinion_slug);
+
+        if (empty($opinion)) {
+            throw $this->createNotFoundException($this->get('translator')->trans('Opinion not found'));
         }
 
-        $currentUrl = $this->generateUrl('app_consultation_show_opinion', ['consultation_slug' => $consultation->getSlug(), 'opinion_type_slug' => $opinionType->getSlug(), 'opinion_slug' => $opinion->getSlug() ]);
-        $opinion = $this->getDoctrine()->getRepository('CapcoAppBundle:Opinion')->getOpinion($opinion->getSlug());
+        $currentUrl = $this->generateUrl('app_consultation_show_opinion', ['consultation_slug' => $opinion->getConsultation()->getSlug(), 'opinion_type_slug' => $opinion->getOpinionType()->getSlug(), 'opinion_slug' => $opinion->getSlug() ]);
         $sources = $this->getDoctrine()->getRepository('CapcoAppBundle:Source')->getEnabledSourcesByOpinion($opinion);
-        $Votes = $this->getDoctrine()->getRepository('CapcoAppBundle:OpinionVote')->getByOpinion($opinion->getSlug());
+
         $steps = $this->getDoctrine()->getRepository('CapcoAppBundle:Step')->findBy(array(
-            'consultation' => $consultation,
+            'consultation' => $opinion->getConsultation(),
             'isEnabled' => true
         ));
 
         $reportingOpinion = $this->getDoctrine()->getRepository('CapcoAppBundle:Reporting')->findBy(array(
             'Reporter' => $this->getUser(),
-            'Opinion' => $opinion
+            'Opinion' => $opinion->getSlug()
         ));
 
         $reportingSource = $this->getDoctrine()->getRepository('CapcoAppBundle:Reporting')->findBy(array(
@@ -310,8 +309,7 @@ class OpinionController extends Controller
         $sortArgumentsForm = $this->get('form.factory')->createNamedBuilder('sortArgumentsForm', new ArgumentsSortType(), array(
             'action' => $currentUrl,
             'method' => 'POST'
-        ))
-            ->getForm();
+        ))->getForm();
 
         if ('POST' === $request->getMethod()) {
 
@@ -341,14 +339,14 @@ class OpinionController extends Controller
                     $data = $form->getData();
                     return $this->redirect($this->generateUrl('app_consultation_show_opinion_sortarguments',array(
                         'argumentSort' => $data['argumentSort'],
-                        'consultation_slug' => $consultation->getSlug(),
-                        'opinion_type_slug' => $opinionType->getSlug(),
+                        'consultation_slug' => $opinion->getConsultation()->getSlug(),
+                        'opinion_type_slug' => $opinion->getOpinionType()->getSlug(),
                         'opinion_slug' => $opinion->getSlug(),
                     )));
                 }
             }
 
-            return $this->redirect($this->generateUrl('app_consultation_show_opinion', ['consultation_slug' => $consultation->getSlug(), 'opinion_type_slug' => $opinionType->getSlug(), 'opinion_slug' => $opinion->getSlug() ]));
+            return $this->redirect($this->generateUrl('app_consultation_show_opinion', ['consultation_slug' => $opinion->getConsultation()->getSlug(), 'opinion_type_slug' => $opinion->getOpinionType()->getSlug(), 'opinion_slug' => $opinion->getSlug() ]));
 
         } else {
             $sortArgumentsForm->get('argumentSort')->setData($argumentSort);
@@ -358,11 +356,11 @@ class OpinionController extends Controller
             'userReportingOpinion' => $userReportingOpinion,
             'userReportingSource' => $userReportingSource,
             'currentUrl' => $currentUrl,
-            'consultation' => $consultation,
+            'consultation' => $opinion->getConsultation(),
             'opinion' => $opinion,
             'sources' => $sources,
             'opinionType' => $opinion->getOpinionType(),
-            'votes' => $Votes,
+            'votes' => $opinion->getVotes(),
             'consultation_steps' => $steps,
             'argumentFormYes' => $argumentFormYes->createView(),
             'argumentFormNo' => $argumentFormNo->createView(),

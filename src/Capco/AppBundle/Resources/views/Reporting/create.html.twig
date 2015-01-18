@@ -15,8 +15,8 @@
                         <div class="dialog__body  box">
                             <div class="media">
                                 {% if app.user.Media %}
-                                    <a class="pull-left" href="#">
-                                        {% thumbnail app.user.Media, 'avatar' with {'title': app.user.fullname, 'alt': app.user.fullname, 'class': 'media-object img-circle'} %}
+                                    <a class="pull-left" href="{{ path('capco_user_profile_show_all', {'username': app.user}) }}">
+                                        {% thumbnail app.user.Media, 'avatar' with {'title': app.user.username, 'alt': app.user.username, 'class': 'media-object img-circle'} %}
                                     </a>
                                 {% endif %}
                                 <div class="media-body">

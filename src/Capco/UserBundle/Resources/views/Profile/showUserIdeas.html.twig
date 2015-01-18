@@ -8,15 +8,8 @@
     {% include '@CapcoUser/Profile/showProfile.html.twig' %}
     <div class="container">
         <div class="row">
-            <div class="col-xs-12  col-sm-12  col-md-12 col-lg-12">
-                <h2>Les propositions</h2>
-                {% include '@CapcoUser/Profile/opinions.html.twig' %}
-                <h2>Les arguments</h2>
-                {% include '@CapcoUser/Profile/arguments.html.twig' %}
-                <h2>Les sources</h2>
-                {% include '@CapcoUser/Profile/sources.html.twig' %}
-                <h2>Les idées</h2>
-                {% include '@CapcoUser/Profile/ideas.html.twig' %}
+            <div class="col-xs-12  col-sm-12  col-md-12 col-lg-12" id="details">
+                {% include '@CapcoUser/Profile/Ideas.html.twig' %}
             </div>
         </div>
     </div>

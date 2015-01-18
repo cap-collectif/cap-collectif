@@ -748,4 +748,11 @@ class Opinion
         return $this;
     }
 
+    /**
+     * @return string
+     */
+    public function getType()
+    {
+        return $this->Author;
+    }
 }

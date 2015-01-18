@@ -9,12 +9,10 @@ class RegistrationFormType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('firstname', 'text', array('required' => false))
-                ->add('lastname', 'text', array('required' => false))
-                ->add('isTermsAccepted', 'checkbox', array(
-                                                    'label' => null,
-                                                    'required' => true,
-                                                ) )
+        $builder->add('isTermsAccepted', 'checkbox', array(
+                    'label' => null,
+                    'required' => true,
+                ))
         ;
     }
 

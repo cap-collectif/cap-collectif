@@ -65,6 +65,56 @@ class ArgumentRepository extends EntityRepository
             ->getResult();
     }
 
+    /**
+     * Count all arguments
+     * @param $user
+     * @return mixed
+     */
+    public function countArgumentsByUser($user)
+    {
+        $qb = $this->getIsEnabledQueryBuilder()
+            ->select('COUNT(a) as TotalArguments')
+            ->leftJoin('a.opinion', 'o')
+            ->leftJoin('o.Consultation', 'c')
+            ->andWhere('a.isTrashed = :notTrashed')
+            ->setParameter('notTrashed', false)
+            ->andWhere('a.Author = :author')
+            ->setParameter('author', $user)
+            ->andWhere('o.isEnabled = :enabled')
+            ->setParameter('enabled', true)
+            ->andWhere('c.isEnabled = :consultEnabled')
+            ->setParameter('consultEnabled', true);
+
+        return $qb
+            ->getQuery()
+            ->getSingleScalarResult();
+    }
+
+    public function getEnabledArgumentsByUser($user)
+    {
+        return $this->getIsEnabledQueryBuilder()
+            ->leftJoin('a.opinion', 'o')
+            ->addSelect('o')
+            ->leftJoin('o.Consultation', 'c')
+            ->addSelect('c')
+            ->leftJoin('o.Author', 'aut')
+            ->addSelect('aut')
+            ->leftJoin('aut.Media', 'm')
+            ->addSelect('m')
+            ->leftJoin('a.Votes', 'v')
+            ->addSelect('v')
+            ->andWhere('a.isTrashed = :notTrashed')
+            ->setParameter('notTrashed', false)
+            ->andWhere('a.Author = :author')
+            ->setParameter('author', $user)
+            ->andWhere('o.isEnabled = :enabled')
+            ->setParameter('enabled', true)
+            ->andWhere('c.isEnabled = :consultEnabled')
+            ->setParameter('consultEnabled', true)
+            ->getQuery()
+            ->getResult();
+    }
+
     public function getTrashedArgumentsByConsultation($consultation)
     {
         return $this->getIsEnabledQueryBuilder()

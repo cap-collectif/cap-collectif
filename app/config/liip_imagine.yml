@@ -59,3 +59,9 @@ liip_imagine:
             controller_action: 'SonataMediaBundle:Media:liipImagineFilter'
             filters:
                 relative_resize: {heighten: 32 }
+
+        default_profile:
+            quality: 70
+            controller_action: 'SonataMediaBundle:Media:liipImagineFilter'
+            filters:
+                relative_resize: { widen: 200 }

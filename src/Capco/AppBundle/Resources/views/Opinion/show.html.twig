@@ -19,19 +19,19 @@
             {% set nbSources = (opinion.sourcesCount) %}
             <div class="col-xs-12  col-sm-8  col-md-9 has-chart" id="details" data-ok="{{ opinion.voteCountOk }}" data-nok="{{ opinion.voteCountNok }}" data-mitige="{{ opinion.voteCountMitige }}" data-opinion-id="{{ opinion.id }}">
                 <div class="block  block--shadowed  opinion__details">
-                    <div class="opinion  opinion--{{ app.request.attributes.get('opinionType').color }}  opinion--current">
+                    <div class="opinion  opinion--{{ opinion.opinionType.color }}  opinion--current">
                         <div class="opinion__header  opinion__header--centered">
                             <a class="neutral-hover  pull-left  h4" href="{% if opinion.isTrashed %}{{ path('app_consultation_show_trashed', {'consultation_slug': consultation.slug,}) }}{% else %}{{ path('app_consultation_show_opinions', {'consultation_slug': consultation.slug, 'opinion_type_slug': app.request.attributes.get('opinion_type_slug')}) }}{% endif %}"><i class="cap cap-arrow-1"></i><span class="hidden-xs  hidden-sm"> Retour</span></a>
-                            <p class="h4  opinion__header__title">{{ app.request.attributes.get('opinionType').slug|capitalize }} </p>
+                            <p class="h4  opinion__header__title">{{ opinion.opinionType.slug|capitalize }} </p>
                         </div>
                         <div class="opinion__body  box">
                             {% if opinion.Author.Media %}
-                                <a class="pull-left" href="#">
-                                    {% thumbnail opinion.Author.Media, 'avatar' with {'title': opinion.Author.fullname, 'alt': opinion.Author.fullname, 'class': 'img-circle  pull-left'} %}
+                                <a class="pull-left" href="{{ path('capco_user_profile_show_all', {'username': opinion.Author}) }}">
+                                    {% thumbnail opinion.Author.Media, 'avatar' with {'title': opinion.Author.username, 'alt': opinion.Author.username, 'class': 'img-circle  pull-left'} %}
                                 </a>
                             {% endif %}
                             <div class="opinion__data">
-                                <p class="opinion__user  h5"><a href="#">{{ opinion.Author.username }}</a> <span class="pull-right  excerpt">{{ opinion.createdAt | localizeddate('medium', 'none', app.request.locale) }}</span></p>
+                                <p class="opinion__user  h5"><a href="{{ path('capco_user_profile_show_all', {'username': opinion.Author}) }}">{{ opinion.Author.username }}</a> <span class="pull-right  excerpt">{{ opinion.createdAt | localizeddate('medium', 'none', app.request.locale) }}</span></p>
                                 <p class="opinion__title">{{ opinion.title }}</p>
                                 <p class="opinion__votes  excerpt h5">
                                     {% transchoice nbVotes with {'%count%': nbVotes} from 'CapcoAppBundle' %}
@@ -79,7 +79,7 @@
                                 {% endif %}
 
                                 {% if app.user is not null and app.user == opinion.Author %}
-                                <a href="{{ path('app_consultation_edit_opinion' ,{'consultation_slug': consultation.slug, 'opinion_type_slug': app.request.attributes.get('opinionType').slug, 'opinion_slug': opinion.slug } ) }}" class="btn  btn-dark-gray  btn--outline"><i class="cap cap-pencil-1"></i> Modifier</a>
+                                <a href="{{ path('app_consultation_edit_opinion' ,{'consultation_slug': consultation.slug, 'opinion_type_slug': opinion.opinionType.slug, 'opinion_slug': opinion.slug } ) }}" class="btn  btn-dark-gray  btn--outline"><i class="cap cap-pencil-1"></i> Modifier</a>
                                 {% endif %}
                             </div>
                         </div> <!-- .opinion__buttons -->
@@ -95,8 +95,8 @@
                                         {% for source in sources %}
                                             <div class="media" id="source{{ source.id }}">
                                                 {% if source.Author.Media %}
-                                                    <a class="pull-left media-middle" href="#">
-                                                        {% thumbnail source.Author.Media, 'avatar_source' with {'title': source.Author.fullname, 'alt': source.Author.fullname, 'class': 'img-circle  pull-left'} %}
+                                                    <a class="pull-left media-middle" href="{{ path('capco_user_profile_show_all', {'username': source.Author}) }}">
+                                                        {% thumbnail source.Author.Media, 'avatar_source' with {'title': source.Author.username, 'alt': source.Author.username, 'class': 'img-circle  pull-left'} %}
                                                     </a>
                                                 {% endif %}
                                                 <div class="media-body">
@@ -139,7 +139,6 @@
                         </div> <!-- .panel-group -->
                     </div> <!-- .opinion__description -->
                 </div>
-
                 <div class="row">
                     <div class="col-sm-12  col-md-6">
                         {% if app.user is not null %}
@@ -147,7 +146,7 @@
                             {% set form = argumentFormYes %}
                             {% include '@CapcoApp/Argument/create.html.twig' %}
                         {% endif %}
-                        {{ render(controller('CapcoAppBundle:Argument:showArguments', {'consultation': consultation, 'opinionType': app.request.attributes.get('opinionType'), 'opinion': opinion, 'type': 1, 'form': sortArgumentsForm, 'argumentSort': argumentSort})) }}
+                        {{ render(controller('CapcoAppBundle:Argument:showArguments', {'consultation': consultation, 'opinionType': opinionType, 'opinion': opinion, 'type': 1, 'form': sortArgumentsForm, 'argumentSort': argumentSort})) }}
                     </div>
                     <div class="col-sm-12  col-md-6">
                         {% if app.user is not null %}
@@ -155,7 +154,7 @@
                             {% set form = argumentFormNo %}
                             {% include '@CapcoApp/Argument/create.html.twig' %}
                         {% endif %}
-                        {{ render(controller('CapcoAppBundle:Argument:showArguments', {'consultation': consultation, 'opinionType': app.request.attributes.get('opinionType'), 'opinion': opinion, 'type': 0, 'form': sortArgumentsForm, 'argumentSort': argumentSort})) }}
+                        {{ render(controller('CapcoAppBundle:Argument:showArguments', {'consultation': consultation, 'opinionType': opinionType, 'opinion': opinion, 'type': 0, 'form': sortArgumentsForm, 'argumentSort': argumentSort})) }}
                     </div>
                 </div>
             </div> <!-- col-xs-12  col-sm-4  col-md-3 -->

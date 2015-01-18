@@ -1,0 +1,31 @@
+{% if ideas|length > 0 %}
+    {% for idea in ideas %}
+        <div class="col-xs-12  col-sm-6  col-md-4  col-lg-3">
+            <div class="media  media--macro  block  block--shadowed">
+                {% if idea.Author and idea.Author.Media %}
+                    <a class="pull-left" href="{{ path('capco_user_profile_show_all', {'username': idea.Author}) }}">
+                        {% thumbnail idea.Author.Media, 'avatar' with {'title': idea.Author.username, 'alt': idea.Author.username, 'class': 'media-object img-circle'} %}
+                    </a>
+                {% endif %}
+                <div class="media-body">
+                    <p class="media-heading h5  media--macro__user"><a href="#">{{ idea.Author.username }}</a></p>
+                    <span class="excerpt h5">{{ idea.createdAt | localizeddate('long', 'none') }}</span>
+                </div>
+                <div class="media__content">
+                    <h4 class="h4"><a href="{{ path('app_idea_show', {'slug': idea.slug}) }}">{{ idea.title }}</a></h4>
+            <span class="excerpt  h5">
+                {% set voteCount = idea.voteCount %}
+                {% transchoice voteCount with {'%count%': voteCount} from 'CapcoAppBundle' %}
+                idea.show.votes
+                {% endtranschoice %}
+            </span>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+{% else %}
+    <div class="consultation__empty-block  text-center">
+        <p class="icon  cap-bubble-star-2"></p>
+        <p>{{ 'idea.none'|trans({}, 'CapcoAppBundle') }}</p>
+    </div>
+{% endif %}
