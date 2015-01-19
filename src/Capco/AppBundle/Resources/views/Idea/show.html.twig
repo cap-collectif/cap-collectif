@@ -5,7 +5,7 @@
 
 {% block body %}
     <div class="container">
-        <h1 class="h1">{% if idea.isTrashed %}<span class="label label-default">{{ 'idea.show.trashed.label'|trans({}, 'CapcoAppBundle') }}</span>{% endif %} {{ idea.title }}</h1>
+        <h1 class="h1"> {{ idea.title }}</h1>
         <div class="block">
             <div class="media">
                 {% if idea.Author and idea.Author.Media %}
@@ -14,7 +14,7 @@
                     </a>
                 {% endif %}
                 <div class="media-body">
-                    <p class="media--aligned  excerpt"><a href="{{ path('capco_user_profile_show_all', {'username': idea.Author}) }}">{{ idea.Author.username }}</a> dans <a href="{{ path('app_theme_show', {'slug': idea.Theme.slug}) }}">{{ idea.Theme.title }}</a> le {{ idea.createdAt | localizeddate('long', 'none') }}</p>
+                    <p class="media--aligned  excerpt"><a href="{{ path('capco_user_profile_show_all', {'username': idea.Author}) }}">{{ idea.Author.username }}</a> dans <a href="{{ path('app_theme_show', {'slug': idea.Theme.slug}) }}">{{ idea.Theme.title }}</a> le {{ idea.createdAt | localizeddate('long', 'none') }} {% if idea.isTrashed %}<span class="label label-default">{{ 'idea.show.trashed.label'|trans({}, 'CapcoAppBundle') }}</span>{% endif %}</p>
                 </div>
             </div>
         </div>
@@ -62,7 +62,19 @@
         {% endif %}
     </div>
 
-    {{ render_esi(controller('CapcoAppBundle:Idea:lastIdeas', {'max': 4, 'offset': 0})) }}
+    {% if idea.isTrashed == false %}
+        {{ render_esi(controller('CapcoAppBundle:Idea:lastIdeas', {'max': 4, 'offset': 0})) }}
+    {% endif %}
+
+    {% if idea.isTrashed == true and idea.trashedReason is not null %}
+        <div class="container">
+            <div class="row">
+                <h2>Motif de la modération</h2>
+                <p class="excerpt">le {{ idea.trashedAt | localizeddate('long', 'none') }}</p>
+                <p>{{ idea.trashedReason }}</p>
+            </div>
+        </div>
+    {% endif %}
 
 {% endblock %}
 
