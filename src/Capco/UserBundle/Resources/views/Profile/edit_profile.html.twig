@@ -1,10 +1,15 @@
 {% extends "CapcoUserBundle::layout.html.twig" %}
 
-{% block sonata_profile_title %}
-    {{ "title_user_account" | trans({}, 'SonataUserBundle')}} - {{ "title_user_edit_profile" | trans({}, 'SonataUserBundle')}}
+{% block title %} {{ parent() }} - {{ "user.profile.show.jumbotron" | trans({}, 'CapcoAppBundle')}} {% endblock %}
+
+{% block jumbotron %}
+    <div class="jumbotron  jumbotron--custom  jumbotron--bg-1  text-center">
+        <div class="container">
+            <h1 class="h2  h--no-border">{{ "user.profile.show.jumbotron" | trans({}, 'CapcoAppBundle')}}</h1>
+        </div>
+    </div>
 {% endblock %}
 
-{% block title %} Paramètre {% endblock %}
 
 {% block fos_user_content %}
     <div class="container">

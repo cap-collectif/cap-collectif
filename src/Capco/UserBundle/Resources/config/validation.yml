@@ -1,6 +1,17 @@
 Capco\UserBundle\Entity\User:
   properties:
+    username:
+      - Notblank: ~
+      - Length:
+          min: 2
+          max: 20
+          minMessage: "Votre nom doit faire au moins {{ limit }} caractères"
+          maxMessage: "Votre nom ne peut pas être plus long que {{ limit }} caractères"
     isTermsAccepted:
       - NotNull: ~
       - "True": { message: capco_user.register.terms.not_checked }
-
+    email:
+      - Notblank: ~
+      - Email:
+          message: "'{{ value }}' n'est pas un email valide."
+          checkMX: true

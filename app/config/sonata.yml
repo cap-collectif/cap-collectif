@@ -178,6 +178,8 @@ sonata_user:
         register:
             form:
                 type: capco_user_registration
+                validation_groups:
+                    - Default
     admin:
         user:
             class: Capco\AdminBundle\Admin\UserAdmin
