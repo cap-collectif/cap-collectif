@@ -120,7 +120,9 @@ class Source
     private $Media;
 
     /**
-     * @var int
+     * @var integer
+     *
+     * @ORM\Column(name="type", type="integer")
      */
     private $type;
 
