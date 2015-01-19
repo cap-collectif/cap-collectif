@@ -7,7 +7,7 @@
                 <h4 class="pull-left  h4  opinion__header__title"> {{ block.title }} <span class="badge">{{ block.Opinions|length }}</span></h4>
                 <div class="pull-right  opinion__header__filter">
                     {% if block.isEnabled == true and consultation.canContribute %}
-                        <a href="{{ path('app_consultation_new_opinion' ,{'consultation_slug': consultation.slug, 'opinion_type_slug': block.slug} ) }}" class="btn  btn-default">
+                        <a href="{{ path('app_consultation_new_opinion' ,{'consultationSlug': consultation.slug, 'opinionTypeSlug': block.slug} ) }}" class="btn  btn-default">
                             <i class="cap cap-add-1"></i>
                             <span class="hidden-xs  hidden-sm"> Proposer</span>
                         </a>
@@ -31,7 +31,7 @@
                             {% endif %}
                             <div class="opinion__data">
                                 <p class="opinion__user  h5"><a href="{{ path('capco_user_profile_show_all', {'username': opinion.Author}) }}">{{ opinion.Author.username }}</a> <span class="pull-right  excerpt">{{ opinion.createdAt | localizeddate('medium', 'none', app.request.locale) }}</span></p>
-                                <p class="opinion__title"><a href="{{ path('app_consultation_show_opinion', {'consultation_slug': consultation.slug, 'opinion_type_slug': block.slug, 'opinion_slug': opinion.slug}) }}">{{ opinion.title }}</a> </p>
+                                <p class="opinion__title"><a href="{{ path('app_consultation_show_opinion', {'consultationSlug': consultation.slug, 'opinionTypeSlug': block.slug, 'opinionSlug': opinion.slug}) }}">{{ opinion.title }}</a> </p>
                                 <p class="opinion__votes  excerpt h5">
                                     {% transchoice nbVotes with {'%count%': nbVotes} from 'CapcoAppBundle' %}
                                     consultation.show.votes

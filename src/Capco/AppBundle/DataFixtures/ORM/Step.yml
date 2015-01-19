@@ -1,10 +1,10 @@
 Capco\AppBundle\Entity\Step:
     step1:
         title: <sentence(3)>
-        isEnabled: <boolean()>
-        type: <numberBetween(0, 1)>
+        isEnabled: true
+        type: 1
         startAt: <dateTimeBetween('-1 years','now')>
-        endAt: <dateTimeBetween('-10 days','now')>
+        endAt: <dateTimeBetween('now','+1 years')>
         position: <numberBetween(1, 10)>
         consultation: @cs1
         body: <text(1000)>

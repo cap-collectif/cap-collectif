@@ -39,7 +39,7 @@ class ArgumentController extends Controller
 
         $arguments = $this->getDoctrine()
             ->getRepository('CapcoAppBundle:Argument')
-            ->getEnabledArgumentsByTypeAndOpinionWithSort($type, $opinion, $argumentSort);
+            ->getByTypeAndOpinionOrdered($type, $opinion, $argumentSort);
 
         $reportingArgument = $this->getDoctrine()->getRepository('CapcoAppBundle:Reporting')->findBy(array(
             'Reporter' => $this->getUser(),
@@ -59,27 +59,34 @@ class ArgumentController extends Controller
     }
 
     /**
-     * @Route("/consultation/{consultation_slug}/{opinion_type_slug}/{opinion_slug}/argument/vote/{argument_id}", name="app_consultation_vote_argument")
-     * @ParamConverter("consultation", class="CapcoAppBundle:Consultation", options={"mapping": {"consultation_slug": "slug"}})
-     * @ParamConverter("opinionType", class="CapcoAppBundle:OpinionType", options={"mapping": {"opinion_type_slug": "slug"}})
-     * @ParamConverter("opinion", class="CapcoAppBundle:Opinion", options={"mapping": {"opinion_slug": "slug"}})
-     * @ParamConverter("argument", class="CapcoAppBundle:Argument", options={"mapping": {"argument_id": "id"}})
+     * @Route("/consultation/{consultationSlug}/opinions/{opinionTypeSlug}/{opinionSlug}/arguments/{argumentId}/vote", name="app_consultation_vote_argument")
      *
      * @param $request
-     * @param $consultation
-     * @param $opinionType
-     * @param $opinion
-     * @param $argument
+     * @param $consultationSlug
+     * @param $opinionTypeSlug
+     * @param $opinionSlug
+     * @param $argumentId
      * @return array
      */
-    public function voteOnArgumentAction(Consultation $consultation, OpinionType $opinionType, Opinion $opinion, Argument $argument, Request $request)
+    public function voteOnArgumentAction($consultationSlug, $opinionTypeSlug, $opinionSlug, $argumentId, Request $request)
     {
         if (false === $this->get('security.authorization_checker')->isGranted('ROLE_USER')) {
             throw new AccessDeniedException($this->get('translator')->trans('Access restricted to authenticated users'));
         }
+
+        $argument = $this->getDoctrine()->getRepository('CapcoAppBundle:Argument')->getOneById($consultationSlug, $opinionTypeSlug, $opinionSlug, $argumentId);
+
+        if($argument == null){
+            throw $this->createNotFoundException($this->get('translator')->trans('Argument not found.'));
+        }
+
         if (false == $argument->canContribute()) {
             throw new AccessDeniedException($this->get('translator')->trans('Access restricted'));
         }
+
+        $opinion = $argument->getOpinion();
+        $opinionType = $opinion->getOpinionType();
+        $consultation = $opinion->getConsultation();
 
         $user = $this->getUser();
 
@@ -123,33 +130,39 @@ class ArgumentController extends Controller
             }
         }
 
-        return $this->redirect($this->generateUrl('app_consultation_show_opinion', ['consultation_slug' => $consultation->getSlug(), 'opinion_type_slug' => $opinionType->getSlug(), 'opinion_slug' => $opinion->getSlug() ]));
+        return $this->redirect($this->generateUrl('app_consultation_show_opinion', ['consultationSlug' => $consultation->getSlug(), 'opinionTypeSlug' => $opinionType->getSlug(), 'opinionSlug' => $opinion->getSlug() ]));
     }
 
     /**
-     * @Route("/consultation/{consultation_slug}/{opinion_type_slug}/{opinion_slug}/argument/edit/{argument_id}", name="app_consultation_edit_argument")
-     * @ParamConverter("consultation", class="CapcoAppBundle:Consultation", options={"mapping": {"consultation_slug": "slug"}})
-     * @ParamConverter("opinionType", class="CapcoAppBundle:OpinionType", options={"mapping": {"opinion_type_slug": "slug"}})
-     * @ParamConverter("opinion", class="CapcoAppBundle:Opinion", options={"mapping": {"opinion_slug": "slug"}})
-     * @ParamConverter("argument", class="CapcoAppBundle:Argument", options={"mapping": {"argument_id": "id"}})
+     * @Route("/consultation/{consultationSlug}/opinions/{opinionTypeSlug}/{opinionSlug}/argument/{argumentId}/edit", name="app_consultation_edit_argument")
      * @Template("CapcoAppBundle:Argument:update.html.twig")
      *
      * @param $request
-     * @param $consultation
-     * @param $opinionType
-     * @param $opinion
-     * @param $argument
+     * @param $consultationSlug
+     * @param $opinionTypeSlug
+     * @param $opinionSlug
+     * @param $argumentId
      * @return array
      */
-    public function updateArgumentAction(Consultation $consultation, OpinionType $opinionType, Opinion $opinion, Argument $argument, Request $request)
+    public function updateArgumentAction($consultationSlug, $opinionTypeSlug, $opinionSlug, $argumentId, Request $request)
     {
         if (false === $this->get('security.authorization_checker')->isGranted('ROLE_USER')) {
             throw new AccessDeniedException($this->get('translator')->trans('Access restricted to authenticated users'));
         }
 
+        $argument = $this->getDoctrine()->getRepository('CapcoAppBundle:Argument')->getOneById($consultationSlug, $opinionTypeSlug, $opinionSlug, $argumentId);
+
+        if($argument == null){
+            throw $this->createNotFoundException($this->get('translator')->trans('Argument not found.'));
+        }
+
         if (false == $argument->canContribute()) {
             throw new AccessDeniedException($this->get('translator')->trans('Access restricted'));
         }
+
+        $opinion = $argument->getOpinion();
+        $opinionType = $opinion->getOpinionType();
+        $consultation = $opinion->getConsultation();
 
         $userCurrent = $this->getUser()->getId();
         $userPostArgument = $argument->getAuthor()->getId();
@@ -178,7 +191,7 @@ class ArgumentController extends Controller
                 $em->flush();
 
                 $this->get('session')->getFlashBag()->add('success', $this->get('translator')->trans('The argument has been edited'));
-                return $this->redirect($this->generateUrl('app_consultation_show_opinion', ['consultation_slug' => $consultation->getSlug(), 'opinion_type_slug' => $opinionType->getSlug(), 'opinion_slug' => $opinion->getSlug() ]));
+                return $this->redirect($this->generateUrl('app_consultation_show_opinion', ['consultationSlug' => $consultation->getSlug(), 'opinionTypeSlug' => $opinionType->getSlug(), 'opinionSlug' => $opinion->getSlug() ]));
             }
         }
 
@@ -192,28 +205,34 @@ class ArgumentController extends Controller
     }
 
     /**
-     * @Route("/consultation/{consultation_slug}/{opinion_type_slug}/{opinion_slug}/argument/delete/{argument_id}", name="app_consultation_delete_argument")
-     * @ParamConverter("consultation", class="CapcoAppBundle:Consultation", options={"mapping": {"consultation_slug": "slug"}})
-     * @ParamConverter("opinionType", class="CapcoAppBundle:OpinionType", options={"mapping": {"opinion_type_slug": "slug"}})
-     * @ParamConverter("opinion", class="CapcoAppBundle:Opinion", options={"mapping": {"opinion_slug": "slug"}})
-     * @ParamConverter("argument", class="CapcoAppBundle:Argument", options={"mapping": {"argument_id": "id"}})
+     * @Route("/consultation/{consultationSlug}/opinions/{opinionTypeSlug}/{opinionSlug}/arguments/{argumentId}/delete", name="app_consultation_delete_argument")
      * @Template("CapcoAppBundle:Argument:delete.html.twig")
      * @param $request
-     * @param $consultation
-     * @param $opinionType
-     * @param $opinion
-     * @param $argument
+     * @param $consultationSlug
+     * @param $opinionTypeSlug
+     * @param $opinionSlug
+     * @param $argumentId
      * @return array
      */
-    public function deleteArgumentAction(Consultation $consultation, OpinionType $opinionType, Opinion $opinion, Argument $argument, Request $request)
+    public function deleteArgumentAction($consultationSlug, $opinionTypeSlug, $opinionSlug, $argumentId, Request $request)
     {
         if (false === $this->get('security.authorization_checker')->isGranted('ROLE_USER')) {
             throw new AccessDeniedException($this->get('translator')->trans('Access restricted to authenticated users'));
         }
 
+        $argument = $this->getDoctrine()->getRepository('CapcoAppBundle:Argument')->getOneById($consultationSlug, $opinionTypeSlug, $opinionSlug, $argumentId);
+
+        if($argument == null){
+            throw $this->createNotFoundException($this->get('translator')->trans('Argument not found.'));
+        }
+
         if (false == $argument->canContribute()) {
             throw new AccessDeniedException($this->get('translator')->trans('Access restricted'));
         }
+
+        $opinion = $argument->getOpinion();
+        $opinionType = $opinion->getOpinionType();
+        $consultation = $opinion->getConsultation();
 
         $userCurrent = $this->getUser()->getId();
         $userPostArgument = $argument->getAuthor()->getId();
@@ -235,7 +254,7 @@ class ArgumentController extends Controller
                 $em->flush();
 
                 $this->get('session')->getFlashBag()->add('info', $this->get('translator')->trans('The argument has been deleted.'));
-                return $this->redirect($this->generateUrl('app_consultation_show_opinion', ['consultation_slug' => $consultation->getSlug(), 'opinion_type_slug' => $opinionType->getSlug(), 'opinion_slug' => $opinion->getSlug() ]));
+                return $this->redirect($this->generateUrl('app_consultation_show_opinion', ['consultationSlug' => $consultation->getSlug(), 'opinionTypeSlug' => $opinionType->getSlug(), 'opinionSlug' => $opinion->getSlug() ]));
             }
         }
 

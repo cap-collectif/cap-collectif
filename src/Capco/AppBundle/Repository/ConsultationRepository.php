@@ -18,64 +18,42 @@ use Doctrine\Common\Collections\Collection;
  */
 class ConsultationRepository extends EntityRepository
 {
-    public function findEnabledByTheme($theme)
+
+    /**
+     * Get one by slug
+     * @return mixed
+     */
+    public function getOne($slug)
     {
-        $qb = $this->createQueryBuilder('c')
+        $qb = $this->getIsEnabledQueryBuilder('c')
+            ->leftJoin('c.Themes', 't')
+            ->addSelect('t')
+            ->leftJoin('c.Steps', 's')
+            ->addSelect('s')
             ->leftJoin('c.Cover', 'cov')
             ->addSelect('cov')
-            ->leftJoin('c.Themes' , 't')
-            ->addSelect('t')
-            ->andWhere(':theme MEMBER OF c.Themes')
-            ->setParameter('theme', $theme)
-            ->orderBy('c.createdAt', 'DESC');
-
-        $qb = $this->whereIsEnabled($qb);
+            ->leftJoin('c.Opinions', 'o')
+            ->addSelect('o')
+            ->andWhere('c.slug = :slug')
+            ->setParameter('slug', $slug)
+            ->addOrderBy('o.createdAt', 'DESC');
 
         return $qb
             ->getQuery()
-            ->execute();
+            ->getOneOrNullResult();
     }
 
-    protected function getIsEnabledQueryBuilder()
-    {
-        return $this->createQueryBuilder('c')
-            ->andWhere('c.isEnabled = :isEnabled')
-            ->setParameter('isEnabled', true);
-    }
-
-    public function getLast($limit = 1, $offset = 0)
-    {
-
-        $qb = $this->getQBAll();
-
-        $qb = $this->whereIsEnabled($qb);
-
-        if ($limit) {
-            $qb->setMaxResults($limit);
-        }
-
-        if ($offset) {
-            $qb->setFirstResult($offset);
-        }
-
-        return new Paginator($qb, $fetchJoin = true);
-    }
-
-
-    public function getLastOpen($limit = 1, $offset = 0)
-    {
-        $result = $this->getLast($limit, $offset);
-
-        return $this->getOpenedOnly($result);
-    }
-
-    public function getSearchResultsWithTheme($nbByPage = 8, $page = 1, $theme = null, $sort = null, $term = null)
+    /**
+     * Get search results
+     * @return mixed
+     */
+    public function getSearchResults($nbByPage = 8, $page = 1, $theme = null, $sort = null, $term = null)
     {
         if ((int) $page < 1) {
             throw new \InvalidArgumentException(sprintf(
-                    'The argument "page" cannot be lower than 1 (current value: "%s")',
-                    $page
-                ));
+                'The argument "page" cannot be lower than 1 (current value: "%s")',
+                $page
+            ));
         }
 
         $qb = $this->getIsEnabledQueryBuilder()
@@ -87,8 +65,6 @@ class ConsultationRepository extends EntityRepository
             ->addSelect('cov')
             ->addOrderBy('c.createdAt', 'DESC')
         ;
-
-        $qb = $this->whereIsEnabled($qb);
 
         if ($theme !== null && $theme !== Theme::FILTER_ALL) {
             $qb->andWhere('t.slug = :theme')
@@ -118,49 +94,72 @@ class ConsultationRepository extends EntityRepository
         return new Paginator($query);
     }
 
-    public function getFirstResultWithCover($slug)
+    /**
+     * Get last consultations
+     * @return mixed
+     */
+    public function getLast($limit = 1, $offset = 0)
     {
-        $qb = $this->getIsEnabledQueryBuilder('c')
-            ->leftJoin('c.Cover', 'cov')
-            ->addSelect('cov')
-            ->leftJoin('c.Opinions', 'o')
-            ->addSelect('o')
-            ->andWhere('c.isEnabled = :enabled')
-            ->setParameter('enabled', true)
-            ->addOrderBy('o.createdAt', 'DESC')
-            ->andWhere('c.slug = :slug')
-            ->setParameter('slug', $slug);
-
-        return $qb
-            ->getQuery()
-            ->getOneOrNullResult();
-    }
-
-    private function getQBAll(){
-
-        $qb = $this->createQueryBuilder('c')
+        $qb = $this->getIsEnabledQueryBuilder()
             ->leftJoin('c.Themes', 't')
             ->addSelect('t')
             ->leftJoin('c.Steps', 's')
             ->addSelect('s')
             ->leftJoin('c.Cover', 'cov')
             ->addSelect('cov')
-            ->addOrderBy('c.createdAt', 'DESC')
-        ;
+            ->addOrderBy('c.createdAt', 'DESC');
 
-        return $qb;
+        if ($limit) {
+            $qb->setMaxResults($limit);
+        }
+
+        if ($offset) {
+            $qb->setFirstResult($offset);
+        }
+
+        return new Paginator($qb, $fetchJoin = true);
     }
 
-
-
-    private function whereIsEnabled(QueryBuilder $qb)
+    /**
+     * Get last open consultations
+     * @return mixed
+     */
+    public function getLastOpen($limit = 1, $offset = 0)
     {
-        $qb->andWhere('c.isEnabled = :enabled')
-            ->setParameter('enabled', true);
-        return $qb;
+        $result = $this->getLast($limit, $offset);
+
+        return $this->getOpenOnly($result);
     }
 
-    private function getOpenedOnly($array){
+    /**
+     * Get consultations by theme
+     * @param theme
+     * @return mixed
+     */
+    public function getByTheme($theme)
+    {
+        $qb = $this->getIsEnabledQueryBuilder()
+            ->leftJoin('c.Cover', 'cov')
+            ->addSelect('cov')
+            ->leftJoin('c.Themes' , 't')
+            ->addSelect('t')
+            ->andWhere(':theme MEMBER OF c.Themes')
+            ->setParameter('theme', $theme)
+            ->orderBy('c.createdAt', 'DESC');
+
+        return $qb
+            ->getQuery()
+            ->execute();
+    }
+
+    protected function getIsEnabledQueryBuilder()
+    {
+        return $this->createQueryBuilder('c')
+            ->andWhere('c.isEnabled = :isEnabled')
+            ->setParameter('isEnabled', true);
+    }
+
+    private function getOpenOnly($array){
         $result = array();
         foreach ($array as $c) {
             if($c->getOpeningStatus() == Consultation::OPENING_STATUS_OPENED){
@@ -169,20 +168,5 @@ class ConsultationRepository extends EntityRepository
         }
         return $result;
     }
-
-//    protected function getIsEnabledAndTrasedByUserQueryBuilder()
-//    {
-//        return $this->createQueryBuilder('c')
-//            ->andWhere('s.isEnabled = :enabledSource')
-//            ->setParameter('enabledSource', true)
-//            ->andWhere('s.isTrashed = :trashed')
-//            ->setParameter('trashed', false)
-//            ->andWhere('o.isEnabled = :enabledOpi')
-//            ->setParameter('enabledOpi', true)
-//            ->andWhere('o.isTrashed = :trashedOpi')
-//            ->setParameter('trashedOpi', false)
-//            ->andWhere('c.isEnabled = :isEnabled')
-//            ->setParameter('isEnabled', true);
-//    }
 
 }

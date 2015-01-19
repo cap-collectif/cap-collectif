@@ -126,7 +126,7 @@ Capco\AppBundle\Entity\Opinion:
         isTrashed: <boolean(30)>
         trashedReason: <text(100)>
         Author: @user*
-        Consultation: @cs<numberBetween(1,5)>
+        Consultation: @cs1
         OpinionType: @opinionType<numberBetween(1, 5)>
         createdAt: <dateTimeBetween('-1 years','+10 days')>
         voteCountMitige: <numberBetween(0, 50)>

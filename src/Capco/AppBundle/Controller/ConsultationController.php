@@ -72,7 +72,7 @@ class ConsultationController extends Controller
             $pagination = (int)$pagination;
         }
 
-        $consultations = $em->getRepository('CapcoAppBundle:Consultation')->getSearchResultsWithTheme($pagination, $page, $theme, $sort, $term);
+        $consultations = $em->getRepository('CapcoAppBundle:Consultation')->getSearchResults($pagination, $page, $theme, $sort, $term);
 
         //Avoid division by 0 in nbPage calculation
         $nbPage = 1;
@@ -117,7 +117,7 @@ class ConsultationController extends Controller
     public function showAction(Consultation $consultation)
     {
         $em = $this->getDoctrine()->getManager();
-        $consultation = $em->getRepository('CapcoAppBundle:Consultation')->getFirstResultWithCover($consultation->getSlug());
+        $consultation = $em->getRepository('CapcoAppBundle:Consultation')->getOne($consultation->getSlug());
 
         if (false == $consultation->canDisplay() ) {
             throw $this->createNotFoundException();
@@ -137,13 +137,12 @@ class ConsultationController extends Controller
      */
     public function showNavOpinionTypesAction(Consultation $consultation, $type)
     {
-        $consultationCurrent = $consultation->getSlug();
-        $opinionsTypes = $this->getDoctrine()->getRepository('CapcoAppBundle:OpinionType')->findAllByPosition();
+        $opinionTypes = $this->getDoctrine()->getRepository('CapcoAppBundle:OpinionType')->findAllByPosition();
 
         return [
-            'opinionsTypes' => $opinionsTypes,
+            'opinionTypes' => $opinionTypes,
             'opinionTypeCurrent' => $type,
-            'consultationCurrent' => $consultationCurrent
+            'consultation' => $consultation,
         ];
     }
 
@@ -163,23 +162,28 @@ class ConsultationController extends Controller
     }
 
     /**
-     * @Route("/consultation/{consultation_slug}/opinions/{opinion_type_slug}/{page}", name="app_consultation_show_opinions", requirements={"page" = "\d+"}, defaults={"page" = 1})
-     * @ParamConverter("consultation", class="CapcoAppBundle:Consultation", options={"mapping": {"consultation_slug": "slug"}})
-     * @ParamConverter("opiniontype", class="CapcoAppBundle:OpinionType", options={"mapping": {"opinion_type_slug": "slug"}})
+     * @Route("/consultation/{consultationSlug}/opinions/{opinionTypeSlug}/{page}", name="app_consultation_show_opinions", requirements={"page" = "\d+"}, defaults={"page" = 1})
+     * @ParamConverter("consultation", class="CapcoAppBundle:Consultation", options={"mapping": {"consultationSlug": "slug"}})
+     * @ParamConverter("opinionType", class="CapcoAppBundle:OpinionType", options={"mapping": {"opinionTypeSlug": "slug"}})
      * @Template("CapcoAppBundle:Consultation:show_by_type.html.twig")
      * @param Consultation $consultation
      * @param OpinionType $opiniontype
      * @param $page
      * @return array
      */
-    public function showByTypeAction(Consultation $consultation, OpinionType $opiniontype, $page)
+    public function showByTypeAction(Consultation $consultation, OpinionType $opinionType, $page)
     {
-        $currentUrl = $this->generateUrl('app_consultation_show_opinions', ['consultation_slug' => $consultation->getSlug(), 'opinion_type_slug' => $opiniontype->getSlug() ]);
-        $opinions = $this->getDoctrine()->getRepository('CapcoAppBundle:Opinion')->getEnabledOpinionsByOpinionTypeAndConsultation($consultation, $opiniontype, 10, $page);
+        if (false == $consultation->canDisplay() ) {
+            throw $this->createNotFoundException();
+        }
+
+        $currentUrl = $this->generateUrl('app_consultation_show_opinions', ['consultationSlug' => $consultation->getSlug(), 'opinionTypeSlug' => $opinionType->getSlug() ]);
+        $opinions = $this->getDoctrine()->getRepository('CapcoAppBundle:Opinion')->getByOpinionTypeAndConsultation($consultation, $opinionType, 10, $page);
 
         return [
             'currentUrl' => $currentUrl,
             'consultation' => $consultation,
+            'opinionType' => $opinionType,
             'opinions' => $opinions,
             'page' => $page,
             'nbPage' => ceil(count($opinions) / 10),
@@ -187,17 +191,21 @@ class ConsultationController extends Controller
     }
 
     /**
-     * @Route("/consultation/{consultation_slug}/trashed", name="app_consultation_show_trashed")
-     * @ParamConverter("consultation", class="CapcoAppBundle:Consultation", options={"mapping": {"consultation_slug": "slug"}})
+     * @Route("/consultation/{consultationSlug}/trashed", name="app_consultation_show_trashed")
+     * @ParamConverter("consultation", class="CapcoAppBundle:Consultation", options={"mapping": {"consultationSlug": "slug"}})
      * @Template("CapcoAppBundle:Consultation:show_trashed.html.twig")
      * @param Consultation $consultation
      * @return array
      */
     public function showTrashedAction(Consultation $consultation)
     {
-        $opinions = $this->getDoctrine()->getRepository('CapcoAppBundle:Opinion')->getTrashedOpinionsByConsultation($consultation);
-        $arguments = $this->getDoctrine()->getRepository('CapcoAppBundle:Argument')->getTrashedArgumentsByConsultation($consultation);
-        $sources = $this->getDoctrine()->getRepository('CapcoAppBundle:Source')->getTrashedSourcesByConsultation($consultation);
+        if (false == $consultation->canDisplay() ) {
+            throw $this->createNotFoundException();
+        }
+
+        $opinions = $this->getDoctrine()->getRepository('CapcoAppBundle:Opinion')->getTrashedByConsultation($consultation);
+        $arguments = $this->getDoctrine()->getRepository('CapcoAppBundle:Argument')->getTrashedByConsultation($consultation);
+        $sources = $this->getDoctrine()->getRepository('CapcoAppBundle:Source')->getTrashedByConsultation($consultation);
 
         return [
             'consultation' => $consultation,

@@ -22,34 +22,32 @@ class SourceController extends Controller
 {
 
     /**
-     * @Route("/{opinion_slug}/sources/add", name="app_new_source")
-     * @ParamConverter("opinion", class="CapcoAppBundle:Opinion", options={"mapping": {"opinion_slug": "slug"}})
-     * @param $opinion
+     * @Route("/consultation/{consultationSlug}/opinions/{opinionTypeSlug}/{opinionSlug}/sources/add", name="app_new_source")
+     * @param $consultationSlug
+     * @param $opinionTypeSlug
+     * @param $opinionSlug
      * @param $request
      * @Template("CapcoAppBundle:Source:create.html.twig")
      * @return array
      */
-    public function createSourceAction(Opinion $opinion, Request $request)
+    public function createSourceAction($consultationSlug, $opinionTypeSlug, $opinionSlug, Request $request)
     {
         if (false === $this->get('security.authorization_checker')->isGranted('ROLE_USER')) {
             throw new AccessDeniedException($this->get('translator')->trans('Access restricted to authenticated users'));
         }
 
-        if (false == $opinion->getConsultation()->getIsEnabled()) {
+        $opinion = $this->getDoctrine()->getRepository('CapcoAppBundle:Opinion')->getOneBySlug($consultationSlug, $opinionTypeSlug, $opinionSlug);
+
+        if($opinion == null){
+            throw $this->createNotFoundException($this->get('translator')->trans('Argument not found.'));
+        }
+
+        if (false == $opinion->canContribute()) {
             throw new AccessDeniedException($this->get('translator')->trans('Access restricted'));
         }
 
-        if (Consultation::OPENING_STATUS_OPENED != $opinion->getConsultation()->getOpeningStatus()) {
-            throw new AccessDeniedException($this->get('translator')->trans('Access restricted'));
-        }
-
-        if (false == $opinion->getIsEnabled()) {
-            throw new AccessDeniedException($this->get('translator')->trans('Access restricted'));
-        }
-
-        if ($opinion->getIsTrashed()) {
-            throw new AccessDeniedException($this->get('translator')->trans('Access restricted'));
-        }
+        $opinionType = $opinion->getOpinionType();
+        $consultation = $opinion->getConsultation();
 
         $source = new Source();
         $source->setAuthor($this->getUser());
@@ -65,7 +63,7 @@ class SourceController extends Controller
                 $em->persist($source);
                 $em->flush();
                 $this->get('session')->getFlashBag()->add('success', $this->get('translator')->trans('Your source has been saved'));
-                return $this->redirect($this->generateUrl('app_consultation_show_opinion', ['consultation_slug' => $opinion->getConsultation()->getSlug(), 'opinion_type_slug' => $opinion->getOpinionType()->getSlug(), 'opinion_slug' => $opinion->getSlug() ]) . '#source' . $source->getId());
+                return $this->redirect($this->generateUrl('app_consultation_show_opinion', ['consultationSlug' => $consultation->getSlug(), 'opinionTypeSlug' => $opinionType->getSlug(), 'opinionSlug' => $opinion->getSlug() ]) . '#source' . $source->getId());
             }
         }
 
@@ -79,44 +77,34 @@ class SourceController extends Controller
     }
 
     /**
-     * @Route("/{opinion_slug}/sources/delete/{source_slug}", name="app_delete_source")
-     * @ParamConverter("source", class="CapcoAppBundle:Source", options={"mapping": {"source_slug": "slug"}})
-     * @ParamConverter("opinion", class="CapcoAppBundle:Opinion", options={"mapping": {"opinion_slug": "slug"}})
-     * @param $opinion
-     * @param $source
+     * @Route("/consultation/{consultationSlug}/opinions/{opinionTypeSlug}/{opinionSlug}/sources/{sourceSlug}/delete", name="app_delete_source")
+     * @param consultationSlug
+     * @param $opinionTypeSlug
+     * @param $opinionSlug
+     * @param $sourceSlug
      * @param $request
      * @Template("CapcoAppBundle:Source:delete.html.twig")
      * @return array
      */
-    public function deleteSourceAction(Opinion $opinion, Source $source, Request $request)
+    public function deleteSourceAction($consultationSlug, $opinionTypeSlug, $opinionSlug, $sourceSlug, Request $request)
     {
         if (false === $this->get('security.authorization_checker')->isGranted('ROLE_USER')) {
             throw new AccessDeniedException($this->get('translator')->trans('Access restricted to authenticated users'));
         }
 
-        if (false == $opinion->getConsultation()->getIsEnabled()) {
+        $source = $this->getDoctrine()->getRepository('CapcoAppBundle:Source')->getOneBySlug($consultationSlug, $opinionTypeSlug, $opinionSlug, $sourceSlug);
+
+        if($source == null){
+            throw $this->createNotFoundException($this->get('translator')->trans('Argument not found.'));
+        }
+
+        if (false == $source->canContribute()) {
             throw new AccessDeniedException($this->get('translator')->trans('Access restricted'));
         }
 
-        if (Consultation::OPENING_STATUS_OPENED != $opinion->getConsultation()->getOpeningStatus()) {
-            throw new AccessDeniedException($this->get('translator')->trans('Access restricted'));
-        }
-
-        if (false == $opinion->getIsEnabled()) {
-            throw new AccessDeniedException($this->get('translator')->trans('Access restricted'));
-        }
-
-        if ($opinion->getIsTrashed()) {
-            throw new AccessDeniedException($this->get('translator')->trans('Access restricted'));
-        }
-
-        if (false == $source->getIsEnabled()) {
-            throw new AccessDeniedException($this->get('translator')->trans('Access restricted'));
-        }
-
-        if ($source->getIsTrashed()) {
-            throw new AccessDeniedException($this->get('translator')->trans('Access restricted'));
-        }
+        $opinion = $source->getOpinion();
+        $opinionType = $opinion->getOpinionType();
+        $consultation = $opinion->getConsultation();
 
         $userCurrent = $this->getUser()->getId();
         $userPostSource = $source->getAuthor()->getId();
@@ -138,57 +126,48 @@ class SourceController extends Controller
                 $em->flush();
 
                 $this->get('session')->getFlashBag()->add('info', $this->get('translator')->trans('The source has been deleted'));
-                return $this->redirect($this->generateUrl('app_consultation_show_opinion', ['consultation_slug' => $opinion->getConsultation()->getSlug(), 'opinion_type_slug' => $opinion->getOpinionType()->getSlug(), 'opinion_slug' => $opinion->getSlug() ]));
+                return $this->redirect($this->generateUrl('app_consultation_show_opinion', ['consultationSlug' => $consultation->getSlug(), 'opinionTypeSlug' => $opinionType->getSlug(), 'opinionSlug' => $opinion->getSlug() ]));
             }
         }
 
         return array(
-            'consultation' => $opinion->getConsultation(),
-            'opinionType' => $opinion->getOpinionType(),
+            'consultation' => $consultation,
+            'opinionType' => $opinionType,
+            'opinion' => $opinion,
             'source' => $source,
             'form' => $form->createView()
         );
     }
 
     /**
-     * @Route("/{opinion_slug}/sources/{source_slug}", name="app_edit_source")
-     * @ParamConverter("source", class="CapcoAppBundle:Source", options={"mapping": {"source_slug": "slug"}})
-     * @ParamConverter("opinion", class="CapcoAppBundle:Opinion", options={"mapping": {"opinion_slug": "slug"}})
+     * @Route("/consultation/{consultationSlug}/opinions/{opinionTypeSlug}/{opinionSlug}/sources/{sourceSlug}/edit", name="app_edit_source")
      * @Template("CapcoAppBundle:Source:update.html.twig")
+     * @param consultationSlug
+     * @param $opinionTypeSlug
+     * @param $opinionSlug
+     * @param $sourceSlug
      * @param $request
-     * @param $source
-     * @param $opinion
      * @return array
      */
-    public function updateSourceAction(Opinion $opinion, Source $source, Request $request)
+    public function updateSourceAction($consultationSlug, $opinionTypeSlug, $opinionSlug, $sourceSlug, Request $request)
     {
         if (false === $this->get('security.authorization_checker')->isGranted('ROLE_USER')) {
             throw new AccessDeniedException($this->get('translator')->trans('Access restricted to authenticated users'));
         }
 
-        if (false == $opinion->getConsultation()->getIsEnabled()) {
+        $source = $this->getDoctrine()->getRepository('CapcoAppBundle:Source')->getOneBySlug($consultationSlug, $opinionTypeSlug, $opinionSlug, $sourceSlug);
+
+        if($source == null){
+            throw $this->createNotFoundException($this->get('translator')->trans('Argument not found.'));
+        }
+
+        if (false == $source->canContribute()) {
             throw new AccessDeniedException($this->get('translator')->trans('Access restricted'));
         }
 
-        if (Consultation::OPENING_STATUS_OPENED != $opinion->getConsultation()->getOpeningStatus()) {
-            throw new AccessDeniedException($this->get('translator')->trans('Access restricted'));
-        }
-
-        if (false == $opinion->getIsEnabled()) {
-            throw new AccessDeniedException($this->get('translator')->trans('Access restricted'));
-        }
-
-        if ($opinion->getIsTrashed()) {
-            throw new AccessDeniedException($this->get('translator')->trans('Access restricted'));
-        }
-
-        if (false == $source->getIsEnabled()) {
-            throw new AccessDeniedException($this->get('translator')->trans('Access restricted'));
-        }
-
-        if ($source->getIsTrashed()) {
-            throw new AccessDeniedException($this->get('translator')->trans('Access restricted'));
-        }
+        $opinion = $source->getOpinion();
+        $opinionType = $opinion->getOpinionType();
+        $consultation = $opinion->getConsultation();
 
         $userCurrent = $this->getUser()->getId();
         $userPostSource = $source->getAuthor()->getId();
@@ -229,13 +208,13 @@ class SourceController extends Controller
                 $em->flush();
 
                 $this->get('session')->getFlashBag()->add('success', $this->get('translator')->trans('The source has been edited'));
-                return $this->redirect($this->generateUrl('app_consultation_show_opinion', ['consultation_slug' => $opinion->getConsultation()->getSlug(), 'opinion_type_slug' => $opinion->getOpinionType()->getSlug(), 'opinion_slug' => $opinion->getSlug() ]) . '#source' . $source->getId());
+                return $this->redirect($this->generateUrl('app_consultation_show_opinion', ['consultationSlug' => $consultation->getSlug(), 'opinionTypeSlug' => $opinionType->getSlug(), 'opinionSlug' => $opinion->getSlug() ]) . '#source' . $source->getId());
             }
         }
 
         return [
-            'consultation' => $opinion->getConsultation(),
-            'opinionType' => $opinion->getOpinionType(),
+            'consultation' => $consultation,
+            'opinionType' => $opinionType,
             'opinion' => $opinion,
             'source' => $source,
             'form' => $form->createView(),
@@ -244,47 +223,33 @@ class SourceController extends Controller
     }
 
     /**
-     * @Route("/consultation/{consultation_slug}/{opinion_type_slug}/{opinion_slug}/source/vote/{source_id}", name="app_consultation_vote_source")
-     * @ParamConverter("consultation", class="CapcoAppBundle:Consultation", options={"mapping": {"consultation_slug": "slug"}})
-     * @ParamConverter("opinionType", class="CapcoAppBundle:OpinionType", options={"mapping": {"opinion_type_slug": "slug"}})
-     * @ParamConverter("opinion", class="CapcoAppBundle:Opinion", options={"mapping": {"opinion_slug": "slug"}})
-     * @ParamConverter("source", class="CapcoAppBundle:Source", options={"mapping": {"source_id": "id"}})
+     * @Route("/consultation/{consultationSlug}/opinions/{opinionTypeSlug}/{opinionSlug}/sources/{sourceSlug}/vote", name="app_consultation_vote_source")
+     * @param consultationSlug
+     * @param $opinionTypeSlug
+     * @param $opinionSlug
+     * @param $sourceSlug
      * @param $request
-     * @param $consultation
-     * @param $opinionType
-     * @param $opinion
-     * @param $source
      * @return array
      */
-    public function voteOnSourceAction(Consultation $consultation, OpinionType $opinionType, Opinion $opinion, Source $source, Request $request)
+    public function voteOnSourceAction($consultationSlug, $opinionTypeSlug, $opinionSlug, $sourceSlug, Request $request)
     {
         if (false === $this->get('security.authorization_checker')->isGranted('ROLE_USER')) {
             throw new AccessDeniedException($this->get('translator')->trans('Access restricted to authenticated users'));
         }
 
-        if (false == $opinion->getConsultation()->getIsEnabled()) {
+        $source = $this->getDoctrine()->getRepository('CapcoAppBundle:Source')->getOneBySlug($consultationSlug, $opinionTypeSlug, $opinionSlug, $sourceSlug);
+
+        if($source == null){
+            throw $this->createNotFoundException($this->get('translator')->trans('Argument not found.'));
+        }
+
+        if (false == $source->canContribute()) {
             throw new AccessDeniedException($this->get('translator')->trans('Access restricted'));
         }
 
-        if (Consultation::OPENING_STATUS_OPENED != $opinion->getConsultation()->getOpeningStatus()) {
-            throw new AccessDeniedException($this->get('translator')->trans('Access restricted'));
-        }
-
-        if (false == $opinion->getIsEnabled()) {
-            throw new AccessDeniedException($this->get('translator')->trans('Access restricted'));
-        }
-
-        if ($opinion->getIsTrashed()) {
-            throw new AccessDeniedException($this->get('translator')->trans('Access restricted'));
-        }
-
-        if (false == $source->getIsEnabled()) {
-            throw new AccessDeniedException($this->get('translator')->trans('Access restricted'));
-        }
-
-        if ($source->getIsTrashed()) {
-            throw new AccessDeniedException($this->get('translator')->trans('Access restricted'));
-        }
+        $opinion = $source->getOpinion();
+        $opinionType = $opinion->getOpinionType();
+        $consultation = $opinion->getConsultation();
 
         $user = $this->getUser();
 
@@ -328,6 +293,6 @@ class SourceController extends Controller
             }
         }
 
-        return $this->redirect($this->generateUrl('app_consultation_show_opinion', ['consultation_slug' => $consultation->getSlug(), 'opinion_type_slug' => $opinionType->getSlug(), 'opinion_slug' => $opinion->getSlug() ]));
+        return $this->redirect($this->generateUrl('app_consultation_show_opinion', ['consultationSlug' => $consultation->getSlug(), 'opinionTypeSlug' => $opinionType->getSlug(), 'opinionSlug' => $opinion->getSlug() ]));
     }
 }

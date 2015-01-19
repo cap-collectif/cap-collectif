@@ -15,7 +15,114 @@ use Doctrine\ORM\Tools\Pagination\Paginator;
  */
 class OpinionRepository extends EntityRepository
 {
-    public function getEnabledOpinionsByOpinionTypeAndConsultation($consultation, $opinionType, $nbByPage = 10, $page = 1)
+
+    /**
+     * Get one opinion by slug, opinion type and consultation
+     * @param $consultation
+     * @param $opinionType
+     * @param $opinion
+     */
+    public function getOneBySlug($consultation, $opinionType, $opinion)
+    {
+        $qb = $this->getIsEnabledQueryBuilder()
+            ->leftJoin('o.Author', 'a')
+            ->addSelect('a')
+            ->leftJoin('a.Media', 'm')
+            ->addSelect('m')
+            ->leftJoin('o.OpinionType', 'ot')
+            ->addSelect('ot')
+            ->leftJoin('o.Consultation', 'c')
+            ->addSelect('c')
+            ->andWhere('c.slug = :consultation')
+            ->setParameter('consultation', $consultation)
+            ->andWhere('ot.slug = :opinionType')
+            ->setParameter('opinionType', $opinionType)
+            ->andWhere('o.slug = :opinion')
+            ->setParameter('opinion', $opinion)
+        ;
+
+        return $qb->getQuery()
+            ->getOneOrNullResult();
+
+    }
+
+    /**
+     * Get all trashed opinions
+     * @param $consultation
+     */
+    public function getTrashedByConsultation($consultation)
+    {
+        $qb = $this->getIsEnabledQueryBuilder()
+            ->andWhere('o.isTrashed = :trashed')
+            ->setParameter('trashed', true)
+            ->leftJoin('o.OpinionType', 'ot')
+            ->addSelect('ot')
+            ->leftJoin('o.Consultation', 'c')
+            ->addSelect('c')
+            ->leftJoin('o.Author', 'aut')
+            ->addSelect('aut')
+            ->leftJoin('aut.Media', 'm')
+            ->addSelect('m')
+            ->andWhere('o.Consultation = :consultation')
+            ->setParameter('consultation', $consultation)
+            ->orderBy('o.trashedAt', 'DESC');
+
+        return $qb->getQuery()->getResult();
+
+    }
+
+    /**
+     * Get all opinions by user
+     * @param $user
+     */
+    public function getByUser($user)
+    {
+        $qb = $this->getIsEnabledQueryBuilder()
+            ->leftJoin('o.OpinionType', 'ot')
+            ->addSelect('ot')
+            ->leftJoin('o.Consultation', 'c')
+            ->addSelect('c')
+            ->leftJoin('o.Author', 'aut')
+            ->addSelect('aut')
+            ->leftJoin('aut.Media', 'm')
+            ->addSelect('m')
+            ->andWhere('c.isEnabled = :enabled')
+            ->setParameter('enabled', true)
+            ->andWhere('o.Author = :author')
+            ->setParameter('author', $user)
+            ->orderBy('o.createdAt', 'DESC');
+
+        return $qb->getQuery()->getResult();
+
+    }
+
+    /**
+     * Count opinions by user
+     * @param $user
+     * @return mixed
+     */
+    public function countByUser($user)
+    {
+        $qb = $this->getIsEnabledQueryBuilder()
+            ->select('COUNT(o) as totalOpinions')
+            ->leftJoin('o.Consultation', 'c')
+            ->andWhere('c.isEnabled = :enabledConsul')
+            ->setParameter('enabledConsul', true)
+            ->andWhere('o.isEnabled = :enabled')
+            ->setParameter('enabled', true)
+            ->andWhere('o.Author = :author')
+            ->setParameter('author', $user);
+
+        return $qb
+            ->getQuery()
+            ->getSingleScalarResult();
+    }
+
+    /**
+     * Get opinions by opinionType and consultation
+     * @return mixed
+     */
+    public function getByOpinionTypeAndConsultation($consultation, $opinionType, $nbByPage = 10, $page = 1)
     {
         if ((int) $page < 1) {
             throw new \InvalidArgumentException(sprintf(
@@ -24,9 +131,7 @@ class OpinionRepository extends EntityRepository
                 ));
         }
 
-        $qb = $this->createQueryBuilder('o')
-                ->andWhere('o.isEnabled = :enabled')
-                ->setParameter('enabled', true)
+        $qb = $this->getIsEnabledQueryBuilder()
                 ->andWhere('o.isTrashed = :notTrashed')
                 ->setParameter('notTrashed', false)
                 ->leftJoin('o.OpinionType', 'ot')
@@ -51,102 +156,11 @@ class OpinionRepository extends EntityRepository
 
     }
 
-    public function getTrashedOpinionsByConsultation($consultation)
+    protected function getIsEnabledQueryBuilder()
     {
-        $qb = $this->createQueryBuilder('o')
-            ->andWhere('o.isEnabled = :enabled')
-            ->setParameter('enabled', true)
-            ->andWhere('o.isTrashed = :trashed')
-            ->setParameter('trashed', true)
-            ->leftJoin('o.OpinionType', 'ot')
-            ->addSelect('ot')
-            ->leftJoin('o.Consultation', 'c')
-            ->addSelect('c')
-            ->leftJoin('o.Author', 'aut')
-            ->addSelect('aut')
-            ->leftJoin('aut.Media', 'm')
-            ->addSelect('m')
-            ->andWhere('o.Consultation = :consultation')
-            ->setParameter('consultation', $consultation)
-            ->orderBy('o.trashedAt', 'DESC');
-
-        return $qb->getQuery()->getResult();
-
-    }
-
-    public function getOpinionsByUser($user)
-    {
-        $qb = $this->createQueryBuilder('o')
-            ->leftJoin('o.OpinionType', 'ot')
-            ->addSelect('ot')
-            ->leftJoin('o.Consultation', 'c')
-            ->addSelect('c')
-            ->leftJoin('o.Author', 'aut')
-            ->addSelect('aut')
-            ->leftJoin('aut.Media', 'm')
-            ->addSelect('m')
-            ->andWhere('o.Author = :author')
-            ->setParameter('author', $user)
-            ->orderBy('o.createdAt', 'DESC');
-
-        return $qb->getQuery()->getResult();
-
-    }
-
-    /**
-     * Profil, count all opinions
-     * @param $user
-     * @return mixed
-     */
-    public function countOpinionsByUser($user)
-    {
-        $qb = $this->createQueryBuilder('o')
-            ->select('COUNT(o) as totalOpinions')
-            ->leftJoin('o.Consultation', 'c')
-            ->andWhere('c.isEnabled = :enabledConsul')
-            ->setParameter('enabledConsul', true)
-            ->andWhere('o.isEnabled = :enabled')
-            ->setParameter('enabled', true)
-            ->andWhere('o.isTrashed = :notTrashed')
-            ->setParameter('notTrashed', false)
-            ->andWhere('o.Author = :author')
-            ->setParameter('author', $user);
-
-        return $qb
-            ->getQuery()
-            ->getSingleScalarResult();
-    }
-
-
-
-    public function getOpinion($consultationSlug, $opinionTypeSlug, $opinionSlug)
-    {
-        $qb = $this->createQueryBuilder('o')
-                ->leftJoin('o.Author', 'a')
-                ->addSelect('a')
-                ->leftJoin('a.Media', 'm')
-                ->addSelect('m')
-                ->leftJoin('o.OpinionType', 'ot')
-                ->addSelect('ot')
-                ->leftJoin('o.Consultation', 'c')
-                ->addSelect('c')
-                ->andWhere('o.isEnabled = :enabled')
-                ->setParameter('enabled', true)
-                ->andWhere('o.isTrashed = :notTrashed')
-                ->setParameter('notTrashed', false)
-                ->andWhere('c.slug = :consultationSlug')
-                ->setParameter('consultationSlug', $consultationSlug)
-                ->andWhere('ot.slug = :opinionTypeSlug')
-                ->setParameter('opinionTypeSlug', $opinionTypeSlug)
-                ->andWhere('o.slug = :opinion')
-                ->setParameter('opinion', $opinionSlug)
-                ->andWhere('c.isEnabled = :enabled')
-                ->setParameter('enabled', true)
-                ;
-
-        return $qb->getQuery()
-            ->getOneOrNullResult();
-
+        return $this->createQueryBuilder('o')
+            ->andWhere('o.isEnabled = :isEnabled')
+            ->setParameter('isEnabled', true);
     }
 
 }

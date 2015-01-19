@@ -13,7 +13,10 @@ use Doctrine\ORM\Query;
  */
 class ArgumentRepository extends EntityRepository
 {
-    public function getEnabledArgumentsByTypeAndOpinionWithSort($type, $opinion, $argumentSort = null)
+    /**
+     * Get all enabled arguments by type and opinion, sorted by argumentSort
+     */
+    public function getByTypeAndOpinionOrdered($type, $opinion, $argumentSort = null)
     {
         $qb = $this->getIsEnabledQueryBuilder()
             ->leftJoin('a.opinion', 'o')
@@ -46,76 +49,50 @@ class ArgumentRepository extends EntityRepository
             ->getResult();
     }
 
-    public function getEnabledArgumentsByOpinion($opinion)
+    /**
+     * Get one argument by id, opinion, opinion type and consultation
+     */
+    public function getOneById($consultation, $opinionType, $opinion, $argument)
     {
         return $this->getIsEnabledQueryBuilder()
-            ->leftJoin('a.opinion', 'o')
-            ->addSelect('o')
-            ->leftJoin('o.Author', 'aut')
+
+            ->leftJoin('a.Author', 'aut')
             ->addSelect('aut')
             ->leftJoin('aut.Media', 'm')
             ->addSelect('m')
+
             ->leftJoin('a.Votes', 'v')
             ->addSelect('v')
-            ->andWhere('a.isTrashed = :notTrashed')
-            ->setParameter('notTrashed', false)
-            ->andWhere('a.opinion = :opinion')
+
+            ->andWhere('a.id = :argument')
+            ->setParameter('argument', $argument)
+
+            ->leftJoin('a.opinion', 'o')
+            ->addSelect('o')
+            ->andWhere('o.slug = :opinion')
             ->setParameter('opinion', $opinion)
+
+            ->leftJoin('o.Consultation', 'c')
+            ->addSelect('c')
+            ->andWhere('c.slug = :consultation')
+            ->setParameter('consultation', $consultation)
+
+            ->leftJoin('o.OpinionType', 'ot')
+            ->addSelect('ot')
+            ->andWhere('ot.slug = :opinionType')
+            ->setParameter('opinionType', $opinionType)
+
             ->getQuery()
-            ->getResult();
+            ->getOneOrNullResult();
+
     }
 
     /**
-     * Count all arguments
-     * @param $user
+     * Get all trashed arguments for consultation
+     * @param $consultation
      * @return mixed
      */
-    public function countArgumentsByUser($user)
-    {
-        $qb = $this->getIsEnabledQueryBuilder()
-            ->select('COUNT(a) as TotalArguments')
-            ->leftJoin('a.opinion', 'o')
-            ->leftJoin('o.Consultation', 'c')
-            ->andWhere('a.isTrashed = :notTrashed')
-            ->setParameter('notTrashed', false)
-            ->andWhere('a.Author = :author')
-            ->setParameter('author', $user)
-            ->andWhere('o.isEnabled = :enabled')
-            ->setParameter('enabled', true)
-            ->andWhere('c.isEnabled = :consultEnabled')
-            ->setParameter('consultEnabled', true);
-
-        return $qb
-            ->getQuery()
-            ->getSingleScalarResult();
-    }
-
-    public function getEnabledArgumentsByUser($user)
-    {
-        return $this->getIsEnabledQueryBuilder()
-            ->leftJoin('a.opinion', 'o')
-            ->addSelect('o')
-            ->leftJoin('o.Consultation', 'c')
-            ->addSelect('c')
-            ->leftJoin('o.Author', 'aut')
-            ->addSelect('aut')
-            ->leftJoin('aut.Media', 'm')
-            ->addSelect('m')
-            ->leftJoin('a.Votes', 'v')
-            ->addSelect('v')
-            ->andWhere('a.isTrashed = :notTrashed')
-            ->setParameter('notTrashed', false)
-            ->andWhere('a.Author = :author')
-            ->setParameter('author', $user)
-            ->andWhere('o.isEnabled = :enabled')
-            ->setParameter('enabled', true)
-            ->andWhere('c.isEnabled = :consultEnabled')
-            ->setParameter('consultEnabled', true)
-            ->getQuery()
-            ->getResult();
-    }
-
-    public function getTrashedArgumentsByConsultation($consultation)
+    public function getTrashedByConsultation($consultation)
     {
         return $this->getIsEnabledQueryBuilder()
             ->andWhere('a.isTrashed = :trashed')
@@ -134,6 +111,57 @@ class ArgumentRepository extends EntityRepository
             ->getQuery()
             ->getResult();
 
+    }
+
+    /**
+     * Count all arguments by user
+     * @param $user
+     * @return mixed
+     */
+    public function countByUser($user)
+    {
+        $qb = $this->getIsEnabledQueryBuilder()
+            ->select('COUNT(a) as TotalArguments')
+            ->leftJoin('a.opinion', 'o')
+            ->leftJoin('o.Consultation', 'c')
+            ->andWhere('a.Author = :author')
+            ->setParameter('author', $user)
+            ->andWhere('o.isEnabled = :enabled')
+            ->setParameter('enabled', true)
+            ->andWhere('c.isEnabled = :consultEnabled')
+            ->setParameter('consultEnabled', true);
+
+        return $qb
+            ->getQuery()
+            ->getSingleScalarResult();
+    }
+
+    /**
+     * Get all arguments by user
+     * @param $user
+     * @return mixed
+     */
+    public function getByUser($user)
+    {
+        return $this->getIsEnabledQueryBuilder()
+            ->leftJoin('a.opinion', 'o')
+            ->addSelect('o')
+            ->leftJoin('o.Consultation', 'c')
+            ->addSelect('c')
+            ->leftJoin('o.Author', 'aut')
+            ->addSelect('aut')
+            ->leftJoin('aut.Media', 'm')
+            ->addSelect('m')
+            ->leftJoin('a.Votes', 'v')
+            ->addSelect('v')
+            ->andWhere('a.Author = :author')
+            ->setParameter('author', $user)
+            ->andWhere('o.isEnabled = :enabled')
+            ->setParameter('enabled', true)
+            ->andWhere('c.isEnabled = :consultEnabled')
+            ->setParameter('consultEnabled', true)
+            ->getQuery()
+            ->getResult();
     }
 
     protected function getIsEnabledQueryBuilder()

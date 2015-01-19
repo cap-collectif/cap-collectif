@@ -97,7 +97,7 @@ class ThemeController extends Controller
      */
     public function themeConsultationsAction(Theme $theme = null)
     {
-        $consultations = $this->getDoctrine()->getRepository('CapcoAppBundle:Consultation')->findEnabledByTheme($theme->getId());
+        $consultations = $this->getDoctrine()->getRepository('CapcoAppBundle:Consultation')->getByTheme($theme->getId());
 
         return [
             'consultations' => $consultations,
@@ -113,7 +113,7 @@ class ThemeController extends Controller
      */
     public function themeIdeasAction(Theme $theme = null)
     {
-        $ideas = $this->getDoctrine()->getRepository('CapcoAppBundle:Idea')->findByTheme($theme->getId());
+        $ideas = $this->getDoctrine()->getRepository('CapcoAppBundle:Idea')->getByTheme($theme->getId());
 
         return [ 'ideas' => $ideas ];
     }

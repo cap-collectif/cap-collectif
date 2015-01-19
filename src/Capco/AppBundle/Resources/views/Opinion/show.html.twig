@@ -21,7 +21,7 @@
                 <div class="block  block--shadowed  opinion__details">
                     <div class="opinion  opinion--{{ opinion.opinionType.color }}  opinion--current">
                         <div class="opinion__header  opinion__header--centered">
-                            <a class="neutral-hover  pull-left  h4" href="{% if opinion.isTrashed %}{{ path('app_consultation_show_trashed', {'consultation_slug': consultation.slug,}) }}{% else %}{{ path('app_consultation_show_opinions', {'consultation_slug': consultation.slug, 'opinion_type_slug': app.request.attributes.get('opinion_type_slug')}) }}{% endif %}"><i class="cap cap-arrow-1"></i><span class="hidden-xs  hidden-sm"> Retour</span></a>
+                            <a class="neutral-hover  pull-left  h4" href="{% if opinion.isTrashed %}{{ path('app_consultation_show_trashed', {'consultationSlug': consultation.slug,}) }}{% else %}{{ path('app_consultation_show_opinions', {'consultationSlug': consultation.slug, 'opinionTypeSlug': opinionType.slug}) }}{% endif %}"><i class="cap cap-arrow-1"></i><span class="hidden-xs  hidden-sm"> Retour</span></a>
                             <p class="h4  opinion__header__title">{{ opinion.opinionType.slug|capitalize }} </p>
                         </div>
                         <div class="opinion__body  box">
@@ -74,40 +74,16 @@
                                 <div class="pull-right  opinion__action-buttons">
 
                                     {% if(userReportingOpinion == false) %}
-                                    <a href="{{ path('app_report_opinion' ,{'consultation_slug': consultation.slug, 'opinion_type_slug': opinionType.slug, 'opinion_slug': opinion.slug } ) }}" class="btn  btn-dark-gray  btn--outline"><i class="cap cap-flag-1"></i> Signaler</a>
+                                    <a href="{{ path('app_report_opinion' ,{'consultationSlug': consultation.slug, 'opinionTypeSlug': opinionType.slug, 'opinionSlug': opinion.slug } ) }}" class="btn  btn-dark-gray  btn--outline"><i class="cap cap-flag-1"></i> Signaler</a>
                                     {% else %}
                                     <button disabled="disabled" class="btn  btn-dark-gray"><i class="cap cap-flag-1"></i> opinion signalé</button>
                                     {% endif %}
 
                                     {% if app.user is not null and app.user == opinion.Author %}
-                                    <a href="{{ path('app_consultation_edit_opinion' ,{'consultation_slug': consultation.slug, 'opinion_type_slug': opinion.opinionType.slug, 'opinion_slug': opinion.slug } ) }}" class="btn  btn-dark-gray  btn--outline"><i class="cap cap-pencil-1"></i> Modifier</a>
+                                    <a href="{{ path('app_consultation_edit_opinion' ,{'consultationSlug': consultation.slug, 'opinionTypeSlug': opinion.opinionType.slug, 'opinionSlug': opinion.slug } ) }}" class="btn  btn-dark-gray  btn--outline"><i class="cap cap-pencil-1"></i> Modifier</a>
                                     {% endif %}
                                 </div>
 
-                            {% endif %}
-
-                            {% if opinion.canContribute %}
-                                {% form_theme opinionVoteForm 'CapcoAppBundle:Form:opinion_vote.html.twig' %}
-                                {{ form_start(opinionVoteForm ) }}
-                                    {{ form_errors(opinionVoteForm) }}
-                                    {{ form_widget(opinionVoteForm.value, {'previousType': previousValue, 'typeStyles': opinionVoteStyles, 'voteCounts': opinionVoteCounts}) }}
-                                    {{ form_rest(opinionVoteForm) }}
-                                {{ form_end(opinionVoteForm) }}
-                            {% endif %}
-
-                            {% if opinion.canContribute %}
-                                <div class="pull-right  opinion__action-buttons">
-
-                                    {% if(userReportingOpinion == false) %}
-                                    <a href="{{ path('app_report_opinion' ,{'consultation_slug': consultation.slug, 'opinion_type_slug': opinionType.slug, 'opinion_slug': opinion.slug } ) }}" class="btn  btn-dark-gray  btn--outline"><i class="cap cap-flag-1"></i> Signaler</a>
-                                    {% else %}
-                                    <button disabled="disabled" class="btn  btn-dark-gray"><i class="cap cap-flag-1"></i> opinion signalé</button>
-                                    {% endif %}
-
-                                    {% if app.user is not null and app.user == opinion.Author %}
-                                    <a href="{{ path('app_consultation_edit_opinion' ,{'consultation_slug': consultation.slug, 'opinion_type_slug': app.request.attributes.get('opinionType').slug, 'opinion_slug': opinion.slug } ) }}" class="btn  btn-dark-gray  btn--outline"><i class="cap cap-pencil-1"></i> Modifier</a>
-                                    {% endif %}
-                                </div>
                             {% endif %}
                         </div> <!-- .opinion__buttons -->
                         <div class="panel-group" id="accordion">
@@ -119,7 +95,7 @@
                                 <div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
                                     <div class="panel-body">
                                         {% if opinion.canContribute %}
-                                            <p><a href="{{ path('app_new_source' ,{'opinion_slug': opinion.slug} ) }}" class="btn-sm btn btn-default"><i class="cap cap-add-1"></i> {{ 'source.show.add'|trans({}, 'CapcoAppBundle') }}</a></p>
+                                            <p><a href="{{ path('app_new_source' ,{'consultationSlug': consultation.slug, 'opinionTypeSlug': opinionType.slug, 'opinionSlug': opinion.slug} ) }}" class="btn-sm btn btn-default"><i class="cap cap-add-1"></i> {{ 'source.show.add'|trans({}, 'CapcoAppBundle') }}</a></p>
                                         {% endif %}
                                         {% for source in sources %}
                                             <div class="media" id="source{{ source.id }}">
@@ -143,7 +119,7 @@
                                                     {% if false == opinion.canContribute %}
                                                         <button disabled="disabled" class="btn  btn-dark-gray  btn-xs"><i class="cap cap-hand-like-2"></i>Pertinent</button>
                                                     {% else %}
-                                                        <form method="POST" style="display: inline-block;" action="{{ path('app_consultation_vote_source' ,{'consultation_slug': consultation.slug, 'opinion_type_slug': opinionType.slug, 'opinion_slug': opinion.slug, 'source_id': source.id } ) }}">
+                                                        <form method="POST" style="display: inline-block;" action="{{ path('app_consultation_vote_source' ,{'consultationSlug': consultation.slug, 'opinionTypeSlug': opinionType.slug, 'opinionSlug': opinion.slug, 'sourceSlug': source.slug } ) }}">
                                                             {% if source.userHasVote(app.user) %}
                                                             <button class="btn  btn-danger  btn-xs">Annuler mon vote</button>
                                                             {% else %}
@@ -156,13 +132,13 @@
 
                                                     {% if opinion.canContribute %}
                                                         {% if(userReportingSource == false) %}
-                                                            <a href="{{ path('app_report_source' ,{'consultation_slug': consultation.slug, 'opinion_type_slug': opinionType.slug, 'opinion_slug': opinion.slug, 'source_slug': source.slug } ) }}" class="btn btn-xs btn-dark-gray  btn--outline"><i class="cap cap-flag-1"></i> Signaler</a>
+                                                            <a href="{{ path('app_report_source' ,{'consultationSlug': consultation.slug, 'opinionTypeSlug': opinionType.slug, 'opinionSlug': opinion.slug, 'sourceSlug': source.slug } ) }}" class="btn btn-xs btn-dark-gray  btn--outline"><i class="cap cap-flag-1"></i> Signaler</a>
                                                         {% else %}
                                                             <button disabled="disabled" class="btn btn-xs btn-dark-gray"><i class="cap cap-flag-1"></i> source signalé</button>
                                                         {% endif %}
 
                                                         {% if app.user is not null and app.user == source.Author %}
-                                                            <a href="{{ path('app_edit_source' ,{'opinion_slug': opinion.slug, 'source_slug': source.slug} ) }}" class="btn  btn-dark-gray  btn--outline  btn-xs"><i class="cap cap-pencil-1"></i> Modifier</a>
+                                                            <a href="{{ path('app_edit_source' ,{'consultationSlug': consultation.slug, 'opinionTypeSlug': opinionType.slug, 'opinionSlug': opinion.slug, 'sourceSlug': source.slug} ) }}" class="btn  btn-dark-gray  btn--outline  btn-xs"><i class="cap cap-pencil-1"></i> Modifier</a>
                                                         {% endif %}
                                                     {% endif %}
                                                 </div>

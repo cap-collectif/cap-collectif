@@ -588,7 +588,7 @@ class Source
     }
 
     public function canContribute() {
-        return ($this->isEnabled() && !$this->isTrashed && $this->Opinion->canContribute());
+        return ($this->isEnabled && !$this->isTrashed && $this->Opinion->canContribute());
     }
 
 }

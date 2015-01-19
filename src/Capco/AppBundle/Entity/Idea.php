@@ -546,7 +546,7 @@ class Idea
     }
 
     public function canContribute() {
-        return ($this->isEnabled() && !$this->isTrashed);
+        return ($this->isEnabled && !$this->isTrashed);
     }
 
     public function getExcerpt($nb = 100){

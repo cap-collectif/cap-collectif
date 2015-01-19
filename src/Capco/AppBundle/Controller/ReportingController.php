@@ -25,38 +25,32 @@ class ReportingController extends Controller
 {
 
     /**
-     * @Route("/consultation/{consultation_slug}/{opinion_type_slug}/{opinion_slug}/report", name="app_report_opinion")
-     * @ParamConverter("consultation", class="CapcoAppBundle:Consultation", options={"mapping": {"consultation_slug": "slug"}})
-     * @ParamConverter("opinionType", class="CapcoAppBundle:OpinionType", options={"mapping": {"opinion_type_slug": "slug"}})
-     * @ParamConverter("opinion", class="CapcoAppBundle:Opinion", options={"mapping": {"opinion_slug": "slug"}})
+     * @Route("/consultation/{consultationSlug}/opinions/{opinionTypeSlug}/{opinionSlug}/report", name="app_report_opinion")
      * @Template("CapcoAppBundle:Reporting:create.html.twig")
      * @param $request
-     * @param $consultation
-     * @param $opinionType
-     * @param $opinion
+     * @param $consultationSlug
+     * @param $opinionTypeSlug
+     * @param $opinionSlug
      * @return array
      */
-    public function reportingOpinionAction(Consultation $consultation, OpinionType $opinionType, Opinion $opinion, Request $request)
+    public function reportingOpinionAction($consultationSlug, $opinionTypeSlug, $opinionSlug, Request $request)
     {
         if (false === $this->get('security.authorization_checker')->isGranted('ROLE_USER')) {
             throw new AccessDeniedException($this->get('translator')->trans('Access restricted to authenticated users'));
         }
 
-        if (false == $opinion->getConsultation()->getIsEnabled()) {
+        $opinion = $this->getDoctrine()->getRepository('CapcoAppBundle:Opinion')->getOneBySlug($consultationSlug, $opinionTypeSlug, $opinionSlug);
+
+        if($opinion == null){
+            throw $this->createNotFoundException($this->get('translator')->trans('Argument not found.'));
+        }
+
+        if (false == $opinion->canContribute()) {
             throw new AccessDeniedException($this->get('translator')->trans('Access restricted'));
         }
 
-        if (Consultation::OPENING_STATUS_OPENED != $opinion->getConsultation()->getOpeningStatus()) {
-            throw new AccessDeniedException($this->get('translator')->trans('Access restricted'));
-        }
-
-        if (false == $opinion->getIsEnabled()) {
-            throw new AccessDeniedException($this->get('translator')->trans('Access restricted'));
-        }
-
-        if ($opinion->getIsTrashed()) {
-            throw new AccessDeniedException($this->get('translator')->trans('Access restricted'));
-        }
+        $opinionType = $opinion->getOpinionType();
+        $consultation = $opinion->getConsultation();
 
         $reporting = new Reporting();
         $form = $this->createForm(new ReportingType(), $reporting);
@@ -76,9 +70,9 @@ class ReportingController extends Controller
                     $this->generateUrl(
                         'app_consultation_show_opinion',
                         [
-                            'consultation_slug' => $consultation->getSlug(),
-                            'opinion_type_slug' => $opinionType->getSlug(),
-                            'opinion_slug' => $opinion->getSlug()
+                            'consultationSlug' => $consultation->getSlug(),
+                            'opinionTypeSlug' => $opinionType->getSlug(),
+                            'opinionSlug' => $opinion->getSlug()
                         ]
                     )
                 );
@@ -94,48 +88,34 @@ class ReportingController extends Controller
     }
 
     /**
-     * @Route("/consultation/{consultation_slug}/{opinion_type_slug}/{opinion_slug}/{source_slug}/report", name="app_report_source")
-     * @ParamConverter("consultation", class="CapcoAppBundle:Consultation", options={"mapping": {"consultation_slug": "slug"}})
-     * @ParamConverter("opinionType", class="CapcoAppBundle:OpinionType", options={"mapping": {"opinion_type_slug": "slug"}})
-     * @ParamConverter("opinion", class="CapcoAppBundle:Opinion", options={"mapping": {"opinion_slug": "slug"}})
-     * @ParamConverter("source", class="CapcoAppBundle:Source", options={"mapping": {"source_slug": "slug"}})
+     * @Route("/consultation/{consultationSlug}/opinions/{opinionTypeSlug}/{opinionSlug}/sources/{sourceSlug}/report", name="app_report_source")
      * @Template("CapcoAppBundle:Reporting:create.html.twig")
      * @param $request
-     * @param $consultation
-     * @param $opinionType
-     * @param $source
-     * @param $opinion
+     * @param $consultationSlug
+     * @param $opinionTypeSlug
+     * @param $sourceSlug
+     * @param $opinionSlug
      * @return array
      */
-    public function reportingSourceAction(Consultation $consultation, OpinionType $opinionType, Opinion $opinion, Source $source, Request $request)
+    public function reportingSourceAction($consultationSlug, $opinionTypeSlug, $opinionSlug, $sourceSlug, Request $request)
     {
         if (false === $this->get('security.authorization_checker')->isGranted('ROLE_USER')) {
             throw new AccessDeniedException($this->get('translator')->trans('Access restricted to authenticated users'));
         }
 
-        if (false == $opinion->getConsultation()->getIsEnabled()) {
+        $source = $this->getDoctrine()->getRepository('CapcoAppBundle:Source')->getOneBySlug($consultationSlug, $opinionTypeSlug, $opinionSlug, $sourceSlug);
+
+        if($source == null){
+            throw $this->createNotFoundException($this->get('translator')->trans('Argument not found.'));
+        }
+
+        if (false == $source->canContribute()) {
             throw new AccessDeniedException($this->get('translator')->trans('Access restricted'));
         }
 
-        if (Consultation::OPENING_STATUS_OPENED != $opinion->getConsultation()->getOpeningStatus()) {
-            throw new AccessDeniedException($this->get('translator')->trans('Access restricted'));
-        }
-
-        if (false == $opinion->getIsEnabled()) {
-            throw new AccessDeniedException($this->get('translator')->trans('Access restricted'));
-        }
-
-        if ($opinion->getIsTrashed()) {
-            throw new AccessDeniedException($this->get('translator')->trans('Access restricted'));
-        }
-
-        if (false == $source->getIsEnabled()) {
-            throw new AccessDeniedException($this->get('translator')->trans('Access restricted'));
-        }
-
-        if ($source->getIsTrashed()) {
-            throw new AccessDeniedException($this->get('translator')->trans('Access restricted'));
-        }
+        $opinion = $source->getOpinion();
+        $opinionType = $opinion->getOpinionType();
+        $consultation = $opinion->getConsultation();
 
         $reporting = new Reporting();
         $form = $this->createForm(new ReportingType(), $reporting);
@@ -156,9 +136,9 @@ class ReportingController extends Controller
                     $this->generateUrl(
                         'app_consultation_show_opinion',
                         [
-                            'consultation_slug' => $consultation->getSlug(),
-                            'opinion_type_slug' => $opinionType->getSlug(),
-                            'opinion_slug' => $opinion->getSlug()
+                            'consultationSlug' => $consultation->getSlug(),
+                            'opinionTypeSlug' => $opinionType->getSlug(),
+                            'opinionSlug' => $opinion->getSlug()
                         ]
                     )
                 );
@@ -174,48 +154,34 @@ class ReportingController extends Controller
     }
 
     /**
-     * @Route("/consultation/{consultation_slug}/{opinion_type_slug}/{opinion_slug}/report/{argument_id}", name="app_report_argument")
-     * @ParamConverter("consultation", class="CapcoAppBundle:Consultation", options={"mapping": {"consultation_slug": "slug"}})
-     * @ParamConverter("opinionType", class="CapcoAppBundle:OpinionType", options={"mapping": {"opinion_type_slug": "slug"}})
-     * @ParamConverter("opinion", class="CapcoAppBundle:Opinion", options={"mapping": {"opinion_slug": "slug"}})
-     * @ParamConverter("argument", class="CapcoAppBundle:Argument", options={"mapping": {"argument_id": "id"}})
+     * @Route("/consultation/{consultationSlug}/{opinionTypeSlug}/{opinionSlug}/arguments/{argumentId}/report", name="app_report_argument")
      * @Template("CapcoAppBundle:Reporting:create.html.twig")
      * @param $request
-     * @param $consultation
-     * @param $opinionType
-     * @param $argument
-     * @param $opinion
+     * @param $consultationSlug
+     * @param $opinionTypeSlug
+     * @param $argumentId
+     * @param $opinionSlug
      * @return array
      */
-    public function reportingArgumentAction(Consultation $consultation, OpinionType $opinionType, Opinion $opinion, Argument $argument, Request $request)
+    public function reportingArgumentAction($consultationSlug, $opinionTypeSlug, $opinionSlug, $argumentId, Request $request)
     {
         if (false === $this->get('security.authorization_checker')->isGranted('ROLE_USER')) {
             throw new AccessDeniedException($this->get('translator')->trans('Access restricted to authenticated users'));
         }
 
-        if (false == $opinion->getConsultation()->getIsEnabled()) {
+        $argument = $this->getDoctrine()->getRepository('CapcoAppBundle:Argument')->getOneById($consultationSlug, $opinionTypeSlug, $opinionSlug, $argumentId);
+
+        if($argument == null){
+            throw $this->createNotFoundException($this->get('translator')->trans('Argument not found.'));
+        }
+
+        if (false == $argument->canContribute()) {
             throw new AccessDeniedException($this->get('translator')->trans('Access restricted'));
         }
 
-        if (Consultation::OPENING_STATUS_OPENED != $opinion->getConsultation()->getOpeningStatus()) {
-            throw new AccessDeniedException($this->get('translator')->trans('Access restricted'));
-        }
-
-        if (false == $opinion->getIsEnabled()) {
-            throw new AccessDeniedException($this->get('translator')->trans('Access restricted'));
-        }
-
-        if ($opinion->getIsTrashed()) {
-            throw new AccessDeniedException($this->get('translator')->trans('Access restricted'));
-        }
-
-        if (false == $argument->getIsEnabled()) {
-            throw new AccessDeniedException($this->get('translator')->trans('Access restricted'));
-        }
-
-        if ($argument->getIsTrashed()) {
-            throw new AccessDeniedException($this->get('translator')->trans('Access restricted'));
-        }
+        $opinion = $argument->getOpinion();
+        $opinionType = $opinion->getOpinionType();
+        $consultation = $opinion->getConsultation();
 
         $reporting = new Reporting();
         $form = $this->createForm(new ReportingType(), $reporting);
@@ -236,9 +202,9 @@ class ReportingController extends Controller
                     $this->generateUrl(
                         'app_consultation_show_opinion',
                         [
-                            'consultation_slug' => $consultation->getSlug(),
-                            'opinion_type_slug' => $opinionType->getSlug(),
-                            'opinion_slug' => $opinion->getSlug()
+                            'consultationSlug' => $consultation->getSlug(),
+                            'opinionTypeSlug' => $opinionType->getSlug(),
+                            'opinionSlug' => $opinion->getSlug()
                         ]
                     )
                 );
@@ -254,8 +220,8 @@ class ReportingController extends Controller
     }
 
     /**
-     * @Route("/idea/report/{idea_slug}", name="app_report_idea")
-     * @ParamConverter("idea", class="CapcoAppBundle:Idea", options={"mapping": {"idea_slug": "slug"}})
+     * @Route("/ideas/{ideaSlug}/report", name="app_report_idea")
+     * @ParamConverter("idea", class="CapcoAppBundle:Idea", options={"mapping": {"ideaSlug": "slug"}})
      * @Template("CapcoAppBundle:Reporting:create.html.twig")
      * @param $request
      * @param $idea
@@ -263,16 +229,12 @@ class ReportingController extends Controller
      */
     public function reportingIdeaAction(Idea $idea, Request $request)
     {
-        if (false === $this->get('security.authorization_checker')->isGranted('ROLE_USER')) {
+        if (!$this->get('security.context')->isGranted('ROLE_USER')) {
             throw new AccessDeniedException($this->get('translator')->trans('Access restricted to authenticated users'));
         }
 
-        if (false == $idea->getIsEnabled()) {
-            throw new AccessDeniedException($this->get('translator')->trans('Access restricted'));
-        }
-
-        if ($idea->getIsTrashed()) {
-            throw new AccessDeniedException($this->get('translator')->trans('Access restricted'));
+        if (false == $idea->canContribute() ) {
+            throw new AccessDeniedException($this->get('translator')->trans('Forbidden'));
         }
 
         $reporting = new Reporting();

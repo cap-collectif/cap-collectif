@@ -28,7 +28,7 @@
                                         {% endif %}
                                         <div class="opinion__data">
                                             <p class="opinion__user  h5"><a href="#">{{ opinion.Author.username }}</a> <span class="pull-right  excerpt">{{ opinion.createdAt | localizeddate('medium', 'none', app.request.locale) }}</span></p>
-                                            <p class="opinion__title"><a href="{{ path('app_consultation_show_opinion', {'consultation_slug': consultation.slug, 'opinion_type_slug': opinion.opinionType.slug, 'opinion_slug': opinion.slug}) }}">{{ opinion.title }}</a></p>
+                                            <p class="opinion__title"><a href="{{ path('app_consultation_show_opinion', {'consultationSlug': consultation.slug, 'opinionTypeSlug': opinion.opinionType.slug, 'opinionSlug': opinion.slug}) }}">{{ opinion.title }}</a></p>
                                             <p class="opinion__votes  excerpt h5">
                                                 {% transchoice nbVotes with {'%count%': nbVotes} from 'CapcoAppBundle' %}
                                                 consultation.show.votes
@@ -66,7 +66,7 @@
                                 <div class="opinion__data">
                                     <p class="h5  opinion__user"><a href="#">{{ argument.Author.getFullname }}</a> <span class="label {% if argument.type == 0 %}label-danger{% elseif argument.type == 1 %}label-success{% endif %}">{{ argumentsLabels[argument.type] | trans({}, 'CapcoAppBundle') | capitalize }}</span></p>
                                     <p class="excerpt  opinion__date"><a class="excerpt" href="#">{{ argument.createdAt | localizeddate('long', 'short', app.request.locale) }}</a></p>
-                                    <p>{{ 'argument.trashed.linked_proposition' | trans({}, 'CapcoAppBundle') }} <a href="{{ path('app_consultation_show_opinion', {'consultation_slug': consultation.slug, 'opinion_type_slug': argument.Opinion.OpinionType.slug, 'opinion_slug': argument.Opinion.slug}) }}">{{ argument.Opinion.title }}</a></p>
+                                    <p>{{ 'argument.trashed.linked_proposition' | trans({}, 'CapcoAppBundle') }} <a href="{{ path('app_consultation_show_opinion', {'consultationSlug': consultation.slug, 'opinionTypeSlug': argument.Opinion.OpinionType.slug, 'opinionSlug': argument.Opinion.slug}) }}">{{ argument.Opinion.title }}</a></p>
                                 </div>
                                 <p class="opinion__text">
                                     {{ argument.body }}
@@ -96,7 +96,7 @@
                                         <a href="{{ source.link }}" target="_blank">{{ source.title }}</a>
                                     {% endif %}
                                 </h4>
-                                <p>{{ 'source.trashed.linked_proposition' | trans({}, 'CapcoAppBundle') }} <a href="{{ path('app_consultation_show_opinion', {'consultation_slug': consultation.slug, 'opinion_type_slug': source.Opinion.OpinionType.slug, 'opinion_slug': source.Opinion.slug}) }}">{{ source.Opinion.title }}</a></p>
+                                <p>{{ 'source.trashed.linked_proposition' | trans({}, 'CapcoAppBundle') }} <a href="{{ path('app_consultation_show_opinion', {'consultationSlug': consultation.slug, 'opinionTypeSlug': source.Opinion.OpinionType.slug, 'opinionSlug': source.Opinion.slug}) }}">{{ source.Opinion.title }}</a></p>
                                 <p class="excerpt">
                                     {{ source.body }}
                                 </p>

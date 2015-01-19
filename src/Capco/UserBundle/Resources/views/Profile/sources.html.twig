@@ -16,7 +16,7 @@
                     {% endif %}
                 </h4>
                 <p class="excerpt">
-                    <strong>{{ 'argument.trashed.linked_proposition' | trans({}, 'CapcoAppBundle') }} </strong><a href="{{ path('app_consultation_show_opinion', {'consultation_slug': source.Opinion.consultation.slug, 'opinion_type_slug': source.Opinion.OpinionType.slug, 'opinion_slug': source.Opinion.slug}) }}">{{ source.Opinion.title }}</a><br/>
+                    <strong>{{ 'argument.trashed.linked_proposition' | trans({}, 'CapcoAppBundle') }} </strong><a href="{{ path('app_consultation_show_opinion', {'consultationSlug': source.Opinion.consultation.slug, 'opinionTypeSlug': source.Opinion.OpinionType.slug, 'opinionSlug': source.Opinion.slug}) }}">{{ source.Opinion.title }}</a><br/>
                     {{ source.body }}
                 </p>
                 <button disabled="disabled" class="btn  btn-default btn-xs"><i class="cap cap-hand-like-2"></i>Pertinent</button>

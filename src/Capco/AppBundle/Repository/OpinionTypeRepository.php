@@ -15,7 +15,69 @@ use Doctrine\ORM\Tools\Pagination\Paginator;
  */
 class OpinionTypeRepository extends EntityRepository
 {
-    public function findByType($consultation)
+    /**
+     * Get all opnionTypes with opinions for user
+     * @param $consultation
+     * @return mixed
+     */
+    public function getByUser($user)
+    {
+        $qb = $this->createQueryBuilder('ot')
+            ->leftJoin('ot.Opinions','o')
+            ->addSelect('o')
+            ->leftJoin('o.Consultation', 'c')
+            ->addSelect('c')
+            ->leftJoin('o.Author', 'a')
+            ->addSelect('a')
+            ->leftJoin('a.Media', 'm')
+            ->addSelect('m')
+            ->leftJoin('o.Votes', 'v')
+            ->addSelect('v')
+            ->andWhere('c.isEnabled = :enabledConsul')
+            ->setParameter('enabledConsul', true)
+            ->andWhere('o.isEnabled = :enabled')
+            ->setParameter('enabled', true)
+            ->andWhere('o.Author = :author')
+            ->setParameter('author', $user)
+            ->orderBy('ot.position', 'ASC')
+            ->addOrderBy('o.createdAt', 'DESC');
+
+        return $qb
+            ->getQuery()
+            ->getResult();
+    }
+
+    /**
+     * Get all opinionTypes with opinions for user
+     * @param $consultation
+     * @return mixed
+     */
+    public function countByUser($user)
+    {
+        $qb = $this->createQueryBuilder('ot')
+            ->Join('ot.Opinions','o')
+            ->addselect('o')
+            ->leftJoin('o.Consultation', 'c')
+            ->addSelect('c')
+            ->addGroupBy('ot.id')
+//            ->addGroupBy('o.id')
+            ->andWhere('o.Author = :author')
+            ->andWhere('o.isEnabled = :enabled')
+            ->andWhere('c.isEnabled = :enabledConsul')
+            ->setParameter('enabledConsul', true)
+            ->setParameter('enabled', true)
+            ->setParameter('author', $user)
+            ->orderBy('ot.position', 'ASC')
+            ->addOrderBy('o.createdAt', 'DESC');
+
+        return $qb
+            ->getQuery()
+            ->getScalarResult();
+    }
+
+
+
+    /*public function findByType($consultation)
     {
         $qb = $this->createQueryBuilder('ot')
             ->leftJoin('ot.Opinions','o')
@@ -42,59 +104,9 @@ class OpinionTypeRepository extends EntityRepository
         return $qb
             ->getQuery()
             ->getResult();
-    }
+    }*/
 
-    public function findByUser($user)
-    {
-        $qb = $this->createQueryBuilder('ot')
-            ->leftJoin('ot.Opinions','o')
-            ->addSelect('o')
-            ->leftJoin('o.Consultation', 'c')
-            ->addSelect('c')
-            ->leftJoin('o.Author', 'a')
-            ->addSelect('a')
-            ->leftJoin('a.Media', 'm')
-            ->addSelect('m')
-            ->leftJoin('o.Votes', 'v')
-            ->addSelect('v')
-            ->andWhere('c.isEnabled = :enabledConsul')
-            ->setParameter('enabledConsul', true)
-            ->andWhere('o.isEnabled = :enabled')
-            ->setParameter('enabled', true)
-            ->andWhere('o.isTrashed = :notTrashed')
-            ->setParameter('notTrashed', false)
-            ->andWhere('o.Author = :author')
-            ->setParameter('author', $user)
-            ->orderBy('ot.position', 'ASC')
-            ->addOrderBy('o.createdAt', 'DESC');
-
-        return $qb
-            ->getQuery()
-            ->getResult();
-    }
-
-    public function countByUser($user)
-    {
-        $qb = $this->createQueryBuilder('ot')
-            ->Join('ot.Opinions','o')
-            ->addselect('o')
-            ->addGroupBy('ot.id')
-//            ->addGroupBy('o.id')
-            ->andWhere('o.Author = :author')
-            ->andWhere('o.isEnabled = :enabled')
-            ->setParameter('enabled', true)
-            ->andWhere('o.isTrashed = :notTrashed')
-            ->setParameter('notTrashed', false)
-            ->setParameter('author', $user)
-            ->orderBy('ot.position', 'ASC')
-            ->addOrderBy('o.createdAt', 'DESC');
-
-        return $qb
-            ->getQuery()
-            ->getScalarResult();
-    }
-
-    public function findAllByPosition()
+    /*public function findAllByPosition()
     {
         $qb = $this->createQueryBuilder('ot')
             ->orderBy('ot.position', 'ASC');
@@ -102,6 +114,6 @@ class OpinionTypeRepository extends EntityRepository
         return $qb
             ->getQuery()
             ->getResult();
-    }
+    }*/
 
 }

@@ -13,11 +13,52 @@ use Doctrine\ORM\Query;
  */
 class SourceRepository extends EntityRepository
 {
-    public function getTrashedSourcesByConsultation($consultation)
+    /**
+     * Get one source by slug, opinion, opinion type and consultation
+     */
+    public function getOneBySlug($consultation, $opinionType, $opinion, $source)
     {
-        $qb = $this->createQueryBuilder('s')
-            ->andWhere('s.isEnabled = :enabled')
-            ->setParameter('enabled', true)
+        return $this->getIsEnabledQueryBuilder()
+
+            ->leftJoin('s.Author', 'a')
+            ->addSelect('a')
+            ->leftJoin('a.Media', 'm')
+            ->addSelect('m')
+
+            ->leftJoin('s.Votes', 'v')
+            ->addSelect('v')
+
+            ->andWhere('s.slug = :source')
+            ->setParameter('source', $source)
+
+            ->leftJoin('s.Opinion', 'o')
+            ->addSelect('o')
+            ->andWhere('o.slug = :opinion')
+            ->setParameter('opinion', $opinion)
+
+            ->leftJoin('o.Consultation', 'c')
+            ->addSelect('c')
+            ->andWhere('c.slug = :consultation')
+            ->setParameter('consultation', $consultation)
+
+            ->leftJoin('o.OpinionType', 'ot')
+            ->addSelect('ot')
+            ->andWhere('ot.slug = :opinionType')
+            ->setParameter('opinionType', $opinionType)
+
+            ->getQuery()
+            ->getOneOrNullResult();
+
+    }
+
+    /**
+     * Get all trashed sources for consultation
+     * @param $consultation
+     * @return mixed
+     */
+    public function getTrashedByConsultation($consultation)
+    {
+        $qb = $this->getIsEnabledQueryBuilder()
             ->andWhere('s.isTrashed = :trashed')
             ->setParameter('trashed', true)
             ->leftJoin('s.Category', 'ca')
@@ -33,34 +74,16 @@ class SourceRepository extends EntityRepository
             ->orderBy('s.trashedAt', 'DESC');
 
         return $qb->getQuery()->getResult();
-
-    }
-    public function getByUser($user)
-    {
-        $qb = $this->getIsEnabledAndTrasedByUserQueryBuilder()
-            ->leftJoin('s.Category', 'ca')
-            ->addSelect('ca')
-            ->leftJoin('s.Opinion', 'o')
-            ->addSelect('o')
-            ->leftJoin('o.Consultation', 'c')
-            ->addSelect('c')
-            ->leftJoin('s.Author', 'aut')
-            ->addSelect('aut')
-            ->leftJoin('aut.Media', 'm')
-            ->addSelect('m')
-            ->andWhere('s.Author = :author')
-            ->setParameter('author', $user)
-            ->orderBy('s.createdAt', 'DESC');
-
-        return $qb->getQuery()->getResult();
-
     }
 
-    public function getEnabledSourcesByOpinion($opinion)
+    /**
+     * Get sources by opinion
+     * @param $opinion
+     * @return mixed
+     */
+    public function getByOpinion($opinion)
     {
-        $qb = $this->createQueryBuilder('s')
-            ->andWhere('s.isEnabled = :enabled')
-            ->setParameter('enabled', true)
+        $qb = $this->getIsEnabledQueryBuilder()
             ->andWhere('s.isTrashed = :notTrashed')
             ->setParameter('notTrashed', false)
             ->leftJoin('s.Category', 'ca')
@@ -76,20 +99,50 @@ class SourceRepository extends EntityRepository
             ->orderBy('s.updatedAt', 'DESC');
 
         return $qb->getQuery()->getResult();
-
     }
 
     /**
-     * Count all arguments
+     * Get sources by user
      * @param $user
      * @return mixed
      */
-    public function countSourcesByUser($user)
+    public function getByUser($user)
     {
-        $qb = $this->getIsEnabledAndTrasedByUserQueryBuilder()
+        $qb = $this->getIsEnabledQueryBuilder()
+            ->leftJoin('s.Category', 'ca')
+            ->addSelect('ca')
+            ->leftJoin('s.Opinion', 'o')
+            ->addSelect('o')
+            ->leftJoin('o.Consultation', 'c')
+            ->addSelect('c')
+            ->leftJoin('s.Author', 'aut')
+            ->addSelect('aut')
+            ->leftJoin('aut.Media', 'm')
+            ->addSelect('m')
+            ->andWhere('s.Author = :author')
+            ->setParameter('author', $user)
+            ->andWhere('o.isEnabled = :enabled')
+            ->andWhere('c.isEnabled = :enabled')
+            ->setParameter('enabled', true)
+            ->orderBy('s.createdAt', 'DESC');
+
+        return $qb->getQuery()->getResult();
+    }
+
+    /**
+     * Count by user
+     * @param $user
+     * @return mixed
+     */
+    public function countByUser($user)
+    {
+        $qb = $this->getIsEnabledQueryBuilder()
             ->select('COUNT(s) as TotalSources')
             ->leftJoin('s.Opinion', 'o')
             ->leftJoin('o.Consultation', 'c')
+            ->andWhere('o.isEnabled = :enabled')
+            ->andWhere('c.isEnabled = :enabled')
+            ->setParameter('enabled', true)
             ->andWhere('s.Author = :author')
             ->setParameter('author', $user);
 
@@ -98,23 +151,10 @@ class SourceRepository extends EntityRepository
             ->getSingleScalarResult();
     }
 
-    /**
-     * Condition by QueryBuilder - isEnabled, isTrashed
-     * @return \Doctrine\ORM\QueryBuilder
-     */
-    protected function getIsEnabledAndTrasedByUserQueryBuilder()
+    protected function getIsEnabledQueryBuilder()
     {
         return $this->createQueryBuilder('s')
-            ->andWhere('s.isEnabled = :enabledSource')
-            ->setParameter('enabledSource', true)
-            ->andWhere('s.isTrashed = :trashed')
-            ->setParameter('trashed', false)
-            ->andWhere('o.isEnabled = :enabledOpi')
-            ->setParameter('enabledOpi', true)
-            ->andWhere('o.isTrashed = :trashedOpi')
-            ->setParameter('trashedOpi', false)
-            ->andWhere('c.isEnabled = :isEnabled')
+            ->andWhere('s.isEnabled = :isEnabled')
             ->setParameter('isEnabled', true);
     }
-
 }
