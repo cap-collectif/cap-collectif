@@ -547,9 +547,7 @@ class Consultation
      */
     public function addTheme(Theme $theme)
     {
-        $theme->addConsultation($this);
         $this->Themes->add($theme);
-
         return $this;
     }
 
@@ -560,7 +558,6 @@ class Consultation
      */
     public function removeTheme(Theme $theme)
     {
-        $theme->removeConsultation($this);
         $this->Themes->removeElement($theme);
         return $this;
     }
@@ -573,26 +570,6 @@ class Consultation
     public function getThemes()
     {
         return $this->Themes;
-    }
-
-    /**
-     * Set themes
-     *
-     * @param \Doctrine\Common\Collections\ArrayCollection $themes
-     * @return Consultation
-     */
-    public function setThemes($themes)
-    {
-        if (gettype($themes) == "array") {
-            $themes = new ArrayCollection($themes);
-        }
-
-        foreach($themes as $theme)
-        {
-            $theme->addConsultation($this);
-        }
-        $this->Themes = $themes;
-        return $this;
     }
 
     /**
@@ -669,32 +646,13 @@ class Consultation
         return $return;
     }
 
-    public function setOpinions($opinions){
-        foreach($opinions as $opinion){
-            $opinion->setConsultation($this);
-        }
-        $this->Opinions = $opinions;
-        $this->opinionCount = $opinions->count();
-        return $this;
-    }
-
     public function getOpinions(){
         return $this->Opinions;
-    }
-
-    public function resetOpinions() {
-        foreach($this->Opinions as $opinion){
-            $opinion->setConsultation(null);
-        }
-        $this->opinionCount = 0;
-        $this->setOpinions(new ArrayCollection());
-        return $this;
     }
 
     public function addOpinion($opinion){
         $this->opinionCount++;
         $this->Opinions->add($opinion);
-        $opinion->setconsultation($this);
         return $this;
     }
 
@@ -702,9 +660,7 @@ class Consultation
     {
         if ($this->Opinions->removeElement($opinion)) {
             $this->opinionCount--;
-            $opinion->setConsultation(null);
         }
-
         return $this;
     }
 
@@ -727,5 +683,18 @@ class Consultation
         $excerpt = substr($this->teaser, 0, $nb);
         $excerpt = $excerpt.'...';
         return $excerpt;
+    }
+
+    /**
+     * @ORM\PreRemove
+     */
+    public function deleteConsultation()
+    {
+        if ($this->Themes->count() > 0) {
+            foreach ($this->Themes as $theme) {
+                $theme->removeConsultation($this);
+            }
+        }
+
     }
 }

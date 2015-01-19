@@ -47,6 +47,13 @@ class SiteImage
 
     /**
      * @var \DateTime
+     * @Gedmo\Timestampable(on="create")
+     * @ORM\Column(name="created_at", type="datetime")
+     */
+    private $createdAt;
+
+    /**
+     * @var \DateTime
      * @Gedmo\Timestampable(on="change", field={"Media"})
      * @ORM\Column(name="updated_at", type="datetime")
      */
@@ -189,5 +196,13 @@ class SiteImage
     {
         $this->isEnabled = $isEnabled;
         return $this;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getCreatedAt()
+    {
+        return $this->createdAt;
     }
 }

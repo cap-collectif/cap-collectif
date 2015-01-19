@@ -6,8 +6,7 @@ sonata_admin:
         layout: CapcoAdminBundle::standard_layout.html.twig
     dashboard:
         blocks:
-            - { position: left,  type: sonata.admin.block.admin_list, settings: { groups: [admin.group.moderation, admin.group.content, admin.group.consultation, admin.group.ideas] } }
-            - { position: right, type: sonata.admin.block.admin_list, settings: { groups: [sonata.admin.group.user, admin.group.marketing, admin.group.parameters] } }
+            - { position: left,  type: sonata.admin.block.admin_list, settings: { groups: [admin.group.moderation] } }
         groups:
             admin.group.moderation:
                 items:
@@ -37,7 +36,6 @@ sonata_admin:
             sonata.admin.group.user:
                 items:
                     - sonata.user.admin.user
-                    - sonata.user.admin.group
             admin.group.marketing:
                 items:
                     - capco_admin.admin.newsletter_subscription

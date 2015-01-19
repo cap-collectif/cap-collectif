@@ -49,7 +49,7 @@ class OpinionController extends Controller
         $opinion->setAuthor($this->getUser());
         $opinion->setOpinionType($opinionType);
         $opinion->setIsEnabled(true);
-        $consultation->addOpinion($opinion);
+        $opinion->setConsultation($consultation);
 
         $form = $this->createForm(new OpinionForm(), $opinion);
 
@@ -116,7 +116,6 @@ class OpinionController extends Controller
 
             if ($form->isValid()) {
                 $em = $this->getDoctrine()->getManager();
-                $consultation->removeOpinion($opinion);
                 $em->remove($opinion);
                 $em->flush();
 
@@ -175,14 +174,6 @@ class OpinionController extends Controller
             if ($form->isValid()) {
 
                 $em = $this->getDoctrine()->getManager();
-
-                // Get votes on opinion
-                $linkedVotes = $em->getRepository('CapcoAppBundle:OpinionVote')->findByOpinion($opinion);
-
-                foreach($linkedVotes as $vote){
-                    $em->remove($vote);
-                }
-
                 $opinion->resetVotes();
                 $em->persist($opinion);
                 $em->flush();
@@ -225,24 +216,18 @@ class OpinionController extends Controller
             $em = $this->getDoctrine()->getManager();
 
             if (!$alreadyVoted) {
-                $opinion->addVoteWithType($opinionVote->getValue());
+                $opinionVote->setOpinion($opinion);
                 $em->persist($opinionVote);
-                $em->persist($opinion);
                 $em->flush();
                 $this->get('session')->getFlashBag()->add('success', $this->get('translator')->trans('Your vote has been saved.'));
             } else {
                 $previousVote = $em->getUnitOfWork()->getOriginalEntityData($opinionVote);
                 if($previousVote['value'] == $opinionVote->getValue()){
-                    $opinion->removeVoteWithType($opinionVote->getValue());
-                    $em->persist($opinion);
                     $em->remove($opinionVote);
                     $em->flush();
                     $this->get('session')->getFlashBag()->add('info', $this->get('translator')->trans('Your vote has been removed.'));
                 }
                 else {
-                    $opinion->removeVoteWithType($previousVote['value']);
-                    $opinion->addVoteWithType($opinionVote->getValue());
-                    $em->persist($opinion);
                     $em->persist($opinionVote);
                     $em->flush();
                     $this->get('session')->getFlashBag()->add('success', $this->get('translator')->trans('Your vote has been updated.'));
@@ -301,7 +286,6 @@ class OpinionController extends Controller
 
         // Argument forms
         $argument = new Argument();
-        $argument->setOpinion($opinion);
         $argument->setAuthor($this->getUser());
 
         $argumentFormYes = $this->get('form.factory')->createNamedBuilder('argumentFormYes', new ArgumentForm(), $argument)->getForm();
@@ -324,7 +308,6 @@ class OpinionController extends Controller
             $userHasVoted = true;
         } else {
             $opinionVote = new OpinionVote();
-            $opinionVote->setOpinion($opinion);
             $opinionVote->setVoter($this->getUser());
         }
 
@@ -423,9 +406,8 @@ class OpinionController extends Controller
         $form->handleRequest($request);
 
         if ($form->isValid()) {
-
+            $argument->setOpinion($opinion);
             $em = $this->getDoctrine()->getManager();
-            $opinion->addArgument($argument);
             $em->persist($argument);
             $em->flush();
             $this->get('session')->getFlashBag()->add('success', $this->get('translator')->trans('Your argument has been saved'));

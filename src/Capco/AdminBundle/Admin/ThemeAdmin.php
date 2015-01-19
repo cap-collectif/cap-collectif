@@ -7,6 +7,7 @@ use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Show\ShowMapper;
+use Capco\AppBundle\Entity\Theme;
 
 class ThemeAdmin extends Admin
 {
@@ -40,6 +41,9 @@ class ThemeAdmin extends Admin
             ->add('updatedAt', null, array(
                 'label' => 'admin.fields.theme.updated_at',
             ))
+            ->add('Author', null, array(
+                'label' => 'admin.fields.theme.author',
+            ))
         ;
     }
 
@@ -51,6 +55,22 @@ class ThemeAdmin extends Admin
         $listMapper
             ->addIdentifier('title', null, array(
                 'label' => 'admin.fields.theme.title',
+            ))
+            ->add('Author', null, array(
+                'label' => 'admin.fields.theme.author',
+            ))
+            ->add('status', null, array(
+                'label' => 'admin.fields.theme.status',
+                'template' => 'CapcoAdminBundle:Theme:status_list_field.html.twig',
+                'statusesLabels' => Theme::$statusesLabels,
+            ))
+            ->add('ideasCount', null, array(
+                'label' => 'admin.fields.theme.ideas_count',
+                'template' => 'CapcoAdminBundle:Theme:ideas_count_list_field.html.twig',
+            ))
+            ->add('consultationsCount', null, array(
+                'label' => 'admin.fields.theme.consultations_count',
+                'template' => 'CapcoAdminBundle:Theme:consultations_count_list_field.html.twig',
             ))
             ->add('isEnabled', null, array(
                 'editable' => true,
@@ -78,6 +98,9 @@ class ThemeAdmin extends Admin
             ->add('title', null, array(
                 'label' => 'admin.fields.theme.title',
             ))
+            ->add('Author', null, array(
+                'label' => 'admin.fields.theme.author',
+            ))
             ->add('isEnabled', null, array(
                 'label' => 'admin.fields.theme.is_enabled',
                 'required' => false,
@@ -89,6 +112,11 @@ class ThemeAdmin extends Admin
             ->add('body', 'textarea', array(
                 'attr' => array('class' => 'ckeditor'),
                 'label' => 'admin.fields.theme.body',
+            ))
+            ->add('status', 'choice', array(
+                'label' => 'admin.fields.theme.status',
+                'choices' => Theme::$statusesLabels,
+                'translation_domain' => 'CapcoAppBundle',
             ))
             ->add('Consultations', null, array(
                 'label' => 'admin.fields.theme.consultations',
@@ -122,8 +150,24 @@ class ThemeAdmin extends Admin
             ->add('body', null, array(
                 'label' => 'admin.fields.theme.body',
             ))
+            ->add('status', null, array(
+                'label' => 'admin.fields.theme.status',
+                'template' => 'CapcoAdminBundle:Theme:status_show_field.html.twig',
+                'statusesLabels' => Theme::$statusesLabels,
+            ))
+            ->add('Author', null, array(
+                'label' => 'admin.fields.theme.author',
+            ))
+            ->add('consultationsCount', null, array(
+                'label' => 'admin.fields.theme.consultations_count',
+                'template' => 'CapcoAdminBundle:Theme:consultations_count_show_field.html.twig',
+            ))
             ->add('Consultations', null, array(
                 'label' => 'admin.fields.theme.consultations',
+            ))
+            ->add('ideasCount', null, array(
+                'label' => 'admin.fields.theme.ideas_count',
+                'template' => 'CapcoAdminBundle:Theme:ideas_count_show_field.html.twig',
             ))
             ->add('Ideas', null, array(
                 'label' => 'admin.fields.theme.ideas',

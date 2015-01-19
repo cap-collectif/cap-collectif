@@ -129,6 +129,12 @@ class FooterSocialNetworkAdmin extends Admin
             ->add('position', null, array(
                 'label' => 'admin.fields.footer_social_network.position',
             ))
+            ->add('createdAt', null, array(
+                'label' => 'admin.fields.footer_social_network.created_at',
+            ))
+            ->add('updatedAt', null, array(
+                'label' => 'admin.fields.footer_social_network.updated_at',
+            ))
         ;
     }
 }

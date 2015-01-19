@@ -103,6 +103,9 @@ class SiteImageAdmin extends Admin
             ->add('isEnabled', null, array(
                 'label' => 'admin.fields.site_image.is_enabled',
             ))
+            ->add('createdAt', null, array(
+                'label' => 'admin.fields.site_image.created_at',
+            ))
             ->add('updatedAt', null, array(
                 'label' => 'admin.fields.site_image.updated_at',
             ))

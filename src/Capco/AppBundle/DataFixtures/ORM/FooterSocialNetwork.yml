@@ -32,4 +32,4 @@ Capco\AppBundle\Entity\FooterSocialNetwork:
         link: '#'
         position: 5
         isEnabled: false
-        style: rss-1
+        style: rss

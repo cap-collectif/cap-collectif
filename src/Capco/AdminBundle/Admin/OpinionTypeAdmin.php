@@ -126,6 +126,9 @@ class OpinionTypeAdmin extends Admin
             ->add('isEnabled', null, array(
                 'label' => 'admin.fields.opinion_type.is_enabled',
             ))
+            ->add('createdAt', null, array(
+                'label' => 'admin.fields.opinion_type.created_at',
+            ))
             ->add('updatedAt', 'datetime', array(
                 'label' => 'admin.fields.opinion_type.updated_at',
             ))

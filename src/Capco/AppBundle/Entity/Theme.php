@@ -26,6 +26,12 @@ class Theme
         'future' => self::STATUS_FUTURE,
     ];
 
+    public static $statusesLabels = [
+        self::STATUS_CLOSED => 'theme.show.status.closed',
+        self::STATUS_OPENED => 'theme.show.status.opened',
+        self::STATUS_FUTURE => 'theme.show.status.future',
+    ];
+
     /**
      * @var integer
      *
@@ -82,6 +88,14 @@ class Theme
      * @ORM\Column(name="body", type="text")
      */
     private $body;
+
+    /**
+     * @var
+     *
+     * @ORM\ManyToOne(targetEntity="Capco\UserBundle\Entity\User")
+     * @ORM\JoinColumn(name="author_id", referencedColumnName="id")
+     */
+    private $Author;
 
     /**
      * @var \DateTime
@@ -413,4 +427,42 @@ class Theme
         $excerpt = $excerpt.'...';
         return $excerpt;
     }
+
+    public function canContribute()
+    {
+        return ($this->isEnabled);
+    }
+
+    public function canDisplay()
+    {
+        return ($this->isEnabled);
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getAuthor()
+    {
+        return $this->Author;
+    }
+
+    /**
+     * @param mixed $Author
+     */
+    public function setAuthor($Author)
+    {
+        $this->Author = $Author;
+    }
+
+    public function countConsultations()
+    {
+        return $this->Consultations->count();
+    }
+
+    public function countIdeas()
+    {
+        return $this->Ideas->count();
+    }
+
+
 }

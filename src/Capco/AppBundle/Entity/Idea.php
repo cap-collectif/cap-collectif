@@ -528,17 +528,18 @@ class Idea
      */
     public function addReport(Reporting $report)
     {
-        $this->Reports[] = $report;
-
+        $this->Reports->add($report);
         return $this;
     }
 
     /**
      * @param Reporting $report
+     * @return $this
      */
     public function removeReport(Reporting $report)
     {
         $this->Reports->removeElement($report);
+        return $this;
     }
 
     public function canDisplay() {

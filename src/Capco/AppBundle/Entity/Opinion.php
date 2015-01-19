@@ -11,6 +11,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
  *
  * @ORM\Table(name="opinion")
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\OpinionRepository")
+ * @ORM\HasLifecycleCallbacks()
  */
 class Opinion
 {
@@ -206,10 +207,16 @@ class Opinion
 
     /**
      * @param mixed $Consultation
+     * @return $this
      */
     public function setConsultation($Consultation)
     {
+        if ($this->Consultation != null) {
+            $this->Consultation->removeOpinion($this);
+        }
         $this->Consultation = $Consultation;
+        $this->Consultation->addOpinion($this);
+        return $this;
     }
 
     function __construct()
@@ -429,15 +436,6 @@ class Opinion
         return $this->Votes;
     }
 
-    public function setVotes($votes){
-        foreach($votes as $vote){
-            $vote->setOpinion($this);
-            $this->addToCount($vote->getValue());
-        }
-        $this->Votes = $votes;
-        return $this;
-    }
-
     /**
      * @param OpinionVote $vote
      * @return $this
@@ -446,7 +444,6 @@ class Opinion
     {
         $this->Votes->add($vote);
         $this->addToCount($vote->getValue());
-        $vote->setOpinion($this);
         return $this;
     }
 
@@ -458,17 +455,7 @@ class Opinion
     {
         if($this->Votes->removeElement($vote)){
             $this->removeFromCount($vote->getValue());
-            $vote->setOpinion($this);
         }
-        return $this;
-    }
-
-    public function resetVotes() {
-        foreach($this->Votes as $vote){
-            $vote->setOpinion(null);
-        }
-        $this->resetVoteCount();
-        $this->setVotes(new ArrayCollection());
         return $this;
     }
 
@@ -513,27 +500,17 @@ class Opinion
      */
     public function addReport(Reporting $report)
     {
-        $this->Reports[] = $report;
-
+        $this->Reports->add($report);
         return $this;
     }
 
     /**
      * @param Reporting $report
+     * @return $this
      */
     public function removeReport(Reporting $report)
     {
         $this->Reports->removeElement($report);
-    }
-
-    public function setArguments($arguments){
-        $this->Consultation->removeFromArgumentCount($this->arguments->count());
-        foreach($arguments as $argument){
-            $argument->setOpinion($this);
-        }
-        $this->arguments = $arguments;
-        $this->argumentsCount = $arguments->count();
-        $this->Consultation->addToArgumentCount($arguments->count());
         return $this;
     }
 
@@ -541,26 +518,14 @@ class Opinion
         return $this->arguments;
     }
 
-    public function resetArguments() {
-        $this->Consultation->removeFromArgumentCount($this->arguments->count());
-        foreach($this->arguments as $argument){
-            $argument->setOpinion(null);
-        }
-        $this->argumentsCount = 0;
-        $this->setArguments(new ArrayCollection());
-        return $this;
-    }
-
     public function addArgument($argument){
         $this->arguments->add($argument);
-        $argument->setOpinion($this);
         $this->increaseArgumentsCount(1);
         return $this;
     }
 
     public function removeArgument($argument){
         if($this->arguments->removeElement($argument)){
-            $argument->setOpinion(null);
             $this->decreaseArgumentsCount(1);
         }
         return $this;
@@ -722,51 +687,6 @@ class Opinion
         return $this->getVoteCountMitige() + $this->getVoteCountNok() + $this->getVoteCountOk();
     }
 
-
-    /**
-     * Add vote
-     *
-     * @param type
-     *
-     * @return Opinion
-     */
-    public function addVoteWithType($type)
-    {
-        if($type == OpinionVote::VOTE_MITIGE){
-            $this->voteCountMitige++;
-        }
-        else if($type == OpinionVote::VOTE_NOK){
-            $this->voteCountNok++;
-        }
-        else if($type == OpinionVote::VOTE_OK){
-            $this->voteCountOk++;
-        }
-
-        return $this;
-    }
-
-    /**
-     * Remove vote
-     *
-     * @param type
-     *
-     * @return Opinion
-     */
-    public function removeVoteWithType($type)
-    {
-        if($type == OpinionVote::VOTE_MITIGE){
-            $this->voteCountMitige--;
-        }
-        else if($type == OpinionVote::VOTE_NOK){
-            $this->voteCountNok--;
-        }
-        else if($type == OpinionVote::VOTE_OK){
-            $this->voteCountOk--;
-        }
-
-        return $this;
-    }
-
     public function canDisplay() {
         return ($this->isEnabled && $this->Consultation->canDisplay());
     }
@@ -780,5 +700,16 @@ class Opinion
         $excerpt = substr($this->body, 0, $nb);
         $excerpt = $excerpt.'...';
         return $excerpt;
+    }
+
+    /**
+     * @ORM\PreRemove
+     */
+    public function deleteOpinion()
+    {
+        if ($this->Consultation != null) {
+            $this->Consultation->removeOpinion($this);
+        }
+
     }
 }

@@ -81,6 +81,9 @@ class StepAdmin extends Admin
                 'stepTypeLabels' => Step::$stepTypeLabels,
                 'label' => 'admin.fields.step.type',
             ))
+            ->add('updatedAt', null, array(
+                'label' => 'admin.fields.step.updated_at',
+            ))
             ->add('_action', 'actions', array(
                 'actions' => array(
                     'edit' => array(),
@@ -168,6 +171,12 @@ class StepAdmin extends Admin
             ))
             ->add('consultation', null, array(
                 'label' => 'admin.fields.step.consultation',
+            ))
+            ->add('createdAt', null, array(
+                'label' => 'admin.fields.step.created_at',
+            ))
+            ->add('updatedAt', null, array(
+                'label' => 'admin.fields.step.updated_at',
             ))
         ;
     }

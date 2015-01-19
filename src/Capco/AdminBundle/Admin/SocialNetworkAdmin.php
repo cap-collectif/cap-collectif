@@ -127,6 +127,9 @@ class SocialNetworkAdmin extends Admin
             ->add('position', null, array(
                 'label' => 'admin.fields.social_network.position',
             ))
+            ->add('createdAt', null, array(
+                'label' => 'admin.fields.social_network.created_at',
+            ))
             ->add('updatedAt', null, array(
                 'label' => 'admin.fields.social_network.updated_at',
             ))

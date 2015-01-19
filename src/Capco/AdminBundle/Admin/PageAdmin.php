@@ -105,6 +105,9 @@ class PageAdmin extends Admin
             ->add('updatedAt', null, array(
                 'label' => 'admin.fields.page.updated_at',
             ))
+            ->add('createdAt', null, array(
+                'label' => 'admin.fields.page.created_at',
+            ))
         ;
     }
 }

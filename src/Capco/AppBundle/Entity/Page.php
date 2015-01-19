@@ -270,17 +270,27 @@ class Page
     /**
      * @return MenuItem
      */
-    public function getMenuItem()
+    public function getMenuItems()
     {
-        return $this->MenuItem;
+        return $this->MenuItems;
     }
 
     /**
-     * @param MenuItem $MenuItem
+     * @param $menuItems
      */
-    public function setMenuItem($MenuItem)
+    public function setMenuItems($menuItems)
     {
-        $this->MenuItem = $MenuItem;
+        $this->MenuItems = $menuItems;
+    }
+
+    public function addMenuItem($menuItem)
+    {
+        $this->MenuItems->add($menuItem);
+    }
+
+    public function removeMenuItem($menuItem)
+    {
+        $this->MenuItems->removeElement($menuItem);
     }
 
     public function getExcerpt($nb = 100){

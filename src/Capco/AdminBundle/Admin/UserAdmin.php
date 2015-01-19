@@ -22,21 +22,26 @@ class UserAdmin extends BaseAdmin
         $listMapper
             ->addIdentifier('username')
             ->add('email')
-            ->add('groups')
             ->add('enabled', null, array(
                 'editable' => true,
             ))
             ->add('locked', null, array(
                 'editable' => true,
             ))
-            ->add('createdAt')
+            ->add('updatedAt', null, array(
+                'label' => 'admin.fields.user.updated_at',
+                'translation_domain' => 'SonataAdminBundle',
+            ))
+            ->add('_action', 'actions', array(
+                'label' => 'admin.fields.user.action',
+                'translation_domain' => 'SonataAdminBundle',
+                'actions' => array(
+                    'edit' => array(),
+                    'show' => array(),
+                    'delete' => array(),
+                )
+            ))
         ;
-
-        if ($this->isGranted('ROLE_ALLOWED_TO_SWITCH')) {
-            $listMapper
-                ->add('impersonating', 'string', array('template' => 'SonataUserBundle:Admin:Field/impersonating.html.twig'))
-            ;
-        }
     }
 
     /**
@@ -47,9 +52,9 @@ class UserAdmin extends BaseAdmin
         $filterMapper
             ->add('id')
             ->add('username')
-            ->add('locked')
             ->add('email')
-            ->add('groups')
+            ->add('enabled')
+            ->add('locked')
         ;
     }
 
@@ -106,7 +111,6 @@ class UserAdmin extends BaseAdmin
             ->end()
             ->tab('Security')
             ->with('Status', array('class' => 'col-md-4'))->end()
-            ->with('Groups', array('class' => 'col-md-4'))->end()
             ->with('Keys', array('class' => 'col-md-4'))->end()
             ->with('Roles', array('class' => 'col-md-12'))->end()
             ->end()
@@ -143,12 +147,26 @@ class UserAdmin extends BaseAdmin
             ->add('phone', null, array('required' => false))
             ->end()
             ->with('Social')
-            ->add('facebookUid', null, array('required' => false))
-            ->add('facebookName', null, array('required' => false))
-            ->add('twitterUid', null, array('required' => false))
-            ->add('twitterName', null, array('required' => false))
-            ->add('gplusUid', null, array('required' => false))
-            ->add('gplusName', null, array('required' => false))
+            ->add('facebook_id', null, array(
+                'required' => false,
+                'label' => 'Facebook Id',
+                'translation_domain' => 'SonataAdminBundle',
+            ))
+            ->add('facebook_access_token', null, array(
+                'required' => false,
+                'label' => 'Facebook access token',
+                'translation_domain' => 'SonataAdminBundle',
+            ))
+            ->add('google_id', null, array(
+                'required' => false,
+                'label' => 'Google Id',
+                'translation_domain' => 'SonataAdminBundle',
+            ))
+            ->add('google_access_token', null, array(
+                'required' => false,
+                'label' => 'Google access token',
+                'translation_domain' => 'SonataAdminBundle',
+            ))
             ->end()
             ->end()
         ;
@@ -157,16 +175,25 @@ class UserAdmin extends BaseAdmin
             $formMapper
                 ->tab('Security')
                 ->with('Status')
-                ->add('locked', null, array('required' => false))
-                ->add('expired', null, array('required' => false))
-                ->add('enabled', null, array('required' => false))
-                ->add('credentialsExpired', null, array('required' => false))
-                ->end()
-                ->with('Groups')
-                ->add('groups', 'sonata_type_model', array(
+                ->add('locked', null, array(
                     'required' => false,
-                    'expanded' => true,
-                    'multiple' => true
+                    'label' => 'Verrouillé',
+                    'translation_domain' => 'SonataAdminBundle',
+                ))
+                ->add('expired', null, array(
+                    'required' => false,
+                    'label' => 'Expiré',
+                    'translation_domain' => 'SonataAdminBundle',
+                ))
+                ->add('enabled', null, array(
+                    'required' => false,
+                    'label' => 'Activé',
+                    'translation_domain' => 'SonataAdminBundle',
+                ))
+                ->add('credentialsExpired', null, array(
+                    'required' => false,
+                    'label' => 'Identifiants de connexion expirés',
+                    'translation_domain' => 'SonataAdminBundle',
                 ))
                 ->end()
                 ->with('Roles')
@@ -174,7 +201,7 @@ class UserAdmin extends BaseAdmin
                     'label'    => 'form.label_roles',
                     'expanded' => true,
                     'multiple' => true,
-                    'required' => false
+                    'required' => false,
                 ))
                 ->end()
                 ->end()

@@ -14,6 +14,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  *
  * @ORM\Table(name="argument")
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\ArgumentRepository")
+ * @ORM\HasLifecycleCallbacks()
  */
 class Argument
 {
@@ -91,7 +92,7 @@ class Argument
     /**
      * @var
      *
-     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Opinion", inversedBy="arguments")
+     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Opinion", inversedBy="arguments", cascade={"persist"})
      */
     private $opinion;
 
@@ -131,8 +132,6 @@ class Argument
         $this->Votes = new ArrayCollection();
         $this->voteCount = 0;
         $this->Reports = new ArrayCollection();
-        $this->Votes = new ArrayCollection();
-        $this->voteCount = 0;
         $this->updatedAt = new \Datetime;
     }
 
@@ -246,7 +245,11 @@ class Argument
      */
     public function setOpinion($opinion)
     {
+        if($this->opinion != null) {
+            $this->opinion->removeArgument($this);
+        }
         $this->opinion = $opinion;
+        $opinion->addArgument($this);
     }
 
     /**
@@ -427,33 +430,13 @@ class Argument
         return $this->isEnabled;
     }
 
-    public function setVotes($votes){
-        foreach($votes as $vote){
-            $vote->setArgument($this);
-        }
-        $this->Votes = $votes;
-        $this->voteCount = $votes->count();
-        return $this;
-    }
-
     public function getVotes(){
         return $this->Votes;
-    }
-
-    public function resetVotes() {
-        foreach($this->Votes as $vote){
-            $vote->setArgument(null);
-        }
-        $this->voteCount = 0;
-        $this->setVotes(new ArrayCollection());
-        return $this;
     }
 
     public function addVote($vote){
         $this->voteCount++;
         $this->Votes->add($vote);
-        $vote->setArgument($this);
-
         return $this;
     }
 
@@ -461,10 +444,15 @@ class Argument
     {
         if ($this->Votes->removeElement($vote)) {
             $this->voteCount--;
+        }
+        return $this;
+    }
+
+    public function resetVotes() {
+        foreach ($this->Votes as $vote) {
+            $this->removeVote($vote);
             $vote->setArgument(null);
         }
-
-        return $this;
     }
 
     public function userHasVote(User $user = null){
@@ -492,17 +480,18 @@ class Argument
      */
     public function addReport(Reporting $report)
     {
-        $this->Reports[] = $report;
-
+        $this->Reports->add($report);
         return $this;
     }
 
     /**
      * @param Reporting $report
+     * @return $this
      */
     public function removeReport(Reporting $report)
     {
         $this->Reports->removeElement($report);
+        return $this;
     }
 
     public function canDisplay() {
@@ -518,5 +507,16 @@ class Argument
         $excerpt = substr($this->body, 0, $nb);
         $excerpt = $excerpt.'...';
         return $excerpt;
+    }
+
+    /**
+     * @ORM\PreRemove
+     */
+    public function deleteArgument()
+    {
+        if ($this->opinion != null) {
+            $this->opinion->removeArgument($this);
+        }
+
     }
 }

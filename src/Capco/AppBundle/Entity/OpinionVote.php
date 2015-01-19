@@ -11,6 +11,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
  *
  * @ORM\Table(name="opinion_vote")
  * @ORM\Entity()
+ * @ORM\HasLifecycleCallbacks()
  */
 class OpinionVote
 {
@@ -141,8 +142,13 @@ class OpinionVote
      */
     public function setValue($value)
     {
+        if ($this->opinion != null) {
+            $this->opinion->removeVote($this);
+        }
         $this->value = $value;
-
+        if ($this->opinion != null) {
+            $this->opinion->addVote($this);
+        }
         return $this;
     }
 
@@ -169,7 +175,11 @@ class OpinionVote
      */
     public function setOpinion($Opinion)
     {
+        if($this->opinion != null) {
+            $this->opinion->removeVote($this);
+        }
         $this->opinion = $Opinion;
+        $this->opinion->addVote($this);
     }
 
     /**
@@ -214,5 +224,16 @@ class OpinionVote
         $this->updatedAt = $updatedAt;
 
         return $this;
+    }
+
+    /**
+     * @ORM\PreRemove
+     */
+    public function deleteVote()
+    {
+        if ($this->opinion != null) {
+            $this->opinion->removeVote($this);
+        }
+
     }
 }

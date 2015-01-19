@@ -13,6 +13,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  *
  * @ORM\Table(name="source")
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\SourceRepository")
+ * @ORM\HasLifecycleCallbacks()
  */
 class Source
 {
@@ -105,7 +106,7 @@ class Source
     /**
      * @var
      *
-     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Category", inversedBy="Sources")
+     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Category", inversedBy="Sources", cascade={"persist"})
      * @ORM\JoinColumn(name="category_id", referencedColumnName="id", nullable=false)
      */
     private $Category;
@@ -361,7 +362,11 @@ class Source
      */
     public function setCategory($Category)
     {
+        if($this->Category != null) {
+            $this->Category->removeSource($this);
+        }
         $this->Category = $Category;
+        $this->Category->addSource($this);
     }
 
     /**
@@ -536,17 +541,18 @@ class Source
      */
     public function addReport(Reporting $report)
     {
-        $this->Reports[] = $report;
-
+        $this->Reports->add($report);
         return $this;
     }
 
     /**
      * @param Reporting $report
+     * @return $this
      */
     public function removeReport(Reporting $report)
     {
         $this->Reports->removeElement($report);
+        return $this;
     }
 
     /**
@@ -589,6 +595,20 @@ class Source
 
     public function canContribute() {
         return ($this->isEnabled && !$this->isTrashed && $this->Opinion->canContribute());
+    }
+
+    /**
+     * @ORM\PreRemove
+     */
+    public function deleteSource()
+    {
+        if ($this->Category != null) {
+            $this->Category->removeSource($this);
+        }
+        if ($this->Opinion != null) {
+            $this->Opinion->removeSource($this);
+        }
+
     }
 
 }

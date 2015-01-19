@@ -10,6 +10,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
  *
  * @ORM\Table(name="argument_vote")
  * @ORM\Entity
+ * @ORM\HasLifecycleCallbacks()
  */
 class ArgumentVote
 {
@@ -94,7 +95,11 @@ class ArgumentVote
      */
     public function setArgument($argument)
     {
+        if($this->argument != null) {
+            $this->argument->removeVote($this);
+        }
         $this->argument = $argument;
+        $argument->addVote($this);
     }
 
     /**
@@ -140,5 +145,16 @@ class ArgumentVote
         $this->updatedAt = $updatedAt;
 
         return $this;
+    }
+
+    /**
+     * @ORM\PreRemove
+     */
+    public function deleteVote()
+    {
+        if ($this->argument != null) {
+            $this->argument->removeVote($this);
+        }
+
     }
 }

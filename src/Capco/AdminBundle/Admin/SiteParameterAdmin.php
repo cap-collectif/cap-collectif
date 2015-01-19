@@ -98,6 +98,9 @@ class SiteParameterAdmin extends Admin
             ->add('isEnabled', null, array(
                 'label' => 'admin.fields.site_parameter.is_enabled',
             ))
+            ->add('createdAt', null, array(
+                'label' => 'admin.fields.site_parameter.created_at',
+            ))
             ->add('updatedAt', null, array(
                 'label' => 'admin.fields.site_parameter.updated_at',
             ))

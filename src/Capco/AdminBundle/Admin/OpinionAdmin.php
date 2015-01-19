@@ -159,10 +159,10 @@ class OpinionAdmin extends Admin
             ->add('OpinionType', null, array(
                 'label' => 'admin.fields.opinion.opinion_type',
             ))
-            ->add('voteCountTotal', 'integer', array(
+            ->add('voteCountTotal', null, array(
                 'label' => 'admin.fields.opinion.vote_count_total',
                 'mapped' => false,
-                'data' => $subject->getVoteCountAll(),
+                'template' => 'CapcoAdminBundle:Opinion:vote_count_show_field.html.twig',
             ))
             ->add('voteCountOk', null, array(
                 'label' => 'admin.fields.opinion.vote_count_ok',

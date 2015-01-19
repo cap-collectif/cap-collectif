@@ -59,7 +59,7 @@ class Category
 
     /**
      * @var
-     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\Source", mappedBy="Category",  cascade={"persist", "remove"})
+     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\Source", mappedBy="Category",  cascade={"persist", "remove"}, orphanRemoval=true)
      */
     private $Sources;
 
@@ -186,17 +186,18 @@ class Category
      */
     public function addSource(Source $source)
     {
-        $this->Sources[] = $source;
-
+        $this->Sources->add($source);
         return $this;
     }
 
     /**
      * @param Source $source
+     * @return $this
      */
     public function removeSource(Source $source)
     {
         $this->Sources->removeElement($source);
+        return $this;
     }
 
 }

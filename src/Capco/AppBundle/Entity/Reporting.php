@@ -11,6 +11,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  *
  * @ORM\Table(name="reporting")
  * @ORM\Entity
+ * @ORM\HasLifecycleCallbacks()
  */
 class Reporting
 {
@@ -232,7 +233,12 @@ class Reporting
      */
     public function setOpinion($Opinion)
     {
+        if($this->Opinion != null) {
+            $this->Opinion->removeReport($this);
+        }
         $this->Opinion = $Opinion;
+        $this->Opinion->addReport($this);
+        return $this;
     }
 
     /**
@@ -248,7 +254,12 @@ class Reporting
      */
     public function setSource($Source)
     {
+        if($this->Source != null) {
+            $this->Source->removeReport($this);
+        }
         $this->Source = $Source;
+        $this->Source->addReport($this);
+        return $this;
     }
 
     /**
@@ -264,7 +275,12 @@ class Reporting
      */
     public function setArgument($Argument)
     {
+        if($this->Argument != null) {
+            $this->Argument->removeReport($this);
+        }
         $this->Argument = $Argument;
+        $this->Argument->addReport($this);
+        return $this;
     }
 
     /**
@@ -280,7 +296,12 @@ class Reporting
      */
     public function setIdea($Idea)
     {
+        if($this->Idea != null) {
+            $this->Idea->removeReport($this);
+        }
         $this->Idea = $Idea;
+        $this->Idea->addReport($this);
+        return $this;
     }
 
     public function getRelatedObject(){
@@ -295,5 +316,26 @@ class Reporting
         }
         return null;
     }
+
+    /**
+     * @ORM\PreRemove
+     */
+    public function deleteReport()
+    {
+        if ($this->Opinion != null) {
+            $this->Opinion->removeReport($this);
+        }
+        if ($this->Source != null) {
+            $this->Source->removeReport($this);
+        }
+        if ($this->Argument != null) {
+            $this->Argument->removeReport($this);
+        }
+        if ($this->Idea != null) {
+            $this->Idea->removeReport($this);
+        }
+
+    }
+
 
 }

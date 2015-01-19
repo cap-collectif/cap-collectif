@@ -156,6 +156,10 @@ class IdeaAdmin extends Admin
             ->add('updatedAt', null, array(
                 'label' => 'admin.fields.idea.updated_at',
             ))
+            ->add('createdAt', null, array(
+                'label' => 'admin.fields.idea.created_at',
+            ))
+
         ;
     }
 }

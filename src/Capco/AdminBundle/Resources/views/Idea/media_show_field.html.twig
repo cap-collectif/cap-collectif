@@ -2,6 +2,6 @@
 
 {% block field %}
     {%  if value is not null %}
-        {% thumbnail value, 'small' with {'title': value.name, 'alt': value.name} %}
+        {% thumbnail value, 'form' with {'title': value.name, 'alt': value.name} %}
     {%  endif %}
 {% endblock %}

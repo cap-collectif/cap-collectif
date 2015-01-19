@@ -45,6 +45,13 @@ class SiteParameter
 
     /**
      * @var \DateTime
+     * @Gedmo\Timestampable(on="create")
+     * @ORM\Column(name="created_at", type="datetime")
+     */
+    private $createdAt;
+
+    /**
+     * @var \DateTime
      * @Gedmo\Timestampable(on="change", field={"value"})
      * @ORM\Column(name="updated_at", type="datetime")
      */
@@ -200,4 +207,14 @@ class SiteParameter
     {
         return $this->isEnabled;
     }
+
+    /**
+     * @return \DateTime
+     */
+    public function getCreatedAt()
+    {
+        return $this->createdAt;
+    }
+
+
 }

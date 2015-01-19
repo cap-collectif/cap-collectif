@@ -41,7 +41,7 @@ class MenuItemAdmin extends Admin
                 ),
                 'entity',
                 array(
-                    'query_builder' => $this->createParentsItemQuery()->getQueryBuilder(),
+                    'query_builder' => $this->createParentsItemQuery(),
                 )
             )
             ->add('Page', null, array(
@@ -170,6 +170,12 @@ class MenuItemAdmin extends Admin
             ->add('link', null, array(
                 'label' => 'admin.fields.menu_item.link',
             ))
+            ->add('createdAt', null, array(
+                'label' => 'admin.fields.menu_item.created_at',
+            ))
+            ->add('updatedAt', null, array(
+                'label' => 'admin.fields.menu_item.updated_at',
+            ))
         ;
     }
 
@@ -197,8 +203,8 @@ class MenuItemAdmin extends Admin
     private function createParentsItemQuery()
     {
         $query = $this->modelManager
-                            ->createQuery($this->getClass(), 'p');
-        $query->where('p.parent IS NULL')
+            ->createQuery($this->getClass(), 'p')
+            ->where('p.parent IS NULL')
             ->leftJoin('p.Menu', 'm')
             ->andWhere('m.type = :header')
             ->setParameter('header', Menu::TYPE_HEADER)

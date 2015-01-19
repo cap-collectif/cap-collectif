@@ -5,7 +5,7 @@ admin.group.navigation: Navigation
 admin.group.marketing: Communication
 admin.group.ideas: Boite à idées
 admin.group.parameters: Paramètres
-sonata.admin.group.user: Utilisateurs et groupes
+sonata.admin.group.user: Utilisateurs
 admin.group.moderation: Contributions
 
 # Dashboard names
@@ -92,6 +92,7 @@ admin:
       style: Icône
       link: Lien
       position: Position
+      created_at: Création
       updated_at: Mise à jour
     idea:
       title: Titre
@@ -102,6 +103,7 @@ admin:
       is_enabled: Publié
       is_trashed: Dans la corbeille
       updated_at: Mise à jour
+      created_at: Création
       media: Image
     idea_vote:
       idea: Idée
@@ -147,6 +149,7 @@ admin:
       color: Couleur
       opinions: Propositions
       is_enabled: Contribuable
+      created_at: Création
       updated_at: Mise à jour
     opinion_vote:
       opinion: Proposition
@@ -161,6 +164,7 @@ admin:
       url: URL
       menu_items: Menus
       updated_at: Mise à jour
+      created_at: Création
     reporting:
       status: Type de problème
       reporter: Auteur
@@ -177,11 +181,13 @@ admin:
       title: Description
       media: Image
       is_enabled: Publié
+      created_at: Création
       updated_at: Mise à jour
     site_parameter:
       title: Description
       value: Valeur
       is_enabled: Publié
+      created_at: Création
       updated_at: Mise à jour
     social_network:
       title: Titre
@@ -189,6 +195,7 @@ admin:
       link: Lien
       media: Image
       position: Position
+      created_at: Création
       updated_at: Mise à jour
     source:
       title: Titre
@@ -211,6 +218,8 @@ admin:
       consultation: Consultation
       type: Type d'étape
       body: Contenu
+      updated_at: Mise à jour
+      created_at: Création
     theme:
       title: Titre
       is_enabled: Publié
@@ -221,13 +230,23 @@ admin:
       media: Image
       updated_at: Mise à jour
       created_at: Création
+      author: Auteur
+      status: Statut
+      ideas_count: Idées
+      consultations_count: Consultations
     user:
       username: Nom d'utilisateur
       email: Email
       groups: Groupes
       enabled: Activé
       locked: Verrouillé
-      created_at: Créé le
+      created_at: Création
+      updated_at: Mise à jour
+      action: Action
+      facebook_id: Id Facebook
+      facebook_access_token: Token d'accès Facebook
+      google_id: Id Google+
+      google_access_token: Token d'accès Google+
   action:
     reporting:
       disable:

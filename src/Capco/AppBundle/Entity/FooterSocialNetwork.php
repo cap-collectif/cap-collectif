@@ -18,6 +18,7 @@ class FooterSocialNetwork
         'facebook' => 'Facebook',
         'twitter' => 'Twitter',
         'gplus' => 'Google+',
+        'rss' => 'RSS',
         'pinterest' => 'Pinterest',
         'github' => 'Github',
         'linkedin' => 'Linkedin',

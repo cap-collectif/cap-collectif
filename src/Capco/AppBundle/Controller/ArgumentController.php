@@ -109,16 +109,13 @@ class ArgumentController extends Controller
                 }
 
                 if($userVote == null ){
-                    $argument->addVote($argumentVote);
-                    $em->persist($argument);
+                    $argumentVote->setArgument($argument);
                     $em->persist($argumentVote);
                     $em->flush();
 
                     $this->get('session')->getFlashBag()->add('success', $this->get('translator')->trans('Your vote has been saved.'));
                 }
                 else {
-                    $argument->removeVote($argumentVote);
-                    $em->persist($argument);
                     $em->remove($argumentVote);
                     $em->flush();
 
@@ -178,14 +175,6 @@ class ArgumentController extends Controller
             if ($form->isValid()) {
 
                 $em = $this->getDoctrine()->getManager();
-
-                // Get votes on argument
-                $linkedVotes = $em->getRepository('CapcoAppBundle:ArgumentVote')->findByArgument($argument);
-
-                foreach($linkedVotes as $vote){
-                    $em->remove($vote);
-                }
-
                 $argument->resetVotes();
                 $em->persist($argument);
                 $em->flush();
@@ -249,7 +238,6 @@ class ArgumentController extends Controller
 
             if ($form->isValid()) {
                 $em = $this->getDoctrine()->getManager();
-                $opinion->removeArgument($argument);
                 $em->remove($argument);
                 $em->flush();
 
