@@ -186,7 +186,7 @@ class MenuItemAdmin extends Admin
     private function manageLink($menuItem) {
         $page = $menuItem->getPage();
         if(null != $page){
-            $link = $this->routeGenerator->generate('app_page_show', array('slug' => $page->getSlug()));
+            $link = 'pages/'.$page->getSlug();
             $menuItem->setLink($link);
         }
         else {
