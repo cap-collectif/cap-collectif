@@ -15,7 +15,9 @@ class IdeaRepository extends EntityRepository
 {
     /**
      * Get all trashed ideas
-     * @return mixed
+     * @param int $nbByPage
+     * @param int $page
+     * @return Paginator
      */
     public function getTrashed($nbByPage = 8, $page = 1)
     {
@@ -27,15 +29,12 @@ class IdeaRepository extends EntityRepository
         }
 
         $qb = $this->getIsEnabledQueryBuilder()
-            ->andWhere('i.isTrashed = :trashed')
-            ->setParameter('trashed', true)
+            ->addSelect('a', 'm', 't')
             ->leftJoin('i.Author', 'a')
-            ->addSelect('a')
             ->leftJoin('a.Media', 'm')
-            ->addSelect('m')
             ->leftJoin('i.Theme', 't')
-            ->addSelect('t')
-        ;
+            ->andWhere('i.isTrashed = :trashed')
+            ->setParameter('trashed', true);
 
         $query = $qb->getQuery();
 
@@ -92,6 +91,8 @@ class IdeaRepository extends EntityRepository
 
     /**
      * Get last ideas
+     * @param int $limit
+     * @param int $offset
      * @return mixed
      */
     public function getLast($limit = 1, $offset = 0)
@@ -121,7 +122,12 @@ class IdeaRepository extends EntityRepository
 
     /**
      * Get ideas depending on theme and search term, ordered by sort criteria
-     * @return mixed
+     * @param int $nbByPage
+     * @param int $page
+     * @param null $theme
+     * @param null $sort
+     * @param null $term
+     * @return Paginator
      */
     public function getSearchResults($nbByPage = 8, $page = 1, $theme = null, $sort = null, $term = null)
     {
@@ -133,15 +139,12 @@ class IdeaRepository extends EntityRepository
         }
 
         $qb = $this->getIsEnabledQueryBuilder()
-            ->andWhere('i.isTrashed = :notTrashed')
-            ->setParameter('notTrashed', false)
+            ->addSelect('a', 'm', 't')
             ->leftJoin('i.Author', 'a')
-            ->addSelect('a')
             ->leftJoin('a.Media', 'm')
-            ->addSelect('m')
             ->leftJoin('i.Theme', 't')
-            ->addSelect('t')
-        ;
+            ->andWhere('i.isTrashed = :notTrashed')
+            ->setParameter('notTrashed', false);
 
         if ($theme !== null && $theme !== Theme::FILTER_ALL) {
             $qb->andWhere('t.slug = :theme')
@@ -179,10 +182,9 @@ class IdeaRepository extends EntityRepository
     public function getByUser($user)
     {
         $qb = $this->getIsEnabledQueryBuilder()
+            ->addSelect('a', 'm')
             ->leftJoin('i.Author', 'a')
-            ->addSelect('a')
             ->leftJoin('a.Media', 'm')
-            ->addSelect('m')
             ->andWhere('i.Author = :user')
             ->setParameter('user', $user)
             ->orderBy('i.createdAt', 'DESC');
@@ -194,17 +196,18 @@ class IdeaRepository extends EntityRepository
 
     /**
      * Get one idea by id
+     * @param $id
      * @return mixed
+     * @throws \Doctrine\ORM\NonUniqueResultException
      */
     public function getOne($id)
     {
         $query = $this->getIsEnabledQueryBuilder()
+            ->addSelect('a', 'm', 't', 'media')
+            ->leftJoin('i.Media', 'media')
             ->leftJoin('i.Author', 'a')
-            ->addSelect('a')
             ->leftJoin('a.Media', 'm')
-            ->addSelect('m')
             ->leftJoin('i.Theme', 't')
-            ->addSelect('t')
             ->andWhere('i.id = :id')
             ->setParameter('id', $id)
             ->getQuery();
@@ -225,8 +228,8 @@ class IdeaRepository extends EntityRepository
             ->leftJoin('a.Media', 'm')
             ->leftJoin('i.Theme', 't')
             ->andWhere('i.isTrashed = :notTrashed')
-            ->setParameter('notTrashed', false)
             ->andWhere('t.id = :theme')
+            ->setParameter('notTrashed', false)
             ->setParameter('theme', $theme)
             ->orderBy('i.createdAt', 'DESC');
 

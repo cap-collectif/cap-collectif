@@ -11,6 +11,11 @@ use Doctrine\ORM\Tools\Pagination\Paginator;
  */
 class ThemeRepository extends EntityRepository
 {
+    /**
+     * @param int $limit
+     * @param int $offset
+     * @return array
+     */
     public function getLast($limit = 1, $offset = 0)
     {
         $qb = $this->createQueryBuilder('t');
@@ -29,6 +34,12 @@ class ThemeRepository extends EntityRepository
             ->getResult();
     }
 
+    /**
+     * @param int $nbByPage
+     * @param int $page
+     * @param null $term
+     * @return Paginator
+     */
     public function getSearchResultsWithconsultationsAndIdeas($nbByPage = 8, $page = 1, $term = null)
     {
         if ((int) $page < 1) {
@@ -63,7 +74,12 @@ class ThemeRepository extends EntityRepository
         return new Paginator($query);
     }
 
-    //Helpers
+    /**
+     * Helpers
+     * @param QueryBuilder $qb
+     * @param string $alias
+     * @return QueryBuilder
+     */
     private function joinEnabledConsultations(QueryBuilder $qb, $alias = 'c')
     {
         $qb->leftJoin('t.Consultations', $alias)
@@ -71,6 +87,7 @@ class ThemeRepository extends EntityRepository
         $this->whereIsEnabled($qb, $alias);
         return $qb;
     }
+
     private function joinEnabledIdeas(QueryBuilder $qb, $alias = 'i')
     {
         $qb->leftJoin('t.Ideas', 'i')

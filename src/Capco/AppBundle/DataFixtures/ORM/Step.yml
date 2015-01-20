@@ -11,7 +11,7 @@ Capco\AppBundle\Entity\Step:
     step2:
         title: <sentence(3)>
         isEnabled: <boolean()>
-        type: <numberBetween(0, 1)>
+        type: 0
         startAt: <dateTimeBetween('-1 years','now')>
         endAt: <dateTimeBetween('-10 days','now')>
         position: <numberBetween(1, 10)>
@@ -20,7 +20,7 @@ Capco\AppBundle\Entity\Step:
     step3:
         title: <sentence(3)>
         isEnabled: <boolean()>
-        type: <numberBetween(0, 1)>
+        type: 0
         startAt: <dateTimeBetween('-1 years','now')>
         endAt: <dateTimeBetween('-10 days','now')>
         position: <numberBetween(1, 10)>
@@ -29,7 +29,7 @@ Capco\AppBundle\Entity\Step:
     step4:
         title: <sentence(3)>
         isEnabled: <boolean()>
-        type: <numberBetween(0, 1)>
+        type: 1
         startAt: <dateTimeBetween('-1 years','now')>
         endAt: <dateTimeBetween('-10 days','now')>
         position: <numberBetween(1, 10)>

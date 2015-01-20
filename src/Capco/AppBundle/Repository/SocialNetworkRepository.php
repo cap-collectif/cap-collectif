@@ -9,6 +9,10 @@ use Doctrine\ORM\EntityRepository;
  */
 class SocialNetworkRepository extends EntityRepository
 {
+    /**
+     * get all social network enabled
+     * @return array
+     */
     public function getEnabled()
     {
         $qb = $this->createQueryBuilder('s')

@@ -17,27 +17,22 @@ class OpinionTypeRepository extends EntityRepository
 {
     /**
      * Get all opnionTypes with opinions for user
-     * @param $consultation
-     * @return mixed
+     * @param $user
+     * @return array
      */
     public function getByUser($user)
     {
         $qb = $this->createQueryBuilder('ot')
+            ->addSelect('o', 'c', 'a', 'm', 'v')
             ->leftJoin('ot.Opinions','o')
-            ->addSelect('o')
             ->leftJoin('o.Consultation', 'c')
-            ->addSelect('c')
             ->leftJoin('o.Author', 'a')
-            ->addSelect('a')
             ->leftJoin('a.Media', 'm')
-            ->addSelect('m')
             ->leftJoin('o.Votes', 'v')
-            ->addSelect('v')
-            ->andWhere('c.isEnabled = :enabledConsul')
-            ->setParameter('enabledConsul', true)
+            ->andWhere('c.isEnabled = :enabled')
             ->andWhere('o.isEnabled = :enabled')
-            ->setParameter('enabled', true)
             ->andWhere('o.Author = :author')
+            ->setParameter('enabled', true)
             ->setParameter('author', $user)
             ->orderBy('ot.position', 'ASC')
             ->addOrderBy('o.createdAt', 'DESC');
@@ -48,23 +43,20 @@ class OpinionTypeRepository extends EntityRepository
     }
 
     /**
-     * Get all opinionTypes with opinions for user
-     * @param $consultation
-     * @return mixed
+     * Count all opinionTypes with opinions for user
+     * @param $user
+     * @return array
      */
     public function countByUser($user)
     {
         $qb = $this->createQueryBuilder('ot')
+            ->addSelect('o', 'c')
             ->Join('ot.Opinions','o')
-            ->addselect('o')
             ->leftJoin('o.Consultation', 'c')
-            ->addSelect('c')
             ->addGroupBy('ot.id')
-//            ->addGroupBy('o.id')
             ->andWhere('o.Author = :author')
             ->andWhere('o.isEnabled = :enabled')
-            ->andWhere('c.isEnabled = :enabledConsul')
-            ->setParameter('enabledConsul', true)
+            ->andWhere('c.isEnabled = :enabled')
             ->setParameter('enabled', true)
             ->setParameter('author', $user)
             ->orderBy('ot.position', 'ASC')
@@ -76,37 +68,40 @@ class OpinionTypeRepository extends EntityRepository
     }
 
 
-
-    /*public function findByType($consultation)
+    /**
+     * Get all opinionTypes with opinions for consultation
+     * @param $consultation
+     * @return array
+     */
+    public function getByConsultation($consultation)
     {
         $qb = $this->createQueryBuilder('ot')
+            ->addSelect('o', 'c', 'a', 'm', 'arg', 'v')
             ->leftJoin('ot.Opinions','o')
-            ->addSelect('o')
             ->leftJoin('o.Consultation', 'c')
-            ->addSelect('c')
             ->leftJoin('o.Author', 'a')
-            ->addSelect('a')
             ->leftJoin('a.Media', 'm')
-            ->addSelect('m')
             ->leftJoin('o.arguments', 'arg')
-            ->addSelect('arg')
             ->leftJoin('o.Votes', 'v')
-            ->addSelect('v')
             ->andWhere('o.Consultation = :consultation')
             ->andWhere('o.isEnabled = :enabled')
-            ->setParameter('enabled', true)
             ->andWhere('o.isTrashed = :notTrashed')
-            ->setParameter('notTrashed', false)
             ->setParameter('consultation', $consultation)
+            ->setParameter('enabled', true)
+            ->setParameter('notTrashed', false)
             ->orderBy('ot.position', 'ASC')
             ->addOrderBy('o.createdAt', 'DESC');
 
         return $qb
             ->getQuery()
             ->getResult();
-    }*/
+    }
 
-    /*public function findAllByPosition()
+    /**
+     * Get all opinionTypes
+     * @return array
+     */
+    public function getOrderedByPosition()
     {
         $qb = $this->createQueryBuilder('ot')
             ->orderBy('ot.position', 'ASC');
@@ -114,6 +109,6 @@ class OpinionTypeRepository extends EntityRepository
         return $qb
             ->getQuery()
             ->getResult();
-    }*/
+    }
 
 }

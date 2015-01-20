@@ -10,7 +10,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
  * Vote
  *
  * @ORM\Table(name="opinion_vote")
- * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\OpinionVoteRepository")
+ * @ORM\Entity()
  */
 class OpinionVote
 {

@@ -5,7 +5,7 @@
     <div class="opinion__arguments__header  row">
         <h4 class="col-xs-6  col-sm-12  col-md-6  h4  opinion__header__title">{% transchoice nbArguments with {'%count%': nbArguments} from 'CapcoAppBundle' %}consultation.arguments{% endtranschoice %} {% if argumentType == "yes" %} pour {% else %} contre {% endif %} </h4>
         <div class="col-xs-6  col-sm-12  col-md-6">
-            <div class="filter  block">
+            <div class="filter">
                 {{ form_start(sortArgumentsForm) }}
                 {{ form_errors(sortArgumentsForm) }}
                 <div class="formgroup--inline">

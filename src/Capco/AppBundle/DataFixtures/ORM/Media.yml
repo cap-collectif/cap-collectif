@@ -40,3 +40,42 @@ Capco\MediaBundle\Entity\Media:
         enabled:       true
         name:          Logo
         context:       @MediaContext3
+
+    # Social Network
+    MediaFlickr:
+        binaryContent: ../files/social/flickr.png
+        enabled:       true
+        name:          Flickr
+        context:       @MediaContext2
+
+
+
+    MediaFacebook:
+        binaryContent: ../files/social/facebook.png
+        enabled:       true
+        name:          Facebook
+        context:       @MediaContext2
+
+    MediaGooglePlus:
+        binaryContent: ../files/social/google_plus.png
+        enabled:       true
+        name:          Google
+        context:       @MediaContext2
+
+    MediaLinkedIn:
+        binaryContent: ../files/social/linkedIn.png
+        enabled:       true
+        name:          LinkedIn
+        context:       @MediaContext2
+
+    MediaRSS:
+        binaryContent: ../files/social/rss.png
+        enabled:       true
+        name:          RSS
+        context:       @MediaContext2
+
+    MediaTwitter:
+        binaryContent: ../files/social/twitter.png
+        enabled:       true
+        name:          Twitter
+        context:       @MediaContext2

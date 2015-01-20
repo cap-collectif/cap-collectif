@@ -10,6 +10,12 @@ use Doctrine\ORM\EntityRepository;
 class SiteImageRepository extends EntityRepository
 {
 
+    /**
+     * Logo site parameters /CapcoAppBundle/SiteImage/Resolver
+     * @param $key
+     * @return mixed
+     * @throws \Doctrine\ORM\NonUniqueResultException
+     */
     public function getMediaByKeyIfEnabled($key)
     {
         $result = $this->createQueryBuilder('p')

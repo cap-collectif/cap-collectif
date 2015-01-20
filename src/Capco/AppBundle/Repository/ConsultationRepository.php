@@ -21,19 +21,18 @@ class ConsultationRepository extends EntityRepository
 
     /**
      * Get one by slug
+     * @param $slug
      * @return mixed
+     * @throws \Doctrine\ORM\NonUniqueResultException
      */
     public function getOne($slug)
     {
         $qb = $this->getIsEnabledQueryBuilder('c')
+            ->addSelect('t', 's', 'cov', 'o')
             ->leftJoin('c.Themes', 't')
-            ->addSelect('t')
             ->leftJoin('c.Steps', 's')
-            ->addSelect('s')
             ->leftJoin('c.Cover', 'cov')
-            ->addSelect('cov')
             ->leftJoin('c.Opinions', 'o')
-            ->addSelect('o')
             ->andWhere('c.slug = :slug')
             ->setParameter('slug', $slug)
             ->addOrderBy('o.createdAt', 'DESC');
@@ -45,7 +44,12 @@ class ConsultationRepository extends EntityRepository
 
     /**
      * Get search results
-     * @return mixed
+     * @param int $nbByPage
+     * @param int $page
+     * @param null $theme
+     * @param null $sort
+     * @param null $term
+     * @return Paginator
      */
     public function getSearchResults($nbByPage = 8, $page = 1, $theme = null, $sort = null, $term = null)
     {
@@ -57,14 +61,11 @@ class ConsultationRepository extends EntityRepository
         }
 
         $qb = $this->getIsEnabledQueryBuilder()
+            ->addSelect('t', 's', 'cov')
             ->leftJoin('c.Themes', 't')
-            ->addSelect('t')
             ->leftJoin('c.Steps', 's')
-            ->addSelect('s')
             ->leftJoin('c.Cover', 'cov')
-            ->addSelect('cov')
-            ->addOrderBy('c.createdAt', 'DESC')
-        ;
+            ->addOrderBy('c.createdAt', 'DESC');
 
         if ($theme !== null && $theme !== Theme::FILTER_ALL) {
             $qb->andWhere('t.slug = :theme')
@@ -96,17 +97,17 @@ class ConsultationRepository extends EntityRepository
 
     /**
      * Get last consultations
-     * @return mixed
+     * @param int $limit
+     * @param int $offset
+     * @return Paginator
      */
     public function getLast($limit = 1, $offset = 0)
     {
         $qb = $this->getIsEnabledQueryBuilder()
+            ->addSelect('t', 's', 'cov')
             ->leftJoin('c.Themes', 't')
-            ->addSelect('t')
             ->leftJoin('c.Steps', 's')
-            ->addSelect('s')
             ->leftJoin('c.Cover', 'cov')
-            ->addSelect('cov')
             ->addOrderBy('c.createdAt', 'DESC');
 
         if ($limit) {
@@ -122,7 +123,9 @@ class ConsultationRepository extends EntityRepository
 
     /**
      * Get last open consultations
-     * @return mixed
+     * @param int $limit
+     * @param int $offset
+     * @return array
      */
     public function getLastOpen($limit = 1, $offset = 0)
     {
@@ -139,10 +142,10 @@ class ConsultationRepository extends EntityRepository
     public function getByTheme($theme)
     {
         $qb = $this->getIsEnabledQueryBuilder()
+            ->addSelect('cov', 't', 's')
             ->leftJoin('c.Cover', 'cov')
-            ->addSelect('cov')
             ->leftJoin('c.Themes' , 't')
-            ->addSelect('t')
+            ->leftJoin('c.Steps', 's')
             ->andWhere(':theme MEMBER OF c.Themes')
             ->setParameter('theme', $theme)
             ->orderBy('c.createdAt', 'DESC');

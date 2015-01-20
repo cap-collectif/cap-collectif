@@ -137,7 +137,7 @@ class ConsultationController extends Controller
      */
     public function showNavOpinionTypesAction(Consultation $consultation, $type)
     {
-        $opinionTypes = $this->getDoctrine()->getRepository('CapcoAppBundle:OpinionType')->findAllByPosition();
+        $opinionTypes = $this->getDoctrine()->getRepository('CapcoAppBundle:OpinionType')->getOrderedByPosition();
 
         return [
             'opinionTypes' => $opinionTypes,
@@ -153,7 +153,7 @@ class ConsultationController extends Controller
      */
     public function showOpinionsAction(Consultation $consultation)
     {
-        $blocks = $this->getDoctrine()->getRepository('CapcoAppBundle:OpinionType')->findByType($consultation);
+        $blocks = $this->getDoctrine()->getRepository('CapcoAppBundle:OpinionType')->getByConsultation($consultation);
 
         return [
             'blocks' => $blocks,

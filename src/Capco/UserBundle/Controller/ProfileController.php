@@ -97,12 +97,12 @@ class ProfileController extends BaseController
      */
     public function showUserOpinionsAction(User $user)
     {
-        $blocks = $this->getDoctrine()->getRepository('CapcoAppBundle:OpinionType')->findByUser($user);
+        $blocks = $this->getDoctrine()->getRepository('CapcoAppBundle:OpinionType')->getByUser($user);
 
-        $countOpinions = $this->getDoctrine()->getRepository('CapcoAppBundle:Opinion')->countOpinionsByUser($user);
-        $countArguments = $this->getDoctrine()->getRepository('CapcoAppBundle:Argument')->countArgumentsByUser($user);
-        $countIdeas = $this->getDoctrine()->getRepository('CapcoAppBundle:Idea')->countIdeasEnabledAndNotTrashedByUser($user);
-        $countSources = $this->getDoctrine()->getRepository('CapcoAppBundle:Source')->countSourcesByUser($user);
+        $countOpinions = $this->getDoctrine()->getRepository('CapcoAppBundle:Opinion')->countByUser($user);
+        $countArguments = $this->getDoctrine()->getRepository('CapcoAppBundle:Argument')->countByUser($user);
+        $countIdeas = $this->getDoctrine()->getRepository('CapcoAppBundle:Idea')->countByUser($user);
+        $countSources = $this->getDoctrine()->getRepository('CapcoAppBundle:Source')->countByUser($user);
 
         return [
             'user' => $user,
@@ -122,12 +122,12 @@ class ProfileController extends BaseController
      */
     public function showArgumentsAction(User $user)
     {
-        $arguments = $this->getDoctrine()->getRepository('CapcoAppBundle:Argument')->getEnabledArgumentsByUser($user);
+        $arguments = $this->getDoctrine()->getRepository('CapcoAppBundle:Argument')->getByUser($user);
 
-        $countOpinions = $this->getDoctrine()->getRepository('CapcoAppBundle:Opinion')->countOpinionsByUser($user);
-        $countArguments = $this->getDoctrine()->getRepository('CapcoAppBundle:Argument')->countArgumentsByUser($user);
-        $countIdeas = $this->getDoctrine()->getRepository('CapcoAppBundle:Idea')->countIdeasEnabledAndNotTrashedByUser($user);
-        $countSources = $this->getDoctrine()->getRepository('CapcoAppBundle:Source')->countSourcesByUser($user);
+        $countOpinions = $this->getDoctrine()->getRepository('CapcoAppBundle:Opinion')->countByUser($user);
+        $countArguments = $this->getDoctrine()->getRepository('CapcoAppBundle:Argument')->countByUser($user);
+        $countIdeas = $this->getDoctrine()->getRepository('CapcoAppBundle:Idea')->countByUser($user);
+        $countSources = $this->getDoctrine()->getRepository('CapcoAppBundle:Source')->countByUser($user);
 
         return array(
             'user' => $user,
@@ -148,12 +148,12 @@ class ProfileController extends BaseController
      */
     public function showIdeasAction(User $user)
     {
-        $ideas = $this->getDoctrine()->getRepository('CapcoAppBundle:Idea')->getUser($user);
+        $ideas = $this->getDoctrine()->getRepository('CapcoAppBundle:Idea')->getByUser($user);
 
-        $countOpinions = $this->getDoctrine()->getRepository('CapcoAppBundle:Opinion')->countOpinionsByUser($user);
-        $countArguments = $this->getDoctrine()->getRepository('CapcoAppBundle:Argument')->countArgumentsByUser($user);
-        $countIdeas = $this->getDoctrine()->getRepository('CapcoAppBundle:Idea')->countIdeasEnabledAndNotTrashedByUser($user);
-        $countSources = $this->getDoctrine()->getRepository('CapcoAppBundle:Source')->countSourcesByUser($user);
+        $countOpinions = $this->getDoctrine()->getRepository('CapcoAppBundle:Opinion')->countByUser($user);
+        $countArguments = $this->getDoctrine()->getRepository('CapcoAppBundle:Argument')->countByUser($user);
+        $countIdeas = $this->getDoctrine()->getRepository('CapcoAppBundle:Idea')->countByUser($user);
+        $countSources = $this->getDoctrine()->getRepository('CapcoAppBundle:Source')->countByUser($user);
 
         return array(
             'user' => $user,
@@ -175,10 +175,10 @@ class ProfileController extends BaseController
     {
         $sources = $this->getDoctrine()->getRepository('CapcoAppBundle:Source')->getByUser($user);
 
-        $countOpinions = $this->getDoctrine()->getRepository('CapcoAppBundle:Opinion')->countOpinionsByUser($user);
-        $countArguments = $this->getDoctrine()->getRepository('CapcoAppBundle:Argument')->countArgumentsByUser($user);
-        $countIdeas = $this->getDoctrine()->getRepository('CapcoAppBundle:Idea')->countIdeasEnabledAndNotTrashedByUser($user);
-        $countSources = $this->getDoctrine()->getRepository('CapcoAppBundle:Source')->countSourcesByUser($user);
+        $countOpinions = $this->getDoctrine()->getRepository('CapcoAppBundle:Opinion')->countByUser($user);
+        $countArguments = $this->getDoctrine()->getRepository('CapcoAppBundle:Argument')->countByUser($user);
+        $countIdeas = $this->getDoctrine()->getRepository('CapcoAppBundle:Idea')->countByUser($user);
+        $countSources = $this->getDoctrine()->getRepository('CapcoAppBundle:Source')->countByUser($user);
 
         return array(
             'user' => $user,

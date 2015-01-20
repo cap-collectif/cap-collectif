@@ -452,6 +452,7 @@ class Opinion
 
     /**
      * @param OpinionVote $vote
+     * @return $this
      */
     public function removeVote(OpinionVote $vote)
     {
@@ -551,18 +552,16 @@ class Opinion
     }
 
     public function addArgument($argument){
-        $this->argumentsCount++;
         $this->arguments->add($argument);
         $argument->setOpinion($this);
-        $this->Consultation->addToArgumentCount(1);
+        $this->increaseArgumentsCount(1);
         return $this;
     }
 
     public function removeArgument($argument){
         if($this->arguments->removeElement($argument)){
-            $this->argumentsCount--;
             $argument->setOpinion(null);
-            $this->Consultation->removeFromArgumentCount(1);
+            $this->decreaseArgumentsCount(1);
         }
         return $this;
     }

@@ -15,31 +15,28 @@ use Doctrine\ORM\Tools\Pagination\Paginator;
  */
 class OpinionRepository extends EntityRepository
 {
-
     /**
      * Get one opinion by slug, opinion type and consultation
      * @param $consultation
      * @param $opinionType
      * @param $opinion
+     * @return mixed
+     * @throws \Doctrine\ORM\NonUniqueResultException
      */
     public function getOneBySlug($consultation, $opinionType, $opinion)
     {
         $qb = $this->getIsEnabledQueryBuilder()
+            ->addSelect('a', 'm', 'ot', 'c')
             ->leftJoin('o.Author', 'a')
-            ->addSelect('a')
             ->leftJoin('a.Media', 'm')
-            ->addSelect('m')
             ->leftJoin('o.OpinionType', 'ot')
-            ->addSelect('ot')
             ->leftJoin('o.Consultation', 'c')
-            ->addSelect('c')
             ->andWhere('c.slug = :consultation')
-            ->setParameter('consultation', $consultation)
-            ->andWhere('ot.slug = :opinionType')
-            ->setParameter('opinionType', $opinionType)
             ->andWhere('o.slug = :opinion')
+            ->andWhere('ot.slug = :opinionType')
+            ->setParameter('consultation', $consultation)
             ->setParameter('opinion', $opinion)
-        ;
+            ->setParameter('opinionType', $opinionType);
 
         return $qb->getQuery()
             ->getOneOrNullResult();
@@ -49,22 +46,20 @@ class OpinionRepository extends EntityRepository
     /**
      * Get all trashed opinions
      * @param $consultation
+     * @return array
      */
     public function getTrashedByConsultation($consultation)
     {
         $qb = $this->getIsEnabledQueryBuilder()
-            ->andWhere('o.isTrashed = :trashed')
-            ->setParameter('trashed', true)
+            ->addSelect('ot', 'c', 'aut', 'm')
             ->leftJoin('o.OpinionType', 'ot')
-            ->addSelect('ot')
             ->leftJoin('o.Consultation', 'c')
-            ->addSelect('c')
             ->leftJoin('o.Author', 'aut')
-            ->addSelect('aut')
             ->leftJoin('aut.Media', 'm')
-            ->addSelect('m')
             ->andWhere('o.Consultation = :consultation')
+            ->andWhere('o.isTrashed = :trashed')
             ->setParameter('consultation', $consultation)
+            ->setParameter('trashed', true)
             ->orderBy('o.trashedAt', 'DESC');
 
         return $qb->getQuery()->getResult();
@@ -74,21 +69,19 @@ class OpinionRepository extends EntityRepository
     /**
      * Get all opinions by user
      * @param $user
+     * @return array
      */
     public function getByUser($user)
     {
         $qb = $this->getIsEnabledQueryBuilder()
+            ->addSelect('ot', 'c', 'aut', 'm')
             ->leftJoin('o.OpinionType', 'ot')
-            ->addSelect('ot')
             ->leftJoin('o.Consultation', 'c')
-            ->addSelect('c')
             ->leftJoin('o.Author', 'aut')
-            ->addSelect('aut')
             ->leftJoin('aut.Media', 'm')
-            ->addSelect('m')
             ->andWhere('c.isEnabled = :enabled')
-            ->setParameter('enabled', true)
             ->andWhere('o.Author = :author')
+            ->setParameter('enabled', true)
             ->setParameter('author', $user)
             ->orderBy('o.createdAt', 'DESC');
 
@@ -106,11 +99,10 @@ class OpinionRepository extends EntityRepository
         $qb = $this->getIsEnabledQueryBuilder()
             ->select('COUNT(o) as totalOpinions')
             ->leftJoin('o.Consultation', 'c')
-            ->andWhere('c.isEnabled = :enabledConsul')
-            ->setParameter('enabledConsul', true)
+            ->andWhere('c.isEnabled = :enabled')
             ->andWhere('o.isEnabled = :enabled')
-            ->setParameter('enabled', true)
             ->andWhere('o.Author = :author')
+            ->setParameter('enabled', true)
             ->setParameter('author', $user);
 
         return $qb
@@ -120,6 +112,11 @@ class OpinionRepository extends EntityRepository
 
     /**
      * Get opinions by opinionType and consultation
+     * @param $consultation
+     * @param $opinionType
+     * @param int $nbByPage
+     * @param int $page
+     * @return Paginator
      * @return mixed
      */
     public function getByOpinionTypeAndConsultation($consultation, $opinionType, $nbByPage = 10, $page = 1)
@@ -132,21 +129,18 @@ class OpinionRepository extends EntityRepository
         }
 
         $qb = $this->getIsEnabledQueryBuilder()
-                ->andWhere('o.isTrashed = :notTrashed')
-                ->setParameter('notTrashed', false)
-                ->leftJoin('o.OpinionType', 'ot')
-                ->addSelect('ot')
-                ->leftJoin('o.Consultation', 'c')
-                ->addSelect('c')
-                ->leftJoin('o.Author', 'aut')
-                ->addSelect('aut')
-                ->leftJoin('aut.Media', 'm')
-                ->addSelect('m')
-                ->andWhere('o.Consultation = :consultation')
-                ->setParameter('consultation', $consultation)
-                ->andWhere('o.OpinionType = :opinionType')
-                ->setParameter('opinionType', $opinionType)
-                ->orderBy('o.createdAt', 'DESC');
+            ->addSelect('ot', 'c', 'aut', 'm')
+            ->leftJoin('o.OpinionType', 'ot')
+            ->leftJoin('o.Consultation', 'c')
+            ->leftJoin('o.Author', 'aut')
+            ->leftJoin('aut.Media', 'm')
+            ->andWhere('o.Consultation = :consultation')
+            ->andWhere('o.OpinionType = :opinionType')
+            ->andWhere('o.isTrashed = :notTrashed')
+            ->setParameter('consultation', $consultation)
+            ->setParameter('opinionType', $opinionType)
+            ->setParameter('notTrashed', false)
+            ->orderBy('o.createdAt', 'DESC');
 
         $query = $qb->getQuery()
             ->setFirstResult(($page - 1) * $nbByPage)

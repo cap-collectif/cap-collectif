@@ -555,8 +555,8 @@ class Consultation
 
     /**
      * Remove theme
-     *
      * @param \Capco\AppBundle\Entity\Theme $theme
+     * @return $this
      */
     public function removeTheme(Theme $theme)
     {
@@ -612,8 +612,8 @@ class Consultation
 
     /**
      * Remove step
-     *
      * @param \Capco\AppBundle\Entity\Step $step
+     * @return $this
      */
     public function removeStep(Step $step)
     {
