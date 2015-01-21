@@ -83,57 +83,11 @@ class Argument
     private $voteCount = 0;
 
     /**
-     * @var
-     *
-     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\ArgumentVote", mappedBy="argument", cascade={"persist", "remove"}, orphanRemoval=true)
-     */
-    private $Votes;
-
-    /**
-     * @var
-     *
-     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Opinion", inversedBy="arguments", cascade={"persist"})
-     */
-    private $opinion;
-
-    /**
-     * @var string
-     *
-     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\Reporting", mappedBy="Argument", cascade={"persist", "remove"})
-     */
-    private $Reports;
-
-    /**
      * @var integer
      *
      * @ORM\Column(name="type", type="integer")
      */
     private $type = 1;
-
-    /**
-     * @var
-     *
-     * @ORM\ManyToOne(targetEntity="Capco\UserBundle\Entity\User")
-     * @ORM\JoinColumn(name="author_id", referencedColumnName="id")
-     */
-    private $Author;
-
-    public function __toString()
-    {
-        if ($this->id) {
-            return $this->getBodyExcerpt(50);
-        } else {
-            return "New opinion";
-        }
-    }
-
-    function __construct()
-    {
-        $this->Votes = new ArrayCollection();
-        $this->voteCount = 0;
-        $this->Reports = new ArrayCollection();
-        $this->updatedAt = new \Datetime;
-    }
 
     /**
      * @var boolean
@@ -155,6 +109,52 @@ class Argument
      * @ORM\Column(name="trashed_reason", type="text", nullable=true)
      */
     private $trashedReason = null;
+
+    /**
+     * @var
+     *
+     * @ORM\ManyToOne(targetEntity="Capco\UserBundle\Entity\User")
+     * @ORM\JoinColumn(name="author_id", referencedColumnName="id")
+     */
+    private $Author;
+
+    /**
+     * @var
+     *
+     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\ArgumentVote", mappedBy="argument", cascade={"persist", "remove"}, orphanRemoval=true)
+     */
+    private $Votes;
+
+    /**
+     * @var
+     *
+     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Opinion", inversedBy="arguments", cascade={"persist"})
+     */
+    private $opinion;
+
+    /**
+     * @var string
+     *
+     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\Reporting", mappedBy="Argument", cascade={"persist", "remove"})
+     */
+    private $Reports;
+
+    function __construct()
+    {
+        $this->Votes = new ArrayCollection();
+        $this->Reports = new ArrayCollection();
+        $this->updatedAt = new \Datetime();
+        $this->voteCount = 0;
+    }
+
+    public function __toString()
+    {
+        if ($this->id) {
+            return $this->getBodyExcerpt(50);
+        } else {
+            return "New opinion";
+        }
+    }
 
     /**
      * Get id
@@ -233,26 +233,6 @@ class Argument
     }
 
     /**
-     * @return mixed
-     */
-    public function getOpinion()
-    {
-        return $this->opinion;
-    }
-
-    /**
-     * @param mixed $opinion
-     */
-    public function setOpinion($opinion)
-    {
-        if($this->opinion != null) {
-            $this->opinion->removeArgument($this);
-        }
-        $this->opinion = $opinion;
-        $opinion->addArgument($this);
-    }
-
-    /**
      * @return int
      */
     public function getType()
@@ -271,6 +251,26 @@ class Argument
     /**
      * @return mixed
      */
+    public function getOpinion()
+    {
+        return $this->opinion;
+    }
+
+    /**
+     * @param mixed $opinion
+     */
+    public function setOpinion($opinion)
+    {
+        if ($this->opinion != null) {
+            $this->opinion->removeArgument($this);
+        }
+        $this->opinion = $opinion;
+        $opinion->addArgument($this);
+    }
+
+    /**
+     * @return mixed
+     */
     public function getAuthor()
     {
         return $this->Author;
@@ -282,36 +282,6 @@ class Argument
     public function setAuthor($Author)
     {
         $this->Author = $Author;
-    }
-
-
-
-    /**
-     * Set createdAt
-     *
-     * @param \DateTime $createdAt
-     *
-     * @return Argument
-     */
-    public function setCreatedAt($createdAt)
-    {
-        $this->createdAt = $createdAt;
-
-        return $this;
-    }
-
-    /**
-     * Set updatedAt
-     *
-     * @param \DateTime $updatedAt
-     *
-     * @return Argument
-     */
-    public function setUpdatedAt($updatedAt)
-    {
-        $this->updatedAt = $updatedAt;
-
-        return $this;
     }
 
     /**
@@ -445,24 +415,28 @@ class Argument
         if ($this->Votes->removeElement($vote)) {
             $this->voteCount--;
         }
+
         return $this;
     }
 
-    public function resetVotes() {
+    public function resetVotes()
+    {
         foreach ($this->Votes as $vote) {
             $this->removeVote($vote);
             $vote->setArgument(null);
         }
     }
 
-    public function userHasVote(User $user = null){
-        if($user != null){
+    public function userHasVote(User $user = null)
+    {
+        if ($user != null) {
             foreach($this->Votes as $vote){
                 if($vote->getVoter() == $user){
                     return true;
                 }
             }
         }
+
         return false;
     }
 
@@ -503,7 +477,8 @@ class Argument
         return ($this->isEnabled && !$this->isTrashed && $this->opinion->canContribute());
     }
 
-    public function getBodyExcerpt($nb = 100){
+    public function getBodyExcerpt($nb = 100)
+    {
         $excerpt = substr($this->body, 0, $nb);
         $excerpt = $excerpt.'...';
         return $excerpt;

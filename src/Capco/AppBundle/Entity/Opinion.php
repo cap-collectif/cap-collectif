@@ -88,26 +88,6 @@ class Opinion
     private $trashedReason = null;
 
     /**
-     * @var
-     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\Argument", mappedBy="opinion",  cascade={"persist", "remove"}, orphanRemoval=true)
-     */
-    private $arguments;
-
-    /**
-     * @var string
-     *
-     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\OpinionVote", mappedBy="opinion", cascade={"persist", "remove"}, orphanRemoval=true)
-     */
-    private $Votes;
-
-    /**
-     * @var string
-     *
-     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\Reporting", mappedBy="Opinion", cascade={"persist", "remove"}, orphanRemoval=true)
-     */
-    private $Reports;
-
-    /**
      * @var integer
      *
      * @ORM\Column(name="vote_count_nok", type="integer")
@@ -171,6 +151,42 @@ class Opinion
      */
     private $Sources;
 
+    /**
+     * @var
+     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\Argument", mappedBy="opinion",  cascade={"persist", "remove"}, orphanRemoval=true)
+     */
+    private $arguments;
+
+    /**
+     * @var string
+     *
+     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\OpinionVote", mappedBy="opinion", cascade={"persist", "remove"}, orphanRemoval=true)
+     */
+    private $Votes;
+
+    /**
+     * @var string
+     *
+     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\Reporting", mappedBy="Opinion", cascade={"persist", "remove"}, orphanRemoval=true)
+     */
+    private $Reports;
+
+    function __construct()
+    {
+        $this->Votes = new ArrayCollection();
+        $this->Reports = new ArrayCollection();
+        $this->arguments = new ArrayCollection();
+        $this->Sources = new ArrayCollection();
+        $this->updatedAt = new \Datetime();
+
+        $this->argumentsCount = 0;
+        $this->sourcesCount = 0;
+        $this->voteCountMitige = 0;
+        $this->voteCountNok = 0;
+        $this->voteCountOk = 0;
+        $this->resetVoteCount();
+    }
+
     public function __toString()
     {
         if ($this->id) {
@@ -179,61 +195,6 @@ class Opinion
             return "New opinion";
         }
     }
-
-    /**
-     * @return mixed
-     */
-    public function getOpinionType()
-    {
-        return $this->OpinionType;
-    }
-
-    /**
-     * @param mixed $OpinionType
-     */
-    public function setOpinionType($OpinionType)
-    {
-        $this->OpinionType = $OpinionType;
-    }
-
-
-    /**
-     * @return mixed
-     */
-    public function getConsultation()
-    {
-        return $this->Consultation;
-    }
-
-    /**
-     * @param mixed $Consultation
-     * @return $this
-     */
-    public function setConsultation($Consultation)
-    {
-        if ($this->Consultation != null) {
-            $this->Consultation->removeOpinion($this);
-        }
-        $this->Consultation = $Consultation;
-        $this->Consultation->addOpinion($this);
-        return $this;
-    }
-
-    function __construct()
-    {
-        $this->Votes = new ArrayCollection();
-        $this->Reports = new ArrayCollection();
-        $this->arguments = new ArrayCollection();
-        $this->Sources = new ArrayCollection();
-        $this->argumentsCount = 0;
-        $this->sourcesCount = 0;
-        $this->resetVoteCount();
-        $this->updatedAt = new \Datetime;
-        $this->voteCountMitige = 0;
-        $this->voteCountNok = 0;
-        $this->voteCountOk = 0;
-    }
-
 
     /**
      * Get id
@@ -427,144 +388,40 @@ class Opinion
     }
 
     /**
-     * Get votes
-     *
-     * @return string
+     * @return mixed
      */
-    public function getVotes()
+    public function getOpinionType()
     {
-        return $this->Votes;
+        return $this->OpinionType;
     }
 
     /**
-     * @param OpinionVote $vote
+     * @param mixed $OpinionType
+     */
+    public function setOpinionType($OpinionType)
+    {
+        $this->OpinionType = $OpinionType;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getConsultation()
+    {
+        return $this->Consultation;
+    }
+
+    /**
+     * @param mixed $Consultation
      * @return $this
      */
-    public function addVote($vote)
+    public function setConsultation($Consultation)
     {
-        $this->Votes->add($vote);
-        $this->addToCount($vote->getValue());
-        return $this;
-    }
-
-    /**
-     * @param OpinionVote $vote
-     * @return $this
-     */
-    public function removeVote(OpinionVote $vote)
-    {
-        if($this->Votes->removeElement($vote)){
-            $this->removeFromCount($vote->getValue());
+        if ($this->Consultation != null) {
+            $this->Consultation->removeOpinion($this);
         }
-        return $this;
-    }
-
-    public function addToCount($type) {
-        if($type == OpinionVote::$voteTypes['ok']) {
-            $this->voteCountOk++;
-        } else if($type == OpinionVote::$voteTypes['nok']) {
-            $this->voteCountNok++;
-        } else if($type == OpinionVote::$voteTypes['mitige']) {
-            $this->voteCountMitige++;
-        }
-    }
-
-    public function removeFromCount($type) {
-        if($type == OpinionVote::$voteTypes['ok']) {
-            $this->voteCountOk--;
-        } else if($type == OpinionVote::$voteTypes['nok']) {
-            $this->voteCountNok--;
-        } else if($type == OpinionVote::$voteTypes['mitige']) {
-            $this->voteCountMitige--;
-        }
-    }
-
-    public function resetVoteCount() {
-        $this->voteCountOk = 0;
-        $this->voteCountNok = 0;
-        $this->voteCountMitige = 0;
-    }
-
-    /**
-     *
-     * @return string
-     */
-    public function getReports()
-    {
-        return $this->Reports;
-    }
-
-    /**
-     * @param Reporting $report
-     * @return $this
-     */
-    public function addReport(Reporting $report)
-    {
-        $this->Reports->add($report);
-        return $this;
-    }
-
-    /**
-     * @param Reporting $report
-     * @return $this
-     */
-    public function removeReport(Reporting $report)
-    {
-        $this->Reports->removeElement($report);
-        return $this;
-    }
-
-    public function getArguments(){
-        return $this->arguments;
-    }
-
-    public function addArgument($argument){
-        $this->arguments->add($argument);
-        $this->increaseArgumentsCount(1);
-        return $this;
-    }
-
-    public function removeArgument($argument){
-        if($this->arguments->removeElement($argument)){
-            $this->decreaseArgumentsCount(1);
-        }
-        return $this;
-    }
-
-    public function setSources($sources){
-        foreach($sources as $source){
-            $source->setOpinion($this);
-        }
-        $this->Sources = $sources;
-        $this->sourcesCount = $sources->count();
-        return $this;
-    }
-
-    public function getSources(){
-        return $this->Sources;
-    }
-
-    public function resetSources() {
-        foreach($this->Sources as $source){
-            $source->setOpinion(null);
-        }
-        $this->sourcesCount = 0;
-        $this->setSources(new ArrayCollection());
-        return $this;
-    }
-
-    public function addSource($source){
-        $this->sourcesCount++;
-        $this->Sources->add($source);
-        $source->setOpinion($this);
-        return $this;
-    }
-
-    public function removeSource($source){
-        if($this->Sources->removeElement($source)){
-            $this->sourcesCount--;
-            $source->setOpinion(null);
-        }
+        $this->Consultation = $Consultation;
+        $this->Consultation->addOpinion($this);
         return $this;
     }
 
@@ -600,16 +457,6 @@ class Opinion
         return $this->argumentsCount;
     }
 
-    public function increaseArgumentsCount($nb) {
-        $this->argumentsCount+=$nb;
-        $this->getConsultation()->increaseArgumentCount($nb);
-    }
-
-    public function decreaseArgumentsCount($nb) {
-        $this->argumentsCount-=$nb;
-        $this->getConsultation()->decreaseArgumentCount($nb);
-    }
-
     /**
      * @return int
      */
@@ -626,13 +473,6 @@ class Opinion
         $this->sourcesCount = $sourcesCount;
     }
 
-    public function increaseSourcesCount($nb) {
-        $this->sourcesCount+=$nb;
-    }
-
-    public function decreaseSourcesCount($nb) {
-        $this->sourcesCount-=$nb;
-    }
 
     /**
      * @return int
@@ -682,21 +522,250 @@ class Opinion
         $this->voteCountMitige = $voteCountMitige;
     }
 
+
+    /** -------------- Getters, Add and Remove ------------------------------ */
+
+    /**
+     *
+     * @return string
+     */
+    public function getReports()
+    {
+        return $this->Reports;
+    }
+
+    /**
+     * @param Reporting $report
+     * @return $this
+     */
+    public function addReport(Reporting $report)
+    {
+        $this->Reports->add($report);
+        return $this;
+    }
+
+    /**
+     * @param Reporting $report
+     * @return $this
+     */
+    public function removeReport(Reporting $report)
+    {
+        $this->Reports->removeElement($report);
+        return $this;
+    }
+
+    /**
+     * Get arguments
+     * @return ArrayCollection
+     */
+    public function getArguments()
+    {
+        return $this->arguments;
+    }
+
+    /**
+     * @param $argument
+     * @return $this
+     */
+    public function addArgument(Argument $argument)
+    {
+        $this->arguments->add($argument);
+        $this->increaseArgumentsCount(1);
+        return $this;
+    }
+
+    /**
+     * @param Argument $argument
+     * @return $this
+     */
+    public function removeArgument(Argument $argument)
+    {
+        if ($this->arguments->removeElement($argument)) {
+            $this->decreaseArgumentsCount(1);
+        }
+
+        return $this;
+    }
+
+    /**
+     * Get votes
+     *
+     * @return string
+     */
+    public function getVotes()
+    {
+        return $this->Votes;
+    }
+
+    /**
+     * @param OpinionVote $vote
+     * @return $this
+     */
+    public function addVote($vote)
+    {
+        $this->Votes->add($vote);
+        $this->addToCount($vote->getValue());
+        return $this;
+    }
+
+    /**
+     * @param OpinionVote $vote
+     * @return $this
+     */
+    public function removeVote(OpinionVote $vote)
+    {
+        if ($this->Votes->removeElement($vote)) {
+            $this->removeFromCount($vote->getValue());
+        }
+
+        return $this;
+    }
+
+    /**
+     * @param $source
+     * @return $this
+     */
+    public function removeSource($source)
+    {
+        if ($this->Sources->removeElement($source)) {
+            $this->sourcesCount--;
+
+            $source->setOpinion(null);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @param $source
+     * @return $this
+     */
+    public function addSource($source)
+    {
+        $this->sourcesCount++;
+        $this->Sources->add($source);
+        $source->setOpinion($this);
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getSources()
+    {
+        return $this->Sources;
+    }
+
+    /** ------------------------------------  Method User  ---------------------------------------------------------- */
+
+    /**
+     * Increase count for opinion Vote
+     * @param $type
+     */
+    public function addToCount($type) {
+        if($type == OpinionVote::$voteTypes['ok']) {
+            $this->voteCountOk++;
+        } else if($type == OpinionVote::$voteTypes['nok']) {
+            $this->voteCountNok++;
+        } else if($type == OpinionVote::$voteTypes['mitige']) {
+            $this->voteCountMitige++;
+        }
+    }
+
+    /**
+     * Decrease count for opinion Vote
+     * @param $type
+     */
+    public function removeFromCount($type) {
+        if($type == OpinionVote::$voteTypes['ok']) {
+            $this->voteCountOk--;
+        } else if($type == OpinionVote::$voteTypes['nok']) {
+            $this->voteCountNok--;
+        } else if($type == OpinionVote::$voteTypes['mitige']) {
+            $this->voteCountMitige--;
+        }
+    }
+
+    /**
+     * Reset all votes opinion
+     */
+    public function resetVoteCount() {
+        $this->voteCountOk = 0;
+        $this->voteCountNok = 0;
+        $this->voteCountMitige = 0;
+    }
+
+    /**
+     * @param $nb
+     */
+    public function increaseArgumentsCount($nb)
+    {
+        $this->argumentsCount+=$nb;
+        $this->getConsultation()->increaseArgumentCount($nb);
+    }
+
+    /**
+     * @param $nb
+     */
+    public function decreaseArgumentsCount($nb)
+    {
+        $this->argumentsCount-=$nb;
+        $this->getConsultation()->decreaseArgumentCount($nb);
+    }
+
+    /**
+     * @param $nb
+     */
+    public function increaseSourcesCount($nb)
+    {
+        $this->sourcesCount+=$nb;
+    }
+
+    /**
+     * @param $nb
+     */
+    public function decreaseSourcesCount($nb)
+    {
+        $this->sourcesCount-=$nb;
+    }
+
+    /**
+     * Reset vote source
+     */
+    public function resetVoteSources() {
+        $this->sourcesCount = 0;
+    }
+
+    /**
+     * @return int
+     */
     public function getVoteCountAll()
     {
         return $this->getVoteCountMitige() + $this->getVoteCountNok() + $this->getVoteCountOk();
     }
 
-    public function canDisplay() {
+    /**
+     * @return bool
+     */
+    public function canDisplay()
+    {
         return ($this->isEnabled && $this->Consultation->canDisplay());
     }
 
+    /**
+     * @return bool
+     */
     public function canContribute()
     {
         return ($this->isEnabled && !$this->isTrashed && $this->Consultation->canContribute());
     }
 
-    public function getBodyExcerpt($nb = 100){
+    /**
+     * @param int $nb
+     * @return string
+     */
+    public function getBodyExcerpt($nb = 100)
+    {
         $excerpt = substr($this->body, 0, $nb);
         $excerpt = $excerpt.'...';
         return $excerpt;
@@ -710,6 +779,5 @@ class Opinion
         if ($this->Consultation != null) {
             $this->Consultation->removeOpinion($this);
         }
-
     }
 }

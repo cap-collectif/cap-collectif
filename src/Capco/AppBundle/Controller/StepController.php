@@ -22,7 +22,7 @@ class StepController extends Controller
     /**
      * @Template("CapcoAppBundle:Step:show_all_in_nav.html.twig")
      * @param Consultation $consultation
-     * @param Step $current
+     * @param Step $currentStep
      * @return array
      */
     public function showAllInNavAction(Consultation $consultation, $currentStep = null)
@@ -58,7 +58,7 @@ class StepController extends Controller
     public function showStepAction(Consultation $consultation, Step $step)
     {
         $em = $this->getDoctrine()->getManager();
-        $consultation = $em->getRepository('CapcoAppBundle:Consultation')->getFirstResultWithMedia($consultation->getSlug());
+        $consultation = $em->getRepository('CapcoAppBundle:Consultation')->getOne($consultation->getSlug());
 
         return [
             'consultation' => $consultation,
