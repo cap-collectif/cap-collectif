@@ -78,7 +78,7 @@ class Reporting
     /**
      * @var
      *
-     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Opinion", inversedBy="Reports")
+     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Opinion", inversedBy="Reports", cascade={"persist"})
      * @ORM\JoinColumn(name="opinion_id", referencedColumnName="id")
      */
     private $Opinion;
@@ -86,7 +86,7 @@ class Reporting
     /**
      * @var
      *
-     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Source", inversedBy="Reports")
+     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Source", inversedBy="Reports", cascade={"persist"})
      * @ORM\JoinColumn(name="source_id", referencedColumnName="id")
      */
     private $Source;
@@ -94,7 +94,7 @@ class Reporting
     /**
      * @var
      *
-     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Argument", inversedBy="Reports")
+     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Argument", inversedBy="Reports", cascade={"persist"})
      * @ORM\JoinColumn(name="argument_id", referencedColumnName="id")
      */
     private $Argument;
@@ -102,15 +102,10 @@ class Reporting
     /**
      * @var
      *
-     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Idea", inversedBy="Reports")
+     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Idea", inversedBy="Reports", cascade={"persist"})
      * @ORM\JoinColumn(name="idea_id", referencedColumnName="id")
      */
     private $Idea;
-
-    function __construct()
-    {
-        $this->updatedAt = new \Datetime;
-    }
 
     /**
      * @var boolean
@@ -118,6 +113,11 @@ class Reporting
      * @ORM\Column(name="is_archived", type="boolean")
      */
     private $isArchived = false;
+
+    function __construct()
+    {
+        $this->updatedAt = new \Datetime();
+    }
 
     /**
      * @return boolean
@@ -238,7 +238,6 @@ class Reporting
         }
         $this->Opinion = $Opinion;
         $this->Opinion->addReport($this);
-        return $this;
     }
 
     /**
@@ -259,7 +258,6 @@ class Reporting
         }
         $this->Source = $Source;
         $this->Source->addReport($this);
-        return $this;
     }
 
     /**
@@ -280,7 +278,6 @@ class Reporting
         }
         $this->Argument = $Argument;
         $this->Argument->addReport($this);
-        return $this;
     }
 
     /**
@@ -301,7 +298,6 @@ class Reporting
         }
         $this->Idea = $Idea;
         $this->Idea->addReport($this);
-        return $this;
     }
 
     public function getRelatedObject(){
@@ -325,12 +321,15 @@ class Reporting
         if ($this->Opinion != null) {
             $this->Opinion->removeReport($this);
         }
+
         if ($this->Source != null) {
             $this->Source->removeReport($this);
         }
+
         if ($this->Argument != null) {
             $this->Argument->removeReport($this);
         }
+
         if ($this->Idea != null) {
             $this->Idea->removeReport($this);
         }

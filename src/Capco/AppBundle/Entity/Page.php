@@ -293,7 +293,8 @@ class Page
         $this->MenuItems->removeElement($menuItem);
     }
 
-    public function getExcerpt($nb = 100){
+    public function getExcerpt($nb = 100)
+    {
         $excerpt = substr($this->body, 0, $nb);
         $excerpt = $excerpt.'...';
         return $excerpt;

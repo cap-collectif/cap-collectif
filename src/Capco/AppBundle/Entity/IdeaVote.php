@@ -10,6 +10,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
  *
  * @ORM\Table(name="idea_vote")
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\IdeaVoteRepository")
+ * @ORM\HasLifecycleCallbacks()
  */
 class IdeaVote
 {
@@ -92,23 +93,15 @@ class IdeaVote
      */
     public function setIdea($Idea)
     {
+        if($this->Idea != null) {
+            $this->Idea->removeIdeaVote($this);
+        }
+
         $this->Idea = $Idea;
+        $this->Idea->addIdeaVote($this);
 
         return $this;
-    }
 
-    /**
-     * Set createdAt
-     *
-     * @param \DateTime $createdAt
-     *
-     * @return IdeaVote
-     */
-    public function setCreatedAt($createdAt)
-    {
-        $this->createdAt = $createdAt;
-
-        return $this;
     }
 
     /**
@@ -133,5 +126,16 @@ class IdeaVote
     public function getVoter()
     {
         return $this->Voter;
+    }
+
+    /**
+     * @ORM\PreRemove
+     */
+    public function deleteIdeaVote()
+    {
+        if ($this->Idea != null) {
+            $this->Idea->removeIdeaVote($this);
+        }
+
     }
 }

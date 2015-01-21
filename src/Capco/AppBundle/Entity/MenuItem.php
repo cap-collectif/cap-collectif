@@ -99,7 +99,7 @@ class MenuItem
      * @var
      *
      * @Gedmo\SortableGroup
-     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Menu", inversedBy="MenuItems")
+     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Menu", inversedBy="MenuItems", cascade={"persist"})
      * @ORM\JoinColumn(name="menu_id", referencedColumnName="id")
      *
      */
@@ -284,7 +284,12 @@ class MenuItem
      */
     public function setMenu($Menu)
     {
+        if ($this->Menu != null) {
+            $this->Menu->removeMenuItem($this);
+        }
         $this->Menu = $Menu;
+        $this->Menu->addMenuItem($this);
+
     }
 
     /**
@@ -366,5 +371,18 @@ class MenuItem
         }
         $this->Page = $page;
         $page->addMenuItem($this);
+    }
+
+    /**
+     * @ORM\PreRemove
+     */
+    public function deleteMenuItem()
+    {
+        if ($this->Menu != null) {
+            $this->Menu->removeMenuItem($this);
+        }
+        if ($this->Page != null) {
+            $this->Page->removeMenuItem($this);
+        }
     }
 }

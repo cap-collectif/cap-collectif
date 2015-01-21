@@ -41,7 +41,7 @@ class Menu
     /**
      * @var \Doctrine\Common\Collections\ArrayCollection
      *
-     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\MenuItem", mappedBy="Menu", cascade={"persist", "remove"})
+     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\MenuItem", mappedBy="Menu", cascade={"persist", "remove"}, orphanRemoval=true)
      *
      */
     private $MenuItems;
@@ -104,18 +104,9 @@ class Menu
      */
     public function addMenuItem(MenuItem $MenuItem)
     {
-        $this->MenuItems[] = $MenuItem;
+        $this->MenuItems->add($MenuItem);
 
         return $this;
-    }
-
-    /**
-     * @param Capco\AppBundle\Entity\MenuItem $MenuItem
-     *
-     */
-    public function removeOpinionType(MenuItem $MenuItem)
-    {
-        $this->MenuItems->removeElement($MenuItem);
     }
 
     /**

@@ -119,7 +119,7 @@ class Theme
 
     /**
      * @var
-     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\Idea", mappedBy="Theme", cascade={"persist"})
+     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\Idea", mappedBy="Theme", cascade={"persist", "remove"})
      */
     private $Ideas;
 
@@ -269,18 +269,18 @@ class Theme
     }
 
     /**
-     * @param Capco\AppBundle\Entity\Consultation $Consultation
+     * @param Consultation $Consultation
      * @return Theme
      */
     public function addConsultation(Consultation $Consultation)
     {
-        $this->Consultations[] = $Consultation;
+        $this->Consultations->add($Consultation);
 
         return $this;
     }
 
     /**
-     * @param Capco\AppBundle\Entity\Consultation $Consultation
+     * @param Consultation $Consultation
      */
     public function removeConsultation(Consultation $Consultation)
     {
@@ -352,34 +352,6 @@ class Theme
     public function getIsEnabled()
     {
         return $this->isEnabled;
-    }
-
-    /**
-     * Set createdAt
-     *
-     * @param \DateTime $createdAt
-     *
-     * @return Theme
-     */
-    public function setCreatedAt($createdAt)
-    {
-        $this->createdAt = $createdAt;
-
-        return $this;
-    }
-
-    /**
-     * Set updatedAt
-     *
-     * @param \DateTime $updatedAt
-     *
-     * @return Theme
-     */
-    public function setUpdatedAt($updatedAt)
-    {
-        $this->updatedAt = $updatedAt;
-
-        return $this;
     }
 
     /**

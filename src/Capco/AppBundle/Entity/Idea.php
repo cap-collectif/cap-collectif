@@ -12,6 +12,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  *
  * @ORM\Table(name="idea")
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\IdeaRepository")
+ * @ORM\HasLifecycleCallbacks()
  */
 class Idea
 {
@@ -90,7 +91,28 @@ class Idea
     private $voteCount = 0;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Theme", inversedBy="Ideas")
+     * @var boolean
+     *
+     * @ORM\Column(name="is_trashed", type="boolean")
+     */
+    private $isTrashed = false;
+
+    /**
+     * @var \DateTime
+     * @Gedmo\Timestampable(on="change", field={"isTrashed"})
+     * @ORM\Column(name="trashed_at", type="datetime", nullable=true)
+     */
+    private $trashedAt = null;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="trashed_reason", type="text", nullable=true)
+     */
+    private $trashedReason = null;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Theme", inversedBy="Ideas", cascade={"persist"})
      * @ORM\JoinColumn(name="theme_id", referencedColumnName="id", nullable=true)
      */
     private $Theme = null;
@@ -125,25 +147,15 @@ class Idea
     private $IdeaVotes;
 
     /**
-     * @var boolean
-     *
-     * @ORM\Column(name="is_trashed", type="boolean")
+     * Constructor
      */
-    private $isTrashed = false;
-
-    /**
-     * @var \DateTime
-     * @Gedmo\Timestampable(on="change", field={"isTrashed"})
-     * @ORM\Column(name="trashed_at", type="datetime", nullable=true)
-     */
-    private $trashedAt = null;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="trashed_reason", type="text", nullable=true)
-     */
-    private $trashedReason = null;
+    public function __construct()
+    {
+        $this->IdeaVotes = new ArrayCollection();
+        $this->Reports = new ArrayCollection();
+        $this->voteCount = 0;
+        $this->updatedAt = new \Datetime;
+    }
 
     public function __toString()
     {
@@ -289,7 +301,11 @@ class Idea
      */
     public function setTheme($Theme)
     {
+        if ($this->Theme != null) {
+            $this->Theme->removeIdea($this);
+        }
         $this->Theme = $Theme;
+        $Theme->addIdea($this);
     }
 
     /**
@@ -325,17 +341,6 @@ class Idea
     }
 
     /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->IdeaVotes = new ArrayCollection();
-        $this->Reports = new ArrayCollection();
-        $this->voteCount = 0;
-        $this->updatedAt = new \Datetime;
-    }
-
-    /**
      * Set isEnabled
      *
      * @param boolean $isEnabled
@@ -357,34 +362,6 @@ class Idea
     public function getIsEnabled()
     {
         return $this->isEnabled;
-    }
-
-    /**
-     * Set createdAt
-     *
-     * @param \DateTime $createdAt
-     *
-     * @return Idea
-     */
-    public function setCreatedAt($createdAt)
-    {
-        $this->createdAt = $createdAt;
-
-        return $this;
-    }
-
-    /**
-     * Set updatedAt
-     *
-     * @param \DateTime $updatedAt
-     *
-     * @return Idea
-     */
-    public function setUpdatedAt($updatedAt)
-    {
-        $this->updatedAt = $updatedAt;
-
-        return $this;
     }
 
     /**
@@ -457,63 +434,6 @@ class Idea
     }
 
     /**
-     * Add ideaVote
-     *
-     * @param \Capco\AppBundle\Entity\IdeaVote $ideaVote
-     *
-     * @return Idea
-     */
-    public function addIdeaVote(\Capco\AppBundle\Entity\IdeaVote $ideaVote)
-    {
-        $this->IdeaVotes->add($ideaVote);
-        $this->voteCount++;
-        $ideaVote->setIdea($this);
-        return $this;
-    }
-
-    /**
-     * Remove ideaVote
-     *
-     * @param \Capco\AppBundle\Entity\IdeaVote $ideaVote
-     */
-    public function removeIdeaVote(\Capco\AppBundle\Entity\IdeaVote $ideaVote)
-    {
-        if($this->IdeaVotes->removeElement($ideaVote)){
-            $this->voteCount--;
-            $ideaVote->setIdea(null);
-        }
-        return $this;
-    }
-
-    /**
-     * Get ideaVotes
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getIdeaVotes()
-    {
-        return $this->IdeaVotes;
-    }
-
-    public function resetIdeaVotes() {
-        foreach($this->IdeaVotes as $vote){
-            $vote->setIdea(null);
-        }
-        $this->voteCount = 0;
-        $this->setIdeaVotes(new ArrayCollection());
-        return $this;
-    }
-
-    public function setIdeaVotes($votes){
-        foreach($votes as $vote){
-            $vote->setIdea($this);
-        }
-        $this->IdeaVotes = $votes;
-        $this->voteCount = $votes->count();
-        return $this;
-    }
-
-    /**
      *
      * @return string
      */
@@ -542,17 +462,73 @@ class Idea
         return $this;
     }
 
+    /**
+     * Add ideaVote
+     *
+     * @param \Capco\AppBundle\Entity\IdeaVote $ideaVote
+     *
+     * @return Idea
+     */
+    public function addIdeaVote(\Capco\AppBundle\Entity\IdeaVote $ideaVote)
+    {
+        $this->IdeaVotes->add($ideaVote);
+        $this->voteCount++;
+        return $this;
+    }
+
+    /**
+     * @param IdeaVote $ideaVote
+     * @return $this
+     */
+    public function removeIdeaVote(\Capco\AppBundle\Entity\IdeaVote $ideaVote)
+    {
+        if($this->IdeaVotes->removeElement($ideaVote)){
+            $this->voteCount--;
+        }
+        return $this;
+    }
+
+    /**
+     * Get ideaVotes
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getIdeaVotes()
+    {
+        return $this->IdeaVotes;
+    }
+
+    /**
+     * @return bool
+     */
     public function canDisplay() {
         return ($this->isEnabled);
     }
 
+    /**
+     * @return bool
+     */
     public function canContribute() {
         return ($this->isEnabled && !$this->isTrashed);
     }
 
+    /**
+     * @param int $nb
+     * @return string
+     */
     public function getExcerpt($nb = 100){
         $excerpt = substr($this->body, 0, $nb);
         $excerpt = $excerpt.'...';
         return $excerpt;
+    }
+
+    /**
+     * @ORM\PreRemove
+     */
+    public function deleteIdea()
+    {
+        if ($this->Theme != null) {
+            $this->Theme->removeIdea($this);
+        }
     }
 }

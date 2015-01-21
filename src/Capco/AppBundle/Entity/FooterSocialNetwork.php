@@ -89,6 +89,14 @@ class FooterSocialNetwork
      */
     private $updatedAt;
 
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->updatedAt = new \Datetime();
+    }
+
     public function __toString()
     {
         if ($this->id) {
@@ -96,14 +104,6 @@ class FooterSocialNetwork
         } else {
             return "New footer social network";
         }
-    }
-
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->updatedAt = new \Datetime;
     }
 
     /**
