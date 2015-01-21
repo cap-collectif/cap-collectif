@@ -142,13 +142,14 @@ consultation:
     arguments: "]-Inf, 0] Aucun argument | {1} 1 argument | ]1,Inf[ %count% arguments"
     votes: "]-Inf, 0] Aucun vote | {1} 1 vote | ]1,Inf[ %count% votes"
     sources: "]-Inf, 0] Aucune source | {1} 1 source | ]1,Inf[ %count% sources"
+    opinions_no_nb: "]-Inf, 1] opinion | ]1,Inf[ opinions"
+    arguments_no_nb: "]-Inf, 1] argument | ]1,Inf[ arguments"
     trashed:
       title: Corbeille
       short_name: Corbeille
       none: Aucun élèment dans la corbeille
   searchform:
     no_result:  Aucune consultation ne correspond à ces critères de recherche
-  arguments: "]-Inf, 0] Aucun argument | {1} 1 argument | ]1,Inf[ %count% arguments"
 
 argument:
   update:

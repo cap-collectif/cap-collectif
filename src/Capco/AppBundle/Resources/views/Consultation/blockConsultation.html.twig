@@ -48,7 +48,7 @@
                             <p  class="thumbnail__number">{{ opinionCount }}</p>
                             <h5 class="thumbnail__number__label  excerpt h5">
                                 {% transchoice opinionCount with {'%count%': opinionCount} from 'CapcoAppBundle' %}
-                                    consultation.show.opinions
+                                    consultation.show.opinions_no_nb
                                 {% endtranschoice %}
                             </h5>
                         </div>
@@ -58,7 +58,7 @@
                             <p  class="thumbnail__number">{{ argumentCount }}</p>
                             <h5 class="thumbnail__number__label  excerpt h5">
                                 {% transchoice argumentCount with {'%count%': argumentCount} from 'CapcoAppBundle' %}
-                                    consultation.show.arguments
+                                    consultation.show.arguments_no_nb
                                 {% endtranschoice %}
                             </h5>
                         </div>
