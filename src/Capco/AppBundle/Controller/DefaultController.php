@@ -29,15 +29,21 @@ class DefaultController extends Controller
             if ($form->isValid()) {
                 $data = $form->getData();
 
+                $adminEmail = $this->get('capco.site_parameter.resolver')->getValue('admin.mail.contact');
+                if (null == $adminEmail) {
+                    $this->get('session')->getFlashBag()->add('danger', 'contact.email.sent_error');
+                    return $this->redirect($this->generateUrl('app_homepage'));
+                }
+
                 $message = \Swift_Message::newInstance()
-                    ->setSubject('Contact via le site')
+                    ->setSubject($this->get('translator')->trans('contact.email.subject', array(), 'CapcoAppBundle'))
                     ->setFrom($data["email"])
                     ->setReplyTo($data["email"])
-                    ->setTo('lbrunet@jolicode.com')
+                    ->setTo($adminEmail)
                     ->setBody($data["message"]);
 
                 $this->get('mailer')->send($message);
-                $this->get('session')->getFlashBag()->add('success', $translator->trans('Your message has been sended.'));
+                $this->get('session')->getFlashBag()->add('success', 'contact.email.sent_success');
 
                 return $this->redirect($this->generateUrl('app_homepage'));
             }

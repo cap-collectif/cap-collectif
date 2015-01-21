@@ -24,7 +24,7 @@ class Notify
         $subject = "Un contenu à été signalé";
         $template = 'CapcoAppBundle:Mail:notify.txt.twig';
         $from = $user->getEmail();
-        $to = $this->resolver->getValue('mail.admin');
+        $to = $this->resolver->getValue('admin.mail.notifications');
         $body = $this->templating->render($template, array('user' => $user, 'message' => $message));
         $this->sendMessage($from, $to, $subject, $body);
     }

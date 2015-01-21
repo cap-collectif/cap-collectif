@@ -3,7 +3,12 @@
 {% block jumbotron %}
     <div class="jumbotron  jumbotron--custom  jumbotron--bg-1 text-center">
         <div class="container">
-            <h1>{{ 'idea.trashed.jumbotron.title'|trans({}, 'CapcoAppBundle') }}</h1>
+            {% set title = capco_site_parameter_value('ideas.trashed.jumbotron.title') %}
+            {% if null != title %}
+                <h1>{{ title }}</h1>
+            {% else %}
+                <h1>{{ 'idea.trashed.jumbotron.title'|trans({}, 'CapcoAppBundle') }}</h1>
+            {% endif %}
         </div>
     </div>
 {% endblock %}

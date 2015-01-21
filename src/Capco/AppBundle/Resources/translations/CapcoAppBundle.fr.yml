@@ -26,7 +26,22 @@ homepage:
   consultations:
     last: Dernières consultations
 
+# Page contact
 contact:
+  email:
+    subject: Contact via le site
+    sent_success: Merci ! Votre message a bien été envoyé.
+    sent_error: Suite à une erreur interne, votre message n'a pas pu être envoyé, merci de réessayer ultérieurement.
+  title: Contact
+  address: Adresse
+  tel: Téléphone
+  form:
+    title: Formulaire de contact
+    name: Nom
+    email: Adresse email
+    message: Message
+    error:
+      email: Email invalide
   button: Envoyer
 
 header:

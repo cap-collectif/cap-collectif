@@ -4,28 +4,43 @@
 {% block jumbotron %}
     <div class="jumbotron  jumbotron--custom  jumbotron--bg-1  text-center">
         <div class="container">
-            <h1>Contact</h1>
-            <p>{{ capco_site_parameter_value('contact.jumbotron.body')}}</p>
+            <h1>{{ 'contact.title' | trans({}, 'CapcoAppBundle') }}</h1>
+            {% set teaser = capco_site_parameter_value('contact.jumbotron.body') %}
+            {%  if teaser != null %}
+                <p>{{ teaser }}</p>
+            {% endif %}
         </div>
     </div>
 {% endblock %}
 
 {% block body %}
     <div class="container">
-        <p>{{ capco_site_parameter_value('contact.content.body')}}</p>
-        <address>
-            <strong>Adresse</strong><br/>
-            {{ capco_site_parameter_value('contact.content.address')}}<br/>
-            <br/><strong>Teléphone</strong><br/>
-            {{ capco_site_parameter_value('contact.content.phone_number')}}
-        </address>
+        {% set body = capco_site_parameter_value('contact.content.body') %}
+        {%  if body != null %}
+            <p>{{ body }}</p>
+        {% endif %}
+        {% set address = capco_site_parameter_value('contact.content.address') %}
+        {% set tel = capco_site_parameter_value('contact.content.phone_number') %}
+        {%  if address != null or tel != null %}
+            <address>
+                {% if address != null %}
+                    <strong>{{ 'contact.address' | trans({}, 'CapcoAppBundle') }}</strong><br/>
+                    {{ address }}<br/><br/>
+                {% endif %}
+                {% if tel != null %}
+                    <strong>{{ 'contact.tel' | trans({}, 'CapcoAppBundle') }}</strong><br/>
+                    {{ tel }}
+                {% endif %}
+            </address>
+        {% endif %}
 
         <hr/>
 
-        <h4 class="h4">Formulaire de contact</h4>
+        <h4 class="h4">{{ 'contact.form.title' | trans({}, 'CapcoAppBundle') }}</h4>
         <div class="row">
             <div class="col-xs-12 col-md-8">
                 <form method="post">
+                    {{ form_errors(form) }}
                     {{ form_rest(form) }}
                     <button type="submit" class="btn btn-primary">{{ 'contact.button'|trans({}, 'CapcoAppBundle') }}</button>
                 </form>
