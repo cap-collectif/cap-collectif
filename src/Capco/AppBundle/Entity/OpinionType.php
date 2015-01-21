@@ -89,7 +89,7 @@ class OpinionType
     /**
      * @var
      *
-     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\Opinion", mappedBy="OpinionType")
+     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\Opinion", mappedBy="OpinionType", cascade={"persist", "remove"}, orphanRemoval=true)
      */
     private $Opinions;
 
@@ -134,6 +134,16 @@ class OpinionType
     }
 
     /**
+     * Get title
+     *
+     * @return string
+     */
+    public function getTitle()
+    {
+        return $this->title;
+    }
+
+    /**
      * Set title
      *
      * @param string $title
@@ -147,13 +157,13 @@ class OpinionType
     }
 
     /**
-     * Get title
+     * Get shortName
      *
      * @return string
      */
-    public function getTitle()
+    public function getShortName()
     {
-        return $this->title;
+        return $this->shortName;
     }
 
     /**
@@ -170,13 +180,13 @@ class OpinionType
     }
 
     /**
-     * Get shortName
+     * Get slug
      *
      * @return string
      */
-    public function getShortName()
+    public function getSlug()
     {
-        return $this->shortName;
+        return $this->slug;
     }
 
     /**
@@ -193,13 +203,13 @@ class OpinionType
     }
 
     /**
-     * Get slug
+     * Get position
      *
-     * @return string
+     * @return integer
      */
-    public function getSlug()
+    public function getPosition()
     {
-        return $this->slug;
+        return $this->position;
     }
 
     /**
@@ -216,13 +226,13 @@ class OpinionType
     }
 
     /**
-     * Get position
+     * Get voteWidgetType
      *
      * @return integer
      */
-    public function getPosition()
+    public function getVoteWidgetType()
     {
-        return $this->position;
+        return $this->voteWidgetType;
     }
 
     /**
@@ -236,16 +246,6 @@ class OpinionType
         $this->voteWidgetType = $voteWidgetType;
 
         return $this;
-    }
-
-    /**
-     * Get voteWidgetType
-     *
-     * @return integer
-     */
-    public function getVoteWidgetType()
-    {
-        return $this->voteWidgetType;
     }
 
     /**
@@ -279,49 +279,22 @@ class OpinionType
     /**
      *
      * @param \Capco\AppBundle\Entity\Opinion $opinion
-     * @return Consultation
+     * @return $this
      */
     public function addOpinion(Opinion $opinion)
     {
-        $this->Opinions[] = $opinion;
-
+        $this->Opinions->add($opinion);
         return $this;
     }
 
     /**
      *
      * @param \Capco\AppBundle\Entity\Opinion $opinion
+     * @return $this
      */
     public function removeOpinion(Opinion $opinion)
     {
         $this->Opinions->removeElement($opinion);
-    }
-
-    /**
-     * Set createdAt
-     *
-     * @param \DateTime $createdAt
-     *
-     * @return OpinionType
-     */
-    public function setCreatedAt($createdAt)
-    {
-        $this->createdAt = $createdAt;
-
-        return $this;
-    }
-
-    /**
-     * Set updatedAt
-     *
-     * @param \DateTime $updatedAt
-     *
-     * @return OpinionType
-     */
-    public function setUpdatedAt($updatedAt)
-    {
-        $this->updatedAt = $updatedAt;
-
         return $this;
     }
 
@@ -344,7 +317,7 @@ class OpinionType
     /**
      * @return boolean
      */
-    public function isIsEnabled()
+    public function getIsEnabled()
     {
         return $this->isEnabled;
     }

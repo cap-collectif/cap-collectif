@@ -179,6 +179,7 @@ argument:
     reset_submit: Annuler
     remove_submit: Supprimer
   show:
+    nb: "]-Inf, 0] Aucun argument | {1} 1 argument | ]1,Inf[ %count% arguments"
     type:
       for: pour
       against: contre

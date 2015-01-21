@@ -118,6 +118,14 @@ class Step
      */
     private $updatedAt;
 
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->updatedAt = new \Datetime;
+    }
+
     public function __toString()
     {
         if ($this->id) {
@@ -128,14 +136,6 @@ class Step
     }
 
     /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->updatedAt = new \Datetime;
-    }
-
-    /**
      * Get id
      *
      * @return integer
@@ -143,6 +143,16 @@ class Step
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * Get title
+     *
+     * @return string
+     */
+    public function getTitle()
+    {
+        return $this->title;
     }
 
     /**
@@ -159,13 +169,13 @@ class Step
     }
 
     /**
-     * Get title
+     * Get slug
      *
      * @return string
      */
-    public function getTitle()
+    public function getSlug()
     {
-        return $this->title;
+        return $this->slug;
     }
 
     /**
@@ -182,13 +192,13 @@ class Step
     }
 
     /**
-     * Get slug
+     * Get startAt
      *
-     * @return string
+     * @return \DateTime
      */
-    public function getSlug()
+    public function getStartAt()
     {
-        return $this->slug;
+        return $this->startAt;
     }
 
     /**
@@ -205,13 +215,13 @@ class Step
     }
 
     /**
-     * Get startAt
+     * Get endAt
      *
      * @return \DateTime
      */
-    public function getStartAt()
+    public function getEndAt()
     {
-        return $this->startAt;
+        return $this->endAt;
     }
 
     /**
@@ -228,13 +238,13 @@ class Step
     }
 
     /**
-     * Get endAt
+     * Get position
      *
-     * @return \DateTime
+     * @return integer
      */
-    public function getEndAt()
+    public function getPosition()
     {
-        return $this->endAt;
+        return $this->position;
     }
 
     /**
@@ -251,36 +261,13 @@ class Step
     }
 
     /**
-     * Get position
+     * Get type
      *
      * @return integer
      */
-    public function getPosition()
+    public function getType()
     {
-        return $this->position;
-    }
-
-    /**
-     * Set isEnabled
-     *
-     * @param boolean $isEnabled
-     * @return Step
-     */
-    public function setIsEnabled($isEnabled)
-    {
-        $this->isEnabled = $isEnabled;
-
-        return $this;
-    }
-
-    /**
-     * Get isEnabled
-     *
-     * @return boolean
-     */
-    public function getIsEnabled()
-    {
-        return $this->isEnabled;
+        return $this->type;
     }
 
     /**
@@ -297,13 +284,26 @@ class Step
     }
 
     /**
-     * Get type
+     * Get isEnabled
      *
-     * @return integer
+     * @return boolean
      */
-    public function getType()
+    public function getIsEnabled()
     {
-        return $this->type;
+        return $this->isEnabled;
+    }
+
+    /**
+     * Set isEnabled
+     *
+     * @param boolean $isEnabled
+     * @return Step
+     */
+    public function setIsEnabled($isEnabled)
+    {
+        $this->isEnabled = $isEnabled;
+
+        return $this;
     }
 
     /**
@@ -318,30 +318,16 @@ class Step
 
     /**
      * @param string $consultation
+     * @return $this
      */
     public function setConsultation(Consultation $consultation = null)
     {
+        if (null != $this->consultation) {
+            $this->consultation->removeStep($this);
+        }
         $this->consultation = $consultation;
-    }
-
-    /**
-     * @return boolean
-     */
-    public function isOtherStep(){
-        if($this->type == self::TYPE_OTHER){
-            return true;
-        }
-        return false;
-    }
-
-    /**
-     * @return boolean
-     */
-    public function isConsultationStep(){
-        if($this->type == self::TYPE_CONSULTATION){
-            return true;
-        }
-        return false;
+        $this->consultation->addStep($this);
+        return $this;
     }
 
     /**
@@ -381,32 +367,39 @@ class Step
         return $this->updatedAt;
     }
 
-    /**
-     * Set createdAt
-     *
-     * @param \DateTime $createdAt
-     *
-     * @return Step
-     */
-    public function setCreatedAt($createdAt)
-    {
-        $this->createdAt = $createdAt;
+    // ********************** custom Methods *******************************
 
-        return $this;
+    /**
+     * @return boolean
+     */
+    public function isConsultationStep(){
+        if($this->type == self::TYPE_CONSULTATION){
+            return true;
+        }
+        return false;
     }
 
     /**
-     * Set updatedAt
-     *
-     * @param \DateTime $updatedAt
-     *
-     * @return Step
+     * @return boolean
      */
-    public function setUpdatedAt($updatedAt)
-    {
-        $this->updatedAt = $updatedAt;
+    public function isOtherStep(){
+        if($this->type == self::TYPE_OTHER){
+            return true;
+        }
+        return false;
+    }
 
-        return $this;
+    // ************************* Lifecycle **************************
+
+    /**
+     * @ORM\PreRemove
+     */
+    public function deleteStep()
+    {
+        if ($this->consultation != null) {
+            $this->consultation->removeStep($this);
+        }
+
     }
 
 }

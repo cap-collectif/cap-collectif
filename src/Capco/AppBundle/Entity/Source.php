@@ -98,7 +98,7 @@ class Source
     /**
      * @var
      *
-     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Opinion", inversedBy="Sources")
+     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Opinion", inversedBy="Sources", cascade={"persist"})
      * @ORM\JoinColumn(name="opinion_id", referencedColumnName="id", nullable=false)
      */
     private $Opinion;
@@ -135,9 +135,9 @@ class Source
     private $Votes;
 
     /**
-     * @var string
+     * @var
      *
-     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\Reporting", mappedBy="Source", cascade={"persist", "remove"})
+     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\Reporting", mappedBy="Source", cascade={"persist", "remove"}, orphanRemoval=true)
      */
     private $Reports;
 
@@ -169,6 +169,14 @@ class Source
      */
     private $trashedReason = null;
 
+    function __construct()
+    {
+        $this->type = self::LINK;
+        $this->Reports = new ArrayCollection();
+        $this->voteCountSource = 0;
+        $this->updatedAt = new \DateTime;
+    }
+
     public function __toString()
     {
         if ($this->id) {
@@ -179,14 +187,6 @@ class Source
 
     }
 
-    function __construct()
-    {
-        $this->type = self::LINK;
-        $this->Reports = new ArrayCollection();
-        $this->voteCountSource = 0;
-        $this->updatedAt = new \DateTime;
-    }
-
     /**
      * Get id
      *
@@ -195,6 +195,16 @@ class Source
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * Get title
+     *
+     * @return string
+     */
+    public function getTitle()
+    {
+        return $this->title;
     }
 
     /**
@@ -209,128 +219,6 @@ class Source
         $this->title = $title;
 
         return $this;
-    }
-
-    /**
-     * Get title
-     *
-     * @return string
-     */
-    public function getTitle()
-    {
-        return $this->title;
-    }
-
-    /**
-     * Set link
-     *
-     * @param string $link
-     *
-     * @return Source
-     */
-    public function setLink($link)
-    {
-        $this->link = $link;
-
-        return $this;
-    }
-
-    /**
-     * Get link
-     *
-     * @return string
-     */
-    public function getLink()
-    {
-        return $this->link;
-    }
-
-    /**
-     * Set body
-     *
-     * @param string $body
-     *
-     * @return Source
-     */
-    public function setBody($body)
-    {
-        $this->body = $body;
-
-        return $this;
-    }
-
-    /**
-     * Get body
-     *
-     * @return string
-     */
-    public function getBody()
-    {
-        return $this->body;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getAuthor()
-    {
-        return $this->Author;
-    }
-
-    /**
-     * @param mixed $Author
-     */
-    public function setAuthor($Author)
-    {
-        $this->Author = $Author;
-    }
-
-    /**
-     * @return \DateTime
-     */
-    public function getCreatedAt()
-    {
-        return $this->createdAt;
-    }
-
-    /**
-     * @return \DateTime
-     */
-    public function getUpdatedAt()
-    {
-        return $this->updatedAt;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getOpinion()
-    {
-        return $this->Opinion;
-    }
-
-    /**
-     * @param mixed $Opinion
-     */
-    public function setOpinion($Opinion)
-    {
-        $this->Opinion = $Opinion;
-    }
-
-    /**
-     * @return int
-     */
-    public function getVoteCountSource()
-    {
-        return $this->voteCountSource;
-    }
-
-    /**
-     * @param int $voteCountSource
-     */
-    public function setVoteCountSource($voteCountSource)
-    {
-        $this->voteCountSource = $voteCountSource;
     }
 
     /**
@@ -350,6 +238,142 @@ class Source
     }
 
     /**
+     * Get link
+     *
+     * @return string
+     */
+    public function getLink()
+    {
+        return $this->link;
+    }
+
+    /**
+     * Set link
+     *
+     * @param string $link
+     *
+     * @return Source
+     */
+    public function setLink($link)
+    {
+        $this->link = $link;
+
+        return $this;
+    }
+
+    /**
+     * Get body
+     *
+     * @return string
+     */
+    public function getBody()
+    {
+        return $this->body;
+    }
+
+    /**
+     * Set body
+     *
+     * @param string $body
+     *
+     * @return Source
+     */
+    public function setBody($body)
+    {
+        $this->body = $body;
+
+        return $this;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getCreatedAt()
+    {
+        return $this->createdAt;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getUpdatedAt()
+    {
+        return $this->updatedAt;
+    }
+
+    /**
+     * Get isEnabled
+     *
+     * @return boolean
+     */
+    public function getIsEnabled()
+    {
+        return $this->isEnabled;
+    }
+
+    /**
+     * Set isEnabled
+     *
+     * @param boolean $isEnabled
+     * @return Source
+     */
+    public function setIsEnabled($isEnabled)
+    {
+        if ($isEnabled != $this->isEnabled) {
+            if($isEnabled) {
+                if(!$this->isTrashed) {
+                    $this->Opinion->increaseSourcesCount(1);
+                }
+            } else {
+                if(!$this->isTrashed) {
+                    $this->Opinion->decreaseSourcesCount(1);
+                }
+            }
+        }
+        $this->isEnabled = $isEnabled;
+        return $this;
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getAuthor()
+    {
+        return $this->Author;
+    }
+
+    /**
+     * @param mixed $Author
+     */
+    public function setAuthor($Author)
+    {
+        $this->Author = $Author;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getOpinion()
+    {
+        return $this->Opinion;
+    }
+
+    /**
+     * @param mixed $Opinion
+     * @return $this
+     */
+    public function setOpinion($Opinion)
+    {
+        if (null != $this->Opinion) {
+            $this->Opinion->removeSource($this);
+        }
+        $this->Opinion = $Opinion;
+        $this->Opinion->addSource($this);
+        return $this;
+    }
+
+    /**
      * @return mixed
      */
     public function getCategory()
@@ -359,14 +383,16 @@ class Source
 
     /**
      * @param mixed $Category
+     * @return $this
      */
     public function setCategory($Category)
     {
-        if($this->Category != null) {
+        if(null != $this->Category) {
             $this->Category->removeSource($this);
         }
         $this->Category = $Category;
         $this->Category->addSource($this);
+        return $this;
     }
 
     /**
@@ -402,128 +428,31 @@ class Source
     }
 
     /**
-     * Set isTrashed
-     *
-     * @param boolean $isTrashed
-     * @return Source
+     * @return mixed
      */
-    public function setIsTrashed($isTrashed)
-    {
-        if ($isTrashed != $this->isTrashed) {
-            if($this->isEnabled) {
-                if ($isTrashed) {
-                    $this->Opinion->decreaseSourcesCount(1);
-                } else {
-                    $this->Opinion->increaseSourcesCount(1);
-                }
-            }
-        }
-        $this->isTrashed = $isTrashed;
-        return $this;
-    }
-
-    /**
-     * Get isTrashed
-     *
-     * @return boolean
-     */
-    public function getIsTrashed()
-    {
-        return $this->isTrashed;
-    }
-
-    /**
-     * Set trashedAt
-     *
-     * @param \DateTime $trashedAt
-     * @return Source
-     */
-    public function setTrashedAt($trashedAt)
-    {
-        $this->trashedAt = $trashedAt;
-
-        return $this;
-    }
-
-    /**
-     * Get trashedAt
-     *
-     * @return \DateTime
-     */
-    public function getTrashedAt()
-    {
-        return $this->trashedAt;
-    }
-
-    /**
-     * Set trashedReason
-     *
-     * @param string $trashedReason
-     * @return Source
-     */
-    public function setTrashedReason($trashedReason)
-    {
-        $this->trashedReason = $trashedReason;
-
-        return $this;
-    }
-
-    /**
-     * Get trashedReason
-     *
-     * @return string
-     */
-    public function getTrashedReason()
-    {
-        return $this->trashedReason;
-    }
-
-    public function setVotes($votes){
-        foreach($votes as $vote){
-            $vote->setSource($this);
-        }
-        $this->Votes = $votes;
-        $this->voteCountSource = $votes->count();
-        return $this;
-    }
-
-    public function resetVotes() {
-        foreach($this->Votes as $vote){
-            $vote->setSource(null);
-        }
-        $this->voteCountSource = 0;
-        $this->setVotes(new ArrayCollection());
-        return $this;
-    }
-
-    public function addVote($vote){
-        $this->voteCountSource++;
-        $this->Votes->add($vote);
-        $vote->setSource($this);
-        return $this;
-    }
-
-    public function removeVote($vote){
-        if($this->Votes->removeElement($vote)){
-            $this->voteCountSource--;
-            $vote->setSource(null);
-        }
-        return $this;
-    }
-
     public function getVotes(){
         return $this->Votes;
     }
 
-    public function userHasVote(User $user = null){
-        if ($user != null) {
-            foreach($this->Votes as $vote) {
-                if ($vote->getVoter() == $user) {
-                    return true;
-                }
-            }
+    /**
+     * @param $vote
+     * @return $this
+     */
+    public function addVote($vote){
+        $this->voteCountSource++;
+        $this->Votes->add($vote);
+        return $this;
+    }
+
+    /**
+     * @param $vote
+     * @return $this
+     */
+    public function removeVote($vote){
+        if($this->Votes->removeElement($vote)){
+            $this->voteCountSource--;
         }
-        return false;
+        return $this;
     }
 
     /**
@@ -556,37 +485,124 @@ class Source
     }
 
     /**
-     * Set isEnabled
+     * @return int
+     */
+    public function getVoteCountSource()
+    {
+        return $this->voteCountSource;
+    }
+
+    /**
+     * @param int $voteCountSource
+     */
+    public function setVoteCountSource($voteCountSource)
+    {
+        $this->voteCountSource = $voteCountSource;
+    }
+
+    /**
+     * Get isTrashed
      *
-     * @param boolean $isEnabled
+     * @return boolean
+     */
+    public function getIsTrashed()
+    {
+        return $this->isTrashed;
+    }
+
+    /**
+     * Set isTrashed
+     *
+     * @param boolean $isTrashed
      * @return Source
      */
-    public function setIsEnabled($isEnabled)
+    public function setIsTrashed($isTrashed)
     {
-        if ($isEnabled != $this->isEnabled) {
-            if($isEnabled) {
-                if(!$this->isTrashed) {
-                    $this->Opinion->increaseSourcesCount(1);
-                }
-            } else {
-                if(!$this->isTrashed) {
+        if ($isTrashed != $this->isTrashed) {
+            if($this->isEnabled) {
+                if ($isTrashed) {
                     $this->Opinion->decreaseSourcesCount(1);
+                } else {
+                    $this->Opinion->increaseSourcesCount(1);
                 }
             }
         }
-        $this->isEnabled = $isEnabled;
-        return $this;
+        $this->isTrashed = $isTrashed;
         return $this;
     }
 
     /**
-     * Get isEnabled
+     * Get trashedAt
      *
-     * @return boolean
+     * @return \DateTime
      */
-    public function getIsEnabled()
+    public function getTrashedAt()
     {
-        return $this->isEnabled;
+        return $this->trashedAt;
+    }
+
+    /**
+     * Set trashedAt
+     *
+     * @param \DateTime $trashedAt
+     * @return Source
+     */
+    public function setTrashedAt($trashedAt)
+    {
+        $this->trashedAt = $trashedAt;
+
+        return $this;
+    }
+
+    /**
+     * Get trashedReason
+     *
+     * @return string
+     */
+    public function getTrashedReason()
+    {
+        return $this->trashedReason;
+    }
+
+    /**
+     * Set trashedReason
+     *
+     * @param string $trashedReason
+     * @return Source
+     */
+    public function setTrashedReason($trashedReason)
+    {
+        $this->trashedReason = $trashedReason;
+
+        return $this;
+    }
+
+    // *************************** custom methods *******************************
+
+    /**
+     * @return $this
+     */
+    public function resetVotes()
+    {
+        foreach ($this->Votes as $vote) {
+            $this->removeVote($vote);
+        }
+        return $this;
+    }
+
+    /**
+     * @param User $user
+     * @return bool
+     */
+    public function userHasVote(User $user = null){
+        if ($user != null) {
+            foreach($this->Votes as $vote) {
+                if ($vote->getVoter() == $user) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     public function canDisplay() {
@@ -596,6 +612,8 @@ class Source
     public function canContribute() {
         return ($this->isEnabled && !$this->isTrashed && $this->Opinion->canContribute());
     }
+
+    // ******************** Lifecycle ************************************
 
     /**
      * @ORM\PreRemove

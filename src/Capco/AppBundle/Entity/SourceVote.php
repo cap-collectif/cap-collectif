@@ -10,6 +10,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
  *
  * @ORM\Table(name="source_vote")
  * @ORM\Entity
+ * @ORM\HasLifecycleCallbacks()
  */
 class SourceVote
 {
@@ -32,7 +33,7 @@ class SourceVote
     /**
      * @var
      *
-     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Source", inversedBy="Votes")
+     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Source", inversedBy="Votes", cascade={"persist"})
      */
     private $source;
 
@@ -74,10 +75,16 @@ class SourceVote
 
     /**
      * @param mixed $source
+     * @return $this
      */
     public function setSource($source)
     {
+        if (null != $this->source) {
+            $this->source->removeVote($this);
+        }
         $this->source = $source;
+        $this->source->addVote($this);
+        return $this;
     }
 
     /**
@@ -96,18 +103,16 @@ class SourceVote
         $this->Voter = $Voter;
     }
 
+    // ***************************** Lifecycle ****************************************
 
     /**
-     * Set createdAt
-     *
-     * @param \DateTime $createdAt
-     *
-     * @return ArgumentVote
+     * @ORM\PreRemove
      */
-    public function setCreatedAt($createdAt)
+    public function deleteVote()
     {
-        $this->createdAt = $createdAt;
+        if ($this->source != null) {
+            $this->source->removeVote($this);
+        }
 
-        return $this;
     }
 }

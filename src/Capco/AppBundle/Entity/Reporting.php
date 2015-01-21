@@ -116,23 +116,7 @@ class Reporting
 
     function __construct()
     {
-        $this->updatedAt = new \Datetime();
-    }
-
-    /**
-     * @return boolean
-     */
-    public function getIsArchived()
-    {
-        return $this->isArchived;
-    }
-
-    /**
-     * @param boolean $isArchived
-     */
-    public function setIsArchived($isArchived)
-    {
-        $this->isArchived = $isArchived;
+        $this->updatedAt = new \Datetime;
     }
 
     /**
@@ -146,6 +130,16 @@ class Reporting
     }
 
     /**
+     * Get status
+     *
+     * @return integer
+     */
+    public function getStatus()
+    {
+        return $this->status;
+    }
+
+    /**
      * Set status
      *
      * @param integer $status
@@ -156,16 +150,6 @@ class Reporting
         $this->status = $status;
 
         return $this;
-    }
-
-    /**
-     * Get status
-     *
-     * @return integer
-     */
-    public function getStatus()
-    {
-        return $this->status;
     }
 
     /**
@@ -270,6 +254,7 @@ class Reporting
 
     /**
      * @param mixed $Argument
+     * @return $this
      */
     public function setArgument($Argument)
     {
@@ -300,6 +285,24 @@ class Reporting
         $this->Idea->addReport($this);
     }
 
+    /**
+     * @return boolean
+     */
+    public function getIsArchived()
+    {
+        return $this->isArchived;
+    }
+
+    /**
+     * @param boolean $isArchived
+     */
+    public function setIsArchived($isArchived)
+    {
+        $this->isArchived = $isArchived;
+    }
+
+    // ******************* Custom methods *************************
+
     public function getRelatedObject(){
         if ($this->Opinion != null) {
             return $this->Opinion;
@@ -312,6 +315,8 @@ class Reporting
         }
         return null;
     }
+
+    // ***************************** Lifecycle *******************************
 
     /**
      * @ORM\PreRemove

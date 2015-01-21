@@ -207,16 +207,15 @@ class IdeaController extends Controller
                 if ($userVoteCount == 0) {
                     $vote = new IdeaVote();
                     $vote->setVoter($this->getUser());
-                    $idea->addIdeaVote($vote);
-                    $em->persist($idea);
+                    $vote->setIdea($idea);
+                    $em->persist($vote);
                     $em->flush();
 
                     $this->get('session')->getFlashBag()->add('success', $translator->trans('Your vote has been saved.'));
                 } else {
-                    $ideaVote = $em->getRepository('CapcoAppBundle:IdeaVote')->hasVote($this->getUser(), $idea);
+                    $vote = $em->getRepository('CapcoAppBundle:IdeaVote')->hasVote($this->getUser(), $idea);
                     $em = $this->getDoctrine()->getManager();
-                    $idea->removeIdeaVote($ideaVote);
-                    $em->remove($ideaVote);
+                    $em->remove($vote);
                     $em->flush();
 
                     $this->get('session')->getFlashBag()->add('success', $translator->trans('Your vote has been removed'));
@@ -265,10 +264,6 @@ class IdeaController extends Controller
 
             if ($form->isValid()) {
                 $em = $this->getDoctrine()->getManager();
-                $linkedVotes = $this->getDoctrine()->getRepository("CapcoAppBundle:IdeaVote")->findBy(array('Idea'=>$idea));
-                foreach($linkedVotes as $vote){
-                    $em->remove($vote);
-                }
                 $idea->resetIdeaVotes();
                 $em->persist($idea);
                 $em->flush();

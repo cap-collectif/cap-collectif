@@ -51,7 +51,6 @@ class SourceController extends Controller
 
         $source = new Source();
         $source->setAuthor($this->getUser());
-        $opinion->addSource($source);
 
         $form = $this->createForm(new SourcesType(), $source);
 
@@ -59,6 +58,7 @@ class SourceController extends Controller
             $form->handleRequest($request);
 
             if ($form->isValid()) {
+                $source->setOpinion($opinion);
                 $em = $this->getDoctrine()->getManager();
                 $em->persist($source);
                 $em->flush();
@@ -121,7 +121,6 @@ class SourceController extends Controller
 
             if ($form->isValid()) {
                 $em = $this->getDoctrine()->getManager();
-                $opinion->removeSource($source);
                 $em->remove($source);
                 $em->flush();
 
@@ -185,10 +184,6 @@ class SourceController extends Controller
                 $type = $form->get('type')->getData();
                 $em = $this->getDoctrine()->getManager();
 
-                $linkedVotes = $em->getRepository('CapcoAppBundle:SourceVote')->findBySource($source);
-                foreach($linkedVotes as $vote){
-                    $em->remove($vote);
-                }
                 $source->resetVotes();
 
                 if ($type === 0) {
@@ -272,16 +267,13 @@ class SourceController extends Controller
                 }
 
                 if($userVote == null ){
-                    $source->addVote($sourceVote);
-                    $em->persist($source);
+                    $sourceVote->setSource($source);
                     $em->persist($sourceVote);
                     $em->flush();
 
                     $this->get('session')->getFlashBag()->add('success', $this->get('translator')->trans('Your vote has been saved.'));
                 }
                 else {
-                    $source->removeVote($sourceVote);
-                    $em->persist($source);
                     $em->remove($sourceVote);
                     $em->flush();
 

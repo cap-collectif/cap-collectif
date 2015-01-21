@@ -135,6 +135,16 @@ class OpinionVote
     }
 
     /**
+     * Get value
+     *
+     * @return integer
+     */
+    public function getValue()
+    {
+        return $this->value;
+    }
+
+    /**
      * Set value
      *
      * @param integer $value
@@ -143,23 +153,13 @@ class OpinionVote
     public function setValue($value)
     {
         if ($this->opinion != null) {
-            $this->opinion->removeVote($this);
+            $this->opinion->removeFromVotesCount($this->value);
         }
         $this->value = $value;
         if ($this->opinion != null) {
-            $this->opinion->addVote($this);
+            $this->opinion->addToVotesCount($this->value);
         }
         return $this;
-    }
-
-    /**
-     * Get value
-     *
-     * @return integer
-     */
-    public function getValue()
-    {
-        return $this->value;
     }
 
     /**
@@ -198,33 +198,7 @@ class OpinionVote
         $this->Voter = $Voter;
     }
 
-    /**
-     * Set createdAt
-     *
-     * @param \DateTime $createdAt
-     *
-     * @return Vote
-     */
-    public function setCreatedAt($createdAt)
-    {
-        $this->createdAt = $createdAt;
-
-        return $this;
-    }
-
-    /**
-     * Set updatedAt
-     *
-     * @param \DateTime $updatedAt
-     *
-     * @return Vote
-     */
-    public function setUpdatedAt($updatedAt)
-    {
-        $this->updatedAt = $updatedAt;
-
-        return $this;
-    }
+    // ******************* Lifecycle ******************************
 
     /**
      * @ORM\PreRemove

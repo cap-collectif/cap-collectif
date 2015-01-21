@@ -63,6 +63,12 @@ class Category
      */
     private $Sources;
 
+    function __construct()
+    {
+        $this->Sources = new ArrayCollection();
+        $this->updatedAt = new \Datetime;
+    }
+
     public function __toString()
     {
         if ($this->id) {
@@ -70,12 +76,6 @@ class Category
         } else {
             return "New category";
         }
-    }
-
-    function __construct()
-    {
-        $this->Sources = new ArrayCollection();
-        $this->updatedAt = new \Datetime;
     }
 
     /**
@@ -89,6 +89,16 @@ class Category
     }
 
     /**
+     * Get title
+     *
+     * @return string
+     */
+    public function getTitle()
+    {
+        return $this->title;
+    }
+
+    /**
      * Set title
      *
      * @param string $title
@@ -98,18 +108,35 @@ class Category
     public function setTitle($title)
     {
         $this->title = $title;
-
         return $this;
     }
 
     /**
-     * Get title
-     *
-     * @return string
+     * @return mixed
      */
-    public function getTitle()
+    public function getSlug()
     {
-        return $this->title;
+        return $this->slug;
+    }
+
+    /**
+     * @param $slug
+     * @return $this
+     */
+    public function setSlug($slug)
+    {
+        $this->slug = $slug;
+        return $this;
+    }
+
+    /**
+     * Get isEnabled
+     *
+     * @return boolean
+     */
+    public function getIsEnabled()
+    {
+        return $this->isEnabled;
     }
 
     /**
@@ -122,18 +149,7 @@ class Category
     public function setIsEnabled($isEnabled)
     {
         $this->isEnabled = $isEnabled;
-
         return $this;
-    }
-
-    /**
-     * Get isEnabled
-     *
-     * @return boolean
-     */
-    public function getIsEnabled()
-    {
-        return $this->isEnabled;
     }
 
     /**
@@ -154,22 +170,6 @@ class Category
     public function getUpdatedAt()
     {
         return $this->updatedAt;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getSlug()
-    {
-        return $this->slug;
-    }
-
-    /**
-     * @param mixed $slug
-     */
-    public function setSlug($slug)
-    {
-        $this->slug = $slug;
     }
 
     /**

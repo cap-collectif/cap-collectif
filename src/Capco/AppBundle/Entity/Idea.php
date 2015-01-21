@@ -462,6 +462,12 @@ class Idea
         return $this;
     }
 
+    public function resetIdeaVotes() {
+        foreach ($this->IdeaVotes as $vote) {
+            $this->removeIdeaVote($vote);
+        }
+    }
+
     /**
      * Add ideaVote
      *

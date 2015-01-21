@@ -165,14 +165,6 @@ class Consultation
      */
     private $video = null;
 
-    public function __toString()
-    {
-        if ($this->id) {
-            return $this->getTitle();
-        } else {
-            return "New consultation";
-        }
-    }
 
     /**
      * Constructor
@@ -183,6 +175,15 @@ class Consultation
         $this->Opinions = new ArrayCollection();
         $this->Steps = new ArrayCollection();
         $this->updatedAt = new \Datetime;
+    }
+
+    public function __toString()
+    {
+        if ($this->id) {
+            return $this->getTitle();
+        } else {
+            return "New consultation";
+        }
     }
 
     /**
@@ -196,19 +197,6 @@ class Consultation
     }
 
     /**
-     * Set title
-     *
-     * @param string $title
-     * @return Consultation
-     */
-    public function setTitle($title)
-    {
-        $this->title = $title;
-
-        return $this;
-    }
-
-    /**
      * Get title
      *
      * @return string
@@ -219,84 +207,15 @@ class Consultation
     }
 
     /**
-     * @return \DateTime
+     * Set title
+     *
+     * @param string $title
+     * @return Consultation
      */
-    public function getCreatedAt()
+    public function setTitle($title)
     {
-        return $this->createdAt;
-    }
-
-    /**
-     * @return int
-     */
-    public function getOpinionCount()
-    {
-        return $this->opinionCount;
-    }
-
-    /**
-     * @param int $opinionCount
-     */
-    public function setOpinionCount($opinionCount)
-    {
-        $this->opinionCount = $opinionCount;
-    }
-
-    public function increaseOpinionCount($nb) {
-        $this->opinionCount+=$nb;
-    }
-
-    public function decreaseOpinionCount($nb) {
-        $this->opinionCount-=$nb;
-    }
-
-    /**
-     * @return int
-     */
-    public function getTrashedOpinionCount()
-    {
-        return $this->trashedOpinionCount;
-    }
-
-    /**
-     * @param int $trashedOpinionCount
-     */
-    public function setTrashedOpinionCount($trashedOpinionCount)
-    {
-        $this->trashedOpinionCount = $trashedOpinionCount;
-    }
-
-    public function increaseTrashedOpinionCount($nb) {
-        $this->trashedOpinionCount+=$nb;
-    }
-
-    public function decreaseTrashedOpinionCount($nb) {
-        $this->trashedOpinionCount-=$nb;
-    }
-
-
-    /**
-     * @return \DateTime
-     */
-    public function getUpdatedAt()
-    {
-        return $this->updatedAt;
-    }
-
-    /**
-     * @return string
-     */
-    public function getAuthor()
-    {
-        return $this->Author;
-    }
-
-    /**
-     * @param string $Author
-     */
-    public function setAuthor($Author)
-    {
-        $this->Author = $Author;
+        $this->title = $title;
+        return $this;
     }
 
     /**
@@ -308,27 +227,13 @@ class Consultation
     }
 
     /**
-     * @param mixed $slug
+     * @param $slug
+     * @return $this
      */
     public function setSlug($slug)
     {
         $this->slug = $slug;
-    }
-
-    /**
-     * @return string
-     */
-    public function getBody()
-    {
-        return $this->body;
-    }
-
-    /**
-     * @param string $body
-     */
-    public function setBody($body)
-    {
-        $this->body = $body;
+        return $this;
     }
 
     /**
@@ -340,11 +245,105 @@ class Consultation
     }
 
     /**
-     * @param string $teaser
+     * @param $teaser
+     * @return $this
      */
     public function setTeaser($teaser)
     {
         $this->teaser = $teaser;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getBody()
+    {
+        return $this->body;
+    }
+
+    /**
+     * @param $body
+     * @return $this
+     */
+    public function setBody($body)
+    {
+        $this->body = $body;
+        return $this;
+    }
+
+    /**
+     * Get isEnabled
+     *
+     * @return boolean
+     */
+    public function getIsEnabled()
+    {
+        return $this->isEnabled;
+    }
+
+    /**
+     * Set isEnabled
+     *
+     * @param boolean $isEnabled
+     * @return Consultation
+     */
+    public function setIsEnabled($isEnabled)
+    {
+        $this->isEnabled = $isEnabled;
+        return $this;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getCreatedAt()
+    {
+        return $this->createdAt;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getUpdatedAt()
+    {
+        return $this->updatedAt;
+    }
+
+    /**
+     * @return int
+     */
+    public function getOpinionCount()
+    {
+        return $this->opinionCount;
+    }
+
+    /**
+     * @param $opinionCount
+     * @return $this
+     */
+    public function setOpinionCount($opinionCount)
+    {
+        $this->opinionCount = $opinionCount;
+        return $this;
+    }
+
+    /**
+     * @return int
+     */
+    public function getTrashedOpinionCount()
+    {
+        return $this->trashedOpinionCount;
+    }
+
+    /**
+     * @param $trashedOpinionCount
+     * @return $this
+     */
+    public function setTrashedOpinionCount($trashedOpinionCount)
+    {
+        $this->trashedOpinionCount = $trashedOpinionCount;
+        return $this;
     }
 
     /**
@@ -356,22 +355,12 @@ class Consultation
     }
 
     /**
-     * @param int $argumentCount
+     * @param $argumentCount
+     * @return $this
      */
     public function setArgumentCount($argumentCount)
     {
         $this->argumentCount = $argumentCount;
-    }
-
-    public function increaseArgumentCount($nb){
-        $this->argumentCount+=$nb;
-        return $this;
-    }
-
-    public function decreaseArgumentCount($nb)
-    {
-        $this->argumentCount -= $nb;
-
         return $this;
     }
 
@@ -384,19 +373,127 @@ class Consultation
     }
 
     /**
-     * @param int $trashedArgumentCount
+     * @param $trashedArgumentCount
+     * @return $this
      */
     public function setTrashedArgumentCount($trashedArgumentCount)
     {
         $this->trashedArgumentCount = $trashedArgumentCount;
+        return $this;
     }
 
-    public function increaseTrashedArgumentCount($nb) {
-        $this->trashedArgumentCount+=$nb;
+    /**
+     * @return string
+     */
+    public function getAuthor()
+    {
+        return $this->Author;
     }
 
-    public function decreaseTrashedArgumentCount($nb) {
-        $this->trashedArgumentCount-=$nb;
+    /**
+     * @param $Author
+     * @return $this
+     */
+    public function setAuthor($Author)
+    {
+        $this->Author = $Author;
+        return $this;
+    }
+
+    /**
+     * Get themes
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getThemes()
+    {
+        return $this->Themes;
+    }
+
+    /**
+     * Add theme
+     *
+     * @param \Capco\AppBundle\Entity\Theme $theme
+     *
+     * @return Consultation
+     */
+    public function addTheme(Theme $theme)
+    {
+        $this->Themes->add($theme);
+        return $this;
+    }
+
+    /**
+     * Remove theme
+     * @param \Capco\AppBundle\Entity\Theme $theme
+     * @return $this
+     */
+    public function removeTheme(Theme $theme)
+    {
+        $this->Themes->removeElement($theme);
+        return $this;
+    }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getOpinions(){
+        return $this->Opinions;
+    }
+
+    /**
+     * @param $opinion
+     * @return $this
+     */
+    public function addOpinion($opinion){
+        $this->opinionCount++;
+        $this->Opinions->add($opinion);
+        return $this;
+    }
+
+    /**
+     * @param $opinion
+     * @return $this
+     */
+    public function removeOpinion($opinion)
+    {
+        if ($this->Opinions->removeElement($opinion)) {
+            $this->opinionCount--;
+        }
+        return $this;
+    }
+
+    /**
+     * Get steps
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getSteps()
+    {
+        return $this->Steps;
+    }
+
+    /**
+     * Add step
+     *
+     * @param \Capco\AppBundle\Entity\Step $step
+     * @return Consultation
+     */
+    public function addStep(Step $step)
+    {
+        $this->Steps->add($step);
+        return $this;
+    }
+
+    /**
+     * Remove step
+     * @param \Capco\AppBundle\Entity\Step $step
+     * @return $this
+     */
+    public function removeStep(Step $step)
+    {
+        $this->Steps->removeElement($step);
+        return $this;
     }
 
     /**
@@ -431,7 +528,13 @@ class Consultation
         $this->video = $video;
     }
 
-    public function getConsultationStep() {
+    // ******************** Custom methods ******************************
+
+    /**
+     * @return mixed|null
+     */
+    public function getConsultationStep()
+    {
         foreach ($this->Steps as $step) {
             if($step->isConsultationStep()) {
                 return $step;
@@ -440,7 +543,11 @@ class Consultation
         return null;
     }
 
-    public function getOpenedAt(){
+    /**
+     * @return null
+     */
+    public function getOpenedAt()
+    {
         $consultationStep = $this->getConsultationStep();
         if(null != $consultationStep){
             return $consultationStep->getStartAt();
@@ -448,7 +555,11 @@ class Consultation
         return null;
     }
 
-    public function getClosedAt(){
+    /**
+     * @return null
+     */
+    public function getClosedAt()
+    {
         $consultationStep = $this->getConsultationStep();
         if(null != $consultationStep){
             return $consultationStep->getEndAt();
@@ -456,6 +567,9 @@ class Consultation
         return null;
     }
 
+    /**
+     * @return null
+     */
     public function getRemainingDays()
     {
         $closedAt = $this->getClosedAt();
@@ -468,6 +582,9 @@ class Consultation
         }
     }
 
+    /**
+     * @return int|null
+     */
     public function getOpeningStatus()
     {
         $now = new \DateTime();
@@ -487,203 +604,124 @@ class Consultation
     }
 
     /**
-     * Set isEnabled
-     *
-     * @param boolean $isEnabled
-     *
-     * @return Consultation
+     * @return bool
      */
-    public function setIsEnabled($isEnabled)
+    public function canDisplay()
     {
-        $this->isEnabled = $isEnabled;
-
-        return $this;
-    }
-
-    /**
-     * Get isEnabled
-     *
-     * @return boolean
-     */
-    public function getIsEnabled()
-    {
-        return $this->isEnabled;
-    }
-
-    /**
-     * Set createdAt
-     *
-     * @param \DateTime $createdAt
-     *
-     * @return Consultation
-     */
-    public function setCreatedAt($createdAt)
-    {
-        $this->createdAt = $createdAt;
-
-        return $this;
-    }
-
-    /**
-     * Set updatedAt
-     *
-     * @param \DateTime $updatedAt
-     *
-     * @return Consultation
-     */
-    public function setUpdatedAt($updatedAt)
-    {
-        $this->updatedAt = $updatedAt;
-
-        return $this;
-    }
-
-    /**
-     * Add theme
-     *
-     * @param \Capco\AppBundle\Entity\Theme $theme
-     *
-     * @return Consultation
-     */
-    public function addTheme(Theme $theme)
-    {
-        $this->Themes->add($theme);
-        return $this;
-    }
-
-    /**
-     * Remove theme
-     * @param \Capco\AppBundle\Entity\Theme $theme
-     * @return $this
-     */
-    public function removeTheme(Theme $theme)
-    {
-        $this->Themes->removeElement($theme);
-        return $this;
-    }
-
-    /**
-     * Get themes
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getThemes()
-    {
-        return $this->Themes;
-    }
-
-    /**
-     * Add step
-     *
-     * @param \Capco\AppBundle\Entity\Step $step
-     *
-     * @return Consultation
-     */
-    public function addStep(Step $step)
-    {
-        $step->setConsultation($this);
-        $this->Steps->add($step);
-
-        return $this;
-    }
-
-    /**
-     * Remove step
-     * @param \Capco\AppBundle\Entity\Step $step
-     * @return $this
-     */
-    public function removeStep(Step $step)
-    {
-        $step->setConsultation(null);
-        $this->Steps->removeElement($step);
-        return $this;
-    }
-
-    /**
-     * Get steps
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getSteps()
-    {
-        return $this->Steps;
-    }
-
-    /**
-     * Set steps
-     *
-     * @param \Doctrine\Common\Collections\ArrayCollection $steps
-     * @return Consultation
-     */
-    public function setSteps($steps)
-    {
-        if (gettype($steps) == "array") {
-            $steps = new ArrayCollection($steps);
-        }
-
-        foreach($steps as $step)
-        {
-            $step->setConsultation($this);
-        }
-        $this->Steps = $steps;
-        return $this;
-    }
-
-    /**
-     * Get theme names
-     *
-     * @return array
-     */
-    public function getThemeNames()
-    {
-        $return = array();
-
-        foreach ($this->Themes as $theme) {
-            $return[] = $theme->getTitle();
-        }
-
-        sort($return);
-        return $return;
-    }
-
-    public function getOpinions(){
-        return $this->Opinions;
-    }
-
-    public function addOpinion($opinion){
-        $this->opinionCount++;
-        $this->Opinions->add($opinion);
-        return $this;
-    }
-
-    public function removeOpinion($opinion)
-    {
-        if ($this->Opinions->removeElement($opinion)) {
-            $this->opinionCount--;
-        }
-        return $this;
-    }
-
-    public function canDisplay() {
         return ($this->isEnabled);
     }
 
+    /**
+     * @return bool
+     */
     public function canContribute()
     {
         return ($this->isEnabled && ($this->getOpeningStatus() == $this::OPENING_STATUS_OPENED));
     }
 
-    public function getBodyExcerpt($nb = 100){
+    /**
+     * @param int $nb
+     * @return string
+     */
+    public function getBodyExcerpt($nb = 100)
+    {
         $excerpt = substr($this->body, 0, $nb);
         $excerpt = $excerpt.'...';
         return $excerpt;
     }
 
-    public function getTeaserExcerpt($nb = 100){
+    /**
+     * @param int $nb
+     * @return string
+     */
+    public function getTeaserExcerpt($nb = 100)
+    {
         $excerpt = substr($this->teaser, 0, $nb);
         $excerpt = $excerpt.'...';
         return $excerpt;
     }
+
+    /**
+     * @param $nb
+     * @return $this
+     */
+    public function increaseOpinionCount($nb)
+    {
+        $this->opinionCount+=$nb;
+        return $this;
+    }
+
+    /**
+     * @param $nb
+     * @return $this
+     */
+    public function decreaseOpinionCount($nb)
+    {
+        $this->opinionCount-=$nb;
+        return $this;
+    }
+
+    /**
+     * @param $nb
+     * @return $this
+     */
+    public function increaseTrashedOpinionCount($nb)
+    {
+        $this->trashedOpinionCount+=$nb;
+        return $this;
+    }
+
+    /**
+     * @param $nb
+     * @return $this
+     */
+    public function decreaseTrashedOpinionCount($nb)
+    {
+        $this->trashedOpinionCount-=$nb;
+        return $this;
+    }
+
+    /**
+     * @param $nb
+     * @return $this
+     */
+    public function increaseArgumentCount($nb)
+    {
+        $this->argumentCount+=$nb;
+        return $this;
+    }
+
+    /**
+     * @param $nb
+     * @return $this
+     */
+    public function decreaseArgumentCount($nb)
+    {
+        $this->argumentCount -= $nb;
+        return $this;
+    }
+
+    /**
+     * @param $nb
+     * @return $this
+     */
+    public function increaseTrashedArgumentCount($nb)
+    {
+        $this->trashedArgumentCount+=$nb;
+        return $this;
+    }
+
+    /**
+     * @param $nb
+     * @return $this
+     */
+    public function decreaseTrashedArgumentCount($nb)
+    {
+        $this->trashedArgumentCount-=$nb;
+        return $this;
+    }
+
+    // ************************** Lifecycle **************************************
 
     /**
      * @ORM\PreRemove

@@ -167,6 +167,16 @@ class Argument
     }
 
     /**
+     * Get body
+     *
+     * @return string
+     */
+    public function getBody()
+    {
+        return $this->body;
+    }
+
+    /**
      * Set body
      *
      * @param string $body
@@ -177,16 +187,6 @@ class Argument
         $this->body = $body;
 
         return $this;
-    }
-
-    /**
-     * Get body
-     *
-     * @return string
-     */
-    public function getBody()
-    {
-        return $this->body;
     }
 
     /**
@@ -210,157 +210,13 @@ class Argument
     }
 
     /**
-     * Set voteCount
-     *
-     * @param integer $voteCount
-     * @return Argument
-     */
-    public function setVoteCount($voteCount)
-    {
-        $this->voteCount = $voteCount;
-
-        return $this;
-    }
-
-    /**
-     * Get voteCount
-     *
-     * @return integer
-     */
-    public function getVoteCount()
-    {
-        return $this->voteCount;
-    }
-
-    /**
-     * @return int
-     */
-    public function getType()
-    {
-        return $this->type;
-    }
-
-    /**
-     * @param int $type
-     */
-    public function setType($type)
-    {
-        $this->type = $type;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getOpinion()
-    {
-        return $this->opinion;
-    }
-
-    /**
-     * @param mixed $opinion
-     */
-    public function setOpinion($opinion)
-    {
-        if ($this->opinion != null) {
-            $this->opinion->removeArgument($this);
-        }
-        $this->opinion = $opinion;
-        $opinion->addArgument($this);
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getAuthor()
-    {
-        return $this->Author;
-    }
-
-    /**
-     * @param mixed $Author
-     */
-    public function setAuthor($Author)
-    {
-        $this->Author = $Author;
-    }
-
-    /**
-     * Set isTrashed
-     *
-     * @param boolean $isTrashed
-     * @return Argument
-     */
-    public function setIsTrashed($isTrashed)
-    {
-        if ($isTrashed != $this->isTrashed) {
-            if($this->isEnabled) {
-                if ($isTrashed) {
-                    $this->opinion->getConsultation()->increaseTrashedArgumentCount(1);
-                    $this->opinion->decreaseArgumentsCount(1);
-                } else {
-                    $this->opinion->increaseArgumentsCount(1);
-                    $this->opinion->getConsultation()->decreaseTrashedArgumentCount(1);
-                }
-            }
-        }
-        $this->isTrashed = $isTrashed;
-        return $this;
-    }
-
-    /**
-     * Get isTrashed
+     * Get isEnabled
      *
      * @return boolean
      */
-    public function getIsTrashed()
+    public function getIsEnabled()
     {
-        return $this->isTrashed;
-    }
-
-    /**
-     * Set trashedAt
-     *
-     * @param \DateTime $trashedAt
-     * @return Argument
-     */
-    public function setTrashedAt($trashedAt)
-    {
-        $this->trashedAt = $trashedAt;
-
-        return $this;
-    }
-
-    /**
-     * Get trashedAt
-     *
-     * @return \DateTime
-     */
-    public function getTrashedAt()
-    {
-        return $this->trashedAt;
-    }
-
-    /**
-     * Set trashedReason
-     *
-     * @param string $trashedReason
-     * @return Argument
-     */
-    public function setTrashedReason($trashedReason)
-    {
-        $this->trashedReason = $trashedReason;
-
-        return $this;
-    }
-
-    /**
-     * Get trashedReason
-     *
-     * @return string
-     */
-    public function getTrashedReason()
-    {
-        return $this->trashedReason;
+        return $this->isEnabled;
     }
 
     /**
@@ -391,25 +247,160 @@ class Argument
     }
 
     /**
-     * Get isEnabled
+     * Get voteCount
+     *
+     * @return integer
+     */
+    public function getVoteCount()
+    {
+        return $this->voteCount;
+    }
+
+    /**
+     * Set voteCount
+     *
+     * @param integer $voteCount
+     * @return Argument
+     */
+    public function setVoteCount($voteCount)
+    {
+        $this->voteCount = $voteCount;
+
+        return $this;
+    }
+
+    /**
+     * @return int
+     */
+    public function getType()
+    {
+        return $this->type;
+    }
+
+    /**
+     * @param int $type
+     */
+    public function setType($type)
+    {
+        $this->type = $type;
+    }
+
+    /**
+     * Get isTrashed
      *
      * @return boolean
      */
-    public function getIsEnabled()
+    public function getIsTrashed()
     {
-        return $this->isEnabled;
+        return $this->isTrashed;
     }
 
+    /**
+     * Set isTrashed
+     *
+     * @param boolean $isTrashed
+     * @return Argument
+     */
+    public function setIsTrashed($isTrashed)
+    {
+        if ($isTrashed != $this->isTrashed) {
+            if($this->isEnabled) {
+                if ($isTrashed) {
+                    $this->opinion->getConsultation()->increaseTrashedArgumentCount(1);
+                    $this->opinion->decreaseArgumentsCount(1);
+                } else {
+                    $this->opinion->increaseArgumentsCount(1);
+                    $this->opinion->getConsultation()->decreaseTrashedArgumentCount(1);
+                }
+            }
+        }
+        $this->isTrashed = $isTrashed;
+        return $this;
+    }
+
+    /**
+     * Get trashedAt
+     *
+     * @return \DateTime
+     */
+    public function getTrashedAt()
+    {
+        return $this->trashedAt;
+    }
+
+    /**
+     * Set trashedAt
+     *
+     * @param \DateTime $trashedAt
+     * @return Argument
+     */
+    public function setTrashedAt($trashedAt)
+    {
+        $this->trashedAt = $trashedAt;
+
+        return $this;
+    }
+
+    /**
+     * Get trashedReason
+     *
+     * @return string
+     */
+    public function getTrashedReason()
+    {
+        return $this->trashedReason;
+    }
+
+    /**
+     * Set trashedReason
+     *
+     * @param string $trashedReason
+     * @return Argument
+     */
+    public function setTrashedReason($trashedReason)
+    {
+        $this->trashedReason = $trashedReason;
+
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getAuthor()
+    {
+        return $this->Author;
+    }
+
+    /**
+     * @param mixed $Author
+     */
+    public function setAuthor($Author)
+    {
+        $this->Author = $Author;
+    }
+
+    /**
+     * @return ArrayCollection
+     */
     public function getVotes(){
         return $this->Votes;
     }
 
+    /**
+     * @param $vote
+     * @return $this
+     */
     public function addVote($vote){
         $this->voteCount++;
         $this->Votes->add($vote);
         return $this;
     }
 
+    /**
+     * @param $vote
+     * @return $this
+     */
     public function removeVote($vote)
     {
         if ($this->Votes->removeElement($vote)) {
@@ -419,25 +410,24 @@ class Argument
         return $this;
     }
 
-    public function resetVotes()
+    /**
+     * @return mixed
+     */
+    public function getOpinion()
     {
-        foreach ($this->Votes as $vote) {
-            $this->removeVote($vote);
-            $vote->setArgument(null);
-        }
+        return $this->opinion;
     }
 
-    public function userHasVote(User $user = null)
+    /**
+     * @param mixed $opinion
+     */
+    public function setOpinion($opinion)
     {
-        if ($user != null) {
-            foreach($this->Votes as $vote){
-                if($vote->getVoter() == $user){
-                    return true;
-                }
-            }
+        if ($this->opinion != null) {
+            $this->opinion->removeArgument($this);
         }
-
-        return false;
+        $this->opinion = $opinion;
+        $opinion->addArgument($this);
     }
 
     /**
@@ -468,21 +458,63 @@ class Argument
         return $this;
     }
 
+    // ************************ Custom methods *********************************
+
+    /**
+     * @return $this
+     */
+    public function resetVotes()
+    {
+        foreach ($this->Votes as $vote) {
+            $this->removeVote($vote);
+        }
+        return $this;
+    }
+
+    /**
+     * @param User $user
+     * @return bool
+     */
+    public function userHasVote(User $user = null)
+    {
+        if ($user != null) {
+            foreach($this->Votes as $vote){
+                if($vote->getVoter() == $user){
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    /**
+     * @return bool
+     */
     public function canDisplay() {
         return ($this->isEnabled && $this->opinion->canDisplay());
     }
 
+    /**
+     * @return bool
+     */
     public function canContribute()
     {
         return ($this->isEnabled && !$this->isTrashed && $this->opinion->canContribute());
     }
 
+    /**
+     * @param int $nb
+     * @return string
+     */
     public function getBodyExcerpt($nb = 100)
     {
         $excerpt = substr($this->body, 0, $nb);
         $excerpt = $excerpt.'...';
         return $excerpt;
     }
+
+
+    // ************************* Lifecycle ***********************************
 
     /**
      * @ORM\PreRemove

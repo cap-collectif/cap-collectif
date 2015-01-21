@@ -91,7 +91,8 @@ class ArgumentVote
     }
 
     /**
-     * @param mixed $argument
+     * @param $argument
+     * @return $this
      */
     public function setArgument($argument)
     {
@@ -100,6 +101,7 @@ class ArgumentVote
         }
         $this->argument = $argument;
         $argument->addVote($this);
+        return $this;
     }
 
     /**
@@ -111,12 +113,16 @@ class ArgumentVote
     }
 
     /**
-     * @param mixed $Voter
+     * @param $Voter
+     * @return $this
      */
     public function setVoter($Voter)
     {
         $this->Voter = $Voter;
+        return $this;
     }
+
+    // *************************** Lifecycle **********************************
 
     /**
      * @ORM\PreRemove

@@ -159,6 +159,16 @@ class Theme
     }
 
     /**
+     * Get title
+     *
+     * @return string
+     */
+    public function getTitle()
+    {
+        return $this->title;
+    }
+
+    /**
      * Set title
      *
      * @param string $title
@@ -172,13 +182,29 @@ class Theme
     }
 
     /**
-     * Get title
+     * @return mixed
+     */
+    public function getSlug()
+    {
+        return $this->slug;
+    }
+
+    /**
+     * @param mixed $slug
+     */
+    public function setSlug($slug)
+    {
+        $this->slug = $slug;
+    }
+
+    /**
+     * Get teaser
      *
      * @return string
      */
-    public function getTitle()
+    public function getTeaser()
     {
-        return $this->title;
+        return $this->teaser;
     }
 
     /**
@@ -195,19 +221,9 @@ class Theme
     }
 
     /**
-     * Get teaser
-     *
-     * @return string
-     */
-    public function getTeaser()
-    {
-        return $this->teaser;
-    }
-
-    /**
      * @return boolean
      */
-    public function isIsEnabled()
+    public function getIsEnabled()
     {
         return $this->isEnabled;
     }
@@ -269,46 +285,19 @@ class Theme
     }
 
     /**
-     * @param Consultation $Consultation
-     * @return Theme
-     */
-    public function addConsultation(Consultation $Consultation)
-    {
-        $this->Consultations->add($Consultation);
-
-        return $this;
-    }
-
-    /**
-     * @param Consultation $Consultation
-     */
-    public function removeConsultation(Consultation $Consultation)
-    {
-        $this->Consultations->removeElement($Consultation);
-    }
-
-    /**
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getConsultations()
-    {
-        return $this->Consultations;
-    }
-
-    /**
      * @return mixed
      */
-    public function getSlug()
+    public function getAuthor()
     {
-        return $this->slug;
+        return $this->Author;
     }
 
     /**
-     * @param mixed $slug
+     * @param mixed $Author
      */
-    public function setSlug($slug)
+    public function setAuthor($Author)
     {
-        $this->slug = $slug;
+        $this->Author = $Author;
     }
 
     /**
@@ -328,30 +317,41 @@ class Theme
     }
 
     /**
-     * @return mixed
+     * @return \Doctrine\Common\Collections\Collection
      */
-    public function getMedia()
+    public function getConsultations()
     {
-        return $this->Media;
+        return $this->Consultations;
     }
 
     /**
-     * @param mixed $media
+     * @param Capco\AppBundle\Entity\Consultation $Consultation
+     * @return Theme
      */
-    public function setMedia($media)
+    public function addConsultation(Consultation $Consultation)
     {
-        $this->Media = $media;
+        $this->Consultations->add($Consultation);
+        $Consultation->addTheme($this);
+        return $this;
     }
 
+    /**
+     * @param Consultation $Consultation
+     */
+    public function removeConsultation(Consultation $Consultation)
+    {
+        $this->Consultations->removeElement($Consultation);
+        $Consultation->removeTheme($this);
+    }
 
     /**
-     * Get isEnabled
+     * Get ideas
      *
-     * @return boolean
+     * @return \Doctrine\Common\Collections\Collection
      */
-    public function getIsEnabled()
+    public function getIdeas()
     {
-        return $this->isEnabled;
+        return $this->Ideas;
     }
 
     /**
@@ -379,14 +379,22 @@ class Theme
     }
 
     /**
-     * Get ideas
-     *
-     * @return \Doctrine\Common\Collections\Collection
+     * @return mixed
      */
-    public function getIdeas()
+    public function getMedia()
     {
-        return $this->Ideas;
+        return $this->Media;
     }
+
+    /**
+     * @param mixed $media
+     */
+    public function setMedia($media)
+    {
+        $this->Media = $media;
+    }
+
+    // ********************** custom methods ****************************
 
     public function getBodyExcerpt($nb = 100){
         $excerpt = substr($this->body, 0, $nb);
@@ -408,22 +416,6 @@ class Theme
     public function canDisplay()
     {
         return ($this->isEnabled);
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getAuthor()
-    {
-        return $this->Author;
-    }
-
-    /**
-     * @param mixed $Author
-     */
-    public function setAuthor($Author)
-    {
-        $this->Author = $Author;
     }
 
     public function countConsultations()
