@@ -14,7 +14,7 @@
                     </a>
                 {% endif %}
                 <div class="media-body">
-                    <p class="media--aligned  excerpt"><a href="{{ path('capco_user_profile_show_all', {'username': idea.Author}) }}">{{ idea.Author.username }}</a> dans <a href="{{ path('app_theme_show', {'slug': idea.Theme.slug}) }}">{{ idea.Theme.title }}</a> le {{ idea.createdAt | localizeddate('long', 'none') }} {% if idea.isTrashed %}<span class="label label-default">{{ 'idea.show.trashed.label'|trans({}, 'CapcoAppBundle') }}</span>{% endif %}</p>
+                    <p class="media--aligned  excerpt"><a href="{{ path('capco_user_profile_show_all', {'username': idea.Author}) }}">{{ idea.Author.username }}</a> {% if idea.theme.canDisplay %}dans <a href="{{ path('app_theme_show', {'slug': idea.Theme.slug}) }}">{{ idea.Theme.title }}</a>{% endif %} le {{ idea.createdAt | localizeddate('long', 'none') }} {% if idea.isTrashed %}<span class="label label-default">{{ 'idea.show.trashed.label'|trans({}, 'CapcoAppBundle') }}</span>{% endif %}</p>
                 </div>
             </div>
         </div>

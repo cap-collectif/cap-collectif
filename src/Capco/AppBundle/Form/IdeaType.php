@@ -6,6 +6,7 @@ use Capco\AppBundle\Entity\Theme;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Capco\AppBundle\Repository\ThemeRepository;
 
 class IdeaType extends AbstractType
 {
@@ -22,7 +23,12 @@ class IdeaType extends AbstractType
                     'class' => 'CapcoAppBundle:Theme',
                     'property' => 'title',
                     'multiple' => false,
-                    'expanded' => false
+                    'expanded' => false,
+                    'query_builder' => function(ThemeRepository $tr) {
+                        return $tr->createQueryBuilder('t')
+                            ->where('t.isEnabled = :enabled')
+                            ->setParameter('enabled', true);
+                    }
                 ))
             ->add('media', 'sonata_media_type', array(
                     'provider' => 'sonata.media.provider.image',

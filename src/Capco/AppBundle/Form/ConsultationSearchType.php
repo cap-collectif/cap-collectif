@@ -5,6 +5,7 @@ namespace Capco\AppBundle\Form;
 use Capco\AppBundle\Entity\Consultation;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Capco\AppBundle\Repository\ThemeRepository;
 
 
 class ConsultationSearchType extends AbstractType
@@ -32,6 +33,11 @@ class ConsultationSearchType extends AbstractType
                 'class' => 'CapcoAppBundle:Theme',
                 'property' => 'title',
                 'translation_domain' => 'CapcoAppBundle',
+                'query_builder' => function(ThemeRepository $tr) {
+                    return $tr->createQueryBuilder('t')
+                        ->where('t.isEnabled = :enabled')
+                        ->setParameter('enabled', true);
+                },
                 'empty_value' => 'idea.searchform.all_themes',
                 'attr' => array('onchange' => 'this.form.submit()')
             ))

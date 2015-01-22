@@ -19,7 +19,9 @@
         <p class="excerpt">Thème(s)</p>
         <p>
             {% for theme in consultation.Themes %}
-                <a href="{{ path('app_theme_show', {'slug': theme.slug}) }}">{{theme}}</a> {% if loop.last == false %} , {% endif %}
+                {% if theme.canDisplay %}
+                    <a href="{{ path('app_theme_show', {'slug': theme.slug}) }}">{{theme}}</a> {% if loop.last == false %} , {% endif %}
+                {% endif %}
             {% endfor %}
         </p>
         <p class="excerpt">Publication</p>

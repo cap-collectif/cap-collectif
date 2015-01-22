@@ -11,10 +11,12 @@
             <div class="figcaption">
                 <span class="excerpt  h5">
                     {% for theme in consultation.Themes %}
-                        <a class="excerpt" href="{{ path('app_theme_show', {'slug': theme.slug}) }}">
-                            {{ theme.title }}
-                        </a>
-                        {% if loop.last == false %}, {% endif %}
+                        {% if (theme.canDisplay) %}
+                            <a class="excerpt" href="{{ path('app_theme_show', {'slug': theme.slug}) }}">
+                                {{ theme.title }}
+                            </a>
+                            {% if loop.last == false %}, {% endif %}
+                    {% endif %}
                     {% endfor %}
                 </span>
                 <h4 class="h4"><a href="{{ path('app_consultation_show', {'slug': consultation.slug}) }}" title="">{{ consultation.title }}</a></h4>

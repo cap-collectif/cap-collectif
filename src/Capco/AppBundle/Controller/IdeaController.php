@@ -157,6 +157,120 @@ class IdeaController extends Controller
     }
 
     /**
+     * @Route("/ideas/{slug}/edit", name="app_idea_update")
+     * @Template()
+     * @param $request
+     * @param $idea
+     * @return array
+     */
+    public function updateAction(Idea $idea,  Request $request)
+    {
+        if (!$this->get('security.context')->isGranted('ROLE_USER')) {
+            throw new AccessDeniedException($this->get('translator')->trans('Access restricted to authenticated users'));
+        }
+
+        if (false == $idea->canContribute() ) {
+            throw new AccessDeniedException($this->get('translator')->trans('Forbidden'));
+        }
+
+        $userCurrent = $this->getUser()->getId();
+        $userPostIdea = $idea->getAuthor()->getId();
+
+        if ($userCurrent !== $userPostIdea) {
+            throw new AccessDeniedException($this->get('translator')->trans('You cannot edit this idea, as you are not its author'));
+        }
+
+        $form = $this->createForm(new IdeaUpdateType(), $idea);
+        if ($request->getMethod() == 'POST') {
+            $form->handleRequest($request);
+
+            if ($form->isValid()) {
+                $em = $this->getDoctrine()->getManager();
+                $idea->resetIdeaVotes();
+                $em->persist($idea);
+                $em->flush();
+
+                $this->get('session')->getFlashBag()->add('success', $this->get('translator')->trans('The idea has been edited'));
+
+                return $this->redirect($this->generateUrl('app_idea_show', array('slug' => $idea->getSlug())));
+            }
+        }
+
+        return array(
+            'form' => $form->createView(),
+            'idea' => $idea
+        );
+    }
+
+    /**
+     * @Route("/ideas/{page}", name="app_idea", requirements={"page" = "\d+"}, defaults={"page" = 1} )
+     * @Route("/ideas/filter/{theme}/{sort}/{page}", name="app_idea_search", requirements={"page" = "\d+"}, defaults={"page" = 1, "theme" = "all"} )
+     * @Route("/ideas/filter/{theme}/{sort}/{term}/{page}", name="app_idea_search_term", requirements={"page" = "\d+"}, defaults={"page" = 1, "theme" = "all"} )
+     * @Template()
+     * @param $page
+     * @param $request
+     * @param $theme
+     * @param $sort
+     * @param $term
+     * @return array
+     */
+    public function indexAction(Request $request, $page, $theme = null, $sort = null, $term = null)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $currentUrl = $this->generateUrl('app_idea');
+
+        $form = $this->createForm(new IdeaSearchType(), null, array(
+            'action' => $currentUrl,
+            'method' => 'POST'
+        ));
+
+        if ($request->getMethod() == 'POST') {
+            $form->handleRequest($request);
+
+            if ($form->isValid()) {
+                // redirect to the results page (avoids reload alerts)
+                $data = $form->getData();
+
+                return $this->redirect($this->generateUrl('app_idea_search_term', array(
+                    'theme' => $data['theme'] ? $data['theme']->getSlug() : Theme::FILTER_ALL,
+                    'sort' => $data['sort'],
+                    'term' => $data['term']
+                )));
+            }
+        } else {
+            $form->setData(array(
+                'theme' => $em->getRepository('CapcoAppBundle:Theme')->findOneBySlug($theme),
+                'sort' => $sort,
+                'term' => $term,
+            ));
+        }
+
+        $pagination = $this->get('capco.site_parameter.resolver')->getValue('ideas.pagination');
+        if (!is_numeric($pagination)){
+            $pagination = 0;
+        } else {
+            $pagination = (int)$pagination;
+        }
+
+        $ideas = $em->getRepository('CapcoAppBundle:Idea')->getSearchResults($pagination, $page, $theme, $sort, $term);
+        $trashedIdeasNb = $em->getRepository('CapcoAppBundle:Idea')->countTrashed();
+
+        //Avoid division by 0 in nbPage calculation
+        $nbPage = 1;
+        if($pagination != 0){
+            $nbPage = ceil(count($ideas) / $pagination);
+        }
+
+        return array(
+            'ideas' => $ideas,
+            'form' => $form->createView(),
+            'page' => $page,
+            'nbPage' => $nbPage,
+            'trashedIdeasNb' => $trashedIdeasNb,
+        );
+    }
+
+    /**
      * @Route("/ideas/{slug}", name="app_idea_show")
      * @Template()
      * @param Idea $idea
@@ -231,120 +345,6 @@ class IdeaController extends Controller
             'userReportingIdea' => $userReportingIdea,
             'userVoteCount' => $userVoteCount,
             'form' => $form->createView()
-        );
-    }
-
-    /**
-     * @Route("/ideas/{slug}/edit", name="app_idea_update")
-     * @Template()
-     * @param $request
-     * @param $idea
-     * @return array
-     */
-    public function updateAction(Idea $idea,  Request $request)
-    {
-        if (!$this->get('security.context')->isGranted('ROLE_USER')) {
-            throw new AccessDeniedException($this->get('translator')->trans('Access restricted to authenticated users'));
-        }
-
-        if (false == $idea->canContribute() ) {
-            throw new AccessDeniedException($this->get('translator')->trans('Forbidden'));
-        }
-
-        $userCurrent = $this->getUser()->getId();
-        $userPostIdea = $idea->getAuthor()->getId();
-
-        if ($userCurrent !== $userPostIdea) {
-            throw new AccessDeniedException($this->get('translator')->trans('You cannot edit this idea, as you are not its author'));
-        }
-
-        $form = $this->createForm(new IdeaUpdateType(), $idea);
-        if ($request->getMethod() == 'POST') {
-            $form->handleRequest($request);
-
-            if ($form->isValid()) {
-                $em = $this->getDoctrine()->getManager();
-                $idea->resetIdeaVotes();
-                $em->persist($idea);
-                $em->flush();
-
-                $this->get('session')->getFlashBag()->add('success', $this->get('translator')->trans('The idea has been edited'));
-
-                return $this->redirect($this->generateUrl('app_idea_show', array('slug' => $idea->getSlug())));
-            }
-        }
-
-        return array(
-            'form' => $form->createView(),
-            'idea' => $idea
-        );
-    }
-
-    /**
-     * @Route("/ideas/{page}", name="app_idea", requirements={"page" = "\d+"}, defaults={"page" = 1} )
-     * @Route("/ideas/{theme}/{sort}/{page}", name="app_idea_search", requirements={"page" = "\d+"}, defaults={"page" = 1, "theme" = "all"} )
-     * @Route("/ideas/{theme}/{sort}/{term}/{page}", name="app_idea_search_term", requirements={"page" = "\d+"}, defaults={"page" = 1, "theme" = "all"} )
-     * @Template()
-     * @param $page
-     * @param $request
-     * @param $theme
-     * @param $sort
-     * @param $term
-     * @return array
-     */
-    public function indexAction(Request $request, $page, $theme = null, $sort = null, $term = null)
-    {
-        $em = $this->getDoctrine()->getManager();
-        $currentUrl = $this->generateUrl('app_idea');
-
-        $form = $this->createForm(new IdeaSearchType(), null, array(
-            'action' => $currentUrl,
-            'method' => 'POST'
-        ));
-
-        if ($request->getMethod() == 'POST') {
-            $form->handleRequest($request);
-
-            if ($form->isValid()) {
-                // redirect to the results page (avoids reload alerts)
-                $data = $form->getData();
-
-                return $this->redirect($this->generateUrl('app_idea_search_term', array(
-                    'theme' => $data['theme'] ? $data['theme']->getSlug() : Theme::FILTER_ALL,
-                    'sort' => $data['sort'],
-                    'term' => $data['term']
-                )));
-            }
-        } else {
-            $form->setData(array(
-                'theme' => $em->getRepository('CapcoAppBundle:Theme')->findOneBySlug($theme),
-                'sort' => $sort,
-                'term' => $term,
-            ));
-        }
-
-        $pagination = $this->get('capco.site_parameter.resolver')->getValue('ideas.pagination');
-        if (!is_numeric($pagination)){
-            $pagination = 0;
-        } else {
-            $pagination = (int)$pagination;
-        }
-
-        $ideas = $em->getRepository('CapcoAppBundle:Idea')->getSearchResults($pagination, $page, $theme, $sort, $term);
-        $trashedIdeasNb = $em->getRepository('CapcoAppBundle:Idea')->countTrashed();
-
-        //Avoid division by 0 in nbPage calculation
-        $nbPage = 1;
-        if($pagination != 0){
-            $nbPage = ceil(count($ideas) / $pagination);
-        }
-
-        return array(
-            'ideas' => $ideas,
-            'form' => $form->createView(),
-            'page' => $page,
-            'nbPage' => $nbPage,
-            'trashedIdeasNb' => $trashedIdeasNb,
         );
     }
 }

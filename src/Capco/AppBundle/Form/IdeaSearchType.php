@@ -6,6 +6,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 
 use Capco\AppBundle\Entity\Idea;
+use Capco\AppBundle\Repository\ThemeRepository;
 
 class IdeaSearchType extends AbstractType
 {
@@ -32,6 +33,11 @@ class IdeaSearchType extends AbstractType
                 'class' => 'CapcoAppBundle:Theme',
                 'property' => 'title',
                 'translation_domain' => 'CapcoAppBundle',
+                'query_builder' => function(ThemeRepository $tr) {
+                    return $tr->createQueryBuilder('t')
+                        ->where('t.isEnabled = :enabled')
+                        ->setParameter('enabled', true);
+                },
                 'empty_value' => 'idea.searchform.all_themes',
                 'attr' => array('onchange' => 'this.form.submit()')
             ))

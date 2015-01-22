@@ -19,6 +19,7 @@ class ThemeRepository extends EntityRepository
     public function getLast($limit = 1, $offset = 0)
     {
         $qb = $this->createQueryBuilder('t');
+        $qb = $this->whereIsEnabled($qb);
         $qb->addOrderBy('t.createdAt', 'DESC');
 
         if ($limit) {
@@ -98,7 +99,7 @@ class ThemeRepository extends EntityRepository
 
     private function whereIsEnabled(QueryBuilder $qb, $entity = 't')
     {
-        $qb->andWhere($entity.'.isEnabled IS NULL OR '.$entity.'.isEnabled = :isEnabled')
+        $qb->andWhere($entity.'.isEnabled = :isEnabled')
             ->setParameter('isEnabled', true);
         return $qb;
     }
