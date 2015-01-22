@@ -3,7 +3,7 @@ Capco\AppBundle\Entity\Source:
         title: <text(20)>
         body: <text(1000)>
         Author: @user1
-        Opinion: @opinion1
+        Opinion: @opinion<numberBetween(1,75)>
         Category: @Category1
         link: <url()>
         voteCountSource: <numberBetween(0, 50)>
@@ -11,7 +11,7 @@ Capco\AppBundle\Entity\Source:
         title: <text(20)>
         body: <text(1000)>
         Author: @user1
-        Opinion: @opinion2
+        Opinion: @opinion<numberBetween(1,75)>
         Category: @Category2
         link: <url()>
         voteCountSource: <numberBetween(0, 50)>
@@ -19,7 +19,7 @@ Capco\AppBundle\Entity\Source:
         title: <text(20)>
         body: <text(1000)>
         Author: @user1
-        Opinion: @opinion3
+        Opinion: @opinion<numberBetween(1,75)>
         Category: @Category3
         link: <url()>
         voteCountSource: <numberBetween(0, 50)>
@@ -27,7 +27,7 @@ Capco\AppBundle\Entity\Source:
         title: <text(20)>
         body: <text(1000)>
         Author: @user3
-        Opinion: @opinion1
+        Opinion: @opinion<numberBetween(1,75)>
         Category: @Category4
         link: <url()>
         voteCountSource: <numberBetween(0, 50)>
@@ -35,7 +35,7 @@ Capco\AppBundle\Entity\Source:
         title: <text(20)>
         body: <text(1000)>
         Author: @user2
-        Opinion: @opinion2
+        Opinion: @opinion<numberBetween(1,75)>
         Category: @Category5
         link: <url()>
         voteCountSource: <numberBetween(0, 50)>
@@ -43,7 +43,7 @@ Capco\AppBundle\Entity\Source:
         title: <text(20)>
         body: <text(1000)>
         Author: @user1
-        Opinion: @opinion3
+        Opinion: @opinion<numberBetween(1,75)>
         Category: @Category*
         link: <url()>
         voteCountSource: <numberBetween(0, 50)>
@@ -51,7 +51,7 @@ Capco\AppBundle\Entity\Source:
         title: <text(20)>
         body: <text(1000)>
         Author: @user1
-        Opinion: @opinion1
+        Opinion: @opinion<numberBetween(1,75)>
         Category: @Category*
         link: <url()>
         voteCountSource: <numberBetween(0, 50)>
@@ -59,7 +59,7 @@ Capco\AppBundle\Entity\Source:
         title: <text(20)>
         body: <text(1000)>
         Author: @user3
-        Opinion: @opinion1
+        Opinion: @opinion<numberBetween(1,75)>
         Category: @Category*
         link: <url()>
         voteCountSource: <numberBetween(0, 50)>
@@ -67,7 +67,7 @@ Capco\AppBundle\Entity\Source:
         title: <text(20)>
         body: <text(1000)>
         Author: @user2
-        Opinion: @opinion2
+        Opinion: @opinion<numberBetween(1,75)>
         Category: @Category*
         link: <url()>
         voteCountSource: <numberBetween(0, 50)>
@@ -75,7 +75,7 @@ Capco\AppBundle\Entity\Source:
         title: <text(20)>
         body: <text(1000)>
         Author: @user3
-        Opinion: @opinion2
+        Opinion: @opinion<numberBetween(1,75)>
         Category: @Category*
         link: <url()>
         voteCountSource: <numberBetween(0, 50)>
@@ -84,7 +84,7 @@ Capco\AppBundle\Entity\Source:
         body: <text(1000)>
         Author: @user*
         Category: @Category*
-        Opinion: @opinion<numberBetween(1, 30)>
+        Opinion: @opinion<numberBetween(1,75)>
         link: <url()>
         voteCountSource: <numberBetween(0, 50)>
         isTrashed: <boolean()>
