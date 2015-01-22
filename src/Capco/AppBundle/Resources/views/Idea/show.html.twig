@@ -50,7 +50,7 @@
             <div class="pull-right no-float-mobile">
 
                 {% if(userReportingIdea == false) %}
-                    <a href="{{ path('app_report_idea' ,{'ideaSlug': idea.slug } ) }}" class="btn btn-dark-gray  btn--outline"><i class="cap cap-flag-1"></i> {{ 'idea.show.report'|trans({}, 'CapcoAppBundle') }}</a>
+                    <a href="{{ path('app_report_idea' ,{'idea_id': idea.id } ) }}" class="btn btn-dark-gray  btn--outline"><i class="cap cap-flag-1"></i> {{ 'idea.show.report'|trans({}, 'CapcoAppBundle') }}</a>
                 {% else %}
                     <button disabled="disabled" class="btn btn-dark-gray"><i class="cap cap-flag-1"></i> source signalé</button>
                 {% endif %}

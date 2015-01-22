@@ -176,6 +176,7 @@
   // Special case : argument
   &.opinion--argument {
     background-color: $light-gray;
+    position: relative;
     .opinion__text {
       padding-top: 10px;
       margin-bottom: 0;

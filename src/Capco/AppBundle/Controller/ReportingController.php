@@ -220,8 +220,8 @@ class ReportingController extends Controller
     }
 
     /**
-     * @Route("/ideas/{ideaSlug}/report", name="app_report_idea")
-     * @ParamConverter("idea", class="CapcoAppBundle:Idea", options={"mapping": {"ideaSlug": "slug"}})
+     * @Route("/ideas/{idea_id}/report/", name="app_report_idea")
+     * @ParamConverter("idea", class="CapcoAppBundle:Idea", options={"mapping": {"idea_id": "id"}})
      * @Template("CapcoAppBundle:Reporting:create.html.twig")
      * @param $request
      * @param $idea
