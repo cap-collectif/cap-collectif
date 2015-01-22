@@ -71,9 +71,6 @@ class SiteImageAdmin extends Admin
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
-            ->add('title', null, array(
-                'label' => 'admin.fields.site_image.title',
-            ))
             ->add('isEnabled', null, array(
                 'label' => 'admin.fields.site_image.is_enabled',
                 'required' => false,

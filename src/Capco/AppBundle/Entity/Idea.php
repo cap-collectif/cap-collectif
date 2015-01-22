@@ -372,6 +372,10 @@ class Idea
      */
     public function setIsTrashed($isTrashed)
     {
+        if (false == $this->isTrashed) {
+            $this->trashedReason = null;
+            $this->trashedAt = null;
+        }
         $this->isTrashed = $isTrashed;
 
         return $this;

@@ -182,27 +182,30 @@ class OpinionAdmin extends Admin
             ->add('isEnabled', null, array(
                 'label' => 'admin.fields.opinion.is_enabled',
             ))
-            ->add('isTrashed', null, array(
-                'label' => 'admin.fields.opinion.is_trashed',
-            ))
-            ->add('trashedReason', null, array(
-                'label' => 'admin.fields.opinion.trashed_reason',
-            ))
-            ->add('trashedAt', null, array(
-                'label' => 'admin.fields.opinion.trashed_at',
-            ))
             ->add('createdAt', null, array(
                 'label' => 'admin.fields.opinion.created_at',
             ))
             ->add('updatedAt', null, array(
                 'label' => 'admin.fields.opinion.updated_at',
             ))
+            ->add('isTrashed', null, array(
+                'label' => 'admin.fields.opinion.is_trashed',
+            ))
         ;
+
+        if ($subject->getIsTrashed()) {
+            $showMapper
+                ->add('trashedAt', null, array(
+                    'label' => 'admin.fields.opinion.trashed_at',
+                ))
+                ->add('trashedReason', null, array(
+                    'label' => 'admin.fields.opinion.trashed_reason',
+                ))
+            ;
+        }
     }
 
     protected function configureRoutes(RouteCollection $collection)
     {
-        $collection->remove('delete');
-        $collection->remove('edit');
     }
 }

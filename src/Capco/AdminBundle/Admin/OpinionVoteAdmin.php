@@ -67,6 +67,8 @@ class OpinionVoteAdmin extends Admin
             ->add('_action', 'actions', array(
                 'actions' => array(
                     'show' => array(),
+                    'edit' => array(),
+                    'delete' => array(),
                 )
             ))
         ;
@@ -99,10 +101,28 @@ class OpinionVoteAdmin extends Admin
         ;
     }
 
+    /**
+     * @param FormMapper $formMapper
+     */
+    protected function configureFormFields(FormMapper $formMapper)
+    {
+        $formMapper
+            ->add('opinion', 'sonata_type_model', array(
+                'label' => 'admin.fields.opinion_vote.opinion',
+            ))
+            ->add('Voter', 'sonata_type_model', array(
+                'label' => 'admin.fields.opinion_vote.voter',
+            ))
+            ->add('value', 'choice', array(
+                'label' => 'admin.fields.opinion_vote.value',
+                'choices' => OpinionVote::$voteTypesLabels,
+                'translation_domain' => 'CapcoAppBundle',
+            ))
+        ;
+    }
+
     protected function configureRoutes(RouteCollection $collection)
     {
-        $collection->remove('delete');
         $collection->remove('create');
-        $collection->remove('edit');
     }
 }

@@ -89,7 +89,8 @@ class ReportingAdmin extends Admin
                     ),
                     'trash' => array(
                         'template' => 'CapcoAdminBundle:CRUD:list__action_trash.html.twig'
-                    )
+                    ),
+                    'delete' => array(),
                 )
             ))
         ;
@@ -133,7 +134,6 @@ class ReportingAdmin extends Admin
     protected function configureRoutes(RouteCollection $collection)
     {
         $collection->remove('create');
-        $collection->remove('delete');
         $collection->remove('edit');
         $collection->add('disable', $this->getRouterIdParameter().'/disable');
         $collection->add('trash', $this->getRouterIdParameter().'/trash');

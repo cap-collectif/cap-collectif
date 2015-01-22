@@ -56,6 +56,8 @@ admin:
       vote_count: Nombre de votes
       is_enabled: Publié
       is_trashed: Dans la corbeille
+      trashed_reason: Raison de la mise en corbeille
+      trashed_at: Mise à la corbeille
     argument_vote:
       argument: Argument
       voter: Auteur
@@ -104,6 +106,8 @@ admin:
       is_trashed: Dans la corbeille
       updated_at: Mise à jour
       created_at: Création
+      trashed_reason: Raison de la mise en corbeille
+      trashed_at: Mise à la corbeille
       media: Image
     idea_vote:
       idea: Idée
@@ -209,6 +213,8 @@ admin:
       category: Type
       is_enabled: Publié
       is_trashed: Dans la corbeille
+      trashed_at: Mise à la corbeille
+      trashed_reason: Raison de la mise à la corbeille
     step:
       title: Titre
       start_at: Commence

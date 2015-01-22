@@ -329,6 +329,10 @@ class Opinion
      */
     public function setIsTrashed($isTrashed)
     {
+        if (false == $isTrashed) {
+            $this->trashedReason = null;
+            $this->trashedAt = null;
+        }
         $this->isTrashed = $isTrashed;
         return $this;
     }

@@ -519,6 +519,10 @@ class Source
     public function setIsTrashed($isTrashed)
     {
         if ($isTrashed != $this->isTrashed) {
+            if (false == $this->isTrashed) {
+                $this->trashedReason = null;
+                $this->trashedAt = null;
+            }
             if($this->isEnabled) {
                 if ($isTrashed) {
                     $this->Opinion->decreaseSourcesCount(1);

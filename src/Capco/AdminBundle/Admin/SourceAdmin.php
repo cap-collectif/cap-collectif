@@ -107,9 +107,6 @@ class SourceAdmin extends Admin
             ->add('isEnabled', null, array(
                 'label' => 'admin.fields.source.is_enabled',
             ))
-            ->add('isTrashed', null, array(
-                'label' => 'admin.fields.source.is_trashed',
-            ))
             ->add('body', null, array(
                 'label' => 'admin.fields.source.body',
                 'attr' => array('class' => 'ckeditor'),
@@ -126,6 +123,12 @@ class SourceAdmin extends Admin
             ->add('link', null, array(
                 'label' => 'admin.fields.source.link',
             ))
+            ->add('isTrashed', null, array(
+                'label' => 'admin.fields.source.is_trashed',
+            ))
+            ->add('trashedReason', null, array(
+                'label' => 'admin.fields.source.trashed_reason',
+            ))
         ;
     }
 
@@ -134,6 +137,7 @@ class SourceAdmin extends Admin
      */
     protected function configureShowFields(ShowMapper $showMapper)
     {
+        $subject = $this->getSubject();
         $showMapper
             ->add('title', null, array(
                 'label' => 'admin.fields.source.title',
@@ -159,20 +163,29 @@ class SourceAdmin extends Admin
             ->add('isEnabled', null, array(
                 'label' => 'admin.fields.source.is_enabled',
             ))
-            ->add('isTrashed', null, array(
-                'label' => 'admin.fields.source.is_trashed',
-            ))
             ->add('createdAt', null, array(
                 'label' => 'admin.fields.source.created_at',
             ))
             ->add('updatedAt', null, array(
                 'label' => 'admin.fields.source.updated_at',
             ))
+            ->add('isTrashed', null, array(
+                'label' => 'admin.fields.source.is_trashed',
+            ))
         ;
+        if ($subject->getIsTrashed()) {
+            $showMapper
+                ->add('trashedAt', null, array(
+                    'label' => 'admin.fields.source.trashed_at',
+                ))
+                ->add('trashedReason', null, array(
+                    'label' => 'admin.fields.source.trashed_reason',
+                ))
+            ;
+        }
     }
 
     protected function configureRoutes(RouteCollection $collection)
     {
-        $collection->remove('delete');
     }
 }

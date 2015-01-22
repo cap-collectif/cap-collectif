@@ -98,9 +98,6 @@ class IdeaAdmin extends Admin
                 'label' => 'admin.fields.idea.is_enabled',
                 'required' => false,
             ))
-            ->add('isTrashed', null, array(
-                'label' => 'admin.fields.idea.is_trashed',
-            ))
             ->add('Author', 'sonata_type_model', array(
                 'label' => 'admin.fields.idea.author',
             ))
@@ -116,6 +113,13 @@ class IdeaAdmin extends Admin
                 'provider' => 'sonata.media.provider.image',
                 'context' => 'default',
                 'label' => 'admin.fields.idea.media',
+                'required' => false,
+            ))
+            ->add('isTrashed', null, array(
+                'label' => 'admin.fields.idea.is_trashed',
+            ))
+            ->add('trashedReason', null, array(
+                'label' => 'admin.fields.idea.trashed_reason',
             ))
         ;
     }
@@ -125,6 +129,8 @@ class IdeaAdmin extends Admin
      */
     protected function configureShowFields(ShowMapper $showMapper)
     {
+        $subject = $this->getSubject();
+
         $showMapper
             ->add('title', null, array(
                 'label' => 'admin.fields.idea.title',
@@ -150,16 +156,26 @@ class IdeaAdmin extends Admin
                 'label' => 'admin.fields.idea.is_enabled',
                 'editable' => true,
             ))
-            ->add('isTrashed', null, array(
-                'label' => 'admin.fields.idea.is_trashed',
-            ))
             ->add('updatedAt', null, array(
                 'label' => 'admin.fields.idea.updated_at',
             ))
             ->add('createdAt', null, array(
                 'label' => 'admin.fields.idea.created_at',
             ))
-
+            ->add('isTrashed', null, array(
+                'label' => 'admin.fields.idea.is_trashed',
+            ))
         ;
+
+        if ($subject->getIsTrashed()) {
+            $showMapper
+                ->add('trashedAt', null, array(
+                    'label' => 'admin.fields.idea.trashed_at',
+                ))
+                ->add('trashedReason', null, array(
+                    'label' => 'admin.fields.idea.trashed_reason',
+                ))
+            ;
+        }
     }
 }

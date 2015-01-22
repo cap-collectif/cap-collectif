@@ -87,6 +87,7 @@ class ArgumentAdmin extends Admin
                 'actions' => array(
                     'show' => array(),
                     'edit' => array(),
+                    'delete' => array(),
                 )
             ))
         ;
@@ -106,9 +107,6 @@ class ArgumentAdmin extends Admin
             ->add('isEnabled', null, array(
                 'label' => 'admin.fields.argument.is_enabled',
             ))
-            ->add('isTrashed', null, array(
-                'label' => 'admin.fields.argument.is_trashed',
-            ))
             ->add('opinion', 'sonata_type_model', array(
                 'label' => 'admin.fields.argument.opinion',
             ))
@@ -119,6 +117,12 @@ class ArgumentAdmin extends Admin
                 'attr' => array('class' => 'ckeditor'),
                 'label' => 'admin.fields.argument.body',
             ))
+            ->add('isTrashed', null, array(
+                'label' => 'admin.fields.argument.is_trashed',
+            ))
+            ->add('trashedReason', null, array(
+                'label' => 'admin.fields.argument.trashed_reason',
+            ))
         ;
     }
 
@@ -127,6 +131,8 @@ class ArgumentAdmin extends Admin
      */
     protected function configureShowFields(ShowMapper $showMapper)
     {
+        $subject = $this->getSubject();
+
         $showMapper
             ->add('body', null, array(
                 'label' => 'admin.fields.argument.body',
@@ -158,10 +164,21 @@ class ArgumentAdmin extends Admin
                 'label' => 'admin.fields.argument.is_trashed',
             ))
         ;
+
+        if ($subject->getIsTrashed()) {
+            $showMapper
+                ->add('trashedAt', null, array(
+                    'label' => 'admin.fields.argument.trashed_at',
+                ))
+                ->add('trashedReason', null, array(
+                    'label' => 'admin.fields.argument.trashed_reason',
+                ))
+            ;
+        }
+
     }
 
     protected function configureRoutes(RouteCollection $collection)
     {
-        $collection->remove('delete');
     }
 }
