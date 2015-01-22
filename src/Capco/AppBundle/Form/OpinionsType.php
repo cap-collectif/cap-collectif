@@ -17,9 +17,7 @@ class OpinionsType extends AbstractType
     {
         $builder
             ->add('title', 'text')
-            ->add('body', 'textarea', array(
-                    'attr' => array('class' => 'ckeditor')
-                ))
+            ->add('body', 'textarea')
         ;
     }
     

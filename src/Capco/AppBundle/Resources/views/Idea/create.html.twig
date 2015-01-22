@@ -45,7 +45,13 @@
     <script src="{{ asset('js/ckeditor/ckeditor.js') }}"></script>
     <script type="text/javascript">
         $(window).on('load', function() {
-            App.module.ckEditor('ckeditor');
+            CKEDITOR.replace('capco_appbundle_idea_body', {
+                toolbarGroups : [
+                    { name: 'basicstyles', groups: [ 'basicstyles', 'cleanup' ] },
+                    { name: 'paragraph',   groups: [ 'list', 'indent', 'blocks', 'align', 'bidi' ] },
+                    { name: 'styles' }
+                ]
+            });
         });
     </script>
 {% endblock %}

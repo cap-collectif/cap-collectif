@@ -54,9 +54,9 @@
 
 {% block javascripts %}
     {{ parent() }}
-    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
-    <script src="{{ asset('js/readmore/readmore.min.js') }}"></script>
     <script type="text/javascript">
-        App.module.checkButton('.typeBtn');
+        $(window).on('load', function() {
+            App.module.checkButton('.typeBtn');
+        });
     </script>
 {% endblock %}
