@@ -17,10 +17,8 @@ class Resolver
         $this->logger = $logger;
     }
 
-    public function getValue($key)
+    public function getValue($key, $value = null)
     {
-        $value = null;
-
         try {
             $value = $this->repository->getValueByKeyIfEnabled($key);
         } catch (NoResultException $e) {
