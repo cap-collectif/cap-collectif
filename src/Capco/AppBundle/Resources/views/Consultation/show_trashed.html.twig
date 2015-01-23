@@ -60,11 +60,11 @@
                             <div class="opinion__body  box">
                                 {% if argument.Author.Media %}
                                     <a class="pull-left" href="#">
-                                        {% thumbnail argument.Author.Media, 'avatar' with {'title': argument.Author.fullname, 'alt': argument.Author.fullname, 'class': 'img-circle  pull-left'} %}
+                                        {% thumbnail argument.Author.Media, 'avatar' with {'title': argument.Author.username, 'alt': argument.Author.username, 'class': 'img-circle  pull-left'} %}
                                     </a>
                                 {% endif %}
                                 <div class="opinion__data">
-                                    <p class="h5  opinion__user"><a href="#">{{ argument.Author.getFullname }}</a> <span class="label {% if argument.type == 0 %}label-danger{% elseif argument.type == 1 %}label-success{% endif %}">{{ argumentsLabels[argument.type] | trans({}, 'CapcoAppBundle') | capitalize }}</span></p>
+                                    <p class="h5  opinion__user"><a href="#">{{ argument.Author.username }}</a> <span class="label {% if argument.type == 0 %}label-danger{% elseif argument.type == 1 %}label-success{% endif %}">{{ argumentsLabels[argument.type] | trans({}, 'CapcoAppBundle') | capitalize }}</span></p>
                                     <p class="excerpt  opinion__date"><a class="excerpt" href="#">{{ argument.createdAt | localizeddate('long', 'short', app.request.locale) }}</a></p>
                                     <p>{{ 'argument.trashed.linked_proposition' | trans({}, 'CapcoAppBundle') }} <a href="{{ path('app_consultation_show_opinion', {'consultationSlug': consultation.slug, 'opinionTypeSlug': argument.Opinion.OpinionType.slug, 'opinionSlug': argument.Opinion.slug}) }}">{{ argument.Opinion.title }}</a></p>
                                 </div>
@@ -84,7 +84,7 @@
                         <li class="opinion  media  box" id="source{{ source.id }}">
                             {% if source.Author.Media %}
                                 <a class="pull-left media-middle" href="#">
-                                    {% thumbnail source.Author.Media, 'avatar_source' with {'title': source.Author.fullname, 'alt': source.Author.fullname, 'class': 'img-circle  pull-left'} %}
+                                    {% thumbnail source.Author.Media, 'avatar_source' with {'title': source.Author.username, 'alt': source.Author.username, 'class': 'img-circle  pull-left'} %}
                                 </a>
                             {% endif %}
                             <div class="media-body">
