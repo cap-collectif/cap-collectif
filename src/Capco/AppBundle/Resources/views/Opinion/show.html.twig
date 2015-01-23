@@ -10,6 +10,18 @@
 
         <div class="row">
 
+            {% if consultation.getClose %}
+                <div class="alert alert-info alert-dismissible  block" role="alert">
+                    <p><strong>Statut "Terminée" :</strong> La période de participation est maintenant terminée. Merci à tous d'avoir contribué.</p>
+                </div>
+            {% endif %}
+
+            {% if consultation.getFurure %}
+                <div class="alert alert-info alert-dismissible  block" role="alert">
+                    <p><strong>Statut "À venir" :</strong> La période de participation débutera le <strong>{{ consultation.getOpenedAt| localizeddate('long', 'none', app.request.locale) }}</strong>.</p>
+                </div>
+            {% endif %}
+
             <div class="col-xs-12  col-sm-4  col-md-3">
                 {% include '@CapcoApp/Consultation/show_meta.html.twig' %}
             </div>

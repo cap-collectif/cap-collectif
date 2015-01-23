@@ -1,30 +1,30 @@
 Capco\AppBundle\Entity\Consultation:
     cs1:
-        title: <sentence(3)>
+        title: Justice et numérique
         teaser: <text(35)>
         body: <text(1000)>
         Author: @user*
         Cover: @MediaConsultation1
     cs2:
-        title: <sentence(3)>
+        title: Stratégie technologique de l'Etat et services publics
         teaser: <text(35)>
         body: <text(1000)>
         Author: @user*
         Cover: @MediaConsultation2
     cs3:
-        title: <sentence(3)>
+        title: Transformation numérique des relations entre administrations et usagers des services publics
         teaser: <text(35)>
         body: <text(1000)>
         Author: @user*
         Cover: @MediaConsultation1
     cs4:
-        title: <sentence(3)>
+        title: Souveraineté numérique
         teaser: <text(35)>
         body: <text(1000)>
         Author: @user*
         Cover: @MediaConsultation2
     cs5:
-        title: <sentence(3)>
+        title: Economie collaborative
         teaser: <text(35)>
         body: <text(1000)>
         Author: @user*

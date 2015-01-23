@@ -576,10 +576,51 @@ class Consultation
         $now = new \DateTime();
         if(null != $closedAt && $closedAt > $now){
             return $closedAt->diff($now)->format('%a');
-        }
-        else {
+        } else {
             return null;
         }
+    }
+
+    /**
+     * Verify if a consultation is opened
+     * @return bool
+     */
+    public function getOpen()
+    {
+        $closedAt = $this->getClosedAt();
+        $openedAt = $this->getOpenedAt();
+        $now = new \DateTime();
+
+        return $openedAt < $now && $now < $closedAt;
+
+    }
+
+    /**
+     * Verify if a consultation is future
+     * @return bool
+     */
+    public function getFurure()
+    {
+        $closedAt = $this->getClosedAt();
+        $openedAt = $this->getOpenedAt();
+        $now = new \DateTime();
+
+        return $openedAt > $now && $now < $closedAt;
+
+    }
+
+    /**
+     * Verify if a consultation is closed
+     * @return bool
+     */
+    public function getClose()
+    {
+        $closedAt = $this->getClosedAt();
+        $openedAt = $this->getOpenedAt();
+        $now = new \DateTime();
+
+        return $openedAt < $now && $now > $closedAt;
+
     }
 
     /**

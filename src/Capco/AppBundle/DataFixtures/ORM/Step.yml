@@ -1,6 +1,6 @@
 Capco\AppBundle\Entity\Step:
     step1:
-        title: <sentence(3)>
+        title: <sentence(2)>
         isEnabled: true
         type: 1
         startAt: <dateTimeBetween('-1 years','now')>
@@ -9,7 +9,7 @@ Capco\AppBundle\Entity\Step:
         consultation: @cs1
         body: <text(1000)>
     step2:
-        title: <sentence(3)>
+        title: <sentence(2)>
         isEnabled: <boolean()>
         type: 0
         startAt: <dateTimeBetween('-1 years','now')>
@@ -18,8 +18,8 @@ Capco\AppBundle\Entity\Step:
         consultation: @cs1
         body: <text(1000)>
     step3:
-        title: <sentence(3)>
-        isEnabled: <boolean()>
+        title: <sentence(2)>
+        isEnabled: true
         type: 0
         startAt: <dateTimeBetween('-1 years','now')>
         endAt: <dateTimeBetween('-10 days','now')>
@@ -27,8 +27,8 @@ Capco\AppBundle\Entity\Step:
         consultation: @cs1
         body: <text(1000)>
     step4:
-        title: <sentence(3)>
-        isEnabled: <boolean()>
+        title: <sentence(2)>
+        isEnabled: true
         type: 1
         startAt: <dateTimeBetween('-1 years','now')>
         endAt: <dateTimeBetween('-10 days','now')>
@@ -36,7 +36,7 @@ Capco\AppBundle\Entity\Step:
         consultation: @cs2
         body: <text(1000)>
     step5:
-        title: <sentence(3)>
+        title: <sentence(2)>
         isEnabled: true
         type: 0
         startAt: <(new \DateTime('2014-01-01'))>
@@ -45,7 +45,7 @@ Capco\AppBundle\Entity\Step:
         consultation: @cs3
         body: <text(1000)>
     step6:
-        title: <sentence(3)>
+        title: <sentence(2)>
         isEnabled: true
         type: 1
         startAt: <(new \DateTime('2014-03-04'))>
