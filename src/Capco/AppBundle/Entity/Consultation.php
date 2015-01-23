@@ -585,7 +585,7 @@ class Consultation
      * Verify if a consultation is opened
      * @return bool
      */
-    public function getOpen()
+    public function isOpen()
     {
         $closedAt = $this->getClosedAt();
         $openedAt = $this->getOpenedAt();
@@ -599,7 +599,7 @@ class Consultation
      * Verify if a consultation is future
      * @return bool
      */
-    public function getFurure()
+    public function isFuture()
     {
         $closedAt = $this->getClosedAt();
         $openedAt = $this->getOpenedAt();
@@ -613,7 +613,7 @@ class Consultation
      * Verify if a consultation is closed
      * @return bool
      */
-    public function getClose()
+    public function isClose()
     {
         $closedAt = $this->getClosedAt();
         $openedAt = $this->getOpenedAt();
