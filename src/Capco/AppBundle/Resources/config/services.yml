@@ -10,7 +10,6 @@ parameters:
     capco.toggle.manager.class: Capco\AppBundle\Toggle\Manager
     capco.toggle.listener.request.class: Capco\AppBundle\Toggle\RequestListener
     capco.blog.post.repository.class: Capco\AppBundle\Repository\PostRepository
-
     capco.site_color.repository.class: Capco\AppBundle\Repository\SiteColorRepository
     capco.site_color.resolver.class: Capco\AppBundle\SiteColor\Resolver
     capco.twig_extension.site_color.class: Capco\AppBundle\Twig\SiteColorExtension

@@ -292,7 +292,6 @@ action_disable: Désactiver
 label_type_no: non
 label_type_yes: oui
 
-
 # posts
 post_is_public: publié
 post_is_not_public: non publié

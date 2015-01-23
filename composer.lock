@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "9103a77735ff937b92783635b404fbac",
+    "hash": "c32ecaffa6271f1590e2255ffb118222",
     "packages": [
         {
             "name": "behat/transliterator",
@@ -5502,8 +5502,12 @@
         "sonata-project/easy-extends-bundle": 20,
         "sonata-project/media-bundle": 20,
         "hwi/oauth-bundle": 20,
+<<<<<<< HEAD
         "predis/predis": 20,
         "jolicode/jolitypo-bundle": 20
+=======
+        "predis/predis": 20
+>>>>>>> implemented feature flags, in admin and frontend
     },
     "prefer-stable": false,
     "prefer-lowest": false,

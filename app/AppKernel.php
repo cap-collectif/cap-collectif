@@ -52,7 +52,6 @@ class AppKernel extends Kernel
 
             // feature activation / deactivation
             new Qandidate\Bundle\ToggleBundle\QandidateToggleBundle(),
-
             // typography concerns
             new Joli\TypoBundle\JoliTypoBundle(),
         );
