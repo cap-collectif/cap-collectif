@@ -26,7 +26,7 @@ class OpinionController extends Controller
 {
 
     /**
-     * @Route("/consultation/{consultationSlug}/opinions/{opinionTypeSlug}/add", name="app_consultation_new_opinion")
+     * @Route("/consultations/{consultationSlug}/opinions/{opinionTypeSlug}/add", name="app_consultation_new_opinion")
      * @ParamConverter("consultation", class="CapcoAppBundle:Consultation", options={"mapping": {"consultationSlug": "slug"}})
      * @ParamConverter("opinionType", class="CapcoAppBundle:OpinionType", options={"mapping": {"opinionTypeSlug": "slug"}})
      * @param $opinionType
@@ -73,7 +73,7 @@ class OpinionController extends Controller
     }
 
     /**
-     * @Route("/consultation/{consultationSlug}/opinions/{opinionTypeSlug}/{opinionSlug}/delete", name="app_consultation_delete_opinion")
+     * @Route("/consultations/{consultationSlug}/opinions/{opinionTypeSlug}/{opinionSlug}/delete", name="app_consultation_delete_opinion")
      * @param $consultationSlug
      * @param $opinionTypeSlug
      * @param $consultationSlug
@@ -133,7 +133,7 @@ class OpinionController extends Controller
     }
 
     /**
-     * @Route("/consultation/{consultationSlug}/opinions/{opinionTypeSlug}/{opinionSlug}/edit", name="app_consultation_edit_opinion")
+     * @Route("/consultations/{consultationSlug}/opinions/{opinionTypeSlug}/{opinionSlug}/edit", name="app_consultation_edit_opinion")
      * @Template("CapcoAppBundle:Opinion:update.html.twig")
      * @param $consultationSlug
      * @param $opinionTypeSlug
@@ -241,8 +241,8 @@ class OpinionController extends Controller
 
     /**
      * Page opinion
-     * @Route("/consultation/{consultationSlug}/opinions/{opinionTypeSlug}/{opinionSlug}", name="app_consultation_show_opinion")
-     * @Route("/consultation/{consultationSlug}/opinions/{opinionTypeSlug}/{opinionSlug}/sort_arguments/{argumentSort}", name="app_consultation_show_opinion_sortarguments", requirements={"argumentsSort" = "popularity|date"})
+     * @Route("/consultations/{consultationSlug}/opinions/{opinionTypeSlug}/{opinionSlug}", name="app_consultation_show_opinion")
+     * @Route("/consultations/{consultationSlug}/opinions/{opinionTypeSlug}/{opinionSlug}/sort_arguments/{argumentSort}", name="app_consultation_show_opinion_sortarguments", requirements={"argumentsSort" = "popularity|date"})
      * @param $consultationSlug
      * @param $opinionTypeSlug
      * @param $opinionSlug
