@@ -49,6 +49,9 @@ class AppKernel extends Kernel
             new Capco\UserBundle\CapcoUserBundle(),
             new Capco\MediaBundle\CapcoMediaBundle(),
             new Capco\ClassificationBundle\CapcoClassificationBundle(),
+
+            // feature activation / deactivation
+            new Qandidate\Bundle\ToggleBundle\QandidateToggleBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

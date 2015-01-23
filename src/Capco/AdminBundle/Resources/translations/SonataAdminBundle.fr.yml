@@ -14,6 +14,7 @@ admin.label.menu_item: Navigation
 admin.label.argument: Arguments
 admin.label.argument_vote: "Vote sur les arguments"
 admin.label.consultation: Consultations
+admin.label.feature: Fonctionnalités
 admin.label.footer_social_network: Réseaux sociaux (pied de page)
 admin.label.idea: Idées
 admin.label.idea_vote: "Votes sur les idées"
@@ -45,6 +46,12 @@ admin:
     menu_item:
       parent: Non applicable pour les éléments du menu de bas de page (footer).
       link: Si vous avez associé une page à l'élément de menu, le lien sera défini automatiquement.
+
+  features:
+    title:
+      enabled: 'Activé ?'
+      module: 'Module'
+      action: 'Action'
 
   fields:
     argument:
@@ -263,3 +270,14 @@ admin:
       trash:
         label: Mettre le contenu à la corbeille
         success: Le contenu a été placé dans la corbeille.
+
+capco:
+  module:
+    blog: Module de blog
+    calendar: Module de calendrier
+
+action_enable: Activer
+action_disable: Désactiver
+label_type_no: non
+label_type_yes: oui
+

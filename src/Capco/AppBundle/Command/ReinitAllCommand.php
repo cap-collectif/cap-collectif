@@ -36,6 +36,7 @@ class ReinitAllCommand extends ContainerAwareCommand
         $this->createDatabase($output);
         $this->createSchema($output);
         $this->loadFixtures($output);
+        $this->loadToggles($output);
 
         $output->writeln('Reinit completed');
     }
@@ -74,6 +75,17 @@ class ReinitAllCommand extends ContainerAwareCommand
     {
         $command = $this->getApplication()->find('doctrine:fixtures:load');
         $input = new ArrayInput(array(''));
+        $input->setInteractive(false);
+        $command->run($input, $output);
+    }
+
+    protected function loadToggles(OutputInterface $output)
+    {
+        $command = $this->getApplication()->find('capco:reinit-feature-flags');
+        $input = new ArrayInput(array(
+            '--force' => true,
+            ''
+        ));
         $input->setInteractive(false);
         $command->run($input, $output);
     }

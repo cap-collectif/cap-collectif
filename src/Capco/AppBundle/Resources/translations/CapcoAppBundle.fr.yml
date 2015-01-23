@@ -20,6 +20,7 @@ error:
   report: Reporter un problème
   contribute: Profiez-en pour contribuer à une consultation
   access_restricted: Accès interdit uax utilisateurs non identifiés.
+  feature_not_enabled: "Cette fonction n'est pas activée, veuillez l'activer dans l'espace d'administration !"
 
 # Homepage
 homepage:

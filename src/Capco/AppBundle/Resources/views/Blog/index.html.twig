@@ -1,0 +1,20 @@
+{% extends '@CapcoApp/base.html.twig' %}
+
+{% block jumbotron %}
+    <div class="jumbotron  jumbotron--custom  jumbotron--bg-1 text-center">
+        <div class="container">
+            <h1>{{ capco_site_parameter_value('blog.jumbotron.title')}}</h1>
+            {% set jumbotron_body = capco_site_parameter_value('blog.jumbotron.body') %}
+            {% if null != jumbotron_body %}
+                <p>{{ jumbotron_body }}</p>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}
+
+{% block body %}
+    <div class="container">
+        YO THIS IS DA BLOG
+    </div>
+{% endblock %}
+

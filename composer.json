@@ -36,7 +36,9 @@
         "sonata-project/media-bundle": "~2.4@dev",
 
         "hwi/oauth-bundle": "0.4.*@dev",
-        "liip/imagine-bundle": "~0.9"
+        "liip/imagine-bundle": "~0.9",
+        "qandidate/toggle-bundle": "~0.1",
+        "predis/predis": "~1.1@dev"
     },
     "require-dev": {
         "sensio/generator-bundle": "~2.3"

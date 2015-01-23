@@ -20,6 +20,9 @@ error:
   contribute: Profiez-en pour contribuer à une consultation
   access_restricted: Accès interdit uax utilisateurs non identifiés.
 
+error:
+  feature_not_enabled: "This feature is not enabled, please check it in the admin!"
+
 # Homepage
 homepage:
   newsletter:

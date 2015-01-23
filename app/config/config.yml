@@ -128,3 +128,9 @@ hwi_oauth:
                 approval_prompt: auto
                 display: page
                 login_hint: email address
+
+qandidate_toggle:
+    persistence: redis
+    context_factory: null
+    redis_namespace: feature_toggle # default, only required when persistence = redis
+    redis_client: capco.predis.client # only required when persistence = redis

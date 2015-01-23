@@ -18,3 +18,21 @@
 		});
 	</script>
 {% endblock %}
+
+
+{% block side_bar_after_nav %}
+    {% if app.security.token and is_granted('ROLE_SONATA_ADMIN') %}
+        <ul class="sidebar-menu">
+            <li class="treeview{% if 'admin_feature' == app.request.get('_route') %} active{% endif %}">
+                <a href="#">
+                    <i class="fa fa-folder"></i>
+                    <span>{{ 'Configuration'|trans() }}</span>
+                    <i class="fa pull-right fa-angle-left"></i>
+                </a>
+                <ul class="treeview-menu{% if 'admin_feature' == app.request.get('_route') %} active{% endif %}">
+                    <li><a href="{{ path('admin_feature')}}"><i class="fa fa-angle-double-right"></i> {{ 'Features'|trans() }}</a></li>
+                </ul>
+            </li>
+        </ul>
+    {% endif %}
+{% endblock %}
