@@ -79,6 +79,10 @@ class MenuItemAdmin extends Admin
             ->add('Page', 'sonata_type_admin', array(
                 'label' => 'admin.fields.menu_item.page',
             ))
+            ->add('link', null, array(
+                'label' => 'admin.fields.menu_item.link',
+                'template' => 'CapcoAdminBundle:MenuItem:link_list_field.html.twig',
+            ))
             ->add('updatedAt', null, array(
                 'label' => 'admin.fields.menu_item.updated_at',
             ))
@@ -130,6 +134,7 @@ class MenuItemAdmin extends Admin
                     'label' => 'admin.fields.menu_item.page',
                     'required' => false,
                     'btn_add' => 'add',
+                    'query' => $this->createPageQuery(),
 
                 ))
                 ->add('link', null, array(
@@ -146,6 +151,8 @@ class MenuItemAdmin extends Admin
      */
     protected function configureShowFields(ShowMapper $showMapper)
     {
+        $subject = $this->getSubject();
+
         $showMapper
             ->add('title', null, array(
                 'label' => 'admin.fields.menu_item.title',
@@ -167,9 +174,18 @@ class MenuItemAdmin extends Admin
             ->add('Page', 'sonata_type_admin', array(
                 'label' => 'admin.fields.menu_item.page',
             ))
-            ->add('link', null, array(
-                'label' => 'admin.fields.menu_item.link',
-            ))
+        ;
+
+        if (null == $subject->getPage()) {
+            $showMapper
+                ->add('link', null, array(
+                    'label' => 'admin.fields.menu_item.link',
+                    'template' => 'CapcoAdminBundle:MenuItem:link_show_field.html.twig',
+                ))
+            ;
+        }
+
+        $showMapper
             ->add('createdAt', null, array(
                 'label' => 'admin.fields.menu_item.created_at',
             ))
@@ -195,9 +211,6 @@ class MenuItemAdmin extends Admin
             $link = 'pages/'.$page->getSlug();
             $menuItem->setLink($link);
         }
-        else {
-            $menuItem->setLink(null);
-        }
     }
 
     private function createParentsItemQuery()
@@ -212,6 +225,14 @@ class MenuItemAdmin extends Admin
             ->setParameter('nullLink', null)
             ->setParameter('blankLink', '');
         return $query;
+    }
+
+    private function createPageQuery()
+    {
+        return $this->modelManager
+            ->createQuery('CapcoAppBundle:Page', 'p')
+            ->where('p.isEnabled = :enabled')
+            ->setParameter('enabled', true);
     }
 
     protected function configureRoutes(RouteCollection $collection)

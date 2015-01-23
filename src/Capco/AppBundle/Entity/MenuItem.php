@@ -370,7 +370,9 @@ class MenuItem
             $this->Page->removeMenuItem($this);
         }
         $this->Page = $page;
-        $page->addMenuItem($this);
+        if (null != $this->getPage()) {
+            $this->Page->addMenuItem($this);
+        }
     }
 
     /**
