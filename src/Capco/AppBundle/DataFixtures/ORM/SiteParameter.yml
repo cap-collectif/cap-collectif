@@ -168,3 +168,20 @@ Capco\AppBundle\Entity\SiteParameter:
         title: Nom complet du site
         value: Cap-Collectif
         position: 1
+
+    # blog
+    SiteParameterBlogPaginationSize:
+        keyname: blog.pagination.size
+        title: Nombre d'articles par page du blog
+        value: 10
+        position: 750
+    SiteParameterBlogJumbotronBody:
+        keyname: blog.jumbotron.body
+        title: Sous-titre de la section blog
+        value: Description de la page "Blog"
+        position: 760
+    SiteParameterBlogJumbotronTitle:
+        keyname: blog.jumbotron.title
+        title: Titre de la section blog
+        value: Blog
+        position: 770

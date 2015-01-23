@@ -22,4 +22,36 @@ class PostRepository extends EntityRepository
 
         return $qb->getQuery()->getResult();
     }
+
+    public function getPublishedBySlug($slug)
+    {
+        $qb = $this->getPublicQueryBuilder('p')
+            ->andWhere('p.slug = :slug')
+            ->leftJoin('p.Authors', 'a')
+            ->orderBy('p.publishedAt', 'DESC')
+            ->setParameter('slug', $slug)
+            ->setMaxResults(1);
+
+        return $qb->getQuery()->getSingleResult();
+    }
+
+    public function getPublishedPosts($page = 1, $pageSize)
+    {
+        $qb = $this->getPublicQueryBuilder('p')
+            ->leftJoin('p.Authors', 'a')
+            ->orderBy('p.publishedAt', 'DESC')
+            ->setMaxResults($pageSize)
+            ->setFirstResult(($page - 1) * $pageSize);
+
+        return $qb->getQuery()->getResult();
+    }
+
+    protected function getPublicQueryBuilder($alias = 'p')
+    {
+        return $this->createQueryBuilder($alias)
+            ->andWhere($alias.'.isPublished = :isPublished')
+            ->andWhere($alias.'.publishedAt <= :now')
+            ->setParameter('isPublished', true)
+            ->setParameter('now', new \DateTime());
+    }
 }

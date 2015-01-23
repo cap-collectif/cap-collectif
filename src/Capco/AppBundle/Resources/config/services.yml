@@ -9,6 +9,7 @@ parameters:
     capco.notify.manager.class: Capco\AppBundle\Manager\Notify
     capco.toggle.manager.class: Capco\AppBundle\Toggle\Manager
     capco.toggle.listener.request.class: Capco\AppBundle\Toggle\RequestListener
+    capco.blog.post.repository.class: Capco\AppBundle\Repository\PostRepository
 
     capco.site_color.repository.class: Capco\AppBundle\Repository\SiteColorRepository
     capco.site_color.resolver.class: Capco\AppBundle\SiteColor\Resolver
@@ -100,3 +101,9 @@ services:
         arguments: [@capco.toggle.manager, @translator]
         tags:
             - { name: kernel.event_listener, event: kernel.request, method: onKernelRequest }
+
+    capco.blog.post.repository:
+        class:           "%capco.blog.post.repository.class%"
+        factory_service: doctrine.orm.entity_manager
+        factory_method:  getRepository
+        arguments:       ['CapcoAppBundle:Post']

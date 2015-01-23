@@ -513,4 +513,8 @@ user:
           title: Sources
 
 #SonataUser errors
-"Bad credentials.": Nom d'utilisateur ou mot de passe incorrect
+"Bad credentials.": Username and/or password are invalid
+
+# blog module
+blog:
+  no_post: "No post published for the moment."

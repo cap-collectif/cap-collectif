@@ -492,3 +492,8 @@ user:
 
 #SonataUser errors
 "Bad credentials.": Nom d'utilisateur ou mot de passe incorrect
+
+# blog module
+blog:
+  no_post: "Aucun article n'a été publié"
+

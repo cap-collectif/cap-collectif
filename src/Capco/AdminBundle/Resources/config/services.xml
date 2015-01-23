@@ -7,7 +7,6 @@
     <parameters>
         <parameter key="capco.type_display_extension.class">Capco\AdminBundle\Twig\TypeDisplayExtension</parameter>
         <parameter key="capco_admin.blog.block.recent_post.class">Capco\AdminBundle\Block\RecentPostBlockService</parameter>
-        <parameter key="capco_admin.blog.post.repository.class">Capco\AppBundle\Repository\PostRepository</parameter>
     </parameters>
 
     <services>
@@ -16,17 +15,10 @@
             <tag name="twig.extension" />
         </service>
 
-        <service id="capco_admin.blog.post.repository"
-                 class="%capco_admin.blog.post.repository.class%"
-                 factory-service="doctrine.orm.entity_manager"
-                 factory-method="getRepository">
-                <argument>CapcoAppBundle:Post</argument>
-        </service>
-
         <service id="capco_admin.blog.block.recent_posts" class="%capco_admin.blog.block.recent_post.class%">
             <argument>capco_admin.blog.block.recent_posts</argument>
             <argument type="service" id="templating" />
-            <argument type="service" id="capco_admin.blog.post.repository" />
+            <argument type="service" id="capco.blog.post.repository" />
             <argument type="service" id="capco.toggle.manager" />
             <tag name="sonata.block" />
         </service>
