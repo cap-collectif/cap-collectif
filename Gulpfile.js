@@ -40,6 +40,9 @@ gulp.task('copy', function() {
 
     gulp.src(app + '/fonts/*.{ttf,woff,eof,svg,eot}')
         .pipe(gulp.dest('web/fonts/'));
+
+    gulp.src(app + '/img/*')
+        .pipe(gulp.dest('web/img/'));
 });
 
 gulp.task('concat', function() {

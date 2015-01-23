@@ -29,6 +29,9 @@
                     <li> <a href="{{ footerLink.link }}">{{ footerLink.title }}</a>{% if not loop.last %} |{% endif %}</li>
                 {% endfor %}
             </ul>
+            <div class="capco-powered">
+                <img src="/img/capcollectif.png"/> <span>{{ 'global.capco_powered' | trans({'%startlink%': '<a href="http://www.cap-collectif.com">', '%endlink%': '</a>' }, 'CapcoAppBundle') | raw}}</span>
+            </div>
         </div>
     </div>
 </footer>

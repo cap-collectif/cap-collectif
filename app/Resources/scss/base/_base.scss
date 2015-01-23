@@ -223,3 +223,19 @@ a.excerpt {
 .alert--no-radius {
   @include border-radius(0);
 }
+
+.capco-powered {
+  margin-bottom: 10px;
+  img {
+    height: 23px;
+    width: auto;
+    margin-right: 5px;
+  }
+  span {
+    font-size: 13px;
+  }
+  a {
+    color: inherit;
+    text-decoration: underline;
+  }
+}

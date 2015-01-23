@@ -2,6 +2,7 @@
 global:
   alert:
     close: Fermer
+  capco_powered: Propulsé par %startlink%Cap-Collectif%endlink%
 
 #Errors
 error:
