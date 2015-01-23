@@ -3,6 +3,7 @@ imports:
     - { resource: security.yml }
     - { resource: sonata.yml }
     - { resource: liip_imagine.yml }
+    - { resource: joli/jolitypo.yml }
 
 framework:
     secret: "%secret%"

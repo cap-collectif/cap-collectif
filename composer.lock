@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "c32ecaffa6271f1590e2255ffb118222",
+    "hash": "9103a77735ff937b92783635b404fbac",
     "packages": [
         {
             "name": "behat/transliterator",
@@ -2163,6 +2163,132 @@
             "time": "2014-09-25 09:44:03"
         },
         {
+            "name": "jolicode/jolitypo",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/jolicode/JoliTypo.git",
+                "reference": "f94e5bb52152222fa5f49982a55ed96ed0828c8f",
+                "mirrors": [
+                    {
+                        "url": "/%package%/%normalizedUrl%.%type%",
+                        "preferred": true
+                    }
+                ]
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/jolicode/JoliTypo/zipball/f94e5bb52152222fa5f49982a55ed96ed0828c8f",
+                "reference": "f94e5bb52152222fa5f49982a55ed96ed0828c8f",
+                "shasum": "",
+                "mirrors": [
+                    {
+                        "url": "http://local.toran.org/repo/packagist/dists/%package%/%version%/%reference%.%type%",
+                        "preferred": true
+                    }
+                ]
+            },
+            "require": {
+                "ext-mbstring": "*",
+                "lib-libxml": "*",
+                "org_heigl/hyphenator": "~2.0.3",
+                "php": ">=5.3.0"
+            },
+            "conflict": {
+                "ext-apc": "3.1.11"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "0.1.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "JoliTypo": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Damien Alexandre",
+                    "email": "dalexandre@jolicode.com",
+                    "homepage": "http://damienalexandre.fr/"
+                }
+            ],
+            "description": "Microtypography fixer for the web.",
+            "homepage": "https://github.com/jolicode/JoliTypo",
+            "keywords": [
+                "ellipsis",
+                "fixer",
+                "quote",
+                "smartquote",
+                "typography"
+            ],
+            "time": "2014-11-16 22:27:57"
+        },
+        {
+            "name": "jolicode/jolitypo-bundle",
+            "version": "dev-master",
+            "target-dir": "Joli/TypoBundle",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/jolicode/JoliTypoBundle.git",
+                "reference": "ce58b606610a1bc9877eb76e1278c0b7db215077",
+                "mirrors": [
+                    {
+                        "url": "/%package%/%normalizedUrl%.%type%",
+                        "preferred": true
+                    }
+                ]
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/jolicode/JoliTypoBundle/zipball/ce58b606610a1bc9877eb76e1278c0b7db215077",
+                "reference": "ce58b606610a1bc9877eb76e1278c0b7db215077",
+                "shasum": "",
+                "mirrors": [
+                    {
+                        "url": "http://local.toran.org/repo/packagist/dists/%package%/%version%/%reference%.%type%",
+                        "preferred": true
+                    }
+                ]
+            },
+            "require": {
+                "jolicode/jolitypo": "0.1.*",
+                "php": ">=5.3.2"
+            },
+            "type": "symfony-bundle",
+            "autoload": {
+                "psr-0": {
+                    "Joli\\TypoBundle": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Damien Alexandre",
+                    "email": "dalexandre@jolicode.com",
+                    "homepage": "http://damienalexandre.fr/"
+                }
+            ],
+            "description": "JoliTypo integration for your Symfony2 project",
+            "homepage": "https://github.com/jolicode/JoliTypoBundle",
+            "keywords": [
+                "hyphen",
+                "jolitypo",
+                "smartquote",
+                "typography"
+            ],
+            "time": "2013-09-06 10:36:52"
+        },
+        {
             "name": "knplabs/gaufrette",
             "version": "dev-master",
             "source": {
@@ -2889,6 +3015,61 @@
                 "rest"
             ],
             "time": "2014-10-26 23:51:54"
+        },
+        {
+            "name": "org_heigl/hyphenator",
+            "version": "v2.0.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/heiglandreas/Org_Heigl_Hyphenator.git",
+                "reference": "1ea68a85e67f87c4dab48d6771989248ca0cfd15",
+                "mirrors": [
+                    {
+                        "url": "/%package%/%normalizedUrl%.%type%",
+                        "preferred": true
+                    }
+                ]
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/heiglandreas/Org_Heigl_Hyphenator/zipball/1ea68a85e67f87c4dab48d6771989248ca0cfd15",
+                "reference": "1ea68a85e67f87c4dab48d6771989248ca0cfd15",
+                "shasum": "",
+                "mirrors": [
+                    {
+                        "url": "http://local.toran.org/repo/packagist/dists/%package%/%version%/%reference%.%type%",
+                        "preferred": true
+                    }
+                ]
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Org\\Heigl\\Hyphenator": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Andreas Heigl",
+                    "email": "andreas@heigl.org",
+                    "homepage": "http://andreas.heigl.org",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Word-Hyphenation for PHP",
+            "homepage": "http://github.com/heiglandreas/Org_Heigl_Hyphenator",
+            "keywords": [
+                "hyphenate",
+                "hyphenation"
+            ],
+            "time": "2013-05-16 19:30:56"
         },
         {
             "name": "phpcollection/phpcollection",
@@ -5321,7 +5502,8 @@
         "sonata-project/easy-extends-bundle": 20,
         "sonata-project/media-bundle": 20,
         "hwi/oauth-bundle": 20,
-        "predis/predis": 20
+        "predis/predis": 20,
+        "jolicode/jolitypo-bundle": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,

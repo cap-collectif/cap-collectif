@@ -52,6 +52,9 @@ class AppKernel extends Kernel
 
             // feature activation / deactivation
             new Qandidate\Bundle\ToggleBundle\QandidateToggleBundle(),
+
+            // typography concerns
+            new Joli\TypoBundle\JoliTypoBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {
