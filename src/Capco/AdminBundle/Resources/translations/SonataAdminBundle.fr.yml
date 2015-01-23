@@ -22,6 +22,8 @@ admin.label.newsletter_subscription: "Lettre d'information"
 admin.label.opinion: Propositions
 admin.label.opinion_type: "Types de propositions"
 admin.label.opinion_vote: "Votes sur les propositions"
+admin.label.post: Articles
+admin.label.recent_posts: "Derniers articles du blog"
 admin.label.reporting: Signalements
 admin.label.step: Étapes
 admin.label.theme: Thèmes
@@ -71,6 +73,15 @@ admin:
       voter: Auteur
       updated_at: Mise à jour
       created_at: Création
+    blog_post:
+      title: Titre
+      authors: Auteurs
+      abstract: Résumé
+      body: Contenu
+      updated_at: Mise à jour
+      created_at: Création
+      published_at: Date de Publication
+      is_published: Publié
     category:
       title: Titre
       sources: Sources
@@ -281,3 +292,9 @@ action_disable: Désactiver
 label_type_no: non
 label_type_yes: oui
 
+
+# posts
+post_is_public: publié
+post_is_not_public: non publié
+no_post_found: Aucun article pour le moment
+view_all_posts: Voir tous les articles

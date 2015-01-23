@@ -1,0 +1,10 @@
+Capco\AppBundle\Entity\Post:
+  post{1..25}:
+    title: <text(40)>
+    abstract: <text(200)>
+    body: <text(2000)>
+    title: <text(20)>
+    isPublished: <boolean()>
+    publishedAt: <dateTimeBetween('-100 days', '+10 days')>
+    Authors:
+        - @user<numberBetween(1,3)>

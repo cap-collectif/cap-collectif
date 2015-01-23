@@ -7,6 +7,7 @@ sonata_admin:
     dashboard:
         blocks:
             - { position: left,  type: sonata.admin.block.admin_list, settings: { groups: [admin.group.moderation] } }
+            - { position: right,  type: capco_admin.blog.block.recent_posts, settings: { number: 7, title: admin.label.recent_posts, toggle: 'blog' } }
         groups:
             admin.group.moderation:
                 items:
@@ -72,6 +73,7 @@ sonata_block:
         sonata.media.block.media:
         sonata.media.block.gallery:
         sonata.media.block.feature_media:
+        capco_admin.blog.block.recent_posts:
 
 
 sonata_classification:

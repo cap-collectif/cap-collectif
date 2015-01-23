@@ -1,0 +1,32 @@
+{% extends sonata_block.templates.block_base %}
+
+{% block block %}
+    <div class="sonata-news-block-recent-post panel panel-default">
+        {% if settings.title %}
+            <div class="panel-heading">
+                <h3 class="sonata-news-block-recent-post panel-title"><i class="fa fa-pencil"></i> {{ settings.title|trans({}, 'SonataAdminBundle') }}</h3>
+            </div>
+        {% endif %}
+
+        <div class="panel-body">
+            {% sonata_template_box 'This is the recent posts block.' %}
+
+            <div class="sonata-blog-post-container list-group">
+                {% for post in posts %}
+                    <a class="list-group-item" href="{{ url('admin_capco_app_post_edit', { 'id': post.id }) }}">
+                        {% if post.isPublic %}
+                            <span class="label label-success">{{ 'post_is_public'|trans({}, 'SonataAdminBundle') }}</span>
+                        {% else %}
+                            <span class="label label-danger">{{ 'post_is_not_public'|trans({}, 'SonataAdminBundle') }}</span>
+                        {% endif %}&nbsp;
+
+                        {{ post.title }} - {{ post.publishedAt | format_date }}</a>
+                {% else %}
+                    <a class="list-group-item" href="#">{{ 'no_post_found'|trans({}, 'SonataAdminBundle') }}</a>
+                {% endfor %}
+            </div>
+
+            <a href="{{ url('admin_capco_app_post_list') }}" class="btn btn-primary btn-block"><i class="fa fa-list"></i> {{ 'view_all_posts'|trans({}, 'SonataAdminBundle') }}</a>
+        </div>
+    </div>
+{% endblock %}

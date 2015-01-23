@@ -166,3 +166,11 @@ services:
             - {name: sonata.admin, manager_type: orm, group: admin.group.consultation, label: admin.label.source}
         calls:
             - [ setTranslationDomain, [SonataAdminBundle]]
+
+    capco_admin.admin.post:
+        class: Capco\AdminBundle\Admin\PostAdmin
+        arguments: [~, Capco\AppBundle\Entity\Post, SonataAdminBundle:CRUD]
+        tags:
+            - {name: sonata.admin, manager_type: orm, group: admin.group.blog, label: admin.label.post}
+        calls:
+            - [ setTranslationDomain, [SonataAdminBundle]]
