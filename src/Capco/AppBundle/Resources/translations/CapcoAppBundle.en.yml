@@ -26,6 +26,9 @@ error:
 error:
   feature_not_enabled: "This feature is not enabled, please check it in the admin!"
 
+error:
+  feature_not_enabled: "This feature is not enabled, please check it in the admin!"
+
 # Homepage
 homepage:
   newsletter:

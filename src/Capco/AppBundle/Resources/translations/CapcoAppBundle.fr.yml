@@ -19,7 +19,7 @@ error:
   to_homepage: Aller à la page d'Accueil
   report: Reporter un problème
   contribute: Profiez-en pour contribuer à une consultation
-  access_restricted: Accès interdit uax utilisateurs non identifiés.
+  access_restricted: Accès interdit aux utilisateurs non identifiés.
   feature_not_enabled: "Cette fonction n'est pas activée, veuillez l'activer dans l'espace d'administration !"
 
 # Homepage
