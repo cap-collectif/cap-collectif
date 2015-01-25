@@ -19,10 +19,9 @@ class OpinionType
         'green' => 'opinion_type.colors.green',
         'blue' => 'opinion_type.colors.blue',
         'orange' => 'opinion_type.colors.orange',
-        'bluelight' => 'opinion_type.colors.bluelight',
         'bluedark' => 'opinion_type.colors.bluedark',
-        'gray' => 'opinion_type.colors.gray',
-        'graylight' => 'opinion_type.colors.graylight',
+        'white' => 'opinion_type.colors.white',
+        'default' => 'opinion_type.colors.default',
     ];
 
     const VOTE_WIDGET_TYPE_DISABLED = 0;

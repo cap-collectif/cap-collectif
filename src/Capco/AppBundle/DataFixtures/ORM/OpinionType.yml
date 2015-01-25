@@ -25,14 +25,14 @@ Capco\AppBundle\Entity\OpinionType:
         shortName: Fraises
         position: 100
         voteWidgetType: 2
-        color: graylight
+        color: default
         isEnabled: <boolean(100)>
     opinionType5:
         title: Toutes les tomates
         shortName: Tomates
         position: <numberBetween(2, 10)>
         voteWidgetType: 3
-        color: bluelight
+        color: blue
         isEnabled: <boolean(100)>
     opinionType6:
         title: Le problème constaté

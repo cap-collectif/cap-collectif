@@ -438,8 +438,8 @@ opinion_type:
     orange: Orange
     bluelight: Bleu clair
     bluedark: Bleu foncé
-    gray: Gris
-    graylight: Gris clair
+    default: Gris
+    white: Blanc
 
 page:
   error:
