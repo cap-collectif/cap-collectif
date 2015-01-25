@@ -1,0 +1,11 @@
+{% extends 'SonataAdminBundle:CRUD:base_list_field.html.twig' %}
+
+{% block field %}
+	{% if object.value is not null %}
+	<div style="text-align: center; background-color: {{ object.value }}; padding: 5px 0" >
+		<strong>{{ object.value }}</strong>
+	</div>
+	{% else %}
+		non défini
+	{% endif %}
+{% endblock %}

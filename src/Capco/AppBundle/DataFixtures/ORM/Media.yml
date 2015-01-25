@@ -41,14 +41,24 @@ Capco\MediaBundle\Entity\Media:
         name:          Logo
         context:       @MediaContext3
 
+    header:
+        binaryContent: ../files/header.jpg
+        enabled:       true
+        name:          Header
+        context:       @MediaContext3
+
+    picto:
+        binaryContent: ../files/picto.png
+        enabled:       true
+        name:          Picto
+        context:       @MediaContext3
+
     # Social Network
     MediaFlickr:
         binaryContent: ../files/social/flickr.png
         enabled:       true
         name:          Flickr
         context:       @MediaContext2
-
-
 
     MediaFacebook:
         binaryContent: ../files/social/facebook.png

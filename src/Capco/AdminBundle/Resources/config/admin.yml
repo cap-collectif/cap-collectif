@@ -127,6 +127,14 @@ services:
         calls:
             - [ setTranslationDomain, [SonataAdminBundle]]
 
+    capco_admin.admin.site_color:
+        class: Capco\AdminBundle\Admin\SiteColorAdmin
+        arguments: [~, Capco\AppBundle\Entity\SiteColor, SonataAdminBundle:CRUD]
+        tags:
+            - {name: sonata.admin, manager_type: orm, group: admin.group.reference, label: admin.label.site_color}
+        calls:
+            - [ setTranslationDomain, [SonataAdminBundle]]
+
     capco_admin.admin.social_network:
         class: Capco\AdminBundle\Admin\SocialNetworkAdmin
         arguments: [~, Capco\AppBundle\Entity\SocialNetwork, SonataAdminBundle:CRUD]

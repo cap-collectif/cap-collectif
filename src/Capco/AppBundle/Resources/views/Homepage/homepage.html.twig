@@ -2,7 +2,7 @@
 {% extends "CapcoAppBundle::base.html.twig" %}
 
 {% block jumbotron %}
-    <div class="jumbotron  jumbotron--custom  jumbotron--bg-1  text-center">
+    <div class="jumbotron  jumbotron--custom  jumbotron--bg-1  text-center header-img">
         <div class="container">
             {% set jumbotron_title = capco_site_parameter_value('homepage.jumbotron.title') %}
             {% if null != jumbotron_title %}
@@ -16,6 +16,10 @@
             {% set jumbotron_button_link = capco_site_parameter_value('homepage.jumbotron.button_link') %}
             {% if null != jumbotron_button and null != jumbotron_button_link %}
                 <p><a href="{{ jumbotron_button_link }}" class="btn  btn--outline btn-custom-1  btn-lg" role="button">{{ jumbotron_button }}</a></p>
+            {% endif %}
+            {% set picto = capco_site_image_media('image.picto') %}
+            {% if (picto != null) %}
+                <p>{% thumbnail picto, 'header_picto' with {'title': picto.name, 'alt': picto.name} %}</p>
             {% endif %}
         </div>
     </div>

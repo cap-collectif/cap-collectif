@@ -109,10 +109,6 @@
     }
   }
 
-  p {
-    margin-bottom: 0;
-  }
-
   .btn {
     margin-top: 15px;
   }
@@ -143,5 +139,11 @@ $backgrounds:
 .home-page .jumbotron--custom {
   h1, .h1 {
     font-size: 63px;
+  }
+}
+
+.jumbotron--bg-1 {
+  p:last-child {
+    margin-bottom: 0;
   }
 }

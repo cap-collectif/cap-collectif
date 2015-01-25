@@ -5,3 +5,15 @@ Capco\AppBundle\Entity\SiteImage:
         media: @Logo
         isEnabled: true
         position: 1
+    SiteImage2:
+        keyname: image.header
+        title: header
+        media: @header
+        isEnabled: true
+        position: 2
+    SiteImage3:
+        keyname: image.picto
+        title: Picto
+        media: @picto
+        isEnabled: true
+        position: 3

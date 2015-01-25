@@ -8,6 +8,10 @@ parameters:
     capco.twig_extension.menu_url.class: Capco\AppBundle\Twig\MenuLinkExtension
     capco.notify.manager.class: Capco\AppBundle\Manager\Notify
 
+    capco.site_color.repository.class: Capco\AppBundle\Repository\SiteColorRepository
+    capco.site_color.resolver.class: Capco\AppBundle\SiteColor\Resolver
+    capco.twig_extension.site_color.class: Capco\AppBundle\Twig\SiteColorExtension
+
 services:
     capco.site_parameter.repository:
         class: %capco.site_parameter.repository.class%
@@ -28,6 +32,7 @@ services:
         tags:
             - { name: twig.extension }
 
+    ## Site paramèters for Image
     capco.site_image.repository:
         class: %capco.site_image.repository.class%
         factory_service: doctrine.orm.default_entity_manager
@@ -47,6 +52,27 @@ services:
         tags:
             - { name: twig.extension }
 
+    ## Site paramèters for colors
+    capco.site_color.repository:
+        class: %capco.site_color.repository.class%
+        factory_service: doctrine.orm.default_entity_manager
+        factory_method: getRepository
+        arguments:
+            - Capco\AppBundle\Entity\SiteColor
+
+    capco.site_color.resolver:
+        class: %capco.site_color.resolver.class%
+        arguments:
+            - @capco.site_color.repository
+            - @logger
+
+    capco.twig.site_color:
+        class: %capco.twig_extension.site_color.class%
+        arguments: [ @capco.site_color.resolver ]
+        tags:
+            - { name: twig.extension }
+
+    ## Menu URL
     capco.twig.menu_url:
         class: %capco.twig_extension.menu_url.class%
         arguments: [ @router, @validator ]
@@ -58,6 +84,7 @@ services:
         tags:
             - { name: form.type_extension, alias: sonata_media_type }
 
+    ## Service Notify - send mail
     capco.notify_manager:
         class:     %capco.notify.manager.class%
         arguments: [@mailer, @templating, @capco.site_parameter.resolver]

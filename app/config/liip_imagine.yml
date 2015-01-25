@@ -3,71 +3,97 @@ liip_imagine:
         admin:
             quality: 100
             controller_action: 'SonataMediaBundle:Media:liipImagineFilter'
+            format: png
             filters:
                 thumbnail: { size: [100, 100], mode: outbound }
 
         default_small:
             quality: 75
             controller_action: 'SonataMediaBundle:Media:liipImagineFilter'
+            format: png
             filters:
                 thumbnail: { size: [100, 70], mode: outbound }
 
         default_big:
             quality: 75
             controller_action: 'SonataMediaBundle:Media:liipImagineFilter'
+            format: png
             filters:
                 thumbnail: { size: [500, 70], mode: outbound }
 
         default_consultation:
             quality: 100
             controller_action: 'SonataMediaBundle:Media:liipImagineFilter'
+            format: png
             filters:
                 thumbnail: { size: [400, 300], mode: inbound }
 
         default_blockHeader:
             quality: 100
             controller_action: 'SonataMediaBundle:Media:liipImagineFilter'
+            format: png
             filters:
                 thumbnail: { size: [1140, 200], mode: inbound }
 
         default_avatar:
             quality: 70
             controller_action: 'SonataMediaBundle:Media:liipImagineFilter'
+            format: png
             filters:
                 thumbnail: { size: [45, 45], mode: inbound }
 
         default_idea:
             quality: 70
             controller_action: 'SonataMediaBundle:Media:liipImagineFilter'
+            format: png
             filters:
                 relative_resize: { heighten: 250 }
 
         default_socialIcon:
             quality: 70
             controller_action: 'SonataMediaBundle:Media:liipImagineFilter'
+            format: png
             filters:
                 thumbnail: { size: [50, 50], mode: inbound }
 
         default_logo:
             quality: 70
             controller_action: 'SonataMediaBundle:Media:liipImagineFilter'
+            format: png
             filters:
                 relative_resize: {heighten: 50 }
 
         default_avatar_source:
             quality: 70
             controller_action: 'SonataMediaBundle:Media:liipImagineFilter'
+            format: png
             filters:
                 relative_resize: {heighten: 32 }
 
         default_profile:
             quality: 70
             controller_action: 'SonataMediaBundle:Media:liipImagineFilter'
+            format: png
             filters:
                 relative_resize: { widen: 200 }
 
         default_form:
             quality: 70
             controller_action: 'SonataMediaBundle:Media:liipImagineFilter'
+            format: png
             filters:
                 relative_resize: {heighten: 150 }
+
+        default_header:
+            quality: 90
+            controller_action: 'SonataMediaBundle:Media:liipImagineFilter'
+            format: png
+            filters:
+                relative_resize: { widen: 1920 }
+
+        default_header_picto:
+            quality: 70
+            controller_action: 'SonataMediaBundle:Media:liipImagineFilter'
+            format: png
+            filters:
+                relative_resize: {widen: 70 }

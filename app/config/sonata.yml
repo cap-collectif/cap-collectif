@@ -45,6 +45,7 @@ sonata_admin:
                 items:
                     - capco_admin.admin.site_parameter
                     - capco_admin.admin.site_image
+                    - capco_admin.admin.site_color
                     - capco_admin.admin.menu_item
                     - capco_admin.admin.opinion_type
                     - capco_admin.admin.category

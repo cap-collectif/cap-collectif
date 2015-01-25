@@ -8,8 +8,9 @@ Capco\AppBundle\Entity\SiteParameter:
     SiteParameter2:
         keyname: homepage.jumbotron.body
         title: Accroche du site
-        value: ''
         position: 110
+        value:  |
+                This is a template for a simple marketing or informational website. It includes a large callout called a jumbotron and three supporting pieces of content. Use it as a starting point to create something more unique.
     SiteParameter3:
         keyname: homepage.jumbotron.button
         title: Libellé du bouton principal

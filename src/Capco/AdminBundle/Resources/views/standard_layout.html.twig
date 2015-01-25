@@ -2,15 +2,19 @@
 
 {% block stylesheets %}
 	{{ parent() }}
-	<link href="/css/style-admin.min.css" rel="stylesheet">
+	<link href="{{ asset('css/style-admin.min.css') }}" rel="stylesheet">
+	<link href="{{ asset('css/jquery.minicolors.min.css') }}" rel="stylesheet">
 {% endblock %}
 
 {% block javascripts %}
 	{{ parent() }}
 	<script src="{{ asset('js/ckeditor/ckeditor.js') }}"></script>
+	<script src="{{ asset('js/jquery.minicolors.js') }}"></script>
 	<script type="text/javascript">
 		$(window).on('load', function() {
-			App.module.ckEditor('ckeditor');
+			$('.minicolors-input').minicolors({
+				theme: 'bootstrap'
+			});
 		});
 	</script>
 {% endblock %}

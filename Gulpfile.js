@@ -29,11 +29,13 @@ gulp.task('copy', function() {
     gulp.src(app + '/libs/readmore/**/*')
         .pipe(gulp.dest('web/js/readmore'));
 
-    gulp.src(app + '/libs/Snap.svg/**/*')
-        .pipe(gulp.dest('web/js/Snap.svg'));
+    gulp.src(app + '/libs/jquery-minicolors/jquery.minicolors.js')
+        .pipe(gulp.dest('web/js/'));
 
-    gulp.src(app + '/libs/pizza/**/*')
-        .pipe(gulp.dest('web/js/pizza'));
+    gulp.src(app + '/libs/jquery-minicolors/jquery.minicolors.css')
+        .pipe(plugins.minifyCss({keepSpecialComments:0}))
+        .pipe(plugins.rename({suffix: '.min'}))
+        .pipe(gulp.dest('web/css/'));
 
     gulp.src(app + '/libs/ckeditor/**/*')
         .pipe(gulp.dest('web/js/ckeditor'));
