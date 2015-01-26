@@ -83,6 +83,14 @@ class Post
 
     /**
      * @var
+     *
+     * @ORM\ManyToOne(targetEntity="Capco\MediaBundle\Entity\Media", cascade={"persist"})
+     * @ORM\JoinColumn(name="media_id", referencedColumnName="id")
+     */
+    private $Media;
+
+    /**
+     * @var
      * @ORM\ManyToMany(targetEntity="Capco\UserBundle\Entity\User", cascade={"persist"})
      * @ORM\JoinTable(name="blog_post_authors",
      *      joinColumns={@ORM\JoinColumn(name="post_id", referencedColumnName="id")},
@@ -356,5 +364,29 @@ class Post
         }
 
         return $this->isPublished && ($now > $this->publishedAt);
+    }
+
+    /**
+     * Set media
+     *
+     * @param \Capco\MediaBundle\Entity\Media $media
+     *
+     * @return Post
+     */
+    public function setMedia(\Capco\MediaBundle\Entity\Media $media = null)
+    {
+        $this->Media = $media;
+
+        return $this;
+    }
+
+    /**
+     * Get media
+     *
+     * @return \Capco\MediaBundle\Entity\Media
+     */
+    public function getMedia()
+    {
+        return $this->Media;
     }
 }

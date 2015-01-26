@@ -82,6 +82,7 @@ admin:
       created_at: Création
       published_at: Date de Publication
       is_published: Publié
+      media: Photo
     category:
       title: Titre
       sources: Sources

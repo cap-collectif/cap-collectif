@@ -10,7 +10,8 @@
  */
 
 namespace Capco\MediaBundle\Entity;
-
+use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 use Sonata\MediaBundle\Entity\BaseMedia as BaseMedia;
 
 /**
@@ -37,6 +38,7 @@ class Media extends BaseMedia
     {
         return $this->id;
     }
+
     /**
      * Constructor
      */

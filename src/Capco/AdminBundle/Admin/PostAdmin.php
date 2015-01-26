@@ -81,32 +81,25 @@ class PostAdmin extends Admin
      */
     protected function configureFormFields(FormMapper $formMapper)
     {
-        $subject = $this->getSubject();
-        $publishedAt = null;
-
-        if ($subject !== null){
-            $publishedAt = $subject->getPublishedAt();
-        }
-
         $formMapper
             ->add('title', null, array(
                 'label' => 'admin.fields.blog_post.title',
             ))
+            ->add('Media', 'sonata_type_model_list', array('required' => false), array(
+                'link_parameters' => array(
+                    'context' => 'default',
+                    'hide_context' => true
+                )
+            ))
             ->add('abstract', null, array(
                 'label' => 'admin.fields.blog_post.abstract',
             ))
-            ->add('body', null, array(
-                'attr' => array('class' => 'ckeditor'),
-                'label' => 'admin.fields.blog_post.body',
-            ))
             ->add('isPublished', null, array(
                 'label' => 'admin.fields.blog_post.is_published',
+                'required' => false,
             ))
             ->add('publishedAt', 'sonata_type_datetime_picker', array(
                 'required' => false,
-                'mapped' => false,
-                'datepicker_use_button' => false,
-                'data' => $publishedAt,
                 'label' => 'admin.fields.blog_post.published_at',
             ))
             ->add('Authors', null, array(
