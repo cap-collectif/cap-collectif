@@ -26,6 +26,47 @@ class OpinionController extends Controller
 {
 
     /**
+     * @Route("/consultation/{consultationSlug}/opinions/{opinionTypeSlug}/{opinionSlug}/remove/{opinionVote}", name="app_consultation_cancel_vote")
+     * @param $request
+     * @param $consultationSlug
+     * @param $opinionTypeSlug
+     * @param $opinionSlug
+     * @param $opinionVote
+     * @return array
+     */
+    public function deleteOpinionVoteAction($consultationSlug, $opinionTypeSlug, $opinionSlug, OpinionVote $opinionVote, Request $request)
+    {
+        if (false === $this->get('security.authorization_checker')->isGranted('ROLE_USER')) {
+            throw new AccessDeniedException($this->get('translator')->trans('error.access_restricted', array(), 'CapcoAppBundle'));
+        }
+
+        $opinion = $this->getDoctrine()->getRepository('CapcoAppBundle:Opinion')->getOneBySlug($consultationSlug, $opinionTypeSlug, $opinionSlug);
+
+        if (null == $opinion) {
+            throw $this->createNotFoundException($this->get('translator')->trans('opinion.error.not_found', array(), 'CapcoAppBundle'));
+        }
+
+        if (false == $opinion->canContribute()) {
+            throw new AccessDeniedException($this->get('translator')->trans('opinion.error.no_contribute', array(), 'CapcoAppBundle'));
+        }
+
+        if ($request->getMethod() == 'POST') {
+
+            if($this->isCsrfTokenValid('remove_opinion_vote', $request->get('_csrf_token'))) {
+                $em = $this->getDoctrine()->getManager();
+                $em->remove($opinionVote);
+                $em->flush();
+                $this->get('session')->getFlashBag()->add('success', $this->get('translator')->trans('opinion.vote.delete.success', array(), 'CapcoAppBundle'));
+            }
+            else {
+                $this->get('session')->getFlashBag()->add('danger', $this->get('translator')->trans('argument.vote.csrf_error', array(), 'CapcoAppBundle'));
+            }
+        }
+
+        return $this->redirect($this->generateUrl('app_consultation_show_opinion', ['consultationSlug' => $opinion->getConsultation()->getSlug(), 'opinionTypeSlug' => $opinion->getOpinionType()->getSlug(), 'opinionSlug' => $opinion->getSlug() ]));
+    }
+
+    /**
      * @Route("/consultations/{consultationSlug}/opinions/{opinionTypeSlug}/add", name="app_consultation_new_opinion")
      * @ParamConverter("consultation", class="CapcoAppBundle:Consultation", options={"mapping": {"consultationSlug": "slug"}})
      * @ParamConverter("opinionType", class="CapcoAppBundle:OpinionType", options={"mapping": {"opinionTypeSlug": "slug"}})

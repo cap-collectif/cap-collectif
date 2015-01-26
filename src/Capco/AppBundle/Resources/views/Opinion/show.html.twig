@@ -85,6 +85,14 @@
 
                                 <div class="pull-right  opinion__action-buttons">
 
+                                    {% if (previousVote) %}
+                                        {% set tokenRemoveVote = csrf_token('remove_opinion_vote') %}
+                                        <form method="POST" style="display: inline-block;" action="{{ path('app_consultation_cancel_vote' ,{'consultationSlug': consultation.slug, 'opinionTypeSlug': opinionType.slug, 'opinionSlug': opinion.slug, 'opinionVote': previousVote.id } ) }}">
+                                            <button class="btn  btn-info"> {{ 'source.vote.delete'|trans({}, 'CapcoAppBundle') }}</button>
+                                            <input type="hidden" name="_csrf_token" value="{{ tokenRemoveVote }}">
+                                        </form>
+                                    {% endif %}
+
                                     {% if(userReportingOpinion == false) %}
                                     <a href="{{ path('app_report_opinion' ,{'consultationSlug': consultation.slug, 'opinionTypeSlug': opinionType.slug, 'opinionSlug': opinion.slug } ) }}" class="btn  btn-dark-gray  btn--outline"><i class="cap cap-flag-1"></i> {{ 'opinion.report.submit'|trans({}, 'CapcoAppBundle') }}</a>
                                     {% else %}
