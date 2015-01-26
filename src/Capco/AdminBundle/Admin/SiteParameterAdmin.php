@@ -79,6 +79,7 @@ class SiteParameterAdmin extends Admin
             ))
             ->add('value', null, array(
                 'label' => 'admin.fields.site_parameter.value',
+                'required' => false,
             ))
         ;
     }
