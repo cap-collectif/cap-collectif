@@ -9,13 +9,13 @@
     <div class="container">
         <div class="row">
             <div class="col-xs-12  col-sm-12  col-md-12 col-lg-12">
-                <h2>Les propositions</h2>
+                <h2>{{ 'user.profile.show.opinions' | trans({}, 'CapcoAppBundle') }}</h2>
                 {% include '@CapcoUser/Profile/opinions.html.twig' %}
-                <h2>Les arguments</h2>
+                <h2>{{ 'user.profile.show.arguments' | trans({}, 'CapcoAppBundle') }}</h2>
                 {% include '@CapcoUser/Profile/arguments.html.twig' %}
-                <h2>Les sources</h2>
+                <h2>{{ 'user.profile.show.sources' | trans({}, 'CapcoAppBundle') }}</h2>
                 {% include '@CapcoUser/Profile/sources.html.twig' %}
-                <h2>Les idées</h2>
+                <h2>{{ 'user.profile.show.ideas' | trans({}, 'CapcoAppBundle') }}</h2>
                 {% include '@CapcoUser/Profile/ideas.html.twig' %}
             </div>
         </div>

@@ -62,7 +62,7 @@ class ProfileController extends BaseController
         $user = $this->container->get('fos_user.user_manager')->findUserByUsername($user);
 
         if ($user==null){
-            throw $this->createNotFoundException('user.not_found');
+            throw $this->createNotFoundException();
         }
 
         $blocks = $this->getDoctrine()->getRepository('CapcoAppBundle:OpinionType')->getByUser($user);

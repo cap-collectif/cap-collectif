@@ -11,7 +11,7 @@
                 {% block capco_user_registration %}
                     <form role="form" action="{{ path('fos_user_registration_register') }}" {{ form_enctype(form) }} method="POST">
                         <div class="form-group">
-                            <label for="username" class="control-label  h5">{{ 'user.register.username.title'|trans({}, 'CapcoAppBundle') }}</label>
+                            <label for="username" class="control-label  h5">{{ 'user.register.username.username'|trans({}, 'CapcoAppBundle') }}</label>
                             {{ form_widget(form.username) }}
                             <p class="excerpt  h5">{{ 'user.register.username.is_public'|trans({}, 'CapcoAppBundle') }}</p>
                         </div>
@@ -48,12 +48,12 @@
                         {% endif %}
 
                         {{ form_rest(form) }}
-                        <button type="submit" class="btn  btn-success  btn-block  login__submit">{{ 'registration.submit'|trans({}, 'FOSUserBundle') }}</button>
+                        <button type="submit" class="btn  btn-success  btn-block  login__submit">{{ 'user.register.submit' | trans({}, 'CapcoAppBundle') }}</button>
 
                     </form>
                 {% endblock %}
                 <hr>
-                <a href="{{ path('fos_user_security_login') }}" class="btn  btn-light-gray  btn-block">{{ 'security.login.submit'|trans({}, 'FOSUserBundle') }}</a>
+                <a href="{{ path('fos_user_security_login') }}" class="btn  btn-light-gray  btn-block">{{ 'user.login.submit' | trans({}, 'CapcoAppBundle') }}</a>
 
             </div>
         </div>

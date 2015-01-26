@@ -33,32 +33,32 @@
             <ul class="nav  nav-pills">
                 <li class="profile__value {% if app.request.attributes.get('_route') == 'capco_user_profile_show_all' %}active{% endif %} ">
                     <a href="{{ path('capco_user_profile_show_all', {'username': user.username}) }}">
-                        <h5 class="excerpt  profile__value__label">{{ 'user.profile.show.propositions.all'|trans({}, 'CapcoAppBundle') }}</h5>
+                        <h5 class="excerpt  profile__value__label">{{ 'user.profile.show.all'|trans({}, 'CapcoAppBundle') }}</h5>
                         <p class="profile__value__number">{{ totalCount }}</p>
                     </a>
                 </li>
                 <li class="profile__value {% if app.request.attributes.get('_route') == 'capco_user_profile_show_opinions' %}active{% endif %}">
                     <a href="{{ path('capco_user_profile_show_opinions', {'username': user.username}) }}">
-                        <h5 class="excerpt  profile__value__label">{{ 'user.profile.show.propositions.contributions.title'|trans({}, 'CapcoAppBundle') }}</h5>
+                        <h5 class="excerpt  profile__value__label">{{ 'user.profile.show.opinions'|trans({}, 'CapcoAppBundle') }}</h5>
                         <p class="profile__value__number">{{ countOpinions }}</p>
                     </a>
                 </li>
                 <li class="profile__value {% if app.request.attributes.get('_route') == 'capco_user_profile_show_arguments' %}active{% endif %}">
                     <a href="{{ path('capco_user_profile_show_arguments', {'username': user.username}) }}">
-                        <h5 class="excerpt  profile__value__label">{{ 'user.profile.show.propositions.arguments.title'|trans({}, 'CapcoAppBundle') }}</h5>
+                        <h5 class="excerpt  profile__value__label">{{ 'user.profile.show.arguments'|trans({}, 'CapcoAppBundle') }}</h5>
                         <p class="profile__value__number">{{ countArguments }}</p>
                     </a>
                 </li>
 
                 <li class="profile__value {% if app.request.attributes.get('_route') == 'capco_user_profile_show_ideas' %}active{% endif %}">
                     <a href="{{ path('capco_user_profile_show_ideas', {'username': user.username}) }}">
-                        <h5 class="excerpt  profile__value__label">{{ 'user.profile.show.propositions.ideas.title'|trans({}, 'CapcoAppBundle') }}</h5>
+                        <h5 class="excerpt  profile__value__label">{{ 'user.profile.show.ideas'|trans({}, 'CapcoAppBundle') }}</h5>
                         <p class="profile__value__number">{{ countIdeas }}</p>
                     </a>
                 </li>
                 <li class="profile__value {% if app.request.attributes.get('_route') == 'capco_user_profile_show_sources' %}active{% endif %}">
                     <a href="{{ path('capco_user_profile_show_sources', {'username': user.username}) }}">
-                        <h5 class="excerpt  profile__value__label">{{ 'user.profile.show.propositions.sources.title'|trans({}, 'CapcoAppBundle') }}</h5>
+                        <h5 class="excerpt  profile__value__label">{{ 'user.profile.show.sources'|trans({}, 'CapcoAppBundle') }}</h5>
                         <p class="profile__value__number">{{ countSources }}</p>
                     </a>
                 </li>

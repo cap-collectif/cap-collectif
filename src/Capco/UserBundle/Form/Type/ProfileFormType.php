@@ -12,19 +12,23 @@ class ProfileFormType extends AbstractType
     {
         $builder
             ->add('twitterName', null, array(
-                'label'    => 'Twitter',
+                'label' => 'user.profile.edit.twitter',
+                'translation_domain' => 'CapcoAppBundle',
                 'required' => false
             ))
             ->add('facebookName', null, array(
-                'label'    => 'Facebook',
+                'label' => 'user.profile.edit.facebook',
+                'translation_domain' => 'CapcoAppBundle',
                 'required' => false
             ))
             ->add('gplusName', null, array(
-                'label'    => 'Google +',
+                'label' => 'user.profile.edit.gplus',
+                'translation_domain' => 'CapcoAppBundle',
                 'required' => false
             ))
             ->add('username', null, array(
-                'label'    => 'Nom',
+                'label' => 'user.profile.edit.username',
+                'translation_domain' => 'CapcoAppBundle',
                 'required' => true
             ))
             ->add('email', null, array(
@@ -35,7 +39,8 @@ class ProfileFormType extends AbstractType
                 'provider' => 'sonata.media.provider.image',
                 'context' => 'default',
                 'required' => false,
-                'label' => 'Image'
+                'label' => 'user.profile.edit.media',
+                'translation_domain' => 'CapcoAppBundle',
             ))
             ->remove('lastname')
             ->remove('firstname')

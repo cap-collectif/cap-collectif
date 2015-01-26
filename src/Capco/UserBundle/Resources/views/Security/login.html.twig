@@ -45,12 +45,12 @@
                                 <input type="password" class="form-control" id="password" name="_password" required="required">
                             </div>
                             <input type="hidden" name="_csrf_token" value="{{ csrf_token }}"/>
-                            <button type="submit" class="btn  btn-success  btn-block  login__submit">{{ 'security.login.submit'|trans({}, 'FOSUserBundle') }}</button>
+                            <button type="submit" class="btn  btn-success  btn-block  login__submit">{{ 'user.login.submit' | trans({}, 'CapcoAppBundle') }}</button>
                         </form>
                     {% endblock %}
 
                     <hr>
-                    <a href="{{ path('fos_user_registration_register') }}" class="btn  btn-light-gray  btn-block">{{ 'layout.register'|trans({}, 'FOSUserBundle') }}</a>
+                    <a href="{{ path('fos_user_registration_register') }}" class="btn  btn-light-gray  btn-block">{{ 'user.register.submit' | trans({}, 'CapcoAppBundle') }}</a>
 
                 </div>
             </div>
