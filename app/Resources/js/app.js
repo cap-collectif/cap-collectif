@@ -55,6 +55,24 @@ App.module = function ($) {
         }
     };
 
+    var video = function(el) {
+        var $el = $(el);
+        $el.on("click", function(){
+            $.fancybox({
+                href: this.href,
+                type: $(this).data("type"),
+                padding     : 0,
+                margin      : 50,
+                maxWidth	: 1280,
+                maxHeight	: 720,
+                fitToView	: false,
+                width		: '90%',
+                height		: '90%'
+            }); // fancybox
+            return false
+        }); // on
+    };
+
     var checkButton = function(el) {
         var $el = $(el);
 
@@ -70,7 +88,8 @@ App.module = function ($) {
         rezised: rezised,
         ckEditor: ckEditor,
         pieChart: pieChart,
-        checkButton: checkButton
+        checkButton: checkButton,
+        video: video
     };
 
     return AppPublic;

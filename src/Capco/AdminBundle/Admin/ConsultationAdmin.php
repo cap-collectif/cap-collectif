@@ -171,6 +171,12 @@ class ConsultationAdmin extends Admin
                 'label' => 'admin.fields.consultation.cover',
                 'required' => false,
             ))
+            ->add('Image', 'sonata_media_type', array(
+                'provider' => 'sonata.media.provider.image',
+                'context' => 'default',
+                'label' => 'admin.fields.consultation.image',
+                'required' => false,
+            ))
             ->add('video', null, array(
                 'label' => 'admin.fields.consultation.video',
                 'required' => false,

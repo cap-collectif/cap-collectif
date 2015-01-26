@@ -203,7 +203,6 @@ consultation:
         title: Consultation à venir.
         text: La période de participation débutera le %date%.
     meta:
-      video: Vidéo
       intro:
         title: Introduction
         read_more: Lire la suite

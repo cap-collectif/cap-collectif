@@ -45,6 +45,9 @@ gulp.task('copy', function() {
 
     gulp.src(app + '/img/*')
         .pipe(gulp.dest('web/img/'));
+
+    gulp.src(app + '/libs/fancybox/source/**/*')
+        .pipe(gulp.dest('web/js/fancybox'));
 });
 
 gulp.task('concat', function() {

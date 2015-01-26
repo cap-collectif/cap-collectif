@@ -183,6 +183,13 @@ a.excerpt {
   background-color: $black;
 }
 
+.bg--default {
+  background-color: $light-gray;
+  height: 142px;
+  display: block;
+  position: relative;
+}
+
 // Icon circled
 .icon--circled {
   color: $black;

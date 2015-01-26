@@ -88,6 +88,7 @@ admin:
       updated_at: Mise à jour
       created_at: Création
       cover: Image de couverture
+      image: Image de la vidéo
       video: Vidéo
     footer_social_network:
       title: Titre

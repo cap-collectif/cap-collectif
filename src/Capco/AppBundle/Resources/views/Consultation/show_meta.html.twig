@@ -1,13 +1,20 @@
 <div class="thumbnail--custom  thumbnail--sidebar  block--shadowed">
-    {#<a href="#" class="play" data-length="3:50">#}
-        {#<img class="img-responsive  center-block" src="http://lorempixel.com/400/300/technics" alt="image de la consultation">#}
-    {#</a>#}
+
+    {% if consultation.video and consultation.Image %}
+        <a href="{{ consultation.video }}" class="play  fancybox" data-type="iframe">
+            {% thumbnail consultation.Image, 'img_video' with {'title': consultation.Image.name, 'alt': consultation.Image.name, 'class': 'img-responsive  center-block'} %}
+        </a>
+    {% elseif consultation.video and consultation.Image is null %}
+        <a href="{{ consultation.video }}" class="play  fancybox" data-type="iframe">
+            <div class="bg-primary  bg--default"></div>
+        </a>
+    {% elseif consultation.video is null and consultation.Image %}
+        {% thumbnail consultation.Image, 'img_video' with {'title': consultation.Image.name, 'alt': consultation.Image.name, 'class': 'img-responsive  center-block'} %}
+    {% else %}
+        <div class="bg-primary  bg--default"></div>
+    {% endif %}
+
     <div class="box">
-
-        {% if consultation.video %}
-            <a href="{{ consultation.video }}">{{ 'consultation.show.meta.video'|trans({}, 'CapcoAppBundle') }}</a>
-        {% endif %}
-
         <h4 class="h4">{{ 'consultation.show.meta.intro.title'|trans({}, 'CapcoAppBundle') }}</h4>
         <div class="more">{{ consultation.body | raw }}</div>
         {%  if currentStep is not defined %}
