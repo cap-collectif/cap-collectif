@@ -1,0 +1,7 @@
+{{ 'blog.written_by' | trans({}, 'CapcoAppBundle') }} {% for author in authors %}
+    <span class="media--news__user"><a href="{{ path('capco_user_profile_show_all', { username: author.username })}}">{{ author.fullname }}</a></span>{% if loop.revindex0 == '1' %}
+        {{ 'blog.and' | trans({}, 'CapcoAppBundle') }}
+    {% elseif loop.revindex0 == '2' %}
+        {{- ', ' }}
+    {% endif %}
+{% endfor %}

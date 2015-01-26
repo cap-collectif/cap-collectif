@@ -524,3 +524,5 @@ user:
 # blog module
 blog:
   no_post: "No post published for the moment."
+  written_by: "by"
+  and: "and"

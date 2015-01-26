@@ -26,7 +26,10 @@
                         {%  endif %}
                         <div class="media-body">
                             <h3 class="media-title"><a href="{{ url('app_blog_show', {'slug': post.slug}) }}">{{ post.title | jolitypo() }}</a></h3>
-                            <p class="excerpt  h5  media--news__meta">{{ post.publishedAt | localizeddate('long', 'none') }}, par <span class="media--news__user"><a href="{{ path('capco_user_profile_show_all', { username: post.Authors[0].username })}}">{{ post.Authors[0].fullname }}</a></span></p>
+                            <p class="excerpt  h5  media--news__meta">
+                                {{- post.publishedAt | localizeddate('long', 'none') }},
+                                {% include 'CapcoAppBundle:Blog:_authors.html.twig' with {'authors': post.Authors} %}
+                            </p>
                             {% if post.abstract %}
                                 <p class="media--news__text">{{ post.abstract | jolitypo() }}</p>
                             {% endif %}

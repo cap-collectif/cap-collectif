@@ -496,4 +496,5 @@ user:
 # blog module
 blog:
   no_post: "Aucun article n'a été publié"
-
+  written_by: "par"
+  and: "et"
