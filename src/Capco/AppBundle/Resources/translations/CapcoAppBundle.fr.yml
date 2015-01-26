@@ -197,10 +197,10 @@ consultation:
   show:
     alert:
       ended:
-        title: Statut "Terminé" :
+        title: Consultation terminée.
         text: La période de participation est maintenant terminée. Merci à tous d'avoir contribué.
       future:
-        title: Statut "À venir" :
+        title: Consultation à venir.
         text: La période de participation débutera le %date%.
     meta:
       video: Vidéo
