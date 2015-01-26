@@ -24,7 +24,7 @@ class IdeaVoteType extends AbstractType
         $resolver->setDefaults(array(
             'data_class' => 'Capco\AppBundle\Entity\Idea',
             'csrf_protection' => true,
-            'csrf_field_name' => '_token'
+            'csrf_field_name' => '_token',
         ));
     }
 

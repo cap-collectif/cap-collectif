@@ -1,4 +1,4 @@
-<h4 class="h4">Étapes</h4>
+<h4 class="h4">{{ 'consultation.show.meta.step.title'|trans({}, 'CapcoAppBundle') }}</h4>
 <div class="navbar--sub">
     <ul class="nav">
         {% set nb = 1 %}
@@ -30,11 +30,11 @@
                         </p>
                         <p class="label label-default">
                             {% if now < step.startAt %}
-                                À venir
+                                {{ stepStatus['future'] | trans({}, 'CapcoAppBundle') }}
                             {% elseif now > step.endAt %}
-                                Fermé
+                                {{ stepStatus['closed'] | trans({}, 'CapcoAppBundle') }}
                             {% else %}
-                                En cours
+                                {{ stepStatus['open'] | trans({}, 'CapcoAppBundle') }}
                             {% endif %}
                         </p>
                     </div>

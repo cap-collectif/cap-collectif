@@ -5,5 +5,5 @@
    {{ form_label(form.email, null, {'label_attr':{"class":"sr-only"} }) }}
    {{ form_errors(form.email) }}
    {{ form_widget(form.email, {'attr':{'style': 'width: 250px;', "placeholder": 'homepage.newsletter.enter_email'|trans({}, 'CapcoAppBundle')} }) }}
-   <button type="submit" class="btn  btn-primary">S'inscrire</button>
+   <button type="submit" class="btn  btn-primary">{{ 'homepage.newsletter.submit'|trans({}, 'CapcoAppBundle') }}</button>
 {{ form_end(form) }}

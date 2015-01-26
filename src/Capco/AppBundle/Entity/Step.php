@@ -33,6 +33,12 @@ class Step
         self::TYPE_OTHER => 'Autre',
     ];
 
+    public static $stepStatus = [
+        'closed' => 'step.status.closed',
+        'open' => 'step.status.open',
+        'future' => 'step.status.future'
+    ];
+
     /**
      * @var integer
      *

@@ -24,7 +24,7 @@ class PageController extends Controller
     public function showAction(Page $page)
     {
         if($page->getIsEnabled() == false){
-            throw $this->createNotFoundException();
+            throw $this->createNotFoundException($this->get('translator')->trans('page.error.not_found', array(), 'CapcoAppBundle'));
         }
 
         return [

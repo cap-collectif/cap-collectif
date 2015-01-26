@@ -1,9 +1,9 @@
 {% block body_text %}
     {% autoescape false %}
     <p>
-        Bonjour, un contenu vient d’être signalé par <strong><a href="mailto:{{ user.email }}">{{ user.username }}</a></strong> comme abusif sur Cap-Collectif.
+        {{ 'reporting.notification.body'|trans({'%mail%' : '<strong><a href="mailto:' ~ user.email ~ '">{{ user.username }}</a></strong>', 'sitename': capco_site_parameter_value('global.site.fullname')}) }}, 'CapcoAppBundle') }}
     </p>
-    <p>message: </p>
+    <p{{ 'reporting.notification.message_title'|trans({}, 'CapcoAppBundle') }}</p>
     <p>{{ message }}</p>
     {% endautoescape %}
 {% endblock %}

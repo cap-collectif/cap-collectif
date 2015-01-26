@@ -4,3 +4,4 @@ Capco\AppBundle\Entity\SiteImage:
         title: Logo
         media: @Logo
         isEnabled: true
+        position: 1

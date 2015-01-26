@@ -5,18 +5,18 @@
     <div class="box">
 
         {% if consultation.video %}
-            <a href="{{ consultation.video }}">Video</a>
+            <a href="{{ consultation.video }}">{{ 'consultation.show.meta.video'|trans({}, 'CapcoAppBundle') }}</a>
         {% endif %}
 
-        <h4 class="h4">Introduction</h4>
+        <h4 class="h4">{{ 'consultation.show.meta.intro.title'|trans({}, 'CapcoAppBundle') }}</h4>
         <div class="more">{{ consultation.body | raw }}</div>
         {%  if currentStep is not defined %}
             {% set currentStep = null %}
         {% endif %}
         {{ render(controller('CapcoAppBundle:Step:showAllInNav', {'consultation': consultation, 'currentStep': currentStep})) }}
 
-        <h4 class="h4">Informations</h4>
-        <p class="excerpt">Thème(s)</p>
+        <h4 class="h4">{{ 'consultation.show.meta.info.title'|trans({}, 'CapcoAppBundle') }}</h4>
+        <p class="excerpt">{{ 'consultation.show.meta.info.themes'|trans({}, 'CapcoAppBundle') }}</p>
         <p>
             {% for theme in consultation.Themes %}
                 {% if theme.canDisplay %}
@@ -24,9 +24,9 @@
                 {% endif %}
             {% endfor %}
         </p>
-        <p class="excerpt">Publication</p>
+        <p class="excerpt">{{ 'consultation.show.meta.info.opening'|trans({}, 'CapcoAppBundle') }}</p>
         <p>{{ consultation.openedAt | localizeddate('long', 'none') }}</p>
-        <p class="excerpt">Contributions</p>
+        <p class="excerpt">{{ 'consultation.show.meta.info.contributions'|trans({}, 'CapcoAppBundle') }}</p>
         <p>
             {% set opinionCount = (consultation.opinionCount + consultation.trashedOpinionCount) %}
             {% set argumentCount = (consultation.argumentCount + consultation.trashedArgumentCount) %}

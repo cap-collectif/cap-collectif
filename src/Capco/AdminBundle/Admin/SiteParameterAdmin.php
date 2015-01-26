@@ -15,7 +15,7 @@ class SiteParameterAdmin extends Admin
 
     protected $datagridValues = array(
         '_sort_order' => 'ASC',
-        '_sort_by' => 'id'
+        '_sort_by' => 'position'
     );
 
     /**

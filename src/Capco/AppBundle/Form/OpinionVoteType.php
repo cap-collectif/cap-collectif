@@ -18,6 +18,7 @@ class OpinionVoteType extends AbstractType
         $builder
             ->add('value', 'choice', array(
                 'choices' => OpinionVote::$voteTypesLabels,
+                'label' => 'opinion.form.vote',
                 'translation_domain' => 'CapcoAppBundle',
                 'multiple' => false,
                 'expanded' => true,

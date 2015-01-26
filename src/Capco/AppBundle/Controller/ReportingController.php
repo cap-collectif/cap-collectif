@@ -36,17 +36,17 @@ class ReportingController extends Controller
     public function reportingOpinionAction($consultationSlug, $opinionTypeSlug, $opinionSlug, Request $request)
     {
         if (false === $this->get('security.authorization_checker')->isGranted('ROLE_USER')) {
-            throw new AccessDeniedException($this->get('translator')->trans('Access restricted to authenticated users'));
+            throw new AccessDeniedException($this->get('translator')->trans('error.access_restricted', array(), 'CapcoAppBundle'));
         }
 
         $opinion = $this->getDoctrine()->getRepository('CapcoAppBundle:Opinion')->getOneBySlug($consultationSlug, $opinionTypeSlug, $opinionSlug);
 
         if($opinion == null){
-            throw $this->createNotFoundException($this->get('translator')->trans('Argument not found.'));
+            throw $this->createNotFoundException($this->get('translator')->trans('opinion.error.not_found', array(), 'CapcoAppBundle'));
         }
 
         if (false == $opinion->canContribute()) {
-            throw new AccessDeniedException($this->get('translator')->trans('Access restricted'));
+            throw new AccessDeniedException($this->get('translator')->trans('opinion.error.no_contribute', array(), 'CapcoAppBundle'));
         }
 
         $opinionType = $opinion->getOpinionType();
@@ -64,7 +64,7 @@ class ReportingController extends Controller
                 $this->get('capco.notify_manager')->sendNotifyMessage($this->getUser(), $form->get('body')->getData() );
                 $em->persist($reporting);
                 $em->flush();
-                $this->get('session')->getFlashBag()->add('success', $this->get('translator')->trans('Your report has been saved'));
+                $this->get('session')->getFlashBag()->add('success', $this->get('translator')->trans('reporting.success'));
 
                 return $this->redirect(
                     $this->generateUrl(
@@ -76,6 +76,8 @@ class ReportingController extends Controller
                         ]
                     )
                 );
+            } else {
+                $this->get('session')->getFlashBag()->add('danger', $this->get('translator')->trans('reporting.error'));
             }
         }
 
@@ -100,17 +102,17 @@ class ReportingController extends Controller
     public function reportingSourceAction($consultationSlug, $opinionTypeSlug, $opinionSlug, $sourceSlug, Request $request)
     {
         if (false === $this->get('security.authorization_checker')->isGranted('ROLE_USER')) {
-            throw new AccessDeniedException($this->get('translator')->trans('Access restricted to authenticated users'));
+            throw new AccessDeniedException($this->get('translator')->trans('error.access_restricted', array(), 'CapcoAppBundle'));
         }
 
         $source = $this->getDoctrine()->getRepository('CapcoAppBundle:Source')->getOneBySlug($consultationSlug, $opinionTypeSlug, $opinionSlug, $sourceSlug);
 
         if($source == null){
-            throw $this->createNotFoundException($this->get('translator')->trans('Argument not found.'));
+            throw $this->createNotFoundException($this->get('translator')->trans('source.error.not_found', array(), 'CapcoAppBundle'));
         }
 
         if (false == $source->canContribute()) {
-            throw new AccessDeniedException($this->get('translator')->trans('Access restricted'));
+            throw new AccessDeniedException($this->get('translator')->trans('source.error.no_contribute', array(), 'CapcoAppBundle'));
         }
 
         $opinion = $source->getOpinion();
@@ -130,7 +132,7 @@ class ReportingController extends Controller
                 $this->get('capco.notify_manager')->sendNotifyMessage($this->getUser(), $form->get('body')->getData() );
                 $em->persist($reporting);
                 $em->flush();
-                $this->get('session')->getFlashBag()->add('success', $this->get('translator')->trans('Your report has been saved'));
+                $this->get('session')->getFlashBag()->add('success', $this->get('translator')->trans('reporting.success'));
 
                 return $this->redirect(
                     $this->generateUrl(
@@ -142,6 +144,8 @@ class ReportingController extends Controller
                         ]
                     )
                 );
+            } else {
+                $this->get('session')->getFlashBag()->add('danger', $this->get('translator')->trans('reporting.error'));
             }
         }
 
@@ -166,17 +170,17 @@ class ReportingController extends Controller
     public function reportingArgumentAction($consultationSlug, $opinionTypeSlug, $opinionSlug, $argumentId, Request $request)
     {
         if (false === $this->get('security.authorization_checker')->isGranted('ROLE_USER')) {
-            throw new AccessDeniedException($this->get('translator')->trans('Access restricted to authenticated users'));
+            throw new AccessDeniedException($this->get('translator')->trans('error.access_restricted', array(), 'CapcoAppBundle'));
         }
 
         $argument = $this->getDoctrine()->getRepository('CapcoAppBundle:Argument')->getOneById($consultationSlug, $opinionTypeSlug, $opinionSlug, $argumentId);
 
         if($argument == null){
-            throw $this->createNotFoundException($this->get('translator')->trans('Argument not found.'));
+            throw $this->createNotFoundException($this->get('translator')->trans('argument.error.not_found', array(), 'CapcoAppBundle'));
         }
 
         if (false == $argument->canContribute()) {
-            throw new AccessDeniedException($this->get('translator')->trans('Access restricted'));
+            throw new AccessDeniedException($this->get('translator')->trans('argument.error.no_contribute', array(), 'CapcoAppBundle'));
         }
 
         $opinion = $argument->getOpinion();
@@ -196,7 +200,7 @@ class ReportingController extends Controller
                 $this->get('capco.notify_manager')->sendNotifyMessage($this->getUser(), $form->get('body')->getData() );
                 $em->persist($reporting);
                 $em->flush();
-                $this->get('session')->getFlashBag()->add('success', $this->get('translator')->trans('Your report has been saved'));
+                $this->get('session')->getFlashBag()->add('success', $this->get('translator')->trans('reporting.success'));
 
                 return $this->redirect(
                     $this->generateUrl(
@@ -208,6 +212,8 @@ class ReportingController extends Controller
                         ]
                     )
                 );
+            } else {
+                $this->get('session')->getFlashBag()->add('danger', $this->get('translator')->trans('reporting.error'));
             }
         }
 
@@ -230,11 +236,11 @@ class ReportingController extends Controller
     public function reportingIdeaAction(Idea $idea, Request $request)
     {
         if (!$this->get('security.context')->isGranted('ROLE_USER')) {
-            throw new AccessDeniedException($this->get('translator')->trans('Access restricted to authenticated users'));
+            throw new AccessDeniedException($this->get('translator')->trans('error.access_restricted', array(), 'CapcoAppBundle'));
         }
 
         if (false == $idea->canContribute() ) {
-            throw new AccessDeniedException($this->get('translator')->trans('Forbidden'));
+            throw new AccessDeniedException($this->get('translator')->trans('idea.error.no_contribute', array(), 'CapcoAppBundle'));
         }
 
         $reporting = new Reporting();
@@ -250,8 +256,10 @@ class ReportingController extends Controller
                 $this->get('capco.notify_manager')->sendNotifyMessage($this->getUser(), $form->get('body')->getData() );
                 $em->persist($reporting);
                 $em->flush();
-                $this->get('session')->getFlashBag()->add('success', $this->get('translator')->trans('Your report has been saved'));
+                $this->get('session')->getFlashBag()->add('success', $this->get('translator')->trans('reporting.success'));
                 return $this->redirect($this->generateUrl('app_idea_show', array('slug' => $idea->getSlug())));
+            } else {
+                $this->get('session')->getFlashBag()->add('danger', $this->get('translator')->trans('reporting.error'));
             }
         }
 

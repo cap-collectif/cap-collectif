@@ -10,13 +10,13 @@
 
         {% if consultation.isClose %}
         <div class="alert alert-info alert-dismissible  block" role="alert">
-            <p><strong>Statut "Terminée" :</strong> La période de participation est maintenant terminée. Merci à tous d'avoir contribué.</p>
+            <p><strong>{{ 'consultation.show.alert.ended.title'|trans({}, 'CapcoAppBundle') }}</strong> {{ 'consultation.show.alert.ended.text'|trans({}, 'CapcoAppBundle') }}</p>
         </div>
         {% endif %}
 
         {% if consultation.isFuture %}
         <div class="alert alert-info alert-dismissible  block" role="alert">
-            <p><strong>Statut "À venir" :</strong> La période de participation débutera le <strong>{{ consultation.getOpenedAt| localizeddate('long', 'none', app.request.locale) }}</strong>.</p>
+            <p><strong>{{ 'consultation.show.alert.future.title'|trans({}, 'CapcoAppBundle') }}</strong> {{ 'consultation.show.alert.future.text'|trans({'%date%': '<strong>' ~ consultation.getOpenedAt| localizeddate('long', 'none', app.request.locale) ~ '</strong>'}, 'CapcoAppBundle') | raw }}</p>
         </div>
         {% endif %}
 
@@ -46,8 +46,8 @@
         App.module.pieChart();
         $('.more').readmore({
             maxHeight: 90,
-            moreLink: '<a href="#">Lire la suite</a>', //BazingaJsTranslationBundle
-            lessLink: '<a href="#">Fermer</a>'
+            moreLink: '<a href="#">{{ 'consultation.show.meta.intro.read_more'|trans({}, 'CapcoAppBundle') }}</a>', //BazingaJsTranslationBundle
+            lessLink: '<a href="#">{{ 'consultation.show.meta.Intro.read_less'|trans({}, 'CapcoAppBundle') }}</a>'
         });
     </script>
 {% endblock %}

@@ -38,11 +38,11 @@ class OpinionController extends Controller
     public function createOpinionAction(Consultation $consultation, OpinionType $opinionType, Request $request)
     {
         if (false === $this->get('security.authorization_checker')->isGranted('ROLE_USER')) {
-            throw new AccessDeniedException($this->get('translator')->trans('Access restricted to authenticated users'));
+            throw new AccessDeniedException($this->get('translator')->trans('error.access_restricted', array(), 'CapcoAppBundle'));
         }
 
        if (false == $consultation->canContribute()) {
-            throw new AccessDeniedException($this->get('translator')->trans('Access restricted'));
+            throw new AccessDeniedException($this->get('translator')->trans('consultation.error.no_contribute', array(), 'CapcoAppBundle'));
         }
 
         $opinion = new Opinion();
@@ -60,8 +60,10 @@ class OpinionController extends Controller
                 $em = $this->getDoctrine()->getManager();
                 $em->persist($opinion);
                 $em->flush();
-                $this->get('session')->getFlashBag()->add('success', $this->get('translator')->trans('Your proposition has been saved'));
+                $this->get('session')->getFlashBag()->add('success', $this->get('translator')->trans('opinion.create.success'));
                 return $this->redirect($this->generateUrl('app_consultation_show_opinion', ['consultationSlug' => $consultation->getSlug(), 'opinionTypeSlug' => $opinionType->getSlug(), 'opinionSlug' => $opinion->getSlug() ]));
+            } else {
+                $this->get('session')->getFlashBag()->add('danger', $this->get('translator')->trans('opinion.create.error'));
             }
         }
 
@@ -85,17 +87,17 @@ class OpinionController extends Controller
     public function deleteOpinionAction($consultationSlug, $opinionTypeSlug, $opinionSlug, Request $request)
     {
         if (false === $this->get('security.authorization_checker')->isGranted('ROLE_USER')) {
-            throw new AccessDeniedException($this->get('translator')->trans('Access restricted to authenticated users'));
+            throw new AccessDeniedException($this->get('translator')->trans('error.access_restricted', array(), 'CapcoAppBundle'));
         }
 
         $opinion = $this->getDoctrine()->getRepository('CapcoAppBundle:Opinion')->getOneBySlug($consultationSlug, $opinionTypeSlug, $opinionSlug);
 
         if($opinion == null){
-            throw $this->createNotFoundException($this->get('translator')->trans('Argument not found.'));
+            throw $this->createNotFoundException($this->get('translator')->trans('opinion.error.not_found', array(), 'CapcoAppBundle'));
         }
 
         if (false == $opinion->canContribute()) {
-            throw new AccessDeniedException($this->get('translator')->trans('Access restricted'));
+            throw new AccessDeniedException($this->get('translator')->trans('opinion.error.no_contribute', array(), 'CapcoAppBundle'));
         }
 
         $opinionType = $opinion->getOpinionType();
@@ -105,7 +107,7 @@ class OpinionController extends Controller
         $userPostOpinion = $opinion->getAuthor()->getId();
 
         if ($userCurrent !== $userPostOpinion) {
-            throw new AccessDeniedException($this->get('translator')->trans('You cannot delete this contribution'));
+            throw new AccessDeniedException($this->get('translator')->trans('opinion.error.not_author', array(), 'CapcoAppBundle'));
         }
 
         //Champ CSRF
@@ -119,8 +121,10 @@ class OpinionController extends Controller
                 $em->remove($opinion);
                 $em->flush();
 
-                $this->get('session')->getFlashBag()->add('info', $this->get('translator')->trans('The proposition has been deleted'));
+                $this->get('session')->getFlashBag()->add('info', $this->get('translator')->trans('opinion.delete.success'));
                 return $this->redirect($this->generateUrl('app_consultation_show', ['slug' => $consultation->getSlug() ]));
+            } else {
+                $this->get('session')->getFlashBag()->add('danger', $this->get('translator')->trans('opinion.delete.error'));
             }
         }
 
@@ -144,17 +148,17 @@ class OpinionController extends Controller
     public function updateOpinionAction($consultationSlug, $opinionTypeSlug, $opinionSlug, Request $request)
     {
         if (false === $this->get('security.authorization_checker')->isGranted('ROLE_USER')) {
-            throw new AccessDeniedException($this->get('translator')->trans('Access restricted to authenticated users'));
+            throw new AccessDeniedException($this->get('translator')->trans('error.access_restricted', array(), 'CapcoAppBundle'));
         }
 
         $opinion = $this->getDoctrine()->getRepository('CapcoAppBundle:Opinion')->getOneBySlug($consultationSlug, $opinionTypeSlug, $opinionSlug);
 
         if($opinion == null){
-            throw $this->createNotFoundException($this->get('translator')->trans('Argument not found.'));
+            throw $this->createNotFoundException($this->get('translator')->trans('opinion.error.not_found', array(), 'CapcoAppBundle'));
         }
 
         if (false == $opinion->canContribute()) {
-            throw new AccessDeniedException($this->get('translator')->trans('Access restricted'));
+            throw new AccessDeniedException($this->get('translator')->trans('opinion.error.no_contribute', array(), 'CapcoAppBundle'));
         }
 
         $opinionType = $opinion->getOpinionType();
@@ -164,7 +168,7 @@ class OpinionController extends Controller
         $userPostOpinion = $opinion->getAuthor()->getId();
 
         if ($userCurrent !== $userPostOpinion) {
-            throw new AccessDeniedException($this->get('translator')->trans('You cannot edit this opinion, as you are not its author'));
+            throw new AccessDeniedException($this->get('translator')->trans('opinion.error.not_author', array(), 'CapcoAppBundle'));
         }
 
         $form = $this->createForm(new OpinionForm(), $opinion);
@@ -178,8 +182,10 @@ class OpinionController extends Controller
                 $em->persist($opinion);
                 $em->flush();
 
-                $this->get('session')->getFlashBag()->add('success', $this->get('translator')->trans('The opinion has been edited'));
+                $this->get('session')->getFlashBag()->add('success', $this->get('translator')->trans('opinion.update.success'));
                 return $this->redirect($this->generateUrl('app_consultation_show_opinion', ['consultationSlug' => $consultation->getSlug(), 'opinionTypeSlug' => $opinionType->getSlug(), 'opinionSlug' => $opinion->getSlug() ]));
+            } else {
+                $this->get('session')->getFlashBag()->add('danger', $this->get('translator')->trans('opinion.update.error'));
             }
         }
 
@@ -202,11 +208,11 @@ class OpinionController extends Controller
     private function handleOpinionVoteForm(Opinion $opinion, OpinionVote $opinionVote, $alreadyVoted = false, Form $form, Request $request)
     {
         if (false === $this->get('security.authorization_checker')->isGranted('ROLE_USER')) {
-            throw new AccessDeniedException('Access restricted to authenticated users');
+            throw new AccessDeniedException($this->get('translator')->trans('error.access_restricted', array(), 'CapcoAppBundle'));
         }
 
         if (false == $opinion->canContribute()) {
-            throw new AccessDeniedException($this->get('translator')->trans('Access restricted'));
+            throw new AccessDeniedException($this->get('translator')->trans('opinion.error.no_contribute', array(), 'CapcoAppBundle'));
         }
 
         $form->handleRequest($request);
@@ -219,23 +225,23 @@ class OpinionController extends Controller
                 $opinionVote->setOpinion($opinion);
                 $em->persist($opinionVote);
                 $em->flush();
-                $this->get('session')->getFlashBag()->add('success', $this->get('translator')->trans('Your vote has been saved.'));
+                $this->get('session')->getFlashBag()->add('success', $this->get('translator')->trans('opinion.vote.add.success'));
             } else {
                 $previousVote = $em->getUnitOfWork()->getOriginalEntityData($opinionVote);
                 if($previousVote['value'] == $opinionVote->getValue()){
                     $em->remove($opinionVote);
                     $em->flush();
-                    $this->get('session')->getFlashBag()->add('info', $this->get('translator')->trans('Your vote has been removed.'));
+                    $this->get('session')->getFlashBag()->add('info', $this->get('translator')->trans('opinion.vote.delete.success'));
                 }
                 else {
                     $em->persist($opinionVote);
                     $em->flush();
-                    $this->get('session')->getFlashBag()->add('success', $this->get('translator')->trans('Your vote has been updated.'));
+                    $this->get('session')->getFlashBag()->add('success', $this->get('translator')->trans('opinion.vote.update.success'));
                 }
             }
 
         } else {
-            $this->get('session')->getFlashBag()->add('danger', $this->get('translator')->trans('Error. Your vote has not been saved.'));
+            $this->get('session')->getFlashBag()->add('danger', $this->get('translator')->trans('opinion.vote.error'));
         }
     }
 
@@ -255,12 +261,8 @@ class OpinionController extends Controller
     {
         $opinion = $this->getDoctrine()->getRepository('CapcoAppBundle:Opinion')->getOneBySlug($consultationSlug, $opinionTypeSlug, $opinionSlug);
 
-        if ($opinion == null) {
-            throw $this->createNotFoundException($this->get('translator')->trans('Opinion not found'));
-        }
-
-        if (false == $opinion->canDisplay()) {
-            throw $this->createNotFoundException($this->get('translator')->trans('Opinion not found.'));
+        if ($opinion == null || false == $opinion->canDisplay()) {
+            throw $this->createNotFoundException($this->get('translator')->trans('opinion.error.not_found', array(), 'CapcoAppBundle'));
         }
 
         $currentUrl = $this->generateUrl('app_consultation_show_opinion', ['consultationSlug' => $opinion->getConsultation()->getSlug(), 'opinionTypeSlug' => $opinion->getOpinionType()->getSlug(), 'opinionSlug' => $opinion->getSlug() ]);
@@ -396,11 +398,11 @@ class OpinionController extends Controller
     {
 
         if (false === $this->get('security.authorization_checker')->isGranted('ROLE_USER')) {
-            throw new AccessDeniedException($this->get('translator')->trans('Access restricted to authenticated users'));
+            throw new AccessDeniedException($this->get('translator')->trans('error.access_restricted', array(), 'CapcoAppBundle'));
         }
 
         if (false == $opinion->canContribute()) {
-            throw new AccessDeniedException($this->get('translator')->trans('Access restricted'));
+            throw new AccessDeniedException($this->get('translator')->trans('opinion.error.no_contribute', array(), 'CapcoAppBundle'));
         }
 
         $form->handleRequest($request);
@@ -410,9 +412,9 @@ class OpinionController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->persist($argument);
             $em->flush();
-            $this->get('session')->getFlashBag()->add('success', $this->get('translator')->trans('Your argument has been saved'));
+            $this->get('session')->getFlashBag()->add('success', $this->get('translator')->trans('argument.create.success'));
         } else {
-            $this->get('session')->getFlashBag()->add('danger', $this->get('translator')->trans('Your argument has not been saved.'));
+            $this->get('session')->getFlashBag()->add('danger', $this->get('translator')->trans('argument.create.error'));
         }
     }
 }

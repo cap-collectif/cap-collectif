@@ -52,8 +52,8 @@ class ConsultationController extends Controller
         $em = $this->getDoctrine()->getManager();
         $consultation = $em->getRepository('CapcoAppBundle:Consultation')->getOne($consultation->getSlug());
 
-        if (false == $consultation->canDisplay() ) {
-            throw $this->createNotFoundException();
+        if (null == $consultation || false == $consultation->canDisplay() ) {
+            throw $this->createNotFoundException($this->get('translator')->trans('consultation.error.not_found', array(), 'CapcoAppBundle'));
         }
 
         return [
@@ -107,7 +107,7 @@ class ConsultationController extends Controller
     public function showByTypeAction(Consultation $consultation, OpinionType $opinionType, $page)
     {
         if (false == $consultation->canDisplay() ) {
-            throw $this->createNotFoundException();
+            throw $this->createNotFoundException($this->get('translator')->trans('consultation.error.not_found', array(), 'CapcoAppBundle'));
         }
 
         $currentUrl = $this->generateUrl('app_consultation_show_opinions', ['consultationSlug' => $consultation->getSlug(), 'opinionTypeSlug' => $opinionType->getSlug() ]);
@@ -133,7 +133,7 @@ class ConsultationController extends Controller
     public function showTrashedAction(Consultation $consultation)
     {
         if (false == $consultation->canDisplay() ) {
-            throw $this->createNotFoundException();
+            throw $this->createNotFoundException($this->get('translator')->trans('consultation.error.not_found', array(), 'CapcoAppBundle'));
         }
 
         $opinions = $this->getDoctrine()->getRepository('CapcoAppBundle:Opinion')->getTrashedByConsultation($consultation);

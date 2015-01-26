@@ -71,17 +71,17 @@ class ArgumentController extends Controller
     public function voteOnArgumentAction($consultationSlug, $opinionTypeSlug, $opinionSlug, $argumentId, Request $request)
     {
         if (false === $this->get('security.authorization_checker')->isGranted('ROLE_USER')) {
-            throw new AccessDeniedException($this->get('translator')->trans('Access restricted to authenticated users'));
+            throw new AccessDeniedException($this->get('translator')->trans('error.access_restricted', array(), 'CapcoAppBundle'));
         }
 
         $argument = $this->getDoctrine()->getRepository('CapcoAppBundle:Argument')->getOneById($consultationSlug, $opinionTypeSlug, $opinionSlug, $argumentId);
 
         if($argument == null){
-            throw $this->createNotFoundException($this->get('translator')->trans('Argument not found.'));
+            throw $this->createNotFoundException($this->get('translator')->trans('argument.error.not_found', array(), 'CapcoAppBundle'));
         }
 
         if (false == $argument->canContribute()) {
-            throw new AccessDeniedException($this->get('translator')->trans('Access restricted'));
+            throw new AccessDeniedException($this->get('translator')->trans('argument.error.no_contribute', array(), 'CapcoAppBundle'));
         }
 
         $opinion = $argument->getOpinion();
@@ -113,17 +113,17 @@ class ArgumentController extends Controller
                     $em->persist($argumentVote);
                     $em->flush();
 
-                    $this->get('session')->getFlashBag()->add('success', $this->get('translator')->trans('Your vote has been saved.'));
+                    $this->get('session')->getFlashBag()->add('success', $this->get('translator')->trans('argument.vote.add_success'));
                 }
                 else {
                     $em->remove($argumentVote);
                     $em->flush();
 
-                    $this->get('session')->getFlashBag()->add('info', $this->get('translator')->trans('Your vote has been removed.'));
+                    $this->get('session')->getFlashBag()->add('info', $this->get('translator')->trans('argument.vote.remove_success'));
                 }
             }
             else {
-                $this->get('session')->getFlashBag()->add('danger', $this->get('translator')->trans('Authentication error.'));
+                $this->get('session')->getFlashBag()->add('danger', $this->get('translator')->trans('argument.vote.csrf_error'));
             }
         }
 
@@ -144,17 +144,17 @@ class ArgumentController extends Controller
     public function updateArgumentAction($consultationSlug, $opinionTypeSlug, $opinionSlug, $argumentId, Request $request)
     {
         if (false === $this->get('security.authorization_checker')->isGranted('ROLE_USER')) {
-            throw new AccessDeniedException($this->get('translator')->trans('Access restricted to authenticated users'));
+            throw new AccessDeniedException($this->get('translator')->trans('error.access_restricted', array(), 'CapcoAppBundle'));
         }
 
         $argument = $this->getDoctrine()->getRepository('CapcoAppBundle:Argument')->getOneById($consultationSlug, $opinionTypeSlug, $opinionSlug, $argumentId);
 
         if($argument == null){
-            throw $this->createNotFoundException($this->get('translator')->trans('Argument not found.'));
+            throw $this->createNotFoundException($this->get('translator')->trans('argument.error.not_found', array(), 'CapcoAppBundle'));
         }
 
         if (false == $argument->canContribute()) {
-            throw new AccessDeniedException($this->get('translator')->trans('Access restricted'));
+            throw new AccessDeniedException($this->get('translator')->trans('argument.error.no_contribute', array(), 'CapcoAppBundle'));
         }
 
         $opinion = $argument->getOpinion();
@@ -165,7 +165,7 @@ class ArgumentController extends Controller
         $userPostArgument = $argument->getAuthor()->getId();
 
         if ($userCurrent !== $userPostArgument) {
-            throw new AccessDeniedException($this->get('translator')->trans('You cannot edit this argument, as you are not its author.'));
+            throw new AccessDeniedException($this->get('translator')->trans('argument.error.not_author', array(), 'CapcoAppBundle'));
         }
 
         $form = $this->createForm(new ArgumentForm(), $argument);
@@ -179,8 +179,10 @@ class ArgumentController extends Controller
                 $em->persist($argument);
                 $em->flush();
 
-                $this->get('session')->getFlashBag()->add('success', $this->get('translator')->trans('The argument has been edited'));
+                $this->get('session')->getFlashBag()->add('success', $this->get('translator')->trans('argument.update.success'));
                 return $this->redirect($this->generateUrl('app_consultation_show_opinion', ['consultationSlug' => $consultation->getSlug(), 'opinionTypeSlug' => $opinionType->getSlug(), 'opinionSlug' => $opinion->getSlug() ]));
+            } else {
+                $this->get('session')->getFlashBag()->add('danger', $this->get('translator')->trans('argument.update.error'));
             }
         }
 
@@ -206,17 +208,17 @@ class ArgumentController extends Controller
     public function deleteArgumentAction($consultationSlug, $opinionTypeSlug, $opinionSlug, $argumentId, Request $request)
     {
         if (false === $this->get('security.authorization_checker')->isGranted('ROLE_USER')) {
-            throw new AccessDeniedException($this->get('translator')->trans('Access restricted to authenticated users'));
+            throw new AccessDeniedException($this->get('translator')->trans('error.access_restricted', array(), 'CapcoAppBundle'));
         }
 
         $argument = $this->getDoctrine()->getRepository('CapcoAppBundle:Argument')->getOneById($consultationSlug, $opinionTypeSlug, $opinionSlug, $argumentId);
 
         if($argument == null){
-            throw $this->createNotFoundException($this->get('translator')->trans('Argument not found.'));
+            throw $this->createNotFoundException($this->get('translator')->trans('argument.error.not_found', array(), 'CapcoAppBundle'));
         }
 
         if (false == $argument->canContribute()) {
-            throw new AccessDeniedException($this->get('translator')->trans('Access restricted'));
+            throw new AccessDeniedException($this->get('translator')->trans('argument.error.no_contribute', array(), 'CapcoAppBundle'));
         }
 
         $opinion = $argument->getOpinion();
@@ -227,7 +229,7 @@ class ArgumentController extends Controller
         $userPostArgument = $argument->getAuthor()->getId();
 
         if ($userCurrent !== $userPostArgument) {
-            throw new AccessDeniedException($this->get('translator')->trans('You cannot delete this argument.'));
+            throw new AccessDeniedException($this->get('translator')->trans('argument.error.not_author', array(), 'CapcoAppBundle'));
         }
 
         //Champ CSRF
@@ -241,8 +243,10 @@ class ArgumentController extends Controller
                 $em->remove($argument);
                 $em->flush();
 
-                $this->get('session')->getFlashBag()->add('info', $this->get('translator')->trans('The argument has been deleted.'));
+                $this->get('session')->getFlashBag()->add('info', $this->get('translator')->trans('argument.delete.success'));
                 return $this->redirect($this->generateUrl('app_consultation_show_opinion', ['consultationSlug' => $consultation->getSlug(), 'opinionTypeSlug' => $opinionType->getSlug(), 'opinionSlug' => $opinion->getSlug() ]));
+            } else {
+                $this->get('session')->getFlashBag()->add('danger', $this->get('translator')->trans('argument.delete.error'));
             }
         }
 

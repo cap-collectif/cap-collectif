@@ -16,7 +16,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </span>
-                <span class="navbar__toggle-label">Menu</span>
+                <span class="navbar__toggle-label">{{ 'global.menu.title'|trans({}, 'CapcoAppBundle') }}</span>
             </button>
         </div>
         {{ render_esi(controller('CapcoAppBundle:Default:navigation', { pathInfo: app.request.pathInfo })) }}

@@ -15,7 +15,11 @@ class ArgumentType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('body', 'textarea', array('required' => true))
+            ->add('body', 'textarea', array(
+                'required' => true,
+                'label' => 'argument.form.body',
+                'translation_domain' => 'CapcoAppBundle',
+            ))
         ;
     }
     

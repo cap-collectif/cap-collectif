@@ -30,8 +30,8 @@
         App.module.pieChart();
         $('.more').readmore({
             maxHeight: 90,
-            moreLink: '<a href="#">Lire la suite</a>', //BazingaJsTranslationBundle
-            lessLink: '<a href="#">Fermer</a>'
+            moreLink: '<a href="#">{{ 'consultation.show.meta.intro.read_more'|trans({}, 'CapcoAppBundle') }}</a>', //BazingaJsTranslationBundle
+            lessLink: '<a href="#">{{ 'consultation.show.meta.Intro.read_less'|trans({}, 'CapcoAppBundle') }}</a>'
         });
     </script>
 {% endblock %}

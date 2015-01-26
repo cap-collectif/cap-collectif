@@ -28,7 +28,7 @@ class IdeaController extends Controller
     public function createAction(Request $request)
     {
         if (!$this->get('security.context')->isGranted('ROLE_USER')) {
-            throw new AccessDeniedException($this->get('translator')->trans('Access restricted to authenticated users'));
+            throw new AccessDeniedException($this->get('translator')->trans('error.access_restricted', array(), 'CapcoAppBundle'));
         }
 
         $idea = new Idea;
@@ -47,8 +47,10 @@ class IdeaController extends Controller
                 $em = $this->getDoctrine()->getManager();
                 $em->persist($idea);
                 $em->flush();
-                $this->get('session')->getFlashBag()->add('success', $this->get('translator')->trans('Your idea has been saved'));
+                $this->get('session')->getFlashBag()->add('success', $this->get('translator')->trans('idea.create.success'));
                 return $this->redirect($this->generateUrl('app_idea_show', array('slug' => $idea->getSlug())));
+            } else {
+                $this->get('session')->getFlashBag()->add('danger', $this->get('translator')->trans('idea.create.error'));
             }
 
         }
@@ -66,18 +68,18 @@ class IdeaController extends Controller
     public function deleteAction(Idea $idea, Request $request)
     {
         if (false == $idea->canContribute() ) {
-            throw new AccessDeniedException($this->get('translator')->trans('Forbidden'));
+            throw new AccessDeniedException($this->get('translator')->trans('idea.error.no_contribute', array(), 'CapcoAppBundle'));
         }
 
         if (!$this->get('security.context')->isGranted('ROLE_USER')) {
-            throw new AccessDeniedException($this->get('translator')->trans('Access restricted to authenticated users'));
+            throw new AccessDeniedException($this->get('translator')->trans('error.access_restricted', array(), 'CapcoAppBundle'));
         }
 
         $userCurrent = $this->getUser()->getId();
         $userPostIdea = $idea->getAuthor()->getId();
 
         if ($userCurrent !== $userPostIdea) {
-            throw new AccessDeniedException($this->get('translator')->trans('You cannot delete this contribution'));
+            throw new AccessDeniedException($this->get('translator')->trans('idea.error.not_author', array(), 'CapcoAppBundle'));
         }
 
         //Champ CSRF
@@ -88,13 +90,14 @@ class IdeaController extends Controller
 
             if ($form->isValid()) {
 
-                //vérifie donc que le CSRF
                 $em = $this->getDoctrine()->getManager();
                 $em->remove($idea);
                 $em->flush();
-                $this->get('session')->getFlashBag()->add('info', $this->get('translator')->trans('The idea has been deleted'));
+                $this->get('session')->getFlashBag()->add('info', $this->get('translator')->trans('idea.delete.success'));
 
                 return $this->redirect($this->generateUrl('app_idea', array()));
+            } else {
+                $this->get('session')->getFlashBag()->add('danger', $this->get('translator')->trans('idea.delete.error'));
             }
         }
 
@@ -166,18 +169,18 @@ class IdeaController extends Controller
     public function updateAction(Idea $idea,  Request $request)
     {
         if (!$this->get('security.context')->isGranted('ROLE_USER')) {
-            throw new AccessDeniedException($this->get('translator')->trans('Access restricted to authenticated users'));
+            throw new AccessDeniedException($this->get('translator')->trans('error.access_restricted', array(), 'CapcoAppBundle'));
         }
 
         if (false == $idea->canContribute() ) {
-            throw new AccessDeniedException($this->get('translator')->trans('Forbidden'));
+            throw new AccessDeniedException($this->get('translator')->trans('idea.error.no_contribute', array(), 'CapcoAppBundle'));
         }
 
         $userCurrent = $this->getUser()->getId();
         $userPostIdea = $idea->getAuthor()->getId();
 
         if ($userCurrent !== $userPostIdea) {
-            throw new AccessDeniedException($this->get('translator')->trans('You cannot edit this idea, as you are not its author'));
+            throw new AccessDeniedException($this->get('translator')->trans('idea.error.not_author', array(), 'CapcoAppBundle'));
         }
 
         $form = $this->createForm(new IdeaUpdateType(), $idea);
@@ -190,9 +193,11 @@ class IdeaController extends Controller
                 $em->persist($idea);
                 $em->flush();
 
-                $this->get('session')->getFlashBag()->add('success', $this->get('translator')->trans('The idea has been edited'));
+                $this->get('session')->getFlashBag()->add('success', $this->get('translator')->trans('idea.update.success'));
 
                 return $this->redirect($this->generateUrl('app_idea_show', array('slug' => $idea->getSlug())));
+            } else {
+                $this->get('session')->getFlashBag()->add('danger', $this->get('translator')->trans('idea.update.error'));
             }
         }
 
@@ -279,13 +284,14 @@ class IdeaController extends Controller
      */
     public function showAction(Request $request, Idea $idea)
     {
+        $translator = $this->get('translator');
+
         if (false == $idea->canDisplay() ){
-            throw $this->createNotFoundException();
+            throw $this->createNotFoundException($translator->trans('idea.error.not_found', array(), 'CapcoAppBundle'));
         }
 
         $em = $this->getDoctrine()->getManager();
         $currentUrl = $this->generateUrl('app_idea_show', [ 'slug' => $idea->getSlug() ]);
-        $translator = $this->get('translator');
         $idea = $em->getRepository('CapcoAppBundle:Idea')->getOne($idea);
         $reportingIdea = $this->getDoctrine()->getRepository('CapcoAppBundle:Reporting')->findBy(array(
             'Reporter' => $this->getUser(),
@@ -308,11 +314,11 @@ class IdeaController extends Controller
         if ($request->getMethod() == 'POST') {
 
             if (!$this->get('security.context')->isGranted('ROLE_USER')) {
-                throw new AccessDeniedException($translator->trans('Please log in or create an account to vote for this idea!'));
+                throw new AccessDeniedException($translator->trans('error.access_restricted', array(), 'CapcoAppBundle'));
             }
 
             if (false == $idea->canContribute() ) {
-                throw new AccessDeniedException($this->get('translator')->trans('Forbidden'));
+                throw new AccessDeniedException($translator->trans('idea.error.no_contribute', array(), 'CapcoAppBundle'));
             }
 
             $form->handleRequest($request);
@@ -325,14 +331,14 @@ class IdeaController extends Controller
                     $em->persist($vote);
                     $em->flush();
 
-                    $this->get('session')->getFlashBag()->add('success', $translator->trans('Your vote has been saved.'));
+                    $this->get('session')->getFlashBag()->add('success', $translator->trans('idea.vote.add.success'));
                 } else {
                     $vote = $em->getRepository('CapcoAppBundle:IdeaVote')->hasVote($this->getUser(), $idea);
                     $em = $this->getDoctrine()->getManager();
                     $em->remove($vote);
                     $em->flush();
 
-                    $this->get('session')->getFlashBag()->add('success', $translator->trans('Your vote has been removed'));
+                    $this->get('session')->getFlashBag()->add('info', $translator->trans('idea.vote.delete.success'));
                 }
 
                 // redirect (avoids reload alerts)

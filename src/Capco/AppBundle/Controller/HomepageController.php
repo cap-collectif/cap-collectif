@@ -32,17 +32,17 @@ class HomepageController extends Controller
             if ($form->isValid()) {
                 $alreadyExists = $this->getDoctrine()->getRepository('CapcoAppBundle:NewsletterSubscription')->findOneByEmail($subscription->getEmail());
                 if(null != $alreadyExists){
-                    $this->get('session')->getFlashBag()->add('danger', $this->get('translator')->trans('Cette adresse email est déjà inscrite à notre newsletter.'));
+                    $this->get('session')->getFlashBag()->add('info', $this->get('translator')->trans('homepage.newsletter.already_subscribed'));
                 }
                 else{
                     $em = $this->getDoctrine()->getManager();
                     $em->persist($subscription);
                     $em->flush();
-                    $this->get('session')->getFlashBag()->add('success', $this->get('translator')->trans('Merci ! Votre inscription a bien été prise en compte.'));
+                    $this->get('session')->getFlashBag()->add('success', $this->get('translator')->trans('homepage.newsletter.success'));
                 }
             }
             else{
-                $this->get('session')->getFlashBag()->add('danger', $this->get('translator')->trans('L\'adresse email est invalide.'));
+                $this->get('session')->getFlashBag()->add('danger', $this->get('translator')->trans('homepage.newsletter.invalid'));
             }
             return $this->redirect($this->generateUrl('app_homepage'));
 
@@ -70,7 +70,7 @@ class HomepageController extends Controller
      * @Cache(expires="+1 minutes", maxage="60", smaxage="60", public="true")
      * @Template()
      */
-    public function lastTopicsAction($max = 4, $offset = 0)
+    public function lastThemesAction($max = 4, $offset = 0)
     {
         $topics = $this->getDoctrine()->getRepository('CapcoAppBundle:Theme')->getLast($max, $offset);
 

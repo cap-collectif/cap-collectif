@@ -4,65 +4,80 @@ Capco\AppBundle\Entity\SiteParameter:
         keyname: homepage.jumbotron.title
         title: Titre/objet du site
         value: Bienvenue
+        position: 100
     SiteParameter2:
         keyname: homepage.jumbotron.body
         title: Accroche du site
         value: ''
+        position: 110
     SiteParameter3:
         keyname: homepage.jumbotron.button
         title: Libellé du bouton principal
         value: Comment ça marche ?
+        position: 120
     SiteParameter4:
         keyname: homepage.jumbotron.button_link
         title: Lien du bouton principal
         value: http://www.google.fr
+        position: 130
     SiteParameter5:
         keyname: homepage.jumbotron2.title
         title: Titre de l'introduction
         value: Introduction
+        position: 140
     SiteParameter6:
         keyname: homepage.jumbotron2.body
         title: Texte de l'introduction
         value: Introduisez ici votre démarche et vos objectifs.
+        position: 150
 
     SiteParameter7:
         keyname: footer.text.title
         title: Titre du pied de page
         value: À propos
+        position: 200
     SiteParameter8:
         keyname: footer.text.body
         title: Texte du pied de page
         value: Présentez-vous ici en quelques lignes.
+        position: 210
 
     SiteParameter9:
         keyname: consultations.jumbotron.title
         title: Titre de la page "Liste des consultations"
         value: Consultations
+        position: 300
     SiteParameter10:
         keyname: consultations.jumbotron.body
         title: Accroche de la page "Liste des consultations"
         value: ''
+        position: 310
     SiteParameter11:
         keyname: consultations.content.body
         title: Description de la page "Liste des consultations"
         value: ''
+        position: 320
 
     SiteParameter12:
         keyname: ideas.jumbotron.title
         title: Titre de la page "Liste des idées"
         value: Idées
+        position: 400
     SiteParameter13:
         keyname: ideas.jumbotron.body
         title: Accroche de la page "Liste des idées"
         value: ''
+        position: 410
     SiteParameter14:
         keyname: ideas.content.body
         title: Description de la page "Liste des idées"
         value: ''
+        position: 420
     SiteParameter15:
         keyname: ideas.trashed.jumbotron.title
         title: Titre de la page "Corbeille des idées"
         value: Corbeille des idées
+        position: 430
     SiteParameter16:
         keyname: ideas.trashed.content.body
         title: Description de la page "Corbeille des idées"
@@ -70,64 +85,85 @@ Capco\AppBundle\Entity\SiteParameter:
                 Les messages se trouvant dans la corbeille sont des contenus signalés abusifs par les utilisateurs ou l'administrateur du site.
                 Les contenus signalés sont examinés afin de déterminer s'ils enfreignent la charte.
                 En cas de non-respect de la charte, les comptes concernés sont pénalisés et des infractions graves ou répétées peuvent entraîner leur fermeture.
+        position: 440
 
     SiteParameter17:
         keyname: themes.jumbotron.title
         title: Titre de la page "Liste des thèmes"
         value: Thèmes
+        position: 500
     SiteParameter18:
         keyname: themes.jumbotron.body
         title: Accroche de la page "Liste des thèmes"
         value: ''
+        position: 510
     SiteParameter19:
         keyname: themes.content.body
         title: Description de la page "Liste des thèmes"
         value: ''
+        position: 520
 
     SiteParameter20:
         keyname: contact.jumbotron.body
         title: Accroche de la page contact
         value: ''
+        position: 600
     SiteParameter21:
         keyname: contact.content.body
         title: Texte de la page contact
         value: ''
+        position: 610
     SiteParameter22:
         keyname: contact.content.address
         title: Adresse postale
         value: ''
+        position: 620
     SiteParameter23:
         keyname: contact.content.phone_number
         title: Numéro de téléphone
         value: ''
+        position: 630
 
     SiteParameter24:
         keyname: consultations.pagination
         title: Nombre d'éléments pour la pagination des consultations
         value: 16
+        position: 700
     SiteParameter25:
         keyname: ideas.pagination
         title: Nombre d'éléments pour la pagination des idées
         value: 16
+        position: 710
     SiteParameter26:
         keyname: themes.pagination
         title: Nombre d'éléments pour la pagination des thèmes
         value: 0
+        position: 720
 
     SiteParameter27:
         keyname: signin.cgu.name
         title: Nom du document à accepter lors de l'inscription (exemples : charte, conditions d'utilisation, etc.)
         value: la charte
+        position: 800
     SiteParameter28:
         keyname: signin.cgu.link
         title: Lien de la charte ou des CGU sur la page d'inscription
         value: /pages/charte
+        position: 810
 
     SiteParameter29:
         keyname: admin.mail.notifications
         title: Adresse e-mail de réception des notifications (signalements)
         value: brunet.laurent60@yahoo.fr
+        position: 900
     SiteParameter30:
         keyname: admin.mail.contact
         title: Adresse email de contact
         value: brunet.laurent60@yahoo.fr
+        position: 910
+
+    SiteParameter31:
+        keyname: global.site.fullname
+        title: Nom complet du site
+        value: Cap-Collectif
+        position: 1

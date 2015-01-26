@@ -18,13 +18,15 @@ class ConsultationSearchType extends AbstractType
     {
         $builder
             ->add('term', 'search', array(
-                'required' => false
+                'required' => false,
+                'label' => 'consultation.searchform.term',
+                'translation_domain' => 'CapcoAppBundle',
             ))
             ->add('sort', 'choice', array(
                 'required' => false,
                 'choices' => Consultation::$sortOrderLabels,
                 'translation_domain' => 'CapcoAppBundle',
-                'label' => 'idea.searchform.sort',
+                'label' => 'consultation.searchform.sort',
                 'empty_value' => false,
                 'attr' => array('onchange' => 'this.form.submit()')
             ))
@@ -32,13 +34,14 @@ class ConsultationSearchType extends AbstractType
                 'required' => false,
                 'class' => 'CapcoAppBundle:Theme',
                 'property' => 'title',
+                'label' => 'consultation.searchform.theme',
                 'translation_domain' => 'CapcoAppBundle',
                 'query_builder' => function(ThemeRepository $tr) {
                     return $tr->createQueryBuilder('t')
                         ->where('t.isEnabled = :enabled')
                         ->setParameter('enabled', true);
                 },
-                'empty_value' => 'idea.searchform.all_themes',
+                'empty_value' => 'consultation.searchform.all_themes',
                 'attr' => array('onchange' => 'this.form.submit()')
             ))
         ;

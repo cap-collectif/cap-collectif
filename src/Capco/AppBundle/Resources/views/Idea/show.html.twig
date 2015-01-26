@@ -14,7 +14,7 @@
                     </a>
                 {% endif %}
                 <div class="media-body">
-                    <p class="media--aligned  excerpt"><a href="{{ path('capco_user_profile_show_all', {'username': idea.Author}) }}">{{ idea.Author.username }}</a> {% if idea.theme.canDisplay %}dans <a href="{{ path('app_theme_show', {'slug': idea.Theme.slug}) }}">{{ idea.Theme.title }}</a>{% endif %} le {{ idea.createdAt | localizeddate('long', 'none') }} {% if idea.isTrashed %}<span class="label label-default">{{ 'idea.show.trashed.label'|trans({}, 'CapcoAppBundle') }}</span>{% endif %}</p>
+                    <p class="media--aligned  excerpt"><a href="{{ path('capco_user_profile_show_all', {'username': idea.Author}) }}">{{ idea.Author.username }}</a> {% if idea.theme.canDisplay %}{{ 'idea.show.in_theme'|trans({}, 'CapcoAppBundle') }} <a href="{{ path('app_theme_show', {'slug': idea.Theme.slug}) }}">{{ idea.Theme.title }}</a>{% endif %} {{ 'idea.show.on_date'|trans({}, 'CapcoAppBundle') }} {{ idea.createdAt | localizeddate('long', 'none') }} {% if idea.isTrashed %}<span class="label label-default">{{ 'idea.show.trashed.label'|trans({}, 'CapcoAppBundle') }}</span>{% endif %}</p>
                 </div>
             </div>
         </div>
@@ -27,19 +27,19 @@
         </div>
 
         {% if idea.isTrashed %}
-            <button disabled="disabled" class="btn btn-dark-gray"><i class="cap cap-hand-like-2-1"></i> {{ 'idea.show.vote'|trans({}, 'CapcoAppBundle') }}</button>
+            <button disabled="disabled" class="btn btn-dark-gray"><i class="cap cap-hand-like-2-1"></i> {{ 'idea.vote.submit'|trans({}, 'CapcoAppBundle') }}</button>
             <span class="nb-bordered">{{ idea.voteCount }}</span>
         {% else %}
             {% if userVoteCount == 0 %}
                 {{ form_start(form, {'attr':{"class":"inline"} } ) }}
                     {{ form_errors(form) }}
-                    <button class="btn btn-success"><i class="cap cap-hand-like-2-1"></i> {{ 'idea.show.vote'|trans({}, 'CapcoAppBundle') }}</button>
+                    <button class="btn btn-success"><i class="cap cap-hand-like-2-1"></i> {{ 'idea.vote.submit'|trans({}, 'CapcoAppBundle') }}</button>
                     <span class="nb-bordered">{{ idea.voteCount }}</span>
                 {{ form_end(form) }}
             {% else %}
                 {{ form_start(form, {'attr':{"class":"inline"} } ) }}
                 {{ form_errors(form) }}
-                <button class="btn btn-danger">{{ 'idea.show.cancel'|trans({}, 'CapcoAppBundle') }}</button>
+                <button class="btn btn-danger">{{ 'idea.vote.delete'|trans({}, 'CapcoAppBundle') }}</button>
                 <span class="nb-bordered">{{ idea.voteCount }}</span>
                 {{ form_end(form) }}
 
@@ -50,9 +50,9 @@
             <div class="pull-right no-float-mobile">
 
                 {% if(userReportingIdea == false) %}
-                    <a href="{{ path('app_report_idea' ,{'idea_id': idea.id } ) }}" class="btn btn-dark-gray  btn--outline"><i class="cap cap-flag-1"></i> {{ 'idea.show.report'|trans({}, 'CapcoAppBundle') }}</a>
+                    <a href="{{ path('app_report_idea' ,{'idea_id': idea.id } ) }}" class="btn btn-dark-gray  btn--outline"><i class="cap cap-flag-1"></i> {{ 'idea.report.submit'|trans({}, 'CapcoAppBundle') }}</a>
                 {% else %}
-                    <button disabled="disabled" class="btn btn-dark-gray"><i class="cap cap-flag-1"></i> source signalé</button>
+                    <button disabled="disabled" class="btn btn-dark-gray"><i class="cap cap-flag-1"></i> {{ 'idea.report.reported'|trans({}, 'CapcoAppBundle') }}</button>
                 {% endif %}
 
                 {% if app.user.id is defined and app.user.id == idea.Author.id %}
@@ -66,13 +66,15 @@
         {{ render_esi(controller('CapcoAppBundle:Idea:lastIdeas', {'max': 4, 'offset': 0})) }}
     {% endif %}
 
-    {% if idea.isTrashed == true and idea.trashedReason is not null %}
+    {% if idea.isTrashed == true %}
         <div class="container">
-            <div class="row">
-                <h2>Motif de la modération</h2>
-                <p class="excerpt">le {{ idea.trashedAt | localizeddate('long', 'none') }}</p>
+                <h2>{{ 'idea.show.trashed.reason'|trans({}, 'CapcoAppBundle') }}</h2>
+            {% if  idea.trashedReason is not null %}
                 <p>{{ idea.trashedReason }}</p>
-            </div>
+            {% else %}
+                <p>{{ 'idea.show.trashed.no_reason'|trans({}, 'CapcoAppBundle') }}</p>
+            {% endif %}
+            <p class="excerpt">{{ 'idea.show.trashed.date'|trans({'%date%': idea.trashedAt | localizeddate('long', 'none') }, 'CapcoAppBundle') }}</p>
         </div>
     {% endif %}
 

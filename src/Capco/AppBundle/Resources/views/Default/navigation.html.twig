@@ -39,6 +39,6 @@
             </li>
         </ul>
     {% else %}
-        <p><a href="{{ path('fos_user_security_login') }}" class="btn  btn-custom-2  btn-brand  navbar-btn  navbar-right">Connexion</a></p>
+        <p><a href="{{ path('fos_user_security_login') }}" class="btn  btn-custom-2  btn-brand  navbar-btn  navbar-right">{{ 'layout.login'|trans({}, 'FOSUserBundle') }}</a></p>
     {% endif %}
 </div>

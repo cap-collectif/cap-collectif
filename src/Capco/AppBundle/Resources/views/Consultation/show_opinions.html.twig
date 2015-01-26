@@ -9,7 +9,7 @@
                     {% if block.isEnabled == true and consultation.canContribute %}
                         <a href="{{ path('app_consultation_new_opinion' ,{'consultationSlug': consultation.slug, 'opinionTypeSlug': block.slug} ) }}" class="btn  btn-default">
                             <i class="cap cap-add-1"></i>
-                            <span class="hidden-xs  hidden-sm"> Proposer</span>
+                            <span class="hidden-xs  hidden-sm"> {{ 'opinion.create.button'|trans({}, 'CapcoAppBundle') }}</span>
                         </a>
                     {% endif %}
                 </div>

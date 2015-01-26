@@ -43,6 +43,7 @@ class StepController extends Controller
             'consultation' => $consultation,
             'steps' => $steps,
             'currentStep' => $currentStep,
+            'stepStatus' => Step::$stepStatus,
         ];
     }
 

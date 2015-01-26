@@ -33,17 +33,17 @@ class SourceController extends Controller
     public function createSourceAction($consultationSlug, $opinionTypeSlug, $opinionSlug, Request $request)
     {
         if (false === $this->get('security.authorization_checker')->isGranted('ROLE_USER')) {
-            throw new AccessDeniedException($this->get('translator')->trans('Access restricted to authenticated users'));
+            throw new AccessDeniedException($this->get('translator')->trans('error.access_restricted', array(), 'CapcoAppBundle'));
         }
 
         $opinion = $this->getDoctrine()->getRepository('CapcoAppBundle:Opinion')->getOneBySlug($consultationSlug, $opinionTypeSlug, $opinionSlug);
 
         if($opinion == null){
-            throw $this->createNotFoundException($this->get('translator')->trans('Argument not found.'));
+            throw $this->createNotFoundException($this->get('translator')->trans('opinion.error.not_found', array(), 'CapcoAppBundle'));
         }
 
         if (false == $opinion->canContribute()) {
-            throw new AccessDeniedException($this->get('translator')->trans('Access restricted'));
+            throw new AccessDeniedException($this->get('translator')->trans('opinion.error.no_contribute', array(), 'CapcoAppBundle'));
         }
 
         $opinionType = $opinion->getOpinionType();
@@ -62,8 +62,10 @@ class SourceController extends Controller
                 $em = $this->getDoctrine()->getManager();
                 $em->persist($source);
                 $em->flush();
-                $this->get('session')->getFlashBag()->add('success', $this->get('translator')->trans('Your source has been saved'));
+                $this->get('session')->getFlashBag()->add('success', $this->get('translator')->trans('source.create.success'));
                 return $this->redirect($this->generateUrl('app_consultation_show_opinion', ['consultationSlug' => $consultation->getSlug(), 'opinionTypeSlug' => $opinionType->getSlug(), 'opinionSlug' => $opinion->getSlug() ]) . '#source' . $source->getId());
+            } else {
+                $this->get('session')->getFlashBag()->add('danger', $this->get('translator')->trans('source.create.error'));
             }
         }
 
@@ -89,17 +91,17 @@ class SourceController extends Controller
     public function deleteSourceAction($consultationSlug, $opinionTypeSlug, $opinionSlug, $sourceSlug, Request $request)
     {
         if (false === $this->get('security.authorization_checker')->isGranted('ROLE_USER')) {
-            throw new AccessDeniedException($this->get('translator')->trans('Access restricted to authenticated users'));
+            throw new AccessDeniedException($this->get('translator')->trans('error.access_restricted', array(), 'CapcoAppBundle'));
         }
 
         $source = $this->getDoctrine()->getRepository('CapcoAppBundle:Source')->getOneBySlug($consultationSlug, $opinionTypeSlug, $opinionSlug, $sourceSlug);
 
-        if($source == null){
-            throw $this->createNotFoundException($this->get('translator')->trans('Argument not found.'));
+        if (null == $source) {
+            throw $this->createNotFoundException($this->get('translator')->trans('source.error.not_found', array(), 'CapcoAppBundle'));
         }
 
         if (false == $source->canContribute()) {
-            throw new AccessDeniedException($this->get('translator')->trans('Access restricted'));
+            throw new AccessDeniedException($this->get('translator')->trans('source.error.no_contribute', array(), 'CapcoAppBundle'));
         }
 
         $opinion = $source->getOpinion();
@@ -110,7 +112,7 @@ class SourceController extends Controller
         $userPostSource = $source->getAuthor()->getId();
 
         if ($userCurrent !== $userPostSource) {
-            throw new AccessDeniedException($this->get('translator')->trans('You cannot delete this source'));
+            throw new AccessDeniedException($this->get('translator')->trans('source.error.not_author', array(), 'CapcoAppBundle'));
         }
 
         //Champ CSRF
@@ -124,8 +126,10 @@ class SourceController extends Controller
                 $em->remove($source);
                 $em->flush();
 
-                $this->get('session')->getFlashBag()->add('info', $this->get('translator')->trans('The source has been deleted'));
+                $this->get('session')->getFlashBag()->add('info', $this->get('translator')->trans('source.delete.success'));
                 return $this->redirect($this->generateUrl('app_consultation_show_opinion', ['consultationSlug' => $consultation->getSlug(), 'opinionTypeSlug' => $opinionType->getSlug(), 'opinionSlug' => $opinion->getSlug() ]));
+            } else {
+                $this->get('session')->getFlashBag()->add('danger', $this->get('translator')->trans('source.delete.error'));
             }
         }
 
@@ -151,17 +155,17 @@ class SourceController extends Controller
     public function updateSourceAction($consultationSlug, $opinionTypeSlug, $opinionSlug, $sourceSlug, Request $request)
     {
         if (false === $this->get('security.authorization_checker')->isGranted('ROLE_USER')) {
-            throw new AccessDeniedException($this->get('translator')->trans('Access restricted to authenticated users'));
+            throw new AccessDeniedException($this->get('translator')->trans('error.access_restricted', array(), 'CapcoAppBundle'));
         }
 
         $source = $this->getDoctrine()->getRepository('CapcoAppBundle:Source')->getOneBySlug($consultationSlug, $opinionTypeSlug, $opinionSlug, $sourceSlug);
 
         if($source == null){
-            throw $this->createNotFoundException($this->get('translator')->trans('Argument not found.'));
+            throw $this->createNotFoundException($this->get('translator')->trans('source.error.not_found', array(), 'CapcoAppBundle'));
         }
 
         if (false == $source->canContribute()) {
-            throw new AccessDeniedException($this->get('translator')->trans('Access restricted'));
+            throw new AccessDeniedException($this->get('translator')->trans('source.error.no_contribute', array(), 'CapcoAppBundle'));
         }
 
         $opinion = $source->getOpinion();
@@ -172,7 +176,7 @@ class SourceController extends Controller
         $userPostSource = $source->getAuthor()->getId();
 
         if ($userCurrent !== $userPostSource) {
-            throw new AccessDeniedException($this->get('translator')->trans('You cannot edit this source, as you are not its author'));
+            throw new AccessDeniedException($this->get('translator')->trans('source.error.not_author', array(), 'CapcoAppBundle'));
         }
 
         $form = $this->createForm(new SourcesType(), $source);
@@ -202,8 +206,10 @@ class SourceController extends Controller
                 $em->persist($source);
                 $em->flush();
 
-                $this->get('session')->getFlashBag()->add('success', $this->get('translator')->trans('The source has been edited'));
+                $this->get('session')->getFlashBag()->add('success', $this->get('translator')->trans('source.update.success'));
                 return $this->redirect($this->generateUrl('app_consultation_show_opinion', ['consultationSlug' => $consultation->getSlug(), 'opinionTypeSlug' => $opinionType->getSlug(), 'opinionSlug' => $opinion->getSlug() ]) . '#source' . $source->getId());
+            } else {
+                $this->get('session')->getFlashBag()->add('danger', $this->get('translator')->trans('source.update.error'));
             }
         }
 
@@ -229,17 +235,17 @@ class SourceController extends Controller
     public function voteOnSourceAction($consultationSlug, $opinionTypeSlug, $opinionSlug, $sourceSlug, Request $request)
     {
         if (false === $this->get('security.authorization_checker')->isGranted('ROLE_USER')) {
-            throw new AccessDeniedException($this->get('translator')->trans('Access restricted to authenticated users'));
+            throw new AccessDeniedException($this->get('translator')->trans('error.access_restricted', array(), 'CapcoAppBundle'));
         }
 
         $source = $this->getDoctrine()->getRepository('CapcoAppBundle:Source')->getOneBySlug($consultationSlug, $opinionTypeSlug, $opinionSlug, $sourceSlug);
 
         if($source == null){
-            throw $this->createNotFoundException($this->get('translator')->trans('Argument not found.'));
+            throw $this->createNotFoundException($this->get('translator')->trans('source.error.not_found', array(), 'CapcoAppBundle'));
         }
 
         if (false == $source->canContribute()) {
-            throw new AccessDeniedException($this->get('translator')->trans('Access restricted'));
+            throw new AccessDeniedException($this->get('translator')->trans('source.error.no_contribute', array(), 'CapcoAppBundle'));
         }
 
         $opinion = $source->getOpinion();
@@ -271,17 +277,17 @@ class SourceController extends Controller
                     $em->persist($sourceVote);
                     $em->flush();
 
-                    $this->get('session')->getFlashBag()->add('success', $this->get('translator')->trans('Your vote has been saved.'));
+                    $this->get('session')->getFlashBag()->add('success', $this->get('translator')->trans('source.vote.add_success'));
                 }
                 else {
                     $em->remove($sourceVote);
                     $em->flush();
 
-                    $this->get('session')->getFlashBag()->add('info', $this->get('translator')->trans('Your vote has been removed.'));
+                    $this->get('session')->getFlashBag()->add('info', $this->get('translator')->trans('source.vote.remove_success'));
                 }
             }
             else {
-                $this->get('session')->getFlashBag()->add('danger', $this->get('translator')->trans('Authentication error.'));
+                $this->get('session')->getFlashBag()->add('danger', $this->get('translator')->trans('source.vote.csrf_error'));
             }
         }
 

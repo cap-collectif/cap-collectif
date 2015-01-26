@@ -13,7 +13,7 @@ class SiteImageAdmin extends Admin
 {
     protected $datagridValues = array(
         '_sort_order' => 'ASC',
-        '_sort_by' => 'title'
+        '_sort_by' => 'position'
     );
 
     /**

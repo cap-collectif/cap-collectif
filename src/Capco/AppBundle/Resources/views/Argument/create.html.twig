@@ -10,13 +10,13 @@
         <div class="opinion__data">
             <form method="post" {{ form_enctype(form) }}>
                 <div class="form-group">
-                    <label class="sr-only" for="arg{{ type_text }}-input">Ajouter un argument {{ type_display|trans({}, 'CapcoAppBundle') }}</label>
+                    <label class="sr-only" for="arg{{ type_text }}-input">{{ 'argument.create.label'|trans({}, 'CapcoAppBundle') }} {{ type_display|trans({}, 'CapcoAppBundle') }}</label>
                     {{ form_widget(form.body, {'id': 'arg' ~ type_text ~ '-input', 'attr': {'data-toggle': 'collapse', 'href': '.arg' ~ type_text ~ '-btns', 'rows': 2, 'placeholder':'Ajouter un argument ' ~ type_display|trans({}, 'CapcoAppBundle'), } }) }}
                     {{ form_errors(form.body) }}
                     {{ form_rest(form) }}
                     <div class="collapse  arg{{ type_text }}-btns">
-                        <button type="submit" class="btn  btn-success">Publier</button>
-                        <button type="button" class=" btn  btn-default" data-toggle="collapse" href=".arg{{ type_text }}-btns">Annuler</button>
+                        <button type="submit" class="btn  btn-success">{{ 'argument.create.submit'|trans({}, 'CapcoAppBundle') }}</button>
+                        <button type="button" class=" btn  btn-default" data-toggle="collapse" href=".arg{{ type_text }}-btns">{{ 'argument.create.cancel'|trans({}, 'CapcoAppBundle') }}</button>
                     </div>
                 </div>
             </form>

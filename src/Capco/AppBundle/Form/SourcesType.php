@@ -32,6 +32,7 @@ class SourcesType extends AbstractType
             ))
             ->add('type', 'choice', array(
                 'choices' => Source::$TypesLabels,
+                'label' => 'source.form.type',
                 'translation_domain' => 'CapcoAppBundle',
                 'multiple' => false,
                 'expanded' => true,

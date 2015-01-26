@@ -16,8 +16,12 @@ class OpinionsType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('title', 'text')
-            ->add('body', 'textarea')
+            ->add('title', 'text', array(
+                'label' => 'opinion.form.title',
+            ))
+            ->add('body', 'textarea', array(
+                'label' => 'opinion.form.body',
+            ))
         ;
     }
     
@@ -29,7 +33,8 @@ class OpinionsType extends AbstractType
         $resolver->setDefaults(array(
             'data_class' => 'Capco\AppBundle\Entity\Opinion',
             'csrf_protection' => true,
-            'csrf_field_name' => '_token'
+            'csrf_field_name' => '_token',
+            'translation_domain' => 'CapcoAppBundle',
         ));
     }
 

@@ -28,7 +28,14 @@
     <meta name="msapplication-TileImage" content="{{ asset('mstile-144x144.png') }}">
     <meta name="application-name" content="Cap Collectif">
 
-    <title>{% block title %}Cap Collectif{% endblock %}</title>
+    {% set sitename = capco_site_parameter_value('global.site.fullname') %}
+    <title>{% block title %}
+        {%  if sitename != null %}
+            {{ sitename }}
+        {% else %}
+            Cap-Collectif
+        {% endif %}
+    {% endblock %}</title>
     {% block stylesheets %}
         <link href="{{ asset('css/style.min.css') }}" rel="stylesheet">
     {% endblock %}
@@ -47,26 +54,14 @@
 {% for key, messages in app.session.flashbag.all() %}
     {% for message in messages %}
     <div class="alert alert-{{ key }} alert-dismissible  alert--no-radius" role="alert" style="margin-bottom: 0">
-        <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">{{ 'global.alert.close'|trans({}, 'CapcoAppBundle') }}</span></button>
         <span>{% block error_message %}{{ message | trans({}, 'CapcoAppBundle') }}{% endblock %}</span>
     </div>
     {% endfor %}
 {% endfor %}
 
 {# Main jumbotron for a primary marketing message or call to action #}
-{% block jumbotron %}
-    <div class="jumbotron  jumbotron--custom  jumbotron--bg-1 text-center">
-        <div class="container">
-            <h1>Hello, world!</h1>
-            <p>
-                This is a template for a simple marketing or informational website. It includes a large callout called a
-                jumbotron and three supporting pieces of content. Use it as a starting point to create something more
-                unique.
-            </p>
-            <p><a class="btn  btn--outline btn-custom-1  btn-lg" role="button">Comment ça marche ?</a></p>
-        </div>
-    </div>
-{% endblock %}
+{% block jumbotron %}{% endblock %}
 
 <div class="main">
     {% block body %}{% endblock %}

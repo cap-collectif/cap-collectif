@@ -64,6 +64,12 @@ class SiteParameter
      */
     private $isEnabled = true;
 
+    /**
+     * @var integer
+     * @ORM\Column(name="position", type="integer")
+     */
+    private $position = 0;
+
 
     public function __toString()
     {
@@ -214,6 +220,22 @@ class SiteParameter
     public function getCreatedAt()
     {
         return $this->createdAt;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPosition()
+    {
+        return $this->position;
+    }
+
+    /**
+     * @param mixed $position
+     */
+    public function setPosition($position)
+    {
+        $this->position = $position;
     }
 
 

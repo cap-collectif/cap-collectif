@@ -84,7 +84,7 @@ class ThemeController extends Controller
     public function showAction(Theme $theme)
     {
         if (false == $theme->canDisplay()) {
-            throw $this->createNotFoundException($this->get('translator')->trans('Theme not found'));
+            throw $this->createNotFoundException($this->get('translator')->trans('theme.error.not_found', array(), 'CapcoAppBundle'));
         }
         return array(
             'theme' => $theme,

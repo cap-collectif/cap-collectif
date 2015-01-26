@@ -15,7 +15,10 @@ class NewsletterSubscriptionType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('email', 'email', array('required' => true))
+            ->add('email', 'email', array(
+                'required' => true,
+                'label' => 'homepage.newsletter.form.email',
+            ))
         ;
     }
     
@@ -25,7 +28,8 @@ class NewsletterSubscriptionType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'Capco\AppBundle\Entity\NewsletterSubscription'
+            'data_class' => 'Capco\AppBundle\Entity\NewsletterSubscription',
+            'translation_domain' => 'CapcoAppBundle',
         ));
     }
 

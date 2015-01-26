@@ -71,7 +71,7 @@
                                 <p class="opinion__text">
                                     {{ argument.body }}
                                 </p>
-                                <button disabled="disabled" class="btn  btn-default btn-xs"><i class="cap cap-hand-like-2"></i>D'accord</button>
+                                <button disabled="disabled" class="btn  btn-default btn-xs"><i class="cap cap-hand-like-2"></i> {{ 'argument.vote.submit'|trans({}, 'CapcoAppBundle') }}</button>
                                 <span class="opinion__votes-nb">{{ argument.VoteCount }}</span>
                             </div>
                         </li>
@@ -88,7 +88,7 @@
                                 </a>
                             {% endif %}
                             <div class="media-body">
-                                <h4 class="media-heading h4" id="source{{ source.id }}"><span class="label label-info">{{ source.Category.title }}</span>
+                                <h4 class="media-heading h4" id="source{{ source.id }}"><span class="label label-info">{{ source.Category.title | capitalize }}</span>
                                     {% if source.Media %}
                                         <a href="{{ path('sonata_media_download', {'id': source.Media|sonata_urlsafeid }) }}">{{ source.title }}</a>
                                     {% endif %}
@@ -100,7 +100,7 @@
                                 <p class="excerpt">
                                     {{ source.body }}
                                 </p>
-                                <button disabled="disabled" class="btn  btn-default btn-xs"><i class="cap cap-hand-like-2"></i>Pertinent</button>
+                                <button disabled="disabled" class="btn  btn-default btn-xs"><i class="cap cap-hand-like-2"></i> {{ 'source.vote.submit'|trans({}, 'CapcoAppBundle') }}</button>
                                 <span class="nb-votes">{{ source.voteCountSource }}</span>
                             </div>
                         </li>

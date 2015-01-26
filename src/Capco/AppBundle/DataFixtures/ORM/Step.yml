@@ -48,8 +48,8 @@ Capco\AppBundle\Entity\Step:
         title: <sentence(2)>
         isEnabled: true
         type: 1
-        startAt: <(new \DateTime('2014-03-04'))>
-        endAt: <(new \DateTime('2014-04-04'))>
+        startAt: <dateTimeBetween('now','+10 days')>
+        endAt: <dateTimeBetween('+10 days','+1 years')>
         position: 2
         consultation: @cs3
         body: <text(1000)>

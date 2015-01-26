@@ -12,13 +12,13 @@
 
             {% if consultation.isClose %}
                 <div class="alert alert-info alert-dismissible  block" role="alert">
-                    <p><strong>Statut "Terminée" :</strong> La période de participation est maintenant terminée. Merci à tous d'avoir contribué.</p>
+                    <p><strong>{{ 'consultation.show.alert.ended.title'|trans({}, 'CapcoAppBundle') }}</strong> {{ 'consultation.show.alert.ended.text'|trans({}, 'CapcoAppBundle') }}</p>
                 </div>
             {% endif %}
 
             {% if consultation.isFuture %}
                 <div class="alert alert-info alert-dismissible  block" role="alert">
-                    <p><strong>Statut "À venir" :</strong> La période de participation débutera le <strong>{{ consultation.getOpenedAt| localizeddate('long', 'none', app.request.locale) }}</strong>.</p>
+                    <p><strong>{{ 'consultation.show.alert.future.title'|trans({}, 'CapcoAppBundle') }}</strong> {{ 'consultation.show.alert.future.text'|trans({'%date%': '<strong>' ~ consultation.getOpenedAt| localizeddate('long', 'none', app.request.locale) ~ '</strong>'}, 'CapcoAppBundle') | raw }}</p>
                 </div>
             {% endif %}
 
@@ -33,7 +33,7 @@
                 <div class="block  block--shadowed  opinion__details">
                     <div class="opinion  opinion--{{ opinion.opinionType.color }}  opinion--current">
                         <div class="opinion__header  opinion__header--centered">
-                            <a class="neutral-hover  pull-left  h4" href="{% if opinion.isTrashed %}{{ path('app_consultation_show_trashed', {'consultationSlug': consultation.slug,}) }}{% else %}{{ path('app_consultation_show_opinions', {'consultationSlug': consultation.slug, 'opinionTypeSlug': opinionType.slug}) }}{% endif %}"><i class="cap cap-arrow-1"></i><span class="hidden-xs  hidden-sm"> Retour</span></a>
+                            <a class="neutral-hover  pull-left  h4" href="{% if opinion.isTrashed %}{{ path('app_consultation_show_trashed', {'consultationSlug': consultation.slug,}) }}{% else %}{{ path('app_consultation_show_opinions', {'consultationSlug': consultation.slug, 'opinionTypeSlug': opinionType.slug}) }}{% endif %}"><i class="cap cap-arrow-1"></i><span class="hidden-xs  hidden-sm"> {{ 'opinion.show.back'|trans({}, 'CapcoAppBundle') }}</span></a>
                             <p class="h4  opinion__header__title">{{ opinion.opinionType.slug|capitalize }} </p>
                         </div>
                         <div class="opinion__body  box">
@@ -86,13 +86,13 @@
                                 <div class="pull-right  opinion__action-buttons">
 
                                     {% if(userReportingOpinion == false) %}
-                                    <a href="{{ path('app_report_opinion' ,{'consultationSlug': consultation.slug, 'opinionTypeSlug': opinionType.slug, 'opinionSlug': opinion.slug } ) }}" class="btn  btn-dark-gray  btn--outline"><i class="cap cap-flag-1"></i> Signaler</a>
+                                    <a href="{{ path('app_report_opinion' ,{'consultationSlug': consultation.slug, 'opinionTypeSlug': opinionType.slug, 'opinionSlug': opinion.slug } ) }}" class="btn  btn-dark-gray  btn--outline"><i class="cap cap-flag-1"></i> {{ 'opinion.report.submit'|trans({}, 'CapcoAppBundle') }}</a>
                                     {% else %}
-                                    <button disabled="disabled" class="btn  btn-dark-gray"><i class="cap cap-flag-1"></i> opinion signalé</button>
+                                    <button disabled="disabled" class="btn  btn-dark-gray"><i class="cap cap-flag-1"></i> {{ 'opinion.report.reported'|trans({}, 'CapcoAppBundle') }}</button>
                                     {% endif %}
 
                                     {% if app.user is not null and app.user == opinion.Author %}
-                                    <a href="{{ path('app_consultation_edit_opinion' ,{'consultationSlug': consultation.slug, 'opinionTypeSlug': opinion.opinionType.slug, 'opinionSlug': opinion.slug } ) }}" class="btn  btn-dark-gray  btn--outline"><i class="cap cap-pencil-1"></i> Modifier</a>
+                                    <a href="{{ path('app_consultation_edit_opinion' ,{'consultationSlug': consultation.slug, 'opinionTypeSlug': opinion.opinionType.slug, 'opinionSlug': opinion.slug } ) }}" class="btn  btn-dark-gray  btn--outline"><i class="cap cap-pencil-1"></i> {{ 'opinion.update.button'|trans({}, 'CapcoAppBundle') }}</a>
                                     {% endif %}
                                 </div>
 
@@ -107,7 +107,7 @@
                                 <div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
                                     <div class="panel-body">
                                         {% if opinion.canContribute %}
-                                            <p><a href="{{ path('app_new_source' ,{'consultationSlug': consultation.slug, 'opinionTypeSlug': opinionType.slug, 'opinionSlug': opinion.slug} ) }}" class="btn-sm btn btn-default"><i class="cap cap-add-1"></i> {{ 'source.show.add'|trans({}, 'CapcoAppBundle') }}</a></p>
+                                            <p><a href="{{ path('app_new_source' ,{'consultationSlug': consultation.slug, 'opinionTypeSlug': opinionType.slug, 'opinionSlug': opinion.slug} ) }}" class="btn-sm btn btn-default"><i class="cap cap-add-1"></i> {{ 'source.create.button'|trans({}, 'CapcoAppBundle') }}</a></p>
                                         {% endif %}
                                         {% for source in sources %}
                                             <div class="media" id="source{{ source.id }}">
@@ -129,13 +129,13 @@
                                                         {{ source.body }}
                                                     </p>
                                                     {% if false == opinion.canContribute %}
-                                                        <button disabled="disabled" class="btn  btn-dark-gray  btn-xs"><i class="cap cap-hand-like-2"></i>Pertinent</button>
+                                                        <button disabled="disabled" class="btn  btn-dark-gray  btn-xs"><i class="cap cap-hand-like-2"></i> {{ 'source.vote.submit'|trans({}, 'CapcoAppBundle') }}</button>
                                                     {% else %}
                                                         <form method="POST" style="display: inline-block;" action="{{ path('app_consultation_vote_source' ,{'consultationSlug': consultation.slug, 'opinionTypeSlug': opinionType.slug, 'opinionSlug': opinion.slug, 'sourceSlug': source.slug } ) }}">
                                                             {% if source.userHasVote(app.user) %}
-                                                            <button class="btn  btn-danger  btn-xs">Annuler mon vote</button>
+                                                            <button class="btn  btn-danger  btn-xs"> {{ 'source.vote.delete'|trans({}, 'CapcoAppBundle') }}</button>
                                                             {% else %}
-                                                            <button class="btn  btn-success  btn--outline  btn-xs"><i class="cap cap-hand-like-2"></i>Pertinent</button>
+                                                            <button class="btn  btn-success  btn--outline  btn-xs"><i class="cap cap-hand-like-2"></i> {{ 'source.vote.submit'|trans({}, 'CapcoAppBundle') }}</button>
                                                             {% endif %}
                                                             <input type="hidden" name="_csrf_token" value="{{ tokenSource }}">
                                                         </form>
@@ -144,13 +144,13 @@
 
                                                     {% if opinion.canContribute %}
                                                         {% if(userReportingSource == false) %}
-                                                            <a href="{{ path('app_report_source' ,{'consultationSlug': consultation.slug, 'opinionTypeSlug': opinionType.slug, 'opinionSlug': opinion.slug, 'sourceSlug': source.slug } ) }}" class="btn btn-xs btn-dark-gray  btn--outline"><i class="cap cap-flag-1"></i> Signaler</a>
+                                                            <a href="{{ path('app_report_source' ,{'consultationSlug': consultation.slug, 'opinionTypeSlug': opinionType.slug, 'opinionSlug': opinion.slug, 'sourceSlug': source.slug } ) }}" class="btn btn-xs btn-dark-gray  btn--outline"><i class="cap cap-flag-1"></i> {{ 'source.report.submit'|trans({}, 'CapcoAppBundle') }}</a>
                                                         {% else %}
-                                                            <button disabled="disabled" class="btn btn-xs btn-dark-gray"><i class="cap cap-flag-1"></i> source signalé</button>
+                                                            <button disabled="disabled" class="btn btn-xs btn-dark-gray"><i class="cap cap-flag-1"></i> {{ 'source.report.reported'|trans({}, 'CapcoAppBundle') }}</button>
                                                         {% endif %}
 
                                                         {% if app.user is not null and app.user == source.Author %}
-                                                            <a href="{{ path('app_edit_source' ,{'consultationSlug': consultation.slug, 'opinionTypeSlug': opinionType.slug, 'opinionSlug': opinion.slug, 'sourceSlug': source.slug} ) }}" class="btn  btn-dark-gray  btn--outline  btn-xs"><i class="cap cap-pencil-1"></i> Modifier</a>
+                                                            <a href="{{ path('app_edit_source' ,{'consultationSlug': consultation.slug, 'opinionTypeSlug': opinionType.slug, 'opinionSlug': opinion.slug, 'sourceSlug': source.slug} ) }}" class="btn  btn-dark-gray  btn--outline  btn-xs"><i class="cap cap-pencil-1"></i> {{ 'source.update.button'|trans({}, 'CapcoAppBundle') }}</a>
                                                         {% endif %}
                                                     {% endif %}
                                                 </div>
@@ -193,8 +193,8 @@
         App.module.pieChart();
         $('.more').readmore({
             maxHeight: 90,
-            moreLink: '<a href="#">Lire la suite</a>', //BazingaJsTranslationBundle
-            lessLink: '<a href="#">Fermer</a>'
+            moreLink: '<a href="#">{{ 'consultation.show.meta.intro.read_more'|trans({}, 'CapcoAppBundle') }}</a>', //BazingaJsTranslationBundle
+            lessLink: '<a href="#">{{ 'consultation.show.meta.Intro.read_less'|trans({}, 'CapcoAppBundle') }}</a>'
         });
     </script>
 {% endblock %}

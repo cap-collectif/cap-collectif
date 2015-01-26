@@ -38,12 +38,18 @@
 
 {% block body %}
 
-    {{ render(controller('CapcoAppBundle:Homepage:lastTopics', {'max': 4, 'offset': 0})) }}
+    <div class="container">
+        <h2 class="h2">{{ 'homepage.themes.last'|trans({}, 'CapcoAppBundle') }}</h2>
+        {{ render(controller('CapcoAppBundle:Homepage:lastThemes', {'max': 4, 'offset': 0})) }}
+    </div>
     <div class="container">
         <h2 class="h2">{{ 'homepage.consultations.last'|trans({}, 'CapcoAppBundle') }}</h2>
         {{ render(controller('CapcoAppBundle:Consultation:lastOpenConsultations', {'max': 4, 'offset': 0})) }}
     </div>
-    {{ render(controller('CapcoAppBundle:Homepage:lastIdeas', {'max': 4, 'offset': 0})) }}
+    <div class="container">
+        <h2 class="h2">{{ 'homepage.ideas.last'|trans({}, 'CapcoAppBundle') }}</h2>
+        {{ render(controller('CapcoAppBundle:Homepage:lastIdeas', {'max': 4, 'offset': 0})) }}
+    </div>
 
     <div class="container">
         <div class="row">

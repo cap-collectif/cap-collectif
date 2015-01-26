@@ -18,7 +18,9 @@ class IdeaSearchType extends AbstractType
     {
         $builder
             ->add('term', 'search', array(
-                'required' => false
+                'required' => false,
+                'label' => 'idea.searchform.term',
+                'translation_domain' => 'CapcoAppBundle',
             ))
             ->add('sort', 'choice', array(
                 'required' => false,
@@ -32,6 +34,7 @@ class IdeaSearchType extends AbstractType
                 'required' => false,
                 'class' => 'CapcoAppBundle:Theme',
                 'property' => 'title',
+                'label' => 'idea.searchform.theme',
                 'translation_domain' => 'CapcoAppBundle',
                 'query_builder' => function(ThemeRepository $tr) {
                     return $tr->createQueryBuilder('t')
