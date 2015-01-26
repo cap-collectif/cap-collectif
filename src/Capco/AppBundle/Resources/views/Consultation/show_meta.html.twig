@@ -16,14 +16,16 @@
         {{ render(controller('CapcoAppBundle:Step:showAllInNav', {'consultation': consultation, 'currentStep': currentStep})) }}
 
         <h4 class="h4">{{ 'consultation.show.meta.info.title'|trans({}, 'CapcoAppBundle') }}</h4>
-        <p class="excerpt">{{ 'consultation.show.meta.info.themes'|trans({}, 'CapcoAppBundle') }}</p>
-        <p>
-            {% for theme in consultation.Themes %}
-                {% if theme.canDisplay %}
-                    <a href="{{ path('app_theme_show', {'slug': theme.slug}) }}">{{theme}}</a> {% if loop.last == false %} , {% endif %}
-                {% endif %}
-            {% endfor %}
-        </p>
+        {% if consultation.Themes | length > 0 %}
+            <p class="excerpt">{{ 'consultation.show.meta.info.themes'|trans({}, 'CapcoAppBundle') }}</p>
+            <p>
+                {% for theme in consultation.Themes %}
+                    {% if theme.canDisplay %}
+                        <a href="{{ path('app_theme_show', {'slug': theme.slug}) }}">{{theme}}</a> {% if loop.last == false %} , {% endif %}
+                    {% endif %}
+                {% endfor %}
+            </p>
+        {% endif %}
         <p class="excerpt">{{ 'consultation.show.meta.info.opening'|trans({}, 'CapcoAppBundle') }}</p>
         <p>{{ consultation.openedAt | localizeddate('long', 'none') }}</p>
         <p class="excerpt">{{ 'consultation.show.meta.info.contributions'|trans({}, 'CapcoAppBundle') }}</p>

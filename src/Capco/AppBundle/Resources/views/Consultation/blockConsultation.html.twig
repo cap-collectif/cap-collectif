@@ -9,16 +9,18 @@
 
         <div class="box">
             <div class="figcaption">
-                <span class="excerpt  h5">
-                    {% for theme in consultation.Themes %}
-                        {% if (theme.canDisplay) %}
-                            <a class="excerpt" href="{{ path('app_theme_show', {'slug': theme.slug}) }}">
-                                {{ theme.title }}
-                            </a>
-                            {% if loop.last == false %}, {% endif %}
-                    {% endif %}
-                    {% endfor %}
-                </span>
+                {% if consultation.Themes | length > 0 %}
+                    <span class="excerpt  h5">
+                        {% for theme in consultation.Themes %}
+                            {% if (theme.canDisplay) %}
+                                <a class="excerpt" href="{{ path('app_theme_show', {'slug': theme.slug}) }}">
+                                    {{ theme.title }}
+                                </a>
+                                {% if loop.last == false %}, {% endif %}
+                        {% endif %}
+                        {% endfor %}
+                    </span>
+                {% endif %}
                 <h4 class="h4"><a href="{{ path('app_consultation_show', {'slug': consultation.slug}) }}" title="">{{ consultation.title }}</a></h4>
             </div>
             <div class="thumbnail__status">
