@@ -6,6 +6,7 @@ parameters:
     capco.site_image.resolver.class: Capco\AppBundle\SiteImage\Resolver
     capco.twig_extension.site_image.class: Capco\AppBundle\Twig\SiteImageExtension
     capco.twig_extension.menu_url.class: Capco\AppBundle\Twig\MenuLinkExtension
+    capco.twig_extension.feature_toggle.class: Capco\AppBundle\Twig\FeatureToggleExtension
     capco.notify.manager.class: Capco\AppBundle\Manager\Notify
     capco.toggle.manager.class: Capco\AppBundle\Toggle\Manager
     capco.toggle.listener.request.class: Capco\AppBundle\Toggle\RequestListener
@@ -100,6 +101,12 @@ services:
         arguments: [@capco.toggle.manager, @translator]
         tags:
             - { name: kernel.event_listener, event: kernel.request, method: onKernelRequest }
+
+    capco.twig.feature_toggle:
+        class:     %capco.twig_extension.feature_toggle.class%
+        arguments: [@capco.toggle.manager]
+        tags:
+            - { name: twig.extension }
 
     capco.blog.post.repository:
         class:           "%capco.blog.post.repository.class%"
