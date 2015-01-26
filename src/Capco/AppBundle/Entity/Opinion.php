@@ -287,9 +287,9 @@ class Opinion
      */
     public function setIsEnabled($isEnabled)
     {
-        if ($isEnabled != $this->isEnabled) {
-            if($isEnabled) {
-                if($this->isTrashed) {
+        if ($isEnabled != $this->isEnabled && (null != $this->Consultation)) {
+            if ($isEnabled) {
+                if ($this->isTrashed) {
                     $this->Consultation->increaseTrashedOpinionCount(1);
                 } else {
                     $this->Consultation->increaseOpinionCount(1);

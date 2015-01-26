@@ -1,132 +1,132 @@
 Capco\AppBundle\Entity\Opinion:
     opinion1:
+        Consultation: @cs1
         title: <text(20)>
         body: <text(1000)>
         isEnabled: <boolean()>
         isTrashed: <boolean(30)>
         trashedReason: <text(100)>
         Author: @user1
-        Consultation: @cs1
         OpinionType: @opinionType1
         voteCountMitige: <numberBetween(0, 50)>
         voteCountOk: <numberBetween(0, 50)>
         voteCountNok: <numberBetween(0, 50)>
     opinion2:
+        Consultation: @cs2
         title: <text(20)>
         body: <text(1000)>
         isEnabled: <boolean()>
         isTrashed: <boolean(30)>
         trashedReason: <text(100)>
         Author: @user1
-        Consultation: @cs2
         OpinionType: @opinionType2
         voteCountMitige: <numberBetween(0, 50)>
         voteCountOk: <numberBetween(0, 50)>
         voteCountNok: <numberBetween(0, 50)>
     opinion3:
+        Consultation: @cs3
         title: <text(20)>
         body: <text(1000)>
         isEnabled: <boolean()>
         isTrashed: <boolean(30)>
         trashedReason: <text(100)>
         Author: @user1
-        Consultation: @cs3
         OpinionType: @opinionType2
         voteCountMitige: <numberBetween(0, 50)>
         voteCountOk: <numberBetween(0, 50)>
         voteCountNok: <numberBetween(0, 50)>
     opinion4:
+        Consultation: @cs2
         title: <text(20)>
         body: <text(1000)>
         isEnabled: <boolean()>
         isTrashed: <boolean(30)>
         trashedReason: <text(100)>
         Author: @user2
-        Consultation: @cs2
         OpinionType: @opinionType3
         voteCountMitige: <numberBetween(0, 50)>
         voteCountOk: <numberBetween(0, 50)>
         voteCountNok: <numberBetween(0, 50)>
     opinion5:
+        Consultation: @cs2
         title: <text(20)>
         body: <text(1000)>
         isEnabled: <boolean()>
         isTrashed: <boolean(30)>
         trashedReason: <text(100)>
         Author: @user2
-        Consultation: @cs2
         OpinionType: @opinionType3
         voteCountMitige: <numberBetween(0, 50)>
         voteCountOk: <numberBetween(0, 50)>
         voteCountNok: <numberBetween(0, 50)>
     opinion6:
+        Consultation: @cs2
         title: <text(20)>
         body: <text(1000)>
         isEnabled: <boolean()>
         isTrashed: <boolean(30)>
         trashedReason: <text(100)>
         Author: @user2
-        Consultation: @cs2
         OpinionType: @opinionType3
         voteCountMitige: <numberBetween(0, 50)>
         voteCountOk: <numberBetween(0, 50)>
         voteCountNok: <numberBetween(0, 50)>
     opinion7:
+        Consultation: @cs2
         title: <text(20)>
         body: <text(1000)>
         isEnabled: <boolean()>
         isTrashed: <boolean(30)>
         trashedReason: <text(100)>
         Author: @user2
-        Consultation: @cs2
         OpinionType: @opinionType3
         voteCountMitige: <numberBetween(0, 50)>
         voteCountOk: <numberBetween(0, 50)>
         voteCountNok: <numberBetween(0, 50)>
     opinion8:
+        Consultation: @cs2
         title: <text(20)>
         body: <text(1000)>
         isEnabled: <boolean()>
         isTrashed: <boolean(30)>
         trashedReason: <text(100)>
         Author: @user3
-        Consultation: @cs2
         OpinionType: @opinionType4
         voteCountMitige: <numberBetween(0, 50)>
         voteCountOk: <numberBetween(0, 50)>
         voteCountNok: <numberBetween(0, 50)>
     opinion9:
+        Consultation: @cs2
         title: <text(20)>
         body: <text(1000)>
         isEnabled: <boolean()>
         isTrashed: <boolean(30)>
         trashedReason: <text(100)>
         Author: @user3
-        Consultation: @cs2
         OpinionType: @opinionType5
         voteCountMitige: <numberBetween(0, 50)>
         voteCountOk: <numberBetween(0, 50)>
         voteCountNok: <numberBetween(0, 50)>
     opinion10:
+        Consultation: @cs2
         title: <text(20)>
         body: <text(1000)>
         isEnabled: <boolean(100)>
         isTrashed: <boolean(30)>
         trashedReason: <text(100)>
         Author: @user3
-        Consultation: @cs2
         OpinionType: @opinionType6
         voteCountMitige: <numberBetween(0, 50)>
         voteCountOk: <numberBetween(0, 50)>
         voteCountNok: <numberBetween(0, 50)>
     opinion{11..75}:
+        Consultation: @cs1
         title: <text(20)>
         body: <text(1000)>
         isEnabled: <boolean()>
         isTrashed: <boolean(30)>
         trashedReason: <text(100)>
         Author: @user*
-        Consultation: @cs1
         OpinionType: @opinionType<numberBetween(1, 5)>
         createdAt: <dateTimeBetween('-1 years','+10 days')>
         voteCountMitige: <numberBetween(0, 50)>
