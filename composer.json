@@ -25,15 +25,19 @@
         "doctrine/doctrine-fixtures-bundle": "2.2.*",
         "stof/doctrine-extensions-bundle": "~1.2@dev",
         "hautelook/alice-bundle": "~0.2",
-        
+
         "elao/web-profiler-extra-bundle": "dev-master",
-        
-        "sonata-project/core-bundle": "dev-master",
-        "sonata-project/admin-bundle": "dev-master",
-        "sonata-project/doctrine-orm-admin-bundle": "dev-master",
-        "sonata-project/user-bundle": "dev-master",
-        "sonata-project/easy-extends-bundle": "dev-master",
+
+        "sonata-project/easy-extends-bundle": "~2.1@dev",
+        "sonata-project/core-bundle": "~2.2@dev",
+        "sonata-project/admin-bundle": "~2.3@dev",
+        "sonata-project/doctrine-orm-admin-bundle": "~2.3@dev",
+        "sonata-project/block-bundle": "~2.3@dev",
         "sonata-project/media-bundle": "~2.4@dev",
+        "sonata-project/user-bundle": "~2.2@dev",
+        "sonata-project/datagrid-bundle": "~2.2@dev",
+        "sonata-project/exporter": "~1.3@dev",
+        "sonata-project/classification-bundle": "~2.2@dev",
 
         "hwi/oauth-bundle": "0.4.*@dev",
         "liip/imagine-bundle": "~0.9",
