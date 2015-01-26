@@ -283,10 +283,25 @@ class Opinion
      * Set isEnabled
      *
      * @param boolean $isEnabled
-     * @return Opinion
+     * @return Argument
      */
     public function setIsEnabled($isEnabled)
     {
+        if ($isEnabled != $this->isEnabled) {
+            if($isEnabled) {
+                if($this->isTrashed) {
+                    $this->Consultation->increaseTrashedOpinionCount(1);
+                } else {
+                    $this->Consultation->increaseOpinionCount(1);
+                }
+            } else {
+                if($this->isTrashed) {
+                    $this->Consultation->decreaseOpinionCount(1);
+                } else {
+                    $this->Consultation->decreaseOpinionCount(1);
+                }
+            }
+        }
         $this->isEnabled = $isEnabled;
         return $this;
     }
