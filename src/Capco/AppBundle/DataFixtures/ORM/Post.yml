@@ -8,3 +8,4 @@ Capco\AppBundle\Entity\Post:
     publishedAt: <dateTimeBetween('-100 days', '+10 days')>
     Authors:
         - @user<numberBetween(1,3)>
+    Media: @MediaConsultation2

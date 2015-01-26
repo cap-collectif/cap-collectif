@@ -185,3 +185,7 @@ Capco\AppBundle\Entity\SiteParameter:
         title: Titre de la section blog
         value: Blog
         position: 770
+    SiteParameterBlogDisqusUsername:
+        keyname: blog.disqus.username
+        title: Compte Disqus à utiliser
+        value: ''

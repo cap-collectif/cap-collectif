@@ -1,0 +1,34 @@
+{% extends '@CapcoApp/base.html.twig' %}
+
+{% block jumbotron %}
+    <div class="jumbotron  jumbotron--custom  jumbotron--bg-1 text-center">
+        <div class="container">
+            <h1>{{ capco_site_parameter_value('blog.jumbotron.title')}}</h1>
+            {% set jumbotron_body = capco_site_parameter_value('blog.jumbotron.body') %}
+            {% if null != jumbotron_body %}
+                <p>{{ jumbotron_body }}</p>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <h1><a href="{{ url('app_blog_show', {'slug': post.slug}) }}">{{ post.title | jolitypo() }}</a></h1>
+        <p class="excerpt  h5  media--news__meta">
+            {{ post.publishedAt | localizeddate('long', 'none') }},
+            par <span class="media--news__user"><a href="{{ path('capco_user_profile_show_all', { username: post.Authors[0].username })}}">{{ post.Authors[0].fullname }}</a></span>
+        </p>
+
+        {%  if post.Media %}
+            {% thumbnail post.Media, 'blockHeader' with {'title': post.Media.name, 'alt': post.Media.name, 'class': 'img-responsive'} %}
+        {%  endif %}
+
+        {{ post.body | jolitypo() }}
+
+        {% if capco_site_parameter_value('blog.disqus.username') %}
+            {% include 'CapcoAppBundle:Blog:_comments.html.twig' with {'post': post} %}
+        {% endif %}
+    </div>
+{% endblock %}
+
