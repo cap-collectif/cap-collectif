@@ -43,30 +43,17 @@
                 {% endif %}
             </div>
 
-            {% set opinionCount = consultation.opinionCount %}
-            {% set argumentCount = consultation.argumentCount %}
-            {% if opinionCount + argumentCount > 0 %}
+            {% set contributionsCount = consultation.totalContributionsCount %}
+            {% if contributionsCount > 0 %}
                 <div class="thumbnail__numbers">
-                    {% if opinionCount > 0 %}
-                        <div class="thumbnail__number-block">
-                            <p  class="thumbnail__number">{{ opinionCount }}</p>
-                            <h5 class="thumbnail__number__label  excerpt h5">
-                                {% transchoice opinionCount with {'%count%': opinionCount} from 'CapcoAppBundle' %}
-                                    consultation.show.opinions_no_nb
-                                {% endtranschoice %}
-                            </h5>
-                        </div>
-                    {% endif %}
-                    {% if argumentCount > 0 %}
-                        <div class="thumbnail__number-block">
-                            <p  class="thumbnail__number">{{ argumentCount }}</p>
-                            <h5 class="thumbnail__number__label  excerpt h5">
-                                {% transchoice argumentCount with {'%count%': argumentCount} from 'CapcoAppBundle' %}
-                                    consultation.show.arguments_no_nb
-                                {% endtranschoice %}
-                            </h5>
-                        </div>
-                    {% endif %}
+                    <div class="thumbnail__number-block">
+                        <p  class="thumbnail__number">{{ contributionsCount }}</p>
+                        <h5 class="thumbnail__number__label  excerpt h5">
+                            {% transchoice contributionsCount with {'%count%': contributionsCount} from 'CapcoAppBundle' %}
+                                consultation.show.contributions_no_nb
+                            {% endtranschoice %}
+                        </h5>
+                    </div>
                 </div>
             {% endif %}
         </div>

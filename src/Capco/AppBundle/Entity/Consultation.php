@@ -762,6 +762,14 @@ class Consultation
         return $this;
     }
 
+    /**
+     * @return int
+     */
+    public function getTotalContributionsCount ()
+    {
+        return ($this->argumentCount + $this->opinionCount + $this->trashedArgumentCount + $this->trashedOpinionCount);
+    }
+
     // ************************** Lifecycle **************************************
 
     /**
