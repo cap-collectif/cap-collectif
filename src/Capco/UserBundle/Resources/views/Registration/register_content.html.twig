@@ -39,11 +39,13 @@
                         </div>
                         {{ form_errors(form.plainPassword.second) }}
 
-                        <div class="checkbox  login__checkbox">
-                            {{ form_widget(form.isTermsAccepted, {'attr': {'style': 'position: static'}}) }}
-                            <p style="display: inline">{{ 'user.register.terms.label'|trans({'%cgu%': '<a href="'~ app.request.baseUrl ~ capco_site_parameter_value('signin.cgu.link') ~ '">' ~ ( capco_site_parameter_value('signin.cgu.name') | lower ) ~ '</a>'}, 'CapcoAppBundle') | raw }}</p>
-                        </div>
-                        {{ form_errors(form.isTermsAccepted) }}
+                        {% if (capco_site_parameter_value('signin.cgu.name') is not null) and (capco_site_parameter_value('signin.cgu.link') is not null) %}
+                            <div class="checkbox  login__checkbox">
+                                {{ form_widget(form.isTermsAccepted, {'attr': {'style': 'position: static'}}) }}
+                                <p style="display: inline">{{ 'user.register.terms.label'|trans({'%cgu%': '<a href="'~ app.request.baseUrl ~ capco_site_parameter_value('signin.cgu.link') ~ '">' ~ ( capco_site_parameter_value('signin.cgu.name') | lower ) ~ '</a>'}, 'CapcoAppBundle') | raw }}</p>
+                            </div>
+                            {{ form_errors(form.isTermsAccepted) }}
+                        {% endif %}
 
                         {{ form_rest(form) }}
                         <button type="submit" class="btn  btn-success  btn-block  login__submit">{{ 'registration.submit'|trans({}, 'FOSUserBundle') }}</button>

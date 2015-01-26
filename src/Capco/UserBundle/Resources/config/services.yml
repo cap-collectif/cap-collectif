@@ -11,6 +11,7 @@ services:
     class: Capco\UserBundle\Form\Type\RegistrationFormType
     tags:
       - { name: form.type, alias: capco_user_registration }
+    arguments: [@capco.site_parameter.resolver]
 
   capco_user.profile.form.type:
     class: Capco\UserBundle\Form\Type\ProfileFormType
