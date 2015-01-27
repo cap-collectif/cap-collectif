@@ -13,7 +13,7 @@ security:
 
     providers:
         fos_userbundle:
-            id: fos_user.user_provider.username_email
+            id: capco_user.user_provider.email
 
     firewalls:
         dev:

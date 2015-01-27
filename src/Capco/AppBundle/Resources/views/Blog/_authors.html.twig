@@ -1,11 +1,11 @@
 {% for author in authors %}
         {% if author.Media %}
-            <a class="pull-left" href="{{ path('capco_user_profile_show_all', {'username': author}) }}">
+            <a class="pull-left" href="{{ path('capco_user_profile_show_all', {'slug': author.slug}) }}">
                 {% thumbnail author.Media, 'avatar' with {'title': author.username, 'alt': author.username, 'class': 'media-object img-circle'} %}
             </a>
         {% endif %}
         <div class="media-body">
-            <p class="media--aligned  excerpt">{{ 'blog.written_by' | trans({}, 'CapcoAppBundle') }} <a href="{{ path('capco_user_profile_show_all', { username: author.username })}}">{{ author.username }}</a>, le {{ post.publishedAt | localizeddate('long', 'none') }} </p>
+            <p class="media--aligned  excerpt">{{ 'blog.written_by' | trans({}, 'CapcoAppBundle') }} <a href="{{ path('capco_user_profile_show_all', { 'slug': author.slug })}}">{{ author.username }}</a>, le {{ post.publishedAt | localizeddate('long', 'none') }} </p>
         </div>
     {% if loop.revindex0 == '1' %}
         {{ 'blog.and' | trans({}, 'CapcoAppBundle') }}

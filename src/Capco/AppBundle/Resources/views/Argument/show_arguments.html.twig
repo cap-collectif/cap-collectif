@@ -24,12 +24,12 @@
             <li class="opinion  opinion--argument" id="arg-{{ argument.id }}">
                 <div class="opinion__body  box">
                     {% if argument.Author.Media %}
-                        <a class="pull-left" href="{{ path('capco_user_profile_show_all', {'username': argument.Author}) }}">
+                        <a class="pull-left" href="{{ path('capco_user_profile_show_all', {'slug': argument.Author.slug}) }}">
                             {% thumbnail argument.Author.Media, 'avatar' with {'title': argument.Author.username, 'alt': argument.Author.username, 'class': 'img-circle  pull-left'} %}
                         </a>
                     {% endif %}
                     <div class="opinion__data">
-                        <p class="h5  opinion__user"><a href="{{ path('capco_user_profile_show_all', {'username': argument.Author}) }}">{{ argument.Author.username }}</a></p>
+                        <p class="h5  opinion__user"><a href="{{ path('capco_user_profile_show_all', {'slug': argument.Author.slug}) }}">{{ argument.Author.username }}</a></p>
                         <p class="excerpt  opinion__date"><a class="excerpt" href="#">{{ argument.createdAt | localizeddate('long', 'short', app.request.locale) }}</a></p>
                     </div>
                     <p class="opinion__text">

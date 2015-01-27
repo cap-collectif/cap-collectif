@@ -2,7 +2,7 @@
     {% for source in sources %}
         <div class="media" id="source{{ source.id }}">
             {% if source.Author.Media %}
-                <a class="pull-left media-middle" href="{{ path('capco_user_profile_show_all', {'username': source.Author}) }}">
+                <a class="pull-left media-middle" href="{{ path('capco_user_profile_show_all', {'slug': source.Author.slug}) }}">
                     {% thumbnail source.Author.Media, 'avatar_source' with {'title': source.Author.username, 'alt': source.Author.username, 'class': 'img-circle  pull-left'} %}
                 </a>
             {% endif %}

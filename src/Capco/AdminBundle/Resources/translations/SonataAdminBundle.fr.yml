@@ -263,10 +263,11 @@ admin:
       ideas_count: Idées
       consultations_count: Consultations
     user:
-      username: Nom d'utilisateur
+      username: Nom
       email: Email
       groups: Groupes
       enabled: Activé
+      slug: Nom unique
       locked: Verrouillé
       created_at: Création
       updated_at: Mise à jour
@@ -279,6 +280,7 @@ admin:
         user: Utilisateur
         admin: Administrateur
         super_admin: Super administrateur
+      city: Ville
   action:
     reporting:
       disable:

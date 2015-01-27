@@ -37,12 +37,12 @@
                         </div>
                         <div class="opinion__body  box">
                             {% if opinion.Author.Media %}
-                                <a class="pull-left" href="{{ path('capco_user_profile_show_all', {'username': opinion.Author}) }}">
+                                <a class="pull-left" href="{{ path('capco_user_profile_show_all', {'slug': opinion.Author.slug}) }}">
                                     {% thumbnail opinion.Author.Media, 'avatar' with {'title': opinion.Author.username, 'alt': opinion.Author.username, 'class': 'img-circle  pull-left'} %}
                                 </a>
                             {% endif %}
                             <div class="opinion__data">
-                                <p class="opinion__user  h5"><a href="{{ path('capco_user_profile_show_all', {'username': opinion.Author}) }}">{{ opinion.Author.username }}</a> <span class="pull-right  excerpt">{{ opinion.createdAt | localizeddate('medium', 'none', app.request.locale) }}</span></p>
+                                <p class="opinion__user  h5"><a href="{{ path('capco_user_profile_show_all', {'slug': opinion.Author.slug}) }}">{{ opinion.Author.username }}</a> <span class="pull-right  excerpt">{{ opinion.createdAt | localizeddate('medium', 'none', app.request.locale) }}</span></p>
                                 <p class="opinion__title">{% if opinion.isTrashed %}<span class="label label-default" style="position: static">{{ 'opinion.show.trashed.label'|trans({}, 'CapcoAppBundle') }}</span> {% endif %}{{ opinion.title }}</p>
                                 <p class="opinion__votes  excerpt h5">
                                     {% transchoice nbVotes with {'%count%': nbVotes} from 'CapcoAppBundle' %}
@@ -119,7 +119,7 @@
                                         {% for source in sources %}
                                             <div class="media" id="source{{ source.id }}">
                                                 {% if source.Author.Media %}
-                                                    <a class="pull-left media-middle" href="{{ path('capco_user_profile_show_all', {'username': source.Author}) }}">
+                                                    <a class="pull-left media-middle" href="{{ path('capco_user_profile_show_all', {'slug': source.Author.slug}) }}">
                                                         {% thumbnail source.Author.Media, 'avatar_source' with {'title': source.Author.username, 'alt': source.Author.username, 'class': 'img-circle  pull-left'} %}
                                                     </a>
                                                 {% endif %}

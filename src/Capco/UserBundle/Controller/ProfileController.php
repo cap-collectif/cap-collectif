@@ -52,19 +52,13 @@ class ProfileController extends BaseController
     }
 
     /**
-     * @Route("/user/{username}", name="capco_user_profile_show_all")
+     * @Route("/user/{slug}", name="capco_user_profile_show_all")
      * @param User $user
      * @Template("CapcoUserBundle:Profile:show.html.twig")
      * @return array
      */
     public function showUserAction(User $user)
     {
-        $user = $this->container->get('fos_user.user_manager')->findUserByUsername($user);
-
-        if ($user==null){
-            throw $this->createNotFoundException();
-        }
-
         $blocks = $this->getDoctrine()->getRepository('CapcoAppBundle:OpinionType')->getByUser($user);
         $arguments = $this->getDoctrine()->getRepository('CapcoAppBundle:Argument')->getByUser($user);
         $ideas = $this->getDoctrine()->getRepository('CapcoAppBundle:Idea')->getByUser($user);
@@ -90,7 +84,7 @@ class ProfileController extends BaseController
     }
 
     /**
-     * @Route("/{username}/opinions", name="capco_user_profile_show_opinions")
+     * @Route("/{slug}/opinions", name="capco_user_profile_show_opinions")
      * @param User $user
      * @return array
      * @Template("CapcoUserBundle:Profile:showUserOpinions.html.twig")
@@ -115,7 +109,7 @@ class ProfileController extends BaseController
     }
 
     /**
-     * @Route("/{username}/arguments", name="capco_user_profile_show_arguments")
+     * @Route("/{slug}/arguments", name="capco_user_profile_show_arguments")
      * @param User $user
      * @return array
      * @Template("CapcoUserBundle:Profile:showUserArguments.html.twig")
@@ -141,7 +135,7 @@ class ProfileController extends BaseController
     }
 
     /**
-     * @Route("/{username}/ideas", name="capco_user_profile_show_ideas")
+     * @Route("/{slug}/ideas", name="capco_user_profile_show_ideas")
      * @param User $user
      * @return array
      * @Template("CapcoUserBundle:Profile:showUserIdeas.html.twig")
@@ -166,7 +160,7 @@ class ProfileController extends BaseController
     }
 
     /**
-     * @Route("/{username}/sources", name="capco_user_profile_show_sources")
+     * @Route("/{slug}/sources", name="capco_user_profile_show_sources")
      * @param User $user
      * @return array
      * @Template("CapcoUserBundle:Profile:showUserSources.html.twig")

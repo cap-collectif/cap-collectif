@@ -451,6 +451,7 @@ page:
 user:
   login:
     title: Connexion à
+    email: Adresse électronique
     social:
       facebook: Se connecter avec Facebook
       gplus: Se connecter avec Google+
@@ -492,7 +493,7 @@ user:
       sources: Sources
 
 #SonataUser errors
-"Bad credentials.": Nom d'utilisateur ou mot de passe incorrect
+"Bad credentials.": Email ou mot de passe incorrect
 
 # blog module
 blog:

@@ -12,6 +12,19 @@ use FOS\UserBundle\Model\UserManagerInterface;
 
 class UserAdmin extends BaseAdmin
 {
+    public function getFormBuilder()
+    {
+        $this->formOptions['data_class'] = $this->getClass();
+
+        $options = $this->formOptions;
+        $options['validation_groups'] = 'Default';
+
+        $formBuilder = $this->getFormContractor()->getFormBuilder( $this->getUniqid(), $options);
+
+        $this->defineFormBuilder($formBuilder);
+
+        return $formBuilder;
+    }
 
     private $rolesLabels = [
         'ROLE_USER' => 'admin.fields.user.roles.user',
@@ -25,14 +38,22 @@ class UserAdmin extends BaseAdmin
     ];
 
     protected $translationDomain = 'SonataAdminBundle';
+
     /**
      * {@inheritdoc}
      */
     protected function configureListFields(ListMapper $listMapper)
     {
         $listMapper
-            ->addIdentifier('username')
-            ->add('email')
+            ->addIdentifier('email')
+            ->add('username', null, array(
+                'label' => 'admin.fields.user.username',
+                'translation_domain' => 'SonataAdminBundle',
+            ))
+            ->add('slug', null, array(
+                'label' => 'admin.fields.user.slug',
+                'translation_domain' => 'SonataAdminBundle',
+            ))
             ->add('enabled', null, array(
                 'editable' => true,
             ))
@@ -62,9 +83,15 @@ class UserAdmin extends BaseAdmin
     {
         $filterMapper
             ->add('id')
-            ->add('username')
+            ->add('username', null, array(
+                'label' => 'admin.fields.user.username',
+                'translation_domain' => 'SonataAdminBundle',
+            ))
             ->add('email')
-            ->add('enabled')
+            ->add('enabled', null, array(
+                'label' => 'admin.fields.user.enabled',
+                'translation_domain' => 'SonataAdminBundle',
+            ))
             ->add('locked')
         ;
     }
@@ -78,6 +105,7 @@ class UserAdmin extends BaseAdmin
             ->with('General')
             ->add('username')
             ->add('email')
+            ->add('slug')
             ->end()
             ->with('Profile')
             ->add('dateOfBirth')
@@ -85,6 +113,7 @@ class UserAdmin extends BaseAdmin
             ->add('lastname')
             ->add('website')
             ->add('biography')
+            ->add('city')
             ->add('gender')
             ->add('locale')
             ->add('timezone')
@@ -166,9 +195,13 @@ class UserAdmin extends BaseAdmin
             ->add('lastname', null, array('required' => false))
             ->add('website', 'url', array('required' => false))
             ->add('biography', 'text', array('required' => false))
+            ->add('city', null, array(
+                'required' => false,
+                'label' => 'admin.fields.user.city',
+                'translation_domain' => 'SonataAdminBundle',
+            ))
             ->add('gender', 'sonata_user_gender', array(
                 'required' => true,
-                'translation_domain' => $this->getTranslationDomain()
             ))
             ->add('locale', 'locale', array('required' => false))
             ->add('timezone', 'timezone', array('required' => false))
@@ -207,6 +240,12 @@ class UserAdmin extends BaseAdmin
                     'required' => false,
                     'label' => 'Verrouillé',
                     'translation_domain' => 'SonataAdminBundle',
+                ))
+                ->add('isTermsAccepted', null, array(
+                    'required' => false,
+                    'label' => 'admin.fields.user.is_terms_accepted',
+                    'translation_domain' => 'SonataAdminBundle',
+                    'data' => true,
                 ))
                 ->add('expired', null, array(
                     'required' => false,

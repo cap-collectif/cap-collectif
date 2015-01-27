@@ -177,6 +177,8 @@ sonata_user:
     profile:
         form:
             type: capco_user_profile
+            validation_groups:
+                - Default
         register:
             form:
                 type: capco_user_registration

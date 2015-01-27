@@ -457,6 +457,7 @@ page:
 user:
   login:
     title: Connexion à
+    email: Adresse électronique
     social:
       facebook: Se connecter avec Facebook
       gplus: Se connecter avec Google+

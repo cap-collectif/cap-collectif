@@ -3,7 +3,7 @@
 <div class="opinion  opinion--add-argument  block  block--shadowed">
     <div class="opinion__body  box">
         {% if app.user.Media %}
-            <a class="pull-left" href="{{ path('capco_user_profile_show_all', {'username': app.user}) }}">
+            <a class="pull-left" href="{{ path('capco_user_profile_show_all', {'slug': app.user.slug}) }}">
                 {% thumbnail app.user.Media, 'avatar' with {'title': app.user.username, 'alt': app.user.username, 'class': 'media-object img-circle'} %}
             </a>
         {% endif %}
