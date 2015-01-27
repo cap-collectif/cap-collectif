@@ -1,9 +1,29 @@
 {% extends 'SonataDoctrineORMAdminBundle:Form:form_admin_fields.html.twig' %}
 
-{% block checkbox_widget %}
+{% block checkbox_row -%}
+    <div class=""></div>
+    {{ block('choice_row') }}
+{%- endblock checkbox_row %}
+
+{% block checkbox_label -%}
+    {{ block('choice_label') }}
+{%- endblock checkbox_label %}
+
+{% block sonata_security_roles_widget %}
     {% spaceless %}
-        <label for="{{ id }}">
-            <input type="checkbox" {{ block('widget_attributes') }}{% if value is defined %} value="{{ value }}"{% endif %}{% if checked %} checked="checked"{% endif %} /> {{ label|trans({}, 'SonataAdminBundle') }}
-        </label>
+        <div class="editable">
+            {{ block('choice_widget') }}
+        </div>
+        {% if read_only_choices|length > 0 %}
+            <div class="readonly">
+                <h4>{{ 'field.label_roles_readonly'|trans({}, "SonataUserBundle") }}</h4>
+                <ul>
+                    {% for choice in read_only_choices %}
+                        <li>{{ choice }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        {% endif %}
     {% endspaceless %}
-{% endblock %}
+{% endblock sonata_security_roles_widget %}
+

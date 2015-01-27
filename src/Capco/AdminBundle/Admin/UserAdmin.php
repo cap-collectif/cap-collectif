@@ -13,6 +13,17 @@ use FOS\UserBundle\Model\UserManagerInterface;
 class UserAdmin extends BaseAdmin
 {
 
+    private $rolesLabels = [
+        'ROLE_USER' => 'admin.fields.user.roles.user',
+        'ROLE_ADMIN' => 'admin.fields.user.roles.admin',
+        'ROLE_SUPER_ADMIN' => 'admin.fields.user.roles.super_admin',
+    ];
+
+    private $rolesLabelsNoSuper = [
+        'ROLE_USER' => 'admin.fields.user.roles.user',
+        'ROLE_ADMIN' => 'admin.fields.user.roles.admin',
+    ];
+
     protected $translationDomain = 'SonataAdminBundle';
     /**
      * {@inheritdoc}
@@ -68,9 +79,6 @@ class UserAdmin extends BaseAdmin
             ->add('username')
             ->add('email')
             ->end()
-            ->with('Groups')
-            ->add('groups')
-            ->end()
             ->with('Profile')
             ->add('dateOfBirth')
             ->add('firstname')
@@ -83,12 +91,25 @@ class UserAdmin extends BaseAdmin
             ->add('phone')
             ->end()
             ->with('Social')
-            ->add('facebookUid')
-            ->add('facebookName')
-            ->add('twitterUid')
-            ->add('twitterName')
-            ->add('gplusUid')
-            ->add('gplusName')
+            ->add('facebook_id', null, array(
+                'required' => false,
+                'label' => 'admin.fields.user.facebook_id',
+                'translation_domain' => 'SonataAdminBundle',
+            ))
+            ->add('facebook_access_token', null, array(
+                'label' => 'admin.fields.user.facebook_access_token',
+                'translation_domain' => 'SonataAdminBundle',
+            ))
+            ->add('google_id', null, array(
+                'required' => false,
+                'label' => 'admin.fields.user.google_id',
+                'translation_domain' => 'SonataAdminBundle',
+            ))
+            ->add('google_access_token', null, array(
+                'required' => false,
+                'label' => 'admin.fields.user.google_access_token',
+                'translation_domain' => 'SonataAdminBundle',
+            ))
             ->end()
             ->with('Security')
             ->add('token')
@@ -102,6 +123,9 @@ class UserAdmin extends BaseAdmin
      */
     protected function configureFormFields(FormMapper $formMapper)
     {
+        $currentUser = $user = $this->getConfigurationPool()->getContainer()->get('security.context')->getToken()->getUser();
+        $subject = $this->getSubject();
+
         // define group zoning
         $formMapper
             ->tab('User')
@@ -109,12 +133,16 @@ class UserAdmin extends BaseAdmin
             ->with('General', array('class' => 'col-md-6'))->end()
             ->with('Social', array('class' => 'col-md-6'))->end()
             ->end()
-            ->tab('Security')
-            ->with('Status', array('class' => 'col-md-4'))->end()
-            ->with('Keys', array('class' => 'col-md-4'))->end()
-            ->with('Roles', array('class' => 'col-md-12'))->end()
-            ->end()
         ;
+        if (($subject && !$subject->hasRole('ROLE_SUPER_ADMIN')) || $currentUser->hasRole('ROLE_SUPER_ADMIN') ) {
+            $formMapper
+                ->tab('Security')
+                ->with('Status', array('class' => 'col-md-4'))->end()
+                ->with('Keys', array('class' => 'col-md-4'))->end()
+                ->with('Roles', array('class' => 'col-md-12'))->end()
+                ->end()
+            ;
+        }
 
         $now = new \DateTime();
 
@@ -149,29 +177,29 @@ class UserAdmin extends BaseAdmin
             ->with('Social')
             ->add('facebook_id', null, array(
                 'required' => false,
-                'label' => 'Facebook Id',
+                'label' => 'admin.fields.user.facebook_id',
                 'translation_domain' => 'SonataAdminBundle',
             ))
             ->add('facebook_access_token', null, array(
                 'required' => false,
-                'label' => 'Facebook access token',
+                'label' => 'admin.fields.user.facebook_access_token',
                 'translation_domain' => 'SonataAdminBundle',
             ))
             ->add('google_id', null, array(
                 'required' => false,
-                'label' => 'Google Id',
+                'label' => 'admin.fields.user.google_id',
                 'translation_domain' => 'SonataAdminBundle',
             ))
             ->add('google_access_token', null, array(
                 'required' => false,
-                'label' => 'Google access token',
+                'label' => 'admin.fields.user.google_access_token',
                 'translation_domain' => 'SonataAdminBundle',
             ))
             ->end()
             ->end()
         ;
 
-        if ($this->getSubject() && !$this->getSubject()->hasRole('ROLE_SUPER_ADMIN')) {
+        if (($subject && !$subject->hasRole('ROLE_SUPER_ADMIN')) || $currentUser->hasRole('ROLE_SUPER_ADMIN') ) {
             $formMapper
                 ->tab('Security')
                 ->with('Status')
@@ -196,26 +224,55 @@ class UserAdmin extends BaseAdmin
                     'translation_domain' => 'SonataAdminBundle',
                 ))
                 ->end()
-                ->with('Roles')
-                ->add('realRoles', 'sonata_security_roles', array(
-                    'label'    => 'form.label_roles',
-                    'expanded' => true,
-                    'multiple' => true,
-                    'required' => false,
-                ))
+            ;
+            if ($currentUser->hasRole('ROLE_SUPER_ADMIN')) {
+                $formMapper
+                    ->with('Roles')
+                    ->add(
+                        'realRoles',
+                        'sonata_security_roles',
+                        array(
+                            'label' => 'form.label_roles',
+                            'expanded' => true,
+                            'multiple' => true,
+                            'required' => false,
+                            'translation_domain' => 'SonataAdminBundle',
+                            'choices' => $this->rolesLabels,
+                        )
+                    )
+                    ->end()
+                ;
+            } else {
+                $formMapper
+                    ->with('Roles')
+                    ->add(
+                        'realRoles',
+                        'sonata_security_roles',
+                        array(
+                            'label' => 'form.label_roles',
+                            'expanded' => true,
+                            'multiple' => true,
+                            'required' => false,
+                            'translation_domain' => 'SonataAdminBundle',
+                            'choices' => $this->rolesLabelsNoSuper,
+                        )
+                    )
+                    ->end()
+                ;
+            }
+            $formMapper
+                ->with('Keys')
+                ->add('token', null, array('required' => false))
+                ->add('twoStepVerificationCode', null, array('required' => false))
                 ->end()
                 ->end()
             ;
         }
+    }
 
-        $formMapper
-            ->tab('Security')
-            ->with('Keys')
-            ->add('token', null, array('required' => false))
-            ->add('twoStepVerificationCode', null, array('required' => false))
-            ->end()
-            ->end()
-        ;
+    public function prePersist($user)
+    {
+        $user->setIsTermsAccepted(true);
     }
 
 }

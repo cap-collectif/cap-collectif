@@ -274,6 +274,10 @@ admin:
       facebook_access_token: Token d'accès Facebook
       google_id: Id Google+
       google_access_token: Token d'accès Google+
+      roles:
+        user: Utilisateur
+        admin: Administrateur
+        super_admin: Super administrateur
   action:
     reporting:
       disable:

@@ -28,8 +28,8 @@
             <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{ 'header.hello' |trans({}, 'CapcoAppBundle') }} {{ app.user.username }}<span class="caret"></span></a>
                 <ul class="dropdown-menu" role="menu">
-                    {% if is_granted('ROLE_SUPER_ADMIN') %}
-                    <li><a href="{{ path('sonata_admin_dashboard') }}">{{ 'header.administration'|trans({}, 'CapcoAppBundle') }}</a></li>
+                    {% if is_granted('ROLE_ADMIN') %}
+                        <li><a href="{{ path('sonata_admin_dashboard') }}">{{ 'header.administration'|trans({}, 'CapcoAppBundle') }}</a></li>
                     {% endif %}
                     <li><a href="{{ path('fos_user_profile_show') }}">{{ 'header.profile'|trans({}, 'CapcoAppBundle') }}</a></li>
                     <li><a href="{{ path('fos_user_profile_edit') }}">{{ 'header.user_settings'|trans({}, 'CapcoAppBundle') }}</a></li>
