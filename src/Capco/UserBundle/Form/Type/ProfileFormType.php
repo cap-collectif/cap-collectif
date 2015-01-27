@@ -27,6 +27,10 @@ class ProfileFormType extends AbstractType
                 'label'    => 'Nom',
                 'required' => true
             ))
+            ->add('email', null, array(
+                'label'    => 'Adresse électronique',
+                'required' => true
+            ))
             ->add('media', 'sonata_media_type', array(
                 'provider' => 'sonata.media.provider.image',
                 'context' => 'default',

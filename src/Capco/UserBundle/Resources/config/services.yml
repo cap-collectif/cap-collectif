@@ -17,4 +17,3 @@ services:
     class: Capco\UserBundle\Form\Type\ProfileFormType
     tags:
       - { name: form.type, alias: capco_user_profile }
-  

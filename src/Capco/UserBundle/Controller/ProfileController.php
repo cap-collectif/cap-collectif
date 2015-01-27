@@ -189,5 +189,4 @@ class ProfileController extends BaseController
             'countSources' => $countSources,
         );
     }
-
 }
