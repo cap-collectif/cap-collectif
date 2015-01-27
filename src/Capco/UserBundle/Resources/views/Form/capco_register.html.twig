@@ -1,0 +1,10 @@
+{% block _sonata_user_registration_form_checkbox_widget %}
+    {% spaceless %}
+        <div class="checkbox login__checkbox">
+            <label for="{{ id }}">
+                <input type="checkbox" {{ block('widget_attributes') }} value="{{ value }}" />
+                {{ 'user.register.terms.label'|trans({'%cgu%': '<a href="'~ app.request.baseUrl ~ capco_site_parameter_value('signin.cgu.link') ~ '">' ~ ( capco_site_parameter_value('signin.cgu.name') | lower ) ~ '</a>'}, 'CapcoAppBundle') | raw }}
+            </label>
+        </div>
+    {% endspaceless %}
+{% endblock %}

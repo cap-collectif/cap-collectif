@@ -21,6 +21,11 @@ class RegistrationFormType extends AbstractType
                 'label' => null,
                 'required' => true,
             ));
+        } else {
+            $builder->add('isTermsAccepted', 'hidden', array(
+                'data' => true,
+                'property_path' => 'isTermsAccepted',
+            ));
         }
     }
 
