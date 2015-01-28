@@ -9,16 +9,16 @@ global:
 #Errors
 error:
   404:
-    title: "Désolé, cette page n'existe pas"
+    title: "Désolé, cette page n'existe pas (%code%)"
   500:
-    title: "Erreur sur le serveur"
+    title: "Erreur sur le serveur (%code%)"
   other:
-    title: Erreur
+    title: Erreur %code%
   actions: Vous pouvez :
   to_previous_page: Retourner à la page précédente
   to_homepage: Aller à la page d'Accueil
   report: Reporter un problème
-  contribute: Profiez-en pour contribuer à une consultation
+  contribute: Profitez-en pour contribuer à une consultation
   access_restricted: Accès interdit aux utilisateurs non identifiés.
   feature_not_enabled: "Cette fonction n'est pas activée, veuillez l'activer dans l'espace d'administration !"
 
