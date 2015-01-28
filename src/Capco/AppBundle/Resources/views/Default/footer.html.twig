@@ -8,7 +8,7 @@
                 {% endif %}
                 {% set footer_body = capco_site_parameter_value('footer.text.body') %}
                 {% if null != footer_body %}
-                    <p>{{ footer_body }}</p>
+                    {{ footer_body|raw }}
                 {% endif %}
             </div>
 

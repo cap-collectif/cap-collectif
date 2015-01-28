@@ -63,7 +63,10 @@
     </div>
 
     {% if idea.isTrashed == false %}
+    <div class="container">
+        <h2>{{ 'idea.title'|trans({}, 'CapcoAppBundle') }}</h2>
         {{ render_esi(controller('CapcoAppBundle:Idea:lastIdeas', {'max': 4, 'offset': 0})) }}
+    </div>
     {% endif %}
 
     {% if idea.isTrashed == true %}

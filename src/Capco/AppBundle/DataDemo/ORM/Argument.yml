@@ -1,0 +1,29 @@
+Capco\AppBundle\Entity\Argument:
+    argument1:
+        body: <text(1000)>
+        voteCount: 0
+        opinion: @opinion<numberBetween(1, 11)>
+        Author: @user<numberBetween(1, 5)>
+        type: <numberBetween(0, 1)>
+        isTrashed: false
+    argument2:
+        body: <text(1000)>
+        voteCount: 0
+        opinion: @opinion<numberBetween(1, 11)>
+        Author: @user<numberBetween(1, 5)>
+        type: <numberBetween(0, 1)>
+        isTrashed: false
+    argument3:
+        body: <text(1000)>
+        voteCount: 0
+        opinion: @opinion<numberBetween(1, 11)>
+        Author: @user<numberBetween(1, 5)>
+        type: <numberBetween(0, 1)>
+        isTrashed: false
+    argument{4..25}:
+        body: <text(1000)>
+        voteCount: 0
+        opinion: @opinion<numberBetween(1, 17)>
+        Author: @user<numberBetween(1, 5)>
+        type: <numberBetween(0, 1)>
+        isTrashed: false

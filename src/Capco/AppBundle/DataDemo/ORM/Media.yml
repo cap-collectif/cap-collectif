@@ -1,0 +1,122 @@
+Capco\MediaBundle\Entity\Media:
+
+    # consultations
+    MediaConsultation1:
+        binaryContent: ../files/consultation-1.jpg
+        enabled:       true
+        name:          Titre du média
+        context:       @MediaContext1
+
+    MediaConsultation2:
+        binaryContent: ../files/consultation-2.jpg
+        enabled:       true
+        name:          Titre du média 2
+        context:       @MediaContext1
+
+    MediaConsultation3:
+        binaryContent: ../files/consultation-3.jpg
+        enabled:       true
+        name:          Titre du média 2
+        context:       @MediaContext1
+
+    MediaConsultationImageVideo:
+        binaryContent: ../files/consultation-image-video.jpg
+        enabled:       true
+        name:          Titre du média 2
+        context:       @MediaContext1
+
+    # consultations
+    MediaIdea1:
+        binaryContent: ../files/idea-1.jpg
+        enabled:       true
+        name:          Titre du média
+        context:       @MediaContext1
+
+    MediaIdea2:
+        binaryContent: ../files/idea-2.jpg
+        enabled:       true
+        name:          Titre du média 2
+        context:       @MediaContext1
+
+
+    # users
+    MediaUser1:
+        binaryContent: ../files/user/sfavot.jpg
+        enabled:       true
+        name:          Suzanne Favot
+        context:       @MediaContext2
+
+    MediaUser2:
+        binaryContent: ../files/user/lbrunet.jpg
+        enabled:       true
+        name:          Laurent Brunet
+        context:       @MediaContext2
+
+    MediaUser3:
+        binaryContent: ../files/user/xlacot.jpg
+        enabled:       true
+        name:          Xavier Lacot
+        context:       @MediaContext2
+
+
+    #SiteImages
+    Logo:
+        binaryContent: ../files/logo.png
+        enabled:       true
+        name:          Logo
+        context:       @MediaContext3
+
+    header:
+        binaryContent: ../files/header.jpg
+        enabled:       true
+        name:          Header
+        context:       @MediaContext3
+
+    picto:
+        binaryContent: ../files/picto.png
+        enabled:       true
+        name:          Picto
+        context:       @MediaContext3
+
+    # Social Network
+    MediaFlickr:
+        binaryContent: ../files/social/flickr.png
+        enabled:       true
+        name:          Flickr
+        context:       @MediaContext2
+
+    MediaFacebook:
+        binaryContent: ../files/social/facebook.png
+        enabled:       true
+        name:          Facebook
+        context:       @MediaContext2
+
+    MediaGooglePlus:
+        binaryContent: ../files/social/google_plus.png
+        enabled:       true
+        name:          Google
+        context:       @MediaContext2
+
+    MediaLinkedIn:
+        binaryContent: ../files/social/linkedIn.png
+        enabled:       true
+        name:          LinkedIn
+        context:       @MediaContext2
+
+    MediaRSS:
+        binaryContent: ../files/social/rss.png
+        enabled:       true
+        name:          RSS
+        context:       @MediaContext2
+
+    MediaTwitter:
+        binaryContent: ../files/social/twitter.png
+        enabled:       true
+        name:          Twitter
+        context:       @MediaContext2
+
+    MediaCapcoSite:
+        binaryContent: ../files/social/capco.png
+        enabled:       true
+        name:          Capco
+        context:       @MediaContext2

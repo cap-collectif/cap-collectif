@@ -17,19 +17,27 @@
         {% if posts|length > 0 %}
             <ul class="media-list">
                 {% for post in posts %}
-                    <li class="media  media--news  block  block--shadowed  box">
+                    <li class="media  media--news  block  block--shadowed">
                         <!-- .pull-left has to be applied to a and not to media-object -->
                         {%  if post.Media %}
                             <a href="{{ url('app_blog_show', {'slug': post.slug}) }}" class="pull-left">
-                                {% thumbnail post.Media, 'blog' with {'title': post.Media.name, 'alt': post.Media.name, 'class': 'media-object'} %}
+                                {% thumbnail post.Media, 'post' with {'title': post.Media.name, 'alt': post.Media.name, 'class': 'media-object'} %}
                             </a>
                         {%  endif %}
-                        <div class="media-body">
+                        <div class="media-body box">
                             <h3 class="media-title"><a href="{{ url('app_blog_show', {'slug': post.slug}) }}">{{ post.title | jolitypo() }}</a></h3>
-                            <p class="excerpt  h5  media--news__meta">
-                                {{- post.publishedAt | localizeddate('long', 'none') }},
-                                {% include 'CapcoAppBundle:Blog:_authors.html.twig' with {'authors': post.Authors} %}
-                            </p>
+                            <div class="media excerpt  h5  media--news__meta">
+                                {% for author in post.Authors %}
+                                    <div class="media-body">
+                                        <p class="media--aligned  excerpt">{{ 'blog.written_by' | trans({}, 'CapcoAppBundle') }} <a href="{{ path('capco_user_profile_show_all', { username: author.username })}}">{{ author.username }}</a>, le {{ post.publishedAt | localizeddate('long', 'none') }} </p>
+                                    </div>
+                                    {% if loop.revindex0 == '1' %}
+                                        {{ 'blog.and' | trans({}, 'CapcoAppBundle') }}
+                                    {% elseif loop.revindex0 == '2' %}
+                                        {{- ', ' }}
+                                    {% endif %}
+                                {% endfor %}
+                            </div>
                             {% if post.abstract %}
                                 <p class="media--news__text">{{ post.abstract | jolitypo() }}</p>
                             {% endif %}

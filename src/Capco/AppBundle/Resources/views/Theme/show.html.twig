@@ -14,7 +14,7 @@
         {% if theme.body %}
             <h2 class="h2">{{ 'theme.show.body_title'|trans({}, 'CapcoAppBundle') }}
             </h2>
-            <p>{{ theme.body }}</p>
+            {{ theme.body|raw }}
         {% endif %}
         <span class="h5">{{ 'theme.show.status.title'|trans({}, 'CapcoAppBundle') }}
             {% if theme.status == statuses.opened %}
@@ -34,7 +34,10 @@
         </div>
     {% endif %}
     {% if theme.Ideas|length > 0 %}
-        {{ render_esi(controller('CapcoAppBundle:Theme:themeIdeas', {'theme': theme})) }}
+        <div class="container  block">
+            <h2 class="h2">{{ 'idea.index.appendices.index.title'|trans({}, 'CapcoAppBundle') }}</h2>
+            {{ render_esi(controller('CapcoAppBundle:Theme:themeIdeas', {'theme': theme})) }}
+        </div>
     {% endif %}
 
 {% endblock %}

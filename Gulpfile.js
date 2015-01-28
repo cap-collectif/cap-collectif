@@ -46,8 +46,8 @@ gulp.task('copy', function() {
     gulp.src(app + '/img/*')
         .pipe(gulp.dest('web/img/'));
 
-    gulp.src(app + '/libs/fancybox/source/**/*')
-        .pipe(gulp.dest('web/js/fancybox'));
+    //gulp.src(app + '/libs/fancybox/source/**/*')
+    //    .pipe(gulp.dest('web/js/fancybox'));
 });
 
 gulp.task('concat', function() {
@@ -55,6 +55,7 @@ gulp.task('concat', function() {
         app + '/libs/jquery/dist/jquery.js',
         app + '/libs/bootstrap/assets/javascripts/bootstrap.js',
         app + '/libs/readmore/readmore.js',
+        app + '/libs/fancybox/source/jquery.fancybox.js',
         app + '/js/googleCharts.js',
         app + '/js/app.js'
     ])

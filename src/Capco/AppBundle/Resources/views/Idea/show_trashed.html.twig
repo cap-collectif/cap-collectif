@@ -18,7 +18,7 @@
 
         {% set content_body = capco_site_parameter_value('ideas.trashed.content.body') %}
         {% if null != content_body %}
-            <p class="block">{{ content_body }}</p>
+            <div class="block">{{ content_body|raw }}</div>
         {% endif %}
 
         <div class="row">

@@ -7,7 +7,7 @@
             <h1>{{ 'contact.title' | trans({}, 'CapcoAppBundle') }}</h1>
             {% set teaser = capco_site_parameter_value('contact.jumbotron.body') %}
             {%  if teaser != null %}
-                <p>{{ teaser }}</p>
+                {{ teaser|raw }}
             {% endif %}
         </div>
     </div>
@@ -17,7 +17,7 @@
     <div class="container">
         {% set body = capco_site_parameter_value('contact.content.body') %}
         {%  if body != null %}
-            <p>{{ body }}</p>
+            {{ body|raw }}
         {% endif %}
         {% set address = capco_site_parameter_value('contact.content.address') %}
         {% set tel = capco_site_parameter_value('contact.content.phone_number') %}
@@ -25,18 +25,16 @@
             <address>
                 {% if address != null %}
                     <strong>{{ 'contact.address' | trans({}, 'CapcoAppBundle') }}</strong><br/>
-                    {{ address }}<br/><br/>
+                    {{ address|raw }}<br/>
                 {% endif %}
                 {% if tel != null %}
                     <strong>{{ 'contact.tel' | trans({}, 'CapcoAppBundle') }}</strong><br/>
-                    {{ tel }}
+                    {{ tel|raw }}
                 {% endif %}
             </address>
         {% endif %}
 
-        <hr/>
-
-        <h4 class="h4">{{ 'contact.form.title' | trans({}, 'CapcoAppBundle') }}</h4>
+        <h4 class="h2">{{ 'contact.form.title' | trans({}, 'CapcoAppBundle') }}</h4>
         <div class="row">
             <div class="col-xs-12 col-md-8">
                 <form method="post">

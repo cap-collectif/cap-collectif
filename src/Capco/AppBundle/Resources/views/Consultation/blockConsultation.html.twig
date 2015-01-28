@@ -5,6 +5,10 @@
             <a href="{{ path('app_consultation_show', {'slug': consultation.slug}) }}" {% if consultation.video %}class="play"{% endif %}>
                 {% thumbnail consultation.Cover, 'consultation' with {'title': consultation.Cover.name, 'alt': consultation.Cover.name, 'class': 'img-responsive'} %}
             </a>
+        {% else %}
+            <a href="{{ path('app_consultation_show', {'slug': consultation.slug}) }}" {% if consultation.video %}class="play"{% endif %}>
+                <div class="bg--default bg--consultation"></div>
+            </a>
         {%  endif %}
 
         <div class="box">

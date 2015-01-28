@@ -53,7 +53,7 @@ contact:
   address: Adresse
   tel: Téléphone
   form:
-    title: Formulaire de contact
+    title: Ecrivez-nous !
     name: Nom
     email: Adresse email
     message: Message
@@ -168,6 +168,7 @@ idea:
 
 #Theme
 theme:
+  none: Il n' y a pas de thème.
   see_all: Voir tous les thèmes
   index:
     title: Thèmes

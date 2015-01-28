@@ -53,30 +53,22 @@ class HomepageController extends Controller
 
     /**
      * @Cache(expires="+1 minutes", maxage="60", smaxage="60", public="true")
-     * @Template()
+     * @Template("CapcoAppBundle:Idea:lastIdeas.html.twig")
      */
     public function lastIdeasAction($max = 4, $offset = 0)
     {
         $ideas = $this->getDoctrine()->getRepository('CapcoAppBundle:Idea')->getLast($max, $offset);
-
-        if (!isset($ideas[0])) {
-            return new Response('');
-        }
 
         return [ 'ideas' => $ideas ];
     }
 
     /**
      * @Cache(expires="+1 minutes", maxage="60", smaxage="60", public="true")
-     * @Template()
+     * @Template("CapcoAppBundle:Theme:lastThemes.html.twig")
      */
     public function lastThemesAction($max = 4, $offset = 0)
     {
         $topics = $this->getDoctrine()->getRepository('CapcoAppBundle:Theme')->getLast($max, $offset);
-
-        if (!isset($topics[0])) {
-            return new Response('');
-        }
 
         return [ 'topics' => $topics ];
     }

@@ -27,13 +27,6 @@ liip_imagine:
             filters:
                 thumbnail: { size: [500, 70], mode: outbound }
 
-        default_blog:
-            quality: 70
-            controller_action: 'SonataMediaBundle:Media:liipImagineFilter'
-            format: png
-            filters:
-                thumbnail: { size: [220, 180], mode: outbound }
-
         default_blockHeader:
             quality: 100
             controller_action: 'SonataMediaBundle:Media:liipImagineFilter'
@@ -47,6 +40,13 @@ liip_imagine:
             format: png
             filters:
                 thumbnail: { size: [400, 300], mode: inbound }
+
+        default_post:
+            quality: 80
+            controller_action: 'SonataMediaBundle:Media:liipImagineFilter'
+            format: png
+            filters:
+                thumbnail: { size: [320, 240], mode: inbound }
 
         default_form:
             quality: 70

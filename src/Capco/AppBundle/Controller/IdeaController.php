@@ -152,10 +152,6 @@ class IdeaController extends Controller
     {
         $ideas = $this->getDoctrine()->getRepository('CapcoAppBundle:Idea')->getLast($max, $offset);
 
-        if (!isset($ideas[0])) {
-            return new Response('');
-        }
-
         return [ 'ideas' => $ideas ];
     }
 

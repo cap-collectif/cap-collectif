@@ -105,9 +105,6 @@ h2 + h3 {
 
 a.excerpt {
   color: $excerpt;
-  &:hover {
-    color: $link-color;
-  }
 }
 
 .nb-bordered {
@@ -185,7 +182,7 @@ a.excerpt {
 
 .bg--default {
   background-color: $light-gray;
-  height: 142px;
+  height: 195px;
   display: block;
   position: relative;
 }

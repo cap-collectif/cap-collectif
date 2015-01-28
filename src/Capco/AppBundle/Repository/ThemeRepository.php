@@ -84,16 +84,18 @@ class ThemeRepository extends EntityRepository
     private function joinEnabledConsultations(QueryBuilder $qb, $alias = 'c')
     {
         $qb->leftJoin('t.Consultations', $alias)
-            ->addSelect('c');
-        $this->whereIsEnabled($qb, $alias);
+            ->addSelect('c')
+            ->orWhere('c.isEnabled = :isEnabled')
+            ->setParameter('isEnabled', true);
         return $qb;
     }
 
     private function joinEnabledIdeas(QueryBuilder $qb, $alias = 'i')
     {
         $qb->leftJoin('t.Ideas', 'i')
-            ->addSelect('i');
-        $this->whereIsEnabled($qb, 'i');
+            ->addSelect('i')
+            ->orWhere('i.isEnabled = :isEnabled')
+            ->setParameter('isEnabled', true);
         return $qb;
     }
 

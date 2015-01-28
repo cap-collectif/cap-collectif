@@ -21,8 +21,20 @@
 {% set btnPrimary = capco_site_color_value('color.btn.primary') %}
 {% set btnPrimaryText = capco_site_color_value('color.btn.primary.text') %}
 
+{% set link = capco_site_color_value('color.link') %}
+{% set linkHover = capco_site_color_value('color.link.hover') %}
+
 
 <style>
+
+    a {
+        color: {{ link }};
+    }
+
+    a:hover,
+    a:focus {
+        color: {{ link }};
+    }
 
     h1, .h1 { color: {{ h1 }};}
     h2, .h2 { color: {{ h2 }}; border-bottom-color: {{ h2 }}; }
@@ -66,48 +78,41 @@
         border-bottom-color: {{ sectionTitle }};
     }
 
-    .btn-custom-1,
-    .btn--outline.btn-custom-1{
-        color: {{ btnText }}!important;
-        background-color: {{ btn }}!important;
-        border-color: {{ btn }}!important;
-    }
-    .btn-custom-1:hover,
-    .btn--outline.btn-custom-1:hover{
-        background-color: {{ btnText }}!important;
-        color: {{ btn }}!important;
-    }
-
     .btn--outline.btn-primary {
-        color: {{ btnPrimaryText }}!important;
-        background-color: {{ btnPrimary }}!important;
-        border-color: {{ btnPrimary }}!important;
+        color: {{ btnPrimary }};
+        background-color: transparent;
+        border-color: {{ btnPrimary }};
     }
 
     .btn--outline.btn-primary:hover {
-        color: {{ btnPrimary }}!important;
-        background-color: {{ btnPrimaryText }}!important;
-        border-color: {{ btnPrimaryText }}!important;
+        color: {{ btnPrimaryText }};
+        background-color: {{ btnPrimary }};
+        border-color: {{ btnPrimary }};
     }
 
+
     .btn-primary {
-        color: {{ btnPrimaryText }}!important;
-        background-color: {{ btnPrimary }}!important;
-        border-color: {{ btnPrimary }}!important;
+        color: {{ btnPrimaryText }};
+        background-color: {{ btnPrimary }};
+        border-color: {{ btnPrimary }};
     }
 
     .btn-primary:hover {
-        color: {{ btnPrimary }}!important;
-        background-color: {{ btnPrimaryText }}!important;
-        border-color: {{ btnPrimaryText }}!important;
+        color: {{ btnPrimary }};
+        background-color: {{ btnPrimaryText }};
+        border-color: {{ btnPrimary }};
+    }
+
+    .bg--consultation {
+        background-color: {{ sectionBg }};
     }
 
     {% if null != capco_site_image_media('image.header') and app.request.attributes.get('_route') == 'app_homepage' %}
     .jumbotron--bg-1{
-        background-image: url({% path capco_site_image_media('image.header'), 'header' %})!important;
-        background-position: 50% 50%!important;
-        background-size: cover!important;
-        height: 450px!important;
+        background-image: url({% path capco_site_image_media('image.header'), 'header' %});
+        background-position: 50% 50%;
+        background-size: cover;
+        height: 365px;
     }
     {% endif %}
 </style>

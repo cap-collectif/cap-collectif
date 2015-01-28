@@ -10,6 +10,6 @@
 
 {% block body %}
     <div class="container">
-        <p>{{ page.body }}</p>
+        {{ page.body|raw }}
     </div>
 {% endblock %}

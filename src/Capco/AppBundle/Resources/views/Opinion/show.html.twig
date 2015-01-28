@@ -8,20 +8,19 @@
 
         {% include '@CapcoApp/Consultation/show_title.html.twig' %}
 
+        {% if consultation.isClose %}
+            <div class="alert alert-info alert-dismissible  block" role="alert">
+                <p><strong>{{ 'consultation.show.alert.ended.title'|trans({}, 'CapcoAppBundle') }}</strong> {{ 'consultation.show.alert.ended.text'|trans({}, 'CapcoAppBundle') }}</p>
+            </div>
+        {% endif %}
+
+        {% if consultation.isFuture %}
+            <div class="alert alert-info alert-dismissible  block" role="alert">
+                <p><strong>{{ 'consultation.show.alert.future.title'|trans({}, 'CapcoAppBundle') }}</strong> {{ 'consultation.show.alert.future.text'|trans({'%date%': '<strong>' ~ consultation.getOpenedAt| localizeddate('long', 'none', app.request.locale) ~ '</strong>'}, 'CapcoAppBundle') | raw }}</p>
+            </div>
+        {% endif %}
+
         <div class="row">
-
-            {% if consultation.isClose %}
-                <div class="alert alert-info alert-dismissible  block" role="alert">
-                    <p><strong>{{ 'consultation.show.alert.ended.title'|trans({}, 'CapcoAppBundle') }}</strong> {{ 'consultation.show.alert.ended.text'|trans({}, 'CapcoAppBundle') }}</p>
-                </div>
-            {% endif %}
-
-            {% if consultation.isFuture %}
-                <div class="alert alert-info alert-dismissible  block" role="alert">
-                    <p><strong>{{ 'consultation.show.alert.future.title'|trans({}, 'CapcoAppBundle') }}</strong> {{ 'consultation.show.alert.future.text'|trans({'%date%': '<strong>' ~ consultation.getOpenedAt| localizeddate('long', 'none', app.request.locale) ~ '</strong>'}, 'CapcoAppBundle') | raw }}</p>
-                </div>
-            {% endif %}
-
             <div class="col-xs-12  col-sm-4  col-md-3">
                 {% include '@CapcoApp/Consultation/show_meta.html.twig' %}
             </div>
@@ -198,11 +197,12 @@
     <script type="text/javascript" src="https://www.google.com/jsapi"></script>
     <script src="{{ asset('js/readmore/readmore.min.js') }}"></script>
     <script type="text/javascript">
+        App.module.video();
         App.module.pieChart();
         $('.more').readmore({
             maxHeight: 90,
             moreLink: '<a href="#">{{ 'consultation.show.meta.intro.read_more'|trans({}, 'CapcoAppBundle') }}</a>', //BazingaJsTranslationBundle
-            lessLink: '<a href="#">{{ 'consultation.show.meta.Intro.read_less'|trans({}, 'CapcoAppBundle') }}</a>'
+            lessLink: '<a href="#">{{ 'consultation.show.meta.intro.read_less'|trans({}, 'CapcoAppBundle') }}</a>'
         });
     </script>
 {% endblock %}

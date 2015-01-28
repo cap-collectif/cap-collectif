@@ -1,0 +1,25 @@
+Capco\AppBundle\Entity\Source:
+    source{1..6}:
+        title: <text(20)>
+        body: <text(1000)>
+        Author: @user<numberBetween(1,5)>
+        Opinion: @opinion<numberBetween(1,5)>
+        Category: @Category<numberBetween(1,5)>
+        link: http://www.cap-collectif.com/
+        voteCountSource: 0
+    source{7..10}:
+        title: <text(20)>
+        body: <text(1000)>
+        Author: @user<numberBetween(1,5)>
+        Opinion: @opinion<numberBetween(5,11)>
+        Category: @Category<numberBetween(1,5)>
+        link: http://www.cap-collectif.com/
+        voteCountSource: 0
+    source{11..23}:
+        title: <text(20)>
+        body: <text(1000)>
+        Author: @user<numberBetween(1,5)>
+        Opinion: @opinion<numberBetween(12,17)>
+        Category: @Category<numberBetween(1,5)>
+        link: https://www.parlement-et-citoyens.fr/
+        voteCountSource: 0
