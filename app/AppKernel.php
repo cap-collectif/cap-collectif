@@ -22,6 +22,9 @@ class AppKernel extends Kernel
             new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
             new Hautelook\AliceBundle\HautelookAliceBundle(),
 
+            // Doctrine migrations
+            new Doctrine\Bundle\MigrationsBundle\DoctrineMigrationsBundle(),
+
             // sonata admin
             new Sonata\CoreBundle\SonataCoreBundle(),
             new Sonata\IntlBundle\SonataIntlBundle(),
