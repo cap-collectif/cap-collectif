@@ -67,7 +67,7 @@ class MenuItemAdmin extends Admin
                 'template' => 'CapcoAdminBundle:MenuItem:menu_list_field.html.twig',
             ))
             ->add('isEnabled', null, array(
-                'editable' => false,
+                'editable' => true,
                 'label' => 'admin.fields.menu_item.is_enabled',
             ))
             ->add('position', null, array(
@@ -106,6 +106,10 @@ class MenuItemAdmin extends Admin
             ->add('title', null, array(
                 'label' => 'admin.fields.menu_item.title',
             ))
+            ->add('isEnabled', null, array(
+                'label' => 'admin.fields.menu_item.is_enabled',
+                'required' => false,
+            ))
             ->add('Menu', null, array(
                 'label' => 'admin.fields.menu_item.menu',
                 'required' => true,
@@ -126,10 +130,6 @@ class MenuItemAdmin extends Admin
 
         if ($subject->getIsFullyModifiable()) {
             $formMapper
-                ->add('isEnabled', null, array(
-                    'label' => 'admin.fields.menu_item.is_enabled',
-                    'required' => false,
-                ))
                 ->add('Page', 'sonata_type_model', array(
                     'label' => 'admin.fields.menu_item.page',
                     'required' => false,

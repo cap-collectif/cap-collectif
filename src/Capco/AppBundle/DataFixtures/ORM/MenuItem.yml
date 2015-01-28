@@ -77,3 +77,13 @@ Capco\AppBundle\Entity\MenuItem:
     position: 7
     parent: null
     menu: @menu2
+
+  MenuItem10:
+    title: Actualités
+    link: blog
+    isEnabled: 1
+    isDeletable: 0
+    isFullyModifiable: 0
+    position: 2
+    parent: null
+    menu: @menu1
