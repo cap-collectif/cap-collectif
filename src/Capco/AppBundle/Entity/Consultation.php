@@ -598,11 +598,12 @@ class Consultation
     {
         $closedAt = $this->getClosedAt();
         $now = new \DateTime();
-        if(null != $closedAt && $closedAt > $now){
-            return $closedAt->diff($now)->format('%a');
-        } else {
-            return null;
+        if ($this->getOpeningStatus() == self::OPENING_STATUS_OPENED) {
+            if (null != $closedAt && $closedAt > $now) {
+                return $closedAt->diff($now)->format('%a');
+            }
         }
+        return null;
     }
 
     /**
