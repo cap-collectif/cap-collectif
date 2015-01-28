@@ -176,6 +176,7 @@ admin:
       is_enabled: Contribuable
       created_at: Création
       updated_at: Mise à jour
+      position: Position
     opinion_vote:
       opinion: Proposition
       voter: Auteur

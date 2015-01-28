@@ -45,6 +45,9 @@ class OpinionTypeAdmin extends Admin
             ->add('updatedAt', null, array(
                 'label' => 'admin.fields.opinion_type.updated_at',
             ))
+            ->add('position', null, array(
+                'label' => 'admin.fields.opinion_type.position',
+            ))
         ;
     }
 
@@ -98,6 +101,9 @@ class OpinionTypeAdmin extends Admin
             ->add('shortName', null, array(
                 'label' => 'admin.fields.opinion_type.short_name',
             ))
+            ->add('position', null, array(
+                'label' => 'admin.fields.opinion_type.position',
+            ))
             ->add('color', 'choice', array(
                 'label' => 'admin.fields.opinion_type.color',
                 'choices' => OpinionType::$colorsType,
@@ -125,6 +131,9 @@ class OpinionTypeAdmin extends Admin
             ))
             ->add('isEnabled', null, array(
                 'label' => 'admin.fields.opinion_type.is_enabled',
+            ))
+            ->add('position', null, array(
+                'label' => 'admin.fields.opinion_type.position',
             ))
             ->add('createdAt', null, array(
                 'label' => 'admin.fields.opinion_type.created_at',
