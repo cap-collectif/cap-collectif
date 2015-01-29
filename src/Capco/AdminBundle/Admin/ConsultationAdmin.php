@@ -138,14 +138,14 @@ class ConsultationAdmin extends Admin
             ->add('openedAt', 'sonata_type_datetime_picker', array(
                 'required' => true,
                 'mapped' => false,
-                'datepicker_use_button' => false,
+                'datepicker_use_button' => true,
                 'data' => $open,
                 'label' => 'admin.fields.consultation.opened_at',
             ))
              ->add('closedAt', 'sonata_type_datetime_picker', array(
                 'required' => true,
                 'mapped' => false,
-                 'datepicker_use_button' => false,
+                 'datepicker_use_button' => true,
                 'data' => $close,
                  'help' => 'admin.help.consultation.closedAt',
                  'label' => 'admin.fields.consultation.closed_at',

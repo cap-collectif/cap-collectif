@@ -113,11 +113,11 @@ class StepAdmin extends Admin
             $formMapper
                 ->add('startAt', 'sonata_type_datetime_picker', array(
                     'label' => 'admin.fields.step.start_at',
-                    'datepicker_use_button' => false,
+                    'datepicker_use_button' => true,
                 ))
                 ->add('endAt', 'sonata_type_datetime_picker', array(
                     'label' => 'admin.fields.step.end_at',
-                    'datepicker_use_button' => false,
+                    'datepicker_use_button' => true,
                     'help' => 'admin.help.step.endAt',
                 ))
                 ->add('isEnabled', null, array(
