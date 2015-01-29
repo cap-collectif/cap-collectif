@@ -368,8 +368,8 @@ opinion:
     trashed:
       label: Dans la corbeille
   create:
-    title: Proposer une proposition
-    text: Merci d'examiner %type% en premier lieu afin de ne pas soumettre de doublon. . Vous pouvez voter pour une proposition existante !
+    title: Faire une proposition
+    text: Merci d'examiner %type% en premier lieu afin de ne pas soumettre de doublon. Vous pouvez voter pour une proposition existante !
     button: Proposer
     cancel: Annuler
     submit: Publier
