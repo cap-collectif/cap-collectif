@@ -90,10 +90,6 @@
     padding: 15px;
   }
 
-  .container {
-    padding: 0;
-  }
-
   h2, .h2,
   h1, .h1 {
     font-size: 30px;
@@ -107,10 +103,6 @@
     &:only-child {
       margin-bottom: 0;
     }
-  }
-
-  .btn {
-    margin-top: 15px;
   }
 }
 
@@ -144,9 +136,21 @@ $backgrounds:
 
 .jumbotron--bg-1 {
   position: relative;
-  p:last-child {
+  p {
+    padding-top: 10px;
+    padding-bottom: 10px;
     margin-bottom: 0;
   }
+  p:first-child {
+    padding-top: 0;
+  }
+  p:last-child {
+    padding-bottom: 0;
+  }
+}
+
+.jumbotron--bg-2 {
+  border-bottom: 1px solid $border;
 }
 
 .header-img {

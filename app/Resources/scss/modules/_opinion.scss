@@ -262,14 +262,27 @@
   }
 
   .opinion__vote-group {
-    float: left;
-    margin-right: 10px;
+    display:inline-block;
+    margin-right: 1px;
   }
 
-  @media (max-width: $screen-sm-max) {
-    .opinion__action-buttons, .opinion__vote-group {
+  .opinion__vote-group:last-child {
+    margin-right: 0;
+  }
+
+  @media (max-width: $screen-md-max) {
+    .opinion__action-buttons {
       float: none !important;
+    }
+    .opinion__vote-group {
       margin-top: 10px;
+    }
+  }
+
+  .vote-form {
+    display: inline-block;
+    > div {
+      display: inline-block;
     }
   }
 }
@@ -307,6 +320,21 @@
 }
 
 // Opinion resources
+
+.sources__panel {
+  position: relative;
+  overflow: hidden;
+  .panel-title {
+    display: inline;
+  }
+  .sources__btn {
+    display: inline-block;
+    float: right;
+    margin-right: 15px;
+    margin-bottom: 0;
+  }
+}
+
 .opinion__resources {
   border-top: 1px solid $border;
   border-bottom: 0px;

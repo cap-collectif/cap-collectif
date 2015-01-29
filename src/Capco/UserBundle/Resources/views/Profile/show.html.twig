@@ -7,18 +7,14 @@
 {% block fos_user_content %}
     {% include '@CapcoUser/Profile/showProfile.html.twig' %}
     <div class="container">
-        <div class="row">
-            <div class="col-xs-12  col-sm-12  col-md-12 col-lg-12">
-                <h2>{{ 'user.profile.show.opinions' | trans({}, 'CapcoAppBundle') }}</h2>
-                {% include '@CapcoUser/Profile/opinions.html.twig' %}
-                <h2>{{ 'user.profile.show.arguments' | trans({}, 'CapcoAppBundle') }}</h2>
-                {% include '@CapcoUser/Profile/arguments.html.twig' %}
-                <h2>{{ 'user.profile.show.sources' | trans({}, 'CapcoAppBundle') }}</h2>
-                {% include '@CapcoUser/Profile/sources.html.twig' %}
-                <h2>{{ 'user.profile.show.ideas' | trans({}, 'CapcoAppBundle') }}</h2>
-                {% include '@CapcoUser/Profile/ideas.html.twig' %}
-            </div>
-        </div>
+        <h2>{{ 'user.profile.show.opinions' | trans({}, 'CapcoAppBundle') }}</h2>
+        {% include '@CapcoUser/Profile/opinions.html.twig' %}
+        <h2>{{ 'user.profile.show.arguments' | trans({}, 'CapcoAppBundle') }}</h2>
+        {% include '@CapcoUser/Profile/arguments.html.twig' %}
+        <h2>{{ 'user.profile.show.sources' | trans({}, 'CapcoAppBundle') }}</h2>
+        {% include '@CapcoUser/Profile/sources.html.twig' %}
+        <h2>{{ 'user.profile.show.ideas' | trans({}, 'CapcoAppBundle') }}</h2>
+        {% include '@CapcoUser/Profile/ideas.html.twig' %}
     </div>
 {% endblock fos_user_content %}
 

@@ -17,7 +17,7 @@
         {% if posts|length > 0 %}
             <ul class="media-list">
                 {% for post in posts %}
-                    <li class="media  media--news  block  block--shadowed">
+                    <li class="media  media--news  block  block--bordered">
                         <!-- .pull-left has to be applied to a and not to media-object -->
                         {%  if post.Media %}
                             <a href="{{ url('app_blog_show', {'slug': post.slug}) }}" class="pull-left">

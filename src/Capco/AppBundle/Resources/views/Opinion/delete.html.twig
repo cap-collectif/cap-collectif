@@ -7,12 +7,9 @@
     <div class="container">
         <div class="row">
             <div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2">
-                <div class="dialog  dialog--{{ opinionType.color }}  block--shadowed">
+                <div class="dialog  dialog--light-gray  block--bordered">
                     <div class="dialog__header  box">
                         <h4 class="h4  dialog__title">{{ 'opinion.delete.title'|trans({}, 'CapcoAppBundle') }}</h4>
-                    </div>
-                    <div class="dialog__excerpt  excerpt  box">
-                        <p>{{ 'opinion.delete.text'|trans({}, 'CapcoAppBundle') }}</p>
                     </div>
 
                     <form method="post" {{ form_enctype(form) }}>
@@ -20,9 +17,9 @@
                             <div class="media">
                                 <div class="media-body">
                                     {{ form_rest(form) }}
-                                    <h4>{{ opinion.title }}</h4>
+                                    <h4>{{ 'opinion.delete.subtitle'|trans({}, 'CapcoAppBundle') }}</h4>
                                     <div>
-                                        {{ opinion.body|truncate(300, true, ' [...]')|raw }}
+                                        {{ 'opinion.delete.text'|trans({}, 'CapcoAppBundle') }}
                                     </div>
                                 </div>
                             </div>

@@ -1,6 +1,6 @@
 {% if sources|length > 0 %}
     {% for source in sources %}
-        <div class="media" id="source{{ source.id }}">
+        <div class="media block  block--bordered  box" id="source{{ source.id }}">
             {% if source.Author.Media %}
                 <a class="pull-left media-middle" href="{{ path('capco_user_profile_show_all', {'slug': source.Author.slug}) }}">
                     {% thumbnail source.Author.Media, 'avatar_source' with {'title': source.Author.username, 'alt': source.Author.username, 'class': 'img-circle  pull-left'} %}
@@ -17,7 +17,7 @@
                 </h4>
                 <p class="excerpt">
                     <strong>{{ 'argument.trashed.linked_proposition' | trans({}, 'CapcoAppBundle') }} </strong><a href="{{ path('app_consultation_show_opinion', {'consultationSlug': source.Opinion.consultation.slug, 'opinionTypeSlug': source.Opinion.OpinionType.slug, 'opinionSlug': source.Opinion.slug}) }}">{{ source.Opinion.title }}</a><br/>
-                    {{ source.body }}
+                    {% if source.isTrashed %}<span class="label label-default" style="position: static">{{ 'opinion.show.trashed.label'|trans({}, 'CapcoAppBundle') }}</span> {% endif %} {{ source.body }}
                 </p>
                 <button disabled="disabled" class="btn  btn-default btn-xs"><i class="cap cap-hand-like-2"></i>Pertinent</button>
                 <span class="nb-votes">{{ source.voteCountSource }}</span>

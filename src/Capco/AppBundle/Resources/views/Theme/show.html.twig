@@ -16,7 +16,7 @@
             </h2>
             {{ theme.body|raw }}
         {% endif %}
-        <span class="h5">{{ 'theme.show.status.title'|trans({}, 'CapcoAppBundle') }}
+        <p class="theme__status">{{ 'theme.show.status.title'|trans({}, 'CapcoAppBundle') }}
             {% if theme.status == statuses.opened %}
                 <span class="label label-success">{{ 'theme.show.status.opened'|trans({}, 'CapcoAppBundle') }}</span>
             {% elseif theme.status == statuses.closed %}
@@ -24,7 +24,7 @@
             {% elseif theme.status == statuses.future %}
                 <span class="label label-info">{{ 'theme.show.status.future'|trans({}, 'CapcoAppBundle') }}</span>
             {% endif %}
-        </span>
+        </p>
     </div>
 
     {% if theme.Consultations|length > 0 %}

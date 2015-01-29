@@ -1,6 +1,6 @@
 {% set type_text = argumentTypes[argType] %}
 {% set type_display = argumentTypesLabels[argType] %}
-<div class="opinion  opinion--add-argument  block  block--shadowed">
+<div class="opinion  opinion--add-argument  block  block--bordered">
     <div class="opinion__body  box">
         {% if app.user.Media %}
             <a class="pull-left" href="{{ path('capco_user_profile_show_all', {'slug': app.user.slug}) }}">

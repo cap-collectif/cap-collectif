@@ -2,7 +2,7 @@
 
 {% block opinions_list %}
     {% set trashedNb = (arguments|length + opinions|length + sources|length) %}
-    <div class="block  block--shadowed">
+    <div class="block  block--bordered">
         <div class="opinion  opinion--gray opinion--default">
             <div class="opinion__header  opinion__header--mobile-centered">
                 <h4 class="pull-left  h4  opinion__header__title">{{ 'consultation.show.trashed.title'|trans({}, 'CapcoAppBundle') }} <span class="badge">{{ trashedNb }}</span></h4>
@@ -13,6 +13,9 @@
         {% if trashedNb > 0 %}
             {% if(opinions|length > 0) %}
                 <ul class="media-list  opinion__list">
+                    <li class="bg-warning text-warning box text-center">
+                        {{ 'consultation.show.trashed.text'|trans({}, 'CapcoAppBundle') }}
+                    </li>
                     {% for opinion in opinions %}
                         {% set nbVotes = (opinion.getVoteCountAll) %}
                         {% set nbArguments = (opinion.argumentsCount) %}

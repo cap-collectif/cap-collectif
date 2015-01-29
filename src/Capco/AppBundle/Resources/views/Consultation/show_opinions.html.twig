@@ -1,18 +1,18 @@
 {% if(blocks|length > 0) %}
     {% for block in blocks %}
-        <div class="block  block--shadowed">
+        <div class="block  block--bordered">
         <div class="opinion  opinion--{{ block.color }}  opinion--default">
             <div class="opinion__header  opinion__header--mobile-centered">
 
                 <h4 class="pull-left  h4  opinion__header__title"> {{ block.title }} <span class="badge">{{ block.Opinions|length }}</span></h4>
-                <div class="pull-right  opinion__header__filter">
-                    {% if block.isEnabled == true and consultation.canContribute %}
+                {% if block.isEnabled == true and consultation.canContribute %}
+                    <div class="pull-right  opinion__header__filter">
                         <a href="{{ path('app_consultation_new_opinion' ,{'consultationSlug': consultation.slug, 'opinionTypeSlug': block.slug} ) }}" class="btn  btn-default">
                             <i class="cap cap-add-1"></i>
-                            <span class="hidden-xs  hidden-sm"> {{ 'opinion.create.button'|trans({}, 'CapcoAppBundle') }}</span>
+                            {{ 'opinion.create.button'|trans({}, 'CapcoAppBundle') }}
                         </a>
-                    {% endif %}
-                </div>
+                    </div>
+                {% endif %}
             </div>
         </div>
         <ul class="media-list  opinion__list">

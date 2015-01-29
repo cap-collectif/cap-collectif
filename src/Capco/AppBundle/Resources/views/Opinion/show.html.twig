@@ -25,7 +25,7 @@
         {% endif %}
 
         <div class="row">
-            <div class="col-xs-12  col-sm-4  col-md-3">
+            <div class="col-xs-12  col-sm-4  col-md-3  block--mobile">
                 {% include '@CapcoApp/Consultation/show_meta.html.twig' %}
             </div>
 
@@ -33,7 +33,7 @@
             {% set nbArguments = (opinion.argumentsCount) %}
             {% set nbSources = (opinion.sourcesCount) %}
             <div class="col-xs-12  col-sm-8  col-md-9 has-chart" id="details" data-ok="{{ opinion.voteCountOk }}" data-nok="{{ opinion.voteCountNok }}" data-mitige="{{ opinion.voteCountMitige }}" data-opinion-id="{{ opinion.id }}">
-                <div class="block  block--shadowed  opinion__details">
+                <div class="block  block--bordered  opinion__details">
                     <div class="opinion  opinion--{{ opinion.opinionType.color }}  opinion--current">
                         <div class="opinion__header  opinion__header--centered">
                             <a class="neutral-hover  pull-left  h4" href="{% if opinion.isTrashed %}{{ path('app_consultation_show_trashed', {'consultationSlug': consultation.slug,}) }}{% else %}{{ path('app_consultation_show_opinions', {'consultationSlug': consultation.slug, 'opinionTypeSlug': opinionType.slug}) }}{% endif %}"><i class="cap cap-arrow-1"></i><span class="hidden-xs  hidden-sm"> {{ 'opinion.show.back'|trans({}, 'CapcoAppBundle') }}</span></a>
@@ -80,31 +80,37 @@
                             {% if opinion.canContribute %}
 
                                 {% form_theme opinionVoteForm 'CapcoAppBundle:Form:opinion_vote.html.twig' %}
-                                {{ form_start(opinionVoteForm ) }}
+                                {{ form_start(opinionVoteForm, {'attr': {'class': 'vote-form'}} ) }}
                                     {{ form_errors(opinionVoteForm) }}
                                     {{ form_widget(opinionVoteForm.value, {'previousType': previousValue, 'typeStyles': opinionVoteStyles, 'voteCounts': opinionVoteCounts}) }}
                                     {{ form_rest(opinionVoteForm) }}
+
+
                                 {{ form_end(opinionVoteForm) }}
 
-                                <div class="pull-right  opinion__action-buttons">
-
-                                    {% if (previousVote) %}
+                                {% if (previousVote) %}
+                                    <div class="opinion__vote-group">
                                         {% set tokenRemoveVote = csrf_token('remove_opinion_vote') %}
                                         <form method="POST" style="display: inline-block;" action="{{ path('app_consultation_cancel_vote' ,{'consultationSlug': consultation.slug, 'opinionTypeSlug': opinionType.slug, 'opinionSlug': opinion.slug, 'opinionVote': previousVote.id } ) }}">
                                             <button class="btn  btn-info"> {{ 'source.vote.delete'|trans({}, 'CapcoAppBundle') }}</button>
                                             <input type="hidden" name="_csrf_token" value="{{ tokenRemoveVote }}">
                                         </form>
-                                    {% endif %}
+                                    </div>
+                                {% endif %}
 
-                                    {% if(userReportingOpinion == false) %}
-                                    <a href="{{ path('app_report_opinion' ,{'consultationSlug': consultation.slug, 'opinionTypeSlug': opinionType.slug, 'opinionSlug': opinion.slug } ) }}" class="btn  btn-dark-gray  btn--outline"><i class="cap cap-flag-1"></i> {{ 'opinion.report.submit'|trans({}, 'CapcoAppBundle') }}</a>
-                                    {% else %}
-                                    <button disabled="disabled" class="btn  btn-dark-gray"><i class="cap cap-flag-1"></i> {{ 'opinion.report.reported'|trans({}, 'CapcoAppBundle') }}</button>
-                                    {% endif %}
+                                <div class="pull-right  opinion__action-buttons">
 
-                                    {% if app.user is not null and app.user == opinion.Author %}
-                                    <a href="{{ path('app_consultation_edit_opinion' ,{'consultationSlug': consultation.slug, 'opinionTypeSlug': opinion.opinionType.slug, 'opinionSlug': opinion.slug } ) }}" class="btn  btn-dark-gray  btn--outline"><i class="cap cap-pencil-1"></i> {{ 'opinion.update.button'|trans({}, 'CapcoAppBundle') }}</a>
-                                    {% endif %}
+                                    <div class="opinion__vote-group">
+                                        {% if(userReportingOpinion == false) %}
+                                        <a href="{{ path('app_report_opinion' ,{'consultationSlug': consultation.slug, 'opinionTypeSlug': opinionType.slug, 'opinionSlug': opinion.slug } ) }}" class="btn  btn-dark-gray  btn--outline"><i class="cap cap-flag-1"></i> {{ 'opinion.report.submit'|trans({}, 'CapcoAppBundle') }}</a>
+                                        {% else %}
+                                        <button disabled="disabled" class="btn  btn-dark-gray"><i class="cap cap-flag-1"></i> {{ 'opinion.report.reported'|trans({}, 'CapcoAppBundle') }}</button>
+                                        {% endif %}
+
+                                        {% if app.user is not null and app.user == opinion.Author %}
+                                        <a href="{{ path('app_consultation_edit_opinion' ,{'consultationSlug': consultation.slug, 'opinionTypeSlug': opinion.opinionType.slug, 'opinionSlug': opinion.slug } ) }}" class="btn  btn-dark-gray  btn--outline"><i class="cap cap-pencil-1"></i> {{ 'opinion.update.button'|trans({}, 'CapcoAppBundle') }}</a>
+                                        {% endif %}
+                                    </div>
                                 </div>
 
                             {% endif %}
@@ -112,14 +118,18 @@
                         <div class="panel-group" id="accordion">
                             {% set tokenSource = csrf_token('source_vote') %}
                             <div class="panel panel-default">
-                                <div class="panel-heading" data-toggle="collapse" data-target="#collapseOne" style="cursor:pointer;">
-                                    <h4 class="panel-title">{% transchoice (sources|length) with {'%count%': (sources|length)} from 'CapcoAppBundle' %}source.show.count{% endtranschoice %} <i class="cap cap-arrow-67 pull-right"></i></h4>
+                                <div class=" sources__panel  panel-heading" data-toggle="collapse" data-target="#collapseOne" style="cursor:pointer;">
+                                    <h4 class="panel-title">
+                                        {% transchoice (sources|length) with {'%count%': (sources|length)} from 'CapcoAppBundle' %}source.show.count{% endtranschoice %}
+                                        {% if sources|length > 0 %} <i class="cap cap-arrow-67 pull-right"></i>{% endif %}
+                                    </h4>
+                                    {% if opinion.canContribute %}
+                                        <p class="sources__btn"><a href="{{ path('app_new_source' ,{'consultationSlug': consultation.slug, 'opinionTypeSlug': opinionType.slug, 'opinionSlug': opinion.slug} ) }}" class="btn-sm btn btn-default"><i class="cap cap-add-1"></i> {{ 'source.create.button'|trans({}, 'CapcoAppBundle') }}</a></p>
+                                    {% endif %}
                                 </div>
+                                {% if sources|length > 0 %}
                                 <div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
                                     <div class="panel-body">
-                                        {% if opinion.canContribute %}
-                                            <p><a href="{{ path('app_new_source' ,{'consultationSlug': consultation.slug, 'opinionTypeSlug': opinionType.slug, 'opinionSlug': opinion.slug} ) }}" class="btn-sm btn btn-default"><i class="cap cap-add-1"></i> {{ 'source.create.button'|trans({}, 'CapcoAppBundle') }}</a></p>
-                                        {% endif %}
                                         {% for source in sources %}
                                             <div class="media" id="source{{ source.id }}">
                                                 {% if source.Author.Media %}
@@ -169,6 +179,7 @@
                                         {% endfor %}
                                     </div>
                                 </div>
+                                {% endif %}
                             </div>
                         </div> <!-- .panel-group -->
                     </div> <!-- .opinion__description -->

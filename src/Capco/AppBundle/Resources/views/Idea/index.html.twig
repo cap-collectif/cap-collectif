@@ -22,18 +22,18 @@
 
         <div class="filter  block">
             <div class="row">
-                <div class="col-xs-12  col-sm-3  col-md-3  col-lg-2  block">
+                <div class="col-xs-12  col-sm-3  col-md-3  col-lg-2  filter__down">
                     <a href="{{ path('app_idea_create') }}" class="form-control  btn  btn-primary"><i class="cap cap-add-1"></i> {{ 'idea.create.button'|trans({}, 'CapcoAppBundle') }}</a>
                 </div>
 
                 {{ form_start(form) }}
                     {{ form_errors(form) }}
-                    <div class="col-xs-12  col-sm-3  col-md-3  col-lg-4">
+                    <div class="col-xs-12  col-sm-3  col-md-3  col-lg-4  filter__down">
                         {{ form_label(form.theme, null, {'label_attr':{"class":"control-label  sr-only"} }) }}
                         {{ form_errors(form.theme) }}
                         {{ form_widget(form.theme, {'attr':{"class":"form-control"} }) }}
                     </div>
-                    <div class="col-xs-12  col-sm-3  col-md-3  col-lg-3">
+                    <div class="col-xs-12  col-sm-3  col-md-3  col-lg-3  filter__down">
                         <div class="formgroup--inline">
                             {{ form_label(form.sort, null, {'label_attr':{"class":"control-label"} }) }}
                             <span class="formgroup--inline__control">
@@ -43,7 +43,7 @@
                         </div>
                     </div>
 
-                    <div role="form" class="col-xs-12  col-sm-3  col-md-3  col-lg-3">
+                    <div role="form" class="col-xs-12  col-sm-3  col-md-3  col-lg-3  filter__down">
                         {{ form_label(form.term, null, {'label_attr':{"class":"control-label sr-only"} }) }}
                         <div class="input-group filter__search">
                             {{ form_errors(form.term) }}

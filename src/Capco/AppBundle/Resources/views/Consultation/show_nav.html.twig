@@ -1,4 +1,4 @@
-<div class="block  block--shadowed">
+<div class="block  block--bordered">
     <div class="consultation__nav">
         <ul class="nav  nav-pills">
             <li class="{% if opinionTypeCurrent is null %}active{% endif %} consultation__nav--blue"><a href="{{ path('app_consultation_show', {'slug': consultation.slug}) }}">{{ 'consultation.show.global.title'|trans({}, 'CapcoAppBundle') }}</a></li>

@@ -40,12 +40,8 @@
   }
 
   @media (max-width: $screen-xs-max) {
-    form,
-    .filter__down-sm {
+    form .filter__down, form .filter__down-sm {
       margin-top: 10px;
-      &:first-child {
-        margin-top: 0;
-      }
     }
   }
 

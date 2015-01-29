@@ -29,7 +29,7 @@ admin.label.step: Étapes
 admin.label.theme: Thèmes
 admin.label.site_parameter: Informations
 admin.label.site_image: Apparence
-admin.label.site_color: Color
+admin.label.site_color: Couleurs du site
 admin.label.social_network: Réseaux sociaux (page d'accueil)
 admin.label.category: Types de sources
 admin.label.source: Sources

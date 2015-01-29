@@ -197,7 +197,7 @@ class UserAdmin extends BaseAdmin
             ->add('biography', 'text', array('required' => false))
             ->add('city', null, array(
                 'required' => false,
-                'label' => 'admin.fields.user.city',
+                'label' => 'Ville',
             ))
             ->add('gender', 'sonata_user_gender', array(
                 'required' => true,

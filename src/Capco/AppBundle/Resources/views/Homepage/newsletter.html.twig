@@ -1,9 +1,9 @@
-<h3 class="h3">{{ 'homepage.newsletter.title'|trans({}, 'CapcoAppBundle') }}</h3>
+<h2 class="h2">{{ 'homepage.newsletter.title'|trans({}, 'CapcoAppBundle') }}</h2>
 <p>{{ 'homepage.newsletter.description'|trans({}, 'CapcoAppBundle') }}</p>
 {{ form_start(form, {'attr': { 'class': 'form-inline' }}) }}
    {{ form_errors(form) }}
    {{ form_label(form.email, null, {'label_attr':{"class":"sr-only"} }) }}
    {{ form_errors(form.email) }}
    {{ form_widget(form.email, {'attr':{'style': 'width: 250px;', "placeholder": 'homepage.newsletter.enter_email'|trans({}, 'CapcoAppBundle')} }) }}
-   <button type="submit" class="btn  btn-primary">{{ 'homepage.newsletter.submit'|trans({}, 'CapcoAppBundle') }}</button>
+   <button type="submit" class="btn  btn-primary block--first-mobile">{{ 'homepage.newsletter.submit'|trans({}, 'CapcoAppBundle') }}</button>
 {{ form_end(form) }}
