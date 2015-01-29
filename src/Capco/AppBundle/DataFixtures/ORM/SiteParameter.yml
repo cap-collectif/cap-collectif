@@ -3,171 +3,218 @@ Capco\AppBundle\Entity\SiteParameter:
     SiteParameter1:
         keyname: homepage.jumbotron.title
         title: Titre/objet du site
-        value: Bienvenue
+        value: Participez à l'élaboration de la loi
         position: 100
+        type: 0
     SiteParameter2:
         keyname: homepage.jumbotron.body
         title: Accroche du site
         position: 110
+        type: 1
         value:  |
-                This is a template for a simple marketing or informational website. It includes a large callout called a jumbotron and three supporting pieces of content. Use it as a starting point to create something more unique.
+               <p> Parlement & Citoyens permet aux parlementaires et aux citoyens de travailler ensemble à la résolution de problèmes de société par la rédaction de propositions de loi.</p>
     SiteParameter3:
         keyname: homepage.jumbotron.button
         title: Libellé du bouton principal
         value: Comment ça marche ?
         position: 120
+        type: 0
     SiteParameter4:
         keyname: homepage.jumbotron.button_link
         title: Lien du bouton principal
-        value: http://www.google.fr
+        value: /pages/comment-ça-marche
         position: 130
+        type: 0
     SiteParameter5:
         keyname: homepage.jumbotron2.title
         title: Titre de l'introduction
         value: Introduction
         position: 140
+        type: 0
     SiteParameter6:
         keyname: homepage.jumbotron2.body
         title: Texte de l'introduction
-        value: Introduisez ici votre démarche et vos objectifs.
+        value: |
+                <p>Introduisez ici votre démarche et vos objectifs.</p>
+                <p><text(500)></p>
+                <p><text(500)></p>
         position: 150
-
+        type: 1
     SiteParameter7:
         keyname: footer.text.title
         title: Titre du pied de page
         value: À propos
         position: 200
+        type: 0
     SiteParameter8:
         keyname: footer.text.body
         title: Texte du pied de page
-        value: Présentez-vous ici en quelques lignes.
+        value: |
+           <p>Présentez-vous ici en quelques lignes.</p>
+           <p><text(200)></p>
         position: 210
+        type: 1
 
     SiteParameter9:
         keyname: consultations.jumbotron.title
         title: Titre de la page "Liste des consultations"
         value: Consultations
         position: 300
+        type: 0
     SiteParameter10:
         keyname: consultations.jumbotron.body
         title: Accroche de la page "Liste des consultations"
-        value: ''
+        value: |
+              <p><text(100)></p>
         position: 310
+        type: 1
     SiteParameter11:
         keyname: consultations.content.body
         title: Description de la page "Liste des consultations"
-        value: ''
+        value: |
+             <p><text(100)></p>
         position: 320
+        type: 1
 
     SiteParameter12:
         keyname: ideas.jumbotron.title
         title: Titre de la page "Liste des idées"
         value: Idées
         position: 400
+        type: 0
     SiteParameter13:
         keyname: ideas.jumbotron.body
         title: Accroche de la page "Liste des idées"
-        value: ''
+        value: |
+            <p><text(100)></p>
         position: 410
+        type: 1
     SiteParameter14:
         keyname: ideas.content.body
         title: Description de la page "Liste des idées"
-        value: ''
+        value: |
+            <p><text(100)></p>
         position: 420
+        type: 1
     SiteParameter15:
         keyname: ideas.trashed.jumbotron.title
         title: Titre de la page "Corbeille des idées"
         value: Corbeille des idées
         position: 430
+        type: 0
     SiteParameter16:
         keyname: ideas.trashed.content.body
         title: Description de la page "Corbeille des idées"
         value: |
-                Les messages se trouvant dans la corbeille sont des contenus signalés abusifs par les utilisateurs ou l'administrateur du site.
+                <p>Les messages se trouvant dans la corbeille sont des contenus signalés abusifs par les utilisateurs ou l'administrateur du site.
                 Les contenus signalés sont examinés afin de déterminer s'ils enfreignent la charte.
-                En cas de non-respect de la charte, les comptes concernés sont pénalisés et des infractions graves ou répétées peuvent entraîner leur fermeture.
+                En cas de non-respect de la charte, les comptes concernés sont pénalisés et des infractions graves ou répétées peuvent entraîner leur fermeture.</p>
         position: 440
+        type: 1
 
     SiteParameter17:
         keyname: themes.jumbotron.title
         title: Titre de la page "Liste des thèmes"
         value: Thèmes
         position: 500
+        type: 0
     SiteParameter18:
         keyname: themes.jumbotron.body
         title: Accroche de la page "Liste des thèmes"
-        value: ''
+        value: |
+            <p><text(100)></p>
         position: 510
+        type: 1
     SiteParameter19:
         keyname: themes.content.body
         title: Description de la page "Liste des thèmes"
-        value: ''
+        value: |
+           <p><text(100)></p>
         position: 520
+        type: 1
 
     SiteParameter20:
         keyname: contact.jumbotron.body
         title: Accroche de la page contact
-        value: ''
+        value: |
+               <p><text(100)></p>
         position: 600
+        type: 1
     SiteParameter21:
         keyname: contact.content.body
         title: Texte de la page contact
-        value: ''
+        value: |
+            <h2>Situez-nous !</h2>
+            <p><text(250)><p>
         position: 610
+        type: 1
     SiteParameter22:
         keyname: contact.content.address
         title: Adresse postale
-        value: ''
+        value: |
+            Cap Collectif<br>
+            16 bis avenue Parmentier<br>
+            75011 Paris<br>
         position: 620
+        type: 1
     SiteParameter23:
         keyname: contact.content.phone_number
         title: Numéro de téléphone
-        value: ''
+        value: 06 10 20 30 40
         position: 630
+        type: 0
 
     SiteParameter24:
         keyname: consultations.pagination
         title: Nombre d'éléments pour la pagination des consultations
         value: 16
         position: 700
+        type: 0
     SiteParameter25:
         keyname: ideas.pagination
         title: Nombre d'éléments pour la pagination des idées
         value: 16
         position: 710
+        type: 0
     SiteParameter26:
         keyname: themes.pagination
         title: Nombre d'éléments pour la pagination des thèmes
         value: 0
         position: 720
+        type: 0
 
     SiteParameter27:
         keyname: signin.cgu.name
         title: Nom du document à accepter lors de l'inscription (exemples : charte, conditions d'utilisation, etc.)
         value: la charte
         position: 800
+        type: 0
     SiteParameter28:
         keyname: signin.cgu.link
         title: Lien de la charte ou des CGU sur la page d'inscription
         value: /pages/charte
         position: 810
+        type: 0
 
     SiteParameter29:
         keyname: admin.mail.notifications
         title: Adresse e-mail de réception des notifications (signalements)
         value: brunet.laurent60@yahoo.fr
         position: 900
+        type: 0
     SiteParameter30:
         keyname: admin.mail.contact
         title: Adresse email de contact
         value: brunet.laurent60@yahoo.fr
         position: 910
+        type: 0
 
     SiteParameter31:
         keyname: global.site.fullname
         title: Nom complet du site
         value: Cap-Collectif
         position: 1
+        type: 0
 
     # blog
     SiteParameterBlogPaginationSize:
@@ -175,17 +222,21 @@ Capco\AppBundle\Entity\SiteParameter:
         title: Nombre d'articles par page du blog
         value: 10
         position: 750
+        type: 0
     SiteParameterBlogJumbotronBody:
         keyname: blog.jumbotron.body
         title: Sous-titre de la section blog
         value: Description de la page "Blog"
         position: 760
+        type: 1
     SiteParameterBlogJumbotronTitle:
         keyname: blog.jumbotron.title
         title: Titre de la section blog
         value: Blog
         position: 770
+        type: 0
     SiteParameterBlogDisqusUsername:
         keyname: blog.disqus.username
         title: Compte Disqus à utiliser
         value: ''
+        type: 0

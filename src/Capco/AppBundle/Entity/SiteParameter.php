@@ -13,6 +13,14 @@ use Gedmo\Mapping\Annotation as Gedmo;
  */
 class SiteParameter
 {
+    const TYPE_SIMPLE_TEXT = 0;
+    const TYPE_FREE_TEXT = 1;
+
+    public static $types = [
+        'simple_text' => self::TYPE_SIMPLE_TEXT,
+        'free_text' => self::TYPE_FREE_TEXT,
+    ];
+
     /**
      * @var integer
      *
@@ -70,6 +78,12 @@ class SiteParameter
      */
     private $position = 0;
 
+    /**
+     * @var integer
+     * @ORM\Column(name="type", type="integer")
+     */
+    private $type;
+
 
     public function __toString()
     {
@@ -86,6 +100,7 @@ class SiteParameter
     public function __construct()
     {
         $this->updatedAt = new \Datetime;
+        $this->type = self::TYPE_SIMPLE_TEXT;
     }
 
     /**
@@ -238,5 +253,20 @@ class SiteParameter
         $this->position = $position;
     }
 
+    /**
+     * @return mixed
+     */
+    public function getType()
+    {
+        return $this->type;
+    }
+
+    /**
+     * @param mixed $type
+     */
+    public function setType($type)
+    {
+        $this->type = $type;
+    }
 
 }

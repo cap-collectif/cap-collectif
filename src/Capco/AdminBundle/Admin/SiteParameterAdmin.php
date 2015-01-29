@@ -2,6 +2,7 @@
 
 namespace Capco\AdminBundle\Admin;
 
+use Capco\AppBundle\Entity\SiteParameter;
 use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
@@ -77,11 +78,25 @@ class SiteParameterAdmin extends Admin
                 'label' => 'admin.fields.site_parameter.is_enabled',
                 'required' => false,
             ))
-            ->add('value', null, array(
-                'label' => 'admin.fields.site_parameter.value',
-                'required' => false,
-            ))
         ;
+
+        $subject = $this->getSubject();
+        $types = SiteParameter::$types;
+        if ($subject->getType() == $types['simple_text']) {
+            $formMapper
+                ->add('value', 'text', array(
+                    'label' => 'admin.fields.site_parameter.value',
+                    'required' => false,
+                ))
+            ;
+        } else if($subject->getType() == $types['free_text'])
+            $formMapper
+                ->add('value', null, array(
+                    'label' => 'admin.fields.site_parameter.value',
+                    'required' => false,
+                    'attr' => array('class' => 'ckeditor'),
+                ))
+            ;
     }
 
     /**
