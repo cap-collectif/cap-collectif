@@ -43,7 +43,9 @@
         "liip/imagine-bundle": "~0.9",
         "qandidate/toggle-bundle": "~0.1",
         "predis/predis": "~1.1@dev",
-        "jolicode/jolitypo-bundle": "dev-master"
+        "jolicode/jolitypo-bundle": "dev-master",
+
+        "hipaway-travel/mandrill-bundle": "dev-master"
     },
     "require-dev": {
         "sensio/generator-bundle": "~2.3"

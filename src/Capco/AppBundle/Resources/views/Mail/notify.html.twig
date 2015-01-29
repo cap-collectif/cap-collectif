@@ -1,0 +1,12 @@
+{% block body_text %}
+    {% autoescape false %}
+    <p>
+        {{ 'reporting.notification.body'|trans({'%username%' : '<strong><a href="' ~ path('capco_user_profile_show_all', {'username': user.username}) ~'">' ~ user.username ~ '</a></strong>', '%sitename%': capco_site_parameter_value('global.site.fullname')}, 'CapcoAppBundle') | raw }}
+    </p>
+    <p>{{ 'reporting.notification.type_title'|trans({}, 'CapcoAppBundle') }}</p>
+    <p>{{ type }}</p>
+    <p>{{ 'reporting.notification.message_title'|trans({}, 'CapcoAppBundle') }}</p>
+    <p>{{ message }}</p>
+    {% endautoescape %}
+{% endblock %}
+{% block body_html %}{% endblock %}

@@ -46,7 +46,7 @@ homepage:
 # Page contact
 contact:
   email:
-    subject: Contact via le site
+    subject: Contact via %sitename%.
     sent_success: Merci ! Votre message a bien été envoyé.
     sent_error: Suite à une erreur interne, votre message n'a pas pu être envoyé, merci de réessayer ultérieurement.
   title: Contact
@@ -427,8 +427,10 @@ reporting:
     error: Information erronée
     off_topic: Propos hors-sujet
   notification:
+    subject: Un contenu a été signalé sur %sitename%.
     body: Bonjour, un contenu vient d’être signalé par %username% comme abusif sur %sitename%.
     message_title: Message :
+    type_title: Type :
   success: Merci ! Votre signalement a bien été pris en compte.
   error: Erreur, le signalement n'a pas pu être enregistré.
 

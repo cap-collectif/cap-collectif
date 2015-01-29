@@ -55,6 +55,9 @@ class AppKernel extends Kernel
 
             // typography concerns
             new Joli\TypoBundle\JoliTypoBundle(),
+
+            // mail service
+            new \Hip\MandrillBundle\HipMandrillBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

@@ -61,7 +61,7 @@ class ReportingController extends Controller
                 $em = $this->getDoctrine()->getManager();
                 $reporting->setOpinion($opinion);
                 $reporting->setReporter($this->getUser());
-                $this->get('capco.notify_manager')->sendNotifyMessage($this->getUser(), $form->get('body')->getData() );
+                $this->get('capco.notify_manager')->sendNotifyMessage($this->getUser(), $reporting->getStatus(), $form->get('body')->getData() );
                 $em->persist($reporting);
                 $em->flush();
                 $this->get('session')->getFlashBag()->add('success', $this->get('translator')->trans('reporting.success'));
@@ -129,7 +129,7 @@ class ReportingController extends Controller
                 $em = $this->getDoctrine()->getManager();
                 $reporting->setSource($source);
                 $reporting->setReporter($this->getUser());
-                $this->get('capco.notify_manager')->sendNotifyMessage($this->getUser(), $form->get('body')->getData() );
+                $this->get('capco.notify_manager')->sendNotifyMessage($this->getUser(), $reporting->getStatus(), $form->get('body')->getData() );
                 $em->persist($reporting);
                 $em->flush();
                 $this->get('session')->getFlashBag()->add('success', $this->get('translator')->trans('reporting.success'));
@@ -197,7 +197,7 @@ class ReportingController extends Controller
                 $em = $this->getDoctrine()->getManager();
                 $reporting->setArgument($argument);
                 $reporting->setReporter($this->getUser());
-                $this->get('capco.notify_manager')->sendNotifyMessage($this->getUser(), $form->get('body')->getData() );
+                $this->get('capco.notify_manager')->sendNotifyMessage($this->getUser(), $reporting->getStatus(), $form->get('body')->getData() );
                 $em->persist($reporting);
                 $em->flush();
                 $this->get('session')->getFlashBag()->add('success', $this->get('translator')->trans('reporting.success'));
@@ -253,7 +253,7 @@ class ReportingController extends Controller
                 $em = $this->getDoctrine()->getManager();
                 $reporting->setIdea($idea);
                 $reporting->setReporter($this->getUser());
-                $this->get('capco.notify_manager')->sendNotifyMessage($this->getUser(), $form->get('body')->getData() );
+                $this->get('capco.notify_manager')->sendNotifyMessage($this->getUser(), $reporting->getStatus(), $form->get('body')->getData() );
                 $em->persist($reporting);
                 $em->flush();
                 $this->get('session')->getFlashBag()->add('success', $this->get('translator')->trans('reporting.success'));

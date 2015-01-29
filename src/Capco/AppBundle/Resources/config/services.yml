@@ -14,6 +14,7 @@ parameters:
     capco.site_color.repository.class: Capco\AppBundle\Repository\SiteColorRepository
     capco.site_color.resolver.class: Capco\AppBundle\SiteColor\Resolver
     capco.twig_extension.site_color.class: Capco\AppBundle\Twig\SiteColorExtension
+    capco.email_sender.class: Capco\AppBundle\Services\EmailService
 
 services:
     capco.site_parameter.repository:
@@ -90,8 +91,14 @@ services:
     ## Service Notify - send mail
     capco.notify_manager:
         class:     %capco.notify.manager.class%
-        arguments: [@mailer, @templating, @capco.site_parameter.resolver]
+        arguments: [@capco.email_sender, @templating, @translator, @capco.site_parameter.resolver]
 
+    ## Mandrill
+    capco.email_sender:
+        class:     %capco.email_sender.class%
+        arguments: [@security.token_storage, @hip_mandrill.dispatcher]
+
+    ## Toggle
     capco.toggle.manager:
         class:     %capco.toggle.manager.class%
         arguments: [@qandidate.toggle.manager, @qandidate.toggle.user_context_factory]
@@ -113,3 +120,4 @@ services:
         factory_service: doctrine.orm.entity_manager
         factory_method:  getRepository
         arguments:       ['CapcoAppBundle:Post']
+

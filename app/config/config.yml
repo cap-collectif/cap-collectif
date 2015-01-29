@@ -54,6 +54,7 @@ doctrine:
 swiftmailer:
     transport: "%mailer_transport%"
     host: "%mailer_host%"
+    port: "%mailer_port%"
     username: "%mailer_user%"
     password: "%mailer_password%"
 
@@ -135,3 +136,11 @@ qandidate_toggle:
     context_factory: null
     redis_namespace: feature_toggle # default, only required when persistence = redis
     redis_client: capco.predis.client # only required when persistence = redis
+
+hip_mandrill:
+    api_key: ***REMOVED***
+    disable_delivery: false #disable for dev environment
+    default:
+        sender: coucou@cap-collectif.com
+        sender_name: Cap Collectif
+

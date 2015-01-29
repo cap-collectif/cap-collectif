@@ -35,14 +35,9 @@ class DefaultController extends Controller
                     return $this->redirect($this->generateUrl('app_homepage'));
                 }
 
-                $message = \Swift_Message::newInstance()
-                    ->setSubject($this->get('translator')->trans('contact.email.subject', array(), 'CapcoAppBundle'))
-                    ->setFrom($data["email"])
-                    ->setReplyTo($data["email"])
-                    ->setTo($adminEmail)
-                    ->setBody($data["message"]);
+                $subject = $this->get('translator')->trans('contact.email.subject', array('%sitename%' => $this->get('capco.site_parameter.resolver')->getValue('global.site.fullname')), 'CapcoAppBundle');
 
-                $this->get('mailer')->send($message);
+                $this->get('capco.email_sender')->send($adminEmail, $subject, $data["message"], $data["email"], $data["name"], $data["email"]);
                 $this->get('session')->getFlashBag()->add('success', 'contact.email.sent_success');
 
                 return $this->redirect($this->generateUrl('app_homepage'));

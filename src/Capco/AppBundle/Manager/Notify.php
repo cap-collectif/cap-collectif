@@ -2,44 +2,42 @@
 
 namespace Capco\AppBundle\Manager;
 
+use Capco\AppBundle\Entity\Reporting;
+use Capco\AppBundle\Services\EmailService;
 use Capco\AppBundle\SiteParameter\Resolver;
 use Capco\UserBundle\Entity\User;
 use Symfony\Component\Templating\EngineInterface;
+use Symfony\Component\Translation\TranslatorInterface;
 
 class Notify
 {
     protected $mailer;
     protected $templating;
     protected $resolver;
+    protected $translator;
 
-    public function __construct(\Swift_Mailer $mailer, EngineInterface $templating, Resolver $resolver)
+    public function __construct(EmailService $mailer, EngineInterface $templating, TranslatorInterface $translator, Resolver $resolver)
     {
         $this->mailer = $mailer;
         $this->templating = $templating;
         $this->resolver = $resolver;
+        $this->translator = $translator;
     }
 
     //TODO Update Link mail
-    public function sendNotifyMessage(User $user, $message){
-        $subject = "Un contenu à été signalé";
-        $template = 'CapcoAppBundle:Mail:notify.txt.twig';
-        $from = $user->getEmail();
-        $to = $this->resolver->getValue('admin.mail.notifications');
-        $body = $this->templating->render($template, array('user' => $user, 'message' => $message));
-        $this->sendMessage($from, $to, $subject, $body);
-    }
-
-    protected function sendMessage($from, $to, $subject, $body)
+    public function sendNotifyMessage(User $user, $type, $message)
     {
-        $mail = \Swift_Message::newInstance();
-
-        $mail
-            ->setFrom($from)
-            ->setTo($to)
-            ->setSubject($subject)
-            ->setBody($body)
-            ->setContentType('text/html');
-
-            $this->mailer->send($mail);
+        $to = $this->resolver->getValue('admin.mail.notifications');
+        $subject = $this->translator->trans('reporting.notification.subject', array(
+                '%sitename%' => $this->resolver->getValue('global.site.fullname'),
+            ),
+            'CapcoAppBundle'
+        );
+        $template = 'CapcoAppBundle:Mail:notify.html.twig';
+        $type = $this->translator->trans(Reporting::$statusesLabels[$type], array(), 'CapcoAppBundle');
+        $body = $this->templating->render($template, array('user' => $user, 'type' => $type, 'message' => $message));
+        $fromMail = $user->getEmail();
+        $fromName = $user->getUsername();
+        $this->mailer->send($to, $subject, $body, $fromMail, $fromName);
     }
 }
