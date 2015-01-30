@@ -39,6 +39,12 @@
                             </div>
 
                             <div class="form-group">
+                                {{ form_errors(form.website) }}
+                                {{ form_label(form.website, null, {'label_attr': {'class': 'col-sm-3 control-label'}}) }}
+                                <div class="col-sm-9">{{ form_widget(form.website, {'attr':  {'placeholder': 'http://www.cap-collectif.com/'} }) }}</div>
+                            </div>
+
+                            <div class="form-group">
                                 {{ form_errors(form.gender) }}
                                 {{ form_label(form.gender, null, {'label_attr': {'class': 'col-sm-3 control-label'}}) }}
                                 <div class="col-sm-9">{{ form_widget(form.gender) }}</div>
@@ -51,9 +57,9 @@
                             </div>
 
                             <div class="form-group">
-                                {{ form_errors(form.website) }}
-                                {{ form_label(form.website, null, {'label_attr': {'class': 'col-sm-3 control-label'}}) }}
-                                <div class="col-sm-9">{{ form_widget(form.website, {'attr':  {'placeholder': 'http://www.cap-collectif.com/'} }) }}</div>
+                                {{ form_errors(form.city) }}
+                                {{ form_label(form.city, null, {'label_attr': {'class': 'col-sm-3 control-label'}}) }}
+                                <div class="col-sm-9">{{ form_widget(form.city) }}</div>
                             </div>
                             
                             <div class="form-group">

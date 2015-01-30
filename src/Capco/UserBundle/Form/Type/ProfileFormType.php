@@ -14,26 +14,32 @@ class ProfileFormType extends AbstractType
             ->add('twitterName', null, array(
                 'label' => 'user.profile.edit.twitter',
                 'translation_domain' => 'CapcoAppBundle',
-                'required' => false
+                'required' => false,
             ))
             ->add('facebookName', null, array(
                 'label' => 'user.profile.edit.facebook',
                 'translation_domain' => 'CapcoAppBundle',
-                'required' => false
+                'required' => false,
             ))
             ->add('gplusName', null, array(
                 'label' => 'user.profile.edit.gplus',
                 'translation_domain' => 'CapcoAppBundle',
-                'required' => false
+                'required' => false,
             ))
             ->add('username', null, array(
                 'label' => 'user.profile.edit.username',
                 'translation_domain' => 'CapcoAppBundle',
-                'required' => true
+                'required' => true,
             ))
             ->add('email', null, array(
-                'label'    => 'Adresse électronique',
-                'required' => true
+                'label'    => 'user.profile.edit.email',
+                'translation_domain' => 'CapcoAppBundle',
+                'required' => true,
+            ))
+            ->add('city', null, array(
+                'label'    => 'user.profile.edit.city',
+                'translation_domain' => 'CapcoAppBundle',
+                'required' => false,
             ))
             ->add('media', 'sonata_media_type', array(
                 'provider' => 'sonata.media.provider.image',
@@ -46,6 +52,11 @@ class ProfileFormType extends AbstractType
             ->remove('firstname')
             ->add('gender', 'sonata_user_gender', array(
                 'required' => true,
+                'translation_domain' => 'CapcoAppBundle',
+            ))
+            ->add('dateOfBirth', 'date', array(
+                'required' => false,
+                'label' => 'user.profile.edit.birthday',
                 'translation_domain' => 'CapcoAppBundle',
             ))
         ;

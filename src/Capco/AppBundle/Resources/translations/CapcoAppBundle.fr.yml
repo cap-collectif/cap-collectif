@@ -490,6 +490,9 @@ user:
       gplus: Google+
       username: Nom
       media: Image
+      email: Adresse électronique
+      birthday: Date de naissance
+      city: Ville
       account: Compte
       password: Mot de passe
       submit: Enregistrer les modifications

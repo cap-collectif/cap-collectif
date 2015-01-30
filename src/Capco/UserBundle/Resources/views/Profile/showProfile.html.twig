@@ -14,13 +14,25 @@
                 </h3>
                 <p>{{ user.biography }}</p>
                 <ul class="excerpt  profile__infos">
-                	{% if user.city %}
-                    	<li><i class="cap cap-marker-1"></i> {{ user.city }}</li>
-                    {% endif %}
                     <li><i class="cap cap-calendar-1"></i> {{ 'user.profile.show.since' | trans({}, 'CapcoAppBundle')}} {{ user.createdAt|localizeddate('short', 'none', app.request.locale)}}</li>
                     {% if user.website %}
-                    <li><i class="cap cap-link-2"></i> <a href="#">{{ user.website }}</a></li>
-                	{% endif %}
+                        <li><i class="cap cap-link-2"></i> <a href="{{ user.website }}">{{ user.website }}</a></li>
+                    {% endif %}
+                    {% if user.dateOfBirth %}
+                        <li><i class="cap cap-calendar-1"></i> {{ user.dateOfBirth|localizeddate('medium', 'none', app.request.locale) }}</li>
+                    {% endif %}
+                    {% if user.city %}
+                    	<li><i class="cap cap-marker-1"></i> {{ user.city }}</li>
+                    {% endif %}
+                    {% if user.facebookName %}
+                        <li><i class="cap cap-facebook"></i> <a href="{{ user.facebookName }}">{{ user.facebookName }}</a></li>
+                    {% endif %}
+                    {% if user.twitterName %}
+                        <li><i class="cap cap-twitter"></i> <a href="{{ user.twitterName }}">{{ user.twitterName }}</a></li>
+                    {% endif %}
+                    {% if user.gplusName %}
+                        <li><i class="cap cap-gplus"></i> <a href="{{ user.gplusName }}">{{ user.gplusName }}</a></li>
+                    {% endif %}
                 </ul>
             </div>
         </div>
