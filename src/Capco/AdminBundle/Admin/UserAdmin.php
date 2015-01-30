@@ -201,6 +201,7 @@ class UserAdmin extends BaseAdmin
             ))
             ->add('gender', 'sonata_user_gender', array(
                 'required' => true,
+                'translation_domain' => 'CapcoAppBundle',
             ))
             ->add('locale', 'locale', array('required' => false))
             ->add('timezone', 'timezone', array('required' => false))

@@ -44,6 +44,10 @@ class ProfileFormType extends AbstractType
             ))
             ->remove('lastname')
             ->remove('firstname')
+            ->add('gender', 'sonata_user_gender', array(
+                'required' => true,
+                'translation_domain' => 'CapcoAppBundle',
+            ))
         ;
     }
 

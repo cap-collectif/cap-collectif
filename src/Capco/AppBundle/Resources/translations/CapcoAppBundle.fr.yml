@@ -456,6 +456,10 @@ page:
 
 #Users
 user:
+  gender:
+    unknown: Non communiqué
+    male: Homme
+    female: Femme
   login:
     title: Connexion à
     email: Adresse électronique
