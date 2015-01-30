@@ -117,9 +117,11 @@ class IdeaAdmin extends Admin
             ))
             ->add('isTrashed', null, array(
                 'label' => 'admin.fields.idea.is_trashed',
+                'required' => false,
             ))
             ->add('trashedReason', null, array(
                 'label' => 'admin.fields.idea.trashed_reason',
+                'required' => false,
             ))
         ;
     }

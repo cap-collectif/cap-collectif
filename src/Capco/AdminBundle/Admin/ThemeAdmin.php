@@ -108,6 +108,7 @@ class ThemeAdmin extends Admin
             ->add('teaser', 'textarea', array(
                 'attr' => array('class' => 'ckeditor'),
                 'label' => 'admin.fields.theme.teaser',
+                'required' => false,
             ))
             ->add('body', 'textarea', array(
                 'attr' => array('class' => 'ckeditor'),
@@ -128,6 +129,7 @@ class ThemeAdmin extends Admin
                 'provider' => 'sonata.media.provider.image',
                 'context' => 'default',
                 'label' => 'admin.fields.theme.media',
+                'required' => false,
             ))
         ;
     }

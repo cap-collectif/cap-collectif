@@ -106,6 +106,7 @@ class ArgumentAdmin extends Admin
             ))
             ->add('isEnabled', null, array(
                 'label' => 'admin.fields.argument.is_enabled',
+                'required' => false,
             ))
             ->add('opinion', 'sonata_type_model', array(
                 'label' => 'admin.fields.argument.opinion',
@@ -119,9 +120,11 @@ class ArgumentAdmin extends Admin
             ))
             ->add('isTrashed', null, array(
                 'label' => 'admin.fields.argument.is_trashed',
+                'required' => false,
             ))
             ->add('trashedReason', null, array(
                 'label' => 'admin.fields.argument.trashed_reason',
+                'required' => false,
             ))
         ;
     }

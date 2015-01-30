@@ -101,6 +101,7 @@ class SocialNetworkAdmin extends Admin
                 'provider' => 'sonata.media.provider.image',
                 'context' => 'default',
                 'label' => 'admin.fields.social_network.media',
+                'required' => false,
             ))
         ;
     }

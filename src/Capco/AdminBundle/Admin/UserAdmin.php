@@ -122,8 +122,8 @@ class UserAdmin extends BaseAdmin
             ->with('Social')
             ->add('facebook_id', null, array(
                 'required' => false,
-                'label' => 'admin.fields.user.facebook_id',
-                'translation_domain' => 'SonataAdminBundle',
+                'label' => 'form.label_facebook_name',
+//                'translation_domain' => 'SonataAdminBundle',
             ))
             ->add('facebook_access_token', null, array(
                 'label' => 'admin.fields.user.facebook_access_token',
@@ -198,7 +198,6 @@ class UserAdmin extends BaseAdmin
             ->add('city', null, array(
                 'required' => false,
                 'label' => 'admin.fields.user.city',
-                'translation_domain' => 'SonataAdminBundle',
             ))
             ->add('gender', 'sonata_user_gender', array(
                 'required' => true,
@@ -210,22 +209,12 @@ class UserAdmin extends BaseAdmin
             ->with('Social')
             ->add('facebook_id', null, array(
                 'required' => false,
-                'label' => 'admin.fields.user.facebook_id',
-                'translation_domain' => 'SonataAdminBundle',
-            ))
-            ->add('facebook_access_token', null, array(
-                'required' => false,
-                'label' => 'admin.fields.user.facebook_access_token',
+                'label' => 'form.label_facebook_uid',
                 'translation_domain' => 'SonataAdminBundle',
             ))
             ->add('google_id', null, array(
                 'required' => false,
-                'label' => 'admin.fields.user.google_id',
-                'translation_domain' => 'SonataAdminBundle',
-            ))
-            ->add('google_access_token', null, array(
-                'required' => false,
-                'label' => 'admin.fields.user.google_access_token',
+                'label' => 'show.label_gplus_uid',
                 'translation_domain' => 'SonataAdminBundle',
             ))
             ->end()

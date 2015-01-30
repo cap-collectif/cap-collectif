@@ -69,6 +69,7 @@ class CategoryAdmin extends Admin
             ))
             ->add('isEnabled', null, array(
                 'label' => 'admin.fields.category.is_enabled',
+                'required' => false,
             ))
         ;
     }

@@ -106,6 +106,7 @@ class SourceAdmin extends Admin
             ))
             ->add('isEnabled', null, array(
                 'label' => 'admin.fields.source.is_enabled',
+                'required' => false,
             ))
             ->add('body', null, array(
                 'label' => 'admin.fields.source.body',
@@ -128,9 +129,11 @@ class SourceAdmin extends Admin
             ))
             ->add('isTrashed', null, array(
                 'label' => 'admin.fields.source.is_trashed',
+                'required' => false,
             ))
             ->add('trashedReason', null, array(
                 'label' => 'admin.fields.source.trashed_reason',
+                'required' => false,
             ))
         ;
     }
