@@ -433,7 +433,7 @@ reporting:
     type_title: Type :
   success: Merci ! Votre signalement a bien été pris en compte.
   error: Erreur, le signalement n'a pas pu être enregistré.
-
+  empty_value: Sélectionnez une valeur
 opinion_type:
   colors:
     red: Rouge
