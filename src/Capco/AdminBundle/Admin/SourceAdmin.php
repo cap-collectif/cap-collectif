@@ -122,6 +122,9 @@ class SourceAdmin extends Admin
             ))
             ->add('link', null, array(
                 'label' => 'admin.fields.source.link',
+                'attr' => array(
+                    'placeholder' => 'http://www.cap-collectif.com/',
+                )
             ))
             ->add('isTrashed', null, array(
                 'label' => 'admin.fields.source.is_trashed',
