@@ -60,10 +60,10 @@ class StepAdmin extends Admin
             ->addIdentifier('title', null, array(
                 'label' => 'admin.fields.step.title',
             ))
-            ->add('startAt', null, array(
+            ->add('startAt', 'date', array(
                 'label' => 'admin.fields.step.start_at',
             ))
-            ->add('endAt', null, array(
+            ->add('endAt', 'date', array(
                 'label' => 'admin.fields.step.end_at',
             ))
             ->add('position', null, array(
@@ -113,11 +113,17 @@ class StepAdmin extends Admin
             $formMapper
                 ->add('startAt', 'sonata_type_datetime_picker', array(
                     'label' => 'admin.fields.step.start_at',
-                    'datepicker_use_button' => true,
+                    'format' => 'dd/MM/yyyy HH:mm',
+                    'attr' => array(
+                        'data-date-format' => 'DD/MM/YYYY HH:mm'
+                    )
                 ))
                 ->add('endAt', 'sonata_type_datetime_picker', array(
                     'label' => 'admin.fields.step.end_at',
-                    'datepicker_use_button' => true,
+                    'format' => 'dd/MM/yyyy HH:mm',
+                    'attr' => array(
+                        'data-date-format' => 'DD/MM/YYYY HH:mm'
+                    ),
                     'help' => 'admin.help.step.endAt',
                 ))
                 ->add('isEnabled', null, array(

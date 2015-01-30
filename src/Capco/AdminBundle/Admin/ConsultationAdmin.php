@@ -10,6 +10,7 @@ use Sonata\AdminBundle\Show\ShowMapper;
 
 use Capco\AppBundle\Entity\Consultation;
 use Capco\AppBundle\Entity\Step;
+use Symfony\Component\Validator\Constraints\DateTime;
 
 class ConsultationAdmin extends Admin
 {
@@ -138,17 +139,23 @@ class ConsultationAdmin extends Admin
             ->add('openedAt', 'sonata_type_datetime_picker', array(
                 'required' => true,
                 'mapped' => false,
-                'datepicker_use_button' => true,
                 'data' => $open,
                 'label' => 'admin.fields.consultation.opened_at',
+                'format' => 'dd/MM/yyyy HH:mm',
+                'attr' => array(
+                    'data-date-format' => 'DD/MM/YYYY HH:mm'
+                )
             ))
              ->add('closedAt', 'sonata_type_datetime_picker', array(
                 'required' => true,
                 'mapped' => false,
-                 'datepicker_use_button' => true,
                 'data' => $close,
-                 'help' => 'admin.help.consultation.closedAt',
+                 'help' => 'admin.help.consultation.closed_at',
                  'label' => 'admin.fields.consultation.closed_at',
+                 'format' => 'dd/MM/yyyy HH:mm',
+                 'attr' => array(
+                     'data-date-format' => 'DD/MM/YYYY HH:mm'
+                 )
              ))
             ->add('Steps', null, array(
                 'required' => false,
