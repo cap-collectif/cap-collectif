@@ -6,7 +6,7 @@ Capco\AppBundle\Entity\Consultation:
         body: <text(500)>
         Author: @user4
         Cover: @MediaConsultation1
-        video: '//www.youtube.com/embed/A3PDXmYoF5U'
+        video: 'http://www.youtube.com/embed/A3PDXmYoF5U?autoplay=1'
         Image: @MediaConsultationImageVideo
     cs2:
         title: Stratégie technologique de l'Etat et services publics
@@ -14,7 +14,7 @@ Capco\AppBundle\Entity\Consultation:
         body: <text(340)>
         Author: @user4
         Cover: @MediaConsultation2
-        video: '//www.youtube.com/embed/wTcNtgA6gHs'
+        video: 'http://www.youtube.com/embed/wTcNtgA6gHs?autoplay=1'
     cs3:
         title: Transformation numérique des relations
         teaser: <text(35)>

@@ -164,7 +164,7 @@ a.excerpt {
   left: 50%;
   margin-top: -($custom-video-play/2);
   margin-left: -($custom-video-play/2);
-  @include triangle($white, 'left', $custom-video-play);
+  @include triangle($gray-darker, 'left', $custom-video-play);
 }
 
 // Show length of video, stored in link's data-length attribute

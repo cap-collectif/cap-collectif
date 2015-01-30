@@ -1,4 +1,8 @@
 {% extends '@CapcoApp/base.html.twig' %}
+{% block stylesheets %}
+    {{ parent() }}
+    <link href="{{ asset('js/fancybox/jquery.fancybox.css') }}" rel="stylesheet">
+{% endblock %}
 
 {% block jumbotron %}
 {% endblock %}
@@ -33,5 +37,6 @@
             moreLink: '<a href="#">{{ 'consultation.show.meta.intro.read_more'|trans({}, 'CapcoAppBundle') }}</a>', //BazingaJsTranslationBundle
             lessLink: '<a href="#">{{ 'consultation.show.meta.Intro.read_less'|trans({}, 'CapcoAppBundle') }}</a>'
         });
+        App.module.video('.fancybox');
     </script>
 {% endblock %}

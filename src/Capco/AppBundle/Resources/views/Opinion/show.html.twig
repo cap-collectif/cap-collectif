@@ -1,4 +1,8 @@
 {% extends '@CapcoApp/base.html.twig' %}
+{% block stylesheets %}
+    {{ parent() }}
+    <link href="{{ asset('js/fancybox/jquery.fancybox.css') }}" rel="stylesheet">
+{% endblock %}
 
 {% block jumbotron %}
 {% endblock %}
@@ -197,7 +201,7 @@
     <script type="text/javascript" src="https://www.google.com/jsapi"></script>
     <script src="{{ asset('js/readmore/readmore.min.js') }}"></script>
     <script type="text/javascript">
-        App.module.video();
+        App.module.video('.fancybox');
         App.module.pieChart();
         $('.more').readmore({
             maxHeight: 90,
