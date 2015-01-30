@@ -221,8 +221,7 @@ class MenuItemAdmin extends Admin
             ->leftJoin('p.Menu', 'm')
             ->andWhere('m.type = :header')
             ->setParameter('header', Menu::TYPE_HEADER)
-            ->andWhere('p.link = :nullLink OR p.link = :blankLink')
-            ->setParameter('nullLink', null)
+            ->andWhere('p.link IS NULL OR p.link = :blankLink')
             ->setParameter('blankLink', '');
         return $query;
     }
