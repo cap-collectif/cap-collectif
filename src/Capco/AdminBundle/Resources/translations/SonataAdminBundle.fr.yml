@@ -7,6 +7,8 @@ admin.group.ideas: Boite à idées
 admin.group.parameters: Paramètres
 sonata.admin.group.user: Utilisateurs
 admin.group.moderation: Contributions
+admin.group.blog: Actualités
+admin.group.configuration: Configuration
 
 # Dashboard names
 admin.label.page: Pages
@@ -33,6 +35,8 @@ admin.label.site_color: Couleurs du site
 admin.label.social_network: Réseaux sociaux (page d'accueil)
 admin.label.category: Types de sources
 admin.label.source: Sources
+admin.label.posts: Articles
+admin.label.features: Fonctionnalités
 
 # Messages
 admin:

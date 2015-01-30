@@ -27,11 +27,11 @@
                 <li class="treeview{% if app.request.get('_route') starts with 'admin_capco_app_post_' %} active{% endif %}">
                     <a href="#">
                         <i class="fa fa-folder"></i>
-                        <span>{{ 'Blog'|trans() }}</span>
+                        <span>{{ 'admin.group.blog'|trans({}, 'SonataAdminBundle') }}</span>
                         <i class="fa pull-right fa-angle-left"></i>
                     </a>
                     <ul class="treeview-menu{% if app.request.get('_route') starts with 'admin_capco_app_post_' %} active{% endif %}">
-                        <li><a href="{{ path('admin_capco_app_post_list')}}"><i class="fa fa-angle-double-right"></i> {{ 'Posts'|trans() }}</a></li>
+                        <li><a href="{{ path('admin_capco_app_post_list')}}"><i class="fa fa-angle-double-right"></i> {{ 'admin.label.posts'|trans({}, 'SonataAdminBundle') }}</a></li>
                     </ul>
                 </li>
             {% endif %}
@@ -39,11 +39,11 @@
             <li class="treeview{% if 'admin_feature' == app.request.get('_route') %} active{% endif %}">
                 <a href="#">
                     <i class="fa fa-folder"></i>
-                    <span>{{ 'Configuration'|trans() }}</span>
+                    <span>{{ 'admin.group.configuration'|trans({}, 'SonataAdminBundle') }}</span>
                     <i class="fa pull-right fa-angle-left"></i>
                 </a>
                 <ul class="treeview-menu{% if 'admin_feature' == app.request.get('_route') %} active{% endif %}">
-                    <li><a href="{{ path('admin_feature')}}"><i class="fa fa-angle-double-right"></i> {{ 'Features'|trans() }}</a></li>
+                    <li><a href="{{ path('admin_feature')}}"><i class="fa fa-angle-double-right"></i> {{ 'admin.label.features'|trans({}, 'SonataAdminBundle') }}</a></li>
                 </ul>
             </li>
         </ul>
