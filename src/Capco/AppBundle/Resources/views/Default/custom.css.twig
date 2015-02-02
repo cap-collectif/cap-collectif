@@ -9,6 +9,7 @@
 {% set bodyText = capco_site_color_value('color.body.text') %}
 
 {% set headerBg = capco_site_color_value('color.header.bg') %}
+{% set headerTitle = capco_site_color_value('color.header.title') %}
 {% set headerText = capco_site_color_value('color.header.text') %}
 
 {% set sectionBg = capco_site_color_value('color.section.bg') %}
@@ -24,6 +25,9 @@
 {% set link = capco_site_color_value('color.link') %}
 {% set linkHover = capco_site_color_value('color.link.hover') %}
 
+{% set footerText = capco_site_color_value('color.footer.text') %}
+{% set footerBg = capco_site_color_value('color.footer.bg') %}
+
 
 <style>
 
@@ -32,8 +36,23 @@
     }
 
     a:hover,
-    a:focus {
+    a:focus,
+    .opinion .opinion__body .opinion__title a:hover,
+    .opinion .opinion__body .opinion__user a:hover {
         color: {{ link }};
+    }
+
+    .navbar--sub .nav li.active a,
+    .navbar--sub .nav li.active:hover a {
+        background-color: {{ link }};
+    }
+
+    .profile .profile__value a:hover,
+    .profile .profile__value.active a,
+    .profile .profile__value.active a:hover {
+        -moz-box-shadow: 0 -3px 0 {{ link }} inset;
+        -webkit-box-shadow: 0 -3px 0 {{ link }} inset;
+        box-shadow: 0 -3px 0 {{ link }} inset;
     }
 
     .nav-pills >li.active > a,
@@ -59,6 +78,9 @@
         background-color: {{ headerBg }};
         color: {{ headerText }};
     }
+    .jumbotron--bg-1 h1{
+        color: {{ headerTitle }};
+    }
     .jumbotron--bg-2,
     .footer .footer__links,
     .footer .footer__links ul li,
@@ -66,6 +88,19 @@
     .footer .capco-powered a:hover {
         background-color: {{ sectionBg }};
         color: {{ sectionText }};
+    }
+
+    .footer .footer__links h1,
+    .footer .footer__links h2,
+    .footer .footer__links h3,
+    .footer .footer__links h4,
+    .footer .footer__links h5,
+    .footer .footer__links,
+    .footer .footer__links ul li,
+    .footer .footer__links ul li a,
+    .footer .capco-powered a:hover {
+        background-color: {{ footerBg }};
+        color: {{ footerText }};
     }
 
     body {
@@ -76,12 +111,7 @@
     .jumbotron--bg-2 h2,
     .jumbotron--bg-2 h3,
     .jumbotron--bg-2 h4,
-    .jumbotron--bg-2 h5,
-    .footer .footer__links h1,
-    .footer .footer__links h2,
-    .footer .footer__links h3,
-    .footer .footer__links h4,
-    .footer .footer__links h5 {
+    .jumbotron--bg-2 h5 {
         color: {{ sectionTitle }};
     }
     .jumbotron--bg-2 h2 {
@@ -113,7 +143,8 @@
         border-color: {{ btnPrimary }};
     }
 
-    .bg--consultation {
+    .bg--consultation,
+    .bg--default {
         background-color: {{ sectionBg }};
     }
 
@@ -122,7 +153,22 @@
         background-image: url({% path capco_site_image_media('image.header'), 'header' %});
         background-position: 50% 50%;
         background-size: cover;
-        height: 365px;
+        padding: 0;
+        margin: 0;
+    }
+    .header-img {
+        padding: 0;
+        margin: 0;
+        padding-bottom: 30px;
+        position: relative;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        padding-top: 30px;
+        background-color: rgb(0, 0, 0);
+        background-color: rgba(0, 0, 0, 0.6);
+        filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#99000000, endColorstr=#99000000);
     }
     {% endif %}
 </style>

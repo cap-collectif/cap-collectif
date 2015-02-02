@@ -48,7 +48,9 @@ admin:
       steps: |
                 Ajoutez ici les étapes postérieures ou antérieures à la consultation (synthèse finale, présentation préliminaire...). L'étape correspondant à la consultation elle-même sera créée automatiquement en fonction des dates renseignées.
                 Vous pouvez ajouter des étapes créées au préalable ou les ajouter ultérieurement via le menu de création d'étapes.
-      video: Entre l'URL embed de la vidéo souhaitée. Ex: http://www.youtube.com/embed/wTcNtgA6gHs?autoplay=1
+      video: |
+            Entre l'URL embed de la vidéo souhaitée. Ex: http://www.youtube.com/embed/wTcNtgA6gHs?autoplay=1<br/>
+            Ajouter <strong>?autoplay=1</strong> pour que la vidéo se lance automatiquement.
     menu_item:
       parent: Non applicable pour les éléments du menu de bas de page (footer).
       link: Si vous avez associé une page à l'élément de menu, le lien sera défini automatiquement.

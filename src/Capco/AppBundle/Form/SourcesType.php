@@ -42,7 +42,7 @@ class SourcesType extends AbstractType
                 'required' => false,
                 'translation_domain' => 'CapcoAppBundle',
                 'label' => 'source.form.link',
-//                'attr' => array('class' => 'link')
+                'attr' => array('placeholder' => 'http://')
             ))
             ->add('media', 'sonata_media_type', array(
                 'provider' => 'sonata.media.provider.file',

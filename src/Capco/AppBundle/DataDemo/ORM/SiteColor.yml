@@ -12,9 +12,13 @@ Capco\AppBundle\Entity\SiteColor:
         title: Couleur d'entête
         value: '#16a085'
         position: 3
+    SiteColor41:
+        keyname: color.header.title
+        title: Titre de l'en-tête
+        position: 4
     SiteColor4:
         keyname: color.header.text
-        title: Texte de l'entête
+        title: Texte de l'en-tête
         position: 4
     SiteColor5:
         keyname: color.section.bg
@@ -87,3 +91,13 @@ Capco\AppBundle\Entity\SiteColor:
         title: Texte des liens au survol
         value: '#1abc9c'
         position: 19
+    SiteColor20:
+        keyname: color.footer.text
+        title: Texte du pied de page
+        value: '#ffffff'
+        position: 20
+    SiteColor21:
+        keyname: color.footer.bg
+        title: Fond du pied de page
+        value: '#1abc9c'
+        position: 21
