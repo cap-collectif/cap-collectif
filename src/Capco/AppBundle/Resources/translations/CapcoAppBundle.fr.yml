@@ -496,6 +496,7 @@ user:
       account: Compte
       password: Mot de passe
       submit: Enregistrer les modifications
+      gender: Genre
     show:
       jumbotron: Compte
       title: Profil de %name%
