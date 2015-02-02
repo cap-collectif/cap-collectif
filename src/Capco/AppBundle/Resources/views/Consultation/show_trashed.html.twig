@@ -24,9 +24,10 @@
                             <div class="row">
                                 <div class="col-xs-12  col-sm-8  col-md-9  col-lg-10">
                                     <div class="opinion__body  box">
-                                        {% if opinion.Author.Media %}
+                                        {%  set avatar = opinion.Author.Media|capco_default_avatar %}
+                                        {% if avatar != null %}
                                             <a class="pull-left" href="{{ path('capco_user_profile_show_all', {'slug': opinion.Author.slug}) }}">
-                                                {% thumbnail opinion.Author.Media, 'avatar' with {'title': opinion.Author.username, 'alt': opinion.Author.username, 'class': 'img-circle  pull-left'} %}
+                                                {% thumbnail avatar, 'avatar' with {'title': opinion.Author.username, 'alt': opinion.Author.username, 'class': 'img-circle  pull-left'} %}
                                             </a>
                                         {% endif %}
                                         <div class="opinion__data">
@@ -61,9 +62,10 @@
                     {% for argument in arguments %}
                         <li class="opinion  opinion--argument" id="arg-{{ argument.id }}">
                             <div class="opinion__body  box">
-                                {% if argument.Author.Media %}
+                                {%  set avatar = argument.Author.Media|capco_default_avatar %}
+                                {% if avatar != null %}
                                     <a class="pull-left" href="#">
-                                        {% thumbnail argument.Author.Media, 'avatar' with {'title': argument.Author.username, 'alt': argument.Author.username, 'class': 'img-circle  pull-left'} %}
+                                        {% thumbnail avatar, 'avatar' with {'title': argument.Author.username, 'alt': argument.Author.username, 'class': 'img-circle  pull-left'} %}
                                     </a>
                                 {% endif %}
                                 <div class="opinion__data">
@@ -85,9 +87,10 @@
                 <ul class="media-list  opinion__list">
                     {% for source in sources %}
                         <li class="opinion  media  box" id="source{{ source.id }}">
-                            {% if source.Author.Media %}
+                            {%  set avatar = source.Author.Media|capco_default_avatar %}
+                            {% if avatar != null %}
                                 <a class="pull-left media-middle" href="#">
-                                    {% thumbnail source.Author.Media, 'avatar_source' with {'title': source.Author.username, 'alt': source.Author.username, 'class': 'img-circle  pull-left'} %}
+                                    {% thumbnail avatar, 'avatar_source' with {'title': source.Author.username, 'alt': source.Author.username, 'class': 'img-circle  pull-left'} %}
                                 </a>
                             {% endif %}
                             <div class="media-body">

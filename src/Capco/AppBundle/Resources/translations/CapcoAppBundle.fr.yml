@@ -471,6 +471,18 @@ user:
     or: ou
     submit: Se connecter
   register:
+    check_email: |
+      Un e-mail a été envoyé à l'adresse %email%. Il contient un lien d'activation sur lequel il vous faudra cliquer afin d'activer votre compte. Si vous n'avez pas reçu d'e-mail d'ici quelques minutes, vérifiez dans votre courrier indésirable.
+    confirmation_message: |
+      Bonjour %username%,
+
+      Merci de vous êtes inscrit à %sitename%.
+
+      Pour valider votre compte, merci de vous rendre à cette adresse : %url%
+
+      Votre identifiant est : %email%
+
+      À bientôt !
     title: Inscription à
     social:
       facebook: S'inscrire avec Facebook

@@ -15,6 +15,7 @@ parameters:
     capco.site_color.resolver.class: Capco\AppBundle\SiteColor\Resolver
     capco.twig_extension.site_color.class: Capco\AppBundle\Twig\SiteColorExtension
     capco.email_sender.class: Capco\AppBundle\Services\EmailService
+    capco.twig.default_avatar.class: Capco\AppBundle\Twig\DefaultAvatarExtension
 
 services:
     capco.site_parameter.repository:
@@ -54,6 +55,14 @@ services:
         class: %capco.twig_extension.site_image.class%
         arguments: [ @capco.site_image.resolver ]
         tags:
+            - { name: twig.extension }
+
+    # default avatar
+    capco.twig.default_avatar:
+         class: %capco.twig.default_avatar.class%
+         arguments:
+             - @capco.site_image.resolver
+         tags:
             - { name: twig.extension }
 
     ## Site paramèters for colors

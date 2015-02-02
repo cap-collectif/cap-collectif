@@ -4,9 +4,10 @@
             <p class="media--aligned  excerpt">
                 {{ 'blog.written_by' | trans({}, 'CapcoAppBundle') }}
                 {% for author in authors %}
-                    {% if author and author.Media %}
+                    {%  set avatar = author.Media|capco_default_avatar %}
+                    {% if avatar != null %}
                         <a href="{{ path('capco_user_profile_show_all', {'slug': author.slug}) }}">
-                            {% thumbnail author.Media, 'avatar' with {'title': author.username, 'alt': author.username, 'class': 'media-object img-circle'} %}
+                            {% thumbnail avatar, 'avatar' with {'title': author.username, 'alt': author.username, 'class': 'media-object img-circle'} %}
                         </a>
                     {% endif %}
                     <a href="{{ path('capco_user_profile_show_all', { slug: author.slug })}}">

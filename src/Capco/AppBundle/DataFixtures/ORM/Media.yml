@@ -89,3 +89,9 @@ Capco\MediaBundle\Entity\Media:
         enabled:       true
         name:          Twitter
         context:       @MediaContext2
+
+    MediaAvatar:
+        binaryContent: ../files/default_avatar.jpg
+        enabled: true
+        name: Avatar
+        context: @MediaContext2

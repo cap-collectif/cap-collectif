@@ -6,7 +6,7 @@
 
 {% block body_text %}
 	{% autoescape false %}
-		{{ 'registration.email.message'|trans({'%username%': user.username, '%confirmationUrl%': confirmationUrl}, 'FOSUserBundle') }}
+		{{ 'user.register.confirmation_message'|trans({'%username%': user.username, '%sitename%': capco_site_parameter_value('global.site.fullname'),'%url%': confirmationUrl, '%email%': user.email}, 'CapcoAppBundle') }}
 	{% endautoescape %}
 {% endblock %}
 

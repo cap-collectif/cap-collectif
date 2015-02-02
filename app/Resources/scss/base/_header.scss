@@ -1,6 +1,10 @@
 /* ===============================================================
     $Navbar
 ================================================================*/
+.navbar > .container .navbar-brand {
+  margin-left: 0;
+}
+
 .navbar {
 
   .navbar-brand {
@@ -131,6 +135,12 @@ $backgrounds:
 .home-page .jumbotron--custom {
   h1, .h1 {
     font-size: 63px;
+  }
+  @media (max-width:$screen-xs-max) {
+    h1, .h1 {
+      font-size: 40px;
+      word-wrap: break-word;
+    }
   }
 }
 

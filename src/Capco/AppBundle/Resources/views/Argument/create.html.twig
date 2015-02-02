@@ -2,9 +2,10 @@
 {% set type_display = argumentTypesLabels[argType] %}
 <div class="opinion  opinion--add-argument  block  block--bordered">
     <div class="opinion__body  box">
-        {% if app.user.Media %}
+        {%  set avatar = app.user.Media|capco_default_avatar %}
+        {% if avatar != null %}
             <a class="pull-left" href="{{ path('capco_user_profile_show_all', {'slug': app.user.slug}) }}">
-                {% thumbnail app.user.Media, 'avatar' with {'title': app.user.username, 'alt': app.user.username, 'class': 'media-object img-circle'} %}
+                {% thumbnail avatar, 'avatar' with {'title': app.user.username, 'alt': app.user.username, 'class': 'media-object img-circle'} %}
             </a>
         {% endif %}
         <div class="opinion__data">

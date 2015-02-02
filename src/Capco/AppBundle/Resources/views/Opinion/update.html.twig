@@ -17,9 +17,10 @@
                     <form method="post" {{ form_enctype(form) }}>
                         <div class="dialog__body  box">
                             <div class="media">
-                                {% if opinion.Author and opinion.Author.Media %}
+                                {%  set avatar = opinion.Author.Media|capco_default_avatar %}
+                                {% if avatar != null %}
                                     <a class="pull-left" href="{{ path('capco_user_profile_show_all', {'slug': opinion.Author.slug}) }}">
-                                        {% thumbnail opinion.Author.Media, 'avatar' with {'title': opinion.Author.username, 'alt': opinion.Author.username, 'class': 'media-object img-circle'} %}
+                                        {% thumbnail avatar, 'avatar' with {'title': opinion.Author.username, 'alt': opinion.Author.username, 'class': 'media-object img-circle'} %}
                                     </a>
                                 {% endif %}
                                 <div class="media-body">

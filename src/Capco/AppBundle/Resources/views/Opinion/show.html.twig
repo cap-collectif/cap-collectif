@@ -40,9 +40,10 @@
                             <p class="h4  opinion__header__title">{{ opinion.opinionType.slug|capitalize }} </p>
                         </div>
                         <div class="opinion__body  box">
-                            {% if opinion.Author.Media %}
+                            {%  set avatar = opinion.Author.Media|capco_default_avatar %}
+                            {% if avatar != null %}
                                 <a class="pull-left" href="{{ path('capco_user_profile_show_all', {'slug': opinion.Author.slug}) }}">
-                                    {% thumbnail opinion.Author.Media, 'avatar' with {'title': opinion.Author.username, 'alt': opinion.Author.username, 'class': 'img-circle  pull-left'} %}
+                                    {% thumbnail avatar, 'avatar' with {'title': opinion.Author.username, 'alt': opinion.Author.username, 'class': 'img-circle  pull-left'} %}
                                 </a>
                             {% endif %}
                             <div class="opinion__data">
@@ -132,9 +133,10 @@
                                     <div class="panel-body">
                                         {% for source in sources %}
                                             <div class="media" id="source{{ source.id }}">
-                                                {% if source.Author.Media %}
+                                                {%  set avatar = source.Author.Media|capco_default_avatar %}
+                                                {% if avatar != null %}
                                                     <a class="pull-left media-middle" href="{{ path('capco_user_profile_show_all', {'slug': source.Author.slug}) }}">
-                                                        {% thumbnail source.Author.Media, 'avatar_source' with {'title': source.Author.username, 'alt': source.Author.username, 'class': 'img-circle  pull-left'} %}
+                                                        {% thumbnail avatar, 'avatar_source' with {'title': source.Author.username, 'alt': source.Author.username, 'class': 'img-circle  pull-left'} %}
                                                     </a>
                                                 {% endif %}
                                                 <div class="media-body">
