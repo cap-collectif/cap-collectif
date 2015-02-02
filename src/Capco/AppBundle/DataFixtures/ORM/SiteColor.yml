@@ -73,12 +73,12 @@ Capco\AppBundle\Entity\SiteColor:
         position: 15
     SiteColor16:
         keyname: color.btn.primary
-        title: Couleur du bouton primary
+        title: Couleur du bouton primaire
         value: '#1abc9c'
         position: 16
     SiteColor17:
         keyname: color.btn.primary.text
-        title: Texte du bouton primary
+        title: Texte du bouton primaire
         value: '#ffffff'
         position: 17
     SiteColor18:
