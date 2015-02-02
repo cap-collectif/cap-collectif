@@ -233,7 +233,7 @@ class UserAdmin extends BaseAdmin
                 ))
                 ->add('isTermsAccepted', null, array(
                     'required' => false,
-                    'label' => 'admin.fields.user.is_terms_accepted',
+                    'label' => 'Termes acceptés',
                     'translation_domain' => 'SonataAdminBundle',
                     'data' => true,
                 ))
