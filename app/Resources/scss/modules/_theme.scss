@@ -9,6 +9,10 @@ $THEME
   text-align: center;
   padding: 20px 15px;
 
+  &:hover {
+    background-color: $light-gray;
+  }
+
   .theme__title {
     font-size: 20px;
     margin-bottom: 10px;
