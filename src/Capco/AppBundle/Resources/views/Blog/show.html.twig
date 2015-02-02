@@ -15,9 +15,7 @@
 {% block body %}
     <div class="container">
         <h1><a href="{{ url('app_blog_show', {'slug': post.slug}) }}">{{ post.title | jolitypo() }}</a></h1>
-        <div class="media excerpt  h5  media--news__meta">
-            {% include 'CapcoAppBundle:Blog:_authors.html.twig' with {'authors': post.Authors, 'publishedAt': post.publishedAt} %}
-        </div>
+        {% include 'CapcoAppBundle:Blog:_authors.html.twig' with {'authors': post.Authors, 'publishedAt': post.publishedAt} %}
 
         {%  if post.Media %}
             {% thumbnail post.Media, 'blockHeader' with {'title': post.Media.name, 'alt': post.Media.name, 'class': 'img-responsive'} %}

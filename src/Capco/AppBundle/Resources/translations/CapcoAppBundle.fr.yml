@@ -517,6 +517,7 @@ user:
 blog:
   no_post: "Aucun article n'a été publié"
   written_by: "par"
-  and: "et"
+  and: " et"
+  on_date: le %date%
   see_all: Voir toutes les actualités
   none: "Il n'y a aucune actualité."
