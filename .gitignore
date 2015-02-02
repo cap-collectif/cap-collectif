@@ -28,6 +28,7 @@ app/config/parameters/*
 /app/Resources/libs
 
 # deployment
+.bundle
 .capistrano
 
 # OS X

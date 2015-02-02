@@ -1,4 +1,4 @@
-namespace :symfony2 do
+namespace :symfony do
     desc 'Install parameters.yml'
     task :parameters do
         on roles(:web) do

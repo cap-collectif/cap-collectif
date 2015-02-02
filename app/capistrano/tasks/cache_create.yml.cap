@@ -1,4 +1,4 @@
-namespace :symfony2 do
+namespace :symfony do
     desc 'create cache dir'
     task :cache_create do
         on roles(:web) do

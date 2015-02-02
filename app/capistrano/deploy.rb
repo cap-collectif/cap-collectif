@@ -1,4 +1,4 @@
-lock '3.3.3'
+lock '3.3.5'
 
 set :application, "CapCo"
 set :repo_url,  "git@github.com:jolicode/CapCollectif-SF2.git"
@@ -72,7 +72,8 @@ fetch(:default_env).merge!(symfony_env: fetch(:symfony_env))
 
 set :gulp_tasks, 'build'
 
-before 'deploy:starting', 'symfony2:parameters'
+before 'deploy:starting', 'symfony:parameters'
 after 'bower:install', 'gulp'
-before "deploy:set_permissions:check", 'symfony2:cache_create'
+after 'deploy:updated', 'symfony:migrate'
+before "deploy:set_permissions:check", 'symfony:cache_create'
 before "composer:install", "deploy:set_permissions:acl"
