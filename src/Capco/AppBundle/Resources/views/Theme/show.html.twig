@@ -16,15 +16,17 @@
             </h2>
             {{ theme.body|raw }}
         {% endif %}
-        <p class="theme__status">{{ 'theme.show.status.title'|trans({}, 'CapcoAppBundle') }}
-            {% if theme.status == statuses.opened %}
-                <span class="label label-success">{{ 'theme.show.status.opened'|trans({}, 'CapcoAppBundle') }}</span>
-            {% elseif theme.status == statuses.closed %}
-                <span class="label label-danger">{{ 'theme.show.status.closed'|trans({}, 'CapcoAppBundle') }}</span>
-            {% elseif theme.status == statuses.future %}
-                <span class="label label-info">{{ 'theme.show.status.future'|trans({}, 'CapcoAppBundle') }}</span>
-            {% endif %}
-        </p>
+        {% if theme.status != null %}
+            <p class="theme__status">{{ 'theme.show.status.title'|trans({}, 'CapcoAppBundle') }}
+                {% if theme.status == statuses.opened %}
+                    <span class="label label-success">{{ 'theme.show.status.opened'|trans({}, 'CapcoAppBundle') }}</span>
+                {% elseif theme.status == statuses.closed %}
+                    <span class="label label-danger">{{ 'theme.show.status.closed'|trans({}, 'CapcoAppBundle') }}</span>
+                {% elseif theme.status == statuses.future %}
+                    <span class="label label-info">{{ 'theme.show.status.future'|trans({}, 'CapcoAppBundle') }}</span>
+                {% endif %}
+            </p>
+        {% endif %}
     </div>
 
     {% if theme.Consultations|length > 0 %}

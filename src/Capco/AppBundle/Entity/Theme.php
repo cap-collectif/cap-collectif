@@ -5,6 +5,7 @@ namespace Capco\AppBundle\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Theme
@@ -45,6 +46,8 @@ class Theme
      * @var string
      *
      * @ORM\Column(name="title", type="string", length=255)
+     * @Assert\NotNull()
+     * @Assert\NotBlank()
      */
     private $title;
 
@@ -57,7 +60,7 @@ class Theme
     /**
      * @var string
      *
-     * @ORM\Column(name="teaser", type="string", length=255)
+     * @ORM\Column(name="teaser", type="string", length=255, nullable=true)
      */
     private $teaser;
 
@@ -72,13 +75,14 @@ class Theme
      * @var integer
      *
      * @ORM\Column(name="position", type="integer")
+     * @Assert\NotNull()
      */
     private $position;
 
     /**
      * @var integer
      *
-     * @ORM\Column(name="status", type="integer")
+     * @ORM\Column(name="status", type="integer", nullable=true)
      */
     private $status;
 
@@ -86,6 +90,7 @@ class Theme
      * @var string
      *
      * @ORM\Column(name="body", type="text")
+     * @Assert\NotNull()
      */
     private $body;
 
@@ -94,6 +99,7 @@ class Theme
      *
      * @ORM\ManyToOne(targetEntity="Capco\UserBundle\Entity\User")
      * @ORM\JoinColumn(name="author_id", referencedColumnName="id")
+     * @Assert\NotNull()
      */
     private $Author;
 

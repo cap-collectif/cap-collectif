@@ -2,9 +2,11 @@
 
 {% block field %}
     {%  set labels = field_description.options.statusesLabels %}
+    {% if object.status != null %}
     <div>
         <p>
             {{ labels[object.status] | trans({}, 'CapcoAppBundle')  }}
         </p>
     </div>
+    {% endif %}
 {% endblock %}

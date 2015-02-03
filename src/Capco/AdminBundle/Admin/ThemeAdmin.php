@@ -64,6 +64,9 @@ class ThemeAdmin extends Admin
                 'template' => 'CapcoAdminBundle:Theme:status_list_field.html.twig',
                 'statusesLabels' => Theme::$statusesLabels,
             ))
+            ->add('position', null, array(
+                'label' => 'admin.fields.theme.position',
+            ))
             ->add('ideasCount', null, array(
                 'label' => 'admin.fields.theme.ideas_count',
                 'template' => 'CapcoAdminBundle:Theme:ideas_count_list_field.html.twig',
@@ -97,6 +100,7 @@ class ThemeAdmin extends Admin
         $formMapper
             ->add('title', null, array(
                 'label' => 'admin.fields.theme.title',
+                'required' => true,
             ))
             ->add('Author', null, array(
                 'label' => 'admin.fields.theme.author',
@@ -104,6 +108,9 @@ class ThemeAdmin extends Admin
             ->add('isEnabled', null, array(
                 'label' => 'admin.fields.theme.is_enabled',
                 'required' => false,
+            ))
+            ->add('position', 'integer', array(
+                'label' => 'admin.fields.theme.position',
             ))
             ->add('teaser', 'textarea', array(
                 'attr' => array('class' => 'ckeditor'),
@@ -118,6 +125,7 @@ class ThemeAdmin extends Admin
                 'label' => 'admin.fields.theme.status',
                 'choices' => Theme::$statusesLabels,
                 'translation_domain' => 'CapcoAppBundle',
+                'required' => false,
             ))
             ->add('Consultations', null, array(
                 'label' => 'admin.fields.theme.consultations',
@@ -156,6 +164,9 @@ class ThemeAdmin extends Admin
                 'label' => 'admin.fields.theme.status',
                 'template' => 'CapcoAdminBundle:Theme:status_show_field.html.twig',
                 'statusesLabels' => Theme::$statusesLabels,
+            ))
+            ->add('position', null, array(
+                'label' => 'admin.fields.theme.position',
             ))
             ->add('Author', null, array(
                 'label' => 'admin.fields.theme.author',
