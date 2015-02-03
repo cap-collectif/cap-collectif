@@ -136,11 +136,3 @@ qandidate_toggle:
     context_factory: null
     redis_namespace: feature_toggle # default, only required when persistence = redis
     redis_client: capco.predis.client # only required when persistence = redis
-
-hip_mandrill:
-    api_key: ***REMOVED***
-    disable_delivery: false #disable for dev environment
-    default:
-        sender: coucou@cap-collectif.com
-        sender_name: Cap Collectif
-

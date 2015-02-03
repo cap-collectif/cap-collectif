@@ -6,6 +6,7 @@ use Capco\AppBundle\Entity\Reporting;
 use Capco\AppBundle\Services\EmailService;
 use Capco\AppBundle\SiteParameter\Resolver;
 use Capco\UserBundle\Entity\User;
+use Sonata\NotificationBundle\Model\Message;
 use Symfony\Component\Templating\EngineInterface;
 use Symfony\Component\Translation\TranslatorInterface;
 
@@ -16,7 +17,7 @@ class Notify
     protected $resolver;
     protected $translator;
 
-    public function __construct(EmailService $mailer, EngineInterface $templating, TranslatorInterface $translator, Resolver $resolver)
+    public function __construct(\Swift_Mailer $mailer, EngineInterface $templating, TranslatorInterface $translator, Resolver $resolver)
     {
         $this->mailer = $mailer;
         $this->templating = $templating;
@@ -24,7 +25,7 @@ class Notify
         $this->translator = $translator;
     }
 
-    //TODO Update Link mail
+    //TODO: update link
     public function sendNotifyMessage(User $user, $type, $message)
     {
         $to = $this->resolver->getValue('admin.mail.notifications');
@@ -37,7 +38,13 @@ class Notify
         $type = $this->translator->trans(Reporting::$statusesLabels[$type], array(), 'CapcoAppBundle');
         $body = $this->templating->render($template, array('user' => $user, 'type' => $type, 'message' => $message));
         $fromMail = $user->getEmail();
-        $fromName = $user->getUsername();
-        $this->mailer->send($to, $subject, $body, $fromMail, $fromName);
+        $message = \Swift_Message::newInstance()
+            ->setTo($to)
+            ->setSubject($subject)
+            ->setContentType('text/html')
+            ->setBody($body)
+            ->setFrom($fromMail)
+        ;
+        $this->mailer->send($message);
     }
 }

@@ -91,12 +91,7 @@ services:
     ## Service Notify - send mail
     capco.notify_manager:
         class:     %capco.notify.manager.class%
-        arguments: [@capco.email_sender, @templating, @translator, @capco.site_parameter.resolver]
-
-    ## Mandrill
-    capco.email_sender:
-        class:     %capco.email_sender.class%
-        arguments: [@security.token_storage, @hip_mandrill.dispatcher]
+        arguments: [@mailer, @templating, @translator, @capco.site_parameter.resolver]
 
     ## Toggle
     capco.toggle.manager:

@@ -45,7 +45,6 @@
         "predis/predis": "~1.1@dev",
         "jolicode/jolitypo-bundle": "dev-master",
 
-        "hipaway-travel/mandrill-bundle": "dev-master",
         "doctrine/doctrine-migrations-bundle": "~2.1@dev"
     },
     "require-dev": {
