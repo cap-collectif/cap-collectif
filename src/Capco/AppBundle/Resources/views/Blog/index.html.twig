@@ -29,7 +29,7 @@
                             <div class="media excerpt  h5  media--news__meta">
                                 {% for author in post.Authors %}
                                     <div class="media-body">
-                                        <p class="media--aligned  excerpt">{{ 'blog.written_by' | trans({}, 'CapcoAppBundle') }} <a href="{{ path('capco_user_profile_show_all', { username: author.username })}}">{{ author.username }}</a>, le {{ post.publishedAt | localizeddate('long', 'none') }} </p>
+                                        <p class="media--aligned  excerpt">{{ 'blog.written_by' | trans({}, 'CapcoAppBundle') }} <a href="{{ path('capco_user_profile_show_all', { slug: author.slug })}}">{{ author.username }}</a>, le {{ post.publishedAt | localizeddate('long', 'none') }} </p>
                                     </div>
                                     {% if loop.revindex0 == '1' %}
                                         {{ 'blog.and' | trans({}, 'CapcoAppBundle') }}
@@ -49,5 +49,18 @@
             <p>{{ 'blog.no_post' | trans({}, 'CapcoAppBundle') | jolitypo() }}</p>
         {% endif %}
     </div>
+
+    {% if nbPage > 1 %}
+        <div class="pagination--custom  text-center block">
+            <ul class="pagination">
+                {% for p in range(1, nbPage) %}
+                    <li{% if p == page %} class="active"{% endif %}>
+                        <a href="{{ path('app_blog', {'page': p}) }}">{{ p }}</a>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    {% endif %}
+
 {% endblock %}
 

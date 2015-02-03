@@ -18,12 +18,27 @@ class BlogController extends Controller
      */
     public function indexAction(Request $request, $page)
     {
+        $pagination = $this->get('capco.site_parameter.resolver')->getValue('blog.pagination.size');
+        if (!is_numeric($pagination)){
+            $pagination = 0;
+        } else {
+            $pagination = (int)$pagination;
+        }
+
         $posts = $this->get('capco.blog.post.repository')->getPublishedPosts(
             $page,
-            $this->get('capco.site_parameter.resolver')->getValue('blog.pagination.size')
+            $pagination
         );
+
+        $nbPage = 1;
+        if($pagination != 0){
+            $nbPage = ceil(count($posts) / $pagination);
+        }
+
         return [
-            'posts' => $posts
+            'posts' => $posts,
+            'page' => $page,
+            'nbPage' => $nbPage,
         ];
     }
 

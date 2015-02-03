@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\Tools\Pagination\Paginator;
 
 /**
  * PostRepository
@@ -67,13 +68,21 @@ class PostRepository extends EntityRepository
 
     public function getPublishedPosts($page = 1, $pageSize)
     {
+        if ((int) $page < 1) {
+            throw new \InvalidArgumentException(sprintf(
+                'The argument "page" cannot be lower than 1 (current value: "%s")',
+                $page
+            ));
+        }
+
         $qb = $this->getPublicQueryBuilder('p')
             ->leftJoin('p.Authors', 'a')
-            ->orderBy('p.publishedAt', 'DESC')
-            ->setMaxResults($pageSize)
-            ->setFirstResult(($page - 1) * $pageSize);
+            ->orderBy('p.publishedAt', 'DESC');
+        $query = $qb->getQuery();
+        $query->setFirstResult(($page - 1) * $pageSize)
+            ->setMaxResults($pageSize);
 
-        return $qb->getQuery()->getResult();
+        return new Paginator($query);
     }
 
     protected function getPublicQueryBuilder($alias = 'p')
