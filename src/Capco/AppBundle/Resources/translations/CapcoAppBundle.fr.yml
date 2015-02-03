@@ -42,6 +42,8 @@ homepage:
     last: Thèmes
   ideas:
     last: Idées
+  posts:
+    last: Dernières actualités
 
 # Page contact
 contact:
@@ -516,3 +518,5 @@ blog:
   no_post: "Aucun article n'a été publié"
   written_by: "par"
   and: "et"
+  see_all: Voir toutes les actualités
+  none: "Il n'y a aucune actualité."

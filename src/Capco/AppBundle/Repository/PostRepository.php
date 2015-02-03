@@ -12,6 +12,36 @@ use Doctrine\ORM\EntityRepository;
  */
 class PostRepository extends EntityRepository
 {
+    /**
+     * Get last ideas
+     * @param int $limit
+     * @param int $offset
+     * @return mixed
+     */
+    public function getLast($limit = 1, $offset = 0)
+    {
+        $qb = $this->createQueryBuilder('p')
+            ->select('p, a, m')
+            ->leftJoin('p.Authors', 'a')
+            ->leftJoin('p.Media', 'm')
+            ->andWhere('p.isPublished = :published')
+            ->setParameter('published', true)
+            ->addOrderBy('p.createdAt', 'DESC')
+            ->addGroupBy('p.id');
+
+        if ($limit) {
+            $qb->setMaxResults($limit);
+        }
+
+        if ($offset) {
+            $qb->setFirstResult($offset);
+        }
+
+        return $qb
+            ->getQuery()
+            ->execute();
+    }
+
     public function getRecentPosts($count = 5)
     {
         $qb = $this->createQueryBuilder('p')

@@ -74,6 +74,17 @@ class HomepageController extends Controller
     }
 
     /**
+     * @Cache(expires="+1 minutes", maxage="60", smaxage="60", public="true")
+     * @Template("CapcoAppBundle:Blog:lastPosts.html.twig")
+     */
+    public function lastPostsAction($max = 3, $offset = 0)
+    {
+        $posts = $this->get('capco.blog.post.repository')->getLast($max, $offset);
+
+        return [ 'posts' => $posts ];
+    }
+
+    /**
      * @Template()
      */
     public function socialNetworksAction()

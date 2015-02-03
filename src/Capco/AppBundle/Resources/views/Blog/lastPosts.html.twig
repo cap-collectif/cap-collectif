@@ -1,0 +1,35 @@
+{% if posts|length > 0 %}
+    <ul class="media-list">
+        {% for post in posts %}
+            <li class="media  media--news  block  block--bordered">
+                <!-- .pull-left has to be applied to a and not to media-object -->
+                {%  if post.Media %}
+                    <a href="{{ url('app_blog_show', {'slug': post.slug}) }}" class="pull-left">
+                        {% thumbnail post.Media, 'post' with {'title': post.Media.name, 'alt': post.Media.name, 'class': 'media-object'} %}
+                    </a>
+                {%  endif %}
+                <div class="media-body box">
+                    <h3 class="media-title"><a href="{{ url('app_blog_show', {'slug': post.slug}) }}">{{ post.title | jolitypo() }}</a></h3>
+                    <div class="media excerpt  h5  media--news__meta">
+                        {% for author in post.Authors %}
+                            <div class="media-body">
+                                <p class="media--aligned  excerpt">{{ 'blog.written_by' | trans({}, 'CapcoAppBundle') }} <a href="{{ path('capco_user_profile_show_all', { slug: author.slug })}}">{{ author.username }}</a>, le {{ post.publishedAt | localizeddate('long', 'none') }} </p>
+                            </div>
+                            {% if loop.revindex0 == '1' %}
+                                {{ 'blog.and' | trans({}, 'CapcoAppBundle') }}
+                            {% elseif loop.revindex0 == '2' %}
+                                {{- ', ' }}
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                    {% if post.abstract %}
+                        <p class="media--news__text">{{ post.abstract | jolitypo() }}</p>
+                    {% endif %}
+                </div>
+            </li>
+        {% endfor %}
+    </ul>
+    <a href="{{ path('app_blog') }}" class="btn  btn-primary  btn--outline">{{ 'blog.see_all'|trans({}, 'CapcoAppBundle') }}</a>
+{% else %}
+    <p>{{ 'blog.none'|trans({}, 'CapcoAppBundle') }}</p>
+{% endif %}

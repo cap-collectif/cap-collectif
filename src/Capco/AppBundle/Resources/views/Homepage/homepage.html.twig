@@ -45,6 +45,10 @@
 {% block body %}
 
     <div class="container  block">
+        <h2 class="h2">{{ 'homepage.posts.last'|trans({}, 'CapcoAppBundle') }}</h2>
+        {{ render(controller('CapcoAppBundle:Homepage:lastPosts', {'max': 3, 'offset': 0})) }}
+    </div>
+    <div class="container  block">
         <h2 class="h2">{{ 'homepage.themes.last'|trans({}, 'CapcoAppBundle') }}</h2>
         {{ render(controller('CapcoAppBundle:Homepage:lastThemes', {'max': 4, 'offset': 0})) }}
     </div>
