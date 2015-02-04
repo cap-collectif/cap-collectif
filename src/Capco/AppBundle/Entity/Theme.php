@@ -141,7 +141,6 @@ class Theme
     {
         $this->Consultations = new ArrayCollection();
         $this->Ideas = new ArrayCollection();
-        $this->status = self::STATUS_CLOSED;
         $this->updatedAt = new \Datetime;
     }
 
@@ -424,14 +423,26 @@ class Theme
         return ($this->isEnabled);
     }
 
-    public function countConsultations()
+    public function countEnabledConsultations()
     {
-        return $this->Consultations->count();
+        $count = 0;
+        foreach ($this->Consultations as $consultation) {
+            if (true == $consultation->getIsEnabled()) {
+                $count++;
+            }
+        }
+        return $count;
     }
 
-    public function countIdeas()
+    public function countEnabledIdeas()
     {
-        return $this->Ideas->count();
+        $count = 0;
+        foreach ($this->Ideas as $idea) {
+            if (true == $idea->getIsEnabled()) {
+                $count++;
+            }
+        }
+        return $count;
     }
 
 

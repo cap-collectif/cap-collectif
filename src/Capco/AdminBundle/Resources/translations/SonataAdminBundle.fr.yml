@@ -269,7 +269,7 @@ admin:
       ideas_count: Idées
       consultations_count: Consultations
       position: Position
-      no_status: Aucun
+      no_status: Aucun statut
     user:
       username: Nom
       email: Email

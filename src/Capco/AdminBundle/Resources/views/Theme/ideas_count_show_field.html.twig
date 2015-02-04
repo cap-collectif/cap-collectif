@@ -2,6 +2,6 @@
 
 {% block field %}
     {%  if object is not null %}
-        {{ object.countIdeas()  }}
+        {{ object.Ideas | length  }}
     {%  endif %}
 {% endblock %}

@@ -2,11 +2,13 @@
 
 {% block field %}
     {%  set labels = field_description.options.statusesLabels %}
-    {% if object.status != null %}
     <div>
         <p>
-            {{ labels[object.status] | trans({}, 'CapcoAppBundle')  }}
+            {% if labels[object.status] is defined %}
+                {{ labels[object.status] | trans({}, 'CapcoAppBundle')  }}
+            {% else %}
+                {{ 'admin.fields.theme.no_status'|trans({}, 'SonataAdminBundle') }}
+            {% endif %}
         </p>
     </div>
-    {% endif %}
 {% endblock %}

@@ -18,9 +18,12 @@ class ThemeRepository extends EntityRepository
      */
     public function getLast($limit = 1, $offset = 0)
     {
-        $qb = $this->createQueryBuilder('t');
-        $qb = $this->whereIsEnabled($qb);
-        $qb->addOrderBy('t.createdAt', 'DESC');
+        $qb = $this->getIsEnabledQueryBuilder()
+            ->addSelect('c', 'i')
+            ->leftJoin('t.Consultations', 'c')
+            ->leftJoin('t.Ideas', 'i')
+            ->addOrderBy('t.createdAt', 'DESC')
+        ;
 
         if ($limit) {
             $qb->setMaxResults($limit);
@@ -30,9 +33,7 @@ class ThemeRepository extends EntityRepository
             $qb->setFirstResult($offset);
         }
 
-        return $qb
-            ->getQuery()
-            ->getResult();
+        return new Paginator($qb, $fetchJoin = true);
     }
 
     /**
@@ -50,12 +51,11 @@ class ThemeRepository extends EntityRepository
             ));
         }
 
-        $qb = $this->createQueryBuilder('t');
-
-        $this->joinEnabledConsultations($qb);
-        $this->joinEnabledIdeas($qb);
-
-        $this->whereIsEnabled($qb, 't');
+        $qb = $this->getIsEnabledQueryBuilder();
+        $qb->addSelect('c, i')
+            ->leftJoin('t.Consultations', 'c')
+            ->leftJoin('t.Ideas', 'i')
+        ;
 
         $qb->addOrderBy('t.createdAt', 'DESC');
 
@@ -75,34 +75,10 @@ class ThemeRepository extends EntityRepository
         return new Paginator($query);
     }
 
-    /**
-     * Helpers
-     * @param QueryBuilder $qb
-     * @param string $alias
-     * @return QueryBuilder
-     */
-    private function joinEnabledConsultations(QueryBuilder $qb, $alias = 'c')
+    protected function getIsEnabledQueryBuilder()
     {
-        $qb->leftJoin('t.Consultations', $alias)
-            ->addSelect('c')
-            ->orWhere('c.isEnabled = :isEnabled')
-            ->setParameter('isEnabled', true);
-        return $qb;
-    }
-
-    private function joinEnabledIdeas(QueryBuilder $qb, $alias = 'i')
-    {
-        $qb->leftJoin('t.Ideas', 'i')
-            ->addSelect('i')
-            ->orWhere('i.isEnabled = :isEnabled')
-            ->setParameter('isEnabled', true);
-        return $qb;
-    }
-
-    private function whereIsEnabled(QueryBuilder $qb, $entity = 't')
-    {
-        $qb->andWhere($entity.'.isEnabled = :isEnabled')
-            ->setParameter('isEnabled', true);
-        return $qb;
+        return $this->createQueryBuilder('t')
+            ->andWhere('t.isEnabled = :enabled')
+            ->setParameter('enabled', true);
     }
 }

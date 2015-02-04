@@ -126,6 +126,7 @@ class ThemeAdmin extends Admin
                 'choices' => Theme::$statusesLabels,
                 'translation_domain' => 'CapcoAppBundle',
                 'required' => false,
+                'empty_value' => 'admin.fields.theme.no_status',
             ))
             ->add('Consultations', null, array(
                 'label' => 'admin.fields.theme.consultations',
