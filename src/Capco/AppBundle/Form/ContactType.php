@@ -21,6 +21,10 @@ class ContactType extends AbstractType
             ))
             ->add('message', 'textarea', array(
                 'label' => 'contact.form.message',
+                'attr' => array(
+                    'rows' => '10',
+                    'cols' => '30',
+                )
             ))
         ;
     }
