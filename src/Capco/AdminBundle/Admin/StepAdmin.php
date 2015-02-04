@@ -136,6 +136,7 @@ class StepAdmin extends Admin
                     'label' => 'admin.fields.step.type',
                 ))
                 ->add('body', null, array(
+                    'attr' => array('class' => 'ckeditor'),
                     'label' => 'admin.fields.step.body',
                     'required' => false,
                 ))

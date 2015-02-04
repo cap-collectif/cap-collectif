@@ -119,7 +119,7 @@ class Theme
 
     /**
      * @var
-     * @ORM\ManyToMany(targetEntity="Capco\AppBundle\Entity\Consultation", inversedBy="Themes", cascade={"persist"})
+     * @ORM\ManyToMany(targetEntity="Capco\AppBundle\Entity\Consultation", mappedBy="Themes", cascade={"persist"})
      */
     private $Consultations;
 
@@ -338,7 +338,6 @@ class Theme
         if (!$this->Consultations->contains($Consultation)) {
             $this->Consultations->add($Consultation);
         }
-        $Consultation->addTheme($this);
         return $this;
     }
 
@@ -349,7 +348,6 @@ class Theme
     public function removeConsultation(Consultation $Consultation)
     {
         $this->Consultations->removeElement($Consultation);
-        $Consultation->removeTheme($this);
         return $this;
     }
 

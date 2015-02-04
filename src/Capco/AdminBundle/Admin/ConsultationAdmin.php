@@ -131,9 +131,10 @@ class ConsultationAdmin extends Admin
             ->add('Author', 'sonata_type_model', array(
                 'label' => 'admin.fields.consultation.author',
             ))
-            ->add('Themes', null, array(
+            ->add('Themes', 'sonata_type_model', array(
                 'label' => 'admin.fields.consultation.themes',
                 'required' => false,
+                'multiple' => true,
                 'by_reference' => false,
             ))
             ->add('openedAt', 'sonata_type_datetime_picker', array(
@@ -157,13 +158,6 @@ class ConsultationAdmin extends Admin
                      'data-date-format' => 'DD/MM/YYYY HH:mm'
                  )
              ))
-            ->add('Steps', null, array(
-                'required' => false,
-                'by_reference' => false,
-                'query_builder' => $this->createStepsQuery('other'),
-                'help' => 'admin.help.consultation.steps',
-                'label' => 'admin.fields.consultation.steps',
-            ))
             ->add('teaser', null, array(
                 'attr' => array('class' => 'ckeditor'),
                 'label' => 'admin.fields.consultation.teaser',
@@ -279,17 +273,6 @@ class ConsultationAdmin extends Admin
                 'label' => 'admin.fields.consultation.updated_at',
             ))
         ;
-    }
-
-    private function createStepsQuery($type)
-    {
-        $em = $this->modelManager->getEntityManager('CapcoAppBundle:Step');
-        $query = $em->createQueryBuilder()
-            ->from('CapcoAppBundle:Step', 's')
-            ->select('s')
-            ->where('s.type = :type')
-            ->setParameter('type', Step::$stepTypes[$type]);
-        return $query;
     }
 
     public function prePersist($consultation)
