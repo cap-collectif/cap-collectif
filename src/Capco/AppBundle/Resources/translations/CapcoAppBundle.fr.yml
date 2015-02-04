@@ -521,3 +521,8 @@ blog:
   on_date: le %date%
   see_all: Voir toutes les actualités
   none: "Il n'y a aucune actualité."
+
+media:
+  form:
+    unlink: Dissocier l'image
+    binary_content: Fichier image

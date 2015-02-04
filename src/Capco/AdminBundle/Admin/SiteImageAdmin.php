@@ -75,12 +75,15 @@ class SiteImageAdmin extends Admin
                 'label' => 'admin.fields.site_image.is_enabled',
                 'required' => false,
             ))
-            ->add('Media', 'sonata_media_type', array(
-                'label' => 'admin.fields.site_image.media',
-                'provider' => 'sonata.media.provider.image',
-                'context' => 'default',
+            ->add('Media', 'sonata_type_model_list', array(
                 'required' => false,
-            ))
+                'label' => 'admin.fields.site_image.media',
+            ), array(
+                'link_parameters' => array(
+                    'context' => 'default',
+                    'hide_context' => true,
+                    'provider' => 'sonata.media.provider.image',
+            )))
         ;
     }
 

@@ -97,12 +97,15 @@ class SocialNetworkAdmin extends Admin
             ->add('position', null, array(
                 'label' => 'admin.fields.social_network.position',
             ))
-            ->add('media', 'sonata_media_type', array(
-                'provider' => 'sonata.media.provider.image',
-                'context' => 'default',
-                'label' => 'admin.fields.social_network.media',
+            ->add('media', 'sonata_type_model_list', array(
                 'required' => false,
-            ))
+                'label' => 'admin.fields.social_network.media',
+            ), array(
+                'link_parameters' => array(
+                    'context' => 'default',
+                    'hide_context' => true,
+                    'provider' => 'sonata.media.provider.image',
+            )))
         ;
     }
 

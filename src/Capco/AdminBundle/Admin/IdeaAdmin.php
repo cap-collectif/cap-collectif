@@ -109,11 +109,15 @@ class IdeaAdmin extends Admin
                 'label' => 'admin.fields.idea.body',
                 'attr' => array('class' => 'ckeditor'),
             ))
-            ->add('Media', 'sonata_media_type', array(
-                'provider' => 'sonata.media.provider.image',
-                'context' => 'default',
+            ->add('Media', 'sonata_type_model_list', array(
                 'label' => 'admin.fields.idea.media',
                 'required' => false,
+            ), array(
+                'link_parameters' => array(
+                    'context' => 'default',
+                    'hide_context' => true,
+                    'provider' => 'sonata.media.provider.image',
+                )
             ))
             ->add('isTrashed', null, array(
                 'label' => 'admin.fields.idea.is_trashed',

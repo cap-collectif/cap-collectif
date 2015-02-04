@@ -172,17 +172,25 @@ class ConsultationAdmin extends Admin
                 'attr' => array('class' => 'ckeditor'),
                 'label' => 'admin.fields.consultation.body',
             ))
-            ->add('Cover', 'sonata_media_type', array(
-                'provider' => 'sonata.media.provider.image',
-                'context' => 'default',
-                'label' => 'admin.fields.consultation.cover',
+            ->add('Cover', 'sonata_type_model_list', array(
                 'required' => false,
+                'label' => 'admin.fields.consultation.cover',
+            ), array(
+                'link_parameters' => array(
+                    'context' => 'default',
+                    'hide_context' => true,
+                    'provider' => 'sonata.media.provider.image',
+                )
             ))
-            ->add('Image', 'sonata_media_type', array(
-                'provider' => 'sonata.media.provider.image',
-                'context' => 'default',
+            ->add('Image', 'sonata_type_model_list', array(
                 'label' => 'admin.fields.consultation.image',
                 'required' => false,
+            ), array(
+                'link_parameters' => array(
+                    'context' => 'default',
+                    'hide_context' => true,
+                    'provider' => 'sonata.media.provider.image',
+                )
             ))
             ->add('video', null, array(
                 'label' => 'admin.fields.consultation.video',
@@ -218,6 +226,10 @@ class ConsultationAdmin extends Admin
             ->add('Cover', null, array(
                 'template' => 'CapcoAdminBundle:Consultation:cover_show_field.html.twig',
                 'label' => 'admin.fields.consultation.cover',
+            ))
+            ->add('Image', null, array(
+                'template' => 'CapcoAdminBundle:Consultation:cover_show_field.html.twig',
+                'label' => 'admin.fields.consultation.image',
             ))
             ->add('video', null, array(
                 'label' => 'admin.fields.consultation.video',

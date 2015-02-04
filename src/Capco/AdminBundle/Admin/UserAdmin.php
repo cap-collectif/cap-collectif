@@ -105,15 +105,24 @@ class UserAdmin extends BaseAdmin
             ->with('General')
             ->add('username')
             ->add('email')
-            ->add('slug')
+            ->add('slug', null, array(
+                'label' => 'Slug'
+            ))
             ->end()
             ->with('Profile')
+            ->add('Media', 'sonata_media_type', array(
+                'template' => 'CapcoAdminBundle:User:media_show_field.html.twig',
+                'provider' => 'sonata.media.provider.image',
+                'label' => 'Avatar',
+            ))
             ->add('dateOfBirth')
             ->add('firstname')
             ->add('lastname')
             ->add('website')
             ->add('biography')
-            ->add('city')
+            ->add('city', null, array(
+                'label' => 'Ville'
+            ))
             ->add('gender')
             ->add('locale')
             ->add('timezone')
@@ -185,6 +194,14 @@ class UserAdmin extends BaseAdmin
             ))
             ->end()
             ->with('Profile')
+            ->add('Media', 'sonata_type_model_list', array(
+                'required' => false,
+                'label' => 'Avatar',
+            ), array(
+                'link_parameters' => array(
+                'context' => 'default',
+                'hide_context' => true
+            )))
             ->add('dateOfBirth', 'sonata_type_date_picker', array(
                 'years' => range(1900, $now->format('Y')),
                 'dp_min_date' => '1-1-1900',
