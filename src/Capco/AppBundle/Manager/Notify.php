@@ -24,8 +24,7 @@ class Notify
         $this->resolver = $resolver;
         $this->translator = $translator;
     }
-
-    //TODO: update link
+    
     public function sendNotifyMessage(User $user, $type, $message)
     {
         $to = $this->resolver->getValue('admin.mail.notifications');
