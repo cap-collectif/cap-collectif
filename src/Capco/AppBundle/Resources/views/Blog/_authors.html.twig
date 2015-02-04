@@ -2,7 +2,6 @@
     <div class="media  media--news__meta">
         <div class="media-body">
             <p class="media--aligned  excerpt">
-                {{ 'blog.written_by' | trans({}, 'CapcoAppBundle') }}
                 {% for author in authors %}
                     {%  set avatar = author.Media|capco_default_avatar %}
                     {% if avatar != null %}
