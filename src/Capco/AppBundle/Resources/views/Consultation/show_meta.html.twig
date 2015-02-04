@@ -6,12 +6,12 @@
         </a>
     {% elseif consultation.video and consultation.Image is null %}
         <a href="{{ consultation.video }}" class="play  fancybox" data-type="iframe">
-            <div class="bg-primary  bg--default"></div>
+            <div class="bg--default  bg--consultation"></div>
         </a>
     {% elseif consultation.video is null and consultation.Image %}
         {% thumbnail consultation.Image, 'img_video' with {'title': consultation.Image.name, 'alt': consultation.Image.name, 'class': 'img-responsive  center-block'} %}
     {% else %}
-        <div class="bg-primary  bg--default"></div>
+        <div class="bg--default  bg--consultation"></div>
     {% endif %}
 
     <div class="box">

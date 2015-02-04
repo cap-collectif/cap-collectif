@@ -8,6 +8,14 @@
   }
 }
 
+.media--news .pull-left {
+  margin-right: 0;
+}
+
+.media--news .media-object {
+  margin-right: 15px;
+}
+
 .media--news__user a {
   color: $black;
 }

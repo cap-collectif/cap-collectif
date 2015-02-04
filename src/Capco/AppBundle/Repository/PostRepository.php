@@ -21,14 +21,12 @@ class PostRepository extends EntityRepository
      */
     public function getLast($limit = 1, $offset = 0)
     {
-        $qb = $this->createQueryBuilder('p')
+        $qb = $this->getPublicQueryBuilder()
             ->select('p, a, m')
             ->leftJoin('p.Authors', 'a')
             ->leftJoin('p.Media', 'm')
-            ->andWhere('p.isPublished = :published')
-            ->setParameter('published', true)
-            ->addOrderBy('p.createdAt', 'DESC')
-            ->addGroupBy('p.id');
+            ->addOrderBy('p.publishedAt', 'DESC')
+        ;
 
         if ($limit) {
             $qb->setMaxResults($limit);
@@ -38,9 +36,7 @@ class PostRepository extends EntityRepository
             $qb->setFirstResult($offset);
         }
 
-        return $qb
-            ->getQuery()
-            ->execute();
+        return new Paginator($qb, $fetchJoin = true);
     }
 
     public function getRecentPosts($count = 5)

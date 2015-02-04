@@ -91,9 +91,6 @@ class PostAdmin extends Admin
                     'hide_context' => true
                 )
             ))
-            ->add('abstract', null, array(
-                'label' => 'admin.fields.blog_post.abstract',
-            ))
             ->add('isPublished', null, array(
                 'label' => 'admin.fields.blog_post.is_published',
                 'required' => false,
@@ -101,11 +98,22 @@ class PostAdmin extends Admin
             ->add('publishedAt', 'sonata_type_datetime_picker', array(
                 'required' => false,
                 'label' => 'admin.fields.blog_post.published_at',
+                'format' => 'dd/MM/yyyy HH:mm',
+                'attr' => array(
+                    'data-date-format' => 'DD/MM/YYYY HH:mm'
+                ),
             ))
             ->add('Authors', null, array(
                 'label' => 'admin.fields.blog_post.authors',
                 'required' => false,
                 'by_reference' => false,
+            ))
+            ->add('abstract', null, array(
+                'label' => 'admin.fields.blog_post.abstract',
+            ))
+            ->add('body', null, array(
+                'label' => 'admin.fields.blog_post.body',
+                'attr' => array('class' => 'ckeditor'),
             ))
         ;
     }
