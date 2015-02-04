@@ -301,9 +301,6 @@ class Idea
      */
     public function setTheme($Theme)
     {
-        if ($this->Theme != null) {
-            $this->Theme->removeIdea($this);
-        }
         $this->Theme = $Theme;
         $Theme->addIdea($this);
     }
@@ -452,7 +449,9 @@ class Idea
      */
     public function addReport(Reporting $report)
     {
-        $this->Reports->add($report);
+        if (!$this->Reports->contains($report)) {
+            $this->Reports->add($report);
+        }
         return $this;
     }
 
@@ -481,8 +480,10 @@ class Idea
      */
     public function addIdeaVote(\Capco\AppBundle\Entity\IdeaVote $ideaVote)
     {
-        $this->IdeaVotes->add($ideaVote);
-        $this->voteCount++;
+        if (!$this->IdeaVotes->contains($ideaVote)) {
+            $this->IdeaVotes->add($ideaVote);
+            $this->voteCount++;
+        }
         return $this;
     }
 

@@ -93,10 +93,6 @@ class IdeaVote
      */
     public function setIdea($Idea)
     {
-        if($this->Idea != null) {
-            $this->Idea->removeIdeaVote($this);
-        }
-
         $this->Idea = $Idea;
         $this->Idea->addIdeaVote($this);
 

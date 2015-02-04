@@ -365,9 +365,6 @@ class Source
      */
     public function setOpinion($Opinion)
     {
-        if (null != $this->Opinion) {
-            $this->Opinion->removeSource($this);
-        }
         $this->Opinion = $Opinion;
         $this->Opinion->addSource($this);
         return $this;
@@ -387,9 +384,6 @@ class Source
      */
     public function setCategory($Category)
     {
-        if(null != $this->Category) {
-            $this->Category->removeSource($this);
-        }
         $this->Category = $Category;
         $this->Category->addSource($this);
         return $this;
@@ -438,9 +432,12 @@ class Source
      * @param $vote
      * @return $this
      */
-    public function addVote($vote){
-        $this->voteCountSource++;
-        $this->Votes->add($vote);
+    public function addVote($vote)
+    {
+        if (!$this->Votes->contains($vote)) {
+            $this->voteCountSource++;
+            $this->Votes->add($vote);
+        }
         return $this;
     }
 
@@ -470,7 +467,9 @@ class Source
      */
     public function addReport(Reporting $report)
     {
-        $this->Reports->add($report);
+        if (!$this->Reports->contains($report)) {
+            $this->Reports->add($report);
+        }
         return $this;
     }
 

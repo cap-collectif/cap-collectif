@@ -325,8 +325,9 @@ class Post
      */
     public function addAuthor(\Capco\UserBundle\Entity\User $author)
     {
-        $this->Authors[] = $author;
-
+        if (!$this->Authors->contains($author)) {
+            $this->Authors[] = $author;
+        }
         return $this;
     }
 

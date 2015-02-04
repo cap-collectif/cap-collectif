@@ -328,9 +328,6 @@ class Step
      */
     public function setConsultation(Consultation $consultation = null)
     {
-        if (null != $this->consultation) {
-            $this->consultation->removeStep($this);
-        }
         $this->consultation = $consultation;
         $this->consultation->addStep($this);
         return $this;

@@ -175,9 +175,6 @@ class OpinionVote
      */
     public function setOpinion($Opinion)
     {
-        if($this->opinion != null) {
-            $this->opinion->removeVote($this);
-        }
         $this->opinion = $Opinion;
         $this->opinion->addVote($this);
     }

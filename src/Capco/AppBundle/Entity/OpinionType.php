@@ -282,7 +282,9 @@ class OpinionType
      */
     public function addOpinion(Opinion $opinion)
     {
-        $this->Opinions->add($opinion);
+        if (!$this->Opinions->contains($opinion)) {
+            $this->Opinions->add($opinion);
+        }
         return $this;
     }
 

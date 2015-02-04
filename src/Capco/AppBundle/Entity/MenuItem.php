@@ -284,9 +284,6 @@ class MenuItem
      */
     public function setMenu($Menu)
     {
-        if ($this->Menu != null) {
-            $this->Menu->removeMenuItem($this);
-        }
         $this->Menu = $Menu;
         $this->Menu->addMenuItem($this);
 
@@ -366,9 +363,6 @@ class MenuItem
      */
     public function setPage($page)
     {
-        if (null != $this->getPage()) {
-            $this->Page->removeMenuItem($this);
-        }
         $this->Page = $page;
         if (null != $this->getPage()) {
             $this->Page->addMenuItem($this);

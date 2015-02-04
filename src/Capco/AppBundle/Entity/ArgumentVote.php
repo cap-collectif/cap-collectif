@@ -96,9 +96,6 @@ class ArgumentVote
      */
     public function setArgument($argument)
     {
-        if($this->argument != null) {
-            $this->argument->removeVote($this);
-        }
         $this->argument = $argument;
         $argument->addVote($this);
         return $this;

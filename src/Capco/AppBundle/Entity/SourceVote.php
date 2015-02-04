@@ -79,9 +79,6 @@ class SourceVote
      */
     public function setSource($source)
     {
-        if (null != $this->source) {
-            $this->source->removeVote($this);
-        }
         $this->source = $source;
         $this->source->addVote($this);
         return $this;

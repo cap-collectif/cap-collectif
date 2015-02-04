@@ -335,18 +335,22 @@ class Theme
      */
     public function addConsultation(Consultation $Consultation)
     {
-        $this->Consultations->add($Consultation);
+        if (!$this->Consultations->contains($Consultation)) {
+            $this->Consultations->add($Consultation);
+        }
         $Consultation->addTheme($this);
         return $this;
     }
 
     /**
      * @param Consultation $Consultation
+     * @return $this
      */
     public function removeConsultation(Consultation $Consultation)
     {
         $this->Consultations->removeElement($Consultation);
         $Consultation->removeTheme($this);
+        return $this;
     }
 
     /**
@@ -368,8 +372,9 @@ class Theme
      */
     public function addIdea(\Capco\AppBundle\Entity\Idea $idea)
     {
-        $this->Ideas[] = $idea;
-
+        if (!$this->Ideas->contains($idea)) {
+            $this->Ideas[] = $idea;
+        }
         return $this;
     }
 

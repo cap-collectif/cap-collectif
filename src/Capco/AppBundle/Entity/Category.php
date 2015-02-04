@@ -186,7 +186,9 @@ class Category
      */
     public function addSource(Source $source)
     {
-        $this->Sources->add($source);
+        if (!$this->Sources->contains($source)) {
+            $this->Sources->add($source);
+        }
         return $this;
     }
 

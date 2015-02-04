@@ -285,7 +285,9 @@ class Page
 
     public function addMenuItem($menuItem)
     {
-        $this->MenuItems->add($menuItem);
+        if (!$this->MenuItems->contains($menuItem)) {
+            $this->MenuItems->add($menuItem);
+        }
     }
 
     public function removeMenuItem($menuItem)

@@ -505,9 +505,6 @@ class Opinion
      */
     public function setOpinionType($OpinionType)
     {
-        if (null != $this->OpinionType) {
-            $this->OpinionType->removeOpinion($this);
-        }
         $this->OpinionType = $OpinionType;
         $this->OpinionType->addOpinion($this);
     }
@@ -526,9 +523,6 @@ class Opinion
      */
     public function setConsultation($Consultation)
     {
-        if ($this->Consultation != null) {
-            $this->Consultation->removeOpinion($this);
-        }
         $this->Consultation = $Consultation;
         $this->Consultation->addOpinion($this);
         return $this;
@@ -548,8 +542,10 @@ class Opinion
      */
     public function addSource($source)
     {
-        $this->increaseSourcesCount(1);
-        $this->Sources->add($source);
+        if (!$this->Sources->contains($source)) {
+            $this->increaseSourcesCount(1);
+            $this->Sources->add($source);
+        }
         return $this;
     }
 
@@ -580,8 +576,10 @@ class Opinion
      */
     public function addArgument(Argument $argument)
     {
-        $this->arguments->add($argument);
-        $this->increaseArgumentsCount(1);
+        if (!$this->arguments->contains($argument)) {
+            $this->arguments->add($argument);
+            $this->increaseArgumentsCount(1);
+        }
         return $this;
     }
 
@@ -613,8 +611,10 @@ class Opinion
      */
     public function addVote($vote)
     {
-        $this->Votes->add($vote);
-        $this->addToVotesCount($vote->getValue());
+        if (!$this->Votes->contains($vote)) {
+            $this->Votes->add($vote);
+            $this->addToVotesCount($vote->getValue());
+        }
         return $this;
     }
 
@@ -645,7 +645,9 @@ class Opinion
      */
     public function addReport(Reporting $report)
     {
-        $this->Reports->add($report);
+        if (!$this->Reports->contains($report)) {
+            $this->Reports->add($report);
+        }
         return $this;
     }
 

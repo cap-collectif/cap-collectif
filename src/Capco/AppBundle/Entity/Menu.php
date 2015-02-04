@@ -104,8 +104,9 @@ class Menu
      */
     public function addMenuItem(MenuItem $MenuItem)
     {
-        $this->MenuItems->add($MenuItem);
-
+        if (!$this->MenuItems->contains($MenuItem)) {
+            $this->MenuItems->add($MenuItem);
+        }
         return $this;
     }
 

@@ -427,7 +427,9 @@ class Consultation
      */
     public function addTheme(Theme $theme)
     {
-        $this->Themes->add($theme);
+        if (!$this->Themes->contains($theme)) {
+            $this->Themes->add($theme);
+        }
         return $this;
     }
 
@@ -454,8 +456,10 @@ class Consultation
      * @return $this
      */
     public function addOpinion($opinion){
-        $this->opinionCount++;
-        $this->Opinions->add($opinion);
+        if (!$this->Opinions->contains($opinion)) {
+            $this->opinionCount++;
+            $this->Opinions->add($opinion);
+        }
         return $this;
     }
 
@@ -489,7 +493,9 @@ class Consultation
      */
     public function addStep(Step $step)
     {
-        $this->Steps->add($step);
+        if (!$this->Steps->contains($step)) {
+            $this->Steps->add($step);
+        }
         return $this;
     }
 

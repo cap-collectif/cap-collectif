@@ -396,8 +396,10 @@ class Argument
      * @return $this
      */
     public function addVote($vote){
-        $this->voteCount++;
-        $this->Votes->add($vote);
+        if (!$this->Votes->contains($vote)) {
+            $this->voteCount++;
+            $this->Votes->add($vote);
+        }
         return $this;
     }
 
@@ -410,7 +412,6 @@ class Argument
         if ($this->Votes->removeElement($vote)) {
             $this->voteCount--;
         }
-
         return $this;
     }
 
@@ -427,9 +428,6 @@ class Argument
      */
     public function setOpinion($opinion)
     {
-        if ($this->opinion != null) {
-            $this->opinion->removeArgument($this);
-        }
         $this->opinion = $opinion;
         $opinion->addArgument($this);
     }
@@ -448,7 +446,9 @@ class Argument
      */
     public function addReport(Reporting $report)
     {
-        $this->Reports->add($report);
+        if (!$this->Reports->contains($report)) {
+            $this->Reports->add($report);
+        }
         return $this;
     }
 
