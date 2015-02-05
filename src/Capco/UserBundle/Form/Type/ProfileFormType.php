@@ -55,7 +55,7 @@ class ProfileFormType extends AbstractType
                 'required' => true,
                 'translation_domain' => 'CapcoAppBundle',
             ))
-            ->add('dateOfBirth', 'date', array(
+            ->add('dateOfBirth', 'birthday', array(
                 'required' => false,
                 'label' => 'user.profile.edit.birthday',
                 'translation_domain' => 'CapcoAppBundle',
