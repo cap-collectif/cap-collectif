@@ -44,7 +44,26 @@
 
     .navbar--sub .nav li.active a,
     .navbar--sub .nav li.active:hover a {
-        background-color: {{ link }};
+        background-color: {{ btnPrimary }};
+        border-color: {{ btnPrimary }};
+        color: {{ btnPrimaryText }};
+    }
+
+    .pagination>.active > a,
+    .pagination>.active > a:focus,
+    .pagination>.active > a:hover,
+    .pagination>.active > span,
+    .pagination>.active > span:focus,
+    .pagination>.active > span:hover {
+        background-color: {{ btnPrimary }};
+        border-color: {{ btnPrimary }};
+        color: {{ btnPrimaryText }};
+    }
+
+    .dropdown-menu>.active > a,
+    .dropdown-menu>.active > a:focus,
+    .dropdown-menu>.active > a:hover {
+        background-color: {{ btnPrimary }};
     }
 
     .profile .profile__value a:hover,
@@ -55,11 +74,21 @@
         box-shadow: 0 -3px 0 {{ link }} inset;
     }
 
-    .nav-pills >li.active > a,
-    .nav-pills > li.active > a:focus,
-    .nav-pills > li.active > a:hover {
+    .settings__nav.nav-pills > li.active > a,
+    .settings__nav.nav-pills > li.active > a:focus,
+    .settings__nav.nav-pills > li.active > a:hover {
         color: {{ headerText }};
         background-color: {{ headerBg }};
+    }
+
+    .btn-primary.active,
+    .btn-primary:active,
+    .btn-primary:focus,
+    .btn-primary:hover,
+    .open > .btn-primary.dropdown-toggle {
+        background-color: {{ btnPrimary }};
+        border-color: {{ btnPrimary }};
+        color: {{ btnPrimaryText }};
     }
 
     h1, .h1 { color: {{ h1 }};}

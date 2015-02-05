@@ -1,15 +1,15 @@
 Capco\AppBundle\Entity\SiteColor:
     SiteColor1:
         keyname: color.body.bg
-        title: Couleur de fond du site
+        title: Fond du site
         position: 1
     SiteColor2:
         keyname: color.body.text
-        title: Texte pour le fond du site
+        title: Texte du site
         position: 2
     SiteColor3:
         keyname: color.header.bg
-        title: Couleur d'entête
+        title: Fond de l'en-tête
         value: '#16a085'
         position: 3
     SiteColor41:
@@ -22,7 +22,7 @@ Capco\AppBundle\Entity\SiteColor:
         position: 4
     SiteColor5:
         keyname: color.section.bg
-        title: Couleur de section
+        title: Fond de la section
         value: '#1abc9c'
         position: 5
     SiteColor6:
@@ -37,12 +37,12 @@ Capco\AppBundle\Entity\SiteColor:
         position: 7
     SiteColor8:
         keyname: color.btn
-        title: Couleur du bouton
+        title: Bouton de l'en-tête
         value: '#1abc9c'
         position: 8
     SiteColor9:
         keyname: color.btn.text
-        title: Texte du bouton
+        title: Libellé du bouton de l'en-tête
         value: '#ffffff'
         position: 9
     SiteColor10:
@@ -73,22 +73,22 @@ Capco\AppBundle\Entity\SiteColor:
         position: 15
     SiteColor16:
         keyname: color.btn.primary
-        title: Couleur du bouton primaire
+        title: Couleur primaire
         value: '#1abc9c'
         position: 16
     SiteColor17:
         keyname: color.btn.primary.text
-        title: Texte du bouton primaire
+        title: Libellé primaire
         value: '#ffffff'
         position: 17
     SiteColor18:
         keyname: color.link
-        title: Texte des liens
+        title: Liens
         value: '#16a085'
         position: 18
     SiteColor19:
         keyname: color.link.hover
-        title: Texte des liens au survol
+        title: Liens au survol
         value: '#1abc9c'
         position: 19
     SiteColor20:
@@ -98,6 +98,6 @@ Capco\AppBundle\Entity\SiteColor:
         position: 20
     SiteColor21:
         keyname: color.footer.bg
-        title: Fond du pied de page
+        title: Fond pied de page
         value: '#1abc9c'
         position: 21
