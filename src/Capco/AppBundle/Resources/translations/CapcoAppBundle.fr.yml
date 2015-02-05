@@ -536,5 +536,5 @@ blog:
 
 media:
   form:
-    unlink: Dissocier l'image
-    binary_content: Fichier image
+    unlink: Dissocier
+    binary_content: Fichier

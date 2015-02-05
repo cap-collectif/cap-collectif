@@ -576,6 +576,22 @@ class Consultation
         return null;
     }
 
+    public function getConsultationStepTitle()
+    {
+        $consultationStep = $this->getConsultationStep();
+        if (null != $consultationStep) {
+            return $consultationStep->getTitle();
+        }
+    }
+
+    public function getConsultationStepPosition()
+    {
+        $consultationStep = $this->getConsultationStep();
+        if (null != $consultationStep) {
+            return $consultationStep->getPosition();
+        }
+    }
+
     /**
      * @return null
      */

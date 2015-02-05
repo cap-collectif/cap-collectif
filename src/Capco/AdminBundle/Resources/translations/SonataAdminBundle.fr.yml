@@ -105,6 +105,8 @@ admin:
       opening_status: Statut
       opened_at: Ouvert
       closed_at: Fermé
+      step_title: Titre de l'étape de consultation
+      step_position: Position de l'étape de consultation
       opinion_count: Propositions
       trashed_opinion_count: Propositions dans la corbeille
       argument_count: Arguments
@@ -316,5 +318,5 @@ view_all_posts: Voir tous les articles
 
 media:
   form:
-    unlink: Dissocier l'image
-    binary_content: Fichier image
+    unlink: Dissocier
+    binary_content: Fichier

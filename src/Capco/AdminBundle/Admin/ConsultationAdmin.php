@@ -115,9 +115,16 @@ class ConsultationAdmin extends Admin
         $subject = $this->getSubject();
         $open = null;
         $close = null;
+        $stepTitle = 'Consultation';
+        $stepPosition = 1;
         if($subject != null){
             $open = $subject->getOpenedAt();
             $close = $subject->getClosedAt();
+            $consultationStep = $subject->getConsultationStep();
+            if (null != $consultationStep) {
+                $stepTitle = $consultationStep->getTitle();
+                $stepPosition = $consultationStep->getPosition();
+            }
         }
 
         $formMapper
@@ -158,6 +165,18 @@ class ConsultationAdmin extends Admin
                      'data-date-format' => 'DD/MM/YYYY HH:mm'
                  )
              ))
+            ->add('consultationStepTitle', 'text', array(
+                'required' => true,
+                'mapped' => false,
+                'data' => $stepTitle,
+                'label' => 'admin.fields.consultation.step_title',
+            ))
+            ->add('consultationStepPosition', 'integer', array(
+                'required' => true,
+                'mapped' => false,
+                'data' => $stepPosition,
+                'label' => 'admin.fields.consultation.step_position',
+            ))
             ->add('teaser', null, array(
                 'attr' => array('class' => 'ckeditor'),
                 'label' => 'admin.fields.consultation.teaser',
@@ -208,6 +227,9 @@ class ConsultationAdmin extends Admin
             ->add('title', null, array(
                 'label' => 'admin.fields.consultation.title',
             ))
+            ->add('isEnabled', 'boolean', array(
+                'label' => 'admin.fields.consultation.is_enabled',
+            ))
             ->add('Author', null, array(
                 'label' => 'admin.fields.consultation.author',
             ))
@@ -236,20 +258,20 @@ class ConsultationAdmin extends Admin
             ))
             ->add('openingStatus', null, array(
                 'label' => 'admin.fields.consultation.opening_status',
-                'mapped' => false,
-                'data' => $subject->getOpeningStatus(),
                 'template' => 'CapcoAdminBundle:Consultation:openingStatus_show_field.html.twig',
                 'statuses' => Consultation::$openingStatuses,
             ))
             ->add('openedAt', 'datetime', array(
                 'label' => 'admin.fields.consultation.opened_at',
-                'mapped' => false,
-                'data' => $subject->getOpenedAt(),
             ))
             ->add('closedAt', 'datetime', array(
                 'label' => 'admin.fields.consultation.closed_at',
-                'mapped' => false,
-                'data' => $subject->getClosedAt(),
+            ))
+            ->add('consultationStepTitle', 'text', array(
+                'label' => 'admin.fields.consultation.step_title',
+            ))
+            ->add('consultationStepPosition', 'integer', array(
+                'label' => 'admin.fields.consultation.step_position',
             ))
             ->add('opinionCount', null, array(
                 'label' => 'admin.fields.consultation.opinion_count',
@@ -262,9 +284,6 @@ class ConsultationAdmin extends Admin
             ))
             ->add('trashedArgumentCount', null, array(
                 'label' => 'admin.fields.consultation.trashed_argument_count',
-            ))
-            ->add('isEnabled', 'boolean', array(
-                'label' => 'admin.fields.consultation.is_enabled',
             ))
             ->add('createdAt', null, array(
                 'label' => 'admin.fields.consultation.created_at',
@@ -291,16 +310,18 @@ class ConsultationAdmin extends Admin
         if($consultationStep == null){
             $consultationStep = new Step();
             $consultationStep->setType(Step::$stepTypes['consultation']);
-            $consultationStep->setTitle('Consultation');
-            $consultationStep->setPosition(1);
             $consultationStep->setConsultation($consultation);
         }
 
         $openingDate = $this->getForm()->get('openedAt')->getData();
         $closingDate = $this->getForm()->get('closedAt')->getData();
+        $title = $this->getForm()->get('consultationStepTitle')->getData();
+        $position = $this->getForm()->get('consultationStepPosition')->getData();
 
         $consultationStep->setStartAt($openingDate);
         $consultationStep->setEndAt($closingDate);
+        $consultationStep->setTitle($title);
+        $consultationStep->setPosition($position);
 
         $consultation->addStep($consultationStep);
     }
