@@ -7,17 +7,19 @@
 <div class="collapse navbar-collapse" id="navbar-collapse-1">
     <ul class="nav navbar-nav">
         {% for headerLink in headerLinks %}
-            {% if headerLink.children|length > 0 %}
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{ headerLink.title}} <span class="caret"></span></a>
-                    <ul class="dropdown-menu" role="menu">
-                        {% for child in headerLink.children %}
-                        {{ nav_item(pathInfo, child.link, child.title) }}
-                        {% endfor %}
-                    </ul>
-                </li>
-            {% else %}
-                {{ nav_item(pathInfo, headerLink.link, headerLink.title) }}
+            {% if headerLink.hasEnabledFeature %}
+                {% if headerLink.children|length > 0 %}
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{ headerLink.title}} <span class="caret"></span></a>
+                        <ul class="dropdown-menu" role="menu">
+                            {% for child in headerLink.children %}
+                            {{ nav_item(pathInfo, child.link, child.title) }}
+                            {% endfor %}
+                        </ul>
+                    </li>
+                {% else %}
+                    {{ nav_item(pathInfo, headerLink.link, headerLink.title) }}
+                {% endif %}
             {% endif %}
         {% endfor %}
     </ul>

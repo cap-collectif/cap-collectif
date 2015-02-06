@@ -33,13 +33,15 @@ class Manager
         }
     }
 
-    public function all()
+    public function all($state = null)
     {
         // features are disabled by default
         $return = array();
 
         foreach (self::$toggles as $name) {
-            $return[$name] = $this->isActive($name);
+            if (null == $state || $state == $this->isActive($name)) {
+                $return[$name] = $this->isActive($name);
+            }
         }
 
         return $return;

@@ -105,6 +105,12 @@ class MenuItem
      */
     private $Menu;
 
+    /**
+     * @var
+     * @ORM\Column(name="associated_features", type="simple_array", nullable=true)
+     */
+    private $associatedFeatures;
+
     public function __toString()
     {
         if ($this->id) {
@@ -121,6 +127,7 @@ class MenuItem
     public function __construct()
     {
         $this->updatedAt = new \Datetime;
+        $this->associatedFeatures = null;
     }
 
     /**
@@ -380,5 +387,21 @@ class MenuItem
         if ($this->Page != null) {
             $this->Page->removeMenuItem($this);
         }
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getAssociatedFeatures()
+    {
+        return $this->associatedFeatures;
+    }
+
+    /**
+     * @param mixed $associatedFeatures
+     */
+    public function setAssociatedFeatures($associatedFeatures)
+    {
+        $this->associatedFeatures = $associatedFeatures;
     }
 }

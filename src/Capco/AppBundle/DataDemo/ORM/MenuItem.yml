@@ -87,3 +87,4 @@ Capco\AppBundle\Entity\MenuItem:
     position: 2
     parent: null
     menu: @menu1
+    associatedFeatures: [blog]

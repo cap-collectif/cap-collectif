@@ -1,5 +1,7 @@
 parameters:
     capco.site_parameter.repository.class: Capco\AppBundle\Repository\SiteParameterRepository
+    capco.menu_item.repository.class: Capco\AppBundle\Repository\MenuItemRepository
+    capco.menu_item.resolver.class: Capco\AppBundle\Manager\MenuItemResolver
     capco.site_parameter.resolver.class: Capco\AppBundle\SiteParameter\Resolver
     capco.twig_extension.site_parameter.class: Capco\AppBundle\Twig\SiteParameterExtension
     capco.site_image.repository.class: Capco\AppBundle\Repository\SiteImageRepository
@@ -124,4 +126,15 @@ services:
         factory_service: doctrine.orm.entity_manager
         factory_method:  getRepository
         arguments:       ['CapcoAppBundle:Post']
+
+    capco.menu_item.repository:
+        class: %capco.menu_item.repository.class%
+        factory_service: doctrine.orm.default_entity_manager
+        factory_method: getRepository
+        arguments:
+            - Capco\AppBundle\Entity\MenuItem
+
+    capco.menu_item.resolver:
+        class: %capco.menu_item.resolver.class%
+        arguments: [@capco.menu_item.repository, @capco.toggle.manager]
 

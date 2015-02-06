@@ -86,11 +86,7 @@ class DefaultController extends Controller
     {
         $headerMenu = $this->getDoctrine()->getRepository('CapcoAppBundle:Menu')->findIdForType(Menu::TYPE_HEADER);
 
-        if (null !== $headerMenu) {
-            $headerLinks = $this->getDoctrine()->getRepository('CapcoAppBundle:MenuItem')->getParentsItemsWithChildrenItems($headerMenu);
-        } else {
-            $headerLinks = array();
-        }
+        $headerLinks = $this->get('capco.menu_item.resolver')->getEnabledMenuItemsWithChildren($headerMenu);
 
         return [
             'pathInfo' => $pathInfo,

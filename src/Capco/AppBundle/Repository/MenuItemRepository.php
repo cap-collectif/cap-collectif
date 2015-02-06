@@ -15,7 +15,7 @@ class MenuItemRepository extends EntityRepository
     public function getParentItems(Menu $menu)
     {
         $qb = $this->createQueryBuilder('i')
-            ->select('i.id, i.title, i.link')
+            ->select('i.id, i.title, i.link, i.associatedFeatures')
             ->andWhere('i.parent IS NULL')
             ->andWhere('i.Menu = :menu')
             ->setParameter('menu', $menu)
@@ -33,7 +33,7 @@ class MenuItemRepository extends EntityRepository
     public function getChildItems(Menu $menu)
     {
         $qb = $this->createQueryBuilder('i')
-            ->select('i.id, i.title, i.link, p.id as parent_id')
+            ->select('i.id, i.title, i.link, i.associatedFeatures, p.id as parent_id')
             ->leftJoin('i.parent', 'p')
             ->andWhere('i.parent IS NOT NULL')
             ->andWhere('i.Menu = :menu')
@@ -47,33 +47,6 @@ class MenuItemRepository extends EntityRepository
             ->getArrayResult();
 
         return $result;
-    }
-
-    public function getParentsItemsWithChildrenItems(Menu $menu)
-    {
-        $parentsLinks = $this->getParentItems($menu);
-        $childrenLinks = $this->getChildItems($menu);
-
-        $links = [];
-        foreach ($parentsLinks as $key => $value) {
-            $links[$value['id']] = [
-                'title' => $value['title'],
-                'link' => $value['link'],
-                'children' => []
-            ];
-        }
-
-        foreach ($childrenLinks as $key => $value) {
-            if (array_key_exists($value['parent_id'], $links)) {
-                $links[$value['parent_id']]['children'][] = [
-                    'id' => $value['id'],
-                    'title' => $value['title'],
-                    'link' => $value['link'], 
-                ];
-            }
-        }
-
-        return $links;
     }
 
     private function whereIsEnabled(QueryBuilder $qb)
