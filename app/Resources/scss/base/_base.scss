@@ -163,6 +163,13 @@ a.excerpt {
   position: relative;
 }
 
+.opinion .pull-left {
+  svg {
+    margin-right: 10px;
+    display: block;
+  }
+}
+
 // Class .play
 .play {
   display: block;
