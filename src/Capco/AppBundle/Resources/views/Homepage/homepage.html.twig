@@ -56,10 +56,12 @@
         <h2 class="h2">{{ 'homepage.ideas.last'|trans({}, 'CapcoAppBundle') }}</h2>
         {{ render(controller('CapcoAppBundle:Homepage:lastIdeas', {'max': 4, 'offset': 0})) }}
     </div>
-    <div class="container  block">
-        <h2 class="h2">{{ 'homepage.posts.last'|trans({}, 'CapcoAppBundle') }}</h2>
-        {{ render(controller('CapcoAppBundle:Homepage:lastPosts', {'max': 3, 'offset': 0})) }}
-    </div>
+    {% if is_feature_enabled('blog') %}
+        <div class="container  block">
+            <h2 class="h2">{{ 'homepage.posts.last'|trans({}, 'CapcoAppBundle') }}</h2>
+            {{ render(controller('CapcoAppBundle:Homepage:lastPosts', {'max': 3, 'offset': 0})) }}
+        </div>
+    {% endif %}
 
     <div class="container">
         <div class="row">

@@ -15,6 +15,10 @@ class FeatureController extends Controller
      */
     public function listAction(Request $request)
     {
+        if (false == $this->get('security.context')->isGranted('ROLE_SUPER_ADMIN')) {
+            $this->createAccessDeniedException();
+        }
+
         $admin_pool = $this->get('sonata.admin.pool');
         $toggleManager = $this->get('capco.toggle.manager');
         $toggles = $toggleManager->all();
@@ -31,6 +35,10 @@ class FeatureController extends Controller
      */
     public function switchAction($toggle)
     {
+        if (false == $this->get('security.context')->isGranted('ROLE_SUPER_ADMIN')) {
+            $this->createAccessDeniedException();
+        }
+
         $toggleManager = $this->get('capco.toggle.manager');
         $value = $toggleManager->switchValue($toggle);
 
