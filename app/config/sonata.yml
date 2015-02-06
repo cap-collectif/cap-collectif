@@ -116,7 +116,6 @@ sonata_media:
                 small:          { width: 100, quality: 70 }
                 big:            { width: 500, quality: 70 }
                 blockHeader:    { width: 1140, height: 200, quality: 70 }
-                blog:           { width: 220, quality 70 }
                 consultation:   { width: 400, height: 300, quality: 70 }
                 form:           { height: 150, quality 70 }
                 idea:           { height: 250, quality: 70 }

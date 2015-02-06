@@ -320,3 +320,7 @@ media:
   form:
     unlink: Dissocier
     binary_content: Fichier
+
+form:
+  label_enabled: Actif
+  label_cdn_is_flushable: À rafraîchir sur le CDN

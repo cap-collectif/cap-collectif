@@ -157,7 +157,7 @@ class Consultation
      * @var
      *
      * @ORM\ManyToOne(targetEntity="Capco\MediaBundle\Entity\Media", cascade={"persist"})
-     * @ORM\JoinColumn(name="cover_id", referencedColumnName="id")
+     * @ORM\JoinColumn(name="cover_id", referencedColumnName="id", nullable=true, onDelete="SET NULL")
      */
     private $Cover;
 
@@ -165,7 +165,7 @@ class Consultation
      * @var
      *
      * @ORM\ManyToOne(targetEntity="Capco\MediaBundle\Entity\Media", cascade={"persist"})
-     * @ORM\JoinColumn(name="image_id", referencedColumnName="id")
+     * @ORM\JoinColumn(name="image_id", referencedColumnName="id", nullable=true, onDelete="SET NULL")
      */
     private $Image;
 

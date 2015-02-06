@@ -34,7 +34,7 @@
             <cascade>
                 <cascade-persist/>
             </cascade>
-            <join-column name="media_id" referenced-column-name="id" />
+            <join-column name="media_id" referenced-column-name="id" nullable="true" on-delete="SET NULL" />
         </many-to-one>
 
         <field name="isTermsAccepted" column="is_terms_accepted" type="boolean" nullable="false" />
