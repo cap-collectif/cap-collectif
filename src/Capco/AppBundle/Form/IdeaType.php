@@ -40,8 +40,8 @@ class IdeaType extends AbstractType
                 'provider' => 'sonata.media.provider.image',
                 'context' => 'default',
                 'required' => false,
-                'label' => 'Image'
-            ))
+
+            ));
         ;
     }
     

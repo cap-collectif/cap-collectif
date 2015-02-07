@@ -117,6 +117,7 @@ class Source
      * @ORM\OneToOne(targetEntity="Capco\MediaBundle\Entity\Media", fetch="LAZY", cascade={"persist", "remove"})
      * @ORM\JoinColumn(name="media_id", referencedColumnName="id", nullable=true)
      * @Assert\NotBlank(groups={"file"})
+     * @Assert\Valid()
      */
     private $Media;
 

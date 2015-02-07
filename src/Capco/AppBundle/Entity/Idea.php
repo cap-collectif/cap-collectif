@@ -43,6 +43,7 @@ class Idea
      *
      * @ORM\Column(name="title", type="string", length=255)
      * @Assert\Length(min=3)
+     * @Assert\NotBlank()
      */
     private $title;
 
@@ -130,6 +131,7 @@ class Idea
      *
      * @ORM\OneToOne(targetEntity="Capco\MediaBundle\Entity\Media", fetch="LAZY", cascade={"persist", "remove"})
      * @ORM\JoinColumn(name="media_id", referencedColumnName="id", nullable=true, onDelete="SET NULL")
+     * @Assert\Valid()
      */
     private $Media;
 

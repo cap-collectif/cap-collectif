@@ -17,3 +17,5 @@ Capco\UserBundle\Entity\User:
       - Email:
           checkMX: true
           message: user.register.invalid_email
+    Media:
+      - Valid: ~
