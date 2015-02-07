@@ -75,6 +75,9 @@ class OpinionTypeAdmin extends Admin
             ->add('updatedAt', 'datetime', array(
                 'label' => 'admin.fields.opinion_type.updated_at',
             ))
+            ->add('position', null, array(
+                'label' => 'admin.fields.opinion_type.position',
+            ))
             ->add('_action', 'actions', array(
                 'actions' => array(
                     'show' => array(),
