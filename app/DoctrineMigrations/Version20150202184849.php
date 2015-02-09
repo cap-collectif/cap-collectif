@@ -3,6 +3,7 @@
 namespace Application\Migrations;
 
 use Capco\AppBundle\Entity\SiteImage;
+use Capco\ClassificationBundle\Entity\Category;
 use Capco\ClassificationBundle\Entity\Context;
 use Capco\MediaBundle\Entity\Media;
 use Doctrine\DBAL\Migrations\AbstractMigration;
@@ -31,13 +32,33 @@ class Version20150202184849 extends AbstractMigration implements ContainerAwareI
     {
         $em = $this->container->get('doctrine.orm.entity_manager');
 
+        $context = $em->getRepository('CapcoClassificationBundle:Context')->findOneById('default');
+        if (null == $context) {
+            $context = new Context();
+            $context->setId('default');
+            $context->setName('Default');
+            $context->setEnabled(true);
+            $em->persist($context);
+        }
+
+        $category = $em->getRepository('CapcoClassificationBundle:Category')->findOneByName('root');
+        if (null == $category) {
+            $category = new Category();
+            $category->setName('root');
+            $category->setEnabled(true);
+        }
+        $category->setContext($context);
+        $em->persist($category);
+
+        $em->flush();
+
         $media = new Media();
         $media->setBinaryContent('app/Resources/img/default_avatar.jpg');
         $media->setEnabled(true);
         $media->setName('Avatar');
-        $media->setContext('default');
+        $media->setContext($context->getId());
         $media->setProviderName('sonata.media.provider.image');
-        $this->container->get('sonata.media.manager.media')->save($media);
+        $this->container->get('sonata.media.manager.media')->save($media, $media->getContext(), $media->getProviderName());
 
         $siteImage = new SiteImage();
         $siteImage->setKeyname('image.default_avatar');
