@@ -8,7 +8,8 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 
 class CRUDController extends Controller
 {
-    public function disableAction(){
+    public function disableAction()
+    {
 
         $id = $this->get('request')->get($this->admin->getIdParameter());
         $object = $this->admin->getObject($id);
@@ -33,7 +34,8 @@ class CRUDController extends Controller
         return new RedirectResponse($this->admin->generateUrl('list'));
     }
 
-    public function trashAction(){
+    public function trashAction()
+    {
 
         $id = $this->get('request')->get($this->admin->getIdParameter());
         $object = $this->admin->getObject($id);
@@ -57,4 +59,5 @@ class CRUDController extends Controller
 
         return new RedirectResponse($this->admin->generateUrl('list'));
     }
+
 }
