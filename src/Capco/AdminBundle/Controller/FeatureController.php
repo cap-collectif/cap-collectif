@@ -6,6 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 class FeatureController extends Controller
 {
@@ -15,8 +16,8 @@ class FeatureController extends Controller
      */
     public function listAction(Request $request)
     {
-        if (false == $this->get('security.context')->isGranted('ROLE_SUPER_ADMIN')) {
-            $this->createAccessDeniedException();
+        if (false == $this->get('security.authorization_checker')->isGranted('ROLE_SUPER_ADMIN')) {
+            throw new AccessDeniedException();
         }
 
         $admin_pool = $this->get('sonata.admin.pool');
@@ -35,8 +36,8 @@ class FeatureController extends Controller
      */
     public function switchAction($toggle)
     {
-        if (false == $this->get('security.context')->isGranted('ROLE_SUPER_ADMIN')) {
-            $this->createAccessDeniedException();
+        if (false == $this->get('security.authorization_checker')->isGranted('ROLE_SUPER_ADMIN')) {
+            throw new AccessDeniedException();
         }
 
         $toggleManager = $this->get('capco.toggle.manager');
