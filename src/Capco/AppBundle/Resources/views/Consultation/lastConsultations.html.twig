@@ -1,6 +1,7 @@
-{% if consultations|length > 0 %}
+{% if consultationSteps|length > 0 %}
 	<div class="row">
-	    {% for consultation in consultations %}
+	    {% for step in consultationSteps %}
+			{% set consultation = step.consultation %}
 	        {% include '@CapcoApp/Consultation/blockConsultation.html.twig' %}
 	    {% endfor %}
 	</div>

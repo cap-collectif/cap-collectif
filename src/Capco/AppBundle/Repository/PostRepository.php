@@ -26,6 +26,7 @@ class PostRepository extends EntityRepository
             ->leftJoin('p.Authors', 'a')
             ->leftJoin('p.Media', 'm')
             ->addOrderBy('p.publishedAt', 'DESC')
+            ->addGroupBy('p.id')
         ;
 
         if ($limit) {
@@ -36,7 +37,9 @@ class PostRepository extends EntityRepository
             $qb->setFirstResult($offset);
         }
 
-        return new Paginator($qb, $fetchJoin = true);
+        return $qb
+            ->getQuery()
+            ->execute();
     }
 
     public function getRecentPosts($count = 5)

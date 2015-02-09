@@ -11,7 +11,7 @@ use Capco\AppBundle\Entity\Consultation;
  * Step
  *
  * @ORM\Table(name="step")
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\StepRepository")
  */
 class Step
 {

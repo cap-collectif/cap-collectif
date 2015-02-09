@@ -108,7 +108,7 @@ class ConsultationRepository extends EntityRepository
             ->leftJoin('c.Themes', 't')
             ->leftJoin('c.Steps', 's')
             ->leftJoin('c.Cover', 'cov')
-            ->addOrderBy('c.createdAt', 'DESC');
+            ->addOrderBy('c.updatedAt', 'DESC');
 
         if ($limit) {
             $qb->setMaxResults($limit);
@@ -119,19 +119,6 @@ class ConsultationRepository extends EntityRepository
         }
 
         return new Paginator($qb, $fetchJoin = true);
-    }
-
-    /**
-     * Get last open consultations
-     * @param int $limit
-     * @param int $offset
-     * @return array
-     */
-    public function getLastOpen($limit = 1, $offset = 0)
-    {
-        $result = $this->getLast($limit, $offset);
-
-        return $this->getOpenOnly($result);
     }
 
     /**
@@ -160,16 +147,6 @@ class ConsultationRepository extends EntityRepository
         return $this->createQueryBuilder('c')
             ->andWhere('c.isEnabled = :isEnabled')
             ->setParameter('isEnabled', true);
-    }
-
-    private function getOpenOnly($array){
-        $result = array();
-        foreach ($array as $c) {
-            if($c->getOpeningStatus() == Consultation::OPENING_STATUS_OPENED){
-                array_push($result, $c);
-            }
-        }
-        return $result;
     }
 
 }

@@ -23,6 +23,7 @@ class ThemeRepository extends EntityRepository
             ->leftJoin('t.Consultations', 'c')
             ->leftJoin('t.Ideas', 'i')
             ->addOrderBy('t.createdAt', 'DESC')
+            ->addGroupBy('t.id')
         ;
 
         if ($limit) {
@@ -33,7 +34,9 @@ class ThemeRepository extends EntityRepository
             $qb->setFirstResult($offset);
         }
 
-        return new Paginator($qb, $fetchJoin = true);
+        return $qb
+            ->getQuery()
+            ->execute();
     }
 
     /**
