@@ -15,8 +15,10 @@
     {% endif %}
 
     <div class="box">
-        <h4 class="h4">{{ 'consultation.show.meta.intro.title'|trans({}, 'CapcoAppBundle') }}</h4>
-        <div class="more">{{ consultation.body | raw }}</div>
+        {% if null != consultation.body %}
+            <h4 class="h4">{{ 'consultation.show.meta.intro.title'|trans({}, 'CapcoAppBundle') }}</h4>
+            <div class="more">{{ consultation.body | raw }}</div>
+        {% endif %}
         {%  if currentStep is not defined %}
             {% set currentStep = null %}
         {% endif %}
