@@ -4,6 +4,7 @@ namespace Capco\AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
+use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 
@@ -66,14 +67,14 @@ class Consultation
     /**
      * @var string
      *
-     * @ORM\Column(name="teaser", type="text")
+     * @ORM\Column(name="teaser", type="text", nullable=true)
      */
     private $teaser;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="body", type="text")
+     * @ORM\Column(name="body", type="text", nullable=true)
      */
     private $body;
 

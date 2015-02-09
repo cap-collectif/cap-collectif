@@ -177,13 +177,10 @@ class ConsultationAdmin extends Admin
                 'data' => $stepPosition,
                 'label' => 'admin.fields.consultation.step_position',
             ))
-            ->add('teaser', null, array(
-                'attr' => array('class' => 'ckeditor'),
-                'label' => 'admin.fields.consultation.teaser',
-            ))
             ->add('body', null, array(
                 'attr' => array('class' => 'ckeditor'),
                 'label' => 'admin.fields.consultation.body',
+                'required' => false,
             ))
             ->add('Cover', 'sonata_type_model_list', array(
                 'required' => false,
@@ -232,9 +229,6 @@ class ConsultationAdmin extends Admin
             ))
             ->add('Author', null, array(
                 'label' => 'admin.fields.consultation.author',
-            ))
-            ->add('teaser', null, array(
-                'label' => 'admin.fields.consultation.teaser',
             ))
             ->add('body', null, array(
                 'label' => 'admin.fields.consultation.body',

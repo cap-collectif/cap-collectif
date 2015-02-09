@@ -99,7 +99,7 @@ admin:
       title: Titre
       author: Auteur
       teaser: Accroche
-      body: Contenu
+      body: Introduction
       themes: Thèmes
       steps: Étapes
       opening_status: Statut
