@@ -1,10 +1,11 @@
 {% if topics|length > 0 %}
-    <div class="row">
-        {% for theme in topics %}
-            {% include '@CapcoApp/Theme/blockTheme.html.twig' %}
-        {% endfor %}
+    <div class="container  block">
+        <h2 class="h2">{{ 'homepage.themes.last'|trans({}, 'CapcoAppBundle') }}</h2>
+        <div class="row">
+            {% for theme in topics %}
+                {% include '@CapcoApp/Theme/blockTheme.html.twig' %}
+            {% endfor %}
+        </div>
+        <a href="{{ path('app_theme') }}" class="btn  btn-primary  btn--outline">{{ 'theme.see_all'|trans({}, 'CapcoAppBundle') }}</a>
     </div>
-    <a href="{{ path('app_theme') }}" class="btn  btn-primary  btn--outline">{{ 'theme.see_all'|trans({}, 'CapcoAppBundle') }}</a>
-{% else %}
-    <p>{{ 'theme.none'|trans({}, 'CapcoAppBundle') }}</p>
 {% endif %}

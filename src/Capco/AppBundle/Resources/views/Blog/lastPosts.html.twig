@@ -1,10 +1,11 @@
 {% if posts|length > 0 %}
-    <ul class="media-list">
-        {% for post in posts %}
-            {% include '@CapcoApp/Blog/blockPost.html.twig' %}
-        {% endfor %}
-    </ul>
-    <a href="{{ path('app_blog') }}" class="btn  btn-primary  btn--outline">{{ 'blog.see_all'|trans({}, 'CapcoAppBundle') }}</a>
-{% else %}
-    <p>{{ 'blog.none'|trans({}, 'CapcoAppBundle') }}</p>
+    <div class="container  block">
+        <h2 class="h2">{{ 'homepage.posts.last'|trans({}, 'CapcoAppBundle') }}</h2>
+        <ul class="media-list">
+            {% for post in posts %}
+                {% include '@CapcoApp/Blog/blockPost.html.twig' %}
+            {% endfor %}
+        </ul>
+        <a href="{{ path('app_blog') }}" class="btn  btn-primary  btn--outline">{{ 'blog.see_all'|trans({}, 'CapcoAppBundle') }}</a>
+    </div>
 {% endif %}

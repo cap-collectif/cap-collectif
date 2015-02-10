@@ -19,7 +19,7 @@
                     </a>
                 {% endif %}
                 <div class="media-body">
-                    <p class="media--aligned  excerpt"><a href="{{ path('capco_user_profile_show_all', {'slug': idea.Author.slug}) }}">{{ idea.Author.username }}</a> {% if idea.theme.canDisplay %}{{ 'idea.show.in_theme'|trans({}, 'CapcoAppBundle') }} <a href="{{ path('app_theme_show', {'slug': idea.Theme.slug}) }}">{{ idea.Theme.title }}</a>{% endif %} {{ 'idea.show.on_date'|trans({}, 'CapcoAppBundle') }} {{ idea.createdAt | localizeddate('long', 'none') }} {% if idea.isTrashed %}<span class="label label-default">{{ 'idea.show.trashed.label'|trans({}, 'CapcoAppBundle') }}</span>{% endif %}</p>
+                    <p class="media--aligned  excerpt"><a href="{{ path('capco_user_profile_show_all', {'slug': idea.Author.slug}) }}">{{ idea.Author.username }}</a> {% if idea.theme and idea.theme.canDisplay %}{{ 'idea.show.in_theme'|trans({}, 'CapcoAppBundle') }} <a href="{{ path('app_theme_show', {'slug': idea.Theme.slug}) }}">{{ idea.Theme.title }}</a>{% endif %} {{ 'idea.show.on_date'|trans({}, 'CapcoAppBundle') }} {{ idea.createdAt | localizeddate('long', 'none') }} {% if idea.isTrashed %}<span class="label label-default">{{ 'idea.show.trashed.label'|trans({}, 'CapcoAppBundle') }}</span>{% endif %}</p>
                 </div>
             </div>
         </div>
@@ -68,10 +68,7 @@
     </div>
 
     {% if idea.isTrashed == false %}
-    <div class="container">
-        <h2>{{ 'idea.title'|trans({}, 'CapcoAppBundle') }}</h2>
         {{ render_esi(controller('CapcoAppBundle:Idea:lastIdeas', {'max': 4, 'offset': 0})) }}
-    </div>
     {% endif %}
 
     {% if idea.isTrashed == true %}

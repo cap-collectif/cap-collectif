@@ -13,6 +13,8 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Capco\AppBundle\Entity\NewsletterSubscription;
 use Capco\AppBundle\Form\NewsletterSubscriptionType;
 
+use Capco\AppBundle\Entity\Consultation;
+
 class HomepageController extends Controller
 {
     /**
@@ -82,6 +84,25 @@ class HomepageController extends Controller
         $posts = $this->get('capco.blog.post.repository')->getLast($max, $offset);
 
         return [ 'posts' => $posts ];
+    }
+
+    /**
+     * @Cache(expires="+1 minutes", maxage="60", smaxage="60", public="true")
+     * @Template("CapcoAppBundle:Homepage:lastConsultations.html.twig")
+     */
+    public function lastConsultationsAction($max = 3, $offset = 0)
+    {
+        $consultationSteps = $this->getDoctrine()->getRepository('CapcoAppBundle:Step')->getLastOpen($max, $offset);
+        if (empty($consultationSteps)) {
+            $consultationSteps = $this->getDoctrine()->getRepository('CapcoAppBundle:Step')->getLastFuture($max, $offset);
+        }
+        if (empty($consultationSteps)) {
+            $consultationSteps = $this->getDoctrine()->getRepository('CapcoAppBundle:Step')->getLastClosed($max, $offset);
+        }
+        return [
+            'consultationSteps' => $consultationSteps,
+            'statuses' => Consultation::$openingStatuses
+        ];
     }
 
     /**
