@@ -6,7 +6,7 @@
             <h1>{{ capco_site_parameter_value('blog.jumbotron.title')}}</h1>
             {% set jumbotron_body = capco_site_parameter_value('blog.jumbotron.body') %}
             {% if null != jumbotron_body %}
-                <p>{{ jumbotron_body }}</p>
+                {{ jumbotron_body|raw }}
             {% endif %}
         </div>
     </div>
