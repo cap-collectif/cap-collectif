@@ -24,7 +24,7 @@ Capco\AppBundle\Entity\SiteParameter:
         title: Lien du bouton principal
         value: /pages/comment-ça-marche
         position: 130
-        type: 0
+        type: 5
     SiteParameter5:
         keyname: homepage.jumbotron2.title
         title: Titre de l'introduction
@@ -162,26 +162,26 @@ Capco\AppBundle\Entity\SiteParameter:
         title: Numéro de téléphone
         value: 06 10 20 30 40
         position: 630
-        type: 0
+        type: 7
 
     SiteParameter24:
         keyname: consultations.pagination
         title: Nombre d'éléments pour la pagination des consultations
         value: 16
         position: 700
-        type: 0
+        type: 2
     SiteParameter25:
         keyname: ideas.pagination
         title: Nombre d'éléments pour la pagination des idées
         value: 16
         position: 710
-        type: 0
+        type: 2
     SiteParameter26:
         keyname: themes.pagination
         title: Nombre d'éléments pour la pagination des thèmes
         value: 0
         position: 720
-        type: 0
+        type: 2
 
     SiteParameter27:
         keyname: signin.cgu.name
@@ -194,20 +194,20 @@ Capco\AppBundle\Entity\SiteParameter:
         title: Lien de la charte ou des CGU sur la page d'inscription
         value: /pages/charte
         position: 810
-        type: 0
+        type: 5
 
     SiteParameter29:
         keyname: admin.mail.notifications
         title: Adresse e-mail de réception des notifications (signalements)
         value: brunet.laurent60@yahoo.fr
         position: 900
-        type: 0
+        type: 4
     SiteParameter30:
         keyname: admin.mail.contact
         title: Adresse email de contact
         value: brunet.laurent60@yahoo.fr
         position: 910
-        type: 0
+        type: 4
 
     SiteParameter31:
         keyname: global.site.fullname
@@ -222,7 +222,7 @@ Capco\AppBundle\Entity\SiteParameter:
         title: Nombre d'articles par page du blog
         value: 10
         position: 750
-        type: 0
+        type: 2
     SiteParameterBlogJumbotronBody:
         keyname: blog.jumbotron.body
         title: Sous-titre de la section blog
@@ -239,4 +239,12 @@ Capco\AppBundle\Entity\SiteParameter:
         keyname: blog.disqus.username
         title: Compte Disqus à utiliser
         value: ''
+        position: 1000
         type: 0
+
+    SiteParameterScript:
+        keyname: global.site.embed_js
+        title: Script à insérer dans les pages
+        value: ''
+        position: 2
+        type: 3

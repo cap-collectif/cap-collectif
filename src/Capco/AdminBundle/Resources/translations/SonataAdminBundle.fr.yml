@@ -54,6 +54,8 @@ admin:
     menu_item:
       parent: Non applicable pour les éléments du menu de bas de page (footer).
       link: Si vous avez associé une page à l'élément de menu, le lien sera défini automatiquement.
+    site_parameter:
+      js: Rajoutez ici un ou plusieurs scripts entourés par leurs balises < script >.
 
   features:
     title:
