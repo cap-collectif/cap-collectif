@@ -75,6 +75,13 @@ body {
   }
 }
 
+.block--tablet {
+  @media (min-width: $screen-sm-min) and (max-width: $screen-sm-max) {
+    margin-bottom: 30px;
+  }
+  @extend .block--mobile;
+}
+
 .box {
   padding: 15px;
 }

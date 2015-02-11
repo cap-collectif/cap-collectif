@@ -15,6 +15,11 @@ use Gedmo\Mapping\Annotation as Gedmo;
  */
 class Opinion
 {
+    public static $sortCriterias = [
+        'votes' => 'opinion.sort.votes',
+        'comments' => 'opinion.sort.comments',
+        'date' => 'opinion.sort.date',
+    ];
 
     /**
      * @var integer

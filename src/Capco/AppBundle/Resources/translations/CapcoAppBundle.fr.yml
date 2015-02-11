@@ -413,6 +413,11 @@ opinion:
   report:
     submit: Signaler
     reported: Signalé
+  sort:
+    date: Les plus récents
+    votes: Les plus votés
+    comments: Les plus commentés
+    label: Trier par
   error:
     not_found: Proposition introuvable.
     not_author: Vous ne pouvez pas modifier cette proposition car vous n'en êtes pas l'auteur.

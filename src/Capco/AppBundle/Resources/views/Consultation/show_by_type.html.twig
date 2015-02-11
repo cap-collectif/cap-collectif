@@ -4,15 +4,19 @@
     <div class="block  block--bordered">
         <div class="opinion  opinion--{{ opinionType.color }} opinion--default">
             <div class="opinion__header  opinion__header--mobile-centered">
-                <h4 class="pull-left  h4  opinion__header__title">{{ opinionType.title }} <span class="badge">{{ opinions|length }}</span></h4>
-                {% if opinionType.isEnabled == true and consultation.canContribute %}
-                    <div class="pull-right  opinion__header__filter">
+                <h4 class="h4  opinion__header__title  pull-left">{{ opinionType.title }} <span class="badge">{{ opinions|length }}</span></h4>
+                <div class="pull-right  opinion__header__filter">
+                    {{ form_start(sortOpinionsForm) }}
+                    {{ form_label(sortOpinionsForm.opinionsSort, null, {'label_attr':{"class":"control-label  sr-only"} }) }}
+                    {{ form_widget(sortOpinionsForm.opinionsSort, {'attr':{"class":"form-control"} }) }}
+                    {{ form_end(sortOpinionsForm) }}
+                    {% if opinionType.isEnabled == true and consultation.canContribute %}
                         <a href="{{ path('app_consultation_new_opinion' ,{'consultationSlug': consultation.slug, 'opinionTypeSlug': opinionType.slug } ) }}" class="btn  btn-default">
                             <i class="cap cap-add-1"></i>
-                            {{ 'opinion.create.button'|trans({}, 'CapcoAppBundle') }}
+                            <span class="hidden-xs">{{ 'opinion.create.button'|trans({}, 'CapcoAppBundle') }}</span>
                         </a>
-                    </div>
-                {% endif %}
+                    {% endif %}
+                </div>
             </div>
         </div>
     {% if(opinions|length > 0) %}

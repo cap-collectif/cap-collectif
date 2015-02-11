@@ -1,19 +1,18 @@
 {% set nbArguments = arguments|length %}
 {% set token = csrf_token('argument_vote') %}
 {%  set currentUser = app.user %}
-<div class="block--bordered  opinion__arguments--{{ argumentType }}">
+<div class="{% if argumentType == 'yes' %}block--tablet  {% endif %}block--bordered  opinion__arguments--{{ argumentType }}">
     <div class="opinion__arguments__header  row">
         <h4 class="col-xs-6  col-sm-12  col-md-6  h4  opinion__header__title">{% transchoice nbArguments with {'%count%': nbArguments} from 'CapcoAppBundle' %}argument.show.nb{% endtranschoice %} {% if argumentType == "yes" %} {{ 'argument.show.type.for'|trans({}, 'CapcoAppBundle') }} {% else %} {{ 'argument.show.type.against'|trans({}, 'CapcoAppBundle') }} {% endif %} </h4>
         <div class="col-xs-6  col-sm-12  col-md-6">
             <div class="filter">
                 {{ form_start(sortArgumentsForm) }}
-                {{ form_errors(sortArgumentsForm) }}
                 <div class="formgroup--inline">
-                    {{ form_label(sortArgumentsForm.argumentSort, null, {'label_attr':{"class":"control-label"} }) }}
+                    {{ form_label(sortArgumentsForm.argumentSort, null, {'label_attr':{"class":"control-label  hidden-xs"} }) }}
+                    {{ form_label(sortArgumentsForm.argumentSort, null, {'label_attr':{"class":"control-label  sr-only  visible-xs"} }) }}
                     <span class="formgroup--inline__control">
-                                {{ form_errors(sortArgumentsForm.argumentSort) }}
                         {{ form_widget(sortArgumentsForm.argumentSort, {'attr':{"class":"form-control"} }) }}
-                            </span>
+                    </span>
                 </div>
                 {{ form_end(sortArgumentsForm) }}
             </div>

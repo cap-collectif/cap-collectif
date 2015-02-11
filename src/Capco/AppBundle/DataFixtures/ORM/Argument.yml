@@ -1,16 +1,6 @@
-Capco\AppBundle\Entity\Category:
-    Category1:
-        title: Études
-        isEnabled: true
-    Category2:
-        title: Politique
-        isEnabled: true
-    Category3:
-        title: Commerces
-        isEnabled: true
-    Category4:
-        title: Financements
-        isEnabled: true
-    Category5:
-        title: Transports
-        isEnabled: true
+Capco\AppBundle\Entity\Argument:
+    argument{1..100}:
+        Opinion: @opinion<numberBetween(1, 50)>
+        type: <numberBetween(0, 1)>
+        Author: @user<numberBetween(1, 5)>
+        body: <text(300)>

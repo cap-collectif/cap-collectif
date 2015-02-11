@@ -119,7 +119,7 @@ class OpinionRepository extends EntityRepository
      * @return Paginator
      * @return mixed
      */
-    public function getByOpinionTypeAndConsultation($consultation, $opinionType, $nbByPage = 10, $page = 1)
+    public function getByOpinionTypeAndConsultationOrdered($consultation, $opinionType, $nbByPage = 10, $page = 1, $opinionsSort = null)
     {
         if ((int) $page < 1) {
             throw new \InvalidArgumentException(sprintf(
@@ -129,7 +129,7 @@ class OpinionRepository extends EntityRepository
         }
 
         $qb = $this->getIsEnabledQueryBuilder()
-            ->addSelect('ot', 'c', 'aut', 'm')
+            ->addSelect('ot', 'c', 'aut', 'm', '(o.voteCountMitige + o.voteCountOk + o.voteCountNok) as HIDDEN vnb')
             ->leftJoin('o.OpinionType', 'ot')
             ->leftJoin('o.Consultation', 'c')
             ->leftJoin('o.Author', 'aut')
@@ -139,8 +139,22 @@ class OpinionRepository extends EntityRepository
             ->andWhere('o.isTrashed = :notTrashed')
             ->setParameter('consultation', $consultation)
             ->setParameter('opinionType', $opinionType)
-            ->setParameter('notTrashed', false)
-            ->orderBy('o.createdAt', 'DESC');
+            ->setParameter('notTrashed', false);
+
+        if (null != $opinionsSort) {
+            if ($opinionsSort == 'date') {
+                $qb->orderBy('o.updatedAt', 'DESC');
+            } else if ($opinionsSort == 'votes') {
+                $qb->orderBy('vnb', 'DESC');
+            } else if ($opinionsSort == 'comments') {
+                $qb->orderBy('o.argumentsCount', 'DESC');
+            }
+        }
+
+        $qb->addOrderBy('vnb', 'DESC')
+            ->addOrderBy('o.argumentsCount', 'DESC')
+            ->addOrderBy('o.updatedAt', 'DESC');
+
 
         $query = $qb->getQuery()
             ->setFirstResult(($page - 1) * $nbByPage)

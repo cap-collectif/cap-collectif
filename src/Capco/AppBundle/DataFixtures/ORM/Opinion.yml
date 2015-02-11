@@ -115,8 +115,8 @@ Capco\AppBundle\Entity\Opinion:
         isTrashed: false
         Author: @user2
         OpinionType: @opinionType3
-    opinion{12..17}:
-        Consultation: @cs<numberBetween(2, 3)>
+    opinion{12..50}:
+        Consultation: @cs<numberBetween(1, 2)>
         title: <text(20)>
         body: |
              <p><text(100)></p>

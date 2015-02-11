@@ -9,6 +9,7 @@ use Capco\AppBundle\Entity\OpinionType;
 use Capco\AppBundle\Entity\Theme;
 use Capco\AppBundle\Entity\Step;
 use Capco\AppBundle\Form\ConsultationSearchType;
+use Capco\AppBundle\Form\OpinionsSortType;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -91,7 +92,7 @@ class ConsultationController extends Controller
      */
     public function showOpinionsAction(Consultation $consultation)
     {
-        $blocks = $this->getDoctrine()->getRepository('CapcoAppBundle:OpinionType')->getByConsultation($consultation);
+        $blocks = $this->getDoctrine()->getRepository('CapcoAppBundle:OpinionType')->getByConsultationOrderedByNbVotes($consultation);
 
         return [
             'blocks' => $blocks,
@@ -101,22 +102,42 @@ class ConsultationController extends Controller
 
     /**
      * @Route("/consultations/{consultationSlug}/opinions/{opinionTypeSlug}/{page}", name="app_consultation_show_opinions", requirements={"page" = "\d+"}, defaults={"page" = 1})
+     * @Route("/consultations/{consultationSlug}/opinions/{opinionTypeSlug}/{page}/{opinionsSort}", name="app_consultation_show_opinions_sorted", requirements={"page" = "\d+","opinionsSort" = "date|comments|votes"}, defaults={"page" = 1})
      * @ParamConverter("consultation", class="CapcoAppBundle:Consultation", options={"mapping": {"consultationSlug": "slug"}})
      * @ParamConverter("opinionType", class="CapcoAppBundle:OpinionType", options={"mapping": {"opinionTypeSlug": "slug"}})
      * @Template("CapcoAppBundle:Consultation:show_by_type.html.twig")
      * @param Consultation $consultation
      * @param OpinionType $opinionType
      * @param $page
+     * @param Request $request
+     * @param $opinionsSort
      * @return array
      */
-    public function showByTypeAction(Consultation $consultation, OpinionType $opinionType, $page)
+    public function showByTypeAction(Consultation $consultation, OpinionType $opinionType, $page, Request $request, $opinionsSort = null)
     {
         if (false == $consultation->canDisplay() ) {
             throw $this->createNotFoundException($this->get('translator')->trans('consultation.error.not_found', array(), 'CapcoAppBundle'));
         }
 
+        $form = $this->createForm(new OpinionsSortType());
+
+        if ('POST' === $request->getMethod()) {
+            $form->handleRequest($request);
+            if($form->isValid()) {
+                $data = $form->getData();
+                return $this->redirect($this->generateUrl('app_consultation_show_opinions_sorted',array(
+                    'consultationSlug' => $consultation->getSlug(),
+                    'opinionTypeSlug' => $opinionType->getSlug(),
+                    'page' => $page,
+                    'opinionsSort' => $data['opinionsSort'],
+                )));
+            }
+        } else {
+            $form->get('opinionsSort')->setData($opinionsSort);
+        }
+
         $currentUrl = $this->generateUrl('app_consultation_show_opinions', ['consultationSlug' => $consultation->getSlug(), 'opinionTypeSlug' => $opinionType->getSlug() ]);
-        $opinions = $this->getDoctrine()->getRepository('CapcoAppBundle:Opinion')->getByOpinionTypeAndConsultation($consultation, $opinionType, 10, $page);
+        $opinions = $this->getDoctrine()->getRepository('CapcoAppBundle:Opinion')->getByOpinionTypeAndConsultationOrdered($consultation, $opinionType, 10, $page, $opinionsSort);
 
         return [
             'currentUrl' => $currentUrl,
@@ -125,6 +146,8 @@ class ConsultationController extends Controller
             'opinions' => $opinions,
             'page' => $page,
             'nbPage' => ceil(count($opinions) / 10),
+            'sortOpinionsForm' => $form->createView(),
+            'opinionsSort' => $opinionsSort
         ];
     }
 
