@@ -1,5 +1,13 @@
 {% form_theme form 'CapcoUserBundle:Form:capco_register.html.twig' %}
 <div class="container">
+
+    {% set textTop = capco_site_parameter_value('signin.text.top') %}
+    {% if textTop %}
+        <div class="alert  alert-info  block  text-center">
+            {{ textTop|raw }}
+        </div>
+    {% endif %}
+
     <div class="row">
         <div class="col-lg-4  col-lg-offset-4  col-md-6  col-md-offset-3  col-sm-8  col-sm-offset-2  col-xs-12">
             <div class="block  block--bordered  box">
@@ -56,5 +64,11 @@
             </div>
         </div>
     </div>
-    <p class="text-center  login__p">{{ 'user.register.legal_text'|trans({'%startlink%': '<a href="#">', '%endlink%': '</a>'}, 'CapcoAppBundle') | raw }}</p>
+
+    {% set textBottom = capco_site_parameter_value('signin.text.bottom') %}
+    {% if textBottom %}
+        <div class="text-center  login__p">
+            {{ textBottom|raw }}
+        </div>
+    {% endif %}
 </div>
