@@ -1,8 +1,0 @@
-parameters:
-    capco.media.admin_extension.class: Capco\MediaBundle\Extension\MediaAdminExtension
-
-services:
-    capco.media.admin_extension:
-        class: %capco.media.admin_extension.class%
-        tags:
-          - { name: sonata.admin.extension, target : sonata.media.admin.media }
