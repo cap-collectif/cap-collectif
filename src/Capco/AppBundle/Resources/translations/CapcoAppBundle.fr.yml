@@ -534,6 +534,12 @@ blog:
   see_all: Voir toutes les actualités
   none: "Il n'y a aucune actualité."
 
+# Features
+features:
+  switch:
+    enabled: Le module a été activé.
+    disabled: Le module a été désactivé.
+
 media:
   form:
     unlink: Dissocier

@@ -306,6 +306,7 @@ capco:
   module:
     blog: Module de blog
     calendar: Module de calendrier
+    newsletter: Module lettre d'information
 
 action_enable: Activer
 action_disable: Désactiver

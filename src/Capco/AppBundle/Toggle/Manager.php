@@ -12,7 +12,8 @@ class Manager
 
     protected static $toggles = array(
         'blog',
-        'calendar'
+        'calendar',
+        'newsletter',
     );
 
     public function __construct(ToggleManager $toggleManager, ContextFactory $contextFactory)

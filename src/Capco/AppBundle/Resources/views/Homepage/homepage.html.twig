@@ -52,10 +52,12 @@
 
     <div class="container">
         <div class="row">
-            <div class="col-xs-12  col-sm-6">
-                {% include '@CapcoApp/Homepage/newsletter.html.twig' %}
-            </div>
-            <div class="col-xs-12  col-sm-6">
+            {% if is_feature_enabled('newsletter') %}
+                <div class="col-xs-12  col-sm-6">
+                    {% include '@CapcoApp/Homepage/newsletter.html.twig' %}
+                </div>
+            {% endif %}
+            <div class="col-xs-12  {% if is_feature_enabled('newsletter') %}col-sm-6{% endif %}">
                 {{ render(controller('CapcoAppBundle:Homepage:socialNetworks', {})) }}
             </div>
         </div>

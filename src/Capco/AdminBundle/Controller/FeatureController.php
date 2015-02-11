@@ -44,9 +44,9 @@ class FeatureController extends Controller
         $value = $toggleManager->switchValue($toggle);
 
         if ($value) {
-            $message = $this->get('translator')->trans('The module has been enabled');
+            $message = $this->get('translator')->trans('features.switch.enabled', array(), 'CapcoAppBundle');
         } else {
-            $message = $this->get('translator')->trans('The module has been disabled');
+            $message = $this->get('translator')->trans('features.switch.disabled', array(), 'CapcoAppBundle');
         }
 
         $this->get('sonata.core.flashmessage.manager')->getSession()->getFlashBag()->add('success', $message);
