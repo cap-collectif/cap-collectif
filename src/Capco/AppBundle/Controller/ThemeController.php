@@ -94,7 +94,7 @@ class ThemeController extends Controller
 
     /**
      * @Cache(expires="+1 minutes", maxage="60", smaxage="60", public="true")
-     * @Template("CapcoAppBundle:Consultation:lastConsultations.html.twig")
+     * @Template("CapcoAppBundle:Theme:lastConsultations.html.twig")
      * @param $theme
      * @return array
      */

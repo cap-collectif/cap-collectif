@@ -430,7 +430,7 @@ class Theme
     {
         $count = 0;
         foreach ($this->Consultations as $consultation) {
-            if (true == $consultation->getIsEnabled()) {
+            if ($consultation->getIsEnabled()) {
                 $count++;
             }
         }
@@ -441,7 +441,7 @@ class Theme
     {
         $count = 0;
         foreach ($this->Ideas as $idea) {
-            if (true == $idea->getIsEnabled()) {
+            if ($idea->getIsEnabled()) {
                 $count++;
             }
         }

@@ -135,7 +135,7 @@ class ConsultationRepository extends EntityRepository
             ->leftJoin('c.Steps', 's')
             ->andWhere(':theme MEMBER OF c.Themes')
             ->setParameter('theme', $theme)
-            ->orderBy('c.createdAt', 'DESC');
+            ->orderBy('c.updatedAt', 'DESC');
 
         return $qb
             ->getQuery()

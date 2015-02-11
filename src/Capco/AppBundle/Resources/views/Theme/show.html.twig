@@ -35,15 +35,11 @@
     {% if theme.Consultations|length > 0 %}
         <div class="container  block">
             <h2 class="h2">{{ 'homepage.consultations.last'|trans({}, 'CapcoAppBundle') }}</h2>
-            {{ render_esi(controller('CapcoAppBundle:Theme:themeConsultations', {'theme': theme})) }}
+            {{ render(controller('CapcoAppBundle:Theme:themeConsultations', {'theme': theme})) }}
         </div>
     {% endif %}
-    {% if theme.Ideas|length > 0 %}
-        <div class="container  block">
-            <h2 class="h2">{{ 'idea.index.appendices.index.title'|trans({}, 'CapcoAppBundle') }}</h2>
-            {{ render_esi(controller('CapcoAppBundle:Theme:themeIdeas', {'theme': theme})) }}
-        </div>
-    {% endif %}
+    
+    {{ render(controller('CapcoAppBundle:Theme:themeIdeas', {'theme': theme})) }}
 
 {% endblock %}
 

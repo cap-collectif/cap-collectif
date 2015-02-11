@@ -10,7 +10,6 @@ Capco\AppBundle\Entity\Theme:
             <p><text(1000)></p>
             <h3>un thème pas comme les autres</h3>
             <p><text(500)></p>
-        Consultations: [@cs1]
         Author: @user4
     theme2:
         title: Justice
@@ -23,7 +22,6 @@ Capco\AppBundle\Entity\Theme:
               <p><text(1000)></p>
               <h3>un thème important</h3>
               <p><text(500)></p>
-        Consultations: [@cs2]
         Author: @user4
     theme3:
         title: Transport
@@ -36,5 +34,4 @@ Capco\AppBundle\Entity\Theme:
               <p><text(100)></p>
               <h3>un troisième thème pratique</h3>
               <p><text(500)></p>
-        Consultations: [@cs3]
         Author: @user4

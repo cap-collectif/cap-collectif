@@ -23,20 +23,19 @@ class ThemeRepository extends EntityRepository
             ->leftJoin('t.Consultations', 'c')
             ->leftJoin('t.Ideas', 'i')
             ->addOrderBy('t.createdAt', 'DESC')
-            ->addGroupBy('t.id')
         ;
 
+        $query = $qb->getQuery();
+
         if ($limit) {
-            $qb->setMaxResults($limit);
+            $query->setMaxResults($limit);
         }
 
         if ($offset) {
-            $qb->setFirstResult($offset);
+            $query->setFirstResult($offset);
         }
 
-        return $qb
-            ->getQuery()
-            ->execute();
+        return new Paginator($query);
     }
 
     /**
@@ -60,7 +59,7 @@ class ThemeRepository extends EntityRepository
             ->leftJoin('t.Ideas', 'i')
         ;
 
-        $qb->addOrderBy('t.createdAt', 'DESC');
+        $qb->addOrderBy('t.updatedAt', 'DESC');
 
         if ($term !== null) {
             $qb->andWhere('t.title LIKE :term')
