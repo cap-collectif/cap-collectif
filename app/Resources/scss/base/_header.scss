@@ -1,6 +1,15 @@
 /* ===============================================================
     $Navbar
 ================================================================*/
+//Fix margin in mobile view
+.container-fluid > .navbar-collapse,
+.container-fluid > .navbar-header,
+.container > .navbar-collapse,
+.container > .navbar-header {
+  margin-right: 0;
+  margin-left: 0;
+}
+
 .navbar > .container .navbar-brand {
   margin-left: 0;
 }

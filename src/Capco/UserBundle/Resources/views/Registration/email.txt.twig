@@ -1,13 +1,13 @@
 {% block subject %}
-	{% autoescape false %}
-		{{ 'registration.email.subject'|trans({'%username%': user.username, '%confirmationUrl%': confirmationUrl}, 'FOSUserBundle') }}
-	{% endautoescape %}
+{% autoescape false %}
+{{ 'registration.email.subject'|trans({'%username%': user.username, '%confirmationUrl%': confirmationUrl}, 'FOSUserBundle') }}
+{% endautoescape %}
 {% endblock %}
 
 {% block body_text %}
-	{% autoescape false %}
-		{{ 'user.register.confirmation_message'|trans({'%username%': user.username, '%sitename%': capco_site_parameter_value('global.site.fullname'),'%url%': confirmationUrl, '%email%': user.email}, 'CapcoAppBundle') }}
-	{% endautoescape %}
+{% autoescape false %}
+{{ 'user.register.confirmation_message'|trans({'%username%': user.username, '%sitename%': capco_site_parameter_value('global.site.fullname'),'%url%': confirmationUrl, '%email%': user.email}, 'CapcoAppBundle') }}
+{% endautoescape %}
 {% endblock %}
 
 {% block body_html %}{% endblock %}
