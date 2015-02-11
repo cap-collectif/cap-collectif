@@ -7,13 +7,13 @@ Capco\AppBundle\Entity\SiteImage:
         position: 1
     SiteImage2:
         keyname: image.header
-        title: Image d'en-tête
+        title: header
         media: @header
         isEnabled: true
         position: 2
     SiteImage3:
         keyname: image.picto
-        title: Pictogramme
+        title: Picto
         media: @picto
         isEnabled: true
         position: 3

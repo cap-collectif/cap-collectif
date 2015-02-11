@@ -1,31 +1,22 @@
 Capco\AppBundle\Entity\Consultation:
     cs1:
-        title: Justice et numérique
-        teaser: <text(35)>
-        body: <text(1000)>
-        Author: @user*
+        title: Croissance innovation, disruption
+        teaser: |
+                Le numérique occupe une place de plus en plus importante de l'économie mondiale, européenne et française, avec une part de 5,2% du PIB français en 2010. Il représente un quart de la croissance et contribuera à la création de 450 000 emplois d’ici 2015. En transformant les rouages essentiels du fonctionnement de la société, le numérique provoque une restructuration de nombreux secteurs de l’économie (commerce, tourisme, assurance, santé, édition, etc.). Il est indispensable d'en comprendre les spécificités pour pouvoir en tirer tous les bénéfices. A défaut, le risque est grand de n'en subir que les effets négatifs.
+        body: <text(500)>
+        Author: @user4
         Cover: @MediaConsultation1
+        video: 'http://www.youtube.com/embed/A3PDXmYoF5U?autoplay=1'
+        Image: @MediaConsultationImageVideo
     cs2:
         title: Stratégie technologique de l'Etat et services publics
         teaser: <text(35)>
-        body: <text(1000)>
-        Author: @user*
+        body: <text(340)>
+        Author: @user4
         Cover: @MediaConsultation2
+        video: 'http://www.youtube.com/embed/wTcNtgA6gHs?autoplay=1'
     cs3:
-        title: Transformation numérique des relations entre administrations et usagers des services publics
+        title: Transformation numérique des relations
         teaser: <text(35)>
-        body: <text(1000)>
-        Author: @user*
-        Cover: @MediaConsultation1
-    cs4:
-        title: Souveraineté numérique
-        teaser: <text(35)>
-        body: <text(1000)>
-        Author: @user*
-        Cover: @MediaConsultation2
-    cs5:
-        title: Economie collaborative
-        teaser: <text(35)>
-        body: <text(1000)>
-        Author: @user*
-        Cover: @MediaConsultation1
+        body: <text(100)>
+        Author: @user4

@@ -1,61 +1,9 @@
 Capco\UserBundle\Entity\User:
     user1:
-        username: lbrunet
-        firstname: Laurent
-        lastname: Brunet
-        email: lbrunet@jolicode.com
+        username: capco
+        email: admin@cap-collectif.com
         enabled: true
-        plainPassword: laurentbrunet
+        plainPassword: ***REMOVED***
         roles:
          - 'ROLE_SUPER_ADMIN'
-        Media: @MediaUser2
-        isTermsAccepted: true
-
-    user2:
-        username: sfavot
-        firstname: Suzanne
-        lastname: Favot
-        email: sfavot@jolicode.com
-        enabled: true
-        plainPassword: suzannefavot
-        roles:
-         - 'ROLE_SUPER_ADMIN'
-        Media: @MediaUser1
-        city: Antony
-        isTermsAccepted: true
-        website: www.sfavot.fr
-        biography: Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eum earum fuga quaerat expedita minima labore vitae voluptate, repellendus perspiciatis consequuntur cum, dignissimos quas temporibus consequatur tempora est repellat. Architecto, quia.
-
-    user3:
-        username: xlacot
-        firstname: Xavier
-        lastname: Lacot
-        email: xlacot@jolicode.com
-        enabled: true
-        plainPassword: xavierlacot
-        roles:
-         - 'ROLE_SUPER_ADMIN'
-        Media: @MediaUser3
-        isTermsAccepted: true
-
-    user4:
-        username: admin
-        firstname: Administrateur
-        lastname: authentifier
-        email: admin@test.com
-        enabled: true
-        plainPassword: admin
-        roles:
-         - 'ROLE_ADMIN'
-        isTermsAccepted: true
-
-    user5:
-        username: thomas
-        firstname: Utilisater
-        lastname: authentifier
-        email: thomas@test.com
-        enabled: true
-        plainPassword: user
-        roles:
-         - 'ROLE_USER'
         isTermsAccepted: true

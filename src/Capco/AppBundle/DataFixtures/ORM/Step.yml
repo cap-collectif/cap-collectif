@@ -1,64 +1,77 @@
 Capco\AppBundle\Entity\Step:
     step1:
-        title: <sentence(2)>
+        title: Collecte des avis
         isEnabled: true
         type: 1
-        startAt: <dateTimeBetween('-1 years','now')>
-        endAt: <dateTimeBetween('now','+1 years')>
-        position: <numberBetween(1, 10)>
+        startAt: <(new \DateTime('2015-01-25'))>
+        endAt: <(new \DateTime('2015-03-25'))>
+        position: 1
         consultation: @cs1
-        body: <text(1000)>
     step2:
-        title: <sentence(2)>
-        isEnabled: <boolean()>
-        type: 0
-        startAt: <dateTimeBetween('-1 years','now')>
-        endAt: <dateTimeBetween('-10 days','now')>
-        position: <numberBetween(1, 10)>
-        consultation: @cs1
-        body: <text(1000)>
-    step3:
-        title: <sentence(2)>
+        title: Préparation de la synthèse
         isEnabled: true
         type: 0
-        startAt: <dateTimeBetween('-1 years','now')>
-        endAt: <dateTimeBetween('-10 days','now')>
-        position: <numberBetween(1, 10)>
+        startAt: <(new \DateTime('2015-03-25'))>
+        endAt: <(new \DateTime('2015-04-25'))>
+        position: 2
         consultation: @cs1
-        body: <text(1000)>
+        body: |
+            <p>Afficher le texte pour la préparation de la synthèse</p>
+            <p><text(1000)></p>
+    step3:
+        title: Proposition
+        isEnabled: true
+        type: 0
+        startAt: <(new \DateTime('2015-04-25'))>
+        endAt: <(new \DateTime('2015-05-25'))>
+        position: 3
+        consultation: @cs1
+        body: |
+             <p> Afficher le texte pour la proposition de la synthèse</p>
+             <h3>Argumentation</h3>
+             <p><text(1000)></p>
     step4:
-        title: <sentence(2)>
+        title: Collecte des avis pour une meilleur stratégie
         isEnabled: true
         type: 1
-        startAt: <dateTimeBetween('-1 years','now')>
-        endAt: <dateTimeBetween('-10 days','now')>
-        position: <numberBetween(1, 10)>
+        startAt: <(new \DateTime('2014-08-14'))>
+        endAt: <(new \DateTime('2014-09-27'))>
+        position: 1
         consultation: @cs2
-        body: <text(1000)>
     step5:
-        title: <sentence(2)>
+        title: Mettre en place une proposotion adaptée à la synthèse
         isEnabled: true
         type: 0
-        startAt: <(new \DateTime('2014-01-01'))>
-        endAt: <(new \DateTime('2015-03-03'))>
+        startAt: <(new \DateTime('2014-09-27'))>
+        endAt: <(new \DateTime('2014-11-20'))>
+        position: 2
+        consultation: @cs2
+        body: |
+              <p>Afficher le texte pour la préparation de la proposition</p>
+              <h3>Une synthèse</h3>
+              <p><text(1000)></p>
+              <h3>Une bonne synthèse argumentée</h3>
+              <p><text(500)></p>
+    step6:
+        title: Ma futur collecte de proposition
+        isEnabled: true
+        type: 1
+        startAt: <(new \DateTime('2015-09-20'))>
+        endAt: <(new \DateTime('2015-10-20'))>
         position: 1
         consultation: @cs3
-        body: <text(1000)>
-    step6:
-        title: <sentence(2)>
-        isEnabled: true
-        type: 1
-        startAt: <dateTimeBetween('now','+10 days')>
-        endAt: <dateTimeBetween('+10 days','+1 years')>
-        position: 2
-        consultation: @cs3
-        body: <text(1000)>
+
     step7:
-        title: <sentence(3)>
+        title: À venir une synthèse optimisée
         isEnabled: true
         type: 0
-        startAt: <(new \DateTime('2015-04-05'))>
-        endAt: <(new \DateTime('2015-05-05'))>
+        startAt: <(new \DateTime('2015-10-20'))>
+        endAt: <(new \DateTime('2015-11-20'))>
         position: 2
         consultation: @cs3
-        body: <text(1000)>
+        body: |
+            <p><text(100)></p>
+            <h2>Ma synthèse</h2>
+            <p><text(1000)></p>
+            <h3>Une bonne synthèse argumentée</h3>
+            <p><text(500)></p>

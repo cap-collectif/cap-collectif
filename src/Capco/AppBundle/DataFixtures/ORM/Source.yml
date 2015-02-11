@@ -1,90 +1,25 @@
 Capco\AppBundle\Entity\Source:
-    source1:
+    source{1..6}:
         title: <text(20)>
         body: <text(1000)>
-        Author: @user1
-        Opinion: @opinion<numberBetween(1,75)>
-        Category: @Category1
-        link: <url()>
-        voteCountSource: <numberBetween(0, 50)>
-    source2:
+        Author: @user<numberBetween(1,5)>
+        Opinion: @opinion<numberBetween(1,5)>
+        Category: @Category<numberBetween(1,5)>
+        link: http://www.cap-collectif.com/
+        voteCountSource: 0
+    source{7..10}:
         title: <text(20)>
         body: <text(1000)>
-        Author: @user1
-        Opinion: @opinion<numberBetween(1,75)>
-        Category: @Category2
-        link: <url()>
-        voteCountSource: <numberBetween(0, 50)>
-    source3:
+        Author: @user<numberBetween(1,5)>
+        Opinion: @opinion<numberBetween(5,11)>
+        Category: @Category<numberBetween(1,5)>
+        link: http://www.cap-collectif.com/
+        voteCountSource: 0
+    source{11..23}:
         title: <text(20)>
         body: <text(1000)>
-        Author: @user1
-        Opinion: @opinion<numberBetween(1,75)>
-        Category: @Category3
-        link: <url()>
-        voteCountSource: <numberBetween(0, 50)>
-    source4:
-        title: <text(20)>
-        body: <text(1000)>
-        Author: @user3
-        Opinion: @opinion<numberBetween(1,75)>
-        Category: @Category4
-        link: <url()>
-        voteCountSource: <numberBetween(0, 50)>
-    source5:
-        title: <text(20)>
-        body: <text(1000)>
-        Author: @user2
-        Opinion: @opinion<numberBetween(1,75)>
-        Category: @Category5
-        link: <url()>
-        voteCountSource: <numberBetween(0, 50)>
-    source6:
-        title: <text(20)>
-        body: <text(1000)>
-        Author: @user1
-        Opinion: @opinion<numberBetween(1,75)>
-        Category: @Category*
-        link: <url()>
-        voteCountSource: <numberBetween(0, 50)>
-    source7:
-        title: <text(20)>
-        body: <text(1000)>
-        Author: @user1
-        Opinion: @opinion<numberBetween(1,75)>
-        Category: @Category*
-        link: <url()>
-        voteCountSource: <numberBetween(0, 50)>
-    source8:
-        title: <text(20)>
-        body: <text(1000)>
-        Author: @user3
-        Opinion: @opinion<numberBetween(1,75)>
-        Category: @Category*
-        link: <url()>
-        voteCountSource: <numberBetween(0, 50)>
-    source9:
-        title: <text(20)>
-        body: <text(1000)>
-        Author: @user2
-        Opinion: @opinion<numberBetween(1,75)>
-        Category: @Category*
-        link: <url()>
-        voteCountSource: <numberBetween(0, 50)>
-    source10:
-        title: <text(20)>
-        body: <text(1000)>
-        Author: @user3
-        Opinion: @opinion<numberBetween(1,75)>
-        Category: @Category*
-        link: <url()>
-        voteCountSource: <numberBetween(0, 50)>
-    source{11..35}:
-        title: <text(20)>
-        body: <text(1000)>
-        Author: @user*
-        Category: @Category*
-        Opinion: @opinion<numberBetween(1,75)>
-        link: <url()>
-        voteCountSource: <numberBetween(0, 50)>
-        isTrashed: <boolean()>
+        Author: @user<numberBetween(1,5)>
+        Opinion: @opinion<numberBetween(12,17)>
+        Category: @Category<numberBetween(1,5)>
+        link: https://www.parlement-et-citoyens.fr/
+        voteCountSource: 0

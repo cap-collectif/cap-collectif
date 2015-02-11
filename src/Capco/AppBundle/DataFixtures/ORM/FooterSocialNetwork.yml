@@ -3,12 +3,12 @@ Capco\AppBundle\Entity\FooterSocialNetwork:
         title: Facebook
         link: http://facebook.com
         position: 1
-        isEnabled: true
+        isEnabled: false
         style: facebook
 
     FooterSocialNetwork2:
         title: Twitter
-        link: http://twitter.com
+        link: https://twitter.com/CapCollectif
         position: 2
         isEnabled: true
         style: twitter
@@ -17,12 +17,12 @@ Capco\AppBundle\Entity\FooterSocialNetwork:
         title: Linkedin
         link: http://linkedin.com
         position: 3
-        isEnabled: true
+        isEnabled: false
         style: linkedin
 
     FooterSocialNetwork4:
         title: Google+
-        link: http://plus.google.com
+        link: ***REMOVED***
         position: 4
         isEnabled: true
         style: gplus

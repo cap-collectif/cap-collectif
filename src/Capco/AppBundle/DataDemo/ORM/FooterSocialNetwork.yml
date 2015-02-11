@@ -28,7 +28,7 @@ Capco\AppBundle\Entity\FooterSocialNetwork:
         style: gplus
 
     FooterSocialNetwork5:
-        title: RSS feed
+        title: Flux RSS
         link: '#'
         position: 5
         isEnabled: false

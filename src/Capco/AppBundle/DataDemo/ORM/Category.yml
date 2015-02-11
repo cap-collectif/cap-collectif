@@ -1,16 +1,34 @@
 Capco\AppBundle\Entity\Category:
     Category1:
-        title: Études
+        title: Articles de presse
         isEnabled: true
     Category2:
-        title: Politique
+        title: Billet de blog
         isEnabled: true
     Category3:
-        title: Commerces
+        title: Article scientifique
         isEnabled: true
     Category4:
-        title: Financements
+        title: Thèse / Mémoire
         isEnabled: true
     Category5:
-        title: Transports
+        title: Rapport / Étude
+        isEnabled: true
+    Category6:
+        title: Document audiovisuel / iconographique
+        isEnabled: true
+    Category7:
+        title: Document cartographique
+        isEnabled: true
+    Category8:
+        title: Lois et règlements
+        isEnabled: true
+    Category9:
+        title: Manuel / Guide
+        isEnabled: true
+    Category10:
+        title: Site internet
+        isEnabled: true
+    Category11:
+        title: Autre
         isEnabled: true

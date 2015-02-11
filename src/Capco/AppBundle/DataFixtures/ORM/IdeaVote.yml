@@ -1,4 +1,0 @@
-Capco\AppBundle\Entity\IdeaVote:
-    IdeaVote{1..15}:
-        Idea: @Idea<numberBetween(1, 15)>
-        Voter: @user<numberBetween(1, 3)>

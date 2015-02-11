@@ -44,8 +44,8 @@ Capco\AppBundle\Entity\MenuItem:
     title: À propos
     link: ""
     isEnabled: 1
-    isDeletable: 0
-    isFullyModifiable: 0
+    isDeletable: 1
+    isFullyModifiable: 1
     position: 5
     parent: null
     menu: @menu1
@@ -68,15 +68,6 @@ Capco\AppBundle\Entity\MenuItem:
     parent: @MenuItem5
     menu: @menu1
     link: pages/charte
-
-  MenuItem9:
-    title: FAQ
-    link: pages/faq
-    isEnabled: 1
-    isDeletable: 1
-    position: 7
-    parent: null
-    menu: @menu2
 
   MenuItem10:
     title: Comment ça marche

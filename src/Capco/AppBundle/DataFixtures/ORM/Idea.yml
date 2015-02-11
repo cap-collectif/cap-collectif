@@ -1,8 +1,67 @@
 Capco\AppBundle\Entity\Idea:
-    Idea{1..50}:
+    Idea1:
         title: <text(38)>
-        body: <text(1000)>
+        body: |
+              <p><text(100)></p>
+              <h3>mon titre numéro 3</h3>
+              <p><text(500)></p>
+              <h3>mon titre numéro 2</h3>
+              <p><text(300)></p>
+        Theme: @theme1
+        Author: @user1
+        createdAt: <(new \DateTime('2015-01-01'))>
+        isTrashed: false
+        Media: @MediaIdea1
+
+    Idea2:
+        title: <text(38)>
+        body: |
+            <p><text(100)></p>
+            <h3>mon titre numéro 3</h3>
+            <p><text(500)></p>
+            <h3>mon titre numéro 2</h3>
+            <p><text(300)></p>
+        Theme: @theme2
+        Author: @user2
+        createdAt: <(new \DateTime('2015-01-11'))>
+        isTrashed: false
+        Media: @MediaIdea2
+
+    Idea3:
+        title: <text(38)>
+        body: |
+            <p><text(100)></p>
+            <h2>Un beau titre</h2>
+            <p><text(500)></p>
+            <h3>mon titre</h3>
+            <p><text(300)></p>
+        Theme: @theme3
+        Author: @user3
+        createdAt: <(new \DateTime('2015-01-11'))>
+        isTrashed: false
+
+    Idea4:
+        title: <text(38)>
+        body: |
+              <p><text(100)></p>
+              <h2>Mon titre</h2>
+              <p><text(500)></p>
+              <h3>Un autre titre</h3>
+              <p><text(300)></p>
+        Theme: @theme1
+        Author: @user5
+        createdAt: <(new \DateTime('2015-01-21'))>
+        isTrashed: false
+
+    Idea{5..10}:
+        title: <text(38)>
+        body: |
+              <p><text(100)></p>
+              <h2><text(10)></h2>
+              <p><text(500)></p>
+              <h3><text(10)></h3>
+              <p><text(300)></p>
         Theme: @theme*
         Author: @user*
-        createdAt: <dateTimeBetween('-1 years','now')>
-        isTrashed: <boolean()>
+        createdAt: <dateTimeBetween('-30 days','now')>
+        isTrashed: false

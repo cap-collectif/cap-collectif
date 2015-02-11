@@ -13,6 +13,31 @@ Capco\MediaBundle\Entity\Media:
         name:          Titre du média 2
         context:       @MediaContext1
 
+    MediaConsultation3:
+        binaryContent: ../files/consultation-3.jpg
+        enabled:       true
+        name:          Titre du média 2
+        context:       @MediaContext1
+
+    MediaConsultationImageVideo:
+        binaryContent: ../files/consultation-image-video.jpg
+        enabled:       true
+        name:          Titre du média 2
+        context:       @MediaContext1
+
+    # consultations
+    MediaIdea1:
+        binaryContent: ../files/idea-1.jpg
+        enabled:       true
+        name:          Titre du média
+        context:       @MediaContext1
+
+    MediaIdea2:
+        binaryContent: ../files/idea-2.jpg
+        enabled:       true
+        name:          Titre du média 2
+        context:       @MediaContext1
+
 
     # users
     MediaUser1:
@@ -88,6 +113,12 @@ Capco\MediaBundle\Entity\Media:
         binaryContent: ../files/social/twitter.png
         enabled:       true
         name:          Twitter
+        context:       @MediaContext2
+
+    MediaCapcoSite:
+        binaryContent: ../files/social/capco.png
+        enabled:       true
+        name:          Capco
         context:       @MediaContext2
 
     MediaAvatar:

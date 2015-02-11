@@ -1,64 +1,4 @@
 Capco\MediaBundle\Entity\Media:
-
-    # consultations
-    MediaConsultation1:
-        binaryContent: ../files/consultation-1.jpg
-        enabled:       true
-        name:          Titre du média
-        context:       @MediaContext1
-
-    MediaConsultation2:
-        binaryContent: ../files/consultation-2.jpg
-        enabled:       true
-        name:          Titre du média 2
-        context:       @MediaContext1
-
-    MediaConsultation3:
-        binaryContent: ../files/consultation-3.jpg
-        enabled:       true
-        name:          Titre du média 2
-        context:       @MediaContext1
-
-    MediaConsultationImageVideo:
-        binaryContent: ../files/consultation-image-video.jpg
-        enabled:       true
-        name:          Titre du média 2
-        context:       @MediaContext1
-
-    # consultations
-    MediaIdea1:
-        binaryContent: ../files/idea-1.jpg
-        enabled:       true
-        name:          Titre du média
-        context:       @MediaContext1
-
-    MediaIdea2:
-        binaryContent: ../files/idea-2.jpg
-        enabled:       true
-        name:          Titre du média 2
-        context:       @MediaContext1
-
-
-    # users
-    MediaUser1:
-        binaryContent: ../files/user/sfavot.jpg
-        enabled:       true
-        name:          Suzanne Favot
-        context:       @MediaContext2
-
-    MediaUser2:
-        binaryContent: ../files/user/lbrunet.jpg
-        enabled:       true
-        name:          Laurent Brunet
-        context:       @MediaContext2
-
-    MediaUser3:
-        binaryContent: ../files/user/xlacot.jpg
-        enabled:       true
-        name:          Xavier Lacot
-        context:       @MediaContext2
-
-
     #SiteImages
     Logo:
         binaryContent: ../files/logo.png
@@ -120,9 +60,3 @@ Capco\MediaBundle\Entity\Media:
         enabled:       true
         name:          Capco
         context:       @MediaContext2
-
-    MediaAvatar:
-        binaryContent: ../files/default_avatar.jpg
-        enabled: true
-        name: Avatar
-        context: @MediaContext2

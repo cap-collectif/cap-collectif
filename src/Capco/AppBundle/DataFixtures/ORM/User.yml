@@ -37,3 +37,25 @@ Capco\UserBundle\Entity\User:
          - 'ROLE_SUPER_ADMIN'
         Media: @MediaUser3
         isTermsAccepted: true
+
+    user4:
+        username: admin
+        firstname: Administrateur
+        lastname: authentifier
+        email: admin@test.com
+        enabled: true
+        plainPassword: admin
+        roles:
+         - 'ROLE_ADMIN'
+        isTermsAccepted: true
+
+    user5:
+        username: user
+        firstname: Utilisater
+        lastname: authentifier
+        email: user@test.com
+        enabled: true
+        plainPassword: user
+        roles:
+         - 'ROLE_USER'
+        isTermsAccepted: true

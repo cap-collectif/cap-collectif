@@ -9,20 +9,20 @@ Capco\AppBundle\Entity\OpinionType:
     opinionType2:
         title: Les causes
         shortName: Causes
-        position: 2
+        position: 3
         voteWidgetType: 1
         color: orange
         isEnabled: true
     opinionType3:
         title: Les enjeux
         shortName: Enjeux
-        position: 3
+        position: 2
         voteWidgetType: 2
         color: bluedark
         isEnabled: true
     opinionType4:
         title: Les solutions
-        shortName: Solution
+        shortName: Solutions
         position: 4
         voteWidgetType: 2
         color: green

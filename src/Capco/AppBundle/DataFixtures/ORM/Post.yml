@@ -1,11 +1,16 @@
 Capco\AppBundle\Entity\Post:
   post{1..25}:
     title: <text(40)>
-    abstract: <text(200)>
-    body: <text(2000)>
+    abstract: <text(150)>
+    body: |
+         <h2><text(10)></h2>
+         <p><text(500)></p>
+         <h2><text(10)></h2>
+         <h3><text(10)></h3>
+         <p><text(300)></p>
     title: <text(20)>
-    isPublished: <boolean()>
+    isPublished: true
     publishedAt: <dateTimeBetween('-100 days', '+10 days')>
     Authors:
-        - @user<numberBetween(1,3)>
-    Media: @MediaConsultation2
+        - @user<numberBetween(1,5)>
+    Media: @MediaConsultation<numberBetween(1,3)>

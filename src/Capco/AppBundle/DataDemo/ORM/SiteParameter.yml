@@ -199,13 +199,13 @@ Capco\AppBundle\Entity\SiteParameter:
     SiteParameter29:
         keyname: admin.mail.notifications
         title: Adresse e-mail de réception des notifications (signalements)
-        value: brunet.laurent60@yahoo.fr
+        value: assistance@cap-collectif.com
         position: 900
         type: 4
     SiteParameter30:
         keyname: admin.mail.contact
         title: Adresse email de contact
-        value: brunet.laurent60@yahoo.fr
+        value: coucou@cap-collectif.com
         position: 910
         type: 4
 

@@ -28,7 +28,7 @@ Capco\AppBundle\Entity\SocialNetwork:
         media: @MediaFlickr
 
     SocialNetwork5:
-        title: RSS feed
+        title: Flux RSS
         link: http://jolicode.com/blog/
         position: 5
         isEnabled: true
@@ -40,3 +40,10 @@ Capco\AppBundle\Entity\SocialNetwork:
         position: 6
         isEnabled: true
         media: @MediaGooglePlus
+
+    SocialNetwork7:
+        title: Cap Collectif
+        link: http://www.cap-collectif.com/
+        position: 6
+        isEnabled: true
+        media: @MediaCapcoSite

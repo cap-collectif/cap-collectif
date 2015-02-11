@@ -20,6 +20,6 @@ Capco\AppBundle\Entity\SiteImage:
     SiteImage4:
         keyname: image.default_avatar
         title: Avatar par défaut
-        media: @MediaAvatar
-        isEnabled: true
+        media: null
+        isEnabled: false
         position: 4

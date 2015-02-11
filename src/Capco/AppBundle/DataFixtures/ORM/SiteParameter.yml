@@ -144,7 +144,7 @@ Capco\AppBundle\Entity\SiteParameter:
         keyname: contact.content.body
         title: Texte de la page contact
         value: |
-            <h2>Situez-nous !</h2>
+            <h2>Situez nous !</h2>
             <p><text(250)><p>
         position: 610
         type: 1
