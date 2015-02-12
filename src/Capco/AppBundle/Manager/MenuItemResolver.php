@@ -14,7 +14,7 @@ class MenuItemResolver
     public function __construct(MenuItemRepository $repository, Manager $toggleManager)
     {
         $this->repository = $repository;
-        $this->enabledFeatures = $toggleManager->all(true);
+        $this->enabledFeatures = array_keys($toggleManager->all(true));
     }
 
     /**
@@ -61,7 +61,7 @@ class MenuItemResolver
      */
     public function containsEnabledFeature($features)
     {
-        if (null == $features || empty($features)) {
+        if (empty($features)) {
             return true;
         }
 
