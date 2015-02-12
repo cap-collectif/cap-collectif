@@ -19,7 +19,7 @@
             {{ 'blog.on_date'|trans({'%date%': (post.publishedAt | localizeddate('long', 'none'))}, 'CapcoAppBundle') }}</p>
         </p>
         {% if post.abstract %}
-            <p class="media--news__text">{{ post.abstract | jolitypo() | truncate(250, true, '...') }}</p>
+            <p class="media--news__text">{{ post.abstract | jolitypo() }}</p>
         {% endif %}
     </div>
 </li>
