@@ -23,6 +23,7 @@ Capco\AppBundle\Entity\Theme:
               <h3>un thème important</h3>
               <p><text(500)></p>
         Author: @user4
+        Media: @MediaConsultation1
     theme3:
         title: Transport
         teaser: <sentence(3)>
@@ -35,3 +36,4 @@ Capco\AppBundle\Entity\Theme:
               <h3>un troisième thème pratique</h3>
               <p><text(500)></p>
         Author: @user4
+        Media: @MediaConsultation2

@@ -1,18 +1,16 @@
-<div class="col-lg-3  col-md-4  col-sm-6  col-xs-12  block">
-    <div class="theme" style="background-image: url({% path theme.Media, 'idea' %}); background-size: cover; background-repeat: no-repeat; height: 100%">
-        <div class="{% if theme.Media %}opacity {% else %} theme--img {% endif %}">
-            <h3 class="theme__title"><a href="{{ path('app_theme_show', {'slug': theme.slug}) }}">{{ theme.title }}</a></h3>
-            {% set nbConsultations = theme.countEnabledConsultations() %}
-            {% set nbIdeas = theme.countEnabledIdeas() %}
-            <p class="excerpt">
-                {% transchoice nbConsultations with {'%count%': nbConsultations} from 'CapcoAppBundle' %}
-                theme.index.consultations
-                {% endtranschoice %}
-                •
-                {% transchoice nbIdeas with {'%count%': nbIdeas} from 'CapcoAppBundle' %}
-                theme.index.ideas
-                {% endtranschoice %}
-            </p>
-        </div>
+<div class="col-lg-3  col-md-4  col-sm-6  col-xs-12">
+    <div class="theme  block">
+        <h3 class="theme__title"><a href="{{ path('app_theme_show', {'slug': theme.slug}) }}">{{ theme.title }}</a></h3>
+        {% set nbConsultations = theme.countEnabledConsultations() %}
+        {% set nbIdeas = theme.countEnabledIdeas() %}
+        <p class="excerpt">
+            {% transchoice nbConsultations with {'%count%': nbConsultations} from 'CapcoAppBundle' %}
+            theme.index.consultations
+            {% endtranschoice %}
+            •
+            {% transchoice nbIdeas with {'%count%': nbIdeas} from 'CapcoAppBundle' %}
+            theme.index.ideas
+            {% endtranschoice %}
+        </p>
     </div>
 </div>
