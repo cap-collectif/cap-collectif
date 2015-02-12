@@ -34,6 +34,9 @@ sonata_admin:
                 items:
                     - capco_admin.admin.idea
                     - capco_admin.admin.idea_vote
+            admin.group.news:
+                items:
+                    - capco_admin.admin.post
             sonata.admin.group.user:
                 items:
                     - sonata.user.admin.user

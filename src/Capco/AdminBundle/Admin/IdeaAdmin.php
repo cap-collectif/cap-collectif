@@ -184,4 +184,11 @@ class IdeaAdmin extends Admin
             ;
         }
     }
+
+    public function getFeatures()
+    {
+        return array(
+            'ideas',
+        );
+    }
 }

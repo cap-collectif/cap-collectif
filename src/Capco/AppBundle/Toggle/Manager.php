@@ -14,6 +14,7 @@ class Manager
         'blog',
         'calendar',
         'newsletter',
+        'ideas',
     );
 
     public function __construct(ToggleManager $toggleManager, ContextFactory $contextFactory)
@@ -63,6 +64,16 @@ class Manager
     public function isActive($name)
     {
         return $this->toggleManager->active($name, $this->context);
+    }
+
+    public function hasOneActive($names)
+    {
+        foreach ($names as $name) {
+            if ($this->isActive($name)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public function switchValue($name)

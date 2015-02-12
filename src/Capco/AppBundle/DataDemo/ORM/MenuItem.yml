@@ -39,6 +39,7 @@ Capco\AppBundle\Entity\MenuItem:
     position: 4
     parent: null
     menu: @menu1
+    associatedFeatures: [ideas]
 
   MenuItem5:
     title: À propos

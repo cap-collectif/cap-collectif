@@ -7,7 +7,7 @@ admin.group.ideas: Boite à idées
 admin.group.parameters: Paramètres
 sonata.admin.group.user: Utilisateurs
 admin.group.moderation: Contributions
-admin.group.blog: Actualités
+admin.group.news: Actualités
 admin.group.configuration: Configuration
 
 # Dashboard names
@@ -307,6 +307,7 @@ capco:
     blog: Module de blog
     calendar: Module de calendrier
     newsletter: Module lettre d'information
+    ideas: Module boîte à idées
 
 action_enable: Activer
 action_disable: Désactiver

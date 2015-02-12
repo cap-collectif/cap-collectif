@@ -98,4 +98,11 @@ class NewsletterSubscriptionAdmin extends Admin
     protected function configureRoutes(RouteCollection $collection)
     {
     }
+
+    public function getFeatures()
+    {
+        return array(
+            'newsletter',
+        );
+    }
 }

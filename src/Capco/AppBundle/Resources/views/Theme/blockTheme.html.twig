@@ -7,10 +7,12 @@
             {% transchoice nbConsultations with {'%count%': nbConsultations} from 'CapcoAppBundle' %}
             theme.index.consultations
             {% endtranschoice %}
-            •
-            {% transchoice nbIdeas with {'%count%': nbIdeas} from 'CapcoAppBundle' %}
-            theme.index.ideas
-            {% endtranschoice %}
+            {% if is_feature_enabled('ideas') %}
+                •
+                {% transchoice nbIdeas with {'%count%': nbIdeas} from 'CapcoAppBundle' %}
+                theme.index.ideas
+                {% endtranschoice %}
+            {% endif %}
         </p>
     </div>
 </div>

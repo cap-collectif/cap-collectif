@@ -45,7 +45,9 @@
 {% block body %}
     {{ render(controller('CapcoAppBundle:Homepage:lastThemes', {'max': 4, 'offset': 0})) }}
     {{ render(controller('CapcoAppBundle:Homepage:lastConsultations', {'max': 4, 'offset': 0})) }}
-    {{ render(controller('CapcoAppBundle:Homepage:lastIdeas', {'max': 4, 'offset': 0})) }}
+    {% if is_feature_enabled('ideas') %}
+        {{ render(controller('CapcoAppBundle:Homepage:lastIdeas', {'max': 4, 'offset': 0})) }}
+    {% endif %}
     {% if is_feature_enabled('blog') %}
         {{ render(controller('CapcoAppBundle:Homepage:lastPosts', {'max': 3, 'offset': 0})) }}
     {% endif %}

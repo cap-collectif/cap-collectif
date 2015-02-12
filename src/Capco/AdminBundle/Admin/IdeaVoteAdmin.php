@@ -82,4 +82,11 @@ class IdeaVoteAdmin extends Admin
         $collection->remove('delete');
         $collection->remove('edit');
     }
+
+    public function getFeatures()
+    {
+        return array(
+            'ideas',
+        );
+    }
 }

@@ -117,4 +117,11 @@ class PostAdmin extends Admin
             ))
         ;
     }
+
+    public function getFeatures()
+    {
+        return array(
+            'blog',
+        );
+    }
 }

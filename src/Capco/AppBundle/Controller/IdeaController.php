@@ -20,7 +20,7 @@ use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 class IdeaController extends Controller
 {
     /**
-     * @Route("/ideas/add", name="app_idea_create")
+     * @Route("/ideas/add", name="app_idea_create", defaults={"_feature_flag" = "ideas"})
      * @Template()
      * @param $request
      * @return array
@@ -59,7 +59,7 @@ class IdeaController extends Controller
     }
 
     /**
-     * @Route("/ideas/{slug}/delete", name="app_idea_delete")
+     * @Route("/ideas/{slug}/delete", name="app_idea_delete", defaults={"_feature_flag" = "ideas"})
      * @Template()
      * @param $request
      * @param $idea
@@ -108,7 +108,7 @@ class IdeaController extends Controller
     }
 
     /**
-     * @Route("/ideas/trashed/{page}", name="app_idea_trashed", requirements={"page" = "\d+"}, defaults={"page" = 1} )
+     * @Route("/ideas/trashed/{page}", name="app_idea_trashed", requirements={"page" = "\d+"}, defaults={"_feature_flag" = "ideas", "page" = 1} )
      * @Template("CapcoAppBundle:Idea:show_trashed.html.twig")
      * @param $page
      * @return array
@@ -156,7 +156,7 @@ class IdeaController extends Controller
     }
 
     /**
-     * @Route("/ideas/{slug}/edit", name="app_idea_update")
+     * @Route("/ideas/{slug}/edit", name="app_idea_update", defaults={"_feature_flag" = "ideas"})
      * @Template()
      * @param $request
      * @param $idea
@@ -204,9 +204,9 @@ class IdeaController extends Controller
     }
 
     /**
-     * @Route("/ideas/{page}", name="app_idea", requirements={"page" = "\d+"}, defaults={"page" = 1} )
-     * @Route("/ideas/filter/{theme}/{sort}/{page}", name="app_idea_search", requirements={"page" = "\d+"}, defaults={"page" = 1, "theme" = "all"} )
-     * @Route("/ideas/filter/{theme}/{sort}/{term}/{page}", name="app_idea_search_term", requirements={"page" = "\d+"}, defaults={"page" = 1, "theme" = "all"} )
+     * @Route("/ideas/{page}", name="app_idea", requirements={"page" = "\d+"}, defaults={"page" = 1, "_feature_flag" = "ideas"} )
+     * @Route("/ideas/filter/{theme}/{sort}/{page}", name="app_idea_search", requirements={"page" = "\d+"}, defaults={"page" = 1, "theme" = "all", "_feature_flag" = "ideas"} )
+     * @Route("/ideas/filter/{theme}/{sort}/{term}/{page}", name="app_idea_search_term", requirements={"page" = "\d+"}, defaults={"page" = 1, "theme" = "all", "_feature_flag" = "ideas"} )
      * @Template()
      * @param $page
      * @param $request
@@ -272,7 +272,7 @@ class IdeaController extends Controller
     }
 
     /**
-     * @Route("/ideas/{slug}", name="app_idea_show")
+     * @Route("/ideas/{slug}", name="app_idea_show", defaults={"_feature_flag" = "ideas"})
      * @Template()
      * @param Idea $idea
      * @param Request $request

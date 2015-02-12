@@ -9,8 +9,6 @@
         {% endif %}
 
         <div class="panel-body">
-            {% sonata_template_box 'This is the recent posts block.' %}
-
             <div class="sonata-blog-post-container list-group">
                 {% for post in posts %}
                     <a class="list-group-item" href="{{ url('admin_capco_app_post_edit', { 'id': post.id }) }}">
