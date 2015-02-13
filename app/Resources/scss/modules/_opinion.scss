@@ -29,6 +29,11 @@
         color: $black;
       }
 
+      .btn-link,
+      .btn-link:hover {
+        color: $link-color;
+      }
+
       .badge {
         background-color: $text;
         color: $color;

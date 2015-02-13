@@ -365,6 +365,7 @@ source:
 opinion:
   show:
     back: Retour
+    all: Show
     vote:
       cancel: Annuler mon vote
       ok: D'accord

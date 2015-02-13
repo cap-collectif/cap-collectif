@@ -1,4 +1,4 @@
-{% if(blocks|length > 0) %}
+{% if (blocks|length > 0) %}
     {% for block in blocks %}
         <div class="block  block--bordered">
         <div class="opinion  opinion--{{ block.color }}  opinion--default">
@@ -17,7 +17,7 @@
         </div>
         {% if block.Opinions | length > 0 %}
             <ul class="media-list  opinion__list">
-                {% for opinion in block.Opinions %}
+                {% for opinion in block.Opinions|slice(0, 5) %}
                 {% set nbVotes = (opinion.getVoteCountAll) %}
                 {% set nbArguments = (opinion.argumentsCount) %}
                 {% set nbSources = (opinion.sourcesCount) %}
@@ -62,6 +62,15 @@
                 </li>
                 {% endfor %}
             </ul>
+            {% if block.Opinions|length > 5  %}
+                <div class="opinion  opinion--default">
+                    <div class="opinion__header  opinion__header--mobile-centered">
+                        <a href="{{ path('app_consultation_show_opinions', {'consultationSlug': consultation.slug ,'opinionTypeSlug': block.slug}) }}" class="btn  btn-link text-center" style="display: block">
+                            {{ 'opinion.show.all'|trans({}, 'CapcoAppBundle') }} {{ block.title|lower }}
+                        </a>
+                    </div>
+                </div>
+            {% endif %}
         {% else %}
             <div class="opinion-type__empty-block  text-center">
                 <p class="icon  cap-bubble-attention-6"></p>
