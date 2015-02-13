@@ -198,4 +198,11 @@ class ThemeAdmin extends Admin
             ))
         ;
     }
+
+    public function getFeatures()
+    {
+        return array(
+            'themes',
+        );
+    }
 }

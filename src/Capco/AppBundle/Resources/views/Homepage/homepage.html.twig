@@ -43,7 +43,9 @@
 {% endblock %}
 
 {% block body %}
-    {{ render(controller('CapcoAppBundle:Homepage:lastThemes', {'max': 4, 'offset': 0})) }}
+    {% if is_feature_enabled('themes') %}
+        {{ render(controller('CapcoAppBundle:Homepage:lastThemes', {'max': 4, 'offset': 0})) }}
+    {% endif %}
     {{ render(controller('CapcoAppBundle:Homepage:lastConsultations', {'max': 4, 'offset': 0})) }}
     {% if is_feature_enabled('ideas') %}
         {{ render(controller('CapcoAppBundle:Homepage:lastIdeas', {'max': 4, 'offset': 0})) }}

@@ -25,7 +25,8 @@
         {{ render(controller('CapcoAppBundle:Step:showAllInNav', {'consultation': consultation, 'currentStep': currentStep})) }}
 
         <h4 class="h4">{{ 'consultation.show.meta.info.title'|trans({}, 'CapcoAppBundle') }}</h4>
-        {% if consultation.Themes | length > 0 %}
+        {% if is_feature_enabled('themes') %}
+            {% if consultation.Themes | length > 0 %}
             <p class="excerpt">{{ 'consultation.show.meta.info.themes'|trans({}, 'CapcoAppBundle') }}</p>
             <p>
                 {% for theme in consultation.Themes %}
@@ -34,6 +35,7 @@
                     {% endif %}
                 {% endfor %}
             </p>
+            {% endif %}
         {% endif %}
         <p class="excerpt">{{ 'consultation.show.meta.info.opening'|trans({}, 'CapcoAppBundle') }}</p>
         <p>{{ consultation.openedAt | localizeddate('long', 'none') }}</p>

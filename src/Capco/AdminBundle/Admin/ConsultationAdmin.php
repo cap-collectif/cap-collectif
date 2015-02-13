@@ -32,9 +32,15 @@ class ConsultationAdmin extends Admin
             ->add('Author', null, array(
                 'label' => 'admin.fields.consultation.author',
             ))
-            ->add('Themes', null, array(
+        ;
+
+        if ($this->getConfigurationPool()->getContainer()->get('capco.toggle.manager')->isActive('themes')) {
+            $datagridMapper->add('Themes', null, array(
                 'label' => 'admin.fields.consultation.themes',
-            ))
+                ));
+        }
+
+        $datagridMapper
             ->add('Steps', null, array(
                 'label' => 'admin.fields.consultation.steps',
             ))
@@ -65,9 +71,15 @@ class ConsultationAdmin extends Admin
             ->add('Author', 'sonata_type_model', array(
                 'label' => 'admin.fields.consultation.author',
             ))
-            ->add('Themes', 'sonata_type_collection', array(
+        ;
+
+        if ($this->getConfigurationPool()->getContainer()->get('capco.toggle.manager')->isActive('themes')) {
+            $listMapper->add('Themes', null, array(
                 'label' => 'admin.fields.consultation.themes',
-            ))
+            ));
+        }
+
+        $listMapper
             ->add('openingStatus', null, array(
                 'label' => 'admin.fields.consultation.opening_status',
                 'mapped' => false,
@@ -138,12 +150,18 @@ class ConsultationAdmin extends Admin
             ->add('Author', 'sonata_type_model', array(
                 'label' => 'admin.fields.consultation.author',
             ))
-            ->add('Themes', 'sonata_type_model', array(
+        ;
+
+        if ($this->getConfigurationPool()->getContainer()->get('capco.toggle.manager')->isActive('themes')) {
+            $formMapper->add('Themes', 'sonata_type_model', array(
                 'label' => 'admin.fields.consultation.themes',
                 'required' => false,
                 'multiple' => true,
                 'by_reference' => false,
-            ))
+            ));
+        }
+
+        $formMapper
             ->add('openedAt', 'sonata_type_datetime_picker', array(
                 'required' => true,
                 'mapped' => false,
@@ -244,9 +262,15 @@ class ConsultationAdmin extends Admin
             ->add('video', null, array(
                 'label' => 'admin.fields.consultation.video',
             ))
-            ->add('Themes', null, array(
+        ;
+
+        if ($this->getConfigurationPool()->getContainer()->get('capco.toggle.manager')->isActive('themes')) {
+            $showMapper->add('Themes', null, array(
                 'label' => 'admin.fields.consultation.themes',
-            ))
+            ));
+        }
+
+        $showMapper
             ->add('Steps', null, array(
                 'label' => 'admin.fields.consultation.steps',
             ))

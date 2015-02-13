@@ -17,8 +17,8 @@ class ThemeController extends Controller
 {
 
     /**
-     * @Route("/themes/{page}", name="app_theme", requirements={"page" = "\d+"}, defaults={"page" = 1} )
-     * @Route("/themes/search/{term}/{page}", name="app_theme_search", requirements={"page" = "\d+"}, defaults={"page" = 1} )
+     * @Route("/themes/{page}", name="app_theme", requirements={"page" = "\d+"}, defaults={"page" = 1, "_feature_flag" = "themes"} )
+     * @Route("/themes/search/{term}/{page}", name="app_theme_search", requirements={"page" = "\d+"}, defaults={"page" = 1, "_feature_flag" = "themes"} )
      * @Template()
      * @param $page
      * @param $request
@@ -76,7 +76,7 @@ class ThemeController extends Controller
     }
 
     /**
-     * @Route("/themes/{slug}", name="app_theme_show")
+     * @Route("/themes/{slug}", name="app_theme_show", defaults={"_feature_flag" = "themes"})
      * @Template()
      * @param Theme $theme
      * @return array

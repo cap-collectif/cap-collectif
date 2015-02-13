@@ -13,17 +13,19 @@
 
         <div class="box">
             <div class="figcaption">
-                {% if consultation.Themes | length > 0 %}
-                    <span class="excerpt  h5">
-                        {% for theme in consultation.Themes %}
-                            {% if (theme.canDisplay) %}
-                                <a class="excerpt" href="{{ path('app_theme_show', {'slug': theme.slug}) }}">
-                                    {{ theme.title }}
-                                </a>
-                                {% if loop.last == false %}, {% endif %}
-                        {% endif %}
-                        {% endfor %}
-                    </span>
+                {% if is_feature_enabled('themes') %}
+                    {% if consultation.Themes | length > 0 %}
+                        <span class="excerpt  h5">
+                            {% for theme in consultation.Themes %}
+                                {% if (theme.canDisplay) %}
+                                    <a class="excerpt" href="{{ path('app_theme_show', {'slug': theme.slug}) }}">
+                                        {{ theme.title }}
+                                    </a>
+                                    {% if loop.last == false %}, {% endif %}
+                            {% endif %}
+                            {% endfor %}
+                        </span>
+                    {% endif %}
                 {% endif %}
                 <h4 class="h4"><a href="{{ consultation | capco_first_step_link }}" title="">{{ consultation.title }}</a></h4>
             </div>

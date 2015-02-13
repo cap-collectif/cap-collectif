@@ -37,7 +37,7 @@ class IdeaController extends Controller
             $idea->setAuthor($this->getUser());
         }
 
-        $form = $this->createForm(new IdeaType(), $idea);
+        $form = $this->createForm(new IdeaType($this->get('capco.toggle.manager')), $idea);
 
         if ($request->getMethod() == 'POST') {
             $form->handleRequest($request);
@@ -179,7 +179,7 @@ class IdeaController extends Controller
             throw new AccessDeniedException($this->get('translator')->trans('idea.error.not_author', array(), 'CapcoAppBundle'));
         }
 
-        $form = $this->createForm(new IdeaUpdateType(), $idea);
+        $form = $this->createForm(new IdeaUpdateType($this->get('capco.toggle.manager')), $idea);
         if ($request->getMethod() == 'POST') {
             $form->handleRequest($request);
 
@@ -220,7 +220,7 @@ class IdeaController extends Controller
         $em = $this->getDoctrine()->getManager();
         $currentUrl = $this->generateUrl('app_idea');
 
-        $form = $this->createForm(new IdeaSearchType(), null, array(
+        $form = $this->createForm(new IdeaSearchType($this->get('capco.toggle.manager')), null, array(
             'action' => $currentUrl,
             'method' => 'POST'
         ));

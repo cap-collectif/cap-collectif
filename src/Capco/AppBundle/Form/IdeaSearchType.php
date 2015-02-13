@@ -7,9 +7,17 @@ use Symfony\Component\Form\FormBuilderInterface;
 
 use Capco\AppBundle\Entity\Idea;
 use Capco\AppBundle\Repository\ThemeRepository;
+use Capco\AppBundle\Toggle\Manager;
 
 class IdeaSearchType extends AbstractType
 {
+    private $toggleManager;
+
+    function __construct(Manager $toggleManager)
+    {
+        $this->toggleManager = $toggleManager;
+    }
+
     /**
      * @param FormBuilderInterface $builder
      * @param array $options
@@ -30,21 +38,24 @@ class IdeaSearchType extends AbstractType
                 'empty_value' => false,
                 'attr' => array('onchange' => 'this.form.submit()')
             ))
-            ->add('theme', 'entity', array(
+        ;
+
+        if ($this->toggleManager->isActive('themes')) {
+            $builder->add('theme', 'entity', array(
                 'required' => false,
                 'class' => 'CapcoAppBundle:Theme',
                 'property' => 'title',
                 'label' => 'idea.searchform.theme',
                 'translation_domain' => 'CapcoAppBundle',
-                'query_builder' => function(ThemeRepository $tr) {
+                'query_builder' => function (ThemeRepository $tr) {
                     return $tr->createQueryBuilder('t')
                         ->where('t.isEnabled = :enabled')
                         ->setParameter('enabled', true);
                 },
                 'empty_value' => 'idea.searchform.all_themes',
                 'attr' => array('onchange' => 'this.form.submit()')
-            ))
-        ;
+            ));
+        }
     }
 
     /**

@@ -15,6 +15,7 @@ class Manager
         'calendar',
         'newsletter',
         'ideas',
+        'themes',
     );
 
     public function __construct(ToggleManager $toggleManager, ContextFactory $contextFactory)

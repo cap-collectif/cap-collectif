@@ -194,7 +194,7 @@ class ConsultationController extends Controller
         $em = $this->getDoctrine()->getManager();
         $currentUrl = $this->generateUrl('app_consultation');
 
-        $form = $this->createForm(new ConsultationSearchType(), null, array(
+        $form = $this->createForm(new ConsultationSearchType($this->get('capco.toggle.manager')), null, array(
             'action' => $currentUrl,
             'method' => 'POST'
         ));

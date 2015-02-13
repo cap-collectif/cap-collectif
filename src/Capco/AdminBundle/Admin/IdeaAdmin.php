@@ -25,9 +25,15 @@ class IdeaAdmin extends Admin
             ->add('title', null, array(
                 'label' => 'admin.fields.idea.title',
             ))
-            ->add('Theme', null, array(
+        ;
+
+        if ($this->getConfigurationPool()->getContainer()->get('capco.toggle.manager')->isActive('themes')) {
+            $datagridMapper->add('Theme', null, array(
                 'label' => 'admin.fields.idea.theme',
-            ))
+            ));
+        }
+
+        $datagridMapper
             ->add('voteCount', null, array(
                 'label' => 'admin.fields.idea.vote_count',
             ))
@@ -55,9 +61,15 @@ class IdeaAdmin extends Admin
             ->addIdentifier('title', null, array(
                 'label' => 'admin.fields.idea.title',
             ))
-            ->add('Theme', 'sonata_type_model', array(
+        ;
+
+        if ($this->getConfigurationPool()->getContainer()->get('capco.toggle.manager')->isActive('themes')) {
+            $listMapper->add('Theme', null, array(
                 'label' => 'admin.fields.idea.theme',
-            ))
+            ));
+        }
+
+        $listMapper
             ->add('voteCount', null, array(
                 'label' => 'admin.fields.idea.vote_count',
             ))
@@ -101,10 +113,16 @@ class IdeaAdmin extends Admin
             ->add('Author', 'sonata_type_model', array(
                 'label' => 'admin.fields.idea.author',
             ))
-            ->add('Theme', 'sonata_type_model', array(
+        ;
+
+        if ($this->getConfigurationPool()->getContainer()->get('capco.toggle.manager')->isActive('themes')) {
+            $formMapper->add('Theme', null, array(
                 'label' => 'admin.fields.idea.theme',
                 'required' => false,
-            ))
+            ));
+        }
+
+        $formMapper
             ->add('body', null, array(
                 'label' => 'admin.fields.idea.body',
                 'attr' => array('class' => 'ckeditor'),
@@ -143,10 +161,15 @@ class IdeaAdmin extends Admin
             ))
             ->add('body', null, array(
                 'label' => 'admin.fields.idea.body',
-            ))
-            ->add('Theme', 'sonata_type_model', array(
+            ));
+
+        if ($this->getConfigurationPool()->getContainer()->get('capco.toggle.manager')->isActive('themes')) {
+            $showMapper->add('Theme', null, array(
                 'label' => 'admin.fields.idea.theme',
-            ))
+            ));
+        }
+
+        $showMapper
             ->add('voteCount', null, array(
                 'label' => 'admin.fields.idea.vote_count',
             ))

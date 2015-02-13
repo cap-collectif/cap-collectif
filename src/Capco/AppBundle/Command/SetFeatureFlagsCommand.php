@@ -34,6 +34,7 @@ class SetFeatureFlagsCommand extends ContainerAwareCommand
         $toggleManager->deactivate('calendar');
         $toggleManager->activate('newsletter');
         $toggleManager->activate('ideas');
+        $toggleManager->activate('themes');
 
         $output->writeln('Feature toggles reinitialized');
     }
