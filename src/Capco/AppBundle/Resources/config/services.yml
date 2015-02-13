@@ -16,8 +16,9 @@ parameters:
     capco.site_color.repository.class: Capco\AppBundle\Repository\SiteColorRepository
     capco.site_color.resolver.class: Capco\AppBundle\SiteColor\Resolver
     capco.twig_extension.site_color.class: Capco\AppBundle\Twig\SiteColorExtension
-    capco.email_sender.class: Capco\AppBundle\Services\EmailService
     capco.twig.default_avatar.class: Capco\AppBundle\Twig\DefaultAvatarExtension
+    capco.step.resolver.class: Capco\AppBundle\Manager\StepResolver
+    capco.twig.steps_links.class: Capco\AppBundle\Twig\StepsLinksExtension
 
 services:
     capco.site_parameter.repository:
@@ -138,3 +139,12 @@ services:
         class: %capco.menu_item.resolver.class%
         arguments: [@capco.menu_item.repository, @capco.toggle.manager]
 
+    capco.step.resolver:
+        class: %capco.step.resolver.class%
+        arguments: [@router]
+
+    capco.twig.steps_links:
+        class:     %capco.twig.steps_links.class%
+        arguments: [@capco.step.resolver]
+        tags:
+            - { name: twig.extension }

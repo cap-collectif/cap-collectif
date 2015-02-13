@@ -2,11 +2,11 @@
     <div class="thumbnail  thumbnail--custom  block  block--bordered">
 
         {%  if consultation.Cover %}
-            <a href="{{ path('app_consultation_show', {'slug': consultation.slug}) }}" {% if consultation.video %}class="play"{% endif %}>
+            <a href="{{ consultation | capco_first_step_link }}" {% if consultation.video %}class="play"{% endif %}>
                 {% thumbnail consultation.Cover, 'consultation' with {'title': consultation.Cover.name, 'alt': consultation.Cover.name, 'class': 'img-responsive'} %}
             </a>
         {% else %}
-            <a href="{{ path('app_consultation_show', {'slug': consultation.slug}) }}" {% if consultation.video %}class="play"{% endif %}>
+            <a href="{{ consultation | capco_first_step_link }}" {% if consultation.video %}class="play"{% endif %}>
                 <div class="bg--default bg--consultation"></div>
             </a>
         {%  endif %}
@@ -25,7 +25,7 @@
                         {% endfor %}
                     </span>
                 {% endif %}
-                <h4 class="h4"><a href="{{ path('app_consultation_show', {'slug': consultation.slug}) }}" title="">{{ consultation.title }}</a></h4>
+                <h4 class="h4"><a href="{{ consultation | capco_first_step_link }}" title="">{{ consultation.title }}</a></h4>
             </div>
             <div class="thumbnail__status">
                 <p>

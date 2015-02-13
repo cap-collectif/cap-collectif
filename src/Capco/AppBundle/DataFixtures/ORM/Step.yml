@@ -5,7 +5,7 @@ Capco\AppBundle\Entity\Step:
         type: 1
         startAt: <(new \DateTime('2015-01-25'))>
         endAt: <(new \DateTime('2015-03-25'))>
-        position: 1
+        position: 2
         consultation: @cs1
     step2:
         title: Préparation de la synthèse
@@ -13,7 +13,7 @@ Capco\AppBundle\Entity\Step:
         type: 0
         startAt: <(new \DateTime('2015-03-25'))>
         endAt: <(new \DateTime('2015-04-25'))>
-        position: 2
+        position: 1
         consultation: @cs1
         body: |
             <p>Afficher le texte pour la préparation de la synthèse</p>

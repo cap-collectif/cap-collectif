@@ -564,6 +564,24 @@ class Consultation
 
     // ******************** Custom methods ******************************
 
+
+    /**
+     * @return mixed|null
+     */
+    public function getFirstStep()
+    {
+        if (!empty($this->Steps)) {
+            $first = $this->Steps[0];
+            foreach ($this->Steps as $step) {
+                if ($step->getPosition() < $first->getPosition()) {
+                    $first = $step;
+                }
+            }
+            return $first;
+        }
+        return null;
+    }
+
     /**
      * @return mixed|null
      */
