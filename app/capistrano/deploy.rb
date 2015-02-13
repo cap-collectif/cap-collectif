@@ -69,6 +69,22 @@ set :composer_install_flags, '--no-dev --prefer-dist --no-interaction --optimize
 fetch(:default_env).merge!(symfony_env: fetch(:symfony_env))
 
 
+# Slack hook configuration
+set :slack_url, '***REMOVED***'
+set :slack_channel, '#cap-collectif'
+set :slack_username, 'Deploybot'
+set :slack_text, -> {
+  elapsed = Integer(fetch(:time_finished) - fetch(:time_started))
+  "[#{fetch(:application)} : #{fetch(:stage)}] Deploy finished  with revision #{fetch(:current_revision, fetch(:branch))} " \
+  "- Deployed to #{fetch(:stage)} by #{fetch(:slack_user)} " \
+  "in #{elapsed} seconds."
+}
+set :slack_deploy_starting_text, -> {
+  "[#{fetch(:application)} : #{fetch(:stage)}] Deploy starting with revision/branch #{fetch(:current_revision, fetch(:branch))}"
+}
+set :slack_deploy_failed_text, -> {
+  "[#{fetch(:application)} : #{fetch(:stage)}] Deploy with revision/branch #{fetch(:current_revision, fetch(:branch))} FAILED :thumbsdown: :thumbsdown: :thumbsdown: "
+}
 
 set :gulp_tasks, 'build'
 

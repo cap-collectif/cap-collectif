@@ -25,9 +25,13 @@ GEM
       capistrano (~> 3.0)
     capistrano-npm (1.0.1)
       capistrano (>= 3.0.0)
+    capistrano-slackify (2.2.0)
+      capistrano (>= 3.1.0)
+      multi_json
     capistrano-stats (1.1.1)
     colorize (0.7.5)
     i18n (0.7.0)
+    multi_json (1.10.1)
     net-scp (1.2.1)
       net-ssh (>= 2.6.5)
     net-ssh (2.9.2)
@@ -45,4 +49,5 @@ DEPENDENCIES
   capistrano-bower
   capistrano-gulp (~> 0.0.1)
   capistrano-npm
+  capistrano-slackify
   capistrano-symfony (~> 0.1)!
