@@ -3,9 +3,10 @@
         {% for argument in arguments %}
             <li class="opinion  opinion--argument block  block--bordered" id="arg-{{ argument.id }}">
                 <div class="opinion__body  box">
-                    {% if argument.Author.Media %}
+                    {% set avatar = argument.Author.Media|capco_default_avatar %}
+                    {% if avatar != null %}
                         <a class="pull-left" href="{{ path('capco_user_profile_show_all', {'slug': argument.Author.slug}) }}">
-                            {% thumbnail argument.Author.Media, 'avatar' with {'title': argument.Author.username, 'alt': argument.Author.username, 'class': 'img-circle  pull-left'} %}
+                            {% thumbnail avatar, 'avatar' with {'title': argument.Author.username, 'alt': argument.Author.username, 'class': 'img-circle  pull-left'} %}
                         </a>
                     {% else %}
                         <a class="pull-left" href="{{ path('capco_user_profile_show_all', {'slug': argument.Author.slug}) }}">

@@ -1,9 +1,10 @@
 <div class="col-xs-12  col-sm-4  col-md-3">
     <div class="block--bordered">
         <div class="media  box">
-            {% if app.user.Media %}
+            {% set avatar = app.user.Media|capco_default_avatar %}
+            {% if avatar != null %}
                 <a class="pull-left" href="{{ path('capco_user_profile_show_all', {'slug': app.user.slug}) }}">
-                    {% thumbnail app.user.Media, 'avatar' with {'title': app.user.username, 'alt': app.user.username, 'class': 'media-object img-circle'} %}
+                    {% thumbnail avatar, 'avatar' with {'title': app.user.username, 'alt': app.user.username, 'class': 'media-object img-circle'} %}
                 </a>
             {% else %}
                 <a class="pull-left" href="{{ path('capco_user_profile_show_all', {'slug': app.user.slug}) }}">

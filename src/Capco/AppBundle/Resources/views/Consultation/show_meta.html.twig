@@ -10,8 +10,6 @@
         </a>
     {% elseif consultation.video is null and consultation.Image %}
         {% thumbnail consultation.Image, 'img_video' with {'title': consultation.Image.name, 'alt': consultation.Image.name, 'class': 'img-responsive  center-block'} %}
-    {% else %}
-        <div class="bg--default  bg--consultation"></div>
     {% endif %}
 
     <div class="box">
