@@ -92,12 +92,23 @@
 .consultation__empty-block {
   color: $dark-gray;
   font-weight: bold;
-  padding: 50px 15px;
+  padding: 30px 15px;
   @media (max-width: $screen-xs-max) {
     padding: 35px 15px;
   }
   .icon {
     font-size: 80px;
+    margin-bottom: 0;
+  }
+}
+
+.opinion-type__empty-block {
+  border-top: 1px solid $border;
+  color: $dark-gray;
+  font-weight: bold;
+  padding: 15px 15px;
+  .icon {
+    font-size: 40px;
     margin-bottom: 0;
   }
 }
