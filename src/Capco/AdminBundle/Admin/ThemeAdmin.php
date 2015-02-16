@@ -17,6 +17,7 @@ class ThemeAdmin extends Admin
         '_sort_by' => 'title'
     );
 
+    
     /**
      * @param DatagridMapper $datagridMapper
      */
@@ -127,12 +128,6 @@ class ThemeAdmin extends Admin
                 'translation_domain' => 'CapcoAppBundle',
                 'required' => false,
                 'empty_value' => 'admin.fields.theme.no_status',
-            ))
-            ->add('Consultations', null, array(
-                'label' => 'admin.fields.theme.consultations',
-            ))
-            ->add('Ideas', null, array(
-                'label' => 'admin.fields.theme.ideas',
             ))
             ->add('Media', 'sonata_media_type', array(
                 'provider' => 'sonata.media.provider.image',
