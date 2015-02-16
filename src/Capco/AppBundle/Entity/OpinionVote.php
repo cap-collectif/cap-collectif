@@ -84,15 +84,15 @@ class OpinionVote
      * @var
      *
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Opinion", inversedBy="Votes", cascade={"persist"})
-     * @ORM\JoinColumn(name="opinion_id", referencedColumnName="id")
+     * @ORM\JoinColumn(name="opinion_id", referencedColumnName="id", onDelete="CASCADE")
      */
     private $opinion;
 
     /**
      * @var
      *
-     * @ORM\ManyToOne(targetEntity="Capco\UserBundle\Entity\User")
-     * @ORM\JoinColumn(name="voter_id", referencedColumnName="id")
+     * @ORM\ManyToOne(targetEntity="Capco\UserBundle\Entity\User", cascade={"persist"})
+     * @ORM\JoinColumn(name="voter_id", referencedColumnName="id", onDelete="CASCADE")
      */
     private $Voter;
 

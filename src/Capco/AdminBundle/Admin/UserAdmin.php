@@ -321,4 +321,13 @@ class UserAdmin extends BaseAdmin
         $user->setIsTermsAccepted(true);
     }
 
+    public function getTemplate($name)
+    {
+        if ($name == 'delete') {
+            return 'CapcoAdminBundle:User:delete.html.twig';
+        }
+        return parent::getTemplate($name);
+    }
+
+
 }

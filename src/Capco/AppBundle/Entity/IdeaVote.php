@@ -41,7 +41,7 @@ class IdeaVote
      * @var
      *
      * @ORM\ManyToOne(targetEntity="Capco\UserBundle\Entity\User")
-     * @ORM\JoinColumn(name="voter_id", referencedColumnName="id")
+     * @ORM\JoinColumn(name="voter_id", referencedColumnName="id", onDelete="CASCADE")
      */
     private $Voter;
 

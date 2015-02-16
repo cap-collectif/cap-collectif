@@ -328,3 +328,7 @@ media:
 form:
   label_enabled: Actif
   label_cdn_is_flushable: À rafraîchir sur le CDN
+
+user:
+  delete:
+    warning_message: Attention, si vous supprimez cet utilisateur, tous ses contenus seront également supprimés.

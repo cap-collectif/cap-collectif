@@ -1,0 +1,31 @@
+{% extends 'SonataAdminBundle:CRUD:delete.html.twig' %}
+
+{% block content %}
+    <div class="sonata-ba-delete">
+
+        <div class="box box-danger">
+            <div class="box-header">
+                <h3 class="box-title">{{ 'title_delete'|trans({}, 'SonataAdminBundle') }}</h3>
+            </div>
+            <div class="box-body">
+                {{ 'message_delete_confirmation'|trans({'%object%': admin.toString(object)}, 'SonataAdminBundle') }}
+                <p>{{ 'user.delete.warning_message'|trans({}, 'SonataAdminBundle') }}</p>
+            </div>
+            <div class="box-footer clearfix">
+                <form method="POST" action="{{ admin.generateObjectUrl('delete', object) }}">
+                    <input type="hidden" name="_method" value="DELETE">
+                    <input type="hidden" name="_sonata_csrf_token" value="{{ csrf_token }}">
+
+                    <button type="submit" class="btn btn-danger"><i class="glyphicon glyphicon-trash"></i> {{ 'btn_delete'|trans({}, 'SonataAdminBundle') }}</button>
+                    {% if admin.hasRoute('edit') and admin.isGranted('EDIT', object) %}
+                        {{ 'delete_or'|trans({}, 'SonataAdminBundle') }}
+
+                        <a class="btn btn-success" href="{{ admin.generateObjectUrl('edit', object) }}">
+                            <i class="glyphicon glyphicon-edit"></i>
+                            {{ 'link_action_edit'|trans({}, 'SonataAdminBundle') }}</a>
+                    {% endif %}
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}
