@@ -23,10 +23,15 @@ class ReinitDemoCommand extends ContainerAwareCommand
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         if (!$input->getOption('force')) {
-            // @TODO : WHY? Seriously... I want to know why I have to add a --force in my command.
+            $output->writeln('This command will add some demo data in your project, if you\'re sure that you want those data, go ahead and add --force');
             $output->writeln('Please set the --force option to run this command');
+
             return;
         }
+
+        /*
+
+        NO. JUST NO.
 
         try {
             $this->dropDatabase($output);
@@ -34,10 +39,11 @@ class ReinitDemoCommand extends ContainerAwareCommand
             $output->writeln('<error>Database could not be deleted - maybe it didn\'t exist?</error>');
         }
 
-        // NO.
-        //$this->createDatabase($output);
-        //$this->createSchema($output);
+        $this->createDatabase($output);
+        $this->createSchema($output);
+
         // This shouldn't be here.
+        //*/
         $this->loadFixtures($output);
         $this->loadToggles($output);
 
