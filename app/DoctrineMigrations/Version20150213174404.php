@@ -47,7 +47,9 @@ class Version20150213174404 extends AbstractMigration implements ContainerAwareI
 
         if (null == $themeMI) {
             $header = $em->getRepository('CapcoAppBundle:Menu')->findOneByType(1);
-            if (null != $header) {
+
+            // If we havn't a header yet, we want to get one
+            if (null === $header) {
                 $header = new Menu();
                 $header->setType(1);
                 $em->persist($header);
