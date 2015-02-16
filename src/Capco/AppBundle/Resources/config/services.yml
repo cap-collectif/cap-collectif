@@ -19,6 +19,7 @@ parameters:
     capco.twig.default_avatar.class: Capco\AppBundle\Twig\DefaultAvatarExtension
     capco.step.resolver.class: Capco\AppBundle\Manager\StepResolver
     capco.twig.steps_links.class: Capco\AppBundle\Twig\StepsLinksExtension
+    capco.block.service.share_button.class: Capco\AppBundle\Block\ShareButtonBlockService
 
 services:
     capco.site_parameter.repository:
@@ -148,3 +149,9 @@ services:
         arguments: [@capco.step.resolver]
         tags:
             - { name: twig.extension }
+
+    capco.block.service.share_button:
+        class:     %capco.block.service.share_button.class%
+        arguments: [capco.block.service.share_button, @templating]
+        tags:
+            - { name: sonata.block }

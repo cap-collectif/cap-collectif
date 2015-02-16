@@ -6,15 +6,12 @@
         <div class="pull-left">
             <h3 class="consultation__title__title  h3">{{ consultation.title }}</h3>
         </div>
-        {#<div class="dropdown  pull-right  dropdown--social">#}
-            {#<button class="btn  btn-default" type="button" data-toggle="dropdown"><i class="cap cap-link"></i> Partager <span class="caret"></span></button>#}
-            {#<ul class="dropdown-menu" role="menu">#}
-                {#<li><a href="#"><i class="cap cap-facebook"></i> Facebook</a></li>#}
-                {#<li><a href="#"><i class="cap cap-twitter"></i> Twitter</a></li>#}
-                {#<li><a href="#"><i class="cap cap-gplus"></i> Google+</a></li>#}
-                {#<li><a href="#"><i class="cap cap-mail-2-1"></i> Mail</a></li>#}
-                {#<li><a class="copy-link"><i class="cap cap-link-1"></i> Copier le lien</a></li>#}
-            {#</ul>#}
-        {#</div>#}
+
+        {{ sonata_block_render({'type': 'capco.block.service.share_button'}, {
+            'url': (consultation | capco_first_step_link(true)),
+            'title': consultation.title,
+            'classes': 'pull-right'
+        }) }}
+
     </div>
 </div>

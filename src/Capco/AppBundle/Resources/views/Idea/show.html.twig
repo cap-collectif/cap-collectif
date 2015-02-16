@@ -51,6 +51,11 @@
             {% endif %}
         {% endif %}
 
+        {{ sonata_block_render({'type': 'capco.block.service.share_button'}, {
+            'url': url('app_idea_show', {'slug': idea.slug}),
+            'title': idea.title,
+        }) }}
+
         {% if idea.isTrashed == false %}
             <div class="pull-right no-float-mobile">
 

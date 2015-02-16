@@ -551,3 +551,18 @@ media:
   form:
     unlink: Dissocier
     binary_content: Fichier
+
+share_button:
+  share: Partager
+  facebook: Facebook
+  gplus: Google+
+  twitter: Twitter
+  email: Email
+  link: Copier le lien
+  share_on:
+    facebook: Partager sur Facebook
+    twitter: Partager sur Facebook
+    gplus: Partager sur Google+
+    email: Partager par email
+    link: Partager un lien
+  argument_on: Argument sur la proposition "%opinion%"

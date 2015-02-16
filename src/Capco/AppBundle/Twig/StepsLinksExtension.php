@@ -27,17 +27,17 @@ class StepsLinksExtension extends \Twig_Extension
     {
         return array(
             new \Twig_SimpleFilter('capco_step_link', array($this, 'getStepLink')),
-            new \Twig_SimpleFilter('capco_first_step_link', array($this, 'getFirstStepLink'))
+            new \Twig_SimpleFilter('capco_first_step_link', array($this, 'getFirstStepLink')),
         );
     }
 
-    public function getStepLink($step)
+    public function getStepLink($step, $absolute = false)
     {
-        return $this->resolver->getLink($step);
+        return $this->resolver->getLink($step, $absolute);
     }
 
-    public function getFirstStepLink($consultation)
+    public function getFirstStepLink($consultation, $absolute = false)
     {
-        return $this->resolver->getFirstStepLinkForConsultation($consultation);
+        return $this->resolver->getFirstStepLinkForConsultation($consultation, $absolute);
     }
 }

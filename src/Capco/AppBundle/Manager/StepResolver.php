@@ -16,14 +16,14 @@ class StepResolver
         $this->router = $router;
     }
 
-    public function getLink(Step $step)
+    public function getLink(Step $step, $absolute = false)
     {
         if (null != $step) {
             if ($step->isConsultationStep()) {
-                return $this->router->generate('app_consultation_show', array('slug'=>$step->getConsultation()->getSlug()));
+                return $this->router->generate('app_consultation_show', array('slug'=>$step->getConsultation()->getSlug()), $absolute);
             }
             else if ($step->isOtherStep()) {
-                return $this->router->generate('app_consultation_show_step', array('consultation_slug'=>$step->getConsultation()->getSlug(), 'step_slug'=>$step->getSlug()));
+                return $this->router->generate('app_consultation_show_step', array('consultation_slug'=>$step->getConsultation()->getSlug(), 'step_slug'=>$step->getSlug()), $absolute);
             }
         }
 
@@ -31,9 +31,9 @@ class StepResolver
 
     }
 
-    public function getFirstStepLinkForConsultation(Consultation $consultation)
+    public function getFirstStepLinkForConsultation(Consultation $consultation, $absolute = false)
     {
-        return $this->getLink($consultation->getFirstStep());
+        return $this->getLink($consultation->getFirstStep(), $absolute);
     }
 
 

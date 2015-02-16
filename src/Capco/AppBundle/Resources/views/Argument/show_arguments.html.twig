@@ -54,6 +54,12 @@
                     {% endif %}
                     <span class="opinion__votes-nb">{{ argument.VoteCount }}</span>
 
+                    {{ sonata_block_render({'type': 'capco.block.service.share_button'}, {
+                        'url': (url('app_consultation_show_opinion', {'consultationSlug': consultation.slug, 'opinionTypeSlug': opinionType.slug, 'opinionSlug': opinion.slug}) ~ '#arg-' ~ argument.id),
+                        'title': ('share_button.argument_on'|trans({'%opinion%': opinion.title}, 'CapcoAppBundle')),
+                        'btn_classes': 'btn-xs  btn-dark-gray  btn--outline',
+                    }) }}
+
                     {%  if argument.canContribute %}
                         {% if(userReportingArgument is empty) %}
                         <a href="{{ path('app_report_argument' ,{'consultationSlug': consultation.slug, 'opinionTypeSlug': opinionType.slug, 'opinionSlug': opinion.slug, 'argumentId': argument.id } ) }}" class="btn btn-xs btn-dark-gray  btn--outline"><i class="cap cap-flag-1"></i> {{ 'argument.report.submit'|trans({}, 'CapcoAppBundle') }}</a>

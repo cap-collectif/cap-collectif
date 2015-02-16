@@ -1,0 +1,47 @@
+{% block block %}
+    <div class="dropdown  dropdown--social  {{ classes }}">
+        <button class="btn  btn-default {{ btn_classes }}" type="button" data-toggle="dropdown"><i class="cap cap-link"></i> {{ 'share_button.share' | trans({}, 'CapcoAppBundle') }} <span class="caret"></span></button>
+        <ul class="dropdown-menu" role="menu">
+            <li>
+                <a href="http://www.facebook.com/sharer.php?u={{ url|url_encode }}&t={{ title }}" onclick="window.open('http://www.facebook.com/sharer.php?u={{ url|url_encode }}&t={{ title }}', 'Facebook', config='height=500, width=700, toolbar=no, menubar=no'); return false" title="{{ 'share_button.share_on.facebook' | trans({}, 'CapcoAppBundle') }}">
+                    <i class="cap cap-facebook"></i> {{ 'share_button.facebook' | trans({}, 'CapcoAppBundle') }}
+                </a>
+            </li>
+            <li>
+                <a href="http://twitter.com/share?url={{ url|url_encode }}&text={{ title }}" onclick="window.open('http://twitter.com/share?url={{ url|url_encode }}&text={{ title }}', 'Twitter', config='height=500, width=700, toolbar=no, menubar=no'); return false" title="{{ 'share_button.share_on.twitter' | trans({}, 'CapcoAppBundle') }}">
+                    <i class="cap cap-twitter"></i> {{ 'share_button.twitter' | trans({}, 'CapcoAppBundle') }}
+                </a>
+            </li>
+            <li>
+                <a href="https://plus.google.com/share?url={{ url|url_encode }}&title={{ title }}" onclick="javascript:window.open(this.href,'', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;" title="{{ 'share_button.share_on.gplus' | trans({}, 'CapcoAppBundle') }}">
+                    <i class="cap cap-gplus"></i> {{ 'share_button.gplus' | trans({}, 'CapcoAppBundle') }}
+                </a>
+            </li>
+            <li>
+                <a href="mailto:?subject={{ title }}&body={{ url }}" title="{{ 'share_button.share_on.email' | trans({}, 'CapcoAppBundle') }}">
+                    <i class="cap cap-mail-2-1"></i> {{ 'share_button.email' | trans({}, 'CapcoAppBundle') }}
+                </a>
+            </li>
+            <li>
+                <button class="btn-link" data-toggle="modal" data-target="#shareLink{{ block.id }}">
+                    <i class="cap cap-link-1"></i> {{ 'share_button.link' | trans({}, 'CapcoAppBundle') }}
+                </button>
+            </li>
+        </ul>
+    </div>
+
+    <div class="modal fade  modal--social" id="shareLink{{ block.id }}" tabindex="-1" role="dialog" aria-labelledby="{{ title }}" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">{{ 'share_button.share_on.link' | trans({}, 'CapcoAppBundle') }}</h4>
+                </div>
+                <div class="modal-body">
+                    <p class="excerpt">{{ title }}</p>
+                    <textarea id="shareLinkInput{{ block.id }}" readonly rows="3">{{ url }}</textarea>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

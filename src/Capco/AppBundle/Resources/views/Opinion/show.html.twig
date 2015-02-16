@@ -106,12 +106,22 @@
                                 <div class="pull-right  opinion__action-buttons">
 
                                     <div class="opinion__vote-group">
+                                        {{ sonata_block_render({'type': 'capco.block.service.share_button'}, {
+                                            'url': (url('app_consultation_show_opinion', {'consultationSlug': consultation.slug, 'opinionTypeSlug': opinionType.slug, 'opinionSlug': opinion.slug}) ~ '#details'),
+                                            'title': opinion.title,
+                                            'btn_classes': 'btn-dark-gray  btn--outline',
+                                        }) }}
+                                    </div>
+
+                                    <div class="opinion__vote-group">
                                         {% if(userReportingOpinion == false) %}
                                         <a href="{{ path('app_report_opinion' ,{'consultationSlug': consultation.slug, 'opinionTypeSlug': opinionType.slug, 'opinionSlug': opinion.slug } ) }}" class="btn  btn-dark-gray  btn--outline"><i class="cap cap-flag-1"></i> {{ 'opinion.report.submit'|trans({}, 'CapcoAppBundle') }}</a>
                                         {% else %}
                                         <button disabled="disabled" class="btn  btn-dark-gray"><i class="cap cap-flag-1"></i> {{ 'opinion.report.reported'|trans({}, 'CapcoAppBundle') }}</button>
                                         {% endif %}
+                                    </div>
 
+                                    <div class="opinion__vote-group">
                                         {% if app.user is not null and app.user == opinion.Author %}
                                         <a href="{{ path('app_consultation_edit_opinion' ,{'consultationSlug': consultation.slug, 'opinionTypeSlug': opinion.opinionType.slug, 'opinionSlug': opinion.slug } ) }}" class="btn  btn-dark-gray  btn--outline"><i class="cap cap-pencil-1"></i> {{ 'opinion.update.button'|trans({}, 'CapcoAppBundle') }}</a>
                                         {% endif %}
