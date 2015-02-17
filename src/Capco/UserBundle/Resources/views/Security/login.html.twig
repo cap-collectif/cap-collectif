@@ -57,8 +57,10 @@
                         </form>
                     {% endblock %}
 
-                    <hr>
-                    <a href="{{ path('fos_user_registration_register') }}" class="btn  btn-light-gray  btn-block">{{ 'user.register.submit' | trans({}, 'CapcoAppBundle') }}</a>
+                    {% if is_feature_enabled('registration') %}
+                        <hr>
+                        <a href="{{ path('fos_user_registration_register') }}" class="btn  btn-light-gray  btn-block">{{ 'user.register.submit' | trans({}, 'CapcoAppBundle') }}</a>
+                    {% endif %}
 
                 </div>
             </div>
