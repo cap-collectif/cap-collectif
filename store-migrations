@@ -13,3 +13,4 @@ app/console doctrine:migrations:version 20150212164448 --add --no-interaction
 app/console doctrine:migrations:version 20150216170544 --add --no-interaction
 app/console doctrine:migrations:version 20150213174404 --add --no-interaction
 app/console doctrine:migrations:version 20150218164337 --add --no-interaction
+app/console doctrine:migrations:version 20150218103103 --add --no-interaction

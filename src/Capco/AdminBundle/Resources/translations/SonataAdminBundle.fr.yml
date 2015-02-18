@@ -327,6 +327,8 @@ capco:
     ideas: Module boîte à idées
     themes: Module thèmes
     registration: Inscription
+    login_facebook: Inscription/Connexion avec Facebook
+    login_gplus: Inscription/Connexion avec Google+
 
 action_enable: Activer
 action_disable: Désactiver

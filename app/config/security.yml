@@ -55,7 +55,6 @@ security:
                 resource_owners:
                     facebook: "/login/check-facebook"
                     google: "/login/check-google"
-                    twitter: "/login/check-twitter"
                 login_path: /login
 #                default_target_path: /profile
 

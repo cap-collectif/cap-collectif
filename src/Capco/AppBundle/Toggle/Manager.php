@@ -16,7 +16,9 @@ class Manager
         'newsletter',
         'ideas',
         'themes',
-        'registration'
+        'registration',
+        'login_facebook',
+        'login_gplus',
     );
 
     public function __construct(ToggleManager $toggleManager, ContextFactory $contextFactory)
