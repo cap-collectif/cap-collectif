@@ -7,10 +7,11 @@ app/console doctrine:migrations:version 20150206184935 --add --no-interaction
 app/console doctrine:migrations:version 20150209142437 --add --no-interaction
 app/console doctrine:migrations:version 20150210172512 --add --no-interaction
 app/console doctrine:migrations:version 20150206171059 --add --no-interaction
-app/console doctrine:migrations:version 20150211121254  --add --no-interaction
+app/console doctrine:migrations:version 20150211121254 --add --no-interaction
 app/console doctrine:migrations:version 20150211123011 --add --no-interaction
 app/console doctrine:migrations:version 20150212164448 --add --no-interaction
 app/console doctrine:migrations:version 20150216170544 --add --no-interaction
 app/console doctrine:migrations:version 20150213174404 --add --no-interaction
 app/console doctrine:migrations:version 20150218164337 --add --no-interaction
 app/console doctrine:migrations:version 20150218103103 --add --no-interaction
+app/console doctrine:migrations:version 20150217160940 --add --no-interaction
