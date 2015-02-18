@@ -12,14 +12,14 @@
                 </a>
             {% endif %}
             <div class="media-body">
-                <h4 class="media-heading h4" id="source{{ source.id }}"><span class="label label-info">{{ source.Category.title }}</span>
+                <h2 class="media-heading h4" id="source{{ source.id }}"><span class="label label-info">{{ source.Category.title }}</span>
                     {% if source.Media %}
                         <a href="{{ path('sonata_media_download', {'id': source.Media|sonata_urlsafeid }) }}">{{ source.title }}</a>
                     {% endif %}
                     {% if source.link %}
-                        <a href="{{ source.link }}" target="_blank">{{ source.title }}</a>
+                        <a href="{{ source.link }}" class="external-link">{{ source.title }}</a>
                     {% endif %}
-                </h4>
+                </h2>
                 <p class="excerpt">
                     <strong>{{ 'argument.trashed.linked_proposition' | trans({}, 'CapcoAppBundle') }} </strong><a href="{{ path('app_consultation_show_opinion', {'consultationSlug': source.Opinion.consultation.slug, 'opinionTypeSlug': source.Opinion.OpinionType.slug, 'opinionSlug': source.Opinion.slug}) }}">{{ source.Opinion.title }}</a><br/>
                     {% if source.isTrashed %}<span class="label label-default" style="position: static">{{ 'opinion.show.trashed.label'|trans({}, 'CapcoAppBundle') }}</span> {% endif %} {{ source.body }}

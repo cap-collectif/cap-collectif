@@ -15,7 +15,7 @@
             <span class="excerpt h5">{{ idea.createdAt | localizeddate('long', 'none') }}</span>
         </div>
         <div class="media__content">
-            <h4 class="h4"><a href="{{ path('app_idea_show', {'slug': idea.slug}) }}">{{ idea.title }}</a></h4>
+            <h2 class="h4"><a href="{{ path('app_idea_show', {'slug': idea.slug}) }}">{{ idea.title }}</a></h2>
             <span class="excerpt  h5">
                 {% set voteCount = idea.voteCount %}
                 {% transchoice voteCount with {'%count%': voteCount} from 'CapcoAppBundle' %}

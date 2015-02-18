@@ -19,6 +19,7 @@ class ArgumentType extends AbstractType
                 'required' => true,
                 'label' => 'argument.form.body',
                 'translation_domain' => 'CapcoAppBundle',
+                'attr' => array('rows' => 7)
             ))
         ;
     }

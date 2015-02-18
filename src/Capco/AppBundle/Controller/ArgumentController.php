@@ -59,7 +59,7 @@ class ArgumentController extends Controller
     }
 
     /**
-     * @Route("/consultation/{consultationSlug}/opinions/{opinionTypeSlug}/{opinionSlug}/arguments/{argumentId}/vote", name="app_consultation_vote_argument")
+     * @Route("/secure/consultation/{consultationSlug}/opinions/{opinionTypeSlug}/{opinionSlug}/arguments/{argumentId}/vote", name="app_consultation_vote_argument")
      *
      * @param $request
      * @param $consultationSlug

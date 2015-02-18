@@ -1,4 +1,10 @@
-{% extends '@CapcoApp/base.html.twig' %}
+{% extends '@CapcoApp/Idea/index.html.twig' %}
+
+{% block canonical_link %}{{ url('app_idea_show', {'slug': idea.slug}) }}{% endblock %}
+
+{% block title %}
+    {{ parent() }} - {{ idea.title }}
+{% endblock %}
 
 {% block jumbotron %}
 {% endblock %}
@@ -60,7 +66,7 @@
             <div class="pull-right no-float-mobile">
 
                 {% if(userReportingIdea == false) %}
-                    <a href="{{ path('app_report_idea' ,{'idea_id': idea.id } ) }}" class="btn btn-dark-gray  btn--outline"><i class="cap cap-flag-1"></i> {{ 'idea.report.submit'|trans({}, 'CapcoAppBundle') }}</a>
+                    <a href="{{ path('app_report_idea' ,{'idea_slug': idea.slug } ) }}" class="btn btn-dark-gray  btn--outline"><i class="cap cap-flag-1"></i> {{ 'idea.report.submit'|trans({}, 'CapcoAppBundle') }}</a>
                 {% else %}
                     <button disabled="disabled" class="btn btn-dark-gray"><i class="cap cap-flag-1"></i> {{ 'idea.report.reported'|trans({}, 'CapcoAppBundle') }}</button>
                 {% endif %}

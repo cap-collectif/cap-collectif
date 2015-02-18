@@ -1,6 +1,6 @@
 <div class="col-lg-3  col-md-4  col-sm-6  col-xs-12">
     <div class="theme  block">
-        <h3 class="theme__title"><a href="{{ path('app_theme_show', {'slug': theme.slug}) }}">{{ theme.title }}</a></h3>
+        <h2 class="theme__title  h3"><a href="{{ path('app_theme_show', {'slug': theme.slug}) }}">{{ theme.title }}</a></h2>
         {% set nbConsultations = theme.countEnabledConsultations() %}
         {% set nbIdeas = theme.countEnabledIdeas() %}
         <p class="excerpt">

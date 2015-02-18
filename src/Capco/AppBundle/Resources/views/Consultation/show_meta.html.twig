@@ -14,7 +14,7 @@
 
     <div class="box">
         {% if null != consultation.body %}
-            <h4 class="h4">{{ 'consultation.show.meta.intro.title'|trans({}, 'CapcoAppBundle') }}</h4>
+            <h2 class="h4">{{ 'consultation.show.meta.intro.title'|trans({}, 'CapcoAppBundle') }}</h2>
             <div class="more"  style="max-height: 115px; overflow: hidden; width: 100%">{{ consultation.body | raw }}</div>
         {% endif %}
         {%  if currentStep is not defined %}
@@ -22,7 +22,7 @@
         {% endif %}
         {{ render(controller('CapcoAppBundle:Step:showAllInNav', {'consultation': consultation, 'currentStep': currentStep})) }}
 
-        <h4 class="h4">{{ 'consultation.show.meta.info.title'|trans({}, 'CapcoAppBundle') }}</h4>
+        <h2 class="h4">{{ 'consultation.show.meta.info.title'|trans({}, 'CapcoAppBundle') }}</h2>
         {% if is_feature_enabled('themes') %}
             {% if consultation.Themes | length > 0 %}
             <p class="excerpt">{{ 'consultation.show.meta.info.themes'|trans({}, 'CapcoAppBundle') }}</p>

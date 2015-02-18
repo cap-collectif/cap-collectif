@@ -224,7 +224,7 @@ class SourceController extends Controller
     }
 
     /**
-     * @Route("/consultation/{consultationSlug}/opinions/{opinionTypeSlug}/{opinionSlug}/sources/{sourceSlug}/vote", name="app_consultation_vote_source")
+     * @Route("/secure/consultation/{consultationSlug}/opinions/{opinionTypeSlug}/{opinionSlug}/sources/{sourceSlug}/vote", name="app_consultation_vote_source")
      * @param consultationSlug
      * @param $opinionTypeSlug
      * @param $opinionSlug

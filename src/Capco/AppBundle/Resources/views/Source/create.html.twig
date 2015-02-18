@@ -1,5 +1,11 @@
 {% extends '@CapcoApp/base.html.twig' %}
 
+{% block canonical_link %}{{ url('app_new_source', {'consultationSlug': consultation.slug, 'opinionTypeSlug': opinionType.slug, 'opinionSlug': opinion.slug}) }}{% endblock %}
+
+{% block title %}
+    {{ parent() }} - {{ opinion.title }} - {{ 'source.create.title'|trans({}, 'CapcoAppBundle') }}
+{% endblock %}
+
 {% block jumbotron %}
 {% endblock %}
 
@@ -9,7 +15,7 @@
             <div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2">
                 <div class="dialog  dialog--light-gray  block--bordered">
                     <div class="dialog__header  box">
-                        <h4 class="h4  dialog__title">{{ 'source.create.title'|trans({}, 'CapcoAppBundle') }}</h4>
+                        <h1 class="h4  dialog__title">{{ 'source.create.title'|trans({}, 'CapcoAppBundle') }}</h1>
                     </div>
                     <div class="dialog__excerpt  excerpt  box">
                         <p>{{ 'source.create.text'|trans({}, 'CapcoAppBundle') }}</p>

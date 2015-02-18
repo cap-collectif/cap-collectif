@@ -1,7 +1,12 @@
 {% set page_class = "profile-page" %}
 {% extends "CapcoUserBundle::layout.html.twig" %}
 
-{% block title %} {{ 'user.profile.show.title'|trans({'%name%': user.username }, 'CapcoAppBundle') }} - {{ parent() }} {% endblock %}
+{% block canonical_link %}{{ url('capco_user_profile_show_opinions', {'slug': user.slug}) }}{% endblock %}
+
+{% block title %}
+    {{ parent() }} - {{ 'user.profile.show.title'|trans({'%name%': user.username }, 'CapcoAppBundle') }}
+{% endblock %}
+
 {% block jumbotron %}{% endblock %}
 
 {% block fos_user_content %}

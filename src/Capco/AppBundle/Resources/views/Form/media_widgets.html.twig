@@ -9,7 +9,7 @@
                     <p><strong>{{ value.name }}</strong></p>
                 {% endif %}
             {% else %}
-                <img src="{{ asset('bundles/sonatamedia/grey.png') }}" style="width: 85px; height: 85px; display: block; margin-bottom: 5px;"/>
+                <img src="{{ asset('bundles/sonatamedia/grey.png') }}" alt="placeholder" style="width: 85px; height: 85px; display: block; margin-bottom: 5px;"/>
                 <p><strong>{{ 'no_linked_media'|trans({}, 'SonataMediaBundle') }}</strong></p>
             {% endif %}
         </div>

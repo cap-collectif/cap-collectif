@@ -3,8 +3,8 @@
     <ul class="social__icons">
         {% for socialNetwork in socialNetworks %}
             <li>
-                <a href="{{ socialNetwork.link }}" target="_blank">
-                    {% thumbnail socialNetwork.Media, 'socialIcon' with {'title': socialNetwork.title, 'alt': socialNetwork.title, 'class': 'social__icon'} %}
+                <a href="{{ socialNetwork.link }}" class="external-link">
+                    {% thumbnail socialNetwork.Media, 'socialIcon' with {'title': socialNetwork.title, 'alt': '', 'class': 'social__icon'} %}
                     {{ socialNetwork.title }}
                 </a>
             </li>

@@ -1,11 +1,13 @@
 {% extends '@CapcoApp/Consultation/show.html.twig' %}
 
+{% block canonical_link %}{{ url('app_consultation_show_trashed', {'consultationSlug': consultation.slug}) }}{% endblock %}
+
 {% block opinions_list %}
     {% set trashedNb = (arguments|length + opinions|length + sources|length) %}
     <div class="block  block--bordered">
         <div class="opinion  opinion--gray opinion--default">
             <div class="opinion__header  opinion__header--mobile-centered">
-                <h4 class="pull-left  h4  opinion__header__title">{{ 'consultation.show.trashed.title'|trans({}, 'CapcoAppBundle') }} <span class="badge">{{ trashedNb }}</span></h4>
+                <h2 class="pull-left  h4  opinion__header__title">{{ 'consultation.show.trashed.title'|trans({}, 'CapcoAppBundle') }} <span class="badge">{{ trashedNb }}</span></h2>
                 <div class="pull-right  opinion__header__filter">
                 </div>
             </div>

@@ -1,5 +1,10 @@
 {% extends "CapcoUserBundle::layout.html.twig" %}
-{% block title %} {{ 'user.register.title'|trans({}, 'CapcoAppBundle') }} {{ parent() }} {% endblock %}
+
+{% block canonical_link %}{{ url('capco_user_register') }}{% endblock %}
+
+{% block title %}
+    {{ parent() }} - {{ 'user.register.title'|trans({}, 'CapcoAppBundle') }}
+{% endblock %}
 
 {% block jumbotron %}
     <div class="jumbotron  jumbotron--custom  jumbotron--bg-1  text-center">

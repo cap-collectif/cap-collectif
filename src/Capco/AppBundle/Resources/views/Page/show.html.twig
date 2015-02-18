@@ -1,5 +1,11 @@
 {% extends "CapcoAppBundle::base.html.twig" %}
 
+{% block canonical_link %}{{ url('app_page_show', {'slug': page.slug}) }}{% endblock %}
+
+{% block title %}
+    {{ parent() }} - {{ page.title }}
+{% endblock %}
+
 {% block jumbotron %}
     <div class="jumbotron  jumbotron--custom  jumbotron--bg-1  text-center">
         <div class="container">

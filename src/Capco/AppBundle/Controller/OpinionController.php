@@ -26,7 +26,7 @@ class OpinionController extends Controller
 {
 
     /**
-     * @Route("/consultation/{consultationSlug}/opinions/{opinionTypeSlug}/{opinionSlug}/remove/{opinionVote}", name="app_consultation_cancel_vote")
+     * @Route("/secure/consultation/{consultationSlug}/opinions/{opinionTypeSlug}/{opinionSlug}/remove/{opinionVote}", name="app_consultation_cancel_vote")
      * @param $request
      * @param $consultationSlug
      * @param $opinionTypeSlug

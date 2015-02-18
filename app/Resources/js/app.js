@@ -83,13 +83,21 @@ App.module = function ($) {
         });
     };
 
+    var externalLinks = function() {
+        $('.external-link').on('click', function(e){
+            window.open($(this).attr('href'));
+            return false;
+        });
+    };
+
     var AppPublic = {
         equalheight: equalheight,
         rezised: rezised,
         ckEditor: ckEditor,
         pieChart: pieChart,
         checkButton: checkButton,
-        video: video
+        video: video,
+        externalLinks: externalLinks,
     };
 
     return AppPublic;

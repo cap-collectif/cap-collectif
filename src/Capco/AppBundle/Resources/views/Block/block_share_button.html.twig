@@ -35,11 +35,11 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title">{{ 'share_button.share_on.link' | trans({}, 'CapcoAppBundle') }}</h4>
+                    <p class="modal-title h4">{{ 'share_button.share_on.link' | trans({}, 'CapcoAppBundle') }}</p>
                 </div>
                 <div class="modal-body">
                     <p class="excerpt">{{ title }}</p>
-                    <textarea id="shareLinkInput{{ block.id }}" readonly rows="3">{{ url }}</textarea>
+                    <textarea id="shareLinkInput{{ block.id }}" title="{{ 'share_button.share_on.link' | trans({}, 'CapcoAppBundle') }}" readonly rows="3">{{ url }}</textarea>
                 </div>
             </div>
         </div>

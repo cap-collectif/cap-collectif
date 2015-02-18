@@ -1,7 +1,9 @@
-{% extends '@CapcoApp/base.html.twig' %}
-{% block stylesheets %}
-    {{ parent() }}
-    <link href="{{ asset('js/fancybox/jquery.fancybox.css') }}" rel="stylesheet">
+{% extends '@CapcoApp/Consultation/show.html.twig' %}
+
+{% block canonical_link %}{{ url('app_consultation_show_opinion', {'consultationSlug': consultation.slug, 'opinionTypeSlug': opinionType.slug, 'opinionSlug': opinion.slug}) }}{% endblock %}
+
+{% block title %}
+    {{ parent() }} - {{ opinion.title }}
 {% endblock %}
 
 {% block jumbotron %}
@@ -37,7 +39,7 @@
                     <div class="opinion  opinion--{{ opinion.opinionType.color }}  opinion--current">
                         <div class="opinion__header  opinion__header--centered">
                             <a class="neutral-hover  pull-left  h4" href="{% if opinion.isTrashed %}{{ path('app_consultation_show_trashed', {'consultationSlug': consultation.slug,}) }}{% else %}{{ path('app_consultation_show_opinions', {'consultationSlug': consultation.slug, 'opinionTypeSlug': opinionType.slug}) }}{% endif %}"><i class="cap cap-arrow-1"></i><span class="hidden-xs  hidden-sm"> {{ 'opinion.show.back'|trans({}, 'CapcoAppBundle') }}</span></a>
-                            <p class="h4  opinion__header__title">{{ opinion.opinionType.slug|capitalize }} </p>
+                            <h2 class="h4  opinion__header__title">{{ opinion.opinionType.slug|capitalize }} </h2>
                         </div>
                         <div class="opinion__body  box">
                             {%  set avatar = opinion.Author.Media|capco_default_avatar %}
@@ -52,7 +54,7 @@
                             {% endif %}
                             <div class="opinion__data">
                                 <p class="opinion__user  h5"><a href="{{ path('capco_user_profile_show_all', {'slug': opinion.Author.slug}) }}">{{ opinion.Author.username }}</a> <span class="pull-right  excerpt">{{ opinion.createdAt | localizeddate('medium', 'none', app.request.locale) }}</span></p>
-                                <p class="opinion__title">{% if opinion.isTrashed %}<span class="label label-default" style="position: static">{{ 'opinion.show.trashed.label'|trans({}, 'CapcoAppBundle') }}</span> {% endif %}{{ opinion.title }}</p>
+                                <h3 class="opinion__title">{% if opinion.isTrashed %}<span class="label label-default" style="position: static">{{ 'opinion.show.trashed.label'|trans({}, 'CapcoAppBundle') }}</span> {% endif %}{{ opinion.title }}</h3>
                                 <p class="opinion__votes  excerpt h5">
                                     {% transchoice nbVotes with {'%count%': nbVotes} from 'CapcoAppBundle' %}
                                     consultation.show.votes
@@ -130,6 +132,7 @@
 
                             {% endif %}
                         </div> <!-- .opinion__buttons -->
+
                         <div class="panel-group" id="accordion">
                             {% set tokenSource = csrf_token('source_vote') %}
                             <div class="panel panel-default">
@@ -139,7 +142,7 @@
                                         {% if sources|length > 0 %} <i class="cap cap-arrow-67 pull-right"></i>{% endif %}
                                     </h4>
                                     {% if opinion.canContribute %}
-                                        <p class="sources__btn"><a href="{{ path('app_new_source' ,{'consultationSlug': consultation.slug, 'opinionTypeSlug': opinionType.slug, 'opinionSlug': opinion.slug} ) }}" class="btn-sm btn btn-default"><i class="cap cap-add-1"></i> {{ 'source.create.button'|trans({}, 'CapcoAppBundle') }}</a></p>
+                                        <p class="sources__btn"><a id="addSourceLink" href="{{ path('app_new_source' ,{'consultationSlug': consultation.slug, 'opinionTypeSlug': opinionType.slug, 'opinionSlug': opinion.slug} ) }}" class="btn-sm btn btn-default"><i class="cap cap-add-1"></i> {{ 'source.create.button'|trans({}, 'CapcoAppBundle') }}</a></p>
                                     {% endif %}
                                 </div>
                                 {% if sources|length > 0 %}
@@ -163,7 +166,7 @@
                                                             <a href="{{ path('sonata_media_download', {'id': source.Media|sonata_urlsafeid }) }}">{{ source.title }}</a>
                                                         {% endif %}
                                                         {% if source.link %}
-                                                            <a href="{{ source.link }}" target="_blank">{{ source.title }}</a>
+                                                            <a rel="nofollow" href="{{ source.link }}" class="external-link">{{ source.title }}</a>
                                                         {% endif %}
                                                     </h4>
                                                     <p class="excerpt">
@@ -240,6 +243,11 @@
             collapsedHeight: 115,
             moreLink: '<a href="#">{{ 'consultation.show.meta.intro.read_more'|trans({}, 'CapcoAppBundle') }}</a>', //BazingaJsTranslationBundle
             lessLink: '<a href="#">{{ 'consultation.show.meta.intro.read_less'|trans({}, 'CapcoAppBundle') }}</a>'
+        });
+    </script>
+    <script type="text/javascript">
+        $("#addSourceLink").on('click', function (e) {
+            e.stopPropagation();
         });
     </script>
 {% endblock %}

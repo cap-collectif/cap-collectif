@@ -1,9 +1,19 @@
 {% extends '@CapcoApp/base.html.twig' %}
 
+{% block canonical_link %}{{ url('app_idea_trashed') }}{% endblock %}
+
+{% set title = capco_site_parameter_value('ideas.trashed.jumbotron.title') %}
+{% block title %}
+    {% if null != title %}
+        {{ parent() }} - {{ title }}
+    {% else %}
+        {{ parent() }} - {{ 'idea.trashed.jumbotron.title'|trans({}, 'CapcoAppBundle') }}
+    {% endif %}
+{% endblock %}
+
 {% block jumbotron %}
     <div class="jumbotron  jumbotron--custom  jumbotron--bg-1 text-center">
         <div class="container">
-            {% set title = capco_site_parameter_value('ideas.trashed.jumbotron.title') %}
             {% if null != title %}
                 <h1>{{ title }}</h1>
             {% else %}

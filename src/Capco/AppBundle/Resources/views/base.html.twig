@@ -4,8 +4,6 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
 
     <link rel="apple-touch-icon" sizes="57x57" href="{{ asset('apple-touch-icon-57x57.png') }}"/>
     <link rel="apple-touch-icon" sizes="114x114" href="{{ asset('apple-touch-icon-114x114.png') }}"/>
@@ -23,6 +21,7 @@
     <link rel="icon" type="image/png" href="{{ asset('favicon-16x16.png') }}" sizes="16x16">
     <link rel="icon" type="image/png" href="{{ asset('favicon-32x32.png') }}" sizes="32x32">
 
+    <link rel="canonical" href="{% block canonical_link %}{{ url('app_homepage') }}{% endblock %}" />
 
     <meta name="msapplication-TileColor" content="#da532c">
     <meta name="msapplication-TileImage" content="{{ asset('mstile-144x144.png') }}">
@@ -73,6 +72,9 @@
 
 {% block javascripts %}
     <script src="{{ asset('js/app.min.js') }}"></script>
+    <script type="text/javascript">
+        App.module.externalLinks();
+    </script>
     {% set client_js = capco_site_parameter_value('global.site.embed_js') %}
     {% if null != client_js %}
         {{ client_js|raw }}

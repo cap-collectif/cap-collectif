@@ -6,11 +6,21 @@
     <link href="{{ asset('js/fancybox/jquery.fancybox.css') }}" rel="stylesheet">
 {% endblock %}
 
+{% block canonical_link %}{{ url('app_homepage') }}{% endblock %}
+
+{% set jumbotron_title = capco_site_parameter_value('homepage.jumbotron.title') %}
+{% block title %}
+    {% if null != jumbotron_title %}
+        {{ parent() }} - {{ jumbotron_title }}
+    {% else %}
+        {{ parent() }}
+    {% endif %}
+{% endblock %}
+
 {% block jumbotron %}
     <div class="jumbotron  jumbotron--custom  jumbotron--bg-1  text-center">
         <div class="header-img">
             <div class="container">
-                {% set jumbotron_title = capco_site_parameter_value('homepage.jumbotron.title') %}
                 {% if null != jumbotron_title %}
                     <h1>{{ jumbotron_title }}</h1>
                 {% endif %}

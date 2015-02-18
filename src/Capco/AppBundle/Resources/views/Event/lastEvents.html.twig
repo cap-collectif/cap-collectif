@@ -1,6 +1,6 @@
 {% if events|length > 0 %}
     <div class="container">
-        <h2 class="h2">Prochains évènements</h2>
+        <h2 class="h2">{{ 'event.last.title'|trans({}, 'CapcoAppBundle') }}</h2>
         <div class="row">
             {% for event in events %}
                 {% include '@CapcoApp/Event/blockEvent.html.twig' %}

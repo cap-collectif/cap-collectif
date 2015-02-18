@@ -1,6 +1,12 @@
 {% set page_class = "contact" %}
 {% extends "CapcoAppBundle::base.html.twig" %}
 
+{% block canonical_link %}{{ url('app_contact') }}{% endblock %}
+
+{% block title %}
+        {{ parent() }} - {{ 'contact.title' | trans({}, 'CapcoAppBundle') }}
+{% endblock %}
+
 {% block jumbotron %}
     <div class="jumbotron  jumbotron--custom  jumbotron--bg-1  text-center">
         <div class="container">
@@ -34,7 +40,7 @@
             </address>
         {% endif %}
 
-        <h4 class="h2">{{ 'contact.form.title' | trans({}, 'CapcoAppBundle') }}</h4>
+        <h2 class="h2">{{ 'contact.form.title' | trans({}, 'CapcoAppBundle') }}</h2>
         <div class="row">
             <div class="col-xs-12 col-md-8">
                 <form method="post">

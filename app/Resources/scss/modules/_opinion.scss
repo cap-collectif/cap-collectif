@@ -134,7 +134,10 @@
     }
 
     .opinion__title {
-      margin-bottom: 5px;
+      color: black;
+      font-size: $font-size-base;
+      margin: 0 0 5px;
+      font-weight: normal;
     }
 
     .opinion__votes {

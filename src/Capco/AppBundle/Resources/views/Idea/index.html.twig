@@ -1,9 +1,24 @@
 {% extends '@CapcoApp/base.html.twig' %}
 
+{% block canonical_link %}{{ url('app_blog') }}{% endblock %}
+
+{% set jumbotron_title = capco_site_parameter_value('ideas.jumbotron.title') %}
+{% block title %}
+    {% if null != jumbotron_title %}
+        {{ parent() }} - {{ jumbotron_title }}
+    {% else %}
+        {{ parent() }} - {{ 'idea.index.page_title'|trans({}, 'CapcoAppBundle') }}
+    {% endif %}
+{% endblock %}
+
 {% block jumbotron %}
     <div class="jumbotron  jumbotron--custom  jumbotron--bg-1 text-center">
         <div class="container">
-            <h1>{{ capco_site_parameter_value('ideas.jumbotron.title')}}</h1>
+            {% if null != jumbotron_title %}
+                <h1>{{ jumbotron_title }}</h1>
+            {% else %}
+                <h1>{{ 'idea.index.page_title'|trans({}, 'CapcoAppBundle') }}</h1>
+            {% endif %}
             {% set jumbotron_body = capco_site_parameter_value('ideas.jumbotron.body') %}
             {% if null != jumbotron_body %}
                 {{ jumbotron_body|raw }}
@@ -103,7 +118,7 @@
     <div class="appendices__container">
         <div class="row">
             <div class="col-xs-12 col-md-4 col-md-offset-4 text-center  appendices__item  box">
-                <h4 class="h4">{{ 'idea.index.appendices.trashed.title'|trans({}, 'CapcoAppBundle') }}</h4>
+                <h2 class="h4">{{ 'idea.index.appendices.trashed.title'|trans({}, 'CapcoAppBundle') }}</h2>
                 <p class="excerpt">{% transchoice trashedIdeasNb with {'%count%': trashedIdeasNb} from 'CapcoAppBundle' %}
                     idea.index.appendices.trashed.number
                 {% endtranschoice %}</p>

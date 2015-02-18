@@ -1,9 +1,24 @@
 {% extends '@CapcoApp/base.html.twig' %}
 
+{% block canonical_link %}{{ url('app_theme') }}{% endblock %}
+
+{% set title = capco_site_parameter_value('themes.jumbotron.title') %}
+{% block title %}
+    {% if null != title %}
+        {{ parent() }} - {{ title }}
+    {% else %}
+        {{ parent() }} - {{ 'theme.index.titles'|trans({}, 'CapcoAppBundle') }}
+    {% endif %}
+{% endblock %}
+
 {% block jumbotron %}
     <div class="jumbotron  jumbotron--custom  jumbotron--bg-1 text-center">
         <div class="container">
-            <h1>{{ capco_site_parameter_value('themes.jumbotron.title')}}</h1>
+            {% if null != title %}
+                <h1>{{ title }}</h1>
+            {% else %}
+                <h1>{{ 'theme.index.titles'|trans({}, 'CapcoAppBundle') }}</h1>
+            {% endif %}
             {% set jumbotron_body = capco_site_parameter_value('themes.jumbotron.body') %}
             {% if null != jumbotron_body %}
                 {{ jumbotron_body|raw }}

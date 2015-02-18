@@ -1,7 +1,9 @@
-{% extends '@CapcoApp/base.html.twig' %}
-{% block stylesheets %}
-    {{ parent() }}
-    <link href="{{ asset('js/fancybox/jquery.fancybox.css') }}" rel="stylesheet">
+{% extends '@CapcoApp/Consultation/show.html.twig' %}
+
+{% block canonical_link %}{{ url('app_consultation_show_step', {'consultation_slug': consultation.slug, 'step_slug': currentStep.slug}) }}{% endblock %}
+
+{% block title %}
+    {{ parent() }} - {{ currentStep.title }}
 {% endblock %}
 
 {% block jumbotron %}

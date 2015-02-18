@@ -7,7 +7,7 @@
             </div>
         </div>
         <div class="col-md-10  col-xs-12  event__body  event-js">
-            <h4><a href="{{ path('app_event_show' ,{'slug': event.slug } ) }}">{{ event.title }}</a></h4>
+            <h2><a href="{{ path('app_event_show' ,{'slug': event.slug } ) }}" class="h4">{{ event.title }}</a></h2>
             {{ event.body |striptags| truncate(50, true, '...') | jolitypo() }}
             <p class="h5  excerpt"><i class="cap-calendar-1"></i>
                 {% if event.startAt == event.endAt %}

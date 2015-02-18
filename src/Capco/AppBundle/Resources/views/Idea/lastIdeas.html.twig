@@ -1,6 +1,6 @@
 {% if ideas|length > 0 %}
     <div class="container  block">
-        <h2>{{ 'idea.title'|trans({}, 'CapcoAppBundle') }}</h2>
+        <h2 class="h2">{{ 'idea.title'|trans({}, 'CapcoAppBundle') }}</h2>
         <div class="row">
             {% for idea in ideas %}
                 {% include '@CapcoApp/Idea/blockIdea.html.twig' %}

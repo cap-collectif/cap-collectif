@@ -84,6 +84,7 @@ idea:
   title: Idées
   see_all: Voir toutes les idées
   index:
+    page_title: Boîte à idées
     filter: Trier
     search: Rechercher
     text_info: Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eos, perspiciatis, cupiditate. Nesciunt eos nam ullam iste iusto similique officia sit enim excepturi numquam natus, ab eum sint perspiciatis repudiandae dolorem.
@@ -122,6 +123,7 @@ idea:
     success: Merci ! Votre idée a bien été enregistrée.
     error: Erreur, impossible de créer une idée.
   update:
+    page_title: Modifier l'idée %title%
     delete: Supprimer
     cancel: Annuler
     submit: Modifier
@@ -131,6 +133,7 @@ idea:
     success: Merci ! Votre idée a bien été modifée.
     error: Erreur, votre idée n'a pas pu être modifée.
   delete:
+    page_title: Supprimer l'idée %title%
     title: Supprimer une idée
     subtitle: Êtes-vous sûr de vouloir supprimer cette idée ?
     text: Cette suppression marquera la fin de ce contenu à jamais.
@@ -263,6 +266,7 @@ argument:
     success: Merci ! Votre argument a bien été enregistré.
     error: Erreur, votre argument n'a pas pu être enregistré.
   update:
+    page_title: Modifier un argument
     button: Modifier
     title: Modifier un argument
     alert: Attention ! En modifiant votre argument, vous perdrez tous les votes qui lui sont associés.
@@ -272,6 +276,7 @@ argument:
     success: Merci ! Votre argument a bien été modifié.
     error: Erreur, impossible de modifier l'argument.
   delete:
+    page_title: Supprimer un argument
     title: Supprimer un argument
     subtitle: Êtes-vous sûr de vouloir supprimer cet argument ?
     text: Cette suppression marquera la fin de ce contenu à jamais.
@@ -317,6 +322,7 @@ source:
     success: Merci ! Votre source a bien été enregistrée.
     error: Erreur, votre source n'a pas pu être enregistrée.
   update:
+    page_title: Modifier la source %title%
     button: Modifier
     title: Modifier une source
     text: Attention ! En modifiant votre source, vous perdrez tous les votes qui lui sont associés.
@@ -326,6 +332,7 @@ source:
     success: Merci ! Votre source a bien été modifiée.
     error: Erreur, impossible de modifier la source.
   delete:
+    page_title: Supprimer la source %title%
     title: Supprimer une source
     subtitle: Êtes-vous sûr de vouloir supprimer cette source ?
     text: Cette suppression marquera la fin de ce contenu à jamais.
@@ -384,6 +391,7 @@ opinion:
     success: Merci ! Votre proposition a bien été enregistrée.
     error: Erreur, impossible de créer une proposition.
   delete:
+    page_title: Supprimer la proposition %title%
     title: Supprimer une proposition
     subtitle: Êtes-vous sûr de vouloir supprimer cette proposition ?
     text: Cette suppression marquera la fin de ce contenu à jamais.
@@ -392,6 +400,7 @@ opinion:
     success: Votre proposition a bien été supprimée.
     error: Erreur, impossible de supprimer la proposition.
   update:
+    page_title: Modifier la proposition %title%
     button: Modifier
     title: Modifier une proposition
     text: Attention ! En modifiant votre proposition, vous perdrez tous les votes qui lui sont associés.
@@ -470,7 +479,7 @@ user:
     male: Homme
     female: Femme
   login:
-    title: Connexion à
+    title: Connexion
     email: Adresse électronique
     social:
       facebook: Se connecter avec Facebook
@@ -490,7 +499,7 @@ user:
       Votre identifiant est : %email%.
 
       À bientôt !
-    title: Inscription à
+    title: Inscription à la plateforme
     social:
       facebook: S'inscrire avec Facebook
       gplus: S'inscrire avec Google+
@@ -534,6 +543,7 @@ user:
 
 # blog module
 blog:
+  page_title: Actualités
   no_post: "Aucun article n'a été publié"
   written_by: "par"
   and: " et"
@@ -569,14 +579,18 @@ share_button:
 
 # event module
 event:
+  index:
+    title: Évènements
+  last:
+    title: Prochains évènements
   archived: Évènements passés
-  no_event: "Aucun événement n'a été publié"
+  no_event: "Aucun évènement n'a été publié"
   written_by: "par"
   on_date: le %date%
   between_dates: du %start% au %end%
-  see_all: Voir tous les événements
-  none: "Il n'y a aucun événement."
-  no_result:  Aucun événement ne correspond à ces critères de recherche.
+  see_all: Voir tous les évènements
+  none: "Il n'y a aucun évènement."
+  no_result:  Aucun évènement ne correspond à ces critères de recherche.
 
 # video module
 video:
