@@ -1,0 +1,25 @@
+dependencies:
+    override:
+        - composer install --no-interaction -vvv:
+            timeout: 3600
+    pre:
+        - echo "memory_limit = 2048M" > ~/.phpenv/versions/$(phpenv global)/etc/conf.d/memory.ini
+        - gem install bundler
+        - bundle install --clean
+
+test:
+    pre:
+        - echo "memory_limit = 2048M" > ~/.phpenv/versions/$(phpenv global)/etc/conf.d/memory.ini
+
+    override:
+        - phpunit -c app -v
+
+machine:
+    php:
+        version: 5.4.21
+
+deployment:
+    preprod:
+        branch: develop
+        commands:
+            - bundle exec cap preprod deploy
