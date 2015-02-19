@@ -1,3 +1,8 @@
+general:
+    branches:
+        only:
+            - develop # list of branches to build
+
 dependencies:
     override:
         - composer install --no-interaction -vvv:
@@ -16,7 +21,9 @@ test:
 
 machine:
     php:
-        version: 5.4.21
+        version: 5.5.15
+    environment:
+        DATABASE_URL: mysql://root:@127.0.0.1/symfony
 
 deployment:
     preprod:

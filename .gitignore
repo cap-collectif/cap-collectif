@@ -31,6 +31,9 @@ app/config/parameters/*
 .bundle
 .capistrano
 
+# tests
+app/test.db
+
 # OS X
 .DS_Store
 .AppleDouble
