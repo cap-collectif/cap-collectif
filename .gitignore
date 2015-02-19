@@ -30,6 +30,7 @@ app/config/parameters/*
 # deployment
 .bundle
 .capistrano
+!.capistrano/metrics
 
 # tests
 app/test.db
