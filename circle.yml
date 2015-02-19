@@ -1,7 +1,7 @@
-general:
-    branches:
-        only:
-            - develop # list of branches to build
+database:
+    override:
+        - mv app/config/parameters.ci.yml app/config/parameters.yml
+        - php app/console capco:reinit
 
 dependencies:
     override:
@@ -12,21 +12,24 @@ dependencies:
         - gem install bundler
         - bundle install --clean
 
+deployment:
+    preprod:
+        branch: develop
+        commands:
+            - bundle exec cap preprod deploy
+
+general:
+    branches:
+        only:
+            - develop # list of branches to build
+
+machine:
+    php:
+        version: 5.5.15
+
 test:
     pre:
         - echo "memory_limit = 2048M" > ~/.phpenv/versions/$(phpenv global)/etc/conf.d/memory.ini
 
     override:
         - phpunit -c app -v
-
-machine:
-    php:
-        version: 5.5.15
-    environment:
-        DATABASE_URL: mysql://root:@127.0.0.1/symfony
-
-deployment:
-    preprod:
-        branch: develop
-        commands:
-            - bundle exec cap preprod deploy

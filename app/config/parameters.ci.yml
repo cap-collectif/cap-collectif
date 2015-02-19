@@ -1,0 +1,27 @@
+parameters:
+    database_driver: pdo_mysql
+    database_host: 127.0.0.1
+    database_port: ~
+    database_name: circle_test
+    database_user: ubuntu
+    database_password: ~
+
+    mailer_transport: smtp
+    mailer_user: ~
+    mailer_password: ~
+    mailer_host: ~
+    mailer_port: ~
+
+    locale: fr
+    secret: ThisTokenIsNotSoSecretChangeIt
+    debug_toolbar: true
+    debug_redirects: false
+    use_assetic_controller: true
+
+    facebook_app_id: xxxx
+    facebook_app_secret: xxxx
+    google_app_id: xxxx
+    google_app_secret: xxxx
+
+    registration_email_address: coucou@cap-collectif.com
+    registration_sender_name: Cap Collectif
