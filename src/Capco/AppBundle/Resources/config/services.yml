@@ -22,6 +22,7 @@ parameters:
     capco.step.resolver.class: Capco\AppBundle\Manager\StepResolver
     capco.twig.steps_links.class: Capco\AppBundle\Twig\StepsLinksExtension
     capco.block.service.share_button.class: Capco\AppBundle\Block\ShareButtonBlockService
+    capco.video.repository.class: Capco\AppBundle\Repository\VideoRepository
 
 services:
     capco.site_parameter.repository:
@@ -140,6 +141,12 @@ services:
     capco.event.resolver:
         class: %capco.event.resolver.class%
         arguments: [@capco.event.repository]
+
+    capco.video.repository:
+        class:           "%capco.video.repository.class%"
+        factory_service: doctrine.orm.entity_manager
+        factory_method:  getRepository
+        arguments:       ['CapcoAppBundle:Video']
 
     capco.menu_item.repository:
         class: %capco.menu_item.repository.class%

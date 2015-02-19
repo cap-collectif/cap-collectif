@@ -1,0 +1,26 @@
+Capco\AppBundle\Entity\Video:
+    video1:
+        title: Croissance innovation, disruption
+        body: <text(50)>
+        isEnabled: true
+        position: 2
+        Author: @user1
+        Media: @MediaConsultation1
+        link: 'https://www.youtube.com/embed/gwuLVLwMjuA?autoplay=1'
+        color: black
+    video2:
+        title: Stratégie technologique de l'Etat et services publics
+        body: <text(50)>
+        isEnabled: false
+        position: 3
+        Author: @user2
+        Media: @MediaConsultationImageVideo
+        link: 'https://www.youtube.com/embed/A3PDXmYoF5U?autoplay=1'
+        color: white
+    video3:
+        isEnabled: true
+        position: 1
+        Author: @user3
+        Media: @MediaConsultation3
+        link: 'https://www.youtube.com/embed/A3PDXmYoF5U?autoplay=1'
+        color: black

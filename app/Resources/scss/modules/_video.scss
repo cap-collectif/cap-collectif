@@ -1,0 +1,11 @@
+@media (max-width: $screen-sm-min) {
+  .video {
+    .img-responsive {
+      width: 100%;
+    }
+  }
+}
+
+.bg--video {
+  height: 270px;
+}

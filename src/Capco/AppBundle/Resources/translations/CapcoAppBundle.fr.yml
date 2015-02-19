@@ -577,3 +577,14 @@ event:
   see_all: Voir tous les événements
   none: "Il n'y a aucun événement."
   no_result:  Aucun événement ne correspond à ces critères de recherche.
+
+# video module
+video:
+  archived: Vidéos passés
+  no_event: "Aucune vidéo  n'a été publié"
+  see_all: Voir toutes les videos
+  none: "Il n'y a aucune vidéo."
+  no_result:  Aucune vidéo ne correspond à ces critères de recherche.
+  colors:
+    black: Noir
+    white: Blanc

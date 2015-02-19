@@ -21,6 +21,7 @@ sonata_admin:
                     - capco_admin.admin.theme
                     - capco_admin.admin.page
                     - sonata.media.admin.media
+                    - capco_admin.admin.video
             admin.group.consultation:
                 items:
                     - capco_admin.admin.consultation

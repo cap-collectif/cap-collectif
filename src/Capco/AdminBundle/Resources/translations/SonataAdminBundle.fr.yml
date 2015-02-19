@@ -38,6 +38,7 @@ admin.label.source: Sources
 admin.label.posts: Articles
 admin.label.events: Événements
 admin.label.features: Fonctionnalités
+admin.label.video: Vidéo de la page d'accueil
 
 # Messages
 admin:
@@ -310,6 +311,16 @@ admin:
       zipcode: Code postal
       city: Ville
       link: URL
+    video:
+      title: Titre
+      is_enabled: Publié
+      body: Contenu
+      updated_at: Mise à jour
+      created_at: Création
+      author: Auteur
+      media: Image
+      link: URL
+      position: Position
   action:
     reporting:
       disable:

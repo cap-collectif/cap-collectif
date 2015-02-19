@@ -182,3 +182,11 @@ services:
             - {name: sonata.admin, manager_type: orm, group: admin.group.blog, label: admin.label.events}
         calls:
             - [ setTranslationDomain, [SonataAdminBundle]]
+
+    capco_admin.admin.video:
+        class: Capco\AdminBundle\Admin\VideoAdmin
+        arguments: [~, Capco\AppBundle\Entity\Video, SonataAdminBundle:CRUD]
+        tags:
+            - {name: sonata.admin, manager_type: orm, group: admin.group.content, label: admin.label.video}
+        calls:
+            - [ setTranslationDomain, [SonataAdminBundle]]

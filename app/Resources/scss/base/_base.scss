@@ -208,6 +208,10 @@ a.excerpt {
   background-color: $black;
 }
 
+.play--black:after {
+  @include triangle($black, 'left', $custom-video-play);
+}
+
 .bg--default {
   background-color: $brand-color-2;
   display: block;

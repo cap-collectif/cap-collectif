@@ -1,6 +1,11 @@
 {% set page_class = "home-page" %}
 {% extends "CapcoAppBundle::base.html.twig" %}
 
+{% block stylesheets %}
+    {{ parent() }}
+    <link href="{{ asset('js/fancybox/jquery.fancybox.css') }}" rel="stylesheet">
+{% endblock %}
+
 {% block jumbotron %}
     <div class="jumbotron  jumbotron--custom  jumbotron--bg-1  text-center">
         <div class="header-img">
@@ -43,6 +48,9 @@
 {% endblock %}
 
 {% block body %}
+
+    {{ render(controller('CapcoAppBundle:Video:videoList')) }}
+
     {% if is_feature_enabled('themes') %}
         {{ render(controller('CapcoAppBundle:Homepage:lastThemes', {'max': 4, 'offset': 0})) }}
     {% endif %}
@@ -80,6 +88,8 @@
             App.module.equalheight('.thumbnail--custom');window.onresize = App.module.rezised('.thumbnail--custom');
             App.module.equalheight('.media--macro');window.onresize = App.module.rezised('.media--macro');
             App.module.equalheight('.event-js');window.onresize = App.module.rezised('.event-js');
+            App.module.equalheight('.video');window.onresize = App.module.rezised('.video');
+            App.module.video('.fancybox');
         });
     </script>
 {% endblock %}
