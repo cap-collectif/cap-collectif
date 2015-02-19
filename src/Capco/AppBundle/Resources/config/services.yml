@@ -13,6 +13,8 @@ parameters:
     capco.toggle.manager.class: Capco\AppBundle\Toggle\Manager
     capco.toggle.listener.request.class: Capco\AppBundle\Toggle\RequestListener
     capco.blog.post.repository.class: Capco\AppBundle\Repository\PostRepository
+    capco.event.repository.class: Capco\AppBundle\Repository\EventRepository
+    capco.event.resolver.class: Capco\AppBundle\Manager\EventResolver
     capco.site_color.repository.class: Capco\AppBundle\Repository\SiteColorRepository
     capco.site_color.resolver.class: Capco\AppBundle\SiteColor\Resolver
     capco.twig_extension.site_color.class: Capco\AppBundle\Twig\SiteColorExtension
@@ -128,6 +130,16 @@ services:
         factory_service: doctrine.orm.entity_manager
         factory_method:  getRepository
         arguments:       ['CapcoAppBundle:Post']
+
+    capco.event.repository:
+        class:           "%capco.event.repository.class%"
+        factory_service: doctrine.orm.entity_manager
+        factory_method:  getRepository
+        arguments:       ['CapcoAppBundle:Event']
+
+    capco.event.resolver:
+        class: %capco.event.resolver.class%
+        arguments: [@capco.event.repository]
 
     capco.menu_item.repository:
         class: %capco.menu_item.repository.class%

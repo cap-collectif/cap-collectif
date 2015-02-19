@@ -36,6 +36,7 @@ admin.label.social_network: Réseaux sociaux (page d'accueil)
 admin.label.category: Types de sources
 admin.label.source: Sources
 admin.label.posts: Articles
+admin.label.events: Événements
 admin.label.features: Fonctionnalités
 
 # Messages
@@ -293,6 +294,22 @@ admin:
         admin: Administrateur
         super_admin: Super administrateur
       city: Ville
+    event:
+      title: Titre
+      is_enabled: Publié
+      body: Contenu
+      updated_at: Mise à jour
+      created_at: Création
+      themes: Thèmes
+      author: Auteur
+      start_at: Commence
+      end_at: Termine
+      media: Image
+      nbAddress: Numéro
+      address: Adresse postal
+      zipcode: Code postal
+      city: Ville
+      link: URL
   action:
     reporting:
       disable:

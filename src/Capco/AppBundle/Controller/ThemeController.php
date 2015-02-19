@@ -121,4 +121,17 @@ class ThemeController extends Controller
         return [ 'ideas' => $ideas ];
     }
 
+    /**
+     * @Cache(expires="+1 minutes", maxage="60", smaxage="60", public="true")
+     * @Template("CapcoAppBundle:Event:lastEvents.html.twig")
+     * @param $theme
+     * @return array
+     */
+    public function themeEventsAction(Theme $theme = null)
+    {
+        $events = $this->getDoctrine()->getRepository('CapcoAppBundle:Event')->getByTheme($theme->getId());
+
+        return [ 'events' => $events ];
+    }
+
 }

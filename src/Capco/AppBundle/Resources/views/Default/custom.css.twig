@@ -178,6 +178,10 @@
         background-color: {{ sectionBg }};
     }
 
+    .event .month {
+        background-color: {{ headerBg }};
+    }
+
     {% if null != capco_site_image_media('image.header') and app.request.attributes.get('_route') == 'app_homepage' %}
     .jumbotron--bg-1{
         background-image: url({% path capco_site_image_media('image.header'), 'header' %});

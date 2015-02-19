@@ -130,6 +130,12 @@ class Theme
 
     /**
      * @var
+     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\Event", mappedBy="Theme", cascade={"persist", "remove"})
+     */
+    private $Events;
+
+    /**
+     * @var
      *
      * @ORM\OneToOne(targetEntity="Capco\MediaBundle\Entity\Media", cascade={"persist", "remove"})
      * @ORM\JoinColumn(name="media_id", referencedColumnName="id", nullable=true, onDelete="SET NULL")
@@ -140,6 +146,7 @@ class Theme
     {
         $this->Consultations = new ArrayCollection();
         $this->Ideas = new ArrayCollection();
+        $this->Events = new ArrayCollection();
         $this->updatedAt = new \Datetime;
     }
 
@@ -383,6 +390,41 @@ class Theme
     public function removeIdea(\Capco\AppBundle\Entity\Idea $idea)
     {
         $this->Ideas->removeElement($idea);
+    }
+
+    /**
+     * Get Event
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getEvents()
+    {
+        return $this->Events;
+    }
+
+    /**
+     * Add Event
+     *
+     * @param \Capco\AppBundle\Entity\Event $event
+     *
+     * @return Theme
+     */
+    public function addEvent(\Capco\AppBundle\Entity\Event $event)
+    {
+        if (!$this->Events->contains($event)) {
+            $this->Events[] = $event;
+        }
+        return $this;
+    }
+
+    /**
+     * Remove idea
+     *
+     * @param \Capco\AppBundle\Entity\Event $event
+     */
+    public function removeEvent(\Capco\AppBundle\Entity\Event $event)
+    {
+        $this->Events->removeElement($event);
     }
 
     /**

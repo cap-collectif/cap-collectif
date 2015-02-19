@@ -31,7 +31,7 @@ class SetFeatureFlagsCommand extends ContainerAwareCommand
 
         $toggleManager = $this->getApplication()->getKernel()->getContainer()->get('capco.toggle.manager');
         $toggleManager->activate('blog');
-        $toggleManager->deactivate('calendar');
+        $toggleManager->activate('calendar');
         $toggleManager->activate('newsletter');
         $toggleManager->activate('ideas');
         $toggleManager->activate('themes');

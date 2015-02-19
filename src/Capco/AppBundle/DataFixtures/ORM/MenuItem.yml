@@ -99,3 +99,14 @@ Capco\AppBundle\Entity\MenuItem:
     parent: null
     menu: @menu1
     associatedFeatures: [blog]
+
+  MenuItem12:
+    title: Événements
+    link: event
+    isEnabled: 1
+    isDeletable: 0
+    isFullyModifiable: 0
+    position: 3
+    parent: null
+    menu: @menu1
+    associatedFeatures: [calendar]

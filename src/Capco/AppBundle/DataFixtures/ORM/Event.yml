@@ -1,0 +1,113 @@
+Capco\AppBundle\Entity\Event:
+    event1:
+        title: ForumPHP2014
+        isEnabled: true
+        body: |
+          <p>Idque Caesaris facere voluntate liceret: sese habere. Paullum deliquit, ponderibus modulisque suis ratio utitur. Vivamus sagittis lacus vel augue laoreet rutrum faucibus.</p>
+          <p>Etiam habebis sem dicantur magna mollis euismod. Praeterea iter est quasdam res quas ex communi. Ullamco laboris nisi ut aliquid ex ea commodi consequat. Mercedem aut nummos unde unde extricat, amaras.
+             Quae vero auctorem tractata ab fiducia dicuntur. Morbi fringilla convallis sapien, id pulvinar odio volutpat. Quam diu etiam furor iste tuus nos eludet? Non equidem invideo, miror magis posuere velit aliquet. Quisque placerat facilisis egestas cillum dolore. Qui ipsorum lingua Celtae, nostra Galli appellantur.
+             Quae vero auctorem tractata ab fiducia dicuntur. Me non paenitet nullum festiviorem excogitasse ad hoc. Prima luce, cum quibus mons aliud  consensu ab eo. Prima luce, cum quibus mons aliud  consensu ab eo.
+             Nec dubitamus multa iter quae et nos invenerat. Inmensae subtilitatis, obscuris et malesuada fames. Quam diu etiam furor iste tuus nos eludet? Integer legentibus erat a ante historiarum dapibus.</p>
+             <h2>Pulvinar odio volutpat</h2>
+        startAt: <(new \DateTime('2014-10-23'))>
+        endAt: <(new \DateTime('2014-10-24'))>
+        Author: @user<numberBetween(1, 5)>
+        nbAddress: 111
+        address: Avenue Clémenceau
+        city: Lyon
+        link: http://www.forumPHP2014.fr
+    event2:
+        title: PHPTour2014
+        isEnabled: true
+        body: |
+          <p>Idque Caesaris facere voluntate liceret: sese habere. Paullum deliquit, ponderibus modulisque suis ratio utitur. Vivamus sagittis lacus vel augue laoreet rutrum faucibus.</p>
+          <p>Etiam habebis sem dicantur magna mollis euismod. Praeterea iter est quasdam res quas ex communi. Ullamco laboris nisi ut aliquid ex ea commodi consequat. Mercedem aut nummos unde unde extricat, amaras.
+             Quae vero auctorem tractata ab fiducia dicuntur. Morbi fringilla convallis sapien, id pulvinar odio volutpat. Quam diu etiam furor iste tuus nos eludet? Non equidem invideo, miror magis posuere velit aliquet. Quisque placerat facilisis egestas cillum dolore. Qui ipsorum lingua Celtae, nostra Galli appellantur.
+             Quae vero auctorem tractata ab fiducia dicuntur. Me non paenitet nullum festiviorem excogitasse ad hoc. Prima luce, cum quibus mons aliud  consensu ab eo. Prima luce, cum quibus mons aliud  consensu ab eo.
+             Nec dubitamus multa iter quae et nos invenerat. Inmensae subtilitatis, obscuris et malesuada fames. Quam diu etiam furor iste tuus nos eludet? Integer legentibus erat a ante historiarum dapibus.</p>
+             <h2>Pulvinar odio volutpat</h2>
+             <p>Fictum,  deserunt mollit anim laborum astutumque! Phasellus laoreet lorem vel dolor tempus vehicula. Cras mattis iudicium purus sit amet fermentum. Cum ceteris in veneratione tui montes, nascetur mus.
+                Hi omnes lingua, institutis, legibus inter se differunt. Unam incolunt Belgae, aliam Aquitani, tertiam. Integer legentibus erat a ante historiarum dapibus. Morbi fringilla convallis sapien, id pulvinar odio volutpat. Paullum deliquit, ponderibus modulisque suis ratio utitur.</p>
+        startAt: <(new \DateTime('2014-06-23'))>
+        endAt: <(new \DateTime('2014-06-24'))>
+        Author: @user<numberBetween(1, 5)>
+        nbAddress: 11
+        address: Avenue George 5
+        city: Paris
+        link: http://www.phptour2014.fr
+    event3:
+        title: PHPTour2015
+        isEnabled: true
+        body: |
+          <p>Idque Caesaris facere voluntate liceret: sese habere. Paullum deliquit, ponderibus modulisque suis ratio utitur. Vivamus sagittis lacus vel augue laoreet rutrum faucibus.</p>
+          <p>Etiam habebis sem dicantur magna mollis euismod. Praeterea iter est quasdam res quas ex communi. Ullamco laboris nisi ut aliquid ex ea commodi consequat. Mercedem aut nummos unde unde extricat, amaras.
+             Quae vero auctorem tractata ab fiducia dicuntur. Morbi fringilla convallis sapien, id pulvinar odio volutpat. Quam diu etiam furor iste tuus nos eludet? Non equidem invideo, miror magis posuere velit aliquet. Quisque placerat facilisis egestas cillum dolore. Qui ipsorum lingua Celtae, nostra Galli appellantur.
+             Quae vero auctorem tractata ab fiducia dicuntur. Me non paenitet nullum festiviorem excogitasse ad hoc. Prima luce, cum quibus mons aliud  consensu ab eo. Prima luce, cum quibus mons aliud  consensu ab eo.
+             Nec dubitamus multa iter quae et nos invenerat. Inmensae subtilitatis, obscuris et malesuada fames. Quam diu etiam furor iste tuus nos eludet? Integer legentibus erat a ante historiarum dapibus.</p>
+             <h2>Pulvinar odio volutpat</h2>
+             <p>Fictum,  deserunt mollit anim laborum astutumque! Phasellus laoreet lorem vel dolor tempus vehicula. Cras mattis iudicium purus sit amet fermentum. Cum ceteris in veneratione tui montes, nascetur mus.
+                Hi omnes lingua, institutis, legibus inter se differunt. Unam incolunt Belgae, aliam Aquitani, tertiam. Integer legentibus erat a ante historiarum dapibus. Morbi fringilla convallis sapien, id pulvinar odio volutpat. Paullum deliquit, ponderibus modulisque suis ratio utitur.</p>
+        startAt: <(new \DateTime('2015-05-23'))>
+        endAt: <(new \DateTime('2015-05-24'))>
+        Author: @user<numberBetween(1, 5)>
+        nbAddress: 457
+        address: Rue de Picardie
+        city: Bordeaux
+        link: http://www.PHPTour2015.fr
+        Media: @MediaConsultation3
+    event5:
+        title: SymfonyLive2015
+        isEnabled: true
+        body: |
+          <p>Idque Caesaris facere voluntate liceret: sese habere. Paullum deliquit, ponderibus modulisque suis ratio utitur. Vivamus sagittis lacus vel augue laoreet rutrum faucibus.</p>
+          <p>Etiam habebis sem dicantur magna mollis euismod. Praeterea iter est quasdam res quas ex communi. Ullamco laboris nisi ut aliquid ex ea commodi consequat. Mercedem aut nummos unde unde extricat, amaras.
+             Quae vero auctorem tractata ab fiducia dicuntur. Morbi fringilla convallis sapien, id pulvinar odio volutpat. Quam diu etiam furor iste tuus nos eludet? Non equidem invideo, miror magis posuere velit aliquet. Quisque placerat facilisis egestas cillum dolore. Qui ipsorum lingua Celtae, nostra Galli appellantur.
+             Quae vero auctorem tractata ab fiducia dicuntur. Me non paenitet nullum festiviorem excogitasse ad hoc. Prima luce, cum quibus mons aliud  consensu ab eo. Prima luce, cum quibus mons aliud  consensu ab eo.
+             Nec dubitamus multa iter quae et nos invenerat. Inmensae subtilitatis, obscuris et malesuada fames. Quam diu etiam furor iste tuus nos eludet? Integer legentibus erat a ante historiarum dapibus.</p>
+             <h2>Pulvinar odio volutpat</h2>
+             <p>Fictum,  deserunt mollit anim laborum astutumque! Phasellus laoreet lorem vel dolor tempus vehicula. Cras mattis iudicium purus sit amet fermentum. Cum ceteris in veneratione tui montes, nascetur mus.
+                Hi omnes lingua, institutis, legibus inter se differunt. Unam incolunt Belgae, aliam Aquitani, tertiam. Integer legentibus erat a ante historiarum dapibus. Morbi fringilla convallis sapien, id pulvinar odio volutpat. Paullum deliquit, ponderibus modulisque suis ratio utitur.</p>
+        startAt: <(new \DateTime('2015-07-23'))>
+        endAt: <(new \DateTime('2015-07-24'))>
+        Author: @user<numberBetween(1, 5)>
+        link: http://www.symfonyLive2015.fr
+        Media: @MediaIdea1
+    event6:
+        title: ParisWeb2014
+        isEnabled: true
+        body: |
+          <p>Idque Caesaris facere voluntate liceret: sese habere. Paullum deliquit, ponderibus modulisque suis ratio utitur. Vivamus sagittis lacus vel augue laoreet rutrum faucibus.</p>
+          <p>Etiam habebis sem dicantur magna mollis euismod. Praeterea iter est quasdam res quas ex communi. Ullamco laboris nisi ut aliquid ex ea commodi consequat. Mercedem aut nummos unde unde extricat, amaras.
+             Quae vero auctorem tractata ab fiducia dicuntur. Morbi fringilla convallis sapien, id pulvinar odio volutpat. Quam diu etiam furor iste tuus nos eludet? Non equidem invideo, miror magis posuere velit aliquet. Quisque placerat facilisis egestas cillum dolore. Qui ipsorum lingua Celtae, nostra Galli appellantur.
+             Quae vero auctorem tractata ab fiducia dicuntur. Me non paenitet nullum festiviorem excogitasse ad hoc. Prima luce, cum quibus mons aliud  consensu ab eo. Prima luce, cum quibus mons aliud  consensu ab eo.
+             Nec dubitamus multa iter quae et nos invenerat. Inmensae subtilitatis, obscuris et malesuada fames. Quam diu etiam furor iste tuus nos eludet? Integer legentibus erat a ante historiarum dapibus.</p>
+             <h2>Pulvinar odio volutpat</h2>
+             <p>Fictum,  deserunt mollit anim laborum astutumque! Phasellus laoreet lorem vel dolor tempus vehicula. Cras mattis iudicium purus sit amet fermentum. Cum ceteris in veneratione tui montes, nascetur mus.
+                Hi omnes lingua, institutis, legibus inter se differunt. Unam incolunt Belgae, aliam Aquitani, tertiam. Integer legentibus erat a ante historiarum dapibus. Morbi fringilla convallis sapien, id pulvinar odio volutpat. Paullum deliquit, ponderibus modulisque suis ratio utitur.</p>
+        startAt: <(new \DateTime('2014-02-11'))>
+        endAt: <(new \DateTime('2014-02-12'))>
+        Author: @user<numberBetween(1, 5)>
+        link: http://www.parisweb2014.fr
+    event6:
+        title: ParisWeb2015
+        isEnabled: true
+        body: |
+          <p>Idque Caesaris facere voluntate liceret: sese habere. Paullum deliquit, ponderibus modulisque suis ratio utitur. Vivamus sagittis lacus vel augue laoreet rutrum faucibus.</p>
+          <p>Etiam habebis sem dicantur magna mollis euismod. Praeterea iter est quasdam res quas ex communi. Ullamco laboris nisi ut aliquid ex ea commodi consequat. Mercedem aut nummos unde unde extricat, amaras.
+             Quae vero auctorem tractata ab fiducia dicuntur. Morbi fringilla convallis sapien, id pulvinar odio volutpat. Quam diu etiam furor iste tuus nos eludet? Non equidem invideo, miror magis posuere velit aliquet. Quisque placerat facilisis egestas cillum dolore. Qui ipsorum lingua Celtae, nostra Galli appellantur.
+             Quae vero auctorem tractata ab fiducia dicuntur. Me non paenitet nullum festiviorem excogitasse ad hoc. Prima luce, cum quibus mons aliud  consensu ab eo. Prima luce, cum quibus mons aliud  consensu ab eo.
+             Nec dubitamus multa iter quae et nos invenerat. Inmensae subtilitatis, obscuris et malesuada fames. Quam diu etiam furor iste tuus nos eludet? Integer legentibus erat a ante historiarum dapibus.</p>
+             <h2>Pulvinar odio volutpat</h2>
+             <p>Fictum,  deserunt mollit anim laborum astutumque! Phasellus laoreet lorem vel dolor tempus vehicula. Cras mattis iudicium purus sit amet fermentum. Cum ceteris in veneratione tui montes, nascetur mus.
+                Hi omnes lingua, institutis, legibus inter se differunt. Unam incolunt Belgae, aliam Aquitani, tertiam. Integer legentibus erat a ante historiarum dapibus. Morbi fringilla convallis sapien, id pulvinar odio volutpat. Paullum deliquit, ponderibus modulisque suis ratio utitur.</p>
+        startAt: <(new \DateTime('2015-12-11'))>
+        endAt: <(new \DateTime('2015-12-12'))>
+        Author: @user<numberBetween(1, 5)>
+        link: http://www.parisweb2014.fr
+    event{7..10}:
+        title: <text(30)>
+        isEnabled: <boolean(80)>
+        body: <text(1000)>
+        startAt: <dateTimeBetween('-40 days', '+10 days')>
+        endAt: <dateTimeBetween('-10 days', '+40 days')>
+        Author: @user<numberBetween(1, 5)>

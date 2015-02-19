@@ -566,3 +566,14 @@ share_button:
     email: Partager par email
     link: Partager un lien
   argument_on: Argument sur la proposition "%opinion%"
+
+# event module
+event:
+  archived: Évènements passés
+  no_event: "Aucun événement n'a été publié"
+  written_by: "par"
+  on_date: le %date%
+  between_dates: du %start% au %end%
+  see_all: Voir tous les événements
+  none: "Il n'y a aucun événement."
+  no_result:  Aucun événement ne correspond à ces critères de recherche.

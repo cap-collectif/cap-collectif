@@ -1,0 +1,13 @@
+{% if events|length > 0 %}
+    <div class="container">
+        <h2 class="h2">Prochains évènements</h2>
+        <div class="row">
+            {% for event in events %}
+                {% include '@CapcoApp/Event/blockEvent.html.twig' %}
+            {% endfor %}
+        </div>
+        <a href="{{ path('app_event') }}" class="btn  btn-primary  btn--outline">{{ 'event.see_all'|trans({}, 'CapcoAppBundle') }}</a>
+    </div>
+{% else %}
+	<p>{{ 'event.no_result'|trans({}, 'CapcoAppBundle') }}</p>
+{% endif %}

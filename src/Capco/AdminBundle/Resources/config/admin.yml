@@ -174,3 +174,11 @@ services:
             - {name: sonata.admin, manager_type: orm, group: admin.group.blog, label: admin.label.post}
         calls:
             - [ setTranslationDomain, [SonataAdminBundle]]
+
+    capco_admin.admin.event:
+        class: Capco\AdminBundle\Admin\EventAdmin
+        arguments: [~, Capco\AppBundle\Entity\Event, SonataAdminBundle:CRUD]
+        tags:
+            - {name: sonata.admin, manager_type: orm, group: admin.group.blog, label: admin.label.events}
+        calls:
+            - [ setTranslationDomain, [SonataAdminBundle]]

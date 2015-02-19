@@ -41,6 +41,10 @@
     
     {{ render(controller('CapcoAppBundle:Theme:themeIdeas', {'theme': theme})) }}
 
+    {% if theme.Events|length > 0 %}
+        {{ render(controller('CapcoAppBundle:Theme:themeEvents', {'theme': theme})) }}
+    {% endif %}
+
 {% endblock %}
 
 {% block javascripts %}

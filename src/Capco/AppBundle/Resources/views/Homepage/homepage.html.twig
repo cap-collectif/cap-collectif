@@ -53,6 +53,9 @@
     {% if is_feature_enabled('blog') %}
         {{ render(controller('CapcoAppBundle:Homepage:lastPosts', {'max': 3, 'offset': 0})) }}
     {% endif %}
+    {% if is_feature_enabled('calendar') %}
+        {{ render(controller('CapcoAppBundle:Event:lastEvents', {'max': 4, 'offset': 0})) }}
+    {% endif %}
 
     <div class="container">
         <div class="row">
@@ -76,6 +79,7 @@
             App.module.equalheight('.theme');window.onresize = App.module.rezised('.theme');
             App.module.equalheight('.thumbnail--custom');window.onresize = App.module.rezised('.thumbnail--custom');
             App.module.equalheight('.media--macro');window.onresize = App.module.rezised('.media--macro');
+            App.module.equalheight('.event-js');window.onresize = App.module.rezised('.event-js');
         });
     </script>
 {% endblock %}
