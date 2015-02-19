@@ -18,9 +18,11 @@ class OpinionsType extends AbstractType
         $builder
             ->add('title', 'text', array(
                 'label' => 'opinion.form.title',
+                'required' => true
             ))
             ->add('body', 'textarea', array(
                 'label' => 'opinion.form.body',
+                'required' => true
             ))
         ;
     }
