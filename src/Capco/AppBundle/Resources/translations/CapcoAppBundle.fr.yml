@@ -211,7 +211,7 @@ consultation:
       intro:
         title: Introduction
         read_more: Lire la suite
-        read_less: Masquer
+        read_less: Replier
       info:
         title: Informations
         themes: Thème(s)

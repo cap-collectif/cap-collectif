@@ -29,16 +29,12 @@
 {% block javascripts %}
     {{ parent() }}
     <script type="text/javascript" src="https://www.google.com/jsapi"></script>
-    <script src="{{ asset('js/readmore/readmore.min.js') }}"></script>
-    {% if consultation.video %}
-        <script src="{{ asset('js/fancybox/jquery.fancybox.pack.js') }}"></script>
-    {% endif %}
     <script type="text/javascript">
         App.module.pieChart();
         $('.more').readmore({
-            maxHeight: 90,
+            collapsedHeight: 115,
             moreLink: '<a href="#">{{ 'consultation.show.meta.intro.read_more'|trans({}, 'CapcoAppBundle') }}</a>', //BazingaJsTranslationBundle
-            lessLink: '<a href="#">{{ 'consultation.show.meta.Intro.read_less'|trans({}, 'CapcoAppBundle') }}</a>'
+            lessLink: '<a href="#">{{ 'consultation.show.meta.intro.read_less'|trans({}, 'CapcoAppBundle') }}</a>'
         });
         App.module.video('.fancybox');
     </script>

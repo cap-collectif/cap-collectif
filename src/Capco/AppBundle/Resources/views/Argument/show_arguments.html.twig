@@ -36,7 +36,7 @@
                         <p class="h5  opinion__user"><a href="{{ path('capco_user_profile_show_all', {'slug': argument.Author.slug}) }}">{{ argument.Author.username }}</a></p>
                         <p class="excerpt  opinion__date">{{ argument.createdAt | localizeddate('long', 'short', app.request.locale) }}</p>
                     </div>
-                    <p class="opinion__text">
+                    <p class="opinion__text more" style="max-height: 115px; overflow: hidden; width: 100%">
                         {{ argument.body }}
                     </p>
 

@@ -15,7 +15,7 @@
     <div class="box">
         {% if null != consultation.body %}
             <h4 class="h4">{{ 'consultation.show.meta.intro.title'|trans({}, 'CapcoAppBundle') }}</h4>
-            <div class="more">{{ consultation.body | raw }}</div>
+            <div class="more"  style="max-height: 115px; overflow: hidden; width: 100%">{{ consultation.body | raw }}</div>
         {% endif %}
         {%  if currentStep is not defined %}
             {% set currentStep = null %}
