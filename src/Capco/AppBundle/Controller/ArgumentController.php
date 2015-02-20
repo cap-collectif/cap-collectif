@@ -59,7 +59,7 @@ class ArgumentController extends Controller
     }
 
     /**
-     * @Route("/secure/consultation/{consultationSlug}/opinions/{opinionTypeSlug}/{opinionSlug}/arguments/{argumentId}/vote", name="app_consultation_vote_argument")
+     * @Route("/secure/consultations/{consultationSlug}/opinions/{opinionTypeSlug}/{opinionSlug}/arguments/{argumentId}/vote", name="app_consultation_vote_argument")
      *
      * @param $request
      * @param $consultationSlug
@@ -131,7 +131,7 @@ class ArgumentController extends Controller
     }
 
     /**
-     * @Route("/consultation/{consultationSlug}/opinions/{opinionTypeSlug}/{opinionSlug}/argument/{argumentId}/edit", name="app_consultation_edit_argument")
+     * @Route("/consultations/{consultationSlug}/opinions/{opinionTypeSlug}/{opinionSlug}/arguments/{argumentId}/edit", name="app_consultation_edit_argument")
      * @Template("CapcoAppBundle:Argument:update.html.twig")
      *
      * @param $request
@@ -149,7 +149,7 @@ class ArgumentController extends Controller
 
         $argument = $this->getDoctrine()->getRepository('CapcoAppBundle:Argument')->getOneById($consultationSlug, $opinionTypeSlug, $opinionSlug, $argumentId);
 
-        if($argument == null){
+        if ($argument == null){
             throw $this->createNotFoundException($this->get('translator')->trans('argument.error.not_found', array(), 'CapcoAppBundle'));
         }
 
@@ -196,7 +196,7 @@ class ArgumentController extends Controller
     }
 
     /**
-     * @Route("/consultation/{consultationSlug}/opinions/{opinionTypeSlug}/{opinionSlug}/arguments/{argumentId}/delete", name="app_consultation_delete_argument")
+     * @Route("/consultations/{consultationSlug}/opinions/{opinionTypeSlug}/{opinionSlug}/arguments/{argumentId}/delete", name="app_consultation_delete_argument")
      * @Template("CapcoAppBundle:Argument:delete.html.twig")
      * @param $request
      * @param $consultationSlug
@@ -213,7 +213,7 @@ class ArgumentController extends Controller
 
         $argument = $this->getDoctrine()->getRepository('CapcoAppBundle:Argument')->getOneById($consultationSlug, $opinionTypeSlug, $opinionSlug, $argumentId);
 
-        if($argument == null){
+        if ($argument == null){
             throw $this->createNotFoundException($this->get('translator')->trans('argument.error.not_found', array(), 'CapcoAppBundle'));
         }
 

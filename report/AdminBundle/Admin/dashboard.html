@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <title>Dashboard for /Users/Suzy/Repositories/CapCollectif-SF2/src/Capco/AdminBundle/Admin</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="../../css/bootstrap.min.css" rel="stylesheet">
+  <link href="../../css/nv.d3.css" rel="stylesheet">
+  <link href="../../css/style.css" rel="stylesheet">
+  <!--[if lt IE 9]>
+  <script src="../../js/html5shiv.min.js"></script>
+  <script src="../../js/respond.min.js"></script>
+  <![endif]-->
+ </head>
+ <body>
+  <header>
+   <div class="container">
+    <div class="row">
+     <div class="col-md-12">
+      <ol class="breadcrumb">
+        <li><a href="../../index.html">/Users/Suzy/Repositories/CapCollectif-SF2/src/Capco</a></li>
+        <li><a href="../index.html">AdminBundle</a></li>
+        <li><a href="index.html">Admin</a></li>
+        <li class="active">(Dashboard)</li>
+
+      </ol>
+     </div>
+    </div>
+   </div>
+  </header>
+  <div class="container">
+   <div class="row">
+    <div class="col-md-12">
+     <h2>Classes</h2>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-6">
+     <h3>Coverage Distribution</h3>
+     <div id="classCoverageDistribution" style="height: 300px;">
+       <svg></svg>
+     </div>
+    </div>
+    <div class="col-md-6">
+     <h3>Complexity</h3>
+     <div id="classComplexity" style="height: 300px;">
+       <svg></svg>
+     </div>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-6">
+     <h3>Insufficient Coverage</h3>
+     <div class="scrollbox">
+      <table class="table">
+       <thead>
+        <tr>
+         <th>Class</th>
+         <th class="text-right">Coverage</th>
+        </tr>
+       </thead>
+       <tbody>
+       <tr><td><a href="SiteImageAdmin.php.html#12">SiteImageAdmin</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="SiteParameterAdmin.php.html#14">SiteParameterAdmin</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="SiteColorAdmin.php.html#13">SiteColorAdmin</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ReportingAdmin.php.html#13">ReportingAdmin</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="PostAdmin.php.html#11">PostAdmin</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="SocialNetworkAdmin.php.html#13">SocialNetworkAdmin</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="SourceAdmin.php.html#12">SourceAdmin</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="VideoAdmin.php.html#13">VideoAdmin</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="UserAdmin.php.html#13">UserAdmin</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ThemeAdmin.php.html#12">ThemeAdmin</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="StepAdmin.php.html#13">StepAdmin</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="PageAdmin.php.html#12">PageAdmin</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="OpinionVoteAdmin.php.html#14">OpinionVoteAdmin</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="EventAdmin.php.html#15">EventAdmin</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="FooterSocialNetworkAdmin.php.html#13">FooterSocialNetworkAdmin</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ConsultationAdmin.php.html#15">ConsultationAdmin</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="CategoryAdmin.php.html#11">CategoryAdmin</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ArgumentVoteAdmin.php.html#12">ArgumentVoteAdmin</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="IdeaAdmin.php.html#11">IdeaAdmin</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="IdeaVoteAdmin.php.html#12">IdeaVoteAdmin</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="OpinionTypeAdmin.php.html#13">OpinionTypeAdmin</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="OpinionAdmin.php.html#12">OpinionAdmin</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="NewsletterSubscriptionAdmin.php.html#12">NewsletterSubscriptionAdmin</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="MenuItemAdmin.php.html#14">MenuItemAdmin</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ArgumentAdmin.php.html#14">ArgumentAdmin</a></td><td class="text-right">0%</td></tr>
+
+       </tbody>
+      </table>
+     </div>
+    </div>
+    <div class="col-md-6">
+     <h3>Project Risks</h3>
+     <div class="scrollbox">
+      <table class="table">
+       <thead>
+        <tr>
+         <th>Class</th>
+         <th class="text-right"><abbr title="Change Risk Anti-Patterns (CRAP) Index">CRAP</abbr></th>
+        </tr>
+       </thead>
+       <tbody>
+       <tr><td><a href="UserAdmin.php.html#13">UserAdmin</a></td><td class="text-right">272</td></tr>
+       <tr><td><a href="EventAdmin.php.html#15">EventAdmin</a></td><td class="text-right">210</td></tr>
+       <tr><td><a href="MenuItemAdmin.php.html#14">MenuItemAdmin</a></td><td class="text-right">210</td></tr>
+       <tr><td><a href="ConsultationAdmin.php.html#15">ConsultationAdmin</a></td><td class="text-right">210</td></tr>
+       <tr><td><a href="SiteParameterAdmin.php.html#14">SiteParameterAdmin</a></td><td class="text-right">182</td></tr>
+       <tr><td><a href="IdeaAdmin.php.html#11">IdeaAdmin</a></td><td class="text-right">110</td></tr>
+       <tr><td><a href="ArgumentAdmin.php.html#14">ArgumentAdmin</a></td><td class="text-right">42</td></tr>
+       <tr><td><a href="StepAdmin.php.html#13">StepAdmin</a></td><td class="text-right">42</td></tr>
+       <tr><td><a href="SourceAdmin.php.html#12">SourceAdmin</a></td><td class="text-right">42</td></tr>
+       <tr><td><a href="OpinionAdmin.php.html#12">OpinionAdmin</a></td><td class="text-right">42</td></tr>
+
+       </tbody>
+      </table>
+     </div>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-12">
+     <h2>Methods</h2>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-6">
+     <h3>Coverage Distribution</h3>
+     <div id="methodCoverageDistribution" style="height: 300px;">
+       <svg></svg>
+     </div>
+    </div>
+    <div class="col-md-6">
+     <h3>Complexity</h3>
+     <div id="methodComplexity" style="height: 300px;">
+       <svg></svg>
+     </div>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-6">
+     <h3>Insufficient Coverage</h3>
+     <div class="scrollbox">
+      <table class="table">
+       <thead>
+        <tr>
+         <th>Method</th>
+         <th class="text-right">Coverage</th>
+        </tr>
+       </thead>
+       <tbody>
+       <tr><td><a href="SiteColorAdmin.php.html#74"><abbr title="SiteColorAdmin::configureFormFields">configureFormFields</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="SiteColorAdmin.php.html#91"><abbr title="SiteColorAdmin::configureShowFields">configureShowFields</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="SiteColorAdmin.php.html#112"><abbr title="SiteColorAdmin::configureRoutes">configureRoutes</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="SiteColorAdmin.php.html#45"><abbr title="SiteColorAdmin::configureListFields">configureListFields</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="SiteColorAdmin.php.html#24"><abbr title="SiteColorAdmin::configureDatagridFilters">configureDatagridFilters</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ReportingAdmin.php.html#102"><abbr title="ReportingAdmin::configureShowFields">configureShowFields</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ReportingAdmin.php.html#134"><abbr title="ReportingAdmin::configureRoutes">configureRoutes</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="SiteImageAdmin.php.html#22"><abbr title="SiteImageAdmin::configureDatagridFilters">configureDatagridFilters</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="SiteImageAdmin.php.html#40"><abbr title="SiteImageAdmin::configureListFields">configureListFields</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="SiteParameterAdmin.php.html#46"><abbr title="SiteParameterAdmin::configureListFields">configureListFields</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="SiteParameterAdmin.php.html#74"><abbr title="SiteParameterAdmin::configureFormFields">configureFormFields</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="SiteParameterAdmin.php.html#25"><abbr title="SiteParameterAdmin::configureDatagridFilters">configureDatagridFilters</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="SiteImageAdmin.php.html#115"><abbr title="SiteImageAdmin::configureRoutes">configureRoutes</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="SiteImageAdmin.php.html#71"><abbr title="SiteImageAdmin::configureFormFields">configureFormFields</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="SiteImageAdmin.php.html#93"><abbr title="SiteImageAdmin::configureShowFields">configureShowFields</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ReportingAdmin.php.html#56"><abbr title="ReportingAdmin::configureListFields">configureListFields</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ReportingAdmin.php.html#23"><abbr title="ReportingAdmin::configureDatagridFilters">configureDatagridFilters</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="OpinionVoteAdmin.php.html#80"><abbr title="OpinionVoteAdmin::configureShowFields">configureShowFields</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="OpinionVoteAdmin.php.html#107"><abbr title="OpinionVoteAdmin::configureFormFields">configureFormFields</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="OpinionVoteAdmin.php.html#124"><abbr title="OpinionVoteAdmin::configureRoutes">configureRoutes</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="OpinionVoteAdmin.php.html#49"><abbr title="OpinionVoteAdmin::configureListFields">configureListFields</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="OpinionVoteAdmin.php.html#25"><abbr title="OpinionVoteAdmin::configureDatagridFilters">configureDatagridFilters</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="OpinionTypeAdmin.php.html#94"><abbr title="OpinionTypeAdmin::configureFormFields">configureFormFields</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="OpinionTypeAdmin.php.html#121"><abbr title="OpinionTypeAdmin::configureShowFields">configureShowFields</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="PageAdmin.php.html#20"><abbr title="PageAdmin::configureFormFields">configureFormFields</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="PageAdmin.php.html#38"><abbr title="PageAdmin::configureDatagridFilters">configureDatagridFilters</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="PostAdmin.php.html#82"><abbr title="PostAdmin::configureFormFields">configureFormFields</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="PostAdmin.php.html#121"><abbr title="PostAdmin::getFeatures">getFeatures</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="PostAdmin.php.html#51"><abbr title="PostAdmin::configureListFields">configureListFields</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="PostAdmin.php.html#21"><abbr title="PostAdmin::configureDatagridFilters">configureDatagridFilters</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="PageAdmin.php.html#57"><abbr title="PageAdmin::configureListFields">configureListFields</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="PageAdmin.php.html#86"><abbr title="PageAdmin::configureShowFields">configureShowFields</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="SiteParameterAdmin.php.html#149"><abbr title="SiteParameterAdmin::configureShowFields">configureShowFields</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="SiteParameterAdmin.php.html#170"><abbr title="SiteParameterAdmin::configureRoutes">configureRoutes</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="UserAdmin.php.html#15"><abbr title="UserAdmin::getFormBuilder">getFormBuilder</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="UserAdmin.php.html#45"><abbr title="UserAdmin::configureListFields">configureListFields</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="UserAdmin.php.html#82"><abbr title="UserAdmin::configureDatagridFilters">configureDatagridFilters</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ThemeAdmin.php.html#197"><abbr title="ThemeAdmin::getFeatures">getFeatures</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ThemeAdmin.php.html#144"><abbr title="ThemeAdmin::configureShowFields">configureShowFields</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ThemeAdmin.php.html#54"><abbr title="ThemeAdmin::configureListFields">configureListFields</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ThemeAdmin.php.html#99"><abbr title="ThemeAdmin::configureFormFields">configureFormFields</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="UserAdmin.php.html#102"><abbr title="UserAdmin::configureShowFields">configureShowFields</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="UserAdmin.php.html#162"><abbr title="UserAdmin::configureFormFields">configureFormFields</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="VideoAdmin.php.html#88"><abbr title="VideoAdmin::configureFormFields">configureFormFields</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="VideoAdmin.php.html#139"><abbr title="VideoAdmin::configureShowFields">configureShowFields</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="VideoAdmin.php.html#51"><abbr title="VideoAdmin::configureListFields">configureListFields</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="VideoAdmin.php.html#24"><abbr title="VideoAdmin::configureDatagridFilters">configureDatagridFilters</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="UserAdmin.php.html#319"><abbr title="UserAdmin::prePersist">prePersist</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="UserAdmin.php.html#324"><abbr title="UserAdmin::getTemplate">getTemplate</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ThemeAdmin.php.html#24"><abbr title="ThemeAdmin::configureDatagridFilters">configureDatagridFilters</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="StepAdmin.php.html#191"><abbr title="StepAdmin::getBatchActions">getBatchActions</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="SocialNetworkAdmin.php.html#143"><abbr title="SocialNetworkAdmin::configureRoutes">configureRoutes</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="SourceAdmin.php.html#17"><abbr title="SourceAdmin::configureDatagridFilters">configureDatagridFilters</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="SocialNetworkAdmin.php.html#115"><abbr title="SocialNetworkAdmin::configureShowFields">configureShowFields</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="SocialNetworkAdmin.php.html#84"><abbr title="SocialNetworkAdmin::configureFormFields">configureFormFields</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="SocialNetworkAdmin.php.html#23"><abbr title="SocialNetworkAdmin::configureDatagridFilters">configureDatagridFilters</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="SocialNetworkAdmin.php.html#47"><abbr title="SocialNetworkAdmin::configureListFields">configureListFields</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="SourceAdmin.php.html#59"><abbr title="SourceAdmin::configureListFields">configureListFields</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="SourceAdmin.php.html#101"><abbr title="SourceAdmin::configureFormFields">configureFormFields</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="StepAdmin.php.html#101"><abbr title="StepAdmin::configureFormFields">configureFormFields</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="StepAdmin.php.html#153"><abbr title="StepAdmin::configureShowFields">configureShowFields</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="StepAdmin.php.html#57"><abbr title="StepAdmin::configureListFields">configureListFields</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="StepAdmin.php.html#24"><abbr title="StepAdmin::configureDatagridFilters">configureDatagridFilters</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="SourceAdmin.php.html#144"><abbr title="SourceAdmin::configureShowFields">configureShowFields</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="SourceAdmin.php.html#194"><abbr title="SourceAdmin::configureRoutes">configureRoutes</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="OpinionTypeAdmin.php.html#57"><abbr title="OpinionTypeAdmin::configureListFields">configureListFields</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="OpinionTypeAdmin.php.html#24"><abbr title="OpinionTypeAdmin::configureDatagridFilters">configureDatagridFilters</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="EventAdmin.php.html#62"><abbr title="EventAdmin::configureListFields">configureListFields</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="EventAdmin.php.html#106"><abbr title="EventAdmin::configureFormFields">configureFormFields</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="EventAdmin.php.html#201"><abbr title="EventAdmin::configureShowFields">configureShowFields</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="EventAdmin.php.html#26"><abbr title="EventAdmin::configureDatagridFilters">configureDatagridFilters</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ConsultationAdmin.php.html#325"><abbr title="ConsultationAdmin::setConsultationStep">setConsultationStep</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ConsultationAdmin.php.html#315"><abbr title="ConsultationAdmin::prePersist">prePersist</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ConsultationAdmin.php.html#320"><abbr title="ConsultationAdmin::preUpdate">preUpdate</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="EventAdmin.php.html#266"><abbr title="EventAdmin::configureRoutes">configureRoutes</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="EventAdmin.php.html#274"><abbr title="EventAdmin::getFeatures">getFeatures</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="FooterSocialNetworkAdmin.php.html#51"><abbr title="FooterSocialNetworkAdmin::configureListFields">configureListFields</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="FooterSocialNetworkAdmin.php.html#87"><abbr title="FooterSocialNetworkAdmin::configureFormFields">configureFormFields</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="FooterSocialNetworkAdmin.php.html#24"><abbr title="FooterSocialNetworkAdmin::configureDatagridFilters">configureDatagridFilters</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="EventAdmin.php.html#291"><abbr title="EventAdmin::setCoord">setCoord</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="EventAdmin.php.html#281"><abbr title="EventAdmin::prePersist">prePersist</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="EventAdmin.php.html#286"><abbr title="EventAdmin::preUpdate">preUpdate</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ConsultationAdmin.php.html#237"><abbr title="ConsultationAdmin::configureShowFields">configureShowFields</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ConsultationAdmin.php.html#125"><abbr title="ConsultationAdmin::configureFormFields">configureFormFields</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ArgumentVoteAdmin.php.html#22"><abbr title="ArgumentVoteAdmin::configureDatagridFilters">configureDatagridFilters</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ArgumentVoteAdmin.php.html#40"><abbr title="ArgumentVoteAdmin::configureListFields">configureListFields</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ArgumentAdmin.php.html#184"><abbr title="ArgumentAdmin::configureRoutes">configureRoutes</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ArgumentAdmin.php.html#135"><abbr title="ArgumentAdmin::configureShowFields">configureShowFields</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ArgumentAdmin.php.html#54"><abbr title="ArgumentAdmin::configureListFields">configureListFields</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ArgumentAdmin.php.html#99"><abbr title="ArgumentAdmin::configureFormFields">configureFormFields</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ArgumentVoteAdmin.php.html#60"><abbr title="ArgumentVoteAdmin::configureShowFields">configureShowFields</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ArgumentVoteAdmin.php.html#75"><abbr title="ArgumentVoteAdmin::configureRoutes">configureRoutes</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ConsultationAdmin.php.html#26"><abbr title="ConsultationAdmin::configureDatagridFilters">configureDatagridFilters</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ConsultationAdmin.php.html#65"><abbr title="ConsultationAdmin::configureListFields">configureListFields</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="CategoryAdmin.php.html#80"><abbr title="CategoryAdmin::configureShowFields">configureShowFields</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="CategoryAdmin.php.html#64"><abbr title="CategoryAdmin::configureFormFields">configureFormFields</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="CategoryAdmin.php.html#16"><abbr title="CategoryAdmin::configureDatagridFilters">configureDatagridFilters</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="CategoryAdmin.php.html#38"><abbr title="CategoryAdmin::configureListFields">configureListFields</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="FooterSocialNetworkAdmin.php.html#113"><abbr title="FooterSocialNetworkAdmin::configureShowFields">configureShowFields</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="IdeaAdmin.php.html#22"><abbr title="IdeaAdmin::configureDatagridFilters">configureDatagridFilters</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="NewsletterSubscriptionAdmin.php.html#22"><abbr title="NewsletterSubscriptionAdmin::configureDatagridFilters">configureDatagridFilters</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="NewsletterSubscriptionAdmin.php.html#40"><abbr title="NewsletterSubscriptionAdmin::configureListFields">configureListFields</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="NewsletterSubscriptionAdmin.php.html#66"><abbr title="NewsletterSubscriptionAdmin::configureFormFields">configureFormFields</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="MenuItemAdmin.php.html#241"><abbr title="MenuItemAdmin::getBatchActions">getBatchActions</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="MenuItemAdmin.php.html#237"><abbr title="MenuItemAdmin::configureRoutes">configureRoutes</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="MenuItemAdmin.php.html#216"><abbr title="MenuItemAdmin::createParentsItemQuery">createParentsItemQuery</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="MenuItemAdmin.php.html#229"><abbr title="MenuItemAdmin::createPageQuery">createPageQuery</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="NewsletterSubscriptionAdmin.php.html#82"><abbr title="NewsletterSubscriptionAdmin::configureShowFields">configureShowFields</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="NewsletterSubscriptionAdmin.php.html#98"><abbr title="NewsletterSubscriptionAdmin::configureRoutes">configureRoutes</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="OpinionAdmin.php.html#142"><abbr title="OpinionAdmin::configureShowFields">configureShowFields</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="OpinionAdmin.php.html#208"><abbr title="OpinionAdmin::configureRoutes">configureRoutes</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="OpinionAdmin.php.html#106"><abbr title="OpinionAdmin::configureFormFields">configureFormFields</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="OpinionAdmin.php.html#59"><abbr title="OpinionAdmin::configureListFields">configureListFields</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="NewsletterSubscriptionAdmin.php.html#102"><abbr title="NewsletterSubscriptionAdmin::getFeatures">getFeatures</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="OpinionAdmin.php.html#23"><abbr title="OpinionAdmin::configureDatagridFilters">configureDatagridFilters</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="MenuItemAdmin.php.html#208"><abbr title="MenuItemAdmin::manageLink">manageLink</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="MenuItemAdmin.php.html#203"><abbr title="MenuItemAdmin::preUpdate">preUpdate</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="IdeaVoteAdmin.php.html#23"><abbr title="IdeaVoteAdmin::configureDatagridFilters">configureDatagridFilters</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="IdeaVoteAdmin.php.html#41"><abbr title="IdeaVoteAdmin::configureListFields">configureListFields</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="IdeaAdmin.php.html#211"><abbr title="IdeaAdmin::getFeatures">getFeatures</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="IdeaAdmin.php.html#154"><abbr title="IdeaAdmin::configureShowFields">configureShowFields</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="IdeaAdmin.php.html#58"><abbr title="IdeaAdmin::configureListFields">configureListFields</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="IdeaAdmin.php.html#103"><abbr title="IdeaAdmin::configureFormFields">configureFormFields</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="IdeaVoteAdmin.php.html#64"><abbr title="IdeaVoteAdmin::configureShowFields">configureShowFields</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="IdeaVoteAdmin.php.html#79"><abbr title="IdeaVoteAdmin::configureRoutes">configureRoutes</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="MenuItemAdmin.php.html#152"><abbr title="MenuItemAdmin::configureShowFields">configureShowFields</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="MenuItemAdmin.php.html#198"><abbr title="MenuItemAdmin::prePersist">prePersist</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="MenuItemAdmin.php.html#102"><abbr title="MenuItemAdmin::configureFormFields">configureFormFields</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="MenuItemAdmin.php.html#59"><abbr title="MenuItemAdmin::configureListFields">configureListFields</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="IdeaVoteAdmin.php.html#86"><abbr title="IdeaVoteAdmin::getFeatures">getFeatures</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="MenuItemAdmin.php.html#24"><abbr title="MenuItemAdmin::configureDatagridFilters">configureDatagridFilters</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ArgumentAdmin.php.html#24"><abbr title="ArgumentAdmin::configureDatagridFilters">configureDatagridFilters</a></a></td><td class="text-right">0%</td></tr>
+
+       </tbody>
+      </table>
+     </div>
+    </div>
+    <div class="col-md-6">
+     <h3>Project Risks</h3>
+     <div class="scrollbox">
+      <table class="table">
+       <thead>
+        <tr>
+         <th>Method</th>
+         <th class="text-right"><abbr title="Change Risk Anti-Patterns (CRAP) Index">CRAP</abbr></th>
+        </tr>
+       </thead>
+       <tbody>
+       <tr><td><a href="SiteParameterAdmin.php.html#74"><abbr title="SiteParameterAdmin::configureFormFields">configureFormFields</abbr></a></td><td class="text-right">90</td></tr>
+       <tr><td><a href="UserAdmin.php.html#162"><abbr title="UserAdmin::configureFormFields">configureFormFields</abbr></a></td><td class="text-right">90</td></tr>
+       <tr><td><a href="ConsultationAdmin.php.html#125"><abbr title="ConsultationAdmin::configureFormFields">configureFormFields</abbr></a></td><td class="text-right">20</td></tr>
+       <tr><td><a href="IdeaAdmin.php.html#154"><abbr title="IdeaAdmin::configureShowFields">configureShowFields</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="MenuItemAdmin.php.html#152"><abbr title="MenuItemAdmin::configureShowFields">configureShowFields</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="MenuItemAdmin.php.html#102"><abbr title="MenuItemAdmin::configureFormFields">configureFormFields</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="MenuItemAdmin.php.html#208"><abbr title="MenuItemAdmin::manageLink">manageLink</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="SourceAdmin.php.html#144"><abbr title="SourceAdmin::configureShowFields">configureShowFields</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="UserAdmin.php.html#324"><abbr title="UserAdmin::getTemplate">getTemplate</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="StepAdmin.php.html#101"><abbr title="StepAdmin::configureFormFields">configureFormFields</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="IdeaAdmin.php.html#103"><abbr title="IdeaAdmin::configureFormFields">configureFormFields</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="OpinionAdmin.php.html#142"><abbr title="OpinionAdmin::configureShowFields">configureShowFields</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="IdeaAdmin.php.html#22"><abbr title="IdeaAdmin::configureDatagridFilters">configureDatagridFilters</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="ConsultationAdmin.php.html#325"><abbr title="ConsultationAdmin::setConsultationStep">setConsultationStep</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="ConsultationAdmin.php.html#237"><abbr title="ConsultationAdmin::configureShowFields">configureShowFields</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="ConsultationAdmin.php.html#65"><abbr title="ConsultationAdmin::configureListFields">configureListFields</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="ConsultationAdmin.php.html#26"><abbr title="ConsultationAdmin::configureDatagridFilters">configureDatagridFilters</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="EventAdmin.php.html#26"><abbr title="EventAdmin::configureDatagridFilters">configureDatagridFilters</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="EventAdmin.php.html#62"><abbr title="EventAdmin::configureListFields">configureListFields</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="ArgumentAdmin.php.html#135"><abbr title="ArgumentAdmin::configureShowFields">configureShowFields</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="EventAdmin.php.html#266"><abbr title="EventAdmin::configureRoutes">configureRoutes</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="EventAdmin.php.html#201"><abbr title="EventAdmin::configureShowFields">configureShowFields</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="EventAdmin.php.html#106"><abbr title="EventAdmin::configureFormFields">configureFormFields</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="IdeaAdmin.php.html#58"><abbr title="IdeaAdmin::configureListFields">configureListFields</abbr></a></td><td class="text-right">6</td></tr>
+
+       </tbody>
+      </table>
+     </div>
+    </div>
+   </div>
+   <footer>
+    <hr/>
+    <p>
+     <small>Generated by <a href="http://github.com/sebastianbergmann/php-code-coverage" target="_top">PHP_CodeCoverage 2.0.15</a> using <a href="http://php.net/" target="_top">PHP 5.5.19</a> and <a href="http://phpunit.de/">PHPUnit 4.7-g7b9e68d</a> at Wed Feb 25 19:52:24 CET 2015.</small>
+    </p>
+   </footer>
+  </div>
+  <script src="../../js/jquery.min.js" type="text/javascript"></script>
+  <script src="../../js/bootstrap.min.js" type="text/javascript"></script>
+  <script src="../../js/holder.js" type="text/javascript"></script>
+  <script src="../../js/d3.min.js" type="text/javascript"></script>
+  <script src="../../js/nv.d3.min.js" type="text/javascript"></script>
+  <script type="text/javascript">
+$(document).ready(function() {
+  nv.addGraph(function() {
+    var chart = nv.models.multiBarChart();
+    chart.tooltips(false)
+      .showControls(false)
+      .showLegend(false)
+      .reduceXTicks(false)
+      .staggerLabels(true)
+      .yAxis.tickFormat(d3.format('d'));
+
+    d3.select('#classCoverageDistribution svg')
+      .datum(getCoverageDistributionData([25,0,0,0,0,0,0,0,0,0,0,0], "Class Coverage"))
+      .transition().duration(500).call(chart);
+
+    nv.utils.windowResize(chart.update);
+
+    return chart;
+  });
+
+  nv.addGraph(function() {
+    var chart = nv.models.multiBarChart();
+    chart.tooltips(false)
+      .showControls(false)
+      .showLegend(false)
+      .reduceXTicks(false)
+      .staggerLabels(true)
+      .yAxis.tickFormat(d3.format('d'));
+
+    d3.select('#methodCoverageDistribution svg')
+      .datum(getCoverageDistributionData([132,0,0,0,0,0,0,0,0,0,0,0], "Method Coverage"))
+      .transition().duration(500).call(chart);
+
+    nv.utils.windowResize(chart.update);
+
+    return chart;
+  });
+
+  function getCoverageDistributionData(data, label) {
+    var labels = [
+      '0%',
+      '0-10%',
+      '10-20%',
+      '20-30%',
+      '30-40%',
+      '40-50%',
+      '50-60%',
+      '60-70%',
+      '70-80%',
+      '80-90%',
+      '90-100%',
+      '100%'
+    ];
+    var values = [];
+    $.each(labels, function(key) {
+      values.push({x: labels[key], y: data[key]});
+    });
+
+    return [
+      {
+        key: label,
+        values: values,
+        color: "#4572A7"
+      }
+    ];
+  }
+  nv.addGraph(function() {
+    var chart = nv.models.scatterChart()
+      .showDistX(true)
+      .showDistY(true)
+      .showLegend(false)
+      .forceX([0, 100]);
+    chart.scatter.onlyCircles(false);
+    chart.tooltipContent(function(key, y, e, graph) {
+      return '<p>' + graph.point.class + '</p>';
+    });
+
+    chart.xAxis.axisLabel('Code Coverage (in percent)');
+    chart.yAxis.axisLabel('Cyclomatic Complexity');
+
+    d3.select('#classComplexity svg')
+      .datum(getComplexityData([[0,6,"<a href=\"ArgumentAdmin.php.html#14\">ArgumentAdmin<\/a>"],[0,4,"<a href=\"ArgumentVoteAdmin.php.html#12\">ArgumentVoteAdmin<\/a>"],[0,4,"<a href=\"CategoryAdmin.php.html#11\">CategoryAdmin<\/a>"],[0,14,"<a href=\"ConsultationAdmin.php.html#15\">ConsultationAdmin<\/a>"],[0,14,"<a href=\"EventAdmin.php.html#15\">EventAdmin<\/a>"],[0,4,"<a href=\"FooterSocialNetworkAdmin.php.html#13\">FooterSocialNetworkAdmin<\/a>"],[0,10,"<a href=\"IdeaAdmin.php.html#11\">IdeaAdmin<\/a>"],[0,5,"<a href=\"IdeaVoteAdmin.php.html#12\">IdeaVoteAdmin<\/a>"],[0,14,"<a href=\"MenuItemAdmin.php.html#14\">MenuItemAdmin<\/a>"],[0,6,"<a href=\"NewsletterSubscriptionAdmin.php.html#12\">NewsletterSubscriptionAdmin<\/a>"],[0,6,"<a href=\"OpinionAdmin.php.html#12\">OpinionAdmin<\/a>"],[0,4,"<a href=\"OpinionTypeAdmin.php.html#13\">OpinionTypeAdmin<\/a>"],[0,5,"<a href=\"OpinionVoteAdmin.php.html#14\">OpinionVoteAdmin<\/a>"],[0,4,"<a href=\"PageAdmin.php.html#12\">PageAdmin<\/a>"],[0,4,"<a href=\"PostAdmin.php.html#11\">PostAdmin<\/a>"],[0,4,"<a href=\"ReportingAdmin.php.html#13\">ReportingAdmin<\/a>"],[0,5,"<a href=\"SiteColorAdmin.php.html#13\">SiteColorAdmin<\/a>"],[0,5,"<a href=\"SiteImageAdmin.php.html#12\">SiteImageAdmin<\/a>"],[0,13,"<a href=\"SiteParameterAdmin.php.html#14\">SiteParameterAdmin<\/a>"],[0,5,"<a href=\"SocialNetworkAdmin.php.html#13\">SocialNetworkAdmin<\/a>"],[0,6,"<a href=\"SourceAdmin.php.html#12\">SourceAdmin<\/a>"],[0,6,"<a href=\"StepAdmin.php.html#13\">StepAdmin<\/a>"],[0,5,"<a href=\"ThemeAdmin.php.html#12\">ThemeAdmin<\/a>"],[0,16,"<a href=\"UserAdmin.php.html#13\">UserAdmin<\/a>"],[0,4,"<a href=\"VideoAdmin.php.html#13\">VideoAdmin<\/a>"]], 'Class Complexity'))
+      .transition()
+      .duration(500)
+      .call(chart);
+
+    nv.utils.windowResize(chart.update);
+
+    return chart;
+  });
+
+  nv.addGraph(function() {
+    var chart = nv.models.scatterChart()
+      .showDistX(true)
+      .showDistY(true)
+      .showLegend(false)
+      .forceX([0, 100]);
+    chart.scatter.onlyCircles(false);
+    chart.tooltipContent(function(key, y, e, graph) {
+      return '<p>' + graph.point.class + '</p>';
+    });
+
+    chart.xAxis.axisLabel('Code Coverage (in percent)');
+    chart.yAxis.axisLabel('Method Complexity');
+
+    d3.select('#methodComplexity svg')
+      .datum(getComplexityData([[0,1,"<a href=\"ArgumentAdmin.php.html#24\">ArgumentAdmin::configureDatagridFilters<\/a>"],[0,1,"<a href=\"ArgumentAdmin.php.html#54\">ArgumentAdmin::configureListFields<\/a>"],[0,1,"<a href=\"ArgumentAdmin.php.html#99\">ArgumentAdmin::configureFormFields<\/a>"],[0,2,"<a href=\"ArgumentAdmin.php.html#135\">ArgumentAdmin::configureShowFields<\/a>"],[0,1,"<a href=\"ArgumentAdmin.php.html#184\">ArgumentAdmin::configureRoutes<\/a>"],[0,1,"<a href=\"ArgumentVoteAdmin.php.html#22\">ArgumentVoteAdmin::configureDatagridFilters<\/a>"],[0,1,"<a href=\"ArgumentVoteAdmin.php.html#40\">ArgumentVoteAdmin::configureListFields<\/a>"],[0,1,"<a href=\"ArgumentVoteAdmin.php.html#60\">ArgumentVoteAdmin::configureShowFields<\/a>"],[0,1,"<a href=\"ArgumentVoteAdmin.php.html#75\">ArgumentVoteAdmin::configureRoutes<\/a>"],[0,1,"<a href=\"CategoryAdmin.php.html#16\">CategoryAdmin::configureDatagridFilters<\/a>"],[0,1,"<a href=\"CategoryAdmin.php.html#38\">CategoryAdmin::configureListFields<\/a>"],[0,1,"<a href=\"CategoryAdmin.php.html#64\">CategoryAdmin::configureFormFields<\/a>"],[0,1,"<a href=\"CategoryAdmin.php.html#80\">CategoryAdmin::configureShowFields<\/a>"],[0,2,"<a href=\"ConsultationAdmin.php.html#26\">ConsultationAdmin::configureDatagridFilters<\/a>"],[0,2,"<a href=\"ConsultationAdmin.php.html#65\">ConsultationAdmin::configureListFields<\/a>"],[0,4,"<a href=\"ConsultationAdmin.php.html#125\">ConsultationAdmin::configureFormFields<\/a>"],[0,2,"<a href=\"ConsultationAdmin.php.html#237\">ConsultationAdmin::configureShowFields<\/a>"],[0,1,"<a href=\"ConsultationAdmin.php.html#315\">ConsultationAdmin::prePersist<\/a>"],[0,1,"<a href=\"ConsultationAdmin.php.html#320\">ConsultationAdmin::preUpdate<\/a>"],[0,2,"<a href=\"ConsultationAdmin.php.html#325\">ConsultationAdmin::setConsultationStep<\/a>"],[0,2,"<a href=\"EventAdmin.php.html#26\">EventAdmin::configureDatagridFilters<\/a>"],[0,2,"<a href=\"EventAdmin.php.html#62\">EventAdmin::configureListFields<\/a>"],[0,2,"<a href=\"EventAdmin.php.html#106\">EventAdmin::configureFormFields<\/a>"],[0,2,"<a href=\"EventAdmin.php.html#201\">EventAdmin::configureShowFields<\/a>"],[0,2,"<a href=\"EventAdmin.php.html#266\">EventAdmin::configureRoutes<\/a>"],[0,1,"<a href=\"EventAdmin.php.html#274\">EventAdmin::getFeatures<\/a>"],[0,1,"<a href=\"EventAdmin.php.html#281\">EventAdmin::prePersist<\/a>"],[0,1,"<a href=\"EventAdmin.php.html#286\">EventAdmin::preUpdate<\/a>"],[0,1,"<a href=\"EventAdmin.php.html#291\">EventAdmin::setCoord<\/a>"],[0,1,"<a href=\"FooterSocialNetworkAdmin.php.html#24\">FooterSocialNetworkAdmin::configureDatagridFilters<\/a>"],[0,1,"<a href=\"FooterSocialNetworkAdmin.php.html#51\">FooterSocialNetworkAdmin::configureListFields<\/a>"],[0,1,"<a href=\"FooterSocialNetworkAdmin.php.html#87\">FooterSocialNetworkAdmin::configureFormFields<\/a>"],[0,1,"<a href=\"FooterSocialNetworkAdmin.php.html#113\">FooterSocialNetworkAdmin::configureShowFields<\/a>"],[0,2,"<a href=\"IdeaAdmin.php.html#22\">IdeaAdmin::configureDatagridFilters<\/a>"],[0,2,"<a href=\"IdeaAdmin.php.html#58\">IdeaAdmin::configureListFields<\/a>"],[0,2,"<a href=\"IdeaAdmin.php.html#103\">IdeaAdmin::configureFormFields<\/a>"],[0,3,"<a href=\"IdeaAdmin.php.html#154\">IdeaAdmin::configureShowFields<\/a>"],[0,1,"<a href=\"IdeaAdmin.php.html#211\">IdeaAdmin::getFeatures<\/a>"],[0,1,"<a href=\"IdeaVoteAdmin.php.html#23\">IdeaVoteAdmin::configureDatagridFilters<\/a>"],[0,1,"<a href=\"IdeaVoteAdmin.php.html#41\">IdeaVoteAdmin::configureListFields<\/a>"],[0,1,"<a href=\"IdeaVoteAdmin.php.html#64\">IdeaVoteAdmin::configureShowFields<\/a>"],[0,1,"<a href=\"IdeaVoteAdmin.php.html#79\">IdeaVoteAdmin::configureRoutes<\/a>"],[0,1,"<a href=\"IdeaVoteAdmin.php.html#86\">IdeaVoteAdmin::getFeatures<\/a>"],[0,1,"<a href=\"MenuItemAdmin.php.html#24\">MenuItemAdmin::configureDatagridFilters<\/a>"],[0,1,"<a href=\"MenuItemAdmin.php.html#59\">MenuItemAdmin::configureListFields<\/a>"],[0,2,"<a href=\"MenuItemAdmin.php.html#102\">MenuItemAdmin::configureFormFields<\/a>"],[0,2,"<a href=\"MenuItemAdmin.php.html#152\">MenuItemAdmin::configureShowFields<\/a>"],[0,1,"<a href=\"MenuItemAdmin.php.html#198\">MenuItemAdmin::prePersist<\/a>"],[0,1,"<a href=\"MenuItemAdmin.php.html#203\">MenuItemAdmin::preUpdate<\/a>"],[0,2,"<a href=\"MenuItemAdmin.php.html#208\">MenuItemAdmin::manageLink<\/a>"],[0,1,"<a href=\"MenuItemAdmin.php.html#216\">MenuItemAdmin::createParentsItemQuery<\/a>"],[0,1,"<a href=\"MenuItemAdmin.php.html#229\">MenuItemAdmin::createPageQuery<\/a>"],[0,1,"<a href=\"MenuItemAdmin.php.html#237\">MenuItemAdmin::configureRoutes<\/a>"],[0,1,"<a href=\"MenuItemAdmin.php.html#241\">MenuItemAdmin::getBatchActions<\/a>"],[0,1,"<a href=\"NewsletterSubscriptionAdmin.php.html#22\">NewsletterSubscriptionAdmin::configureDatagridFilters<\/a>"],[0,1,"<a href=\"NewsletterSubscriptionAdmin.php.html#40\">NewsletterSubscriptionAdmin::configureListFields<\/a>"],[0,1,"<a href=\"NewsletterSubscriptionAdmin.php.html#66\">NewsletterSubscriptionAdmin::configureFormFields<\/a>"],[0,1,"<a href=\"NewsletterSubscriptionAdmin.php.html#82\">NewsletterSubscriptionAdmin::configureShowFields<\/a>"],[0,1,"<a href=\"NewsletterSubscriptionAdmin.php.html#98\">NewsletterSubscriptionAdmin::configureRoutes<\/a>"],[0,1,"<a href=\"NewsletterSubscriptionAdmin.php.html#102\">NewsletterSubscriptionAdmin::getFeatures<\/a>"],[0,1,"<a href=\"OpinionAdmin.php.html#23\">OpinionAdmin::configureDatagridFilters<\/a>"],[0,1,"<a href=\"OpinionAdmin.php.html#59\">OpinionAdmin::configureListFields<\/a>"],[0,1,"<a href=\"OpinionAdmin.php.html#106\">OpinionAdmin::configureFormFields<\/a>"],[0,2,"<a href=\"OpinionAdmin.php.html#142\">OpinionAdmin::configureShowFields<\/a>"],[0,1,"<a href=\"OpinionAdmin.php.html#208\">OpinionAdmin::configureRoutes<\/a>"],[0,1,"<a href=\"OpinionTypeAdmin.php.html#24\">OpinionTypeAdmin::configureDatagridFilters<\/a>"],[0,1,"<a href=\"OpinionTypeAdmin.php.html#57\">OpinionTypeAdmin::configureListFields<\/a>"],[0,1,"<a href=\"OpinionTypeAdmin.php.html#94\">OpinionTypeAdmin::configureFormFields<\/a>"],[0,1,"<a href=\"OpinionTypeAdmin.php.html#121\">OpinionTypeAdmin::configureShowFields<\/a>"],[0,1,"<a href=\"OpinionVoteAdmin.php.html#25\">OpinionVoteAdmin::configureDatagridFilters<\/a>"],[0,1,"<a href=\"OpinionVoteAdmin.php.html#49\">OpinionVoteAdmin::configureListFields<\/a>"],[0,1,"<a href=\"OpinionVoteAdmin.php.html#80\">OpinionVoteAdmin::configureShowFields<\/a>"],[0,1,"<a href=\"OpinionVoteAdmin.php.html#107\">OpinionVoteAdmin::configureFormFields<\/a>"],[0,1,"<a href=\"OpinionVoteAdmin.php.html#124\">OpinionVoteAdmin::configureRoutes<\/a>"],[0,1,"<a href=\"PageAdmin.php.html#20\">PageAdmin::configureFormFields<\/a>"],[0,1,"<a href=\"PageAdmin.php.html#38\">PageAdmin::configureDatagridFilters<\/a>"],[0,1,"<a href=\"PageAdmin.php.html#57\">PageAdmin::configureListFields<\/a>"],[0,1,"<a href=\"PageAdmin.php.html#86\">PageAdmin::configureShowFields<\/a>"],[0,1,"<a href=\"PostAdmin.php.html#21\">PostAdmin::configureDatagridFilters<\/a>"],[0,1,"<a href=\"PostAdmin.php.html#51\">PostAdmin::configureListFields<\/a>"],[0,1,"<a href=\"PostAdmin.php.html#82\">PostAdmin::configureFormFields<\/a>"],[0,1,"<a href=\"PostAdmin.php.html#121\">PostAdmin::getFeatures<\/a>"],[0,1,"<a href=\"ReportingAdmin.php.html#23\">ReportingAdmin::configureDatagridFilters<\/a>"],[0,1,"<a href=\"ReportingAdmin.php.html#56\">ReportingAdmin::configureListFields<\/a>"],[0,1,"<a href=\"ReportingAdmin.php.html#102\">ReportingAdmin::configureShowFields<\/a>"],[0,1,"<a href=\"ReportingAdmin.php.html#134\">ReportingAdmin::configureRoutes<\/a>"],[0,1,"<a href=\"SiteColorAdmin.php.html#24\">SiteColorAdmin::configureDatagridFilters<\/a>"],[0,1,"<a href=\"SiteColorAdmin.php.html#45\">SiteColorAdmin::configureListFields<\/a>"],[0,1,"<a href=\"SiteColorAdmin.php.html#74\">SiteColorAdmin::configureFormFields<\/a>"],[0,1,"<a href=\"SiteColorAdmin.php.html#91\">SiteColorAdmin::configureShowFields<\/a>"],[0,1,"<a href=\"SiteColorAdmin.php.html#112\">SiteColorAdmin::configureRoutes<\/a>"],[0,1,"<a href=\"SiteImageAdmin.php.html#22\">SiteImageAdmin::configureDatagridFilters<\/a>"],[0,1,"<a href=\"SiteImageAdmin.php.html#40\">SiteImageAdmin::configureListFields<\/a>"],[0,1,"<a href=\"SiteImageAdmin.php.html#71\">SiteImageAdmin::configureFormFields<\/a>"],[0,1,"<a href=\"SiteImageAdmin.php.html#93\">SiteImageAdmin::configureShowFields<\/a>"],[0,1,"<a href=\"SiteImageAdmin.php.html#115\">SiteImageAdmin::configureRoutes<\/a>"],[0,1,"<a href=\"SiteParameterAdmin.php.html#25\">SiteParameterAdmin::configureDatagridFilters<\/a>"],[0,1,"<a href=\"SiteParameterAdmin.php.html#46\">SiteParameterAdmin::configureListFields<\/a>"],[0,9,"<a href=\"SiteParameterAdmin.php.html#74\">SiteParameterAdmin::configureFormFields<\/a>"],[0,1,"<a href=\"SiteParameterAdmin.php.html#149\">SiteParameterAdmin::configureShowFields<\/a>"],[0,1,"<a href=\"SiteParameterAdmin.php.html#170\">SiteParameterAdmin::configureRoutes<\/a>"],[0,1,"<a href=\"SocialNetworkAdmin.php.html#23\">SocialNetworkAdmin::configureDatagridFilters<\/a>"],[0,1,"<a href=\"SocialNetworkAdmin.php.html#47\">SocialNetworkAdmin::configureListFields<\/a>"],[0,1,"<a href=\"SocialNetworkAdmin.php.html#84\">SocialNetworkAdmin::configureFormFields<\/a>"],[0,1,"<a href=\"SocialNetworkAdmin.php.html#115\">SocialNetworkAdmin::configureShowFields<\/a>"],[0,1,"<a href=\"SocialNetworkAdmin.php.html#143\">SocialNetworkAdmin::configureRoutes<\/a>"],[0,1,"<a href=\"SourceAdmin.php.html#17\">SourceAdmin::configureDatagridFilters<\/a>"],[0,1,"<a href=\"SourceAdmin.php.html#59\">SourceAdmin::configureListFields<\/a>"],[0,1,"<a href=\"SourceAdmin.php.html#101\">SourceAdmin::configureFormFields<\/a>"],[0,2,"<a href=\"SourceAdmin.php.html#144\">SourceAdmin::configureShowFields<\/a>"],[0,1,"<a href=\"SourceAdmin.php.html#194\">SourceAdmin::configureRoutes<\/a>"],[0,1,"<a href=\"StepAdmin.php.html#24\">StepAdmin::configureDatagridFilters<\/a>"],[0,1,"<a href=\"StepAdmin.php.html#57\">StepAdmin::configureListFields<\/a>"],[0,2,"<a href=\"StepAdmin.php.html#101\">StepAdmin::configureFormFields<\/a>"],[0,1,"<a href=\"StepAdmin.php.html#153\">StepAdmin::configureShowFields<\/a>"],[0,1,"<a href=\"StepAdmin.php.html#191\">StepAdmin::getBatchActions<\/a>"],[0,1,"<a href=\"ThemeAdmin.php.html#24\">ThemeAdmin::configureDatagridFilters<\/a>"],[0,1,"<a href=\"ThemeAdmin.php.html#54\">ThemeAdmin::configureListFields<\/a>"],[0,1,"<a href=\"ThemeAdmin.php.html#99\">ThemeAdmin::configureFormFields<\/a>"],[0,1,"<a href=\"ThemeAdmin.php.html#144\">ThemeAdmin::configureShowFields<\/a>"],[0,1,"<a href=\"ThemeAdmin.php.html#197\">ThemeAdmin::getFeatures<\/a>"],[0,1,"<a href=\"UserAdmin.php.html#15\">UserAdmin::getFormBuilder<\/a>"],[0,1,"<a href=\"UserAdmin.php.html#45\">UserAdmin::configureListFields<\/a>"],[0,1,"<a href=\"UserAdmin.php.html#82\">UserAdmin::configureDatagridFilters<\/a>"],[0,1,"<a href=\"UserAdmin.php.html#102\">UserAdmin::configureShowFields<\/a>"],[0,9,"<a href=\"UserAdmin.php.html#162\">UserAdmin::configureFormFields<\/a>"],[0,1,"<a href=\"UserAdmin.php.html#319\">UserAdmin::prePersist<\/a>"],[0,2,"<a href=\"UserAdmin.php.html#324\">UserAdmin::getTemplate<\/a>"],[0,1,"<a href=\"VideoAdmin.php.html#24\">VideoAdmin::configureDatagridFilters<\/a>"],[0,1,"<a href=\"VideoAdmin.php.html#51\">VideoAdmin::configureListFields<\/a>"],[0,1,"<a href=\"VideoAdmin.php.html#88\">VideoAdmin::configureFormFields<\/a>"],[0,1,"<a href=\"VideoAdmin.php.html#139\">VideoAdmin::configureShowFields<\/a>"]], 'Method Complexity'))
+      .transition()
+      .duration(500)
+      .call(chart);
+
+    nv.utils.windowResize(chart.update);
+
+    return chart;
+  });
+
+  function getComplexityData(data, label) {
+    var values = [];
+    $.each(data, function(key) {
+      var value = Math.round(data[key][0]*100) / 100;
+      values.push({
+        x: value,
+        y: data[key][1],
+        class: data[key][2],
+        size: 0.05,
+        shape: 'diamond'
+      });
+    });
+
+    return [
+      {
+        key: label,
+        values: values,
+        color: "#4572A7"
+      }
+    ];
+  }
+});
+  </script>
+ </body>
+</html>

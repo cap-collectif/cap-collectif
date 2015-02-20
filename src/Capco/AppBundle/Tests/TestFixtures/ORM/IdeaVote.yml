@@ -1,0 +1,29 @@
+Capco\AppBundle\Entity\IdeaVote:
+    IdeaVote1:
+        Idea: @Idea1
+        Voter: @user
+        createdAt: <(new \DateTime('2015-01-01'))>
+    IdeaVote2:
+          Idea: @Idea1
+          Voter: @admin
+          createdAt: <(new \DateTime('2015-01-01'))>
+    IdeaVote3:
+          Idea: @Idea2
+          Voter: @user
+          createdAt: <(new \DateTime('2015-01-01'))>
+    IdeaVote4:
+        Idea: @IdeaTrashed
+        Voter: @user
+        createdAt: <(new \DateTime('2015-01-01'))>
+    IdeaVote5:
+          Idea: @IdeaUnpublished
+          Voter: @admin
+          createdAt: <(new \DateTime('2015-01-01'))>
+    IdeaVote6:
+          Idea: @IdeaUnpublished
+          Voter: @user
+          createdAt: <(new \DateTime('2015-01-01'))>
+    IdeaVote7:
+          Idea: @IdeaUnpublishedTheme
+          Voter: @admin
+          createdAt: <(new \DateTime('2015-01-01'))>

@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <title>Dashboard for /Users/Suzy/Repositories/CapCollectif-SF2/src/Capco/AppBundle/Controller</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="../../css/bootstrap.min.css" rel="stylesheet">
+  <link href="../../css/nv.d3.css" rel="stylesheet">
+  <link href="../../css/style.css" rel="stylesheet">
+  <!--[if lt IE 9]>
+  <script src="../../js/html5shiv.min.js"></script>
+  <script src="../../js/respond.min.js"></script>
+  <![endif]-->
+ </head>
+ <body>
+  <header>
+   <div class="container">
+    <div class="row">
+     <div class="col-md-12">
+      <ol class="breadcrumb">
+        <li><a href="../../index.html">/Users/Suzy/Repositories/CapCollectif-SF2/src/Capco</a></li>
+        <li><a href="../index.html">AppBundle</a></li>
+        <li><a href="index.html">Controller</a></li>
+        <li class="active">(Dashboard)</li>
+
+      </ol>
+     </div>
+    </div>
+   </div>
+  </header>
+  <div class="container">
+   <div class="row">
+    <div class="col-md-12">
+     <h2>Classes</h2>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-6">
+     <h3>Coverage Distribution</h3>
+     <div id="classCoverageDistribution" style="height: 300px;">
+       <svg></svg>
+     </div>
+    </div>
+    <div class="col-md-6">
+     <h3>Complexity</h3>
+     <div id="classComplexity" style="height: 300px;">
+       <svg></svg>
+     </div>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-6">
+     <h3>Insufficient Coverage</h3>
+     <div class="scrollbox">
+      <table class="table">
+       <thead>
+        <tr>
+         <th>Class</th>
+         <th class="text-right">Coverage</th>
+        </tr>
+       </thead>
+       <tbody>
+       <tr><td><a href="SourceController.php.html#21">SourceController</a></td><td class="text-right">28%</td></tr>
+       <tr><td><a href="ConsultationController.php.html#23">ConsultationController</a></td><td class="text-right">42%</td></tr>
+       <tr><td><a href="ReportingController.php.html#24">ReportingController</a></td><td class="text-right">44%</td></tr>
+       <tr><td><a href="DefaultController.php.html#15">DefaultController</a></td><td class="text-right">44%</td></tr>
+       <tr><td><a href="OpinionController.php.html#26">OpinionController</a></td><td class="text-right">47%</td></tr>
+       <tr><td><a href="ArgumentController.php.html#23">ArgumentController</a></td><td class="text-right">50%</td></tr>
+       <tr><td><a href="StepController.php.html#20">StepController</a></td><td class="text-right">54%</td></tr>
+       <tr><td><a href="HomepageController.php.html#18">HomepageController</a></td><td class="text-right">56%</td></tr>
+       <tr><td><a href="IdeaController.php.html#20">IdeaController</a></td><td class="text-right">59%</td></tr>
+       <tr><td><a href="PageController.php.html#14">PageController</a></td><td class="text-right">66%</td></tr>
+       <tr><td><a href="EventController.php.html#14">EventController</a></td><td class="text-right">68%</td></tr>
+       <tr><td><a href="ThemeController.php.html#16">ThemeController</a></td><td class="text-right">69%</td></tr>
+
+       </tbody>
+      </table>
+     </div>
+    </div>
+    <div class="col-md-6">
+     <h3>Project Risks</h3>
+     <div class="scrollbox">
+      <table class="table">
+       <thead>
+        <tr>
+         <th>Class</th>
+         <th class="text-right"><abbr title="Change Risk Anti-Patterns (CRAP) Index">CRAP</abbr></th>
+        </tr>
+       </thead>
+       <tbody>
+       <tr><td><a href="OpinionController.php.html#26">OpinionController</a></td><td class="text-right">398</td></tr>
+       <tr><td><a href="SourceController.php.html#21">SourceController</a></td><td class="text-right">376</td></tr>
+       <tr><td><a href="IdeaController.php.html#20">IdeaController</a></td><td class="text-right">123</td></tr>
+       <tr><td><a href="ReportingController.php.html#24">ReportingController</a></td><td class="text-right">115</td></tr>
+       <tr><td><a href="ConsultationController.php.html#23">ConsultationController</a></td><td class="text-right">96</td></tr>
+       <tr><td><a href="ArgumentController.php.html#23">ArgumentController</a></td><td class="text-right">89</td></tr>
+       <tr><td><a href="HomepageController.php.html#18">HomepageController</a></td><td class="text-right">20</td></tr>
+       <tr><td><a href="DefaultController.php.html#15">DefaultController</a></td><td class="text-right">15</td></tr>
+       <tr><td><a href="EventController.php.html#14">EventController</a></td><td class="text-right">14</td></tr>
+       <tr><td><a href="ThemeController.php.html#16">ThemeController</a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="StepController.php.html#20">StepController</a></td><td class="text-right">5</td></tr>
+       <tr><td><a href="PageController.php.html#14">PageController</a></td><td class="text-right">2</td></tr>
+
+       </tbody>
+      </table>
+     </div>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-12">
+     <h2>Methods</h2>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-6">
+     <h3>Coverage Distribution</h3>
+     <div id="methodCoverageDistribution" style="height: 300px;">
+       <svg></svg>
+     </div>
+    </div>
+    <div class="col-md-6">
+     <h3>Complexity</h3>
+     <div id="methodComplexity" style="height: 300px;">
+       <svg></svg>
+     </div>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-6">
+     <h3>Insufficient Coverage</h3>
+     <div class="scrollbox">
+      <table class="table">
+       <thead>
+        <tr>
+         <th>Method</th>
+         <th class="text-right">Coverage</th>
+        </tr>
+       </thead>
+       <tbody>
+       <tr><td><a href="OpinionController.php.html#38"><abbr title="OpinionController::deleteOpinionVoteAction">deleteOpinionVoteAction</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ArgumentController.php.html#71"><abbr title="ArgumentController::voteOnArgumentAction">voteOnArgumentAction</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="SourceController.php.html#33"><abbr title="SourceController::createSourceAction">createSourceAction</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="OpinionController.php.html#254"><abbr title="OpinionController::handleOpinionVoteForm">handleOpinionVoteForm</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ConsultationController.php.html#161"><abbr title="ConsultationController::showTrashedAction">showTrashedAction</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ConsultationController.php.html#116"><abbr title="ConsultationController::showByTypeAction">showByTypeAction</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ThemeController.php.html#130"><abbr title="ThemeController::themeEventsAction">themeEventsAction</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="StepController.php.html#60"><abbr title="StepController::showStepAction">showStepAction</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="SourceController.php.html#235"><abbr title="SourceController::voteOnSourceAction">voteOnSourceAction</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ConsultationController.php.html#33"><abbr title="ConsultationController::lastConsultationsAction">lastConsultationsAction</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="OpinionController.php.html#443"><abbr title="OpinionController::handleCreateArgumentForm">handleCreateArgumentForm</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="DefaultController.php.html#21"><abbr title="DefaultController::contactAction">contactAction</a></a></td><td class="text-right">20%</td></tr>
+       <tr><td><a href="HomepageController.php.html#24"><abbr title="HomepageController::homepageAction">homepageAction</a></a></td><td class="text-right">40%</td></tr>
+       <tr><td><a href="ReportingController.php.html#236"><abbr title="ReportingController::reportingIdeaAction">reportingIdeaAction</a></a></td><td class="text-right">40%</td></tr>
+       <tr><td><a href="ReportingController.php.html#36"><abbr title="ReportingController::reportingOpinionAction">reportingOpinionAction</a></a></td><td class="text-right">44%</td></tr>
+       <tr><td><a href="SourceController.php.html#155"><abbr title="SourceController::updateSourceAction">updateSourceAction</a></a></td><td class="text-right">44%</td></tr>
+       <tr><td><a href="ReportingController.php.html#102"><abbr title="ReportingController::reportingSourceAction">reportingSourceAction</a></a></td><td class="text-right">44%</td></tr>
+       <tr><td><a href="ReportingController.php.html#170"><abbr title="ReportingController::reportingArgumentAction">reportingArgumentAction</a></a></td><td class="text-right">44%</td></tr>
+       <tr><td><a href="IdeaController.php.html#281"><abbr title="IdeaController::showAction">showAction</a></a></td><td class="text-right">47%</td></tr>
+       <tr><td><a href="IdeaController.php.html#165"><abbr title="IdeaController::updateAction">updateAction</a></a></td><td class="text-right">50%</td></tr>
+       <tr><td><a href="IdeaController.php.html#28"><abbr title="IdeaController::createAction">createAction</a></a></td><td class="text-right">50%</td></tr>
+       <tr><td><a href="IdeaController.php.html#68"><abbr title="IdeaController::deleteAction">deleteAction</a></a></td><td class="text-right">54%</td></tr>
+       <tr><td><a href="HomepageController.php.html#98"><abbr title="HomepageController::lastConsultationsAction">lastConsultationsAction</a></a></td><td class="text-right">55%</td></tr>
+       <tr><td><a href="OpinionController.php.html#306"><abbr title="OpinionController::showOpinionAction">showOpinionAction</a></a></td><td class="text-right">61%</td></tr>
+       <tr><td><a href="OpinionController.php.html#194"><abbr title="OpinionController::updateOpinionAction">updateOpinionAction</a></a></td><td class="text-right">62%</td></tr>
+       <tr><td><a href="ArgumentController.php.html#144"><abbr title="ArgumentController::updateArgumentAction">updateArgumentAction</a></a></td><td class="text-right">62%</td></tr>
+       <tr><td><a href="EventController.php.html#26"><abbr title="EventController::indexAction">indexAction</a></a></td><td class="text-right">63%</td></tr>
+       <tr><td><a href="EventController.php.html#74"><abbr title="EventController::showArchivedAction">showArchivedAction</a></a></td><td class="text-right">63%</td></tr>
+       <tr><td><a href="ThemeController.php.html#28"><abbr title="ThemeController::indexAction">indexAction</a></a></td><td class="text-right">64%</td></tr>
+       <tr><td><a href="SourceController.php.html#91"><abbr title="SourceController::deleteSourceAction">deleteSourceAction</a></a></td><td class="text-right">64%</td></tr>
+       <tr><td><a href="OpinionController.php.html#80"><abbr title="OpinionController::createOpinionAction">createOpinionAction</a></a></td><td class="text-right">65%</td></tr>
+       <tr><td><a href="OpinionController.php.html#133"><abbr title="OpinionController::deleteOpinionAction">deleteOpinionAction</a></a></td><td class="text-right">65%</td></tr>
+       <tr><td><a href="ArgumentController.php.html#208"><abbr title="ArgumentController::deleteArgumentAction">deleteArgumentAction</a></a></td><td class="text-right">65%</td></tr>
+       <tr><td><a href="PageController.php.html#24"><abbr title="PageController::showAction">showAction</a></a></td><td class="text-right">66%</td></tr>
+       <tr><td><a href="ConsultationController.php.html#192"><abbr title="ConsultationController::indexAction">indexAction</a></a></td><td class="text-right">69%</td></tr>
+       <tr><td><a href="IdeaController.php.html#218"><abbr title="IdeaController::indexAction">indexAction</a></a></td><td class="text-right">70%</td></tr>
+       <tr><td><a href="BlogController.php.html#19"><abbr title="BlogController::indexAction">indexAction</a></a></td><td class="text-right">87%</td></tr>
+       <tr><td><a href="DefaultController.php.html#63"><abbr title="DefaultController::footerAction">footerAction</a></a></td><td class="text-right">87%</td></tr>
+       <tr><td><a href="IdeaController.php.html#116"><abbr title="IdeaController::showTrashedAction">showTrashedAction</a></a></td><td class="text-right">88%</td></tr>
+
+       </tbody>
+      </table>
+     </div>
+    </div>
+    <div class="col-md-6">
+     <h3>Project Risks</h3>
+     <div class="scrollbox">
+      <table class="table">
+       <thead>
+        <tr>
+         <th>Method</th>
+         <th class="text-right"><abbr title="Change Risk Anti-Patterns (CRAP) Index">CRAP</abbr></th>
+        </tr>
+       </thead>
+       <tbody>
+       <tr><td><a href="SourceController.php.html#235"><abbr title="SourceController::voteOnSourceAction">voteOnSourceAction</abbr></a></td><td class="text-right">72</td></tr>
+       <tr><td><a href="ArgumentController.php.html#71"><abbr title="ArgumentController::voteOnArgumentAction">voteOnArgumentAction</abbr></a></td><td class="text-right">72</td></tr>
+       <tr><td><a href="OpinionController.php.html#254"><abbr title="OpinionController::handleOpinionVoteForm">handleOpinionVoteForm</abbr></a></td><td class="text-right">42</td></tr>
+       <tr><td><a href="SourceController.php.html#33"><abbr title="SourceController::createSourceAction">createSourceAction</abbr></a></td><td class="text-right">42</td></tr>
+       <tr><td><a href="OpinionController.php.html#38"><abbr title="OpinionController::deleteOpinionVoteAction">deleteOpinionVoteAction</abbr></a></td><td class="text-right">42</td></tr>
+       <tr><td><a href="SourceController.php.html#155"><abbr title="SourceController::updateSourceAction">updateSourceAction</abbr></a></td><td class="text-right">26</td></tr>
+       <tr><td><a href="OpinionController.php.html#306"><abbr title="OpinionController::showOpinionAction">showOpinionAction</abbr></a></td><td class="text-right">22</td></tr>
+       <tr><td><a href="IdeaController.php.html#281"><abbr title="IdeaController::showAction">showAction</abbr></a></td><td class="text-right">20</td></tr>
+       <tr><td><a href="OpinionController.php.html#443"><abbr title="OpinionController::handleCreateArgumentForm">handleCreateArgumentForm</abbr></a></td><td class="text-right">20</td></tr>
+       <tr><td><a href="ConsultationController.php.html#116"><abbr title="ConsultationController::showByTypeAction">showByTypeAction</abbr></a></td><td class="text-right">20</td></tr>
+       <tr><td><a href="ReportingController.php.html#36"><abbr title="ReportingController::reportingOpinionAction">reportingOpinionAction</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="ReportingController.php.html#102"><abbr title="ReportingController::reportingSourceAction">reportingSourceAction</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="ReportingController.php.html#170"><abbr title="ReportingController::reportingArgumentAction">reportingArgumentAction</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="StepController.php.html#60"><abbr title="StepController::showStepAction">showStepAction</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="ConsultationController.php.html#33"><abbr title="ConsultationController::lastConsultationsAction">lastConsultationsAction</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="DefaultController.php.html#21"><abbr title="DefaultController::contactAction">contactAction</abbr></a></td><td class="text-right">11</td></tr>
+       <tr><td><a href="IdeaController.php.html#165"><abbr title="IdeaController::updateAction">updateAction</abbr></a></td><td class="text-right">10</td></tr>
+       <tr><td><a href="ReportingController.php.html#236"><abbr title="ReportingController::reportingIdeaAction">reportingIdeaAction</abbr></a></td><td class="text-right">10</td></tr>
+       <tr><td><a href="OpinionController.php.html#194"><abbr title="OpinionController::updateOpinionAction">updateOpinionAction</abbr></a></td><td class="text-right">9</td></tr>
+       <tr><td><a href="ArgumentController.php.html#144"><abbr title="ArgumentController::updateArgumentAction">updateArgumentAction</abbr></a></td><td class="text-right">9</td></tr>
+       <tr><td><a href="IdeaController.php.html#68"><abbr title="IdeaController::deleteAction">deleteAction</abbr></a></td><td class="text-right">9</td></tr>
+       <tr><td><a href="SourceController.php.html#91"><abbr title="SourceController::deleteSourceAction">deleteSourceAction</abbr></a></td><td class="text-right">9</td></tr>
+       <tr><td><a href="OpinionController.php.html#133"><abbr title="OpinionController::deleteOpinionAction">deleteOpinionAction</abbr></a></td><td class="text-right">9</td></tr>
+       <tr><td><a href="ArgumentController.php.html#208"><abbr title="ArgumentController::deleteArgumentAction">deleteArgumentAction</abbr></a></td><td class="text-right">8</td></tr>
+       <tr><td><a href="IdeaController.php.html#28"><abbr title="IdeaController::createAction">createAction</abbr></a></td><td class="text-right">8</td></tr>
+       <tr><td><a href="OpinionController.php.html#80"><abbr title="OpinionController::createOpinionAction">createOpinionAction</abbr></a></td><td class="text-right">7</td></tr>
+       <tr><td><a href="HomepageController.php.html#24"><abbr title="HomepageController::homepageAction">homepageAction</abbr></a></td><td class="text-right">7</td></tr>
+       <tr><td><a href="ConsultationController.php.html#192"><abbr title="ConsultationController::indexAction">indexAction</abbr></a></td><td class="text-right">7</td></tr>
+       <tr><td><a href="IdeaController.php.html#218"><abbr title="IdeaController::indexAction">indexAction</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="ThemeController.php.html#28"><abbr title="ThemeController::indexAction">indexAction</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="ConsultationController.php.html#161"><abbr title="ConsultationController::showTrashedAction">showTrashedAction</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="EventController.php.html#74"><abbr title="EventController::showArchivedAction">showArchivedAction</abbr></a></td><td class="text-right">4</td></tr>
+       <tr><td><a href="EventController.php.html#26"><abbr title="EventController::indexAction">indexAction</abbr></a></td><td class="text-right">4</td></tr>
+       <tr><td><a href="HomepageController.php.html#98"><abbr title="HomepageController::lastConsultationsAction">lastConsultationsAction</abbr></a></td><td class="text-right">3</td></tr>
+       <tr><td><a href="BlogController.php.html#19"><abbr title="BlogController::indexAction">indexAction</abbr></a></td><td class="text-right">3</td></tr>
+       <tr><td><a href="IdeaController.php.html#116"><abbr title="IdeaController::showTrashedAction">showTrashedAction</abbr></a></td><td class="text-right">3</td></tr>
+       <tr><td><a href="PageController.php.html#24"><abbr title="PageController::showAction">showAction</abbr></a></td><td class="text-right">2</td></tr>
+       <tr><td><a href="DefaultController.php.html#63"><abbr title="DefaultController::footerAction">footerAction</abbr></a></td><td class="text-right">2</td></tr>
+
+       </tbody>
+      </table>
+     </div>
+    </div>
+   </div>
+   <footer>
+    <hr/>
+    <p>
+     <small>Generated by <a href="http://github.com/sebastianbergmann/php-code-coverage" target="_top">PHP_CodeCoverage 2.0.15</a> using <a href="http://php.net/" target="_top">PHP 5.5.19</a> and <a href="http://phpunit.de/">PHPUnit 4.7-g7b9e68d</a> at Wed Feb 25 19:52:24 CET 2015.</small>
+    </p>
+   </footer>
+  </div>
+  <script src="../../js/jquery.min.js" type="text/javascript"></script>
+  <script src="../../js/bootstrap.min.js" type="text/javascript"></script>
+  <script src="../../js/holder.js" type="text/javascript"></script>
+  <script src="../../js/d3.min.js" type="text/javascript"></script>
+  <script src="../../js/nv.d3.min.js" type="text/javascript"></script>
+  <script type="text/javascript">
+$(document).ready(function() {
+  nv.addGraph(function() {
+    var chart = nv.models.multiBarChart();
+    chart.tooltips(false)
+      .showControls(false)
+      .showLegend(false)
+      .reduceXTicks(false)
+      .staggerLabels(true)
+      .yAxis.tickFormat(d3.format('d'));
+
+    d3.select('#classCoverageDistribution svg')
+      .datum(getCoverageDistributionData([0,0,0,1,0,4,4,3,0,0,1,1], "Class Coverage"))
+      .transition().duration(500).call(chart);
+
+    nv.utils.windowResize(chart.update);
+
+    return chart;
+  });
+
+  nv.addGraph(function() {
+    var chart = nv.models.multiBarChart();
+    chart.tooltips(false)
+      .showControls(false)
+      .showLegend(false)
+      .reduceXTicks(false)
+      .staggerLabels(true)
+      .yAxis.tickFormat(d3.format('d'));
+
+    d3.select('#methodCoverageDistribution svg')
+      .datum(getCoverageDistributionData([11,0,0,1,0,7,4,12,1,3,0,18], "Method Coverage"))
+      .transition().duration(500).call(chart);
+
+    nv.utils.windowResize(chart.update);
+
+    return chart;
+  });
+
+  function getCoverageDistributionData(data, label) {
+    var labels = [
+      '0%',
+      '0-10%',
+      '10-20%',
+      '20-30%',
+      '30-40%',
+      '40-50%',
+      '50-60%',
+      '60-70%',
+      '70-80%',
+      '80-90%',
+      '90-100%',
+      '100%'
+    ];
+    var values = [];
+    $.each(labels, function(key) {
+      values.push({x: labels[key], y: data[key]});
+    });
+
+    return [
+      {
+        key: label,
+        values: values,
+        color: "#4572A7"
+      }
+    ];
+  }
+  nv.addGraph(function() {
+    var chart = nv.models.scatterChart()
+      .showDistX(true)
+      .showDistY(true)
+      .showLegend(false)
+      .forceX([0, 100]);
+    chart.scatter.onlyCircles(false);
+    chart.tooltipContent(function(key, y, e, graph) {
+      return '<p>' + graph.point.class + '</p>';
+    });
+
+    chart.xAxis.axisLabel('Code Coverage (in percent)');
+    chart.yAxis.axisLabel('Cyclomatic Complexity');
+
+    d3.select('#classComplexity svg')
+      .datum(getComplexityData([[50,23,"<a href=\"ArgumentController.php.html#23\">ArgumentController<\/a>"],[90,5,"<a href=\"BlogController.php.html#11\">BlogController<\/a>"],[42.268041237113,20,"<a href=\"ConsultationController.php.html#23\">ConsultationController<\/a>"],[44.444444444444,7,"<a href=\"DefaultController.php.html#15\">DefaultController<\/a>"],[68,11,"<a href=\"EventController.php.html#14\">EventController<\/a>"],[56.756756756757,11,"<a href=\"HomepageController.php.html#18\">HomepageController<\/a>"],[59.259259259259,36,"<a href=\"IdeaController.php.html#20\">IdeaController<\/a>"],[47.391304347826,49,"<a href=\"OpinionController.php.html#26\">OpinionController<\/a>"],[66.666666666667,2,"<a href=\"PageController.php.html#14\">PageController<\/a>"],[44.029850746269,23,"<a href=\"ReportingController.php.html#24\">ReportingController<\/a>"],[100,15,"<a href=\"SitemapsController.php.html#9\">SitemapsController<\/a>"],[28.87323943662,31,"<a href=\"SourceController.php.html#21\">SourceController<\/a>"],[54.545454545455,4,"<a href=\"StepController.php.html#20\">StepController<\/a>"],[69.047619047619,10,"<a href=\"ThemeController.php.html#16\">ThemeController<\/a>"]], 'Class Complexity'))
+      .transition()
+      .duration(500)
+      .call(chart);
+
+    nv.utils.windowResize(chart.update);
+
+    return chart;
+  });
+
+  nv.addGraph(function() {
+    var chart = nv.models.scatterChart()
+      .showDistX(true)
+      .showDistY(true)
+      .showLegend(false)
+      .forceX([0, 100]);
+    chart.scatter.onlyCircles(false);
+    chart.tooltipContent(function(key, y, e, graph) {
+      return '<p>' + graph.point.class + '</p>';
+    });
+
+    chart.xAxis.axisLabel('Code Coverage (in percent)');
+    chart.yAxis.axisLabel('Method Complexity');
+
+    d3.select('#methodComplexity svg')
+      .datum(getComplexityData([[100,1,"<a href=\"ArgumentController.php.html#35\">ArgumentController::showArgumentsAction<\/a>"],[0,8,"<a href=\"ArgumentController.php.html#71\">ArgumentController::voteOnArgumentAction<\/a>"],[62.5,7,"<a href=\"ArgumentController.php.html#144\">ArgumentController::updateArgumentAction<\/a>"],[65.625,7,"<a href=\"ArgumentController.php.html#208\">ArgumentController::deleteArgumentAction<\/a>"],[87.5,3,"<a href=\"BlogController.php.html#19\">BlogController::indexAction<\/a>"],[100,2,"<a href=\"BlogController.php.html#51\">BlogController::showAction<\/a>"],[0,3,"<a href=\"ConsultationController.php.html#33\">ConsultationController::lastConsultationsAction<\/a>"],[100,3,"<a href=\"ConsultationController.php.html#56\">ConsultationController::showAction<\/a>"],[100,1,"<a href=\"ConsultationController.php.html#77\">ConsultationController::showNavOpinionTypesAction<\/a>"],[100,1,"<a href=\"ConsultationController.php.html#93\">ConsultationController::showOpinionsAction<\/a>"],[0,4,"<a href=\"ConsultationController.php.html#116\">ConsultationController::showByTypeAction<\/a>"],[0,2,"<a href=\"ConsultationController.php.html#161\">ConsultationController::showTrashedAction<\/a>"],[69.444444444444,6,"<a href=\"ConsultationController.php.html#192\">ConsultationController::indexAction<\/a>"],[20.833333333333,4,"<a href=\"DefaultController.php.html#21\">DefaultController::contactAction<\/a>"],[87.5,2,"<a href=\"DefaultController.php.html#63\">DefaultController::footerAction<\/a>"],[100,1,"<a href=\"DefaultController.php.html#85\">DefaultController::navigationAction<\/a>"],[63.636363636364,4,"<a href=\"EventController.php.html#26\">EventController::indexAction<\/a>"],[63.636363636364,4,"<a href=\"EventController.php.html#74\">EventController::showArchivedAction<\/a>"],[100,2,"<a href=\"EventController.php.html#117\">EventController::showAction<\/a>"],[100,1,"<a href=\"EventController.php.html#137\">EventController::lastEventsAction<\/a>"],[40,4,"<a href=\"HomepageController.php.html#24\">HomepageController::homepageAction<\/a>"],[100,1,"<a href=\"HomepageController.php.html#65\">HomepageController::lastIdeasAction<\/a>"],[100,1,"<a href=\"HomepageController.php.html#76\">HomepageController::lastThemesAction<\/a>"],[100,1,"<a href=\"HomepageController.php.html#87\">HomepageController::lastPostsAction<\/a>"],[55.555555555556,3,"<a href=\"HomepageController.php.html#98\">HomepageController::lastConsultationsAction<\/a>"],[100,1,"<a href=\"HomepageController.php.html#116\">HomepageController::socialNetworksAction<\/a>"],[50,5,"<a href=\"IdeaController.php.html#28\">IdeaController::createAction<\/a>"],[54.545454545455,6,"<a href=\"IdeaController.php.html#68\">IdeaController::deleteAction<\/a>"],[88.235294117647,3,"<a href=\"IdeaController.php.html#116\">IdeaController::showTrashedAction<\/a>"],[100,1,"<a href=\"IdeaController.php.html#151\">IdeaController::lastIdeasAction<\/a>"],[50,6,"<a href=\"IdeaController.php.html#165\">IdeaController::updateAction<\/a>"],[70.27027027027,6,"<a href=\"IdeaController.php.html#218\">IdeaController::indexAction<\/a>"],[47.727272727273,9,"<a href=\"IdeaController.php.html#281\">IdeaController::showAction<\/a>"],[0,6,"<a href=\"OpinionController.php.html#38\">OpinionController::deleteOpinionVoteAction<\/a>"],[65.384615384615,6,"<a href=\"OpinionController.php.html#80\">OpinionController::createOpinionAction<\/a>"],[65.51724137931,7,"<a href=\"OpinionController.php.html#133\">OpinionController::deleteOpinionAction<\/a>"],[62.068965517241,7,"<a href=\"OpinionController.php.html#194\">OpinionController::updateOpinionAction<\/a>"],[0,6,"<a href=\"OpinionController.php.html#254\">OpinionController::handleOpinionVoteForm<\/a>"],[61.111111111111,13,"<a href=\"OpinionController.php.html#306\">OpinionController::showOpinionAction<\/a>"],[0,4,"<a href=\"OpinionController.php.html#443\">OpinionController::handleCreateArgumentForm<\/a>"],[66.666666666667,2,"<a href=\"PageController.php.html#24\">PageController::showAction<\/a>"],[44.444444444444,6,"<a href=\"ReportingController.php.html#36\">ReportingController::reportingOpinionAction<\/a>"],[44.736842105263,6,"<a href=\"ReportingController.php.html#102\">ReportingController::reportingSourceAction<\/a>"],[44.736842105263,6,"<a href=\"ReportingController.php.html#170\">ReportingController::reportingArgumentAction<\/a>"],[40.909090909091,5,"<a href=\"ReportingController.php.html#236\">ReportingController::reportingIdeaAction<\/a>"],[100,15,"<a href=\"SitemapsController.php.html#17\">SitemapsController::sitemapAction<\/a>"],[0,6,"<a href=\"SourceController.php.html#33\">SourceController::createSourceAction<\/a>"],[64.516129032258,7,"<a href=\"SourceController.php.html#91\">SourceController::deleteSourceAction<\/a>"],[44.68085106383,10,"<a href=\"SourceController.php.html#155\">SourceController::updateSourceAction<\/a>"],[0,8,"<a href=\"SourceController.php.html#235\">SourceController::voteOnSourceAction<\/a>"],[100,1,"<a href=\"StepController.php.html#29\">StepController::showAllInNavAction<\/a>"],[0,3,"<a href=\"StepController.php.html#60\">StepController::showStepAction<\/a>"],[64.516129032258,5,"<a href=\"ThemeController.php.html#28\">ThemeController::indexAction<\/a>"],[100,2,"<a href=\"ThemeController.php.html#84\">ThemeController::showAction<\/a>"],[100,1,"<a href=\"ThemeController.php.html#101\">ThemeController::themeConsultationsAction<\/a>"],[100,1,"<a href=\"ThemeController.php.html#117\">ThemeController::themeIdeasAction<\/a>"],[0,1,"<a href=\"ThemeController.php.html#130\">ThemeController::themeEventsAction<\/a>"]], 'Method Complexity'))
+      .transition()
+      .duration(500)
+      .call(chart);
+
+    nv.utils.windowResize(chart.update);
+
+    return chart;
+  });
+
+  function getComplexityData(data, label) {
+    var values = [];
+    $.each(data, function(key) {
+      var value = Math.round(data[key][0]*100) / 100;
+      values.push({
+        x: value,
+        y: data[key][1],
+        class: data[key][2],
+        size: 0.05,
+        shape: 'diamond'
+      });
+    });
+
+    return [
+      {
+        key: label,
+        values: values,
+        color: "#4572A7"
+      }
+    ];
+  }
+});
+  </script>
+ </body>
+</html>

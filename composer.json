@@ -49,7 +49,9 @@
         "willdurand/geocoder": "~3.0@dev"
     },
     "require-dev": {
-        "sensio/generator-bundle": "~2.3"
+        "sensio/generator-bundle": "~2.3",
+        "liip/functional-test-bundle": "~1.0@dev",
+        "phpunit/phpunit-selenium": "dev-master"
     },
     "scripts": {
         "post-root-package-install": [

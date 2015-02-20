@@ -1,0 +1,59 @@
+Capco\AppBundle\Entity\Event:
+    eventPassed:
+        title: ForumPHP2014
+        isEnabled: true
+        body: |
+          <p>Idque Caesaris facere voluntate liceret: sese habere. Paullum deliquit, ponderibus modulisque suis ratio utitur. Vivamus sagittis lacus vel augue laoreet rutrum faucibus.</p>
+          <p>Etiam habebis sem dicantur magna mollis euismod. Praeterea iter est quasdam res quas ex communi. Ullamco laboris nisi ut aliquid ex ea commodi consequat. Mercedem aut nummos unde unde extricat, amaras.
+             Quae vero auctorem tractata ab fiducia dicuntur. Morbi fringilla convallis sapien, id pulvinar odio volutpat. Quam diu etiam furor iste tuus nos eludet? Non equidem invideo, miror magis posuere velit aliquet. Quisque placerat facilisis egestas cillum dolore. Qui ipsorum lingua Celtae, nostra Galli appellantur.
+             Quae vero auctorem tractata ab fiducia dicuntur. Me non paenitet nullum festiviorem excogitasse ad hoc. Prima luce, cum quibus mons aliud  consensu ab eo. Prima luce, cum quibus mons aliud  consensu ab eo.
+             Nec dubitamus multa iter quae et nos invenerat. Inmensae subtilitatis, obscuris et malesuada fames. Quam diu etiam furor iste tuus nos eludet? Integer legentibus erat a ante historiarum dapibus.</p>
+             <h2>Pulvinar odio volutpat</h2>
+        startAt: <(new \DateTime('2014-10-23'))>
+        endAt: <(new \DateTime('2014-10-24'))>
+        Author: @admin
+        address: 111 Avenue Clémenceau
+        city: Lyon
+    eventPassedWithLink:
+        title: PHPTour2014
+        isEnabled: true
+        body: |
+          <p>Idque Caesaris facere voluntate liceret: sese habere. Paullum deliquit, ponderibus modulisque suis ratio utitur. Vivamus sagittis lacus vel augue laoreet rutrum faucibus.</p>
+           <p>Fictum,  deserunt mollit anim laborum astutumque! Phasellus laoreet lorem vel dolor tempus vehicula. Cras mattis iudicium purus sit amet fermentum. Cum ceteris in veneratione tui montes, nascetur mus.
+              Hi omnes lingua, institutis, legibus inter se differunt. Unam incolunt Belgae, aliam Aquitani, tertiam. Integer legentibus erat a ante historiarum dapibus. Morbi fringilla convallis sapien, id pulvinar odio volutpat. Paullum deliquit, ponderibus modulisque suis ratio utitur.</p>
+        startAt: <(new \DateTime('2014-06-23'))>
+        endAt: <(new \DateTime('2014-06-24'))>
+        Author: @admin
+        address: 16 bis avenue Parmentier
+        zipCode: 75011
+        city: Paris
+        country: France
+        link: http://www.phptour2014.fr
+    eventComing:
+        title: PHPTour2019
+        isEnabled: true
+        body: |
+          <p>Idque Caesaéàris facere voluntate liceret: sese habere. Paullum deliquit, ponderibus modulisque suis ratio utitur. Vivamus sagittis lacus vel augue laoreet rutrum faucibus.</p>
+          <p>Etiam habebis sem dicantur magna mollis euismod. Praeterea iter est quasdam res quas ex communi. Ullamco laboris nisi ut aliquid ex ea commodi consequat. Mercedem aut nummos unde unde extricat, amaras.
+             Quae vero auctorem tractata ab fiducia dicuntur. Morbi fringilla convallis sapien, id pulvinar odio volutpat. Quam diu etiam furor iste tuus nos eludet? Non equidem invideo, miror magis posuere velit aliquet. Quisque placerat facilisis egestas cillum dolore. Qui ipsorum lingua Celtae, nostra Galli appellantur.
+             Quae vero auctorem tractata ab fiducia dicuntur. Me non paenitet nullum festiviorem excogitasse ad hoc. Prima luce, cum quibus mons aliud  consensu ab eo. Prima luce, cum quibus mons aliud  consensu ab eo.
+             Nec dubitamus multa iter quae et nos invenerat. Inmensae subtilitatis, obscuris et malesuada fames. Quam diu etiam furor iste tuus nos eludet? Integer legentibus erat a ante historiarum dapibus.</p>
+             <h2>Pulvinar odio volutpat</h2>
+             <p>Fictum,  deserunt mollit anim laborum astutumque! Phasellus laoreet lorem vel dolor tempus vehicula. Cras mattis iudicium purus sit amet fermentum. Cum ceteris in veneratione tui montes, nascetur mus.
+                Hi omnes lingua, institutis, legibus inter se differunt. Unam incolunt Belgae, aliam Aquitani, tertiam. Integer legentibus erat a ante historiarum dapibus. Morbi fringilla convallis sapien, id pulvinar odio volutpat. Paullum deliquit, ponderibus modulisque suis ratio utitur.</p>
+        startAt: <(new \DateTime('2019-05-23'))>
+        endAt: <(new \DateTime('2019-05-24'))>
+        Author: @admin
+        address: 457 Rue de Picardie
+        city: Bordeaux
+        link: http://www.PHPTour2015.fr
+        Media: @MediaConsultation3
+    eventComingDisabled:
+        title: SymfonyLive2015
+        isEnabled: false
+        body: |
+             <p>Fictum,  deserunt mollit anim laborum astutumque! Phasellus laoreet lorem vel dolor tempus vehicula. Cras mattis iudicium purus sit amet fermentum. Cum ceteris in veneratione tui montes, nascetur mus.
+                Hi omnes lingua, institutis, legibus inter se differunt. Unam incolunt Belgae, aliam Aquitani, tertiam. Integer legentibus erat a ante historiarum dapibus. Morbi fringilla convallis sapien, id pulvinar odio volutpat. Paullum deliquit, ponderibus modulisque suis ratio utitur.</p>
+        startAt: <(new \DateTime('2018-07-23'))>
+        endAt: <(new \DateTime('2018-07-24'))>
+        Author: @admin

@@ -25,7 +25,7 @@ class ReportingController extends Controller
 {
 
     /**
-     * @Route("/consultation/{consultationSlug}/opinions/{opinionTypeSlug}/{opinionSlug}/report", name="app_report_opinion")
+     * @Route("/consultations/{consultationSlug}/opinions/{opinionTypeSlug}/{opinionSlug}/report", name="app_report_opinion")
      * @Template("CapcoAppBundle:Reporting:create.html.twig")
      * @param $request
      * @param $consultationSlug
@@ -90,7 +90,7 @@ class ReportingController extends Controller
     }
 
     /**
-     * @Route("/consultation/{consultationSlug}/opinions/{opinionTypeSlug}/{opinionSlug}/sources/{sourceSlug}/report", name="app_report_source")
+     * @Route("/consultations/{consultationSlug}/opinions/{opinionTypeSlug}/{opinionSlug}/sources/{sourceSlug}/report", name="app_report_source")
      * @Template("CapcoAppBundle:Reporting:create.html.twig")
      * @param $request
      * @param $consultationSlug
@@ -158,7 +158,7 @@ class ReportingController extends Controller
     }
 
     /**
-     * @Route("/consultation/{consultationSlug}/{opinionTypeSlug}/{opinionSlug}/arguments/{argumentId}/report", name="app_report_argument")
+     * @Route("/consultations/{consultationSlug}/opinions/{opinionTypeSlug}/{opinionSlug}/arguments/{argumentId}/report", name="app_report_argument")
      * @Template("CapcoAppBundle:Reporting:create.html.twig")
      * @param $request
      * @param $consultationSlug

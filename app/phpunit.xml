@@ -8,7 +8,7 @@
          processIsolation= "false"
          stopOnFailure= "false"
          syntaxCheck= "false"
-         bootstrap="bootstrap.php.cache"
+         bootstrap="test.bootstrap.php"
 >
     <testsuites>
         <testsuite name="Project Test Suite">
@@ -17,11 +17,9 @@
         </testsuite>
     </testsuites>
 
-    <!--
     <php>
-        <server name="KERNEL_DIR" value="/path/to/your/app/" />
+        <server name="BOOTSTRAP_CLEAR_CACHE_ENV" value="test"/>
     </php>
-    -->
 
     <filter>
         <whitelist>

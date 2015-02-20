@@ -1,0 +1,68 @@
+Capco\AppBundle\Entity\Idea:
+    Idea1:
+        title: Idée
+        body: |
+              <p><text(100)></p>
+              <h3>mon titre numéro 3</h3>
+              <p><text(500)></p>
+              <h3>mon titre numéro 2</h3>
+              <p><text(300)></p>
+        Theme: @theme1
+        Author: @user
+        createdAt: <(new \DateTime('2015-01-01'))>
+        isTrashed: false
+        Media: @MediaIdea1
+
+    Idea2:
+        title: Idée admin
+        body: |
+              <p><text(100)></p>
+              <h3>mon titre numéro 3</h3>
+              <p><text(500)></p>
+              <h3>mon titre numéro 2</h3>
+              <p><text(300)></p>
+        Theme: @theme2
+        Author: @admin
+        createdAt: <(new \DateTime('2015-01-01'))>
+        isTrashed: false
+
+    IdeaTrashed:
+        title: Idée à la corbeille
+        body: |
+            <p><text(100)></p>
+            <h3>mon titre numéro 3</h3>
+            <p><text(500)></p>
+            <h3>mon titre numéro 2</h3>
+            <p><text(300)></p>
+        Theme: @theme2
+        Author: @admin
+        createdAt: <(new \DateTime('2015-01-11'))>
+        isTrashed: true
+        Media: @MediaIdea2
+
+    IdeaUnpublished:
+        title: <text(38)>
+        body: |
+            <p><text(100)></p>
+            <h2>Un beau titre</h2>
+            <p><text(500)></p>
+            <h3>mon titre</h3>
+            <p><text(300)></p>
+        Theme: @theme1
+        Author: @admin
+        createdAt: <(new \DateTime('2015-01-11'))>
+        isTrashed: false
+        isEnabled: false
+
+    IdeaUnpublishedTheme:
+        title: Idée dans un thème non publié
+        body: |
+              <p><text(100)></p>
+              <h2>Mon titre</h2>
+              <p><text(500)></p>
+              <h3>Un autre titre</h3>
+              <p><text(300)></p>
+        Theme: @theme3
+        Author: @admin
+        createdAt: <(new \DateTime('2015-01-21'))>
+        isTrashed: false

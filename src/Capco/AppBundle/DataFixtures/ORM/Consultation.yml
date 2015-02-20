@@ -21,5 +21,6 @@ Capco\AppBundle\Entity\Consultation:
         title: Transformation numérique des relations
         teaser: <text(35)>
         body: <text(100)>
+        isEnabled: false
         Author: @user4
         Themes: [@theme2, @theme3]

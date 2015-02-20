@@ -19,6 +19,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Cache;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Symfony\Component\Form\Form;
 
@@ -26,7 +27,7 @@ class OpinionController extends Controller
 {
 
     /**
-     * @Route("/secure/consultation/{consultationSlug}/opinions/{opinionTypeSlug}/{opinionSlug}/remove/{opinionVote}", name="app_consultation_cancel_vote")
+     * @Route("/secure/consultations/{consultationSlug}/opinions/{opinionTypeSlug}/{opinionSlug}/remove/{opinionVote}", name="app_consultation_cancel_vote")
      * @param $request
      * @param $consultationSlug
      * @param $opinionTypeSlug
@@ -82,8 +83,12 @@ class OpinionController extends Controller
             throw new AccessDeniedException($this->get('translator')->trans('error.access_restricted', array(), 'CapcoAppBundle'));
         }
 
-       if (false == $consultation->canContribute()) {
+        if (false == $consultation->canContribute()) {
             throw new AccessDeniedException($this->get('translator')->trans('consultation.error.no_contribute', array(), 'CapcoAppBundle'));
+        }
+
+        if (!$opinionType->getIsEnabled()) {
+            throw new NotFoundHttpException();
         }
 
         $opinion = new Opinion();
@@ -194,7 +199,7 @@ class OpinionController extends Controller
 
         $opinion = $this->getDoctrine()->getRepository('CapcoAppBundle:Opinion')->getOneBySlug($consultationSlug, $opinionTypeSlug, $opinionSlug);
 
-        if($opinion == null){
+        if ($opinion == null){
             throw $this->createNotFoundException($this->get('translator')->trans('opinion.error.not_found', array(), 'CapcoAppBundle'));
         }
 

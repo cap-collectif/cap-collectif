@@ -1,0 +1,33 @@
+Capco\AppBundle\Entity\Argument:
+    argumentYes:
+        Author: @admin
+        Opinion: @pb1
+        type: 1
+        body: <text(300)>
+    argumentNo:
+        Author: @admin
+        Opinion: @pb1
+        type: 0
+        body: <text(300)>
+    argumentTrashed:
+        Author: @admin
+        Opinion: @pb1
+        type: <numberBetween(0, 1)>
+        body: <text(300)>
+        isTrashed: true
+    argumentDisabled:
+        Author: @admin
+        Opinion: @pb1
+        type: <numberBetween(0, 1)>
+        body: <text(300)>
+        isEnabled: false
+    argumentDisabledOpinion:
+        Author: @admin
+        Opinion: @causeDisabled1
+        type: <numberBetween(0, 1)>
+        body: <text(300)>
+    argumentTrashedOpinion:
+        Author: @admin
+        Opinion: @causeTrashed
+        type: <numberBetween(0, 1)>
+        body: <text(300)>

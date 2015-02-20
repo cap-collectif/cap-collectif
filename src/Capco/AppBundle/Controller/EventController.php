@@ -14,9 +14,9 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 class EventController extends Controller
 {
     /**
-     * @Route("/event", name="app_event", defaults={"_feature_flag" = "calendar"} )
-     * @Route("/event/filter/{theme}", name="app_event_search_theme", defaults={"_feature_flag" = "calendar", "theme" = "all"} )
-     * @Route("/event/filter/{theme}/{term}", name="app_event_search_term", defaults={"_feature_flag" = "calendar", "theme" = "all"} )
+     * @Route("/events", name="app_event", defaults={"_feature_flag" = "calendar"} )
+     * @Route("/events/filter/{theme}", name="app_event_search_theme", defaults={"_feature_flag" = "calendar", "theme" = "all"} )
+     * @Route("/events/filter/{theme}/{term}", name="app_event_search_term", defaults={"_feature_flag" = "calendar", "theme" = "all"} )
      * @Template()
      * @param $request
      * @param $theme
@@ -62,9 +62,9 @@ class EventController extends Controller
     }
 
     /**
-     * @Route("/event/archived", name="app_event_archived", defaults={"_feature_flag" = "calendar"} )
-     * @Route("/event/archived/{theme}", name="app_event_archived_theme", defaults={"_feature_flag" = "calendar", "theme" = "all"} )
-     * @Route("/event/archived/{theme}/{term}", name="app_event_archived_term", defaults={"_feature_flag" = "calendar", "theme" = "all"} )
+     * @Route("/events/archived", name="app_event_archived", defaults={"_feature_flag" = "calendar"} )
+     * @Route("/events/archived/{theme}", name="app_event_archived_theme", defaults={"_feature_flag" = "calendar", "theme" = "all"} )
+     * @Route("/events/archived/{theme}/{term}", name="app_event_archived_term", defaults={"_feature_flag" = "calendar", "theme" = "all"} )
      * @Template("CapcoAppBundle:Event:show_archived.html.twig")
      * @param $theme
      * @param $term
@@ -109,7 +109,7 @@ class EventController extends Controller
     }
 
     /**
-     * @Route("/event/{slug}", name="app_event_show", defaults={"_feature_flag" = "calendar"} )
+     * @Route("/events/{slug}", name="app_event_show", defaults={"_feature_flag" = "calendar"} )
      * @Template()
      * @param $request
      * @return array

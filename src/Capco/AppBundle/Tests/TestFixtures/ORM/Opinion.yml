@@ -1,0 +1,71 @@
+Capco\AppBundle\Entity\Opinion:
+    pb1:
+        Consultation: @cs1
+        title: Problème
+        body: |
+             <p><text(100)></p>
+             <p><text(300)></p>
+        isEnabled: true
+        isTrashed: false
+        Author: @user
+        OpinionType: @pb
+    pb2:
+        Consultation: @cs1
+        title: Problème admin
+        body: |
+             <p><text(100)></p>
+             <p><text(300)></p>
+        isEnabled: true
+        isTrashed: false
+        Author: @admin
+        OpinionType: @pb
+    causeDisabled1:
+        Consultation: @cs1
+        title: Cause désactivée
+        body: |
+             <p><text(100)></p>
+             <p><text(300)></p>
+        isEnabled: false
+        isTrashed: false
+        Author: @user
+        OpinionType: @cause
+    causeDisabled2:
+        Consultation: @cs2
+        title: Cause désactivée 2
+        body: |
+             <p><text(100)></p>
+             <p><text(300)></p>
+        isEnabled: false
+        isTrashed: false
+        Author: @admin
+        OpinionType: @cause
+    causeTrashed:
+        Consultation: @cs2
+        title: Cause à la corbeille
+        body: |
+             <p><text(100)></p>
+             <p><text(300)></p>
+        isEnabled: true
+        isTrashed: true
+        Author: @admin
+        OpinionType: @cause
+    causeTrashedDisabled:
+        Consultation: @cs2
+        title: Cause à la corbeille désactivée
+        body: |
+             <p><text(100)></p>
+             <p><text(300)></p>
+        isEnabled: false
+        isTrashed: true
+        Author: @admin
+        OpinionType: @cause
+    causeDisbledCS:
+        Consultation: @csDisabled
+        title: Cause dans une consultation désactivée
+        body: |
+             <p><text(100)></p>
+             <p><text(300)></p>
+        isEnabled: true
+        isTrashed: false
+        Author: @admin
+        OpinionType: @cause

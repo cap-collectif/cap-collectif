@@ -1,0 +1,38 @@
+Capco\AppBundle\Entity\Theme:
+    theme1:
+        title: Immobilier
+        teaser: <sentence(3)>
+        isEnabled: true
+        position: 1
+        status: 0
+        body: |
+            <p>Mise en place du thème <strong>immobilier</strong></p>
+            <p><text(1000)></p>
+            <h3>un thème pas comme les autres</h3>
+            <p><text(500)></p>
+        Author: @admin
+    theme2:
+        title: Justice
+        isEnabled: true
+        position: 2
+        status: 1
+        body: |
+              <p>Mise en place du thème <strong>justice</strong></p>
+              <p><text(1000)></p>
+              <h3>un thème important</h3>
+              <p><text(500)></p>
+        Author: @admin
+        Media: @MediaConsultation1
+    theme3:
+        title: Transport
+        teaser: <sentence(3)>
+        isEnabled: false
+        position: 3
+        status: 2
+        body: |
+              <p>Mise en place du thème <strong>transport</strong></p>
+              <p><text(100)></p>
+              <h3>un troisième thème pratique</h3>
+              <p><text(500)></p>
+        Author: @admin
+        Media: @MediaConsultation2

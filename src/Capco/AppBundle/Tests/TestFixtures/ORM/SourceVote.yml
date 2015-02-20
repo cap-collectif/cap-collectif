@@ -1,0 +1,29 @@
+Capco\AppBundle\Entity\SourceVote:
+    SourceVote1:
+        Source: @source1
+        Voter: @user
+        createdAt: <(new \DateTime('2015-01-01'))>
+    SourceVote2:
+          Source: @source1
+          Voter: @admin
+          createdAt: <(new \DateTime('2015-01-01'))>
+    SourceVote3:
+        Source: @sourceTrashed
+        Voter: @user
+        createdAt: <(new \DateTime('2015-01-01'))>
+    SourceVote4:
+          Source: @sourceDisabled
+          Voter: @admin
+          createdAt: <(new \DateTime('2015-01-01'))>
+    SourceVote5:
+          Source: @sourceDisabled
+          Voter: @user
+          createdAt: <(new \DateTime('2015-01-01'))>
+    SourceVote6:
+          Source: @sourceDisabledOpinion
+          Voter: @admin
+          createdAt: <(new \DateTime('2015-01-01'))>
+    SourceVote7:
+          Source: @sourceDisabledCategory
+          Voter: @admin
+          createdAt: <(new \DateTime('2015-01-01'))>

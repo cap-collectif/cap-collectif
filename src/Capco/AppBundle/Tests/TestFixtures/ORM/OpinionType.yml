@@ -1,0 +1,15 @@
+Capco\AppBundle\Entity\OpinionType:
+    pb:
+        title: Le problème constaté
+        shortName: Problèmes
+        position: 1
+        voteWidgetType: 3
+        color: red
+        isEnabled: 0
+    cause:
+        title: Les causes
+        shortName: Causes
+        position: 2
+        voteWidgetType: 1
+        color: orange
+        isEnabled: true

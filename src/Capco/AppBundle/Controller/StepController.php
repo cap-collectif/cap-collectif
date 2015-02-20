@@ -13,6 +13,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Cache;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Symfony\Component\Form\Form;
 
@@ -58,6 +59,14 @@ class StepController extends Controller
      */
     public function showStepAction(Consultation $consultation, Step $step)
     {
+        if (!$step->getConsultation()->canDisplay()) {
+            throw new NotFoundHttpException();
+        }
+
+        if ($step->isConsultationStep()) {
+            throw new NotFoundHttpException();
+        }
+
         $em = $this->getDoctrine()->getManager();
         $consultation = $em->getRepository('CapcoAppBundle:Consultation')->getOne($consultation->getSlug());
 

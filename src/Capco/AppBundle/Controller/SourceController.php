@@ -22,7 +22,7 @@ class SourceController extends Controller
 {
 
     /**
-     * @Route("/consultation/{consultationSlug}/opinions/{opinionTypeSlug}/{opinionSlug}/sources/add", name="app_new_source")
+     * @Route("/consultations/{consultationSlug}/opinions/{opinionTypeSlug}/{opinionSlug}/sources/add", name="app_new_source")
      * @param $consultationSlug
      * @param $opinionTypeSlug
      * @param $opinionSlug
@@ -32,7 +32,7 @@ class SourceController extends Controller
      */
     public function createSourceAction($consultationSlug, $opinionTypeSlug, $opinionSlug, Request $request)
     {
-        if (false === $this->get('security.authorization_checker')->isGranted('ROLE_USER')) {
+        if (!$this->get('security.authorization_checker')->isGranted('ROLE_USER')) {
             throw new AccessDeniedException($this->get('translator')->trans('error.access_restricted', array(), 'CapcoAppBundle'));
         }
 
@@ -79,7 +79,7 @@ class SourceController extends Controller
     }
 
     /**
-     * @Route("/consultation/{consultationSlug}/opinions/{opinionTypeSlug}/{opinionSlug}/sources/{sourceSlug}/delete", name="app_delete_source")
+     * @Route("/consultations/{consultationSlug}/opinions/{opinionTypeSlug}/{opinionSlug}/sources/{sourceSlug}/delete", name="app_delete_source")
      * @param consultationSlug
      * @param $opinionTypeSlug
      * @param $opinionSlug
@@ -143,7 +143,7 @@ class SourceController extends Controller
     }
 
     /**
-     * @Route("/consultation/{consultationSlug}/opinions/{opinionTypeSlug}/{opinionSlug}/sources/{sourceSlug}/edit", name="app_edit_source")
+     * @Route("/consultations/{consultationSlug}/opinions/{opinionTypeSlug}/{opinionSlug}/sources/{sourceSlug}/edit", name="app_edit_source")
      * @Template("CapcoAppBundle:Source:update.html.twig")
      * @param consultationSlug
      * @param $opinionTypeSlug
@@ -224,7 +224,7 @@ class SourceController extends Controller
     }
 
     /**
-     * @Route("/secure/consultation/{consultationSlug}/opinions/{opinionTypeSlug}/{opinionSlug}/sources/{sourceSlug}/vote", name="app_consultation_vote_source")
+     * @Route("/secure/consultations/{consultationSlug}/opinions/{opinionTypeSlug}/{opinionSlug}/sources/{sourceSlug}/vote", name="app_consultation_vote_source")
      * @param consultationSlug
      * @param $opinionTypeSlug
      * @param $opinionSlug

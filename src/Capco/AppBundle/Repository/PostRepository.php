@@ -62,7 +62,7 @@ class PostRepository extends EntityRepository
             ->setParameter('slug', $slug)
             ->setMaxResults(1);
 
-        return $qb->getQuery()->getSingleResult();
+        return $qb->getQuery()->getOneOrNullResult();
     }
 
     public function getPublishedPosts($page = 1, $pageSize)

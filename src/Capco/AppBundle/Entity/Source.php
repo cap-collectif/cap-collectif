@@ -174,6 +174,7 @@ class Source
     {
         $this->type = self::LINK;
         $this->Reports = new ArrayCollection();
+        $this->Votes = new ArrayCollection();
         $this->voteCountSource = 0;
         $this->updatedAt = new \DateTime;
     }

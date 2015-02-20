@@ -1,0 +1,21 @@
+Capco\AppBundle\Entity\SocialNetwork:
+    SocialNetwork1:
+        title: Facebook
+        link: http://facebook.com
+        position: 1
+        isEnabled: true
+        media: @MediaFacebook
+
+    SocialNetwork2:
+        title: Twitter
+        link: http://twitter.com
+        position: 2
+        isEnabled: false
+        media: @MediaTwitter
+
+    SocialNetwork3:
+        title: Cap Collectif
+        link: http://www.cap-collectif.com/
+        position: 6
+        isEnabled: true
+        media: @MediaCapcoSite

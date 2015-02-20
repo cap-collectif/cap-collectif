@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <title>Dashboard for /Users/Suzy/Repositories/CapCollectif-SF2/src/Capco/AppBundle/Form</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="../../css/bootstrap.min.css" rel="stylesheet">
+  <link href="../../css/nv.d3.css" rel="stylesheet">
+  <link href="../../css/style.css" rel="stylesheet">
+  <!--[if lt IE 9]>
+  <script src="../../js/html5shiv.min.js"></script>
+  <script src="../../js/respond.min.js"></script>
+  <![endif]-->
+ </head>
+ <body>
+  <header>
+   <div class="container">
+    <div class="row">
+     <div class="col-md-12">
+      <ol class="breadcrumb">
+        <li><a href="../../index.html">/Users/Suzy/Repositories/CapCollectif-SF2/src/Capco</a></li>
+        <li><a href="../index.html">AppBundle</a></li>
+        <li><a href="index.html">Form</a></li>
+        <li class="active">(Dashboard)</li>
+
+      </ol>
+     </div>
+    </div>
+   </div>
+  </header>
+  <div class="container">
+   <div class="row">
+    <div class="col-md-12">
+     <h2>Classes</h2>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-6">
+     <h3>Coverage Distribution</h3>
+     <div id="classCoverageDistribution" style="height: 300px;">
+       <svg></svg>
+     </div>
+    </div>
+    <div class="col-md-6">
+     <h3>Complexity</h3>
+     <div id="classComplexity" style="height: 300px;">
+       <svg></svg>
+     </div>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-6">
+     <h3>Insufficient Coverage</h3>
+     <div class="scrollbox">
+      <table class="table">
+       <thead>
+        <tr>
+         <th>Class</th>
+         <th class="text-right">Coverage</th>
+        </tr>
+       </thead>
+       <tbody>
+       <tr><td><a href="OpinionsSortType.php.html#10">OpinionsSortType</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Extension/MediaTypeExtension.php.html#9">MediaTypeExtension</a></td><td class="text-right">72%</td></tr>
+
+       </tbody>
+      </table>
+     </div>
+    </div>
+    <div class="col-md-6">
+     <h3>Project Risks</h3>
+     <div class="scrollbox">
+      <table class="table">
+       <thead>
+        <tr>
+         <th>Class</th>
+         <th class="text-right"><abbr title="Change Risk Anti-Patterns (CRAP) Index">CRAP</abbr></th>
+        </tr>
+       </thead>
+       <tbody>
+       <tr><td><a href="Extension/MediaTypeExtension.php.html#9">MediaTypeExtension</a></td><td class="text-right">4</td></tr>
+
+       </tbody>
+      </table>
+     </div>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-12">
+     <h2>Methods</h2>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-6">
+     <h3>Coverage Distribution</h3>
+     <div id="methodCoverageDistribution" style="height: 300px;">
+       <svg></svg>
+     </div>
+    </div>
+    <div class="col-md-6">
+     <h3>Complexity</h3>
+     <div id="methodComplexity" style="height: 300px;">
+       <svg></svg>
+     </div>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-6">
+     <h3>Insufficient Coverage</h3>
+     <div class="scrollbox">
+      <table class="table">
+       <thead>
+        <tr>
+         <th>Method</th>
+         <th class="text-right">Coverage</th>
+        </tr>
+       </thead>
+       <tbody>
+       <tr><td><a href="SourcesType.php.html#68"><abbr title="SourcesType::anonymous function">anonymous function</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="OpinionsSortType.php.html#33"><abbr title="OpinionsSortType::getName">getName</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="OpinionsSortType.php.html#16"><abbr title="OpinionsSortType::buildForm">buildForm</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Extension/MediaTypeExtension.php.html#52"><abbr title="MediaTypeExtension::getExtendedType">getExtendedType</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Extension/MediaTypeExtension.php.html#24"><abbr title="MediaTypeExtension::buildForm">buildForm</a></a></td><td class="text-right">70%</td></tr>
+
+       </tbody>
+      </table>
+     </div>
+    </div>
+    <div class="col-md-6">
+     <h3>Project Risks</h3>
+     <div class="scrollbox">
+      <table class="table">
+       <thead>
+        <tr>
+         <th>Method</th>
+         <th class="text-right"><abbr title="Change Risk Anti-Patterns (CRAP) Index">CRAP</abbr></th>
+        </tr>
+       </thead>
+       <tbody>
+       <tr><td><a href="SourcesType.php.html#68"><abbr title="SourcesType::anonymous function">anonymous function</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="Extension/MediaTypeExtension.php.html#24"><abbr title="MediaTypeExtension::buildForm">buildForm</abbr></a></td><td class="text-right">2</td></tr>
+
+       </tbody>
+      </table>
+     </div>
+    </div>
+   </div>
+   <footer>
+    <hr/>
+    <p>
+     <small>Generated by <a href="http://github.com/sebastianbergmann/php-code-coverage" target="_top">PHP_CodeCoverage 2.0.15</a> using <a href="http://php.net/" target="_top">PHP 5.5.19</a> and <a href="http://phpunit.de/">PHPUnit 4.7-g7b9e68d</a> at Wed Feb 25 19:52:24 CET 2015.</small>
+    </p>
+   </footer>
+  </div>
+  <script src="../../js/jquery.min.js" type="text/javascript"></script>
+  <script src="../../js/bootstrap.min.js" type="text/javascript"></script>
+  <script src="../../js/holder.js" type="text/javascript"></script>
+  <script src="../../js/d3.min.js" type="text/javascript"></script>
+  <script src="../../js/nv.d3.min.js" type="text/javascript"></script>
+  <script type="text/javascript">
+$(document).ready(function() {
+  nv.addGraph(function() {
+    var chart = nv.models.multiBarChart();
+    chart.tooltips(false)
+      .showControls(false)
+      .showLegend(false)
+      .reduceXTicks(false)
+      .staggerLabels(true)
+      .yAxis.tickFormat(d3.format('d'));
+
+    d3.select('#classCoverageDistribution svg')
+      .datum(getCoverageDistributionData([1,0,0,0,0,0,0,0,1,0,1,14], "Class Coverage"))
+      .transition().duration(500).call(chart);
+
+    nv.utils.windowResize(chart.update);
+
+    return chart;
+  });
+
+  nv.addGraph(function() {
+    var chart = nv.models.multiBarChart();
+    chart.tooltips(false)
+      .showControls(false)
+      .showLegend(false)
+      .reduceXTicks(false)
+      .staggerLabels(true)
+      .yAxis.tickFormat(d3.format('d'));
+
+    d3.select('#methodCoverageDistribution svg')
+      .datum(getCoverageDistributionData([4,0,0,0,0,0,0,0,1,0,0,46], "Method Coverage"))
+      .transition().duration(500).call(chart);
+
+    nv.utils.windowResize(chart.update);
+
+    return chart;
+  });
+
+  function getCoverageDistributionData(data, label) {
+    var labels = [
+      '0%',
+      '0-10%',
+      '10-20%',
+      '20-30%',
+      '30-40%',
+      '40-50%',
+      '50-60%',
+      '60-70%',
+      '70-80%',
+      '80-90%',
+      '90-100%',
+      '100%'
+    ];
+    var values = [];
+    $.each(labels, function(key) {
+      values.push({x: labels[key], y: data[key]});
+    });
+
+    return [
+      {
+        key: label,
+        values: values,
+        color: "#4572A7"
+      }
+    ];
+  }
+  nv.addGraph(function() {
+    var chart = nv.models.scatterChart()
+      .showDistX(true)
+      .showDistY(true)
+      .showLegend(false)
+      .forceX([0, 100]);
+    chart.scatter.onlyCircles(false);
+    chart.tooltipContent(function(key, y, e, graph) {
+      return '<p>' + graph.point.class + '</p>';
+    });
+
+    chart.xAxis.axisLabel('Code Coverage (in percent)');
+    chart.yAxis.axisLabel('Cyclomatic Complexity');
+
+    d3.select('#classComplexity svg')
+      .datum(getComplexityData([[100,3,"<a href=\"ArgumentType.php.html#9\">ArgumentType<\/a>"],[100,2,"<a href=\"ArgumentsSortType.php.html#10\">ArgumentsSortType<\/a>"],[100,5,"<a href=\"ConsultationSearchType.php.html#12\">ConsultationSearchType<\/a>"],[100,3,"<a href=\"ContactType.php.html#12\">ContactType<\/a>"],[100,3,"<a href=\"EventSearchType.php.html#9\">EventSearchType<\/a>"],[72,4,"<a href=\"Extension\/MediaTypeExtension.php.html#9\">MediaTypeExtension<\/a>"],[100,5,"<a href=\"IdeaSearchType.php.html#12\">IdeaSearchType<\/a>"],[100,6,"<a href=\"IdeaType.php.html#12\">IdeaType<\/a>"],[100,2,"<a href=\"IdeaUpdateType.php.html#10\">IdeaUpdateType<\/a>"],[100,3,"<a href=\"IdeaVoteType.php.html#9\">IdeaVoteType<\/a>"],[100,3,"<a href=\"NewsletterSubscriptionType.php.html#9\">NewsletterSubscriptionType<\/a>"],[100,3,"<a href=\"OpinionVoteType.php.html#10\">OpinionVoteType<\/a>"],[0,2,"<a href=\"OpinionsSortType.php.html#10\">OpinionsSortType<\/a>"],[100,3,"<a href=\"OpinionsType.php.html#10\">OpinionsType<\/a>"],[100,2,"<a href=\"ReportingType.php.html#10\">ReportingType<\/a>"],[91.111111111111,6,"<a href=\"SourcesType.php.html#12\">SourcesType<\/a>"],[100,2,"<a href=\"ThemeSearchType.php.html#10\">ThemeSearchType<\/a>"]], 'Class Complexity'))
+      .transition()
+      .duration(500)
+      .call(chart);
+
+    nv.utils.windowResize(chart.update);
+
+    return chart;
+  });
+
+  nv.addGraph(function() {
+    var chart = nv.models.scatterChart()
+      .showDistX(true)
+      .showDistY(true)
+      .showLegend(false)
+      .forceX([0, 100]);
+    chart.scatter.onlyCircles(false);
+    chart.tooltipContent(function(key, y, e, graph) {
+      return '<p>' + graph.point.class + '</p>';
+    });
+
+    chart.xAxis.axisLabel('Code Coverage (in percent)');
+    chart.yAxis.axisLabel('Method Complexity');
+
+    d3.select('#methodComplexity svg')
+      .datum(getComplexityData([[100,1,"<a href=\"ArgumentType.php.html#15\">ArgumentType::buildForm<\/a>"],[100,1,"<a href=\"ArgumentType.php.html#30\">ArgumentType::setDefaultOptions<\/a>"],[100,1,"<a href=\"ArgumentType.php.html#42\">ArgumentType::getName<\/a>"],[100,1,"<a href=\"ArgumentsSortType.php.html#16\">ArgumentsSortType::buildForm<\/a>"],[100,1,"<a href=\"ArgumentsSortType.php.html#33\">ArgumentsSortType::getName<\/a>"],[100,1,"<a href=\"ConsultationSearchType.php.html#16\">ConsultationSearchType::__construct<\/a>"],[100,2,"<a href=\"ConsultationSearchType.php.html#25\">ConsultationSearchType::buildForm<\/a>"],[100,1,"<a href=\"ConsultationSearchType.php.html#50\">ConsultationSearchType::anonymous function<\/a>"],[100,1,"<a href=\"ConsultationSearchType.php.html#64\">ConsultationSearchType::getName<\/a>"],[100,1,"<a href=\"ContactType.php.html#14\">ContactType::buildForm<\/a>"],[100,1,"<a href=\"ContactType.php.html#32\">ContactType::getName<\/a>"],[100,1,"<a href=\"ContactType.php.html#37\">ContactType::setDefaultOptions<\/a>"],[100,1,"<a href=\"EventSearchType.php.html#15\">EventSearchType::buildForm<\/a>"],[100,1,"<a href=\"EventSearchType.php.html#29\">EventSearchType::anonymous function<\/a>"],[100,1,"<a href=\"EventSearchType.php.html#43\">EventSearchType::getName<\/a>"],[100,1,"<a href=\"Extension\/MediaTypeExtension.php.html#14\">MediaTypeExtension::setDefaultOptions<\/a>"],[70,2,"<a href=\"Extension\/MediaTypeExtension.php.html#24\">MediaTypeExtension::buildForm<\/a>"],[0,1,"<a href=\"Extension\/MediaTypeExtension.php.html#52\">MediaTypeExtension::getExtendedType<\/a>"],[100,1,"<a href=\"IdeaSearchType.php.html#16\">IdeaSearchType::__construct<\/a>"],[100,2,"<a href=\"IdeaSearchType.php.html#25\">IdeaSearchType::buildForm<\/a>"],[100,1,"<a href=\"IdeaSearchType.php.html#50\">IdeaSearchType::anonymous function<\/a>"],[100,1,"<a href=\"IdeaSearchType.php.html#64\">IdeaSearchType::getName<\/a>"],[100,1,"<a href=\"IdeaType.php.html#16\">IdeaType::__construct<\/a>"],[100,2,"<a href=\"IdeaType.php.html#25\">IdeaType::buildForm<\/a>"],[100,1,"<a href=\"IdeaType.php.html#49\">IdeaType::anonymous function<\/a>"],[100,1,"<a href=\"IdeaType.php.html#61\">IdeaType::setDefaultOptions<\/a>"],[100,1,"<a href=\"IdeaType.php.html#74\">IdeaType::getName<\/a>"],[100,1,"<a href=\"IdeaUpdateType.php.html#16\">IdeaUpdateType::buildForm<\/a>"],[100,1,"<a href=\"IdeaUpdateType.php.html#24\">IdeaUpdateType::getName<\/a>"],[100,1,"<a href=\"IdeaVoteType.php.html#15\">IdeaVoteType::buildForm<\/a>"],[100,1,"<a href=\"IdeaVoteType.php.html#22\">IdeaVoteType::setDefaultOptions<\/a>"],[100,1,"<a href=\"IdeaVoteType.php.html#34\">IdeaVoteType::getName<\/a>"],[100,1,"<a href=\"NewsletterSubscriptionType.php.html#15\">NewsletterSubscriptionType::buildForm<\/a>"],[100,1,"<a href=\"NewsletterSubscriptionType.php.html#28\">NewsletterSubscriptionType::setDefaultOptions<\/a>"],[100,1,"<a href=\"NewsletterSubscriptionType.php.html#39\">NewsletterSubscriptionType::getName<\/a>"],[100,1,"<a href=\"OpinionVoteType.php.html#16\">OpinionVoteType::buildForm<\/a>"],[100,1,"<a href=\"OpinionVoteType.php.html#33\">OpinionVoteType::setDefaultOptions<\/a>"],[100,1,"<a href=\"OpinionVoteType.php.html#45\">OpinionVoteType::getName<\/a>"],[0,1,"<a href=\"OpinionsSortType.php.html#16\">OpinionsSortType::buildForm<\/a>"],[0,1,"<a href=\"OpinionsSortType.php.html#33\">OpinionsSortType::getName<\/a>"],[100,1,"<a href=\"OpinionsType.php.html#16\">OpinionsType::buildForm<\/a>"],[100,1,"<a href=\"OpinionsType.php.html#33\">OpinionsType::setDefaultOptions<\/a>"],[100,1,"<a href=\"OpinionsType.php.html#46\">OpinionsType::getName<\/a>"],[100,1,"<a href=\"ReportingType.php.html#16\">ReportingType::buildForm<\/a>"],[100,1,"<a href=\"ReportingType.php.html#35\">ReportingType::getName<\/a>"],[100,1,"<a href=\"SourcesType.php.html#18\">SourcesType::buildForm<\/a>"],[100,2,"<a href=\"SourcesType.php.html#62\">SourcesType::setDefaultOptions<\/a>"],[0,2,"<a href=\"SourcesType.php.html#68\">SourcesType::anonymous function<\/a>"],[100,1,"<a href=\"SourcesType.php.html#83\">SourcesType::getName<\/a>"],[100,1,"<a href=\"ThemeSearchType.php.html#16\">ThemeSearchType::buildForm<\/a>"],[100,1,"<a href=\"ThemeSearchType.php.html#30\">ThemeSearchType::getName<\/a>"]], 'Method Complexity'))
+      .transition()
+      .duration(500)
+      .call(chart);
+
+    nv.utils.windowResize(chart.update);
+
+    return chart;
+  });
+
+  function getComplexityData(data, label) {
+    var values = [];
+    $.each(data, function(key) {
+      var value = Math.round(data[key][0]*100) / 100;
+      values.push({
+        x: value,
+        y: data[key][1],
+        class: data[key][2],
+        size: 0.05,
+        shape: 'diamond'
+      });
+    });
+
+    return [
+      {
+        key: label,
+        values: values,
+        color: "#4572A7"
+      }
+    ];
+  }
+});
+  </script>
+ </body>
+</html>
