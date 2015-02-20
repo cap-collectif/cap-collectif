@@ -568,13 +568,13 @@ share_button:
   gplus: Google+
   twitter: Twitter
   email: Email
-  link: Copier le lien
+  link: Lien de partage
   share_on:
     facebook: Partager sur Facebook
     twitter: Partager sur Facebook
     gplus: Partager sur Google+
     email: Partager par email
-    link: Partager un lien
+    link: Lien de partage
   argument_on: Argument sur la proposition "%opinion%"
 
 # event module
