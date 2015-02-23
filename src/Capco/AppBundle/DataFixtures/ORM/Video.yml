@@ -11,7 +11,7 @@ Capco\AppBundle\Entity\Video:
     video2:
         title: Stratégie technologique de l'Etat et services publics
         body: <text(50)>
-        isEnabled: false
+        isEnabled: true
         position: 3
         Author: @user2
         Media: @MediaConsultationImageVideo
@@ -23,4 +23,3 @@ Capco\AppBundle\Entity\Video:
         Author: @user3
         Media: @MediaConsultation3
         link: 'https://www.youtube.com/embed/A3PDXmYoF5U?autoplay=1'
-        color: black

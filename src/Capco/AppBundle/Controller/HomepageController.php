@@ -28,6 +28,8 @@ class HomepageController extends Controller
 
         $form = $this->createForm(new NewsletterSubscriptionType(), $subscription);
 
+        $videos = $this->get('capco.video.repository')->getAll();
+
         if ($request->getMethod() == 'POST') {
             $form->handleRequest($request);
 
@@ -50,7 +52,10 @@ class HomepageController extends Controller
 
         }
 
-        return array('form' => $form->createView());   
+        return array(
+            'form' => $form->createView(),
+            'videos' => $videos,
+        );
     }
 
     /**

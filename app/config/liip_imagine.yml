@@ -110,3 +110,10 @@ liip_imagine:
             format: png
             filters:
                 relative_resize: {widen: 320 }
+
+        default_homepage_video:
+            quality: 100
+            controller_action: 'SonataMediaBundle:Media:liipImagineFilter'
+            format: png
+            filters:
+                thumbnail: { size: [360, 240], mode: inbound }

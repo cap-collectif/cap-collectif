@@ -1,0 +1,25 @@
+{% if videos > 0 %}
+    <div class="row  block--first">
+        {% for video in videos %}
+            <div class="col-xs-12  col-sm-6  col-md-4  col-lg-4">
+                <div class="video">
+                    {%  if video.Media %}
+                        <a href="{{ video.link }}" class="play {% if video.color == "black" %} play--black {% endif %}fancybox" data-type="iframe">
+                            {% thumbnail video.Media, 'homepage_video' with {'title': video.Media.name, 'alt': video.Media.name, 'class': 'img-responsive'} %}
+                        </a>
+                    {% else %}
+                        <a href="{{ video.link }}" class="play {% if video.color == "black" %} play--black {% endif %} fancybox" data-type="iframe">
+                            <div class="bg--default bg--video"></div>
+                        </a>
+                    {%  endif %}
+                    {% if video.title %}
+                        <h3 class="h4">{{ video.title }}</h3>
+                    {% endif %}
+                    {% if video.body %}
+                        <p>{{ video.body }}</p>
+                    {% endif %}
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endif %}

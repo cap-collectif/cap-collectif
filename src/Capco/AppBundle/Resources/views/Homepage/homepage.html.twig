@@ -43,23 +43,24 @@
 
     {% set jumbotron2_title = capco_site_parameter_value('homepage.jumbotron2.title') %}
     {% set jumbotron2_body = capco_site_parameter_value('homepage.jumbotron2.body') %}
-    {% if null != jumbotron2_title or null != jumbotron2_body %}
+    {% if null != jumbotron2_title or null != jumbotron2_body or (videos|length > 0) %}
         <div class="jumbotron  jumbotron--custom  jumbotron--bg-2  jumbotron--small">
             <div class="container">
                 {% if null != jumbotron2_title %}
                     <h2>{{ jumbotron2_title }}</h2>
                 {% endif %}
                 {% if null != jumbotron2_body %}
-                    {{ jumbotron2_body|raw }}
+                    <div {% if videos|length > 0 %}class="block"{% endif %}>
+                        {{ jumbotron2_body|raw }}
+                    </div>
                 {% endif %}
+                {% include '@CapcoApp/Homepage/videos.html.twig' %}
             </div>
         </div>
     {% endif %}
 {% endblock %}
 
 {% block body %}
-
-    {{ render(controller('CapcoAppBundle:Video:videoList')) }}
 
     {% if is_feature_enabled('themes') %}
         {{ render(controller('CapcoAppBundle:Homepage:lastThemes', {'max': 4, 'offset': 0})) }}

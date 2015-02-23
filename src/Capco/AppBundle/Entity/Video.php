@@ -17,8 +17,8 @@ class Video
 {
 
     public static $colorButtonPlay = [
-        'black' => 'video.colors.black',
         'white' => 'video.colors.white',
+        'black' => 'video.colors.black',
     ];
 
     /**
@@ -85,7 +85,7 @@ class Video
      *
      * @ORM\Column(name="color", type="string", length=50)
      */
-    private $color;
+    private $color = 'white';
 
     /**
      * @ORM\Column(name="video", type="string")
