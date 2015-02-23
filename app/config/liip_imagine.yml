@@ -60,7 +60,7 @@ liip_imagine:
             controller_action: 'SonataMediaBundle:Media:liipImagineFilter'
             format: png
             filters:
-                relative_resize: { heighten: 250 }
+                relative_resize: { heighten: 400 }
 
         default_logo:
             quality: 70

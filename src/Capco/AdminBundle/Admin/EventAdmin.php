@@ -2,6 +2,9 @@
 
 namespace Capco\AdminBundle\Admin;
 
+use Capco\AppBundle\Entity\Event;
+use Geocoder\Provider\GoogleMaps;
+use Ivory\HttpAdapter\CurlHttpAdapter;
 use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Route\RouteCollection;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
@@ -104,14 +107,14 @@ class EventAdmin extends Admin
     {
         // define group zoning
         $formMapper
-            ->with('Event', array('class' => 'col-md-12'))->end()
-            ->with('Meta', array('class' => 'col-md-6'))->end()
-            ->with('Address', array('class' => 'col-md-6'))->end()
+            ->with('admin.fields.event.group_event', array('class' => 'col-md-12'))->end()
+            ->with('admin.fields.event.group_meta', array('class' => 'col-md-6'))->end()
+            ->with('admin.fields.event.group_address', array('class' => 'col-md-6'))->end()
             ->end()
         ;
 
         $formMapper
-            ->with('Event')
+            ->with('admin.fields.event.group_event')
             ->add('title', null, array(
                 'label' => 'admin.fields.event.title',
             ))
@@ -138,7 +141,7 @@ class EventAdmin extends Admin
                 'help' => 'admin.help.step.endAt',
             ))
             ->end()
-            ->with('Meta')
+            ->with('admin.fields.event.group_meta')
             ->add('link', null, array(
                 'label' => 'admin.fields.event.link',
                 'required' => false,
@@ -171,34 +174,22 @@ class EventAdmin extends Admin
                 'required' => false,
             ))
             ->end()
-            ->with('Address')
-            ->add('nbAddress', 'number', array(
-                'label' => 'admin.fields.event.nbAddress',
-                'required' => false,
-                'attr' => array(
-                    'placeholder' => '11'
-                ),
-            ))
+            ->with('admin.fields.event.group_address')
             ->add('address', null, array(
                 'label' => 'admin.fields.event.address',
                 'required' => false,
-                'attr' => array(
-                    'placeholder' => 'Avenue Parmentier'
-                ),
             ))
             ->add('zipCode', 'number', array(
                 'label' => 'admin.fields.event.zipcode',
                 'required' => false,
-                'attr' => array(
-                    'placeholder' => '75011'
-                ),
             ))
             ->add('city', null, array(
                 'label' => 'admin.fields.event.city',
                 'required' => false,
-                'attr' => array(
-                    'placeholder' => 'Paris'
-                ),
+            ))
+            ->add('country', null, array(
+                'label' => 'admin.fields.event.country',
+                'required' => false,
             ))
             ->end()
         ;
@@ -243,7 +234,6 @@ class EventAdmin extends Admin
             ))
             ->add('isEnabled', null, array(
                 'label' => 'admin.fields.event.is_enabled',
-                'editable' => true,
             ))
             ->add('updatedAt', null, array(
                 'label' => 'admin.fields.event.updated_at',
@@ -251,6 +241,25 @@ class EventAdmin extends Admin
             ->add('createdAt', null, array(
                 'label' => 'admin.fields.event.created_at',
             ))
+            ->add('address', null, array(
+                'label' => 'admin.fields.event.address',
+            ))
+            ->add('zipCode', 'number', array(
+                'label' => 'admin.fields.event.zipcode',
+            ))
+            ->add('city', null, array(
+                'label' => 'admin.fields.event.city',
+            ))
+            ->add('country', null, array(
+                'label' => 'admin.fields.event.country',
+            ))
+            ->add('lat', null, array(
+                'label' => 'admin.fields.event.lat',
+            ))
+            ->add('lng', null, array(
+                'label' => 'admin.fields.event.lng',
+            ))
+
         ;
     }
 
@@ -268,4 +277,30 @@ class EventAdmin extends Admin
             'calendar',
         );
     }
+
+    public function prePersist($event)
+    {
+        $this->setCoord($event);
+    }
+
+    public function preUpdate($event)
+    {
+        $this->setCoord($event);
+    }
+
+    private function setCoord(Event $event)
+    {
+        $curl = new CurlHttpAdapter();
+        $geocoder = new GoogleMaps($curl);
+
+        $address = $event->getAddress().', '.$event->getZipCode().' '.$event->getCity().', '.$event->getCountry();
+
+        $coord = $geocoder->geocode($address)->first()->getCoordinates();
+
+        $event->setLat($coord->getLatitude());
+        $event->setLng($coord->getLongitude());
+
+    }
+
+
 }

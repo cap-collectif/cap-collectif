@@ -12,8 +12,7 @@ Capco\AppBundle\Entity\Event:
         startAt: <(new \DateTime('2014-10-23'))>
         endAt: <(new \DateTime('2014-10-24'))>
         Author: @user<numberBetween(1, 5)>
-        nbAddress: 111
-        address: Avenue Clémenceau
+        address: 111 Avenue Clémenceau
         city: Lyon
         link: http://www.forumPHP2014.fr
     event2:
@@ -31,15 +30,14 @@ Capco\AppBundle\Entity\Event:
         startAt: <(new \DateTime('2014-06-23'))>
         endAt: <(new \DateTime('2014-06-24'))>
         Author: @user<numberBetween(1, 5)>
-        nbAddress: 11
-        address: Avenue George 5
+        address: 11 Avenue George 5
         city: Paris
         link: http://www.phptour2014.fr
     event3:
         title: PHPTour2015
         isEnabled: true
         body: |
-          <p>Idque Caesaris facere voluntate liceret: sese habere. Paullum deliquit, ponderibus modulisque suis ratio utitur. Vivamus sagittis lacus vel augue laoreet rutrum faucibus.</p>
+          <p>Idque Caesaéàris facere voluntate liceret: sese habere. Paullum deliquit, ponderibus modulisque suis ratio utitur. Vivamus sagittis lacus vel augue laoreet rutrum faucibus.</p>
           <p>Etiam habebis sem dicantur magna mollis euismod. Praeterea iter est quasdam res quas ex communi. Ullamco laboris nisi ut aliquid ex ea commodi consequat. Mercedem aut nummos unde unde extricat, amaras.
              Quae vero auctorem tractata ab fiducia dicuntur. Morbi fringilla convallis sapien, id pulvinar odio volutpat. Quam diu etiam furor iste tuus nos eludet? Non equidem invideo, miror magis posuere velit aliquet. Quisque placerat facilisis egestas cillum dolore. Qui ipsorum lingua Celtae, nostra Galli appellantur.
              Quae vero auctorem tractata ab fiducia dicuntur. Me non paenitet nullum festiviorem excogitasse ad hoc. Prima luce, cum quibus mons aliud  consensu ab eo. Prima luce, cum quibus mons aliud  consensu ab eo.
@@ -50,8 +48,7 @@ Capco\AppBundle\Entity\Event:
         startAt: <(new \DateTime('2015-05-23'))>
         endAt: <(new \DateTime('2015-05-24'))>
         Author: @user<numberBetween(1, 5)>
-        nbAddress: 457
-        address: Rue de Picardie
+        address: 457 Rue de Picardie
         city: Bordeaux
         link: http://www.PHPTour2015.fr
         Media: @MediaConsultation3

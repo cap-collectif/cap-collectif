@@ -107,11 +107,22 @@ class Event
     private $city;
 
     /**
-     * @var integer
-     *
-     * @ORM\Column(name="nbAddress", type="integer", nullable=true)
+     * @var string
+     * @ORM\Column(name="country", type="string", nullable=true)
      */
-    private $nbAddress;
+    private $country;
+
+    /**
+     * @var float
+     * @ORM\Column(name="lat", type="float", nullable=true)
+     */
+    private $lat;
+
+    /**
+     * @var float
+     * @ORM\Column(name="lng", type="float", nullable=true)
+     */
+    private $lng;
 
     /**
      * @var string
@@ -425,27 +436,57 @@ class Event
     }
 
     /**
-     * Set nbAddress
-     *
-     * @param integer $nbAddress
-     *
-     * @return Event
+     * @return mixed
      */
-    public function setNbAddress($nbAddress)
+    public function getCountry()
     {
-        $this->nbAddress = $nbAddress;
-
-        return $this;
+        return $this->country;
     }
 
     /**
-     * Get nbAddress
-     *
-     * @return integer
+     * @param mixed $country
      */
-    public function getNbAddress()
+    public function setCountry($country)
     {
-        return $this->nbAddress;
+        $this->country = $country;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getLat()
+    {
+        return $this->lat;
+    }
+
+    /**
+     * @param mixed $lat
+     */
+    public function setLat($lat)
+    {
+        if (is_string($lat)) {
+            $lat = floatval($lat);
+        }
+        $this->lat = $lat;
+    }
+
+    /**
+     * @return float
+     */
+    public function getLng()
+    {
+        return $this->lng;
+    }
+
+    /**
+     * @param float $lng
+     */
+    public function setLng($lng)
+    {
+        if (is_string($lng)) {
+            $lng = floatval($lng);
+        }
+        $this->lng = $lng;
     }
 
     /**

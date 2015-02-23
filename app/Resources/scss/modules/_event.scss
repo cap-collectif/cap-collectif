@@ -12,6 +12,7 @@
 
   .event__icon {
     margin-top: 20px;
+    max-width: 50px;
   }
 
   .month {
@@ -37,4 +38,14 @@
     border-left: 1px solid $border;
   }
 
+}
+
+.event__meta {
+  list-style-type: none;
+  padding-left: 2px;
+}
+
+.event__map {
+  width: 100%;
+  height: 500px;
 }

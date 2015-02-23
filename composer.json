@@ -45,7 +45,8 @@
         "predis/predis": "~1.1@dev",
         "jolicode/jolitypo-bundle": "dev-master",
 
-        "doctrine/doctrine-migrations-bundle": "~2.1@dev"
+        "doctrine/doctrine-migrations-bundle": "~2.1@dev",
+        "willdurand/geocoder": "~3.0@dev"
     },
     "require-dev": {
         "sensio/generator-bundle": "~2.3"

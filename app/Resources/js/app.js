@@ -38,7 +38,7 @@ App.module = function ($) {
 
     };
 
-    var rezised = function(el) {
+    var resized = function(el) {
         var $el = $(el);
 
         $(window).resize(function(){
@@ -90,14 +90,36 @@ App.module = function ($) {
         });
     };
 
+    var showMap = function(container) {
+        var $mapCanvas = $(container);
+        $mapCanvas.each(function() {
+            // Map
+            var mapOptions = {
+                center: new google.maps.LatLng($(this).attr('data-lat'), $(this).attr('data-lng')),
+                zoom: 15,
+                mapTypeId: google.maps.MapTypeId.ROADMAP
+            }
+            var map = new google.maps.Map(this, mapOptions);
+
+            // Marker
+            var iconBase = 'https://maps.google.com/mapfiles/kml/pushpin/';
+            var marker = new google.maps.Marker({
+                position: new google.maps.LatLng($(this).attr('data-lat'), $(this).attr('data-lng')),
+                map: map,
+                icon: iconBase + 'blue-pushpin.png'
+            });
+        });
+    };
+
     var AppPublic = {
         equalheight: equalheight,
-        rezised: rezised,
+        resized: resized,
         ckEditor: ckEditor,
         pieChart: pieChart,
         checkButton: checkButton,
         video: video,
         externalLinks: externalLinks,
+        showMap: showMap,
     };
 
     return AppPublic;

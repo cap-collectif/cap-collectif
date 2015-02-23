@@ -1,23 +1,22 @@
-<div class="col-md-6  col-sm-6  col-xs-12">
+<div class="col-md-4  col-sm-6  col-xs-12">
     <div class="event  block  block--shadowed">
-        <div class="col-md-2  hidden-sm  hidden-xs">
-            <div class="event__icon">
-                <div class="month"> {{ event.startAt|date("M") }}.</div>
-                <div class="day">{{ event.startAt|date("d") }}</div>
+        <div class="col-md-3  col-sm-3  hidden-xs">
+            <div class="event__icon center-block">
+                <div class="month"> {{ event.startAt|localizeddate('none', 'none', app.request.locale, null, "MMM")|capitalize }}</div>
+                <div class="day">{{ event.startAt|localizeddate('none', 'none', app.request.locale, null, "dd") }}</div>
             </div>
         </div>
-        <div class="col-md-10  col-xs-12  event__body  event-js">
-            <h2><a href="{{ path('app_event_show' ,{'slug': event.slug } ) }}" class="h4">{{ event.title }}</a></h2>
-            {{ event.body |striptags| truncate(50, true, '...') | jolitypo() }}
+        <div class="col-md-9  col-sm-9  col-xs-12  event__body  box  event-js">
+            <h2 class="h4"><a href="{{ path('app_event_show' ,{'slug': event.slug } ) }}">{{ event.title }}</a></h2>
             <p class="h5  excerpt"><i class="cap-calendar-1"></i>
                 {% if event.startAt == event.endAt %}
-                    {{ 'event.on_date'|trans({'%date%': (event.startAt | localizeddate('long', 'none'))}, 'CapcoAppBundle') }}
+                    {{ 'event.on_date'|trans({'%date%': (event.startAt | localizeddate('long', 'none', app.request.locale))}, 'CapcoAppBundle') }}
                 {% else %}
-                    {{ 'event.between_dates'|trans({'%start%': (event.startAt | localizeddate('long', 'none')), '%end%': (event.endAt | localizeddate('long', 'none'))}, 'CapcoAppBundle') }}
+                    {{ 'event.between_dates'|trans({'%start%': (event.startAt | localizeddate('long', 'none', app.request.locale)), '%end%': (event.endAt | localizeddate('long', 'none', app.request.locale))}, 'CapcoAppBundle') }}
                 {% endif %}
             </p>
-            {% if (event.address) or (event.zipCode) %}
-            <p class="h5  excerpt"><i class="cap-marker-1"></i> {{ event.nbAddress }} {{ event.address }} , {{ event.zipCode }} {{ event.city }}</p>
+            {% if (event.address) or (event.zipCode) or (event.city) %}
+            <p class="h5  excerpt"><i class="cap-marker-1"></i> {{ event.address }}, {{ event.zipCode }} {{ event.city }}</p>
             {% endif %}
         </div>
     </div>

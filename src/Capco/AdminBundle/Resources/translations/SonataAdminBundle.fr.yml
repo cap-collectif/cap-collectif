@@ -121,6 +121,27 @@ admin:
       cover: Image de couverture
       image: Aperçu de la vidéo
       video: Vidéo
+    event:
+      group_event: Évènement
+      group_meta: Métadonnées
+      group_address: Lieu
+      title: Titre
+      is_enabled: Publié
+      body: Contenu
+      updated_at: Mise à jour
+      created_at: Création
+      themes: Thèmes
+      author: Auteur
+      start_at: Commence
+      end_at: Termine
+      media: Image
+      address: Adresse postale
+      zipcode: Code postal
+      city: Ville
+      link: Lien d'inscription
+      country: Pays
+      lat: Latitude
+      lng: Longitude
     footer_social_network:
       title: Titre
       is_enabled: Publié
@@ -295,22 +316,6 @@ admin:
         admin: Administrateur
         super_admin: Super administrateur
       city: Ville
-    event:
-      title: Titre
-      is_enabled: Publié
-      body: Contenu
-      updated_at: Mise à jour
-      created_at: Création
-      themes: Thèmes
-      author: Auteur
-      start_at: Commence
-      end_at: Termine
-      media: Image
-      nbAddress: Numéro
-      address: Adresse postal
-      zipcode: Code postal
-      city: Ville
-      link: URL
     video:
       title: Titre
       is_enabled: Publié

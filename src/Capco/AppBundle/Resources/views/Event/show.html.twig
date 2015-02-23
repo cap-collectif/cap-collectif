@@ -27,7 +27,7 @@
                     <svg version="1.1" id="Calque_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="45px" height="45px" viewBox="0 0 200 200" enable-background="new 0 0 200 200" xml:space="preserve"><circle fill="{{ capco_site_color_value('color.section.bg')  }}" cx="100" cy="100" r="97.617"/><g><path fill="none" stroke="#FFFFFF" stroke-width="3" stroke-linejoin="round" stroke-miterlimit="10" d="M100,160.011h68.011c0,0,0-12.163-5.916-23.993c-4.41-8.819-22.024-14.039-45.683-22.908V95.367c0,0,7.239-6.661,7.239-18.49c2.959,0,5.916-11.826,0-14.785c0-1.754,7.927-16.569,5.916-26.613c-2.957-14.786-44.353-14.786-47.309-2.955c-17.742,0-5.915,27.169-5.915,29.568c-5.913,2.959-2.957,14.785,0,14.785c0,11.829,7.238,17.473,7.238,17.473v18.759c-23.655,8.875-41.273,14.089-45.682,22.908c-5.911,11.83-5.911,23.993-5.911,23.993H100z"/></g></svg>
                 </a>
             {% endif %}
-            <div class="media-body">
+            <div class="media-body  block">
                 <p class="media--aligned  excerpt">
                     <a href="{{ path('capco_user_profile_show_all', {'slug': event.Author.slug}) }}">{{ event.Author.username }}</a>
                     {% if is_feature_enabled('themes') and event.Theme and event.Theme.canDisplay %}
@@ -35,18 +35,17 @@
                     {% endif %}
                     {{ 'idea.show.on_date'|trans({}, 'CapcoAppBundle') }} {{ event.createdAt | localizeddate('long', 'none') }}
             </div>
-            <div class="box">
-                {% if (event.link) %}
-                <p class="excerpt"><i class="cap cap-link-1"></i> <a href="{{ event.link }}" target="_blank">{{ event.link }}</a> </p>
+            <ul class="event__meta  block">
+                <li class="excerpt"><i class="cap cap-calendar-1"></i> {{ 'idea.show.on_date'|trans({}, 'CapcoAppBundle') }} {{ event.startAt | localizeddate('long', 'none') }} au {{ event.endAt | localizeddate('long', 'none') }}</li>
+                {% if (event.address) or (event.zipCode) or (event.city) %}
+                <li class="excerpt">
+                    <address>
+                        <i class="cap cap-marker-1  excerpt"></i>
+                        {{ event.address }}, {{ event.zipCode }} {{ event.city }}{% if event.country %}, {{ event.country }}{% endif %} <br/>
+                    </address>
+                </li>
                 {% endif %}
-                <p class="excerpt"><i class="cap cap-calendar-1"></i> {{ 'idea.show.on_date'|trans({}, 'CapcoAppBundle') }} {{ event.startAt | localizeddate('long', 'none') }} au {{ event.endAt | localizeddate('long', 'none') }}</p>
-                {% if (event.address) or (event.zipCode) %}
-                <address class="excerpt">
-                    <i class="cap cap-marker-1  excerpt"></i>
-                    {{ event.nbAddress }} {{ event.address }} , {{ event.zipCode }} {{ event.city }} <br/>
-                </address>
-                {% endif %}
-            </div>
+            </ul>
         </div>
         {% if event.Media %}
             {% thumbnail event.Media, 'idea' with {'class': 'block  img-responsive'} %}
@@ -55,9 +54,19 @@
         <div class="block">
             {{ event.body|raw| jolitypo() }}
         </div>
-    </div>
 
-    {{ render_esi(controller('CapcoAppBundle:Event:lastEvents', {'max': 4, 'offset': 0})) }}
+        {% if event.lat and event.lng %}
+            <div class="event__map  map-canvas  block" data-lat="{{ event.lat }}" data-lng="{{ event.lng }}"></div>
+        {% endif %}
+
+        {% if (event.link) %}
+            <a class="btn  btn-primary  external-link" href="{{ event.link }}" class="external-link">{{ 'event.link_button'|trans({}, 'CapcoAppBundle') }}</a>
+        {% endif %}
+        {{ sonata_block_render({'type': 'capco.block.service.share_button'}, {
+            'url': url('app_event_show', {'slug': event.slug}),
+            'title': event.title,
+        }) }}
+    </div>
 
 {% endblock %}
 
@@ -65,7 +74,9 @@
     {{ parent() }}
     <script type="text/javascript">
         $(window).on('load', function() {
-            App.module.equalheight('.event-js');window.onresize = App.module.rezised('.event-js');
+            App.module.equalheight('.event-js');window.onresize = App.module.resized('.event-js');
+            App.module.showMap('.map-canvas');
         });
     </script>
+    <script src="https://maps.googleapis.com/maps/api/js"></script>
 {% endblock %}

@@ -582,7 +582,7 @@ event:
   index:
     title: Évènements
   last:
-    title: Prochains évènements
+    title: Évènements
   archived: Évènements passés
   no_event: "Aucun évènement n'a été publié"
   written_by: "par"
@@ -592,6 +592,7 @@ event:
   see_archived: Voir les évènements passés
   none: "Il n'y a aucun évènement."
   no_result:  Aucun évènement ne correspond à ces critères de recherche.
+  link_button: Inscription
 
 # video module
 video:
