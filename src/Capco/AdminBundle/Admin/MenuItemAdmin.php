@@ -18,6 +18,31 @@ class MenuItemAdmin extends Admin
         '_sort_by'    => 'Menu',
     );
 
+    public function createQuery($context = 'list')
+    {
+        $resolver = $this->getConfigurationPool()->getContainer()->get('capco.menu_item.resolver');
+        $em = $this->getConfigurationPool()->getContainer()->get('doctrine.orm.entity_manager');
+
+        $all = $em->getRepository('CapcoAppBundle:MenuItem')->findAll();
+
+        $ids = array();
+        foreach ($all as $mi) {
+            if ($resolver->hasEnabledFeatures($mi)) {
+                $ids[] = $mi->getId();
+            }
+        }
+
+        $query = parent::createQuery($context);
+        $query->andWhere(
+            $query->expr()->in($query->getRootAliases()[0] . '.id', ':ids')
+        );
+        $query->setParameter('ids', $ids);
+
+        return $query;
+
+    }
+
+
     /**
      * @param DatagridMapper $datagridMapper
      */

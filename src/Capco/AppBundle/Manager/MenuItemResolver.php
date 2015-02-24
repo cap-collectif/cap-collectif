@@ -55,6 +55,10 @@ class MenuItemResolver
         return array();
     }
 
+    public function hasEnabledFeatures($menuItem) {
+        return $this->containsEnabledFeature($menuItem->getAssociatedFeatures());
+    }
+
     /**
      * @param $features
      * @return bool
