@@ -118,6 +118,7 @@ class VideoAdmin extends Admin
             ->add('Media', 'sonata_type_model_list', array(
                 'label' => 'admin.fields.video.media',
                 'required' => false,
+                'help' => 'admin.help.video.media',
             ), array(
                 'link_parameters' => array(
                     'context' => 'default',

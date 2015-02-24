@@ -5,7 +5,7 @@
                 <div class="video">
                     {%  if video.Media %}
                         <a href="{{ video.link }}" class="play {% if video.color == "black" %} play--black {% endif %}fancybox" data-type="iframe">
-                            {% thumbnail video.Media, 'homepage_video' with {'title': video.Media.name, 'alt': video.Media.name, 'class': 'img-responsive'} %}
+                            {% thumbnail video.Media, 'homepageVideo' with {'title': video.Media.name, 'alt': video.Media.name, 'class': 'img-responsive'} %}
                         </a>
                     {% else %}
                         <a href="{{ video.link }}" class="play {% if video.color == "black" %} play--black {% endif %} fancybox" data-type="iframe">

@@ -58,7 +58,8 @@ admin:
       link: Si vous avez associé une page à l'élément de menu, le lien sera défini automatiquement.
     site_parameter:
       js: Rajoutez ici un ou plusieurs scripts entourés par leurs balises < script >.
-
+    video:
+      media: Pour un rendu optimal, choisissez une image faisant au moins 320 pixels de largeur et 215 pixels de hauteur.
   features:
     title:
       enabled: 'Activé ?'
