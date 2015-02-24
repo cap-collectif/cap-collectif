@@ -39,7 +39,8 @@ liip_imagine:
             controller_action: 'SonataMediaBundle:Media:liipImagineFilter'
             format: png
             filters:
-                thumbnail: { size: [400, 300], mode: inbound }
+                thumbnail: { size: [360, 240], mode: outbound }
+                crop: { start: [0, 0], size: [360, 240] }
 
         default_post:
             quality: 80
@@ -116,5 +117,5 @@ liip_imagine:
             controller_action: 'SonataMediaBundle:Media:liipImagineFilter'
             format: png
             filters:
-                thumbnail: { size: [360, 240], mode: outbound, allow_upscale: false }
+                thumbnail: { size: [360, 240], mode: outbound }
                 crop: { start: [0, 0], size: [360, 240] }
