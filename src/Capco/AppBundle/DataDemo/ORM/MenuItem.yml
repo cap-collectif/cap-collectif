@@ -93,7 +93,7 @@ Capco\AppBundle\Entity\MenuItem:
 
   MenuItem12:
     title: Événements
-    link: event
+    link: events
     isEnabled: 1
     isDeletable: 0
     isFullyModifiable: 0

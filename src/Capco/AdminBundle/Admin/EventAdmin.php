@@ -142,7 +142,7 @@ class EventAdmin extends Admin
             ))
             ->end()
             ->with('admin.fields.event.group_meta')
-            ->add('link', null, array(
+            ->add('link', 'url', array(
                 'label' => 'admin.fields.event.link',
                 'required' => false,
                 'attr' => array(
