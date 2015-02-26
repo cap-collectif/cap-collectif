@@ -9,6 +9,12 @@ if (isset($_ENV['BOOTSTRAP_CLEAR_CACHE_ENV'])) {
 }
 
 passthru(sprintf(
+    'php "%s/console" doctrine:schema:update --env=test --no-interaction --force',
+    __DIR__
+));
+
+
+passthru(sprintf(
     'php "%s/console" doctrine:fixtures:load --env=test --no-interaction --fixtures=%s',
     __DIR__,
     __DIR__.'/../src/Capco/AppBundle/Tests/TestFixtures/ORM'
