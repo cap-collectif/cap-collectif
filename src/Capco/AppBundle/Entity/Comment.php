@@ -8,29 +8,18 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Validator\Constraints as Assert;
+use Capco\AppBundle\Validator\Constraints as CapcoAssert;
 
 /**
- * Argument
+ * Comment
  *
- * @ORM\Table(name="argument")
- * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\ArgumentRepository")
+ * @ORM\Table(name="comment")
+ * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\CommentRepository")
  * @ORM\HasLifecycleCallbacks()
+ * @CapcoAssert\HasAuthor
  */
-class Argument
+class Comment
 {
-
-    const TYPE_AGAINST = 0;
-    const TYPE_FOR  = 1;
-
-    public static $argumentTypes = [
-        self::TYPE_FOR => 'yes',
-        self::TYPE_AGAINST => 'no'
-   ];
-
-    public static $argumentTypesLabels = [
-        self::TYPE_FOR => 'argument.show.type.for',
-        self::TYPE_AGAINST => 'argument.show.type.against',
-    ];
 
     public static $sortCriterias = [
         'date' => 'argument.sort.date',
@@ -50,7 +39,7 @@ class Argument
      * @var string
      *
      * @ORM\Column(name="body", type="text")
-     * @Assert\NotBlank()
+     * @Assert\NotBlank(message="comment.create.no_body_error")
      */
     private $body;
 
@@ -83,11 +72,57 @@ class Argument
     private $voteCount = 0;
 
     /**
-     * @var integer
+     * @var
      *
-     * @ORM\Column(name="type", type="integer")
+     * @ORM\ManyToOne(targetEntity="Capco\UserBundle\Entity\User")
+     * @ORM\JoinColumn(name="author_id", referencedColumnName="id", onDelete="CASCADE", nullable=true)
      */
-    private $type = 1;
+    private $Author;
+
+    /**
+     * @var
+     *
+     * @ORM\Column(name="author_name", type="string", nullable=true)
+     */
+    private $authorName;
+
+    /**
+     * @var
+     *
+     * @ORM\Column(name="author_email", type="string", nullable=true)
+     * @Assert\Email(checkMX = true, message="comment.create.invalid_email_error")
+     */
+    private $authorEmail;
+
+    /**
+     * @var
+     *
+     * @ORM\Column(name="author_ip", type="string", nullable=true)
+     * @Assert\Ip
+     */
+    private $authorIp;
+
+    /**
+     * @var
+     *
+     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\CommentVote", mappedBy="comment", cascade={"persist", "remove"}, orphanRemoval=true)
+     */
+    private $Votes;
+
+    /**
+     * @var
+     *
+     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Idea", inversedBy="comments", cascade={"persist"})
+     * @ORM\JoinColumn(name="idea_id", referencedColumnName="id", onDelete="CASCADE", nullable=true)
+     */
+    private $Idea;
+
+    /**
+     * @var string
+     *
+     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\Reporting", mappedBy="Comment", cascade={"persist", "remove"})
+     */
+    private $Reports;
 
     /**
      * @var boolean
@@ -110,36 +145,6 @@ class Argument
      */
     private $trashedReason = null;
 
-    /**
-     * @var
-     *
-     * @ORM\ManyToOne(targetEntity="Capco\UserBundle\Entity\User")
-     * @ORM\JoinColumn(name="author_id", referencedColumnName="id", onDelete="CASCADE")
-     */
-    private $Author;
-
-    /**
-     * @var
-     *
-     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\ArgumentVote", mappedBy="argument", cascade={"persist", "remove"}, orphanRemoval=true)
-     */
-    private $Votes;
-
-    /**
-     * @var
-     *
-     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Opinion", inversedBy="arguments", cascade={"persist"})
-     * @ORM\JoinColumn(name="opinion_id", referencedColumnName="id", onDelete="CASCADE")
-     */
-    private $opinion;
-
-    /**
-     * @var string
-     *
-     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\Reporting", mappedBy="Argument", cascade={"persist", "remove"})
-     */
-    private $Reports;
-
     function __construct()
     {
         $this->Votes = new ArrayCollection();
@@ -153,7 +158,7 @@ class Argument
         if ($this->id) {
             return $this->getBodyExcerpt(50);
         } else {
-            return "New opinion";
+            return "New comment";
         }
     }
 
@@ -229,17 +234,17 @@ class Argument
     public function setIsEnabled($isEnabled)
     {
         if ($isEnabled != $this->isEnabled) {
-            if($isEnabled) {
-                if($this->isTrashed) {
-                    $this->opinion->getConsultation()->increaseTrashedArgumentCount(1);
-                } else {
-                    $this->opinion->increaseArgumentsCount(1);
+            if ($isEnabled) {
+                if (!$this->isTrashed) {
+                    if (null != $this->Idea) {
+                        $this->Idea->increaseCommentsCount(1);
+                    }
                 }
             } else {
-                if($this->isTrashed) {
-                    $this->opinion->getConsultation()->decreaseArgumentCount(1);
-                } else {
-                    $this->opinion->decreaseArgumentsCount(1);
+                if (!$this->isTrashed) {
+                    if (null != $this->Idea) {
+                        $this->Idea->decreaseCommentsCount(1);
+                    }
                 }
             }
         }
@@ -271,19 +276,145 @@ class Argument
     }
 
     /**
-     * @return int
+     * @return mixed
      */
-    public function getType()
+    public function getAuthor()
     {
-        return $this->type;
+        return $this->Author;
     }
 
     /**
-     * @param int $type
+     * @param mixed $Author
      */
-    public function setType($type)
+    public function setAuthor($Author)
     {
-        $this->type = $type;
+        $this->Author = $Author;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getAuthorName()
+    {
+        return $this->authorName;
+    }
+
+    /**
+     * @param mixed $authorName
+     */
+    public function setAuthorName($authorName)
+    {
+        $this->authorName = $authorName;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getAuthorEmail()
+    {
+        return $this->authorEmail;
+    }
+
+    /**
+     * @param mixed $authorEmail
+     */
+    public function setAuthorEmail($authorEmail)
+    {
+        $this->authorEmail = $authorEmail;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getAuthorIp()
+    {
+        return $this->authorIp;
+    }
+
+    /**
+     * @param mixed $authorIp
+     */
+    public function setAuthorIp($authorIp)
+    {
+        $this->authorIp = $authorIp;
+    }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getVotes(){
+        return $this->Votes;
+    }
+
+    /**
+     * @param $vote
+     * @return $this
+     */
+    public function addVote($vote){
+        if (!$this->Votes->contains($vote)) {
+            $this->voteCount++;
+            $this->Votes->add($vote);
+        }
+        return $this;
+    }
+
+    /**
+     * @param $vote
+     * @return $this
+     */
+    public function removeVote($vote)
+    {
+        if ($this->Votes->removeElement($vote)) {
+            $this->voteCount--;
+        }
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getIdea()
+    {
+        return $this->Idea;
+    }
+
+    /**
+     * @param mixed $Idea
+     */
+    public function setIdea($Idea)
+    {
+        $this->Idea = $Idea;
+        $Idea->addComment($this);
+    }
+
+    /**
+     * @return string
+     */
+    public function getReports()
+    {
+        return $this->Reports;
+    }
+
+    /**
+     * @param Reporting $report
+     * @return $this
+     */
+    public function addReport(Reporting $report)
+    {
+        if (!$this->Reports->contains($report)) {
+            $this->Reports->add($report);
+        }
+        return $this;
+    }
+
+    /**
+     * @param Reporting $report
+     * @return $this
+     */
+    public function removeReport(Reporting $report)
+    {
+        $this->Reports->removeElement($report);
+        return $this;
     }
 
     /**
@@ -311,11 +442,13 @@ class Argument
             }
             if($this->isEnabled) {
                 if ($isTrashed) {
-                    $this->opinion->getConsultation()->increaseTrashedArgumentCount(1);
-                    $this->opinion->decreaseArgumentsCount(1);
+                    if (null != $this->Idea) {
+                        $this->Idea->decreaseCommentsCount(1);
+                    }
                 } else {
-                    $this->opinion->increaseArgumentsCount(1);
-                    $this->opinion->getConsultation()->decreaseTrashedArgumentCount(1);
+                    if (null != $this->Idea) {
+                        $this->Idea->increaseCommentsCount(1);
+                    }
                 }
             }
         }
@@ -369,100 +502,6 @@ class Argument
         return $this;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getAuthor()
-    {
-        return $this->Author;
-    }
-
-    /**
-     * @param mixed $Author
-     */
-    public function setAuthor($Author)
-    {
-        $this->Author = $Author;
-    }
-
-    /**
-     * @return ArrayCollection
-     */
-    public function getVotes(){
-        return $this->Votes;
-    }
-
-    /**
-     * @param $vote
-     * @return $this
-     */
-    public function addVote($vote){
-        if (!$this->Votes->contains($vote)) {
-            $this->voteCount++;
-            $this->Votes->add($vote);
-        }
-        return $this;
-    }
-
-    /**
-     * @param $vote
-     * @return $this
-     */
-    public function removeVote($vote)
-    {
-        if ($this->Votes->removeElement($vote)) {
-            $this->voteCount--;
-        }
-        return $this;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getOpinion()
-    {
-        return $this->opinion;
-    }
-
-    /**
-     * @param mixed $opinion
-     */
-    public function setOpinion($opinion)
-    {
-        $this->opinion = $opinion;
-        $opinion->addArgument($this);
-    }
-
-    /**
-     * @return string
-     */
-    public function getReports()
-    {
-        return $this->Reports;
-    }
-
-    /**
-     * @param Reporting $report
-     * @return $this
-     */
-    public function addReport(Reporting $report)
-    {
-        if (!$this->Reports->contains($report)) {
-            $this->Reports->add($report);
-        }
-        return $this;
-    }
-
-    /**
-     * @param Reporting $report
-     * @return $this
-     */
-    public function removeReport(Reporting $report)
-    {
-        $this->Reports->removeElement($report);
-        return $this;
-    }
-
     // ************************ Custom methods *********************************
 
     /**
@@ -500,7 +539,7 @@ class Argument
     {
         if ($user != null) {
             foreach($this->Reports as $report){
-                if($report->getVoter() == $user){
+                if($report->getReporter() == $user){
                     return true;
                 }
             }
@@ -512,7 +551,10 @@ class Argument
      * @return bool
      */
     public function canDisplay() {
-        return ($this->isEnabled && $this->opinion->canDisplay());
+        if (null != $this->Idea) {
+            return ($this->isEnabled && $this->Idea->canDisplay());
+        }
+        return false;
     }
 
     /**
@@ -520,7 +562,10 @@ class Argument
      */
     public function canContribute()
     {
-        return ($this->isEnabled && !$this->isTrashed && $this->opinion->canContribute());
+        if (null != $this->Idea) {
+            return ($this->isEnabled && !$this->isTrashed && $this->Idea->canContribute());
+        }
+        return false;
     }
 
     /**
@@ -540,10 +585,10 @@ class Argument
     /**
      * @ORM\PreRemove
      */
-    public function deleteArgument()
+    public function deleteComment()
     {
-        if ($this->opinion != null) {
-            $this->opinion->removeArgument($this);
+        if (null != $this->Idea) {
+            $this->Idea->removeComment($this);
         }
 
     }

@@ -164,11 +164,21 @@
     }
   }
 
-
-
   // Special case : current opinion
   &.opinion--current:hover {
     background-color: white;
+  }
+
+  // Special case : add an comment
+  &.opinion--add-comment {
+    .opinion__body {
+      img {
+        margin-right: 0;
+      }
+    }
+    textarea {
+      resize: vertical;
+    }
   }
 
   // Special cases : add an argument
@@ -214,7 +224,7 @@
   }
 
   // Special case : comment
-  &.opinion--commentaire {
+  &.opinion--comment {
     @extend .opinion--argument;
     background-color: transparent;
   }
@@ -248,11 +258,22 @@
   .opinion {
     border-top: 1px solid $border;
   }
+
+  .opinion--comment {
+    border-top: 0;
+    padding-top: 30px;
+    &:first-child {
+      padding-top: 15px;
+    }
+    &:last-child {
+      margin-bottom: 10px;
+    }
+  }
 }
 
 // List of comments
 .media-list {
-  .opinion--commentaire {
+  .opinion--comment {
     .media-list {
       padding-top: 30px;
       padding-left: 40px;

@@ -39,6 +39,8 @@ admin.label.posts: Articles
 admin.label.events: Événements
 admin.label.features: Fonctionnalités
 admin.label.video: Vidéos de la page d'accueil
+admin.label.comment: Commentaires
+admin.label.comment_vote: Votes sur les commentaires
 
 # Messages
 admin:
@@ -60,6 +62,9 @@ admin:
       js: Rajoutez ici un ou plusieurs scripts entourés par leurs balises < script >.
     video:
       media: Pour un rendu optimal, choisissez une image faisant au moins 320 pixels de largeur et 215 pixels de hauteur.
+    comment:
+      author: Il est obligatoire de spécifier soit un auteur, soit un nom et une adresse email.
+
   features:
     title:
       enabled: 'Activé ?'
@@ -99,6 +104,25 @@ admin:
       sources: Sources
       is_enabled: Publié
       updated_at: Mise à jour
+      created_at: Création
+    comment:
+      body: Contenu
+      object: Objet lié
+      author: Auteur
+      author_name: Nom de l'auteur
+      author_email: E-mail de l'auteur
+      author_ip: Adresse IP de l'auteur
+      vote_count: Nombre de votes
+      is_enabled: Publié
+      is_trashed: Dans la corbeille
+      updated_at: Mise à jour
+      created_at: Création
+      idea: Idée liée
+      trashed_at: Mise à la corbeille
+      trashed_reason: Raison de la mise à la corbeille
+    comment_vote:
+      comment: Commentaire
+      voter: Votant
       created_at: Création
     consultation:
       title: Titre
@@ -156,6 +180,7 @@ admin:
       body: Contenu
       theme: Thème
       vote_count: Nombre de votes
+      comments_count: Nombre de commentaires
       author: Auteur
       is_enabled: Publié
       is_trashed: Dans la corbeille
@@ -236,6 +261,7 @@ admin:
       source: Source
       argument: Argument
       idea: Idée
+      comment: Commentaire
       is_archived: Archivé
     site_image:
       title: Description

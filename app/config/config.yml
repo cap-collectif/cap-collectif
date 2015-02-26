@@ -20,7 +20,7 @@ framework:
             - twig
     default_locale: "%locale%"
     trusted_hosts: null
-    trusted_proxies: null
+    trusted_proxies: ['127.0.0.1']
     session:
         handler_id: null
     fragments: null

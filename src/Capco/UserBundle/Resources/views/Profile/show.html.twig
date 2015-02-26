@@ -20,6 +20,8 @@
         {% include '@CapcoUser/Profile/sources.html.twig' %}
         <h2>{{ 'user.profile.show.ideas' | trans({}, 'CapcoAppBundle') }}</h2>
         {% include '@CapcoUser/Profile/ideas.html.twig' %}
+        <h2>{{ 'user.profile.show.comments' | trans({}, 'CapcoAppBundle') }}</h2>
+        {% include '@CapcoUser/Profile/comments.html.twig' %}
     </div>
 {% endblock fos_user_content %}
 

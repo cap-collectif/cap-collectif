@@ -104,6 +104,7 @@ idea:
   show:
     voted: Vous avez voté
     votes: "]-Inf, 0] Aucun vote | {1} 1 vote | ]1,Inf[ %count% votes"
+    comments: "]-Inf, 0] Aucun commentaire | {1} 1 commentaire | ]1,Inf[ %count% commentaires"
     share: Partager
     report: Signaler
     edit: Modifier
@@ -149,10 +150,8 @@ idea:
   vote:
     submit: Soutenir
     delete: Annuler mon vote
-    add:
-      success: Merci ! Votre vote a bien été pris en compte.
-    delete:
-      success: Votre vote a bien été supprimé.
+    add_success: Merci ! Votre vote a bien été pris en compte.
+    delete_success: Votre vote a bien été supprimé.
   report:
     submit: Signaler
     reported: Signalé
@@ -363,7 +362,7 @@ source:
     count: "]-Inf, 0] Aucune source | {1} 1 source | ]1,Inf[ %count% sources"
   trashed:
     linked_proposition: Liée à la proposition :
-  none: Il n' y a pas de sources.
+  none: Il n'y a pas de sources.
   error:
     not_found: Source introuvable.
     no_contribute: Impossible de contribuer sur cette source.
@@ -535,6 +534,7 @@ user:
       ideas: Idées
       arguments: Arguments
       sources: Sources
+      comments: Commentaires
 
 #SonataUser errors
 "Bad credentials.": Email ou mot de passe incorrect
@@ -574,6 +574,7 @@ share_button:
     email: Partager par email
     link: Lien de partage
   argument_on: Argument sur la proposition "%opinion%"
+  comment_on: Commentaire sur %object%
 
 # event module
 event:
@@ -591,6 +592,69 @@ event:
   none: "Il n'y a aucun évènement."
   no_result:  Aucun évènement ne correspond à ces critères de recherche.
   link_button: Inscription
+
+# comments
+comment:
+  linked_object: Lié à l'objet :
+  trashed:
+    label: Dans la corbeille
+  read_more: Lire plus
+  read_less: Réduire
+  list:
+    title: "{1} 1 commentaire | ]1,Inf[ %count% commentaires"
+  create:
+    title: Publier un commentaire
+    input_label: Message
+    name_label: Nom
+    email_label: Adresse électronique (masquée)
+    with_account: Commenter avec mon compte
+    all_fields_mandatory: Tous les champs sont obligatoires.
+    submit: Commenter
+    success: Merci ! Votre commentaire a bien été enregistré.
+    no_author_error: Erreur : vous devez vous connecter ou renseigner un nom et une adresse électronique valide pour pouvoir publier un commentaire.
+    no_body_error: Erreur : vous devez spécifier un contenu pour pouvoir publier un commentaire.
+    invalid_email_error: Erreur : L'adresse électronique est invalide.
+  update:
+    page_title: Modifier un commentaire
+    button: Modifier
+    title: Modifier un commentaire
+    alert: Attention ! En modifiant votre commentaire, vous perdrez tous les votes qui lui sont associés.
+    remove: Supprimer
+    cancel: Annuler
+    submit: Modifier
+    success: Merci ! Votre commentaire a bien été modifié.
+    error: Erreur, impossible de modifier le commentaire.
+  delete:
+    page_title: Supprimer un commentaire
+    title: Supprimer un commentaire
+    subtitle: Êtes-vous sûr de vouloir supprimer ce commentaire ?
+    text: Cette suppression marquera la fin de ce contenu à jamais.
+    cancel: Annuler
+    submit: Supprimer
+    success: Votre commentaire a bien été supprimé.
+    error: Erreur, impossible de supprimer le commentaire.
+  form:
+    body: Message
+    name: Nom
+    email: Adresse électronique
+  sort:
+    date: Date
+    popularity: Nombre de votes
+    label: Trier par
+  none: Il n'y a pas de commentaires.
+  vote:
+    submit: D'accord
+    delete: Annuler mon vote
+    add_success: Merci ! Votre vote a bien été pris en compte.
+    remove_success: Votre vote a bien été annulé.
+    csrf_error: Erreur d'identification.
+  report:
+    submit: Signaler
+    reported: Signalé
+  error:
+    not_found: Commentaire introuvable.
+    no_contribute: Impossible de contribuer sur ce commentaire.
+    not_author: Vous ne pouvez pas modifier ce commentaire car vous n'en êtes pas l'auteur.
 
 # video module
 video:

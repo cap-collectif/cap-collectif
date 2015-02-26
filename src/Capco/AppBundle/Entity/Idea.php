@@ -149,13 +149,28 @@ class Idea
     private $IdeaVotes;
 
     /**
+     * @var integer
+     *
+     * @ORM\Column(name="comments_count", type="integer")
+     */
+    private $commentsCount = 0;
+
+    /**
+     * @var
+     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\Comment", mappedBy="Idea",  cascade={"persist", "remove"}, orphanRemoval=true)
+     */
+    private $comments;
+
+    /**
      * Constructor
      */
     public function __construct()
     {
         $this->IdeaVotes = new ArrayCollection();
         $this->Reports = new ArrayCollection();
+        $this->comments = new ArrayCollection();
         $this->voteCount = 0;
+        $this->commentsCount = 0;
         $this->updatedAt = new \Datetime;
     }
 
@@ -534,6 +549,73 @@ class Idea
         $excerpt = $excerpt.'...';
         return $excerpt;
     }
+
+    /**
+     * @return int
+     */
+    public function getCommentsCount()
+    {
+        return $this->commentsCount;
+    }
+
+    /**
+     * @param int $commentsCount
+     */
+    public function setCommentsCount($commentsCount)
+    {
+        $this->commentsCount = $commentsCount;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getComments()
+    {
+        return $this->comments;
+    }
+
+    /**
+     * @param $comment
+     * @return $this
+     */
+    public function addComment($comment)
+    {
+        if (!$this->comments->contains($comment)) {
+            $this->increaseCommentsCount(1);
+            $this->comments->add($comment);
+        }
+        return $this;
+    }
+
+    /**
+     * @param $comment
+     * @return $this
+     */
+    public function removeComment($comment)
+    {
+        if ($this->comments->removeElement($comment)) {
+            $this->decreaseCommentsCount(1);
+        }
+        return $this;
+    }
+
+    // **************** Custom methods ***************
+
+    public function increaseCommentsCount($nb) {
+        $this->commentsCount += $nb;
+    }
+
+    public function decreaseCommentsCount($nb) {
+        $this->commentsCount -= $nb;
+    }
+
+    public function getClassName()
+    {
+        return get_class($this);
+    }
+
+
+    // ************* Lifecycle *********************
 
     /**
      * @ORM\PreRemove

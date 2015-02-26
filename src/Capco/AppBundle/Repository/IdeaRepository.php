@@ -61,7 +61,7 @@ class IdeaRepository extends EntityRepository
     }
 
     /**
-     * Count all published (= not trashed) ideas
+     * Count all published (= not trashed AND enabled) ideas
      * @return mixed
      */
     public function countPublished(){
@@ -187,7 +187,7 @@ class IdeaRepository extends EntityRepository
             ->leftJoin('a.Media', 'm')
             ->andWhere('i.Author = :user')
             ->setParameter('user', $user)
-            ->orderBy('i.createdAt', 'DESC');
+            ->orderBy('i.updatedAt', 'DESC');
 
         return $qb
             ->getQuery()
@@ -203,11 +203,16 @@ class IdeaRepository extends EntityRepository
     public function getOne($id)
     {
         $query = $this->getIsEnabledQueryBuilder()
-            ->addSelect('a', 'm', 't', 'media')
+            ->addSelect('a', 'm', 't', 'media', 'v', 'c', 'cr')
             ->leftJoin('i.Media', 'media')
             ->leftJoin('i.Author', 'a')
             ->leftJoin('a.Media', 'm')
             ->leftJoin('i.Theme', 't')
+            ->leftJoin('i.IdeaVotes', 'v')
+            ->leftJoin('i.comments', 'c', 'WITH', 'c.isEnabled = :enabled AND c.isTrashed = :notTrashed')
+            ->leftJoin('c.Reports', 'cr')
+            ->setParameter('enabled', true)
+            ->setParameter('notTrashed', false)
             ->andWhere('i.id = :id')
             ->setParameter('id', $id)
             ->getQuery();

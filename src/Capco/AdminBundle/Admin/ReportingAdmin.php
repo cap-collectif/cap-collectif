@@ -38,6 +38,9 @@ class ReportingAdmin extends Admin
             ->add('Idea', null, array(
                 'label' => 'admin.fields.reporting.idea',
             ))
+            ->add('Comment', null, array(
+                'label' => 'admin.fields.reporting.comment',
+            ))
             ->add('Reporter', null, array(
                 'label' => 'admin.fields.reporting.reporter',
             ))

@@ -1,7 +1,9 @@
 {% extends '@CapcoApp/base.html.twig' %}
 
+{% block canonical_link %}{{ url('app_comment_edit', {'commentId': comment.id}) }}{% endblock %}
+
 {% block title %}
-    {{ parent() }} - {{ 'reporting.create.title'|trans({}, 'CapcoAppBundle') }}
+    {{ parent() }} - {{ capco_comment_object(comment) }} - {{ 'comment.update.page_title'|trans({}, 'CapcoAppBundle') }}
 {% endblock %}
 
 {% block jumbotron %}
@@ -11,41 +13,37 @@
     <div class="container">
         <div class="row">
             <div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2">
-                <div class="dialog  dialog--white  block--bordered">
+                <div class="dialog  dialog--light-gray  block--bordered">
                     <div class="dialog__header  box">
-                        <h1 class="h4  dialog__title">{{ 'reporting.create.title'|trans({}, 'CapcoAppBundle') }}</h1>
+                        <h1 class="h4  dialog__title">{{ 'comment.update.title'|trans({}, 'CapcoAppBundle') }}</h1>
+                    </div>
+                    <div class="dialog__excerpt  excerpt  box">
+                        <p>{{ 'comment.update.alert'|trans({}, 'CapcoAppBundle') }}</p>
                     </div>
                     <form method="post" {{ form_enctype(form) }}>
                         <div class="dialog__body  box">
                             <div class="media">
-                                {%  set avatar = app.user.Media|capco_default_avatar %}
+                                {%  set avatar = comment.Author.Media|capco_default_avatar %}
                                 {% if avatar != null %}
-                                    <a class="pull-left" href="{{ path('capco_user_profile_show_all', {'slug': app.user.slug}) }}">
-                                        {% thumbnail avatar, 'avatar' with {'title': app.user.username, 'alt': app.user.username, 'class': 'media-object img-circle'} %}
+                                    <a class="pull-left" href="{{ path('capco_user_profile_show_all', {'slug': comment.Author.slug}) }}">
+                                        {% thumbnail avatar, 'avatar' with {'title': comment.Author.username, 'alt': comment.Author.username, 'class': 'media-object img-circle'} %}
                                     </a>
                                 {% else %}
-                                    <a class="pull-left" href="{{ path('capco_user_profile_show_all', {'slug': app.user.slug}) }}">
+                                    <a class="pull-left" href="{{ path('capco_user_profile_show_all', {'slug': comment.Author.slug}) }}">
                                         <svg version="1.1" id="Calque_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="45px" height="45px" viewBox="0 0 200 200" enable-background="new 0 0 200 200" xml:space="preserve"><circle fill="{{ capco_site_color_value('color.section.bg')  }}" cx="100" cy="100" r="97.617"/><g><path fill="none" stroke="#FFFFFF" stroke-width="3" stroke-linejoin="round" stroke-miterlimit="10" d="M100,160.011h68.011c0,0,0-12.163-5.916-23.993c-4.41-8.819-22.024-14.039-45.683-22.908V95.367c0,0,7.239-6.661,7.239-18.49c2.959,0,5.916-11.826,0-14.785c0-1.754,7.927-16.569,5.916-26.613c-2.957-14.786-44.353-14.786-47.309-2.955c-17.742,0-5.915,27.169-5.915,29.568c-5.913,2.959-2.957,14.785,0,14.785c0,11.829,7.238,17.473,7.238,17.473v18.759c-23.655,8.875-41.273,14.089-45.682,22.908c-5.911,11.83-5.911,23.993-5.911,23.993H100z"/></g></svg>
                                     </a>
                                 {% endif %}
                                 <div class="media-body">
+                                    {{form_widget(form.body)}}
                                     {{ form_rest(form) }}
                                 </div>
                             </div>
                         </div>
-                        <div class="dialog__excerpt  excerpt  box">
-                            <p>{{ 'reporting.create.text'|trans({}, 'CapcoAppBundle') }}</p>
-                        </div>
                         <div class="dialog__footer  box">
+                            <a href="{{ path('app_comment_delete' ,{'commentId': comment.id } ) }}" class="btn  btn-danger">{{ 'comment.update.remove'|trans({}, 'CapcoAppBundle') }}</a>
                             <div class="pull-right">
-                                {% if idea is defined %}
-                                    <a href="{{ path('app_idea_show', {'slug': idea.slug}) }}" class="btn  btn-default">{{ 'reporting.create.cancel'|trans({}, 'CapcoAppBundle') }}</a>
-                                {% elseif comment is defined %}
-                                    <a href="{{ capco_comment_object_url(comment) }}" class="btn  btn-default">{{ 'reporting.create.cancel'|trans({}, 'CapcoAppBundle') }}</a>
-                                {% else %}
-                                    <a href="{{ path('app_consultation_show_opinion', {'consultationSlug': consultation.slug, 'opinionTypeSlug': opinionType.slug, 'opinionSlug': opinion.slug}) }}" class="btn  btn-default">{{ 'reporting.create.cancel'|trans({}, 'CapcoAppBundle') }}</a>
-                                {% endif %}
-                                <button type="submit" class="btn  btn-primary">{{ 'reporting.create.submit'|trans({}, 'CapcoAppBundle') }}</button>
+                                <a href="{{ capco_comment_object_url(comment) }}" class="btn  btn-default">{{ 'comment.update.cancel'|trans({}, 'CapcoAppBundle') }}</a>
+                                <button type="submit" class="btn  btn-warning">{{ 'comment.update.submit'|trans({}, 'CapcoAppBundle') }}</button>
                             </div>
                         </div>
                     </form>

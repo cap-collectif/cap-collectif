@@ -15,6 +15,8 @@ parameters:
     capco.blog.post.repository.class: Capco\AppBundle\Repository\PostRepository
     capco.event.repository.class: Capco\AppBundle\Repository\EventRepository
     capco.event.resolver.class: Capco\AppBundle\Manager\EventResolver
+    capco.comment.resolver.class: Capco\AppBundle\Manager\CommentResolver
+    capco.twig.comment.class: Capco\AppBundle\Twig\CommentExtension
     capco.site_color.repository.class: Capco\AppBundle\Repository\SiteColorRepository
     capco.site_color.resolver.class: Capco\AppBundle\SiteColor\Resolver
     capco.twig_extension.site_color.class: Capco\AppBundle\Twig\SiteColorExtension
@@ -162,6 +164,16 @@ services:
     capco.step.resolver:
         class: %capco.step.resolver.class%
         arguments: [@router]
+
+    capco.comment.resolver:
+        class: %capco.comment.resolver.class%
+        arguments: [@doctrine.orm.entity_manager, @router]
+
+    capco.twig.comment:
+        class: %capco.twig.comment.class%
+        arguments: [@capco.comment.resolver]
+        tags:
+          - { name: twig.extension }
 
     capco.twig.steps_links:
         class:     %capco.twig.steps_links.class%

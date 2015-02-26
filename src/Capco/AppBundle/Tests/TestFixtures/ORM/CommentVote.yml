@@ -1,0 +1,10 @@
+Capco\AppBundle\Entity\CommentVote:
+  commentVote1:
+    comment: @comment1
+    Voter: @user
+  commentVote2:
+    comment: @comment1
+    Voter: @admin
+  commentVote3:
+    comment: @comment2
+    Voter: @user

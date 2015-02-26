@@ -1,0 +1,9 @@
+{% extends 'SonataAdminBundle:CRUD:base_list_field.html.twig' %}
+
+{% block field %}
+    <div>
+        {% if (object.Idea is not null) %}
+            <span><a href="{{ path('admin_capco_app_idea_show', {'id': object.Idea.id}) }}">{{ object.Idea.title }}</a></span>
+        {% endif %}
+    </div>
+{% endblock %}

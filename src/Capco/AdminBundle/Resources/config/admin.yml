@@ -190,3 +190,19 @@ services:
             - {name: sonata.admin, manager_type: orm, group: admin.group.content, label: admin.label.video}
         calls:
             - [ setTranslationDomain, [SonataAdminBundle]]
+
+    capco_admin.admin.comment:
+        class: Capco\AdminBundle\Admin\CommentAdmin
+        arguments: [~, Capco\AppBundle\Entity\Comment, SonataAdminBundle:CRUD]
+        tags:
+            - {name: sonata.admin, manager_type: orm, group: admin.group.news, label: admin.label.comment}
+        calls:
+            - [ setTranslationDomain, [SonataAdminBundle]]
+
+    capco_admin.admin.comment_vote:
+        class: Capco\AdminBundle\Admin\CommentVoteAdmin
+        arguments: [~, Capco\AppBundle\Entity\CommentVote, SonataAdminBundle:CRUD]
+        tags:
+            - {name: sonata.admin, manager_type: orm, group: admin.group.news, label: admin.label.comment_vote}
+        calls:
+            - [ setTranslationDomain, [SonataAdminBundle]]

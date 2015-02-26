@@ -327,14 +327,14 @@ class IdeaController extends Controller
                     $em->persist($vote);
                     $em->flush();
 
-                    $this->get('session')->getFlashBag()->add('success', $translator->trans('idea.vote.add.success'));
+                    $this->get('session')->getFlashBag()->add('success', $translator->trans('idea.vote.add_success'));
                 } else {
                     $vote = $em->getRepository('CapcoAppBundle:IdeaVote')->hasVote($this->getUser(), $idea);
                     $em = $this->getDoctrine()->getManager();
                     $em->remove($vote);
                     $em->flush();
 
-                    $this->get('session')->getFlashBag()->add('info', $translator->trans('idea.vote.delete.success'));
+                    $this->get('session')->getFlashBag()->add('info', $translator->trans('idea.vote.delete_success'));
                 }
 
                 // redirect (avoids reload alerts)
@@ -346,7 +346,7 @@ class IdeaController extends Controller
             'idea' => $idea,
             'userReportingIdea' => $userReportingIdea,
             'userVoteCount' => $userVoteCount,
-            'form' => $form->createView()
+            'form' => $form->createView(),
         );
     }
 }

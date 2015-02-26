@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\Controller;
 
 use Capco\AppBundle\Entity\Argument;
+use Capco\AppBundle\Entity\Comment;
 use Capco\AppBundle\Entity\Consultation;
 use Capco\AppBundle\Entity\Idea;
 use Capco\AppBundle\Entity\Opinion;
@@ -265,6 +266,50 @@ class ReportingController extends Controller
 
         return [
             'idea' => $idea,
+            'form' => $form->createView()
+        ];
+    }
+
+    /**
+     * @Route("/comments/{commentId}/report", name="app_report_comment")
+     * @ParamConverter("comment", class="CapcoAppBundle:Comment", options={"mapping": {"commentId": "id"}})
+     * @Template("CapcoAppBundle:Reporting:create.html.twig")
+     * @param $request
+     * @param $comment
+     * @return array
+     */
+    public function reportingCommentAction(Comment $comment, Request $request)
+    {
+        if (!$this->get('security.context')->isGranted('ROLE_USER')) {
+            throw new AccessDeniedException($this->get('translator')->trans('error.access_restricted', array(), 'CapcoAppBundle'));
+        }
+
+        if (false == $comment->canContribute() ) {
+            throw new AccessDeniedException($this->get('translator')->trans('comment.error.no_contribute', array(), 'CapcoAppBundle'));
+        }
+
+        $reporting = new Reporting();
+        $form = $this->createForm(new ReportingType(), $reporting);
+
+        if ($request->getMethod() == 'POST') {
+            $form->handleRequest($request);
+
+            if ($form->isValid()) {
+                $em = $this->getDoctrine()->getManager();
+                $reporting->setComment($comment);
+                $reporting->setReporter($this->getUser());
+                $this->get('capco.notify_manager')->sendNotifyMessage($this->getUser(), $reporting->getStatus(), $form->get('body')->getData() );
+                $em->persist($reporting);
+                $em->flush();
+                $this->get('session')->getFlashBag()->add('success', $this->get('translator')->trans('reporting.success'));
+                return $this->redirect($this->get('capco.comment.resolver')->getUrlOfRelatedObject($comment));
+            } else {
+                $this->get('session')->getFlashBag()->add('danger', $this->get('translator')->trans('reporting.error'));
+            }
+        }
+
+        return [
+            'comment' => $comment,
             'form' => $form->createView()
         ];
     }

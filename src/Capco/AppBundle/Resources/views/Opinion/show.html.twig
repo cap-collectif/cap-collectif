@@ -172,7 +172,7 @@
                                                     <p class="excerpt">
                                                         {{ source.body }}
                                                     </p>
-                                                    {% if false == opinion.canContribute %}
+                                                    {% if false == source.canContribute %}
                                                         <button disabled="disabled" class="btn  btn-dark-gray  btn-xs"><i class="cap cap-hand-like-2"></i> {{ 'source.vote.submit'|trans({}, 'CapcoAppBundle') }}</button>
                                                     {% else %}
                                                         <form method="POST" style="display: inline-block;" action="{{ path('app_consultation_vote_source' ,{'consultationSlug': consultation.slug, 'opinionTypeSlug': opinionType.slug, 'opinionSlug': opinion.slug, 'sourceSlug': source.slug } ) }}">
@@ -186,7 +186,7 @@
                                                     {% endif %}
                                                     <span class="nb-votes">{{ source.voteCountSource }}</span>
 
-                                                    {% if opinion.canContribute %}
+                                                    {% if source.canContribute %}
                                                         {% if(userReportingSource == false) %}
                                                             <a href="{{ path('app_report_source' ,{'consultationSlug': consultation.slug, 'opinionTypeSlug': opinionType.slug, 'opinionSlug': opinion.slug, 'sourceSlug': source.slug } ) }}" class="btn btn-xs btn-dark-gray  btn--outline"><i class="cap cap-flag-1"></i> {{ 'source.report.submit'|trans({}, 'CapcoAppBundle') }}</a>
                                                         {% else %}

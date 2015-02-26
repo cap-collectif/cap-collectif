@@ -73,6 +73,9 @@ class IdeaAdmin extends Admin
             ->add('voteCount', null, array(
                 'label' => 'admin.fields.idea.vote_count',
             ))
+            ->add('commentsCount', null, array(
+                'label' => 'admin.fields.idea.comments_count',
+            ))
             ->add('Author', 'sonata_type_model', array(
                 'label' => 'admin.fields.idea.author',
             ))
@@ -172,6 +175,9 @@ class IdeaAdmin extends Admin
         $showMapper
             ->add('voteCount', null, array(
                 'label' => 'admin.fields.idea.vote_count',
+            ))
+            ->add('commentsCount', null, array(
+                'label' => 'admin.fields.idea.comments_count',
             ))
             ->add('Author', null, array(
                 'label' => 'admin.fields.idea.author',

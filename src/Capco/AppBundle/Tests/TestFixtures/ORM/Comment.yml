@@ -1,0 +1,31 @@
+Capco\AppBundle\Entity\Comment:
+  comment1:
+    Idea: @Idea1
+    Author: @user
+    body: "Commentaire 1"
+  comment2:
+    Idea: @Idea1
+    Author: @admin
+    body: "Commentaire 2"
+  comment3:
+    Idea: @Idea2
+    Author: @admin
+    body: "Commentaire 3"
+  commentDisabled:
+    Idea: @Idea2
+    Author: @admin
+    body: "Commentaire désactivé"
+    isEnabled: false
+  commentTrashed:
+    Idea: @Idea2
+    Author: @admin
+    body: "Commentaire à la corbeille"
+    isTrashed: true
+  commentOnDisabledIdea:
+    Idea: @IdeaUnpublished
+    Author: @admin
+    body: "Commentaire sur une idée désactivée"
+  commentOnTrashedIdea:
+    Idea: @IdeaTrashed
+    Author: @admin
+    body: "Commentaire sur une idée à la corbeille"
