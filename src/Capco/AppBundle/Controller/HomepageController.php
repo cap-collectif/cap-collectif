@@ -98,11 +98,13 @@ class HomepageController extends Controller
     public function lastConsultationsAction($max = 3, $offset = 0)
     {
         $consultationSteps = $this->getDoctrine()->getRepository('CapcoAppBundle:Step')->getLastOpen($max, $offset);
-        if (empty($consultationSteps)) {
-            $consultationSteps = $this->getDoctrine()->getRepository('CapcoAppBundle:Step')->getLastFuture($max, $offset);
+        $left = $max - count($consultationSteps);
+        if ($left > 0) {
+            $consultationSteps = array_merge($consultationSteps, $this->getDoctrine()->getRepository('CapcoAppBundle:Step')->getLastFuture($left, $offset));
         }
-        if (empty($consultationSteps)) {
-            $consultationSteps = $this->getDoctrine()->getRepository('CapcoAppBundle:Step')->getLastClosed($max, $offset);
+        $left = $max - count($consultationSteps);
+        if ($left > 0) {
+            $consultationSteps = array_merge($consultationSteps, $this->getDoctrine()->getRepository('CapcoAppBundle:Step')->getLastClosed($left, $offset));
         }
         return [
             'consultationSteps' => $consultationSteps,
