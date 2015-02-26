@@ -65,7 +65,7 @@ class VideoAdmin extends Admin
                 'label' => 'admin.fields.video.updated_at',
             ))
             ->add('color', null, array(
-                'label' => 'admin.fields.opinion_type.color',
+                'label' => 'admin.fields.video.color',
                 'template' => 'CapcoAdminBundle:OpinionType:color_list_field.html.twig',
                 'typesColors' => Video::$colorButtonPlay,
             ))
@@ -90,13 +90,13 @@ class VideoAdmin extends Admin
 
         $formMapper
             ->add('title', null, array(
-                'label' => 'admin.fields.event.title',
+                'label' => 'admin.fields.video.title',
             ))
             ->add('body', null, array(
-                'label' => 'admin.fields.event.body',
+                'label' => 'admin.fields.video.body',
             ))
             ->add('Author', 'sonata_type_model', array(
-                'label' => 'admin.fields.event.author',
+                'label' => 'admin.fields.video.author',
                 'required' => true,
             ))
             ->add('link', null, array(
@@ -111,7 +111,7 @@ class VideoAdmin extends Admin
                 'label' => 'admin.fields.video.position',
             ))
             ->add('color', 'choice', array(
-                'label' => 'admin.fields.opinion_type.color',
+                'label' => 'admin.fields.video.color',
                 'choices' => Video::$colorButtonPlay,
                 'translation_domain' => 'CapcoAppBundle',
             ))
@@ -156,7 +156,7 @@ class VideoAdmin extends Admin
                 'label' => 'admin.fields.video.media',
             ))
             ->add('color', null, array(
-                'label' => 'admin.fields.opinion_type.color',
+                'label' => 'admin.fields.video.color',
                 'template' => 'CapcoAdminBundle:OpinionType:color_show_field.html.twig',
                 'typesColors' => Video::$colorButtonPlay,
             ))

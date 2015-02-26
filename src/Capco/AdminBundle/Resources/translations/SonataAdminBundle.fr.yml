@@ -327,6 +327,7 @@ admin:
       media: Image
       link: URL
       position: Position
+      color: Couleur du bouton lecture
   action:
     reporting:
       disable:
