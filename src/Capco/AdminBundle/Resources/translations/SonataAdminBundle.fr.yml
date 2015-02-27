@@ -347,6 +347,7 @@ capco:
     registration: Inscription
     login_facebook: Inscription/Connexion avec Facebook
     login_gplus: Inscription/Connexion avec Google+
+    shield_mode: Mode bouclier
 
 action_enable: Activer
 action_disable: Désactiver

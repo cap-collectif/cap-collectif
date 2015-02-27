@@ -294,3 +294,16 @@ Capco\AppBundle\Entity\SiteParameter:
            <p><text(100)></p>
         position: 303
         type: 1
+
+    SiteParameterShieldUsername:
+        keyname: security.shield_mode.username
+        title: "Nom d'utilisateur du mode bouclier"
+        value: admin
+        position: 1000
+        type: 0
+    SiteParameterShieldPassword:
+        keyname: security.shield_mode.password
+        title: "Mot de passe du mode bouclier"
+        value: admin
+        position: 1001
+        type: 0

@@ -44,4 +44,13 @@ class BaseTestHelper extends WebTestCase
         );
         $this->loadFixtures($classes);
     }
+
+    protected function setUp()
+    {
+        $client = static::createClient();
+        $toggleManager = $client->getContainer()->get('capco.toggle.manager');
+        $toggleManager->deactivate('shield_mode');
+    }
+
+
 }

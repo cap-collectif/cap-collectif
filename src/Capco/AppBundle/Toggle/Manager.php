@@ -19,6 +19,7 @@ class Manager
         'registration',
         'login_facebook',
         'login_gplus',
+        'shield_mode',
     );
 
     public function __construct(ToggleManager $toggleManager, ContextFactory $contextFactory)

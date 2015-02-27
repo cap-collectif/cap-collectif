@@ -38,6 +38,7 @@ class SetFeatureFlagsCommand extends ContainerAwareCommand
         $toggleManager->activate('registration');
         $toggleManager->activate('login_facebook');
         $toggleManager->activate('login_gplus');
+        $toggleManager->deactivate('shield_mode');
 
         $output->writeln('Feature toggles reinitialized');
     }
