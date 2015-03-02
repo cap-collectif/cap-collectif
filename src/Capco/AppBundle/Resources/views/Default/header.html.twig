@@ -1,4 +1,4 @@
-<nav class="navbar  navbar-default navbar-fixed-top" role="navigation">
+<nav class="navbar  navbar-default navbar-fixed-top  autocollapse-js" role="navigation">
     <div class="container">
 
         {# Navbar brand and toggle  #}
@@ -19,6 +19,6 @@
                 <span class="navbar__toggle-label">{{ 'global.menu.title'|trans({}, 'CapcoAppBundle') }}</span>
             </button>
         </div>
-        {{ render_esi(controller('CapcoAppBundle:Default:navigation', { pathInfo: app.request.pathInfo })) }}
+        {{ render(controller('CapcoAppBundle:Default:navigation', { pathInfo: app.request.pathInfo })) }}
     </div>
 </nav>

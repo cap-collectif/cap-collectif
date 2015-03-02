@@ -111,6 +111,18 @@ App.module = function ($) {
         });
     };
 
+    var autocollapse = function(navbars) {
+        var $navbars = $(navbars);
+        $navbars.each(function() {
+            $(this).removeClass('collapsed');
+            $('body').removeClass('higher-navbar');
+            if ($(this).innerHeight() > 50) {
+                $(this).addClass('collapsed');
+                $('body').addClass('higher-navbar');
+            }
+        });
+    };
+
     var AppPublic = {
         equalheight: equalheight,
         resized: resized,
@@ -120,6 +132,7 @@ App.module = function ($) {
         video: video,
         externalLinks: externalLinks,
         showMap: showMap,
+        autocollapse: autocollapse
     };
 
     return AppPublic;

@@ -73,7 +73,13 @@
 {% block javascripts %}
     <script src="{{ asset('js/app.min.js') }}"></script>
     <script type="text/javascript">
-        App.module.externalLinks();
+        $(window).on('load', function() {
+            App.module.externalLinks();
+            App.module.autocollapse('.autocollapse-js')
+        });
+        $(window).on('resize', function() {
+            App.module.autocollapse('.autocollapse-js');
+        });
     </script>
     {% set client_js = capco_site_parameter_value('global.site.embed_js') %}
     {% if null != client_js %}
