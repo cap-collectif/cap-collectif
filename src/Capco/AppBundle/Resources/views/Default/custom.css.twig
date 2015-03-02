@@ -6,27 +6,43 @@
 {% set h6 = capco_site_color_value('color.h6') %}
 
 {% set bodyBg = capco_site_color_value('color.body.bg') %}
+{% if null == bodyBg %}{% set bodyBg = '#EBEBEB' %}{% endif %}
 {% set bodyText = capco_site_color_value('color.body.text') %}
+{% if null == bodyText %}{% set bodyText = '#333' %}{% endif %}
 
 {% set headerBg = capco_site_color_value('color.header.bg') %}
+{% if null == headerBg %}{% set headerBg = '#16A085' %}{% endif %}
 {% set headerTitle = capco_site_color_value('color.header.title') %}
+{% if null == headerTitle %}{% set headerTitle = '#FFF' %}{% endif %}
 {% set headerText = capco_site_color_value('color.header.text') %}
+{% if null == headerText %}{% set headerText = '#FFF' %}{% endif %}
 
 {% set sectionBg = capco_site_color_value('color.section.bg') %}
+{% if null == sectionBg %}{% set sectionBg = '#1ABC9C' %}{% endif %}
 {% set sectionText = capco_site_color_value('color.section.text') %}
+{% if null == sectionText %}{% set sectionText = '#FFF' %}{% endif %}
 {% set sectionTitle = capco_site_color_value('color.section.title') %}
+{% if null == sectionTitle %}{% set sectionTitle = '#FFF' %}{% endif %}
 
 {% set btn = capco_site_color_value('color.btn') %}
+{% if null == btn %}{% set btn = '#1abc9c' %}{% endif %}
 {% set btnText = capco_site_color_value('color.btn.text') %}
+{% if null == btnText %}{% set btnText = '#FFF' %}{% endif %}
 
 {% set btnPrimary = capco_site_color_value('color.btn.primary') %}
+{% if null == btnPrimary %}{% set btnPrimary = '#1abc9c' %}{% endif %}
 {% set btnPrimaryText = capco_site_color_value('color.btn.primary.text') %}
+{% if null == btnPrimaryText %}{% set btnPrimaryText = '#FFF' %}{% endif %}
 
 {% set link = capco_site_color_value('color.link') %}
+{% if null == link %}{% set link = '#16a085' %}{% endif %}
 {% set linkHover = capco_site_color_value('color.link.hover') %}
+{% if null == linkHover %}{% set linkHover = '#1abc9c' %}{% endif %}
 
 {% set footerText = capco_site_color_value('color.footer.text') %}
+{% if null == footerText %}{% set footerText = '#FFF' %}{% endif %}
 {% set footerBg = capco_site_color_value('color.footer.bg') %}
+{% if null == footerBg %}{% set footerBg = '#1abc9c' %}{% endif %}
 
 
 <style>
@@ -103,21 +119,20 @@
         color:{{ bodyText }};
     }
     .jumbotron--bg-1,
-    .footer,
-    .footer .social-network li a {
+    .footer {
         background-color: {{ headerBg }};
         color: {{ headerText }};
     }
+    .footer a,
+    .footer a:hover,
+    .footer a:focus,
+    .footer .footer__body a,
+    .footer .social-network li a {
+        color: {{ footerText }};
+    }
+
     .jumbotron--bg-1 h1{
         color: {{ headerTitle }};
-    }
-    .jumbotron--bg-2,
-    .footer .footer__links,
-    .footer .footer__links ul li,
-    .footer .footer__links ul li a,
-    .footer .capco-powered a:hover {
-        background-color: {{ sectionBg }};
-        color: {{ sectionText }};
     }
 
     .footer .footer__links h1,
@@ -136,7 +151,10 @@
     body {
         background-color: {{ sectionBg }};
     }
-
+    .jumbotron--bg-2 {
+        background-color: {{ sectionBg }};
+        color: {{ sectionText }};
+    }
     .jumbotron--bg-2 h1,
     .jumbotron--bg-2 h2,
     .jumbotron--bg-2 h3,

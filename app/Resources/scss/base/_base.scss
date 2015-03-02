@@ -259,22 +259,6 @@ a.excerpt {
   @include border-radius(0);
 }
 
-.capco-powered {
-  margin-bottom: 10px;
-  img {
-    height: 23px;
-    width: auto;
-    margin-right: 5px;
-  }
-  span {
-    font-size: 13px;
-  }
-  a {
-    color: inherit;
-    text-decoration: underline;
-  }
-}
-
 .dropdown--social .dropdown-menu li button {
   padding: 3px 20px;
   font-weight: 400;
