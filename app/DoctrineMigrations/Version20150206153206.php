@@ -28,10 +28,12 @@ class Version20150206153206 extends AbstractMigration implements ContainerAwareI
     {
         $em = $this->container->get('doctrine.orm.entity_manager');
 
-        $siteImage = $em->getRepository('CapcoAppBundle:SiteImage')->findOneByKeyname('image.default_avatar');
+        $query = $em->createQuery("SELECT si.id FROM Capco\AppBundle\Entity\SiteImage si WHERE si.keyname = :keyname");
+        $query->setParameter('keyname', 'image.default_avatar');
+        $siteImage = $query->getOneOrNullResult();
+
         if (null != $siteImage) {
-            $media = $siteImage->setIsEnabled(false);
-            $em->flush();
+            $this->connection->update('site_image', array('is_enabled' => false), array('id' => $siteImage['id']));
         }
     }
 
@@ -44,10 +46,12 @@ class Version20150206153206 extends AbstractMigration implements ContainerAwareI
     {
         $em = $this->container->get('doctrine.orm.entity_manager');
 
-        $siteImage = $em->getRepository('CapcoAppBundle:SiteImage')->findOneByKeyname('image.default_avatar');
+        $query = $em->createQuery("SELECT si.id FROM Capco\AppBundle\Entity\SiteImage si WHERE si.keyname = :keyname");
+        $query->setParameter('keyname', 'image.default_avatar');
+        $siteImage = $query->getOneOrNullResult();
+
         if (null != $siteImage) {
-            $media = $siteImage->setIsEnabled(true);
-            $em->flush();
+            $this->connection->update('site_image', array('is_enabled' => true), array('id' => $siteImage['id']));
         }
     }
 }

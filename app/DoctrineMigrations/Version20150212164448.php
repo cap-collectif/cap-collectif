@@ -36,15 +36,13 @@ class Version20150212164448 extends AbstractMigration implements ContainerAwareI
     public function postUp(Schema $schema)
     {
         $em = $this->container->get('doctrine.orm.entity_manager');
-        $ideasMI = $em->getRepository('CapcoAppBundle:MenuItem')->findOneBy(array(
-            'link' => 'ideas',
-            'isDeletable' => false,
-        ));
+        $query = $em->createQuery("SELECT mi.id FROM Capco\AppBundle\Entity\MenuItem mi WHERE mi.link = :link AND mi.isDeletable = :isDeletable");
+        $query->setParameter('link','ideas');
+        $query->setParameter('isDeletable', false);
+        $ideasMI = $query->getOneOrNullResult();
 
         if (null != $ideasMI) {
-            $ideasMI->setAssociatedFeatures(array('ideas'));
-            $em->persist($ideasMI);
-            $em->flush();
+            $this->connection->update('menu_item', array('associated_features' => 'ideas'), array('id' => $ideasMI['id']));
         }
 
         $toggleManager = $this->container->get('capco.toggle.manager');
@@ -61,15 +59,13 @@ class Version20150212164448 extends AbstractMigration implements ContainerAwareI
     public function postDown(Schema $schema)
     {
         $em = $this->container->get('doctrine.orm.entity_manager');
-        $ideasMI = $em->getRepository('CapcoAppBundle:MenuItem')->findOneBy(array(
-            'link' => 'ideas',
-            'isDeletable' => false,
-        ));
+        $query = $em->createQuery("SELECT mi.id FROM Capco\AppBundle\Entity\MenuItem mi WHERE mi.link = :link AND mi.isDeletable = :isDeletable");
+        $query->setParameter('link','ideas');
+        $query->setParameter('isDeletable', false);
+        $ideasMI = $query->getOneOrNullResult();
 
         if (null != $ideasMI) {
-            $ideasMI->setAssociatedFeatures(array());
-            $em->persist($ideasMI);
-            $em->flush();
+            $this->connection->update('menu_item', array('associated_features' => 'ideas'), array('id' => $ideasMI['id']));
         }
     }
 

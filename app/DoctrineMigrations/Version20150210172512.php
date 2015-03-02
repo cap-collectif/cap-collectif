@@ -79,22 +79,25 @@ class Version20150210172512 extends AbstractMigration implements ContainerAwareI
         );
 
         foreach ($newTypeSettings as $key => $type) {
-            $parameter = $em->getRepository('CapcoAppBundle:SiteParameter')->findOneByKeyname($key);
+
+            $em = $this->container->get('doctrine.orm.entity_manager');
+
+            $query = $em->createQuery("SELECT sp.id FROM Capco\AppBundle\Entity\SiteParameter sp WHERE sp.keyname = :keyname");
+            $query->setParameter('keyname', $key);
+            $parameter = $query->getOneOrNullResult();
+
             if (null != $parameter) {
-                $parameter->setType($parameterTypes[$type]);
-                $em->persist($parameter);
+                $this->connection->update('site_parameter', array('type' => $parameterTypes[$type]), array('id' => $parameter['id']));
             }
         }
 
-        $newParameter = new SiteParameter();
-        $newParameter->setKeyname('global.site.embed_js');
-        $newParameter->setTitle('Script à insérer dans les pages');
-        $newParameter->setValue('');
-        $newParameter->setPosition(2);
-        $newParameter->setType($parameterTypes['javascript']);
-        $em->persist($newParameter);
-
-        $em->flush();
+        $query = $em->createQuery("SELECT sp.id FROM Capco\AppBundle\Entity\SiteParameter sp WHERE sp.keyname = :keyname");
+        $query->setParameter('keyname', 'global.site.embed_js');
+        $newParameter = $query->getOneOrNullResult();
+        if (null == $newParameter) {
+            $date = (new \DateTime())->format('Y-m-d H:i:s');
+            $this->connection->insert('site_parameter', array('keyname' => 'global.site.embed_js', 'title' => 'Script à insérer dans les pages', 'value' => '', 'position' => 2, 'type' => $parameterTypes['javascript'], 'created_at' => $date, 'updated_at' => $date));
+        }
     }
 
 
@@ -107,10 +110,11 @@ class Version20150210172512 extends AbstractMigration implements ContainerAwareI
     public function postDown(Schema $schema)
     {
         $em = $this->container->get('doctrine.orm.entity_manager');
-        $newParameter = $em->getRepository('CapcoAppBundle:SiteParameter')->findOneByKeyname('global.site_embed_js');
+        $query = $em->createQuery("SELECT sp.id FROM Capco\AppBundle\Entity\SiteParameter sp WHERE sp.keyname = :keyname");
+        $query->setParameter('keyname', 'global.site.embed_js');
+        $newParameter = $query->getOneOrNullResult();
         if (null != $newParameter) {
-            $em->remove($newParameter);
-            $em->flush();
+            $this->connection->delete('site_parameter', array('id' => $newParameter['id']));
         }
     }
 

@@ -40,36 +40,29 @@ class Version20150213174404 extends AbstractMigration implements ContainerAwareI
         $toggleManager->activate('themes');
 
         $em = $this->container->get('doctrine.orm.entity_manager');
-        $themeMI = $em->getRepository('CapcoAppBundle:MenuItem')->findOneBy(array(
-            'link' => 'themes',
-            'isDeletable' => false,
-        ));
+        $query = $em->createQuery("SELECT mi.id FROM Capco\AppBundle\Entity\MenuItem mi WHERE mi.link = :link AND mi.isDeletable = :isDeletable");
+        $query->setParameter('link','themes');
+        $query->setParameter('isDeletable', false);
+        $themeMI = $query->getOneOrNullResult();
 
         if (null == $themeMI) {
-            $header = $em->getRepository('CapcoAppBundle:Menu')->findOneByType(1);
+            $query = $em->createQuery("SELECT m.id FROM Capco\AppBundle\Entity\Menu m WHERE m.type = :type");
+            $query->setParameter('type',1);
+            $header = $query->getOneOrNullResult();
 
             // If we havn't a header yet, we want to get one
             if (null === $header) {
-                $header = new Menu();
-                $header->setType(1);
-                $em->persist($header);
+                $this->connection->insert('menu', array('type' => 1));
+                $headerId = $this->connection->lastInsertId();
+            } else {
+                $headerId = $header['id'];
             }
 
-            $themeMI = new MenuItem();
-            $themeMI->setTitle('Thèmes');
-            $themeMI->setLink('themes');
-            $themeMI->setIsEnabled(true);
-            $themeMI->setIsDeletable(false);
-            $themeMI->setIsFullyModifiable(false);
-            $themeMI->setPosition(2);
-            $themeMI->setParent(null);
-            $themeMI->setMenu($header);
-            $em->persist($themeMI);
+            $date = (new \DateTime())->format('Y-m-d H:i:s');
+            $this->connection->insert('menu_item', array('title' => 'Thèmes', 'link' => 'themes', 'is_enabled' => true, 'is_deletable' => false, 'isFullyModifiable' => false, 'position' => 2, 'parent_id' => null, 'menu_id' => $headerId, 'created_at' => $date, 'updated_at' => $date));
         }
 
-        $themeMI->setAssociatedFeatures(array('themes'));
-        $em->persist($themeMI);
-        $em->flush();
+        $this->connection->update('menu_item', array('associated_features' => 'themes'), array('link' => 'themes', 'is_deletable' => false));
     }
 
 
@@ -83,15 +76,13 @@ class Version20150213174404 extends AbstractMigration implements ContainerAwareI
     {
 
         $em = $this->container->get('doctrine.orm.entity_manager');
-        $themeMI = $em->getRepository('CapcoAppBundle:MenuItem')->findOneBy(array(
-            'link' => 'themes',
-            'isDeletable' => false,
-        ));
+        $query = $em->createQuery("SELECT mi.id FROM Capco\AppBundle\Entity\MenuItem mi WHERE mi.link = :link AND mi.isDeletable = :isDeletable");
+        $query->setParameter('link','themes');
+        $query->setParameter('isDeletable', false);
+        $themeMI = $query->getOneOrNullResult();
 
-        if (null == $themeMI) {
-            $themeMI->setAssociatedFeatures(array());
-            $em->persist($themeMI);
-            $em->flush();
+        if (null != $themeMI) {
+            $this->connection->update('menu_item', array('associated_features' => 'themes'), array('id' => $themeMI['id']));
         }
     }
 }

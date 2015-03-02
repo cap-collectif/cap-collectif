@@ -25,16 +25,25 @@ class Version20150204171640 extends AbstractMigration implements ContainerAwareI
     {
         $em = $this->container->get('doctrine.orm.entity_manager');
 
-        $query = $em->createQuery("SELECT mi.id FROM Capco\AppBundle\Entity\MenuItem mi WHERE mi.link = 'blog' AND mi.isDeletable = 0");
+        $query = $em->createQuery("SELECT mi.id FROM Capco\AppBundle\Entity\MenuItem mi WHERE mi.link = :link AND mi.isDeletable = :isDeletable");
+        $query->setParameter('link', 'blog');
+        $query->setParameter('isDeletable', false);
         $blogMenuItem = $query->getOneOrNullResult();
 
         if (null == $blogMenuItem) {
-            $query = $em->createQuery("SELECT m.id FROM Capco\AppBundle\Entity\Menu m WHERE m.type = 1");
+            $query = $em->createQuery("SELECT m.id FROM Capco\AppBundle\Entity\Menu m WHERE m.type = :type");
+            $query->setParameter('type', 1);
             $menu = $query->getOneOrNullResult();
 
             if (null != $menu) {
-                $this->addSql("INSERT INTO menu_item (title, link, is_enabled, is_deletable, isFullyModifiable, position, menu_id, parent_id) VALUES ('Actualités', 'blog', TRUE, FALSE, FALSE, 2, NULL, $blogMenuItem)");
+                $menuId = $menu['id'];
+            } else {
+                $this->connection->insert('menu', array('type' => 1));
+                $menuId = $this->connection->lastInsertId();
             }
+
+            $date = (new \DateTime())->format('Y-m-d H:i:s');
+            $this->connection->insert('menu_item', array('title' => 'Actualités', 'link' => 'blog', 'is_enabled' => true, 'is_deletable' => 'false', 'isFullyModifiable' => false, 'position' => 2, 'menu_id' => $menuId, 'parent_id' => null, 'created_at' => $date, 'updated_at' => $date));
         }
 
     }
@@ -49,11 +58,13 @@ class Version20150204171640 extends AbstractMigration implements ContainerAwareI
     {
         $em = $this->container->get('doctrine.orm.entity_manager');
 
-        $query = $em->createQuery("SELECT mi.id FROM Capco\AppBundle\Entity\MenuItem mi WHERE mi.link = 'blog' AND mi.isDeletable = 0");
+        $query = $em->createQuery("SELECT mi.id FROM Capco\AppBundle\Entity\MenuItem mi WHERE mi.link = :link AND mi.isDeletable = :isDeletable");
+        $query->setParameter('link', 'blog');
+        $query->setParameter('isDeletable', false);
         $blogMenuItem = $query->getOneOrNullResult();
 
         if (null != $blogMenuItem) {
-            $this->addSql("DELETE FROM menu_item WHERE id = $blogMenuItem");
+            $this->connection->delete('menu_item', array('id' => $blogMenuItem['id']));
         }
     }
 

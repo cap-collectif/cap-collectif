@@ -32,43 +32,13 @@ class Version20150202184849 extends AbstractMigration implements ContainerAwareI
     {
         $em = $this->container->get('doctrine.orm.entity_manager');
 
-        $context = $em->getRepository('CapcoClassificationBundle:Context')->findOneById('default');
-        if (null == $context) {
-            $context = new Context();
-            $context->setId('default');
-            $context->setName('Default');
-            $context->setEnabled(true);
-            $em->persist($context);
+        $query = $em->createQuery("SELECT si.id FROM Capco\AppBundle\Entity\SiteImage si WHERE si.keyname = :keyname");
+        $query->setParameter('keyname', 'image.default_avatar');
+        $siteImage = $query->getOneOrNullResult();
+        if (null == $siteImage) {
+            $date = (new \DateTime())->format('Y-m-d H:i:s');
+            $this->connection->insert('site_image', array('keyname' => 'image.default_avatar', 'Media_id' => null, 'is_enabled' => false, 'title' => 'Avatar par défaut', 'position' => 4, 'created_at' => $date, 'updated_at' => $date));
         }
-
-        $category = $em->getRepository('CapcoClassificationBundle:Category')->findOneByName('root');
-        if (null == $category) {
-            $category = new Category();
-            $category->setName('root');
-            $category->setEnabled(true);
-        }
-        $category->setContext($context);
-        $em->persist($category);
-
-        $em->flush();
-
-        $media = new Media();
-        $media->setBinaryContent('app/Resources/img/default_avatar.jpg');
-        $media->setEnabled(true);
-        $media->setName('Avatar');
-        $media->setContext($context->getId());
-        $media->setProviderName('sonata.media.provider.image');
-        $this->container->get('sonata.media.manager.media')->save($media, $media->getContext(), $media->getProviderName());
-
-        $siteImage = new SiteImage();
-        $siteImage->setKeyname('image.default_avatar');
-        $siteImage->setMedia($media);
-        $siteImage->setIsEnabled(true);
-        $siteImage->setTitle('Avatar par défaut');
-        $siteImage->setPosition(4);
-        $em->persist($siteImage);
-
-        $em->flush();
     }
 
     public function down(Schema $schema)
@@ -80,15 +50,15 @@ class Version20150202184849 extends AbstractMigration implements ContainerAwareI
     {
         $em = $this->container->get('doctrine.orm.entity_manager');
 
-        $siteImage = $em->getRepository('CapcoAppBundle:SiteImage')->findOneByKeyname('image.default_avatar');
+        $query = $em->createQuery("SELECT si.id FROM Capco\AppBundle\Entity\SiteImage si JOIN si.Media m WHERE si.keyname = :keyname");
+        $query->setParameter('keyname', 'image.default_avatar');
+        $siteImage = $query->getOneOrNullResult();
         if (null != $siteImage) {
-            $media = $siteImage->getMedia();
-            if (null != $media) {
-                $em->remove($media);
+            $mediaId = $siteImage['m'];
+            if (null != $mediaId) {
+                $this->connection->delete('media__media', array('id' => $mediaId));
             }
-            $em->remove($siteImage);
-
-            $em->flush();
+            $this->connection->delete('site_image', array('id' => $siteImage['id']));
         }
     }
 }

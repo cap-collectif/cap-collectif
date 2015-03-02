@@ -37,6 +37,7 @@ class Version20150211123011 extends AbstractMigration implements ContainerAwareI
     {
         $em = $this->container->get('doctrine.orm.entity_manager');
 
+        $date = (new \DateTime())->format('Y-m-d H:i:s');
         $newParameters = array(
             array(
                 'login.text.top',
@@ -44,7 +45,9 @@ class Version20150211123011 extends AbstractMigration implements ContainerAwareI
                 '',
                 250,
                 SiteParameter::$types['rich_text'],
-                true
+                true,
+                $date,
+                $date,
             ),
             array(
                 'login.text.bottom',
@@ -52,7 +55,9 @@ class Version20150211123011 extends AbstractMigration implements ContainerAwareI
                 '',
                 251,
                 SiteParameter::$types['rich_text'],
-                true
+                true,
+                $date,
+                $date,
             ),
             array(
                 'signin.text.top',
@@ -60,7 +65,9 @@ class Version20150211123011 extends AbstractMigration implements ContainerAwareI
                 '',
                 252,
                 SiteParameter::$types['rich_text'],
-                true
+                true,
+                $date,
+                $date,
             ),
             array(
                 'signin.text.bottom',
@@ -68,22 +75,20 @@ class Version20150211123011 extends AbstractMigration implements ContainerAwareI
                 'Les informations recueillies font l’objet d’un traitement informatique destiné au fonctionnement de la plateforme contributive. Le [nom du propriétéaire] est l’unique destinataire de ces données. Conformément à la loi « informatique et libertés » du 6 janvier 1978 modifiée en 2004, vous bénéficiez d’un droit d’accès et de rectification aux informations qui vous concernent, que vous pouvez exercer en vous adressant à [adresse de contact]. Vous pouvez également, pour des motifs légitimes, vous opposer au traitement des données vous concernant.',
                 253,
                 SiteParameter::$types['rich_text'],
-                true
+                true,
+                $date,
+                $date,
             )
         );
 
         foreach ($newParameters as $values) {
-            $param = new SiteParameter();
-            $param->setKeyname($values[0]);
-            $param->setTitle($values[1]);
-            $param->setValue($values[2]);
-            $param->setPosition($values[3]);
-            $param->setType($values[4]);
-            $param->setIsEnabled($values[5]);
-            $em->persist($param);
+            $query = $em->createQuery("SELECT sp.id FROM Capco\AppBundle\Entity\SiteParameter sp WHERE sp.keyname = :keyname");
+            $query->setParameter('keyname', $values[0]);
+            $param = $query->getOneOrNullResult();
+            if (null == $param) {
+                $this->connection->insert('site_parameter', array('keyname' => $values[0], 'title' => $values[1], 'value' => $values[2], 'position' => $values[3], 'type' => $values[4], 'is_enabled' => $values[5], 'created_at' => $values[6], 'updated_at' => $values[7]));
+            }
         }
-
-        $em->flush();
 
     }
 
@@ -105,13 +110,13 @@ class Version20150211123011 extends AbstractMigration implements ContainerAwareI
         );
 
         foreach ($parametersKeys as $key) {
-            $param = $em->getRepository('CapcoAppBundle:SiteParameter')->findOneByKeyname($key);
+            $query = $em->createQuery("SELECT sp.id FROM Capco\AppBundle\Entity\SiteParameter sp WHERE sp.keyname = :keyname");
+            $query->setParameter('keyname', $key);
+            $param = $query->getOneOrNullResult();
             if (null != $param) {
-                $em->remove($param);
+                $this->connection->delete('site_parameter', array('id' => $param['id']));
             }
         }
-
-        $em->flush();
 
     }
 }

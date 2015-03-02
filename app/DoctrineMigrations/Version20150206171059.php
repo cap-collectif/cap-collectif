@@ -38,11 +38,12 @@ class Version20150206171059 extends AbstractMigration implements ContainerAwareI
     public function postUp(Schema $schema)
     {
         $em = $this->container->get('doctrine.orm.entity_manager');
-        $blogMenuItem = $em->getRepository('CapcoAppBundle:MenuItem')->findOneByLink('blog');
+        $query = $em->createQuery("SELECT mi.id FROM Capco\AppBundle\Entity\MenuItem mi WHERE mi.link = :link");
+        $query->setParameter('link', 'blog');
+        $blogMenuItem = $query->getOneOrNullResult();
+
         if (null != $blogMenuItem) {
-            $blogMenuItem->setAssociatedFeatures(['blog']);
-            $em->persist($blogMenuItem);
-            $em->flush();
+            $this->connection->update('menu_item', array('associated_features' => 'blog'), array('id' => $blogMenuItem['id']));
         }
     }
 
