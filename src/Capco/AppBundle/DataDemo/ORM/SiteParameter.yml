@@ -305,3 +305,10 @@ Capco\AppBundle\Entity\SiteParameter:
         value: admin
         position: 1001
         type: 0
+
+    SiteParameterHomepageDarkening:
+        keyname: homepage.jumbotron.darken
+        title: Assombrissement de l'image de fond sur la page d'accueil
+        value: true
+        position: 160
+        type: 8

@@ -21,6 +21,7 @@ class SiteParameter
     const TYPE_INTERN_URL = 5;
     const TYPE_URL = 6;
     const TYPE_TEL_NB = 7;
+    const TYPE_BOOLEAN = 8;
 
     public static $types = [
         'simple_text' => self::TYPE_SIMPLE_TEXT,
@@ -31,6 +32,7 @@ class SiteParameter
         'intern_url' => self::TYPE_INTERN_URL,
         'url' => self::TYPE_URL,
         'tel' => self::TYPE_TEL_NB,
+        'boolean' => self::TYPE_BOOLEAN,
     ];
 
     /**

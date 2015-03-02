@@ -135,6 +135,13 @@ class SiteParameterAdmin extends Admin
                 'required' => false,
             ));
             
+        } else if ($subject->getType() == $types['boolean']) {
+            $formMapper->add('value', 'choice', array(
+                'label' => 'admin.fields.site_parameter.value',
+                'required' => false,
+                'choices' => array('1' => 'Activé', '0' => 'Désactivé'),
+            ));
+
         } else {
             $formMapper->add('value', null, array(
                 'label' => 'admin.fields.site_parameter.value',
