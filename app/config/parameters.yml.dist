@@ -25,3 +25,5 @@ parameters:
 
     registration_email_address: coucou@cap-collectif.com
     registration_sender_name: Cap Collectif
+
+    redis_prefix: dev

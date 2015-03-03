@@ -10,6 +10,8 @@ class Manager
 {
     protected $toggleManager;
 
+    protected $prefix;
+
     protected static $toggles = array(
         'blog',
         'calendar',
@@ -22,10 +24,19 @@ class Manager
         'shield_mode',
     );
 
-    public function __construct(ToggleManager $toggleManager, ContextFactory $contextFactory)
+    public function __construct(ToggleManager $toggleManager, ContextFactory $contextFactory, $prefix)
     {
         $this->toggleManager = $toggleManager;
         $this->context = $contextFactory->createContext();
+        $this->prefix = $prefix;
+    }
+
+    protected function getPrefixedName($name)
+    {
+        if (null != $this->prefix && !(0 === strpos($name, $this->prefix))) {
+            return $this->prefix.'__'.$name;
+        }
+        return $name;
     }
 
     public function activate($name)
@@ -68,7 +79,7 @@ class Manager
 
     public function isActive($name)
     {
-        return $this->toggleManager->active($name, $this->context);
+        return $this->toggleManager->active($this->getPrefixedName($name), $this->context);
     }
 
     public function hasOneActive($names)
@@ -96,7 +107,7 @@ class Manager
 
     private function createToggle($name, $status, array $conditions = array())
     {
-        $toggle = new Toggle($name, $conditions);
+        $toggle = new Toggle($this->getPrefixedName($name), $conditions);
 
         if ($status === Toggle::INACTIVE) {
             $toggle->deactivate();

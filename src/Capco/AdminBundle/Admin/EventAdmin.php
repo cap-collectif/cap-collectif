@@ -263,14 +263,6 @@ class EventAdmin extends Admin
         ;
     }
 
-    protected function configureRoutes(RouteCollection $collection)
-    {
-        if (!$this->getConfigurationPool()->getContainer()->get('capco.toggle.manager')->hasOneActive($this->getFeatures())) {
-            $collection->clear();
-            return $collection;
-        }
-    }
-
     public function getFeatures()
     {
         return array(

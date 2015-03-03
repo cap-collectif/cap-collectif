@@ -114,7 +114,7 @@ services:
     ## Toggle
     capco.toggle.manager:
         class:     %capco.toggle.manager.class%
-        arguments: [@qandidate.toggle.manager, @qandidate.toggle.user_context_factory]
+        arguments: [@qandidate.toggle.manager, @qandidate.toggle.user_context_factory, "%redis_prefix%" ]
 
     capco.toggle.listener.request:
         class:     %capco.toggle.listener.request.class%
