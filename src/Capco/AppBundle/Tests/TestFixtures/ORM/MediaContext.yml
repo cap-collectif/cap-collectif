@@ -5,11 +5,6 @@ Capco\ClassificationBundle\Entity\Context:
     enabled: true
 
   MediaContext2:
-    id: avatar
-    name: Avatar
-    enabled: true
-
-  MediaContext3:
-    id: logo
-    name: logo
+    id: sources
+    name: Sources
     enabled: true

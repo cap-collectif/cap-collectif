@@ -4,59 +4,59 @@ Capco\MediaBundle\Entity\Media:
         binaryContent: ../files/logo.png
         enabled:       true
         name:          Logo
-        context:       @MediaContext3
+        context:       @MediaContext1
 
     header:
         binaryContent: ../files/header.jpg
         enabled:       true
         name:          Header
-        context:       @MediaContext3
+        context:       @MediaContext1
 
     picto:
         binaryContent: ../files/picto.png
         enabled:       true
         name:          Picto
-        context:       @MediaContext3
+        context:       @MediaContext1
 
     # Social Network
     MediaFlickr:
         binaryContent: ../files/social/flickr.png
         enabled:       true
         name:          Flickr
-        context:       @MediaContext2
+        context:       @MediaContext1
 
     MediaFacebook:
         binaryContent: ../files/social/facebook.png
         enabled:       true
         name:          Facebook
-        context:       @MediaContext2
+        context:       @MediaContext1
 
     MediaGooglePlus:
         binaryContent: ../files/social/google_plus.png
         enabled:       true
         name:          Google
-        context:       @MediaContext2
+        context:       @MediaContext1
 
     MediaLinkedIn:
         binaryContent: ../files/social/linkedIn.png
         enabled:       true
         name:          LinkedIn
-        context:       @MediaContext2
+        context:       @MediaContext1
 
     MediaRSS:
         binaryContent: ../files/social/rss.png
         enabled:       true
         name:          RSS
-        context:       @MediaContext2
+        context:       @MediaContext1
 
     MediaTwitter:
         binaryContent: ../files/social/twitter.png
         enabled:       true
         name:          Twitter
-        context:       @MediaContext2
+        context:       @MediaContext1
 
     MediaCapcoSite:
         binaryContent: ../files/social/capco.png
         enabled:       true
         name:          Capco
-        context:       @MediaContext2
+        context:       @MediaContext1
