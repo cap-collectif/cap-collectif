@@ -296,6 +296,10 @@ class EventAdmin extends Admin
 
     private function setCoord(Event $event)
     {
+        if ($event->getAddress() == null) {
+            return;
+        }
+
         $curl = new CurlHttpAdapter();
         $geocoder = new GoogleMaps($curl);
 
