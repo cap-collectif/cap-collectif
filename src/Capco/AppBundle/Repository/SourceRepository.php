@@ -72,11 +72,12 @@ class SourceRepository extends EntityRepository
     }
 
     /**
-     * Get sources by opinion
+     * Get sources by opinion with user reports
      * @param $opinion
+     * @param $user
      * @return mixed
      */
-    public function getByOpinion($opinion)
+    public function getByOpinionJoinUserReports($opinion, $user)
     {
         $qb = $this->getIsEnabledQueryBuilder()
             ->addSelect('ca', 'o', 'aut', 'm', 'media')
@@ -85,10 +86,12 @@ class SourceRepository extends EntityRepository
             ->leftJoin('s.Opinion', 'o')
             ->leftJoin('s.Author', 'aut')
             ->leftJoin('aut.Media', 'm')
+            ->leftJoin('s.Reports', 'r', 'WITH', 'r.Reporter =  :user')
             ->andWhere('s.isTrashed = :notTrashed')
             ->andWhere('s.Opinion = :opinion')
             ->setParameter('notTrashed', false)
             ->setParameter('opinion', $opinion)
+            ->setParameter('user', $user)
             ->orderBy('s.updatedAt', 'DESC');
 
         return $qb->getQuery()->getResult();

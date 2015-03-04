@@ -305,14 +305,14 @@ class OpinionController extends Controller
      */
     public function showOpinionAction($consultationSlug, $opinionTypeSlug, $opinionSlug, Request $request, $argumentSort = null)
     {
-        $opinion = $this->getDoctrine()->getRepository('CapcoAppBundle:Opinion')->getOneBySlug($consultationSlug, $opinionTypeSlug, $opinionSlug);
+        $opinion = $this->getDoctrine()->getRepository('CapcoAppBundle:Opinion')->getOneBySlugJoinUserReports($consultationSlug, $opinionTypeSlug, $opinionSlug, $this->getUser());
 
         if ($opinion == null || false == $opinion->canDisplay()) {
             throw $this->createNotFoundException($this->get('translator')->trans('opinion.error.not_found', array(), 'CapcoAppBundle'));
         }
 
         $currentUrl = $this->generateUrl('app_consultation_show_opinion', ['consultationSlug' => $opinion->getConsultation()->getSlug(), 'opinionTypeSlug' => $opinion->getOpinionType()->getSlug(), 'opinionSlug' => $opinion->getSlug() ]);
-        $sources = $this->getDoctrine()->getRepository('CapcoAppBundle:Source')->getByOpinion($opinion);
+        $sources = $this->getDoctrine()->getRepository('CapcoAppBundle:Source')->getByOpinionJoinUserReports($opinion, $this->getUser());
 
         $steps = $this->getDoctrine()->getRepository('CapcoAppBundle:Step')->findBy(array(
             'consultation' => $opinion->getConsultation(),

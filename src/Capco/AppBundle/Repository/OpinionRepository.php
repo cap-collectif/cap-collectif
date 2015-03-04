@@ -44,6 +44,38 @@ class OpinionRepository extends EntityRepository
     }
 
     /**
+     * Get one opinion by slug, opinion type and consultation with user reports
+     * @param $consultation
+     * @param $opinionType
+     * @param $opinion
+     * @param $user
+     * @return mixed
+     * @throws \Doctrine\ORM\NonUniqueResultException
+     */
+    public function getOneBySlugJoinUserReports($consultation, $opinionType, $opinion, $user)
+    {
+        $qb = $this->getIsEnabledQueryBuilder()
+            ->addSelect('a', 'm', 'ot', 'c')
+            ->leftJoin('o.Author', 'a')
+            ->leftJoin('a.Media', 'm')
+            ->leftJoin('o.OpinionType', 'ot')
+            ->leftJoin('o.Consultation', 'c')
+            ->leftJoin('o.Reports', 'r', 'WITH', 'r.Reporter =  :user')
+            ->andWhere('c.slug = :consultation')
+            ->andWhere('o.slug = :opinion')
+            ->andWhere('ot.slug = :opinionType')
+            ->setParameter('consultation', $consultation)
+            ->setParameter('opinion', $opinion)
+            ->setParameter('opinionType', $opinionType)
+            ->setParameter('user', $user);
+
+        return $qb->getQuery()
+            ->getOneOrNullResult();
+
+    }
+
+
+    /**
      * Get all trashed opinions
      * @param $consultation
      * @return array

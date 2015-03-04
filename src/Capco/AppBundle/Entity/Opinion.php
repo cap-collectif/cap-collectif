@@ -794,21 +794,6 @@ class Opinion
         return $excerpt;
     }
 
-    /**
-     * @param User $user
-     * @return bool
-     */
-    public function userHasReport(User $user = null){
-        if ($user != null) {
-            foreach($this->Reports as $report) {
-                if ($report->getReporter() == $user) {
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
-
     // ******************* Lifecycle *********************************
 
     /**
