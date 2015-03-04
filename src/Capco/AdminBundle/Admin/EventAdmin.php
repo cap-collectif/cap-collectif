@@ -44,6 +44,9 @@ class EventAdmin extends Admin
             ->add('isEnabled', null, array(
                 'label' => 'admin.fields.event.is_enabled',
             ))
+            ->add('isCommentable', null, array(
+                'label' => 'admin.fields.event.is_commentable',
+            ))
             ->add('updatedAt', null, array(
                 'label' => 'admin.fields.event.updated_at',
             ))
@@ -85,6 +88,10 @@ class EventAdmin extends Admin
             ))
             ->add('isEnabled', null, array(
                 'label' => 'admin.fields.event.is_enabled',
+                'editable' => true,
+            ))
+            ->add('isCommentable', null, array(
+                'label' => 'admin.fields.event.is_commentable',
                 'editable' => true,
             ))
             ->add('updatedAt', null, array(
@@ -173,6 +180,10 @@ class EventAdmin extends Admin
                 'label' => 'admin.fields.event.is_enabled',
                 'required' => false,
             ))
+            ->add('isCommentable', null, array(
+                'label' => 'admin.fields.event.is_commentable',
+                'required' => false,
+            ))
             ->end()
             ->with('admin.fields.event.group_address')
             ->add('address', null, array(
@@ -234,6 +245,9 @@ class EventAdmin extends Admin
             ))
             ->add('isEnabled', null, array(
                 'label' => 'admin.fields.event.is_enabled',
+            ))
+            ->add('isCommentable', null, array(
+                'label' => 'admin.fields.event.is_commentable',
             ))
             ->add('updatedAt', null, array(
                 'label' => 'admin.fields.event.updated_at',

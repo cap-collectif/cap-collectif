@@ -24,7 +24,7 @@
             </p>
             <p class="excerpt  opinion__date">{{ comment.createdAt | localizeddate('long', 'short', app.request.locale) }}</p>
         </div>
-        <p class="opinion__text more" style="max-height: 100px; overflow: hidden; width: 100%">
+        <p class="opinion__text more" style="max-height: 98px;">
             {% if comment.isTrashed %}<span class="label label-default" style="position: static">{{ 'comment.trashed.label'|trans({}, 'CapcoAppBundle') }}</span> {% endif %}
             {{ comment.body }}
         </p>

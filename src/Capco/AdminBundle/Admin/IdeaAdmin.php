@@ -46,6 +46,9 @@ class IdeaAdmin extends Admin
             ->add('isTrashed', null, array(
                 'label' => 'admin.fields.idea.is_trashed',
             ))
+            ->add('isCommentable', null, array(
+                'label' => 'admin.fields.idea.is_commentable',
+            ))
             ->add('updatedAt', null, array(
                 'label' => 'admin.fields.idea.updated_at',
             ))
@@ -87,6 +90,10 @@ class IdeaAdmin extends Admin
                 'label' => 'admin.fields.idea.is_trashed',
                 'editable' => true,
             ))
+            ->add('isCommentable', null, array(
+                'label' => 'admin.fields.idea.is_commentable',
+                'editable' => true,
+            ))
             ->add('updatedAt', null, array(
                 'label' => 'admin.fields.idea.updated_at',
             ))
@@ -111,6 +118,10 @@ class IdeaAdmin extends Admin
             ))
             ->add('isEnabled', null, array(
                 'label' => 'admin.fields.idea.is_enabled',
+                'required' => false,
+            ))
+            ->add('isCommentable', null, array(
+                'label' => 'admin.fields.idea.is_commentable',
                 'required' => false,
             ))
             ->add('Author', 'sonata_type_model', array(
@@ -189,7 +200,9 @@ class IdeaAdmin extends Admin
             ))
             ->add('isEnabled', null, array(
                 'label' => 'admin.fields.idea.is_enabled',
-                'editable' => true,
+            ))
+            ->add('isCommentable', null, array(
+                'label' => 'admin.fields.idea.is_commentable',
             ))
             ->add('updatedAt', null, array(
                 'label' => 'admin.fields.idea.updated_at',

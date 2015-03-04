@@ -193,7 +193,7 @@ services:
 
     capco_admin.admin.comment:
         class: Capco\AdminBundle\Admin\CommentAdmin
-        arguments: [~, Capco\AppBundle\Entity\Comment, SonataAdminBundle:CRUD]
+        arguments: [~, Capco\AppBundle\Entity\AbstractComment, SonataAdminBundle:CRUD]
         tags:
             - {name: sonata.admin, manager_type: orm, group: admin.group.news, label: admin.label.comment}
         calls:

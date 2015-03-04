@@ -30,9 +30,11 @@
                             {{ 'idea.show.in_theme'|trans({}, 'CapcoAppBundle') }} <a href="{{ path('app_theme_show', {'slug': idea.Theme.slug}) }}">{{ idea.Theme.title }}</a>
                         {% endif %}
                         {{ 'idea.show.on_date'|trans({}, 'CapcoAppBundle') }} {{ idea.createdAt | localizeddate('long', 'none') }}
-                        | {% transchoice idea.commentsCount with {'%count%': idea.commentsCount} from 'CapcoAppBundle' %}
-                            idea.show.comments
-                        {% endtranschoice %}
+                        {% if capco_comment_can_show(idea) %}
+                            | {% transchoice idea.commentsCount with {'%count%': idea.commentsCount} from 'CapcoAppBundle' %}
+                                idea.show.comments
+                            {% endtranschoice %}
+                        {% endif %}
                         {% if idea.isTrashed %}<span class="label label-default">{{ 'idea.show.trashed.label'|trans({}, 'CapcoAppBundle') }}</span>{% endif %}</p>
                 </div>
             </div>
@@ -88,11 +90,11 @@
         </div>
     </div>
 
-    {% if idea.commentsCount > 0 %}
+    {% if capco_comment_can_show(idea) and idea.commentsCount > 0 %}
         {{ render(controller('CapcoAppBundle:Comment:showComments', {'object': idea})) }}
     {% endif %}
 
-    {% if capco_comment_allowed(idea) %}
+    {% if capco_comment_can_add(idea) %}
         {{ render(controller('CapcoAppBundle:Comment:create', {'objectId': idea.id, 'objectType': idea.className})) }}
     {% endif %}
 
@@ -116,12 +118,10 @@
 
 {% block javascripts %}
     {{ parent() }}
+    <script src="{{ asset('js/readmore/readmore.js') }}"></script>
     <script type="text/javascript">
-        $(window).on('load', function() {
-            App.module.equalheight('.media--macro');window.onresize = App.module.resized('.media--macro');
-        });
         $('.more').readmore({
-            collapsedHeight: 100,
+            collapsedHeight: 98,
             moreLink: '<a href="#">{{ 'comment.read_more'|trans({}, 'CapcoAppBundle') }}</a>',
             lessLink: '<a href="#">{{ 'comment.read_less'|trans({}, 'CapcoAppBundle') }}</a>'
         });

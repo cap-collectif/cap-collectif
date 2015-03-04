@@ -2,7 +2,7 @@
 
 namespace Capco\AppBundle\Controller;
 
-use Capco\AppBundle\Entity\Comment;
+use Capco\AppBundle\Entity\AbstractComment;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
@@ -48,7 +48,7 @@ class CommentController extends Controller
         $user = $this->getUser();
         $ip = $request->getClientIp();
 
-        $comment = new Comment();
+        $comment = $this->get('capco.comment.resolver')->createCommentForType($objectType);
         if (null != $user) {
             $comment->setAuthor($this->getUser());
         }
@@ -57,13 +57,13 @@ class CommentController extends Controller
         }
         $comment->setIsEnabled(true);
 
-        $this->get('capco.comment.resolver')->setObjectOnComment($object, $comment);
+        $comment = $this->get('capco.comment.resolver')->setObjectOnComment($object, $comment);
 
         $form = $this->createForm(new CommentForm($user), $comment);
 
         if ($request->getMethod() == 'POST') {
 
-            if (false == $this->get('capco.comment.resolver')->canCommentOn($object)) {
+            if (false == $this->get('capco.comment.resolver')->canAddCommentOn($object)) {
                 throw new AccessDeniedException($this->get('translator')->trans('consultation.error.no_contribute', array(), 'CapcoAppBundle'));
             }
 
@@ -123,7 +123,7 @@ class CommentController extends Controller
             throw new AccessDeniedException($this->get('translator')->trans('error.access_restricted', array(), 'CapcoAppBundle'));
         }
 
-        $comment = $this->getDoctrine()->getRepository('CapcoAppBundle:Comment')->getOneById($commentId);
+        $comment = $this->getDoctrine()->getRepository('CapcoAppBundle:AbstractComment')->getOneById($commentId);
 
         if($comment == null){
             throw $this->createNotFoundException($this->get('translator')->trans('comment.error.not_found', array(), 'CapcoAppBundle'));
@@ -192,7 +192,7 @@ class CommentController extends Controller
             throw new AccessDeniedException($this->get('translator')->trans('error.access_restricted', array(), 'CapcoAppBundle'));
         }
 
-        $comment = $this->getDoctrine()->getRepository('CapcoAppBundle:Comment')->getOneById($commentId);
+        $comment = $this->getDoctrine()->getRepository('CapcoAppBundle:AbstractComment')->getOneById($commentId);
 
         if ($comment == null){
             throw $this->createNotFoundException($this->get('translator')->trans('comment.error.not_found', array(), 'CapcoAppBundle'));
@@ -248,7 +248,7 @@ class CommentController extends Controller
             throw new AccessDeniedException($this->get('translator')->trans('error.access_restricted', array(), 'CapcoAppBundle'));
         }
 
-        $comment = $this->getDoctrine()->getRepository('CapcoAppBundle:Comment')->getOneById($commentId);
+        $comment = $this->getDoctrine()->getRepository('CapcoAppBundle:AbstractComment')->getOneById($commentId);
 
         if ($comment == null){
             throw $this->createNotFoundException($this->get('translator')->trans('comment.error.not_found', array(), 'CapcoAppBundle'));

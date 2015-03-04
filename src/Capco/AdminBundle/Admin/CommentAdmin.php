@@ -9,7 +9,7 @@ use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Show\ShowMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
 
-use Capco\AppBundle\Entity\Comment;
+use Capco\AppBundle\Entity\AbstractComment;
 
 class CommentAdmin extends Admin
 {
@@ -24,9 +24,6 @@ class CommentAdmin extends Admin
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
         $datagridMapper
-            ->add('Idea', null, array(
-                'label' => 'admin.fields.comment.idea',
-            ))
             ->add('Author', null, array(
                 'label' => 'admin.fields.comment.author',
             ))
@@ -177,10 +174,6 @@ class CommentAdmin extends Admin
             ->add('body', null, array(
                 'label' => 'admin.fields.comment.body',
                 'attr' => array('rows' => 8)
-            ))
-            ->add('Idea', null, array(
-                'label' => 'admin.fields.comment.idea',
-                'required' => true,
             ))
             ->add('Author', null, array(
                 'label' => 'admin.fields.comment.author',

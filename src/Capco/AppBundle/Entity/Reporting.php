@@ -111,7 +111,7 @@ class Reporting
     /**
      * @var
      *
-     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Comment", inversedBy="Reports", cascade={"persist"})
+     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\AbstractComment", inversedBy="Reports", cascade={"persist"})
      * @ORM\JoinColumn(name="comment_id", referencedColumnName="id")
      */
     private $Comment;

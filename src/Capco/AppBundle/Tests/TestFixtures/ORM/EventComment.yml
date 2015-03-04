@@ -1,0 +1,27 @@
+Capco\AppBundle\Entity\EventComment:
+  evcomment1:
+    Event: @eventComing
+    Author: @user
+    body: "Commentaire 1"
+  evcomment2:
+    Event: @eventComing
+    Author: @admin
+    body: "Commentaire 2"
+  evcomment3:
+    Event: @eventPassed
+    Author: @admin
+    body: "Commentaire 3"
+  evcommentDisabled:
+    Event: @eventComing
+    Author: @admin
+    body: "Commentaire désactivé"
+    isEnabled: false
+  evcommentTrashed:
+    Event: @eventPassedWithLink
+    Author: @admin
+    body: "Commentaire à la corbeille"
+    isTrashed: true
+  evcommentOnDisabledEvent:
+    Event: @eventComingDisabled
+    Author: @admin
+    body: "Commentaire sur une idée désactivée"

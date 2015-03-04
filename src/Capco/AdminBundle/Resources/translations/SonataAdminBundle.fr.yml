@@ -9,6 +9,7 @@ sonata.admin.group.user: Utilisateurs
 admin.group.moderation: Contributions
 admin.group.news: Actualités
 admin.group.configuration: Configuration
+admin.group.comments: Commentaires
 
 # Dashboard names
 admin.label.page: Pages
@@ -152,6 +153,7 @@ admin:
       group_address: Lieu
       title: Titre
       is_enabled: Publié
+      is_commentable: Commentable
       body: Contenu
       updated_at: Mise à jour
       created_at: Création
@@ -184,6 +186,7 @@ admin:
       author: Auteur
       is_enabled: Publié
       is_trashed: Dans la corbeille
+      is_commentable: Commentable
       updated_at: Mise à jour
       created_at: Création
       trashed_reason: Raison de la mise en corbeille

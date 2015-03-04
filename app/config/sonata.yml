@@ -36,12 +36,14 @@ sonata_admin:
                 items:
                     - capco_admin.admin.idea
                     - capco_admin.admin.idea_vote
-                    - capco_admin.admin.comment
-                    - capco_admin.admin.comment_vote
             admin.group.news:
                 items:
                     - capco_admin.admin.post
                     - capco_admin.admin.event
+            admin.group.comments:
+                items:
+                    - capco_admin.admin.comment
+                    - capco_admin.admin.comment_vote
             sonata.admin.group.user:
                 items:
                     - sonata.user.admin.user

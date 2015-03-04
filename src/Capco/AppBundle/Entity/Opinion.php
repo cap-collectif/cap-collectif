@@ -733,7 +733,9 @@ class Opinion
      */
     public function decreaseArgumentsCount($nb)
     {
-        $this->argumentsCount-=$nb;
+        if ($this->argumentsCount >= $nb) {
+            $this->argumentsCount -= $nb;
+        }
         $this->getConsultation()->decreaseArgumentCount($nb);
     }
 
@@ -750,7 +752,9 @@ class Opinion
      */
     public function decreaseSourcesCount($nb)
     {
-        $this->sourcesCount-=$nb;
+        if ($this->sourcesCount >= $nb) {
+            $this->sourcesCount -= $nb;
+        }
     }
 
     /**
@@ -766,7 +770,7 @@ class Opinion
      */
     public function canDisplay()
     {
-        return ($this->isEnabled && $this->Consultation->canDisplay());
+        return $this->isEnabled && $this->Consultation->canDisplay();
     }
 
     /**
@@ -774,7 +778,7 @@ class Opinion
      */
     public function canContribute()
     {
-        return ($this->isEnabled && !$this->isTrashed && $this->Consultation->canContribute());
+        return $this->isEnabled && !$this->isTrashed && $this->Consultation->canContribute();
     }
 
     /**

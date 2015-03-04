@@ -52,7 +52,7 @@ Capco\AppBundle\Entity\Event:
         city: Bordeaux
         link: http://www.PHPTour2015.fr
         Media: @MediaConsultation3
-    event5:
+    event4:
         title: SymfonyLive2015
         isEnabled: true
         body: |
@@ -69,7 +69,7 @@ Capco\AppBundle\Entity\Event:
         Author: @user<numberBetween(1, 5)>
         link: http://www.symfonyLive2015.fr
         Media: @MediaIdea1
-    event6:
+    event5:
         title: ParisWeb2014
         isEnabled: true
         body: |

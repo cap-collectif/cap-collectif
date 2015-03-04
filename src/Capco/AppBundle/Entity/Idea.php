@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\Entity;
 
+use Capco\AppBundle\Traits\CommentableTrait;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
@@ -16,6 +17,8 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class Idea
 {
+    use CommentableTrait;
+
     const SORT_ORDER_CREATED_AT = 0;
     const SORT_ORDER_VOTES_COUNT = 1;
 
@@ -149,15 +152,8 @@ class Idea
     private $IdeaVotes;
 
     /**
-     * @var integer
-     *
-     * @ORM\Column(name="comments_count", type="integer")
-     */
-    private $commentsCount = 0;
-
-    /**
      * @var
-     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\Comment", mappedBy="Idea",  cascade={"persist", "remove"}, orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\IdeaComment", mappedBy="Idea",  cascade={"persist", "remove"})
      */
     private $comments;
 
@@ -526,18 +522,11 @@ class Idea
         return $this->IdeaVotes;
     }
 
-    /**
-     * @return bool
-     */
-    public function canDisplay() {
-        return ($this->isEnabled);
-    }
+    // **************** Custom methods ***************
 
-    /**
-     * @return bool
-     */
-    public function canContribute() {
-        return ($this->isEnabled && !$this->isTrashed);
+    public function getClassName()
+    {
+        return 'Idea';
     }
 
     /**
@@ -549,71 +538,6 @@ class Idea
         $excerpt = $excerpt.'...';
         return $excerpt;
     }
-
-    /**
-     * @return int
-     */
-    public function getCommentsCount()
-    {
-        return $this->commentsCount;
-    }
-
-    /**
-     * @param int $commentsCount
-     */
-    public function setCommentsCount($commentsCount)
-    {
-        $this->commentsCount = $commentsCount;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getComments()
-    {
-        return $this->comments;
-    }
-
-    /**
-     * @param $comment
-     * @return $this
-     */
-    public function addComment($comment)
-    {
-        if (!$this->comments->contains($comment)) {
-            $this->increaseCommentsCount(1);
-            $this->comments->add($comment);
-        }
-        return $this;
-    }
-
-    /**
-     * @param $comment
-     * @return $this
-     */
-    public function removeComment($comment)
-    {
-        if ($this->comments->removeElement($comment)) {
-            $this->decreaseCommentsCount(1);
-        }
-        return $this;
-    }
-
-    // **************** Custom methods ***************
-
-    public function increaseCommentsCount($nb) {
-        $this->commentsCount += $nb;
-    }
-
-    public function decreaseCommentsCount($nb) {
-        $this->commentsCount -= $nb;
-    }
-
-    public function getClassName()
-    {
-        return get_class($this);
-    }
-
 
     // ************* Lifecycle *********************
 

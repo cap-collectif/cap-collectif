@@ -2,7 +2,7 @@
 
 namespace Capco\AppBundle\Twig;
 
-use Capco\AppBundle\Entity\Comment;
+use Capco\AppBundle\Entity\AbstractComment as Comment;
 use Capco\AppBundle\Manager\CommentResolver;
 use Symfony\Component\Routing\Router;
 
@@ -28,9 +28,11 @@ class CommentExtension extends \Twig_Extension
     public function getFunctions()
     {
         return array(
-            new \Twig_SimpleFunction('capco_comment_allowed', array($this, 'canCommentOnObject')),
+            new \Twig_SimpleFunction('capco_comment_can_show', array($this, 'canShowCommentOnObject')),
+            new \Twig_SimpleFunction('capco_comment_can_add', array($this, 'canAddCommentOnObject')),
             new \Twig_SimpleFunction('capco_comment_object_url', array($this, 'getRelatedObjectUrl')),
             new \Twig_SimpleFunction('capco_comment_object', array($this, 'getRelatedObject')),
+            new \Twig_SimpleFunction('capco_comment_object_admin_url', array($this, 'getRelatedObjectAdminUrl')),
         );
     }
 
@@ -39,13 +41,23 @@ class CommentExtension extends \Twig_Extension
         return $this->resolver->getUrlOfRelatedObject($comment, $absolute);
     }
 
+    public function getRelatedObjectAdminUrl(Comment $comment, $absolute = false)
+    {
+        return $this->resolver->getAdminUrlOfRelatedObject($comment, $absolute);
+    }
+
     public function getRelatedObject(Comment $comment)
     {
         return $this->resolver->getRelatedObject($comment);
     }
 
-    public function canCommentOnObject($object)
+    public function canShowCommentOnObject($object)
     {
-        return $this->resolver->canCommentOn($object);
+        return $this->resolver->canShowCommentOn($object);
+    }
+
+    public function canAddCommentOnObject($object)
+    {
+        return $this->resolver->canAddCommentOn($object);
     }
 }

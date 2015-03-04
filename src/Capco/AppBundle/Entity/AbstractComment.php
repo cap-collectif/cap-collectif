@@ -11,14 +11,16 @@ use Symfony\Component\Validator\Constraints as Assert;
 use Capco\AppBundle\Validator\Constraints as CapcoAssert;
 
 /**
- * Comment
- *
+ * Class AbstractComment
+ * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\AbstractCommentRepository")
  * @ORM\Table(name="comment")
- * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\CommentRepository")
- * @ORM\HasLifecycleCallbacks()
+ * @ORM\InheritanceType("SINGLE_TABLE")
+ * @ORM\DiscriminatorColumn(name = "objectType", type = "string")
+ * @ORM\DiscriminatorMap( {"idea" = "IdeaComment", "event" = "EventComment"} )
  * @CapcoAssert\HasAuthor
+ * @package Capco\AppBundle\Entity
  */
-class Comment
+abstract class AbstractComment
 {
 
     public static $sortCriterias = [
@@ -33,7 +35,7 @@ class Comment
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      */
-    private $id;
+    protected $id;
 
     /**
      * @var string
@@ -41,35 +43,35 @@ class Comment
      * @ORM\Column(name="body", type="text")
      * @Assert\NotBlank(message="comment.create.no_body_error")
      */
-    private $body;
+    protected $body;
 
     /**
      * @var \DateTime
      * @Gedmo\Timestampable(on="create")
      * @ORM\Column(name="created_at", type="datetime")
      */
-    private $createdAt;
+    protected $createdAt;
 
     /**
      * @var \DateTime
      * @Gedmo\Timestampable(on="change", field={"body"})
      * @ORM\Column(name="updated_at", type="datetime")
      */
-    private $updatedAt;
+    protected $updatedAt;
 
     /**
      * @var boolean
      *
      * @ORM\Column(name="is_enabled", type="boolean")
      */
-    private $isEnabled = true;
+    protected $isEnabled = true;
 
     /**
      * @var integer
      *
      * @ORM\Column(name="vote_count", type="integer")
      */
-    private $voteCount = 0;
+    protected $voteCount = 0;
 
     /**
      * @var
@@ -77,14 +79,14 @@ class Comment
      * @ORM\ManyToOne(targetEntity="Capco\UserBundle\Entity\User")
      * @ORM\JoinColumn(name="author_id", referencedColumnName="id", onDelete="CASCADE", nullable=true)
      */
-    private $Author;
+    protected $Author;
 
     /**
      * @var
      *
      * @ORM\Column(name="author_name", type="string", nullable=true)
      */
-    private $authorName;
+    protected $authorName;
 
     /**
      * @var
@@ -92,7 +94,7 @@ class Comment
      * @ORM\Column(name="author_email", type="string", nullable=true)
      * @Assert\Email(checkMX = true, message="comment.create.invalid_email_error")
      */
-    private $authorEmail;
+    protected $authorEmail;
 
     /**
      * @var
@@ -100,50 +102,42 @@ class Comment
      * @ORM\Column(name="author_ip", type="string", nullable=true)
      * @Assert\Ip
      */
-    private $authorIp;
+    protected $authorIp;
 
     /**
      * @var
      *
      * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\CommentVote", mappedBy="comment", cascade={"persist", "remove"}, orphanRemoval=true)
      */
-    private $Votes;
-
-    /**
-     * @var
-     *
-     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Idea", inversedBy="comments", cascade={"persist"})
-     * @ORM\JoinColumn(name="idea_id", referencedColumnName="id", onDelete="CASCADE", nullable=true)
-     */
-    private $Idea;
+    protected $Votes;
 
     /**
      * @var string
      *
      * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\Reporting", mappedBy="Comment", cascade={"persist", "remove"})
      */
-    private $Reports;
+    protected $Reports;
 
     /**
      * @var boolean
      *
      * @ORM\Column(name="is_trashed", type="boolean")
      */
-    private $isTrashed = false;
+    protected $isTrashed = false;
 
     /**
      * @var \DateTime
      * @Gedmo\Timestampable(on="change", field={"isTrashed"})
      * @ORM\Column(name="trashed_at", type="datetime", nullable=true)
      */
-    private $trashedAt = null;
+    protected $trashedAt = null;
 
     /**
      * @var string
      *
      * @ORM\Column(name="trashed_reason", type="text", nullable=true)
      */
-    private $trashedReason = null;
+    protected $trashedReason = null;
 
     function __construct()
     {
@@ -236,15 +230,11 @@ class Comment
         if ($isEnabled != $this->isEnabled) {
             if ($isEnabled) {
                 if (!$this->isTrashed) {
-                    if (null != $this->Idea) {
-                        $this->Idea->increaseCommentsCount(1);
-                    }
+                    $this->increaseRelatedObjectCount(1);
                 }
             } else {
                 if (!$this->isTrashed) {
-                    if (null != $this->Idea) {
-                        $this->Idea->decreaseCommentsCount(1);
-                    }
+                    $this->decreaseRelatedObjectCount(1);
                 }
             }
         }
@@ -371,23 +361,6 @@ class Comment
     }
 
     /**
-     * @return mixed
-     */
-    public function getIdea()
-    {
-        return $this->Idea;
-    }
-
-    /**
-     * @param mixed $Idea
-     */
-    public function setIdea($Idea)
-    {
-        $this->Idea = $Idea;
-        $Idea->addComment($this);
-    }
-
-    /**
      * @return string
      */
     public function getReports()
@@ -442,13 +415,9 @@ class Comment
             }
             if($this->isEnabled) {
                 if ($isTrashed) {
-                    if (null != $this->Idea) {
-                        $this->Idea->decreaseCommentsCount(1);
-                    }
+                    $this->decreaseRelatedObjectCount(1);
                 } else {
-                    if (null != $this->Idea) {
-                        $this->Idea->increaseCommentsCount(1);
-                    }
+                    $this->increaseRelatedObjectCount(1);
                 }
             }
         }
@@ -551,10 +520,7 @@ class Comment
      * @return bool
      */
     public function canDisplay() {
-        if (null != $this->Idea) {
-            return ($this->isEnabled && $this->Idea->canDisplay());
-        }
-        return false;
+        return $this->isEnabled && $this->canDisplayRelatedObject();
     }
 
     /**
@@ -562,10 +528,7 @@ class Comment
      */
     public function canContribute()
     {
-        if (null != $this->Idea) {
-            return ($this->isEnabled && !$this->isTrashed && $this->Idea->canContribute());
-        }
-        return false;
+        return $this->isEnabled && !$this->isTrashed && $this->canContributeToRelatedObject();
     }
 
     /**
@@ -579,6 +542,57 @@ class Comment
         return $excerpt;
     }
 
+    /**
+     * @param int $nb
+     */
+    public function increaseRelatedObjectCount($nb = 1)
+    {
+        $this->getRelatedObject()->increaseCommentsCount($nb);
+    }
+    /**
+     * @param int $nb
+     */
+    public function decreaseRelatedObjectCount($nb = 1)
+    {
+        $this->getRelatedObject()->decreaseCommentsCount($nb);
+    }
+
+    /**
+     * @return mixed
+     */
+    public function removeCommentFromRelatedObject()
+    {
+        $this->getRelatedObject()->removeComment($this);
+    }
+
+    /**
+     * @return bool
+     */
+    public function canDisplayRelatedObject() {
+        return $this->getRelatedObject()->canDisplay();
+    }
+
+    /**
+     * @return bool
+     */
+    public function canContributeToRelatedObject()
+    {
+        return $this->getRelatedObject()->canContribute();
+    }
+
+    // ********************** Abstract methods **********************************
+
+    /**
+     * @return mixed
+     */
+    abstract public function getRelatedObject();
+
+    /**
+     * @param $object
+     * @return mixed
+     */
+    abstract public function setRelatedObject($object);
+
 
     // ************************* Lifecycle ***********************************
 
@@ -587,9 +601,7 @@ class Comment
      */
     public function deleteComment()
     {
-        if (null != $this->Idea) {
-            $this->Idea->removeComment($this);
-        }
+        $this->removeCommentFromRelatedObject($this);
 
     }
 }

@@ -2,9 +2,11 @@
 
 namespace Capco\AppBundle\Entity;
 
+use Capco\AppBundle\Traits\CommentableTrait;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Validator\Constraints as Assert;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * Event
@@ -14,6 +16,8 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class Event
 {
+    use CommentableTrait;
+
     /**
      * @var integer
      *
@@ -155,6 +159,20 @@ class Event
      * @Assert\NotNull()
      */
     private $Author;
+
+    /**
+     * @var
+     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\EventComment", mappedBy="Event",  cascade={"persist", "remove"})
+     */
+    private $comments;
+
+    function __construct()
+    {
+        $this->comments = new ArrayCollection();
+        $this->commentsCount = 0;
+        $this->updatedAt = new \Datetime;
+    }
+
 
     public function __toString()
     {
@@ -544,6 +562,13 @@ class Event
     public function setSlug($slug)
     {
         $this->slug = $slug;
+    }
+
+    // **************** Custom methods ***************
+
+    public function getClassName()
+    {
+        return 'Event';
     }
 
     public function getStartYear()

@@ -11,4 +11,9 @@ class IdeaSpec extends ObjectBehavior
     {
         $this->shouldHaveType('Capco\AppBundle\Entity\Idea');
     }
+
+    function it_has_class_name()
+    {
+        $this->getClassName()->shouldReturn('Idea');
+    }
 }

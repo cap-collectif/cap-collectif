@@ -62,6 +62,10 @@ class EventControllerTest extends BaseTestHelper
                 $this->assertEquals("404", $client->getResponse()->getStatusCode());
             } else {
                 $this->assertEquals("200", $client->getResponse()->getStatusCode());
+                if ($event->getTitle() == "PHPTour2019" ) {
+                    $nbDisplayedComments = $crawler->filter('.opinion--comment:not(.opinion--add-comment)')->count();
+                    $this->assertEquals("2", $nbDisplayedComments);
+                }
             }
         }
 

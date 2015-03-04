@@ -1,0 +1,7 @@
+Capco\AppBundle\Entity\EventComment:
+    evcomment{1..50}:
+        Event: @event<numberBetween(1, 10)>
+        Author: @user<numberBetween(1, 5)>
+        body: <text(300)>
+        isEnabled: <boolean()>
+        isTrashed: <boolean()>

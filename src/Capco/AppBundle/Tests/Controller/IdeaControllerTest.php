@@ -60,12 +60,12 @@ class IdeaControllerTest extends BaseTestHelper
 
             if (!$idea->getIsEnabled()) {
                 $this->assertEquals("404", $client->getResponse()->getStatusCode());
-                if ($idea->getTitle() == "Idée admin" ) {
-                    $nbDisplayedComments = $crawler->filter('.opinion--comment')->count();
-                    $this->assertEquals("1", $nbDisplayedComments);
-                }
             } else {
                 $this->assertEquals("200", $client->getResponse()->getStatusCode());
+                if ($idea->getTitle() == "Idée admin" ) {
+                    $nbDisplayedComments = $crawler->filter('.opinion--comment:not(.opinion--add-comment)')->count();
+                    $this->assertEquals("1", $nbDisplayedComments);
+                }
             }
         }
 

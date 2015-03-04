@@ -1,5 +1,5 @@
-Capco\AppBundle\Entity\Comment:
-    comment{1..50}:
+Capco\AppBundle\Entity\IdeaComment:
+    icomment{1..50}:
         Idea: @Idea<numberBetween(1, 10)>
         Author: @user<numberBetween(1, 5)>
         body: <text(300)>

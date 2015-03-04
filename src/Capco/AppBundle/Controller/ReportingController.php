@@ -3,7 +3,7 @@
 namespace Capco\AppBundle\Controller;
 
 use Capco\AppBundle\Entity\Argument;
-use Capco\AppBundle\Entity\Comment;
+use Capco\AppBundle\Entity\AbstractComment;
 use Capco\AppBundle\Entity\Consultation;
 use Capco\AppBundle\Entity\Idea;
 use Capco\AppBundle\Entity\Opinion;
@@ -272,13 +272,13 @@ class ReportingController extends Controller
 
     /**
      * @Route("/comments/{commentId}/report", name="app_report_comment")
-     * @ParamConverter("comment", class="CapcoAppBundle:Comment", options={"mapping": {"commentId": "id"}})
+     * @ParamConverter("comment", class="CapcoAppBundle:AbstractComment", options={"mapping": {"commentId": "id"}})
      * @Template("CapcoAppBundle:Reporting:create.html.twig")
      * @param $request
      * @param $comment
      * @return array
      */
-    public function reportingCommentAction(Comment $comment, Request $request)
+    public function reportingCommentAction(AbstractComment $comment, Request $request)
     {
         if (!$this->get('security.context')->isGranted('ROLE_USER')) {
             throw new AccessDeniedException($this->get('translator')->trans('error.access_restricted', array(), 'CapcoAppBundle'));

@@ -459,12 +459,12 @@ class Theme
 
     public function canContribute()
     {
-        return ($this->isEnabled);
+        return $this->isEnabled;
     }
 
     public function canDisplay()
     {
-        return ($this->isEnabled);
+        return $this->isEnabled;
     }
 
     public function countEnabledConsultations()

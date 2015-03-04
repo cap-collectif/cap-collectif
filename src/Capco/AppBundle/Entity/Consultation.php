@@ -718,7 +718,7 @@ class Consultation
      */
     public function canDisplay()
     {
-        return ($this->isEnabled);
+        return $this->isEnabled;
     }
 
     /**
@@ -726,7 +726,7 @@ class Consultation
      */
     public function canContribute()
     {
-        return ($this->isEnabled && ($this->getOpeningStatus() == $this::OPENING_STATUS_OPENED));
+        return $this->isEnabled && ($this->getOpeningStatus() == $this::OPENING_STATUS_OPENED);
     }
 
     /**
@@ -767,7 +767,9 @@ class Consultation
      */
     public function decreaseOpinionCount($nb)
     {
-        $this->opinionCount-=$nb;
+        if ($this->opinionCount >= $nb) {
+            $this->opinionCount -= $nb;
+        }
         return $this;
     }
 
@@ -787,7 +789,9 @@ class Consultation
      */
     public function decreaseTrashedOpinionCount($nb)
     {
-        $this->trashedOpinionCount-=$nb;
+        if ($this->trashedOpinionCount >= $nb) {
+            $this->trashedOpinionCount -= $nb;
+        }
         return $this;
     }
 
@@ -807,7 +811,9 @@ class Consultation
      */
     public function decreaseArgumentCount($nb)
     {
-        $this->argumentCount -= $nb;
+        if ($this->argumentCount >= $nb) {
+            $this->argumentCount -= $nb;
+        }
         return $this;
     }
 
@@ -827,7 +833,9 @@ class Consultation
      */
     public function decreaseTrashedArgumentCount($nb)
     {
-        $this->trashedArgumentCount-=$nb;
+        if ($this->trashedArgumentCount >= $nb) {
+            $this->trashedArgumentCount -= $nb;
+        }
         return $this;
     }
 

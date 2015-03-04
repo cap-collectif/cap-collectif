@@ -512,7 +512,7 @@ class Argument
      * @return bool
      */
     public function canDisplay() {
-        return ($this->isEnabled && $this->opinion->canDisplay());
+        return $this->isEnabled && $this->opinion->canDisplay();
     }
 
     /**
@@ -520,7 +520,7 @@ class Argument
      */
     public function canContribute()
     {
-        return ($this->isEnabled && !$this->isTrashed && $this->opinion->canContribute());
+        return $this->isEnabled && !$this->isTrashed && $this->opinion->canContribute();
     }
 
     /**

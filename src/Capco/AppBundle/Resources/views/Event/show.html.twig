@@ -34,6 +34,11 @@
                         {{ 'idea.show.in_theme'|trans({}, 'CapcoAppBundle') }} <a href="{{ path('app_theme_show', {'slug': event.Theme.slug}) }}">{{ event.Theme.title }}</a>
                     {% endif %}
                     {{ 'idea.show.on_date'|trans({}, 'CapcoAppBundle') }} {{ event.createdAt | localizeddate('long', 'none') }}
+                    {% if capco_comment_can_show(event) %}
+                        | {% transchoice event.commentsCount with {'%count%': event.commentsCount} from 'CapcoAppBundle' %}
+                        idea.show.comments
+                        {% endtranschoice %}
+                    {% endif %}
             </div>
             <ul class="event__meta  block">
                 <li class="excerpt"><i class="cap cap-calendar-1"></i>
@@ -72,17 +77,31 @@
             'url': url('app_event_show', {'slug': event.slug}),
             'title': event.title,
         }) }}
+
+        {% if capco_comment_can_show(event) and event.commentsCount > 0 %}
+            {{ render(controller('CapcoAppBundle:Comment:showComments', {'object': event})) }}
+        {% endif %}
+
+        {% if capco_comment_can_add(event) %}
+            {{ render(controller('CapcoAppBundle:Comment:create', {'objectId': event.id, 'objectType': event.className})) }}
+        {% endif %}
+
     </div>
 
 {% endblock %}
 
 {% block javascripts %}
     {{ parent() }}
+    <script src="{{ asset('js/readmore/readmore.js') }}"></script>
+    <script src="https://maps.googleapis.com/maps/api/js"></script>
     <script type="text/javascript">
         $(window).on('load', function() {
-            App.module.equalheight('.event-js');window.onresize = App.module.resized('.event-js');
             App.module.showMap('.map-canvas');
         });
+        $('.more').readmore({
+            collapsedHeight: 98,
+            moreLink: '<a href="#">{{ 'comment.read_more'|trans({}, 'CapcoAppBundle') }}</a>',
+            lessLink: '<a href="#">{{ 'comment.read_less'|trans({}, 'CapcoAppBundle') }}</a>'
+        });
     </script>
-    <script src="https://maps.googleapis.com/maps/api/js"></script>
 {% endblock %}

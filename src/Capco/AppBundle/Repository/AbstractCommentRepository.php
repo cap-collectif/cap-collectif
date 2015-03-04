@@ -6,37 +6,10 @@ use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\Query;
 
 /**
- * CommentRepository
+ * AbstractCommentRepository
  */
-class CommentRepository extends EntityRepository
+class AbstractCommentRepository extends EntityRepository
 {
-
-    /**
-     * Get all enabled comments by idea
-     *
-     * @param $idea
-     * @return array
-     */
-    public function getEnabledByIdea($idea)
-    {
-        $qb = $this->getIsEnabledQueryBuilder()
-            ->addSelect('aut', 'm', 'v', 'i', 'r')
-            ->leftJoin('c.Author', 'aut')
-            ->leftJoin('aut.Media', 'm')
-            ->leftJoin('c.Votes', 'v')
-            ->leftJoin('c.Reports', 'r')
-            ->leftJoin('c.Idea', 'i')
-            ->andWhere('c.Idea = :idea')
-            ->andWhere('c.isTrashed = :notTrashed')
-            ->setParameter('idea', $idea)
-            ->setParameter('notTrashed', false)
-            ->addOrderBy('c.updatedAt', 'DESC')
-        ;
-
-        return $qb->getQuery()
-            ->getResult();
-    }
-
     /**
      * Get one comment by id
      * @param $comment
@@ -46,12 +19,11 @@ class CommentRepository extends EntityRepository
     public function getOneById($comment)
     {
         return $this->getIsEnabledQueryBuilder()
-            ->addSelect('aut', 'm', 'v', 'i', 'r')
+            ->addSelect('aut', 'm', 'v', 'r')
             ->leftJoin('c.Author', 'aut')
             ->leftJoin('aut.Media', 'm')
             ->leftJoin('c.Votes', 'v')
             ->leftJoin('c.Reports', 'r')
-            ->leftJoin('c.Idea', 'i')
             ->andWhere('c.id = :comment')
             ->setParameter('comment', $comment)
             ->getQuery()
