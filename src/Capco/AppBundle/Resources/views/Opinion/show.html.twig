@@ -116,10 +116,10 @@
                                     </div>
 
                                     <div class="opinion__vote-group">
-                                        {% if(userReportingOpinion == false) %}
-                                        <a href="{{ path('app_report_opinion' ,{'consultationSlug': consultation.slug, 'opinionTypeSlug': opinionType.slug, 'opinionSlug': opinion.slug } ) }}" class="btn  btn-dark-gray  btn--outline"><i class="cap cap-flag-1"></i> {{ 'opinion.report.submit'|trans({}, 'CapcoAppBundle') }}</a>
+                                        {% if opinion.userHasReport(app.user) %}
+                                            <button disabled="disabled" class="btn  btn-dark-gray"><i class="cap cap-flag-1"></i> {{ 'opinion.report.reported'|trans({}, 'CapcoAppBundle') }}</button>
                                         {% else %}
-                                        <button disabled="disabled" class="btn  btn-dark-gray"><i class="cap cap-flag-1"></i> {{ 'opinion.report.reported'|trans({}, 'CapcoAppBundle') }}</button>
+                                            <a href="{{ path('app_report_opinion' ,{'consultationSlug': consultation.slug, 'opinionTypeSlug': opinionType.slug, 'opinionSlug': opinion.slug } ) }}" class="btn  btn-dark-gray  btn--outline"><i class="cap cap-flag-1"></i> {{ 'opinion.report.submit'|trans({}, 'CapcoAppBundle') }}</a>
                                         {% endif %}
                                     </div>
 
@@ -187,10 +187,10 @@
                                                     <span class="nb-votes">{{ source.voteCountSource }}</span>
 
                                                     {% if source.canContribute %}
-                                                        {% if(userReportingSource == false) %}
-                                                            <a href="{{ path('app_report_source' ,{'consultationSlug': consultation.slug, 'opinionTypeSlug': opinionType.slug, 'opinionSlug': opinion.slug, 'sourceSlug': source.slug } ) }}" class="btn btn-xs btn-dark-gray  btn--outline"><i class="cap cap-flag-1"></i> {{ 'source.report.submit'|trans({}, 'CapcoAppBundle') }}</a>
-                                                        {% else %}
+                                                        {% if source.userHasReport(app.user) %}
                                                             <button disabled="disabled" class="btn btn-xs btn-dark-gray"><i class="cap cap-flag-1"></i> {{ 'source.report.reported'|trans({}, 'CapcoAppBundle') }}</button>
+                                                        {% else %}
+                                                            <a href="{{ path('app_report_source' ,{'consultationSlug': consultation.slug, 'opinionTypeSlug': opinionType.slug, 'opinionSlug': opinion.slug, 'sourceSlug': source.slug } ) }}" class="btn btn-xs btn-dark-gray  btn--outline"><i class="cap cap-flag-1"></i> {{ 'source.report.submit'|trans({}, 'CapcoAppBundle') }}</a>
                                                         {% endif %}
 
                                                         {% if app.user is not null and app.user == source.Author %}

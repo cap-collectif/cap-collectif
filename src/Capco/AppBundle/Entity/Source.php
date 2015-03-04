@@ -334,7 +334,6 @@ class Source
         }
         $this->isEnabled = $isEnabled;
         return $this;
-        return $this;
     }
 
     /**

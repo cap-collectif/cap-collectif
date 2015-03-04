@@ -6,6 +6,8 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Validator\Constraints as Assert;
+use Capco\UserBundle\Entity\User;
+
 
 /**
  * Opinion
@@ -790,6 +792,21 @@ class Opinion
         $excerpt = substr($this->body, 0, $nb);
         $excerpt = $excerpt.'...';
         return $excerpt;
+    }
+
+    /**
+     * @param User $user
+     * @return bool
+     */
+    public function userHasReport(User $user = null){
+        if ($user != null) {
+            foreach($this->Reports as $report) {
+                if ($report->getReporter() == $user) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     // ******************* Lifecycle *********************************
