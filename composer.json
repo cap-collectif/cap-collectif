@@ -51,7 +51,8 @@
     "require-dev": {
         "sensio/generator-bundle": "~2.3",
         "liip/functional-test-bundle": "~1.0@dev",
-        "phpunit/phpunit-selenium": "dev-master"
+        "phpunit/phpunit-selenium": "dev-master",
+        "phpspec/phpspec": "~2.0"
     },
     "scripts": {
         "post-root-package-install": [

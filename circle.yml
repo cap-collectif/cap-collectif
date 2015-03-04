@@ -29,3 +29,4 @@ test:
 
     override:
         - phpunit -c app -v
+        - bin/phpspec run
