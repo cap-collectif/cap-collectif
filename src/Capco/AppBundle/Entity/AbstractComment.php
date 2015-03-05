@@ -16,7 +16,7 @@ use Capco\AppBundle\Validator\Constraints as CapcoAssert;
  * @ORM\Table(name="comment")
  * @ORM\InheritanceType("SINGLE_TABLE")
  * @ORM\DiscriminatorColumn(name = "objectType", type = "string")
- * @ORM\DiscriminatorMap( {"idea" = "IdeaComment", "event" = "EventComment"} )
+ * @ORM\DiscriminatorMap( {"idea" = "IdeaComment", "event" = "EventComment", "post" = "PostComment"} )
  * @CapcoAssert\HasAuthor
  * @package Capco\AppBundle\Entity
  */

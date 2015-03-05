@@ -2,6 +2,8 @@
 
 namespace Capco\AppBundle\Entity;
 
+use Capco\AppBundle\Model\CommentableInterface;
+use Capco\AppBundle\Traits\CommentableTrait;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 use Gedmo\Mapping\Annotation as Gedmo;
@@ -13,8 +15,10 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Table(name="blog_post")
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\PostRepository")
  */
-class Post
+class Post implements CommentableInterface
 {
+    use CommentableTrait;
+
     /**
      * @var integer
      *
@@ -99,9 +103,18 @@ class Post
      */
     private $Authors;
 
+    /**
+     * @var
+     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\PostComment", mappedBy="Post",  cascade={"persist", "remove"})
+     */
+    private $comments;
+
     function __construct()
     {
         $this->Authors = new ArrayCollection();
+        $this->comments = new ArrayCollection();
+        $this->voteCount = 0;
+        $this->commentsCount = 0;
         $this->updatedAt = new \Datetime;
     }
 
@@ -390,4 +403,26 @@ class Post
     {
         return $this->Media;
     }
+
+    // **************************** Commentable Methods **************************
+    public function getClassName()
+    {
+        return 'Post';
+    }
+
+    /**
+     * @return bool
+     */
+    public function canDisplay() {
+        return $this->isPublished;
+    }
+
+    /**
+     * @return bool
+     */
+    public function canContribute() {
+        return $this->isPublished;
+    }
+
+
 }

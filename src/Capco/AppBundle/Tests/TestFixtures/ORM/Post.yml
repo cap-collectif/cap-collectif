@@ -1,5 +1,5 @@
 Capco\AppBundle\Entity\Post:
-  post1:
+  postSimple:
     title: Article simple
     abstract: <text(150)>
     body: |
@@ -15,7 +15,7 @@ Capco\AppBundle\Entity\Post:
         - @admin
     Media: @MediaConsultation<numberBetween(1,3)>
 
-  post2:
+  postWithMultipleAuthors:
     title: Article avec plusieurs auteurs
     abstract: <text(150)>
     body: |
@@ -32,7 +32,7 @@ Capco\AppBundle\Entity\Post:
         - @user
     Media: @MediaConsultation<numberBetween(1,3)>
 
-  post3:
+  postUnpublished:
     title: Article dépublié
     abstract: <text(150)>
     body: |
@@ -48,7 +48,7 @@ Capco\AppBundle\Entity\Post:
         - @admin
     Media: @MediaConsultation<numberBetween(1,3)>
 
-  post4:
+  postNotYetPublished:
     title: Article pas encore publié
     abstract: <text(150)>
     body: |

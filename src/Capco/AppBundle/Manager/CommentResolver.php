@@ -7,6 +7,8 @@ use Capco\AppBundle\Entity\Event;
 use Capco\AppBundle\Entity\EventComment;
 use Capco\AppBundle\Entity\IdeaComment;
 use Capco\AppBundle\Entity\AbstractComment as Comment;
+use Capco\AppBundle\Entity\Post;
+use Capco\AppBundle\Entity\PostComment;
 use Capco\AppBundle\Repository\CommentRepository;
 use Capco\AppBundle\Entity\Idea;
 
@@ -31,6 +33,8 @@ class CommentResolver
             $comment = new IdeaComment();
         } else if ($objectType == 'Event') {
             $comment = new EventComment();
+        } else if ($objectType == 'Post') {
+            $comment = new PostComment();
         }
         return $comment;
     }
@@ -40,9 +44,10 @@ class CommentResolver
         $object = null;
         if ($objectType == 'Idea'){
             $object = $this->em->getRepository('CapcoAppBundle:Idea')->find($objectId);
-        }
-        if ($objectType == 'Event'){
+        } else if ($objectType == 'Event'){
             $object = $this->em->getRepository('CapcoAppBundle:Event')->find($objectId);
+        } else if ($objectType == 'Post'){
+            $object = $this->em->getRepository('CapcoAppBundle:Post')->find($objectId);
         }
         return $object;
     }
@@ -56,6 +61,11 @@ class CommentResolver
         if ($object instanceof Event) {
             return $this->em->getRepository('CapcoAppBundle:EventComment')->getEnabledByEvent($object);
         }
+
+        if ($object instanceof Post) {
+            return $this->em->getRepository('CapcoAppBundle:PostComment')->getEnabledByPost($object);
+        }
+
         return null;
 
     }
@@ -82,6 +92,10 @@ class CommentResolver
             return $this->router->generate('app_event_show', array('slug' => $object->getSlug()), $absolute);
         }
 
+        if ($object instanceof Post) {
+            return $this->router->generate('app_blog_show', array('slug' => $object->getSlug()), $absolute);
+        }
+
         return $this->router->generate('app_homepage', array(), $absolute);
     }
 
@@ -93,6 +107,10 @@ class CommentResolver
 
         if ($object instanceof Event) {
             return $this->router->generate('admin_capco_app_event_show', array('id' => $object->getId()), $absolute);
+        }
+
+        if ($object instanceof Post) {
+            return $this->router->generate('admin_capco_app_post_show', array('id' => $object->getId()), $absolute);
         }
 
         return '';
@@ -124,11 +142,7 @@ class CommentResolver
 
     public function setObjectOnComment($object, Comment $comment)
     {
-        if ($object instanceof Idea) {
-            $comment->setIdea($object);
-        } else if ($object instanceof Event) {
-            $comment->setEvent($object);
-        }
+        $comment->setRelatedObject($object);
         return $comment;
 
     }

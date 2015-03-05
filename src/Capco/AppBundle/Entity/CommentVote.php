@@ -94,10 +94,12 @@ class CommentVote
      * @param $comment
      * @return $this
      */
-    public function setComment($comment)
+    public function setComment(AbstractComment $comment)
     {
-        $this->comment = $comment;
-        $comment->addVote($this);
+        if (null != $comment) {
+            $this->comment = $comment;
+            $comment->addVote($this);
+        }
         return $this;
     }
 

@@ -26,9 +26,25 @@
             'title': post.title,
         }) }}
 
-        {% if capco_site_parameter_value('blog.disqus.username') %}
-            {% include 'CapcoAppBundle:Blog:_comments.html.twig' with {'post': post} %}
+        {% if capco_comment_can_show(post) and post.commentsCount > 0 %}
+            {{ render(controller('CapcoAppBundle:Comment:showComments', {'object': post})) }}
+        {% endif %}
+
+        {% if capco_comment_can_add(post) %}
+            {{ render(controller('CapcoAppBundle:Comment:create', {'objectId': post.id, 'objectType': post.className})) }}
         {% endif %}
     </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('js/readmore/readmore.js') }}"></script>
+    <script type="text/javascript">
+        $('.more').readmore({
+            collapsedHeight: 98,
+            moreLink: '<a href="#">{{ 'comment.read_more'|trans({}, 'CapcoAppBundle') }}</a>',
+            lessLink: '<a href="#">{{ 'comment.read_less'|trans({}, 'CapcoAppBundle') }}</a>'
+        });
+    </script>
 {% endblock %}
 

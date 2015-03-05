@@ -33,6 +33,9 @@ class PostAdmin extends Admin
             ->add('isPublished', null, array(
                 'label' => 'admin.fields.blog_post.is_published',
             ))
+            ->add('isCommentable', null, array(
+                'label' => 'admin.fields.blog_post.is_commentable',
+            ))
             ->add('publishedAt', null, array(
                 'label' => 'admin.fields.blog_post.published_at',
             ))
@@ -67,6 +70,16 @@ class PostAdmin extends Admin
             ->add('publishedAt', null, array(
                 'label' => 'admin.fields.blog_post.published_at',
             ))
+            ->add('isCommentable', null, array(
+                'label' => 'admin.fields.blog_post.is_commentable',
+                'editable' => true,
+            ))
+            ->add('commentsCount', null, array(
+                'label' => 'admin.fields.blog_post.comments_count',
+            ))
+            ->add('updatedAt', null, array(
+                'label' => 'admin.fields.blog_post.updated_at',
+            ))
             ->add('_action', 'actions', array(
                 'actions' => array(
                     'edit' => array(),
@@ -85,11 +98,10 @@ class PostAdmin extends Admin
             ->add('title', null, array(
                 'label' => 'admin.fields.blog_post.title',
             ))
-            ->add('Media', 'sonata_type_model_list', array('required' => false), array(
-                'link_parameters' => array(
-                    'context' => 'default',
-                    'hide_context' => true
-                )
+            ->add('Authors', null, array(
+                'label' => 'admin.fields.blog_post.authors',
+                'required' => false,
+                'by_reference' => false,
             ))
             ->add('isPublished', null, array(
                 'label' => 'admin.fields.blog_post.is_published',
@@ -103,17 +115,66 @@ class PostAdmin extends Admin
                     'data-date-format' => 'DD/MM/YYYY HH:mm'
                 ),
             ))
-            ->add('Authors', null, array(
-                'label' => 'admin.fields.blog_post.authors',
-                'required' => false,
-                'by_reference' => false,
-            ))
             ->add('abstract', null, array(
                 'label' => 'admin.fields.blog_post.abstract',
             ))
             ->add('body', null, array(
                 'label' => 'admin.fields.blog_post.body',
                 'attr' => array('class' => 'ckeditor'),
+            ))
+            ->add('Media', 'sonata_type_model_list', array('required' => false), array(
+                'link_parameters' => array(
+                    'context' => 'default',
+                    'hide_context' => true
+                )
+            ))
+            ->add('isCommentable', null, array(
+                'label' => 'admin.fields.blog_post.is_commentable',
+                'required' => false,
+            ))
+        ;
+    }
+
+    /**
+     * @param ShowMapper $showMapper
+     */
+    protected function configureShowFields(ShowMapper $showMapper)
+    {
+        $showMapper
+            ->add('title', null, array(
+                'label' => 'admin.fields.blog_post.title',
+            ))
+            ->add('Authors', null, array(
+                'label' => 'admin.fields.blog_post.authors',
+            ))
+            ->add('abstract', null, array(
+                'label' => 'admin.fields.blog_post.abstract',
+            ))
+            ->add('body', null, array(
+                'label' => 'admin.fields.blog_post.body',
+            ))
+            ->add('Media', 'sonata_media_type', array(
+                'template' => 'CapcoAdminBundle:Post:media_show_field.html.twig',
+                'provider' => 'sonata.media.provider.image',
+                'label' => 'admin.fields.blog_post.media',
+            ))
+            ->add('isPublished', null, array(
+                'label' => 'admin.fields.blog_post.is_published',
+            ))
+            ->add('publishedAt', null, array(
+                'label' => 'admin.fields.blog_post.published_at',
+            ))
+            ->add('isCommentable', null, array(
+                'label' => 'admin.fields.blog_post.is_commentable',
+            ))
+            ->add('commentsCount', null, array(
+                'label' => 'admin.fields.blog_post.comments_count',
+            ))
+            ->add('updatedAt', null, array(
+                'label' => 'admin.fields.blog_post.updated_at',
+            ))
+            ->add('createdAt', null, array(
+                'label' => 'admin.fields.blog_post.created_at',
             ))
         ;
     }

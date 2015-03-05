@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\Entity;
 
+use Capco\AppBundle\Model\CommentableInterface;
 use Capco\AppBundle\Traits\CommentableTrait;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
@@ -15,7 +16,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\IdeaRepository")
  * @ORM\HasLifecycleCallbacks()
  */
-class Idea
+class Idea implements CommentableInterface
 {
     use CommentableTrait;
 
@@ -527,6 +528,20 @@ class Idea
     public function getClassName()
     {
         return 'Idea';
+    }
+
+    /**
+     * @return bool
+     */
+    public function canDisplay() {
+        return $this->isEnabled;
+    }
+
+    /**
+     * @return bool
+     */
+    public function canContribute() {
+        return $this->isEnabled && !$this->isTrashed;
     }
 
     /**

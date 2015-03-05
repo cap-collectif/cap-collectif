@@ -1,31 +1,31 @@
 Capco\AppBundle\Entity\IdeaComment:
-  icomment1:
+  iComment1:
     Idea: @Idea1
     Author: @user
     body: "Commentaire 1"
-  icomment2:
+  iComment2:
     Idea: @Idea1
     Author: @admin
     body: "Commentaire 2"
-  icomment3:
+  iComment3:
     Idea: @Idea2
     Author: @admin
     body: "Commentaire 3"
-  icommentDisabled:
+  iCommentDisabled:
     Idea: @Idea2
     Author: @admin
     body: "Commentaire désactivé"
     isEnabled: false
-  icommentTrashed:
+  iCommentTrashed:
     Idea: @Idea2
     Author: @admin
     body: "Commentaire à la corbeille"
     isTrashed: true
-  icommentOnDisabledIdea:
+  iCommentOnDisabledIdea:
     Idea: @IdeaUnpublished
     Author: @admin
     body: "Commentaire sur une idée désactivée"
-  icommentOnTrashedIdea:
+  iCommentOnTrashedIdea:
     Idea: @IdeaTrashed
     Author: @admin
     body: "Commentaire sur une idée à la corbeille"

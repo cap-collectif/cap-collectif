@@ -1,5 +1,5 @@
 Capco\AppBundle\Entity\Post:
-  post{1..25}:
+  post{1..10}:
     title: <text(40)>
     abstract: <text(150)>
     body: |

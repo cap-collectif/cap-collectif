@@ -30,7 +30,7 @@ class IdeaCommentRepository extends EntityRepository
             ->andWhere('c.isTrashed = :notTrashed')
             ->setParameter('idea', $idea)
             ->setParameter('notTrashed', false)
-            ->addOrderBy('c.updatedAt', 'DESC')
+            ->addOrderBy('c.updatedAt', 'ASC')
         ;
 
         return $qb->getQuery()

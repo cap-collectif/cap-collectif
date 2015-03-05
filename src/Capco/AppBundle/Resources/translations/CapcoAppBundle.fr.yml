@@ -548,6 +548,8 @@ blog:
   on_date: le %date%
   see_all: Voir toutes les actualités
   none: "Il n'y a aucune actualité."
+  show:
+    comments: "]-Inf, 0] Aucun commentaire | {1} 1 commentaire | ]1,Inf[ %count% commentaires"
 
 # Features
 features:

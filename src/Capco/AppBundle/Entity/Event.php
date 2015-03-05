@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\Entity;
 
+use Capco\AppBundle\Model\CommentableInterface;
 use Capco\AppBundle\Traits\CommentableTrait;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
@@ -14,7 +15,7 @@ use Doctrine\Common\Collections\ArrayCollection;
  * @ORM\Table(name="event")
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\EventRepository")
  */
-class Event
+class Event implements CommentableInterface
 {
     use CommentableTrait;
 
@@ -569,6 +570,20 @@ class Event
     public function getClassName()
     {
         return 'Event';
+    }
+
+    /**
+     * @return bool
+     */
+    public function canDisplay() {
+        return $this->isEnabled;
+    }
+
+    /**
+     * @return bool
+     */
+    public function canContribute() {
+        return $this->isEnabled;
     }
 
     public function getStartYear()

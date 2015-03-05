@@ -22,9 +22,6 @@ trait CommentableTrait
      */
     private $isCommentable = true;
 
-
-    abstract public function getClassName();
-
     public function increaseCommentsCount($nb) {
         $this->commentsCount += $nb;
     }
@@ -98,20 +95,6 @@ trait CommentableTrait
     public function setIsCommentable($isCommentable)
     {
         $this->isCommentable = $isCommentable;
-    }
-
-    /**
-     * @return bool
-     */
-    public function canDisplay() {
-        return $this->isEnabled;
-    }
-
-    /**
-     * @return bool
-     */
-    public function canContribute() {
-        return $this->isEnabled && (!isset($this->isTrashed) || !$this->isTrashed);
     }
 
     /**

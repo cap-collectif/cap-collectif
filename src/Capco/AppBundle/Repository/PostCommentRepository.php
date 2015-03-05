@@ -6,29 +6,29 @@ use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\Query;
 
 /**
- * EventCommentRepository
+ * PostCommentRepository
  */
-class EventCommentRepository extends EntityRepository
+class PostCommentRepository extends EntityRepository
 {
 
     /**
-     * Get all enabled comments by event
+     * Get all enabled comments by post
      *
-     * @param $event
+     * @param $idea
      * @return array
      */
-    public function getEnabledByEvent($event)
+    public function getEnabledByPost($post)
     {
         $qb = $this->getIsEnabledQueryBuilder()
-            ->addSelect('aut', 'm', 'v', 'e', 'r')
+            ->addSelect('aut', 'm', 'v', 'p', 'r')
             ->leftJoin('c.Author', 'aut')
             ->leftJoin('aut.Media', 'm')
             ->leftJoin('c.Votes', 'v')
             ->leftJoin('c.Reports', 'r')
-            ->leftJoin('c.Event', 'e')
-            ->andWhere('c.Event = :event')
+            ->leftJoin('c.Post', 'p')
+            ->andWhere('c.Post = :post')
             ->andWhere('c.isTrashed = :notTrashed')
-            ->setParameter('event', $event)
+            ->setParameter('post', $post)
             ->setParameter('notTrashed', false)
             ->addOrderBy('c.updatedAt', 'ASC')
         ;

@@ -94,6 +94,9 @@ class EventAdmin extends Admin
                 'label' => 'admin.fields.event.is_commentable',
                 'editable' => true,
             ))
+            ->add('commentsCount', null, array(
+                'label' => 'admin.fields.event.comments_count',
+            ))
             ->add('updatedAt', null, array(
                 'label' => 'admin.fields.event.updated_at',
             ))
@@ -249,6 +252,9 @@ class EventAdmin extends Admin
             ))
             ->add('isCommentable', null, array(
                 'label' => 'admin.fields.event.is_commentable',
+            ))
+            ->add('commentsCount', null, array(
+                'label' => 'admin.fields.event.comments_count',
             ))
             ->add('updatedAt', null, array(
                 'label' => 'admin.fields.event.updated_at',

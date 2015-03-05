@@ -187,9 +187,6 @@ class IdeaAdmin extends Admin
             ->add('voteCount', null, array(
                 'label' => 'admin.fields.idea.vote_count',
             ))
-            ->add('commentsCount', null, array(
-                'label' => 'admin.fields.idea.comments_count',
-            ))
             ->add('Author', null, array(
                 'label' => 'admin.fields.idea.author',
             ))
@@ -203,6 +200,9 @@ class IdeaAdmin extends Admin
             ))
             ->add('isCommentable', null, array(
                 'label' => 'admin.fields.idea.is_commentable',
+            ))
+            ->add('commentsCount', null, array(
+                'label' => 'admin.fields.idea.comments_count',
             ))
             ->add('updatedAt', null, array(
                 'label' => 'admin.fields.idea.updated_at',

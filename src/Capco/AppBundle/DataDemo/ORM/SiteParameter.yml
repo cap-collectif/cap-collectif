@@ -233,12 +233,6 @@ Capco\AppBundle\Entity\SiteParameter:
         value: Blog
         position: 770
         type: 0
-    SiteParameterBlogDisqusUsername:
-        keyname: blog.disqus.username
-        title: Compte Disqus à utiliser
-        value: ''
-        position: 1000
-        type: 0
 
     SiteParameterScript:
         keyname: global.site.embed_js

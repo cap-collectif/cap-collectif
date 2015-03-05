@@ -48,6 +48,10 @@ class BlogControllerTest extends BaseTestHelper
                 $this->assertEquals("404", $client->getResponse()->getStatusCode());
             } else {
                 $this->assertEquals("200", $client->getResponse()->getStatusCode());
+                if ($post->getTitle() == "Article Simple" ) {
+                    $nbDisplayedComments = $crawler->filter('.opinion--comment:not(.opinion--add-comment)')->count();
+                    $this->assertEquals("2", $nbDisplayedComments);
+                }
             }
         }
 

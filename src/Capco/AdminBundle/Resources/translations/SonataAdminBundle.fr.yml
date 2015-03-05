@@ -102,6 +102,8 @@ admin:
       published_at: Date de Publication
       is_published: Publié
       media: Photo
+      is_commentable: Commentable
+      comments_count: Nombre de commentaires
     category:
       title: Titre
       sources: Sources
@@ -156,6 +158,7 @@ admin:
       title: Titre
       is_enabled: Publié
       is_commentable: Commentable
+      comments_count: Nombre de commentaires
       body: Contenu
       updated_at: Mise à jour
       created_at: Création
