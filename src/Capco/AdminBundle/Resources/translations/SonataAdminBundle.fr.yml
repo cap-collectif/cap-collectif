@@ -65,6 +65,8 @@ admin:
       media: Pour un rendu optimal, choisissez une image faisant au moins 320 pixels de largeur et 215 pixels de hauteur.
     comment:
       author: Il est obligatoire de spécifier soit un auteur, soit un nom et une adresse email.
+    event:
+      adress: Il est nécessaire de spécifier au moins l'adresse et la ville pour afficher la carte.
 
   features:
     title:

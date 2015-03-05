@@ -189,6 +189,7 @@ class EventAdmin extends Admin
             ->add('address', null, array(
                 'label' => 'admin.fields.event.address',
                 'required' => false,
+                'help' => 'admin.help.event.adress',
             ))
             ->add('zipCode', 'number', array(
                 'label' => 'admin.fields.event.zipcode',
@@ -296,7 +297,9 @@ class EventAdmin extends Admin
 
     private function setCoord(Event $event)
     {
-        if ($event->getAddress() == null) {
+        if (!$event->getAddress() || !$event->getCity()) {
+            $event->setLat(null);
+            $event->setLng(null);
             return;
         }
 
