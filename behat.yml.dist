@@ -1,0 +1,29 @@
+default:
+    formatters:
+        pretty:
+            verbose:  true
+            paths:    false
+            snippets: false
+    extensions:
+           Behat\Symfony2Extension: ~
+           SensioLabs\Behat\PageObjectExtension:
+              namespaces:
+                  page: [ Capco\AppBundle\Behat\Page ]
+              factory:
+                  page_parameters:
+                      base_url: 'http://127.0.0.1:8000'
+           Behat\MinkExtension:
+              sessions:
+                  default:
+                      symfony2: ~
+                  javascript:
+                      selenium2: ~
+              browser_name: firefox
+              show_auto:    true
+              show_cmd: 'open %s'
+    suites:
+        default:
+            paths: [ %paths.base%/features ]
+            contexts:
+                - Capco\AppBundle\Behat\UserContext
+                - Capco\AppBundle\Behat\NavigationContext

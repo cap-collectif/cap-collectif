@@ -35,6 +35,7 @@ app/config/parameters/*
 # tests
 app/test.db
 /report/
+behat.yml
 
 # OS X
 .DS_Store

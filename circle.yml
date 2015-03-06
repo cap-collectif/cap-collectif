@@ -5,6 +5,7 @@ dependencies:
     pre:
         - echo "memory_limit = 2048M" > ~/.phpenv/versions/$(phpenv global)/etc/conf.d/memory.ini
         - mv app/config/parameters.ci.yml app/config/parameters.yml
+        - mv behat.yml.dist behat.yml
         - gem install bundler
         - bundle install --clean
 
@@ -30,3 +31,4 @@ test:
     override:
         - phpunit -c app -v
         - bin/phpspec run
+        - bin/behat
