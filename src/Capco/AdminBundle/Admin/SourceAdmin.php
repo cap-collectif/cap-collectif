@@ -110,7 +110,6 @@ class SourceAdmin extends Admin
             ))
             ->add('body', null, array(
                 'label' => 'admin.fields.source.body',
-                'attr' => array('class' => 'ckeditor'),
             ))
             ->add('Author', 'sonata_type_model', array(
                 'label' => 'admin.fields.source.author',

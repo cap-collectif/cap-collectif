@@ -150,8 +150,9 @@ class PostAdmin extends Admin
             ->add('abstract', null, array(
                 'label' => 'admin.fields.blog_post.abstract',
             ))
-            ->add('body', null, array(
+            ->add('body', 'ckeditor', array(
                 'label' => 'admin.fields.blog_post.body',
+                'config_name' => 'admin_editor',
             ))
             ->add('Media', 'sonata_media_type', array(
                 'template' => 'CapcoAdminBundle:Post:media_show_field.html.twig',

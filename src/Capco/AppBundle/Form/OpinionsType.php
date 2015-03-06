@@ -20,9 +20,10 @@ class OpinionsType extends AbstractType
                 'label' => 'opinion.form.title',
                 'required' => true
             ))
-            ->add('body', 'textarea', array(
+            ->add('body', 'ckeditor', array(
                 'label' => 'opinion.form.body',
-                'required' => true
+                'required' => true,
+                'config_name' => 'user_editor',
             ))
         ;
     }

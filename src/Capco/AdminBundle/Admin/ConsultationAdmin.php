@@ -196,9 +196,9 @@ class ConsultationAdmin extends Admin
                 'label' => 'admin.fields.consultation.step_position',
             ))
             ->add('body', null, array(
-                'attr' => array('class' => 'ckeditor'),
                 'label' => 'admin.fields.consultation.body',
                 'required' => false,
+                'attr' => array('rows' => 10),
             ))
             ->add('Cover', 'sonata_type_model_list', array(
                 'required' => false,

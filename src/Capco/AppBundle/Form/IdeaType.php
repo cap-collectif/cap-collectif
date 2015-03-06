@@ -28,8 +28,9 @@ class IdeaType extends AbstractType
             ->add('title', 'text', array(
                 'label' => 'idea.form.title',
             ))
-            ->add('body', 'textarea', array(
+            ->add('body', 'ckeditor', array(
                 'label' => 'idea.form.body',
+                'config_name' => 'user_editor',
             ))
             ->add('media', 'sonata_media_type', array(
                 'label' => 'idea.form.media',

@@ -27,6 +27,6 @@ class CapcoMediaBundle extends Bundle
      */
     public function getParent()
     {
-        return 'SonataMediaBundle';
+        return 'CoopTilleulsCKEditorSonataMediaBundle';
     }
 }

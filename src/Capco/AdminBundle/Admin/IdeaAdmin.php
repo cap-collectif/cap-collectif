@@ -137,9 +137,9 @@ class IdeaAdmin extends Admin
         }
 
         $formMapper
-            ->add('body', null, array(
+            ->add('body', 'ckeditor', array(
                 'label' => 'admin.fields.idea.body',
-                'attr' => array('class' => 'ckeditor'),
+                'config_name' => 'admin_editor',
             ))
             ->add('Media', 'sonata_type_model_list', array(
                 'label' => 'admin.fields.idea.media',

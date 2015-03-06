@@ -135,8 +135,8 @@ class StepAdmin extends Admin
                     'choices' => Step::$stepTypeLabelsNoConsultation,
                     'label' => 'admin.fields.step.type',
                 ))
-                ->add('body', null, array(
-                    'attr' => array('class' => 'ckeditor'),
+                ->add('body', 'ckeditor', array(
+                    'config_name' => 'admin_editor',
                     'label' => 'admin.fields.step.body',
                     'required' => false,
                 ))

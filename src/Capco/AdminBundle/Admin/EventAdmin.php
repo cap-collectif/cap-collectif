@@ -128,9 +128,9 @@ class EventAdmin extends Admin
             ->add('title', null, array(
                 'label' => 'admin.fields.event.title',
             ))
-            ->add('body', null, array(
+            ->add('body', 'ckeditor', array(
                 'label' => 'admin.fields.event.body',
-                'attr' => array('class' => 'ckeditor'),
+                'config_name' => 'admin_editor',
             ))
             ->add('Author', 'sonata_type_model', array(
                 'label' => 'admin.fields.event.author',

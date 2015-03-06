@@ -112,9 +112,9 @@ class OpinionAdmin extends Admin
             ->add('Author', 'sonata_type_model', array(
                 'label' => 'admin.fields.opinion.author',
             ))
-            ->add('body', null, array(
-                'attr' => array('class' => 'ckeditor'),
+            ->add('body', 'ckeditor', array(
                 'label' => 'admin.fields.opinion.body',
+                'config_name' => 'admin_editor',
             ))
             ->add('Consultation', 'sonata_type_model', array(
                 'label' => 'admin.fields.opinion.consultation',

@@ -58,6 +58,10 @@ class AppKernel extends Kernel
 
             // typography concerns
             new Joli\TypoBundle\JoliTypoBundle(),
+
+            // CKEditor
+            new \CoopTilleuls\Bundle\CKEditorSonataMediaBundle\CoopTilleulsCKEditorSonataMediaBundle(),
+            new \Ivory\CKEditorBundle\IvoryCKEditorBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

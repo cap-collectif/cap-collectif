@@ -23,9 +23,9 @@ class PageAdmin extends Admin
             ->add('title', null, array(
                 'label' => 'admin.fields.page.title',
             ))
-            ->add('body', null, array(
+            ->add('body', 'ckeditor', array(
                 'label' => 'admin.fields.page.body',
-                'attr' => array('class' => 'ckeditor'),
+                'config_name' => 'admin_editor',
             ))
             ->add('isEnabled', null, array(
                 'label' => 'admin.fields.page.is_enabled',

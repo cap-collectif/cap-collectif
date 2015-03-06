@@ -90,10 +90,10 @@ class SiteParameterAdmin extends Admin
                 ));
 
         } else if ($subject->getType() == $types['rich_text']) {
-            $formMapper->add('value', null, array(
+            $formMapper->add('value', 'ckeditor', array(
                 'label' => 'admin.fields.site_parameter.value',
                 'required' => false,
-                'attr' => array('class' => 'ckeditor'),
+                'config_name' => 'admin_editor',
             ));
 
         } else if ($subject->getType() == $types['integer']) {

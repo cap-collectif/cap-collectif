@@ -114,13 +114,12 @@ class ThemeAdmin extends Admin
                 'label' => 'admin.fields.theme.position',
             ))
             ->add('teaser', 'textarea', array(
-                'attr' => array('class' => 'ckeditor'),
                 'label' => 'admin.fields.theme.teaser',
                 'required' => false,
             ))
-            ->add('body', 'textarea', array(
-                'attr' => array('class' => 'ckeditor'),
+            ->add('body', 'ckeditor', array(
                 'label' => 'admin.fields.theme.body',
+                'config_name' => 'admin_editor',
             ))
             ->add('status', 'choice', array(
                 'label' => 'admin.fields.theme.status',
@@ -129,11 +128,15 @@ class ThemeAdmin extends Admin
                 'required' => false,
                 'empty_value' => 'admin.fields.theme.no_status',
             ))
-            ->add('Media', 'sonata_media_type', array(
-                'provider' => 'sonata.media.provider.image',
-                'context' => 'default',
-                'label' => 'admin.fields.theme.media',
+            ->add('Media', 'sonata_type_model_list', array(
                 'required' => false,
+                'label' => 'admin.fields.theme.media',
+            ), array(
+                'link_parameters' => array(
+                    'context' => 'default',
+                    'hide_context' => true,
+                    'provider' => 'sonata.media.provider.image',
+                )
             ))
         ;
     }

@@ -136,3 +136,51 @@ qandidate_toggle:
     context_factory: null
     redis_namespace: feature_toggle # default, only required when persistence = redis
     redis_client: capco.predis.client # only required when persistence = redis
+
+ivory_ck_editor:
+    base_path: 'js/ckeditor/'
+    js_path: 'js/ckeditor/ckeditor.js'
+    default_config: user_editor
+    configs:
+        user_editor:
+            toolbar: user_toolbar
+        admin_editor:
+            toolbar: admin_toolbar
+            filebrowserBrowseRoute: admin_capco_media_media_browser
+            filebrowserImageBrowseRoute: admin_capco_media_media_browser
+            # Display images by default when clicking the image dialog browse button
+            filebrowserImageBrowseRouteParameters:
+                provider: sonata.media.provider.image
+            filebrowserUploadRoute: admin_capco_media_media_upload
+            filebrowserUploadRouteParameters:
+                provider: sonata.media.provider.file
+            # Upload file as image when sending a file from the image dialog
+            filebrowserImageUploadRoute: admin_capco_media_media_upload
+            filebrowserImageUploadRouteParameters:
+                provider: sonata.media.provider.image
+                context: default
+            filebrowserWindowWidth: '50%'
+            filebrowserWindowHeight: '80%'
+    toolbars:
+        configs:
+            admin_toolbar: ['@clipboard', '@styles', '@basicstyles', '@paragraph', '@links', '@insert', '@document', '@tools' ]
+            user_toolbar: ['@clipboard', '@user_styles', '@basicstyles', '@user_paragraph', '@user_links', '@user_insert', '@tools']
+        items:
+            clipboard: [ 'Undo', 'Redo' ]
+            basicstyles: [ 'Bold', 'Italic', 'Underline', 'Strike' ]
+            paragraph: [ 'NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', 'Blockquote', '-', 'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock' ]
+            user_paragraph: [ 'NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', 'Blockquote' ]
+            styles: [ 'Styles', 'Format', 'FontSize' ]
+            user_styles: [ 'Format' ]
+            links: [ 'Link', 'Unlink', 'Anchor' ]
+            user_links: [ 'Link', 'Unlink' ]
+            insert: [ 'Image', 'Table', 'HorizontalRule', 'Iframe' ]
+            user_insert: [ 'Image', 'Table', 'HorizontalRule' ]
+            document: ['Source']
+            tools: [ 'Maximize' ]
+
+coop_tilleuls_ck_editor_sonata_media:
+    templates:
+        layout: CoopTilleulsCKEditorSonataMediaBundle::layout.html.twig
+        browser: CapcoMediaBundle:MediaAdmin:browser.html.twig
+        upload: CoopTilleulsCKEditorSonataMediaBundle:MediaAdmin:upload.html.twig

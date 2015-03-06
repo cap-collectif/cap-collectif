@@ -115,8 +115,10 @@ class ArgumentAdmin extends Admin
                 'label' => 'admin.fields.argument.author',
             ))
             ->add('body', null, array(
-                'attr' => array('class' => 'ckeditor'),
                 'label' => 'admin.fields.argument.body',
+                'attr' => array(
+                    'rows' => 10,
+                )
             ))
             ->add('isTrashed', null, array(
                 'label' => 'admin.fields.argument.is_trashed',

@@ -2,11 +2,6 @@ var App = App || {};
 
 App.module = function ($) {
 
-    var ckEditor = function(el) {
-        var $el = $(el);
-        CKEDITOR.replace($el);
-    };
-
     var equalheight = function(container) {
         var currentTallest = 0;
         var currentRowStart = 0;
@@ -126,7 +121,6 @@ App.module = function ($) {
     var AppPublic = {
         equalheight: equalheight,
         resized: resized,
-        ckEditor: ckEditor,
         pieChart: pieChart,
         checkButton: checkButton,
         video: video,
