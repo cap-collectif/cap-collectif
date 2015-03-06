@@ -9,7 +9,6 @@ sonata.admin.group.user: Utilisateurs
 admin.group.moderation: Contributions
 admin.group.news: Actualités
 admin.group.configuration: Configuration
-admin.group.comments: Commentaires
 
 # Dashboard names
 admin.label.page: Pages

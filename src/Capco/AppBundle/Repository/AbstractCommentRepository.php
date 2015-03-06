@@ -59,7 +59,7 @@ class AbstractCommentRepository extends EntityRepository
             ->leftJoin('a.Media', 'm')
             ->andWhere('c.Author = :user')
             ->setParameter('user', $user)
-            ->orderBy('c.updatedAt', 'DESC');
+            ->orderBy('c.updatedAt', 'ASC');
 
         return $qb
             ->getQuery()

@@ -195,7 +195,7 @@ services:
         class: Capco\AdminBundle\Admin\CommentAdmin
         arguments: [~, Capco\AppBundle\Entity\AbstractComment, SonataAdminBundle:CRUD]
         tags:
-            - {name: sonata.admin, manager_type: orm, group: admin.group.news, label: admin.label.comment}
+            - {name: sonata.admin, manager_type: orm, group: admin.group.moderation, label: admin.label.comment}
         calls:
             - [ setTranslationDomain, [SonataAdminBundle]]
 
@@ -203,6 +203,6 @@ services:
         class: Capco\AdminBundle\Admin\CommentVoteAdmin
         arguments: [~, Capco\AppBundle\Entity\CommentVote, SonataAdminBundle:CRUD]
         tags:
-            - {name: sonata.admin, manager_type: orm, group: admin.group.news, label: admin.label.comment_vote}
+            - {name: sonata.admin, manager_type: orm, group: admin.group.moderation, label: admin.label.comment_vote}
         calls:
             - [ setTranslationDomain, [SonataAdminBundle]]

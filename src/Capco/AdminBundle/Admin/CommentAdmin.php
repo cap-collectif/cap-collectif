@@ -187,9 +187,11 @@ class CommentAdmin extends Admin
             ))
             ->add('isEnabled', null, array(
                 'label' => 'admin.fields.comment.is_enabled',
+                'required' => false,
             ))
             ->add('isTrashed', null, array(
                 'label' => 'admin.fields.comment.is_trashed',
+                'required' => false,
             ))
             ->add('trashedReason', null, array(
                 'label' => 'admin.fields.comment.trashed_reason',
