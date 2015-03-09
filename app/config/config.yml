@@ -144,8 +144,10 @@ ivory_ck_editor:
     configs:
         user_editor:
             toolbar: user_toolbar
+            language: 'fr'
         admin_editor:
             toolbar: admin_toolbar
+            language: 'fr'
             filebrowserBrowseRoute: admin_capco_media_media_browser
             filebrowserImageBrowseRoute: admin_capco_media_media_browser
             # Display images by default when clicking the image dialog browse button
@@ -174,7 +176,7 @@ ivory_ck_editor:
             user_styles: [ 'Format' ]
             links: [ 'Link', 'Unlink', 'Anchor' ]
             user_links: [ 'Link', 'Unlink' ]
-            insert: [ 'Image', 'Table', 'HorizontalRule', 'Iframe' ]
+            insert: [ 'Image', 'oembed', 'Iframe', 'Table', 'HorizontalRule' ]
             user_insert: [ 'Image', 'Table', 'HorizontalRule' ]
             document: ['Source']
             tools: [ 'Maximize' ]

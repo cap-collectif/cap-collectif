@@ -37,7 +37,7 @@ gulp.task('copy', function() {
         .pipe(plugins.rename({suffix: '.min'}))
         .pipe(gulp.dest('web/css/'));
 
-    gulp.src(app + '/libs/ckeditor/**/*')
+    gulp.src(app + '/js/ckeditor/**/*')
         .pipe(gulp.dest('web/js/ckeditor'));
 
     gulp.src(app + '/fonts/*.{ttf,woff,eof,svg,eot}')
