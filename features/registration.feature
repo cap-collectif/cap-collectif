@@ -1,10 +1,11 @@
 Feature: Registration
 
   Background:
-    Given the database contains fixtures
+    Given database contains fixtures
 
   Scenario: Register new user
-    Given I visited homepage
+    Given feature "registration" is enabled
+    And I visited homepage
     When I follow "Connexion"
     And I follow "S'inscrire"
     And I fill in the following:

@@ -126,10 +126,26 @@ abstract class DefaultContext extends MinkContext implements Context, KernelAwar
     }
 
     /**
-     * @Given /^the database contains fixtures$/
+     * @Given database contains fixtures
      */
-    public function theDatabaseContainsFixtures()
+    public function databaseContainsFixtures()
     {
         exec('php app/console doctrine:fixtures:load -n -e test');
+    }
+
+    /**
+     * @Given all features are enabled
+     */
+    public function allFeaturesAreEnabled()
+    {
+        exec('php app/console capco:reinit-feature-flags --force');
+    }
+
+    /**
+     * @Given feature :feature is enabled
+     */
+    public function featureIsEnabled($feature)
+    {
+        $this->getService('capco.toggle.manager')->activate($feature);
     }
 }
