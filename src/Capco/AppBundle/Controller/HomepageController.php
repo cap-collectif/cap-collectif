@@ -60,7 +60,7 @@ class HomepageController extends Controller
 
     /**
      * @Cache(expires="+1 minutes", maxage="60", smaxage="60", public="true")
-     * @Template("CapcoAppBundle:Idea:lastIdeas.html.twig")
+     * @Template("CapcoAppBundle:Homepage:lastIdeas.html.twig")
      */
     public function lastIdeasAction($max = 4, $offset = 0)
     {

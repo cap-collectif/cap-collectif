@@ -44,7 +44,7 @@
             {{ render(controller('CapcoAppBundle:Theme:themeConsultations', {'theme': theme})) }}
         </div>
     {% endif %}
-    
+
     {{ render(controller('CapcoAppBundle:Theme:themeIdeas', {'theme': theme})) }}
 
     {% if theme.Events|length > 0 %}
