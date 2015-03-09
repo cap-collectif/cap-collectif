@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Class IdeaComment
@@ -16,14 +17,14 @@ class IdeaComment extends AbstractComment
      * @var
      *
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Idea", inversedBy="comments", cascade={"persist"})
-     * @ORM\JoinColumn(name="idea_id", referencedColumnName="id", onDelete="CASCADE", nullable=true)
+     * @ORM\JoinColumn(name="idea_id", referencedColumnName="id", onDelete="CASCADE")
+     * @Assert\NotNull()
      */
-    private $Idea = null;
+    private $Idea;
 
     function __construct()
     {
         parent::__construct();
-        $this->Idea = null;
     }
 
     /**

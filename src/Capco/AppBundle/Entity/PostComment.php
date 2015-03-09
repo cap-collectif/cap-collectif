@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Class PostComment
@@ -16,14 +17,14 @@ class PostComment extends AbstractComment
      * @var
      *
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Post", inversedBy="comments", cascade={"persist"})
-     * @ORM\JoinColumn(name="post_id", referencedColumnName="id", onDelete="CASCADE", nullable=true)
+     * @ORM\JoinColumn(name="post_id", referencedColumnName="id", onDelete="CASCADE")
+     * @Assert\NotNull()
      */
-    private $Post = null;
+    private $Post;
 
     function __construct()
     {
         parent::__construct();
-        $this->Post = null;
     }
 
     /**

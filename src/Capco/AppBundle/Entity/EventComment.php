@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Class EventComment
@@ -16,14 +17,14 @@ class EventComment extends AbstractComment
      * @var
      *
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Event", inversedBy="comments", cascade={"persist"})
-     * @ORM\JoinColumn(name="event_id", referencedColumnName="id", onDelete="CASCADE", nullable=true)
+     * @ORM\JoinColumn(name="event_id", referencedColumnName="id", onDelete="CASCADE")
+     * @Assert\NotNull()
      */
-    private $Event = null;
+    private $Event;
 
     function __construct()
     {
         parent::__construct();
-        $this->Event = null;
     }
 
     /**
