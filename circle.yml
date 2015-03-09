@@ -15,10 +15,6 @@ deployment:
         commands:
             - bundle exec cap preprod deploy
 
-general:
-    branches:
-        only:
-            - develop # list of branches to build
 
 machine:
     php:
