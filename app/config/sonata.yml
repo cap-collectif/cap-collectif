@@ -205,3 +205,4 @@ sonata_user:
     admin:
         user:
             class: Capco\AdminBundle\Admin\UserAdmin
+            controller: CapcoAdminBundle:User

@@ -404,4 +404,5 @@ form:
 
 user:
   delete:
+    batch_denied: Impossible de supprimer un super administrateur.
     warning_message: Attention, si vous supprimez cet utilisateur, tous ses contenus seront également supprimés.

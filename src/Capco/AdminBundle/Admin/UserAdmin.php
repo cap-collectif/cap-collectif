@@ -2,29 +2,16 @@
 
 namespace Capco\AdminBundle\Admin;
 
+use Capco\UserBundle\Entity\User;
 use Sonata\UserBundle\Admin\Model\UserAdmin as BaseAdmin;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Show\ShowMapper;
-
 use FOS\UserBundle\Model\UserManagerInterface;
 
 class UserAdmin extends BaseAdmin
 {
-    public function getFormBuilder()
-    {
-        $this->formOptions['data_class'] = $this->getClass();
-
-        $options = $this->formOptions;
-        $options['validation_groups'] = 'Default';
-
-        $formBuilder = $this->getFormContractor()->getFormBuilder( $this->getUniqid(), $options);
-
-        $this->defineFormBuilder($formBuilder);
-
-        return $formBuilder;
-    }
 
     private $rolesLabels = [
         'ROLE_USER' => 'admin.fields.user.roles.user',
@@ -38,6 +25,20 @@ class UserAdmin extends BaseAdmin
     ];
 
     protected $translationDomain = 'SonataAdminBundle';
+
+    public function getFormBuilder()
+    {
+        $this->formOptions['data_class'] = $this->getClass();
+
+        $options = $this->formOptions;
+        $options['validation_groups'] = 'Default';
+
+        $formBuilder = $this->getFormContractor()->getFormBuilder( $this->getUniqid(), $options);
+
+        $this->defineFormBuilder($formBuilder);
+
+        return $formBuilder;
+    }
 
     /**
      * {@inheritdoc}
@@ -68,9 +69,13 @@ class UserAdmin extends BaseAdmin
                 'label' => 'admin.fields.user.action',
                 'translation_domain' => 'SonataAdminBundle',
                 'actions' => array(
-                    'edit' => array(),
+                    'edit' => array(
+                        'template' => 'CapcoAdminBundle:User:list__action_edit.html.twig',
+                    ),
                     'show' => array(),
-                    'delete' => array(),
+                    'delete' => array(
+                        'template' => 'CapcoAdminBundle:User:list__action_delete.html.twig',
+                    ),
                 )
             ))
         ;
