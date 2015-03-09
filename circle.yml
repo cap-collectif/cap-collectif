@@ -27,4 +27,4 @@ test:
     override:
         - phpunit -c app -v
         - bin/phpspec run
-        # - bin/behat
+        - bin/behat
