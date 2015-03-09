@@ -87,21 +87,9 @@
         </div>
     </div>
 
-    {% if capco_comment_can_show(idea) and idea.commentsCount > 0 %}
-        {{ render(controller('CapcoAppBundle:Comment:showComments', {'object': idea})) }}
-    {% endif %}
-
-    {% if capco_comment_can_add(idea) %}
-        {{ render(controller('CapcoAppBundle:Comment:create', {'objectId': idea.id, 'objectType': idea.className})) }}
-    {% endif %}
-
-    {% if idea.isTrashed == false %}
-        {{ render_esi(controller('CapcoAppBundle:Idea:lastIdeas', {'max': 4, 'offset': 0})) }}
-    {% endif %}
-
     {% if idea.isTrashed == true %}
         <div class="container">
-                <h2>{{ 'idea.show.trashed.reason'|trans({}, 'CapcoAppBundle') }}</h2>
+            <h2>{{ 'idea.show.trashed.reason'|trans({}, 'CapcoAppBundle') }}</h2>
             {% if  idea.trashedReason is not null %}
                 <p>{{ idea.trashedReason }}</p>
             {% else %}
@@ -109,6 +97,14 @@
             {% endif %}
             <p class="excerpt">{{ 'idea.show.trashed.date'|trans({'%date%': idea.trashedAt | localizeddate('long', 'none') }, 'CapcoAppBundle') }}</p>
         </div>
+    {% endif %}
+
+    {% if capco_comment_can_show(idea) and idea.commentsCount > 0 %}
+        {{ render(controller('CapcoAppBundle:Comment:showComments', {'object': idea})) }}
+    {% endif %}
+
+    {% if capco_comment_can_add(idea) %}
+        {{ render(controller('CapcoAppBundle:Comment:create', {'objectId': idea.id, 'objectType': idea.className})) }}
     {% endif %}
 
 {% endblock %}
