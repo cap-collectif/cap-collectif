@@ -71,7 +71,7 @@
     {% if app.security.token and is_granted('ROLE_SONATA_ADMIN') %}
         <ul class="sidebar-menu">
 
-            {% if is_granted('ROLE_SUPER_ADMIN') %}
+            {% if is_granted('ROLE_ADMIN') %}
                 <li class="treeview{% if 'admin_feature' == app.request.get('_route') %} active{% endif %}">
                     <a href="#">
                         <i class="fa fa-folder"></i>

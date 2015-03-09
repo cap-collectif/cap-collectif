@@ -16,7 +16,7 @@ class FeatureController extends Controller
      */
     public function listAction(Request $request)
     {
-        if (false == $this->get('security.authorization_checker')->isGranted('ROLE_SUPER_ADMIN')) {
+        if (false == $this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')) {
             throw new AccessDeniedException();
         }
 
@@ -36,7 +36,7 @@ class FeatureController extends Controller
      */
     public function switchAction($toggle)
     {
-        if (false == $this->get('security.authorization_checker')->isGranted('ROLE_SUPER_ADMIN')) {
+        if (false == $this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')) {
             throw new AccessDeniedException();
         }
 
