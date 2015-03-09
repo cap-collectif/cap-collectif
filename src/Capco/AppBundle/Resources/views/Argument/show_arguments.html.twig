@@ -60,23 +60,14 @@
                         'btn_classes': 'btn-xs  btn-dark-gray  btn--outline',
                     }) }}
 
-                    {%  if argument.canContribute %}
-                        {% if(userReportingArgument is empty) %}
+                    {% if argument.reports | length > 0 %}
+                        <button disabled="disabled" class="btn btn-xs btn-dark-gray"><i class="cap cap-flag-1"></i> {{ 'argument.report.reported'|trans({}, 'CapcoAppBundle') }}</button>
+                    {% else %}
                         <a href="{{ path('app_report_argument' ,{'consultationSlug': consultation.slug, 'opinionTypeSlug': opinionType.slug, 'opinionSlug': opinion.slug, 'argumentId': argument.id } ) }}" class="btn btn-xs btn-dark-gray  btn--outline"><i class="cap cap-flag-1"></i> {{ 'argument.report.submit'|trans({}, 'CapcoAppBundle') }}</a>
-                        {% else %}
-                            {% for userReport in userReportingArgument %}
-                                {% if(userReport.Argument.id == argument.id ) %}
-                                    <button disabled="disabled" class="btn btn-xs btn-dark-gray"><i class="cap cap-flag-1"></i> {{ 'argument.report.reported'|trans({}, 'CapcoAppBundle') }}</button>
-                                {% else %}
-                                    <a href="{{ path('app_report_argument' ,{'consultationSlug': consultation.slug, 'opinionTypeSlug': opinionType.slug, 'opinionSlug': opinion.slug, 'argumentId': argument.id } ) }}" class="btn btn-xs btn-dark-gray  btn--outline"><i class="cap cap-flag-1"></i> {{ 'argument.report.submit'|trans({}, 'CapcoAppBundle') }}</a>
-                                {% endif %}
-                            {% endfor %}
-                        {% endif  %}
+                    {% endif %}
 
-
-                        {% if currentUser is not null and currentUser == argument.Author and argument.canContribute %}
-                            <a href="{{ path('app_consultation_edit_argument' ,{'consultationSlug': consultation.slug, 'opinionTypeSlug': opinionType.slug, 'opinionSlug': opinion.slug, 'argumentId': argument.id } ) }}" class="btn  btn-dark-gray  btn--outline  btn-xs"><i class="cap cap-pencil-1"></i> {{ 'argument.update.button'|trans({}, 'CapcoAppBundle') }}</a>
-                        {% endif %}
+                    {% if argument.canContribute and currentUser is not null and currentUser == argument.Author %}
+                        <a href="{{ path('app_consultation_edit_argument' ,{'consultationSlug': consultation.slug, 'opinionTypeSlug': opinionType.slug, 'opinionSlug': opinion.slug, 'argumentId': argument.id } ) }}" class="btn  btn-dark-gray  btn--outline  btn-xs"><i class="cap cap-pencil-1"></i> {{ 'argument.update.button'|trans({}, 'CapcoAppBundle') }}</a>
                     {% endif %}
                 </div>
             </li>

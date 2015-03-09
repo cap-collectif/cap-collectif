@@ -39,15 +39,9 @@ class ArgumentController extends Controller
 
         $arguments = $this->getDoctrine()
             ->getRepository('CapcoAppBundle:Argument')
-            ->getByTypeAndOpinionOrdered($type, $opinion, $argumentSort);
-
-        $reportingArgument = $this->getDoctrine()->getRepository('CapcoAppBundle:Reporting')->findBy(array(
-            'Reporter' => $this->getUser(),
-            'Argument' => $arguments
-        ));
+            ->getByTypeAndOpinionOrderedJoinUserReports($type, $opinion, $argumentSort, $this->getUser());
 
         return [
-            'userReportingArgument' => $reportingArgument,
             'arguments' => $arguments,
             'argumentType' => $argumentType,
             'argumentTypeLabel' => $argumentTypeLabel,

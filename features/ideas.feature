@@ -14,7 +14,7 @@ Scenario: Can see ideas in not empty theme
   And I visited themespage
   When I follow "Immobilier"
   Then I should not see "Il n'y a aucune idée pour le moment."
-  And I should see 3 ".media--macro" elements
+  And I should see 4 ".media--macro" elements
 
 Scenario: Can create an idea when logged in
   Given feature "ideas" is enabled

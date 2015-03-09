@@ -77,7 +77,7 @@ class SourceRepository extends EntityRepository
      * @param $user
      * @return mixed
      */
-    public function getByOpinionJoinUserReports($opinion, $user)
+    public function getByOpinionJoinUserReports($opinion, $user = null)
     {
         $qb = $this->getIsEnabledQueryBuilder()
             ->addSelect('ca', 'o', 'aut', 'm', 'media')

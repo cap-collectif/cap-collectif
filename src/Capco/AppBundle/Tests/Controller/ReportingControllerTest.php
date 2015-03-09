@@ -21,7 +21,7 @@ class ReportingControllerTest extends BaseTestHelper
             $crawler = $client->request('GET', '/consultations/'.$opinion->getConsultation()->getSlug().'/opinions/'.$opinion->getOpinionType()->getSlug().'/'.$opinion->getSlug().'/report');
             if (!$opinion->getIsEnabled()) {
                 $this->assertEquals("404", $client->getResponse()->getStatusCode());
-            } else if (!$opinion->canContribute()) {
+            } else if (!$opinion->canDisplay()) {
                 $this->assertEquals("403", $client->getResponse()->getStatusCode());
             } else {
                 $this->assertEquals("200", $client->getResponse()->getStatusCode());
@@ -45,7 +45,7 @@ class ReportingControllerTest extends BaseTestHelper
             $crawler = $client->request('GET', '/consultations/'.$source->getOpinion()->getConsultation()->getSlug().'/opinions/'.$source->getOpinion()->getOpinionType()->getSlug().'/'.$source->getOpinion()->getSlug().'/sources/'.$source->getSlug().'/report');
             if (!$source->getIsEnabled()) {
                 $this->assertEquals("404", $client->getResponse()->getStatusCode());
-            } else if (!$source->canContribute()) {
+            } else if (!$source->canDisplay()) {
                 $this->assertEquals("403", $client->getResponse()->getStatusCode());
             } else {
                 $this->assertEquals("200", $client->getResponse()->getStatusCode());
@@ -67,7 +67,7 @@ class ReportingControllerTest extends BaseTestHelper
         foreach ($ideas as $idea) {
 
             $crawler = $client->request('GET', '/ideas/'.$idea->getSlug().'/report');
-            if (!$idea->canContribute()) {
+            if (!$idea->canDisplay()) {
                 $this->assertEquals("403", $client->getResponse()->getStatusCode());
             } else {
                 $this->assertEquals("200", $client->getResponse()->getStatusCode());
@@ -90,7 +90,7 @@ class ReportingControllerTest extends BaseTestHelper
             $crawler = $client->request('GET', '/consultations/'.$argument->getOpinion()->getConsultation()->getSlug().'/opinions/'.$argument->getOpinion()->getOpinionType()->getSlug().'/'.$argument->getOpinion()->getSlug().'/arguments/'.$argument->getId().'/report');
             if (!$argument->getIsEnabled()) {
                 $this->assertEquals("404", $client->getResponse()->getStatusCode());
-            } else if (!$argument->canContribute()) {
+            } else if (!$argument->canDisplay()) {
                 $this->assertEquals("403", $client->getResponse()->getStatusCode());
             } else {
                 $this->assertEquals("200", $client->getResponse()->getStatusCode());

@@ -46,7 +46,7 @@ class ReportingController extends Controller
             throw $this->createNotFoundException($this->get('translator')->trans('opinion.error.not_found', array(), 'CapcoAppBundle'));
         }
 
-        if (false == $opinion->canContribute()) {
+        if (false == $opinion->canDisplay()) {
             throw new AccessDeniedException($this->get('translator')->trans('opinion.error.no_contribute', array(), 'CapcoAppBundle'));
         }
 
@@ -112,7 +112,7 @@ class ReportingController extends Controller
             throw $this->createNotFoundException($this->get('translator')->trans('source.error.not_found', array(), 'CapcoAppBundle'));
         }
 
-        if (false == $source->canContribute()) {
+        if (false == $source->canDisplay()) {
             throw new AccessDeniedException($this->get('translator')->trans('source.error.no_contribute', array(), 'CapcoAppBundle'));
         }
 
@@ -180,7 +180,7 @@ class ReportingController extends Controller
             throw $this->createNotFoundException($this->get('translator')->trans('argument.error.not_found', array(), 'CapcoAppBundle'));
         }
 
-        if (false == $argument->canContribute()) {
+        if (false == $argument->canDisplay()) {
             throw new AccessDeniedException($this->get('translator')->trans('argument.error.no_contribute', array(), 'CapcoAppBundle'));
         }
 
@@ -240,7 +240,7 @@ class ReportingController extends Controller
             throw new AccessDeniedException($this->get('translator')->trans('error.access_restricted', array(), 'CapcoAppBundle'));
         }
 
-        if (false == $idea->canContribute() ) {
+        if (false == $idea->canDisplay() ) {
             throw new AccessDeniedException($this->get('translator')->trans('idea.error.no_contribute', array(), 'CapcoAppBundle'));
         }
 
@@ -284,7 +284,7 @@ class ReportingController extends Controller
             throw new AccessDeniedException($this->get('translator')->trans('error.access_restricted', array(), 'CapcoAppBundle'));
         }
 
-        if (false == $comment->canContribute() ) {
+        if (false == $comment->canDisplay() ) {
             throw new AccessDeniedException($this->get('translator')->trans('comment.error.no_contribute', array(), 'CapcoAppBundle'));
         }
 

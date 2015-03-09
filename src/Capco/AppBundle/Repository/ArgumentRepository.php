@@ -23,7 +23,7 @@ class ArgumentRepository extends EntityRepository
      * @param null $argumentSort
      * @return array
      */
-    public function getByTypeAndOpinionOrdered($type, $opinion, $argumentSort = null)
+    public function getByTypeAndOpinionOrderedJoinUserReports($type, $opinion, $argumentSort = null, $user = null)
     {
         $qb = $this->getIsEnabledQueryBuilder()
             ->addSelect('o', 'aut', 'm', 'v')
@@ -31,12 +31,14 @@ class ArgumentRepository extends EntityRepository
             ->leftJoin('o.Author', 'aut')
             ->leftJoin('aut.Media', 'm')
             ->leftJoin('a.Votes', 'v')
+            ->leftJoin('a.Reports', 'r', 'WITH', 'r.Reporter =  :user')
             ->andWhere('a.isTrashed = :notTrashed')
             ->andWhere('a.opinion = :opinion')
             ->andWhere('a.type = :type')
             ->setParameter('notTrashed', false)
             ->setParameter('opinion', $opinion)
-            ->setParameter('type', $type);
+            ->setParameter('type', $type)
+            ->setParameter('user', $user);
 
 
         if (null != $argumentSort) {

@@ -47,17 +47,16 @@
         {% endif %}
         <span class="opinion__votes-nb">{{ comment.VoteCount }}</span>
 
-        {%  if comment.canContribute %}
-            {% if comment.userHasReport(currentUser) %}
-                <button disabled="disabled" class="btn btn-xs btn-dark-gray"><i class="cap cap-flag-1"></i> {{ 'comment.report.reported'|trans({}, 'CapcoAppBundle') }}</button>
-            {% else %}
-                <a href="{{ path('app_report_comment' ,{'commentId': comment.id } ) }}" class="btn btn-xs btn-dark-gray  btn--outline"><i class="cap cap-flag-1"></i> {{ 'comment.report.submit'|trans({}, 'CapcoAppBundle') }}</a>
-            {% endif  %}
+        {% if comment.userHasReport(currentUser) %}
+            <button disabled="disabled" class="btn btn-xs btn-dark-gray"><i class="cap cap-flag-1"></i> {{ 'comment.report.reported'|trans({}, 'CapcoAppBundle') }}</button>
+        {% else %}
+            <a href="{{ path('app_report_comment' ,{'commentId': comment.id } ) }}" class="btn btn-xs btn-dark-gray  btn--outline"><i class="cap cap-flag-1"></i> {{ 'comment.report.submit'|trans({}, 'CapcoAppBundle') }}</a>
+        {% endif  %}
 
 
-            {% if currentUser is not null and currentUser == comment.Author and comment.canContribute %}
-                <a href="{{ path('app_comment_edit' ,{'commentId': comment.id } ) }}" class="btn  btn-dark-gray  btn--outline  btn-xs"><i class="cap cap-pencil-1"></i> {{ 'comment.update.button'|trans({}, 'CapcoAppBundle') }}</a>
-            {% endif %}
+        {% if comment.canContribute and currentUser is not null and currentUser == comment.Author and comment.canContribute %}
+            <a href="{{ path('app_comment_edit' ,{'commentId': comment.id } ) }}" class="btn  btn-dark-gray  btn--outline  btn-xs"><i class="cap cap-pencil-1"></i> {{ 'comment.update.button'|trans({}, 'CapcoAppBundle') }}</a>
         {% endif %}
+        
     </div>
 </li>

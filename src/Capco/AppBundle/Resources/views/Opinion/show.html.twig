@@ -105,32 +105,34 @@
                                     </div>
                                 {% endif %}
 
-                                <div class="pull-right  opinion__action-buttons">
+                            {% endif %}
 
-                                    <div class="opinion__vote-group">
-                                        {{ sonata_block_render({'type': 'capco.block.service.share_button'}, {
-                                            'url': (url('app_consultation_show_opinion', {'consultationSlug': consultation.slug, 'opinionTypeSlug': opinionType.slug, 'opinionSlug': opinion.slug}) ~ '#details'),
-                                            'title': opinion.title,
-                                            'btn_classes': 'btn-dark-gray  btn--outline',
-                                        }) }}
-                                    </div>
+                            <div class="pull-right  opinion__action-buttons">
 
-                                    <div class="opinion__vote-group">
-                                        {% if opinion.reports | length > 0 %}
-                                            <button disabled="disabled" class="btn  btn-dark-gray"><i class="cap cap-flag-1"></i> {{ 'opinion.report.reported'|trans({}, 'CapcoAppBundle') }}</button>
-                                        {% else %}
-                                            <a href="{{ path('app_report_opinion' ,{'consultationSlug': consultation.slug, 'opinionTypeSlug': opinionType.slug, 'opinionSlug': opinion.slug } ) }}" class="btn  btn-dark-gray  btn--outline"><i class="cap cap-flag-1"></i> {{ 'opinion.report.submit'|trans({}, 'CapcoAppBundle') }}</a>
-                                        {% endif %}
-                                    </div>
-
-                                    <div class="opinion__vote-group">
-                                        {% if app.user is not null and app.user == opinion.Author %}
-                                        <a href="{{ path('app_consultation_edit_opinion' ,{'consultationSlug': consultation.slug, 'opinionTypeSlug': opinion.opinionType.slug, 'opinionSlug': opinion.slug } ) }}" class="btn  btn-dark-gray  btn--outline"><i class="cap cap-pencil-1"></i> {{ 'opinion.update.button'|trans({}, 'CapcoAppBundle') }}</a>
-                                        {% endif %}
-                                    </div>
+                                <div class="opinion__vote-group">
+                                    {{ sonata_block_render({'type': 'capco.block.service.share_button'}, {
+                                        'url': (url('app_consultation_show_opinion', {'consultationSlug': consultation.slug, 'opinionTypeSlug': opinionType.slug, 'opinionSlug': opinion.slug}) ~ '#details'),
+                                        'title': opinion.title,
+                                        'btn_classes': 'btn-dark-gray  btn--outline',
+                                    }) }}
                                 </div>
 
-                            {% endif %}
+                                <div class="opinion__vote-group">
+                                    {% if opinion.reports | length > 0 %}
+                                        <button disabled="disabled" class="btn  btn-dark-gray"><i class="cap cap-flag-1"></i> {{ 'opinion.report.reported'|trans({}, 'CapcoAppBundle') }}</button>
+                                    {% else %}
+                                        <a href="{{ path('app_report_opinion' ,{'consultationSlug': consultation.slug, 'opinionTypeSlug': opinionType.slug, 'opinionSlug': opinion.slug } ) }}" class="btn  btn-dark-gray  btn--outline"><i class="cap cap-flag-1"></i> {{ 'opinion.report.submit'|trans({}, 'CapcoAppBundle') }}</a>
+                                    {% endif %}
+                                </div>
+
+                                {% if opinion.canContribute and app.user is not null and app.user == opinion.Author %}
+                                    <div class="opinion__vote-group">
+                                        <a href="{{ path('app_consultation_edit_opinion' ,{'consultationSlug': consultation.slug, 'opinionTypeSlug': opinion.opinionType.slug, 'opinionSlug': opinion.slug } ) }}" class="btn  btn-dark-gray  btn--outline"><i class="cap cap-pencil-1"></i> {{ 'opinion.update.button'|trans({}, 'CapcoAppBundle') }}</a>
+                                    </div>
+                                {% endif %}
+
+                            </div>
+
                         </div> <!-- .opinion__buttons -->
 
                         <div class="panel-group" id="accordion">
@@ -186,16 +188,14 @@
                                                     {% endif %}
                                                     <span class="nb-votes">{{ source.voteCountSource }}</span>
 
-                                                    {% if source.canContribute %}
-                                                        {% if source.reports | length > 0 %}
-                                                            <button disabled="disabled" class="btn btn-xs btn-dark-gray"><i class="cap cap-flag-1"></i> {{ 'source.report.reported'|trans({}, 'CapcoAppBundle') }}</button>
-                                                        {% else %}
-                                                            <a href="{{ path('app_report_source' ,{'consultationSlug': consultation.slug, 'opinionTypeSlug': opinionType.slug, 'opinionSlug': opinion.slug, 'sourceSlug': source.slug } ) }}" class="btn btn-xs btn-dark-gray  btn--outline"><i class="cap cap-flag-1"></i> {{ 'source.report.submit'|trans({}, 'CapcoAppBundle') }}</a>
-                                                        {% endif %}
+                                                    {% if source.reports | length > 0 %}
+                                                        <button disabled="disabled" class="btn btn-xs btn-dark-gray"><i class="cap cap-flag-1"></i> {{ 'source.report.reported'|trans({}, 'CapcoAppBundle') }}</button>
+                                                    {% else %}
+                                                        <a href="{{ path('app_report_source' ,{'consultationSlug': consultation.slug, 'opinionTypeSlug': opinionType.slug, 'opinionSlug': opinion.slug, 'sourceSlug': source.slug } ) }}" class="btn btn-xs btn-dark-gray  btn--outline"><i class="cap cap-flag-1"></i> {{ 'source.report.submit'|trans({}, 'CapcoAppBundle') }}</a>
+                                                    {% endif %}
 
-                                                        {% if app.user is not null and app.user == source.Author %}
-                                                            <a href="{{ path('app_edit_source' ,{'consultationSlug': consultation.slug, 'opinionTypeSlug': opinionType.slug, 'opinionSlug': opinion.slug, 'sourceSlug': source.slug} ) }}" class="btn  btn-dark-gray  btn--outline  btn-xs"><i class="cap cap-pencil-1"></i> {{ 'source.update.button'|trans({}, 'CapcoAppBundle') }}</a>
-                                                        {% endif %}
+                                                    {% if app.user is not null and app.user == source.Author %}
+                                                        <a href="{{ path('app_edit_source' ,{'consultationSlug': consultation.slug, 'opinionTypeSlug': opinionType.slug, 'opinionSlug': opinion.slug, 'sourceSlug': source.slug} ) }}" class="btn  btn-dark-gray  btn--outline  btn-xs"><i class="cap cap-pencil-1"></i> {{ 'source.update.button'|trans({}, 'CapcoAppBundle') }}</a>
                                                     {% endif %}
                                                 </div>
                                             </div>
