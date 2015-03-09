@@ -41,6 +41,7 @@ admin.label.features: Fonctionnalités
 admin.label.video: Vidéos de la page d'accueil
 admin.label.comment: Commentaires
 admin.label.comment_vote: Votes sur les commentaires
+admin.label.event_registrations: Inscription à l'événement
 
 # Messages
 admin:
@@ -169,10 +170,19 @@ admin:
       address: Adresse postale
       zipcode: Code postal
       city: Ville
-      link: Lien d'inscription
+      link: Lien d'inscription externe
       country: Pays
       lat: Latitude
       lng: Longitude
+      registration_enable: Module d'inscription interne
+    event_registration:
+      event: Événement
+      registered: Inscrit
+      username: Utilisateur externe
+      email: Adresse mail externe
+      user: Utilisateur
+      private: Anonyme
+
     footer_social_network:
       title: Titre
       is_enabled: Publié

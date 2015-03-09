@@ -1,0 +1,5 @@
+{# src/Acme/DemoBundle/Resources/views/CRUD/list__action_clone.html.twig #}
+
+{% if object.registrationEnable %}
+    <a class="btn btn-sm btn-default view_link" href="{{ path('admin_capco_app_eventregistration_list', {'filter[event][value]': object.id }) }}">Inscriptions</a>
+{% endif %}

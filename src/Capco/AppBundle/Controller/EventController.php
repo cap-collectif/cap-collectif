@@ -8,8 +8,16 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Cache;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+
+use Capco\AppBundle\Entity\Event;
+use Capco\AppBundle\Entity\EventRegistration;
+use Capco\AppBundle\Form\EventAnonymousRegistrationType;
+use Capco\AppBundle\Form\EventRegistrationType;
+use Capco\AppBundle\Form\EventUnsubscribeType;
+
 
 class EventController extends Controller
 {
@@ -109,22 +117,38 @@ class EventController extends Controller
     }
 
     /**
-     * @Route("/events/{slug}", name="app_event_show", defaults={"_feature_flag" = "calendar"} )
+     * @Route("/events/{slug}", name="app_event_show", defaults={"_feature_flag" = "calendar"})
+     * @ParamConverter("event", options={"mapping": {"slug": "slug"}, "repository_method" = "getOne"})
      * @Template()
      * @param $request
      * @return array
      */
-    public function showAction(Request $request, $slug)
+    public function showAction(Request $request, Event $event)
     {
-        $event = $this->get('capco.event.repository')->getOne($slug);
+        $eventHelper = $this->container->get('capco.event.helper');
 
-        if (!$event) {
-            throw new NotFoundHttpException('Could not find a published event for this slug.');
+        if (!$eventHelper->isRegistrationPossible($event)) {
+            return [ 'event' => $event ];
         }
 
-        return [
-            'event' => $event
-        ];
+        $user = $this->getUser();
+        $registration = $eventHelper->findUserRegistrationOrCreate($event, $user);
+        $form = $this->createForm(new EventRegistrationType($user, $registration->isConfirmed()), $registration);
+
+        if ($request->getMethod() == 'POST') {
+            $registration->setUser($user);
+            $form->handleRequest($request);
+            $registration->setConfirmed(!$registration->isConfirmed());
+
+            if ($form->isValid()) {
+                $em = $this->getDoctrine()->getManager();
+                $em->persist($registration);
+                $em->flush();
+                return $this->redirect($this->generateUrl('app_event_show', ['slug' => $event->getSlug() ]));
+            }
+        }
+
+        return [ 'form' => $form->createView(), 'event' => $event ];
     }
 
     /**

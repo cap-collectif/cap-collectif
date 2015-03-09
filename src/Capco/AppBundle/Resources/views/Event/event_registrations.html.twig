@@ -1,0 +1,34 @@
+{% macro registration_user(registration, col) %}
+<div class=" {{ 'col-xs-12  col-sm-6  col-md-' ~ col ~ ' col-lg-' ~ col }} ">
+    <div class="media  media--macro  block  block--bordered">
+    {% if registration.private %}
+        <div class="media-body">
+            Anonyme
+        </div>
+    {% elseif registration.user %}
+        <a class="pull-left" href="{{ path('capco_user_profile_show_all', {'slug': registration.user.slug}) }}">
+            {% thumbnail registration.user.Media|capco_default_avatar, 'avatar' with {'title': registration.user.username, 'alt': registration.user.username, 'class': 'media-object img-circle'} %}
+        </a>
+        <div class="media-body">
+            {{ registration.user.username }}
+        </div>
+    {% else %}
+        {{ registration.username}}
+    {% endif %}
+    </div>
+</div>
+{% endmacro %}
+
+{% import _self as render %}
+
+{% if limit is defined %}
+    {% for registration in event.registrations|slice(0, limit) %}
+        {{ render.registration_user(registration, 4) }}
+    {% endfor %}
+    {% else %}
+        {% for registration in event.registrations %}
+            {{ render.registration_user(registration, 6) }}
+        {% endfor %}
+{% endif %}
+
+

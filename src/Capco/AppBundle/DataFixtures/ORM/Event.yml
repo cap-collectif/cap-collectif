@@ -50,8 +50,8 @@ Capco\AppBundle\Entity\Event:
         Author: @user<numberBetween(1, 5)>
         address: 457 Rue de Picardie
         city: Bordeaux
-        link: http://www.PHPTour2015.fr
         Media: @MediaConsultation3
+        registrationEnable: true
     event4:
         title: SymfonyLive2015
         isEnabled: true

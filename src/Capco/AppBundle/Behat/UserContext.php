@@ -4,6 +4,8 @@ namespace Capco\AppBundle\Behat;
 
 use Behat\Gherkin\Node\TableNode;
 
+use Capco\AppBundle\Entity\EventRegistration;
+
 class UserContext extends DefaultContext
 {
     /**
@@ -38,6 +40,22 @@ class UserContext extends DefaultContext
         $this->fillField('_password', $pwd);
         $this->pressButton('Se connecter');
 
+    }
+
+    /**
+     * @Given :email is registered to event :slug
+     */
+    public function isRegisteredToEvent($email, $slug)
+    {
+        $event = $this->getRepository('CapcoAppBundle:Event')->findOneBySlug($slug);
+        $registration = (new EventRegistration($event))
+                            ->setEmail($email)
+                            ->setUsername($email)
+                            ->setPrivate(false)
+                        ;
+
+        $this->getEntityManager()->persist($registration);
+        $this->getEntityManager()->flush();
     }
 
 }

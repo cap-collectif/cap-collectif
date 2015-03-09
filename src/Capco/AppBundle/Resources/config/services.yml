@@ -191,3 +191,12 @@ services:
     capco.consultation.download.resolver:
         class: %capco.consultation.download.resolver.class%
         arguments: [@doctrine.orm.entity_manager, @templating, @translator]
+
+    capco.event.helper:
+        class: Capco\AppBundle\Helper\EventHelper
+
+    capco.unlisted_email.validator:
+        class: Capco\AppBundle\Validator\Constraints\HasUnlistedEmailValidator
+        arguments: [@doctrine.orm.entity_manager]
+        tags:
+            - { name: validator.constraint_validator, alias: unlisted_email.validator }

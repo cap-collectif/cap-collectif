@@ -7,13 +7,13 @@ use Symfony\Component\Validator\Constraint;
 /**
  * @Annotation
  */
-class HasAuthor extends Constraint
+class HasUnlistedEmail extends Constraint
 {
-    public $message = 'comment.create.no_author_error';
+    public $message = 'event_registration.create.listed_email';
 
     public function validatedBy()
     {
-        return get_class($this).'Validator';
+        return 'unlisted_email.validator';
     }
 
     public function getTargets()

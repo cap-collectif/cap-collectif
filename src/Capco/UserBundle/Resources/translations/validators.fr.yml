@@ -2,3 +2,6 @@ user:
   register:
     invalid_email: Veuillez entrer une adresse électronique valide.
     already_used_email: Cette adresse électronique est déjà utilisée.
+event_registration:
+    create:
+        listed_email: Cette adresse électronique a déjà été utilisée pour s'inscrire à l'événement.

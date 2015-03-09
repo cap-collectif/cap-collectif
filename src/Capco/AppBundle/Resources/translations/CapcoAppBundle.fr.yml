@@ -600,6 +600,20 @@ event:
   no_result:  Aucun évènement ne correspond à ces critères de recherche.
   link_button: Inscription
 
+# event registration
+event_registration:
+  create:
+    my_account: S'inscrire avec mon compte
+    name: Nom
+    email: Adresse électronique
+    private: Ne pas rendre publique mon inscription
+    register: S'inscrire
+    submit: S'inscrire à l'événement
+  listing: Participants
+  see_listing_all: Voir tous les participants
+  listing_all: Liste des participants
+  unsubscribe: Se désinscrire
+
 # comments
 comment:
   linked_object: Lié à l'objet :

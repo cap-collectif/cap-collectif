@@ -91,10 +91,11 @@ class EventRepository extends EntityRepository
     public function getOne($slug)
     {
         $qb = $this->getIsEnabledQueryBuilder()
-            ->addSelect('a, t, media')
+            ->addSelect('a, t, media, registration')
             ->leftJoin('e.Author', 'a')
             ->leftJoin('e.Media', 'media')
             ->leftJoin('e.Theme', 't')
+            ->leftJoin('e.registrations', 'registration', 'WITH', 'registration.confirmed = true')
             ->andWhere('e.slug = :slug')
             ->setParameter('slug', $slug)
             ;

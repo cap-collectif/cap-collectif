@@ -7,9 +7,9 @@ use Symfony\Component\Validator\Constraint;
 /**
  * @Annotation
  */
-class HasAuthor extends Constraint
+class HasAnonymousOrUser extends Constraint
 {
-    public $message = 'comment.create.no_author_error';
+    public $message = 'Invalid entity, it must belongs to a User or an Anonymous';
 
     public function validatedBy()
     {

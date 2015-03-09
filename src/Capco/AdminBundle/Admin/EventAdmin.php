@@ -103,6 +103,7 @@ class EventAdmin extends Admin
             ->add('_action', 'actions', array(
                 'actions' => array(
                     'show' => array(),
+                    'registrations' => array('template' => 'CapcoAdminBundle:CRUD:list__action_registrations.html.twig'),
                     'edit' => array(),
                     'delete' => array(),
                 )
@@ -152,6 +153,10 @@ class EventAdmin extends Admin
             ))
             ->end()
             ->with('admin.fields.event.group_meta')
+            ->add('registrationEnable', null, [
+                  'label' => 'admin.fields.event.registration_enable',
+                  'required' => false
+            ])
             ->add('link', 'url', array(
                 'label' => 'admin.fields.event.link',
                 'required' => false,
@@ -294,11 +299,19 @@ class EventAdmin extends Admin
     public function prePersist($event)
     {
         $this->setCoord($event);
+        $this->checkRegistration($event);
     }
 
     public function preUpdate($event)
     {
         $this->setCoord($event);
+        $this->checkRegistration($event);
+    }
+
+    private function checkRegistration($event) {
+        if ($event->getLink() != null) {
+            $event->setRegistrationEnable(false);
+        }
     }
 
     private function setCoord(Event $event)

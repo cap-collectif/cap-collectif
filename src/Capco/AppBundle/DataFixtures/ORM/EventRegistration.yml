@@ -1,0 +1,7 @@
+Capco\AppBundle\Entity\EventRegistration:
+    eventRegistration{1..10}:
+        __construct: [@event3]
+        username: <username()>
+        email: <email()>
+        private: false
+        confirmed: true

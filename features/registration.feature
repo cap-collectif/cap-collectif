@@ -1,5 +1,6 @@
 Feature: Registration
 
+  @database
   Scenario: Register new user
     Given feature "registration" is enabled
     And I visited "home page"

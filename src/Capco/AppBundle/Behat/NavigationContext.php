@@ -24,4 +24,12 @@ class NavigationContext extends PageObjectContext
     {
         $this->getPage($pageName)->open($parameters->getRowsHash());
     }
+
+    /**
+     * @Given I visited :pageName :slug
+     */
+    public function iVisitedPageSlug($pageName, $slug)
+    {
+        $this->getPage($pageName)->open(['slug' => $slug]);
+    }
 }

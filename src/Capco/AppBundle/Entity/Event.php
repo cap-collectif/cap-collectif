@@ -167,9 +167,20 @@ class Event implements CommentableInterface
      */
     private $comments;
 
+    /**
+     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\EventRegistration", mappedBy="event",  cascade={"persist", "remove"})
+     */
+    private $registrations;
+
+    /**
+     * @ORM\Column(name="registration_enable", type="boolean", nullable=false)
+     */
+    private $registrationEnable = false;
+
     function __construct()
     {
         $this->comments = new ArrayCollection();
+        $this->registrations = new ArrayCollection();
         $this->commentsCount = 0;
         $this->updatedAt = new \Datetime;
     }
@@ -564,6 +575,36 @@ class Event implements CommentableInterface
     {
         $this->slug = $slug;
     }
+
+    public function getRegistrations()
+    {
+        return $this->registrations;
+    }
+
+    /**
+     * Set registrationEnable
+     *
+     * @param boolean $registrationEnable
+     *
+     * @return Event
+     */
+    public function setRegistrationEnable($registrationEnable)
+    {
+        $this->registrationEnable = $registrationEnable;
+
+        return $this;
+    }
+
+    /**
+     * Is registrationEnable
+     *
+     * @return boolean
+     */
+    public function isRegistrationEnable()
+    {
+        return $this->registrationEnable;
+    }
+
 
     // **************** Custom methods ***************
 
