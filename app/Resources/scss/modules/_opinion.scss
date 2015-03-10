@@ -300,6 +300,14 @@
   .opinion__vote-group {
     display:inline-block;
     margin-right: 1px;
+
+    &[data-toggle=buttons] label.btn > input[type=checkbox],
+    &[data-toggle=buttons] label.btn > input[type=radio] {
+      position: absolute;
+      z-index: -1;
+      opacity: 0;
+      filter: alpha(opacity=0);
+    }
   }
 
   .opinion__vote-group:last-child {

@@ -118,6 +118,15 @@ App.module = function ($) {
         });
     };
 
+    var initPopovers = function(triggers, options) {
+        var $triggers = $(triggers);
+        $triggers.attr('tabindex', '0');
+        $triggers.popover(options).on('click', function(e){
+            e.preventDefault();
+            e.stopPropagation();
+        });
+    };
+
     var AppPublic = {
         equalheight: equalheight,
         resized: resized,
@@ -126,7 +135,8 @@ App.module = function ($) {
         video: video,
         externalLinks: externalLinks,
         showMap: showMap,
-        autocollapse: autocollapse
+        autocollapse: autocollapse,
+        initPopovers: initPopovers,
     };
 
     return AppPublic;

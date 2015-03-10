@@ -55,7 +55,9 @@
                 {% if userVoteCount == 0 %}
                     {{ form_start(form, {'attr':{"class":"inline"} } ) }}
                         {{ form_errors(form) }}
-                        <button class="btn btn-success"><i class="cap cap-hand-like-2-1"></i> {{ 'idea.vote.submit'|trans({}, 'CapcoAppBundle') }}</button>
+                        <a class="connection-popover-js">
+                            <button class="btn btn-success"><i class="cap cap-hand-like-2-1"></i> {{ 'idea.vote.submit'|trans({}, 'CapcoAppBundle') }}</button>
+                        </a>
                         <span class="nb-bordered">{{ idea.voteCount }}</span>
                     {{ form_end(form) }}
                 {% else %}
@@ -75,7 +77,7 @@
 
             <div class="pull-right no-float-mobile">
                 {% if(userReportingIdea == false) %}
-                    <a href="{{ path('app_report_idea' ,{'idea_slug': idea.slug } ) }}" class="btn btn-dark-gray  btn--outline"><i class="cap cap-flag-1"></i> {{ 'idea.report.submit'|trans({}, 'CapcoAppBundle') }}</a>
+                    <a href="{{ path('app_report_idea' ,{'idea_slug': idea.slug } ) }}" class="btn btn-dark-gray  btn--outline  connection-popover-js"><i class="cap cap-flag-1"></i> {{ 'idea.report.submit'|trans({}, 'CapcoAppBundle') }}</a>
                 {% else %}
                     <button disabled="disabled" class="btn btn-dark-gray"><i class="cap cap-flag-1"></i> {{ 'idea.report.reported'|trans({}, 'CapcoAppBundle') }}</button>
                 {% endif %}
@@ -118,6 +120,15 @@
             moreLink: '<a href="#">{{ 'comment.read_more'|trans({}, 'CapcoAppBundle') }}</a>',
             lessLink: '<a href="#">{{ 'comment.read_less'|trans({}, 'CapcoAppBundle') }}</a>'
         });
+        {% if null == app.user %}
+            App.module.initPopovers('.connection-popover-js', {
+                placement: "top",
+                html: "true",
+                trigger: "focus",
+                title: "{{ 'user.login.popover.title'|trans({}, 'CapcoAppBundle') }}",
+                content: "<p>{{ 'user.login.popover.body'|trans({}, 'CapcoAppBundle') }}</p><p><a href='{{ path('fos_user_registration_register') }}' class='btn  btn-success  center-block'>{{ 'user.login.popover.signin'|trans({}, 'CapcoAppBundle') }}</a></p><p><a href='{{ path('fos_user_security_login') }}' class='btn  btn-default  center-block'>{{ 'user.login.popover.login'|trans({}, 'CapcoAppBundle') }}</a></p>"
+            });
+        {% endif %}
     </script>
 {% endblock %}
 

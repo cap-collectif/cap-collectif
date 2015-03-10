@@ -5,10 +5,12 @@
         {% for child in form %}
             <div class="opinion__vote-group" data-toggle="buttons">
             	{% set voteType = child.vars['value'] %}
-        		<label class="btn btn-{{ typeStyles[voteType]['color'] }} {% if previousType == voteType %}active{% else %}btn--outline{% endif %}">
-        			{{ form_widget(child) }}
-        			<i class="cap cap-{% if previousType == voteType %}{{ typeStyles[voteType]['icon_checked'] }}{% else %}{{ typeStyles[voteType]['icon'] }}{% endif %}"></i> {{ child.vars.label|trans({}, child.vars.translation_domain) }}
-            	</label>
+                <a class="connection-popover-js">
+                    <label class="btn btn-{{ typeStyles[voteType]['color'] }} {% if previousType == voteType %}active{% else %}btn--outline{% endif %}">
+                        {{ form_widget(child) }}
+                        <i class="cap cap-{% if previousType == voteType %}{{ typeStyles[voteType]['icon_checked'] }}{% else %}{{ typeStyles[voteType]['icon'] }}{% endif %}"></i> {{ child.vars.label|trans({}, child.vars.translation_domain) }}
+                    </label>
+                </a>
   				<span class="nb-bordered  opinion__votes-nb" data-value="{{ voteCounts[voteType] }}">{{ voteCounts[voteType] }}</span>
     		</div>
         {% endfor %}

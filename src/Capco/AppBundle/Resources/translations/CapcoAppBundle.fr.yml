@@ -485,6 +485,11 @@ user:
       gplus: Se connecter avec Google+
     or: ou
     submit: Se connecter
+    popover:
+      title: Connectez-vous pour contribuer
+      body: Vous devez être connecté pour réaliser cette action.
+      login: Connexion
+      signin: Inscription
   register:
     confirmation_message: |
       Bonjour %username%,

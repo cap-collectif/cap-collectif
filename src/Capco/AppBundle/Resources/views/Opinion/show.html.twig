@@ -74,7 +74,7 @@
 
                     <div class="opinion__description">
                         {% if(nbVotes > 0) %}
-                        <div id="piechart-{{ opinion.id }}" class="opinion__chart  center-block"></div>
+                            <div id="piechart-{{ opinion.id }}" class="opinion__chart  center-block"></div>
                         {% endif %}
                         {{ opinion.body|raw }}
                         <div class="opinion__buttons">
@@ -87,12 +87,10 @@
                             {% if opinion.canContribute %}
 
                                 {% form_theme opinionVoteForm 'CapcoAppBundle:Form:opinion_vote.html.twig' %}
-                                {{ form_start(opinionVoteForm, {'attr': {'class': 'vote-form'}} ) }}
-                                    {{ form_errors(opinionVoteForm) }}
-                                    {{ form_widget(opinionVoteForm.value, {'previousType': previousValue, 'typeStyles': opinionVoteStyles, 'voteCounts': opinionVoteCounts}) }}
-                                    {{ form_rest(opinionVoteForm) }}
-
-
+                                {{ form_start(opinionVoteForm, {'attr': {'class': 'vote-form '} }) }}
+                                {{ form_errors(opinionVoteForm) }}
+                                {{ form_widget(opinionVoteForm.value, {'previousType': previousValue, 'typeStyles': opinionVoteStyles, 'voteCounts': opinionVoteCounts}) }}
+                                {{ form_rest(opinionVoteForm) }}
                                 {{ form_end(opinionVoteForm) }}
 
                                 {% if (previousVote) %}
@@ -121,7 +119,7 @@
                                     {% if opinion.reports | length > 0 %}
                                         <button disabled="disabled" class="btn  btn-dark-gray"><i class="cap cap-flag-1"></i> {{ 'opinion.report.reported'|trans({}, 'CapcoAppBundle') }}</button>
                                     {% else %}
-                                        <a href="{{ path('app_report_opinion' ,{'consultationSlug': consultation.slug, 'opinionTypeSlug': opinionType.slug, 'opinionSlug': opinion.slug } ) }}" class="btn  btn-dark-gray  btn--outline"><i class="cap cap-flag-1"></i> {{ 'opinion.report.submit'|trans({}, 'CapcoAppBundle') }}</a>
+                                        <a href="{{ path('app_report_opinion' ,{'consultationSlug': consultation.slug, 'opinionTypeSlug': opinionType.slug, 'opinionSlug': opinion.slug } ) }}" class="btn  btn-dark-gray  btn--outline  connection-popover-js"><i class="cap cap-flag-1"></i> {{ 'opinion.report.submit'|trans({}, 'CapcoAppBundle') }}</a>
                                     {% endif %}
                                 </div>
 
@@ -144,7 +142,7 @@
                                         {% if sources|length > 0 %} <i class="cap cap-arrow-67 pull-right"></i>{% endif %}
                                     </h4>
                                     {% if opinion.canContribute %}
-                                        <p class="sources__btn"><a id="addSourceLink" href="{{ path('app_new_source' ,{'consultationSlug': consultation.slug, 'opinionTypeSlug': opinionType.slug, 'opinionSlug': opinion.slug} ) }}" class="btn-sm btn btn-default"><i class="cap cap-add-1"></i> {{ 'source.create.button'|trans({}, 'CapcoAppBundle') }}</a></p>
+                                        <p class="sources__btn"><a id="addSourceLink" href="{{ path('app_new_source' ,{'consultationSlug': consultation.slug, 'opinionTypeSlug': opinionType.slug, 'opinionSlug': opinion.slug} ) }}" class="btn-sm btn btn-default connection-popover-js" data-container="body"><i class="cap cap-add-1"></i> {{ 'source.create.button'|trans({}, 'CapcoAppBundle') }}</a></p>
                                     {% endif %}
                                 </div>
                                 {% if sources|length > 0 %}
@@ -209,7 +207,7 @@
                 </div>
                 <div class="row">
                     <div class="col-sm-12  col-md-6">
-                        {% if app.user is not null and opinion.canContribute %}
+                        {% if opinion.canContribute %}
                             {% set argType = 1 %}
                             {% set form = argumentFormYes %}
                             {% include '@CapcoApp/Argument/create.html.twig' %}
@@ -217,7 +215,7 @@
                         {{ render(controller('CapcoAppBundle:Argument:showArguments', {'consultation': consultation, 'opinionType': opinionType, 'opinion': opinion, 'type': 1, 'form': sortArgumentsForm, 'argumentSort': argumentSort})) }}
                     </div>
                     <div class="col-sm-12  col-md-6">
-                        {% if app.user is not null  and opinion.canContribute %}
+                        {% if opinion.canContribute %}
                             {% set argType = 0 %}
                             {% set form = argumentFormNo %}
                             {% include '@CapcoApp/Argument/create.html.twig' %}
@@ -236,5 +234,14 @@
         $("#addSourceLink").on('click', function (e) {
             e.stopPropagation();
         });
+        {% if null == app.user %}
+            App.module.initPopovers('.connection-popover-js', {
+                placement: "top",
+                html: "true",
+                trigger: "focus",
+                title: "{{ 'user.login.popover.title'|trans({}, 'CapcoAppBundle') }}",
+                content: "<p>{{ 'user.login.popover.body'|trans({}, 'CapcoAppBundle') }}</p><p><a href='{{ path('fos_user_registration_register') }}' class='btn  btn-success  center-block'>{{ 'user.login.popover.signin'|trans({}, 'CapcoAppBundle') }}</a></p><p><a href='{{ path('fos_user_security_login') }}' class='btn  btn-default  center-block'>{{ 'user.login.popover.login'|trans({}, 'CapcoAppBundle') }}</a></p>"
+            });
+        {% endif %}
     </script>
 {% endblock %}

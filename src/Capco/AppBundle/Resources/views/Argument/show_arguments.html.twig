@@ -47,7 +47,9 @@
                             {% if argument.userHasVote(currentUser) %}
                                 <button class="btn  btn-danger  btn-xs">{{ 'argument.vote.delete'|trans({}, 'CapcoAppBundle') }}</button>
                             {% else %}
-                                <button class="btn  btn-success  btn--outline  btn-xs"><i class="cap-hand-like-2"></i> {{ 'argument.vote.submit'|trans({}, 'CapcoAppBundle') }}</button>
+                                <a class="connection-popover-js">
+                                    <button class="btn  btn-success  btn--outline  btn-xs"><i class="cap-hand-like-2"></i> {{ 'argument.vote.submit'|trans({}, 'CapcoAppBundle') }}</button>
+                                </a>
                             {% endif %}
                             <input type="hidden" name="_csrf_token" value="{{ token }}">
                         </form>
@@ -63,7 +65,7 @@
                     {% if argument.reports | length > 0 %}
                         <button disabled="disabled" class="btn btn-xs btn-dark-gray"><i class="cap cap-flag-1"></i> {{ 'argument.report.reported'|trans({}, 'CapcoAppBundle') }}</button>
                     {% else %}
-                        <a href="{{ path('app_report_argument' ,{'consultationSlug': consultation.slug, 'opinionTypeSlug': opinionType.slug, 'opinionSlug': opinion.slug, 'argumentId': argument.id } ) }}" class="btn btn-xs btn-dark-gray  btn--outline"><i class="cap cap-flag-1"></i> {{ 'argument.report.submit'|trans({}, 'CapcoAppBundle') }}</a>
+                        <a href="{{ path('app_report_argument' ,{'consultationSlug': consultation.slug, 'opinionTypeSlug': opinionType.slug, 'opinionSlug': opinion.slug, 'argumentId': argument.id } ) }}" class="btn btn-xs btn-dark-gray  btn--outline  connection-popover-js"><i class="cap cap-flag-1"></i> {{ 'argument.report.submit'|trans({}, 'CapcoAppBundle') }}</a>
                     {% endif %}
 
                     {% if argument.canContribute and currentUser is not null and currentUser == argument.Author %}
