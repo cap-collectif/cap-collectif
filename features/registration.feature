@@ -1,8 +1,5 @@
 Feature: Registration
 
-  Background:
-    Given database contains fixtures
-
   Scenario: Register new user
     Given feature "registration" is enabled
     And I visited homepage

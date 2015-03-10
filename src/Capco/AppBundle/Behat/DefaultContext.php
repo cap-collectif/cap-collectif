@@ -26,6 +26,16 @@ use Behat\MinkExtension\Context\MinkContext;
 
 abstract class DefaultContext extends MinkContext implements Context, KernelAwareContext
 {
+    protected $navigationContext;
+
+    /** @BeforeScenario */
+    public function gatherContexts(BeforeScenarioScope $scope)
+    {
+        $environment = $scope->getEnvironment();
+
+        $this->navigationContext = $environment->getContext('Capco\AppBundle\Behat\NavigationContext');
+    }
+
     /**
      * @var KernelInterface
      */
@@ -126,9 +136,10 @@ abstract class DefaultContext extends MinkContext implements Context, KernelAwar
     }
 
     /**
+     * @BeforeSuite
      * @Given database contains fixtures
      */
-    public function databaseContainsFixtures()
+    public static function databaseContainsFixtures()
     {
         exec('php app/console doctrine:fixtures:load -n -e test');
     }

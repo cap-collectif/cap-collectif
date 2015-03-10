@@ -9,9 +9,9 @@ use SensioLabs\Behat\PageObjectExtension\Context\PageObjectContext;
 class NavigationContext extends PageObjectContext
 {
     /**
-     * @Given /^(?:|I )visited (?:|the )(?P<pageName>.*?)$/
+     * @Given I visited :pageName
      */
-    public function iVisitedThePage($pageName)
+    public function iVisitedPage($pageName)
     {
         $this->getPage($pageName)->open();
     }

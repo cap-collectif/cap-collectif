@@ -61,7 +61,7 @@ Capco\AppBundle\Entity\Idea:
               <p><text(500)></p>
               <h3><text(10)></h3>
               <p><text(300)></p>
-        Theme: @theme*
+        Theme: @theme<numberBetween(1, 3)>
         Author: @user*
         createdAt: <dateTimeBetween('-30 days','now')>
         isTrashed: false
