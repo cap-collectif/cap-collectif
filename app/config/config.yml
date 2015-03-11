@@ -144,10 +144,13 @@ ivory_ck_editor:
     configs:
         user_editor:
             toolbar: user_toolbar
-            language: 'fr'
+            language: fr
+            skin: bootstrapck
         admin_editor:
             toolbar: admin_toolbar
-            language: 'fr'
+            language: fr
+            skin: bootstrapck
+            extraPlugins: oembed
             filebrowserBrowseRoute: admin_capco_media_media_browser
             filebrowserImageBrowseRoute: admin_capco_media_media_browser
             # Display images by default when clicking the image dialog browse button
@@ -169,11 +172,11 @@ ivory_ck_editor:
             user_toolbar: ['@clipboard', '@user_styles', '@basicstyles', '@user_paragraph', '@user_links', '@user_insert', '@tools']
         items:
             clipboard: [ 'Undo', 'Redo' ]
+            styles: [ 'Styles', 'Format', 'FontSize' ]
+            user_styles: [ 'Format' ]
             basicstyles: [ 'Bold', 'Italic', 'Underline', 'Strike' ]
             paragraph: [ 'NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', 'Blockquote', '-', 'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock' ]
             user_paragraph: [ 'NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', 'Blockquote' ]
-            styles: [ 'Styles', 'Format', 'FontSize' ]
-            user_styles: [ 'Format' ]
             links: [ 'Link', 'Unlink', 'Anchor' ]
             user_links: [ 'Link', 'Unlink' ]
             insert: [ 'Image', 'oembed', 'Iframe', 'Table', 'HorizontalRule' ]

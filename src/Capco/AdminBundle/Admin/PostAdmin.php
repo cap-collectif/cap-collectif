@@ -118,9 +118,9 @@ class PostAdmin extends Admin
             ->add('abstract', null, array(
                 'label' => 'admin.fields.blog_post.abstract',
             ))
-            ->add('body', null, array(
+            ->add('body', 'ckeditor', array(
                 'label' => 'admin.fields.blog_post.body',
-                'attr' => array('class' => 'ckeditor'),
+                'config_name' => 'admin_editor',
             ))
             ->add('Media', 'sonata_type_model_list', array('required' => false), array(
                 'link_parameters' => array(
