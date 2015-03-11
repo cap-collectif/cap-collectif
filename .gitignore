@@ -32,6 +32,9 @@ app/config/parameters/*
 .capistrano
 !.capistrano/metrics
 
+# redis
+dump.rdb
+
 # tests
 app/test.db
 /report/
