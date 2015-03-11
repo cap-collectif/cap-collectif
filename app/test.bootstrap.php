@@ -13,11 +13,4 @@ passthru(sprintf(
     __DIR__
 ));
 
-
-passthru(sprintf(
-    'php "%s/console" doctrine:fixtures:load --env=test --no-interaction --fixtures=%s',
-    __DIR__,
-    __DIR__.'/../src/Capco/AppBundle/Tests/TestFixtures/ORM'
-));
-
 require __DIR__.'/bootstrap.php.cache';

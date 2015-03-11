@@ -1,11 +1,10 @@
 dependencies:
     override:
-        - composer install --no-interaction -vvv:
+        - sudo composer self-update && composer install --no-interaction -vvv:
             timeout: 3600
     pre:
         - echo "memory_limit = 2048M" > ~/.phpenv/versions/$(phpenv global)/etc/conf.d/memory.ini
         - mv app/config/parameters.ci.yml app/config/parameters.yml
-        - mv behat.yml.dist behat.yml
         - gem install bundler
         - bundle install --clean
 
@@ -23,8 +22,13 @@ machine:
 test:
     pre:
         - echo "memory_limit = 2048M" > ~/.phpenv/versions/$(phpenv global)/etc/conf.d/memory.ini
+        - app/console doctrine:database:create --env test
+        - app/console doctrine:schema:update --force --env test -n
+        - npm install && bower install
+        - npm install -g gulp
 
     override:
-        - phpunit -c app -v
+        - app/console doctrine:migrations:migrate -n
+        - gulp build
         - bin/phpspec run
         - bin/behat

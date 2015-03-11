@@ -25,5 +25,5 @@ default:
         default:
             paths: [ %paths.base%/features ]
             contexts:
-                - Capco\AppBundle\Behat\UserContext
+                - Capco\AppBundle\Behat\ApplicationContext
                 - Capco\AppBundle\Behat\NavigationContext

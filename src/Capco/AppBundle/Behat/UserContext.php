@@ -3,13 +3,17 @@
 namespace Capco\AppBundle\Behat;
 
 use Behat\Gherkin\Node\TableNode;
-use Behat\Mink\Driver\BrowserKitDriver;
-use Symfony\Component\BrowserKit\Cookie;
-use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
-use Symfony\Component\Security\Http\Event\InteractiveLoginEvent;
 
 class UserContext extends DefaultContext
 {
+    /**
+     * @Given I am logged out
+     */
+    public function iAmLoggedOut()
+    {
+        $this->navigationContext->iVisitedPage('logoutPage');
+    }
+
     /**
      * @Given I am logged in as admin
      */
@@ -26,9 +30,10 @@ class UserContext extends DefaultContext
         $this->logInWith('user@test.com', 'user');
     }
 
+
     private function logInWith($email, $pwd)
     {
-        $this->navigationContext->iVisitedPage('loginpage');
+        $this->navigationContext->iVisitedPage('loginPage');
         $this->fillField('_username', $email);
         $this->fillField('_password', $pwd);
         $this->pressButton('Se connecter');

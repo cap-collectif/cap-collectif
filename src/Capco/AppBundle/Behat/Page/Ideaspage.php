@@ -4,7 +4,7 @@ namespace Capco\AppBundle\Behat\Page;
 
 use SensioLabs\Behat\PageObjectExtension\PageObject\Page;
 
-class Ideaspage extends Page
+class IdeasPage extends Page
 {
     /**
      * @var string $path

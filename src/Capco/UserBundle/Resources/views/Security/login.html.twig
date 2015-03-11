@@ -50,7 +50,7 @@
 
 
                     {% block sonata_user_login_form %}
-                        <form role="form" action="{{ path("fos_user_security_check") }}" method="post">
+                        <form id="login-form" role="form" action="{{ path("fos_user_security_check") }}" method="post">
                             <div class="form-group">
                                 <label for="username" class="control-label  h5"  style="margin-top:0;">{{ 'user.login.email'|trans({}, 'CapcoAppBundle') }}</label>
                                 <input type="text" class="form-control" id="username" name="_username" required="required" tabindex="1">
