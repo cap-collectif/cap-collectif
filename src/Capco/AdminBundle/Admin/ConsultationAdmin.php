@@ -8,6 +8,8 @@ use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Show\ShowMapper;
 
+use Sonata\AdminBundle\Route\RouteCollection;
+
 use Capco\AppBundle\Entity\Consultation;
 use Capco\AppBundle\Entity\Step;
 use Symfony\Component\Validator\Constraints\DateTime;
@@ -112,6 +114,9 @@ class ConsultationAdmin extends Admin
             ->add('_action', 'actions', array(
                 'actions' => array(
                     'show' => array(),
+                    'download' => array(
+                        'template' => 'CapcoAdminBundle:CRUD:list__action_download.html.twig',
+                    ),
                     'edit' => array(),
                     'delete' => array(),
                 )
@@ -342,5 +347,10 @@ class ConsultationAdmin extends Admin
         $consultationStep->setPosition($position);
 
         $consultation->addStep($consultationStep);
+    }
+
+    protected function configureRoutes(RouteCollection $collection)
+    {
+        $collection->add('download', $this->getRouterIdParameter().'/download');
     }
 }

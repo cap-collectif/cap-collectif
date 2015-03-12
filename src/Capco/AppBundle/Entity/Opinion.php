@@ -768,6 +768,22 @@ class Opinion
     }
 
     /**
+     * @param $type
+     * @return int
+     */
+    public function getArgumentsCountByType($type)
+    {
+        $count = 0;
+        foreach ($this->arguments as $arg)
+        {
+            if (Argument::$argumentTypes[$arg->getType()] == $type) {
+                $count++;
+            }
+        }
+        return $count;
+    }
+
+    /**
      * @return bool
      */
     public function canDisplay()

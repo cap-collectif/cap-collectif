@@ -15,7 +15,7 @@ Capco\AppBundle\Entity\Source:
         Category: @Category<numberBetween(1,5)>
         link: http://www.cap-collectif.com/
         voteCountSource: 0
-    source{11..23}:
+    source{11..30}:
         title: <text(20)>
         body: <text(1000)>
         Author: @user<numberBetween(1,5)>
@@ -23,3 +23,5 @@ Capco\AppBundle\Entity\Source:
         Category: @Category<numberBetween(1,5)>
         link: https://www.parlement-et-citoyens.fr/
         voteCountSource: 0
+        isEnabled: <boolean()>
+        isTrashed: <boolean()>

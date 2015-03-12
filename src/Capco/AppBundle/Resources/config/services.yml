@@ -25,6 +25,7 @@ parameters:
     capco.twig.steps_links.class: Capco\AppBundle\Twig\StepsLinksExtension
     capco.block.service.share_button.class: Capco\AppBundle\Block\ShareButtonBlockService
     capco.video.repository.class: Capco\AppBundle\Repository\VideoRepository
+    capco.consultation.download.resolver.class: Capco\AppBundle\Resolver\ConsultationDownloadResolver
 
 services:
     capco.site_parameter.repository:
@@ -186,3 +187,7 @@ services:
         arguments: [capco.block.service.share_button, @templating]
         tags:
             - { name: sonata.block }
+
+    capco.consultation.download.resolver:
+        class: %capco.consultation.download.resolver.class%
+        arguments: [@doctrine.orm.entity_manager, @templating, @translator]

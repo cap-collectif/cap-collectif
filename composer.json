@@ -56,7 +56,8 @@
         "sensiolabs/behat-page-object-extension": "~2.0",
         "ocramius/proxy-manager": "~0.5",
         "tilleuls/ckeditor-sonata-media-bundle": "~2.3@dev",
-        "egeloen/ckeditor-bundle": "~3.0@dev"
+        "egeloen/ckeditor-bundle": "~3.0@dev",
+        "mewesk/twig-excel-bundle": "~1.0@dev"
     },
     "require-dev": {
         "sensio/generator-bundle": "~2.3",

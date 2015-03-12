@@ -361,6 +361,8 @@ admin:
       link: URL
       position: Position
       color: Couleur du bouton lecture
+
+  # Custom actions
   action:
     reporting:
       disable:
@@ -369,6 +371,14 @@ admin:
       trash:
         label: Mettre le contenu à la corbeille
         success: Le contenu a été placé dans la corbeille.
+    consultation:
+      download:
+        label: Télécharger le contenu
+        modal:
+          title: Télécharger le contenu
+          body: Choisissez un format de téléchargement :
+          button: Télécharger au format %format%
+          cancel: Fermer
 
 capco:
   module:

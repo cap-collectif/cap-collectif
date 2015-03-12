@@ -121,7 +121,7 @@ Capco\AppBundle\Entity\Opinion:
         body: |
              <p><text(100)></p>
              <p><text(300)></p>
-        isEnabled: true
-        isTrashed: false
+        isEnabled: <boolean()>
+        isTrashed: <boolean()>
         Author: @user<numberBetween(1, 5)>
         OpinionType: @opinionType<numberBetween(2, 4)>

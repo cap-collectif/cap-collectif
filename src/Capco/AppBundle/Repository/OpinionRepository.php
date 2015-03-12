@@ -196,6 +196,27 @@ class OpinionRepository extends EntityRepository
 
     }
 
+    /**
+     * Get all opinions by consultation
+     * @param $consultation
+     * @return mixed
+     */
+    public function getByConsultation($consultation)
+    {
+        $qb = $this->createQueryBuilder('o')
+            ->addSelect('ot', 'aut', 'arg')
+            ->leftJoin('o.OpinionType', 'ot')
+            ->leftJoin('o.Author', 'aut')
+            ->leftJoin('o.arguments', 'arg')
+            ->andWhere('o.Consultation = :consultation')
+            ->setParameter('consultation', $consultation)
+            ->addOrderBy('o.updatedAt', 'DESC');
+
+        return $qb
+            ->getQuery()
+            ->getResult();
+    }
+
     protected function getIsEnabledQueryBuilder()
     {
         return $this->createQueryBuilder('o')

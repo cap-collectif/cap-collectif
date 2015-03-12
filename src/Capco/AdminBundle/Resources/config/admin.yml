@@ -41,7 +41,7 @@ services:
 
     capco_admin.admin.consultation:
         class: Capco\AdminBundle\Admin\ConsultationAdmin
-        arguments: [~, Capco\AppBundle\Entity\Consultation, SonataAdminBundle:CRUD]
+        arguments: [~, Capco\AppBundle\Entity\Consultation, CapcoAdminBundle:Consultation]
         tags:
             - {name: sonata.admin, manager_type: orm, group: admin.group.consultation, label: admin.label.consultation}
         calls:
@@ -89,7 +89,7 @@ services:
 
     capco_admin.admin.reporting:
         class: Capco\AdminBundle\Admin\ReportingAdmin
-        arguments: [~, Capco\AppBundle\Entity\Reporting, CapcoAdminBundle:CRUD]
+        arguments: [~, Capco\AppBundle\Entity\Reporting, CapcoAdminBundle:Reporting]
         tags:
             - {name: sonata.admin, manager_type: orm, group: admin.group.consultation, label: admin.label.reporting}
         calls:

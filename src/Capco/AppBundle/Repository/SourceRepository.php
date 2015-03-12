@@ -98,6 +98,26 @@ class SourceRepository extends EntityRepository
     }
 
     /**
+     * Get all sources by consultation
+     * @param $consultation
+     * @return mixed
+     */
+    public function getByConsultation($consultation)
+    {
+        $qb = $this->createQueryBuilder('s')
+            ->addSelect('ca', 'o', 'ot', 'aut')
+            ->leftJoin('s.Category', 'ca')
+            ->leftJoin('s.Opinion', 'o')
+            ->leftJoin('o.OpinionType', 'ot')
+            ->leftJoin('s.Author', 'aut')
+            ->andWhere('o.Consultation = :consultation')
+            ->setParameter('consultation', $consultation)
+            ->orderBy('s.updatedAt', 'DESC');
+
+        return $qb->getQuery()->getResult();
+    }
+
+    /**
      * Get sources by user
      * @param $user
      * @return mixed

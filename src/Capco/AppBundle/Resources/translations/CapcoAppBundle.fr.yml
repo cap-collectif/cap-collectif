@@ -668,3 +668,42 @@ video:
   colors:
     black: Noir
     white: Blanc
+
+# consultation download
+consultation_download:
+  sheets:
+    published: Contenu publié
+    unpublished: Contenu non publié
+  label:
+    opinion_title: Titre de la proposition
+    content_type: Type de contenu
+    opinion_type: Type de proposition
+    category: Catégorie
+    content: Contenu
+    link: Lié à
+    created: Création
+    updated: Modification
+    author: Auteur
+    score: Score
+    total_votes: Total des votes
+    votes_ok: Votes pour
+    votes_mitigated: Votes mitigés
+    votes_nok: Votes contre
+    sources: Sources
+    total_arguments: Total des arguments
+    arguments_ok: Arguments pour
+    arguments_nok: Arguments contre
+    enabled: Publié
+    trashed: Corbeille
+    trashed_date: Date de mise à la corbeille
+    trashed_reason: Raison de la mise en corbeille
+  values:
+    non_applicable: n/a
+    content_type:
+      opinion: Proposition
+      argument: Argument
+      source: Source
+    link:
+      media: Fichier
+    yes: Oui
+    no: Non

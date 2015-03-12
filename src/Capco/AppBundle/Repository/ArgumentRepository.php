@@ -57,6 +57,26 @@ class ArgumentRepository extends EntityRepository
     }
 
     /**
+     * Find all arguments by consultation
+     * @param $consultation
+     * @return array
+     */
+    public function getByConsultation($consultation)
+    {
+        $qb = $this->createQueryBuilder('a')
+            ->addSelect('o', 'ot', 'aut')
+            ->leftJoin('a.opinion', 'o')
+            ->leftJoin('o.OpinionType', 'ot')
+            ->leftJoin('o.Author', 'aut')
+            ->andWhere('o.Consultation = :consultation')
+            ->setParameter('consultation', $consultation)
+            ->addOrderBy('a.updatedAt', 'DESC');
+
+        return $qb->getQuery()
+            ->getResult();
+    }
+
+    /**
      * Get one argument by id, opinion, opinion type and consultation
      * @param $consultation
      * @param $opinionType

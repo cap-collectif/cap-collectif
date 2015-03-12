@@ -4,3 +4,5 @@ Capco\AppBundle\Entity\Argument:
         type: <numberBetween(0, 1)>
         Author: @user<numberBetween(1, 5)>
         body: <text(300)>
+        isEnabled: <boolean()>
+        isTrashed: <boolean()>

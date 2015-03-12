@@ -62,6 +62,9 @@ class AppKernel extends Kernel
             // CKEditor
             new \CoopTilleuls\Bundle\CKEditorSonataMediaBundle\CoopTilleulsCKEditorSonataMediaBundle(),
             new \Ivory\CKEditorBundle\IvoryCKEditorBundle(),
+
+            // Excel files generation
+            new MewesK\TwigExcelBundle\MewesKTwigExcelBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {
