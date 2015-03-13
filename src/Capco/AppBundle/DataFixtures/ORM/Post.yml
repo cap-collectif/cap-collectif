@@ -1,6 +1,6 @@
 Capco\AppBundle\Entity\Post:
   post{1..10}:
-    title: <text(40)>
+    title: Post <current()>
     abstract: <text(150)>
     body: |
          <h2><text(10)></h2>
@@ -8,7 +8,6 @@ Capco\AppBundle\Entity\Post:
          <h2><text(10)></h2>
          <h3><text(10)></h3>
          <p><text(300)></p>
-    title: <text(20)>
     isPublished: true
     publishedAt: <dateTimeBetween('-100 days', '+10 days')>
     Authors:

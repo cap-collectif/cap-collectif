@@ -2,7 +2,7 @@ Feature: Registration
 
   Scenario: Register new user
     Given feature "registration" is enabled
-    And I visited homepage
+    And I visited "home page"
     When I follow "Connexion"
     And I follow "S'inscrire"
     And I fill in the following:

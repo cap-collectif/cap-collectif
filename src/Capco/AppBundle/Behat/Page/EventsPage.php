@@ -4,10 +4,10 @@ namespace Capco\AppBundle\Behat\Page;
 
 use SensioLabs\Behat\PageObjectExtension\PageObject\Page;
 
-class Homepage extends Page
+class EventsPage extends Page
 {
     /**
      * @var string $path
      */
-    protected $path = '/';
+    protected $path = '/events';
 }

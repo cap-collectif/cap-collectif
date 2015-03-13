@@ -11,7 +11,7 @@ class UserContext extends DefaultContext
      */
     public function iAmLoggedOut()
     {
-        $this->navigationContext->iVisitedPage('logoutPage');
+        $this->navigationContext->iVisitedPage('LogoutPage');
     }
 
     /**
@@ -33,7 +33,7 @@ class UserContext extends DefaultContext
 
     private function logInWith($email, $pwd)
     {
-        $this->navigationContext->iVisitedPage('loginPage');
+        $this->navigationContext->iVisitedPage('LoginPage');
         $this->fillField('_username', $email);
         $this->fillField('_password', $pwd);
         $this->pressButton('Se connecter');

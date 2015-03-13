@@ -5,6 +5,7 @@ namespace Capco\AppBundle\Behat;
 
 use Behat\Mink\Exception\Exception;
 use SensioLabs\Behat\PageObjectExtension\PageObject\Exception\ElementNotFoundException;
+use Capco\AppBundle\Toggle\Manager;
 
 class ApplicationContext extends UserContext
 {
@@ -18,11 +19,28 @@ class ApplicationContext extends UserContext
     }
 
     /**
+     * @AfterSuite
+     */
+    public static function reinitFeatures()
+    {
+        exec('php app/console capco:reinit-feature-flags --force');
+    }
+
+    /**
+     * @BeforeScenario
+     */
+    public function resetFeatures()
+    {
+        $this->getService('capco.toggle.manager')->deactivateAll();
+    }
+
+
+    /**
      * @Given all features are enabled
      */
     public function allFeaturesAreEnabled()
     {
-        exec('php app/console capco:reinit-feature-flags --force');
+        $this->getService('capco.toggle.manager')->activateAll();
     }
 
     /**

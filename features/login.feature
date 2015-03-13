@@ -2,16 +2,16 @@ Feature: Login
 
   Scenario: Login user
     Given I am logged in as user
-    And I visited homepage
+    And I visited "home page"
     Then I should see "Bonjour user"
 
   Scenario: Login admin
     Given I am logged in as admin
-    And I visited homepage
+    And I visited "home page"
     Then I should see "Bonjour admin"
 
   Scenario: Lost password
-    Given I visited loginpage
+    Given I visited "login page"
     When I follow "Mot de passe oublié ?"
     And  I fill in "username" with "user@test.com"
     And I press "Réinitialiser le mot de passe"
@@ -19,7 +19,7 @@ Feature: Login
 
   Scenario: Logout
     Given I am logged in as user
-    And I visited homepage
+    And I visited "home page"
     When I follow "Bonjour user"
     And I follow "Déconnexion"
     Then I should see "Connexion"
