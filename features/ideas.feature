@@ -35,13 +35,13 @@ Scenario: Can not create an idea when not logged in
   When I follow "Proposer une idée"
   Then I should see "Connexion"
 
-Scenario: Can comment an idea
+Scenario: Can not comment an uncommentable idea
   Given feature "ideas" is enabled
   And I visited "ideas page"
   And I follow "ideaNotCommentable"
   Then I should not see "Commenter"
 
-Scenario: Can not comment an uncommentable idea
+Scenario: Can comment an idea
   Given feature "ideas" is enabled
   And I visited "ideas page"
   And I follow "ideaCommentable"
