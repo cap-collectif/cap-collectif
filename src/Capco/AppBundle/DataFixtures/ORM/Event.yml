@@ -1,6 +1,6 @@
 Capco\AppBundle\Entity\Event:
     event1:
-        title: ForumPHP2014
+        title: ForumPHP2016
         isEnabled: true
         body: |
           <p>Idque Caesaris facere voluntate liceret: sese habere. Paullum deliquit, ponderibus modulisque suis ratio utitur. Vivamus sagittis lacus vel augue laoreet rutrum faucibus.</p>
@@ -9,12 +9,15 @@ Capco\AppBundle\Entity\Event:
              Quae vero auctorem tractata ab fiducia dicuntur. Me non paenitet nullum festiviorem excogitasse ad hoc. Prima luce, cum quibus mons aliud  consensu ab eo. Prima luce, cum quibus mons aliud  consensu ab eo.
              Nec dubitamus multa iter quae et nos invenerat. Inmensae subtilitatis, obscuris et malesuada fames. Quam diu etiam furor iste tuus nos eludet? Integer legentibus erat a ante historiarum dapibus.</p>
              <h2>Pulvinar odio volutpat</h2>
-        startAt: <(new \DateTime('2014-10-23'))>
-        endAt: <(new \DateTime('2014-10-24'))>
+             <p>Etiam habebis sem dicantur magna mollis euismod.</p>
+        startAt: <(new \DateTime('2016-10-23'))>
+        endAt: <(new \DateTime('2016-10-24'))>
         Author: @user<numberBetween(1, 5)>
         address: 111 Avenue Clémenceau
         city: Lyon
-        link: http://www.forumPHP2014.fr
+        registrationEnable: true
+        lat: 45,7012741
+        lng: 4,7959638
     event2:
         title: PHPTour2014
         isEnabled: true

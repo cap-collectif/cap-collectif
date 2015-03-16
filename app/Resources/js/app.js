@@ -12,14 +12,14 @@ App.module = function ($) {
         $(container).each(function() {
             $el = $(this);
             $($el).height('auto');
-            topPostion = $el.position().top;
+            topPosition = $el.position().top;
 
-            if (currentRowStart != topPostion) {
+            if (currentRowStart != topPosition) {
                 for (currentDiv = 0 ; currentDiv < rowDivs.length ; currentDiv++) {
                     rowDivs[currentDiv].height(currentTallest);
                 }
                 rowDivs.length = 0; // empty the array
-                currentRowStart = topPostion;
+                currentRowStart = topPosition;
                 currentTallest = $el.height();
                 rowDivs.push($el);
             } else {
@@ -127,6 +127,20 @@ App.module = function ($) {
         });
     };
 
+    var makeSidebar = function(options) {
+
+        // Fix containers
+        var containers = options['container'] + ' .container';
+        $(options['container']).addClass('container  sidebar__container');
+        $(containers).removeClass('container');
+
+        // Handle small screens
+        $(options['toggle']).on('click', function() {
+            $(options['hideable']).toggleClass('sidebar-hidden-small');
+            $(options['overlay']).toggleClass('sidebar__darkened-overlay');
+        })
+    };
+
     var AppPublic = {
         equalheight: equalheight,
         resized: resized,
@@ -137,6 +151,7 @@ App.module = function ($) {
         showMap: showMap,
         autocollapse: autocollapse,
         initPopovers: initPopovers,
+        makeSidebar: makeSidebar
     };
 
     return AppPublic;

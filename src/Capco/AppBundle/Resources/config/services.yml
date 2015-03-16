@@ -26,6 +26,7 @@ parameters:
     capco.block.service.share_button.class: Capco\AppBundle\Block\ShareButtonBlockService
     capco.video.repository.class: Capco\AppBundle\Repository\VideoRepository
     capco.consultation.download.resolver.class: Capco\AppBundle\Resolver\ConsultationDownloadResolver
+    capco.twig.event_helper.class: Capco\AppBundle\Twig\EventExtension
 
 services:
     capco.site_parameter.repository:
@@ -200,3 +201,9 @@ services:
         arguments: [@doctrine.orm.entity_manager]
         tags:
             - { name: validator.constraint_validator, alias: unlisted_email.validator }
+
+    capco.twig.event_helper:
+        class: %capco.twig.event_helper.class%
+        arguments: [@capco.event.helper]
+        tags:
+          - { name: twig.extension }

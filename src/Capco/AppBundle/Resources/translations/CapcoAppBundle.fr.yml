@@ -606,12 +606,18 @@ event_registration:
     my_account: S'inscrire avec mon compte
     name: Nom
     email: Adresse électronique
-    private: Ne pas rendre publique mon inscription
+    private: Rendre mon inscription privée
     register: S'inscrire
     submit: S'inscrire à l'événement
-  listing: Participants
-  see_listing_all: Voir tous les participants
-  listing_all: Liste des participants
+  toggle:
+    subscribe: S'inscrire à l'évènement
+    unsubscribe: Se désinscrire
+    cancel: Annuler
+  listing:
+    title: Participants
+    see_all: Voir tous les participants
+    title_all: Liste des participants
+    anonymous: Anonyme
   unsubscribe: Se désinscrire
 
 # comments
