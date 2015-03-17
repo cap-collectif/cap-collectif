@@ -175,6 +175,13 @@ class Consultation
      */
     private $video = null;
 
+    /**
+     * @var
+     * @ORM\ManyToMany(targetEntity="Capco\AppBundle\Entity\OpinionType")
+     * @ORM\JoinTable(name="consultation_types")
+     */
+    private $allowedTypes;
+
 
     /**
      * Constructor
@@ -184,6 +191,7 @@ class Consultation
         $this->Themes = new ArrayCollection();
         $this->Opinions = new ArrayCollection();
         $this->Steps = new ArrayCollection();
+        $this->allowedTypes = new ArrayCollection();
         $this->updatedAt = new \Datetime;
     }
 
@@ -560,6 +568,46 @@ class Consultation
     public function setVideo($video)
     {
         $this->video = $video;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getAllowedTypes()
+    {
+        return $this->allowedTypes;
+    }
+
+    /**
+     * @param $allowedTypes
+     * @return $this
+     */
+    public function setAllowedTypes($allowedTypes)
+    {
+        $this->allowedTypes = $allowedTypes;
+        return $this;
+    }
+
+    /**
+     * @param $allowedType
+     * @return $this
+     */
+    public function addAllowedType($allowedType)
+    {
+        if (!$this->allowedTypes->contains($allowedType)) {
+            $this->allowedTypes[] = $allowedType;
+        }
+        return $this;
+    }
+
+    /**
+     * @param $allowedType
+     * @return $this
+     */
+    public function removeAllowedType($allowedType)
+    {
+        $this->allowedTypes->removeElement($allowedType);
+        return $this;
     }
 
     // ******************** Custom methods ******************************
