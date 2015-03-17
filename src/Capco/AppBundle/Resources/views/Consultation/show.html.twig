@@ -40,7 +40,7 @@
                 {% set opinionTypeCurrent = 'trashed' %}
             {% endif %}
             <div class="col-xs-12  col-sm-8  col-md-9" id="details">
-                {{ render(controller('CapcoAppBundle:Consultation:showNavOpinionTypes', {'consultation': consultation.id, 'type': opinionTypeCurrent})) }}
+                {% include '@CapcoApp/Consultation/show_nav.html.twig' with {'type': opinionTypeCurrent, 'consultation': consultation} %}
                 {% block opinions_list %}
                     {{ render(controller('CapcoAppBundle:Consultation:showOpinions', {'consultation': consultation.id})) }}
                 {% endblock %}

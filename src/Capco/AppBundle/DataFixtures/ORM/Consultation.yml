@@ -17,6 +17,7 @@ Capco\AppBundle\Entity\Consultation:
         Cover: @MediaConsultation2
         video: 'http://www.youtube.com/embed/wTcNtgA6gHs?autoplay=1'
         Themes: [@theme1, @theme3]
+        allowedTypes: [@opinionType1, @opinionType2, @opinionType3]
     cs3:
         title: Transformation numérique des relations
         teaser: <text(35)>

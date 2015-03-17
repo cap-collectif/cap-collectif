@@ -895,6 +895,14 @@ class Consultation
         return ($this->argumentCount + $this->opinionCount + $this->trashedArgumentCount + $this->trashedOpinionCount);
     }
 
+    /**
+     * @param $opinionType
+     * @return bool
+     */
+    public function allowType($opinionType) {
+        return $this->allowedTypes->contains($opinionType);
+    }
+
     // ************************** Lifecycle **************************************
 
     /**

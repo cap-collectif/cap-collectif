@@ -43,6 +43,32 @@ class ConsultationRepository extends EntityRepository
     }
 
     /**
+     * Get one by slug with allowed types
+     * @param $slug
+     * @return mixed
+     * @throws \Doctrine\ORM\NonUniqueResultException
+     */
+    public function getOneWithAllowedTypes($slug)
+    {
+        $qb = $this->getIsEnabledQueryBuilder('c')
+            ->addSelect('t', 's', 'cov', 'o', 'at')
+            ->leftJoin('c.Themes', 't')
+            ->leftJoin('c.Steps', 's')
+            ->leftJoin('c.Cover', 'cov')
+            ->leftJoin('c.allowedTypes', 'at')
+            ->leftJoin('c.Opinions', 'o')
+            ->andWhere('c.slug = :slug')
+            ->setParameter('slug', $slug)
+            ->addOrderBy('o.createdAt', 'DESC')
+            ->addOrderBy('at.position', 'ASC')
+        ;
+
+        return $qb
+            ->getQuery()
+            ->getOneOrNullResult();
+    }
+
+    /**
      * Get search results
      * @param int $nbByPage
      * @param int $page

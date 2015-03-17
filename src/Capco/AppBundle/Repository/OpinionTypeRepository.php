@@ -83,9 +83,11 @@ class OpinionTypeRepository extends EntityRepository
             ->leftJoin('a.Media', 'm')
             ->leftJoin('o.arguments', 'arg')
             ->leftJoin('o.Votes', 'v')
+            ->andWhere('ot IN (:allowedTypes)')
             ->setParameter('consultation', $consultation)
             ->setParameter('enabled', true)
             ->setParameter('notTrashed', false)
+            ->setParameter('allowedTypes', $consultation->getAllowedTypes())
             ->orderBy('ot.position', 'ASC')
             ->addOrderBy('vnb', 'DESC');
 

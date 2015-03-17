@@ -18,6 +18,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Cache;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 class ConsultationController extends Controller
@@ -56,7 +57,7 @@ class ConsultationController extends Controller
     public function showAction(Consultation $consultation)
     {
         $em = $this->getDoctrine()->getManager();
-        $consultation = $em->getRepository('CapcoAppBundle:Consultation')->getOne($consultation->getSlug());
+        $consultation = $em->getRepository('CapcoAppBundle:Consultation')->getOneWithAllowedTypes($consultation->getSlug());
 
         if (null == $consultation || false == $consultation->canDisplay() ) {
             throw $this->createNotFoundException($this->get('translator')->trans('consultation.error.not_found', array(), 'CapcoAppBundle'));
@@ -65,23 +66,6 @@ class ConsultationController extends Controller
         return [
             'consultation' => $consultation,
             'statuses' => Theme::$statuses,
-        ];
-    }
-
-    /**
-     * @Template("CapcoAppBundle:Consultation:show_nav.html.twig")
-     * @param $consultation
-     * @param $type
-     * @return array
-     */
-    public function showNavOpinionTypesAction(Consultation $consultation, $type)
-    {
-        $opinionTypes = $this->getDoctrine()->getRepository('CapcoAppBundle:OpinionType')->getOrderedByPosition();
-
-        return [
-            'opinionTypes' => $opinionTypes,
-            'opinionTypeCurrent' => $type,
-            'consultation' => $consultation,
         ];
     }
 
@@ -117,6 +101,10 @@ class ConsultationController extends Controller
     {
         if (false == $consultation->canDisplay() ) {
             throw $this->createNotFoundException($this->get('translator')->trans('consultation.error.not_found', array(), 'CapcoAppBundle'));
+        }
+
+        if (false == $consultation->allowType($opinionType)) {
+            throw new NotFoundHttpException('this type does not exist for this consultation');
         }
 
         $form = $this->createForm(new OpinionsSortType());
