@@ -53,7 +53,7 @@
                         <form id="login-form" role="form" action="{{ path("fos_user_security_check") }}" method="post">
                             <div class="form-group">
                                 <label for="username" class="control-label  h5"  style="margin-top:0;">{{ 'user.login.email'|trans({}, 'CapcoAppBundle') }}</label>
-                                <input type="text" class="form-control" id="username" name="_username" required="required" tabindex="1">
+                                <input type="email" class="form-control" id="username" name="_username" required="required" tabindex="1">
                             </div>
                             <div class="form-group">
                                 <label for="password" class="control-label  h5" style="width:100%;">
