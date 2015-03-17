@@ -5,8 +5,10 @@
     {% set username = registration.user.username %}
 {% else %}
     {% set username = registration.username %}
+    {% set avatar = null %}
+    {% set profile = null %}
 {% endif %}
-{% if registration.private or registration.user is null %}
+{% if registration.private %}
     {% set avatar = null %}
     {% set profile = null %}
     {% set username = 'event_registration.listing.anonymous' | trans({}, 'CapcoAppBundle') %}

@@ -142,30 +142,4 @@ abstract class DefaultContext extends MinkContext implements Context, KernelAwar
     {
         return $this->locatePath($this->getService('router')->generate($route, $parameters, $absolute));
     }
-
-    /**
-     * @BeforeSuite
-     * @AfterScenario @database
-     * @Given database contains fixtures
-     */
-    public static function databaseContainsFixtures()
-    {
-        exec('php app/console doctrine:fixtures:load -n -e test');
-    }
-
-    /**
-     * @Given all features are enabled
-     */
-    public function allFeaturesAreEnabled()
-    {
-        exec('php app/console capco:reinit-feature-flags --force');
-    }
-
-    /**
-     * @Given feature :feature is enabled
-     */
-    public function featureIsEnabled($feature)
-    {
-        $this->getService('capco.toggle.manager')->activate($feature);
-    }
 }

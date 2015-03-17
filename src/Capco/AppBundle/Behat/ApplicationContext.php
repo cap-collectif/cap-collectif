@@ -11,7 +11,7 @@ class ApplicationContext extends UserContext
 {
     /**
      * @BeforeSuite
-     * @Given database contains fixtures
+     * @AfterScenario @database
      */
     public static function databaseContainsFixtures()
     {

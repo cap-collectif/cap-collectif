@@ -4,6 +4,7 @@ namespace Capco\AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 use Capco\AppBundle\Entity\Event;
 use Capco\UserBundle\Entity\User;
@@ -14,6 +15,7 @@ use Capco\AppBundle\Validator\Constraints as CapcoAssert;
  * Class EventRegistration
  * @CapcoAssert\HasUnlistedEmail()
  * @CapcoAssert\HasAnonymousOrUser()
+ * @CapcoAssert\EmailDoesNotBelongToUser()
  * @ORM\Table(name="event_registration")
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\EventRegistrationRepository")
  */
@@ -49,8 +51,17 @@ class EventRegistration
 
     /**
      * @ORM\Column(name="email", type="string", length=255, nullable=true)
+     * @Assert\Email(checkMX = true)
      */
     private $email;
+
+    /**
+     * @var
+     *
+     * @ORM\Column(name="ip_address", type="string", nullable=true)
+     * @Assert\Ip
+     */
+    protected $ipAddress;
 
     /**
      * @ORM\Column(name="private", type="boolean", nullable=false)
@@ -62,9 +73,24 @@ class EventRegistration
      */
     private $confirmed = false;
 
+    /**
+     * @var \DateTime
+     * @Gedmo\Timestampable(on="create")
+     * @ORM\Column(name="created_at", type="datetime")
+     */
+    private $createdAt;
+
+    /**
+     * @var \DateTime
+     * @Gedmo\Timestampable(on="change", field={"confirmed"})
+     * @ORM\Column(name="updated_at", type="datetime")
+     */
+    private $updatedAt;
+
     public function __construct(Event $event = null)
     {
         $this->event = $event;
+        $this->updatedAt = new \Datetime();
     }
 
     /**
@@ -193,4 +219,54 @@ class EventRegistration
 
         return $this;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getIpAddress()
+    {
+        return $this->ipAddress;
+    }
+
+    /**
+     * @param mixed $ipAddress
+     */
+    public function setIpAddress($ipAddress)
+    {
+        $this->ipAddress = $ipAddress;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getCreatedAt()
+    {
+        return $this->createdAt;
+    }
+
+    /**
+     * @param \DateTime $createdAt
+     */
+    public function setCreatedAt($createdAt)
+    {
+        $this->createdAt = $createdAt;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getUpdatedAt()
+    {
+        return $this->updatedAt;
+    }
+
+    /**
+     * @param \DateTime $updatedAt
+     */
+    public function setUpdatedAt($updatedAt)
+    {
+        $this->updatedAt = $updatedAt;
+    }
+
+
 }

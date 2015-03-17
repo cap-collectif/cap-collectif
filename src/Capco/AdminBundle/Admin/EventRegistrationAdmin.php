@@ -35,6 +35,7 @@ class EventRegistrationAdmin extends Admin
             ->add('event', null, ['label' => 'admin.fields.event_registration.event'])
             ->add('confirmed', null, ['label' => 'admin.fields.event_registration.registered', 'required' => false])
             ->add('user', null, ['label' => 'admin.fields.event_registration.user'])
+            ->add('updatedAt', null, ['label' => 'admin.fields.event_registration.updated_at'])
         ;
     }
 
@@ -60,6 +61,9 @@ class EventRegistrationAdmin extends Admin
             ->add('private', null, array(
                 'label' => 'admin.fields.event_registration.private',
             ))
+            ->add('updatedAt', null, array(
+                'label' => 'admin.fields.event_registration.updated_at',
+            ))
             ->add('_action', 'actions', array(
                 'actions' => array(
                     'show' => array(),
@@ -76,7 +80,7 @@ class EventRegistrationAdmin extends Admin
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
-            ->add('event')
+            ->add('event', null, ['label' => 'admin.fields.event_registration.event'])
             ->add('confirmed', null, ['label' => 'admin.fields.event_registration.registered', 'required' => false])
             ->add('user', null, ['label' => 'admin.fields.event_registration.user'])
             ->add('username', null, ['label' => 'admin.fields.event_registration.username'])
@@ -92,11 +96,12 @@ class EventRegistrationAdmin extends Admin
     protected function configureShowFields(ShowMapper $showMapper)
     {
         $showMapper
-            ->add('confirmed', null, ['label' => 'admin.fields.event_registration.registered', 'required' => false])
+            ->add('confirmed', null, ['label' => 'admin.fields.event_registration.registered'])
             ->add('user', null, ['label' => 'admin.fields.event_registration.user'])
             ->add('username', null, ['label' => 'admin.fields.event_registration.username'])
             ->add('email', null, ['label' => 'admin.fields.event_registration.email'])
-            ->add('private', null, ['label' => 'admin.fields.event_registration.private', 'required' => false])
+            ->add('private', null, ['label' => 'admin.fields.event_registration.private'])
+            ->add('updatedAt', null, ['label' => 'admin.fields.event_registration.updated_at'])
         ;
 
     }

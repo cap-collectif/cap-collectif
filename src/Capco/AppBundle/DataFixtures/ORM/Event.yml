@@ -1,6 +1,6 @@
 Capco\AppBundle\Entity\Event:
     event1:
-        title: ForumPHP2016
+        title: Event with registrations
         isEnabled: true
         body: |
           <p>Idque Caesaris facere voluntate liceret: sese habere. Paullum deliquit, ponderibus modulisque suis ratio utitur. Vivamus sagittis lacus vel augue laoreet rutrum faucibus.</p>
@@ -37,7 +37,7 @@ Capco\AppBundle\Entity\Event:
         city: Paris
         link: http://www.phptour2014.fr
     event3:
-        title: PHPTour2015
+        title: Event without registrations
         isEnabled: true
         body: |
           <p>Idque Caesaéàris facere voluntate liceret: sese habere. Paullum deliquit, ponderibus modulisque suis ratio utitur. Vivamus sagittis lacus vel augue laoreet rutrum faucibus.</p>

@@ -182,7 +182,7 @@ admin:
       email: Adresse mail externe
       user: Utilisateur
       private: Anonyme
-
+      updated_at: Date d'inscription
     footer_social_network:
       title: Titre
       is_enabled: Publié

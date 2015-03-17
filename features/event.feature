@@ -3,7 +3,7 @@ Feature: Events
 Scenario: Can comment an event
   Given feature "calendar" is enabled
   And I visited "events page"
-  And I follow "PHPTour2015"
+  And I follow "Event with registrations"
   And I should see "Commenter avec mon compte"
   And I fill in the following:
     | capco_app_comment[authorName]  | Naruto              |

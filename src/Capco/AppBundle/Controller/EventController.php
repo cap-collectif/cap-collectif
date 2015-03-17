@@ -136,6 +136,7 @@ class EventController extends Controller
         $form = $this->createForm(new EventRegistrationType($user, $registration->isConfirmed()), $registration);
 
         if ($request->getMethod() == 'POST') {
+            $registration->setIpAddress($request->getClientIp());
             $registration->setUser($user);
             $form->handleRequest($request);
             $registration->setConfirmed(!$registration->isConfirmed());
@@ -144,6 +145,11 @@ class EventController extends Controller
                 $em = $this->getDoctrine()->getManager();
                 $em->persist($registration);
                 $em->flush();
+                if ($registration->isConfirmed()) {
+                    $this->get('session')->getFlashBag()->add('success', $this->get('translator')->trans('event_registration.create.register_success'));
+                } else {
+                    $this->get('session')->getFlashBag()->add('info', $this->get('translator')->trans('event_registration.create.unregister_success'));
+                }
                 return $this->redirect($this->generateUrl('app_event_show', ['slug' => $event->getSlug() ]));
             }
         }

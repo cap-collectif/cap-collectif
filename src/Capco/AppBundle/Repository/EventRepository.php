@@ -98,7 +98,8 @@ class EventRepository extends EntityRepository
             ->leftJoin('e.registrations', 'registration', 'WITH', 'registration.confirmed = true')
             ->andWhere('e.slug = :slug')
             ->setParameter('slug', $slug)
-            ;
+            ->addOrderBy('registration.updatedAt', 'DESC')
+        ;
 
         return $query = $qb->getQuery()->getOneOrNullResult();
     }

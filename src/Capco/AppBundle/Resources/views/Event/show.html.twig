@@ -42,6 +42,11 @@
                                     idea.show.comments
                                     {% endtranschoice %}
                                 {% endif %}
+                                {% if event.registrations|length > 0 %}
+                                    | {% transchoice event.registrations|length with {'%count%': event.registrations|length} from 'CapcoAppBundle' %}
+                                    event_registration.listing.count
+                                    {% endtranschoice %}
+                                {% endif %}
                         </div>
                         <ul class="event__meta  block">
                             <li class="excerpt"><i class="cap cap-calendar-1"></i>
@@ -73,9 +78,10 @@
                         <div class="event__map  map-canvas  block" data-lat="{{ event.lat }}" data-lng="{{ event.lng }}"></div>
                     {% endif %}
 
-                    {% if (event.link) %}
+                    {% if event.link %}
                         <a class="btn  btn-primary  external-link" href="{{ event.link }}" class="external-link">{{ 'event.link_button'|trans({}, 'CapcoAppBundle') }}</a>
                     {% endif %}
+                    
                     {{ sonata_block_render({'type': 'capco.block.service.share_button'}, {
                         'url': url('app_event_show', {'slug': event.slug}),
                         'title': event.title,

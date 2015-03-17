@@ -603,17 +603,20 @@ event:
 # event registration
 event_registration:
   create:
-    my_account: S'inscrire avec mon compte
+    my_account: M'inscrire avec mon compte
     name: Nom
     email: Adresse électronique
     private: Rendre mon inscription privée
     register: S'inscrire
     submit: S'inscrire à l'événement
+    register_success: Merci ! Votre inscription a bien été prise en compte.
+    unregister_success: Votre inscription a bien été annulée.
   toggle:
     subscribe: S'inscrire à l'évènement
     unsubscribe: Se désinscrire
     cancel: Annuler
   listing:
+    count: ]-Inf, 0] Aucun participant | {1} 1 participant | ]1,Inf[ %count% participants
     title: Participants
     see_all: Voir tous les participants
     title_all: Liste des participants

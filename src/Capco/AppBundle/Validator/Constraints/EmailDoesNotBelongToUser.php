@@ -7,13 +7,13 @@ use Symfony\Component\Validator\Constraint;
 /**
  * @Annotation
  */
-class HasAnonymousOrUser extends Constraint
+class EmailDoesNotBelongToUser extends Constraint
 {
-    public $message = 'event_registration.create.no_user_error';
+    public $message = 'event_registration.create.email_belongs_to_user';
 
     public function validatedBy()
     {
-        return get_class($this).'Validator';
+        return 'email_belongs_not.validator';
     }
 
     public function getTargets()

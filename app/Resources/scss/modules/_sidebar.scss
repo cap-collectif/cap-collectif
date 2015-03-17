@@ -55,7 +55,7 @@
     position: fixed;
     left: 50%;
     top: 80px;
-    @include translateX(100%, 0);
+    @include translate(100%, 20%);
   }
 }
 
