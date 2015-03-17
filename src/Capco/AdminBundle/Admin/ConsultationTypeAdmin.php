@@ -91,7 +91,6 @@ class ConsultationTypeAdmin extends Admin
             ))
             ->add('enabled', null, array(
                 'label' => 'admin.fields.consultation_type.enabled',
-                'required' => false,
             ))
         ;
     }

@@ -36,6 +36,7 @@ app/config/parameters/*
 dump.rdb
 
 # tests
+fabfile.pyc
 app/test.db
 /report/
 behat.yml
