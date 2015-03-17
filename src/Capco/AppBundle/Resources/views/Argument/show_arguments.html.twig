@@ -37,7 +37,7 @@
                         <p class="excerpt  opinion__date">{{ argument.createdAt | localizeddate('long', 'short', app.request.locale) }}</p>
                     </div>
                     <p class="opinion__text more" style="max-height: 115px; overflow: hidden; width: 100%">
-                        {{ argument.body }}
+                        {{ argument.body | escape | nl2br }}
                     </p>
 
                     {% if false == argument.canContribute %}
