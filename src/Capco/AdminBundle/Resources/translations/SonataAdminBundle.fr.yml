@@ -383,11 +383,11 @@ admin:
         success: Le contenu a été placé dans la corbeille.
     consultation:
       download:
-        label: Télécharger le contenu
+        label: Télécharger
         modal:
-          title: Télécharger le contenu
-          body: Choisissez un format de téléchargement :
-          button: Télécharger au format %format%
+          title: Télécharger
+          body: Choisissez le format du fichier :
+          button: Format %format%
           cancel: Fermer
 
 capco:
