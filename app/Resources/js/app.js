@@ -97,11 +97,9 @@ App.module = function ($) {
             var map = new google.maps.Map(this, mapOptions);
 
             // Marker
-            var iconBase = 'https://maps.google.com/mapfiles/kml/pushpin/';
             var marker = new google.maps.Marker({
                 position: new google.maps.LatLng($(this).attr('data-lat'), $(this).attr('data-lng')),
-                map: map,
-                icon: iconBase + 'blue-pushpin.png'
+                map: map
             });
         });
     };
