@@ -6,7 +6,7 @@ use Capco\AppBundle\Entity\Argument;
 use Capco\AppBundle\Entity\Opinion;
 use Capco\AppBundle\Entity\Source;
 use Doctrine\ORM\EntityManager;
-use Elao\WebProfilerExtraBundle\TwigProfilerEngine;
+use Symfony\Bundle\TwigBundle\TwigEngine;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Translation\TranslatorInterface;
 
@@ -80,7 +80,7 @@ class ConsultationDownloadResolver
     protected $templating;
     protected $translator;
 
-    public function __construct(EntityManager $em, TwigProfilerEngine $templating, TranslatorInterface $translator)
+    public function __construct(EntityManager $em, TwigEngine $templating, TranslatorInterface $translator)
     {
         $this->em = $em;
         $this->templating = $templating;
