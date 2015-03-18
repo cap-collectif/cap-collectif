@@ -1,0 +1,38 @@
+{% extends 'SonataAdminBundle:CRUD:base_edit.html.twig' %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script type="text/javascript">
+
+        $(document).ready(function(){
+            var consultationType = $("#{{ admin.uniqId }}_consultationType");
+            consultationType.on('change', function() {
+                updateAllowedTypes();
+            });
+
+            function updateAllowedTypes() {
+                $('#{{ admin.uniqId }}_allowedTypes_2').prop('checked', false);
+                var consultationTypeId = $("#{{ admin.uniqId }}_consultationType option:selected").val();
+                var allowedTypes = $("#field_container_{{ admin.uniqId }}_allowedTypes input[type='checkbox']");
+
+                var url = "{{ admin.generateObjectUrl('getAllowedTypesFromConsultationType', object) }}"
+                $.get(url, {'consultationTypeId': consultationTypeId}, function(data){
+
+                    console.log(data);
+                    if (data.length > 0) {
+                        $(allowedTypes).each(function(){
+                            console.log($(this));
+                            $(this).prop('checked', false);
+                            $(this).iCheck('update');
+                            if ($.inArray($(this).val(), data)) {
+                                $(this).prop('checked', true);
+                                $(this).iCheck('update');
+                            }
+                        });
+                    }
+
+                });
+            }
+        });
+    </script>
+{% endblock %}

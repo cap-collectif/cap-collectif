@@ -38,9 +38,9 @@ class ConsultationType
     /**
      * @var boolean
      *
-     * @ORM\Column(name="is_enabled", type="boolean")
+     * @ORM\Column(name="enabled", type="boolean")
      */
-    private $isEnabled = true;
+    private $enabled = true;
 
     /**
      * @var \DateTime
@@ -116,24 +116,24 @@ class ConsultationType
     }
 
     /**
-     * Get isEnabled
+     * Is enabled
      *
      * @return boolean
      */
-    public function getIsEnabled()
+    public function enabled()
     {
-        return $this->isEnabled;
+        return $this->enabled;
     }
 
     /**
-     * Set isEnabled
+     * Set enabled
      *
-     * @param boolean $isEnabled
+     * @param boolean $enabled
      * @return Consultation
      */
-    public function setIsEnabled($isEnabled)
+    public function setEnabled($enabled)
     {
-        $this->isEnabled = $isEnabled;
+        $this->enabled = $enabled;
 
         return $this;
     }

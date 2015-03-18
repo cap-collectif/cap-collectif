@@ -903,6 +903,20 @@ class Consultation
         return $this->allowedTypes->contains($opinionType);
     }
 
+    public function setConsultationType(ConsultationType $consultationType)
+    {
+        $this->allowedTypes = $consultationType->getOpinionTypes();
+    }
+
+    /**
+     * Required for sonata admin
+     * @return null
+     */
+    public function getConsultationType()
+    {
+        return null;
+    }
+
     // ************************** Lifecycle **************************************
 
     /**

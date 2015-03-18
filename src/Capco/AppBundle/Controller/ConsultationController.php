@@ -104,7 +104,7 @@ class ConsultationController extends Controller
         }
 
         if (false == $consultation->allowType($opinionType)) {
-            throw new NotFoundHttpException('this type does not exist for this consultation');
+            throw new NotFoundHttpException('This type does not exist for this consultation');
         }
 
         $form = $this->createForm(new OpinionsSortType());

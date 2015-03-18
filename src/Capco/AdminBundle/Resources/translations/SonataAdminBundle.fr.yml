@@ -42,6 +42,7 @@ admin.label.video: Vidéos de la page d'accueil
 admin.label.comment: Commentaires
 admin.label.comment_vote: Votes sur les commentaires
 admin.label.event_registrations: Inscription à l'événement
+admin.label.consultation_type: Types de consultation
 
 # Messages
 admin:
@@ -49,6 +50,7 @@ admin:
     step:
       endAt: Si l'étape ne dure qu'une journée, renseignez la même date que pour la date de début.
     consultation:
+      consultation_type: Créez de nouveaux modèles dans la section "Types de consultation".
       closed_at: Si la consultation ne dure qu'une journée, renseignez la même date que pour la date de début.
       steps: |
                 Ajoutez ici les étapes postérieures ou antérieures à la consultation (synthèse finale, présentation préliminaire...). L'étape correspondant à la consultation elle-même sera créée automatiquement en fonction des dates renseignées.
@@ -130,6 +132,10 @@ admin:
       voter: Votant
       created_at: Création
     consultation:
+      group_content: Contenu
+      group_meta: Métadonnées
+      group_opinion_types: Type de consultation
+      group_steps: Étape de consultation
       title: Titre
       author: Auteur
       teaser: Accroche
@@ -139,8 +145,8 @@ admin:
       opening_status: Statut
       opened_at: Ouvert
       closed_at: Fermé
-      step_title: Titre de l'étape de consultation
-      step_position: Position de l'étape de consultation
+      step_title: Titre de l'étape
+      step_position: Position de l'étape
       opinion_count: Propositions
       trashed_opinion_count: Propositions dans la corbeille
       argument_count: Arguments
@@ -151,6 +157,14 @@ admin:
       cover: Image de couverture
       image: Aperçu de la vidéo
       video: Vidéo
+      allowed_types: Types de proposition
+      consultation_type: Modèle
+    consultation_type:
+      title: Titre
+      opinion_types: Types de proposition
+      enabled: Activé
+      updated_at: Mise à jour
+      created_at: Création
     event:
       group_event: Évènement
       group_meta: Métadonnées

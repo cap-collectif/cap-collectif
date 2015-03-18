@@ -46,6 +46,9 @@ class ConsultationAdmin extends Admin
             ->add('Steps', null, array(
                 'label' => 'admin.fields.consultation.steps',
             ))
+            ->add('allowedTypes', null, array(
+                'label' => 'admin.fields.consultation.allowed_types',
+            ))
             ->add('opinionCount', null, array(
                 'label' => 'admin.fields.consultation.opinion_count',
             ))
@@ -145,20 +148,40 @@ class ConsultationAdmin extends Admin
         }
 
         $formMapper
+            ->with('admin.fields.consultation.group_content', array('class' => 'col-md-12'))->end()
+            ->with('admin.fields.consultation.group_meta', array('class' => 'col-md-6'))->end()
+            ->with('admin.fields.consultation.group_opinion_types', array('class' => 'col-md-6'))->end()
+            ->with('admin.fields.consultation.group_steps', array('class' => 'col-md-12'))->end()
+            ->end()
+        ;
+
+        $formMapper
+            // Content
+            ->with('admin.fields.consultation.group_content')
             ->add('title', null, array(
                 'label' => 'admin.fields.consultation.title',
             ))
-            ->add('isEnabled', null, array(
-                'label' => 'admin.fields.consultation.is_enabled',
+            ->add('body', null, array(
+                'label' => 'admin.fields.consultation.body',
                 'required' => false,
+                'attr' => array('rows' => 10),
             ))
             ->add('Author', 'sonata_type_model', array(
                 'label' => 'admin.fields.consultation.author',
             ))
+            ->end()
+
+            // Metadata
+            ->with('admin.fields.consultation.group_meta')
+            ->add('isEnabled', null, array(
+                'label' => 'admin.fields.consultation.is_enabled',
+                'required' => false,
+            ))
         ;
 
         if ($this->getConfigurationPool()->getContainer()->get('capco.toggle.manager')->isActive('themes')) {
-            $formMapper->add('Themes', 'sonata_type_model', array(
+            $formMapper
+                ->add('Themes', 'sonata_type_model', array(
                 'label' => 'admin.fields.consultation.themes',
                 'required' => false,
                 'multiple' => true,
@@ -167,6 +190,55 @@ class ConsultationAdmin extends Admin
         }
 
         $formMapper
+            ->add('Cover', 'sonata_type_model_list', array(
+                'required' => false,
+                'label' => 'admin.fields.consultation.cover',
+            ), array(
+                'link_parameters' => array(
+                    'context' => 'default',
+                    'hide_context' => true,
+                    'provider' => 'sonata.media.provider.image',
+                )
+            ))
+            ->add('Image', 'sonata_type_model_list', array(
+                'label' => 'admin.fields.consultation.image',
+                'required' => false,
+            ), array(
+                'link_parameters' => array(
+                    'context' => 'default',
+                    'hide_context' => true,
+                    'provider' => 'sonata.media.provider.image',
+                )
+            ))
+            ->add('video', null, array(
+                'label' => 'admin.fields.consultation.video',
+                'required' => false,
+                'help' => 'admin.help.consultation.video',
+                ), array(
+                    'link_parameters' => array('context' => 'consultation'),
+            ))
+            ->end()
+
+            // Opinion types
+            ->with('admin.fields.consultation.group_opinion_types')
+            ->add('consultationType', 'sonata_type_model', array(
+                'label' => 'admin.fields.consultation.consultation_type',
+                'required' => false,
+                'mapped' => false,
+                'class' => 'Capco\AppBundle\Entity\ConsultationType',
+                'help' => 'admin.help.consultation.consultation_type',
+            ))
+            ->add('allowedTypes', 'sonata_type_model', array(
+                'label' => 'admin.fields.consultation.allowed_types',
+                'required' => false,
+                'multiple' => true,
+                'by_reference' => false,
+                'expanded' => true,
+            ))
+            ->end()
+
+            // Steps
+            ->with('admin.fields.consultation.group_steps')
             ->add('openedAt', 'sonata_type_datetime_picker', array(
                 'required' => true,
                 'mapped' => false,
@@ -200,39 +272,6 @@ class ConsultationAdmin extends Admin
                 'data' => $stepPosition,
                 'label' => 'admin.fields.consultation.step_position',
             ))
-            ->add('body', null, array(
-                'label' => 'admin.fields.consultation.body',
-                'required' => false,
-                'attr' => array('rows' => 10),
-            ))
-            ->add('Cover', 'sonata_type_model_list', array(
-                'required' => false,
-                'label' => 'admin.fields.consultation.cover',
-            ), array(
-                'link_parameters' => array(
-                    'context' => 'default',
-                    'hide_context' => true,
-                    'provider' => 'sonata.media.provider.image',
-                )
-            ))
-            ->add('Image', 'sonata_type_model_list', array(
-                'label' => 'admin.fields.consultation.image',
-                'required' => false,
-            ), array(
-                'link_parameters' => array(
-                    'context' => 'default',
-                    'hide_context' => true,
-                    'provider' => 'sonata.media.provider.image',
-                )
-            ))
-            ->add('video', null, array(
-                'label' => 'admin.fields.consultation.video',
-                'required' => false,
-                'help' => 'admin.help.consultation.video',
-                ),
-                array(
-                    'link_parameters' => array('context' => 'consultation'),
-                ))
         ;
     }
 
@@ -276,6 +315,9 @@ class ConsultationAdmin extends Admin
         }
 
         $showMapper
+            ->add('allowedTypes', null, array(
+                'label' => 'admin.fields.consultation.allowed_types',
+            ))
             ->add('Steps', null, array(
                 'label' => 'admin.fields.consultation.steps',
             ))
@@ -327,10 +369,11 @@ class ConsultationAdmin extends Admin
         $this->setConsultationStep($consultation);
     }
 
-    private function setConsultationStep($consultation) {
+    private function setConsultationStep($consultation)
+    {
 
         $consultationStep = $consultation->getConsultationStep();
-        if($consultationStep == null){
+        if ($consultationStep == null) {
             $consultationStep = new Step();
             $consultationStep->setType(Step::$stepTypes['consultation']);
             $consultationStep->setConsultation($consultation);
@@ -352,5 +395,16 @@ class ConsultationAdmin extends Admin
     protected function configureRoutes(RouteCollection $collection)
     {
         $collection->add('download', $this->getRouterIdParameter().'/download');
+        $collection->add('getAllowedTypesFromConsultationType', $this->getRouterIdParameter().'/getAllowedTypesFromConsultationType');
     }
+
+    public function getTemplate($name)
+    {
+        if ($name == 'edit') {
+            return 'CapcoAdminBundle:Consultation:edit.html.twig';
+        }
+        return parent::getTemplate($name);
+    }
+
+
 }

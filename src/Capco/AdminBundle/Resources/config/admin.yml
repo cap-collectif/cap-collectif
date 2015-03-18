@@ -214,3 +214,11 @@ services:
             - {name: sonata.admin, manager_type: orm, group: admin.group.moderation, label: admin.label.comment_vote}
         calls:
             - [ setTranslationDomain, [SonataAdminBundle]]
+
+    capco_admin.admin.consultation_type:
+        class: Capco\AdminBundle\Admin\ConsultationTypeAdmin
+        arguments: [~, Capco\AppBundle\Entity\ConsultationType, SonataAdminBundle:CRUD]
+        tags:
+            - {name: sonata.admin, manager_type: orm, group: admin.group.consultation, label: admin.label.consultation_type}
+        calls:
+            - [ setTranslationDomain, [SonataAdminBundle]]

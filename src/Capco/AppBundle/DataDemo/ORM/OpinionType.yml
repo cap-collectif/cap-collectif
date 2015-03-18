@@ -1,29 +1,29 @@
 Capco\AppBundle\Entity\OpinionType:
     opinionType1:
         title: Le problème constaté
-        shortName: Problèmes
+        shortName: Problème
         position: 1
         voteWidgetType: 3
         color: red
-        isEnabled: 0
+        isEnabled: false
     opinionType2:
-        title: Les causes
-        shortName: Causes
-        position: 3
-        voteWidgetType: 1
-        color: orange
-        isEnabled: true
-    opinionType3:
         title: Les enjeux
         shortName: Enjeux
         position: 2
-        voteWidgetType: 2
+        voteWidgetType: 3
         color: bluedark
+        isEnabled: true
+    opinionType3:
+        title: Les cause
+        shortName: Causes
+        position: 3
+        voteWidgetType: 3
+        color: orange
         isEnabled: true
     opinionType4:
         title: Les solutions
         shortName: Solutions
         position: 4
-        voteWidgetType: 2
+        voteWidgetType: 3
         color: green
         isEnabled: true

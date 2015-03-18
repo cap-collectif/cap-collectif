@@ -33,6 +33,7 @@ sonata_admin:
                     - capco_admin.admin.argument
                     - capco_admin.admin.argument_vote
                     - capco_admin.admin.source
+                    - capco_admin.admin.consultation_type
             admin.group.ideas:
                 items:
                     - capco_admin.admin.idea
