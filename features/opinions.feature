@@ -32,7 +32,7 @@ Feature: Opinions
       | slug | croissance-innovation-disruption |
     When I follow "Causes"
     And I follow "Proposer"
-    Then I should see "Connection form" from "loginPage"
+    Then I should see "Connection form" on "login page"
 
   Scenario: Logged in user can report an opinion
     Given I am logged in as user

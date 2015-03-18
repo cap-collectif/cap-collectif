@@ -18,7 +18,6 @@
                 var url = "{{ admin.generateObjectUrl('getAllowedTypesFromConsultationType', object) }}"
                 $.get(url, {'consultationTypeId': consultationTypeId}, function(data){
 
-                    console.log(data);
                     if (data.length > 0) {
                         $(allowedTypes).each(function(){
                             console.log($(this));
@@ -30,6 +29,8 @@
                             }
                         });
                     }
+
+                    $(consultationType).select2('val', '');
 
                 });
             }

@@ -9,6 +9,7 @@ Capco\AppBundle\Entity\Consultation:
         video: 'http://www.youtube.com/embed/A3PDXmYoF5U?autoplay=1'
         Image: @MediaConsultationImageVideo
         Themes: [@theme1, @theme2]
+        allowedTypes: [@opinionType1, @opinionType2, @opinionType3]
     cs2:
         title: Stratégie technologique de l'Etat et services publics
         teaser: <text(35)>
@@ -17,7 +18,7 @@ Capco\AppBundle\Entity\Consultation:
         Cover: @MediaConsultation2
         video: 'http://www.youtube.com/embed/wTcNtgA6gHs?autoplay=1'
         Themes: [@theme1, @theme3]
-        allowedTypes: [@opinionType1, @opinionType2, @opinionType3]
+        allowedTypes: [@opinionType1, @opinionType2]
     cs3:
         title: Transformation numérique des relations
         teaser: <text(35)>
@@ -25,3 +26,4 @@ Capco\AppBundle\Entity\Consultation:
         isEnabled: false
         Author: @user4
         Themes: [@theme2, @theme3]
+        allowedTypes: [@opinionType1, @opinionType2, @opinionType3]

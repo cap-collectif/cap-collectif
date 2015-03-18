@@ -61,26 +61,27 @@ class ApplicationContext extends UserContext
     }
 
     /**
-     * @Then I should see :element from :page
+     * @Then I should see :element on :page
      */
-    public function iShouldSeeElementInPage($element, $page)
+    public function iShouldSeeElementOnPage($element, $page)
     {
-        $this->navigationContext->getPage($page)->getElement($element);
+        expect($this->navigationContext->getPage($page)->containsElement($element));
     }
 
     /**
-     * @Then I should not see :element from :page
+     * @Then I should not see :element on :page
      */
-    public function iShouldNotSeeElementInPage($element, $page)
+    public function iShouldNotSeeElementOnPage($element, $page)
     {
-        try {
-            $result = $this->navigationContext->getPage($page)->getElement($element);
-        } catch (ElementNotFoundException $e) {
-            return;
-        }
-        throw new \Exception(
-            'Element '.$element.' is present on the page.'
-        );
+        expect(!$this->navigationContext->getPage($page)->containsElement($element));
+    }
+
+    /**
+     * @Then I should see :nb :element on current page
+     */
+    public function iShouldSeeNbElementOnPage($nb, $element)
+    {
+        expect($nb == count($this->getSession()->getPage()->find("css", $element)));
     }
 
     /**

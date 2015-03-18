@@ -15,8 +15,8 @@ Feature: Arguments
       | consultation_slug | strategie-technologique-de-l-etat-et-services-publics |
       | opinion_type_slug | causes                                                |
       | opinion_slug      | opinion-7                                             |
-    Then I should not see "Argument yes field" from "opinionPage"
-    And I should not see "Argument no field" from "opinionPage"
+    Then I should not see "Argument yes field" on "opinionPage"
+    And I should not see "Argument no field" on "opinionPage"
 
   @javascript @database
   Scenario: Logged in user wants to vote for an argument
