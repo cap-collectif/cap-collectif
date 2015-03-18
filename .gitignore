@@ -38,8 +38,11 @@ dump.rdb
 # tests
 fabfile.pyc
 app/test.db
+app/test.db-journal
 /report/
 behat.yml
+
+
 
 # OS X
 .DS_Store

@@ -37,7 +37,7 @@ def build():
         local('composer install --prefer-source --no-interaction --optimize-autoloader')
 
 @task
-def build_db():
+def build_test_db():
     with lcd(env.local_dir):
         local('php app/console doctrine:schema:update --force -e test')
 

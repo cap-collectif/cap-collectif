@@ -17,9 +17,7 @@ dependencies:
             background: true
         - curl http://get.sensiolabs.org/php-cs-fixer.phar -o php-cs-fixer
         - sudo chmod a+x php-cs-fixer
-        - pip install fabric
-        - pip install requests
-        - pip install libsaas
+        - pip install fabric requests libsaas
 
 deployment:
     preprod:
@@ -34,8 +32,7 @@ test:
         - app/console server:run:
             background: true
         - fab build
-        - app/console doctrine:database:create -e test
-        - fab build_db
+        - fab build_test_db
 
     override:
         - app/console doctrine:migrations:migrate -n
