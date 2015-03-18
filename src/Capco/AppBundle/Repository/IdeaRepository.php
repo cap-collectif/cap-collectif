@@ -208,7 +208,7 @@ class IdeaRepository extends EntityRepository
             ->leftJoin('i.Author', 'a')
             ->leftJoin('a.Media', 'm')
             ->leftJoin('i.Theme', 't')
-            ->leftJoin('i.IdeaVotes', 'v')
+            ->leftJoin('i.votes', 'v')
             ->leftJoin('i.comments', 'c', 'WITH', 'c.isEnabled = :enabled AND c.isTrashed = :notTrashed')
             ->leftJoin('c.Reports', 'cr')
             ->setParameter('enabled', true)
@@ -219,6 +219,35 @@ class IdeaRepository extends EntityRepository
 
         return $query->getOneOrNullResult();
     }
+
+    /**
+     * Get one idea by id
+     * @param $id
+     * @return mixed
+     * @throws \Doctrine\ORM\NonUniqueResultException
+     */
+    public function getOneJoinUserReports($slug, $user = null)
+    {
+        $query = $this->getIsEnabledQueryBuilder()
+            ->addSelect('a', 'm', 't', 'media', 'v', 'c', 'cr')
+            ->leftJoin('i.Media', 'media')
+            ->leftJoin('i.Author', 'a')
+            ->leftJoin('a.Media', 'm')
+            ->leftJoin('i.Theme', 't')
+            ->leftJoin('i.votes', 'v')
+            ->leftJoin('i.comments', 'c', 'WITH', 'c.isEnabled = :enabled AND c.isTrashed = :notTrashed')
+            ->leftJoin('c.Reports', 'cr', 'WITH', 'cr.Reporter =  :user')
+            ->setParameter('enabled', true)
+            ->setParameter('notTrashed', false)
+            ->setParameter('user', $user)
+            ->setParameter('slug', $slug)
+            ->andWhere('i.slug = :slug')
+            ->addOrderBy('v.createdAt', 'DESC')
+            ->getQuery();
+
+        return $query->getOneOrNullResult();
+    }
+
 
     /**
      * Get ideas by theme

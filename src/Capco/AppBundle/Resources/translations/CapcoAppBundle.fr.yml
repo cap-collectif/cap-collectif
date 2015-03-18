@@ -149,9 +149,18 @@ idea:
     media: Image
   vote:
     submit: Soutenir
-    delete: Annuler mon vote
+    private: Rendre privé mon soutien
+    message: Pourquoi soutenez-vous ? (optionnel)
+    name: Nom
+    email: Adresse électronique
+    unsubscribe: Annuler mon soutien
     add_success: Merci ! Votre vote a bien été pris en compte.
     delete_success: Votre vote a bien été supprimé.
+    listing:
+      title: "{1} 1 vote | ]1,Inf[ %count% votes"
+      anonymous: Anonyme
+      see_all: Voir tous les votes
+      title_all: Liste des soutiens
   report:
     submit: Signaler
     reported: Signalé

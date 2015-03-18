@@ -1,0 +1,60 @@
+{% macro vote_user(vote, col) %}
+{% if vote.user is not null %}
+    {% set avatar = vote.user.Media|capco_default_avatar %}
+    {% set profile = path('capco_user_profile_show_all', {'slug': vote.user.slug}) %}
+    {% set username = vote.user.username %}
+{% else %}
+    {% set username = vote.username %}
+    {% set avatar = null %}
+    {% set profile = null %}
+{% endif %}
+{% if vote.private %}
+    {% set avatar = null %}
+    {% set profile = null %}
+    {% set username = 'idea.vote.listing.anonymous' | trans({}, 'CapcoAppBundle') %}
+{% endif %}
+<div class=" {{ 'col-xs-12  col-sm-6  col-md-' ~ col ~ ' col-lg-' ~ col }} ">
+    <div class="media  media--macro  box  block  block--bordered">
+
+        {% if avatar == null and profile == null %}
+            <span class="pull-left">
+                <svg class="media-object" version="1.1" id="Calque_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="45px" height="45px" viewBox="0 0 200 200" enable-background="new 0 0 200 200" xml:space="preserve"><circle fill="{{ capco_site_color_value('color.section.bg')  }}" cx="100" cy="100" r="97.617"/><g><path fill="none" stroke="#FFFFFF" stroke-width="3" stroke-linejoin="round" stroke-miterlimit="10" d="M100,160.011h68.011c0,0,0-12.163-5.916-23.993c-4.41-8.819-22.024-14.039-45.683-22.908V95.367c0,0,7.239-6.661,7.239-18.49c2.959,0,5.916-11.826,0-14.785c0-1.754,7.927-16.569,5.916-26.613c-2.957-14.786-44.353-14.786-47.309-2.955c-17.742,0-5.915,27.169-5.915,29.568c-5.913,2.959-2.957,14.785,0,14.785c0,11.829,7.238,17.473,7.238,17.473v18.759c-23.655,8.875-41.273,14.089-45.682,22.908c-5.911,11.83-5.911,23.993-5.911,23.993H100z"/></g></svg>
+            </span>
+        {% elseif avatar == null and profile != null %}
+            <a class="pull-left" href="{{ profile }}" alt="{{ username }}">
+                <svg class="media-object" version="1.1" id="Calque_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="45px" height="45px" viewBox="0 0 200 200" enable-background="new 0 0 200 200" xml:space="preserve"><circle fill="{{ capco_site_color_value('color.section.bg')  }}" cx="100" cy="100" r="97.617"/><g><path fill="none" stroke="#FFFFFF" stroke-width="3" stroke-linejoin="round" stroke-miterlimit="10" d="M100,160.011h68.011c0,0,0-12.163-5.916-23.993c-4.41-8.819-22.024-14.039-45.683-22.908V95.367c0,0,7.239-6.661,7.239-18.49c2.959,0,5.916-11.826,0-14.785c0-1.754,7.927-16.569,5.916-26.613c-2.957-14.786-44.353-14.786-47.309-2.955c-17.742,0-5.915,27.169-5.915,29.568c-5.913,2.959-2.957,14.785,0,14.785c0,11.829,7.238,17.473,7.238,17.473v18.759c-23.655,8.875-41.273,14.089-45.682,22.908c-5.911,11.83-5.911,23.993-5.911,23.993H100z"/></g></svg>
+            </a>
+        {% else %}
+            <a class="pull-left" href="{{ profile }}" alt="{{ username }}">
+                {% thumbnail avatar, 'avatar' with {'title': username, 'alt': username, 'class': 'media-object img-circle'} %}
+            </a>
+        {% endif %}
+
+        <div class="media-body">
+            <p class="media--aligned media--macro__user">
+                {% if profile is not null %}
+                    <a href="{{ profile }}">{{ username }}</a>
+                {% else %}
+                    {{ username }}
+                {% endif %}
+            </p>
+        </div>
+    </div>
+</div>
+{% endmacro %}
+
+{% import _self as render %}
+
+<div class="row">
+    {% if limit is defined %}
+        {% for vote in idea.votes|slice(0, limit) %}
+            {{ render.vote_user(vote, 4) }}
+        {% endfor %}
+    {% else %}
+        {% for vote in idea.votes %}
+            {{ render.vote_user(vote, 6) }}
+        {% endfor %}
+    {% endif %}
+</div>
+
+

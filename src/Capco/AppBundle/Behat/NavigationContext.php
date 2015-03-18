@@ -26,24 +26,6 @@ class NavigationContext extends PageObjectContext
     }
 
     /**
-     * @When I vote for an idea
-     */
-    public function iVoteForAnIdea()
-    {
-        $this->getPage("idea page")
-             ->open(['slug' => 'ideacommentable'])
-             ->vote();
-    }
-
-    /**
-     * @Then The idea vote counter should be :value
-     */
-    public function theIdeaVoteCounterShouldBe($value)
-    {
-        expect($this->getPage("idea page")->getVoteCounterValue())->toBe($value);
-    }
-
-    /**
      * @When I collapse sources list
      */
     public function iCollapseSourcesList()

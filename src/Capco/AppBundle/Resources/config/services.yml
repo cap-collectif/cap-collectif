@@ -197,11 +197,20 @@ services:
     capco.event.helper:
         class: Capco\AppBundle\Helper\EventHelper
 
+    capco.idea.helper:
+        class: Capco\AppBundle\Helper\IdeaHelper
+
     capco.unlisted_email.validator:
         class: Capco\AppBundle\Validator\Constraints\HasUnlistedEmailValidator
         arguments: [@doctrine.orm.entity_manager]
         tags:
             - { name: validator.constraint_validator, alias: unlisted_email.validator }
+
+    capco.already_vote.validator:
+        class: Capco\AppBundle\Validator\Constraints\DidNotAlreadyVoteEmailValidator
+        arguments: [@doctrine.orm.entity_manager]
+        tags:
+            - { name: validator.constraint_validator, alias: already_vote.validator }
 
     capco.twig.event_helper:
         class: %capco.twig.event_helper.class%

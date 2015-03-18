@@ -4,3 +4,8 @@ event_registration:
     no_user_error: Erreur : vous devez vous connecter ou renseigner un nom et une adresse électronique valide pour pouvoir vous inscrire.
     invalid_email_error: Erreur : L'adresse électronique est invalide.
     email_belongs_to_user: Cette adresse électronique est déjà associée à un compte. Cliquez sur "M'inscrire avec mon compte" pour vous inscrire.
+
+
+idea:
+    vote:
+        already: Cette adresse électronique a déjà été utilisée pour soutenir cette idée.

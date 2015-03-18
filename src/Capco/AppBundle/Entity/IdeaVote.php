@@ -4,16 +4,26 @@ namespace Capco\AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
+use Capco\AppBundle\Validator\Constraints as CapcoAssert;
+
+use Capco\AppBundle\Traits\ConfirmableTrait;
 
 /**
  * ArgumentVote
  *
+ * @CapcoAssert\DidNotAlreadyVoteEmail()
+ * @CapcoAssert\HasAnonymousOrUser()
+ * @CapcoAssert\EmailDoesNotBelongToUser()
  * @ORM\Table(name="idea_vote")
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\IdeaVoteRepository")
  * @ORM\HasLifecycleCallbacks()
  */
 class IdeaVote
 {
+    use \Capco\AppBundle\Traits\ConfirmableTrait;
+    use \Capco\AppBundle\Traits\AnonymousableTrait;
+    use \Capco\AppBundle\Traits\PrivatableTrait;
+
     /**
      * @var integer
      *
@@ -33,9 +43,9 @@ class IdeaVote
     /**
      * @var
      *
-     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Idea", inversedBy="IdeaVotes", cascade={"persist"})
+     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Idea", inversedBy="votes", cascade={"persist"})
      */
-    private $Idea;
+    private $idea;
 
     /**
      * @var
@@ -43,15 +53,20 @@ class IdeaVote
      * @ORM\ManyToOne(targetEntity="Capco\UserBundle\Entity\User")
      * @ORM\JoinColumn(name="voter_id", referencedColumnName="id", onDelete="CASCADE")
      */
-    private $Voter;
+    private $user;
+
+    /**
+     * @ORM\Column(name="message", type="text", nullable=true)
+     */
+    private $message;
 
     public function __toString()
     {
-        if ($this->Idea && $this->Voter) {
-            return $this->getVoter()." - ".$this->getIdea();
-        } else {
-            return "New idea vote";
+        if ($this->idea && $this->user) {
+            return $this->getUser()." - ".$this->getIdea();
         }
+
+        return "New idea vote";
     }
 
     /**
@@ -81,7 +96,7 @@ class IdeaVote
      */
     public function getIdea()
     {
-        return $this->Idea;
+        return $this->idea;
     }
 
     /**
@@ -91,47 +106,66 @@ class IdeaVote
      *
      * @return IdeaVote
      */
-    public function setIdea($Idea)
+    public function setIdea($idea)
     {
-        $this->Idea = $Idea;
-        $this->Idea->addIdeaVote($this);
+        $this->idea = $idea;
+        $this->idea->addVote($this);
 
         return $this;
-
     }
 
     /**
-     * Set voter
+     * Set user
      *
-     * @param \Capco\UserBundle\Entity\User $voter
+     * @param \Capco\UserBundle\Entity\User $user
      *
      * @return IdeaVote
      */
-    public function setVoter(\Capco\UserBundle\Entity\User $voter = null)
+    public function setUser(\Capco\UserBundle\Entity\User $user = null)
     {
-        $this->Voter = $voter;
+        $this->user = $user;
 
         return $this;
     }
 
     /**
-     * Get voter
+     * Get user
      *
      * @return \Capco\UserBundle\Entity\User
      */
-    public function getVoter()
+    public function getUser()
     {
-        return $this->Voter;
+        return $this->user;
     }
 
     /**
      * @ORM\PreRemove
      */
-    public function deleteIdeaVote()
+    public function deleteVote()
     {
-        if ($this->Idea != null) {
-            $this->Idea->removeIdeaVote($this);
+        if ($this->idea != null) {
+            $this->idea->removeVote($this);
         }
-
     }
+
+    /**
+     * Get message
+     */
+    public function getMessage()
+    {
+        return $this->message;
+    }
+
+    /**
+     * Set message
+     *
+     * @param $message
+     */
+    public function setMessage($message)
+    {
+        $this->message = $message;
+
+        return $this;
+    }
+
 }

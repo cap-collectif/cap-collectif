@@ -148,9 +148,9 @@ class Idea implements CommentableInterface
 
     /**
      * @var
-     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\IdeaVote", mappedBy="Idea", cascade={"persist", "remove"}, orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\IdeaVote", mappedBy="idea", cascade={"persist", "remove"}, orphanRemoval=true)
      */
-    private $IdeaVotes;
+    private $votes;
 
     /**
      * @var
@@ -163,7 +163,7 @@ class Idea implements CommentableInterface
      */
     public function __construct()
     {
-        $this->IdeaVotes = new ArrayCollection();
+        $this->votes = new ArrayCollection();
         $this->Reports = new ArrayCollection();
         $this->comments = new ArrayCollection();
         $this->voteCount = 0;
@@ -479,48 +479,48 @@ class Idea implements CommentableInterface
         return $this;
     }
 
-    public function resetIdeaVotes() {
-        foreach ($this->IdeaVotes as $vote) {
-            $this->removeIdeaVote($vote);
+    public function resetVotes() {
+        foreach ($this->votes as $vote) {
+            $this->removeVote($vote);
         }
     }
 
     /**
-     * Add ideaVote
+     * Add vote
      *
-     * @param \Capco\AppBundle\Entity\IdeaVote $ideaVote
+     * @param \Capco\AppBundle\Entity\IdeaVote $vote
      *
      * @return Idea
      */
-    public function addIdeaVote(\Capco\AppBundle\Entity\IdeaVote $ideaVote)
+    public function addVote(\Capco\AppBundle\Entity\IdeaVote $vote)
     {
-        if (!$this->IdeaVotes->contains($ideaVote)) {
-            $this->IdeaVotes->add($ideaVote);
+        if (!$this->votes->contains($vote)) {
+            $this->votes->add($vote);
             $this->voteCount++;
         }
         return $this;
     }
 
     /**
-     * @param IdeaVote $ideaVote
+     * @param \Capco\AppBundle\Entity\IdeaVote $vote
      * @return $this
      */
-    public function removeIdeaVote(\Capco\AppBundle\Entity\IdeaVote $ideaVote)
+    public function removeVote(\Capco\AppBundle\Entity\IdeaVote $vote)
     {
-        if($this->IdeaVotes->removeElement($ideaVote)){
+        if ($this->votes->removeElement($vote)) {
             $this->voteCount--;
         }
         return $this;
     }
 
     /**
-     * Get ideaVotes
+     * Get votes
      *
      * @return \Doctrine\Common\Collections\Collection
      */
-    public function getIdeaVotes()
+    public function getVotes()
     {
-        return $this->IdeaVotes;
+        return $this->votes;
     }
 
     // **************** Custom methods ***************

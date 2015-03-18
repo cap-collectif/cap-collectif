@@ -274,79 +274,53 @@ class IdeaController extends Controller
     /**
      * @Route("/ideas/{slug}", name="app_idea_show", defaults={"_feature_flag" = "ideas"})
      * @Template()
-     * @param Idea $idea
+     * @param string $slug
      * @param Request $request
      * @return array
      */
-    public function showAction(Request $request, Idea $idea)
+    public function showAction(Request $request, $slug)
     {
+        $em = $this->getDoctrine()->getManager();
         $translator = $this->get('translator');
+        $idea = $em->getRepository('CapcoAppBundle:Idea')->getOneJoinUserReports($slug, $this->getUser());
 
         if (false == $idea->canDisplay() ){
             throw $this->createNotFoundException($translator->trans('idea.error.not_found', array(), 'CapcoAppBundle'));
         }
 
-        $em = $this->getDoctrine()->getManager();
-        $currentUrl = $this->generateUrl('app_idea_show', [ 'slug' => $idea->getSlug() ]);
-        $idea = $em->getRepository('CapcoAppBundle:Idea')->getOne($idea);
-        $reportingIdea = $this->getDoctrine()->getRepository('CapcoAppBundle:Reporting')->findBy(array(
-            'Reporter' => $this->getUser(),
-            'Idea' => $idea
-        ));
-
-        $userReportingIdea = (count($reportingIdea) > 0) ? true : false;
-
-        if ($this->get('security.context')->isGranted('ROLE_USER')) {
-            $userVoteCount = $em->getRepository('CapcoAppBundle:IdeaVote')->countForUserAndIdea($this->getUser(), $idea);
-        } else {
-            $userVoteCount = 0;
-        }
-
-        $form = $this->createForm(new IdeaVoteType(), $idea, array(
-            'action' => $currentUrl,
-            'method' => 'POST'
-        ));
+        $ideaHelper = $this->get('capco.idea.helper');
+        $vote = $ideaHelper->findUserVoteOrCreate($idea, $this->getUser());
+        $form = $this->createForm(new IdeaVoteType($this->getUser(), $vote->isConfirmed()), $vote);
 
         if ($request->getMethod() == 'POST') {
 
-            if (!$this->get('security.context')->isGranted('ROLE_USER')) {
-                throw new AccessDeniedException($translator->trans('error.access_restricted', array(), 'CapcoAppBundle'));
-            }
-
-            if (false == $idea->canContribute() ) {
+            if (false == $idea->canContribute()) {
                 throw new AccessDeniedException($translator->trans('idea.error.no_contribute', array(), 'CapcoAppBundle'));
             }
 
+            $vote->setUser($this->getUser());
+            $vote->setIdea($idea);
+            $vote->setIpAddress($request->getClientIp());
             $form->handleRequest($request);
 
             if ($form->isValid()) {
-                if ($userVoteCount == 0) {
-                    $vote = new IdeaVote();
-                    $vote->setVoter($this->getUser());
-                    $vote->setIdea($idea);
-                    $em->persist($vote);
-                    $em->flush();
+                $vote->setConfirmed(!$vote->isConfirmed());
+                $em->persist($vote);
+                $em->flush();
 
-                    $this->get('session')->getFlashBag()->add('success', $translator->trans('idea.vote.add_success'));
+                if ($vote->isConfirmed()) {
+                    $this->get('session')->getFlashBag()->add('success', $this->get('translator')->trans('idea.vote.add_success'));
                 } else {
-                    $vote = $em->getRepository('CapcoAppBundle:IdeaVote')->hasVote($this->getUser(), $idea);
-                    $em = $this->getDoctrine()->getManager();
-                    $em->remove($vote);
-                    $em->flush();
-
-                    $this->get('session')->getFlashBag()->add('info', $translator->trans('idea.vote.delete_success'));
+                    $this->get('session')->getFlashBag()->add('info', $this->get('translator')->trans('idea.vote.delete_success'));
                 }
 
-                // redirect (avoids reload alerts)
-                return $this->redirect($currentUrl);
+                return $this->redirect($this->generateUrl('app_idea_show', ['slug' => $idea->getSlug() ]));
             }
         }
 
-        return array(
+        return [
             'idea' => $idea,
-            'userReportingIdea' => $userReportingIdea,
-            'userVoteCount' => $userVoteCount,
             'form' => $form->createView(),
-        );
+        ];
     }
 }

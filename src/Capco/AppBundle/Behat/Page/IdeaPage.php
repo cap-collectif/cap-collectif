@@ -12,22 +12,9 @@ class IdeaPage extends Page
     protected $path = '/ideas/{slug}';
 
     protected $elements = [
-        'Vote Button' => 'form[name="capco_app_idea_vote"] button',
-        'Vote Counter' => 'form[name="capco_app_idea_vote"] span',
         'First comment vote button' => '.opinion--comment button',
         'First comment vote counter' => '.opinion--comment .opinion__votes-nb',
     ];
-
-    public function vote()
-    {
-        $button = $this->getElement('Vote Button');
-        $button->click();
-    }
-
-    public function getVoteCounterValue()
-    {
-        return $this->getElement('Vote Counter')->getText();
-    }
 
     public function voteForFirstComment()
     {

@@ -208,9 +208,14 @@ admin:
       media: Image
     idea_vote:
       idea: Idée
-      voter: Auteur
+      user: Auteur
       created_at: Création
       updated_at: Mise à jour
+      private: Anonyme
+      confirmed: Confirmé
+      username: Nom d'utilisateur externe
+      email: Adresse mail externe
+      ip: Adresse ip
     menu_item:
       title: Titre
       menu: Type de menu
