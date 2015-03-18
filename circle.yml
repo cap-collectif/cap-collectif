@@ -7,6 +7,10 @@ dependencies:
         - mv app/config/parameters.ci.yml app/config/parameters.yml
         - gem install bundler
         - bundle install --clean
+    post:
+        - wget http://selenium-release.storage.googleapis.com/2.44/selenium-server-standalone-2.44.0.jar
+        - java -jar selenium-server-standalone-2.44.0.jar:
+            background: true
 
 deployment:
     preprod:
@@ -26,6 +30,8 @@ test:
         - app/console doctrine:schema:update --force --env test -n
         - npm install && bower install
         - npm install -g gulp
+        - app/console server:run:
+            background: true
 
     override:
         - app/console doctrine:migrations:migrate -n

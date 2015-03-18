@@ -53,3 +53,29 @@ Scenario: Can comment an idea
   When I press "Commenter"
   Then I should see "Merci ! Votre commentaire a bien été enregistré."
   And I should see "J'ai un truc à dire" in the ".opinion__list" element
+
+  @javascript @database
+  Scenario: Logged in user wants to vote for an idea
+    Given feature "ideas" is enabled
+    And I am logged in as user
+    When I vote for an idea
+    Then The idea vote counter should be "1"
+    And I should see "Merci ! Votre vote a bien été pris en compte."
+    And I should see "Annuler mon vote"
+    And I vote for an idea
+    And I should see "Votre vote a bien été supprimé."
+    And The idea vote counter should be "0"
+
+  @javascript @database @dev
+  Scenario: Logged in user wants to vote for the comment of an idea
+    Given feature "ideas" is enabled
+    And I am logged in as user
+    And I visited "idea page" with:
+      | slug | ideacommentable |
+    When I vote for the first comment
+    Then The first comment vote counter should be "1"
+    And I should see "Merci ! Votre vote a bien été pris en compte."
+    And I should see "Annuler mon vote"
+    And I vote for the first comment
+    And I should see "Votre vote a bien été annulé."
+    And The first comment vote counter should be "0"

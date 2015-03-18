@@ -17,6 +17,8 @@ class OpinionPage extends Page
         'Argument yes buttons' => '.argyes-btns',
         'Argument no field' => '#argno-input',
         'Argument no buttons' => '.argno-btns',
+        'Sources list' => '.sources__panel',
+        'Vote first source' => '.panel-body .media form',
     );
 
     public function submitArgument($type, $text)
@@ -27,4 +29,14 @@ class OpinionPage extends Page
         $button->press();
     }
 
+    public function collapseSourcesList()
+    {
+        $this->getElement('Sources list')->click();
+    }
+
+    public function voteForFirstSource()
+    {
+        $this->getElement('Vote first source')->click();
+    }
 }
+

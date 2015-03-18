@@ -3,7 +3,7 @@ Capco\AppBundle\Entity\CommentVote:
     comment: @evComment<numberBetween(1, 50)>
     Voter: @user<numberBetween(1, 5)>
   iCommentVote{1..150}:
-    comment: @iComment<numberBetween(1, 50)>
+    comment: @iComment<numberBetween(5, 50)>
     Voter: @user<numberBetween(1, 5)>
   pCommentVote{1..150}:
     comment: @pComment<numberBetween(1, 50)>

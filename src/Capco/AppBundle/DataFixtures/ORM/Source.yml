@@ -3,7 +3,7 @@ Capco\AppBundle\Entity\Source:
         title: <text(20)>
         body: <text(1000)>
         Author: @user<numberBetween(1,5)>
-        Opinion: @opinion<numberBetween(1,5)>
+        Opinion: @opinion<current()>
         Category: @Category<numberBetween(1,5)>
         link: http://www.cap-collectif.com/
         voteCountSource: 0
@@ -23,5 +23,3 @@ Capco\AppBundle\Entity\Source:
         Category: @Category<numberBetween(1,5)>
         link: https://www.parlement-et-citoyens.fr/
         voteCountSource: 0
-        isEnabled: <boolean()>
-        isTrashed: <boolean()>

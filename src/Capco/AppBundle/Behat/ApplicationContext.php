@@ -83,4 +83,21 @@ class ApplicationContext extends UserContext
         );
     }
 
+    /**
+     * @When I click the :element element
+     */
+    public function iClickElement($element)
+    {
+        $something = $this->getSession()->getPage()->find("css", $element)->click();
+    }
+
+    /**
+     * @When I wait :seconds seconds
+     */
+    public function iWait($seconds)
+    {
+        $time = intval($seconds * 1000);
+        $this->getSession()->wait($time);
+    }
+
 }

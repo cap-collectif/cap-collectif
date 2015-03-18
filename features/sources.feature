@@ -22,3 +22,18 @@ Feature: Source
       | opinion_type_slug | causes                                                |
       | opinion_slug      | opinion-7                                             |
     Then I should not see "Proposer une source"
+
+ @javascript @database
+  Scenario: Can vote for a source
+    Given I am logged in as user
+    And I visited "opinion page" with:
+      | consultation_slug | croissance-innovation-disruption |
+      | opinion_type_slug | enjeux                           |
+      | opinion_slug      | opinion-3                        |
+    And I collapse sources list
+    When I vote for the first source
+    Then I should see "Merci ! Votre vote a bien été pris en compte."
+    When I collapse sources list
+    Then I should see "Annuler mon vote"
+    When I vote for the first source
+    Then I should see "Votre vote a bien été annulé."

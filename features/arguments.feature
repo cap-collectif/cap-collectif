@@ -17,3 +17,19 @@ Feature: Arguments
       | opinion_slug      | opinion-7                                             |
     Then I should not see "Argument yes field" from "opinionPage"
     And I should not see "Argument no field" from "opinionPage"
+
+  @javascript @database
+  Scenario: Logged in user wants to vote for an argument
+    And I am logged in as user
+    And I visited "opinion page" with:
+      | consultation_slug | croissance-innovation-disruption |
+      | opinion_type_slug | causes                           |
+      | opinion_slug      | opinion-2                        |
+    When I click the ".opinion__arguments--no .opinion__body .btn" element
+    Then I should see "1" in the ".opinion__arguments--no .opinion__body .opinion__votes-nb" element
+    And I wait "2" seconds
+    And I should see "Merci ! Votre vote a bien été pris en compte."
+    And I should see "Annuler mon vote"
+    And I click the ".opinion__arguments--no .opinion__body .btn" element
+    And I should see "Votre vote a bien été annulé."
+    And I should see "0" in the ".opinion__arguments--no .opinion__body .opinion__votes-nb" element

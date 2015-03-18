@@ -25,7 +25,7 @@
         "doctrine/doctrine-fixtures-bundle": "2.2.*",
         "stof/doctrine-extensions-bundle": "~1.2@dev",
         "hautelook/alice-bundle": "~0.2",
-        
+
         "elao/web-profiler-extra-bundle": "dev-master",
 
         "sonata-project/easy-extends-bundle": "~2.1@dev",
@@ -57,7 +57,8 @@
         "ocramius/proxy-manager": "~0.5",
         "tilleuls/ckeditor-sonata-media-bundle": "~2.3@dev",
         "egeloen/ckeditor-bundle": "~3.0@dev",
-        "mewesk/twig-excel-bundle": "~1.0@dev"
+        "mewesk/twig-excel-bundle": "~1.0@dev",
+        "bossa/phpspec2-expect": "*"
     },
     "require-dev": {
         "sensio/generator-bundle": "~2.3",

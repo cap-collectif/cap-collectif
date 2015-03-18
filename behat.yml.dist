@@ -9,16 +9,14 @@ default:
            SensioLabs\Behat\PageObjectExtension:
               namespaces:
                   page: [ Capco\AppBundle\Behat\Page ]
-              factory:
-                  page_parameters:
-                      base_url: 'http://127.0.0.1:8000'
            Behat\MinkExtension:
+              base_url: 'http://127.0.0.1:8000/app_test.php/'
               sessions:
                   default:
                       symfony2: ~
                   javascript:
                       selenium2: ~
-              browser_name: firefox
+              browser_name: chrome
               show_auto:    true
               show_cmd: 'open %s'
     suites:
@@ -27,3 +25,5 @@ default:
             contexts:
                 - Capco\AppBundle\Behat\ApplicationContext
                 - Capco\AppBundle\Behat\NavigationContext
+            mink_session: default
+            mink_javascript_session: javascript

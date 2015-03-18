@@ -46,3 +46,13 @@ Feature: Opinions
       | capco_app_reporting_body   | Pas terrible tout ça... |
     And I press "Signaler"
     Then I should see "Merci ! Votre signalement a bien été pris en compte."
+
+  @javascript @database
+  Scenario: Logged in user wants to vote
+    Given I am logged in as user
+    And I visited "opinion page" with:
+      | consultation_slug | croissance-innovation-disruption |
+      | opinion_type_slug | solutions                        |
+      | opinion_slug      | opinion-5                        |
+    When I click the ".connection-popover-js > label" element
+    Then I should see "1" in the ".opinion__votes-nb" element

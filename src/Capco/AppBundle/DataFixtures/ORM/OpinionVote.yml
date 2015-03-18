@@ -1,5 +1,5 @@
 Capco\AppBundle\Entity\OpinionVote:
     opinionVote{1..150}:
-        Opinion: @opinion<numberBetween(1, 50)>
+        Opinion: @opinion<numberBetween(6, 50)>
         value: <numberBetween(-1, 1)>
         Voter: @user<numberBetween(1, 5)>
