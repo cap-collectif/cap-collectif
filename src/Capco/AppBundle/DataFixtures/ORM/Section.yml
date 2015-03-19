@@ -89,8 +89,8 @@ Capco\AppBundle\Entity\Section:
         nbObjects: null
         enabled: true
         associatedFeatures: []
-    SectionCustomEnabled:
-        type: disabled
+    SectionCustomDisabled:
+        type: custom
         title: Section désactivée
         position: 10
         teaser: <text(150)>

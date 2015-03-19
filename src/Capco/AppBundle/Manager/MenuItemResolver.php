@@ -9,12 +9,12 @@ use Capco\AppBundle\Toggle\Manager;
 class MenuItemResolver
 {
     protected $repository;
-    protected $enabledFeatures;
+    protected $manager;
 
     public function __construct(MenuItemRepository $repository, Manager $toggleManager)
     {
         $this->repository = $repository;
-        $this->enabledFeatures = array_keys($toggleManager->all(true));
+        $this->manager = $toggleManager;
     }
 
     /**
@@ -33,7 +33,7 @@ class MenuItemResolver
                 $links[$value['id']] = [
                     'title' => $value['title'],
                     'link' => $value['link'],
-                    'hasEnabledFeature' => $this->containsEnabledFeature($value['associatedFeatures']),
+                    'hasEnabledFeature' => $this->manager->containsEnabledFeature($value['associatedFeatures']),
                     'children' => []
                 ];
             }
@@ -44,7 +44,7 @@ class MenuItemResolver
                         'id' => $value['id'],
                         'title' => $value['title'],
                         'link' => $value['link'],
-                        'hasEnabledFeature' => $this->containsEnabledFeature($value['associatedFeatures']),
+                        'hasEnabledFeature' => $this->manager->containsEnabledFeature($value['associatedFeatures']),
                     ];
                 }
             }
@@ -56,25 +56,7 @@ class MenuItemResolver
     }
 
     public function hasEnabledFeatures($menuItem) {
-        return $this->containsEnabledFeature($menuItem->getAssociatedFeatures());
+        return $this->manager->containsEnabledFeature($menuItem->getAssociatedFeatures());
     }
 
-    /**
-     * @param $features
-     * @return bool
-     */
-    public function containsEnabledFeature($features)
-    {
-        if (empty($features)) {
-            return true;
-        }
-
-        foreach ($features as $feature) {
-            if (in_array($feature, $this->enabledFeatures)) {
-                return true;
-            }
-        }
-        
-        return false;
-    }
 }

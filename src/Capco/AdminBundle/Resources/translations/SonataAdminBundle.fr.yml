@@ -9,6 +9,7 @@ sonata.admin.group.user: Utilisateurs
 admin.group.moderation: Contributions
 admin.group.news: Actualités
 admin.group.configuration: Configuration
+admin.group.pages: Pages
 
 # Dashboard names
 admin.label.page: Pages
@@ -43,6 +44,7 @@ admin.label.comment: Commentaires
 admin.label.comment_vote: Votes sur les commentaires
 admin.label.event_registrations: Inscription à l'événement
 admin.label.consultation_type: Types de consultation
+admin.label.section: Accueil
 
 # Messages
 admin:
@@ -299,6 +301,15 @@ admin:
       idea: Idée
       comment: Commentaire
       is_archived: Archivé
+    section:
+      title: Titre
+      position: Position
+      teaser: Accroche
+      body: Contenu
+      nb_objects: Nombre d'objets
+      enabled: Publié
+      created_at: Création
+      updated_at: Mise à jour
     site_image:
       title: Description
       media: Image
@@ -408,6 +419,18 @@ admin:
           body: Choisissez le format du fichier :
           button: Format %format%
           cancel: Fermer
+    menu_item:
+      batch_delete:
+        denied: Impossible de supprimer certains des éléments de menu sélectionnés.
+      delete:
+        denied: Impossible de supprimer cet élément de menu.
+    section:
+      batch_delete:
+        denied: Impossible de supprimer certaines des sections sélectionnées.
+      delete:
+        denied: Impossible de supprimer cette section.
+      move_actions:
+        label: Réordonner
 
 capco:
   module:

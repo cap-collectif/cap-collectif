@@ -50,6 +50,9 @@ sonata_admin:
                     - capco_admin.admin.newsletter_subscription
                     - capco_admin.admin.social_network
                     - capco_admin.admin.footer_social_network
+            admin.group.pages:
+                items:
+                    - capco_admin.admin.section
             admin.group.parameters:
                 items:
                     - capco_admin.admin.site_parameter

@@ -170,6 +170,7 @@ class Section
 
     function __construct()
     {
+        $this->type = 'custom';
         $this->updatedAt = new \Datetime;
     }
 

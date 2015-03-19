@@ -9,7 +9,7 @@ services:
 
     capco_admin.admin.menu_item:
         class: Capco\AdminBundle\Admin\MenuItemAdmin
-        arguments: [~, Capco\AppBundle\Entity\MenuItem, SonataAdminBundle:CRUD]
+        arguments: [~, Capco\AppBundle\Entity\MenuItem, CapcoAdminBundle:MenuItem]
         tags:
             - {name: sonata.admin, manager_type: orm, group: admin.group.navigation, label: admin.label.menu_item}
         calls:
@@ -220,5 +220,13 @@ services:
         arguments: [~, Capco\AppBundle\Entity\ConsultationType, SonataAdminBundle:CRUD]
         tags:
             - {name: sonata.admin, manager_type: orm, group: admin.group.consultation, label: admin.label.consultation_type}
+        calls:
+            - [ setTranslationDomain, [SonataAdminBundle]]
+
+    capco_admin.admin.section:
+        class: Capco\AdminBundle\Admin\SectionAdmin
+        arguments: [~, Capco\AppBundle\Entity\Section, CapcoAdminBundle:Section]
+        tags:
+            - {name: sonata.admin, manager_type: orm, group: admin.group.pages, label: admin.label.section}
         calls:
             - [ setTranslationDomain, [SonataAdminBundle]]

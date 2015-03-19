@@ -1,0 +1,6 @@
+{% if false == object | capco_is_last_section %}
+    <a class="btn btn-sm btn-default" href="{{ admin.generateObjectUrl('down', object) }}"><i class="glyphicon glyphicon-chevron-down"></i></a>
+{% else %}
+    <span class="btn btn-sm btn-default disabled"><i class="glyphicon glyphicon-chevron-down"></i></span>
+{% endif %}
+

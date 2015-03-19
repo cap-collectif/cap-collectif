@@ -117,4 +117,23 @@ class Manager
 
         return $toggle;
     }
+
+    /**
+     * @param $features
+     * @return bool
+     */
+    public function containsEnabledFeature($features)
+    {
+        if (empty($features)) {
+            return true;
+        }
+
+        foreach ($features as $feature) {
+            if (in_array($feature, array_keys($this->all(true)))) {
+                return true;
+            }
+        }
+
+        return false;
+    }
 }
