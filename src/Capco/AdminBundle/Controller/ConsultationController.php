@@ -29,8 +29,9 @@ class ConsultationController extends Controller
 
         $response = new Response($content);
         $contentType = $resolver->getContentType($format);
+        $filename = $consultation->getSlug().'.'.$format;
         $response->headers->set('Content-Type', $contentType);
-        $response->headers->set('Content-Disposition', 'inline; filename="'.$consultation->getTitle().'.'.$format.'""');
+        $response->headers->set('Content-Disposition', 'attachment;filename='.$filename);
 
         return $response;
     }
