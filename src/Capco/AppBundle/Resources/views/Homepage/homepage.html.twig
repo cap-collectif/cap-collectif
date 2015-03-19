@@ -40,54 +40,84 @@
             </div>
         </div>
     </div>
-
-    {% set jumbotron2_title = capco_site_parameter_value('homepage.jumbotron2.title') %}
-    {% set jumbotron2_body = capco_site_parameter_value('homepage.jumbotron2.body') %}
-    {% if null != jumbotron2_title or null != jumbotron2_body or (videos|length > 0) %}
-        <div class="jumbotron  jumbotron--custom  jumbotron--bg-2  jumbotron--small">
-            <div class="container">
-                {% if null != jumbotron2_title %}
-                    <h2>{{ jumbotron2_title }}</h2>
-                {% endif %}
-                {% if null != jumbotron2_body %}
-                    <div {% if videos|length > 0 %}class="block"{% endif %}>
-                        {{ jumbotron2_body|raw }}
-                    </div>
-                {% endif %}
-                {% include '@CapcoApp/Homepage/videos.html.twig' %}
-            </div>
-        </div>
-    {% endif %}
 {% endblock %}
 
 {% block body %}
 
-    {% if is_feature_enabled('themes') %}
-        {{ render(controller('CapcoAppBundle:Homepage:lastThemes', {'max': 4, 'offset': 0})) }}
-    {% endif %}
-    {{ render(controller('CapcoAppBundle:Homepage:lastConsultations', {'max': 4, 'offset': 0})) }}
-    {% if is_feature_enabled('ideas') %}
-        {{ render(controller('CapcoAppBundle:Homepage:lastIdeas', {'max': 4, 'offset': 0})) }}
-    {% endif %}
-    {% if is_feature_enabled('blog') %}
-        {{ render(controller('CapcoAppBundle:Homepage:lastPosts', {'max': 3, 'offset': 0})) }}
-    {% endif %}
-    {% if is_feature_enabled('calendar') %}
-        {{ render(controller('CapcoAppBundle:Event:lastEvents', {'max': 4, 'offset': 0})) }}
-    {% endif %}
+    {% for section in sections %}
+        {% if section.type == 'introduction' %}
 
-    <div class="container">
-        <div class="row">
-            {% if is_feature_enabled('newsletter') %}
-                <div class="col-xs-12  col-sm-6">
-                    {% include '@CapcoApp/Homepage/newsletter.html.twig' %}
+            {% set jumbotron2_title = capco_site_parameter_value('homepage.jumbotron2.title') %}
+            {% set jumbotron2_body = capco_site_parameter_value('homepage.jumbotron2.body') %}
+            {% if null != jumbotron2_title or null != jumbotron2_body or (videos|length > 0) %}
+                <div class="jumbotron  jumbotron--custom  jumbotron--bg-2  jumbotron--small">
+                    <div class="container">
+                        {% if null != jumbotron2_title %}
+                            <h2>{{ jumbotron2_title }}</h2>
+                        {% endif %}
+                        {% if null != jumbotron2_body %}
+                            <p>{{ jumbotron2_body|raw }}</p>
+                        {% endif %}
+                    </div>
                 </div>
             {% endif %}
-            <div class="col-xs-12  {% if is_feature_enabled('newsletter') %}col-sm-6{% endif %}">
+
+        {% elseif section.type == 'videos' %}
+
+            <div class="container">
+                <h2 class="h2">{{ section.title }}</h2>
+                <p class="block">{{ section.teaser }}</p>
+                {{ render(controller('CapcoAppBundle:Homepage:lastVideos', {'max': section.nbObjects, 'offset': 0})) }}
+            </div>
+
+        {% elseif section.type == 'consultations' %}
+
+            {{ render(controller('CapcoAppBundle:Homepage:lastConsultations', {'max': section.nbObjects, 'offset': 0})) }}
+
+        {% elseif section.type == 'themes' %}
+
+            {{ render(controller('CapcoAppBundle:Homepage:lastThemes', {'max': section.nbObjects, 'offset': 0})) }}
+
+        {% elseif section.type == 'ideas' %}
+
+            {{ render(controller('CapcoAppBundle:Homepage:lastIdeas', {'max': section.nbObjects, 'offset': 0})) }}
+
+        {% elseif section.type == 'news' %}
+
+            {{ render(controller('CapcoAppBundle:Homepage:lastPosts', {'max': section.nbObjects, 'offset': 0})) }}
+
+        {% elseif section.type == 'events' %}
+
+            {{ render(controller('CapcoAppBundle:Event:lastEvents', {'max': section.nbObjects, 'offset': 0})) }}
+
+        {% elseif section.type == 'newsletter' %}
+
+            <div class="container">
+                <h2 class="h2">{{ section.title }}</h2>
+                <p>{{ section.teaser }}</p>
+                {% include '@CapcoApp/Homepage/newsletter.html.twig' %}
+            </div>
+
+        {% elseif section.type == 'social-networks' %}
+
+            <div class="container">
+                <h2 class="h2">{{ section.title }}</h2>
+                <p>{{ section.teaser }}</p>
                 {{ render(controller('CapcoAppBundle:Homepage:socialNetworks', {})) }}
             </div>
-        </div>
-    </div>
+
+        {% elseif section.type == 'figures' %}
+
+        {% elseif section.type == 'custom' %}
+
+            <div class="container">
+                <h2 class="h2">{{ section.title }}</h2>
+                <p>{{ section.teaser }}</p>
+                <p>{{ section.body | raw }}</p>
+            </div>
+
+        {% endif %}
+    {% endfor %}
 
 {% endblock %}
 

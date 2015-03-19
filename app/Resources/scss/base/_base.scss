@@ -10,12 +10,20 @@ body {
 
 .main {
   background-color: $main-bg;
-  padding-top: 30px;
-  padding-bottom: 30px;
 
-  @media (max-width: $screen-xs-max) {
-    padding-bottom: 15px;
-    padding-top: 15px;
+  & > .container {
+    padding-top: 30px;
+    padding-bottom: 30px;
+
+    @media (max-width: $screen-xs-max) {
+      padding-bottom: 15px;
+      padding-top: 15px;
+    }
+  }
+
+  .container--alt {
+    border-top: 1px solid $border;
+    border-bottom: 1px solid $border;
   }
 }
 

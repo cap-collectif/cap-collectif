@@ -25,15 +25,16 @@ class HomepageController extends Controller
     {
         // Subscription to newsletter
         $subscription = new NewsletterSubscription;
+        $toggleManager = $this->get('capco.toggle.manager');
 
         $form = $this->createForm(new NewsletterSubscriptionType(), $subscription);
 
-        $videos = $this->get('capco.video.repository')->getAll();
+        $sections = $this->get('capco.section.resolver')->getDisplayableEnabledSectionsOrdered();
 
         if ($request->getMethod() == 'POST') {
             $form->handleRequest($request);
 
-            if ($form->isValid()) {
+            if ($toggleManager->isActive('newsletter') && $form->isValid()) {
                 $alreadyExists = $this->getDoctrine()->getRepository('CapcoAppBundle:NewsletterSubscription')->findOneByEmail($subscription->getEmail());
                 if(null != $alreadyExists){
                     $this->get('session')->getFlashBag()->add('info', $this->get('translator')->trans('homepage.newsletter.already_subscribed'));
@@ -54,8 +55,18 @@ class HomepageController extends Controller
 
         return array(
             'form' => $form->createView(),
-            'videos' => $videos,
+            'sections' => $sections,
         );
+    }
+
+    /**
+     * @Template("CapcoAppBundle:Homepage:videos.html.twig")
+     */
+    public function lastVideosAction($max = 4, $offset = 0)
+    {
+        $videos = $this->get('capco.video.repository')->getLast($max, $offset);
+
+        return [ 'videos' => $videos ];
     }
 
     /**

@@ -141,9 +141,8 @@ class SectionAdmin extends Admin
         ;
 
         if ($fields['teaser']) {
-            $formMapper->add('teaser', 'ckeditor', array(
+            $formMapper->add('teaser', null, array(
                 'label' => 'admin.fields.section.teaser',
-                'config_name' => 'admin_editor',
                 'required' => false,
             ));
         }

@@ -80,10 +80,19 @@ Capco\AppBundle\Entity\Section:
         nbObjects: null
         enabled: true
         associatedFeatures: []
+    SectionFigures:
+        type: figures
+        title: Chiffres-clés
+        position: 10
+        teaser: <text(150)>
+        body: null
+        nbObjects: null
+        enabled: true
+        associatedFeatures: []
     SectionCustomEnabled:
         type: custom
         title: Section activée
-        position: 9
+        position: 11
         teaser: <text(150)>
         body: <text(300)>
         nbObjects: null
@@ -92,7 +101,7 @@ Capco\AppBundle\Entity\Section:
     SectionCustomDisabled:
         type: custom
         title: Section désactivée
-        position: 10
+        position: 12
         teaser: <text(150)>
         body: <text(300)>
         nbObjects: null

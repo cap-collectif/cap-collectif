@@ -34,6 +34,21 @@ class SectionResolver
     }
 
     /**
+     * @return array
+     */
+    public function getDisplayableEnabledSectionsOrdered()
+    {
+        $all = $this->repository->getEnabledOrderedByPosition();
+        $sections = array();
+        foreach ($all as $section) {
+            if ($this->toggleManager->containsEnabledFeature($section->getAssociatedFeatures())) {
+                $sections[] = $section;
+            }
+        }
+        return $sections;
+    }
+
+    /**
      * @param $reference
      * @param $relPos
      * @return null
