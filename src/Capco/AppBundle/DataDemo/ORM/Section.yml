@@ -1,0 +1,82 @@
+Capco\AppBundle\Entity\Section:
+    SectionIntro:
+        type: introduction
+        title: Introduction
+        position: 1
+        teaser: <text(150)>
+        body: <text(300)>
+        nbObjects: null
+        enabled: true
+        associatedFeatures: []
+    SectionVideos:
+        type: videos
+        title: Vidéos
+        position: 2
+        teaser: <text(150)>
+        body: null
+        nbObjects: 3
+        enabled: true
+        associatedFeatures: []
+    SectionConsultations:
+        type: consultations
+        title: Consultations
+        position: 3
+        teaser: <text(150)>
+        body: null
+        nbObjects: 4
+        enabled: true
+        associatedFeatures: []
+    SectionThemes:
+        type: themes
+        title: Thèmes
+        position: 4
+        teaser: <text(150)>
+        body: null
+        nbObjects: 4
+        enabled: true
+        associatedFeatures: [themes]
+    SectionIdeas:
+        type: ideas
+        title: Idées
+        position: 4
+        teaser: <text(150)>
+        body: null
+        nbObjects: 4
+        enabled: true
+        associatedFeatures: [ideas]
+    SectionNews:
+        type: news
+        title: Actualités
+        position: 5
+        teaser: <text(150)>
+        body: null
+        nbObjects: 3
+        enabled: true
+        associatedFeatures: [blog]
+    SectionEvents:
+        type: events
+        title: Évènements
+        position: 6
+        teaser: <text(150)>
+        body: null
+        nbObjects: 3
+        enabled: true
+        associatedFeatures: [calendar]
+    SectionNewsletter:
+        type: newsletter
+        title: Lettre d'information
+        position: 7
+        teaser: <text(150)>
+        body: null
+        nbObjects: null
+        enabled: true
+        associatedFeatures: [newsletter]
+    SectionSocialNetworks:
+        type: social-networks
+        title: Restez à l'écoute
+        position: 8
+        teaser: <text(150)>
+        body: null
+        nbObjects: null
+        enabled: true
+        associatedFeatures: []
