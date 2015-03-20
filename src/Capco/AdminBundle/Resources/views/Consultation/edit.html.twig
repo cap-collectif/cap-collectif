@@ -20,7 +20,6 @@
 
                     if (data.length > 0) {
                         $(allowedTypes).each(function(){
-                            console.log($(this));
                             $(this).prop('checked', false);
                             $(this).iCheck('update');
                             if ($.inArray($(this).val(), data)) {

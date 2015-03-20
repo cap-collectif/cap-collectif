@@ -38,7 +38,7 @@ class ConsultationType
     /**
      * @var boolean
      *
-     * @ORM\Column(name="enabled", type="boolean")
+     * @ORM\Column(name="enabled", type="boolean", nullable=false)
      */
     private $enabled = true;
 
