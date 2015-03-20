@@ -16,7 +16,7 @@ class IdeaHelperSpec extends ObjectBehavior
         $this->shouldHaveType('Capco\AppBundle\Helper\IdeaHelper');
     }
 
-    function it_can_find_user_rvote(Idea $idea, User $user)
+    function it_can_find_user_vote(Idea $idea, User $user)
     {
         $idea->getVotes()->willReturn(new ArrayCollection());
         $this->findUserVoteOrCreate($idea, $user)->shouldReturnAnInstanceOf('Capco\AppBundle\Entity\IdeaVote');
