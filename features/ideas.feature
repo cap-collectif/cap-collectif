@@ -66,7 +66,7 @@ Scenario: Can comment an idea
     And I should see "Votre vote a bien été supprimé."
     And The idea vote counter should be "0"
 
-  @javascript @database @dev
+  @javascript @database
   Scenario: Logged in user wants to vote for the comment of an idea
     Given feature "ideas" is enabled
     And I am logged in as user
