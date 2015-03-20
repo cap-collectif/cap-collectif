@@ -13,7 +13,7 @@ dependencies:
         - bundle install --clean
     post:
         - wget http://selenium-release.storage.googleapis.com/2.44/selenium-server-standalone-2.44.0.jar
-        - java -jar selenium-server-standalone-2.44.0.jar:
+        - selenium-server:
             background: true
         - curl http://get.sensiolabs.org/php-cs-fixer.phar -o php-cs-fixer
         - sudo chmod a+x php-cs-fixer
@@ -37,4 +37,5 @@ test:
     override:
         - app/console doctrine:migrations:migrate -n
         - fab circleci lint:pr=$CI_PULL_REQUEST
-        - fab test
+        - bin/phpspec run
+        - bin/behat
