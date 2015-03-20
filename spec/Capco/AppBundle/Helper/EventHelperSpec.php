@@ -46,9 +46,9 @@ class EventHelperSpec extends ObjectBehavior
         $this->isRegistrationPossible($event)->shouldReturn(false);
     }
 
-    function it_can_find_user_registration(Event $event, User $user1)
+    function it_can_find_user_registration(Event $event, User $user)
     {
         $event->getRegistrations()->willReturn(new ArrayCollection());
-        $this->findUserRegistrationOrCreate($event, $user1)->shouldReturnAnInstanceOf('Capco\AppBundle\Entity\EventRegistration');
+        $this->findUserRegistrationOrCreate($event, $user)->shouldReturnAnInstanceOf('Capco\AppBundle\Entity\EventRegistration');
     }
 }
