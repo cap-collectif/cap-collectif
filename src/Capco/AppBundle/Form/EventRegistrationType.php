@@ -55,14 +55,14 @@ class EventRegistrationType extends AbstractType
 
         $builder
             ->add('username', null, [
-                  'label' => 'event_registration.create.name'
+                'label' => 'event_registration.create.name'
             ])
             ->add('email', null, [
-                  'label' => 'event_registration.create.email'
+                'label' => 'event_registration.create.email'
             ])
             ->add('private', null, [
-                  'required' => false,
-                  'label' => 'event_registration.create.private'
+                'required' => false,
+                'label' => 'event_registration.create.private'
             ])
             ->add('submit', 'submit', [
                   'label' => 'event_registration.create.submit',

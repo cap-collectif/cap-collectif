@@ -202,7 +202,7 @@
 {%- endblock datetime_row %}
 
 {% block checkbox_row -%}
-    <div class="form-group{% if not valid %} has-error{% endif %}">
+    <div class="checkbox form-group{% if not valid %} has-error{% endif %}">
         {{ form_widget(form) }}
         {{ form_errors(form) }}
     </div>

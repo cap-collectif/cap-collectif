@@ -148,7 +148,7 @@
                 </div>
 
                 {% if app.user is null %}
-                    <p class="text-center"><a href="{{ path('fos_user_security_login') }}">{{ 'idea_vote.create.my_account'|trans({}, 'CapcoAppBundle') }}</a></p>
+                    <p class="p--topped  text-center"><a href="{{ path('fos_user_security_login') }}">{{ 'idea_vote.create.my_account'|trans({}, 'CapcoAppBundle') }}</a></p>
                 {% endif %}
             </div>
             {% if idea | capco_idea_user_voted(app.user) %}
