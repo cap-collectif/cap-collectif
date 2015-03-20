@@ -34,16 +34,6 @@ homepage:
     invalid: Veuillez entrer une adresse email valide.
     form:
       email: Adresse email
-  social:
-    title: Restez à l'écoute
-  consultations:
-    last: Consultations
-  themes:
-    last: Thèmes
-  ideas:
-    last: Idées
-  posts:
-    last: Actualités
 
 # Page contact
 contact:

@@ -82,7 +82,7 @@ class HomepageController extends Controller
 
     /**
      * @Cache(expires="+1 minutes", maxage="60", smaxage="60", public="true")
-     * @Template("CapcoAppBundle:Theme:lastThemes.html.twig")
+     * @Template("CapcoAppBundle:Homepage:lastThemes.html.twig")
      */
     public function lastThemesAction($max = 4, $offset = 0)
     {
@@ -93,7 +93,7 @@ class HomepageController extends Controller
 
     /**
      * @Cache(expires="+1 minutes", maxage="60", smaxage="60", public="true")
-     * @Template("CapcoAppBundle:Blog:lastPosts.html.twig")
+     * @Template("CapcoAppBundle:Homepage:lastPosts.html.twig")
      */
     public function lastPostsAction($max = 3, $offset = 0)
     {
@@ -121,6 +121,20 @@ class HomepageController extends Controller
             'consultationSteps' => $consultationSteps,
             'statuses' => Consultation::$openingStatuses
         ];
+    }
+
+    /**
+     * @Cache(expires="+1 minutes", maxage="60", smaxage="60", public="true")
+     * @param $max
+     * @param $offset
+     * @return array
+     * @Template("CapcoAppBundle:Homepage:lastEvents.html.twig")
+     */
+    public function lastEventsAction($max = 3, $offset = 0)
+    {
+        $events = $this->get('capco.event.repository')->getLast($max, $offset);
+
+        return [ 'events' => $events ];
     }
 
     /**
