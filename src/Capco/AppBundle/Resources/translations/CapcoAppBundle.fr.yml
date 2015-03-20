@@ -739,3 +739,8 @@ consultation_download:
       media: Fichier
     yes: Oui
     no: Non
+
+idea_vote:
+    toggle:
+        subscribe: Soutenir cette idée
+        unsubscribe: Annuler mon soutien

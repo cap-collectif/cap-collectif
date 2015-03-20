@@ -150,9 +150,12 @@
                 {% if app.user is null %}
                     <p class="text-center"><a href="{{ path('fos_user_security_login') }}">{{ 'event_registration.create.my_account'|trans({}, 'CapcoAppBundle') }}</a></p>
                 {% endif %}
-
-                <button type="button" class="sidebar-toggle sidebar-hidden-large  btn  btn-default  btn-block">{{ 'event_registration.toggle.cancel'|trans({}, 'CapcoAppBundle') }}</button>
             </div>
+            {% if idea | capco_idea_user_voted(app.user) %}
+                <button type="button" class="sidebar-toggle sidebar-hideable  sidebar-hidden-large  btn-danger btn-lg  btn  btn-block  btn--no-radius">{{ 'idea_vote.toggle.unsubscribe'|trans({}, 'CapcoAppBundle') }}</button>
+            {% else %}
+                <button type="button" class="sidebar-toggle sidebar-hideable  sidebar-hidden-large  btn-primary btn-lg  btn  btn-block  btn--no-radius">{{ 'idea_vote.toggle.subscribe'|trans({}, 'CapcoAppBundle') }}</button>
+            {% endif %}
         </div>
     </div>
 </div>

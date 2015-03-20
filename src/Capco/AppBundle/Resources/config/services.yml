@@ -27,6 +27,7 @@ parameters:
     capco.video.repository.class: Capco\AppBundle\Repository\VideoRepository
     capco.consultation.download.resolver.class: Capco\AppBundle\Resolver\ConsultationDownloadResolver
     capco.twig.event_helper.class: Capco\AppBundle\Twig\EventExtension
+    capco.twig.idea_helper.class: Capco\AppBundle\Twig\IdeaExtension
     capco.email_belongs_not.validator.class: Capco\AppBundle\Validator\Constraints\EmailDoesNotBelongToUserValidator
 
 services:
@@ -215,6 +216,12 @@ services:
     capco.twig.event_helper:
         class: %capco.twig.event_helper.class%
         arguments: [@capco.event.helper]
+        tags:
+          - { name: twig.extension }
+
+    capco.twig.idea_helper:
+        class: %capco.twig.idea_helper.class%
+        arguments: [@capco.idea.helper]
         tags:
           - { name: twig.extension }
 
