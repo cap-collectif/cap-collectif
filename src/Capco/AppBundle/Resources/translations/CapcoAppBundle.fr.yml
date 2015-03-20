@@ -744,3 +744,5 @@ idea_vote:
     toggle:
         subscribe: Soutenir cette idée
         unsubscribe: Annuler mon soutien
+    create:
+        my_account: M'inscrire avec mon compte
