@@ -72,8 +72,10 @@ class SectionResolver
     public function isFirstSection(Section $section)
     {
         $sections = $this->getDisplayableSectionsOrdered();
-        $first = $sections[0];
-        return $section === $first;
+        if (count($sections) > 0) {
+            return $section === $sections[0];
+        }
+        return false;
 
     }
 
@@ -84,8 +86,10 @@ class SectionResolver
     public function isLastSection(Section $section)
     {
         $sections = $this->getDisplayableSectionsOrdered();
-        $last = $sections[count($sections) - 1];
-        return $section === $last;
+        if (count($sections) > 0) {
+            return $section === $sections[count($sections) - 1];
+        }
+        return false;
 
     }
 

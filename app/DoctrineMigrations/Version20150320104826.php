@@ -49,13 +49,20 @@ class Version20150320104826 extends AbstractMigration implements ContainerAwareI
 
         $parameterResolver = $this->container->get('capco.site_parameter.resolver');
 
+        $introTitle = $parameterResolver->getValue($siteParameters[0]);
+        if ( null == $introTitle) {
+            $introTitle = 'Introduction';
+        }
+
+        $introBody = $parameterResolver->getValue($siteParameters[1]);
+
         $sections = array(
             array(
                 'introduction',
-                $parameterResolver->getValue($siteParameters[0]),
+                $introTitle,
                 1,
                 null,
-                $parameterResolver->getValue($siteParameters[1]),
+                $introBody,
                 null,
                 true,
                 $created,

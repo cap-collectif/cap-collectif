@@ -103,7 +103,7 @@ class SectionController extends Controller
         ));
     }
 
-    public function upAction($format = null)
+    public function upAction()
     {
         $id     = $this->get('request')->get($this->admin->getIdParameter());
         $object = $this->admin->getObject($id);
@@ -117,7 +117,7 @@ class SectionController extends Controller
 
     }
 
-    public function downAction($format = null)
+    public function downAction()
     {
         $id     = $this->get('request')->get($this->admin->getIdParameter());
         $object = $this->admin->getObject($id);

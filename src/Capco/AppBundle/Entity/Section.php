@@ -167,7 +167,6 @@ class Section
      */
     private $associatedFeatures;
 
-
     function __construct()
     {
         $this->type = 'custom';
@@ -178,9 +177,8 @@ class Section
     {
         if ($this->id) {
             return $this->getTitle();
-        } else {
-            return "New section";
         }
+        return "New section";
     }
 
     /**
