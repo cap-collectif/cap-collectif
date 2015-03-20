@@ -66,7 +66,7 @@ class IdeaVoteType extends AbstractType
             ->add('username', null, [
                   'label' => 'idea.vote.name'
             ])
-            ->add('email', null, [
+            ->add('email', 'email', [
                   'label' => 'idea.vote.email'
             ])
             ->add('private', null, [
