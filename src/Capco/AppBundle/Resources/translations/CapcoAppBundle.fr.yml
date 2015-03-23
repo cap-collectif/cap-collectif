@@ -34,6 +34,22 @@ homepage:
     invalid: Veuillez entrer une adresse email valide.
     form:
       email: Adresse email
+    videos:
+      title: Vidéos
+    consultations:
+      title: Consultations
+    themes:
+      title: Thèmes
+    ideas:
+      title: Idées
+    blog:
+      title: Actualités
+    events:
+      title: Évènements
+    newsletter:
+      title: Lettre d'information
+    social_networks:
+      title: Restez à l'écoute
 
 # Page contact
 contact:

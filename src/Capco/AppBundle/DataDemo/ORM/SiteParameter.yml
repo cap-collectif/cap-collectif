@@ -25,21 +25,6 @@ Capco\AppBundle\Entity\SiteParameter:
         value: /pages/comment-ça-marche
         position: 130
         type: 5
-    SiteParameter5:
-        keyname: homepage.jumbotron2.title
-        title: Titre de l'introduction
-        value: Introduction
-        position: 140
-        type: 0
-    SiteParameter6:
-        keyname: homepage.jumbotron2.body
-        title: Texte de l'introduction
-        value: |
-                <p>Introduisez ici votre démarche et vos objectifs.</p>
-                <p><text(500)></p>
-                <p><text(500)></p>
-        position: 150
-        type: 1
     SiteParameter7:
         keyname: footer.text.title
         title: Titre du pied de page

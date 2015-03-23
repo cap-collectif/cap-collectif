@@ -134,6 +134,7 @@ class SectionAdmin extends Admin
         $formMapper
             ->add('enabled', null, array(
                 'label' => 'admin.fields.section.enabled',
+                'required' => false,
             ))
             ->add('position', null, array(
                 'label' => 'admin.fields.section.position',

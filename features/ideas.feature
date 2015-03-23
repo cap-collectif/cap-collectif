@@ -52,17 +52,6 @@ Scenario: Can comment an idea
   And I should see "J'ai un truc à dire" in the ".opinion__list" element
 
   @javascript @database
-  Scenario: Logged in user wants to vote for an idea
-    Given I am logged in as user
-    When I vote for an idea
-    Then The idea vote counter should be "1"
-    And I should see "Merci ! Votre vote a bien été pris en compte."
-    And I should see "Annuler mon vote"
-    And I vote for an idea
-    And I should see "Votre vote a bien été supprimé."
-    And The idea vote counter should be "0"
-
-  @javascript @database
   Scenario: Logged in user wants to vote for the comment of an idea
     Given I am logged in as user
     And I visited "idea page" with:
@@ -104,7 +93,7 @@ Scenario: Can comment an idea
     When I follow "M'inscrire avec mon compte"
     Then I should see "Se connecter"
 
-  @database @dev
+  @database
   Scenario: Logged in user wants to vote
    Given I am logged in as user
    And I visited "idea page" with:
@@ -113,7 +102,7 @@ Scenario: Can comment an idea
    Then I should see "Merci ! Votre vote a bien été pris en compte."
    And I should see "user" in the "#ideaVotesModal" element
 
-  @database @dev
+  @database
   Scenario: Logged in user wants to vote
     Given I am logged in as user
     And I visited "idea page" with:

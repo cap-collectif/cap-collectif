@@ -1,0 +1,11 @@
+<div class="container">
+    {% if null != section.title %}
+        <h2 class="h2">{{ section.title }}</h2>
+    {% endif %}
+    {% if null != section.teaser %}
+        <p class="block">{{ section.teaser }}</p>
+    {% endif %}
+    {% if null != section.body %}
+        <p>{{ section.body | raw }}</p>
+    {% endif %}
+ </div>
