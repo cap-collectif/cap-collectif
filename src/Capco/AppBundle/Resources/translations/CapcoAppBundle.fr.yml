@@ -268,7 +268,7 @@ consultation:
 
 step:
   status:
-    closed: Fermé
+    closed: Terminé
     open: En cours
     future: À venir
 
