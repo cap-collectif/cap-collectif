@@ -15,18 +15,17 @@
                 var consultationTypeId = $("#{{ admin.uniqId }}_consultationType option:selected").val();
                 var allowedTypes = $("#field_container_{{ admin.uniqId }}_allowedTypes input[type='checkbox']");
 
-                var url = "{{ admin.generateUrl('getAllowedTypesFromConsultationType', {}) }}";
+                var url = "{{ admin.generateObjectUrl('getAllowedTypesFromConsultationType', object) }}"
                 $.get(url, {'consultationTypeId': consultationTypeId}, function(data){
 
                     if (data.length > 0) {
                         $(allowedTypes).each(function(){
                             $(this).prop('checked', false);
-                            if ($.inArray($(this).val(), data) != -1) {
-                                $(this).prop('checked', true);
-                            } else {
-                                $(this).prop('checked', false);
-                            }
                             $(this).iCheck('update');
+                            if ($.inArray($(this).val(), data)) {
+                                $(this).prop('checked', true);
+                                $(this).iCheck('update');
+                            }
                         });
                     }
 

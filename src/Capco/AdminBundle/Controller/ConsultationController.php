@@ -45,7 +45,7 @@ class ConsultationController extends Controller
         }
 
         $em = $this->get('doctrine.orm.entity_manager');
-        $opinionTypes = $em->getRepository('CapcoAppBundle:ConsultationType')->getRelatedTypes($consultationTypeId);
+        $opinionTypes = $em->getRepository('CapcoAppBundle:ConsultationType')->getRelatedTypes(1);
 
         if (null == $opinionTypes) {
             return new JsonResponse(array());

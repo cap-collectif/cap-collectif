@@ -1,4 +1,58 @@
-<div class="consultation__title  block  block--bordered">
+<div class="row consultation__header">
+    <div class="col-xs-12 col-md-5">
+        {% if consultation.Cover %}
+            {% thumbnail consultation.Cover, 'blockHeader' with {'title': consultation.Cover.name, 'alt': consultation.Cover.name, 'class': 'img-responsive'} %}
+        {% endif %}
+    </div>
+    <div class="col-xs-12 col-md-7">
+        <h1 class="consultation__title__title  h3">{{ consultation.title }}</h1>
+            <div class="media">
+                {% set author = consultation.Author %}
+                {% set avatar = author.Media|capco_default_avatar %}
+                {% if avatar != null %}
+                    <a class="pull-left" href="{{ path('capco_user_profile_show_all', {'slug': author.slug}) }}">
+                        {% thumbnail avatar, 'avatar' with {'title': author.username, 'alt': author.username, 'class': 'media-object img-circle'} %}
+                    </a>
+                {% else %}
+                    <a class="pull-left" href="{{ path('capco_user_profile_show_all', {'slug': author.slug}) }}">
+                        <svg class="{{ class }}" version="1.1" id="Calque_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="45px" height="45px" viewBox="0 0 200 200" enable-background="new 0 0 200 200" xml:space="preserve"><circle fill="{{ capco_site_color_value('color.section.bg')  }}" cx="100" cy="100" r="97.617"/><g><path fill="none" stroke="#FFFFFF" stroke-width="3" stroke-linejoin="round" stroke-miterlimit="10" d="M100,160.011h68.011c0,0,0-12.163-5.916-23.993c-4.41-8.819-22.024-14.039-45.683-22.908V95.367c0,0,7.239-6.661,7.239-18.49c2.959,0,5.916-11.826,0-14.785c0-1.754,7.927-16.569,5.916-26.613c-2.957-14.786-44.353-14.786-47.309-2.955c-17.742,0-5.915,27.169-5.915,29.568c-5.913,2.959-2.957,14.785,0,14.785c0,11.829,7.238,17.473,7.238,17.473v18.759c-23.655,8.875-41.273,14.089-45.682,22.908c-5.911,11.83-5.911,23.993-5.911,23.993H100z"/></g></svg>
+                    </a>
+                {% endif %}
+                <div class="media-body">
+                    <p class="media--aligned  excerpt"><a href="{{ path('capco_user_profile_show_all', {'slug': author.slug}) }}">{{ author.username }}</a>
+                    dans
+                    {% for theme in consultation.Themes %}
+                        {{ theme.title }}{% if not loop.last %},{% endif %}
+                    {% endfor %}
+                    le {{ consultation.createdAt | localizeddate('long', 'none')}}
+                    </p>
+                </div>
+            </div>
+        <ul class="nav nav-pills consultation__infos">
+            <li>
+                <div class="value">109</div>
+                <div class="category">contributions</div>
+            </li>
+            <li>
+                <div class="value">109</div>
+                <div class="category">participants</div>
+            </li>
+            <li>
+                <div class="value">109</div>
+                <div class="category">jours restants</div>
+            </li>
+        </ul>
+
+        {{ sonata_block_render({'type': 'capco.block.service.share_button'}, {
+            'url': (consultation | capco_first_step_link(true)),
+            'title': consultation.title
+        }) }}
+    </div>
+</div>
+
+
+
+<!-- <div class="consultation__title  block  block--bordered">
     {% if consultation.Cover %}
         {% thumbnail consultation.Cover, 'blockHeader' with {'title': consultation.Cover.name, 'alt': consultation.Cover.name, 'class': 'img-responsive'} %}
     {% endif %}
@@ -15,3 +69,4 @@
 
     </div>
 </div>
+ -->
