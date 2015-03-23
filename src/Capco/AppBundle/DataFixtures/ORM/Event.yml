@@ -18,6 +18,8 @@ Capco\AppBundle\Entity\Event:
         registrationEnable: true
         lat: 45,7012741
         lng: 4,7959638
+        consultations: [@cs1]
+        themes: [@theme1, @theme2]
     event2:
         title: PHPTour2014
         isEnabled: true

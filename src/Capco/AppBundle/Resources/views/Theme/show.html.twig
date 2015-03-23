@@ -16,7 +16,7 @@
 {% endblock %}
 
 {% block body %}
-    <div class="container  block">
+    <div class="container">
         {% if theme.Media %}
             {% thumbnail theme.Media, 'idea' with {'class': 'block  img-responsive'} %}
         {% endif %}
@@ -38,18 +38,21 @@
         {% endif %}
     </div>
 
-    {% if theme.Consultations|length > 0 %}
-        <div class="container  block">
-            <h2 class="h2">{{ 'homepage.consultations.last'|trans({}, 'CapcoAppBundle') }}</h2>
-            {{ render(controller('CapcoAppBundle:Theme:themeConsultations', {'theme': theme})) }}
+    {% if theme.Consultations | length > 0 %}
+        <div class="container">
+            <h2 class="h2">{{ 'theme.show.consultations.title'|trans({}, 'CapcoAppBundle') }}</h2>
+            {% include 'CapcoAppBundle:Theme:lastConsultations.html.twig' with {'consultations': theme.Consultations} %}
         </div>
     {% endif %}
 
-    {{ render(controller('CapcoAppBundle:Theme:themeIdeas', {'theme': theme})) }}
-
-    {% if theme.Events|length > 0 %}
-        {{ render(controller('CapcoAppBundle:Theme:themeEvents', {'theme': theme})) }}
+    {% if theme.Ideas | length > 0 %}
+    <div class="container">
+        <h2 class="h2">{{ 'theme.show.ideas.title'|trans({}, 'CapcoAppBundle') }} <a class="pull-right  btn  btn-primary" href="{{ path('app_idea_create') }}">{{ 'idea.create.button'|trans({}, 'CapcoAppBundle') }}</a></h2>
+        {%  include 'CapcoAppBundle:Theme:lastIdeas.html.twig' with {'ideas': theme.Ideas} %}
+    </div>
     {% endif %}
+
+    {%  include 'CapcoAppBundle:Theme:appendices.html.twig' %}
 
 {% endblock %}
 

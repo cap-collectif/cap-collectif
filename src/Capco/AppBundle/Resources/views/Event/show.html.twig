@@ -33,13 +33,16 @@
                         <div class="media-body  block">
                             <p class="media--aligned  excerpt">
                                 <a href="{{ path('capco_user_profile_show_all', {'slug': event.Author.slug}) }}">{{ event.Author.username }}</a>
-                                {% if is_feature_enabled('themes') and event.Theme and event.Theme.canDisplay %}
-                                    {{ 'idea.show.in_theme'|trans({}, 'CapcoAppBundle') }} <a href="{{ path('app_theme_show', {'slug': event.Theme.slug}) }}">{{ event.Theme.title }}</a>
+                                {% if is_feature_enabled('themes') and event.themes | length > 0 %}
+                                    {{ 'event.show.in_theme'|trans({}, 'CapcoAppBundle') }}
+                                    {% for theme in event.themes %}
+                                        {% if theme.canDisplay %}
+                                            <a href="{{ path('app_theme_show', {'slug': theme.slug}) }}">{{ theme.title }}</a>{% if loop.revindex0 == '1' %} {{ 'event.and' | trans({}, 'CapcoAppBundle') }}{% elseif loop.revindex0 >= '2' %}, {% endif %}{% endif %}{% endfor %},
                                 {% endif %}
-                                {{ 'idea.show.on_date'|trans({}, 'CapcoAppBundle') }} {{ event.createdAt | localizeddate('long', 'none') }}
+                                {{ 'event.show.on_date'|trans({'%date%': event.createdAt | localizeddate('long', 'none') }, 'CapcoAppBundle') }}
                                 {% if capco_comment_can_show(event) %}
                                     | {% transchoice event.commentsCount with {'%count%': event.commentsCount} from 'CapcoAppBundle' %}
-                                    idea.show.comments
+                                    event.show.comments
                                     {% endtranschoice %}
                                 {% endif %}
                                 {% if event.registrations|length > 0 %}
@@ -76,6 +79,21 @@
 
                     {% if event.lat and event.lng %}
                         <div class="event__map  map-canvas  block" data-lat="{{ event.lat }}" data-lng="{{ event.lng }}"></div>
+                    {% endif %}
+
+                    {% if event.consultations | length > 0 %}
+                        <div class="block">
+                            <p>
+                                {% transchoice event.consultations | length from 'CapcoAppBundle' %}
+                                    event.show.consultations.title
+                                {% endtranschoice %}
+                            </p>
+                            <ul>
+                                {% for consultation in event.consultations %}
+                                    <li><a href="{{ path('app_consultation', {'slug': consultation.slug}) }}">{{ consultation.title }}</a></li>
+                                {% endfor %}
+                            </ul>
+                        </div>
                     {% endif %}
 
                     {% if event.link %}

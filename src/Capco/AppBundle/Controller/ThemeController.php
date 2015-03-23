@@ -10,6 +10,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Cache;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
@@ -77,6 +78,7 @@ class ThemeController extends Controller
 
     /**
      * @Route("/themes/{slug}", name="app_theme_show", defaults={"_feature_flag" = "themes"})
+     * @ParamConverter("theme", class="CapcoAppBundle:Theme", options={"repository_method" = "getOneBySlug"})
      * @Template()
      * @param Theme $theme
      * @return array
@@ -90,48 +92,6 @@ class ThemeController extends Controller
             'theme' => $theme,
             'statuses' => Theme::$statuses
         );
-    }
-
-    /**
-     * @Cache(expires="+1 minutes", maxage="60", smaxage="60", public="true")
-     * @Template("CapcoAppBundle:Theme:lastConsultations.html.twig")
-     * @param $theme
-     * @return array
-     */
-    public function themeConsultationsAction(Theme $theme = null)
-    {
-        $consultations = $this->getDoctrine()->getRepository('CapcoAppBundle:Consultation')->getByTheme($theme->getId());
-
-        return [
-            'consultations' => $consultations,
-            'statuses' => Consultation::$openingStatuses
-        ];
-    }
-
-    /**
-     * @Cache(expires="+1 minutes", maxage="60", smaxage="60", public="true")
-     * @Template("CapcoAppBundle:Idea:lastIdeas.html.twig")
-     * @param $theme
-     * @return array
-     */
-    public function themeIdeasAction(Theme $theme = null)
-    {
-        $ideas = $this->getDoctrine()->getRepository('CapcoAppBundle:Idea')->getByTheme($theme->getId());
-
-        return [ 'ideas' => $ideas ];
-    }
-
-    /**
-     * @Cache(expires="+1 minutes", maxage="60", smaxage="60", public="true")
-     * @Template("CapcoAppBundle:Event:lastEvents.html.twig")
-     * @param $theme
-     * @return array
-     */
-    public function themeEventsAction(Theme $theme = null)
-    {
-        $events = $this->getDoctrine()->getRepository('CapcoAppBundle:Event')->getByTheme($theme->getId());
-
-        return [ 'events' => $events ];
     }
 
 }

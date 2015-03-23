@@ -37,11 +37,11 @@
             </div>
             <div class="thumbnail__status">
                 <p>
-                    {% if consultation.openingStatus == statuses.opened %}
+                    {% if consultation.isOpen %}
                         <span class="label label-success">{{ 'consultation.show.status.opened'|trans({}, 'CapcoAppBundle') }}</span>
-                    {% elseif consultation.openingStatus == statuses.ended %}
+                    {% elseif consultation.isClose %}
                         <span class="label label-danger">{{ 'consultation.show.status.ended'|trans({}, 'CapcoAppBundle') }}</span>
-                    {% elseif consultation.openingStatus == statuses.future %}
+                    {% elseif consultation.isFuture %}
                         <span class="label label-info">{{ 'consultation.show.status.future'|trans({}, 'CapcoAppBundle') }}</span>
                     {% endif %}
                 </p>

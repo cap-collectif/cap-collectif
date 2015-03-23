@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\Controller;
 
+use Capco\AppBundle\Entity\Consultation;
 use Capco\AppBundle\Entity\Theme;
 use Capco\AppBundle\Form\EventSearchType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -24,20 +25,22 @@ class EventController extends Controller
     /**
      * @Route("/events", name="app_event", defaults={"_feature_flag" = "calendar"} )
      * @Route("/events/filter/{theme}", name="app_event_search_theme", defaults={"_feature_flag" = "calendar", "theme" = "all"} )
-     * @Route("/events/filter/{theme}/{term}", name="app_event_search_term", defaults={"_feature_flag" = "calendar", "theme" = "all"} )
+     * @Route("/events/filter/{theme}/{consultation}", name="app_event_search_consultation", defaults={"_feature_flag" = "calendar", "theme" = "all", "consultation"="all"} )
+     * @Route("/events/filter/{theme}/{consultation}/{term}", name="app_event_search_term", defaults={"_feature_flag" = "calendar", "theme" = "all", "consultation"="all"} )
      * @Template()
      * @param $request
      * @param $theme
+     * @param $consultation
      * @param $term
      * @return array
      */
-    public function indexAction(Request $request, $theme = null, $term = null)
+    public function indexAction(Request $request, $theme = null, $consultation= null, $term = null)
     {
 
         $em = $this->getDoctrine()->getManager();
         $currentUrl = $this->generateUrl('app_event');
 
-        $form = $this->createForm(new EventSearchType(), null, array(
+        $form = $this->createForm(new EventSearchType($this->get('capco.toggle.manager')), null, array(
             'action' => $currentUrl,
             'method' => 'POST'
         ));
@@ -51,17 +54,19 @@ class EventController extends Controller
 
                 return $this->redirect($this->generateUrl('app_event_search_term', array(
                     'theme' => $data['theme'] ? $data['theme']->getSlug() : Theme::FILTER_ALL,
+                    'consultation' => $data['consultation'] ? $data['consultation']->getSlug() : Consultation::FILTER_ALL,
                     'term' => $data['term']
                 )));
             }
         } else {
             $form->setData(array(
                 'theme' => $em->getRepository('CapcoAppBundle:Theme')->findOneBySlug($theme),
+                'consultation' => $em->getRepository('CapcoAppBundle:Consultation')->findOneBySlug($consultation),
                 'term' => $term,
             ));
         }
 
-        $groupedEvents = $this->get('capco.event.resolver')->getEventsGroupedByYearAndMonth($theme, $term);
+        $groupedEvents = $this->get('capco.event.resolver')->getEventsGroupedByYearAndMonth($theme, $consultation, $term);
 
         return [
             'years' => $groupedEvents,
@@ -72,19 +77,21 @@ class EventController extends Controller
     /**
      * @Route("/events/archived", name="app_event_archived", defaults={"_feature_flag" = "calendar"} )
      * @Route("/events/archived/{theme}", name="app_event_archived_theme", defaults={"_feature_flag" = "calendar", "theme" = "all"} )
-     * @Route("/events/archived/{theme}/{term}", name="app_event_archived_term", defaults={"_feature_flag" = "calendar", "theme" = "all"} )
+     * @Route("/events/archived/{theme}/{consultation}", name="app_event_archived_consultation", defaults={"_feature_flag" = "calendar", "theme" = "all", "consultation"="all"} )
+     * @Route("/events/archived/{theme}/{consultation}/{term}", name="app_event_archived_term", defaults={"_feature_flag" = "calendar", "theme" = "all", "consultation"="all"} )
      * @Template("CapcoAppBundle:Event:show_archived.html.twig")
      * @param $theme
+     * @param $consultation
      * @param $term
      * @param $request
      * @return array
      */
-    public function showArchivedAction(Request $request, $theme = null, $term = null)
+    public function showArchivedAction(Request $request, $theme = null, $consultation = null, $term = null)
     {
         $em = $this->getDoctrine()->getManager();
         $currentUrl = $this->generateUrl('app_event_archived');
 
-        $form = $this->createForm(new EventSearchType(), null, array(
+        $form = $this->createForm(new EventSearchType($this->get('capco.toggle.manager')), null, array(
             'action' => $currentUrl,
             'method' => 'POST'
         ));
@@ -98,17 +105,19 @@ class EventController extends Controller
 
                 return $this->redirect($this->generateUrl('app_event_archived_term', array(
                     'theme' => $data['theme'] ? $data['theme']->getSlug() : Theme::FILTER_ALL,
+                    'consultation' => $data['consultation'] ? $data['consultation']->getSlug() : Consultation::FILTER_ALL,
                     'term' => $data['term']
                 )));
             }
         } else {
             $form->setData(array(
                 'theme' => $em->getRepository('CapcoAppBundle:Theme')->findOneBySlug($theme),
+                'consultation' => $em->getRepository('CapcoAppBundle:Consultation')->findOneBySlug($consultation),
                 'term' => $term,
             ));
         }
 
-        $groupedEvents = $this->get('capco.event.resolver')->getEventsArchivedGroupedByYearAndMonth($theme, $term);
+        $groupedEvents = $this->get('capco.event.resolver')->getEventsArchivedGroupedByYearAndMonth($theme, $consultation, $term);
 
         return [
             'years' => $groupedEvents,

@@ -20,6 +20,7 @@ use Capco\AppBundle\Entity\Theme;
  */
 class Consultation
 {
+    const FILTER_ALL = 'all';
 
     const SORT_ORDER_CREATED_AT = 0;
     const SORT_ORDER_VOTES_COUNT = 1;

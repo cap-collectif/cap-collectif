@@ -16,12 +16,14 @@ class EventResolver
 
     /**
      * @param $theme
+     * @param $consultation
      * @param $term
      * @return array
      */
-    public function getEventsGroupedByYearAndMonth($theme, $term) {
+    public function getEventsGroupedByYearAndMonth($theme, $consultation, $term)
+    {
 
-        $results = $this->repository->getSearchResults($theme, $term);
+        $results = $this->repository->getSearchResults($theme, $consultation, $term);
 
         if (!empty($results)) {
 
@@ -36,12 +38,14 @@ class EventResolver
 
     /**
      * @param $theme
+     * @param $consultation
      * @param $term
      * @return array
      */
-    public function getEventsArchivedGroupedByYearAndMonth($theme, $term) {
+    public function getEventsArchivedGroupedByYearAndMonth($theme, $consultation, $term)
+    {
 
-        $results = $this->repository->getSearchResultsArchived($theme, $term);
+        $results = $this->repository->getSearchResultsArchived($theme, $consultation, $term);
 
         if (!empty($results)) {
 

@@ -4,6 +4,8 @@ namespace Capco\AppBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\Tools\Pagination\Paginator;
+use Capco\AppBundle\Entity\Theme;
+use Capco\AppBundle\Entity\Consultation;
 
 /**
  * PostRepository
@@ -14,19 +16,70 @@ use Doctrine\ORM\Tools\Pagination\Paginator;
 class PostRepository extends EntityRepository
 {
     /**
-     * Get last ideas
+     * Get posts depending on theme, consultation and search term
+     * @param $nbByPage
+     * @param $page
+     * @param null $themeSlug
+     * @param null $consultationSlug
+     * @return array
+     */
+    public function getSearchResults($nbByPage = 8, $page = 1, $themeSlug = null, $consultationSlug = null)
+    {
+        if ((int) $page < 1) {
+            throw new \InvalidArgumentException(sprintf(
+                'The argument "page" cannot be lower than 1 (current value: "%s")',
+                $page
+            ));
+        }
+
+        $qb = $this->getIsPublishedQueryBuilder('p')
+            ->addSelect('a', 'm', 't', 'c')
+            ->leftJoin('p.Authors', 'a')
+            ->leftJoin('p.Media', 'm')
+            ->leftJoin('p.themes', 't', 'WITH', 't.isEnabled = :enabled')
+            ->leftJoin('p.consultations', 'c', 'WITH', 'c.isEnabled = :enabled')
+            ->setParameter('enabled', true)
+            ->orderBy('p.publishedAt', 'DESC')
+        ;
+
+        if ($themeSlug !== null && $themeSlug !== Theme::FILTER_ALL) {
+            $qb->andWhere('t.slug = :theme')
+                ->setParameter('theme', $themeSlug)
+            ;
+        }
+
+        if ($consultationSlug !== null && $consultationSlug !== Consultation::FILTER_ALL) {
+            $qb->andWhere('c.slug = :consultation')
+                ->setParameter('consultation', $consultationSlug)
+            ;
+        }
+
+        $query = $qb->getQuery();
+
+        if($nbByPage > 0){
+            $query->setFirstResult(($page - 1) * $nbByPage)
+                ->setMaxResults($nbByPage);
+        }
+
+        return new Paginator($query);
+
+    }
+
+    /**
+     * Get last posts
      * @param int $limit
      * @param int $offset
      * @return mixed
      */
     public function getLast($limit = 1, $offset = 0)
     {
-        $qb = $this->getPublicQueryBuilder()
-            ->select('p, a, m')
+        $qb = $this->getIsPublishedQueryBuilder()
+            ->addSelect('a', 'm', 'c', 't')
             ->leftJoin('p.Authors', 'a')
             ->leftJoin('p.Media', 'm')
+            ->leftJoin('p.consultations', 'c')
+            ->leftJoin('p.themes', 't')
             ->addOrderBy('p.publishedAt', 'DESC')
-            ->addGroupBy('p.id')
         ;
 
         if ($limit) {
@@ -42,10 +95,37 @@ class PostRepository extends EntityRepository
             ->execute();
     }
 
+    /**
+     * @param $slug
+     * @return mixed
+     */
+    public function getPublishedBySlug($slug)
+    {
+        $qb = $this->getIsPublishedQueryBuilder('p')
+            ->addSelect('a', 'am', 'm', 'c', 't')
+            ->leftJoin('p.Authors', 'a')
+            ->leftJoin('a.Media', 'am')
+            ->leftJoin('p.Media', 'm')
+            ->leftJoin('p.themes', 't', 'WITH', 't.isEnabled = :tEnabled')
+            ->leftJoin('p.consultations', 'c', 'WITH', 'c.isEnabled = :cEnabled')
+            ->andWhere('p.slug = :slug')
+            ->setParameter('tEnabled', true)
+            ->setParameter('cEnabled', true)
+            ->setParameter('slug', $slug)
+            ->orderBy('p.publishedAt', 'DESC')
+        ;
+
+        return $qb->getQuery()->getOneOrNullResult();
+    }
+
     public function getRecentPosts($count = 5)
     {
         $qb = $this->createQueryBuilder('p')
+            ->addSelect('a', 'm', 'c', 't')
             ->leftJoin('p.Authors', 'a')
+            ->leftJoin('p.Media', 'm')
+            ->leftJoin('p.themes', 't')
+            ->leftJoin('p.consultations', 'c')
             ->orderBy('p.createdAt', 'DESC')
             ->addOrderBy('p.publishedAt', 'DESC')
             ->setMaxResults($count);
@@ -53,38 +133,11 @@ class PostRepository extends EntityRepository
         return $qb->getQuery()->getResult();
     }
 
-    public function getPublishedBySlug($slug)
-    {
-        $qb = $this->getPublicQueryBuilder('p')
-            ->andWhere('p.slug = :slug')
-            ->leftJoin('p.Authors', 'a')
-            ->orderBy('p.publishedAt', 'DESC')
-            ->setParameter('slug', $slug)
-            ->setMaxResults(1);
-
-        return $qb->getQuery()->getOneOrNullResult();
-    }
-
-    public function getPublishedPosts($page = 1, $pageSize)
-    {
-        if ((int) $page < 1) {
-            throw new \InvalidArgumentException(sprintf(
-                'The argument "page" cannot be lower than 1 (current value: "%s")',
-                $page
-            ));
-        }
-
-        $qb = $this->getPublicQueryBuilder('p')
-            ->leftJoin('p.Authors', 'a')
-            ->orderBy('p.publishedAt', 'DESC');
-        $query = $qb->getQuery();
-        $query->setFirstResult(($page - 1) * $pageSize)
-            ->setMaxResults($pageSize);
-
-        return new Paginator($query);
-    }
-
-    protected function getPublicQueryBuilder($alias = 'p')
+    /**
+     * @param string $alias
+     * @return \Doctrine\ORM\QueryBuilder
+     */
+    protected function getIsPublishedQueryBuilder($alias = 'p')
     {
         return $this->createQueryBuilder($alias)
             ->andWhere($alias.'.isPublished = :isPublished')

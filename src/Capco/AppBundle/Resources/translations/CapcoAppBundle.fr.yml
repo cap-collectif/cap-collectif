@@ -199,12 +199,25 @@ theme:
     ideas: "]-Inf, 0] Aucune idée | {1} 1 idée | ]1,Inf[ %count% idées"
     none: Aucun thème
   show:
+    consultations:
+      title: Consultations
+    ideas:
+      title: Idées
     body_title: Contexte
     status:
       title: "Statut du thème : "
       opened: "Ouvert"
       closed: "Fermé"
       future: "À venir"
+    appendices:
+      posts:
+        title: Articles liés
+        number: "]-Inf, 0] Aucun article lié | {1} 1 article lié | ]1,Inf[ %count% articles liés"
+        button: Voir les articles
+      events:
+        title: Évènements liés
+        number: "]-Inf, 0] Aucun évènement lié | {1} 1 évènement lié | ]1,Inf[ %count% évènements liés"
+        button: Voir les évènements
   searchform:
     search: Rechercher
     term: Terme
@@ -568,7 +581,16 @@ blog:
   on_date: le %date%
   see_all: Voir toutes les actualités
   none: "Il n'y a aucune actualité."
+  searchform:
+    theme: Thème
+    consultation: Consultation
+    all_themes: Tous les thèmes
+    all_consultations: Toutes les consultations
+    no_result:  Aucun article ne correspond à ces critères de recherche.
   show:
+    in_theme: dans
+    consultations:
+      title: "]-Inf, 1] Consultation liée : | ]1,Inf[ Consultations liées :"
     comments: "]-Inf, 0] Aucun commentaire | {1} 1 commentaire | ]1,Inf[ %count% commentaires"
 
 # Features
@@ -612,8 +634,22 @@ event:
   see_all: Voir tous les évènements
   see_archived: Voir les évènements passés
   none: "Il n'y a aucun évènement."
+  show:
+    in_theme: dans
+    on_date: le %date%
+    comments: "]-Inf, 0] Aucun commentaire | {1} 1 commentaire | ]1,Inf[ %count% commentaires"
+    consultations:
+      title: "]-Inf, 1] Consultation liée : | ]1, Inf[ Consultations liées :"
+  link_button: Inscrption
   no_result:  Aucun évènement ne correspond à ces critères de recherche.
-  link_button: Inscription
+  and: et
+  searchform:
+    term: Terme
+    theme: Thème
+    consultation: Consultation
+    search: Rechercher
+    all_themes: Tous les thèmes
+    all_consultations: Toutes les consultations
 
 # event registration
 event_registration:

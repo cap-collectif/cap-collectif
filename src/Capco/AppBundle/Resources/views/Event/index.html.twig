@@ -45,6 +45,11 @@
                     {{ form_widget(form.theme, {'attr':{"class":"form-control"} }) }}
                 </div>
                 <div class="col-xs-12  col-sm-3  col-md-3  col-lg-3 filter__down">
+                    {{ form_label(form.consultation, null, {'label_attr':{"class":"control-label  sr-only"} }) }}
+                    {{ form_errors(form.consultation) }}
+                    {{ form_widget(form.consultation, {'attr':{"class":"form-control"} }) }}
+                </div>
+                <div class="col-xs-12  col-sm-3  col-md-3  col-lg-3 filter__down">
                     {{ form_label(form.term, null, {'label_attr':{"class":"control-label sr-only"} }) }}
                     <div class="input-group  filter__search">
                         {{ form_errors(form.term) }}

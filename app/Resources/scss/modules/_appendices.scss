@@ -6,10 +6,19 @@
 .appendices__container {
   border-top: 1px solid $border;
   border-bottom: 1px solid $border;
-  margin-bottom: -30px;
 }
 
 .appendices__item {
   border-left: 1px solid $border;
   border-right: 1px solid $border;
+
+  &:last-child:not(:only-of-type) {
+    border-left: 0;
+  }
+}
+
+@media(max-width: $screen-xs-max) {
+  .appendices__item:not(:last-child) {
+    border-bottom: 1px solid $border;
+  }
 }

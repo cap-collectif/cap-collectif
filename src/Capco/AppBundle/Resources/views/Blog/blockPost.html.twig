@@ -26,12 +26,15 @@
     <div class="media-body">
         <h2 class="media-title  h3"><a href="{{ url('app_blog_show', {'slug': post.slug}) }}" alt="{{ post.title }}">{{ post.title | jolitypo() }}</a></h2>
         <p class="excerpt  h5  media--news__meta">
+            {% for theme in post.themes %}
+                <a href="{{ path('app_theme_show', {'slug': theme.slug}) }}"><span class="label label-default">{{ theme.title }}</span></a>
+            {% endfor %}
+            {{ 'blog.on_date'|trans({'%date%': (post.publishedAt | localizeddate('long', 'none'))}, 'CapcoAppBundle') | capitalize }}
             {% if post.Authors|length > 0 %}
                 {{ 'blog.written_by' | trans({}, 'CapcoAppBundle') }}
                 {% for author in post.Authors %}
                     <a href="{{ path('capco_user_profile_show_all', { slug: author.slug })}}">{{ author.username }}</a>{% if loop.revindex0 == '1' %}{{ 'blog.and' | trans({}, 'CapcoAppBundle') }}{% elseif loop.revindex0 >= '2' %}, {% endif %}{% endfor %},
             {% endif %}
-            {{ 'blog.on_date'|trans({'%date%': (post.publishedAt | localizeddate('long', 'none'))}, 'CapcoAppBundle') }}</p>
         </p>
         {% if post.abstract %}
             <p class="media--news__text">{{ post.abstract | jolitypo() }}</p>

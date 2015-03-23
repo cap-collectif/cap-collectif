@@ -94,8 +94,9 @@
     {% if nbPage > 1 %}
         <div class="pagination--custom  text-center block">
             <ul class="pagination">
-                {% set theme = form.vars.data.theme %}
-                {% if theme is null %}
+                {% if form.vars.data.theme is not null %}
+                    {% set theme = form.vars.data.theme.slug %}
+                {% else %}
                     {% set theme = 'all' %}
                 {% endif %}
                 {% for p in range(1, nbPage) %}

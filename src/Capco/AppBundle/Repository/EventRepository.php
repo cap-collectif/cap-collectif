@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\Repository;
 
+use Capco\AppBundle\Entity\Consultation;
 use Capco\AppBundle\Entity\Theme;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\Tools\Pagination\Paginator;
@@ -13,27 +14,35 @@ use Doctrine\ORM\QueryBuilder;
 class EventRepository extends EntityRepository
 {
     /**
-     * Get events depending on theme and search term, ordered by startAt criteria
-     * @param null $theme
+     * Get events depending on theme, consultation and search term, ordered by startAt criteria
+     * @param null $themeSlug
+     * @param null $consultationSlug
      * @param null $term
      * @return array
      */
-    public function getSearchResults($theme = null, $term = null)
+    public function getSearchResults($themeSlug = null, $consultationSlug = null, $term = null)
     {
 
         $qb = $this->getIsEnabledQueryBuilder()
-            ->addSelect('a', 'm', 't')
+            ->addSelect('a', 'm', 't', 'c')
             ->leftJoin('e.Author', 'a')
             ->leftJoin('a.Media', 'm')
-            ->leftJoin('e.Theme', 't')
+            ->leftJoin('e.themes', 't')
+            ->leftJoin('e.consultations', 'c')
             ->orderBy('e.startAt', 'ASC')
         ;
 
         $qb = $this->whereIsNotArchived($qb);
 
-        if ($theme !== null && $theme !== Theme::FILTER_ALL) {
+        if ($themeSlug !== null && $themeSlug !== Theme::FILTER_ALL) {
             $qb->andWhere('t.slug = :theme')
-                ->setParameter('theme', $theme)
+                ->setParameter('theme', $themeSlug)
+            ;
+        }
+
+        if ($consultationSlug !== null && $consultationSlug !== Consultation::FILTER_ALL) {
+            $qb->andWhere('c.slug = :consultation')
+                ->setParameter('consultation', $consultationSlug)
             ;
         }
 
@@ -49,26 +58,35 @@ class EventRepository extends EntityRepository
 
     /**
      * Get events archived depending on theme and search term, ordered by sort criteria
-     * @param null $theme
+     * @param null $themeSlug
+     * @param null $consultationSlug
      * @param null $term
      * @return array
      */
-    public function getSearchResultsArchived($theme = null, $term = null)
+    public function getSearchResultsArchived($themeSlug = null, $consultationSlug = null, $term = null)
     {
 
         $qb = $this->getIsEnabledQueryBuilder()
-            ->addSelect('a', 'm', 't')
+            ->addSelect('a', 'm', 't', 'c')
             ->leftJoin('e.Author', 'a')
             ->leftJoin('a.Media', 'm')
-            ->leftJoin('e.Theme', 't')
+            ->leftJoin('e.themes', 't', 'WITH', 't.isEnabled = :enabled')
+            ->leftJoin('e.consultations', 'c', 'WITH', 'c.isEnabled = :enabled')
+            ->setParameter('enabled', true)
             ->orderBy('e.startAt', 'DESC')
         ;
 
         $qb = $this->whereIsArchived($qb);
 
-        if ($theme !== null && $theme !== Theme::FILTER_ALL) {
+        if ($themeSlug !== null && $themeSlug !== Theme::FILTER_ALL) {
             $qb->andWhere('t.slug = :theme')
-                ->setParameter('theme', $theme)
+                ->setParameter('theme', $themeSlug)
+            ;
+        }
+
+        if ($consultationSlug !== null && $consultationSlug !== Consultation::FILTER_ALL) {
+            $qb->andWhere('c.slug = :consultation')
+                ->setParameter('consultation', $consultationSlug)
             ;
         }
 
@@ -91,13 +109,17 @@ class EventRepository extends EntityRepository
     public function getOne($slug)
     {
         $qb = $this->getIsEnabledQueryBuilder()
-            ->addSelect('a, t, media, registration')
+            ->addSelect('a', 't', 'media', 'registration', 'c')
             ->leftJoin('e.Author', 'a')
             ->leftJoin('e.Media', 'media')
-            ->leftJoin('e.Theme', 't')
+            ->leftJoin('e.themes', 't', 'WITH', 't.isEnabled = :tEnabled')
+            ->leftJoin('e.consultations', 'c', 'WITH', 'c.isEnabled = :cEnabled')
             ->leftJoin('e.registrations', 'registration', 'WITH', 'registration.confirmed = true')
             ->andWhere('e.slug = :slug')
+            ->setParameter('tEnabled', true)
+            ->setParameter('cEnabled', true)
             ->setParameter('slug', $slug)
+            ->orderBy('e.startAt', 'ASC')
             ->addOrderBy('registration.updatedAt', 'DESC')
         ;
 
@@ -113,9 +135,10 @@ class EventRepository extends EntityRepository
     public function getLast($limit = 1, $offset = 0)
     {
         $qb = $this->getIsEnabledQueryBuilder()
-            ->addSelect('a, t, media')
+            ->addSelect('a', 't', 'media', 'c')
             ->leftJoin('e.Author', 'a')
-            ->leftJoin('e.Theme', 't')
+            ->leftJoin('e.themes', 't')
+            ->leftJoin('e.consultations', 'c')
             ->leftJoin('e.Media', 'media')
             ->orderBy('e.startAt', 'ASC');
 
@@ -140,13 +163,36 @@ class EventRepository extends EntityRepository
     public function getByTheme($theme)
     {
         $qb = $this->getIsEnabledQueryBuilder()
-            ->addSelect('a, media, t')
-            ->leftJoin('e.Theme', 't')
+            ->addSelect('a', 'media', 't', 'c')
+            ->leftJoin('e.themes', 't')
+            ->leftJoin('e.consultations', 'c')
             ->leftJoin('e.Author', 'a')
             ->leftJoin('e.Media', 'media')
             ->andWhere('t.id = :theme')
             ->setParameter('theme', $theme)
-            ->orderBy('e.createdAt', 'DESC');
+            ->orderBy('e.startAt', 'ASC');
+
+        return $qb
+            ->getQuery()
+            ->execute();
+    }
+
+    /**
+     * Get Events by consultation
+     * @param consultation
+     * @return mixed
+     */
+    public function getByConsultation($consultation)
+    {
+        $qb = $this->getIsEnabledQueryBuilder()
+            ->addSelect('a', 'media', 't', 'c')
+            ->leftJoin('e.themes', 't')
+            ->leftJoin('e.consultations', 'c')
+            ->leftJoin('e.Author', 'a')
+            ->leftJoin('e.Media', 'media')
+            ->andWhere('c.id = :consultation')
+            ->setParameter('consultation', $consultation)
+            ->orderBy('e.startAt', 'ASC');
 
         return $qb
             ->getQuery()

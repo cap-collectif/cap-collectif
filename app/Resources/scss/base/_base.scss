@@ -289,3 +289,9 @@ a.excerpt {
 .btn--no-radius {
   @include border-radius(0);
 }
+
+.col-centered {
+  display:inline-block;
+  float:none;
+  margin-right: -4px;
+}

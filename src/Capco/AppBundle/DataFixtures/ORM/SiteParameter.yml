@@ -220,7 +220,7 @@ Capco\AppBundle\Entity\SiteParameter:
     SiteParameterBlogPaginationSize:
         keyname: blog.pagination.size
         title: Nombre d'articles par page du blog
-        value: 10
+        value: 5
         position: 750
         type: 2
     SiteParameterBlogJumbotronBody:

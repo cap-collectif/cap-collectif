@@ -77,6 +77,30 @@ class ThemeRepository extends EntityRepository
         return new Paginator($query);
     }
 
+    /**
+     * @param $slug
+     * @return mixed
+     */
+    public function getOneBySlug($slug)
+    {
+        $qb = $this->getIsEnabledQueryBuilder()
+            ->addSelect('a', 'am', 'm', 'c', 'i', 'p', 'e')
+            ->leftJoin('t.Author', 'a')
+            ->leftJoin('a.Media', 'am')
+            ->leftJoin('t.Media', 'm')
+            ->leftJoin('t.Consultations', 'c', 'WITH', 'c.isEnabled = :enabled')
+            ->leftJoin('t.Ideas', 'i', 'WITH', 'i.isEnabled = :enabled')
+            ->leftJoin('t.posts', 'p', 'WITH', 'p.isPublished = :enabled')
+            ->leftJoin('t.events', 'e', 'WITH', 'e.isEnabled = :enabled')
+            ->andWhere('t.slug = :slug')
+            ->setParameter('enabled', true)
+            ->setParameter('slug', $slug)
+            ->orderBy('t.updatedAt', 'DESC')
+        ;
+
+        return $qb->getQuery()->getOneOrNullResult();
+    }
+
     protected function getIsEnabledQueryBuilder()
     {
         return $this->createQueryBuilder('t')
