@@ -1,10 +1,6 @@
-machine:
-    php:
-        version: 5.5.15
-
 dependencies:
     override:
-        - sudo composer self-update:
+        - sudo composer self-update && composer install --no-interaction -vvv:
             timeout: 3600
     pre:
         - echo "memory_limit = 2048M" > ~/.phpenv/versions/$(phpenv global)/etc/conf.d/memory.ini
@@ -15,9 +11,6 @@ dependencies:
         - wget http://selenium-release.storage.googleapis.com/2.44/selenium-server-standalone-2.44.0.jar
         - java -jar selenium-server-standalone-2.44.0.jar:
             background: true
-        - curl http://get.sensiolabs.org/php-cs-fixer.phar -o php-cs-fixer
-        - sudo chmod a+x php-cs-fixer
-        - pip install fabric requests libsaas
 
 deployment:
     preprod:
@@ -25,16 +18,23 @@ deployment:
         commands:
             - bundle exec cap preprod deploy
 
+
+machine:
+    php:
+        version: 5.5.15
+
 test:
     pre:
         - echo "memory_limit = 2048M" > ~/.phpenv/versions/$(phpenv global)/etc/conf.d/memory.ini
+        - app/console doctrine:database:create --env test
+        - app/console doctrine:schema:update --force --env test -n
+        - npm install && bower install
         - npm install -g gulp
         - app/console server:run:
             background: true
-        - fab build
-        - fab build_test_db
 
     override:
         - app/console doctrine:migrations:migrate -n
-        - fab circleci lint:pr=$CI_PULL_REQUEST
-        - fab test
+        - gulp build
+        - bin/phpspec run
+        - bin/behat

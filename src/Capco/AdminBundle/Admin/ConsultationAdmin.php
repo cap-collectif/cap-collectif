@@ -395,7 +395,7 @@ class ConsultationAdmin extends Admin
     protected function configureRoutes(RouteCollection $collection)
     {
         $collection->add('download', $this->getRouterIdParameter().'/download');
-        $collection->add('getAllowedTypesFromConsultationType', $this->getRouterIdParameter().'/getAllowedTypesFromConsultationType');
+        $collection->add('getAllowedTypesFromConsultationType', 'allowed_types_from_consultation_types');
     }
 
     public function getTemplate($name)
