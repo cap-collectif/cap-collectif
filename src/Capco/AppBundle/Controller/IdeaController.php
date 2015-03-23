@@ -9,6 +9,7 @@ use Capco\AppBundle\Form\IdeaType;
 use Capco\AppBundle\Form\IdeaUpdateType;
 use Capco\AppBundle\Form\IdeaVoteType;
 use Capco\AppBundle\Form\IdeaSearchType;
+use Capco\AppBundle\Entity\IdeaComment;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
@@ -290,7 +291,7 @@ class IdeaController extends Controller
 
         $ideaHelper = $this->get('capco.idea.helper');
         $vote = $ideaHelper->findUserVoteOrCreate($idea, $this->getUser());
-        $form = $this->createForm(new IdeaVoteType($this->getUser(), $vote->isConfirmed()), $vote);
+        $form = $this->createForm(new IdeaVoteType($this->getUser(), $vote->isConfirmed(), $idea->getIsCommentable()), $vote);
 
         if ($request->getMethod() == 'POST') {
 
@@ -309,6 +310,24 @@ class IdeaController extends Controller
                 $em->flush();
 
                 if ($vote->isConfirmed()) {
+
+                    $message = $form->get('message')->getData();
+
+                    if ($message != null) {
+                        $comment = new IdeaComment();
+
+                        // Note : For now, private votes authors are not anonymous in the comment.
+                        $comment
+                            ->setAuthor($vote->getUser())
+                            ->setAuthorName($vote->getUsername())
+                            ->setAuthorEmail($vote->getEmail())
+                            ->setBody($message)
+                            ->setIdea($idea)
+                        ;
+                        $em->persist($comment);
+                        $em->flush();
+                    }
+
                     $this->get('session')->getFlashBag()->add('success', $this->get('translator')->trans('idea.vote.add_success'));
                 } else {
                     $this->get('session')->getFlashBag()->add('info', $this->get('translator')->trans('idea.vote.delete_success'));

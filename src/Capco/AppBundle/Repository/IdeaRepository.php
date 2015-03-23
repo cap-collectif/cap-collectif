@@ -234,7 +234,7 @@ class IdeaRepository extends EntityRepository
             ->leftJoin('i.Author', 'a')
             ->leftJoin('a.Media', 'm')
             ->leftJoin('i.Theme', 't')
-            ->leftJoin('i.votes', 'v')
+            ->leftJoin('i.votes', 'v', 'WITH', 'v.confirmed = true')
             ->leftJoin('i.comments', 'c', 'WITH', 'c.isEnabled = :enabled AND c.isTrashed = :notTrashed')
             ->leftJoin('c.Reports', 'cr', 'WITH', 'cr.Reporter =  :user')
             ->setParameter('enabled', true)

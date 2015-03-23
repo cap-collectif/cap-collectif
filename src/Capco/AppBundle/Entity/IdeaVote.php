@@ -55,11 +55,6 @@ class IdeaVote
      */
     private $user;
 
-    /**
-     * @ORM\Column(name="message", type="text", nullable=true)
-     */
-    private $message;
-
     public function __toString()
     {
         if ($this->idea && $this->user) {
@@ -147,25 +142,4 @@ class IdeaVote
             $this->idea->removeVote($this);
         }
     }
-
-    /**
-     * Get message
-     */
-    public function getMessage()
-    {
-        return $this->message;
-    }
-
-    /**
-     * Set message
-     *
-     * @param $message
-     */
-    public function setMessage($message)
-    {
-        $this->message = $message;
-
-        return $this;
-    }
-
 }

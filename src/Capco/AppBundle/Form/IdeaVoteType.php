@@ -13,11 +13,13 @@ class IdeaVoteType extends AbstractType
 
     private $user;
     private $confirmed;
+    private $commentable;
 
-    public function __construct(User $user = null, $confirmed) {
+    public function __construct(User $user = null, $confirmed, $commentable) {
 
         $this->user = $user;
         $this->confirmed = $confirmed;
+        $this->commentable = $commentable;
     }
 
     /**
@@ -36,11 +38,6 @@ class IdeaVoteType extends AbstractType
           return;
         }
 
-        $builder
-
-        ;
-
-
         if ($this->user != null) {
 
             $builder
@@ -48,11 +45,18 @@ class IdeaVoteType extends AbstractType
                   'required' => false,
                   'label' => 'idea.vote.private'
               ])
-              ->add('message', null, [
+            ;
+
+            if ($this->commentable) {
+              $builder->add('message', null, [
                     'required' => false,
+                    'mapped'        => false,
                     'label' => false,
                     'attr' => ['placeholder' => 'idea.vote.message']
-              ])
+              ]);
+            }
+
+            $builder
               ->add('submit', 'submit', [
                   'label' => 'idea.vote.submit',
                   'attr' => ['class' => 'btn btn-success btn-block']
@@ -73,11 +77,18 @@ class IdeaVoteType extends AbstractType
                   'required' => false,
                   'label' => 'idea.vote.private'
             ])
-            ->add('message', null, [
-                  'required' => false,
-                  'label' => false,
-                  'attr' => ['placeholder' => 'idea.vote.message']
-            ])
+        ;
+
+        if ($this->commentable) {
+          $builder->add('message', null, [
+                'required' => false,
+                'mapped'        => false,
+                'label' => false,
+                'attr' => ['placeholder' => 'idea.vote.message']
+          ]);
+        }
+
+        $builder
             ->add('submit', 'submit', [
                   'label' => 'idea.vote.submit',
                   'attr' => ['class' => 'btn  btn-success  btn-block']

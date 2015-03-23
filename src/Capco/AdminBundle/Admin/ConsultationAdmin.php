@@ -200,6 +200,16 @@ class ConsultationAdmin extends Admin
                     'provider' => 'sonata.media.provider.image',
                 )
             ))
+            ->add('Image', 'sonata_type_model_list', array(
+                'label' => 'admin.fields.consultation.image',
+                'required' => false,
+            ), array(
+                'link_parameters' => array(
+                    'context' => 'default',
+                    'hide_context' => true,
+                    'provider' => 'sonata.media.provider.image',
+                )
+            ))
             ->add('video', null, array(
                 'label' => 'admin.fields.consultation.video',
                 'required' => false,
@@ -288,6 +298,10 @@ class ConsultationAdmin extends Admin
             ->add('Cover', null, array(
                 'template' => 'CapcoAdminBundle:Consultation:cover_show_field.html.twig',
                 'label' => 'admin.fields.consultation.cover',
+            ))
+            ->add('Image', null, array(
+                'template' => 'CapcoAdminBundle:Consultation:cover_show_field.html.twig',
+                'label' => 'admin.fields.consultation.image',
             ))
             ->add('video', null, array(
                 'label' => 'admin.fields.consultation.video',
@@ -381,7 +395,7 @@ class ConsultationAdmin extends Admin
     protected function configureRoutes(RouteCollection $collection)
     {
         $collection->add('download', $this->getRouterIdParameter().'/download');
-        $collection->add('getAllowedTypesFromConsultationType', $this->getRouterIdParameter().'/getAllowedTypesFromConsultationType');
+        $collection->add('getAllowedTypesFromConsultationType', 'allowed_types_from_consultation_types');
     }
 
     public function getTemplate($name)

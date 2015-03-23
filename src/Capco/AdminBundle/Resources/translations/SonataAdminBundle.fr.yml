@@ -156,14 +156,15 @@ admin:
       is_enabled: Publié
       updated_at: Mise à jour
       created_at: Création
-      cover: Image
+      cover: Image de couverture
+      image: Aperçu de la vidéo
       video: Vidéo
       allowed_types: Types de proposition
       consultation_type: Modèle
     consultation_type:
       title: Titre
       opinion_types: Types de proposition
-      enabled: Activé
+      enabled: Publié
       updated_at: Mise à jour
       created_at: Création
     event:

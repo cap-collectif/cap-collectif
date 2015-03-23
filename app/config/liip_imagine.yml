@@ -32,7 +32,7 @@ liip_imagine:
             controller_action: 'SonataMediaBundle:Media:liipImagineFilter'
             format: png
             filters:
-                thumbnail: { size: [760, 500], mode: outbound }
+                thumbnail: { size: [1140, 200], mode: inbound }
 
         default_consultation:
             quality: 100

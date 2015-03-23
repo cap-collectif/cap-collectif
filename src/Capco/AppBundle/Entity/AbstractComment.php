@@ -279,6 +279,8 @@ abstract class AbstractComment
     public function setAuthor($Author)
     {
         $this->Author = $Author;
+
+        return $this;
     }
 
     /**
@@ -295,6 +297,8 @@ abstract class AbstractComment
     public function setAuthorName($authorName)
     {
         $this->authorName = $authorName;
+
+        return $this;
     }
 
     /**
@@ -311,6 +315,8 @@ abstract class AbstractComment
     public function setAuthorEmail($authorEmail)
     {
         $this->authorEmail = $authorEmail;
+
+        return $this;
     }
 
     /**
