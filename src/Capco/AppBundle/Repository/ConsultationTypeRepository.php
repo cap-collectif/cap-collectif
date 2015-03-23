@@ -21,16 +21,16 @@ class ConsultationTypeRepository extends EntityRepository
     public function getRelatedTypes($id)
     {
         $qb = $this->getIsEnabledQueryBuilder('ct')
-            ->select('ct.id, ot.id')
+            ->select('ot.id')
             ->leftJoin('ct.opinionTypes', 'ot')
             ->andWhere('ct.id = :id')
             ->setParameter('id', $id)
-            ->groupBy('ot.id')
         ;
 
-        return $qb
+        return array_map('current',
+            $qb
             ->getQuery()
-            ->getArrayResult();
+            ->getScalarResult());
     }
 
     /**

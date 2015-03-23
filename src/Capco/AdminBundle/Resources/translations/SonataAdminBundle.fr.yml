@@ -164,7 +164,7 @@ admin:
     consultation_type:
       title: Titre
       opinion_types: Types de proposition
-      enabled: Activé
+      enabled: Publié
       updated_at: Mise à jour
       created_at: Création
     event:
