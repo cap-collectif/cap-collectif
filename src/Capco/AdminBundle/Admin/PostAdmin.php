@@ -24,6 +24,17 @@ class PostAdmin extends Admin
             ->add('title', null, array(
                 'label' => 'admin.fields.blog_post.title',
             ))
+        ;
+            if ($this->getConfigurationPool()->getContainer()->get('capco.toggle.manager')->isActive('themes')) {
+                $datagridMapper->add('themes', null, array(
+                    'label' => 'admin.fields.blog_post.themes',
+                ));
+            }
+
+        $datagridMapper
+            ->add('consultations', null, array(
+                'label' => 'admin.fields.blog_post.consultations',
+            ))
             ->add('body', null, array(
                 'label' => 'admin.fields.blog_post.body',
             ))
@@ -60,6 +71,18 @@ class PostAdmin extends Admin
             ->add('Authors', 'sonata_type_collection', array(
                 'label' => 'admin.fields.blog_post.authors',
             ))
+        ;
+
+        if ($this->getConfigurationPool()->getContainer()->get('capco.toggle.manager')->isActive('themes')) {
+            $listMapper->add('themes', null, array(
+                'label' => 'admin.fields.blog_post.themes',
+            ));
+        }
+
+        $listMapper
+            ->add('consultations', null, array(
+                'label' => 'admin.fields.blog_post.consultations',
+            ))
             ->add('createdAt', null, array(
                 'label' => 'admin.fields.blog_post.created_at',
             ))
@@ -82,6 +105,7 @@ class PostAdmin extends Admin
             ))
             ->add('_action', 'actions', array(
                 'actions' => array(
+                    'show' => array(),
                     'edit' => array(),
                     'delete' => array(),
                 )
@@ -101,6 +125,24 @@ class PostAdmin extends Admin
             ->add('Authors', null, array(
                 'label' => 'admin.fields.blog_post.authors',
                 'required' => false,
+                'by_reference' => false,
+            ))
+        ;
+
+        if ($this->getConfigurationPool()->getContainer()->get('capco.toggle.manager')->isActive('themes')) {
+            $formMapper->add('themes', 'sonata_type_model', array(
+                'label' => 'admin.fields.blog_post.themes',
+                'required' => false,
+                'multiple' => true,
+                'by_reference' => false,
+            ));
+        }
+
+        $formMapper
+            ->add('consultations', 'sonata_type_model', array(
+                'label' => 'admin.fields.blog_post.consultations',
+                'required' => false,
+                'multiple' => true,
                 'by_reference' => false,
             ))
             ->add('isPublished', null, array(
@@ -146,6 +188,18 @@ class PostAdmin extends Admin
             ))
             ->add('Authors', null, array(
                 'label' => 'admin.fields.blog_post.authors',
+            ))
+        ;
+
+        if ($this->getConfigurationPool()->getContainer()->get('capco.toggle.manager')->isActive('themes')) {
+            $showMapper->add('themes', null, array(
+                'label' => 'admin.fields.blog_post.themes',
+            ));
+        }
+
+        $showMapper
+            ->add('consultations', null, array(
+                'label' => 'admin.fields.blog_post.consultations',
             ))
             ->add('abstract', null, array(
                 'label' => 'admin.fields.blog_post.abstract',

@@ -14,6 +14,7 @@ use Doctrine\Common\Collections\ArrayCollection;
  *
  * @ORM\Table(name="event")
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\EventRepository")
+ * @ORM\HasLifecycleCallbacks()
  */
 class Event implements CommentableInterface
 {
@@ -147,10 +148,18 @@ class Event implements CommentableInterface
     private $Media;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Theme", inversedBy="Events", cascade={"persist"})
-     * @ORM\JoinColumn(name="theme_id", referencedColumnName="id", onDelete="SET NULL")
+     * @var
+     * @ORM\ManyToMany(targetEntity="Capco\AppBundle\Entity\Theme", inversedBy="events", cascade={"persist"})
+     * @ORM\JoinTable(name="theme_event")
      */
-    private $Theme;
+    private $themes;
+
+    /**
+     * @var
+     * @ORM\ManyToMany(targetEntity="Capco\AppBundle\Entity\Consultation", inversedBy="events", cascade={"persist"})
+     * @ORM\JoinTable(name="consultation_event")
+     */
+    private $consultations;
 
     /**
      * @var
@@ -181,6 +190,8 @@ class Event implements CommentableInterface
     {
         $this->comments = new ArrayCollection();
         $this->registrations = new ArrayCollection();
+        $this->themes = new ArrayCollection();
+        $this->consultations = new ArrayCollection();
         $this->commentsCount = 0;
         $this->updatedAt = new \Datetime;
     }
@@ -346,28 +357,79 @@ class Event implements CommentableInterface
     }
 
     /**
-     * Set theme
+     * Get themes
      *
-     * @param string $theme
-     *
-     * @return Event
+     * @return \Doctrine\Common\Collections\Collection
      */
-    public function setTheme($theme)
+    public function getThemes()
     {
-        $this->Theme = $theme;
-        $this->Theme->addEvent($this);
+        return $this->themes;
+    }
 
+    /**
+     * Add theme
+     *
+     * @param \Capco\AppBundle\Entity\Theme $theme
+     *
+     * @return $this
+     */
+    public function addTheme(Theme $theme)
+    {
+        if (!$this->themes->contains($theme)) {
+            $this->themes->add($theme);
+        }
+        $theme->addEvent($this);
         return $this;
     }
 
     /**
-     * Get theme
-     *
-     * @return string
+     * Remove theme
+     * @param \Capco\AppBundle\Entity\Theme $theme
+     * @return $this
      */
-    public function getTheme()
+    public function removeTheme(Theme $theme)
     {
-        return $this->Theme;
+        $this->themes->removeElement($theme);
+        $theme->removeEvent($this);
+        return $this;
+    }
+
+    /**
+     * Get consultations
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getConsultations()
+    {
+        return $this->consultations;
+    }
+
+    /**
+     * Add consultation
+     *
+     * @param \Capco\AppBundle\Entity\Consultation $consultation
+     *
+     * @return $this
+     */
+    public function addConsultation(Consultation $consultation)
+    {
+        if (!$this->consultations->contains($consultation)) {
+            $this->consultations->add($consultation);
+        }
+        $consultation->addEvent($this);
+        return $this;
+    }
+
+    /**
+     * Remove consultation
+     * @param \Capco\AppBundle\Entity\Consultation $consultation
+     * @return $this
+     */
+    public function removeConsultation(Consultation $consultation)
+    {
+        $this->consultations->removeElement($consultation);
+        $consultation->removeEvent($this);
+        return $this;
     }
 
     /**
@@ -635,6 +697,27 @@ class Event implements CommentableInterface
     public function getStartMonth()
     {
         return $this->startAt->format('m');
+    }
+
+    // ************************** Lifecycle **************************************
+
+    /**
+     * @ORM\PreRemove
+     */
+    public function deleteEvent()
+    {
+        if ($this->themes->count() > 0) {
+            foreach ($this->themes as $theme) {
+                $theme->removeEvent($this);
+            }
+        }
+
+        if ($this->consultations->count() > 0) {
+            foreach ($this->consultations as $consultation) {
+                $consultation->removeEvent($this);
+            }
+        }
+
     }
 }
 

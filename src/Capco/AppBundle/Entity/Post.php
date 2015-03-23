@@ -14,6 +14,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  *
  * @ORM\Table(name="blog_post")
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\PostRepository")
+ * @ORM\HasLifecycleCallbacks()
  */
 class Post implements CommentableInterface
 {
@@ -95,6 +96,20 @@ class Post implements CommentableInterface
 
     /**
      * @var
+     * @ORM\ManyToMany(targetEntity="Capco\AppBundle\Entity\Theme", inversedBy="posts", cascade={"persist"})
+     * @ORM\JoinTable(name="theme_post")
+     */
+    private $themes;
+
+    /**
+     * @var
+     * @ORM\ManyToMany(targetEntity="Capco\AppBundle\Entity\Consultation", inversedBy="posts", cascade={"persist"})
+     * @ORM\JoinTable(name="consultation_post")
+     */
+    private $consultations;
+
+    /**
+     * @var
      * @ORM\ManyToMany(targetEntity="Capco\UserBundle\Entity\User", cascade={"persist"})
      * @ORM\JoinTable(name="blog_post_authors",
      *      joinColumns={@ORM\JoinColumn(name="post_id", referencedColumnName="id")},
@@ -113,6 +128,8 @@ class Post implements CommentableInterface
     {
         $this->Authors = new ArrayCollection();
         $this->comments = new ArrayCollection();
+        $this->themes = new ArrayCollection();
+        $this->consultations = new ArrayCollection();
         $this->voteCount = 0;
         $this->commentsCount = 0;
         $this->updatedAt = new \Datetime;
@@ -404,6 +421,82 @@ class Post implements CommentableInterface
         return $this->Media;
     }
 
+    /**
+     * Get themes
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getThemes()
+    {
+        return $this->themes;
+    }
+
+    /**
+     * Add theme
+     *
+     * @param \Capco\AppBundle\Entity\Theme $theme
+     *
+     * @return $this
+     */
+    public function addTheme(Theme $theme)
+    {
+        if (!$this->themes->contains($theme)) {
+            $this->themes->add($theme);
+        }
+        $theme->addPost($this);
+        return $this;
+    }
+
+    /**
+     * Remove theme
+     * @param \Capco\AppBundle\Entity\Theme $theme
+     * @return $this
+     */
+    public function removeTheme(Theme $theme)
+    {
+        $this->themes->removeElement($theme);
+        $theme->removePost($this);
+        return $this;
+    }
+
+    /**
+     * Get consultations
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getConsultations()
+    {
+        return $this->consultations;
+    }
+
+    /**
+     * Add consultation
+     *
+     * @param \Capco\AppBundle\Entity\Consultation $consultation
+     *
+     * @return $this
+     */
+    public function addConsultation(Consultation $consultation)
+    {
+        if (!$this->consultations->contains($consultation)) {
+            $this->consultations->add($consultation);
+        }
+        $consultation->addPost($this);
+        return $this;
+    }
+
+    /**
+     * Remove consultation
+     * @param \Capco\AppBundle\Entity\Consultation $consultation
+     * @return $this
+     */
+    public function removeConsultation(Consultation $consultation)
+    {
+        $this->consultations->removeElement($consultation);
+        $consultation->removePost($this);
+        return $this;
+    }
+
     // **************************** Commentable Methods **************************
     public function getClassName()
     {
@@ -424,5 +517,24 @@ class Post implements CommentableInterface
         return $this->isPublished;
     }
 
+    // ************************** Lifecycle **************************************
 
+    /**
+     * @ORM\PreRemove
+     */
+    public function deletePost()
+    {
+        if ($this->themes->count() > 0) {
+            foreach ($this->themes as $theme) {
+                $theme->removePost($this);
+            }
+        }
+
+        if ($this->consultations->count() > 0) {
+            foreach ($this->consultations as $consultation) {
+                $consultation->removePost($this);
+            }
+        }
+
+    }
 }

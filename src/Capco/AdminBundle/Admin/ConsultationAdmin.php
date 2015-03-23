@@ -46,6 +46,12 @@ class ConsultationAdmin extends Admin
             ->add('Steps', null, array(
                 'label' => 'admin.fields.consultation.steps',
             ))
+            ->add('events', null, array(
+                'label' => 'admin.fields.consultation.events',
+            ))
+            ->add('posts', null, array(
+                'label' => 'admin.fields.consultation.posts',
+            ))
             ->add('allowedTypes', null, array(
                 'label' => 'admin.fields.consultation.allowed_types',
             ))
@@ -106,6 +112,14 @@ class ConsultationAdmin extends Admin
             ))
             ->add('argumentCount', null, array(
                 'label' => 'admin.fields.consultation.argument_count',
+            ))
+            ->add('eventsCount', null, array(
+                'label' => 'admin.fields.consultation.events_count',
+                'template' => 'CapcoAdminBundle:Consultation:events_count_list_field.html.twig',
+            ))
+            ->add('postsCount', null, array(
+                'label' => 'admin.fields.consultation.posts_count',
+                'template' => 'CapcoAdminBundle:Consultation:posts_count_list_field.html.twig',
             ))
             ->add('isEnabled', null, array(
                 'editable' => true,
@@ -343,6 +357,12 @@ class ConsultationAdmin extends Admin
             ))
             ->add('argumentCount', null, array(
                 'label' => 'admin.fields.consultation.argument_count',
+            ))
+            ->add('events', null, array(
+                'label' => 'admin.fields.consultation.events',
+            ))
+            ->add('posts', null, array(
+                'label' => 'admin.fields.consultation.posts',
             ))
             ->add('trashedOpinionCount', null, array(
                 'label' => 'admin.fields.consultation.trashed_opinion_count',

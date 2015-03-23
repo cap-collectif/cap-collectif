@@ -141,6 +141,7 @@ ivory_ck_editor:
     base_path: 'js/ckeditor/'
     js_path: 'js/ckeditor/ckeditor.js'
     default_config: user_editor
+    input_sync: true
     configs:
         user_editor:
             toolbar: user_toolbar

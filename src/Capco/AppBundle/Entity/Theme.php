@@ -130,9 +130,15 @@ class Theme
 
     /**
      * @var
-     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\Event", mappedBy="Theme", cascade={"persist", "remove"})
+     * @ORM\ManyToMany(targetEntity="Capco\AppBundle\Entity\Event", mappedBy="themes", cascade={"persist"})
      */
-    private $Events;
+    private $events;
+
+    /**
+     * @var
+     * @ORM\ManyToMany(targetEntity="Capco\AppBundle\Entity\Post", mappedBy="themes", cascade={"persist"})
+     */
+    private $posts;
 
     /**
      * @var
@@ -146,7 +152,8 @@ class Theme
     {
         $this->Consultations = new ArrayCollection();
         $this->Ideas = new ArrayCollection();
-        $this->Events = new ArrayCollection();
+        $this->events = new ArrayCollection();
+        $this->posts = new ArrayCollection();
         $this->updatedAt = new \Datetime;
     }
 
@@ -393,38 +400,70 @@ class Theme
     }
 
     /**
-     * Get Event
-     *
      * @return \Doctrine\Common\Collections\Collection
      */
     public function getEvents()
     {
-        return $this->Events;
+        return $this->events;
     }
 
     /**
-     * Add Event
-     *
-     * @param \Capco\AppBundle\Entity\Event $event
-     *
+     * @param Event $event
      * @return Theme
      */
-    public function addEvent(\Capco\AppBundle\Entity\Event $event)
+    public function addEvent(Event $event)
     {
-        if (!$this->Events->contains($event)) {
-            $this->Events[] = $event;
+        if (!$this->events->contains($event)) {
+            $this->events->add($event);
         }
         return $this;
     }
 
     /**
-     * Remove idea
-     *
-     * @param \Capco\AppBundle\Entity\Event $event
+     * @param Event $event
+     * @return $this
      */
-    public function removeEvent(\Capco\AppBundle\Entity\Event $event)
+    public function removeEvent(Event $event)
     {
-        $this->Events->removeElement($event);
+        $this->events->removeElement($event);
+        return $this;
+    }
+
+    /**
+     * Get Posts
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getPosts()
+    {
+        return $this->posts;
+    }
+
+    /**
+     * Add Post
+     *
+     * @param Post $post
+     *
+     * @return $this
+     */
+    public function addPost(Post $post)
+    {
+        if (!$this->posts->contains($post)) {
+            $this->posts[] = $post;
+        }
+        return $this;
+    }
+
+    /**
+     * Remove post
+     *
+     * @param Post $post
+     * @return $this
+     */
+    public function removePost(Post $post)
+    {
+        $this->posts->removeElement($post);
+        return $this;
     }
 
     /**

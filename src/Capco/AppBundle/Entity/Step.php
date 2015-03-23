@@ -12,6 +12,7 @@ use Capco\AppBundle\Entity\Consultation;
  *
  * @ORM\Table(name="step")
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\StepRepository")
+ * @ORM\HasLifecycleCallbacks()
  */
 class Step
 {

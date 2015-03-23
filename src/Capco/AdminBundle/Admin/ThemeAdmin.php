@@ -36,6 +36,12 @@ class ThemeAdmin extends Admin
             ->add('Ideas', null, array(
                 'label' => 'admin.fields.theme.ideas',
             ))
+            ->add('events', null, array(
+                'label' => 'admin.fields.theme.events',
+            ))
+            ->add('posts', null, array(
+                'label' => 'admin.fields.theme.posts',
+            ))
             ->add('createdAt', null, array(
                 'label' => 'admin.fields.theme.created_at',
             ))
@@ -75,6 +81,14 @@ class ThemeAdmin extends Admin
             ->add('consultationsCount', null, array(
                 'label' => 'admin.fields.theme.consultations_count',
                 'template' => 'CapcoAdminBundle:Theme:consultations_count_list_field.html.twig',
+            ))
+            ->add('eventsCount', null, array(
+                'label' => 'admin.fields.theme.events_count',
+                'template' => 'CapcoAdminBundle:Theme:events_count_list_field.html.twig',
+            ))
+            ->add('postsCount', null, array(
+                'label' => 'admin.fields.theme.posts_count',
+                'template' => 'CapcoAdminBundle:Theme:posts_count_list_field.html.twig',
             ))
             ->add('isEnabled', null, array(
                 'editable' => true,
@@ -170,19 +184,17 @@ class ThemeAdmin extends Admin
             ->add('Author', null, array(
                 'label' => 'admin.fields.theme.author',
             ))
-            ->add('consultationsCount', null, array(
-                'label' => 'admin.fields.theme.consultations_count',
-                'template' => 'CapcoAdminBundle:Theme:consultations_count_show_field.html.twig',
-            ))
             ->add('Consultations', null, array(
                 'label' => 'admin.fields.theme.consultations',
             ))
-            ->add('ideasCount', null, array(
-                'label' => 'admin.fields.theme.ideas_count',
-                'template' => 'CapcoAdminBundle:Theme:ideas_count_show_field.html.twig',
-            ))
             ->add('Ideas', null, array(
                 'label' => 'admin.fields.theme.ideas',
+            ))
+            ->add('events', null, array(
+                'label' => 'admin.fields.theme.events',
+            ))
+            ->add('posts', null, array(
+                'label' => 'admin.fields.theme.posts',
             ))
             ->add('Media', null, array(
                 'template' => 'CapcoAdminBundle:Theme:media_show_field.html.twig',

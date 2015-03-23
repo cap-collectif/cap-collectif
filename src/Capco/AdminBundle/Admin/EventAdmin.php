@@ -32,12 +32,15 @@ class EventAdmin extends Admin
         ;
 
         if ($this->getConfigurationPool()->getContainer()->get('capco.toggle.manager')->isActive('themes')) {
-            $datagridMapper->add('Theme', null, array(
+            $datagridMapper->add('themes', null, array(
                 'label' => 'admin.fields.event.themes',
             ));
         }
 
         $datagridMapper
+            ->add('consultations', null, array(
+                'label' => 'admin.fields.event.consultations',
+            ))
             ->add('Author', null, array(
                 'label' => 'admin.fields.event.author',
             ))
@@ -77,12 +80,15 @@ class EventAdmin extends Admin
         ;
 
         if ($this->getConfigurationPool()->getContainer()->get('capco.toggle.manager')->isActive('themes')) {
-            $listMapper->add('Theme', null, array(
+            $listMapper->add('themes', null, array(
                 'label' => 'admin.fields.event.themes',
             ));
         }
 
         $listMapper
+            ->add('consultations', null, array(
+                'label' => 'admin.fields.event.consultations',
+            ))
             ->add('Author', 'sonata_type_model', array(
                 'label' => 'admin.fields.event.author',
             ))
@@ -102,8 +108,8 @@ class EventAdmin extends Admin
             ))
             ->add('_action', 'actions', array(
                 'actions' => array(
-                    'show' => array(),
                     'registrations' => array('template' => 'CapcoAdminBundle:CRUD:list__action_registrations.html.twig'),
+                    'show' => array(),
                     'edit' => array(),
                     'delete' => array(),
                 )
@@ -177,13 +183,21 @@ class EventAdmin extends Admin
         ;
 
         if ($this->getConfigurationPool()->getContainer()->get('capco.toggle.manager')->isActive('themes')) {
-            $formMapper->add('Theme', 'sonata_type_model_list', array(
+            $formMapper->add('themes', 'sonata_type_model', array(
                 'label' => 'admin.fields.event.themes',
                 'required' => false,
+                'multiple' => true,
+                'by_reference' => false,
             ));
         }
 
         $formMapper
+            ->add('consultations', 'sonata_type_model', array(
+                'label' => 'admin.fields.event.consultations',
+                'required' => false,
+                'multiple' => true,
+                'by_reference' => false,
+            ))
             ->add('isEnabled', null, array(
                 'label' => 'admin.fields.event.is_enabled',
                 'required' => false,
@@ -238,12 +252,15 @@ class EventAdmin extends Admin
         ;
 
         if ($this->getConfigurationPool()->getContainer()->get('capco.toggle.manager')->isActive('themes')) {
-            $showMapper->add('Theme', null, array(
+            $showMapper->add('themes', null, array(
                 'label' => 'admin.fields.event.themes',
             ));
         }
 
         $showMapper
+            ->add('consultation', null, array(
+                'label' => 'admin.fields.event.consultation',
+            ))
             ->add('Author', null, array(
                 'label' => 'admin.fields.event.author',
             ))

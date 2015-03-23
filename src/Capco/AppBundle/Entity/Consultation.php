@@ -16,6 +16,7 @@ use Capco\AppBundle\Entity\Theme;
  *
  * @ORM\Table(name="consultation")
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\ConsultationRepository")
+ * @ORM\HasLifecycleCallbacks()
  */
 class Consultation
 {
@@ -182,6 +183,18 @@ class Consultation
      */
     private $allowedTypes;
 
+    /**
+     * @var
+     * @ORM\ManyToMany(targetEntity="Capco\AppBundle\Entity\Event", mappedBy="consultations", cascade={"persist"})
+     */
+    private $events;
+
+    /**
+     * @var
+     * @ORM\ManyToMany(targetEntity="Capco\AppBundle\Entity\Post", mappedBy="consultations", cascade={"persist"})
+     */
+    private $posts;
+
 
     /**
      * Constructor
@@ -191,6 +204,8 @@ class Consultation
         $this->Themes = new ArrayCollection();
         $this->Opinions = new ArrayCollection();
         $this->Steps = new ArrayCollection();
+        $this->events = new ArrayCollection();
+        $this->posts = new ArrayCollection();
         $this->allowedTypes = new ArrayCollection();
         $this->updatedAt = new \Datetime;
     }
@@ -607,6 +622,73 @@ class Consultation
     public function removeAllowedType($allowedType)
     {
         $this->allowedTypes->removeElement($allowedType);
+        return $this;
+    }
+
+    /**
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getEvents()
+    {
+        return $this->events;
+    }
+
+    /**
+     * @param Event $event
+     * @return Theme
+     */
+    public function addEvent(Event $event)
+    {
+        if (!$this->events->contains($event)) {
+            $this->events->add($event);
+        }
+        return $this;
+    }
+
+    /**
+     * @param Event $event
+     * @return $this
+     */
+    public function removeEvent(Event $event)
+    {
+        $this->events->removeElement($event);
+        return $this;
+    }
+
+    /**
+     * Get Posts
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getPosts()
+    {
+        return $this->posts;
+    }
+
+    /**
+     * Add Post
+     *
+     * @param Post $post
+     *
+     * @return $this
+     */
+    public function addPost(Post $post)
+    {
+        if (!$this->posts->contains($post)) {
+            $this->posts[] = $post;
+        }
+        return $this;
+    }
+
+    /**
+     * Remove post
+     *
+     * @param Post $post
+     * @return $this
+     */
+    public function removePost(Post $post)
+    {
+        $this->posts->removeElement($post);
         return $this;
     }
 

@@ -106,6 +106,8 @@ admin:
       published_at: Date de Publication
       is_published: Publié
       media: Photo
+      themes: Thèmes
+      consultations: Consultations
       is_commentable: Commentable
       comments_count: Nombre de commentaires
     category:
@@ -161,6 +163,10 @@ admin:
       video: Vidéo
       allowed_types: Types de proposition
       consultation_type: Modèle
+      events_count: Évènements
+      events: Évènements
+      posts_count: Articles
+      posts: Articles
     consultation_type:
       title: Titre
       opinion_types: Types de proposition
@@ -179,6 +185,7 @@ admin:
       updated_at: Mise à jour
       created_at: Création
       themes: Thèmes
+      consultations: Consultations
       author: Auteur
       start_at: Commence
       end_at: Termine
@@ -361,6 +368,8 @@ admin:
       teaser: Accroche
       body: Contenu
       consultations: Consultations
+      events: Évènements
+      posts: Articles
       ideas: Idées
       media: Image
       updated_at: Mise à jour
@@ -369,6 +378,8 @@ admin:
       status: Statut
       ideas_count: Idées
       consultations_count: Consultations
+      events_count: Évènements
+      posts_count: Articles
       position: Position
       no_status: Aucun statut
     user:
