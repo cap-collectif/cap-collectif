@@ -38,7 +38,7 @@
                 <div class="value">109</div>
                 <div class="category">participants</div>
             </li>
-            <li data-toggle="popover" title="Popover title" data-content="And here's some amazing content. It's very engaging. Right?">
+            <li data-toggle="tooltip" data-placement="top" title="{{ consultation.closedAt | localizeddate('long', 'none') }}">
                 <div class="value">{{ consultation.getRemainingDays() | default('0') }}</div>
                 <div class="category">jours restants</div>
             </li>
