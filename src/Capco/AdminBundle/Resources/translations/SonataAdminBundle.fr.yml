@@ -158,8 +158,7 @@ admin:
       is_enabled: Publié
       updated_at: Mise à jour
       created_at: Création
-      cover: Image de couverture
-      image: Aperçu de la vidéo
+      cover: Image
       video: Vidéo
       allowed_types: Types de proposition
       consultation_type: Modèle

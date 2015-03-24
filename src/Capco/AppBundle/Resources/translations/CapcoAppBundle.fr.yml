@@ -234,6 +234,8 @@ consultation:
   see_all: Voir toutes les consultations
   none: Aucune consultation.
   show:
+    in_theme: dans
+    on_date: le %date%
     alert:
       ended:
         title: Consultation terminée.

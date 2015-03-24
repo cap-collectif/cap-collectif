@@ -1,17 +1,51 @@
-<div class="consultation__title  block  block--bordered">
-    {% if consultation.Cover %}
-        {% thumbnail consultation.Cover, 'blockHeader' with {'title': consultation.Cover.name, 'alt': consultation.Cover.name, 'class': 'img-responsive'} %}
-    {% endif %}
-    <div class="consultation__title__body">
-        <div class="pull-left">
-            <h1 class="consultation__title__title  h3">{{ consultation.title }}</h1>
-        </div>
+<div class="row block">
+    <div class="col-xs-12 col-sm-5">
+        {% if consultation.video is not null %}
+            <a href="{{ consultation.video }}" class="play fancybox" data-type="iframe">
+        {% endif %}
+        {% if consultation.Cover %}
+            {% thumbnail consultation.Cover, 'blockHeader' with {'title': consultation.Cover.name, 'alt': consultation.Cover.name, 'class': 'img-responsive'} %}
+        {% else %}
+            <div class="bg--default bg--consultation"></div>
+        {% endif %}
+        {% if consultation.video is not null %}
+            </a>
+        {% endif %}
+    </div>
+    <div class="col-xs-12 col-sm-7">
+        <h1 class="consultation__header__title  h2">{{ consultation.title }}</h1>
+
+        {% set text %}
+            <p class="media--aligned  excerpt">
+                <a href="{{ path('capco_user_profile_show_all', {'slug': consultation.Author.slug}) }}">
+                    {{ consultation.Author.username }}
+                </a>{{ 'consultation.show.in_theme' | trans({}, 'CapcoAppBundle') }}
+                {% for theme in consultation.Themes %}
+                    <a href="{{ path('app_theme_show', {'slug': theme.slug}) }}">{{ theme.title }}</a>{% if not loop.last %},{% endif %}{% endfor %},
+                {{ 'consultation.show.on_date' | trans({'%date%': consultation.createdAt | localizeddate('long', 'none')}, 'CapcoAppBundle') }}
+            </p>
+        {% endset %}
+
+        {% include 'CapcoUserBundle:Avatar:avatar.html.twig' with {'user': consultation.Author, 'class': 'media-object', 'text': text} only %}
+
+        <ul class="nav nav-pills consultation__infos">
+<!--             <li>
+                <div class="value">109</div>
+                <div class="category">contributions</div>
+            </li>
+            <li>
+                <div class="value">109</div>
+                <div class="category">participants</div>
+            </li> -->
+            <li data-toggle="tooltip" data-placement="top" title="{{ consultation.closedAt | localizeddate('long', 'none') }}">
+                <div class="value">{{ consultation.getRemainingDays() | default('0') }}</div>
+                <div class="excerpt  category">jours restants</div>
+            </li>
+        </ul>
 
         {{ sonata_block_render({'type': 'capco.block.service.share_button'}, {
             'url': (consultation | capco_first_step_link(true)),
-            'title': consultation.title,
-            'classes': 'pull-right'
+            'title': consultation.title
         }) }}
-
     </div>
 </div>

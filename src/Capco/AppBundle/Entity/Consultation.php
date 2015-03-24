@@ -165,14 +165,6 @@ class Consultation
     private $Cover;
 
     /**
-     * @var
-     *
-     * @ORM\ManyToOne(targetEntity="Capco\MediaBundle\Entity\Media", cascade={"persist"})
-     * @ORM\JoinColumn(name="image_id", referencedColumnName="id", nullable=true, onDelete="SET NULL")
-     */
-    private $Image;
-
-    /**
      * @ORM\Column(name="video", type="string", nullable = true)
      */
     private $video = null;
@@ -552,22 +544,6 @@ class Consultation
     public function setCover($cover)
     {
         $this->Cover = $cover;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getImage()
-    {
-        return $this->Image;
-    }
-
-    /**
-     * @param mixed $Image
-     */
-    public function setImage($Image)
-    {
-        $this->Image = $Image;
     }
 
     /**

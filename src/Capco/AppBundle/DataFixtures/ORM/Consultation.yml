@@ -7,7 +7,6 @@ Capco\AppBundle\Entity\Consultation:
         Author: @user4
         Cover: @MediaConsultation1
         video: 'http://www.youtube.com/embed/A3PDXmYoF5U?autoplay=1'
-        Image: @MediaConsultationImageVideo
         Themes: [@theme1, @theme2]
         allowedTypes: [@opinionType1, @opinionType2, @opinionType3]
     cs2:
