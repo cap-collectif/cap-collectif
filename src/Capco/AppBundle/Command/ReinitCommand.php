@@ -81,7 +81,7 @@ class ReinitCommand extends ContainerAwareCommand
 
     protected function loadToggles(OutputInterface $output)
     {
-        $command = $this->getApplication()->find('capco:reinit-feature-flags');
+        $command = $this->getApplication()->find('capco:reset-feature-flags');
         $input = new ArrayInput(array(
             '--force' => true,
             '',
