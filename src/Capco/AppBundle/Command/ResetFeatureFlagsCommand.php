@@ -8,13 +8,13 @@ use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Input\ArrayInput;
 
-class SetFeatureFlagsCommand extends ContainerAwareCommand
+class ResetFeatureFlagsCommand extends ContainerAwareCommand
 {
     protected function configure()
     {
         $this
-            ->setName('capco:reinit-feature-flags')
-            ->setDescription('Reinit the feature flags')
+            ->setName('capco:reset-feature-flags')
+            ->setDescription('Reset the feature flags to default values')
             ->addOption("force", false, InputOption::VALUE_NONE, "set this option to force the reinit. Warning, this may de/activate some features")
         ;
     }
@@ -27,7 +27,7 @@ class SetFeatureFlagsCommand extends ContainerAwareCommand
         }
 
         $output->writeln('');
-        $output->writeln('Re-init the feature toggles to the default configuration');
+        $output->writeln('Resetting the feature toggles to the default configuration');
 
         $toggleManager = $this->getApplication()->getKernel()->getContainer()->get('capco.toggle.manager');
         $toggleManager->activate('blog');
@@ -40,6 +40,6 @@ class SetFeatureFlagsCommand extends ContainerAwareCommand
         $toggleManager->activate('login_gplus');
         $toggleManager->deactivate('shield_mode');
 
-        $output->writeln('Feature toggles reinitialized');
+        $output->writeln('Feature flags reseted');
     }
 }

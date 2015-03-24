@@ -23,7 +23,7 @@ class ApplicationContext extends UserContext
      */
     public static function reinitFeatures()
     {
-        exec('php app/console capco:reinit-feature-flags --force');
+        exec('php app/console capco:reset-feature-flags --force');
     }
 
     /**

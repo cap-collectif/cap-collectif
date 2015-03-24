@@ -9,13 +9,13 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Input\ArrayInput;
 use Doctrine\DBAL\Exception\ConnectionException;
 
-class ReinitDemoCommand extends ContainerAwareCommand
+class ReinitCommand extends ContainerAwareCommand
 {
     protected function configure()
     {
         $this
-            ->setName('capco:demo')
-            ->setDescription('Reinit the demo application data')
+            ->setName('capco:reinit')
+            ->setDescription('Reinit the application data')
             ->addOption("force", false, InputOption::VALUE_NONE, "set this option to force the rebuild")
         ;
     }
@@ -23,15 +23,9 @@ class ReinitDemoCommand extends ContainerAwareCommand
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         if (!$input->getOption('force')) {
-            $output->writeln('This command will add some demo data in your project, if you\'re sure that you want those data, go ahead and add --force');
             $output->writeln('Please set the --force option to run this command');
-
             return;
         }
-
-        /*
-
-        NO. JUST NO.
 
         try {
             $this->dropDatabase($output);
@@ -41,18 +35,11 @@ class ReinitDemoCommand extends ContainerAwareCommand
 
         $this->createDatabase($output);
         $this->createSchema($output);
-
-        // This shouldn't be here.
-        //*/
         $this->loadFixtures($output);
         $this->loadToggles($output);
 
         $output->writeln('Reinit completed');
     }
-
-    /*
-
-    ***REMOVED***
 
     protected function createDatabase(OutputInterface $output)
     {
@@ -83,15 +70,11 @@ class ReinitDemoCommand extends ContainerAwareCommand
             $output->writeln('<info>previous connection closed</info>');
         }
     }
-    //*/
 
     protected function loadFixtures(OutputInterface $output)
     {
         $command = $this->getApplication()->find('doctrine:fixtures:load');
-        $input = new ArrayInput(array(
-            'command'=>'doctrine:fixtures:load',
-            '--fixtures' => 'src/Capco/AppBundle/DataDemo/ORM'
-        ));
+        $input = new ArrayInput(array(''));
         $input->setInteractive(false);
         $command->run($input, $output);
     }
