@@ -11,11 +11,7 @@
             </a>
         {% endif %}
         <div class="media-body">
-            {% if text is not defined %}
-                <p class="media--aligned  excerpt"><a href="{{ path('capco_user_profile_show_all', {'slug': user.slug}) }}">{{ user.username }}</a>
-            {% else %}
-                {{ text | raw }}
-            {% endif %}
+            <p class="media--aligned  excerpt"><a href="{{ path('capco_user_profile_show_all', {'slug': user.slug}) }}">{{ user.username }}</a>
         </div>
     </div>
 {% endif %}
