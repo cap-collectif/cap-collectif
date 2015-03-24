@@ -80,6 +80,9 @@
         $(window).on('resize', function() {
             App.module.autocollapse('.autocollapse-js');
         });
+        $(function () {
+          $('[data-toggle="tooltip"]').tooltip();
+        });
     </script>
     {% set client_js = capco_site_parameter_value('global.site.embed_js') %}
     {% if null != client_js %}
