@@ -2,7 +2,6 @@
 
 namespace Capco\AppBundle\Manager;
 
-
 use Capco\AppBundle\Repository\MenuItemRepository;
 use Capco\AppBundle\Toggle\Manager;
 
@@ -19,12 +18,12 @@ class MenuItemResolver
 
     /**
      * @param $menu
+     *
      * @return array
      */
-    public function getEnabledMenuItemsWithChildren($menu) {
-
+    public function getEnabledMenuItemsWithChildren($menu)
+    {
         if (null !== $menu) {
-
             $parentsLinks = $this->repository->getParentItems($menu);
             $childrenLinks = $this->repository->getChildItems($menu);
             $links = [];
@@ -34,7 +33,7 @@ class MenuItemResolver
                     'title' => $value['title'],
                     'link' => $value['link'],
                     'hasEnabledFeature' => $this->manager->containsEnabledFeature($value['associatedFeatures']),
-                    'children' => []
+                    'children' => [],
                 ];
             }
 
@@ -55,8 +54,8 @@ class MenuItemResolver
         return array();
     }
 
-    public function hasEnabledFeatures($menuItem) {
+    public function hasEnabledFeatures($menuItem)
+    {
         return $this->manager->containsEnabledFeature($menuItem->getAssociatedFeatures());
     }
-
 }

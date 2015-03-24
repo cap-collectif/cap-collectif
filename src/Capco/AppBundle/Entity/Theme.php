@@ -8,7 +8,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * Theme
+ * Theme.
  *
  * @ORM\Table(name="theme")
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\ThemeRepository")
@@ -148,13 +148,13 @@ class Theme
      */
     private $Media;
 
-    function __construct()
+    public function __construct()
     {
         $this->Consultations = new ArrayCollection();
         $this->Ideas = new ArrayCollection();
         $this->events = new ArrayCollection();
         $this->posts = new ArrayCollection();
-        $this->updatedAt = new \Datetime;
+        $this->updatedAt = new \Datetime();
     }
 
     public function __toString()
@@ -167,7 +167,7 @@ class Theme
     }
 
     /**
-     * Get id
+     * Get id.
      *
      * @return integer
      */
@@ -177,7 +177,7 @@ class Theme
     }
 
     /**
-     * Get title
+     * Get title.
      *
      * @return string
      */
@@ -187,9 +187,10 @@ class Theme
     }
 
     /**
-     * Set title
+     * Set title.
      *
      * @param string $title
+     *
      * @return Theme
      */
     public function setTitle($title)
@@ -216,7 +217,7 @@ class Theme
     }
 
     /**
-     * Get teaser
+     * Get teaser.
      *
      * @return string
      */
@@ -226,9 +227,10 @@ class Theme
     }
 
     /**
-     * Set teaser
+     * Set teaser.
      *
      * @param string $teaser
+     *
      * @return Theme
      */
     public function setTeaser($teaser)
@@ -344,6 +346,7 @@ class Theme
 
     /**
      * @param Capco\AppBundle\Entity\Consultation $Consultation
+     *
      * @return Theme
      */
     public function addConsultation(Consultation $Consultation)
@@ -351,21 +354,24 @@ class Theme
         if (!$this->Consultations->contains($Consultation)) {
             $this->Consultations->add($Consultation);
         }
+
         return $this;
     }
 
     /**
      * @param Consultation $Consultation
+     *
      * @return $this
      */
     public function removeConsultation(Consultation $Consultation)
     {
         $this->Consultations->removeElement($Consultation);
+
         return $this;
     }
 
     /**
-     * Get ideas
+     * Get ideas.
      *
      * @return \Doctrine\Common\Collections\Collection
      */
@@ -375,7 +381,7 @@ class Theme
     }
 
     /**
-     * Add idea
+     * Add idea.
      *
      * @param \Capco\AppBundle\Entity\Idea $idea
      *
@@ -386,11 +392,12 @@ class Theme
         if (!$this->Ideas->contains($idea)) {
             $this->Ideas[] = $idea;
         }
+
         return $this;
     }
 
     /**
-     * Remove idea
+     * Remove idea.
      *
      * @param \Capco\AppBundle\Entity\Idea $idea
      */
@@ -409,6 +416,7 @@ class Theme
 
     /**
      * @param Event $event
+     *
      * @return Theme
      */
     public function addEvent(Event $event)
@@ -416,21 +424,24 @@ class Theme
         if (!$this->events->contains($event)) {
             $this->events->add($event);
         }
+
         return $this;
     }
 
     /**
      * @param Event $event
+     *
      * @return $this
      */
     public function removeEvent(Event $event)
     {
         $this->events->removeElement($event);
+
         return $this;
     }
 
     /**
-     * Get Posts
+     * Get Posts.
      *
      * @return \Doctrine\Common\Collections\Collection
      */
@@ -440,7 +451,7 @@ class Theme
     }
 
     /**
-     * Add Post
+     * Add Post.
      *
      * @param Post $post
      *
@@ -451,18 +462,21 @@ class Theme
         if (!$this->posts->contains($post)) {
             $this->posts[] = $post;
         }
+
         return $this;
     }
 
     /**
-     * Remove post
+     * Remove post.
      *
      * @param Post $post
+     *
      * @return $this
      */
     public function removePost(Post $post)
     {
         $this->posts->removeElement($post);
+
         return $this;
     }
 
@@ -484,15 +498,19 @@ class Theme
 
     // ********************** custom methods ****************************
 
-    public function getBodyExcerpt($nb = 100){
+    public function getBodyExcerpt($nb = 100)
+    {
         $excerpt = substr($this->body, 0, $nb);
         $excerpt = $excerpt.'...';
+
         return $excerpt;
     }
 
-    public function getTeaserExcerpt($nb = 100){
+    public function getTeaserExcerpt($nb = 100)
+    {
         $excerpt = substr($this->teaser, 0, $nb);
         $excerpt = $excerpt.'...';
+
         return $excerpt;
     }
 
@@ -514,6 +532,7 @@ class Theme
                 $count++;
             }
         }
+
         return $count;
     }
 
@@ -525,8 +544,7 @@ class Theme
                 $count++;
             }
         }
+
         return $count;
     }
-
-
 }

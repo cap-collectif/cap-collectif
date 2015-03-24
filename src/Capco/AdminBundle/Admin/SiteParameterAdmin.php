@@ -8,15 +8,13 @@ use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Show\ShowMapper;
-
 use Sonata\AdminBundle\Route\RouteCollection;
 
 class SiteParameterAdmin extends Admin
 {
-
     protected $datagridValues = array(
         '_sort_order' => 'ASC',
-        '_sort_by' => 'position'
+        '_sort_by' => 'position',
     );
 
     /**
@@ -63,7 +61,7 @@ class SiteParameterAdmin extends Admin
                 'actions' => array(
                     'show' => array(),
                     'edit' => array(),
-                )
+                ),
             ))
         ;
     }
@@ -88,60 +86,51 @@ class SiteParameterAdmin extends Admin
                     'label' => 'admin.fields.site_parameter.value',
                     'required' => false,
                 ));
-
-        } else if ($subject->getType() == $types['rich_text']) {
+        } elseif ($subject->getType() == $types['rich_text']) {
             $formMapper->add('value', 'ckeditor', array(
                 'label' => 'admin.fields.site_parameter.value',
                 'required' => false,
                 'config_name' => 'admin_editor',
             ));
-
-        } else if ($subject->getType() == $types['integer']) {
+        } elseif ($subject->getType() == $types['integer']) {
             $formMapper->add('value', 'integer', array(
                 'label' => 'admin.fields.site_parameter.value',
                 'required' => false,
             ));
-
-        } else if ($subject->getType() == $types['javascript']) {
+        } elseif ($subject->getType() == $types['javascript']) {
             $formMapper->add('value', 'textarea', array(
                 'label' => 'admin.fields.site_parameter.value',
                 'required' => false,
                 'help' => 'admin.help.site_parameter.js',
                 'attr' => array('rows' => 10, 'placeholder' => '<script type="text/javascript"> </script>'),
             ));
-
-        } else if ($subject->getType() == $types['email']) {
+        } elseif ($subject->getType() == $types['email']) {
             $formMapper->add('value', 'email', array(
                 'label' => 'admin.fields.site_parameter.value',
                 'required' => false,
                 'attr' => array('placeholder' => 'hello@exemple.com'),
             ));
-
-        } else if ($subject->getType() == $types['intern_url']) {
+        } elseif ($subject->getType() == $types['intern_url']) {
             $formMapper->add('value', null, array(
                 'label' => 'admin.fields.site_parameter.value',
                 'required' => false,
             ));
-
-        } else if ($subject->getType() == $types['url']) {
+        } elseif ($subject->getType() == $types['url']) {
             $formMapper->add('value', 'url', array(
                 'label' => 'admin.fields.site_parameter.value',
                 'required' => false,
             ));
-
-        } else if ($subject->getType() == $types['tel']) {
+        } elseif ($subject->getType() == $types['tel']) {
             $formMapper->add('value', null, array(
                 'label' => 'admin.fields.site_parameter.value',
                 'required' => false,
             ));
-            
-        } else if ($subject->getType() == $types['boolean']) {
+        } elseif ($subject->getType() == $types['boolean']) {
             $formMapper->add('value', 'choice', array(
                 'label' => 'admin.fields.site_parameter.value',
                 'required' => false,
                 'choices' => array('1' => 'Activé', '0' => 'Désactivé'),
             ));
-
         } else {
             $formMapper->add('value', null, array(
                 'label' => 'admin.fields.site_parameter.value',

@@ -10,7 +10,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * Post
+ * Post.
  *
  * @ORM\Table(name="blog_post")
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\PostRepository")
@@ -124,7 +124,7 @@ class Post implements CommentableInterface
      */
     private $comments;
 
-    function __construct()
+    public function __construct()
     {
         $this->Authors = new ArrayCollection();
         $this->comments = new ArrayCollection();
@@ -132,7 +132,7 @@ class Post implements CommentableInterface
         $this->consultations = new ArrayCollection();
         $this->voteCount = 0;
         $this->commentsCount = 0;
-        $this->updatedAt = new \Datetime;
+        $this->updatedAt = new \Datetime();
     }
 
     public function __toString()
@@ -145,7 +145,7 @@ class Post implements CommentableInterface
     }
 
     /**
-     * Get id
+     * Get id.
      *
      * @return integer
      */
@@ -155,7 +155,7 @@ class Post implements CommentableInterface
     }
 
     /**
-     * Set title
+     * Set title.
      *
      * @param string $title
      *
@@ -169,7 +169,7 @@ class Post implements CommentableInterface
     }
 
     /**
-     * Get title
+     * Get title.
      *
      * @return string
      */
@@ -179,7 +179,7 @@ class Post implements CommentableInterface
     }
 
     /**
-     * Set abstract
+     * Set abstract.
      *
      * @param string $abstract
      *
@@ -193,7 +193,7 @@ class Post implements CommentableInterface
     }
 
     /**
-     * Get abstract
+     * Get abstract.
      *
      * @return string
      */
@@ -203,7 +203,7 @@ class Post implements CommentableInterface
     }
 
     /**
-     * Set slug
+     * Set slug.
      *
      * @param string $slug
      *
@@ -217,7 +217,7 @@ class Post implements CommentableInterface
     }
 
     /**
-     * Get slug
+     * Get slug.
      *
      * @return string
      */
@@ -227,7 +227,7 @@ class Post implements CommentableInterface
     }
 
     /**
-     * Set body
+     * Set body.
      *
      * @param string $body
      *
@@ -241,7 +241,7 @@ class Post implements CommentableInterface
     }
 
     /**
-     * Get body
+     * Get body.
      *
      * @return string
      */
@@ -251,7 +251,7 @@ class Post implements CommentableInterface
     }
 
     /**
-     * Set isPublished
+     * Set isPublished.
      *
      * @param boolean $isPublished
      *
@@ -265,7 +265,7 @@ class Post implements CommentableInterface
     }
 
     /**
-     * Get isPublished
+     * Get isPublished.
      *
      * @return boolean
      */
@@ -275,7 +275,7 @@ class Post implements CommentableInterface
     }
 
     /**
-     * Set createdAt
+     * Set createdAt.
      *
      * @param \DateTime $createdAt
      *
@@ -289,7 +289,7 @@ class Post implements CommentableInterface
     }
 
     /**
-     * Get createdAt
+     * Get createdAt.
      *
      * @return \DateTime
      */
@@ -299,7 +299,7 @@ class Post implements CommentableInterface
     }
 
     /**
-     * Set publishedAt
+     * Set publishedAt.
      *
      * @param \DateTime $publishedAt
      *
@@ -313,7 +313,7 @@ class Post implements CommentableInterface
     }
 
     /**
-     * Get publishedAt
+     * Get publishedAt.
      *
      * @return \DateTime
      */
@@ -323,7 +323,7 @@ class Post implements CommentableInterface
     }
 
     /**
-     * Set updatedAt
+     * Set updatedAt.
      *
      * @param \DateTime $updatedAt
      *
@@ -337,7 +337,7 @@ class Post implements CommentableInterface
     }
 
     /**
-     * Get updatedAt
+     * Get updatedAt.
      *
      * @return \DateTime
      */
@@ -347,7 +347,7 @@ class Post implements CommentableInterface
     }
 
     /**
-     * Add author
+     * Add author.
      *
      * @param \Capco\UserBundle\Entity\User $author
      *
@@ -358,11 +358,12 @@ class Post implements CommentableInterface
         if (!$this->Authors->contains($author)) {
             $this->Authors[] = $author;
         }
+
         return $this;
     }
 
     /**
-     * Remove author
+     * Remove author.
      *
      * @param \Capco\UserBundle\Entity\User $author
      */
@@ -372,7 +373,7 @@ class Post implements CommentableInterface
     }
 
     /**
-     * Get authors
+     * Get authors.
      *
      * @return \Doctrine\Common\Collections\Collection
      */
@@ -382,7 +383,7 @@ class Post implements CommentableInterface
     }
 
     /**
-     * Returns true if the post is publicly visible at a given date
+     * Returns true if the post is publicly visible at a given date.
      *
      * @param \DateTime $now
      *
@@ -398,7 +399,7 @@ class Post implements CommentableInterface
     }
 
     /**
-     * Set media
+     * Set media.
      *
      * @param \Capco\MediaBundle\Entity\Media $media
      *
@@ -412,7 +413,7 @@ class Post implements CommentableInterface
     }
 
     /**
-     * Get media
+     * Get media.
      *
      * @return \Capco\MediaBundle\Entity\Media
      */
@@ -422,7 +423,7 @@ class Post implements CommentableInterface
     }
 
     /**
-     * Get themes
+     * Get themes.
      *
      * @return \Doctrine\Common\Collections\Collection
      */
@@ -432,7 +433,7 @@ class Post implements CommentableInterface
     }
 
     /**
-     * Add theme
+     * Add theme.
      *
      * @param \Capco\AppBundle\Entity\Theme $theme
      *
@@ -444,23 +445,27 @@ class Post implements CommentableInterface
             $this->themes->add($theme);
         }
         $theme->addPost($this);
+
         return $this;
     }
 
     /**
-     * Remove theme
+     * Remove theme.
+     *
      * @param \Capco\AppBundle\Entity\Theme $theme
+     *
      * @return $this
      */
     public function removeTheme(Theme $theme)
     {
         $this->themes->removeElement($theme);
         $theme->removePost($this);
+
         return $this;
     }
 
     /**
-     * Get consultations
+     * Get consultations.
      *
      * @return \Doctrine\Common\Collections\Collection
      */
@@ -470,7 +475,7 @@ class Post implements CommentableInterface
     }
 
     /**
-     * Add consultation
+     * Add consultation.
      *
      * @param \Capco\AppBundle\Entity\Consultation $consultation
      *
@@ -482,18 +487,22 @@ class Post implements CommentableInterface
             $this->consultations->add($consultation);
         }
         $consultation->addPost($this);
+
         return $this;
     }
 
     /**
-     * Remove consultation
+     * Remove consultation.
+     *
      * @param \Capco\AppBundle\Entity\Consultation $consultation
+     *
      * @return $this
      */
     public function removeConsultation(Consultation $consultation)
     {
         $this->consultations->removeElement($consultation);
         $consultation->removePost($this);
+
         return $this;
     }
 
@@ -506,14 +515,16 @@ class Post implements CommentableInterface
     /**
      * @return bool
      */
-    public function canDisplay() {
+    public function canDisplay()
+    {
         return $this->isPublished;
     }
 
     /**
      * @return bool
      */
-    public function canContribute() {
+    public function canContribute()
+    {
         return $this->isPublished;
     }
 
@@ -535,6 +546,5 @@ class Post implements CommentableInterface
                 $consultation->removePost($this);
             }
         }
-
     }
 }

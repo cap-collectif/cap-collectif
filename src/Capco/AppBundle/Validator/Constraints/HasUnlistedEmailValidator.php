@@ -8,7 +8,6 @@ use Symfony\Component\Validator\ConstraintValidator;
 
 class HasUnlistedEmailValidator extends ConstraintValidator
 {
-
     private $entityManager;
 
     public function __construct(EntityManager $entityManager)
@@ -24,7 +23,7 @@ class HasUnlistedEmailValidator extends ConstraintValidator
 
         $registrations = $this->entityManager->getRepository('CapcoAppBundle:EventRegistration')->findBy([
             'event' => $value->getEvent(),
-            'email' => $value->getEmail()
+            'email' => $value->getEmail(),
         ]);
 
         $present = false;
@@ -36,6 +35,7 @@ class HasUnlistedEmailValidator extends ConstraintValidator
 
         if ($present) {
             $this->context->addViolationAt('email', $constraint->message, array(), null);
+
             return false;
         }
 

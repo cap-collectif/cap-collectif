@@ -6,7 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
- * ArgumentVote
+ * ArgumentVote.
  *
  * @ORM\Table(name="source_vote")
  * @ORM\Entity
@@ -46,7 +46,7 @@ class SourceVote
     private $Voter;
 
     /**
-     * Get id
+     * Get id.
      *
      * @return integer
      */
@@ -56,7 +56,7 @@ class SourceVote
     }
 
     /**
-     * Get createdAt
+     * Get createdAt.
      *
      * @return \DateTime
      */
@@ -75,12 +75,14 @@ class SourceVote
 
     /**
      * @param mixed $source
+     *
      * @return $this
      */
     public function setSource($source)
     {
         $this->source = $source;
         $this->source->addVote($this);
+
         return $this;
     }
 
@@ -110,6 +112,5 @@ class SourceVote
         if ($this->source != null) {
             $this->source->removeVote($this);
         }
-
     }
 }

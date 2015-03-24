@@ -3,7 +3,6 @@
 namespace Capco\AppBundle\Entity;
 
 use Capco\UserBundle\Entity\User;
-
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
@@ -11,7 +10,8 @@ use Symfony\Component\Validator\Constraints as Assert;
 use Capco\AppBundle\Validator\Constraints as CapcoAssert;
 
 /**
- * Class AbstractComment
+ * Class AbstractComment.
+ *
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\AbstractCommentRepository")
  * @ORM\Table(name="comment")
  * @ORM\HasLifecycleCallbacks()
@@ -19,11 +19,9 @@ use Capco\AppBundle\Validator\Constraints as CapcoAssert;
  * @ORM\DiscriminatorColumn(name = "objectType", type = "string")
  * @ORM\DiscriminatorMap( {"idea" = "IdeaComment", "event" = "EventComment", "post" = "PostComment"} )
  * @CapcoAssert\HasAuthor
- * @package Capco\AppBundle\Entity
  */
 abstract class AbstractComment
 {
-
     public static $sortCriterias = [
         'date' => 'argument.sort.date',
         'popularity' => 'argument.sort.popularity',
@@ -140,7 +138,7 @@ abstract class AbstractComment
      */
     protected $trashedReason = null;
 
-    function __construct()
+    public function __construct()
     {
         $this->Votes = new ArrayCollection();
         $this->Reports = new ArrayCollection();
@@ -158,7 +156,7 @@ abstract class AbstractComment
     }
 
     /**
-     * Get id
+     * Get id.
      *
      * @return integer
      */
@@ -168,7 +166,7 @@ abstract class AbstractComment
     }
 
     /**
-     * Get body
+     * Get body.
      *
      * @return string
      */
@@ -178,9 +176,10 @@ abstract class AbstractComment
     }
 
     /**
-     * Set body
+     * Set body.
      *
      * @param string $body
+     *
      * @return Argument
      */
     public function setBody($body)
@@ -191,7 +190,7 @@ abstract class AbstractComment
     }
 
     /**
-     * Get createdAt
+     * Get createdAt.
      *
      * @return \DateTime
      */
@@ -201,7 +200,7 @@ abstract class AbstractComment
     }
 
     /**
-     * Get updatedAt
+     * Get updatedAt.
      *
      * @return \DateTime
      */
@@ -211,7 +210,7 @@ abstract class AbstractComment
     }
 
     /**
-     * Get isEnabled
+     * Get isEnabled.
      *
      * @return boolean
      */
@@ -221,9 +220,10 @@ abstract class AbstractComment
     }
 
     /**
-     * Set isEnabled
+     * Set isEnabled.
      *
      * @param boolean $isEnabled
+     *
      * @return Argument
      */
     public function setIsEnabled($isEnabled)
@@ -240,11 +240,12 @@ abstract class AbstractComment
             }
         }
         $this->isEnabled = $isEnabled;
+
         return $this;
     }
 
     /**
-     * Get voteCount
+     * Get voteCount.
      *
      * @return integer
      */
@@ -254,9 +255,10 @@ abstract class AbstractComment
     }
 
     /**
-     * Set voteCount
+     * Set voteCount.
      *
      * @param integer $voteCount
+     *
      * @return Argument
      */
     public function setVoteCount($voteCount)
@@ -339,24 +341,29 @@ abstract class AbstractComment
     /**
      * @return ArrayCollection
      */
-    public function getVotes(){
+    public function getVotes()
+    {
         return $this->Votes;
     }
 
     /**
      * @param $vote
+     *
      * @return $this
      */
-    public function addVote($vote){
+    public function addVote($vote)
+    {
         if (!$this->Votes->contains($vote)) {
             $this->voteCount++;
             $this->Votes->add($vote);
         }
+
         return $this;
     }
 
     /**
      * @param $vote
+     *
      * @return $this
      */
     public function removeVote($vote)
@@ -364,6 +371,7 @@ abstract class AbstractComment
         if ($this->Votes->removeElement($vote)) {
             $this->voteCount--;
         }
+
         return $this;
     }
 
@@ -377,6 +385,7 @@ abstract class AbstractComment
 
     /**
      * @param Reporting $report
+     *
      * @return $this
      */
     public function addReport(Reporting $report)
@@ -384,21 +393,24 @@ abstract class AbstractComment
         if (!$this->Reports->contains($report)) {
             $this->Reports->add($report);
         }
+
         return $this;
     }
 
     /**
      * @param Reporting $report
+     *
      * @return $this
      */
     public function removeReport(Reporting $report)
     {
         $this->Reports->removeElement($report);
+
         return $this;
     }
 
     /**
-     * Get isTrashed
+     * Get isTrashed.
      *
      * @return boolean
      */
@@ -408,9 +420,10 @@ abstract class AbstractComment
     }
 
     /**
-     * Set isTrashed
+     * Set isTrashed.
      *
      * @param boolean $isTrashed
+     *
      * @return Argument
      */
     public function setIsTrashed($isTrashed)
@@ -420,7 +433,7 @@ abstract class AbstractComment
                 $this->trashedReason = null;
                 $this->trashedAt = null;
             }
-            if($this->isEnabled) {
+            if ($this->isEnabled) {
                 if ($isTrashed) {
                     $this->decreaseRelatedObjectCount(1);
                 } else {
@@ -429,11 +442,12 @@ abstract class AbstractComment
             }
         }
         $this->isTrashed = $isTrashed;
+
         return $this;
     }
 
     /**
-     * Get trashedAt
+     * Get trashedAt.
      *
      * @return \DateTime
      */
@@ -443,9 +457,10 @@ abstract class AbstractComment
     }
 
     /**
-     * Set trashedAt
+     * Set trashedAt.
      *
      * @param \DateTime $trashedAt
+     *
      * @return Argument
      */
     public function setTrashedAt($trashedAt)
@@ -456,7 +471,7 @@ abstract class AbstractComment
     }
 
     /**
-     * Get trashedReason
+     * Get trashedReason.
      *
      * @return string
      */
@@ -466,9 +481,10 @@ abstract class AbstractComment
     }
 
     /**
-     * Set trashedReason
+     * Set trashedReason.
      *
      * @param string $trashedReason
+     *
      * @return Argument
      */
     public function setTrashedReason($trashedReason)
@@ -488,45 +504,51 @@ abstract class AbstractComment
         foreach ($this->Votes as $vote) {
             $this->removeVote($vote);
         }
+
         return $this;
     }
 
     /**
      * @param User $user
+     *
      * @return bool
      */
     public function userHasVote(User $user = null)
     {
         if ($user != null) {
-            foreach($this->Votes as $vote){
-                if($vote->getVoter() == $user){
+            foreach ($this->Votes as $vote) {
+                if ($vote->getVoter() == $user) {
                     return true;
                 }
             }
         }
+
         return false;
     }
 
     /**
      * @param User $user
+     *
      * @return bool
      */
     public function userHasReport(User $user = null)
     {
         if ($user != null) {
-            foreach($this->Reports as $report){
-                if($report->getReporter() == $user){
+            foreach ($this->Reports as $report) {
+                if ($report->getReporter() == $user) {
                     return true;
                 }
             }
         }
+
         return false;
     }
 
     /**
      * @return bool
      */
-    public function canDisplay() {
+    public function canDisplay()
+    {
         return $this->isEnabled && $this->canDisplayRelatedObject();
     }
 
@@ -540,12 +562,14 @@ abstract class AbstractComment
 
     /**
      * @param int $nb
+     *
      * @return string
      */
     public function getBodyExcerpt($nb = 100)
     {
         $excerpt = substr($this->body, 0, $nb);
         $excerpt = $excerpt.'...';
+
         return $excerpt;
     }
 
@@ -575,7 +599,8 @@ abstract class AbstractComment
     /**
      * @return bool
      */
-    public function canDisplayRelatedObject() {
+    public function canDisplayRelatedObject()
+    {
         return $this->getRelatedObject()->canDisplay();
     }
 
@@ -596,10 +621,10 @@ abstract class AbstractComment
 
     /**
      * @param $object
+     *
      * @return mixed
      */
     abstract public function setRelatedObject($object);
-
 
     // ************************* Lifecycle ***********************************
 
@@ -609,6 +634,5 @@ abstract class AbstractComment
     public function deleteComment()
     {
         $this->removeCommentFromRelatedObject($this);
-
     }
 }

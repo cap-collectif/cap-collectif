@@ -10,13 +10,11 @@ class LoginPage extends Page
     use PageTrait;
 
     /**
-     * @var string $path
+     * @var string
      */
     protected $path = '/login';
 
     protected $elements = array(
         'Connection form' => '#login-form',
     );
-
-
 }

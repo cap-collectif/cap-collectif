@@ -4,14 +4,13 @@ namespace Capco\AppBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
-
 use Capco\AppBundle\Entity\Opinion;
 
 class OpinionsSortType extends AbstractType
 {
     /**
      * @param FormBuilderInterface $builder
-     * @param array $options
+     * @param array                $options
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -22,7 +21,7 @@ class OpinionsSortType extends AbstractType
                 'translation_domain' => 'CapcoAppBundle',
                 'label' => 'opinion.sort.label',
                 'empty_value' => false,
-                'attr' => array('onchange' => 'this.form.submit()')
+                'attr' => array('onchange' => 'this.form.submit()'),
             ))
         ;
     }

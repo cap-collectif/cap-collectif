@@ -23,7 +23,7 @@ class DidNotAlreadyVoteEmailValidator extends ConstraintValidator
 
         $votes = $this->entityManager->getRepository('CapcoAppBundle:IdeaVote')->findBy([
             'idea' => $value->getIdea(),
-            'email' => $value->getEmail()
+            'email' => $value->getEmail(),
         ]);
 
         $present = false;
@@ -35,6 +35,7 @@ class DidNotAlreadyVoteEmailValidator extends ConstraintValidator
 
         if ($present) {
             $this->context->addViolationAt('email', $constraint->message, array(), null);
+
             return false;
         }
 

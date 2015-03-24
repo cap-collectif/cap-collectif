@@ -2,7 +2,6 @@
 
 namespace Capco\AppBundle\Twig;
 
-
 use Capco\AppBundle\Helper\IdeaHelper;
 
 class IdeaExtension extends \Twig_Extension

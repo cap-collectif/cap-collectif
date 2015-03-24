@@ -4,29 +4,19 @@ namespace Capco\UserBundle\Controller;
 
 use HWI\Bundle\OAuthBundle\Controller\ConnectController;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
-use HWI\Bundle\OAuthBundle\OAuth\ResourceOwnerInterface;
-use HWI\Bundle\OAuthBundle\Security\Core\Authentication\Token\OAuthToken;
 use HWI\Bundle\OAuthBundle\Security\Core\Exception\AccountNotLinkedException;
-use Symfony\Component\DependencyInjection\ContainerAware;
-use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Security\Core\Exception\AccessDeniedException;
-use Symfony\Component\Security\Core\Exception\AccountStatusException;
-use Symfony\Component\Security\Core\SecurityContext;
-use Symfony\Component\Security\Core\User\UserInterface;
-use Symfony\Component\Security\Http\Event\InteractiveLoginEvent;
-use Symfony\Component\Security\Http\SecurityEvents;
 
 /**
- * ConnectController
+ * ConnectController.
  */
 class OauthConnectController extends ConnectController
 {
     protected $featuresForServices = array(
         'facebook' => array('login_facebook'),
-        'google' => array('login_gplus')
+        'google' => array('login_gplus'),
     );
 
     public function getFeaturesForService($service)
@@ -37,6 +27,7 @@ class OauthConnectController extends ConnectController
     protected function serviceHasEnabledFeature($service)
     {
         $toggleManager = $this->container->get('capco.toggle.manager');
+
         return $toggleManager->hasOneActive($this->getFeaturesForService($service));
     }
 

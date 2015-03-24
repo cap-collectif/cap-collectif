@@ -6,7 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
- * CommentVote
+ * CommentVote.
  *
  * @ORM\Table(name="comment_vote")
  * @ORM\Entity
@@ -53,7 +53,7 @@ class CommentVote
     private $Voter;
 
     /**
-     * Get id
+     * Get id.
      *
      * @return integer
      */
@@ -63,7 +63,7 @@ class CommentVote
     }
 
     /**
-     * Get createdAt
+     * Get createdAt.
      *
      * @return \DateTime
      */
@@ -73,7 +73,7 @@ class CommentVote
     }
 
     /**
-     * Get updatedAt
+     * Get updatedAt.
      *
      * @return \DateTime
      */
@@ -92,6 +92,7 @@ class CommentVote
 
     /**
      * @param $comment
+     *
      * @return $this
      */
     public function setComment(AbstractComment $comment)
@@ -100,6 +101,7 @@ class CommentVote
             $this->comment = $comment;
             $comment->addVote($this);
         }
+
         return $this;
     }
 
@@ -113,11 +115,13 @@ class CommentVote
 
     /**
      * @param $Voter
+     *
      * @return $this
      */
     public function setVoter($Voter)
     {
         $this->Voter = $Voter;
+
         return $this;
     }
 
@@ -131,6 +135,5 @@ class CommentVote
         if ($this->comment != null) {
             $this->comment->removeVote($this);
         }
-
     }
 }

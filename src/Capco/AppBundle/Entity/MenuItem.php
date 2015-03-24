@@ -6,7 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
- * MenuItem
+ * MenuItem.
  *
  * @ORM\Table(name="menu_item")
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\MenuItemRepository")
@@ -102,7 +102,6 @@ class MenuItem
      * @Gedmo\SortableGroup
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Menu", inversedBy="MenuItems", cascade={"persist"})
      * @ORM\JoinColumn(name="menu_id", referencedColumnName="id")
-     *
      */
     private $Menu;
 
@@ -121,18 +120,17 @@ class MenuItem
         }
     }
 
-
     /**
-     * Constructor
+     * Constructor.
      */
     public function __construct()
     {
-        $this->updatedAt = new \Datetime;
+        $this->updatedAt = new \Datetime();
         $this->associatedFeatures = null;
     }
 
     /**
-     * Get id
+     * Get id.
      *
      * @return integer
      */
@@ -142,9 +140,10 @@ class MenuItem
     }
 
     /**
-     * Set title
+     * Set title.
      *
      * @param string $title
+     *
      * @return MenuItem
      */
     public function setTitle($title)
@@ -155,7 +154,7 @@ class MenuItem
     }
 
     /**
-     * Get title
+     * Get title.
      *
      * @return string
      */
@@ -165,9 +164,10 @@ class MenuItem
     }
 
     /**
-     * Set link
+     * Set link.
      *
      * @param string $link
+     *
      * @return MenuItem
      */
     public function setLink($link)
@@ -178,7 +178,7 @@ class MenuItem
     }
 
     /**
-     * Get link
+     * Get link.
      *
      * @return string
      */
@@ -188,9 +188,10 @@ class MenuItem
     }
 
     /**
-     * Set isEnabled
+     * Set isEnabled.
      *
      * @param boolean $isEnabled
+     *
      * @return MenuItem
      */
     public function setIsEnabled($isEnabled)
@@ -201,7 +202,7 @@ class MenuItem
     }
 
     /**
-     * Get isEnabled
+     * Get isEnabled.
      *
      * @return boolean
      */
@@ -211,9 +212,10 @@ class MenuItem
     }
 
     /**
-     * Set isDeletable
+     * Set isDeletable.
      *
      * @param boolean $isDeletable
+     *
      * @return MenuItem
      */
     public function setIsDeletable($isDeletable)
@@ -224,7 +226,7 @@ class MenuItem
     }
 
     /**
-     * Get isDeletable
+     * Get isDeletable.
      *
      * @return boolean
      */
@@ -234,9 +236,10 @@ class MenuItem
     }
 
     /**
-     * Set isFullyModifiable
+     * Set isFullyModifiable.
      *
      * @param boolean $isFullyModifiable
+     *
      * @return MenuItem
      */
     public function setIsFullyModifiable($isFullyModifiable)
@@ -247,7 +250,7 @@ class MenuItem
     }
 
     /**
-     * Get isFullyModifiable
+     * Get isFullyModifiable.
      *
      * @return boolean
      */
@@ -257,9 +260,10 @@ class MenuItem
     }
 
     /**
-     * Set position
+     * Set position.
      *
      * @param integer $position
+     *
      * @return MenuItem
      */
     public function setPosition($position)
@@ -270,7 +274,7 @@ class MenuItem
     }
 
     /**
-     * Get position
+     * Get position.
      *
      * @return integer
      */
@@ -294,7 +298,6 @@ class MenuItem
     {
         $this->Menu = $Menu;
         $this->Menu->addMenuItem($this);
-
     }
 
     /**
@@ -329,9 +332,8 @@ class MenuItem
         return $this->updatedAt;
     }
 
-
     /**
-     * Set createdAt
+     * Set createdAt.
      *
      * @param \DateTime $createdAt
      *
@@ -345,7 +347,7 @@ class MenuItem
     }
 
     /**
-     * Set updatedAt
+     * Set updatedAt.
      *
      * @param \DateTime $updatedAt
      *

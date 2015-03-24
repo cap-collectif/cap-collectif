@@ -3,17 +3,19 @@
 namespace Capco\AppBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
-use Doctrine\ORM\Query;
 
 /**
- * AbstractCommentRepository
+ * AbstractCommentRepository.
  */
 class AbstractCommentRepository extends EntityRepository
 {
     /**
-     * Get one comment by id
+     * Get one comment by id.
+     *
      * @param $comment
+     *
      * @return mixed
+     *
      * @throws \Doctrine\ORM\NonUniqueResultException
      */
     public function getOneById($comment)
@@ -28,16 +30,17 @@ class AbstractCommentRepository extends EntityRepository
             ->setParameter('comment', $comment)
             ->getQuery()
             ->getOneOrNullResult();
-
     }
 
     /**
-     * Count all comments by user
+     * Count all comments by user.
+     *
      * @param $user
+     *
      * @return mixed
      */
-    public function countByUser($user){
-
+    public function countByUser($user)
+    {
         return $this->getIsEnabledQueryBuilder()
             ->select('COUNT(c)')
             ->andWhere('c.Author = :author')
@@ -47,8 +50,10 @@ class AbstractCommentRepository extends EntityRepository
     }
 
     /**
-     * Get comments by user
+     * Get comments by user.
+     *
      * @param user
+     *
      * @return mixed
      */
     public function getByUser($user)

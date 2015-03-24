@@ -3,9 +3,7 @@
 namespace Capco\AdminBundle\Admin;
 
 use Capco\AppBundle\Entity\Event;
-
 use Sonata\AdminBundle\Admin\Admin;
-use Sonata\AdminBundle\Route\RouteCollection;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
@@ -13,7 +11,6 @@ use Sonata\AdminBundle\Show\ShowMapper;
 
 class EventRegistrationAdmin extends Admin
 {
-
     public function getPersistentParameters()
     {
         if (!$this->getRequest()) {
@@ -21,7 +18,7 @@ class EventRegistrationAdmin extends Admin
         }
 
         return array(
-            'event' => $this->getRequest()->get('event')
+            'event' => $this->getRequest()->get('event'),
         );
     }
 
@@ -30,7 +27,6 @@ class EventRegistrationAdmin extends Admin
      */
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
-
         $datagridMapper
             ->add('event', null, ['label' => 'admin.fields.event_registration.event'])
             ->add('confirmed', null, ['label' => 'admin.fields.event_registration.registered', 'required' => false])
@@ -69,7 +65,7 @@ class EventRegistrationAdmin extends Admin
                     'show' => array(),
                     'edit' => array(),
                     'delete' => array(),
-                )
+                ),
             ))
         ;
     }
@@ -87,7 +83,6 @@ class EventRegistrationAdmin extends Admin
             ->add('email', null, ['label' => 'admin.fields.event_registration.email'])
             ->add('private', null, ['label' => 'admin.fields.event_registration.private', 'required' => false])
         ;
-
     }
 
     /**
@@ -103,6 +98,5 @@ class EventRegistrationAdmin extends Admin
             ->add('private', null, ['label' => 'admin.fields.event_registration.private'])
             ->add('updatedAt', null, ['label' => 'admin.fields.event_registration.updated_at'])
         ;
-
     }
 }

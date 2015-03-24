@@ -5,16 +5,14 @@ namespace Capco\AdminBundle\Admin;
 use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
-use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Show\ShowMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
 
 class IdeaVoteAdmin extends Admin
 {
-
     protected $datagridValues = array(
         '_sort_order' => 'ASC',
-        '_sort_by' => 'idea.title'
+        '_sort_by' => 'idea.title',
     );
 
     /**
@@ -24,13 +22,13 @@ class IdeaVoteAdmin extends Admin
     {
         $datagridMapper
             ->add('idea', null, array(
-                'label' => 'admin.fields.idea_vote.idea'
+                'label' => 'admin.fields.idea_vote.idea',
             ))
             ->add('user', null, array(
-                'label' => 'admin.fields.idea_vote.user'
+                'label' => 'admin.fields.idea_vote.user',
             ))
             ->add('createdAt', null, array(
-                'label' => 'admin.fields.idea_vote.created_at'
+                'label' => 'admin.fields.idea_vote.created_at',
             ))
         ;
     }
@@ -42,35 +40,35 @@ class IdeaVoteAdmin extends Admin
     {
         $listMapper
             ->add('confirmed', null, [
-                'label' => 'admin.fields.idea_vote.confirmed'
+                'label' => 'admin.fields.idea_vote.confirmed',
             ])
             ->add('idea', 'sonata_type_model', array(
-                'label' => 'admin.fields.idea_vote.idea'
+                'label' => 'admin.fields.idea_vote.idea',
             ))
             ->add('private', null, [
-                  'label' => 'admin.fields.idea_vote.private'
+                  'label' => 'admin.fields.idea_vote.private',
             ])
             ->add('user', 'sonata_type_model', array(
-                'label' => 'admin.fields.idea_vote.user'
+                'label' => 'admin.fields.idea_vote.user',
             ))
             ->add('username', null, [
-                'label' => 'admin.fields.idea_vote.username'
+                'label' => 'admin.fields.idea_vote.username',
             ])
             ->add('email', null, [
-                'label' => 'admin.fields.idea_vote.email'
+                'label' => 'admin.fields.idea_vote.email',
             ])
             ->add('ipAdress', null, [
-                'label' => 'admin.fields.idea_vote.ip'
+                'label' => 'admin.fields.idea_vote.ip',
             ])
             ->add('createdAt', null, array(
-                'label' => 'admin.fields.idea_vote.created_at'
+                'label' => 'admin.fields.idea_vote.created_at',
             ))
             ->add('_action', 'actions', array(
                 'actions' => array(
                     'show' => array(),
                     'edit' => array(),
                     'delete' => array(),
-                )
+                ),
             ))
         ;
     }
@@ -82,13 +80,13 @@ class IdeaVoteAdmin extends Admin
     {
         $showMapper
             ->add('idea', 'sonata_type_model', array(
-                    'label' => 'admin.fields.idea_vote.idea'
+                    'label' => 'admin.fields.idea_vote.idea',
             ))
             ->add('user', 'sonata_type_model', array(
-                    'label' => 'admin.fields.idea_vote.user'
+                    'label' => 'admin.fields.idea_vote.user',
             ))
             ->add('createdAt', null, array(
-                    'label' => 'admin.fields.idea_vote.created_at'
+                    'label' => 'admin.fields.idea_vote.created_at',
             ))
         ;
     }

@@ -10,7 +10,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\Common\Collections\ArrayCollection;
 
 /**
- * Event
+ * Event.
  *
  * @ORM\Table(name="event")
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\EventRepository")
@@ -186,16 +186,15 @@ class Event implements CommentableInterface
      */
     private $registrationEnable = false;
 
-    function __construct()
+    public function __construct()
     {
         $this->comments = new ArrayCollection();
         $this->registrations = new ArrayCollection();
         $this->themes = new ArrayCollection();
         $this->consultations = new ArrayCollection();
         $this->commentsCount = 0;
-        $this->updatedAt = new \Datetime;
+        $this->updatedAt = new \Datetime();
     }
-
 
     public function __toString()
     {
@@ -207,7 +206,7 @@ class Event implements CommentableInterface
     }
 
     /**
-     * Get id
+     * Get id.
      *
      * @return integer
      */
@@ -217,7 +216,7 @@ class Event implements CommentableInterface
     }
 
     /**
-     * Set title
+     * Set title.
      *
      * @param string $title
      *
@@ -231,7 +230,7 @@ class Event implements CommentableInterface
     }
 
     /**
-     * Get title
+     * Get title.
      *
      * @return string
      */
@@ -241,7 +240,7 @@ class Event implements CommentableInterface
     }
 
     /**
-     * Set body
+     * Set body.
      *
      * @param string $body
      *
@@ -255,7 +254,7 @@ class Event implements CommentableInterface
     }
 
     /**
-     * Get body
+     * Get body.
      *
      * @return string
      */
@@ -265,7 +264,7 @@ class Event implements CommentableInterface
     }
 
     /**
-     * Get createdAt
+     * Get createdAt.
      *
      * @return \DateTime
      */
@@ -275,7 +274,7 @@ class Event implements CommentableInterface
     }
 
     /**
-     * Get updatedAt
+     * Get updatedAt.
      *
      * @return \DateTime
      */
@@ -285,7 +284,7 @@ class Event implements CommentableInterface
     }
 
     /**
-     * Set startAt
+     * Set startAt.
      *
      * @param \DateTime $startAt
      *
@@ -299,7 +298,7 @@ class Event implements CommentableInterface
     }
 
     /**
-     * Get startAt
+     * Get startAt.
      *
      * @return \DateTime
      */
@@ -309,7 +308,7 @@ class Event implements CommentableInterface
     }
 
     /**
-     * Set endAt
+     * Set endAt.
      *
      * @param \DateTime $endAt
      *
@@ -323,7 +322,7 @@ class Event implements CommentableInterface
     }
 
     /**
-     * Get endAt
+     * Get endAt.
      *
      * @return \DateTime
      */
@@ -333,7 +332,7 @@ class Event implements CommentableInterface
     }
 
     /**
-     * Set media
+     * Set media.
      *
      * @param string $media
      *
@@ -347,7 +346,7 @@ class Event implements CommentableInterface
     }
 
     /**
-     * Get media
+     * Get media.
      *
      * @return string
      */
@@ -357,7 +356,7 @@ class Event implements CommentableInterface
     }
 
     /**
-     * Get themes
+     * Get themes.
      *
      * @return \Doctrine\Common\Collections\Collection
      */
@@ -367,7 +366,7 @@ class Event implements CommentableInterface
     }
 
     /**
-     * Add theme
+     * Add theme.
      *
      * @param \Capco\AppBundle\Entity\Theme $theme
      *
@@ -379,23 +378,27 @@ class Event implements CommentableInterface
             $this->themes->add($theme);
         }
         $theme->addEvent($this);
+
         return $this;
     }
 
     /**
-     * Remove theme
+     * Remove theme.
+     *
      * @param \Capco\AppBundle\Entity\Theme $theme
+     *
      * @return $this
      */
     public function removeTheme(Theme $theme)
     {
         $this->themes->removeElement($theme);
         $theme->removeEvent($this);
+
         return $this;
     }
 
     /**
-     * Get consultations
+     * Get consultations.
      *
      * @return \Doctrine\Common\Collections\Collection
      */
@@ -405,7 +408,7 @@ class Event implements CommentableInterface
     }
 
     /**
-     * Add consultation
+     * Add consultation.
      *
      * @param \Capco\AppBundle\Entity\Consultation $consultation
      *
@@ -417,23 +420,27 @@ class Event implements CommentableInterface
             $this->consultations->add($consultation);
         }
         $consultation->addEvent($this);
+
         return $this;
     }
 
     /**
-     * Remove consultation
+     * Remove consultation.
+     *
      * @param \Capco\AppBundle\Entity\Consultation $consultation
+     *
      * @return $this
      */
     public function removeConsultation(Consultation $consultation)
     {
         $this->consultations->removeElement($consultation);
         $consultation->removeEvent($this);
+
         return $this;
     }
 
     /**
-     * Set author
+     * Set author.
      *
      * @param string $author
      *
@@ -447,7 +454,7 @@ class Event implements CommentableInterface
     }
 
     /**
-     * Get author
+     * Get author.
      *
      * @return string
      */
@@ -457,7 +464,7 @@ class Event implements CommentableInterface
     }
 
     /**
-     * Set zipCode
+     * Set zipCode.
      *
      * @param integer $zipCode
      *
@@ -471,7 +478,7 @@ class Event implements CommentableInterface
     }
 
     /**
-     * Get zipCode
+     * Get zipCode.
      *
      * @return integer
      */
@@ -481,7 +488,7 @@ class Event implements CommentableInterface
     }
 
     /**
-     * Set address
+     * Set address.
      *
      * @param string $address
      *
@@ -495,7 +502,7 @@ class Event implements CommentableInterface
     }
 
     /**
-     * Get address
+     * Get address.
      *
      * @return string
      */
@@ -505,7 +512,7 @@ class Event implements CommentableInterface
     }
 
     /**
-     * Set city
+     * Set city.
      *
      * @param string $city
      *
@@ -519,7 +526,7 @@ class Event implements CommentableInterface
     }
 
     /**
-     * Get city
+     * Get city.
      *
      * @return string
      */
@@ -583,7 +590,7 @@ class Event implements CommentableInterface
     }
 
     /**
-     * Set link
+     * Set link.
      *
      * @param string $link
      *
@@ -597,7 +604,7 @@ class Event implements CommentableInterface
     }
 
     /**
-     * Get link
+     * Get link.
      *
      * @return string
      */
@@ -644,7 +651,7 @@ class Event implements CommentableInterface
     }
 
     /**
-     * Set registrationEnable
+     * Set registrationEnable.
      *
      * @param boolean $registrationEnable
      *
@@ -658,7 +665,7 @@ class Event implements CommentableInterface
     }
 
     /**
-     * Is registrationEnable
+     * Is registrationEnable.
      *
      * @return boolean
      */
@@ -666,7 +673,6 @@ class Event implements CommentableInterface
     {
         return $this->registrationEnable;
     }
-
 
     // **************** Custom methods ***************
 
@@ -678,14 +684,16 @@ class Event implements CommentableInterface
     /**
      * @return bool
      */
-    public function canDisplay() {
+    public function canDisplay()
+    {
         return $this->isEnabled;
     }
 
     /**
      * @return bool
      */
-    public function canContribute() {
+    public function canContribute()
+    {
         return $this->isEnabled;
     }
 
@@ -717,7 +725,5 @@ class Event implements CommentableInterface
                 $consultation->removeEvent($this);
             }
         }
-
     }
 }
-

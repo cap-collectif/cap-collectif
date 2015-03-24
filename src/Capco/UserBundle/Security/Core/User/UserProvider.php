@@ -7,8 +7,7 @@ use HWI\Bundle\OAuthBundle\Security\Core\User\FOSUBUserProvider;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
- * Class UserProvider
- * @package Capco\UserBundle\Security\Core\User
+ * Class UserProvider.
  */
 class UserProvider extends FOSUBUserProvider
 {
@@ -22,9 +21,9 @@ class UserProvider extends FOSUBUserProvider
 
         //on connect - get the access token and the user ID
         $service = $response->getResourceOwner()->getName();
-        $setter = 'set' . ucfirst($service);
-        $setter_id = $setter . 'Id';
-        $setter_token = $setter . 'AccessToken';
+        $setter = 'set'.ucfirst($service);
+        $setter_id = $setter.'Id';
+        $setter_token = $setter.'AccessToken';
 
         //we "disconnect" previously connected users
         if (null !== $previousUser = $this->userManager->findUserBy(array($property => $username))) {
@@ -41,7 +40,6 @@ class UserProvider extends FOSUBUserProvider
 
     /**
      * {@inheritdoc}
-     *
      */
     public function loadUserByOAuthUserResponse(UserResponseInterface $response)
     {
@@ -52,7 +50,6 @@ class UserProvider extends FOSUBUserProvider
             $user = $this->userManager->findUserByEmail($response->getEmail());
         }
         if (null === $user) {
-
             $user = $this->userManager->createUser();
             $user->setUsername($response->getNickname());
             $user->setEmail($response->getEmail());
@@ -62,9 +59,9 @@ class UserProvider extends FOSUBUserProvider
         }
 
         $service = $response->getResourceOwner()->getName();
-        $setter = 'set' . ucfirst($service);
-        $setter_id = $setter . 'Id';
-        $setter_token = $setter . 'AccessToken';
+        $setter = 'set'.ucfirst($service);
+        $setter_id = $setter.'Id';
+        $setter_token = $setter.'AccessToken';
         $user->$setter_id($username);
         $user->$setter_token($response->getAccessToken());
 
@@ -75,9 +72,11 @@ class UserProvider extends FOSUBUserProvider
 
     /**
      * @param $length
+     *
      * @return string
      */
-    protected function random_string($length) {
+    protected function random_string($length)
+    {
         $key = '';
         $keys = array_merge(range(0, 9), range('a', 'Z'));
 
@@ -87,5 +86,4 @@ class UserProvider extends FOSUBUserProvider
 
         return $key;
     }
-
 }

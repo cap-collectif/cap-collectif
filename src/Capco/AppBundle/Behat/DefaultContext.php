@@ -4,24 +4,12 @@ namespace Capco\AppBundle\Behat;
 
 use Behat\Behat\Context\Context;
 use Behat\Behat\Hook\Scope\BeforeScenarioScope;
-use Behat\MinkExtension\Context\RawMinkContext;
 use Behat\Symfony2Extension\Context\KernelAwareContext;
-
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\DataFixtures\Purger\ORMPurger;
-use Doctrine\Common\DataFixtures\Executor\ORMExecutor;
 use Doctrine\Common\Persistence\ObjectManager;
-use Doctrine\Common\DataFixtures\Loader;
-use Doctrine\Common\DataFixtures\DependentFixtureInterface;
-
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpKernel\KernelInterface;
 use Symfony\Component\Security\Core\SecurityContextInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
-
-use Capco\AppBundle\DataFixtures\ORM\LoaderDataFixture;
-use Hautelook\AliceBundle\Alice\DataFixtureLoader;
-
 use Behat\MinkExtension\Context\MinkContext;
 
 abstract class DefaultContext extends MinkContext implements Context, KernelAwareContext

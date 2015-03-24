@@ -11,14 +11,14 @@ class CommentType extends AbstractType
 {
     private $user;
 
-    function __construct(User $user = null)
+    public function __construct(User $user = null)
     {
         $this->user = $user;
     }
 
     /**
      * @param FormBuilderInterface $builder
-     * @param array $options
+     * @param array                $options
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -52,7 +52,7 @@ class CommentType extends AbstractType
         $resolver->setDefaults(array(
             'data_class' => 'Capco\AppBundle\Entity\AbstractComment',
             'csrf_protection' => true,
-            'csrf_field_name' => '_token'
+            'csrf_field_name' => '_token',
         ));
     }
 

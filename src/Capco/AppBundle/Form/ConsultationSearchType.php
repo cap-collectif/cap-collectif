@@ -8,19 +8,18 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Capco\AppBundle\Repository\ThemeRepository;
 
-
 class ConsultationSearchType extends AbstractType
 {
     private $toggleManager;
 
-    function __construct(Manager $toggleManager)
+    public function __construct(Manager $toggleManager)
     {
         $this->toggleManager = $toggleManager;
     }
 
     /**
      * @param FormBuilderInterface $builder
-     * @param array $options
+     * @param array                $options
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -36,7 +35,7 @@ class ConsultationSearchType extends AbstractType
                 'translation_domain' => 'CapcoAppBundle',
                 'label' => 'consultation.searchform.sort',
                 'empty_value' => false,
-                'attr' => array('onchange' => 'this.form.submit()')
+                'attr' => array('onchange' => 'this.form.submit()'),
             ))
         ;
 
@@ -53,7 +52,7 @@ class ConsultationSearchType extends AbstractType
                         ->setParameter('enabled', true);
                 },
                 'empty_value' => 'consultation.searchform.all_themes',
-                'attr' => array('onchange' => 'this.form.submit()')
+                'attr' => array('onchange' => 'this.form.submit()'),
             ));
         }
     }

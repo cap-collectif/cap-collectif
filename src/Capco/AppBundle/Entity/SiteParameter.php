@@ -6,7 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
- * SiteParameter
+ * SiteParameter.
  *
  * @ORM\Table(name="site_parameter")
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\SiteParameterRepository")
@@ -98,7 +98,6 @@ class SiteParameter
      */
     private $type;
 
-
     public function __toString()
     {
         if ($this->id) {
@@ -109,16 +108,16 @@ class SiteParameter
     }
 
     /**
-     * Constructor
+     * Constructor.
      */
     public function __construct()
     {
-        $this->updatedAt = new \Datetime;
+        $this->updatedAt = new \Datetime();
         $this->type = self::TYPE_SIMPLE_TEXT;
     }
 
     /**
-     * Get id
+     * Get id.
      *
      * @return integer
      */
@@ -128,9 +127,10 @@ class SiteParameter
     }
 
     /**
-     * Set keyname
+     * Set keyname.
      *
      * @param string $keyname
+     *
      * @return SiteParameter
      */
     public function setKeyname($keyname)
@@ -141,7 +141,7 @@ class SiteParameter
     }
 
     /**
-     * Get keyname
+     * Get keyname.
      *
      * @return string
      */
@@ -151,9 +151,10 @@ class SiteParameter
     }
 
     /**
-     * Set title
+     * Set title.
      *
      * @param string $title
+     *
      * @return SiteParameter
      */
     public function setTitle($title)
@@ -164,7 +165,7 @@ class SiteParameter
     }
 
     /**
-     * Get title
+     * Get title.
      *
      * @return string
      */
@@ -174,9 +175,10 @@ class SiteParameter
     }
 
     /**
-     * Set value
+     * Set value.
      *
      * @param string $value
+     *
      * @return SiteParameter
      */
     public function setValue($value)
@@ -187,7 +189,7 @@ class SiteParameter
     }
 
     /**
-     * Get value
+     * Get value.
      *
      * @return string
      */
@@ -197,7 +199,8 @@ class SiteParameter
     }
 
     /**
-     * Get updatedAt
+     * Get updatedAt.
+     *
      * @return \DateTime
      */
     public function getUpdatedAt()
@@ -206,7 +209,7 @@ class SiteParameter
     }
 
     /**
-     * Set updatedAt
+     * Set updatedAt.
      *
      * @param \DateTime $updatedAt
      *
@@ -220,7 +223,7 @@ class SiteParameter
     }
 
     /**
-     * Set isEnabled
+     * Set isEnabled.
      *
      * @param boolean $isEnabled
      *
@@ -234,7 +237,7 @@ class SiteParameter
     }
 
     /**
-     * Get isEnabled
+     * Get isEnabled.
      *
      * @return boolean
      */
@@ -282,5 +285,4 @@ class SiteParameter
     {
         $this->type = $type;
     }
-
 }

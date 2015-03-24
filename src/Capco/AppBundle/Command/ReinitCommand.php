@@ -1,7 +1,6 @@
 <?php
 namespace Capco\AppBundle\Command;
 
-use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
@@ -24,6 +23,7 @@ class ReinitCommand extends ContainerAwareCommand
     {
         if (!$input->getOption('force')) {
             $output->writeln('Please set the --force option to run this command');
+
             return;
         }
 
@@ -60,7 +60,7 @@ class ReinitCommand extends ContainerAwareCommand
         $command = $this->getApplication()->find('doctrine:database:drop');
         $input = new ArrayInput(array(
             '--force' => true,
-            ''
+            '',
         ));
         $command->run($input, $output);
         $connection = $this->getApplication()->getKernel()->getContainer()->get('doctrine')->getConnection();
@@ -84,7 +84,7 @@ class ReinitCommand extends ContainerAwareCommand
         $command = $this->getApplication()->find('capco:reinit-feature-flags');
         $input = new ArrayInput(array(
             '--force' => true,
-            ''
+            '',
         ));
         $input->setInteractive(false);
         $command->run($input, $output);

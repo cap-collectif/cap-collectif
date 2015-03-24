@@ -8,15 +8,13 @@ use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Show\ShowMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
-
 use Capco\AppBundle\Entity\OpinionVote;
 
 class OpinionVoteAdmin extends Admin
 {
-
     protected $datagridValues = array(
         '_sort_order' => 'ASC',
-        '_sort_by' => 'opinion.title'
+        '_sort_by' => 'opinion.title',
     );
 
     /**
@@ -69,7 +67,7 @@ class OpinionVoteAdmin extends Admin
                     'show' => array(),
                     'edit' => array(),
                     'delete' => array(),
-                )
+                ),
             ))
         ;
     }

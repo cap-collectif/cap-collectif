@@ -7,29 +7,25 @@ use Capco\AppBundle\Entity\Consultation;
 use Capco\AppBundle\Entity\Opinion;
 use Capco\AppBundle\Entity\OpinionType;
 use Capco\AppBundle\Entity\ArgumentVote;
-
 use Capco\AppBundle\Form\ArgumentType as ArgumentForm;
-
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Cache;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Symfony\Component\Form\Form;
 
 class ArgumentController extends Controller
 {
-
     /**
      * @Template("CapcoAppBundle:Argument:show_arguments.html.twig")
+     *
      * @param $consultation
      * @param $opinionType
      * @param $opinion
      * @param $type
      * @param $argumentSort
+     *
      * @return array
      */
     public function showArgumentsAction(Consultation $consultation, OpinionType $opinionType, Opinion $opinion, $type, Form $form, $argumentSort = null)
@@ -60,6 +56,7 @@ class ArgumentController extends Controller
      * @param $opinionTypeSlug
      * @param $opinionSlug
      * @param $argumentId
+     *
      * @return array
      */
     public function voteOnArgumentAction($consultationSlug, $opinionTypeSlug, $opinionSlug, $argumentId, Request $request)
@@ -70,7 +67,7 @@ class ArgumentController extends Controller
 
         $argument = $this->getDoctrine()->getRepository('CapcoAppBundle:Argument')->getOneById($consultationSlug, $opinionTypeSlug, $opinionSlug, $argumentId);
 
-        if($argument == null){
+        if ($argument == null) {
             throw $this->createNotFoundException($this->get('translator')->trans('argument.error.not_found', array(), 'CapcoAppBundle'));
         }
 
@@ -85,9 +82,7 @@ class ArgumentController extends Controller
         $user = $this->getUser();
 
         if ($request->getMethod() == 'POST') {
-
-            if($this->isCsrfTokenValid('argument_vote', $request->get('_csrf_token'))) {
-
+            if ($this->isCsrfTokenValid('argument_vote', $request->get('_csrf_token'))) {
                 $em = $this->getDoctrine()->getManager();
 
                 $argumentVote = new ArgumentVote();
@@ -95,28 +90,26 @@ class ArgumentController extends Controller
 
                 $userVote = $em->getRepository('CapcoAppBundle:ArgumentVote')->findOneBy(array(
                         'Voter' => $user,
-                        'argument' => $argument
+                        'argument' => $argument,
                     ));
 
-                if( $userVote != null ){
+                if ($userVote != null) {
                     $argumentVote = $userVote;
                 }
 
-                if($userVote == null ){
+                if ($userVote == null) {
                     $argumentVote->setArgument($argument);
                     $em->persist($argumentVote);
                     $em->flush();
 
                     $this->get('session')->getFlashBag()->add('success', $this->get('translator')->trans('argument.vote.add_success'));
-                }
-                else {
+                } else {
                     $em->remove($argumentVote);
                     $em->flush();
 
                     $this->get('session')->getFlashBag()->add('info', $this->get('translator')->trans('argument.vote.remove_success'));
                 }
-            }
-            else {
+            } else {
                 $this->get('session')->getFlashBag()->add('danger', $this->get('translator')->trans('argument.vote.csrf_error'));
             }
         }
@@ -133,6 +126,7 @@ class ArgumentController extends Controller
      * @param $opinionTypeSlug
      * @param $opinionSlug
      * @param $argumentId
+     *
      * @return array
      */
     public function updateArgumentAction($consultationSlug, $opinionTypeSlug, $opinionSlug, $argumentId, Request $request)
@@ -143,7 +137,7 @@ class ArgumentController extends Controller
 
         $argument = $this->getDoctrine()->getRepository('CapcoAppBundle:Argument')->getOneById($consultationSlug, $opinionTypeSlug, $opinionSlug, $argumentId);
 
-        if ($argument == null){
+        if ($argument == null) {
             throw $this->createNotFoundException($this->get('translator')->trans('argument.error.not_found', array(), 'CapcoAppBundle'));
         }
 
@@ -167,13 +161,13 @@ class ArgumentController extends Controller
             $form->handleRequest($request);
 
             if ($form->isValid()) {
-
                 $em = $this->getDoctrine()->getManager();
                 $argument->resetVotes();
                 $em->persist($argument);
                 $em->flush();
 
                 $this->get('session')->getFlashBag()->add('success', $this->get('translator')->trans('argument.update.success'));
+
                 return $this->redirect($this->generateUrl('app_consultation_show_opinion', ['consultationSlug' => $consultation->getSlug(), 'opinionTypeSlug' => $opinionType->getSlug(), 'opinionSlug' => $opinion->getSlug() ]));
             } else {
                 $this->get('session')->getFlashBag()->add('danger', $this->get('translator')->trans('argument.update.error'));
@@ -192,11 +186,13 @@ class ArgumentController extends Controller
     /**
      * @Route("/consultations/{consultationSlug}/opinions/{opinionTypeSlug}/{opinionSlug}/arguments/{argumentId}/delete", name="app_consultation_delete_argument")
      * @Template("CapcoAppBundle:Argument:delete.html.twig")
+     *
      * @param $request
      * @param $consultationSlug
      * @param $opinionTypeSlug
      * @param $opinionSlug
      * @param $argumentId
+     *
      * @return array
      */
     public function deleteArgumentAction($consultationSlug, $opinionTypeSlug, $opinionSlug, $argumentId, Request $request)
@@ -207,7 +203,7 @@ class ArgumentController extends Controller
 
         $argument = $this->getDoctrine()->getRepository('CapcoAppBundle:Argument')->getOneById($consultationSlug, $opinionTypeSlug, $opinionSlug, $argumentId);
 
-        if ($argument == null){
+        if ($argument == null) {
             throw $this->createNotFoundException($this->get('translator')->trans('argument.error.not_found', array(), 'CapcoAppBundle'));
         }
 
@@ -238,6 +234,7 @@ class ArgumentController extends Controller
                 $em->flush();
 
                 $this->get('session')->getFlashBag()->add('info', $this->get('translator')->trans('argument.delete.success'));
+
                 return $this->redirect($this->generateUrl('app_consultation_show_opinion', ['consultationSlug' => $consultation->getSlug(), 'opinionTypeSlug' => $opinionType->getSlug(), 'opinionSlug' => $opinion->getSlug() ]));
             } else {
                 $this->get('session')->getFlashBag()->add('danger', $this->get('translator')->trans('argument.delete.error'));

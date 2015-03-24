@@ -6,7 +6,6 @@ use Capco\AppBundle\Entity\Event;
 use Geocoder\Provider\GoogleMaps;
 use Ivory\HttpAdapter\CurlHttpAdapter;
 use Sonata\AdminBundle\Admin\Admin;
-use Sonata\AdminBundle\Route\RouteCollection;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
@@ -14,10 +13,9 @@ use Sonata\AdminBundle\Show\ShowMapper;
 
 class EventAdmin extends Admin
 {
-
     protected $datagridValues = array(
         '_sort_order' => 'DESC',
-        '_sort_by' => 'createdAt'
+        '_sort_by' => 'createdAt',
     );
 
     /**
@@ -112,7 +110,7 @@ class EventAdmin extends Admin
                     'show' => array(),
                     'edit' => array(),
                     'delete' => array(),
-                )
+                ),
             ))
         ;
     }
@@ -146,14 +144,14 @@ class EventAdmin extends Admin
                 'label' => 'admin.fields.event.start_at',
                 'format' => 'dd/MM/yyyy HH:mm',
                 'attr' => array(
-                    'data-date-format' => 'DD/MM/YYYY HH:mm'
-                )
+                    'data-date-format' => 'DD/MM/YYYY HH:mm',
+                ),
             ))
             ->add('endAt', 'sonata_type_datetime_picker', array(
                 'label' => 'admin.fields.event.end_at',
                 'format' => 'dd/MM/yyyy HH:mm',
                 'attr' => array(
-                    'data-date-format' => 'DD/MM/YYYY HH:mm'
+                    'data-date-format' => 'DD/MM/YYYY HH:mm',
                 ),
                 'help' => 'admin.help.step.endAt',
             ))
@@ -161,13 +159,13 @@ class EventAdmin extends Admin
             ->with('admin.fields.event.group_meta')
             ->add('registrationEnable', null, [
                   'label' => 'admin.fields.event.registration_enable',
-                  'required' => false
+                  'required' => false,
             ])
             ->add('link', 'url', array(
                 'label' => 'admin.fields.event.link',
                 'required' => false,
                 'attr' => array(
-                    'placeholder' => 'http://'
+                    'placeholder' => 'http://',
                 ),
             ))
             ->add('Media', 'sonata_type_model_list', array(
@@ -178,7 +176,7 @@ class EventAdmin extends Admin
                     'context' => 'default',
                     'hide_context' => true,
                     'provider' => 'sonata.media.provider.image',
-                )
+                ),
             ))
         ;
 
@@ -325,7 +323,8 @@ class EventAdmin extends Admin
         $this->checkRegistration($event);
     }
 
-    private function checkRegistration($event) {
+    private function checkRegistration($event)
+    {
         if ($event->getLink() != null) {
             $event->setRegistrationEnable(false);
         }
@@ -336,6 +335,7 @@ class EventAdmin extends Admin
         if (!$event->getAddress() || !$event->getCity()) {
             $event->setLat(null);
             $event->setLng(null);
+
             return;
         }
 
@@ -348,8 +348,5 @@ class EventAdmin extends Admin
 
         $event->setLat($coord->getLatitude());
         $event->setLng($coord->getLongitude());
-
     }
-
-
 }

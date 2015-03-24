@@ -3,19 +3,19 @@
 namespace Capco\AppBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
-use Doctrine\ORM\QueryBuilder;
-use Doctrine\ORM\Tools\Pagination\Paginator;
 use Capco\AppBundle\Entity\Step;
 
 /**
- * StepRepository
+ * StepRepository.
  */
 class StepRepository extends EntityRepository
 {
     /**
-     * Get last open consultations
+     * Get last open consultations.
+     *
      * @param int $limit
      * @param int $offset
+     *
      * @return array
      */
     public function getLastOpen($limit = 1, $offset = 0)
@@ -48,9 +48,11 @@ class StepRepository extends EntityRepository
     }
 
     /**
-     * Get last future consultations
+     * Get last future consultations.
+     *
      * @param int $limit
      * @param int $offset
+     *
      * @return array
      */
     public function getLastFuture($limit = 1, $offset = 0)
@@ -83,9 +85,11 @@ class StepRepository extends EntityRepository
     }
 
     /**
-     * Get last closed consultations
+     * Get last closed consultations.
+     *
      * @param int $limit
      * @param int $offset
+     *
      * @return array
      */
     public function getLastClosed($limit = 1, $offset = 0)

@@ -1,13 +1,11 @@
 <?php
 namespace Capco\AppBundle\Command;
 
-use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Input\ArrayInput;
-use Doctrine\DBAL\Exception\ConnectionException;
 
 class LoadBaseDataCommand extends ContainerAwareCommand
 {
@@ -39,8 +37,8 @@ class LoadBaseDataCommand extends ContainerAwareCommand
     {
         $command = $this->getApplication()->find('doctrine:fixtures:load');
         $input = new ArrayInput(array(
-            'command'=>'doctrine:fixtures:load',
-            '--fixtures' => 'src/Capco/AppBundle/DataDemo/ORM'
+            'command' => 'doctrine:fixtures:load',
+            '--fixtures' => 'src/Capco/AppBundle/DataDemo/ORM',
         ));
         $input->setInteractive(false);
         $command->run($input, $output);
@@ -51,7 +49,7 @@ class LoadBaseDataCommand extends ContainerAwareCommand
         $command = $this->getApplication()->find('capco:reset-feature-flags');
         $input = new ArrayInput(array(
             '--force' => true,
-            ''
+            '',
         ));
         $input->setInteractive(false);
         $command->run($input, $output);

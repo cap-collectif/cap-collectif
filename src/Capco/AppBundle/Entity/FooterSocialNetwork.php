@@ -6,7 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
- * FooterSocialNetwork
+ * FooterSocialNetwork.
  *
  * @ORM\Table(name="footer_social_network")
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\FooterSocialNetworkRepository")
@@ -90,7 +90,7 @@ class FooterSocialNetwork
     private $updatedAt;
 
     /**
-     * Constructor
+     * Constructor.
      */
     public function __construct()
     {
@@ -107,7 +107,7 @@ class FooterSocialNetwork
     }
 
     /**
-     * Get id
+     * Get id.
      *
      * @return integer
      */
@@ -117,9 +117,10 @@ class FooterSocialNetwork
     }
 
     /**
-     * Set title
+     * Set title.
      *
      * @param string $title
+     *
      * @return FooterSocialNetwork
      */
     public function setTitle($title)
@@ -130,7 +131,7 @@ class FooterSocialNetwork
     }
 
     /**
-     * Get title
+     * Get title.
      *
      * @return string
      */
@@ -140,9 +141,10 @@ class FooterSocialNetwork
     }
 
     /**
-     * Set link
+     * Set link.
      *
      * @param string $link
+     *
      * @return FooterSocialNetwork
      */
     public function setLink($link)
@@ -153,7 +155,7 @@ class FooterSocialNetwork
     }
 
     /**
-     * Get link
+     * Get link.
      *
      * @return string
      */
@@ -163,9 +165,10 @@ class FooterSocialNetwork
     }
 
     /**
-     * Set style
+     * Set style.
      *
      * @param string $style
+     *
      * @return FooterSocialNetwork
      */
     public function setStyle($style)
@@ -176,7 +179,7 @@ class FooterSocialNetwork
     }
 
     /**
-     * Get style
+     * Get style.
      *
      * @return string
      */
@@ -186,9 +189,10 @@ class FooterSocialNetwork
     }
 
     /**
-     * Set position
+     * Set position.
      *
      * @param integer $position
+     *
      * @return FooterSocialNetwork
      */
     public function setPosition($position)
@@ -199,7 +203,7 @@ class FooterSocialNetwork
     }
 
     /**
-     * Get position
+     * Get position.
      *
      * @return integer
      */
@@ -209,9 +213,10 @@ class FooterSocialNetwork
     }
 
     /**
-     * Set isEnabled
+     * Set isEnabled.
      *
      * @param boolean $isEnabled
+     *
      * @return FooterSocialNetwork
      */
     public function setIsEnabled($isEnabled)
@@ -222,7 +227,7 @@ class FooterSocialNetwork
     }
 
     /**
-     * Get isEnabled
+     * Get isEnabled.
      *
      * @return boolean
      */
@@ -232,7 +237,7 @@ class FooterSocialNetwork
     }
 
     /**
-     * Get createdAt
+     * Get createdAt.
      *
      * @return \DateTime
      */
@@ -242,7 +247,7 @@ class FooterSocialNetwork
     }
 
     /**
-     * Get updatedAt
+     * Get updatedAt.
      *
      * @return \DateTime
      */
@@ -252,7 +257,7 @@ class FooterSocialNetwork
     }
 
     /**
-     * Set createdAt
+     * Set createdAt.
      *
      * @param \DateTime $createdAt
      *
@@ -266,7 +271,7 @@ class FooterSocialNetwork
     }
 
     /**
-     * Set updatedAt
+     * Set updatedAt.
      *
      * @param \DateTime $updatedAt
      *

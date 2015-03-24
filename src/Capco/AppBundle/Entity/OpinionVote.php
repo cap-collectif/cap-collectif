@@ -2,12 +2,11 @@
 
 namespace Capco\AppBundle\Entity;
 
-use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
- * Vote
+ * Vote.
  *
  * @ORM\Table(name="opinion_vote")
  * @ORM\Entity()
@@ -15,7 +14,6 @@ use Gedmo\Mapping\Annotation as Gedmo;
  */
 class OpinionVote
 {
-
     const VOTE_OK = 1;
     const VOTE_NOK = -1;
     const VOTE_MITIGE = 0;
@@ -97,15 +95,15 @@ class OpinionVote
     private $Voter;
 
     /**
-     * Constructor
+     * Constructor.
      */
     public function __construct()
     {
-        $this->updatedAt = new \Datetime;
+        $this->updatedAt = new \Datetime();
     }
 
     /**
-     * Get id
+     * Get id.
      *
      * @return integer
      */
@@ -115,7 +113,7 @@ class OpinionVote
     }
 
     /**
-     * Get createdAt
+     * Get createdAt.
      *
      * @return \DateTime
      */
@@ -125,7 +123,7 @@ class OpinionVote
     }
 
     /**
-     * Get updatedAt
+     * Get updatedAt.
      *
      * @return \DateTime
      */
@@ -135,7 +133,7 @@ class OpinionVote
     }
 
     /**
-     * Get value
+     * Get value.
      *
      * @return integer
      */
@@ -145,9 +143,10 @@ class OpinionVote
     }
 
     /**
-     * Set value
+     * Set value.
      *
      * @param integer $value
+     *
      * @return Vote
      */
     public function setValue($value)
@@ -159,6 +158,7 @@ class OpinionVote
         if ($this->opinion != null) {
             $this->opinion->addToVotesCount($this->value);
         }
+
         return $this;
     }
 
@@ -205,6 +205,5 @@ class OpinionVote
         if ($this->opinion != null) {
             $this->opinion->removeVote($this);
         }
-
     }
 }

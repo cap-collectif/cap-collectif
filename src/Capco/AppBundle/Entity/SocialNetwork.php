@@ -6,7 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
- * SocialNetwork
+ * SocialNetwork.
  *
  * @ORM\Table(name="social_network")
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\SocialNetworkRepository")
@@ -84,15 +84,15 @@ class SocialNetwork
     }
 
     /**
-     * Constructor
+     * Constructor.
      */
     public function __construct()
     {
-        $this->updatedAt = new \Datetime;
+        $this->updatedAt = new \Datetime();
     }
 
     /**
-     * Get id
+     * Get id.
      *
      * @return integer
      */
@@ -102,9 +102,10 @@ class SocialNetwork
     }
 
     /**
-     * Set title
+     * Set title.
      *
      * @param string $title
+     *
      * @return SocialNetwork
      */
     public function setTitle($title)
@@ -115,7 +116,7 @@ class SocialNetwork
     }
 
     /**
-     * Get title
+     * Get title.
      *
      * @return string
      */
@@ -125,9 +126,10 @@ class SocialNetwork
     }
 
     /**
-     * Set link
+     * Set link.
      *
      * @param string $link
+     *
      * @return SocialNetwork
      */
     public function setLink($link)
@@ -138,7 +140,7 @@ class SocialNetwork
     }
 
     /**
-     * Get link
+     * Get link.
      *
      * @return string
      */
@@ -148,9 +150,10 @@ class SocialNetwork
     }
 
     /**
-     * Set position
+     * Set position.
      *
      * @param integer $position
+     *
      * @return SocialNetwork
      */
     public function setPosition($position)
@@ -161,7 +164,7 @@ class SocialNetwork
     }
 
     /**
-     * Get position
+     * Get position.
      *
      * @return integer
      */
@@ -171,9 +174,10 @@ class SocialNetwork
     }
 
     /**
-     * Set isEnabled
+     * Set isEnabled.
      *
      * @param boolean $isEnabled
+     *
      * @return SocialNetwork
      */
     public function setIsEnabled($isEnabled)
@@ -184,7 +188,7 @@ class SocialNetwork
     }
 
     /**
-     * Get isEnabled
+     * Get isEnabled.
      *
      * @return boolean
      */
@@ -194,7 +198,7 @@ class SocialNetwork
     }
 
     /**
-     * Get createdAt
+     * Get createdAt.
      *
      * @return \DateTime
      */
@@ -204,7 +208,7 @@ class SocialNetwork
     }
 
     /**
-     * Get updatedAt
+     * Get updatedAt.
      *
      * @return \DateTime
      */
@@ -229,9 +233,8 @@ class SocialNetwork
         $this->media = $media;
     }
 
-
     /**
-     * Set createdAt
+     * Set createdAt.
      *
      * @param \DateTime $createdAt
      *
@@ -245,7 +248,7 @@ class SocialNetwork
     }
 
     /**
-     * Set updatedAt
+     * Set updatedAt.
      *
      * @param \DateTime $updatedAt
      *

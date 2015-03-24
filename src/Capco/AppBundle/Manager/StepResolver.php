@@ -2,7 +2,6 @@
 
 namespace Capco\AppBundle\Manager;
 
-
 use Capco\AppBundle\Entity\Consultation;
 use Capco\AppBundle\Entity\Step;
 use Symfony\Component\Routing\Router;
@@ -20,21 +19,17 @@ class StepResolver
     {
         if (null != $step) {
             if ($step->isConsultationStep()) {
-                return $this->router->generate('app_consultation_show', array('slug'=>$step->getConsultation()->getSlug()), $absolute);
-            }
-            else if ($step->isOtherStep()) {
-                return $this->router->generate('app_consultation_show_step', array('consultation_slug'=>$step->getConsultation()->getSlug(), 'step_slug'=>$step->getSlug()), $absolute);
+                return $this->router->generate('app_consultation_show', array('slug' => $step->getConsultation()->getSlug()), $absolute);
+            } elseif ($step->isOtherStep()) {
+                return $this->router->generate('app_consultation_show_step', array('consultation_slug' => $step->getConsultation()->getSlug(), 'step_slug' => $step->getSlug()), $absolute);
             }
         }
 
-        return null;
-
+        return;
     }
 
     public function getFirstStepLinkForConsultation(Consultation $consultation, $absolute = false)
     {
         return $this->getLink($consultation->getFirstStep(), $absolute);
     }
-
-
 }

@@ -10,7 +10,7 @@ class ConsultationsPage extends Page
     use PageTrait;
 
     /**
-     * @var string $path
+     * @var string
      */
     protected $path = '/consultations';
 }

@@ -2,13 +2,12 @@
 
 namespace Capco\AppBundle\Entity;
 
-use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * Section
+ * Section.
  *
  * @ORM\Table(name="section")
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\SectionRepository")
@@ -167,10 +166,10 @@ class Section
      */
     private $associatedFeatures;
 
-    function __construct()
+    public function __construct()
     {
         $this->type = 'custom';
-        $this->updatedAt = new \Datetime;
+        $this->updatedAt = new \Datetime();
     }
 
     public function __toString()
@@ -178,6 +177,7 @@ class Section
         if ($this->id) {
             return $this->getTitle();
         }
+
         return "New section";
     }
 
@@ -339,8 +339,4 @@ class Section
     {
         return $this->type == 'custom';
     }
-
-
-
 }
-

@@ -10,9 +10,7 @@ class StepPage extends Page
     use PageTrait;
 
     /**
-     * @var string $path
+     * @var string
      */
     protected $path = '/themes/{slug}';
-
-
 }

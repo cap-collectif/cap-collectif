@@ -49,7 +49,7 @@
     {% if capco_comment_can_add(post) %}
         {{ render(controller('CapcoAppBundle:Comment:create', {'objectId': post.id, 'objectType': post.className})) }}
     {% endif %}
-    
+
 {% endblock %}
 
 {% block javascripts %}
@@ -63,4 +63,3 @@
         });
     </script>
 {% endblock %}
-

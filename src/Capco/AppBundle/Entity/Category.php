@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
- * Category
+ * Category.
  *
  * @ORM\Table(name="category")
  * @ORM\Entity
@@ -63,10 +63,10 @@ class Category
      */
     private $Sources;
 
-    function __construct()
+    public function __construct()
     {
         $this->Sources = new ArrayCollection();
-        $this->updatedAt = new \Datetime;
+        $this->updatedAt = new \Datetime();
     }
 
     public function __toString()
@@ -79,7 +79,7 @@ class Category
     }
 
     /**
-     * Get id
+     * Get id.
      *
      * @return integer
      */
@@ -89,7 +89,7 @@ class Category
     }
 
     /**
-     * Get title
+     * Get title.
      *
      * @return string
      */
@@ -99,7 +99,7 @@ class Category
     }
 
     /**
-     * Set title
+     * Set title.
      *
      * @param string $title
      *
@@ -108,6 +108,7 @@ class Category
     public function setTitle($title)
     {
         $this->title = $title;
+
         return $this;
     }
 
@@ -121,16 +122,18 @@ class Category
 
     /**
      * @param $slug
+     *
      * @return $this
      */
     public function setSlug($slug)
     {
         $this->slug = $slug;
+
         return $this;
     }
 
     /**
-     * Get isEnabled
+     * Get isEnabled.
      *
      * @return boolean
      */
@@ -140,7 +143,7 @@ class Category
     }
 
     /**
-     * Set isEnabled
+     * Set isEnabled.
      *
      * @param boolean $isEnabled
      *
@@ -149,11 +152,12 @@ class Category
     public function setIsEnabled($isEnabled)
     {
         $this->isEnabled = $isEnabled;
+
         return $this;
     }
 
     /**
-     * Get createdAt
+     * Get createdAt.
      *
      * @return \DateTime
      */
@@ -163,7 +167,7 @@ class Category
     }
 
     /**
-     * Get updatedAt
+     * Get updatedAt.
      *
      * @return \DateTime
      */
@@ -182,6 +186,7 @@ class Category
 
     /**
      * @param Source $source
+     *
      * @return $this
      */
     public function addSource(Source $source)
@@ -189,18 +194,19 @@ class Category
         if (!$this->Sources->contains($source)) {
             $this->Sources->add($source);
         }
+
         return $this;
     }
 
     /**
      * @param Source $source
+     *
      * @return $this
      */
     public function removeSource(Source $source)
     {
         $this->Sources->removeElement($source);
+
         return $this;
     }
-
 }
-

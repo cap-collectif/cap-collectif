@@ -73,7 +73,7 @@ class ConsultationDownloadResolver
             'trashed',
             'trashed_date',
             'trashed_reason',
-        )
+        ),
     );
 
     protected $em;
@@ -220,7 +220,6 @@ class ConsultationDownloadResolver
             'trashed_date' => $this->dateToString($argument->getTrashedAt()),
             'trashed_reason' => $argument->getTrashedReason(),
         );
-
     }
 
     private function getSourceItem(Source $source)
@@ -249,7 +248,6 @@ class ConsultationDownloadResolver
             'trashed_date' => $this->dateToString($source->getTrashedAt()),
             'trashed_reason' => $source->getTrashedReason(),
         );
-
     }
 
     private function calculateScore($ok, $mitigated, $nok)
@@ -270,6 +268,7 @@ class ConsultationDownloadResolver
         if (null != $source->getMedia()) {
             return $this->translator->trans('consultation_download.values.link.media', array(), 'CapcoAppBundle');
         }
+
         return '';
     }
 
@@ -278,8 +277,8 @@ class ConsultationDownloadResolver
         if ($boolean) {
             return $this->translator->trans('consultation_download.values.yes', array(), 'CapcoAppBundle');
         }
-        return $this->translator->trans('consultation_download.values.no', array(), 'CapcoAppBundle');
 
+        return $this->translator->trans('consultation_download.values.no', array(), 'CapcoAppBundle');
     }
 
     private function dateToString($date)
@@ -287,6 +286,7 @@ class ConsultationDownloadResolver
         if ($date != null) {
             return $date->format('d-m-Y H:i:s');
         }
+
         return '';
     }
 
@@ -297,7 +297,7 @@ class ConsultationDownloadResolver
         $text = str_ireplace($oneBreak, "\r", $text);
         $text = str_ireplace($twoBreaks, "\r\n", $text);
         $text = strip_tags($text);
+
         return $text;
     }
-
 }

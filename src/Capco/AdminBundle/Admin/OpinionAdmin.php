@@ -11,10 +11,9 @@ use Sonata\AdminBundle\Route\RouteCollection;
 
 class OpinionAdmin extends Admin
 {
-
     protected $datagridValues = array(
         '_sort_order' => 'ASC',
-        '_sort_by' => 'title'
+        '_sort_by' => 'title',
     );
 
     /**
@@ -95,7 +94,7 @@ class OpinionAdmin extends Admin
                     'show' => array(),
                     'edit' => array(),
                     'delete' => array(),
-                )
+                ),
             ))
         ;
     }

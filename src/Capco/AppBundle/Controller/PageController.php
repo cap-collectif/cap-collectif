@@ -10,25 +10,26 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 
 /**
  * @Route("/pages")
-*/
+ */
 class PageController extends Controller
 {
-
     /**
      * @Route("/{slug}", name="app_page_show")
      * @ParamConverter("page", class="CapcoAppBundle:Page", options={"mapping": {"slug": "slug"}})
      * @Template()
+     *
      * @param Page $page
+     *
      * @return array
      */
     public function showAction(Page $page)
     {
-        if($page->getIsEnabled() == false){
+        if ($page->getIsEnabled() == false) {
             throw $this->createNotFoundException($this->get('translator')->trans('page.error.not_found', array(), 'CapcoAppBundle'));
         }
 
         return [
-            'page' => $page
+            'page' => $page,
         ];
     }
 }

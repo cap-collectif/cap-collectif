@@ -9,7 +9,8 @@ use Psr\Log\LoggerInterface;
 use Hautelook\AliceBundle\Alice\Doctrine;
 
 /**
- * Loader
+ * Loader.
+ *
  * @author Baldur Rensch <brensch@gmail.com>
  */
 class Loader
@@ -154,6 +155,7 @@ class Loader
      * @param string $key
      *
      * @throws \InvalidArgumentException
+     *
      * @return \Nelmio\Alice\LoaderInterface
      */
     protected function getLoader($key)
@@ -198,6 +200,7 @@ class Loader
      * Returns whether the passed in object has "identity" as defined by Doctrine.
      *
      * @param mixed $reference
+     *
      * @return bool
      */
     private function hasIdentity($reference)

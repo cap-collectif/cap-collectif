@@ -10,7 +10,7 @@ class NewsPage extends Page
     use PageTrait;
 
     /**
-     * @var string $path
+     * @var string
      */
     protected $path = '/blog/{slug}';
 }

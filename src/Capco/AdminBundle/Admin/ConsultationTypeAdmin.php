@@ -8,16 +8,11 @@ use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Show\ShowMapper;
 
-use Sonata\AdminBundle\Route\RouteCollection;
-
-use Capco\AppBundle\Entity\OpinionType;
-
 class ConsultationTypeAdmin extends Admin
 {
-
     protected $datagridValues = array(
         '_sort_order' => 'ASC',
-        '_sort_by' => 'title'
+        '_sort_by' => 'title',
     );
 
     /**
@@ -68,7 +63,7 @@ class ConsultationTypeAdmin extends Admin
                     'show' => array(),
                     'edit' => array(),
                     'delete' => array(),
-                )
+                ),
             ))
         ;
     }
@@ -78,7 +73,6 @@ class ConsultationTypeAdmin extends Admin
      */
     protected function configureFormFields(FormMapper $formMapper)
     {
-
         $formMapper
             ->add('title', null, array(
                 'label' => 'admin.fields.consultation_type.title',

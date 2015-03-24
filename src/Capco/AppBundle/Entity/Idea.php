@@ -10,7 +10,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * Idea
+ * Idea.
  *
  * @ORM\Table(name="idea")
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\IdeaRepository")
@@ -31,7 +31,6 @@ class Idea implements CommentableInterface
         'date' => 'idea.sort.created_at',
         'popularity' => 'idea.sort.popularity',
     ];
-
 
     /**
      * @var integer
@@ -175,7 +174,7 @@ class Idea implements CommentableInterface
     private $comments;
 
     /**
-     * Constructor
+     * Constructor.
      */
     public function __construct()
     {
@@ -184,7 +183,7 @@ class Idea implements CommentableInterface
         $this->comments = new ArrayCollection();
         $this->voteCount = 0;
         $this->commentsCount = 0;
-        $this->updatedAt = new \Datetime;
+        $this->updatedAt = new \Datetime();
     }
 
     public function __toString()
@@ -197,7 +196,7 @@ class Idea implements CommentableInterface
     }
 
     /**
-     * Get id
+     * Get id.
      *
      * @return integer
      */
@@ -207,9 +206,10 @@ class Idea implements CommentableInterface
     }
 
     /**
-     * Set title
+     * Set title.
      *
      * @param string $title
+     *
      * @return Idea
      */
     public function setTitle($title)
@@ -220,7 +220,7 @@ class Idea implements CommentableInterface
     }
 
     /**
-     * Get title
+     * Get title.
      *
      * @return string
      */
@@ -230,9 +230,10 @@ class Idea implements CommentableInterface
     }
 
     /**
-     * Set slug
+     * Set slug.
      *
      * @param string $slug
+     *
      * @return Idea
      */
     public function setSlug($slug)
@@ -243,7 +244,7 @@ class Idea implements CommentableInterface
     }
 
     /**
-     * Get slug
+     * Get slug.
      *
      * @return string
      */
@@ -253,9 +254,10 @@ class Idea implements CommentableInterface
     }
 
     /**
-     * Set body
+     * Set body.
      *
      * @param string $body
+     *
      * @return Idea
      */
     public function setBody($body)
@@ -266,7 +268,7 @@ class Idea implements CommentableInterface
     }
 
     /**
-     * Get body
+     * Get body.
      *
      * @return string
      */
@@ -308,7 +310,7 @@ class Idea implements CommentableInterface
     }
 
     /**
-     * Get createdAt
+     * Get createdAt.
      *
      * @return \DateTime
      */
@@ -318,7 +320,7 @@ class Idea implements CommentableInterface
     }
 
     /**
-     * Get updatedAt
+     * Get updatedAt.
      *
      * @return \DateTime
      */
@@ -328,9 +330,10 @@ class Idea implements CommentableInterface
     }
 
     /**
-     * Set voteCount
+     * Set voteCount.
      *
      * @param integer $voteCount
+     *
      * @return Idea
      */
     public function setVoteCount($voteCount)
@@ -341,7 +344,7 @@ class Idea implements CommentableInterface
     }
 
     /**
-     * Get voteCount
+     * Get voteCount.
      *
      * @return integer
      */
@@ -400,7 +403,7 @@ class Idea implements CommentableInterface
     }
 
     /**
-     * Set isEnabled
+     * Set isEnabled.
      *
      * @param boolean $isEnabled
      *
@@ -414,7 +417,7 @@ class Idea implements CommentableInterface
     }
 
     /**
-     * Get isEnabled
+     * Get isEnabled.
      *
      * @return boolean
      */
@@ -424,9 +427,10 @@ class Idea implements CommentableInterface
     }
 
     /**
-     * Set isTrashed
+     * Set isTrashed.
      *
      * @param boolean $isTrashed
+     *
      * @return Idea
      */
     public function setIsTrashed($isTrashed)
@@ -441,7 +445,7 @@ class Idea implements CommentableInterface
     }
 
     /**
-     * Get isTrashed
+     * Get isTrashed.
      *
      * @return boolean
      */
@@ -451,9 +455,10 @@ class Idea implements CommentableInterface
     }
 
     /**
-     * Set trashedAt
+     * Set trashedAt.
      *
      * @param \DateTime $trashedAt
+     *
      * @return Idea
      */
     public function setTrashedAt($trashedAt)
@@ -464,7 +469,7 @@ class Idea implements CommentableInterface
     }
 
     /**
-     * Get trashedAt
+     * Get trashedAt.
      *
      * @return \DateTime
      */
@@ -474,9 +479,10 @@ class Idea implements CommentableInterface
     }
 
     /**
-     * Set trashedReason
+     * Set trashedReason.
      *
      * @param string $trashedReason
+     *
      * @return Idea
      */
     public function setTrashedReason($trashedReason)
@@ -487,7 +493,7 @@ class Idea implements CommentableInterface
     }
 
     /**
-     * Get trashedReason
+     * Get trashedReason.
      *
      * @return string
      */
@@ -497,7 +503,6 @@ class Idea implements CommentableInterface
     }
 
     /**
-     *
      * @return string
      */
     public function getReports()
@@ -507,6 +512,7 @@ class Idea implements CommentableInterface
 
     /**
      * @param Reporting $report
+     *
      * @return $this
      */
     public function addReport(Reporting $report)
@@ -514,27 +520,31 @@ class Idea implements CommentableInterface
         if (!$this->Reports->contains($report)) {
             $this->Reports->add($report);
         }
+
         return $this;
     }
 
     /**
      * @param Reporting $report
+     *
      * @return $this
      */
     public function removeReport(Reporting $report)
     {
         $this->Reports->removeElement($report);
+
         return $this;
     }
 
-    public function resetVotes() {
+    public function resetVotes()
+    {
         foreach ($this->votes as $vote) {
             $vote->setConfirmed(false);
         }
     }
 
     /**
-     * Add vote
+     * Add vote.
      *
      * @param \Capco\AppBundle\Entity\IdeaVote $vote
      *
@@ -546,11 +556,13 @@ class Idea implements CommentableInterface
             $this->votes->add($vote);
             $this->voteCount++;
         }
+
         return $this;
     }
 
     /**
      * @param \Capco\AppBundle\Entity\IdeaVote $vote
+     *
      * @return $this
      */
     public function removeVote(\Capco\AppBundle\Entity\IdeaVote $vote)
@@ -558,11 +570,12 @@ class Idea implements CommentableInterface
         if ($this->votes->removeElement($vote)) {
             $this->voteCount--;
         }
+
         return $this;
     }
 
     /**
-     * Get votes
+     * Get votes.
      *
      * @return \Doctrine\Common\Collections\Collection
      */
@@ -581,24 +594,29 @@ class Idea implements CommentableInterface
     /**
      * @return bool
      */
-    public function canDisplay() {
+    public function canDisplay()
+    {
         return $this->isEnabled;
     }
 
     /**
      * @return bool
      */
-    public function canContribute() {
+    public function canContribute()
+    {
         return $this->isEnabled && !$this->isTrashed;
     }
 
     /**
      * @param int $nb
+     *
      * @return string
      */
-    public function getExcerpt($nb = 100){
+    public function getExcerpt($nb = 100)
+    {
         $excerpt = substr($this->body, 0, $nb);
         $excerpt = $excerpt.'...';
+
         return $excerpt;
     }
 

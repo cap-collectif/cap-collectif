@@ -4,7 +4,6 @@ namespace Capco\AdminBundle\Admin;
 
 use Capco\AppBundle\Entity\Video;
 use Sonata\AdminBundle\Admin\Admin;
-use Sonata\AdminBundle\Route\RouteCollection;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
@@ -12,10 +11,9 @@ use Sonata\AdminBundle\Show\ShowMapper;
 
 class VideoAdmin extends Admin
 {
-
     protected $datagridValues = array(
         '_sort_order' => 'DESC',
-        '_sort_by' => 'createdAt'
+        '_sort_by' => 'createdAt',
     );
 
     /**
@@ -77,7 +75,7 @@ class VideoAdmin extends Admin
                     'show' => array(),
                     'edit' => array(),
                     'delete' => array(),
-                )
+                ),
             ))
         ;
     }
@@ -87,7 +85,6 @@ class VideoAdmin extends Admin
      */
     protected function configureFormFields(FormMapper $formMapper)
     {
-
         $formMapper
             ->add('title', null, array(
                 'label' => 'admin.fields.video.title',
@@ -104,7 +101,7 @@ class VideoAdmin extends Admin
                 'required' => true,
                 'help' => 'admin.help.consultation.video',
                 'attr' => array(
-                    'placeholder' => 'http://'
+                    'placeholder' => 'http://',
                 ),
             ))
             ->add('position', null, array(
@@ -124,7 +121,7 @@ class VideoAdmin extends Admin
                     'context' => 'default',
                     'hide_context' => true,
                     'provider' => 'sonata.media.provider.image',
-                )
+                ),
             ))
             ->add('isEnabled', null, array(
                 'label' => 'admin.fields.video.is_enabled',

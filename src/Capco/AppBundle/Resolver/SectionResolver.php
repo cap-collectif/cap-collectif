@@ -2,7 +2,6 @@
 
 namespace Capco\AppBundle\Resolver;
 
-
 use Capco\AppBundle\Entity\Section;
 use Capco\AppBundle\Repository\SectionRepository;
 use Capco\AppBundle\Toggle\Manager;
@@ -30,6 +29,7 @@ class SectionResolver
                 $sections[] = $section;
             }
         }
+
         return $sections;
     }
 
@@ -45,13 +45,13 @@ class SectionResolver
                 $sections[] = $section;
             }
         }
+
         return $sections;
     }
 
     /**
      * @param $reference
      * @param $relPos
-     * @return null
      */
     public function getObjectToSwitch($reference, $relPos)
     {
@@ -61,12 +61,13 @@ class SectionResolver
                 return $sections[$index + $relPos];
             }
         }
-        return null;
 
+        return;
     }
 
     /**
      * @param Section $section
+     *
      * @return bool
      */
     public function isFirstSection(Section $section)
@@ -75,12 +76,13 @@ class SectionResolver
         if (count($sections) > 0) {
             return $section === $sections[0];
         }
-        return false;
 
+        return false;
     }
 
     /**
      * @param Section $section
+     *
      * @return bool
      */
     public function isLastSection(Section $section)
@@ -89,8 +91,7 @@ class SectionResolver
         if (count($sections) > 0) {
             return $section === $sections[count($sections) - 1];
         }
+
         return false;
-
     }
-
 }

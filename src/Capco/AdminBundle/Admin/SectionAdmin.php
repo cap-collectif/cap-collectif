@@ -8,7 +8,6 @@ use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Show\ShowMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
-
 use Capco\AppBundle\Entity\Section;
 
 class SectionAdmin extends Admin
@@ -34,14 +33,12 @@ class SectionAdmin extends Admin
 
         $query = parent::createQuery($context);
         $query->andWhere(
-            $query->expr()->in($query->getRootAliases()[0] . '.id', ':ids')
+            $query->expr()->in($query->getRootAliases()[0].'.id', ':ids')
         );
         $query->setParameter('ids', $ids);
 
         return $query;
-
     }
-
 
     /**
      * @param DatagridMapper $datagridMapper
@@ -108,7 +105,7 @@ class SectionAdmin extends Admin
                     'show' => array(),
                     'edit' => array(),
                     'delete' => array('template' => 'CapcoAdminBundle:Section:list__action_delete.html.twig'),
-                )
+                ),
             ))
         ;
     }
@@ -207,6 +204,4 @@ class SectionAdmin extends Admin
         $collection->add('down', $this->getRouterIdParameter().'/down');
         $collection->add('up', $this->getRouterIdParameter().'/up');
     }
-
-
 }

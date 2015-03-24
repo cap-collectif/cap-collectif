@@ -18,10 +18,12 @@ class BlogController extends Controller
      * @Route("/blog/filter/{theme}/{page}", name="app_blog_search_theme", requirements={"page" = "\d+"}, defaults={"page" = 1, "theme" = "all", "_feature_flag" = "blog"} )
      * @Route("/blog/filter/{theme}/{consultation}/{page}", name="app_blog_search_consultation", requirements={"page" = "\d+"}, defaults={"page" = 1, "theme" = "all", "consultation" = "all", "_feature_flag" = "blog"} )
      * @Template()
+     *
      * @param $request
      * @param $page
      * @param $theme
      * @param $consultation
+     *
      * @return array
      */
     public function indexAction(Request $request, $page, $theme = null, $consultation = null)
@@ -31,7 +33,7 @@ class BlogController extends Controller
 
         $form = $this->createForm(new PostSearchType($this->get('capco.toggle.manager')), null, array(
             'action' => $currentUrl,
-            'method' => 'POST'
+            'method' => 'POST',
         ));
 
         if ($request->getMethod() == 'POST') {
@@ -54,10 +56,10 @@ class BlogController extends Controller
         }
 
         $pagination = $this->get('capco.site_parameter.resolver')->getValue('blog.pagination.size');
-        if (!is_numeric($pagination)){
+        if (!is_numeric($pagination)) {
             $pagination = 0;
         } else {
-            $pagination = (int)$pagination;
+            $pagination = (int) $pagination;
         }
 
         $posts = $this->get('capco.blog.post.repository')->getSearchResults(
@@ -69,7 +71,7 @@ class BlogController extends Controller
 
         //Avoid division by 0 in nbPage calculation
         $nbPage = 1;
-        if($pagination != 0){
+        if ($pagination != 0) {
             $nbPage = ceil(count($posts) / $pagination);
         }
 
@@ -84,7 +86,9 @@ class BlogController extends Controller
     /**
      * @Route("/blog/{slug}", name="app_blog_show", defaults={"_feature_flag" = "blog"} )
      * @Template()
+     *
      * @param $request
+     *
      * @return array
      */
     public function showAction(Request $request, $slug)
@@ -96,7 +100,7 @@ class BlogController extends Controller
         }
 
         return [
-            'post' => $post
+            'post' => $post,
         ];
     }
 }

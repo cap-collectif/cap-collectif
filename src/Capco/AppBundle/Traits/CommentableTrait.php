@@ -3,7 +3,6 @@
 namespace Capco\AppBundle\Traits;
 
 use Doctrine\ORM\Mapping as ORM;
-
 use Capco\AppBundle\Entity\AbstractComment;
 
 trait CommentableTrait
@@ -22,11 +21,13 @@ trait CommentableTrait
      */
     private $isCommentable = true;
 
-    public function increaseCommentsCount($nb) {
+    public function increaseCommentsCount($nb)
+    {
         $this->commentsCount += $nb;
     }
 
-    public function decreaseCommentsCount($nb) {
+    public function decreaseCommentsCount($nb)
+    {
         if ($this->commentsCount >= $nb) {
             $this->commentsCount -= $nb;
         }
@@ -58,6 +59,7 @@ trait CommentableTrait
 
     /**
      * @param $comment
+     *
      * @return $this
      */
     public function addComment(AbstractComment $comment)
@@ -66,11 +68,13 @@ trait CommentableTrait
             $this->increaseCommentsCount(1);
             $this->comments->add($comment);
         }
+
         return $this;
     }
 
     /**
      * @param $comment
+     *
      * @return $this
      */
     public function removeComment(AbstractComment $comment)
@@ -78,6 +82,7 @@ trait CommentableTrait
         if ($this->comments->removeElement($comment)) {
             $this->decreaseCommentsCount(1);
         }
+
         return $this;
     }
 
@@ -100,7 +105,8 @@ trait CommentableTrait
     /**
      * @return bool
      */
-    public function canComment() {
+    public function canComment()
+    {
         return $this->canContribute() && $this->isCommentable;
     }
 }

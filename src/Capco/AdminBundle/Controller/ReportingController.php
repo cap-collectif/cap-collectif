@@ -8,7 +8,6 @@ class ReportingController extends Controller
 {
     public function disableAction()
     {
-
         $id = $this->get('request')->get($this->admin->getIdParameter());
         $object = $this->admin->getObject($id);
 
@@ -37,7 +36,6 @@ class ReportingController extends Controller
 
     public function trashAction()
     {
-
         $id = $this->get('request')->get($this->admin->getIdParameter());
         $object = $this->admin->getObject($id);
 

@@ -9,7 +9,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * Source
+ * Source.
  *
  * @ORM\Table(name="source")
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\SourceRepository")
@@ -23,7 +23,7 @@ class Source
 
     public static $TypesLabels = [
         self::LINK => 'source.type.link',
-        self::FILE => 'source.type.file'
+        self::FILE => 'source.type.file',
     ];
 
     /**
@@ -170,13 +170,13 @@ class Source
      */
     private $trashedReason = null;
 
-    function __construct()
+    public function __construct()
     {
         $this->type = self::LINK;
         $this->Reports = new ArrayCollection();
         $this->Votes = new ArrayCollection();
         $this->voteCountSource = 0;
-        $this->updatedAt = new \DateTime;
+        $this->updatedAt = new \DateTime();
     }
 
     public function __toString()
@@ -186,11 +186,10 @@ class Source
         } else {
             return "New source";
         }
-
     }
 
     /**
-     * Get id
+     * Get id.
      *
      * @return integer
      */
@@ -200,7 +199,7 @@ class Source
     }
 
     /**
-     * Get title
+     * Get title.
      *
      * @return string
      */
@@ -210,7 +209,7 @@ class Source
     }
 
     /**
-     * Set title
+     * Set title.
      *
      * @param string $title
      *
@@ -240,7 +239,7 @@ class Source
     }
 
     /**
-     * Get link
+     * Get link.
      *
      * @return string
      */
@@ -250,7 +249,7 @@ class Source
     }
 
     /**
-     * Set link
+     * Set link.
      *
      * @param string $link
      *
@@ -264,7 +263,7 @@ class Source
     }
 
     /**
-     * Get body
+     * Get body.
      *
      * @return string
      */
@@ -274,7 +273,7 @@ class Source
     }
 
     /**
-     * Set body
+     * Set body.
      *
      * @param string $body
      *
@@ -304,7 +303,7 @@ class Source
     }
 
     /**
-     * Get isEnabled
+     * Get isEnabled.
      *
      * @return boolean
      */
@@ -314,25 +313,27 @@ class Source
     }
 
     /**
-     * Set isEnabled
+     * Set isEnabled.
      *
      * @param boolean $isEnabled
+     *
      * @return Source
      */
     public function setIsEnabled($isEnabled)
     {
         if ($isEnabled != $this->isEnabled) {
-            if($isEnabled) {
-                if(!$this->isTrashed) {
+            if ($isEnabled) {
+                if (!$this->isTrashed) {
                     $this->Opinion->increaseSourcesCount(1);
                 }
             } else {
-                if(!$this->isTrashed) {
+                if (!$this->isTrashed) {
                     $this->Opinion->decreaseSourcesCount(1);
                 }
             }
         }
         $this->isEnabled = $isEnabled;
+
         return $this;
     }
 
@@ -362,12 +363,14 @@ class Source
 
     /**
      * @param mixed $Opinion
+     *
      * @return $this
      */
     public function setOpinion($Opinion)
     {
         $this->Opinion = $Opinion;
         $this->Opinion->addSource($this);
+
         return $this;
     }
 
@@ -381,12 +384,14 @@ class Source
 
     /**
      * @param mixed $Category
+     *
      * @return $this
      */
     public function setCategory($Category)
     {
         $this->Category = $Category;
         $this->Category->addSource($this);
+
         return $this;
     }
 
@@ -425,12 +430,14 @@ class Source
     /**
      * @return mixed
      */
-    public function getVotes(){
+    public function getVotes()
+    {
         return $this->Votes;
     }
 
     /**
      * @param $vote
+     *
      * @return $this
      */
     public function addVote($vote)
@@ -439,22 +446,25 @@ class Source
             $this->voteCountSource++;
             $this->Votes->add($vote);
         }
+
         return $this;
     }
 
     /**
      * @param $vote
+     *
      * @return $this
      */
-    public function removeVote($vote){
-        if($this->Votes->removeElement($vote)){
+    public function removeVote($vote)
+    {
+        if ($this->Votes->removeElement($vote)) {
             $this->voteCountSource--;
         }
+
         return $this;
     }
 
     /**
-     *
      * @return string
      */
     public function getReports()
@@ -464,6 +474,7 @@ class Source
 
     /**
      * @param Reporting $report
+     *
      * @return $this
      */
     public function addReport(Reporting $report)
@@ -471,16 +482,19 @@ class Source
         if (!$this->Reports->contains($report)) {
             $this->Reports->add($report);
         }
+
         return $this;
     }
 
     /**
      * @param Reporting $report
+     *
      * @return $this
      */
     public function removeReport(Reporting $report)
     {
         $this->Reports->removeElement($report);
+
         return $this;
     }
 
@@ -501,7 +515,7 @@ class Source
     }
 
     /**
-     * Get isTrashed
+     * Get isTrashed.
      *
      * @return boolean
      */
@@ -511,9 +525,10 @@ class Source
     }
 
     /**
-     * Set isTrashed
+     * Set isTrashed.
      *
      * @param boolean $isTrashed
+     *
      * @return Source
      */
     public function setIsTrashed($isTrashed)
@@ -523,7 +538,7 @@ class Source
                 $this->trashedReason = null;
                 $this->trashedAt = null;
             }
-            if($this->isEnabled) {
+            if ($this->isEnabled) {
                 if ($isTrashed) {
                     $this->Opinion->decreaseSourcesCount(1);
                 } else {
@@ -532,11 +547,12 @@ class Source
             }
         }
         $this->isTrashed = $isTrashed;
+
         return $this;
     }
 
     /**
-     * Get trashedAt
+     * Get trashedAt.
      *
      * @return \DateTime
      */
@@ -546,9 +562,10 @@ class Source
     }
 
     /**
-     * Set trashedAt
+     * Set trashedAt.
      *
      * @param \DateTime $trashedAt
+     *
      * @return Source
      */
     public function setTrashedAt($trashedAt)
@@ -559,7 +576,7 @@ class Source
     }
 
     /**
-     * Get trashedReason
+     * Get trashedReason.
      *
      * @return string
      */
@@ -569,9 +586,10 @@ class Source
     }
 
     /**
-     * Set trashedReason
+     * Set trashedReason.
      *
      * @param string $trashedReason
+     *
      * @return Source
      */
     public function setTrashedReason($trashedReason)
@@ -591,44 +609,53 @@ class Source
         foreach ($this->Votes as $vote) {
             $this->removeVote($vote);
         }
+
         return $this;
     }
 
     /**
      * @param User $user
+     *
      * @return bool
      */
-    public function userHasVote(User $user = null){
+    public function userHasVote(User $user = null)
+    {
         if ($user != null) {
-            foreach($this->Votes as $vote) {
+            foreach ($this->Votes as $vote) {
                 if ($vote->getVoter() == $user) {
                     return true;
                 }
             }
         }
+
         return false;
     }
 
     /**
      * @param User $user
+     *
      * @return bool
      */
-    public function userHasReport(User $user = null){
+    public function userHasReport(User $user = null)
+    {
         if ($user != null) {
-            foreach($this->Reports as $report) {
+            foreach ($this->Reports as $report) {
                 if ($report->getReporter() == $user) {
                     return true;
                 }
             }
         }
+
         return false;
     }
 
-    public function canDisplay() {
+    public function canDisplay()
+    {
         return $this->isEnabled && $this->Opinion->canDisplay();
     }
 
-    public function canContribute() {
+    public function canContribute()
+    {
         return $this->isEnabled && !$this->isTrashed && $this->Opinion->canContribute();
     }
 
@@ -645,8 +672,5 @@ class Source
         if ($this->Opinion != null) {
             $this->Opinion->removeSource($this);
         }
-
     }
-
 }
-

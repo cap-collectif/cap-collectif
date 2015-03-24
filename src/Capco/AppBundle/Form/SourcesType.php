@@ -7,20 +7,19 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
-use Symfony\Component\Form\Extension\Core\ChoiceList\ChoiceList;
 
 class SourcesType extends AbstractType
 {
     /**
      * @param FormBuilderInterface $builder
-     * @param array $options
+     * @param array                $options
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
             ->add('title', 'text', array(
                 'translation_domain' => 'CapcoAppBundle',
-                'label' => 'source.form.title'
+                'label' => 'source.form.title',
             ))
             ->add('body', 'textarea', array(
                 'translation_domain' => 'CapcoAppBundle',
@@ -42,7 +41,7 @@ class SourcesType extends AbstractType
                 'required' => false,
                 'translation_domain' => 'CapcoAppBundle',
                 'label' => 'source.form.link',
-                'attr' => array('placeholder' => 'http://')
+                'attr' => array('placeholder' => 'http://'),
             ))
             ->add('media', 'sonata_media_type', array(
                 'provider' => 'sonata.media.provider.file',
@@ -55,7 +54,7 @@ class SourcesType extends AbstractType
             ))
         ;
     }
-    
+
     /**
      * @param OptionsResolverInterface $resolver
      */
@@ -65,14 +64,14 @@ class SourcesType extends AbstractType
             'data_class' => 'Capco\AppBundle\Entity\Source',
             'csrf_protection' => true,
             'csrf_field_name' => '_token',
-            'validation_groups' => function(FormInterface $form){
+            'validation_groups' => function (FormInterface $form) {
                 $data = $form->getData();
-                if($data->getType() == 0){
+                if ($data->getType() == 0) {
                     return ['Default', 'link'];
                 } else {
                     return ['Default', 'file'];
                 }
-            }
+            },
 
         ));
     }

@@ -10,7 +10,7 @@ class ArgumentType extends AbstractType
 {
     /**
      * @param FormBuilderInterface $builder
-     * @param array $options
+     * @param array                $options
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -19,11 +19,11 @@ class ArgumentType extends AbstractType
                 'required' => true,
                 'label' => 'argument.form.body',
                 'translation_domain' => 'CapcoAppBundle',
-                'attr' => array('rows' => 7)
+                'attr' => array('rows' => 7),
             ))
         ;
     }
-    
+
     /**
      * @param OptionsResolverInterface $resolver
      */
@@ -32,7 +32,7 @@ class ArgumentType extends AbstractType
         $resolver->setDefaults(array(
             'data_class' => 'Capco\AppBundle\Entity\Argument',
             'csrf_protection' => true,
-            'csrf_field_name' => '_token'
+            'csrf_field_name' => '_token',
         ));
     }
 

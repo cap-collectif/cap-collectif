@@ -90,4 +90,3 @@ Capco\AppBundle\Entity\Section:
         nbObjects: null
         enabled: false
         associatedFeatures: []
-

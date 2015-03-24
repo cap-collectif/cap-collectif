@@ -6,6 +6,7 @@ trait PageTrait
 {
     /**
      * @param $element
+     *
      * @return bool
      */
     public function containsElement($element)

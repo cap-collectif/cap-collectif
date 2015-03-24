@@ -8,14 +8,13 @@ use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Show\ShowMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
-
 use Capco\AppBundle\Entity\Argument;
 
 class ArgumentAdmin extends Admin
 {
     protected $datagridValues = array(
         '_sort_order' => 'ASC',
-        '_sort_by' => 'opinion.title'
+        '_sort_by' => 'opinion.title',
     );
 
     /**
@@ -88,7 +87,7 @@ class ArgumentAdmin extends Admin
                     'show' => array(),
                     'edit' => array(),
                     'delete' => array(),
-                )
+                ),
             ))
         ;
     }
@@ -118,7 +117,7 @@ class ArgumentAdmin extends Admin
                 'label' => 'admin.fields.argument.body',
                 'attr' => array(
                     'rows' => 10,
-                )
+                ),
             ))
             ->add('isTrashed', null, array(
                 'label' => 'admin.fields.argument.is_trashed',
@@ -180,7 +179,6 @@ class ArgumentAdmin extends Admin
                 ))
             ;
         }
-
     }
 
     protected function configureRoutes(RouteCollection $collection)

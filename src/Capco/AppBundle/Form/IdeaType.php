@@ -13,14 +13,14 @@ class IdeaType extends AbstractType
 {
     private $toggleManager;
 
-    function __construct(Manager $toggleManager)
+    public function __construct(Manager $toggleManager)
     {
         $this->toggleManager = $toggleManager;
     }
 
     /**
      * @param FormBuilderInterface $builder
-     * @param array $options
+     * @param array                $options
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -41,7 +41,7 @@ class IdeaType extends AbstractType
                     return $tr->createQueryBuilder('t')
                         ->where('t.isEnabled = :enabled')
                         ->setParameter('enabled', true);
-                }
+                },
             ));
         }
 
@@ -67,7 +67,7 @@ class IdeaType extends AbstractType
             ))
         ;
     }
-    
+
     /**
      * @param OptionsResolverInterface $resolver
      */

@@ -3,12 +3,9 @@ namespace Capco\AppBundle\Toggle;
 
 use Capco\AppBundle\SiteParameter\Resolver;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpKernel\HttpKernelInterface;
 use Symfony\Component\HttpKernel\Event\GetResponseEvent;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Translation\TranslatorInterface;
-
-use Capco\AppBundle\Toggle\Manager;
 
 class RequestListener
 {
@@ -29,7 +26,6 @@ class RequestListener
 
         // Shield mode activated
         if ($this->manager->isActive('shield_mode')) {
-
             $username = $this->siteParameterResolver->getValue('security.shield_mode.username');
             if (null == $username) {
                 $username = 'admin';
@@ -38,7 +34,6 @@ class RequestListener
             $authString = base64_encode($username.':'.$pwd);
 
             if (false == strpos($request->headers->get('Authorization'), $authString)) {
-
                 $event->setResponse(new Response('Access restricted'));
                 $event->getResponse()->headers->set('WWW-Authenticate', 'Basic realm="Member Area"');
                 $event->getResponse()->setStatusCode('401');
@@ -52,8 +47,5 @@ class RequestListener
             $message = $this->translator->trans('error.feature_not_enabled', array(), 'CapcoAppBundle');
             throw new NotFoundHttpException($message);
         }
-
-
     }
 }
-

@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
- * OpinionType
+ * OpinionType.
  *
  * @ORM\Table(name="opinion_type")
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\OpinionTypeRepository")
@@ -106,11 +106,11 @@ class OpinionType
      */
     private $isEnabled;
 
-    function __construct()
+    public function __construct()
     {
         $this->voteWidgetType = self::VOTE_WIDGET_TYPE_ACCORD;
         $this->Opinions = new ArrayCollection();
-        $this->updatedAt = new \Datetime;
+        $this->updatedAt = new \Datetime();
     }
 
     public function __toString()
@@ -123,7 +123,7 @@ class OpinionType
     }
 
     /**
-     * Get id
+     * Get id.
      *
      * @return integer
      */
@@ -133,7 +133,7 @@ class OpinionType
     }
 
     /**
-     * Get title
+     * Get title.
      *
      * @return string
      */
@@ -143,9 +143,10 @@ class OpinionType
     }
 
     /**
-     * Set title
+     * Set title.
      *
      * @param string $title
+     *
      * @return OpinionType
      */
     public function setTitle($title)
@@ -156,7 +157,7 @@ class OpinionType
     }
 
     /**
-     * Get shortName
+     * Get shortName.
      *
      * @return string
      */
@@ -166,9 +167,10 @@ class OpinionType
     }
 
     /**
-     * Set shortName
+     * Set shortName.
      *
      * @param string $shortName
+     *
      * @return OpinionType
      */
     public function setShortName($shortName)
@@ -179,7 +181,7 @@ class OpinionType
     }
 
     /**
-     * Get slug
+     * Get slug.
      *
      * @return string
      */
@@ -189,9 +191,10 @@ class OpinionType
     }
 
     /**
-     * Set slug
+     * Set slug.
      *
      * @param string $slug
+     *
      * @return OpinionType
      */
     public function setSlug($slug)
@@ -202,7 +205,7 @@ class OpinionType
     }
 
     /**
-     * Get position
+     * Get position.
      *
      * @return integer
      */
@@ -212,9 +215,10 @@ class OpinionType
     }
 
     /**
-     * Set position
+     * Set position.
      *
      * @param integer $position
+     *
      * @return OpinionType
      */
     public function setPosition($position)
@@ -225,7 +229,7 @@ class OpinionType
     }
 
     /**
-     * Get voteWidgetType
+     * Get voteWidgetType.
      *
      * @return integer
      */
@@ -235,9 +239,10 @@ class OpinionType
     }
 
     /**
-     * Set voteWidgetType
+     * Set voteWidgetType.
      *
      * @param integer $voteWidgetType
+     *
      * @return OpinionType
      */
     public function setVoteWidgetType($voteWidgetType)
@@ -248,7 +253,7 @@ class OpinionType
     }
 
     /**
-     * Get createdAt
+     * Get createdAt.
      *
      * @return \DateTime
      */
@@ -258,7 +263,7 @@ class OpinionType
     }
 
     /**
-     * Get updatedAt
+     * Get updatedAt.
      *
      * @return \DateTime
      */
@@ -276,8 +281,8 @@ class OpinionType
     }
 
     /**
-     *
      * @param \Capco\AppBundle\Entity\Opinion $opinion
+     *
      * @return $this
      */
     public function addOpinion(Opinion $opinion)
@@ -285,17 +290,19 @@ class OpinionType
         if (!$this->Opinions->contains($opinion)) {
             $this->Opinions->add($opinion);
         }
+
         return $this;
     }
 
     /**
-     *
      * @param \Capco\AppBundle\Entity\Opinion $opinion
+     *
      * @return $this
      */
     public function removeOpinion(Opinion $opinion)
     {
         $this->Opinions->removeElement($opinion);
+
         return $this;
     }
 
@@ -330,5 +337,4 @@ class OpinionType
     {
         $this->isEnabled = $isEnabled;
     }
-
 }

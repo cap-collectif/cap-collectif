@@ -6,7 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
- * ArgumentVote
+ * ArgumentVote.
  *
  * @ORM\Table(name="argument_vote")
  * @ORM\Entity
@@ -53,7 +53,7 @@ class ArgumentVote
     private $Voter;
 
     /**
-     * Get id
+     * Get id.
      *
      * @return integer
      */
@@ -63,7 +63,7 @@ class ArgumentVote
     }
 
     /**
-     * Get createdAt
+     * Get createdAt.
      *
      * @return \DateTime
      */
@@ -73,7 +73,7 @@ class ArgumentVote
     }
 
     /**
-     * Get updatedAt
+     * Get updatedAt.
      *
      * @return \DateTime
      */
@@ -92,12 +92,14 @@ class ArgumentVote
 
     /**
      * @param $argument
+     *
      * @return $this
      */
     public function setArgument($argument)
     {
         $this->argument = $argument;
         $argument->addVote($this);
+
         return $this;
     }
 
@@ -111,11 +113,13 @@ class ArgumentVote
 
     /**
      * @param $Voter
+     *
      * @return $this
      */
     public function setVoter($Voter)
     {
         $this->Voter = $Voter;
+
         return $this;
     }
 
@@ -129,6 +133,5 @@ class ArgumentVote
         if ($this->argument != null) {
             $this->argument->removeVote($this);
         }
-
     }
 }

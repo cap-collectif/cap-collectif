@@ -1,6 +1,7 @@
 <?php
 // src/Acme/DemoBundle/Admin/PostAdmin.php
 
+
 namespace Capco\AdminBundle\Admin;
 
 use Sonata\AdminBundle\Admin\Admin;
@@ -13,7 +14,7 @@ class PageAdmin extends Admin
 {
     protected $datagridValues = array(
         '_sort_order' => 'ASC',
-        '_sort_by' => 'title'
+        '_sort_by' => 'title',
     );
 
     // Fields to be shown on create/edit forms
@@ -75,7 +76,7 @@ class PageAdmin extends Admin
                         'show' => array(),
                         'edit' => array(),
                         'delete' => array(),
-                    )
+                    ),
                 ))
         ;
     }

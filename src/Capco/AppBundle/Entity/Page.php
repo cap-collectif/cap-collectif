@@ -7,7 +7,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
 use Doctrine\Common\Collections\ArrayCollection;
 
 /**
- * Page
+ * Page.
  *
  * @ORM\Table(name="page")
  * @ORM\Entity
@@ -82,7 +82,7 @@ class Page
     private $media;
 
     /**
-     * Get id
+     * Get id.
      *
      * @return integer
      */
@@ -100,20 +100,20 @@ class Page
         }
     }
 
-
     /**
-     * Constructor
+     * Constructor.
      */
     public function __construct()
     {
         $this->MenuItems = new ArrayCollection();
-        $this->updatedAt = new \Datetime;
+        $this->updatedAt = new \Datetime();
     }
 
     /**
-     * Set title
+     * Set title.
      *
      * @param string $title
+     *
      * @return Page
      */
     public function setTitle($title)
@@ -124,7 +124,7 @@ class Page
     }
 
     /**
-     * Get title
+     * Get title.
      *
      * @return string
      */
@@ -134,9 +134,10 @@ class Page
     }
 
     /**
-     * Set slug
+     * Set slug.
      *
      * @param string $slug
+     *
      * @return Page
      */
     public function setSlug($slug)
@@ -147,7 +148,7 @@ class Page
     }
 
     /**
-     * Get slug
+     * Get slug.
      *
      * @return string
      */
@@ -157,9 +158,10 @@ class Page
     }
 
     /**
-     * Set body
+     * Set body.
      *
      * @param string $body
+     *
      * @return Page
      */
     public function setBody($body)
@@ -170,7 +172,7 @@ class Page
     }
 
     /**
-     * Get body
+     * Get body.
      *
      * @return string
      */
@@ -180,7 +182,7 @@ class Page
     }
 
     /**
-     * Get createdAt
+     * Get createdAt.
      *
      * @return \DateTime
      */
@@ -190,7 +192,7 @@ class Page
     }
 
     /**
-     * Get updatedAt
+     * Get updatedAt.
      *
      * @return \DateTime
      */
@@ -200,9 +202,10 @@ class Page
     }
 
     /**
-     * Set isEnabled
+     * Set isEnabled.
      *
      * @param boolean $isEnabled
+     *
      * @return Page
      */
     public function setIsEnabled($isEnabled)
@@ -213,7 +216,7 @@ class Page
     }
 
     /**
-     * Get isEnabled
+     * Get isEnabled.
      *
      * @return boolean
      */
@@ -238,9 +241,8 @@ class Page
         $this->media = $media;
     }
 
-
     /**
-     * Set createdAt
+     * Set createdAt.
      *
      * @param \DateTime $createdAt
      *
@@ -254,7 +256,7 @@ class Page
     }
 
     /**
-     * Set updatedAt
+     * Set updatedAt.
      *
      * @param \DateTime $updatedAt
      *
@@ -299,6 +301,7 @@ class Page
     {
         $excerpt = substr($this->body, 0, $nb);
         $excerpt = $excerpt.'...';
+
         return $excerpt;
     }
 }

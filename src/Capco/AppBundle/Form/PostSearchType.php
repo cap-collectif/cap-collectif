@@ -2,26 +2,24 @@
 
 namespace Capco\AppBundle\Form;
 
-use Capco\AppBundle\Entity\Post;
 use Capco\AppBundle\Toggle\Manager;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Capco\AppBundle\Repository\ThemeRepository;
 use Capco\AppBundle\Repository\ConsultationRepository;
 
-
 class PostSearchType extends AbstractType
 {
     private $toggleManager;
 
-    function __construct(Manager $toggleManager)
+    public function __construct(Manager $toggleManager)
     {
         $this->toggleManager = $toggleManager;
     }
 
     /**
      * @param FormBuilderInterface $builder
-     * @param array $options
+     * @param array                $options
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -38,7 +36,7 @@ class PostSearchType extends AbstractType
                         ->setParameter('enabled', true);
                 },
                 'empty_value' => 'blog.searchform.all_themes',
-                'attr' => array('onchange' => 'this.form.submit()')
+                'attr' => array('onchange' => 'this.form.submit()'),
             ));
         }
 
@@ -54,7 +52,7 @@ class PostSearchType extends AbstractType
                     ->setParameter('enabled', true);
             },
             'empty_value' => 'blog.searchform.all_consultations',
-            'attr' => array('onchange' => 'this.form.submit()')
+            'attr' => array('onchange' => 'this.form.submit()'),
         ));
     }
 

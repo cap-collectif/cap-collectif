@@ -6,14 +6,13 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Menu
+ * Menu.
  *
  * @ORM\Table(name="menu")
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\MenuRepository")
  */
 class Menu
 {
-
     const TYPE_HEADER = 1;
     const TYPE_FOOTER = 2;
 
@@ -42,11 +41,10 @@ class Menu
      * @var \Doctrine\Common\Collections\ArrayCollection
      *
      * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\MenuItem", mappedBy="Menu", cascade={"persist", "remove"}, orphanRemoval=true)
-     *
      */
     private $MenuItems;
 
-    function __construct()
+    public function __construct()
     {
         $this->type = self::TYPE_HEADER;
         $this->MenuItems = new ArrayCollection();
@@ -58,7 +56,7 @@ class Menu
     }
 
     /**
-     * Get id
+     * Get id.
      *
      * @return integer
      */
@@ -68,9 +66,10 @@ class Menu
     }
 
     /**
-     * Set type
+     * Set type.
      *
      * @param string $type
+     *
      * @return Menu
      */
     public function setType($type)
@@ -81,7 +80,7 @@ class Menu
     }
 
     /**
-     * Get type
+     * Get type.
      *
      * @return string
      */
@@ -100,6 +99,7 @@ class Menu
 
     /**
      * @param Capco\AppBundle\Entity\MenuItem $MenuItem
+     *
      * @return Menu
      */
     public function addMenuItem(MenuItem $MenuItem)
@@ -107,11 +107,12 @@ class Menu
         if (!$this->MenuItems->contains($MenuItem)) {
             $this->MenuItems->add($MenuItem);
         }
+
         return $this;
     }
 
     /**
-     * Remove menuItem
+     * Remove menuItem.
      *
      * @param \Capco\AppBundle\Entity\MenuItem $menuItem
      */

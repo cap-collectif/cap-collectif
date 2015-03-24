@@ -5,7 +5,6 @@ namespace Capco\AdminBundle\Admin;
 use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
-use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Show\ShowMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
 use Capco\AppBundle\Entity\Reporting;
@@ -14,7 +13,7 @@ class ReportingAdmin extends Admin
 {
     protected $datagridValues = array(
         '_sort_order' => 'ASC',
-        '_sort_by' => 'isArchived'
+        '_sort_by' => 'isArchived',
     );
 
     /**
@@ -88,13 +87,13 @@ class ReportingAdmin extends Admin
                 'actions' => array(
                     'show' => array(),
                     'disable' => array(
-                        'template' => 'CapcoAdminBundle:CRUD:list__action_disable.html.twig'
+                        'template' => 'CapcoAdminBundle:CRUD:list__action_disable.html.twig',
                     ),
                     'trash' => array(
-                        'template' => 'CapcoAdminBundle:CRUD:list__action_trash.html.twig'
+                        'template' => 'CapcoAdminBundle:CRUD:list__action_trash.html.twig',
                     ),
                     'delete' => array(),
-                )
+                ),
             ))
         ;
     }
@@ -104,7 +103,6 @@ class ReportingAdmin extends Admin
      */
     protected function configureShowFields(ShowMapper $showMapper)
     {
-
         $showMapper
             ->add('object', null, array(
                 'label' => 'admin.fields.reporting.object',

@@ -3,9 +3,7 @@
 namespace Capco\AppBundle\Controller;
 
 use Capco\AppBundle\Form\ContactType;
-use Capco\MediaBundle\Entity\Media;
 use Capco\AppBundle\Entity\Menu;
-
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Cache;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -32,10 +30,11 @@ class DefaultController extends Controller
                 $adminEmail = $this->get('capco.site_parameter.resolver')->getValue('admin.mail.contact');
                 if (null == $adminEmail) {
                     $this->get('session')->getFlashBag()->add('danger', 'contact.email.sent_error');
+
                     return $this->redirect($this->generateUrl('app_homepage'));
                 }
 
-                $subject = $this->get('translator')->trans('contact.email.subject', array('%sitename%' => $this->get('capco.site_parameter.resolver' )->getValue('global.site.fullname'), '%sender%' => $data["name"]), 'CapcoAppBundle');
+                $subject = $this->get('translator')->trans('contact.email.subject', array('%sitename%' => $this->get('capco.site_parameter.resolver')->getValue('global.site.fullname'), '%sender%' => $data["name"]), 'CapcoAppBundle');
 
                 $message = \Swift_Message::newInstance()
                     ->setTo($adminEmail)
@@ -52,7 +51,7 @@ class DefaultController extends Controller
         }
 
         return [
-            'form' => $form->createView()
+            'form' => $form->createView(),
         ];
     }
 
@@ -74,7 +73,7 @@ class DefaultController extends Controller
 
         return [
             'socialNetworks' => $socialNetworks,
-            'footerLinks' => $footerLinks
+            'footerLinks' => $footerLinks,
         ];
     }
 
@@ -90,7 +89,7 @@ class DefaultController extends Controller
 
         return [
             'pathInfo' => $pathInfo,
-            'headerLinks' => $headerLinks
+            'headerLinks' => $headerLinks,
         ];
     }
 }

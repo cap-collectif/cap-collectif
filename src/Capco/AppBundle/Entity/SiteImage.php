@@ -5,16 +5,14 @@ namespace Capco\AppBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 
-
 /**
- * SiteImage
+ * SiteImage.
  *
  * @ORM\Table(name="site_image")
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\SiteImageRepository")
  */
 class SiteImage
 {
-
     /**
      * @var integer
      *
@@ -73,17 +71,16 @@ class SiteImage
      */
     private $position = 0;
 
-
     /**
-     * Constructor
+     * Constructor.
      */
     public function __construct()
     {
-        $this->updatedAt = new \Datetime;
+        $this->updatedAt = new \Datetime();
     }
 
     /**
-     * Get id
+     * Get id.
      *
      * @return integer
      */
@@ -93,9 +90,10 @@ class SiteImage
     }
 
     /**
-     * Set keyname
+     * Set keyname.
      *
      * @param string $keyname
+     *
      * @return SiteImage
      */
     public function setKeyname($keyname)
@@ -106,7 +104,7 @@ class SiteImage
     }
 
     /**
-     * Get keyname
+     * Get keyname.
      *
      * @return string
      */
@@ -116,9 +114,10 @@ class SiteImage
     }
 
     /**
-     * Set title
+     * Set title.
      *
      * @param string $title
+     *
      * @return SiteImage
      */
     public function setTitle($title)
@@ -129,7 +128,7 @@ class SiteImage
     }
 
     /**
-     * Get title
+     * Get title.
      *
      * @return string
      */
@@ -138,9 +137,8 @@ class SiteImage
         return $this->title;
     }
 
-
     /**
-     * Get media
+     * Get media.
      *
      * @return mixed
      */
@@ -150,7 +148,7 @@ class SiteImage
     }
 
     /**
-     * Set media
+     * Set media.
      *
      * @param mixed $media
      */
@@ -160,7 +158,8 @@ class SiteImage
     }
 
     /**
-     * Get updatedAt
+     * Get updatedAt.
+     *
      * @return \DateTime
      */
     public function getUpdatedAt()
@@ -169,7 +168,7 @@ class SiteImage
     }
 
     /**
-     * Set updatedAt
+     * Set updatedAt.
      *
      * @param \DateTime $updatedAt
      *
@@ -183,7 +182,7 @@ class SiteImage
     }
 
     /**
-     * Get isEnabled
+     * Get isEnabled.
      *
      * @return boolean
      */
@@ -193,15 +192,17 @@ class SiteImage
     }
 
     /**
-     * Set isEnabled
+     * Set isEnabled.
      *
      *
      * @param boolean isEnabled
+     *
      * @return SiteImage
      */
     public function setIsEnabled($isEnabled)
     {
         $this->isEnabled = $isEnabled;
+
         return $this;
     }
 

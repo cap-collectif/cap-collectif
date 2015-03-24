@@ -7,15 +7,13 @@ use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Show\ShowMapper;
-
 use Capco\AppBundle\Entity\Step;
 
 class StepAdmin extends Admin
 {
-
     protected $datagridValues = array(
         '_sort_order' => 'ASC',
-        '_sort_by' => 'title'
+        '_sort_by' => 'title',
     );
 
     /**
@@ -89,10 +87,9 @@ class StepAdmin extends Admin
                     'edit' => array(),
                     'show' => array(),
                     'delete' => array('template' => 'CapcoAdminBundle:Step:list__action_delete.html.twig'),
-                )
+                ),
             ))
         ;
-
     }
 
     /**
@@ -109,20 +106,20 @@ class StepAdmin extends Admin
                 'label' => 'admin.fields.step.position',
             ))
         ;
-        if($subject->isOtherStep()){
+        if ($subject->isOtherStep()) {
             $formMapper
                 ->add('startAt', 'sonata_type_datetime_picker', array(
                     'label' => 'admin.fields.step.start_at',
                     'format' => 'dd/MM/yyyy HH:mm',
                     'attr' => array(
-                        'data-date-format' => 'DD/MM/YYYY HH:mm'
-                    )
+                        'data-date-format' => 'DD/MM/YYYY HH:mm',
+                    ),
                 ))
                 ->add('endAt', 'sonata_type_datetime_picker', array(
                     'label' => 'admin.fields.step.end_at',
                     'format' => 'dd/MM/yyyy HH:mm',
                     'attr' => array(
-                        'data-date-format' => 'DD/MM/YYYY HH:mm'
+                        'data-date-format' => 'DD/MM/YYYY HH:mm',
                     ),
                     'help' => 'admin.help.step.endAt',
                 ))

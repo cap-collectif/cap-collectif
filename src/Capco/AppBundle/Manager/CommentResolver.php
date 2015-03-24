@@ -2,16 +2,13 @@
 
 namespace Capco\AppBundle\Manager;
 
-
 use Capco\AppBundle\Entity\Event;
 use Capco\AppBundle\Entity\EventComment;
 use Capco\AppBundle\Entity\IdeaComment;
 use Capco\AppBundle\Entity\AbstractComment as Comment;
 use Capco\AppBundle\Entity\Post;
 use Capco\AppBundle\Entity\PostComment;
-use Capco\AppBundle\Repository\CommentRepository;
 use Capco\AppBundle\Entity\Idea;
-
 use Doctrine\ORM\EntityManager;
 use Symfony\Component\Routing\Router;
 
@@ -31,24 +28,26 @@ class CommentResolver
         $comment = null;
         if ($objectType == 'Idea') {
             $comment = new IdeaComment();
-        } else if ($objectType == 'Event') {
+        } elseif ($objectType == 'Event') {
             $comment = new EventComment();
-        } else if ($objectType == 'Post') {
+        } elseif ($objectType == 'Post') {
             $comment = new PostComment();
         }
+
         return $comment;
     }
 
     public function getObjectByTypeAndId($objectType, $objectId)
     {
         $object = null;
-        if ($objectType == 'Idea'){
+        if ($objectType == 'Idea') {
             $object = $this->em->getRepository('CapcoAppBundle:Idea')->find($objectId);
-        } else if ($objectType == 'Event'){
+        } elseif ($objectType == 'Event') {
             $object = $this->em->getRepository('CapcoAppBundle:Event')->find($objectId);
-        } else if ($objectType == 'Post'){
+        } elseif ($objectType == 'Post') {
             $object = $this->em->getRepository('CapcoAppBundle:Post')->find($objectId);
         }
+
         return $object;
     }
 
@@ -66,19 +65,18 @@ class CommentResolver
             return $this->em->getRepository('CapcoAppBundle:PostComment')->getEnabledByPost($object);
         }
 
-        return null;
-
+        return;
     }
 
     public function getRelatedObject(Comment $comment)
     {
         return $comment->getRelatedObject();
-
     }
 
     public function getUrlOfObjectByTypeAndId($objectType, $objectId, $absolute = false)
     {
         $object = $this->getObjectByTypeAndId($objectType, $objectId);
+
         return $this->getUrlOfObject($object, $absolute);
     }
 
@@ -119,15 +117,15 @@ class CommentResolver
     public function getUrlOfRelatedObject(Comment $comment, $absolute = false)
     {
         $object = $this->getRelatedObject($comment);
-        return $this->getUrlOfObject($object, $absolute);
 
+        return $this->getUrlOfObject($object, $absolute);
     }
 
     public function getAdminUrlOfRelatedObject(Comment $comment, $absolute = false)
     {
         $object = $this->getRelatedObject($comment);
-        return $this->getAdminUrlOfObject($object, $absolute);
 
+        return $this->getAdminUrlOfObject($object, $absolute);
     }
 
     public function canShowCommentOn($object)
@@ -143,7 +141,7 @@ class CommentResolver
     public function setObjectOnComment($object, Comment $comment)
     {
         $comment->setRelatedObject($object);
-        return $comment;
 
+        return $comment;
     }
 }

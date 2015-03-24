@@ -4,19 +4,20 @@ namespace Capco\AppBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\Tools\Pagination\Paginator;
-
 use Capco\AppBundle\Entity\Idea;
 use Capco\AppBundle\Entity\Theme;
 
 /**
- * IdeaRepository
+ * IdeaRepository.
  */
 class IdeaRepository extends EntityRepository
 {
     /**
-     * Get all trashed ideas
+     * Get all trashed ideas.
+     *
      * @param int $nbByPage
      * @param int $page
+     *
      * @return Paginator
      */
     public function getTrashed($nbByPage = 8, $page = 1)
@@ -38,7 +39,7 @@ class IdeaRepository extends EntityRepository
 
         $query = $qb->getQuery();
 
-        if($nbByPage > 0){
+        if ($nbByPage > 0) {
             $query->setFirstResult(($page - 1) * $nbByPage)
                 ->setMaxResults($nbByPage);
         }
@@ -47,11 +48,12 @@ class IdeaRepository extends EntityRepository
     }
 
     /**
-     * Count all trashed ideas
+     * Count all trashed ideas.
+     *
      * @return mixed
      */
-    public function countTrashed(){
-
+    public function countTrashed()
+    {
         return $this->getIsEnabledQueryBuilder()
             ->select('COUNT(i)')
             ->andWhere('i.isTrashed = :trashed')
@@ -61,11 +63,12 @@ class IdeaRepository extends EntityRepository
     }
 
     /**
-     * Count all published (= not trashed AND enabled) ideas
+     * Count all published (= not trashed AND enabled) ideas.
+     *
      * @return mixed
      */
-    public function countPublished(){
-
+    public function countPublished()
+    {
         return $this->getIsEnabledQueryBuilder()
             ->select('COUNT(i)')
             ->andWhere('i.isTrashed = :notTrashed')
@@ -75,12 +78,14 @@ class IdeaRepository extends EntityRepository
     }
 
     /**
-     * Count all ideas by user
+     * Count all ideas by user.
+     *
      * @param $user
+     *
      * @return mixed
      */
-    public function countByUser($user){
-
+    public function countByUser($user)
+    {
         return $this->getIsEnabledQueryBuilder()
             ->select('COUNT(i)')
             ->andWhere('i.Author = :author')
@@ -90,9 +95,11 @@ class IdeaRepository extends EntityRepository
     }
 
     /**
-     * Get last ideas
+     * Get last ideas.
+     *
      * @param int $limit
      * @param int $offset
+     *
      * @return mixed
      */
     public function getLast($limit = 1, $offset = 0)
@@ -121,12 +128,14 @@ class IdeaRepository extends EntityRepository
     }
 
     /**
-     * Get ideas depending on theme and search term, ordered by sort criteria
-     * @param int $nbByPage
-     * @param int $page
+     * Get ideas depending on theme and search term, ordered by sort criteria.
+     *
+     * @param int  $nbByPage
+     * @param int  $page
      * @param null $theme
      * @param null $sort
      * @param null $term
+     *
      * @return Paginator
      */
     public function getSearchResults($nbByPage = 8, $page = 1, $theme = null, $sort = null, $term = null)
@@ -166,7 +175,7 @@ class IdeaRepository extends EntityRepository
 
         $query = $qb->getQuery();
 
-        if($nbByPage > 0){
+        if ($nbByPage > 0) {
             $query->setFirstResult(($page - 1) * $nbByPage)
                 ->setMaxResults($nbByPage);
         }
@@ -175,8 +184,10 @@ class IdeaRepository extends EntityRepository
     }
 
     /**
-     * Get ideas by user
+     * Get ideas by user.
+     *
      * @param user
+     *
      * @return mixed
      */
     public function getByUser($user)
@@ -195,9 +206,12 @@ class IdeaRepository extends EntityRepository
     }
 
     /**
-     * Get one idea by id
+     * Get one idea by id.
+     *
      * @param $id
+     *
      * @return mixed
+     *
      * @throws \Doctrine\ORM\NonUniqueResultException
      */
     public function getOne($id)
@@ -221,9 +235,12 @@ class IdeaRepository extends EntityRepository
     }
 
     /**
-     * Get one idea by id
+     * Get one idea by id.
+     *
      * @param $id
+     *
      * @return mixed
+     *
      * @throws \Doctrine\ORM\NonUniqueResultException
      */
     public function getOneJoinUserReports($slug, $user = null)
@@ -248,10 +265,11 @@ class IdeaRepository extends EntityRepository
         return $query->getOneOrNullResult();
     }
 
-
     /**
-     * Get ideas by theme
+     * Get ideas by theme.
+     *
      * @param theme
+     *
      * @return mixed
      */
     public function getByTheme($theme)

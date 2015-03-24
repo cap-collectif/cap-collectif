@@ -8,11 +8,9 @@ use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Show\ShowMapper;
-use FOS\UserBundle\Model\UserManagerInterface;
 
 class UserAdmin extends BaseAdmin
 {
-
     private $rolesLabels = [
         'ROLE_USER' => 'admin.fields.user.roles.user',
         'ROLE_ADMIN' => 'admin.fields.user.roles.admin',
@@ -33,7 +31,7 @@ class UserAdmin extends BaseAdmin
         $options = $this->formOptions;
         $options['validation_groups'] = 'Default';
 
-        $formBuilder = $this->getFormContractor()->getFormBuilder( $this->getUniqid(), $options);
+        $formBuilder = $this->getFormContractor()->getFormBuilder($this->getUniqid(), $options);
 
         $this->defineFormBuilder($formBuilder);
 
@@ -76,7 +74,7 @@ class UserAdmin extends BaseAdmin
                     'delete' => array(
                         'template' => 'CapcoAdminBundle:User:list__action_delete.html.twig',
                     ),
-                )
+                ),
             ))
         ;
     }
@@ -111,7 +109,7 @@ class UserAdmin extends BaseAdmin
             ->add('username')
             ->add('email')
             ->add('slug', null, array(
-                'label' => 'Slug'
+                'label' => 'Slug',
             ))
             ->end()
             ->with('Profile')
@@ -126,7 +124,7 @@ class UserAdmin extends BaseAdmin
             ->add('website')
             ->add('biography')
             ->add('city', null, array(
-                'label' => 'Ville'
+                'label' => 'Ville',
             ))
             ->add('gender')
             ->add('locale')
@@ -177,7 +175,7 @@ class UserAdmin extends BaseAdmin
             ->with('Social', array('class' => 'col-md-6'))->end()
             ->end()
         ;
-        if (($subject && !$subject->hasRole('ROLE_SUPER_ADMIN')) || $currentUser->hasRole('ROLE_SUPER_ADMIN') ) {
+        if (($subject && !$subject->hasRole('ROLE_SUPER_ADMIN')) || $currentUser->hasRole('ROLE_SUPER_ADMIN')) {
             $formMapper
                 ->tab('Security')
                 ->with('Status', array('class' => 'col-md-4'))->end()
@@ -195,7 +193,7 @@ class UserAdmin extends BaseAdmin
             ->add('username')
             ->add('email')
             ->add('plainPassword', 'text', array(
-                'required' => (!$this->getSubject() || is_null($this->getSubject()->getId()))
+                'required' => (!$this->getSubject() || is_null($this->getSubject()->getId())),
             ))
             ->end()
             ->with('Profile')
@@ -205,13 +203,13 @@ class UserAdmin extends BaseAdmin
             ), array(
                 'link_parameters' => array(
                 'context' => 'default',
-                'hide_context' => true
-            )))
+                'hide_context' => true,
+            ), ))
             ->add('dateOfBirth', 'sonata_type_date_picker', array(
                 'years' => range(1900, $now->format('Y')),
                 'dp_min_date' => '1-1-1900',
                 'dp_max_date' => $now->format('c'),
-                'required' => false
+                'required' => false,
             ))
             ->add('firstname', null, array('required' => false))
             ->add('lastname', null, array('required' => false))
@@ -244,7 +242,7 @@ class UserAdmin extends BaseAdmin
             ->end()
         ;
 
-        if (($subject && !$subject->hasRole('ROLE_SUPER_ADMIN')) || $currentUser->hasRole('ROLE_SUPER_ADMIN') ) {
+        if (($subject && !$subject->hasRole('ROLE_SUPER_ADMIN')) || $currentUser->hasRole('ROLE_SUPER_ADMIN')) {
             $formMapper
                 ->tab('Security')
                 ->with('Status')
@@ -331,8 +329,7 @@ class UserAdmin extends BaseAdmin
         if ($name == 'delete') {
             return 'CapcoAdminBundle:User:delete.html.twig';
         }
+
         return parent::getTemplate($name);
     }
-
-
 }

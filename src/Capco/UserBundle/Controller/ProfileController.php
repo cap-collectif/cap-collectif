@@ -3,17 +3,14 @@
 namespace Capco\UserBundle\Controller;
 
 use Capco\AppBundle\Entity\Argument;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Capco\UserBundle\Entity\User;
 use Sonata\UserBundle\Controller\ProfileFOSUser1Controller as BaseController;
 
-
 /**
  * @Route("/profile")
-*/
+ */
 class ProfileController extends BaseController
 {
     /**
@@ -57,8 +54,10 @@ class ProfileController extends BaseController
 
     /**
      * @Route("/user/{slug}", name="capco_user_profile_show_all")
+     *
      * @param User $user
      * @Template("CapcoUserBundle:Profile:show.html.twig")
+     *
      * @return array
      */
     public function showUserAction(User $user)
@@ -93,7 +92,9 @@ class ProfileController extends BaseController
 
     /**
      * @Route("/{slug}/opinions", name="capco_user_profile_show_opinions")
+     *
      * @param User $user
+     *
      * @return array
      * @Template("CapcoUserBundle:Profile:showUserOpinions.html.twig")
      */
@@ -120,7 +121,9 @@ class ProfileController extends BaseController
 
     /**
      * @Route("/{slug}/arguments", name="capco_user_profile_show_arguments")
+     *
      * @param User $user
+     *
      * @return array
      * @Template("CapcoUserBundle:Profile:showUserArguments.html.twig")
      */
@@ -148,7 +151,9 @@ class ProfileController extends BaseController
 
     /**
      * @Route("/{slug}/ideas", name="capco_user_profile_show_ideas")
+     *
      * @param User $user
+     *
      * @return array
      * @Template("CapcoUserBundle:Profile:showUserIdeas.html.twig")
      */
@@ -175,7 +180,9 @@ class ProfileController extends BaseController
 
     /**
      * @Route("/{slug}/sources", name="capco_user_profile_show_sources")
+     *
      * @param User $user
+     *
      * @return array
      * @Template("CapcoUserBundle:Profile:showUserSources.html.twig")
      */
@@ -202,7 +209,9 @@ class ProfileController extends BaseController
 
     /**
      * @Route("/{slug}/comments", name="capco_user_profile_show_comments")
+     *
      * @param User $user
+     *
      * @return array
      * @Template("CapcoUserBundle:Profile:showUserComments.html.twig")
      */

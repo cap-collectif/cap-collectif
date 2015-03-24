@@ -3,18 +3,17 @@
 namespace Capco\AppBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
-use Doctrine\ORM\Query;
 
 /**
- * IdeaCommentRepository
+ * IdeaCommentRepository.
  */
 class IdeaCommentRepository extends EntityRepository
 {
-
     /**
-     * Get all enabled comments by idea
+     * Get all enabled comments by idea.
      *
      * @param $idea
+     *
      * @return array
      */
     public function getEnabledByIdea($idea)

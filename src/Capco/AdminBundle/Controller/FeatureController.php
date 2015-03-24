@@ -26,7 +26,7 @@ class FeatureController extends Controller
 
         return array(
             'admin_pool' => $admin_pool,
-            'toggles' => $toggles
+            'toggles' => $toggles,
         );
     }
 

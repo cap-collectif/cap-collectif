@@ -4,15 +4,11 @@ namespace Capco\AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
-use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 
-use Capco\AppBundle\Entity\Step;
-use Capco\AppBundle\Entity\Theme;
-
 /**
- * Consultation
+ * Consultation.
  *
  * @ORM\Table(name="consultation")
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\ConsultationRepository")
@@ -188,9 +184,8 @@ class Consultation
      */
     private $posts;
 
-
     /**
-     * Constructor
+     * Constructor.
      */
     public function __construct()
     {
@@ -200,7 +195,7 @@ class Consultation
         $this->events = new ArrayCollection();
         $this->posts = new ArrayCollection();
         $this->allowedTypes = new ArrayCollection();
-        $this->updatedAt = new \Datetime;
+        $this->updatedAt = new \Datetime();
     }
 
     public function __toString()
@@ -213,7 +208,7 @@ class Consultation
     }
 
     /**
-     * Get id
+     * Get id.
      *
      * @return integer
      */
@@ -223,7 +218,7 @@ class Consultation
     }
 
     /**
-     * Get title
+     * Get title.
      *
      * @return string
      */
@@ -233,14 +228,16 @@ class Consultation
     }
 
     /**
-     * Set title
+     * Set title.
      *
      * @param string $title
+     *
      * @return Consultation
      */
     public function setTitle($title)
     {
         $this->title = $title;
+
         return $this;
     }
 
@@ -254,11 +251,13 @@ class Consultation
 
     /**
      * @param $slug
+     *
      * @return $this
      */
     public function setSlug($slug)
     {
         $this->slug = $slug;
+
         return $this;
     }
 
@@ -272,11 +271,13 @@ class Consultation
 
     /**
      * @param $teaser
+     *
      * @return $this
      */
     public function setTeaser($teaser)
     {
         $this->teaser = $teaser;
+
         return $this;
     }
 
@@ -290,16 +291,18 @@ class Consultation
 
     /**
      * @param $body
+     *
      * @return $this
      */
     public function setBody($body)
     {
         $this->body = $body;
+
         return $this;
     }
 
     /**
-     * Get isEnabled
+     * Get isEnabled.
      *
      * @return boolean
      */
@@ -309,14 +312,16 @@ class Consultation
     }
 
     /**
-     * Set isEnabled
+     * Set isEnabled.
      *
      * @param boolean $isEnabled
+     *
      * @return Consultation
      */
     public function setIsEnabled($isEnabled)
     {
         $this->isEnabled = $isEnabled;
+
         return $this;
     }
 
@@ -346,11 +351,13 @@ class Consultation
 
     /**
      * @param $opinionCount
+     *
      * @return $this
      */
     public function setOpinionCount($opinionCount)
     {
         $this->opinionCount = $opinionCount;
+
         return $this;
     }
 
@@ -364,11 +371,13 @@ class Consultation
 
     /**
      * @param $trashedOpinionCount
+     *
      * @return $this
      */
     public function setTrashedOpinionCount($trashedOpinionCount)
     {
         $this->trashedOpinionCount = $trashedOpinionCount;
+
         return $this;
     }
 
@@ -382,11 +391,13 @@ class Consultation
 
     /**
      * @param $argumentCount
+     *
      * @return $this
      */
     public function setArgumentCount($argumentCount)
     {
         $this->argumentCount = $argumentCount;
+
         return $this;
     }
 
@@ -400,11 +411,13 @@ class Consultation
 
     /**
      * @param $trashedArgumentCount
+     *
      * @return $this
      */
     public function setTrashedArgumentCount($trashedArgumentCount)
     {
         $this->trashedArgumentCount = $trashedArgumentCount;
+
         return $this;
     }
 
@@ -418,16 +431,18 @@ class Consultation
 
     /**
      * @param $Author
+     *
      * @return $this
      */
     public function setAuthor($Author)
     {
         $this->Author = $Author;
+
         return $this;
     }
 
     /**
-     * Get themes
+     * Get themes.
      *
      * @return \Doctrine\Common\Collections\Collection
      */
@@ -437,7 +452,7 @@ class Consultation
     }
 
     /**
-     * Add theme
+     * Add theme.
      *
      * @param \Capco\AppBundle\Entity\Theme $theme
      *
@@ -449,42 +464,51 @@ class Consultation
             $this->Themes->add($theme);
         }
         $theme->addConsultation($this);
+
         return $this;
     }
 
     /**
-     * Remove theme
+     * Remove theme.
+     *
      * @param \Capco\AppBundle\Entity\Theme $theme
+     *
      * @return $this
      */
     public function removeTheme(Theme $theme)
     {
         $this->Themes->removeElement($theme);
         $theme->removeConsultation($this);
+
         return $this;
     }
 
     /**
      * @return ArrayCollection
      */
-    public function getOpinions(){
+    public function getOpinions()
+    {
         return $this->Opinions;
     }
 
     /**
      * @param $opinion
+     *
      * @return $this
      */
-    public function addOpinion($opinion){
+    public function addOpinion($opinion)
+    {
         if (!$this->Opinions->contains($opinion)) {
             $this->opinionCount++;
             $this->Opinions->add($opinion);
         }
+
         return $this;
     }
 
     /**
      * @param $opinion
+     *
      * @return $this
      */
     public function removeOpinion($opinion)
@@ -492,11 +516,12 @@ class Consultation
         if ($this->Opinions->removeElement($opinion)) {
             $this->opinionCount--;
         }
+
         return $this;
     }
 
     /**
-     * Get steps
+     * Get steps.
      *
      * @return \Doctrine\Common\Collections\Collection
      */
@@ -506,9 +531,10 @@ class Consultation
     }
 
     /**
-     * Add step
+     * Add step.
      *
      * @param \Capco\AppBundle\Entity\Step $step
+     *
      * @return Consultation
      */
     public function addStep(Step $step)
@@ -516,17 +542,21 @@ class Consultation
         if (!$this->Steps->contains($step)) {
             $this->Steps->add($step);
         }
+
         return $this;
     }
 
     /**
-     * Remove step
+     * Remove step.
+     *
      * @param \Capco\AppBundle\Entity\Step $step
+     *
      * @return $this
      */
     public function removeStep(Step $step)
     {
         $this->Steps->removeElement($step);
+
         return $this;
     }
 
@@ -572,16 +602,19 @@ class Consultation
 
     /**
      * @param $allowedTypes
+     *
      * @return $this
      */
     public function setAllowedTypes($allowedTypes)
     {
         $this->allowedTypes = $allowedTypes;
+
         return $this;
     }
 
     /**
      * @param $allowedType
+     *
      * @return $this
      */
     public function addAllowedType($allowedType)
@@ -589,16 +622,19 @@ class Consultation
         if (!$this->allowedTypes->contains($allowedType)) {
             $this->allowedTypes[] = $allowedType;
         }
+
         return $this;
     }
 
     /**
      * @param $allowedType
+     *
      * @return $this
      */
     public function removeAllowedType($allowedType)
     {
         $this->allowedTypes->removeElement($allowedType);
+
         return $this;
     }
 
@@ -612,6 +648,7 @@ class Consultation
 
     /**
      * @param Event $event
+     *
      * @return Theme
      */
     public function addEvent(Event $event)
@@ -619,21 +656,24 @@ class Consultation
         if (!$this->events->contains($event)) {
             $this->events->add($event);
         }
+
         return $this;
     }
 
     /**
      * @param Event $event
+     *
      * @return $this
      */
     public function removeEvent(Event $event)
     {
         $this->events->removeElement($event);
+
         return $this;
     }
 
     /**
-     * Get Posts
+     * Get Posts.
      *
      * @return \Doctrine\Common\Collections\Collection
      */
@@ -643,7 +683,7 @@ class Consultation
     }
 
     /**
-     * Add Post
+     * Add Post.
      *
      * @param Post $post
      *
@@ -654,18 +694,21 @@ class Consultation
         if (!$this->posts->contains($post)) {
             $this->posts[] = $post;
         }
+
         return $this;
     }
 
     /**
-     * Remove post
+     * Remove post.
      *
      * @param Post $post
+     *
      * @return $this
      */
     public function removePost(Post $post)
     {
         $this->posts->removeElement($post);
+
         return $this;
     }
 
@@ -684,9 +727,11 @@ class Consultation
                     $first = $step;
                 }
             }
+
             return $first;
         }
-        return null;
+
+        return;
     }
 
     /**
@@ -695,11 +740,12 @@ class Consultation
     public function getConsultationStep()
     {
         foreach ($this->Steps as $step) {
-            if($step->isConsultationStep()) {
+            if ($step->isConsultationStep()) {
                 return $step;
             }
         }
-        return null;
+
+        return;
     }
 
     public function getConsultationStepTitle()
@@ -719,31 +765,30 @@ class Consultation
     }
 
     /**
-     * @return null
      */
     public function getOpenedAt()
     {
         $consultationStep = $this->getConsultationStep();
-        if(null != $consultationStep){
+        if (null != $consultationStep) {
             return $consultationStep->getStartAt();
         }
-        return null;
+
+        return;
     }
 
     /**
-     * @return null
      */
     public function getClosedAt()
     {
         $consultationStep = $this->getConsultationStep();
-        if(null != $consultationStep){
+        if (null != $consultationStep) {
             return $consultationStep->getEndAt();
         }
-        return null;
+
+        return;
     }
 
     /**
-     * @return null
      */
     public function getRemainingDays()
     {
@@ -754,11 +799,13 @@ class Consultation
                 return $closedAt->diff($now)->format('%a');
             }
         }
-        return null;
+
+        return;
     }
 
     /**
-     * Verify if a consultation is opened
+     * Verify if a consultation is opened.
+     *
      * @return bool
      */
     public function isOpen()
@@ -768,11 +815,11 @@ class Consultation
         $now = new \DateTime();
 
         return $openedAt < $now && $now < $closedAt;
-
     }
 
     /**
-     * Verify if a consultation is future
+     * Verify if a consultation is future.
+     *
      * @return bool
      */
     public function isFuture()
@@ -782,11 +829,11 @@ class Consultation
         $now = new \DateTime();
 
         return $openedAt > $now && $now < $closedAt;
-
     }
 
     /**
-     * Verify if a consultation is closed
+     * Verify if a consultation is closed.
+     *
      * @return bool
      */
     public function isClose()
@@ -796,7 +843,6 @@ class Consultation
         $now = new \DateTime();
 
         return $openedAt < $now && $now > $closedAt;
-
     }
 
     /**
@@ -810,14 +856,13 @@ class Consultation
 
         if (null != $closedAt && $now > $closedAt) {
             return self::OPENING_STATUS_ENDED;
-        }
-        else if (null != $openedAt && $now < $openedAt) {
+        } elseif (null != $openedAt && $now < $openedAt) {
             return self::OPENING_STATUS_FUTURE;
-        }
-        else if(null != $openedAt && null!= $closedAt && $openedAt < $now && $now < $closedAt) {
+        } elseif (null != $openedAt && null != $closedAt && $openedAt < $now && $now < $closedAt) {
             return self::OPENING_STATUS_OPENED;
         }
-        return null;
+
+        return;
     }
 
     /**
@@ -838,38 +883,45 @@ class Consultation
 
     /**
      * @param int $nb
+     *
      * @return string
      */
     public function getBodyExcerpt($nb = 100)
     {
         $excerpt = substr($this->body, 0, $nb);
         $excerpt = $excerpt.'...';
+
         return $excerpt;
     }
 
     /**
      * @param int $nb
+     *
      * @return string
      */
     public function getTeaserExcerpt($nb = 100)
     {
         $excerpt = substr($this->teaser, 0, $nb);
         $excerpt = $excerpt.'...';
+
         return $excerpt;
     }
 
     /**
      * @param $nb
+     *
      * @return $this
      */
     public function increaseOpinionCount($nb)
     {
-        $this->opinionCount+=$nb;
+        $this->opinionCount += $nb;
+
         return $this;
     }
 
     /**
      * @param $nb
+     *
      * @return $this
      */
     public function decreaseOpinionCount($nb)
@@ -877,21 +929,25 @@ class Consultation
         if ($this->opinionCount >= $nb) {
             $this->opinionCount -= $nb;
         }
+
         return $this;
     }
 
     /**
      * @param $nb
+     *
      * @return $this
      */
     public function increaseTrashedOpinionCount($nb)
     {
-        $this->trashedOpinionCount+=$nb;
+        $this->trashedOpinionCount += $nb;
+
         return $this;
     }
 
     /**
      * @param $nb
+     *
      * @return $this
      */
     public function decreaseTrashedOpinionCount($nb)
@@ -899,21 +955,25 @@ class Consultation
         if ($this->trashedOpinionCount >= $nb) {
             $this->trashedOpinionCount -= $nb;
         }
+
         return $this;
     }
 
     /**
      * @param $nb
+     *
      * @return $this
      */
     public function increaseArgumentCount($nb)
     {
-        $this->argumentCount+=$nb;
+        $this->argumentCount += $nb;
+
         return $this;
     }
 
     /**
      * @param $nb
+     *
      * @return $this
      */
     public function decreaseArgumentCount($nb)
@@ -921,21 +981,25 @@ class Consultation
         if ($this->argumentCount >= $nb) {
             $this->argumentCount -= $nb;
         }
+
         return $this;
     }
 
     /**
      * @param $nb
+     *
      * @return $this
      */
     public function increaseTrashedArgumentCount($nb)
     {
-        $this->trashedArgumentCount+=$nb;
+        $this->trashedArgumentCount += $nb;
+
         return $this;
     }
 
     /**
      * @param $nb
+     *
      * @return $this
      */
     public function decreaseTrashedArgumentCount($nb)
@@ -943,22 +1007,25 @@ class Consultation
         if ($this->trashedArgumentCount >= $nb) {
             $this->trashedArgumentCount -= $nb;
         }
+
         return $this;
     }
 
     /**
      * @return int
      */
-    public function getTotalContributionsCount ()
+    public function getTotalContributionsCount()
     {
         return ($this->argumentCount + $this->opinionCount + $this->trashedArgumentCount + $this->trashedOpinionCount);
     }
 
     /**
      * @param $opinionType
+     *
      * @return bool
      */
-    public function allowType($opinionType) {
+    public function allowType($opinionType)
+    {
         return $this->allowedTypes->contains($opinionType);
     }
 
@@ -968,12 +1035,11 @@ class Consultation
     }
 
     /**
-     * Required for sonata admin
-     * @return null
+     * Required for sonata admin.
      */
     public function getConsultationType()
     {
-        return null;
+        return;
     }
 
     // ************************** Lifecycle **************************************
@@ -988,6 +1054,5 @@ class Consultation
                 $theme->removeConsultation($this);
             }
         }
-
     }
 }

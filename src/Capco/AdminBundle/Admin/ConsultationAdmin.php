@@ -7,19 +7,16 @@ use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Show\ShowMapper;
-
 use Sonata\AdminBundle\Route\RouteCollection;
-
 use Capco\AppBundle\Entity\Consultation;
 use Capco\AppBundle\Entity\Step;
 use Symfony\Component\Validator\Constraints\DateTime;
 
 class ConsultationAdmin extends Admin
 {
-
     protected $datagridValues = array(
         '_sort_order' => 'ASC',
-        '_sort_by' => 'title'
+        '_sort_by' => 'title',
     );
 
     /**
@@ -100,12 +97,12 @@ class ConsultationAdmin extends Admin
             ->add('openedAt', null, array(
                 'label' => 'admin.fields.consultation.opened_at',
                 'mapped' => false,
-                'template' => 'CapcoAdminBundle:Consultation:openedAt_list_field.html.twig'
+                'template' => 'CapcoAdminBundle:Consultation:openedAt_list_field.html.twig',
             ))
             ->add('closedAt', null, array(
                 'label' => 'admin.fields.consultation.closed_at',
                 'mapped' => false,
-                'template' => 'CapcoAdminBundle:Consultation:closedAt_list_field.html.twig'
+                'template' => 'CapcoAdminBundle:Consultation:closedAt_list_field.html.twig',
             ))
             ->add('opinionCount', null, array(
                 'label' => 'admin.fields.consultation.opinion_count',
@@ -136,7 +133,7 @@ class ConsultationAdmin extends Admin
                     ),
                     'edit' => array(),
                     'delete' => array(),
-                )
+                ),
             ))
         ;
     }
@@ -151,7 +148,7 @@ class ConsultationAdmin extends Admin
         $close = null;
         $stepTitle = 'Consultation';
         $stepPosition = 1;
-        if($subject != null){
+        if ($subject != null) {
             $open = $subject->getOpenedAt();
             $close = $subject->getClosedAt();
             $consultationStep = $subject->getConsultationStep();
@@ -212,7 +209,7 @@ class ConsultationAdmin extends Admin
                     'context' => 'default',
                     'hide_context' => true,
                     'provider' => 'sonata.media.provider.image',
-                )
+                ),
             ))
             ->add('video', null, array(
                 'label' => 'admin.fields.consultation.video',
@@ -250,8 +247,8 @@ class ConsultationAdmin extends Admin
                 'label' => 'admin.fields.consultation.opened_at',
                 'format' => 'dd/MM/yyyy HH:mm',
                 'attr' => array(
-                    'data-date-format' => 'DD/MM/YYYY HH:mm'
-                )
+                    'data-date-format' => 'DD/MM/YYYY HH:mm',
+                ),
             ))
              ->add('closedAt', 'sonata_type_datetime_picker', array(
                 'required' => true,
@@ -261,8 +258,8 @@ class ConsultationAdmin extends Admin
                  'label' => 'admin.fields.consultation.closed_at',
                  'format' => 'dd/MM/yyyy HH:mm',
                  'attr' => array(
-                     'data-date-format' => 'DD/MM/YYYY HH:mm'
-                 )
+                     'data-date-format' => 'DD/MM/YYYY HH:mm',
+                 ),
              ))
             ->add('consultationStepTitle', 'text', array(
                 'required' => true,
@@ -377,7 +374,6 @@ class ConsultationAdmin extends Admin
 
     private function setConsultationStep($consultation)
     {
-
         $consultationStep = $consultation->getConsultationStep();
         if ($consultationStep == null) {
             $consultationStep = new Step();
@@ -409,8 +405,7 @@ class ConsultationAdmin extends Admin
         if ($name == 'edit') {
             return 'CapcoAdminBundle:Consultation:edit.html.twig';
         }
+
         return parent::getTemplate($name);
     }
-
-
 }

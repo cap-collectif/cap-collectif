@@ -2,10 +2,8 @@
 
 namespace Capco\AppBundle\Behat;
 
-
 use Behat\Gherkin\Node\TableNode;
 use SensioLabs\Behat\PageObjectExtension\Context\PageObjectContext;
-
 
 class NavigationContext extends PageObjectContext
 {
@@ -60,5 +58,4 @@ class NavigationContext extends PageObjectContext
     {
         expect($this->getPage("idea page")->getFirstCommentVoteCounter())->toBe($value);
     }
-
 }

@@ -90,7 +90,7 @@ class SourceAdmin extends Admin
                     'show' => array(),
                     'edit' => array(),
                     'delete' => array(),
-                )
+                ),
             ))
         ;
     }
@@ -124,7 +124,7 @@ class SourceAdmin extends Admin
                 'label' => 'admin.fields.source.link',
                 'attr' => array(
                     'placeholder' => 'http://www.cap-collectif.com/',
-                )
+                ),
             ))
             ->add('isTrashed', null, array(
                 'label' => 'admin.fields.source.is_trashed',

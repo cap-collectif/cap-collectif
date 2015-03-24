@@ -13,7 +13,7 @@ class SiteImageAdmin extends Admin
 {
     protected $datagridValues = array(
         '_sort_order' => 'ASC',
-        '_sort_by' => 'position'
+        '_sort_by' => 'position',
     );
 
     /**
@@ -47,7 +47,7 @@ class SiteImageAdmin extends Admin
                 'label' => 'admin.fields.site_image.media',
                 'template' => 'CapcoAdminBundle:SiteImage:media_list_field.html.twig',
                 'provider' => 'sonata.media.provider.image',
-                'context' => 'default'
+                'context' => 'default',
             ))
             ->add('isEnabled', null, array(
                 'editable' => true,
@@ -60,7 +60,7 @@ class SiteImageAdmin extends Admin
                 'actions' => array(
                     'show' => array(),
                     'edit' => array(),
-                )
+                ),
             ))
         ;
     }
@@ -83,7 +83,7 @@ class SiteImageAdmin extends Admin
                     'context' => 'default',
                     'hide_context' => true,
                     'provider' => 'sonata.media.provider.image',
-            )))
+            ), ))
         ;
     }
 

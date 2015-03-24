@@ -11,7 +11,7 @@ class OpinionVoteType extends AbstractType
 {
     /**
      * @param FormBuilderInterface $builder
-     * @param array $options
+     * @param array                $options
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -22,7 +22,7 @@ class OpinionVoteType extends AbstractType
                 'translation_domain' => 'CapcoAppBundle',
                 'multiple' => false,
                 'expanded' => true,
-                'attr' => array('onchange' => "document.getElementById('opinion_vote_form').submit()")
+                'attr' => array('onchange' => "document.getElementById('opinion_vote_form').submit()"),
             ))
         ;
     }
@@ -35,7 +35,7 @@ class OpinionVoteType extends AbstractType
         $resolver->setDefaults(array(
             'data_class' => 'Capco\AppBundle\Entity\OpinionVote',
             'csrf_protection' => true,
-            'csrf_field_name' => '_token'
+            'csrf_field_name' => '_token',
         ));
     }
 

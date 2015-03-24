@@ -8,9 +8,8 @@ use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Validator\Constraints as Assert;
 use Capco\UserBundle\Entity\User;
 
-
 /**
- * Opinion
+ * Opinion.
  *
  * @ORM\Table(name="opinion")
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\OpinionRepository")
@@ -181,7 +180,7 @@ class Opinion
      */
     private $Reports;
 
-    function __construct()
+    public function __construct()
     {
         $this->Votes = new ArrayCollection();
         $this->Reports = new ArrayCollection();
@@ -204,7 +203,7 @@ class Opinion
     }
 
     /**
-     * Get id
+     * Get id.
      *
      * @return integer
      */
@@ -214,7 +213,7 @@ class Opinion
     }
 
     /**
-     * Get title
+     * Get title.
      *
      * @return string
      */
@@ -224,19 +223,21 @@ class Opinion
     }
 
     /**
-     * Set title
+     * Set title.
      *
      * @param string $title
+     *
      * @return Opinion
      */
     public function setTitle($title)
     {
         $this->title = $title;
+
         return $this;
     }
 
     /**
-     * Get slug
+     * Get slug.
      *
      * @return string
      */
@@ -246,19 +247,21 @@ class Opinion
     }
 
     /**
-     * Set slug
+     * Set slug.
      *
      * @param string $slug
+     *
      * @return Opinion
      */
     public function setSlug($slug)
     {
         $this->slug = $slug;
+
         return $this;
     }
 
     /**
-     * Get body
+     * Get body.
      *
      * @return string
      */
@@ -268,19 +271,21 @@ class Opinion
     }
 
     /**
-     * Set body
+     * Set body.
      *
      * @param string $body
+     *
      * @return Opinion
      */
     public function setBody($body)
     {
         $this->body = $body;
+
         return $this;
     }
 
     /**
-     * Get isEnabled
+     * Get isEnabled.
      *
      * @return boolean
      */
@@ -290,9 +295,10 @@ class Opinion
     }
 
     /**
-     * Set isEnabled
+     * Set isEnabled.
      *
      * @param boolean $isEnabled
+     *
      * @return Argument
      */
     public function setIsEnabled($isEnabled)
@@ -305,7 +311,7 @@ class Opinion
                     $this->Consultation->increaseOpinionCount(1);
                 }
             } else {
-                if($this->isTrashed) {
+                if ($this->isTrashed) {
                     $this->Consultation->decreaseOpinionCount(1);
                 } else {
                     $this->Consultation->decreaseOpinionCount(1);
@@ -313,11 +319,12 @@ class Opinion
             }
         }
         $this->isEnabled = $isEnabled;
+
         return $this;
     }
 
     /**
-     * Get createdAt
+     * Get createdAt.
      *
      * @return \DateTime
      */
@@ -327,7 +334,7 @@ class Opinion
     }
 
     /**
-     * Get updatedAt
+     * Get updatedAt.
      *
      * @return \DateTime
      */
@@ -337,7 +344,7 @@ class Opinion
     }
 
     /**
-     * Get isTrashed
+     * Get isTrashed.
      *
      * @return boolean
      */
@@ -347,9 +354,10 @@ class Opinion
     }
 
     /**
-     * Set isTrashed
+     * Set isTrashed.
      *
      * @param boolean $isTrashed
+     *
      * @return Opinion
      */
     public function setIsTrashed($isTrashed)
@@ -359,11 +367,12 @@ class Opinion
             $this->trashedAt = null;
         }
         $this->isTrashed = $isTrashed;
+
         return $this;
     }
 
     /**
-     * Get trashedAt
+     * Get trashedAt.
      *
      * @return \DateTime
      */
@@ -373,19 +382,21 @@ class Opinion
     }
 
     /**
-     * Set trashedAt
+     * Set trashedAt.
      *
      * @param \DateTime $trashedAt
+     *
      * @return Opinion
      */
     public function setTrashedAt($trashedAt)
     {
         $this->trashedAt = $trashedAt;
+
         return $this;
     }
 
     /**
-     * Get trashedReason
+     * Get trashedReason.
      *
      * @return string
      */
@@ -395,14 +406,16 @@ class Opinion
     }
 
     /**
-     * Set trashedReason
+     * Set trashedReason.
      *
      * @param string $trashedReason
+     *
      * @return Opinion
      */
     public function setTrashedReason($trashedReason)
     {
         $this->trashedReason = $trashedReason;
+
         return $this;
     }
     /**
@@ -415,6 +428,7 @@ class Opinion
 
     /**
      * @param $voteCountNok
+     *
      * @return $this
      */
     public function setVoteCountNok($voteCountNok)
@@ -529,12 +543,14 @@ class Opinion
 
     /**
      * @param mixed $Consultation
+     *
      * @return $this
      */
     public function setConsultation($Consultation)
     {
         $this->Consultation = $Consultation;
         $this->Consultation->addOpinion($this);
+
         return $this;
     }
 
@@ -548,6 +564,7 @@ class Opinion
 
     /**
      * @param $source
+     *
      * @return $this
      */
     public function addSource($source)
@@ -556,11 +573,13 @@ class Opinion
             $this->increaseSourcesCount(1);
             $this->Sources->add($source);
         }
+
         return $this;
     }
 
     /**
      * @param $source
+     *
      * @return $this
      */
     public function removeSource($source)
@@ -568,11 +587,13 @@ class Opinion
         if ($this->Sources->removeElement($source)) {
             $this->decreaseSourcesCount(1);
         }
+
         return $this;
     }
 
     /**
-     * Get arguments
+     * Get arguments.
+     *
      * @return ArrayCollection
      */
     public function getArguments()
@@ -582,6 +603,7 @@ class Opinion
 
     /**
      * @param $argument
+     *
      * @return $this
      */
     public function addArgument(Argument $argument)
@@ -590,11 +612,13 @@ class Opinion
             $this->arguments->add($argument);
             $this->increaseArgumentsCount(1);
         }
+
         return $this;
     }
 
     /**
      * @param Argument $argument
+     *
      * @return $this
      */
     public function removeArgument(Argument $argument)
@@ -602,11 +626,12 @@ class Opinion
         if ($this->arguments->removeElement($argument)) {
             $this->decreaseArgumentsCount(1);
         }
+
         return $this;
     }
 
     /**
-     * Get votes
+     * Get votes.
      *
      * @return string
      */
@@ -617,6 +642,7 @@ class Opinion
 
     /**
      * @param OpinionVote $vote
+     *
      * @return $this
      */
     public function addVote($vote)
@@ -625,11 +651,13 @@ class Opinion
             $this->Votes->add($vote);
             $this->addToVotesCount($vote->getValue());
         }
+
         return $this;
     }
 
     /**
      * @param OpinionVote $vote
+     *
      * @return $this
      */
     public function removeVote(OpinionVote $vote)
@@ -637,11 +665,11 @@ class Opinion
         if ($this->Votes->removeElement($vote)) {
             $this->removeFromVotesCount($vote->getValue());
         }
+
         return $this;
     }
 
     /**
-     *
      * @return string
      */
     public function getReports()
@@ -651,6 +679,7 @@ class Opinion
 
     /**
      * @param Reporting $report
+     *
      * @return $this
      */
     public function addReport(Reporting $report)
@@ -658,16 +687,19 @@ class Opinion
         if (!$this->Reports->contains($report)) {
             $this->Reports->add($report);
         }
+
         return $this;
     }
 
     /**
      * @param Reporting $report
+     *
      * @return $this
      */
     public function removeReport(Reporting $report)
     {
         $this->Reports->removeElement($report);
+
         return $this;
     }
 
@@ -681,41 +713,47 @@ class Opinion
         foreach ($this->Votes as $vote) {
             $this->removeVote($vote);
         }
+
         return $this;
     }
 
     /**
-     * Increase count for opinion Vote
+     * Increase count for opinion Vote.
+     *
      * @param $type
      */
-    public function addToVotesCount($type) {
-        if($type == OpinionVote::$voteTypes['ok']) {
+    public function addToVotesCount($type)
+    {
+        if ($type == OpinionVote::$voteTypes['ok']) {
             $this->voteCountOk++;
-        } else if($type == OpinionVote::$voteTypes['nok']) {
+        } elseif ($type == OpinionVote::$voteTypes['nok']) {
             $this->voteCountNok++;
-        } else if($type == OpinionVote::$voteTypes['mitige']) {
+        } elseif ($type == OpinionVote::$voteTypes['mitige']) {
             $this->voteCountMitige++;
         }
     }
 
     /**
-     * Decrease count for opinion Vote
+     * Decrease count for opinion Vote.
+     *
      * @param $type
      */
-    public function removeFromVotesCount($type) {
-        if($type == OpinionVote::$voteTypes['ok']) {
+    public function removeFromVotesCount($type)
+    {
+        if ($type == OpinionVote::$voteTypes['ok']) {
             $this->voteCountOk--;
-        } else if($type == OpinionVote::$voteTypes['nok']) {
+        } elseif ($type == OpinionVote::$voteTypes['nok']) {
             $this->voteCountNok--;
-        } else if($type == OpinionVote::$voteTypes['mitige']) {
+        } elseif ($type == OpinionVote::$voteTypes['mitige']) {
             $this->voteCountMitige--;
         }
     }
 
     /**
-     * Reset all votes count
+     * Reset all votes count.
      */
-    public function resetVotesCount() {
+    public function resetVotesCount()
+    {
         $this->voteCountOk = 0;
         $this->voteCountNok = 0;
         $this->voteCountMitige = 0;
@@ -726,7 +764,7 @@ class Opinion
      */
     public function increaseArgumentsCount($nb)
     {
-        $this->argumentsCount+=$nb;
+        $this->argumentsCount += $nb;
         $this->getConsultation()->increaseArgumentCount($nb);
     }
 
@@ -746,7 +784,7 @@ class Opinion
      */
     public function increaseSourcesCount($nb)
     {
-        $this->sourcesCount+=$nb;
+        $this->sourcesCount += $nb;
     }
 
     /**
@@ -769,17 +807,18 @@ class Opinion
 
     /**
      * @param $type
+     *
      * @return int
      */
     public function getArgumentsCountByType($type)
     {
         $count = 0;
-        foreach ($this->arguments as $arg)
-        {
+        foreach ($this->arguments as $arg) {
             if (Argument::$argumentTypes[$arg->getType()] == $type) {
                 $count++;
             }
         }
+
         return $count;
     }
 
@@ -801,12 +840,14 @@ class Opinion
 
     /**
      * @param int $nb
+     *
      * @return string
      */
     public function getBodyExcerpt($nb = 100)
     {
         $excerpt = substr($this->body, 0, $nb);
         $excerpt = $excerpt.'...';
+
         return $excerpt;
     }
 

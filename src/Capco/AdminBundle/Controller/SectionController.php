@@ -5,8 +5,6 @@ namespace Capco\AdminBundle\Controller;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Sonata\AdminBundle\Controller\CRUDController as Controller;
 use Symfony\Component\HttpFoundation\RedirectResponse;
-
-use Sonata\AdminBundle\Datagrid\ProxyQueryInterface;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 class SectionController extends Controller
@@ -14,9 +12,10 @@ class SectionController extends Controller
     /**
      * @param array $selectedIds
      * @param $allEntitiesSelected
+     *
      * @return bool|string
      */
-    public function batchActionDeleteIsRelevant (array $selectedIds, $allEntitiesSelected)
+    public function batchActionDeleteIsRelevant(array $selectedIds, $allEntitiesSelected)
     {
         foreach ($selectedIds as $id) {
             $item = $this->container->get('doctrine.orm.entity_manager')->getRepository('Section')->find($id);
@@ -26,11 +25,10 @@ class SectionController extends Controller
         }
 
         return true;
-
     }
 
     /**
-     * Delete action
+     * Delete action.
      *
      * @param int|string|null $id
      *
@@ -75,7 +73,6 @@ class SectionController extends Controller
                         'SonataAdminBundle'
                     )
                 );
-
             } catch (ModelManagerException $e) {
                 $this->handleModelManagerException($e);
 
@@ -99,7 +96,7 @@ class SectionController extends Controller
         return $this->render($this->admin->getTemplate('delete'), array(
             'object'     => $object,
             'action'     => 'delete',
-            'csrf_token' => $this->getCsrfToken('sonata.delete')
+            'csrf_token' => $this->getCsrfToken('sonata.delete'),
         ));
     }
 
@@ -114,7 +111,6 @@ class SectionController extends Controller
             'list',
             array('filter' => $this->admin->getFilterParameters())
         ));
-
     }
 
     public function downAction()
@@ -128,7 +124,6 @@ class SectionController extends Controller
             'list',
             array('filter' => $this->admin->getFilterParameters())
         ));
-
     }
 
     private function move($section, $relativePosition)
@@ -166,6 +161,5 @@ class SectionController extends Controller
                 }
             }
         }
-
     }
 }

@@ -24,7 +24,7 @@ class ContactType extends AbstractType
                 'attr' => array(
                     'rows' => '10',
                     'cols' => '30',
-                )
+                ),
             ))
         ;
     }
@@ -38,13 +38,13 @@ class ContactType extends AbstractType
     {
         $collectionConstraint = new Collection(array(
                 'name'      => array(
-                    new NotBlank()
+                    new NotBlank(),
                 ),
                 'email'     => array(
-                    new Email()
+                    new Email(),
                 ),
                 'message'   => array(
-                    new NotBlank()
+                    new NotBlank(),
                 ),
             ));
 

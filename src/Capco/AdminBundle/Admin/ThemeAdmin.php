@@ -11,13 +11,11 @@ use Capco\AppBundle\Entity\Theme;
 
 class ThemeAdmin extends Admin
 {
-
     protected $datagridValues = array(
         '_sort_order' => 'ASC',
-        '_sort_by' => 'title'
+        '_sort_by' => 'title',
     );
 
-    
     /**
      * @param DatagridMapper $datagridMapper
      */
@@ -102,7 +100,7 @@ class ThemeAdmin extends Admin
                     'show' => array(),
                     'edit' => array(),
                     'delete' => array(),
-                )
+                ),
             ))
         ;
     }
@@ -150,7 +148,7 @@ class ThemeAdmin extends Admin
                     'context' => 'default',
                     'hide_context' => true,
                     'provider' => 'sonata.media.provider.image',
-                )
+                ),
             ))
         ;
     }

@@ -5,10 +5,8 @@ namespace Capco\AppBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 
-use Capco\AppBundle\Entity\Consultation;
-
 /**
- * Step
+ * Step.
  *
  * @ORM\Table(name="step")
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\StepRepository")
@@ -16,7 +14,6 @@ use Capco\AppBundle\Entity\Consultation;
  */
 class Step
 {
-
     const TYPE_OTHER = 0;
     const TYPE_CONSULTATION = 1;
 
@@ -37,7 +34,7 @@ class Step
     public static $stepStatus = [
         'closed' => 'step.status.closed',
         'open' => 'step.status.open',
-        'future' => 'step.status.future'
+        'future' => 'step.status.future',
     ];
 
     /**
@@ -83,7 +80,6 @@ class Step
      */
     private $position;
 
-
     /**
      * @var integer
      *
@@ -126,11 +122,11 @@ class Step
     private $updatedAt;
 
     /**
-     * Constructor
+     * Constructor.
      */
     public function __construct()
     {
-        $this->updatedAt = new \Datetime;
+        $this->updatedAt = new \Datetime();
     }
 
     public function __toString()
@@ -143,7 +139,7 @@ class Step
     }
 
     /**
-     * Get id
+     * Get id.
      *
      * @return integer
      */
@@ -153,7 +149,7 @@ class Step
     }
 
     /**
-     * Get title
+     * Get title.
      *
      * @return string
      */
@@ -163,9 +159,10 @@ class Step
     }
 
     /**
-     * Set title
+     * Set title.
      *
      * @param string $title
+     *
      * @return Step
      */
     public function setTitle($title)
@@ -176,7 +173,7 @@ class Step
     }
 
     /**
-     * Get slug
+     * Get slug.
      *
      * @return string
      */
@@ -186,9 +183,10 @@ class Step
     }
 
     /**
-     * Set slug
+     * Set slug.
      *
      * @param string $slug
+     *
      * @return Step
      */
     public function setSlug($slug)
@@ -199,7 +197,7 @@ class Step
     }
 
     /**
-     * Get startAt
+     * Get startAt.
      *
      * @return \DateTime
      */
@@ -209,9 +207,10 @@ class Step
     }
 
     /**
-     * Set startAt
+     * Set startAt.
      *
      * @param \DateTime $startAt
+     *
      * @return Step
      */
     public function setStartAt($startAt)
@@ -222,7 +221,7 @@ class Step
     }
 
     /**
-     * Get endAt
+     * Get endAt.
      *
      * @return \DateTime
      */
@@ -232,9 +231,10 @@ class Step
     }
 
     /**
-     * Set endAt
+     * Set endAt.
      *
      * @param \DateTime $endAt
+     *
      * @return Step
      */
     public function setEndAt($endAt)
@@ -245,7 +245,7 @@ class Step
     }
 
     /**
-     * Get position
+     * Get position.
      *
      * @return integer
      */
@@ -255,9 +255,10 @@ class Step
     }
 
     /**
-     * Set position
+     * Set position.
      *
      * @param integer $position
+     *
      * @return Step
      */
     public function setPosition($position)
@@ -268,7 +269,7 @@ class Step
     }
 
     /**
-     * Get type
+     * Get type.
      *
      * @return integer
      */
@@ -278,9 +279,10 @@ class Step
     }
 
     /**
-     * Set type
+     * Set type.
      *
      * @param integer $type
+     *
      * @return Step
      */
     public function setType($type)
@@ -291,7 +293,7 @@ class Step
     }
 
     /**
-     * Get isEnabled
+     * Get isEnabled.
      *
      * @return boolean
      */
@@ -301,9 +303,10 @@ class Step
     }
 
     /**
-     * Set isEnabled
+     * Set isEnabled.
      *
      * @param boolean $isEnabled
+     *
      * @return Step
      */
     public function setIsEnabled($isEnabled)
@@ -314,7 +317,7 @@ class Step
     }
 
     /**
-     * Get consultation
+     * Get consultation.
      *
      * @return string
      */
@@ -325,17 +328,19 @@ class Step
 
     /**
      * @param string $consultation
+     *
      * @return $this
      */
     public function setConsultation(Consultation $consultation = null)
     {
         $this->consultation = $consultation;
         $this->consultation->addStep($this);
+
         return $this;
     }
 
     /**
-     * Get body
+     * Get body.
      *
      * @return string
      */
@@ -345,13 +350,14 @@ class Step
     }
 
     /**
-     * Set body
+     * Set body.
      *
      * @return Step
      */
     public function setBody($body)
     {
         $this->body = $body;
+
         return $this;
     }
 
@@ -376,20 +382,24 @@ class Step
     /**
      * @return boolean
      */
-    public function isConsultationStep(){
-        if($this->type == self::TYPE_CONSULTATION){
+    public function isConsultationStep()
+    {
+        if ($this->type == self::TYPE_CONSULTATION) {
             return true;
         }
+
         return false;
     }
 
     /**
      * @return boolean
      */
-    public function isOtherStep(){
-        if($this->type == self::TYPE_OTHER){
+    public function isOtherStep()
+    {
+        if ($this->type == self::TYPE_OTHER) {
             return true;
         }
+
         return false;
     }
 
@@ -403,7 +413,5 @@ class Step
         if ($this->consultation != null) {
             $this->consultation->removeStep($this);
         }
-
     }
-
 }

@@ -10,7 +10,7 @@ class IdeaPage extends Page
     use PageTrait;
 
     /**
-     * @var string $path
+     * @var string
      */
     protected $path = '/ideas/{slug}';
 

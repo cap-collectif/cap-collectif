@@ -5,7 +5,7 @@ namespace Capco\AppBundle\Repository;
 use Doctrine\ORM\EntityRepository;
 
 /**
- * SiteParameterRepository
+ * SiteParameterRepository.
  */
 class SiteColorRepository extends EntityRepository
 {

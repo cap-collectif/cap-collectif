@@ -3,17 +3,17 @@
 namespace Capco\AppBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
-use Doctrine\ORM\QueryBuilder;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 
 /**
- * ThemeRepository
+ * ThemeRepository.
  */
 class ThemeRepository extends EntityRepository
 {
     /**
      * @param int $limit
      * @param int $offset
+     *
      * @return array
      */
     public function getLast($limit = 1, $offset = 0)
@@ -39,9 +39,10 @@ class ThemeRepository extends EntityRepository
     }
 
     /**
-     * @param int $nbByPage
-     * @param int $page
+     * @param int  $nbByPage
+     * @param int  $page
      * @param null $term
+     *
      * @return Paginator
      */
     public function getSearchResultsWithconsultationsAndIdeas($nbByPage = 8, $page = 1, $term = null)
@@ -69,7 +70,7 @@ class ThemeRepository extends EntityRepository
 
         $query = $qb->getQuery();
 
-        if($nbByPage > 0){
+        if ($nbByPage > 0) {
             $query->setFirstResult(($page - 1) * $nbByPage)
                 ->setMaxResults($nbByPage);
         }
@@ -79,6 +80,7 @@ class ThemeRepository extends EntityRepository
 
     /**
      * @param $slug
+     *
      * @return mixed
      */
     public function getOneBySlug($slug)

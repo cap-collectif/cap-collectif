@@ -3,9 +3,9 @@
 namespace Capco\UserBundle\Security\Core\User;
 
 use FOS\UserBundle\Security\UserProvider as BaseUserProvider;
+
 /**
- * Class UserEmailProvider
- * @package Capco\UserBundle\Security\Core\User
+ * Class UserEmailProvider.
  */
 class UserEmailProvider extends BaseUserProvider
 {

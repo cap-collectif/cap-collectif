@@ -5,24 +5,24 @@ namespace Capco\AppBundle\Repository;
 use Capco\AppBundle\Entity\Consultation;
 use Capco\AppBundle\Entity\Theme;
 use Doctrine\ORM\EntityRepository;
-use Doctrine\ORM\Tools\Pagination\Paginator;
 use Doctrine\ORM\QueryBuilder;
 
 /**
- * EventRepository
+ * EventRepository.
  */
 class EventRepository extends EntityRepository
 {
     /**
-     * Get events depending on theme, consultation and search term, ordered by startAt criteria
+     * Get events depending on theme, consultation and search term, ordered by startAt criteria.
+     *
      * @param null $themeSlug
      * @param null $consultationSlug
      * @param null $term
+     *
      * @return array
      */
     public function getSearchResults($themeSlug = null, $consultationSlug = null, $term = null)
     {
-
         $qb = $this->getIsEnabledQueryBuilder()
             ->addSelect('a', 'm', 't', 'c')
             ->leftJoin('e.Author', 'a')
@@ -53,19 +53,19 @@ class EventRepository extends EntityRepository
         }
 
         return $query = $qb->getQuery()->getResult();
-
     }
 
     /**
-     * Get events archived depending on theme and search term, ordered by sort criteria
+     * Get events archived depending on theme and search term, ordered by sort criteria.
+     *
      * @param null $themeSlug
      * @param null $consultationSlug
      * @param null $term
+     *
      * @return array
      */
     public function getSearchResultsArchived($themeSlug = null, $consultationSlug = null, $term = null)
     {
-
         $qb = $this->getIsEnabledQueryBuilder()
             ->addSelect('a', 'm', 't', 'c')
             ->leftJoin('e.Author', 'a')
@@ -97,13 +97,15 @@ class EventRepository extends EntityRepository
         }
 
         return $query = $qb->getQuery()->getResult();
-
     }
 
     /**
-     * Get one event by slug
+     * Get one event by slug.
+     *
      * @param $slug
+     *
      * @return mixed
+     *
      * @throws \Doctrine\ORM\NonUniqueResultException
      */
     public function getOne($slug)
@@ -127,9 +129,11 @@ class EventRepository extends EntityRepository
     }
 
     /**
-     * Get last events future
+     * Get last events future.
+     *
      * @param int $limit
      * @param int $offset
+     *
      * @return mixed
      */
     public function getLast($limit = 1, $offset = 0)
@@ -156,8 +160,10 @@ class EventRepository extends EntityRepository
     }
 
     /**
-     * Get Events by theme
+     * Get Events by theme.
+     *
      * @param theme
+     *
      * @return mixed
      */
     public function getByTheme($theme)
@@ -178,8 +184,10 @@ class EventRepository extends EntityRepository
     }
 
     /**
-     * Get Events by consultation
+     * Get Events by consultation.
+     *
      * @param consultation
+     *
      * @return mixed
      */
     public function getByConsultation($consultation)
@@ -206,19 +214,19 @@ class EventRepository extends EntityRepository
             ->setParameter('isEnabled', true);
     }
 
-    protected function whereIsNotArchived (QueryBuilder $qb, $alias='e')
+    protected function whereIsNotArchived(QueryBuilder $qb, $alias = 'e')
     {
         return $qb->andWhere(':now < '.$alias.'.endAt')
             ->setParameter('now', new \DateTime());
     }
 
-    protected function whereIsFuture (QueryBuilder $qb, $alias='e')
+    protected function whereIsFuture(QueryBuilder $qb, $alias = 'e')
     {
         return $qb->andWhere(':now < '.$alias.'.startAt')
             ->setParameter('now', new \DateTime());
     }
 
-    protected function whereIsArchived (QueryBuilder $qb, $alias='e')
+    protected function whereIsArchived(QueryBuilder $qb, $alias = 'e')
     {
         return $qb->andWhere(':now > '.$alias.'.endAt')
             ->setParameter('now', new \DateTime());

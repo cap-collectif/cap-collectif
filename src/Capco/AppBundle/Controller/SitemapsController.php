@@ -37,7 +37,7 @@ class SitemapsController extends Controller
 
         // Pages
         foreach ($em->getRepository('CapcoAppBundle:Page')->findBy(array(
-            'isEnabled'=>true,
+            'isEnabled' => true,
         )) as $page) {
             $urls[] = array(
                 'loc' => $this->get('router')->generate('app_page_show', array('slug' => $page->getSlug())),
@@ -55,7 +55,7 @@ class SitemapsController extends Controller
                 'priority' => '0.5',
             );
             foreach ($em->getRepository('CapcoAppBundle:Theme')->findBy(array(
-                'isEnabled'=>true,
+                'isEnabled' => true,
             )) as $theme) {
                 $urls[] = array(
                     'loc' => $this->get('router')->generate('app_theme_show', array('slug' => $theme->getSlug())),
@@ -74,7 +74,7 @@ class SitemapsController extends Controller
                 'priority' => '1.0',
             );
             foreach ($em->getRepository('CapcoAppBundle:Post')->findBy(array(
-                'isPublished'=>true,
+                'isPublished' => true,
             )) as $post) {
                 $urls[] = array(
                     'loc' => $this->get('router')->generate('app_blog_show', array('slug' => $post->getSlug())),
@@ -93,7 +93,7 @@ class SitemapsController extends Controller
                 'priority' => '1.0',
             );
             foreach ($em->getRepository('CapcoAppBundle:Event')->findBy(array(
-                'isEnabled'=>true,
+                'isEnabled' => true,
             )) as $event) {
                 $urls[] = array(
                     'loc' => $this->get('router')->generate('app_event_show', array('slug' => $event->getSlug())),
@@ -112,7 +112,7 @@ class SitemapsController extends Controller
                 'priority' => '1.0',
             );
             foreach ($em->getRepository('CapcoAppBundle:Idea')->findBy(array(
-                'isEnabled'=>true,
+                'isEnabled' => true,
             )) as $idea) {
                 $urls[] = array(
                     'loc' => $this->get('router')->generate('app_idea_show', array('slug' => $idea->getSlug())),
@@ -130,7 +130,7 @@ class SitemapsController extends Controller
             'priority' => '0.5',
         );
         foreach ($em->getRepository('CapcoAppBundle:Consultation')->findBy(array(
-            'isEnabled'=>true,
+            'isEnabled' => true,
         )) as $consultation) {
             $urls[] = array(
                 'loc' => $this->get('router')->generate('app_consultation_show', array('slug' => $consultation->getSlug())),
@@ -142,7 +142,7 @@ class SitemapsController extends Controller
 
         // Steps
         foreach ($em->getRepository('CapcoAppBundle:Step')->findBy(array(
-            'isEnabled'=>true,
+            'isEnabled' => true,
         )) as $step) {
             if ($step->getConsultation()->canDisplay()) {
                 $urls[] = array(
@@ -156,7 +156,7 @@ class SitemapsController extends Controller
 
         // Opinions
         foreach ($em->getRepository('CapcoAppBundle:Opinion')->findBy(array(
-            'isEnabled'=>true,
+            'isEnabled' => true,
         )) as $opinion) {
             if ($opinion->canDisplay()) {
                 $urls[] = array(
@@ -172,6 +172,5 @@ class SitemapsController extends Controller
             'urls' => $urls,
             'hostname' => $hostname,
         );
-
     }
 }

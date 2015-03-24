@@ -4,7 +4,6 @@ namespace Capco\AppBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
-
 use Capco\AppBundle\Entity\Idea;
 use Capco\AppBundle\Repository\ThemeRepository;
 use Capco\AppBundle\Toggle\Manager;
@@ -13,14 +12,14 @@ class IdeaSearchType extends AbstractType
 {
     private $toggleManager;
 
-    function __construct(Manager $toggleManager)
+    public function __construct(Manager $toggleManager)
     {
         $this->toggleManager = $toggleManager;
     }
 
     /**
      * @param FormBuilderInterface $builder
-     * @param array $options
+     * @param array                $options
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -36,7 +35,7 @@ class IdeaSearchType extends AbstractType
                 'translation_domain' => 'CapcoAppBundle',
                 'label' => 'idea.searchform.sort',
                 'empty_value' => false,
-                'attr' => array('onchange' => 'this.form.submit()')
+                'attr' => array('onchange' => 'this.form.submit()'),
             ))
         ;
 
@@ -53,7 +52,7 @@ class IdeaSearchType extends AbstractType
                         ->setParameter('enabled', true);
                 },
                 'empty_value' => 'idea.searchform.all_themes',
-                'attr' => array('onchange' => 'this.form.submit()')
+                'attr' => array('onchange' => 'this.form.submit()'),
             ));
         }
     }

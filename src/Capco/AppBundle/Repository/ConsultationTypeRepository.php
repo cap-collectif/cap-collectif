@@ -3,19 +3,20 @@
 namespace Capco\AppBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
-use Doctrine\ORM\Query;
 use Doctrine\ORM\QueryBuilder;
 
 /**
- * ConsultationTypeRepository
- *
+ * ConsultationTypeRepository.
  */
 class ConsultationTypeRepository extends EntityRepository
 {
     /**
-     * Get opinion types by id of consultation type
+     * Get opinion types by id of consultation type.
+     *
      * @param $id
+     *
      * @return mixed
+     *
      * @throws \Doctrine\ORM\NonUniqueResultException
      */
     public function getRelatedTypes($id)
@@ -42,5 +43,4 @@ class ConsultationTypeRepository extends EntityRepository
             ->andWhere('ct.enabled = :enabled')
             ->setParameter('enabled', true);
     }
-
 }

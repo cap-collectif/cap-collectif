@@ -5,7 +5,7 @@ namespace Capco\AppBundle\Repository;
 use Doctrine\ORM\EntityRepository;
 
 /**
- * MenuRepository
+ * MenuRepository.
  */
 class MenuRepository extends EntityRepository
 {

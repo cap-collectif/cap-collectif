@@ -8,7 +8,6 @@ use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Show\ShowMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
-
 use Capco\AppBundle\Entity\Menu;
 
 class MenuItemAdmin extends Admin
@@ -34,14 +33,12 @@ class MenuItemAdmin extends Admin
 
         $query = parent::createQuery($context);
         $query->andWhere(
-            $query->expr()->in($query->getRootAliases()[0] . '.id', ':ids')
+            $query->expr()->in($query->getRootAliases()[0].'.id', ':ids')
         );
         $query->setParameter('ids', $ids);
 
         return $query;
-
     }
-
 
     /**
      * @param DatagridMapper $datagridMapper
@@ -116,7 +113,7 @@ class MenuItemAdmin extends Admin
                     'show' => array(),
                     'edit' => array(),
                     'delete' => array('template' => 'CapcoAdminBundle:MenuItem:list__action_delete.html.twig'),
-                )
+                ),
             ))
         ;
     }
@@ -126,7 +123,6 @@ class MenuItemAdmin extends Admin
      */
     protected function configureFormFields(FormMapper $formMapper)
     {
-
         $formMapper
             ->add('title', null, array(
                 'label' => 'admin.fields.menu_item.title',
@@ -230,9 +226,10 @@ class MenuItemAdmin extends Admin
         $this->manageLink($menuItem);
     }
 
-    private function manageLink($menuItem) {
+    private function manageLink($menuItem)
+    {
         $page = $menuItem->getPage();
-        if(null != $page){
+        if (null != $page) {
             $link = 'pages/'.$page->getSlug();
             $menuItem->setLink($link);
         }
@@ -248,6 +245,7 @@ class MenuItemAdmin extends Admin
             ->setParameter('header', Menu::TYPE_HEADER)
             ->andWhere('p.link IS NULL OR p.link = :blankLink')
             ->setParameter('blankLink', '');
+
         return $query;
     }
 

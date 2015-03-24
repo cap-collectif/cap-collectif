@@ -7,12 +7,9 @@ use Sonata\AdminBundle\Validator\ErrorElement;
 use Sonata\BlockBundle\Block\BaseBlockService;
 use Sonata\BlockBundle\Block\BlockContextInterface;
 use Sonata\BlockBundle\Model\BlockInterface;
-use Sonata\CoreBundle\Model\ManagerInterface;
-
 use Symfony\Bundle\FrameworkBundle\Templating\EngineInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
-
 use Capco\AppBundle\Repository\PostRepository;
 use Capco\AppBundle\Toggle\Manager;
 
@@ -22,9 +19,9 @@ class RecentPostBlockService extends BaseBlockService
     protected $toggleManager;
 
     /**
-     * @param string           $name
-     * @param EngineInterface  $templating
-     * @param PostRepository   $repository
+     * @param string          $name
+     * @param EngineInterface $templating
+     * @param PostRepository  $repository
      */
     public function __construct($name, EngineInterface $templating, PostRepository $repository, Manager $manager)
     {
@@ -36,13 +33,12 @@ class RecentPostBlockService extends BaseBlockService
 
     public function buildEditForm(FormMapper $formMapper, BlockInterface $block)
     {
-
         $formMapper->add('settings', 'sonata_type_immutable_array', array(
             'keys' => array(
                 array('number', 'integer', array('required' => true)),
                 array('title', 'text', array('required' => false)),
                 array('toggle', 'text', array('required' => false)),
-            )
+            ),
         ));
     }
 
@@ -61,7 +57,7 @@ class RecentPostBlockService extends BaseBlockService
             'context'   => $blockContext,
             'settings'  => $blockContext->getSettings(),
             'block'     => $blockContext->getBlock(),
-            'posts'     => $this->postRepository->getRecentPosts($blockContext->getSetting('number'))
+            'posts'     => $this->postRepository->getRecentPosts($blockContext->getSetting('number')),
         );
 
         return $this->renderPrivateResponse($blockContext->getTemplate(), $parameters, $response);
@@ -81,7 +77,7 @@ class RecentPostBlockService extends BaseBlockService
             'number'     => 5,
             'toggle'     => false,
             'title'      => 'Recent Posts',
-            'template'   => 'CapcoAdminBundle:Block:recent_posts.html.twig'
+            'template'   => 'CapcoAdminBundle:Block:recent_posts.html.twig',
         ));
     }
 

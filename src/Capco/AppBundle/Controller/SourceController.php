@@ -11,23 +11,21 @@ use Capco\AppBundle\Form\SourcesType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Cache;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Symfony\Component\Form\Form;
 
 class SourceController extends Controller
 {
-
     /**
      * @Route("/consultations/{consultationSlug}/opinions/{opinionTypeSlug}/{opinionSlug}/sources/add", name="app_new_source")
+     *
      * @param $consultationSlug
      * @param $opinionTypeSlug
      * @param $opinionSlug
      * @param $request
      * @Template("CapcoAppBundle:Source:create.html.twig")
+     *
      * @return array
      */
     public function createSourceAction($consultationSlug, $opinionTypeSlug, $opinionSlug, Request $request)
@@ -38,7 +36,7 @@ class SourceController extends Controller
 
         $opinion = $this->getDoctrine()->getRepository('CapcoAppBundle:Opinion')->getOneBySlug($consultationSlug, $opinionTypeSlug, $opinionSlug);
 
-        if($opinion == null){
+        if ($opinion == null) {
             throw $this->createNotFoundException($this->get('translator')->trans('opinion.error.not_found', array(), 'CapcoAppBundle'));
         }
 
@@ -63,7 +61,8 @@ class SourceController extends Controller
                 $em->persist($source);
                 $em->flush();
                 $this->get('session')->getFlashBag()->add('success', $this->get('translator')->trans('source.create.success'));
-                return $this->redirect($this->generateUrl('app_consultation_show_opinion', ['consultationSlug' => $consultation->getSlug(), 'opinionTypeSlug' => $opinionType->getSlug(), 'opinionSlug' => $opinion->getSlug() ]) . '#source' . $source->getId());
+
+                return $this->redirect($this->generateUrl('app_consultation_show_opinion', ['consultationSlug' => $consultation->getSlug(), 'opinionTypeSlug' => $opinionType->getSlug(), 'opinionSlug' => $opinion->getSlug() ]).'#source'.$source->getId());
             } else {
                 $this->get('session')->getFlashBag()->add('danger', $this->get('translator')->trans('source.create.error'));
             }
@@ -80,12 +79,14 @@ class SourceController extends Controller
 
     /**
      * @Route("/consultations/{consultationSlug}/opinions/{opinionTypeSlug}/{opinionSlug}/sources/{sourceSlug}/delete", name="app_delete_source")
+     *
      * @param consultationSlug
      * @param $opinionTypeSlug
      * @param $opinionSlug
      * @param $sourceSlug
      * @param $request
      * @Template("CapcoAppBundle:Source:delete.html.twig")
+     *
      * @return array
      */
     public function deleteSourceAction($consultationSlug, $opinionTypeSlug, $opinionSlug, $sourceSlug, Request $request)
@@ -127,6 +128,7 @@ class SourceController extends Controller
                 $em->flush();
 
                 $this->get('session')->getFlashBag()->add('info', $this->get('translator')->trans('source.delete.success'));
+
                 return $this->redirect($this->generateUrl('app_consultation_show_opinion', ['consultationSlug' => $consultation->getSlug(), 'opinionTypeSlug' => $opinionType->getSlug(), 'opinionSlug' => $opinion->getSlug() ]));
             } else {
                 $this->get('session')->getFlashBag()->add('danger', $this->get('translator')->trans('source.delete.error'));
@@ -138,18 +140,20 @@ class SourceController extends Controller
             'opinionType' => $opinionType,
             'opinion' => $opinion,
             'source' => $source,
-            'form' => $form->createView()
+            'form' => $form->createView(),
         );
     }
 
     /**
      * @Route("/consultations/{consultationSlug}/opinions/{opinionTypeSlug}/{opinionSlug}/sources/{sourceSlug}/edit", name="app_edit_source")
      * @Template("CapcoAppBundle:Source:update.html.twig")
+     *
      * @param consultationSlug
      * @param $opinionTypeSlug
      * @param $opinionSlug
      * @param $sourceSlug
      * @param $request
+     *
      * @return array
      */
     public function updateSourceAction($consultationSlug, $opinionTypeSlug, $opinionSlug, $sourceSlug, Request $request)
@@ -160,7 +164,7 @@ class SourceController extends Controller
 
         $source = $this->getDoctrine()->getRepository('CapcoAppBundle:Source')->getOneBySlug($consultationSlug, $opinionTypeSlug, $opinionSlug, $sourceSlug);
 
-        if($source == null){
+        if ($source == null) {
             throw $this->createNotFoundException($this->get('translator')->trans('source.error.not_found', array(), 'CapcoAppBundle'));
         }
 
@@ -184,7 +188,6 @@ class SourceController extends Controller
             $form->handleRequest($request);
 
             if ($form->isValid()) {
-
                 $type = $form->get('type')->getData();
                 $em = $this->getDoctrine()->getManager();
 
@@ -194,7 +197,7 @@ class SourceController extends Controller
                     $source->setMedia(null);
                     $mediaManager = $this->container->get('sonata.media.manager.media');
                     $media = $mediaManager->findOneBy(array('id' => $source->getMedia()));
-                    if(null != $media) {
+                    if (null != $media) {
                         $provider = $this->get($media->getProviderName());
                         $provider->removeThumbnails($media);
                         $mediaManager->delete($media);
@@ -207,7 +210,8 @@ class SourceController extends Controller
                 $em->flush();
 
                 $this->get('session')->getFlashBag()->add('success', $this->get('translator')->trans('source.update.success'));
-                return $this->redirect($this->generateUrl('app_consultation_show_opinion', ['consultationSlug' => $consultation->getSlug(), 'opinionTypeSlug' => $opinionType->getSlug(), 'opinionSlug' => $opinion->getSlug() ]) . '#source' . $source->getId());
+
+                return $this->redirect($this->generateUrl('app_consultation_show_opinion', ['consultationSlug' => $consultation->getSlug(), 'opinionTypeSlug' => $opinionType->getSlug(), 'opinionSlug' => $opinion->getSlug() ]).'#source'.$source->getId());
             } else {
                 $this->get('session')->getFlashBag()->add('danger', $this->get('translator')->trans('source.update.error'));
             }
@@ -225,11 +229,13 @@ class SourceController extends Controller
 
     /**
      * @Route("/secure/consultations/{consultationSlug}/opinions/{opinionTypeSlug}/{opinionSlug}/sources/{sourceSlug}/vote", name="app_consultation_vote_source")
+     *
      * @param consultationSlug
      * @param $opinionTypeSlug
      * @param $opinionSlug
      * @param $sourceSlug
      * @param $request
+     *
      * @return array
      */
     public function voteOnSourceAction($consultationSlug, $opinionTypeSlug, $opinionSlug, $sourceSlug, Request $request)
@@ -240,7 +246,7 @@ class SourceController extends Controller
 
         $source = $this->getDoctrine()->getRepository('CapcoAppBundle:Source')->getOneBySlug($consultationSlug, $opinionTypeSlug, $opinionSlug, $sourceSlug);
 
-        if($source == null){
+        if ($source == null) {
             throw $this->createNotFoundException($this->get('translator')->trans('source.error.not_found', array(), 'CapcoAppBundle'));
         }
 
@@ -255,9 +261,7 @@ class SourceController extends Controller
         $user = $this->getUser();
 
         if ($request->getMethod() == 'POST') {
-
-            if($this->isCsrfTokenValid('source_vote', $request->get('_csrf_token'))) {
-
+            if ($this->isCsrfTokenValid('source_vote', $request->get('_csrf_token'))) {
                 $em = $this->getDoctrine()->getManager();
 
                 $sourceVote = new SourceVote();
@@ -265,28 +269,26 @@ class SourceController extends Controller
 
                 $userVote = $em->getRepository('CapcoAppBundle:SourceVote')->findOneBy(array(
                     'Voter' => $user,
-                    'source' => $source
+                    'source' => $source,
                 ));
 
-                if( $userVote != null ){
+                if ($userVote != null) {
                     $sourceVote = $userVote;
                 }
 
-                if($userVote == null ){
+                if ($userVote == null) {
                     $sourceVote->setSource($source);
                     $em->persist($sourceVote);
                     $em->flush();
 
                     $this->get('session')->getFlashBag()->add('success', $this->get('translator')->trans('source.vote.add_success'));
-                }
-                else {
+                } else {
                     $em->remove($sourceVote);
                     $em->flush();
 
                     $this->get('session')->getFlashBag()->add('info', $this->get('translator')->trans('source.vote.remove_success'));
                 }
-            }
-            else {
+            } else {
                 $this->get('session')->getFlashBag()->add('danger', $this->get('translator')->trans('source.vote.csrf_error'));
             }
         }

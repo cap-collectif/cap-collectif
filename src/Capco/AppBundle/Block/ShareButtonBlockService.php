@@ -1,25 +1,17 @@
 <?php
 
-
 namespace Capco\AppBundle\Block;
 
-use Sonata\AdminBundle\Form\FormMapper;
-use Sonata\AdminBundle\Validator\ErrorElement;
 use Sonata\BlockBundle\Block\BaseBlockService;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
-
-use Sonata\BlockBundle\Model\BlockInterface;
 use Sonata\BlockBundle\Block\BlockContextInterface;
 
 /**
- * Class ShareButtonBlockService
- *
+ * Class ShareButtonBlockService.
  */
 class ShareButtonBlockService extends BaseBlockService
 {
-
     /**
      * {@inheritdoc}
      */
@@ -51,5 +43,4 @@ class ShareButtonBlockService extends BaseBlockService
 
         return $this->renderResponse($blockContext->getTemplate(), $parameters, $response);
     }
-
 }

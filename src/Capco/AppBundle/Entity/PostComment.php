@@ -6,13 +6,12 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * Class PostComment
+ * Class PostComment.
+ *
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\PostCommentRepository")
- * @package Capco\AppBundle\Entity
  */
 class PostComment extends AbstractComment
 {
-
     /**
      * @var
      *
@@ -22,7 +21,7 @@ class PostComment extends AbstractComment
      */
     private $Post;
 
-    function __construct()
+    public function __construct()
     {
         parent::__construct();
     }
@@ -37,19 +36,20 @@ class PostComment extends AbstractComment
 
     /**
      * @param $Post
+     *
      * @return $this
      */
     public function setPost($Post)
     {
         $this->Post = $Post;
         $Post->addComment($this);
+
         return $this;
     }
 
     // ************************ Overriden methods *********************************
 
     /**
-     * @return null
      */
     public function getRelatedObject()
     {
@@ -58,11 +58,11 @@ class PostComment extends AbstractComment
 
     /**
      * @param $object
+     *
      * @return mixed
      */
     public function setRelatedObject($object)
     {
         return $this->setPost($object);
     }
-
 }

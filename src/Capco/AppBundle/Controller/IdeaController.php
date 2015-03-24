@@ -3,7 +3,6 @@
 namespace Capco\AppBundle\Controller;
 
 use Capco\AppBundle\Entity\Idea;
-use Capco\AppBundle\Entity\IdeaVote;
 use Capco\AppBundle\Entity\Theme;
 use Capco\AppBundle\Form\IdeaType;
 use Capco\AppBundle\Form\IdeaUpdateType;
@@ -15,7 +14,6 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Cache;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 class IdeaController extends Controller
@@ -23,7 +21,9 @@ class IdeaController extends Controller
     /**
      * @Route("/ideas/add", name="app_idea_create", defaults={"_feature_flag" = "ideas"})
      * @Template()
+     *
      * @param $request
+     *
      * @return array
      */
     public function createAction(Request $request)
@@ -32,7 +32,7 @@ class IdeaController extends Controller
             throw new AccessDeniedException($this->get('translator')->trans('error.access_restricted', array(), 'CapcoAppBundle'));
         }
 
-        $idea = new Idea;
+        $idea = new Idea();
 
         if ($this->getUser()) {
             $idea->setAuthor($this->getUser());
@@ -44,16 +44,15 @@ class IdeaController extends Controller
             $form->handleRequest($request);
 
             if ($form->isValid()) {
-
                 $em = $this->getDoctrine()->getManager();
                 $em->persist($idea);
                 $em->flush();
                 $this->get('session')->getFlashBag()->add('success', $this->get('translator')->trans('idea.create.success'));
+
                 return $this->redirect($this->generateUrl('app_idea_show', array('slug' => $idea->getSlug())));
             } else {
                 $this->get('session')->getFlashBag()->add('danger', $this->get('translator')->trans('idea.create.error'));
             }
-
         }
 
         return array('form' => $form->createView());
@@ -62,13 +61,15 @@ class IdeaController extends Controller
     /**
      * @Route("/ideas/{slug}/delete", name="app_idea_delete", defaults={"_feature_flag" = "ideas"})
      * @Template()
+     *
      * @param $request
      * @param $idea
+     *
      * @return array
      */
     public function deleteAction(Idea $idea, Request $request)
     {
-        if (false == $idea->canContribute() ) {
+        if (false == $idea->canContribute()) {
             throw new AccessDeniedException($this->get('translator')->trans('idea.error.no_contribute', array(), 'CapcoAppBundle'));
         }
 
@@ -90,7 +91,6 @@ class IdeaController extends Controller
             $form->handleRequest($request);
 
             if ($form->isValid()) {
-
                 $em = $this->getDoctrine()->getManager();
                 $em->remove($idea);
                 $em->flush();
@@ -104,14 +104,16 @@ class IdeaController extends Controller
 
         return array(
             'idea' => $idea,
-            'form' => $form->createView()
+            'form' => $form->createView(),
         );
     }
 
     /**
      * @Route("/ideas/trashed/{page}", name="app_idea_trashed", requirements={"page" = "\d+"}, defaults={"_feature_flag" = "ideas", "page" = 1} )
      * @Template("CapcoAppBundle:Idea:show_trashed.html.twig")
+     *
      * @param $page
+     *
      * @return array
      */
     public function showTrashedAction($page)
@@ -119,10 +121,10 @@ class IdeaController extends Controller
         $em = $this->getDoctrine()->getManager();
 
         $pagination = $this->get('capco.site_parameter.resolver')->getValue('ideas.pagination');
-        if (!is_numeric($pagination)){
+        if (!is_numeric($pagination)) {
             $pagination = 0;
         } else {
-            $pagination = (int)$pagination;
+            $pagination = (int) $pagination;
         }
 
         $ideas = $em->getRepository('CapcoAppBundle:Idea')->getTrashed($pagination, $page);
@@ -130,7 +132,7 @@ class IdeaController extends Controller
 
         //Avoid division by 0 in nbPage calculation
         $nbPage = 1;
-        if($pagination != 0){
+        if ($pagination != 0) {
             $nbPage = ceil(count($ideas) / $pagination);
         }
 
@@ -144,8 +146,10 @@ class IdeaController extends Controller
 
     /**
      * @Cache(expires="+1 minutes", maxage="60", smaxage="60", public="true")
+     *
      * @param $max
      * @param $offset
+     *
      * @return array
      * @Template()
      */
@@ -159,8 +163,10 @@ class IdeaController extends Controller
     /**
      * @Route("/ideas/{slug}/edit", name="app_idea_update", defaults={"_feature_flag" = "ideas"})
      * @Template()
+     *
      * @param $request
      * @param $idea
+     *
      * @return array
      */
     public function updateAction(Idea $idea,  Request $request)
@@ -169,7 +175,7 @@ class IdeaController extends Controller
             throw new AccessDeniedException($this->get('translator')->trans('error.access_restricted', array(), 'CapcoAppBundle'));
         }
 
-        if (false == $idea->canContribute() ) {
+        if (false == $idea->canContribute()) {
             throw new AccessDeniedException($this->get('translator')->trans('idea.error.no_contribute', array(), 'CapcoAppBundle'));
         }
 
@@ -200,7 +206,7 @@ class IdeaController extends Controller
 
         return array(
             'form' => $form->createView(),
-            'idea' => $idea
+            'idea' => $idea,
         );
     }
 
@@ -209,11 +215,13 @@ class IdeaController extends Controller
      * @Route("/ideas/filter/{theme}/{sort}/{page}", name="app_idea_search", requirements={"page" = "\d+"}, defaults={"page" = 1, "theme" = "all", "_feature_flag" = "ideas"} )
      * @Route("/ideas/filter/{theme}/{sort}/{term}/{page}", name="app_idea_search_term", requirements={"page" = "\d+"}, defaults={"page" = 1, "theme" = "all", "_feature_flag" = "ideas"} )
      * @Template()
+     *
      * @param $page
      * @param $request
      * @param $theme
      * @param $sort
      * @param $term
+     *
      * @return array
      */
     public function indexAction(Request $request, $page, $theme = null, $sort = null, $term = null)
@@ -223,7 +231,7 @@ class IdeaController extends Controller
 
         $form = $this->createForm(new IdeaSearchType($this->get('capco.toggle.manager')), null, array(
             'action' => $currentUrl,
-            'method' => 'POST'
+            'method' => 'POST',
         ));
 
         if ($request->getMethod() == 'POST') {
@@ -236,7 +244,7 @@ class IdeaController extends Controller
                 return $this->redirect($this->generateUrl('app_idea_search_term', array(
                     'theme' => $data['theme'] ? $data['theme']->getSlug() : Theme::FILTER_ALL,
                     'sort' => $data['sort'],
-                    'term' => $data['term']
+                    'term' => $data['term'],
                 )));
             }
         } else {
@@ -248,10 +256,10 @@ class IdeaController extends Controller
         }
 
         $pagination = $this->get('capco.site_parameter.resolver')->getValue('ideas.pagination');
-        if (!is_numeric($pagination)){
+        if (!is_numeric($pagination)) {
             $pagination = 0;
         } else {
-            $pagination = (int)$pagination;
+            $pagination = (int) $pagination;
         }
 
         $ideas = $em->getRepository('CapcoAppBundle:Idea')->getSearchResults($pagination, $page, $theme, $sort, $term);
@@ -275,8 +283,10 @@ class IdeaController extends Controller
     /**
      * @Route("/ideas/{slug}", name="app_idea_show", defaults={"_feature_flag" = "ideas"})
      * @Template()
-     * @param string $slug
+     *
+     * @param string  $slug
      * @param Request $request
+     *
      * @return array
      */
     public function showAction(Request $request, $slug)
@@ -285,7 +295,7 @@ class IdeaController extends Controller
         $translator = $this->get('translator');
         $idea = $em->getRepository('CapcoAppBundle:Idea')->getOneJoinUserReports($slug, $this->getUser());
 
-        if (false == $idea->canDisplay() ){
+        if (false == $idea->canDisplay()) {
             throw $this->createNotFoundException($translator->trans('idea.error.not_found', array(), 'CapcoAppBundle'));
         }
 
@@ -294,7 +304,6 @@ class IdeaController extends Controller
         $form = $this->createForm(new IdeaVoteType($this->getUser(), $vote->isConfirmed(), $idea->getIsCommentable()), $vote);
 
         if ($request->getMethod() == 'POST') {
-
             if (false == $idea->canContribute()) {
                 throw new AccessDeniedException($translator->trans('idea.error.no_contribute', array(), 'CapcoAppBundle'));
             }
@@ -310,7 +319,6 @@ class IdeaController extends Controller
                 $em->flush();
 
                 if ($vote->isConfirmed()) {
-
                     $message = $form->get('message')->getData();
 
                     if ($message != null) {

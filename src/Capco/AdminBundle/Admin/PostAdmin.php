@@ -12,7 +12,7 @@ class PostAdmin extends Admin
 {
     protected $datagridValues = array(
         '_sort_order' => 'DESC',
-        '_sort_by' => 'createdAt'
+        '_sort_by' => 'createdAt',
     );
 
     /**
@@ -25,11 +25,11 @@ class PostAdmin extends Admin
                 'label' => 'admin.fields.blog_post.title',
             ))
         ;
-            if ($this->getConfigurationPool()->getContainer()->get('capco.toggle.manager')->isActive('themes')) {
-                $datagridMapper->add('themes', null, array(
+        if ($this->getConfigurationPool()->getContainer()->get('capco.toggle.manager')->isActive('themes')) {
+            $datagridMapper->add('themes', null, array(
                     'label' => 'admin.fields.blog_post.themes',
                 ));
-            }
+        }
 
         $datagridMapper
             ->add('consultations', null, array(
@@ -108,7 +108,7 @@ class PostAdmin extends Admin
                     'show' => array(),
                     'edit' => array(),
                     'delete' => array(),
-                )
+                ),
             ))
         ;
     }
@@ -154,7 +154,7 @@ class PostAdmin extends Admin
                 'label' => 'admin.fields.blog_post.published_at',
                 'format' => 'dd/MM/yyyy HH:mm',
                 'attr' => array(
-                    'data-date-format' => 'DD/MM/YYYY HH:mm'
+                    'data-date-format' => 'DD/MM/YYYY HH:mm',
                 ),
             ))
             ->add('abstract', null, array(
@@ -167,8 +167,8 @@ class PostAdmin extends Admin
             ->add('Media', 'sonata_type_model_list', array('required' => false), array(
                 'link_parameters' => array(
                     'context' => 'default',
-                    'hide_context' => true
-                )
+                    'hide_context' => true,
+                ),
             ))
             ->add('isCommentable', null, array(
                 'label' => 'admin.fields.blog_post.is_commentable',

@@ -44,6 +44,7 @@ trait AnonymousableTrait
     public function setUsername($username)
     {
         $this->username = $username;
+
         return $this;
     }
 
@@ -63,6 +64,7 @@ trait AnonymousableTrait
     public function setEmail($email)
     {
         $this->email = $email;
+
         return $this;
     }
 

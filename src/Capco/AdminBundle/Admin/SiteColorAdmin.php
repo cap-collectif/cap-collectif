@@ -7,15 +7,13 @@ use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Show\ShowMapper;
-
 use Sonata\AdminBundle\Route\RouteCollection;
 
 class SiteColorAdmin extends Admin
 {
-
     protected $datagridValues = array(
         '_sort_order' => 'ASC',
-        '_sort_by' => 'position'
+        '_sort_by' => 'position',
     );
 
     /**
@@ -63,7 +61,7 @@ class SiteColorAdmin extends Admin
                 'actions' => array(
                     'show' => array(),
                     'edit' => array(),
-                )
+                ),
             ))
         ;
     }
@@ -80,7 +78,7 @@ class SiteColorAdmin extends Admin
             ))
             ->add('value', null, array(
                 'label' => 'admin.fields.site_parameter.value',
-                'attr' => array('class' => 'minicolors-input')
+                'attr' => array('class' => 'minicolors-input'),
             ))
         ;
     }

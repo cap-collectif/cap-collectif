@@ -5,16 +5,14 @@ namespace Capco\AppBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 
-
 /**
- * SiteImage
+ * SiteImage.
  *
  * @ORM\Table(name="site_color")
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\SiteColorRepository")
  */
 class SiteColor
 {
-
     /**
      * @var integer
      *
@@ -73,11 +71,11 @@ class SiteColor
     private $position = 0;
 
     /**
-     * Constructor
+     * Constructor.
      */
     public function __construct()
     {
-        $this->updatedAt = new \Datetime;
+        $this->updatedAt = new \Datetime();
     }
 
     public function __toString()
@@ -90,7 +88,7 @@ class SiteColor
     }
 
     /**
-     * Get id
+     * Get id.
      *
      * @return integer
      */
@@ -100,9 +98,10 @@ class SiteColor
     }
 
     /**
-     * Set keyname
+     * Set keyname.
      *
      * @param string $keyname
+     *
      * @return SiteImage
      */
     public function setKeyname($keyname)
@@ -113,7 +112,7 @@ class SiteColor
     }
 
     /**
-     * Get keyname
+     * Get keyname.
      *
      * @return string
      */
@@ -123,9 +122,10 @@ class SiteColor
     }
 
     /**
-     * Set title
+     * Set title.
      *
      * @param string $title
+     *
      * @return SiteImage
      */
     public function setTitle($title)
@@ -136,7 +136,7 @@ class SiteColor
     }
 
     /**
-     * Get title
+     * Get title.
      *
      * @return string
      */
@@ -145,10 +145,8 @@ class SiteColor
         return $this->title;
     }
 
-
-
     /**
-     * Get isEnabled
+     * Get isEnabled.
      *
      * @return boolean
      */
@@ -158,15 +156,17 @@ class SiteColor
     }
 
     /**
-     * Set isEnabled
+     * Set isEnabled.
      *
      *
      * @param boolean $isEnabled
+     *
      * @return SiteImage
      */
     public function setIsEnabled($isEnabled)
     {
         $this->isEnabled = $isEnabled;
+
         return $this;
     }
 
@@ -187,9 +187,10 @@ class SiteColor
     }
 
     /**
-     * Set value
+     * Set value.
      *
      * @param string $value
+     *
      * @return SiteParameter
      */
     public function setValue($value)
@@ -200,7 +201,7 @@ class SiteColor
     }
 
     /**
-     * Get value
+     * Get value.
      *
      * @return string
      */
@@ -224,5 +225,4 @@ class SiteColor
     {
         $this->position = $position;
     }
-
 }

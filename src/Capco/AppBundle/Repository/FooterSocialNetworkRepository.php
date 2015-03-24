@@ -5,7 +5,7 @@ namespace Capco\AppBundle\Repository;
 use Doctrine\ORM\EntityRepository;
 
 /**
- * FooterSocialNetworkRepository
+ * FooterSocialNetworkRepository.
  */
 class FooterSocialNetworkRepository extends EntityRepository
 {

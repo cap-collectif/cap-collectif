@@ -3,14 +3,13 @@
 namespace Capco\AppBundle\Entity;
 
 use Capco\UserBundle\Entity\User;
-
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * Argument
+ * Argument.
  *
  * @ORM\Table(name="argument")
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\ArgumentRepository")
@@ -18,13 +17,12 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class Argument
 {
-
     const TYPE_AGAINST = 0;
     const TYPE_FOR  = 1;
 
     public static $argumentTypes = [
         self::TYPE_FOR => 'yes',
-        self::TYPE_AGAINST => 'no'
+        self::TYPE_AGAINST => 'no',
    ];
 
     public static $argumentTypesLabels = [
@@ -140,7 +138,7 @@ class Argument
      */
     private $Reports;
 
-    function __construct()
+    public function __construct()
     {
         $this->Votes = new ArrayCollection();
         $this->Reports = new ArrayCollection();
@@ -158,7 +156,7 @@ class Argument
     }
 
     /**
-     * Get id
+     * Get id.
      *
      * @return integer
      */
@@ -168,7 +166,7 @@ class Argument
     }
 
     /**
-     * Get body
+     * Get body.
      *
      * @return string
      */
@@ -178,9 +176,10 @@ class Argument
     }
 
     /**
-     * Set body
+     * Set body.
      *
      * @param string $body
+     *
      * @return Argument
      */
     public function setBody($body)
@@ -191,7 +190,7 @@ class Argument
     }
 
     /**
-     * Get createdAt
+     * Get createdAt.
      *
      * @return \DateTime
      */
@@ -201,7 +200,7 @@ class Argument
     }
 
     /**
-     * Get updatedAt
+     * Get updatedAt.
      *
      * @return \DateTime
      */
@@ -211,7 +210,7 @@ class Argument
     }
 
     /**
-     * Get isEnabled
+     * Get isEnabled.
      *
      * @return boolean
      */
@@ -221,22 +220,23 @@ class Argument
     }
 
     /**
-     * Set isEnabled
+     * Set isEnabled.
      *
      * @param boolean $isEnabled
+     *
      * @return Argument
      */
     public function setIsEnabled($isEnabled)
     {
         if ($isEnabled != $this->isEnabled) {
-            if($isEnabled) {
-                if($this->isTrashed) {
+            if ($isEnabled) {
+                if ($this->isTrashed) {
                     $this->opinion->getConsultation()->increaseTrashedArgumentCount(1);
                 } else {
                     $this->opinion->increaseArgumentsCount(1);
                 }
             } else {
-                if($this->isTrashed) {
+                if ($this->isTrashed) {
                     $this->opinion->getConsultation()->decreaseArgumentCount(1);
                 } else {
                     $this->opinion->decreaseArgumentsCount(1);
@@ -244,11 +244,12 @@ class Argument
             }
         }
         $this->isEnabled = $isEnabled;
+
         return $this;
     }
 
     /**
-     * Get voteCount
+     * Get voteCount.
      *
      * @return integer
      */
@@ -258,9 +259,10 @@ class Argument
     }
 
     /**
-     * Set voteCount
+     * Set voteCount.
      *
      * @param integer $voteCount
+     *
      * @return Argument
      */
     public function setVoteCount($voteCount)
@@ -287,7 +289,7 @@ class Argument
     }
 
     /**
-     * Get isTrashed
+     * Get isTrashed.
      *
      * @return boolean
      */
@@ -297,9 +299,10 @@ class Argument
     }
 
     /**
-     * Set isTrashed
+     * Set isTrashed.
      *
      * @param boolean $isTrashed
+     *
      * @return Argument
      */
     public function setIsTrashed($isTrashed)
@@ -309,7 +312,7 @@ class Argument
                 $this->trashedReason = null;
                 $this->trashedAt = null;
             }
-            if($this->isEnabled) {
+            if ($this->isEnabled) {
                 if ($isTrashed) {
                     $this->opinion->getConsultation()->increaseTrashedArgumentCount(1);
                     $this->opinion->decreaseArgumentsCount(1);
@@ -320,11 +323,12 @@ class Argument
             }
         }
         $this->isTrashed = $isTrashed;
+
         return $this;
     }
 
     /**
-     * Get trashedAt
+     * Get trashedAt.
      *
      * @return \DateTime
      */
@@ -334,9 +338,10 @@ class Argument
     }
 
     /**
-     * Set trashedAt
+     * Set trashedAt.
      *
      * @param \DateTime $trashedAt
+     *
      * @return Argument
      */
     public function setTrashedAt($trashedAt)
@@ -347,7 +352,7 @@ class Argument
     }
 
     /**
-     * Get trashedReason
+     * Get trashedReason.
      *
      * @return string
      */
@@ -357,9 +362,10 @@ class Argument
     }
 
     /**
-     * Set trashedReason
+     * Set trashedReason.
      *
      * @param string $trashedReason
+     *
      * @return Argument
      */
     public function setTrashedReason($trashedReason)
@@ -388,24 +394,29 @@ class Argument
     /**
      * @return ArrayCollection
      */
-    public function getVotes(){
+    public function getVotes()
+    {
         return $this->Votes;
     }
 
     /**
      * @param $vote
+     *
      * @return $this
      */
-    public function addVote($vote){
+    public function addVote($vote)
+    {
         if (!$this->Votes->contains($vote)) {
             $this->voteCount++;
             $this->Votes->add($vote);
         }
+
         return $this;
     }
 
     /**
      * @param $vote
+     *
      * @return $this
      */
     public function removeVote($vote)
@@ -413,6 +424,7 @@ class Argument
         if ($this->Votes->removeElement($vote)) {
             $this->voteCount--;
         }
+
         return $this;
     }
 
@@ -443,6 +455,7 @@ class Argument
 
     /**
      * @param Reporting $report
+     *
      * @return $this
      */
     public function addReport(Reporting $report)
@@ -450,16 +463,19 @@ class Argument
         if (!$this->Reports->contains($report)) {
             $this->Reports->add($report);
         }
+
         return $this;
     }
 
     /**
      * @param Reporting $report
+     *
      * @return $this
      */
     public function removeReport(Reporting $report)
     {
         $this->Reports->removeElement($report);
+
         return $this;
     }
 
@@ -473,45 +489,51 @@ class Argument
         foreach ($this->Votes as $vote) {
             $this->removeVote($vote);
         }
+
         return $this;
     }
 
     /**
      * @param User $user
+     *
      * @return bool
      */
     public function userHasVote(User $user = null)
     {
         if ($user != null) {
-            foreach($this->Votes as $vote){
-                if($vote->getVoter() == $user){
+            foreach ($this->Votes as $vote) {
+                if ($vote->getVoter() == $user) {
                     return true;
                 }
             }
         }
+
         return false;
     }
 
     /**
      * @param User $user
+     *
      * @return bool
      */
     public function userHasReport(User $user = null)
     {
         if ($user != null) {
-            foreach($this->Reports as $report){
-                if($report->getVoter() == $user){
+            foreach ($this->Reports as $report) {
+                if ($report->getVoter() == $user) {
                     return true;
                 }
             }
         }
+
         return false;
     }
 
     /**
      * @return bool
      */
-    public function canDisplay() {
+    public function canDisplay()
+    {
         return $this->isEnabled && $this->opinion->canDisplay();
     }
 
@@ -525,15 +547,16 @@ class Argument
 
     /**
      * @param int $nb
+     *
      * @return string
      */
     public function getBodyExcerpt($nb = 100)
     {
         $excerpt = substr($this->body, 0, $nb);
         $excerpt = $excerpt.'...';
+
         return $excerpt;
     }
-
 
     // ************************* Lifecycle ***********************************
 
@@ -545,6 +568,5 @@ class Argument
         if ($this->opinion != null) {
             $this->opinion->removeArgument($this);
         }
-
     }
 }

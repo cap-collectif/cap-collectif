@@ -41,16 +41,18 @@ class MediaProcessor implements ProcessorInterface
             $media->setContext($object->getContext());
 
             $this->mediaManager->save($media, 'default', 'sonata.media.provider.image');
+
             return $media;
-        } else if ($object instanceof \Capco\ClassificationBundle\Entity\Context) {
+        } elseif ($object instanceof \Capco\ClassificationBundle\Entity\Context) {
             $context = $this->contextManager->create();
             $context->setId($object->getId());
             $context->setEnabled($object->getEnabled());
             $context->setName($object->getName());
 
             $this->contextManager->save($context);
+
             return $context;
-        } else if ($object instanceof \Capco\ClassificationBundle\Entity\Category) {
+        } elseif ($object instanceof \Capco\ClassificationBundle\Entity\Category) {
             $category = $this->categoryManager->create();
             $category->setName($object->getName());
             $category->setEnabled($object->getEnabled());
@@ -58,6 +60,7 @@ class MediaProcessor implements ProcessorInterface
             $category->setContext($object->getContext());
 
             $this->categoryManager->save($category);
+
             return $category;
         }
     }
@@ -67,6 +70,5 @@ class MediaProcessor implements ProcessorInterface
      */
     public function postProcess($object)
     {
-
     }
 }

@@ -7,7 +7,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * Idea
+ * Idea.
  *
  * @ORM\Table(name="video")
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\VideoRepository")
@@ -15,7 +15,6 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class Video
 {
-
     public static $colorButtonPlay = [
         'white' => 'video.colors.white',
         'black' => 'video.colors.black',
@@ -110,13 +109,12 @@ class Video
      */
     private $Media;
 
-
     /**
-     * Constructor
+     * Constructor.
      */
     public function __construct()
     {
-        $this->updatedAt = new \Datetime;
+        $this->updatedAt = new \Datetime();
     }
 
     public function __toString()
@@ -129,7 +127,7 @@ class Video
     }
 
     /**
-     * Get id
+     * Get id.
      *
      * @return integer
      */
@@ -139,9 +137,10 @@ class Video
     }
 
     /**
-     * Set title
+     * Set title.
      *
      * @param string $title
+     *
      * @return Video
      */
     public function setTitle($title)
@@ -152,7 +151,7 @@ class Video
     }
 
     /**
-     * Get title
+     * Get title.
      *
      * @return string
      */
@@ -162,9 +161,10 @@ class Video
     }
 
     /**
-     * Set slug
+     * Set slug.
      *
      * @param string $slug
+     *
      * @return Video
      */
     public function setSlug($slug)
@@ -175,7 +175,7 @@ class Video
     }
 
     /**
-     * Get slug
+     * Get slug.
      *
      * @return string
      */
@@ -185,9 +185,10 @@ class Video
     }
 
     /**
-     * Set body
+     * Set body.
      *
      * @param string $body
+     *
      * @return Video
      */
     public function setBody($body)
@@ -198,7 +199,7 @@ class Video
     }
 
     /**
-     * Get body
+     * Get body.
      *
      * @return string
      */
@@ -208,7 +209,7 @@ class Video
     }
 
     /**
-     * Get createdAt
+     * Get createdAt.
      *
      * @return \DateTime
      */
@@ -218,7 +219,7 @@ class Video
     }
 
     /**
-     * Get updatedAt
+     * Get updatedAt.
      *
      * @return \DateTime
      */
@@ -260,7 +261,7 @@ class Video
     }
 
     /**
-     * Set isEnabled
+     * Set isEnabled.
      *
      * @param boolean $isEnabled
      *
@@ -274,7 +275,7 @@ class Video
     }
 
     /**
-     * Get isEnabled
+     * Get isEnabled.
      *
      * @return boolean
      */
@@ -330,5 +331,4 @@ class Video
     {
         $this->color = $color;
     }
-
 }

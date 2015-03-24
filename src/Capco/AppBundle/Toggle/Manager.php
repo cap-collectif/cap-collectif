@@ -36,6 +36,7 @@ class Manager
         if (null != $this->prefix && !(0 === strpos($name, $this->prefix))) {
             return $this->prefix.'__'.$name;
         }
+
         return $name;
     }
 
@@ -89,6 +90,7 @@ class Manager
                 return true;
             }
         }
+
         return false;
     }
 
@@ -120,6 +122,7 @@ class Manager
 
     /**
      * @param $features
+     *
      * @return bool
      */
     public function containsEnabledFeature($features)

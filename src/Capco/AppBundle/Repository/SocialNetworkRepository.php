@@ -5,12 +5,13 @@ namespace Capco\AppBundle\Repository;
 use Doctrine\ORM\EntityRepository;
 
 /**
- * SocialNetworkRepository
+ * SocialNetworkRepository.
  */
 class SocialNetworkRepository extends EntityRepository
 {
     /**
-     * get all social network enabled
+     * get all social network enabled.
+     *
      * @return array
      */
     public function getEnabled()

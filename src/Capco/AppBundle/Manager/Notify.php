@@ -3,7 +3,6 @@
 namespace Capco\AppBundle\Manager;
 
 use Capco\AppBundle\Entity\Reporting;
-use Capco\AppBundle\Services\EmailService;
 use Capco\AppBundle\SiteParameter\Resolver;
 use Capco\UserBundle\Entity\User;
 use Sonata\NotificationBundle\Model\Message;
@@ -24,7 +23,7 @@ class Notify
         $this->resolver = $resolver;
         $this->translator = $translator;
     }
-    
+
     public function sendNotifyMessage(User $user, $type, $message)
     {
         $to = $this->resolver->getValue('admin.mail.notifications');

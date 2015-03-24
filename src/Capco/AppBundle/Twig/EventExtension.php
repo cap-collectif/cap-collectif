@@ -2,7 +2,6 @@
 
 namespace Capco\AppBundle\Twig;
 
-
 use Capco\AppBundle\Helper\EventHelper;
 
 class EventExtension extends \Twig_Extension

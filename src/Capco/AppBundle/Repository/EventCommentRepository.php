@@ -3,18 +3,17 @@
 namespace Capco\AppBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
-use Doctrine\ORM\Query;
 
 /**
- * EventCommentRepository
+ * EventCommentRepository.
  */
 class EventCommentRepository extends EntityRepository
 {
-
     /**
-     * Get all enabled comments by event
+     * Get all enabled comments by event.
      *
      * @param $event
+     *
      * @return array
      */
     public function getEnabledByEvent($event)

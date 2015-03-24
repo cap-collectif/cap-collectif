@@ -2,28 +2,25 @@
 
 namespace Capco\AppBundle\Controller;
 
-use Capco\AppBundle\Entity\Consultation;
-use Capco\AppBundle\Entity\Idea;
 use Capco\AppBundle\Entity\Theme;
 use Capco\AppBundle\Form\ThemeSearchType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Cache;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 class ThemeController extends Controller
 {
-
     /**
      * @Route("/themes/{page}", name="app_theme", requirements={"page" = "\d+"}, defaults={"page" = 1, "_feature_flag" = "themes"} )
      * @Route("/themes/search/{term}/{page}", name="app_theme_search", requirements={"page" = "\d+"}, defaults={"page" = 1, "_feature_flag" = "themes"} )
      * @Template()
+     *
      * @param $page
      * @param $request
      * @param $term
+     *
      * @return array
      */
     public function indexAction(Request $request, $page, $term = null)
@@ -33,7 +30,7 @@ class ThemeController extends Controller
 
         $form = $this->createForm(new ThemeSearchType(), null, array(
             'action' => $currentUrl,
-            'method' => 'POST'
+            'method' => 'POST',
         ));
 
         if ($request->getMethod() == 'POST') {
@@ -44,7 +41,7 @@ class ThemeController extends Controller
                 $data = $form->getData();
 
                 return $this->redirect($this->generateUrl('app_theme_search', array(
-                    'term' => $data['term']
+                    'term' => $data['term'],
                 )));
             }
         } else {
@@ -54,17 +51,17 @@ class ThemeController extends Controller
         }
 
         $pagination = $this->get('capco.site_parameter.resolver')->getValue('themes.pagination');
-        if (!is_numeric($pagination)){
+        if (!is_numeric($pagination)) {
             $pagination = 0;
         } else {
-            $pagination = (int)$pagination;
+            $pagination = (int) $pagination;
         }
 
         $themes = $em->getRepository('CapcoAppBundle:Theme')->getSearchResultsWithConsultationsAndIdeas($pagination, $page, $term);
 
         //Avoid division by 0 in nbPage calculation
         $nbPage = 1;
-        if($pagination != 0){
+        if ($pagination != 0) {
             $nbPage = ceil(count($themes) / $pagination);
         }
 
@@ -80,7 +77,9 @@ class ThemeController extends Controller
      * @Route("/themes/{slug}", name="app_theme_show", defaults={"_feature_flag" = "themes"})
      * @ParamConverter("theme", class="CapcoAppBundle:Theme", options={"repository_method" = "getOneBySlug"})
      * @Template()
+     *
      * @param Theme $theme
+     *
      * @return array
      */
     public function showAction(Theme $theme)
@@ -88,10 +87,10 @@ class ThemeController extends Controller
         if (false == $theme->canDisplay()) {
             throw $this->createNotFoundException($this->get('translator')->trans('theme.error.not_found', array(), 'CapcoAppBundle'));
         }
+
         return array(
             'theme' => $theme,
-            'statuses' => Theme::$statuses
+            'statuses' => Theme::$statuses,
         );
     }
-
 }

@@ -4,7 +4,6 @@ namespace Capco\AppBundle\Twig;
 
 use Capco\AppBundle\Entity\AbstractComment as Comment;
 use Capco\AppBundle\Manager\CommentResolver;
-use Symfony\Component\Routing\Router;
 
 class CommentExtension extends \Twig_Extension
 {

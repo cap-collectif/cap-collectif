@@ -8,4 +8,3 @@ Capco\ClassificationBundle\Entity\Context:
     id: sources
     name: Sources
     enabled: true
-

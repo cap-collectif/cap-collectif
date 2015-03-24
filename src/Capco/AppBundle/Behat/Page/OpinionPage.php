@@ -10,7 +10,7 @@ class OpinionPage extends Page
     use PageTrait;
 
     /**
-     * @var string $path
+     * @var string
      */
     protected $path = '/consultations/{consultation_slug}/opinions/{opinion_type_slug}/{opinion_slug}';
 
@@ -42,4 +42,3 @@ class OpinionPage extends Page
         $this->getElement('Vote first source')->click();
     }
 }
-

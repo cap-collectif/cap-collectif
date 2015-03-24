@@ -10,25 +10,23 @@ use Capco\AppBundle\Entity\Theme;
 use Capco\AppBundle\Entity\Step;
 use Capco\AppBundle\Form\ConsultationSearchType;
 use Capco\AppBundle\Form\OpinionsSortType;
-
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Cache;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
-use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 class ConsultationController extends Controller
 {
-
     /**
      * @Cache(expires="+1 minutes", maxage="60", smaxage="60", public="true")
      * @Template("CapcoAppBundle:Consultation:lastConsultations.html.twig")
+     *
      * @param $max
      * @param $offset
+     *
      * @return array
      */
     public function lastConsultationsAction($max = 4, $offset = 0)
@@ -40,9 +38,10 @@ class ConsultationController extends Controller
         if (empty($consultationSteps)) {
             $consultationSteps = $this->getDoctrine()->getRepository('CapcoAppBundle:Step')->getLastClosed($max, $offset);
         }
+
         return [
             'consultationSteps' => $consultationSteps,
-            'statuses' => Consultation::$openingStatuses
+            'statuses' => Consultation::$openingStatuses,
         ];
     }
 
@@ -51,7 +50,9 @@ class ConsultationController extends Controller
     /**
      * @Route("/consultations/{slug}", name="app_consultation_show")
      * @Template()
+     *
      * @param Consultation $consultation
+     *
      * @return array
      */
     public function showAction(Consultation $consultation)
@@ -59,7 +60,7 @@ class ConsultationController extends Controller
         $em = $this->getDoctrine()->getManager();
         $consultation = $em->getRepository('CapcoAppBundle:Consultation')->getOneWithAllowedTypes($consultation->getSlug());
 
-        if (null == $consultation || false == $consultation->canDisplay() ) {
+        if (null == $consultation || false == $consultation->canDisplay()) {
             throw $this->createNotFoundException($this->get('translator')->trans('consultation.error.not_found', array(), 'CapcoAppBundle'));
         }
 
@@ -71,7 +72,9 @@ class ConsultationController extends Controller
 
     /**
      * @Template("CapcoAppBundle:Consultation:show_opinions.html.twig")
+     *
      * @param $consultation
+     *
      * @return array
      */
     public function showOpinionsAction(Consultation $consultation)
@@ -90,16 +93,18 @@ class ConsultationController extends Controller
      * @ParamConverter("consultation", class="CapcoAppBundle:Consultation", options={"mapping": {"consultationSlug": "slug"}})
      * @ParamConverter("opinionType", class="CapcoAppBundle:OpinionType", options={"mapping": {"opinionTypeSlug": "slug"}})
      * @Template("CapcoAppBundle:Consultation:show_by_type.html.twig")
+     *
      * @param Consultation $consultation
-     * @param OpinionType $opinionType
+     * @param OpinionType  $opinionType
      * @param $page
-     * @param Request $request
+     * @param Request      $request
      * @param $opinionsSort
+     *
      * @return array
      */
     public function showByTypeAction(Consultation $consultation, OpinionType $opinionType, $page, Request $request, $opinionsSort = null)
     {
-        if (false == $consultation->canDisplay() ) {
+        if (false == $consultation->canDisplay()) {
             throw $this->createNotFoundException($this->get('translator')->trans('consultation.error.not_found', array(), 'CapcoAppBundle'));
         }
 
@@ -111,9 +116,10 @@ class ConsultationController extends Controller
 
         if ('POST' === $request->getMethod()) {
             $form->handleRequest($request);
-            if($form->isValid()) {
+            if ($form->isValid()) {
                 $data = $form->getData();
-                return $this->redirect($this->generateUrl('app_consultation_show_opinions_sorted',array(
+
+                return $this->redirect($this->generateUrl('app_consultation_show_opinions_sorted', array(
                     'consultationSlug' => $consultation->getSlug(),
                     'opinionTypeSlug' => $opinionType->getSlug(),
                     'page' => $page,
@@ -135,7 +141,7 @@ class ConsultationController extends Controller
             'page' => $page,
             'nbPage' => ceil(count($opinions) / 10),
             'sortOpinionsForm' => $form->createView(),
-            'opinionsSort' => $opinionsSort
+            'opinionsSort' => $opinionsSort,
         ];
     }
 
@@ -143,12 +149,14 @@ class ConsultationController extends Controller
      * @Route("/consultations/{consultationSlug}/trashed", name="app_consultation_show_trashed")
      * @ParamConverter("consultation", class="CapcoAppBundle:Consultation", options={"mapping": {"consultationSlug": "slug"}})
      * @Template("CapcoAppBundle:Consultation:show_trashed.html.twig")
+     *
      * @param Consultation $consultation
+     *
      * @return array
      */
     public function showTrashedAction(Consultation $consultation)
     {
-        if (false == $consultation->canDisplay() ) {
+        if (false == $consultation->canDisplay()) {
             throw $this->createNotFoundException($this->get('translator')->trans('consultation.error.not_found', array(), 'CapcoAppBundle'));
         }
 
@@ -170,11 +178,13 @@ class ConsultationController extends Controller
      * @Route("/consultations/{theme}/{sort}/{page}", name="app_consultation_search", requirements={"page" = "\d+"}, defaults={"page" = 1, "theme" = "all"} )
      * @Route("/consultations/{theme}/{sort}/{term}/{page}", name="app_consultation_search_term", requirements={"page" = "\d+"}, defaults={"page" = 1, "theme" = "all"} )
      * @Template()
+     *
      * @param $page
      * @param $request
      * @param $theme
      * @param $sort
      * @param $term
+     *
      * @return array
      */
     public function indexAction(Request $request, $page, $theme = null, $sort = null, $term = null)
@@ -184,7 +194,7 @@ class ConsultationController extends Controller
 
         $form = $this->createForm(new ConsultationSearchType($this->get('capco.toggle.manager')), null, array(
             'action' => $currentUrl,
-            'method' => 'POST'
+            'method' => 'POST',
         ));
 
         if ($request->getMethod() == 'POST') {
@@ -197,7 +207,7 @@ class ConsultationController extends Controller
                 return $this->redirect($this->generateUrl('app_consultation_search_term', array(
                     'theme' => $data['theme'] ? $data['theme']->getSlug() : Theme::FILTER_ALL,
                     'sort' => $data['sort'],
-                    'term' => $data['term']
+                    'term' => $data['term'],
                 )));
             }
         } else {
@@ -209,17 +219,17 @@ class ConsultationController extends Controller
         }
 
         $pagination = $this->get('capco.site_parameter.resolver')->getValue('consultations.pagination');
-        if (!is_numeric($pagination)){
+        if (!is_numeric($pagination)) {
             $pagination = 0;
         } else {
-            $pagination = (int)$pagination;
+            $pagination = (int) $pagination;
         }
 
         $consultations = $em->getRepository('CapcoAppBundle:Consultation')->getSearchResults($pagination, $page, $theme, $sort, $term);
 
         //Avoid division by 0 in nbPage calculation
         $nbPage = 1;
-        if($pagination != 0){
+        if ($pagination != 0) {
             $nbPage = ceil(count($consultations) / $pagination);
         }
 
@@ -228,8 +238,7 @@ class ConsultationController extends Controller
             'statuses' => Consultation::$openingStatuses,
             'page' => $page,
             'nbPage' => $nbPage,
-            'form' => $form->createView()
+            'form' => $form->createView(),
         ];
     }
-
 }

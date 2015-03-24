@@ -10,7 +10,7 @@ class ConsultationPage extends Page
     use PageTrait;
 
     /**
-     * @var string $path
+     * @var string
      */
     protected $path = '/consultations/{slug}';
 
@@ -20,5 +20,4 @@ class ConsultationPage extends Page
             'css' => '.consultation_nav li',
         ),
     );
-
 }

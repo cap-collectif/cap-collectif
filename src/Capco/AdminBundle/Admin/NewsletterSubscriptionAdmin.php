@@ -13,7 +13,7 @@ class NewsletterSubscriptionAdmin extends Admin
 {
     protected $datagridValues = array(
         '_sort_order' => 'ASC',
-        '_sort_by' => 'email'
+        '_sort_by' => 'email',
     );
 
     /**
@@ -55,7 +55,7 @@ class NewsletterSubscriptionAdmin extends Admin
                     'show' => array(),
                     'edit' => array(),
                     'delete' => array(),
-                )
+                ),
             ))
         ;
     }

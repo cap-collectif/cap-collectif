@@ -5,13 +5,11 @@ namespace Capco\AdminBundle\Controller;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Sonata\AdminBundle\Controller\CRUDController as Controller;
 use Symfony\Component\HttpFoundation\RedirectResponse;
-
-use Sonata\AdminBundle\Datagrid\ProxyQueryInterface;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 class UserController extends Controller
 {
-    public function batchActionDeleteIsRelevant (array $selectedIds, $allEntitiesSelected)
+    public function batchActionDeleteIsRelevant(array $selectedIds, $allEntitiesSelected)
     {
         if (!$this->isGranted('ROLE_SUPER_ADMIN')) {
             foreach ($selectedIds as $id) {
@@ -23,11 +21,10 @@ class UserController extends Controller
         }
 
         return true;
-
     }
 
     /**
-     * Delete action
+     * Delete action.
      *
      * @param int|string|null $id
      *
@@ -72,7 +69,6 @@ class UserController extends Controller
                         'SonataAdminBundle'
                     )
                 );
-
             } catch (ModelManagerException $e) {
                 $this->handleModelManagerException($e);
 
@@ -96,12 +92,12 @@ class UserController extends Controller
         return $this->render($this->admin->getTemplate('delete'), array(
             'object'     => $object,
             'action'     => 'delete',
-            'csrf_token' => $this->getCsrfToken('sonata.delete')
+            'csrf_token' => $this->getCsrfToken('sonata.delete'),
         ));
     }
 
     /**
-     * Edit action
+     * Edit action.
      *
      * @param int|string|null $id
      *
@@ -143,14 +139,13 @@ class UserController extends Controller
 
             // persist if the form was valid and if in preview mode the preview was approved
             if ($isFormValid && (!$this->isInPreviewMode() || $this->isPreviewApproved())) {
-
                 try {
                     $object = $this->admin->update($object);
 
                     if ($this->isXmlHttpRequest()) {
                         return $this->renderJson(array(
                             'result'    => 'ok',
-                            'objectId'  => $this->admin->getNormalizedIdentifier($object)
+                            'objectId'  => $this->admin->getNormalizedIdentifier($object),
                         ));
                     }
 
@@ -165,7 +160,6 @@ class UserController extends Controller
 
                     // redirect to edit mode
                     return $this->redirectTo($object);
-
                 } catch (ModelManagerException $e) {
                     $this->handleModelManagerException($e);
 

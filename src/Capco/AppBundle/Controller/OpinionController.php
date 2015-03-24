@@ -11,28 +11,26 @@ use Capco\AppBundle\Form\OpinionsType as OpinionForm;
 use Capco\AppBundle\Form\ArgumentType as ArgumentForm;
 use Capco\AppBundle\Form\OpinionVoteType as OpinionVoteForm;
 use Capco\AppBundle\Form\ArgumentsSortType;
-
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Cache;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Symfony\Component\Form\Form;
 
 class OpinionController extends Controller
 {
-
     /**
      * @Route("/secure/consultations/{consultationSlug}/opinions/{opinionTypeSlug}/{opinionSlug}/remove/{opinionVote}", name="app_consultation_cancel_vote")
+     *
      * @param $request
      * @param $consultationSlug
      * @param $opinionTypeSlug
      * @param $opinionSlug
      * @param $opinionVote
+     *
      * @return array
      */
     public function deleteOpinionVoteAction($consultationSlug, $opinionTypeSlug, $opinionSlug, OpinionVote $opinionVote, Request $request)
@@ -52,14 +50,12 @@ class OpinionController extends Controller
         }
 
         if ($request->getMethod() == 'POST') {
-
-            if($this->isCsrfTokenValid('remove_opinion_vote', $request->get('_csrf_token'))) {
+            if ($this->isCsrfTokenValid('remove_opinion_vote', $request->get('_csrf_token'))) {
                 $em = $this->getDoctrine()->getManager();
                 $em->remove($opinionVote);
                 $em->flush();
                 $this->get('session')->getFlashBag()->add('success', $this->get('translator')->trans('opinion.vote.delete.success', array(), 'CapcoAppBundle'));
-            }
-            else {
+            } else {
                 $this->get('session')->getFlashBag()->add('danger', $this->get('translator')->trans('argument.vote.csrf_error', array(), 'CapcoAppBundle'));
             }
         }
@@ -71,10 +67,12 @@ class OpinionController extends Controller
      * @Route("/consultations/{consultationSlug}/opinions/{opinionTypeSlug}/add", name="app_consultation_new_opinion")
      * @ParamConverter("consultation", class="CapcoAppBundle:Consultation", options={"mapping": {"consultationSlug": "slug"}})
      * @ParamConverter("opinionType", class="CapcoAppBundle:OpinionType", options={"mapping": {"opinionTypeSlug": "slug"}})
+     *
      * @param $opinionType
      * @param $consultation
      * @param $request
      * @Template("CapcoAppBundle:Opinion:create.html.twig")
+     *
      * @return array
      */
     public function createOpinionAction(Consultation $consultation, OpinionType $opinionType, Request $request)
@@ -107,6 +105,7 @@ class OpinionController extends Controller
                 $em->persist($opinion);
                 $em->flush();
                 $this->get('session')->getFlashBag()->add('success', $this->get('translator')->trans('opinion.create.success'));
+
                 return $this->redirect($this->generateUrl('app_consultation_show_opinion', ['consultationSlug' => $consultation->getSlug(), 'opinionTypeSlug' => $opinionType->getSlug(), 'opinionSlug' => $opinion->getSlug() ]));
             } else {
                 $this->get('session')->getFlashBag()->add('danger', $this->get('translator')->trans('opinion.create.error'));
@@ -116,18 +115,20 @@ class OpinionController extends Controller
         return [
             'consultation' => $consultation,
             'opinionType' => $opinionType,
-            'form' => $form->createView()
+            'form' => $form->createView(),
         ];
     }
 
     /**
      * @Route("/consultations/{consultationSlug}/opinions/{opinionTypeSlug}/{opinionSlug}/delete", name="app_consultation_delete_opinion")
+     *
      * @param $consultationSlug
      * @param $opinionTypeSlug
      * @param $consultationSlug
      * @param $opinionSlug
      * @param $request
      * @Template("CapcoAppBundle:Opinion:delete.html.twig")
+     *
      * @return array
      */
     public function deleteOpinionAction($consultationSlug, $opinionTypeSlug, $opinionSlug, Request $request)
@@ -138,7 +139,7 @@ class OpinionController extends Controller
 
         $opinion = $this->getDoctrine()->getRepository('CapcoAppBundle:Opinion')->getOneBySlug($consultationSlug, $opinionTypeSlug, $opinionSlug);
 
-        if($opinion == null){
+        if ($opinion == null) {
             throw $this->createNotFoundException($this->get('translator')->trans('opinion.error.not_found', array(), 'CapcoAppBundle'));
         }
 
@@ -168,6 +169,7 @@ class OpinionController extends Controller
                 $em->flush();
 
                 $this->get('session')->getFlashBag()->add('info', $this->get('translator')->trans('opinion.delete.success'));
+
                 return $this->redirect($this->generateUrl('app_consultation_show', ['slug' => $consultation->getSlug() ]));
             } else {
                 $this->get('session')->getFlashBag()->add('danger', $this->get('translator')->trans('opinion.delete.error'));
@@ -178,17 +180,19 @@ class OpinionController extends Controller
             'opinion' => $opinion,
             'consultation' => $consultation,
             'opinionType' => $opinionType,
-            'form' => $form->createView()
+            'form' => $form->createView(),
         );
     }
 
     /**
      * @Route("/consultations/{consultationSlug}/opinions/{opinionTypeSlug}/{opinionSlug}/edit", name="app_consultation_edit_opinion")
      * @Template("CapcoAppBundle:Opinion:update.html.twig")
+     *
      * @param $consultationSlug
      * @param $opinionTypeSlug
      * @param $opinionSlug
      * @param $request
+     *
      * @return array
      */
     public function updateOpinionAction($consultationSlug, $opinionTypeSlug, $opinionSlug, Request $request)
@@ -199,7 +203,7 @@ class OpinionController extends Controller
 
         $opinion = $this->getDoctrine()->getRepository('CapcoAppBundle:Opinion')->getOneBySlug($consultationSlug, $opinionTypeSlug, $opinionSlug);
 
-        if ($opinion == null){
+        if ($opinion == null) {
             throw $this->createNotFoundException($this->get('translator')->trans('opinion.error.not_found', array(), 'CapcoAppBundle'));
         }
 
@@ -222,13 +226,13 @@ class OpinionController extends Controller
             $form->handleRequest($request);
 
             if ($form->isValid()) {
-
                 $em = $this->getDoctrine()->getManager();
                 $opinion->resetVotes();
                 $em->persist($opinion);
                 $em->flush();
 
                 $this->get('session')->getFlashBag()->add('success', $this->get('translator')->trans('opinion.update.success'));
+
                 return $this->redirect($this->generateUrl('app_consultation_show_opinion', ['consultationSlug' => $consultation->getSlug(), 'opinionTypeSlug' => $opinionType->getSlug(), 'opinionSlug' => $opinion->getSlug() ]));
             } else {
                 $this->get('session')->getFlashBag()->add('danger', $this->get('translator')->trans('opinion.update.error'));
@@ -239,7 +243,7 @@ class OpinionController extends Controller
             'form' => $form->createView(),
             'opinion' => $opinion,
             'consultation' => $consultation,
-            'opinionType' => $opinionType
+            'opinionType' => $opinionType,
         ];
     }
 
@@ -249,6 +253,7 @@ class OpinionController extends Controller
      * @param $form
      * @param $request
      * @param $alreadyVoted
+     *
      * @return array
      */
     private function handleOpinionVoteForm(Opinion $opinion, OpinionVote $opinionVote, $alreadyVoted = false, Form $form, Request $request)
@@ -264,7 +269,6 @@ class OpinionController extends Controller
         $form->handleRequest($request);
 
         if ($form->isValid()) {
-
             $em = $this->getDoctrine()->getManager();
 
             if (!$alreadyVoted) {
@@ -274,33 +278,34 @@ class OpinionController extends Controller
                 $this->get('session')->getFlashBag()->add('success', $this->get('translator')->trans('opinion.vote.add.success'));
             } else {
                 $previousVote = $em->getUnitOfWork()->getOriginalEntityData($opinionVote);
-                if($previousVote['value'] == $opinionVote->getValue()){
+                if ($previousVote['value'] == $opinionVote->getValue()) {
                     $em->remove($opinionVote);
                     $em->flush();
                     $this->get('session')->getFlashBag()->add('info', $this->get('translator')->trans('opinion.vote.delete.success'));
-                }
-                else {
+                } else {
                     $em->persist($opinionVote);
                     $em->flush();
                     $this->get('session')->getFlashBag()->add('success', $this->get('translator')->trans('opinion.vote.update.success'));
                 }
             }
-
         } else {
             $this->get('session')->getFlashBag()->add('danger', $this->get('translator')->trans('opinion.vote.error'));
         }
     }
 
     /**
-     * Page opinion
+     * Page opinion.
+     *
      * @Route("/consultations/{consultationSlug}/opinions/{opinionTypeSlug}/{opinionSlug}", name="app_consultation_show_opinion")
      * @Route("/consultations/{consultationSlug}/opinions/{opinionTypeSlug}/{opinionSlug}/sort_arguments/{argumentSort}", name="app_consultation_show_opinion_sortarguments", requirements={"argumentsSort" = "popularity|date"})
+     *
      * @param $consultationSlug
      * @param $opinionTypeSlug
      * @param $opinionSlug
      * @param $request
      * @param $argumentSort
      * @Template("CapcoAppBundle:Opinion:show.html.twig")
+     *
      * @return array
      */
     public function showOpinionAction($consultationSlug, $opinionTypeSlug, $opinionSlug, Request $request, $argumentSort = null)
@@ -316,7 +321,7 @@ class OpinionController extends Controller
 
         $steps = $this->getDoctrine()->getRepository('CapcoAppBundle:Step')->findBy(array(
             'consultation' => $opinion->getConsultation(),
-            'isEnabled' => true
+            'isEnabled' => true,
         ));
 
         // Argument forms
@@ -334,11 +339,11 @@ class OpinionController extends Controller
         if ($this->get('security.authorization_checker')->isGranted('ROLE_USER')) {
             $previousVote = $this->getDoctrine()->getRepository('CapcoAppBundle:OpinionVote')->findOneBy(array(
                 'Voter' => $this->getUser(),
-                'opinion' => $opinion
+                'opinion' => $opinion,
             ));
         }
 
-        if ( $previousVote != null ){
+        if ($previousVote != null) {
             $opinionVote = $previousVote;
             $userHasVoted = true;
         } else {
@@ -350,12 +355,11 @@ class OpinionController extends Controller
 
         $sortArgumentsForm = $this->get('form.factory')->createNamedBuilder('sortArgumentsForm', new ArgumentsSortType(), array(
             'action' => $currentUrl,
-            'method' => 'POST'
+            'method' => 'POST',
         ))
             ->getForm();
 
         if ('POST' === $request->getMethod()) {
-
             $form = null;
 
             if ($request->request->has('argumentFormYes')) {
@@ -378,9 +382,10 @@ class OpinionController extends Controller
             if ($request->request->has('sortArgumentsForm')) {
                 $form = $sortArgumentsForm;
                 $form->handleRequest($request);
-                if($form->isValid()) {
+                if ($form->isValid()) {
                     $data = $form->getData();
-                    return $this->redirect($this->generateUrl('app_consultation_show_opinion_sortarguments',array(
+
+                    return $this->redirect($this->generateUrl('app_consultation_show_opinion_sortarguments', array(
                         'argumentSort' => $data['argumentSort'],
                         'consultationSlug' => $opinion->getConsultation()->getSlug(),
                         'opinionTypeSlug' => $opinion->getOpinionType()->getSlug(),
@@ -390,7 +395,6 @@ class OpinionController extends Controller
             }
 
             return $this->redirect($this->generateUrl('app_consultation_show_opinion', ['consultationSlug' => $opinion->getConsultation()->getSlug(), 'opinionTypeSlug' => $opinion->getOpinionType()->getSlug(), 'opinionSlug' => $opinion->getSlug() ]));
-
         } else {
             $sortArgumentsForm->get('argumentSort')->setData($argumentSort);
         }
@@ -417,17 +421,19 @@ class OpinionController extends Controller
     }
 
     /**
-     * Argument CRUD
+     * Argument CRUD.
+     *
      * @Template("CapcoAppBundle:Argument:create.html.twig")
+     *
      * @param $opinion
      * @param $argument
      * @param $form
      * @param $request
+     *
      * @return array
      */
     private function handleCreateArgumentForm(Opinion $opinion, Argument $argument, Form $form, Request $request)
     {
-
         if (false === $this->get('security.authorization_checker')->isGranted('ROLE_USER')) {
             throw new AccessDeniedException($this->get('translator')->trans('error.access_restricted', array(), 'CapcoAppBundle'));
         }

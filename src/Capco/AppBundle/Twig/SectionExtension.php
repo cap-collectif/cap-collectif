@@ -2,7 +2,6 @@
 
 namespace Capco\AppBundle\Twig;
 
-
 use Capco\AppBundle\Resolver\SectionResolver;
 
 class SectionExtension extends \Twig_Extension

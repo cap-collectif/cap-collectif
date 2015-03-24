@@ -5,7 +5,6 @@ namespace Capco\AdminBundle\Admin;
 use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
-use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Show\ShowMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
 
@@ -13,7 +12,7 @@ class CommentVoteAdmin extends Admin
 {
     protected $datagridValues = array(
         '_sort_order' => 'ASC',
-        '_sort_by' => 'title'
+        '_sort_by' => 'title',
     );
 
     /**
@@ -52,7 +51,7 @@ class CommentVoteAdmin extends Admin
             ->add('_action', 'actions', array(
                 'actions' => array(
                     'show' => array(),
-                )
+                ),
             ))
         ;
     }
@@ -61,13 +60,13 @@ class CommentVoteAdmin extends Admin
     {
         $showMapper
             ->add('comment', 'sonata_type_model', array(
-                'label' => 'admin.fields.comment_vote.comment'
+                'label' => 'admin.fields.comment_vote.comment',
             ))
             ->add('Voter', 'sonata_type_model', array(
-                'label' => 'admin.fields.comment_vote.voter'
+                'label' => 'admin.fields.comment_vote.voter',
             ))
             ->add('createdAt', null, array(
-                'label' => 'admin.fields.comment_vote.created_at'
+                'label' => 'admin.fields.comment_vote.created_at',
             ))
         ;
     }

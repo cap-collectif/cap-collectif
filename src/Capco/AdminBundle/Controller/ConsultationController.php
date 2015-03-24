@@ -50,6 +50,7 @@ class ConsultationController extends Controller
         if (null == $opinionTypes) {
             return new JsonResponse(array());
         }
+
         return new JsonResponse($opinionTypes);
     }
 }

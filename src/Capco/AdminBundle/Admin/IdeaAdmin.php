@@ -10,10 +10,9 @@ use Sonata\AdminBundle\Show\ShowMapper;
 
 class IdeaAdmin extends Admin
 {
-
     protected $datagridValues = array(
         '_sort_order' => 'ASC',
-        '_sort_by' => 'title'
+        '_sort_by' => 'title',
     );
 
     /**
@@ -102,7 +101,7 @@ class IdeaAdmin extends Admin
                     'show' => array(),
                     'edit' => array(),
                     'delete' => array(),
-                )
+                ),
             ))
         ;
     }
@@ -149,7 +148,7 @@ class IdeaAdmin extends Admin
                     'context' => 'default',
                     'hide_context' => true,
                     'provider' => 'sonata.media.provider.image',
-                )
+                ),
             ))
             ->add('isTrashed', null, array(
                 'label' => 'admin.fields.idea.is_trashed',

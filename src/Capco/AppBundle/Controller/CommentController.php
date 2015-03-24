@@ -8,7 +8,6 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
-
 use Capco\AppBundle\Entity\CommentVote;
 use Capco\AppBundle\Form\CommentType as CommentForm;
 
@@ -19,6 +18,7 @@ class CommentController extends Controller
      *
      * @param $objectType
      * @param $objectId
+     *
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
     public function loginToCommentAction($objectType, $objectId)
@@ -28,7 +28,6 @@ class CommentController extends Controller
         }
 
         return $this->redirect($this->get('capco.comment.resolver')->getUrlOfObjectByTypeAndId($objectType, $objectId));
-
     }
 
     /**
@@ -38,7 +37,9 @@ class CommentController extends Controller
      * @param $objectId
      * @param $objectType
      * @param Request $request
+     *
      * @return array|\Symfony\Component\HttpFoundation\RedirectResponse
+     *
      * @throws AccessDeniedException
      * @throws NotFoundHttpException
      */
@@ -62,7 +63,6 @@ class CommentController extends Controller
         $form = $this->createForm(new CommentForm($user), $comment);
 
         if ($request->getMethod() == 'POST') {
-
             if (false == $this->get('capco.comment.resolver')->canAddCommentOn($object)) {
                 throw new AccessDeniedException($this->get('translator')->trans('consultation.error.no_contribute', array(), 'CapcoAppBundle'));
             }
@@ -74,6 +74,7 @@ class CommentController extends Controller
                 $em->persist($comment);
                 $em->flush();
                 $this->get('session')->getFlashBag()->add('success', $this->get('translator')->trans('comment.create.success'));
+
                 return $this->redirect($this->get('capco.comment.resolver')->getUrlOfRelatedObject($comment));
             } else {
                 foreach ($form->getErrors() as $error) {
@@ -84,13 +85,14 @@ class CommentController extends Controller
                         $this->get('session')->getFlashBag()->add('danger', $error->getMessage());
                     }
                 }
+
                 return $this->redirect($this->get('capco.comment.resolver')->getUrlOfRelatedObject($comment));
             }
         }
 
         return [
             'object' => $object,
-            'form' => $form->createView()
+            'form' => $form->createView(),
         ];
     }
 
@@ -98,6 +100,7 @@ class CommentController extends Controller
      * @Template("CapcoAppBundle:Comment:list.html.twig")
      *
      * @param $object
+     *
      * @return array
      */
     public function showCommentsAction($object)
@@ -114,7 +117,9 @@ class CommentController extends Controller
      *
      * @param $commentId
      * @param Request $request
+     *
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     *
      * @throws AccessDeniedException
      */
     public function voteOnCommentAction($commentId, Request $request)
@@ -125,7 +130,7 @@ class CommentController extends Controller
 
         $comment = $this->getDoctrine()->getRepository('CapcoAppBundle:AbstractComment')->getOneById($commentId);
 
-        if($comment == null){
+        if ($comment == null) {
             throw $this->createNotFoundException($this->get('translator')->trans('comment.error.not_found', array(), 'CapcoAppBundle'));
         }
 
@@ -136,9 +141,7 @@ class CommentController extends Controller
         $user = $this->getUser();
 
         if ($request->getMethod() == 'POST') {
-
-            if($this->isCsrfTokenValid('comment_vote', $request->get('_csrf_token'))) {
-
+            if ($this->isCsrfTokenValid('comment_vote', $request->get('_csrf_token'))) {
                 $em = $this->getDoctrine()->getManager();
 
                 $commentVote = new CommentVote();
@@ -149,25 +152,23 @@ class CommentController extends Controller
                     'comment' => $comment,
                 ));
 
-                if( $userVote != null ){
+                if ($userVote != null) {
                     $commentVote = $userVote;
                 }
 
-                if($userVote == null ){
+                if ($userVote == null) {
                     $commentVote->setComment($comment);
                     $em->persist($commentVote);
                     $em->flush();
 
                     $this->get('session')->getFlashBag()->add('success', $this->get('translator')->trans('comment.vote.add_success'));
-                }
-                else {
+                } else {
                     $em->remove($commentVote);
                     $em->flush();
 
                     $this->get('session')->getFlashBag()->add('info', $this->get('translator')->trans('comment.vote.remove_success'));
                 }
-            }
-            else {
+            } else {
                 $this->get('session')->getFlashBag()->add('danger', $this->get('translator')->trans('comment.vote.csrf_error'));
             }
         }
@@ -183,7 +184,9 @@ class CommentController extends Controller
      *
      * @param $commentId
      * @param Request $request
+     *
      * @return array|\Symfony\Component\HttpFoundation\RedirectResponse
+     *
      * @throws AccessDeniedException
      */
     public function updateCommentAction($commentId, Request $request)
@@ -194,7 +197,7 @@ class CommentController extends Controller
 
         $comment = $this->getDoctrine()->getRepository('CapcoAppBundle:AbstractComment')->getOneById($commentId);
 
-        if ($comment == null){
+        if ($comment == null) {
             throw $this->createNotFoundException($this->get('translator')->trans('comment.error.not_found', array(), 'CapcoAppBundle'));
         }
 
@@ -214,13 +217,13 @@ class CommentController extends Controller
             $form->handleRequest($request);
 
             if ($form->isValid()) {
-
                 $em = $this->getDoctrine()->getManager();
                 $comment->resetVotes();
                 $em->persist($comment);
                 $em->flush();
 
                 $this->get('session')->getFlashBag()->add('success', $this->get('translator')->trans('comment.update.success'));
+
                 return $this->redirect($this->get('capco.comment.resolver')->getUrlOfRelatedObject($comment));
             } else {
                 $this->get('session')->getFlashBag()->add('danger', $this->get('translator')->trans('comment.update.error'));
@@ -239,7 +242,9 @@ class CommentController extends Controller
      *
      * @param $commentId
      * @param Request $request
+     *
      * @return array|\Symfony\Component\HttpFoundation\RedirectResponse
+     *
      * @throws AccessDeniedException
      */
     public function deleteCommentAction($commentId, Request $request)
@@ -250,7 +255,7 @@ class CommentController extends Controller
 
         $comment = $this->getDoctrine()->getRepository('CapcoAppBundle:AbstractComment')->getOneById($commentId);
 
-        if ($comment == null){
+        if ($comment == null) {
             throw $this->createNotFoundException($this->get('translator')->trans('comment.error.not_found', array(), 'CapcoAppBundle'));
         }
 
@@ -277,6 +282,7 @@ class CommentController extends Controller
                 $em->flush();
 
                 $this->get('session')->getFlashBag()->add('info', $this->get('translator')->trans('comment.delete.success'));
+
                 return $this->redirect($this->get('capco.comment.resolver')->getUrlOfRelatedObject($comment));
             } else {
                 $this->get('session')->getFlashBag()->add('danger', $this->get('translator')->trans('comment.delete.error'));

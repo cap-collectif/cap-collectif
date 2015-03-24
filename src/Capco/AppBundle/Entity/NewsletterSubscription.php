@@ -7,7 +7,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * NewsletterSubscription
+ * NewsletterSubscription.
  *
  * @ORM\Table(name="newsletter_subscription")
  * @ORM\Entity
@@ -57,7 +57,7 @@ class NewsletterSubscription
     }
 
     /**
-     * Get id
+     * Get id.
      *
      * @return integer
      */
@@ -67,9 +67,10 @@ class NewsletterSubscription
     }
 
     /**
-     * Set email
+     * Set email.
      *
      * @param string $email
+     *
      * @return NewsletterSubscription
      */
     public function setEmail($email)
@@ -80,7 +81,7 @@ class NewsletterSubscription
     }
 
     /**
-     * Get email
+     * Get email.
      *
      * @return string
      */
@@ -90,7 +91,7 @@ class NewsletterSubscription
     }
 
     /**
-     * Get createdAt
+     * Get createdAt.
      *
      * @return \DateTime
      */
@@ -100,9 +101,10 @@ class NewsletterSubscription
     }
 
     /**
-     * Set isEnabled
+     * Set isEnabled.
      *
      * @param boolean $isEnabled
+     *
      * @return NewsletterSubscription
      */
     public function setIsEnabled($isEnabled)
@@ -113,7 +115,7 @@ class NewsletterSubscription
     }
 
     /**
-     * Get isEnabled
+     * Get isEnabled.
      *
      * @return boolean
      */
@@ -123,7 +125,7 @@ class NewsletterSubscription
     }
 
     /**
-     * Set createdAt
+     * Set createdAt.
      *
      * @param \DateTime $createdAt
      *

@@ -7,16 +7,14 @@ use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\Common\Collections\ArrayCollection;
 
-
 /**
- * ConsultationType
+ * ConsultationType.
  *
  * @ORM\Table(name="consultation_type")
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\ConsultationTypeRepository")
  */
 class ConsultationType
 {
-
     /**
      * @var integer
      *
@@ -33,7 +31,6 @@ class ConsultationType
      * @Assert\NotNull()
      */
     private $title;
-
 
     /**
      * @var boolean
@@ -63,14 +60,13 @@ class ConsultationType
      */
     private $opinionTypes;
 
-
     /**
-     * Constructor
+     * Constructor.
      */
     public function __construct()
     {
         $this->opinionTypes = new ArrayCollection();
-        $this->updatedAt = new \Datetime;
+        $this->updatedAt = new \Datetime();
     }
 
     public function __toString()
@@ -83,7 +79,7 @@ class ConsultationType
     }
 
     /**
-     * Get id
+     * Get id.
      *
      * @return integer
      */
@@ -93,7 +89,7 @@ class ConsultationType
     }
 
     /**
-     * Get title
+     * Get title.
      *
      * @return string
      */
@@ -103,9 +99,10 @@ class ConsultationType
     }
 
     /**
-     * Set title
+     * Set title.
      *
      * @param string $title
+     *
      * @return Consultation
      */
     public function setTitle($title)
@@ -116,7 +113,7 @@ class ConsultationType
     }
 
     /**
-     * Is enabled
+     * Is enabled.
      *
      * @return boolean
      */
@@ -126,9 +123,10 @@ class ConsultationType
     }
 
     /**
-     * Set enabled
+     * Set enabled.
      *
      * @param boolean $enabled
+     *
      * @return Consultation
      */
     public function setEnabled($enabled)
@@ -164,6 +162,7 @@ class ConsultationType
 
     /**
      * @param $opinionTypes
+     *
      * @return $this
      */
     public function setOpinionTypes($opinionTypes)
@@ -175,6 +174,7 @@ class ConsultationType
 
     /**
      * @param $opinionType
+     *
      * @return $this
      */
     public function addOpinionType($opinionType)
@@ -188,6 +188,7 @@ class ConsultationType
 
     /**
      * @param $opinionType
+     *
      * @return $this
      */
     public function removeOpinionType($opinionType)

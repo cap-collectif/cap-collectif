@@ -8,14 +8,12 @@ use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Show\ShowMapper;
 use Capco\AppBundle\Entity\FooterSocialNetwork;
-use Sonata\AdminBundle\Route\RouteCollection;
 
 class FooterSocialNetworkAdmin extends Admin
 {
-
     protected $datagridValues = array(
         '_sort_order' => 'ASC',
-        '_sort_by' => 'title'
+        '_sort_by' => 'title',
     );
 
     /**
@@ -62,7 +60,7 @@ class FooterSocialNetworkAdmin extends Admin
                 'label' => 'admin.fields.footer_social_network.link',
             ))
             ->add('style', 'string', array(
-                'template'=>'CapcoAdminBundle:FooterSocialNetwork:style_list_field.html.twig',
+                'template' => 'CapcoAdminBundle:FooterSocialNetwork:style_list_field.html.twig',
                 'label' => 'admin.fields.footer_social_network.style',
             ))
             ->add('position', null, array(
@@ -76,7 +74,7 @@ class FooterSocialNetworkAdmin extends Admin
                     'show' => array(),
                     'edit' => array(),
                     'delete' => array(),
-                )
+                ),
             ))
         ;
     }
@@ -98,7 +96,7 @@ class FooterSocialNetworkAdmin extends Admin
                 'label' => 'admin.fields.footer_social_network.link',
             ))
             ->add('style', 'choice', array(
-                'choices'=>FooterSocialNetwork::$socialIcons,
+                'choices' => FooterSocialNetwork::$socialIcons,
                 'label' => 'admin.fields.footer_social_network.style',
             ))
             ->add('position', null, array(

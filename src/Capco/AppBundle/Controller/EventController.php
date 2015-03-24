@@ -11,14 +11,8 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Cache;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
-
 use Capco\AppBundle\Entity\Event;
-use Capco\AppBundle\Entity\EventRegistration;
-use Capco\AppBundle\Form\EventAnonymousRegistrationType;
 use Capco\AppBundle\Form\EventRegistrationType;
-use Capco\AppBundle\Form\EventUnsubscribeType;
-
 
 class EventController extends Controller
 {
@@ -28,34 +22,34 @@ class EventController extends Controller
      * @Route("/events/filter/{theme}/{consultation}", name="app_event_search_consultation", defaults={"_feature_flag" = "calendar", "theme" = "all", "consultation"="all"} )
      * @Route("/events/filter/{theme}/{consultation}/{term}", name="app_event_search_term", defaults={"_feature_flag" = "calendar", "theme" = "all", "consultation"="all"} )
      * @Template()
+     *
      * @param $request
      * @param $theme
      * @param $consultation
      * @param $term
+     *
      * @return array
      */
-    public function indexAction(Request $request, $theme = null, $consultation= null, $term = null)
+    public function indexAction(Request $request, $theme = null, $consultation = null, $term = null)
     {
-
         $em = $this->getDoctrine()->getManager();
         $currentUrl = $this->generateUrl('app_event');
 
         $form = $this->createForm(new EventSearchType($this->get('capco.toggle.manager')), null, array(
             'action' => $currentUrl,
-            'method' => 'POST'
+            'method' => 'POST',
         ));
 
         if ($request->getMethod() == 'POST') {
             $form->handleRequest($request);
 
             if ($form->isValid()) {
-
                 $data = $form->getData();
 
                 return $this->redirect($this->generateUrl('app_event_search_term', array(
                     'theme' => $data['theme'] ? $data['theme']->getSlug() : Theme::FILTER_ALL,
                     'consultation' => $data['consultation'] ? $data['consultation']->getSlug() : Consultation::FILTER_ALL,
-                    'term' => $data['term']
+                    'term' => $data['term'],
                 )));
             }
         } else {
@@ -80,10 +74,12 @@ class EventController extends Controller
      * @Route("/events/archived/{theme}/{consultation}", name="app_event_archived_consultation", defaults={"_feature_flag" = "calendar", "theme" = "all", "consultation"="all"} )
      * @Route("/events/archived/{theme}/{consultation}/{term}", name="app_event_archived_term", defaults={"_feature_flag" = "calendar", "theme" = "all", "consultation"="all"} )
      * @Template("CapcoAppBundle:Event:show_archived.html.twig")
+     *
      * @param $theme
      * @param $consultation
      * @param $term
      * @param $request
+     *
      * @return array
      */
     public function showArchivedAction(Request $request, $theme = null, $consultation = null, $term = null)
@@ -93,20 +89,19 @@ class EventController extends Controller
 
         $form = $this->createForm(new EventSearchType($this->get('capco.toggle.manager')), null, array(
             'action' => $currentUrl,
-            'method' => 'POST'
+            'method' => 'POST',
         ));
 
         if ($request->getMethod() == 'POST') {
             $form->handleRequest($request);
 
             if ($form->isValid()) {
-
                 $data = $form->getData();
 
                 return $this->redirect($this->generateUrl('app_event_archived_term', array(
                     'theme' => $data['theme'] ? $data['theme']->getSlug() : Theme::FILTER_ALL,
                     'consultation' => $data['consultation'] ? $data['consultation']->getSlug() : Consultation::FILTER_ALL,
-                    'term' => $data['term']
+                    'term' => $data['term'],
                 )));
             }
         } else {
@@ -129,7 +124,9 @@ class EventController extends Controller
      * @Route("/events/{slug}", name="app_event_show", defaults={"_feature_flag" = "calendar"})
      * @ParamConverter("event", options={"mapping": {"slug": "slug"}, "repository_method" = "getOne"})
      * @Template()
+     *
      * @param $request
+     *
      * @return array
      */
     public function showAction(Request $request, Event $event)
@@ -159,6 +156,7 @@ class EventController extends Controller
                 } else {
                     $this->get('session')->getFlashBag()->add('info', $this->get('translator')->trans('event_registration.create.unregister_success'));
                 }
+
                 return $this->redirect($this->generateUrl('app_event_show', ['slug' => $event->getSlug() ]));
             }
         }
@@ -168,8 +166,10 @@ class EventController extends Controller
 
     /**
      * @Cache(expires="+1 minutes", maxage="60", smaxage="60", public="true")
+     *
      * @param $max
      * @param $offset
+     *
      * @return array
      * @Template()
      */

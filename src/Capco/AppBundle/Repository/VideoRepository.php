@@ -3,20 +3,19 @@
 namespace Capco\AppBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
-use Doctrine\ORM\QueryBuilder;
 
 /**
- * VideoRepository
+ * VideoRepository.
  */
 class VideoRepository extends EntityRepository
 {
     /**
-     * Get videos
+     * Get videos.
+     *
      * @return array
      */
     public function getAll()
     {
-
         $qb = $this->getIsEnabledQueryBuilder()
             ->addSelect('a, m')
             ->leftJoin('v.Author', 'a')
@@ -25,13 +24,14 @@ class VideoRepository extends EntityRepository
         ;
 
         return $query = $qb->getQuery()->getResult();
-
     }
 
     /**
-     * Get last videos
+     * Get last videos.
+     *
      * @param int $limit
      * @param int $offset
+     *
      * @return mixed
      */
     public function getLast($limit = 1, $offset = 0)

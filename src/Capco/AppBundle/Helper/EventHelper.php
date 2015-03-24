@@ -8,7 +8,6 @@ use Capco\UserBundle\Entity\User;
 
 class EventHelper
 {
-
     public function isRegistrationPossible(Event $event)
     {
         return $event->getEndAt() > new \DateTime() && $event->isRegistrationEnable() && $event->getLink() == null;

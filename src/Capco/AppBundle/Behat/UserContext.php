@@ -2,8 +2,6 @@
 
 namespace Capco\AppBundle\Behat;
 
-use Behat\Gherkin\Node\TableNode;
-
 use Capco\AppBundle\Entity\EventRegistration;
 
 class UserContext extends DefaultContext
@@ -32,14 +30,12 @@ class UserContext extends DefaultContext
         $this->logInWith('user@test.com', 'user');
     }
 
-
     private function logInWith($email, $pwd)
     {
         $this->navigationContext->iVisitedPage('LoginPage');
         $this->fillField('_username', $email);
         $this->fillField('_password', $pwd);
         $this->pressButton('Se connecter');
-
     }
 
     /**
@@ -57,5 +53,4 @@ class UserContext extends DefaultContext
         $this->getEntityManager()->persist($registration);
         $this->getEntityManager()->flush();
     }
-
 }

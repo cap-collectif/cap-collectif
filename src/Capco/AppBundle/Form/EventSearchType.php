@@ -12,14 +12,14 @@ class EventSearchType extends AbstractType
 {
     private $toggleManager;
 
-    function __construct(Manager $toggleManager)
+    public function __construct(Manager $toggleManager)
     {
         $this->toggleManager = $toggleManager;
     }
 
     /**
      * @param FormBuilderInterface $builder
-     * @param array $options
+     * @param array                $options
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -48,7 +48,7 @@ class EventSearchType extends AbstractType
                                 ->setParameter('enabled', true);
                         },
                         'empty_value' => 'event.searchform.all_themes',
-                        'attr' => array('onchange' => 'this.form.submit()')
+                        'attr' => array('onchange' => 'this.form.submit()'),
                     )
                 );
         }
@@ -65,7 +65,7 @@ class EventSearchType extends AbstractType
                     ->setParameter('enabled', true);
             },
             'empty_value' => 'event.searchform.all_consultations',
-            'attr' => array('onchange' => 'this.form.submit()')
+            'attr' => array('onchange' => 'this.form.submit()'),
         ));
     }
 

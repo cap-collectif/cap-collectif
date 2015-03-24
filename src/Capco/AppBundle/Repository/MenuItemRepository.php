@@ -4,11 +4,10 @@ namespace Capco\AppBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
 use Capco\AppBundle\Entity\Menu;
-use Capco\AppBundle\Entity\MenuItem;
 use Doctrine\ORM\QueryBuilder;
 
 /**
- * MenuItemRepository
+ * MenuItemRepository.
  */
 class MenuItemRepository extends EntityRepository
 {
@@ -54,6 +53,7 @@ class MenuItemRepository extends EntityRepository
         $qb->leftJoin('i.Page', 'page')
             ->andWhere('(page.id IS NULL AND i.isEnabled = :isEnabled) OR (page.id IS NOT NULL AND page.isEnabled = :isEnabled)')
             ->setParameter('isEnabled', true);
+
         return $qb;
     }
 }

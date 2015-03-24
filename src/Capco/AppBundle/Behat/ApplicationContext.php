@@ -2,9 +2,6 @@
 
 namespace Capco\AppBundle\Behat;
 
-
-use Behat\Mink\Exception\Exception;
-use SensioLabs\Behat\PageObjectExtension\PageObject\Exception\ElementNotFoundException;
 use Capco\AppBundle\Toggle\Manager;
 
 class ApplicationContext extends UserContext
@@ -34,7 +31,6 @@ class ApplicationContext extends UserContext
         $this->getService('capco.toggle.manager')->deactivateAll();
     }
 
-
     /**
      * @Given all features are enabled
      */
@@ -57,7 +53,6 @@ class ApplicationContext extends UserContext
     public function iSubmitAnArgument($type, $text)
     {
         $this->navigationContext->getPage('opinionPage')->submitArgument($type, $text);
-
     }
 
     /**
@@ -100,5 +95,4 @@ class ApplicationContext extends UserContext
         $time = intval($seconds * 1000);
         $this->getSession()->wait($time);
     }
-
 }

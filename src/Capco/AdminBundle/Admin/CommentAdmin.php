@@ -7,15 +7,12 @@ use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Show\ShowMapper;
-use Sonata\AdminBundle\Route\RouteCollection;
-
-use Capco\AppBundle\Entity\AbstractComment;
 
 class CommentAdmin extends Admin
 {
     protected $datagridValues = array(
         '_sort_order' => 'ASC',
-        '_sort_by' => 'updatedAt'
+        '_sort_by' => 'updatedAt',
     );
 
     /**
@@ -88,7 +85,7 @@ class CommentAdmin extends Admin
                     'show' => array(),
                     'edit' => array(),
                     'delete' => array(),
-                )
+                ),
             ))
         ;
     }
@@ -131,7 +128,6 @@ class CommentAdmin extends Admin
             ;
         }
 
-
         $showMapper
             ->add('voteCount', null, array(
                 'label' => 'admin.fields.comment.vote_count',
@@ -160,7 +156,6 @@ class CommentAdmin extends Admin
                 ))
             ;
         }
-
     }
 
     /**
@@ -173,11 +168,11 @@ class CommentAdmin extends Admin
         $formMapper
             ->add('body', null, array(
                 'label' => 'admin.fields.comment.body',
-                'attr' => array('rows' => 8)
+                'attr' => array('rows' => 8),
             ))
             ->add('Author', null, array(
                 'label' => 'admin.fields.comment.author',
-                'help' => 'admin.help.comment.author'
+                'help' => 'admin.help.comment.author',
             ))
             ->add('authorName', null, array(
                 'label' => 'admin.fields.comment.author_name',
@@ -197,6 +192,5 @@ class CommentAdmin extends Admin
                 'label' => 'admin.fields.comment.trashed_reason',
             ))
         ;
-
     }
 }

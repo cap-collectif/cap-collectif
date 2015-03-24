@@ -5,14 +5,11 @@ namespace Capco\AppBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Gedmo\Mapping\Annotation as Gedmo;
-
-use Capco\AppBundle\Entity\Event;
 use Capco\UserBundle\Entity\User;
-
 use Capco\AppBundle\Validator\Constraints as CapcoAssert;
 
 /**
- * Class EventRegistration
+ * Class EventRegistration.
  *
  * @CapcoAssert\HasUnlistedEmail()
  * @CapcoAssert\HasAnonymousOrUser()
@@ -69,7 +66,7 @@ class EventRegistration
     }
 
     /**
-     * Get id
+     * Get id.
      *
      * @return integer
      */
@@ -96,21 +93,25 @@ class EventRegistration
 
     /**
      * @param $event
+     *
      * @return $this
      */
     public function setEvent(Event $event)
     {
         $this->event = $event;
+
         return $this;
     }
 
     /**
      * @param $user
+     *
      * @return $this
      */
     public function setUser(User $user = null)
     {
         $this->user = $user;
+
         return $this;
     }
 

@@ -5,12 +5,13 @@ namespace Capco\AppBundle\Repository;
 use Doctrine\ORM\EntityRepository;
 
 /**
- * SectionRepository
+ * SectionRepository.
  */
 class SectionRepository extends EntityRepository
 {
     /**
-     * Get all sections ordered by position
+     * Get all sections ordered by position.
+     *
      * @return mixed
      */
     public function getAllOrderedByPosition()
@@ -24,7 +25,8 @@ class SectionRepository extends EntityRepository
     }
 
     /**
-     * Get all enabled sections ordered by position
+     * Get all enabled sections ordered by position.
+     *
      * @return mixed
      */
     public function getEnabledOrderedByPosition()

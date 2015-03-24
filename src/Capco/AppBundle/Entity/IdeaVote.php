@@ -5,11 +5,10 @@ namespace Capco\AppBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Capco\AppBundle\Validator\Constraints as CapcoAssert;
-
 use Capco\AppBundle\Traits\ConfirmableTrait;
 
 /**
- * ArgumentVote
+ * ArgumentVote.
  *
  * @CapcoAssert\DidNotAlreadyVoteEmail()
  * @CapcoAssert\HasAnonymousOrUser()
@@ -65,7 +64,7 @@ class IdeaVote
     }
 
     /**
-     * Get id
+     * Get id.
      *
      * @return integer
      */
@@ -75,7 +74,7 @@ class IdeaVote
     }
 
     /**
-     * Get createdAt
+     * Get createdAt.
      *
      * @return \DateTime
      */
@@ -85,7 +84,7 @@ class IdeaVote
     }
 
     /**
-     * Get idea
+     * Get idea.
      *
      * @return \Capco\AppBundle\Entity\Idea
      */
@@ -95,7 +94,7 @@ class IdeaVote
     }
 
     /**
-     * set idea
+     * set idea.
      *
      * @param $Idea
      *
@@ -110,7 +109,7 @@ class IdeaVote
     }
 
     /**
-     * Set user
+     * Set user.
      *
      * @param \Capco\UserBundle\Entity\User $user
      *
@@ -124,7 +123,7 @@ class IdeaVote
     }
 
     /**
-     * Get user
+     * Get user.
      *
      * @return \Capco\UserBundle\Entity\User
      */

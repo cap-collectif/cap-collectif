@@ -7,7 +7,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * Reporting
+ * Reporting.
  *
  * @ORM\Table(name="reporting")
  * @ORM\Entity
@@ -123,13 +123,13 @@ class Reporting
      */
     private $isArchived = false;
 
-    function __construct()
+    public function __construct()
     {
-        $this->updatedAt = new \Datetime;
+        $this->updatedAt = new \Datetime();
     }
 
     /**
-     * Get id
+     * Get id.
      *
      * @return integer
      */
@@ -139,7 +139,7 @@ class Reporting
     }
 
     /**
-     * Get status
+     * Get status.
      *
      * @return integer
      */
@@ -149,9 +149,10 @@ class Reporting
     }
 
     /**
-     * Set status
+     * Set status.
      *
      * @param integer $status
+     *
      * @return Reporting
      */
     public function setStatus($status)
@@ -162,7 +163,7 @@ class Reporting
     }
 
     /**
-     * Get createdAt
+     * Get createdAt.
      *
      * @return \DateTime
      */
@@ -172,7 +173,7 @@ class Reporting
     }
 
     /**
-     * Get updatedAt
+     * Get updatedAt.
      *
      * @return \DateTime
      */
@@ -257,6 +258,7 @@ class Reporting
 
     /**
      * @param mixed $Argument
+     *
      * @return $this
      */
     public function setArgument($Argument)
@@ -317,7 +319,8 @@ class Reporting
 
     // ******************* Custom methods *************************
 
-    public function getRelatedObject(){
+    public function getRelatedObject()
+    {
         if ($this->Opinion != null) {
             return $this->Opinion;
         } elseif ($this->Source != null) {
@@ -329,7 +332,8 @@ class Reporting
         } elseif ($this->Comment != null) {
             return $this->Comment;
         }
-        return null;
+
+        return;
     }
 
     // ***************************** Lifecycle *******************************
@@ -358,8 +362,5 @@ class Reporting
         if ($this->Comment != null) {
             $this->Comment->removeReport($this);
         }
-
     }
-
-
 }

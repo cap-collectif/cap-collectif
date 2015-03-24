@@ -22,8 +22,8 @@ class Resolver
         try {
             $value = $this->repository->getValueByKeyIfEnabled($key);
         } catch (NoResultException $e) {
-            $this->logger->error($e->getMessage() . ' Tried to access undefined site parameter.', array(
-                'key' => $key
+            $this->logger->error($e->getMessage().' Tried to access undefined site parameter.', array(
+                'key' => $key,
             ));
         }
 

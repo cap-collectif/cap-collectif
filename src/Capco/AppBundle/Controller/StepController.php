@@ -5,25 +5,20 @@ namespace Capco\AppBundle\Controller;
 use Capco\AppBundle\Entity\Consultation;
 use Capco\AppBundle\Entity\Step;
 use Capco\AppBundle\Entity\Theme;
-
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Cache;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
-use Symfony\Component\Security\Core\Exception\AccessDeniedException;
-use Symfony\Component\Form\Form;
 
 class StepController extends Controller
 {
-
     /**
      * @Template("CapcoAppBundle:Step:show_all_in_nav.html.twig")
+     *
      * @param Consultation $consultation
-     * @param Step $currentStep
+     * @param Step         $currentStep
+     *
      * @return array
      */
     public function showAllInNavAction(Consultation $consultation, $currentStep = null)
@@ -32,7 +27,7 @@ class StepController extends Controller
         $steps = $em->getRepository('CapcoAppBundle:Step')->findBy(
             array(
                 'consultation' => $consultation,
-                'isEnabled' => true
+                'isEnabled' => true,
             ),
             array(
                 'position' => 'ASC',
@@ -53,8 +48,10 @@ class StepController extends Controller
      * @Template("CapcoAppBundle:Step:show.html.twig")
      * @ParamConverter("consultation", class="CapcoAppBundle:Consultation", options={"mapping": {"consultation_slug": "slug"}})
      * @ParamConverter("step", class="CapcoAppBundle:Step", options={"mapping": {"step_slug": "slug"}})
+     *
      * @param Consultation $consultation
-     * @param Step $step
+     * @param Step         $step
+     *
      * @return array
      */
     public function showStepAction(Consultation $consultation, Step $step)
@@ -76,5 +73,4 @@ class StepController extends Controller
             'currentStep' => $step,
         ];
     }
-
 }

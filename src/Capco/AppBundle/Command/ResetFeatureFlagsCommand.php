@@ -1,12 +1,10 @@
 <?php
 namespace Capco\AppBundle\Command;
 
-use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
-use Symfony\Component\Console\Input\ArrayInput;
 
 class ResetFeatureFlagsCommand extends ContainerAwareCommand
 {
@@ -23,6 +21,7 @@ class ResetFeatureFlagsCommand extends ContainerAwareCommand
     {
         if (!$input->getOption('force')) {
             $output->writeln('Please set the --force option to run this command');
+
             return;
         }
 
