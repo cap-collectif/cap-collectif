@@ -1,17 +1,5 @@
 <div class="thumbnail--custom  thumbnail--sidebar  block--bordered">
 
-    {% if consultation.video and consultation.Image %}
-        <a href="{{ consultation.video }}" class="play  fancybox" data-type="iframe">
-            {% thumbnail consultation.Image, 'img_video' with {'title': consultation.Image.name, 'alt': consultation.Image.name, 'class': 'img-responsive  center-block'} %}
-        </a>
-    {% elseif consultation.video and consultation.Image is null %}
-        <a href="{{ consultation.video }}" class="play  fancybox" data-type="iframe">
-            <div class="bg--default  bg--consultation"></div>
-        </a>
-    {% elseif consultation.video is null and consultation.Image %}
-        {% thumbnail consultation.Image, 'img_video' with {'title': consultation.Image.name, 'alt': consultation.Image.name, 'class': 'img-responsive  center-block'} %}
-    {% endif %}
-
     <div class="box">
         {% if null != consultation.body %}
             <h2 class="h4">{{ 'consultation.show.meta.intro.title'|trans({}, 'CapcoAppBundle') }}</h2>
