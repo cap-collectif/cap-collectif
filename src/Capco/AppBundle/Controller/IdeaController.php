@@ -186,7 +186,7 @@ class IdeaController extends Controller
 
             if ($form->isValid()) {
                 $em = $this->getDoctrine()->getManager();
-                $idea->resetIdeaVotes();
+                $idea->resetVotes();
                 $em->persist($idea);
                 $em->flush();
 

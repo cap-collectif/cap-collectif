@@ -481,7 +481,7 @@ class Idea implements CommentableInterface
 
     public function resetVotes() {
         foreach ($this->votes as $vote) {
-            $this->removeVote($vote);
+            $vote->setConfirmed(false);
         }
     }
 
