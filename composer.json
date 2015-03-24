@@ -15,7 +15,6 @@
         "doctrine/orm": "~2.2,>=2.2.3",
         "doctrine/doctrine-bundle": "~1.2",
         "twig/extensions": "~1.0",
-        "symfony/assetic-bundle": "~2.3",
         "symfony/swiftmailer-bundle": "~2.3",
         "symfony/monolog-bundle": "~2.4",
         "sensio/distribution-bundle": "~3.0",
@@ -47,6 +46,12 @@
 
         "doctrine/doctrine-migrations-bundle": "~2.1@dev",
         "willdurand/geocoder": "~3.0@dev",
+        "tilleuls/ckeditor-sonata-media-bundle": "~2.3@dev",
+        "egeloen/ckeditor-bundle": "~3.0@dev",
+        "mewesk/twig-excel-bundle": "~1.0@dev"
+    },
+    "require-dev": {
+        "sensio/generator-bundle": "~2.3",
         "behat/behat": "~3.0.6",
         "behat/symfony2-extension": "~2.0@dev",
         "behat/mink-extension": "~2.0@dev",
@@ -55,13 +60,7 @@
         "behat/mink-browserkit-driver": "@dev",
         "sensiolabs/behat-page-object-extension": "~2.0",
         "ocramius/proxy-manager": "~0.5",
-        "tilleuls/ckeditor-sonata-media-bundle": "~2.3@dev",
-        "egeloen/ckeditor-bundle": "~3.0@dev",
-        "mewesk/twig-excel-bundle": "~1.0@dev",
-        "bossa/phpspec2-expect": "*"
-    },
-    "require-dev": {
-        "sensio/generator-bundle": "~2.3",
+        "bossa/phpspec2-expect": "*",
         "phpspec/phpspec": "~2.0"
     },
     "scripts": {
