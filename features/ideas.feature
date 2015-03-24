@@ -15,7 +15,7 @@ Scenario: Can see ideas in not empty theme
   And I visited "themes page"
   When I follow "Immobilier"
   Then I should not see "Il n'y a aucune idée pour le moment."
-  And I should see 10 ".media--macro" elements
+  And I should see 2 ".media--macro" elements
 
 Scenario: Can create an idea when logged in
   Given feature "themes" is enabled
@@ -25,6 +25,7 @@ Scenario: Can create an idea when logged in
   And I fill in the following:
     | capco_appbundle_idea_title     | Titre                     |
     | capco_appbundle_idea_body      | Description de mon idée   |
+    | capco_appbundle_idea_object    | Objectif de mon idée      |
   And I select "Immobilier" from "capco_appbundle_idea_Theme"
   And I press "Publier"
   Then I should see "Merci ! Votre idée a bien été enregistrée."
