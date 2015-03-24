@@ -28,16 +28,6 @@ class IdeaType extends AbstractType
             ->add('title', 'text', array(
                 'label' => 'idea.form.title',
             ))
-            ->add('body', 'ckeditor', array(
-                'label' => 'idea.form.body',
-                'config_name' => 'user_editor',
-            ))
-            ->add('media', 'sonata_media_type', array(
-                'label' => 'idea.form.media',
-                'provider' => 'sonata.media.provider.image',
-                'context' => 'default',
-                'required' => false,
-            ))
         ;
 
         if ($this->toggleManager->isActive('themes')) {
@@ -54,6 +44,28 @@ class IdeaType extends AbstractType
                 }
             ));
         }
+
+        $builder
+            ->add('body', 'ckeditor', array(
+                'label' => 'idea.form.body',
+                'config_name' => 'user_editor',
+            ))
+            ->add('object', 'ckeditor', array(
+                'label' => 'idea.form.object',
+                'config_name' => 'user_editor',
+            ))
+            ->add('url', 'url', array(
+                'label' => 'idea.form.url',
+                'required' => false,
+                'default_protocol' => 'http',
+            ))
+            ->add('media', 'sonata_media_type', array(
+                'label' => 'idea.form.media',
+                'provider' => 'sonata.media.provider.image',
+                'context' => 'default',
+                'required' => false,
+            ))
+        ;
     }
     
     /**

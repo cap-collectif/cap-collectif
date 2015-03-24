@@ -108,6 +108,9 @@ idea:
       title: Corbeille des idées
     none: Aucune idée dans la corbeille
   show:
+    body: Description
+    object: Objectif
+    info: Informations complémentaires
     voted: Vous avez voté
     votes: "]-Inf, 0] Aucun vote | {1} 1 vote | ]1,Inf[ %count% votes"
     comments: "]-Inf, 0] Aucun commentaire | {1} 1 commentaire | ]1,Inf[ %count% commentaires"
@@ -135,8 +138,7 @@ idea:
     cancel: Annuler
     submit: Modifier
     title: Modifier une idée
-    text: Vous éditez une idée déjà existante, ne le changez pas trop pour éviter aux membres de ne pas comprendre.
-    alert: Attention ! En modifiant votre idée, vous perdrez les votes qui lui sont associés.
+    text: Attention ! En modifiant votre idée, vous perdrez tous les votes qui lui sont associés.
     success: Merci ! Votre idée a bien été modifée.
     error: Erreur, votre idée n'a pas pu être modifée.
   delete:
@@ -150,7 +152,9 @@ idea:
     error: Erreur, impossible de supprimer l'idée.
   form:
     title: Titre
-    body: Contenu
+    body: Description
+    object: Objectif
+    url: Site web
     theme: Thème
     media: Image
   vote:

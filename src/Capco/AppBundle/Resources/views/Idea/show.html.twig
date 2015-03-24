@@ -48,8 +48,23 @@
                 {% endif %}
 
                 <div class="block">
-                    {{ idea.body|raw }}
+                    <h2 class="h2">{{ 'idea.show.body' | trans({}, 'CapcoAppBundle') }}</h2>
+                    {{ idea.body | raw }}
                 </div>
+
+                {% if idea.object is not null %}
+                    <div class="block">
+                        <h2 class="h2">{{ 'idea.show.object' | trans({}, 'CapcoAppBundle') }}</h2>
+                        {{ idea.object | raw }}
+                    </div>
+                {% endif %}
+
+                {% if idea.url is not null %}
+                    <div class="block">
+                        <h2 class="h2">{{ 'idea.show.info' | trans({}, 'CapcoAppBundle') }}</h2>
+                        <p><a class="external-link" href="{{ idea.url }}">{{ idea.url }}</a></p>
+                    </div>
+                {% endif %}
 
                 <div class="block">
                     {% if idea.isTrashed %}

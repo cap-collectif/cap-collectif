@@ -66,6 +66,22 @@ class Idea implements CommentableInterface
     private $body;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="object", type="text", nullable=true)
+     * @Assert\NotBlank()
+     */
+    private $object;
+
+    /**
+     * @var url
+     *
+     * @ORM\Column(name="url", type="string", nullable=true)
+     * @Assert\Url()
+     */
+    private $url;
+
+    /**
      * @var boolean
      *
      * @ORM\Column(name="is_enabled", type="boolean")
@@ -257,6 +273,38 @@ class Idea implements CommentableInterface
     public function getBody()
     {
         return $this->body;
+    }
+
+    /**
+     * @return string
+     */
+    public function getObject()
+    {
+        return $this->object;
+    }
+
+    /**
+     * @param string $object
+     */
+    public function setObject($object)
+    {
+        $this->object = $object;
+    }
+
+    /**
+     * @return url
+     */
+    public function getUrl()
+    {
+        return $this->url;
+    }
+
+    /**
+     * @param url $url
+     */
+    public function setUrl($url)
+    {
+        $this->url = $url;
     }
 
     /**
