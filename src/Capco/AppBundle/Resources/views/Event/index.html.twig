@@ -39,11 +39,13 @@
             <div class="row">
                 {{ form_start(form) }}
                 {{ form_errors(form) }}
-                <div class="col-xs-12  col-sm-3  col-md-3  col-lg-4  filter__down">
-                    {{ form_label(form.theme, null, {'label_attr':{"class":"control-label  sr-only"} }) }}
-                    {{ form_errors(form.theme) }}
-                    {{ form_widget(form.theme, {'attr':{"class":"form-control"} }) }}
-                </div>
+                {% if is_feature_enabled('themes')%}
+                    <div class="col-xs-12  col-sm-3  col-md-3  col-lg-4  filter__down">
+                        {{ form_label(form.theme, null, {'label_attr':{"class":"control-label  sr-only"} }) }}
+                        {{ form_errors(form.theme) }}
+                        {{ form_widget(form.theme, {'attr':{"class":"form-control"} }) }}
+                    </div>
+                {% endif %}
                 <div class="col-xs-12  col-sm-3  col-md-3  col-lg-3 filter__down">
                     {{ form_label(form.consultation, null, {'label_attr':{"class":"control-label  sr-only"} }) }}
                     {{ form_errors(form.consultation) }}

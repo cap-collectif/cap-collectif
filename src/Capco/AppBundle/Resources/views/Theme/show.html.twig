@@ -38,19 +38,16 @@
         {% endif %}
     </div>
 
-    {% if theme.Consultations | length > 0 %}
-        <div class="container">
-            <h2 class="h2">{{ 'theme.show.consultations.title'|trans({}, 'CapcoAppBundle') }}</h2>
-            {% include 'CapcoAppBundle:Theme:lastConsultations.html.twig' with {'consultations': theme.Consultations} %}
-        </div>
-    {% endif %}
 
-    {% if theme.Ideas | length > 0 %}
+    <div class="container">
+        <h2 class="h2">{{ 'theme.show.consultations.title'|trans({}, 'CapcoAppBundle') }}</h2>
+        {% include 'CapcoAppBundle:Theme:lastConsultations.html.twig' with {'consultations': theme.Consultations} %}
+    </div>
+
     <div class="container">
         <h2 class="h2">{{ 'theme.show.ideas.title'|trans({}, 'CapcoAppBundle') }} <a class="pull-right  btn  btn-primary" href="{{ path('app_idea_create') }}">{{ 'idea.create.button'|trans({}, 'CapcoAppBundle') }}</a></h2>
         {%  include 'CapcoAppBundle:Theme:lastIdeas.html.twig' with {'ideas': theme.Ideas} %}
     </div>
-    {% endif %}
 
     {%  include 'CapcoAppBundle:Theme:appendices.html.twig' %}
 
