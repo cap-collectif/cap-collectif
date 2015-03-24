@@ -10,10 +10,12 @@ body {
 
 .main {
   background-color: $main-bg;
+  overflow: hidden;
 
-  & > .container {
+  .container {
     padding-top: 30px;
     padding-bottom: 30px;
+    z-index: 0;
 
     @media (max-width: $screen-xs-max) {
       padding-bottom: 15px;
@@ -22,8 +24,23 @@ body {
   }
 
   .container--alt {
-    border-top: 1px solid $border;
+    position: relative;
+  }
+
+  .container--alt:after {
+    background-color: $alt-section;
+    content: '';
+    display: block;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    margin-left: -9999rem;
+    margin-right: -9999rem;
+    z-index: -1;
     border-bottom: 1px solid $border;
+    border-top: 1px solid $border;
   }
 }
 

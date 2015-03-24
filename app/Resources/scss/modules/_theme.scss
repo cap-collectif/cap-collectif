@@ -2,16 +2,14 @@
 $THEME
 ================================================================*/
 .bg--theme {
-  height: 150px;
-  width: 225px;
+  height: 240px;
+  width: 360px;
   padding-top: 20px;
 }
 
 .theme {
   background-color: $white;
   text-align: center;
-  border: 1px solid #ddd;
-  padding: 20px 15px;
 
   &:hover {
     background-color: $light-gray;

@@ -46,26 +46,32 @@
 
     {% for section in sections %}
 
+        {% set alt = false %}
+        {% if loop.index is odd %}
+            {% set alt = true %}
+        {% endif %}
+
         {% if section.type == 'introduction' %}
-            {% include '@CapcoApp/Homepage/intro.html.twig' with {'section': section} %}
+            {% include '@CapcoApp/Homepage/intro.html.twig' with {'section': section, 'alt': alt} %}
         {% elseif section.type == 'videos' %}
-            {{ render(controller('CapcoAppBundle:Homepage:lastVideos', {'max': section.nbObjects, 'offset': 0, 'section': section})) }}
+            {{ render(controller('CapcoAppBundle:Homepage:lastVideos', {'max': section.nbObjects, 'offset': 0, 'section': section, 'alt': alt})) }}
         {% elseif section.type == 'consultations' %}
-            {{ render(controller('CapcoAppBundle:Homepage:lastConsultations', {'max': section.nbObjects, 'offset': 0, 'section': section})) }}
+            {{ render(controller('CapcoAppBundle:Homepage:lastConsultations', {'max': section.nbObjects, 'offset': 0, 'section': section, 'alt': alt})) }}
         {% elseif section.type == 'themes' %}
-            {{ render(controller('CapcoAppBundle:Homepage:lastThemes', {'max': section.nbObjects, 'offset': 0, 'section': section})) }}
+            {{ render(controller('CapcoAppBundle:Homepage:lastThemes', {'max': section.nbObjects, 'offset': 0, 'section': section, 'alt': alt})) }}
         {% elseif section.type == 'ideas' %}
-            {{ render(controller('CapcoAppBundle:Homepage:lastIdeas', {'max': section.nbObjects, 'offset': 0, 'section': section})) }}
+            {{ render(controller('CapcoAppBundle:Homepage:lastIdeas', {'max': section.nbObjects, 'offset': 0, 'section': section, 'alt': alt})) }}
         {% elseif section.type == 'news' %}
-            {{ render(controller('CapcoAppBundle:Homepage:lastPosts', {'max': section.nbObjects, 'offset': 0, 'section': section})) }}
+            {{ render(controller('CapcoAppBundle:Homepage:lastPosts', {'max': section.nbObjects, 'offset': 0, 'section': section, 'alt': alt})) }}
         {% elseif section.type == 'events' %}
-            {{ render(controller('CapcoAppBundle:Homepage:lastEvents', {'max': section.nbObjects, 'offset': 0, 'section': section})) }}
+            {{ render(controller('CapcoAppBundle:Homepage:lastEvents', {'max': section.nbObjects, 'offset': 0, 'section': section, 'alt': alt})) }}
         {% elseif section.type == 'newsletter' %}
-            {% include '@CapcoApp/Homepage/newsletter.html.twig' with {'section': section} %}
+            {% include '@CapcoApp/Homepage/newsletter.html.twig' with {'section': section, 'alt': alt} %}
         {% elseif section.type == 'social-networks' %}
-            {{ render(controller('CapcoAppBundle:Homepage:socialNetworks', {'section': section})) }}
+            {{ render(controller('CapcoAppBundle:Homepage:socialNetworks', {'section': section, 'alt': alt})) }}
         {% elseif section.type == 'custom' %}
-            {% include '@CapcoApp/Homepage/custom_section.html.twig' with {'section': section} %}
+            {% include '@CapcoApp/Homepage/custom_section.html.twig' with {'section': section, 'alt': alt} %}
+        {% elseif section.type == 'figures' %}
         {% endif %}
 
     {% endfor %}

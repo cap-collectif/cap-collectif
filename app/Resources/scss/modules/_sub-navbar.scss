@@ -21,18 +21,8 @@
 
       &.active a,
       &.active:hover a {
-        background-color: $brand-primary;
-
-        .navbar__step-nb,
-        .navbar__step-title,
-        .excerpt {
-          color: $white;
-        }
-
-        .label {
-          color: $brand-primary;
-          background-color: $white;
-        }
+        border-left: 5px solid $brand-primary;
+        background-color: $light-gray;
       }
 
       &:hover a{

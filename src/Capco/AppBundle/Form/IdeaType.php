@@ -58,7 +58,6 @@ class IdeaType extends AbstractType
                 'label' => 'idea.form.url',
                 'required' => false,
                 'default_protocol' => 'http',
-                'attr' => ['placeholder' => 'http://',],
             ))
             ->add('media', 'sonata_media_type', array(
                 'label' => 'idea.form.media',
