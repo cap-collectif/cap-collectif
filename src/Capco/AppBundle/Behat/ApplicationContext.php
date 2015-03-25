@@ -8,6 +8,12 @@ class ApplicationContext extends UserContext
 {
     /**
      * @BeforeSuite
+     */
+    public static function reinitDatabase()
+    {
+        exec('app/console capco:reinit --force -e test');
+    }
+    /**
      * @AfterScenario @database
      */
     public static function databaseContainsFixtures()

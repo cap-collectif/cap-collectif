@@ -23,3 +23,8 @@ Feature: Login
     When I follow "Bonjour user"
     And I follow "Déconnexion"
     Then I should see "Connexion"
+
+  Scenario: Login as a previous drupal user
+    Given I am logged in as drupal
+    And I visited "home page"
+    Then I should see "Bonjour drupal"
