@@ -27,11 +27,11 @@
         {% endif %}
         {% if theme.status != null %}
             <p class="theme__status">{{ 'theme.show.status.title'|trans({}, 'CapcoAppBundle') }}
-                {% if theme.status == statuses.opened %}
+                {% if theme.isOpened %}
                     <span class="label label-success">{{ 'theme.show.status.opened'|trans({}, 'CapcoAppBundle') }}</span>
-                {% elseif theme.status == statuses.closed %}
+                {% elseif theme.isClosed %}
                     <span class="label label-danger">{{ 'theme.show.status.closed'|trans({}, 'CapcoAppBundle') }}</span>
-                {% elseif theme.status == statuses.future %}
+                {% elseif theme.isFuture %}
                     <span class="label label-info">{{ 'theme.show.status.future'|trans({}, 'CapcoAppBundle') }}</span>
                 {% endif %}
             </p>

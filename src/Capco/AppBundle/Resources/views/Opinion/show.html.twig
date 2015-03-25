@@ -41,35 +41,7 @@
                             <a class="neutral-hover  pull-left  h4" href="{% if opinion.isTrashed %}{{ path('app_consultation_show_trashed', {'consultationSlug': consultation.slug,}) }}{% else %}{{ path('app_consultation_show_opinions', {'consultationSlug': consultation.slug, 'opinionTypeSlug': opinionType.slug}) }}{% endif %}"><i class="cap cap-arrow-1"></i><span class="hidden-xs  hidden-sm"> {{ 'opinion.show.back'|trans({}, 'CapcoAppBundle') }}</span></a>
                             <h2 class="h4  opinion__header__title">{{ opinion.opinionType.slug|capitalize }} </h2>
                         </div>
-                        <div class="opinion__body  box">
-                            {%  set avatar = opinion.Author.Media|capco_default_avatar %}
-                            {% if avatar != null %}
-                                <a class="pull-left" href="{{ path('capco_user_profile_show_all', {'slug': opinion.Author.slug}) }}">
-                                    {% thumbnail avatar, 'avatar' with {'title': opinion.Author.username, 'alt': opinion.Author.username, 'class': 'img-circle  pull-left'} %}
-                                </a>
-                            {% else %}
-                                <a class="pull-left" href="{{ path('capco_user_profile_show_all', {'slug': opinion.Author.slug}) }}">
-                                    <svg version="1.1" id="Calque_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="45px" height="45px" viewBox="0 0 200 200" enable-background="new 0 0 200 200" xml:space="preserve"><circle fill="{{ capco_site_color_value('color.section.bg')  }}" cx="100" cy="100" r="97.617"/><g><path fill="none" stroke="#FFFFFF" stroke-width="3" stroke-linejoin="round" stroke-miterlimit="10" d="M100,160.011h68.011c0,0,0-12.163-5.916-23.993c-4.41-8.819-22.024-14.039-45.683-22.908V95.367c0,0,7.239-6.661,7.239-18.49c2.959,0,5.916-11.826,0-14.785c0-1.754,7.927-16.569,5.916-26.613c-2.957-14.786-44.353-14.786-47.309-2.955c-17.742,0-5.915,27.169-5.915,29.568c-5.913,2.959-2.957,14.785,0,14.785c0,11.829,7.238,17.473,7.238,17.473v18.759c-23.655,8.875-41.273,14.089-45.682,22.908c-5.911,11.83-5.911,23.993-5.911,23.993H100z"/></g></svg>
-                                </a>
-                            {% endif %}
-                            <div class="opinion__data">
-                                <p class="opinion__user  h5"><a href="{{ path('capco_user_profile_show_all', {'slug': opinion.Author.slug}) }}">{{ opinion.Author.username }}</a> <span class="pull-right  excerpt">{{ opinion.createdAt | localizeddate('medium', 'none', app.request.locale) }}</span></p>
-                                <h3 class="opinion__title">{% if opinion.isTrashed %}<span class="label label-default" style="position: static">{{ 'opinion.show.trashed.label'|trans({}, 'CapcoAppBundle') }}</span> {% endif %}{{ opinion.title }}</h3>
-                                <p class="opinion__votes  excerpt h5">
-                                    {% transchoice nbVotes with {'%count%': nbVotes} from 'CapcoAppBundle' %}
-                                    consultation.show.votes
-                                    {% endtranschoice %}
-                                    •
-                                    {% transchoice nbArguments with {'%count%': nbArguments} from 'CapcoAppBundle' %}
-                                    consultation.show.arguments
-                                    {% endtranschoice %}
-                                    •
-                                    {% transchoice nbSources with {'%count%': nbSources} from 'CapcoAppBundle' %}
-                                    consultation.show.sources
-                                    {% endtranschoice %}
-                                </p>
-                            </div>
-                        </div>
+                        {% include 'CapcoAppBundle:Opinion:opinion_body.html.twig' %}
                     </div>
 
                     <div class="opinion__description">

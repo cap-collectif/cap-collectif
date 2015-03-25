@@ -15,7 +15,7 @@ class StepResolver
         $this->router = $router;
     }
 
-    public function getLink(Step $step, $absolute = false)
+    public function getLink(Step $step = null, $absolute = false)
     {
         if (null != $step) {
             if ($step->isConsultationStep()) {

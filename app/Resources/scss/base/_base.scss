@@ -23,12 +23,11 @@ body {
     }
   }
 
-  .container--alt {
+  .container--bg {
     position: relative;
   }
 
-  .container--alt:after {
-    background-color: $alt-section;
+  .container--bg:after {
     content: '';
     display: block;
     position: absolute;
@@ -36,12 +35,33 @@ body {
     bottom: 0;
     right: 0;
     left: 0;
-    margin-left: -9999rem;
-    margin-right: -9999rem;
+    margin-left: -200%;
+    margin-right: -200%;
     z-index: -1;
-    border-bottom: 1px solid $border;
-    border-top: 1px solid $border;
   }
+
+  .container--alt {
+    @extend .container--bg;
+    color: $black;
+    &:after {
+      background-color: $alt-section;
+      border-bottom: 1px solid $border;
+      border-top: 1px solid $border;
+    }
+  }
+
+  .container--header2 {
+    @extend .container--bg;
+    color: $white !important;
+    &:after {
+      background-color: $custom-jumbotron-2 !important;
+      border-top: 0 !important;
+    }
+  }
+}
+
+body:not(.edit-page) .main .container:nth-of-type(odd) {
+  @extend .container--alt;
 }
 
 .profile-page .main {
@@ -234,11 +254,45 @@ a.excerpt {
   @include triangle($black, 'left', $custom-video-play);
 }
 
+.bg__wrapper {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  display: inline-block;
+  width: 100%;
+  position: relative;
+
+  // ratio 2/3
+  &:after {
+    padding-top: 66.67%;
+    display: block;
+    content: '';
+  }
+}
+
+@media (max-width: $screen-xs-max) {
+  .bg__wrapper:after {
+    padding-top: 0;
+  }
+}
+
 .bg--default {
   background-color: $brand-color-2;
-  display: block;
-  position: relative;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
 }
+
+@media (max-width: $screen-xs-max) {
+  .bg--default {
+    position: static;
+  }
+}
+
 
 // Icon circled
 .icon--circled {

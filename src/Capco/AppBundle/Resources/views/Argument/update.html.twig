@@ -1,3 +1,4 @@
+{% set page_class = "edit-page" %}
 {% extends '@CapcoApp/base.html.twig' %}
 
 {% block canonical_link %}{{ url('app_consultation_edit_argument', {'consultationSlug': consultation.slug, 'opinionTypeSlug': opinionType.slug, 'opinionSlug': opinion.slug, 'argumentId': argument.id}) }}{% endblock %}

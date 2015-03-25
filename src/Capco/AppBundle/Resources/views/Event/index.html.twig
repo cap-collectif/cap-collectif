@@ -28,12 +28,15 @@
 {% endblock %}
 
 {% block body %}
-    <div class="container">
 
-        {% set content_body = capco_site_parameter_value('events.content.body') %}
-        {% if null != content_body %}
-            <div class="block">{{ content_body|raw }}</div>
-        {% endif %}
+    {% set content_body = capco_site_parameter_value('events.content.body') %}
+    {% if null != content_body %}
+        <div class="container">
+            {{ content_body|raw }}
+        </div>
+    {% endif %}
+
+    <div class="container">
 
         <div class="filter  block">
             <div class="row">
@@ -85,7 +88,7 @@
         {% endif %}
     </div>
 
-    <div class="appendices__container">
+    <div class="container appendices__container">
         <div class="row">
             <div class="col-xs-12 col-md-4 col-md-offset-4 text-center  appendices__item  box">
                 <h4 class="h4">{{ 'event.archived'|trans({}, 'CapcoAppBundle') }}</h4>

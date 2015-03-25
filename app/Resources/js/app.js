@@ -14,20 +14,23 @@ App.module = function ($) {
             $($el).height('auto');
             topPosition = $el.position().top;
 
-            if (currentRowStart != topPosition) {
-                for (currentDiv = 0 ; currentDiv < rowDivs.length ; currentDiv++) {
+            if ($(window).width() > 767) {
+
+                if (currentRowStart != topPosition) {
+                    for (currentDiv = 0; currentDiv < rowDivs.length; currentDiv++) {
+                        rowDivs[currentDiv].height(currentTallest);
+                    }
+                    rowDivs.length = 0; // empty the array
+                    currentRowStart = topPosition;
+                    currentTallest = $el.height();
+                    rowDivs.push($el);
+                } else {
+                    rowDivs.push($el);
+                    currentTallest = (currentTallest < $el.height()) ? ($el.height()) : (currentTallest);
+                }
+                for (currentDiv = 0; currentDiv < rowDivs.length; currentDiv++) {
                     rowDivs[currentDiv].height(currentTallest);
                 }
-                rowDivs.length = 0; // empty the array
-                currentRowStart = topPosition;
-                currentTallest = $el.height();
-                rowDivs.push($el);
-            } else {
-                rowDivs.push($el);
-                currentTallest = (currentTallest < $el.height()) ? ($el.height()) : (currentTallest);
-            }
-            for (currentDiv = 0 ; currentDiv < rowDivs.length ; currentDiv++) {
-                rowDivs[currentDiv].height(currentTallest);
             }
         });
 
