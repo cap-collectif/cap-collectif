@@ -3,8 +3,8 @@ Capco\AppBundle\Entity\Step:
         title: Collecte des avis
         isEnabled: true
         type: 1
-        startAt: <(new \DateTime('2015-01-25'))>
-        endAt: <(new \DateTime('2015-03-25'))>
+        startAt: <dateTimeBetween('-40 days', 'now')>
+        endAt: <dateTimeBetween('now', '+10 days')>
         position: 2
         consultation: @cs1
     step2:
