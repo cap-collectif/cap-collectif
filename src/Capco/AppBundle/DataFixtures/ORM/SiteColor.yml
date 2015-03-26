@@ -108,7 +108,7 @@ Capco\AppBundle\Entity\SiteColor:
     SiteColor22:
         keyname: color.section.bg
         title: Fond des sections
-        value: '#ebebeb'
+        value: '#f6f6f6'
         position: 2
     SiteColor23:
         keyname: color.section.text

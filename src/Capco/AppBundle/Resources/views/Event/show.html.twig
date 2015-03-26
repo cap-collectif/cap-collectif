@@ -16,8 +16,8 @@
 {% block body %}
     <div id="sidebar-container">
         <div class="row">
-            <div class="col-xs-12  {% if event|capco_event_registration_possible %}col-sm-9{% endif %}">
-                <div class="container">
+            <div class="col-xs-12  {% if event|capco_event_registration_possible and event.canContribute %}col-sm-9{% endif %}">
+                <div class="container  container--custom">
                     <h1 class="h1"> {{ event.title }}</h1>
                     <div class="media">
                         {%  set avatar = event.Author.Media|capco_default_avatar %}
@@ -54,7 +54,7 @@
                     </div>
                 </div>
 
-                <div class="container">
+                <div class="container  container--custom">
 
                     <ul class="event__meta  block">
                         <li class="excerpt"><i class="cap cap-calendar-1"></i>
@@ -112,7 +112,7 @@
                 </div>
 
                 {% if event.registrations|length > 0 %}
-                    <div class="container">
+                    <div class="container  container--custom">
                         <h2>{{ 'event_registration.listing.title'|trans({}, 'CapcoAppBundle') }}</h2>
                         {% set limit = 6 %}
                         {% include 'CapcoAppBundle:Event:event_registrations.html.twig' with {'event': event, 'limit': limit} only %}
@@ -144,7 +144,7 @@
                 {% endif %}
 
                 {% if capco_comment_can_add(event) or (capco_comment_can_show(event) and event.commentsCount > 0) %}
-                    <div class="container">
+                    <div class="container  container--custom">
                         {% if capco_comment_can_show(event) and event.commentsCount > 0 %}
                             {{ render(controller('CapcoAppBundle:Comment:showComments', {'object': event})) }}
                         {% endif %}
@@ -157,7 +157,7 @@
 
             </div>
 
-            {% if event|capco_event_registration_possible %}
+            {% if event.canContribute and event|capco_event_registration_possible %}
                 <div id="sidebar-overlay"></div>
                 <div class="col-xs-12  col-sm-3  sidebar" id="sidebar">
                     <div class="block block--bordered box sidebar-hideable  sidebar-hidden-small">
@@ -195,7 +195,7 @@
     <script type="text/javascript">
         $(window).on('load', function() {
             App.module.showMap('.map-canvas');
-            {% if event | capco_event_registration_possible %}
+            {% if event | capco_event_registration_possible and event.canContribute %}
                 App.module.makeSidebar({
                     sidebar: '#sidebar',
                     container: '#sidebar-container',

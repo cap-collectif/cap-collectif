@@ -9,12 +9,12 @@
 {% block jumbotron %}{% endblock %}
 
 {% block body %}
-    <div class="container">
+    <div class="container  container--custom">
         <h1><a href="{{ url('app_blog_show', {'slug': post.slug}) }}">{{ post.title | jolitypo() }}</a></h1>
         {% include 'CapcoAppBundle:Blog:_authors.html.twig' with {'authors': post.Authors, 'themes': post.themes, 'publishedAt': post.publishedAt} %}
     </div>
 
-    <div class="container">
+    <div class="container  container--custom">
 
         {%  if post.Media %}
             {% thumbnail post.Media, 'blockHeader' with {'title': post.Media.name, 'alt': post.Media.name, 'class': 'img-responsive'} %}
@@ -46,7 +46,7 @@
     </div>
 
     {% if capco_comment_can_add(post) or (capco_comment_can_show(post) and post.commentsCount > 0) %}
-        <div class="container">
+        <div class="container  container--custom">
             {% if capco_comment_can_show(post) and post.commentsCount > 0 %}
                 {{ render(controller('CapcoAppBundle:Comment:showComments', {'object': post})) }}
             {% endif %}

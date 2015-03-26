@@ -10,9 +10,11 @@
 {% endblock %}
 
 {% block body %}
-    <div class="container">
-
+    <div class="container  container--custom">
         {% include '@CapcoApp/Consultation/show_title.html.twig' %}
+    </div>
+
+    <div class="container  container--custom">
 
         {% if consultation.isClose %}
             <div class="alert alert-info alert-dismissible  block" role="alert">
@@ -61,7 +63,7 @@
                                 {% form_theme opinionVoteForm 'CapcoAppBundle:Form:opinion_vote.html.twig' %}
                                 {{ form_start(opinionVoteForm, {'attr': {'class': 'vote-form '} }) }}
                                 {{ form_errors(opinionVoteForm) }}
-                                {{ form_widget(opinionVoteForm.value, {'previousType': previousValue, 'typeStyles': opinionVoteStyles, 'voteCounts': opinionVoteCounts}) }}
+                                {{ form_widget(opinionVoteForm.value, {'previousType': previousValue, 'typeStyles': opinionVoteStyles}) }}
                                 {{ form_rest(opinionVoteForm) }}
                                 {{ form_end(opinionVoteForm) }}
 

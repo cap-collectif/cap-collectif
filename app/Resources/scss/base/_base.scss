@@ -60,7 +60,7 @@ body {
   }
 }
 
-body:not(.edit-page) .main .container:nth-of-type(odd) {
+.main .container--custom:nth-of-type(odd) {
   @extend .container--alt;
 }
 
