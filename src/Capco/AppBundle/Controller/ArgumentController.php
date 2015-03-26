@@ -15,6 +15,9 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Symfony\Component\Form\Form;
 
+use Capco\AppBundle\CapcoAppBundleEvents;
+use Capco\AppBundle\Event\AddContributionEvent;
+
 class ArgumentController extends Controller
 {
     /**
@@ -101,6 +104,11 @@ class ArgumentController extends Controller
                     $argumentVote->setArgument($argument);
                     $em->persist($argumentVote);
                     $em->flush();
+
+                    $this->get('event_dispatcher')->dispatch(
+                        CapcoAppBundleEvents::AFTER_CONTRIBUTION_ADDED,
+                        new AddContributionEvent($this->getUser())
+                    );
 
                     $this->get('session')->getFlashBag()->add('success', $this->get('translator')->trans('argument.vote.add_success'));
                 } else {

@@ -6,7 +6,8 @@
                   xmlns:gedmo="http://gediminasm.org/schemas/orm/doctrine-extensions-mapping">
 
     <entity name="Capco\UserBundle\Entity\User"
-            table="fos_user">
+            table="fos_user"
+            repository-class="Capco\UserBundle\Repository\UserRepository">
         <id name="id" column="id" type="integer">
             <generator strategy="AUTO" />
         </id>
@@ -48,6 +49,20 @@
 
         <field name="city" column="city" type="string" length="255" nullable="true" />
         <field name="encoder" column="encoder" type="string" length="255" nullable="true" />
+
+        <one-to-many field="opinions" target-entity="Capco\AppBundle\Entity\Opinion" mapped-by="Author" />
+        <one-to-many field="ideas" target-entity="Capco\AppBundle\Entity\Idea" mapped-by="Author" />
+        <one-to-many field="comments" target-entity="Capco\AppBundle\Entity\AbstractComment" mapped-by="Author" />
+        <one-to-many field="arguments" target-entity="Capco\AppBundle\Entity\Argument" mapped-by="Author" />
+        <one-to-many field="sources" target-entity="Capco\AppBundle\Entity\Source" mapped-by="Author" />
+
+        <field name="commentsCount" column="comments_count" type="integer" nullable="false" />
+        <field name="votesCount" column="votes_count" type="integer" nullable="false" />
+        <field name="ideasCount" column="ideas_count" type="integer" nullable="false" />
+        <field name="argumentsCount" column="arguments_count" type="integer" nullable="false" />
+        <field name="sourcesCount" column="sources_count" type="integer" nullable="false" />
+        <field name="opinionsCount" column="opinions_count" type="integer" nullable="false" />
+
     </entity>
 
 </doctrine-mapping>

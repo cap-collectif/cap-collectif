@@ -31,11 +31,14 @@
         {% endif %}
 
         <div class="media-body">
-            <p class="media--aligned media--macro__user">
+           <p class="media--aligned media--macro__user">
                 {% if profile is not null %}
                     <a href="{{ profile }}">{{ username }}</a>
                 {% else %}
                     {{ username }}
+                {% endif %}
+                {% if registration.user %}
+                    Le total des contributions est de : {{ registration.user.contributionsCount }}
                 {% endif %}
             </p>
         </div>
