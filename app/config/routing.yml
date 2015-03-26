@@ -76,6 +76,9 @@ facebook_login:
 google_login:
     pattern: /login/check-google
 
+twitter_login:
+    pattern: /login/check-twitter
+
 # last...
 capco_app_cms:
     resource: "@CapcoAppBundle/Resources/config/routing.yml"

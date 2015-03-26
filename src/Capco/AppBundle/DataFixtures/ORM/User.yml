@@ -59,12 +59,3 @@ Capco\UserBundle\Entity\User:
         roles:
          - 'ROLE_USER'
         isTermsAccepted: true
-
-    user_drupal:
-        __construct: ['drupal']
-        username: drupal
-        firstname: toto
-        lastname: toto
-        email: drupal@gmail.com
-        enabled: true
-        password: $S$DV4UqpdijYQloOE/c6CHQg2SzxEW0K0iHQxOEPLfbv3H/4plvGAU

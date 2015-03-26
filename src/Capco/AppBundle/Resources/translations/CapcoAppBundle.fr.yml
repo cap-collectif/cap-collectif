@@ -517,6 +517,7 @@ user:
     social:
       facebook: Se connecter avec Facebook
       gplus: Se connecter avec Google+
+      twitter: Se connecter avec Twitter
     or: ou
     submit: Se connecter
     popover:
@@ -539,6 +540,7 @@ user:
     social:
       facebook: S'inscrire avec Facebook
       gplus: S'inscrire avec Google+
+      twitter: S'inscrire avec Twitter
     or: ou
     username:
       username: Nom

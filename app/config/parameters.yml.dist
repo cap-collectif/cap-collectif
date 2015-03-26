@@ -22,6 +22,8 @@ parameters:
     facebook_app_secret: xxxx
     google_app_id: xxxx
     google_app_secret: xxxx
+    twitter_app_id: xxxx
+    twitter_app_secret: xxxx
 
     registration_email_address: coucou@cap-collectif.com
     registration_sender_name: Cap Collectif

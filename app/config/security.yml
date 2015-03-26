@@ -4,8 +4,6 @@ security:
 
     encoders:
         Capco\UserBundle\Entity\User: bcrypt
-        drupal:
-            id: drupal.encoder
 
     role_hierarchy:
         ROLE_ADMIN:       [ROLE_USER, ROLE_SONATA_ADMIN]
@@ -57,6 +55,7 @@ security:
                 resource_owners:
                     facebook: "/login/check-facebook"
                     google: "/login/check-google"
+                    twitter: "/login/check-twitter"
                 login_path: /login
 #                default_target_path: /profile
 

@@ -17,6 +17,7 @@ class OauthConnectController extends ConnectController
     protected $featuresForServices = array(
         'facebook' => array('login_facebook'),
         'google' => array('login_gplus'),
+        'twitter' => array('login_twitter'),
     );
 
     public function getFeaturesForService($service)

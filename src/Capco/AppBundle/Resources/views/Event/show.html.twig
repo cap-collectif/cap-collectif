@@ -90,7 +90,7 @@
                             </p>
                             <ul>
                                 {% for consultation in event.consultations %}
-                                    <li><a href="{{ consultation | capco_first_step_link }}">{{ consultation.title }}</a></li>
+                                    <li><a href="{{ path('app_consultation', {'slug': consultation.slug}) }}">{{ consultation.title }}</a></li>
                                 {% endfor %}
                             </ul>
                         </div>

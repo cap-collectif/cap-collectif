@@ -12,12 +12,15 @@
         <div class="col-lg-4  col-lg-offset-4  col-md-6  col-md-offset-3  col-sm-8  col-sm-offset-2  col-xs-12">
             <div class="block  block--bordered  box">
 
-                {% if has_feature_enabled(['login_facebook', 'login_gplus']) %}
+                {% if has_feature_enabled(['login_facebook', 'login_gplus', 'login_twitter']) %}
                     {% if is_feature_enabled('login_facebook') %}
                         <a href="{{ path('hwi_oauth_service_redirect', {'service': 'facebook' }) }}" title="Sign in with Facebook" class="btn  login__social-btn  login__social-btn--facebook">{{ 'user.register.social.facebook'|trans({}, 'CapcoAppBundle') }}</a>
                     {% endif %}
                     {% if is_feature_enabled('login_gplus') %}
                         <a href="{{ path('hwi_oauth_service_redirect', {'service': 'google' }) }}" title="Sign in with Google" class="btn  login__social-btn  login__social-btn--googleplus">{{ 'user.register.social.gplus'|trans({}, 'CapcoAppBundle') }}</a>
+                    {% endif %}
+                    {% if is_feature_enabled('login_twitter') %}
+                        <a href="{{ path('hwi_oauth_service_redirect', {'service': 'twitter' }) }}" title="Sign in with Twitter" class="btn  login__social-btn  login__social-btn--googleplus">{{ 'user.register.social.twitter'|trans({}, 'CapcoAppBundle') }}</a>
                     {% endif %}
                     <p class="p--lined"><span>{{ 'user.register.or'|trans({}, 'CapcoAppBundle') }}</span></p>
                 {% endif %}

@@ -21,6 +21,7 @@ class Manager
         'registration',
         'login_facebook',
         'login_gplus',
+        'login_twitter',
         'shield_mode',
     );
 
