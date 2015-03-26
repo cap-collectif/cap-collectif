@@ -20,7 +20,7 @@
                         <a href="{{ path('hwi_oauth_service_redirect', {'service': 'google' }) }}" title="Sign in with Google" class="btn  login__social-btn  login__social-btn--googleplus">{{ 'user.register.social.gplus'|trans({}, 'CapcoAppBundle') }}</a>
                     {% endif %}
                     {% if is_feature_enabled('login_twitter') %}
-                        <a href="{{ path('hwi_oauth_service_redirect', {'service': 'twitter' }) }}" title="Sign in with Twitter" class="btn  login__social-btn  login__social-btn--googleplus">{{ 'user.register.social.twitter'|trans({}, 'CapcoAppBundle') }}</a>
+                        <a href="{{ path('hwi_oauth_service_redirect', {'service': 'twitter' }) }}" title="Sign in with Twitter" class="btn  login__social-btn  login__social-btn--twitter">{{ 'user.register.social.twitter'|trans({}, 'CapcoAppBundle') }}</a>
                     {% endif %}
                     <p class="p--lined"><span>{{ 'user.register.or'|trans({}, 'CapcoAppBundle') }}</span></p>
                 {% endif %}
