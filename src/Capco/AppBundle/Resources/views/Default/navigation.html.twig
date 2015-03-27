@@ -43,6 +43,9 @@
             </li>
         </ul>
     {% else %}
-        <p><a href="{{ path('fos_user_security_login') }}" class="btn  btn-primary  btn-brand  navbar-btn  navbar-right">{{ 'layout.login'|trans({}, 'FOSUserBundle') }}</a></p>
+        <p>
+            <a href="{{ path('fos_user_security_login') }}" class="btn  btn-primary  btn-brand  navbar-btn  navbar-right">{{ 'layout.login'|trans({}, 'FOSUserBundle') }}</a></p>
+            <a href="{{ path('fos_user_registration_register') }}" class="btn  btn-primary  btn-brand  navbar-btn  navbar-right">{{ 'layout.register'|trans({}, 'FOSUserBundle') }}</a>
+        </p>
     {% endif %}
 </div>

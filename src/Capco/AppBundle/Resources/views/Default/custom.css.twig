@@ -108,6 +108,24 @@
         background-color: {{ headerBg }};
     }
 
+    .btn-primary {
+        color: {{ btnPrimaryText }};
+        background-color: {{ btnPrimary }};
+        border-color: {{ btnPrimary }};
+    }
+
+    .btn--outline.btn-primary:hover {
+        color: {{ btnPrimaryText }};
+        background-color: {{ btnPrimary }};
+        border-color: {{ btnPrimary }};
+    }
+
+    .btn-primary:hover {
+        color: {{ btnPrimary }};
+        background-color: {{ btnPrimaryText }};
+        border-color: {{ btnPrimary }};
+    }
+
     .btn-primary.active,
     .btn-primary:active,
     .btn-primary:focus,
@@ -195,25 +213,6 @@
     .btn--outline.btn-primary {
         color: {{ btnPrimary }};
         background-color: transparent;
-        border-color: {{ btnPrimary }};
-    }
-
-    .btn--outline.btn-primary:hover {
-        color: {{ btnPrimaryText }};
-        background-color: {{ btnPrimary }};
-        border-color: {{ btnPrimary }};
-    }
-
-
-    .btn-primary {
-        color: {{ btnPrimaryText }};
-        background-color: {{ btnPrimary }};
-        border-color: {{ btnPrimary }};
-    }
-
-    .btn-primary:hover {
-        color: {{ btnPrimary }};
-        background-color: {{ btnPrimaryText }};
         border-color: {{ btnPrimary }};
     }
 
