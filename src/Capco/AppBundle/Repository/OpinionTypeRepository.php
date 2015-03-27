@@ -78,9 +78,8 @@ class OpinionTypeRepository extends EntityRepository
     public function getByConsultationOrderedByNbVotes($consultation)
     {
         $qb = $this->createQueryBuilder('ot')
-            ->addSelect('o', 'c', '(o.voteCountOk + o.voteCountNok + o.voteCountMitige) as HIDDEN vnb')
+            ->addSelect('o', '(o.voteCountOk + o.voteCountNok + o.voteCountMitige) as HIDDEN vnb')
             ->leftJoin('ot.Opinions', 'o', 'WITH', 'o.isEnabled = :enabled AND o.Consultation = :consultation AND o.isTrashed = :notTrashed')
-            ->leftJoin('o.Consultation', 'c')
             ->andWhere('ot IN (:allowedTypes)')
             ->setParameter('consultation', $consultation)
             ->setParameter('enabled', true)
