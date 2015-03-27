@@ -86,7 +86,6 @@ class User extends BaseUser implements EncoderAwareInterface
      */
     protected $encoder;
 
-
     protected $opinions;
 
     protected $ideas;
@@ -371,7 +370,7 @@ class User extends BaseUser implements EncoderAwareInterface
         $this->setSourcesCount($data['source_count']);
         $this->setIdeasCount($data['idea_count']);
         $this->setCommentsCount($data['comment_count']);
-        // $this->setVotesCount($data['vote_count']);
+        $this->setVotesCount($data['vote_count']);
     }
 
     public function getContributionsCount()

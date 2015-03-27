@@ -502,7 +502,7 @@ class Argument
     {
         if ($user != null) {
             foreach ($this->Votes as $vote) {
-                if ($vote->getVoter() == $user) {
+                if ($vote->getUser() == $user) {
                     return true;
                 }
             }
@@ -520,7 +520,7 @@ class Argument
     {
         if ($user != null) {
             foreach ($this->Reports as $report) {
-                if ($report->getVoter() == $user) {
+                if ($report->getUser() == $user) {
                     return true;
                 }
             }

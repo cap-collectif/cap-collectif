@@ -622,7 +622,7 @@ class Source
     {
         if ($user != null) {
             foreach ($this->Votes as $vote) {
-                if ($vote->getVoter() == $user) {
+                if ($vote->getUser() == $user) {
                     return true;
                 }
             }

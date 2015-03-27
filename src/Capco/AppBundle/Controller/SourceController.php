@@ -14,6 +14,8 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Symfony\Component\Form\Form;
+use Capco\AppBundle\CapcoAppBundleEvents;
+use Capco\AppBundle\Event\AddContributionEvent;
 
 class SourceController extends Controller
 {
@@ -60,6 +62,12 @@ class SourceController extends Controller
                 $em = $this->getDoctrine()->getManager();
                 $em->persist($source);
                 $em->flush();
+
+                $this->get('event_dispatcher')->dispatch(
+                        CapcoAppBundleEvents::AFTER_CONTRIBUTION_ADDED,
+                        new AddContributionEvent($this->getUser())
+                );
+
                 $this->get('session')->getFlashBag()->add('success', $this->get('translator')->trans('source.create.success'));
 
                 return $this->redirect($this->generateUrl('app_consultation_show_opinion', ['consultationSlug' => $consultation->getSlug(), 'opinionTypeSlug' => $opinionType->getSlug(), 'opinionSlug' => $opinion->getSlug()]).'#source'.$source->getId());
@@ -265,10 +273,10 @@ class SourceController extends Controller
                 $em = $this->getDoctrine()->getManager();
 
                 $sourceVote = new SourceVote();
-                $sourceVote->setVoter($user);
+                $sourceVote->setUser($user);
 
                 $userVote = $em->getRepository('CapcoAppBundle:SourceVote')->findOneBy(array(
-                    'Voter' => $user,
+                    'user' => $user,
                     'source' => $source,
                 ));
 

@@ -19,6 +19,8 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Symfony\Component\Form\Form;
+use Capco\AppBundle\CapcoAppBundleEvents;
+use Capco\AppBundle\Event\AddContributionEvent;
 
 class OpinionController extends Controller
 {
@@ -104,6 +106,12 @@ class OpinionController extends Controller
                 $em = $this->getDoctrine()->getManager();
                 $em->persist($opinion);
                 $em->flush();
+
+                $this->get('event_dispatcher')->dispatch(
+                        CapcoAppBundleEvents::AFTER_CONTRIBUTION_ADDED,
+                        new AddContributionEvent($this->getUser())
+                );
+
                 $this->get('session')->getFlashBag()->add('success', $this->get('translator')->trans('opinion.create.success'));
 
                 return $this->redirect($this->generateUrl('app_consultation_show_opinion', ['consultationSlug' => $consultation->getSlug(), 'opinionTypeSlug' => $opinionType->getSlug(), 'opinionSlug' => $opinion->getSlug()]));
@@ -338,7 +346,7 @@ class OpinionController extends Controller
 
         if ($this->get('security.authorization_checker')->isGranted('ROLE_USER')) {
             $previousVote = $this->getDoctrine()->getRepository('CapcoAppBundle:OpinionVote')->findOneBy(array(
-                'Voter' => $this->getUser(),
+                'user' => $this->getUser(),
                 'opinion' => $opinion,
             ));
         }
@@ -348,7 +356,7 @@ class OpinionController extends Controller
             $userHasVoted = true;
         } else {
             $opinionVote = new OpinionVote();
-            $opinionVote->setVoter($this->getUser());
+            $opinionVote->setUser($this->getUser());
         }
 
         $opinionVoteForm = $this->get('form.factory')->createNamedBuilder('opinionVoteForm', new OpinionVoteForm(), $opinionVote, ['attr' => ['id' => 'opinion_vote_form']])->getForm();

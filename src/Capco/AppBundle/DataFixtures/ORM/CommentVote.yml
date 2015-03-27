@@ -1,10 +1,13 @@
 Capco\AppBundle\Entity\CommentVote:
   evCommentVote{1..150}:
     comment: @evComment<numberBetween(1, 50)>
-    Voter: @user<numberBetween(1, 5)>
+    user: @user<numberBetween(1, 5)>
+    confirmed: true
   iCommentVote{1..150}:
     comment: @iComment<numberBetween(5, 50)>
-    Voter: @user<numberBetween(1, 5)>
+    user: @user<numberBetween(1, 5)>
+    confirmed: true
   pCommentVote{1..150}:
     comment: @pComment<numberBetween(1, 50)>
-    Voter: @user<numberBetween(1, 5)>
+    user: @user<numberBetween(1, 5)>
+    confirmed: true

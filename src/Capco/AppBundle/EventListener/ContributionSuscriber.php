@@ -4,7 +4,6 @@ namespace Capco\AppBundle\EventListener;
 
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Doctrine\ORM\EntityManager;
-
 use Capco\AppBundle\CapcoAppBundleEvents;
 use Capco\AppBundle\Event\AddContributionEvent;
 
@@ -20,7 +19,7 @@ class ContributionSuscriber implements EventSubscriberInterface
     public static function getSubscribedEvents()
     {
         return [
-            CapcoAppBundleEvents::AFTER_CONTRIBUTION_ADDED => 'onAdd'
+            CapcoAppBundleEvents::AFTER_CONTRIBUTION_ADDED => 'onAdd',
         ];
     }
 

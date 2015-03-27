@@ -14,7 +14,6 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Symfony\Component\Form\Form;
-
 use Capco\AppBundle\CapcoAppBundleEvents;
 use Capco\AppBundle\Event\AddContributionEvent;
 
@@ -89,10 +88,10 @@ class ArgumentController extends Controller
                 $em = $this->getDoctrine()->getManager();
 
                 $argumentVote = new ArgumentVote();
-                $argumentVote->setVoter($user);
+                $argumentVote->setUser($user);
 
                 $userVote = $em->getRepository('CapcoAppBundle:ArgumentVote')->findOneBy(array(
-                        'Voter' => $user,
+                        'user' => $user,
                         'argument' => $argument,
                     ));
 

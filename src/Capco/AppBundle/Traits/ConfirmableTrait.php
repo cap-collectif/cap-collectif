@@ -9,7 +9,7 @@ trait ConfirmableTrait
     /**
      * @ORM\Column(name="confirmed", type="boolean", nullable=false)
      */
-    private $confirmed = false;
+    private $confirmed;
 
     /**
      * @return mixed

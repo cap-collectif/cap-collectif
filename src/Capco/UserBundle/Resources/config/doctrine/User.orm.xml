@@ -55,6 +55,8 @@
         <one-to-many field="comments" target-entity="Capco\AppBundle\Entity\AbstractComment" mapped-by="Author" />
         <one-to-many field="arguments" target-entity="Capco\AppBundle\Entity\Argument" mapped-by="Author" />
         <one-to-many field="sources" target-entity="Capco\AppBundle\Entity\Source" mapped-by="Author" />
+        <one-to-many field="votes" target-entity="Capco\AppBundle\Entity\AbstractVote" mapped-by="user" />
+
 
         <field name="commentsCount" column="comments_count" type="integer" nullable="false" />
         <field name="votesCount" column="votes_count" type="integer" nullable="false" />
