@@ -79,10 +79,16 @@ class ConsultationController extends Controller
      */
     public function showOpinionsAction(Consultation $consultation)
     {
-        $blocks = $this->getDoctrine()->getRepository('CapcoAppBundle:OpinionType')->getByConsultationOrderedByNbVotes($consultation);
+        $blocks = $this->getDoctrine()->getRepository('CapcoAppBundle:OpinionType')->getAllWithOpinionCount($consultation);
+
+        $opinions = [];
+        foreach ($blocks as $key => $block) {
+            $opinions[] = $this->getDoctrine()->getRepository('CapcoAppBundle:Opinion')->getByConsultationAndOpinionTypeOrdered($consultation, $block["id"]);
+        }
 
         return [
             'blocks' => $blocks,
+            'opinions' => $opinions,
             'consultation' => $consultation,
         ];
     }

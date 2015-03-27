@@ -75,23 +75,21 @@ class OpinionTypeRepository extends EntityRepository
      *
      * @return array
      */
-    public function getByConsultationOrderedByNbVotes($consultation)
+    public function getAllWithOpinionCount($consultation)
     {
         $qb = $this->createQueryBuilder('ot')
-            ->addSelect('o', '(o.voteCountOk + o.voteCountNok + o.voteCountMitige) as HIDDEN vnb')
+            ->select('ot.id', 'ot.title', 'ot.color', 'ot.isEnabled',  'ot.slug', 'count(o) as total')
             ->leftJoin('ot.Opinions', 'o', 'WITH', 'o.isEnabled = :enabled AND o.Consultation = :consultation AND o.isTrashed = :notTrashed')
-            ->andWhere('ot IN (:allowedTypes)')
             ->setParameter('consultation', $consultation)
             ->setParameter('enabled', true)
             ->setParameter('notTrashed', false)
-            ->setParameter('allowedTypes', $consultation->getAllowedTypes())
+            ->addGroupBy('ot')
             ->orderBy('ot.position', 'ASC')
-            ->addOrderBy('vnb', 'DESC')
-            ;
+        ;
 
         return $qb
             ->getQuery()
-            ->getResult();
+            ->getArrayResult();
     }
 
     /**

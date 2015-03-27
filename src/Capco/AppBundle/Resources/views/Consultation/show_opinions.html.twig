@@ -1,10 +1,10 @@
 {% if (blocks|length > 0) %}
-    {% for block in blocks %}
+    {% for key, block in blocks %}
         <div class="block  block--bordered">
         <div class="opinion  opinion--{{ block.color }}  opinion--default">
             <div class="opinion__header  opinion__header--mobile-centered">
 
-                <h2 class="pull-left  h4  opinion__header__title"> {{ block.title }} <span class="badge">{{ block.Opinions|length }}</span></h2>
+                <h2 class="pull-left  h4  opinion__header__title"> {{ block.title }} <span class="badge">{{ block.total }}</span></h2>
                 {% if block.isEnabled == true and consultation.canContribute %}
                     <div class="pull-right  opinion__header__filter">
                         <a href="{{ path('app_consultation_new_opinion' ,{'consultationSlug': consultation.slug, 'opinionTypeSlug': block.slug} ) }}" class="btn  btn-default">
@@ -15,9 +15,9 @@
                 {% endif %}
             </div>
         </div>
-        {% if block.Opinions | length > 0 %}
+        {% if block.total > 0 %}
             <ul class="media-list  opinion__list">
-                {% for opinion in block.Opinions|slice(0, 5) %}
+                {% for opinion in opinions[key] %}
                 {% set nbVotes = (opinion.getVoteCountAll) %}
                 {% set nbArguments = (opinion.argumentsCount) %}
                 {% set nbSources = (opinion.sourcesCount) %}
@@ -62,7 +62,7 @@
                 </li>
                 {% endfor %}
             </ul>
-            {% if block.Opinions|length > 5  %}
+            {% if block.total > 5  %}
                 <div class="opinion  opinion--default">
                     <div class="opinion__header  opinion__header--mobile-centered">
                         <a href="{{ path('app_consultation_show_opinions', {'consultationSlug': consultation.slug ,'opinionTypeSlug': block.slug}) }}" class="btn  btn-link text-center" style="display: block">
