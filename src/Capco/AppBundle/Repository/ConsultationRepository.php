@@ -53,16 +53,13 @@ class ConsultationRepository extends EntityRepository
     public function getOneWithAllowedTypes($slug)
     {
         $qb = $this->getIsEnabledQueryBuilder('c')
-            ->addSelect('t', 's', 'cov', 'o', 'at')
+            ->addSelect('t', 's', 'cov', 'at')
             ->leftJoin('c.Themes', 't')
             ->leftJoin('c.Steps', 's')
             ->leftJoin('c.Cover', 'cov')
             ->leftJoin('c.allowedTypes', 'at')
-            ->leftJoin('c.Opinions', 'o')
             ->andWhere('c.slug = :slug')
             ->setParameter('slug', $slug)
-            ->addOrderBy('o.createdAt', 'DESC')
-            ->addOrderBy('at.position', 'ASC')
         ;
 
         return $qb
