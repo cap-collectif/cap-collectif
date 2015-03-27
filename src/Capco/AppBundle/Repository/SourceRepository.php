@@ -85,7 +85,7 @@ class SourceRepository extends EntityRepository
     public function getByOpinionJoinUserReports($opinion, $user = null)
     {
         $qb = $this->getIsEnabledQueryBuilder()
-            ->addSelect('ca', 'o', 'aut', 'm', 'media')
+            ->addSelect('ca', 'o', 'aut', 'm', 'media', 'r')
             ->leftJoin('s.Category', 'ca')
             ->leftJoin('s.Media', 'media')
             ->leftJoin('s.Opinion', 'o')

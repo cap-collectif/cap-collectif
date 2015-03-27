@@ -58,7 +58,7 @@ class OpinionRepository extends EntityRepository
     public function getOneBySlugJoinUserReports($consultation, $opinionType, $opinion, $user)
     {
         $qb = $this->getIsEnabledQueryBuilder()
-            ->addSelect('a', 'm', 'ot', 'c')
+            ->addSelect('a', 'm', 'ot', 'c', 'r')
             ->leftJoin('o.Author', 'a')
             ->leftJoin('a.Media', 'm')
             ->leftJoin('o.OpinionType', 'ot')
