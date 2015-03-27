@@ -23,6 +23,10 @@ body {
     }
   }
 
+  .container--thinner {
+    max-width: $thin-container;
+  }
+
   .container--bg {
     position: relative;
   }
