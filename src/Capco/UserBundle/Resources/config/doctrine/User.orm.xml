@@ -47,6 +47,7 @@
         <field name="isTermsAccepted" column="is_terms_accepted" type="boolean" nullable="false" />
 
         <field name="city" column="city" type="string" length="255" nullable="true" />
+        <field name="encoder" column="encoder" type="string" length="255" nullable="true" />
     </entity>
 
 </doctrine-mapping>
