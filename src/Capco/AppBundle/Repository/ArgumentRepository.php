@@ -26,9 +26,8 @@ class ArgumentRepository extends EntityRepository
     public function getByTypeAndOpinionOrderedJoinUserReports($type, $opinion, $argumentSort = null, $user = null)
     {
         $qb = $this->getIsEnabledQueryBuilder()
-            ->addSelect('o', 'aut', 'm', 'v')
-            ->leftJoin('a.opinion', 'o')
-            ->leftJoin('o.Author', 'aut')
+            ->addSelect('aut', 'm', 'v', 'r')
+            ->leftJoin('a.Author', 'aut')
             ->leftJoin('aut.Media', 'm')
             ->leftJoin('a.Votes', 'v')
             ->leftJoin('a.Reports', 'r', 'WITH', 'r.Reporter =  :user')
