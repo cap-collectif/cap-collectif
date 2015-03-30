@@ -121,7 +121,7 @@ class Argument
      *
      * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\ArgumentVote", mappedBy="argument", cascade={"persist", "remove"}, orphanRemoval=true)
      */
-    private $Votes;
+    private $votes;
 
     /**
      * @var
@@ -140,7 +140,7 @@ class Argument
 
     public function __construct()
     {
-        $this->Votes = new ArrayCollection();
+        $this->votes = new ArrayCollection();
         $this->Reports = new ArrayCollection();
         $this->updatedAt = new \Datetime();
         $this->voteCount = 0;
@@ -228,21 +228,6 @@ class Argument
      */
     public function setIsEnabled($isEnabled)
     {
-        if ($isEnabled != $this->isEnabled) {
-            if ($isEnabled) {
-                if ($this->isTrashed) {
-                    $this->opinion->getConsultation()->increaseTrashedArgumentCount(1);
-                } else {
-                    $this->opinion->increaseArgumentsCount(1);
-                }
-            } else {
-                if ($this->isTrashed) {
-                    $this->opinion->getConsultation()->decreaseArgumentCount(1);
-                } else {
-                    $this->opinion->decreaseArgumentsCount(1);
-                }
-            }
-        }
         $this->isEnabled = $isEnabled;
 
         return $this;
@@ -307,21 +292,6 @@ class Argument
      */
     public function setIsTrashed($isTrashed)
     {
-        if ($isTrashed != $this->isTrashed) {
-            if ($isTrashed == false) {
-                $this->trashedReason = null;
-                $this->trashedAt = null;
-            }
-            if ($this->isEnabled) {
-                if ($isTrashed) {
-                    $this->opinion->getConsultation()->increaseTrashedArgumentCount(1);
-                    $this->opinion->decreaseArgumentsCount(1);
-                } else {
-                    $this->opinion->increaseArgumentsCount(1);
-                    $this->opinion->getConsultation()->decreaseTrashedArgumentCount(1);
-                }
-            }
-        }
         $this->isTrashed = $isTrashed;
 
         return $this;
@@ -396,7 +366,7 @@ class Argument
      */
     public function getVotes()
     {
-        return $this->Votes;
+        return $this->votes;
     }
 
     /**
@@ -406,9 +376,8 @@ class Argument
      */
     public function addVote($vote)
     {
-        if (!$this->Votes->contains($vote)) {
-            $this->voteCount++;
-            $this->Votes->add($vote);
+        if (!$this->votes->contains($vote)) {
+            $this->votes->add($vote);
         }
 
         return $this;
@@ -421,9 +390,7 @@ class Argument
      */
     public function removeVote($vote)
     {
-        if ($this->Votes->removeElement($vote)) {
-            $this->voteCount--;
-        }
+        $this->votes->removeElement($vote);
 
         return $this;
     }
@@ -486,8 +453,8 @@ class Argument
      */
     public function resetVotes()
     {
-        foreach ($this->Votes as $vote) {
-            $this->removeVote($vote);
+        foreach ($this->votes as $vote) {
+            $vote->setConfirmed(false);
         }
 
         return $this;
@@ -501,7 +468,7 @@ class Argument
     public function userHasVote(User $user = null)
     {
         if ($user != null) {
-            foreach ($this->Votes as $vote) {
+            foreach ($this->votes as $vote) {
                 if ($vote->getUser() == $user) {
                     return true;
                 }
