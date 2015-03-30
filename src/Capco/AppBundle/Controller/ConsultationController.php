@@ -81,14 +81,12 @@ class ConsultationController extends Controller
     {
         $blocks = $this->getDoctrine()->getRepository('CapcoAppBundle:OpinionType')->getAllWithOpinionCount($consultation);
 
-        $opinions = [];
         foreach ($blocks as $key => $block) {
-            $opinions[] = $this->getDoctrine()->getRepository('CapcoAppBundle:Opinion')->getByConsultationAndOpinionTypeOrdered($consultation, $block["id"]);
+            $blocks[$key]['opinions'] = $this->getDoctrine()->getRepository('CapcoAppBundle:Opinion')->getByConsultationAndOpinionTypeOrdered($consultation, $block['id']);
         }
 
         return [
             'blocks' => $blocks,
-            'opinions' => $opinions,
             'consultation' => $consultation,
         ];
     }

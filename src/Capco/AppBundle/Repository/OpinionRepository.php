@@ -208,7 +208,7 @@ class OpinionRepository extends EntityRepository
      *
      * @return mixed
      */
-    public function getByConsultationAndOpinionTypeOrdered($consultation, $ot)
+    public function getByConsultationAndOpinionTypeOrdered($consultation, $ot, $limit = 5)
     {
         $qb = $this->createQueryBuilder('o')
             ->addSelect('ot', 'aut', '(o.voteCountMitige + o.voteCountOk + o.voteCountNok) as HIDDEN vnb')
@@ -219,14 +219,13 @@ class OpinionRepository extends EntityRepository
             ->setParameter('consultation', $consultation)
             ->setParameter('ot', $ot)
             ->addOrderBy('vnb', 'DESC')
-            ->setMaxResults(5)
+            ->setMaxResults($limit)
             ;
 
         return $qb
             ->getQuery()
             ->getResult();
     }
-
 
     /**
      * Get all opinions by consultation.

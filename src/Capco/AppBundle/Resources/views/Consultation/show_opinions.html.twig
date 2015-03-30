@@ -1,10 +1,10 @@
 {% if (blocks|length > 0) %}
-    {% for key, block in blocks %}
+    {% for block in blocks %}
         <div class="block  block--bordered">
         <div class="opinion  opinion--{{ block.color }}  opinion--default">
             <div class="opinion__header  opinion__header--mobile-centered">
 
-                <h2 class="pull-left  h4  opinion__header__title"> {{ block.title }} <span class="badge">{{ block.total }}</span></h2>
+                <h2 class="pull-left  h4  opinion__header__title"> {{ block.title }} <span class="badge">{{ block.total_opinions_count }}</span></h2>
                 {% if block.isEnabled == true and consultation.canContribute %}
                     <div class="pull-right  opinion__header__filter">
                         <a href="{{ path('app_consultation_new_opinion' ,{'consultationSlug': consultation.slug, 'opinionTypeSlug': block.slug} ) }}" class="btn  btn-default">
@@ -15,12 +15,12 @@
                 {% endif %}
             </div>
         </div>
-        {% if block.total > 0 %}
+        {% if block.total_opinions_count > 0 %}
             <ul class="media-list  opinion__list">
-                {% for opinion in opinions[key] %}
-                {% set nbVotes = (opinion.getVoteCountAll) %}
-                {% set nbArguments = (opinion.argumentsCount) %}
-                {% set nbSources = (opinion.sourcesCount) %}
+                {% for opinion in block.opinions %}
+                {% set nbVotes = opinion.getVoteCountAll %}
+                {% set nbArguments = opinion.argumentsCount %}
+                {% set nbSources = opinion.sourcesCount %}
                 <li class="opinion  opinion--{{ block.slug }}  has-chart" data-ok="{{ opinion.voteCountOk }}" data-nok="{{ opinion.voteCountNok }}" data-mitige="{{ opinion.voteCountMitige }}" data-opinion-id="{{ opinion.id }}">
                     <div class="row">
                         <div class="col-xs-12  col-sm-8  col-md-9  col-lg-10">
@@ -62,7 +62,7 @@
                 </li>
                 {% endfor %}
             </ul>
-            {% if block.total > 5  %}
+            {% if block.total_opinions_count > 5  %}
                 <div class="opinion  opinion--default">
                     <div class="opinion__header  opinion__header--mobile-centered">
                         <a href="{{ path('app_consultation_show_opinions', {'consultationSlug': consultation.slug ,'opinionTypeSlug': block.slug}) }}" class="btn  btn-link text-center" style="display: block">
