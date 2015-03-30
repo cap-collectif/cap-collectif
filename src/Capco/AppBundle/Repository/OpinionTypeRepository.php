@@ -75,7 +75,7 @@ class OpinionTypeRepository extends EntityRepository
      *
      * @return array
      */
-    public function getAllWithOpinionCount($consultation)
+    public function getAllowedWithOpinionCount($consultation)
     {
         $qb = $this->createQueryBuilder('ot')
             ->select('ot.id', 'ot.title', 'ot.color', 'ot.isEnabled',  'ot.slug', 'count(o) as total_opinions_count')
