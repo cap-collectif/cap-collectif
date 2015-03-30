@@ -19,8 +19,6 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Symfony\Component\Form\Form;
-use Capco\AppBundle\CapcoAppBundleEvents;
-use Capco\AppBundle\Event\AddContributionEvent;
 
 class OpinionController extends Controller
 {
@@ -106,11 +104,6 @@ class OpinionController extends Controller
                 $em = $this->getDoctrine()->getManager();
                 $em->persist($opinion);
                 $em->flush();
-
-                $this->get('event_dispatcher')->dispatch(
-                        CapcoAppBundleEvents::AFTER_CONTRIBUTION_ADDED,
-                        new AddContributionEvent($this->getUser())
-                );
 
                 $this->get('session')->getFlashBag()->add('success', $this->get('translator')->trans('opinion.create.success'));
 

@@ -10,8 +10,6 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Capco\AppBundle\Entity\CommentVote;
 use Capco\AppBundle\Form\CommentType as CommentForm;
-use Capco\AppBundle\CapcoAppBundleEvents;
-use Capco\AppBundle\Event\AddContributionEvent;
 
 class CommentController extends Controller
 {
@@ -75,11 +73,6 @@ class CommentController extends Controller
                 $em = $this->getDoctrine()->getManager();
                 $em->persist($comment);
                 $em->flush();
-
-                $this->get('event_dispatcher')->dispatch(
-                    CapcoAppBundleEvents::AFTER_CONTRIBUTION_ADDED,
-                    new AddContributionEvent($this->getUser())
-                );
 
                 $this->get('session')->getFlashBag()->add('success', $this->get('translator')->trans('comment.create.success'));
 

@@ -250,9 +250,3 @@ services:
         arguments: [@capco.section.resolver]
         tags:
           - { name: twig.extension }
-
-    capco.contribution.suscriber:
-        class: Capco\AppBundle\EventListener\ContributionSuscriber
-        arguments: [@doctrine.orm.entity_manager]
-        tags:
-            - { name: "kernel.event_subscriber" }

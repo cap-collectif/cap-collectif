@@ -14,8 +14,6 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Symfony\Component\Form\Form;
-use Capco\AppBundle\CapcoAppBundleEvents;
-use Capco\AppBundle\Event\AddContributionEvent;
 
 class SourceController extends Controller
 {
@@ -62,11 +60,6 @@ class SourceController extends Controller
                 $em = $this->getDoctrine()->getManager();
                 $em->persist($source);
                 $em->flush();
-
-                $this->get('event_dispatcher')->dispatch(
-                        CapcoAppBundleEvents::AFTER_CONTRIBUTION_ADDED,
-                        new AddContributionEvent($this->getUser())
-                );
 
                 $this->get('session')->getFlashBag()->add('success', $this->get('translator')->trans('source.create.success'));
 

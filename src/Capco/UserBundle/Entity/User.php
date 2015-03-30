@@ -363,16 +363,6 @@ class User extends BaseUser implements EncoderAwareInterface
         );
     }
 
-    public function updateContributionCounters($data)
-    {
-        $this->setOpinionsCount($data['opinion_count']);
-        $this->setArgumentsCount($data['argument_count']);
-        $this->setSourcesCount($data['source_count']);
-        $this->setIdeasCount($data['idea_count']);
-        $this->setCommentsCount($data['comment_count']);
-        $this->setVotesCount($data['vote_count']);
-    }
-
     public function getContributionsCount()
     {
         return $this->votesCount + $this->sourcesCount + $this->ideasCount + $this->argumentsCount + $this->opinionsCount;
@@ -445,7 +435,7 @@ class User extends BaseUser implements EncoderAwareInterface
      *
      * @return self
      */
-    protected function setOpinionsCount($opinionsCount)
+    public function setOpinionsCount($opinionsCount)
     {
         $this->opinionsCount = $opinionsCount;
 
@@ -459,7 +449,7 @@ class User extends BaseUser implements EncoderAwareInterface
      *
      * @return self
      */
-    protected function setIdeasCount($ideasCount)
+    public function setIdeasCount($ideasCount)
     {
         $this->ideasCount = $ideasCount;
 
@@ -473,7 +463,7 @@ class User extends BaseUser implements EncoderAwareInterface
      *
      * @return self
      */
-    protected function setCommentsCount($commentsCount)
+    public function setCommentsCount($commentsCount)
     {
         $this->commentsCount = $commentsCount;
 
@@ -487,7 +477,7 @@ class User extends BaseUser implements EncoderAwareInterface
      *
      * @return self
      */
-    protected function setArgumentsCount($argumentsCount)
+    public function setArgumentsCount($argumentsCount)
     {
         $this->argumentsCount = $argumentsCount;
 
@@ -501,7 +491,7 @@ class User extends BaseUser implements EncoderAwareInterface
      *
      * @return self
      */
-    protected function setSourcesCount($sourcesCount)
+    public function setSourcesCount($sourcesCount)
     {
         $this->sourcesCount = $sourcesCount;
 
@@ -515,7 +505,7 @@ class User extends BaseUser implements EncoderAwareInterface
      *
      * @return self
      */
-    protected function setVotes($votes)
+    public function setVotes($votes)
     {
         $this->votes = $votes;
 
@@ -529,7 +519,7 @@ class User extends BaseUser implements EncoderAwareInterface
      *
      * @return self
      */
-    protected function setVotesCount($votesCount)
+    public function setVotesCount($votesCount)
     {
         $this->votesCount = $votesCount;
 
