@@ -553,6 +553,7 @@ user:
     submit: S'inscrire
   changePassword:
     show: Mot de passe
+  edition: Édition
   profile:
     edit:
       twitter: Twitter
@@ -681,6 +682,7 @@ event_registration:
     see_all: Voir tous les participants
     title_all: Liste des participants
     anonymous: Anonyme
+    contribution: "{0}|{1} contribution | ]1,Inf[ %count% contributions"
   unsubscribe: Se désinscrire
 
 # comments

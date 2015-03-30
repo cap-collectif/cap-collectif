@@ -134,7 +134,7 @@ class Opinion
     /**
      * @var string
      *
-     * @ORM\ManyToOne(targetEntity="Capco\UserBundle\Entity\User")
+     * @ORM\ManyToOne(targetEntity="Capco\UserBundle\Entity\User", inversedBy="opinions")
      * @ORM\JoinColumn(name="author_id", referencedColumnName="id", onDelete="CASCADE")
      */
     private $Author;

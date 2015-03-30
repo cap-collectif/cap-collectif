@@ -73,6 +73,7 @@ class CommentController extends Controller
                 $em = $this->getDoctrine()->getManager();
                 $em->persist($comment);
                 $em->flush();
+
                 $this->get('session')->getFlashBag()->add('success', $this->get('translator')->trans('comment.create.success'));
 
                 return $this->redirect($this->get('capco.comment.resolver')->getUrlOfRelatedObject($comment));
@@ -145,10 +146,10 @@ class CommentController extends Controller
                 $em = $this->getDoctrine()->getManager();
 
                 $commentVote = new CommentVote();
-                $commentVote->setVoter($user);
+                $commentVote->setUser($user);
 
                 $userVote = $em->getRepository('CapcoAppBundle:CommentVote')->findOneBy(array(
-                    'Voter' => $user,
+                    'user' => $user,
                     'comment' => $comment,
                 ));
 
