@@ -50,6 +50,8 @@ Capco\AppBundle\Entity\Opinion:
         Author: @user3
         OpinionType: @opinionType4
 
+
+
     opinion6:
         Consultation: @cs2
         title: Opinion 6
@@ -114,7 +116,7 @@ Capco\AppBundle\Entity\Opinion:
         Author: @user2
         OpinionType: @opinionType3
     opinion{12..50}:
-        Consultation: @cs1
+        Consultation: @cs<numberBetween(1, 2)>
         title: Opinion <current()>
         body: |
              <p><text(100)></p>

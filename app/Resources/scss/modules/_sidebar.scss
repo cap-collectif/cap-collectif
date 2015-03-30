@@ -1,28 +1,6 @@
 /* ===============================================================
     $SIDEBAR
 ================================================================*/
-
-.main .sidebar__container {
-  padding-top: 0;
-  padding-bottom: 0;
-
-  @media (max-width: $screen-xs-max) {
-    padding-bottom: 0;
-    padding-top: 0;
-  }
-}
-
-.container--with-sidebar {
-  padding-top: 30px;
-  padding-bottom: 30px;
-  z-index: 0;
-
-  @media (max-width: $screen-xs-max) {
-    padding-bottom: 15px;
-    padding-top: 15px;
-  }
-}
-
 .sidebar {
   font-size: 14px;
   .sidebar__form {
@@ -41,7 +19,7 @@
   @extend .hidden-md;
 }
 
-@media (max-width: $screen-md-min) {
+@media (max-width: $screen-sm-max) {
   .sidebar {
     position: fixed;
     bottom: 0;
@@ -77,8 +55,13 @@
     position: fixed;
     left: 50%;
     top: 80px;
-    width: $container-md*0.25;
     @include translate(100%, 20%);
+  }
+}
+
+@media (min-width: $screen-md-min) {
+  .sidebar {
+    width: $container-md*0.25;
   }
 }
 

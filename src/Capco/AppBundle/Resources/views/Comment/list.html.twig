@@ -1,9 +1,11 @@
 {% set nbComments = comments | length %}
 {% if nbComments > 0 %}
-    <h2 class="h2">{% transchoice nbComments with {'%count%': nbComments} from 'CapcoAppBundle' %}comment.list.title{% endtranschoice %}</h2>
-    <ul class="media-list  opinion__list">
-        {% for comment in comments %}
-            {% include '@CapcoApp/Comment/blockComment.html.twig' with {'token': csrf_token('comment_vote')} %}
-        {% endfor %}
-    </ul>
+    <div class="container">
+        <h2 class="h2">{% transchoice nbComments with {'%count%': nbComments} from 'CapcoAppBundle' %}comment.list.title{% endtranschoice %}</h2>
+        <ul class="media-list  opinion__list">
+            {% for comment in comments %}
+                {% include '@CapcoApp/Comment/blockComment.html.twig' with {'token': csrf_token('comment_vote')} %}
+            {% endfor %}
+        </ul>
+    </div>
 {% endif %}

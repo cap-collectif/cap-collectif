@@ -1,13 +1,11 @@
 Capco\AppBundle\Entity\SiteColor:
     SiteColor1:
         keyname: color.body.bg
-        value: '#ffffff'
         title: Fond du site
         position: 1
     SiteColor2:
         keyname: color.body.text
         title: Texte du site
-        value: '#333333'
         position: 2
     SiteColor3:
         keyname: color.header.bg
@@ -17,26 +15,24 @@ Capco\AppBundle\Entity\SiteColor:
     SiteColor41:
         keyname: color.header.title
         title: Titre de l'en-tête
-        value: '#ffffff'
         position: 4
     SiteColor4:
         keyname: color.header.text
         title: Texte de l'en-tête
-        value: '#ffffff'
         position: 4
     SiteColor5:
-        keyname: color.header2.bg
-        title: Fond de l'en-tête secondaire
+        keyname: color.section.bg
+        title: Fond de la section
         value: '#1abc9c'
         position: 5
     SiteColor6:
-        keyname: color.header2.text
-        title: Texte de l'en-tête secondaire
+        keyname: color.section.text
+        title: Texte de la section
         value: '#ffffff'
         position: 6
     SiteColor7:
-        keyname: color.header2.title
-        title: Titre de l'en-tête secondaire
+        keyname: color.section.title
+        title: Titre de la section
         value: '#ffffff'
         position: 7
     SiteColor8:
@@ -105,13 +101,3 @@ Capco\AppBundle\Entity\SiteColor:
         title: Fond pied de page
         value: '#1abc9c'
         position: 21
-    SiteColor22:
-        keyname: color.section.bg
-        title: Fond des sections
-        value: '#f6f6f6'
-        position: 2
-    SiteColor23:
-        keyname: color.section.text
-        title: Texte des sections
-        value: '#000000'
-        position: 2

@@ -3,9 +3,9 @@
 ================================================================*/
 
 // Container
-.container.appendices__container {
-  padding-top: 0;
-  padding-bottom: 0;
+.appendices__container {
+  border-top: 1px solid $border;
+  border-bottom: 1px solid $border;
 }
 
 .appendices__item {

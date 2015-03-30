@@ -28,7 +28,7 @@
 
     {# Connection button #}
     {% if app.user and is_granted("IS_AUTHENTICATED_REMEMBERED") %}
-        <ul class="nav navbar-nav navbar-right">
+        <ul class="nav navbar-nav pull-right">
             <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{ 'header.hello' |trans({}, 'CapcoAppBundle') }} {{ app.user.username }}<span class="caret"></span></a>
                 <ul class="dropdown-menu" role="menu">
@@ -43,9 +43,6 @@
             </li>
         </ul>
     {% else %}
-    <div class="nav navbar-right">
-        <a href="{{ path('fos_user_security_login') }}" class="btn  btn-primary  btn-brand  navbar-btn">{{ 'layout.login'|trans({}, 'FOSUserBundle') }}</a>
-        <a href="{{ path('fos_user_registration_register') }}" class="btn  btn-primary  btn-brand  navbar-btn">{{ 'layout.register'|trans({}, 'FOSUserBundle') }}</a>
-    </div>
+        <p><a href="{{ path('fos_user_security_login') }}" class="btn  btn-primary  btn-brand  navbar-btn  navbar-right">{{ 'layout.login'|trans({}, 'FOSUserBundle') }}</a></p>
     {% endif %}
 </div>

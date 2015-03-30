@@ -5,10 +5,10 @@
 {% set h5 = capco_site_color_value('color.h5') %}
 {% set h6 = capco_site_color_value('color.h6') %}
 
-{% set mainBg = capco_site_color_value('color.body.bg') %}
-{% if null == mainBg %}{% set mainBg = '#FFF' %}{% endif %}
-{% set mainText = capco_site_color_value('color.body.text') %}
-{% if null == mainText %}{% set mainText = '#333' %}{% endif %}
+{% set bodyBg = capco_site_color_value('color.body.bg') %}
+{% if null == bodyBg %}{% set bodyBg = '#EBEBEB' %}{% endif %}
+{% set bodyText = capco_site_color_value('color.body.text') %}
+{% if null == bodyText %}{% set bodyText = '#333' %}{% endif %}
 
 {% set headerBg = capco_site_color_value('color.header.bg') %}
 {% if null == headerBg %}{% set headerBg = '#16A085' %}{% endif %}
@@ -17,17 +17,12 @@
 {% set headerText = capco_site_color_value('color.header.text') %}
 {% if null == headerText %}{% set headerText = '#FFF' %}{% endif %}
 
-{% set header2Bg = capco_site_color_value('color.header2.bg') %}
-{% if null == header2Bg %}{% set header2Bg = '#1ABC9C' %}{% endif %}
-{% set header2Text = capco_site_color_value('color.header2.text') %}
-{% if null == header2Text %}{% set header2Text = '#FFF' %}{% endif %}
-{% set header2Title = capco_site_color_value('color.header2.title') %}
-{% if null == header2Title %}{% set header2Title = '#FFF' %}{% endif %}
-
 {% set sectionBg = capco_site_color_value('color.section.bg') %}
-{% if null == sectionBg %}{% set sectionBg = '#ebebeb' %}{% endif %}
+{% if null == sectionBg %}{% set sectionBg = '#1ABC9C' %}{% endif %}
 {% set sectionText = capco_site_color_value('color.section.text') %}
-{% if null == sectionText %}{% set sectionText = '#000' %}{% endif %}
+{% if null == sectionText %}{% set sectionText = '#FFF' %}{% endif %}
+{% set sectionTitle = capco_site_color_value('color.section.title') %}
+{% if null == sectionTitle %}{% set sectionTitle = '#FFF' %}{% endif %}
 
 {% set btn = capco_site_color_value('color.btn') %}
 {% if null == btn %}{% set btn = '#1abc9c' %}{% endif %}
@@ -65,15 +60,9 @@
 
     .navbar--sub .nav li.active a,
     .navbar--sub .nav li.active:hover a {
+        background-color: {{ btnPrimary }};
         border-color: {{ btnPrimary }};
-    }
-
-    .navbar--sub .navbar__step-nb {
-        color: {{ btnPrimary }};
-    }
-
-    .consultation__infos li .value {
-        color: {{ btnPrimary }};
+        color: {{ btnPrimaryText }};
     }
 
     .pagination>.active > a,
@@ -108,24 +97,6 @@
         background-color: {{ headerBg }};
     }
 
-    .btn-primary {
-        color: {{ btnPrimaryText }};
-        background-color: {{ btnPrimary }};
-        border-color: {{ btnPrimary }};
-    }
-
-    .btn--outline.btn-primary:hover {
-        color: {{ btnPrimaryText }};
-        background-color: {{ btnPrimary }};
-        border-color: {{ btnPrimary }};
-    }
-
-    .btn-primary:hover {
-        color: {{ btnPrimary }};
-        background-color: {{ btnPrimaryText }};
-        border-color: {{ btnPrimary }};
-    }
-
     .btn-primary.active,
     .btn-primary:active,
     .btn-primary:focus,
@@ -144,8 +115,8 @@
     h6, .h6 { color: {{ h6 }};}
 
     .main {
-        background-color: {{ mainBg }};
-        color:{{ mainText }};
+        background-color: {{ bodyBg }};
+        color:{{ bodyText }};
     }
     .jumbotron--bg-1,
     .footer {
@@ -178,37 +149,22 @@
     }
 
     body {
-        background-color: {{ header2Bg }};
+        background-color: {{ sectionBg }};
     }
-
-    .container--header2 {
-        color: {{ header2Text }};
-    }
-
-    .container--header2:after {
-        background-color: {{ header2Bg }};
-    }
-
-    .container--header2 h1,
-    .container--header2 h2,
-    .container--header2 h3,
-    .container--header2 h4,
-    .container--header2 h5 {
-        color: {{ header2Title }};
-    }
-    .container--header2 h2 {
-        border-bottom-color: {{ header2Title }};
-    }
-
-    .container--alt,
-    .main .container--custom:nth-of-type(odd) {
+    .jumbotron--bg-2 {
+        background-color: {{ sectionBg }};
         color: {{ sectionText }};
     }
-
-    .container--alt:after,
-    .main .container--custom:nth-of-type(odd):after {
-         background: {{ sectionBg }};
-     }
+    .jumbotron--bg-2 h1,
+    .jumbotron--bg-2 h2,
+    .jumbotron--bg-2 h3,
+    .jumbotron--bg-2 h4,
+    .jumbotron--bg-2 h5 {
+        color: {{ sectionTitle }};
+    }
+    .jumbotron--bg-2 h2 {
+        border-bottom-color: {{ sectionTitle }};
+    }
 
     .btn--outline.btn-primary {
         color: {{ btnPrimary }};
@@ -216,10 +172,28 @@
         border-color: {{ btnPrimary }};
     }
 
+    .btn--outline.btn-primary:hover {
+        color: {{ btnPrimaryText }};
+        background-color: {{ btnPrimary }};
+        border-color: {{ btnPrimary }};
+    }
+
+
+    .btn-primary {
+        color: {{ btnPrimaryText }};
+        background-color: {{ btnPrimary }};
+        border-color: {{ btnPrimary }};
+    }
+
+    .btn-primary:hover {
+        color: {{ btnPrimary }};
+        background-color: {{ btnPrimaryText }};
+        border-color: {{ btnPrimary }};
+    }
+
     .bg--consultation,
-    .bg--theme,
-    .bg--post {
-        background-color: {{ header2Bg }};
+    .bg--theme {
+        background-color: {{ sectionBg }};
     }
 
     .event .month {

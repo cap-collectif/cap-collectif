@@ -20,7 +20,7 @@
 {% endblock %}
 
 {% block body %}
-    <div class="container  container--custom">
+    <div class="container">
         {% set body = capco_site_parameter_value('contact.content.body') %}
         {%  if body != null %}
             {{ body|raw }}
@@ -39,9 +39,6 @@
                 {% endif %}
             </address>
         {% endif %}
-    </div>
-
-    <div class="container  container--custom">
 
         <h2 class="h2">{{ 'contact.form.title' | trans({}, 'CapcoAppBundle') }}</h2>
         <div class="row">

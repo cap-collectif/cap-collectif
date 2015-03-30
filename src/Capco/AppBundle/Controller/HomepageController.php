@@ -56,14 +56,13 @@ class HomepageController extends Controller
     /**
      * @Template("CapcoAppBundle:Homepage:videos.html.twig")
      */
-    public function lastVideosAction($max = 4, $offset = 0, $section = null, $alt = null)
+    public function lastVideosAction($max = 4, $offset = 0, $section = null)
     {
         $videos = $this->get('capco.video.repository')->getLast($max, $offset);
 
         return [
             'videos' => $videos,
             'section' => $section,
-            'alt' => $alt,
         ];
     }
 
@@ -71,14 +70,13 @@ class HomepageController extends Controller
      * @Cache(expires="+1 minutes", maxage="60", smaxage="60", public="true")
      * @Template("CapcoAppBundle:Homepage:lastIdeas.html.twig")
      */
-    public function lastIdeasAction($max = 4, $offset = 0, $section = null, $alt = null)
+    public function lastIdeasAction($max = 4, $offset = 0, $section = null)
     {
         $ideas = $this->getDoctrine()->getRepository('CapcoAppBundle:Idea')->getLast($max, $offset);
 
         return [
             'ideas' => $ideas,
             'section' => $section,
-            'alt' => $alt,
         ];
     }
 
@@ -86,14 +84,13 @@ class HomepageController extends Controller
      * @Cache(expires="+1 minutes", maxage="60", smaxage="60", public="true")
      * @Template("CapcoAppBundle:Homepage:lastThemes.html.twig")
      */
-    public function lastThemesAction($max = 4, $offset = 0, $section = null, $alt = null)
+    public function lastThemesAction($max = 4, $offset = 0, $section = null)
     {
         $topics = $this->getDoctrine()->getRepository('CapcoAppBundle:Theme')->getLast($max, $offset);
 
         return [
             'topics' => $topics,
             'section' => $section,
-            'alt' => $alt,
         ];
     }
 
@@ -101,14 +98,13 @@ class HomepageController extends Controller
      * @Cache(expires="+1 minutes", maxage="60", smaxage="60", public="true")
      * @Template("CapcoAppBundle:Homepage:lastPosts.html.twig")
      */
-    public function lastPostsAction($max = 3, $offset = 0, $section = null, $alt = null)
+    public function lastPostsAction($max = 3, $offset = 0, $section = null)
     {
         $posts = $this->get('capco.blog.post.repository')->getLast($max, $offset);
 
         return [
             'posts' => $posts,
             'section' => $section,
-            'alt' => $alt,
         ];
     }
 
@@ -116,7 +112,7 @@ class HomepageController extends Controller
      * @Cache(expires="+1 minutes", maxage="60", smaxage="60", public="true")
      * @Template("CapcoAppBundle:Homepage:lastConsultations.html.twig")
      */
-    public function lastConsultationsAction($max = 3, $offset = 0, $section = null, $alt = null)
+    public function lastConsultationsAction($max = 3, $offset = 0, $section = null)
     {
         $consultationSteps = $this->getDoctrine()->getRepository('CapcoAppBundle:Step')->getLastOpen($max, $offset);
         $left = $max - count($consultationSteps);
@@ -132,7 +128,6 @@ class HomepageController extends Controller
             'consultationSteps' => $consultationSteps,
             'statuses' => Consultation::$openingStatuses,
             'section' => $section,
-            'alt' => $alt,
         ];
     }
 
@@ -145,28 +140,26 @@ class HomepageController extends Controller
      * @return array
      * @Template("CapcoAppBundle:Homepage:lastEvents.html.twig")
      */
-    public function lastEventsAction($max = 3, $offset = 0, $section = null, $alt = null)
+    public function lastEventsAction($max = 3, $offset = 0, $section = null)
     {
         $events = $this->get('capco.event.repository')->getLast($max, $offset);
 
         return [
             'events' => $events,
             'section' => $section,
-            'alt' => $alt,
         ];
     }
 
     /**
      * @Template()
      */
-    public function socialNetworksAction($section = null, $alt = null)
+    public function socialNetworksAction($section = null)
     {
         $socialNetworks = $this->getDoctrine()->getRepository('CapcoAppBundle:SocialNetwork')->getEnabled();
 
         return [
             'socialNetworks' => $socialNetworks,
             'section' => $section,
-            'alt' => $alt,
         ];
     }
 }
