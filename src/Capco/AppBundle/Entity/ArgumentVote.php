@@ -15,7 +15,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
 class ArgumentVote
 {
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
@@ -55,7 +55,7 @@ class ArgumentVote
     /**
      * Get id.
      *
-     * @return integer
+     * @return int
      */
     public function getId()
     {

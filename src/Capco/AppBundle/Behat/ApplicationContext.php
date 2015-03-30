@@ -82,7 +82,7 @@ class ApplicationContext extends UserContext
      */
     public function iShouldSeeNbElementOnPage($nb, $element)
     {
-        expect($nb == count($this->getSession()->getPage()->find("css", $element)));
+        expect($nb == count($this->getSession()->getPage()->find('css', $element)));
     }
 
     /**
@@ -90,7 +90,7 @@ class ApplicationContext extends UserContext
      */
     public function iClickElement($element)
     {
-        $something = $this->getSession()->getPage()->find("css", $element)->click();
+        $something = $this->getSession()->getPage()->find('css', $element)->click();
     }
 
     /**

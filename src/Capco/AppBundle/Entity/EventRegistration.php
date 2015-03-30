@@ -24,7 +24,7 @@ class EventRegistration
     use \Capco\AppBundle\Traits\PrivatableTrait;
 
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
@@ -68,7 +68,7 @@ class EventRegistration
     /**
      * Get id.
      *
-     * @return integer
+     * @return int
      */
     public function getId()
     {

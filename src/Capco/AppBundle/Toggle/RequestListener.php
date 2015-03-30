@@ -1,4 +1,5 @@
 <?php
+
 namespace Capco\AppBundle\Toggle;
 
 use Capco\AppBundle\SiteParameter\Resolver;

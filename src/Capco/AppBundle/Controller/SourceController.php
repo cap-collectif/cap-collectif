@@ -62,7 +62,7 @@ class SourceController extends Controller
                 $em->flush();
                 $this->get('session')->getFlashBag()->add('success', $this->get('translator')->trans('source.create.success'));
 
-                return $this->redirect($this->generateUrl('app_consultation_show_opinion', ['consultationSlug' => $consultation->getSlug(), 'opinionTypeSlug' => $opinionType->getSlug(), 'opinionSlug' => $opinion->getSlug() ]).'#source'.$source->getId());
+                return $this->redirect($this->generateUrl('app_consultation_show_opinion', ['consultationSlug' => $consultation->getSlug(), 'opinionTypeSlug' => $opinionType->getSlug(), 'opinionSlug' => $opinion->getSlug()]).'#source'.$source->getId());
             } else {
                 $this->get('session')->getFlashBag()->add('danger', $this->get('translator')->trans('source.create.error'));
             }
@@ -129,7 +129,7 @@ class SourceController extends Controller
 
                 $this->get('session')->getFlashBag()->add('info', $this->get('translator')->trans('source.delete.success'));
 
-                return $this->redirect($this->generateUrl('app_consultation_show_opinion', ['consultationSlug' => $consultation->getSlug(), 'opinionTypeSlug' => $opinionType->getSlug(), 'opinionSlug' => $opinion->getSlug() ]));
+                return $this->redirect($this->generateUrl('app_consultation_show_opinion', ['consultationSlug' => $consultation->getSlug(), 'opinionTypeSlug' => $opinionType->getSlug(), 'opinionSlug' => $opinion->getSlug()]));
             } else {
                 $this->get('session')->getFlashBag()->add('danger', $this->get('translator')->trans('source.delete.error'));
             }
@@ -211,7 +211,7 @@ class SourceController extends Controller
 
                 $this->get('session')->getFlashBag()->add('success', $this->get('translator')->trans('source.update.success'));
 
-                return $this->redirect($this->generateUrl('app_consultation_show_opinion', ['consultationSlug' => $consultation->getSlug(), 'opinionTypeSlug' => $opinionType->getSlug(), 'opinionSlug' => $opinion->getSlug() ]).'#source'.$source->getId());
+                return $this->redirect($this->generateUrl('app_consultation_show_opinion', ['consultationSlug' => $consultation->getSlug(), 'opinionTypeSlug' => $opinionType->getSlug(), 'opinionSlug' => $opinion->getSlug()]).'#source'.$source->getId());
             } else {
                 $this->get('session')->getFlashBag()->add('danger', $this->get('translator')->trans('source.update.error'));
             }
@@ -293,6 +293,6 @@ class SourceController extends Controller
             }
         }
 
-        return $this->redirect($this->generateUrl('app_consultation_show_opinion', ['consultationSlug' => $consultation->getSlug(), 'opinionTypeSlug' => $opinionType->getSlug(), 'opinionSlug' => $opinion->getSlug() ]));
+        return $this->redirect($this->generateUrl('app_consultation_show_opinion', ['consultationSlug' => $consultation->getSlug(), 'opinionTypeSlug' => $opinionType->getSlug(), 'opinionSlug' => $opinion->getSlug()]));
     }
 }

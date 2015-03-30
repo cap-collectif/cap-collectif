@@ -24,14 +24,14 @@ use Sonata\MediaBundle\Entity\BaseGalleryHasMedia as BaseGalleryHasMedia;
 class GalleryHasMedia extends BaseGalleryHasMedia
 {
     /**
-     * @var integer
+     * @var int
      */
     protected $id;
 
     /**
      * Get id.
      *
-     * @return integer $id
+     * @return int $id
      */
     public function getId()
     {

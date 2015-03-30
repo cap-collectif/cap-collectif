@@ -49,7 +49,7 @@ class OpinionVote
     ];
 
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
@@ -72,7 +72,7 @@ class OpinionVote
     private $updatedAt;
 
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="value", type="integer")
      */
@@ -105,7 +105,7 @@ class OpinionVote
     /**
      * Get id.
      *
-     * @return integer
+     * @return int
      */
     public function getId()
     {
@@ -135,7 +135,7 @@ class OpinionVote
     /**
      * Get value.
      *
-     * @return integer
+     * @return int
      */
     public function getValue()
     {
@@ -145,7 +145,7 @@ class OpinionVote
     /**
      * Set value.
      *
-     * @param integer $value
+     * @param int $value
      *
      * @return Vote
      */

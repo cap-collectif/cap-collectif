@@ -134,7 +134,7 @@ class EventController extends Controller
         $eventHelper = $this->container->get('capco.event.helper');
 
         if (!$eventHelper->isRegistrationPossible($event)) {
-            return [ 'event' => $event ];
+            return ['event' => $event];
         }
 
         $user = $this->getUser();
@@ -157,11 +157,11 @@ class EventController extends Controller
                     $this->get('session')->getFlashBag()->add('info', $this->get('translator')->trans('event_registration.create.unregister_success'));
                 }
 
-                return $this->redirect($this->generateUrl('app_event_show', ['slug' => $event->getSlug() ]));
+                return $this->redirect($this->generateUrl('app_event_show', ['slug' => $event->getSlug()]));
             }
         }
 
-        return [ 'form' => $form->createView(), 'event' => $event ];
+        return ['form' => $form->createView(), 'event' => $event];
     }
 
     /**
@@ -177,6 +177,6 @@ class EventController extends Controller
     {
         $events = $this->get('capco.event.repository')->getLast($max, $offset);
 
-        return [ 'events' => $events ];
+        return ['events' => $events];
     }
 }

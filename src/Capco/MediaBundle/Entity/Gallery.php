@@ -24,14 +24,14 @@ use Sonata\MediaBundle\Entity\BaseGallery as BaseGallery;
 class Gallery extends BaseGallery
 {
     /**
-     * @var integer
+     * @var int
      */
     protected $id;
 
     /**
      * Get id.
      *
-     * @return integer $id
+     * @return int $id
      */
     public function getId()
     {

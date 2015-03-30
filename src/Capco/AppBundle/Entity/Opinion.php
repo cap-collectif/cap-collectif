@@ -24,7 +24,7 @@ class Opinion
     ];
 
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
@@ -55,7 +55,7 @@ class Opinion
     private $body;
 
     /**
-     * @var boolean
+     * @var bool
      *
      * @ORM\Column(name="is_enabled", type="boolean")
      */
@@ -76,7 +76,7 @@ class Opinion
     private $updatedAt;
 
     /**
-     * @var boolean
+     * @var bool
      *
      * @ORM\Column(name="is_trashed", type="boolean")
      */
@@ -97,35 +97,35 @@ class Opinion
     private $trashedReason = null;
 
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="vote_count_nok", type="integer")
      */
     private $voteCountNok = 0;
 
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="vote_count_ok", type="integer")
      */
     private $voteCountOk = 0;
 
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="vote_count_mitige", type="integer")
      */
     private $voteCountMitige = 0;
 
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="sources_count", type="integer")
      */
     private $sourcesCount = 0;
 
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="arguments_count", type="integer")
      */
@@ -198,14 +198,14 @@ class Opinion
         if ($this->id) {
             return $this->getTitle();
         } else {
-            return "New opinion";
+            return 'New opinion';
         }
     }
 
     /**
      * Get id.
      *
-     * @return integer
+     * @return int
      */
     public function getId()
     {
@@ -287,7 +287,7 @@ class Opinion
     /**
      * Get isEnabled.
      *
-     * @return boolean
+     * @return bool
      */
     public function getIsEnabled()
     {
@@ -297,7 +297,7 @@ class Opinion
     /**
      * Set isEnabled.
      *
-     * @param boolean $isEnabled
+     * @param bool $isEnabled
      *
      * @return Argument
      */
@@ -346,7 +346,7 @@ class Opinion
     /**
      * Get isTrashed.
      *
-     * @return boolean
+     * @return bool
      */
     public function getIsTrashed()
     {
@@ -356,7 +356,7 @@ class Opinion
     /**
      * Set isTrashed.
      *
-     * @param boolean $isTrashed
+     * @param bool $isTrashed
      *
      * @return Opinion
      */

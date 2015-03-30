@@ -24,7 +24,7 @@ class IdeaVote
     use \Capco\AppBundle\Traits\PrivatableTrait;
 
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
@@ -57,16 +57,16 @@ class IdeaVote
     public function __toString()
     {
         if ($this->idea && $this->user) {
-            return $this->getUser()." - ".$this->getIdea();
+            return $this->getUser().' - '.$this->getIdea();
         }
 
-        return "New idea vote";
+        return 'New idea vote';
     }
 
     /**
      * Get id.
      *
-     * @return integer
+     * @return int
      */
     public function getId()
     {

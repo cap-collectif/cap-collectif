@@ -22,7 +22,7 @@ class Menu
     );
 
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
@@ -31,7 +31,7 @@ class Menu
     private $id;
 
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="type", type="integer")
      */
@@ -58,7 +58,7 @@ class Menu
     /**
      * Get id.
      *
-     * @return integer
+     * @return int
      */
     public function getId()
     {

@@ -84,7 +84,7 @@ class Section
     ];
 
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
@@ -109,7 +109,7 @@ class Section
     private $title;
 
     /**
-     * @var integer
+     * @var int
      * @Gedmo\SortablePosition
      * @ORM\Column(name="position", type="integer")
      * @Assert\NotNull()
@@ -131,13 +131,13 @@ class Section
     private $body;
 
     /**
-     * @var integer
+     * @var int
      * @ORM\Column(name="nb_objects", type="integer", nullable=true)
      */
     private $nbObjects;
 
     /**
-     * @var boolean
+     * @var bool
      *
      * @ORM\Column(name="enabled", type="boolean")
      * @Assert\NotNull()
@@ -178,7 +178,7 @@ class Section
             return $this->getTitle();
         }
 
-        return "New section";
+        return 'New section';
     }
 
     /**
@@ -286,7 +286,7 @@ class Section
     }
 
     /**
-     * @return boolean
+     * @return bool
      */
     public function isEnabled()
     {
@@ -294,7 +294,7 @@ class Section
     }
 
     /**
-     * @param boolean $enabled
+     * @param bool $enabled
      */
     public function setEnabled($enabled)
     {

@@ -15,7 +15,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 class Page
 {
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
@@ -60,7 +60,7 @@ class Page
     private $updatedAt;
 
     /**
-     * @var boolean
+     * @var bool
      *
      * @ORM\Column(name="is_enabled", type="boolean")
      */
@@ -84,7 +84,7 @@ class Page
     /**
      * Get id.
      *
-     * @return integer
+     * @return int
      */
     public function getId()
     {
@@ -96,7 +96,7 @@ class Page
         if ($this->id) {
             return $this->getTitle();
         } else {
-            return "New page";
+            return 'New page';
         }
     }
 
@@ -204,7 +204,7 @@ class Page
     /**
      * Set isEnabled.
      *
-     * @param boolean $isEnabled
+     * @param bool $isEnabled
      *
      * @return Page
      */
@@ -218,7 +218,7 @@ class Page
     /**
      * Get isEnabled.
      *
-     * @return boolean
+     * @return bool
      */
     public function getIsEnabled()
     {

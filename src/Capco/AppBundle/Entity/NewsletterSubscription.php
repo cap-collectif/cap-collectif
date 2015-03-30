@@ -15,7 +15,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 class NewsletterSubscription
 {
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
@@ -41,7 +41,7 @@ class NewsletterSubscription
     private $createdAt;
 
     /**
-     * @var boolean
+     * @var bool
      *
      * @ORM\Column(name="is_enabled", type="boolean")
      */
@@ -52,14 +52,14 @@ class NewsletterSubscription
         if ($this->id) {
             return $this->getEmail();
         } else {
-            return "New newsletter";
+            return 'New newsletter';
         }
     }
 
     /**
      * Get id.
      *
-     * @return integer
+     * @return int
      */
     public function getId()
     {
@@ -103,7 +103,7 @@ class NewsletterSubscription
     /**
      * Set isEnabled.
      *
-     * @param boolean $isEnabled
+     * @param bool $isEnabled
      *
      * @return NewsletterSubscription
      */
@@ -117,7 +117,7 @@ class NewsletterSubscription
     /**
      * Get isEnabled.
      *
-     * @return boolean
+     * @return bool
      */
     public function getIsEnabled()
     {

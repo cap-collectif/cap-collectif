@@ -1,4 +1,5 @@
 <?php
+
 namespace Capco\AppBundle\Command;
 
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
@@ -14,7 +15,7 @@ class LoadBaseDataCommand extends ContainerAwareCommand
         $this
             ->setName('capco:load-base-data')
             ->setDescription('A bunch of fixtures to start using the application')
-            ->addOption("force", false, InputOption::VALUE_NONE, "set this option to force the rebuild")
+            ->addOption('force', false, InputOption::VALUE_NONE, 'set this option to force the rebuild')
         ;
     }
 

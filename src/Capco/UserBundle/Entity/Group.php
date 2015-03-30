@@ -24,14 +24,14 @@ use Sonata\UserBundle\Entity\BaseGroup as BaseGroup;
 class Group extends BaseGroup
 {
     /**
-     * @var integer
+     * @var int
      */
     protected $id;
 
     /**
      * Get id.
      *
-     * @return integer $id
+     * @return int $id
      */
     public function getId()
     {

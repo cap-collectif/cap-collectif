@@ -21,7 +21,7 @@ class Event implements CommentableInterface
     use CommentableTrait;
 
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
@@ -85,14 +85,14 @@ class Event implements CommentableInterface
     private $endAt;
 
     /**
-     * @var boolean
+     * @var bool
      *
      * @ORM\Column(name="is_enabled", type="boolean")
      */
     private $isEnabled = true;
 
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="zipCode", type="integer", nullable=true)
      */
@@ -201,14 +201,14 @@ class Event implements CommentableInterface
         if ($this->id) {
             return $this->getTitle();
         } else {
-            return "New event";
+            return 'New event';
         }
     }
 
     /**
      * Get id.
      *
-     * @return integer
+     * @return int
      */
     public function getId()
     {
@@ -466,7 +466,7 @@ class Event implements CommentableInterface
     /**
      * Set zipCode.
      *
-     * @param integer $zipCode
+     * @param int $zipCode
      *
      * @return Event
      */
@@ -480,7 +480,7 @@ class Event implements CommentableInterface
     /**
      * Get zipCode.
      *
-     * @return integer
+     * @return int
      */
     public function getZipCode()
     {
@@ -614,7 +614,7 @@ class Event implements CommentableInterface
     }
 
     /**
-     * @return boolean
+     * @return bool
      */
     public function getIsEnabled()
     {
@@ -622,7 +622,7 @@ class Event implements CommentableInterface
     }
 
     /**
-     * @param boolean $isEnabled
+     * @param bool $isEnabled
      */
     public function setIsEnabled($isEnabled)
     {
@@ -653,7 +653,7 @@ class Event implements CommentableInterface
     /**
      * Set registrationEnable.
      *
-     * @param boolean $registrationEnable
+     * @param bool $registrationEnable
      *
      * @return Event
      */
@@ -667,7 +667,7 @@ class Event implements CommentableInterface
     /**
      * Is registrationEnable.
      *
-     * @return boolean
+     * @return bool
      */
     public function isRegistrationEnable()
     {

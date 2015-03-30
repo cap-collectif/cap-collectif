@@ -28,7 +28,7 @@ abstract class AbstractComment
     ];
 
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
@@ -59,14 +59,14 @@ abstract class AbstractComment
     protected $updatedAt;
 
     /**
-     * @var boolean
+     * @var bool
      *
      * @ORM\Column(name="is_enabled", type="boolean")
      */
     protected $isEnabled = true;
 
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="vote_count", type="integer")
      */
@@ -118,7 +118,7 @@ abstract class AbstractComment
     protected $Reports;
 
     /**
-     * @var boolean
+     * @var bool
      *
      * @ORM\Column(name="is_trashed", type="boolean")
      */
@@ -151,14 +151,14 @@ abstract class AbstractComment
         if ($this->id) {
             return $this->getBodyExcerpt(50);
         } else {
-            return "New comment";
+            return 'New comment';
         }
     }
 
     /**
      * Get id.
      *
-     * @return integer
+     * @return int
      */
     public function getId()
     {
@@ -212,7 +212,7 @@ abstract class AbstractComment
     /**
      * Get isEnabled.
      *
-     * @return boolean
+     * @return bool
      */
     public function getIsEnabled()
     {
@@ -222,7 +222,7 @@ abstract class AbstractComment
     /**
      * Set isEnabled.
      *
-     * @param boolean $isEnabled
+     * @param bool $isEnabled
      *
      * @return Argument
      */
@@ -247,7 +247,7 @@ abstract class AbstractComment
     /**
      * Get voteCount.
      *
-     * @return integer
+     * @return int
      */
     public function getVoteCount()
     {
@@ -257,7 +257,7 @@ abstract class AbstractComment
     /**
      * Set voteCount.
      *
-     * @param integer $voteCount
+     * @param int $voteCount
      *
      * @return Argument
      */
@@ -412,7 +412,7 @@ abstract class AbstractComment
     /**
      * Get isTrashed.
      *
-     * @return boolean
+     * @return bool
      */
     public function getIsTrashed()
     {
@@ -422,7 +422,7 @@ abstract class AbstractComment
     /**
      * Set isTrashed.
      *
-     * @param boolean $isTrashed
+     * @param bool $isTrashed
      *
      * @return Argument
      */

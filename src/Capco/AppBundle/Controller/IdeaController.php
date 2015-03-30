@@ -157,7 +157,7 @@ class IdeaController extends Controller
     {
         $ideas = $this->getDoctrine()->getRepository('CapcoAppBundle:Idea')->getLast($max, $offset);
 
-        return [ 'ideas' => $ideas ];
+        return ['ideas' => $ideas];
     }
 
     /**
@@ -341,7 +341,7 @@ class IdeaController extends Controller
                     $this->get('session')->getFlashBag()->add('info', $this->get('translator')->trans('idea.vote.delete_success'));
                 }
 
-                return $this->redirect($this->generateUrl('app_idea_show', ['slug' => $idea->getSlug() ]));
+                return $this->redirect($this->generateUrl('app_idea_show', ['slug' => $idea->getSlug()]));
             }
         }
 

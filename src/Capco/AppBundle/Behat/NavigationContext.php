@@ -28,7 +28,7 @@ class NavigationContext extends PageObjectContext
      */
     public function iCollapseSourcesList()
     {
-        $this->getPage("opinion page")
+        $this->getPage('opinion page')
              ->collapseSourcesList();
         sleep(1);
     }
@@ -38,7 +38,7 @@ class NavigationContext extends PageObjectContext
      */
     public function iVoteForFirstSource()
     {
-        $this->getPage("opinion page")
+        $this->getPage('opinion page')
              ->voteForFirstSource();
     }
 
@@ -47,7 +47,7 @@ class NavigationContext extends PageObjectContext
      */
     public function iVoteForTheFirstComment()
     {
-        $this->getPage("idea page")
+        $this->getPage('idea page')
              ->voteForFirstComment();
     }
 
@@ -56,6 +56,6 @@ class NavigationContext extends PageObjectContext
      */
     public function theFirstCommentVoteCounterShouldBe($value)
     {
-        expect($this->getPage("idea page")->getFirstCommentVoteCounter())->toBe($value);
+        expect($this->getPage('idea page')->getFirstCommentVoteCounter())->toBe($value);
     }
 }

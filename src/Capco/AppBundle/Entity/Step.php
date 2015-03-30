@@ -38,7 +38,7 @@ class Step
     ];
 
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
@@ -74,21 +74,21 @@ class Step
     private $endAt;
 
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="position", type="integer")
      */
     private $position;
 
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="type", type="integer")
      */
     private $type = self::TYPE_OTHER;
 
     /**
-     * @var boolean
+     * @var bool
      *
      * @ORM\Column(name="is_enabled", type="boolean")
      */
@@ -134,14 +134,14 @@ class Step
         if ($this->id) {
             return $this->getTitle();
         } else {
-            return "New step";
+            return 'New step';
         }
     }
 
     /**
      * Get id.
      *
-     * @return integer
+     * @return int
      */
     public function getId()
     {
@@ -247,7 +247,7 @@ class Step
     /**
      * Get position.
      *
-     * @return integer
+     * @return int
      */
     public function getPosition()
     {
@@ -257,7 +257,7 @@ class Step
     /**
      * Set position.
      *
-     * @param integer $position
+     * @param int $position
      *
      * @return Step
      */
@@ -271,7 +271,7 @@ class Step
     /**
      * Get type.
      *
-     * @return integer
+     * @return int
      */
     public function getType()
     {
@@ -281,7 +281,7 @@ class Step
     /**
      * Set type.
      *
-     * @param integer $type
+     * @param int $type
      *
      * @return Step
      */
@@ -295,7 +295,7 @@ class Step
     /**
      * Get isEnabled.
      *
-     * @return boolean
+     * @return bool
      */
     public function getIsEnabled()
     {
@@ -305,7 +305,7 @@ class Step
     /**
      * Set isEnabled.
      *
-     * @param boolean $isEnabled
+     * @param bool $isEnabled
      *
      * @return Step
      */
@@ -380,7 +380,7 @@ class Step
     // ********************** custom Methods *******************************
 
     /**
-     * @return boolean
+     * @return bool
      */
     public function isConsultationStep()
     {
@@ -392,7 +392,7 @@ class Step
     }
 
     /**
-     * @return boolean
+     * @return bool
      */
     public function isOtherStep()
     {

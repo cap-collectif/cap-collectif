@@ -24,14 +24,14 @@ use Sonata\UserBundle\Document\BaseUser as BaseUser;
 class User extends BaseUser
 {
     /**
-     * @var integer
+     * @var int
      */
     protected $id;
 
     /**
      * Get id.
      *
-     * @return integer $id
+     * @return int $id
      */
     public function getId()
     {

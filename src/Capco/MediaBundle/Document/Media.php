@@ -24,14 +24,14 @@ use Sonata\MediaBundle\Document\BaseMedia as BaseMedia;
 class Media extends BaseMedia
 {
     /**
-     * @var integer
+     * @var int
      */
     protected $id;
 
     /**
      * Get id.
      *
-     * @return integer $id
+     * @return int $id
      */
     public function getId()
     {

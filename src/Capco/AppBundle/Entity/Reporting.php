@@ -30,7 +30,7 @@ class Reporting
     ];
 
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
@@ -39,7 +39,7 @@ class Reporting
     private $id;
 
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="status", type="integer")
      * @Assert\NotNull()
@@ -117,7 +117,7 @@ class Reporting
     private $Comment;
 
     /**
-     * @var boolean
+     * @var bool
      *
      * @ORM\Column(name="is_archived", type="boolean")
      */
@@ -131,7 +131,7 @@ class Reporting
     /**
      * Get id.
      *
-     * @return integer
+     * @return int
      */
     public function getId()
     {
@@ -141,7 +141,7 @@ class Reporting
     /**
      * Get status.
      *
-     * @return integer
+     * @return int
      */
     public function getStatus()
     {
@@ -151,7 +151,7 @@ class Reporting
     /**
      * Set status.
      *
-     * @param integer $status
+     * @param int $status
      *
      * @return Reporting
      */
@@ -302,7 +302,7 @@ class Reporting
     }
 
     /**
-     * @return boolean
+     * @return bool
      */
     public function getIsArchived()
     {
@@ -310,7 +310,7 @@ class Reporting
     }
 
     /**
-     * @param boolean $isArchived
+     * @param bool $isArchived
      */
     public function setIsArchived($isArchived)
     {

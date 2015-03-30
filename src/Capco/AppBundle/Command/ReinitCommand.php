@@ -1,4 +1,5 @@
 <?php
+
 namespace Capco\AppBundle\Command;
 
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
@@ -15,7 +16,7 @@ class ReinitCommand extends ContainerAwareCommand
         $this
             ->setName('capco:reinit')
             ->setDescription('Reinit the application data')
-            ->addOption("force", false, InputOption::VALUE_NONE, "set this option to force the rebuild")
+            ->addOption('force', false, InputOption::VALUE_NONE, 'set this option to force the rebuild')
         ;
     }
 

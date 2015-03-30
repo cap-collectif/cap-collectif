@@ -30,7 +30,7 @@ class FooterSocialNetwork
    ];
 
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
@@ -60,14 +60,14 @@ class FooterSocialNetwork
     private $style;
 
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="position", type="integer")
      */
     private $position;
 
     /**
-     * @var boolean
+     * @var bool
      *
      * @ORM\Column(name="is_enabled", type="boolean")
      */
@@ -102,14 +102,14 @@ class FooterSocialNetwork
         if ($this->id) {
             return $this->getTitle();
         } else {
-            return "New footer social network";
+            return 'New footer social network';
         }
     }
 
     /**
      * Get id.
      *
-     * @return integer
+     * @return int
      */
     public function getId()
     {
@@ -191,7 +191,7 @@ class FooterSocialNetwork
     /**
      * Set position.
      *
-     * @param integer $position
+     * @param int $position
      *
      * @return FooterSocialNetwork
      */
@@ -205,7 +205,7 @@ class FooterSocialNetwork
     /**
      * Get position.
      *
-     * @return integer
+     * @return int
      */
     public function getPosition()
     {
@@ -215,7 +215,7 @@ class FooterSocialNetwork
     /**
      * Set isEnabled.
      *
-     * @param boolean $isEnabled
+     * @param bool $isEnabled
      *
      * @return FooterSocialNetwork
      */
@@ -229,7 +229,7 @@ class FooterSocialNetwork
     /**
      * Get isEnabled.
      *
-     * @return boolean
+     * @return bool
      */
     public function getIsEnabled()
     {

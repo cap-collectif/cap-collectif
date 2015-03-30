@@ -36,7 +36,7 @@ class Argument
     ];
 
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
@@ -67,28 +67,28 @@ class Argument
     private $updatedAt;
 
     /**
-     * @var boolean
+     * @var bool
      *
      * @ORM\Column(name="is_enabled", type="boolean")
      */
     private $isEnabled = true;
 
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="vote_count", type="integer")
      */
     private $voteCount = 0;
 
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="type", type="integer")
      */
     private $type = 1;
 
     /**
-     * @var boolean
+     * @var bool
      *
      * @ORM\Column(name="is_trashed", type="boolean")
      */
@@ -151,14 +151,14 @@ class Argument
         if ($this->id) {
             return $this->getBodyExcerpt(50);
         } else {
-            return "New opinion";
+            return 'New opinion';
         }
     }
 
     /**
      * Get id.
      *
-     * @return integer
+     * @return int
      */
     public function getId()
     {
@@ -212,7 +212,7 @@ class Argument
     /**
      * Get isEnabled.
      *
-     * @return boolean
+     * @return bool
      */
     public function getIsEnabled()
     {
@@ -222,7 +222,7 @@ class Argument
     /**
      * Set isEnabled.
      *
-     * @param boolean $isEnabled
+     * @param bool $isEnabled
      *
      * @return Argument
      */
@@ -251,7 +251,7 @@ class Argument
     /**
      * Get voteCount.
      *
-     * @return integer
+     * @return int
      */
     public function getVoteCount()
     {
@@ -261,7 +261,7 @@ class Argument
     /**
      * Set voteCount.
      *
-     * @param integer $voteCount
+     * @param int $voteCount
      *
      * @return Argument
      */
@@ -291,7 +291,7 @@ class Argument
     /**
      * Get isTrashed.
      *
-     * @return boolean
+     * @return bool
      */
     public function getIsTrashed()
     {
@@ -301,7 +301,7 @@ class Argument
     /**
      * Set isTrashed.
      *
-     * @param boolean $isTrashed
+     * @param bool $isTrashed
      *
      * @return Argument
      */

@@ -27,7 +27,7 @@ class OpinionPage extends Page
     public function submitArgument($type, $text)
     {
         $field = $this->getElement('Argument '.$type.' field');
-        $button = $this->getElement('Argument '.$type.' buttons')->findButton("Publier");
+        $button = $this->getElement('Argument '.$type.' buttons')->findButton('Publier');
         $field->setValue($text);
         $button->press();
     }

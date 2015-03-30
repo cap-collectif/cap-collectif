@@ -26,7 +26,7 @@ use Symfony\Component\Security\Core\Encoder\EncoderAwareInterface;
 class User extends BaseUser implements EncoderAwareInterface
 {
     /**
-     * @var integer
+     * @var int
      */
     protected $id;
 
@@ -36,22 +36,22 @@ class User extends BaseUser implements EncoderAwareInterface
     private $slug;
 
     /**
-     * @var integer
+     * @var int
      */
     protected $facebook_id;
 
     /**
-     * @var integer
+     * @var int
      */
     protected $facebook_access_token;
 
     /**
-     * @var integer
+     * @var int
      */
     protected $google_id;
 
     /**
-     * @var integer
+     * @var int
      */
     protected $google_access_token;
 
@@ -71,7 +71,7 @@ class User extends BaseUser implements EncoderAwareInterface
     protected $Media;
 
     /**
-     * @var boolean
+     * @var bool
      */
     protected $isTermsAccepted = false;
 
@@ -101,7 +101,7 @@ class User extends BaseUser implements EncoderAwareInterface
     /**
      * Get id.
      *
-     * @return integer $id
+     * @return int $id
      */
     public function getId()
     {
@@ -235,7 +235,7 @@ class User extends BaseUser implements EncoderAwareInterface
     }
 
     /**
-     * @return boolean
+     * @return bool
      */
     public function getIsTermsAccepted()
     {
@@ -243,7 +243,7 @@ class User extends BaseUser implements EncoderAwareInterface
     }
 
     /**
-     * @param boolean $is_terms_accepted
+     * @param bool $is_terms_accepted
      */
     public function setIsTermsAccepted($isTermsAccepted)
     {

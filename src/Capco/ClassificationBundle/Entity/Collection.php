@@ -24,14 +24,14 @@ use Sonata\ClassificationBundle\Entity\BaseCollection as BaseCollection;
 class Collection extends BaseCollection
 {
     /**
-     * @var integer
+     * @var int
      */
     protected $id;
 
     /**
      * Get id.
      *
-     * @return integer $id
+     * @return int $id
      */
     public function getId()
     {

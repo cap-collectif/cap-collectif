@@ -21,7 +21,7 @@ class Post implements CommentableInterface
     use CommentableTrait;
 
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
@@ -59,7 +59,7 @@ class Post implements CommentableInterface
     private $body;
 
     /**
-     * @var boolean
+     * @var bool
      *
      * @ORM\Column(name="is_published", type="boolean")
      */
@@ -140,14 +140,14 @@ class Post implements CommentableInterface
         if ($this->id) {
             return $this->getTitle();
         } else {
-            return "New post";
+            return 'New post';
         }
     }
 
     /**
      * Get id.
      *
-     * @return integer
+     * @return int
      */
     public function getId()
     {
@@ -253,7 +253,7 @@ class Post implements CommentableInterface
     /**
      * Set isPublished.
      *
-     * @param boolean $isPublished
+     * @param bool $isPublished
      *
      * @return Post
      */
@@ -267,7 +267,7 @@ class Post implements CommentableInterface
     /**
      * Get isPublished.
      *
-     * @return boolean
+     * @return bool
      */
     public function getIsPublished()
     {
@@ -387,7 +387,7 @@ class Post implements CommentableInterface
      *
      * @param \DateTime $now
      *
-     * @return boolean
+     * @return bool
      */
     public function isPublic($now = null)
     {

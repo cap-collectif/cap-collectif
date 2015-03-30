@@ -27,7 +27,7 @@ class Source
     ];
 
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
@@ -81,7 +81,7 @@ class Source
     private $updatedAt;
 
     /**
-     * @var boolean
+     * @var bool
      *
      * @ORM\Column(name="is_enabled", type="boolean")
      */
@@ -122,7 +122,7 @@ class Source
     private $Media;
 
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="type", type="integer")
      */
@@ -143,14 +143,14 @@ class Source
     private $Reports;
 
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="vote_count_source", type="integer")
      */
     private $voteCountSource = 0;
 
     /**
-     * @var boolean
+     * @var bool
      *
      * @ORM\Column(name="is_trashed", type="boolean")
      */
@@ -184,14 +184,14 @@ class Source
         if ($this->id) {
             return $this->getTitle();
         } else {
-            return "New source";
+            return 'New source';
         }
     }
 
     /**
      * Get id.
      *
-     * @return integer
+     * @return int
      */
     public function getId()
     {
@@ -305,7 +305,7 @@ class Source
     /**
      * Get isEnabled.
      *
-     * @return boolean
+     * @return bool
      */
     public function getIsEnabled()
     {
@@ -315,7 +315,7 @@ class Source
     /**
      * Set isEnabled.
      *
-     * @param boolean $isEnabled
+     * @param bool $isEnabled
      *
      * @return Source
      */
@@ -517,7 +517,7 @@ class Source
     /**
      * Get isTrashed.
      *
-     * @return boolean
+     * @return bool
      */
     public function getIsTrashed()
     {
@@ -527,7 +527,7 @@ class Source
     /**
      * Set isTrashed.
      *
-     * @param boolean $isTrashed
+     * @param bool $isTrashed
      *
      * @return Source
      */

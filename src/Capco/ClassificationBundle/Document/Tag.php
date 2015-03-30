@@ -24,14 +24,14 @@ use Sonata\ClassificationBundle\Document\BaseTag as BaseTag;
 class Tag extends BaseTag
 {
     /**
-     * @var integer
+     * @var int
      */
     protected $id;
 
     /**
      * Get id.
      *
-     * @return integer $id
+     * @return int $id
      */
     public function getId()
     {

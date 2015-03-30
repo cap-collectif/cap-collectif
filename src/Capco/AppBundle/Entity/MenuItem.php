@@ -14,7 +14,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
 class MenuItem
 {
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
@@ -44,28 +44,28 @@ class MenuItem
     private $Page;
 
     /**
-     * @var boolean
+     * @var bool
      *
      * @ORM\Column(name="is_enabled", type="boolean")
      */
     private $isEnabled = true;
 
     /**
-     * @var boolean
+     * @var bool
      *
      * @ORM\Column(name="is_deletable", type="boolean")
      */
     private $isDeletable = true;
 
     /**
-     * @var boolean
+     * @var bool
      *
      * @ORM\Column(type="boolean")
      */
     private $isFullyModifiable = true;
 
     /**
-     * @var integer
+     * @var int
      * @Gedmo\SortablePosition
      * @ORM\Column(name="position", type="integer")
      */
@@ -116,7 +116,7 @@ class MenuItem
         if ($this->id) {
             return $this->getTitle();
         } else {
-            return "New menu item";
+            return 'New menu item';
         }
     }
 
@@ -132,7 +132,7 @@ class MenuItem
     /**
      * Get id.
      *
-     * @return integer
+     * @return int
      */
     public function getId()
     {
@@ -190,7 +190,7 @@ class MenuItem
     /**
      * Set isEnabled.
      *
-     * @param boolean $isEnabled
+     * @param bool $isEnabled
      *
      * @return MenuItem
      */
@@ -204,7 +204,7 @@ class MenuItem
     /**
      * Get isEnabled.
      *
-     * @return boolean
+     * @return bool
      */
     public function getIsEnabled()
     {
@@ -214,7 +214,7 @@ class MenuItem
     /**
      * Set isDeletable.
      *
-     * @param boolean $isDeletable
+     * @param bool $isDeletable
      *
      * @return MenuItem
      */
@@ -228,7 +228,7 @@ class MenuItem
     /**
      * Get isDeletable.
      *
-     * @return boolean
+     * @return bool
      */
     public function getIsDeletable()
     {
@@ -238,7 +238,7 @@ class MenuItem
     /**
      * Set isFullyModifiable.
      *
-     * @param boolean $isFullyModifiable
+     * @param bool $isFullyModifiable
      *
      * @return MenuItem
      */
@@ -252,7 +252,7 @@ class MenuItem
     /**
      * Get isFullyModifiable.
      *
-     * @return boolean
+     * @return bool
      */
     public function getIsFullyModifiable()
     {
@@ -262,7 +262,7 @@ class MenuItem
     /**
      * Set position.
      *
-     * @param integer $position
+     * @param int $position
      *
      * @return MenuItem
      */
@@ -276,7 +276,7 @@ class MenuItem
     /**
      * Get position.
      *
-     * @return integer
+     * @return int
      */
     public function getPosition()
     {

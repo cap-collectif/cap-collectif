@@ -1,4 +1,5 @@
 <?php
+
 namespace Capco\AppBundle\Command;
 
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
@@ -13,7 +14,7 @@ class ResetFeatureFlagsCommand extends ContainerAwareCommand
         $this
             ->setName('capco:reset-feature-flags')
             ->setDescription('Reset the feature flags to default values')
-            ->addOption("force", false, InputOption::VALUE_NONE, "set this option to force the reinit. Warning, this may de/activate some features")
+            ->addOption('force', false, InputOption::VALUE_NONE, 'set this option to force the reinit. Warning, this may de/activate some features')
         ;
     }
 

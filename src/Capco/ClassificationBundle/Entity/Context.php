@@ -25,14 +25,14 @@ use Sonata\ClassificationBundle\Model\ContextInterface;
 class Context extends BaseContext implements ContextInterface
 {
     /**
-     * @var integer
+     * @var int
      */
     protected $id;
 
     /**
      * Get id.
      *
-     * @return integer $id
+     * @return int $id
      */
     public function getId()
     {

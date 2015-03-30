@@ -21,7 +21,7 @@ class Video
     ];
 
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
@@ -50,7 +50,7 @@ class Video
     private $body;
 
     /**
-     * @var boolean
+     * @var bool
      *
      * @ORM\Column(name="is_enabled", type="boolean")
      */
@@ -73,7 +73,7 @@ class Video
     private $updatedAt;
 
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="position", type="integer", nullable=true)
      */
@@ -122,14 +122,14 @@ class Video
         if ($this->id) {
             return $this->getTitle();
         } else {
-            return "New video";
+            return 'New video';
         }
     }
 
     /**
      * Get id.
      *
-     * @return integer
+     * @return int
      */
     public function getId()
     {
@@ -263,7 +263,7 @@ class Video
     /**
      * Set isEnabled.
      *
-     * @param boolean $isEnabled
+     * @param bool $isEnabled
      *
      * @return Video
      */
@@ -277,7 +277,7 @@ class Video
     /**
      * Get isEnabled.
      *
-     * @return boolean
+     * @return bool
      */
     public function getIsEnabled()
     {

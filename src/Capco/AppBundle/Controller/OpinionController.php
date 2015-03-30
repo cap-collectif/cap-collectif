@@ -60,7 +60,7 @@ class OpinionController extends Controller
             }
         }
 
-        return $this->redirect($this->generateUrl('app_consultation_show_opinion', ['consultationSlug' => $opinion->getConsultation()->getSlug(), 'opinionTypeSlug' => $opinion->getOpinionType()->getSlug(), 'opinionSlug' => $opinion->getSlug() ]));
+        return $this->redirect($this->generateUrl('app_consultation_show_opinion', ['consultationSlug' => $opinion->getConsultation()->getSlug(), 'opinionTypeSlug' => $opinion->getOpinionType()->getSlug(), 'opinionSlug' => $opinion->getSlug()]));
     }
 
     /**
@@ -106,7 +106,7 @@ class OpinionController extends Controller
                 $em->flush();
                 $this->get('session')->getFlashBag()->add('success', $this->get('translator')->trans('opinion.create.success'));
 
-                return $this->redirect($this->generateUrl('app_consultation_show_opinion', ['consultationSlug' => $consultation->getSlug(), 'opinionTypeSlug' => $opinionType->getSlug(), 'opinionSlug' => $opinion->getSlug() ]));
+                return $this->redirect($this->generateUrl('app_consultation_show_opinion', ['consultationSlug' => $consultation->getSlug(), 'opinionTypeSlug' => $opinionType->getSlug(), 'opinionSlug' => $opinion->getSlug()]));
             } else {
                 $this->get('session')->getFlashBag()->add('danger', $this->get('translator')->trans('opinion.create.error'));
             }
@@ -170,7 +170,7 @@ class OpinionController extends Controller
 
                 $this->get('session')->getFlashBag()->add('info', $this->get('translator')->trans('opinion.delete.success'));
 
-                return $this->redirect($this->generateUrl('app_consultation_show', ['slug' => $consultation->getSlug() ]));
+                return $this->redirect($this->generateUrl('app_consultation_show', ['slug' => $consultation->getSlug()]));
             } else {
                 $this->get('session')->getFlashBag()->add('danger', $this->get('translator')->trans('opinion.delete.error'));
             }
@@ -233,7 +233,7 @@ class OpinionController extends Controller
 
                 $this->get('session')->getFlashBag()->add('success', $this->get('translator')->trans('opinion.update.success'));
 
-                return $this->redirect($this->generateUrl('app_consultation_show_opinion', ['consultationSlug' => $consultation->getSlug(), 'opinionTypeSlug' => $opinionType->getSlug(), 'opinionSlug' => $opinion->getSlug() ]));
+                return $this->redirect($this->generateUrl('app_consultation_show_opinion', ['consultationSlug' => $consultation->getSlug(), 'opinionTypeSlug' => $opinionType->getSlug(), 'opinionSlug' => $opinion->getSlug()]));
             } else {
                 $this->get('session')->getFlashBag()->add('danger', $this->get('translator')->trans('opinion.update.error'));
             }
@@ -316,7 +316,7 @@ class OpinionController extends Controller
             throw $this->createNotFoundException($this->get('translator')->trans('opinion.error.not_found', array(), 'CapcoAppBundle'));
         }
 
-        $currentUrl = $this->generateUrl('app_consultation_show_opinion', ['consultationSlug' => $opinion->getConsultation()->getSlug(), 'opinionTypeSlug' => $opinion->getOpinionType()->getSlug(), 'opinionSlug' => $opinion->getSlug() ]);
+        $currentUrl = $this->generateUrl('app_consultation_show_opinion', ['consultationSlug' => $opinion->getConsultation()->getSlug(), 'opinionTypeSlug' => $opinion->getOpinionType()->getSlug(), 'opinionSlug' => $opinion->getSlug()]);
         $sources = $this->getDoctrine()->getRepository('CapcoAppBundle:Source')->getByOpinionJoinUserReports($opinion, $this->getUser());
 
         $steps = $this->getDoctrine()->getRepository('CapcoAppBundle:Step')->findBy(array(
@@ -394,7 +394,7 @@ class OpinionController extends Controller
                 }
             }
 
-            return $this->redirect($this->generateUrl('app_consultation_show_opinion', ['consultationSlug' => $opinion->getConsultation()->getSlug(), 'opinionTypeSlug' => $opinion->getOpinionType()->getSlug(), 'opinionSlug' => $opinion->getSlug() ]));
+            return $this->redirect($this->generateUrl('app_consultation_show_opinion', ['consultationSlug' => $opinion->getConsultation()->getSlug(), 'opinionTypeSlug' => $opinion->getOpinionType()->getSlug(), 'opinionSlug' => $opinion->getSlug()]));
         } else {
             $sortArgumentsForm->get('argumentSort')->setData($argumentSort);
         }

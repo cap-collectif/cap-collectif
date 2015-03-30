@@ -24,14 +24,14 @@ use Sonata\ClassificationBundle\Document\BaseCategory as BaseCategory;
 class Category extends BaseCategory
 {
     /**
-     * @var integer
+     * @var int
      */
     protected $id;
 
     /**
      * Get id.
      *
-     * @return integer $id
+     * @return int $id
      */
     public function getId()
     {

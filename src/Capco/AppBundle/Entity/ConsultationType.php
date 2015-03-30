@@ -16,7 +16,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 class ConsultationType
 {
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
@@ -33,7 +33,7 @@ class ConsultationType
     private $title;
 
     /**
-     * @var boolean
+     * @var bool
      *
      * @ORM\Column(name="enabled", type="boolean", nullable=false)
      */
@@ -74,14 +74,14 @@ class ConsultationType
         if ($this->id) {
             return $this->getTitle();
         } else {
-            return "New consultation type";
+            return 'New consultation type';
         }
     }
 
     /**
      * Get id.
      *
-     * @return integer
+     * @return int
      */
     public function getId()
     {
@@ -115,7 +115,7 @@ class ConsultationType
     /**
      * Is enabled.
      *
-     * @return boolean
+     * @return bool
      */
     public function enabled()
     {
@@ -125,7 +125,7 @@ class ConsultationType
     /**
      * Set enabled.
      *
-     * @param boolean $enabled
+     * @param bool $enabled
      *
      * @return Consultation
      */

@@ -252,7 +252,7 @@ class OpinionRepository extends EntityRepository
             ->getResult();
     }
 
-    protected function getIsEnabledQueryBuilder($alias ='o')
+    protected function getIsEnabledQueryBuilder($alias = 'o')
     {
         return $this->createQueryBuilder($alias)
             ->andWhere($alias.'.isEnabled = :isEnabled')

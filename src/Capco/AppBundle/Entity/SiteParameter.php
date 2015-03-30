@@ -36,7 +36,7 @@ class SiteParameter
     ];
 
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
@@ -80,20 +80,20 @@ class SiteParameter
     private $updatedAt;
 
     /**
-     * @var boolean
+     * @var bool
      *
      * @ORM\Column(name="is_enabled", type="boolean")
      */
     private $isEnabled = true;
 
     /**
-     * @var integer
+     * @var int
      * @ORM\Column(name="position", type="integer")
      */
     private $position = 0;
 
     /**
-     * @var integer
+     * @var int
      * @ORM\Column(name="type", type="integer")
      */
     private $type;
@@ -103,7 +103,7 @@ class SiteParameter
         if ($this->id) {
             return $this->getTitle();
         } else {
-            return "New parameter";
+            return 'New parameter';
         }
     }
 
@@ -119,7 +119,7 @@ class SiteParameter
     /**
      * Get id.
      *
-     * @return integer
+     * @return int
      */
     public function getId()
     {
@@ -225,7 +225,7 @@ class SiteParameter
     /**
      * Set isEnabled.
      *
-     * @param boolean $isEnabled
+     * @param bool $isEnabled
      *
      * @return Consultation
      */
@@ -239,7 +239,7 @@ class SiteParameter
     /**
      * Get isEnabled.
      *
-     * @return boolean
+     * @return bool
      */
     public function getIsEnabled()
     {

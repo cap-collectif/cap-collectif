@@ -29,7 +29,7 @@ class OpinionType
     const VOTE_WIDGET_TYPE_FAVORABLE = 2;
 
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
@@ -58,14 +58,14 @@ class OpinionType
     private $slug;
 
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="position", type="integer")
      */
     private $position;
 
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="vote_widget_type", type="integer")
      */
@@ -100,7 +100,7 @@ class OpinionType
     private $color;
 
     /**
-     * @var boolean
+     * @var bool
      *
      * @ORM\Column(name="is_enabled", type="boolean")
      */
@@ -118,14 +118,14 @@ class OpinionType
         if ($this->id) {
             return $this->getTitle();
         } else {
-            return "New opinion type";
+            return 'New opinion type';
         }
     }
 
     /**
      * Get id.
      *
-     * @return integer
+     * @return int
      */
     public function getId()
     {
@@ -207,7 +207,7 @@ class OpinionType
     /**
      * Get position.
      *
-     * @return integer
+     * @return int
      */
     public function getPosition()
     {
@@ -217,7 +217,7 @@ class OpinionType
     /**
      * Set position.
      *
-     * @param integer $position
+     * @param int $position
      *
      * @return OpinionType
      */
@@ -231,7 +231,7 @@ class OpinionType
     /**
      * Get voteWidgetType.
      *
-     * @return integer
+     * @return int
      */
     public function getVoteWidgetType()
     {
@@ -241,7 +241,7 @@ class OpinionType
     /**
      * Set voteWidgetType.
      *
-     * @param integer $voteWidgetType
+     * @param int $voteWidgetType
      *
      * @return OpinionType
      */
@@ -323,7 +323,7 @@ class OpinionType
     }
 
     /**
-     * @return boolean
+     * @return bool
      */
     public function getIsEnabled()
     {
@@ -331,7 +331,7 @@ class OpinionType
     }
 
     /**
-     * @param boolean $isEnabled
+     * @param bool $isEnabled
      */
     public function setIsEnabled($isEnabled)
     {

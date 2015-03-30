@@ -134,7 +134,7 @@ class ConsultationController extends Controller
             $form->get('opinionsSort')->setData($opinionsSort);
         }
 
-        $currentUrl = $this->generateUrl('app_consultation_show_opinions', ['consultationSlug' => $consultation->getSlug(), 'opinionTypeSlug' => $opinionType->getSlug() ]);
+        $currentUrl = $this->generateUrl('app_consultation_show_opinions', ['consultationSlug' => $consultation->getSlug(), 'opinionTypeSlug' => $opinionType->getSlug()]);
         $opinions = $this->getDoctrine()->getRepository('CapcoAppBundle:Opinion')->getByOpinionTypeAndConsultationOrdered($consultation, $opinionType, 10, $page, $opinionsSort);
 
         return [

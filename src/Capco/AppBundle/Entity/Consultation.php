@@ -41,7 +41,7 @@ class Consultation
     ];
 
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
@@ -77,7 +77,7 @@ class Consultation
     private $body;
 
     /**
-     * @var boolean
+     * @var bool
      *
      * @ORM\Column(name="is_enabled", type="boolean")
      */
@@ -98,28 +98,28 @@ class Consultation
     private $updatedAt;
 
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="opinion_count", type="integer")
      */
     private $opinionCount = 0;
 
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="trashed_opinion_count", type="integer")
      */
     private $trashedOpinionCount = 0;
 
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="argument_count", type="integer")
      */
     private $argumentCount = 0;
 
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="trashed_argument_count", type="integer")
      */
@@ -203,14 +203,14 @@ class Consultation
         if ($this->id) {
             return $this->getTitle();
         } else {
-            return "New consultation";
+            return 'New consultation';
         }
     }
 
     /**
      * Get id.
      *
-     * @return integer
+     * @return int
      */
     public function getId()
     {
@@ -304,7 +304,7 @@ class Consultation
     /**
      * Get isEnabled.
      *
-     * @return boolean
+     * @return bool
      */
     public function getIsEnabled()
     {
@@ -314,7 +314,7 @@ class Consultation
     /**
      * Set isEnabled.
      *
-     * @param boolean $isEnabled
+     * @param bool $isEnabled
      *
      * @return Consultation
      */

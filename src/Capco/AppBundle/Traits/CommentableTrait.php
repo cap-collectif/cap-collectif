@@ -8,14 +8,14 @@ use Capco\AppBundle\Entity\AbstractComment;
 trait CommentableTrait
 {
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="comments_count", type="integer")
      */
     private $commentsCount = 0;
 
     /**
-     * @var boolean
+     * @var bool
      *
      * @ORM\Column(name="is_commentable", type="boolean")
      */
@@ -87,7 +87,7 @@ trait CommentableTrait
     }
 
     /**
-     * @return boolean
+     * @return bool
      */
     public function getIsCommentable()
     {
@@ -95,7 +95,7 @@ trait CommentableTrait
     }
 
     /**
-     * @param boolean $isCommentable
+     * @param bool $isCommentable
      */
     public function setIsCommentable($isCommentable)
     {

@@ -14,7 +14,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
 class SocialNetwork
 {
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
@@ -37,14 +37,14 @@ class SocialNetwork
     private $link;
 
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="position", type="integer")
      */
     private $position;
 
     /**
-     * @var boolean
+     * @var bool
      *
      * @ORM\Column(name="is_enabled", type="boolean")
      */
@@ -79,7 +79,7 @@ class SocialNetwork
         if ($this->id) {
             return $this->getTitle();
         } else {
-            return "New social network";
+            return 'New social network';
         }
     }
 
@@ -94,7 +94,7 @@ class SocialNetwork
     /**
      * Get id.
      *
-     * @return integer
+     * @return int
      */
     public function getId()
     {
@@ -152,7 +152,7 @@ class SocialNetwork
     /**
      * Set position.
      *
-     * @param integer $position
+     * @param int $position
      *
      * @return SocialNetwork
      */
@@ -166,7 +166,7 @@ class SocialNetwork
     /**
      * Get position.
      *
-     * @return integer
+     * @return int
      */
     public function getPosition()
     {
@@ -176,7 +176,7 @@ class SocialNetwork
     /**
      * Set isEnabled.
      *
-     * @param boolean $isEnabled
+     * @param bool $isEnabled
      *
      * @return SocialNetwork
      */
@@ -190,7 +190,7 @@ class SocialNetwork
     /**
      * Get isEnabled.
      *
-     * @return boolean
+     * @return bool
      */
     public function getIsEnabled()
     {

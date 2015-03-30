@@ -33,7 +33,7 @@ class Idea implements CommentableInterface
     ];
 
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
@@ -81,7 +81,7 @@ class Idea implements CommentableInterface
     private $url;
 
     /**
-     * @var boolean
+     * @var bool
      *
      * @ORM\Column(name="is_enabled", type="boolean")
      */
@@ -104,14 +104,14 @@ class Idea implements CommentableInterface
     private $updatedAt;
 
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="vote_count", type="integer")
      */
     private $voteCount = 0;
 
     /**
-     * @var boolean
+     * @var bool
      *
      * @ORM\Column(name="is_trashed", type="boolean")
      */
@@ -191,14 +191,14 @@ class Idea implements CommentableInterface
         if ($this->id) {
             return $this->getTitle();
         } else {
-            return "New idea";
+            return 'New idea';
         }
     }
 
     /**
      * Get id.
      *
-     * @return integer
+     * @return int
      */
     public function getId()
     {
@@ -332,7 +332,7 @@ class Idea implements CommentableInterface
     /**
      * Set voteCount.
      *
-     * @param integer $voteCount
+     * @param int $voteCount
      *
      * @return Idea
      */
@@ -346,7 +346,7 @@ class Idea implements CommentableInterface
     /**
      * Get voteCount.
      *
-     * @return integer
+     * @return int
      */
     public function getVoteCount()
     {
@@ -405,7 +405,7 @@ class Idea implements CommentableInterface
     /**
      * Set isEnabled.
      *
-     * @param boolean $isEnabled
+     * @param bool $isEnabled
      *
      * @return Idea
      */
@@ -419,7 +419,7 @@ class Idea implements CommentableInterface
     /**
      * Get isEnabled.
      *
-     * @return boolean
+     * @return bool
      */
     public function getIsEnabled()
     {
@@ -429,7 +429,7 @@ class Idea implements CommentableInterface
     /**
      * Set isTrashed.
      *
-     * @param boolean $isTrashed
+     * @param bool $isTrashed
      *
      * @return Idea
      */
@@ -447,7 +447,7 @@ class Idea implements CommentableInterface
     /**
      * Get isTrashed.
      *
-     * @return boolean
+     * @return bool
      */
     public function getIsTrashed()
     {

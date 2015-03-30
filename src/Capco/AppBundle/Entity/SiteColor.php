@@ -14,7 +14,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
 class SiteColor
 {
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
@@ -37,7 +37,7 @@ class SiteColor
     private $title;
 
     /**
-     * @var boolean
+     * @var bool
      *
      * @ORM\Column(name="is_enabled", type="boolean")
      */
@@ -65,7 +65,7 @@ class SiteColor
     private $value;
 
     /**
-     * @var integer
+     * @var int
      * @ORM\Column(name="position", type="integer")
      */
     private $position = 0;
@@ -83,14 +83,14 @@ class SiteColor
         if ($this->id) {
             return $this->getTitle();
         } else {
-            return "New color";
+            return 'New color';
         }
     }
 
     /**
      * Get id.
      *
-     * @return integer
+     * @return int
      */
     public function getId()
     {
@@ -148,7 +148,7 @@ class SiteColor
     /**
      * Get isEnabled.
      *
-     * @return boolean
+     * @return bool
      */
     public function getIsEnabled()
     {
@@ -159,7 +159,7 @@ class SiteColor
      * Set isEnabled.
      *
      *
-     * @param boolean $isEnabled
+     * @param bool $isEnabled
      *
      * @return SiteImage
      */

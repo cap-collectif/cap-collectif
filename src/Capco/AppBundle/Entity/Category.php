@@ -15,7 +15,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
 class Category
 {
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
@@ -37,7 +37,7 @@ class Category
     private $slug;
 
     /**
-     * @var boolean
+     * @var bool
      *
      * @ORM\Column(name="isEnabled", type="boolean")
      */
@@ -74,14 +74,14 @@ class Category
         if ($this->id) {
             return $this->getTitle();
         } else {
-            return "New category";
+            return 'New category';
         }
     }
 
     /**
      * Get id.
      *
-     * @return integer
+     * @return int
      */
     public function getId()
     {
@@ -135,7 +135,7 @@ class Category
     /**
      * Get isEnabled.
      *
-     * @return boolean
+     * @return bool
      */
     public function getIsEnabled()
     {
@@ -145,7 +145,7 @@ class Category
     /**
      * Set isEnabled.
      *
-     * @param boolean $isEnabled
+     * @param bool $isEnabled
      *
      * @return Category
      */

@@ -114,7 +114,7 @@ class ArgumentController extends Controller
             }
         }
 
-        return $this->redirect($this->generateUrl('app_consultation_show_opinion', ['consultationSlug' => $consultation->getSlug(), 'opinionTypeSlug' => $opinionType->getSlug(), 'opinionSlug' => $opinion->getSlug() ]));
+        return $this->redirect($this->generateUrl('app_consultation_show_opinion', ['consultationSlug' => $consultation->getSlug(), 'opinionTypeSlug' => $opinionType->getSlug(), 'opinionSlug' => $opinion->getSlug()]));
     }
 
     /**
@@ -168,7 +168,7 @@ class ArgumentController extends Controller
 
                 $this->get('session')->getFlashBag()->add('success', $this->get('translator')->trans('argument.update.success'));
 
-                return $this->redirect($this->generateUrl('app_consultation_show_opinion', ['consultationSlug' => $consultation->getSlug(), 'opinionTypeSlug' => $opinionType->getSlug(), 'opinionSlug' => $opinion->getSlug() ]));
+                return $this->redirect($this->generateUrl('app_consultation_show_opinion', ['consultationSlug' => $consultation->getSlug(), 'opinionTypeSlug' => $opinionType->getSlug(), 'opinionSlug' => $opinion->getSlug()]));
             } else {
                 $this->get('session')->getFlashBag()->add('danger', $this->get('translator')->trans('argument.update.error'));
             }
@@ -235,7 +235,7 @@ class ArgumentController extends Controller
 
                 $this->get('session')->getFlashBag()->add('info', $this->get('translator')->trans('argument.delete.success'));
 
-                return $this->redirect($this->generateUrl('app_consultation_show_opinion', ['consultationSlug' => $consultation->getSlug(), 'opinionTypeSlug' => $opinionType->getSlug(), 'opinionSlug' => $opinion->getSlug() ]));
+                return $this->redirect($this->generateUrl('app_consultation_show_opinion', ['consultationSlug' => $consultation->getSlug(), 'opinionTypeSlug' => $opinionType->getSlug(), 'opinionSlug' => $opinion->getSlug()]));
             } else {
                 $this->get('session')->getFlashBag()->add('danger', $this->get('translator')->trans('argument.delete.error'));
             }

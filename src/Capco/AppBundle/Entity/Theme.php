@@ -34,7 +34,7 @@ class Theme
     ];
 
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
@@ -65,14 +65,14 @@ class Theme
     private $teaser;
 
     /**
-     * @var boolean
+     * @var bool
      *
      * @ORM\Column(name="is_enabled", type="boolean")
      */
     private $isEnabled = true;
 
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="position", type="integer")
      * @Assert\NotNull()
@@ -80,7 +80,7 @@ class Theme
     private $position;
 
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="status", type="integer", nullable=true)
      */
@@ -162,14 +162,14 @@ class Theme
         if ($this->id) {
             return $this->getTitle();
         } else {
-            return "New theme";
+            return 'New theme';
         }
     }
 
     /**
      * Get id.
      *
-     * @return integer
+     * @return int
      */
     public function getId()
     {
@@ -241,7 +241,7 @@ class Theme
     }
 
     /**
-     * @return boolean
+     * @return bool
      */
     public function getIsEnabled()
     {
@@ -249,7 +249,7 @@ class Theme
     }
 
     /**
-     * @param boolean $isEnabled
+     * @param bool $isEnabled
      */
     public function setIsEnabled($isEnabled)
     {

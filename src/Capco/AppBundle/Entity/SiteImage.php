@@ -14,7 +14,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
 class SiteImage
 {
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
@@ -59,14 +59,14 @@ class SiteImage
     private $updatedAt;
 
     /**
-     * @var boolean
+     * @var bool
      *
      * @ORM\Column(name="is_enabled", type="boolean")
      */
     private $isEnabled = true;
 
     /**
-     * @var integer
+     * @var int
      * @ORM\Column(name="position", type="integer")
      */
     private $position = 0;
@@ -82,7 +82,7 @@ class SiteImage
     /**
      * Get id.
      *
-     * @return integer
+     * @return int
      */
     public function getId()
     {
@@ -184,7 +184,7 @@ class SiteImage
     /**
      * Get isEnabled.
      *
-     * @return boolean
+     * @return bool
      */
     public function getIsEnabled()
     {
@@ -195,7 +195,7 @@ class SiteImage
      * Set isEnabled.
      *
      *
-     * @param boolean isEnabled
+     * @param bool isEnabled
      *
      * @return SiteImage
      */
