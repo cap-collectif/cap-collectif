@@ -3,21 +3,41 @@
 namespace Capco\AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
 use Capco\AppBundle\Validator\Constraints as CapcoAssert;
+use Capco\AppBundle\Traits\ConfirmableTrait;
 
 /**
- * IdeaVote.
+ * ArgumentVote.
  *
  * @CapcoAssert\DidNotAlreadyVoteEmail()
  * @CapcoAssert\HasAnonymousOrUser()
  * @CapcoAssert\EmailDoesNotBelongToUser()
+ * @ORM\Table(name="idea_vote")
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\IdeaVoteRepository")
  * @ORM\HasLifecycleCallbacks()
  */
-class IdeaVote extends AbstractVote
+class IdeaVote
 {
+    use \Capco\AppBundle\Traits\ConfirmableTrait;
     use \Capco\AppBundle\Traits\AnonymousableTrait;
     use \Capco\AppBundle\Traits\PrivatableTrait;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+
+    /**
+     * @var \DateTime
+     * @Gedmo\Timestampable(on="create")
+     * @ORM\Column(name="created_at", type="datetime")
+     */
+    private $createdAt;
 
     /**
      * @var
@@ -27,15 +47,12 @@ class IdeaVote extends AbstractVote
     private $idea;
 
     /**
-     * Constructor.
+     * @var
+     *
+     * @ORM\ManyToOne(targetEntity="Capco\UserBundle\Entity\User")
+     * @ORM\JoinColumn(name="voter_id", referencedColumnName="id", onDelete="CASCADE")
      */
-    public function __construct(Idea $idea = null)
-    {
-        parent::__construct();
-
-        $this->idea = $idea;
-        $this->setConfirmed(false);
-    }
+    private $user;
 
     public function __toString()
     {
@@ -44,6 +61,36 @@ class IdeaVote extends AbstractVote
         }
 
         return 'New idea vote';
+    }
+
+    /**
+     * Get id.
+     *
+     * @return int
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Get createdAt.
+     *
+     * @return \DateTime
+     */
+    public function getCreatedAt()
+    {
+        return $this->createdAt;
+    }
+
+    /**
+     * Get idea.
+     *
+     * @return \Capco\AppBundle\Entity\Idea
+     */
+    public function getIdea()
+    {
+        return $this->idea;
     }
 
     /**
@@ -61,9 +108,28 @@ class IdeaVote extends AbstractVote
         return $this;
     }
 
-    public function getIdea()
+    /**
+     * Set user.
+     *
+     * @param \Capco\UserBundle\Entity\User $user
+     *
+     * @return IdeaVote
+     */
+    public function setUser(\Capco\UserBundle\Entity\User $user = null)
     {
-        return $this->idea;
+        $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * Get user.
+     *
+     * @return \Capco\UserBundle\Entity\User
+     */
+    public function getUser()
+    {
+        return $this->user;
     }
 
     /**

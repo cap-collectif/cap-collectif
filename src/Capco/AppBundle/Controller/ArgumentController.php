@@ -86,10 +86,10 @@ class ArgumentController extends Controller
                 $em = $this->getDoctrine()->getManager();
 
                 $argumentVote = new ArgumentVote();
-                $argumentVote->setUser($user);
+                $argumentVote->setVoter($user);
 
                 $userVote = $em->getRepository('CapcoAppBundle:ArgumentVote')->findOneBy(array(
-                        'user' => $user,
+                        'Voter' => $user,
                         'argument' => $argument,
                     ));
 

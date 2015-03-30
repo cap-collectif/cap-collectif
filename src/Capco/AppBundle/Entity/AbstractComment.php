@@ -75,7 +75,7 @@ abstract class AbstractComment
     /**
      * @var
      *
-     * @ORM\ManyToOne(targetEntity="Capco\UserBundle\Entity\User", inversedBy="comments")
+     * @ORM\ManyToOne(targetEntity="Capco\UserBundle\Entity\User")
      * @ORM\JoinColumn(name="author_id", referencedColumnName="id", onDelete="CASCADE", nullable=true)
      */
     protected $Author;
@@ -517,7 +517,7 @@ abstract class AbstractComment
     {
         if ($user != null) {
             foreach ($this->Votes as $vote) {
-                if ($vote->getUser() == $user) {
+                if ($vote->getVoter() == $user) {
                     return true;
                 }
             }

@@ -6,6 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Capco\AppBundle\Validator\Constraints as CapcoAssert;
 
 /**
  * Consultation.
@@ -149,6 +150,8 @@ class Consultation
     /**
      * @var
      * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\Step", mappedBy="consultation",  cascade={"persist", "remove"}, orphanRemoval = true)
+     * @ORM\OrderBy({"position" = "ASC"})
+     * @CapcoAssert\HasOnlyOneConsultationStep()
      */
     private $Steps;
 
@@ -528,6 +531,19 @@ class Consultation
     public function getSteps()
     {
         return $this->Steps;
+    }
+
+    /**
+     * Reset steps
+     *
+     * @param $steps
+     * @return $this
+     */
+    public function resetSteps()
+    {
+        $this->Steps = new ArrayCollection();
+
+        return $this;
     }
 
     /**
