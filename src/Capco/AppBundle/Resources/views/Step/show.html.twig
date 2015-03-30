@@ -10,9 +10,11 @@
 {% endblock %}
 
 {% block body %}
-    <div class="container">
-
+    <div class="container  container--custom">
         {% include '@CapcoApp/Consultation/show_title.html.twig' %}
+    </div>
+
+    <div class="container  container--custom">
         <div class="row">
             <div class="col-xs-12  col-sm-4  col-md-3">
                 {% include '@CapcoApp/Consultation/show_meta.html.twig' %}
@@ -26,4 +28,5 @@
             </div> <!-- col-xs-12  col-sm-8  col-md-9 -->
         </div> <!-- .row -->
     </div>
+
 {% endblock %}

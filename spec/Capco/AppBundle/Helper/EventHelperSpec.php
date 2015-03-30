@@ -19,30 +19,40 @@ class EventHelperSpec extends ObjectBehavior
 
     function it_knows_when_event_registration_are_possible(Event $event)
     {
-
         $event->getLink()->willReturn(null);
         $event->isRegistrationEnable()->willReturn(false);
         $event->getEndAt()->willReturn((new \DateTime())->modify('+ 1 day'));
+        $event->canContribute()->willReturn(true);
         $this->isRegistrationPossible($event)->shouldReturn(false);
 
         $event->getLink()->willReturn(null);
         $event->isRegistrationEnable()->willReturn(false);
         $event->getEndAt()->willReturn((new \DateTime())->modify('- 1 day'));
+        $event->canContribute()->willReturn(true);
         $this->isRegistrationPossible($event)->shouldReturn(false);
 
         $event->getLink()->willReturn(null);
         $event->isRegistrationEnable()->willReturn(true);
         $event->getEndAt()->willReturn((new \DateTime())->modify('+ 1 day'));
+        $event->canContribute()->willReturn(true);
         $this->isRegistrationPossible($event)->shouldReturn(true);
+
+        $event->getLink()->willReturn(null);
+        $event->isRegistrationEnable()->willReturn(true);
+        $event->getEndAt()->willReturn((new \DateTime())->modify('+ 1 day'));
+        $event->canContribute()->willReturn(false);
+        $this->isRegistrationPossible($event)->shouldReturn(false);
 
         $event->isRegistrationEnable()->willReturn(true);
         $event->getEndAt()->willReturn((new \DateTime())->modify('+ 1 day'));
         $event->getLink()->willReturn('http://lol.com');
+        $event->canContribute()->willReturn(true);
         $this->isRegistrationPossible($event)->shouldReturn(false);
 
         $event->getLink()->willReturn(null);
         $event->isRegistrationEnable()->willReturn(true);
         $event->getEndAt()->willReturn((new \DateTime())->modify('- 1 day'));
+        $event->canContribute()->willReturn(true);
         $this->isRegistrationPossible($event)->shouldReturn(false);
     }
 

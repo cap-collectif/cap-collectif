@@ -10,7 +10,7 @@
 {% endblock %}
 
 {% block fos_user_content %}
-    <div class="container">
+    <div class="container  container--custom">
         <h2 class="h2">{{ 'registration.check_email.title'|trans({}, 'SonataUserBundle') }}</h2>
         <p class="text-blue">{{ 'registration.check_email.body'|trans({'%email%': user.email}, 'SonataUserBundle') }}</p>
         <h2 class="h2">{{ 'registration.check_email.content.title'|trans({}, 'SonataUserBundle') }}</h2>

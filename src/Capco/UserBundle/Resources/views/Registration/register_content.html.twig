@@ -1,5 +1,5 @@
 {% form_theme form 'CapcoUserBundle:Form:capco_register.html.twig' %}
-<div class="container">
+<div class="container  container--custom">
 
     {% set textTop = capco_site_parameter_value('signin.text.top') %}
     {% if textTop %}
@@ -10,8 +10,8 @@
 
     <div class="row">
         <div class="col-lg-4  col-lg-offset-4  col-md-6  col-md-offset-3  col-sm-8  col-sm-offset-2  col-xs-12">
-            <div class="block  block--bordered  box">
 
+            <div class="block">
                 {% if has_feature_enabled(['login_facebook', 'login_gplus', 'login_twitter']) %}
                     {% if is_feature_enabled('login_facebook') %}
                         <a href="{{ path('hwi_oauth_service_redirect', {'service': 'facebook' }) }}" title="Sign in with Facebook" class="btn  login__social-btn  login__social-btn--facebook">{{ 'user.register.social.facebook'|trans({}, 'CapcoAppBundle') }}</a>
@@ -22,8 +22,10 @@
                     {% if is_feature_enabled('login_twitter') %}
                         <a href="{{ path('hwi_oauth_service_redirect', {'service': 'twitter' }) }}" title="Sign in with Twitter" class="btn  login__social-btn  login__social-btn--twitter">{{ 'user.register.social.twitter'|trans({}, 'CapcoAppBundle') }}</a>
                     {% endif %}
-                    <p class="p--lined"><span>{{ 'user.register.or'|trans({}, 'CapcoAppBundle') }}</span></p>
                 {% endif %}
+            </div>
+
+            <div class="block  block--bordered  box">
 
                 {% block capco_user_registration %}
                     <form role="form" action="{{ path('fos_user_registration_register') }}" {{ form_enctype(form) }} method="POST">
@@ -44,17 +46,9 @@
                             <label for="password" class="control-label  h5">
                                 {{ 'security.login.password'|trans({}, 'SonataUserBundle') }}
                             </label>
-                            {{ form_widget(form.plainPassword.first) }}
+                            {{ form_widget(form.plainPassword) }}
                         </div>
-                        {{ form_errors(form.plainPassword.first) }}
-
-                        <div class="form-group">
-                            <label for="password-confirm" class="control-label  h5">
-                                {{ 'form.password_confirmation'|trans({}, 'SonataUserBundle') }}
-                            </label>
-                            {{ form_widget(form.plainPassword.second) }}
-                        </div>
-                        {{ form_errors(form.plainPassword.second) }}
+                        {{ form_errors(form.plainPassword) }}
 
                         {% if form.isTermsAccepted is defined %}
                             {{ form_widget(form.isTermsAccepted) }}

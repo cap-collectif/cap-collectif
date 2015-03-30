@@ -3,7 +3,7 @@
 {% set nbAppendices = (nbPosts > 0) + (nbEvents > 0) %}
 
 {% if nbAppendices > 0 %}
-    <div class="appendices__container">
+    <div class="container  container--custom  appendices__container">
         <div class="row  text-center">
             {% if nbPosts > 0 %}
                 <div class="col-centered col-xs-12 col-sm-6 {% if nbAppendices == 1 %}col-md-offset-4 {% endif %}col-md-4 text-center  appendices__item  box">
