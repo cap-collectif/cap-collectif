@@ -16,7 +16,7 @@
 {% endblock %}
 
 {% block body %}
-    <div class="container">
+    <div class="container  container--custom">
         {% if theme.Media %}
             {% thumbnail theme.Media, 'idea' with {'class': 'block  img-responsive'} %}
         {% endif %}
@@ -27,11 +27,11 @@
         {% endif %}
         {% if theme.status != null %}
             <p class="theme__status">{{ 'theme.show.status.title'|trans({}, 'CapcoAppBundle') }}
-                {% if theme.status == statuses.opened %}
+                {% if theme.isOpened %}
                     <span class="label label-success">{{ 'theme.show.status.opened'|trans({}, 'CapcoAppBundle') }}</span>
-                {% elseif theme.status == statuses.closed %}
+                {% elseif theme.isClosed %}
                     <span class="label label-danger">{{ 'theme.show.status.closed'|trans({}, 'CapcoAppBundle') }}</span>
-                {% elseif theme.status == statuses.future %}
+                {% elseif theme.isFuture %}
                     <span class="label label-info">{{ 'theme.show.status.future'|trans({}, 'CapcoAppBundle') }}</span>
                 {% endif %}
             </p>
@@ -39,12 +39,12 @@
     </div>
 
 
-    <div class="container">
+    <div class="container  container--custom">
         <h2 class="h2">{{ 'theme.show.consultations.title'|trans({}, 'CapcoAppBundle') }}</h2>
         {% include 'CapcoAppBundle:Theme:lastConsultations.html.twig' with {'consultations': theme.Consultations} %}
     </div>
 
-    <div class="container">
+    <div class="container  container--custom">
         <h2 class="h2">{{ 'theme.show.ideas.title'|trans({}, 'CapcoAppBundle') }} <a class="pull-right  btn  btn-primary" href="{{ path('app_idea_create') }}">{{ 'idea.create.button'|trans({}, 'CapcoAppBundle') }}</a></h2>
         {%  include 'CapcoAppBundle:Theme:lastIdeas.html.twig' with {'ideas': theme.Ideas} %}
     </div>

@@ -46,6 +46,11 @@
 
     {% for section in sections %}
 
+        {% set alt = false %}
+        {% if loop.index is odd %}
+            {% set alt = true %}
+        {% endif %}
+
         {% if section.type == 'introduction' %}
             {% include '@CapcoApp/Homepage/intro.html.twig' with {'section': section} %}
         {% elseif section.type == 'videos' %}
@@ -66,6 +71,7 @@
             {{ render(controller('CapcoAppBundle:Homepage:socialNetworks', {'section': section})) }}
         {% elseif section.type == 'custom' %}
             {% include '@CapcoApp/Homepage/custom_section.html.twig' with {'section': section} %}
+        {% elseif section.type == 'figures' %}
         {% endif %}
 
     {% endfor %}

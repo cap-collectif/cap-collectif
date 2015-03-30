@@ -61,7 +61,7 @@ contact:
   address: Adresse
   tel: Téléphone
   form:
-    title: Ecrivez-nous !
+    title: Ecrivez-nous
     name: Nom
     email: Adresse électronique
     message: Message

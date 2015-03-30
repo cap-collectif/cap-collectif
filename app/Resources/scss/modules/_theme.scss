@@ -2,16 +2,13 @@
 $THEME
 ================================================================*/
 .bg--theme {
-  height: 150px;
-  width: 225px;
-  padding-top: 20px;
+  background-color: $brand-primary;
+  padding-top: 45px;
+  padding-bottom: 45px;
 }
 
 .theme {
-  background-color: $white;
   text-align: center;
-  border: 1px solid #ddd;
-  padding: 20px 15px;
 
   &:hover {
     background-color: $light-gray;
@@ -23,9 +20,14 @@ $THEME
     padding: 0 0 10px 0;
   }
 
-  p {
-    margin: 0;
-    padding: 0;
+  p:last-of-type {
+    margin-bottom: 0;
+  }
+
+  @media (max-width: $screen-xs-max) {
+    img {
+      width: 100%;
+    }
   }
 
 }

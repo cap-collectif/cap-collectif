@@ -87,7 +87,7 @@ Capco\AppBundle\Entity\Section:
         teaser: <text(150)>
         body: null
         nbObjects: null
-        enabled: true
+        enabled: false
         associatedFeatures: []
     SectionCustomEnabled:
         type: custom

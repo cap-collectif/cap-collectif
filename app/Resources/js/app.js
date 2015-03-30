@@ -14,20 +14,23 @@ App.module = function ($) {
             $($el).height('auto');
             topPosition = $el.position().top;
 
-            if (currentRowStart != topPosition) {
-                for (currentDiv = 0 ; currentDiv < rowDivs.length ; currentDiv++) {
+            if ($(window).width() > 767) {
+
+                if (currentRowStart != topPosition) {
+                    for (currentDiv = 0; currentDiv < rowDivs.length; currentDiv++) {
+                        rowDivs[currentDiv].height(currentTallest);
+                    }
+                    rowDivs.length = 0; // empty the array
+                    currentRowStart = topPosition;
+                    currentTallest = $el.height();
+                    rowDivs.push($el);
+                } else {
+                    rowDivs.push($el);
+                    currentTallest = (currentTallest < $el.height()) ? ($el.height()) : (currentTallest);
+                }
+                for (currentDiv = 0; currentDiv < rowDivs.length; currentDiv++) {
                     rowDivs[currentDiv].height(currentTallest);
                 }
-                rowDivs.length = 0; // empty the array
-                currentRowStart = topPosition;
-                currentTallest = $el.height();
-                rowDivs.push($el);
-            } else {
-                rowDivs.push($el);
-                currentTallest = (currentTallest < $el.height()) ? ($el.height()) : (currentTallest);
-            }
-            for (currentDiv = 0 ; currentDiv < rowDivs.length ; currentDiv++) {
-                rowDivs[currentDiv].height(currentTallest);
             }
         });
 
@@ -130,7 +133,7 @@ App.module = function ($) {
         // Fix containers
         var containers = options['container'] + ' .container';
         $(options['container']).addClass('container  sidebar__container');
-        $(containers).removeClass('container');
+        $(containers).removeClass('container').addClass('container--with-sidebar');
 
         // Handle small screens
         $(options['toggle']).on('click', function() {

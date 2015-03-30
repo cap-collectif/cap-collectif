@@ -28,12 +28,15 @@
 {% endblock %}
 
 {% block body %}
-    <div class="container">
 
+    <div class="container  container--custom">
         {% set content_body = capco_site_parameter_value('consultations.content.body') %}
         {% if null != content_body %}
-            <div class="block">{{ content_body|raw }}</div>
+            {{ content_body|raw }}
         {% endif %}
+    </div>
+
+    <div class="container  container--custom">
 
         <div class="filter  block">
             <div class="row">
@@ -82,31 +85,32 @@
                 </p>
             {% endif %}
         </div>
-    </div>
 
-    {% if nbPage > 1 %}
-        <div class="pagination--custom  text-center">
-            <ul class="pagination">
-                {% set theme = form.vars.data.theme %}
-                {% if theme is null %}
-                    {% set theme = 'all' %}
-                {% endif %}
-                {% for p in range(1, nbPage) %}
-                    <li{% if p == page %} class="active"{% endif %}>
-                        {% if (form.vars.data.sort is not null) or (form.vars.data.theme is not null) %}
-                            {% if form.vars.data.term is not null %}
-                                <a href="{{ path('app_consultation_search_term', {'page': p, 'sort': form.vars.data.sort, 'theme': theme, 'term': form.vars.data.term }) }}">{{ p }}</a>
+        {% if nbPage > 1 %}
+            <div class="pagination--custom  text-center">
+                <ul class="pagination">
+                    {% set theme = form.vars.data.theme %}
+                    {% if theme is null %}
+                        {% set theme = 'all' %}
+                    {% endif %}
+                    {% for p in range(1, nbPage) %}
+                        <li{% if p == page %} class="active"{% endif %}>
+                            {% if (form.vars.data.sort is not null) or (form.vars.data.theme is not null) %}
+                                {% if form.vars.data.term is not null %}
+                                    <a href="{{ path('app_consultation_search_term', {'page': p, 'sort': form.vars.data.sort, 'theme': theme, 'term': form.vars.data.term }) }}">{{ p }}</a>
+                                {% else %}
+                                    <a href="{{ path('app_consultation_search', {'page': p, 'sort': form.vars.data.sort, 'theme': theme }) }}">{{ p }}</a>
+                                {% endif %}
                             {% else %}
-                                <a href="{{ path('app_consultation_search', {'page': p, 'sort': form.vars.data.sort, 'theme': theme }) }}">{{ p }}</a>
+                                <a href="{{ path('app_consultation', {'page': p}) }}">{{ p }}</a>
                             {% endif %}
-                        {% else %}
-                            <a href="{{ path('app_consultation', {'page': p}) }}">{{ p }}</a>
-                        {% endif %}
-                    </li>
-                {% endfor %}
-            </ul>
-        </div>
-    {% endif %}
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        {% endif %}
+
+    </div>
 
 {% endblock %}
 

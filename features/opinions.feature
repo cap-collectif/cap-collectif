@@ -55,4 +55,4 @@ Feature: Opinions
       | opinion_type_slug | solutions                        |
       | opinion_slug      | opinion-5                        |
     When I click the ".connection-popover-js > label" element
-    Then I should see "1" in the ".opinion__votes-nb" element
+    Then I should see "1" in the ".opinion__chart" element
