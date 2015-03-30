@@ -61,6 +61,10 @@
             </li>
         </ul>
 
+        {% if consultation.canContribute %}
+            <a class="btn  btn-primary" href="{{ path('app_consultation_show', {'slug': consultation.slug}) }}">{{ 'step.presentation.participe' | trans({}, 'CapcoAppBundle') }}</a>
+        {% endif %}
+
         {{ sonata_block_render({'type': 'capco.block.service.share_button'}, {
             'url': (consultation | capco_first_step_link(true)),
             'title': consultation.title

@@ -1,4 +1,7 @@
-<div class="col-md-4  col-sm-6  col-xs-12">
+{% if col_classes is not defined %}
+    {% set col_classes = 'col-md-4  col-sm-6' %}
+{% endif %}
+<div class="{{ col_classes }}  col-xs-12">
     <div class="event  block  block--bordered">
         <div class="col-md-3  col-sm-3  hidden-xs">
             <div class="event__icon center-block">

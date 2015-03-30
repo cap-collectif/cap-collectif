@@ -1,6 +1,6 @@
 <?php
 
-namespace Capco\AppBundle\Manager;
+namespace Capco\AppBundle\Resolver;
 
 use Capco\AppBundle\Entity\Consultation;
 use Capco\AppBundle\Entity\Step;
@@ -20,6 +20,8 @@ class StepResolver
         if (null != $step) {
             if ($step->isConsultationStep()) {
                 return $this->router->generate('app_consultation_show', array('slug' => $step->getConsultation()->getSlug()), $absolute);
+            } elseif ($step->isPresentationStep()) {
+                return $this->router->generate('app_consultation_show_presentation', array('consultation_slug' => $step->getConsultation()->getSlug(), 'step_slug' => $step->getSlug()), $absolute);
             } elseif ($step->isOtherStep()) {
                 return $this->router->generate('app_consultation_show_step', array('consultation_slug' => $step->getConsultation()->getSlug(), 'step_slug' => $step->getSlug()), $absolute);
             }

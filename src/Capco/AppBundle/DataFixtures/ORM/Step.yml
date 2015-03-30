@@ -8,9 +8,9 @@ Capco\AppBundle\Entity\Step:
         position: 2
         consultation: @cs1
     step2:
-        title: Préparation de la synthèse
+        title: Présentation
         isEnabled: true
-        type: 0
+        type: 2
         startAt: <(new \DateTime('2015-03-25'))>
         endAt: <(new \DateTime('2015-04-25'))>
         position: 1

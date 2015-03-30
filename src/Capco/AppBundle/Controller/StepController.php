@@ -73,4 +73,38 @@ class StepController extends Controller
             'currentStep' => $step,
         ];
     }
+
+    /**
+     * @Route("/consultation/{consultation_slug}/presentation/{step_slug}", name="app_consultation_show_presentation")
+     * @Template("CapcoAppBundle:Step:presentation.html.twig")
+     * @ParamConverter("step", class="CapcoAppBundle:Step", options={"mapping" = {"step_slug": "slug"}})
+     *
+     * @param $consultation_slug
+     * @param Step         $step
+     *
+     * @return array
+     */
+    public function showPresentationAction($consultation_slug, Step $step)
+    {
+        if ($step->isConsultationStep()) {
+            throw new NotFoundHttpException();
+        }
+
+        if (!$step->getConsultation()->canDisplay()) {
+            throw new NotFoundHttpException();
+        }
+
+        $em = $this->getDoctrine()->getManager();
+        $consultation = $em->getRepository('CapcoAppBundle:Consultation')->getOneBySlugWithEventsAndPosts($consultation_slug, 2, 2);
+        $events = $this->get('capco.event.repository')->getLastByConsultation($consultation_slug, 2);
+        $posts = $this->get('capco.blog.post.repository')->getLastPublishedByConsultation($consultation_slug, 2);
+
+        return [
+            'consultation' => $consultation,
+            'statuses' => Theme::$statuses,
+            'currentStep' => $step,
+            'events' => $events,
+            'posts' => $posts,
+        ];
+    }
 }

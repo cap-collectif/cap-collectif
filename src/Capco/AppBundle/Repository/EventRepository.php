@@ -160,6 +160,40 @@ class EventRepository extends EntityRepository
     }
 
     /**
+     * Get last events by consultation.
+     *
+     * @param $consultationSlug
+     * @param int $limit
+     * @param int $offset
+     *
+     * @return mixed
+     */
+    public function getLastByConsultation($consultationSlug, $limit = 1, $offset = 0)
+    {
+        $qb = $this->getIsEnabledQueryBuilder()
+            ->addSelect('a', 't', 'media', 'c')
+            ->leftJoin('e.Author', 'a')
+            ->leftJoin('e.themes', 't')
+            ->leftJoin('e.consultations', 'c')
+            ->leftJoin('e.Media', 'media')
+            ->andWhere('c.slug = :consultation')
+            ->setParameter('consultation', $consultationSlug)
+            ->orderBy('e.startAt', 'ASC');
+
+        $qb = $this->whereIsNotArchived($qb);
+
+        if ($limit) {
+            $qb->setMaxResults($limit);
+        }
+
+        if ($offset) {
+            $qb->setFirstResult($offset);
+        }
+
+        return $qb->getQuery()->execute();
+    }
+
+    /**
      * Get Events by theme.
      *
      * @param theme

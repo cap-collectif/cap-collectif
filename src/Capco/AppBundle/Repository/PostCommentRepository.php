@@ -22,7 +22,7 @@ class PostCommentRepository extends EntityRepository
             ->addSelect('aut', 'm', 'v', 'p', 'r')
             ->leftJoin('c.Author', 'aut')
             ->leftJoin('aut.Media', 'm')
-            ->leftJoin('c.Votes', 'v')
+            ->leftJoin('c.votes', 'v')
             ->leftJoin('c.Reports', 'r')
             ->leftJoin('c.Post', 'p')
             ->andWhere('c.Post = :post')

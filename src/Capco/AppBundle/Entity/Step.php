@@ -17,18 +17,17 @@ class Step
 {
     const TYPE_OTHER = 0;
     const TYPE_CONSULTATION = 1;
+    const TYPE_PRESENTATION = 2;
 
     public static $stepTypes = [
         'consultation' => self::TYPE_CONSULTATION,
+        'presentation' => self::TYPE_PRESENTATION,
         'other' => self::TYPE_OTHER,
     ];
 
     public static $stepTypeLabels = [
         self::TYPE_CONSULTATION => 'Consultation',
-        self::TYPE_OTHER => 'Autre',
-    ];
-
-    public static $stepTypeLabelsNoConsultation = [
+        self::TYPE_PRESENTATION => 'Présentation',
         self::TYPE_OTHER => 'Autre',
     ];
 
@@ -391,6 +390,18 @@ class Step
     public function isConsultationStep()
     {
         if ($this->type == self::TYPE_CONSULTATION) {
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isPresentationStep()
+    {
+        if ($this->type == self::TYPE_PRESENTATION) {
             return true;
         }
 

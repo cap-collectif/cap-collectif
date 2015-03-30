@@ -288,6 +288,14 @@ consultation:
     no_contribute: Impossible de contribuer sur cette consultation.
 
 step:
+  presentation:
+    participe: Participer
+    posts:
+      title: Actualités
+      see_all: Voir tous les articles
+    events:
+      title: Évènements
+      see_all: Voir tous les évènements
   status:
     closed: Terminé
     open: En cours

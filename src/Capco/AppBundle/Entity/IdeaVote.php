@@ -66,6 +66,11 @@ class IdeaVote extends AbstractVote
         return $this->idea;
     }
 
+    public function getRelatedEntity()
+    {
+        return $this->idea;
+    }
+
     /**
      * @ORM\PreRemove
      */

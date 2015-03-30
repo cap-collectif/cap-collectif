@@ -68,6 +68,37 @@ class ConsultationRepository extends EntityRepository
     }
 
     /**
+     * Get one by slug with events and posts.
+     *
+     * @param $slug
+     * @param int $eventsLimit
+     * @param int $postsLimit
+     * @return mixed
+     * @throws \Doctrine\ORM\NonUniqueResultException
+     */
+    public function getOneBySlugWithEventsAndPosts($slug, $eventsLimit = 2, $postsLimit = 2)
+    {
+        $qb = $this->getIsEnabledQueryBuilder('c')
+            ->addSelect('t', 's', 'cov', 'p', 'e')
+            ->leftJoin('c.Themes', 't')
+            ->leftJoin('c.Steps', 's')
+            ->leftJoin('c.Cover', 'cov')
+            ->leftJoin('c.posts', 'p', 'WITH', 'p.isPublished = :published')
+            ->leftJoin('c.events', 'e', 'WITH', 'e.isEnabled = :enabled')
+            ->andWhere('c.slug = :slug')
+            ->setParameter('slug', $slug)
+            ->setParameter('published', true)
+            ->setParameter('enabled', true)
+            ->addOrderBy('p.publishedAt', 'DESC')
+            ->addOrderBy('e.startAt', 'DESC')
+        ;
+
+        return $qb
+            ->getQuery()
+            ->getOneOrNullResult();
+    }
+
+    /**
      * Get search results.
      *
      * @param int  $nbByPage
