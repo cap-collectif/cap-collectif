@@ -32,7 +32,7 @@ liip_imagine:
             controller_action: 'SonataMediaBundle:Media:liipImagineFilter'
             format: png
             filters:
-                thumbnail: { size: [750, 500], mode: outbound }
+                thumbnail: { size: [760, 500], mode: outbound }
 
         default_consultation:
             quality: 100
@@ -113,14 +113,6 @@ liip_imagine:
                 relative_resize: {widen: 320 }
 
         default_homepageVideo:
-            quality: 100
-            controller_action: 'SonataMediaBundle:Media:liipImagineFilter'
-            format: png
-            filters:
-                thumbnail: { size: [360, 240], mode: outbound }
-                crop: { start: [0, 0], size: [360, 240] }
-
-        default_theme:
             quality: 100
             controller_action: 'SonataMediaBundle:Media:liipImagineFilter'
             format: png

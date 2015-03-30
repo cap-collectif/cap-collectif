@@ -11,6 +11,7 @@
                         <i class="cap cap-{% if previousType == voteType %}{{ typeStyles[voteType]['icon_checked'] }}{% else %}{{ typeStyles[voteType]['icon'] }}{% endif %}"></i> {{ child.vars.label|trans({}, child.vars.translation_domain) }}
                     </label>
                 </a>
+  				<span class="nb-bordered  opinion__votes-nb" data-value="{{ voteCounts[voteType] }}">{{ voteCounts[voteType] }}</span>
     		</div>
         {% endfor %}
 	</div>

@@ -90,6 +90,7 @@ class ThemeController extends Controller
 
         return array(
             'theme' => $theme,
+            'statuses' => Theme::$statuses,
         );
     }
 }

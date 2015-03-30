@@ -27,14 +27,6 @@ class RegistrationFormType extends AbstractType
                 'property_path' => 'isTermsAccepted',
             ));
         }
-
-        $builder
-            ->remove('plainPassword')
-            ->add('plainPassword', 'password', array(
-                'translation_domain' => 'FOSUserBundle',
-                'label' => 'form.password',
-            ))
-        ;
     }
 
     public function getParent()

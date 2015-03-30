@@ -44,16 +44,12 @@ class IdeaVoteType extends AbstractType
             ;
 
             if ($this->commentable) {
-                $builder->add('message', 'textarea', [
+                $builder->add('message', null, [
                     'required' => false,
-                    'mapped' => false,
+                    'mapped'        => false,
                     'label' => false,
-                    'attr' => [
-                        'placeholder' => 'idea.vote.message',
-                        'rows' => 5,
-                        'style' => 'resize: vertical;',
-                    ],
-                ]);
+                    'attr' => ['placeholder' => 'idea.vote.message'],
+              ]);
             }
 
             $builder
@@ -80,16 +76,12 @@ class IdeaVoteType extends AbstractType
         ;
 
         if ($this->commentable) {
-            $builder->add('message', 'textarea', [
+            $builder->add('message', null, [
                 'required' => false,
-                'mapped' => false,
+                'mapped'        => false,
                 'label' => false,
-                'attr' => [
-                    'placeholder' => 'idea.vote.message',
-                    'rows' => 5,
-                    'style' => 'resize: vertical;',
-                ],
-            ]);
+                'attr' => ['placeholder' => 'idea.vote.message'],
+          ]);
         }
 
         $builder

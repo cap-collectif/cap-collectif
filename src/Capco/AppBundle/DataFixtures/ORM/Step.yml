@@ -75,11 +75,3 @@ Capco\AppBundle\Entity\Step:
             <p><text(1000)></p>
             <h3>Une bonne synthèse argumentée</h3>
             <p><text(500)></p>
-    step8:
-        title: Consultation
-        isEnabled: true
-        type: 1
-        startAt: <dateTimeBetween('-40 days', 'now')>
-        endAt: <dateTimeBetween('now', '+10 days')>
-        position: 1
-        consultation: @cs4

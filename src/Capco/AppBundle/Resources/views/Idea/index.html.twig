@@ -28,15 +28,13 @@
 {% endblock %}
 
 {% block body %}
+    <div class="container">
 
-    <div class="container  container--custom">
         {% set content_body = capco_site_parameter_value('ideas.content.body') %}
         {% if null != content_body %}
-            {{ content_body|raw }}
+            <div class="block">{{ content_body|raw }}</div>
         {% endif %}
-    </div>
 
-    <div class="container  container--custom">
         <div class="filter  block">
             <div class="row">
                 <div class="col-xs-12  col-sm-3  col-md-3  col-lg-2  filter__down">
@@ -91,34 +89,34 @@
                 </p>
             {% endif %}
         </div>
-
-        {% if nbPage > 1 %}
-            <div class="pagination--custom  text-center block">
-                <ul class="pagination">
-                    {% if form.vars.data.theme is not null %}
-                        {% set theme = form.vars.data.theme.slug %}
-                    {% else %}
-                        {% set theme = 'all' %}
-                    {% endif %}
-                    {% for p in range(1, nbPage) %}
-                        <li{% if p == page %} class="active"{% endif %}>
-                            {% if (form.vars.data.sort is not null) or (form.vars.data.theme is not null) %}
-                                {% if form.vars.data.term is not null %}
-                                    <a href="{{ path('app_idea_search_term', {'page': p, 'sort': form.vars.data.sort, 'theme': theme, 'term': form.vars.data.term }) }}">{{ p }}</a>
-                                {% else %}
-                                    <a href="{{ path('app_idea_search', {'page': p, 'sort': form.vars.data.sort, 'theme': theme }) }}">{{ p }}</a>
-                                {% endif %}
-                            {% else %}
-                                <a href="{{ path('app_idea', {'page': p}) }}">{{ p }}</a>
-                            {% endif %}
-                        </li>
-                    {% endfor %}
-                </ul>
-            </div>
-        {% endif %}
     </div>
 
-    <div class="container  container--custom  appendices__container">
+    {% if nbPage > 1 %}
+        <div class="pagination--custom  text-center block">
+            <ul class="pagination">
+                {% if form.vars.data.theme is not null %}
+                    {% set theme = form.vars.data.theme.slug %}
+                {% else %}
+                    {% set theme = 'all' %}
+                {% endif %}
+                {% for p in range(1, nbPage) %}
+                    <li{% if p == page %} class="active"{% endif %}>
+                        {% if (form.vars.data.sort is not null) or (form.vars.data.theme is not null) %}
+                            {% if form.vars.data.term is not null %}
+                                <a href="{{ path('app_idea_search_term', {'page': p, 'sort': form.vars.data.sort, 'theme': theme, 'term': form.vars.data.term }) }}">{{ p }}</a>
+                            {% else %}
+                                <a href="{{ path('app_idea_search', {'page': p, 'sort': form.vars.data.sort, 'theme': theme }) }}">{{ p }}</a>
+                            {% endif %}
+                        {% else %}
+                            <a href="{{ path('app_idea', {'page': p}) }}">{{ p }}</a>
+                        {% endif %}
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    {% endif %}
+
+    <div class="appendices__container">
         <div class="row">
             <div class="col-xs-12 col-md-4 col-md-offset-4 text-center  appendices__item  box">
                 <h2 class="h4">{{ 'idea.index.appendices.trashed.title'|trans({}, 'CapcoAppBundle') }}</h2>

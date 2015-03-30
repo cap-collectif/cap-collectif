@@ -1,12 +1,6 @@
  /* ===============================================================
    $Thumbnail
 ================================================================*/
- .bg--consultation {
-   background-color: $brand-primary;
-   padding-top: 45px;
-   padding-bottom: 45px;
- }
-
 .thumbnail--custom {
   @include border-radius(0);
   padding: 0;

@@ -547,19 +547,4 @@ class Theme
 
         return $count;
     }
-
-    public function isOpened()
-    {
-        return $this->status == self::$statuses['opened'];
-    }
-
-    public function isClosed()
-    {
-        return $this->status == self::$statuses['closed'];
-    }
-
-    public function isFuture()
-    {
-        return $this->status == self::$statuses['future'];
-    }
 }

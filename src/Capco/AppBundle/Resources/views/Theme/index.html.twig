@@ -28,15 +28,12 @@
 {% endblock %}
 
 {% block body %}
+    <div class="container">
 
-    <div class="container  container--custom">
         {% set content_body = capco_site_parameter_value('themes.content.body') %}
         {% if null != content_body %}
-            {{ content_body|raw }}
+            <div class="block">{{ content_body|raw }}</div>
         {% endif %}
-    </div>
-
-    <div class="container  container--custom">
 
         <div class="filter  block">
             <div class="row">

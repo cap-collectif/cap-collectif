@@ -21,8 +21,18 @@
 
       &.active a,
       &.active:hover a {
-        border-left: 5px solid $brand-primary;
-        background-color: $light-gray;
+        background-color: $brand-primary;
+
+        .navbar__step-nb,
+        .navbar__step-title,
+        .excerpt {
+          color: $white;
+        }
+
+        .label {
+          color: $brand-primary;
+          background-color: $white;
+        }
       }
 
       &:hover a{

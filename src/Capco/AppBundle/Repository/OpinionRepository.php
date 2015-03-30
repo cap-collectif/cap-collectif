@@ -210,16 +210,14 @@ class OpinionRepository extends EntityRepository
      */
     public function getByConsultationAndOpinionTypeOrdered($consultation, $ot, $limit = 5)
     {
-        $qb = $this->getIsEnabledQueryBuilder('o')
+        $qb = $this->createQueryBuilder('o')
             ->addSelect('ot', 'aut', '(o.voteCountMitige + o.voteCountOk + o.voteCountNok) as HIDDEN vnb')
             ->leftJoin('o.OpinionType', 'ot')
             ->leftJoin('o.Author', 'aut')
             ->andWhere('o.Consultation = :consultation')
             ->andWhere('ot.id = :ot')
-            ->andWhere('o.isTrashed = :notTrashed')
             ->setParameter('consultation', $consultation)
             ->setParameter('ot', $ot)
-            ->setParameter('notTrashed', false)
             ->addOrderBy('vnb', 'DESC')
             ->setMaxResults($limit)
             ;
@@ -252,10 +250,10 @@ class OpinionRepository extends EntityRepository
             ->getResult();
     }
 
-    protected function getIsEnabledQueryBuilder($alias ='o')
+    protected function getIsEnabledQueryBuilder()
     {
-        return $this->createQueryBuilder($alias)
-            ->andWhere($alias.'.isEnabled = :isEnabled')
+        return $this->createQueryBuilder('o')
+            ->andWhere('o.isEnabled = :isEnabled')
             ->setParameter('isEnabled', true);
     }
 }

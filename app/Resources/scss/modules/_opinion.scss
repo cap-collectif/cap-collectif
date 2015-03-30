@@ -79,6 +79,10 @@
       }
     }
 
+    &.opinion__header--end {
+      border-top: 1px solid $border;
+    }
+
     @media (max-width: $screen-sm-max) {
       .opinion__header__title,
       .opinion__header__filter {
@@ -88,10 +92,6 @@
         margin-bottom: 10px;
       }
     }
-  }
-
-  &.opinion__footer {
-    border-top: 1px solid $border;
   }
 
   // Body of opinion blocks
@@ -110,12 +110,6 @@
     .opinion__user {
       margin: 0px 0px 5px;
       position: relative;
-
-      &.excerpt {
-        a {
-          color: $excerpt;
-        }
-      }
     }
 
     .label {
@@ -125,8 +119,8 @@
       margin-left: 5px;
     }
 
-    .opinion__title,
-    .opinion__user {
+    .opinion__user,
+    .opinion__title {
       a {
         color: black;
       }

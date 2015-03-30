@@ -28,15 +28,13 @@
 {% endblock %}
 
 {% block body %}
+    <div class="container">
 
-    {% set content_body = capco_site_parameter_value('events.content.body') %}
-    {% if null != content_body %}
-        <div class="container  container--custom">
-            {{ content_body|raw }}
-        </div>
-    {% endif %}
+        {% set content_body = capco_site_parameter_value('events.content.body') %}
+        {% if null != content_body %}
+            <div class="block">{{ content_body|raw }}</div>
+        {% endif %}
 
-    <div class="container  container--custom">
         <div class="filter  block">
             <div class="row">
                 {{ form_start(form) }}

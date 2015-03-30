@@ -10,7 +10,7 @@
 {% endblock %}
 
 {% block body %}
-    <div class="container  container--custom">
+    <div class="container">
         <div class="row">
             <div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2">
                 <div class="dialog  dialog--light-gray  block--bordered">
@@ -30,6 +30,7 @@
                                     </a>
                                 {% endif %}
                                 <div class="media-body">
+                                    {{ form_errors(form) }}
                                     {{ form_rest(form) }}
                                 </div>
                             </div>
