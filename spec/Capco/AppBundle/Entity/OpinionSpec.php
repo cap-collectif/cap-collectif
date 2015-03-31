@@ -20,4 +20,14 @@ class OpinionSpec extends ObjectBehavior
     	$this->getTrashedReason()->shouldReturn(null);
     	$this->getTrashedAt()->shouldReturn(null);
     }
+
+
+    function it_can_reset_vote_count()
+    {
+    	$this->resetVotesCOunt();
+
+    	$this->getVoteCountOk()->shouldReturn(0);
+    	$this->getVoteCountNok()->shouldReturn(0);
+    	$this->getVoteCountMitige()->shouldReturn(0);
+    }
 }

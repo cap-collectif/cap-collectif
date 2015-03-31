@@ -32,8 +32,6 @@ parameters:
     capco.section.repository.class: Capco\AppBundle\Repository\SectionRepository
     capco.section.resolver.class: Capco\AppBundle\Resolver\SectionResolver
     capco.twig.section_resolver.class: Capco\AppBundle\Twig\SectionExtension
-    capco.has_theme_if_activated.validator.class: Capco\AppBundle\Validator\Constraints\HasThemeIfActivatedValidator
-    capco.help_extension.class: Capco\AppBundle\Form\Extension\HelpExtension
 
 services:
     capco.site_parameter.repository:
@@ -252,20 +250,3 @@ services:
         arguments: [@capco.section.resolver]
         tags:
           - { name: twig.extension }
-
-    capco.has_theme_if_activated.validator:
-        class: %capco.has_theme_if_activated.validator.class%
-        arguments: [@capco.toggle.manager]
-        tags:
-            - { name: validator.constraint_validator, alias: has_theme_if_activated.validator }
-
-    capco.help_extension:
-      class: %capco.help_extension.class%
-      tags:
-        - { name: form.type_extension, alias: text }
-
-    capco.vote.suscriber:
-        class: Capco\AppBundle\EventListener\VoteSuscriber
-        arguments: [@doctrine.orm.entity_manager]
-        tags:
-            - { name: "kernel.event_subscriber" }

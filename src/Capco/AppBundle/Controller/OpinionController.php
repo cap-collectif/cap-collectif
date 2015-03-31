@@ -19,8 +19,6 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Symfony\Component\Form\Form;
-use Capco\AppBundle\CapcoAppBundleEvents;
-use Capco\AppBundle\Event\OpinionVoteChangedEvent;
 
 class OpinionController extends Controller
 {
@@ -55,14 +53,7 @@ class OpinionController extends Controller
             if ($this->isCsrfTokenValid('remove_opinion_vote', $request->get('_csrf_token'))) {
                 $em = $this->getDoctrine()->getManager();
                 $em->remove($opinionVote);
-
-                $this->get('event_dispatcher')->dispatch(
-                    CapcoAppBundleEvents::OPINION_VOTE_CHANGED,
-                    new OpinionVoteChangedEvent($opinionVote, 'remove')
-                );
-
                 $em->flush();
-
                 $this->get('session')->getFlashBag()->add('success', $this->get('translator')->trans('opinion.vote.delete.success', array(), 'CapcoAppBundle'));
             } else {
                 $this->get('session')->getFlashBag()->add('danger', $this->get('translator')->trans('argument.vote.csrf_error', array(), 'CapcoAppBundle'));
@@ -284,31 +275,23 @@ class OpinionController extends Controller
             if (!$alreadyVoted) {
                 $opinionVote->setOpinion($opinion);
                 $em->persist($opinionVote);
-                $this->get('event_dispatcher')->dispatch(
-                    CapcoAppBundleEvents::OPINION_VOTE_CHANGED,
-                    new OpinionVoteChangedEvent($opinionVote, 'add')
-                );
                 $em->flush();
-
                 $this->get('session')->getFlashBag()->add('success', $this->get('translator')->trans('opinion.vote.add.success'));
-
-                return;
+            } else {
+                $previousVote = $em->getUnitOfWork()->getOriginalEntityData($opinionVote);
+                if ($previousVote['value'] == $opinionVote->getValue()) {
+                    $em->remove($opinionVote);
+                    $em->flush();
+                    $this->get('session')->getFlashBag()->add('info', $this->get('translator')->trans('opinion.vote.delete.success'));
+                } else {
+                    $em->persist($opinionVote);
+                    $em->flush();
+                    $this->get('session')->getFlashBag()->add('success', $this->get('translator')->trans('opinion.vote.update.success'));
+                }
             }
-
-            $previousVote = $em->getUnitOfWork()->getOriginalEntityData($opinionVote);
-            $em->persist($opinionVote);
-            $this->get('event_dispatcher')->dispatch(
-                CapcoAppBundleEvents::OPINION_VOTE_CHANGED,
-                new OpinionVoteChangedEvent($opinionVote, 'update', $previousVote['value'])
-            );
-            $em->flush();
-
-            $this->get('session')->getFlashBag()->add('success', $this->get('translator')->trans('opinion.vote.update.success'));
-
-            return;
+        } else {
+            $this->get('session')->getFlashBag()->add('danger', $this->get('translator')->trans('opinion.vote.error'));
         }
-
-        $this->get('session')->getFlashBag()->add('danger', $this->get('translator')->trans('opinion.vote.error'));
     }
 
     /**

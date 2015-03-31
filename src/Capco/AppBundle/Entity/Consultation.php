@@ -504,6 +504,7 @@ class Consultation
     public function addOpinion($opinion)
     {
         if (!$this->Opinions->contains($opinion)) {
+            $this->opinionCount++;
             $this->Opinions->add($opinion);
         }
 
@@ -517,7 +518,9 @@ class Consultation
      */
     public function removeOpinion($opinion)
     {
-        $this->Opinions->removeElement($opinion);
+        if ($this->Opinions->removeElement($opinion)) {
+            $this->opinionCount--;
+        }
 
         return $this;
     }
@@ -924,11 +927,115 @@ class Consultation
     }
 
     /**
+     * @param $nb
+     *
+     * @return $this
+     */
+    public function increaseOpinionCount($nb)
+    {
+        $this->opinionCount += $nb;
+
+        return $this;
+    }
+
+    /**
+     * @param $nb
+     *
+     * @return $this
+     */
+    public function decreaseOpinionCount($nb)
+    {
+        if ($this->opinionCount >= $nb) {
+            $this->opinionCount -= $nb;
+        }
+
+        return $this;
+    }
+
+    /**
+     * @param $nb
+     *
+     * @return $this
+     */
+    public function increaseTrashedOpinionCount($nb)
+    {
+        $this->trashedOpinionCount += $nb;
+
+        return $this;
+    }
+
+    /**
+     * @param $nb
+     *
+     * @return $this
+     */
+    public function decreaseTrashedOpinionCount($nb)
+    {
+        if ($this->trashedOpinionCount >= $nb) {
+            $this->trashedOpinionCount -= $nb;
+        }
+
+        return $this;
+    }
+
+    /**
+     * @param $nb
+     *
+     * @return $this
+     */
+    public function increaseArgumentCount($nb)
+    {
+        $this->argumentCount += $nb;
+
+        return $this;
+    }
+
+    /**
+     * @param $nb
+     *
+     * @return $this
+     */
+    public function decreaseArgumentCount($nb)
+    {
+        if ($this->argumentCount >= $nb) {
+            $this->argumentCount -= $nb;
+        }
+
+        return $this;
+    }
+
+    /**
+     * @param $nb
+     *
+     * @return $this
+     */
+    public function increaseTrashedArgumentCount($nb)
+    {
+        $this->trashedArgumentCount += $nb;
+
+        return $this;
+    }
+
+    /**
+     * @param $nb
+     *
+     * @return $this
+     */
+    public function decreaseTrashedArgumentCount($nb)
+    {
+        if ($this->trashedArgumentCount >= $nb) {
+            $this->trashedArgumentCount -= $nb;
+        }
+
+        return $this;
+    }
+
+    /**
      * @return int
      */
     public function getTotalContributionsCount()
     {
-        return $this->argumentCount + $this->opinionCount + $this->trashedArgumentCount + $this->trashedOpinionCount;
+        return ($this->argumentCount + $this->opinionCount + $this->trashedArgumentCount + $this->trashedOpinionCount);
     }
 
     /**

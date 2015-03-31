@@ -22,7 +22,7 @@ class IdeaCommentRepository extends EntityRepository
             ->addSelect('aut', 'm', 'v', 'i', 'r')
             ->leftJoin('c.Author', 'aut')
             ->leftJoin('aut.Media', 'm')
-            ->leftJoin('c.votes', 'v')
+            ->leftJoin('c.Votes', 'v')
             ->leftJoin('c.Reports', 'r')
             ->leftJoin('c.Idea', 'i')
             ->andWhere('c.Idea = :idea')
