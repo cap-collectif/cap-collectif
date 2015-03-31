@@ -1,3 +1,7 @@
+#Global
+admin.global:
+  delete: Supprimer
+
 # Dashboard groups
 admin.group.content: Contenu
 admin.group.consultation: Consultations
@@ -139,7 +143,7 @@ admin:
       group_content: Contenu
       group_meta: Métadonnées
       group_opinion_types: Type de consultation
-      group_steps: Étape de consultation
+      group_steps: Étapes
       title: Titre
       author: Auteur
       teaser: Accroche
@@ -414,6 +418,9 @@ admin:
 
   # Custom actions
   action:
+    global:
+      move_action:
+        label: Réordonner
     reporting:
       disable:
         label: Désactiver le contenu
