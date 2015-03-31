@@ -13,16 +13,12 @@
 {% set headerBg = capco_site_color_value('color.header.bg') %}
 {% if null == headerBg %}{% set headerBg = '#16A085' %}{% endif %}
 {% set headerTitle = capco_site_color_value('color.header.title') %}
-{% if null == headerTitle %}{% set headerTitle = '#FFF' %}{% endif %}
 {% set headerText = capco_site_color_value('color.header.text') %}
 {% if null == headerText %}{% set headerText = '#FFF' %}{% endif %}
 
 {% set header2Bg = capco_site_color_value('color.header2.bg') %}
-{% if null == header2Bg %}{% set header2Bg = '#1ABC9C' %}{% endif %}
 {% set header2Text = capco_site_color_value('color.header2.text') %}
-{% if null == header2Text %}{% set header2Text = '#FFF' %}{% endif %}
 {% set header2Title = capco_site_color_value('color.header2.title') %}
-{% if null == header2Title %}{% set header2Title = '#FFF' %}{% endif %}
 
 {% set sectionBg = capco_site_color_value('color.section.bg') %}
 {% if null == sectionBg %}{% set sectionBg = '#ebebeb' %}{% endif %}
@@ -30,9 +26,9 @@
 {% if null == sectionText %}{% set sectionText = '#000' %}{% endif %}
 
 {% set btn = capco_site_color_value('color.btn') %}
-{% if null == btn %}{% set btn = '#1abc9c' %}{% endif %}
+{% if null == btn %}{% set btn = '#FFF' %}{% endif %}
 {% set btnText = capco_site_color_value('color.btn.text') %}
-{% if null == btnText %}{% set btnText = '#FFF' %}{% endif %}
+{% if null == btnText %}{% set btnText = '#1ABC9C' %}{% endif %}
 
 {% set btnPrimary = capco_site_color_value('color.btn.primary') %}
 {% if null == btnPrimary %}{% set btnPrimary = '#1abc9c' %}{% endif %}
@@ -147,18 +143,46 @@
         background-color: {{ mainBg }};
         color:{{ mainText }};
     }
-    .jumbotron--bg-1,
-    .footer {
+    .jumbotron--bg-1 {
         background-color: {{ headerBg }};
         color: {{ headerText }};
     }
-    .footer a,
-    .footer a:hover,
-    .footer a:focus,
-    .footer .footer__body a,
-    .footer .social-network li a {
-        color: {{ footerText }};
+
+    .jumbotron--bg-1 .btn--outline {
+        border-color: {{ btn }};
+        color: {{ btn }};
     }
+
+    .jumbotron--bg-1 .btn--outline:hover,
+    .jumbotron--bg-1 .btn--outline:focus,
+    .jumbotron--bg-1 .btn--outline:active {
+        background-color: {{ btn }};
+        border-color: {{ btn }};
+        color: {{ btnText }};
+    }
+
+    {% if header2Title is not null %}
+        .footer h2 {
+            color: {{ header2Title }};
+        }
+    {% endif %}
+
+    {% if header2Bg is not null %}
+        .footer {
+            background-color: {{ header2Bg }};
+        }
+    {% endif %}
+
+    {% if header2Text is not null %}
+        .footer,
+        .footer a,
+        .footer a:hover,
+        .footer a:focus,
+        .footer .footer__body a,
+        .footer .social-network li a {
+            color: {{ header2Text }};
+        }
+    {% endif %}
 
     .jumbotron--bg-1 h1{
         color: {{ headerTitle }};
@@ -178,26 +202,7 @@
     }
 
     body {
-        background-color: {{ header2Bg }};
-    }
-
-    .container--header2 {
-        color: {{ header2Text }};
-    }
-
-    .container--header2:after {
-        background-color: {{ header2Bg }};
-    }
-
-    .container--header2 h1,
-    .container--header2 h2,
-    .container--header2 h3,
-    .container--header2 h4,
-    .container--header2 h5 {
-        color: {{ header2Title }};
-    }
-    .container--header2 h2 {
-        border-bottom-color: {{ header2Title }};
+        background-color: {{ footerBg }};
     }
 
     .container--alt,
@@ -207,8 +212,37 @@
 
     .container--alt:after,
     .main .container--custom:nth-of-type(odd):after {
-         background: {{ sectionBg }};
-     }
+        background: {{ sectionBg }};
+    }
+
+    .avatar {
+        background-color: {{ btnPrimary }};
+    }
+
+    {% if header2Text is not null %}
+        .main .container--header2 {
+            color: {{ header2Text }} !important;
+        }
+    {% endif %}
+
+    {% if header2Bg is not null %}
+        .main .container--header2:after {
+            background-color: {{ header2Bg }} !important;
+        }
+    {% endif %}
+
+    {% if header2Title is not null %}
+        .container--header2 h1,
+        .container--header2 h2,
+        .container--header2 h3,
+        .container--header2 h4,
+        .container--header2 h5 {
+            color: {{ header2Title }};
+        }
+        .container--header2 h2 {
+            border-bottom-color: {{ header2Title }};
+        }
+    {% endif %}
 
     .btn--outline.btn-primary {
         color: {{ btnPrimary }};
@@ -216,15 +250,25 @@
         border-color: {{ btnPrimary }};
     }
 
-    .bg--consultation,
-    .bg--theme,
-    .bg--post {
+    {% if header2Bg is not null %}
+        .bg--consultation,
+        .bg--theme,
+        .bg--post {
+            background-color: {{ header2Bg }};
+        }
+    {% endif %}
+
+    {% if header2Text is not null %}
+        .event .month {
+            color: {{ header2Text }}
+        }
+    {% endif %}
+
+    {% if header2Bg is not null %}
+    .event .month {
         background-color: {{ header2Bg }};
     }
-
-    .event .month {
-        background-color: {{ headerBg }};
-    }
+    {% endif %}
 
     {% if null != capco_site_image_media('image.header') and app.request.attributes.get('_route') == 'app_homepage' %}
 

@@ -44,8 +44,8 @@
         </ul>
     {% else %}
     <div class="nav navbar-right">
-        <a href="{{ path('fos_user_security_login') }}" class="btn  btn-primary  btn-brand  navbar-btn">{{ 'layout.login'|trans({}, 'FOSUserBundle') }}</a>
         <a href="{{ path('fos_user_registration_register') }}" class="btn  btn-primary  btn-brand  navbar-btn">{{ 'layout.register'|trans({}, 'FOSUserBundle') }}</a>
+        <a href="{{ path('fos_user_security_login') }}" class="btn  btn-darkest-gray  navbar-btn">{{ 'layout.login'|trans({}, 'FOSUserBundle') }}</a>
     </div>
     {% endif %}
 </div>

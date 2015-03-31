@@ -13,14 +13,23 @@ body {
   overflow: hidden;
 
   .container {
-    padding-top: 30px;
-    padding-bottom: 30px;
-    z-index: 0;
+    padding-top: 50px;
+    padding-bottom: 50px;
+    z-index: 2;
 
     @media (max-width: $screen-xs-max) {
-      padding-bottom: 15px;
-      padding-top: 15px;
+      padding-bottom: 30px;
+      padding-top: 30px;
     }
+
+    & > h2:first-child {
+      margin-top: 0;
+    }
+
+    p:last-child {
+      margin-bottom: 0;
+    }
+
   }
 
   .container--thinner {
@@ -56,9 +65,7 @@ body {
 
   .container--header2 {
     @extend .container--bg;
-    color: $white !important;
     &:after {
-      background-color: $custom-jumbotron-2 !important;
       border-top: 0 !important;
     }
   }
@@ -328,17 +335,35 @@ a.excerpt {
   @include border-radius(0);
 }
 
-.dropdown--social .dropdown-menu li button {
-  padding: 3px 20px;
-  font-weight: 400;
-  line-height: 1.42857;
-  width: 100%;
-  text-align: left;
-  color: #333;
-  &:hover {
-    text-decoration: none;
-    color: #262626;
-    background-color: #F5F5F5;
+// Social dropdown
+.dropdown--social {
+  display: inline-block;
+  position: static;
+
+  .dropdown-menu {
+    position: absolute;
+    z-index: 1000;
+    top: auto;
+    right: auto;
+    left: auto;
+  }
+
+  li button {
+    padding: 3px 20px;
+    font-weight: 400;
+    line-height: 1.42857;
+    width: 100%;
+    text-align: left;
+    color: #333;
+    &:hover {
+      text-decoration: none;
+      color: #262626;
+      background-color: #F5F5F5;
+    }
+  }
+
+  @media (max-width: $screen-xs-max) {
+    float: none !important;
   }
 }
 

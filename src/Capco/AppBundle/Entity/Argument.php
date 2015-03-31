@@ -111,7 +111,7 @@ class Argument
     /**
      * @var
      *
-     * @ORM\ManyToOne(targetEntity="Capco\UserBundle\Entity\User")
+     * @ORM\ManyToOne(targetEntity="Capco\UserBundle\Entity\User", inversedBy="arguments")
      * @ORM\JoinColumn(name="author_id", referencedColumnName="id", onDelete="CASCADE")
      */
     private $Author;
@@ -502,7 +502,7 @@ class Argument
     {
         if ($user != null) {
             foreach ($this->Votes as $vote) {
-                if ($vote->getVoter() == $user) {
+                if ($vote->getUser() == $user) {
                     return true;
                 }
             }
@@ -520,7 +520,7 @@ class Argument
     {
         if ($user != null) {
             foreach ($this->Reports as $report) {
-                if ($report->getVoter() == $user) {
+                if ($report->getUser() == $user) {
                     return true;
                 }
             }

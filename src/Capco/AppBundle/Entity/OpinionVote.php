@@ -3,16 +3,14 @@
 namespace Capco\AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
- * Vote.
+ * OpinionVote.
  *
- * @ORM\Table(name="opinion_vote")
  * @ORM\Entity()
  * @ORM\HasLifecycleCallbacks()
  */
-class OpinionVote
+class OpinionVote extends AbstractVote
 {
     const VOTE_OK = 1;
     const VOTE_NOK = -1;
@@ -51,29 +49,6 @@ class OpinionVote
     /**
      * @var int
      *
-     * @ORM\Column(name="id", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
-     */
-    private $id;
-
-    /**
-     * @var \DateTime
-     * @Gedmo\Timestampable(on="create")
-     * @ORM\Column(name="created_at", type="datetime")
-     */
-    private $createdAt;
-
-    /**
-     * @var \DateTime
-     * @Gedmo\Timestampable(on="change", field={"value"})
-     * @ORM\Column(name="updated_at", type="datetime")
-     */
-    private $updatedAt;
-
-    /**
-     * @var int
-     *
      * @ORM\Column(name="value", type="integer")
      */
     private $value;
@@ -85,52 +60,6 @@ class OpinionVote
      * @ORM\JoinColumn(name="opinion_id", referencedColumnName="id", onDelete="CASCADE")
      */
     private $opinion;
-
-    /**
-     * @var
-     *
-     * @ORM\ManyToOne(targetEntity="Capco\UserBundle\Entity\User", cascade={"persist"})
-     * @ORM\JoinColumn(name="voter_id", referencedColumnName="id", onDelete="CASCADE")
-     */
-    private $Voter;
-
-    /**
-     * Constructor.
-     */
-    public function __construct()
-    {
-        $this->updatedAt = new \Datetime();
-    }
-
-    /**
-     * Get id.
-     *
-     * @return int
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    /**
-     * Get createdAt.
-     *
-     * @return \DateTime
-     */
-    public function getCreatedAt()
-    {
-        return $this->createdAt;
-    }
-
-    /**
-     * Get updatedAt.
-     *
-     * @return \DateTime
-     */
-    public function getUpdatedAt()
-    {
-        return $this->updatedAt;
-    }
 
     /**
      * Get value.
@@ -177,22 +106,6 @@ class OpinionVote
     {
         $this->opinion = $Opinion;
         $this->opinion->addVote($this);
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getVoter()
-    {
-        return $this->Voter;
-    }
-
-    /**
-     * @param mixed $Voter
-     */
-    public function setVoter($Voter)
-    {
-        $this->Voter = $Voter;
     }
 
     // ******************* Lifecycle ******************************

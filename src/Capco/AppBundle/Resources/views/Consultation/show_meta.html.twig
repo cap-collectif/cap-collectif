@@ -9,33 +9,5 @@
             {% set currentStep = null %}
         {% endif %}
         {{ render(controller('CapcoAppBundle:Step:showAllInNav', {'consultation': consultation, 'currentStep': currentStep})) }}
-
-        <h2 class="h4">{{ 'consultation.show.meta.info.title'|trans({}, 'CapcoAppBundle') }}</h2>
-        {% if is_feature_enabled('themes') %}
-            {% if consultation.Themes | length > 0 %}
-            <p class="excerpt">{{ 'consultation.show.meta.info.themes'|trans({}, 'CapcoAppBundle') }}</p>
-            <p>
-                {% for theme in consultation.Themes %}
-                    {% if theme.canDisplay %}
-                        <a href="{{ path('app_theme_show', {'slug': theme.slug}) }}">{{theme}}</a> {% if loop.last == false %} , {% endif %}
-                    {% endif %}
-                {% endfor %}
-            </p>
-            {% endif %}
-        {% endif %}
-        <p class="excerpt">{{ 'consultation.show.meta.info.opening'|trans({}, 'CapcoAppBundle') }}</p>
-        <p>{{ consultation.openedAt | localizeddate('long', 'none') }}</p>
-        <p class="excerpt">{{ 'consultation.show.meta.info.contributions'|trans({}, 'CapcoAppBundle') }}</p>
-        <p>
-            {% set opinionCount = (consultation.opinionCount + consultation.trashedOpinionCount) %}
-            {% set argumentCount = (consultation.argumentCount + consultation.trashedArgumentCount) %}
-            {% transchoice opinionCount with {'%count%': opinionCount} from 'CapcoAppBundle' %}
-            consultation.show.opinions
-            {% endtranschoice %}
-            <br/>
-            {% transchoice argumentCount with {'%count%': argumentCount} from 'CapcoAppBundle' %}
-            consultation.show.arguments
-            {% endtranschoice %}
-        </p>
-    </div>
+        </div>
 </div>
