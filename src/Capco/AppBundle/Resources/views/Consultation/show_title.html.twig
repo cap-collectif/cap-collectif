@@ -24,40 +24,31 @@
     <div class="col-xs-12 col-sm-7">
         <h1 class="consultation__header__title  h1">{{ consultation.title }}</h1>
 
-        {% if consultation.Author is not null %}
-            <div class="media">
-                {% include 'CapcoUserBundle:Avatar:avatar.html.twig' with {'user': consultation.Author, 'classes': 'media-object', 'link_classes': 'pull-left'} only %}
-                <div class="media-body">
-                    <p class="media--aligned  excerpt">
-                        <a href="{{ path('capco_user_profile_show_all', {'slug': consultation.Author.slug}) }}">
-                            {{ consultation.Author.username }}
-                        </a>{{ 'consultation.show.in_theme' | trans({}, 'CapcoAppBundle') }}
-                        {% for theme in consultation.Themes %}
-                        <a href="{{ path('app_theme_show', {'slug': theme.slug}) }}">{{ theme.title }}</a>{% if not loop.last %},{% endif %}{% endfor %},
-                        {{ 'consultation.show.on_date' | trans({'%date%': consultation.createdAt | localizeddate('long', 'none')}, 'CapcoAppBundle') }}
-                    </p>
-                </div>
-            </div>
-        {% endif %}
+        {% set text %}
+            <p class="media--aligned  excerpt">
+                <a href="{{ path('capco_user_profile_show_all', {'slug': consultation.Author.slug}) }}">
+                    {{ consultation.Author.username }}
+                </a>{{ 'consultation.show.in_theme' | trans({}, 'CapcoAppBundle') }}
+                {% for theme in consultation.Themes %}
+                    <a href="{{ path('app_theme_show', {'slug': theme.slug}) }}">{{ theme.title }}</a>{% if not loop.last %},{% endif %}{% endfor %},
+                {{ 'consultation.show.on_date' | trans({'%date%': consultation.createdAt | localizeddate('long', 'none')}, 'CapcoAppBundle') }}
+            </p>
+        {% endset %}
+
+        {% include 'CapcoUserBundle:Avatar:avatar.html.twig' with {'user': consultation.Author, 'class': 'media-object', 'text': text} only %}
 
         <ul class="nav nav-pills consultation__infos">
-            <li>
-                {% set contributionsCount = consultation.totalContributionsCount %}
-                <div class="value">{{ contributionsCount }}</div>
-                <div class="excerpt category">
-                    {% transchoice contributionsCount from 'CapcoAppBundle' %}
-                        consultation.show.meta.total_count
-                    {% endtranschoice %}
-                </div>
+<!--             <li>
+                <div class="value">109</div>
+                <div class="category">contributions</div>
             </li>
+            <li>
+                <div class="value">109</div>
+                <div class="category">participants</div>
+            </li> -->
             <li data-toggle="tooltip" data-placement="top" title="{{ 'consultation.show.end_at' | trans({'%date%': consultation.closedAt | localizeddate('long', 'none')}, 'CapcoAppBundle') }}">
-                {% set remDays = consultation.remainingDays | default('0') %}
-                <div class="value">{{ remDays }}</div>
-                <div class="excerpt  category">
-                    {% transchoice remDays from 'CapcoAppBundle' %}
-                        consultation.show.meta.remaining_days
-                    {% endtranschoice %}
-                </div>
+                <div class="value">{{ consultation.remainingDays | default('0') }}</div>
+                <div class="excerpt  category">jours restants</div>
             </li>
         </ul>
 

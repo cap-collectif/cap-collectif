@@ -27,7 +27,7 @@ class CommentVoteAdmin extends Admin
             ->add('comment', null, array(
                 'label' => 'admin.fields.comment_vote.comment',
             ))
-            ->add('user', null, array(
+            ->add('Voter', null, array(
                 'label' => 'admin.fields.comment_vote.voter',
             ))
         ;
@@ -42,7 +42,7 @@ class CommentVoteAdmin extends Admin
             ->add('comment', 'sonata_type_model', array(
                 'label' => 'admin.fields.comment_vote.comment',
             ))
-            ->add('user', 'sonata_type_model', array(
+            ->add('Voter', 'sonata_type_model', array(
                 'label' => 'admin.fields.comment_vote.voter',
             ))
             ->add('createdAt', null, array(
@@ -62,7 +62,7 @@ class CommentVoteAdmin extends Admin
             ->add('comment', 'sonata_type_model', array(
                 'label' => 'admin.fields.comment_vote.comment',
             ))
-            ->add('user', 'sonata_type_model', array(
+            ->add('Voter', 'sonata_type_model', array(
                 'label' => 'admin.fields.comment_vote.voter',
             ))
             ->add('createdAt', null, array(

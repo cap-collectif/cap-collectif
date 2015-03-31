@@ -26,7 +26,7 @@ class OpinionVoteAdmin extends Admin
             ->add('opinion', null, array(
                 'label' => 'admin.fields.opinion_vote.opinion',
             ))
-            ->add('user', null, array(
+            ->add('Voter', null, array(
                 'label' => 'admin.fields.opinion_vote.voter',
             ))
             ->add('value', null, array(
@@ -50,7 +50,7 @@ class OpinionVoteAdmin extends Admin
             ->add('opinion', 'sonata_type_model', array(
                 'label' => 'admin.fields.opinion_vote.opinion',
             ))
-            ->add('user', 'sonata_type_model', array(
+            ->add('Voter', 'sonata_type_model', array(
                 'label' => 'admin.fields.opinion_vote.voter',
             ))
             ->add('value', null, array(
@@ -81,7 +81,7 @@ class OpinionVoteAdmin extends Admin
             ->add('opinion', 'sonata_type_model', array(
                 'label' => 'admin.fields.opinion_vote.opinion',
             ))
-            ->add('user', 'sonata_type_model', array(
+            ->add('Voter', 'sonata_type_model', array(
                 'label' => 'admin.fields.opinion_vote.voter',
             ))
             ->add('value', null, array(
@@ -108,7 +108,7 @@ class OpinionVoteAdmin extends Admin
             ->add('opinion', 'sonata_type_model', array(
                 'label' => 'admin.fields.opinion_vote.opinion',
             ))
-            ->add('user', 'sonata_type_model', array(
+            ->add('Voter', 'sonata_type_model', array(
                 'label' => 'admin.fields.opinion_vote.voter',
             ))
             ->add('value', 'choice', array(

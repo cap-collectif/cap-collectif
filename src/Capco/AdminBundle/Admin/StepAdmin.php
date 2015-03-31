@@ -101,47 +101,42 @@ class StepAdmin extends Admin
         $formMapper
             ->add('title', null, array(
                 'label' => 'admin.fields.step.title',
+                'required' => true,
+            ))
+            ->add('type', 'choice', array(
+                'required' => true,
+                'choices' => Step::$stepTypeLabels,
+                'label' => 'admin.fields.step.type',
             ))
             ->add('position', null, array(
+                'required' => true,
                 'label' => 'admin.fields.step.position',
             ))
+            ->add('isEnabled', null, array(
+                'label' => 'admin.fields.step.is_enabled',
+                'required' => false,
+            ))
+            ->add('startAt', 'sonata_type_datetime_picker', array(
+                'label' => 'admin.fields.step.start_at',
+                'format' => 'dd/MM/yyyy HH:mm',
+                'attr' => array(
+                    'data-date-format' => 'DD/MM/YYYY HH:mm',
+                ),
+            ))
+            ->add('endAt', 'sonata_type_datetime_picker', array(
+                'label' => 'admin.fields.step.end_at',
+                'format' => 'dd/MM/yyyy HH:mm',
+                'attr' => array(
+                    'data-date-format' => 'DD/MM/YYYY HH:mm',
+                ),
+                'help' => 'admin.help.step.endAt',
+            ))
+            ->add('body', 'ckeditor', array(
+                'config_name' => 'admin_editor',
+                'label' => 'admin.fields.step.body',
+                'required' => false,
+            ))
         ;
-        if ($subject->isOtherStep()) {
-            $formMapper
-                ->add('startAt', 'sonata_type_datetime_picker', array(
-                    'label' => 'admin.fields.step.start_at',
-                    'format' => 'dd/MM/yyyy HH:mm',
-                    'attr' => array(
-                        'data-date-format' => 'DD/MM/YYYY HH:mm',
-                    ),
-                ))
-                ->add('endAt', 'sonata_type_datetime_picker', array(
-                    'label' => 'admin.fields.step.end_at',
-                    'format' => 'dd/MM/yyyy HH:mm',
-                    'attr' => array(
-                        'data-date-format' => 'DD/MM/YYYY HH:mm',
-                    ),
-                    'help' => 'admin.help.step.endAt',
-                ))
-                ->add('isEnabled', null, array(
-                    'label' => 'admin.fields.step.is_enabled',
-                    'required' => false,
-                ))
-                ->add('type', 'choice', array(
-                    'required' => true,
-                    'choices' => Step::$stepTypeLabelsNoConsultation,
-                    'label' => 'admin.fields.step.type',
-                ))
-                ->add('body', 'ckeditor', array(
-                    'config_name' => 'admin_editor',
-                    'label' => 'admin.fields.step.body',
-                    'required' => false,
-                ))
-                ->add('consultation', 'sonata_type_model', array(
-                    'label' => 'admin.fields.step.consultation',
-                ))
-            ;
-        }
     }
 
     /**

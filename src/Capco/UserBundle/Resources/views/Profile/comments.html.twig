@@ -1,8 +1,8 @@
 {% if comments|length > 0 %}
     {% set token = csrf_token('comment_vote') %}
-    <ul class="media-list">
+    <ul class="media-list  opinion__list">
         {% for comment in comments %}
-            {% include 'CapcoAppBundle:Comment:blockComment.html.twig' with {'profile': true, 'classes': 'block  block--bordered  box'} %}
+            {% include 'CapcoAppBundle:Comment:blockComment.html.twig' with {'profile': true} %}
         {% endfor %}
 {% else %}
     <div class="consultation__empty-block  text-center">
