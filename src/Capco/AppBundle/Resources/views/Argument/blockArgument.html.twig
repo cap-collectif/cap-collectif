@@ -12,7 +12,7 @@
                     {{ argument.Author.username }}
                 </a>
                 {% if trashed is defined or profile is defined %}
-                    <span class="label {% if argument.type == 0 %}label-danger{% elseif argument.type == 1 %}label-success{% endif %}">
+                    <span class="label  label--right {% if argument.type == 0 %}label-danger{% elseif argument.type == 1 %}label-success{% endif %}">
                         {{ argumentsLabels[argument.type] | trans({}, 'CapcoAppBundle') | capitalize }}
                     </span>
                 {% endif %}

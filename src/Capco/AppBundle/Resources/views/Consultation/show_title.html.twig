@@ -41,17 +41,23 @@
         {% endif %}
 
         <ul class="nav nav-pills consultation__infos">
-<!--             <li>
-                <div class="value">109</div>
-                <div class="category">contributions</div>
-            </li>
             <li>
-                <div class="value">109</div>
-                <div class="category">participants</div>
-            </li> -->
+                {% set contributionsCount = consultation.opinionCount + consultation.trashedOpinionCount + consultation.argumentCount + consultation.trashedArgumentCount %}
+                <div class="value">{{ contributionsCount }}</div>
+                <div class="excerpt category">
+                    {% transchoice contributionsCount from 'CapcoAppBundle' %}
+                        consultation.show.meta.total_count
+                    {% endtranschoice %}
+                </div>
+            </li>
             <li data-toggle="tooltip" data-placement="top" title="{{ 'consultation.show.end_at' | trans({'%date%': consultation.closedAt | localizeddate('long', 'none')}, 'CapcoAppBundle') }}">
-                <div class="value">{{ consultation.remainingDays | default('0') }}</div>
-                <div class="excerpt  category">jours restants</div>
+                {% set remDays = consultation.remainingDays | default('0') %}
+                <div class="value">{{ remDays }}</div>
+                <div class="excerpt  category">
+                    {% transchoice remDays from 'CapcoAppBundle' %}
+                        consultation.show.meta.remaining_days
+                    {% endtranschoice %}
+                </div>
             </li>
         </ul>
 

@@ -15,7 +15,7 @@ body {
   .container {
     padding-top: 50px;
     padding-bottom: 50px;
-    z-index: 0;
+    z-index: 2;
 
     @media (max-width: $screen-xs-max) {
       padding-bottom: 30px;
@@ -335,17 +335,35 @@ a.excerpt {
   @include border-radius(0);
 }
 
-.dropdown--social .dropdown-menu li button {
-  padding: 3px 20px;
-  font-weight: 400;
-  line-height: 1.42857;
-  width: 100%;
-  text-align: left;
-  color: #333;
-  &:hover {
-    text-decoration: none;
-    color: #262626;
-    background-color: #F5F5F5;
+// Social dropdown
+.dropdown--social {
+  display: inline-block;
+  position: static;
+
+  .dropdown-menu {
+    position: absolute;
+    z-index: 1000;
+    top: auto;
+    right: auto;
+    left: auto;
+  }
+
+  li button {
+    padding: 3px 20px;
+    font-weight: 400;
+    line-height: 1.42857;
+    width: 100%;
+    text-align: left;
+    color: #333;
+    &:hover {
+      text-decoration: none;
+      color: #262626;
+      background-color: #F5F5F5;
+    }
+  }
+
+  @media (max-width: $screen-xs-max) {
+    float: none !important;
   }
 }
 

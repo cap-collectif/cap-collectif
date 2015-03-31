@@ -1,6 +1,6 @@
 {%  set currentUser = app.user %}
 {% set author = comment.Author %}
-<li class="opinion  opinion--comment" id="comment-{{ comment.id }}">
+<li class="opinion  opinion--comment {% if classes is defined %}{{ classes }}{% endif %}" id="comment-{{ comment.id }}">
     <div class="opinion__body">
         {% if null != author %}
             {% include 'CapcoUserBundle:Avatar:avatar.html.twig' with { 'user': author, 'link_classes': 'pull-left'} only %}
