@@ -42,7 +42,7 @@
 
         <ul class="nav nav-pills consultation__infos">
             <li>
-                {% set contributionsCount = consultation.opinionCount + consultation.trashedOpinionCount + consultation.argumentCount + consultation.trashedArgumentCount %}
+                {% set contributionsCount = consultation.totalContributionsCount %}
                 <div class="value">{{ contributionsCount }}</div>
                 <div class="excerpt category">
                     {% transchoice contributionsCount from 'CapcoAppBundle' %}
