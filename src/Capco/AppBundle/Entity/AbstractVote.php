@@ -113,4 +113,6 @@ abstract class AbstractVote
 
         return $this;
     }
+
+    abstract public function getRelatedEntity();
 }

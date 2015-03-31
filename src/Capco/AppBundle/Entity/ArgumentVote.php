@@ -40,6 +40,11 @@ class ArgumentVote extends AbstractVote
         return $this;
     }
 
+    public function getRelatedEntity()
+    {
+        return $this->argument;
+    }
+
     // *************************** Lifecycle **********************************
 
     /**

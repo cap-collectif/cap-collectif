@@ -6,7 +6,6 @@ use Symfony\Component\Form\AbstractTypeExtension;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormView;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
-use Symfony\Component\PropertyAccess\PropertyAccess;
 
 class HelpExtension extends AbstractTypeExtension
 {
@@ -24,6 +23,4 @@ class HelpExtension extends AbstractTypeExtension
     {
         $view->vars = array_merge($view->vars, array('help' => $options['help']));
     }
-
-
 }

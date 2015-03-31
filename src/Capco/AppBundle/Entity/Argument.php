@@ -390,7 +390,8 @@ class Argument
      */
     public function removeVote($vote)
     {
-        $this->votes->removeElement($vote);
+        if ($this->votes->removeElement($vote)) {
+        }
 
         return $this;
     }

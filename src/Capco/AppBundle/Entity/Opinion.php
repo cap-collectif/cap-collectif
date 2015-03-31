@@ -639,9 +639,7 @@ class Opinion
      */
     public function removeVote(OpinionVote $vote)
     {
-        if ($this->votes->removeElement($vote)) {
-            $this->removeFromVotesCount($vote->getValue());
-        }
+        $this->votes->removeElement($vote);
 
         return $this;
     }
@@ -683,6 +681,50 @@ class Opinion
     // ******************************* Custom methods **************************************
 
     /**
+     * Increase count for opinion Vote.
+     *
+     * @param $type
+     */
+    public function increaseVotesCount($type)
+    {
+        if ($type == OpinionVote::$voteTypes['ok']) {
+            $this->voteCountOk++;
+
+            return;
+        }
+        if ($type == OpinionVote::$voteTypes['nok']) {
+            $this->voteCountNok++;
+
+            return;
+        }
+        if ($type == OpinionVote::$voteTypes['mitige']) {
+            $this->voteCountMitige++;
+        }
+    }
+
+    /**
+     * Decrease count for opinion Vote.
+     *
+     * @param $type
+     */
+    public function decreaseVotesCount($type)
+    {
+        if ($type == OpinionVote::$voteTypes['ok']) {
+            $this->voteCountOk--;
+
+            return;
+        }
+        if ($type == OpinionVote::$voteTypes['nok']) {
+            $this->voteCountNok--;
+
+            return;
+        }
+        if ($type == OpinionVote::$voteTypes['mitige']) {
+            $this->voteCountMitige--;
+        }
+    }
+
+    /**
      * @return $this
      */
     public function resetVotes()
@@ -690,6 +732,9 @@ class Opinion
         foreach ($this->votes as $vote) {
             $vote->setConfirmed(false);
         }
+        $this->voteCountMitige = 0;
+        $this->voteCountNok = 0;
+        $this->voteCountOk = 0;
 
         return $this;
     }

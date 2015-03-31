@@ -147,7 +147,7 @@ class Source
      *
      * @ORM\Column(name="vote_count_source", type="integer")
      */
-    private $voteCountSource = 0;
+    private $voteCount = 0;
 
     /**
      * @var bool
@@ -175,7 +175,7 @@ class Source
         $this->type = self::LINK;
         $this->Reports = new ArrayCollection();
         $this->votes = new ArrayCollection();
-        $this->voteCountSource = 0;
+        $this->voteCount = 0;
         $this->updatedAt = new \DateTime();
     }
 
@@ -487,17 +487,17 @@ class Source
     /**
      * @return int
      */
-    public function getVoteCountSource()
+    public function getVoteCount()
     {
-        return $this->voteCountSource;
+        return $this->voteCount;
     }
 
     /**
-     * @param int $voteCountSource
+     * @param int $voteCount
      */
-    public function setVoteCountSource($voteCountSource)
+    public function setVoteCount($voteCount)
     {
-        $this->voteCountSource = $voteCountSource;
+        $this->voteCount = $voteCount;
     }
 
     /**

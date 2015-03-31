@@ -87,6 +87,10 @@ class RecalculCounterCommand extends ContainerAwareCommand
             (select count(ov.id) from CapcoAppBundle:OpinionVote ov where ov.opinion = a AND ov.confirmed = 1 AND ov.value = -1 group by ov.opinion)');
         $query->execute();
 
+        $query = $em->createQuery('update CapcoAppBundle:Source s set s.voteCount =
+            (select count(sv.id) from CapcoAppBundle:SourceVote sv where sv.source = s AND sv.confirmed = 1 group by sv.source)');
+        $query->execute();
+
         $output->writeln('Recalcul completed');
     }
 }

@@ -40,6 +40,11 @@ class SourceVote extends AbstractVote
         return $this;
     }
 
+    public function getRelatedEntity()
+    {
+        return $this->source;
+    }
+
     // ***************************** Lifecycle ****************************************
 
     /**
