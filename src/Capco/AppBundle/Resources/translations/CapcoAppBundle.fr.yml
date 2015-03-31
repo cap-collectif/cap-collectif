@@ -244,12 +244,15 @@ consultation:
         title: Consultation à venir.
         text: La période de participation débutera le %date%.
     meta:
-      remaining_days: "]-Inf, 1] jour restant | ]1,Inf[ jours restants"
-      total_count: "]-Inf, 1] contribution | ]1,Inf[ contributions"
-      read_more: Lire la suite
-      read_less: Replier
       intro:
         title: Introduction
+        read_more: Lire la suite
+        read_less: Replier
+      info:
+        title: Informations
+        themes: Thème(s)
+        opening: Publication
+        contributions: Contributions
       step:
         title: Étapes
     status:
@@ -550,7 +553,6 @@ user:
     submit: S'inscrire
   changePassword:
     show: Mot de passe
-  edition: Édition
   profile:
     edit:
       twitter: Twitter
@@ -679,7 +681,6 @@ event_registration:
     see_all: Voir tous les participants
     title_all: Liste des participants
     anonymous: Anonyme
-    contribution: "{0}|{1} contribution | ]1,Inf[ %count% contributions"
   unsubscribe: Se désinscrire
 
 # comments

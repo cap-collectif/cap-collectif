@@ -4,6 +4,7 @@ namespace Capco\AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Step.
@@ -50,6 +51,7 @@ class Step
      * @var string
      *
      * @ORM\Column(name="title", type="string", length=255)
+     * @Assert\NotBlank()
      */
     private $title;
 
@@ -63,6 +65,7 @@ class Step
      * @var \DateTime
      *
      * @ORM\Column(name="start_at", type="datetime")
+     * @Assert\NotNull()
      */
     private $startAt;
 
@@ -70,6 +73,7 @@ class Step
      * @var \DateTime
      *
      * @ORM\Column(name="end_at", type="datetime")
+     * @Assert\NotNull()
      */
     private $endAt;
 
@@ -77,6 +81,7 @@ class Step
      * @var int
      *
      * @ORM\Column(name="position", type="integer")
+     * @Assert\NotNull()
      */
     private $position;
 
@@ -84,6 +89,7 @@ class Step
      * @var int
      *
      * @ORM\Column(name="type", type="integer")
+     * @Assert\NotNull()
      */
     private $type = self::TYPE_OTHER;
 

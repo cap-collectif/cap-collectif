@@ -10,7 +10,6 @@ $gray-primary: #c0c0c0;
 $excerpt: #999999;
 $light-gray: #f6f6f6;
 $dark-gray: #999999;
-$darkest-gray: #3E4149;
 $dark-blue: #2a6496;
 $light-blue: #428bca;
 $excerpt: #999999;
@@ -61,8 +60,7 @@ $btns-custom:
   (custom-1 $white $brand-color-1)
   (custom-2 $brand-color-1 $white)
   (dark-gray $dark-gray $white)
-  (light-gray $light-gray $black)
-  (darkest-gray $darkest-gray $white);
+  (light-gray $light-gray $black);
 
 $btns-outline:
   ("default" $btn-default-color $btn-default-color $btn-default-bg)

@@ -90,7 +90,7 @@ class Source
     /**
      * @var string
      *
-     * @ORM\ManyToOne(targetEntity="Capco\UserBundle\Entity\User", inversedBy="sources")
+     * @ORM\ManyToOne(targetEntity="Capco\UserBundle\Entity\User")
      * @ORM\JoinColumn(name="author_id", referencedColumnName="id", nullable=false, onDelete="CASCADE")
      */
     private $Author;
@@ -622,7 +622,7 @@ class Source
     {
         if ($user != null) {
             foreach ($this->Votes as $vote) {
-                if ($vote->getUser() == $user) {
+                if ($vote->getVoter() == $user) {
                     return true;
                 }
             }

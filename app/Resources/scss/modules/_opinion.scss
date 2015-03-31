@@ -122,9 +122,6 @@
       position: absolute;
       left: auto;
       top: auto;
-    }
-
-    .label--right {
       margin-left: 5px;
     }
 
@@ -230,13 +227,7 @@
       padding: 1px 5px;
       vertical-align: middle;
     }
-
-    &.opinion--argument--white {
-      background-color: $white;
-    }
   }
-
-
 
   // Special case : comment
   &.opinion--comment {

@@ -60,7 +60,6 @@ class SourceController extends Controller
                 $em = $this->getDoctrine()->getManager();
                 $em->persist($source);
                 $em->flush();
-
                 $this->get('session')->getFlashBag()->add('success', $this->get('translator')->trans('source.create.success'));
 
                 return $this->redirect($this->generateUrl('app_consultation_show_opinion', ['consultationSlug' => $consultation->getSlug(), 'opinionTypeSlug' => $opinionType->getSlug(), 'opinionSlug' => $opinion->getSlug()]).'#source'.$source->getId());
@@ -266,10 +265,10 @@ class SourceController extends Controller
                 $em = $this->getDoctrine()->getManager();
 
                 $sourceVote = new SourceVote();
-                $sourceVote->setUser($user);
+                $sourceVote->setVoter($user);
 
                 $userVote = $em->getRepository('CapcoAppBundle:SourceVote')->findOneBy(array(
-                    'user' => $user,
+                    'Voter' => $user,
                     'source' => $source,
                 ));
 

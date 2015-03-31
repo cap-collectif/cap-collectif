@@ -70,6 +70,23 @@
   }
 }
 
+// Social dropdown
+.dropdown--social {
+  display: inline-block;
+  position: static;
+
+  .dropdown-menu {
+    position: absolute;
+    top: auto;
+    right: auto;
+    left: auto;
+  }
+
+  @media (max-width: $screen-xs-max) {
+    float: none !important;
+  }
+}
+
 // Empty consultation
 .consultation__empty-block {
   color: $dark-gray;

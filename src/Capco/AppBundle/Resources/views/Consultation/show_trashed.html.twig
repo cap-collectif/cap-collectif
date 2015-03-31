@@ -34,7 +34,12 @@
                 <ul class="media-list  opinion__list">
                     {% for source in sources %}
                         <li class="opinion  media  box" id="source{{ source.id }}">
-                            {% include 'CapcoUserBundle:Avatar:avatar.html.twig' with { 'user': source.Author, 'link_classes': 'pull-left media-middle', format: 'avatar_source'} only %}
+                            {%  set avatar = source.Author.Media|capco_default_avatar %}
+                            {% if avatar != null %}
+                                <a class="pull-left media-middle" href="#">
+                                    {% thumbnail avatar, 'avatar_source' with {'title': source.Author.username, 'alt': source.Author.username, 'class': 'img-circle  pull-left'} %}
+                                </a>
+                            {% endif %}
                             <div class="media-body">
                                 <h4 class="media-heading h4" id="source{{ source.id }}"><span class="label label-info">{{ source.Category.title | capitalize }}</span>
                                     {% if source.Media %}

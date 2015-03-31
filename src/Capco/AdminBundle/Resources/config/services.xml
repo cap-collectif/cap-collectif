@@ -22,5 +22,6 @@
             <argument type="service" id="capco.toggle.manager" />
             <tag name="sonata.block" />
         </service>
+
     </services>
 </container>

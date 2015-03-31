@@ -63,7 +63,6 @@ class EventRegistration
     {
         $this->event = $event;
         $this->updatedAt = new \Datetime();
-        $this->confirmed = false;
     }
 
     /**

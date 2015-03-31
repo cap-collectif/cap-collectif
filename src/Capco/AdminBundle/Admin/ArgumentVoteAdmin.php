@@ -27,7 +27,7 @@ class ArgumentVoteAdmin extends Admin
             ->add('argument', null, array(
                 'label' => 'admin.fields.argument_vote.argument',
             ))
-            ->add('user', null, array(
+            ->add('Voter', null, array(
                 'label' => 'admin.fields.argument_vote.voter',
             ))
         ;
@@ -42,7 +42,7 @@ class ArgumentVoteAdmin extends Admin
             ->add('argument', 'sonata_type_model', array(
                 'label' => 'admin.fields.argument_vote.argument',
             ))
-            ->add('user', 'sonata_type_model', array(
+            ->add('Voter', 'sonata_type_model', array(
                 'label' => 'admin.fields.argument_vote.voter',
             ))
             ->add('createdAt', null, array(
@@ -62,7 +62,7 @@ class ArgumentVoteAdmin extends Admin
             ->add('argument', 'sonata_type_model', array(
                 'label' => 'admin.fields.argument_vote.argument',
             ))
-            ->add('user', 'sonata_type_model', array(
+            ->add('Voter', 'sonata_type_model', array(
                 'label' => 'admin.fields.argument_vote.voter',
             ))
             ->add('createdAt', null, array(
