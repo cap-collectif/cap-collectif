@@ -4,20 +4,19 @@ namespace Capco\AppBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
 
+
 /**
  * SiteParameterRepository.
  */
 class SiteColorRepository extends EntityRepository
 {
-    public function getValueByKeyIfEnabled($key)
+    public function getValuesIfEnabled()
     {
         return $this->createQueryBuilder('p')
-            ->select('p.value')
-            ->andWhere('p.keyname = :key')
+            ->select('p.keyname, p.value')
             ->andWhere('p.isEnabled = :enabled')
-            ->setParameter('key', $key)
             ->setParameter('enabled', true)
             ->getQuery()
-            ->getSingleScalarResult();
+            ->getResult();
     }
 }
