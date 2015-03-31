@@ -9,16 +9,14 @@ use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Show\ShowMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
 use Capco\AppBundle\Entity\Consultation;
+use Capco\AppBundle\Entity\Step;
+use Symfony\Component\Validator\Constraints\DateTime;
 
 class ConsultationAdmin extends Admin
 {
     protected $datagridValues = array(
         '_sort_order' => 'ASC',
         '_sort_by' => 'title',
-    );
-
-    protected $formOptions = array(
-        'cascade_validation' => true,
     );
 
     /**
@@ -111,6 +109,14 @@ class ConsultationAdmin extends Admin
             ))
             ->add('argumentCount', null, array(
                 'label' => 'admin.fields.consultation.argument_count',
+            ))
+            ->add('eventsCount', null, array(
+                'label' => 'admin.fields.consultation.events_count',
+                'template' => 'CapcoAdminBundle:Consultation:events_count_list_field.html.twig',
+            ))
+            ->add('postsCount', null, array(
+                'label' => 'admin.fields.consultation.posts_count',
+                'template' => 'CapcoAdminBundle:Consultation:posts_count_list_field.html.twig',
             ))
             ->add('isEnabled', null, array(
                 'editable' => true,
@@ -234,12 +240,38 @@ class ConsultationAdmin extends Admin
 
             // Steps
             ->with('admin.fields.consultation.group_steps')
-            ->add('Steps', 'sonata_type_collection', array(
-                'label' => 'admin.fields.consultation.steps',
-                'by_reference' => false,
-            ), array(
-                'edit' => 'inline',
-                'inline' => 'capco_table',
+            ->add('openedAt', 'sonata_type_datetime_picker', array(
+                'required' => true,
+                'mapped' => false,
+                'data' => $open,
+                'label' => 'admin.fields.consultation.opened_at',
+                'format' => 'dd/MM/yyyy HH:mm',
+                'attr' => array(
+                    'data-date-format' => 'DD/MM/YYYY HH:mm',
+                ),
+            ))
+             ->add('closedAt', 'sonata_type_datetime_picker', array(
+                'required' => true,
+                'mapped' => false,
+                'data' => $close,
+                 'help' => 'admin.help.consultation.closed_at',
+                 'label' => 'admin.fields.consultation.closed_at',
+                 'format' => 'dd/MM/yyyy HH:mm',
+                 'attr' => array(
+                     'data-date-format' => 'DD/MM/YYYY HH:mm',
+                 ),
+             ))
+            ->add('consultationStepTitle', 'text', array(
+                'required' => true,
+                'mapped' => false,
+                'data' => $stepTitle,
+                'label' => 'admin.fields.consultation.step_title',
+            ))
+            ->add('consultationStepPosition', 'integer', array(
+                'required' => true,
+                'mapped' => false,
+                'data' => $stepPosition,
+                'label' => 'admin.fields.consultation.step_position',
             ))
         ;
     }
@@ -291,23 +323,35 @@ class ConsultationAdmin extends Admin
                 'template' => 'CapcoAdminBundle:Consultation:openingStatus_show_field.html.twig',
                 'statuses' => Consultation::$openingStatuses,
             ))
+            ->add('openedAt', 'datetime', array(
+                'label' => 'admin.fields.consultation.opened_at',
+            ))
+            ->add('closedAt', 'datetime', array(
+                'label' => 'admin.fields.consultation.closed_at',
+            ))
+            ->add('consultationStepTitle', 'text', array(
+                'label' => 'admin.fields.consultation.step_title',
+            ))
+            ->add('consultationStepPosition', 'integer', array(
+                'label' => 'admin.fields.consultation.step_position',
+            ))
             ->add('opinionCount', null, array(
                 'label' => 'admin.fields.consultation.opinion_count',
             ))
             ->add('argumentCount', null, array(
                 'label' => 'admin.fields.consultation.argument_count',
             ))
-            ->add('trashedOpinionCount', null, array(
-                'label' => 'admin.fields.consultation.trashed_opinion_count',
-            ))
-            ->add('trashedArgumentCount', null, array(
-                'label' => 'admin.fields.consultation.trashed_argument_count',
-            ))
             ->add('events', null, array(
                 'label' => 'admin.fields.consultation.events',
             ))
             ->add('posts', null, array(
                 'label' => 'admin.fields.consultation.posts',
+            ))
+            ->add('trashedOpinionCount', null, array(
+                'label' => 'admin.fields.consultation.trashed_opinion_count',
+            ))
+            ->add('trashedArgumentCount', null, array(
+                'label' => 'admin.fields.consultation.trashed_argument_count',
             ))
             ->add('createdAt', null, array(
                 'label' => 'admin.fields.consultation.created_at',
@@ -320,23 +364,34 @@ class ConsultationAdmin extends Admin
 
     public function prePersist($consultation)
     {
-        $this->setSteps($consultation);
+        $this->setConsultationStep($consultation);
     }
 
     public function preUpdate($consultation)
     {
-        $this->setSteps($consultation);
+        $this->setConsultationStep($consultation);
     }
 
-    private function setSteps($consultation)
+    private function setConsultationStep($consultation)
     {
-        $consultation->resetSteps();
-
-        $newSteps = $this->getForm()->get('Steps');
-        foreach ($newSteps as $child) {
-            $step = $child->getData();
-            $step->setConsultation($consultation);
+        $consultationStep = $consultation->getConsultationStep();
+        if ($consultationStep == null) {
+            $consultationStep = new Step();
+            $consultationStep->setType(Step::$stepTypes['consultation']);
+            $consultationStep->setConsultation($consultation);
         }
+
+        $openingDate = $this->getForm()->get('openedAt')->getData();
+        $closingDate = $this->getForm()->get('closedAt')->getData();
+        $title = $this->getForm()->get('consultationStepTitle')->getData();
+        $position = $this->getForm()->get('consultationStepPosition')->getData();
+
+        $consultationStep->setStartAt($openingDate);
+        $consultationStep->setEndAt($closingDate);
+        $consultationStep->setTitle($title);
+        $consultationStep->setPosition($position);
+
+        $consultation->addStep($consultationStep);
     }
 
     protected function configureRoutes(RouteCollection $collection)

@@ -23,12 +23,7 @@
                     <form method="post" {{ form_enctype(form) }}>
                         <div class="dialog__body  box">
                             <div class="media">
-                                {%  set avatar = idea.Author.Media|capco_default_avatar %}
-                                {% if avatar != null %}
-                                    <a class="pull-left" href="{{ path('capco_user_profile_show_all', {'slug': idea.Author.slug}) }}">
-                                        {% thumbnail avatar, 'avatar' with {'title': idea.Author.username, 'alt': idea.Author.username, 'class': 'media-object img-circle'} %}
-                                    </a>
-                                {% endif %}
+                                {% include 'CapcoUserBundle:Avatar:avatar.html.twig' with { 'user': idea.Author, 'classes': 'media-object', 'link_classes': 'pull-left'} only %}
                                 <div class="media-body">
                                     {{ form_errors(form) }}
                                     {{ form_rest(form) }}

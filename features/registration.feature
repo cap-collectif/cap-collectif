@@ -4,8 +4,7 @@ Feature: Registration
   Scenario: Register new user
     Given feature "registration" is enabled
     And I visited "home page"
-    When I follow "Connexion"
-    And I follow "S'inscrire"
+    When I follow "Inscription"
     And I fill in the following:
     | sonata_user_registration_form_username             | Naruto42             |
     | sonata_user_registration_form_email                | naruto42@gmail.com   |

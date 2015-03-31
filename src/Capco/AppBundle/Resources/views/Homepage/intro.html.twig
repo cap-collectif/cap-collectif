@@ -6,6 +6,6 @@
         <p>{{ section.teaser }}</p>
     {% endif %}
     {% if null != section.body %}
-        <p>{{ section.body | raw }}</p>
+        {{ section.body | raw }}
     {% endif %}
 </div>
