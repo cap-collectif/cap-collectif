@@ -337,7 +337,7 @@ class ConsultationAdmin extends Admin
         $newSteps = ($this->getForm()->get('Steps'));
         foreach ($newSteps as $child) {
             $step = $child->getData();
-            $consultation->addStep($step);
+            $step->setConsultation($consultation);
         }
     }
 
