@@ -31,6 +31,7 @@
         {% endif %}
 
         <div class="media-body">
+            {% set contributions = registration.user.contributionsCount |default(0) %}
            <p class="media--aligned media--macro__user">
                 {% if profile is not null %}
                     <a href="{{ profile }}">{{ username }}</a>
@@ -38,7 +39,9 @@
                     {{ username }}
                 {% endif %}
                 {% if registration.user %}
-                    Le total des contributions est de : {{ registration.user.contributionsCount }}
+                    {% transchoice  contributions with {'%count%': contributions} from 'CapcoAppBundle' %}
+                        event_registration.listing.contribution
+                    {% endtranschoice %}
                 {% endif %}
             </p>
         </div>
