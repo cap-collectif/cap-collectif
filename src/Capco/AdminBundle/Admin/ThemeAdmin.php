@@ -12,6 +12,7 @@ use Sonata\CoreBundle\Model\Metadata;
 
 class ThemeAdmin extends Admin
 {
+
     protected $datagridValues = array(
         '_sort_order' => 'ASC',
         '_sort_by' => 'position',
@@ -52,6 +53,9 @@ class ThemeAdmin extends Admin
             ))
             ->add('Author', null, array(
                 'label' => 'admin.fields.theme.author',
+            ))
+            ->add('highlighted', null, array(
+                'label' => 'admin.fields.theme.highlighted',
             ))
         ;
     }
@@ -96,6 +100,10 @@ class ThemeAdmin extends Admin
                 'editable' => true,
                 'label' => 'admin.fields.theme.is_enabled',
             ))
+            ->add('highlighted', null, array(
+                'label' => 'admin.fields.theme.highlighted',
+                'editable' => true
+            ))
             ->add('updatedAt', 'datetime', array(
                 'label' => 'admin.fields.theme.updated_at',
             ))
@@ -124,6 +132,10 @@ class ThemeAdmin extends Admin
             ))
             ->add('isEnabled', null, array(
                 'label' => 'admin.fields.theme.is_enabled',
+                'required' => false,
+            ))
+            ->add('highlighted', null, array(
+                'label' => 'admin.fields.theme.highlighted',
                 'required' => false,
             ))
             ->add('position', 'integer', array(
@@ -203,6 +215,9 @@ class ThemeAdmin extends Admin
                 'template' => 'CapcoAdminBundle:Theme:media_show_field.html.twig',
                 'label' => 'admin.fields.theme.media',
             ))
+            ->add('highlighted', null, array(
+                'label' => 'admin.fields.theme.highlighted',
+            ))
             ->add('createdAt', null, array(
                 'label' => 'admin.fields.theme.created_at',
             ))
@@ -233,4 +248,19 @@ class ThemeAdmin extends Admin
             'themes',
         );
     }
+
+    public function prePersist($theme)
+    {
+        $this->checkHighlighted($theme);
+    }
+
+    public function preUpdate($theme)
+    {
+        $dm = $this->getConfigurationPool()->getContainer()->get('Doctrine')->getManager();
+        $uow = $dm->getUnitOfWork();
+        $originalTheme = $uow->getOriginalEntityData($theme);
+
+        $this->checkHighlighted($theme, $originalTheme);
+    }
+
 }

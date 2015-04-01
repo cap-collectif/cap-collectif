@@ -15,8 +15,6 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Cache;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
-use Capco\AppBundle\Event\AbstractVoteChangedEvent;
-use Capco\AppBundle\CapcoAppBundleEvents;
 
 class IdeaController extends Controller
 {
@@ -303,15 +301,16 @@ class IdeaController extends Controller
 
         $ideaHelper = $this->get('capco.idea.helper');
         $vote = $ideaHelper->findUserVoteOrCreate($idea, $this->getUser());
-        $vote->setUser($this->getUser());
-        $vote->setIpAddress($request->getClientIp());
         $form = $this->createForm(new IdeaVoteType($this->getUser(), $vote->isConfirmed(), $idea->getIsCommentable()), $vote);
 
         if ($request->getMethod() == 'POST') {
-
             if (false == $idea->canContribute()) {
                 throw new AccessDeniedException($translator->trans('idea.error.no_contribute', array(), 'CapcoAppBundle'));
             }
+
+            $vote->setUser($this->getUser());
+            $vote->setIdea($idea);
+            $vote->setIpAddress($request->getClientIp());
             $form->handleRequest($request);
 
             if ($form->isValid()) {
@@ -337,19 +336,8 @@ class IdeaController extends Controller
                         $em->flush();
                     }
 
-                    $this->get('event_dispatcher')->dispatch(
-                        CapcoAppBundleEvents::ABSTRACT_VOTE_CHANGED,
-                        new AbstractVoteChangedEvent($vote, 'add')
-                    );
-                    $em->flush();
-
                     $this->get('session')->getFlashBag()->add('success', $this->get('translator')->trans('idea.vote.add_success'));
                 } else {
-                    $this->get('event_dispatcher')->dispatch(
-                        CapcoAppBundleEvents::ABSTRACT_VOTE_CHANGED,
-                        new AbstractVoteChangedEvent($vote, 'remove')
-                    );
-                    $em->flush();
                     $this->get('session')->getFlashBag()->add('info', $this->get('translator')->trans('idea.vote.delete_success'));
                 }
 

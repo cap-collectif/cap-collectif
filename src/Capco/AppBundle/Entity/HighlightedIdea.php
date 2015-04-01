@@ -1,0 +1,42 @@
+<?php
+
+namespace Capco\AppBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * HighlightedIdea.
+ *
+ * @ORM\Entity()
+ */
+class HighlightedIdea extends HighlightedContent
+{
+    /**
+     * @ORM\OneToOne(targetEntity="Idea")
+     */
+    private $idea;
+
+    /**
+     * Gets the value of idea.
+     *
+     * @return mixed
+     */
+    public function getIdea()
+    {
+        return $this->idea;
+    }
+
+    /**
+     * Sets the value of idea.
+     *
+     * @param mixed $idea the idea
+     *
+     * @return self
+     */
+    public function setIdea($idea)
+    {
+        $this->idea = $idea;
+
+        return $this;
+    }
+}

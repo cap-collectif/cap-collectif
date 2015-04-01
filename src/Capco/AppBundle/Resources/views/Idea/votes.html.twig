@@ -10,11 +10,11 @@
 <div class=" {{ 'col-xs-12  col-sm-6  col-md-' ~ col ~ ' col-lg-' ~ col }} ">
     <div class="media  media--macro  box  block  block--bordered">
 
-        {% include 'CapcoUserBundle:Avatar:avatar.html.twig' with { 'user': vote.user, 'private': true, 'classes': 'media-object', 'link_classes': 'pull-left'} only %}
+        {% include 'CapcoUserBundle:Avatar:avatar.html.twig' with { 'user': vote.user, 'classes': 'media-object', 'link_classes': 'pull-left'} only %}
 
         <div class="media-body">
             <p class="media--aligned media--macro__user">
-                {% if vote.user is not null and not vote.private %}
+                {% if vote.user is not null %}
                     <a href="{{ path('capco_user_profile_show', {'slug': vote.user.slug}) }}">{{ username }}</a>
                 {% else %}
                     {{ username }}
@@ -30,11 +30,11 @@
 <div class="row">
     {% if limit is defined %}
         {% for vote in idea.votes|slice(0, limit) %}
-            {% include 'CapcoAppBundle:Default:user_thumbnail.html.twig' with {'user': vote.user, 'username': vote.username, 'private': vote.private, 'col': 4} only %}
+            {{ render.vote_user(vote, 4) }}
         {% endfor %}
     {% else %}
         {% for vote in idea.votes %}
-            {% include 'CapcoAppBundle:Default:user_thumbnail.html.twig' with {'user': vote.user, 'username': vote.username, 'private': vote.private, 'col': 6} only %}
+            {{ render.vote_user(vote, 6) }}
         {% endfor %}
     {% endif %}
 </div>

@@ -36,11 +36,11 @@ class SectionExtension extends \Twig_Extension
 
     public function isFirstSection($section)
     {
-        return $this->resolver->isFirstSection($section);
+        return $this->resolver->isFirst($section);
     }
 
     public function isLastSection($section)
     {
-        return $this->resolver->isLastSection($section);
+        return $this->resolver->isLast($section);
     }
 }

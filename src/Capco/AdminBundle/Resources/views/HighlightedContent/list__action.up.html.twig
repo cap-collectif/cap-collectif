@@ -1,0 +1,5 @@
+{% if false == object | capco_is_first_highlighted %}
+    <a class="btn btn-sm btn-default" href="{{ admin.generateObjectUrl('up', object) }}"><i class="glyphicon glyphicon-chevron-up"></i></a>
+{% else %}
+    <span class="btn btn-sm btn-default disabled"><i class="glyphicon glyphicon-chevron-up"></i></span>
+{% endif %}

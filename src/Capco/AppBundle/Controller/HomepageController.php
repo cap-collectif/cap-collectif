@@ -25,7 +25,7 @@ class HomepageController extends Controller
 
         $form = $this->createForm(new NewsletterSubscriptionType(), $subscription);
 
-        $sections = $this->get('capco.section.resolver')->getDisplayableEnabledSectionsOrdered();
+        $sections = $this->get('capco.section.resolver')->getDisplayableEnabledOrdered();
 
         if ($request->getMethod() == 'POST') {
             $form->handleRequest($request);
@@ -51,6 +51,21 @@ class HomepageController extends Controller
             'form' => $form->createView(),
             'sections' => $sections,
         );
+    }
+
+    /**
+     * @Template("CapcoAppBundle:Homepage:highlighted.html.twig")
+     */
+    public function highlightedAction($max = 4, $offset = 0, $section = null, $alt = null)
+    {
+
+        $highlighted = $this->getDoctrine()->getRepository('CapcoAppBundle:Theme')->getLast($max, $offset);
+
+        return [
+            'videos' => $videos,
+            'section' => $section,
+            'alt' => $alt,
+        ];
     }
 
     /**

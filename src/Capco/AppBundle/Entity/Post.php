@@ -4,6 +4,7 @@ namespace Capco\AppBundle\Entity;
 
 use Capco\AppBundle\Model\CommentableInterface;
 use Capco\AppBundle\Traits\CommentableTrait;
+use Capco\AppBundle\Traits\HighlitableTrait;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 use Gedmo\Mapping\Annotation as Gedmo;
@@ -19,6 +20,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 class Post implements CommentableInterface
 {
     use CommentableTrait;
+    use HighlitableTrait;
 
     /**
      * @var int

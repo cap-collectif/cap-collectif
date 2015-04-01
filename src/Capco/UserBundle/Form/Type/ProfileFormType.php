@@ -4,9 +4,17 @@ namespace Capco\UserBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Capco\AppBundle\Toggle\Manager;
 
 class ProfileFormType extends AbstractType
 {
+    private $toggleManager;
+
+    public function __construct(Manager $toggleManager)
+    {
+        $this->toggleManager = $toggleManager;
+    }
+
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
@@ -60,6 +68,15 @@ class ProfileFormType extends AbstractType
                 'translation_domain' => 'CapcoAppBundle',
             ))
         ;
+
+        if ($this->toggleManager->isActive('user_type')) {
+            $builder->add('userType', null, array(
+                'required' => true,
+                'empty_value' => 'user.profile.edit.no_user_type',
+                'label' => 'user.profile.edit.user_type',
+                'translation_domain' => 'CapcoAppBundle',
+            ));
+        }
     }
 
     public function getParent()

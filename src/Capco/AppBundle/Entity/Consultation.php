@@ -8,6 +8,8 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Symfony\Component\Validator\Constraints as Assert;
 use Capco\AppBundle\Validator\Constraints as CapcoAssert;
+use Capco\AppBundle\Traits\HighlitableTrait;
+
 
 /**
  * Consultation.
@@ -41,6 +43,8 @@ class Consultation
         'opened' => self::OPENING_STATUS_OPENED,
         'ended' => self::OPENING_STATUS_ENDED,
     ];
+
+    use HighlitableTrait;
 
     /**
      * @var int

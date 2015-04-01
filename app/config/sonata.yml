@@ -24,6 +24,7 @@ sonata_admin:
                     - capco_admin.admin.page
                     - sonata.media.admin.media
                     - capco_admin.admin.video
+                    - capco_admin.admin.highlighted
             admin.group.consultation:
                 items:
                     - capco_admin.admin.consultation
@@ -44,6 +45,7 @@ sonata_admin:
             sonata.admin.group.user:
                 items:
                     - sonata.user.admin.user
+                    - capco_admin.admin.user_type
             admin.group.marketing:
                 items:
                     - capco_admin.admin.newsletter_subscription

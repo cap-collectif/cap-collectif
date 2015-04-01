@@ -50,6 +50,14 @@
                         </div>
                         {{ form_errors(form.plainPassword) }}
 
+                        {% if is_feature_enabled('user_type') %}
+                            <div class="form-group">
+                                <label for="userType" class="control-label  h5">{{ 'user.register.user_type'|trans({}, 'CapcoAppBundle') }}</label>
+                                {{ form_widget(form.userType) }}
+                            </div>
+                            {{ form_errors(form.userType) }}
+                        {% endif %}
+
                         {% if form.isTermsAccepted is defined %}
                             {{ form_widget(form.isTermsAccepted) }}
                             {{ form_errors(form.isTermsAccepted) }}

@@ -2,6 +2,7 @@
 
 namespace Capco\UserBundle\Form\Type;
 
+use Capco\AppBundle\Toggle\Manager;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Capco\AppBundle\SiteParameter\Resolver as SiteParameterResolver;
@@ -9,11 +10,14 @@ use Capco\AppBundle\SiteParameter\Resolver as SiteParameterResolver;
 class RegistrationFormType extends AbstractType
 {
     private $siteParameterResolver;
+    private $toggleManager;
 
-    public function __construct(SiteParameterResolver $resolver)
+    public function __construct(SiteParameterResolver $resolver, Manager $toggleManager)
     {
         $this->siteParameterResolver = $resolver;
+        $this->toggleManager = $toggleManager;
     }
+
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         if ((null != $this->siteParameterResolver->getValue('signin.cgu.name')) && (null != $this->siteParameterResolver->getValue('signin.cgu.link'))) {
@@ -35,6 +39,14 @@ class RegistrationFormType extends AbstractType
                 'label' => 'form.password',
             ))
         ;
+
+        if ($this->toggleManager->isActive('user_type')) {
+            $builder->add('userType', null, array(
+                'required' => true,
+                'empty_value' => 'form.no_type',
+                'translation_domain' => 'FOSUserBundle',
+            ));
+        }
     }
 
     public function getParent()
