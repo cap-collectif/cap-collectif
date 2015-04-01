@@ -5,6 +5,8 @@ global:
   capco_powered: Propulsé par %startlink%Cap-Collectif%endlink%
   menu:
     title: Menu
+  form:
+    mandatory: Ce champ est obligatoire.
 
 #Errors
 error:
@@ -157,6 +159,8 @@ idea:
     url: Site web
     theme: Thème
     media: Image
+    empty_theme: Choisissez une valeur
+    url_help: Indiquez un site proposant des informations complémentaires.
   vote:
     submit: Soutenir
     private: Rendre privé mon soutien
