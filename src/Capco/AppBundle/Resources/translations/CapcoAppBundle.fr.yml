@@ -288,8 +288,6 @@ step:
     closed: Terminé
     open: En cours
     future: À venir
-  on_date: Le %date%
-  between_dates: Du %start% au %end%
 
 argument:
   create:
