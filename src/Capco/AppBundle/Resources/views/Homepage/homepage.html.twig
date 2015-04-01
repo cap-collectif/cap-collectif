@@ -21,15 +21,11 @@
     <div class="jumbotron  jumbotron--custom  jumbotron--bg-1  text-center">
         <div class="header-img">
             <div class="container">
-                {% if app.user is not null and app.user.email == 'admin@cap-collectif.com' %}
-                    <h1>100% GLUTEN</h1>
-                {% elseif null != jumbotron_title %}
+                {% if null != jumbotron_title %}
                     <h1>{{ jumbotron_title }}</h1>
                 {% endif %}
                 {% set jumbotron_body = capco_site_parameter_value('homepage.jumbotron.body') %}
-                {% if app.user is not null and app.user.email == 'admin@cap-collectif.com' %}
-                    <p>Respectez votre corps, donnez-lui des protéines de blé !</p>
-                {% elseif null != jumbotron_body %}
+                {% if null != jumbotron_body %}
                     {{ jumbotron_body|raw }}
                 {% endif %}
                 {% set jumbotron_button = capco_site_parameter_value('homepage.jumbotron.button') %}

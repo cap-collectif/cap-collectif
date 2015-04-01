@@ -45,19 +45,6 @@
 {% set footerBg = capco_site_color_value('color.footer.bg') %}
 {% if null == footerBg %}{% set footerBg = '#1abc9c' %}{% endif %}
 
-{%  if app.user is not null and app.user.email == 'admin@cap-collectif.com' %}
-    {% set headerBg = '#e03ae0' %}
-    {% set header2Bg = '#e03ae0' %}
-    {% set h1 = '#e03ae0' %}
-    {% set h2 = '#e03ae0' %}
-    {% set h3 = '#e03ae0' %}
-    {% set btn = '#e03ae0' %}
-    {% set btnPrimary = '#e03ae0' %}
-    {% set link = '#e03ae0' %}
-    {% set linkHover = '#e03ae0' %}
-    {% set footerBg = '#e03ae0' %}
-{% endif %}
-
 <style>
 
     a {
