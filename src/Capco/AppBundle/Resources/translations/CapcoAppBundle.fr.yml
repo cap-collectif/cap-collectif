@@ -558,6 +558,7 @@ user:
     show: Mot de passe
   edition: Édition
   profile:
+    title: Profil
     edit:
       twitter: Twitter
       facebook: Facebook
