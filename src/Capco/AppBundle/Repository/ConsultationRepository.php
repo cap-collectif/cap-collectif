@@ -71,12 +71,10 @@ class ConsultationRepository extends EntityRepository
      * Get one by slug with events and posts.
      *
      * @param $slug
-     * @param int $eventsLimit
-     * @param int $postsLimit
      * @return mixed
      * @throws \Doctrine\ORM\NonUniqueResultException
      */
-    public function getOneBySlugWithEventsAndPosts($slug, $eventsLimit = 2, $postsLimit = 2)
+    public function getOneBySlugWithEventsAndPosts($slug)
     {
         $qb = $this->getIsEnabledQueryBuilder('c')
             ->addSelect('t', 's', 'cov', 'p', 'e')

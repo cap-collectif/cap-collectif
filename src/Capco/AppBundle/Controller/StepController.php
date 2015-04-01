@@ -24,6 +24,7 @@ class StepController extends Controller
     public function showAllInNavAction(Consultation $consultation, $currentStep = null)
     {
         $em = $this->getDoctrine();
+        $consultation = $em->getRepository('CapcoAppBundle:Consultation')->getOneBySlugWithEventsAndPosts($consultation->getSlug());
         $steps = $em->getRepository('CapcoAppBundle:Step')->findBy(
             array(
                 'consultation' => $consultation,
@@ -95,7 +96,7 @@ class StepController extends Controller
         }
 
         $em = $this->getDoctrine()->getManager();
-        $consultation = $em->getRepository('CapcoAppBundle:Consultation')->getOneBySlugWithEventsAndPosts($consultation_slug, 2, 2);
+        $consultation = $em->getRepository('CapcoAppBundle:Consultation')->getOne($consultation_slug);
         $events = $this->get('capco.event.repository')->getLastByConsultation($consultation_slug, 2);
         $posts = $this->get('capco.blog.post.repository')->getLastPublishedByConsultation($consultation_slug, 2);
 

@@ -39,3 +39,29 @@
         {% endfor %}
     </ul>
 </div>
+
+{% if consultation.posts | length > 0 or consultation.events | length > 0 %}
+    <h2 class="h4">{{ 'consultation.show.meta.info.title'|trans({}, 'CapcoAppBundle') }}</h2>
+    <div class="navbar--sub">
+        <ul class="nav">
+            {% if consultation.posts | length > 0 %}
+                <li {% if currentStep == 'posts' %} class="active" {% endif %}>
+                    <a href="{{ path('app_consultation_show', {'slug': consultation.slug}) }}">
+                        <div class="navbar__step">
+                            <h3 class="navbar__step-title">{{ 'consultation.show.meta.info.posts'|trans({}, 'CapcoAppBundle') }}  <i class="pull-right  excerpt  cap-arrow-66"></i></h3>
+                        </div>
+                    </a>
+                </li>
+            {% endif %}
+            {% if consultation.events | length > 0 %}
+                <li {% if currentStep == 'events' %} class="active" {% endif %}>
+                    <a href="{{ path('app_consultation_show', {'slug': consultation.slug}) }}">
+                        <div class="navbar__step">
+                            <p class="h5">{{ 'consultation.show.meta.info.events'|trans({}, 'CapcoAppBundle') }}  <i class="pull-right  excerpt  cap-arrow-66"></i></p>
+                        </div>
+                    </a>
+                </li>
+            {% endif %}
+        </ul>
+    </div>
+{% endif %}

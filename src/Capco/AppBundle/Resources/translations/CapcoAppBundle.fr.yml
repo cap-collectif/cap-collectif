@@ -256,6 +256,10 @@ consultation:
         title: Introduction
       step:
         title: Étapes
+      info:
+        title: Informations
+        posts: Actualités
+        events: Évènements
     status:
       opened: Consultation ouverte
       ended: Consultation fermée
