@@ -6,7 +6,7 @@
     <div class="container  container--custom  appendices__container">
         <div class="row  text-center">
             {% if nbPosts > 0 %}
-                <div class="col-centered col-xs-12 col-sm-6 col-md-4 text-center  appendices__item  box">
+                <div class="col-centered col-xs-12 col-sm-6 {% if nbAppendices == 1 %}col-md-offset-4 {% endif %}col-md-4 text-center  appendices__item  box">
                     <h2 class="h4">{{ 'theme.show.appendices.posts.title'|trans({}, 'CapcoAppBundle') }}</h2>
                     <p class="excerpt">{% transchoice nbPosts | length with {'%count%': nbPosts | length} from 'CapcoAppBundle' %}
                         theme.show.appendices.posts.number
@@ -15,7 +15,7 @@
                 </div>
             {% endif %}
             {% if nbEvents > 0 %}
-                <div class="col-centered col-xs-12 col-sm-6 col-md-4 text-center  appendices__item  box">
+                <div class="col-centered col-xs-12 col-sm-6 col-md-4 {% if nbAppendices == 1 %}col-md-offset-4 {% endif %}text-center  appendices__item  box">
                     <h2 class="h4">{{ 'theme.show.appendices.events.title'|trans({}, 'CapcoAppBundle') }}</h2>
                     <p class="excerpt">{% transchoice nbEvents with {'%count%': nbEvents | length} from 'CapcoAppBundle' %}
                         theme.show.appendices.events.number
