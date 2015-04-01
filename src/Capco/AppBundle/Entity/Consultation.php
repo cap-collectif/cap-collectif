@@ -707,7 +707,7 @@ class Consultation
             }
         }
 
-        return null;
+        return;
     }
 
     /**
@@ -719,7 +719,7 @@ class Consultation
             return $consultationStep->getStartAt();
         }
 
-        return null;
+        return;
     }
 
     /**
@@ -731,7 +731,7 @@ class Consultation
             return $consultationStep->getEndAt();
         }
 
-        return null;
+        return;
     }
 
     /**
@@ -820,7 +820,7 @@ class Consultation
             return self::OPENING_STATUS_OPENED;
         }
 
-        return null;
+        return;
     }
 
     /**

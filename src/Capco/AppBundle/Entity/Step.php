@@ -389,11 +389,7 @@ class Step
      */
     public function isConsultationStep()
     {
-        if ($this->type == self::TYPE_CONSULTATION) {
-            return true;
-        }
-
-        return false;
+        return $this->type == self::TYPE_CONSULTATION;
     }
 
     /**
@@ -401,11 +397,7 @@ class Step
      */
     public function isPresentationStep()
     {
-        if ($this->type == self::TYPE_PRESENTATION) {
-            return true;
-        }
-
-        return false;
+        return $this->type == self::TYPE_PRESENTATION;
     }
 
     /**
@@ -413,11 +405,7 @@ class Step
      */
     public function isOtherStep()
     {
-        if ($this->type == self::TYPE_OTHER) {
-            return true;
-        }
-
-        return false;
+        return $this->type == self::TYPE_OTHER;
     }
 
     // ************************* Lifecycle **************************

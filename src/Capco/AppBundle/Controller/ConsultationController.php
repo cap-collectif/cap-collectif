@@ -67,6 +67,7 @@ class ConsultationController extends Controller
         return [
             'consultation' => $consultation,
             'statuses' => Theme::$statuses,
+            'currentStep' => $consultation->getConsultationStep(),
         ];
     }
 
@@ -146,6 +147,7 @@ class ConsultationController extends Controller
             'nbPage' => ceil(count($opinions) / 10),
             'sortOpinionsForm' => $form->createView(),
             'opinionsSort' => $opinionsSort,
+            'currentStep' => $consultation->getConsultationStep(),
         ];
     }
 
@@ -174,6 +176,84 @@ class ConsultationController extends Controller
             'arguments' => $arguments,
             'sources' => $sources,
             'argumentsLabels' => Argument::$argumentTypesLabels,
+            'currentStep' => $consultation->getConsultationStep(),
+        ];
+    }
+
+    /**
+     * @Route("/consultations/{consultationSlug}/events", name="app_consultation_show_events", defaults={"_feature_flag" = "calendar"})
+     * @ParamConverter("consultation", class="CapcoAppBundle:Consultation", options={"mapping": {"consultationSlug": "slug"}})
+     * @Template("CapcoAppBundle:Consultation:show_events.html.twig")
+     *
+     * @param $consultation
+     *
+     * @return array
+     */
+    public function showEventsAction(Consultation $consultation)
+    {
+        $groupedEvents = $this->get('capco.event.resolver')->getEventsGroupedByYearAndMonth(null, $consultation->getSlug(), null);
+        $nbEvents = $this->get('capco.event.resolver')->countEvents(null, $consultation->getSlug(), null);
+
+        return [
+            'consultation' => $consultation,
+            'years' => $groupedEvents,
+            'nbEvents' => $nbEvents,
+        ];
+    }
+
+    /**
+     * @Route("/consultations/{consultationSlug}/posts/{page}", name="app_consultation_show_posts", requirements={"page" = "\d+"}, defaults={"_feature_flag" = "blog", "page" = 1} )
+     * @ParamConverter("consultation", class="CapcoAppBundle:Consultation", options={"mapping": {"consultationSlug": "slug"}})
+     * @Template("CapcoAppBundle:Consultation:show_posts.html.twig")
+     *
+     * @param $page
+     * @param $consultation
+     *
+     * @return array
+     */
+    public function showPostsAction(Consultation $consultation, $page)
+    {
+        $pagination = $this->get('capco.site_parameter.resolver')->getValue('blog.pagination.size');
+        $pagination = is_numeric($pagination) ? (int) $pagination : 0;
+
+        $posts = $this->get('capco.blog.post.repository')->getSearchResults(
+            $pagination,
+            $page,
+            null,
+            $consultation->getSlug()
+        );
+
+        //Avoid division by 0 in nbPage calculation
+        $nbPage = 1;
+        if ($pagination != 0) {
+            $nbPage = ceil(count($posts) / $pagination);
+        }
+
+        return [
+            'consultation' => $consultation,
+            'posts' => $posts,
+            'page' => $page,
+            'nbPage' => $nbPage,
+        ];
+    }
+
+    /**
+     * @Template("CapcoAppBundle:Consultation:show_meta.html.twig")
+     *
+     * @param $consultationSlug
+     * @param $currentStepSlug
+     *
+     * @return array
+     */
+    public function showMetaAction($consultationSlug, $currentStepSlug)
+    {
+        $em = $this->getDoctrine();
+        $consultation = $em->getRepository('CapcoAppBundle:Consultation')->getOneBySlugWithStepsAndEventsAndPosts($consultationSlug);
+
+        return [
+            'consultation' => $consultation,
+            'currentStep' => $currentStepSlug,
+            'stepStatus' => Step::$stepStatus,
         ];
     }
 
@@ -223,11 +303,7 @@ class ConsultationController extends Controller
         }
 
         $pagination = $this->get('capco.site_parameter.resolver')->getValue('consultations.pagination');
-        if (!is_numeric($pagination)) {
-            $pagination = 0;
-        } else {
-            $pagination = (int) $pagination;
-        }
+        $pagination = is_numeric($pagination) ? (int) $pagination : 0;
 
         $consultations = $em->getRepository('CapcoAppBundle:Consultation')->getSearchResults($pagination, $page, $theme, $sort, $term);
 

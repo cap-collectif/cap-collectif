@@ -7,6 +7,7 @@ Capco\AppBundle\Entity\Step:
         endAt: <dateTimeBetween('now', '+10 days')>
         position: 2
         consultation: @cs1
+        body: <text(1000)>
     step2:
         title: Présentation
         isEnabled: true

@@ -8,7 +8,7 @@
             </div>
             <ul class="media-list  opinion__list">
                 {% for opinion in block.Opinions %}
-                    {% include 'CapcoAppBundle:Opinion:blockOpinion.html.twig' with {'opinionType': opinion.opinionType, 'profile': true} %}
+                    {% include 'CapcoAppBundle:Opinion:blockOpinion.html.twig' with {'opinion': opinion, 'opinionType': opinion.opinionType, 'profile': true} only %}
                 {% endfor %}
             </ul>
         </div>

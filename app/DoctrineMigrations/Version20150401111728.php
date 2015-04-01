@@ -41,12 +41,17 @@ class Version20150401111728 extends AbstractMigration
 
     public function postDown(Schema $schema)
     {
-        $steps = $this->connection->fetchAll('SELECT consultation_id, body FROM step WHERE type = 1');
+        $steps = $this->connection->fetchAll('SELECT id, consultation_id, body FROM step WHERE type = 1');
         foreach ($steps as $step) {
             $this->connection->update('consultation', array(
                 'body' => $step['body'],
             ), array(
                 'id' => $step['consultation_id'],
+            ));
+            $this->connection->update('step', array(
+                'body' => null,
+            ), array(
+                'id' => $step['id'],
             ));
         }
     }

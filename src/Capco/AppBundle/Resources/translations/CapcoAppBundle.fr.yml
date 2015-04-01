@@ -238,8 +238,11 @@ consultation:
   see_all: Voir toutes les consultations
   none: Aucune consultation.
   show:
+    events:
+      title: Évènements
+    posts:
+      title: Actualités
     in_theme: dans
-    on_date: le %date%
     alert:
       ended:
         title: Consultation terminée.
@@ -256,6 +259,8 @@ consultation:
         title: Introduction
       step:
         title: Étapes
+        on_date: Le %date%
+        between_dates: Du %start% au %end%
       info:
         title: Informations
         posts: Actualités

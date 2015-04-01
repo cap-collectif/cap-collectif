@@ -16,6 +16,6 @@ class EventResolverSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Capco\AppBundle\Manager\EventResolver');
+        $this->shouldHaveType('Capco\AppBundle\Resolver\EventResolver');
     }
 }

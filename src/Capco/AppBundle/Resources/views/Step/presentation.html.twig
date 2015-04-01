@@ -17,7 +17,7 @@
     <div class="container  container--custom">
         <div class="row">
             <div class="col-xs-12  col-sm-4  col-md-3">
-                {% include '@CapcoApp/Consultation/show_meta.html.twig' %}
+                {{ render(controller('CapcoAppBundle:Consultation:showMeta', {'consultationSlug': consultation.slug, 'currentStepSlug': currentStep.slug})) }}
             </div>
 
             <div class="col-xs-12  col-sm-8  col-md-9" id="details">
@@ -36,7 +36,7 @@
                         <h2 class="h2">{{ 'step.presentation.posts.title'|trans({}, 'CapcoAppBundle') }}</h2>
                         <ul class="media-list">
                             {% for post in posts %}
-                                {% include '@CapcoApp/Blog/blockPost.html.twig' %}
+                                {% include '@CapcoApp/Blog/blockPost.html.twig' with {'post': post} only %}
                             {% endfor %}
                         </ul>
                         <a href="{{ path('app_blog_search_consultation', {'theme': 'all', 'consultation': consultation.slug}) }}" class="btn  btn-primary  btn--outline">{{ 'step.presentation.posts.see_all'|trans({}, 'CapcoAppBundle') }}</a>
@@ -48,7 +48,7 @@
                         <h2 class="h2">{{ 'step.presentation.events.title'|trans({}, 'CapcoAppBundle') }}</h2>
                         <div class="row">
                             {% for event in events %}
-                                {% include '@CapcoApp/Event/blockEvent.html.twig' with {'col_classes': 'col-md-6  col-sm-12'} %}
+                                {% include '@CapcoApp/Event/blockEvent.html.twig' with {'event': event, 'col_classes': 'col-md-6  col-sm-12'} only %}
                             {% endfor %}
                         </div>
                         <a href="{{ path('app_event_search_consultation', {'theme': 'all', 'consultation': consultation.slug}) }}" class="btn  btn-primary  btn--outline">{{ 'step.presentation.events.see_all'|trans({}, 'CapcoAppBundle') }}</a>

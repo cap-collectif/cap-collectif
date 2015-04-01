@@ -20,9 +20,11 @@ class StepResolver
         if (null != $step) {
             if ($step->isConsultationStep()) {
                 return $this->router->generate('app_consultation_show', array('slug' => $step->getConsultation()->getSlug()), $absolute);
-            } elseif ($step->isPresentationStep()) {
+            }
+            if ($step->isPresentationStep()) {
                 return $this->router->generate('app_consultation_show_presentation', array('consultation_slug' => $step->getConsultation()->getSlug(), 'step_slug' => $step->getSlug()), $absolute);
-            } elseif ($step->isOtherStep()) {
+            }
+            if ($step->isOtherStep()) {
                 return $this->router->generate('app_consultation_show_step', array('consultation_slug' => $step->getConsultation()->getSlug(), 'step_slug' => $step->getSlug()), $absolute);
             }
         }

@@ -21,7 +21,7 @@ class StepController extends Controller
      *
      * @return array
      */
-    public function showAllInNavAction(Consultation $consultation, $currentStep = null)
+    public function showStepsNavAction(Consultation $consultation, $currentStep = null)
     {
         $em = $this->getDoctrine();
         $consultation = $em->getRepository('CapcoAppBundle:Consultation')->getOneBySlugWithEventsAndPosts($consultation->getSlug());
@@ -81,17 +81,13 @@ class StepController extends Controller
      * @ParamConverter("step", class="CapcoAppBundle:Step", options={"mapping" = {"step_slug": "slug"}})
      *
      * @param $consultation_slug
-     * @param Step         $step
+     * @param Step $step
      *
      * @return array
      */
     public function showPresentationAction($consultation_slug, Step $step)
     {
-        if ($step->isConsultationStep()) {
-            throw new NotFoundHttpException();
-        }
-
-        if (!$step->getConsultation()->canDisplay()) {
+        if ($step->isConsultationStep() || !$step->getConsultation()->canDisplay()) {
             throw new NotFoundHttpException();
         }
 

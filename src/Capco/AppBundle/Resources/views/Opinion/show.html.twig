@@ -30,7 +30,7 @@
 
         <div class="row">
             <div class="col-xs-12  col-sm-4  col-md-3  block--mobile">
-                {% include '@CapcoApp/Consultation/show_meta.html.twig' %}
+                {{ render(controller('CapcoAppBundle:Consultation:showMeta', {'consultationSlug': consultation.slug, 'currentStepSlug': 'consultation_step'})) }}
             </div>
 
             {% set nbVotes = (opinion.getVoteCountAll) %}

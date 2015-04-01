@@ -99,7 +99,7 @@ class PostRepository extends EntityRepository
     }
 
     /**
-     * Get last postsby consultation.
+     * Get last posts by consultation.
      *
      * @param $consultationSlug
      * @param int $limit

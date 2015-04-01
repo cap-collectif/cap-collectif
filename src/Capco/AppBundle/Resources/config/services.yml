@@ -14,7 +14,7 @@ parameters:
     capco.toggle.listener.request.class: Capco\AppBundle\Toggle\RequestListener
     capco.blog.post.repository.class: Capco\AppBundle\Repository\PostRepository
     capco.event.repository.class: Capco\AppBundle\Repository\EventRepository
-    capco.event.resolver.class: Capco\AppBundle\Manager\EventResolver
+    capco.event.resolver.class: Capco\AppBundle\Resolver\EventResolver
     capco.comment.resolver.class: Capco\AppBundle\Manager\CommentResolver
     capco.twig.comment.class: Capco\AppBundle\Twig\CommentExtension
     capco.site_color.repository.class: Capco\AppBundle\Repository\SiteColorRepository
