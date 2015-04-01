@@ -4,6 +4,7 @@
     <ul class="media-list  opinion__list">
         {% for comment in comments %}
             {% include '@CapcoApp/Comment/blockComment.html.twig' with {'token': csrf_token('comment_vote')} %}
+            <hr/>
         {% endfor %}
     </ul>
 {% endif %}

@@ -384,9 +384,3 @@ a.excerpt {
   float:none;
   margin-right: -4px;
 }
-
-.help {
-  @extend .excerpt;
-  font-size: 14px;
-  margin-top: 5px;
-}

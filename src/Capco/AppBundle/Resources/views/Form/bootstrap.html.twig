@@ -7,9 +7,6 @@
         {% set attr = attr|merge({class: (attr.class|default('') ~ ' form-control')|trim}) %}
     {% endif %}
     {{- parent() -}}
-    {% if help is defined and help is not null %}
-        <span class="help">{{ help | trans({}, translation_domain) }}</span>
-    {% endif %}
 {%- endblock form_widget_simple %}
 
 {% block textarea_widget -%}
@@ -142,9 +139,6 @@
 {% block form_label -%}
     {% set label_attr = label_attr|merge({class: (label_attr.class|default('') ~ ' control-label')|trim}) %}
     {{- parent() -}}
-    {% if required %}
-        <span class="required" title="{{ 'global.form.mandatory' | trans({}, 'CapcoAppBundle') }}">*</span>
-    {% endif %}
 {%- endblock form_label %}
 
 {% block choice_label %}
