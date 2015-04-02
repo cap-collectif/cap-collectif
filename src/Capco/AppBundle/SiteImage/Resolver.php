@@ -4,30 +4,31 @@ namespace Capco\AppBundle\SiteImage;
 
 use Capco\AppBundle\Repository\SiteImageRepository;
 use Psr\Log\LoggerInterface;
+use Doctrine\ORM\NoResultException;
 
 class Resolver
 {
     protected $repository;
     protected $logger;
-    protected $images;
 
     public function __construct(SiteImageRepository $repository, LoggerInterface $logger)
     {
         $this->repository = $repository;
         $this->logger = $logger;
-        $this->images = $this->repository->getValuesIfEnabled();
     }
 
     public function getMedia($key)
     {
-        if (!array_key_exists($key, $this->images)) {
-            $this->logger->error('Tried to access undefined site image.', array(
+        $media = null;
+
+        try {
+            $media = $this->repository->getMediaByKeyIfEnabled($key);
+        } catch (NoResultException $e) {
+            $this->logger->error($e->getMessage().' Tried to access undefined site parameter.', array(
                 'key' => $key,
             ));
-
-            return;
         }
 
-        return $this->images[$key]->getMedia();
+        return $media;
     }
 }

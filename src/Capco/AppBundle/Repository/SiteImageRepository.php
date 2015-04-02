@@ -9,16 +9,31 @@ use Doctrine\ORM\EntityRepository;
  */
 class SiteImageRepository extends EntityRepository
 {
-    public function getValuesIfEnabled()
+    /**
+     * Logo site parameters /CapcoAppBundle/SiteImage/Resolver.
+     *
+     * @param $key
+     *
+     * @return mixed
+     *
+     * @throws \Doctrine\ORM\NonUniqueResultException
+     */
+    public function getMediaByKeyIfEnabled($key)
     {
-        return $this->_em->createQueryBuilder()
-            ->select('p', 'm')
-            ->from($this->getClassName(), 'p', 'p.keyname')
+        $result = $this->createQueryBuilder('p')
+            ->addSelect('m')
             ->leftJoin('p.Media', 'm')
+            ->andWhere('p.keyname = :key')
             ->andWhere('p.isEnabled = :enabled')
+            ->setParameter('key', $key)
             ->setParameter('enabled', true)
-            ->groupBy('p.keyname')
             ->getQuery()
-            ->getResult();
+            ->getOneOrNullResult();
+
+        if (null != $result) {
+            return $result->getMedia();
+        } else {
+            return $result;
+        }
     }
 }

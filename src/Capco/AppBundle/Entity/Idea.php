@@ -8,6 +8,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Validator\Constraints as Assert;
+use Capco\AppBundle\Validator\Constraints as CapcoAssert;
 
 /**
  * Idea.
@@ -134,6 +135,7 @@ class Idea implements CommentableInterface
     /**
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Theme", inversedBy="Ideas", cascade={"persist"})
      * @ORM\JoinColumn(name="theme_id", referencedColumnName="id", nullable=true)
+     * @CapcoAssert\HasThemeIfActivated()
      */
     private $Theme = null;
 
@@ -554,7 +556,6 @@ class Idea implements CommentableInterface
     {
         if (!$this->votes->contains($vote)) {
             $this->votes->add($vote);
-            $this->voteCount++;
         }
 
         return $this;
@@ -567,9 +568,7 @@ class Idea implements CommentableInterface
      */
     public function removeVote(\Capco\AppBundle\Entity\IdeaVote $vote)
     {
-        if ($this->votes->removeElement($vote)) {
-            $this->voteCount--;
-        }
+        $this->votes->removeElement($vote);
 
         return $this;
     }

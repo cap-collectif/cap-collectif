@@ -108,7 +108,7 @@ abstract class AbstractComment
      *
      * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\CommentVote", mappedBy="comment", cascade={"persist", "remove"}, orphanRemoval=true)
      */
-    protected $Votes;
+    protected $votes;
 
     /**
      * @var string
@@ -140,7 +140,7 @@ abstract class AbstractComment
 
     public function __construct()
     {
-        $this->Votes = new ArrayCollection();
+        $this->votes = new ArrayCollection();
         $this->Reports = new ArrayCollection();
         $this->updatedAt = new \Datetime();
         $this->voteCount = 0;
@@ -228,17 +228,6 @@ abstract class AbstractComment
      */
     public function setIsEnabled($isEnabled)
     {
-        if ($isEnabled != $this->isEnabled) {
-            if ($isEnabled) {
-                if (!$this->isTrashed) {
-                    $this->increaseRelatedObjectCount(1);
-                }
-            } else {
-                if (!$this->isTrashed) {
-                    $this->decreaseRelatedObjectCount(1);
-                }
-            }
-        }
         $this->isEnabled = $isEnabled;
 
         return $this;
@@ -343,7 +332,7 @@ abstract class AbstractComment
      */
     public function getVotes()
     {
-        return $this->Votes;
+        return $this->votes;
     }
 
     /**
@@ -353,9 +342,8 @@ abstract class AbstractComment
      */
     public function addVote($vote)
     {
-        if (!$this->Votes->contains($vote)) {
-            $this->voteCount++;
-            $this->Votes->add($vote);
+        if (!$this->votes->contains($vote)) {
+            $this->votes->add($vote);
         }
 
         return $this;
@@ -368,9 +356,7 @@ abstract class AbstractComment
      */
     public function removeVote($vote)
     {
-        if ($this->Votes->removeElement($vote)) {
-            $this->voteCount--;
-        }
+        $this->votes->removeElement($vote);
 
         return $this;
     }
@@ -433,13 +419,6 @@ abstract class AbstractComment
                 $this->trashedReason = null;
                 $this->trashedAt = null;
             }
-            if ($this->isEnabled) {
-                if ($isTrashed) {
-                    $this->decreaseRelatedObjectCount(1);
-                } else {
-                    $this->increaseRelatedObjectCount(1);
-                }
-            }
         }
         $this->isTrashed = $isTrashed;
 
@@ -501,8 +480,8 @@ abstract class AbstractComment
      */
     public function resetVotes()
     {
-        foreach ($this->Votes as $vote) {
-            $this->removeVote($vote);
+        foreach ($this->votes as $vote) {
+            $vote->setConfirmed(false);
         }
 
         return $this;
@@ -516,7 +495,7 @@ abstract class AbstractComment
     public function userHasVote(User $user = null)
     {
         if ($user != null) {
-            foreach ($this->Votes as $vote) {
+            foreach ($this->votes as $vote) {
                 if ($vote->getUser() == $user) {
                     return true;
                 }
@@ -571,21 +550,6 @@ abstract class AbstractComment
         $excerpt = $excerpt.'...';
 
         return $excerpt;
-    }
-
-    /**
-     * @param int $nb
-     */
-    public function increaseRelatedObjectCount($nb = 1)
-    {
-        $this->getRelatedObject()->increaseCommentsCount($nb);
-    }
-    /**
-     * @param int $nb
-     */
-    public function decreaseRelatedObjectCount($nb = 1)
-    {
-        $this->getRelatedObject()->decreaseCommentsCount($nb);
     }
 
     /**

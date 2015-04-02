@@ -9,15 +9,15 @@ use Doctrine\ORM\EntityRepository;
  */
 class SiteColorRepository extends EntityRepository
 {
-    public function getValuesIfEnabled()
+    public function getValueByKeyIfEnabled($key)
     {
-        return $this->_em->createQueryBuilder()
-            ->from($this->getClassName(), 'p', 'p.keyname')
-            ->select('p.value', 'p.keyname')
+        return $this->createQueryBuilder('p')
+            ->select('p.value')
+            ->andWhere('p.keyname = :key')
             ->andWhere('p.isEnabled = :enabled')
+            ->setParameter('key', $key)
             ->setParameter('enabled', true)
-            ->groupBy('p.keyname')
             ->getQuery()
-            ->getResult();
+            ->getSingleScalarResult();
     }
 }
