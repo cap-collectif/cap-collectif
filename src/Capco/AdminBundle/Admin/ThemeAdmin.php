@@ -13,7 +13,7 @@ class ThemeAdmin extends Admin
 {
     protected $datagridValues = array(
         '_sort_order' => 'ASC',
-        '_sort_by' => 'title',
+        '_sort_by' => 'position',
     );
 
     /**
@@ -24,6 +24,9 @@ class ThemeAdmin extends Admin
         $datagridMapper
             ->add('title', null, array(
                 'label' => 'admin.fields.theme.title',
+            ))
+            ->add('position', null, array(
+                'label' => 'admin.fields.theme.position',
             ))
             ->add('isEnabled', null, array(
                 'label' => 'admin.fields.theme.is_enabled',

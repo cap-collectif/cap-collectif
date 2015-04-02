@@ -35,7 +35,7 @@ class SourceAdmin extends Admin
             ->add('link', null, array(
                 'label' => 'admin.fields.source.link',
             ))
-            ->add('voteCount', null, array(
+            ->add('voteCountSource', null, array(
                 'label' => 'admin.fields.source.vote_count_source',
             ))
             ->add('updatedAt', null, array(
@@ -71,7 +71,7 @@ class SourceAdmin extends Admin
             ->add('Category', 'sonata_type_model', array(
                 'label' => 'admin.fields.source.category',
             ))
-            ->add('voteCount', null, array(
+            ->add('voteCountSource', null, array(
                 'label' => 'admin.fields.source.vote_count_source',
             ))
             ->add('isEnabled', null, array(
@@ -162,7 +162,7 @@ class SourceAdmin extends Admin
             ->add('link', null, array(
                 'label' => 'admin.fields.source.link',
             ))
-            ->add('voteCount', null, array(
+            ->add('voteCountSource', null, array(
                 'label' => 'admin.fields.source.vote_count_source',
             ))
             ->add('isEnabled', null, array(

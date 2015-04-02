@@ -14,8 +14,6 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Symfony\Component\Form\Form;
-use Capco\AppBundle\CapcoAppBundleEvents;
-use Capco\AppBundle\Event\AbstractVoteChangedEvent;
 
 class SourceController extends Controller
 {
@@ -282,22 +280,11 @@ class SourceController extends Controller
                 if ($userVote == null) {
                     $sourceVote->setSource($source);
                     $em->persist($sourceVote);
-                    $this->get('event_dispatcher')->dispatch(
-                        CapcoAppBundleEvents::ABSTRACT_VOTE_CHANGED,
-                        new AbstractVoteChangedEvent($sourceVote, 'add')
-                    );
-
                     $em->flush();
 
                     $this->get('session')->getFlashBag()->add('success', $this->get('translator')->trans('source.vote.add_success'));
                 } else {
                     $em->remove($sourceVote);
-
-                    $this->get('event_dispatcher')->dispatch(
-                        CapcoAppBundleEvents::ABSTRACT_VOTE_CHANGED,
-                        new AbstractVoteChangedEvent($sourceVote, 'remove')
-                    );
-
                     $em->flush();
 
                     $this->get('session')->getFlashBag()->add('info', $this->get('translator')->trans('source.vote.remove_success'));

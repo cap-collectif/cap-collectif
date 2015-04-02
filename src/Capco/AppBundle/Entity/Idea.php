@@ -556,6 +556,7 @@ class Idea implements CommentableInterface
     {
         if (!$this->votes->contains($vote)) {
             $this->votes->add($vote);
+            $this->voteCount++;
         }
 
         return $this;
@@ -568,7 +569,9 @@ class Idea implements CommentableInterface
      */
     public function removeVote(\Capco\AppBundle\Entity\IdeaVote $vote)
     {
-        $this->votes->removeElement($vote);
+        if ($this->votes->removeElement($vote)) {
+            $this->voteCount--;
+        }
 
         return $this;
     }
