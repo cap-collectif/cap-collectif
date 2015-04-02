@@ -9,6 +9,7 @@
 .profile {
 
   position: relative;
+  background-color: $light-gray;
 
   .profile__picture img {
     max-width: 100%;
@@ -32,6 +33,7 @@
 
   .profile__values {
     background-color: $white;
+    border-top: 1px solid $border;
     border-bottom: 1px solid $border;
   }
 

@@ -14,8 +14,6 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Symfony\Component\Form\Form;
-use Capco\AppBundle\CapcoAppBundleEvents;
-use Capco\AppBundle\Event\AbstractVoteChangedEvent;
 
 class ArgumentController extends Controller
 {
@@ -102,23 +100,13 @@ class ArgumentController extends Controller
                 if ($userVote == null) {
                     $argumentVote->setArgument($argument);
                     $em->persist($argumentVote);
-
-                    $this->get('event_dispatcher')->dispatch(
-                        CapcoAppBundleEvents::ABSTRACT_VOTE_CHANGED,
-                        new AbstractVoteChangedEvent($argumentVote, 'add')
-                    );
-
                     $em->flush();
+
                     $this->get('session')->getFlashBag()->add('success', $this->get('translator')->trans('argument.vote.add_success'));
                 } else {
                     $em->remove($argumentVote);
-
-                    $this->get('event_dispatcher')->dispatch(
-                        CapcoAppBundleEvents::ABSTRACT_VOTE_CHANGED,
-                        new AbstractVoteChangedEvent($argumentVote, 'remove')
-                    );
-
                     $em->flush();
+
                     $this->get('session')->getFlashBag()->add('info', $this->get('translator')->trans('argument.vote.remove_success'));
                 }
             } else {

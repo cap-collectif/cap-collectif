@@ -13,7 +13,6 @@ class ApplicationContext extends UserContext
     {
         exec('app/console capco:reinit --force -e test');
     }
-
     /**
      * @AfterScenario @database
      */

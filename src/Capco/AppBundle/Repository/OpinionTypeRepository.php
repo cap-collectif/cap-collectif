@@ -27,7 +27,7 @@ class OpinionTypeRepository extends EntityRepository
             ->leftJoin('o.Consultation', 'c')
             ->leftJoin('o.Author', 'a')
             ->leftJoin('a.Media', 'm')
-            ->leftJoin('o.votes', 'v')
+            ->leftJoin('o.Votes', 'v')
             ->andWhere('c.isEnabled = :enabled')
             ->andWhere('o.isEnabled = :enabled')
             ->andWhere('o.Author = :author')

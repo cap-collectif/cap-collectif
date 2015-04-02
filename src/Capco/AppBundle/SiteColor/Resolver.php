@@ -4,30 +4,31 @@ namespace Capco\AppBundle\SiteColor;
 
 use Capco\AppBundle\Repository\SiteColorRepository;
 use Psr\Log\LoggerInterface;
+use Doctrine\ORM\NoResultException;
 
 class Resolver
 {
     protected $repository;
     protected $logger;
-    protected $colors;
 
     public function __construct(SiteColorRepository $repository, LoggerInterface $logger)
     {
         $this->repository = $repository;
         $this->logger = $logger;
-        $this->colors = $this->repository->getValuesIfEnabled();
     }
 
     public function getValue($key)
     {
-        if (!array_key_exists($key, $this->colors)) {
-            $this->logger->error('Tried to access undefined site color.', array(
+        $value = null;
+
+        try {
+            $value = $this->repository->getValueByKeyIfEnabled($key);
+        } catch (NoResultException $e) {
+            $this->logger->error($e->getMessage().' Tried to access undefined site parameter.', array(
                 'key' => $key,
             ));
-
-            return;
         }
 
-        return $this->colors[$key]['value'];
+        return $value;
     }
 }

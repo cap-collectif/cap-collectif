@@ -171,7 +171,7 @@ class Opinion
      *
      * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\OpinionVote", mappedBy="opinion", cascade={"persist", "remove"}, orphanRemoval=true)
      */
-    private $votes;
+    private $Votes;
 
     /**
      * @var string
@@ -182,7 +182,7 @@ class Opinion
 
     public function __construct()
     {
-        $this->votes = new ArrayCollection();
+        $this->Votes = new ArrayCollection();
         $this->Reports = new ArrayCollection();
         $this->arguments = new ArrayCollection();
         $this->Sources = new ArrayCollection();
@@ -190,6 +190,7 @@ class Opinion
 
         $this->argumentsCount = 0;
         $this->sourcesCount = 0;
+        $this->resetVotesCount();
     }
 
     public function __toString()
@@ -302,6 +303,21 @@ class Opinion
      */
     public function setIsEnabled($isEnabled)
     {
+        if ($isEnabled != $this->isEnabled && (null != $this->Consultation)) {
+            if ($isEnabled) {
+                if ($this->isTrashed) {
+                    $this->Consultation->increaseTrashedOpinionCount(1);
+                } else {
+                    $this->Consultation->increaseOpinionCount(1);
+                }
+            } else {
+                if ($this->isTrashed) {
+                    $this->Consultation->decreaseOpinionCount(1);
+                } else {
+                    $this->Consultation->decreaseOpinionCount(1);
+                }
+            }
+        }
         $this->isEnabled = $isEnabled;
 
         return $this;
@@ -554,6 +570,7 @@ class Opinion
     public function addSource($source)
     {
         if (!$this->Sources->contains($source)) {
+            $this->increaseSourcesCount(1);
             $this->Sources->add($source);
         }
 
@@ -567,7 +584,9 @@ class Opinion
      */
     public function removeSource($source)
     {
-        $this->Sources->removeElement($source);
+        if ($this->Sources->removeElement($source)) {
+            $this->decreaseSourcesCount(1);
+        }
 
         return $this;
     }
@@ -591,6 +610,7 @@ class Opinion
     {
         if (!$this->arguments->contains($argument)) {
             $this->arguments->add($argument);
+            $this->increaseArgumentsCount(1);
         }
 
         return $this;
@@ -603,7 +623,9 @@ class Opinion
      */
     public function removeArgument(Argument $argument)
     {
-        $this->arguments->removeElement($argument);
+        if ($this->arguments->removeElement($argument)) {
+            $this->decreaseArgumentsCount(1);
+        }
 
         return $this;
     }
@@ -615,7 +637,7 @@ class Opinion
      */
     public function getVotes()
     {
-        return $this->votes;
+        return $this->Votes;
     }
 
     /**
@@ -625,8 +647,9 @@ class Opinion
      */
     public function addVote($vote)
     {
-        if (!$this->votes->contains($vote)) {
-            $this->votes->add($vote);
+        if (!$this->Votes->contains($vote)) {
+            $this->Votes->add($vote);
+            $this->addToVotesCount($vote->getValue());
         }
 
         return $this;
@@ -639,7 +662,9 @@ class Opinion
      */
     public function removeVote(OpinionVote $vote)
     {
-        $this->votes->removeElement($vote);
+        if ($this->Votes->removeElement($vote)) {
+            $this->removeFromVotesCount($vote->getValue());
+        }
 
         return $this;
     }
@@ -681,23 +706,29 @@ class Opinion
     // ******************************* Custom methods **************************************
 
     /**
+     * @return $this
+     */
+    public function resetVotes()
+    {
+        foreach ($this->Votes as $vote) {
+            $this->removeVote($vote);
+        }
+
+        return $this;
+    }
+
+    /**
      * Increase count for opinion Vote.
      *
      * @param $type
      */
-    public function increaseVotesCount($type)
+    public function addToVotesCount($type)
     {
         if ($type == OpinionVote::$voteTypes['ok']) {
             $this->voteCountOk++;
-
-            return;
-        }
-        if ($type == OpinionVote::$voteTypes['nok']) {
+        } elseif ($type == OpinionVote::$voteTypes['nok']) {
             $this->voteCountNok++;
-
-            return;
-        }
-        if ($type == OpinionVote::$voteTypes['mitige']) {
+        } elseif ($type == OpinionVote::$voteTypes['mitige']) {
             $this->voteCountMitige++;
         }
     }
@@ -707,36 +738,63 @@ class Opinion
      *
      * @param $type
      */
-    public function decreaseVotesCount($type)
+    public function removeFromVotesCount($type)
     {
         if ($type == OpinionVote::$voteTypes['ok']) {
             $this->voteCountOk--;
-
-            return;
-        }
-        if ($type == OpinionVote::$voteTypes['nok']) {
+        } elseif ($type == OpinionVote::$voteTypes['nok']) {
             $this->voteCountNok--;
-
-            return;
-        }
-        if ($type == OpinionVote::$voteTypes['mitige']) {
+        } elseif ($type == OpinionVote::$voteTypes['mitige']) {
             $this->voteCountMitige--;
         }
     }
 
     /**
-     * @return $this
+     * Reset all votes count.
      */
-    public function resetVotes()
+    public function resetVotesCount()
     {
-        foreach ($this->votes as $vote) {
-            $vote->setConfirmed(false);
-        }
-        $this->voteCountMitige = 0;
-        $this->voteCountNok = 0;
         $this->voteCountOk = 0;
+        $this->voteCountNok = 0;
+        $this->voteCountMitige = 0;
+    }
 
-        return $this;
+    /**
+     * @param $nb
+     */
+    public function increaseArgumentsCount($nb)
+    {
+        $this->argumentsCount += $nb;
+        $this->getConsultation()->increaseArgumentCount($nb);
+    }
+
+    /**
+     * @param $nb
+     */
+    public function decreaseArgumentsCount($nb)
+    {
+        if ($this->argumentsCount >= $nb) {
+            $this->argumentsCount -= $nb;
+        }
+        $this->getConsultation()->decreaseArgumentCount($nb);
+    }
+
+    /**
+     * @param $nb
+     */
+    public function increaseSourcesCount($nb)
+    {
+        $this->sourcesCount += $nb;
+    }
+
+    /**
+     * @param $nb
+     */
+    public function decreaseSourcesCount($nb)
+    {
+        if ($this->sourcesCount >= $nb) {
+            $this->sourcesCount -= $nb;
+        }
     }
 
     /**
