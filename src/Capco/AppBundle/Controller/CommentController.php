@@ -10,6 +10,8 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Capco\AppBundle\Entity\CommentVote;
 use Capco\AppBundle\Form\CommentType as CommentForm;
+use Capco\AppBundle\CapcoAppBundleEvents;
+use Capco\AppBundle\Event\AbstractVoteChangedEvent;
 
 class CommentController extends Controller
 {
@@ -160,11 +162,19 @@ class CommentController extends Controller
                 if ($userVote == null) {
                     $commentVote->setComment($comment);
                     $em->persist($commentVote);
+                    $this->get('event_dispatcher')->dispatch(
+                        CapcoAppBundleEvents::ABSTRACT_VOTE_CHANGED,
+                        new AbstractVoteChangedEvent($commentVote, 'add')
+                    );
                     $em->flush();
 
                     $this->get('session')->getFlashBag()->add('success', $this->get('translator')->trans('comment.vote.add_success'));
                 } else {
                     $em->remove($commentVote);
+                    $this->get('event_dispatcher')->dispatch(
+                        CapcoAppBundleEvents::ABSTRACT_VOTE_CHANGED,
+                        new AbstractVoteChangedEvent($commentVote, 'remove')
+                    );
                     $em->flush();
 
                     $this->get('session')->getFlashBag()->add('info', $this->get('translator')->trans('comment.vote.remove_success'));

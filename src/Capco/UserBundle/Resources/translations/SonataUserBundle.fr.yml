@@ -7,6 +7,3 @@ registration:
       body: Pour empêcher les fausses inscriptions, vous envoyer des notifications par e-mail liées au service. Par exemple, vous ne pourrez recevoir de messages relatifs à la réinitialisation de votre mot de passe si vous avez oublié vos données de connexion.
   flash:
     user_created: Merci ! Votre compte a bien été créé.
-resetting:
-  flash:
-    success: Votre mot de passe a bien été modifié.

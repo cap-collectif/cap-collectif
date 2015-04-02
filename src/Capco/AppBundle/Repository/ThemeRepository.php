@@ -22,7 +22,8 @@ class ThemeRepository extends EntityRepository
             ->addSelect('c', 'i')
             ->leftJoin('t.Consultations', 'c')
             ->leftJoin('t.Ideas', 'i')
-            ->addOrderBy('t.createdAt', 'DESC')
+            ->addOrderBy('t.position', 'ASC')
+            ->addOrderBy('t.updatedAt', 'DESC')
         ;
 
         $query = $qb->getQuery();
@@ -45,7 +46,7 @@ class ThemeRepository extends EntityRepository
      *
      * @return Paginator
      */
-    public function getSearchResultsWithconsultationsAndIdeas($nbByPage = 8, $page = 1, $term = null)
+    public function getSearchResultsWithConsultationsAndIdeas($nbByPage = 8, $page = 1, $term = null)
     {
         if ((int) $page < 1) {
             throw new \InvalidArgumentException(sprintf(
@@ -58,9 +59,13 @@ class ThemeRepository extends EntityRepository
         $qb->addSelect('c, i')
             ->leftJoin('t.Consultations', 'c')
             ->leftJoin('t.Ideas', 'i')
+            ->addOrderBy('t.position', 'ASC')
         ;
 
-        $qb->addOrderBy('t.updatedAt', 'DESC');
+        $qb
+            ->addOrderBy('t.position', 'ASC')
+            ->addOrderBy('t.updatedAt', 'DESC')
+        ;
 
         if ($term !== null) {
             $qb->andWhere('t.title LIKE :term')

@@ -15,7 +15,7 @@ class ArgumentVote extends AbstractVote
     /**
      * @var
      *
-     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Argument", inversedBy="Votes", cascade={"persist"})
+     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Argument", inversedBy="votes", cascade={"persist"})
      */
     private $argument;
 
@@ -38,6 +38,11 @@ class ArgumentVote extends AbstractVote
         $argument->addVote($this);
 
         return $this;
+    }
+
+    public function getRelatedEntity()
+    {
+        return $this->argument;
     }
 
     // *************************** Lifecycle **********************************

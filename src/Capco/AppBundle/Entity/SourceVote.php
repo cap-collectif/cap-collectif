@@ -15,7 +15,7 @@ class SourceVote extends AbstractVote
     /**
      * @var
      *
-     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Source", inversedBy="Votes", cascade={"persist"})
+     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Source", inversedBy="votes", cascade={"persist"})
      */
     private $source;
 
@@ -38,6 +38,11 @@ class SourceVote extends AbstractVote
         $this->source->addVote($this);
 
         return $this;
+    }
+
+    public function getRelatedEntity()
+    {
+        return $this->source;
     }
 
     // ***************************** Lifecycle ****************************************

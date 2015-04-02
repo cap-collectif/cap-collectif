@@ -13,9 +13,9 @@ Feature: Login
   Scenario: Lost password
     Given I visited "login page"
     When I follow "Mot de passe oublié ?"
-    And  I fill in "email" with "user@test.com"
+    And  I fill in "username" with "user@test.com"
     And I press "Réinitialiser le mot de passe"
-    Then I should see "Si un compte est associé à l'adresse user@test.com, vous recevrez un e-mail avec un lien pour réinitialiser votre mot de passe."
+    Then I should see "Un e-mail a été envoyé à l'adresse ...@test.com. Il contient un lien sur lequel il vous faudra cliquer afin de réinitialiser votre mot de passe."
 
   Scenario: Logout
     Given I am logged in as user

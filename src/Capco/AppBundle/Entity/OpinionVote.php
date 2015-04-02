@@ -56,7 +56,7 @@ class OpinionVote extends AbstractVote
     /**
      * @var
      *
-     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Opinion", inversedBy="Votes", cascade={"persist"})
+     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Opinion", inversedBy="votes", cascade={"persist"})
      * @ORM\JoinColumn(name="opinion_id", referencedColumnName="id", onDelete="CASCADE")
      */
     private $opinion;
@@ -80,13 +80,7 @@ class OpinionVote extends AbstractVote
      */
     public function setValue($value)
     {
-        if ($this->opinion != null) {
-            $this->opinion->removeFromVotesCount($this->value);
-        }
         $this->value = $value;
-        if ($this->opinion != null) {
-            $this->opinion->addToVotesCount($this->value);
-        }
 
         return $this;
     }
@@ -106,6 +100,11 @@ class OpinionVote extends AbstractVote
     {
         $this->opinion = $Opinion;
         $this->opinion->addVote($this);
+    }
+
+    public function getRelatedEntity()
+    {
+        return $this->opinion;
     }
 
     // ******************* Lifecycle ******************************

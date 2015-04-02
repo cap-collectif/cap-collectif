@@ -92,4 +92,50 @@ class ThemeController extends Controller
             'theme' => $theme,
         );
     }
+
+    /**
+     * @Template("CapcoAppBundle:Theme:lastIdeas.html.twig")
+     *
+     * @param $theme
+     * @param int $max
+     * @param int $offset
+     *
+     * @return array
+     */
+    public function lastIdeasAction($theme, $max = 8, $offset = 0)
+    {
+        $em = $this->get('doctrine.orm.entity_manager');
+        $ideas = $em->getRepository('CapcoAppBundle:Idea')->getLastByTheme($theme->getId(), $max, $offset);
+        $nbIdeas = $em->getRepository('CapcoAppBundle:Idea')->countSearchResults($theme->getSlug());
+
+        return [
+            'ideas' => $ideas,
+            'theme' => $theme,
+            'max' => $max,
+            'nbIdeas' => $nbIdeas,
+        ];
+    }
+
+    /**
+     * @Template("CapcoAppBundle:Theme:lastConsultations.html.twig")
+     *
+     * @param $theme
+     * @param int $max
+     * @param int $offset
+     *
+     * @return array
+     */
+    public function lastConsultationsAction($theme, $max = 8, $offset = 0)
+    {
+        $em = $this->get('doctrine.orm.entity_manager');
+        $consultations = $em->getRepository('CapcoAppBundle:Consultation')->getLastByTheme($theme->getId(), $max, $offset);
+        $nbConsultations = $em->getRepository('CapcoAppBundle:Consultation')->countSearchResults($theme->getSlug());
+
+        return [
+            'consultations' => $consultations,
+            'theme' => $theme,
+            'max' => $max,
+            'nbConsultations' => $nbConsultations,
+        ];
+    }
 }
