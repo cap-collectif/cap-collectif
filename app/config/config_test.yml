@@ -20,6 +20,4 @@ doctrine:
         default_connection: default
         connections:
             default:
-                driver:   pdo_sqlite
-                path:     %kernel.root_dir%/test.db
-                charset: utf8
+                dbname: "%database_name%_test"

@@ -31,12 +31,10 @@ class IdeaType extends AbstractType
         ;
 
         if ($this->toggleManager->isActive('themes')) {
-            $builder->add('Theme', 'entity', array(
+            $builder->add('Theme', null, array(
                 'label' => 'idea.form.theme',
-                'class' => 'CapcoAppBundle:Theme',
-                'property' => 'title',
-                'multiple' => false,
-                'expanded' => false,
+                'required' => true,
+                'empty_value' => 'idea.form.empty_theme',
                 'query_builder' => function (ThemeRepository $tr) {
                     return $tr->createQueryBuilder('t')
                         ->where('t.isEnabled = :enabled')
@@ -58,7 +56,10 @@ class IdeaType extends AbstractType
                 'label' => 'idea.form.url',
                 'required' => false,
                 'default_protocol' => 'http',
-                'attr' => ['placeholder' => 'http://'],
+                'help' => 'idea.form.url_help',
+                'attr' => [
+                    'placeholder' => 'http://',
+                ],
             ))
             ->add('media', 'sonata_media_type', array(
                 'label' => 'idea.form.media',

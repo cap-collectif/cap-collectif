@@ -11,6 +11,7 @@ dependencies:
         - mv app/config/parameters.ci.yml app/config/parameters.yml
         - gem install bundler
         - bundle install --clean
+        - mysql -u ubuntu -e "create database circle"
     post:
         - wget http://selenium-release.storage.googleapis.com/2.44/selenium-server-standalone-2.44.0.jar
         - java -jar selenium-server-standalone-2.44.0.jar:
@@ -30,11 +31,10 @@ test:
         - echo "memory_limit = 2048M" > ~/.phpenv/versions/$(phpenv global)/etc/conf.d/memory.ini
         - npm install -g gulp
         - fab build
-        - fab build_test_db
         - app/console server:run:
             background: true
 
     override:
-        - app/console doctrine:migrations:migrate -n
+        - fab migrate_test_db
         - fab circleci lint:pr=$CI_PULL_REQUEST
         - fab test
