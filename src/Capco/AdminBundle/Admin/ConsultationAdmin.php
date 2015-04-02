@@ -137,21 +137,6 @@ class ConsultationAdmin extends Admin
      */
     protected function configureFormFields(FormMapper $formMapper)
     {
-        $subject = $this->getSubject();
-        $open = null;
-        $close = null;
-        $stepTitle = 'Consultation';
-        $stepPosition = 1;
-        if ($subject != null) {
-            $open = $subject->getOpenedAt();
-            $close = $subject->getClosedAt();
-            $consultationStep = $subject->getConsultationStep();
-            if (null != $consultationStep) {
-                $stepTitle = $consultationStep->getTitle();
-                $stepPosition = $consultationStep->getPosition();
-            }
-        }
-
         $formMapper
             ->with('admin.fields.consultation.group_content', array('class' => 'col-md-12'))->end()
             ->with('admin.fields.consultation.group_meta', array('class' => 'col-md-6'))->end()
@@ -165,11 +150,6 @@ class ConsultationAdmin extends Admin
             ->with('admin.fields.consultation.group_content')
             ->add('title', null, array(
                 'label' => 'admin.fields.consultation.title',
-            ))
-            ->add('body', null, array(
-                'label' => 'admin.fields.consultation.body',
-                'required' => false,
-                'attr' => array('rows' => 10),
             ))
             ->add('Author', 'sonata_type_model', array(
                 'label' => 'admin.fields.consultation.author',
@@ -260,9 +240,6 @@ class ConsultationAdmin extends Admin
             ))
             ->add('Author', null, array(
                 'label' => 'admin.fields.consultation.author',
-            ))
-            ->add('body', null, array(
-                'label' => 'admin.fields.consultation.body',
             ))
             ->add('Cover', null, array(
                 'template' => 'CapcoAdminBundle:Consultation:cover_show_field.html.twig',

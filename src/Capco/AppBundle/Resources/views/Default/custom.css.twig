@@ -26,9 +26,9 @@
 {% if null == sectionText %}{% set sectionText = '#000' %}{% endif %}
 
 {% set btn = capco_site_color_value('color.btn') %}
-{% if null == btn %}{% set btn = '#FFF' %}{% endif %}
+{% if null == btn %}{% set btn = '#1ABC9C' %}{% endif %}
 {% set btnText = capco_site_color_value('color.btn.text') %}
-{% if null == btnText %}{% set btnText = '#1ABC9C' %}{% endif %}
+{% if null == btnText %}{% set btnText = '#FFF' %}{% endif %}
 
 {% set btnPrimary = capco_site_color_value('color.btn.primary') %}
 {% if null == btnPrimary %}{% set btnPrimary = '#1abc9c' %}{% endif %}
@@ -71,12 +71,21 @@
         color: {{ btnPrimary }};
     }
 
-    .pagination>.active > a,
-    .pagination>.active > a:focus,
-    .pagination>.active > a:hover,
-    .pagination>.active > span,
-    .pagination>.active > span:focus,
-    .pagination>.active > span:hover {
+    .pagination > li > a,
+    .pagination > li > a:hover,
+    .pagination > li > a:focus,
+    .pagination > li > span,
+    .pagination > li > span:hover,
+    .pagination > li > span:focus {
+        color: {{ btnPrimary }};
+    }
+
+    .pagination >.active > a,
+    .pagination >.active > a:focus,
+    .pagination >.active > a:hover,
+    .pagination >.active > span,
+    .pagination >.active > span:focus,
+    .pagination >.active > span:hover {
         background-color: {{ btnPrimary }};
         border-color: {{ btnPrimary }};
         color: {{ btnPrimaryText }};
@@ -148,8 +157,8 @@
     }
 
     .jumbotron--bg-1 .btn--outline {
-        border-color: {{ btn }};
-        color: {{ btn }};
+        border-color: {{ btnText }};
+        color: {{ btnText }};
     }
 
     .jumbotron--bg-1 .btn--outline:hover,

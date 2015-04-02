@@ -7,10 +7,11 @@ Capco\AppBundle\Entity\Step:
         endAt: <dateTimeBetween('now', '+10 days')>
         position: 2
         consultation: @cs1
+        body: <text(1000)>
     step2:
-        title: Préparation de la synthèse
+        title: Présentation
         isEnabled: true
-        type: 0
+        type: 2
         startAt: <(new \DateTime('2015-03-25'))>
         endAt: <(new \DateTime('2015-04-25'))>
         position: 1

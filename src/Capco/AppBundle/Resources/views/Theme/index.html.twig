@@ -59,7 +59,7 @@
         {% if themes|length > 0 %}
             <div class="row">
                 {% for theme in themes %}
-                    {% include '@CapcoApp/Theme/blockTheme.html.twig' %}
+                    {% include '@CapcoApp/Theme/blockTheme.html.twig' with {'theme': theme} only %}
                 {% endfor %}
             </div>
         {% else %}

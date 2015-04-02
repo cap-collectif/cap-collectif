@@ -238,8 +238,11 @@ consultation:
   see_all: Voir toutes les consultations
   none: Aucune consultation.
   show:
+    events:
+      title: Évènements
+    posts:
+      title: Actualités
     in_theme: dans
-    on_date: le %date%
     alert:
       ended:
         title: Consultation terminée.
@@ -256,6 +259,12 @@ consultation:
         title: Introduction
       step:
         title: Étapes
+        on_date: Le %date%
+        between_dates: Du %start% au %end%
+      info:
+        title: Informations
+        posts: Actualités
+        events: Évènements
     status:
       opened: Consultation ouverte
       ended: Consultation fermée
@@ -288,6 +297,14 @@ consultation:
     no_contribute: Impossible de contribuer sur cette consultation.
 
 step:
+  presentation:
+    participe: Participer
+    posts:
+      title: Actualités
+      see_all: Voir tous les articles
+    events:
+      title: Évènements
+      see_all: Voir tous les évènements
   status:
     closed: Terminé
     open: En cours

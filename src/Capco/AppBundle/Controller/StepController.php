@@ -21,9 +21,10 @@ class StepController extends Controller
      *
      * @return array
      */
-    public function showAllInNavAction(Consultation $consultation, $currentStep = null)
+    public function showStepsNavAction(Consultation $consultation, $currentStep = null)
     {
         $em = $this->getDoctrine();
+        $consultation = $em->getRepository('CapcoAppBundle:Consultation')->getOneBySlugWithEventsAndPosts($consultation->getSlug());
         $steps = $em->getRepository('CapcoAppBundle:Step')->findBy(
             array(
                 'consultation' => $consultation,
@@ -71,6 +72,36 @@ class StepController extends Controller
             'consultation' => $consultation,
             'statuses' => Theme::$statuses,
             'currentStep' => $step,
+        ];
+    }
+
+    /**
+     * @Route("/consultation/{consultation_slug}/presentation/{step_slug}", name="app_consultation_show_presentation")
+     * @Template("CapcoAppBundle:Step:presentation.html.twig")
+     * @ParamConverter("step", class="CapcoAppBundle:Step", options={"mapping" = {"step_slug": "slug"}})
+     *
+     * @param $consultation_slug
+     * @param Step $step
+     *
+     * @return array
+     */
+    public function showPresentationAction($consultation_slug, Step $step)
+    {
+        if ($step->isConsultationStep() || !$step->getConsultation()->canDisplay()) {
+            throw new NotFoundHttpException();
+        }
+
+        $em = $this->getDoctrine()->getManager();
+        $consultation = $em->getRepository('CapcoAppBundle:Consultation')->getOne($consultation_slug);
+        $events = $this->get('capco.event.repository')->getLastByConsultation($consultation_slug, 2);
+        $posts = $this->get('capco.blog.post.repository')->getLastPublishedByConsultation($consultation_slug, 2);
+
+        return [
+            'consultation' => $consultation,
+            'statuses' => Theme::$statuses,
+            'currentStep' => $step,
+            'events' => $events,
+            'posts' => $posts,
         ];
     }
 }

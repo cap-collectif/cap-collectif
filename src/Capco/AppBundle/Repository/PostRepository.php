@@ -99,6 +99,41 @@ class PostRepository extends EntityRepository
     }
 
     /**
+     * Get last posts by consultation.
+     *
+     * @param $consultationSlug
+     * @param int $limit
+     * @param int $offset
+     *
+     * @return mixed
+     */
+    public function getLastPublishedByConsultation($consultationSlug, $limit = 1, $offset = 0)
+    {
+        $qb = $this->getIsPublishedQueryBuilder()
+            ->addSelect('a', 'm', 'c', 't')
+            ->leftJoin('p.Authors', 'a')
+            ->leftJoin('p.Media', 'm')
+            ->leftJoin('p.consultations', 'c')
+            ->leftJoin('p.themes', 't')
+            ->andWhere('c.slug = :consultation')
+            ->setParameter('consultation', $consultationSlug)
+            ->addOrderBy('p.publishedAt', 'DESC')
+        ;
+
+        if ($limit) {
+            $qb->setMaxResults($limit);
+        }
+
+        if ($offset) {
+            $qb->setFirstResult($offset);
+        }
+
+        return $qb
+            ->getQuery()
+            ->execute();
+    }
+
+    /**
      * @param $slug
      *
      * @return mixed

@@ -1,7 +1,7 @@
 {% if ideas|length > 0 %}
     <div class="row">
         {% for idea in ideas %}
-            {% include 'CapcoAppBundle:Idea:blockIdea.html.twig' %}
+            {% include 'CapcoAppBundle:Idea:blockIdea.html.twig' with {'idea': idea} only %}
         {% endfor %}
     </div>
 {% else %}

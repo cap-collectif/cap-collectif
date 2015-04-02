@@ -1,7 +1,7 @@
 {% if consultations|length > 0 %}
     <div class="row">
         {% for consultation in consultations %}
-            {% include '@CapcoApp/Consultation/blockConsultation.html.twig' %}
+            {% include '@CapcoApp/Consultation/blockConsultation.html.twig' with {'consultation': consultation} only %}
         {% endfor %}
     </div>
     {% if nbConsultations > max %}

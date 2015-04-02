@@ -19,14 +19,14 @@
                         {{ 'consultation.show.trashed.text'|trans({}, 'CapcoAppBundle') }}
                     </li>
                     {% for opinion in opinions %}
-                        {% include 'CapcoAppBundle:Opinion:blockOpinion.html.twig' with {'opinionType': opinion.opinionType, 'trashed': true} %}
+                        {% include 'CapcoAppBundle:Opinion:blockOpinion.html.twig' with {'opinion': opinion, 'opinionType': opinion.opinionType, 'trashed': true} only %}
                     {% endfor %}
                 </ul>
             {% endif %}
             {% if arguments|length > 0 %}
                 <ul class="media-list  opinion__list">
                     {% for argument in arguments %}
-                        {% include 'CapcoAppBundle:Argument:blockArgument.html.twig' with {'trashed': true} %}
+                        {% include 'CapcoAppBundle:Argument:blockArgument.html.twig' with {'trashed': true, 'argument': argument, 'argumentsLabels': argumentsLabels} only %}
                     {% endfor %}
                 </ul>
             {% endif %}

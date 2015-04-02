@@ -66,20 +66,6 @@ class Consultation
     private $slug;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="teaser", type="text", nullable=true)
-     */
-    private $teaser;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="body", type="text", nullable=true)
-     */
-    private $body;
-
-    /**
      * @var bool
      *
      * @ORM\Column(name="is_enabled", type="boolean")
@@ -262,46 +248,6 @@ class Consultation
     public function setSlug($slug)
     {
         $this->slug = $slug;
-
-        return $this;
-    }
-
-    /**
-     * @return string
-     */
-    public function getTeaser()
-    {
-        return $this->teaser;
-    }
-
-    /**
-     * @param $teaser
-     *
-     * @return $this
-     */
-    public function setTeaser($teaser)
-    {
-        $this->teaser = $teaser;
-
-        return $this;
-    }
-
-    /**
-     * @return string
-     */
-    public function getBody()
-    {
-        return $this->body;
-    }
-
-    /**
-     * @param $body
-     *
-     * @return $this
-     */
-    public function setBody($body)
-    {
-        $this->body = $body;
 
         return $this;
     }
@@ -764,22 +710,6 @@ class Consultation
         return;
     }
 
-    public function getConsultationStepTitle()
-    {
-        $consultationStep = $this->getConsultationStep();
-        if (null != $consultationStep) {
-            return $consultationStep->getTitle();
-        }
-    }
-
-    public function getConsultationStepPosition()
-    {
-        $consultationStep = $this->getConsultationStep();
-        if (null != $consultationStep) {
-            return $consultationStep->getPosition();
-        }
-    }
-
     /**
      */
     public function getOpenedAt()
@@ -830,7 +760,11 @@ class Consultation
         $openedAt = $this->getOpenedAt();
         $now = new \DateTime();
 
-        return $openedAt < $now && $now < $closedAt;
+        if (null != $closedAt && null != $openedAt) {
+            return $openedAt < $now && $now < $closedAt;
+        }
+
+        return false;
     }
 
     /**
@@ -844,7 +778,11 @@ class Consultation
         $openedAt = $this->getOpenedAt();
         $now = new \DateTime();
 
-        return $openedAt > $now && $now < $closedAt;
+        if (null != $closedAt && null != $openedAt) {
+            return $openedAt > $now && $now < $closedAt;
+        }
+
+        return false;
     }
 
     /**
@@ -858,7 +796,11 @@ class Consultation
         $openedAt = $this->getOpenedAt();
         $now = new \DateTime();
 
-        return $openedAt < $now && $now > $closedAt;
+        if (null != $closedAt && null != $openedAt) {
+            return $openedAt < $now && $now > $closedAt;
+        }
+
+        return false;
     }
 
     /**
@@ -895,32 +837,6 @@ class Consultation
     public function canContribute()
     {
         return $this->isEnabled && ($this->getOpeningStatus() == $this::OPENING_STATUS_OPENED);
-    }
-
-    /**
-     * @param int $nb
-     *
-     * @return string
-     */
-    public function getBodyExcerpt($nb = 100)
-    {
-        $excerpt = substr($this->body, 0, $nb);
-        $excerpt = $excerpt.'...';
-
-        return $excerpt;
-    }
-
-    /**
-     * @param int $nb
-     *
-     * @return string
-     */
-    public function getTeaserExcerpt($nb = 100)
-    {
-        $excerpt = substr($this->teaser, 0, $nb);
-        $excerpt = $excerpt.'...';
-
-        return $excerpt;
     }
 
     /**
