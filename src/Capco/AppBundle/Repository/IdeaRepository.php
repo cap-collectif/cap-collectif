@@ -184,41 +184,6 @@ class IdeaRepository extends EntityRepository
     }
 
     /**
-     * Count search results.
-     *
-     * @param null $themeSlug
-     * @param null $term
-     *
-     * @return mixed
-     */
-    public function countSearchResults($themeSlug = null, $term = null)
-    {
-        $qb = $this->getIsEnabledQueryBuilder()
-            ->select('COUNT(i.id)')
-            ->innerJoin('i.Theme', 't')
-            ->andWhere('i.isTrashed = :notTrashed')
-            ->setParameter('notTrashed', false)
-        ;
-
-        if ($themeSlug !== null && $themeSlug !== Theme::FILTER_ALL) {
-            $qb->andWhere('t.slug = :themeSlug')
-                ->setParameter('themeSlug', $themeSlug)
-            ;
-        }
-
-        if ($term !== null) {
-            $qb->andWhere('i.title LIKE :term')
-                ->setParameter('term', '%'.$term.'%')
-            ;
-        }
-
-        return $qb
-            ->getQuery()
-            ->getSingleScalarResult()
-        ;
-    }
-
-    /**
      * Get ideas by user.
      *
      * @param user
@@ -233,8 +198,7 @@ class IdeaRepository extends EntityRepository
             ->leftJoin('a.Media', 'm')
             ->andWhere('i.Author = :user')
             ->setParameter('user', $user)
-            ->orderBy('i.updatedAt', 'DESC')
-        ;
+            ->orderBy('i.updatedAt', 'DESC');
 
         return $qb
             ->getQuery()
@@ -302,15 +266,13 @@ class IdeaRepository extends EntityRepository
     }
 
     /**
-     * Get last ideas by theme.
+     * Get ideas by theme.
      *
      * @param theme
-     * @param $limit
-     * @param $offset
      *
      * @return mixed
      */
-    public function getLastByTheme($themeId, $limit = null, $offset = null)
+    public function getByTheme($theme)
     {
         $qb = $this->getIsEnabledQueryBuilder()
             ->select('i, a, m, t')
@@ -320,22 +282,12 @@ class IdeaRepository extends EntityRepository
             ->andWhere('i.isTrashed = :notTrashed')
             ->andWhere('t.id = :theme')
             ->setParameter('notTrashed', false)
-            ->setParameter('theme', $themeId)
-            ->orderBy('i.updatedAt', 'DESC')
-        ;
-
-        if ($limit) {
-            $qb->setMaxResults($limit);
-        }
-
-        if ($offset) {
-            $qb->setFirstResult($offset);
-        }
+            ->setParameter('theme', $theme)
+            ->orderBy('i.createdAt', 'DESC');
 
         return $qb
             ->getQuery()
-            ->execute()
-        ;
+            ->execute();
     }
 
     protected function getIsEnabledQueryBuilder()

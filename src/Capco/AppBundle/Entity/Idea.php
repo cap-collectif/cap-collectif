@@ -8,7 +8,6 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Validator\Constraints as Assert;
-use Capco\AppBundle\Validator\Constraints as CapcoAssert;
 
 /**
  * Idea.
@@ -135,7 +134,6 @@ class Idea implements CommentableInterface
     /**
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Theme", inversedBy="Ideas", cascade={"persist"})
      * @ORM\JoinColumn(name="theme_id", referencedColumnName="id", nullable=true)
-     * @CapcoAssert\HasThemeIfActivated()
      */
     private $Theme = null;
 

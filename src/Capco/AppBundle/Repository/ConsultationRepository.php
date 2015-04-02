@@ -123,39 +123,6 @@ class ConsultationRepository extends EntityRepository
     }
 
     /**
-     * Count search results.
-     *
-     * @param null $themeSlug
-     * @param null $term
-     *
-     * @return mixed
-     */
-    public function countSearchResults($themeSlug = null, $term = null)
-    {
-        $qb = $this->getIsEnabledQueryBuilder()
-            ->select('COUNT(c.id)')
-            ->innerJoin('c.Themes', 't')
-        ;
-
-        if ($themeSlug !== null && $themeSlug !== Theme::FILTER_ALL) {
-            $qb->andWhere('t.slug = :themeSlug')
-                ->setParameter('themeSlug', $themeSlug)
-            ;
-        }
-
-        if ($term !== null) {
-            $qb->andWhere('c.title LIKE :term')
-                ->setParameter('term', '%'.$term.'%')
-            ;
-        }
-
-        return $qb
-            ->getQuery()
-            ->getSingleScalarResult()
-        ;
-    }
-
-    /**
      * Get last consultations.
      *
      * @param int $limit
@@ -184,15 +151,13 @@ class ConsultationRepository extends EntityRepository
     }
 
     /**
-     * Get last consultations by theme.
+     * Get consultations by theme.
      *
      * @param theme
-     * @param int $limit
-     * @param int $offset
      *
      * @return mixed
      */
-    public function getLastByTheme($themeId, $limit = null, $offset = null)
+    public function getByTheme($theme)
     {
         $qb = $this->getIsEnabledQueryBuilder()
             ->addSelect('cov', 't', 's')
@@ -200,16 +165,8 @@ class ConsultationRepository extends EntityRepository
             ->leftJoin('c.Themes', 't')
             ->leftJoin('c.Steps', 's')
             ->andWhere(':theme MEMBER OF c.Themes')
-            ->setParameter('theme', $themeId)
+            ->setParameter('theme', $theme)
             ->orderBy('c.updatedAt', 'DESC');
-
-        if ($limit) {
-            $qb->setMaxResults($limit);
-        }
-
-        if ($offset) {
-            $qb->setFirstResult($offset);
-        }
 
         return $qb
             ->getQuery()

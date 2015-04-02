@@ -41,12 +41,12 @@
 
     <div class="container  container--custom">
         <h2 class="h2">{{ 'theme.show.consultations.title'|trans({}, 'CapcoAppBundle') }}</h2>
-        {{ render(controller('CapcoAppBundle:Theme:lastConsultations', {'theme': theme})) }}
+        {% include 'CapcoAppBundle:Theme:lastConsultations.html.twig' with {'consultations': theme.Consultations} %}
     </div>
 
     <div class="container  container--custom">
         <h2 class="h2">{{ 'theme.show.ideas.title'|trans({}, 'CapcoAppBundle') }} <a class="pull-right  btn  btn-primary" href="{{ path('app_idea_create') }}">{{ 'idea.create.button'|trans({}, 'CapcoAppBundle') }}</a></h2>
-        {{ render(controller('CapcoAppBundle:Theme:lastIdeas', {'theme': theme})) }}
+        {%  include 'CapcoAppBundle:Theme:lastIdeas.html.twig' with {'ideas': theme.Ideas} %}
     </div>
 
     {%  include 'CapcoAppBundle:Theme:appendices.html.twig' %}

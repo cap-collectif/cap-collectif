@@ -16,11 +16,11 @@
                     <div class="navbar__step-nb">{{ nb }}</div>
                     <div class="navbar__step">
                         <h3 class="navbar__step-title">{{ step.title}}  <i class="pull-right  excerpt  cap-arrow-66"></i></h3>
-                        <p class="excerpt">
+                        <p class="excerpt h5">
                             {% if step.startAt == step.endAt %}
-                                {{ 'step.on_date' | trans({'%date%': step.startAt | localizeddate('full', 'none', app.request.locale)}, 'CapcoAppBundle') }}
+                                Le {{ step.startAt | localizeddate('full', 'none', app.request.locale) }}
                             {% else %}
-                                {{ 'step.between_dates' | trans({'%start%': step.startAt | localizeddate('full', 'none', app.request.locale), '%end%': step.endAt | localizeddate('full', 'none', app.request.locale)}, 'CapcoAppBundle') }}
+                                Du {{ step.startAt | localizeddate('full', 'none', app.request.locale) }} au {{ step.endAt | localizeddate('full', 'none', app.request.locale) }}
                             {% endif %}
                         </p>
                         <p class="label label-default">

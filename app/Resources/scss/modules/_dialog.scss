@@ -26,10 +26,9 @@
   }
 }
 
-.dialog__message {
+.dialog__excerpt {
   border-top: 1px solid $gray-primary;
   background-color: $alert-warning-bg;
-  color: $alert-warning-text;
   text-align: center;
   font-size: 15px;
   p {

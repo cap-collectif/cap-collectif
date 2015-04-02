@@ -114,6 +114,24 @@
                         {% endif %}
                     </div>
 
+                    <!-- Modal -->
+                    <div class="modal fade" id="eventRegistrationModal" tabindex="-1" role="dialog" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                    <h4 class="modal-title">{{ 'event_registration.listing.title_all'|trans({}, 'CapcoAppBundle') }}</h4>
+                                </div>
+                                <div class="modal-body">
+                                    {% include 'CapcoAppBundle:Event:event_registrations.html.twig' with {'event': event } only %}
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-primary" data-dismiss="modal">Fermer</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                 {% endif %}
 
                 {% if capco_comment_can_add(event) or (capco_comment_can_show(event) and event.commentsCount > 0) %}
@@ -169,26 +187,6 @@
         </div>
 
     </div>
-
-    {% if event.registrations|length > 0 %}
-        <!-- Modal -->
-        <div class="modal fade" id="eventRegistrationModal" tabindex="-1" role="dialog" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                        <h4 class="modal-title">{{ 'event_registration.listing.title_all'|trans({}, 'CapcoAppBundle') }}</h4>
-                    </div>
-                    <div class="modal-body">
-                        {% include 'CapcoAppBundle:Event:event_registrations.html.twig' with {'event': event } only %}
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-primary" data-dismiss="modal">Fermer</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    {% endif %}
 
 {% endblock %}
 
