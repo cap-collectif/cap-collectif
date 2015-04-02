@@ -1,6 +1,6 @@
 <?php
 
-namespace Capco\AppBundle\Resolver;
+namespace Capco\AppBundle\Manager;
 
 use Capco\AppBundle\Repository\EventRepository;
 
@@ -14,27 +14,15 @@ class EventResolver
     }
 
     /**
-     * @param $themeSlug
-     * @param $consultationSlug
+     * @param $theme
+     * @param $consultation
      * @param $term
      *
      * @return array
      */
-    public function countEvents($themeSlug, $consultationSlug, $term)
+    public function getEventsGroupedByYearAndMonth($theme, $consultation, $term)
     {
-        return $this->repository->countSearchResults($themeSlug, $consultationSlug, $term);
-    }
-
-    /**
-     * @param $themeSlug
-     * @param $consultationSlug
-     * @param $term
-     *
-     * @return array
-     */
-    public function getEventsGroupedByYearAndMonth($themeSlug, $consultationSlug, $term)
-    {
-        $results = $this->repository->getSearchResults($themeSlug, $consultationSlug, $term);
+        $results = $this->repository->getSearchResults($theme, $consultation, $term);
 
         if (!empty($results)) {
             foreach ($results as $e) {

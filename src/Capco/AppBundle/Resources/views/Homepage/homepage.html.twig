@@ -52,7 +52,7 @@
         {% endif %}
 
         {% if section.type == 'introduction' %}
-            {% include '@CapcoApp/Homepage/intro.html.twig' with {'section': section} only %}
+            {% include '@CapcoApp/Homepage/intro.html.twig' with {'section': section} %}
         {% elseif section.type == 'videos' %}
             {{ render(controller('CapcoAppBundle:Homepage:lastVideos', {'max': section.nbObjects, 'offset': 0, 'section': section})) }}
         {% elseif section.type == 'consultations' %}
@@ -66,11 +66,11 @@
         {% elseif section.type == 'events' %}
             {{ render(controller('CapcoAppBundle:Homepage:lastEvents', {'max': section.nbObjects, 'offset': 0, 'section': section})) }}
         {% elseif section.type == 'newsletter' %}
-            {% include '@CapcoApp/Homepage/newsletter.html.twig' with {'section': section, 'form': form} only %}
+            {% include '@CapcoApp/Homepage/newsletter.html.twig' with {'section': section} %}
         {% elseif section.type == 'social-networks' %}
             {{ render(controller('CapcoAppBundle:Homepage:socialNetworks', {'section': section})) }}
         {% elseif section.type == 'custom' %}
-            {% include '@CapcoApp/Homepage/custom_section.html.twig' with {'section': section} only %}
+            {% include '@CapcoApp/Homepage/custom_section.html.twig' with {'section': section} %}
         {% elseif section.type == 'figures' %}
         {% endif %}
 

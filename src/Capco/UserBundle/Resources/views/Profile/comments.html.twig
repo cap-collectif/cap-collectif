@@ -2,7 +2,7 @@
     {% set token = csrf_token('comment_vote') %}
     <ul class="media-list">
         {% for comment in comments %}
-            {% include 'CapcoAppBundle:Comment:blockComment.html.twig' with {'comment': comment, 'profile': true, 'classes': 'block  block--bordered  box'} only %}
+            {% include 'CapcoAppBundle:Comment:blockComment.html.twig' with {'profile': true, 'classes': 'block  block--bordered  box'} %}
         {% endfor %}
 {% else %}
     <div class="consultation__empty-block  text-center">

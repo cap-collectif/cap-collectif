@@ -24,7 +24,7 @@ class AbstractCommentRepository extends EntityRepository
             ->addSelect('aut', 'm', 'v', 'r')
             ->leftJoin('c.Author', 'aut')
             ->leftJoin('aut.Media', 'm')
-            ->leftJoin('c.votes', 'v')
+            ->leftJoin('c.Votes', 'v')
             ->leftJoin('c.Reports', 'r')
             ->andWhere('c.id = :comment')
             ->setParameter('comment', $comment)

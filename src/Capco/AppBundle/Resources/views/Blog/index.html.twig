@@ -58,7 +58,7 @@
         {% if posts|length > 0 %}
             <ul class="media-list">
                 {% for post in posts %}
-                    {% include '@CapcoApp/Blog/blockPost.html.twig' with {'post': post} only %}
+                    {% include '@CapcoApp/Blog/blockPost.html.twig' %}
                 {% endfor %}
             </ul>
         {% else %}

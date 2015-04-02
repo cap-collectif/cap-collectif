@@ -1,6 +1,6 @@
 {% if (blocks|length > 0) %}
     {% for block in blocks %}
-    <div class="block  block--bordered">
+        <div class="block  block--bordered">
         <div class="opinion  opinion--{{ block.color }}  opinion--default">
             <div class="opinion__header  opinion__header--mobile-centered">
 
@@ -18,7 +18,7 @@
         {% if block.total_opinions_count > 0 %}
             <ul class="media-list  opinion__list">
                 {% for opinion in block.opinions %}
-                    {% include 'CapcoAppBundle:Opinion:blockOpinion.html.twig' with {'opinion': opinion, 'opinionType': block} only %}
+                    {% include 'CapcoAppBundle:Opinion:blockOpinion.html.twig' with {'opinionType': block} %}
                 {% endfor %}
             </ul>
             {% if block.total_opinions_count > 5  %}

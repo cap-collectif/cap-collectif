@@ -76,7 +76,7 @@
                     <h2>{{ date | localizeddate('none', 'none', app.request.locale, null, "MMMM Y") | capitalize }}</h2>
                     <div class="row">
                         {% for event in events %}
-                            {% include '@CapcoApp/Event/blockEvent.html.twig' with {'event': event} only %}
+                            {% include '@CapcoApp/Event/blockEvent.html.twig' %}
                         {% endfor %}
                     </div>
                 {% endfor %}

@@ -17,17 +17,18 @@ class Step
 {
     const TYPE_OTHER = 0;
     const TYPE_CONSULTATION = 1;
-    const TYPE_PRESENTATION = 2;
 
     public static $stepTypes = [
         'consultation' => self::TYPE_CONSULTATION,
-        'presentation' => self::TYPE_PRESENTATION,
         'other' => self::TYPE_OTHER,
     ];
 
     public static $stepTypeLabels = [
         self::TYPE_CONSULTATION => 'Consultation',
-        self::TYPE_PRESENTATION => 'Présentation',
+        self::TYPE_OTHER => 'Autre',
+    ];
+
+    public static $stepTypeLabelsNoConsultation = [
         self::TYPE_OTHER => 'Autre',
     ];
 
@@ -389,15 +390,11 @@ class Step
      */
     public function isConsultationStep()
     {
-        return $this->type == self::TYPE_CONSULTATION;
-    }
+        if ($this->type == self::TYPE_CONSULTATION) {
+            return true;
+        }
 
-    /**
-     * @return bool
-     */
-    public function isPresentationStep()
-    {
-        return $this->type == self::TYPE_PRESENTATION;
+        return false;
     }
 
     /**
@@ -405,7 +402,11 @@ class Step
      */
     public function isOtherStep()
     {
-        return $this->type == self::TYPE_OTHER;
+        if ($this->type == self::TYPE_OTHER) {
+            return true;
+        }
+
+        return false;
     }
 
     // ************************* Lifecycle **************************

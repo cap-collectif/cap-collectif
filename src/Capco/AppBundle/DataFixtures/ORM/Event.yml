@@ -57,7 +57,6 @@ Capco\AppBundle\Entity\Event:
         city: Bordeaux
         Media: @MediaConsultation3
         registrationEnable: true
-        consultations: [@cs1]
     event4:
         title: SymfonyLive2015
         isEnabled: true

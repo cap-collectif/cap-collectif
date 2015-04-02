@@ -14,14 +14,14 @@ parameters:
     capco.toggle.listener.request.class: Capco\AppBundle\Toggle\RequestListener
     capco.blog.post.repository.class: Capco\AppBundle\Repository\PostRepository
     capco.event.repository.class: Capco\AppBundle\Repository\EventRepository
-    capco.event.resolver.class: Capco\AppBundle\Resolver\EventResolver
+    capco.event.resolver.class: Capco\AppBundle\Manager\EventResolver
     capco.comment.resolver.class: Capco\AppBundle\Manager\CommentResolver
     capco.twig.comment.class: Capco\AppBundle\Twig\CommentExtension
     capco.site_color.repository.class: Capco\AppBundle\Repository\SiteColorRepository
     capco.site_color.resolver.class: Capco\AppBundle\SiteColor\Resolver
     capco.twig_extension.site_color.class: Capco\AppBundle\Twig\SiteColorExtension
     capco.twig.default_avatar.class: Capco\AppBundle\Twig\DefaultAvatarExtension
-    capco.step.resolver.class: Capco\AppBundle\Resolver\StepResolver
+    capco.step.resolver.class: Capco\AppBundle\Manager\StepResolver
     capco.twig.steps_links.class: Capco\AppBundle\Twig\StepsLinksExtension
     capco.block.service.share_button.class: Capco\AppBundle\Block\ShareButtonBlockService
     capco.video.repository.class: Capco\AppBundle\Repository\VideoRepository
@@ -263,9 +263,3 @@ services:
       class: %capco.help_extension.class%
       tags:
         - { name: form.type_extension, alias: text }
-
-    capco.vote.suscriber:
-        class: Capco\AppBundle\EventListener\VoteSuscriber
-        arguments: [@doctrine.orm.entity_manager]
-        tags:
-            - { name: "kernel.event_subscriber" }

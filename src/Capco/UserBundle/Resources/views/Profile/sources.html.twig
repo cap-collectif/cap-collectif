@@ -28,7 +28,7 @@
                         <input type="hidden" name="_csrf_token" value="{{ tokenSource }}">
                     </form>
                 {% endif %}
-                <span class="nb-votes">{{ source.votesCount }}</span>
+                <span class="nb-votes">{{ source.voteCountSource }}</span>
 
                 {% if source.canContribute %}
                     {% if (false == source.userHasReport(app.user)) %}

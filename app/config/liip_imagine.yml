@@ -92,11 +92,11 @@ liip_imagine:
                 thumbnail: { size: [50, 50], mode: inbound }
 
         default_header:
-            quality: 70
+            quality: 90
             controller_action: 'SonataMediaBundle:Media:liipImagineFilter'
             format: png
             filters:
-                relative_resize: { widen: 1200 }
+                relative_resize: { widen: 1920 }
 
         default_header_picto:
             quality: 70

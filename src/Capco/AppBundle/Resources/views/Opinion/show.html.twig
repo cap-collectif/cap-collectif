@@ -30,7 +30,7 @@
 
         <div class="row">
             <div class="col-xs-12  col-sm-4  col-md-3  block--mobile">
-                {{ render(controller('CapcoAppBundle:Consultation:showMeta', {'consultationSlug': consultation.slug, 'currentStepSlug': 'consultation_step'})) }}
+                {% include '@CapcoApp/Consultation/show_meta.html.twig' %}
             </div>
 
             {% set nbVotes = (opinion.getVoteCountAll) %}
@@ -149,7 +149,7 @@
                                                             <input type="hidden" name="_csrf_token" value="{{ tokenSource }}">
                                                         </form>
                                                     {% endif %}
-                                                    <span class="nb-votes">{{ source.voteCount }}</span>
+                                                    <span class="nb-votes">{{ source.voteCountSource }}</span>
 
                                                     {% if source.reports | length > 0 %}
                                                         <button disabled="disabled" class="btn btn-xs btn-dark-gray"><i class="cap cap-flag-1"></i> {{ 'source.report.reported'|trans({}, 'CapcoAppBundle') }}</button>

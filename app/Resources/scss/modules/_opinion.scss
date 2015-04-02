@@ -45,7 +45,6 @@
   .opinion__header {
     padding: 2px 15px;
     overflow: hidden;
-    border-bottom: 1px solid $border;
 
     .neutral-hover:hover {
       text-decoration: none;
@@ -273,11 +272,7 @@
   
   .opinion {
     border-top: 1px solid $border;
-    &:first-child {
-      border-top: 0;
-    }
   }
-
 
   .opinion--comment {
     border-top: 0;
@@ -449,7 +444,6 @@
   padding-top: 15px;
   padding-bottom: 15px;
   background-color: $light-gray;
-  border-bottom: 1px solid $border;
 
   .opinion__header__title {
     font-size: 16px;

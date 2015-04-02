@@ -20,7 +20,7 @@
     </div>
     <ul class="media-list  opinion__list">
         {% for argument in arguments %}
-            {% include 'CapcoAppBundle:Argument:blockArgument.html.twig' with {'argument': argument, 'currentUser': currentUser, 'token': token} only %}
+            {% include 'CapcoAppBundle:Argument:blockArgument.html.twig' %}
         {% endfor %}
     </ul>
 </div>

@@ -27,9 +27,8 @@ class EventRepository extends EntityRepository
             ->addSelect('a', 'm', 't', 'c')
             ->leftJoin('e.Author', 'a')
             ->leftJoin('a.Media', 'm')
-            ->leftJoin('e.themes', 't', 'WITH', 't.isEnabled = :enabled')
-            ->leftJoin('e.consultations', 'c', 'WITH', 'c.isEnabled = :enabled')
-            ->setParameter('enabled', true)
+            ->leftJoin('e.themes', 't')
+            ->leftJoin('e.consultations', 'c')
             ->orderBy('e.startAt', 'ASC')
         ;
 
@@ -54,49 +53,6 @@ class EventRepository extends EntityRepository
         }
 
         return $query = $qb->getQuery()->getResult();
-    }
-
-    /**
-     * Count events depending on theme, consultation and search term.
-     *
-     * @param null $themeSlug
-     * @param null $consultationSlug
-     * @param null $term
-     *
-     * @return array
-     */
-    public function countSearchResults($themeSlug = null, $consultationSlug = null, $term = null)
-    {
-        $qb = $this->getIsEnabledQueryBuilder()
-            ->select('COUNT(e.id)')
-            ->innerJoin('e.themes', 't', 'WITH', 't.isEnabled = :enabled')
-            ->innerJoin('e.consultations', 'c', 'WITH', 'c.isEnabled = :enabled')
-            ->setParameter('enabled', true)
-        ;
-
-        $qb = $this->whereIsNotArchived($qb);
-
-        if ($themeSlug !== null && $themeSlug !== Theme::FILTER_ALL) {
-            $qb->andWhere('t.slug = :theme')
-                ->setParameter('theme', $themeSlug)
-            ;
-        }
-
-        if ($consultationSlug !== null && $consultationSlug !== Consultation::FILTER_ALL) {
-            $qb->andWhere('c.slug = :consultation')
-                ->setParameter('consultation', $consultationSlug)
-            ;
-        }
-
-        if ($term !== null) {
-            $qb->andWhere('e.title LIKE :term')
-                ->setParameter('term', '%'.$term.'%')
-            ;
-        }
-
-        return $query = $qb
-            ->getQuery()
-            ->getSingleScalarResult();
     }
 
     /**
@@ -204,40 +160,6 @@ class EventRepository extends EntityRepository
     }
 
     /**
-     * Get last events by consultation.
-     *
-     * @param $consultationSlug
-     * @param int $limit
-     * @param int $offset
-     *
-     * @return mixed
-     */
-    public function getLastByConsultation($consultationSlug, $limit = 1, $offset = 0)
-    {
-        $qb = $this->getIsEnabledQueryBuilder()
-            ->addSelect('a', 't', 'media', 'c')
-            ->leftJoin('e.Author', 'a')
-            ->leftJoin('e.themes', 't')
-            ->leftJoin('e.consultations', 'c')
-            ->leftJoin('e.Media', 'media')
-            ->andWhere('c.slug = :consultation')
-            ->setParameter('consultation', $consultationSlug)
-            ->orderBy('e.startAt', 'ASC');
-
-        $qb = $this->whereIsNotArchived($qb);
-
-        if ($limit) {
-            $qb->setMaxResults($limit);
-        }
-
-        if ($offset) {
-            $qb->setFirstResult($offset);
-        }
-
-        return $qb->getQuery()->execute();
-    }
-
-    /**
      * Get Events by theme.
      *
      * @param theme
@@ -254,6 +176,30 @@ class EventRepository extends EntityRepository
             ->leftJoin('e.Media', 'media')
             ->andWhere('t.id = :theme')
             ->setParameter('theme', $theme)
+            ->orderBy('e.startAt', 'ASC');
+
+        return $qb
+            ->getQuery()
+            ->execute();
+    }
+
+    /**
+     * Get Events by consultation.
+     *
+     * @param consultation
+     *
+     * @return mixed
+     */
+    public function getByConsultation($consultation)
+    {
+        $qb = $this->getIsEnabledQueryBuilder()
+            ->addSelect('a', 'media', 't', 'c')
+            ->leftJoin('e.themes', 't')
+            ->leftJoin('e.consultations', 'c')
+            ->leftJoin('e.Author', 'a')
+            ->leftJoin('e.Media', 'media')
+            ->andWhere('c.id = :consultation')
+            ->setParameter('consultation', $consultation)
             ->orderBy('e.startAt', 'ASC');
 
         return $qb

@@ -38,7 +38,6 @@ class ReinitCommand extends ContainerAwareCommand
         $this->createSchema($output);
         $this->loadFixtures($output);
         $this->loadToggles($output);
-        $this->recalculCounter($output);
 
         $output->writeln('Reinit completed');
     }
@@ -88,14 +87,6 @@ class ReinitCommand extends ContainerAwareCommand
             '--force' => true,
             '',
         ));
-        $input->setInteractive(false);
-        $command->run($input, $output);
-    }
-
-    protected function recalculCounter(OutputInterface $output)
-    {
-        $command = $this->getApplication()->find('capco:recalcul-counter');
-        $input = new ArrayInput(array(''));
         $input->setInteractive(false);
         $command->run($input, $output);
     }

@@ -1,61 +1,13 @@
-<div class="block">
-    <h2 class="h5 excerpt">{{ 'consultation.show.meta.step.title'|trans({}, 'CapcoAppBundle') | upper }}</h2>
-    <div class="navbar--sub">
-        <ul class="nav">
-            {% set nb = 1 %}
-            {% set now = date("now") %}
-            {% for step in consultation.steps %}
-                <li {% if (currentStep == 'consultation_step' and step.isConsultationStep) or currentStep == step.slug %} class="active" {% endif %}>
-                    <a href="{{ step | capco_step_link }}">
-                        <div class="navbar__step-nb">{{ nb }}</div>
-                        <div class="navbar__step">
-                            <h3 class="navbar__step-title">{{ step.title}}  <i class="pull-right  excerpt  cap-arrow-66"></i></h3>
-                            <p class="excerpt h5">
-                                {% if step.startAt == step.endAt %}
-                                    {{ 'consultation.meta.step.on_date' | trans({'%date%': step.startAt | localizeddate('full', 'none', app.request.locale)}, 'CapcoAppBundle') }}
-                                {% else %}
-                                    {{ 'consultation.show.meta.step.between_dates' | trans({'%start%': step.startAt | localizeddate('full', 'none', app.request.locale), '%end%': step.endAt | localizeddate('full', 'none', app.request.locale)}, 'CapcoAppBundle') }}
-                                {% endif %}
-                            </p>
-                            <p class="label label-default">
-                                {% if now < step.startAt %}
-                                    {{ stepStatus['future'] | trans({}, 'CapcoAppBundle') }}
-                                {% elseif now > step.endAt %}
-                                    {{ stepStatus['closed'] | trans({}, 'CapcoAppBundle') }}
-                                {% else %}
-                                    {{ stepStatus['open'] | trans({}, 'CapcoAppBundle') }}
-                                {% endif %}
-                            </p>
-                        </div>
-                    </a>
-                </li>
-                {% set nb = (nb + 1) %}
-            {% endfor %}
-        </ul>
-    </div>
-</div>
+<div class="thumbnail--custom  thumbnail--sidebar  block--bordered">
 
-
-{% if consultation.posts | length > 0 or consultation.events | length > 0 %}
-    <div>
-        <h2 class="h5 excerpt">{{ 'consultation.show.meta.info.title'|trans({}, 'CapcoAppBundle') | upper }}</h2>
-        <div class="navbar--sub">
-            <ul class="nav">
-                {% if is_feature_enabled('blog') and consultation.posts | length > 0 %}
-                    <li {% if currentStep == 'posts_step' %} class="active" {% endif %}>
-                        <a href="{{ path('app_consultation_show_posts', {'consultationSlug': consultation.slug}) }}">
-                            <p class="navbar__step-title">{{ 'consultation.show.meta.info.posts'|trans({}, 'CapcoAppBundle') }}  <i class="pull-right  excerpt  cap-arrow-66"></i></p>
-                        </a>
-                    </li>
-                {% endif %}
-                {% if is_feature_enabled('calendar') and consultation.events | length > 0 %}
-                    <li {% if currentStep == 'events_step' %} class="active" {% endif %}>
-                        <a href="{{ path('app_consultation_show_events', {'consultationSlug': consultation.slug}) }}">
-                            <p class="navbar__step-title">{{ 'consultation.show.meta.info.events'|trans({}, 'CapcoAppBundle') }}  <i class="pull-right  excerpt  cap-arrow-66"></i></p>
-                        </a>
-                    </li>
-                {% endif %}
-            </ul>
+    <div class="box">
+        {% if null != consultation.body %}
+            <h2 class="h4">{{ 'consultation.show.meta.intro.title'|trans({}, 'CapcoAppBundle') }}</h2>
+            <div class="more"  style="max-height: 115px; overflow: hidden; width: 100%"><p>{{ consultation.body }}</p></div>
+        {% endif %}
+        {%  if currentStep is not defined %}
+            {% set currentStep = null %}
+        {% endif %}
+        {{ render(controller('CapcoAppBundle:Step:showAllInNav', {'consultation': consultation, 'currentStep': currentStep})) }}
         </div>
-    </div>
-{% endif %}
+</div>

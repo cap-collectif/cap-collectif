@@ -77,7 +77,7 @@
         <div class="row">
             {% if consultations|length > 0 %}
                 {% for consultation in consultations %}
-                    {% include '@CapcoApp/Consultation/blockConsultation.html.twig' with {'consultation': consultation} only %}
+                    {% include '@CapcoApp/Consultation/blockConsultation.html.twig' %}
                 {% endfor %}
             {% else %}
                 <p>

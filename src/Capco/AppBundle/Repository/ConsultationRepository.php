@@ -68,39 +68,6 @@ class ConsultationRepository extends EntityRepository
     }
 
     /**
-     * Get one by slug with steps, events and posts.
-     *
-     * @param $slug
-     *
-     * @return mixed
-     *
-     * @throws \Doctrine\ORM\NonUniqueResultException
-     */
-    public function getOneBySlugWithStepsAndEventsAndPosts($slug)
-    {
-        $qb = $this->getIsEnabledQueryBuilder('c')
-            ->addSelect('t', 's', 'cov', 'p', 'e')
-            ->leftJoin('c.Themes', 't')
-            ->leftJoin('c.Steps', 's', 'WITH', 's.isEnabled = :enabled')
-            ->leftJoin('c.Cover', 'cov')
-            ->leftJoin('c.posts', 'p', 'WITH', 'p.isPublished = :published')
-            ->leftJoin('c.events', 'e', 'WITH', 'e.isEnabled = :enabled')
-            ->andWhere('c.slug = :slug')
-            ->setParameter('slug', $slug)
-            ->setParameter('published', true)
-            ->setParameter('enabled', true)
-            ->addOrderBy('p.publishedAt', 'DESC')
-            ->addOrderBy('e.startAt', 'DESC')
-            ->addOrderBy('s.position', 'ASC')
-            ->addOrderBy('s.startAt', 'ASC')
-        ;
-
-        return $qb
-            ->getQuery()
-            ->getOneOrNullResult();
-    }
-
-    /**
      * Get search results.
      *
      * @param int  $nbByPage

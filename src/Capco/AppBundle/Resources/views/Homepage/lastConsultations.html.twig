@@ -14,7 +14,7 @@
         <div class="row">
             {% for step in consultationSteps %}
                 {% set consultation = step.consultation %}
-                {% include '@CapcoApp/Consultation/blockConsultation.html.twig' with {'consultation': consultation} only %}
+                {% include '@CapcoApp/Consultation/blockConsultation.html.twig' %}
             {% endfor %}
         </div>
         <a href="{{ path('app_consultation') }}" class="btn  btn-primary  btn--outline">{{ 'consultation.see_all'|trans({}, 'CapcoAppBundle') }}</a>

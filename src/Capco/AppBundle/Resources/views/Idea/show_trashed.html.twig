@@ -37,7 +37,7 @@
         <div class="row">
             {% if ideas|length > 0 %}
                 {% for idea in ideas %}
-                    {% include '@CapcoApp/Idea/blockIdea.html.twig' with {'idea': idea} only %}
+                    {% include '@CapcoApp/Idea/blockIdea.html.twig' %}
                 {% endfor %}
             {% else %}
                 <p>
