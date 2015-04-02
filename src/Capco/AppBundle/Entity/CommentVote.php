@@ -15,7 +15,7 @@ class CommentVote extends AbstractVote
     /**
      * @var
      *
-     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\AbstractComment", inversedBy="Votes", cascade={"persist"})
+     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\AbstractComment", inversedBy="votes", cascade={"persist"})
      */
     private $comment;
 
@@ -40,6 +40,11 @@ class CommentVote extends AbstractVote
         }
 
         return $this;
+    }
+
+    public function getRelatedEntity()
+    {
+        return $this->comment;
     }
 
     // *************************** Lifecycle **********************************

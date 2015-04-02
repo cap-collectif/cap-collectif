@@ -133,7 +133,7 @@ class Source
      *
      * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\SourceVote", mappedBy="source", cascade={"persist", "remove"}, orphanRemoval=true)
      */
-    private $Votes;
+    private $votes;
 
     /**
      * @var
@@ -147,7 +147,7 @@ class Source
      *
      * @ORM\Column(name="vote_count_source", type="integer")
      */
-    private $voteCountSource = 0;
+    private $voteCount = 0;
 
     /**
      * @var bool
@@ -174,8 +174,8 @@ class Source
     {
         $this->type = self::LINK;
         $this->Reports = new ArrayCollection();
-        $this->Votes = new ArrayCollection();
-        $this->voteCountSource = 0;
+        $this->votes = new ArrayCollection();
+        $this->voteCount = 0;
         $this->updatedAt = new \DateTime();
     }
 
@@ -321,17 +321,6 @@ class Source
      */
     public function setIsEnabled($isEnabled)
     {
-        if ($isEnabled != $this->isEnabled) {
-            if ($isEnabled) {
-                if (!$this->isTrashed) {
-                    $this->Opinion->increaseSourcesCount(1);
-                }
-            } else {
-                if (!$this->isTrashed) {
-                    $this->Opinion->decreaseSourcesCount(1);
-                }
-            }
-        }
         $this->isEnabled = $isEnabled;
 
         return $this;
@@ -432,7 +421,7 @@ class Source
      */
     public function getVotes()
     {
-        return $this->Votes;
+        return $this->votes;
     }
 
     /**
@@ -442,9 +431,8 @@ class Source
      */
     public function addVote($vote)
     {
-        if (!$this->Votes->contains($vote)) {
-            $this->voteCountSource++;
-            $this->Votes->add($vote);
+        if (!$this->votes->contains($vote)) {
+            $this->votes->add($vote);
         }
 
         return $this;
@@ -457,9 +445,7 @@ class Source
      */
     public function removeVote($vote)
     {
-        if ($this->Votes->removeElement($vote)) {
-            $this->voteCountSource--;
-        }
+        $this->votes->removeElement($vote);
 
         return $this;
     }
@@ -501,17 +487,17 @@ class Source
     /**
      * @return int
      */
-    public function getVoteCountSource()
+    public function getVoteCount()
     {
-        return $this->voteCountSource;
+        return $this->voteCount;
     }
 
     /**
-     * @param int $voteCountSource
+     * @param int $voteCount
      */
-    public function setVoteCountSource($voteCountSource)
+    public function setVoteCount($voteCount)
     {
-        $this->voteCountSource = $voteCountSource;
+        $this->voteCount = $voteCount;
     }
 
     /**
@@ -537,13 +523,6 @@ class Source
             if (false == $this->isTrashed) {
                 $this->trashedReason = null;
                 $this->trashedAt = null;
-            }
-            if ($this->isEnabled) {
-                if ($isTrashed) {
-                    $this->Opinion->decreaseSourcesCount(1);
-                } else {
-                    $this->Opinion->increaseSourcesCount(1);
-                }
             }
         }
         $this->isTrashed = $isTrashed;
@@ -606,8 +585,8 @@ class Source
      */
     public function resetVotes()
     {
-        foreach ($this->Votes as $vote) {
-            $this->removeVote($vote);
+        foreach ($this->votes as $vote) {
+            $vote->setConfirmed(false);
         }
 
         return $this;
@@ -621,7 +600,7 @@ class Source
     public function userHasVote(User $user = null)
     {
         if ($user != null) {
-            foreach ($this->Votes as $vote) {
+            foreach ($this->votes as $vote) {
                 if ($vote->getUser() == $user) {
                     return true;
                 }

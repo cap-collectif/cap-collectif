@@ -149,7 +149,7 @@
                                                             <input type="hidden" name="_csrf_token" value="{{ tokenSource }}">
                                                         </form>
                                                     {% endif %}
-                                                    <span class="nb-votes">{{ source.voteCountSource }}</span>
+                                                    <span class="nb-votes">{{ source.voteCount }}</span>
 
                                                     {% if source.reports | length > 0 %}
                                                         <button disabled="disabled" class="btn btn-xs btn-dark-gray"><i class="cap cap-flag-1"></i> {{ 'source.report.reported'|trans({}, 'CapcoAppBundle') }}</button>

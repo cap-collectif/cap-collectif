@@ -263,3 +263,9 @@ services:
       class: %capco.help_extension.class%
       tags:
         - { name: form.type_extension, alias: text }
+
+    capco.vote.suscriber:
+        class: Capco\AppBundle\EventListener\VoteSuscriber
+        arguments: [@doctrine.orm.entity_manager]
+        tags:
+            - { name: "kernel.event_subscriber" }
