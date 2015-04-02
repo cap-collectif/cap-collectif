@@ -32,7 +32,7 @@ class SourceRepository extends EntityRepository
             ->leftJoin('s.Media', 'media')
             ->leftJoin('s.Category', 'cat')
             ->leftJoin('a.Media', 'm')
-            ->leftJoin('s.votes', 'v')
+            ->leftJoin('s.Votes', 'v')
             ->leftJoin('s.Opinion', 'o')
             ->leftJoin('o.Consultation', 'c')
             ->leftJoin('o.OpinionType', 'ot')

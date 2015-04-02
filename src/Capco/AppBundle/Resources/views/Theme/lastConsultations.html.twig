@@ -4,7 +4,9 @@
             {% include '@CapcoApp/Consultation/blockConsultation.html.twig' %}
         {% endfor %}
     </div>
-    <a href="{{ path('app_consultation') }}" class="btn  btn-primary  btn--outline">{{ 'consultation.see_all'|trans({}, 'CapcoAppBundle') }}</a>
+    {% if nbConsultations > max %}
+        <a href="{{ path('app_consultation_search', {'theme': theme.slug, 'sort': 'date'}) }}" class="btn  btn-primary  btn--outline">{{ 'consultation.see_all'|trans({}, 'CapcoAppBundle') }}</a>
+    {% endif %}
 {% else %}
     <p>{{ 'consultation.none'|trans({}, 'CapcoAppBundle') }}</p>
 {% endif %}
