@@ -5,6 +5,7 @@ namespace Capco\AppBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Validator\Constraints as Assert;
+use Capco\AppBundle\Validator\Constraints as CapcoAssert;
 
 /**
  * Step.
@@ -12,6 +13,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Table(name="step")
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\StepRepository")
  * @ORM\HasLifecycleCallbacks()
+ * @CapcoAssert\EndAfterStart()
  */
 class Step
 {
@@ -71,10 +73,9 @@ class Step
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="end_at", type="datetime")
-     * @Assert\NotNull()
+     * @ORM\Column(name="end_at", type="datetime", nullable=true)
      */
-    private $endAt;
+    private $endAt = null;
 
     /**
      * @var int

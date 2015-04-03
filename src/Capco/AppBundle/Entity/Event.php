@@ -7,6 +7,7 @@ use Capco\AppBundle\Traits\CommentableTrait;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Validator\Constraints as Assert;
+use Capco\AppBundle\Validator\Constraints as CapcoAssert;
 use Doctrine\Common\Collections\ArrayCollection;
 
 /**
@@ -15,6 +16,7 @@ use Doctrine\Common\Collections\ArrayCollection;
  * @ORM\Table(name="event")
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\EventRepository")
  * @ORM\HasLifecycleCallbacks()
+ * @CapcoAssert\EndAfterStart()
  */
 class Event implements CommentableInterface
 {
@@ -79,10 +81,9 @@ class Event implements CommentableInterface
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="endAt", type="datetime")
-     * @Assert\NotBlank()
+     * @ORM\Column(name="endAt", type="datetime", nullable=true)
      */
-    private $endAt;
+    private $endAt = null;
 
     /**
      * @var bool

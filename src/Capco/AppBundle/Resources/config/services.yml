@@ -36,6 +36,7 @@ parameters:
     capco.help_extension.class: Capco\AppBundle\Form\Extension\HelpExtension
     capco.vote.resolver.class: Capco\AppBundle\Resolver\VoteResolver
     capco.twig.vote.class: Capco\AppBundle\Twig\VoteExtension
+    capco.end_after_start.validator.class: Capco\AppBundle\Validator\Constraints\EndAfterStartValidator
 
 services:
     capco.site_parameter.repository:
@@ -281,3 +282,8 @@ services:
         arguments: [@capco.vote.resolver]
         tags:
           - { name: twig.extension }
+
+    capco.end_after_start.validator:
+        class: %capco.end_after_start.validator.class%
+        tags:
+            - { name: validator.constraint_validator, alias: end_after_start.validator }
