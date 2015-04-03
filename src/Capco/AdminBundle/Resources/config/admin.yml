@@ -206,6 +206,7 @@ services:
             - {name: sonata.admin, manager_type: orm, group: admin.group.moderation, label: admin.label.comment}
         calls:
             - [ setTranslationDomain, [SonataAdminBundle]]
+            - [setSubClasses, [{idea_comment: Capco\AppBundle\Entity\IdeaComment, event_comment: Capco\AppBundle\Entity\EventComment, post_comment: Capco\AppBundle\Entity\PostComment}]]
 
     capco_admin.admin.comment_vote:
         class: Capco\AdminBundle\Admin\CommentVoteAdmin

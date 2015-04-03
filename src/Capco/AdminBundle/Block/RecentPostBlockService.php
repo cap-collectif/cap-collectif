@@ -3,15 +3,15 @@
 namespace Capco\AdminBundle\Block;
 
 use Sonata\AdminBundle\Form\FormMapper;
-use Sonata\AdminBundle\Validator\ErrorElement;
 use Sonata\BlockBundle\Block\BaseBlockService;
 use Sonata\BlockBundle\Block\BlockContextInterface;
-use Sonata\BlockBundle\Model\BlockInterface;
 use Symfony\Bundle\FrameworkBundle\Templating\EngineInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Capco\AppBundle\Repository\PostRepository;
 use Capco\AppBundle\Toggle\Manager;
+use Sonata\CoreBundle\Validator\ErrorElement;
+use Sonata\BlockBundle\Model\BlockInterface;
 
 class RecentPostBlockService extends BaseBlockService
 {
@@ -81,7 +81,15 @@ class RecentPostBlockService extends BaseBlockService
         ));
     }
 
+    /**
+     * @param ErrorElement   $errorElement
+     * @param BlockInterface $block
+     *
+     * @return void
+     */
     public function validateBlock(ErrorElement $errorElement, BlockInterface $block)
     {
     }
+
+
 }
