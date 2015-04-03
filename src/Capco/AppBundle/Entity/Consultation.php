@@ -707,7 +707,7 @@ class Consultation
             }
         }
 
-        return;
+        return null;
     }
 
     /**
@@ -719,7 +719,7 @@ class Consultation
             return $consultationStep->getStartAt();
         }
 
-        return;
+        return null;
     }
 
     /**
@@ -731,22 +731,15 @@ class Consultation
             return $consultationStep->getEndAt();
         }
 
-        return;
+        return null;
     }
 
     /**
      */
     public function getRemainingDays()
     {
-        $closedAt = $this->getClosedAt();
-        $now = new \DateTime();
-        if ($this->getOpeningStatus() == self::OPENING_STATUS_OPENED) {
-            if (null != $closedAt && $closedAt > $now) {
-                return $closedAt->diff($now)->format('%a');
-            }
-        }
-
-        return;
+        $consultationStep = $this->getConsultationStep();
+        return $consultationStep->getRemainingDays();
     }
 
     /**
@@ -756,15 +749,8 @@ class Consultation
      */
     public function isOpen()
     {
-        $closedAt = $this->getClosedAt();
-        $openedAt = $this->getOpenedAt();
-        $now = new \DateTime();
-
-        if (null != $closedAt && null != $openedAt) {
-            return $openedAt < $now && $now < $closedAt;
-        }
-
-        return false;
+        $consultationStep = $this->getConsultationStep();
+        return $consultationStep->isOpen();
     }
 
     /**
@@ -774,15 +760,8 @@ class Consultation
      */
     public function isFuture()
     {
-        $closedAt = $this->getClosedAt();
-        $openedAt = $this->getOpenedAt();
-        $now = new \DateTime();
-
-        if (null != $closedAt && null != $openedAt) {
-            return $openedAt > $now && $now < $closedAt;
-        }
-
-        return false;
+        $consultationStep = $this->getConsultationStep();
+        return $consultationStep->isFuture();
     }
 
     /**
@@ -790,17 +769,10 @@ class Consultation
      *
      * @return bool
      */
-    public function isClose()
+    public function isClosed()
     {
-        $closedAt = $this->getClosedAt();
-        $openedAt = $this->getOpenedAt();
-        $now = new \DateTime();
-
-        if (null != $closedAt && null != $openedAt) {
-            return $openedAt < $now && $now > $closedAt;
-        }
-
-        return false;
+        $consultationStep = $this->getConsultationStep();
+        return $consultationStep->isClosed();
     }
 
     /**
@@ -808,19 +780,18 @@ class Consultation
      */
     public function getOpeningStatus()
     {
-        $now = new \DateTime();
-        $closedAt = $this->getClosedAt();
-        $openedAt = $this->getOpenedAt();
-
-        if (null != $closedAt && $now > $closedAt) {
+        $consultationStep = $this->getConsultationStep();
+        if ($this->isClosed()) {
             return self::OPENING_STATUS_ENDED;
-        } elseif (null != $openedAt && $now < $openedAt) {
+        }
+        if ($this->isFuture()) {
             return self::OPENING_STATUS_FUTURE;
-        } elseif (null != $openedAt && null != $closedAt && $openedAt < $now && $now < $closedAt) {
+        }
+        if ($this->isOpen()) {
             return self::OPENING_STATUS_OPENED;
         }
 
-        return;
+        return null;
     }
 
     /**

@@ -264,7 +264,8 @@ consultation:
         title: Introduction
       step:
         title: Étapes
-        on_date: Le %date%
+        on_full_day: Le %date% à %time%
+        on_part_day: Le %date% de %start_time% à %end_time%
         between_dates: Du %start% au %end%
       info:
         title: Informations
@@ -666,8 +667,9 @@ event:
   archived: Évènements passés
   no_event: "Aucun évènement n'a été publié"
   written_by: "par"
-  on_date: le %date%
-  between_dates: du %start% au %end%
+  on_full_day: Le %date% à %time%
+  on_part_day: Le %date% de %start_time% à %end_time%
+  between_dates: Du %start% au %end%
   see_all: Voir tous les évènements
   see_archived: Voir les évènements passés
   none: "Il n'y a aucun évènement."
@@ -677,7 +679,7 @@ event:
     comments: "]-Inf, 0] Aucun commentaire | {1} 1 commentaire | ]1,Inf[ %count% commentaires"
     consultations:
       title: "]-Inf, 1] Consultation liée : | ]1, Inf[ Consultations liées :"
-  link_button: Inscrption
+  link_button: Inscription
   no_result:  Aucun évènement ne correspond à ces critères de recherche.
   and: et
   searchform:

@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\Entity;
 
+use Capco\AppBundle\Traits\StartAndEndDatesTrait;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -17,6 +18,8 @@ use Capco\AppBundle\Validator\Constraints as CapcoAssert;
  */
 class Step
 {
+    use StartAndEndDatesTrait;
+
     const TYPE_OTHER = 0;
     const TYPE_CONSULTATION = 1;
     const TYPE_PRESENTATION = 2;
@@ -61,21 +64,6 @@ class Step
      * @ORM\Column(length=255)
      */
     private $slug;
-
-    /**
-     * @var \DateTime
-     *
-     * @ORM\Column(name="start_at", type="datetime")
-     * @Assert\NotNull()
-     */
-    private $startAt;
-
-    /**
-     * @var \DateTime
-     *
-     * @ORM\Column(name="end_at", type="datetime", nullable=true)
-     */
-    private $endAt = null;
 
     /**
      * @var int
@@ -198,54 +186,6 @@ class Step
     public function setSlug($slug)
     {
         $this->slug = $slug;
-
-        return $this;
-    }
-
-    /**
-     * Get startAt.
-     *
-     * @return \DateTime
-     */
-    public function getStartAt()
-    {
-        return $this->startAt;
-    }
-
-    /**
-     * Set startAt.
-     *
-     * @param \DateTime $startAt
-     *
-     * @return Step
-     */
-    public function setStartAt($startAt)
-    {
-        $this->startAt = $startAt;
-
-        return $this;
-    }
-
-    /**
-     * Get endAt.
-     *
-     * @return \DateTime
-     */
-    public function getEndAt()
-    {
-        return $this->endAt;
-    }
-
-    /**
-     * Set endAt.
-     *
-     * @param \DateTime $endAt
-     *
-     * @return Step
-     */
-    public function setEndAt($endAt)
-    {
-        $this->endAt = $endAt;
 
         return $this;
     }

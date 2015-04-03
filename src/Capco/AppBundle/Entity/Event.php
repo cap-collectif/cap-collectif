@@ -4,6 +4,7 @@ namespace Capco\AppBundle\Entity;
 
 use Capco\AppBundle\Model\CommentableInterface;
 use Capco\AppBundle\Traits\CommentableTrait;
+use Capco\AppBundle\Traits\StartAndEndDatesTrait;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -21,6 +22,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 class Event implements CommentableInterface
 {
     use CommentableTrait;
+    use StartAndEndDatesTrait;
 
     /**
      * @var int
@@ -69,21 +71,6 @@ class Event implements CommentableInterface
      * @ORM\Column(name="updated_at", type="datetime", nullable=true)
      */
     private $updatedAt;
-
-    /**
-     * @var \DateTime
-     *
-     * @ORM\Column(name="startAt", type="datetime")
-     * @Assert\NotBlank()
-     */
-    private $startAt;
-
-    /**
-     * @var \DateTime
-     *
-     * @ORM\Column(name="endAt", type="datetime", nullable=true)
-     */
-    private $endAt = null;
 
     /**
      * @var bool
@@ -282,54 +269,6 @@ class Event implements CommentableInterface
     public function getUpdatedAt()
     {
         return $this->updatedAt;
-    }
-
-    /**
-     * Set startAt.
-     *
-     * @param \DateTime $startAt
-     *
-     * @return Event
-     */
-    public function setStartAt($startAt)
-    {
-        $this->startAt = $startAt;
-
-        return $this;
-    }
-
-    /**
-     * Get startAt.
-     *
-     * @return \DateTime
-     */
-    public function getStartAt()
-    {
-        return $this->startAt;
-    }
-
-    /**
-     * Set endAt.
-     *
-     * @param \DateTime $endAt
-     *
-     * @return Event
-     */
-    public function setEndAt($endAt)
-    {
-        $this->endAt = $endAt;
-
-        return $this;
-    }
-
-    /**
-     * Get endAt.
-     *
-     * @return \DateTime
-     */
-    public function getEndAt()
-    {
-        return $this->endAt;
     }
 
     /**
@@ -696,16 +635,6 @@ class Event implements CommentableInterface
     public function canContribute()
     {
         return $this->isEnabled;
-    }
-
-    public function getStartYear()
-    {
-        return $this->startAt->format('Y');
-    }
-
-    public function getStartMonth()
-    {
-        return $this->startAt->format('m');
     }
 
     // ************************** Lifecycle **************************************
