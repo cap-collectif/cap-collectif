@@ -14,29 +14,27 @@ class EventResolver
     }
 
     /**
-     * @param $archived
      * @param $themeSlug
      * @param $consultationSlug
      * @param $term
      *
      * @return array
      */
-    public function countEvents($archived, $themeSlug, $consultationSlug, $term)
+    public function countEvents($themeSlug, $consultationSlug, $term)
     {
-        return $this->repository->countSearchResults($archived, $themeSlug, $consultationSlug, $term);
+        return $this->repository->countSearchResults($themeSlug, $consultationSlug, $term);
     }
 
     /**
-     * @param $archived
      * @param $themeSlug
      * @param $consultationSlug
      * @param $term
      *
      * @return array
      */
-    public function getEventsGroupedByYearAndMonth($archived, $themeSlug, $consultationSlug, $term)
+    public function getEventsGroupedByYearAndMonth($themeSlug, $consultationSlug, $term)
     {
-        $results = $this->repository->getSearchResults($archived, $themeSlug, $consultationSlug, $term);
+        $results = $this->repository->getSearchResults($themeSlug, $consultationSlug, $term);
 
         if (!empty($results)) {
             foreach ($results as $e) {
@@ -47,14 +45,23 @@ class EventResolver
         }
     }
 
-    public function getLastByConsultation($consultationSlug, $limit)
+    /**
+     * @param $theme
+     * @param $consultation
+     * @param $term
+     *
+     * @return array
+     */
+    public function getEventsArchivedGroupedByYearAndMonth($theme, $consultation, $term)
     {
-        $events = $this->repository->getLastByConsultation(false, $consultationSlug, $limit);
-        $left = $limit - count($events);
-        if ($left > 0) {
-            $events = array_merge($events, $this->repository->getLastByConsultation(true, $consultationSlug, $limit));
-        }
+        $results = $this->repository->getSearchResultsArchived($theme, $consultation, $term);
 
-        return $events;
+        if (!empty($results)) {
+            foreach ($results as $e) {
+                $events[$e->getStartYear()][$e->getStartMonth()][] = $e;
+            }
+
+            return $events;
+        }
     }
 }

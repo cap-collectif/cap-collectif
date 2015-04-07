@@ -1,5 +1,5 @@
 {% set token = csrf_token('argument_vote') %}
-{%  set currentUser = app.user %}
+{% set currentUser = app.user %}
 {% if arguments|length > 0 %}
     <ul class="media-list">
         {% for argument in arguments %}

@@ -39,7 +39,7 @@
                                 {% include '@CapcoApp/Blog/blockPost.html.twig' with {'post': post} only %}
                             {% endfor %}
                         </ul>
-                        <a href="{{ path('app_consultation_show_posts', {'consultationSlug': consultation.slug}) }}" class="btn  btn-primary  btn--outline">{{ 'step.presentation.posts.see_all'|trans({}, 'CapcoAppBundle') }}</a>
+                        <a href="{{ path('app_blog_search_consultation', {'theme': 'all', 'consultation': consultation.slug}) }}" class="btn  btn-primary  btn--outline">{{ 'step.presentation.posts.see_all'|trans({}, 'CapcoAppBundle') }}</a>
                     </div>
                 {% endif %}
 
@@ -51,7 +51,7 @@
                                 {% include '@CapcoApp/Event/blockEvent.html.twig' with {'event': event, 'col_classes': 'col-md-6  col-sm-12'} only %}
                             {% endfor %}
                         </div>
-                        <a href="{{ path('app_consultation_show_events', {'consultationSlug': consultation.slug}) }}" class="btn  btn-primary  btn--outline">{{ 'step.presentation.events.see_all'|trans({}, 'CapcoAppBundle') }}</a>
+                        <a href="{{ path('app_event_search_consultation', {'theme': 'all', 'consultation': consultation.slug}) }}" class="btn  btn-primary  btn--outline">{{ 'step.presentation.events.see_all'|trans({}, 'CapcoAppBundle') }}</a>
                     </div>
                 {% endif %}
 
