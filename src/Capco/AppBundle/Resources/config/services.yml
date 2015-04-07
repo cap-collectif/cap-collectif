@@ -127,7 +127,7 @@ services:
 
     capco.toggle.listener.request:
         class:     %capco.toggle.listener.request.class%
-        arguments: [@capco.toggle.manager, @translator, @capco.site_parameter.resolver, %shield_login%, %shield_pwd%]
+        arguments: [@capco.toggle.manager, @translator, @capco.site_parameter.resolver]
         tags:
             - { name: kernel.event_listener, event: kernel.request, method: onKernelRequest }
 
