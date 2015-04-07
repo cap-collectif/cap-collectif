@@ -164,7 +164,7 @@ idea:
   vote:
     submit: Soutenir
     private: Rendre privé mon soutien
-    message: Pourquoi soutenez-vous ? (optionnel)
+    message: Pourquoi soutenez-vous cette idée ? (optionnel)
     name: Nom
     email: Adresse électronique
     unsubscribe: Annuler mon soutien
