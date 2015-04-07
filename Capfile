@@ -13,6 +13,7 @@ require 'capistrano/npm'
 require 'capistrano/bower'
 require 'capistrano/gulp'
 require 'capistrano/slackify'
+require 'capistrano/copy_files'
 
 # Loads custom tasks from `lib/capistrano/tasks' if you have any defined.
 Dir.glob('app/capistrano/tasks/*.cap').each { |r| import r }

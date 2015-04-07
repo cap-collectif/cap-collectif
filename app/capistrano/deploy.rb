@@ -68,6 +68,10 @@ set :composer_install_flags, '--no-dev --prefer-dist --no-interaction --optimize
 
 fetch(:default_env).merge!(symfony_env: fetch(:symfony_env))
 
+# Capistrano copy-files to deploy faster (copy npm and vendor dir from previous deploy)
+set :copy_files, [ "node_modules", "vendor" ] # default
+set :copy_file_flags, ""                      # default
+set :copy_dir_flags, "-R"                     # default
 
 # Slack hook configuration
 set :slack_url, '***REMOVED***'

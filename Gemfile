@@ -7,3 +7,4 @@ gem 'capistrano-npm'
 gem 'capistrano-gulp', "~> 0.0.1"
 gem 'capistrano-bower'
 gem 'capistrano-slackify', require: false
+gem 'capistrano-copy-files'
