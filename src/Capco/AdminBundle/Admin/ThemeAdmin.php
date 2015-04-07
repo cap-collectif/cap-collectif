@@ -8,6 +8,7 @@ use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Show\ShowMapper;
 use Capco\AppBundle\Entity\Theme;
+use Sonata\CoreBundle\Model\Metadata;
 
 class ThemeAdmin extends Admin
 {
@@ -208,6 +209,21 @@ class ThemeAdmin extends Admin
                 'label' => 'admin.fields.theme.updated_at',
             ))
         ;
+    }
+
+    // For mosaic view
+    public function getObjectMetadata($object)
+    {
+        $media = $object->getMedia();
+        if ($media != null) {
+            $provider = $this->getConfigurationPool()->getContainer()->get($media->getProviderName());
+            $format = $provider->getFormatName($media, 'form');
+            $url = $provider->generatePublicUrl($media, $format);
+
+            return new Metadata($object->getTitle(), $object->getBody(), $url);
+        }
+
+        return parent::getObjectMetadata($object);
     }
 
     public function getFeatures()

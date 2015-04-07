@@ -38,6 +38,8 @@ class ArgumentVoteAdmin extends Admin
      */
     protected function configureListFields(ListMapper $listMapper)
     {
+        unset($this->listModes['mosaic']);
+
         $listMapper
             ->add('argument', 'sonata_type_model', array(
                 'label' => 'admin.fields.argument_vote.argument',

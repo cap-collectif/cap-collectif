@@ -46,6 +46,8 @@ class OpinionVoteAdmin extends Admin
      */
     protected function configureListFields(ListMapper $listMapper)
     {
+        unset($this->listModes['mosaic']);
+
         $listMapper
             ->add('opinion', 'sonata_type_model', array(
                 'label' => 'admin.fields.opinion_vote.opinion',

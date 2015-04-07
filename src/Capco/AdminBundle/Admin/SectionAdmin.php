@@ -75,6 +75,8 @@ class SectionAdmin extends Admin
      */
     protected function configureListFields(ListMapper $listMapper)
     {
+        unset($this->listModes['mosaic']);
+
         $listMapper
             ->add('move_actions', 'actions', array(
                 'label' => 'admin.action.section.move_actions.label',

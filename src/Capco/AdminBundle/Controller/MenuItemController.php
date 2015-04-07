@@ -29,7 +29,7 @@ class MenuItemController extends Controller
     }
 
     /**
-     * Delete action
+     * Delete action.
      *
      * @param int|string|null $id
      * @param Request         $request
