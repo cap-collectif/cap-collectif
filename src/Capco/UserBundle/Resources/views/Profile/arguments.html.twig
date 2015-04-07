@@ -3,7 +3,7 @@
 {% if arguments|length > 0 %}
     <ul class="media-list">
         {% for argument in arguments %}
-            {% include 'CapcoAppBundle:Argument:blockArgument.html.twig' with {'argument': argument, 'argumentsLabels': argumentsLabels, 'token': token, 'currentUser': currentUser, 'profile': true, 'classes': 'block block--bordered  opinion--argument--white'} only %}
+            {% include 'CapcoAppBundle:Argument:blockArgument.html.twig' with {'argument': argument, 'profile': true, 'classes': 'block block--bordered  opinion--argument--white'} only %}
         {% endfor %}
     </ul>
 {% else %}

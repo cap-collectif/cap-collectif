@@ -1,25 +1,3 @@
-{% macro contributions_popover(consultation) %}
-    {% set opinions = consultation.opinionCount + consultation.trashedOpinionCount %}
-    {% transchoice opinions with {'%count%': opinions} from 'CapcoAppBundle'  %}
-        consultation.show.meta.opinionsCount
-    {% endtranschoice %}
-    </br>
-    {% set arguments = consultation.argumentCount + consultation.trashedArgumentCount %}
-    {% transchoice arguments with {'%count%': arguments} from 'CapcoAppBundle'  %}
-        consultation.show.meta.argumentsCount
-    {% endtranschoice %}
-    {#</br>
-    {% transchoice consultation.sourcesCount with {'%count%': consultation.sourcesCount} from 'CapcoAppBundle'  %}
-        consultation.show.sourcesCount
-    {% endtranschoice %}
-    </br>
-    {% transchoice consultation.votesCount with {'%count%': consultation.votesCount} from 'CapcoAppBundle'  %}
-        consultation.show.votesCount
-    {% endtranschoice %}#}
-{% endmacro %}
-
-{% import _self as render %}
-
 <div class="row">
     <div class="col-xs-12 col-sm-5">
         {% if consultation.video is not null %}
@@ -63,8 +41,8 @@
         {% endif %}
 
         <ul class="nav nav-pills consultation__infos">
-            {% set contributionsCount = consultation.totalContributionsCount %}
-            <li data-toggle="tooltip" data-placement="top" data-html="true" data-title="{{ render.contributions_popover(consultation) }}">
+            <li>
+                {% set contributionsCount = consultation.totalContributionsCount %}
                 <div class="value">{{ contributionsCount }}</div>
                 <div class="excerpt category">
                     {% transchoice contributionsCount from 'CapcoAppBundle' %}

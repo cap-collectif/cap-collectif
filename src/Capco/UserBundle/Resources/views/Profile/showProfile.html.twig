@@ -36,7 +36,7 @@
         </div>
     </div>
 
-    {% set totalCount = user.opinionsCount + user.argumentsCount + user.ideasCount + user.sourcesCount + user.commentsCount + user.votesCount %}
+    {% set totalCount = user.opinionsCount + user.argumentsCount + user.ideasCount + user.sourcesCount + user.commentsCount %}
 
     <div class="profile__values">
         <div class="container">
@@ -76,12 +76,6 @@
                     <a href="{{ path('capco_user_profile_show_comments', {'slug': user.slug}) }}">
                         <h2 class="h5 excerpt  profile__value__label">{{ 'user.profile.show.comments'|trans({}, 'CapcoAppBundle') }}</h2>
                         <p class="profile__value__number">{{ user.commentsCount }}</p>
-                    </a>
-                </li>
-                <li class="profile__value {% if app.request.attributes.get('_route') == 'capco_user_profile_show_votes' %}active{% endif %}">
-                    <a href="{{ path('capco_user_profile_show_votes', {'slug': user.slug}) }}">
-                        <h2 class="h5 excerpt  profile__value__label">{{ 'user.profile.show.votes'|trans({}, 'CapcoAppBundle') }}</h2>
-                        <p class="profile__value__number">{{ user.votesCount }}</p>
                     </a>
                 </li>
             </ul>

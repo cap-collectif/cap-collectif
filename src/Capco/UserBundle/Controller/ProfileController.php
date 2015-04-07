@@ -29,7 +29,6 @@ class ProfileController extends BaseController
         $ideas = $this->getDoctrine()->getRepository('CapcoAppBundle:Idea')->getByUser($user);
         $sources = $this->getDoctrine()->getRepository('CapcoAppBundle:Source')->getByUser($user);
         $comments = $this->getDoctrine()->getRepository('CapcoAppBundle:AbstractComment')->getByUser($user);
-        $votes = $this->getDoctrine()->getRepository('CapcoAppBundle:AbstractVote')->getByUser($user);
 
         return [
             'user'   => $user,
@@ -38,7 +37,6 @@ class ProfileController extends BaseController
             'ideas' => $ideas,
             'sources' => $sources,
             'comments' => $comments,
-            'votes' => $votes,
             'argumentsLabels' => Argument::$argumentTypesLabels,
         ];
     }
@@ -58,7 +56,6 @@ class ProfileController extends BaseController
         $ideas = $this->getDoctrine()->getRepository('CapcoAppBundle:Idea')->getByUser($user);
         $sources = $this->getDoctrine()->getRepository('CapcoAppBundle:Source')->getByUser($user);
         $comments = $this->getDoctrine()->getRepository('CapcoAppBundle:AbstractComment')->getByUser($user);
-        $votes = $this->getDoctrine()->getRepository('CapcoAppBundle:AbstractVote')->getByUser($user);
 
         return [
             'user' => $user,
@@ -67,7 +64,6 @@ class ProfileController extends BaseController
             'ideas' => $ideas,
             'sources' => $sources,
             'comments' => $comments,
-            'votes' => $votes,
             'argumentsLabels' => Argument::$argumentTypesLabels,
         ];
     }
@@ -160,24 +156,6 @@ class ProfileController extends BaseController
         return array(
             'user' => $user,
             'comments' => $comments,
-        );
-    }
-
-    /**
-     * @Route("/{slug}/votes", name="capco_user_profile_show_votes")
-     *
-     * @param User $user
-     *
-     * @return array
-     * @Template("CapcoUserBundle:Profile:showUserVotes.html.twig")
-     */
-    public function showVotesAction(User $user)
-    {
-        $votes = $this->getDoctrine()->getRepository('CapcoAppBundle:AbstractVote')->getByUser($user);
-
-        return array(
-            'user' => $user,
-            'votes' => $votes,
         );
     }
 }
