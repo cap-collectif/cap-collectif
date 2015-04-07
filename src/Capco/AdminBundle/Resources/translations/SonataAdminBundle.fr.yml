@@ -369,7 +369,7 @@ admin:
       title: Titre
       is_enabled: Publié
       teaser: Accroche
-      body: Contexte
+      body: Contenu
       consultations: Consultations
       events: Évènements
       posts: Articles

@@ -135,7 +135,6 @@ class ThemeAdmin extends Admin
             ->add('body', 'ckeditor', array(
                 'label' => 'admin.fields.theme.body',
                 'config_name' => 'admin_editor',
-                'required' => false,
             ))
             ->add('status', 'choice', array(
                 'label' => 'admin.fields.theme.status',
