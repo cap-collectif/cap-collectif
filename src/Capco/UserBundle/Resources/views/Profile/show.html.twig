@@ -33,6 +33,10 @@
         <h2>{{ 'user.profile.show.comments' | trans({}, 'CapcoAppBundle') }}</h2>
         {% include '@CapcoUser/Profile/comments.html.twig' %}
     </div>
+    <div class="container  container--custom">
+        <h2>{{ 'user.profile.show.votes' | trans({}, 'CapcoAppBundle') }}</h2>
+        {% include '@CapcoUser/Profile/votes.html.twig' %}
+    </div>
 
 {% endblock fos_user_content %}
 
