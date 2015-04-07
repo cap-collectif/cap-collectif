@@ -8,6 +8,7 @@ use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Show\ShowMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
+use Sonata\CoreBundle\Model\Metadata;
 
 class SiteImageAdmin extends Admin
 {
@@ -116,5 +117,20 @@ class SiteImageAdmin extends Admin
     {
         $collection->remove('create');
         $collection->remove('delete');
+    }
+
+    // For mosaic view
+    public function getObjectMetadata($object)
+    {
+        $media = $object->getMedia();
+        if ($media != null) {
+            $provider = $this->getConfigurationPool()->getContainer()->get($media->getProviderName());
+            $format = $provider->getFormatName($media, 'form');
+            $url = $provider->generatePublicUrl($media, $format);
+
+            return new Metadata($object->getTitle(), null, $url);
+        }
+
+        return parent::getObjectMetadata($object);
     }
 }

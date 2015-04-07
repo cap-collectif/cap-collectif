@@ -19,7 +19,7 @@ admin.group.pages: Pages
 admin.label.page: Pages
 admin.label.menu_item: Navigation
 admin.label.argument: Arguments
-admin.label.argument_vote: "Vote sur les arguments"
+admin.label.argument_vote: "Votes sur les arguments"
 admin.label.consultation: Consultations
 admin.label.feature: Fonctionnalités
 admin.label.footer_social_network: Réseaux sociaux (pied de page)

@@ -9,6 +9,7 @@ use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Show\ShowMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
 use Capco\AppBundle\Entity\Consultation;
+use Sonata\CoreBundle\Model\Metadata;
 
 class ConsultationAdmin extends Admin
 {
@@ -329,5 +330,20 @@ class ConsultationAdmin extends Admin
         }
 
         return parent::getTemplate($name);
+    }
+
+    // For mosaic view
+    public function getObjectMetadata($object)
+    {
+        $cover = $object->getCover();
+        if ($cover != null) {
+            $provider = $this->getConfigurationPool()->getContainer()->get($cover->getProviderName());
+            $format = $provider->getFormatName($cover, 'form');
+            $url = $provider->generatePublicUrl($cover, $format);
+
+            return new Metadata($object->getTitle(), null, $url);
+        }
+
+        return parent::getObjectMetadata($object);
     }
 }

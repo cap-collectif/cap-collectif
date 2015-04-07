@@ -38,6 +38,8 @@ class CommentVoteAdmin extends Admin
      */
     protected function configureListFields(ListMapper $listMapper)
     {
+        unset($this->listModes['mosaic']);
+
         $listMapper
             ->add('comment', 'sonata_type_model', array(
                 'label' => 'admin.fields.comment_vote.comment',

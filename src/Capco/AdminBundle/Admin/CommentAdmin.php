@@ -51,6 +51,8 @@ class CommentAdmin extends Admin
      */
     protected function configureListFields(ListMapper $listMapper)
     {
+        unset($this->listModes['mosaic']);
+
         $listMapper
             ->addIdentifier('body', null, array(
                 'label' => 'admin.fields.comment.body',
