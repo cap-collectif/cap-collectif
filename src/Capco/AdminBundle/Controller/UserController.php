@@ -25,7 +25,7 @@ class UserController extends Controller
     }
 
     /**
-     * Delete action.
+     * Delete action
      *
      * @param int|string|null $id
      * @param Request         $request
@@ -48,7 +48,7 @@ class UserController extends Controller
     }
 
     /**
-     * Edit action.
+     * Edit action
      *
      * @param int|string|null $id
      * @param Request         $request

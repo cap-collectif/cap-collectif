@@ -54,8 +54,6 @@ class OpinionTypeAdmin extends Admin
      */
     protected function configureListFields(ListMapper $listMapper)
     {
-        unset($this->listModes['mosaic']);
-
         $listMapper
             ->addIdentifier('title', null, array(
                 'label' => 'admin.fields.opinion_type.title',

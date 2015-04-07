@@ -51,8 +51,6 @@ class CommentAdmin extends Admin
      */
     protected function configureListFields(ListMapper $listMapper)
     {
-        unset($this->listModes['mosaic']);
-
         $listMapper
             ->addIdentifier('body', null, array(
                 'label' => 'admin.fields.comment.body',
@@ -104,21 +102,21 @@ class CommentAdmin extends Admin
             $showMapper
                 ->add('idea', 'sonata_type_model', array(
                     'label' => 'admin.fields.comment.idea',
-                    'class' => 'Capco\AppBundle\Entity\Idea',
+                    'class' => 'Capco\AppBundle\Entity\Idea'
                 ))
             ;
-        } elseif ($subject instanceof EventComment) {
+        } else if ($subject instanceof EventComment) {
             $showMapper
                 ->add('event', 'sonata_type_model', array(
                     'label' => 'admin.fields.comment.idea',
-                    'class' => 'Capco\AppBundle\Entity\Event',
+                    'class' => 'Capco\AppBundle\Entity\Event'
                 ))
             ;
-        } elseif ($subject instanceof PostComment) {
+        } else if ($subject instanceof PostComment) {
             $showMapper
                 ->add('post', 'sonata_type_model', array(
                     'label' => 'admin.fields.comment.idea',
-                    'class' => 'Capco\AppBundle\Entity\Post',
+                    'class' => 'Capco\AppBundle\Entity\Post'
                 ))
             ;
         }
@@ -190,21 +188,21 @@ class CommentAdmin extends Admin
             $formMapper
                 ->add('idea', 'sonata_type_model', array(
                     'label' => 'admin.fields.comment.idea',
-                    'class' => 'Capco\AppBundle\Entity\Idea',
+                    'class' => 'Capco\AppBundle\Entity\Idea'
                 ))
             ;
-        } elseif ($subject instanceof EventComment) {
+        } else if ($subject instanceof EventComment) {
             $formMapper
                 ->add('event', 'sonata_type_model', array(
                     'label' => 'admin.fields.comment.idea',
-                    'class' => 'Capco\AppBundle\Entity\Event',
+                    'class' => 'Capco\AppBundle\Entity\Event'
                 ))
             ;
-        } elseif ($subject instanceof PostComment) {
+        } else if ($subject instanceof PostComment) {
             $formMapper
                 ->add('post', 'sonata_type_model', array(
                     'label' => 'admin.fields.comment.idea',
-                    'class' => 'Capco\AppBundle\Entity\Post',
+                    'class' => 'Capco\AppBundle\Entity\Post'
                 ))
             ;
         }

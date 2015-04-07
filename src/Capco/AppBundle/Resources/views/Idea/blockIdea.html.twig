@@ -2,12 +2,12 @@
     <div class="media  media--macro  block  block--bordered">
         {% include 'CapcoUserBundle:Avatar:avatar.html.twig' with { 'user': idea.Author, 'classes': 'media-object', 'link_classes': 'pull-left'} only %}
         <div class="media-body">
-            <p class="media-heading h5  media--macro__user"><a href="{{ path('capco_user_profile_show_all', {'slug': idea.Author.slug}) }}">{{ idea.Author.username }}</a></p>
-            <span class="excerpt h5">{{ idea.createdAt | localizeddate('long', 'none') }}</span>
+            <p class="media-heading  media--macro__user small"><a href="{{ path('capco_user_profile_show_all', {'slug': idea.Author.slug}) }}">{{ idea.Author.username }}</a></p>
+            <span class="excerpt  small">{{ idea.createdAt | localizeddate('long', 'none') }}</span>
         </div>
         <div class="media__content">
             <h2 class="h4"><a href="{{ path('app_idea_show', {'slug': idea.slug}) }}">{{ idea.title }}</a></h2>
-            <span class="excerpt  h5">
+            <span class="excerpt small">
                 {% set votesCount = idea.voteCount %}
                 {% set commentsCount = idea.commentsCount %}
                 {% transchoice votesCount with {'%count%': votesCount} from 'CapcoAppBundle' %}

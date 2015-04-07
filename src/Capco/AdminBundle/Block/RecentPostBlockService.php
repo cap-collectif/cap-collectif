@@ -84,8 +84,12 @@ class RecentPostBlockService extends BaseBlockService
     /**
      * @param ErrorElement   $errorElement
      * @param BlockInterface $block
+     *
+     * @return void
      */
     public function validateBlock(ErrorElement $errorElement, BlockInterface $block)
     {
     }
+
+
 }

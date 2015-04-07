@@ -39,8 +39,6 @@ class NewsletterSubscriptionAdmin extends Admin
      */
     protected function configureListFields(ListMapper $listMapper)
     {
-        unset($this->listModes['mosaic']);
-
         $listMapper
             ->addIdentifier('email', null, array(
                 'label' => 'admin.fields.newsletter_subscription.email',

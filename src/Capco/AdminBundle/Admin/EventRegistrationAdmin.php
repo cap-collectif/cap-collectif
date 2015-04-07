@@ -40,8 +40,6 @@ class EventRegistrationAdmin extends Admin
      */
     protected function configureListFields(ListMapper $listMapper)
     {
-        unset($this->listModes['mosaic']);
-
         $listMapper
             ->add('confirmed', null, array(
                 'label' => 'admin.fields.event_registration.registered',

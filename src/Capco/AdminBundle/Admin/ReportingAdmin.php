@@ -57,8 +57,6 @@ class ReportingAdmin extends Admin
      */
     protected function configureListFields(ListMapper $listMapper)
     {
-        unset($this->listModes['mosaic']);
-
         $listMapper
             ->add('object', null, array(
                 'label' => 'admin.fields.reporting.object',

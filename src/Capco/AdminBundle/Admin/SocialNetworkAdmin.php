@@ -9,7 +9,6 @@ use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Show\ShowMapper;
 use Capco\AppBundle\Entity\SocialNetwork;
 use Sonata\AdminBundle\Route\RouteCollection;
-use Sonata\CoreBundle\Model\Metadata;
 
 class SocialNetworkAdmin extends Admin
 {
@@ -143,20 +142,5 @@ class SocialNetworkAdmin extends Admin
 
     protected function configureRoutes(RouteCollection $collection)
     {
-    }
-
-    // For mosaic view
-    public function getObjectMetadata($object)
-    {
-        $media = $object->getMedia();
-        if ($media != null) {
-            $provider = $this->getConfigurationPool()->getContainer()->get($media->getProviderName());
-            $format = $provider->getFormatName($media, 'form');
-            $url = $provider->generatePublicUrl($media, $format);
-
-            return new Metadata($object->getTitle(), null, $url);
-        }
-
-        return parent::getObjectMetadata($object);
     }
 }

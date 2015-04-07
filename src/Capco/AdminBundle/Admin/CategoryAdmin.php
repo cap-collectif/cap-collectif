@@ -37,8 +37,6 @@ class CategoryAdmin extends Admin
      */
     protected function configureListFields(ListMapper $listMapper)
     {
-        unset($this->listModes['mosaic']);
-
         $listMapper
             ->addIdentifier('title', null, array(
                 'label' => 'admin.fields.category.title',

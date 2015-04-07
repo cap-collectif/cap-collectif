@@ -58,8 +58,6 @@ class PageAdmin extends Admin
     // Fields to be shown on lists
     protected function configureListFields(ListMapper $listMapper)
     {
-        unset($this->listModes['mosaic']);
-
         $listMapper
             ->addIdentifier('title', null, array(
                 'label' => 'admin.fields.page.title',
