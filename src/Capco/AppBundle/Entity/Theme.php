@@ -89,8 +89,7 @@ class Theme
     /**
      * @var string
      *
-     * @ORM\Column(name="body", type="text")
-     * @Assert\NotNull()
+     * @ORM\Column(name="body", type="text", nullable=true)
      */
     private $body;
 
