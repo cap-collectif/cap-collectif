@@ -5,11 +5,12 @@ namespace Capco\AppBundle\Entity;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
+use Capco\AppBundle\Traits\ConfirmableTrait;
 
 /**
  * Class AbstractVote.
  *
- * @ORM\Entity()
+ * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\AbstractVoteRepository")
  * @ORM\Table(name="votes")
  * @ORM\HasLifecycleCallbacks()
  * @ORM\InheritanceType("SINGLE_TABLE")
@@ -24,7 +25,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
  */
 abstract class AbstractVote
 {
-    use \Capco\AppBundle\Traits\ConfirmableTrait;
+    use ConfirmableTrait;
 
     /**
      * @var int
