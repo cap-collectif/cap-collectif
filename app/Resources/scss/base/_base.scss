@@ -226,7 +226,7 @@ a.excerpt {
 }
   
 // Show a play icon on top of images
-.play:after {
+.play:before {
   content: '';
   display: block;
   position: absolute;
@@ -234,10 +234,11 @@ a.excerpt {
   left: 50%;
   margin-top: -($custom-video-play/2);
   margin-left: -($custom-video-play/2);
+  z-index: 1000;
   @include triangle($white, 'left', $custom-video-play);
 }
 
-// Show length of video, stored in link's data-length attribute
+/*// Show length of video, stored in link's data-length attribute
 .play[data-length]:before {
   content: attr(data-length);
   display: block;
@@ -248,9 +249,9 @@ a.excerpt {
   padding: 5px;
   color: $white;
   background-color: $black;
-}
+}*/
 
-.play--black:after {
+.play--black:before {
   @include triangle($black, 'left', $custom-video-play);
 }
 
