@@ -5,7 +5,6 @@ namespace Capco\AppBundle\Entity;
 use Capco\AppBundle\Model\CommentableInterface;
 use Capco\AppBundle\Traits\CommentableTrait;
 use Capco\AppBundle\Traits\StartAndEndDatesTrait;
-
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -23,6 +22,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 class Event implements CommentableInterface
 {
     use StartAndEndDatesTrait;
+    use CommentableTrait;
 
     /**
      * @var int

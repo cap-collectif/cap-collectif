@@ -2,10 +2,7 @@
 
 namespace Capco\AppBundle\Resolver;
 
-use Capco\AppBundle\Entity\Section;
 use Capco\AppBundle\Toggle\Manager;
-use Doctrine\ORM\EntityRepository;
-
 use Capco\AppBundle\Repository\PositionableRepository;
 
 class PositionableResolver
@@ -64,7 +61,7 @@ class PositionableResolver
             }
         }
 
-        return null;
+        return;
     }
 
     /**

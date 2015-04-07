@@ -9,13 +9,8 @@ use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Show\ShowMapper;
 use Sonata\CoreBundle\Model\Metadata;
 
-use Capco\AdminBundle\Traits\HighlightableAdminTrait;
-
 class PostAdmin extends Admin
 {
-
-    use HighlightableAdminTrait;
-
     protected $datagridValues = array(
         '_sort_order' => 'DESC',
         '_sort_by' => 'createdAt',
@@ -52,9 +47,6 @@ class PostAdmin extends Admin
             ))
             ->add('isCommentable', null, array(
                 'label' => 'admin.fields.blog_post.is_commentable',
-            ))
-            ->add('highlighted', null, array(
-                'label' => 'admin.fields.blog_post.highlighted',
             ))
             ->add('publishedAt', null, array(
                 'label' => 'admin.fields.blog_post.published_at',
@@ -104,10 +96,6 @@ class PostAdmin extends Admin
             ))
             ->add('isCommentable', null, array(
                 'label' => 'admin.fields.blog_post.is_commentable',
-                'editable' => true,
-            ))
-            ->add('highlighted', null, array(
-                'label' => 'admin.fields.blog_post.highlighted',
                 'editable' => true,
             ))
             ->add('commentsCount', null, array(
@@ -187,10 +175,6 @@ class PostAdmin extends Admin
                 'label' => 'admin.fields.blog_post.is_commentable',
                 'required' => false,
             ))
-            ->add('highlighted', null, array(
-                'label' => 'admin.fields.blog_post.highlighted',
-                'required' => false,
-            ))
         ;
     }
 
@@ -239,9 +223,6 @@ class PostAdmin extends Admin
             ->add('isCommentable', null, array(
                 'label' => 'admin.fields.blog_post.is_commentable',
             ))
-            ->add('highlighted', null, array(
-                'label' => 'admin.fields.blog_post.highlighted',
-            ))
             ->add('commentsCount', null, array(
                 'label' => 'admin.fields.blog_post.comments_count',
             ))
@@ -275,19 +256,4 @@ class PostAdmin extends Admin
             'blog',
         );
     }
-
-    public function prePersist($post)
-    {
-        $this->checkHighlighted($post);
-    }
-
-    public function preUpdate($post)
-    {
-        $dm = $this->getConfigurationPool()->getContainer()->get('Doctrine')->getManager();
-        $uow = $dm->getUnitOfWork();
-        $originalPost = $uow->getOriginalEntityData($post);
-
-        $this->checkHighlighted($post, $originalPost);
-    }
-
 }

@@ -2,9 +2,7 @@
 
 namespace Capco\AppBundle\Entity;
 
-use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
-use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * HighlightedContent.
@@ -37,35 +35,13 @@ abstract class HighlightedContent
      */
     private $position;
 
-    /**
-     * @ORM\OneToOne(targetEntity="Post")
-     */
-     private $post;
+    abstract public function getMedia();
+    abstract public function getType();
 
-    /**
-     * @ORM\OneToOne(targetEntity="Theme")
-     */
-     private $theme;
-
-    /**
-     * @ORM\OneToOne(targetEntity="Consultation")
-     */
-     private $consultation;
-
-    /**
-     * @ORM\OneToOne(targetEntity="Idea")
-     */
-     private $idea;
-
-    /**
-     * @ORM\OneToOne(targetEntity="Event")
-     */
-     private $event;
-
-     public function getAssociatedFeatures()
-     {
-         return [];
-     }
+    public function getAssociatedFeatures()
+    {
+        return [];
+    }
 
     /**
      * Get id.
@@ -80,25 +56,11 @@ abstract class HighlightedContent
     /**
      * Get position.
      *
-     * @return integer
+     * @return int
      */
     public function getPosition()
     {
         return $this->position;
-    }
-
-    /**
-     * Sets the value of id.
-     *
-     * @param int $id the id
-     *
-     * @return self
-     */
-    private function setId($id)
-    {
-        $this->id = $id;
-
-        return $this;
     }
 
     /**
@@ -111,126 +73,6 @@ abstract class HighlightedContent
     public function setPosition($position)
     {
         $this->position = $position;
-
-        return $this;
-    }
-
-    /**
-     * Gets the value of post.
-     *
-     * @return mixed
-     */
-    public function getPost()
-    {
-        return $this->post;
-    }
-
-    /**
-     * Sets the value of post.
-     *
-     * @param mixed $post the post
-     *
-     * @return self
-     */
-    public function setPost($post)
-    {
-        $this->post = $post;
-
-        return $this;
-    }
-
-    /**
-     * Gets the value of theme.
-     *
-     * @return mixed
-     */
-    public function getTheme()
-    {
-        return $this->theme;
-    }
-
-    /**
-     * Sets the value of theme.
-     *
-     * @param mixed $theme the theme
-     *
-     * @return self
-     */
-    public function setTheme($theme)
-    {
-        $this->theme = $theme;
-
-        return $this;
-    }
-
-    /**
-     * Gets the value of consultation.
-     *
-     * @return mixed
-     */
-    public function getConsultation()
-    {
-        return $this->consultation;
-    }
-
-    /**
-     * Sets the value of consultation.
-     *
-     * @param mixed $consultation the consultation
-     *
-     * @return self
-     */
-    public function setConsultation($consultation)
-    {
-        $this->consultation = $consultation;
-
-        return $this;
-    }
-
-    /**
-     * Gets the value of idea.
-     *
-     * @return mixed
-     */
-    public function getIdea()
-    {
-        return $this->idea;
-    }
-
-    /**
-     * Sets the value of idea.
-     *
-     * @param mixed $idea the idea
-     *
-     * @return self
-     */
-    public function setIdea($idea)
-    {
-        $this->idea = $idea;
-
-        return $this;
-    }
-
-    /**
-     * Gets the value of event.
-     *
-     * @return mixed
-     */
-    public function getEvent()
-    {
-        return $this->event;
-    }
-
-    /**
-     * Sets the value of event.
-     *
-     * @param mixed $event the event
-     *
-     * @return self
-     */
-    public function setEvent($event)
-    {
-        $this->event = $event;
 
         return $this;
     }

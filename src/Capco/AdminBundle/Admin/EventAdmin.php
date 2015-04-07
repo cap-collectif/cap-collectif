@@ -12,13 +12,8 @@ use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Show\ShowMapper;
 use Sonata\CoreBundle\Model\Metadata;
 
-use Capco\AdminBundle\Traits\HighlightableAdminTrait;
-
 class EventAdmin extends Admin
 {
-
-    use HighlightableAdminTrait;
-
     protected $datagridValues = array(
         '_sort_order' => 'DESC',
         '_sort_by' => 'createdAt',
@@ -53,9 +48,6 @@ class EventAdmin extends Admin
             ))
             ->add('isCommentable', null, array(
                 'label' => 'admin.fields.event.is_commentable',
-            ))
-            ->add('highlighted', null, array(
-                'label' => 'admin.fields.event.highlighted',
             ))
             ->add('updatedAt', null, array(
                 'label' => 'admin.fields.event.updated_at',
@@ -105,10 +97,6 @@ class EventAdmin extends Admin
             ))
             ->add('isCommentable', null, array(
                 'label' => 'admin.fields.event.is_commentable',
-                'editable' => true,
-            ))
-            ->add('highlighted', null, array(
-                'label' => 'admin.fields.event.highlighted',
                 'editable' => true,
             ))
             ->add('commentsCount', null, array(
@@ -216,10 +204,6 @@ class EventAdmin extends Admin
             ))
             ->add('isCommentable', null, array(
                 'label' => 'admin.fields.event.is_commentable',
-                'required' => false,
-            ))
-            ->add('highlighted', null, array(
-                'label' => 'admin.fields.event.highlighted',
                 'required' => false,
             ))
             ->end()
@@ -333,18 +317,12 @@ class EventAdmin extends Admin
     {
         $this->setCoord($event);
         $this->checkRegistration($event);
-        $this->checkHighlighted($event);
     }
 
     public function preUpdate($event)
     {
-        $dm = $this->getConfigurationPool()->getContainer()->get('Doctrine')->getManager();
-        $uow = $dm->getUnitOfWork();
-        $originalEvent = $uow->getOriginalEntityData($event);
-
         $this->setCoord($event);
         $this->checkRegistration($event);
-        $this->checkHighlighted($event, $originalEvent);
     }
 
     private function checkRegistration($event)

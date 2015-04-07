@@ -3,12 +3,15 @@
 namespace Capco\AdminBundle\Admin;
 
 use Sonata\AdminBundle\Admin\Admin;
-use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
-use Sonata\AdminBundle\Show\ShowMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
 use Capco\AppBundle\Entity\HighlightedContent;
+use Capco\AppBundle\Entity\HighlightedPost;
+use Capco\AppBundle\Entity\HighlightedEvent;
+use Capco\AppBundle\Entity\HighlightedTheme;
+use Capco\AppBundle\Entity\HighlightedIdea;
+use Capco\AppBundle\Entity\HighlightedConsultation;
 
 class HighlightedContentAdmin extends Admin
 {
@@ -16,15 +19,6 @@ class HighlightedContentAdmin extends Admin
         '_sort_order' => 'ASC',
         '_sort_by' => 'position',
     );
-
-    /**
-     * @param DatagridMapper $datagridMapper
-     */
-    protected function configureDatagridFilters(DatagridMapper $datagridMapper)
-    {
-        $datagridMapper
-        ;
-    }
 
     /**
      * @param ListMapper $listMapper
@@ -46,26 +40,11 @@ class HighlightedContentAdmin extends Admin
                     ),
                 ),
             ))
-            ->add('post', null, array(
-                'label' => 'admin.fields.highlighted_content.post',
-                'required' => false,
-            ))
-            ->add('consultation', null, array(
-                'label' => 'admin.fields.highlighted_content.consultation',
-                'required' => false,
-            ))
-            ->add('idea', null, array(
-                'label' => 'admin.fields.highlighted_content.idea',
-                'required' => false,
-            ))
-            ->add('event', null, array(
-                'label' => 'admin.fields.highlighted_content.event',
-                'required' => false,
-            ))
-            ->add('theme', null, array(
-                'label' => 'admin.fields.highlighted_content.theme',
-                'required' => false,
-            ))
+            ->add('object', null, [
+                  'label' => 'admin.fields.highlighted_content.object',
+                  'mapped' => false,
+                  'template' => 'CapcoAdminBundle:HighlightedContent:list__object.html.twig',
+            ])
             ->add('_action', 'actions', array(
                 'actions' => array(
                     'edit' => array(),
@@ -88,44 +67,35 @@ class HighlightedContentAdmin extends Admin
             ))
         ;
 
-        if ($subject instanceof \Capco\AppBundle\Entity\HighlightedPost) {
+        if ($subject instanceof HighlightedPost) {
             $formMapper
                 ->add('post', 'sonata_type_model', array(
                     'label' => 'admin.fields.highlighted_content.post',
                     'class' => 'Capco\AppBundle\Entity\Post',
                 ))
             ;
-
-        }
-
-        if ($subject instanceof \Capco\AppBundle\Entity\HighlightedConsultation) {
+        } elseif ($subject instanceof HighlightedConsultation) {
             $formMapper
                 ->add('consultation', 'sonata_type_model', array(
                     'label' => 'admin.fields.highlighted_content.consultation',
                     'class' => 'Capco\AppBundle\Entity\Consultation',
                 ))
             ;
-        }
-
-        if ($subject instanceof \Capco\AppBundle\Entity\HighlightedIdea) {
+        } elseif ($subject instanceof HighlightedIdea) {
             $formMapper
                 ->add('idea', 'sonata_type_model', array(
                     'label' => 'admin.fields.highlighted_content.idea',
                     'class' => 'Capco\AppBundle\Entity\Idea',
                 ))
             ;
-        }
-
-        if ($subject instanceof \Capco\AppBundle\Entity\HighlightedEvent) {
+        } elseif ($subject instanceof HighlightedEvent) {
             $formMapper
                 ->add('event', 'sonata_type_model', array(
                     'label' => 'admin.fields.highlighted_content.event',
                     'class' => 'Capco\AppBundle\Entity\Event',
                 ))
             ;
-        }
-
-        if ($subject instanceof \Capco\AppBundle\Entity\HighlightedTheme) {
+        } elseif ($subject instanceof HighlightedTheme) {
             $formMapper
                 ->add('theme', 'sonata_type_model', array(
                     'label' => 'admin.fields.highlighted_content.theme',
@@ -135,15 +105,9 @@ class HighlightedContentAdmin extends Admin
         }
     }
 
-    public function getBatchActions()
-    {
-        return array();
-    }
-
     protected function configureRoutes(RouteCollection $collection)
     {
         $collection->add('down', $this->getRouterIdParameter().'/down');
         $collection->add('up', $this->getRouterIdParameter().'/up');
     }
-
 }

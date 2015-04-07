@@ -247,4 +247,4 @@ services:
             - {name: sonata.admin, manager_type: orm, group: admin.group.content, label: admin.label.highlighted}
         calls:
             - [ setTranslationDomain, [SonataAdminBundle]]
-            - [ setSubClasses, [{highlighted_post: Capco\AppBundle\Entity\HighlightedPost, highlighted_idea: Capco\AppBundle\Entity\HighlightedIdea, highlighted_theme: Capco\AppBundle\Entity\HighlightedTheme, highlighted_event: Capco\AppBundle\Entity\HighlightedEvent, highlighted_consultation: Capco\AppBundle\Entity\HighlightedPost, highlighted_post: Capco\AppBundle\Entity\HighlightedPost }]]
+            - [ setSubClasses, [{highlighted_post: Capco\AppBundle\Entity\HighlightedPost, highlighted_idea: Capco\AppBundle\Entity\HighlightedIdea, highlighted_theme: Capco\AppBundle\Entity\HighlightedTheme, highlighted_event: Capco\AppBundle\Entity\HighlightedEvent, highlighted_consultation: Capco\AppBundle\Entity\HighlightedConsultation}]]

@@ -6,8 +6,6 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Validator\Constraints as Assert;
-use Capco\AppBundle\Traits\HighlitableTrait;
-
 
 /**
  * Theme.
@@ -34,8 +32,6 @@ class Theme
         self::STATUS_OPENED => 'theme.show.status.opened',
         self::STATUS_FUTURE => 'theme.show.status.future',
     ];
-
-    use HighlitableTrait;
 
     /**
      * @var int

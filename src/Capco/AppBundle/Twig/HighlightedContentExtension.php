@@ -34,13 +34,13 @@ class HighlightedContentExtension extends \Twig_Extension
         );
     }
 
-    public function isFirstHighlightedContent($section)
+    public function isFirstHighlightedContent($content)
     {
-        return $this->resolver->isFirst($section);
+        return $this->resolver->isFirst($content);
     }
 
-    public function isLastHighlightedContent($section)
+    public function isLastHighlightedContent($content)
     {
-        return $this->resolver->isLast($section);
+        return $this->resolver->isLast($content);
     }
 }

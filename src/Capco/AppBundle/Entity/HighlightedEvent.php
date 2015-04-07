@@ -33,10 +33,25 @@ class HighlightedEvent extends HighlightedContent
      *
      * @return self
      */
-    public function setEvent($event)
+    public function setEvent(Event $event)
     {
         $this->event = $event;
 
         return $this;
+    }
+
+    public function getContent()
+    {
+        return $this->event;
+    }
+
+    public function getType()
+    {
+        return 'event';
+    }
+
+    public function getMedia()
+    {
+        return $this->event->getMedia();
     }
 }

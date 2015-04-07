@@ -4,8 +4,7 @@ Capco\AppBundle\Entity\Section:
         title: A la une
         position: 1
         teaser: null
-        body: |
-            <p>Introduisez ici votre démarche et vos objectifs.</p>
+        body: null
         nbObjects: null
         enabled: true
         associatedFeatures: []

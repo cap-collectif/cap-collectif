@@ -14,10 +14,15 @@ class HighlightedContentRepository extends EntityRepository implements Positiona
      *
      * @return mixed
      */
-    public function getAllOrderedByPosition()
+    public function getAllOrderedByPosition($limit = null)
     {
         $qb = $this->createQueryBuilder('s')
-            ->orderBy('s.position', 'ASC');
+            ->orderBy('s.position', 'ASC')
+        ;
+
+        if ($limit) {
+            $qb->setMaxResults($limit);
+        }
 
         return $qb
             ->getQuery()

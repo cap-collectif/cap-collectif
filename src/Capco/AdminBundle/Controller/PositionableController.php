@@ -7,8 +7,6 @@ use Sonata\AdminBundle\Controller\CRUDController as Controller;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
-use Capco\AppBundle\Resolver\PositionableResolver;
-
 class PositionableController extends Controller
 {
     private $resolverName;
@@ -17,11 +15,6 @@ class PositionableController extends Controller
     {
         $this->resolverName = $resolverName;
     }
-
-    // public function setResolver(PositionableResolver $resolver)
-    // {
-    //     $this->resolver = $resolver;
-    // }
 
     public function upAction()
     {

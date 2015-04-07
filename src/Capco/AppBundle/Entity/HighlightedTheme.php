@@ -2,9 +2,7 @@
 
 namespace Capco\AppBundle\Entity;
 
-use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
-use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * HighlightedTheme.
@@ -35,10 +33,25 @@ class HighlightedTheme extends HighlightedContent
      *
      * @return self
      */
-    public function setTheme($theme)
+    public function setTheme(Theme $theme)
     {
         $this->theme = $theme;
 
         return $this;
+    }
+
+    public function getContent()
+    {
+        return $this->theme;
+    }
+
+    public function getType()
+    {
+        return 'theme';
+    }
+
+    public function getMedia()
+    {
+        return $this->theme->getMedia();
     }
 }

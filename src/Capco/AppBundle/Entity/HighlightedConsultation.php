@@ -33,10 +33,25 @@ class HighlightedConsultation extends HighlightedContent
      *
      * @return self
      */
-    public function setConsultation($consultation)
+    public function setConsultation(Consultation $consultation)
     {
         $this->consultation = $consultation;
 
         return $this;
+    }
+
+    public function getType()
+    {
+        return 'consultation';
+    }
+
+    public function getContent()
+    {
+        return $this->consultation;
+    }
+
+    public function getMedia()
+    {
+        return $this->consultation->getCover();
     }
 }

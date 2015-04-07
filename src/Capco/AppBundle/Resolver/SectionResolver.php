@@ -2,7 +2,6 @@
 
 namespace Capco\AppBundle\Resolver;
 
-use Capco\AppBundle\Entity\Section;
 use Capco\AppBundle\Repository\SectionRepository;
 use Capco\AppBundle\Toggle\Manager;
 

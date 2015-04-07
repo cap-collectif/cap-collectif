@@ -56,13 +56,12 @@ class HomepageController extends Controller
     /**
      * @Template("CapcoAppBundle:Homepage:highlighted.html.twig")
      */
-    public function highlightedAction($max = 4, $offset = 0, $section = null, $alt = null)
+    public function highlightedContentAction($max = 4, $offset = 0, $section = null, $alt = null)
     {
-
-        $highlighted = $this->getDoctrine()->getRepository('CapcoAppBundle:Theme')->getLast($max, $offset);
+        $highlighteds = $this->getDoctrine()->getRepository('CapcoAppBundle:HighlightedContent')->getAllOrderedByPosition(5);
 
         return [
-            'videos' => $videos,
+            'highlighteds' => $highlighteds,
             'section' => $section,
             'alt' => $alt,
         ];

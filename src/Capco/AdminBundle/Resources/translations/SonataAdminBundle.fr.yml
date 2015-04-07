@@ -117,7 +117,6 @@ admin:
       consultations: Consultations
       is_commentable: Commentable
       comments_count: Nombre de commentaires
-      highlighted: Promu en page d'accueil
     category:
       title: Titre
       sources: Sources
@@ -174,7 +173,6 @@ admin:
       events: Évènements
       posts_count: Articles
       posts: Articles
-      highlighted: Promu en page d'accueil
     consultation_type:
       title: Titre
       opinion_types: Types de proposition
@@ -206,7 +204,6 @@ admin:
       lat: Latitude
       lng: Longitude
       registration_enable: Module d'inscription interne
-      highlighted: Promu en page d'accueil
     event_registration:
       event: Événement
       registered: Inscrit
@@ -224,6 +221,7 @@ admin:
       created_at: Création
       updated_at: Mise à jour
     highlighted_content:
+      object: Contenu
       post: Article
       theme: Thème
       consultation: Consultation
@@ -246,7 +244,6 @@ admin:
       trashed_reason: Raison de la mise en corbeille
       trashed_at: Mise à la corbeille
       media: Image
-      highlighted: Promu en page d'accueil
     idea_vote:
       idea: Idée
       user: Auteur
@@ -400,7 +397,6 @@ admin:
       posts_count: Articles
       position: Position
       no_status: Aucun statut
-      highlighted: Promu en page d'accueil
     user:
       username: Nom
       email: Email
@@ -508,3 +504,12 @@ user:
   delete:
     batch_denied: Impossible de supprimer un super administrateur.
     warning_message: Attention, si vous supprimez cet utilisateur, tous ses contenus seront également supprimés.
+
+highlighted_post: un article
+highlighted_idea: une idée
+highlighted_theme: un thème
+highlighted_event: un événement
+highlighted_consultation: une consultation
+idea_comment: un commentaire sur une idée
+event_comment: un commentaire sur un événement
+post_comment: un commentaire sur un article

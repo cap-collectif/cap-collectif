@@ -39,4 +39,24 @@ class HighlightedIdea extends HighlightedContent
 
         return $this;
     }
+
+    public function getContent()
+    {
+        return $this->idea;
+    }
+
+    public function getType()
+    {
+        return 'idea';
+    }
+
+    public function getMedia()
+    {
+        return $this->idea->getMedia();
+    }
+
+    public function getMediaFormat()
+    {
+        return 'idea';
+    }
 }

@@ -2,9 +2,7 @@
 
 namespace Capco\AppBundle\Entity;
 
-use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
-use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * HighlightedPost.
@@ -35,10 +33,25 @@ class HighlightedPost extends HighlightedContent
      *
      * @return self
      */
-    public function setPost($post)
+    public function setPost(Post $post)
     {
         $this->post = $post;
 
         return $this;
+    }
+
+    public function getContent()
+    {
+        return $this->post;
+    }
+
+    public function getType()
+    {
+        return 'blog';
+    }
+
+    public function getMedia()
+    {
+        return $this->post->getMedia();
     }
 }

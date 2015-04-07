@@ -15,6 +15,12 @@ use Symfony\Component\Validator\Constraints as Assert;
 class Section
 {
     public static $fieldsForType = [
+        'highlight' => [
+            'title' => true,
+            'teaser' => false,
+            'body' => false,
+            'nbObjects' => false,
+        ],
         'introduction' => [
             'title' => true,
             'teaser' => true,

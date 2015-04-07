@@ -11,7 +11,6 @@ use Sonata\CoreBundle\Model\Metadata;
 
 class IdeaAdmin extends Admin
 {
-
     protected $datagridValues = array(
         '_sort_order' => 'ASC',
         '_sort_by' => 'title',
@@ -49,9 +48,6 @@ class IdeaAdmin extends Admin
             ))
             ->add('isCommentable', null, array(
                 'label' => 'admin.fields.idea.is_commentable',
-            ))
-            ->add('highlighted', null, array(
-                'label' => 'admin.fields.blog_post.highlighted',
             ))
             ->add('updatedAt', null, array(
                 'label' => 'admin.fields.idea.updated_at',
@@ -98,10 +94,6 @@ class IdeaAdmin extends Admin
                 'label' => 'admin.fields.idea.is_commentable',
                 'editable' => true,
             ))
-            ->add('highlighted', null, array(
-                'label' => 'admin.fields.blog_post.highlighted',
-                'editable' => true,
-            ))
             ->add('updatedAt', null, array(
                 'label' => 'admin.fields.idea.updated_at',
             ))
@@ -130,10 +122,6 @@ class IdeaAdmin extends Admin
             ))
             ->add('isCommentable', null, array(
                 'label' => 'admin.fields.idea.is_commentable',
-                'required' => false,
-            ))
-            ->add('highlighted', null, array(
-                'label' => 'admin.fields.idea.highlighted',
                 'required' => false,
             ))
             ->add('Author', 'sonata_type_model', array(
@@ -220,9 +208,6 @@ class IdeaAdmin extends Admin
             ->add('isCommentable', null, array(
                 'label' => 'admin.fields.idea.is_commentable',
             ))
-            ->add('highlighted', null, array(
-                'label' => 'admin.fields.event.highlighted',
-            ))
             ->add('commentsCount', null, array(
                 'label' => 'admin.fields.idea.comments_count',
             ))
@@ -269,19 +254,5 @@ class IdeaAdmin extends Admin
         return array(
             'ideas',
         );
-    }
-
-    public function prePersist($idea)
-    {
-        $this->checkHighlighted($idea);
-    }
-
-    public function preUpdate($idea)
-    {
-        $dm = $this->getConfigurationPool()->getContainer()->get('Doctrine')->getManager();
-        $uow = $dm->getUnitOfWork();
-        $originalIdea = $uow->getOriginalEntityData($idea);
-
-        $this->checkHighlighted($idea, $originalIdea);
     }
 }

@@ -226,28 +226,6 @@ class EventRepository extends EntityRepository
             ->execute();
     }
 
-    /**
-     * Get highlighted Events.
-     *
-     * @return mixed
-     */
-    public function getHighlighted()
-    {
-        $qb = $this->getIsEnabledQueryBuilder()
-            ->addSelect('a', 'media')
-            ->leftJoin('e.Author', 'a')
-            ->leftJoin('e.Media', 'media')
-            ->andWhere('e.highlighted = true')
-            ->orderBy('e.highlightedAt', 'DESC')
-            ->setMaxResults(5)
-            ;
-
-        return $qb
-            ->getQuery()
-            ->execute();
-    }
-
-
     protected function getIsEnabledQueryBuilder()
     {
         return $this->createQueryBuilder('e')
