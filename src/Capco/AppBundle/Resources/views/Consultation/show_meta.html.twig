@@ -11,19 +11,7 @@
                         <div class="navbar__step">
                             <h3 class="navbar__step-title">{{ step.title}}  <i class="pull-right  excerpt  cap-arrow-66"></i></h3>
                             <p class="excerpt h5">
-                                {%  set startDay = step.startAt | localizeddate('full', 'none', app.request.locale) %}
-                                {% set startTime = step.startAt | localizeddate('none', 'short', app.request.locale) %}
-                                {% if step.endAt is not null %}
-                                    {% set endTime = step.endAt | localizeddate('none', 'short', app.request.locale) %}
-                                    {% set endDay = step.endAt | localizeddate('full', 'none', app.request.locale) %}
-                                {% endif %}
-                                {% if step.endAt is null %}
-                                    {{ 'consultation.show.meta.step.on_full_day'|trans({'%date%': startDay, '%time%': startTime}, 'CapcoAppBundle') }}
-                                {% elseif step.lastOneDay %}
-                                    {{ 'consultation.show.meta.step.on_part_day' | trans({'%date%': startDay, '%start_time%': startTime, '%end_time%': endTime}, 'CapcoAppBundle') }}
-                                {% else %}
-                                    {{ 'consultation.show.meta.step.between_dates'|trans({'%start%': startDay, '%end%': endDay}, 'CapcoAppBundle') }}
-                                {% endif %}
+                                {% include 'CapcoAppBundle:Default:print_date.html.twig' with {'object': step} only %}
                             </p>
                             <p class="label label-default">
                                 {{ stepStatus[step.openingStatus] | trans({}, 'CapcoAppBundle') }}

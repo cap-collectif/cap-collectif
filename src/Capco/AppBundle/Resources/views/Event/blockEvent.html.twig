@@ -17,19 +17,7 @@
                 {% endfor %}
             </p>
             <p class="h5  excerpt"><i class="cap-calendar-1"></i>
-                {%  set startDay = event.startAt | localizeddate('full', 'none', app.request.locale) %}
-                {% set startTime = event.startAt | localizeddate('none', 'short', app.request.locale) %}
-                {% if event.endAt is not null %}
-                    {% set endTime = event.endAt | localizeddate('none', 'short', app.request.locale) %}
-                    {% set endDay = event.endAt | localizeddate('full', 'none', app.request.locale) %}
-                {% endif %}
-                {% if event.endAt is null %}
-                    {{ 'event.on_full_day'|trans({'%date%': startDay, '%time%': startTime}, 'CapcoAppBundle') }}
-                {% elseif event.lastOneDay %}
-                    {{ 'event.on_part_day' | trans({'%date%': startDay, '%start_time%': startTime, '%end_time%': endTime}, 'CapcoAppBundle') }}
-                {% else %}
-                    {{ 'event.between_dates'|trans({'%start%': startDay, '%end%': endDay}, 'CapcoAppBundle') }}
-                {% endif %}
+                {% include 'CapcoAppBundle:Default:print_date.html.twig' with {'object': event} only %}
             </p>
             {% if (event.address) or (event.zipCode) or (event.city) %}
             <p class="h5  excerpt"><i class="cap-marker-1"></i> {{ event.address }}, {{ event.zipCode }} {{ event.city }}</p>

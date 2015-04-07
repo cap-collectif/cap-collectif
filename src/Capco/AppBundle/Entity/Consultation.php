@@ -707,7 +707,7 @@ class Consultation
             }
         }
 
-        return null;
+        return;
     }
 
     /**
@@ -719,7 +719,7 @@ class Consultation
             return $consultationStep->getStartAt();
         }
 
-        return null;
+        return;
     }
 
     /**
@@ -731,7 +731,7 @@ class Consultation
             return $consultationStep->getEndAt();
         }
 
-        return null;
+        return;
     }
 
     /**
@@ -739,6 +739,7 @@ class Consultation
     public function getRemainingDays()
     {
         $consultationStep = $this->getConsultationStep();
+
         return $consultationStep->getRemainingDays();
     }
 
@@ -750,6 +751,7 @@ class Consultation
     public function isOpen()
     {
         $consultationStep = $this->getConsultationStep();
+
         return $consultationStep->isOpen();
     }
 
@@ -761,6 +763,7 @@ class Consultation
     public function isFuture()
     {
         $consultationStep = $this->getConsultationStep();
+
         return $consultationStep->isFuture();
     }
 
@@ -772,6 +775,7 @@ class Consultation
     public function isClosed()
     {
         $consultationStep = $this->getConsultationStep();
+
         return $consultationStep->isClosed();
     }
 
@@ -791,7 +795,7 @@ class Consultation
             return self::OPENING_STATUS_OPENED;
         }
 
-        return null;
+        return;
     }
 
     /**

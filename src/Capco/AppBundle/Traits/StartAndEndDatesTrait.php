@@ -120,10 +120,11 @@ trait StartAndEndDatesTrait
             if (null != $this->endAt) {
                 return $this->endAt->diff($now)->format('%a');
             }
+
             return $this->startAt->diff($now)->format('%a');
         }
 
-        return null;
+        return;
     }
 
     public function isOpen()
@@ -151,6 +152,7 @@ trait StartAndEndDatesTrait
     public function isFuture()
     {
         $now = new \DateTime();
+
         return $this->startAt > $now;
     }
 
@@ -169,6 +171,6 @@ trait StartAndEndDatesTrait
             return 'open';
         }
 
-        return null;
+        return;
     }
 }
