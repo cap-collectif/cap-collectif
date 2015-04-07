@@ -13,12 +13,16 @@ class RequestListener
     protected $manager;
     protected $translator;
     protected $siteParameterResolver;
+    protected $shieldLogin;
+    protected $shieldPwd;
 
-    public function __construct(Manager $manager, TranslatorInterface $translator, Resolver $siteParameterResolver)
+    public function __construct(Manager $manager, TranslatorInterface $translator, Resolver $siteParameterResolver, $shieldLogin = null, $shieldPwd = null)
     {
         $this->manager = $manager;
         $this->translator = $translator;
         $this->siteParameterResolver = $siteParameterResolver;
+        $this->shieldLogin = $shieldLogin;
+        $this->shieldPwd = $shieldPwd;
     }
 
     public function onKernelRequest(GetResponseEvent $event)
@@ -27,6 +31,8 @@ class RequestListener
 
         // Shield mode activated
         if ($this->manager->isActive('shield_mode')) {
+
+            // Normal authentication
             $username = $this->siteParameterResolver->getValue('security.shield_mode.username');
             if (null == $username) {
                 $username = 'admin';
@@ -34,7 +40,12 @@ class RequestListener
             $pwd = $this->siteParameterResolver->getValue('security.shield_mode.password');
             $authString = base64_encode($username.':'.$pwd);
 
-            if (false == strpos($request->headers->get('Authorization'), $authString)) {
+            //Maintenance authentication
+            $maintenanceAuthString = base64_encode($this->shieldLogin.':'.$this->shieldPwd);
+
+            $header = $request->headers->get('Authorization');
+
+            if (false == strpos($header, $authString) && false == strpos($header, $maintenanceAuthString)) {
                 $event->setResponse(new Response('Access restricted'));
                 $event->getResponse()->headers->set('WWW-Authenticate', 'Basic realm="Member Area"');
                 $event->getResponse()->setStatusCode('401');

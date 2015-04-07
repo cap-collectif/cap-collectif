@@ -29,3 +29,6 @@ parameters:
     registration_sender_name: Cap Collectif
 
     redis_prefix: dev
+
+    shield_login: admin
+    shield_pwd: admin
