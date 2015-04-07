@@ -102,21 +102,21 @@ class CommentAdmin extends Admin
             $showMapper
                 ->add('idea', 'sonata_type_model', array(
                     'label' => 'admin.fields.comment.idea',
-                    'class' => 'Capco\AppBundle\Entity\Idea'
+                    'class' => 'Capco\AppBundle\Entity\Idea',
                 ))
             ;
-        } else if ($subject instanceof EventComment) {
+        } elseif ($subject instanceof EventComment) {
             $showMapper
                 ->add('event', 'sonata_type_model', array(
                     'label' => 'admin.fields.comment.idea',
-                    'class' => 'Capco\AppBundle\Entity\Event'
+                    'class' => 'Capco\AppBundle\Entity\Event',
                 ))
             ;
-        } else if ($subject instanceof PostComment) {
+        } elseif ($subject instanceof PostComment) {
             $showMapper
                 ->add('post', 'sonata_type_model', array(
                     'label' => 'admin.fields.comment.idea',
-                    'class' => 'Capco\AppBundle\Entity\Post'
+                    'class' => 'Capco\AppBundle\Entity\Post',
                 ))
             ;
         }
@@ -188,21 +188,21 @@ class CommentAdmin extends Admin
             $formMapper
                 ->add('idea', 'sonata_type_model', array(
                     'label' => 'admin.fields.comment.idea',
-                    'class' => 'Capco\AppBundle\Entity\Idea'
+                    'class' => 'Capco\AppBundle\Entity\Idea',
                 ))
             ;
-        } else if ($subject instanceof EventComment) {
+        } elseif ($subject instanceof EventComment) {
             $formMapper
                 ->add('event', 'sonata_type_model', array(
                     'label' => 'admin.fields.comment.idea',
-                    'class' => 'Capco\AppBundle\Entity\Event'
+                    'class' => 'Capco\AppBundle\Entity\Event',
                 ))
             ;
-        } else if ($subject instanceof PostComment) {
+        } elseif ($subject instanceof PostComment) {
             $formMapper
                 ->add('post', 'sonata_type_model', array(
                     'label' => 'admin.fields.comment.idea',
-                    'class' => 'Capco\AppBundle\Entity\Post'
+                    'class' => 'Capco\AppBundle\Entity\Post',
                 ))
             ;
         }
