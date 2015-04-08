@@ -11,20 +11,10 @@
                         <div class="navbar__step">
                             <h3 class="navbar__step-title">{{ step.title}}  <i class="pull-right  excerpt  cap-arrow-66"></i></h3>
                             <p class="excerpt h5">
-                                {% if step.startAt == step.endAt %}
-                                    {{ 'consultation.meta.step.on_date' | trans({'%date%': step.startAt | localizeddate('full', 'none', app.request.locale)}, 'CapcoAppBundle') }}
-                                {% else %}
-                                    {{ 'consultation.show.meta.step.between_dates' | trans({'%start%': step.startAt | localizeddate('full', 'none', app.request.locale), '%end%': step.endAt | localizeddate('full', 'none', app.request.locale)}, 'CapcoAppBundle') }}
-                                {% endif %}
+                                {% include 'CapcoAppBundle:Default:print_date.html.twig' with {'object': step} only %}
                             </p>
                             <p class="label label-default">
-                                {% if now < step.startAt %}
-                                    {{ stepStatus['future'] | trans({}, 'CapcoAppBundle') }}
-                                {% elseif now > step.endAt %}
-                                    {{ stepStatus['closed'] | trans({}, 'CapcoAppBundle') }}
-                                {% else %}
-                                    {{ stepStatus['open'] | trans({}, 'CapcoAppBundle') }}
-                                {% endif %}
+                                {{ stepStatus[step.openingStatus] | trans({}, 'CapcoAppBundle') }}
                             </p>
                         </div>
                     </a>

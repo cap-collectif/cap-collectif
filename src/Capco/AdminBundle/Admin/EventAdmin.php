@@ -154,7 +154,8 @@ class EventAdmin extends Admin
                 'attr' => array(
                     'data-date-format' => 'DD/MM/YYYY HH:mm',
                 ),
-                'help' => 'admin.help.step.endAt',
+                'help' => 'admin.help.event.endAt',
+                'required' => false,
             ))
             ->end()
             ->with('admin.fields.event.group_meta')

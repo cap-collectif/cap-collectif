@@ -264,8 +264,6 @@ consultation:
         title: Introduction
       step:
         title: Étapes
-        on_date: Le %date%
-        between_dates: Du %start% au %end%
       info:
         title: Informations
         posts: Actualités
@@ -314,8 +312,6 @@ step:
     closed: Terminé
     open: En cours
     future: À venir
-  on_date: Le %date%
-  between_dates: Du %start% au %end%
 
 argument:
   create:
@@ -666,8 +662,6 @@ event:
   archived: Évènements passés
   no_event: "Aucun évènement n'a été publié"
   written_by: "par"
-  on_date: le %date%
-  between_dates: du %start% au %end%
   see_all: Voir tous les évènements
   see_archived: Voir les évènements passés
   none: "Il n'y a aucun évènement."
@@ -677,7 +671,7 @@ event:
     comments: "]-Inf, 0] Aucun commentaire | {1} 1 commentaire | ]1,Inf[ %count% commentaires"
     consultations:
       title: "]-Inf, 1] Consultation liée : | ]1, Inf[ Consultations liées :"
-  link_button: Inscrption
+  link_button: Inscription
   no_result:  Aucun évènement ne correspond à ces critères de recherche.
   and: et
   searchform:
@@ -834,3 +828,8 @@ idea_vote:
         unsubscribe: Annuler mon soutien
     create:
         my_account: M'inscrire avec mon compte
+
+dates:
+  full_day: Le %date% à %time%
+  part_day: Le %date% de %start_time% à %end_time%
+  between: Du %start% au %end%
