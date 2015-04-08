@@ -84,7 +84,8 @@
           $('[data-toggle="tooltip"]').tooltip();
         });
         document.addEventListener('DOMContentLoaded', function(event) {
-            cookieChoices.showCookieConsentBar('Your message for visitors here',
+            cookieChoices.showCookieConsentBar(
+                {{ 'cnil.message' | trans({}, 'CapcoAppBundle') }},
               'close message', 'learn more', 'http://example.com');
         });
     </script>
