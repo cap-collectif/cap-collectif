@@ -132,11 +132,15 @@ class IdeaAdmin extends Admin
         if ($this->getConfigurationPool()->getContainer()->get('capco.toggle.manager')->isActive('themes')) {
             $formMapper->add('Theme', 'sonata_type_model', array(
                 'label' => 'admin.fields.idea.theme',
-                'required' => false,
+                'required' => true,
             ));
         }
 
         $formMapper
+            ->add('object', 'ckeditor', array(
+                'label' => 'admin.fields.idea.object',
+                'config_name' => 'admin_editor',
+            ))
             ->add('body', 'ckeditor', array(
                 'label' => 'admin.fields.idea.body',
                 'config_name' => 'admin_editor',
@@ -172,6 +176,9 @@ class IdeaAdmin extends Admin
         $showMapper
             ->add('title', null, array(
                 'label' => 'admin.fields.idea.title',
+            ))
+            ->add('object', null, array(
+                'label' => 'admin.fields.idea.object',
             ))
             ->add('body', null, array(
                 'label' => 'admin.fields.idea.body',
