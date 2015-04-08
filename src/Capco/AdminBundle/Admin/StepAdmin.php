@@ -132,7 +132,6 @@ class StepAdmin extends Admin
                     'data-date-format' => 'DD/MM/YYYY HH:mm',
                 ),
                 'help' => 'admin.help.step.endAt',
-                'required' => false,
             ))
             ->add('body', 'ckeditor', array(
                 'config_name' => 'admin_editor',

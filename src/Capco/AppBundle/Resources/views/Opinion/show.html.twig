@@ -16,7 +16,7 @@
 
     <div class="container  container--custom">
 
-        {% if consultation.isClosed %}
+        {% if consultation.isClose %}
             <div class="alert alert-info alert-dismissible  block" role="alert">
                 <p><strong>{{ 'consultation.show.alert.ended.title'|trans({}, 'CapcoAppBundle') }}</strong> {{ 'consultation.show.alert.ended.text'|trans({}, 'CapcoAppBundle') }}</p>
             </div>

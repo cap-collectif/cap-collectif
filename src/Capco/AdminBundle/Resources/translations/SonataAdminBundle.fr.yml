@@ -54,7 +54,7 @@ admin.label.section: Accueil
 admin:
   help:
     step:
-      endAt: Si l'étape ne dure qu'une journée, ne renseignez pas de date de fin.
+      endAt: Si l'étape ne dure qu'une journée, renseignez la même date que pour la date de début.
     consultation:
       consultation_type: Créez de nouveaux modèles dans la section "Types de consultation".
       closed_at: Si la consultation ne dure qu'une journée, renseignez la même date que pour la date de début.
@@ -75,7 +75,6 @@ admin:
       author: Il est obligatoire de spécifier soit un auteur, soit un nom et une adresse email.
     event:
       adress: Il est nécessaire de spécifier au moins l'adresse et la ville pour afficher la carte.
-      endAt: Si l'évènement ne dure qu'une journée, ne renseignez pas de date de fin.
 
   features:
     title:

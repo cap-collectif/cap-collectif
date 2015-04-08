@@ -49,7 +49,11 @@
 
                     <ul class="event__meta  block">
                         <li class="excerpt"><i class="cap cap-calendar-1"></i>
-                            {% include 'CapcoAppBundle:Default:print_date.html.twig' with {'object': event} only %}
+                            {% if event.startAt == event.endAt %}
+                                {{ 'event.on_date'|trans({'%date%': (event.startAt | localizeddate('long', 'none', app.request.locale))}, 'CapcoAppBundle') }}
+                            {% else %}
+                                {{ 'event.between_dates'|trans({'%start%': (event.startAt | localizeddate('long', 'none', app.request.locale)), '%end%': (event.endAt | localizeddate('long', 'none', app.request.locale))}, 'CapcoAppBundle') }}
+                            {% endif %}
                         </li>
                         {% if event.address or event.zipCode or event.city %}
                         <li class="excerpt">

@@ -40,16 +40,14 @@
                 <p>
                     {% if consultation.isOpen %}
                         <span class="label label-success">{{ 'consultation.show.status.opened'|trans({}, 'CapcoAppBundle') }}</span>
-                    {% endif %}
-                    {% if consultation.isClosed %}
+                    {% elseif consultation.isClose %}
                         <span class="label label-danger">{{ 'consultation.show.status.ended'|trans({}, 'CapcoAppBundle') }}</span>
-                    {% endif %}
-                    {% if consultation.isFuture %}
+                    {% elseif consultation.isFuture %}
                         <span class="label label-info">{{ 'consultation.show.status.future'|trans({}, 'CapcoAppBundle') }}</span>
                     {% endif %}
                 </p>
-                {% if consultation.isOpen %}
-                    {% set remainingDays = consultation.remainingDays %}
+                {% set remainingDays = consultation.remainingDays %}
+                {% if remainingDays > 0 %}
                     <p class="excerpt  h5"><i class="cap cap-calendar-1"></i>
                         {% transchoice remainingDays with {'%count%': remainingDays} from 'CapcoAppBundle' %}
                             consultation.show.remaining_days

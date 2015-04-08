@@ -59,7 +59,7 @@ Capco\AppBundle\Entity\Event:
         registrationEnable: true
         consultations: [@cs1]
     event4:
-        title: EventOnOneDay
+        title: SymfonyLive2015
         isEnabled: true
         body: |
           <p>Idque Caesaris facere voluntate liceret: sese habere. Paullum deliquit, ponderibus modulisque suis ratio utitur. Vivamus sagittis lacus vel augue laoreet rutrum faucibus.</p>
@@ -71,7 +71,7 @@ Capco\AppBundle\Entity\Event:
              <p>Fictum,  deserunt mollit anim laborum astutumque! Phasellus laoreet lorem vel dolor tempus vehicula. Cras mattis iudicium purus sit amet fermentum. Cum ceteris in veneratione tui montes, nascetur mus.
                 Hi omnes lingua, institutis, legibus inter se differunt. Unam incolunt Belgae, aliam Aquitani, tertiam. Integer legentibus erat a ante historiarum dapibus. Morbi fringilla convallis sapien, id pulvinar odio volutpat. Paullum deliquit, ponderibus modulisque suis ratio utitur.</p>
         startAt: <(new \DateTime('2015-07-23'))>
-        endAt: <(new \DateTime('2015-07-23'))>
+        endAt: <(new \DateTime('2015-07-24'))>
         Author: @user<numberBetween(1, 5)>
         link: http://www.symfonyLive2015.fr
         Media: @MediaIdea1
