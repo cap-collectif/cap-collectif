@@ -59,6 +59,7 @@ gulp.task('concat', function() {
         app + '/libs/bootstrap/assets/javascripts/bootstrap.js',
         app + '/libs/fancybox/source/jquery.fancybox.pack.js',
         app + '/js/googleCharts.js',
+        app + '/js/cookiechoices.js',
         app + '/js/app.js'
     ])
         .pipe(plugins.concat('app.js'))
