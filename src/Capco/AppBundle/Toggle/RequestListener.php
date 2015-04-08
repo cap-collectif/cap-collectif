@@ -32,6 +32,8 @@ class RequestListener
         // Shield mode activated
         if ($this->manager->isActive('shield_mode')) {
 
+            $header = $request->headers->get('Authorization');
+
             // Normal authentication
             $username = $this->siteParameterResolver->getValue('security.shield_mode.username');
             if (null == $username) {
@@ -40,12 +42,13 @@ class RequestListener
             $pwd = $this->siteParameterResolver->getValue('security.shield_mode.password');
             $authString = base64_encode($username.':'.$pwd);
 
-            //Maintenance authentication
-            $maintenanceAuthString = base64_encode($this->shieldLogin.':'.$this->shieldPwd);
+            // Maintenance authentication
+            $maintenanceAuthString = null;
+            if ($this->shieldLogin != null && $this->shieldLogin != '' && $this->shieldPwd != null && $this->shieldPwd != '') {
+                $maintenanceAuthString = base64_encode($this->shieldLogin.':'.$this->shieldPwd);
+            }
 
-            $header = $request->headers->get('Authorization');
-
-            if (false == strpos($header, $authString) && false == strpos($header, $maintenanceAuthString)) {
+            if (false === strpos($header, $authString) && null != $maintenanceAuthString && false === strpos($header, $maintenanceAuthString)) {
                 $event->setResponse(new Response('Access restricted'));
                 $event->getResponse()->headers->set('WWW-Authenticate', 'Basic realm="Member Area"');
                 $event->getResponse()->setStatusCode('401');
