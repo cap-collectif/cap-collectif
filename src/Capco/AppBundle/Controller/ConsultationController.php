@@ -191,8 +191,8 @@ class ConsultationController extends Controller
      */
     public function showEventsAction(Consultation $consultation)
     {
-        $groupedEvents = $this->get('capco.event.resolver')->getEventsGroupedByYearAndMonth(null, $consultation->getSlug(), null);
-        $nbEvents = $this->get('capco.event.resolver')->countEvents(null, $consultation->getSlug(), null);
+        $groupedEvents = $this->get('capco.event.resolver')->getEventsGroupedByYearAndMonth(null, null, $consultation->getSlug(), null);
+        $nbEvents = $this->get('capco.event.resolver')->countEvents(null, null, $consultation->getSlug(), null);
 
         return [
             'consultation' => $consultation,
