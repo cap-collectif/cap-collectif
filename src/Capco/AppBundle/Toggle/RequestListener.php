@@ -31,7 +31,6 @@ class RequestListener
 
         // Shield mode activated
         if ($this->manager->isActive('shield_mode')) {
-
             $header = $request->headers->get('Authorization');
 
             // Normal authentication
