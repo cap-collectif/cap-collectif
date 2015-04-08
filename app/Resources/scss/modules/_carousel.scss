@@ -54,7 +54,7 @@
 }
 
 // sidebar
-@media (min-width :768px) {
+@media (min-width : $screen-xs-min) {
   .carousel-sidebar {
     padding-left: 20px;
   }

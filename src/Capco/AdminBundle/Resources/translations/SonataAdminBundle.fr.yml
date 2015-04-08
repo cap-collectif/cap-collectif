@@ -505,6 +505,7 @@ user:
     batch_denied: Impossible de supprimer un super administrateur.
     warning_message: Attention, si vous supprimez cet utilisateur, tous ses contenus seront également supprimés.
 
+highlighted_content.limit_info: 5 contenus à la une maximum
 highlighted_post: un article
 highlighted_idea: une idée
 highlighted_theme: un thème
