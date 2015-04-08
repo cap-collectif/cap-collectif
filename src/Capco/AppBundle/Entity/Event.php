@@ -21,8 +21,8 @@ use Doctrine\Common\Collections\ArrayCollection;
  */
 class Event implements CommentableInterface
 {
-    use StartAndEndDatesTrait;
     use CommentableTrait;
+    use StartAndEndDatesTrait;
 
     /**
      * @var int

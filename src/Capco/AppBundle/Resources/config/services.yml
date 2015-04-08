@@ -32,9 +32,6 @@ parameters:
     capco.section.repository.class: Capco\AppBundle\Repository\SectionRepository
     capco.section.resolver.class: Capco\AppBundle\Resolver\SectionResolver
     capco.twig.section_resolver.class: Capco\AppBundle\Twig\SectionExtension
-    capco.highlighted.repository.class: Capco\AppBundle\Repository\HighlightedContentRepository
-    capco.highlighted.resolver.class: Capco\AppBundle\Resolver\HighlightedContentResolver
-    capco.twig.highlighted_resolver.class: Capco\AppBundle\Twig\HighlightedContentExtension
     capco.has_theme_if_activated.validator.class: Capco\AppBundle\Validator\Constraints\HasThemeIfActivatedValidator
     capco.help_extension.class: Capco\AppBundle\Form\Extension\HelpExtension
     capco.vote.resolver.class: Capco\AppBundle\Resolver\VoteResolver
@@ -249,30 +246,13 @@ services:
         arguments:
             - Capco\AppBundle\Entity\Section
 
-    capco.highlighted.repository:
-        class: %capco.highlighted.repository.class%
-        factory_service: doctrine.orm.default_entity_manager
-        factory_method: getRepository
-        arguments:
-            - Capco\AppBundle\Entity\HighlightedContent
-
     capco.section.resolver:
         class: %capco.section.resolver.class%
         arguments: [@capco.section.repository, @capco.toggle.manager]
 
-    capco.highlighted.resolver:
-        class: %capco.highlighted.resolver.class%
-        arguments: [@capco.highlighted.repository, @capco.toggle.manager]
-
     capco.twig.section_resolver:
         class: %capco.twig.section_resolver.class%
         arguments: [@capco.section.resolver]
-        tags:
-          - { name: twig.extension }
-
-    capco.twig.highlighted_resolver:
-        class: %capco.twig.highlighted_resolver.class%
-        arguments: [@capco.highlighted.resolver]
         tags:
           - { name: twig.extension }
 

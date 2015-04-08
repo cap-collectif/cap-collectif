@@ -1,17 +1,8 @@
 Capco\AppBundle\Entity\Section:
-    SectionHighlighted:
-        type: highlight
-        title: A la une
-        position: 1
-        teaser: null
-        body: null
-        nbObjects: null
-        enabled: true
-        associatedFeatures: []
     SectionIntro:
         type: introduction
         title: Introduction
-        position: 2
+        position: 1
         teaser: <text(150)>
         body: <text(300)>
         nbObjects: null
@@ -20,7 +11,7 @@ Capco\AppBundle\Entity\Section:
     SectionVideos:
         type: videos
         title: Vidéos
-        position: 3
+        position: 2
         teaser: <text(150)>
         body: null
         nbObjects: 3
@@ -29,7 +20,7 @@ Capco\AppBundle\Entity\Section:
     SectionConsultations:
         type: consultations
         title: Consultations
-        position: 4
+        position: 3
         teaser: <text(150)>
         body: null
         nbObjects: 4
@@ -38,7 +29,7 @@ Capco\AppBundle\Entity\Section:
     SectionThemes:
         type: themes
         title: Thèmes
-        position: 5
+        position: 4
         teaser: <text(150)>
         body: null
         nbObjects: 4
@@ -47,7 +38,7 @@ Capco\AppBundle\Entity\Section:
     SectionIdeas:
         type: ideas
         title: Idées
-        position: 6
+        position: 4
         teaser: <text(150)>
         body: null
         nbObjects: 4
@@ -56,7 +47,7 @@ Capco\AppBundle\Entity\Section:
     SectionNews:
         type: news
         title: Actualités
-        position: 6
+        position: 5
         teaser: <text(150)>
         body: null
         nbObjects: 3
@@ -65,7 +56,7 @@ Capco\AppBundle\Entity\Section:
     SectionEvents:
         type: events
         title: Évènements
-        position: 7
+        position: 6
         teaser: <text(150)>
         body: null
         nbObjects: 3
@@ -74,7 +65,7 @@ Capco\AppBundle\Entity\Section:
     SectionNewsletter:
         type: newsletter
         title: Lettre d'information
-        position: 8
+        position: 7
         teaser: <text(150)>
         body: null
         nbObjects: null
@@ -83,7 +74,7 @@ Capco\AppBundle\Entity\Section:
     SectionSocialNetworks:
         type: social-networks
         title: Restez à l'écoute
-        position: 9
+        position: 8
         teaser: <text(150)>
         body: null
         nbObjects: null
@@ -92,7 +83,7 @@ Capco\AppBundle\Entity\Section:
     SectionFigures:
         type: figures
         title: Chiffres-clés
-        position: 11
+        position: 10
         teaser: <text(150)>
         body: null
         nbObjects: null
@@ -101,7 +92,7 @@ Capco\AppBundle\Entity\Section:
     SectionCustomEnabled:
         type: custom
         title: Section activée
-        position: 12
+        position: 11
         teaser: <text(150)>
         body: <text(300)>
         nbObjects: null
@@ -110,7 +101,7 @@ Capco\AppBundle\Entity\Section:
     SectionCustomDisabled:
         type: custom
         title: Section désactivée
-        position: 13
+        position: 12
         teaser: <text(150)>
         body: <text(300)>
         nbObjects: null

@@ -6,6 +6,3 @@ resetting:
 change_password:
   flash:
     success: Votre mot de passe a bien été modifié.
-
-form:
-  no_type: Sélectionnez une valeur

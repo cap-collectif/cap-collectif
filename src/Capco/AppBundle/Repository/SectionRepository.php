@@ -7,7 +7,7 @@ use Doctrine\ORM\EntityRepository;
 /**
  * SectionRepository.
  */
-class SectionRepository extends EntityRepository implements PositionableRepository
+class SectionRepository extends EntityRepository
 {
     /**
      * Get all sections ordered by position.

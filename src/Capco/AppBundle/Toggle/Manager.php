@@ -23,7 +23,6 @@ class Manager
         'login_gplus',
         'login_twitter',
         'shield_mode',
-        'user_type',
     );
 
     public function __construct(ToggleManager $toggleManager, ContextFactory $contextFactory, $prefix)
@@ -87,10 +86,6 @@ class Manager
 
     public function hasOneActive($names)
     {
-        if (count($names) === 0) {
-            return true;
-        }
-
         foreach ($names as $name) {
             if ($this->isActive($name)) {
                 return true;

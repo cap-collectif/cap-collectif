@@ -60,7 +60,7 @@ class EventController extends Controller
             ));
         }
 
-        $groupedEvents = $this->get('capco.event.resolver')->getEventsGroupedByYearAndMonth(false, $theme, $consultation, $term);
+        $groupedEvents = $this->get('capco.event.resolver')->getEventsGroupedByYearAndMonth($theme, $consultation, $term);
 
         return [
             'years' => $groupedEvents,
@@ -112,7 +112,7 @@ class EventController extends Controller
             ));
         }
 
-        $groupedEvents = $this->get('capco.event.resolver')->getEventsGroupedByYearAndMonth(true, $theme, $consultation, $term);
+        $groupedEvents = $this->get('capco.event.resolver')->getEventsArchivedGroupedByYearAndMonth($theme, $consultation, $term);
 
         return [
             'years' => $groupedEvents,
