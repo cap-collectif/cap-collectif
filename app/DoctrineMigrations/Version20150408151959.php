@@ -26,6 +26,16 @@ class Version20150408151959 extends AbstractMigration
         $this->addSql('ALTER TABLE highlighted_content ADD CONSTRAINT FK_5143CD2871F7E88B FOREIGN KEY (event_id) REFERENCES event (id)');
     }
 
+    public function postUp(Schema $schema)
+    {
+        $this->connection->insert('section', [
+            'position' => 1,
+            'type' => 'highlight',
+            'title' => 'A la une',
+            'enabled' => true
+        ]);
+    }
+
     /**
      * @param Schema $schema
      */
@@ -35,5 +45,10 @@ class Version20150408151959 extends AbstractMigration
         $this->abortIf($this->connection->getDatabasePlatform()->getName() != 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
         $this->addSql('DROP TABLE highlighted_content');
+    }
+
+    public function postDown(Schema $schema)
+    {
+        $this->connection->delete('section', ['type' => 'highlight']);
     }
 }

@@ -87,6 +87,10 @@ class Manager
 
     public function hasOneActive($names)
     {
+        if (count($names) === 0) {
+            return true;
+        }
+
         foreach ($names as $name) {
             if ($this->isActive($name)) {
                 return true;

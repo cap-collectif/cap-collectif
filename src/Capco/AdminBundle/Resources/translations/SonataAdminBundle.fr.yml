@@ -465,7 +465,9 @@ admin:
         denied: Impossible de supprimer cette section.
       move_actions:
         label: Réordonner
-
+    highlighted_content:
+      move_actions:
+        label: Réordonner
 capco:
   module:
     blog: Module de blog

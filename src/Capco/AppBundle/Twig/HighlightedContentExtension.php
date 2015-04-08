@@ -20,7 +20,7 @@ class HighlightedContentExtension extends \Twig_Extension
      */
     public function getName()
     {
-        return 'capco_section_resolver';
+        return 'capco_highlighted_resolver';
     }
 
     /**
@@ -29,8 +29,8 @@ class HighlightedContentExtension extends \Twig_Extension
     public function getFilters()
     {
         return array(
-            new \Twig_SimpleFilter('capco_is_first_section', array($this, 'isFirstHighlightedContent')),
-            new \Twig_SimpleFilter('capco_is_last_section', array($this, 'isLastHighlightedContent')),
+            new \Twig_SimpleFilter('capco_is_first_highlighted', array($this, 'isFirstHighlightedContent')),
+            new \Twig_SimpleFilter('capco_is_last_highlighted', array($this, 'isLastHighlightedContent')),
         );
     }
 

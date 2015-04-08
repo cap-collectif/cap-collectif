@@ -40,6 +40,11 @@ class HighlightedIdea extends HighlightedContent
         return $this;
     }
 
+    public function getAssociatedFeatures()
+    {
+        return ['ideas'];
+    }
+
     public function getContent()
     {
         return $this->idea;

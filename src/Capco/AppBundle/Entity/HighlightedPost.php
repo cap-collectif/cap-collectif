@@ -40,6 +40,11 @@ class HighlightedPost extends HighlightedContent
         return $this;
     }
 
+    public function getAssociatedFeatures()
+    {
+        return ['blog'];
+    }
+
     public function getContent()
     {
         return $this->post;

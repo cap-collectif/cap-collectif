@@ -40,6 +40,11 @@ class HighlightedEvent extends HighlightedContent
         return $this;
     }
 
+    public function getAssociatedFeatures()
+    {
+        return ['calendar'];
+    }
+
     public function getContent()
     {
         return $this->event;

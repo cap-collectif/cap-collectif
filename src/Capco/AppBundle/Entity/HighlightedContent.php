@@ -37,11 +37,7 @@ abstract class HighlightedContent
 
     abstract public function getMedia();
     abstract public function getType();
-
-    public function getAssociatedFeatures()
-    {
-        return [];
-    }
+    abstract public function getAssociatedFeatures();
 
     /**
      * Get id.

@@ -40,6 +40,11 @@ class HighlightedTheme extends HighlightedContent
         return $this;
     }
 
+    public function getAssociatedFeatures()
+    {
+        return ['themes'];
+    }
+
     public function getContent()
     {
         return $this->theme;

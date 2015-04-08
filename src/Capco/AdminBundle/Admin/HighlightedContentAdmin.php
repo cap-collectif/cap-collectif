@@ -27,16 +27,16 @@ class HighlightedContentAdmin extends Admin
     {
         $listMapper
             ->add('move_actions', 'actions', array(
-                'label' => 'admin.action.section.move_actions.label',
+                'label' => 'admin.action.highlighted_content.move_actions.label',
                 'template' => 'SonataAdminBundle:CRUD:list__action.html.twig',
                 'type' => 'action',
                 'code' => 'Action',
                 'actions' => array(
                     'up' => array(
-                        'template' => 'CapcoAdminBundle:Section:list__action_up.html.twig',
+                        'template' => 'CapcoAdminBundle:HighlightedContent:list__action_up.html.twig',
                     ),
                     'down' => array(
-                        'template' => 'CapcoAdminBundle:Section:list__action_down.html.twig',
+                        'template' => 'CapcoAdminBundle:HighlightedContent:list__action_down.html.twig',
                     ),
                 ),
             ))

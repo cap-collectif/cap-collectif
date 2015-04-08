@@ -40,6 +40,11 @@ class HighlightedConsultation extends HighlightedContent
         return $this;
     }
 
+    public function getAssociatedFeatures()
+    {
+        return [];
+    }
+
     public function getType()
     {
         return 'consultation';
