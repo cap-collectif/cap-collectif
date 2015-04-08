@@ -10,7 +10,7 @@
 
 {% block body %}
     <div class="container  container--custom  container--thinner">
-        <h1><a href="{{ url('app_blog_show', {'slug': post.slug}) }}">{{ post.title | jolitypo() }}</a></h1>
+        <h1>{{ post.title | jolitypo() }}</h1>
         {% include 'CapcoAppBundle:Blog:_authors.html.twig' with {'authors': post.Authors, 'themes': post.themes, 'publishedAt': post.publishedAt} %}
     </div>
 
