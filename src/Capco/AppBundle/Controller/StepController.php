@@ -95,6 +95,8 @@ class StepController extends Controller
         $consultation = $em->getRepository('CapcoAppBundle:Consultation')->getOne($consultation_slug);
         $events = $this->get('capco.event.resolver')->getLastByConsultation($consultation_slug, 2);
         $posts = $this->get('capco.blog.post.repository')->getLastPublishedByConsultation($consultation_slug, 2);
+        $nbEvents = $this->get('capco.event.resolver')->countEvents(null, $consultation->getSlug(), null);
+        $nbPosts = $em->getRepository('CapcoAppBundle:Post')->countSearchResults(null, $consultation_slug);
 
         return [
             'consultation' => $consultation,
@@ -102,6 +104,8 @@ class StepController extends Controller
             'currentStep' => $step,
             'events' => $events,
             'posts' => $posts,
+            'nbEvents' => $nbEvents,
+            'nbPosts' => $nbPosts,
         ];
     }
 }
