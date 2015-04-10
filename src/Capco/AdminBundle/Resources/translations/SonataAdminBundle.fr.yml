@@ -220,7 +220,8 @@ admin:
       updated_at: Mise à jour
     idea:
       title: Titre
-      body: Contenu
+      body: Description
+      object: Objectif
       theme: Thème
       vote_count: Nombre de votes
       comments_count: Nombre de commentaires
