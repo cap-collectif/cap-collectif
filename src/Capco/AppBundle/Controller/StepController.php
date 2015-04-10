@@ -93,7 +93,7 @@ class StepController extends Controller
 
         $em = $this->getDoctrine()->getManager();
         $consultation = $em->getRepository('CapcoAppBundle:Consultation')->getOne($consultation_slug);
-        $events = $this->get('capco.event.repository')->getLastByConsultation($consultation_slug, 2);
+        $events = $this->get('capco.event.resolver')->getLastByConsultation($consultation_slug, 2);
         $posts = $this->get('capco.blog.post.repository')->getLastPublishedByConsultation($consultation_slug, 2);
 
         return [

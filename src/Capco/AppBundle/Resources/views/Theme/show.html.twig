@@ -10,7 +10,9 @@
 	<div class="jumbotron  jumbotron--custom  jumbotron--bg-1  text-center">
 	    <div class="container">
 	        <h1 class="h2  h--no-border">{{ theme.title }}</h1>
-            <p>{{ theme.teaser }}</p>
+            {% if theme.teaser is not null %}
+                <p>{{ theme.teaser }}</p>
+            {% endif %}
 	    </div>
 	</div>
 {% endblock %}
