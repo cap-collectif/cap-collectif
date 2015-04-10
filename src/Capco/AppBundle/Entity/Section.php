@@ -40,7 +40,7 @@ class Section
             'nbObjects' => true,
         ],
         'ideas' => [
-            'title' => false,
+            'title' => true,
             'teaser' => true,
             'body' => false,
             'nbObjects' => true,

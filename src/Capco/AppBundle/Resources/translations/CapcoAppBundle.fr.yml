@@ -416,7 +416,8 @@ source:
     file: Fichier
   show:
     count: "]-Inf, 0] Aucune source | {1} 1 source | ]1,Inf[ %count% sources"
-  linked_proposition: Liée à la proposition :
+  trashed:
+    linked_proposition: Liée à la proposition :
   none: Il n'y a pas de sources.
   error:
     not_found: Source introuvable.
@@ -595,7 +596,9 @@ user:
       since: Inscrit depuis le
       all: Contributions
       opinions: Propositions
+      no_opinions: Il n'y a pas de propositions.
       ideas: Idées
+      no_ideas: Il n'y a pas d'idées.
       arguments: Arguments
       sources: Sources
       comments: Commentaires

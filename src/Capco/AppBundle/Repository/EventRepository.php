@@ -15,13 +15,14 @@ class EventRepository extends EntityRepository
     /**
      * Get events depending on theme, consultation and search term, ordered by startAt criteria.
      *
+     * @param $archived
      * @param null $themeSlug
      * @param null $consultationSlug
      * @param null $term
      *
      * @return array
      */
-    public function getSearchResults($themeSlug = null, $consultationSlug = null, $term = null)
+    public function getSearchResults($archived = null, $themeSlug = null, $consultationSlug = null, $term = null)
     {
         $qb = $this->getIsEnabledQueryBuilder()
             ->addSelect('a', 'm', 't', 'c')
@@ -33,7 +34,9 @@ class EventRepository extends EntityRepository
             ->orderBy('e.startAt', 'ASC')
         ;
 
-        $qb = $this->whereIsNotArchived($qb);
+        if (null !== $archived) {
+            $qb = $this->whereIsArchived($archived, $qb);
+        }
 
         if ($themeSlug !== null && $themeSlug !== Theme::FILTER_ALL) {
             $qb->andWhere('t.slug = :theme')
@@ -59,31 +62,34 @@ class EventRepository extends EntityRepository
     /**
      * Count events depending on theme, consultation and search term.
      *
+     * @param $archived
      * @param null $themeSlug
      * @param null $consultationSlug
      * @param null $term
      *
      * @return array
      */
-    public function countSearchResults($themeSlug = null, $consultationSlug = null, $term = null)
+    public function countSearchResults($archived = null, $themeSlug = null, $consultationSlug = null, $term = null)
     {
         $qb = $this->getIsEnabledQueryBuilder()
             ->select('COUNT(e.id)')
-            ->innerJoin('e.themes', 't', 'WITH', 't.isEnabled = :enabled')
-            ->innerJoin('e.consultations', 'c', 'WITH', 'c.isEnabled = :enabled')
             ->setParameter('enabled', true)
         ;
 
-        $qb = $this->whereIsNotArchived($qb);
+        if (null !== $archived) {
+            $qb = $this->whereIsArchived($archived, $qb);
+        }
 
         if ($themeSlug !== null && $themeSlug !== Theme::FILTER_ALL) {
-            $qb->andWhere('t.slug = :theme')
+            $qb->innerJoin('e.themes', 't', 'WITH', 't.isEnabled = :enabled')
+                ->andWhere('t.slug = :theme')
                 ->setParameter('theme', $themeSlug)
             ;
         }
 
         if ($consultationSlug !== null && $consultationSlug !== Consultation::FILTER_ALL) {
-            $qb->andWhere('c.slug = :consultation')
+            $qb->innerJoin('e.consultations', 'c', 'WITH', 'c.isEnabled = :enabled')
+                ->andWhere('c.slug = :consultation')
                 ->setParameter('consultation', $consultationSlug)
             ;
         }
@@ -97,50 +103,6 @@ class EventRepository extends EntityRepository
         return $query = $qb
             ->getQuery()
             ->getSingleScalarResult();
-    }
-
-    /**
-     * Get events archived depending on theme and search term, ordered by sort criteria.
-     *
-     * @param null $themeSlug
-     * @param null $consultationSlug
-     * @param null $term
-     *
-     * @return array
-     */
-    public function getSearchResultsArchived($themeSlug = null, $consultationSlug = null, $term = null)
-    {
-        $qb = $this->getIsEnabledQueryBuilder()
-            ->addSelect('a', 'm', 't', 'c')
-            ->leftJoin('e.Author', 'a')
-            ->leftJoin('a.Media', 'm')
-            ->leftJoin('e.themes', 't', 'WITH', 't.isEnabled = :enabled')
-            ->leftJoin('e.consultations', 'c', 'WITH', 'c.isEnabled = :enabled')
-            ->setParameter('enabled', true)
-            ->orderBy('e.startAt', 'DESC')
-        ;
-
-        $qb = $this->whereIsArchived($qb);
-
-        if ($themeSlug !== null && $themeSlug !== Theme::FILTER_ALL) {
-            $qb->andWhere('t.slug = :theme')
-                ->setParameter('theme', $themeSlug)
-            ;
-        }
-
-        if ($consultationSlug !== null && $consultationSlug !== Consultation::FILTER_ALL) {
-            $qb->andWhere('c.slug = :consultation')
-                ->setParameter('consultation', $consultationSlug)
-            ;
-        }
-
-        if ($term !== null) {
-            $qb->andWhere('e.title LIKE :term')
-                ->setParameter('term', '%'.$term.'%')
-            ;
-        }
-
-        return $query = $qb->getQuery()->getResult();
     }
 
     /**
@@ -173,7 +135,7 @@ class EventRepository extends EntityRepository
     }
 
     /**
-     * Get last events future.
+     * Get last future events.
      *
      * @param int $limit
      * @param int $offset
@@ -206,13 +168,14 @@ class EventRepository extends EntityRepository
     /**
      * Get last events by consultation.
      *
+     * @param $archived
      * @param $consultationSlug
      * @param int $limit
      * @param int $offset
      *
      * @return mixed
      */
-    public function getLastByConsultation($consultationSlug, $limit = 1, $offset = 0)
+    public function getLastByConsultation($archived, $consultationSlug, $limit = 1, $offset = 0)
     {
         $qb = $this->getIsEnabledQueryBuilder()
             ->addSelect('a', 't', 'media', 'c')
@@ -224,7 +187,9 @@ class EventRepository extends EntityRepository
             ->setParameter('consultation', $consultationSlug)
             ->orderBy('e.startAt', 'ASC');
 
-        $qb = $this->whereIsNotArchived($qb);
+        if (null !== $archived) {
+            $qb = $this->whereIsArchived($archived, $qb);
+        }
 
         if ($limit) {
             $qb->setMaxResults($limit);
@@ -275,19 +240,16 @@ class EventRepository extends EntityRepository
             ->setParameter('now', new \DateTime());
     }
 
-    protected function whereIsNotArchived(QueryBuilder $qb, $alias = 'e')
+    protected function whereIsArchived($archived, QueryBuilder $qb, $alias = 'e')
     {
-        return $qb
-            ->andWhere('('.$alias.'.endAt IS NULL AND :now < '.$alias.'.startAt) OR :now < '.$alias.'.endAt')
-            ->setParameter('now', new \DateTime())
-        ;
-    }
+        if ($archived) {
+            return $qb
+                ->andWhere('('.$alias.'.endAt IS NULL AND :now < '.$alias.'.startAt) OR :now < '.$alias.'.endAt')
+                ->setParameter('now', new \DateTime())
+            ;
+        }
 
-    protected function whereIsArchived(QueryBuilder $qb, $alias = 'e')
-    {
-        return $qb
-            ->andWhere('('.$alias.'.endAt IS NULL AND :now > '.$alias.'.startAt) OR :now > '.$alias.'.endAt')
-            ->setParameter('now', new \DateTime())
-        ;
+        return $qb->andWhere(':now < '.$alias.'.endAt')
+            ->setParameter('now', new \DateTime());
     }
 }

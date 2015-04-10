@@ -108,7 +108,8 @@
                         </div> <!-- .opinion__buttons -->
 
                         <div class="panel-group" id="accordion">
-                            <div class="panel panel-default panel--sources">
+                            {% set tokenSource = csrf_token('source_vote') %}
+                            <div class="panel panel-default">
                                 <div class=" sources__panel  panel-heading" data-toggle="collapse" data-target="#collapseOne" style="cursor:pointer;">
                                     <h4 class="panel-title">
                                         {% transchoice (sources|length) with {'%count%': (sources|length)} from 'CapcoAppBundle' %}source.show.count{% endtranschoice %}
@@ -121,11 +122,47 @@
                                 {% if sources|length > 0 %}
                                 <div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
                                     <div class="panel-body">
-                                        <ul class="media-list  opinion__list">
-                                            {% for source in sources %}
-                                                {% include 'CapcoAppBundle:Source:blockSource.html.twig' with {'source': source, 'opinion': opinion, 'opinionType': opinionType, 'consultation': consultation } only %}
-                                            {% endfor %}
-                                        </ul>
+                                        {% for source in sources %}
+                                            <div class="media" id="source{{ source.id }}">
+                                                {% include 'CapcoUserBundle:Avatar:avatar.html.twig' with { 'user': source.Author, 'classes': 'media-object', 'link_classes': 'pull-left media-middle'} only %}
+                                                <div class="media-body">
+                                                    <h4 class="media-heading h4" id="source{{ source.id }}"><span class="label label-info">{{ source.Category.title }}</span>
+                                                        {% if source.Media %}
+                                                            <a href="{{ path('sonata_media_download', {'id': source.Media|sonata_urlsafeid }) }}">{{ source.title }}</a>
+                                                        {% endif %}
+                                                        {% if source.link %}
+                                                            <a rel="nofollow" href="{{ source.link }}" class="external-link">{{ source.title }}</a>
+                                                        {% endif %}
+                                                    </h4>
+                                                    <p class="excerpt">
+                                                        {{ source.body }}
+                                                    </p>
+                                                    {% if false == source.canContribute %}
+                                                        <button disabled="disabled" class="btn  btn-dark-gray  btn-xs"><i class="cap cap-hand-like-2"></i> {{ 'source.vote.submit'|trans({}, 'CapcoAppBundle') }}</button>
+                                                    {% else %}
+                                                        <form method="POST" style="display: inline-block;" action="{{ path('app_consultation_vote_source' ,{'consultationSlug': consultation.slug, 'opinionTypeSlug': opinionType.slug, 'opinionSlug': opinion.slug, 'sourceSlug': source.slug } ) }}">
+                                                            {% if source.userHasVote(app.user) %}
+                                                            <button class="btn  btn-danger  btn-xs"> {{ 'source.vote.delete'|trans({}, 'CapcoAppBundle') }}</button>
+                                                            {% else %}
+                                                            <button class="btn  btn-success  btn--outline  btn-xs"><i class="cap cap-hand-like-2"></i> {{ 'source.vote.submit'|trans({}, 'CapcoAppBundle') }}</button>
+                                                            {% endif %}
+                                                            <input type="hidden" name="_csrf_token" value="{{ tokenSource }}">
+                                                        </form>
+                                                    {% endif %}
+                                                    <span class="nb-votes">{{ source.voteCount }}</span>
+
+                                                    {% if source.reports | length > 0 %}
+                                                        <button disabled="disabled" class="btn btn-xs btn-dark-gray"><i class="cap cap-flag-1"></i> {{ 'source.report.reported'|trans({}, 'CapcoAppBundle') }}</button>
+                                                    {% else %}
+                                                        <a href="{{ path('app_report_source' ,{'consultationSlug': consultation.slug, 'opinionTypeSlug': opinionType.slug, 'opinionSlug': opinion.slug, 'sourceSlug': source.slug } ) }}" class="btn btn-xs btn-dark-gray  btn--outline"><i class="cap cap-flag-1"></i> {{ 'source.report.submit'|trans({}, 'CapcoAppBundle') }}</a>
+                                                    {% endif %}
+
+                                                    {% if app.user is not null and app.user == source.Author %}
+                                                        <a href="{{ path('app_edit_source' ,{'consultationSlug': consultation.slug, 'opinionTypeSlug': opinionType.slug, 'opinionSlug': opinion.slug, 'sourceSlug': source.slug} ) }}" class="btn  btn-dark-gray  btn--outline  btn-xs"><i class="cap cap-pencil-1"></i> {{ 'source.update.button'|trans({}, 'CapcoAppBundle') }}</a>
+                                                    {% endif %}
+                                                </div>
+                                            </div>
+                                        {% endfor %}
                                     </div>
                                 </div>
                                 {% endif %}

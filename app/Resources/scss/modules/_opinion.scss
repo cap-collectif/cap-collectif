@@ -244,22 +244,6 @@
     @extend .opinion--argument;
     background-color: transparent;
   }
-
-  // Special case : source
-  &.opinion--source {
-    margin-top: 0;
-  }
-  &.opinion--source:hover {
-    background-color: white;
-  }
-}
-
-.panel--sources {
-  @include box-shadow(none);
-
-  .panel-body {
-    padding: 0;
-  }
 }
 
 // Chart
@@ -268,7 +252,7 @@
   margin-left: -15px;
 }
 .opinion__chart {
-
+  
   height: 150px;
   width: 150px;
   margin-top: 12px;
@@ -286,7 +270,7 @@
 // List of opinions
 .opinion__list {
   margin-bottom: 0;
-
+  
   .opinion {
     border-top: 1px solid $border;
     &:first-child {
@@ -465,14 +449,11 @@
   padding-top: 15px;
   padding-bottom: 15px;
   background-color: $light-gray;
+  border-bottom: 1px solid $border;
 
   .opinion__header__title {
     font-size: 16px;
   }
-}
-
-.opinion__list .opinion--argument:first-child {
-  border-top: 1px solid $border;
 }
 
 .opinion__arguments--yes {
