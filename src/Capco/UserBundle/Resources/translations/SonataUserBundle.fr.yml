@@ -10,3 +10,9 @@ registration:
 resetting:
   flash:
     success: Votre mot de passe a bien été modifié.
+
+form:
+  label_user_type: Type de profil
+
+show:
+  label_user_type: Type de profil

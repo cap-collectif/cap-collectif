@@ -131,7 +131,7 @@ trait StartAndEndDatesTrait
     {
         $now = new \DateTime();
 
-        if ($this->endAt == null) {
+        if ($this->endAt === null) {
             return $this->startAt < $now && $this->isSameDate($this->startAt, $now);
         }
 
@@ -142,7 +142,7 @@ trait StartAndEndDatesTrait
     {
         $now = new \DateTime();
 
-        if ($this->endAt == null) {
+        if ($this->endAt === null) {
             return $this->extractDate($this->startAt) < $this->extractDate($now);
         }
 

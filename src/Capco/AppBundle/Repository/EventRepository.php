@@ -73,7 +73,6 @@ class EventRepository extends EntityRepository
     {
         $qb = $this->getIsEnabledQueryBuilder()
             ->select('COUNT(e.id)')
-            ->setParameter('enabled', true)
         ;
 
         if (null !== $archived) {
@@ -244,12 +243,15 @@ class EventRepository extends EntityRepository
     {
         if ($archived) {
             return $qb
-                ->andWhere('('.$alias.'.endAt IS NULL AND :now < '.$alias.'.startAt) OR :now < '.$alias.'.endAt')
+                ->andWhere('('.$alias.'.endAt IS NOT NULL AND :now > '.$alias.'.endAt) OR ('.$alias.'.endAt IS NULL AND capco_date(:now) > capco_date('.$alias.'.startAt))')
                 ->setParameter('now', new \DateTime())
+                ->orderBy($alias.'.startAt', 'DESC')
             ;
         }
 
-        return $qb->andWhere(':now < '.$alias.'.endAt')
-            ->setParameter('now', new \DateTime());
+        return $qb
+            ->andWhere('('.$alias.'.endAt IS NULL AND capco_date(:now) <= capco_date('.$alias.'.startAt)) OR ('.$alias.'.endAt IS NOT NULL AND :now < '.$alias.'.endAt)')
+            ->setParameter('now', new \DateTime())
+        ;
     }
 }

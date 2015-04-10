@@ -50,10 +50,6 @@ class UserAdmin extends BaseAdmin
                 'label' => 'admin.fields.user.username',
                 'translation_domain' => 'SonataAdminBundle',
             ))
-            ->add('slug', null, array(
-                'label' => 'admin.fields.user.slug',
-                'translation_domain' => 'SonataAdminBundle',
-            ))
             ->add('enabled', null, array(
                 'editable' => true,
             ))
@@ -122,6 +118,13 @@ class UserAdmin extends BaseAdmin
             ->add('dateOfBirth')
             ->add('firstname')
             ->add('lastname')
+        ;
+
+        if ($this->getConfigurationPool()->getContainer()->get('capco.toggle.manager')->isActive('user_type')) {
+            $showMapper->add('userType', null, array());
+        }
+
+        $showMapper
             ->add('website')
             ->add('biography')
             ->add('city', null, array(
@@ -214,6 +217,13 @@ class UserAdmin extends BaseAdmin
             ))
             ->add('firstname', null, array('required' => false))
             ->add('lastname', null, array('required' => false))
+        ;
+
+        if ($this->getConfigurationPool()->getContainer()->get('capco.toggle.manager')->isActive('user_type')) {
+            $formMapper->add('userType', null, array());
+        }
+
+        $formMapper
             ->add('website', 'url', array('required' => false))
             ->add('biography', 'text', array('required' => false))
             ->add('city', null, array(

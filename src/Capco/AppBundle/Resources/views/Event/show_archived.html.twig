@@ -2,23 +2,14 @@
 
 {% block canonical_link %}{{ url('app_event_archived') }}{% endblock %}
 
-{% set jumbotron_title = capco_site_parameter_value('events.jumbotron.title') %}
 {% block title %}
-    {% if null != jumbotron_title %}
-        {{ parent() }} - {{ jumbotron_title }}
-    {% else %}
-        {{ parent() }} - {{ 'event.archived'|trans({}, 'CapcoAppBundle') }}
-    {% endif %}
+    {{ parent() }} - {{ 'event.archived'|trans({}, 'CapcoAppBundle') }}
 {% endblock %}
 
 {% block jumbotron %}
     <div class="jumbotron  jumbotron--custom  jumbotron--bg-1 text-center">
         <div class="container">
-            {% if null != jumbotron_title %}
-                <h1>{{ jumbotron_title }}</h1>
-            {% else %}
-                <h1>{{ 'event.index.title'|trans({}, 'CapcoAppBundle') }}</h1>
-            {% endif %}
+            <h1>{{ 'event.archived'|trans({}, 'CapcoAppBundle') }}</h1>
             {% set jumbotron_body = capco_site_parameter_value('events.jumbotron.body') %}
             {% if null != jumbotron_body %}
                 {{ jumbotron_body|raw }}
@@ -29,12 +20,12 @@
 
 {% block body %}
 
-    {% set content_body = capco_site_parameter_value('events.content.body') %}
-    {% if null != content_body %}
-        <div class="container  container--custom">
+    <div class="container  container--custom">
+        {% set content_body = capco_site_parameter_value('events.content.body') %}
+        {% if null != content_body %}
             {{ content_body|raw }}
-        </div>
-    {% endif %}
+        {% endif %}
+    </div>
 
     <div class="container  container--custom">
         <div class="filter  block">
