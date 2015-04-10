@@ -657,6 +657,9 @@ share_button:
 event:
   index:
     title: Évènements
+    appendices:
+      archived:
+        number: "]-Inf, 0] Aucun évènement passé | {1} 1 évènement passé | ]1,Inf[ %count% évènements passés"
   last:
     title: Évènements
   archived: Évènements passés
