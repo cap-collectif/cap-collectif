@@ -61,12 +61,10 @@ class EventController extends Controller
         }
 
         $groupedEvents = $this->get('capco.event.resolver')->getEventsGroupedByYearAndMonth(false, $theme, $consultation, $term);
-        $archivedEventsNb = $this->get('capco.event.resolver')->countEvents(true, $theme, $consultation, $term);
 
         return [
             'years' => $groupedEvents,
             'form' => $form->createView(),
-            'archivedEventsNb' => $archivedEventsNb,
         ];
     }
 

@@ -128,6 +128,8 @@ class User extends BaseUser implements EncoderAwareInterface
      */
     protected $opinionsCount = 0;
 
+    protected $userType;
+
     public function __construct($encoder = null)
     {
         parent::__construct();
@@ -524,5 +526,21 @@ class User extends BaseUser implements EncoderAwareInterface
         $this->votesCount = $votesCount;
 
         return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getUserType()
+    {
+        return $this->userType;
+    }
+
+    /**
+     * @param mixed $userType
+     */
+    public function setUserType($userType)
+    {
+        $this->userType = $userType;
     }
 }

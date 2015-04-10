@@ -49,6 +49,7 @@ admin.label.comment_vote: Votes sur les commentaires
 admin.label.event_registrations: Inscription à l'événement
 admin.label.consultation_type: Types de consultation
 admin.label.section: Accueil
+admin.label.user_type: Types de profil
 
 # Messages
 admin:
@@ -406,6 +407,11 @@ admin:
         admin: Administrateur
         super_admin: Super administrateur
       city: Ville
+      user_type: Type de profil
+    user_type:
+      name: Type
+      updated_at: Mise à jour
+      created_at: Création
     video:
       title: Titre
       is_enabled: Publié
@@ -463,6 +469,7 @@ capco:
     login_gplus: Inscription/Connexion avec Google+
     login_twitter: Inscription/Connexion avec Twitter
     shield_mode: Mode bouclier
+    user_type: Types de profil utilisateur
 
 action_enable: Activer
 action_disable: Désactiver
