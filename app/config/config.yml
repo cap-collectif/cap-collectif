@@ -174,13 +174,14 @@ ivory_ck_editor:
             filebrowserWindowHeight: '80%'
     toolbars:
         configs:
-            admin_toolbar: ['@clipboard', '@styles', '@basicstyles', '@paragraph', '@links', '@insert', '@document', '@tools' ]
+            admin_toolbar: ['@clipboard', '@styles', '@basicstyles', '@colors', '@paragraph', '@links', '@insert', '@document', '@tools' ]
             user_toolbar: ['@clipboard', '@user_styles', '@basicstyles', '@user_paragraph', '@user_links', '@user_insert', '@tools']
         items:
             clipboard: [ 'Undo', 'Redo' ]
-            styles: [ 'Styles', 'Format', 'FontSize' ]
+            styles: [ 'Format', 'FontSize']
             user_styles: [ 'Format' ]
-            basicstyles: [ 'Bold', 'Italic', 'Underline', 'Strike' ]
+            basicstyles: [ 'Bold', 'Italic', 'Underline', 'Strike']
+            colors: ['TextColor', 'BGColor']
             paragraph: [ 'NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', 'Blockquote', '-', 'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock' ]
             user_paragraph: [ 'NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', 'Blockquote' ]
             links: [ 'Link', 'Unlink', 'Anchor' ]
