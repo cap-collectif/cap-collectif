@@ -16,7 +16,7 @@ use Capco\AppBundle\Entity\Consultation;
 class PostRepository extends EntityRepository
 {
     /**
-     * Get posts depending on theme and consultation.
+     * Get posts depending on theme, consultation and search term.
      *
      * @param $nbByPage
      * @param $page
@@ -64,42 +64,6 @@ class PostRepository extends EntityRepository
         }
 
         return new Paginator($query);
-    }
-
-    /**
-     * Count posts depending on theme and consultation.
-     *
-     * @param null $themeSlug
-     * @param null $consultationSlug
-     *
-     * @return array
-     */
-    public function countSearchResults($themeSlug = null, $consultationSlug = null)
-    {
-        $qb = $this->getIsPublishedQueryBuilder('p')
-            ->select('COUNT(p.id)')
-        ;
-
-        if ($themeSlug !== null && $themeSlug !== Theme::FILTER_ALL) {
-            $qb->innerJoin('p.themes', 't', 'WITH', 't.isEnabled = :tEnabled')
-                ->setParameter('tEnabled', true)
-                ->andWhere('t.slug = :theme')
-                ->setParameter('theme', $themeSlug)
-            ;
-        }
-
-        if ($consultationSlug !== null && $consultationSlug !== Consultation::FILTER_ALL) {
-            $qb->innerJoin('p.consultations', 'c', 'WITH', 'c.isEnabled = :cEnabled')
-                ->setParameter('cEnabled', true)
-                ->andWhere('c.slug = :consultation')
-                ->setParameter('consultation', $consultationSlug)
-            ;
-        }
-
-        return $qb
-            ->getQuery()
-            ->getSingleScalarResult()
-        ;
     }
 
     /**

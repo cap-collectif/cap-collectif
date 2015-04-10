@@ -23,7 +23,6 @@ class Manager
         'login_gplus',
         'login_twitter',
         'shield_mode',
-        'user_type',
     );
 
     public function __construct(ToggleManager $toggleManager, ContextFactory $contextFactory, $prefix)

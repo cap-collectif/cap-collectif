@@ -2,4 +2,3 @@ user:
   register:
     invalid_email: Veuillez entrer une adresse électronique valide.
     already_used_email: Cette adresse électronique est déjà utilisée.
-  no_user_type_when_activated: Vous devez choisir un type de profil.
