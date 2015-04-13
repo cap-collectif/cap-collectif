@@ -163,9 +163,10 @@ idea:
     url_help: Indiquez un site proposant des informations complémentaires.
   vote:
     submit: Soutenir
-    private: Rendre privé mon soutien
+    private: Rendre mon soutien anonyme
     message: Pourquoi soutenez-vous cette idée ? (optionnel)
     name: Nom
+    comment: Commentaire
     email: Adresse électronique
     unsubscribe: Annuler mon soutien
     add_success: Merci ! Votre vote a bien été pris en compte.
