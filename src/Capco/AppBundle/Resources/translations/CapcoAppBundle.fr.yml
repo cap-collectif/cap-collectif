@@ -416,8 +416,7 @@ source:
     file: Fichier
   show:
     count: "]-Inf, 0] Aucune source | {1} 1 source | ]1,Inf[ %count% sources"
-  trashed:
-    linked_proposition: Liée à la proposition :
+  linked_proposition: Liée à la proposition :
   none: Il n'y a pas de sources.
   error:
     not_found: Source introuvable.
