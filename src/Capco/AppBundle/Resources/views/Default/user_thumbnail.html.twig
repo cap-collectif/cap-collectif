@@ -1,0 +1,35 @@
+{% if private is not defined %}
+    {% set private = false %}
+{% endif %}
+{% if user is not null %}
+    {% set username = user.username %}
+{% elseif username is defined %}
+    {% set username = username %}
+{% endif %}
+{% if private %}
+    {% set username = 'idea.vote.listing.anonymous' | trans({}, 'CapcoAppBundle') %}
+{% endif %}
+<div class=" {{ 'col-xs-12  col-sm-6  col-md-' ~ col ~ ' col-lg-' ~ col }} ">
+    <div class="media  media--macro media--user-thumbnail  box  block  block--bordered">
+
+        {% include 'CapcoUserBundle:Avatar:avatar.html.twig' with { 'user': user, 'private': private, 'classes': 'media-object', 'link_classes': 'pull-left'} only %}
+
+        <div class="media-body">
+            <p class="{% if user is not null and not private %}media-heading{% else %}media--aligned{% endif %} media--macro__user">
+                {% if user is not null and not private %}
+                    <a href="{{ path('capco_user_profile_show', {'slug': user.slug}) }}">{{ username }}</a>
+                {% else %}
+                    {{ username }}
+                {% endif %}
+            </p>
+            <span class="excerpt  small">
+                {% if user is not null and not private %}
+                    {% set contributions = user.contributionsCount |default(0) %}
+                    {% transchoice  contributions with {'%count%': contributions} from 'CapcoAppBundle' %}
+                        event_registration.listing.contribution
+                    {% endtranschoice %}
+                {% endif %}
+            </span>
+        </div>
+    </div>
+</div>

@@ -30,3 +30,12 @@
   	margin-top: 15px;
   }
 }
+
+// special case: user thumbnail
+
+.media--user-thumbnail {
+  min-height: 80px;
+  .media-heading {
+    padding-top: 0;
+  }
+}

@@ -1,45 +1,11 @@
-{% macro registration_user(registration, col) %}
-{% if registration.user is not null %}
-    {% set username = registration.user.username %}
-{% else %}
-    {% set username = registration.username %}
-{% endif %}
-{% if registration.private %}
-    {% set username = 'event_registration.listing.anonymous' | trans({}, 'CapcoAppBundle') %}
-{% endif %}
-
-<div class=" {{ 'col-xs-12  col-sm-6  col-md-' ~ col ~ ' col-lg-' ~ col }} ">
-    <div class="media  media--macro  box  block  block--bordered">
-        {% include 'CapcoUserBundle:Avatar:avatar.html.twig' with { 'user': registration.user, 'classes': 'media-object', 'link_classes': 'pull-left'} only %}
-        <div class="media-body">
-            {% set contributions = registration.user.contributionsCount |default(0) %}
-            <p class="media--aligned media--macro__user">
-                {% if registration.user is not null %}
-                    <a href="{{ path('capco_user_profile_show', {'slug': registration.user.slug }) }}">{{ username }}</a>
-                {% else %}
-                    {{ username }}
-                {% endif %}
-                {% if registration.user %}
-                    {% transchoice  contributions with {'%count%': contributions} from 'CapcoAppBundle' %}
-                        event_registration.listing.contribution
-                    {% endtranschoice %}
-                {% endif %}
-            </p>
-        </div>
-    </div>
-</div>
-{% endmacro %}
-
-{% import _self as render %}
-
 <div class="row">
     {% if limit is defined %}
         {% for registration in event.registrations|slice(0, limit) %}
-            {{ render.registration_user(registration, 4) }}
+            {% include 'CapcoAppBundle:Default:user_thumbnail.html.twig' with {'user': registration.user, 'username': registration.username, 'private': registration.private, 'col': 4} only %}
         {% endfor %}
     {% else %}
         {% for registration in event.registrations %}
-            {{ render.registration_user(registration, 6) }}
+            {% include 'CapcoAppBundle:Default:user_thumbnail.html.twig' with {'user': registration.user, 'username': registration.username, 'private': registration.private, 'col': 6} only %}
         {% endfor %}
     {% endif %}
 </div>
