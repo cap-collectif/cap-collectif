@@ -13,7 +13,6 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class StepController extends Controller
 {
-
     /**
      * @Route("/consultation/{consultation_slug}/step/{step_slug}", name="app_consultation_show_step")
      * @Template("CapcoAppBundle:Step:show.html.twig")

@@ -115,6 +115,20 @@ class Consultation
     private $trashedArgumentCount = 0;
 
     /**
+     * @var int
+     *
+     * @ORM\Column(name="sources_count", type="integer")
+     */
+    private $sourcesCount = 0;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="trashed_sources_count", type="integer")
+     */
+    private $trashedSourceCount = 0;
+
+    /**
      * @var string
      *
      * @ORM\ManyToOne(targetEntity="Capco\UserBundle\Entity\User")
@@ -370,6 +384,38 @@ class Consultation
         $this->trashedArgumentCount = $trashedArgumentCount;
 
         return $this;
+    }
+
+    /**
+     * @return int
+     */
+    public function getSourcesCount()
+    {
+        return $this->sourcesCount;
+    }
+
+    /**
+     * @param int $sourcesCount
+     */
+    public function setSourcesCount($sourcesCount)
+    {
+        $this->sourcesCount = $sourcesCount;
+    }
+
+    /**
+     * @return int
+     */
+    public function getTrashedSourceCount()
+    {
+        return $this->trashedSourceCount;
+    }
+
+    /**
+     * @param int $trashedSourceCount
+     */
+    public function setTrashedSourceCount($trashedSourceCount)
+    {
+        $this->trashedSourceCount = $trashedSourceCount;
     }
 
     /**
@@ -738,9 +784,7 @@ class Consultation
      */
     public function getRemainingDays()
     {
-        if (null === $consultationStep = $this->getConsultationStep()) {
-            return null;
-        }
+        $consultationStep = $this->getConsultationStep();
 
         return $consultationStep->getRemainingDays();
     }
@@ -752,9 +796,7 @@ class Consultation
      */
     public function isOpen()
     {
-        if(null === $consultationStep = $this->getConsultationStep()) {
-            return false;
-        }
+        $consultationStep = $this->getConsultationStep();
 
         return $consultationStep->isOpen();
     }
@@ -766,9 +808,7 @@ class Consultation
      */
     public function isFuture()
     {
-        if(null === $consultationStep = $this->getConsultationStep()) {
-            return false;
-        }
+        $consultationStep = $this->getConsultationStep();
 
         return $consultationStep->isFuture();
     }
@@ -780,9 +820,7 @@ class Consultation
      */
     public function isClosed()
     {
-        if(null === $consultationStep = $this->getConsultationStep()) {
-            return false;
-        }
+        $consultationStep = $this->getConsultationStep();
 
         return $consultationStep->isClosed();
     }
