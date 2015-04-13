@@ -598,7 +598,9 @@ user:
       since: Inscrit depuis le
       all: Contributions
       opinions: Propositions
+      no_opinions: Il n'y a pas de propositions.
       ideas: Idées
+      no_ideas: Il n'y a pas d'idées.
       arguments: Arguments
       sources: Sources
       comments: Commentaires
