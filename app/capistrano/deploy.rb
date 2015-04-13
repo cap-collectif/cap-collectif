@@ -97,3 +97,4 @@ after 'bower:install', 'gulp'
 after 'deploy:updated', 'symfony:migrate'
 before "deploy:set_permissions:check", 'symfony:cache_create'
 before "composer:install", "deploy:set_permissions:acl"
+after 'deploy:finished', 'capco:recalculate'

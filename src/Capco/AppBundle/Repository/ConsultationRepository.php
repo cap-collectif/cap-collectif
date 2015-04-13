@@ -27,14 +27,13 @@ class ConsultationRepository extends EntityRepository
     public function getOne($slug)
     {
         $qb = $this->getIsEnabledQueryBuilder('c')
-            ->addSelect('t', 's', 'cov', 'o')
-            ->leftJoin('c.Themes', 't')
-            ->leftJoin('c.Steps', 's')
+            ->addSelect('t', 's', 'cov')
+            ->leftJoin('c.Themes', 't', 'WITH', 't.isEnabled = :enabled')
+            ->leftJoin('c.Steps', 's', 'WITH', 's.isEnabled = :enabled')
             ->leftJoin('c.Cover', 'cov')
-            ->leftJoin('c.Opinions', 'o')
             ->andWhere('c.slug = :slug')
-            ->setParameter('slug', $slug)
-            ->addOrderBy('o.createdAt', 'DESC');
+            ->setParameter('enabled', true)
+            ->setParameter('slug', $slug);
 
         return $qb
             ->getQuery()

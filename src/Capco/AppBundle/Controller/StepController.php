@@ -14,37 +14,6 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 class StepController extends Controller
 {
     /**
-     * @Template("CapcoAppBundle:Step:show_all_in_nav.html.twig")
-     *
-     * @param Consultation $consultation
-     * @param Step         $currentStep
-     *
-     * @return array
-     */
-    public function showStepsNavAction(Consultation $consultation, $currentStep = null)
-    {
-        $em = $this->getDoctrine();
-        $consultation = $em->getRepository('CapcoAppBundle:Consultation')->getOneBySlugWithEventsAndPosts($consultation->getSlug());
-        $steps = $em->getRepository('CapcoAppBundle:Step')->findBy(
-            array(
-                'consultation' => $consultation,
-                'isEnabled' => true,
-            ),
-            array(
-                'position' => 'ASC',
-                'startAt' => 'ASC',
-            )
-        );
-
-        return [
-            'consultation' => $consultation,
-            'steps' => $steps,
-            'currentStep' => $currentStep,
-            'stepStatus' => Step::$stepStatus,
-        ];
-    }
-
-    /**
      * @Route("/consultation/{consultation_slug}/step/{step_slug}", name="app_consultation_show_step")
      * @Template("CapcoAppBundle:Step:show.html.twig")
      * @ParamConverter("consultation", class="CapcoAppBundle:Consultation", options={"mapping": {"consultation_slug": "slug"}})
@@ -95,7 +64,7 @@ class StepController extends Controller
         $consultation = $em->getRepository('CapcoAppBundle:Consultation')->getOne($consultation_slug);
         $events = $this->get('capco.event.resolver')->getLastByConsultation($consultation_slug, 2);
         $posts = $this->get('capco.blog.post.repository')->getLastPublishedByConsultation($consultation_slug, 2);
-        $nbEvents = $this->get('capco.event.resolver')->countEvents(null, $consultation->getSlug(), null);
+        $nbEvents = $this->get('capco.event.resolver')->countEvents(null, null, $consultation->getSlug(), null);
         $nbPosts = $em->getRepository('CapcoAppBundle:Post')->countSearchResults(null, $consultation_slug);
 
         return [

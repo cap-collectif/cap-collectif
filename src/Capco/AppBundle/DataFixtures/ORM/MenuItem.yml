@@ -110,13 +110,3 @@ Capco\AppBundle\Entity\MenuItem:
     parent: null
     menu: @menu1
     associatedFeatures: [calendar]
-
-  MenuItem13:
-    title: Confidentialité
-    link: confidentialite
-    isEnabled: 1
-    isDeletable: 0
-    isFullyModifiable: 0
-    position: 8
-    parent: null
-    menu: @menu2
