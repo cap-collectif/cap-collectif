@@ -83,11 +83,6 @@
         $(function () {
           $('[data-toggle="tooltip"]').tooltip();
         });
-        document.addEventListener('DOMContentLoaded', function(event) {
-            cookieChoices.showCookieConsentBar(
-                {{ 'cnil.message' | trans({}, 'CapcoAppBundle') }},
-              'close message', 'learn more', 'http://example.com');
-        });
     </script>
     {% set client_js = capco_site_parameter_value('global.site.embed_js') %}
     {% if null != client_js %}

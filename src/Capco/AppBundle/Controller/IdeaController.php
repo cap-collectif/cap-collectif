@@ -308,7 +308,6 @@ class IdeaController extends Controller
         $form = $this->createForm(new IdeaVoteType($this->getUser(), $vote->isConfirmed(), $idea->getIsCommentable()), $vote);
 
         if ($request->getMethod() == 'POST') {
-
             if (false == $idea->canContribute()) {
                 throw new AccessDeniedException($translator->trans('idea.error.no_contribute', array(), 'CapcoAppBundle'));
             }
