@@ -20,15 +20,15 @@
     "readmore": "*",
     "jquery-minicolors": "~2.1.10",
     "fancybox": "~2.1.5",
-    "ckeditor": "#full/4.4.7",
-    "compass-mixins": "~1.0.2"
+    "ckeditor": "#full/4.4.7"
+
   },
   "overrides": {
-    "fancybox": {
-      "main": "source/jquery.fancybox.pack.js"
-    },
-    "ckeditor": {
-      "main": "ckeditor.js"
-    }
-  }
+     "fancybox": {
+       "main": "source/jquery.fancybox.pack.js"
+     },
+     "ckeditor": {
+       "main": "ckeditor.js"
+     }
+   }
 }

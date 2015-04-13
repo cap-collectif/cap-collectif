@@ -67,6 +67,8 @@ class StepController extends Controller
         $nbEvents = $this->get('capco.event.resolver')->countEvents(null, null, $consultation->getSlug(), null);
         $nbPosts = $em->getRepository('CapcoAppBundle:Post')->countSearchResults(null, $consultation_slug);
 
+        $contributors = $em->getRepository('CapcoUserBundle:User')->findConsultationContributors($consultation);
+
         return [
             'consultation' => $consultation,
             'statuses' => Theme::$statuses,
@@ -75,6 +77,7 @@ class StepController extends Controller
             'posts' => $posts,
             'nbEvents' => $nbEvents,
             'nbPosts' => $nbPosts,
+            'contributors' => $contributors
         ];
     }
 }
