@@ -3,7 +3,6 @@
 namespace Capco\AppBundle\Controller;
 
 use Capco\AppBundle\Entity\AbstractComment;
-use Capco\AppBundle\Event\AbstractCommentChangedEvent;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
@@ -75,10 +74,6 @@ class CommentController extends Controller
             if ($form->isValid()) {
                 $em = $this->getDoctrine()->getManager();
                 $em->persist($comment);
-                $this->get('event_dispatcher')->dispatch(
-                    CapcoAppBundleEvents::ABSTRACT_COMMENT_CHANGED,
-                    new AbstractCommentChangedEvent($comment, 'add')
-                );
                 $em->flush();
 
                 $this->get('session')->getFlashBag()->add('success', $this->get('translator')->trans('comment.create.success'));
@@ -295,10 +290,6 @@ class CommentController extends Controller
             if ($form->isValid()) {
                 $em = $this->getDoctrine()->getManager();
                 $em->remove($comment);
-                $this->get('event_dispatcher')->dispatch(
-                    CapcoAppBundleEvents::ABSTRACT_COMMENT_CHANGED,
-                    new AbstractCommentChangedEvent($comment, 'remove')
-                );
                 $em->flush();
 
                 $this->get('session')->getFlashBag()->add('info', $this->get('translator')->trans('comment.delete.success'));

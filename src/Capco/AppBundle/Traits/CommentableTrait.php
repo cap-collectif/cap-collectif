@@ -65,6 +65,7 @@ trait CommentableTrait
     public function addComment(AbstractComment $comment)
     {
         if (!$this->comments->contains($comment)) {
+            $this->increaseCommentsCount(1);
             $this->comments->add($comment);
         }
 
@@ -78,7 +79,9 @@ trait CommentableTrait
      */
     public function removeComment(AbstractComment $comment)
     {
-        $this->comments->removeElement($comment);
+        if ($this->comments->removeElement($comment)) {
+            $this->decreaseCommentsCount(1);
+        }
 
         return $this;
     }

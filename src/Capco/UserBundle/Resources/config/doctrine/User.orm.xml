@@ -58,16 +58,8 @@
         <one-to-many field="votes" target-entity="Capco\AppBundle\Entity\AbstractVote" mapped-by="user" />
 
 
-        <field name="ideaCommentsCount" column="idea_comments_count" type="integer" nullable="false" />
-        <field name="postCommentsCount" column="post_comments_count" type="integer" nullable="false" />
-        <field name="eventCommentsCount" column="event_comments_count" type="integer" nullable="false" />
-
-        <field name="ideaVotesCount" column="idea_votes_count" type="integer" nullable="false" />
-        <field name="commentVotesCount" column="comment_votes_count" type="integer" nullable="false" />
-        <field name="opinionVotesCount" column="opinion_votes_count" type="integer" nullable="false" />
-        <field name="sourceVotesCount" column="source_votes_count" type="integer" nullable="false" />
-        <field name="argumentVotesCount" column="argument_votes_count" type="integer" nullable="false" />
-
+        <field name="commentsCount" column="comments_count" type="integer" nullable="false" />
+        <field name="votesCount" column="votes_count" type="integer" nullable="false" />
         <field name="ideasCount" column="ideas_count" type="integer" nullable="false" />
         <field name="argumentsCount" column="arguments_count" type="integer" nullable="false" />
         <field name="sourcesCount" column="sources_count" type="integer" nullable="false" />

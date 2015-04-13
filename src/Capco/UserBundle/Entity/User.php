@@ -101,6 +101,11 @@ class User extends BaseUser implements EncoderAwareInterface
     /**
      * @var int
      */
+    protected $votesCount = 0;
+
+    /**
+     * @var int
+     */
     protected $sourcesCount = 0;
 
     /**
@@ -111,56 +116,17 @@ class User extends BaseUser implements EncoderAwareInterface
     /**
      * @var int
      */
+    protected $commentsCount = 0;
+
+    /**
+     * @var int
+     */
     protected $ideasCount = 0;
 
     /**
      * @var int
      */
     protected $opinionsCount = 0;
-
-    // Comments
-
-    /**
-     * @var int
-     */
-    protected $ideaCommentsCount = 0;
-
-    /**
-     * @var int
-     */
-    protected $postCommentsCount = 0;
-
-    /**
-     * @var int
-     */
-    protected $eventCommentsCount = 0;
-
-    // Votes
-
-    /**
-     * @var int
-     */
-    protected $ideaVotesCount = 0;
-
-    /**
-     * @var int
-     */
-    protected $argumentVotesCount = 0;
-
-    /**
-     * @var int
-     */
-    protected $commentVotesCount = 0;
-
-    /**
-     * @var int
-     */
-    protected $opinionVotesCount = 0;
-
-    /**
-     * @var int
-     */
-    protected $sourceVotesCount = 0;
 
     protected $userType;
 
@@ -401,17 +367,17 @@ class User extends BaseUser implements EncoderAwareInterface
 
     public function getContributionsCount()
     {
-        return $this->getVotesCount() + $this->sourcesCount + $this->ideasCount + $this->argumentsCount + $this->opinionsCount + $this->getCommentsCount();
+        return $this->votesCount + $this->sourcesCount + $this->ideasCount + $this->argumentsCount + $this->opinionsCount;
     }
 
+    /**
+     * Gets the value of votesCount.
+     *
+     * @return int
+     */
     public function getVotesCount()
     {
-        return $this->ideaVotesCount + $this->commentVotesCount + $this->opinionVotesCount + $this->argumentVotesCount + $this->sourceVotesCount;
-    }
-
-    public function getCommentsCount()
-    {
-        return $this->ideaCommentsCount + $this->postCommentsCount + $this->eventCommentsCount;
+        return $this->votesCount;
     }
 
     /**
@@ -432,6 +398,16 @@ class User extends BaseUser implements EncoderAwareInterface
     public function getArgumentsCount()
     {
         return $this->argumentsCount;
+    }
+
+    /**
+     * Gets the value of commentsCount.
+     *
+     * @return int
+     */
+    public function getCommentsCount()
+    {
+        return $this->commentsCount;
     }
 
     /**
@@ -483,6 +459,20 @@ class User extends BaseUser implements EncoderAwareInterface
     }
 
     /**
+     * Sets the value of commentsCount.
+     *
+     * @param int $commentsCount the comments count
+     *
+     * @return self
+     */
+    public function setCommentsCount($commentsCount)
+    {
+        $this->commentsCount = $commentsCount;
+
+        return $this;
+    }
+
+    /**
      * Sets the value of argumentsCount.
      *
      * @param int $argumentsCount the arguments count
@@ -511,134 +501,6 @@ class User extends BaseUser implements EncoderAwareInterface
     }
 
     /**
-     * @return int
-     */
-    public function getIdeaCommentsCount()
-    {
-        return $this->ideaCommentsCount;
-    }
-
-    /**
-     * @param int $ideaCommentsCount
-     */
-    public function setIdeaCommentsCount($ideaCommentsCount)
-    {
-        $this->ideaCommentsCount = $ideaCommentsCount;
-    }
-
-    /**
-     * @return int
-     */
-    public function getPostCommentsCount()
-    {
-        return $this->postCommentsCount;
-    }
-
-    /**
-     * @param int $postCommentsCount
-     */
-    public function setPostCommentsCount($postCommentsCount)
-    {
-        $this->postCommentsCount = $postCommentsCount;
-    }
-
-    /**
-     * @return int
-     */
-    public function getIdeaVotesCount()
-    {
-        return $this->ideaVotesCount;
-    }
-
-    /**
-     * @param int $ideaVotesCount
-     */
-    public function setIdeaVotesCount($ideaVotesCount)
-    {
-        $this->ideaVotesCount = $ideaVotesCount;
-    }
-
-    /**
-     * @return int
-     */
-    public function getOpinionVotesCount()
-    {
-        return $this->opinionVotesCount;
-    }
-
-    /**
-     * @param int $opinionVotesCount
-     */
-    public function setOpinionVotesCount($opinionVotesCount)
-    {
-        $this->opinionVotesCount = $opinionVotesCount;
-    }
-
-    /**
-     * @return int
-     */
-    public function getSourceVotesCount()
-    {
-        return $this->sourceVotesCount;
-    }
-
-    /**
-     * @param int $sourceVotesCount
-     */
-    public function setSourceVotesCount($sourceVotesCount)
-    {
-        $this->sourceVotesCount = $sourceVotesCount;
-    }
-
-    /**
-     * @return int
-     */
-    public function getEventCommentsCount()
-    {
-        return $this->eventCommentsCount;
-    }
-
-    /**
-     * @param int $eventCommentsCount
-     */
-    public function setEventCommentsCount($eventCommentsCount)
-    {
-        $this->eventCommentsCount = $eventCommentsCount;
-    }
-
-    /**
-     * @return int
-     */
-    public function getCommentVotesCount()
-    {
-        return $this->commentVotesCount;
-    }
-
-    /**
-     * @param int $commentVotesCount
-     */
-    public function setCommentVotesCount($commentVotesCount)
-    {
-        $this->commentVotesCount = $commentVotesCount;
-    }
-
-    /**
-     * @return int
-     */
-    public function getArgumentVotesCount()
-    {
-        return $this->argumentVotesCount;
-    }
-
-    /**
-     * @param int $argumentVotesCount
-     */
-    public function setArgumentVotesCount($argumentVotesCount)
-    {
-        $this->argumentVotesCount = $argumentVotesCount;
-    }
-
-    /**
      * Sets the value of votes.
      *
      * @param mixed $votes the votes
@@ -648,6 +510,20 @@ class User extends BaseUser implements EncoderAwareInterface
     public function setVotes($votes)
     {
         $this->votes = $votes;
+
+        return $this;
+    }
+
+    /**
+     * Sets the value of votesCount.
+     *
+     * @param int $votesCount the votes count
+     *
+     * @return self
+     */
+    public function setVotesCount($votesCount)
+    {
+        $this->votesCount = $votesCount;
 
         return $this;
     }

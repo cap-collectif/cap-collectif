@@ -25,21 +25,20 @@
     </div>
 </div>
 
-{% set hasPosts = is_feature_enabled('blog') and consultation.posts | length > 0 %}
-{% set hasEvents = is_feature_enabled('calendar') and consultation.events | length > 0 %}
-{% if hasPosts or hasEvents %}
+
+{% if consultation.posts | length > 0 or consultation.events | length > 0 %}
     <div>
         <h2 class="h5 excerpt">{{ 'consultation.show.meta.info.title'|trans({}, 'CapcoAppBundle') | upper }}</h2>
         <div class="navbar--sub">
             <ul class="nav">
-                {% if hasPosts %}
+                {% if is_feature_enabled('blog') and consultation.posts | length > 0 %}
                     <li {% if currentStep == 'posts_step' %} class="active" {% endif %}>
                         <a href="{{ path('app_consultation_show_posts', {'consultationSlug': consultation.slug}) }}">
                             <p class="navbar__step-title">{{ 'consultation.show.meta.info.posts'|trans({}, 'CapcoAppBundle') }}  <i class="pull-right  excerpt  cap-arrow-66"></i></p>
                         </a>
                     </li>
                 {% endif %}
-                {% if hasEvents %}
+                {% if is_feature_enabled('calendar') and consultation.events | length > 0 %}
                     <li {% if currentStep == 'events_step' %} class="active" {% endif %}>
                         <a href="{{ path('app_consultation_show_events', {'consultationSlug': consultation.slug}) }}">
                             <p class="navbar__step-title">{{ 'consultation.show.meta.info.events'|trans({}, 'CapcoAppBundle') }}  <i class="pull-right  excerpt  cap-arrow-66"></i></p>

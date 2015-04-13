@@ -307,8 +307,3 @@ services:
         class: %capco.end_after_start.validator.class%
         tags:
             - { name: validator.constraint_validator, alias: end_after_start.validator }
-
-    capco.comment.suscriber:
-        class: Capco\AppBundle\EventListener\CommentSuscriber
-        tags:
-            - { name: "kernel.event_subscriber" }

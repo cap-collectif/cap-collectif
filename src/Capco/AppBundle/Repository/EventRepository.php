@@ -80,17 +80,15 @@ class EventRepository extends EntityRepository
         }
 
         if ($themeSlug !== null && $themeSlug !== Theme::FILTER_ALL) {
-            $qb->innerJoin('e.themes', 't', 'WITH', 't.isEnabled = :tEnabled')
+            $qb->innerJoin('e.themes', 't', 'WITH', 't.isEnabled = :enabled')
                 ->andWhere('t.slug = :theme')
-                ->setParameter('tEnabled', true)
                 ->setParameter('theme', $themeSlug)
             ;
         }
 
         if ($consultationSlug !== null && $consultationSlug !== Consultation::FILTER_ALL) {
-            $qb->innerJoin('e.consultations', 'c', 'WITH', 'c.isEnabled = :cEnabled')
+            $qb->innerJoin('e.consultations', 'c', 'WITH', 'c.isEnabled = :enabled')
                 ->andWhere('c.slug = :consultation')
-                ->setParameter('cEnabled', true)
                 ->setParameter('consultation', $consultationSlug)
             ;
         }
@@ -179,16 +177,14 @@ class EventRepository extends EntityRepository
     public function getLastByConsultation($archived, $consultationSlug, $limit = 1, $offset = 0)
     {
         $qb = $this->getIsEnabledQueryBuilder()
-            ->addSelect('a', 'm', 't', 'c')
+            ->addSelect('a', 't', 'media', 'c')
             ->leftJoin('e.Author', 'a')
-            ->leftJoin('a.Media', 'm')
-            ->leftJoin('e.themes', 't', 'WITH', 't.isEnabled = :enabled')
-            ->leftJoin('e.consultations', 'c', 'WITH', 'c.isEnabled = :enabled')
-            ->setParameter('enabled', true)
+            ->leftJoin('e.themes', 't')
+            ->leftJoin('e.consultations', 'c')
+            ->leftJoin('e.Media', 'media')
             ->andWhere('c.slug = :consultation')
             ->setParameter('consultation', $consultationSlug)
-            ->orderBy('e.startAt', 'ASC')
-        ;
+            ->orderBy('e.startAt', 'ASC');
 
         if (null !== $archived) {
             $qb = $this->whereIsArchived($archived, $qb);

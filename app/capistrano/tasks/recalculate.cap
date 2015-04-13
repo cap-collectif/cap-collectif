@@ -1,6 +1,0 @@
-namespace :capco do
-    desc 'recalculate counters'
-    task :recalculate do
-        invoke 'symfony:console', 'capco:recalculate-counters', '--no-interaction'
-    end
-end

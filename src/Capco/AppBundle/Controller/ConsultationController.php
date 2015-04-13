@@ -50,7 +50,6 @@ class ConsultationController extends Controller
     /**
      * @Route("/consultations/{slug}", name="app_consultation_show")
      * @Template()
-     * @ParamConverter("consultation", class="CapcoAppBundle:Consultation", options={"mapping": {"slug": "slug"}, "method"="getOne"})
      *
      * @param Consultation $consultation
      *

@@ -1,0 +1,67 @@
+<h2 class="h4">{{ 'consultation.show.meta.step.title'|trans({}, 'CapcoAppBundle') }}</h2>
+<div class="navbar--sub">
+    <ul class="nav">
+        {% set nb = 1 %}
+        {% set now = date("now") %}
+        {% if currentStep is not defined %}
+            {%  set currentStep = null %}
+        {%  endif %}
+        {%  set isConsultationPage = false %}
+        {% if currentStep == null or currentStep.isConsultationStep %}
+            {%  set isConsultationPage = true %}
+        {% endif %}
+        {% for step in steps %}
+            <li {% if (isConsultationPage and step.isConsultationStep) or (currentStep == step) %} class="active" {% endif %}>
+                <a href="{{ step | capco_step_link }}">
+                    <div class="navbar__step-nb">{{ nb }}</div>
+                    <div class="navbar__step">
+                        <h3 class="navbar__step-title">{{ step.title}}  <i class="pull-right  excerpt  cap-arrow-66"></i></h3>
+                        <p class="excerpt">
+                            {% if step.startAt == step.endAt %}
+                                {{ 'step.on_date' | trans({'%date%': step.startAt | localizeddate('full', 'none', app.request.locale)}, 'CapcoAppBundle') }}
+                            {% else %}
+                                {{ 'step.between_dates' | trans({'%start%': step.startAt | localizeddate('full', 'none', app.request.locale), '%end%': step.endAt | localizeddate('full', 'none', app.request.locale)}, 'CapcoAppBundle') }}
+                            {% endif %}
+                        </p>
+                        <p class="label label-default">
+                            {% if now < step.startAt %}
+                                {{ stepStatus['future'] | trans({}, 'CapcoAppBundle') }}
+                            {% elseif now > step.endAt %}
+                                {{ stepStatus['closed'] | trans({}, 'CapcoAppBundle') }}
+                            {% else %}
+                                {{ stepStatus['open'] | trans({}, 'CapcoAppBundle') }}
+                            {% endif %}
+                        </p>
+                    </div>
+                </a>
+            </li>
+            {% set nb = (nb + 1) %}
+        {% endfor %}
+    </ul>
+</div>
+
+{% if consultation.posts | length > 0 or consultation.events | length > 0 %}
+    <h2 class="h4">{{ 'consultation.show.meta.info.title'|trans({}, 'CapcoAppBundle') }}</h2>
+    <div class="navbar--sub">
+        <ul class="nav">
+            {% if consultation.posts | length > 0 %}
+                <li {% if currentStep == 'posts' %} class="active" {% endif %}>
+                    <a href="{{ path('app_consultation_show', {'slug': consultation.slug}) }}">
+                        <div class="navbar__step">
+                            <h3 class="navbar__step-title">{{ 'consultation.show.meta.info.posts'|trans({}, 'CapcoAppBundle') }}  <i class="pull-right  excerpt  cap-arrow-66"></i></h3>
+                        </div>
+                    </a>
+                </li>
+            {% endif %}
+            {% if consultation.events | length > 0 %}
+                <li {% if currentStep == 'events' %} class="active" {% endif %}>
+                    <a href="{{ path('app_consultation_show', {'slug': consultation.slug}) }}">
+                        <div class="navbar__step">
+                            <p class="h5">{{ 'consultation.show.meta.info.events'|trans({}, 'CapcoAppBundle') }}  <i class="pull-right  excerpt  cap-arrow-66"></i></p>
+                        </div>
+                    </a>
+                </li>
+            {% endif %}
+        </ul>
+    </div>
+{% endif %}

@@ -31,9 +31,9 @@
                     {% endif %}
                 </div>
 
-                {% if is_feature_enabled('blog') and posts | length > 0 %}
+                {% if nbPosts > 0 %}
                     <div class="block">
-                        <h2 class="h2">{{ 'step.presentation.posts.title'|trans({}, 'CapcoAppBundle') }} <span class="small excerpt">{{ nbPosts }}</span></h2>
+                        <h2 class="h2">{{ 'step.presentation.posts.title'|trans({}, 'CapcoAppBundle') }}</h2>
                         <ul class="media-list">
                             {% for post in posts %}
                                 {% include '@CapcoApp/Blog/blockPost.html.twig' with {'post': post} only %}
@@ -45,9 +45,9 @@
                     </div>
                 {% endif %}
 
-                {% if is_feature_enabled('calendar') and events | length > 0 %}
+                {% if nbEvents > 0 %}
                     <div class="block">
-                        <h2 class="h2">{{ 'step.presentation.events.title'|trans({}, 'CapcoAppBundle') }} <span class="small excerpt">{{ nbEvents }}</span></h2>
+                        <h2 class="h2">{{ 'step.presentation.events.title'|trans({}, 'CapcoAppBundle') }}</h2>
                         <div class="row">
                             {% for event in events %}
                                 {% include '@CapcoApp/Event/blockEvent.html.twig' with {'event': event, 'col_classes': 'col-md-6  col-sm-12'} only %}
