@@ -50,6 +50,7 @@ admin.label.event_registrations: Inscription à l'événement
 admin.label.consultation_type: Types de consultation
 admin.label.section: Accueil
 admin.label.user_type: Types de profil
+admin.label.highlighted: A la une
 
 # Messages
 admin:
@@ -219,6 +220,14 @@ admin:
       position: Position
       created_at: Création
       updated_at: Mise à jour
+    highlighted_content:
+      object: Contenu
+      post: Article
+      theme: Thème
+      consultation: Consultation
+      idea: Idée
+      event: Evènement
+      position: Position
     idea:
       title: Titre
       body: Description
@@ -456,7 +465,9 @@ admin:
         denied: Impossible de supprimer cette section.
       move_actions:
         label: Réordonner
-
+    highlighted_content:
+      move_actions:
+        label: Réordonner
 capco:
   module:
     blog: Module de blog
@@ -495,3 +506,13 @@ user:
   delete:
     batch_denied: Impossible de supprimer un super administrateur.
     warning_message: Attention, si vous supprimez cet utilisateur, tous ses contenus seront également supprimés.
+
+highlighted_content.limit_info: 5 contenus à la une maximum
+highlighted_post: un article
+highlighted_idea: une idée
+highlighted_theme: un thème
+highlighted_event: un événement
+highlighted_consultation: une consultation
+idea_comment: un commentaire sur une idée
+event_comment: un commentaire sur un événement
+post_comment: un commentaire sur un article

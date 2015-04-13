@@ -239,3 +239,13 @@ services:
             - {name: sonata.admin, manager_type: orm, group: sonata.admin.group.user, label: admin.label.user_type}
         calls:
             - [ setTranslationDomain, [SonataAdminBundle]]
+
+    capco_admin.admin.highlighted:
+        class: Capco\AdminBundle\Admin\HighlightedContentAdmin
+        arguments: [~, Capco\AppBundle\Entity\HighlightedContent, CapcoAdminBundle:HighlightedContent]
+        tags:
+            - {name: sonata.admin, manager_type: orm, group: admin.group.content, label: admin.label.highlighted}
+        calls:
+            - [ setTranslationDomain, [SonataAdminBundle]]
+            - [ setTemplate, [list, CapcoAdminBundle:HighlightedContent:list.html.twig]]
+            - [ setSubClasses, [{highlighted_post: Capco\AppBundle\Entity\HighlightedPost, highlighted_idea: Capco\AppBundle\Entity\HighlightedIdea, highlighted_theme: Capco\AppBundle\Entity\HighlightedTheme, highlighted_event: Capco\AppBundle\Entity\HighlightedEvent, highlighted_consultation: Capco\AppBundle\Entity\HighlightedConsultation}]]

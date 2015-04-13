@@ -839,3 +839,10 @@ dates:
   full_day: Le %date% à %time%
   part_day: Le %date% de %start_time% à %end_time%
   between: Du %start% au %end%
+
+highlight:
+  idea: Idée
+  event: Evénement
+  blog: Article
+  theme: Thème
+  consultation: Consultation

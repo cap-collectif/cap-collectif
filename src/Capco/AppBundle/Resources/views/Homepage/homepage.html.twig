@@ -51,7 +51,9 @@
             {% set alt = true %}
         {% endif %}
 
-        {% if section.type == 'introduction' %}
+        {% if section.type == 'highlight' %}
+            {{ render(controller('CapcoAppBundle:Homepage:highlightedContent', {'section': section})) }}
+        {% elseif section.type == 'introduction' %}
             {% include '@CapcoApp/Homepage/intro.html.twig' with {'section': section} only %}
         {% elseif section.type == 'videos' %}
             {{ render(controller('CapcoAppBundle:Homepage:lastVideos', {'max': section.nbObjects, 'offset': 0, 'section': section})) }}
@@ -89,6 +91,7 @@
             App.module.equalheight('.event-js');window.onresize = App.module.resized('.event-js');
             App.module.equalheight('.video');window.onresize = App.module.resized('.video');
             App.module.video('.fancybox');
+            App.module.carousel();
         });
     </script>
 {% endblock %}

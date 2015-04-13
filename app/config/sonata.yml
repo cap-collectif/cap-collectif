@@ -24,6 +24,7 @@ sonata_admin:
                     - capco_admin.admin.page
                     - sonata.media.admin.media
                     - capco_admin.admin.video
+                    - capco_admin.admin.highlighted
             admin.group.consultation:
                 items:
                     - capco_admin.admin.consultation
@@ -131,7 +132,7 @@ sonata_media:
                 big:            { width: 500, quality: 70 }
                 blockHeader:    { width: 750, height: 500, quality: 70 }
                 consultation:   { width: 360, height: 240, quality: 70 }
-                form:           { height: 150, quality 70 }
+                form:           { height: 150, quality: 70 }
                 idea:           { height: 400, quality: 70 }
                 logo:           { height: 50, quality: 70 }
                 profile:        { width: 200, quality: 70 }
@@ -139,6 +140,7 @@ sonata_media:
                 homepageVideo:  { width: 360, height: 240, quality: 70 }
                 header_picto:   { height: 100, quality: 70 }
                 theme:          { width: 360, height: 240, quality: 70 }
+                slider:         { width: 750, height: 300, quality: 70 }
 
         sonata_collection:
             providers:

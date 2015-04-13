@@ -1,0 +1,15 @@
+{% extends 'SonataAdminBundle:CRUD:base_list_field.html.twig' %}
+
+{% block field %}
+    {% if object.post is defined %}
+        {{ object.post.title }}
+    {% elseif object.event is defined %}
+        {{ object.event.title }}
+    {% elseif object.theme is defined %}
+        {{ object.theme.title }}
+    {% elseif object.idea is defined %}
+        {{ object.idea.title }}
+    {% elseif object.consultation is defined %}
+        {{ object.consultation.title }}
+    {% endif %}
+{% endblock %}

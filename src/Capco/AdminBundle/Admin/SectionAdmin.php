@@ -79,7 +79,7 @@ class SectionAdmin extends Admin
 
         $listMapper
             ->add('move_actions', 'actions', array(
-                'label' => 'admin.action.section.move_actions.label',
+                'label' => 'admin.action.highlighted_content.move_actions.label',
                 'template' => 'SonataAdminBundle:CRUD:list__action.html.twig',
                 'type' => 'action',
                 'code' => 'Action',

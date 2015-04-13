@@ -142,6 +142,16 @@ App.module = function ($) {
         })
     };
 
+    var carousel = function() {
+        $('.carousel-sidenav li').on('click', function(e) {
+            e.preventDefault();
+            $('.carousel-sidenav li').each(function(){
+                $(this).removeClass('active');
+            })
+            $(this).addClass('active');
+        });
+    };
+
     var AppPublic = {
         equalheight: equalheight,
         resized: resized,
@@ -152,7 +162,8 @@ App.module = function ($) {
         showMap: showMap,
         autocollapse: autocollapse,
         initPopovers: initPopovers,
-        makeSidebar: makeSidebar
+        makeSidebar: makeSidebar,
+        carousel: carousel
     };
 
     return AppPublic;
