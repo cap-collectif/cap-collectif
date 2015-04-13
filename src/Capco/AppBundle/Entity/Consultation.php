@@ -738,7 +738,9 @@ class Consultation
      */
     public function getRemainingDays()
     {
-        $consultationStep = $this->getConsultationStep();
+        if (null === $consultationStep = $this->getConsultationStep()) {
+            return null;
+        }
 
         return $consultationStep->getRemainingDays();
     }
@@ -750,7 +752,9 @@ class Consultation
      */
     public function isOpen()
     {
-        $consultationStep = $this->getConsultationStep();
+        if(null === $consultationStep = $this->getConsultationStep()) {
+            return false;
+        }
 
         return $consultationStep->isOpen();
     }
@@ -762,7 +766,9 @@ class Consultation
      */
     public function isFuture()
     {
-        $consultationStep = $this->getConsultationStep();
+        if(null === $consultationStep = $this->getConsultationStep()) {
+            return false;
+        }
 
         return $consultationStep->isFuture();
     }
@@ -774,7 +780,9 @@ class Consultation
      */
     public function isClosed()
     {
-        $consultationStep = $this->getConsultationStep();
+        if(null === $consultationStep = $this->getConsultationStep()) {
+            return false;
+        }
 
         return $consultationStep->isClosed();
     }
