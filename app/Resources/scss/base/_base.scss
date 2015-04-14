@@ -12,6 +12,10 @@ body {
   background-color: $main-bg;
   overflow: hidden;
 
+  p {
+    margin-bottom: 12px;
+  }
+
   .container {
     padding-top: 50px;
     padding-bottom: 50px;
@@ -130,6 +134,8 @@ body {
 
 hr {
   border-color: $border;
+  margin-top: 50px;
+  margin-bottom: 50px;
 }
 
 .hr--no-margin {
@@ -145,10 +151,17 @@ h1, .h1{
 h2, .h2 {
   color: $brand-color-1;
   margin-bottom: 20px;
+  margin-top: 30px;
 }
+
 
 h3, .h3 {
   color: $brand-color-2;
+}
+
+h4, .h4 {
+  margin-top: 20px;
+  margin-bottom: 10px;
 }
 
 h1 + h2,
@@ -390,4 +403,12 @@ a.excerpt {
   @extend .excerpt;
   font-size: 14px;
   margin-top: 5px;
+}
+
+img {
+  border-color: $border;
+}
+
+div.embeddedContent {
+  margin: 15px 0 15px;
 }

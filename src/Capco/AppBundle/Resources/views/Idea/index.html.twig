@@ -80,17 +80,17 @@
             </div>
         </div>
 
-        <div class="row">
-            {% if ideas|length > 0 %}
+        {% if ideas|length > 0 %}
+            <div class="row">
                 {% for idea in ideas %}
                     {% include '@CapcoApp/Idea/blockIdea.html.twig' with {'idea': idea} only %}
                 {% endfor %}
-            {% else %}
-                <p class="block">
-                    {{ 'idea.searchform.no_result'|trans({}, 'CapcoAppBundle') }}
-                </p>
-            {% endif %}
-        </div>
+            </div>
+        {% else %}
+            <p class="block">
+                {{ 'idea.searchform.no_result'|trans({}, 'CapcoAppBundle') }}
+            </p>
+        {% endif %}
 
         {% if nbPage > 1 %}
             <div class="pagination--custom  text-center block">

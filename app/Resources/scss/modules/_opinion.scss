@@ -297,7 +297,9 @@
 
   .opinion--comment {
     border-top: 0;
+    border-bottom: 1px solid $border;
     padding-top: 30px;
+    padding-bottom: 30px;
     &:first-child {
       padding-top: 15px;
     }

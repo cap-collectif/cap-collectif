@@ -67,27 +67,17 @@
   margin-bottom: 15px;
 }
 
-.carousel-sidebar .nav>li>a:hover {
-  padding-left: 18px;
+.carousel-sidebar .nav > li > a {
+  border-left: 2px solid $border;
+}
+
+.carousel-sidebar .nav > li > a:hover {
   background-color: transparent;
 }
 
-.carousel-sidebar .nav>.active>a, .carousel-sidebar .nav>.active:focus>a {
-  padding-left: 18px;
-  background-color: transparent;
-  border-left-style: solid;
-  border-left-size: 2px;
-}
-
-.carousel-sidebar .nav .nav>li>a {
-  padding-top: 1px;
-  padding-bottom: 1px;
-  padding-left: 30px;
-  font-size: 12px;
-}
-
-.carousel-sidebar .nav .nav>li>a:hover, .carousel-sidebar .nav .nav>li>a:focus {
-  padding-left: 29px;
+.carousel-sidebar .nav > li.active > a, .carousel-sidebar .nav > li.active:focus > a {
+  background: transparent;
+  border-left-color: $brand-color-2;
 }
 
 .carousel-sidebar .nav .nav>.active>a, .carousel-sidebar .nav .nav>.active:hover>a,
@@ -97,4 +87,8 @@
 
 .carousel-sidebar .nav>.active>ul {
   display: block;
+}
+
+.carousel-inner .item img, .carousel-inner .item span.bg__wrapper {
+  border: 1px solid $border;
 }
