@@ -21,7 +21,7 @@ class Resolver
     public function getMedia($key)
     {
         if (!array_key_exists($key, $this->images)) {
-            $this->logger->error('Tried to access undefined site image.', array(
+            $this->logger->warning('Tried to access undefined or disabled site image.', array(
                 'key' => $key,
             ));
 

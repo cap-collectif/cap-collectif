@@ -17,7 +17,7 @@
     <div class="container  container--custom  container--thinner">
 
         {%  if post.Media %}
-            {% thumbnail post.Media, 'blockHeader' with {'title': post.Media.name, 'alt': post.Media.name, 'class': 'img-responsive'} %}
+            {% thumbnail post.Media, 'blockHeader' with {'title': post.Media.name, 'alt': post.Media.name, 'class': 'img-responsive block'} %}
         {%  endif %}
 
         <div class="block">

@@ -22,8 +22,8 @@
 
             <div class="col-xs-12  col-sm-8  col-md-9" id="details">
 
+                <h2 class="h2">{{ currentStep.title }}</h2>
                 <div class="block  block--bordered  box">
-                    <h2 class="h2">{{ currentStep.title }}</h2>
                     {{ currentStep.body | raw }}
 
                     {% if consultation.canContribute %}

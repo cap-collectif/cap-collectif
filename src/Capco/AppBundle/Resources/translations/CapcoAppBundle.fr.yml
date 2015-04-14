@@ -184,7 +184,7 @@ idea:
     search: Rechercher
     sort: 'Trier :'
     all_themes: Tous les thèmes
-    no_result:  Aucune idée ne correspond à ces critères de recherche.
+    no_result:  Il n'y a aucune idée.
   sort:
     created_at: Date de création
     popularity: Popularité

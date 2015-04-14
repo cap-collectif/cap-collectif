@@ -19,40 +19,41 @@ class EventHelperSpec extends ObjectBehavior
 
     function it_knows_when_event_registration_are_possible(Event $event)
     {
-        // Registration is disable => false
         $event->getLink()->willReturn(null);
         $event->isRegistrationEnable()->willReturn(false);
-        $event->isFuture()->willReturn(true);
+        $event->getEndAt()->willReturn((new \DateTime())->modify('+ 1 day'));
         $event->canContribute()->willReturn(true);
         $this->isRegistrationPossible($event)->shouldReturn(false);
 
-        // Event is not future => false
         $event->getLink()->willReturn(null);
-        $event->isRegistrationEnable()->willReturn(true);
-        $event->isFuture()->willReturn(false);
+        $event->isRegistrationEnable()->willReturn(false);
+        $event->getEndAt()->willReturn((new \DateTime())->modify('- 1 day'));
         $event->canContribute()->willReturn(true);
         $this->isRegistrationPossible($event)->shouldReturn(false);
 
-        // Can not contribute => false
         $event->getLink()->willReturn(null);
         $event->isRegistrationEnable()->willReturn(true);
-        $event->isFuture()->willReturn(true);
+        $event->getEndAt()->willReturn((new \DateTime())->modify('+ 1 day'));
+        $event->canContribute()->willReturn(true);
+        $this->isRegistrationPossible($event)->shouldReturn(true);
+
+        $event->getLink()->willReturn(null);
+        $event->isRegistrationEnable()->willReturn(true);
+        $event->getEndAt()->willReturn((new \DateTime())->modify('+ 1 day'));
         $event->canContribute()->willReturn(false);
         $this->isRegistrationPossible($event)->shouldReturn(false);
 
-        // Has link => false
         $event->isRegistrationEnable()->willReturn(true);
-        $event->isFuture()->willReturn(true);
+        $event->getEndAt()->willReturn((new \DateTime())->modify('+ 1 day'));
         $event->getLink()->willReturn('http://lol.com');
         $event->canContribute()->willReturn(true);
         $this->isRegistrationPossible($event)->shouldReturn(false);
 
-        // Everything is awesome => true
         $event->getLink()->willReturn(null);
         $event->isRegistrationEnable()->willReturn(true);
-        $event->isFuture()->willReturn(true);
+        $event->getEndAt()->willReturn((new \DateTime())->modify('- 1 day'));
         $event->canContribute()->willReturn(true);
-        $this->isRegistrationPossible($event)->shouldReturn(true);
+        $this->isRegistrationPossible($event)->shouldReturn(false);
     }
 
     function it_can_find_user_registration(Event $event, User $user)

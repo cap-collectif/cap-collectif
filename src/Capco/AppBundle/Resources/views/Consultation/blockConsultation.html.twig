@@ -22,7 +22,7 @@
             <div class="figcaption">
                 {% if is_feature_enabled('themes') %}
                     {% if consultation.Themes | length > 0 %}
-                        <span class="excerpt  h5">
+                        <span class="excerpt">
                             {% for theme in consultation.Themes %}
                                 {% if (theme.canDisplay) %}
                                     <a class="excerpt" href="{{ path('app_theme_show', {'slug': theme.slug}) }}">
@@ -50,7 +50,7 @@
                 </p>
                 {% if consultation.isOpen %}
                     {% set remainingDays = consultation.remainingDays %}
-                    <p class="excerpt  h5"><i class="cap cap-calendar-1"></i>
+                    <p class="excerpt"><i class="cap cap-calendar-1"></i>
                         {% transchoice remainingDays with {'%count%': remainingDays} from 'CapcoAppBundle' %}
                             consultation.show.remaining_days
                         {% endtranschoice %}
@@ -62,11 +62,11 @@
             <div class="thumbnail__numbers">
                 <div class="thumbnail__number-block">
                     <p  class="thumbnail__number">{{ contributionsCount }}</p>
-                    <h3 class="thumbnail__number__label  excerpt  h5">
+                    <p class="thumbnail__number__label  excerpt  small">
                         {% transchoice contributionsCount with {'%count%': contributionsCount} from 'CapcoAppBundle' %}
                             consultation.show.contributions_no_nb
                         {% endtranschoice %}
-                    </h3>
+                    </p>
                 </div>
             </div>
         </div>

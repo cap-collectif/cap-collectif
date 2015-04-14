@@ -51,6 +51,10 @@
       text-decoration: none;
     }
 
+    .opinion__header__title {
+      color: black;
+    }
+
     .opinion__header__filter {
       padding-top: 2px;
 
@@ -245,6 +249,12 @@
     background-color: transparent;
   }
 
+  // Special case : vote (for profile only)
+  &.opinion--vote {
+    @extend .opinion--argument;
+    background-color: $white;
+  }
+
   // Special case : source
   &.opinion--source {
     margin-top: 0;
@@ -297,7 +307,9 @@
 
   .opinion--comment {
     border-top: 0;
+    border-bottom: 1px solid $border;
     padding-top: 30px;
+    padding-bottom: 30px;
     &:first-child {
       padding-top: 15px;
     }
