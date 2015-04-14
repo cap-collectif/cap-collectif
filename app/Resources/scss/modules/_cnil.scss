@@ -1,0 +1,23 @@
+/* ===============================================================
+   CNIL
+================================================================*/
+
+
+#cookieChoiceInfo #cookieChoiceDismiss {
+  background-color: $cnil-close;
+  text-decoration: none;
+  padding: 3px 15px;
+}
+
+#cookieChoiceInfo {
+  background-color: $cnil;
+}
+
+#cookieChoiceInfo span, #cookieChoiceInfo a {
+  color: white;
+}
+
+#cookieChoiceInfo a {
+  text-decoration: underline;
+}
+

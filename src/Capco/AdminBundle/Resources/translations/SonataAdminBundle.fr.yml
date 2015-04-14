@@ -264,7 +264,6 @@ admin:
       link: Lien
       updated_at: Mise à jour
       created_at: Création
-      parent_empty: Sélectionnez une valeur
     newsletter_subscription:
       email: Email
       is_enabled: Abonné
