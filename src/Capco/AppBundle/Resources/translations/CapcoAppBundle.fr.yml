@@ -847,3 +847,10 @@ highlight:
   blog: Article
   theme: Thème
   consultation: Consultation
+
+cnil:
+  message: Les cookies assurent le bon fonctionnement de nos services. En utilisant ces derniers, vous acceptez l'utilisation des cookies.
+  learn: En savoir plus
+  close: OK
+
+confidentialite.title: Confidentialité
