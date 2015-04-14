@@ -38,13 +38,11 @@
                                 <div class="col-sm-9">{{ form_widget(form.email) }}</div>
                             </div>
 
-                            {% if is_feature_enabled("user_type") %}
-                                <div class="form-group">
-                                    {{ form_errors(form.userType) }}
-                                    {{ form_label(form.userType, null, {'label_attr': {'class': 'col-sm-3 control-label'}}) }}
-                                    <div class="col-sm-9">{{ form_widget(form.userType) }}</div>
-                                </div>
-                            {% endif %}
+                            <div class="form-group">
+                                {{ form_errors(form.userType) }}
+                                {{ form_label(form.userType, null, {'label_attr': {'class': 'col-sm-3 control-label'}}) }}
+                                <div class="col-sm-9">{{ form_widget(form.userType) }}</div>
+                            </div>
 
                             <div class="form-group">
                                 {{ form_errors(form.website) }}
