@@ -146,7 +146,6 @@ class MenuItemAdmin extends Admin
                 'required' => false,
                 'query' => $this->createParentsItemQuery(),
                 'preferred_choices' => array(),
-                'empty_value' => "admin.fields.menu_item.parent_empty",
             ))
         ;
 

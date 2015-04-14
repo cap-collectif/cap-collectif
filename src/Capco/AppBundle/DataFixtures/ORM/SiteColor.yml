@@ -102,15 +102,25 @@ Capco\AppBundle\Entity\SiteColor:
         position: 20
     SiteColor21:
         keyname: color.footer.bg
-        title: Fond pied de page
+        title: Fond du pied de page
         value: '#1abc9c'
         position: 21
     SiteColor22:
+        keyname: color.footer2.text
+        title: Texte du pied de page secondaire
+        value: '#ffffff'
+        position: 22
+    SiteColor23:
+        keyname: color.footer2.bg
+        title: Fond du pied de page secondaire
+        value: '#16a085'
+        position: 23
+    SiteColor24:
         keyname: color.section.bg
         title: Fond des sections
         value: '#f6f6f6'
         position: 2
-    SiteColor23:
+    SiteColor25:
         keyname: color.section.text
         title: Texte des sections
         value: '#000000'

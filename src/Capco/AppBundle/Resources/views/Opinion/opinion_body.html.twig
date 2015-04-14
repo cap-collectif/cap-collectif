@@ -2,7 +2,7 @@
 <div class="opinion__body  box">
     {% include 'CapcoUserBundle:Avatar:avatar.html.twig' with { 'user': opinion.Author, 'link_classes': 'pull-left'} only %}
     <div class="opinion__data">
-        <p class="opinion__user excerpt"><a href="{{ path('capco_user_profile_show_all', {'slug': opinion.Author.slug}) }}">{{ opinion.Author.username }}</a> <span class="pull-right  excerpt">{{ opinion.createdAt | localizeddate('medium', 'none', app.request.locale) }}</span></p>
+        <p class="opinion__user excerpt  h5"><a href="{{ path('capco_user_profile_show_all', {'slug': opinion.Author.slug}) }}">{{ opinion.Author.username }}</a> <span class="pull-right  excerpt">{{ opinion.createdAt | localizeddate('medium', 'none', app.request.locale) }}</span></p>
         <h3 class="opinion__title">
             {% if trashed is not defined and profile is not defined and opinion.isTrashed %}
                 <span class="label label-default" style="position: static">
@@ -13,7 +13,7 @@
                 {{ opinion.title }}
             </a>
         </h3>
-        <p class="opinion__votes  excerpt">
+        <p class="opinion__votes  excerpt h5">
             {% transchoice nbVotes with {'%count%': nbVotes} from 'CapcoAppBundle' %}
             consultation.show.votes
             {% endtranschoice %}

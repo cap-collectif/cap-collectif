@@ -45,6 +45,11 @@
 {% set footerBg = capco_site_color_value('color.footer.bg') %}
 {% if null == footerBg %}{% set footerBg = '#1abc9c' %}{% endif %}
 
+{% set footer2Text = capco_site_color_value('color.footer2.text') %}
+{% if null == footer2Text %}{% set footer2Text = '#FFF' %}{% endif %}
+{% set footer2Bg = capco_site_color_value('color.footer2.bg') %}
+{% if null == footer2Bg %}{% set footer2Bg = '#16a085' %}{% endif %}
+
 <style>
 
     a {
@@ -69,12 +74,6 @@
 
     .consultation__infos li .value {
         color: {{ mainText }};
-    }
-
-    .consultation__nav li.consultation__nav--primary.active a {
-        -moz-box-shadow: {{ btnPrimary }} 0 -3px 0 {{ btnPrimary }} inset;
-        -webkit-box-shadow: {{ btnPrimary }} 0 -3px 0 {{ btnPrimary }} inset;
-        box-shadow: 0 -3px 0 {{ btnPrimary }} inset;
     }
 
     .pagination > li > a,
@@ -184,26 +183,26 @@
         color: {{ btnText }};
     }
 
-    {% if header2Title is not null %}
+    {% if footerText is not null %}
         .footer h2 {
-            color: {{ header2Title }};
+            color: {{ footerText }};
         }
     {% endif %}
 
-    {% if header2Bg is not null %}
+    {% if footerBg is not null %}
         .footer {
-            background-color: {{ header2Bg }};
+            background-color: {{ footerBg }};
         }
     {% endif %}
 
-    {% if header2Text is not null %}
+    {% if footerText is not null %}
         .footer,
         .footer a,
         .footer a:hover,
         .footer a:focus,
         .footer .footer__body a,
         .footer .social-network li a {
-            color: {{ header2Text }};
+            color: {{ footerText }};
         }
     {% endif %}
 
@@ -220,12 +219,12 @@
     .footer .footer__links ul li,
     .footer .footer__links ul li a,
     .footer .capco-powered a:hover {
-        background-color: {{ footerBg }};
-        color: {{ footerText }};
+        background-color: {{ footer2Bg }};
+        color: {{ footer2Text }};
     }
 
     body {
-        background-color: {{ footerBg }};
+        background-color: {{ footer2Bg }};
     }
 
     .container--alt,

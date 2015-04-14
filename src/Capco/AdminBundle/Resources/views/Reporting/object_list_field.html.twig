@@ -11,7 +11,7 @@
         {% elseif (object.Idea is not null) %}
             <span><a href="{{ path('admin_capco_app_idea_show', {'id': object.Idea.id}) }}">{{ object.Idea.title }}</a></span>
         {% elseif (object.Comment is not null) %}
-            <span><a href="{{ path('admin_capco_app_abstractcomment_show', {'id': object.Comment.id}) }}">{{ 'admin.fields.reporting.comment'|trans({}, 'SonataAdminBundle') }}</a></span>
+            <span><a href="{{ path('admin_capco_app_comment_show', {'id': object.Comment.id}) }}">{{ 'admin.fields.reporting.comment'|trans({}, 'SonataAdminBundle') }}</a></span>
         {% endif %}
     </div>
 {% endblock %}

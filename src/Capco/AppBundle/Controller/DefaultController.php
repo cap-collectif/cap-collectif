@@ -56,15 +56,6 @@ class DefaultController extends Controller
     }
 
     /**
-     * @Route("/confidentialite", name="app_confidentialite")
-     * @Template()
-     */
-    public function confidentialiteAction(Request $request)
-    {
-        return [];
-    }
-
-    /**
      * @Cache(expires="+1 minutes", maxage="60", smaxage="0", public="false")
      * @Template()
      */
