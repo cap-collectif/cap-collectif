@@ -4,6 +4,9 @@ namespace Capco\AppBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\FormError;
+use Symfony\Component\Form\FormEvent;
+use Symfony\Component\Form\FormEvents;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Capco\UserBundle\Entity\User;
 
@@ -26,6 +29,17 @@ class IdeaVoteType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        $noMessageWhenPrivateValidator = function (FormEvent $event) {
+            $form = $event->getForm();
+            if ($form->has('message') && $form->has('private')) {
+                $message = $form->get('message')->getData();
+                $private = $form->get('private')->getData();
+                if (!empty($message) && $private == true) {
+                    $form['private']->addError(new FormError('idea.vote.no_message_when_private_error'));
+                }
+            }
+        };
+
         if ($this->confirmed) {
             $builder->add('submit', 'submit', [
               'label' => 'idea.vote.unsubscribe',
@@ -36,18 +50,11 @@ class IdeaVoteType extends AbstractType
         }
 
         if ($this->user != null) {
-            $builder
-              ->add('private', null, [
-                  'required' => false,
-                  'label' => 'idea.vote.private',
-              ])
-            ;
-
             if ($this->commentable) {
                 $builder->add('message', 'textarea', [
                     'required' => false,
                     'mapped' => false,
-                    'label' => false,
+                    'label' => 'idea.vote.comment',
                     'attr' => [
                         'placeholder' => 'idea.vote.message',
                         'rows' => 5,
@@ -57,11 +64,20 @@ class IdeaVoteType extends AbstractType
             }
 
             $builder
+              ->add('private', null, [
+                  'required' => false,
+                  'label' => 'idea.vote.private',
+              ])
+            ;
+
+            $builder
               ->add('submit', 'submit', [
                   'label' => 'idea.vote.submit',
                   'attr' => ['class' => 'btn btn-success btn-block'],
               ])
             ;
+
+            $builder->addEventListener(FormEvents::POST_SUBMIT, $noMessageWhenPrivateValidator);
 
             return;
         }
@@ -73,17 +89,13 @@ class IdeaVoteType extends AbstractType
             ->add('email', 'email', [
                   'label' => 'idea.vote.email',
             ])
-            ->add('private', null, [
-                  'required' => false,
-                  'label' => 'idea.vote.private',
-            ])
         ;
 
         if ($this->commentable) {
             $builder->add('message', 'textarea', [
                 'required' => false,
                 'mapped' => false,
-                'label' => false,
+                'label' => 'idea.vote.comment',
                 'attr' => [
                     'placeholder' => 'idea.vote.message',
                     'rows' => 5,
@@ -92,12 +104,19 @@ class IdeaVoteType extends AbstractType
             ]);
         }
 
+        $builder->add('private', null, [
+            'required' => false,
+            'label' => 'idea.vote.private',
+        ]);
+
         $builder
             ->add('submit', 'submit', [
                   'label' => 'idea.vote.submit',
                   'attr' => ['class' => 'btn  btn-success  btn-block'],
             ])
         ;
+
+        $builder->addEventListener(FormEvents::POST_SUBMIT, $noMessageWhenPrivateValidator);
     }
 
     /**

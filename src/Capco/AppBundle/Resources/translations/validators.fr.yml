@@ -14,6 +14,7 @@ consultation:
 idea:
     vote:
         already: Cette adresse électronique a déjà été utilisée pour soutenir cette idée.
+        no_message_when_private_error: Vous ne pouvez pas poster de commentaire en tant qu'anonyme.
 
 date:
     end_before_start: La date de fin ne peut pas être antérieure à la date de début.
