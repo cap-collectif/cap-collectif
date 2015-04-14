@@ -37,7 +37,7 @@
 
   .profile__values {
     background-color: $white;
-    border-bottom: 1px solid $border-color;
+    border-bottom: 1px solid $border;
   }
 
   .profile__value {
@@ -98,7 +98,7 @@
   padding: 15px;
 
   .opinion__header {
-    border-bottom: 1px solid $border-color;
+    border-bottom: 1px solid $border;
   }
 }
 
@@ -107,12 +107,12 @@
   margin-bottom: 0;
   padding-left: 0;
   .opinion {
-    border-bottom: 1px solid $border-color;
-    border-left: 1px solid $border-color;
-    border-right: 1px solid $border-color;
+    border-bottom: 1px solid $border;
+    border-left: 1px solid $border;
+    border-right: 1px solid $border;
   }
   .opinion:first-child {
-    border-top: 1px solid $border-color;
+    border-top: 1px solid $border;
   }
   .opinion--argument {
     .opinion__header__title {

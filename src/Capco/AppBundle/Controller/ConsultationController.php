@@ -81,15 +81,12 @@ class ConsultationController extends Controller
      */
     public function showOpinionsAction(Consultation $consultation)
     {
-        $blocks = null;
-        if (count($consultation->getAllowedTypes()) > 0) {
-            $blocks = $this->getDoctrine()->getRepository('CapcoAppBundle:OpinionType')->getAllowedWithOpinionCount($consultation);
-            foreach ($blocks as $key => $block) {
-                $blocks[$key]['opinions'] = $this->getDoctrine()->getRepository('CapcoAppBundle:Opinion')->getByConsultationAndOpinionTypeOrdered($consultation, $block['id']);
-            }
+        $blocks = $this->getDoctrine()->getRepository('CapcoAppBundle:OpinionType')->getAllowedWithOpinionCount($consultation);
 
+        foreach ($blocks as $key => $block) {
+            $blocks[$key]['opinions'] = $this->getDoctrine()->getRepository('CapcoAppBundle:Opinion')->getByConsultationAndOpinionTypeOrdered($consultation, $block['id']);
         }
-        
+
         return [
             'blocks' => $blocks,
             'consultation' => $consultation,
@@ -249,7 +246,7 @@ class ConsultationController extends Controller
      *
      * @return array
      */
-    public function showMetaAction($consultationSlug, $currentStepSlug)
+    public function showMetaAction($consultationSlug, $currentStepSlug, $contributorsCount = null)
     {
         $em = $this->getDoctrine();
         $consultation = $em->getRepository('CapcoAppBundle:Consultation')->getOneBySlugWithStepsAndEventsAndPosts($consultationSlug);
@@ -257,6 +254,7 @@ class ConsultationController extends Controller
         return [
             'consultation' => $consultation,
             'currentStep' => $currentStepSlug,
+            'hasContributors' => $contributorsCount > 0,
             'stepStatus' => Step::$stepStatus,
         ];
     }

@@ -32,6 +32,15 @@
         <h2 class="h5 excerpt">{{ 'consultation.show.meta.info.title'|trans({}, 'CapcoAppBundle') | upper }}</h2>
         <div class="navbar--sub">
             <ul class="nav">
+                {% if hasContributors %}
+                    <li>
+                        <a href="{{ path('app_consultation_show_contributors', {
+                            'consultationSlug': consultationSlug }) }}">
+                           <p class="navbar__step-title">{{ 'consultation.show.meta.info.contributors'|trans({}, 'CapcoAppBundle') }}  <i class="pull-right  excerpt  cap-arrow-66"></i></p>
+                        </a>
+
+                    </li>
+                {% endif %}
                 {% if hasPosts %}
                     <li {% if currentStep == 'posts_step' %} class="active" {% endif %}>
                         <a href="{{ path('app_consultation_show_posts', {'consultationSlug': consultation.slug}) }}">

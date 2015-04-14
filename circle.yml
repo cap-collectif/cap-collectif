@@ -37,4 +37,4 @@ test:
     override:
         - fab migrate_test_db
         - fab circleci lint:pr=$CI_PULL_REQUEST
-        - fab test
+        # - fab test

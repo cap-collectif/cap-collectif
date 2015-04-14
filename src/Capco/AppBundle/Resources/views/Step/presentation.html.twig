@@ -17,7 +17,12 @@
     <div class="container  container--custom">
         <div class="row">
             <div class="col-xs-12  col-sm-4  col-md-3">
-                {{ render(controller('CapcoAppBundle:Consultation:showMeta', {'consultationSlug': consultation.slug, 'currentStepSlug': currentStep.slug})) }}
+                {{ render(controller('CapcoAppBundle:Consultation:showMeta', {
+                        'consultationSlug': consultation.slug,
+                        'currentStepSlug': currentStep.slug,
+                        'contributorsCount': contributors|length
+                    }))
+                }}
             </div>
 
             <div class="col-xs-12  col-sm-8  col-md-9" id="details">
@@ -58,6 +63,24 @@
                         {% endif %}
                     </div>
                 {% endif %}
+
+                <div class="block">
+                    <h2 class="h2">Participants</h2>
+                    <div class="row">
+                        {% for contributor in contributors|slice(0,9) %}
+                            {% include 'CapcoAppBundle:Default:user_thumbnail.html.twig' with {'user': contributor.user, 'col': 4} only %}
+                        {% else %}
+                            {% if consultation.isOpen %}
+                                {{ 'consultation.contributors.no' | trans({}, 'CapcoAppBundle')}}
+                            {% else %}
+                                {{ 'consultation.contributors.participate' | trans({}, 'CapcoAppBundle')}}
+                            {% endif %}
+                        {% endfor %}
+                        {% if contributors|length > 9 %}
+
+                        {% endif %}
+                    </div>
+                </div>
 
             </div> <!-- col-xs-12  col-sm-8  col-md-9 -->
         </div> <!-- .row -->

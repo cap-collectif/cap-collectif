@@ -68,7 +68,7 @@
 }
 
 .carousel-sidebar .nav > li > a {
-  border-left: 2px solid $border-color;
+  border-left: 2px solid $border;
 }
 
 .carousel-sidebar .nav > li > a:hover {
@@ -90,5 +90,5 @@
 }
 
 .carousel-inner .item img, .carousel-inner .item span.bg__wrapper {
-  border: 1px solid $border-color;
+  border: 1px solid $border;
 }
