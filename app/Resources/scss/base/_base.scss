@@ -65,15 +65,14 @@ body {
 
   .container--header2 {
     @extend .container--bg;
+    &:after {
+      border-top: 0 !important;
+    }
   }
 }
 
 .main .container--custom:nth-of-type(odd) {
   @extend .container--alt;
-}
-
-.main .container--custom:last-of-type:after {
-  border-bottom: 0px;
 }
 
 .profile-page .main {
