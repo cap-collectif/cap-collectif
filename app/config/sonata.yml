@@ -141,10 +141,6 @@ sonata_media:
                 header_picto:   { height: 100, quality: 70 }
                 theme:          { width: 360, height: 240, quality: 70 }
                 slider:         { width: 750, height: 300, quality: 70 }
-                header:         { width: 1280, quality: 70 }
-                header_md:      { width: 1024, quality: 70 }
-                header_sm:      { width: 800, quality: 70 }
-                header_xs:      { width: 640, quality: 70 }
 
         sonata_collection:
             providers:

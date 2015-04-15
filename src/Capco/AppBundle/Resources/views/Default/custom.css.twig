@@ -45,6 +45,11 @@
 {% set footerBg = capco_site_color_value('color.footer.bg') %}
 {% if null == footerBg %}{% set footerBg = '#1abc9c' %}{% endif %}
 
+{% set footer2Text = capco_site_color_value('color.footer2.text') %}
+{% if null == footer2Text %}{% set footer2Text = '#FFF' %}{% endif %}
+{% set footer2Bg = capco_site_color_value('color.footer2.bg') %}
+{% if null == footer2Bg %}{% set footer2Bg = '#16a085' %}{% endif %}
+
 <style>
 
     a {
@@ -184,26 +189,26 @@
         color: {{ btnText }};
     }
 
-    {% if header2Title is not null %}
+    {% if footerText is not null %}
         .footer h2 {
-            color: {{ header2Title }};
+            color: {{ footerText }};
         }
     {% endif %}
 
-    {% if header2Bg is not null %}
+    {% if footerBg is not null %}
         .footer {
-            background-color: {{ header2Bg }};
+            background-color: {{ footerBg }};
         }
     {% endif %}
 
-    {% if header2Text is not null %}
+    {% if footerText is not null %}
         .footer,
         .footer a,
         .footer a:hover,
         .footer a:focus,
         .footer .footer__body a,
         .footer .social-network li a {
-            color: {{ header2Text }};
+            color: {{ footerText }};
         }
     {% endif %}
 
@@ -220,12 +225,12 @@
     .footer .footer__links ul li,
     .footer .footer__links ul li a,
     .footer .capco-powered a:hover {
-        background-color: {{ footerBg }};
-        color: {{ footerText }};
+        background-color: {{ footer2Bg }};
+        color: {{ footer2Text }};
     }
 
     body {
-        background-color: {{ footerBg }};
+        background-color: {{ footer2Bg }};
     }
 
     .container--alt,
@@ -296,7 +301,7 @@
     {% if null != capco_site_image_media('image.header') and app.request.attributes.get('_route') == 'app_homepage' %}
 
         .jumbotron--bg-1{
-            background-image: url({% path capco_site_image_media('image.header'), 'header_xs' %});
+            background-image: url({% path capco_site_image_media('image.header'), 'header' %});
             background-position: 50% 50%;
             background-size: cover;
             padding: 0;
@@ -304,7 +309,7 @@
         }
 
         .header-img {
-            padding: 30px 0 30px;
+            padding: 0;
             margin: 0;
             position: relative;
             top: 0;
@@ -318,10 +323,14 @@
             {% endif %}
         }
 
-        @media (min-width: 768px ) {
-            .jumbotron--bg-1 {
-                background-image: url({% path capco_site_image_media('image.header'), 'header_sm' %});
+        @media (max-width: 767px ) {
+            .header-img {
+                padding-top: 30px;
+                padding-bottom: 30px;
             }
+        }
+
+        @media (min-width: 768px ) {
             .header-img {
                 padding-top: 50px;
                 padding-bottom: 50px;
@@ -329,19 +338,6 @@
         }
 
         @media (min-width: 992px ) {
-            .jumbotron--bg-1 {
-                background-image: url({% path capco_site_image_media('image.header'), 'header_md' %});
-            }
-            .header-img {
-                padding-top: 150px;
-                padding-bottom: 150px;
-            }
-        }
-
-        @media (min-width: 1200px ) {
-            .jumbotron--bg-1 {
-                background-image: url({% path capco_site_image_media('image.header'), 'header' %});
-            }
             .header-img {
                 padding-top: 150px;
                 padding-bottom: 150px;
