@@ -19,5 +19,3 @@ Capco\UserBundle\Entity\User:
           message: user.register.invalid_email
     Media:
       - Valid: ~
-    userType:
-      - Capco\UserBundle\Validator\Constraints\HasUserTypeIfActivated: ~

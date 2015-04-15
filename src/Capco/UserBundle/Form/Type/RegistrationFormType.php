@@ -42,7 +42,7 @@ class RegistrationFormType extends AbstractType
 
         if ($this->toggleManager->isActive('user_type')) {
             $builder->add('userType', null, array(
-                'required' => true,
+                'required' => false,
                 'empty_value' => 'form.no_type',
                 'translation_domain' => 'FOSUserBundle',
             ));
