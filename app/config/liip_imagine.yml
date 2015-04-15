@@ -96,7 +96,28 @@ liip_imagine:
             controller_action: 'SonataMediaBundle:Media:liipImagineFilter'
             format: png
             filters:
-                relative_resize: { widen: 1200 }
+                relative_resize: { widen: 1280 }
+
+        default_header_xs:
+            quality: 70
+            controller_action: 'SonataMediaBundle:Media:liipImagineFilter'
+            format: png
+            filters:
+                relative_resize: { widen: 640 }
+
+        default_header_sm:
+            quality: 70
+            controller_action: 'SonataMediaBundle:Media:liipImagineFilter'
+            format: png
+            filters:
+                relative_resize: { widen: 800 }
+
+        default_header_md:
+            quality: 70
+            controller_action: 'SonataMediaBundle:Media:liipImagineFilter'
+            format: png
+            filters:
+                relative_resize: { widen: 1024 }
 
         default_header_picto:
             quality: 70
