@@ -13,7 +13,7 @@
 <div id="sidebar-container">
     <div class="row">
         <div class="col-xs-12 {% if idea.canContribute %}col-sm-9{% endif %}">
-            <div class="container  container--thinner  container--custom">
+            <div class="container  container--custom">
                 <h1 class="h1"> {{ idea.title }}</h1>
                 <div class="media">
                     {% include 'CapcoUserBundle:Avatar:avatar.html.twig' with { 'user': idea.Author, 'classes': 'media-object', 'link_classes': 'pull-left'} only %}
@@ -33,7 +33,7 @@
                 </div>
             </div>
 
-            <div class="container  container--thinner container--custom">
+            <div class="container  container--custom">
 
                 {% if idea.Media %}
                     {% thumbnail idea.Media, 'idea' with {'class': 'block  img-responsive'} %}
@@ -96,7 +96,7 @@
             </div>
 
             {% if idea.votes | length > 0 %}
-                <div class="container  container--thinner  container--custom">
+                <div class="container  container--custom">
 
                     {% set limit = 6 %}
                      <h2>
@@ -130,7 +130,7 @@
             {% endif %}
 
             {% if capco_comment_can_add(idea) or(capco_comment_can_show(idea) and idea.commentsCount > 0) %}
-                <div class="container  container--thinner  container--custom">
+                <div class="container  container--custom">
                     {% if capco_comment_can_show(idea) and idea.commentsCount > 0 %}
                         {{ render(controller('CapcoAppBundle:Comment:showComments', {'object': idea})) }}
                     {% endif %}

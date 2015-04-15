@@ -133,7 +133,7 @@ App.module = function ($) {
         // Fix containers
         var containers = options['container'] + ' .container';
         $(options['container']).addClass('container  sidebar__container');
-        $(containers).removeClass('container  container--thinner').addClass('container--with-sidebar');
+        $(containers).removeClass('container').addClass('container--with-sidebar');
 
         // Handle small screens
         $(options['toggle']).on('click', function() {
