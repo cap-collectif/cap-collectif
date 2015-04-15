@@ -2,7 +2,10 @@
 <div class="opinion__body  box">
     {% include 'CapcoUserBundle:Avatar:avatar.html.twig' with { 'user': opinion.Author, 'link_classes': 'pull-left'} only %}
     <div class="opinion__data">
-        <p class="opinion__user excerpt"><a href="{{ path('capco_user_profile_show_all', {'slug': opinion.Author.slug}) }}">{{ opinion.Author.username }}</a> <span class="pull-right  excerpt">{{ opinion.createdAt | localizeddate('medium', 'none', app.request.locale) }}</span></p>
+        <p class="opinion__user excerpt">
+            <a href="{{ path('capco_user_profile_show_all', {'slug': opinion.Author.slug}) }}">{{ opinion.Author.username }}</a>
+            • {{ opinion.createdAt | localizeddate('medium', 'none', app.request.locale) }}
+        </p>
         <h3 class="opinion__title">
             {% if trashed is not defined and profile is not defined and opinion.isTrashed %}
                 <span class="label label-default" style="position: static">
