@@ -163,7 +163,6 @@ admin:
       argument_count: Arguments
       trashed_argument_count: Arguments dans la corbeille
       is_enabled: Publié
-      published_at: Publication
       updated_at: Mise à jour
       created_at: Création
       cover: Image

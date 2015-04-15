@@ -234,9 +234,6 @@ theme:
 
 #Consultation
 consultation:
-  sort:
-    published_at: Date de publication
-    contributions_nb: Nombre de contributions
   title: Consultations
   see_all: Voir toutes les consultations
   none: Aucune consultation.

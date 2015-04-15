@@ -5,7 +5,6 @@ namespace Capco\AppBundle\Repository;
 use Capco\AppBundle\Entity\Consultation;
 use Capco\AppBundle\Entity\Theme;
 use Doctrine\ORM\EntityRepository;
-use Doctrine\ORM\QueryBuilder;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 
 /**
@@ -125,7 +124,7 @@ class ConsultationRepository extends EntityRepository
             ->leftJoin('c.Themes', 't')
             ->leftJoin('c.Steps', 's')
             ->leftJoin('c.Cover', 'cov')
-            ->addOrderBy('c.publishedAt', 'ASC');
+            ->addOrderBy('c.createdAt', 'DESC');
 
         if ($theme !== null && $theme !== Theme::FILTER_ALL) {
             $qb->andWhere('t.slug = :theme')
@@ -139,10 +138,10 @@ class ConsultationRepository extends EntityRepository
             ;
         }
 
-        if (isset(Consultation::$sortOrder[$sort]) && Consultation::$sortOrder[$sort] == Consultation::SORT_ORDER_CONTRIBUTIONS_COUNT) {
-            $qb = $this->getOrderedByContributionsNb($qb, 'DESC', 'c');
+        if (isset(Consultation::$sortOrder[$sort]) && Consultation::$sortOrder[$sort] == Consultation::SORT_ORDER_VOTES_COUNT) {
+            $qb->orderBy('c.opinionCount', 'DESC');
         } else {
-            $qb->orderBy('c.publishedAt', 'ASC');
+            $qb->orderBy('c.createdAt', 'DESC');
         }
 
         $query = $qb->getQuery();
@@ -203,7 +202,7 @@ class ConsultationRepository extends EntityRepository
             ->leftJoin('c.Themes', 't')
             ->leftJoin('c.Steps', 's')
             ->leftJoin('c.Cover', 'cov')
-            ->addOrderBy('c.publishedAt', 'ASC');
+            ->addOrderBy('c.updatedAt', 'DESC');
 
         if ($limit) {
             $qb->setMaxResults($limit);
@@ -234,7 +233,7 @@ class ConsultationRepository extends EntityRepository
             ->leftJoin('c.Steps', 's')
             ->andWhere(':theme MEMBER OF c.Themes')
             ->setParameter('theme', $themeId)
-            ->orderBy('c.publishedAt', 'ASC');
+            ->orderBy('c.updatedAt', 'DESC');
 
         if ($limit) {
             $qb->setMaxResults($limit);
@@ -254,14 +253,5 @@ class ConsultationRepository extends EntityRepository
         return $this->createQueryBuilder('c')
             ->andWhere('c.isEnabled = :isEnabled')
             ->setParameter('isEnabled', true);
-    }
-
-    protected function getOrderedByContributionsNb(QueryBuilder $qb, $order, $alias ='c')
-    {
-        $qb
-            ->addSelect('('.$alias.'.opinionCount + '.$alias.'.trashedOpinionCount + '.$alias.'.argumentCount + '.$alias.'.trashedArgumentCount + '.$alias.'.sourcesCount + '.$alias.'.trashedSourceCount) as HIDDEN contributionsCount')
-            ->orderBy('contributionsCount', 'DESC')
-        ;
-        return $qb;
     }
 }
