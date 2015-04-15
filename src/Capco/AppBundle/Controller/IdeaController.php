@@ -319,9 +319,12 @@ class IdeaController extends Controller
                 $em->flush();
 
                 if ($vote->isConfirmed()) {
-                    if ($form->has('message') && null != ($message = $form->get('message')->getData())) {
+                    $message = $form->get('message')->getData();
+
+                    if ($message != null) {
                         $comment = new IdeaComment();
 
+                        // Note : For now, private votes authors are not anonymous in the comment.
                         $comment
                             ->setAuthor($vote->getUser())
                             ->setAuthorName($vote->getUsername())

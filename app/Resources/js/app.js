@@ -133,7 +133,7 @@ App.module = function ($) {
         // Fix containers
         var containers = options['container'] + ' .container';
         $(options['container']).addClass('container  sidebar__container');
-        $(containers).removeClass('container').addClass('container--with-sidebar');
+        $(containers).removeClass('container  container--thinner').addClass('container--with-sidebar');
 
         // Handle small screens
         $(options['toggle']).on('click', function() {
@@ -152,35 +152,6 @@ App.module = function ($) {
         });
     };
 
-    var hideableMessageAndCheckbox = function(options) {
-        var messageDiv = options['message'];
-        var messageField = messageDiv + ' textarea';
-        var checkboxDiv = options['checkbox'];
-        var checkboxField = checkboxDiv + ' input[type="checkbox"]';
-        var oldVal = null;
-
-        $(messageField).on('change keyup paste', function(){
-            var currentVal = $(this).val();
-            if(currentVal == oldVal) {
-                return;
-            }
-            oldVal = currentVal;
-            if(currentVal) {
-               $(checkboxDiv).addClass('hidden');
-                return;
-            }
-            $(checkboxDiv).removeClass('hidden');
-        });
-
-        $(checkboxField).on('change', function(){
-            if($(this).prop('checked')) {
-                $(messageDiv).addClass('hidden');
-                return;
-            }
-            $(messageDiv).removeClass('hidden');
-        });
-    };
-
     var AppPublic = {
         equalheight: equalheight,
         resized: resized,
@@ -192,8 +163,7 @@ App.module = function ($) {
         autocollapse: autocollapse,
         initPopovers: initPopovers,
         makeSidebar: makeSidebar,
-        carousel: carousel,
-        hideableMessageAndCheckbox: hideableMessageAndCheckbox,
+        carousel: carousel
     };
 
     return AppPublic;
