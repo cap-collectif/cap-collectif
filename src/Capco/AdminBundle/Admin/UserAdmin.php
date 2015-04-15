@@ -220,9 +220,7 @@ class UserAdmin extends BaseAdmin
         ;
 
         if ($this->getConfigurationPool()->getContainer()->get('capco.toggle.manager')->isActive('user_type')) {
-            $formMapper->add('userType', null, array(
-                'required' => false,
-            ));
+            $formMapper->add('userType', null, array());
         }
 
         $formMapper
