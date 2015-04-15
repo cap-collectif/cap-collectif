@@ -739,7 +739,7 @@ class Consultation
             return $first;
         }
 
-        return null;
+        return;
     }
 
     /**
@@ -753,7 +753,7 @@ class Consultation
             }
         }
 
-        return null;
+        return;
     }
 
     /**
@@ -765,7 +765,7 @@ class Consultation
             return $consultationStep->getStartAt();
         }
 
-        return null;
+        return;
     }
 
     /**
@@ -777,7 +777,7 @@ class Consultation
             return $consultationStep->getEndAt();
         }
 
-        return null;
+        return;
     }
 
     /**
@@ -849,7 +849,7 @@ class Consultation
             return self::OPENING_STATUS_OPENED;
         }
 
-        return null;
+        return;
     }
 
     /**
@@ -896,7 +896,7 @@ class Consultation
      */
     public function getConsultationType()
     {
-        return null;
+        return;
     }
 
     // ************************** Lifecycle **************************************
