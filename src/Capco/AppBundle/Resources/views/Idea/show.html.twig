@@ -162,7 +162,32 @@
                     {% endif %}
 
                     <div class="sidebar__form">
-                        {{ form(form) }}
+                        {{ form_start(form) }}
+
+                            {% if form.username is defined %}
+                                {{ form_row(form.username) }}
+                            {% endif %}
+
+                            {% if form.email is defined %}
+                                {{ form_row(form.email) }}
+                            {% endif %}
+
+                            {% if form.message is defined %}
+                                <div class="form-group message-hideable-js">
+                                    {{ form_label(form.message) }}
+                                    {{ form_widget(form.message) }}
+                                    {{ form_errors(form.message) }}
+                                </div>
+                            {% endif %}
+
+                            {% if form.private is defined %}
+                                <div class="form-group checkbox-hideable-js">
+                                    {{ form_widget(form.private) }}
+                                </div>
+                                {{ form_errors(form.private) }}
+                            {% endif %}
+
+                        {{ form_end(form) }}
                     </div>
 
                     {% if app.user is null %}
@@ -197,6 +222,10 @@
                 hideable: '.sidebar-hideable',
                 toggle: '.sidebar-toggle',
                 overlay: '#sidebar-overlay'
+            });
+            App.module.hideableMessageAndCheckbox({
+                message: '.message-hideable-js',
+                checkbox: '.checkbox-hideable-js',
             });
         {% endif %}
         {% if null == app.user %}

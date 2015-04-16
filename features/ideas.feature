@@ -91,7 +91,7 @@ Scenario: Can comment an idea
   Scenario: Anonymous user wants to vote with his account
     Given I visited "idea page" with:
       | slug | ideacommentable |
-    When I follow "M'inscrire avec mon compte"
+    When I follow "Soutenir avec mon compte"
     Then I should see "Se connecter"
 
   @database
