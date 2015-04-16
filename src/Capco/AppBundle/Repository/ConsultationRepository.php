@@ -256,12 +256,13 @@ class ConsultationRepository extends EntityRepository
             ->setParameter('isEnabled', true);
     }
 
-    protected function getOrderedByContributionsNb(QueryBuilder $qb, $order, $alias ='c')
+    protected function getOrderedByContributionsNb(QueryBuilder $qb, $order, $alias = 'c')
     {
         $qb
             ->addSelect('('.$alias.'.opinionCount + '.$alias.'.trashedOpinionCount + '.$alias.'.argumentCount + '.$alias.'.trashedArgumentCount + '.$alias.'.sourcesCount + '.$alias.'.trashedSourceCount) as HIDDEN contributionsCount')
             ->orderBy('contributionsCount', 'DESC')
         ;
+
         return $qb;
     }
 }
