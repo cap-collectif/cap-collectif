@@ -72,15 +72,17 @@
                     {% endtranschoice %}
                 </div>
             </li>
-            <li data-toggle="tooltip" data-placement="top" title="{{ 'consultation.show.end_at' | trans({'%date%': consultation.closedAt | localizeddate('long', 'none')}, 'CapcoAppBundle') }}">
-                {% set remDays = consultation.remainingDays | default('0') %}
-                <div class="value">{{ remDays }}</div>
-                <div class="excerpt  category">
-                    {% transchoice remDays from 'CapcoAppBundle' %}
-                        consultation.show.meta.remaining_days
-                    {% endtranschoice %}
-                </div>
-            </li>
+            {% if consultation.isOpen %}
+                <li data-toggle="tooltip" data-placement="top" title="{{ 'consultation.show.end_at' | trans({'%date%': consultation.closedAt | localizeddate('long', 'none')}, 'CapcoAppBundle') }}">
+                    {% set remDays = consultation.remainingDays | default('0') %}
+                    <div class="value">{{ remDays }}</div>
+                    <div class="excerpt  category">
+                        {% transchoice remDays from 'CapcoAppBundle' %}
+                            consultation.show.meta.remaining_days
+                        {% endtranschoice %}
+                    </div>
+                </li>
+            {% endif %}
         </ul>
 
         {% if consultation.canContribute %}
