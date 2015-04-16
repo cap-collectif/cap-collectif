@@ -254,10 +254,10 @@ consultation:
     meta:
       remaining_days: "]-Inf, 1] jour restant | ]1,Inf[ jours restants"
       total_count: "]-Inf, 1] contribution | ]1,Inf[ contributions"
-      argumentsCount: "]-Inf, 1] argument | ]1,Inf[ %count% arguments"
-      votesCount: "]-Inf, 1] vote | ]1,Inf[ %count% votes"
-      opinionsCount: "]-Inf, 1] proposition | ]1,Inf[ %count% propositions"
-      sourcesCount: "]-Inf, 1] source | ]1,Inf[ %count% sources"
+      argumentsCount: "]-Inf, 1] %count% argument | ]1,Inf[ %count% arguments"
+      votesCount: "]-Inf, 1] %count% vote | ]1,Inf[ %count% votes"
+      opinionsCount: "]-Inf, 1] %count% proposition | ]1,Inf[ %count% propositions"
+      sourcesCount: "]-Inf, 1] %count% source | ]1,Inf[ %count% sources"
       read_more: Lire la suite
       read_less: Replier
       intro:
