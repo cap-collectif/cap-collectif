@@ -29,7 +29,7 @@ deployment:
 test:
     pre:
         - echo "memory_limit = 2048M" > ~/.phpenv/versions/$(phpenv global)/etc/conf.d/memory.ini
-        - npm install -g brunch
+        - npm install -g gulp
         - fab build
         - app/console server:run:
             background: true

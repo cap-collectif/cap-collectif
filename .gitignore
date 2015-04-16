@@ -26,7 +26,6 @@ app/config/parameters/*
 # Node / grunt / bower
 /node_modules/
 /app/Resources/libs
-/bower_components/
 
 # deployment
 .bundle

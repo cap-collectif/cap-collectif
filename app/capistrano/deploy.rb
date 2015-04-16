@@ -90,8 +90,10 @@ set :slack_deploy_failed_text, -> {
   "[#{fetch(:application)} : #{fetch(:stage)}] Deploy with revision/branch #{fetch(:current_revision, fetch(:branch))} FAILED :thumbsdown: :thumbsdown: :thumbsdown: "
 }
 
+set :gulp_tasks, 'build'
+
 before 'deploy:starting', 'symfony:parameters'
-after 'bower:install', 'brunch:build'
+after 'bower:install', 'gulp'
 after 'deploy:updated', 'symfony:migrate'
 before "deploy:set_permissions:check", 'symfony:cache_create'
 before "composer:install", "deploy:set_permissions:acl"

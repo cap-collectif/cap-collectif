@@ -2,7 +2,7 @@
   "name": "cap-collectif-SF2",
   "version": "0.0.1",
   "description": "Cap-Collectif version Symfony2",
-  "main": "brunch-config.js",
+  "main": "Gulpfile.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -17,14 +17,17 @@
   },
   "homepage": "https://github.com/jolicode/CapCollectif-SF2",
   "dependencies": {
-    "brunch": "^1.8.0",
-    "clean-css-brunch": "^1.7.2",
-    "css-brunch": "^1.7.0",
-    "javascript-brunch": "^1.7.1",
-    "sass-brunch": "^1.8.10",
-    "uglify-js-brunch": "^1.7.8"
-  },
-  "devDependencies": {
-    "fb-flo-brunch": "^1.7.22"
+    "gulp": "^3.8.8",
+    "gulp-ruby-sass": "^0.7.1",
+    "gulp-minify-css": "^0.3.10",
+    "gulp-plumber": "^0.6.6",
+    "gulp-rename": "^1.2.0",
+    "gulp-watch": "^1.1.0",
+    "gulp-concat": "^2.4.1",
+    "gulp-copy": "0.0.2",
+    "gulp-load-plugins": "^0.7.0",
+    "gulp-uglify": "^1.0.1",
+    "gulp-uncss": "^0.5.1",
+    "glob": "^4.3.1"
   }
 }

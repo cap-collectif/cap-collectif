@@ -332,7 +332,6 @@ class Consultation
     public function setPublishedAt($publishedAt)
     {
         $this->publishedAt = $publishedAt;
-
         return $this;
     }
 

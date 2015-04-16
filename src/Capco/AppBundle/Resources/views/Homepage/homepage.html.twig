@@ -1,6 +1,11 @@
 {% set page_class = "home-page" %}
 {% extends "CapcoAppBundle::base.html.twig" %}
 
+{% block stylesheets %}
+    {{ parent() }}
+    <link href="{{ asset('js/fancybox/jquery.fancybox.css') }}" rel="stylesheet">
+{% endblock %}
+
 {% block canonical_link %}{{ url('app_homepage') }}{% endblock %}
 
 {% set jumbotron_title = capco_site_parameter_value('homepage.jumbotron.title') %}

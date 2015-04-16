@@ -22,13 +22,5 @@
     "fancybox": "~2.1.5",
     "ckeditor": "#full/4.4.7"
 
-  },
-  "overrides": {
-     "fancybox": {
-       "main": "source/jquery.fancybox.pack.js"
-     },
-     "ckeditor": {
-       "main": "ckeditor.js"
-     }
-   }
+  }
 }

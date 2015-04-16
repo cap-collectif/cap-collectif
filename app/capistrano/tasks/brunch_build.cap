@@ -1,8 +1,0 @@
-namespace :brunch do
-    desc 'build public files'
-    task :build do
-        run_locally do
-            execute "node_modules/brunch/bin/brunch build --production"
-        end
-    end
-end

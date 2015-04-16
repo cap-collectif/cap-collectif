@@ -42,7 +42,7 @@
 /* ===============================================================
     $BOOTSTRAP
 ================================================================*/
-@import "../../../bower_components/bootstrap/assets/stylesheets/bootstrap";
+@import "../libs/bootstrap/assets/stylesheets/bootstrap";
 
 /* ===============================================================
     $FONTS
@@ -61,6 +61,7 @@
 @import "base/base";
 @import "base/header";
 @import "base/footer";
+
 
 /* ===============================================================
     $MODULES

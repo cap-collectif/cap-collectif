@@ -1,4 +1,8 @@
 {% extends '@CapcoApp/Event/index.html.twig' %}
+{% block stylesheets %}
+    {{ parent() }}
+    <link href="{{ asset('js/fancybox/jquery.fancybox.css') }}" rel="stylesheet">
+{% endblock %}
 
 {% block canonical_link %}{{ url('app_event_show', {'slug': event.slug}) }}{% endblock %}
 

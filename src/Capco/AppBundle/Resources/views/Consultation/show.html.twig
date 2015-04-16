@@ -2,6 +2,11 @@
 
 {% block canonical_link %}{{ url('app_consultation_show', {'slug': consultation.slug}) }}{% endblock %}
 
+{% block stylesheets %}
+    {{ parent() }}
+    <link href="{{ asset('js/fancybox/jquery.fancybox.css') }}" rel="stylesheet">
+{% endblock %}
+
 {% block title %}
     {{ parent() }} - {{ consultation.title }}
 {% endblock %}
