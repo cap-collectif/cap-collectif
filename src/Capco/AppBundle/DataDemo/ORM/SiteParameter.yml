@@ -297,3 +297,29 @@ Capco\AppBundle\Entity\SiteParameter:
         value: true
         position: 160
         type: 8
+
+    # members list
+    SiteParameterMembersPaginationSize:
+        keyname: members.pagination.size
+        title: Nombre d'inscrits par page dans la liste des inscrits
+        value: 16
+        position: 783
+        type: 2
+    SiteParameterMembersJumbotronBody:
+        keyname: members.jumbotron.body
+        title: Sous-titre de la liste des inscrits
+        value: ''
+        position: 781
+        type: 1
+    SiteParameterMembersJumbotronTitle:
+        keyname: members.jumbotron.title
+        title: Titre de la liste des inscrits
+        value: Liste des inscrits
+        position: 780
+        type: 0
+    SiteParameterMembersContentBody:
+        keyname: members.content.body
+        title: Introduction de la page "liste des inscrits"
+        value: ''
+        position: 782
+        type: 1

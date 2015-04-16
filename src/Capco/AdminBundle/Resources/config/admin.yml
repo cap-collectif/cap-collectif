@@ -234,7 +234,7 @@ services:
 
     capco_admin.admin.user_type:
         class: Capco\AdminBundle\Admin\UserTypeAdmin
-        arguments: [~, Capco\AppBundle\Entity\UserType, SonataAdminBundle:CRUD]
+        arguments: [~, Capco\UserBundle\Entity\UserType, SonataAdminBundle:CRUD]
         tags:
             - {name: sonata.admin, manager_type: orm, group: sonata.admin.group.user, label: admin.label.user_type}
         calls:

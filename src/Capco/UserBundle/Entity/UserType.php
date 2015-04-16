@@ -1,47 +1,36 @@
 <?php
 
-namespace Capco\AppBundle\Entity;
-
-use Doctrine\ORM\Mapping as ORM;
-use Gedmo\Mapping\Annotation as Gedmo;
-use Symfony\Component\Validator\Constraints as Assert;
+namespace Capco\UserBundle\Entity;
 
 /**
  * UserType.
- *
- * @ORM\Table(name="user_type")
- * @ORM\Entity
  */
 class UserType
 {
+    const FILTER_ALL = 'all';
+
     /**
      * @var int
-     *
-     * @ORM\Column(name="id", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="name", type="string", length=255)
-     * @Assert\NotBlank()
      */
     private $name;
 
     /**
+     * @var string
+     */
+    private $slug;
+
+    /**
      * @var \DateTime
-     * @Gedmo\Timestampable(on="create")
-     * @ORM\Column(name="created_at", type="datetime")
      */
     private $createdAt;
 
     /**
      * @var \DateTime
-     * @Gedmo\Timestampable(on="change", field={"name"})
-     * @ORM\Column(name="updated_at", type="datetime")
      */
     private $updatedAt;
 
@@ -97,6 +86,30 @@ class UserType
     }
 
     /**
+     * @return string
+     */
+    public function getSlug()
+    {
+        return $this->slug;
+    }
+
+    /**
+     * @param string $slug
+     */
+    public function setSlug($slug)
+    {
+        $this->slug = $slug;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getCreatedAt()
+    {
+        return $this->createdAt;
+    }
+
+    /**
      * Get updatedAt.
      *
      * @return \DateTime
@@ -104,19 +117,5 @@ class UserType
     public function getUpdatedAt()
     {
         return $this->updatedAt;
-    }
-
-    /**
-     * Set updatedAt.
-     *
-     * @param \DateTime $updatedAt
-     *
-     * @return UserType
-     */
-    public function setUpdatedAt($updatedAt)
-    {
-        $this->updatedAt = $updatedAt;
-
-        return $this;
     }
 }

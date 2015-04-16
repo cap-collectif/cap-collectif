@@ -1,0 +1,110 @@
+{% extends '@CapcoApp/base.html.twig' %}
+
+{% block canonical_link %}{{ url('app_members') }}{% endblock %}
+
+{% set jumbotron_title = capco_site_parameter_value('members.jumbotron.title') %}
+{% block title %}
+    {% if null != jumbotron_title %}
+        {{ parent() }} - {{ jumbotron_title }}
+    {% else %}
+        {{ parent() }} - {{ 'user.index.title'|trans({}, 'CapcoAppBundle') }}
+    {% endif %}
+{% endblock %}
+
+{% block jumbotron %}
+    <div class="jumbotron  jumbotron--custom  jumbotron--bg-1 text-center">
+        <div class="container">
+            {% if null != jumbotron_title %}
+                <h1>{{ jumbotron_title }}</h1>
+            {% else %}
+                <h1>{{ 'user.index.title'|trans({}, 'CapcoAppBundle') }}</h1>
+            {% endif %}
+            {% set jumbotron_body = capco_site_parameter_value('members.jumbotron.body') %}
+            {% if null != jumbotron_body %}
+                {{ jumbotron_body|raw }}
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}
+
+{% block body %}
+
+    <div class="container  container--custom">
+        {% set content_body = capco_site_parameter_value('members.content.body') %}
+        {% if null != content_body %}
+            {{ content_body|raw }}
+        {% endif %}
+    </div>
+
+    <div class="container  container--custom">
+
+        <div class="filter  block">
+            <div class="row">
+                {{ form_start(form) }}
+                {{ form_errors(form) }}
+                {% if is_feature_enabled('user_type') %}
+                    <div class="col-xs-12  col-sm-3  col-md-4  col-lg-4 filter__down">
+                        {{ form_label(form.userType, null, {'label_attr':{"class":"control-label  sr-only"} }) }}
+                        {{ form_errors(form.userType) }}
+                        {{ form_widget(form.userType, {'attr':{"class":"form-control"} }) }}
+                    </div>
+                {% endif %}
+                <div class="col-xs-12  col-sm-3  col-md-4  col-lg-4 filter__down">
+                    <div class="formgroup--inline">
+                        {{ form_label(form.sort, null, {'label_attr':{"class":"control-label"} }) }}
+                        <span class="formgroup--inline__control">
+                                {{ form_errors(form.sort) }}
+                            {{ form_widget(form.sort, {'attr':{"class":"form-control"} }) }}
+                        </span>
+                    </div>
+                </div>
+
+                {{ form_end(form) }}
+
+            </div>
+        </div>
+
+        <div class="row">
+            {% for member in members %}
+                {% include 'CapcoAppBundle:Default:user_thumbnail.html.twig' with {'user': member, 'col': 3} only %}
+            {% else %}
+                <p>
+                    {{ 'user.index.no_result'|trans({}, 'CapcoAppBundle') }}
+                </p>
+            {% endfor %}
+
+        </div>
+
+        {% if nbPage > 1 %}
+            <div class="pagination--custom  text-center">
+                <ul class="pagination">
+                    {% set userType = form.vars.data.userType %}
+                    {% if userType is null %}
+                        {% set userType = 'all' %}
+                    {% endif %}
+                    {% for p in range(1, nbPage) %}
+                        <li{% if p == page %} class="active"{% endif %}>
+                            {% if form.vars.data.sort is not null %}
+                                <a href="{{ path('app_members_type_sorted', {'page': p, 'sort': form.vars.data.sort, 'userType': userType }) }}">{{ p }}</a>
+                            {% else %}
+                                <a href="{{ path('app_members_type', {'page': p, 'userType': userType}) }}">{{ p }}</a>
+                            {% endif %}
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        {% endif %}
+
+    </div>
+
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script type="text/javascript">
+        $(window).on('load', function() {
+            App.module.equalheight('.thumbnail--custom');
+            window.onresize = App.module.resized('.thumbnail--custom');
+        });
+    </script>
+{% endblock %}
