@@ -1,0 +1,8 @@
+namespace :brunch do
+    desc 'build public files'
+    task :build do
+        on roles(:web) do
+            execute "node_modules/brunch/bin/brunch build --production"
+        end
+    end
+end

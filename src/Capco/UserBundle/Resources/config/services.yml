@@ -1,6 +1,5 @@
 parameters:
   my_user_provider.class: Capco\UserBundle\Security\Core\User\UserProvider
-  capco.has_user_type_if_activated.validator.class: Capco\UserBundle\Validator\Constraints\HasUserTypeIfActivatedValidator
 
 services:
   my_user_provider:
@@ -26,9 +25,3 @@ services:
 
   drupal.encoder:
     class: Capco\UserBundle\Security\DrupalEncoder
-
-  capco.has_user_type_if_activated.validator:
-    class: %capco.has_user_type_if_activated.validator.class%
-    arguments: [@capco.toggle.manager]
-    tags:
-        - { name: validator.constraint_validator, alias: has_user_type_if_activated.validator }

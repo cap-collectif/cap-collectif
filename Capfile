@@ -11,7 +11,6 @@ require 'capistrano/composer'
 require 'capistrano/file-permissions'
 require 'capistrano/npm'
 require 'capistrano/bower'
-require 'capistrano/gulp'
 require 'capistrano/slackify'
 require 'capistrano/copy_files'
 

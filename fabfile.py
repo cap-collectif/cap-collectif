@@ -33,7 +33,7 @@ def build():
     with lcd(env.local_dir):
         local('npm install')
         local('bower install --config.interactive=false')
-        local('gulp build')
+        local('brunch build')
         local('composer install --prefer-source --no-interaction --optimize-autoloader')
 
 @task

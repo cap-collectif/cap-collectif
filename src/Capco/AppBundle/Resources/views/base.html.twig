@@ -36,7 +36,7 @@
         {% endif %}
     {% endblock %}</title>
     {% block stylesheets %}
-        <link href="{{ asset('css/style.min.css') }}" rel="stylesheet">
+        <link href="{{ asset('css/style.css') }}" rel="stylesheet">
     {% endblock %}
 
     {# HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries  #}
@@ -71,7 +71,8 @@
 {{ render(controller('CapcoAppBundle:Default:footer')) }}
 
 {% block javascripts %}
-    <script src="{{ asset('js/app.min.js') }}"></script>
+    <script src="{{ asset('js/vendor.js') }}"></script>
+    <script src="{{ asset('js/app.js') }}"></script>
     <script type="text/javascript">
         $(window).on('load', function() {
             App.module.externalLinks();
