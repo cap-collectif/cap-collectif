@@ -66,6 +66,8 @@ set :assetic_dump_flags,  ''
 
 set :composer_install_flags, '--no-dev --prefer-dist --no-interaction --optimize-autoloader'
 
+set :brunch_command, 'node_modules/brunch/bin/brunch'
+
 fetch(:default_env).merge!(symfony_env: fetch(:symfony_env))
 
 # Capistrano copy-files to deploy faster (copy npm and vendor dir from previous deploy)
