@@ -7,3 +7,5 @@ gem 'capistrano-npm'
 gem 'capistrano-bower'
 gem 'capistrano-slackify', require: false
 gem 'capistrano-copy-files'
+gem 'sass'
+gem 'compass'
