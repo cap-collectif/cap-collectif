@@ -23,8 +23,6 @@ GEM
       capistrano (>= 3.0.0)
     capistrano-file-permissions (0.1.0)
       capistrano (>= 3.0.0)
-    capistrano-gulp (0.0.1)
-      capistrano (~> 3.0)
     capistrano-npm (1.0.1)
       capistrano (>= 3.0.0)
     capistrano-slackify (2.2.0)
@@ -50,7 +48,6 @@ DEPENDENCIES
   capistrano (~> 3.1)
   capistrano-bower
   capistrano-copy-files
-  capistrano-gulp (~> 0.0.1)
   capistrano-npm
   capistrano-slackify
   capistrano-symfony (~> 0.1)!

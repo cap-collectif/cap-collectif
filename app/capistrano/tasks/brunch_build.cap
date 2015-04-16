@@ -1,0 +1,8 @@
+namespace :brunch do
+    desc 'build public files'
+    task :build do
+        run_locally do
+            execute "brunch build --production"
+        end
+    end
+end
