@@ -64,6 +64,9 @@ class ConsultationAdmin extends Admin
             ->add('isEnabled', null, array(
                 'label' => 'admin.fields.consultation.is_enabled',
             ))
+            ->add('publishedAt', null, array(
+                'label' => 'admin.fields.consultation.published_at',
+            ))
             ->add('updatedAt', null, array(
                 'label' => 'admin.fields.consultation.updated_at',
             ))
@@ -117,8 +120,8 @@ class ConsultationAdmin extends Admin
                 'editable' => true,
                 'label' => 'admin.fields.consultation.is_enabled',
             ))
-            ->add('updatedAt', null, array(
-                'label' => 'admin.fields.consultation.updated_at',
+            ->add('publishedAt', null, array(
+                'label' => 'admin.fields.consultation.published_at',
             ))
             ->add('_action', 'actions', array(
                 'actions' => array(
@@ -162,6 +165,14 @@ class ConsultationAdmin extends Admin
             ->add('isEnabled', null, array(
                 'label' => 'admin.fields.consultation.is_enabled',
                 'required' => false,
+            ))
+            ->add('publishedAt', 'sonata_type_datetime_picker', array(
+                'label' => 'admin.fields.consultation.published_at',
+                'required' => true,
+                'format' => 'dd/MM/yyyy HH:mm',
+                'attr' => array(
+                    'data-date-format' => 'DD/MM/YYYY HH:mm',
+                ),
             ))
         ;
 
@@ -238,6 +249,9 @@ class ConsultationAdmin extends Admin
             ))
             ->add('isEnabled', 'boolean', array(
                 'label' => 'admin.fields.consultation.is_enabled',
+            ))
+            ->add('publishedAt', null, array(
+                'label' => 'admin.fields.consultation.published_at',
             ))
             ->add('Author', null, array(
                 'label' => 'admin.fields.consultation.author',

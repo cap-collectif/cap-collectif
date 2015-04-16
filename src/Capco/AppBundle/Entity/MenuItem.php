@@ -60,7 +60,7 @@ class MenuItem
     /**
      * @var bool
      *
-     * @ORM\Column(type="boolean")
+     * @ORM\Column(name="is_fully_modifiable", type="boolean")
      */
     private $isFullyModifiable = true;
 

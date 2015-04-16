@@ -20,16 +20,16 @@ class Consultation
 {
     const FILTER_ALL = 'all';
 
-    const SORT_ORDER_CREATED_AT = 0;
-    const SORT_ORDER_VOTES_COUNT = 1;
+    const SORT_ORDER_PUBLISHED_AT = 0;
+    const SORT_ORDER_CONTRIBUTIONS_COUNT = 1;
 
     public static $sortOrder = [
-        'date' => self::SORT_ORDER_CREATED_AT,
-        'popularity' => self::SORT_ORDER_VOTES_COUNT,
+        'date' => self::SORT_ORDER_PUBLISHED_AT,
+        'popularity' => self::SORT_ORDER_CONTRIBUTIONS_COUNT,
     ];
     public static $sortOrderLabels = [
-        'date' => 'idea.sort.created_at',
-        'popularity' => 'idea.sort.popularity',
+        'date' => 'consultation.sort.published_at',
+        'popularity' => 'consultation.sort.contributions_nb',
     ];
 
     const OPENING_STATUS_FUTURE = 0;
@@ -71,6 +71,15 @@ class Consultation
      * @ORM\Column(name="is_enabled", type="boolean")
      */
     private $isEnabled = true;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="published_at", type="datetime", nullable=false)
+     * @Assert\NotNull()
+     * @Assert\DateTime()
+     */
+    private $publishedAt;
 
     /**
      * @var \DateTime
@@ -201,6 +210,7 @@ class Consultation
         $this->posts = new ArrayCollection();
         $this->allowedTypes = new ArrayCollection();
         $this->updatedAt = new \Datetime();
+        $this->publishedAt = new \DateTime();
     }
 
     public function __toString()
@@ -304,6 +314,25 @@ class Consultation
     public function getUpdatedAt()
     {
         return $this->updatedAt;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getPublishedAt()
+    {
+        return $this->publishedAt;
+    }
+
+    /**
+     * @param \DateTime $publishedAt
+     *
+     * @return $this
+     */
+    public function setPublishedAt($publishedAt)
+    {
+        $this->publishedAt = $publishedAt;
+        return $this;
     }
 
     /**

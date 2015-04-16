@@ -5,6 +5,7 @@ Capco\UserBundle\Entity\User:
         lastname: Brunet
         email: lbrunet@jolicode.com
         enabled: true
+        userType: @UserType1
         plainPassword: toto
         roles:
          - 'ROLE_SUPER_ADMIN'
@@ -17,6 +18,7 @@ Capco\UserBundle\Entity\User:
         lastname: Favot
         email: sfavot@jolicode.com
         enabled: true
+        userType: @UserType1
         plainPassword: toto
         roles:
          - 'ROLE_SUPER_ADMIN'
@@ -32,6 +34,7 @@ Capco\UserBundle\Entity\User:
         lastname: Lacot
         email: xlacot@jolicode.com
         enabled: true
+        userType: @UserType1
         plainPassword: toto
         roles:
          - 'ROLE_SUPER_ADMIN'
@@ -44,6 +47,7 @@ Capco\UserBundle\Entity\User:
         lastname: authentifier
         email: admin@test.com
         enabled: true
+        userType: @UserType1
         plainPassword: admin
         roles:
          - 'ROLE_ADMIN'
@@ -55,6 +59,7 @@ Capco\UserBundle\Entity\User:
         lastname: authentifier
         email: user@test.com
         enabled: true
+        userType: @UserType1
         plainPassword: user
         roles:
          - 'ROLE_USER'
@@ -63,6 +68,7 @@ Capco\UserBundle\Entity\User:
     user_drupal:
         __construct: ['drupal']
         username: drupal
+        userType: @UserType1
         firstname: toto
         lastname: toto
         email: drupal@gmail.com
