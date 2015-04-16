@@ -93,8 +93,7 @@ set :slack_deploy_failed_text, -> {
 }
 
 before 'deploy:starting', 'symfony:parameters'
-after 'bower:install', 'gems:install'
-after 'gems:install', 'brunch:build'
+after 'bower:install', 'brunch:build'
 after 'deploy:updated', 'symfony:migrate'
 before "deploy:set_permissions:check", 'symfony:cache_create'
 before "composer:install", "deploy:set_permissions:acl"
