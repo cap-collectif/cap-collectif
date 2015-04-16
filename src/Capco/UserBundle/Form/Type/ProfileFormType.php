@@ -71,7 +71,7 @@ class ProfileFormType extends AbstractType
 
         if ($this->toggleManager->isActive('user_type')) {
             $builder->add('userType', null, array(
-                'required' => true,
+                'required' => false,
                 'empty_value' => 'user.profile.edit.no_user_type',
                 'label' => 'user.profile.edit.user_type',
                 'translation_domain' => 'CapcoAppBundle',
