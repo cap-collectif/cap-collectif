@@ -929,6 +929,14 @@ class Consultation
         return;
     }
 
+    public function getAllowedTypesIds()
+    {
+        foreach ($this->allowedTypes as $type) {
+            $typesIds[] = $type->getId();
+        }
+        return $typesIds;
+    }
+
     // ************************** Lifecycle **************************************
 
     /**
