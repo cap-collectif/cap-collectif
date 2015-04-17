@@ -5,7 +5,7 @@
   background-color: $custom-footer;
   color: set-link-text-color($custom-footer);
   text-align: center;
-  border-top: 1px solid $border;
+  border-top: 1px solid $border-color;
 
   .container {
     padding: 30px;
@@ -13,7 +13,7 @@
       padding: 15px;
     }
   }
-  
+
   .h4 {
     margin-top: 0;
   }

@@ -62,8 +62,8 @@ body {
     color: $black;
     &:after {
       background-color: $alt-section;
-      border-bottom: 1px solid $border;
-      border-top: 1px solid $border;
+      border-bottom: 1px solid $border-color;
+      border-top: 1px solid $border-color;
     }
   }
 
@@ -100,7 +100,7 @@ body {
 
 .block--bordered {
   background-color: white;
-  border: 1px solid $border;
+  border: 1px solid $border-color;
 }
 
 .block--first-mobile {
@@ -134,7 +134,7 @@ body {
 }
 
 hr {
-  border-color: $border;
+  border-color: $border-color;
   margin-top: 50px;
   margin-bottom: 50px;
 }
@@ -201,7 +201,7 @@ a.excerpt {
     top: 50%;
     left: 0;
     right: 0;
-    background-color: $border;
+    background-color: $border-color;
     height: 1px;
     z-index: 1;
   }
@@ -238,7 +238,7 @@ a.excerpt {
   display: block;
   position: relative;
 }
-  
+
 // Show a play icon on top of images
 .play:before {
   content: '';
@@ -407,7 +407,7 @@ a.excerpt {
 }
 
 img {
-  border-color: $border;
+  border-color: $border-color;
 }
 
 div.embeddedContent {

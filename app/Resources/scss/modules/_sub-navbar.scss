@@ -4,14 +4,14 @@
 .navbar--sub {
   font-size: 15px;
   background-color: $white;
-  border: 1px solid $border;
+  border: 1px solid $border-color;
   margin-bottom: 0;
 
   .nav {
 
     li {
       overflow: hidden;
-      border-top: 1px solid $border;
+      border-top: 1px solid $border-color;
       width: 100%;
 
       &:first-child {

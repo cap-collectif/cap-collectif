@@ -45,7 +45,7 @@
   .opinion__header {
     padding: 2px 15px;
     overflow: hidden;
-    border-bottom: 1px solid $border;
+    border-bottom: 1px solid $border-color;
 
     .neutral-hover:hover {
       text-decoration: none;
@@ -96,7 +96,7 @@
   }
 
   &.opinion__footer {
-    border-top: 1px solid $border;
+    border-top: 1px solid $border-color;
   }
 
   // Body of opinion blocks
@@ -298,7 +298,7 @@
   margin-bottom: 0;
 
   .opinion {
-    border-top: 1px solid $border;
+    border-top: 1px solid $border-color;
     &:first-child {
       border-top: 0;
     }
@@ -307,7 +307,7 @@
 
   .opinion--comment {
     border-top: 0;
-    border-bottom: 1px solid $border;
+    border-bottom: 1px solid $border-color;
     padding-top: 30px;
     padding-bottom: 30px;
     &:first-child {
@@ -335,7 +335,7 @@
 // Opinion descriptions
 .opinion__description {
   padding: 15px;
-  border-top: 1px solid $border;
+  border-top: 1px solid $border-color;
   overflow: hidden;
   word-wrap: break-word;
 
@@ -399,10 +399,10 @@
   @media (max-width: $screen-xs-max) {
     margin-left: -15px;
     margin-right: -15px;
-    border-bottom: 1px solid $border;
+    border-bottom: 1px solid $border-color;
     .opinion__attachment {
       padding: 15px;
-      border-top: 1px solid $border;
+      border-top: 1px solid $border-color;
       &:hover {
         background-color: $light-gray;
         text-decoration: none;
@@ -428,7 +428,7 @@
 }
 
 .opinion__resources {
-  border-top: 1px solid $border;
+  border-top: 1px solid $border-color;
   border-bottom: 0px;
   padding: 15px;
 
@@ -444,7 +444,7 @@
     .opinion__resource {
       display: block;
       padding: 15px;
-      border-top: 1px solid $border;
+      border-top: 1px solid $border-color;
 
       .icon {
         color: $excerpt;
@@ -457,7 +457,7 @@
     }
 
     .opinion__resource:first-child {
-      border-top: 0px solid $border;
+      border-top: 0px solid $border-color;
     }
 
     @each $type in $opinion-types {
@@ -484,7 +484,7 @@
 }
 
 .opinion__list .opinion--argument:first-child {
-  border-top: 1px solid $border;
+  border-top: 1px solid $border-color;
 }
 
 .opinion__arguments--yes {
