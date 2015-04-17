@@ -125,7 +125,7 @@ class ConsultationRepository extends EntityRepository
             ->leftJoin('c.Themes', 't')
             ->leftJoin('c.Steps', 's')
             ->leftJoin('c.Cover', 'cov')
-            ->addOrderBy('c.publishedAt', 'ASC');
+            ->addOrderBy('c.publishedAt', 'DESC');
 
         if ($theme !== null && $theme !== Theme::FILTER_ALL) {
             $qb->andWhere('t.slug = :theme')
@@ -142,7 +142,7 @@ class ConsultationRepository extends EntityRepository
         if (isset(Consultation::$sortOrder[$sort]) && Consultation::$sortOrder[$sort] == Consultation::SORT_ORDER_CONTRIBUTIONS_COUNT) {
             $qb = $this->getOrderedByContributionsNb($qb, 'DESC', 'c');
         } else {
-            $qb->orderBy('c.publishedAt', 'ASC');
+            $qb->orderBy('c.publishedAt', 'DESC');
         }
 
         $query = $qb->getQuery();

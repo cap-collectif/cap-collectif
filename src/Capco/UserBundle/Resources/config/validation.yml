@@ -15,3 +15,15 @@ Capco\UserBundle\Entity\User:
       - Valid: ~
     zipCode:
       - Range: { min: 100, max: 99999, minMessage: user.register.invalid_zip_code, maxMessage: user.register.invalid_zip_code, invalidMessage: user.register.invalid_zip_code }
+
+Capco\UserBundle\Entity\UserType:
+  constraints:
+    - Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity:
+        fields: [name]
+        message: usertype.name.already_exists
+  properties:
+    name:
+      - Notblank: ~
+      - Length:
+          min: 2
+          max: 128

@@ -78,7 +78,7 @@
         <field name="sourcesCount" column="sources_count" type="integer" nullable="false" />
         <field name="opinionsCount" column="opinions_count" type="integer" nullable="false" />
 
-        <many-to-one field="userType" target-entity="Capco\AppBundle\Entity\UserType">
+        <many-to-one field="userType" target-entity="Capco\UserBundle\Entity\UserType">
             <cascade>
                 <cascade-persist/>
             </cascade>

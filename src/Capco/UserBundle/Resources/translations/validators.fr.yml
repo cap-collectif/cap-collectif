@@ -4,3 +4,7 @@ user:
     already_used_email: Cette adresse électronique est déjà utilisée.
     invalid_zip_code: Veuillez saisir un code postal valide.
   no_user_type_when_activated: Vous devez choisir un type de profil.
+
+user_type:
+  name:
+    already_exists: Ce type de profil existe déjà.

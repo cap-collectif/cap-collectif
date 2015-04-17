@@ -3,6 +3,10 @@
 namespace Capco\UserBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
+use Capco\UserBundle\Entity\User;
+use Capco\UserBundle\Entity\UserType;
+use Doctrine\ORM\QueryBuilder;
+use Doctrine\ORM\Tools\Pagination\Paginator;
 
 use Capco\AppBundle\Entity\Consultation;
 
@@ -11,6 +15,7 @@ use Capco\AppBundle\Entity\Consultation;
  */
 class UserRepository extends EntityRepository
 {
+
     public function findConsultationSourceContributorsWithCount(Consultation $consultation)
     {
         $qb = $this->createQueryBuilder('u')
@@ -93,11 +98,75 @@ class UserRepository extends EntityRepository
     public function findWithMediaByIds($ids)
     {
         $qb = $this->createQueryBuilder('u');
-            $qb->addSelect('m')
-               ->leftJoin('u.Media', 'm')
-               ->where('u.id IN (:ids)')
-               ->setParameter('ids', $ids)
-        ;
+        $qb->addSelect('m')
+            ->leftJoin('u.Media', 'm')
+            ->where('u.id IN (:ids)')
+            ->setParameter('ids', $ids);
+
         return $qb->getQuery()->getResult();
+    }
+
+    /**
+     * Get search results.
+     *
+     * @param int  $nbByPage
+     * @param int  $page
+     * @param null $sort
+     * @param null $type
+     *
+     * @return Paginator
+     */
+    public function getSearchResults($nbByPage = 8, $page = 1, $sort = null, $type = null)
+    {
+        if ((int) $page < 1) {
+            throw new \InvalidArgumentException(sprintf(
+                'The argument "page" cannot be lower than 1 (current value: "%s")',
+                $page
+            ));
+        }
+
+        $qb = $this->getIsEnabledQueryBuilder()
+            ->addSelect('m', 'ut')
+            ->leftJoin('u.Media', 'm')
+            ->leftJoin('u.userType', 'ut')
+            ->addOrderBy('u.createdAt', 'DESC')
+        ;
+
+        if ($type !== null && $type !== UserType::FILTER_ALL) {
+            $qb->andWhere('ut.slug = :type')
+                ->setParameter('type', $type)
+            ;
+        }
+
+        if (isset(User::$sortOrder[$sort]) && User::$sortOrder[$sort] == User::SORT_ORDER_CONTRIBUTIONS_COUNT) {
+            $qb = $this->orderByContributionsCount($qb, 'DESC');
+            $qb->addOrderBy('u.createdAt', 'DESC');
+        }
+
+        $query = $qb->getQuery();
+
+        if ($nbByPage > 0) {
+            $query->setFirstResult(($page - 1) * $nbByPage)
+                ->setMaxResults($nbByPage);
+        }
+
+        return new Paginator($query);
+    }
+
+    /**
+     * @return \Doctrine\ORM\QueryBuilder
+     */
+    protected function getIsEnabledQueryBuilder()
+    {
+        return $this->createQueryBuilder('u')
+            ->andWhere('u.enabled = :enabled')
+            ->setParameter('enabled', true);
+    }
+
+    public function orderByContributionsCount(QueryBuilder $qb, $order = 'DESC')
+    {
+        return $qb->addSelect('(u.opinionsCount + u.argumentsCount + u.sourcesCount + u.ideasCount + u.ideaCommentsCount + u.postCommentsCount + u.eventCommentsCount + u.ideaVotesCount + u.commentVotesCount + u.opinionVotesCount + u.argumentVotesCount + u.sourceVotesCount) AS HIDDEN contributionsCount')
+            ->orderBy('contributionsCount', $order)
+        ;
     }
 }
