@@ -24,7 +24,9 @@
             </p>
             <span class="excerpt  small">
                 {% if user is not null and not private %}
-                    {% set contributions = user.contributionsCount |default(0) %}
+                    {% if contributions is not defined %}
+                        {% set contributions = user.contributionsCount |default(0) %}
+                    {% endif %}
                     {% transchoice  contributions with {'%count%': contributions} from 'CapcoAppBundle' %}
                         event_registration.listing.contribution
                     {% endtranschoice %}
