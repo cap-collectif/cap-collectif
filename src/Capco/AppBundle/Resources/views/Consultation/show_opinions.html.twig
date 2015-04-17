@@ -3,19 +3,16 @@
     <div class="block  block--bordered">
         <div class="opinion  opinion--{{ block.color }}  opinion--default">
             <div class="opinion__header  opinion__header--mobile-centered">
+
                 <h2 class="pull-left  h4  opinion__header__title"> {{ block.title }} <span class="badge">{{ block.total_opinions_count }}</span></h2>
-                <div class="pull-right  opinion__header__filter">
-                    {{ form_start(block.sortForm) }}
-                    {{ form_label(block.sortForm.opinionsSort, null, {'label_attr':{"class":"control-label  sr-only"} }) }}
-                    {{ form_widget(block.sortForm.opinionsSort, {'attr':{"class":"form-control", 'onchange': 'this.form.submit()'} }) }}
-                    {{ form_end(block.sortForm) }}
-                    {% if block.isEnabled == true and consultation.canContribute %}
-                        <a href="{{ path('app_consultation_new_opinion' ,{'consultationSlug': consultation.slug, 'opinionTypeSlug': block.slug } ) }}" class="btn  btn-default">
+                {% if block.isEnabled == true and consultation.canContribute %}
+                    <div class="pull-right  opinion__header__filter">
+                        <a href="{{ path('app_consultation_new_opinion' ,{'consultationSlug': consultation.slug, 'opinionTypeSlug': block.slug} ) }}" class="btn  btn-default">
                             <i class="cap cap-add-1"></i>
-                            <span class="hidden-xs">{{ 'opinion.create.button'|trans({}, 'CapcoAppBundle') }}</span>
+                            {{ 'opinion.create.button'|trans({}, 'CapcoAppBundle') }}
                         </a>
-                    {% endif %}
-                </div>
+                    </div>
+                {% endif %}
             </div>
         </div>
         {% if block.total_opinions_count > 0 %}
