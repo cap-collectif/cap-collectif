@@ -33,8 +33,8 @@ def build():
     with lcd(env.local_dir):
         local('npm install')
         local('bower install --config.interactive=false')
-        local('brunch build --production')
-        local('composer install --prefer-source --no-interaction --optimize-autoloader')
+        local('brunch build')
+        local('composer install --prefer-dist --no-interaction --optimize-autoloader')
 
 @task
 def build_test_db():
