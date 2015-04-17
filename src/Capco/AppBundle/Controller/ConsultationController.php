@@ -53,17 +53,33 @@ class ConsultationController extends Controller
      * @Template()
      * @ParamConverter("consultation", class="CapcoAppBundle:Consultation", options={"mapping": {"slug": "slug"}, "method"="getOne"})
      *
+     * @param Request $request
      * @param Consultation $consultation
      *
      * @return array
      */
-    public function showAction(Consultation $consultation)
+    public function showAction(Request $request, Consultation $consultation)
     {
         $em = $this->getDoctrine()->getManager();
         $consultation = $em->getRepository('CapcoAppBundle:Consultation')->getOneWithAllowedTypes($consultation->getSlug());
 
         if (null == $consultation || false == $consultation->canDisplay()) {
             throw $this->createNotFoundException($this->get('translator')->trans('consultation.error.not_found', array(), 'CapcoAppBundle'));
+        }
+
+        if ('POST' === $request->getMethod() && $request->request->has('capco_app_opinions_sort')) {
+
+            $data = $request->request->get('capco_app_opinions_sort');
+            $sort = $data['opinionsSort'];
+            $opinionTypeSlug = $data['opinionType'];
+
+            if (null != $sort && null != $opinionTypeSlug) {
+                return $this->redirect($this->generateUrl('app_consultation_show_opinions_sorted', array(
+                    'consultationSlug' => $consultation->getSlug(),
+                    'opinionTypeSlug' => $opinionTypeSlug,
+                    'opinionsSort' => $sort,
+                )));
+            }
         }
 
         return [
@@ -87,8 +103,9 @@ class ConsultationController extends Controller
             $blocks = $this->getDoctrine()->getRepository('CapcoAppBundle:OpinionType')->getAllowedWithOpinionCount($consultation);
             foreach ($blocks as $key => $block) {
                 $blocks[$key]['opinions'] = $this->getDoctrine()->getRepository('CapcoAppBundle:Opinion')->getByConsultationAndOpinionTypeOrdered($consultation, $block['id']);
+                $form = $this->createForm(new OpinionsSortType($block['slug']));
+                $blocks[$key]['sortForm'] = $form->createView();
             }
-
         }
         
         return [
