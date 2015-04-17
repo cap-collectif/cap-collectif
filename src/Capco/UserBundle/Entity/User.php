@@ -79,26 +79,6 @@ class User extends BaseUser implements EncoderAwareInterface
     /**
      * @var string
      */
-    protected $address;
-
-    /**
-     * @var string
-     */
-    protected $address2;
-
-    /**
-     * @var int
-     */
-    protected $zipCode;
-
-    /**
-     * @var string
-     */
-    protected $neighborhood;
-
-    /**
-     * @var string
-     */
     protected $city;
 
     /**
@@ -358,54 +338,6 @@ class User extends BaseUser implements EncoderAwareInterface
     /**
      * @return string
      */
-    public function getAddress()
-    {
-        return $this->address;
-    }
-
-    /**
-     * @param string $address
-     */
-    public function setAddress($address)
-    {
-        $this->address = $address;
-    }
-
-    /**
-     * @return string
-     */
-    public function getAddress2()
-    {
-        return $this->address2;
-    }
-
-    /**
-     * @param string $address2
-     */
-    public function setAddress2($address2)
-    {
-        $this->address2 = $address2;
-    }
-
-    /**
-     * @return int
-     */
-    public function getZipCode()
-    {
-        return $this->zipCode;
-    }
-
-    /**
-     * @param int $zipCode
-     */
-    public function setZipCode($zipCode)
-    {
-        $this->zipCode = $zipCode;
-    }
-
-    /**
-     * @return string
-     */
     public function getCity()
     {
         return $this->city;
@@ -417,22 +349,6 @@ class User extends BaseUser implements EncoderAwareInterface
     public function setCity($city)
     {
         $this->city = $city;
-    }
-
-    /**
-     * @return string
-     */
-    public function getNeighborhood()
-    {
-        return $this->neighborhood;
-    }
-
-    /**
-     * @param string $neighborhood
-     */
-    public function setNeighborhood($neighborhood)
-    {
-        $this->neighborhood = $neighborhood;
     }
 
     public function getOpinions()

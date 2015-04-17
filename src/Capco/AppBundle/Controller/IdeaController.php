@@ -17,7 +17,6 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Capco\AppBundle\Event\AbstractVoteChangedEvent;
 use Capco\AppBundle\CapcoAppBundleEvents;
-use Capco\AppBundle\Event\AbstractCommentChangedEvent;
 
 class IdeaController extends Controller
 {
@@ -121,10 +120,6 @@ class IdeaController extends Controller
      */
     public function showTrashedAction($page)
     {
-        if (false === $this->get('security.authorization_checker')->isGranted('ROLE_USER')) {
-            throw new AccessDeniedException($this->get('translator')->trans('error.access_restricted', array(), 'CapcoAppBundle'));
-        }
-        
         $em = $this->getDoctrine()->getManager();
 
         $pagination = $this->get('capco.site_parameter.resolver')->getValue('ideas.pagination');
@@ -313,11 +308,9 @@ class IdeaController extends Controller
         $form = $this->createForm(new IdeaVoteType($this->getUser(), $vote->isConfirmed(), $idea->getIsCommentable()), $vote);
 
         if ($request->getMethod() == 'POST') {
-
             if (false == $idea->canContribute()) {
                 throw new AccessDeniedException($translator->trans('idea.error.no_contribute', array(), 'CapcoAppBundle'));
             }
-
             $form->handleRequest($request);
 
             if ($form->isValid()) {
@@ -337,10 +330,6 @@ class IdeaController extends Controller
                             ->setIdea($idea)
                         ;
                         $em->persist($comment);
-                        $this->get('event_dispatcher')->dispatch(
-                            CapcoAppBundleEvents::ABSTRACT_COMMENT_CHANGED,
-                            new AbstractCommentChangedEvent($comment, 'add')
-                        );
                         $em->flush();
                     }
 

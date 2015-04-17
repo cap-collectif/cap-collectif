@@ -96,8 +96,9 @@
             </div>
 
             {% if idea.votes | length > 0 %}
-                {% set limit = 6 %}
                 <div class="container  container--thinner  container--custom">
+
+                    {% set limit = 6 %}
                      <h2>
                        {{ 'idea.vote.listing.title'|transchoice(idea.votes|length, {'%count%': idea.votes|length}, 'CapcoAppBundle') }}
                      </h2>
@@ -107,6 +108,24 @@
                             {{ 'idea.vote.listing.see_all'|trans({}, 'CapcoAppBundle') }}
                         </button>
                     {% endif %}
+                </div>
+
+                <!-- Modal -->
+                <div class="modal fade" id="ideaVotesModal" tabindex="-1" role="dialog" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                <h4 class="modal-title">{{ 'idea.vote.listing.title_all'|trans({}, 'CapcoAppBundle') }}</h4>
+                            </div>
+                            <div class="modal-body">
+                                {% include 'CapcoAppBundle:Idea:votes.html.twig' with {'idea': idea} only %}
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-primary" data-dismiss="modal">Fermer</button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             {% endif %}
 
@@ -185,27 +204,6 @@
 
     </div>
 </div>
-
-{% if idea.votes|length > 0 %}
-    <!-- Modal for votes -->
-    <div class="modal fade" id="ideaVotesModal" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title">{{ 'idea.vote.listing.title_all'|trans({}, 'CapcoAppBundle') }}</h4>
-                </div>
-                <div class="modal-body">
-                    {% include 'CapcoAppBundle:Idea:votes.html.twig' with {'idea': idea} only %}
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" data-dismiss="modal">Fermer</button>
-                </div>
-            </div>
-        </div>
-    </div>
-{% endif %}
-
 {% endblock %}
 
 {% block javascripts %}
