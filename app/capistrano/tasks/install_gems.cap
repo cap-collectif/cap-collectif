@@ -1,9 +1,0 @@
-namespace :gems do
-    desc 'install gems'
-    task :install do
-        on roles(:web) do
-            execute "gem install bundler"
-            execute "cd '#{release_path}'; bundle install --clean"
-        end
-    end
-end
