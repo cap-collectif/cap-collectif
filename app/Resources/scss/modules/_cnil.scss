@@ -2,17 +2,22 @@
    CNIL
 ================================================================*/
 
+
+#cookieChoiceInfo #cookieChoiceDismiss {
+  background-color: $cnil-close;
+  text-decoration: none;
+  padding: 3px 15px;
+}
+
 #cookieChoiceInfo {
-  background-color: $white;
-  color: #666;
-  font-size: 14px;
-  border-bottom: 1px solid $border-color;
+  background-color: $cnil;
 }
 
-#cookieChoiceInfo span, #cookieChoiceInfo a:not(.btn) {
-  color: #666;
+#cookieChoiceInfo span, #cookieChoiceInfo a {
+  color: white;
 }
 
-#cookieChoiceInfo a:not(.btn) {
+#cookieChoiceInfo a {
   text-decoration: underline;
 }
+
