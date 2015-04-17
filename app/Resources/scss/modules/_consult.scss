@@ -42,8 +42,8 @@
 
 .consultation__infos {
   padding: 5px;
-  border-top: 1px solid $border;
-  border-bottom: 1px solid $border;
+  border-top: 1px solid $border-color;
+  border-bottom: 1px solid $border-color;
   margin: 15px 0px;
 
   li {
@@ -85,7 +85,7 @@
 }
 
 .opinion-type__empty-block {
-  border-top: 1px solid $border;
+  border-top: 1px solid $border-color;
   color: $dark-gray;
   font-weight: bold;
   padding: 15px 15px;

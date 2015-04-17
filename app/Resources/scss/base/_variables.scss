@@ -26,7 +26,7 @@ $font-size-base:  16px;
 $body-bg: $brand-color-2;
 $main-bg: #fff;
 $alt-section: #ebebeb;
-$border: #ddd;
+$border-color: #ddd;
 $thin-container: 690px;
 
 // = Navbar
@@ -75,12 +75,6 @@ $btns-outline:
   (primary $btn-primary-bg $btn-primary-bg $btn-default-bg)
   (dark-gray $dark-gray $dark-gray $white)
   (light-gray $light-gray $light-gray $black);
-
-
-// = Cnil
-// -----------------------------
-$cnil: rgb(74, 134, 232);
-$cnil-close: rgb(67, 67, 67);
 
 // = Custom form
 // -----------------------------

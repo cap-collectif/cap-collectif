@@ -113,8 +113,7 @@ Capco\AppBundle\Entity\Opinion:
         isTrashed: false
         Author: @user2
         OpinionType: @opinionType3
-
-    opinion{12..200}:
+    opinion{12..50}:
         Consultation: @cs1
         title: Opinion <current()>
         body: |
@@ -122,5 +121,5 @@ Capco\AppBundle\Entity\Opinion:
              <p><text(300)></p>
         isEnabled: <boolean()>
         isTrashed: <boolean()>
-        Author: @user<numberBetween(1, 50)>
+        Author: @user<numberBetween(1, 5)>
         OpinionType: @opinionType<numberBetween(2, 4)>

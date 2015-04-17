@@ -1,0 +1,8 @@
+namespace :brunch do
+    desc 'build public files'
+    task :build do
+        on roles(:web) do
+            execute "cd '#{release_path}'; #{fetch(:brunch_command)} build --production"
+        end
+    end
+end

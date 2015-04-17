@@ -65,9 +65,33 @@
                             </div>
 
                             <div class="form-group">
+                                {{ form_errors(form.address) }}
+                                {{ form_label(form.address, null, {'label_attr': {'class': 'col-sm-3 control-label'}}) }}
+                                <div class="col-sm-9">{{ form_widget(form.address) }}</div>
+                            </div>
+
+                            <div class="form-group">
+                                {{ form_errors(form.address2) }}
+                                {{ form_label(form.address2, null, {'label_attr': {'class': 'col-sm-3 control-label'}}) }}
+                                <div class="col-sm-9">{{ form_widget(form.address2) }}</div>
+                            </div>
+
+                            <div class="form-group">
+                                {{ form_errors(form.zipCode) }}
+                                {{ form_label(form.zipCode, null, {'label_attr': {'class': 'col-sm-3 control-label'}}) }}
+                                <div class="col-sm-9">{{ form_widget(form.zipCode) }}</div>
+                            </div>
+
+                            <div class="form-group">
                                 {{ form_errors(form.city) }}
                                 {{ form_label(form.city, null, {'label_attr': {'class': 'col-sm-3 control-label'}}) }}
                                 <div class="col-sm-9">{{ form_widget(form.city) }}</div>
+                            </div>
+
+                            <div class="form-group">
+                                {{ form_errors(form.neighborhood) }}
+                                {{ form_label(form.neighborhood, null, {'label_attr': {'class': 'col-sm-3 control-label'}}) }}
+                                <div class="col-sm-9">{{ form_widget(form.neighborhood) }}</div>
                             </div>
 
                             <div class="form-group">

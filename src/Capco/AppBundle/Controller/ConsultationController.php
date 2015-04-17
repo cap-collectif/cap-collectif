@@ -17,6 +17,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Cache;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 class ConsultationController extends Controller
 {
@@ -52,17 +53,33 @@ class ConsultationController extends Controller
      * @Template()
      * @ParamConverter("consultation", class="CapcoAppBundle:Consultation", options={"mapping": {"slug": "slug"}, "method"="getOne"})
      *
+     * @param Request $request
      * @param Consultation $consultation
      *
      * @return array
      */
-    public function showAction(Consultation $consultation)
+    public function showAction(Request $request, Consultation $consultation)
     {
         $em = $this->getDoctrine()->getManager();
         $consultation = $em->getRepository('CapcoAppBundle:Consultation')->getOneWithAllowedTypes($consultation->getSlug());
 
         if (null == $consultation || false == $consultation->canDisplay()) {
             throw $this->createNotFoundException($this->get('translator')->trans('consultation.error.not_found', array(), 'CapcoAppBundle'));
+        }
+
+        if ('POST' === $request->getMethod() && $request->request->has('capco_app_opinions_sort')) {
+
+            $data = $request->request->get('capco_app_opinions_sort');
+            $sort = $data['opinionsSort'];
+            $opinionTypeSlug = $data['opinionType'];
+
+            if (null != $sort && null != $opinionTypeSlug) {
+                return $this->redirect($this->generateUrl('app_consultation_show_opinions_sorted', array(
+                    'consultationSlug' => $consultation->getSlug(),
+                    'opinionTypeSlug' => $opinionTypeSlug,
+                    'opinionsSort' => $sort,
+                )));
+            }
         }
 
         return [
@@ -81,12 +98,16 @@ class ConsultationController extends Controller
      */
     public function showOpinionsAction(Consultation $consultation)
     {
-        $blocks = $this->getDoctrine()->getRepository('CapcoAppBundle:OpinionType')->getAllowedWithOpinionCount($consultation);
-
-        foreach ($blocks as $key => $block) {
-            $blocks[$key]['opinions'] = $this->getDoctrine()->getRepository('CapcoAppBundle:Opinion')->getByConsultationAndOpinionTypeOrdered($consultation, $block['id']);
+        $blocks = null;
+        if (count($consultation->getAllowedTypes()) > 0) {
+            $blocks = $this->getDoctrine()->getRepository('CapcoAppBundle:OpinionType')->getAllowedWithOpinionCount($consultation);
+            foreach ($blocks as $key => $block) {
+                $blocks[$key]['opinions'] = $this->getDoctrine()->getRepository('CapcoAppBundle:Opinion')->getByConsultationAndOpinionTypeOrdered($consultation, $block['id']);
+                $form = $this->createForm(new OpinionsSortType($block['slug']));
+                $blocks[$key]['sortForm'] = $form->createView();
+            }
         }
-
+        
         return [
             'blocks' => $blocks,
             'consultation' => $consultation,
@@ -167,6 +188,10 @@ class ConsultationController extends Controller
             throw $this->createNotFoundException($this->get('translator')->trans('consultation.error.not_found', array(), 'CapcoAppBundle'));
         }
 
+        if (false === $this->get('security.authorization_checker')->isGranted('ROLE_USER')) {
+            throw new AccessDeniedException($this->get('translator')->trans('error.access_restricted', array(), 'CapcoAppBundle'));
+        }
+
         $opinions = $this->getDoctrine()->getRepository('CapcoAppBundle:Opinion')->getTrashedByConsultation($consultation);
         $arguments = $this->getDoctrine()->getRepository('CapcoAppBundle:Argument')->getTrashedByConsultation($consultation);
         $sources = $this->getDoctrine()->getRepository('CapcoAppBundle:Source')->getTrashedByConsultation($consultation);
@@ -239,39 +264,6 @@ class ConsultationController extends Controller
     }
 
     /**
-     * @Route("/consultations/{consultationSlug}/participants/{page}", name="app_consultation_show_contributors", requirements={"page" = "\d+"}, defaults={"page" = 1} )
-     * @ParamConverter("consultation", class="CapcoAppBundle:Consultation", options={"mapping": {"consultationSlug": "slug"}})
-     * @Template("CapcoAppBundle:Consultation:show_contributors.html.twig")
-     *
-     * @param $page
-     * @param $consultation
-     *
-     * @return array
-     */
-    public function showContributorsAction(Consultation $consultation, $page)
-    {
-        $pagination = $this->get('capco.site_parameter.resolver')->getValue('contributors.pagination');
-        $pagination = is_numeric($pagination) ? (int) $pagination : 0;
-
-        $contributors = $this->get('capco.contribution.resolver')->getConsultationContributorsOrdered($consultation);
-
-        //Avoid division by 0 in nbPage calculation
-        $nbPage = 1;
-        if ($pagination != 0) {
-            $nbPage = ceil(count($contributors) / $pagination);
-        }
-
-        return [
-            'consultation' => $consultation,
-            'contributors' => $contributors,
-            'page' => $page,
-            'pagination' => $pagination,
-            'nbPage' => $nbPage,
-        ];
-    }
-
-
-    /**
      * @Template("CapcoAppBundle:Consultation:show_meta.html.twig")
      *
      * @param $consultationSlug
@@ -279,7 +271,7 @@ class ConsultationController extends Controller
      *
      * @return array
      */
-    public function showMetaAction($consultationSlug, $currentStepSlug, $contributorsCount = null)
+    public function showMetaAction($consultationSlug, $currentStepSlug)
     {
         $em = $this->getDoctrine();
         $consultation = $em->getRepository('CapcoAppBundle:Consultation')->getOneBySlugWithStepsAndEventsAndPosts($consultationSlug);
@@ -287,7 +279,6 @@ class ConsultationController extends Controller
         return [
             'consultation' => $consultation,
             'currentStep' => $currentStepSlug,
-            'hasContributors' => $contributorsCount > 0,
             'stepStatus' => Step::$stepStatus,
         ];
     }

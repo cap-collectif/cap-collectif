@@ -17,12 +17,11 @@
   },
   "homepage": "https://github.com/jolicode/CapCollectif-SF2",
   "dependencies": {
+    "bower": "^1.4.1",
     "brunch": "^1.8.0",
     "clean-css-brunch": "^1.7.2",
     "css-brunch": "^1.7.0",
     "javascript-brunch": "^1.7.1",
-    "node-compass": "^0.2.4",
-    "node-sass": "^2.1.1",
     "sass-brunch": "^1.8.10",
     "uglify-js-brunch": "^1.7.8"
   },
