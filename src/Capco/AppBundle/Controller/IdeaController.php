@@ -121,6 +121,10 @@ class IdeaController extends Controller
      */
     public function showTrashedAction($page)
     {
+        if (false === $this->get('security.authorization_checker')->isGranted('ROLE_USER')) {
+            throw new AccessDeniedException($this->get('translator')->trans('error.access_restricted', array(), 'CapcoAppBundle'));
+        }
+        
         $em = $this->getDoctrine()->getManager();
 
         $pagination = $this->get('capco.site_parameter.resolver')->getValue('ideas.pagination');
