@@ -125,8 +125,3 @@ Capco\AppBundle\Entity\SiteColor:
         title: Texte des sections
         value: '#000000'
         position: 2
-    SiteColor25:
-        keyname: color.footer.title
-        title: Titre du pied de page
-        value: '#ffffff'
-        position: 21

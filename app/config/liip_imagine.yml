@@ -154,5 +154,6 @@ liip_imagine:
             controller_action: 'SonataMediaBundle:Media:liipImagineFilter'
             format: png
             filters:
+                upscale: { min: [750, 300] }
                 thumbnail: { size: [750, 300], mode: outbound }
                 crop: { start: [0, 0], size: [750, 300] }
