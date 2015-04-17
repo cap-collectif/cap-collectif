@@ -24,17 +24,19 @@
                     {% endfor %}
                  </div>
             </div>
-            </div>
-            <div class="col-md-4 hidden-xs hidden-sm">
-                <nav class="carousel-sidebar">
-                    <ul class="nav carousel-sidenav">
-                        {% for key, highlighted in highlighteds if has_feature_enabled(highlighted.associatedFeatures) %}
-                            <li data-target="#carousel-highlighted" data-slide-to="{{ key }}" class="{% if loop.first %}active{% endif %}">
-                                <a href="#">{{ highlighted.content.title }}</a>
-                            </li>
-                        {% endfor %}
-                    </ul>
-                </nav>
+        </div>
+        <div class="col-md-4 hidden-xs hidden-sm">
+                {% if highlighteds | length > 1 %}
+                    <nav class="carousel-sidebar">
+                        <ul class="nav carousel-sidenav">
+                            {% for key, highlighted in highlighteds if has_feature_enabled(highlighted.associatedFeatures) %}
+                                <li data-target="#carousel-highlighted" data-slide-to="{{ key }}" class="{% if loop.first %}active{% endif %}">
+                                    <a href="#">{{ highlighted.content.title }}</a>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </nav>
+                {% endif %}
             </div>
         </div>
     </div>

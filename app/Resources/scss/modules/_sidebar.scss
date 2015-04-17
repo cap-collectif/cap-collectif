@@ -41,7 +41,7 @@
   @extend .hidden-md;
 }
 
-@media (max-width: $screen-sm-max) {
+@media (max-width: $screen-md-min) {
   .sidebar {
     position: fixed;
     bottom: 0;
@@ -76,9 +76,9 @@
   .sidebar {
     position: fixed;
     left: 50%;
-    top: 120px;
+    top: 80px;
     width: $container-md*0.25;
-    @include translate(100%, 0);
+    @include translate(100%, 20%);
   }
 }
 

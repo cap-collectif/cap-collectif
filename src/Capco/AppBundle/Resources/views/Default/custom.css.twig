@@ -40,8 +40,6 @@
 {% set linkHover = capco_site_color_value('color.link.hover') %}
 {% if null == linkHover %}{% set linkHover = '#1abc9c' %}{% endif %}
 
-{% set footerTitle = capco_site_color_value('color.footer.title') %}
-{% if null == footerTitle %}{% set footerTitle = '#FFF' %}{% endif %}
 {% set footerText = capco_site_color_value('color.footer.text') %}
 {% if null == footerText %}{% set footerText = '#FFF' %}{% endif %}
 {% set footerBg = capco_site_color_value('color.footer.bg') %}
@@ -191,22 +189,28 @@
         color: {{ btnText }};
     }
 
-    .footer h2 {
-        color: {{ footerTitle }};
-    }
+    {% if footerText is not null %}
+        .footer h2 {
+            color: {{ footerText }};
+        }
+    {% endif %}
 
-    .footer {
-        background-color: {{ footerBg }};
-    }
+    {% if footerBg is not null %}
+        .footer {
+            background-color: {{ footerBg }};
+        }
+    {% endif %}
 
-    .footer,
-    .footer a,
-    .footer a:hover,
-    .footer a:focus,
-    .footer .footer__body a,
-    .footer .social-network li a {
-        color: {{ footerText }};
-    }
+    {% if footerText is not null %}
+        .footer,
+        .footer a,
+        .footer a:hover,
+        .footer a:focus,
+        .footer .footer__body a,
+        .footer .social-network li a {
+            color: {{ footerText }};
+        }
+    {% endif %}
 
     .jumbotron--bg-1 h1{
         color: {{ headerTitle }};
