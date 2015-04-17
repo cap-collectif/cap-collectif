@@ -8,6 +8,13 @@ use Capco\AppBundle\Entity\Opinion;
 
 class OpinionsSortType extends AbstractType
 {
+    protected $opinionType;
+
+    function __construct($opinionType = null)
+    {
+        $this->opinionType = $opinionType;
+    }
+
     /**
      * @param FormBuilderInterface $builder
      * @param array                $options
@@ -21,9 +28,14 @@ class OpinionsSortType extends AbstractType
                 'translation_domain' => 'CapcoAppBundle',
                 'label' => 'opinion.sort.label',
                 'empty_value' => false,
-                'attr' => array('onchange' => 'this.form.submit()'),
             ))
         ;
+
+        if (null !== $this->opinionType) {
+            $builder->add('opinionType', 'hidden', array(
+                'data' => $this->opinionType,
+            ));
+        }
     }
 
     /**

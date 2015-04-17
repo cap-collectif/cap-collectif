@@ -10,7 +10,7 @@
                 <div class="pull-right  opinion__header__filter">
                     {{ form_start(sortOpinionsForm) }}
                     {{ form_label(sortOpinionsForm.opinionsSort, null, {'label_attr':{"class":"control-label  sr-only"} }) }}
-                    {{ form_widget(sortOpinionsForm.opinionsSort, {'attr':{"class":"form-control"} }) }}
+                    {{ form_widget(sortOpinionsForm.opinionsSort, {'attr':{"class":"form-control", 'onchange': 'this.form.submit()'} }) }}
                     {{ form_end(sortOpinionsForm) }}
                     {% if opinionType.isEnabled == true and consultation.canContribute %}
                         <a href="{{ path('app_consultation_new_opinion' ,{'consultationSlug': consultation.slug, 'opinionTypeSlug': opinionType.slug } ) }}" class="btn  btn-default">
