@@ -24,7 +24,6 @@ class Manager
         'login_twitter',
         'shield_mode',
         'user_type',
-        'members_list',
     );
 
     public function __construct(ToggleManager $toggleManager, ContextFactory $contextFactory, $prefix)

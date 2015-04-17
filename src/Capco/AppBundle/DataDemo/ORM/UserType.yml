@@ -1,4 +1,4 @@
-Capco\UserBundle\Entity\UserType:
+Capco\AppBundle\Entity\UserType:
     UserType1:
         name: Citoyen
     UserType2:

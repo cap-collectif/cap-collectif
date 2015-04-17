@@ -26,18 +26,6 @@ use Doctrine\Common\Collections\ArrayCollection;
  */
 class User extends BaseUser implements EncoderAwareInterface
 {
-    const SORT_ORDER_CREATED_AT = 0;
-    const SORT_ORDER_CONTRIBUTIONS_COUNT = 1;
-
-    public static $sortOrder = [
-        'activity' => self::SORT_ORDER_CONTRIBUTIONS_COUNT,
-        'date' => self::SORT_ORDER_CREATED_AT,
-    ];
-    public static $sortOrderLabels = [
-        'activity' => 'user.index.sort.activity',
-        'date' => 'user.index.sort.date',
-    ];
-
     /**
      * @var int
      */
@@ -477,6 +465,39 @@ class User extends BaseUser implements EncoderAwareInterface
         return $this->sources;
     }
 
+    public function getFullname()
+    {
+        return sprintf(
+            '%s %s',
+            $this->getFirstname(),
+            $this->getLastname()
+        );
+    }
+
+    public static function getGenderList()
+    {
+        return array(
+            UserInterface::GENDER_UNKNOWN => 'user.gender.unknown',
+            UserInterface::GENDER_FEMALE  => 'user.gender.female',
+            UserInterface::GENDER_MALE    => 'user.gender.male',
+        );
+    }
+
+    public function getContributionsCount()
+    {
+        return $this->getVotesCount() + $this->sourcesCount + $this->ideasCount + $this->argumentsCount + $this->opinionsCount + $this->getCommentsCount();
+    }
+
+    public function getVotesCount()
+    {
+        return $this->ideaVotesCount + $this->commentVotesCount + $this->opinionVotesCount + $this->argumentVotesCount + $this->sourceVotesCount;
+    }
+
+    public function getCommentsCount()
+    {
+        return $this->ideaCommentsCount + $this->postCommentsCount + $this->eventCommentsCount;
+    }
+
     /**
      * Gets the value of sourcesCount.
      *
@@ -729,40 +750,5 @@ class User extends BaseUser implements EncoderAwareInterface
     public function setUserType($userType)
     {
         $this->userType = $userType;
-    }
-
-    // ************************* Custom methods *********************************
-
-    public function getFullname()
-    {
-        return sprintf(
-            '%s %s',
-            $this->getFirstname(),
-            $this->getLastname()
-        );
-    }
-
-    public static function getGenderList()
-    {
-        return array(
-            UserInterface::GENDER_UNKNOWN => 'user.gender.unknown',
-            UserInterface::GENDER_FEMALE  => 'user.gender.female',
-            UserInterface::GENDER_MALE    => 'user.gender.male',
-        );
-    }
-
-    public function getContributionsCount()
-    {
-        return $this->getVotesCount() + $this->sourcesCount + $this->ideasCount + $this->argumentsCount + $this->opinionsCount + $this->getCommentsCount();
-    }
-
-    public function getVotesCount()
-    {
-        return $this->ideaVotesCount + $this->commentVotesCount + $this->opinionVotesCount + $this->argumentVotesCount + $this->sourceVotesCount;
-    }
-
-    public function getCommentsCount()
-    {
-        return $this->ideaCommentsCount + $this->postCommentsCount + $this->eventCommentsCount;
     }
 }

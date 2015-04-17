@@ -120,13 +120,3 @@ Capco\AppBundle\Entity\MenuItem:
     position: 8
     parent: null
     menu: @menu2
-
-  MenuItem14:
-    title: Liste des inscrits
-    link: members
-    isEnabled: 1
-    isDeletable: 0
-    isFullyModifiable: 0
-    position: 2
-    menu: @menu2
-    parent: @MenuItem5

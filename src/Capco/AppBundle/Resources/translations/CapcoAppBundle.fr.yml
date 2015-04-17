@@ -543,16 +543,6 @@ page:
 
 #Users
 user:
-  index:
-    title: Liste des inscrits
-    no_result: Aucun inscrit trouvé.
-    sort:
-      activity: Les plus actifs
-      date: Les plus récents
-      label: Trier par :
-    user_type:
-      label: Type de profil
-      all_types: Tous les inscrits
   gender:
     unknown: Non communiqué
     male: Homme
