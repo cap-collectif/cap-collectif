@@ -59,6 +59,7 @@ exports.config = {
   plugins: {
     sass: {
       allowCache: true,
+      mode: 'native',
       options: {
         includePaths: ['bower_components/bootstrap/assets/stylesheets/bootstrap']
       }

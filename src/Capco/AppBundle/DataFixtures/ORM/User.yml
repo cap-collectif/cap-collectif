@@ -74,15 +74,3 @@ Capco\UserBundle\Entity\User:
         email: drupal@gmail.com
         enabled: true
         password: $S$DV4UqpdijYQloOE/c6CHQg2SzxEW0K0iHQxOEPLfbv3H/4plvGAU
-
-    user{6..50}:
-        username: <username()>
-        firstname: <firstname()>
-        lastname: <lastname()>
-        email: <email()>
-        enabled: true
-        userType: @UserType1
-        password: <password()>
-        roles:
-         - 'ROLE_USER'
-        isTermsAccepted: true

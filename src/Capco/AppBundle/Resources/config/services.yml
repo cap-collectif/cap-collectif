@@ -159,16 +159,6 @@ services:
         class: %capco.event.resolver.class%
         arguments: [@capco.event.repository]
 
-    capco.contribution.resolver:
-        class: Capco\AppBundle\Resolver\ContributionResolver
-        arguments: [@capco.user.repository]
-
-    capco.user.repository:
-        class:           Capco\UserBundle\Repository\UserRepository
-        factory_service: doctrine.orm.entity_manager
-        factory_method:  getRepository
-        arguments:       ['CapcoUserBundle:User']
-
     capco.video.repository:
         class:           "%capco.video.repository.class%"
         factory_service: doctrine.orm.entity_manager

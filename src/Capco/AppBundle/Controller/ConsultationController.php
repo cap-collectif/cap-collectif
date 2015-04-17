@@ -81,12 +81,15 @@ class ConsultationController extends Controller
      */
     public function showOpinionsAction(Consultation $consultation)
     {
-        $blocks = $this->getDoctrine()->getRepository('CapcoAppBundle:OpinionType')->getAllowedWithOpinionCount($consultation);
+        $blocks = null;
+        if (count($consultation->getAllowedTypes()) > 0) {
+            $blocks = $this->getDoctrine()->getRepository('CapcoAppBundle:OpinionType')->getAllowedWithOpinionCount($consultation);
+            foreach ($blocks as $key => $block) {
+                $blocks[$key]['opinions'] = $this->getDoctrine()->getRepository('CapcoAppBundle:Opinion')->getByConsultationAndOpinionTypeOrdered($consultation, $block['id']);
+            }
 
-        foreach ($blocks as $key => $block) {
-            $blocks[$key]['opinions'] = $this->getDoctrine()->getRepository('CapcoAppBundle:Opinion')->getByConsultationAndOpinionTypeOrdered($consultation, $block['id']);
         }
-
+        
         return [
             'blocks' => $blocks,
             'consultation' => $consultation,
@@ -239,39 +242,6 @@ class ConsultationController extends Controller
     }
 
     /**
-     * @Route("/consultations/{consultationSlug}/participants/{page}", name="app_consultation_show_contributors", requirements={"page" = "\d+"}, defaults={"page" = 1} )
-     * @ParamConverter("consultation", class="CapcoAppBundle:Consultation", options={"mapping": {"consultationSlug": "slug"}})
-     * @Template("CapcoAppBundle:Consultation:show_contributors.html.twig")
-     *
-     * @param $page
-     * @param $consultation
-     *
-     * @return array
-     */
-    public function showContributorsAction(Consultation $consultation, $page)
-    {
-        $pagination = $this->get('capco.site_parameter.resolver')->getValue('contributors.pagination');
-        $pagination = is_numeric($pagination) ? (int) $pagination : 0;
-
-        $contributors = $this->get('capco.contribution.resolver')->getConsultationContributorsOrdered($consultation);
-
-        //Avoid division by 0 in nbPage calculation
-        $nbPage = 1;
-        if ($pagination != 0) {
-            $nbPage = ceil(count($contributors) / $pagination);
-        }
-
-        return [
-            'consultation' => $consultation,
-            'contributors' => $contributors,
-            'page' => $page,
-            'pagination' => $pagination,
-            'nbPage' => $nbPage,
-        ];
-    }
-
-
-    /**
      * @Template("CapcoAppBundle:Consultation:show_meta.html.twig")
      *
      * @param $consultationSlug
@@ -279,7 +249,7 @@ class ConsultationController extends Controller
      *
      * @return array
      */
-    public function showMetaAction($consultationSlug, $currentStepSlug, $contributorsCount = null)
+    public function showMetaAction($consultationSlug, $currentStepSlug)
     {
         $em = $this->getDoctrine();
         $consultation = $em->getRepository('CapcoAppBundle:Consultation')->getOneBySlugWithStepsAndEventsAndPosts($consultationSlug);
@@ -287,7 +257,6 @@ class ConsultationController extends Controller
         return [
             'consultation' => $consultation,
             'currentStep' => $currentStepSlug,
-            'hasContributors' => $contributorsCount > 0,
             'stepStatus' => Step::$stepStatus,
         ];
     }
