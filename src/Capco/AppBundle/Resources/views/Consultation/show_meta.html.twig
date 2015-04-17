@@ -27,18 +27,18 @@
 
 {% set hasPosts = is_feature_enabled('blog') and consultation.posts | length > 0 %}
 {% set hasEvents = is_feature_enabled('calendar') and consultation.events | length > 0 %}
-{% if hasPosts or hasEvents %}
+{% set hasContributors = consultation.opinions | length > 0 %}
+{% if hasPosts or hasEvents or hasContributors %}
     <div>
         <h2 class="h5 excerpt">{{ 'consultation.show.meta.info.title'|trans({}, 'CapcoAppBundle') | upper }}</h2>
         <div class="navbar--sub">
             <ul class="nav">
                 {% if hasContributors %}
-                    <li>
+                    <li {% if currentStep == 'contributors_step' %} class="active" {% endif %}>
                         <a href="{{ path('app_consultation_show_contributors', {
-                            'consultationSlug': consultationSlug }) }}">
+                            'consultationSlug': consultation.slug }) }}">
                            <p class="navbar__step-title">{{ 'consultation.show.meta.info.contributors'|trans({}, 'CapcoAppBundle') }}  <i class="pull-right  excerpt  cap-arrow-66"></i></p>
                         </a>
-
                     </li>
                 {% endif %}
                 {% if hasPosts %}

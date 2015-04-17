@@ -63,7 +63,6 @@ class Opinion
 
     /**
      * @var \DateTime
-     * @Gedmo\Timestampable(on="create")
      * @ORM\Column(name="created_at", type="datetime")
      */
     private $createdAt;
@@ -187,6 +186,7 @@ class Opinion
         $this->arguments = new ArrayCollection();
         $this->Sources = new ArrayCollection();
         $this->updatedAt = new \Datetime();
+        $this->createdAt = new \Datetime();
 
         $this->argumentsCount = 0;
         $this->sourcesCount = 0;
@@ -196,9 +196,9 @@ class Opinion
     {
         if ($this->id) {
             return $this->getTitle();
-        } else {
-            return 'New opinion';
         }
+
+        return 'New opinion';
     }
 
     /**
@@ -514,7 +514,7 @@ class Opinion
     public function setOpinionType($OpinionType)
     {
         $this->OpinionType = $OpinionType;
-        $this->OpinionType->addOpinion($this);
+        // $this->OpinionType->addOpinion($this);
     }
 
     /**
@@ -533,7 +533,7 @@ class Opinion
     public function setConsultation($Consultation)
     {
         $this->Consultation = $Consultation;
-        $this->Consultation->addOpinion($this);
+        // $this->Consultation->addOpinion($this);
 
         return $this;
     }

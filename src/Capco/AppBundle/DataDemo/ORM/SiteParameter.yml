@@ -165,6 +165,12 @@ Capco\AppBundle\Entity\SiteParameter:
         value: 0
         position: 720
         type: 2
+    SiteParameterContributorsPagination:
+        keyname: contributors.pagination
+        title: Nombre d'éléments pour la pagination des participants
+        value: 18
+        position: 730
+        type: 2
 
     SiteParameter27:
         keyname: signin.cgu.name

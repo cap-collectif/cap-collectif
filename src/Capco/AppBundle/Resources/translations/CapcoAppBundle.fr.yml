@@ -235,6 +235,7 @@ theme:
 
 #Consultation
 consultation:
+  share_button: Inviter
   sort:
     published_at: Date de publication
     contributions_nb: Nombre de contributions
@@ -247,6 +248,8 @@ consultation:
       title: Évènements
     posts:
       title: Actualités
+    contributors:
+      title: Participants
     in_theme: dans
     alert:
       ended:
@@ -272,6 +275,7 @@ consultation:
         title: Informations
         posts: Actualités
         events: Évènements
+        contributors: Participants
     status:
       opened: Consultation ouverte
       ended: Consultation fermée
@@ -304,7 +308,7 @@ consultation:
     no_contribute: Impossible de contribuer sur cette consultation.
   contributors:
     no: Il n'y a pas encore de participants pour le moment.
-    participate: Soyez le premier à %link% participer %endlink%.
+    participate: Soyez le premier à %link%participer%endlink%.
 
 step:
   presentation:
@@ -315,10 +319,14 @@ step:
     events:
       title: Évènements
       see_all: Voir tous les évènements
+    contributors:
+      title: Participants
+      see_all: Voir tous les participants
   status:
     closed: Terminé
     open: En cours
-    future: À venir
+    future: À venir:
+
 
 argument:
   create:
