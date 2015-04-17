@@ -47,7 +47,12 @@
 
         <field name="isTermsAccepted" column="is_terms_accepted" type="boolean" nullable="false" />
 
+        <field name="address" column="address" type="string" length="255" nullable="true" />
+        <field name="address2" column="address2" type="string" length="255" nullable="true" />
+        <field name="zipCode" column="zip_code" type="integer" nullable="true" />
         <field name="city" column="city" type="string" length="255" nullable="true" />
+        <field name="neighborhood" column="neighborhood" type="string" length="255" nullable="true" />
+
         <field name="encoder" column="encoder" type="string" length="255" nullable="true" />
 
         <one-to-many field="opinions" target-entity="Capco\AppBundle\Entity\Opinion" mapped-by="Author" />

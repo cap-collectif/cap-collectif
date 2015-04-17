@@ -589,7 +589,11 @@ user:
       media: Image
       email: Adresse électronique
       birthday: Date de naissance
+      address: Adresse
+      address2: Complément d'adresse
+      zip_code: Code postal
       city: Ville
+      neighborhood: Quartier
       account: Compte
       password: Mot de passe
       submit: Enregistrer les modifications

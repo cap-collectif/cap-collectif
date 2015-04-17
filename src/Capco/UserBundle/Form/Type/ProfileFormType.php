@@ -43,8 +43,28 @@ class ProfileFormType extends AbstractType
                 'translation_domain' => 'CapcoAppBundle',
                 'required' => true,
             ))
+            ->add('address', null, array(
+                'label'    => 'user.profile.edit.address',
+                'translation_domain' => 'CapcoAppBundle',
+                'required' => false,
+            ))
+            ->add('address2', null, array(
+                'label'    => 'user.profile.edit.address2',
+                'translation_domain' => 'CapcoAppBundle',
+                'required' => false,
+            ))
+            ->add('zipCode', null, array(
+                'label'    => 'user.profile.edit.zip_code',
+                'translation_domain' => 'CapcoAppBundle',
+                'required' => false,
+            ))
             ->add('city', null, array(
                 'label'    => 'user.profile.edit.city',
+                'translation_domain' => 'CapcoAppBundle',
+                'required' => false,
+            ))
+            ->add('neighborhood', null, array(
+                'label'    => 'user.profile.edit.neighborhood',
                 'translation_domain' => 'CapcoAppBundle',
                 'required' => false,
             ))
