@@ -29,16 +29,12 @@ def create_PR_comment(type, result, pr):
             print 'Can\'t retrieve pr id'
 
 @task
-def build_deps():
+def build():
     with lcd(env.local_dir):
         local('npm install')
         local('bower install --config.interactive=false')
-        local('composer install --prefer-dist --no-interaction --optimize-autoloader')
-
-@task
-def build_front():
-    with lcd(env.local_dir):
         local('brunch build')
+        local('composer install --prefer-dist --no-interaction --optimize-autoloader')
 
 @task
 def build_test_db():
@@ -89,8 +85,3 @@ def test():
         elif result.return_code == 1:
             print result
             print(red('Tests: /!\ KO!'))
-
-@task
-def build():
-    build_deps();
-    build_front();
