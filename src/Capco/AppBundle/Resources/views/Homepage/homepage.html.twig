@@ -12,6 +12,11 @@
     {% endif %}
 {% endblock %}
 
+{% block stylesheets %}
+   {{ parent() }}
+    <link href="{{ asset('js/fancybox/jquery.fancybox.css') }}" rel="stylesheet">
+{% endblock %}
+
 {% block jumbotron %}
     <div class="jumbotron  jumbotron--custom  jumbotron--bg-1  text-center">
         <div class="header-img">

@@ -28,8 +28,8 @@ exports.config = {
           'bower_components/jquery/dist/jquery.js',
           'bower_components/readmore/readmore.min.js',
           'bower_components/ckeditor/ckeditor.js',
-          'bower_components/fancybox/source/jquery.fancybox.pack.js',
           'bower_components/bootstrap/assets/javascripts/bootstrap/*.js',
+          'bower_components/fancybox/source/jquery.fancybox.pack.js',
           'app/Resources/js/cookiechoices.js',
           'app/Resources/js/googleCharts.js'
         ],
@@ -48,8 +48,7 @@ exports.config = {
       joinTo: {
         'css/style.css' : [
           'bower_components/bootstrap/assets/stylesheets/bootstrap.scss',
-          'app/Resources/scss/style.scss',
-          'bower_components/fancybox/source/jquery.fancybox.css'
+          'app/Resources/scss/style.scss'
         ],
         'css/jquery.minicolors.css' : ['bower_components/jquery-minicolors/jquery.minicolors.css'],
         'css/style-admin.css' : ['app/Resources/scss/style-admin.scss'],
