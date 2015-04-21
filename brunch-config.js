@@ -37,7 +37,7 @@ exports.config = {
           'app/Resources/js/app.js'
         ],
         'js/ckeditor/ckeditor.js': [
-          'app/Resources/js/ckeditor/ckeditor.js'
+          'bower_components/ckeditor/ckeditor.js'
         ],
         'js/jquery.minicolors.js': [
           'bower_components/jquery-minicolors/jquery.minicolors.js'
