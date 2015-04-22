@@ -60,3 +60,8 @@ Icon
 
 # PHPStorm configuration
 .idea
+
+# capco
+infrastructure/data
+infrastructure/services/web/VERSION
+infrastructure/services/web/parameters.yml

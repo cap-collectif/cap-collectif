@@ -1,0 +1,13 @@
+builder:
+    build: services/builder
+    volumes:
+        - ../:/capco
+
+demo:
+    build: services/web
+    environment:
+        SHORTNAME: demo
+    ports:
+        - "80:80"
+    expose:
+        - "3306"
