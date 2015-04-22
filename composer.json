@@ -85,7 +85,6 @@
         ]
     },
     "config": {
-        "github-oauth": {"github.com": "***REMOVED***"},
         "bin-dir": "bin"
     },
     "extra": {
