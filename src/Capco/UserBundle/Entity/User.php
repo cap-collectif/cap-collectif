@@ -210,7 +210,14 @@ class User extends BaseUser implements EncoderAwareInterface
         $this->sources = new ArrayCollection();
     }
 
+    // for EncoderAwareInterface
     public function getEncoderName()
+    {
+        return $this->encoder;
+    }
+
+    // for serialization
+    public function getEncoder()
     {
         return $this->encoder;
     }
