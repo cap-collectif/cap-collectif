@@ -3,13 +3,13 @@ Capco\UserBundle\Entity\User:
     - Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity: { fields: email, message: already_used_email }
   properties:
     username:
-      - Notblank: ~
+      - NotBlank: ~
       - Length: { min: 2, max: 128 }
     isTermsAccepted:
       - NotNull: ~
       - "True": ~
     email:
-      - Notblank: ~
+      - NotBlank: ~
       - Email: { checkMX: true, message: user.register.invalid_email }
     Media:
       - Valid: ~
@@ -23,7 +23,7 @@ Capco\UserBundle\Entity\UserType:
         message: usertype.name.already_exists
   properties:
     name:
-      - Notblank: ~
+      - NotBlank: ~
       - Length:
           min: 2
           max: 128
