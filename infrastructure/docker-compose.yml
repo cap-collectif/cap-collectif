@@ -8,6 +8,6 @@ demo:
     environment:
         SHORTNAME: demo
     ports:
-        - "80:80"
+        - "1080:80"
     expose:
         - "3306"

@@ -6,8 +6,8 @@ chown -R capco:capco /var/www/app/logs
 su capco <<'EOF'
 sleep 5
 cd       /var/www
-php app/console doctrine:database:create
-php app/console doctrine:schema:create
+php app/console doctrine:database:create --env=prod --if-not-exists
+php app/console doctrine:migrations:migrate --env=prod --no-interaction
 php app/console cache:warmup --env=prod --no-debug
 EOF
 
