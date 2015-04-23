@@ -107,7 +107,7 @@ class ConsultationController extends Controller
                 $blocks[$key]['sortForm'] = $form->createView();
             }
         }
-        
+
         return [
             'blocks' => $blocks,
             'consultation' => $consultation,

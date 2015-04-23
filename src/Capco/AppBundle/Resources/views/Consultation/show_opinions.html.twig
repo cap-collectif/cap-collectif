@@ -27,7 +27,7 @@
             {% if block.total_opinions_count > 5  %}
                 <div class="opinion  opinion__footer  box">
                     <a href="{{ path('app_consultation_show_opinions', {'consultationSlug': consultation.slug ,'opinionTypeSlug': block.slug}) }}" class="text-center" style="display: block">
-                        {{ 'opinion.show.all'|trans({}, 'CapcoAppBundle') }} {{ block.title|lower }}
+                        {{ 'opinion.show.all'|trans({}, 'CapcoAppBundle') }}
                     </a>
                 </div>
             {% endif %}

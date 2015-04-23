@@ -60,6 +60,7 @@ class ConsultationRepository extends EntityRepository
             ->leftJoin('c.allowedTypes', 'at')
             ->andWhere('c.slug = :slug')
             ->setParameter('slug', $slug)
+            ->addOrderBy('at.position', 'ASC')
         ;
 
         return $qb

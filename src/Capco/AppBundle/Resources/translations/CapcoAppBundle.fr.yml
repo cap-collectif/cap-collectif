@@ -441,7 +441,7 @@ source:
 opinion:
   show:
     back: Retour
-    all: Voir
+    all: Voir tout
     vote:
       cancel: Annuler mon vote
       ok: D'accord
