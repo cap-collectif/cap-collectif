@@ -93,6 +93,7 @@ def generate_docker_compose():
 
     # generate base config
     for line in io.open('templates/docker-compose_base.conf', 'r'):
+        line = line.replace('%%PATH_TO_INFRA%%', env.infrastructure_dir)
         config.write(line)
 
     # generate site config
