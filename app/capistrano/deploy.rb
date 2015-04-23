@@ -5,7 +5,7 @@ set :repo_url,  "git@github.com:jolicode/CapCollectif-SF2.git"
 set :branch, 'develop'
 
 set :format, :pretty
-set :log_level, :info
+set :log_level, :debug
 set :keep_releases, 2
 
 # Symfony environment
@@ -93,7 +93,7 @@ set :slack_deploy_failed_text, -> {
 }
 
 before 'deploy:starting', 'symfony:parameters'
-after 'deploy:updated', 'symfony:migrate'
+before 'deploy:updated', 'symfony:migrate'
 after 'bower:install', 'brunch:build'
 before "deploy:set_permissions:check", 'symfony:cache_create'
 before "composer:install", "deploy:set_permissions:acl"
