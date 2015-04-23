@@ -200,7 +200,7 @@ class Docker:
     def stop(self, c):
         with lcd('%s' % env.client_dir):
             local('docker-compose stop capco%s' % c.user)
-            local('docker-compose rm capco%s' % c.user)
+            local('docker-compose rm -y capco%s' % c.user)
         # local('sudo docker stop -t=15 %s' % (container_id))
         # local('sudo docker rm %s' % (container_id))
 
