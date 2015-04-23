@@ -23,6 +23,7 @@ class MembersController extends Controller
      * @param $userType
      * @param $sort
      *t
+     *
      * @return array|\Symfony\Component\HttpFoundation\RedirectResponse
      */
     public function indexAction(Request $request, $page, $userType = null, $sort = null)
@@ -74,4 +75,3 @@ class MembersController extends Controller
         ];
     }
 }
-

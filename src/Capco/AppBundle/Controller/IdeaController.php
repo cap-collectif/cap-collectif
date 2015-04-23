@@ -124,7 +124,7 @@ class IdeaController extends Controller
         if (false === $this->get('security.authorization_checker')->isGranted('ROLE_USER')) {
             throw new AccessDeniedException($this->get('translator')->trans('error.access_restricted', array(), 'CapcoAppBundle'));
         }
-        
+
         $em = $this->getDoctrine()->getManager();
 
         $pagination = $this->get('capco.site_parameter.resolver')->getValue('ideas.pagination');
@@ -313,7 +313,6 @@ class IdeaController extends Controller
         $form = $this->createForm(new IdeaVoteType($this->getUser(), $vote->isConfirmed(), $idea->getIsCommentable()), $vote);
 
         if ($request->getMethod() == 'POST') {
-
             if (false == $idea->canContribute()) {
                 throw new AccessDeniedException($translator->trans('idea.error.no_contribute', array(), 'CapcoAppBundle'));
             }
