@@ -53,7 +53,7 @@ class ConsultationController extends Controller
      * @Template()
      * @ParamConverter("consultation", class="CapcoAppBundle:Consultation", options={"mapping": {"slug": "slug"}, "method"="getOne"})
      *
-     * @param Request      $request
+     * @param Request $request
      * @param Consultation $consultation
      *
      * @return array
@@ -68,6 +68,7 @@ class ConsultationController extends Controller
         }
 
         if ('POST' === $request->getMethod() && $request->request->has('capco_app_opinions_sort')) {
+
             $data = $request->request->get('capco_app_opinions_sort');
             $sort = $data['opinionsSort'];
             $opinionTypeSlug = $data['opinionType'];
@@ -293,6 +294,7 @@ class ConsultationController extends Controller
             'nbPage' => $nbPage,
         ];
     }
+
 
     /**
      * @Template("CapcoAppBundle:Consultation:show_meta.html.twig")

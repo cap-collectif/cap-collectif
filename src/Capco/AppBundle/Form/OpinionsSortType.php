@@ -10,7 +10,7 @@ class OpinionsSortType extends AbstractType
 {
     protected $opinionType;
 
-    public function __construct($opinionType = null)
+    function __construct($opinionType = null)
     {
         $this->opinionType = $opinionType;
     }

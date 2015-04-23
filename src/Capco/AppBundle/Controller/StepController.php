@@ -77,7 +77,7 @@ class StepController extends Controller
             'posts' => $posts,
             'nbEvents' => $nbEvents,
             'nbPosts' => $nbPosts,
-            'contributors' => $contributors,
+            'contributors' => $contributors
         ];
     }
 }

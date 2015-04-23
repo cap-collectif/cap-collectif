@@ -7,6 +7,7 @@ use Capco\UserBundle\Entity\User;
 use Capco\UserBundle\Entity\UserType;
 use Doctrine\ORM\QueryBuilder;
 use Doctrine\ORM\Tools\Pagination\Paginator;
+
 use Capco\AppBundle\Entity\Consultation;
 
 /**
@@ -14,6 +15,7 @@ use Capco\AppBundle\Entity\Consultation;
  */
 class UserRepository extends EntityRepository
 {
+
     public function findConsultationSourceContributorsWithCount(Consultation $consultation)
     {
         $qb = $this->createQueryBuilder('u')
@@ -24,7 +26,6 @@ class UserRepository extends EntityRepository
                    ->groupBy('u')
                    ->setParameter('consultation', $consultation)
                 ;
-
         return $qb->getQuery()->getResult();
     }
 
@@ -38,7 +39,6 @@ class UserRepository extends EntityRepository
                    ->groupBy('u')
                    ->setParameter('consultation', $consultation)
                 ;
-
         return $qb->getQuery()->getResult();
     }
 
@@ -51,7 +51,6 @@ class UserRepository extends EntityRepository
                     ->groupBy('u')
                     ->setParameter('consultation', $consultation)
             ;
-
         return $qb->getQuery()->getResult();
     }
 
@@ -65,7 +64,6 @@ class UserRepository extends EntityRepository
                     ->groupBy('u')
                     ->setParameter('consultation', $consultation)
             ;
-
         return $qb->getQuery()->getResult();
     }
 
@@ -80,7 +78,6 @@ class UserRepository extends EntityRepository
                     ->groupBy('u')
                     ->setParameter('consultation', $consultation)
             ;
-
         return $qb->getQuery()->getResult();
     }
 
@@ -95,7 +92,6 @@ class UserRepository extends EntityRepository
                     ->groupBy('u')
                     ->setParameter('consultation', $consultation)
             ;
-
         return $qb->getQuery()->getResult();
     }
 

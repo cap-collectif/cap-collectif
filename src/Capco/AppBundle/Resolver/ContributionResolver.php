@@ -67,7 +67,7 @@ class ContributionResolver
             $contributor['total'] += isset($contributor['sources_votes']) ? $contributor['sources_votes'] : 0;
         }
 
-        usort($contributors, function ($a, $b) { return $b['total'] - $a['total']; });
+        usort($contributors, function($a, $b) { return $b['total'] - $a['total']; });
 
         return $contributors;
     }

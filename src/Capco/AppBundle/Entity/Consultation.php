@@ -934,7 +934,6 @@ class Consultation
         foreach ($this->allowedTypes as $type) {
             $typesIds[] = $type->getId();
         }
-
         return $typesIds;
     }
 
