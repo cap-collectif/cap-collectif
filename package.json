@@ -18,7 +18,7 @@
   "homepage": "https://github.com/jolicode/CapCollectif-SF2",
   "dependencies": {
     "bower": "^1.4.1",
-    "brunch": "^1.8.0",
+    "brunch": "^1.8.2",
     "clean-css-brunch": "^1.7.2",
     "css-brunch": "^1.7.0",
     "javascript-brunch": "^1.7.1",

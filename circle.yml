@@ -18,6 +18,7 @@ dependencies:
             background: true
         - curl http://get.sensiolabs.org/php-cs-fixer.phar -o php-cs-fixer
         - sudo chmod a+x php-cs-fixer
+        - npm install -g brunch
         - pip install fabric requests libsaas
 
 deployment:
@@ -29,7 +30,6 @@ deployment:
 test:
     pre:
         - echo "memory_limit = 2048M" > ~/.phpenv/versions/$(phpenv global)/etc/conf.d/memory.ini
-        - npm install -g brunch
         - fab build
         - app/console server:run:
             background: true

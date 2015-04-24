@@ -38,7 +38,7 @@ def build_deps():
 @task
 def build_front():
     with lcd(env.local_dir):
-        local('brunch build')
+        local('brunch build --production')
 
 @task
 def build_test_db():

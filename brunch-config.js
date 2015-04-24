@@ -69,6 +69,10 @@ exports.config = {
     cleancss: {
       keepSpecialComments: 0,
       removeEmpty: true
+    },
+    uglify: {
+      mangle: true,
+      compress: false
     }
   }
 };
