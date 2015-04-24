@@ -63,5 +63,6 @@ Icon
 
 # capco
 infrastructure/data
+infrastructure/sites.csv
 infrastructure/services/web/VERSION
 infrastructure/services/web/parameters.yml
