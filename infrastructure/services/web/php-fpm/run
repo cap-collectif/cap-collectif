@@ -1,5 +1,6 @@
 #!/bin/bash
 
+rm -rf app/cache/prod/*
 chown -R capco:capco /var/www/app/cache
 chown -R capco:capco /var/www/app/logs
 chown -R capco:capco /var/www/web/media
