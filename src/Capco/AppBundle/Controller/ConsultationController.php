@@ -312,7 +312,7 @@ class ConsultationController extends Controller
      *
      * @return array
      */
-    public function showMetaAction($consultationSlug, $currentStepSlug, $contributorsCount = null)
+    public function showMetaAction($consultationSlug, $currentStepSlug)
     {
         $em = $this->getDoctrine();
         $consultation = $em->getRepository('CapcoAppBundle:Consultation')->getOneBySlugWithStepsAndEventsAndPosts($consultationSlug);
@@ -320,7 +320,6 @@ class ConsultationController extends Controller
         return [
             'consultation' => $consultation,
             'currentStep' => $currentStepSlug,
-            'hasContributors' => $contributorsCount > 0,
             'stepStatus' => Step::$stepStatus,
         ];
     }
