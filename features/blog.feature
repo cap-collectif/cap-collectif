@@ -3,7 +3,7 @@ Feature: News
 Scenario: Can comment a news
   Given feature "blog" is enabled
   And I visited "blog page"
-  And I follow "Post 5"
+  And I follow "Post 2"
   And I should see "Commenter avec mon compte"
   And I fill in the following:
     | capco_app_comment[authorName]  | Naruto              |

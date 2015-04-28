@@ -120,7 +120,7 @@ class ConsultationController extends Controller
 
     /**
      * @Route("/consultations/{consultationSlug}/consultation/{stepSlug}/opinions/{opinionTypeSlug}/{page}", name="app_consultation_show_opinions", requirements={"page" = "\d+"}, defaults={"page" = 1})
-     * @Route("/consultations/{consultationSlug}/consultation/{stepSlug}/opinions/{opinionTypeSlug}/{page}/{opinionsSort}", name="app_consultation_show_opinions_sorted", requirements={"page" = "\d+","opinionsSort" = "date|comments|votes"}, defaults={"page" = 1})
+     * @Route("/consultations/{consultationSlug}/consultation/{stepSlug}/opinions/{opinionTypeSlug}/{opinionsSort}/{page}", name="app_consultation_show_opinions_sorted", requirements={"page" = "\d+","opinionsSort" = "date|comments|votes"}, defaults={"page" = 1})
      * @ParamConverter("consultation", class="CapcoAppBundle:Consultation", options={"mapping": {"consultationSlug": "slug"}})
      * @ParamConverter("currentStep", class="CapcoAppBundle:ConsultationStep", options={"mapping": {"stepSlug": "slug"}})
      * @ParamConverter("opinionType", class="CapcoAppBundle:OpinionType", options={"mapping": {"opinionTypeSlug": "slug"}})
@@ -156,12 +156,13 @@ class ConsultationController extends Controller
                     'consultationSlug' => $consultation->getSlug(),
                     'stepSlug' => $currentStep->getSlug(),
                     'opinionTypeSlug' => $opinionType->getSlug(),
-                    'page' => $page,
                     'opinionsSort' => $data['opinionsSort'],
                 )));
             }
         } else {
-            $form->get('opinionsSort')->setData($opinionsSort);
+            $form->setData(array(
+                'opinionsSort'=> $opinionsSort
+            ));
         }
 
         $currentUrl = $this->generateUrl('app_consultation_show_opinions', ['consultationSlug' => $consultation->getSlug(), 'stepSlug' => $currentStep->getSlug(), 'opinionTypeSlug' => $opinionType->getSlug()]);

@@ -75,7 +75,7 @@ Capco\UserBundle\Entity\User:
         enabled: true
         password: $S$DV4UqpdijYQloOE/c6CHQg2SzxEW0K0iHQxOEPLfbv3H/4plvGAU
 
-    user{6..50}:
+    user{6..500}:
         username: <username()>
         firstname: <firstname()>
         lastname: <lastname()>

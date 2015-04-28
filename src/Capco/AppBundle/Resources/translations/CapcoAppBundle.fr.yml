@@ -585,10 +585,10 @@ user:
       twitter: S'inscrire avec Twitter
     or: ou
     username:
-      username: Nom complet
+      username: Nom
       is_public: Votre nom sera rendu public sur le site.
     email: Adresse électronique
-    user_type: Vous êtes :
+    user_type: Type de profil
     terms:
       label: "J'ai lu et j'accepte %cgu%."
     legal_text: "Les informations recueillies font l’objet d’un traitement informatique destiné au fonctionnement de la plateforme contributive. Le Conseil national du numérique est l’unique destinataire de ces données. Conformément à la loi « informatique et libertés » du 6 janvier 1978 modifiée en 2004, vous bénéficiez d’un droit d’accès et de rectification aux informations qui vous concernent, que vous pouvez exercer en vous adressant à %startlink%concertation@cnnumerique.fr%endlink%. Vous pouvez également, pour des motifs légitimes, vous opposer au traitement des données vous concernant."
@@ -735,7 +735,7 @@ event_registration:
     see_all: Voir tous les participants
     title_all: Liste des participants
     anonymous: Anonyme
-    contribution: "{0}|{1} contribution | ]1,Inf[ %count% contributions"
+    contribution: "{0} Aucune contribution | {1} 1 contribution | ]1,Inf[ %count% contributions"
   unsubscribe: Se désinscrire
 
 # comments
