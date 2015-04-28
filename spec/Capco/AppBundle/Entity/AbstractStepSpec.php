@@ -9,6 +9,6 @@ class StepSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
-        $this->shouldHaveType('Capco\AppBundle\Entity\Step');
+        $this->shouldHaveType('Capco\AppBundle\Entity\AbstractStep');
     }
 }

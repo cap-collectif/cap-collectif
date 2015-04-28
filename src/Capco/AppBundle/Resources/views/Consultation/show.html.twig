@@ -1,6 +1,6 @@
 {% extends '@CapcoApp/base.html.twig' %}
 
-{% block canonical_link %}{{ url('app_consultation_show', {'slug': consultation.slug}) }}{% endblock %}
+{% block canonical_link %}{{ url('app_consultation_show', {'consultationSlug': consultation.slug, 'stepSlug': currentStep.slug}) }}{% endblock %}
 
 {% block title %}
     {{ parent() }} - {{ consultation.title }}
@@ -22,22 +22,16 @@
 
     <div class="container  container--custom">
 
-        {% if consultation.isClosed %}
+        {% if currentStep.isClosed %}
         <div class="alert alert-info alert-dismissible  block" role="alert">
             <p><strong>{{ 'consultation.show.alert.ended.title'|trans({}, 'CapcoAppBundle') }}</strong> {{ 'consultation.show.alert.ended.text'|trans({}, 'CapcoAppBundle') }}</p>
         </div>
         {% endif %}
 
-        {% if consultation.isFuture %}
+        {% if currentStep.isFuture %}
         <div class="alert alert-info alert-dismissible  block" role="alert">
             <p><strong>{{ 'consultation.show.alert.future.title'|trans({}, 'CapcoAppBundle') }}</strong> {{ 'consultation.show.alert.future.text'|trans({'%date%': '<strong>' ~ consultation.getOpenedAt| localizeddate('long', 'none', app.request.locale) ~ '</strong>'}, 'CapcoAppBundle') | raw }}</p>
         </div>
-        {% endif %}
-
-        {%  if currentStep is not defined %}
-            {% set currentStepSlug = 'consultation_step' %}
-        {% else %}
-            {% set currentStepSlug = currentStep.slug %}
         {% endif %}
 
         <div class="row">
@@ -49,7 +43,7 @@
                 {% set opinionTypeCurrent = 'trashed' %}
             {% endif %}
             <div class="col-xs-12  col-sm-8  col-md-9" id="details">
-                {% include '@CapcoApp/Consultation/show_nav.html.twig' with {'type': opinionTypeCurrent, 'consultation': consultation} %}
+                {% include '@CapcoApp/Consultation/show_nav.html.twig' with {'opinionTypeCurrent': opinionTypeCurrent, 'consultation': consultation} %}
                 {% block opinions_list %}
                     {% if currentStep.body is not null %}
                         <div class="block  block--bordered">
@@ -63,7 +57,7 @@
                             </div>
                         </div>
                     {% endif %}
-                    {{ render(controller('CapcoAppBundle:Consultation:showOpinions', {'consultation': consultation.id})) }}
+                    {{ render(controller('CapcoAppBundle:Consultation:showOpinions', {'consultation': consultation.id, 'currentStep': currentStep})) }}
                 {% endblock %}
             </div> <!-- col-xs-12  col-sm-8  col-md-9 -->
         </div> <!-- .row -->

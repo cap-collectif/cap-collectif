@@ -3,9 +3,10 @@ Feature: Source
   Scenario: Can create a source in contribuable opinion
     Given I am logged in as user
     And I visited "opinion page" with:
-      | consultation_slug | croissance-innovation-disruption |
-      | opinion_type_slug | causes                           |
-      | opinion_slug      | opinion-2                        |
+      | consultationSlug | croissance-innovation-disruption |
+      | stepSlug         | collecte-des-avis                |
+      | opinionTypeSlug  | causes                           |
+      | opinionSlug      | opinion-2                        |
     When I follow "Ajouter une source"
     And I fill in the following:
     | capco_app_source_link   | http://www.google.fr     |
@@ -18,18 +19,20 @@ Feature: Source
   Scenario: Can not create an argument in non-contribuable opinion
     Given I am logged in as user
     And I visited "opinion page" with:
-      | consultation_slug | strategie-technologique-de-l-etat-et-services-publics |
-      | opinion_type_slug | causes                                                |
-      | opinion_slug      | opinion-7                                             |
+      | consultationSlug   | strategie-technologique-de-l-etat-et-services-publics |
+      | stepSlug           | collecte-des-avis-pour-une-meilleur-strategie         |
+      | opinionTypeSlug    | causes                                                |
+      | opinionSlug        | opinion-7                                             |
     Then I should not see "Proposer une source"
 
  @javascript @database
   Scenario: Can vote for a source
     Given I am logged in as user
     And I visited "opinion page" with:
-      | consultation_slug | croissance-innovation-disruption |
-      | opinion_type_slug | enjeux                           |
-      | opinion_slug      | opinion-3                        |
+      | consultationSlug | croissance-innovation-disruption |
+      | stepSlug         | collecte-des-avis                |
+      | opinionTypeSlug  | enjeux                           |
+      | opinionSlug      | opinion-3                        |
     And I collapse sources list
     When I vote for the first source
     Then I should see "Merci ! Votre vote a bien été pris en compte."

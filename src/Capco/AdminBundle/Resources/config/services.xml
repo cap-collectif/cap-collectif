@@ -23,5 +23,10 @@
             <tag name="sonata.block" />
         </service>
 
+        <service id="capco.admin.helper_controller" class="Capco\AdminBundle\Controller\HelperController">
+            <argument type="service" id="capco.consultation_type.repository" />
+        </service>
+
+
     </services>
 </container>

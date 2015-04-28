@@ -1,6 +1,6 @@
 Capco\AppBundle\Entity\Opinion:
     opinion1:
-        Consultation: @cs1
+        step: @cstep1
         title: Opinion 1
         body: |
              <p><text(100)></p>
@@ -10,7 +10,7 @@ Capco\AppBundle\Entity\Opinion:
         Author: @user1
         OpinionType: @opinionType1
     opinion2:
-        Consultation: @cs1
+        step: @cstep1
         title: Opinion 2
         body: |
              <p><text(100)></p>
@@ -20,7 +20,7 @@ Capco\AppBundle\Entity\Opinion:
         Author: @user1
         OpinionType: @opinionType2
     opinion3:
-        Consultation: @cs1
+        step: @cstep1
         title: Opinion 3
         body: |
              <p><text(100)></p>
@@ -30,7 +30,7 @@ Capco\AppBundle\Entity\Opinion:
         Author: @user1
         OpinionType: @opinionType3
     opinion4:
-        Consultation: @cs1
+        step: @cstep1
         title: Opinion 4
         body: |
              <p><text(100)></p>
@@ -40,7 +40,7 @@ Capco\AppBundle\Entity\Opinion:
         Author: @user2
         OpinionType: @opinionType3
     opinion5:
-        Consultation: @cs1
+        step: @cstep1
         title: Opinion 5
         body: |
              <p><text(100)></p>
@@ -51,7 +51,7 @@ Capco\AppBundle\Entity\Opinion:
         OpinionType: @opinionType4
 
     opinion6:
-        Consultation: @cs2
+        step: @cstep2
         title: Opinion 6
         body: |
              <p><text(100)></p>
@@ -61,7 +61,7 @@ Capco\AppBundle\Entity\Opinion:
         Author: @user5
         OpinionType: @opinionType1
     opinion7:
-        Consultation: @cs2
+        step: @cstep2
         title: Opinion 7
         body: |
              <p><text(100)></p>
@@ -71,7 +71,7 @@ Capco\AppBundle\Entity\Opinion:
         Author: @user4
         OpinionType: @opinionType2
     opinion8:
-        Consultation: @cs2
+        step: @cstep2
         title: Opinion 8
         body: |
              <p><text(100)></p>
@@ -84,7 +84,7 @@ Capco\AppBundle\Entity\Opinion:
 
 
     opinion9:
-        Consultation: @cs3
+        step: @cstep3
         title: Opinion 9
         body: |
              <p><text(100)></p>
@@ -94,7 +94,7 @@ Capco\AppBundle\Entity\Opinion:
         Author: @user5
         OpinionType: @opinionType1
     opinion10:
-        Consultation: @cs3
+        step: @cstep3
         title: Opinion 10
         body: |
              <p><text(100)></p>
@@ -104,7 +104,7 @@ Capco\AppBundle\Entity\Opinion:
         Author: @user4
         OpinionType: @opinionType2
     opinion11:
-        Consultation: @cs3
+        step: @cstep3
         title: Opinion 11
         body: |
              <p><text(100)></p>
@@ -115,7 +115,7 @@ Capco\AppBundle\Entity\Opinion:
         OpinionType: @opinionType3
 
     opinion{12..200}:
-        Consultation: @cs1
+        step: @cstep1
         title: Opinion <current()>
         body: |
              <p><text(100)></p>

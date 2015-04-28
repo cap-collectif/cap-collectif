@@ -7,7 +7,8 @@ use Capco\AppBundle\Entity\Consultation;
 use Capco\AppBundle\Entity\Opinion;
 use Capco\AppBundle\Entity\OpinionType;
 use Capco\AppBundle\Entity\Theme;
-use Capco\AppBundle\Entity\Step;
+use Capco\AppBundle\Entity\AbstractStep as Step;
+use Capco\AppBundle\Entity\ConsultationStep;
 use Capco\AppBundle\Form\ConsultationSearchType;
 use Capco\AppBundle\Form\OpinionsSortType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -49,21 +50,22 @@ class ConsultationController extends Controller
     // Page consultation
 
     /**
-     * @Route("/consultations/{slug}", name="app_consultation_show")
+     * @Route("/consultations/{consultationSlug}/consultation/{stepSlug}", name="app_consultation_show")
      * @Template()
-     * @ParamConverter("consultation", class="CapcoAppBundle:Consultation", options={"mapping": {"slug": "slug"}, "method"="getOne"})
+     * @ParamConverter("consultation", class="CapcoAppBundle:Consultation", options={"mapping": {"consultationSlug": "slug"}, "method"="getOne"})
+     * @ParamConverter("currentStep", class="CapcoAppBundle:ConsultationStep", options={"mapping": {"stepSlug": "slug"}, "method"="getOneWithAllowedTypes"})
      *
-     * @param Request      $request
-     * @param Consultation $consultation
+     * @param Request          $request
+     * @param Consultation     $consultation
+     * @param ConsultationStep $currentStep
      *
      * @return array
      */
-    public function showAction(Request $request, Consultation $consultation)
+    public function showAction(Request $request, Consultation $consultation, ConsultationStep $currentStep)
     {
         $em = $this->getDoctrine()->getManager();
-        $consultation = $em->getRepository('CapcoAppBundle:Consultation')->getOneWithAllowedTypes($consultation->getSlug());
 
-        if (null == $consultation || false == $consultation->canDisplay()) {
+        if (false === $currentStep->canDisplay()) {
             throw $this->createNotFoundException($this->get('translator')->trans('consultation.error.not_found', array(), 'CapcoAppBundle'));
         }
 
@@ -75,6 +77,7 @@ class ConsultationController extends Controller
             if (null != $sort && null != $opinionTypeSlug) {
                 return $this->redirect($this->generateUrl('app_consultation_show_opinions_sorted', array(
                     'consultationSlug' => $consultation->getSlug(),
+                    'stepSlug' => $currentStep->getSlug(),
                     'opinionTypeSlug' => $opinionTypeSlug,
                     'opinionsSort' => $sort,
                 )));
@@ -84,7 +87,7 @@ class ConsultationController extends Controller
         return [
             'consultation' => $consultation,
             'statuses' => Theme::$statuses,
-            'currentStep' => $consultation->getConsultationStep(),
+            'currentStep' => $currentStep,
         ];
     }
 
@@ -92,16 +95,17 @@ class ConsultationController extends Controller
      * @Template("CapcoAppBundle:Consultation:show_opinions.html.twig")
      *
      * @param $consultation
+     * @param $currentStep
      *
      * @return array
      */
-    public function showOpinionsAction(Consultation $consultation)
+    public function showOpinionsAction(Consultation $consultation, ConsultationStep $currentStep)
     {
         $blocks = null;
-        if (count($consultation->getAllowedTypes()) > 0) {
-            $blocks = $this->getDoctrine()->getRepository('CapcoAppBundle:OpinionType')->getAllowedWithOpinionCount($consultation);
+        if (count($currentStep->getAllowedTypes()) > 0) {
+            $blocks = $this->getDoctrine()->getRepository('CapcoAppBundle:OpinionType')->getAllowedWithOpinionCount($currentStep);
             foreach ($blocks as $key => $block) {
-                $blocks[$key]['opinions'] = $this->getDoctrine()->getRepository('CapcoAppBundle:Opinion')->getByConsultationAndOpinionTypeOrdered($consultation, $block['id']);
+                $blocks[$key]['opinions'] = $this->getDoctrine()->getRepository('CapcoAppBundle:Opinion')->getByConsultationStepAndOpinionTypeOrdered($currentStep, $block['id']);
                 $form = $this->createForm(new OpinionsSortType($block['slug']));
                 $blocks[$key]['sortForm'] = $form->createView();
             }
@@ -110,31 +114,34 @@ class ConsultationController extends Controller
         return [
             'blocks' => $blocks,
             'consultation' => $consultation,
+            'currentStep' => $currentStep,
         ];
     }
 
     /**
-     * @Route("/consultations/{consultationSlug}/opinions/{opinionTypeSlug}/{page}", name="app_consultation_show_opinions", requirements={"page" = "\d+"}, defaults={"page" = 1})
-     * @Route("/consultations/{consultationSlug}/opinions/{opinionTypeSlug}/{page}/{opinionsSort}", name="app_consultation_show_opinions_sorted", requirements={"page" = "\d+","opinionsSort" = "date|comments|votes"}, defaults={"page" = 1})
+     * @Route("/consultations/{consultationSlug}/consultation/{stepSlug}/opinions/{opinionTypeSlug}/{page}", name="app_consultation_show_opinions", requirements={"page" = "\d+"}, defaults={"page" = 1})
+     * @Route("/consultations/{consultationSlug}/consultation/{stepSlug}/opinions/{opinionTypeSlug}/{page}/{opinionsSort}", name="app_consultation_show_opinions_sorted", requirements={"page" = "\d+","opinionsSort" = "date|comments|votes"}, defaults={"page" = 1})
      * @ParamConverter("consultation", class="CapcoAppBundle:Consultation", options={"mapping": {"consultationSlug": "slug"}})
+     * @ParamConverter("currentStep", class="CapcoAppBundle:ConsultationStep", options={"mapping": {"stepSlug": "slug"}})
      * @ParamConverter("opinionType", class="CapcoAppBundle:OpinionType", options={"mapping": {"opinionTypeSlug": "slug"}})
      * @Template("CapcoAppBundle:Consultation:show_by_type.html.twig")
      *
-     * @param Consultation $consultation
-     * @param OpinionType  $opinionType
+     * @param Consultation     $consultation
+     * @param ConsultationStep $currentStep
+     * @param OpinionType      $opinionType
      * @param $page
-     * @param Request      $request
+     * @param Request          $request
      * @param $opinionsSort
      *
      * @return array
      */
-    public function showByTypeAction(Consultation $consultation, OpinionType $opinionType, $page, Request $request, $opinionsSort = null)
+    public function showByTypeAction(Consultation $consultation, ConsultationStep $currentStep, OpinionType $opinionType, $page, Request $request, $opinionsSort = null)
     {
-        if (false == $consultation->canDisplay()) {
+        if (false == $currentStep->canDisplay()) {
             throw $this->createNotFoundException($this->get('translator')->trans('consultation.error.not_found', array(), 'CapcoAppBundle'));
         }
 
-        if (false == $consultation->allowType($opinionType)) {
+        if (false == $currentStep->allowType($opinionType)) {
             throw new NotFoundHttpException('This type does not exist for this consultation');
         }
 
@@ -147,6 +154,7 @@ class ConsultationController extends Controller
 
                 return $this->redirect($this->generateUrl('app_consultation_show_opinions_sorted', array(
                     'consultationSlug' => $consultation->getSlug(),
+                    'stepSlug' => $currentStep->getSlug(),
                     'opinionTypeSlug' => $opinionType->getSlug(),
                     'page' => $page,
                     'opinionsSort' => $data['opinionsSort'],
@@ -156,8 +164,8 @@ class ConsultationController extends Controller
             $form->get('opinionsSort')->setData($opinionsSort);
         }
 
-        $currentUrl = $this->generateUrl('app_consultation_show_opinions', ['consultationSlug' => $consultation->getSlug(), 'opinionTypeSlug' => $opinionType->getSlug()]);
-        $opinions = $this->getDoctrine()->getRepository('CapcoAppBundle:Opinion')->getByOpinionTypeAndConsultationOrdered($consultation, $opinionType, 10, $page, $opinionsSort);
+        $currentUrl = $this->generateUrl('app_consultation_show_opinions', ['consultationSlug' => $consultation->getSlug(), 'stepSlug' => $currentStep->getSlug(), 'opinionTypeSlug' => $opinionType->getSlug()]);
+        $opinions = $this->getDoctrine()->getRepository('CapcoAppBundle:Opinion')->getByOpinionTypeAndConsultationStepOrdered($currentStep, $opinionType, 10, $page, $opinionsSort);
 
         return [
             'currentUrl' => $currentUrl,
@@ -168,20 +176,22 @@ class ConsultationController extends Controller
             'nbPage' => ceil(count($opinions) / 10),
             'sortOpinionsForm' => $form->createView(),
             'opinionsSort' => $opinionsSort,
-            'currentStep' => $consultation->getConsultationStep(),
+            'currentStep' => $currentStep,
         ];
     }
 
     /**
-     * @Route("/consultations/{consultationSlug}/trashed", name="app_consultation_show_trashed")
+     * @Route("/consultations/{consultationSlug}/consultation/{stepSlug}/trashed", name="app_consultation_show_trashed")
      * @ParamConverter("consultation", class="CapcoAppBundle:Consultation", options={"mapping": {"consultationSlug": "slug"}})
+     * @ParamConverter("currentStep", class="CapcoAppBundle:ConsultationStep", options={"mapping": {"stepSlug": "slug"}})
      * @Template("CapcoAppBundle:Consultation:show_trashed.html.twig")
      *
-     * @param Consultation $consultation
+     * @param Consultation     $consultation
+     * @param ConsultationStep $currentStep
      *
      * @return array
      */
-    public function showTrashedAction(Consultation $consultation)
+    public function showTrashedAction(Consultation $consultation, ConsultationStep $currentStep)
     {
         if (false == $consultation->canDisplay()) {
             throw $this->createNotFoundException($this->get('translator')->trans('consultation.error.not_found', array(), 'CapcoAppBundle'));
@@ -191,9 +201,9 @@ class ConsultationController extends Controller
             throw new AccessDeniedException($this->get('translator')->trans('error.access_restricted', array(), 'CapcoAppBundle'));
         }
 
-        $opinions = $this->getDoctrine()->getRepository('CapcoAppBundle:Opinion')->getTrashedByConsultation($consultation);
-        $arguments = $this->getDoctrine()->getRepository('CapcoAppBundle:Argument')->getTrashedByConsultation($consultation);
-        $sources = $this->getDoctrine()->getRepository('CapcoAppBundle:Source')->getTrashedByConsultation($consultation);
+        $opinions = $this->getDoctrine()->getRepository('CapcoAppBundle:Opinion')->getTrashedByConsultationStep($currentStep);
+        $arguments = $this->getDoctrine()->getRepository('CapcoAppBundle:Argument')->getTrashedByConsultationStep($currentStep);
+        $sources = $this->getDoctrine()->getRepository('CapcoAppBundle:Source')->getTrashedByConsultationStep($currentStep);
 
         return [
             'consultation' => $consultation,
@@ -201,7 +211,7 @@ class ConsultationController extends Controller
             'arguments' => $arguments,
             'sources' => $sources,
             'argumentsLabels' => Argument::$argumentTypesLabels,
-            'currentStep' => $consultation->getConsultationStep(),
+            'currentStep' => $currentStep,
         ];
     }
 

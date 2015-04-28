@@ -1,4 +1,4 @@
-{% if consultationSteps|length > 0 %}
+{% if consultations|length > 0 %}
     <div class="container  container--custom">
         {% if null != section.title %}
             <h2 class="h2">{{ section.title }}</h2>
@@ -12,8 +12,7 @@
             <p>{{ section.body | raw }}</p>
         {% endif %}
         <div class="row">
-            {% for step in consultationSteps %}
-                {% set consultation = step.consultation %}
+            {% for consultation in consultations %}
                 {% include '@CapcoApp/Consultation/blockConsultation.html.twig' with {'consultation': consultation} only %}
             {% endfor %}
         </div>

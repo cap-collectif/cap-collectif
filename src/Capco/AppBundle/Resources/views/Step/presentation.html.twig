@@ -1,6 +1,6 @@
 {% extends '@CapcoApp/Consultation/show.html.twig' %}
 
-{% block canonical_link %}{{ url('app_consultation_show_presentation', {'consultation_slug': consultation.slug, 'step_slug': currentStep.slug}) }}{% endblock %}
+{% block canonical_link %}{{ url('app_consultation_show_presentation', {'consultationSlug': consultation.slug, 'stepSlug': currentStep.slug}) }}{% endblock %}
 
 {% block title %}
     {{ parent() }} - {{ currentStep.title }}
@@ -31,8 +31,8 @@
                 <div class="block  block--bordered  box">
                     {{ currentStep.body | raw }}
 
-                    {% if consultation.canContribute %}
-                        <p><a class="btn  btn-primary" href="{{ path('app_consultation_show', {'slug': consultation.slug}) }}">{{ 'step.presentation.participe' | trans({}, 'CapcoAppBundle') }}</a></p>
+                    {% if consultation.consultationStepOpen and consultation.consultationStepOpen.canContribute %}
+                        <p><a class="btn  btn-primary" href="{{ path('app_consultation_show', {'consultationSlug': consultation.slug, 'stepSlug': consultation.consultationStepOpen.slug}) }}">{{ 'step.presentation.participe' | trans({}, 'CapcoAppBundle') }}</a></p>
                     {% endif %}
                 </div>
 
@@ -67,7 +67,7 @@
                 <div class="block">
                     <h2 class="h2">{{ 'step.presentation.contributors.title'|trans({}, 'CapcoAppBundle') }}
                         <span class="small excerpt">{{ contributors|length }}</span>
-                        <a class="btn btn-primary pull-right" href="mailto:?body={{ url('app_consultation_show', {'slug': consultation.slug})|escape('url') }}" title="{{ 'share_button.share_on.email' | trans({}, 'CapcoAppBundle') }}">
+                        <a class="btn btn-primary pull-right" href="mailto:?body={{ url('app_consultation_show', {'consultationSlug': consultation.slug, 'stepSlug': consultation.consultationStepOpen.slug})|escape('url') }}" title="{{ 'share_button.share_on.email' | trans({}, 'CapcoAppBundle') }}">
                             <i class="cap cap-user-add-2"></i>
                             {{ 'consultation.share_button' | trans({}, 'CapcoAppBundle') }}
                         </a>
@@ -78,7 +78,7 @@
                         {% else %}
                             {% if consultation.isOpen %}
                                 {{ 'consultation.contributors.participate' | trans({
-                                '%link%': '<a href="' ~ path('app_consultation_show', {'slug': consultation.slug}) ~'"">' ,
+                                '%link%': '<a href="' ~ path('app_consultation_show', {'consultationSlug': consultation.slug, 'stepSlug': consultation.consultationStepOpen.slug}) ~'"">' ,
                                 '%endlink%': '</a>'
                                 }, 'CapcoAppBundle') | raw }}
                             {% else %}

@@ -4,7 +4,6 @@ namespace Capco\AppBundle\Controller;
 
 use Capco\AppBundle\Entity\Consultation;
 use Capco\AppBundle\Entity\Opinion;
-use Capco\AppBundle\Entity\OpinionType;
 use Capco\AppBundle\Entity\Source;
 use Capco\AppBundle\Entity\SourceVote;
 use Capco\AppBundle\Form\SourcesType;
@@ -20,9 +19,10 @@ use Capco\AppBundle\Event\AbstractVoteChangedEvent;
 class SourceController extends Controller
 {
     /**
-     * @Route("/consultations/{consultationSlug}/opinions/{opinionTypeSlug}/{opinionSlug}/sources/add", name="app_new_source")
+     * @Route("/consultations/{consultationSlug}/consultation/{stepSlug}/opinions/{opinionTypeSlug}/{opinionSlug}/sources/add", name="app_new_source")
      *
      * @param $consultationSlug
+     * @param $stepSlug
      * @param $opinionTypeSlug
      * @param $opinionSlug
      * @param $request
@@ -30,13 +30,13 @@ class SourceController extends Controller
      *
      * @return array
      */
-    public function createSourceAction($consultationSlug, $opinionTypeSlug, $opinionSlug, Request $request)
+    public function createSourceAction($consultationSlug, $stepSlug, $opinionTypeSlug, $opinionSlug, Request $request)
     {
         if (!$this->get('security.authorization_checker')->isGranted('ROLE_USER')) {
             throw new AccessDeniedException($this->get('translator')->trans('error.access_restricted', array(), 'CapcoAppBundle'));
         }
 
-        $opinion = $this->getDoctrine()->getRepository('CapcoAppBundle:Opinion')->getOneBySlug($consultationSlug, $opinionTypeSlug, $opinionSlug);
+        $opinion = $this->getDoctrine()->getRepository('CapcoAppBundle:Opinion')->getOneBySlug($opinionSlug);
 
         if ($opinion == null) {
             throw $this->createNotFoundException($this->get('translator')->trans('opinion.error.not_found', array(), 'CapcoAppBundle'));
@@ -47,7 +47,8 @@ class SourceController extends Controller
         }
 
         $opinionType = $opinion->getOpinionType();
-        $consultation = $opinion->getConsultation();
+        $currentStep = $opinion->getStep();
+        $consultation = $currentStep->getConsultation();
 
         $source = new Source();
         $source->setAuthor($this->getUser());
@@ -65,15 +66,13 @@ class SourceController extends Controller
 
                 $this->get('session')->getFlashBag()->add('success', $this->get('translator')->trans('source.create.success'));
 
-                return $this->redirect($this->generateUrl('app_consultation_show_opinion', ['consultationSlug' => $consultation->getSlug(), 'opinionTypeSlug' => $opinionType->getSlug(), 'opinionSlug' => $opinion->getSlug()]).'#source'.$source->getId());
+                return $this->redirect($this->generateUrl('app_consultation_show_opinion', ['consultationSlug' => $consultation->getSlug(), 'stepSlug' => $currentStep->getSlug(), 'opinionTypeSlug' => $opinionType->getSlug(), 'opinionSlug' => $opinion->getSlug()]).'#source'.$source->getId());
             } else {
                 $this->get('session')->getFlashBag()->add('danger', $this->get('translator')->trans('source.create.error'));
             }
         }
 
         return [
-            'consultation' => $opinion->getConsultation(),
-            'opinionType' => $opinion->getOpinionType(),
             'opinion' => $opinion,
             'form' => $form->createView(),
             'buttonActive' => $form->get('type')->getData(),
@@ -81,9 +80,10 @@ class SourceController extends Controller
     }
 
     /**
-     * @Route("/consultations/{consultationSlug}/opinions/{opinionTypeSlug}/{opinionSlug}/sources/{sourceSlug}/delete", name="app_delete_source")
+     * @Route("/consultations/{consultationSlug}/consultation/{stepSlug}/opinions/{opinionTypeSlug}/{opinionSlug}/sources/{sourceSlug}/delete", name="app_delete_source")
      *
      * @param consultationSlug
+     * @param stepSlug
      * @param $opinionTypeSlug
      * @param $opinionSlug
      * @param $sourceSlug
@@ -92,13 +92,13 @@ class SourceController extends Controller
      *
      * @return array
      */
-    public function deleteSourceAction($consultationSlug, $opinionTypeSlug, $opinionSlug, $sourceSlug, Request $request)
+    public function deleteSourceAction($consultationSlug, $stepSlug, $opinionTypeSlug, $opinionSlug, $sourceSlug, Request $request)
     {
         if (false === $this->get('security.authorization_checker')->isGranted('ROLE_USER')) {
             throw new AccessDeniedException($this->get('translator')->trans('error.access_restricted', array(), 'CapcoAppBundle'));
         }
 
-        $source = $this->getDoctrine()->getRepository('CapcoAppBundle:Source')->getOneBySlug($consultationSlug, $opinionTypeSlug, $opinionSlug, $sourceSlug);
+        $source = $this->getDoctrine()->getRepository('CapcoAppBundle:Source')->getOneBySlug($sourceSlug);
 
         if (null == $source) {
             throw $this->createNotFoundException($this->get('translator')->trans('source.error.not_found', array(), 'CapcoAppBundle'));
@@ -110,7 +110,8 @@ class SourceController extends Controller
 
         $opinion = $source->getOpinion();
         $opinionType = $opinion->getOpinionType();
-        $consultation = $opinion->getConsultation();
+        $currentStep = $opinion->getStep();
+        $consultation = $currentStep->getConsultation();
 
         $userCurrent = $this->getUser()->getId();
         $userPostSource = $source->getAuthor()->getId();
@@ -132,15 +133,13 @@ class SourceController extends Controller
 
                 $this->get('session')->getFlashBag()->add('info', $this->get('translator')->trans('source.delete.success'));
 
-                return $this->redirect($this->generateUrl('app_consultation_show_opinion', ['consultationSlug' => $consultation->getSlug(), 'opinionTypeSlug' => $opinionType->getSlug(), 'opinionSlug' => $opinion->getSlug()]));
+                return $this->redirect($this->generateUrl('app_consultation_show_opinion', ['consultationSlug' => $consultation->getSlug(), 'stepSlug' => $currentStep->getSlug(), 'opinionTypeSlug' => $opinionType->getSlug(), 'opinionSlug' => $opinion->getSlug()]));
             } else {
                 $this->get('session')->getFlashBag()->add('danger', $this->get('translator')->trans('source.delete.error'));
             }
         }
 
         return array(
-            'consultation' => $consultation,
-            'opinionType' => $opinionType,
             'opinion' => $opinion,
             'source' => $source,
             'form' => $form->createView(),
@@ -148,10 +147,11 @@ class SourceController extends Controller
     }
 
     /**
-     * @Route("/consultations/{consultationSlug}/opinions/{opinionTypeSlug}/{opinionSlug}/sources/{sourceSlug}/edit", name="app_edit_source")
+     * @Route("/consultations/{consultationSlug}/consultation/{stepSlug}/opinions/{opinionTypeSlug}/{opinionSlug}/sources/{sourceSlug}/edit", name="app_edit_source")
      * @Template("CapcoAppBundle:Source:update.html.twig")
      *
      * @param consultationSlug
+     * @param $stepSlug
      * @param $opinionTypeSlug
      * @param $opinionSlug
      * @param $sourceSlug
@@ -159,13 +159,13 @@ class SourceController extends Controller
      *
      * @return array
      */
-    public function updateSourceAction($consultationSlug, $opinionTypeSlug, $opinionSlug, $sourceSlug, Request $request)
+    public function updateSourceAction($consultationSlug, $stepSlug, $opinionTypeSlug, $opinionSlug, $sourceSlug, Request $request)
     {
         if (false === $this->get('security.authorization_checker')->isGranted('ROLE_USER')) {
             throw new AccessDeniedException($this->get('translator')->trans('error.access_restricted', array(), 'CapcoAppBundle'));
         }
 
-        $source = $this->getDoctrine()->getRepository('CapcoAppBundle:Source')->getOneBySlug($consultationSlug, $opinionTypeSlug, $opinionSlug, $sourceSlug);
+        $source = $this->getDoctrine()->getRepository('CapcoAppBundle:Source')->getOneBySlug($sourceSlug);
 
         if ($source == null) {
             throw $this->createNotFoundException($this->get('translator')->trans('source.error.not_found', array(), 'CapcoAppBundle'));
@@ -177,7 +177,8 @@ class SourceController extends Controller
 
         $opinion = $source->getOpinion();
         $opinionType = $opinion->getOpinionType();
-        $consultation = $opinion->getConsultation();
+        $currentStep = $opinion->getStep();
+        $consultation = $currentStep->getConsultation();
 
         $userCurrent = $this->getUser()->getId();
         $userPostSource = $source->getAuthor()->getId();
@@ -214,15 +215,13 @@ class SourceController extends Controller
 
                 $this->get('session')->getFlashBag()->add('success', $this->get('translator')->trans('source.update.success'));
 
-                return $this->redirect($this->generateUrl('app_consultation_show_opinion', ['consultationSlug' => $consultation->getSlug(), 'opinionTypeSlug' => $opinionType->getSlug(), 'opinionSlug' => $opinion->getSlug()]).'#source'.$source->getId());
+                return $this->redirect($this->generateUrl('app_consultation_show_opinion', ['consultationSlug' => $consultation->getSlug(), 'stepSlug' => $currentStep->getSlug(), 'opinionTypeSlug' => $opinionType->getSlug(), 'opinionSlug' => $opinion->getSlug()]).'#source'.$source->getId());
             } else {
                 $this->get('session')->getFlashBag()->add('danger', $this->get('translator')->trans('source.update.error'));
             }
         }
 
         return [
-            'consultation' => $consultation,
-            'opinionType' => $opinionType,
             'opinion' => $opinion,
             'source' => $source,
             'form' => $form->createView(),
@@ -231,9 +230,10 @@ class SourceController extends Controller
     }
 
     /**
-     * @Route("/secure/consultations/{consultationSlug}/opinions/{opinionTypeSlug}/{opinionSlug}/sources/{sourceSlug}/vote", name="app_consultation_vote_source")
+     * @Route("/secure/consultations/{consultationSlug}/consultation/{stepSlug}/opinions/{opinionTypeSlug}/{opinionSlug}/sources/{sourceSlug}/vote", name="app_consultation_vote_source")
      *
      * @param consultationSlug
+     * @param $stepSlug
      * @param $opinionTypeSlug
      * @param $opinionSlug
      * @param $sourceSlug
@@ -241,13 +241,13 @@ class SourceController extends Controller
      *
      * @return array
      */
-    public function voteOnSourceAction($consultationSlug, $opinionTypeSlug, $opinionSlug, $sourceSlug, Request $request)
+    public function voteOnSourceAction($consultationSlug, $stepSlug, $opinionTypeSlug, $opinionSlug, $sourceSlug, Request $request)
     {
         if (false === $this->get('security.authorization_checker')->isGranted('ROLE_USER')) {
             throw new AccessDeniedException($this->get('translator')->trans('error.access_restricted', array(), 'CapcoAppBundle'));
         }
 
-        $source = $this->getDoctrine()->getRepository('CapcoAppBundle:Source')->getOneBySlug($consultationSlug, $opinionTypeSlug, $opinionSlug, $sourceSlug);
+        $source = $this->getDoctrine()->getRepository('CapcoAppBundle:Source')->getOneBySlug($sourceSlug);
 
         if ($source == null) {
             throw $this->createNotFoundException($this->get('translator')->trans('source.error.not_found', array(), 'CapcoAppBundle'));
@@ -259,7 +259,8 @@ class SourceController extends Controller
 
         $opinion = $source->getOpinion();
         $opinionType = $opinion->getOpinionType();
-        $consultation = $opinion->getConsultation();
+        $currentStep = $opinion->getStep();
+        $consultation = $currentStep->getConsultation();
 
         $user = $this->getUser();
 
@@ -307,6 +308,6 @@ class SourceController extends Controller
             }
         }
 
-        return $this->redirect($this->generateUrl('app_consultation_show_opinion', ['consultationSlug' => $consultation->getSlug(), 'opinionTypeSlug' => $opinionType->getSlug(), 'opinionSlug' => $opinion->getSlug()]));
+        return $this->redirect($this->generateUrl('app_consultation_show_opinion', ['consultationSlug' => $consultation->getSlug(), 'stepSlug' => $currentStep->getSlug(), 'opinionTypeSlug' => $opinionType->getSlug(), 'opinionSlug' => $opinion->getSlug()]));
     }
 }

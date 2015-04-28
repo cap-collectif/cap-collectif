@@ -1,0 +1,33 @@
+Capco\AppBundle\Entity\ConsultationAbstractStep:
+  cas1:
+    step: @cstep1
+    consultation: @cs1
+    position: 2
+  cas2:
+    step: @cstep2
+    consultation: @cs2
+    position: 1
+  cas3:
+    step: @cstep3
+    consultation: @cs3
+    position: 1
+  cas4:
+    step: @cstep4
+    consultation: @cs4
+    position: 1
+  cas5:
+    step: @ostep1
+    consultation: @cs1
+    position: 3
+  cas6:
+    step: @ostep2
+    consultation: @cs2
+    position: 2
+  cas7:
+    step: @ostep3
+    consultation: @cs3
+    position: 2
+  cas8:
+    step: @pstep1
+    consultation: @cs1
+    position: 1

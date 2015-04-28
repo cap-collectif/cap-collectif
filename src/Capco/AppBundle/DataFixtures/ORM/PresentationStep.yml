@@ -1,0 +1,9 @@
+Capco\AppBundle\Entity\PresentationStep:
+    pstep1:
+        title: Présentation
+        isEnabled: true
+        startAt: <(new \DateTime('2015-03-25'))>
+        endAt: <(new \DateTime('2015-04-25'))>
+        body: |
+            <p>Afficher le texte pour la préparation de la synthèse</p>
+            <p><text(1000)></p>

@@ -2,11 +2,11 @@
     <div class="thumbnail  thumbnail--custom  block  block--bordered">
 
         {%  if consultation.Cover %}
-            <a href="{{ consultation | capco_first_step_link }}" alt="{{ consultation.title }}" {% if consultation.video %}class="play"{% endif %}>
+            <a href="{{ consultation | capco_current_step_link }}" alt="{{ consultation.title }}" {% if consultation.video %}class="play"{% endif %}>
                 {% thumbnail consultation.Cover, 'consultation' with {'title': consultation.Cover.name, 'alt': consultation.Cover.name, 'class': 'img-responsive'} %}
             </a>
         {% else %}
-            <a href="{{ consultation | capco_first_step_link }}" alt="{{ consultation.title }}" class="bg__wrapper{% if consultation.video %} play{% endif %}">
+            <a href="{{ consultation | capco_current_step_link }}" alt="{{ consultation.title }}" class="bg__wrapper{% if consultation.video %} play{% endif %}">
                 <div class="bg--default bg--consultation">
                     {% if consultation.video is null %}
                         <svg version="1.1" id="Calque_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="110px" height="110px" viewBox="-162.5 -162.5 226.5 226.5" enable-background="new -162.5 -162.5 226.5 226.5" xml:space="preserve" style="margin: 0 auto; display: block;">
@@ -29,27 +29,30 @@
                                         {{ theme.title }}
                                     </a>
                                     {% if loop.last == false %}, {% endif %}
-                            {% endif %}
+                                {% endif %}
                             {% endfor %}
                         </span>
                     {% endif %}
                 {% endif %}
-                <h2 class="h4"><a href="{{ consultation | capco_first_step_link }}">{{ consultation.title }}</a></h2>
+                <h2 class="h4"><a href="{{ consultation | capco_current_step_link }}">{{ consultation.title }}</a></h2>
             </div>
+            {% set currentStep = consultation.currentStep %}
+            {% if currentStep %}
             <div class="thumbnail__status">
                 <p>
-                    {% if consultation.isOpen %}
-                        <span class="label label-success">{{ 'consultation.show.status.opened'|trans({}, 'CapcoAppBundle') }}</span>
+                    {{ currentStep.title }} :
+                    {% if currentStep.isOpen %}
+                        <span class="label label-success">{{ 'step.status.open'|trans({}, 'CapcoAppBundle') }}</span>
                     {% endif %}
-                    {% if consultation.isClosed %}
-                        <span class="label label-danger">{{ 'consultation.show.status.ended'|trans({}, 'CapcoAppBundle') }}</span>
+                    {% if currentStep.isClosed %}
+                        <span class="label label-danger">{{ 'step.status.closed'|trans({}, 'CapcoAppBundle') }}</span>
                     {% endif %}
-                    {% if consultation.isFuture %}
-                        <span class="label label-info">{{ 'consultation.show.status.future'|trans({}, 'CapcoAppBundle') }}</span>
+                    {% if currentStep.isFuture %}
+                        <span class="label label-info">{{ 'step.status.future'|trans({}, 'CapcoAppBundle') }}</span>
                     {% endif %}
                 </p>
-                {% if consultation.isOpen %}
-                    {% set remainingDays = consultation.remainingDays %}
+                {% if currentStep.isOpen %}
+                    {% set remainingDays = currentStep.remainingDays %}
                     <p class="excerpt"><i class="cap cap-calendar-1"></i>
                         {% transchoice remainingDays with {'%count%': remainingDays} from 'CapcoAppBundle' %}
                             consultation.show.remaining_days
@@ -57,18 +60,21 @@
                     </p>
                 {% endif %}
             </div>
+            {% endif %}
 
             {% set contributionsCount = consultation.totalContributionsCount %}
-            <div class="thumbnail__numbers">
-                <div class="thumbnail__number-block">
-                    <p  class="thumbnail__number">{{ contributionsCount }}</p>
-                    <p class="thumbnail__number__label  excerpt  small">
-                        {% transchoice contributionsCount with {'%count%': contributionsCount} from 'CapcoAppBundle' %}
-                            consultation.show.contributions_no_nb
-                        {% endtranschoice %}
-                    </p>
+            {% if contributionsCount > 0 %}
+                <div class="thumbnail__numbers">
+                    <div class="thumbnail__number-block">
+                        <p  class="thumbnail__number">{{ contributionsCount }}</p>
+                        <p class="thumbnail__number__label  excerpt  small">
+                            {% transchoice contributionsCount with {'%count%': contributionsCount} from 'CapcoAppBundle' %}
+                                consultation.show.contributions_no_nb
+                            {% endtranschoice %}
+                        </p>
+                    </div>
                 </div>
-            </div>
+            {% endif %}
         </div>
     </div>
 </div>

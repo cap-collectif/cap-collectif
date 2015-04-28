@@ -1,6 +1,6 @@
 {% extends '@CapcoApp/Consultation/show.html.twig' %}
 
-{% block canonical_link %}{{ url('app_consultation_show_step', {'consultation_slug': consultation.slug, 'step_slug': currentStep.slug}) }}{% endblock %}
+{% block canonical_link %}{{ url('app_consultation_show_step', {'consultationSlug': consultation.slug, 'stepSlug': currentStep.slug}) }}{% endblock %}
 
 {% block title %}
     {{ parent() }} - {{ currentStep.title }}

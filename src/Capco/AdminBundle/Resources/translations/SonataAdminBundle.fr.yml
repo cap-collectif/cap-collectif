@@ -51,6 +51,7 @@ admin.label.consultation_type: Types de consultation
 admin.label.section: Accueil
 admin.label.user_type: Types de profil
 admin.label.highlighted: A la une
+admin.label.consultation_abstractstep: Étape d'une consultation
 
 # Messages
 admin:
@@ -174,6 +175,9 @@ admin:
       events: Évènements
       posts_count: Articles
       posts: Articles
+    consultation_abstractstep:
+      steps: Étapes
+      position: position
     consultation_type:
       title: Titre
       opinion_types: Types de proposition
@@ -518,3 +522,6 @@ highlighted_consultation: une consultation
 idea_comment: un commentaire sur une idée
 event_comment: un commentaire sur un événement
 post_comment: un commentaire sur un article
+other_step: Autre étape
+consultation_step: Étape de consultation
+presentation_step: Étape de présentation

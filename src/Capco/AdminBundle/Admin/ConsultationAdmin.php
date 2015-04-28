@@ -43,7 +43,7 @@ class ConsultationAdmin extends Admin
         }
 
         $datagridMapper
-            ->add('Steps', null, array(
+            ->add('steps', null, array(
                 'label' => 'admin.fields.consultation.steps',
             ))
             ->add('events', null, array(
@@ -51,15 +51,6 @@ class ConsultationAdmin extends Admin
             ))
             ->add('posts', null, array(
                 'label' => 'admin.fields.consultation.posts',
-            ))
-            ->add('allowedTypes', null, array(
-                'label' => 'admin.fields.consultation.allowed_types',
-            ))
-            ->add('opinionCount', null, array(
-                'label' => 'admin.fields.consultation.opinion_count',
-            ))
-            ->add('argumentCount', null, array(
-                'label' => 'admin.fields.consultation.argument_count',
             ))
             ->add('isEnabled', null, array(
                 'label' => 'admin.fields.consultation.is_enabled',
@@ -94,28 +85,6 @@ class ConsultationAdmin extends Admin
         }
 
         $listMapper
-            ->add('openingStatus', null, array(
-                'label' => 'admin.fields.consultation.opening_status',
-                'mapped' => false,
-                'template' => 'CapcoAdminBundle:Consultation:openingStatus_list_field.html.twig',
-                'statuses' => Consultation::$openingStatuses,
-            ))
-            ->add('openedAt', null, array(
-                'label' => 'admin.fields.consultation.opened_at',
-                'mapped' => false,
-                'template' => 'CapcoAdminBundle:Consultation:openedAt_list_field.html.twig',
-            ))
-            ->add('closedAt', null, array(
-                'label' => 'admin.fields.consultation.closed_at',
-                'mapped' => false,
-                'template' => 'CapcoAdminBundle:Consultation:closedAt_list_field.html.twig',
-            ))
-            ->add('opinionCount', null, array(
-                'label' => 'admin.fields.consultation.opinion_count',
-            ))
-            ->add('argumentCount', null, array(
-                'label' => 'admin.fields.consultation.argument_count',
-            ))
             ->add('isEnabled', null, array(
                 'editable' => true,
                 'label' => 'admin.fields.consultation.is_enabled',
@@ -143,8 +112,7 @@ class ConsultationAdmin extends Admin
     {
         $formMapper
             ->with('admin.fields.consultation.group_content', array('class' => 'col-md-12'))->end()
-            ->with('admin.fields.consultation.group_meta', array('class' => 'col-md-6'))->end()
-            ->with('admin.fields.consultation.group_opinion_types', array('class' => 'col-md-6'))->end()
+            ->with('admin.fields.consultation.group_meta', array('class' => 'col-md-12'))->end()
             ->with('admin.fields.consultation.group_steps', array('class' => 'col-md-12'))->end()
             ->end()
         ;
@@ -206,32 +174,16 @@ class ConsultationAdmin extends Admin
             ))
             ->end()
 
-            // Opinion types
-            ->with('admin.fields.consultation.group_opinion_types')
-            ->add('consultationType', 'sonata_type_model', array(
-                'label' => 'admin.fields.consultation.consultation_type',
-                'required' => false,
-                'mapped' => false,
-                'class' => 'Capco\AppBundle\Entity\ConsultationType',
-                'help' => 'admin.help.consultation.consultation_type',
-            ))
-            ->add('allowedTypes', 'sonata_type_model', array(
-                'label' => 'admin.fields.consultation.allowed_types',
-                'required' => false,
-                'multiple' => true,
-                'by_reference' => false,
-                'expanded' => true,
-            ))
-            ->end()
-
             // Steps
             ->with('admin.fields.consultation.group_steps')
-            ->add('Steps', 'sonata_type_collection', array(
+            ->add('steps', 'sonata_type_collection', array(
                 'label' => 'admin.fields.consultation.steps',
                 'by_reference' => false,
+                'required' => false,
             ), array(
                 'edit' => 'inline',
-                'inline' => 'capco_table',
+                'inline' => 'table',
+                'sortable' => 'position',
             ))
         ;
     }
@@ -272,28 +224,8 @@ class ConsultationAdmin extends Admin
         }
 
         $showMapper
-            ->add('allowedTypes', null, array(
-                'label' => 'admin.fields.consultation.allowed_types',
-            ))
-            ->add('Steps', null, array(
+            ->add('steps', null, array(
                 'label' => 'admin.fields.consultation.steps',
-            ))
-            ->add('openingStatus', null, array(
-                'label' => 'admin.fields.consultation.opening_status',
-                'template' => 'CapcoAdminBundle:Consultation:openingStatus_show_field.html.twig',
-                'statuses' => Consultation::$openingStatuses,
-            ))
-            ->add('opinionCount', null, array(
-                'label' => 'admin.fields.consultation.opinion_count',
-            ))
-            ->add('argumentCount', null, array(
-                'label' => 'admin.fields.consultation.argument_count',
-            ))
-            ->add('trashedOpinionCount', null, array(
-                'label' => 'admin.fields.consultation.trashed_opinion_count',
-            ))
-            ->add('trashedArgumentCount', null, array(
-                'label' => 'admin.fields.consultation.trashed_argument_count',
             ))
             ->add('events', null, array(
                 'label' => 'admin.fields.consultation.events',
@@ -310,27 +242,6 @@ class ConsultationAdmin extends Admin
         ;
     }
 
-    public function prePersist($consultation)
-    {
-        $this->setSteps($consultation);
-    }
-
-    public function preUpdate($consultation)
-    {
-        $this->setSteps($consultation);
-    }
-
-    private function setSteps($consultation)
-    {
-        $consultation->resetSteps();
-
-        $newSteps = $this->getForm()->get('Steps');
-        foreach ($newSteps as $child) {
-            $step = $child->getData();
-            $step->setConsultation($consultation);
-        }
-    }
-
     protected function configureRoutes(RouteCollection $collection)
     {
         $collection->add('download', $this->getRouterIdParameter().'/download');
@@ -340,7 +251,7 @@ class ConsultationAdmin extends Admin
     public function getTemplate($name)
     {
         if ($name == 'edit') {
-            return 'CapcoAdminBundle:Consultation:edit.html.twig';
+            return 'CapcoAdminBundle:Step:edit.html.twig';
         }
 
         return parent::getTemplate($name);

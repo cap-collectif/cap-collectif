@@ -6,7 +6,11 @@
                 <div id="carousel-highlighted" class="carousel vertical slide" data-ride="carousel" data-interval="false">
                   <div class="carousel-inner" role="listbox">
                     {% for highlighted in highlighteds if has_feature_enabled(highlighted.associatedFeatures) %}
-                        {% set url = path('app_' ~ highlighted.type ~ '_show', {'slug': highlighted.content.slug}) %}
+                        {% if highlighted.type == 'consultation' %}
+                            {% set url = (highlighted.content | capco_first_step_link) %}
+                        {% else %}
+                            {% set url = path('app_' ~ highlighted.type ~ '_show', {'slug': highlighted.content.slug}) %}
+                        {% endif %}
                         <div class="item {% if loop.first %}active{% endif %}">
                         <a href="{{ url }}" class="h3" >
                             {% if highlighted.media is not null %}

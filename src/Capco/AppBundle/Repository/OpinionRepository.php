@@ -14,40 +14,33 @@ use Doctrine\ORM\Tools\Pagination\Paginator;
 class OpinionRepository extends EntityRepository
 {
     /**
-     * Get one opinion by slug, opinion type and consultation.
+     * Get one opinion by slug.
      *
-     * @param $consultation
-     * @param $opinionType
      * @param $opinion
      *
      * @return mixed
      *
      * @throws \Doctrine\ORM\NonUniqueResultException
      */
-    public function getOneBySlug($consultation, $opinionType, $opinion)
+    public function getOneBySlug($opinion)
     {
         $qb = $this->getIsEnabledQueryBuilder()
-            ->addSelect('a', 'm', 'ot', 'c')
+            ->addSelect('a', 'm', 'ot', 's')
             ->leftJoin('o.Author', 'a')
             ->leftJoin('a.Media', 'm')
             ->leftJoin('o.OpinionType', 'ot')
-            ->leftJoin('o.Consultation', 'c')
-            ->andWhere('c.slug = :consultation')
+            ->leftJoin('o.step', 's')
             ->andWhere('o.slug = :opinion')
-            ->andWhere('ot.slug = :opinionType')
-            ->setParameter('consultation', $consultation)
             ->setParameter('opinion', $opinion)
-            ->setParameter('opinionType', $opinionType);
+        ;
 
         return $qb->getQuery()
             ->getOneOrNullResult();
     }
 
     /**
-     * Get one opinion by slug, opinion type and consultation with user reports.
+     * Get one opinion by slug with user reports.
      *
-     * @param $consultation
-     * @param $opinionType
      * @param $opinion
      * @param $user
      *
@@ -55,21 +48,17 @@ class OpinionRepository extends EntityRepository
      *
      * @throws \Doctrine\ORM\NonUniqueResultException
      */
-    public function getOneBySlugJoinUserReports($consultation, $opinionType, $opinion, $user)
+    public function getOneBySlugJoinUserReports($opinion, $user)
     {
         $qb = $this->getIsEnabledQueryBuilder()
-            ->addSelect('a', 'm', 'ot', 'c', 'r')
+            ->addSelect('a', 'm', 'ot', 's', 'r')
             ->leftJoin('o.Author', 'a')
             ->leftJoin('a.Media', 'm')
             ->leftJoin('o.OpinionType', 'ot')
-            ->leftJoin('o.Consultation', 'c')
+            ->leftJoin('o.step', 's')
             ->leftJoin('o.Reports', 'r', 'WITH', 'r.Reporter =  :user')
-            ->andWhere('c.slug = :consultation')
             ->andWhere('o.slug = :opinion')
-            ->andWhere('ot.slug = :opinionType')
-            ->setParameter('consultation', $consultation)
             ->setParameter('opinion', $opinion)
-            ->setParameter('opinionType', $opinionType)
             ->setParameter('user', $user);
 
         return $qb->getQuery()
@@ -79,21 +68,21 @@ class OpinionRepository extends EntityRepository
     /**
      * Get all trashed opinions.
      *
-     * @param $consultation
+     * @param $step
      *
      * @return array
      */
-    public function getTrashedByConsultation($consultation)
+    public function getTrashedByConsultationStep($step)
     {
         $qb = $this->getIsEnabledQueryBuilder()
-            ->addSelect('ot', 'c', 'aut', 'm')
+            ->addSelect('ot', 's', 'aut', 'm')
             ->leftJoin('o.OpinionType', 'ot')
-            ->leftJoin('o.Consultation', 'c')
+            ->leftJoin('o.step', 's')
             ->leftJoin('o.Author', 'aut')
             ->leftJoin('aut.Media', 'm')
-            ->andWhere('o.Consultation = :consultation')
+            ->andWhere('o.step = :step')
             ->andWhere('o.isTrashed = :trashed')
-            ->setParameter('consultation', $consultation)
+            ->setParameter('step', $step)
             ->setParameter('trashed', true)
             ->orderBy('o.trashedAt', 'DESC');
 
@@ -110,12 +99,14 @@ class OpinionRepository extends EntityRepository
     public function getByUser($user)
     {
         $qb = $this->getIsEnabledQueryBuilder()
-            ->addSelect('ot', 'c', 'aut', 'm')
+            ->addSelect('ot', 's', 'c', 'aut', 'm')
             ->leftJoin('o.OpinionType', 'ot')
-            ->leftJoin('o.Consultation', 'c')
+            ->leftJoin('o.step', 's')
+            ->leftJoin('s.consultation', 'c')
             ->leftJoin('o.Author', 'aut')
             ->leftJoin('aut.Media', 'm')
             ->andWhere('c.isEnabled = :enabled')
+            ->andWhere('s.isEnabled = :enabled')
             ->andWhere('o.Author = :author')
             ->setParameter('enabled', true)
             ->setParameter('author', $user)
@@ -135,7 +126,9 @@ class OpinionRepository extends EntityRepository
     {
         $qb = $this->getIsEnabledQueryBuilder()
             ->select('COUNT(o) as totalOpinions')
-            ->leftJoin('o.Consultation', 'c')
+            ->leftJoin('o.step', 's')
+            ->leftJoin('s.consultation', 'c')
+            ->andWhere('s.isEnabled = :enabled')
             ->andWhere('c.isEnabled = :enabled')
             ->andWhere('o.isEnabled = :enabled')
             ->andWhere('o.Author = :author')
@@ -148,9 +141,9 @@ class OpinionRepository extends EntityRepository
     }
 
     /**
-     * Get opinions by opinionType and consultation.
+     * Get opinions by opinionType and consultation step.
      *
-     * @param $consultation
+     * @param $step
      * @param $opinionType
      * @param int $nbByPage
      * @param int $page
@@ -158,7 +151,7 @@ class OpinionRepository extends EntityRepository
      * @return Paginator
      * @return mixed
      */
-    public function getByOpinionTypeAndConsultationOrdered($consultation, $opinionType, $nbByPage = 10, $page = 1, $opinionsSort = null)
+    public function getByOpinionTypeAndConsultationStepOrdered($step, $opinionType, $nbByPage = 10, $page = 1, $opinionsSort = null)
     {
         if ((int) $page < 1) {
             throw new \InvalidArgumentException(sprintf(
@@ -168,15 +161,15 @@ class OpinionRepository extends EntityRepository
         }
 
         $qb = $this->getIsEnabledQueryBuilder()
-            ->addSelect('ot', 'c', 'aut', 'm', '(o.voteCountMitige + o.voteCountOk + o.voteCountNok) as HIDDEN vnb')
+            ->addSelect('ot', 's', 'aut', 'm', '(o.voteCountMitige + o.voteCountOk + o.voteCountNok) as HIDDEN vnb')
             ->leftJoin('o.OpinionType', 'ot')
-            ->leftJoin('o.Consultation', 'c')
+            ->leftJoin('o.step', 's')
             ->leftJoin('o.Author', 'aut')
             ->leftJoin('aut.Media', 'm')
-            ->andWhere('o.Consultation = :consultation')
+            ->andWhere('o.step = :step')
             ->andWhere('o.OpinionType = :opinionType')
             ->andWhere('o.isTrashed = :notTrashed')
-            ->setParameter('consultation', $consultation)
+            ->setParameter('step', $step)
             ->setParameter('opinionType', $opinionType)
             ->setParameter('notTrashed', false);
 
@@ -202,22 +195,22 @@ class OpinionRepository extends EntityRepository
     }
 
     /**
-     * Get all opinions by consultation.
+     * Get all opinions by consultation step.
      *
-     * @param $consultation
+     * @param $step
      *
      * @return mixed
      */
-    public function getByConsultationAndOpinionTypeOrdered($consultation, $ot, $limit = 5)
+    public function getByConsultationStepAndOpinionTypeOrdered($step, $ot, $limit = 5)
     {
         $qb = $this->getIsEnabledQueryBuilder('o')
             ->addSelect('ot', 'aut', '(o.voteCountMitige + o.voteCountOk + o.voteCountNok) as HIDDEN vnb')
             ->leftJoin('o.OpinionType', 'ot')
             ->leftJoin('o.Author', 'aut')
-            ->andWhere('o.Consultation = :consultation')
+            ->andWhere('o.step = :step')
             ->andWhere('ot.id = :ot')
             ->andWhere('o.isTrashed = :notTrashed')
-            ->setParameter('consultation', $consultation)
+            ->setParameter('step', $step)
             ->setParameter('ot', $ot)
             ->setParameter('notTrashed', false)
             ->addOrderBy('vnb', 'DESC')
@@ -230,21 +223,21 @@ class OpinionRepository extends EntityRepository
     }
 
     /**
-     * Get all opinions by consultation.
+     * Get all opinions by consultation step.
      *
-     * @param $consultation
+     * @param $step
      *
      * @return mixed
      */
-    public function getByConsultation($consultation)
+    public function getByConsultationStep($step)
     {
         $qb = $this->createQueryBuilder('o')
             ->addSelect('ot', 'aut', 'arg')
             ->leftJoin('o.OpinionType', 'ot')
             ->leftJoin('o.Author', 'aut')
             ->leftJoin('o.arguments', 'arg')
-            ->andWhere('o.Consultation = :consultation')
-            ->setParameter('consultation', $consultation)
+            ->andWhere('o.step = :step')
+            ->setParameter('step', $step)
             ->addOrderBy('o.updatedAt', 'DESC');
 
         return $qb

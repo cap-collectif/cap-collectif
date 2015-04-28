@@ -4,22 +4,21 @@
     {{ parent() }}
     <script type="text/javascript">
 
-        $(document).ready(function(){
-            var consultationType = $("#{{ admin.uniqId }}_consultationType");
-            consultationType.on('change', function() {
-                updateAllowedTypes();
-            });
+        $(document).ready(function() {
+
+            $(document).on('change', ".consultation-type-js" , updateAllowedTypes);
 
             function updateAllowedTypes() {
-                $('#{{ admin.uniqId }}_allowedTypes_2').prop('checked', false);
-                var consultationTypeId = $("#{{ admin.uniqId }}_consultationType option:selected").val();
-                var allowedTypes = $("#field_container_{{ admin.uniqId }}_allowedTypes input[type='checkbox']");
+                var self = this;
+                var consultationTypeId = $("option:selected", self).val();
+                var allowedTypesId = (self.id).replace('consultationType', 'allowedTypes');
+                var allowedTypes = $("#" + allowedTypesId + " input[type='checkbox']");
 
-                var url = "{{ admin.generateUrl('getAllowedTypesFromConsultationType', {}) }}";
+                var url = "{{ url('capco_admin_get_allowed_types') }}";
                 $.get(url, {'consultationTypeId': consultationTypeId}, function(data){
 
                     if (data.length > 0) {
-                        $(allowedTypes).each(function(){
+                        $(allowedTypes).each(function() {
                             $(this).prop('checked', false);
                             if ($.inArray($(this).val(), data) != -1) {
                                 $(this).prop('checked', true);
@@ -30,7 +29,7 @@
                         });
                     }
 
-                    $(consultationType).select2('val', '');
+                    $(self).select2('val', '');
 
                 });
             }

@@ -28,15 +28,15 @@ class RecalculateCountersCommand extends ContainerAwareCommand
         $query->execute();
 
         $query = $em->createQuery('update CapcoUserBundle:User u set u.argumentsCount =
-            (select count(a.id) from CapcoAppBundle:Argument a INNER JOIN CapcoAppBundle:Opinion o WITH a.opinion = o INNER JOIN CapcoAppBundle:Consultation c WITH o.Consultation = c where a.Author = u AND a.isEnabled = 1 AND o.isEnabled = 1 AND c.isEnabled = 1 group by a.Author)');
+            (select count(a.id) from CapcoAppBundle:Argument a INNER JOIN CapcoAppBundle:Opinion o WITH a.opinion = o INNER JOIN CapcoAppBundle:ConsultationStep cs WITH o.step = cs where a.Author = u AND a.isEnabled = 1 AND o.isEnabled = 1 AND cs.isEnabled = 1 group by a.Author)');
         $query->execute();
 
         $query = $em->createQuery('update CapcoUserBundle:User u set u.opinionsCount =
-            (select count(o.id) from CapcoAppBundle:Opinion o INNER JOIN CapcoAppBundle:Consultation c WITH o.Consultation = c where o.Author = u AND o.isEnabled = 1 AND c.isEnabled = 1 group by o.Author)');
+            (select count(o.id) from CapcoAppBundle:Opinion o INNER JOIN CapcoAppBundle:ConsultationStep cs WITH o.step = cs where o.Author = u AND o.isEnabled = 1 AND cs.isEnabled = 1 group by o.Author)');
         $query->execute();
 
         $query = $em->createQuery('update CapcoUserBundle:User u set u.sourcesCount =
-            (select count(s.id) from CapcoAppBundle:Source s INNER JOIN CapcoAppBundle:Opinion o WITH s.Opinion = o INNER JOIN CapcoAppBundle:Consultation c WITH o.Consultation = c  where s.Author = u AND s.isEnabled = 1 AND o.isEnabled = 1 AND c.isEnabled = 1 AND o.isEnabled = 1 AND c.isEnabled = 1 group by s.Author)');
+            (select count(s.id) from CapcoAppBundle:Source s INNER JOIN CapcoAppBundle:Opinion o WITH s.Opinion = o INNER JOIN CapcoAppBundle:ConsultationStep cs WITH o.step = cs where s.Author = u AND s.isEnabled = 1 AND o.isEnabled = 1 AND cs.isEnabled = 1 group by s.Author)');
         $query->execute();
 
         // User comments
@@ -64,15 +64,15 @@ class RecalculateCountersCommand extends ContainerAwareCommand
         $query->execute();
 
         $query = $em->createQuery('update CapcoUserBundle:User u set u.opinionVotesCount =
-            (select count(ov.id) from CapcoAppBundle:OpinionVote ov INNER JOIN CapcoAppBundle:Opinion o WITH ov.opinion = o INNER JOIN CapcoAppBundle:Consultation c WITH o.Consultation = c where ov.user = u AND ov.confirmed = 1 AND o.isEnabled = 1 AND c.isEnabled = 1 group by ov.user)');
+            (select count(ov.id) from CapcoAppBundle:OpinionVote ov INNER JOIN CapcoAppBundle:Opinion o WITH ov.opinion = o INNER JOIN CapcoAppBundle:ConsultationStep cs WITH o.step = cs where ov.user = u AND ov.confirmed = 1 AND o.isEnabled = 1 AND cs.isEnabled = 1 group by ov.user)');
         $query->execute();
 
         $query = $em->createQuery('update CapcoUserBundle:User u set u.argumentVotesCount =
-            (select count(av.id) from CapcoAppBundle:ArgumentVote av INNER JOIN CapcoAppBundle:Argument a WITH av.argument = a INNER JOIN CapcoAppBundle:Opinion o WITH a.opinion = o INNER JOIN CapcoAppBundle:Consultation c WITH o.Consultation = c where av.user = u AND av.confirmed = 1 AND a.isEnabled = 1 AND o.isEnabled = 1 AND c.isEnabled = 1 group by av.user)');
+            (select count(av.id) from CapcoAppBundle:ArgumentVote av INNER JOIN CapcoAppBundle:Argument a WITH av.argument = a INNER JOIN CapcoAppBundle:Opinion o WITH a.opinion = o INNER JOIN CapcoAppBundle:ConsultationStep cs WITH o.step = cs where av.user = u AND av.confirmed = 1 AND a.isEnabled = 1 AND o.isEnabled = 1 AND cs.isEnabled = 1 group by av.user)');
         $query->execute();
 
         $query = $em->createQuery('update CapcoUserBundle:User u set u.sourceVotesCount =
-            (select count(sv.id) from CapcoAppBundle:SourceVote sv INNER JOIN CapcoAppBundle:Source s WITH sv.source = s INNER JOIN CapcoAppBundle:Opinion o WITH s.Opinion = o INNER JOIN CapcoAppBundle:Consultation c WITH o.Consultation = c where sv.user = u AND sv.confirmed = 1 AND s.isEnabled = 1 AND o.isEnabled = 1 AND c.isEnabled = 1 group by sv.user)');
+            (select count(sv.id) from CapcoAppBundle:SourceVote sv INNER JOIN CapcoAppBundle:Source s WITH sv.source = s INNER JOIN CapcoAppBundle:Opinion o WITH s.Opinion = o INNER JOIN CapcoAppBundle:ConsultationStep cs WITH o.step = cs where sv.user = u AND sv.confirmed = 1 AND s.isEnabled = 1 AND o.isEnabled = 1 AND cs.isEnabled = 1 group by sv.user)');
         $query->execute();
 
         // Votes counters
@@ -107,28 +107,28 @@ class RecalculateCountersCommand extends ContainerAwareCommand
             (select count(s.id) from CapcoAppBundle:Source s where s.Opinion = o AND s.isEnabled = 1 AND s.isTrashed = 0 group by s.Opinion)');
         $query->execute();
 
-        $query = $em->createQuery('update CapcoAppBundle:Consultation c set c.opinionCount =
-            (select count(o.id) from CapcoAppBundle:Opinion o where o.Consultation = c AND o.isEnabled = 1 AND o.isTrashed = 0 group by o.Consultation)');
+        $query = $em->createQuery('update CapcoAppBundle:ConsultationStep cs set cs.opinionCount =
+            (select count(o.id) from CapcoAppBundle:Opinion o where o.step = cs AND o.isEnabled = 1 AND o.isTrashed = 0 group by o.step)');
         $query->execute();
 
-        $query = $em->createQuery('update CapcoAppBundle:Consultation c set c.trashedOpinionCount =
-            (select count(o.id) from CapcoAppBundle:Opinion o where o.Consultation = c AND o.isEnabled = 1 AND o.isTrashed = 1 group by o.Consultation)');
+        $query = $em->createQuery('update CapcoAppBundle:ConsultationStep cs set cs.trashedOpinionCount =
+            (select count(o.id) from CapcoAppBundle:Opinion o where o.step = cs AND o.isEnabled = 1 AND o.isTrashed = 1 group by o.step)');
         $query->execute();
 
-        $query = $em->createQuery('update CapcoAppBundle:Consultation c set c.argumentCount =
-            (select count(a.id) from CapcoAppBundle:Argument a INNER JOIN CapcoAppBundle:Opinion o WITH a.opinion = o where o.Consultation = c AND a.isEnabled = 1 AND a.isTrashed = 0 GROUP BY o.Consultation)');
+        $query = $em->createQuery('update CapcoAppBundle:ConsultationStep cs set cs.argumentCount =
+            (select count(a.id) from CapcoAppBundle:Argument a INNER JOIN CapcoAppBundle:Opinion o WITH a.opinion = o where o.step = cs AND a.isEnabled = 1 AND a.isTrashed = 0 GROUP BY o.step)');
         $query->execute();
 
-        $query = $em->createQuery('update CapcoAppBundle:Consultation c set c.trashedArgumentCount =
-            (select count(a.id) from CapcoAppBundle:Argument a INNER JOIN CapcoAppBundle:Opinion o WITH a.opinion = o where o.Consultation = c AND a.isEnabled = 1 AND a.isTrashed = 1 GROUP BY o.Consultation)');
+        $query = $em->createQuery('update CapcoAppBundle:ConsultationStep cs set cs.trashedArgumentCount =
+            (select count(a.id) from CapcoAppBundle:Argument a INNER JOIN CapcoAppBundle:Opinion o WITH a.opinion = o where o.step = cs AND a.isEnabled = 1 AND a.isTrashed = 1 GROUP BY o.step)');
         $query->execute();
 
-        $query = $em->createQuery('update CapcoAppBundle:Consultation c set c.sourcesCount =
-            (select count(s.id) from CapcoAppBundle:Source s INNER JOIN CapcoAppBundle:Opinion o WITH s.Opinion = o where o.Consultation = c AND s.isEnabled = 1 AND s.isTrashed = 0 GROUP BY o.Consultation)');
+        $query = $em->createQuery('update CapcoAppBundle:ConsultationStep cs set cs.sourcesCount =
+            (select count(s.id) from CapcoAppBundle:Source s INNER JOIN CapcoAppBundle:Opinion o WITH s.Opinion = o where o.step = cs AND s.isEnabled = 1 AND s.isTrashed = 0 GROUP BY o.step)');
         $query->execute();
 
-        $query = $em->createQuery('update CapcoAppBundle:Consultation c set c.trashedSourceCount =
-            (select count(s.id) from CapcoAppBundle:Source s INNER JOIN CapcoAppBundle:Opinion o WITH s.Opinion = o where o.Consultation = c AND s.isEnabled = 1 AND s.isTrashed = 1 GROUP BY o.Consultation)');
+        $query = $em->createQuery('update CapcoAppBundle:ConsultationStep cs set cs.trashedSourceCount =
+            (select count(s.id) from CapcoAppBundle:Source s INNER JOIN CapcoAppBundle:Opinion o WITH s.Opinion = o where o.step = cs AND s.isEnabled = 1 AND s.isTrashed = 1 GROUP BY o.step)');
         $query->execute();
 
         $query = $em->createQuery('update CapcoAppBundle:Idea i set i.commentsCount =

@@ -12,7 +12,7 @@ class OpinionPage extends Page
     /**
      * @var string
      */
-    protected $path = '/consultations/{consultation_slug}/opinions/{opinion_type_slug}/{opinion_slug}';
+    protected $path = '/consultations/{consultationSlug}/consultation/{stepSlug}/opinions/{opinionTypeSlug}/{opinionSlug}';
 
     protected $elements = array(
         // Arguments

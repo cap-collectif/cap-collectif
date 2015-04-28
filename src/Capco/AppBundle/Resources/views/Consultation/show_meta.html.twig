@@ -4,7 +4,8 @@
         <ul class="nav">
             {% set nb = 1 %}
             {% set now = date("now") %}
-            {% for step in consultation.steps %}
+            {% for consultationAbstractStep in consultation.steps %}
+                {% set step = consultationAbstractStep.step %}
                 <li {% if (currentStep == 'consultation_step' and step.isConsultationStep) or currentStep == step.slug %} class="active" {% endif %}>
                     <a href="{{ step | capco_step_link }}">
                         <div class="navbar__step-nb">{{ nb }}</div>
@@ -27,7 +28,7 @@
 
 {% set hasPosts = is_feature_enabled('blog') and consultation.posts | length > 0 %}
 {% set hasEvents = is_feature_enabled('calendar') and consultation.events | length > 0 %}
-{% set hasContributors = consultation.opinions | length > 0 %}
+{% set hasContributors = consultation.totalOpinionsCount | length > 0 %}
 {% if hasPosts or hasEvents or hasContributors %}
     <div>
         <h2 class="h5 excerpt">{{ 'consultation.show.meta.info.title'|trans({}, 'CapcoAppBundle') | upper }}</h2>

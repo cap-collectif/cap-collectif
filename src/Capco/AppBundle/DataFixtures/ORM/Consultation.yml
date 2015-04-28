@@ -5,23 +5,19 @@ Capco\AppBundle\Entity\Consultation:
         Cover: @MediaConsultation1
         video: 'http://www.youtube.com/embed/A3PDXmYoF5U?autoplay=1'
         Themes: [@theme1, @theme2]
-        allowedTypes: [@opinionType1, @opinionType2, @opinionType3]
     cs2:
         title: Stratégie technologique de l'Etat et services publics
         Author: @user4
         Cover: @MediaConsultation2
         video: 'http://www.youtube.com/embed/wTcNtgA6gHs?autoplay=1'
         Themes: [@theme1, @theme3]
-        allowedTypes: [@opinionType1, @opinionType2]
     cs3:
         title: Transformation numérique des relations
         isEnabled: false
         Author: @user4
         Themes: [@theme2, @theme3]
-        allowedTypes: [@opinionType1, @opinionType2, @opinionType3]
     cs4:
         title: Consultation vide
         isEnabled: true
         Author: @user4
         Themes: [@theme2, @theme3]
-        allowedTypes: [@opinionType1, @opinionType2, @opinionType3]

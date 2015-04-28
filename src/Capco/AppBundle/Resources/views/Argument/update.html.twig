@@ -1,6 +1,6 @@
 {% extends '@CapcoApp/base.html.twig' %}
 
-{% block canonical_link %}{{ url('app_consultation_edit_argument', {'consultationSlug': consultation.slug, 'opinionTypeSlug': opinionType.slug, 'opinionSlug': opinion.slug, 'argumentId': argument.id}) }}{% endblock %}
+{% block canonical_link %}{{ url('app_consultation_edit_argument', {'consultationSlug': opinion.step.consultation.slug, 'stepSlug': opinion.step.slug, 'opinionTypeSlug': opinion.opinionType.slug, 'opinionSlug': opinion.slug, 'argumentId': argument.id}) }}{% endblock %}
 
 {% block title %}
     {{ parent() }} - {{ opinion.title }} - {{ 'argument.update.page_title'|trans({}, 'CapcoAppBundle') }}
@@ -31,9 +31,9 @@
                             </div>
                         </div>
                         <div class="dialog__footer  box">
-                            <a href="{{ path('app_consultation_delete_argument' ,{'consultationSlug': consultation.slug, 'opinionTypeSlug':opinionType.slug, 'opinionSlug': opinion.slug, 'argumentId': argument.id } ) }}" class="btn  btn-danger">{{ 'argument.update.remove'|trans({}, 'CapcoAppBundle') }}</a>
+                            <a href="{{ path('app_consultation_delete_argument' ,{'consultationSlug': opinion.step.consultation.slug, 'stepSlug': opinion.step.slug, 'opinionTypeSlug': opinion.opinionType.slug, 'opinionSlug': opinion.slug, 'argumentId': argument.id } ) }}" class="btn  btn-danger">{{ 'argument.update.remove'|trans({}, 'CapcoAppBundle') }}</a>
                             <div class="pull-right">
-                                <a href="{{ path('app_consultation_show_opinion', {'consultationSlug': consultation.slug, 'opinionTypeSlug': opinionType.slug, 'opinionSlug': opinion.slug}) }}" class="btn  btn-default">{{ 'argument.update.cancel'|trans({}, 'CapcoAppBundle') }}</a>
+                                <a href="{{ path('app_consultation_show_opinion', {'consultationSlug': opinion.step.consultation.slug, 'stepSlug': opinion.step.slug, 'opinionTypeSlug': opinion.opinionType.slug, 'opinionSlug': opinion.slug}) }}" class="btn  btn-default">{{ 'argument.update.cancel'|trans({}, 'CapcoAppBundle') }}</a>
                                 <button type="submit" class="btn  btn-warning">{{ 'argument.update.submit'|trans({}, 'CapcoAppBundle') }}</button>
                             </div>
                         </div>

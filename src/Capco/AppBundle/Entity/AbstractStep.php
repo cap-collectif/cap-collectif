@@ -9,37 +9,33 @@ use Symfony\Component\Validator\Constraints as Assert;
 use Capco\AppBundle\Validator\Constraints as CapcoAssert;
 
 /**
- * Step.
+ * AbstractStep.
  *
  * @ORM\Table(name="step")
- * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\StepRepository")
- * @ORM\HasLifecycleCallbacks()
+ * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\AbstractStepRepository")
  * @CapcoAssert\EndAfterStart()
+ * @ORM\InheritanceType("SINGLE_TABLE")
+ * @ORM\DiscriminatorColumn(name = "step_type", type = "string")
+ * @ORM\DiscriminatorMap({
+ *      "consultation"     = "ConsultationStep",
+ *      "presentation"  = "PresentationStep",
+ *      "other"  = "OtherStep",
+ * })
  */
-class Step
+abstract class AbstractStep
 {
     use StartAndEndDatesTrait;
-
-    const TYPE_OTHER = 0;
-    const TYPE_CONSULTATION = 1;
-    const TYPE_PRESENTATION = 2;
-
-    public static $stepTypes = [
-        'consultation' => self::TYPE_CONSULTATION,
-        'presentation' => self::TYPE_PRESENTATION,
-        'other' => self::TYPE_OTHER,
-    ];
-
-    public static $stepTypeLabels = [
-        self::TYPE_CONSULTATION => 'Consultation',
-        self::TYPE_PRESENTATION => 'Présentation',
-        self::TYPE_OTHER => 'Autre',
-    ];
 
     public static $stepStatus = [
         'closed' => 'step.status.closed',
         'open' => 'step.status.open',
         'future' => 'step.status.future',
+    ];
+
+    public static $stepTypeLabels = [
+        'presentation' => 'step.types.presentation',
+        'consultation' => 'step.types.consultation',
+        'other' => 'step.types.other',
     ];
 
     /**
@@ -66,22 +62,6 @@ class Step
     private $slug;
 
     /**
-     * @var int
-     *
-     * @ORM\Column(name="position", type="integer")
-     * @Assert\NotNull()
-     */
-    private $position;
-
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="type", type="integer")
-     * @Assert\NotNull()
-     */
-    private $type = self::TYPE_OTHER;
-
-    /**
      * @var bool
      *
      * @ORM\Column(name="is_enabled", type="boolean")
@@ -89,10 +69,11 @@ class Step
     private $isEnabled = true;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Consultation", inversedBy="Steps", cascade={"persist"})
-     * @ORM\JoinColumn(nullable=true)
+     * Needed by sonata admin.
+     *
+     * @ORM\OneToOne(targetEntity="Capco\AppBundle\Entity\ConsultationAbstractStep", mappedBy="step", orphanRemoval=true, cascade={"persist", "remove"})
      */
-    private $consultation = null;
+    private $consultationAbstractStep;
 
     /**
      * @var string
@@ -110,7 +91,7 @@ class Step
 
     /**
      * @var \DateTime
-     * @Gedmo\Timestampable(on="change", field={"title", "startAt", "endAt", "position", "type", "consultation", "body"})
+     * @Gedmo\Timestampable(on="change", field={"title", "startAt", "endAt", "position", "type", "body"})
      * @ORM\Column(name="updated_at", type="datetime")
      */
     private $updatedAt;
@@ -191,54 +172,6 @@ class Step
     }
 
     /**
-     * Get position.
-     *
-     * @return int
-     */
-    public function getPosition()
-    {
-        return $this->position;
-    }
-
-    /**
-     * Set position.
-     *
-     * @param int $position
-     *
-     * @return Step
-     */
-    public function setPosition($position)
-    {
-        $this->position = $position;
-
-        return $this;
-    }
-
-    /**
-     * Get type.
-     *
-     * @return int
-     */
-    public function getType()
-    {
-        return $this->type;
-    }
-
-    /**
-     * Set type.
-     *
-     * @param int $type
-     *
-     * @return Step
-     */
-    public function setType($type)
-    {
-        $this->type = $type;
-
-        return $this;
-    }
-
-    /**
      * Get isEnabled.
      *
      * @return bool
@@ -263,26 +196,19 @@ class Step
     }
 
     /**
-     * Get consultation.
-     *
-     * @return string
+     * @return mixed
      */
-    public function getConsultation()
+    public function getConsultationAbstractStep()
     {
-        return $this->consultation;
+        return $this->consultationAbstractStep;
     }
 
     /**
-     * @param string $consultation
-     *
-     * @return $this
+     * @param mixed $consultationAbstractStep
      */
-    public function setConsultation(Consultation $consultation = null)
+    public function setConsultationAbstractStep($consultationAbstractStep)
     {
-        $this->consultation = $consultation;
-        $this->consultation->addStep($this);
-
-        return $this;
+        $this->consultationAbstractStep = $consultationAbstractStep;
     }
 
     /**
@@ -323,41 +249,51 @@ class Step
         return $this->updatedAt;
     }
 
-    // ********************** custom Methods *******************************
+    // ************************* Custom methods *********************
+
+    /**
+     * Get consultation.
+     *
+     * @return string
+     */
+    public function getConsultation()
+    {
+        return $this->consultationAbstractStep->getConsultation();
+    }
 
     /**
      * @return bool
      */
+    public function canDisplay()
+    {
+        return $this->isEnabled && $this->getConsultation()->canDisplay();
+    }
+
+    /**
+     * @return bool
+     */
+    public function canContribute()
+    {
+        return $this->getConsultation()->canContribute() && $this->isEnabled && $this->isOpen();
+    }
+
+    public function getType()
+    {
+        return;
+    }
+
     public function isConsultationStep()
     {
-        return $this->type == self::TYPE_CONSULTATION;
+        return false;
     }
 
-    /**
-     * @return bool
-     */
     public function isPresentationStep()
     {
-        return $this->type == self::TYPE_PRESENTATION;
+        return false;
     }
 
-    /**
-     * @return bool
-     */
     public function isOtherStep()
     {
-        return $this->type == self::TYPE_OTHER;
-    }
-
-    // ************************* Lifecycle **************************
-
-    /**
-     * @ORM\PreRemove
-     */
-    public function deleteStep()
-    {
-        if ($this->consultation != null) {
-            $this->consultation->removeStep($this);
-        }
+        return false;
     }
 }

@@ -1,6 +1,6 @@
 {% extends '@CapcoApp/Consultation/show.html.twig' %}
 
-{% block canonical_link %}{{ url('app_consultation_show_opinion', {'consultationSlug': consultation.slug, 'opinionTypeSlug': opinionType.slug, 'opinionSlug': opinion.slug}) }}{% endblock %}
+{% block canonical_link %}{{ url('app_consultation_show_opinion', {'consultationSlug': consultation.slug, 'stepSlug': currentStep.slug, 'opinionTypeSlug': opinionType.slug, 'opinionSlug': opinion.slug}) }}{% endblock %}
 
 {% block title %}
     {{ parent() }} - {{ opinion.title }}
@@ -16,13 +16,13 @@
 
     <div class="container  container--custom">
 
-        {% if consultation.isClosed %}
+        {% if currentStep.isClosed %}
             <div class="alert alert-info alert-dismissible  block" role="alert">
                 <p><strong>{{ 'consultation.show.alert.ended.title'|trans({}, 'CapcoAppBundle') }}</strong> {{ 'consultation.show.alert.ended.text'|trans({}, 'CapcoAppBundle') }}</p>
             </div>
         {% endif %}
 
-        {% if consultation.isFuture %}
+        {% if currentStep.isFuture %}
             <div class="alert alert-info alert-dismissible  block" role="alert">
                 <p><strong>{{ 'consultation.show.alert.future.title'|trans({}, 'CapcoAppBundle') }}</strong> {{ 'consultation.show.alert.future.text'|trans({'%date%': '<strong>' ~ consultation.getOpenedAt| localizeddate('long', 'none', app.request.locale) ~ '</strong>'}, 'CapcoAppBundle') | raw }}</p>
             </div>
@@ -40,7 +40,7 @@
                 <div class="block  block--bordered  opinion__details">
                     <div class="opinion  opinion--{{ opinion.opinionType.color }}  opinion--current">
                         <div class="opinion__header  opinion__header--centered">
-                            <a class="neutral-hover  pull-left  h4" href="{% if opinion.isTrashed %}{{ path('app_consultation_show_trashed', {'consultationSlug': consultation.slug,}) }}{% else %}{{ path('app_consultation_show_opinions', {'consultationSlug': consultation.slug, 'opinionTypeSlug': opinionType.slug}) }}{% endif %}"><i class="cap cap-arrow-1"></i><span class="hidden-xs  hidden-sm"> {{ 'opinion.show.back'|trans({}, 'CapcoAppBundle') }}</span></a>
+                            <a class="neutral-hover  pull-left  h4" href="{% if opinion.isTrashed %}{{ path('app_consultation_show_trashed', {'consultationSlug': consultation.slug, 'stepSlug': currentStep.slug}) }}{% else %}{{ path('app_consultation_show_opinions', {'consultationSlug': consultation.slug, 'stepSlug': currentStep.slug, 'opinionTypeSlug': opinionType.slug}) }}{% endif %}"><i class="cap cap-arrow-1"></i><span class="hidden-xs  hidden-sm"> {{ 'opinion.show.back'|trans({}, 'CapcoAppBundle') }}</span></a>
                             <h2 class="h4  opinion__header__title">{{ opinion.opinionType.slug|capitalize }} </h2>
                         </div>
                         {% include 'CapcoAppBundle:Opinion:opinion_body.html.twig' %}
@@ -70,7 +70,7 @@
                                 {% if (previousVote) %}
                                     <div class="opinion__vote-group">
                                         {% set tokenRemoveVote = csrf_token('remove_opinion_vote') %}
-                                        <form method="POST" style="display: inline-block;" action="{{ path('app_consultation_cancel_vote' ,{'consultationSlug': consultation.slug, 'opinionTypeSlug': opinionType.slug, 'opinionSlug': opinion.slug, 'opinionVote': previousVote.id } ) }}">
+                                        <form method="POST" style="display: inline-block;" action="{{ path('app_consultation_cancel_vote' ,{'consultationSlug': consultation.slug, 'stepSlug': currentStep.slug, 'opinionTypeSlug': opinionType.slug, 'opinionSlug': opinion.slug, 'opinionVote': previousVote.id } ) }}">
                                             <button class="btn  btn-info"> {{ 'source.vote.delete'|trans({}, 'CapcoAppBundle') }}</button>
                                             <input type="hidden" name="_csrf_token" value="{{ tokenRemoveVote }}">
                                         </form>
@@ -83,7 +83,7 @@
 
                                 <div class="opinion__vote-group">
                                     {{ sonata_block_render({'type': 'capco.block.service.share_button'}, {
-                                        'url': (url('app_consultation_show_opinion', {'consultationSlug': consultation.slug, 'opinionTypeSlug': opinionType.slug, 'opinionSlug': opinion.slug}) ~ '#details'),
+                                        'url': (url('app_consultation_show_opinion', {'consultationSlug': consultation.slug, 'stepSlug': currentStep.slug, 'opinionTypeSlug': opinionType.slug, 'opinionSlug': opinion.slug}) ~ '#details'),
                                         'title': opinion.title,
                                         'btn_classes': 'btn-dark-gray  btn--outline',
                                     }) }}
@@ -93,13 +93,13 @@
                                     {% if opinion.reports | length > 0 %}
                                         <button disabled="disabled" class="btn  btn-dark-gray"><i class="cap cap-flag-1"></i> {{ 'opinion.report.reported'|trans({}, 'CapcoAppBundle') }}</button>
                                     {% else %}
-                                        <a href="{{ path('app_report_opinion' ,{'consultationSlug': consultation.slug, 'opinionTypeSlug': opinionType.slug, 'opinionSlug': opinion.slug } ) }}" class="btn  btn-dark-gray  btn--outline  connection-popover-js"><i class="cap cap-flag-1"></i> {{ 'opinion.report.submit'|trans({}, 'CapcoAppBundle') }}</a>
+                                        <a href="{{ path('app_report_opinion' ,{'consultationSlug': consultation.slug, 'stepSlug': currentStep.slug, 'opinionTypeSlug': opinionType.slug, 'opinionSlug': opinion.slug } ) }}" class="btn  btn-dark-gray  btn--outline  connection-popover-js"><i class="cap cap-flag-1"></i> {{ 'opinion.report.submit'|trans({}, 'CapcoAppBundle') }}</a>
                                     {% endif %}
                                 </div>
 
                                 {% if opinion.canContribute and app.user is not null and app.user == opinion.Author %}
                                     <div class="opinion__vote-group">
-                                        <a href="{{ path('app_consultation_edit_opinion' ,{'consultationSlug': consultation.slug, 'opinionTypeSlug': opinion.opinionType.slug, 'opinionSlug': opinion.slug } ) }}" class="btn  btn-dark-gray  btn--outline"><i class="cap cap-pencil-1"></i> {{ 'opinion.update.button'|trans({}, 'CapcoAppBundle') }}</a>
+                                        <a href="{{ path('app_consultation_edit_opinion' ,{'consultationSlug': consultation.slug, 'stepSlug': currentStep.slug, 'opinionTypeSlug': opinion.opinionType.slug, 'opinionSlug': opinion.slug } ) }}" class="btn  btn-dark-gray  btn--outline"><i class="cap cap-pencil-1"></i> {{ 'opinion.update.button'|trans({}, 'CapcoAppBundle') }}</a>
                                     </div>
                                 {% endif %}
 
@@ -115,7 +115,7 @@
                                         {% if sources|length > 0 %} <i class="cap cap-arrow-67 pull-right"></i>{% endif %}
                                     </h4>
                                     {% if opinion.canContribute %}
-                                        <p class="sources__btn"><a id="addSourceLink" href="{{ path('app_new_source' ,{'consultationSlug': consultation.slug, 'opinionTypeSlug': opinionType.slug, 'opinionSlug': opinion.slug} ) }}" class="btn-sm btn btn-default connection-popover-js" data-container="body"><i class="cap cap-add-1"></i> {{ 'source.create.button'|trans({}, 'CapcoAppBundle') }}</a></p>
+                                        <p class="sources__btn"><a id="addSourceLink" href="{{ path('app_new_source' ,{'consultationSlug': consultation.slug, 'stepSlug': currentStep.slug, 'opinionTypeSlug': opinionType.slug, 'opinionSlug': opinion.slug} ) }}" class="btn-sm btn btn-default connection-popover-js" data-container="body"><i class="cap cap-add-1"></i> {{ 'source.create.button'|trans({}, 'CapcoAppBundle') }}</a></p>
                                     {% endif %}
                                 </div>
                                 {% if sources|length > 0 %}
@@ -140,7 +140,7 @@
                             {% set form = argumentFormYes %}
                             {% include '@CapcoApp/Argument/create.html.twig' %}
                         {% endif %}
-                        {{ render(controller('CapcoAppBundle:Argument:showArguments', {'consultation': consultation, 'opinionType': opinionType, 'opinion': opinion, 'type': 1, 'form': sortArgumentsForm, 'argumentSort': argumentSort})) }}
+                        {{ render(controller('CapcoAppBundle:Argument:showArguments', {'consultation': consultation, 'step': currentStep, 'opinionType': opinionType, 'opinion': opinion, 'type': 1, 'form': sortArgumentsForm, 'argumentSort': argumentSort})) }}
                     </div>
                     <div class="col-sm-12  col-md-6">
                         {% if opinion.canContribute %}

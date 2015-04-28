@@ -3,11 +3,11 @@
 namespace Capco\AdminBundle\Admin;
 
 use Sonata\AdminBundle\Admin\Admin;
-use Sonata\AdminBundle\Datagrid\DatagridMapper;
-use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
-use Sonata\AdminBundle\Show\ShowMapper;
-use Capco\AppBundle\Entity\Step;
+use Capco\AppBundle\Entity\OtherStep;
+use Capco\AppBundle\Entity\ConsultationStep;
+use Capco\AppBundle\Entity\PresentationStep;
+use Sonata\AdminBundle\Route\RouteCollection;
 
 class StepAdmin extends Admin
 {
@@ -16,83 +16,9 @@ class StepAdmin extends Admin
         '_sort_by' => 'title',
     );
 
-    /**
-     * @param DatagridMapper $datagridMapper
-     */
-    protected function configureDatagridFilters(DatagridMapper $datagridMapper)
-    {
-        $datagridMapper
-            ->add('title', null, array(
-                'label' => 'admin.fields.step.title',
-            ))
-            ->add('startAt', null, array(
-                'label' => 'admin.fields.step.start_at',
-            ))
-            ->add('endAt', null, array(
-                'label' => 'admin.fields.step.end_at',
-            ))
-            ->add('position', null, array(
-                'label' => 'admin.fields.step.position',
-            ))
-            ->add('isEnabled', null, array(
-                'label' => 'admin.fields.step.is_enabled',
-            ))
-            ->add('consultation', null, array(
-                'label' => 'admin.fields.step.consultation',
-            ))
-            ->add('type', null, array(
-                'label' => 'admin.fields.step.type',
-            ))
-            ->add('body', null, array(
-                'label' => 'admin.fields.step.body',
-            ))
-        ;
-    }
-
-    /**
-     * @param ListMapper $listMapper
-     */
-    protected function configureListFields(ListMapper $listMapper)
-    {
-        unset($this->listModes['mosaic']);
-
-        $listMapper
-            ->addIdentifier('title', null, array(
-                'label' => 'admin.fields.step.title',
-            ))
-            ->add('startAt', 'date', array(
-                'label' => 'admin.fields.step.start_at',
-            ))
-            ->add('endAt', 'date', array(
-                'label' => 'admin.fields.step.end_at',
-            ))
-            ->add('position', null, array(
-                'label' => 'admin.fields.step.position',
-            ))
-            ->add('isEnabled', null, array(
-                'editable' => true,
-                'label' => 'admin.fields.step.is_enabled',
-            ))
-            ->add('consultation', 'sonata_type_model', array(
-                'label' => 'admin.fields.step.consultation',
-            ))
-            ->add('type', null, array(
-                'template' => 'CapcoAdminBundle:Step:type_list_field.html.twig',
-                'stepTypeLabels' => Step::$stepTypeLabels,
-                'label' => 'admin.fields.step.type',
-            ))
-            ->add('updatedAt', null, array(
-                'label' => 'admin.fields.step.updated_at',
-            ))
-            ->add('_action', 'actions', array(
-                'actions' => array(
-                    'edit' => array(),
-                    'show' => array(),
-                    'delete' => array('template' => 'CapcoAdminBundle:Step:list__action_delete.html.twig'),
-                ),
-            ))
-        ;
-    }
+    protected $formOptions = array(
+        'cascade_validation' => true,
+    );
 
     /**
      * @param FormMapper $formMapper
@@ -105,15 +31,9 @@ class StepAdmin extends Admin
                 'label' => 'admin.fields.step.title',
                 'required' => true,
             ))
-            ->add('type', 'choice', array(
-                'required' => true,
-                'choices' => Step::$stepTypeLabels,
-                'label' => 'admin.fields.step.type',
-            ))
-            ->add('position', null, array(
-                'required' => true,
-                'label' => 'admin.fields.step.position',
-            ))
+        ;
+
+        $formMapper
             ->add('isEnabled', null, array(
                 'label' => 'admin.fields.step.is_enabled',
                 'required' => false,
@@ -134,57 +54,52 @@ class StepAdmin extends Admin
                 'help' => 'admin.help.step.endAt',
                 'required' => false,
             ))
-            ->add('body', 'ckeditor', array(
-                'config_name' => 'admin_editor',
-                'label' => 'admin.fields.step.body',
-                'required' => false,
-            ))
         ;
+
+        if ($subject instanceof PresentationStep || $subject instanceof OtherStep) {
+            $formMapper
+                ->add('body', 'ckeditor', array(
+                    'config_name' => 'admin_editor',
+                    'label' => 'admin.fields.step.body',
+                    'required' => false,
+                ))
+            ;
+        } elseif ($subject instanceof ConsultationStep) {
+            $formMapper
+                ->add('body', null, array(
+                    'label' => 'admin.fields.step.body',
+                    'required' => false,
+                ))
+                ->add('consultationType', 'sonata_type_model', array(
+                    'label' => 'admin.fields.consultation.consultation_type',
+                    'required' => false,
+                    'mapped' => false,
+                    'class' => 'Capco\AppBundle\Entity\ConsultationType',
+                    'help' => 'admin.help.consultation.consultation_type',
+                    'attr' => array('class' => 'consultation-type-js'),
+                ))
+                ->add('allowedTypes', 'sonata_type_model', array(
+                    'label' => 'admin.fields.consultation.allowed_types',
+                    'required' => false,
+                    'multiple' => true,
+                    'by_reference' => false,
+                    'expanded' => true,
+                ))
+            ;
+        }
     }
 
-    /**
-     * @param ShowMapper $showMapper
-     */
-    protected function configureShowFields(ShowMapper $showMapper)
+    public function getTemplate($name)
     {
-        $showMapper
-            ->add('title', null, array(
-                'label' => 'admin.fields.step.title',
-            ))
-            ->add('body', null, array(
-                'label' => 'admin.fields.step.body',
-            ))
-            ->add('startAt', null, array(
-                'label' => 'admin.fields.step.start_at',
-            ))
-            ->add('endAt', null, array(
-                'label' => 'admin.fields.step.end_at',
-            ))
-            ->add('position', null, array(
-                'label' => 'admin.fields.step.position',
-            ))
-            ->add('isEnabled', null, array(
-                'label' => 'admin.fields.step.is_enabled',
-            ))
-            ->add('type', null, array(
-                'template' => 'CapcoAdminBundle:Step:type_show_field.html.twig',
-                'stepTypeLabels' => Step::$stepTypeLabels,
-                'label' => 'admin.fields.step.type',
-            ))
-            ->add('consultation', null, array(
-                'label' => 'admin.fields.step.consultation',
-            ))
-            ->add('createdAt', null, array(
-                'label' => 'admin.fields.step.created_at',
-            ))
-            ->add('updatedAt', null, array(
-                'label' => 'admin.fields.step.updated_at',
-            ))
-        ;
+        if ($name == 'edit') {
+            return 'CapcoAdminBundle:Step:edit.html.twig';
+        }
+
+        return parent::getTemplate($name);
     }
 
-    public function getBatchActions()
+    protected function configureRoutes(RouteCollection $collection)
     {
-        return array();
+        $collection->clearExcept(array('create', 'edit', 'delete'));
     }
 }

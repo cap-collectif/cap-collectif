@@ -1,4 +1,4 @@
-{% set consultation = opinion.consultation %}
+{% set consultation = opinion.step.consultation %}
 <div class="opinion__body  box">
     {% include 'CapcoUserBundle:Avatar:avatar.html.twig' with { 'user': opinion.Author, 'link_classes': 'pull-left'} only %}
     <div class="opinion__data">
@@ -12,7 +12,7 @@
                     {{ 'opinion.show.trashed.label'|trans({}, 'CapcoAppBundle') }}
                 </span>
             {% endif %}
-            <a href="{{ path('app_consultation_show_opinion', {'consultationSlug': consultation.slug, 'opinionTypeSlug': opinionType.slug, 'opinionSlug': opinion.slug}) }}">
+            <a href="{{ path('app_consultation_show_opinion', {'consultationSlug': consultation.slug, 'stepSlug': opinion.step.slug, 'opinionTypeSlug': opinionType.slug, 'opinionSlug': opinion.slug}) }}">
                 {{ opinion.title }}
             </a>
         </h3>

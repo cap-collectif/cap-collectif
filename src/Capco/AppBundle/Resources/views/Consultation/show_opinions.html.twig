@@ -9,8 +9,8 @@
                     {{ form_label(block.sortForm.opinionsSort, null, {'label_attr':{"class":"control-label  sr-only"} }) }}
                     {{ form_widget(block.sortForm.opinionsSort, {'attr':{"class":"form-control", 'onchange': 'this.form.submit()'} }) }}
                     {{ form_end(block.sortForm) }}
-                    {% if block.isEnabled == true and consultation.canContribute %}
-                        <a href="{{ path('app_consultation_new_opinion' ,{'consultationSlug': consultation.slug, 'opinionTypeSlug': block.slug } ) }}" class="btn  btn-default">
+                    {% if block.isEnabled == true and currentStep.canContribute %}
+                        <a href="{{ path('app_consultation_new_opinion' ,{'consultationSlug': consultation.slug, 'stepSlug': currentStep.slug, 'opinionTypeSlug': block.slug } ) }}" class="btn  btn-default">
                             <i class="cap cap-add-1"></i>
                             <span class="hidden-xs">{{ 'opinion.create.button'|trans({}, 'CapcoAppBundle') }}</span>
                         </a>
@@ -26,7 +26,7 @@
             </ul>
             {% if block.total_opinions_count > 5  %}
                 <div class="opinion  opinion__footer  box">
-                    <a href="{{ path('app_consultation_show_opinions', {'consultationSlug': consultation.slug ,'opinionTypeSlug': block.slug}) }}" class="text-center" style="display: block">
+                    <a href="{{ path('app_consultation_show_opinions', {'consultationSlug': consultation.slug, 'stepSlug': currentStep.slug,'opinionTypeSlug': block.slug}) }}" class="text-center" style="display: block">
                         {{ 'opinion.show.all'|trans({}, 'CapcoAppBundle') }}
                     </a>
                 </div>

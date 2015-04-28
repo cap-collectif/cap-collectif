@@ -3,7 +3,8 @@
 namespace Capco\AppBundle\Controller;
 
 use Capco\AppBundle\Entity\Consultation;
-use Capco\AppBundle\Entity\Step;
+use Capco\AppBundle\Entity\OtherStep;
+use Capco\AppBundle\Entity\PresentationStep;
 use Capco\AppBundle\Entity\Theme;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -14,17 +15,17 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 class StepController extends Controller
 {
     /**
-     * @Route("/consultation/{consultation_slug}/step/{step_slug}", name="app_consultation_show_step")
+     * @Route("/consultation/{consultationSlug}/step/{stepSlug}", name="app_consultation_show_step")
      * @Template("CapcoAppBundle:Step:show.html.twig")
-     * @ParamConverter("consultation", class="CapcoAppBundle:Consultation", options={"mapping": {"consultation_slug": "slug"}})
-     * @ParamConverter("step", class="CapcoAppBundle:Step", options={"mapping": {"step_slug": "slug"}})
+     * @ParamConverter("consultation", class="CapcoAppBundle:Consultation", options={"mapping": {"consultationSlug": "slug"}})
+     * @ParamConverter("step", class="CapcoAppBundle:OtherStep", options={"mapping": {"stepSlug": "slug"}})
      *
      * @param Consultation $consultation
-     * @param Step         $step
+     * @param OtherStep    $step
      *
      * @return array
      */
-    public function showStepAction(Consultation $consultation, Step $step)
+    public function showStepAction(Consultation $consultation, OtherStep $step)
     {
         if (!$step->getConsultation()->canDisplay()) {
             throw new NotFoundHttpException();
@@ -45,27 +46,27 @@ class StepController extends Controller
     }
 
     /**
-     * @Route("/consultation/{consultation_slug}/presentation/{step_slug}", name="app_consultation_show_presentation")
+     * @Route("/consultation/{consultationSlug}/presentation/{stepSlug}", name="app_consultation_show_presentation")
      * @Template("CapcoAppBundle:Step:presentation.html.twig")
-     * @ParamConverter("step", class="CapcoAppBundle:Step", options={"mapping" = {"step_slug": "slug"}})
+     * @ParamConverter("step", class="CapcoAppBundle:PresentationStep", options={"mapping" = {"stepSlug": "slug"}})
      *
-     * @param $consultation_slug
-     * @param Step $step
+     * @param $consultationSlug
+     * @param PresentationStep $step
      *
      * @return array
      */
-    public function showPresentationAction($consultation_slug, Step $step)
+    public function showPresentationAction($consultationSlug, PresentationStep $step)
     {
-        if ($step->isConsultationStep() || !$step->getConsultation()->canDisplay()) {
+        if (!$step->canDisplay()) {
             throw new NotFoundHttpException();
         }
 
         $em = $this->getDoctrine()->getManager();
-        $consultation = $em->getRepository('CapcoAppBundle:Consultation')->getOne($consultation_slug);
-        $events = $this->get('capco.event.resolver')->getLastByConsultation($consultation_slug, 2);
-        $posts = $this->get('capco.blog.post.repository')->getLastPublishedByConsultation($consultation_slug, 2);
-        $nbEvents = $this->get('capco.event.resolver')->countEvents(null, null, $consultation->getSlug(), null);
-        $nbPosts = $em->getRepository('CapcoAppBundle:Post')->countSearchResults(null, $consultation_slug);
+        $consultation = $em->getRepository('CapcoAppBundle:Consultation')->getOne($consultationSlug);
+        $events = $this->get('capco.event.resolver')->getLastByConsultation($consultationSlug, 2);
+        $posts = $this->get('capco.blog.post.repository')->getLastPublishedByConsultation($consultationSlug, 2);
+        $nbEvents = $this->get('capco.event.resolver')->countEvents(null, null, $consultationSlug, null);
+        $nbPosts = $em->getRepository('CapcoAppBundle:Post')->countSearchResults(null, $consultationSlug);
 
         $contributors = $this->get('capco.contribution.resolver')->getConsultationContributorsOrdered($consultation);
 

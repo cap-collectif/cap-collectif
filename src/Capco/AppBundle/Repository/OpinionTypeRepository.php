@@ -22,13 +22,16 @@ class OpinionTypeRepository extends EntityRepository
     public function getByUser($user)
     {
         $qb = $this->createQueryBuilder('ot')
-            ->addSelect('o', 'c', 'a', 'm', 'v')
+            ->addSelect('o', 's', 'cas', 'c', 'a', 'm', 'v')
             ->leftJoin('ot.Opinions', 'o')
-            ->leftJoin('o.Consultation', 'c')
+            ->leftJoin('o.step', 's')
+            ->leftJoin('s.consultationAbstractStep', 'cas')
+            ->leftJoin('cas.consultation', 'c')
             ->leftJoin('o.Author', 'a')
             ->leftJoin('a.Media', 'm')
             ->leftJoin('o.votes', 'v')
             ->andWhere('c.isEnabled = :enabled')
+            ->andWhere('s.isEnabled = :enabled')
             ->andWhere('o.isEnabled = :enabled')
             ->andWhere('o.Author = :author')
             ->setParameter('enabled', true)
@@ -51,12 +54,15 @@ class OpinionTypeRepository extends EntityRepository
     public function countByUser($user)
     {
         $qb = $this->createQueryBuilder('ot')
-            ->addSelect('o', 'c')
+            ->addSelect('o', 's', 'cas', 'c')
             ->Join('ot.Opinions', 'o')
-            ->leftJoin('o.Consultation', 'c')
+            ->leftJoin('o.step', 's')
+            ->leftJoin('s.consultationAbstractStep', 'cas')
+            ->leftJoin('cas.consultation', 'c')
             ->addGroupBy('ot.id')
             ->andWhere('o.Author = :author')
             ->andWhere('o.isEnabled = :enabled')
+            ->andWhere('s.isEnabled = :enabled')
             ->andWhere('c.isEnabled = :enabled')
             ->setParameter('enabled', true)
             ->setParameter('author', $user)
@@ -69,22 +75,22 @@ class OpinionTypeRepository extends EntityRepository
     }
 
     /**
-     * Get all opinionTypes with opinions for consultation.
+     * Get all opinionTypes with opinions for consultation step.
      *
-     * @param $consultation
+     * @param $step
      *
      * @return array
      */
-    public function getAllowedWithOpinionCount($consultation)
+    public function getAllowedWithOpinionCount($step)
     {
         $qb = $this->createQueryBuilder('ot')
             ->select('ot.id', 'ot.title', 'ot.color', 'ot.isEnabled',  'ot.slug', 'count(o.id) as total_opinions_count')
-            ->innerJoin('ot.Opinions', 'o', 'WITH', 'o.isEnabled = :enabled AND o.Consultation = :consultation AND o.isTrashed = :notTrashed')
+            ->leftJoin('ot.Opinions', 'o', 'WITH', 'o.isEnabled = :enabled AND o.step = :step AND o.isTrashed = :notTrashed')
             ->andWhere('ot.id IN (:allowedTypesIds)')
-            ->setParameter('consultation', $consultation)
+            ->setParameter('step', $step)
             ->setParameter('enabled', true)
             ->setParameter('notTrashed', false)
-            ->setParameter('allowedTypesIds', $consultation->getAllowedTypesIds())
+            ->setParameter('allowedTypesIds', $step->getAllowedTypesIds())
             ->addGroupBy('ot')
             ->orderBy('ot.position', 'ASC')
         ;

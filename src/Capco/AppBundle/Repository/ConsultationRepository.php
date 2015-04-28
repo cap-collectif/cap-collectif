@@ -28,40 +28,15 @@ class ConsultationRepository extends EntityRepository
     public function getOne($slug)
     {
         $qb = $this->getIsEnabledQueryBuilder('c')
-            ->addSelect('t', 's', 'cov')
+            ->addSelect('t', 'cas', 's', 'cov')
             ->leftJoin('c.Themes', 't', 'WITH', 't.isEnabled = :enabled')
-            ->leftJoin('c.Steps', 's', 'WITH', 's.isEnabled = :enabled')
+            ->leftJoin('c.steps', 'cas')
+            ->leftJoin('cas.step', 's')
             ->leftJoin('c.Cover', 'cov')
             ->andWhere('c.slug = :slug')
+            ->andWhere('s.isEnabled = :enabled')
             ->setParameter('enabled', true)
             ->setParameter('slug', $slug);
-
-        return $qb
-            ->getQuery()
-            ->getOneOrNullResult();
-    }
-
-    /**
-     * Get one by slug with allowed types.
-     *
-     * @param $slug
-     *
-     * @return mixed
-     *
-     * @throws \Doctrine\ORM\NonUniqueResultException
-     */
-    public function getOneWithAllowedTypes($slug)
-    {
-        $qb = $this->getIsEnabledQueryBuilder('c')
-            ->addSelect('t', 's', 'cov', 'at')
-            ->leftJoin('c.Themes', 't')
-            ->leftJoin('c.Steps', 's')
-            ->leftJoin('c.Cover', 'cov')
-            ->leftJoin('c.allowedTypes', 'at')
-            ->andWhere('c.slug = :slug')
-            ->setParameter('slug', $slug)
-            ->addOrderBy('at.position', 'ASC')
-        ;
 
         return $qb
             ->getQuery()
@@ -80,19 +55,21 @@ class ConsultationRepository extends EntityRepository
     public function getOneBySlugWithStepsAndEventsAndPosts($slug)
     {
         $qb = $this->getIsEnabledQueryBuilder('c')
-            ->addSelect('t', 's', 'cov', 'p', 'e')
+            ->addSelect('t', 'cas', 's', 'cov', 'p', 'e')
             ->leftJoin('c.Themes', 't')
-            ->leftJoin('c.Steps', 's', 'WITH', 's.isEnabled = :enabled')
+            ->leftJoin('c.steps', 'cas')
+            ->leftJoin('cas.step', 's')
             ->leftJoin('c.Cover', 'cov')
             ->leftJoin('c.posts', 'p', 'WITH', 'p.isPublished = :published')
             ->leftJoin('c.events', 'e', 'WITH', 'e.isEnabled = :enabled')
             ->andWhere('c.slug = :slug')
+            ->andWhere('s.isEnabled = :enabled')
             ->setParameter('slug', $slug)
             ->setParameter('published', true)
             ->setParameter('enabled', true)
             ->addOrderBy('p.publishedAt', 'DESC')
             ->addOrderBy('e.startAt', 'DESC')
-            ->addOrderBy('s.position', 'ASC')
+            ->addOrderBy('cas.position', 'ASC')
             ->addOrderBy('s.startAt', 'ASC')
         ;
 
@@ -122,9 +99,10 @@ class ConsultationRepository extends EntityRepository
         }
 
         $qb = $this->getIsEnabledQueryBuilder()
-            ->addSelect('t', 's', 'cov')
+            ->addSelect('t', 'cas', 's', 'cov')
             ->leftJoin('c.Themes', 't')
-            ->leftJoin('c.Steps', 's')
+            ->leftJoin('c.steps', 'cas')
+            ->leftJoin('cas.step', 's')
             ->leftJoin('c.Cover', 'cov')
             ->addOrderBy('c.publishedAt', 'DESC');
 
@@ -190,21 +168,22 @@ class ConsultationRepository extends EntityRepository
     }
 
     /**
-     * Get last consultations.
+     * Get last enabled consultations.
      *
      * @param int $limit
      * @param int $offset
      *
      * @return Paginator
      */
-    public function getLast($limit = 1, $offset = 0)
+    public function getLastPublished($limit = 1, $offset = 0)
     {
         $qb = $this->getIsEnabledQueryBuilder()
-            ->addSelect('t', 's', 'cov')
+            ->addSelect('t', 'cas', 's', 'cov')
             ->leftJoin('c.Themes', 't')
-            ->leftJoin('c.Steps', 's')
+            ->leftJoin('c.steps', 'cas')
+            ->leftJoin('cas.step', 's')
             ->leftJoin('c.Cover', 'cov')
-            ->addOrderBy('c.publishedAt', 'ASC');
+            ->addOrderBy('c.publishedAt', 'DESC');
 
         if ($limit) {
             $qb->setMaxResults($limit);
@@ -229,10 +208,11 @@ class ConsultationRepository extends EntityRepository
     public function getLastByTheme($themeId, $limit = null, $offset = null)
     {
         $qb = $this->getIsEnabledQueryBuilder()
-            ->addSelect('cov', 't', 's')
+            ->addSelect('cov', 't', 'cas', 's')
             ->leftJoin('c.Cover', 'cov')
             ->leftJoin('c.Themes', 't')
-            ->leftJoin('c.Steps', 's')
+            ->leftJoin('c.steps', 'cas')
+            ->leftJoin('cas.step', 's')
             ->andWhere(':theme MEMBER OF c.Themes')
             ->setParameter('theme', $themeId)
             ->orderBy('c.publishedAt', 'ASC');

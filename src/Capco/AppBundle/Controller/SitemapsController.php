@@ -129,24 +129,15 @@ class SitemapsController extends Controller
             'changefreq' => 'weekly',
             'priority' => '0.5',
         );
-        foreach ($em->getRepository('CapcoAppBundle:Consultation')->findBy(array(
-            'isEnabled' => true,
-        )) as $consultation) {
-            $urls[] = array(
-                'loc' => $this->get('router')->generate('app_consultation_show', array('slug' => $consultation->getSlug())),
-                'priority' => '0.5',
-                'lastmod' => $consultation->getUpdatedAt()->format(\DateTime::W3C),
-                'changefreq' => 'weekly',
-            );
-        }
 
         // Steps
-        foreach ($em->getRepository('CapcoAppBundle:Step')->findBy(array(
+        $stepResolver = $this->get('capco.step.resolver');
+        foreach ($em->getRepository('CapcoAppBundle:AbstractStep')->findBy(array(
             'isEnabled' => true,
         )) as $step) {
             if ($step->getConsultation()->canDisplay()) {
                 $urls[] = array(
-                    'loc' => $this->get('router')->generate('app_consultation_show_step', array('consultation_slug' => $step->getConsultation()->getSlug(), 'step_slug' => $step->getSlug())),
+                    'loc' => $stepResolver->getLink($step, true),
                     'priority' => '0.5',
                     'lastmod' => $step->getUpdatedAt()->format(\DateTime::W3C),
                     'changefreq' => 'weekly',
@@ -160,7 +151,7 @@ class SitemapsController extends Controller
         )) as $opinion) {
             if ($opinion->canDisplay()) {
                 $urls[] = array(
-                    'loc' => $this->get('router')->generate('app_consultation_show_opinion', array('consultationSlug' => $opinion->getConsultation()->getSlug(), 'opinionTypeSlug' => $opinion->getOpinionType()->getSlug(), 'opinionSlug' => $opinion->getSlug())),
+                    'loc' => $this->get('router')->generate('app_consultation_show_opinion', array('consultationSlug' => $opinion->getStep()->getConsultation()->getSlug(), 'stepSlug' => $opinion->getStep()->getSlug(), 'opinionTypeSlug' => $opinion->getOpinionType()->getSlug(), 'opinionSlug' => $opinion->getSlug())),
                     'priority' => '2.0',
                     'lastmod' => $opinion->getUpdatedAt()->format(\DateTime::W3C),
                     'changefreq' => 'hourly',

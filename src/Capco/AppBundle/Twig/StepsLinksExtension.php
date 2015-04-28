@@ -28,6 +28,7 @@ class StepsLinksExtension extends \Twig_Extension
         return array(
             new \Twig_SimpleFilter('capco_step_link', array($this, 'getStepLink')),
             new \Twig_SimpleFilter('capco_first_step_link', array($this, 'getFirstStepLink')),
+            new \Twig_SimpleFilter('capco_current_step_link', array($this, 'getCurrentStepLink')),
         );
     }
 
@@ -39,5 +40,10 @@ class StepsLinksExtension extends \Twig_Extension
     public function getFirstStepLink($consultation, $absolute = false)
     {
         return $this->resolver->getFirstStepLinkForConsultation($consultation, $absolute);
+    }
+
+    public function getCurrentStepLink($consultation, $absolute = false)
+    {
+        return $this->resolver->getCurrentStepLinkForConsultation($consultation, $absolute);
     }
 }

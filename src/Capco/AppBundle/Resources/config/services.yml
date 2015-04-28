@@ -322,3 +322,10 @@ services:
         class: Capco\AppBundle\EventListener\CommentSuscriber
         tags:
             - { name: "kernel.event_subscriber" }
+
+    capco.consultation_type.repository:
+        class: Capco\AppBundle\Repository\ConsultationTypeRepository
+        factory_service: doctrine.orm.default_entity_manager
+        factory_method: getRepository
+        arguments:
+            - Capco\AppBundle\Entity\ConsultationType

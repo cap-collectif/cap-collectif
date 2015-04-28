@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\Repository;
 
+use Capco\AppBundle\Entity\ConsultationStep;
 use Doctrine\ORM\EntityRepository;
 
 /**
@@ -13,50 +14,39 @@ use Doctrine\ORM\EntityRepository;
 class SourceRepository extends EntityRepository
 {
     /**
-     * Get one source by slug, opinion, opinion type and consultation.
+     * Get one source by slug.
      *
-     * @param $consultation
-     * @param $opinionType
-     * @param $opinion
      * @param $source
      *
      * @return mixed
      *
      * @throws \Doctrine\ORM\NonUniqueResultException
      */
-    public function getOneBySlug($consultation, $opinionType, $opinion, $source)
+    public function getOneBySlug($source)
     {
         return $this->getIsEnabledQueryBuilder()
-            ->addSelect('a', 'm', 'v', 'o', 'c', 'ot', 'cat', 'media')
+            ->addSelect('a', 'm', 'v', 'o', 'cat', 'media')
             ->leftJoin('s.Author', 'a')
             ->leftJoin('s.Media', 'media')
             ->leftJoin('s.Category', 'cat')
             ->leftJoin('a.Media', 'm')
             ->leftJoin('s.votes', 'v')
             ->leftJoin('s.Opinion', 'o')
-            ->leftJoin('o.Consultation', 'c')
-            ->leftJoin('o.OpinionType', 'ot')
             ->andWhere('s.slug = :source')
-            ->andWhere('o.slug = :opinion')
-            ->andWhere('c.slug = :consultation')
-            ->andWhere('ot.slug = :opinionType')
             ->setParameter('source', $source)
-            ->setParameter('opinion', $opinion)
-            ->setParameter('consultation', $consultation)
-            ->setParameter('opinionType', $opinionType)
 
             ->getQuery()
             ->getOneOrNullResult();
     }
 
     /**
-     * Get all trashed sources for consultation.
+     * Get all trashed sources for consultation step.
      *
-     * @param $consultation
+     * @param $step
      *
      * @return mixed
      */
-    public function getTrashedByConsultation($consultation)
+    public function getTrashedByConsultationStep(ConsultationStep $step)
     {
         $qb = $this->getIsEnabledQueryBuilder()
             ->addSelect('ca', 'o', 'aut', 'm', 'media')
@@ -65,9 +55,9 @@ class SourceRepository extends EntityRepository
             ->leftJoin('s.Opinion', 'o')
             ->leftJoin('s.Author', 'aut')
             ->leftJoin('aut.Media', 'm')
-            ->andWhere('o.Consultation = :consultation')
+            ->andWhere('o.step = :step')
             ->andWhere('s.isTrashed = :trashed')
-            ->setParameter('consultation', $consultation)
+            ->setParameter('step', $step)
             ->setParameter('trashed', true)
             ->orderBy('s.trashedAt', 'DESC');
 
@@ -103,13 +93,13 @@ class SourceRepository extends EntityRepository
     }
 
     /**
-     * Get all sources by consultation.
+     * Get all sources by consultation step.
      *
-     * @param $consultation
+     * @param $step
      *
      * @return mixed
      */
-    public function getByConsultation($consultation)
+    public function getByConsultationStep(ConsultationStep $step)
     {
         $qb = $this->createQueryBuilder('s')
             ->addSelect('ca', 'o', 'ot', 'aut')
@@ -117,8 +107,8 @@ class SourceRepository extends EntityRepository
             ->leftJoin('s.Opinion', 'o')
             ->leftJoin('o.OpinionType', 'ot')
             ->leftJoin('s.Author', 'aut')
-            ->andWhere('o.Consultation = :consultation')
-            ->setParameter('consultation', $consultation)
+            ->andWhere('o.step = :step')
+            ->setParameter('step', $step)
             ->orderBy('s.updatedAt', 'DESC');
 
         return $qb->getQuery()->getResult();
@@ -134,15 +124,18 @@ class SourceRepository extends EntityRepository
     public function getByUser($user)
     {
         $qb = $this->getIsEnabledQueryBuilder()
-            ->addSelect('ca', 'o', 'c', 'aut', 'm', 'media')
+            ->addSelect('ca', 'o', 'cs', 'cas', 'c', 'aut', 'm', 'media')
             ->leftJoin('s.Category', 'ca')
             ->leftJoin('s.Media', 'media')
             ->leftJoin('s.Opinion', 'o')
-            ->leftJoin('o.Consultation', 'c')
+            ->leftJoin('o.step', 'cs')
+            ->leftJoin('cs.consultationAbstractStep', 'cas')
+            ->leftJoin('cas.consultation', 'c')
             ->leftJoin('s.Author', 'aut')
             ->leftJoin('aut.Media', 'm')
             ->andWhere('s.Author = :author')
             ->andWhere('o.isEnabled = :enabled')
+            ->andWhere('cs.isEnabled = :enabled')
             ->andWhere('c.isEnabled = :enabled')
             ->setParameter('author', $user)
             ->setParameter('enabled', true)
@@ -163,8 +156,11 @@ class SourceRepository extends EntityRepository
         $qb = $this->getIsEnabledQueryBuilder()
             ->select('COUNT(s) as TotalSources')
             ->leftJoin('s.Opinion', 'o')
-            ->leftJoin('o.Consultation', 'c')
+            ->leftJoin('o.step', 'cs')
+            ->leftJoin('cs.consultationAbstractStep', 'cas')
+            ->leftJoin('cas.consultation', 'c')
             ->andWhere('o.isEnabled = :enabled')
+            ->andWhere('cs.isEnabled = :enabled')
             ->andWhere('c.isEnabled = :enabled')
             ->andWhere('s.Author = :author')
             ->setParameter('enabled', true)

@@ -2381,7 +2381,7 @@
                     "email": "stof@notk.org"
                 },
                 {
-                    "name": "KnpLabs",
+                    "name": "Knplabs",
                     "homepage": "http://knplabs.com"
                 },
                 {
@@ -3520,12 +3520,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sonata-project/SonataAdminBundle.git",
-                "reference": "a516465b0c0460ce815e98ce152e033fb86c6c98"
+                "reference": "b98f7273972886e7b89e5cbc7943ed2317839825"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sonata-project/SonataAdminBundle/zipball/a516465b0c0460ce815e98ce152e033fb86c6c98",
-                "reference": "a516465b0c0460ce815e98ce152e033fb86c6c98",
+                "url": "https://api.github.com/repos/sonata-project/SonataAdminBundle/zipball/b98f7273972886e7b89e5cbc7943ed2317839825",
+                "reference": "b98f7273972886e7b89e5cbc7943ed2317839825",
                 "shasum": ""
             },
             "require": {
@@ -3596,7 +3596,7 @@
                 "bootstrap",
                 "sonata"
             ],
-            "time": "2015-04-21 13:49:29"
+            "time": "2015-04-24 11:45:19"
         },
         {
             "name": "sonata-project/block-bundle",

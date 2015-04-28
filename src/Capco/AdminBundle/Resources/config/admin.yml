@@ -97,11 +97,12 @@ services:
 
     capco_admin.admin.step:
         class: Capco\AdminBundle\Admin\StepAdmin
-        arguments: [~, Capco\AppBundle\Entity\Step, SonataAdminBundle:CRUD]
+        arguments: [~, Capco\AppBundle\Entity\AbstractStep, SonataAdminBundle:CRUD]
         tags:
             - {name: sonata.admin, manager_type: orm, label: admin.label.step}
         calls:
             - [ setTranslationDomain, [SonataAdminBundle]]
+            - [setSubClasses, [{other_step: Capco\AppBundle\Entity\OtherStep, presentation_step: Capco\AppBundle\Entity\PresentationStep, consultation_step: Capco\AppBundle\Entity\ConsultationStep}]]
 
     capco_admin.admin.theme:
         class: Capco\AdminBundle\Admin\ThemeAdmin
@@ -249,3 +250,9 @@ services:
             - [ setTranslationDomain, [SonataAdminBundle]]
             - [ setTemplate, [list, CapcoAdminBundle:HighlightedContent:list.html.twig]]
             - [ setSubClasses, [{highlighted_post: Capco\AppBundle\Entity\HighlightedPost, highlighted_idea: Capco\AppBundle\Entity\HighlightedIdea, highlighted_theme: Capco\AppBundle\Entity\HighlightedTheme, highlighted_event: Capco\AppBundle\Entity\HighlightedEvent, highlighted_consultation: Capco\AppBundle\Entity\HighlightedConsultation}]]
+
+    capco_admin.admin.consultation_abstractstep:
+        class: Capco\AdminBundle\Admin\ConsultationAbstractStepAdmin
+        arguments: [~, Capco\AppBundle\Entity\ConsultationAbstractStep, SonataAdminBundle:CRUD]
+        tags:
+            - {name: sonata.admin, manager_type: orm, group: sonata.admin.group.consultation, label: admin.label.consultation_abstractstep}

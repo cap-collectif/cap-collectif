@@ -1,6 +1,6 @@
 {% extends '@CapcoApp/Consultation/show.html.twig' %}
 
-{% block canonical_link %}{{ url('app_consultation_show_trashed', {'consultationSlug': consultation.slug}) }}{% endblock %}
+{% block canonical_link %}{{ url('app_consultation_show_trashed', {'consultationSlug': consultation.slug, 'stepSlug': currentStep.slug}) }}{% endblock %}
 
 {% block opinions_list %}
     {% set trashedNb = (arguments|length + opinions|length + sources|length) %}

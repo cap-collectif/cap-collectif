@@ -2,7 +2,7 @@
     <ul class="media-list  opinion__list">
         {% for source in sources %}
             <div class="block  block--bordered">
-                {% include 'CapcoAppBundle:Source:blockSource.html.twig' with {'source': source, 'opinion': source.opinion, 'opinionType': source.opinion.opinionType, 'consultation': source.opinion.consultation, 'profile': true } only %}
+                {% include 'CapcoAppBundle:Source:blockSource.html.twig' with {'source': source, 'opinion': source.opinion, 'opinionType': source.opinion.opinionType, 'consultation': source.opinion.step.consultation, 'profile': true } only %}
             </div>
         {% endfor %}
     </ul>

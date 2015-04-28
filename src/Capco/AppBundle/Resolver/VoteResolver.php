@@ -34,7 +34,7 @@ class VoteResolver
         }
 
         if ($object instanceof Argument || $object instanceof Source) {
-            return $this->router->generate('app_consultation_show_opinion', array('consultationSlug' => $object->getOpinion()->getConsultation()->getSlug(), 'opinionTypeSlug' => $object->getOpinion()->getOpinionType()->getSlug(), 'opinionSlug' => $object->getOpinion()->getSlug()), $absolute);
+            return $this->router->generate('app_consultation_show_opinion', array('consultationSlug' => $object->getOpinion()->getStep()->getConsultation()->getSlug(), 'stepSlug' => $object->getOpinion()->getStep()->getSlug(), 'opinionTypeSlug' => $object->getOpinion()->getOpinionType()->getSlug(), 'opinionSlug' => $object->getOpinion()->getSlug()), $absolute);
         }
 
         if ($object instanceof AbstractComment) {
@@ -42,7 +42,7 @@ class VoteResolver
         }
 
         if ($object instanceof Opinion) {
-            return $this->router->generate('app_consultation_show_opinion', array('consultationSlug' => $object->getConsultation()->getSlug(), 'opinionTypeSlug' => $object->getOpinionType()->getSlug(), 'opinionSlug' => $object->getSlug()), $absolute);
+            return $this->router->generate('app_consultation_show_opinion', array('consultationSlug' => $object->getStep()->getConsultation()->getSlug(), 'stepSlug' => $object->getStep()->getSlug(), 'opinionTypeSlug' => $object->getOpinionType()->getSlug(), 'opinionSlug' => $object->getSlug()), $absolute);
         }
 
         return $this->router->generate('app_homepage', array(), $absolute);

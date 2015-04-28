@@ -54,21 +54,21 @@ class ArgumentRepository extends EntityRepository
     }
 
     /**
-     * Find all arguments by consultation.
+     * Find all arguments by consultation step.
      *
-     * @param $consultation
+     * @param $step
      *
      * @return array
      */
-    public function getByConsultation($consultation)
+    public function getByConsultation($step)
     {
         $qb = $this->createQueryBuilder('a')
             ->addSelect('o', 'ot', 'aut')
             ->leftJoin('a.opinion', 'o')
             ->leftJoin('o.OpinionType', 'ot')
             ->leftJoin('o.Author', 'aut')
-            ->andWhere('o.Consultation = :consultation')
-            ->setParameter('consultation', $consultation)
+            ->andWhere('o.step = :step')
+            ->setParameter('step', $step)
             ->addOrderBy('a.updatedAt', 'DESC');
 
         return $qb->getQuery()
@@ -76,47 +76,36 @@ class ArgumentRepository extends EntityRepository
     }
 
     /**
-     * Get one argument by id, opinion, opinion type and consultation.
+     * Get one argument by id.
      *
-     * @param $consultation
-     * @param $opinionType
-     * @param $opinion
      * @param $argument
      *
      * @return mixed
      *
      * @throws \Doctrine\ORM\NonUniqueResultException
      */
-    public function getOneById($consultation, $opinionType, $opinion, $argument)
+    public function getOneById($argument)
     {
         return $this->getIsEnabledQueryBuilder()
-            ->addSelect('aut', 'm', 'v', 'o', 'c', 'ot')
+            ->addSelect('aut', 'm', 'v', 'o')
             ->leftJoin('a.Author', 'aut')
             ->leftJoin('aut.Media', 'm')
             ->leftJoin('a.votes', 'v')
             ->leftJoin('a.opinion', 'o')
-            ->leftJoin('o.Consultation', 'c')
-            ->leftJoin('o.OpinionType', 'ot')
             ->andWhere('a.id = :argument')
-            ->andWhere('o.slug = :opinion')
-            ->andWhere('c.slug = :consultation')
-            ->andWhere('ot.slug = :opinionType')
             ->setParameter('argument', $argument)
-            ->setParameter('opinion', $opinion)
-            ->setParameter('consultation', $consultation)
-            ->setParameter('opinionType', $opinionType)
             ->getQuery()
             ->getOneOrNullResult();
     }
 
     /**
-     * Get all trashed arguments for consultation.
+     * Get all trashed arguments for consultation step.
      *
-     * @param $consultation
+     * @param $step
      *
      * @return mixed
      */
-    public function getTrashedByConsultation($consultation)
+    public function getTrashedByConsultationStep($step)
     {
         return $this->getIsEnabledQueryBuilder()
             ->addSelect('o', 'v', 'aut', 'm')
@@ -125,9 +114,9 @@ class ArgumentRepository extends EntityRepository
             ->leftJoin('o.Author', 'aut')
             ->leftJoin('aut.Media', 'm')
             ->andWhere('a.isTrashed = :trashed')
-            ->andWhere('o.Consultation = :consultation')
+            ->andWhere('o.step = :step')
             ->setParameter('trashed', true)
-            ->setParameter('consultation', $consultation)
+            ->setParameter('step', $step)
             ->orderBy('a.trashedAt', 'DESC')
             ->getQuery()
             ->getResult();
@@ -145,9 +134,12 @@ class ArgumentRepository extends EntityRepository
         $qb = $this->getIsEnabledQueryBuilder()
             ->select('COUNT(a) as TotalArguments')
             ->leftJoin('a.opinion', 'o')
-            ->leftJoin('o.Consultation', 'c')
+            ->leftJoin('o.step', 's')
+            ->leftJoin('s.consultationAbstractStep', 'cas')
+            ->leftJoin('cas.consultation', 'c')
             ->andWhere('a.Author = :author')
             ->andWhere('o.isEnabled = :enabled')
+            ->andWhere('s.isEnabled = :enabled')
             ->andWhere('c.isEnabled = :enabled')
             ->setParameter('author', $user)
             ->setParameter('enabled', true);
@@ -169,7 +161,11 @@ class ArgumentRepository extends EntityRepository
         return $this->getIsEnabledQueryBuilder()
             ->leftJoin('a.opinion', 'o')
             ->addSelect('o')
-            ->leftJoin('o.Consultation', 'c')
+            ->leftJoin('o.step', 's')
+            ->addSelect('s')
+            ->leftJoin('s.consultationAbstractStep', 'cas')
+            ->addSelect('cas')
+            ->leftJoin('cas.consultation', 'c')
             ->addSelect('c')
             ->leftJoin('o.Author', 'aut')
             ->addSelect('aut')
@@ -181,6 +177,8 @@ class ArgumentRepository extends EntityRepository
             ->setParameter('author', $user)
             ->andWhere('o.isEnabled = :enabled')
             ->setParameter('enabled', true)
+            ->andWhere('s.isEnabled = :stepEnabled')
+            ->setParameter('stepEnabled', true)
             ->andWhere('c.isEnabled = :consultEnabled')
             ->setParameter('consultEnabled', true)
             ->getQuery()

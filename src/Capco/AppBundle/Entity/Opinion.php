@@ -149,9 +149,9 @@ class Opinion
     /**
      * @var
      *
-     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Consultation", inversedBy="Opinions", cascade={"persist"})
+     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\ConsultationStep", inversedBy="opinions", cascade={"persist"})
      */
-    private $Consultation;
+    private $step;
 
     /**
      * @var
@@ -521,21 +521,17 @@ class Opinion
     /**
      * @return mixed
      */
-    public function getConsultation()
+    public function getStep()
     {
-        return $this->Consultation;
+        return $this->step;
     }
 
     /**
-     * @param mixed $Consultation
-     *
-     * @return $this
+     * @param mixed $step
      */
-    public function setConsultation($Consultation)
+    public function setStep($step)
     {
-        $this->Consultation = $Consultation;
-
-        return $this;
+        $this->step = $step;
     }
 
     /**
@@ -769,7 +765,7 @@ class Opinion
      */
     public function canDisplay()
     {
-        return $this->isEnabled && $this->Consultation->canDisplay();
+        return $this->isEnabled && $this->step->canDisplay();
     }
 
     /**
@@ -777,7 +773,7 @@ class Opinion
      */
     public function canContribute()
     {
-        return $this->isEnabled && !$this->isTrashed && $this->Consultation->canContribute();
+        return $this->isEnabled && !$this->isTrashed && $this->step->canContribute();
     }
 
     /**
@@ -800,8 +796,8 @@ class Opinion
      */
     public function deleteOpinion()
     {
-        if ($this->Consultation != null) {
-            $this->Consultation->removeOpinion($this);
+        if ($this->step != null) {
+            $this->step->removeOpinion($this);
         }
         if ($this->OpinionType != null) {
             $this->OpinionType->removeOpinion($this);

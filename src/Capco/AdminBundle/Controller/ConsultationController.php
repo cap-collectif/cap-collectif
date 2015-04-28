@@ -3,7 +3,6 @@
 namespace Capco\AdminBundle\Controller;
 
 use Sonata\AdminBundle\Controller\CRUDController as Controller;
-use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
@@ -35,22 +34,5 @@ class ConsultationController extends Controller
         $response->headers->set('Content-Disposition', 'attachment;filename='.$filename);
 
         return $response;
-    }
-
-    public function getAllowedTypesFromConsultationTypeAction()
-    {
-        $consultationTypeId = $this->get('request')->get('consultationTypeId');
-        if (null == $consultationTypeId) {
-            return new JsonResponse(array());
-        }
-
-        $em = $this->get('doctrine.orm.entity_manager');
-        $opinionTypes = $em->getRepository('CapcoAppBundle:ConsultationType')->getRelatedTypes($consultationTypeId);
-
-        if (null == $opinionTypes) {
-            return new JsonResponse(array());
-        }
-
-        return new JsonResponse($opinionTypes);
     }
 }

@@ -1,6 +1,6 @@
 {% extends '@CapcoApp/base.html.twig' %}
 
-{% block canonical_link %}{{ url('app_consultation_edit_opinion', {'consultationSlug': consultation.slug, 'opinionTypeSlug': opinionType.slug, 'opinionSlug': opinion.slug}) }}{% endblock %}
+{% block canonical_link %}{{ url('app_consultation_edit_opinion', {'consultationSlug': consultation.slug, 'stepSlug': currentStep.slug, 'opinionTypeSlug': opinionType.slug, 'opinionSlug': opinion.slug}) }}{% endblock %}
 
 {% block title %}
     {{ parent() }} - {{ 'opinion.update.page_title'|trans({'%title%': opinion.title}, 'CapcoAppBundle') }}
@@ -30,9 +30,9 @@
                             </div>
                         </div>
                         <div class="dialog__footer  box">
-                            <a href="{{ path('app_consultation_delete_opinion' ,{'consultationSlug': consultation.slug, 'opinionTypeSlug':opinionType.slug, 'opinionSlug': opinion.slug } ) }}" class="btn  btn-danger">{{ 'opinion.update.delete'|trans({}, 'CapcoAppBundle') }}</a>
+                            <a href="{{ path('app_consultation_delete_opinion' ,{'consultationSlug': consultation.slug, 'stepSlug': currentStep.slug, 'opinionTypeSlug':opinionType.slug, 'opinionSlug': opinion.slug } ) }}" class="btn  btn-danger">{{ 'opinion.update.delete'|trans({}, 'CapcoAppBundle') }}</a>
                             <div class="pull-right">
-                                <a href="{{ path('app_consultation_show_opinions', {'consultationSlug': consultation.slug, 'opinionTypeSlug': opinionType.slug}) }}" class="btn  btn-default">{{ 'opinion.update.cancel'|trans({}, 'CapcoAppBundle') }}</a>
+                                <a href="{{ path('app_consultation_show_opinions', {'consultationSlug': consultation.slug, 'stepSlug': currentStep.slug, 'opinionTypeSlug': opinionType.slug}) }}" class="btn  btn-default">{{ 'opinion.update.cancel'|trans({}, 'CapcoAppBundle') }}</a>
                                 <button type="submit" class="btn  btn-warning">{{ 'opinion.update.submit'|trans({}, 'CapcoAppBundle') }}</button>
                             </div>
                         </div>

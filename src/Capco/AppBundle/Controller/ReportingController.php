@@ -7,7 +7,6 @@ use Capco\AppBundle\Entity\AbstractComment;
 use Capco\AppBundle\Entity\Consultation;
 use Capco\AppBundle\Entity\Idea;
 use Capco\AppBundle\Entity\Opinion;
-use Capco\AppBundle\Entity\OpinionType;
 use Capco\AppBundle\Entity\Reporting;
 use Capco\AppBundle\Entity\Source;
 use Capco\AppBundle\Form\ReportingType;
@@ -22,23 +21,24 @@ use Symfony\Component\Form\Form;
 class ReportingController extends Controller
 {
     /**
-     * @Route("/consultations/{consultationSlug}/opinions/{opinionTypeSlug}/{opinionSlug}/report", name="app_report_opinion")
+     * @Route("/consultations/{consultationSlug}/consultation/{stepSlug}/opinions/{opinionTypeSlug}/{opinionSlug}/report", name="app_report_opinion")
      * @Template("CapcoAppBundle:Reporting:create.html.twig")
      *
      * @param $request
      * @param $consultationSlug
+     * @param $stepSlug
      * @param $opinionTypeSlug
      * @param $opinionSlug
      *
      * @return array
      */
-    public function reportingOpinionAction($consultationSlug, $opinionTypeSlug, $opinionSlug, Request $request)
+    public function reportingOpinionAction($consultationSlug, $stepSlug, $opinionTypeSlug, $opinionSlug, Request $request)
     {
         if (false === $this->get('security.authorization_checker')->isGranted('ROLE_USER')) {
             throw new AccessDeniedException($this->get('translator')->trans('error.access_restricted', array(), 'CapcoAppBundle'));
         }
 
-        $opinion = $this->getDoctrine()->getRepository('CapcoAppBundle:Opinion')->getOneBySlug($consultationSlug, $opinionTypeSlug, $opinionSlug);
+        $opinion = $this->getDoctrine()->getRepository('CapcoAppBundle:Opinion')->getOneBySlug($opinionSlug);
 
         if ($opinion == null) {
             throw $this->createNotFoundException($this->get('translator')->trans('opinion.error.not_found', array(), 'CapcoAppBundle'));
@@ -49,7 +49,8 @@ class ReportingController extends Controller
         }
 
         $opinionType = $opinion->getOpinionType();
-        $consultation = $opinion->getConsultation();
+        $currentStep = $opinion->getStep();
+        $consultation = $currentStep->getConsultation();
 
         $reporting = new Reporting();
         $form = $this->createForm(new ReportingType(), $reporting);
@@ -69,6 +70,7 @@ class ReportingController extends Controller
                         'app_consultation_show_opinion',
                         [
                             'consultationSlug' => $consultation->getSlug(),
+                            'stepSlug' => $currentStep->getSlug(),
                             'opinionTypeSlug' => $opinionType->getSlug(),
                             'opinionSlug' => $opinion->getSlug(),
                         ]
@@ -80,19 +82,18 @@ class ReportingController extends Controller
         }
 
         return [
-            'consultation' => $consultation,
-            'opinionType' => $opinionType,
             'opinion' => $opinion,
             'form' => $form->createView(),
         ];
     }
 
     /**
-     * @Route("/consultations/{consultationSlug}/opinions/{opinionTypeSlug}/{opinionSlug}/sources/{sourceSlug}/report", name="app_report_source")
+     * @Route("/consultations/{consultationSlug}/consultation/{stepSlug}/opinions/{opinionTypeSlug}/{opinionSlug}/sources/{sourceSlug}/report", name="app_report_source")
      * @Template("CapcoAppBundle:Reporting:create.html.twig")
      *
      * @param $request
      * @param $consultationSlug
+     * @param $stepSlug
      * @param $opinionTypeSlug
      * @param $sourceSlug
      * @param $opinionSlug
@@ -105,7 +106,7 @@ class ReportingController extends Controller
             throw new AccessDeniedException($this->get('translator')->trans('error.access_restricted', array(), 'CapcoAppBundle'));
         }
 
-        $source = $this->getDoctrine()->getRepository('CapcoAppBundle:Source')->getOneBySlug($consultationSlug, $opinionTypeSlug, $opinionSlug, $sourceSlug);
+        $source = $this->getDoctrine()->getRepository('CapcoAppBundle:Source')->getOneBySlug($sourceSlug);
 
         if ($source == null) {
             throw $this->createNotFoundException($this->get('translator')->trans('source.error.not_found', array(), 'CapcoAppBundle'));
@@ -117,7 +118,8 @@ class ReportingController extends Controller
 
         $opinion = $source->getOpinion();
         $opinionType = $opinion->getOpinionType();
-        $consultation = $opinion->getConsultation();
+        $currentStep = $opinion->getStep();
+        $consultation = $currentStep->getConsultation();
 
         $reporting = new Reporting();
         $form = $this->createForm(new ReportingType(), $reporting);
@@ -139,6 +141,7 @@ class ReportingController extends Controller
                         'app_consultation_show_opinion',
                         [
                             'consultationSlug' => $consultation->getSlug(),
+                            'stepSlug' => $currentStep->getSlug(),
                             'opinionTypeSlug' => $opinionType->getSlug(),
                             'opinionSlug' => $opinion->getSlug(),
                         ]
@@ -150,32 +153,31 @@ class ReportingController extends Controller
         }
 
         return [
-            'consultation' => $consultation,
-            'opinionType' => $opinionType,
             'opinion' => $opinion,
             'form' => $form->createView(),
         ];
     }
 
     /**
-     * @Route("/consultations/{consultationSlug}/opinions/{opinionTypeSlug}/{opinionSlug}/arguments/{argumentId}/report", name="app_report_argument")
+     * @Route("/consultations/{consultationSlug}/consultation/{stepSlug}/opinions/{opinionTypeSlug}/{opinionSlug}/arguments/{argumentId}/report", name="app_report_argument")
      * @Template("CapcoAppBundle:Reporting:create.html.twig")
      *
      * @param $request
      * @param $consultationSlug
+     * @param $stepSlug
      * @param $opinionTypeSlug
      * @param $argumentId
      * @param $opinionSlug
      *
      * @return array
      */
-    public function reportingArgumentAction($consultationSlug, $opinionTypeSlug, $opinionSlug, $argumentId, Request $request)
+    public function reportingArgumentAction($consultationSlug, $stepSlug, $opinionTypeSlug, $opinionSlug, $argumentId, Request $request)
     {
         if (false === $this->get('security.authorization_checker')->isGranted('ROLE_USER')) {
             throw new AccessDeniedException($this->get('translator')->trans('error.access_restricted', array(), 'CapcoAppBundle'));
         }
 
-        $argument = $this->getDoctrine()->getRepository('CapcoAppBundle:Argument')->getOneById($consultationSlug, $opinionTypeSlug, $opinionSlug, $argumentId);
+        $argument = $this->getDoctrine()->getRepository('CapcoAppBundle:Argument')->getOneById($argumentId);
 
         if ($argument == null) {
             throw $this->createNotFoundException($this->get('translator')->trans('argument.error.not_found', array(), 'CapcoAppBundle'));
@@ -187,7 +189,8 @@ class ReportingController extends Controller
 
         $opinion = $argument->getOpinion();
         $opinionType = $opinion->getOpinionType();
-        $consultation = $opinion->getConsultation();
+        $currentStep = $opinion->getStep();
+        $consultation = $currentStep->getConsultation();
 
         $reporting = new Reporting();
         $form = $this->createForm(new ReportingType(), $reporting);
@@ -209,6 +212,7 @@ class ReportingController extends Controller
                         'app_consultation_show_opinion',
                         [
                             'consultationSlug' => $consultation->getSlug(),
+                            'stepSlug' => $currentStep->getSlug(),
                             'opinionTypeSlug' => $opinionType->getSlug(),
                             'opinionSlug' => $opinion->getSlug(),
                         ]
@@ -220,8 +224,6 @@ class ReportingController extends Controller
         }
 
         return [
-            'consultation' => $consultation,
-            'opinionType' => $opinionType,
             'opinion' => $opinion,
             'form' => $form->createView(),
         ];

@@ -1,5 +1,5 @@
 {% set opinion = argument.opinion %}
-{% set consultation = opinion.consultation %}
+{% set consultation = opinion.step.consultation %}
 {% set opinionType = opinion.opinionType %}
 <li class="opinion  opinion--argument {% if classes is defined %}{{ classes }}{% endif %}" id="arg-{{ argument.id }}">
     <div class="opinion__body  box">
@@ -19,7 +19,7 @@
             </p>
             <p class="excerpt  opinion__date">{{ argument.createdAt | localizeddate('long', 'short', app.request.locale) }}</p>
             {% if trashed is defined or profile is defined %}
-                <p>{{ 'argument.trashed.linked_proposition' | trans({}, 'CapcoAppBundle') }} <a href="{{ path('app_consultation_show_opinion', {'consultationSlug': consultation.slug, 'opinionTypeSlug': argument.Opinion.OpinionType.slug, 'opinionSlug': argument.Opinion.slug}) }}">{{ argument.Opinion.title }}</a></p>
+                <p>{{ 'argument.trashed.linked_proposition' | trans({}, 'CapcoAppBundle') }} <a href="{{ path('app_consultation_show_opinion', {'consultationSlug': consultation.slug, 'stepSlug': opinion.step.slug, 'opinionTypeSlug': argument.Opinion.OpinionType.slug, 'opinionSlug': argument.Opinion.slug}) }}">{{ argument.Opinion.title }}</a></p>
             {% endif %}
         </div>
         <p class="opinion__text more" style="max-height: 115px; overflow: hidden; width: 100%">{% if profile is defined and argument.isTrashed %}<span class="label label-default" style="position: static">{{ 'opinion.show.trashed.label'|trans({}, 'CapcoAppBundle') }}</span> {% endif %}{{ argument.body | escape | nl2br }}</p>
@@ -29,7 +29,7 @@
             {% if false == argument.canContribute %}
                 <button disabled="disabled" class="btn  btn-dark-gray  btn-xs"><i class="cap-hand-like-2"></i> {{ 'argument.vote.submit'|trans({}, 'CapcoAppBundle') }}</button>
             {% else %}
-                <form method="POST" style="display: inline-block;" action="{{ path('app_consultation_vote_argument' ,{'consultationSlug': consultation.slug, 'opinionTypeSlug': opinionType.slug, 'opinionSlug': opinion.slug, 'argumentId': argument.id } ) }}">
+                <form method="POST" style="display: inline-block;" action="{{ path('app_consultation_vote_argument' ,{'consultationSlug': consultation.slug, 'stepSlug': opinion.step.slug, 'opinionTypeSlug': opinionType.slug, 'opinionSlug': opinion.slug, 'argumentId': argument.id } ) }}">
                     {% if argument.userHasVote(currentUser) %}
                         <button class="btn  btn-danger  btn-xs">{{ 'argument.vote.delete'|trans({}, 'CapcoAppBundle') }}</button>
                     {% else %}
@@ -43,7 +43,7 @@
             <span class="opinion__votes-nb">{{ argument.VoteCount }}</span>
 
             {{ sonata_block_render({'type': 'capco.block.service.share_button'}, {
-                'url': (url('app_consultation_show_opinion', {'consultationSlug': consultation.slug, 'opinionTypeSlug': opinionType.slug, 'opinionSlug': opinion.slug}) ~ '#arg-' ~ argument.id),
+                'url': (url('app_consultation_show_opinion', {'consultationSlug': consultation.slug, 'stepSlug': opinion.step.slug, 'opinionTypeSlug': opinionType.slug, 'opinionSlug': opinion.slug}) ~ '#arg-' ~ argument.id),
                 'title': ('share_button.argument_on'|trans({'%opinion%': opinion.title}, 'CapcoAppBundle')),
                 'btn_classes': 'btn-xs  btn-dark-gray  btn--outline',
             }) }}
@@ -51,11 +51,11 @@
             {% if argument.reports | length > 0 %}
                 <button disabled="disabled" class="btn btn-xs btn-dark-gray"><i class="cap cap-flag-1"></i> {{ 'argument.report.reported'|trans({}, 'CapcoAppBundle') }}</button>
             {% else %}
-                <a href="{{ path('app_report_argument' ,{'consultationSlug': consultation.slug, 'opinionTypeSlug': opinionType.slug, 'opinionSlug': opinion.slug, 'argumentId': argument.id } ) }}" class="btn btn-xs btn-dark-gray  btn--outline  connection-popover-js"><i class="cap cap-flag-1"></i> {{ 'argument.report.submit'|trans({}, 'CapcoAppBundle') }}</a>
+                <a href="{{ path('app_report_argument' ,{'consultationSlug': consultation.slug, 'stepSlug': opinion.step.slug, 'opinionTypeSlug': opinionType.slug, 'opinionSlug': opinion.slug, 'argumentId': argument.id } ) }}" class="btn btn-xs btn-dark-gray  btn--outline  connection-popover-js"><i class="cap cap-flag-1"></i> {{ 'argument.report.submit'|trans({}, 'CapcoAppBundle') }}</a>
             {% endif %}
 
             {% if argument.canContribute and currentUser is not null and currentUser == argument.Author %}
-                <a href="{{ path('app_consultation_edit_argument' ,{'consultationSlug': consultation.slug, 'opinionTypeSlug': opinionType.slug, 'opinionSlug': opinion.slug, 'argumentId': argument.id } ) }}" class="btn  btn-dark-gray  btn--outline  btn-xs"><i class="cap cap-pencil-1"></i> {{ 'argument.update.button'|trans({}, 'CapcoAppBundle') }}</a>
+                <a href="{{ path('app_consultation_edit_argument' ,{'consultationSlug': consultation.slug, 'stepSlug': opinion.step.slug, 'opinionTypeSlug': opinionType.slug, 'opinionSlug': opinion.slug, 'argumentId': argument.id } ) }}" class="btn  btn-dark-gray  btn--outline  btn-xs"><i class="cap cap-pencil-1"></i> {{ 'argument.update.button'|trans({}, 'CapcoAppBundle') }}</a>
             {% endif %}
 
         {% else %}

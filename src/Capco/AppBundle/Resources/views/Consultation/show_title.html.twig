@@ -1,10 +1,10 @@
 {% macro contributions_popover(consultation) %}
-    {% set opinions = consultation.opinionCount + consultation.trashedOpinionCount %}
+    {% set opinions = consultation.totalOpinionsCount %}
     {% transchoice opinions with {'%count%': opinions} from 'CapcoAppBundle'  %}
         consultation.show.meta.opinionsCount
     {% endtranschoice %}
     </br>
-    {% set arguments = consultation.argumentCount + consultation.trashedArgumentCount %}
+    {% set arguments = consultation.totalArgumentsCount %}
     {% transchoice arguments with {'%count%': arguments} from 'CapcoAppBundle'  %}
         consultation.show.meta.argumentsCount
     {% endtranschoice %}
@@ -64,17 +64,20 @@
 
         <ul class="nav nav-pills consultation__infos">
             {% set contributionsCount = consultation.totalContributionsCount %}
-            <li data-toggle="tooltip" data-placement="top" data-html="true" data-title="{{ render.contributions_popover(consultation) }}">
-                <div class="value">{{ contributionsCount }}</div>
-                <div class="excerpt category">
-                    {% transchoice contributionsCount from 'CapcoAppBundle' %}
-                        consultation.show.meta.total_count
-                    {% endtranschoice %}
-                </div>
-            </li>
-            {% if consultation.isOpen %}
-                <li data-toggle="tooltip" data-placement="top" title="{{ 'consultation.show.end_at' | trans({'%date%': consultation.closedAt | localizeddate('long', 'none')}, 'CapcoAppBundle') }}">
-                    {% set remDays = consultation.remainingDays | default('0') %}
+            {% if contributionsCount > 0 %}
+                <li data-toggle="tooltip" data-placement="top" data-html="true" data-title="{{ render.contributions_popover(consultation) }}">
+                    <div class="value">{{ contributionsCount }}</div>
+                    <div class="excerpt category">
+                        {% transchoice contributionsCount from 'CapcoAppBundle' %}
+                            consultation.show.meta.total_count
+                        {% endtranschoice %}
+                    </div>
+                </li>
+            {% endif %}
+            {% set openStep = consultation.currentStep %}
+            {% if null != openStep %}
+                <li data-toggle="tooltip" data-placement="top" title="{{ 'consultation.show.end_at' | trans({'%date%': openStep.endAt | localizeddate('long', 'none')}, 'CapcoAppBundle') }}">
+                    {% set remDays = openStep.remainingDays | default('0') %}
                     <div class="value">{{ remDays }}</div>
                     <div class="excerpt  category">
                         {% transchoice remDays from 'CapcoAppBundle' %}
@@ -85,8 +88,9 @@
             {% endif %}
         </ul>
 
-        {% if consultation.canContribute %}
-            <a class="btn  btn-primary" href="{{ path('app_consultation_show', {'slug': consultation.slug}) }}">{{ 'step.presentation.participe' | trans({}, 'CapcoAppBundle') }}</a>
+        {% set consultationStepOpen = consultation.consultationStepOpen %}
+        {% if consultationStepOpen and consultationStepOpen.canContribute %}
+            <a class="btn  btn-primary" href="{{ path('app_consultation_show', {'consultationSlug': consultation.slug, 'stepSlug': consultationStepOpen.slug}) }}">{{ 'step.presentation.participe' | trans({}, 'CapcoAppBundle') }}</a>
         {% endif %}
 
         {{ sonata_block_render({'type': 'capco.block.service.share_button'}, {

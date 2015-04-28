@@ -129,21 +129,20 @@ class HomepageController extends Controller
     /**
      * @Cache(expires="+1 minutes", maxage="60", smaxage="60", public="true")
      * @Template("CapcoAppBundle:Homepage:lastConsultations.html.twig")
+     *
+     * @param int  $max
+     * @param int  $offset
+     * @param null $section
+     * @param null $alt
+     *
+     * @return array
      */
     public function lastConsultationsAction($max = 3, $offset = 0, $section = null, $alt = null)
     {
-        $consultationSteps = $this->getDoctrine()->getRepository('CapcoAppBundle:Step')->getLastOpen($max, $offset);
-        $left = $max - count($consultationSteps);
-        if ($left > 0) {
-            $consultationSteps = array_merge($consultationSteps, $this->getDoctrine()->getRepository('CapcoAppBundle:Step')->getLastFuture($left, $offset));
-        }
-        $left = $max - count($consultationSteps);
-        if ($left > 0) {
-            $consultationSteps = array_merge($consultationSteps, $this->getDoctrine()->getRepository('CapcoAppBundle:Step')->getLastClosed($left, $offset));
-        }
+        $consultations = $this->getDoctrine()->getRepository('CapcoAppBundle:Consultation')->getLastPublished($max, $offset);
 
         return [
-            'consultationSteps' => $consultationSteps,
+            'consultations' => $consultations,
             'statuses' => Consultation::$openingStatuses,
             'section' => $section,
             'alt' => $alt,

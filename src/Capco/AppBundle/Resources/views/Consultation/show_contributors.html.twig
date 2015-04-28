@@ -1,4 +1,5 @@
 {% extends '@CapcoApp/Consultation/show.html.twig' %}
+{% set currentStep = 'contributors_step' %}
 
 {% block canonical_link %}{{ url('app_consultation_show_contributors', {'consultationSlug': consultation.slug}) }}{% endblock %}
 
@@ -23,7 +24,7 @@
                 <div class="block  box">
                     <h2 class="h2">{{ 'consultation.show.contributors.title' | trans({}, 'CapcoAppBundle') }}
                         <span class="small excerpt">{{ contributors | length }}</span>
-                        <a class="btn btn-primary pull-right" href="mailto:?body={{ url('app_consultation_show', {'slug': consultation.slug})|escape('url') }}" title="{{ 'share_button.share_on.email' | trans({}, 'CapcoAppBundle') }}">
+                        <a class="btn btn-primary pull-right" href="mailto:?body={{ consultation | capco_first_step_link(true) |escape('url') }}" title="{{ 'share_button.share_on.email' | trans({}, 'CapcoAppBundle') }}">
                             <i class="cap cap-user-add-2"></i>
                             {{ 'consultation.share_button' | trans({}, 'CapcoAppBundle') }}
                         </a>

@@ -1,6 +1,6 @@
 {% extends '@CapcoApp/Consultation/show.html.twig' %}
 
-{% block canonical_link %}{{ url('app_consultation_show_opinions', {'consultationSlug': consultation.slug, 'opinionTypeSlug': opinionType.slug}) }}{% endblock %}
+{% block canonical_link %}{{ url('app_consultation_show_opinions', {'consultationSlug': consultation.slug, 'stepSlug': currentStep.slug, 'opinionTypeSlug': opinionType.slug}) }}{% endblock %}
 
 {% block opinions_list %}
     <div class="block  block--bordered">
@@ -12,8 +12,8 @@
                     {{ form_label(sortOpinionsForm.opinionsSort, null, {'label_attr':{"class":"control-label  sr-only"} }) }}
                     {{ form_widget(sortOpinionsForm.opinionsSort, {'attr':{"class":"form-control", 'onchange': 'this.form.submit()'} }) }}
                     {{ form_end(sortOpinionsForm) }}
-                    {% if opinionType.isEnabled == true and consultation.canContribute %}
-                        <a href="{{ path('app_consultation_new_opinion' ,{'consultationSlug': consultation.slug, 'opinionTypeSlug': opinionType.slug } ) }}" class="btn  btn-default">
+                    {% if opinionType.isEnabled == true and currentStep.canContribute %}
+                        <a href="{{ path('app_consultation_new_opinion' ,{'consultationSlug': consultation.slug, 'stepSlug': currentStep.slug, 'opinionTypeSlug': opinionType.slug } ) }}" class="btn  btn-default">
                             <i class="cap cap-add-1"></i>
                             <span class="hidden-xs">{{ 'opinion.create.button'|trans({}, 'CapcoAppBundle') }}</span>
                         </a>
@@ -40,7 +40,7 @@
             <ul class="pagination">
                 {% for p in range(1, nbPage) %}
                     <li{% if p == page %} class="active"{% endif %}>
-                        <a href="{{ path('app_consultation_show_opinions', {'consultationSlug': consultation.slug, 'opinionTypeSlug': opinionType.slug, 'page': p}) }}">{{ p }}</a>
+                        <a href="{{ path('app_consultation_show_opinions', {'consultationSlug': consultation.slug, 'stepSlug': currentStep.slug, 'opinionTypeSlug': opinionType.slug, 'page': p}) }}">{{ p }}</a>
                     </li>
                 {% endfor %}
             </ul>

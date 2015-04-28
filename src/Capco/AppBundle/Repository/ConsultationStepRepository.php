@@ -3,15 +3,14 @@
 namespace Capco\AppBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
-use Capco\AppBundle\Entity\Step;
 
 /**
- * StepRepository.
+ * ConsultationStepRepository.
  */
-class StepRepository extends EntityRepository
+class ConsultationStepRepository extends EntityRepository
 {
     /**
-     * Get last open consultations.
+     * Get last open consultation steps.
      *
      * @param int $limit
      * @param int $offset
@@ -21,18 +20,17 @@ class StepRepository extends EntityRepository
     public function getLastOpen($limit = 1, $offset = 0)
     {
         $qb = $this->getIsEnabledQueryBuilder()
-            ->addSelect('c', 't', 'cov')
-            ->leftJoin('s.consultation', 'c')
+            ->addSelect('c', 'cas', 't', 'cov')
+            ->leftJoin('cs.consultationAbstractStep', 'cas')
+            ->leftJoin('cas.consultation', 'c')
             ->leftJoin('c.Themes', 't')
             ->leftJoin('c.Cover', 'cov')
-            ->andWhere('s.type = :typeConsultation')
-            ->andWhere(':now BETWEEN s.startAt AND s.endAt')
+            ->andWhere(':now BETWEEN cs.startAt AND cs.endAt')
             ->andWhere('c.isEnabled = :enabled')
-            ->setParameter('typeConsultation', Step::$stepTypes['consultation'])
             ->setParameter('now', new \DateTime())
             ->setParameter('enabled', true)
-            ->groupBy('s.consultation')
-            ->addOrderBy('s.endAt', 'DESC');
+            ->groupBy('cas.consultation')
+            ->addOrderBy('cs.endAt', 'DESC');
 
         if ($limit) {
             $qb->setMaxResults($limit);
@@ -48,7 +46,7 @@ class StepRepository extends EntityRepository
     }
 
     /**
-     * Get last future consultations.
+     * Get last future consultation steps.
      *
      * @param int $limit
      * @param int $offset
@@ -58,18 +56,17 @@ class StepRepository extends EntityRepository
     public function getLastFuture($limit = 1, $offset = 0)
     {
         $qb = $this->getIsEnabledQueryBuilder()
-            ->addSelect('c', 't', 'cov')
-            ->leftJoin('s.consultation', 'c')
+            ->addSelect('c', 'cas', 't', 'cov')
+            ->leftJoin('cs.consultationAbstractStep', 'cas')
+            ->leftJoin('cas.consultation', 'c')
             ->leftJoin('c.Themes', 't')
             ->leftJoin('c.Cover', 'cov')
-            ->andWhere('s.type = :typeConsultation')
-            ->andWhere(':now < s.startAt')
+            ->andWhere(':now < cs.startAt')
             ->andWhere('c.isEnabled = :enabled')
-            ->setParameter('typeConsultation', Step::$stepTypes['consultation'])
             ->setParameter('now', new \DateTime())
             ->setParameter('enabled', true)
-            ->groupBy('s.consultation')
-            ->addOrderBy('s.startAt', 'DESC');
+            ->groupBy('cas.consultation')
+            ->addOrderBy('cs.startAt', 'DESC');
 
         if ($limit) {
             $qb->setMaxResults($limit);
@@ -85,7 +82,7 @@ class StepRepository extends EntityRepository
     }
 
     /**
-     * Get last closed consultations.
+     * Get last closed consultation steps.
      *
      * @param int $limit
      * @param int $offset
@@ -95,18 +92,17 @@ class StepRepository extends EntityRepository
     public function getLastClosed($limit = 1, $offset = 0)
     {
         $qb = $this->getIsEnabledQueryBuilder()
-            ->addSelect('c', 't', 'cov')
-            ->leftJoin('s.consultation', 'c')
+            ->addSelect('c', 'cas', 't', 'cov')
+            ->leftJoin('cs.consultationAbstractStep', 'cas')
+            ->leftJoin('cas.consultation', 'c')
             ->leftJoin('c.Themes', 't')
             ->leftJoin('c.Cover', 'cov')
-            ->andWhere('s.type = :typeConsultation')
-            ->andWhere(':now > s.endAt')
+            ->andWhere(':now > cs.endAt')
             ->andWhere('c.isEnabled = :enabled')
-            ->setParameter('typeConsultation', Step::$stepTypes['consultation'])
             ->setParameter('now', new \DateTime())
             ->setParameter('enabled', true)
-            ->groupBy('s.consultation')
-            ->addOrderBy('s.startAt', 'ASC');
+            ->groupBy('cas.consultation')
+            ->addOrderBy('cs.startAt', 'ASC');
 
         if ($limit) {
             $qb->setMaxResults($limit);
@@ -121,10 +117,33 @@ class StepRepository extends EntityRepository
             ->execute();
     }
 
+    /**
+     * Get one by slug with allowed types.
+     *
+     * @param $slug
+     *
+     * @return mixed
+     *
+     * @throws \Doctrine\ORM\NonUniqueResultException
+     */
+    public function getOneWithAllowedTypes($slug)
+    {
+        $qb = $this->getIsEnabledQueryBuilder()
+            ->addSelect('t', 'at')
+            ->leftJoin('cs.allowedTypes', 'at')
+            ->andWhere('cs.slug = :slug')
+            ->setParameter('slug', $slug)
+        ;
+
+        return $qb
+            ->getQuery()
+            ->getOneOrNullResult();
+    }
+
     protected function getIsEnabledQueryBuilder()
     {
-        return $this->createQueryBuilder('s')
-            ->andWhere('s.isEnabled = :isEnabled')
+        return $this->createQueryBuilder('cs')
+            ->andWhere('cs.isEnabled = :isEnabled')
             ->setParameter('isEnabled', true);
     }
 }

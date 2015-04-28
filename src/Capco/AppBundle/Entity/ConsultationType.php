@@ -56,7 +56,7 @@ class ConsultationType
     /**
      * @var
      * @ORM\ManyToMany(targetEntity="Capco\AppBundle\Entity\OpinionType")
-     * @ORM\JoinTable(name="consultation_type_types")
+     * @ORM\JoinTable(name="consultationtype_opiniontypes")
      */
     private $opinionTypes;
 

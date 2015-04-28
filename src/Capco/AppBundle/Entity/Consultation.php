@@ -7,7 +7,6 @@ use Gedmo\Mapping\Annotation as Gedmo;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Symfony\Component\Validator\Constraints as Assert;
-use Capco\AppBundle\Validator\Constraints as CapcoAssert;
 
 /**
  * Consultation.
@@ -96,48 +95,6 @@ class Consultation
     private $updatedAt;
 
     /**
-     * @var int
-     *
-     * @ORM\Column(name="opinion_count", type="integer")
-     */
-    private $opinionCount = 0;
-
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="trashed_opinion_count", type="integer")
-     */
-    private $trashedOpinionCount = 0;
-
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="argument_count", type="integer")
-     */
-    private $argumentCount = 0;
-
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="trashed_argument_count", type="integer")
-     */
-    private $trashedArgumentCount = 0;
-
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="sources_count", type="integer")
-     */
-    private $sourcesCount = 0;
-
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="trashed_sources_count", type="integer")
-     */
-    private $trashedSourceCount = 0;
-
-    /**
      * @var string
      *
      * @ORM\ManyToOne(targetEntity="Capco\UserBundle\Entity\User")
@@ -153,18 +110,12 @@ class Consultation
     private $Themes;
 
     /**
-     * @var
-     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\Opinion", mappedBy="Consultation",  cascade={"persist", "remove"}, orphanRemoval=true)
-     */
-    private $Opinions;
-
-    /**
-     * @var
-     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\Step", mappedBy="consultation",  cascade={"persist", "remove"}, orphanRemoval = true)
+     * @var \Doctrine\Common\Collections\ArrayCollection
+     *
+     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\ConsultationAbstractStep", mappedBy="consultation",  cascade={"persist", "remove"}, orphanRemoval = true)
      * @ORM\OrderBy({"position" = "ASC"})
-     * @CapcoAssert\HasOnlyOneConsultationStep()
      */
-    private $Steps;
+    private $steps;
 
     /**
      * @var
@@ -178,13 +129,6 @@ class Consultation
      * @ORM\Column(name="video", type="string", nullable = true)
      */
     private $video = null;
-
-    /**
-     * @var
-     * @ORM\ManyToMany(targetEntity="Capco\AppBundle\Entity\OpinionType")
-     * @ORM\JoinTable(name="consultation_types")
-     */
-    private $allowedTypes;
 
     /**
      * @var
@@ -204,11 +148,9 @@ class Consultation
     public function __construct()
     {
         $this->Themes = new ArrayCollection();
-        $this->Opinions = new ArrayCollection();
-        $this->Steps = new ArrayCollection();
+        $this->steps = new ArrayCollection();
         $this->events = new ArrayCollection();
         $this->posts = new ArrayCollection();
-        $this->allowedTypes = new ArrayCollection();
         $this->updatedAt = new \Datetime();
         $this->publishedAt = new \DateTime();
     }
@@ -337,118 +279,6 @@ class Consultation
     }
 
     /**
-     * @return int
-     */
-    public function getOpinionCount()
-    {
-        return $this->opinionCount;
-    }
-
-    /**
-     * @param $opinionCount
-     *
-     * @return $this
-     */
-    public function setOpinionCount($opinionCount)
-    {
-        $this->opinionCount = $opinionCount;
-
-        return $this;
-    }
-
-    /**
-     * @return int
-     */
-    public function getTrashedOpinionCount()
-    {
-        return $this->trashedOpinionCount;
-    }
-
-    /**
-     * @param $trashedOpinionCount
-     *
-     * @return $this
-     */
-    public function setTrashedOpinionCount($trashedOpinionCount)
-    {
-        $this->trashedOpinionCount = $trashedOpinionCount;
-
-        return $this;
-    }
-
-    /**
-     * @return int
-     */
-    public function getArgumentCount()
-    {
-        return $this->argumentCount;
-    }
-
-    /**
-     * @param $argumentCount
-     *
-     * @return $this
-     */
-    public function setArgumentCount($argumentCount)
-    {
-        $this->argumentCount = $argumentCount;
-
-        return $this;
-    }
-
-    /**
-     * @return int
-     */
-    public function getTrashedArgumentCount()
-    {
-        return $this->trashedArgumentCount;
-    }
-
-    /**
-     * @param $trashedArgumentCount
-     *
-     * @return $this
-     */
-    public function setTrashedArgumentCount($trashedArgumentCount)
-    {
-        $this->trashedArgumentCount = $trashedArgumentCount;
-
-        return $this;
-    }
-
-    /**
-     * @return int
-     */
-    public function getSourcesCount()
-    {
-        return $this->sourcesCount;
-    }
-
-    /**
-     * @param int $sourcesCount
-     */
-    public function setSourcesCount($sourcesCount)
-    {
-        $this->sourcesCount = $sourcesCount;
-    }
-
-    /**
-     * @return int
-     */
-    public function getTrashedSourceCount()
-    {
-        return $this->trashedSourceCount;
-    }
-
-    /**
-     * @param int $trashedSourceCount
-     */
-    public function setTrashedSourceCount($trashedSourceCount)
-    {
-        $this->trashedSourceCount = $trashedSourceCount;
-    }
-
-    /**
      * @return string
      */
     public function getAuthor()
@@ -511,59 +341,23 @@ class Consultation
     }
 
     /**
-     * @return ArrayCollection
-     */
-    public function getOpinions()
-    {
-        return $this->Opinions;
-    }
-
-    /**
-     * @param $opinion
-     *
-     * @return $this
-     */
-    public function addOpinion($opinion)
-    {
-        if (!$this->Opinions->contains($opinion)) {
-            $this->Opinions->add($opinion);
-        }
-
-        return $this;
-    }
-
-    /**
-     * @param $opinion
-     *
-     * @return $this
-     */
-    public function removeOpinion($opinion)
-    {
-        $this->Opinions->removeElement($opinion);
-
-        return $this;
-    }
-
-    /**
      * Get steps.
      *
      * @return \Doctrine\Common\Collections\Collection
      */
     public function getSteps()
     {
-        return $this->Steps;
+        return $this->steps;
     }
 
     /**
      * Reset steps.
      *
-     * @param $steps
-     *
      * @return $this
      */
     public function resetSteps()
     {
-        $this->Steps = new ArrayCollection();
+        $this->steps = new ArrayCollection();
 
         return $this;
     }
@@ -571,15 +365,14 @@ class Consultation
     /**
      * Add step.
      *
-     * @param \Capco\AppBundle\Entity\Step $step
+     * @param \Capco\AppBundle\Entity\ConsultationAbstractStep $step
      *
      * @return Consultation
      */
-    public function addStep(Step $step)
+    public function addStep(ConsultationAbstractStep $step)
     {
-        if (!$this->Steps->contains($step)) {
-            $this->Steps->add($step);
-        }
+        $step->setConsultation($this);
+        $this->steps[] = $step;
 
         return $this;
     }
@@ -587,13 +380,13 @@ class Consultation
     /**
      * Remove step.
      *
-     * @param \Capco\AppBundle\Entity\Step $step
+     * @param \Capco\AppBundle\Entity\ConsultationAbstractStep $step
      *
      * @return $this
      */
-    public function removeStep(Step $step)
+    public function removeStep(ConsultationAbstractStep $step)
     {
-        $this->Steps->removeElement($step);
+        $this->steps->removeElement($step);
 
         return $this;
     }
@@ -628,52 +421,6 @@ class Consultation
     public function setVideo($video)
     {
         $this->video = $video;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getAllowedTypes()
-    {
-        return $this->allowedTypes;
-    }
-
-    /**
-     * @param $allowedTypes
-     *
-     * @return $this
-     */
-    public function setAllowedTypes($allowedTypes)
-    {
-        $this->allowedTypes = $allowedTypes;
-
-        return $this;
-    }
-
-    /**
-     * @param $allowedType
-     *
-     * @return $this
-     */
-    public function addAllowedType($allowedType)
-    {
-        if (!$this->allowedTypes->contains($allowedType)) {
-            $this->allowedTypes[] = $allowedType;
-        }
-
-        return $this;
-    }
-
-    /**
-     * @param $allowedType
-     *
-     * @return $this
-     */
-    public function removeAllowedType($allowedType)
-    {
-        $this->allowedTypes->removeElement($allowedType);
-
-        return $this;
     }
 
     /**
@@ -758,125 +505,15 @@ class Consultation
      */
     public function getFirstStep()
     {
-        if (!empty($this->Steps)) {
-            $first = $this->Steps[0];
-            foreach ($this->Steps as $step) {
+        if (!empty($this->steps)) {
+            $first = $this->steps[0];
+            foreach ($this->steps as $step) {
                 if ($step->getPosition() < $first->getPosition()) {
                     $first = $step;
                 }
             }
 
-            return $first;
-        }
-
-        return;
-    }
-
-    /**
-     * @return mixed|null
-     */
-    public function getConsultationStep()
-    {
-        foreach ($this->Steps as $step) {
-            if ($step->isConsultationStep()) {
-                return $step;
-            }
-        }
-
-        return;
-    }
-
-    /**
-     */
-    public function getOpenedAt()
-    {
-        $consultationStep = $this->getConsultationStep();
-        if (null != $consultationStep) {
-            return $consultationStep->getStartAt();
-        }
-
-        return;
-    }
-
-    /**
-     */
-    public function getClosedAt()
-    {
-        $consultationStep = $this->getConsultationStep();
-        if (null != $consultationStep) {
-            return $consultationStep->getEndAt();
-        }
-
-        return;
-    }
-
-    /**
-     */
-    public function getRemainingDays()
-    {
-        if (null === $consultationStep = $this->getConsultationStep()) {
-            return;
-        }
-
-        return $consultationStep->getRemainingDays();
-    }
-
-    /**
-     * Verify if a consultation is opened.
-     *
-     * @return bool
-     */
-    public function isOpen()
-    {
-        if (null === $consultationStep = $this->getConsultationStep()) {
-            return false;
-        }
-
-        return $consultationStep->isOpen();
-    }
-
-    /**
-     * Verify if a consultation is future.
-     *
-     * @return bool
-     */
-    public function isFuture()
-    {
-        if (null === $consultationStep = $this->getConsultationStep()) {
-            return false;
-        }
-
-        return $consultationStep->isFuture();
-    }
-
-    /**
-     * Verify if a consultation is closed.
-     *
-     * @return bool
-     */
-    public function isClosed()
-    {
-        if (null === $consultationStep = $this->getConsultationStep()) {
-            return false;
-        }
-
-        return $consultationStep->isClosed();
-    }
-
-    /**
-     * @return int|null
-     */
-    public function getOpeningStatus()
-    {
-        $consultationStep = $this->getConsultationStep();
-        if ($this->isClosed()) {
-            return self::OPENING_STATUS_ENDED;
-        }
-        if ($this->isFuture()) {
-            return self::OPENING_STATUS_FUTURE;
-        }
-        if ($this->isOpen()) {
-            return self::OPENING_STATUS_OPENED;
+            return $first->getStep();
         }
 
         return;
@@ -895,7 +532,7 @@ class Consultation
      */
     public function canContribute()
     {
-        return $this->isEnabled && ($this->getOpeningStatus() == $this::OPENING_STATUS_OPENED);
+        return $this->isEnabled;
     }
 
     /**
@@ -903,39 +540,77 @@ class Consultation
      */
     public function getTotalContributionsCount()
     {
-        return $this->argumentCount + $this->opinionCount + $this->trashedArgumentCount + $this->trashedOpinionCount;
+        $count = 0;
+        foreach ($this->steps as $step) {
+            if ($step->getStep()->isConsultationStep()) {
+                $count += $step->getStep()->getContributionsCount();
+            }
+        }
+
+        return $count;
     }
 
     /**
-     * @param $opinionType
-     *
-     * @return bool
+     * @return int
      */
-    public function allowType($opinionType)
+    public function getTotalOpinionsCount()
     {
-        return $this->allowedTypes->contains($opinionType);
-    }
+        $count = 0;
+        foreach ($this->steps as $step) {
+            if ($step->getStep()->isConsultationStep()) {
+                $count += ($step->getStep()->getOpinionCount() + $step->getStep()->getTrashedOpinionCount());
+            }
+        }
 
-    public function setConsultationType(ConsultationType $consultationType)
-    {
-        $this->allowedTypes = $consultationType->getOpinionTypes();
+        return $count;
     }
 
     /**
-     * Required for sonata admin.
+     * @return int
      */
-    public function getConsultationType()
+    public function getTotalArgumentsCount()
     {
+        $count = 0;
+        foreach ($this->steps as $step) {
+            if ($step->getStep()->isConsultationStep()) {
+                $count += ($step->getStep()->getArgumentCount() + $step->getStep()->getTrashedArgumentCount());
+            }
+        }
+
+        return $count;
+    }
+
+    public function getCurrentStep()
+    {
+        foreach ($this->steps as $step) {
+            if ($step->getStep()->isOpen()) {
+                return $step->getStep();
+            }
+        }
+        foreach ($this->steps as $step) {
+            if ($step->getStep()->isFuture()) {
+                return $step->getStep();
+            }
+        }
+        $reversedSteps = array_reverse($this->steps->toArray());
+        foreach ($reversedSteps as $step) {
+            if ($step->getStep()->isClosed()) {
+                return $step->getStep();
+            }
+        }
+
         return;
     }
 
-    public function getAllowedTypesIds()
+    public function getConsultationStepOpen()
     {
-        foreach ($this->allowedTypes as $type) {
-            $typesIds[] = $type->getId();
+        foreach ($this->steps as $step) {
+            if ($step->getStep()->isConsultationStep() && $step->getStep()->isOpen()) {
+                return $step->getStep();
+            }
         }
 
-        return $typesIds;
+        return;
     }
 
     // ************************** Lifecycle **************************************
