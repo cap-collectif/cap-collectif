@@ -133,26 +133,21 @@ Capco\AppBundle\Entity\SiteColor:
         position: 24
     SiteColor27:
         keyname: color.main_menu.text_active
-        title: Libellés du menu actif
-        value: '#000000'
-        position: 25
-    SiteColor28:
-        keyname: color.main_menu.text_hover
-        title: Libellés du menu au survol
+        title: Libellés du menu au survol et actif
         value: '#1183F5'
         position: 25
-    SiteColor29:
+    SiteColor28:
         keyname: color.main_menu.bg
         title: Fond du menu
         value: '#52a2f2'
         position: 26
-    SiteColor30:
+    SiteColor29:
         keyname: color.main_menu.bg_active
-        title: Fond des éléments de menu au survol et actif
+        title: Fond des éléments de menu actif
         value: '#B1D2F2'
         position: 27
 
-    SiteColor31:
+    SiteColor30:
         keyname: color.footer.title
         title: Titre du pied de page
         value: '#ffffff'
