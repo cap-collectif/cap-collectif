@@ -105,6 +105,9 @@ class UserAdmin extends BaseAdmin
             ->with('General')
             ->add('username')
             ->add('email')
+            ->add('slug', null, array(
+                'label' => 'Slug',
+            ))
             ->end()
             ->with('Profile')
             ->add('Media', 'sonata_media_type', array(
@@ -122,17 +125,15 @@ class UserAdmin extends BaseAdmin
         }
 
         $showMapper
-            ->add('gender')
             ->add('website')
             ->add('biography')
-            ->add('address')
-            ->add('address2')
-            ->add('zipCode')
-            ->add('city')
-            ->add('neighborhood')
-            ->add('phone')
+            ->add('city', null, array(
+                'label' => 'Ville',
+            ))
+            ->add('gender')
             ->add('locale')
             ->add('timezone')
+            ->add('phone')
             ->end()
             ->with('Social')
             ->add('facebook_id', null, array(
@@ -227,11 +228,10 @@ class UserAdmin extends BaseAdmin
         $formMapper
             ->add('website', 'url', array('required' => false))
             ->add('biography', 'text', array('required' => false))
-            ->add('address', null, array('required' => false,))
-            ->add('address2', null, array('required' => false,))
-            ->add('zipCode', null, array('required' => false,))
-            ->add('city', null, array('required' => false,))
-            ->add('neighborhood', null, array('required' => false,))
+            ->add('city', null, array(
+                'required' => false,
+                'label' => 'Ville',
+            ))
             ->add('gender', 'sonata_user_gender', array(
                 'required' => true,
                 'translation_domain' => 'CapcoAppBundle',

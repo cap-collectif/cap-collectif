@@ -16,8 +16,10 @@
 {% if null == menuBgHover %}{% set menuBgHover = '#e7e7e7' %}{% endif %}
 {% set menuText = capco_site_color_value('color.main_menu.text') %}
 {% if null == menuText %}{% set menuText = '#777' %}{% endif %}
-{% set menuTextHover = capco_site_color_value('color.main_menu.text_active') %}
+{% set menuTextHover = capco_site_color_value('color.main_menu.text_hover') %}
 {% if null == menuTextHover %}{% set menuTextHover = '#555' %}{% endif %}
+{% set menuTextActive = capco_site_color_value('color.main_menu.text_active') %}
+{% if null == menuTextActive %}{% set menuTextActive = '#555' %}{% endif %}
 
 {% set headerBg = capco_site_color_value('color.header.bg') %}
 {% if null == headerBg %}{% set headerBg = '#16A085' %}{% endif %}
@@ -404,8 +406,8 @@
     .navbar-default .navbar-nav > li > a:focus,
     .navbar-default .dropdown-menu > li > a:hover,
     .navbar-default .dropdown-menu > li > a:focus {
-        color: {{ menuTextHover }};
-        background-color: transparent;
+        color: {{ menuTextActive }};
+        background-color: {{ menuBgHover }};
     }
 
 
