@@ -119,5 +119,5 @@ Capco\AppBundle\Entity\MenuItem:
     isDeletable: 0
     isFullyModifiable: 0
     position: 2
-    menu: @menu2
+    menu: @menu1
     parent: @MenuItem5

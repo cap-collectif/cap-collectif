@@ -85,12 +85,12 @@
                                 {{ 'consultation.contributors.no' | trans({}, 'CapcoAppBundle')}}
                             {% endif %}
                         {% endfor %}
+                        {% if contributors|length > 9 %}
+                            <a href="{{ path('app_consultation_show_contributors', {'consultationSlug': consultation.slug}) }}" class="btn  btn-primary  btn--outline">
+                                {{ 'step.presentation.contributors.see_all'|trans({}, 'CapcoAppBundle') }}
+                            </a>
+                        {% endif %}
                     </div>
-                    {% if contributors|length > 9 %}
-                        <a href="{{ path('app_consultation_show_contributors', {'consultationSlug': consultation.slug}) }}" class="btn  btn-primary  btn--outline">
-                            {{ 'step.presentation.contributors.see_all'|trans({}, 'CapcoAppBundle') }}
-                        </a>
-                    {% endif %}
                 </div>
 
             </div> <!-- col-xs-12  col-sm-8  col-md-9 -->

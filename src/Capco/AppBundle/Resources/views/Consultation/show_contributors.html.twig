@@ -29,7 +29,7 @@
                             {{ 'consultation.share_button' | trans({}, 'CapcoAppBundle') }}
                         </a>
                     </h2>
-                    <div class="row">
+                    <ul class="media-list">
                         {% set offset = pagination*page - pagination %}
                         {% set limit = contributors|length <= pagination*page ? contributors|length : pagination*page %}
 

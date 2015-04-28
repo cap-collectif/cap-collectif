@@ -71,9 +71,4 @@ class ContributionResolver
 
         return $contributors;
     }
-
-    public function countConsultationContributors($consultation)
-    {
-        return count($this->getConsultationContributorsOrdered($consultation));
-    }
 }
