@@ -28,8 +28,8 @@ class OpinionAdmin extends Admin
             ->add('Author', null, array(
                 'label' => 'admin.fields.opinion.author',
             ))
-            ->add('Consultation', null, array(
-                'label' => 'admin.fields.opinion.consultation',
+            ->add('step', null, array(
+                'label' => 'admin.fields.opinion.step',
             ))
             ->add('OpinionType', null, array(
                 'label' => 'admin.fields.opinion.opinion_type',
@@ -66,8 +66,8 @@ class OpinionAdmin extends Admin
             ->add('Author', 'sonata_type_model', array(
                 'label' => 'admin.fields.opinion.author',
             ))
-            ->add('Consultation', 'sonata_type_model', array(
-                'label' => 'admin.fields.opinion.consultation',
+            ->add('step', 'sonata_type_model', array(
+                'label' => 'admin.fields.opinion.step',
             ))
             ->add('voteCountTotal', 'integer', array(
                 'label' => 'admin.fields.opinion.vote_count_total',
@@ -117,8 +117,8 @@ class OpinionAdmin extends Admin
                 'label' => 'admin.fields.opinion.body',
                 'config_name' => 'admin_editor',
             ))
-            ->add('Consultation', 'sonata_type_model', array(
-                'label' => 'admin.fields.opinion.consultation',
+            ->add('step', 'sonata_type_model', array(
+                'label' => 'admin.fields.opinion.step',
             ))
             ->add('OpinionType', 'sonata_type_model', array(
                 'label' => 'admin.fields.opinion.opinion_type',
@@ -154,8 +154,8 @@ class OpinionAdmin extends Admin
             ->add('body', null, array(
                 'label' => 'admin.fields.opinion.body',
             ))
-            ->add('Consultation', null, array(
-                'label' => 'admin.fields.opinion.consultation',
+            ->add('step', null, array(
+                'label' => 'admin.fields.opinion.step',
             ))
             ->add('OpinionType', null, array(
                 'label' => 'admin.fields.opinion.opinion_type',
