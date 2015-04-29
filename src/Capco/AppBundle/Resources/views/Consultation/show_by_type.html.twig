@@ -21,7 +21,7 @@
                 </div>
             </div>
         </div>
-    {% if(opinions|length > 0) %}
+        {% if(opinions|length > 0) %}
         <ul class="media-list  opinion__list">
             {% for opinion in opinions %}
                 {% include 'CapcoAppBundle:Opinion:blockOpinion.html.twig' with {'opinion': opinion, 'opinionType': opinionType} only %}
@@ -35,15 +35,11 @@
         {% endif %}
     </div>
 
-    {% if nbPage > 1 %}
-        <div class="pagination--custom  text-center">
-            <ul class="pagination">
-                {% for p in range(1, nbPage) %}
-                    <li{% if p == page %} class="active"{% endif %}>
-                        <a href="{{ path('app_consultation_show_opinions', {'consultationSlug': consultation.slug, 'stepSlug': currentStep.slug, 'opinionTypeSlug': opinionType.slug, 'page': p}) }}">{{ p }}</a>
-                    </li>
-                {% endfor %}
-            </ul>
-        </div>
+    {% if sortOpinionsForm.vars.data.opinionsSort is not null %}
+        {% set route, params = 'app_consultation_show_opinions_sorted', {'consultationSlug': consultation.slug, 'stepSlug': currentStep.slug, 'opinionTypeSlug': opinionType.slug, 'opinionsSort': sortOpinionsForm.vars.data.opinionsSort } %}
+    {% else %}
+        {% set route, params = 'app_consultation_show_opinions', {'consultationSlug': consultation.slug, 'stepSlug': currentStep.slug, 'opinionTypeSlug': opinionType.slug} %}
     {% endif %}
+
+    {% include 'CapcoAppBundle:Block:pagination.html.twig' with {'current': page, 'nb': nbPage, 'route': route, 'params': params} only  %}
 {% endblock %}

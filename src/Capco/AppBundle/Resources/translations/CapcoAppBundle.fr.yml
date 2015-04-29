@@ -736,7 +736,7 @@ event_registration:
     see_all: Voir tous les participants
     title_all: Liste des participants
     anonymous: Anonyme
-    contribution: "{0}|{1} contribution | ]1,Inf[ %count% contributions"
+    contribution: "{0} Aucune contribution | {1} 1 contribution | ]1,Inf[ %count% contributions"
   unsubscribe: Se désinscrire
 
 # comments
