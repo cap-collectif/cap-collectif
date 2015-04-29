@@ -20,7 +20,7 @@ class OpinionPage extends Page
         'Argument yes buttons' => '.argyes-btns',
         'Argument no field' => '#argno-input',
         'Argument no buttons' => '.argno-btns',
-        'Sources list' => '.sources__panel',
+        'Sources list' => '.panel--sources .panel-heading',
         'Vote first source' => '.panel-body .media form',
     );
 
