@@ -329,3 +329,9 @@ services:
         factory_method: getRepository
         arguments:
             - Capco\AppBundle\Entity\ConsultationType
+
+    capco.twig.contributors:
+        class: Capco\AppBundle\Twig\ContributorsExtension
+        arguments: [@capco.contribution.resolver]
+        tags:
+          - { name: twig.extension }
