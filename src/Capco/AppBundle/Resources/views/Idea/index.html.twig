@@ -92,18 +92,30 @@
             </p>
         {% endif %}
 
-        {% set theme = form.vars.data.theme is null ? 'all' : form.vars.data.theme.slug %}
-        {% if form.vars.data.sort is not null or theme != 'all' %}
-            {% if form.vars.data.term is not null %}
-                {% set route, params =  'app_idea_search_term', {'sort': form.vars.data.sort, 'theme': theme, 'term': form.vars.data.term } %}
-            {% else %}
-                {% set route, params =  'app_idea_search', {'sort': form.vars.data.sort, 'theme': theme } %}
-            {% endif %}
-        {% else %}
-            {% set route, params =  'app_idea', {} %}
+        {% if nbPage > 1 %}
+            <div class="pagination--custom  text-center block">
+                <ul class="pagination">
+                    {% if form.vars.data.theme is not null %}
+                        {% set theme = form.vars.data.theme.slug %}
+                    {% else %}
+                        {% set theme = 'all' %}
+                    {% endif %}
+                    {% for p in range(1, nbPage) %}
+                        <li{% if p == page %} class="active"{% endif %}>
+                            {% if (form.vars.data.sort is not null) or (form.vars.data.theme is not null) %}
+                                {% if form.vars.data.term is not null %}
+                                    <a href="{{ path('app_idea_search_term', {'page': p, 'sort': form.vars.data.sort, 'theme': theme, 'term': form.vars.data.term }) }}">{{ p }}</a>
+                                {% else %}
+                                    <a href="{{ path('app_idea_search', {'page': p, 'sort': form.vars.data.sort, 'theme': theme }) }}">{{ p }}</a>
+                                {% endif %}
+                            {% else %}
+                                <a href="{{ path('app_idea', {'page': p}) }}">{{ p }}</a>
+                            {% endif %}
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
         {% endif %}
-        {% include 'CapcoAppBundle:Block:pagination.html.twig' with {'current': page, 'nb': nbPage, 'route': route, 'params': params} only  %}
-
     </div>
 
     <div class="container  container--custom  appendices__container">

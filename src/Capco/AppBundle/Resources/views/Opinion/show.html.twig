@@ -40,7 +40,7 @@
                 <div class="block  block--bordered  opinion__details">
                     <div class="opinion  opinion--{{ opinion.opinionType.color }}  opinion--current">
                         <div class="opinion__header  opinion__header--centered">
-                            <a class="neutral-hover  pull-left  h4  opinion__header__back" href="{% if opinion.isTrashed %}{{ path('app_consultation_show_trashed', {'consultationSlug': consultation.slug, 'stepSlug': currentStep.slug}) }}{% else %}{{ path('app_consultation_show_opinions', {'consultationSlug': consultation.slug, 'stepSlug': currentStep.slug, 'opinionTypeSlug': opinionType.slug}) }}{% endif %}"><i class="cap cap-arrow-1"></i><span class="hidden-xs  hidden-sm"> {{ 'opinion.show.back'|trans({}, 'CapcoAppBundle') }}</span></a>
+                            <a class="neutral-hover  pull-left  h4" href="{% if opinion.isTrashed %}{{ path('app_consultation_show_trashed', {'consultationSlug': consultation.slug, 'stepSlug': currentStep.slug}) }}{% else %}{{ path('app_consultation_show_opinions', {'consultationSlug': consultation.slug, 'stepSlug': currentStep.slug, 'opinionTypeSlug': opinionType.slug}) }}{% endif %}"><i class="cap cap-arrow-1"></i><span class="hidden-xs  hidden-sm"> {{ 'opinion.show.back'|trans({}, 'CapcoAppBundle') }}</span></a>
                             <h2 class="h4  opinion__header__title">{{ opinion.opinionType.slug|capitalize }} </h2>
                         </div>
                         {% include 'CapcoAppBundle:Opinion:opinion_body.html.twig' %}
@@ -109,7 +109,7 @@
 
                         <div class="panel-group" id="accordion">
                             <div class="panel panel-default panel--sources">
-                                <div class="panel-heading" data-toggle="collapse" data-target="#collapseOne" style="cursor:pointer;">
+                                <div class=" sources__panel  panel-heading" data-toggle="collapse" data-target="#collapseOne" style="cursor:pointer;">
                                     <h4 class="panel-title">
                                         {% transchoice (sources|length) with {'%count%': (sources|length)} from 'CapcoAppBundle' %}source.show.count{% endtranschoice %}
                                         {% if sources|length > 0 %} <i class="cap cap-arrow-67 pull-right"></i>{% endif %}
