@@ -13,6 +13,16 @@ resetting:
 
 form:
   label_user_type: Type de profil
+  label_address: Adresse
+  label_address2: Complément d'adresse
+  label_zip_code: Code postal
+  label_city: Ville
+  label_neighborhood: Quartier
 
 show:
   label_user_type: Type de profil
+  label_address: Adresse
+  label_address2: Complément d'adresse
+  label_zip_code: Code postal
+  label_city: Ville
+  label_neighborhood: Quartier
