@@ -437,7 +437,7 @@ source:
 opinion:
   show:
     back: Retour
-    all: Voir tout
+    all: Voir toutes les propositions
     vote:
       cancel: Annuler mon vote
       ok: D'accord
