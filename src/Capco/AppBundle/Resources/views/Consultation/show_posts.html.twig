@@ -33,9 +33,17 @@
             </div> <!-- col-xs-12  col-sm-8  col-md-9 -->
         </div> <!-- .row -->
 
-
-        {% set route, params = 'app_consultation_show_posts', {'consultationSlug': consultation.slug} %}
-        {% include 'CapcoAppBundle:Block:pagination.html.twig' with {'current': page, 'nb': nbPage, 'route': route, 'params': params} only  %}
+        {% if nbPage > 1 %}
+            <div class="pagination--custom  text-center">
+                <ul class="pagination">
+                    {% for p in range(1, nbPage) %}
+                        <li{% if p == page %} class="active"{% endif %}>
+                            <a href="{{ path('app_consultation_show_posts', {'consultationSlug': consultation.slug, 'page': p}) }}">{{ p }}</a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        {% endif %}
 
     </div>
 

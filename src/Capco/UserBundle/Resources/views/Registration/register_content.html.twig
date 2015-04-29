@@ -29,6 +29,15 @@
 
                 {% block capco_user_registration %}
                     <form role="form" action="{{ path('fos_user_registration_register') }}" {{ form_enctype(form) }} method="POST">
+
+                        {% if is_feature_enabled('user_type') %}
+                            <div class="form-group">
+                                <label for="userType" class="control-label  h5">{{ 'user.register.user_type'|trans({}, 'CapcoAppBundle') }}</label>
+                                {{ form_widget(form.userType) }}
+                            </div>
+                            {{ form_errors(form.userType) }}
+                        {% endif %}
+
                         <div class="form-group">
                             <label for="username" class="control-label  h5">{{ 'user.register.username.username'|trans({}, 'CapcoAppBundle') }}</label>
                             {{ form_widget(form.username) }}
@@ -49,14 +58,6 @@
                             {{ form_widget(form.plainPassword) }}
                         </div>
                         {{ form_errors(form.plainPassword) }}
-
-                        {% if is_feature_enabled('user_type') %}
-                            <div class="form-group">
-                                <label for="userType" class="control-label  h5">{{ 'user.register.user_type'|trans({}, 'CapcoAppBundle') }}</label>
-                                {{ form_widget(form.userType) }}
-                            </div>
-                            {{ form_errors(form.userType) }}
-                        {% endif %}
 
                         {% if form.isTermsAccepted is defined %}
                             {{ form_widget(form.isTermsAccepted) }}

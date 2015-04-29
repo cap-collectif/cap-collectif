@@ -41,9 +41,17 @@
             </div>
         </div>
 
-        {% set route, params = 'app_consultation_show_contributors', {'consultationSlug': consultation.slug} %}
-
-        {% include 'CapcoAppBundle:Block:pagination.html.twig' with {'current': page, 'nb': nbPage, 'route': route, 'params': params} only  %}
+        {% if nbPage > 1 %}
+            <div class="pagination--custom  text-center">
+                <ul class="pagination">
+                    {% for p in range(1, nbPage) %}
+                        <li{% if p == page %} class="active"{% endif %}>
+                            <a href="{{ path('app_consultation_show_contributors', {'consultationSlug': consultation.slug, 'page': p}) }}">{{ p }}</a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        {% endif %}
 
     </div>
 
