@@ -550,10 +550,6 @@ user:
     user_type:
       label: Type de profil
       all_types: Tous les inscrits
-  gender:
-    unknown: Non communiqué
-    male: Homme
-    female: Femme
   login:
     title: Connexion
     email: Adresse électronique
@@ -600,9 +596,9 @@ user:
   profile:
     title: Profil
     edit:
-      twitter: Twitter
-      facebook: Facebook
-      gplus: Google+
+      twitter: Lien Twitter
+      facebook: Lien Facebook
+      gplus: Lien Google+
       username: Nom
       media: Image
       email: Adresse électronique
@@ -622,6 +618,9 @@ user:
       jumbotron: Compte
       title: Profil de %name%
       since: Inscrit depuis le
+      gplus: Google+
+      facebook: Facebook
+      twitter: Twitter
       all: Contributions
       opinions: Propositions
       no_opinions: Il n'y a pas de propositions.
@@ -736,7 +735,7 @@ event_registration:
     see_all: Voir tous les participants
     title_all: Liste des participants
     anonymous: Anonyme
-    contribution: "{0}|{1} contribution | ]1,Inf[ %count% contributions"
+    contribution: "{0} Aucune contribution | {1} 1 contribution | ]1,Inf[ %count% contributions"
   unsubscribe: Se désinscrire
 
 # comments

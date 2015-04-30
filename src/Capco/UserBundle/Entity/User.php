@@ -61,12 +61,22 @@ class User extends BaseUser implements EncoderAwareInterface
     /**
      * @var int
      */
+    protected $facebook_url;
+
+    /**
+     * @var int
+     */
     protected $google_id;
 
     /**
      * @var int
      */
     protected $google_access_token;
+
+    /**
+     * @var int
+     */
+    protected $google_url;
 
     /**
      * @var string
@@ -77,6 +87,11 @@ class User extends BaseUser implements EncoderAwareInterface
      * @var string
      */
     protected $twitter_access_token;
+
+    /**
+     * @var string
+     */
+    protected $twitter_url;
 
     /**
      * @var Capco\MediaBundle\Entity\Media
@@ -332,6 +347,54 @@ class User extends BaseUser implements EncoderAwareInterface
     public function getTwitterAccessToken()
     {
         return $this->twitter_access_token;
+    }
+
+    /**
+     * @return int
+     */
+    public function getFacebookUrl()
+    {
+        return $this->facebook_url;
+    }
+
+    /**
+     * @param int $facebook_url
+     */
+    public function setFacebookUrl($facebook_url)
+    {
+        $this->facebook_url = $facebook_url;
+    }
+
+    /**
+     * @return int
+     */
+    public function getGoogleUrl()
+    {
+        return $this->google_url;
+    }
+
+    /**
+     * @param int $google_url
+     */
+    public function setGoogleUrl($google_url)
+    {
+        $this->google_url = $google_url;
+    }
+
+    /**
+     * @return string
+     */
+    public function getTwitterUrl()
+    {
+        return $this->twitter_url;
+    }
+
+    /**
+     * @param string $twitter_url
+     */
+    public function setTwitterUrl($twitter_url)
+    {
+        $this->twitter_url = $twitter_url;
     }
 
     /**
@@ -752,9 +815,9 @@ class User extends BaseUser implements EncoderAwareInterface
     public static function getGenderList()
     {
         return array(
-            UserInterface::GENDER_UNKNOWN => 'user.gender.unknown',
-            UserInterface::GENDER_FEMALE  => 'user.gender.female',
-            UserInterface::GENDER_MALE    => 'user.gender.male',
+            UserInterface::GENDER_UNKNOWN => 'gender.unknown',
+            UserInterface::GENDER_FEMALE  => 'gender.female',
+            UserInterface::GENDER_MALE    => 'gender.male',
         );
     }
 

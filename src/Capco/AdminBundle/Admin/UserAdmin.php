@@ -13,17 +13,15 @@ use Sonata\CoreBundle\Model\Metadata;
 class UserAdmin extends BaseAdmin
 {
     private $rolesLabels = [
-        'ROLE_USER' => 'admin.fields.user.roles.user',
-        'ROLE_ADMIN' => 'admin.fields.user.roles.admin',
-        'ROLE_SUPER_ADMIN' => 'admin.fields.user.roles.super_admin',
+        'ROLE_USER' => 'roles.user',
+        'ROLE_ADMIN' => 'roles.admin',
+        'ROLE_SUPER_ADMIN' => 'roles.super_admin',
     ];
 
     private $rolesLabelsNoSuper = [
-        'ROLE_USER' => 'admin.fields.user.roles.user',
-        'ROLE_ADMIN' => 'admin.fields.user.roles.admin',
+        'ROLE_USER' => 'roles.user',
+        'ROLE_ADMIN' => 'roles.admin',
     ];
-
-    protected $translationDomain = 'SonataAdminBundle';
 
     public function getFormBuilder()
     {
@@ -31,6 +29,7 @@ class UserAdmin extends BaseAdmin
 
         $options = $this->formOptions;
         $options['validation_groups'] = 'Default';
+        $options['translation_domain'] = 'SonataUserBundle';
 
         $formBuilder = $this->getFormContractor()->getFormBuilder($this->getUniqid(), $options);
 
@@ -46,23 +45,15 @@ class UserAdmin extends BaseAdmin
     {
         $listMapper
             ->addIdentifier('email')
-            ->add('username', null, array(
-                'label' => 'admin.fields.user.username',
-                'translation_domain' => 'SonataAdminBundle',
-            ))
+            ->add('username')
             ->add('enabled', null, array(
                 'editable' => true,
             ))
             ->add('locked', null, array(
                 'editable' => true,
             ))
-            ->add('updatedAt', null, array(
-                'label' => 'admin.fields.user.updated_at',
-                'translation_domain' => 'SonataAdminBundle',
-            ))
+            ->add('updatedAt' )
             ->add('_action', 'actions', array(
-                'label' => 'admin.fields.user.action',
-                'translation_domain' => 'SonataAdminBundle',
                 'actions' => array(
                     'edit' => array(
                         'template' => 'CapcoAdminBundle:User:list__action_edit.html.twig',
@@ -83,15 +74,9 @@ class UserAdmin extends BaseAdmin
     {
         $filterMapper
             ->add('id')
-            ->add('username', null, array(
-                'label' => 'admin.fields.user.username',
-                'translation_domain' => 'SonataAdminBundle',
-            ))
+            ->add('username')
             ->add('email')
-            ->add('enabled', null, array(
-                'label' => 'admin.fields.user.enabled',
-                'translation_domain' => 'SonataAdminBundle',
-            ))
+            ->add('enabled')
             ->add('locked')
         ;
     }
@@ -105,12 +90,13 @@ class UserAdmin extends BaseAdmin
             ->with('General')
             ->add('username')
             ->add('email')
+            ->add('createdAt')
+            ->add('updatedAt')
             ->end()
             ->with('Profile')
             ->add('Media', 'sonata_media_type', array(
                 'template' => 'CapcoAdminBundle:User:media_show_field.html.twig',
                 'provider' => 'sonata.media.provider.image',
-                'label' => 'Avatar',
             ))
             ->add('dateOfBirth')
             ->add('firstname')
@@ -135,25 +121,15 @@ class UserAdmin extends BaseAdmin
             ->add('timezone')
             ->end()
             ->with('Social')
-            ->add('facebook_id', null, array(
-                'required' => false,
-                'label' => 'form.label_facebook_name',
-//                'translation_domain' => 'SonataAdminBundle',
-            ))
-            ->add('facebook_access_token', null, array(
-                'label' => 'admin.fields.user.facebook_access_token',
-                'translation_domain' => 'SonataAdminBundle',
-            ))
-            ->add('google_id', null, array(
-                'required' => false,
-                'label' => 'admin.fields.user.google_id',
-                'translation_domain' => 'SonataAdminBundle',
-            ))
-            ->add('google_access_token', null, array(
-                'required' => false,
-                'label' => 'admin.fields.user.google_access_token',
-                'translation_domain' => 'SonataAdminBundle',
-            ))
+            ->add('facebook_url', 'url')
+            ->add('facebook_id')
+            ->add('facebook_access_token')
+            ->add('google_url', 'url')
+            ->add('google_id')
+            ->add('google_access_token')
+            ->add('twitter_url', 'url')
+            ->add('twitter_id')
+            ->add('twitter_access_token')
             ->end()
             ->with('Security')
             ->add('token')
@@ -181,8 +157,8 @@ class UserAdmin extends BaseAdmin
         if (($subject && !$subject->hasRole('ROLE_SUPER_ADMIN')) || $currentUser->hasRole('ROLE_SUPER_ADMIN')) {
             $formMapper
                 ->tab('Security')
-                ->with('Status', array('class' => 'col-md-4'))->end()
-                ->with('Keys', array('class' => 'col-md-4'))->end()
+                ->with('Status', array('class' => 'col-md-6'))->end()
+                ->with('Keys', array('class' => 'col-md-6'))->end()
                 ->with('Roles', array('class' => 'col-md-12'))->end()
                 ->end()
             ;
@@ -202,7 +178,6 @@ class UserAdmin extends BaseAdmin
             ->with('Profile')
             ->add('Media', 'sonata_type_model_list', array(
                 'required' => false,
-                'label' => 'Avatar',
             ), array(
                 'link_parameters' => array(
                 'context' => 'default',
@@ -234,23 +209,16 @@ class UserAdmin extends BaseAdmin
             ->add('neighborhood', null, array('required' => false,))
             ->add('gender', 'sonata_user_gender', array(
                 'required' => true,
-                'translation_domain' => 'CapcoAppBundle',
+                'translation_domain' => 'SonataUserBundle',
             ))
             ->add('locale', 'locale', array('required' => false))
             ->add('timezone', 'timezone', array('required' => false))
             ->add('phone', null, array('required' => false))
             ->end()
             ->with('Social')
-            ->add('facebook_id', null, array(
-                'required' => false,
-                'label' => 'form.label_facebook_uid',
-                'translation_domain' => 'SonataAdminBundle',
-            ))
-            ->add('google_id', null, array(
-                'required' => false,
-                'label' => 'show.label_gplus_uid',
-                'translation_domain' => 'SonataAdminBundle',
-            ))
+            ->add('facebook_url', null, array('required' => false,))
+            ->add('google_url', null, array('required' => false,))
+            ->add('twitter_url', null, array('required' => false,))
             ->end()
             ->end()
         ;
@@ -259,32 +227,14 @@ class UserAdmin extends BaseAdmin
             $formMapper
                 ->tab('Security')
                 ->with('Status')
-                ->add('locked', null, array(
-                    'required' => false,
-                    'label' => 'Verrouillé',
-                    'translation_domain' => 'SonataAdminBundle',
-                ))
+                ->add('locked', null, array('required' => false,))
                 ->add('isTermsAccepted', null, array(
                     'required' => false,
-                    'label' => 'Termes acceptés',
-                    'translation_domain' => 'SonataAdminBundle',
                     'data' => true,
                 ))
-                ->add('expired', null, array(
-                    'required' => false,
-                    'label' => 'Expiré',
-                    'translation_domain' => 'SonataAdminBundle',
-                ))
-                ->add('enabled', null, array(
-                    'required' => false,
-                    'label' => 'Activé',
-                    'translation_domain' => 'SonataAdminBundle',
-                ))
-                ->add('credentialsExpired', null, array(
-                    'required' => false,
-                    'label' => 'Identifiants de connexion expirés',
-                    'translation_domain' => 'SonataAdminBundle',
-                ))
+                ->add('expired', null, array('required' => false,))
+                ->add('enabled', null, array('required' => false,))
+                ->add('credentialsExpired', null, array('required' => false,))
                 ->end()
             ;
             if ($currentUser->hasRole('ROLE_SUPER_ADMIN')) {
@@ -294,11 +244,10 @@ class UserAdmin extends BaseAdmin
                         'realRoles',
                         'sonata_security_roles',
                         array(
-                            'label' => 'form.label_roles',
                             'expanded' => true,
                             'multiple' => true,
                             'required' => false,
-                            'translation_domain' => 'SonataAdminBundle',
+                            'translation_domain' => 'SonataUserBundle',
                             'choices' => $this->rolesLabels,
                         )
                     )
@@ -315,7 +264,7 @@ class UserAdmin extends BaseAdmin
                             'expanded' => true,
                             'multiple' => true,
                             'required' => false,
-                            'translation_domain' => 'SonataAdminBundle',
+                            'translation_domain' => 'SonataUserBundle',
                             'choices' => $this->rolesLabelsNoSuper,
                         )
                     )

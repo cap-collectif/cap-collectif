@@ -65,35 +65,20 @@
             <p>{{ 'blog.no_post' | trans({}, 'CapcoAppBundle') | jolitypo() }}</p>
         {% endif %}
 
-        {% if nbPage > 1 %}
-            <div class="pagination--custom  text-center">
-                <ul class="pagination">
-                    {% if form.vars.data.theme is not null %}
-                        {% set theme = form.vars.data.theme.slug %}
-                    {% else %}
-                        {% set theme = 'all' %}
-                    {% endif %}
-                    {% if form.vars.data.consultation is not null %}
-                        {% set consultation = form.vars.data.consultation.slug %}
-                    {% else %}
-                        {% set consultation = 'all' %}
-                    {% endif %}
-                    {% for p in range(1, nbPage) %}
-                        <li{% if p == page %} class="active"{% endif %}>
-                            {% if form.vars.data.theme is not null or form.vars.data.consultation is not null %}
-                                {% if form.vars.data.consultation is not null %}
-                                    <a href="{{ path('app_blog_search_consultation', {'page': p, 'theme': theme, 'consultation': consultation }) }}">{{ p }}</a>
-                                {% else %}
-                                    <a href="{{ path('app_blog_search_theme', {'page': p, 'theme': theme }) }}">{{ p }}</a>
-                                {% endif %}
-                            {% else %}
-                                <a href="{{ path('app_blog', {'page': p}) }}">{{ p }}</a>
-                            {% endif %}
-                        </li>
-                    {% endfor %}
-                </ul>
-            </div>
+        {% set theme = (form.vars.data.theme is not null ? form.vars.data.theme.slug : 'all') %}
+        {% set consultation = (form.vars.data.consultation is not null ? form.vars.data.consultation.slug : 'all') %}
+
+        {% if theme != 'all' or consultation != 'all' %}
+            {% if consultation != 'all' %}
+                {% set route, params = 'app_blog_search_consultation', {'theme': theme, 'consultation': consultation } %}
+            {% else %}
+                {% set route, params = 'app_blog_search_theme', {'theme': theme } %}
+            {% endif %}
+        {% else %}
+            {% set route, params = 'app_blog', {} %}
         {% endif %}
+
+        {% include 'CapcoAppBundle:Block:pagination.html.twig' with {'current': page, 'nb': nbPage, 'route': route, 'params': params} only  %}
 
     </div>
 

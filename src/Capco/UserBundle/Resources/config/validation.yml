@@ -11,6 +11,15 @@ Capco\UserBundle\Entity\User:
     email:
       - NotBlank: ~
       - Email: { checkMX: true, message: user.register.invalid_email }
+    twitter_url:
+      - Url: ~
+      - Capco\AppBundle\Validator\Constraints\IsSocialNetworkUrl: { social_network: twitter }
+    facebook_url:
+      - Url: ~
+      - Capco\AppBundle\Validator\Constraints\IsSocialNetworkUrl: { social_network: facebook }
+    google_url:
+      - Url: ~
+      - Capco\AppBundle\Validator\Constraints\IsSocialNetworkUrl: { social_network: gplus }
     Media:
       - Valid: ~
     zipCode:

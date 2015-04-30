@@ -413,10 +413,3 @@ img {
 div.embeddedContent {
   margin: 15px 0 15px;
 }
-
-.btgrid [class*="col-"] {
-  margin-bottom: 15px;
-  @media (min-width: $screen-md-min) {
-    margin-bottom: 30px;
-  }
-}

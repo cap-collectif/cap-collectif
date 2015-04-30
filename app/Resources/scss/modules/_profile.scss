@@ -33,6 +33,10 @@
     list-style-type: none;
     padding-left: 0;
     margin-bottom: 0;
+
+    & > li {
+      line-height: 1.5;
+    }
   }
 
   .profile__values {
