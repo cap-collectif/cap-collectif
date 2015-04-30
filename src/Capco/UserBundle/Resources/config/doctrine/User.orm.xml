@@ -19,15 +19,12 @@
 
         <field name="facebook_id" column="facebook_id" type="string" length="255" nullable="true" />
         <field name="facebook_access_token" column="facebook_access_token" type="string" length="255" nullable="true" />
-        <field name="facebook_url" column="facebook_url" type="string" length="255" nullable="true" />
 
         <field name="google_id" column="google_id" type="string" length="255" nullable="true" />
         <field name="google_access_token" column="google_access_token" type="string" length="255" nullable="true" />
-        <field name="google_url" column="google_url" type="string" length="255" nullable="true" />
 
         <field name="twitter_id" column="twitter_id" type="string" length="255" nullable="true" />
         <field name="twitter_access_token" column="twitter_access_token" type="string" length="255" nullable="true" />
-        <field name="twitter_url" column="twitter_url" type="string" length="255" nullable="true" />
 
         <attribute-overrides>
             <attribute-override name="usernameCanonical">
@@ -37,7 +34,7 @@
                 <field column="username" type="string" length="255" unique="false" nullable="true"/>
             </attribute-override>
             <attribute-override name="email">
-                <field column="email" type="string" length="255" nullable="true" />
+                <field name="email" column="email" type="string" length="255" nullable="true" />
             </attribute-override>
         </attribute-overrides>
 

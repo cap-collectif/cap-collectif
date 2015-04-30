@@ -18,17 +18,17 @@ class ProfileFormType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('twitter_url', null, array(
+            ->add('twitterName', null, array(
                 'label' => 'user.profile.edit.twitter',
                 'translation_domain' => 'CapcoAppBundle',
                 'required' => false,
             ))
-            ->add('facebook_url', null, array(
+            ->add('facebookName', null, array(
                 'label' => 'user.profile.edit.facebook',
                 'translation_domain' => 'CapcoAppBundle',
                 'required' => false,
             ))
-            ->add('google_url', null, array(
+            ->add('gplusName', null, array(
                 'label' => 'user.profile.edit.gplus',
                 'translation_domain' => 'CapcoAppBundle',
                 'required' => false,
@@ -78,8 +78,9 @@ class ProfileFormType extends AbstractType
             ->remove('lastname')
             ->remove('firstname')
             ->add('gender', 'sonata_user_gender', array(
+                'label' => 'user.profile.edit.gender',
                 'required' => true,
-                'translation_domain' => 'SonataUserBundle',
+                'translation_domain' => 'CapcoAppBundle',
             ))
             ->add('dateOfBirth', 'birthday', array(
                 'required' => false,

@@ -335,8 +335,3 @@ services:
         arguments: [@capco.contribution.resolver]
         tags:
           - { name: twig.extension }
-
-    capco.is_social_network_url.validator:
-        class: Capco\AppBundle\Validator\Constraints\IsSocialNetworkUrlValidator
-        tags:
-            - { name: validator.constraint_validator, alias: is_social_network_url.validator }

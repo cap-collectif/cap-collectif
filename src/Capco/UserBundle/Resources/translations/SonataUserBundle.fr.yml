@@ -11,53 +11,18 @@ resetting:
   flash:
     success: Votre mot de passe a bien été modifié.
 
-gender:
-  unknown: Non communiqué
-  male: Homme
-  female: Femme
-
-roles:
-  user: Utilisateur
-  admin: Administrateur
-  super_admin: Super administrateur
-
-list:
-  label_updated_at: Mise à jour
-  label__action: Action
-
 form:
-  label_media: Avatar
   label_user_type: Type de profil
   label_address: Adresse
   label_address2: Complément d'adresse
   label_zip_code: Code postal
   label_city: Ville
   label_neighborhood: Quartier
-  label_facebook_url: Lien Facebook
-  label_google_url: Lien Google+
-  label_twitter_url: Lien Twitter
-  label_locked: Verrouillé
-  label_is_terms_accepted: Termes acceptés
-  label_real_roles: Rôles
 
 show:
-  label_created_at: Création
-  label_updated_at: Mise à jour
-  label_media: Avatar
   label_user_type: Type de profil
   label_address: Adresse
   label_address2: Complément d'adresse
   label_zip_code: Code postal
   label_city: Ville
   label_neighborhood: Quartier
-  label_facebook_url: Lien Facebook
-  label_facebook_id: Id Facebook
-  label_facebook_access_token: Jeton d'accès Facebook
-  label_google_url: Lien Google+
-  label_google_id: Id Google+
-  label_google_access_token: Jeton d'accès Google+
-  label_twitter_url: Lien Twitter
-  label_twitter_id: Id Twitter
-  label_twitter_access_token: Jeton d'accès Twitter
-
-"Gender": Civilité

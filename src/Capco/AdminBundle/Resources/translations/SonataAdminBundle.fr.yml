@@ -403,6 +403,26 @@ admin:
       posts_count: Articles
       position: Position
       no_status: Aucun statut
+    user:
+      username: Nom
+      email: Email
+      groups: Groupes
+      enabled: Activé
+      slug: Nom unique
+      locked: Verrouillé
+      created_at: Création
+      updated_at: Mise à jour
+      action: Action
+      facebook_id: Id Facebook
+      facebook_access_token: Token d'accès Facebook
+      google_id: Id Google+
+      google_access_token: Token d'accès Google+
+      roles:
+        user: Utilisateur
+        admin: Administrateur
+        super_admin: Super administrateur
+      city: Ville
+      user_type: Type de profil
     user_type:
       name: Type
       updated_at: Mise à jour

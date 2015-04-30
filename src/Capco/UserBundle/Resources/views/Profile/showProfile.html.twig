@@ -14,7 +14,7 @@
                 <ul class="excerpt  profile__infos">
                     <li><i class="cap cap-calendar-1"></i> {{ 'user.profile.show.since' | trans({}, 'CapcoAppBundle')}} {{ user.createdAt|localizeddate('short', 'none', app.request.locale)}}</li>
                     {% if user.website %}
-                        <li><i class="cap cap-link-1"></i> <a class="external-link" href="{{ user.website }}">{{ user.website }}</a></li>
+                        <li><i class="cap cap-link-1"></i> <a href="{{ user.website }}">{{ user.website }}</a></li>
                     {% endif %}
                     {% if is_feature_enabled('user_type') and user.userType %}
                         <li><i class="cap cap-connection-2-1"></i> {{ user.userType }}</li>
@@ -22,14 +22,14 @@
                     {% if user.city %}
                     	<li><i class="cap cap-marker-1"></i> {{ user.city }}</li>
                     {% endif %}
-                    {% if user.getFacebookUrl %}
-                        <li><i class="cap cap-facebook"></i> <a class="external-link" href="{{ user.getFacebookUrl }}">{{ 'user.profile.show.facebook' | trans({}, 'CapcoAppBundle')}}</a></li>
+                    {% if user.facebookName %}
+                        <li><i class="cap cap-facebook"></i> <a href="{{ user.facebookName }}">{{ user.facebookName }}</a></li>
                     {% endif %}
-                    {% if user.getTwitterUrl %}
-                        <li><i class="cap cap-twitter"></i> <a class="external-link" href="{{ user.getTwitterUrl }}">{{ 'user.profile.show.twitter' | trans({}, 'CapcoAppBundle')}}</a></li>
+                    {% if user.twitterName %}
+                        <li><i class="cap cap-twitter"></i> <a href="{{ user.twitterName }}">{{ user.twitterName }}</a></li>
                     {% endif %}
-                    {% if user.getGoogleUrl %}
-                        <li><i class="cap cap-gplus"></i> <a class="external-link" href="{{ user.getGoogleUrl }}">{{ 'user.profile.show.gplus' | trans({}, 'CapcoAppBundle')}}</a></li>
+                    {% if user.gplusName %}
+                        <li><i class="cap cap-gplus"></i> <a href="{{ user.gplusName }}">{{ user.gplusName }}</a></li>
                     {% endif %}
                 </ul>
             </div>
