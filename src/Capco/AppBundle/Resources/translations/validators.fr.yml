@@ -1,5 +1,9 @@
 global:
   no_theme_when_activated: Vous devez choisir un thème.
+  is_not_social_netwotk_url: Veuillez entrer un lien valide.
+  is_not_facebook_url: Veuillez entrer un lien Facebook valide.
+  is_not_twitter_url: Veuillez entrer un lien Twitter valide.
+  is_not_google_url: Veuillez entrer un lien Google+ valide.
 
 event_registration:
   create:
