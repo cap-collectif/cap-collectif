@@ -47,11 +47,13 @@
     overflow: hidden;
     border-bottom: 1px solid $border-color;
 
-    .neutral-hover:hover {
+    .neutral-hover:hover,
+    .neutral-hover:focus {
       text-decoration: none;
     }
 
-    .opinion__header__title {
+    .opinion__header__title,
+    .opinion__header__back {
       color: black;
       margin: 10px 0 10px;
     }
@@ -259,6 +261,9 @@
   // Special case : source
   &.opinion--source {
     margin-top: 0;
+    .media-heading {
+      margin-top: 0;
+    }
   }
   &.opinion--source:hover {
     background-color: white;
@@ -267,6 +272,23 @@
 
 .panel--sources {
   @include box-shadow(none);
+
+  .panel-heading {
+    position: relative;
+    overflow: hidden;
+
+  }
+
+  .sources__btn {
+    display: inline-block;
+    float: right;
+    margin-right: 15px;
+    margin-bottom: 0;
+  }
+
+  .panel-title {
+    display: inline;
+  }
 
   .panel-body {
     padding: 0;
@@ -414,20 +436,6 @@
 
 // Opinion resources
 
-.sources__panel {
-  position: relative;
-  overflow: hidden;
-  .panel-title {
-    display: inline;
-  }
-  .sources__btn {
-    display: inline-block;
-    float: right;
-    margin-right: 15px;
-    margin-bottom: 0;
-  }
-}
-
 .opinion__resources {
   border-top: 1px solid $border-color;
   border-bottom: 0px;
@@ -481,6 +489,7 @@
 
   .opinion__header__title {
     font-size: 16px;
+    margin: 7px 0;
   }
 }
 
