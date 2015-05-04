@@ -89,10 +89,18 @@
         color: {{ mainText }};
     }
 
+    .consultation__infos > li > a:hover .category {
+        color: {{ linkHover }};
+    }
+
     .consultation__nav li.consultation__nav--primary.active a {
         -moz-box-shadow: {{ btnPrimary }} 0 -3px 0 {{ btnPrimary }} inset;
         -webkit-box-shadow: {{ btnPrimary }} 0 -3px 0 {{ btnPrimary }} inset;
         box-shadow: 0 -3px 0 {{ btnPrimary }} inset;
+    }
+
+    .nav-pills > li + li {
+        margin-left: 0;
     }
 
     .pagination > li > a,
@@ -390,23 +398,23 @@
     .navbar-default .navbar-nav > .active > a,
     .navbar-default .navbar-nav > .active > a:hover,
     .navbar-default .navbar-nav > .active > a:focus,
+    .navbar-default .navbar-toggle:hover,
+    .navbar-default .navbar-toggle:focus,
     .navbar-default .navbar-nav > .open > a,
     .navbar-default .navbar-nav > .open > a:hover,
     .navbar-default .navbar-nav > .open > a:focus,
     .navbar-default .dropdown-menu>.active > a,
     .navbar-default .dropdown-menu>.active > a:focus,
     .navbar-default .dropdown-menu>.active > a:hover {
-        color: {{ menuTextActive }};
+        color: {{ menuTextHover }};
         background-color: {{ menuBgHover }};
     }
 
     .navbar-default .navbar-nav > li > a:hover,
     .navbar-default .navbar-nav > li > a:focus,
     .navbar-default .dropdown-menu > li > a:hover,
-    .navbar-default .dropdown-menu > li > a:focus,
-    .navbar-default .navbar-toggle:hover,
-    .navbar-default .navbar-toggle:focus {
-        color: {{ menuTextHover }};
+    .navbar-default .dropdown-menu > li > a:focus {
+        color: {{ menuTextActive }};
         background-color: {{ menuBgHover }};
     }
 

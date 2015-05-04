@@ -161,7 +161,7 @@ class ConsultationController extends Controller
             }
         } else {
             $form->setData(array(
-                'opinionsSort'=> $opinionsSort
+                'opinionsSort' => $opinionsSort,
             ));
         }
 

@@ -38,7 +38,7 @@ class IsSocialNetworkUrl extends Constraint
 
     public function getMessage()
     {
-        switch($this->social_network) {
+        switch ($this->social_network) {
             case 'facebook':
                 return 'global.is_not_facebook_url';
                 break;

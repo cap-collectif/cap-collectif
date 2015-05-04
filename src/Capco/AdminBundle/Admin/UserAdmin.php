@@ -52,7 +52,7 @@ class UserAdmin extends BaseAdmin
             ->add('locked', null, array(
                 'editable' => true,
             ))
-            ->add('updatedAt' )
+            ->add('updatedAt')
             ->add('_action', 'actions', array(
                 'actions' => array(
                     'edit' => array(
@@ -202,11 +202,11 @@ class UserAdmin extends BaseAdmin
         $formMapper
             ->add('website', 'url', array('required' => false))
             ->add('biography', 'text', array('required' => false))
-            ->add('address', null, array('required' => false,))
-            ->add('address2', null, array('required' => false,))
-            ->add('zipCode', null, array('required' => false,))
-            ->add('city', null, array('required' => false,))
-            ->add('neighborhood', null, array('required' => false,))
+            ->add('address', null, array('required' => false))
+            ->add('address2', null, array('required' => false))
+            ->add('zipCode', null, array('required' => false))
+            ->add('city', null, array('required' => false))
+            ->add('neighborhood', null, array('required' => false))
             ->add('gender', 'sonata_user_gender', array(
                 'required' => true,
                 'translation_domain' => 'SonataUserBundle',
@@ -216,9 +216,9 @@ class UserAdmin extends BaseAdmin
             ->add('phone', null, array('required' => false))
             ->end()
             ->with('Social')
-            ->add('facebook_url', null, array('required' => false,))
-            ->add('google_url', null, array('required' => false,))
-            ->add('twitter_url', null, array('required' => false,))
+            ->add('facebook_url', null, array('required' => false))
+            ->add('google_url', null, array('required' => false))
+            ->add('twitter_url', null, array('required' => false))
             ->end()
             ->end()
         ;
@@ -227,14 +227,14 @@ class UserAdmin extends BaseAdmin
             $formMapper
                 ->tab('Security')
                 ->with('Status')
-                ->add('locked', null, array('required' => false,))
+                ->add('locked', null, array('required' => false))
                 ->add('isTermsAccepted', null, array(
                     'required' => false,
                     'data' => true,
                 ))
-                ->add('expired', null, array('required' => false,))
-                ->add('enabled', null, array('required' => false,))
-                ->add('credentialsExpired', null, array('required' => false,))
+                ->add('expired', null, array('required' => false))
+                ->add('enabled', null, array('required' => false))
+                ->add('credentialsExpired', null, array('required' => false))
                 ->end()
             ;
             if ($currentUser->hasRole('ROLE_SUPER_ADMIN')) {

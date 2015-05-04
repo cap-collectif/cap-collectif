@@ -284,6 +284,7 @@ consultation:
     votes: "]-Inf, 0] Aucun vote | {1} 1 vote | ]1,Inf[ %count% votes"
     sources: "]-Inf, 0] Aucune source | {1} 1 source | ]1,Inf[ %count% sources"
     contributions_no_nb: "]-Inf, 1] contribution | ]1,Inf[ contributions"
+    contributors_nb: "]-Inf, 1] participant | ]1,Inf[ participants"
     opinions_no_nb: "]-Inf, 1] opinion | ]1,Inf[ opinions"
     arguments_no_nb: "]-Inf, 1] argument | ]1,Inf[ arguments"
     global:

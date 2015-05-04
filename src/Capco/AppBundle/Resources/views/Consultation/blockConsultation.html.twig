@@ -62,17 +62,30 @@
             </div>
             {% endif %}
 
+            {% set contributorsCount = consultation | capco_count_consultation_contributors %}
             {% set contributionsCount = consultation.totalContributionsCount %}
-            {% if contributionsCount > 0 %}
+            {% if contributionsCount > 0 or contributorsCount > 0 %}
                 <div class="thumbnail__numbers">
-                    <div class="thumbnail__number-block">
-                        <p  class="thumbnail__number">{{ contributionsCount }}</p>
-                        <p class="thumbnail__number__label  excerpt  small">
-                            {% transchoice contributionsCount with {'%count%': contributionsCount} from 'CapcoAppBundle' %}
-                                consultation.show.contributions_no_nb
-                            {% endtranschoice %}
-                        </p>
-                    </div>
+                    {% if contributorsCount > 0 %}
+                        <div class="thumbnail__number-block">
+                            <p  class="thumbnail__number">{{ contributorsCount }}</p>
+                            <p class="thumbnail__number__label  excerpt  small">
+                                {% transchoice contributorsCount with {'%count%': contributorsCount} from 'CapcoAppBundle' %}
+                                    consultation.show.contributors_nb
+                                {% endtranschoice %}
+                            </p>
+                        </div>
+                    {% endif %}
+                    {% if contributionsCount > 0 %}
+                        <div class="thumbnail__number-block">
+                            <p  class="thumbnail__number">{{ contributionsCount }}</p>
+                            <p class="thumbnail__number__label  excerpt  small">
+                                {% transchoice contributionsCount with {'%count%': contributionsCount} from 'CapcoAppBundle' %}
+                                    consultation.show.contributions_no_nb
+                                {% endtranschoice %}
+                            </p>
+                        </div>
+                    {% endif %}
                 </div>
             {% endif %}
         </div>
