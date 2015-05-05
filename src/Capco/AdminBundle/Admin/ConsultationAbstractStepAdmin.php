@@ -20,13 +20,13 @@ class ConsultationAbstractStepAdmin extends Admin
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
-            ->add('position', null, array(
-                'label' => 'admin.fields.consultation_abstractstep.position',
-            ))
             ->add('step', 'sonata_type_model_list', array(
                 'required' => true,
                 'label' => 'admin.fields.consultation_abstractstep.steps',
                 'translation_domain' => 'SonataAdminBundle',
+            ))
+            ->add('position', null, array(
+                'label' => 'admin.fields.consultation_abstractstep.position',
             ))
         ;
     }

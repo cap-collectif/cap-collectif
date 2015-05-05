@@ -177,7 +177,7 @@ admin:
       posts: Articles
     consultation_abstractstep:
       steps: Étapes
-      position: Position
+      position: position
     consultation_type:
       title: Titre
       opinion_types: Types de proposition

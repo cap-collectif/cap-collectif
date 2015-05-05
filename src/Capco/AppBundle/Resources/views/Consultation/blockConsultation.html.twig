@@ -1,12 +1,12 @@
 <div class="col-xs-12  col-sm-6  col-md-4  col-lg-3">
     <div class="thumbnail  thumbnail--custom  block  block--bordered">
-        {% set link = consultation | capco_current_step_link | default('') %}
+
         {%  if consultation.Cover %}
-            <a href="{{ link }}" alt="{{ consultation.title }}" {% if consultation.video %}class="play"{% endif %}>
+            <a href="{{ consultation | capco_current_step_link }}" alt="{{ consultation.title }}" {% if consultation.video %}class="play"{% endif %}>
                 {% thumbnail consultation.Cover, 'consultation' with {'title': consultation.Cover.name, 'alt': consultation.Cover.name, 'class': 'img-responsive'} %}
             </a>
         {% else %}
-            <a href="{{ link }}" alt="{{ consultation.title }}" class="bg__wrapper{% if consultation.video %} play{% endif %}">
+            <a href="{{ consultation | capco_current_step_link }}" alt="{{ consultation.title }}" class="bg__wrapper{% if consultation.video %} play{% endif %}">
                 <div class="bg--default bg--consultation">
                     {% if consultation.video is null %}
                         <svg version="1.1" id="Calque_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="110px" height="110px" viewBox="-162.5 -162.5 226.5 226.5" enable-background="new -162.5 -162.5 226.5 226.5" xml:space="preserve" style="margin: 0 auto; display: block;">
@@ -34,7 +34,7 @@
                         </span>
                     {% endif %}
                 {% endif %}
-                <h2 class="h4"><a href="{{ link }}">{{ consultation.title }}</a></h2>
+                <h2 class="h4"><a href="{{ consultation | capco_current_step_link }}">{{ consultation.title }}</a></h2>
             </div>
             {% set currentStep = consultation.currentStep %}
             {% if currentStep %}
