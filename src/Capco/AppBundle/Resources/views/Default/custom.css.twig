@@ -89,10 +89,18 @@
         color: {{ mainText }};
     }
 
+    .consultation__infos > li > a:hover .category {
+        color: {{ linkHover }};
+    }
+
     .consultation__nav li.consultation__nav--primary.active a {
         -moz-box-shadow: {{ btnPrimary }} 0 -3px 0 {{ btnPrimary }} inset;
         -webkit-box-shadow: {{ btnPrimary }} 0 -3px 0 {{ btnPrimary }} inset;
         box-shadow: 0 -3px 0 {{ btnPrimary }} inset;
+    }
+
+    .nav-pills > li + li {
+        margin-left: 0;
     }
 
     .pagination > li > a,
