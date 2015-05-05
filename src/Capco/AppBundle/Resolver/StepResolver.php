@@ -29,7 +29,7 @@ class StepResolver
             }
         }
 
-        return;
+        return null;
     }
 
     public function getFirstStepLinkForConsultation(Consultation $consultation, $absolute = false)
