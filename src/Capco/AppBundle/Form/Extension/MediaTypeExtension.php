@@ -39,15 +39,11 @@ class MediaTypeExtension extends AbstractTypeExtension
                 'required' => false,
             ));
         }
-        $builder
-            ->add('binaryContent', 'file', array(
-                'label' => 'media.form.binary_content',
-                'translation_domain' => 'CapcoAppBundle',
-                'required' => false,
-            ))
-            ->remove('contentType')
-        ;
-
+        $builder->add('binaryContent', 'file', array(
+            'label' => 'media.form.binary_content',
+            'translation_domain' => 'CapcoAppBundle',
+            'required' => false,
+        ));
     }
 
     /**
