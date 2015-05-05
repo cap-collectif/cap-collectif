@@ -40,7 +40,7 @@ RUN addgroup --gid=1000 capco && \
 
 ENV PATH $PATH:/home/capco/.composer/vendor/bin/
 
-RUN mkdir /var/www/ ; cd /var/www ; chown -R capco:capco /var/www/
+RUN rm -rf /var/www/html; cd /var/www ; chown -R capco:capco /var/www/
 RUN mv /var/lib/mysql /var/lib/mysql_save
 
 COPY entrypoint.sh         /entrypoint.sh
@@ -66,13 +66,13 @@ USER capco
 
 # Retrieve project
 COPY VERSION /VERSION
-RUN cd /var/www ; git clone -b develop --single-branch --depth 1 git@github.com:jolicode/CapCollectif-SF2.git .
+RUN cd /var/www ; git clone -b infra-test --single-branch --depth 1 git@github.com:jolicode/CapCollectif-SF2.git .
 RUN cd /var/www && /usr/local/bin/capcobuild
 
 WORKDIR /var/www
 ENTRYPOINT ["/entrypoint.sh"]
 
-COPY parameters.yml /var/www/app/config/parameters.yml
+RUN cp /var/www/app/config/parameters.yml.dist /var/www/app/config/parameters.yml
 
 USER root
 

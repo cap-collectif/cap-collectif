@@ -62,7 +62,12 @@ Icon
 .idea
 
 # capco
+<<<<<<< HEAD
 infrastructure/data
 infrastructure/sites.csv
+=======
+infrastructure/vhosts.conf
+infrastructure/docker-compose.yml
+>>>>>>> config
 infrastructure/services/web/VERSION
 infrastructure/services/web/parameters.yml
