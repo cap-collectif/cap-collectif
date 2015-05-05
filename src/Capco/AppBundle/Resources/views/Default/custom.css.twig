@@ -390,23 +390,23 @@
     .navbar-default .navbar-nav > .active > a,
     .navbar-default .navbar-nav > .active > a:hover,
     .navbar-default .navbar-nav > .active > a:focus,
-    .navbar-default .navbar-toggle:hover,
-    .navbar-default .navbar-toggle:focus,
     .navbar-default .navbar-nav > .open > a,
     .navbar-default .navbar-nav > .open > a:hover,
     .navbar-default .navbar-nav > .open > a:focus,
     .navbar-default .dropdown-menu>.active > a,
     .navbar-default .dropdown-menu>.active > a:focus,
     .navbar-default .dropdown-menu>.active > a:hover {
-        color: {{ menuTextHover }};
+        color: {{ menuTextActive }};
         background-color: {{ menuBgHover }};
     }
 
     .navbar-default .navbar-nav > li > a:hover,
     .navbar-default .navbar-nav > li > a:focus,
     .navbar-default .dropdown-menu > li > a:hover,
-    .navbar-default .dropdown-menu > li > a:focus {
-        color: {{ menuTextActive }};
+    .navbar-default .dropdown-menu > li > a:focus,
+    .navbar-default .navbar-toggle:hover,
+    .navbar-default .navbar-toggle:focus {
+        color: {{ menuTextHover }};
         background-color: {{ menuBgHover }};
     }
 
