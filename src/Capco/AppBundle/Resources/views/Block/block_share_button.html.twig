@@ -1,5 +1,5 @@
 {% block block %}
-    <div class="dropdown  dropdown--social  {{ classes }}">
+    <div class="dropdown  dropdown--custom  {{ classes }}">
         <button class="btn  btn-default {{ btn_classes }}" type="button" data-toggle="dropdown"><i class="cap cap-link"></i> {{ 'share_button.share' | trans({}, 'CapcoAppBundle') }} <span class="caret"></span></button>
         <ul class="dropdown-menu" role="menu">
             <li>
@@ -30,7 +30,7 @@
         </ul>
     </div>
 
-    <div class="modal fade  modal--social" id="shareLink{{ block.id }}" tabindex="-1" role="dialog" aria-labelledby="{{ title }}" aria-hidden="true">
+    <div class="modal fade  modal--custom" id="shareLink{{ block.id }}" tabindex="-1" role="dialog" aria-labelledby="{{ title }}" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">

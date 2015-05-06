@@ -93,20 +93,22 @@ class SourceRepository extends EntityRepository
     }
 
     /**
-     * Get all sources by consultation step.
+     * Get enabled sources by consultation step.
      *
      * @param $step
      *
      * @return mixed
      */
-    public function getByConsultationStep(ConsultationStep $step)
+    public function getEnabledByConsultationStep(ConsultationStep $step)
     {
-        $qb = $this->createQueryBuilder('s')
+        $qb = $this->getIsEnabledQueryBuilder()
             ->addSelect('ca', 'o', 'ot', 'aut')
             ->leftJoin('s.Category', 'ca')
             ->leftJoin('s.Opinion', 'o')
             ->leftJoin('o.OpinionType', 'ot')
             ->leftJoin('s.Author', 'aut')
+            ->andWhere('o.isEnabled = :oEnabled')
+            ->setParameter('oEnabled', true)
             ->andWhere('o.step = :step')
             ->setParameter('step', $step)
             ->orderBy('s.updatedAt', 'DESC');

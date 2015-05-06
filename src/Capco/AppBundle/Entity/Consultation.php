@@ -613,6 +613,19 @@ class Consultation
         return;
     }
 
+    public function getAllConsultationSteps()
+    {
+        $consultations = array();
+
+        foreach ($this->steps as $step) {
+            if ($step->getStep()->isConsultationStep()) {
+                $consultations[] = $step;
+            }
+        }
+
+        return $consultations;
+    }
+
     // ************************** Lifecycle **************************************
 
     /**

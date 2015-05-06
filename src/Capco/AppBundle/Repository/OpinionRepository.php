@@ -223,15 +223,15 @@ class OpinionRepository extends EntityRepository
     }
 
     /**
-     * Get all opinions by consultation step.
+     * Get enabled opinions by consultation step.
      *
      * @param $step
      *
      * @return mixed
      */
-    public function getByConsultationStep($step)
+    public function getEnabledByConsultationStep($step)
     {
-        $qb = $this->createQueryBuilder('o')
+        $qb = $this->getIsEnabledQueryBuilder('o')
             ->addSelect('ot', 'aut', 'arg')
             ->leftJoin('o.OpinionType', 'ot')
             ->leftJoin('o.Author', 'aut')

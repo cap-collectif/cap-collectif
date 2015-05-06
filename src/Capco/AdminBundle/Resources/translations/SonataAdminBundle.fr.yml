@@ -431,14 +431,6 @@ admin:
       trash:
         label: Mettre le contenu à la corbeille
         success: Le contenu a été placé dans la corbeille.
-    consultation:
-      download:
-        label: Télécharger
-        modal:
-          title: Télécharger
-          body: Choisissez le format du fichier :
-          button: Format %format%
-          cancel: Fermer
     menu_item:
       batch_delete:
         denied: Impossible de supprimer certains des éléments de menu sélectionnés.

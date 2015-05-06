@@ -44,6 +44,12 @@ App.module = function ($) {
         });
     };
 
+    var customModal = function(el) {
+        var $el = $(el);
+
+        $el.appendTo("body");
+    };
+
     var pieChart = function() {
         if (typeof(google) != "undefined") {
             google.load("visualization", "1", {packages: ["corechart"]});
@@ -194,6 +200,7 @@ App.module = function ($) {
         makeSidebar: makeSidebar,
         carousel: carousel,
         hideableMessageAndCheckbox: hideableMessageAndCheckbox,
+        customModal: customModal,
     };
 
     return AppPublic;
