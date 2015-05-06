@@ -47,7 +47,6 @@ class MediaTypeExtension extends AbstractTypeExtension
             ))
             ->remove('contentType')
         ;
-
     }
 
     /**
