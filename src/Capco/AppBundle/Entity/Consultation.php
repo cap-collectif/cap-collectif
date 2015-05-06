@@ -89,7 +89,7 @@ class Consultation
 
     /**
      * @var \DateTime
-     * @Gedmo\Timestampable(on="change", field={"title", "teaser", "body", "Author", "Themes", "Steps", "Media"})
+     * @Gedmo\Timestampable(on="change", field={"title", "Author", "Themes", "steps", "Media"})
      * @ORM\Column(name="updated_at", type="datetime")
      */
     private $updatedAt;

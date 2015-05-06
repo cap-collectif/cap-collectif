@@ -5,10 +5,10 @@ namespace spec\Capco\AppBundle\Entity;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 
-class StepSpec extends ObjectBehavior
+class OtherStepSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
-        $this->shouldHaveType('Capco\AppBundle\Entity\AbstractStep');
+        $this->shouldHaveType('Capco\AppBundle\Entity\OtherStep');
     }
 }

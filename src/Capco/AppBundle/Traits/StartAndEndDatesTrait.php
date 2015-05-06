@@ -35,14 +35,10 @@ trait StartAndEndDatesTrait
      * Set startAt.
      *
      * @param \DateTime $startAt
-     *
-     * @return Step
      */
     public function setStartAt($startAt)
     {
         $this->startAt = $startAt;
-
-        return $this;
     }
 
     /**
@@ -59,14 +55,10 @@ trait StartAndEndDatesTrait
      * Set endAt.
      *
      * @param \DateTime $endAt
-     *
-     * @return Step
      */
     public function setEndAt($endAt)
     {
         $this->endAt = $endAt;
-
-        return $this;
     }
 
     public function extractDate($datetime)

@@ -138,7 +138,7 @@ abstract class AbstractStep
      *
      * @param string $title
      *
-     * @return Step
+     * @return AbstractStep
      */
     public function setTitle($title)
     {
@@ -162,7 +162,7 @@ abstract class AbstractStep
      *
      * @param string $slug
      *
-     * @return Step
+     * @return AbstractStep
      */
     public function setSlug($slug)
     {
@@ -186,7 +186,7 @@ abstract class AbstractStep
      *
      * @param bool $isEnabled
      *
-     * @return Step
+     * @return AbstractStep
      */
     public function setIsEnabled($isEnabled)
     {
@@ -224,7 +224,7 @@ abstract class AbstractStep
     /**
      * Set body.
      *
-     * @return Step
+     * @return AbstractStep
      */
     public function setBody($body)
     {

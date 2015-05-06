@@ -7,7 +7,7 @@ use Capco\AppBundle\Entity\Consultation;
 use Capco\AppBundle\Entity\Opinion;
 use Capco\AppBundle\Entity\OpinionType;
 use Capco\AppBundle\Entity\Theme;
-use Capco\AppBundle\Entity\AbstractStep as Step;
+use Capco\AppBundle\Entity\AbstractStep;
 use Capco\AppBundle\Entity\ConsultationStep;
 use Capco\AppBundle\Form\ConsultationSearchType;
 use Capco\AppBundle\Form\OpinionsSortType;
@@ -33,12 +33,12 @@ class ConsultationController extends Controller
      */
     public function lastConsultationsAction($max = 4, $offset = 0)
     {
-        $consultationSteps = $this->getDoctrine()->getRepository('CapcoAppBundle:Step')->getLastOpen($max, $offset);
+        $consultationSteps = $this->getDoctrine()->getRepository('CapcoAppBundle:AbstractStep')->getLastOpen($max, $offset);
         if (empty($consultationSteps)) {
-            $consultationSteps = $this->getDoctrine()->getRepository('CapcoAppBundle:Step')->getLastFuture($max, $offset);
+            $consultationSteps = $this->getDoctrine()->getRepository('CapcoAppBundle:AbstractStep')->getLastFuture($max, $offset);
         }
         if (empty($consultationSteps)) {
-            $consultationSteps = $this->getDoctrine()->getRepository('CapcoAppBundle:Step')->getLastClosed($max, $offset);
+            $consultationSteps = $this->getDoctrine()->getRepository('CapcoAppBundle:AbstractStep')->getLastClosed($max, $offset);
         }
 
         return [
@@ -321,7 +321,7 @@ class ConsultationController extends Controller
         return [
             'consultation' => $consultation,
             'currentStep' => $currentStepSlug,
-            'stepStatus' => Step::$stepStatus,
+            'stepStatus' => AbstractStep::$stepStatus,
         ];
     }
 
