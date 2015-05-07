@@ -128,11 +128,6 @@ class IdeaController extends Controller
         $em = $this->getDoctrine()->getManager();
 
         $pagination = $this->get('capco.site_parameter.resolver')->getValue('ideas.pagination');
-        if (!is_numeric($pagination)) {
-            $pagination = 0;
-        } else {
-            $pagination = (int) $pagination;
-        }
 
         $ideas = $em->getRepository('CapcoAppBundle:Idea')->getTrashed($pagination, $page);
         $publishedIdeasNb = $em->getRepository('CapcoAppBundle:Idea')->countPublished();
@@ -263,11 +258,6 @@ class IdeaController extends Controller
         }
 
         $pagination = $this->get('capco.site_parameter.resolver')->getValue('ideas.pagination');
-        if (!is_numeric($pagination)) {
-            $pagination = 0;
-        } else {
-            $pagination = (int) $pagination;
-        }
 
         $ideas = $em->getRepository('CapcoAppBundle:Idea')->getSearchResults($pagination, $page, $theme, $sort, $term);
         $trashedIdeasNb = $em->getRepository('CapcoAppBundle:Idea')->countTrashed();
