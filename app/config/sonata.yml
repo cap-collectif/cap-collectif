@@ -29,12 +29,10 @@ sonata_admin:
                 items:
                     - capco_admin.admin.consultation
                     - capco_admin.admin.opinion
-                    - capco_admin.admin.opinion_type
                     - capco_admin.admin.opinion_vote
                     - capco_admin.admin.argument
                     - capco_admin.admin.argument_vote
                     - capco_admin.admin.source
-                    - capco_admin.admin.category
                     - capco_admin.admin.consultation_type
             admin.group.ideas:
                 items:
@@ -62,6 +60,8 @@ sonata_admin:
                     - capco_admin.admin.site_image
                     - capco_admin.admin.site_color
                     - capco_admin.admin.menu_item
+                    - capco_admin.admin.opinion_type
+                    - capco_admin.admin.category
 
 sonata_doctrine_orm_admin:
     templates:

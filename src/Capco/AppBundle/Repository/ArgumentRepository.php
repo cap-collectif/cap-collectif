@@ -54,22 +54,20 @@ class ArgumentRepository extends EntityRepository
     }
 
     /**
-     * Find enabled arguments by consultation step.
+     * Find all arguments by consultation step.
      *
      * @param $step
      *
      * @return array
      */
-    public function getEnabledByConsultationStep($step)
+    public function getByConsultation($step)
     {
-        $qb = $this->getIsEnabledQueryBuilder()
+        $qb = $this->createQueryBuilder('a')
             ->addSelect('o', 'ot', 'aut')
             ->leftJoin('a.opinion', 'o')
             ->leftJoin('o.OpinionType', 'ot')
             ->leftJoin('o.Author', 'aut')
-            ->andWhere('o.isEnabled = :oEnabled')
             ->andWhere('o.step = :step')
-            ->setParameter('oEnabled', true)
             ->setParameter('step', $step)
             ->addOrderBy('a.updatedAt', 'DESC');
 

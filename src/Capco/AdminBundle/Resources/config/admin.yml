@@ -41,7 +41,7 @@ services:
 
     capco_admin.admin.consultation:
         class: Capco\AdminBundle\Admin\ConsultationAdmin
-        arguments: [~, Capco\AppBundle\Entity\Consultation, SonataAdminBundle:CRUD]
+        arguments: [~, Capco\AppBundle\Entity\Consultation, CapcoAdminBundle:Consultation]
         tags:
             - {name: sonata.admin, manager_type: orm, group: admin.group.consultation, label: admin.label.consultation}
         calls:
@@ -83,7 +83,7 @@ services:
         class: Capco\AdminBundle\Admin\OpinionTypeAdmin
         arguments: [~, Capco\AppBundle\Entity\OpinionType, SonataAdminBundle:CRUD]
         tags:
-            - {name: sonata.admin, manager_type: orm, group: admin.group.consultation, label: admin.label.opinion_type}
+            - {name: sonata.admin, manager_type: orm, group: admin.group.reference, label: admin.label.opinion_type}
         calls:
             - [ setTranslationDomain, [SonataAdminBundle]]
 

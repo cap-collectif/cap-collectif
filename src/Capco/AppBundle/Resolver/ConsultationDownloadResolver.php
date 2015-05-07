@@ -3,7 +3,6 @@
 namespace Capco\AppBundle\Resolver;
 
 use Capco\AppBundle\Entity\Argument;
-use Capco\AppBundle\Entity\ConsultationStep;
 use Capco\AppBundle\Entity\Opinion;
 use Capco\AppBundle\Entity\Source;
 use Doctrine\ORM\EntityManager;
@@ -70,6 +69,7 @@ class ConsultationDownloadResolver
             'total_arguments',
             'arguments_ok',
             'arguments_nok',
+            'enabled',
             'trashed',
             'trashed_date',
             'trashed_reason',
@@ -87,21 +87,21 @@ class ConsultationDownloadResolver
         $this->translator = $translator;
     }
 
-    public function getContent(ConsultationStep $consultationStep, $format)
+    public function getContent($consultation, $format)
     {
-        if (null == $consultationStep) {
-            throw new NotFoundHttpException('Consultation step not found');
+        if (null == $consultation) {
+            throw new NotFoundHttpException('Consultation not found');
         }
 
         if (!$this->isFormatSupported($format)) {
             throw new \Exception('Wrong format');
         }
 
-        $data = $this->getData($consultationStep);
+        $data = $this->getData($consultation);
 
         $content = $this->templating->render('CapcoAppBundle:Consultation:download.xls.twig',
             array(
-                'title' => $consultationStep->getConsultation()->getTitle().'_'.$consultationStep->getTitle(),
+                'title' => $consultation->getTitle(),
                 'format' => $format,
                 'sheets' => $this->sheets,
                 'headers' => $this->headers,
@@ -122,15 +122,15 @@ class ConsultationDownloadResolver
         return $this->contentTypes[$format];
     }
 
-    public function getData($consultationStep)
+    public function getData($consultation)
     {
-        $opinions = $this->em->getRepository('CapcoAppBundle:Opinion')->getEnabledByConsultationStep($consultationStep);
-        $arguments = $this->em->getRepository('CapcoAppBundle:Argument')->getEnabledByConsultationStep($consultationStep);
-        $sources = $this->em->getRepository('CapcoAppBundle:Source')->getEnabledByConsultationStep($consultationStep);
+        $opinions = $this->em->getRepository('CapcoAppBundle:Opinion')->getByConsultation($consultation);
+        $arguments = $this->em->getRepository('CapcoAppBundle:Argument')->getByConsultation($consultation);
+        $sources = $this->em->getRepository('CapcoAppBundle:Source')->getByConsultation($consultation);
 
         $data = array(
             'published' => array(),
-            'unpublished' => array()
+            'unpublished' => array(),
         );
 
         // 0pinions
@@ -187,6 +187,7 @@ class ConsultationDownloadResolver
             'total_arguments' => $opinion->getArgumentsCount(),
             'arguments_ok' => $opinion->getArgumentsCountByType('yes'),
             'arguments_nok' => $opinion->getArgumentsCountByType('no'),
+            'enabled' => $this->booleanToString($opinion->getIsEnabled()),
             'trashed' => $this->booleanToString($opinion->getIsTrashed()),
             'trashed_date' => $this->dateToString($opinion->getTrashedAt()),
             'trashed_reason' => $opinion->getTrashedReason(),
@@ -214,6 +215,7 @@ class ConsultationDownloadResolver
             'total_arguments' => $this->translator->trans('consultation_download.values.non_applicable', array(), 'CapcoAppBundle'),
             'arguments_ok' => $this->translator->trans('consultation_download.values.non_applicable', array(), 'CapcoAppBundle'),
             'arguments_nok' => $this->translator->trans('consultation_download.values.non_applicable', array(), 'CapcoAppBundle'),
+            'enabled' => $this->booleanToString($argument->getIsEnabled()),
             'trashed' => $this->booleanToString($argument->getIsTrashed()),
             'trashed_date' => $this->dateToString($argument->getTrashedAt()),
             'trashed_reason' => $argument->getTrashedReason(),
@@ -241,6 +243,7 @@ class ConsultationDownloadResolver
             'total_arguments' => $this->translator->trans('consultation_download.values.non_applicable', array(), 'CapcoAppBundle'),
             'arguments_ok' => $this->translator->trans('consultation_download.values.non_applicable', array(), 'CapcoAppBundle'),
             'arguments_nok' => $this->translator->trans('consultation_download.values.non_applicable', array(), 'CapcoAppBundle'),
+            'enabled' => $this->booleanToString($source->getIsEnabled()),
             'trashed' => $this->booleanToString($source->getIsTrashed()),
             'trashed_date' => $this->dateToString($source->getTrashedAt()),
             'trashed_reason' => $source->getTrashedReason(),

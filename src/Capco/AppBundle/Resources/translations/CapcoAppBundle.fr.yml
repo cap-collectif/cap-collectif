@@ -235,14 +235,6 @@ theme:
 
 #Consultation
 consultation:
-  download:
-    button: Exporter
-    modal:
-      title: Exporter l'étape de consultation "%title%"
-      body: Choisissez le format du fichier :
-      button: Format %format%
-      cancel: Fermer
-    step: Étape %position% : "%title%"
   share_button: Inviter
   sort:
     published_at: Date de publication
@@ -820,7 +812,7 @@ video:
 consultation_download:
   sheets:
     published: Contenu publié
-    unpublished: Contenu à la corbeille
+    unpublished: Contenu non publié
   label:
     opinion_title: Titre de la proposition
     content_type: Type de contenu

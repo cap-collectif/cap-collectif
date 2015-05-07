@@ -19,7 +19,6 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
-use Symfony\Component\HttpFoundation\Response;
 
 class ConsultationController extends Controller
 {
@@ -215,35 +214,6 @@ class ConsultationController extends Controller
             'argumentsLabels' => Argument::$argumentTypesLabels,
             'currentStep' => $currentStep,
         ];
-    }
-
-    /**
-     * @Route("/consultations/{consultationSlug}/consultation/{stepSlug}/download/{format}", name="app_consultation_download")
-     * @ParamConverter("consultation", class="CapcoAppBundle:Consultation", options={"mapping": {"consultationSlug": "slug"}})
-     * @ParamConverter("step", class="CapcoAppBundle:ConsultationStep", options={"mapping": {"stepSlug": "slug"}})
-     *
-     * @param Consultation     $consultation
-     * @param ConsultationStep $step
-     * @param $format
-     *
-     * @return Response $response
-     */
-    public function downloadAction($consultation, $step, $format)
-    {
-        $resolver = $this->get('capco.consultation.download.resolver');
-        $content = $resolver->getContent($step, $format);
-
-        if (null == $content) {
-            throw new NotFoundHttpException('Wrong format');
-        }
-
-        $response = new Response($content);
-        $contentType = $resolver->getContentType($format);
-        $filename = $consultation->getSlug().'_'.$step->getSlug().'.'.$format;
-        $response->headers->set('Content-Type', $contentType);
-        $response->headers->set('Content-Disposition', 'attachment;filename='.$filename);
-
-        return $response;
     }
 
     /**
