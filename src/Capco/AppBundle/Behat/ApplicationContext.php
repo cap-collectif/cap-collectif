@@ -6,6 +6,8 @@ use Capco\AppBundle\Toggle\Manager;
 
 class ApplicationContext extends UserContext
 {
+    protected $headers;
+
     /**
      * @BeforeSuite
      */
@@ -101,5 +103,32 @@ class ApplicationContext extends UserContext
     {
         $time = intval($seconds * 1000);
         $this->getSession()->wait($time);
+    }
+
+    /**
+     * @When I try to download :url
+     */
+    public function iTryToDownload($url)
+    {
+        $this->headers = get_headers($this->getSession()->getCurrentUrl().$url);
+    }
+
+    /**
+     * @Then /^I should see response status code "([^"]*)"$/
+     */
+    public function iShouldSeeResponseStatusCode($statusCode)
+    {
+        $responseStatusCode = $this->response->getStatusCode();
+        if (!$responseStatusCode == intval($statusCode)) {
+            throw new \Exception(sprintf("Did not see response status code %s, but %s.", $statusCode, $responseStatusCode));
+        }
+    }
+
+    /**
+     * @Then /^I should see in the header "([^"]*)"$/
+     */
+    public function iShouldSeeInTheHeader($header)
+    {
+        assert(in_array($header, $this->headers), "Did not see \"$header\" in the headers.");
     }
 }

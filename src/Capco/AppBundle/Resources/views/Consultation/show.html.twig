@@ -70,6 +70,7 @@
     <script src="{{ asset('js/readmore/readmore.js') }}"></script>
     <script type="text/javascript">
         App.module.pieChart();
+        App.module.customModal('.modal--custom');
         $('.more').readmore({
             collapsedHeight: 100,
             moreLink: '<a href="#">{{ 'consultation.show.meta.read_more'|trans({}, 'CapcoAppBundle') }}</a>', //BazingaJsTranslationBundle

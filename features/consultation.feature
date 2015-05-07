@@ -32,3 +32,18 @@ Feature: Consultation
       | stepSlug         | collecte-des-avis                |
     And I follow "Actualités"
     And I should see 5 ".media--news" elements
+
+  Scenario: Can download a consultation in xslx format
+    Given I visited "home page"
+    When I try to download "consultations/croissance-innovation-disruption/consultation/collecte-des-avis/download/xlsx"
+    Then I should see in the header "Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+
+  Scenario: Can download a consultation in csv format
+    Given I visited "home page"
+    When I try to download "consultations/croissance-innovation-disruption/consultation/collecte-des-avis/download/csv"
+    Then I should see in the header "Content-Type: text/csv; charset=UTF-8"
+
+  Scenario: Can download a consultation in xls format
+    Given I visited "home page"
+    When I try to download "consultations/croissance-innovation-disruption/consultation/collecte-des-avis/download/xls"
+    Then I should see in the header "Content-Type: application/vnd.ms-excel"

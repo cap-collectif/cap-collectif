@@ -110,5 +110,7 @@
             'url': (consultation | capco_first_step_link(true)),
             'title': consultation.title
         }) }}
+
+        {% include 'CapcoAppBundle:Consultation:download_button.html.twig' with {'consultation': consultation} only %}
     </div>
 </div>

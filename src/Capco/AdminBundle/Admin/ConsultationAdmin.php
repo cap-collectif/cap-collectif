@@ -95,9 +95,6 @@ class ConsultationAdmin extends Admin
             ->add('_action', 'actions', array(
                 'actions' => array(
                     'show' => array(),
-                    'download' => array(
-                        'template' => 'CapcoAdminBundle:CRUD:list__action_download.html.twig',
-                    ),
                     'edit' => array(),
                     'delete' => array(),
                 ),
@@ -244,7 +241,6 @@ class ConsultationAdmin extends Admin
 
     protected function configureRoutes(RouteCollection $collection)
     {
-        $collection->add('download', $this->getRouterIdParameter().'/download');
         $collection->add('getAllowedTypesFromConsultationType', 'allowed_types_from_consultation_types');
     }
 

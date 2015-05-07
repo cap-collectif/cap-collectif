@@ -350,8 +350,8 @@ a.excerpt {
   @include border-radius(0);
 }
 
-// Social dropdown
-.dropdown--social {
+// Custom dropdown
+.dropdown--custom {
   display: inline-block;
   position: static;
 
@@ -382,7 +382,11 @@ a.excerpt {
   }
 }
 
-.modal--social {
+// Custom modal
+.modal--custom {
+  .modal-title {
+    margin: 0;
+  }
   textarea {
     width: 100%;
     font-size: 13px;
