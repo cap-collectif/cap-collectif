@@ -2,7 +2,6 @@
 
 namespace Capco\AppBundle\SiteParameter;
 
-use Capco\AppBundle\Entity\SiteParameter;
 use Capco\AppBundle\Repository\SiteParameterRepository;
 use Psr\Log\LoggerInterface;
 
@@ -29,14 +28,6 @@ class Resolver
             return $value;
         }
 
-        $value = $this->parameters[$key]['value'];
-
-        dump($this->parameters[$key]);
-
-        if ($this->parameters[$key]['type'] == SiteParameter::$types['integer']) {
-            $value = is_numeric($value) ? (int) $value : 0;
-        }
-
-        return $value;
+        return $this->parameters[$key]['value'];
     }
 }

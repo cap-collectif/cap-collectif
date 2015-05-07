@@ -56,6 +56,11 @@ class BlogController extends Controller
         }
 
         $pagination = $this->get('capco.site_parameter.resolver')->getValue('blog.pagination.size');
+        if (!is_numeric($pagination)) {
+            $pagination = 0;
+        } else {
+            $pagination = (int) $pagination;
+        }
 
         $posts = $this->get('capco.blog.post.repository')->getSearchResults(
             $pagination,

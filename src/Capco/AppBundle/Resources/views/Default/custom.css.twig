@@ -76,6 +76,15 @@
         color: {{ link }};
     }
 
+    .opinion__header .opinion__header__title,
+    .opinion__header .opinion__header__back {
+        color: black;
+    }
+
+    .dialog__header .dialog__title {
+        color: black;
+    }
+
     .navbar--sub .nav li.active a,
     .navbar--sub .nav li.active:hover a {
         border-color: {{ btnPrimary }};
@@ -313,6 +322,10 @@
     }
     {% endif %}
 
+    .appendices__item h4 {
+        color: {{ mainText }}
+    }
+
     {% if null != capco_site_image_media('image.header') and app.request.attributes.get('_route') == 'app_homepage' %}
 
         .jumbotron--bg-1{
@@ -416,6 +429,12 @@
     .navbar-default .navbar-toggle:focus {
         color: {{ menuTextHover }};
         background-color: {{ menuBgHover }};
+    }
+
+    .navbar-default .btn--connection {
+        background-color: {{ menuText }};
+        color: {{ menuBg }};
+        border-color: {{ menuBg }};
     }
 
 

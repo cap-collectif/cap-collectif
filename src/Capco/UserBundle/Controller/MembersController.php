@@ -56,6 +56,7 @@ class MembersController extends Controller
         }
 
         $pagination = $this->get('capco.site_parameter.resolver')->getValue('members.pagination.size');
+        $pagination = is_numeric($pagination) ? (int) $pagination : 0;
 
         $sort = $sort === null ? 'activity' : $sort;
         $members = $em->getRepository('CapcoUserBundle:User')->getSearchResults($pagination, $page, $sort, $userType);

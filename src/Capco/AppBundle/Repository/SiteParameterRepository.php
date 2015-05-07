@@ -13,7 +13,7 @@ class SiteParameterRepository extends EntityRepository
     {
         return $this->_em->createQueryBuilder()
             ->from($this->getClassName(), 'p', 'p.keyname')
-            ->select('p.value', 'p.keyname', 'p.type')
+            ->select('p.value', 'p.keyname')
             ->andWhere('p.isEnabled = :enabled')
             ->setParameter('enabled', true)
             ->groupBy('p.keyname')
