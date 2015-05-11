@@ -424,3 +424,7 @@ div.embeddedContent {
     margin-bottom: 30px;
   }
 }
+
+.tooltip.top .tooltip-arrow {
+  top: auto !important;
+}
