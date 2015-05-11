@@ -37,6 +37,9 @@ class OpinionAdmin extends Admin
             ->add('isEnabled', null, array(
                 'label' => 'admin.fields.opinion.is_enabled',
             ))
+            ->add('pinned', null, array(
+                'label' => 'admin.fields.opinion.pinned_long',
+            ))
             ->add('isTrashed', null, array(
                 'label' => 'admin.fields.opinion.is_trashed',
             ))
@@ -84,6 +87,10 @@ class OpinionAdmin extends Admin
                 'editable' => true,
                 'label' => 'admin.fields.opinion.is_enabled',
             ))
+            ->add('pinned', null, array(
+                'editable' => true,
+                'label' => 'admin.fields.opinion.pinned',
+            ))
             ->add('isTrashed', null, array(
                 'editable' => true,
                 'label' => 'admin.fields.opinion.is_trashed',
@@ -125,6 +132,10 @@ class OpinionAdmin extends Admin
             ))
             ->add('isEnabled', null, array(
                 'label' => 'admin.fields.opinion.is_enabled',
+                'required' => false,
+            ))
+            ->add('pinned', null, array(
+                'label' => 'admin.fields.opinion.pinned_long',
                 'required' => false,
             ))
             ->add('isTrashed', null, array(
@@ -182,6 +193,9 @@ class OpinionAdmin extends Admin
             ))
             ->add('isEnabled', null, array(
                 'label' => 'admin.fields.opinion.is_enabled',
+            ))
+            ->add('pinned', null, array(
+                'label' => 'admin.fields.opinion.pinned_long',
             ))
             ->add('createdAt', null, array(
                 'label' => 'admin.fields.opinion.created_at',

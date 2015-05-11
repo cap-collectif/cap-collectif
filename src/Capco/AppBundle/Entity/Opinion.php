@@ -57,7 +57,7 @@ class Opinion
     /**
      * @var bool
      *
-     * @ORM\Column(name="is_enabled", type="boolean")
+     * @ORM\Column(name="enabled", type="boolean")
      */
     private $isEnabled = true;
 
@@ -77,7 +77,7 @@ class Opinion
     /**
      * @var bool
      *
-     * @ORM\Column(name="is_trashed", type="boolean")
+     * @ORM\Column(name="trashed", type="boolean")
      */
     private $isTrashed = false;
 
@@ -178,6 +178,13 @@ class Opinion
      * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\Reporting", mappedBy="Opinion", cascade={"persist", "remove"})
      */
     private $Reports;
+
+    /**
+     * @var bool
+     *
+     * @ORM\Column(name="pinned", type="boolean")
+     */
+    private $pinned = false;
 
     public function __construct()
     {
@@ -672,6 +679,22 @@ class Opinion
         $this->Reports->removeElement($report);
 
         return $this;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function isPinned()
+    {
+        return $this->pinned;
+    }
+
+    /**
+     * @param boolean $pinned
+     */
+    public function setPinned($pinned)
+    {
+        $this->pinned = $pinned;
     }
 
     // ******************************* Custom methods **************************************

@@ -171,15 +171,17 @@ class OpinionRepository extends EntityRepository
             ->andWhere('o.isTrashed = :notTrashed')
             ->setParameter('step', $step)
             ->setParameter('opinionType', $opinionType)
-            ->setParameter('notTrashed', false);
+            ->setParameter('notTrashed', false)
+            ->orderBy('o.pinned', 'DESC')
+        ;
 
         if (null != $opinionsSort) {
             if ($opinionsSort == 'date') {
-                $qb->orderBy('o.updatedAt', 'DESC');
+                $qb->addOrderBy('o.updatedAt', 'DESC');
             } elseif ($opinionsSort == 'votes') {
-                $qb->orderBy('vnb', 'DESC');
+                $qb->addOrderBy('vnb', 'DESC');
             } elseif ($opinionsSort == 'comments') {
-                $qb->orderBy('o.argumentsCount', 'DESC');
+                $qb->addOrderBy('o.argumentsCount', 'DESC');
             }
         }
 
@@ -213,6 +215,7 @@ class OpinionRepository extends EntityRepository
             ->setParameter('step', $step)
             ->setParameter('ot', $ot)
             ->setParameter('notTrashed', false)
+            ->orderBy('o.pinned', 'DESC')
             ->addOrderBy('vnb', 'DESC')
             ->setMaxResults($limit)
             ;
