@@ -56,8 +56,6 @@ admin.label.consultation_abstractstep: Étape d'une consultation
 # Messages
 admin:
   help:
-    step:
-      endAt: Si l'étape ne dure qu'une journée, ne renseignez pas de date de fin.
     consultation:
       consultation_type: Créez de nouveaux modèles dans la section "Types de consultation".
       closed_at: Si la consultation ne dure qu'une journée, renseignez la même date que pour la date de début.

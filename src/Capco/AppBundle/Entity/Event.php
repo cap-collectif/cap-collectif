@@ -4,7 +4,7 @@ namespace Capco\AppBundle\Entity;
 
 use Capco\AppBundle\Model\CommentableInterface;
 use Capco\AppBundle\Traits\CommentableTrait;
-use Capco\AppBundle\Traits\StartAndEndDatesTrait;
+use Capco\AppBundle\Traits\DateHelperTrait;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -21,7 +21,7 @@ use Doctrine\Common\Collections\ArrayCollection;
  */
 class Event implements CommentableInterface
 {
-    use StartAndEndDatesTrait;
+    use DateHelperTrait;
     use CommentableTrait;
 
     /**
@@ -78,6 +78,20 @@ class Event implements CommentableInterface
      * @ORM\Column(name="is_enabled", type="boolean")
      */
     private $isEnabled = true;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="start_at", type="datetime")
+     */
+    private $startAt;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="end_at", type="datetime", nullable=true)
+     */
+    private $endAt = null;
 
     /**
      * @var int
@@ -570,6 +584,46 @@ class Event implements CommentableInterface
     }
 
     /**
+     * Get startAt.
+     *
+     * @return \DateTime
+     */
+    public function getStartAt()
+    {
+        return $this->startAt;
+    }
+
+    /**
+     * Set startAt.
+     *
+     * @param \DateTime $startAt
+     */
+    public function setStartAt($startAt)
+    {
+        $this->startAt = $startAt;
+    }
+
+    /**
+     * Get endAt.
+     *
+     * @return \DateTime
+     */
+    public function getEndAt()
+    {
+        return $this->endAt;
+    }
+
+    /**
+     * Set endAt.
+     *
+     * @param \DateTime $endAt
+     */
+    public function setEndAt($endAt)
+    {
+        $this->endAt = $endAt;
+    }
+
+    /**
      * @return string
      */
     public function getSlug()
@@ -635,6 +689,54 @@ class Event implements CommentableInterface
     public function canContribute()
     {
         return $this->isEnabled;
+    }
+
+    public function lastOneDay()
+    {
+        if ($this->endAt == null) {
+            return true;
+        }
+
+        return $this->isSameDate($this->startAt, $this->endAt);
+    }
+
+    public function getStartYear()
+    {
+        return $this->getYear($this->startAt);
+    }
+
+    public function getStartMonth()
+    {
+        return $this->getMonth($this->startAt);
+    }
+
+    public function isOpen()
+    {
+        $now = new \DateTime();
+
+        if ($this->endAt === null) {
+            return $this->startAt < $now && $this->isSameDate($this->startAt, $now);
+        }
+
+        return $this->startAt < $now && $this->endAt > $now;
+    }
+
+    public function isClosed()
+    {
+        $now = new \DateTime();
+
+        if ($this->endAt === null) {
+            return $this->extractDate($this->startAt) < $this->extractDate($now);
+        }
+
+        return $this->endAt < $now;
+    }
+
+    public function isFuture()
+    {
+        $now = new \DateTime();
+
+        return $this->startAt > $now;
     }
 
     // ************************** Lifecycle **************************************
