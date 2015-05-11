@@ -461,6 +461,7 @@ capco:
     login_twitter: Inscription/Connexion avec Twitter
     shield_mode: Mode bouclier
     user_type: Types de profil utilisateur
+    members_list: Liste des membres
 
 action_enable: Activer
 action_disable: Désactiver
