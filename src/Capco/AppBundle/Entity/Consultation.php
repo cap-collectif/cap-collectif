@@ -499,26 +499,6 @@ class Consultation
 
     // ******************** Custom methods ******************************
 
-
-    /**
-     * @return mixed|null
-     */
-    public function getFirstStep()
-    {
-        if (!empty($this->steps)) {
-            $first = $this->steps[0];
-            foreach ($this->steps as $step) {
-                if ($step->getPosition() < $first->getPosition()) {
-                    $first = $step;
-                }
-            }
-
-            return $first->getStep();
-        }
-
-        return;
-    }
-
     /**
      * @return bool
      */
@@ -580,6 +560,24 @@ class Consultation
         return $count;
     }
 
+    /**
+     * @return mixed|null
+     */
+    public function getFirstStep()
+    {
+        $first = null;
+        if (!empty($this->steps)) {
+            $first = $this->steps[0];
+            foreach ($this->steps as $step) {
+                if ($step->getPosition() < $first->getPosition()) {
+                    $first = $step;
+                }
+            }
+        }
+
+        return $first !== null ? $first->getStep() : null;
+    }
+
     public function getCurrentStep()
     {
         foreach ($this->steps as $step) {
@@ -599,7 +597,7 @@ class Consultation
             }
         }
 
-        return;
+        return null;
     }
 
     public function getConsultationStepOpen()

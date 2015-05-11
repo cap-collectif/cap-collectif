@@ -292,8 +292,6 @@ admin:
       trashed_at: Mise à la corbeille
       argument_count: Arguments
       source_count: Sources
-      pinned: Épinglé
-      pinned_long: Épinglé en haut de la liste
     opinion_type:
       title: Titre
       short_name: Nom court

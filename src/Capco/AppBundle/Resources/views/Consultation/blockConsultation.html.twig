@@ -1,6 +1,6 @@
 <div class="col-xs-12  col-sm-6  col-md-4  col-lg-3">
     <div class="thumbnail  thumbnail--custom  block  block--bordered">
-        {% set link = consultation | capco_first_step_link | default('') %}
+        {% set link = ( consultation | capco_first_step_link ) | default('') %}
         {%  if consultation.Cover %}
             <a href="{{ link }}" alt="{{ consultation.title }}" {% if consultation.video %}class="play"{% endif %}>
                 {% thumbnail consultation.Cover, 'consultation' with {'title': consultation.Cover.name, 'alt': consultation.Cover.name, 'class': 'img-responsive'} %}

@@ -455,9 +455,6 @@ opinion:
       mitige: Mitigé
     none: Il n'y a pas encore de proposition.
     no_opinion_types: Aucun type d'opinion n'est défini.
-    pinned:
-      label: Épinglé
-      tooltip: Cette proposition a été épinglée par l'administrateur.
     trashed:
       label: Dans la corbeille
   create:
