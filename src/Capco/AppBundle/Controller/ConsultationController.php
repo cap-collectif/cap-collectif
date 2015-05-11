@@ -280,7 +280,6 @@ class ConsultationController extends Controller
     public function showPostsAction(Consultation $consultation, $page)
     {
         $pagination = $this->get('capco.site_parameter.resolver')->getValue('blog.pagination.size');
-        $pagination = is_numeric($pagination) ? (int) $pagination : 0;
 
         $posts = $this->get('capco.blog.post.repository')->getSearchResults(
             $pagination,
@@ -316,7 +315,6 @@ class ConsultationController extends Controller
     public function showContributorsAction(Consultation $consultation, $page)
     {
         $pagination = $this->get('capco.site_parameter.resolver')->getValue('contributors.pagination');
-        $pagination = is_numeric($pagination) ? (int) $pagination : 0;
 
         $contributors = $this->get('capco.contribution.resolver')->getConsultationContributorsOrdered($consultation);
 
@@ -401,7 +399,6 @@ class ConsultationController extends Controller
         }
 
         $pagination = $this->get('capco.site_parameter.resolver')->getValue('consultations.pagination');
-        $pagination = is_numeric($pagination) ? (int) $pagination : 0;
 
         $consultations = $em->getRepository('CapcoAppBundle:Consultation')->getSearchResults($pagination, $page, $theme, $sort, $term);
 

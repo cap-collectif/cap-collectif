@@ -51,11 +51,6 @@ class ThemeController extends Controller
         }
 
         $pagination = $this->get('capco.site_parameter.resolver')->getValue('themes.pagination');
-        if (!is_numeric($pagination)) {
-            $pagination = 0;
-        } else {
-            $pagination = (int) $pagination;
-        }
 
         $themes = $em->getRepository('CapcoAppBundle:Theme')->getSearchResultsWithConsultationsAndIdeas($pagination, $page, $term);
 
