@@ -41,7 +41,7 @@
                     <div class="opinion  opinion--{{ opinion.opinionType.color }}  opinion--current">
                         <div class="opinion__header  opinion__header--centered">
                             <a class="neutral-hover  pull-left  h4  opinion__header__back" href="{% if opinion.isTrashed %}{{ path('app_consultation_show_trashed', {'consultationSlug': consultation.slug, 'stepSlug': currentStep.slug}) }}{% else %}{{ path('app_consultation_show_opinions', {'consultationSlug': consultation.slug, 'stepSlug': currentStep.slug, 'opinionTypeSlug': opinionType.slug}) }}{% endif %}"><i class="cap cap-arrow-1"></i><span class="hidden-xs  hidden-sm"> {{ 'opinion.show.back'|trans({}, 'CapcoAppBundle') }}</span></a>
-                            <h2 class="h4  opinion__header__title">{{ opinion.opinionType.shortName|capitalize }} </h2>
+                            <h2 class="h4  opinion__header__title">{{ opinion.opinionType.slug|capitalize }} </h2>
                         </div>
                         {% include 'CapcoAppBundle:Opinion:opinion_body.html.twig' %}
                     </div>

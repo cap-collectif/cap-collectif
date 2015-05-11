@@ -143,6 +143,7 @@ class HomepageController extends Controller
 
         return [
             'consultations' => $consultations,
+            'statuses' => Consultation::$openingStatuses,
             'section' => $section,
             'alt' => $alt,
         ];

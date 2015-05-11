@@ -13,6 +13,7 @@
       overflow: hidden;
       border-top: 1px solid $border-color;
       width: 100%;
+      position: relative;
 
       &:first-child {
         border-top: none;
@@ -34,28 +35,28 @@
     font-size: 25px;
     color: $brand-primary;
     float: left;
-    padding-top: 20px;
+    padding-bottom: 0;
   }
 
   .navbar__step-title {
     margin-bottom: 5px;
+    margin-top: 8px;
     padding-top: 0;
     color: $black;
     font-size: 16px;
   }
 
   .navbar__step {
-    margin-left: 30px;
-
-    p, .navbar__step-title {
-      margin-top: 0;
-    }
+    margin-left: 25px;
 
     p.excerpt {
       margin-bottom: 5px;
-      line-height: 18px;
     }
   }
+}
+
+.navbar--sub.navbar--no-nb .navbar__step-title {
+  margin-top: 0;
 }
 
 @media (min-width: $screen-sm-min) and (max-width: $screen-sm-max) {
@@ -63,6 +64,10 @@
 
     .navbar__step-nb {
       float: none;
+    }
+
+    .navbar__step-title {
+      margin-top: 0;
     }
 
     .navbar__step-nb {

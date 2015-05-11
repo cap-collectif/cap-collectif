@@ -44,6 +44,7 @@ class StepAdmin extends Admin
                 'attr' => array(
                     'data-date-format' => 'DD/MM/YYYY HH:mm',
                 ),
+                'required' => false,
             ))
             ->add('endAt', 'sonata_type_datetime_picker', array(
                 'label' => 'admin.fields.step.end_at',
@@ -51,7 +52,6 @@ class StepAdmin extends Admin
                 'attr' => array(
                     'data-date-format' => 'DD/MM/YYYY HH:mm',
                 ),
-                'help' => 'admin.help.step.endAt',
                 'required' => false,
             ))
         ;

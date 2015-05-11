@@ -1,10 +1,11 @@
-{% if consultations|length > 0 %}
-    <div class="row">
-        {% for consultation in consultations %}
-            {% include '@CapcoApp/Consultation/blockConsultation.html.twig' with {'consultation': consultation} only %}
-        {% endfor %}
-    </div>
-    <a href="{{ path('app_consultation') }}" class="btn  btn-primary  btn--outline">{{ 'consultation.see_all'|trans({}, 'CapcoAppBundle') }}</a>
+{% if consultationSteps|length > 0 %}
+	<div class="row">
+	    {% for step in consultationSteps %}
+			{% set consultation = step.consultation %}
+	        {% include '@CapcoApp/Consultation/blockConsultation.html.twig' with {'consultation': consultation} only %}
+	    {% endfor %}
+	</div>
+	<a href="{{ path('app_consultation') }}" class="btn  btn-primary  btn--outline">{{ 'consultation.see_all'|trans({}, 'CapcoAppBundle') }}</a>
 {% else %}
-    <p>{{ 'consultation.none'|trans({}, 'CapcoAppBundle') }}</p>
+	<p>{{ 'consultation.none'|trans({}, 'CapcoAppBundle') }}</p>
 {% endif %}
