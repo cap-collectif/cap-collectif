@@ -34,17 +34,10 @@ class ConsultationController extends Controller
      */
     public function lastConsultationsAction($max = 4, $offset = 0)
     {
-        $consultationSteps = $this->getDoctrine()->getRepository('CapcoAppBundle:AbstractStep')->getLastOpen($max, $offset);
-        if (empty($consultationSteps)) {
-            $consultationSteps = $this->getDoctrine()->getRepository('CapcoAppBundle:AbstractStep')->getLastFuture($max, $offset);
-        }
-        if (empty($consultationSteps)) {
-            $consultationSteps = $this->getDoctrine()->getRepository('CapcoAppBundle:AbstractStep')->getLastClosed($max, $offset);
-        }
+        $consultations = $this->getDoctrine()->getRepository('CapcoAppBundle:Consultation')->getLastPublished($max, $offset);
 
         return [
-            'consultationSteps' => $consultationSteps,
-            'statuses' => Consultation::$openingStatuses,
+            'consultations' => $consultations,
         ];
     }
 

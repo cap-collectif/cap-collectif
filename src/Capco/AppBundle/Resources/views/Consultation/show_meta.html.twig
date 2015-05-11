@@ -14,11 +14,9 @@
                             <p class="excerpt small">
                                 {% include 'CapcoAppBundle:Default:print_date.html.twig' with {'object': step} only %}
                             </p>
-                            {% if step.openingStatus is not null %}
-                                <p class="label label-default">
-                                    {{ stepStatus[step.openingStatus] | trans({}, 'CapcoAppBundle') }}
-                                </p>
-                            {% endif %}
+                            <p class="label label-default">
+                                {{ stepStatus[step.openingStatus] | trans({}, 'CapcoAppBundle') }}
+                            </p>
                         </div>
                     </a>
                 </li>
@@ -34,7 +32,7 @@
 {% if hasPosts or hasEvents or hasContributors %}
     <div>
         <h2 class="h5 excerpt">{{ 'consultation.show.meta.info.title'|trans({}, 'CapcoAppBundle') | upper }}</h2>
-        <div class="navbar--sub  navbar--no-nb">
+        <div class="navbar--sub">
             <ul class="nav">
                 {% if hasContributors %}
                     <li {% if currentStep == 'contributors_step' %} class="active" {% endif %}>

@@ -2,7 +2,7 @@
 
 namespace Capco\AppBundle\Entity;
 
-use Capco\AppBundle\Traits\DateHelperTrait;
+use Capco\AppBundle\Traits\StartAndEndDatesTrait;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -24,8 +24,7 @@ use Capco\AppBundle\Validator\Constraints as CapcoAssert;
  */
 abstract class AbstractStep
 {
-
-    use DateHelperTrait;
+    use StartAndEndDatesTrait;
 
     public static $stepStatus = [
         'closed' => 'step.status.closed',
@@ -68,20 +67,6 @@ abstract class AbstractStep
      * @ORM\Column(name="is_enabled", type="boolean")
      */
     private $isEnabled = true;
-
-    /**
-     * @var \DateTime
-     *
-     * @ORM\Column(name="start_at", type="datetime", nullable=true)
-     */
-    private $startAt = null;
-
-    /**
-     * @var \DateTime
-     *
-     * @ORM\Column(name="end_at", type="datetime", nullable=true)
-     */
-    private $endAt = null;
 
     /**
      * Needed by sonata admin.
@@ -211,46 +196,6 @@ abstract class AbstractStep
     }
 
     /**
-     * Get startAt.
-     *
-     * @return \DateTime
-     */
-    public function getStartAt()
-    {
-        return $this->startAt;
-    }
-
-    /**
-     * Set startAt.
-     *
-     * @param \DateTime $startAt
-     */
-    public function setStartAt($startAt)
-    {
-        $this->startAt = $startAt;
-    }
-
-    /**
-     * Get endAt.
-     *
-     * @return \DateTime
-     */
-    public function getEndAt()
-    {
-        return $this->endAt;
-    }
-
-    /**
-     * Set endAt.
-     *
-     * @param \DateTime $endAt
-     */
-    public function setEndAt($endAt)
-    {
-        $this->endAt = $endAt;
-    }
-
-    /**
      * @return mixed
      */
     public function getConsultationAbstractStep()
@@ -350,71 +295,5 @@ abstract class AbstractStep
     public function isOtherStep()
     {
         return false;
-    }
-
-    public function getRemainingDays()
-    {
-        $now = new \DateTime();
-        if ($this->isOpen()) {
-            if (null != $this->endAt) {
-                return $this->endAt->diff($now)->format('%a');
-            }
-
-            return null != $this->startAt ? $this->startAt->diff($now)->format('%a') : null;
-        }
-
-        return;
-    }
-
-    public function lastOneDay()
-    {
-        if ($this->endAt != null && $this->startAt != null) {
-            return $this->isSameDate($this->startAt, $this->endAt);
-        }
-
-        return false;
-    }
-
-    public function isOpen()
-    {
-        $now = new \DateTime();
-
-        if ($this->startAt != null && $this->endAt != null) {
-            return $this->startAt < $now && $this->endAt > $now;
-        }
-
-        return false;
-    }
-
-    public function isClosed()
-    {
-        $now = new \DateTime();
-
-        return $this->endAt != null ? $this->endAt < $now : false;
-    }
-
-    public function isFuture()
-    {
-        $now = new \DateTime();
-
-        return $this->startAt != null ? $this->startAt > $now : false;
-    }
-
-    /**
-     * @return int|null
-     */
-    public function getOpeningStatus()
-    {
-        if ($this->isFuture()) {
-            return 'future';
-        }
-        if ($this->isClosed()) {
-            return 'closed';
-        }
-        if ($this->isOpen()) {
-            return 'open';
-        }
-
-        return null;
     }
 }
