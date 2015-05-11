@@ -14,12 +14,14 @@ class Version20150427184111 extends AbstractMigration
     protected $types;
     protected $consultationAbstractSteps;
     protected $consultationTypeOpinionTypes;
+    protected $opinions;
 
     public function preUp(Schema $schema)
     {
         $this->steps = $this->connection->fetchAll('SELECT * FROM step');
         $this->types = $this->connection->fetchAll('SELECT * FROM consultation_types');
         $this->consultationTypeOpinionTypes = $this->connection->fetchAll('SELECT * FROM consultation_type_types');
+        $this->opinions = $this->connection->fetchAll('SELECT * FROM opinion');
 
         foreach ($this->steps as &$step) {
             switch ($step['type']) {
@@ -34,6 +36,14 @@ class Version20150427184111 extends AbstractMigration
             foreach ($this->steps as &$step) {
                 if ($step['consultation_id'] === $type['consultation_id'] && $step['step_type'] === 'consultation') {
                     $type['step_id'] = $step['id'];
+                }
+            }
+        }
+
+        foreach ($this->opinions as &$opinion) {
+            foreach ($this->steps as &$step) {
+                if ($step['consultation_id'] === $opinion['Consultation_id'] && $step['step_type'] === 'consultation') {
+                    $opinion['step_id'] = $step['id'];
                 }
             }
         }
@@ -60,7 +70,8 @@ class Version20150427184111 extends AbstractMigration
         $this->addSql('DROP TABLE consultation_types');
         $this->addSql('ALTER TABLE opinion DROP FOREIGN KEY FK_AB02B027EA3A5241');
         $this->addSql('DROP INDEX IDX_AB02B027EA3A5241 ON opinion');
-        $this->addSql('ALTER TABLE opinion CHANGE consultation_id step_id INT DEFAULT NULL');
+        $this->addSql('ALTER TABLE opinion DROP consultation_id');
+        $this->addSql('ALTER TABLE opinion ADD step_id INT DEFAULT NULL');
         $this->addSql('ALTER TABLE opinion ADD CONSTRAINT FK_AB02B02773B21E9C FOREIGN KEY (step_id) REFERENCES step (id)');
         $this->addSql('CREATE INDEX IDX_AB02B02773B21E9C ON opinion (step_id)');
         $this->addSql('ALTER TABLE step DROP FOREIGN KEY FK_43B9FE3C62FF6CDF');
@@ -96,6 +107,21 @@ class Version20150427184111 extends AbstractMigration
             }
         }
 
+        foreach ($this->opinions as $opinion) {
+            if (isset($opinion['step_id'])) {
+                $this->connection->update('opinion', [
+                    'step_id' => $opinion['step_id'],
+                    ],[
+                        'id' => $opinion['id'],
+                    ]
+                );
+            } else {
+                $this->connection->delete('opinion', [
+                    'id' => $opinion['id'],
+                ]);
+            }
+        }
+
         foreach ($this->consultationTypeOpinionTypes as $ctot) {
             $this->connection->insert('consultationtype_opiniontypes', array(
                 'consultationtype_id' => $ctot['consultationtype_id'],
@@ -110,6 +136,7 @@ class Version20150427184111 extends AbstractMigration
         $this->consultationAbstractSteps = $this->connection->fetchAll('SELECT * FROM consultation_abstractstep');
         $this->types = $this->connection->fetchAll('SELECT * FROM consultationstep_opiniontypes');
         $this->consultationTypeOpinionTypes = $this->connection->fetchAll('SELECT * FROM consultationtype_opiniontypes');
+        $this->opinions = $this->connection->fetchAll('SELECT * FROM opinion');
 
         foreach ($this->steps as &$step) {
             switch ($step['step_type']) {
@@ -136,6 +163,14 @@ class Version20150427184111 extends AbstractMigration
                 }
             }
         }
+
+        foreach ($this->opinions as &$opinion) {
+            foreach ($this->steps as &$step) {
+                if ($step['id'] === $opinion['step_id']) {
+                    $opinion['Consultation_id'] = $step['consultation_id'];
+                }
+            }
+        }
     }
 
     /**
@@ -158,7 +193,8 @@ class Version20150427184111 extends AbstractMigration
         $this->addSql('ALTER TABLE consultation ADD opinion_count INT NOT NULL, ADD trashed_opinion_count INT NOT NULL, ADD argument_count INT NOT NULL, ADD trashed_argument_count INT NOT NULL, ADD sources_count INT NOT NULL, ADD trashed_sources_count INT NOT NULL');
         $this->addSql('ALTER TABLE opinion DROP FOREIGN KEY FK_AB02B02773B21E9C');
         $this->addSql('DROP INDEX IDX_AB02B02773B21E9C ON opinion');
-        $this->addSql('ALTER TABLE opinion CHANGE step_id Consultation_id INT DEFAULT NULL');
+        $this->addSql('ALTER TABLE opinion DROP step_id');
+        $this->addSql('ALTER TABLE opinion ADD Consultation_id INT DEFAULT NULL');
         $this->addSql('ALTER TABLE opinion ADD CONSTRAINT FK_AB02B027EA3A5241 FOREIGN KEY (Consultation_id) REFERENCES consultation (id)');
         $this->addSql('CREATE INDEX IDX_AB02B027EA3A5241 ON opinion (Consultation_id)');
         $this->addSql('ALTER TABLE step ADD consultation_id INT DEFAULT NULL, ADD position INT NOT NULL, ADD type INT NOT NULL, DROP step_type, DROP opinion_count, DROP trashed_opinion_count, DROP argument_count, DROP trashed_argument_count, DROP sources_count, DROP trashed_sources_count');
@@ -185,6 +221,14 @@ class Version20150427184111 extends AbstractMigration
             $this->connection->insert('consultation_types', [
                 'consultation_id' => $type['consultation_id'],
                 'opiniontype_id' => $type['opiniontype_id'],
+            ]);
+        }
+
+        foreach ($this->opinions as $opinion) {
+            $this->connection->update('opinion', [
+                'Consultation_id' => $opinion['Consultation_id'],
+            ], [
+                'id' => $opinion['id'],
             ]);
         }
 

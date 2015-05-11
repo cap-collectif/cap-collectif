@@ -47,7 +47,7 @@
         {% if is_feature_enabled('registration') %}
             <a href="{{ path('fos_user_registration_register') }}" class="btn  btn-primary  btn-brand  navbar-btn">{{ 'layout.register'|trans({}, 'FOSUserBundle') }}</a>
         {% endif %}
-        <a href="{{ path('fos_user_security_login') }}" class="btn  btn-darkest-gray  navbar-btn  btn--connection">{{ 'layout.login'|trans({}, 'FOSUserBundle') }}</a>
+        <a href="{{ path('fos_user_security_login') }}" class="btn  btn-darkest-gray  navbar-btn">{{ 'layout.login'|trans({}, 'FOSUserBundle') }}</a>
     </div>
     {% endif %}
 </div>
