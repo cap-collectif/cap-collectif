@@ -127,6 +127,7 @@ Capco\AppBundle\Entity\MenuItem:
     isEnabled: 1
     isDeletable: 0
     isFullyModifiable: 0
+    associatedFeatures: [members_list]
     position: 2
     menu: @menu1
     parent: @MenuItem5
