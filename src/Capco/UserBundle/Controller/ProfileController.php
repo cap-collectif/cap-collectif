@@ -110,7 +110,7 @@ class ProfileController extends BaseController
     }
 
     /**
-     * @Route("/{slug}/ideas", name="capco_user_profile_show_ideas")
+     * @Route("/{slug}/ideas", name="capco_user_profile_show_ideas", defaults={"_feature_flag" = "ideas"})
      *
      * @param User $user
      *
