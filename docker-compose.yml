@@ -1,5 +1,5 @@
-web:
-    build: infrastructure/services/web
+application:
+    build: infrastructure/services/application
     volumes:
         - .:/var/www
     ports:
