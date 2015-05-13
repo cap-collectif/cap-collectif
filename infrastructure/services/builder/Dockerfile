@@ -23,7 +23,7 @@ RUN apt-get update && \
 
 # Update npm - Install gulp / bower
 RUN npm install -g npm && \
-    npm install -g bower
+    npm install -g bower brunch
 
 # Install fake user 1000
 RUN addgroup --gid=1000 capco && \

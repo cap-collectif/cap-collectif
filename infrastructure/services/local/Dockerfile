@@ -22,22 +22,9 @@ RUN apt-get update && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-# BEGIN BUILDER
-# Update npm - Install gulp / bower
-RUN npm install -g npm && \
-    npm install -g bower
-
-# Install composer / drush
-RUN wget https://getcomposer.org/composer.phar -O- -q >> /usr/local/bin/composer && \
-    chmod +x /usr/local/bin/composer
-
-# / END BUILDER
-
 # Install fake user 1000
 RUN addgroup --gid=1000 capco && \
     adduser --system --uid=1000 --home /home/capco --shell /bin/bash capco
-
-ENV PATH $PATH:/home/capco/.composer/vendor/bin/
 
 # Service
 COPY mysql/run             /etc/service/mysql/run
@@ -51,11 +38,12 @@ COPY php-fpm/fpm.conf      /etc/service/php-fpm/fpm.conf
 COPY php-fpm/capco.ini     /etc/php5/fpm/conf.d/capco.ini
 COPY php-fpm/capco.ini     /etc/php5/cli/conf.d/capco.ini
 
-COPY run.sh                /run.sh
 COPY entrypoint.sh         /entrypoint.sh
 RUN chmod 755 /*.sh
 
 USER capco
+
+VOLUME /var/www/web/media
 
 WORKDIR /var/www
 ENTRYPOINT ["/entrypoint.sh"]
@@ -63,4 +51,4 @@ ENTRYPOINT ["/entrypoint.sh"]
 USER root
 
 # Default command
-CMD ["/run.sh"]
+CMD ["/usr/bin/runsvdir", "-P", "/etc/service"]

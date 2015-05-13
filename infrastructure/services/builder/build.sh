@@ -2,9 +2,10 @@
 
 # Composer install for worker
 cd /capco/
-SYMFONY_ENV=prod composer install --no-dev --prefer-dist --no-interaction --optimize-autoloader --no-scripts
+composer install --prefer-dist --no-interaction --no-scripts
+php vendor/sensio/distribution-bundle/Sensio/Bundle/DistributionBundle/Resources/bin/build_bootstrap.php
 
 # Brunch generation / Bower
 npm install
-bower install
-node_modules/brunch/bin/brunch build --production
+bower install --config.interactive=false
+brunch build

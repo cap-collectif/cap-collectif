@@ -1,5 +1,5 @@
 imports:
-    - { resource: parameters.yml }
+    - { resource: parameters.php }
     - { resource: security.yml }
     - { resource: sonata.yml }
     - { resource: liip_imagine.yml }
@@ -23,6 +23,7 @@ framework:
     trusted_proxies: ['127.0.0.1']
     session:
         handler_id: null
+        # cookie_secure: true
     fragments: null
     http_method_override: true
     translator: { fallback: fr }

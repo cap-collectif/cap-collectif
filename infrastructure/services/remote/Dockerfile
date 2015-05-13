@@ -32,6 +32,7 @@ RUN wget https://getcomposer.org/composer.phar -O- -q >> /usr/local/bin/composer
     chmod +x /usr/local/bin/composer
 
 COPY build.sh /usr/local/bin/capcobuild
+RUN chmod +x /usr/local/bin/capcobuild
 # / END BUILDER
 
 # Install fake user 1000
@@ -66,13 +67,11 @@ USER capco
 
 # Retrieve project
 COPY VERSION /VERSION
-RUN cd /var/www ; git clone -b infra-test --single-branch --depth 1 git@github.com:jolicode/CapCollectif-SF2.git .
+RUN cd /var/www ; git clone -b develop --single-branch --depth 1 git@github.com:jolicode/CapCollectif-SF2.git .
 RUN cd /var/www && /usr/local/bin/capcobuild
 
 WORKDIR /var/www
 ENTRYPOINT ["/entrypoint.sh"]
-
-RUN cp /var/www/app/config/parameters.yml.dist /var/www/app/config/parameters.yml
 
 USER root
 
