@@ -29,6 +29,9 @@
     },
     "ckeditor": {
       "main": "ckeditor.js"
+    },
+    "readmore": {
+      "main": "readmore.js"
     }
   }
 }
