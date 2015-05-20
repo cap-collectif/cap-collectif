@@ -1,6 +1,6 @@
 <?php
 
-namespace Capco\AppBundle\Controller;
+namespace Capco\AppBundle\Controller\Site;
 
 use Capco\AppBundle\Entity\Page;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;

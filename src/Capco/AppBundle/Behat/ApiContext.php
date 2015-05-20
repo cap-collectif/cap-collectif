@@ -62,6 +62,7 @@ class ApiContext extends ApplicationContext
      */
     public function iSendARequest($method, $url)
     {
+        $url = '/app_test.php'.$url;
         $request = $this->client->createRequest($method, $url, [
             'headers' => [
                 'Authorization' => sprintf('Bearer %s', $this->token),
@@ -83,6 +84,7 @@ class ApiContext extends ApplicationContext
      */
     public function iSendARequestWithValues($method, $url, TableNode $table)
     {
+        $url = '/app_test.php'.$url;
         $request = $this->client->createRequest($method, $url, [
             'body' => $table->getHash(),
             'exceptions' => false,
@@ -102,6 +104,7 @@ class ApiContext extends ApplicationContext
      */
     public function iSendARequestWithJson($method, $url, PyStringNode $string)
     {
+        $url = '/app_test.php'.$url;
         $request = $this->client->createRequest($method, $url, [
             'body' => $string->getRaw(),
             'exceptions' => false,
@@ -118,9 +121,9 @@ class ApiContext extends ApplicationContext
      *
      * @param string $code status code
      *
-     * @Then /^(?:the )?response status code should be (\d+)$/
+     * @Then /^(?:the )?JSON response status code should be (\d+)$/
      */
-    public function theResponseStatusCodeShouldBe($code)
+    public function theJsonResponseStatusCodeShouldBe($code)
     {
         \PHPUnit_Framework_Assert::assertSame(
             intval($code),
@@ -137,5 +140,16 @@ class ApiContext extends ApplicationContext
         $this->response->json(); // check if json
         $body = (string) $this->response->getBody();
         \PHPUnit_Framework_Assert::assertTrue(match($body, $pattern->getRaw()), $body);
+    }
+
+    /**
+     * I try to get random synthesis
+     *
+     * @When /^(?:I )?try to get random synthesis$/
+     */
+    public function itryToGetRandomSynthesis()
+    {
+        $synthesis = $this->getEntityManager()->getRepository('CapcoAppBundle:Synthesis\Synthesis')->findAll()[0];
+        $this->iSendARequest('GET', '/api/syntheses/'.$synthesis->getId());
     }
 }

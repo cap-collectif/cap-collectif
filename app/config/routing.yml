@@ -3,8 +3,13 @@ capco_admin:
     type:     annotation
     prefix:   /
 
+capco_api:
+  resource: "@CapcoAppBundle/Controller/Api/SynthesisController.php"
+  type: rest
+  prefix: /api
+
 capco_app:
-    resource: "@CapcoAppBundle/Controller/"
+    resource: "@CapcoAppBundle/Controller/Site"
     type:     annotation
     prefix:   /
 
@@ -12,11 +17,6 @@ capco_user:
     resource: "@CapcoUserBundle/Controller/"
     type: annotation
     prefix: /
-
-capco_api:
-  resource: "@CapcoAppBundle/Controller/Api/"
-  type: annotation
-  prefix: /
 
 # sonata admin...
 admin:

@@ -27,6 +27,12 @@ class Synthesis
     private $id;
 
     /**
+     * @ORM\Column(name="enabled", type="boolean")
+     * @Expose
+     */
+    private $enabled = false;
+
+    /**
      * @var
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\ConsultationStep")
      * @ORM\JoinColumn(name="consultation_step_id", referencedColumnName="id", nullable=true, onDelete="SET NULL")
@@ -49,6 +55,22 @@ class Synthesis
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function isEnabled()
+    {
+        return $this->enabled;
+    }
+
+    /**
+     * @param mixed $enabled
+     */
+    public function setEnabled($enabled)
+    {
+        $this->enabled = $enabled;
     }
 
     /**

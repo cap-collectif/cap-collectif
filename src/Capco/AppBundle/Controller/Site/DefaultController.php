@@ -1,6 +1,6 @@
 <?php
 
-namespace Capco\AppBundle\Controller;
+namespace Capco\AppBundle\Controller\Site;
 
 use Capco\AppBundle\Form\ContactType;
 use Capco\AppBundle\Entity\Menu;
