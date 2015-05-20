@@ -14,7 +14,7 @@ application:
 applicationdata:
     build: infrastructure/services/applicationdata
     volumes:
-        - applicationdatatest:/var/www/web/media
+        - mediadata:/var/www/web/media
     command: echo "I'm a data container"
 
 builder:

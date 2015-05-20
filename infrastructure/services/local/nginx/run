@@ -18,7 +18,7 @@ fi
 touch /etc/nginx/environments
 
 # Grep for variables that look like docker set them (_PORT_)
-for _curVar in `env | grep MEDIAPART_ | awk -F = '{print $1}'`;do
+for _curVar in `env | grep SYMFONY_ | awk -F = '{print $1}'`;do
     set_env_variable ${_curVar} ${!_curVar}
 done
 
