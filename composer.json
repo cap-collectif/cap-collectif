@@ -55,7 +55,11 @@
         "tilleuls/ckeditor-sonata-media-bundle": "~2.3@dev",
         "egeloen/ckeditor-bundle": "~3.0@dev",
         "mewesk/twig-excel-bundle": "~1.0@dev",
-        "friendsofsymfony/elastica-bundle": "^3.2@dev"
+        "friendsofsymfony/elastica-bundle": "^3.2@dev",
+        "jms/serializer-bundle": "0.13.*@dev",
+        "nelmio/api-doc-bundle": "~2.9@dev",
+        "friendsofsymfony/rest-bundle": "1.5.*",
+        "guzzlehttp/guzzle": "~5.0@dev"
     },
     "require-dev": {
         "sensio/generator-bundle": "~2.3",

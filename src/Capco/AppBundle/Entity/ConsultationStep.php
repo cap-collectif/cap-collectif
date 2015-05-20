@@ -4,11 +4,15 @@ namespace Capco\AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
+use JMS\Serializer\Annotation as Serializer;
+use JMS\Serializer\Annotation\Expose;
+use JMS\Serializer\Annotation\Groups;
 
 /**
  * Class ConsultationStep.
  *
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\ConsultationStepRepository")
+ * @Serializer\ExclusionPolicy("all")
  */
 class ConsultationStep extends AbstractStep
 {
@@ -16,6 +20,8 @@ class ConsultationStep extends AbstractStep
      * @var int
      *
      * @ORM\Column(name="opinion_count", type="integer")
+     * @Expose
+     * @Groups({"Details"})
      */
     private $opinionCount = 0;
 
@@ -23,6 +29,8 @@ class ConsultationStep extends AbstractStep
      * @var int
      *
      * @ORM\Column(name="trashed_opinion_count", type="integer")
+     * @Expose
+     * @Groups({"Details"})
      */
     private $trashedOpinionCount = 0;
 
@@ -30,6 +38,8 @@ class ConsultationStep extends AbstractStep
      * @var int
      *
      * @ORM\Column(name="argument_count", type="integer")
+     * @Expose
+     * @Groups({"Details"})
      */
     private $argumentCount = 0;
 
@@ -37,6 +47,8 @@ class ConsultationStep extends AbstractStep
      * @var int
      *
      * @ORM\Column(name="trashed_argument_count", type="integer")
+     * @Expose
+     * @Groups({"Details"})
      */
     private $trashedArgumentCount = 0;
 
@@ -44,6 +56,8 @@ class ConsultationStep extends AbstractStep
      * @var int
      *
      * @ORM\Column(name="sources_count", type="integer")
+     * @Expose
+     * @Groups({"Details"})
      */
     private $sourcesCount = 0;
 
@@ -51,6 +65,8 @@ class ConsultationStep extends AbstractStep
      * @var int
      *
      * @ORM\Column(name="trashed_sources_count", type="integer")
+     * @Expose
+     * @Groups({"Details"})
      */
     private $trashedSourceCount = 0;
 

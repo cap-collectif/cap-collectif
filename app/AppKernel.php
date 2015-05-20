@@ -68,6 +68,10 @@ class AppKernel extends Kernel
 
             // Excel files generation
             new MewesK\TwigExcelBundle\MewesKTwigExcelBundle(),
+
+            // API
+            new \FOS\RestBundle\FOSRestBundle(),
+            new \Nelmio\ApiDocBundle\NelmioApiDocBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

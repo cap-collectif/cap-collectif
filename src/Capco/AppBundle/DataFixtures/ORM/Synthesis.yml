@@ -1,0 +1,3 @@
+Capco\AppBundle\Entity\Synthesis\Synthesis:
+    synthesis1:
+        consultationStep: @cstep1

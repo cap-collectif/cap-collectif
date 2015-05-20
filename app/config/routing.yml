@@ -13,6 +13,11 @@ capco_user:
     type: annotation
     prefix: /
 
+capco_api:
+  resource: "@CapcoAppBundle/Controller/Api/"
+  type: annotation
+  prefix: /
+
 # sonata admin...
 admin:
     resource: '@SonataAdminBundle/Resources/config/routing/sonata_admin.xml'
@@ -78,6 +83,11 @@ google_login:
 
 twitter_login:
     pattern: /login/check-twitter
+
+# nelmio doc
+NelmioApiDocBundle:
+    resource: "@NelmioApiDocBundle/Resources/config/routing.yml"
+    prefix: /api/doc
 
 # last...
 capco_app_cms:

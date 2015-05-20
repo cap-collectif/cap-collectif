@@ -32,3 +32,5 @@ parameters:
 
     shield_login: ***REMOVED***
     shield_pwd: q2Li"b"9Y'vmv
+
+    base.url: http://127.0.0.1:8000/
