@@ -8,7 +8,6 @@ dependencies:
             timeout: 3600
     pre:
         - echo "memory_limit = 2048M" > ~/.phpenv/versions/$(phpenv global)/etc/conf.d/memory.ini
-        - mv app/config/parameters.ci.yml app/config/parameters.yml
         - gem install bundler
         - bundle install --clean
         - mysql -u ubuntu -e "create database symfony_test"

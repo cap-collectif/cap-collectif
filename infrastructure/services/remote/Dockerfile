@@ -41,7 +41,7 @@ RUN addgroup --gid=1000 capco && \
 
 ENV PATH $PATH:/home/capco/.composer/vendor/bin/
 
-RUN rm -rf /var/www/html; cd /var/www ; chown -R capco:capco /var/www/
+RUN mkdir /var/www; cd /var/www ; chown -R capco:capco /var/www/
 RUN mv /var/lib/mysql /var/lib/mysql_save
 
 COPY entrypoint.sh         /entrypoint.sh
