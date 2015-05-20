@@ -11,7 +11,7 @@ dependencies:
         - mv app/config/parameters.ci.yml app/config/parameters.yml
         - gem install bundler
         - bundle install --clean
-        - mysql -u ubuntu -e "create database circle"
+        - mysql -u ubuntu -e "create database symfony_test"
     post:
         - wget http://selenium-release.storage.googleapis.com/2.44/selenium-server-standalone-2.44.0.jar
         - java -jar selenium-server-standalone-2.44.0.jar:
@@ -31,10 +31,30 @@ test:
     pre:
         - echo "memory_limit = 2048M" > ~/.phpenv/versions/$(phpenv global)/etc/conf.d/memory.ini
         - fab build
-        - app/console server:run:
+        - SYMFONY_ENV=test php app/console server:run --router=app/config/router_test.php:
             background: true
 
     override:
         - fab migrate_test_db
         - fab circleci lint:pr=$CI_PULL_REQUEST
         - fab test
+
+## WIP run tests with Docker
+
+# machine:
+#     services:
+#       - docker
+
+# dependencies:
+#     override:
+#         - sudo pip install -r requirements.txt
+#         - docker-compose build
+
+# test:
+#   override:
+#     - docker-compose up -d
+#     - sleep 400
+#     - docker-compose logs:
+#         background: true
+#     - docker-compose run application bin/phpspec run
+#     - docker-compose run --rm behat ./bin/behat

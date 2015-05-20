@@ -9,6 +9,9 @@
     </parameters>
 
     <services>
-        <service id="capco.predis.client" class="%capco.predis_client.class%" />
+        <service id="capco.predis.client" class="%capco.predis_client.class%">
+            <!-- <argument type="string">tcp://application:6379</argument> -->
+        </service>
+
     </services>
 </container>

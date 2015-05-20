@@ -1,0 +1,41 @@
+application:
+    build: infrastructure/services/local
+    volumes:
+        - .:/var/www
+    ports:
+        - "80:80"
+        - "6379:6379"
+    environment:
+        SYMFONY_ENV: dev
+    volumes_from:
+        - applicationdata
+        # - mariadbdata
+
+applicationdata:
+    build: infrastructure/services/applicationdata
+    volumes:
+        - mediadata:/var/www/web/media
+    command: echo "I'm a data container"
+
+builder:
+    build: infrastructure/services/builder
+    volumes:
+        - .:/capco
+
+behat:
+    build: infrastructure/services/behat
+    links:
+        - application:application
+        - seleniumhub:selenium
+    volumes:
+        - .:/var/www/html
+
+seleniumhub:
+    image: selenium/hub
+
+seleniumnode:
+    image: selenium/node-firefox
+    # image: selenium/node-chrome
+    links:
+        - seleniumhub:hub
+        - application:application
