@@ -2,16 +2,8 @@
 
 use Symfony\Component\ClassLoader\ApcClassLoader;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Debug\Debug;
-
-$env = getenv('SYMFONY_ENV') ?: 'prod';
-$debug = 'dev' === $env;
 
 $loader = require_once __DIR__.'/../app/bootstrap.php.cache';
-
-if ($debug) {
-    Debug::enable();
-}
 
 // Use APC for autoloading to improve performance.
 // Change 'sf2' to a unique prefix in order to prevent cache key conflicts
@@ -25,7 +17,7 @@ $apcLoader->register(true);
 require_once __DIR__.'/../app/AppKernel.php';
 //require_once __DIR__.'/../app/AppCache.php';
 
-$kernel = new AppKernel($env, $debug);
+$kernel = new AppKernel('prod', false);
 $kernel->loadClassCache();
 //$kernel = new AppCache($kernel);
 

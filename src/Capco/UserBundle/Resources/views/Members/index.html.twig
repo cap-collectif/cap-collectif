@@ -93,8 +93,8 @@
     {{ parent() }}
     <script type="text/javascript">
         $(window).on('load', function() {
-            App.module.equalheight('.thumbnail--custom');
-            window.onresize = App.module.resized('.thumbnail--custom');
+            App.module.equalheight('.media--user-thumbnail');
+            window.onresize = App.module.resized('.media--user-thumbnail');
         });
     </script>
 {% endblock %}
