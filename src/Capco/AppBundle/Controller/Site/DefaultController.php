@@ -14,7 +14,7 @@ class DefaultController extends Controller
 {
     /**
      * @Route("/contact", name="app_contact")
-     * @Template()
+     * @Template("CapcoAppBundle:Default:contact.html.twig")
      */
     public function contactAction(Request $request)
     {
@@ -57,7 +57,7 @@ class DefaultController extends Controller
 
     /**
      * @Route("/confidentialite", name="app_confidentialite")
-     * @Template()
+     * @Template("CapcoAppBundle:Default:confidentialite.html.twig")
      */
     public function confidentialiteAction(Request $request)
     {
@@ -66,7 +66,7 @@ class DefaultController extends Controller
 
     /**
      * @Cache(expires="+1 minutes", maxage="60", smaxage="0", public="false")
-     * @Template()
+     * @Template("CapcoAppBundle:Default:footer.html.twig")
      */
     public function footerAction($max = 4, $offset = 0)
     {
@@ -87,7 +87,7 @@ class DefaultController extends Controller
 
     /**
      * @Cache(expires="+1 minutes", maxage="60", smaxage="0", public="false")
-     * @Template()
+     * @Template("CapcoAppBundle:Default:navigation.html.twig")
      */
     public function navigationAction($pathInfo = null)
     {

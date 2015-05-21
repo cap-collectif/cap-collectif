@@ -16,7 +16,7 @@ class PageController extends Controller
     /**
      * @Route("/{slug}", name="app_page_show")
      * @ParamConverter("page", class="CapcoAppBundle:Page", options={"mapping": {"slug": "slug"}})
-     * @Template()
+     * @Template("CapcoAppBundle:Page:show.html.twig")
      *
      * @param Page $page
      *

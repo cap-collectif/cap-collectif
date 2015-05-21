@@ -19,6 +19,6 @@
                 <span class="navbar__toggle-label">{{ 'global.menu.title'|trans({}, 'CapcoAppBundle') }}</span>
             </button>
         </div>
-        {{ render(controller('CapcoAppBundle:Default:navigation', { pathInfo: app.request.pathInfo })) }}
+        {{ render(controller('CapcoAppBundle:Site/Default:navigation', { pathInfo: app.request.pathInfo })) }}
     </div>
 </nav>

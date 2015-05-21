@@ -43,13 +43,13 @@
 
     <div class="container  container--custom">
         <h2 class="h2">{{ 'theme.show.consultations.title'|trans({}, 'CapcoAppBundle') }}</h2>
-        {{ render(controller('CapcoAppBundle:Theme:lastConsultations', {'theme': theme})) }}
+        {{ render(controller('CapcoAppBundle:Site/Theme:lastConsultations', {'theme': theme})) }}
     </div>
 
     {% if is_feature_enabled('ideas') %}
         <div class="container  container--custom">
             <h2 class="h2">{{ 'theme.show.ideas.title'|trans({}, 'CapcoAppBundle') }} <a class="pull-right  btn  btn-primary" href="{{ path('app_idea_create') }}">{{ 'idea.create.button'|trans({}, 'CapcoAppBundle') }}</a></h2>
-            {{ render(controller('CapcoAppBundle:Theme:lastIdeas', {'theme': theme})) }}
+            {{ render(controller('CapcoAppBundle:Site/Theme:lastIdeas', {'theme': theme})) }}
         </div>
     {% endif %}
 

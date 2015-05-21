@@ -21,7 +21,7 @@ class EventController extends Controller
      * @Route("/events/filter/{theme}", name="app_event_search_theme", defaults={"_feature_flag" = "calendar", "theme" = "all"} )
      * @Route("/events/filter/{theme}/{consultation}", name="app_event_search_consultation", defaults={"_feature_flag" = "calendar", "theme" = "all", "consultation"="all"} )
      * @Route("/events/filter/{theme}/{consultation}/{term}", name="app_event_search_term", defaults={"_feature_flag" = "calendar", "theme" = "all", "consultation"="all"} )
-     * @Template()
+     * @Template("CapcoAppBundle:Event:index.html.twig")
      *
      * @param $request
      * @param $theme
@@ -125,7 +125,7 @@ class EventController extends Controller
     /**
      * @Route("/events/{slug}", name="app_event_show", defaults={"_feature_flag" = "calendar"})
      * @ParamConverter("event", options={"mapping": {"slug": "slug"}, "repository_method" = "getOne"})
-     * @Template()
+     * @Template("CapcoAppBundle:Event:show.html.twig")
      *
      * @param $request
      *
@@ -173,7 +173,7 @@ class EventController extends Controller
      * @param $offset
      *
      * @return array
-     * @Template()
+     * @Template("CapcoAppBundle:Event:lastEvents.html.twig")
      */
     public function lastEventsAction($max = 3, $offset = 0)
     {

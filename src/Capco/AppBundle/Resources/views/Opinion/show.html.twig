@@ -30,7 +30,7 @@
 
         <div class="row">
             <div class="col-xs-12  col-sm-4  col-md-3  block--mobile">
-                {{ render(controller('CapcoAppBundle:Consultation:showMeta', {'consultationSlug': consultation.slug, 'currentStepSlug': 'consultation_step'})) }}
+                {{ render(controller('CapcoAppBundle:Site/Consultation:showMeta', {'consultationSlug': consultation.slug, 'currentStepSlug': 'consultation_step'})) }}
             </div>
 
             {% set nbVotes = (opinion.getVoteCountAll) %}
@@ -140,7 +140,7 @@
                             {% set form = argumentFormYes %}
                             {% include '@CapcoApp/Argument/create.html.twig' %}
                         {% endif %}
-                        {{ render(controller('CapcoAppBundle:Argument:showArguments', {'consultation': consultation, 'step': currentStep, 'opinionType': opinionType, 'opinion': opinion, 'type': 1, 'form': sortArgumentsForm, 'argumentSort': argumentSort})) }}
+                        {{ render(controller('CapcoAppBundle:Site/Argument:showArguments', {'consultation': consultation, 'step': currentStep, 'opinionType': opinionType, 'opinion': opinion, 'type': 1, 'form': sortArgumentsForm, 'argumentSort': argumentSort})) }}
                     </div>
                     <div class="col-sm-12  col-md-6">
                         {% if opinion.canContribute %}
@@ -148,7 +148,7 @@
                             {% set form = argumentFormNo %}
                             {% include '@CapcoApp/Argument/create.html.twig' %}
                         {% endif %}
-                        {{ render(controller('CapcoAppBundle:Argument:showArguments', {'consultation': consultation, 'opinionType': opinionType, 'opinion': opinion, 'type': 0, 'form': sortArgumentsForm, 'argumentSort': argumentSort})) }}
+                        {{ render(controller('CapcoAppBundle:Site/Argument:showArguments', {'consultation': consultation, 'opinionType': opinionType, 'opinion': opinion, 'type': 0, 'form': sortArgumentsForm, 'argumentSort': argumentSort})) }}
                     </div>
                 </div>
             </div> <!-- col-xs-12  col-sm-4  col-md-3 -->

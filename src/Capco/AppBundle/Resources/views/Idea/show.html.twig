@@ -113,11 +113,11 @@
             {% if capco_comment_can_add(idea) or(capco_comment_can_show(idea) and idea.commentsCount > 0) %}
                 <div class="container  container--thinner container--custom">
                     {% if capco_comment_can_show(idea) and idea.commentsCount > 0 %}
-                        {{ render(controller('CapcoAppBundle:Comment:showComments', {'object': idea})) }}
+                        {{ render(controller('CapcoAppBundle:Site/Comment:showComments', {'object': idea})) }}
                     {% endif %}
 
                     {% if capco_comment_can_add(idea) %}
-                        {{ render(controller('CapcoAppBundle:Comment:create', {'objectId': idea.id, 'objectType': idea.className})) }}
+                        {{ render(controller('CapcoAppBundle:Site/Comment:create', {'objectId': idea.id, 'objectType': idea.className})) }}
                     {% endif %}
                 </div>
             {% endif %}

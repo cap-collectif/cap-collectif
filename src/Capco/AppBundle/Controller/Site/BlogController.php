@@ -17,7 +17,7 @@ class BlogController extends Controller
      * @Route("/blog/{page}", name="app_blog", requirements={"page" = "\d+"}, defaults={"_feature_flag" = "blog", "page" = 1} )
      * @Route("/blog/filter/{theme}/{page}", name="app_blog_search_theme", requirements={"page" = "\d+"}, defaults={"page" = 1, "theme" = "all", "_feature_flag" = "blog"} )
      * @Route("/blog/filter/{theme}/{consultation}/{page}", name="app_blog_search_consultation", requirements={"page" = "\d+"}, defaults={"page" = 1, "theme" = "all", "consultation" = "all", "_feature_flag" = "blog"} )
-     * @Template()
+     * @Template("CapcoAppBundle:Blog:index.html.twig")
      *
      * @param $request
      * @param $page
@@ -80,7 +80,7 @@ class BlogController extends Controller
 
     /**
      * @Route("/blog/{slug}", name="app_blog_show", defaults={"_feature_flag" = "blog"} )
-     * @Template()
+     * @Template("CapcoAppBundle:Blog:show.html.twig")
      *
      * @param $request
      *

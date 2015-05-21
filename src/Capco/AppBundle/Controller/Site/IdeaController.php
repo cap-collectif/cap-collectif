@@ -23,7 +23,7 @@ class IdeaController extends Controller
 {
     /**
      * @Route("/ideas/add", name="app_idea_create", defaults={"_feature_flag" = "ideas"})
-     * @Template()
+     * @Template("CapcoAppBundle:Idea:create.html.twig")
      *
      * @param $request
      *
@@ -63,7 +63,7 @@ class IdeaController extends Controller
 
     /**
      * @Route("/ideas/{slug}/delete", name="app_idea_delete", defaults={"_feature_flag" = "ideas"})
-     * @Template()
+     * @Template("CapcoAppBundle:Idea:delete.html.twig")
      *
      * @param $request
      * @param $idea
@@ -153,7 +153,7 @@ class IdeaController extends Controller
      * @param $offset
      *
      * @return array
-     * @Template()
+     * @Template("CapcoAppBundle:Idea:create.html.twig")
      */
     public function lastIdeasAction($max = 4, $offset = 0)
     {
@@ -164,7 +164,7 @@ class IdeaController extends Controller
 
     /**
      * @Route("/ideas/{slug}/edit", name="app_idea_update", defaults={"_feature_flag" = "ideas"})
-     * @Template()
+     * @Template("CapcoAppBundle:Idea:update.html.twig")
      *
      * @param $request
      * @param $idea
@@ -216,7 +216,7 @@ class IdeaController extends Controller
      * @Route("/ideas/{page}", name="app_idea", requirements={"page" = "\d+"}, defaults={"page" = 1, "_feature_flag" = "ideas"} )
      * @Route("/ideas/filter/{theme}/{sort}/{page}", name="app_idea_search", requirements={"page" = "\d+"}, defaults={"page" = 1, "theme" = "all", "sort" = "date", "_feature_flag" = "ideas"} )
      * @Route("/ideas/filter/{theme}/{sort}/{term}/{page}", name="app_idea_search_term", requirements={"page" = "\d+"}, defaults={"page" = 1, "theme" = "all", "sort" = "date", "_feature_flag" = "ideas"} )
-     * @Template()
+     * @Template("CapcoAppBundle:Idea:index.html.twig")
      *
      * @param $page
      * @param $request
@@ -279,7 +279,7 @@ class IdeaController extends Controller
 
     /**
      * @Route("/ideas/{slug}", name="app_idea_show", defaults={"_feature_flag" = "ideas"})
-     * @Template()
+     * @Template("CapcoAppBundle:Idea:show.html.twig")
      *
      * @param string  $slug
      * @param Request $request

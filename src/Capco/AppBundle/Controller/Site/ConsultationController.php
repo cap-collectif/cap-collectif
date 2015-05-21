@@ -45,7 +45,7 @@ class ConsultationController extends Controller
 
     /**
      * @Route("/consultations/{consultationSlug}/consultation/{stepSlug}", name="app_consultation_show")
-     * @Template()
+     * @Template("CapcoAppBundle:Consultation:show.html.twig")
      * @ParamConverter("consultation", class="CapcoAppBundle:Consultation", options={"mapping": {"consultationSlug": "slug"}, "method"="getOne"})
      * @ParamConverter("currentStep", class="CapcoAppBundle:ConsultationStep", options={"mapping": {"stepSlug": "slug"}, "method"="getOneWithAllowedTypes"})
      *
@@ -350,7 +350,7 @@ class ConsultationController extends Controller
      * @Route("/consultations/{page}", name="app_consultation", requirements={"page" = "\d+"}, defaults={"page" = 1} )
      * @Route("/consultations/{theme}/{sort}/{page}", name="app_consultation_search", requirements={"page" = "\d+"}, defaults={"page" = 1, "theme" = "all"} )
      * @Route("/consultations/{theme}/{sort}/{term}/{page}", name="app_consultation_search_term", requirements={"page" = "\d+"}, defaults={"page" = 1, "theme" = "all"} )
-     * @Template()
+     * @Template("CapcoAppBundle:Consultation:index.html.twig")
      *
      * @param $page
      * @param $request

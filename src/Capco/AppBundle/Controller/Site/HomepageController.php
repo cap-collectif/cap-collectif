@@ -15,7 +15,7 @@ class HomepageController extends Controller
 {
     /**
      * @Route("/", name="app_homepage")
-     * @Template()
+     * @Template("CapcoAppBundle:Homepage:homepage.html.twig")
      */
     public function homepageAction(Request $request)
     {
@@ -169,7 +169,7 @@ class HomepageController extends Controller
     }
 
     /**
-     * @Template()
+     * @Template("CapcoAppBundle:Homepage:socialNetworks.html.twig")
      */
     public function socialNetworksAction($section = null, $alt = null)
     {

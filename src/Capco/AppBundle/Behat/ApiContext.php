@@ -143,13 +143,70 @@ class ApiContext extends ApplicationContext
     }
 
     /**
-     * I try to get random synthesis
+     * I try to get first synthesis
      *
-     * @When /^(?:I )?try to get random synthesis$/
+     * @When /^(?:I )?try to get first synthesis$/
      */
-    public function itryToGetRandomSynthesis()
+    public function itryToGetFirstSynthesis()
     {
         $synthesis = $this->getEntityManager()->getRepository('CapcoAppBundle:Synthesis\Synthesis')->findAll()[0];
         $this->iSendARequest('GET', '/api/syntheses/'.$synthesis->getId());
+    }
+
+    /**
+     * I try to update first synthesis
+     *
+     * @When /^(?:I )?try to update first synthesis with json:$/
+     */
+    public function itryToUpdateFirstSynthesisWithJson(PyStringNode $string)
+    {
+        $synthesis = $this->getEntityManager()->getRepository('CapcoAppBundle:Synthesis\Synthesis')->findAll()[0];
+        $this->iSendARequestWithJson('PUT', '/api/syntheses/'.$synthesis->getId(), $string);
+    }
+
+    /**
+     * I try to get first synthesis elements
+     *
+     * @When /^(?:I )?try to get first synthesis elements$/
+     */
+    public function itryToGetFirstSynthesisElements()
+    {
+        $synthesis = $this->getEntityManager()->getRepository('CapcoAppBundle:Synthesis\Synthesis')->findAll()[0];
+        $this->iSendARequest('GET', '/api/syntheses/'.$synthesis->getId().'/elements');
+    }
+
+    /**
+     * I try to get first element of first synthesis
+     *
+     * @When /^(?:I )?try to get first element of first synthesis$/
+     */
+    public function itryToGetFirstElementOfFirstSynthesis()
+    {
+        $synthesis = $this->getEntityManager()->getRepository('CapcoAppBundle:Synthesis\Synthesis')->findAll()[0];
+        $element = $synthesis->getElements()[0];
+        $this->iSendARequest('GET', '/api/syntheses/'.$synthesis->getId().'/elements/'.$element->getId());
+    }
+
+    /**
+     * I try to update an element in first synthesis
+     *
+     * @When /^(?:I )?try to update an element in first synthesis with json:$/
+     */
+    public function itryToUpdateAnElementInFirstSynthesisWithJson(PyStringNode $string)
+    {
+        $synthesis = $this->getEntityManager()->getRepository('CapcoAppBundle:Synthesis\Synthesis')->findAll()[0];
+        $element = $synthesis->getElements()[0];
+        $this->iSendARequestWithJson('PUT', '/api/syntheses/'.$synthesis->getId().'/elements/'.$element->getId(), $string);
+    }
+
+    /**
+     * I try to create an element in first synthesis
+     *
+     * @When /^(?:I )?try to create an element in first synthesis with json:$/
+     */
+    public function itryToCreateAnElementInFirstSynthesisWithJson(PyStringNode $string)
+    {
+        $synthesis = $this->getEntityManager()->getRepository('CapcoAppBundle:Synthesis\Synthesis')->findAll()[0];
+        $this->iSendARequestWithJson('POST', '/api/syntheses/'.$synthesis->getId().'/elements', $string);
     }
 }

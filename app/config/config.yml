@@ -219,9 +219,12 @@ fos_rest:
             json: true
             xml: false
             rss: false
+        templating_formats:
+          html: true
     format_listener:
         rules:
-            - { path: '^/api', fallback_format: json }
+            - { path: ^/api, fallback_format: json }
+            - { path: ^/, stop: true }
     body_listener:
         throw_exception_on_unsupported_content_type: true
         decoders:

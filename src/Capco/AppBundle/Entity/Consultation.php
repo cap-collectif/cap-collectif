@@ -25,6 +25,7 @@ class Consultation
         'date' => self::SORT_ORDER_PUBLISHED_AT,
         'popularity' => self::SORT_ORDER_CONTRIBUTIONS_COUNT,
     ];
+
     public static $sortOrderLabels = [
         'date' => 'consultation.sort.published_at',
         'popularity' => 'consultation.sort.contributions_nb',
