@@ -29,7 +29,6 @@ Capco\AppBundle\Entity\Idea:
         createdAt: <(new \DateTime('2015-01-11'))>
         isTrashed: false
         Media: @MediaIdea2
-        commentsCount: 5
 
     Idea3:
         title: <text(38)>

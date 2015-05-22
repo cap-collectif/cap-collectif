@@ -9,6 +9,7 @@ application:
         SYMFONY_ENV: dev
     volumes_from:
         - applicationdata
+        - redisdata
 
 applicationdata:
     build: infrastructure/services/applicationdata
@@ -17,7 +18,7 @@ applicationdata:
     command: echo "I'm a data container"
 
 redisdata:
-    build: infrastructure/services/applicationdata
+    build: infrastructure/services/redisdata
     volumes:
         - redisdata:/data
     command: echo "I'm a data container"
