@@ -19,7 +19,7 @@ RUN apt-get update && \
     sed -i 's/^\(bind .*\)$/# \1/' /etc/redis/redis.conf && \
     sed -i 's/^\(daemonize .*\)$/# \1/' /etc/redis/redis.conf && \
     sed -i 's/^\(dir .*\)$/# \1\ndir \/data/' /etc/redis/redis.conf && \
-    sed -i 's/^\(logfile .*\)$/# \1/' /etc/redis/redis.conf
+    sed -i 's/^\(logfile .*\)$/# \1/' /etc/redis/redis.conf && \
 
     # Install node js and deps for npm install
     wget https://deb.nodesource.com/setup -O- -q | bash - && \
