@@ -15,6 +15,12 @@ RUN apt-get update && \
     apt-get update && \
     apt-get install -y -qq nginx php5-fpm php5-cli php5-curl php5-intl php5-mysqli php5-redis php5-xsl php5-gd mariadb-server redis-server && \
 
+    # Configure Redis
+    sed -i 's/^\(bind .*\)$/# \1/' /etc/redis/redis.conf && \
+    sed -i 's/^\(daemonize .*\)$/# \1/' /etc/redis/redis.conf && \
+    sed -i 's/^\(dir .*\)$/# \1\ndir \/data/' /etc/redis/redis.conf && \
+    sed -i 's/^\(logfile .*\)$/# \1/' /etc/redis/redis.conf
+
     # Install node js and deps for npm install
     wget https://deb.nodesource.com/setup -O- -q | bash - && \
     apt-get install -y nodejs npm && \
@@ -70,8 +76,11 @@ COPY VERSION /VERSION
 RUN cd /var/www ; git clone -b develop --single-branch --depth 1 git@github.com:jolicode/CapCollectif-SF2.git .
 RUN cd /var/www && /usr/local/bin/capcobuild
 
+
 WORKDIR /var/www
 ENTRYPOINT ["/entrypoint.sh"]
+
+VOLUME /data
 
 USER root
 

@@ -9,12 +9,17 @@ application:
         SYMFONY_ENV: dev
     volumes_from:
         - applicationdata
-        # - mariadbdata
 
 applicationdata:
     build: infrastructure/services/applicationdata
     volumes:
         - mediadata:/var/www/web/media
+    command: echo "I'm a data container"
+
+redisdata:
+    build: infrastructure/services/applicationdata
+    volumes:
+        - redisdata:/data
     command: echo "I'm a data container"
 
 builder:
