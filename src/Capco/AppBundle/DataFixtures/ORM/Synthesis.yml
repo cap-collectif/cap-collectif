@@ -1,3 +1,4 @@
 Capco\AppBundle\Entity\Synthesis\Synthesis:
     synthesis1:
         consultationStep: @cstep1
+        sourceType: consultation_step

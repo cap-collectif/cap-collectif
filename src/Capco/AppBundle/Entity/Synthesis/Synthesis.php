@@ -2,7 +2,9 @@
 
 namespace Capco\AppBundle\Entity\Synthesis;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 use JMS\Serializer\Annotation as Serializer;
 use JMS\Serializer\Annotation\Expose;
 
@@ -20,7 +22,7 @@ class Synthesis
      * @var int
      *
      * @ORM\Id
-     * @ORM\Column(name="id", type="string", length=36)
+     * @ORM\Column(name="id", type="guid")
      * @ORM\GeneratedValue(strategy="UUID")
      * @Expose
      */
@@ -31,6 +33,13 @@ class Synthesis
      * @Expose
      */
     private $enabled = false;
+
+    /**
+     * @var string
+     * @ORM\Column(name="source_type", type="string", length=255)
+     * @Assert\Choice(choices = {"consultation_step", "file", "none"})
+     */
+    private $sourceType = "none";
 
     /**
      * @var
@@ -46,6 +55,12 @@ class Synthesis
      * @Expose
      */
     private $elements;
+
+    function __construct()
+    {
+        $this->sourceType = "none";
+        $this->elements = new ArrayCollection();
+    }
 
     /**
      * Get id.
@@ -71,6 +86,22 @@ class Synthesis
     public function setEnabled($enabled)
     {
         $this->enabled = $enabled;
+    }
+
+    /**
+     * @return string
+     */
+    public function getSourceType()
+    {
+        return $this->sourceType;
+    }
+
+    /**
+     * @param string $sourceType
+     */
+    public function setSourceType($sourceType)
+    {
+        $this->sourceType = $sourceType;
     }
 
     /**

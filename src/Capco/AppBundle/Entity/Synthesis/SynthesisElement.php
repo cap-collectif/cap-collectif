@@ -34,7 +34,7 @@ class SynthesisElement
      * @var int
      *
      * @ORM\Id
-     * @ORM\Column(name="id", type="string", length=36)
+     * @ORM\Column(name="id", type="guid")
      * @ORM\GeneratedValue(strategy="UUID")
      * @Expose
      */
@@ -46,6 +46,13 @@ class SynthesisElement
      * @ORM\JoinColumn(name="synthesis_id", referencedColumnName="id", onDelete="CASCADE")
      */
     private $synthesis;
+
+    /**
+     * @var
+     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Synthesis\SynthesisElement")
+     * @ORM\JoinColumn(name="parent_id", referencedColumnName="id", nullable=true, onDelete="CASCADE")
+     */
+    private $parent = null;
 
     /**
      * @var string
@@ -125,6 +132,22 @@ class SynthesisElement
     public function setSynthesis(Synthesis $synthesis)
     {
         $this->synthesis = $synthesis;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getParent()
+    {
+        return $this->parent;
+    }
+
+    /**
+     * @param mixed $parent
+     */
+    public function setParent($parent)
+    {
+        $this->parent = $parent;
     }
 
     /**
