@@ -25,3 +25,10 @@ web_profiler_extra:
     twig:
         enabled:        true
         display_in_wdt: true
+
+monolog:
+    handlers:
+        main:
+            type:  stream
+            path:  %kernel.logs_dir%/%kernel.environment%.log
+            level: debug

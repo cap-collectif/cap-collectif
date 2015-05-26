@@ -12,6 +12,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 
 use FOS\RestBundle\Controller\Annotations\View;
 use FOS\RestBundle\Controller\Annotations\Get;
@@ -25,6 +26,9 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Capco\AppBundle\Form\Api\SynthesisType as SynthesisForm;
 use Capco\AppBundle\Form\Api\SynthesisElementType as SynthesisElementForm;
 
+/**
+ * @Security("has_role('ROLE_ADMIN')")
+ */
 class SynthesisController extends FOSRestController
 {
     /**
@@ -234,9 +238,17 @@ class SynthesisController extends FOSRestController
     {
         $form = $this->createForm(new SynthesisElementForm(), $element);
         $form->submit($request->request->all(), false);
+
         if ($form->isValid()) {
+
             $em = $this->get('doctrine.orm.entity_manager');
             $em->flush();
+
+            $this->get('event_dispatcher')->dispatch(
+                CapcoAppBundleEvents::SYNTHESIS_ELEMENT_CHANGED,
+                new SynthesisElementChangedEvent($element, $this->getUser(), 'update')
+            );
+
             $url = $this->generateUrl('get_synthesis_element', ['synthesis_id' => $synthesis->getId(), 'element_id' => $element->getId()], UrlGeneratorInterface::ABSOLUTE_URL);
             return $this->redirectView($url);
         }

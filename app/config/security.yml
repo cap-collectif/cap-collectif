@@ -15,7 +15,7 @@ security:
 
     providers:
         fos_userbundle:
-            id: capco_user.user_provider.email
+            id: fos_user.user_provider.username_email
 
     firewalls:
         dev:
@@ -37,6 +37,33 @@ security:
             anonymous:          true
 
         # -> end custom configuration
+
+        api_login:
+            pattern:  ^/api/login
+            provider: fos_userbundle
+            stateless: true
+            anonymous: true
+            form_login:
+                check_path:               /api/login_check
+                username_parameter:       username
+                password_parameter:       password
+                success_handler:          lexik_jwt_authentication.handler.authentication_success
+                failure_handler:          lexik_jwt_authentication.handler.authentication_failure
+                require_previous_session: false
+
+        api:
+            pattern:   ^/api
+            provider: fos_userbundle
+            stateless: true
+            lexik_jwt:
+                authorization_header:
+                    enabled: true
+                    prefix: Bearer
+                query_parameter:
+                    enabled: true
+                    name: bearer
+                throw_exceptions: false
+                create_entry_point: true
 
         # default login area for standard users
 
@@ -77,8 +104,12 @@ security:
         - { path: ^/admin/logout$, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/admin/login_check$, role: IS_AUTHENTICATED_ANONYMOUSLY }
 
+        # JWT
+        - { path: ^/api/login, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/api,       role: [IS_AUTHENTICATED_FULLY, ROLE_ADMIN] }
+
         # Secured part of the site
         # This config requires being logged for the whole site and having the admin role for the admin part.
         # Change these rules to adapt them to your needs
-        - { path: ^/admin/, role: [ROLE_ADMIN, ROLE_SONATA_ADMIN] }
+        - { path: ^/admin/, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/.*, role: IS_AUTHENTICATED_ANONYMOUSLY }

@@ -243,32 +243,11 @@ fos_rest:
             'Doctrine\ORM\OptimisticLockException': HTTP_CONFLICT
         messages:
             'Symfony\Component\Routing\Exception\ResourceNotFoundException': true
-monolog:
-    handlers:
-        main:
-            type: fingers_crossed
-            action_level: critical
-            handler: grouped
-        grouped:
-            type: group
-            members: [streamed, buffered]
-        streamed:
-            type: stream
-            path: "%kernel.logs_dir%/%kernel.environment%.log"
-            level: debug
-        console:
-            type: console
-            bubble: false
-        mail:
-            type: fingers_crossed
-            action_level: critical
-            handler: buffered
-        buffered:
-            type: buffer
-            handler: swift
-        swift:
-            type: swift_mailer
-            from_email: error@cap-collectif.com
-            to_email: [sfavot@jolicode.com]
-            subject: An error occurred
-            level: debug
+
+lexik_jwt_authentication:
+    private_key_path: %jwt_private_key_path%
+    public_key_path:  %jwt_public_key_path%
+    pass_phrase:      %jwt_key_pass_phrase%
+    token_ttl:        %jwt_token_ttl%
+    user_identity_field: email
+

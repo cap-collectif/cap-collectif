@@ -3,7 +3,8 @@ Feature: Synthesis
   I want to manage syntheses
 
   Scenario: API client wants to list syntheses
-    Given I send a GET request to "/api/syntheses"
+    Given I am logged in to api as admin
+    And I send a GET request to "/api/syntheses"
     Then the JSON response should match:
     """
     [
@@ -25,7 +26,8 @@ Feature: Synthesis
     """
 
   Scenario: API client wants to get a synthesis
-    Given I try to get first synthesis
+    Given I am logged in to api as admin
+    And I try to get first synthesis
     Then the JSON response should match:
     """
     {
@@ -46,7 +48,8 @@ Feature: Synthesis
 
   @database
   Scenario: API client wants to create a synthesis
-    Given I send a POST request to "/api/syntheses" with json:
+    Given I am logged in to api as admin
+    And I send a POST request to "/api/syntheses" with json:
     """
     {
       "enabled": true
@@ -56,7 +59,8 @@ Feature: Synthesis
 
   @database
   Scenario: API client wants to update a synthesis
-    Given I try to update first synthesis with json:
+    Given I am logged in to api as admin
+    And I try to update first synthesis with json:
     """
     {
       "enabled": true
@@ -82,7 +86,8 @@ Feature: Synthesis
     """
 
   Scenario: API client wants to get synthesis elements
-    Given I try to get first synthesis elements
+    Given I am logged in to api as admin
+    And I try to get first synthesis elements
     Then the JSON response should match:
     """
     [
@@ -97,7 +102,8 @@ Feature: Synthesis
     """
 
   Scenario: API client wants to get a synthesis element
-    Given I try to get first element of first synthesis
+    Given I am logged in to api as admin
+    And I try to get first element of first synthesis
     Then the JSON response should match:
     """
     {
@@ -111,7 +117,8 @@ Feature: Synthesis
 
   @database
   Scenario: API client wants to create a synthesis element
-    Given I try to create an element in first synthesis with json:
+    Given I am logged in to api as admin
+    And I try to create an element in first synthesis with json:
     """
     {
       "title": "Coucou, je suis un élément.",
@@ -123,7 +130,8 @@ Feature: Synthesis
 
   @database
   Scenario: API client wants to update a synthesis element
-    Given I try to update an element in first synthesis with json:
+    Given I am logged in to api as admin
+    And I try to update an element in first synthesis with json:
     """
     {
       "status": 1,
@@ -141,3 +149,34 @@ Feature: Synthesis
       "notation": 2
     }
     """
+
+  Scenario: API client wants to create a synthesis
+    Given I am logged in to api as admin
+    And I send a POST request to "/api/syntheses" with json:
+    """
+    {
+      "enabled": true
+    }
+    """
+    Then the JSON response status code should be 201
+
+  @dev
+  Scenario: Non admin API Client wants to update a synthesis
+    Given I am logged in to api as user
+    And I try to update first synthesis with json:
+    """
+    {
+      "enabled": true
+    }
+    """
+    Then the JSON response status code should be 403
+
+  @dev
+  Scenario: Anonymous API Client wants to update a synthesis
+    Given I try to update first synthesis with json:
+    """
+    {
+      "enabled": true
+    }
+    """
+    Then the JSON response status code should be 401

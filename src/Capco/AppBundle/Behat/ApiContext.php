@@ -22,11 +22,27 @@ class ApiContext extends ApplicationContext
     }
 
     /**
-     * @When /^I am logged in as "([^"]+)"$/
+     * @When /^I am logged in to api as admin$/
      */
-    public function iAmLoggedIn($username)
+    public function iAmLoggedInToApiAsAdmin()
     {
-        $this->createAuthenticatedClient($username, $username);
+        $this->createAuthenticatedClient('admin@test.com', 'admin');
+    }
+
+    /**
+     * @When /^I am logged in to api as user$/
+     */
+    public function iAmLoggedInToApiAsUser()
+    {
+        $this->createAuthenticatedClient('user@test.com', 'user');
+    }
+
+    /**
+     * @When I am logged in to api as :username with pwd :pwd
+     */
+    public function iAmLoggedInToApi($username, $pwd)
+    {
+        $this->createAuthenticatedClient($username, $pwd);
     }
 
     /**
@@ -40,7 +56,7 @@ class ApiContext extends ApplicationContext
     {
         $request = $this->client->createRequest(
             'POST',
-            '/login_check',
+            '/api/login_check',
             [
                 'body' => [
                     'username' => $username,
@@ -62,7 +78,6 @@ class ApiContext extends ApplicationContext
      */
     public function iSendARequest($method, $url)
     {
-        $url = '/app_test.php'.$url;
         $request = $this->client->createRequest($method, $url, [
             'headers' => [
                 'Authorization' => sprintf('Bearer %s', $this->token),
@@ -84,7 +99,6 @@ class ApiContext extends ApplicationContext
      */
     public function iSendARequestWithValues($method, $url, TableNode $table)
     {
-        $url = '/app_test.php'.$url;
         $request = $this->client->createRequest($method, $url, [
             'body' => $table->getHash(),
             'exceptions' => false,
@@ -104,7 +118,6 @@ class ApiContext extends ApplicationContext
      */
     public function iSendARequestWithJson($method, $url, PyStringNode $string)
     {
-        $url = '/app_test.php'.$url;
         $request = $this->client->createRequest($method, $url, [
             'body' => $string->getRaw(),
             'exceptions' => false,

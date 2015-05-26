@@ -84,6 +84,9 @@ google_login:
 twitter_login:
     pattern: /login/check-twitter
 
+api_login_check:
+    path: /api/login_check
+
 # nelmio doc
 NelmioApiDocBundle:
     resource: "@NelmioApiDocBundle/Resources/config/routing.yml"

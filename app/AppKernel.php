@@ -72,6 +72,7 @@ class AppKernel extends Kernel
             // API
             new \FOS\RestBundle\FOSRestBundle(),
             new \Nelmio\ApiDocBundle\NelmioApiDocBundle(),
+            new \Lexik\Bundle\JWTAuthenticationBundle\LexikJWTAuthenticationBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {
