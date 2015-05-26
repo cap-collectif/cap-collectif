@@ -1,0 +1,8 @@
+#!/bin/bash
+
+sleep 10
+
+# We install the crontab
+crontab /etc/cron.d/crontab
+
+exec cron -f

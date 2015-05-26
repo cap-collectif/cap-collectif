@@ -13,7 +13,7 @@ RUN apt-get update && \
     apt-key adv --recv-keys --keyserver keyserver.ubuntu.com 0xcbcb082a1bb943db && \
     wget http://www.dotdeb.org/dotdeb.gpg -O- -q | apt-key add - && \
     apt-get update && \
-    apt-get install -y -qq nginx php5-fpm php5-cli php5-curl php5-intl php5-mysqli php5-redis php5-xsl php5-gd mariadb-server redis-server && \
+    apt-get install -y -qq cron nginx php5-fpm php5-cli php5-curl php5-intl php5-mysqli php5-redis php5-xsl php5-gd mariadb-server redis-server && \
 
     # Configure Redis
     sed -i 's/^\(bind .*\)$/# \1/' /etc/redis/redis.conf && \
@@ -37,12 +37,14 @@ COPY mysql/run             /etc/service/mysql/run
 COPY nginx/run             /etc/service/nginx/run
 COPY php-fpm/run           /etc/service/php-fpm/run
 COPY redis/run             /etc/service/redis/run
+COPY cron/run              /etc/service/cron/run
 
 # Configuration
 COPY nginx/nginx.conf      /etc/nginx/nginx.conf
 COPY php-fpm/fpm.conf      /etc/service/php-fpm/fpm.conf
 COPY php-fpm/capco.ini     /etc/php5/fpm/conf.d/capco.ini
 COPY php-fpm/capco.ini     /etc/php5/cli/conf.d/capco.ini
+COPY cron/crontab          /etc/cron.d/crontab
 
 COPY entrypoint.sh         /entrypoint.sh
 RUN chmod 755 /*.sh
