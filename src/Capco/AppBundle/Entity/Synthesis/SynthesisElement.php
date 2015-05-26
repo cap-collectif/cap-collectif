@@ -57,8 +57,7 @@ class SynthesisElement
     /**
      * @var string
      *
-     * @ORM\Column(name="title", type="string", length=255)
-     * @Assert\NotBlank()
+     * @ORM\Column(name="title", type="string", length=255, nullable=true)
      * @Expose
      */
     private $title;

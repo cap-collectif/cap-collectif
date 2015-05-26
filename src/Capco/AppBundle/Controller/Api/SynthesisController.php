@@ -2,8 +2,10 @@
 
 namespace Capco\AppBundle\Controller\Api;
 
+use Capco\AppBundle\CapcoAppBundleEvents;
 use Capco\AppBundle\Entity\Synthesis\Synthesis;
 use Capco\AppBundle\Entity\Synthesis\SynthesisElement;
+use Capco\AppBundle\Event\SynthesisElementChangedEvent;
 use FOS\RestBundle\Controller\FOSRestController;
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -196,13 +198,16 @@ class SynthesisController extends FOSRestController
             throw new BadRequestHttpException($validationErrors->__toString());
         }
 
-        dump($element);
-
         $element->setSynthesis($synthesis);
 
         $em = $this->get('doctrine.orm.entity_manager');
         $em->persist($element);
         $em->flush();
+
+        $this->get('event_dispatcher')->dispatch(
+            CapcoAppBundleEvents::SYNTHESIS_ELEMENT_CHANGED,
+            new SynthesisElementChangedEvent($element, $this->getUser(), 'create')
+        );
 
         $url = $this->generateUrl('get_synthesis_element', ['synthesis_id' => $synthesis->getId(), 'element_id' => $element->getId()], UrlGeneratorInterface::ABSOLUTE_URL);
         return $this->redirectView($url, Codes::HTTP_CREATED);

@@ -8,7 +8,7 @@ use Capco\AppBundle\CapcoAppBundleEvents;
 use Capco\AppBundle\Event\OpinionVoteChangedEvent;
 use Capco\AppBundle\Event\AbstractVoteChangedEvent;
 
-class VoteSuscriber implements EventSubscriberInterface
+class VoteSubscriber implements EventSubscriberInterface
 {
     protected $em;
 

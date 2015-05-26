@@ -297,8 +297,8 @@ services:
       tags:
         - { name: form.type_extension, alias: text }
 
-    capco.vote.suscriber:
-        class: Capco\AppBundle\EventListener\VoteSuscriber
+    capco.vote.subscriber:
+        class: Capco\AppBundle\EventListener\VoteSubscriber
         arguments: [@doctrine.orm.entity_manager]
         tags:
             - { name: "kernel.event_subscriber" }
@@ -318,8 +318,8 @@ services:
         tags:
             - { name: validator.constraint_validator, alias: end_after_start.validator }
 
-    capco.comment.suscriber:
-        class: Capco\AppBundle\EventListener\CommentSuscriber
+    capco.comment.subscriber:
+        class: Capco\AppBundle\EventListener\CommentSubscriber
         tags:
             - { name: "kernel.event_subscriber" }
 
@@ -334,3 +334,9 @@ services:
         class: Capco\AppBundle\Validator\Constraints\IsSocialNetworkUrlValidator
         tags:
             - { name: validator.constraint_validator, alias: is_social_network_url.validator }
+
+    capco.synthesis.subscriber:
+        class: Capco\AppBundle\EventListener\SynthesisSubscriber
+        arguments: [@doctrine.orm.entity_manager]
+        tags:
+            - { name: "kernel.event_subscriber" }

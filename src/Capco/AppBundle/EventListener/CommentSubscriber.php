@@ -6,7 +6,7 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Capco\AppBundle\CapcoAppBundleEvents;
 use Capco\AppBundle\Event\AbstractCommentChangedEvent;
 
-class CommentSuscriber implements EventSubscriberInterface
+class CommentSubscriber implements EventSubscriberInterface
 {
     public static function getSubscribedEvents()
     {
