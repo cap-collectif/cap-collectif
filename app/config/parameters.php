@@ -40,6 +40,6 @@ $container->setParameter('redis_prefix',                set_var('redis_prefix', 
 $container->setParameter('shield_login',                set_var('shield_login', 'admin'));
 $container->setParameter('shield_pwd',                  set_var('shield_pwd', 'admin'));
 
-if (file_exists('app/config/parameters.yml')) {
+if (file_exists('app/config/parameters.yml') || file_exists('../app/config/parameters.yml')) {
     $loader->import('parameters.yml');
 }
