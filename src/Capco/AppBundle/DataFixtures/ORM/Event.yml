@@ -10,8 +10,8 @@ Capco\AppBundle\Entity\Event:
              Nec dubitamus multa iter quae et nos invenerat. Inmensae subtilitatis, obscuris et malesuada fames. Quam diu etiam furor iste tuus nos eludet? Integer legentibus erat a ante historiarum dapibus.</p>
              <h2>Pulvinar odio volutpat</h2>
              <p>Etiam habebis sem dicantur magna mollis euismod.</p>
-        startAt: <dateTimeBetween('-10 days', 'now')>
-        endAt: <dateTimeBetween('now', '+10 days')>
+        startAt: <dateTimeBetween('now', '+10 days')>
+        endAt: <dateTimeBetween('+12 days', '+30 days')>
         Author: @user<numberBetween(1, 5)>
         address: 111 Avenue Clémenceau
         city: Lyon
@@ -50,8 +50,8 @@ Capco\AppBundle\Entity\Event:
              <h2>Pulvinar odio volutpat</h2>
              <p>Fictum,  deserunt mollit anim laborum astutumque! Phasellus laoreet lorem vel dolor tempus vehicula. Cras mattis iudicium purus sit amet fermentum. Cum ceteris in veneratione tui montes, nascetur mus.
                 Hi omnes lingua, institutis, legibus inter se differunt. Unam incolunt Belgae, aliam Aquitani, tertiam. Integer legentibus erat a ante historiarum dapibus. Morbi fringilla convallis sapien, id pulvinar odio volutpat. Paullum deliquit, ponderibus modulisque suis ratio utitur.</p>
-        startAt: <dateTimeBetween('-10 days', 'now')>
-        endAt: <dateTimeBetween('now', '+10 days')>
+        startAt: <dateTimeBetween('now', '+10 days')>
+        endAt: <dateTimeBetween('+12 days', '+30 days')>
         Author: @user<numberBetween(1, 5)>
         address: 457 Rue de Picardie
         city: Bordeaux
