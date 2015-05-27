@@ -5,6 +5,7 @@ namespace Capco\AppBundle\Controller\Api;
 use Capco\AppBundle\CapcoAppBundleEvents;
 use Capco\AppBundle\Entity\Synthesis\Synthesis;
 use Capco\AppBundle\Entity\Synthesis\SynthesisElement;
+use Capco\AppBundle\Entity\Synthesis\SynthesisElementDivision;
 use Capco\AppBundle\Event\SynthesisElementChangedEvent;
 use FOS\RestBundle\Controller\FOSRestController;
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
@@ -25,6 +26,7 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 use Capco\AppBundle\Form\Api\SynthesisType as SynthesisForm;
 use Capco\AppBundle\Form\Api\SynthesisElementType as SynthesisElementForm;
+use Capco\AppBundle\Form\Api\SynthesisElementDivisionType as SynthesisElementDivisionForm;
 
 /**
  * @Security("has_role('ROLE_ADMIN')")
@@ -210,7 +212,7 @@ class SynthesisController extends FOSRestController
 
         $this->get('event_dispatcher')->dispatch(
             CapcoAppBundleEvents::SYNTHESIS_ELEMENT_CHANGED,
-            new SynthesisElementChangedEvent($element, $this->getUser(), 'create')
+            new SynthesisElementChangedEvent($element, $this->getUser(), 'created')
         );
 
         $url = $this->generateUrl('get_synthesis_element', ['synthesis_id' => $synthesis->getId(), 'element_id' => $element->getId()], UrlGeneratorInterface::ABSOLUTE_URL);
@@ -242,15 +244,63 @@ class SynthesisController extends FOSRestController
         if ($form->isValid()) {
 
             $em = $this->get('doctrine.orm.entity_manager');
+            $previousState = $em->getRepository('CapcoAppBundle:Synthesis\SynthesisElement')->find($element->getId());
+            $em->persist($element);
             $em->flush();
 
             $this->get('event_dispatcher')->dispatch(
                 CapcoAppBundleEvents::SYNTHESIS_ELEMENT_CHANGED,
-                new SynthesisElementChangedEvent($element, $this->getUser(), 'update')
+                new SynthesisElementChangedEvent($element, $this->getUser(), 'updated', $previousState)
             );
 
             $url = $this->generateUrl('get_synthesis_element', ['synthesis_id' => $synthesis->getId(), 'element_id' => $element->getId()], UrlGeneratorInterface::ABSOLUTE_URL);
             return $this->redirectView($url);
+        }
+        return $form;
+    }
+
+    /**
+     * Divide a synthesis element
+     *
+     * @ApiDoc(
+     *  resource=true,
+     *  description="Divide a synthesis element",
+     *  statusCodes={
+     *    201 = "Returned when successful",
+     *    400 = "Returned when division fail",
+     *  }
+     * )
+     *
+     * @Post("/syntheses/{synthesis_id}/elements/{element_id}/divisions")
+     * @ParamConverter("synthesis", options={"mapping": {"synthesis_id": "id"}})
+     * @ParamConverter("element", options={"mapping": {"element_id": "id"}})
+     * @ParamConverter("division", converter="fos_rest.request_body")
+     * @View(serializerGroups={"Default", "Details"})
+     */
+    public function divideSynthesisElementAction(Request $request, Synthesis $synthesis, SynthesisElement $element, SynthesisElementDivision $division)
+    {
+        $form = $this->createForm(new SynthesisElementDivisionForm(), $division);
+        $form->submit($request->request->all(), false);
+
+        if ($form->isValid()) {
+
+            $em = $this->get('doctrine.orm.entity_manager');
+            foreach ($division->getElements() as $el) {
+                $el->setLinkedDataClass($element->getLinkedDataClass());
+                $el->setLinkedDataId($element->getLinkedDataId());
+                $el->setSynthesis($synthesis);
+                $em->persist($el);
+            }
+            $em->remove($element);
+            $em->flush();
+
+            $this->get('event_dispatcher')->dispatch(
+                CapcoAppBundleEvents::SYNTHESIS_ELEMENT_CHANGED,
+                new SynthesisElementChangedEvent($element, $this->getUser(), 'divided')
+            );
+
+            $url = $this->generateUrl('get_synthesis', ['id' => $synthesis->getId()], UrlGeneratorInterface::ABSOLUTE_URL);
+            return $this->redirectView($url, Codes::HTTP_CREATED);
         }
         return $form;
     }

@@ -18,17 +18,6 @@ use JMS\Serializer\Annotation\Groups;
  */
 class SynthesisElement
 {
-    const STATUS_ARCHIVED = 100;
-    const STATUS_IGNORED = 200;
-    const STATUS_TRASHED = 300;
-    const STATUS_NEW = 0;
-
-    public static $statuses = [
-        'new' => self::STATUS_NEW,
-        'archived' => self::STATUS_ARCHIVED,
-        'ignored' => self::STATUS_IGNORED,
-        'trashed' => self::STATUS_TRASHED,
-    ];
 
     /**
      * @var int
@@ -39,6 +28,20 @@ class SynthesisElement
      * @Expose
      */
     private $id;
+
+    /**
+     * @ORM\Column(name="enabled", type="boolean")
+     * @Expose
+     * @Groups({"Details"})
+     */
+    private $enabled = true;
+
+    /**
+     * @ORM\Column(name="archived", type="boolean")
+     * @Expose
+     * @Groups({"Details"})
+     */
+    private $archived = false;
 
     /**
      * @var
@@ -70,15 +73,6 @@ class SynthesisElement
      * @Groups({"Details"})
      */
     private $body;
-
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="status", type="integer")
-     * @Expose
-     * @Groups({"Details"})
-     */
-    private $status = self::STATUS_NEW;
 
     /**
      * @var int
@@ -182,19 +176,35 @@ class SynthesisElement
     }
 
     /**
-     * @return int
+     * @return mixed
      */
-    public function getStatus()
+    public function isEnabled()
     {
-        return $this->status;
+        return $this->enabled;
     }
 
     /**
-     * @param int $status
+     * @param mixed $enabled
      */
-    public function setStatus($status)
+    public function setEnabled($enabled)
     {
-        $this->status = $status;
+        $this->enabled = $enabled;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function isArchived()
+    {
+        return $this->archived;
+    }
+
+    /**
+     * @param mixed $archived
+     */
+    public function setArchived($archived)
+    {
+        $this->archived = $archived;
     }
 
     /**

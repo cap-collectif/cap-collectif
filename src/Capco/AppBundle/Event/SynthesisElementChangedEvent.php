@@ -10,13 +10,15 @@ class SynthesisElementChangedEvent extends Event
 {
 
     private $element;
+    private $previousState;
     private $author;
     private $action;
     private $datetime;
 
-    public function __construct(SynthesisElement $element, User $author, $action)
+    public function __construct(SynthesisElement $element, User $author, $action, SynthesisElement $previousState = null)
     {
         $this->element = $element;
+        $this->previousState = $previousState;
         $this->author = $author;
         $this->action = $action;
         $this->datetime = new \DateTime();
@@ -28,6 +30,14 @@ class SynthesisElementChangedEvent extends Event
     public function getElement()
     {
         return $this->element;
+    }
+
+    /**
+     * @return SynthesisElement
+     */
+    public function getPreviousState()
+    {
+        return $this->previousState;
     }
 
     /**

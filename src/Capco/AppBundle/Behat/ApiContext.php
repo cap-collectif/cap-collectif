@@ -222,4 +222,16 @@ class ApiContext extends ApplicationContext
         $synthesis = $this->getEntityManager()->getRepository('CapcoAppBundle:Synthesis\Synthesis')->findAll()[0];
         $this->iSendARequestWithJson('POST', '/api/syntheses/'.$synthesis->getId().'/elements', $string);
     }
+
+    /**
+     * I try to divide an element in first synthesis
+     *
+     * @When /^(?:I )?try to divide an element in first synthesis with json:$/
+     */
+    public function itryToDivideAnElementInFirstSynthesisWithJson(PyStringNode $string)
+    {
+        $synthesis = $this->getEntityManager()->getRepository('CapcoAppBundle:Synthesis\Synthesis')->findAll()[0];
+        $element = $synthesis->getElements()[0];
+        $this->iSendARequestWithJson('POST', '/api/syntheses/'.$synthesis->getId().'/elements/'.$element->getId().'/divisions', $string);
+    }
 }

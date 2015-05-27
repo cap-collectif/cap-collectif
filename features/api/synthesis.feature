@@ -85,6 +85,25 @@ Feature: Synthesis
     }
     """
 
+  Scenario: Non admin API Client wants to update a synthesis
+    Given I am logged in to api as user
+    And I try to update first synthesis with json:
+    """
+    {
+      "enabled": true
+    }
+    """
+    Then the JSON response status code should be 403
+
+  Scenario: Anonymous API Client wants to update a synthesis
+    Given I try to update first synthesis with json:
+    """
+    {
+      "enabled": true
+    }
+    """
+    Then the JSON response status code should be 401
+
   Scenario: API client wants to get synthesis elements
     Given I am logged in to api as admin
     And I try to get first synthesis elements
@@ -95,7 +114,8 @@ Feature: Synthesis
         "id": @string@,
         "title": @string@,
         "body": @string@,
-        "status": @integer@,
+        "enabled": @boolean@,
+        "archived": @boolean@,
         "notation": @integer@
       }
     ]
@@ -110,7 +130,8 @@ Feature: Synthesis
       "id": @string@,
       "title": @string@,
       "body": @string@,
-      "status": @integer@,
+      "enabled": @boolean@,
+      "archived": @boolean@,
       "notation": @integer@
     }
     """
@@ -134,7 +155,7 @@ Feature: Synthesis
     And I try to update an element in first synthesis with json:
     """
     {
-      "status": 1,
+      "enabled": true,
       "notation": 2
     }
     """
@@ -145,38 +166,35 @@ Feature: Synthesis
       "id": @string@,
       "title": @string@,
       "body": @string@,
-      "status": 1,
+      "enabled": true,
+      "archived": @boolean@,
       "notation": 2
     }
     """
 
-  Scenario: API client wants to create a synthesis
+  @database
+  Scenario: API client wants to divide a synthesis element
     Given I am logged in to api as admin
-    And I send a POST request to "/api/syntheses" with json:
+    And I try to divide an element in first synthesis with json:
     """
     {
-      "enabled": true
+      "elements": [
+        {
+          "title": "Coucou, je suis un élément.",
+          "body": "blabla",
+          "notation": 5
+        },
+        {
+          "title": "Coucou, je suis un autre élément.",
+          "body": "blabla",
+          "notation": 3
+        },
+        {
+          "title": "Coucou, je suis le dernier élément.",
+          "body": "blabla",
+          "notation": 2
+        }
+      ]
     }
     """
     Then the JSON response status code should be 201
-
-  @dev
-  Scenario: Non admin API Client wants to update a synthesis
-    Given I am logged in to api as user
-    And I try to update first synthesis with json:
-    """
-    {
-      "enabled": true
-    }
-    """
-    Then the JSON response status code should be 403
-
-  @dev
-  Scenario: Anonymous API Client wants to update a synthesis
-    Given I try to update first synthesis with json:
-    """
-    {
-      "enabled": true
-    }
-    """
-    Then the JSON response status code should be 401
