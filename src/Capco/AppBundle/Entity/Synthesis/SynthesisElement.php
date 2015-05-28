@@ -4,6 +4,7 @@ namespace Capco\AppBundle\Entity\Synthesis;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 use JMS\Serializer\Annotation as Serializer;
 use JMS\Serializer\Annotation\Expose;
@@ -14,6 +15,8 @@ use JMS\Serializer\Annotation\Groups;
  *
  * @ORM\Table(name="synthesis_element")
  * @ORM\Entity()
+ * @Gedmo\Loggable()
+ * @Gedmo\SoftDeleteable(fieldName="deletedAt")
  * @Serializer\ExclusionPolicy("all")
  */
 class SynthesisElement
@@ -31,13 +34,22 @@ class SynthesisElement
 
     /**
      * @ORM\Column(name="enabled", type="boolean")
+     * @Gedmo\Versioned
      * @Expose
      * @Groups({"Details"})
      */
     private $enabled = true;
 
     /**
+     * @var \DateTime $deletedAt
+     * @Gedmo\Versioned
+     * @ORM\Column(name="deleted_at", type="datetime", nullable=true)
+     */
+    private $deletedAt;
+
+    /**
      * @ORM\Column(name="archived", type="boolean")
+     * @Gedmo\Versioned
      * @Expose
      * @Groups({"Details"})
      */
@@ -52,7 +64,15 @@ class SynthesisElement
 
     /**
      * @var
+     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Synthesis\SynthesisDivision", inversedBy="elements", cascade={"persist"})
+     * @ORM\JoinColumn(name="original_division_id", referencedColumnName="id", nullable=true, onDelete="SET NULL")
+     */
+    private $originalDivision;
+
+    /**
+     * @var
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Synthesis\SynthesisElement")
+     * @Gedmo\Versioned
      * @ORM\JoinColumn(name="parent_id", referencedColumnName="id", nullable=true, onDelete="CASCADE")
      */
     private $parent = null;
@@ -61,6 +81,7 @@ class SynthesisElement
      * @var string
      *
      * @ORM\Column(name="title", type="string", length=255, nullable=true)
+     * @Gedmo\Versioned
      * @Expose
      */
     private $title;
@@ -69,6 +90,7 @@ class SynthesisElement
      * @var string
      *
      * @ORM\Column(name="body", type="text", nullable=true)
+     * @Gedmo\Versioned
      * @Expose
      * @Groups({"Details"})
      */
@@ -78,6 +100,7 @@ class SynthesisElement
      * @var int
      *
      * @ORM\Column(name="notation", type="integer", nullable=true)
+     * @Gedmo\Versioned
      * @Expose
      * @Groups({"Details"})
      */
@@ -133,6 +156,38 @@ class SynthesisElement
     public function setSynthesis(Synthesis $synthesis)
     {
         $this->synthesis = $synthesis;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getDeletedAt()
+    {
+        return $this->deletedAt;
+    }
+
+    /**
+     * @param \DateTime $deletedAt
+     */
+    public function setDeletedAt($deletedAt)
+    {
+        $this->deletedAt = $deletedAt;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getOriginalDivision()
+    {
+        return $this->originalDivision;
+    }
+
+    /**
+     * @param mixed $originalDivision
+     */
+    public function setOriginalDivision($originalDivision)
+    {
+        $this->originalDivision = $originalDivision;
     }
 
     /**

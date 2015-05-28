@@ -2,11 +2,10 @@ Feature: Synthesis
   As an API client
   I want to manage syntheses
 
-
   Scenario: API client wants to list syntheses
-    Given there is a synthesis with id "42" and elements:
+    Given I am logged in to api as admin
+    And there is a synthesis with id "42" and elements:
       | 43 |
-    And I am logged in to api as admin
     And I send a GET request to "/api/syntheses"
     Then the JSON response should match:
     """
@@ -39,9 +38,9 @@ Feature: Synthesis
     Then the JSON response status code should be 401
 
   Scenario: API client wants to get a synthesis
-    Given there is a synthesis with id "42" and elements:
+    Given I am logged in to api as admin
+    And there is a synthesis with id "42" and elements:
       | 43 |
-    And I am logged in to api as admin
     And I send a GET request to "/api/syntheses/42"
     Then the JSON response should match:
     """
@@ -62,9 +61,9 @@ Feature: Synthesis
     """
 
   Scenario: Non admin API client wants to get a synthesis
-    Given there is a synthesis with id "42" and elements:
+    Given I am logged in to api as user
+    And there is a synthesis with id "42" and elements:
       | 43 |
-    And I am logged in to api as user
     And I send a GET request to "/api/syntheses/42"
     Then the JSON response status code should be 403
 
@@ -106,9 +105,9 @@ Feature: Synthesis
 
   @database
   Scenario: API client wants to update a synthesis
-    Given there is a synthesis with id "42" and elements:
+    Given I am logged in to api as admin
+    And there is a synthesis with id "42" and elements:
       | 43 |
-    And I am logged in to api as admin
     And I send a PUT request to "/api/syntheses/42" with json:
     """
     {
@@ -135,9 +134,9 @@ Feature: Synthesis
     """
 
   Scenario: Non admin API client wants to update a synthesis
-    Given there is a synthesis with id "42" and elements:
+    Given I am logged in to api as user
+    And there is a synthesis with id "42" and elements:
       | 43 |
-    And I am logged in to api as user
     And I send a PUT request to "/api/syntheses/42" with json:
     """
     {
@@ -158,9 +157,9 @@ Feature: Synthesis
     Then the JSON response status code should be 401
 
   Scenario: API client wants to get synthesis elements
-    Given there is a synthesis with id "42" and elements:
+    Given I am logged in to api as admin
+    And there is a synthesis with id "42" and elements:
       | 43 |
-    And I am logged in to api as admin
     And I send a GET request to "/api/syntheses/42/elements"
     Then the JSON response should match:
     """
@@ -177,9 +176,9 @@ Feature: Synthesis
     """
 
   Scenario: Non admin API client wants to get synthesis elements
-    Given there is a synthesis with id "42" and elements:
+    Given I am logged in to api as user
+    And there is a synthesis with id "42" and elements:
       | 43 |
-    And I am logged in to api as user
     And I send a GET request to "/api/syntheses/42/elements"
     Then the JSON response status code should be 403
 
@@ -190,9 +189,9 @@ Feature: Synthesis
     Then the JSON response status code should be 401
 
   Scenario: API client wants to get a synthesis element
-    Given there is a synthesis with id "42" and elements:
+    Given I am logged in to api as admin
+    And there is a synthesis with id "42" and elements:
       | 43 |
-    And I am logged in to api as admin
     And I send a GET request to "/api/syntheses/42/elements/43"
     Then the JSON response should match:
     """
@@ -207,9 +206,9 @@ Feature: Synthesis
     """
 
   Scenario: Non admin API client wants to get a synthesis element
-    Given there is a synthesis with id "42" and elements:
+    Given I am logged in to api as user
+    And there is a synthesis with id "42" and elements:
       | 43 |
-    And I am logged in to api as user
     And I send a GET request to "/api/syntheses/42/elements/43"
     Then the JSON response status code should be 403
 
@@ -221,9 +220,9 @@ Feature: Synthesis
 
   @database
   Scenario: API client wants to create a synthesis element
-    Given there is a synthesis with id "42" and elements:
+    Given I am logged in to api as admin
+    And there is a synthesis with id "42" and elements:
       | 43 |
-    And I am logged in to api as admin
     And I send a POST request to "/api/syntheses/42/elements" with json:
     """
     {
@@ -233,12 +232,23 @@ Feature: Synthesis
     }
     """
     Then the JSON response status code should be 201
+    And the JSON response should match:
+    """
+    {
+      "id": @string@,
+      "title": "Coucou, je suis un élément.",
+      "body": "blabla",
+      "enabled": true,
+      "archived": false,
+      "notation": 5
+    }
+    """
 
 
   Scenario: Non admin API client wants to create a synthesis element
-    Given there is a synthesis with id "42" and elements:
+    Given I am logged in to api as user
+    And there is a synthesis with id "42" and elements:
       | 43 |
-    And I am logged in to api as user
     And I send a POST request to "/api/syntheses/42/elements" with json:
     """
     {
@@ -264,9 +274,9 @@ Feature: Synthesis
 
   @database
   Scenario: API client wants to update a synthesis element
-    Given there is a synthesis with id "42" and elements:
+    Given I am logged in to api as admin
+    And there is a synthesis with id "42" and elements:
       | 43 |
-    And I am logged in to api as admin
     And I send a PUT request to "/api/syntheses/42/elements/43" with json:
     """
     {
@@ -278,7 +288,7 @@ Feature: Synthesis
     And the JSON response should match:
     """
     {
-      "id": 43,
+      "id": "43",
       "title": "Je suis un élément",
       "body": "blabla",
       "enabled": true,
@@ -288,9 +298,9 @@ Feature: Synthesis
     """
 
   Scenario: Non admin API client wants to update a synthesis element
-    Given there is a synthesis with id "42" and elements:
+    Given I am logged in to api as user
+    And there is a synthesis with id "42" and elements:
       | 43 |
-    And I am logged in to api as user
     And I send a PUT request to "/api/syntheses/42/elements/43" with json:
     """
     {
@@ -314,9 +324,9 @@ Feature: Synthesis
 
   @database
   Scenario: API client wants to divide a synthesis element
-    Given there is a synthesis with id "42" and elements:
+    Given I am logged in to api as admin
+    And there is a synthesis with id "42" and elements:
       | 43 |
-    And I am logged in to api as admin
     And I send a POST request to "/api/syntheses/42/elements/43/divisions" with json:
     """
     {
@@ -342,9 +352,9 @@ Feature: Synthesis
     Then the JSON response status code should be 201
 
   Scenario: Non admin API client wants to divide a synthesis element
-    Given there is a synthesis with id "42" and elements:
+    Given I am logged in to api as user
+    And there is a synthesis with id "42" and elements:
       | 43 |
-    And I am logged in to api as user
     And I send a POST request to "/api/syntheses/42/elements/43/divisions" with json:
     """
     {
@@ -397,45 +407,53 @@ Feature: Synthesis
     Then the JSON response status code should be 401
 
   Scenario: API client wants to get a synthesis element history
-    Given there is a synthesis with id "42" and elements:
+    Given I am logged in to api as admin
+    And there is a synthesis with id "42" and elements:
       | 43 |
-    And I am logged in to api as admin
     And I send a GET request to "/api/syntheses/42/elements/43/history"
     Then the JSON response should match:
     """
     [
       {
-        "id": @string@,
-        "created_at": "@string@.isDateTime()",
-        "element_id": "43",
-        "element_title": "Je suis un élément",
-        "author": {
-          "username": "admin",
-          "slug": "admin"
+        "id": @integer@,
+        "action": "update",
+        "logged_at": "@string@.isDateTime()",
+        "object_id": "43",
+        "object_class": "Capco\\AppBundle\\Entity\\Synthesis\\SynthesisElement",
+        "version": 2,
+        "data": {
+          "title": "Je suis un élément"
         },
-        "action": "created",
-        "sentence": "admin a créé l'élément \"Je suis un élément\""
+        "sentences": [
+          "admin a mis à jour l'élément \"43\""
+        ]
       },
       {
-        "id": @string@,
-        "created_at": "@string@.isDateTime()",
-        "element_id": "43",
-        "element_title": "Je suis un élément",
-        "author": {
-          "username": "admin",
-          "slug": "admin"
+        "id": @integer@,
+        "action": "create",
+        "logged_at": "@string@.isDateTime()",
+        "object_id": "43",
+        "object_class": "Capco\\AppBundle\\Entity\\Synthesis\\SynthesisElement",
+        "version": 1,
+        "data": {
+          "enabled": true,
+          "archived": false,
+          "title": "Je suis un nouvel élément",
+          "body": "blabla",
+          "notation": 4
         },
-        "action": "updated",
-        "sentence": "admin a mis à jour l'élément \"Je suis un élément\""
+        "sentences": [
+          "admin a créé l'élément \"43\""
+        ]
       }
     ]
     """
 
-    @database @dev
-  Scenario: API client wants to have a 'created' log when creating a synthesis element
-    Given there is a synthesis with id "42" and elements:
+  @database
+  Scenario: API client wants to have a 'create' log when creating a synthesis element
+    Given I am logged in to api as admin
+    And there is a synthesis with id "42" and elements:
       | 43 |
-    And I am logged in to api as admin
     And I send a POST request to "/api/syntheses/42/elements" with json:
     """
     {
@@ -444,21 +462,94 @@ Feature: Synthesis
       "notation": 5
     }
     """
-    Then there should be a log with values:
-      | element_title | Coucou, je suis un élément. |
-      | action        | created                     |
+    Then there should be a created log on response element with username "admin"
 
-  @database @dev
-  Scenario: API client wants to have an 'updated' log when updating a synthesis element
-    Given there is a synthesis with id "42" and elements:
+  @database
+  Scenario: API client wants to have an 'update' log when updating a synthesis element
+    Given I am logged in to api as admin
+    And there is a synthesis with id "42" and elements:
       | 43 |
-    And I am logged in to api as admin
     And I send a PUT request to "/api/syntheses/42/elements/43" with json:
     """
     {
       "title": "Coucou, je suis un élément avec un titre modifié."
     }
     """
-    Then there should be a log with values:
-      | element_title | Coucou, je suis un élément. |
-      | action        | created                     |
+    Then there should be a log on element 43 with sentence "admin a mis à jour l'élément 43"
+
+  @database
+  Scenario: API client wants to have an 'move' log when changing the parent of a synthesis element
+    Given I am logged in to api as admin
+    And there is a synthesis with id "42" and elements:
+      | 43 |
+    And I create an element in synthesis 42 with values:
+      | id       | 47                          |
+      | title    | Coucou, je suis un élément. |
+      | body     | blabla                      |
+      | notation | 5                           |
+      | enabled  | true                        |
+    And I send a PUT request to "/api/syntheses/42/elements/43" with json:
+    """
+    {
+      "parent": 47
+    }
+    """
+    Then there should be a log on element 43 with sentence "admin a déplacé l'élément 43"
+
+  @database
+  Scenario: API client wants to have an 'publish' log when enabling a synthesis element
+    Given I am logged in to api as admin
+    And there is a synthesis with id "42" and elements:
+      | 43 |
+    And I create an element in synthesis 42 with values:
+      | id       | 47                          |
+      | title    | Coucou, je suis un élément. |
+      | body     | blabla                      |
+      | notation | 5                           |
+      | enabled  | false                       |
+    And I send a PUT request to "/api/syntheses/42/elements/47" with json:
+    """
+    {
+      "enabled": true
+    }
+    """
+    Then there should be a log on element 47 with sentence "admin a publié l'élément 47"
+
+  @database
+  Scenario: API client wants to have an 'unpublish' log when disabling a synthesis element
+    Given I am logged in to api as admin
+    And there is a synthesis with id "42" and elements:
+      | 43 |
+    And I send a PUT request to "/api/syntheses/42/elements/43" with json:
+    """
+    {
+      "enabled": false
+    }
+    """
+    Then there should be a log on element 43 with sentence "admin a dépublié l'élément 43"
+
+  @database
+  Scenario: API client wants to have an 'archive' log when archiving a synthesis element
+    Given I am logged in to api as admin
+    And there is a synthesis with id "42" and elements:
+      | 43 |
+    And I send a PUT request to "/api/syntheses/42/elements/43" with json:
+    """
+    {
+      "archived": true
+    }
+    """
+    Then there should be a log on element 43 with sentence "admin a marqué l'élément 43 comme traité"
+
+  @database
+  Scenario: API client wants to have an 'note' log when noting a synthesis element
+    Given I am logged in to api as admin
+    And there is a synthesis with id "42" and elements:
+      | 43 |
+    And I send a PUT request to "/api/syntheses/42/elements/43" with json:
+    """
+    {
+      "notation": 1
+    }
+    """
+    Then there should be a log on element 43 with sentence "admin a modifié la note de l'élément 43"

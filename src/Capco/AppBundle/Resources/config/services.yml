@@ -335,12 +335,6 @@ services:
         tags:
             - { name: validator.constraint_validator, alias: is_social_network_url.validator }
 
-    capco.synthesis.subscriber:
-        class: Capco\AppBundle\EventListener\SynthesisSubscriber
-        arguments: [@doctrine.orm.entity_manager]
-        tags:
-            - { name: "kernel.event_subscriber" }
-
     capco.synthesis.log_manager:
         class: Capco\AppBundle\Manager\LogManager
         arguments: [@translator]

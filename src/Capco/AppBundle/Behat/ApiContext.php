@@ -201,7 +201,7 @@ class ApiContext extends ApplicationContext
                 // Create element
                 $element = new SynthesisElement();
                 $element->setSynthesis($synthesis);
-                $element->setTitle('Je suis un élément');
+                $element->setTitle('Je suis un nouvel élément');
                 $element->setBody('blabla');
                 $element->setNotation(4);
 
@@ -210,16 +210,12 @@ class ApiContext extends ApplicationContext
                 $metadata = $this->getEntityManager()->getClassMetadata(get_class($element));
                 $metadata->setIdGenerator(new AssignedGenerator());
 
+                // Generate logs for elements
                 $this->getEntityManager()->persist($element);
-
-                // Add logs items for elements
-                $user = $this->getService('fos_user.user_manager')->findOneBy(array(
-                    'email' => 'admin@test.com',
-                ));
-                $logCreated = new SynthesisLogItem($element, $user, 'created');
-                $this->getEntityManager()->persist($logCreated);
-                $logUpdated = new SynthesisLogItem($element, $user, 'updated');
-                $this->getEntityManager()->persist($logUpdated);
+                $this->getEntityManager()->flush();
+                $element->setTitle('Je suis un élément');
+                $this->getEntityManager()->persist($element);
+                $this->getEntityManager()->flush();
             }
         }
 
@@ -227,18 +223,63 @@ class ApiContext extends ApplicationContext
     }
 
     /**
-     * There should be a log with values
+     * I create an element in synthesis with values
      *
-     * @Then there should be a log with values:
+     * @Given I create an element in synthesis :id with values:
      */
-    public function thereShouldBeALogWithValues(TableNode $logValues)
+    public function iCreateAnElementInSynthesisWithValues($id, TableNode $logValues)
     {
         $values = $logValues->getRowsHash();
-        $log = $this->getEntityManager()->getRepository('CapcoAppBundle:Synthesis\SynthesisLogItem')->findOneBy(array(
-            'elementTitle' => $values['element_title'],
-            'action' => $values['action'],
-        ));
+        $synthesis = $this->getEntityManager()->getRepository('CapcoAppBundle:Synthesis\Synthesis')->find($id);
+        $element = new SynthesisElement();
+        $element->setSynthesis($synthesis);
+        $element->setTitle($values['title']);
+        $element->setBody($values['body']);
+        $element->setNotation($values['notation']);
+        $element->setEnabled($values['enabled']);
 
-        \PHPUnit_Framework_Assert::assertNotNull($log);
+        // Set id
+        $element->setId($values['id']);
+        $metadata = $this->getEntityManager()->getClassMetadata(get_class($element));
+        $metadata->setIdGenerator(new AssignedGenerator());
+
+        $this->getEntityManager()->persist($element);
+        $this->getEntityManager()->flush();
+    }
+
+    /**
+     * There should be a log on element with sentence
+     *
+     * @Then there should be a log on element :id with sentence :sentence
+     */
+    public function thereShouldBeALogOnElementWithSentence($id, $sentence)
+    {
+        $element = $this->getEntityManager()->getRepository('CapcoAppBundle:Synthesis\SynthesisElement')->find($id);
+        $logs = $this->getEntityManager()
+            ->getRepository('Gedmo\Loggable\Entity\LogEntry')
+            ->getLogEntries($element);
+        $logExists = false;
+        foreach ($logs as $log) {
+            if ( in_array($sentence, $this->getService('capco.synthesis.log_manager')->getSentencesForLog($log))) {
+                $logExists = true;
+                break;
+            }
+        }
+
+        \PHPUnit_Framework_Assert::assertTrue($logExists);
+    }
+
+    /**
+     * There should be a created log on response element with username
+     *
+     * @Then there should be a created log on response element with username :username
+     */
+    public function thereShouldBeACreatedLogOnResponseElement($username)
+    {
+        $this->response->json(); // check if json
+        $body = (string) $this->response->getBody();
+        $data = json_decode($body, true);
+        $elementId = $data['id'];
+        $this->thereShouldBeALogOnElementWithSentence($elementId, $username.' a créé l\'élément '.$elementId);
     }
 }

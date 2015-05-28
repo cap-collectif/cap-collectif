@@ -1,6 +1,11 @@
 synthesis:
    logs:
       sentence:
-          default: %author% a effectué une action sur l'élément "%element%"
-          created: %author% a créé l'élément "%element%"
-          updated: %author% a mis à jour l'élément "%element%"
+          create: %author% a créé l'élément %element%
+          remove: %author% a supprimé l'élément %element%
+          update: %author% a mis à jour l'élément %element%
+          move: %author% a déplacé l'élément %element%
+          publish: %author% a publié l'élément %element%
+          unpublish: %author% a dépublié l'élément %element%
+          archive: %author% a marqué l'élément %element% comme traité
+          note: %author% a modifié la note de l'élément %element%

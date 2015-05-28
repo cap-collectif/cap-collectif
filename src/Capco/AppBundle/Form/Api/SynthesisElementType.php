@@ -14,7 +14,9 @@ class SynthesisElementType extends AbstractType
             ->add('title', null, ['required' => true])
             ->add('body', null, ['required' => false])
             ->add('enabled', null, ['required' => false])
+            ->add('archived', null, ['required' => false])
             ->add('notation', null, ['required' => false])
+            ->add('parent', null, ['required' => false])
         ;
     }
 

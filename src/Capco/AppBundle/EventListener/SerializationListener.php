@@ -19,7 +19,7 @@ class SerializationListener implements EventSubscriberInterface
     public static function getSubscribedEvents()
     {
         return array(
-            array('event' => 'serializer.post_serialize', 'class' => 'Capco\AppBundle\Entity\Synthesis\SynthesisLogItem', 'method' => 'onPostLogSerialize'),
+            array('event' => 'serializer.post_serialize', 'class' => 'Gedmo\Loggable\Entity\LogEntry', 'method' => 'onPostLogSerialize'),
         );
     }
 
@@ -28,8 +28,8 @@ class SerializationListener implements EventSubscriberInterface
         $log = $event->getObject();
 
         $event->getVisitor()->addData(
-            'sentence',
-            $this->logsManager->getSentenceForLog($log)
+            'sentences',
+            $this->logsManager->getSentencesForLog($log)
         );
     }
 

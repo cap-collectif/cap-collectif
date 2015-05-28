@@ -52,9 +52,19 @@ doctrine:
     orm:
         auto_generate_proxy_classes: "%kernel.debug%"
         auto_mapping: true
+        filters:
+          softdeleteable:
+              class: Gedmo\SoftDeleteable\Filter\SoftDeleteableFilter
+              enabled: true
         dql:
           datetime_functions:
             capco_date: Capco\AppBundle\DQL\DateFunction
+        mappings:
+          loggable:
+            type: annotation
+            alias: GedmoLoggable
+            prefix: Gedmo\Loggable\Entity
+            dir: "%kernel.root_dir%/../vendor/gedmo/doctrine-extensions/lib/Gedmo/Loggable/Entity"
 
 swiftmailer:
     transport: "%mailer_transport%"
@@ -71,6 +81,8 @@ stof_doctrine_extensions:
             timestampable: true
             translatable: true
             sluggable : true
+            softdeleteable: true
+            loggable: true
 
 hautelook_alice:
     locale: fr_FR   # default

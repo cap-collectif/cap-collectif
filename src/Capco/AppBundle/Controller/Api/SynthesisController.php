@@ -2,11 +2,9 @@
 
 namespace Capco\AppBundle\Controller\Api;
 
-use Capco\AppBundle\CapcoAppBundleEvents;
 use Capco\AppBundle\Entity\Synthesis\Synthesis;
 use Capco\AppBundle\Entity\Synthesis\SynthesisElement;
-use Capco\AppBundle\Entity\Synthesis\SynthesisElementDivision;
-use Capco\AppBundle\Event\SynthesisElementChangedEvent;
+use Capco\AppBundle\Entity\Synthesis\SynthesisDivision;
 use FOS\RestBundle\Controller\FOSRestController;
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -20,13 +18,14 @@ use FOS\RestBundle\Controller\Annotations\Get;
 use FOS\RestBundle\Controller\Annotations\Post;
 use FOS\RestBundle\Controller\Annotations\Put;
 use FOS\RestBundle\Util\Codes;
+use FOS\RestBundle\View\View as ResponseView;
 
 use Symfony\Component\Validator\ConstraintViolationListInterface;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 use Capco\AppBundle\Form\Api\SynthesisType as SynthesisForm;
 use Capco\AppBundle\Form\Api\SynthesisElementType as SynthesisElementForm;
-use Capco\AppBundle\Form\Api\SynthesisElementDivisionType as SynthesisElementDivisionForm;
+use Capco\AppBundle\Form\Api\SynthesisDivisionType as SynthesisDivisionForm;
 
 /**
  * @Security("has_role('ROLE_ADMIN')")
@@ -210,13 +209,10 @@ class SynthesisController extends FOSRestController
         $em->persist($element);
         $em->flush();
 
-        $this->get('event_dispatcher')->dispatch(
-            CapcoAppBundleEvents::SYNTHESIS_ELEMENT_CHANGED,
-            new SynthesisElementChangedEvent($element, $this->getUser(), 'created')
-        );
-
+        $view = $this->view($element, Codes::HTTP_CREATED);
         $url = $this->generateUrl('get_synthesis_element', ['synthesis_id' => $synthesis->getId(), 'element_id' => $element->getId()], UrlGeneratorInterface::ABSOLUTE_URL);
-        return $this->redirectView($url, Codes::HTTP_CREATED);
+        $view->setHeader('Location', $url);
+        return $view;
     }
 
     /**
@@ -248,11 +244,6 @@ class SynthesisController extends FOSRestController
             $em->persist($element);
             $em->flush();
 
-            $this->get('event_dispatcher')->dispatch(
-                CapcoAppBundleEvents::SYNTHESIS_ELEMENT_CHANGED,
-                new SynthesisElementChangedEvent($element, $this->getUser(), 'updated', $previousState)
-            );
-
             $url = $this->generateUrl('get_synthesis_element', ['synthesis_id' => $synthesis->getId(), 'element_id' => $element->getId()], UrlGeneratorInterface::ABSOLUTE_URL);
             return $this->redirectView($url);
         }
@@ -277,15 +268,10 @@ class SynthesisController extends FOSRestController
      * @ParamConverter("division", converter="fos_rest.request_body")
      * @View(serializerGroups={"Default", "Details"})
      */
-    public function divideSynthesisElementAction(Request $request, Synthesis $synthesis, SynthesisElement $element, SynthesisElementDivision $division)
+    public function divideSynthesisElementAction(Request $request, Synthesis $synthesis, SynthesisElement $element, SynthesisDivision $division)
     {
-        $form = $this->createForm(new SynthesisElementDivisionForm(), $division);
+        $form = $this->createForm(new SynthesisDivisionForm(), $division);
         $form->submit($request->request->all(), false);
-
-        $this->get('event_dispatcher')->dispatch(
-            CapcoAppBundleEvents::SYNTHESIS_ELEMENT_CHANGED,
-            new SynthesisElementChangedEvent($element, $this->getUser(), 'divided')
-        );
 
         if ($form->isValid()) {
 
@@ -297,12 +283,9 @@ class SynthesisController extends FOSRestController
                 $el->setParent($element->getParent());
                 $el->setNotation($element->getNotation());
                 $em->persist($el);
-                $this->get('event_dispatcher')->dispatch(
-                    CapcoAppBundleEvents::SYNTHESIS_ELEMENT_CHANGED,
-                    new SynthesisElementChangedEvent($el, $this->getUser(), 'created')
-                );
             }
             $em->remove($element);
+            $em->persist($division);
             $em->flush();
 
             $url = $this->generateUrl('get_synthesis', ['id' => $synthesis->getId()], UrlGeneratorInterface::ABSOLUTE_URL);
@@ -326,13 +309,13 @@ class SynthesisController extends FOSRestController
      * @Get("/syntheses/{synthesis_id}/elements/{element_id}/history")
      * @ParamConverter("synthesis", options={"mapping": {"synthesis_id": "id"}})
      * @ParamConverter("element", options={"mapping": {"element_id": "id"}})
-     * @View(serializerGroups={"Default"})
+     * @View(serializerGroups={"Default", "Details"})
      */
     public function getSynthesisElementHistoryAction(Request $request, Synthesis $synthesis, SynthesisElement $element)
     {
-        $logs = $this->get('doctrine.orm.entity_manager')->getRepository('CapcoAppBundle:Synthesis\SynthesisLogItem')->findBy(array(
-            'elementId' => $element->getId(),
-        ));
+        $logs = $this->get('doctrine.orm.entity_manager')
+            ->getRepository('Gedmo\Loggable\Entity\LogEntry')
+            ->getLogEntries($element);
         return $logs;
     }
 }
