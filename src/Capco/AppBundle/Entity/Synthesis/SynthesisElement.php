@@ -112,6 +112,14 @@ class SynthesisElement
     }
 
     /**
+     * @param int $id
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
+    }
+
+    /**
      * @return mixed
      */
     public function getSynthesis()

@@ -8,6 +8,8 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use JMS\Serializer\Annotation as Serializer;
 use JMS\Serializer\Annotation\Expose;
+use JMS\Serializer\Annotation\Groups;
+use JMS\Serializer\Annotation\VirtualProperty;
 use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
@@ -34,15 +36,23 @@ class SynthesisLogItem
      * @var \DateTime
      * @Gedmo\Timestampable(on="create")
      * @ORM\Column(name="created_at", type="datetime")
+     * @Expose
      */
     protected $createdAt;
 
     /**
-     * @var SynthesisElement
-     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Synthesis\SynthesisElement", cascade={"persist", "remove"})
+     * @var string
+     * @ORM\Column(name="element_id", type="string")
      * @Expose
      */
-    protected $element;
+    protected $elementId;
+
+    /**
+     * @var string
+     * @ORM\Column(name="element_title", type="string")
+     * @Expose
+     */
+    protected $elementTitle;
 
     /**
      * @var User
@@ -55,12 +65,14 @@ class SynthesisLogItem
      * @var
      *
      * @ORM\Column(name="action", type="string", length=255)
+     * @Expose
      */
     protected $action;
 
     function __construct(SynthesisElement $element, User $author, $action)
     {
-        $this->element = $element;
+        $this->elementId = $element->getId();
+        $this->elementTitle = $element->getTitle();
         $this->author = $author;
         $this->action = $action;
     }
@@ -73,5 +85,77 @@ class SynthesisLogItem
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getCreatedAt()
+    {
+        return $this->createdAt;
+    }
+
+    /**
+     * @return string
+     */
+    public function getElementId()
+    {
+        return $this->elementId;
+    }
+
+    /**
+     * @param string $elementId
+     */
+    public function setElementId($elementId)
+    {
+        $this->elementId = $elementId;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getElementTitle()
+    {
+        return $this->elementTitle;
+    }
+
+    /**
+     * @param mixed $elementTitle
+     */
+    public function setElementTitle($elementTitle)
+    {
+        $this->elementTitle = $elementTitle;
+    }
+
+    /**
+     * @return User
+     */
+    public function getAuthor()
+    {
+        return $this->author;
+    }
+
+    /**
+     * @param User $author
+     */
+    public function setAuthor($author)
+    {
+        $this->author = $author;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getAction()
+    {
+        return $this->action;
+    }
+
+    /**
+     * @param mixed $action
+     */
+    public function setAction($action)
+    {
+        $this->action = $action;
     }
 }

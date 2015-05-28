@@ -282,6 +282,11 @@ class SynthesisController extends FOSRestController
         $form = $this->createForm(new SynthesisElementDivisionForm(), $division);
         $form->submit($request->request->all(), false);
 
+        $this->get('event_dispatcher')->dispatch(
+            CapcoAppBundleEvents::SYNTHESIS_ELEMENT_CHANGED,
+            new SynthesisElementChangedEvent($element, $this->getUser(), 'divided')
+        );
+
         if ($form->isValid()) {
 
             $em = $this->get('doctrine.orm.entity_manager');
@@ -289,19 +294,45 @@ class SynthesisController extends FOSRestController
                 $el->setLinkedDataClass($element->getLinkedDataClass());
                 $el->setLinkedDataId($element->getLinkedDataId());
                 $el->setSynthesis($synthesis);
+                $el->setParent($element->getParent());
+                $el->setNotation($element->getNotation());
                 $em->persist($el);
+                $this->get('event_dispatcher')->dispatch(
+                    CapcoAppBundleEvents::SYNTHESIS_ELEMENT_CHANGED,
+                    new SynthesisElementChangedEvent($el, $this->getUser(), 'created')
+                );
             }
             $em->remove($element);
             $em->flush();
-
-            $this->get('event_dispatcher')->dispatch(
-                CapcoAppBundleEvents::SYNTHESIS_ELEMENT_CHANGED,
-                new SynthesisElementChangedEvent($element, $this->getUser(), 'divided')
-            );
 
             $url = $this->generateUrl('get_synthesis', ['id' => $synthesis->getId()], UrlGeneratorInterface::ABSOLUTE_URL);
             return $this->redirectView($url, Codes::HTTP_CREATED);
         }
         return $form;
+    }
+
+    /**
+     * Get history of a synthesis element
+     *
+     * @ApiDoc(
+     *  resource=true,
+     *  description="Get history of a synthesis element",
+     *  statusCodes={
+     *    200 = "Returned when successful",
+     *    404 = "Returned when element is not found",
+     *  }
+     * )
+     *
+     * @Get("/syntheses/{synthesis_id}/elements/{element_id}/history")
+     * @ParamConverter("synthesis", options={"mapping": {"synthesis_id": "id"}})
+     * @ParamConverter("element", options={"mapping": {"element_id": "id"}})
+     * @View(serializerGroups={"Default"})
+     */
+    public function getSynthesisElementHistoryAction(Request $request, Synthesis $synthesis, SynthesisElement $element)
+    {
+        $logs = $this->get('doctrine.orm.entity_manager')->getRepository('CapcoAppBundle:Synthesis\SynthesisLogItem')->findBy(array(
+            'elementId' => $element->getId(),
+        ));
+        return $logs;
     }
 }

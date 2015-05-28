@@ -1,0 +1,6 @@
+synthesis:
+   logs:
+      sentence:
+          default: %author% a effectué une action sur l'élément "%element%"
+          created: %author% a créé l'élément "%element%"
+          updated: %author% a mis à jour l'élément "%element%"

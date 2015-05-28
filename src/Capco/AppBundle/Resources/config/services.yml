@@ -340,3 +340,13 @@ services:
         arguments: [@doctrine.orm.entity_manager]
         tags:
             - { name: "kernel.event_subscriber" }
+
+    capco.synthesis.log_manager:
+        class: Capco\AppBundle\Manager\LogManager
+        arguments: [@translator]
+
+    capco.synthesis.serialization_listener:
+        class: Capco\AppBundle\EventListener\SerializationListener
+        arguments: [@capco.synthesis.log_manager]
+        tags:
+            - { name: "jms_serializer.event_subscriber" }

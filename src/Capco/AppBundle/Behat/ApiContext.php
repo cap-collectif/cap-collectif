@@ -1,7 +1,15 @@
 <?php
 
+/**
+ * @Copyright 2015 Aurélien David a.k.a "PretentiouSpyl" <adavid@jolicode.com>
+ */
+
 namespace Capco\AppBundle\Behat;
 
+use Capco\AppBundle\Entity\Synthesis\Synthesis;
+use Capco\AppBundle\Entity\Synthesis\SynthesisElement;
+use Capco\AppBundle\Entity\Synthesis\SynthesisLogItem;
+use Doctrine\ORM\Id\AssignedGenerator;
 use GuzzleHttp\Client;
 use Behat\Gherkin\Node\PyStringNode;
 use Behat\Gherkin\Node\TableNode;
@@ -156,82 +164,81 @@ class ApiContext extends ApplicationContext
     }
 
     /**
-     * I try to get first synthesis
+     * There is a synthesis with id and elements
      *
-     * @When /^(?:I )?try to get first synthesis$/
+     * @Given there is a synthesis with id :id and elements:
      */
-    public function itryToGetFirstSynthesis()
+    public function thereIsASynthesisWithIdAndElements($id, TableNode $elementsIds)
     {
-        $synthesis = $this->getEntityManager()->getRepository('CapcoAppBundle:Synthesis\Synthesis')->findAll()[0];
-        $this->iSendARequest('GET', '/api/syntheses/'.$synthesis->getId());
+        $synthesis = $this->getEntityManager()->getRepository('CapcoAppBundle:Synthesis\Synthesis')->find($id);
+
+        if (null === $synthesis) {
+            // Create synthesis
+            $synthesis = new Synthesis();
+            $consultationStep = $this->getEntityManager()->getRepository('CapcoAppBundle:ConsultationStep')->findOneBy(
+                array('slug' => 'collecte-des-avis')
+            );
+            $synthesis->setSourceType('consultation_step');
+            $synthesis->setConsultationStep($consultationStep);
+            $synthesis->setEnabled(true);
+
+            // Set id
+            $synthesis->setId($id);
+            $metadata = $this->getEntityManager()->getClassMetadata(get_class($synthesis));
+            $metadata->setIdGenerator(new AssignedGenerator());
+
+            $this->getEntityManager()->persist($synthesis);
+        }
+
+        foreach ($elementsIds->getRows() as $el) {
+
+            $elId = $el[0];
+
+            $element = $this->getEntityManager()->getRepository('CapcoAppBundle:Synthesis\SynthesisElement')->find($elId);
+
+            if (null === $element) {
+
+                // Create element
+                $element = new SynthesisElement();
+                $element->setSynthesis($synthesis);
+                $element->setTitle('Je suis un élément');
+                $element->setBody('blabla');
+                $element->setNotation(4);
+
+                // Set id
+                $element->setId($elId);
+                $metadata = $this->getEntityManager()->getClassMetadata(get_class($element));
+                $metadata->setIdGenerator(new AssignedGenerator());
+
+                $this->getEntityManager()->persist($element);
+
+                // Add logs items for elements
+                $user = $this->getService('fos_user.user_manager')->findOneBy(array(
+                    'email' => 'admin@test.com',
+                ));
+                $logCreated = new SynthesisLogItem($element, $user, 'created');
+                $this->getEntityManager()->persist($logCreated);
+                $logUpdated = new SynthesisLogItem($element, $user, 'updated');
+                $this->getEntityManager()->persist($logUpdated);
+            }
+        }
+
+        $this->getEntityManager()->flush();
     }
 
     /**
-     * I try to update first synthesis
+     * There should be a log with values
      *
-     * @When /^(?:I )?try to update first synthesis with json:$/
+     * @Then there should be a log with values:
      */
-    public function itryToUpdateFirstSynthesisWithJson(PyStringNode $string)
+    public function thereShouldBeALogWithValues(TableNode $logValues)
     {
-        $synthesis = $this->getEntityManager()->getRepository('CapcoAppBundle:Synthesis\Synthesis')->findAll()[0];
-        $this->iSendARequestWithJson('PUT', '/api/syntheses/'.$synthesis->getId(), $string);
-    }
+        $values = $logValues->getRowsHash();
+        $log = $this->getEntityManager()->getRepository('CapcoAppBundle:Synthesis\SynthesisLogItem')->findOneBy(array(
+            'elementTitle' => $values['element_title'],
+            'action' => $values['action'],
+        ));
 
-    /**
-     * I try to get first synthesis elements
-     *
-     * @When /^(?:I )?try to get first synthesis elements$/
-     */
-    public function itryToGetFirstSynthesisElements()
-    {
-        $synthesis = $this->getEntityManager()->getRepository('CapcoAppBundle:Synthesis\Synthesis')->findAll()[0];
-        $this->iSendARequest('GET', '/api/syntheses/'.$synthesis->getId().'/elements');
-    }
-
-    /**
-     * I try to get first element of first synthesis
-     *
-     * @When /^(?:I )?try to get first element of first synthesis$/
-     */
-    public function itryToGetFirstElementOfFirstSynthesis()
-    {
-        $synthesis = $this->getEntityManager()->getRepository('CapcoAppBundle:Synthesis\Synthesis')->findAll()[0];
-        $element = $synthesis->getElements()[0];
-        $this->iSendARequest('GET', '/api/syntheses/'.$synthesis->getId().'/elements/'.$element->getId());
-    }
-
-    /**
-     * I try to update an element in first synthesis
-     *
-     * @When /^(?:I )?try to update an element in first synthesis with json:$/
-     */
-    public function itryToUpdateAnElementInFirstSynthesisWithJson(PyStringNode $string)
-    {
-        $synthesis = $this->getEntityManager()->getRepository('CapcoAppBundle:Synthesis\Synthesis')->findAll()[0];
-        $element = $synthesis->getElements()[0];
-        $this->iSendARequestWithJson('PUT', '/api/syntheses/'.$synthesis->getId().'/elements/'.$element->getId(), $string);
-    }
-
-    /**
-     * I try to create an element in first synthesis
-     *
-     * @When /^(?:I )?try to create an element in first synthesis with json:$/
-     */
-    public function itryToCreateAnElementInFirstSynthesisWithJson(PyStringNode $string)
-    {
-        $synthesis = $this->getEntityManager()->getRepository('CapcoAppBundle:Synthesis\Synthesis')->findAll()[0];
-        $this->iSendARequestWithJson('POST', '/api/syntheses/'.$synthesis->getId().'/elements', $string);
-    }
-
-    /**
-     * I try to divide an element in first synthesis
-     *
-     * @When /^(?:I )?try to divide an element in first synthesis with json:$/
-     */
-    public function itryToDivideAnElementInFirstSynthesisWithJson(PyStringNode $string)
-    {
-        $synthesis = $this->getEntityManager()->getRepository('CapcoAppBundle:Synthesis\Synthesis')->findAll()[0];
-        $element = $synthesis->getElements()[0];
-        $this->iSendARequestWithJson('POST', '/api/syntheses/'.$synthesis->getId().'/elements/'.$element->getId().'/divisions', $string);
+        \PHPUnit_Framework_Assert::assertNotNull($log);
     }
 }

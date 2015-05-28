@@ -251,3 +251,14 @@ lexik_jwt_authentication:
     token_ttl:        %jwt_token_ttl%
     user_identity_field: email
 
+jms_serializer:
+    metadata:
+        auto_detection: true
+        directories:
+            FOSUserBundle:
+                namespace_prefix: "FOS\\UserBundle"
+                path: "@CapcoUserBundle/Resources/config/serializer/FOSUserBundle"
+            SonataUserBundle:
+                namespace_prefix: "Sonata\\UserBundle"
+                path: "@CapcoUserBundle/Resources/config/serializer/SonataUserBundle"
+
