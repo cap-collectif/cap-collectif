@@ -447,3 +447,18 @@ Feature: Synthesis
     Then there should be a log with values:
       | element_title | Coucou, je suis un élément. |
       | action        | created                     |
+
+  @database @dev
+  Scenario: API client wants to have an 'updated' log when updating a synthesis element
+    Given there is a synthesis with id "42" and elements:
+      | 43 |
+    And I am logged in to api as admin
+    And I send a PUT request to "/api/syntheses/42/elements/43" with json:
+    """
+    {
+      "title": "Coucou, je suis un élément avec un titre modifié."
+    }
+    """
+    Then there should be a log with values:
+      | element_title | Coucou, je suis un élément. |
+      | action        | created                     |
