@@ -80,7 +80,6 @@ liip_imagine:
         default_small:
             quality: 75
             controller_action: 'SonataMediaBundle:Media:liipImagineFilter'
-            format: png
             filters:
                 thumbnail: { size: [100, 70], mode: outbound }
 

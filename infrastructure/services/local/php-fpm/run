@@ -8,6 +8,7 @@ cd       /var/www
 
 chown -R capco:capco /var/www/app/cache
 chown -R capco:capco /var/www/app/logs
+chown -R capco:capco /var/www/web/media
 chmod -R 777 /var/www/app/cache
 chmod -R 777 /var/www/app/logs
 

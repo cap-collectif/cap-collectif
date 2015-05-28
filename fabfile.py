@@ -94,3 +94,11 @@ def test():
 def build():
     build_deps();
     build_front();
+
+@task
+def reinit():
+    with lcd(env.local_dir):
+        local('docker-compose -p capco stop')
+        local('docker-compose -p capco rm -f')
+        local('docker-compose -p capco build')
+        local('docker-compose -p capco up -d')
