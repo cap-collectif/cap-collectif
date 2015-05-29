@@ -255,9 +255,7 @@ class ApiContext extends ApplicationContext
     public function thereShouldBeALogOnElementWithSentence($id, $sentence)
     {
         $element = $this->getEntityManager()->getRepository('CapcoAppBundle:Synthesis\SynthesisElement')->find($id);
-        $logs = $this->getEntityManager()
-            ->getRepository('Gedmo\Loggable\Entity\LogEntry')
-            ->getLogEntries($element);
+        $logs = $this->getService('capco.synthesis.log_manager')->getLogEntries($element);
         $logExists = false;
         foreach ($logs as $log) {
             if ( in_array($sentence, $this->getService('capco.synthesis.log_manager')->getSentencesForLog($log))) {

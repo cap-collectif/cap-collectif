@@ -66,6 +66,7 @@ class SynthesisElement
      * @var
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Synthesis\SynthesisDivision", inversedBy="elements", cascade={"persist"})
      * @ORM\JoinColumn(name="original_division_id", referencedColumnName="id", nullable=true, onDelete="SET NULL")
+     * @Gedmo\Versioned
      */
     private $originalDivision;
 

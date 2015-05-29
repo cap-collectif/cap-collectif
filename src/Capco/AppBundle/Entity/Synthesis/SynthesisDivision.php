@@ -20,7 +20,6 @@ use JMS\Serializer\Annotation\Type;
  * @ORM\Table(name="synthesis_division")
  * @ORM\Entity()
  * @Gedmo\Loggable()
- *
  * @Serializer\ExclusionPolicy("all")
  */
 class SynthesisDivision
@@ -36,16 +35,17 @@ class SynthesisDivision
     private $id;
 
     /**
-     * @Expose()
-     * @ORM\OneToOne(targetEntity="Capco\AppBundle\Entity\Synthesis\SynthesisElement", cascade={"persist"})
-     * @ORM\JoinColumn(name="original_element_id", referencedColumnName="id", onDelete="CASCADE")
+     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Synthesis\SynthesisElement", cascade={"persist"})
+     * @ORM\JoinColumn(name="original_element_id", referencedColumnName="id")
+     * @Expose
+     * @Gedmo\Versioned
      */
     private $originalElement;
 
     /**
      * @Type("ArrayCollection<Capco\AppBundle\Entity\Synthesis\SynthesisElement>")
-     * @Expose()
      * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\Synthesis\SynthesisElement", mappedBy="originalDivision", cascade={"persist"})
+     * @Expose
      */
     private $elements;
 
@@ -87,6 +87,7 @@ class SynthesisDivision
     public function addElement(SynthesisElement $element)
     {
         return $this->elements[] = $element;
+        $element->setOriginalDivision($this);
     }
 
     /**
@@ -95,6 +96,7 @@ class SynthesisDivision
     public function removeElement(SynthesisElement $element)
     {
         return $this->elements->removeElement($element);
+        $element->setOriginalDivision(null);
     }
 
     /**
@@ -103,6 +105,9 @@ class SynthesisDivision
     public function setElements($elements)
     {
         $this->elements = $elements;
+        foreach ($elements as $el) {
+            $el->setOriginalDivision($this);
+        }
     }
 
 

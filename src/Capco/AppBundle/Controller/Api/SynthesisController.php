@@ -40,6 +40,7 @@ class SynthesisController extends FOSRestController
      * @ApiDoc(
      *  resource=true,
      *  description="Get the synthesis with all elements",
+     *  output="Capco\AppBundle\Entity\Synthesis\Synthesis",
      *  statusCodes={
      *    200 = "Syntheses found",
      *    404 = "No syntheses",
@@ -51,7 +52,7 @@ class SynthesisController extends FOSRestController
      */
     public function getSynthesesAction()
     {
-        return $this->get('doctrine.orm.entity_manager')->getRepository('CapcoAppBundle:Synthesis\Synthesis')->findAll();
+        return $this->get('capco.synthesis.synthesis_handler')->getAll();
     }
 
     /**
@@ -59,7 +60,7 @@ class SynthesisController extends FOSRestController
      *
      * @ApiDoc(
      *  resource=true,
-     *  description="Get the synthesis with all elements",
+     *  description="Get a synthesis with all elements",
      *  statusCodes={
      *    200 = "Returned when successful",
      *    404 = "Synthesis does not exist",
@@ -282,10 +283,14 @@ class SynthesisController extends FOSRestController
                 $el->setSynthesis($synthesis);
                 $el->setParent($element->getParent());
                 $el->setNotation($element->getNotation());
+                $el->setOriginalDivision($division);
                 $em->persist($el);
             }
-            $em->remove($element);
+
+            $division->setOriginalElement($element);
             $em->persist($division);
+
+            $em->remove($element);
             $em->flush();
 
             $url = $this->generateUrl('get_synthesis', ['id' => $synthesis->getId()], UrlGeneratorInterface::ABSOLUTE_URL);
@@ -313,9 +318,7 @@ class SynthesisController extends FOSRestController
      */
     public function getSynthesisElementHistoryAction(Request $request, Synthesis $synthesis, SynthesisElement $element)
     {
-        $logs = $this->get('doctrine.orm.entity_manager')
-            ->getRepository('Gedmo\Loggable\Entity\LogEntry')
-            ->getLogEntries($element);
+        $logs = $this->get('capco.synthesis.log_manager')->getLogEntries($element);
         return $logs;
     }
 }

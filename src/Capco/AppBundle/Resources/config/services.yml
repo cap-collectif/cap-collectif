@@ -337,10 +337,19 @@ services:
 
     capco.synthesis.log_manager:
         class: Capco\AppBundle\Manager\LogManager
-        arguments: [@translator]
+        arguments: [@translator, @fos_user.user_manager, @doctrine.orm.entity_manager]
 
     capco.synthesis.serialization_listener:
         class: Capco\AppBundle\EventListener\SerializationListener
         arguments: [@capco.synthesis.log_manager]
         tags:
             - { name: "jms_serializer.event_subscriber" }
+
+    capco.synthesis.synthesis_listener:
+        class: Capco\AppBundle\EventListener\SynthesisLoggableListener
+        calls:
+          - [ setAnnotationReader, [ @annotation_reader ] ]
+
+    capco.synthesis.synthesis_handler:
+        class: Capco\AppBundle\Handler\Api\SynthesisHandler
+        arguments: [@doctrine.orm.entity_manager]

@@ -425,7 +425,7 @@ Feature: Synthesis
           "title": "Je suis un élément"
         },
         "sentences": [
-          "admin a mis à jour l'élément \"43\""
+          " a mis à jour l'élément 43"
         ]
       },
       {
@@ -443,7 +443,7 @@ Feature: Synthesis
           "notation": 4
         },
         "sentences": [
-          "admin a créé l'élément \"43\""
+          " a créé l'élément 43"
         ]
       }
     ]
@@ -553,3 +553,31 @@ Feature: Synthesis
     }
     """
     Then there should be a log on element 43 with sentence "admin a modifié la note de l'élément 43"
+
+  Scenario: API client wants to have an 'divide' log when dividing a synthesis element
+    Given I am logged in to api as admin
+    And there is a synthesis with id "42" and elements:
+      | 43 |
+    And I send a POST request to "/api/syntheses/42/elements/43/divisions" with json:
+    """
+    {
+      "elements": [
+        {
+          "title": "Coucou, je suis un élément.",
+          "body": "blabla",
+          "notation": 5
+        },
+        {
+          "title": "Coucou, je suis un autre élément.",
+          "body": "blabla",
+          "notation": 3
+        },
+        {
+          "title": "Coucou, je suis le dernier élément.",
+          "body": "blabla",
+          "notation": 2
+        }
+      ]
+    }
+    """
+    Then there should be a log on element 43 with sentence "admin a divisé l'élément 43"
