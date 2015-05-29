@@ -32,7 +32,7 @@ class ProfileController extends BaseController
         $votes = $this->getDoctrine()->getRepository('CapcoAppBundle:AbstractVote')->getByUser($user);
 
         return [
-            'user'   => $user,
+            'user' => $user,
             'blocks' => $blocks,
             'arguments' => $arguments,
             'ideas' => $ideas,

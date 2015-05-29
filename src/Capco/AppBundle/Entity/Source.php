@@ -17,7 +17,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class Source
 {
-    const TYPE_FOR  = 1;
+    const TYPE_FOR = 1;
     const LINK = 0;
     const FILE = 1;
 

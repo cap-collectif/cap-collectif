@@ -8,7 +8,6 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-
 namespace Capco\UserBundle\Entity;
 
 use Sonata\UserBundle\Entity\BaseUser as BaseUser;
@@ -816,8 +815,8 @@ class User extends BaseUser implements EncoderAwareInterface
     {
         return array(
             UserInterface::GENDER_UNKNOWN => 'gender.unknown',
-            UserInterface::GENDER_FEMALE  => 'gender.female',
-            UserInterface::GENDER_MALE    => 'gender.male',
+            UserInterface::GENDER_FEMALE => 'gender.female',
+            UserInterface::GENDER_MALE => 'gender.male',
         );
     }
 

@@ -9,12 +9,6 @@
             "SymfonyStandard": "app/"
         }
     },
-    "repositories": [
-        {
-            "type": "vcs",
-            "url": "https://github.com/spyl94/SonataMediaBundle"
-        }
-    ],
     "require": {
         "php": ">=5.3.3",
         "symfony/symfony": "2.6.*",

@@ -20,9 +20,9 @@ class ConsultationDownloadResolver
     );
 
     protected $contentTypes = array(
-        'xls'  => 'application/vnd.ms-excel',
+        'xls' => 'application/vnd.ms-excel',
         'xlsx' => 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
-        'csv'  => 'text/csv',
+        'csv' => 'text/csv',
     );
 
     protected $sheets = array(
@@ -130,7 +130,7 @@ class ConsultationDownloadResolver
 
         $data = array(
             'published' => array(),
-            'unpublished' => array()
+            'unpublished' => array(),
         );
 
         // 0pinions

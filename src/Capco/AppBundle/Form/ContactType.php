@@ -37,13 +37,13 @@ class ContactType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $collectionConstraint = new Collection(array(
-                'name'      => array(
+                'name' => array(
                     new NotBlank(),
                 ),
-                'email'     => array(
+                'email' => array(
                     new Email(),
                 ),
-                'message'   => array(
+                'message' => array(
                     new NotBlank(),
                 ),
             ));
