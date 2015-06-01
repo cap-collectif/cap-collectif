@@ -18,11 +18,11 @@ class ShareButtonBlockService extends BaseBlockService
     public function setDefaultSettings(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'url'            => null,
-            'title'          => null,
-            'template'       => 'CapcoAppBundle:Block:block_share_button.html.twig',
-            'classes'        => null,
-            'btn_classes'    => null,
+            'url' => null,
+            'title' => null,
+            'template' => 'CapcoAppBundle:Block:block_share_button.html.twig',
+            'classes' => null,
+            'btn_classes' => null,
         ));
     }
 
@@ -32,10 +32,10 @@ class ShareButtonBlockService extends BaseBlockService
     public function execute(BlockContextInterface $blockContext, Response $response = null)
     {
         $parameters = array(
-            'context'   => $blockContext,
-            'settings'  => $blockContext->getSettings(),
-            'block'     => $blockContext->getBlock(),
-            'url'     => $blockContext->getSetting('url'),
+            'context' => $blockContext,
+            'settings' => $blockContext->getSettings(),
+            'block' => $blockContext->getBlock(),
+            'url' => $blockContext->getSetting('url'),
             'title' => $blockContext->getSetting('title'),
             'classes' => $blockContext->getSetting('classes'),
             'btn_classes' => $blockContext->getSetting('btn_classes'),

@@ -6,7 +6,6 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Validator\Constraints as Assert;
-use Capco\UserBundle\Entity\User;
 
 /**
  * Opinion.
@@ -682,7 +681,7 @@ class Opinion
     }
 
     /**
-     * @return boolean
+     * @return bool
      */
     public function isPinned()
     {
@@ -690,7 +689,7 @@ class Opinion
     }
 
     /**
-     * @param boolean $pinned
+     * @param bool $pinned
      */
     public function setPinned($pinned)
     {

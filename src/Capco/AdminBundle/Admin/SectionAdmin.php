@@ -14,7 +14,7 @@ class SectionAdmin extends Admin
 {
     protected $datagridValues = array(
         '_sort_order' => 'ASC',
-        '_sort_by'    => 'position',
+        '_sort_by' => 'position',
     );
 
     public function createQuery($context = 'list')

@@ -14,7 +14,7 @@ class MenuItemAdmin extends Admin
 {
     protected $datagridValues = array(
         '_sort_order' => 'ASC',
-        '_sort_by'    => 'Menu',
+        '_sort_by' => 'Menu',
     );
 
     public function createQuery($context = 'list')
