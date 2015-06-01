@@ -32,6 +32,8 @@ RUN apt-get update && \
 RUN addgroup --gid=1000 capco && \
     adduser --system --uid=1000 --home /home/capco --shell /bin/bash capco
 
+RUN mv /var/lib/mysql /var/lib/mysql_save
+
 # Service
 COPY mysql/run             /etc/service/mysql/run
 COPY nginx/run             /etc/service/nginx/run

@@ -11,7 +11,7 @@ RUN apt-get update && \
     echo "deb http://packages.dotdeb.org wheezy-php56 all" >> /etc/apt/sources.list.d/dotdeb.list && \
     wget http://www.dotdeb.org/dotdeb.gpg -O- -q | apt-key add - && \
     apt-get update && \
-    apt-get install -y php5-cli php5-curl php5-intl php5-mysqli php5-redis && \
+    apt-get install -y php5-gd php5-cli php5-curl php5-intl php5-mysqli php5-redis && \
 
     # Install node js and deps for npm install
     wget https://deb.nodesource.com/setup -O- -q | bash - && \
