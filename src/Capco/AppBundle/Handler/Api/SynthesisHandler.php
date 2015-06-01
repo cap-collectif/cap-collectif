@@ -29,6 +29,8 @@ class SynthesisHandler
         $this->em->flush();
 
         $this->createElementsFromSource($synthesis);
+
+        return $synthesis;
     }
 
     public function createElementsFromSource(Synthesis $synthesis)

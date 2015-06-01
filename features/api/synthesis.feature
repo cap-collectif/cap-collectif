@@ -95,7 +95,7 @@ Feature: Synthesis
     And I send a GET request to "/api/syntheses/42"
     Then the JSON response status code should be 401
 
-  @atabase
+  @database
   Scenario: API client wants to create a synthesis
     Given I am logged in to api as admin
     And I send a POST request to "/api/syntheses" with json:
@@ -105,6 +105,20 @@ Feature: Synthesis
     }
     """
     Then the JSON response status code should be 201
+    And the JSON response should match:
+    """
+    {
+      "id": @string@,
+      "enabled": true,
+      "_links": {
+        "self": { "href": "@string@.startsWith('/api/syntheses/')" },
+        "elements": { "href": "@string@.startsWith('/api/syntheses/').endsWith('/elements')" }
+      },
+      "_embedded": {
+        "elements": @null@
+      }
+    }
+    """
 
   Scenario: Non admin API client wants to create a synthesis
     Given I am logged in to api as user

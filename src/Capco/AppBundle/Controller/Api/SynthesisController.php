@@ -98,10 +98,12 @@ class SynthesisController extends FOSRestController
             throw new BadRequestHttpException($validationErrors->__toString());
         }
         
-        $this->get('capco.synthesis.synthesis_handler')->createSynthesis($synthesis);
+        $synthesis = $this->get('capco.synthesis.synthesis_handler')->createSynthesis($synthesis);
 
+        $view = $this->view($synthesis, Codes::HTTP_CREATED);
         $url = $this->generateUrl('get_synthesis', ['id' => $synthesis->getId()], UrlGeneratorInterface::ABSOLUTE_URL);
-        return $this->redirectView($url, Codes::HTTP_CREATED);
+        $view->setHeader('Location', $url);
+        return $view;
     }
 
     /**
