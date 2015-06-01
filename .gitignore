@@ -65,4 +65,5 @@ Icon
 infrastructure/vhosts.conf
 infrastructure/docker-compose.yml
 infrastructure/services/remote/VERSION
-data/*
+mediadata/*
+redisdata/*

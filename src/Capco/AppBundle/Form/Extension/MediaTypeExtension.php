@@ -25,8 +25,8 @@ class MediaTypeExtension extends AbstractTypeExtension
     {
         if (!$options['show_unlink']) {
             $builder->add('unlink', 'hidden', array(
-                'mapped' => false,
-                'data' => false,
+                'mapped'   => false,
+                'data'     => false,
                 'required' => false,
                 ))
             ;
@@ -34,8 +34,8 @@ class MediaTypeExtension extends AbstractTypeExtension
             $builder->add('unlink', 'checkbox', array(
                 'label' => 'media.form.unlink',
                 'translation_domain' => 'CapcoAppBundle',
-                'mapped' => false,
-                'data' => false,
+                'mapped'   => false,
+                'data'     => false,
                 'required' => false,
             ));
         }

@@ -54,10 +54,10 @@ class RecentPostBlockService extends BaseBlockService
         }
 
         $parameters = array(
-            'context' => $blockContext,
-            'settings' => $blockContext->getSettings(),
-            'block' => $blockContext->getBlock(),
-            'posts' => $this->postRepository->getRecentPosts($blockContext->getSetting('number')),
+            'context'   => $blockContext,
+            'settings'  => $blockContext->getSettings(),
+            'block'     => $blockContext->getBlock(),
+            'posts'     => $this->postRepository->getRecentPosts($blockContext->getSetting('number')),
         );
 
         return $this->renderPrivateResponse($blockContext->getTemplate(), $parameters, $response);
@@ -74,10 +74,10 @@ class RecentPostBlockService extends BaseBlockService
     public function setDefaultSettings(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'number' => 5,
-            'toggle' => false,
-            'title' => 'Recent Posts',
-            'template' => 'CapcoAdminBundle:Block:recent_posts.html.twig',
+            'number'     => 5,
+            'toggle'     => false,
+            'title'      => 'Recent Posts',
+            'template'   => 'CapcoAdminBundle:Block:recent_posts.html.twig',
         ));
     }
 
