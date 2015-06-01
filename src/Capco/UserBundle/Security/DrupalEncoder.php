@@ -251,7 +251,7 @@ function _password_crypt($algo, $password, $setting)
     } while (--$count);
 
     $len = strlen($hash);
-    $output = $setting._password_base64_encode($hash, $len);
+    $output =  $setting._password_base64_encode($hash, $len);
   // _password_base64_encode() of a 16 byte MD5 will always be 22 characters.
   // _password_base64_encode() of a 64 byte sha512 will always be 86 characters.
   $expected = 12 + ceil((8 * $len) / 6);

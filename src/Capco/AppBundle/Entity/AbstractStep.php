@@ -24,6 +24,7 @@ use Capco\AppBundle\Validator\Constraints as CapcoAssert;
  */
 abstract class AbstractStep
 {
+
     use DateHelperTrait;
 
     public static $stepStatus = [
@@ -414,6 +415,6 @@ abstract class AbstractStep
             return 'open';
         }
 
-        return;
+        return null;
     }
 }

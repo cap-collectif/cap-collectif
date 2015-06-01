@@ -2,8 +2,11 @@
 
 namespace Capco\AppBundle\Traits;
 
+use Doctrine\ORM\Mapping as ORM;
+
 trait DateHelperTrait
 {
+
     public function extractDate($datetime)
     {
         return null != $datetime ? $datetime->format('Ymd') : null;

@@ -2,26 +2,25 @@ application:
     build: infrastructure/services/local
     volumes:
         - .:/var/www
-        - data/mysql/:/var/lib/mysql
     ports:
         - "80:80"
         - "6379:6379"
     environment:
         SYMFONY_ENV: dev
     volumes_from:
-        - redisdata
         - applicationdata
+        - redisdata
 
 applicationdata:
     build: infrastructure/services/applicationdata
     volumes:
-        - data/media/:/var/www/web/media
+        - mediadata:/var/www/web/media
     command: echo "I'm a data container"
 
 redisdata:
     build: infrastructure/services/redisdata
     volumes:
-        - data/redis:/data
+        - redisdata:/data
     command: echo "I'm a data container"
 
 builder:
@@ -29,20 +28,20 @@ builder:
     volumes:
         - .:/capco
 
-# behat:
-#     build: infrastructure/services/behat
-#     links:
-#         - application:application
-#         - seleniumhub:selenium
-#     volumes:
-#         - .:/var/www/html
+behat:
+    build: infrastructure/services/behat
+    links:
+        - application:application
+        - seleniumhub:selenium
+    volumes:
+        - .:/var/www/html
 
-# seleniumhub:
-#     image: selenium/hub
+seleniumhub:
+    image: selenium/hub
 
-# seleniumnode:
-#     image: selenium/node-firefox
-#     # image: selenium/node-chrome
-#     links:
-#         - seleniumhub:hub
-#         - application:application
+seleniumnode:
+    image: selenium/node-firefox
+    # image: selenium/node-chrome
+    links:
+        - seleniumhub:hub
+        - application:application

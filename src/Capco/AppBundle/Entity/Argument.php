@@ -18,7 +18,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 class Argument
 {
     const TYPE_AGAINST = 0;
-    const TYPE_FOR = 1;
+    const TYPE_FOR  = 1;
 
     public static $argumentTypes = [
         self::TYPE_FOR => 'yes',

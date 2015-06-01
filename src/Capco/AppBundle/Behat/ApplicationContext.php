@@ -120,7 +120,7 @@ class ApplicationContext extends UserContext
     {
         $responseStatusCode = $this->response->getStatusCode();
         if (!$responseStatusCode == intval($statusCode)) {
-            throw new \Exception(sprintf('Did not see response status code %s, but %s.', $statusCode, $responseStatusCode));
+            throw new \Exception(sprintf("Did not see response status code %s, but %s.", $statusCode, $responseStatusCode));
         }
     }
 

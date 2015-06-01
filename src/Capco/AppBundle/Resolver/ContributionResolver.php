@@ -59,7 +59,7 @@ class ContributionResolver
         }
 
         foreach ($contributors as &$contributor) {
-            $contributor['total'] = isset($contributor['sources']) ? $contributor['sources'] : 0;
+            $contributor['total']  = isset($contributor['sources']) ? $contributor['sources'] : 0;
             $contributor['total'] += isset($contributor['arguments']) ? $contributor['arguments'] : 0;
             $contributor['total'] += isset($contributor['opinions']) ? $contributor['opinions'] : 0;
             $contributor['total'] += isset($contributor['opinions_votes']) ? $contributor['opinions_votes'] : 0;
