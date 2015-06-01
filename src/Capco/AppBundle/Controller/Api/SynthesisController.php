@@ -97,10 +97,9 @@ class SynthesisController extends FOSRestController
         if ($validationErrors->count() > 0) {
             throw new BadRequestHttpException($validationErrors->__toString());
         }
+        
+        $this->get('capco.synthesis.synthesis_handler')->createSynthesis($synthesis);
 
-        $em = $this->get('doctrine.orm.entity_manager');
-        $em->persist($synthesis);
-        $em->flush();
         $url = $this->generateUrl('get_synthesis', ['id' => $synthesis->getId()], UrlGeneratorInterface::ABSOLUTE_URL);
         return $this->redirectView($url, Codes::HTTP_CREATED);
     }

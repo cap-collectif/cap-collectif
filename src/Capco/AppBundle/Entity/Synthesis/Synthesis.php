@@ -7,6 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use JMS\Serializer\Annotation as Serializer;
 use JMS\Serializer\Annotation\Expose;
+use Hateoas\Configuration\Annotation as Hateoas;
 
 /**
  * Synthesis
@@ -14,6 +15,31 @@ use JMS\Serializer\Annotation\Expose;
  * @ORM\Table(name="synthesis")
  * @ORM\Entity()
  * @Serializer\ExclusionPolicy("all")
+ * @Hateoas\Relation(
+ *      "self",
+ *      href = @Hateoas\Route(
+ *          "get_synthesis",
+ *          parameters = {
+ *              "id" = "expr(object.getId())"
+ *          }
+ *      )
+ * )
+ * @Hateoas\Relation(
+ *      "elements",
+ *      href = @Hateoas\Route(
+ *          "get_synthesis_elements",
+ *          parameters = {
+ *              "id" = "expr(object.getId())"
+ *          }
+ *      )
+ * )
+ * @Hateoas\Relation(
+ *      name = "elements",
+ *      embedded = @Hateoas\Embedded(
+ *          "expr(object.getElements())",
+ *          exclusion = @Hateoas\Exclusion(excludeIf = "expr(object.getElements().isEmpty())")
+ *      )
+ * )
  */
 class Synthesis
 {
@@ -52,7 +78,6 @@ class Synthesis
     /**
      * @var
      * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\Synthesis\SynthesisElement", mappedBy="synthesis", cascade={"persist", "remove"}, orphanRemoval=true)
-     * @Expose
      */
     private $elements;
 

@@ -17,12 +17,23 @@ Feature: Synthesis
           "slug": @string@,
           "step_type": "consultation"
         },
-        "elements": [
-          {
-            "id": @string@,
-            "title": @string@
-          }
-        ]
+        "_links": {
+          "self": { "href": "@string@.startsWith('/api/syntheses/')" },
+          "elements": { "href": "@string@.startsWith('/api/syntheses/').endsWith('/elements')" }
+        },
+        "_embedded": {
+          "elements": [
+            {
+              "id": @string@,
+              "title": @string@,
+              "_links": {
+                "self": { "href": "@string@.startsWith('/api/syntheses/').contains('/elements/')" },
+                "divide": { "href": "@string@.startsWith('/api/syntheses/').contains('/elements/').endsWith('/divisions')" },
+                "history": { "href": "@string@.startsWith('/api/syntheses/').contains('/elements/').endsWith('/history')" }
+              }
+            }
+          ]
+        }
       },
       @...@
     ]
@@ -51,12 +62,23 @@ Feature: Synthesis
         "slug": "collecte-des-avis",
         "step_type": "consultation"
       },
-      "elements": [
-        {
-          "id": "43",
-          "title": "Je suis un élément"
-        }
-      ]
+      "_links": {
+        "self": { "href": "/api/syntheses/42" },
+        "elements": { "href": "/api/syntheses/42/elements" }
+      },
+      "_embedded": {
+        "elements": [
+          {
+            "id": "43",
+            "title": "Je suis un élément",
+            "_links": {
+              "self": { "href": "/api/syntheses/42/elements/43" },
+              "divide": { "href": "/api/syntheses/42/elements/43/divisions" },
+              "history": { "href": "/api/syntheses/42/elements/43/history" }
+            }
+          }
+        ]
+      }
     }
     """
 
@@ -73,7 +95,7 @@ Feature: Synthesis
     And I send a GET request to "/api/syntheses/42"
     Then the JSON response status code should be 401
 
-  @database
+  @atabase
   Scenario: API client wants to create a synthesis
     Given I am logged in to api as admin
     And I send a POST request to "/api/syntheses" with json:
@@ -111,7 +133,7 @@ Feature: Synthesis
     And I send a PUT request to "/api/syntheses/42" with json:
     """
     {
-      "enabled": true
+      "enabled": false
     }
     """
     Then the JSON response status code should be 200
@@ -119,17 +141,28 @@ Feature: Synthesis
     """
     {
       "id": "42",
-      "enabled": true,
+      "enabled": false,
       "consultation_step": {
         "slug": "collecte-des-avis",
         "step_type": "consultation"
       },
-      "elements": [
-        {
-          "id": "43",
-          "title": "Je suis un élément"
+      "_links": {
+        "self": { "href": "/api/syntheses/42" },
+        "elements": { "href": "/api/syntheses/42/elements" }
+      },
+      "_embedded": {
+          "elements": [
+            {
+              "id": "43",
+              "title": "Je suis un élément",
+              "_links": {
+                "self": { "href": "/api/syntheses/42/elements/43" },
+                "divide": { "href": "/api/syntheses/42/elements/43/divisions" },
+                "history": { "href": "/api/syntheses/42/elements/43/history" }
+              }
+            }
+          ]
         }
-      ]
     }
     """
 
@@ -170,7 +203,12 @@ Feature: Synthesis
         "archived": false,
         "title": "Je suis un élément",
         "body": "blabla",
-        "notation": 4
+        "notation": 4,
+        "_links": {
+          "self": { "href": "/api/syntheses/42/elements/43" },
+          "divide": { "href": "/api/syntheses/42/elements/43/divisions" },
+          "history": { "href": "/api/syntheses/42/elements/43/history" }
+        }
       }
     ]
     """
@@ -201,7 +239,12 @@ Feature: Synthesis
       "archived": false,
       "title": "Je suis un élément",
       "body": "blabla",
-      "notation": 4
+      "notation": 4,
+      "_links": {
+        "self": { "href": "/api/syntheses/42/elements/43" },
+        "divide": { "href": "/api/syntheses/42/elements/43/divisions" },
+        "history": { "href": "/api/syntheses/42/elements/43/history" }
+      }
     }
     """
 
@@ -240,7 +283,12 @@ Feature: Synthesis
       "body": "blabla",
       "enabled": true,
       "archived": false,
-      "notation": 5
+      "notation": 5,
+      "_links": {
+        "self": { "href": "@string@.startsWith('/api/syntheses/42/elements/')" },
+        "divide": { "href": "@string@.startsWith('/api/syntheses/42/elements/').endsWith('/divisions')" },
+        "history": { "href": "@string@.startsWith('/api/syntheses/42/elements/').endsWith('/history')" }
+      }
     }
     """
 
@@ -293,7 +341,12 @@ Feature: Synthesis
       "body": "blabla",
       "enabled": true,
       "archived": false,
-      "notation": 2
+      "notation": 2,
+      "_links": {
+        "self": { "href": "/api/syntheses/42/elements/43" },
+        "divide": { "href": "/api/syntheses/42/elements/43/divisions" },
+        "history": { "href": "/api/syntheses/42/elements/43/history" }
+      }
     }
     """
 
@@ -478,7 +531,7 @@ Feature: Synthesis
     Then there should be a log on element 43 with sentence "admin a mis à jour l'élément 43"
 
   @database
-  Scenario: API client wants to have an 'move' log when changing the parent of a synthesis element
+  Scenario: API client wants to have a 'move' log when changing the parent of a synthesis element
     Given I am logged in to api as admin
     And there is a synthesis with id "42" and elements:
       | 43 |
@@ -497,7 +550,7 @@ Feature: Synthesis
     Then there should be a log on element 43 with sentence "admin a déplacé l'élément 43"
 
   @database
-  Scenario: API client wants to have an 'publish' log when enabling a synthesis element
+  Scenario: API client wants to have a 'publish' log when enabling a synthesis element
     Given I am logged in to api as admin
     And there is a synthesis with id "42" and elements:
       | 43 |
@@ -542,7 +595,7 @@ Feature: Synthesis
     Then there should be a log on element 43 with sentence "admin a marqué l'élément 43 comme traité"
 
   @database
-  Scenario: API client wants to have an 'note' log when noting a synthesis element
+  Scenario: API client wants to have a 'note' log when noting a synthesis element
     Given I am logged in to api as admin
     And there is a synthesis with id "42" and elements:
       | 43 |
@@ -554,7 +607,7 @@ Feature: Synthesis
     """
     Then there should be a log on element 43 with sentence "admin a modifié la note de l'élément 43"
 
-  Scenario: API client wants to have an 'divide' log when dividing a synthesis element
+  Scenario: API client wants to have a 'divide' log when dividing a synthesis element
     Given I am logged in to api as admin
     And there is a synthesis with id "42" and elements:
       | 43 |

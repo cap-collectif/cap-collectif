@@ -10,6 +10,8 @@ use JMS\Serializer\Annotation as Serializer;
 use JMS\Serializer\Annotation\Expose;
 use JMS\Serializer\Annotation\Groups;
 
+use Hateoas\Configuration\Annotation as Hateoas;
+
 /**
  * SynthesisElement
  *
@@ -18,6 +20,36 @@ use JMS\Serializer\Annotation\Groups;
  * @Gedmo\Loggable()
  * @Gedmo\SoftDeleteable(fieldName="deletedAt")
  * @Serializer\ExclusionPolicy("all")
+ * @Hateoas\Relation(
+ *      "self",
+ *      href = @Hateoas\Route(
+ *          "get_synthesis_element",
+ *          parameters = {
+ *              "synthesis_id" = "expr(object.getSynthesis().getId())",
+ *              "element_id" = "expr(object.getId())"
+ *          }
+ *      )
+ * )
+ * @Hateoas\Relation(
+ *      "divide",
+ *      href = @Hateoas\Route(
+ *          "divide_synthesis_element",
+ *          parameters = {
+ *              "synthesis_id" = "expr(object.getSynthesis().getId())",
+ *              "element_id" = "expr(object.getId())"
+ *          }
+ *      )
+ * )
+ * @Hateoas\Relation(
+ *      "history",
+ *      href = @Hateoas\Route(
+ *          "get_synthesis_element_history",
+ *          parameters = {
+ *              "synthesis_id" = "expr(object.getSynthesis().getId())",
+ *              "element_id" = "expr(object.getId())"
+ *          }
+ *      )
+ * )
  */
 class SynthesisElement
 {
