@@ -215,7 +215,7 @@ class ConsultationRepository extends EntityRepository
             ->leftJoin('cas.step', 's')
             ->andWhere(':theme MEMBER OF c.Themes')
             ->setParameter('theme', $themeId)
-            ->orderBy('c.publishedAt', 'ASC');
+            ->orderBy('c.publishedAt', 'DESC');
 
         if ($limit) {
             $qb->setMaxResults($limit);
