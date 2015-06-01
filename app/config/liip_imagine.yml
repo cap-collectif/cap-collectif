@@ -12,7 +12,7 @@ liip_imagine:
             controller_action: 'SonataMediaBundle:Media:liipImagineFilter'
             format: png
             filters:
-                thumbnail: { size: [45, 45], mode: inbound }
+                thumbnail: { size: [45, 45], mode: outbound }
 
         default_avatar_source:
             quality: 70
@@ -80,7 +80,6 @@ liip_imagine:
         default_small:
             quality: 75
             controller_action: 'SonataMediaBundle:Media:liipImagineFilter'
-            format: png
             filters:
                 thumbnail: { size: [100, 70], mode: outbound }
 
