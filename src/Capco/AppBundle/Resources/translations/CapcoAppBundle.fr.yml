@@ -581,7 +581,7 @@ user:
 
       Merci de vous êtes inscrit à %sitename%.
 
-      Pour valider votre compte, merci de vous rendre à cette adresse : %url%.
+      Pour valider votre compte, merci de vous rendre à cette adresse : %url% (lien à usage unique).
 
       Votre identifiant est : %email%.
 
