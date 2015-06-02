@@ -2,6 +2,7 @@
 global:
   alert:
     close: Fermer
+    already_enabled: Votre compte a déjà été activé
   capco_powered: Propulsé par %startlink%Cap-Collectif%endlink%
   menu:
     title: Menu
@@ -592,7 +593,7 @@ user:
       facebook: S'inscrire avec Facebook
       gplus: S'inscrire avec Google+
       twitter: S'inscrire avec Twitter
-    or: OU
+    or: ou
     username:
       username: Nom complet
       is_public: Votre nom sera rendu public sur le site.

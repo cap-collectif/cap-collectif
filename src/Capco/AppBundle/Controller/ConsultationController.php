@@ -124,7 +124,7 @@ class ConsultationController extends Controller
      * @param ConsultationStep $currentStep
      * @param OpinionType      $opinionType
      * @param $page
-     * @param Request $request
+     * @param Request          $request
      * @param $opinionsSort
      *
      * @return array

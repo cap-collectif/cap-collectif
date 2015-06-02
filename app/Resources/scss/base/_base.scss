@@ -216,18 +216,6 @@ a.excerpt {
   }
 }
 
-.p--centered {
-  margin: 15px auto;
-  text-align: center;
-  color: $dark-gray;
-  span {
-    padding: 0 10px;
-    max-width: 60%;
-    display: inline-block;
-    z-index: 2;
-  }
-}
-
 .pull-abs {
   position: absolute;
   top: 0px;
