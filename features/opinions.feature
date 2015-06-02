@@ -60,5 +60,5 @@ Feature: Opinions
       | stepSlug         | collecte-des-avis                |
       | opinionTypeSlug  | solutions                        |
       | opinionSlug      | opinion-5                        |
-    When I click the ".connection-popover-js" element
+    When I click the ".connection-popover-js > label" element
     Then I should see "1" in the ".opinion__chart" element
