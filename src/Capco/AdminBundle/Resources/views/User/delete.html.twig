@@ -8,8 +8,80 @@
                 <h3 class="box-title">{{ 'title_delete'|trans({}, 'SonataAdminBundle') }}</h3>
             </div>
             <div class="box-body">
-                {{ 'message_delete_confirmation'|trans({'%object%': admin.toString(object)}, 'SonataAdminBundle') }}
-                <p>{{ 'user.delete.warning_message'|trans({}, 'SonataAdminBundle') }}</p>
+                {{ 'user.delete.confirmation'|trans({'%object%': admin.toString(object)}, 'SonataAdminBundle')|raw }}
+                <p>{{ 'user.delete.warning_message'|trans({}, 'SonataAdminBundle')|raw }}</p>
+
+                {% if object.opinions|length > 0 %}
+                    <h4>
+                        {% transchoice object.opinions|length with {'%count%': object.opinions|length} from 'SonataAdminBundle' %}
+                            user.delete.opinions
+                        {% endtranschoice %}
+                    </h4>
+                    <ul>
+                        {% for opinion in object.opinions %}
+                            <li><a href="{{ path('admin_capco_app_opinion_edit', {id: opinion.id}) }}">{{ opinion.title }}</a></li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+
+                {% if object.ideas|length > 0 %}
+                    <h4>
+                        {% transchoice object.ideas|length with {'%count%': object.ideas|length} from 'SonataAdminBundle' %}
+                            user.delete.ideas
+                        {% endtranschoice %}
+                    </h4>
+                    <ul>
+                        {% for idea in object.ideas %}
+                            <li><a href="{{ path('admin_capco_app_idea_edit', {id: idea.id}) }}">{{ idea.title }}</a></li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+
+                {% if object.sources|length > 0 %}
+                    <h4>
+                        {% transchoice object.sources|length with {'%count%': object.sources|length} from 'SonataAdminBundle' %}
+                            user.delete.sources
+                        {% endtranschoice %}
+                    </h4>
+                    <ul>
+                        {% for source in object.sources %}
+                            <li><a href="{{ path('admin_capco_app_source_edit', {id: source.id}) }}">{{ source.title }}</a></li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+
+                {% if object.comments|length > 0 %}
+                    <h4>
+                        {% transchoice object.comments|length with {'%count%': object.comments|length} from 'SonataAdminBundle' %}
+                            user.delete.comments
+                        {% endtranschoice %}
+                    </h4>
+                    {% for key, comment in object.comments %}
+                        <a href="{{ path('admin_capco_app_abstractcomment_edit', {id: comment.id}) }}">#{{ key + 1 }}</a>
+                        {% if not loop.last %},{% endif %}
+                    {% endfor %}
+                {% endif %}
+
+                {% if object.arguments|length > 0 %}
+                    <h4>
+                        {% transchoice object.arguments|length with {'%count%': object.arguments|length} from 'SonataAdminBundle' %}
+                            user.delete.arguments
+                        {% endtranschoice %}
+                    </h4>
+                    {% for key, argument in object.arguments %}
+                        <a href="{{ path('admin_capco_app_argument_edit', {id: argument.id}) }}">#{{ key + 1 }}</a>
+                        {% if not loop.last %},{% endif %}
+                    {% endfor %}
+                {% endif %}
+
+                {% if object.votes|length > 0 %}
+                    <h4>
+                        {% transchoice object.votes|length with {'%count%': object.votes|length} from 'SonataAdminBundle' %}
+                            user.delete.votes
+                        {% endtranschoice %}
+                    </h4>
+                {% endif %}
+
             </div>
             <div class="box-footer clearfix">
                 <form method="POST" action="{{ admin.generateObjectUrl('delete', object) }}">
