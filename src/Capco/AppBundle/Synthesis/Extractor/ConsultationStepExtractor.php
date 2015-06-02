@@ -4,7 +4,43 @@ namespace Capco\AppBundle\Synthesis\Extractor;
 
 class ConsultationStepExtractor
 {
+    protected $em;
 
+    function __construct(EntityManager $em)
+    {
+        $this->em = $em;
+    }
+
+    public function getAll()
+    {
+        return $this->em->getRepository('CapcoAppBundle:Synthesis\Synthesis')->findAll();
+    }
+
+    public function createSynthesisFromConsultationStep(Synthesis $synthesis, ConsultationStep $consultationStep)
+    {
+        $synthesis->setConsultationStep($consultationStep);
+        $synthesis->setSourceType('consultation_step');
+        return $this->createSynthesis($synthesis);
+    }
+
+    public function createSynthesis(Synthesis $synthesis)
+    {
+        $this->em->persist($synthesis);
+        $this->em->flush();
+
+        $synthesis = $this->createElementsFromSource($synthesis);
+
+        return $synthesis;
+    }
+
+    public function createElementsFromSource(Synthesis $synthesis)
+    {
+        if ($synthesis->getSourceType() === "consultation_step" && null !== $synthesis->getConsultationStep()) {
+            return $this->createElementsFromConsultationStep($synthesis, $synthesis->getConsultationStep());
+        }
+        return $synthesis;
+    }
+    
     public function createElementsFromConsultationStep(Synthesis $synthesis, ConsultationStep $consultationStep)
     {
         $currentElements = $synthesis->getElements();
@@ -38,11 +74,14 @@ class ConsultationStepExtractor
 
         foreach ($newElements as $element) {
             $element->setSynthesis($synthesis);
+            $synthesis->addElement($element);
             $this->em->persist($element);
         }
+
+        $this->em->persist($synthesis);
         $this->em->flush();
 
-        return true;
+        return $synthesis;
     }
 
     public function isElementRelated($element, $object)

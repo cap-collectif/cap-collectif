@@ -10,9 +10,6 @@ use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 
 use JMS\Serializer\Annotation as Serializer;
-use JMS\Serializer\Annotation\Expose;
-use JMS\Serializer\Annotation\Groups;
-use JMS\Serializer\Annotation\Type;
 
 /**
  * SynthesisDivision
@@ -30,22 +27,22 @@ class SynthesisDivision
      * @ORM\Id
      * @ORM\Column(name="id", type="guid")
      * @ORM\GeneratedValue(strategy="UUID")
-     * @Expose
+     * @Serializer\Expose
      */
     private $id;
 
     /**
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Synthesis\SynthesisElement", cascade={"persist"})
      * @ORM\JoinColumn(name="original_element_id", referencedColumnName="id")
-     * @Expose
+     * @Serializer\Expose
      * @Gedmo\Versioned
      */
     private $originalElement;
 
     /**
-     * @Type("ArrayCollection<Capco\AppBundle\Entity\Synthesis\SynthesisElement>")
+     * @Serializer\Type("ArrayCollection<Capco\AppBundle\Entity\Synthesis\SynthesisElement>")
      * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\Synthesis\SynthesisElement", mappedBy="originalDivision", cascade={"persist"})
-     * @Expose
+     * @Serializer\Expose
      */
     private $elements;
 

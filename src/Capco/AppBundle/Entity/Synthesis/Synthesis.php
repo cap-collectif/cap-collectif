@@ -6,7 +6,6 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use JMS\Serializer\Annotation as Serializer;
-use JMS\Serializer\Annotation\Expose;
 use Hateoas\Configuration\Annotation as Hateoas;
 
 /**
@@ -50,13 +49,14 @@ class Synthesis
      * @ORM\Id
      * @ORM\Column(name="id", type="guid")
      * @ORM\GeneratedValue(strategy="UUID")
-     * @Expose
+     * @Serializer\Expose
      */
     private $id;
 
     /**
      * @ORM\Column(name="enabled", type="boolean")
-     * @Expose
+     * @Serializer\Expose
+     * @Serializer\Groups({"SynthesisDetails"})
      */
     private $enabled = false;
 
@@ -71,7 +71,7 @@ class Synthesis
      * @var
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\ConsultationStep")
      * @ORM\JoinColumn(name="consultation_step_id", referencedColumnName="id", nullable=true, onDelete="SET NULL")
-     * @Expose
+     * @Serializer\Type("Capco\AppBundle\Entity\ConsultationStep")
      */
     private $consultationStep = null;
 

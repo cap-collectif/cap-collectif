@@ -12,11 +12,6 @@ Feature: Synthesis
     [
       {
         "id": @string@,
-        "enabled": @boolean@,
-        "consultation_step": {
-          "slug": @string@,
-          "step_type": "consultation"
-        },
         "_links": {
           "self": { "href": "@string@.startsWith('/api/syntheses/')" },
           "elements": { "href": "@string@.startsWith('/api/syntheses/').endsWith('/elements')" }
@@ -58,10 +53,6 @@ Feature: Synthesis
     {
       "id": "42",
       "enabled": true,
-      "consultation_step": {
-        "slug": "collecte-des-avis",
-        "step_type": "consultation"
-      },
       "_links": {
         "self": { "href": "/api/syntheses/42" },
         "elements": { "href": "/api/syntheses/42/elements" }
@@ -137,6 +128,66 @@ Feature: Synthesis
     Then the JSON response status code should be 401
 
   @database
+  Scenario: API client wants to create a synthesis from a consultation step
+    Given I am logged in to api as admin
+    And I send a POST request to "/api/syntheses/from-consultation-step/2" with json:
+    """
+    {
+      "enabled": true
+    }
+    """
+    Then the JSON response status code should be 201
+    And the JSON response should match:
+    """
+    {
+      "id": @string@,
+      "enabled": true,
+      "_links": {
+        "self": { "href": "@string@.startsWith('/api/syntheses/')" },
+        "elements": { "href": "@string@.startsWith('/api/syntheses/').endsWith('/elements')" }
+      },
+      "_embedded": {
+        "elements": [
+          {
+            "id": @string@,
+            "title": "Opinion 201",
+            "_links": {
+              "self": { "href": "@string@.startsWith('/api/syntheses/').contains('/elements')" },
+              "divide": { "href": "@string@.startsWith('/api/syntheses/').contains('/elements/').endsWith('/divisions')" },
+              "history": { "href": "@string@.startsWith('/api/syntheses/').contains('/elements/').endsWith('/history')" }
+            }
+          },
+          {
+            "id": @string@,
+            "title": @null@,
+            "_links": "@*@"
+          },
+          {
+            "id": @string@,
+            "title": @null@,
+            "_links": "@*@"
+          },
+          {
+            "id": @string@,
+            "title": "Opinion 202",
+            "_links": "@*@"
+          },
+          {
+            "id": @string@,
+            "title": @null@,
+            "_links": "@*@"
+          },
+          {
+            "id": @string@,
+            "title": "Opinion 203",
+            "_links": "@*@"
+          }
+        ]
+      }
+    }
+    """
+
+  @database
   Scenario: API client wants to update a synthesis
     Given I am logged in to api as admin
     And there is a synthesis with id "42" and elements:
@@ -153,27 +204,23 @@ Feature: Synthesis
     {
       "id": "42",
       "enabled": false,
-      "consultation_step": {
-        "slug": "collecte-des-avis",
-        "step_type": "consultation"
-      },
       "_links": {
         "self": { "href": "/api/syntheses/42" },
         "elements": { "href": "/api/syntheses/42/elements" }
       },
       "_embedded": {
-          "elements": [
-            {
-              "id": "43",
-              "title": "Je suis un élément",
-              "_links": {
-                "self": { "href": "/api/syntheses/42/elements/43" },
-                "divide": { "href": "/api/syntheses/42/elements/43/divisions" },
-                "history": { "href": "/api/syntheses/42/elements/43/history" }
-              }
+        "elements": [
+          {
+            "id": "43",
+            "title": "Je suis un élément",
+            "_links": {
+              "self": { "href": "/api/syntheses/42/elements/43" },
+              "divide": { "href": "/api/syntheses/42/elements/43/divisions" },
+              "history": { "href": "/api/syntheses/42/elements/43/history" }
             }
-          ]
-        }
+          }
+        ]
+      }
     }
     """
 
@@ -184,7 +231,7 @@ Feature: Synthesis
     And I send a PUT request to "/api/syntheses/42" with json:
     """
     {
-      "enabled": true
+      "enabled": false
     }
     """
     Then the JSON response status code should be 403
@@ -195,7 +242,7 @@ Feature: Synthesis
     And I send a PUT request to "/api/syntheses/42" with json:
     """
     {
-      "enabled": true
+      "enabled": false
     }
     """
     Then the JSON response status code should be 401
@@ -210,11 +257,7 @@ Feature: Synthesis
     [
       {
         "id": "43",
-        "enabled": true,
-        "archived": false,
         "title": "Je suis un élément",
-        "body": "blabla",
-        "notation": 4,
         "_links": {
           "self": { "href": "/api/syntheses/42/elements/43" },
           "divide": { "href": "/api/syntheses/42/elements/43/divisions" },
@@ -290,10 +333,10 @@ Feature: Synthesis
     """
     {
       "id": @string@,
-      "title": "Coucou, je suis un élément.",
-      "body": "blabla",
       "enabled": true,
       "archived": false,
+      "title": "Coucou, je suis un élément.",
+      "body": "blabla",
       "notation": 5,
       "_links": {
         "self": { "href": "@string@.startsWith('/api/syntheses/42/elements/')" },
@@ -347,10 +390,10 @@ Feature: Synthesis
     """
     {
       "id": "43",
-      "title": "Je suis un élément",
-      "body": "blabla",
       "enabled": true,
       "archived": false,
+      "title": "Je suis un élément",
+      "body": "blabla",
       "notation": 2,
       "_links": {
         "self": { "href": "/api/syntheses/42/elements/43" },

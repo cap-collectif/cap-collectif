@@ -8,9 +8,6 @@ use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Validator\Constraints as Assert;
 use Capco\AppBundle\Validator\Constraints as CapcoAssert;
 use JMS\Serializer\Annotation as Serializer;
-use JMS\Serializer\Annotation\Expose;
-use JMS\Serializer\Annotation\Groups;
-use JMS\Serializer\Annotation\Discriminator;
 
 /**
  * AbstractStep.
@@ -27,6 +24,12 @@ use JMS\Serializer\Annotation\Discriminator;
  *      "synthesis" = "SynthesisStep",
  * })
  * @Serializer\ExclusionPolicy("all")
+ * @Serializer\Discriminator(field = "step_type", map = {
+ *      "consultation"     = "Capco\AppBundle\Entity\ConsultationStep",
+ *      "presentation"  = "Capco\AppBundle\Entity\PresentationStep",
+ *      "other"  = "Capco\AppBundle\Entity\OtherStep",
+ *      "synthesis" = "Capco\AppBundle\Entity\SynthesisStep",
+ * })
  */
 abstract class AbstractStep
 {
@@ -57,6 +60,7 @@ abstract class AbstractStep
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
+     * @Serializer\Expose
      */
     private $id;
 
@@ -65,15 +69,12 @@ abstract class AbstractStep
      *
      * @ORM\Column(name="title", type="string", length=255)
      * @Assert\NotBlank()
-     * @Expose
-     * @Groups({"Details"})
      */
     private $title;
 
     /**
      * @Gedmo\Slug(fields={"title"})
      * @ORM\Column(length=255)
-     * @Expose
      */
     private $slug;
 
@@ -81,8 +82,6 @@ abstract class AbstractStep
      * @var bool
      *
      * @ORM\Column(name="is_enabled", type="boolean")
-     * @Expose
-     * @Groups({"Details"})
      */
     private $isEnabled = true;
 
@@ -90,8 +89,6 @@ abstract class AbstractStep
      * @var \DateTime
      *
      * @ORM\Column(name="start_at", type="datetime", nullable=true)
-     * @Expose
-     * @Groups({"Details"})
      */
     private $startAt = null;
 
@@ -99,8 +96,6 @@ abstract class AbstractStep
      * @var \DateTime
      *
      * @ORM\Column(name="end_at", type="datetime", nullable=true)
-     * @Expose
-     * @Groups({"Details"})
      */
     private $endAt = null;
 
@@ -115,8 +110,6 @@ abstract class AbstractStep
      * @var string
      *
      * @ORM\Column(name="body", type="text", nullable=true)
-     * @Expose
-     * @Groups({"Details"})
      */
     private $body = null;
 
@@ -124,8 +117,6 @@ abstract class AbstractStep
      * @var \DateTime
      * @Gedmo\Timestampable(on="create")
      * @ORM\Column(name="created_at", type="datetime")
-     * @Expose
-     * @Groups({"Details"})
      */
     private $createdAt;
 
@@ -133,8 +124,6 @@ abstract class AbstractStep
      * @var \DateTime
      * @Gedmo\Timestampable(on="change", field={"title", "startAt", "endAt", "position", "type", "body"})
      * @ORM\Column(name="updated_at", type="datetime")
-     * @Expose
-     * @Groups({"Details"})
      */
     private $updatedAt;
 

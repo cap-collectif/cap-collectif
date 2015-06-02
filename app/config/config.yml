@@ -247,7 +247,8 @@ fos_rest:
         validation_errors_argument: validationErrors
     param_fetcher_listener: true
     allowed_methods_listener: true
-    serializer: ~
+    serializer:
+        serialize_null: true
     exception:
         codes:
             'Symfony\Component\Routing\Exception\ResourceNotFoundException': 404

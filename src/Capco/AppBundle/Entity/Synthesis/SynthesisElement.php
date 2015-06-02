@@ -7,8 +7,6 @@ use Symfony\Component\Validator\Constraints as Assert;
 use Gedmo\Mapping\Annotation as Gedmo;
 
 use JMS\Serializer\Annotation as Serializer;
-use JMS\Serializer\Annotation\Expose;
-use JMS\Serializer\Annotation\Groups;
 
 use Hateoas\Configuration\Annotation as Hateoas;
 
@@ -50,6 +48,16 @@ use Hateoas\Configuration\Annotation as Hateoas;
  *          }
  *      )
  * )
+ * @Hateoas\Relation(
+ *      name = "parent",
+ *      embedded = @Hateoas\Embedded(
+ *          "expr(object.getParent())",
+ *          exclusion = @Hateoas\Exclusion(
+ *              groups = {"ElementDetails"},
+ *              excludeIf = "expr(!object.getParent())"
+ *          )
+ *      )
+ * )
  */
 class SynthesisElement
 {
@@ -60,15 +68,15 @@ class SynthesisElement
      * @ORM\Id
      * @ORM\Column(name="id", type="guid")
      * @ORM\GeneratedValue(strategy="UUID")
-     * @Expose
+     * @Serializer\Expose
      */
     private $id;
 
     /**
      * @ORM\Column(name="enabled", type="boolean")
      * @Gedmo\Versioned
-     * @Expose
-     * @Groups({"Details"})
+     * @Serializer\Expose
+     * @Serializer\Groups({"ElementDetails"})
      */
     private $enabled = true;
 
@@ -82,8 +90,8 @@ class SynthesisElement
     /**
      * @ORM\Column(name="archived", type="boolean")
      * @Gedmo\Versioned
-     * @Expose
-     * @Groups({"Details"})
+     * @Serializer\Expose
+     * @Serializer\Groups({"ElementDetails"})
      */
     private $archived = false;
 
@@ -115,7 +123,7 @@ class SynthesisElement
      *
      * @ORM\Column(name="title", type="string", length=255, nullable=true)
      * @Gedmo\Versioned
-     * @Expose
+     * @Serializer\Expose
      */
     private $title;
 
@@ -124,8 +132,8 @@ class SynthesisElement
      *
      * @ORM\Column(name="body", type="text", nullable=true)
      * @Gedmo\Versioned
-     * @Expose
-     * @Groups({"Details"})
+     * @Serializer\Expose
+     * @Serializer\Groups({"ElementDetails"})
      */
     private $body;
 
@@ -134,8 +142,8 @@ class SynthesisElement
      *
      * @ORM\Column(name="notation", type="integer", nullable=true)
      * @Gedmo\Versioned
-     * @Expose
-     * @Groups({"Details"})
+     * @Serializer\Expose
+     * @Serializer\Groups({"ElementDetails"})
      */
     private $notation;
 
@@ -143,8 +151,6 @@ class SynthesisElement
      * @var string
      *
      * @ORM\Column(name="linked_data_class", type="string", length=255, nullable=true)
-     * @Expose
-     * @Groups({"Details"})
      */
     private $linkedDataClass = null;
 
@@ -152,8 +158,6 @@ class SynthesisElement
      * @var string
      *
      * @ORM\Column(name="linked_data_id", type="string", length=255, nullable=true)
-     * @Expose
-     * @Groups({"Details"})
      */
     private $linkedDataId = null;
 

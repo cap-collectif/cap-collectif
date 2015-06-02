@@ -50,19 +50,64 @@ Capco\AppBundle\Entity\Opinion:
         Author: @user3
         OpinionType: @opinionType4
 
-    opinion6:
+    opinion{6..50}:
+            step: @cstep1
+            title: Opinion <current()>
+            body: |
+                 <p><text(100)></p>
+                 <p><text(300)></p>
+            isEnabled: <boolean()>
+            isTrashed: <boolean()>
+            pinned: <boolean()>
+            Author: @user<numberBetween(1, 50)>
+            OpinionType: @opinionType<numberBetween(2, 4)>
+
+    opinion201:
         step: @cstep2
-        title: Opinion 6
+        title: Opinion 201
         body: |
              <p><text(100)></p>
              <p><text(300)></p>
-        isEnabled: false
+        isEnabled: true
+        isTrashed: false
+        Author: @user5
+        OpinionType: @opinionType2
+    opinion202:
+        step: @cstep2
+        title: Opinion 202
+        body: |
+             <p><text(100)></p>
+             <p><text(300)></p>
+        isEnabled: true
+        isTrashed: false
+        Author: @user4
+        OpinionType: @opinionType1
+    opinion203:
+        step: @cstep2
+        title: Opinion 203
+        body: |
+             <p><text(100)></p>
+             <p><text(300)></p>
+        isEnabled: true
+        isTrashed: false
+        Author: @user2
+        OpinionType: @opinionType2
+
+
+
+    opinion301:
+        step: @cstep3
+        title: Opinion 301
+        body: |
+             <p><text(100)></p>
+             <p><text(300)></p>
+        isEnabled: true
         isTrashed: false
         Author: @user5
         OpinionType: @opinionType1
-    opinion7:
-        step: @cstep2
-        title: Opinion 7
+    opinion302:
+        step: @cstep3
+        title: Opinion 302
         body: |
              <p><text(100)></p>
              <p><text(300)></p>
@@ -70,9 +115,9 @@ Capco\AppBundle\Entity\Opinion:
         isTrashed: false
         Author: @user4
         OpinionType: @opinionType2
-    opinion8:
-        step: @cstep2
-        title: Opinion 8
+    opinion303:
+        step: @cstep3
+        title: Opinion 303
         body: |
              <p><text(100)></p>
              <p><text(300)></p>
@@ -80,48 +125,3 @@ Capco\AppBundle\Entity\Opinion:
         isTrashed: false
         Author: @user2
         OpinionType: @opinionType3
-
-
-
-    opinion9:
-        step: @cstep3
-        title: Opinion 9
-        body: |
-             <p><text(100)></p>
-             <p><text(300)></p>
-        isEnabled: true
-        isTrashed: false
-        Author: @user5
-        OpinionType: @opinionType1
-    opinion10:
-        step: @cstep3
-        title: Opinion 10
-        body: |
-             <p><text(100)></p>
-             <p><text(300)></p>
-        isEnabled: true
-        isTrashed: false
-        Author: @user4
-        OpinionType: @opinionType2
-    opinion11:
-        step: @cstep3
-        title: Opinion 11
-        body: |
-             <p><text(100)></p>
-             <p><text(300)></p>
-        isEnabled: true
-        isTrashed: false
-        Author: @user2
-        OpinionType: @opinionType3
-
-    opinion{12..200}:
-        step: @cstep1
-        title: Opinion <current()>
-        body: |
-             <p><text(100)></p>
-             <p><text(300)></p>
-        isEnabled: <boolean()>
-        isTrashed: <boolean()>
-        pinned: <boolean()>
-        Author: @user<numberBetween(1, 50)>
-        OpinionType: @opinionType<numberBetween(2, 4)>

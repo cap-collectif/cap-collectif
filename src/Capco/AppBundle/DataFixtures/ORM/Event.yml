@@ -32,8 +32,8 @@ Capco\AppBundle\Entity\Event:
              <h2>Pulvinar odio volutpat</h2>
              <p>Fictum,  deserunt mollit anim laborum astutumque! Phasellus laoreet lorem vel dolor tempus vehicula. Cras mattis iudicium purus sit amet fermentum. Cum ceteris in veneratione tui montes, nascetur mus.
                 Hi omnes lingua, institutis, legibus inter se differunt. Unam incolunt Belgae, aliam Aquitani, tertiam. Integer legentibus erat a ante historiarum dapibus. Morbi fringilla convallis sapien, id pulvinar odio volutpat. Paullum deliquit, ponderibus modulisque suis ratio utitur.</p>
-        startAt: <(new \DateTime('2014-06-23'))>
-        endAt: <(new \DateTime('2014-06-24'))>
+        startAt: <dateTimeBetween('-30 days', '-10 days')>
+        endAt: <dateTimeBetween('-9 days', 'now')>
         Author: @user<numberBetween(1, 5)>
         address: 11 Avenue George 5
         city: Paris

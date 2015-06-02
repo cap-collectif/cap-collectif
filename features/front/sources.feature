@@ -16,13 +16,13 @@ Feature: Source
     And I press "Publier"
     Then I should see "Merci ! Votre source a bien été enregistrée."
 
-  Scenario: Can not create an argument in non-contribuable opinion
+  Scenario: Can not create a source in non-contribuable consultation
     Given I am logged in as user
     And I visited "opinion page" with:
       | consultationSlug   | strategie-technologique-de-l-etat-et-services-publics |
       | stepSlug           | collecte-des-avis-pour-une-meilleur-strategie         |
       | opinionTypeSlug    | causes                                                |
-      | opinionSlug        | opinion-7                                             |
+      | opinionSlug        | opinion-201                                           |
     Then I should not see "Proposer une source"
 
  @javascript @database

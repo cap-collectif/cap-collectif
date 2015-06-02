@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\Controller\Api;
 
+use Capco\AppBundle\Entity\ConsultationStep;
 use Capco\AppBundle\Entity\Synthesis\Synthesis;
 use Capco\AppBundle\Entity\Synthesis\SynthesisElement;
 use Capco\AppBundle\Entity\Synthesis\SynthesisDivision;
@@ -19,6 +20,7 @@ use FOS\RestBundle\Controller\Annotations\Post;
 use FOS\RestBundle\Controller\Annotations\Put;
 use FOS\RestBundle\Util\Codes;
 use FOS\RestBundle\View\View as ResponseView;
+use JMS\Serializer\SerializationContext;
 
 use Symfony\Component\Validator\ConstraintViolationListInterface;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
@@ -56,27 +58,6 @@ class SynthesisController extends FOSRestController
     }
 
     /**
-     * Get a synthesis by id
-     *
-     * @ApiDoc(
-     *  resource=true,
-     *  description="Get a synthesis by id",
-     *  statusCodes={
-     *    200 = "Returned when successful",
-     *    404 = "Synthesis does not exist",
-     *  }
-     * )
-     *
-     * @Get("/syntheses/{id}")
-     * @ParamConverter("synthesis", options={"mapping": {"id": "id"}})
-     * @View(serializerGroups={"Default"})
-     */
-    public function getSynthesisAction(Synthesis $synthesis)
-    {
-        return $synthesis;
-    }
-
-    /**
      * Create a synthesis from submitted data
      *
      * @ApiDoc(
@@ -90,20 +71,72 @@ class SynthesisController extends FOSRestController
      *
      * @Post("/syntheses")
      * @ParamConverter("synthesis", converter="fos_rest.request_body")
-     * @View(serializerGroups={"Default"})
      */
     public function createSynthesisAction(Synthesis $synthesis, ConstraintViolationListInterface $validationErrors)
     {
         if ($validationErrors->count() > 0) {
             throw new BadRequestHttpException($validationErrors->__toString());
         }
-        
+
         $synthesis = $this->get('capco.synthesis.synthesis_handler')->createSynthesis($synthesis);
 
         $view = $this->view($synthesis, Codes::HTTP_CREATED);
+        $view->setSerializationContext(SerializationContext::create()->setGroups(array('Default', 'SynthesisDetails')));
         $url = $this->generateUrl('get_synthesis', ['id' => $synthesis->getId()], UrlGeneratorInterface::ABSOLUTE_URL);
         $view->setHeader('Location', $url);
         return $view;
+    }
+
+    /**
+     * Create a synthesis from submitted data and consultation step
+     *
+     * @ApiDoc(
+     *  resource=true,
+     *  description="Create a synthesis from a consultation step",
+     *  statusCodes={
+     *    201 = "Returned when successful",
+     *    400 = "Returned when creation fail",
+     *  }
+     * )
+     *
+     * @Post("/syntheses/from-consultation-step/{id}")
+     * @ParamConverter("consultationStep", options={"mapping": {"id": "id"}})
+     * @ParamConverter("synthesis", converter="fos_rest.request_body")
+     */
+    public function createSynthesisFromConsultationStepAction(ConsultationStep $consultationStep, Synthesis $synthesis, ConstraintViolationListInterface $validationErrors)
+    {
+        if ($validationErrors->count() > 0) {
+            throw new BadRequestHttpException($validationErrors->__toString());
+        }
+
+        $synthesis = $this->get('capco.synthesis.synthesis_handler')->createSynthesisFromConsultationStep($synthesis, $consultationStep);
+
+        $view = $this->view($synthesis, Codes::HTTP_CREATED);
+        $view->setSerializationContext(SerializationContext::create()->setGroups(array('Default', 'SynthesisDetails')));
+        $url = $this->generateUrl('get_synthesis', ['id' => $synthesis->getId()], UrlGeneratorInterface::ABSOLUTE_URL);
+        $view->setHeader('Location', $url);
+        return $view;
+    }
+
+    /**
+     * Get a synthesis by id
+     *
+     * @ApiDoc(
+     *  resource=true,
+     *  description="Get a synthesis with all elements",
+     *  statusCodes={
+     *    200 = "Returned when successful",
+     *    404 = "Synthesis does not exist",
+     *  }
+     * )
+     *
+     * @Get("/syntheses/{id}")
+     * @ParamConverter("synthesis", options={"mapping": {"id": "id"}})
+     * @View(serializerGroups={"Default", "SynthesisDetails"})
+     */
+    public function getSynthesisAction(Synthesis $synthesis)
+    {
+        return $synthesis;
     }
 
     /**
@@ -120,7 +153,7 @@ class SynthesisController extends FOSRestController
      *
      * @Put("/syntheses/{id}")
      * @ParamConverter("synthesis", options={"mapping": {"id": "id"}})
-     * @View(serializerGroups={"Default"})
+     * @View(serializerGroups={"Default", "SynthesisDetails"})
      */
     public function updateSynthesisAction(Request $request, Synthesis $synthesis)
     {
@@ -151,7 +184,7 @@ class SynthesisController extends FOSRestController
      *
      * @Get("/syntheses/{id}/elements")
      * @ParamConverter("synthesis", options={"mapping": {"id": "id"}})
-     * @View(serializerGroups={"Default", "Details"})
+     * @View(serializerGroups={"Default"})
      */
     public function getSynthesisElementsAction(Synthesis $synthesis)
     {
@@ -175,7 +208,7 @@ class SynthesisController extends FOSRestController
      * @Get("/syntheses/{synthesis_id}/elements/{element_id}")
      * @ParamConverter("synthesis", options={"mapping": {"synthesis_id": "id"}})
      * @ParamConverter("element", options={"mapping": {"element_id": "id"}})
-     * @View(serializerGroups={"Default", "Details"})
+     * @View(serializerGroups={"Default", "ElementDetails"})
      */
     public function getSynthesisElementAction(Synthesis $synthesis, SynthesisElement $element)
     {
@@ -197,7 +230,6 @@ class SynthesisController extends FOSRestController
      * @Post("/syntheses/{id}/elements")
      * @ParamConverter("synthesis", options={"mapping": {"id": "id"}})
      * @ParamConverter("element", converter="fos_rest.request_body")
-     * @View(serializerGroups={"Default", "Details"})
      */
     public function createSynthesisElementAction(Synthesis $synthesis, SynthesisElement $element, ConstraintViolationListInterface $validationErrors)
     {
@@ -212,6 +244,7 @@ class SynthesisController extends FOSRestController
         $em->flush();
 
         $view = $this->view($element, Codes::HTTP_CREATED);
+        $view->setSerializationContext(SerializationContext::create()->setGroups(array('Default', 'ElementDetails')));
         $url = $this->generateUrl('get_synthesis_element', ['synthesis_id' => $synthesis->getId(), 'element_id' => $element->getId()], UrlGeneratorInterface::ABSOLUTE_URL);
         $view->setHeader('Location', $url);
         return $view;
@@ -232,7 +265,7 @@ class SynthesisController extends FOSRestController
      * @Put("/syntheses/{synthesis_id}/elements/{element_id}")
      * @ParamConverter("synthesis", options={"mapping": {"synthesis_id": "id"}})
      * @ParamConverter("element", options={"mapping": {"element_id": "id"}})
-     * @View(serializerGroups={"Default", "Details"})
+     * @View(serializerGroups={"Default", "ElementDetails"})
      */
     public function updateSynthesisElementAction(Request $request, Synthesis $synthesis, SynthesisElement $element)
     {
@@ -268,7 +301,7 @@ class SynthesisController extends FOSRestController
      * @ParamConverter("synthesis", options={"mapping": {"synthesis_id": "id"}})
      * @ParamConverter("element", options={"mapping": {"element_id": "id"}})
      * @ParamConverter("division", converter="fos_rest.request_body")
-     * @View(serializerGroups={"Default", "Details"})
+     * @View(serializerGroups={"Default"})
      */
     public function divideSynthesisElementAction(Request $request, Synthesis $synthesis, SynthesisElement $element, SynthesisDivision $division)
     {
@@ -314,7 +347,7 @@ class SynthesisController extends FOSRestController
      * @Get("/syntheses/{synthesis_id}/elements/{element_id}/history")
      * @ParamConverter("synthesis", options={"mapping": {"synthesis_id": "id"}})
      * @ParamConverter("element", options={"mapping": {"element_id": "id"}})
-     * @View(serializerGroups={"Default", "Details"})
+     * @View(serializerGroups={"Default"})
      */
     public function getSynthesisElementHistoryAction(Request $request, Synthesis $synthesis, SynthesisElement $element)
     {

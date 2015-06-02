@@ -178,8 +178,6 @@ class ApiContext extends ApplicationContext
             $consultationStep = $this->getEntityManager()->getRepository('CapcoAppBundle:ConsultationStep')->findOneBy(
                 array('slug' => 'collecte-des-avis')
             );
-            $synthesis->setSourceType('consultation_step');
-            $synthesis->setConsultationStep($consultationStep);
             $synthesis->setEnabled(true);
 
             // Set id

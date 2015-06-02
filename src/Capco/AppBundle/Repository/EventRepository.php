@@ -6,6 +6,7 @@ use Capco\AppBundle\Entity\Consultation;
 use Capco\AppBundle\Entity\Theme;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\QueryBuilder;
+use Doctrine\ORM\Tools\Pagination\Paginator;
 
 /**
  * EventRepository.
@@ -22,7 +23,7 @@ class EventRepository extends EntityRepository
      *
      * @return array
      */
-    public function getSearchResults($archived = null, $themeSlug = null, $consultationSlug = null, $term = null)
+    public function getSearchResults($archived = null, $themeSlug = null, $consultationSlug = null, $term = null, $limit = null, $offset = null)
     {
         $qb = $this->getIsEnabledQueryBuilder()
             ->addSelect('a', 'm', 't', 'c')
@@ -38,7 +39,7 @@ class EventRepository extends EntityRepository
             $qb = $this->whereIsArchived($archived, $qb);
         }
 
-        if ($themeSlug !== null && $themeSlug !== Theme::FILTER_ALL) {
+        if ($themeSlug && $themeSlug !== Theme::FILTER_ALL) {
             $qb->andWhere('t.slug = :theme')
                 ->setParameter('theme', $themeSlug)
             ;
@@ -50,13 +51,21 @@ class EventRepository extends EntityRepository
             ;
         }
 
-        if ($term !== null) {
+        if ($term) {
             $qb->andWhere('e.title LIKE :term')
                 ->setParameter('term', '%'.$term.'%')
             ;
         }
 
-        return $query = $qb->getQuery()->getResult();
+        if ($limit) {
+            $qb->setMaxResults($limit);
+        }
+
+        if ($offset) {
+            $qb->setFirstResult($offset);
+        }
+
+        return new Paginator($qb, $fetchJoin = true);
     }
 
     /**
@@ -154,45 +163,6 @@ class EventRepository extends EntityRepository
             ->orderBy('e.startAt', 'ASC');
 
         $qb = $this->whereIsFuture($qb);
-
-        if ($limit) {
-            $qb->setMaxResults($limit);
-        }
-
-        if ($offset) {
-            $qb->setFirstResult($offset);
-        }
-
-        return $qb->getQuery()->execute();
-    }
-
-    /**
-     * Get last events by consultation.
-     *
-     * @param $archived
-     * @param $consultationSlug
-     * @param int $limit
-     * @param int $offset
-     *
-     * @return mixed
-     */
-    public function getLastByConsultation($archived, $consultationSlug, $limit = 1, $offset = 0)
-    {
-        $qb = $this->getIsEnabledQueryBuilder()
-            ->addSelect('a', 'm', 't', 'c')
-            ->leftJoin('e.Author', 'a')
-            ->leftJoin('a.Media', 'm')
-            ->leftJoin('e.themes', 't', 'WITH', 't.isEnabled = :enabled')
-            ->leftJoin('e.consultations', 'c', 'WITH', 'c.isEnabled = :enabled')
-            ->setParameter('enabled', true)
-            ->andWhere('c.slug = :consultation')
-            ->setParameter('consultation', $consultationSlug)
-            ->orderBy('e.startAt', 'ASC')
-        ;
-
-        if (null !== $archived) {
-            $qb = $this->whereIsArchived($archived, $qb);
-        }
 
         if ($limit) {
             $qb->setMaxResults($limit);

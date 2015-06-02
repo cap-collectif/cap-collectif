@@ -47,12 +47,12 @@ class EventResolver
         }
     }
 
-    public function getLastByConsultation($consultationSlug, $limit)
+    public function getLastByConsultation($consultationSlug, $limit = null)
     {
-        $events = $this->repository->getLastByConsultation(false, $consultationSlug, $limit);
+        $events = $this->repository->getSearchResults(false, null, $consultationSlug, null, $limit);
         $left = $limit - count($events);
         if ($left > 0) {
-            $events = array_merge($events, $this->repository->getLastByConsultation(true, $consultationSlug, $limit));
+            $events = array_merge($events, $this->repository->getSearchResults(true, null, $consultationSlug, null, $left));
         }
 
         return $events;
