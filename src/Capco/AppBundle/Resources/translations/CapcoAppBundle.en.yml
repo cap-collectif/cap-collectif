@@ -69,7 +69,6 @@ contact:
   submit: Envoyer
 
 header:
-  hello: Bonjour
   profile: Mon profil
   user_settings: Mes préférences
   administration: Administration

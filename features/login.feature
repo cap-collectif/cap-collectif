@@ -3,12 +3,12 @@ Feature: Login
   Scenario: Login user
     Given I am logged in as user
     And I visited "home page"
-    Then I should see "Bonjour user"
+    Then I should see "user"
 
   Scenario: Login admin
     Given I am logged in as admin
     And I visited "home page"
-    Then I should see "Bonjour admin"
+    Then I should see "admin"
 
   Scenario: Lost password
     Given I visited "login page"
@@ -20,11 +20,11 @@ Feature: Login
   Scenario: Logout
     Given I am logged in as user
     And I visited "home page"
-    When I follow "Bonjour user"
+    When I follow "user"
     And I follow "Déconnexion"
     Then I should see "Connexion"
 
   Scenario: Login as a previous drupal user
     Given I am logged in as drupal
     And I visited "home page"
-    Then I should see "Bonjour drupal"
+    Then I should see "drupal"

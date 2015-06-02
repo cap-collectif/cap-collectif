@@ -484,7 +484,14 @@ form:
 user:
   delete:
     batch_denied: Impossible de supprimer un super administrateur.
-    warning_message: Attention, si vous supprimez cet utilisateur, tous ses contenus seront également supprimés.
+    confirmation: Êtes-vous sûr de vouloir supprimer l'utilisateur <strong>%object%</strong> sélectionné ?
+    warning_message: Attention, <strong>tous les contenus ci-dessous ainsi que ceux liés seront également supprimés</strong> et cette action sera irréversible.
+    opinions: "{1} 1 proposition :| ]1,Inf[ %count% propositions :"
+    ideas: "{1} 1 idée :| ]1,Inf[ %count% idées :"
+    sources: "{1} 1 source :| ]1,Inf[ %count% sources :"
+    comments: "{1} 1 commentaire :| ]1,Inf[ %count% commentaires :"
+    arguments: "{1} 1 argument :| ]1,Inf[ %count% arguments :"
+    votes: "{1} 1 vote | ]1,Inf[ %count% votes"
 
 highlighted_content.limit_info: 5 contenus à la une maximum
 highlighted_post: un article

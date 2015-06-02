@@ -2,6 +2,7 @@
 global:
   alert:
     close: Fermer
+    already_enabled: Votre compte a déjà été activé
   capco_powered: Propulsé par %startlink%Cap-Collectif%endlink%
   menu:
     title: Menu
@@ -72,7 +73,6 @@ contact:
   submit: Envoyer
 
 header:
-  hello: Bonjour
   profile: Mon profil
   user_settings: Mes préférences
   administration: Administration
@@ -582,7 +582,7 @@ user:
 
       Merci de vous êtes inscrit à %sitename%.
 
-      Pour valider votre compte, merci de vous rendre à cette adresse : %url%.
+      Pour valider votre compte, merci de vous rendre à cette adresse : %url% (lien à usage unique).
 
       Votre identifiant est : %email%.
 
@@ -592,7 +592,7 @@ user:
       facebook: S'inscrire avec Facebook
       gplus: S'inscrire avec Google+
       twitter: S'inscrire avec Twitter
-    or: ou
+    or: OU
     username:
       username: Nom complet
       is_public: Votre nom sera rendu public sur le site.
