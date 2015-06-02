@@ -113,9 +113,6 @@ Feature: Synthesis
       "_links": {
         "self": { "href": "@string@.startsWith('/api/syntheses/')" },
         "elements": { "href": "@string@.startsWith('/api/syntheses/').endsWith('/elements')" }
-      },
-      "_embedded": {
-        "elements": @null@
       }
     }
     """

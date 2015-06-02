@@ -37,7 +37,7 @@ use Hateoas\Configuration\Annotation as Hateoas;
  *      name = "elements",
  *      embedded = @Hateoas\Embedded(
  *          "expr(object.getElements())",
- *          exclusion = @Hateoas\Exclusion(excludeIf = "expr(object.getElements())")
+ *          exclusion = @Hateoas\Exclusion(excludeIf = "expr(!object.getElements())")
  *      )
  * )
  */

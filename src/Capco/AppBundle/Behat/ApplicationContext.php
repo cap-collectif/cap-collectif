@@ -21,6 +21,9 @@ class ApplicationContext extends UserContext
      */
     public static function databaseContainsFixtures()
     {
+        exec('php app/console doctrine:database:drop --force -e test');
+        exec('php app/console doctrine:database:create -e test');
+        exec('php app/console doctrine:schema:update --force -e test');
         exec('php app/console doctrine:fixtures:load -n -e test');
         exec('php app/console capco:recalculate-counters -e test');
         exec('php app/console capco:recalculate-consultations-counters -e test');
