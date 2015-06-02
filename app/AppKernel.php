@@ -53,6 +53,9 @@ class AppKernel extends Kernel
             new Capco\MediaBundle\CapcoMediaBundle(),
             new Capco\ClassificationBundle\CapcoClassificationBundle(),
 
+            // search
+            new FOS\ElasticaBundle\FOSElasticaBundle(),
+
             // feature activation / deactivation
             new Qandidate\Bundle\ToggleBundle\QandidateToggleBundle(),
 

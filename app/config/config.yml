@@ -3,6 +3,7 @@ imports:
     - { resource: security.yml }
     - { resource: sonata.yml }
     - { resource: liip_imagine.yml }
+    - { resource: elastica.yml }
     - { resource: joli/jolitypo.yml }
 
 framework:
@@ -200,3 +201,4 @@ coop_tilleuls_ck_editor_sonata_media:
         layout: CoopTilleulsCKEditorSonataMediaBundle::layout.html.twig
         browser: CapcoMediaBundle:MediaAdmin:browser.html.twig
         upload: CoopTilleulsCKEditorSonataMediaBundle:MediaAdmin:upload.html.twig
+

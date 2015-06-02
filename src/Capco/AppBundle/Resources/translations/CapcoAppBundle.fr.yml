@@ -2,6 +2,7 @@
 global:
   alert:
     close: Fermer
+    already_enabled: Votre compte a déjà été activé
   capco_powered: Propulsé par %startlink%Cap-Collectif%endlink%
   menu:
     title: Menu
