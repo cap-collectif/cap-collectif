@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "23bd5c6ea2b6bde79f9c0984034b9f5e",
+    "hash": "fc34890265bc7663e0a7b94f6a868138",
     "packages": [
         {
             "name": "behat/transliterator",
@@ -1294,7 +1294,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Elao/WebProfilerExtraBundle/zipball/b68a3b424096db659878a0f6c2024cc069cfb9b5",
+                "url": "https://api.github.com/repos/Elao/WebProfilerExtraBundle/zipball/8090ced6d6621cefcc468a23e01b02a3f6bcfdb7",
                 "reference": "8090ced6d6621cefcc468a23e01b02a3f6bcfdb7",
                 "shasum": ""
             },
@@ -1339,87 +1339,6 @@
             "time": "2015-01-30 08:28:07"
         },
         {
-            "name": "friendsofsymfony/elastica-bundle",
-            "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/FriendsOfSymfony/FOSElasticaBundle.git",
-                "reference": "620fcf523b506155372dca6f0fea9f48c3659c6a"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/FriendsOfSymfony/FOSElasticaBundle/zipball/620fcf523b506155372dca6f0fea9f48c3659c6a",
-                "reference": "620fcf523b506155372dca6f0fea9f48c3659c6a",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.3.2",
-                "psr/log": "~1.0",
-                "ruflin/elastica": ">=0.90.10.0, <2.1-dev",
-                "symfony/console": "~2.1",
-                "symfony/form": "~2.1",
-                "symfony/framework-bundle": "~2.3",
-                "symfony/property-access": "~2.2"
-            },
-            "require-dev": {
-                "doctrine/doctrine-bundle": "~1.2",
-                "doctrine/orm": "~2.4",
-                "jms/serializer-bundle": "@stable",
-                "knplabs/knp-components": "~1.2",
-                "knplabs/knp-paginator-bundle": "~2.4",
-                "pagerfanta/pagerfanta": "~1.0",
-                "phpunit/phpunit": "~4.1",
-                "propel/propel1": "1.6.*",
-                "symfony/browser-kit": "~2.3",
-                "symfony/expression-language": "~2.4",
-                "symfony/twig-bundle": "~2.3"
-            },
-            "type": "symfony-bundle",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "3.2.x-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "FOS\\ElasticaBundle\\": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Tim Nagel",
-                    "email": "tim@nagel.com.au"
-                },
-                {
-                    "name": "Richard Miller",
-                    "email": "richard.miller@limethinking.co.uk"
-                },
-                {
-                    "name": "FriendsOfSymfony Community",
-                    "homepage": "https://github.com/FriendsOfSymfony/FOSElasticaBundle/contributors"
-                },
-                {
-                    "name": "Jeremy Mikola",
-                    "email": "jmikola@gmail.com"
-                }
-            ],
-            "description": "Elasticsearch PHP integration for your Symfony2 project using Elastica",
-            "homepage": "https://github.com/FriendsOfSymfony/FOSElasticaBundle",
-            "keywords": [
-                "doctrine2",
-                "elastica",
-                "elasticsearch",
-                "mongodb",
-                "propel",
-                "search"
-            ],
-            "time": "2015-05-27 23:31:56"
-        },
-        {
             "name": "friendsofsymfony/rest-bundle",
             "version": "dev-master",
             "target-dir": "FOS/RestBundle",
@@ -1430,7 +1349,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/FriendsOfSymfony/FOSRestBundle/zipball/0cae3cffda28f5fa1e69268ea114023145fc4d26",
+                "url": "https://api.github.com/repos/FriendsOfSymfony/FOSRestBundle/zipball/b38db72be9eed4f5c2135ba6ea19b66eaa1def22",
                 "reference": "b38db72be9eed4f5c2135ba6ea19b66eaa1def22",
                 "shasum": ""
             },
@@ -1514,7 +1433,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/FriendsOfSymfony/FOSUserBundle/zipball/2022ac8463a8c50dd631f93a17064bd41795fff2",
+                "url": "https://api.github.com/repos/FriendsOfSymfony/FOSUserBundle/zipball/49c4fd518f64aa8ee435dfcfb739d292b2cdc962",
                 "reference": "49c4fd518f64aa8ee435dfcfb739d292b2cdc962",
                 "shasum": ""
             },
@@ -1580,7 +1499,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/fzaninotto/Faker/zipball/2cfecfe1dbc32cfec713db5c83c78c2ecc66c6dc",
+                "url": "https://api.github.com/repos/fzaninotto/Faker/zipball/9254a0eb8993148b3d872fd83b852cb8c09f3e0d",
                 "reference": "9254a0eb8993148b3d872fd83b852cb8c09f3e0d",
                 "shasum": ""
             },
@@ -1770,7 +1689,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/hwi/HWIOAuthBundle/zipball/2e12c7ab9cf83ce0d3e9d6a98315bbf21ab23ab3",
+                "url": "https://api.github.com/repos/hwi/HWIOAuthBundle/zipball/c3790c23dbb32bd270da99fa00b42e2c086f906f",
                 "reference": "c3790c23dbb32bd270da99fa00b42e2c086f906f",
                 "shasum": ""
             },
@@ -2723,7 +2642,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/MewesK/TwigExcelBundle/zipball/af1792769d2b0dd3bd9fac2e53d2c4467179eda2",
+                "url": "https://api.github.com/repos/MewesK/TwigExcelBundle/zipball/068d09aa4cbdbecc928643368b5b9cd017f185b8",
                 "reference": "068d09aa4cbdbecc928643368b5b9cd017f185b8",
                 "shasum": ""
             },
@@ -2834,7 +2753,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Seldaek/monolog/zipball/e064827e23d983fad07eb06841350d51bd19e509",
+                "url": "https://api.github.com/repos/Seldaek/monolog/zipball/bf2bff61743f20a13dc46ff1e3bbd0f19c997d2b",
                 "reference": "bf2bff61743f20a13dc46ff1e3bbd0f19c997d2b",
                 "shasum": ""
             },
@@ -3522,65 +3441,6 @@
             "time": "2015-05-06 15:01:57"
         },
         {
-            "name": "ruflin/elastica",
-            "version": "2.0.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/ruflin/Elastica.git",
-                "reference": "dfe06cc383a671ececa097ce0a05e7e46a504401"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/ruflin/Elastica/zipball/dfe06cc383a671ececa097ce0a05e7e46a504401",
-                "reference": "dfe06cc383a671ececa097ce0a05e7e46a504401",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.3.3",
-                "psr/log": "~1.0"
-            },
-            "require-dev": {
-                "fabpot/php-cs-fixer": "~1.4",
-                "munkie/elasticsearch-thrift-php": "1.4.*",
-                "phpunit/phpunit": "4.1.*"
-            },
-            "suggest": {
-                "egeloen/http-adapter": "Allow using httpadapter transport",
-                "guzzlehttp/guzzle": "Allow using guzzle 4.x as the http transport (Requires php 5.4)",
-                "monolog/monolog": "Logging request",
-                "munkie/elasticsearch-thrift-php": "Allow using thrift transport"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "2.0.x-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Elastica\\": "lib/Elastica/",
-                    "Elastica\\Test\\": "test/lib/Elastica/Test/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Nicolas Ruflin",
-                    "homepage": "http://ruflin.com/"
-                }
-            ],
-            "description": "Elasticsearch Client",
-            "homepage": "http://elastica.io/",
-            "keywords": [
-                "client",
-                "search"
-            ],
-            "time": "2015-05-13 08:07:20"
-        },
-        {
             "name": "sensio/distribution-bundle",
             "version": "dev-master",
             "target-dir": "Sensio/Bundle/DistributionBundle",
@@ -3591,7 +3451,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sensiolabs/SensioDistributionBundle/zipball/8175618b07793b9d43c3be931f3d8d4c14c9e866",
+                "url": "https://api.github.com/repos/sensiolabs/SensioDistributionBundle/zipball/79b820aee1f1daeb2717fa9471ee19275cc1d638",
                 "reference": "79b820aee1f1daeb2717fa9471ee19275cc1d638",
                 "shasum": ""
             },
@@ -3650,7 +3510,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sensiolabs/SensioFrameworkExtraBundle/zipball/c7e5eb6d7d55b1b2b8fe7318dc925bd54933ec6c",
+                "url": "https://api.github.com/repos/sensiolabs/SensioFrameworkExtraBundle/zipball/8cf9ba588534a3f910907c3093db1cfc9419a50f",
                 "reference": "8cf9ba588534a3f910907c3093db1cfc9419a50f",
                 "shasum": ""
             },
@@ -4188,7 +4048,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sonata-project/SonataDoctrineORMAdminBundle/zipball/4208dc19c796bc822e9f7343023266514d36291d",
+                "url": "https://api.github.com/repos/sonata-project/SonataDoctrineORMAdminBundle/zipball/43096bfc8700e49c06f32a5bfcba6143c360834d",
                 "reference": "43096bfc8700e49c06f32a5bfcba6143c360834d",
                 "shasum": ""
             },
@@ -4835,7 +4695,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/MonologBundle/zipball/ae14e153346409cd2bb1a20bffc039feb63340e1",
+                "url": "https://api.github.com/repos/symfony/MonologBundle/zipball/0d7387b2a41375fefe46c7bd122d403333eaee90",
                 "reference": "0d7387b2a41375fefe46c7bd122d403333eaee90",
                 "shasum": ""
             },
@@ -4951,7 +4811,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/symfony/zipball/418b28b4643c4ad60d2cb4b5434be34c3a44f799",
+                "url": "https://api.github.com/repos/symfony/symfony/zipball/31b5e5c5b1c9ad492a68d8e42df53f52cdecb4f3",
                 "reference": "31b5e5c5b1c9ad492a68d8e42df53f52cdecb4f3",
                 "shasum": ""
             },
@@ -5383,7 +5243,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Behat/Behat/zipball/941d766817bccc4f9f4901f34fffdda8b21de186",
+                "url": "https://api.github.com/repos/Behat/Behat/zipball/d4c821ca70c600ddeb75fcd365e3bd30eaba7194",
                 "reference": "d4c821ca70c600ddeb75fcd365e3bd30eaba7194",
                 "shasum": ""
             },
@@ -6059,7 +5919,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpspec/phpspec/zipball/6634a08350971e316c058441e87b5649753dbffe",
+                "url": "https://api.github.com/repos/phpspec/phpspec/zipball/1f9a3443ab6c8d5a9eade80b9386c749ea9020fd",
                 "reference": "1f9a3443ab6c8d5a9eade80b9386c749ea9020fd",
                 "shasum": ""
             },
@@ -6544,7 +6404,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/zendframework/zend-code/zipball/7464fbabf60545502192c8ab12db4585d3d3c2c5",
+                "url": "https://api.github.com/repos/zendframework/zend-code/zipball/746888eb7015ca368c86d7ee0d0c75c5180b3889",
                 "reference": "746888eb7015ca368c86d7ee0d0c75c5180b3889",
                 "shasum": ""
             },
@@ -6598,7 +6458,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/zendframework/zend-eventmanager/zipball/d538f160f92745372179f02818a44569514a252a",
+                "url": "https://api.github.com/repos/zendframework/zend-eventmanager/zipball/bb673bddfc865b425cb8d18e931741696fe9bc16",
                 "reference": "bb673bddfc865b425cb8d18e931741696fe9bc16",
                 "shasum": ""
             },
@@ -6644,7 +6504,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/zendframework/zend-stdlib/zipball/4002405ffcd5eab2ca02f9c4f61b7fd5b3156e7d",
+                "url": "https://api.github.com/repos/zendframework/zend-stdlib/zipball/4a675eecc5a3978c453969da959d4dff2ef0fe12",
                 "reference": "4a675eecc5a3978c453969da959d4dff2ef0fe12",
                 "shasum": ""
             },
@@ -6715,7 +6575,6 @@
         "tilleuls/ckeditor-sonata-media-bundle": 20,
         "egeloen/ckeditor-bundle": 20,
         "mewesk/twig-excel-bundle": 20,
-        "friendsofsymfony/elastica-bundle": 20,
         "behat/symfony2-extension": 20,
         "behat/mink-extension": 20,
         "behat/mink-selenium2-driver": 20,

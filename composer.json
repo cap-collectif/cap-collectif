@@ -54,8 +54,7 @@
         "willdurand/geocoder": "~3.0@dev",
         "tilleuls/ckeditor-sonata-media-bundle": "~2.3@dev",
         "egeloen/ckeditor-bundle": "~3.0@dev",
-        "mewesk/twig-excel-bundle": "~1.0@dev",
-        "friendsofsymfony/elastica-bundle": "^3.2@dev"
+        "mewesk/twig-excel-bundle": "~1.0@dev"
     },
     "require-dev": {
         "sensio/generator-bundle": "~2.3",
