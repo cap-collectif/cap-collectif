@@ -592,7 +592,7 @@ user:
       facebook: S'inscrire avec Facebook
       gplus: S'inscrire avec Google+
       twitter: S'inscrire avec Twitter
-    or: ou
+    or: OU
     username:
       username: Nom complet
       is_public: Votre nom sera rendu public sur le site.
