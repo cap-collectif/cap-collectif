@@ -3,15 +3,13 @@
 {% block _opinionVoteForm_value_widget %}
 	<div {{ block('widget_attributes') }}>
         {% for child in form %}
-            <div class="opinion__vote-group">
+            <div class="opinion__vote-group" data-toggle="buttons">
             	{% set voteType = child.vars['value'] %}
-                <a class="connection-popover-js" style="display: block;">
-                    <div data-toggle="buttons">
-                        <label class="btn btn-{{ typeStyles[voteType]['color'] }} {% if previousType == voteType %}active{% else %}btn--outline{% endif %}">
-                            {{ form_widget(child) }}
-                            <i class="cap cap-{% if previousType == voteType %}{{ typeStyles[voteType]['icon_checked'] }}{% else %}{{ typeStyles[voteType]['icon'] }}{% endif %}"></i> {{ child.vars.label|trans({}, child.vars.translation_domain) }}
-                        </label>
-                    </div>
+                <a class="connection-popover-js">
+                    <label class="btn btn-{{ typeStyles[voteType]['color'] }} {% if previousType == voteType %}active{% else %}btn--outline{% endif %}">
+                        {{ form_widget(child) }}
+                        <i class="cap cap-{% if previousType == voteType %}{{ typeStyles[voteType]['icon_checked'] }}{% else %}{{ typeStyles[voteType]['icon'] }}{% endif %}"></i> {{ child.vars.label|trans({}, child.vars.translation_domain) }}
+                    </label>
                 </a>
     		</div>
         {% endfor %}

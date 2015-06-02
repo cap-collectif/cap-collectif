@@ -378,7 +378,7 @@ abstract class AbstractStep
     {
         $now = new \DateTime();
 
-        if ($this->startAt != null && $this->endAt != null) {
+        if ($this->startAt !== null && $this->endAt !== null) {
             return $this->startAt < $now && $this->endAt > $now;
         }
 
@@ -389,14 +389,26 @@ abstract class AbstractStep
     {
         $now = new \DateTime();
 
-        return $this->endAt != null ? $this->endAt < $now : false;
+        if (null == $this->endAt) {
+            return $this->startAt !== null && $this->startAt < $now;
+        }
+        if ($this->endAt < $now) {
+            return $this->startAt === null || $this->startAt < $now;
+        }
+        return false;
     }
 
     public function isFuture()
     {
         $now = new \DateTime();
 
-        return $this->startAt != null ? $this->startAt > $now : false;
+        if (null === $this->startAt) {
+            return $this->endAt !== null && $this->endAt > $now;
+        }
+        if ($this->startAt > $now) {
+            return $this->endAt === null || $this->endAt > $now;
+        }
+        return false;
     }
 
     /**
