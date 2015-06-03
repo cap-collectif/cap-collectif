@@ -351,5 +351,8 @@ services:
           - [ setAnnotationReader, [ @annotation_reader ] ]
 
     capco.synthesis.synthesis_handler:
-        class: Capco\AppBundle\Handler\Api\SynthesisHandler
-        arguments: [@doctrine.orm.entity_manager]
+        class: Capco\AppBundle\Synthesis\Handler\SynthesisHandler
+        arguments: [@doctrine.orm.entity_manager, @capco.synthesis.consultation_step_extractor]
+
+    capco.synthesis.consultation_step_extractor:
+        class: Capco\AppBundle\Synthesis\Extractor\ConsultationStepExtractor

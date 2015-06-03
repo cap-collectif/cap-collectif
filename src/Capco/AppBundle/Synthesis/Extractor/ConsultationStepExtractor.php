@@ -1,45 +1,9 @@
 <?php
 
-namespace Capco\AppBundle\Handler\Api;
+namespace Capco\AppBundle\Synthesis\Extractor;
 
-use Capco\AppBundle\Entity\Argument;
-use Capco\AppBundle\Entity\ConsultationStep;
-use Capco\AppBundle\Entity\Opinion;
-use Capco\AppBundle\Entity\Synthesis\SynthesisElement;
-use Doctrine\ORM\EntityManager;
-use Capco\AppBundle\Entity\Synthesis\Synthesis;
-
-class SynthesisHandler
+class ConsultationStepExtractor
 {
-    protected $em;
-
-    function __construct(EntityManager $em)
-    {
-        $this->em = $em;
-    }
-
-    public function getAll()
-    {
-        return $this->em->getRepository('CapcoAppBundle:Synthesis\Synthesis')->findAll();
-    }
-
-    public function createSynthesis(Synthesis $synthesis)
-    {
-        $this->em->persist($synthesis);
-        $this->em->flush();
-
-        $this->createElementsFromSource($synthesis);
-
-        return $synthesis;
-    }
-
-    public function createElementsFromSource(Synthesis $synthesis)
-    {
-        if ($synthesis->getSourceType() == "consultation_step" && null !== $synthesis->getConsultationStep()) {
-            return $this->createElementsFromConsultationStep($synthesis, $synthesis->getConsultationStep());
-        }
-        return false;
-    }
 
     public function createElementsFromConsultationStep(Synthesis $synthesis, ConsultationStep $consultationStep)
     {
@@ -51,8 +15,8 @@ class SynthesisHandler
         $opinions = $consultationStep->getOpinions();
         foreach ($opinions as $opinion) {
             foreach ($currentElements as $element) {
-                if ($this->elementIsRelated($element, $opinion)) {
-                    break;
+                if (!$this->isElementRelated($element, $opinion)) {
+                    continue;
                 }
             }
             $newElementFromOpinion = $this->createElementFromOpinion($opinion);
@@ -62,7 +26,7 @@ class SynthesisHandler
             $arguments = $opinion->getArguments();
             foreach ($arguments as $argument) {
                 foreach ($currentElements as $element) {
-                    if ($this->elementIsRelated($element, $argument)) {
+                    if ($this->isElementRelated($element, $argument)) {
                         break;
                     }
                 }
@@ -81,7 +45,7 @@ class SynthesisHandler
         return true;
     }
 
-    public function elementIsRelated($element, $object)
+    public function isElementRelated($element, $object)
     {
         return $element->getLinkedDataClass() === get_class($object) && $element->getLinkedDataId() === $object->getId();
     }
@@ -105,6 +69,4 @@ class SynthesisHandler
         $element->setLinkedDataId($argument->getId());
         return $element;
     }
-
-
 }

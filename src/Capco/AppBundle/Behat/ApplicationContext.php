@@ -18,6 +18,8 @@ class ApplicationContext extends UserContext
 
     /**
      * @AfterScenario @database
+     *
+     * Recreate database before loading fixtures to make sure we always have the same ids
      */
     public static function databaseContainsFixtures()
     {

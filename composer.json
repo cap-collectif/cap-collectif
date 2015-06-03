@@ -59,9 +59,6 @@
         "jms/serializer-bundle": "0.13.*@dev",
         "nelmio/api-doc-bundle": "~2.9@dev",
         "friendsofsymfony/rest-bundle": "1.5.*",
-        "guzzlehttp/guzzle": "~5.0@dev",
-        "phpunit/phpunit": "~4.8@dev",
-        "coduo/php-matcher": "1.1.*",
         "lexik/jwt-authentication-bundle": "~1.0@dev",
         "willdurand/hateoas-bundle": "^1.0@dev"
     },
@@ -76,7 +73,10 @@
         "sensiolabs/behat-page-object-extension": "~2.0",
         "ocramius/proxy-manager": "~0.5",
         "bossa/phpspec2-expect": "*",
-        "phpspec/phpspec": "~2.0"
+        "phpspec/phpspec": "~2.0",
+        "guzzlehttp/guzzle": "~5.0@dev",
+        "phpunit/phpunit": "~4.8@dev",
+        "coduo/php-matcher": "1.1.*"
     },
     "scripts": {
         "post-root-package-install": [

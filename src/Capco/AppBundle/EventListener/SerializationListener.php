@@ -9,11 +9,11 @@ use Symfony\Component\Translation\TranslatorInterface;
 
 class SerializationListener implements EventSubscriberInterface
 {
-    private $logsManager;
+    private $logManager;
 
     public function __construct(LogManager $logManager)
     {
-        $this->logsManager = $logManager;
+        $this->logManager = $logManager;
     }
 
     public static function getSubscribedEvents()
@@ -29,7 +29,7 @@ class SerializationListener implements EventSubscriberInterface
 
         $event->getVisitor()->addData(
             'sentences',
-            $this->logsManager->getSentencesForLog($log)
+            $this->logManager->getSentencesForLog($log)
         );
     }
 
