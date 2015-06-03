@@ -280,6 +280,34 @@ Feature: Synthesis
     And I send a GET request to "/api/syntheses/42/elements"
     Then the JSON response status code should be 401
 
+  @database
+  Scenario: API client wants to get new synthesis elements
+    Given I am logged in to api as admin
+    And there is a synthesis with id "42" and elements:
+      | 43 |
+    And I create an element in synthesis 42 with values:
+      | id       | 44   |
+      | archived | true |
+    And I send a GET request to "/api/syntheses/42/elements/new"
+    Then the JSON response should match:
+    """
+    [
+      {
+        "id": "43",
+        "enabled": true,
+        "archived": false,
+        "title": "Je suis un élément",
+        "body": "blabla",
+        "notation": 4,
+        "_links": {
+          "self": { "href": "/api/syntheses/42/elements/43" },
+          "divide": { "href": "/api/syntheses/42/elements/43/divisions" },
+          "history": { "href": "/api/syntheses/42/elements/43/history" }
+        }
+      }
+    ]
+    """
+
   Scenario: API client wants to get a synthesis element
     Given I am logged in to api as admin
     And there is a synthesis with id "42" and elements:
@@ -563,10 +591,6 @@ Feature: Synthesis
       | 43 |
     And I create an element in synthesis 42 with values:
       | id       | 47                          |
-      | title    | Coucou, je suis un élément. |
-      | body     | blabla                      |
-      | notation | 5                           |
-      | enabled  | true                        |
     And I send a PUT request to "/api/syntheses/42/elements/43" with json:
     """
     {
@@ -582,9 +606,6 @@ Feature: Synthesis
       | 43 |
     And I create an element in synthesis 42 with values:
       | id       | 47                          |
-      | title    | Coucou, je suis un élément. |
-      | body     | blabla                      |
-      | notation | 5                           |
       | enabled  | false                       |
     And I send a PUT request to "/api/syntheses/42/elements/47" with json:
     """

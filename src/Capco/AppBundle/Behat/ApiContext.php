@@ -175,9 +175,6 @@ class ApiContext extends ApplicationContext
         if (null === $synthesis) {
             // Create synthesis
             $synthesis = new Synthesis();
-            $consultationStep = $this->getEntityManager()->getRepository('CapcoAppBundle:ConsultationStep')->findOneBy(
-                array('slug' => 'collecte-des-avis')
-            );
             $synthesis->setEnabled(true);
 
             // Set id
@@ -225,16 +222,31 @@ class ApiContext extends ApplicationContext
      *
      * @Given I create an element in synthesis :id with values:
      */
-    public function iCreateAnElementInSynthesisWithValues($id, TableNode $logValues)
+    public function iCreateAnElementInSynthesisWithValues($id, TableNode $data)
     {
-        $values = $logValues->getRowsHash();
+        $values = $data->getRowsHash();
         $synthesis = $this->getEntityManager()->getRepository('CapcoAppBundle:Synthesis\Synthesis')->find($id);
+
         $element = new SynthesisElement();
         $element->setSynthesis($synthesis);
-        $element->setTitle($values['title']);
-        $element->setBody($values['body']);
-        $element->setNotation($values['notation']);
-        $element->setEnabled($values['enabled']);
+
+        if (array_key_exists('title', $values)) {
+            $element->setTitle($values['title']);
+        }
+        if (array_key_exists('body', $values)) {
+            $element->setBody($values['body']);
+        } else {
+            $element->setBody('blabla');
+        }
+        if (array_key_exists('notation', $values)) {
+            $element->setNotation($values['notation']);
+        }
+        if (array_key_exists('enabled', $values)) {
+            $element->setEnabled(filter_var($values['enabled'], FILTER_VALIDATE_BOOLEAN));
+        }
+        if (array_key_exists('archived', $values)) {
+            $element->setArchived(filter_var($values['archived'], FILTER_VALIDATE_BOOLEAN));
+        }
 
         // Set id
         $element->setId($values['id']);

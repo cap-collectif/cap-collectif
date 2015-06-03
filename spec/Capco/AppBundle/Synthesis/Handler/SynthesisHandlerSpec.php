@@ -4,6 +4,7 @@ namespace spec\Capco\AppBundle\Synthesis\Handler;
 
 use Capco\AppBundle\Entity\Synthesis\Synthesis;
 use Capco\AppBundle\Entity\ConsultationStep;
+use Capco\AppBundle\Manager\LogManager;
 use Capco\AppBundle\Synthesis\Extractor\ConsultationStepExtractor;
 use PhpSpec\ObjectBehavior;
 use Doctrine\ORM\EntityManager;
@@ -13,9 +14,9 @@ use Prophecy\Argument as ProphecyArgument;
 
 class SynthesisHandlerSpec extends ObjectBehavior
 {
-    function let(EntityManager $em, ConsultationStepExtractor $csExtractor)
+    function let(EntityManager $em, ConsultationStepExtractor $csExtractor, LogManager $logManager)
     {
-        $this->beConstructedWith($em, $csExtractor);
+        $this->beConstructedWith($em, $csExtractor, $logManager);
     }
 
     function it_is_initializable()

@@ -54,7 +54,7 @@ class SynthesisController extends FOSRestController
      */
     public function getSynthesesAction()
     {
-        return $this->get('capco.synthesis.synthesis_handler')->getAll();
+        return $this->get('capco.synthesis.synthesis_handler')->getAllSyntheses();
     }
 
     /**
@@ -160,8 +160,7 @@ class SynthesisController extends FOSRestController
         $form = $this->createForm(new SynthesisForm(), $synthesis);
         $form->submit($request->request->all(), false);
         if ($form->isValid()) {
-            $em = $this->get('doctrine.orm.entity_manager');
-            $em->flush();
+            $synthesis = $this->get('capco.synthesis.synthesis_handler')->createOrUpdateSynthesis($synthesis);
             $url = $this->generateUrl('get_synthesis', ['id' => $synthesis->getId()], UrlGeneratorInterface::ABSOLUTE_URL);
             return $this->redirectView($url);
         }
@@ -188,9 +187,30 @@ class SynthesisController extends FOSRestController
      */
     public function getSynthesisElementsAction(Synthesis $synthesis)
     {
-        return $this->get('doctrine.orm.entity_manager')->getRepository('CapcoAppBundle:Synthesis\SynthesisElement')->findBy(array(
-            'synthesis' => $synthesis,
-        ));
+        return $this->get('capco.synthesis.synthesis_handler')->getAllElementsFromSynthesis($synthesis);
+    }
+
+    /**
+     * Get unarchived synthesis elements
+     *
+     * @return array|\Capco\AppBundle\Entity\Synthesis\SynthesisElement[]
+     *
+     * @ApiDoc(
+     *  resource=true,
+     *  description="Get all the elements of a synthesis that are not yet archived",
+     *  statusCodes={
+     *    200 = "Syntheses element found",
+     *    404 = "No syntheses element found",
+     *  }
+     * )
+     *
+     * @Get("/syntheses/{id}/elements/new")
+     * @ParamConverter("synthesis", options={"mapping": {"id": "id"}})
+     * @View(serializerGroups={"Default", "Details"})
+     */
+    public function getNewSynthesisElementsAction(Synthesis $synthesis)
+    {
+        return $this->get('capco.synthesis.synthesis_handler')->getNewElementsFromSynthesis($synthesis);
     }
 
     /**
@@ -237,11 +257,7 @@ class SynthesisController extends FOSRestController
             throw new BadRequestHttpException($validationErrors->__toString());
         }
 
-        $element->setSynthesis($synthesis);
-
-        $em = $this->get('doctrine.orm.entity_manager');
-        $em->persist($element);
-        $em->flush();
+        $element = $this->get('capco.synthesis.synthesis_handler')->createOrUpdateElementInSynthesis($element, $synthesis);
 
         $view = $this->view($element, Codes::HTTP_CREATED);
         $view->setSerializationContext(SerializationContext::create()->setGroups(array('Default', 'ElementDetails')));
@@ -274,10 +290,7 @@ class SynthesisController extends FOSRestController
 
         if ($form->isValid()) {
 
-            $em = $this->get('doctrine.orm.entity_manager');
-            $previousState = $em->getRepository('CapcoAppBundle:Synthesis\SynthesisElement')->find($element->getId());
-            $em->persist($element);
-            $em->flush();
+            $element = $this->get('capco.synthesis.synthesis_handler')->createOrUpdateElementInSynthesis($element, $synthesis);
 
             $url = $this->generateUrl('get_synthesis_element', ['synthesis_id' => $synthesis->getId(), 'element_id' => $element->getId()], UrlGeneratorInterface::ABSOLUTE_URL);
             return $this->redirectView($url);
@@ -309,22 +322,7 @@ class SynthesisController extends FOSRestController
         $form->submit($request->request->all(), false);
 
         if ($form->isValid()) {
-
-            $em = $this->get('doctrine.orm.entity_manager');
-            foreach ($division->getElements() as $el) {
-                $el->setLinkedDataClass($element->getLinkedDataClass());
-                $el->setLinkedDataId($element->getLinkedDataId());
-                $el->setSynthesis($synthesis);
-                $el->setParent($element->getParent());
-                $el->setNotation($element->getNotation());
-                $el->setOriginalDivision($division);
-            }
-
-            $division->setOriginalElement($element);
-            $em->persist($division);
-
-            $em->remove($element);
-            $em->flush();
+            $division = $this->get('capco.synthesis.synthesis_handler')->createDivisionFromElementInSynthesis($division, $element, $synthesis);
 
             $url = $this->generateUrl('get_synthesis', ['id' => $synthesis->getId()], UrlGeneratorInterface::ABSOLUTE_URL);
             return $this->redirectView($url, Codes::HTTP_CREATED);
@@ -351,7 +349,7 @@ class SynthesisController extends FOSRestController
      */
     public function getSynthesisElementHistoryAction(Request $request, Synthesis $synthesis, SynthesisElement $element)
     {
-        $logs = $this->get('capco.synthesis.log_manager')->getLogEntries($element);
+        $logs = $this->get('capco.synthesis.synthesis_handler')->getLogsForElement($element);
         return $logs;
     }
 }

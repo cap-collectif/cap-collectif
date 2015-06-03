@@ -17,8 +17,8 @@ class ConsultationStepExtractor
     {
         $this->em = $em;
     }
-    
-    public function createElementsFromConsultationStep(Synthesis $synthesis, ConsultationStep $consultationStep)
+
+    public function createOrUpdateElementsFromConsultationStep(Synthesis $synthesis, ConsultationStep $consultationStep)
     {
         if ($consultationStep === null) {
             return false;
