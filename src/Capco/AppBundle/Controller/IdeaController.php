@@ -250,11 +250,11 @@ class IdeaController extends Controller
                 )));
             }
         } else {
-            $form->setData(array(
+            $form->setData([
                 'theme' => $em->getRepository('CapcoAppBundle:Theme')->findOneBySlug($theme),
                 'sort' => $sort,
                 'term' => $term,
-            ));
+            ]);
         }
 
         $pagination = $this->get('capco.site_parameter.resolver')->getValue('ideas.pagination');

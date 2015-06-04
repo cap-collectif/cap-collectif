@@ -71,11 +71,10 @@ class DefaultController extends Controller
     public function footerAction($max = 4, $offset = 0)
     {
         $footerMenu = $this->getDoctrine()->getRepository('CapcoAppBundle:Menu')->findIdForType(Menu::TYPE_FOOTER);
+        $footerLinks = [];
 
         if (null !== $footerMenu) {
             $footerLinks = $this->getDoctrine()->getRepository('CapcoAppBundle:MenuItem')->getParentItems($footerMenu);
-        } else {
-            $footerLinks = array();
         }
 
         $socialNetworks = $this->getDoctrine()->getRepository('CapcoAppBundle:FooterSocialNetwork')->getEnabled();

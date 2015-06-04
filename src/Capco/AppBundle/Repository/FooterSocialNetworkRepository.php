@@ -13,9 +13,9 @@ class FooterSocialNetworkRepository extends EntityRepository
     {
         $qb = $this->createQueryBuilder('s')
             ->select('s.title, s.link, s.style')
-            ->andWhere('s.isEnabled = :isEnabled')
+            ->andWhere('s.isEnabled = :enabled')
             ->addOrderBy('s.position', 'ASC')
-            ->setParameter('isEnabled', true);
+            ->setParameter('enabled', true);
 
         return $qb
             ->getQuery()

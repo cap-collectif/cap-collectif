@@ -101,9 +101,9 @@ class FooterSocialNetwork
     {
         if ($this->id) {
             return $this->getTitle();
-        } else {
-            return 'New footer social network';
         }
+
+        return 'New footer social network';
     }
 
     /**

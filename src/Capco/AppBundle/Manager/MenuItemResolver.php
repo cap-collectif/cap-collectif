@@ -28,7 +28,7 @@ class MenuItemResolver
             $childrenLinks = $this->repository->getChildItems($menu);
             $links = [];
 
-            foreach ($parentsLinks as $key => $value) {
+            foreach ($parentsLinks as $value) {
                 $links[$value['id']] = [
                     'title' => $value['title'],
                     'link' => $value['link'],
@@ -37,7 +37,7 @@ class MenuItemResolver
                 ];
             }
 
-            foreach ($childrenLinks as $key => $value) {
+            foreach ($childrenLinks as $value) {
                 if (array_key_exists($value['parent_id'], $links)) {
                     $links[$value['parent_id']]['children'][] = [
                         'id' => $value['id'],
@@ -51,7 +51,7 @@ class MenuItemResolver
             return $links;
         }
 
-        return array();
+        return [];
     }
 
     public function hasEnabledFeatures($menuItem)

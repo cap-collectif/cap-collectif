@@ -22,11 +22,9 @@ class MenuItemRepository extends EntityRepository
 
         $qb = $this->whereIsEnabled($qb);
 
-        $result = $qb
+        return $qb
             ->getQuery()
             ->getArrayResult();
-
-        return $result;
     }
 
     public function getChildItems(Menu $menu)
@@ -41,11 +39,9 @@ class MenuItemRepository extends EntityRepository
 
         $qb = $this->whereIsEnabled($qb);
 
-        $result = $qb
+        return $qb
             ->getQuery()
             ->getArrayResult();
-
-        return $result;
     }
 
     private function whereIsEnabled(QueryBuilder $qb)
