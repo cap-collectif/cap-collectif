@@ -290,16 +290,22 @@ class IdeaController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $translator = $this->get('translator');
+
         $idea = $em->getRepository('CapcoAppBundle:Idea')->getOneJoinUserReports($slug, $this->getUser());
+        $votes = $em->getRepository('CapcoAppBundle:IdeaVote')->findAllByIdea($idea);
+
 
         if (false == $idea->canDisplay()) {
             throw $this->createNotFoundException($translator->trans('idea.error.not_found', array(), 'CapcoAppBundle'));
         }
 
         $ideaHelper = $this->get('capco.idea.helper');
+
         $vote = $ideaHelper->findUserVoteOrCreate($idea, $this->getUser());
-        $vote->setUser($this->getUser());
-        $vote->setIpAddress($request->getClientIp());
+        $vote->setUser($this->getUser())
+             ->setIpAddress($request->getClientIp())
+            ;
+
         $form = $this->createForm(new IdeaVoteType($this->getUser(), $vote->isConfirmed(), $idea->getIsCommentable()), $vote);
 
         if ($request->getMethod() == 'POST') {
@@ -355,6 +361,7 @@ class IdeaController extends Controller
 
         return [
             'idea' => $idea,
+            'votes' => $votes,
             'form' => $form->createView(),
         ];
     }
