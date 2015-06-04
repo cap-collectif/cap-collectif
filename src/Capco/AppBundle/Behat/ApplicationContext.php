@@ -22,8 +22,6 @@ class ApplicationContext extends UserContext
     public static function databaseContainsFixtures()
     {
         exec('php app/console doctrine:fixtures:load -n -e test');
-        exec('php app/console capco:recalculate-counters -e test');
-        exec('php app/console capco:recalculate-consultations-counters -e test');
     }
 
     /**
@@ -88,20 +86,6 @@ class ApplicationContext extends UserContext
     public function iShouldSeeNbElementOnPage($nb, $element)
     {
         expect($nb == count($this->getSession()->getPage()->find('css', $element)));
-    }
-
-    /**
-     * @Then :first should be before :second for selector :cssQuery
-     */
-    public function element1ShouldBeBeforeElement2ForSelector($first, $second, $cssQuery)
-    {
-        $items = array_map(
-            function ($element) {
-                return $element->getText();
-            },
-            $this->getSession()->getPage()->findAll('css', $cssQuery)
-        );
-        expect(array_search($first, $items) > array_search($second, $items));
     }
 
     /**

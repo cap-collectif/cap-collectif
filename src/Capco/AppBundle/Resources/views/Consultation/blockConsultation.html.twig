@@ -62,8 +62,8 @@
             </div>
             {% endif %}
 
-            {% set contributorsCount = consultation.participantsCount %}
-            {% set contributionsCount = consultation.contributionsCount %}
+            {% set contributorsCount = consultation | capco_count_consultation_contributors %}
+            {% set contributionsCount = consultation.totalContributionsCount %}
             {% if contributionsCount > 0 or contributorsCount > 0 %}
                 <div class="thumbnail__numbers">
                     {% if contributorsCount > 0 %}
