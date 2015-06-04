@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\Resolver;
 
+use Capco\AppBundle\Entity\Consultation;
 use Capco\UserBundle\Repository\UserRepository;
 
 class ContributionResolver
@@ -14,7 +15,7 @@ class ContributionResolver
     }
 
     // Code may looks ugly but in fact it's highly optimized !
-    public function getConsultationContributorsOrdered($consultation)
+    public function getConsultationContributorsOrdered(Consultation $consultation)
     {
         // Fetch contributors
         $sourcesContributors = $this->repository->findConsultationSourceContributorsWithCount($consultation);
@@ -72,8 +73,21 @@ class ContributionResolver
         return $contributors;
     }
 
-    public function countConsultationContributors($consultation)
+    public function countConsultationContributors(Consultation $consultation)
     {
         return count($this->getConsultationContributorsOrdered($consultation));
+    }
+
+    // Code may looks ugly but in fact it's highly optimized !
+    public function countConsultationContributions(Consultation $consultation)
+    {
+        $count = 0;
+        foreach ($consultation->getSteps() as $step) {
+            if ($step->getStep()->isConsultationStep()) {
+                $count += $step->getStep()->getContributionsCount();
+            }
+        }
+
+        return $count;
     }
 }

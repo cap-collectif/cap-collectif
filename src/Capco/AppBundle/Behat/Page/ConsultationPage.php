@@ -15,9 +15,9 @@ class ConsultationPage extends Page
     protected $path = '/consultations/{consultationSlug}/consultation/{stepSlug}';
 
     protected $elements = array(
-        'Opinion nav bar' => '.consultation_nav',
+        'Opinion nav bar' => '.consultation__nav',
         'Opinion nav item' => array(
-            'css' => '.consultation_nav li',
+            'css' => '.consultation__nav li',
         ),
     );
 }

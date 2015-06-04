@@ -74,7 +74,7 @@
                     </div>
                 </li>
             {% endif %}
-            {% set contributorsCount = consultation | capco_count_consultation_contributors %}
+            {% set contributorsCount = consultation.participantsCount %}
             {% if contributorsCount > 0 %}
                 <li>
                     <a href="{{ path('app_consultation_show_contributors', {'consultationSlug': consultation.slug}) }}">
