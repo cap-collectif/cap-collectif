@@ -39,7 +39,7 @@ class SynthesisController extends FOSRestController
      *
      * @ApiDoc(
      *  resource=true,
-     *  description="Get the synthesis with all elements",
+     *  description="Get all the syntheses",
      *  output="Capco\AppBundle\Entity\Synthesis\Synthesis",
      *  statusCodes={
      *    200 = "Syntheses found",
@@ -60,7 +60,7 @@ class SynthesisController extends FOSRestController
      *
      * @ApiDoc(
      *  resource=true,
-     *  description="Get a synthesis with all elements",
+     *  description="Get a synthesis by id",
      *  statusCodes={
      *    200 = "Returned when successful",
      *    404 = "Synthesis does not exist",
@@ -285,7 +285,6 @@ class SynthesisController extends FOSRestController
                 $el->setParent($element->getParent());
                 $el->setNotation($element->getNotation());
                 $el->setOriginalDivision($division);
-                $em->persist($el);
             }
 
             $division->setOriginalElement($element);

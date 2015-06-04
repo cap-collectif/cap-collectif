@@ -1,0 +1,12 @@
+# Used to configure serialization for Gedmo LogEntry
+Gedmo\Loggable\Entity\MappedSuperclass\AbstractLogEntry:
+    exclusion_policy: ALL
+    properties:
+      id:
+        expose: true
+      action:
+        expose: true
+      loggedAt:
+        expose: true
+      version:
+        expose: true

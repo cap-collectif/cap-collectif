@@ -47,12 +47,16 @@ class LogManager
             if (array_key_exists('title', $log->getData()) || array_key_exists('body', $log->getData())) {
                 $sentences[] = $this->makeSentence('update', $username, $elementName);
             }
-        } else if ($log->getAction() === 'create' && $log->getObjectClass() === 'Capco\\AppBundle\\Entity\\Synthesis\\SynthesisDivision') {
+            return $sentences;
+        }
+
+        if ($log->getAction() === 'create' && $log->getObjectClass() === 'Capco\\AppBundle\\Entity\\Synthesis\\SynthesisDivision') {
             $division = $this->em->getRepository('CapcoAppBundle:Synthesis\SynthesisDivision')->find($log->getObjectId());
             $sentences[] = $this->makeSentence('divide', $username, $division->getOriginalElement()->getId());
-        } else {
-            $sentences[] = $this->makeSentence($log->getAction(), $username, $elementName);
+            return $sentences;
         }
+
+        $sentences[] = $this->makeSentence($log->getAction(), $username, $elementName);
         return $sentences;
     }
 

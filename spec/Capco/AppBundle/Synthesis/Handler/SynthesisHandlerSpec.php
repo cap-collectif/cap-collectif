@@ -2,13 +2,7 @@
 
 namespace spec\Capco\AppBundle\Synthesis\Handler;
 
-use Capco\AppBundle\Entity\Argument;
-use Capco\AppBundle\Entity\ConsultationStep;
-use Capco\AppBundle\Entity\Opinion;
-use Capco\AppBundle\Entity\Synthesis\Synthesis;
-use Capco\AppBundle\Entity\Synthesis\SynthesisElement;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\ORM\EntityRepository;
+use Capco\AppBundle\Synthesis\Extractor\ConsultationStepExtractor;
 use PhpSpec\ObjectBehavior;
 use Doctrine\ORM\EntityManager;
 

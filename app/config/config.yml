@@ -270,7 +270,7 @@ jms_serializer:
             FOSUserBundle:
                 namespace_prefix: "FOS\\UserBundle"
                 path: "@CapcoUserBundle/Resources/config/serializer/FOSUserBundle"
-            SonataUserBundle:
-                namespace_prefix: "Sonata\\UserBundle"
-                path: "@CapcoUserBundle/Resources/config/serializer/SonataUserBundle"
+            GedmoLoggable:
+                namespace_prefix: "Gedmo\\Loggable"
+                path: "@CapcoAppBundle/Resources/config/serializer/GedmoLoggable"
 

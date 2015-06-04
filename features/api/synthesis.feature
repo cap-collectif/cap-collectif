@@ -303,7 +303,6 @@ Feature: Synthesis
     }
     """
 
-
   Scenario: Non admin API client wants to create a synthesis element
     Given I am logged in to api as user
     And there is a synthesis with id "42" and elements:
@@ -482,12 +481,7 @@ Feature: Synthesis
         "id": @integer@,
         "action": "update",
         "logged_at": "@string@.isDateTime()",
-        "object_id": "43",
-        "object_class": "Capco\\AppBundle\\Entity\\Synthesis\\SynthesisElement",
         "version": 2,
-        "data": {
-          "title": "Je suis un élément"
-        },
         "sentences": [
           " a mis à jour l'élément 43"
         ]
@@ -496,16 +490,7 @@ Feature: Synthesis
         "id": @integer@,
         "action": "create",
         "logged_at": "@string@.isDateTime()",
-        "object_id": "43",
-        "object_class": "Capco\\AppBundle\\Entity\\Synthesis\\SynthesisElement",
         "version": 1,
-        "data": {
-          "enabled": true,
-          "archived": false,
-          "title": "Je suis un nouvel élément",
-          "body": "blabla",
-          "notation": 4
-        },
         "sentences": [
           " a créé l'élément 43"
         ]
@@ -514,7 +499,7 @@ Feature: Synthesis
     """
 
   @database
-  Scenario: API client wants to have a 'create' log when creating a synthesis element
+  Scenario: After creating an element, there should be a 'create' log
     Given I am logged in to api as admin
     And there is a synthesis with id "42" and elements:
       | 43 |
@@ -529,7 +514,7 @@ Feature: Synthesis
     Then there should be a created log on response element with username "admin"
 
   @database
-  Scenario: API client wants to have an 'update' log when updating a synthesis element
+  Scenario: After updating an element, there should be an 'update' log
     Given I am logged in to api as admin
     And there is a synthesis with id "42" and elements:
       | 43 |
@@ -542,7 +527,7 @@ Feature: Synthesis
     Then there should be a log on element 43 with sentence "admin a mis à jour l'élément 43"
 
   @database
-  Scenario: API client wants to have a 'move' log when changing the parent of a synthesis element
+  Scenario: After changing an element's parent, there should be a 'move' log
     Given I am logged in to api as admin
     And there is a synthesis with id "42" and elements:
       | 43 |
@@ -561,7 +546,7 @@ Feature: Synthesis
     Then there should be a log on element 43 with sentence "admin a déplacé l'élément 43"
 
   @database
-  Scenario: API client wants to have a 'publish' log when enabling a synthesis element
+  Scenario: After publishing an element, there should be a 'publish' log
     Given I am logged in to api as admin
     And there is a synthesis with id "42" and elements:
       | 43 |
@@ -580,7 +565,7 @@ Feature: Synthesis
     Then there should be a log on element 47 with sentence "admin a publié l'élément 47"
 
   @database
-  Scenario: API client wants to have an 'unpublish' log when disabling a synthesis element
+  Scenario: After unpublishing an element, there should be an 'unpublish' log
     Given I am logged in to api as admin
     And there is a synthesis with id "42" and elements:
       | 43 |
@@ -593,7 +578,7 @@ Feature: Synthesis
     Then there should be a log on element 43 with sentence "admin a dépublié l'élément 43"
 
   @database
-  Scenario: API client wants to have an 'archive' log when archiving a synthesis element
+  Scenario: After archiving an element, there should be an 'archive' log
     Given I am logged in to api as admin
     And there is a synthesis with id "42" and elements:
       | 43 |
@@ -606,7 +591,7 @@ Feature: Synthesis
     Then there should be a log on element 43 with sentence "admin a marqué l'élément 43 comme traité"
 
   @database
-  Scenario: API client wants to have a 'note' log when noting a synthesis element
+  Scenario: After noting an element, there should be a 'note' log
     Given I am logged in to api as admin
     And there is a synthesis with id "42" and elements:
       | 43 |
@@ -618,7 +603,8 @@ Feature: Synthesis
     """
     Then there should be a log on element 43 with sentence "admin a modifié la note de l'élément 43"
 
-  Scenario: API client wants to have a 'divide' log when dividing a synthesis element
+  @database
+  Scenario: After dividing an element, there should be a 'divide' log
     Given I am logged in to api as admin
     And there is a synthesis with id "42" and elements:
       | 43 |
