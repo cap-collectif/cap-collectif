@@ -1,5 +1,40 @@
 Feature: Consultation
-  
+
+  @javascript
+  Scenario: Consultation can be sorted by published date
+    Given I visited "consultations page"
+    And I select "Date de publication" from "capco_app_search_consultation_sort"
+    And I wait 2 seconds
+    Then "Consultation vide" should be before "Croissance, innovation, disruption" for selector ".thumbnail--custom .figcaption h2 a "
+
+  @javascript
+  Scenario: Consultation can be sorted by contributions number
+    Given I visited "consultations page"
+    And I select "Nombre de contributions" from "capco_app_search_consultation_sort"
+    And I wait 2 seconds
+    Then "Croissance, innovation, disruption" should be before "Consultation vide" for selector ".thumbnail--custom .figcaption h2 a "
+
+  @javascript
+  Scenario: Consultation can be filtered by theme
+    Given feature "themes" is enabled
+    And I visited "consultations page"
+    And I select "Transport" from "capco_app_search_consultation_theme"
+    And I wait 2 seconds
+    Then I should see "Stratégie technologique de l'Etat et services publics"
+    And I should see "Consultation vide"
+    And I should not see "Croissance, innovation, disruption"
+
+  @javascript
+  Scenario: Consultation can be filtered by title
+    Given I visited "consultations page"
+    When I fill in the following:
+      | capco_app_search_consultation_term | innovation |
+    And I click the ".filter__search .btn" element
+    And I wait 2 seconds
+    Then I should see "Croissance, innovation, disruption"
+    And I should not see "Stratégie technologique de l'Etat et services publics"
+    And I should not see "Consultation vide"
+
   Scenario: Consultation should contain allowed types only
     Given I am logged in as user
     And I visited "consultation page" with:

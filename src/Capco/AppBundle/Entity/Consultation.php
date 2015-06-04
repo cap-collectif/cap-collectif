@@ -142,6 +142,20 @@ class Consultation
     private $posts;
 
     /**
+     * @var int
+     *
+     * @ORM\Column(name="participants_count", type="integer")
+     */
+    private $participantsCount = 0;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="contributions_count", type="integer")
+     */
+    private $contributionsCount = 0;
+
+    /**
      * Constructor.
      */
     public function __construct()
@@ -496,6 +510,38 @@ class Consultation
         return $this;
     }
 
+    /**
+     * @return int
+     */
+    public function getParticipantsCount()
+    {
+        return $this->participantsCount;
+    }
+
+    /**
+     * @param int $participantsCount
+     */
+    public function setParticipantsCount($participantsCount)
+    {
+        $this->participantsCount = $participantsCount;
+    }
+
+    /**
+     * @return int
+     */
+    public function getContributionsCount()
+    {
+        return $this->contributionsCount;
+    }
+
+    /**
+     * @param int $contributionsCount
+     */
+    public function setContributionsCount($contributionsCount)
+    {
+        $this->contributionsCount = $contributionsCount;
+    }
+
     // ******************** Custom methods ******************************
 
     /**
@@ -512,21 +558,6 @@ class Consultation
     public function canContribute()
     {
         return $this->isEnabled;
-    }
-
-    /**
-     * @return int
-     */
-    public function getTotalContributionsCount()
-    {
-        $count = 0;
-        foreach ($this->steps as $step) {
-            if ($step->getStep()->isConsultationStep()) {
-                $count += $step->getStep()->getContributionsCount();
-            }
-        }
-
-        return $count;
     }
 
     /**

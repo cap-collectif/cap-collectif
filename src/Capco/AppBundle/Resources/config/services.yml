@@ -330,12 +330,6 @@ services:
         arguments:
             - Capco\AppBundle\Entity\ConsultationType
 
-    capco.twig.contributors:
-        class: Capco\AppBundle\Twig\ContributorsExtension
-        arguments: [@capco.contribution.resolver]
-        tags:
-          - { name: twig.extension }
-
     capco.is_social_network_url.validator:
         class: Capco\AppBundle\Validator\Constraints\IsSocialNetworkUrlValidator
         tags:

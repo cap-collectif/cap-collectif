@@ -282,11 +282,14 @@ class IdeaRepository extends EntityRepository
     public function getOneJoinUserReports($slug, $user = null)
     {
         $query = $this->getIsEnabledQueryBuilder()
-            ->addSelect('a', 'm', 't', 'media', 'c', 'cr')
+            ->addSelect('a', 'm', 't', 'media', 'v', 'c', 'cr', 'u', 'user_media')
             ->leftJoin('i.Media', 'media')
             ->leftJoin('i.Author', 'a')
             ->leftJoin('a.Media', 'm')
             ->leftJoin('i.Theme', 't')
+            ->leftJoin('i.votes', 'v', 'WITH', 'v.confirmed = true')
+            ->leftJoin('v.user', 'u')
+            ->leftJoin('u.Media', 'user_media')
             ->leftJoin('i.comments', 'c', 'WITH', 'c.isEnabled = :enabled AND c.isTrashed = :notTrashed')
             ->leftJoin('c.Reports', 'cr', 'WITH', 'cr.Reporter =  :user')
             ->setParameter('enabled', true)
@@ -294,6 +297,7 @@ class IdeaRepository extends EntityRepository
             ->setParameter('user', $user)
             ->setParameter('slug', $slug)
             ->andWhere('i.slug = :slug')
+            ->addOrderBy('v.createdAt', 'DESC')
             ->getQuery();
 
         return $query->getOneOrNullResult();
