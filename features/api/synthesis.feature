@@ -294,11 +294,7 @@ Feature: Synthesis
     [
       {
         "id": "43",
-        "enabled": true,
-        "archived": false,
         "title": "Je suis un élément",
-        "body": "blabla",
-        "notation": 4,
         "_links": {
           "self": { "href": "/api/syntheses/42/elements/43" },
           "divide": { "href": "/api/syntheses/42/elements/43/divisions" },
@@ -373,7 +369,7 @@ Feature: Synthesis
       }
     }
     """
-    And there should be a created log on response element with username "admin"
+    And there should be a create log on response element with username "admin"
 
   Scenario: Non admin API client wants to create a synthesis element
     Given I am logged in to api as user

@@ -280,9 +280,9 @@ class ApiContext extends ApplicationContext
     /**
      * There should be a created log on response element with username
      *
-     * @Then there should be a created log on response element with username :username
+     * @Then there should be a create log on response element with username :username
      */
-    public function thereShouldBeACreatedLogOnResponseElement($username)
+    public function thereShouldBeACreateLogOnResponseElement($username)
     {
         $this->response->json(); // check if json
         $body = (string) $this->response->getBody();

@@ -78,7 +78,7 @@ class SynthesisController extends FOSRestController
             throw new BadRequestHttpException($validationErrors->__toString());
         }
 
-        $synthesis = $this->get('capco.synthesis.synthesis_handler')->createSynthesis($synthesis);
+        $synthesis = $this->get('capco.synthesis.synthesis_handler')->createOrUpdateSynthesis($synthesis);
 
         $view = $this->view($synthesis, Codes::HTTP_CREATED);
         $view->setSerializationContext(SerializationContext::create()->setGroups(array('Default', 'SynthesisDetails')));
@@ -108,7 +108,6 @@ class SynthesisController extends FOSRestController
         if ($validationErrors->count() > 0) {
             throw new BadRequestHttpException($validationErrors->__toString());
         }
-
         $synthesis = $this->get('capco.synthesis.synthesis_handler')->createSynthesisFromConsultationStep($synthesis, $consultationStep);
 
         $view = $this->view($synthesis, Codes::HTTP_CREATED);
@@ -187,7 +186,7 @@ class SynthesisController extends FOSRestController
      */
     public function getSynthesisElementsAction(Synthesis $synthesis)
     {
-        return $this->get('capco.synthesis.synthesis_handler')->getAllElementsFromSynthesis($synthesis);
+        return $this->get('capco.synthesis.synthesis_element_handler')->getAllElementsFromSynthesis($synthesis);
     }
 
     /**
@@ -210,7 +209,7 @@ class SynthesisController extends FOSRestController
      */
     public function getNewSynthesisElementsAction(Synthesis $synthesis)
     {
-        return $this->get('capco.synthesis.synthesis_handler')->getNewElementsFromSynthesis($synthesis);
+        return $this->get('capco.synthesis.synthesis_element_handler')->getNewElementsFromSynthesis($synthesis);
     }
 
     /**
@@ -257,7 +256,7 @@ class SynthesisController extends FOSRestController
             throw new BadRequestHttpException($validationErrors->__toString());
         }
 
-        $element = $this->get('capco.synthesis.synthesis_handler')->createOrUpdateElementInSynthesis($element, $synthesis);
+        $element = $this->get('capco.synthesis.synthesis_element_handler')->createOrUpdateElementInSynthesis($element, $synthesis);
 
         $view = $this->view($element, Codes::HTTP_CREATED);
         $view->setSerializationContext(SerializationContext::create()->setGroups(array('Default', 'ElementDetails')));
@@ -290,7 +289,7 @@ class SynthesisController extends FOSRestController
 
         if ($form->isValid()) {
 
-            $element = $this->get('capco.synthesis.synthesis_handler')->createOrUpdateElementInSynthesis($element, $synthesis);
+            $element = $this->get('capco.synthesis.synthesis_element_handler')->createOrUpdateElementInSynthesis($element, $synthesis);
 
             $url = $this->generateUrl('get_synthesis_element', ['synthesis_id' => $synthesis->getId(), 'element_id' => $element->getId()], UrlGeneratorInterface::ABSOLUTE_URL);
             return $this->redirectView($url);
@@ -322,7 +321,7 @@ class SynthesisController extends FOSRestController
         $form->submit($request->request->all(), false);
 
         if ($form->isValid()) {
-            $division = $this->get('capco.synthesis.synthesis_handler')->createDivisionFromElementInSynthesis($division, $element, $synthesis);
+            $division = $this->get('capco.synthesis.synthesis_element_handler')->createDivisionFromElementInSynthesis($division, $element, $synthesis);
 
             $url = $this->generateUrl('get_synthesis', ['id' => $synthesis->getId()], UrlGeneratorInterface::ABSOLUTE_URL);
             return $this->redirectView($url, Codes::HTTP_CREATED);
@@ -349,7 +348,7 @@ class SynthesisController extends FOSRestController
      */
     public function getSynthesisElementHistoryAction(Request $request, Synthesis $synthesis, SynthesisElement $element)
     {
-        $logs = $this->get('capco.synthesis.synthesis_handler')->getLogsForElement($element);
+        $logs = $this->get('capco.synthesis.synthesis_element_handler')->getLogsForElement($element);
         return $logs;
     }
 }

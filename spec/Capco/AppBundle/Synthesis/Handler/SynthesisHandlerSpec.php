@@ -4,7 +4,6 @@ namespace spec\Capco\AppBundle\Synthesis\Handler;
 
 use Capco\AppBundle\Entity\Synthesis\Synthesis;
 use Capco\AppBundle\Entity\ConsultationStep;
-use Capco\AppBundle\Manager\LogManager;
 use Capco\AppBundle\Synthesis\Extractor\ConsultationStepExtractor;
 use PhpSpec\ObjectBehavior;
 use Doctrine\ORM\EntityManager;
@@ -14,9 +13,9 @@ use Prophecy\Argument as ProphecyArgument;
 
 class SynthesisHandlerSpec extends ObjectBehavior
 {
-    function let(EntityManager $em, ConsultationStepExtractor $csExtractor, LogManager $logManager)
+    function let(EntityManager $em, ConsultationStepExtractor $csExtractor)
     {
-        $this->beConstructedWith($em, $csExtractor, $logManager);
+        $this->beConstructedWith($em, $csExtractor);
     }
 
     function it_is_initializable()
@@ -30,16 +29,16 @@ class SynthesisHandlerSpec extends ObjectBehavior
         $repo->findAll()->willReturn($collection)->shouldBeCalled();
 
         $this->beConstructedWith($em, $csExtractor);
-        $this->getAll()->shouldReturnAnInstanceOf('Doctrine\Common\Collections\ArrayCollection');
+        $this->getAllSyntheses()->shouldReturnAnInstanceOf('Doctrine\Common\Collections\ArrayCollection');
     }
 
-    function it_can_create_a_synthesis(EntityManager $em, ConsultationStepExtractor $csExtractor, Synthesis $synthesis)
+    function it_can_create_or_update_a_synthesis(EntityManager $em, ConsultationStepExtractor $csExtractor, Synthesis $synthesis)
     {
         $em->persist($synthesis)->shouldBeCalled();
         $em->flush()->shouldBeCalled();
 
         $this->beConstructedWith($em, $csExtractor);
-        $this->createSynthesis($synthesis)->shouldReturnAnInstanceOf('Capco\AppBundle\Entity\Synthesis\Synthesis');
+        $this->createOrUpdateSynthesis($synthesis)->shouldReturnAnInstanceOf('Capco\AppBundle\Entity\Synthesis\Synthesis');
     }
 
     function it_can_create_a_synthesis_from_consultation_step(EntityManager $em, ConsultationStepExtractor $csExtractor, Synthesis $synthesis, ConsultationStep $consultationStep)
@@ -53,21 +52,21 @@ class SynthesisHandlerSpec extends ObjectBehavior
         $this->createSynthesisFromConsultationStep($synthesis, $consultationStep)->shouldReturnAnInstanceOf('Capco\AppBundle\Entity\Synthesis\Synthesis');
     }
 
-    function it_can_create_elements_from_source(EntityManager $em, ConsultationStepExtractor $csExtractor, Synthesis $synthesis, ConsultationStep $consultationStep, Synthesis $synthesisModified)
+    function it_can_create_or_update_elements_from_source(EntityManager $em, ConsultationStepExtractor $csExtractor, Synthesis $synthesis, ConsultationStep $consultationStep, Synthesis $synthesisModified)
     {
         $this->beConstructedWith($em, $csExtractor);
 
         // Case where source is a consultation step
         $synthesis->getSourceType()->willReturn('consultation_step')->shouldBeCalled();
         $synthesis->getConsultationStep()->willReturn($consultationStep)->shouldBeCalled();
-        $csExtractor->createElementsFromConsultationStep($synthesis, $consultationStep)->willReturn($synthesisModified)->shouldBeCalled();
+        $csExtractor->createOrUpdateElementsFromConsultationStep($synthesis, $consultationStep)->willReturn($synthesisModified)->shouldBeCalled();
 
-        $this->createElementsFromSource($synthesis)->shouldReturnAnInstanceOf('Capco\AppBundle\Entity\Synthesis\Synthesis');
+        $this->createOrUpdateElementsFromSource($synthesis)->shouldReturnAnInstanceOf('Capco\AppBundle\Entity\Synthesis\Synthesis');
 
         // Case where source is not a consultation step
         $synthesis->getSourceType()->willReturn('none')->shouldBeCalled();
 
-        $this->createElementsFromSource($synthesis)->shouldReturnAnInstanceOf('Capco\AppBundle\Entity\Synthesis\Synthesis');
+        $this->createOrUpdateElementsFromSource($synthesis)->shouldReturnAnInstanceOf('Capco\AppBundle\Entity\Synthesis\Synthesis');
     }
 
 }

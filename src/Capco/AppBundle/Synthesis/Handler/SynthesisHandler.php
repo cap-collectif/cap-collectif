@@ -7,7 +7,6 @@ use Capco\AppBundle\Entity\ConsultationStep;
 use Capco\AppBundle\Entity\Opinion;
 use Capco\AppBundle\Entity\Synthesis\SynthesisElement;
 use Capco\AppBundle\Entity\Synthesis\SynthesisDivision;
-use Capco\AppBundle\Manager\LogManager;
 use Doctrine\ORM\EntityManager;
 use Capco\AppBundle\Entity\Synthesis\Synthesis;
 use Capco\AppBundle\Synthesis\Extractor\ConsultationStepExtractor;
@@ -16,13 +15,11 @@ class SynthesisHandler
 {
     protected $em;
     protected $consultationStepExtractor;
-    protected $logManager;
 
-    function __construct(EntityManager $em, ConsultationStepExtractor $consultationStepExtractor, LogManager $logManager)
+    function __construct(EntityManager $em, ConsultationStepExtractor $consultationStepExtractor)
     {
         $this->em = $em;
         $this->consultationStepExtractor = $consultationStepExtractor;
-        $this->logManager = $logManager;
     }
 
     public function getAllSyntheses()
@@ -44,58 +41,7 @@ class SynthesisHandler
     {
         $synthesis->setConsultationStep($consultationStep);
         $synthesis->setSourceType('consultation_step');
-        return $this->createSynthesis($synthesis);
-    }
-
-    public function getAllElementsFromSynthesis(Synthesis $synthesis)
-    {
-        return $this->em->getRepository('CapcoAppBundle:Synthesis\SynthesisElement')->findBy(array(
-            'synthesis' => $synthesis,
-        ));
-    }
-
-    public function getNewElementsFromSynthesis(Synthesis $synthesis)
-    {
-        return $this->em->getRepository('CapcoAppBundle:Synthesis\SynthesisElement')->findBy(array(
-            'synthesis' => $synthesis,
-            'archived' => false,
-        ));
-    }
-
-    public function createOrUpdateElementInSynthesis(SynthesisElement $element, Synthesis $synthesis)
-    {
-        $element->setSynthesis($synthesis);
-
-        $this->em->persist($element);
-        $this->em->flush();
-
-        return $element;
-    }
-
-    public function createDivisionFromElementInSynthesis(SynthesisDivision $division, SynthesisElement $element, Synthesis $synthesis)
-    {
-        foreach ($division->getElements() as $el) {
-            $el->setLinkedDataClass($element->getLinkedDataClass());
-            $el->setLinkedDataId($element->getLinkedDataId());
-            $el->setSynthesis($synthesis);
-            $el->setParent($element->getParent());
-            $el->setNotation($element->getNotation());
-            $el->setOriginalDivision($division);
-            $this->em->persist($el);
-        }
-
-        $division->setOriginalElement($element);
-        $this->em->persist($division);
-
-        $this->em->remove($element);
-        $this->em->flush();
-
-        return $division;
-    }
-
-    public function getLogsForElement(SynthesisElement $element)
-    {
-        return $this->logManager->getLogEntries($element);
+        return $this->createOrUpdateSynthesis($synthesis);
     }
 
     public function createOrUpdateElementsFromSource(Synthesis $synthesis)

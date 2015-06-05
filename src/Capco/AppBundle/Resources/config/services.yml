@@ -352,7 +352,11 @@ services:
 
     capco.synthesis.synthesis_handler:
         class: Capco\AppBundle\Synthesis\Handler\SynthesisHandler
-        arguments: [@doctrine.orm.entity_manager, @capco.synthesis.consultation_step_extractor, @capco.synthesis.log_manager]
+        arguments: [@doctrine.orm.entity_manager, @capco.synthesis.consultation_step_extractor]
+
+    capco.synthesis.synthesis_element_handler:
+            class: Capco\AppBundle\Synthesis\Handler\SynthesisElementHandler
+            arguments: [@doctrine.orm.entity_manager, @capco.synthesis.log_manager]
 
     capco.synthesis.consultation_step_extractor:
         class: Capco\AppBundle\Synthesis\Extractor\ConsultationStepExtractor

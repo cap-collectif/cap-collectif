@@ -132,7 +132,7 @@ class ConsultationStepExtractorSpec extends ObjectBehavior
         $em->persist($synthesis)->shouldBeCalled();
         $em->flush()->shouldBeCalled();
 
-        $synthesis = $this->createElementsFromConsultationStep($synthesis, $consultationStep)->shouldReturnAnInstanceOf('Capco\AppBundle\Entity\Synthesis\Synthesis');
+        $synthesis = $this->createOrUpdateElementsFromConsultationStep($synthesis, $consultationStep)->shouldReturnAnInstanceOf('Capco\AppBundle\Entity\Synthesis\Synthesis');
 
         expect(6 === count($synthesis->getElements()));
 
