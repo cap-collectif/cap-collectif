@@ -62,9 +62,9 @@ Capco\AppBundle\Entity\Opinion:
             Author: @user<numberBetween(1, 50)>
             OpinionType: @opinionType<numberBetween(2, 4)>
 
-    opinion201:
+    opinion51:
         step: @cstep2
-        title: Opinion 201
+        title: Opinion 51
         body: |
              <p><text(100)></p>
              <p><text(300)></p>
@@ -72,9 +72,9 @@ Capco\AppBundle\Entity\Opinion:
         isTrashed: false
         Author: @user5
         OpinionType: @opinionType2
-    opinion202:
+    opinion52:
         step: @cstep2
-        title: Opinion 202
+        title: Opinion 52
         body: |
              <p><text(100)></p>
              <p><text(300)></p>
@@ -82,9 +82,9 @@ Capco\AppBundle\Entity\Opinion:
         isTrashed: false
         Author: @user4
         OpinionType: @opinionType1
-    opinion203:
+    opinion53:
         step: @cstep2
-        title: Opinion 203
+        title: Opinion 53
         body: |
              <p><text(100)></p>
              <p><text(300)></p>
@@ -95,9 +95,9 @@ Capco\AppBundle\Entity\Opinion:
 
 
 
-    opinion301:
+    opinion54:
         step: @cstep3
-        title: Opinion 301
+        title: Opinion 54
         body: |
              <p><text(100)></p>
              <p><text(300)></p>
@@ -105,9 +105,9 @@ Capco\AppBundle\Entity\Opinion:
         isTrashed: false
         Author: @user5
         OpinionType: @opinionType1
-    opinion302:
+    opinion55:
         step: @cstep3
-        title: Opinion 302
+        title: Opinion 55
         body: |
              <p><text(100)></p>
              <p><text(300)></p>
@@ -115,9 +115,9 @@ Capco\AppBundle\Entity\Opinion:
         isTrashed: false
         Author: @user4
         OpinionType: @opinionType2
-    opinion303:
+    opinion56:
         step: @cstep3
-        title: Opinion 303
+        title: Opinion 56
         body: |
              <p><text(100)></p>
              <p><text(300)></p>

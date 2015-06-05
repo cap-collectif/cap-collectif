@@ -150,7 +150,7 @@ Feature: Synthesis
         "elements": [
           {
             "id": @string@,
-            "title": "Opinion 201",
+            "title": "Opinion 51",
             "_links": {
               "self": { "href": "@string@.startsWith('/api/syntheses/').contains('/elements')" },
               "divide": { "href": "@string@.startsWith('/api/syntheses/').contains('/elements/').endsWith('/divisions')" },
@@ -169,7 +169,7 @@ Feature: Synthesis
           },
           {
             "id": @string@,
-            "title": "Opinion 202",
+            "title": "Opinion 52",
             "_links": "@*@"
           },
           {
@@ -179,7 +179,7 @@ Feature: Synthesis
           },
           {
             "id": @string@,
-            "title": "Opinion 203",
+            "title": "Opinion 53",
             "_links": "@*@"
           }
         ]
@@ -649,3 +649,37 @@ Feature: Synthesis
     }
     """
     Then there should be a log on element 43 with sentence "admin a modifié la note de l'élément 43"
+
+  @database
+  Scenario: After updating an opinion, I want to get the updated synthesis
+    Given I am logged in to api as admin
+    And there is a synthesis with id "48" based on consultation step 2
+    And I do nothing for 2 seconds
+    When I update opinion 51 with values:
+      | title | Je suis le nouveau titre |
+    And I send a GET request to "api/syntheses/48/updated"
+    Then the JSON response should match:
+    """
+    {
+      "id": "48",
+      "enabled": true,
+      "_links": {
+        "self": { "href": "/api/syntheses/48" },
+        "elements": { "href": "/api/syntheses/48/elements" }
+      },
+      "_embedded": {
+        "elements": [
+          {
+            "id": @string@,
+            "title": "Je suis le nouveau titre",
+            "_links": {
+              "self": { "href": "@string@.startsWith('/api/syntheses/48/elements/')" },
+              "divide": { "href": "@string@.startsWith('/api/syntheses/48/elements/').endsWith('/divisions')" },
+              "history": { "href": "@string@.startsWith('/api/syntheses/48/elements/').endsWith('/history')" }
+            }
+          },
+          @...@
+        ]
+      }
+    }
+    """

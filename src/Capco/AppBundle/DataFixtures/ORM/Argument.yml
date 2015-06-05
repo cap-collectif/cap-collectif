@@ -14,21 +14,21 @@ Capco\AppBundle\Entity\Argument:
         isEnabled: <boolean()>
         isTrashed: <boolean()>
     argument201:
-        Opinion: @opinion201
+        Opinion: @opinion51
         type: 0
         Author: @user<numberBetween(1, 5)>
         body: <text(300)>
         isEnabled: true
         isTrashed: false
     argument202:
-        Opinion: @opinion201
+        Opinion: @opinion51
         type: 0
         Author: @user<numberBetween(1, 5)>
         body: <text(300)>
         isEnabled: true
         isTrashed: false
     argument203:
-        Opinion: @opinion202
+        Opinion: @opinion52
         type: 0
         Author: @user<numberBetween(1, 5)>
         body: <text(300)>

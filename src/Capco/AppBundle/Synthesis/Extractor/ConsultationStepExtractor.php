@@ -24,51 +24,48 @@ class ConsultationStepExtractor
             return false;
         }
 
-        $currentElements = $synthesis->getElements();
-        $currentElements = $currentElements ? $currentElements : array();
-        $newElements = array();
+        $previousElements = $synthesis->getElements();
 
         // Opinions
         $opinions = $consultationStep->getOpinions();
         foreach ($opinions as $opinion) {
             $elementFromOpinion = null;
-            foreach ($currentElements as $element) {
+            foreach ($previousElements as $element) {
                 if ($this->isElementRelated($element, $opinion)) {
                     $elementFromOpinion = $element;
+                    if ($this->elementIsOutdated($elementFromOpinion, $opinion)) {
+                        $elementFromOpinion = $this->updateElementFromOpinion($elementFromOpinion, $opinion);
+                    }
                     break;
                 }
             }
 
             if (null === $elementFromOpinion) {
                 $elementFromOpinion = $this->createElementFromOpinion($opinion);
-                $newElements[] = $elementFromOpinion;
+                $synthesis->addElement($elementFromOpinion);
             }
 
             // Arguments
             $arguments = $opinion->getArguments();
             foreach ($arguments as $argument) {
                 $elementFromArgument = null;
-                foreach ($currentElements as $element) {
+                foreach ($previousElements as $element) {
                     if ($this->isElementRelated($element, $argument)) {
                         $elementFromArgument = $element;
+                        if ($this->elementIsOutdated($elementFromArgument, $argument)) {
+                            $elementFromArgument = $this->updateElementFromArgument($elementFromArgument, $argument);
+                        }
                         break;
                     }
                 }
                 if (null === $elementFromArgument) {
                     $elementFromArgument = $this->createElementFromArgument($argument);
                     $elementFromArgument->setParent($elementFromOpinion);
-                    $newElements[] = $elementFromArgument;
+                    $synthesis->addElement($elementFromArgument);
                 }
             }
         }
 
-        foreach ($newElements as $element) {
-            $element->setSynthesis($synthesis);
-            $synthesis->addElement($element);
-            $this->em->persist($element);
-        }
-
-        $this->em->persist($synthesis);
         $this->em->flush();
 
         return $synthesis;
@@ -76,16 +73,31 @@ class ConsultationStepExtractor
 
     public function isElementRelated(SynthesisElement $element, $object)
     {
-        return $element->getLinkedDataClass() === get_class($object) && $element->getLinkedDataId() === $object->getId();
+        return $element->getLinkedDataClass() === get_class($object) && $element->getLinkedDataId() == $object->getId();
+    }
+
+    public function elementIsOutdated(SynthesisElement $element, $object)
+    {
+        return $object->getUpdatedAt() > $element->getLinkedDataLastUpdate();
     }
 
     public function createElementFromOpinion(Opinion $opinion)
     {
         $element = new SynthesisElement();
-        $element->setTitle($opinion->getTitle());
-        $element->setBody($opinion->getBody());
         $element->setLinkedDataClass(get_class($opinion));
         $element->setLinkedDataId($opinion->getId());
+
+        return $this->updateElementFromOpinion($element, $opinion);
+    }
+
+    public function updateElementFromOpinion(SynthesisElement $element, Opinion $opinion)
+    {
+        $element->setTitle($opinion->getTitle());
+        $element->setBody($opinion->getBody());
+
+        // Update last modified and archive status
+        $element->setLinkedDataLastUpdate($opinion->getUpdatedAt());
+        $element->setArchived(false);
 
         return $element;
     }
@@ -93,9 +105,19 @@ class ConsultationStepExtractor
     public function createElementFromArgument(Argument $argument)
     {
         $element = new SynthesisElement();
-        $element->setBody($argument->getBody());
         $element->setLinkedDataClass(get_class($argument));
         $element->setLinkedDataId($argument->getId());
+
+        return $this->updateElementFromArgument($element, $argument);
+    }
+
+    public function updateElementFromArgument(SynthesisElement $element, Argument $argument)
+    {
+        $element->setBody($argument->getBody());
+
+        // Update last modified and archive status
+        $element->setLinkedDataLastUpdate($argument->getUpdatedAt());
+        $element->setArchived(false);
 
         return $element;
     }

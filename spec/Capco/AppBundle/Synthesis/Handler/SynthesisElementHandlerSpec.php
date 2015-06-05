@@ -24,37 +24,50 @@ class SynthesisElementHandlerSpec extends ObjectBehavior
         $this->shouldHaveType('Capco\AppBundle\Synthesis\Handler\SynthesisElementHandler');
     }
 
-    function it_can_get_all_elements_from_synthesis(EntityManager $em, LogManager $logManager, EntityRepository $repo, ArrayCollection $collection, Synthesis $synthesis)
+    function it_can_get_all_elements_from_synthesis(EntityManager $em, LogManager $logManager, EntityRepository $synthesisRepo, EntityRepository $synthesisElementRepo, ArrayCollection $collection, Synthesis $synthesis, $id)
     {
-        $em->getRepository('CapcoAppBundle:Synthesis\SynthesisElement')->willReturn($repo)->shouldBeCalled();
-        $repo->findBy(array(
+        $em->getRepository('CapcoAppBundle:Synthesis\Synthesis')->willReturn($synthesisRepo)->shouldBeCalled();
+        $em->getRepository('CapcoAppBundle:Synthesis\SynthesisElement')->willReturn($synthesisElementRepo)->shouldBeCalled();
+        $synthesisRepo->find($id)->willReturn($synthesis)->shouldBeCalled();
+        $synthesisElementRepo->findBy(array(
             'synthesis' => $synthesis
         ))->willReturn($collection)->shouldBeCalled();
 
         $this->beConstructedWith($em, $logManager);
-        $this->getAllElementsFromSynthesis($synthesis)->shouldReturnAnInstanceOf('Doctrine\Common\Collections\ArrayCollection');
+        $this->getAllElementsFromSynthesis($id)->shouldReturnAnInstanceOf('Doctrine\Common\Collections\ArrayCollection');
     }
 
-    function it_can_get_new_elements_from_synthesis(EntityManager $em, LogManager $logManager, EntityRepository $repo, ArrayCollection $collection, Synthesis $synthesis)
+    function it_can_get_new_elements_from_synthesis(EntityManager $em, LogManager $logManager, EntityRepository $synthesisRepo, EntityRepository $synthesisElementRepo, ArrayCollection $collection, Synthesis $synthesis, $id)
     {
-        $em->getRepository('CapcoAppBundle:Synthesis\SynthesisElement')->willReturn($repo)->shouldBeCalled();
-        $repo->findBy(array(
+        $em->getRepository('CapcoAppBundle:Synthesis\Synthesis')->willReturn($synthesisRepo)->shouldBeCalled();
+        $em->getRepository('CapcoAppBundle:Synthesis\SynthesisElement')->willReturn($synthesisElementRepo)->shouldBeCalled();
+        $synthesisRepo->find($id)->willReturn($synthesis)->shouldBeCalled();
+        $synthesisElementRepo->findBy(array(
             'synthesis' => $synthesis,
             'archived' => false,
         ))->willReturn($collection)->shouldBeCalled();
 
         $this->beConstructedWith($em, $logManager);
-        $this->getNewElementsFromSynthesis($synthesis)->shouldReturnAnInstanceOf('Doctrine\Common\Collections\ArrayCollection');
+        $this->getNewElementsFromSynthesis($id)->shouldReturnAnInstanceOf('Doctrine\Common\Collections\ArrayCollection');
     }
 
-    function it_can_create_or_update_element_in_synthesis(EntityManager $em, LogManager $logManager, SynthesisElement $element, Synthesis $synthesis)
+    function it_can_create_element_in_synthesis(EntityManager $em, LogManager $logManager, SynthesisElement $element, Synthesis $synthesis)
     {
         $element->setSynthesis($synthesis)->shouldBeCalled();
         $em->persist($element)->shouldBeCalled();
         $em->flush()->shouldBeCalled();
 
         $this->beConstructedWith($em, $logManager);
-        $this->createOrUpdateElementInSynthesis($element, $synthesis)->shouldReturnAnInstanceOf('Capco\AppBundle\Entity\Synthesis\SynthesisElement');
+        $this->createElementInSynthesis($element, $synthesis)->shouldReturnAnInstanceOf('Capco\AppBundle\Entity\Synthesis\SynthesisElement');
+    }
+
+    function it_can_update_element_in_synthesis(EntityManager $em, LogManager $logManager, SynthesisElement $element, Synthesis $synthesis)
+    {
+        $em->persist($element)->shouldBeCalled();
+        $em->flush()->shouldBeCalled();
+
+        $this->beConstructedWith($em, $logManager);
+        $this->updateElementInSynthesis($element, $synthesis)->shouldReturnAnInstanceOf('Capco\AppBundle\Entity\Synthesis\SynthesisElement');
     }
 
     function it_can_create_a_division_from_element_in_synthesis(EntityManager $em, LogManager $logManager, SynthesisDivision $division, SynthesisElement $element, Synthesis $synthesis, SynthesisElement $element)

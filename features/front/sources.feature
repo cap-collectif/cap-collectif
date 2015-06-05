@@ -22,7 +22,7 @@ Feature: Source
       | consultationSlug   | strategie-technologique-de-l-etat-et-services-publics |
       | stepSlug           | collecte-des-avis-pour-une-meilleur-strategie         |
       | opinionTypeSlug    | causes                                                |
-      | opinionSlug        | opinion-201                                           |
+      | opinionSlug        | opinion-51                                            |
     Then I should not see "Proposer une source"
 
  @javascript @database

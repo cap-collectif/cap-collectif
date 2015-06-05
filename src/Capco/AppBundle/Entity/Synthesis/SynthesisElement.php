@@ -12,6 +12,7 @@ use Hateoas\Configuration\Annotation as Hateoas;
  *
  * @ORM\Table(name="synthesis_element")
  * @ORM\Entity()
+ * @ORM\HasLifecycleCallbacks()
  * @Gedmo\Loggable()
  * @Gedmo\SoftDeleteable(fieldName="deletedAt")
  * @Serializer\ExclusionPolicy("all")
@@ -75,6 +76,20 @@ class SynthesisElement
      * @Serializer\Groups({"ElementDetails"})
      */
     private $enabled = true;
+
+    /**
+     * @var \DateTime
+     * @ORM\Column(name="created_at", type="datetime")
+     * @Gedmo\Timestampable(on="create")
+     */
+    private $createdAt;
+
+    /**
+     * @var \DateTime
+     * @Gedmo\Timestampable(on="change", field={"title", "body", "archived", "enabled", "parent", "notation"})
+     * @ORM\Column(name="updated_at", type="datetime")
+     */
+    private $updatedAt;
 
     /**
      * @var \DateTime
@@ -158,6 +173,13 @@ class SynthesisElement
     private $linkedDataId = null;
 
     /**
+     * @var datetime
+     *
+     * @ORM\Column(name="linked_data_last_update", type="datetime", nullable=true)
+     */
+    private $linkedDataLastUpdate = null;
+
+    /**
      * Get id.
      *
      * @return int
@@ -189,6 +211,38 @@ class SynthesisElement
     public function setSynthesis(Synthesis $synthesis)
     {
         $this->synthesis = $synthesis;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getCreatedAt()
+    {
+        return $this->createdAt;
+    }
+
+    /**
+     * @param \DateTime $createdAt
+     */
+    public function setCreatedAt($createdAt)
+    {
+        $this->createdAt = $createdAt;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getUpdatedAt()
+    {
+        return $this->updatedAt;
+    }
+
+    /**
+     * @param \DateTime $updatedAt
+     */
+    public function setUpdatedAt($updatedAt)
+    {
+        $this->updatedAt = $updatedAt;
     }
 
     /**
@@ -349,5 +403,33 @@ class SynthesisElement
     public function setLinkedDataId($linkedDataId)
     {
         $this->linkedDataId = $linkedDataId;
+    }
+
+    /**
+     * @return datetime
+     */
+    public function getLinkedDataLastUpdate()
+    {
+        return $this->linkedDataLastUpdate;
+    }
+
+    /**
+     * @param datetime $linkedDataLastUpdate
+     */
+    public function setLinkedDataLastUpdate($linkedDataLastUpdate)
+    {
+        $this->linkedDataLastUpdate = $linkedDataLastUpdate;
+    }
+
+    // ************************* Lifecycle ***********************************
+
+    /**
+     * @ORM\PrePersist
+     */
+    public function init()
+    {
+        if ($this->updatedAt === null) {
+            $this->updatedAt = new \DateTime();
+        }
     }
 }

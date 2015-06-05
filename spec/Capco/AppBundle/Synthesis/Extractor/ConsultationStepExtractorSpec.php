@@ -24,58 +24,7 @@ class ConsultationStepExtractorSpec extends ObjectBehavior
         $this->shouldHaveType('Capco\AppBundle\Synthesis\Extractor\ConsultationStepExtractor');
     }
 
-    function it_can_create_an_element_from_an_opinion(Opinion $opinion)
-    {
-        $opinion->getTitle()->willReturn('test')->shouldBeCalled();
-        $opinion->getBody()->willReturn('blabla')->shouldBeCalled();
-        $opinion->getId()->willReturn(42)->shouldBeCalled();
-
-        $element = $this->createElementFromOpinion($opinion);
-        $element->shouldBeAnInstanceOf('Capco\AppBundle\Entity\Synthesis\SynthesisElement');
-        $element->getTitle()->shouldReturn('test');
-        $element->getBody()->shouldReturn('blabla');
-        $element->getLinkedDataId()->shouldReturn(42);
-    }
-
-    function it_can_create_an_element_from_an_argument(Argument $argument)
-    {
-        $argument->getBody()->willReturn('blabla')->shouldBeCalled();
-        $argument->getId()->willReturn(42)->shouldBeCalled();
-
-        $element = $this->createElementFromArgument($argument);
-        $element->shouldBeAnInstanceOf('Capco\AppBundle\Entity\Synthesis\SynthesisElement');
-        $element->getBody()->shouldReturn('blabla');
-        $element->getLinkedDataId()->shouldReturn(42);
-    }
-
-    function it_can_tell_if_element_is_related_to_object(SynthesisElement $element)
-    {
-        // Can't mock opinion because we need to call get_class() method on it
-        $opinion = new Opinion();
-        $opinion->setId(42);
-
-        // Related element (same class, same id)
-        $element->getLinkedDataClass()->willReturn('Capco\AppBundle\Entity\Opinion')->shouldBeCalled();
-        $element->getLinkedDataId()->willReturn(42)->shouldBeCalled();
-        $this->isElementRelated($element, $opinion)->shouldReturn(true);
-
-        // Not related (different id)
-        $element->getLinkedDataClass()->willReturn('Capco\AppBundle\Entity\Opinion')->shouldBeCalled();
-        $element->getLinkedDataId()->willReturn(51)->shouldBeCalled();
-        $this->isElementRelated($element, $opinion)->shouldReturn(false);
-
-        // Not related (different class)
-        $element->getLinkedDataClass()->willReturn('Capco\AppBundle\Entity\Synthesis\Test')->shouldBeCalled();
-        $element->getLinkedDataId()->willReturn(42)->shouldBeCalled();
-        $this->isElementRelated($element, $opinion)->shouldReturn(false);
-
-        // Not related (both different)
-        $element->getLinkedDataClass()->willReturn('Capco\AppBundle\Entity\Synthesis\Test')->shouldBeCalled();
-        $element->getLinkedDataId()->willReturn(51)->shouldBeCalled();
-        $this->isElementRelated($element, $opinion)->shouldReturn(false);
-    }
-
-    function it_can_create_elements_from_consultation_step(EntityManager $em, Synthesis $synthesis, ConsultationStep $consultationStep)
+    function it_can_create_or_update_elements_from_consultation_step(EntityManager $em, Synthesis $synthesis, ConsultationStep $consultationStep)
     {
         // Objects can not be mocked because we need to call get_class() method on them
 
@@ -127,15 +76,119 @@ class ConsultationStepExtractorSpec extends ObjectBehavior
         $consultationStep->getOpinions()->willReturn($opinions)->shouldBeCalled();
 
         $synthesis->addElement(ProphecyArgument::any())->shouldBeCalled();
-        $em->persist(ProphecyArgument::any())->shouldBeCalled();
 
-        $em->persist($synthesis)->shouldBeCalled();
         $em->flush()->shouldBeCalled();
 
         $synthesis = $this->createOrUpdateElementsFromConsultationStep($synthesis, $consultationStep)->shouldReturnAnInstanceOf('Capco\AppBundle\Entity\Synthesis\Synthesis');
 
         expect(6 === count($synthesis->getElements()));
 
+    }
+
+    function it_can_tell_if_element_is_related_to_object(SynthesisElement $element)
+    {
+        // Can't mock opinion because we need to call get_class() method on it
+        $opinion = new Opinion();
+        $opinion->setId(42);
+
+        // Related element (same class, same id)
+        $element->getLinkedDataClass()->willReturn('Capco\AppBundle\Entity\Opinion')->shouldBeCalled();
+        $element->getLinkedDataId()->willReturn(42)->shouldBeCalled();
+        $this->isElementRelated($element, $opinion)->shouldReturn(true);
+
+        // Not related (different id)
+        $element->getLinkedDataClass()->willReturn('Capco\AppBundle\Entity\Opinion')->shouldBeCalled();
+        $element->getLinkedDataId()->willReturn(51)->shouldBeCalled();
+        $this->isElementRelated($element, $opinion)->shouldReturn(false);
+
+        // Not related (different class)
+        $element->getLinkedDataClass()->willReturn('Capco\AppBundle\Entity\Synthesis\Test')->shouldBeCalled();
+        $element->getLinkedDataId()->willReturn(42)->shouldBeCalled();
+        $this->isElementRelated($element, $opinion)->shouldReturn(false);
+
+        // Not related (both different)
+        $element->getLinkedDataClass()->willReturn('Capco\AppBundle\Entity\Synthesis\Test')->shouldBeCalled();
+        $element->getLinkedDataId()->willReturn(51)->shouldBeCalled();
+        $this->isElementRelated($element, $opinion)->shouldReturn(false);
+    }
+
+    function it_can_tell_if_element_is_outdated(SynthesisElement $element, Opinion $opinion)
+    {
+        $now = new \DateTime();
+        $before = (new \DateTime())->modify('-10 days');
+
+        // Element before object (element outdated)
+        $element->getLinkedDataLastUpdate()->willReturn($before)->shouldBeCalled();
+        $opinion->getUpdatedAt()->willReturn($now)->shouldBeCalled();
+        $this->elementIsOutdated($element, $opinion)->shouldReturn(true);
+
+        // Object before element
+        $element->getLinkedDataLastUpdate()->willReturn($now)->shouldBeCalled();
+        $opinion->getUpdatedAt()->willReturn($before)->shouldBeCalled();
+        $this->elementIsOutdated($element, $opinion)->shouldReturn(false);
+
+        // Same dates
+        $element->getLinkedDataLastUpdate()->willReturn($now)->shouldBeCalled();
+        $opinion->getUpdatedAt()->willReturn($now)->shouldBeCalled();
+        $this->elementIsOutdated($element, $opinion)->shouldReturn(false);
+    }
+
+    function it_can_create_an_element_from_an_opinion()
+    {
+        // Can't mock opinion because we need to call get_class() method on it
+        $opinion = new Opinion();
+        $opinion->setId(42);
+        $opinion->setTitle('test');
+        $opinion->setBody('blabla');
+
+        $element = $this->createElementFromOpinion($opinion);
+        $element->shouldBeAnInstanceOf('Capco\AppBundle\Entity\Synthesis\SynthesisElement');
+        $element->getTitle()->shouldReturn('test');
+        $element->getBody()->shouldReturn('blabla');
+        $element->getLinkedDataId()->shouldReturn(42);
+    }
+
+    function it_can_update_an_element_from_an_opinion(SynthesisElement $element, Opinion $opinion)
+    {
+        $now = new \DateTime();
+
+        $opinion->getTitle()->willReturn('test')->shouldBeCalled();
+        $opinion->getBody()->willReturn('blabla')->shouldBeCalled();
+        $opinion->getUpdatedAt()->willReturn($now)->shouldBeCalled();
+
+        $element->setTitle('test')->shouldBeCalled();
+        $element->setBody('blabla')->shouldBeCalled();
+        $element->setLinkedDataLastUpdate($now)->shouldBeCalled();
+        $element->setArchived(false)->shouldBeCalled();
+
+        $this->updateElementFromOpinion($element, $opinion)->shouldReturnAnInstanceOf('Capco\AppBundle\Entity\Synthesis\SynthesisElement');
+    }
+
+    function it_can_create_an_element_from_an_argument(Argument $argument)
+    {
+        // Can't mock argument because we need to call get_class() method on it
+        $argument = new Argument();
+        $argument->setId(42);
+        $argument->setBody('blabla');
+
+        $element = $this->createElementFromArgument($argument);
+        $element->shouldBeAnInstanceOf('Capco\AppBundle\Entity\Synthesis\SynthesisElement');
+        $element->getBody()->shouldReturn('blabla');
+        $element->getLinkedDataId()->shouldReturn(42);
+    }
+
+    function it_can_update_an_element_from_an_argument(SynthesisElement $element, Argument $argument)
+    {
+        $now = new \DateTime();
+
+        $argument->getBody()->willReturn('blabla')->shouldBeCalled();
+        $argument->getUpdatedAt()->willReturn($now)->shouldBeCalled();
+
+        $element->setBody('blabla')->shouldBeCalled();
+        $element->setLinkedDataLastUpdate($now)->shouldBeCalled();
+        $element->setArchived(false)->shouldBeCalled();
+
+        $this->updateElementFromArgument($element, $argument)->shouldReturnAnInstanceOf('Capco\AppBundle\Entity\Synthesis\SynthesisElement');
     }
 
 }

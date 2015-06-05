@@ -9,10 +9,11 @@ use JMS\Serializer\Annotation as Serializer;
 use Hateoas\Configuration\Annotation as Hateoas;
 
 /**
- * Synthesis.
+ * Synthesis
  *
  * @ORM\Table(name="synthesis")
  * @ORM\Entity()
+ * @ORM\HasLifecycleCallbacks()
  * @Serializer\ExclusionPolicy("all")
  * @Hateoas\Relation(
  *      "self",
@@ -36,7 +37,7 @@ use Hateoas\Configuration\Annotation as Hateoas;
  *      name = "elements",
  *      embedded = @Hateoas\Embedded(
  *          "expr(object.getElements())",
- *          exclusion = @Hateoas\Exclusion(excludeIf = "expr(!object.getElements())")
+ *          exclusion = @Hateoas\Exclusion(excludeIf = "expr(!object.getElements() or object.getElements().isEmpty())")
  *      )
  * )
  */
@@ -64,7 +65,7 @@ class Synthesis
      * @ORM\Column(name="source_type", type="string", length=255)
      * @Assert\Choice(choices = {"consultation_step", "file", "none"})
      */
-    private $sourceType = 'none';
+    private $sourceType = "none";
 
     /**
      * @var
@@ -82,7 +83,6 @@ class Synthesis
 
     public function __construct()
     {
-        $this->sourceType = 'none';
         $this->elements = new ArrayCollection();
     }
 
@@ -102,6 +102,7 @@ class Synthesis
     public function setId($id)
     {
         $this->id = $id;
+        return $this;
     }
 
     /**
@@ -118,6 +119,7 @@ class Synthesis
     public function setEnabled($enabled)
     {
         $this->enabled = $enabled;
+        return $this;
     }
 
     /**
@@ -134,6 +136,7 @@ class Synthesis
     public function setSourceType($sourceType)
     {
         $this->sourceType = $sourceType;
+        return $this;
     }
 
     /**
@@ -150,6 +153,7 @@ class Synthesis
     public function setConsultationStep($consultationStep)
     {
         $this->consultationStep = $consultationStep;
+        return $this;
     }
 
     /**
@@ -165,7 +169,11 @@ class Synthesis
      */
     public function addElement(SynthesisElement $element)
     {
-        $this->elements[] = $element;
+        if (!$this->elements->contains($element)) {
+            $this->elements[] = $element;
+            $element->setSynthesis($this);
+        }
+        return $this;
     }
 
     /**
@@ -174,5 +182,21 @@ class Synthesis
     public function removeElement(SynthesisElement $element)
     {
         $this->elements->removeElement($element);
+        return $this;
+    }
+
+    // ************************* Lifecycle ***********************************
+
+    /**
+     * @ORM\PrePersist
+     */
+    public function init()
+    {
+        if ($this->sourceType === null) {
+            $this->sourceType = 'none';
+        }
+        if ($this->elements === null) {
+            $this->elements = new ArrayCollection();
+        }
     }
 }

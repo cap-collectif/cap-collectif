@@ -19,25 +19,41 @@ class SynthesisElementHandler
         $this->logManager = $logManager;
     }
 
-    public function getAllElementsFromSynthesis(Synthesis $synthesis)
+    public function getAllElementsFromSynthesis($id)
     {
+        if (!($synthesis = $this->em->getRepository('CapcoAppBundle:Synthesis\Synthesis')->find($id))) {
+            throw new NotFoundHttpException(sprintf('The resource \'%s\' was not found.', $id));
+        }
+
         return $this->em->getRepository('CapcoAppBundle:Synthesis\SynthesisElement')->findBy(array(
             'synthesis' => $synthesis,
         ));
     }
 
-    public function getNewElementsFromSynthesis(Synthesis $synthesis)
+    public function getNewElementsFromSynthesis($id)
     {
+        if (!($synthesis = $this->em->getRepository('CapcoAppBundle:Synthesis\Synthesis')->find($id))) {
+            throw new NotFoundHttpException(sprintf('The resource \'%s\' was not found.', $id));
+        }
+
         return $this->em->getRepository('CapcoAppBundle:Synthesis\SynthesisElement')->findBy(array(
             'synthesis' => $synthesis,
             'archived' => false,
         ));
     }
 
-    public function createOrUpdateElementInSynthesis(SynthesisElement $element, Synthesis $synthesis)
+    public function createElementInSynthesis(SynthesisElement $element, Synthesis $synthesis)
     {
         $element->setSynthesis($synthesis);
 
+        $this->em->persist($element);
+        $this->em->flush();
+
+        return $element;
+    }
+
+    public function updateElementInSynthesis(SynthesisElement $element, Synthesis $synthesis)
+    {
         $this->em->persist($element);
         $this->em->flush();
 

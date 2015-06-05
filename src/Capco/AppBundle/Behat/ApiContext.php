@@ -215,6 +215,33 @@ class ApiContext extends ApplicationContext
     }
 
     /**
+     * There is a synthesis with id base on consultation step.
+     *
+     * @Given there is a synthesis with id :sid based on consultation step :csId
+     */
+    public function thereIsASynthesisBasedOnConsultationStep($sId, $csId)
+    {
+        $synthesis = $this->getEntityManager()->getRepository('CapcoAppBundle:Synthesis\Synthesis')->find($sId);
+
+        if (null === $synthesis) {
+            // Create synthesis
+            $synthesis = new Synthesis();
+            $synthesis->setEnabled(true);
+
+            // Set id
+            $synthesis->setId($sId);
+            $metadata = $this->getEntityManager()->getClassMetadata(get_class($synthesis));
+            $metadata->setIdGenerator(new AssignedGenerator());
+
+            $this->getEntityManager()->persist($synthesis);
+            $this->getEntityManager()->flush();
+        }
+
+        $consultationStep = $this->getEntityManager()->getRepository('CapcoAppBundle:ConsultationStep')->find($csId);
+        $this->getService('capco.synthesis.synthesis_handler')->createSynthesisFromConsultationStep($synthesis, $consultationStep);
+    }
+
+    /**
      * I create an element in synthesis with values.
      *
      * @Given I create an element in synthesis :id with values:
@@ -287,4 +314,39 @@ class ApiContext extends ApplicationContext
         $elementId = $data['id'];
         $this->thereShouldBeALogOnElementWithSentence($elementId, $username.' a créé l\'élément '.$elementId);
     }
+
+    /**
+     * I update opinion with values.
+     *
+     * @Given I update opinion :id with values:
+     */
+    public function iUpdateOpinionWithValues($id, TableNode $data)
+    {
+        $opinion = $this->getEntityManager()->getRepository('CapcoAppBundle:Opinion')->find($id);
+
+        if (null !== $opinion) {
+
+            $values = $data->getRowsHash();
+            if (array_key_exists('title', $values)) {
+                $opinion->setTitle($values['title']);
+            }
+            if (array_key_exists('body', $values)) {
+                $opinion->setBody($values['body']);
+            }
+
+            $this->getEntityManager()->persist($opinion);
+            $this->getEntityManager()->flush();
+        }
+    }
+
+    /**
+     * I do nothing for x seconds
+     *
+     * @Given I do nothing for :seconds seconds
+     */
+    public function iDoNothingForXSeconds($seconds)
+    {
+        sleep($seconds);
+    }
+
 }
