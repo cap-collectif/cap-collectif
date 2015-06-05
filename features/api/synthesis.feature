@@ -345,6 +345,7 @@ Feature: Synthesis
       }
     }
     """
+    And there should be a created log on response element with username "admin"
 
   Scenario: Non admin API client wants to create a synthesis element
     Given I am logged in to api as user
@@ -456,6 +457,7 @@ Feature: Synthesis
     }
     """
     Then the JSON response status code should be 201
+    And there should be a log on element 43 with sentence "admin a divisé l'élément 43"
 
   Scenario: Non admin API client wants to divide a synthesis element
     Given I am logged in to api as user
@@ -540,21 +542,6 @@ Feature: Synthesis
       }
     ]
     """
-
-  @database
-  Scenario: After creating an element, there should be a 'create' log
-    Given I am logged in to api as admin
-    And there is a synthesis with id "42" and elements:
-      | 43 |
-    And I send a POST request to "/api/syntheses/42/elements" with json:
-    """
-    {
-      "title": "Coucou, je suis un élément.",
-      "body": "blabla",
-      "notation": 5
-    }
-    """
-    Then there should be a created log on response element with username "admin"
 
   @database
   Scenario: After updating an element, there should be an 'update' log
@@ -645,32 +632,3 @@ Feature: Synthesis
     }
     """
     Then there should be a log on element 43 with sentence "admin a modifié la note de l'élément 43"
-
-  @database
-  Scenario: After dividing an element, there should be a 'divide' log
-    Given I am logged in to api as admin
-    And there is a synthesis with id "42" and elements:
-      | 43 |
-    And I send a POST request to "/api/syntheses/42/elements/43/divisions" with json:
-    """
-    {
-      "elements": [
-        {
-          "title": "Coucou, je suis un élément.",
-          "body": "blabla",
-          "notation": 5
-        },
-        {
-          "title": "Coucou, je suis un autre élément.",
-          "body": "blabla",
-          "notation": 3
-        },
-        {
-          "title": "Coucou, je suis le dernier élément.",
-          "body": "blabla",
-          "notation": 2
-        }
-      ]
-    }
-    """
-    Then there should be a log on element 43 with sentence "admin a divisé l'élément 43"

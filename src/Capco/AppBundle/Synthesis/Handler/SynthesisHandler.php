@@ -36,11 +36,18 @@ class SynthesisHandler
         return $synthesis;
     }
 
+    public function createSynthesisFromConsultationStep(Synthesis $synthesis, ConsultationStep $consultationStep)
+    {
+        $synthesis->setConsultationStep($consultationStep);
+        $synthesis->setSourceType('consultation_step');
+        return $this->createSynthesis($synthesis);
+    }
+
     public function createElementsFromSource(Synthesis $synthesis)
     {
         if ($synthesis->getSourceType() == "consultation_step") {
             return $this->consultationStepExtractor->createElementsFromConsultationStep($synthesis, $synthesis->getConsultationStep());
         }
-        return false;
+        return $synthesis;
     }
 }
