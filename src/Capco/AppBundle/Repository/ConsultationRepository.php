@@ -119,7 +119,7 @@ class ConsultationRepository extends EntityRepository
         }
 
         if (isset(Consultation::$sortOrder[$sort]) && Consultation::$sortOrder[$sort] == Consultation::SORT_ORDER_CONTRIBUTIONS_COUNT) {
-            $qb->orderBy('c.contributionsCount', 'DESC');
+            $qb = $this->getOrderedByContributionsNb($qb, 'DESC', 'c');
         } else {
             $qb->orderBy('c.publishedAt', 'DESC');
         }
@@ -235,5 +235,15 @@ class ConsultationRepository extends EntityRepository
         return $this->createQueryBuilder('c')
             ->andWhere('c.isEnabled = :isEnabled')
             ->setParameter('isEnabled', true);
+    }
+
+    protected function getOrderedByContributionsNb(QueryBuilder $qb, $order, $alias = 'c')
+    {
+        $qb
+            ->addSelect('('.$alias.'.opinionCount + '.$alias.'.trashedOpinionCount + '.$alias.'.argumentCount + '.$alias.'.trashedArgumentCount + '.$alias.'.sourcesCount + '.$alias.'.trashedSourceCount) as HIDDEN contributionsCount')
+            ->orderBy('contributionsCount', 'DESC')
+        ;
+
+        return $qb;
     }
 }

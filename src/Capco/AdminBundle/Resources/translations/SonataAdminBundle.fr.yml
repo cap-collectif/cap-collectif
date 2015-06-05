@@ -485,7 +485,7 @@ user:
   delete:
     batch_denied: Impossible de supprimer un super administrateur.
     confirmation: Êtes-vous sûr de vouloir supprimer l'utilisateur <strong>%object%</strong> sélectionné ?
-    warning_message: Attention, <strong>tous les contenus ci-dessous ainsi que ceux liés seront également supprimés</strong> et cette action sera irréversible.
+    warning_message: Attention, <strong>tous les contenus ci-dessous ainsi que ceux liés (listés ci-dessous) seront également supprimés</strong>. Cette action sera irréversible.
     opinions: "{1} 1 proposition :| ]1,Inf[ %count% propositions :"
     ideas: "{1} 1 idée :| ]1,Inf[ %count% idées :"
     sources: "{1} 1 source :| ]1,Inf[ %count% sources :"

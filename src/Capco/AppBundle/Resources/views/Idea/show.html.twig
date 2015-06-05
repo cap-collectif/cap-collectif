@@ -95,14 +95,14 @@
                 </div>
             </div>
 
-            {% if idea.votes | length > 0 %}
+            {% if votes | length > 0 %}
                 {% set limit = 6 %}
                 <div class="container  container--thinner  container--custom">
                      <h2>
-                       {{ 'idea.vote.listing.title'|transchoice(idea.votes|length, {'%count%': idea.votes|length}, 'CapcoAppBundle') }}
+                       {{ 'idea.vote.listing.title'|transchoice(votes|length, {'%count%': votes|length}, 'CapcoAppBundle') }}
                      </h2>
                     {% include 'CapcoAppBundle:Idea:votes.html.twig' with {'idea': idea, 'limit': limit} only %}
-                    {% if idea.votes|length > limit %}
+                    {% if votes|length > limit %}
                         <button type="button" class="btn btn-primary btn--outline" data-toggle="modal" data-target="#ideaVotesModal">
                             {{ 'idea.vote.listing.see_all'|trans({}, 'CapcoAppBundle') }}
                         </button>
@@ -186,7 +186,7 @@
     </div>
 </div>
 
-{% if idea.votes|length > 0 %}
+{% if votes|length > 0 %}
     <!-- Modal for votes -->
     <div class="modal fade" id="ideaVotesModal" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog">

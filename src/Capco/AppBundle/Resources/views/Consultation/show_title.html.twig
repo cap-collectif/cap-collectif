@@ -63,7 +63,7 @@
         {% endif %}
 
         <ul class="nav nav-pills consultation__infos">
-            {% set contributionsCount = consultation.contributionsCount %}
+            {% set contributionsCount = consultation.totalContributionsCount %}
             {% if contributionsCount > 0 %}
                 <li data-toggle="tooltip" data-placement="top" data-html="true" data-title="{{ render.contributions_popover(consultation) }}">
                     <div class="value">{{ contributionsCount }}</div>
@@ -74,7 +74,7 @@
                     </div>
                 </li>
             {% endif %}
-            {% set contributorsCount = consultation.participantsCount %}
+            {% set contributorsCount = consultation | capco_count_consultation_contributors %}
             {% if contributorsCount > 0 %}
                 <li>
                     <a href="{{ path('app_consultation_show_contributors', {'consultationSlug': consultation.slug}) }}">
