@@ -17,3 +17,26 @@
 {% block fos_user_content %}
     {% include "CapcoUserBundle:Registration:register_content.html.twig" %}
 {% endblock fos_user_content %}
+
+{% block javascripts %}
+    {{ parent()}}
+    <script>
+    var lastSuggestion = "";
+    $('#sonata_user_registration_form_email').on('blur', function() {
+      var self = $(this);
+      $(this).mailcheck({
+        suggested: function(element, suggestion) {
+            $('.js-email-correction').parent().hide();
+            self.after('<p>Vouliez-vous dire <a href="#" class="js-email-correction">'+suggestion.full+'</a> ?</p>');
+            lastSuggestion = suggestion.full;
+        }
+      });
+    });
+
+    $(document).on('click', '.js-email-correction', function() {
+        $('#sonata_user_registration_form_email').val(lastSuggestion);
+        $(this).parent().hide();
+    });
+
+    </script>
+{% endblock %}

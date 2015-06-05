@@ -3,14 +3,17 @@ Capco\UserBundle\Entity\User:
     - Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity: { fields: email, message: already_used_email }
   properties:
     username:
-      - NotBlank: ~
-      - Length: { min: 2, max: 128 }
+      - NotBlank: { message: username.blank }
+      - Length: { min: 2, max: 128, minMessage: username.minMessage }
+    plainPassword:
+      - NotBlank: { message: password.blank }
+      - Length: { min: 8, max: 128, minMessage: password.minMessage }
     isTermsAccepted:
-      - NotNull: ~
-      - "True": ~
+      - NotNull: { message: charte.blank }
+      - "True": { message: charte.blank }
     email:
-      - NotBlank: ~
-      - Email: { checkMX: true, message: user.register.invalid_email }
+      - NotBlank: { message: email.blank }
+      - Email: { checkMX: true, message: email.invalid }
     twitter_url:
       - Url: ~
       - Capco\AppBundle\Validator\Constraints\IsSocialNetworkUrl: { social_network: twitter }

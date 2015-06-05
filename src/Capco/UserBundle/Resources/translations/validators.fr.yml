@@ -8,3 +8,4 @@ user:
 user_type:
   name:
     already_exists: Ce type de profil existe déjà.
+

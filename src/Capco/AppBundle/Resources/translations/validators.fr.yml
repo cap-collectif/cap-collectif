@@ -22,3 +22,18 @@ idea:
 
 date:
     end_before_start: La date de fin ne peut pas être antérieure à la date de début.
+
+password:
+  minMessage: Le mot de passe doit faire au moins 8 caractères.
+  blank: Veuillez saisir un mot de passe.
+
+username:
+  minMessage: Le nom doit faire au moins 2 caractères.
+  blank: Veuillez saisir votre nom complet.
+
+email:
+  invalid: Ça ne semble pas être un email valide.
+  blank: Veuillez saisir votre adresse électronique.
+
+charte:
+  blank: Veuillez cocher la case pour accepter la charte.
