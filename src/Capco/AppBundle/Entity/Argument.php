@@ -166,6 +166,14 @@ class Argument
     }
 
     /**
+     * @param int $id
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
+    }
+
+    /**
      * Get body.
      *
      * @return string

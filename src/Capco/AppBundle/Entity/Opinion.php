@@ -218,6 +218,14 @@ class Opinion
     }
 
     /**
+     * @param int $id
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
+    }
+
+    /**
      * Get title.
      *
      * @return string
