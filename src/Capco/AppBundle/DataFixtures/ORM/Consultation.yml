@@ -5,12 +5,14 @@ Capco\AppBundle\Entity\Consultation:
         Cover: @MediaConsultation1
         video: 'http://www.youtube.com/embed/A3PDXmYoF5U?autoplay=1'
         Themes: [@theme1, @theme2]
+        publishedAt: <dateTimeBetween('-50 days', 'now')>
     cs2:
         title: Stratégie technologique de l'Etat et services publics
         Author: @user4
         Cover: @MediaConsultation2
         video: 'http://www.youtube.com/embed/wTcNtgA6gHs?autoplay=1'
         Themes: [@theme1, @theme3]
+        publishedAt: <dateTimeBetween('-50 days', 'now')>
     cs3:
         title: Transformation numérique des relations
         isEnabled: false
@@ -21,3 +23,4 @@ Capco\AppBundle\Entity\Consultation:
         isEnabled: true
         Author: @user4
         Themes: [@theme2, @theme3]
+        publishedAt: <dateTimeBetween('+1 days', '+10 days')>
