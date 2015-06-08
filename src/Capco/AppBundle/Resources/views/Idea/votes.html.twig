@@ -1,32 +1,3 @@
-{% macro vote_user(vote, col) %}
-{% if vote.user is not null %}
-    {% set username = vote.user.username %}
-{% else %}
-    {% set username = vote.username %}
-{% endif %}
-{% if vote.private %}
-    {% set username = 'idea.vote.listing.anonymous' | trans({}, 'CapcoAppBundle') %}
-{% endif %}
-<div class=" {{ 'col-xs-12  col-sm-6  col-md-' ~ col ~ ' col-lg-' ~ col }} ">
-    <div class="media  media--macro  box  block  block--bordered">
-
-        {% include 'CapcoUserBundle:Avatar:avatar.html.twig' with { 'user': vote.user, 'private': true, 'classes': 'media-object', 'link_classes': 'pull-left'} only %}
-
-        <div class="media-body">
-            <p class="media--aligned media--macro__user">
-                {% if vote.user is not null and not vote.private %}
-                    <a href="{{ path('capco_user_profile_show', {'slug': vote.user.slug}) }}">{{ username }}</a>
-                {% else %}
-                    {{ username }}
-                {% endif %}
-            </p>
-        </div>
-    </div>
-</div>
-{% endmacro %}
-
-{% import _self as render %}
-
 <div class="row">
     {% if limit is defined %}
         {% for vote in idea.votes|slice(0, limit) %}

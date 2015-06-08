@@ -333,6 +333,12 @@
     border-bottom: 1px solid $border-color;
     padding-top: 30px;
     padding-bottom: 30px;
+    .opinion__body {
+      overflow: visible;
+    }
+    .opinion__text {
+      word-break: break-word;
+    }
     &:first-child {
       padding-top: 15px;
     }

@@ -1,0 +1,40 @@
+/* ===============================================================
+   $Readmore
+================================================================*/
+
+.read-more-state {
+  display: none;
+}
+
+.read-more-target {
+  opacity: 0;
+  max-height: 0;
+  font-size: 0;
+  transition: .25s ease;
+}
+
+.read-more-state:checked ~ .read-more-wrap .read-more-target {
+  opacity: 1;
+  font-size: inherit;
+  max-height: 999em;
+}
+
+.read-more-state ~ .read-more-trigger:before {
+  content: 'Lire plus';
+}
+
+.read-more-state:checked ~ .read-more-trigger:before {
+  content: 'Réduire';
+}
+
+.read-more-trigger {
+  cursor: pointer;
+  display: block;
+  color: $link-color;
+  font-size: 14px;
+  font-weight: normal;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
