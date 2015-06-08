@@ -44,7 +44,7 @@
                         <div class="form-group">
                             <label for="username" class="control-label  h5">{{ 'user.register.username.username'|trans({}, 'CapcoAppBundle') }}</label>
                             {{ form_widget(form.username) }}
-                            <p>{{ 'user.register.username.is_public'|trans({}, 'CapcoAppBundle') }}</p>
+                            <p class="registration__help">{{ 'user.register.username.is_public'|trans({}, 'CapcoAppBundle') }}</p>
                         </div>
                         {{ form_errors(form.username) }}
 

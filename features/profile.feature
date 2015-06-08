@@ -36,7 +36,7 @@ Feature: Profile
       | fos_user_change_password_form_new_first        | tototototo   |
       | fos_user_change_password_form_new_second       | tatatatata   |
     And I press "Enregistrer les modifications"
-    Then I should see "Cette valeur doit être le mot de passe actuel de l'utilisateur."
+    Then I should see "Ceci n'est pas votre mot de passe."
     And I should see "Les deux mots de passe ne sont pas identiques."
 
   Scenario: Logged in user wants to change his password to a too short password

@@ -40,6 +40,6 @@ Feature: Registration
     | sonata_user_registration_form_plainPassword        | 1234                 |
     And I press "S'inscrire"
     Then I should see "Le nom doit faire au moins 2 caractères."
-    And I should see "Ça ne semble pas être un email valide."
+    And I should see "Cet email n'est pas valide."
     And I should see "Le mot de passe doit faire au moins 8 caractères."
     And I should see "Veuillez cocher la case pour accepter la charte."

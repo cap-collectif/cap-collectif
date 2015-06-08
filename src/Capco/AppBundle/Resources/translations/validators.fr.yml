@@ -32,7 +32,7 @@ username:
   blank: Veuillez saisir votre nom complet.
 
 email:
-  invalid: Ça ne semble pas être un email valide.
+  invalid: Cet email n'est pas valide.
   blank: Veuillez saisir votre adresse électronique.
 
 charte:

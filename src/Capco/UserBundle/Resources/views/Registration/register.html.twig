@@ -27,7 +27,7 @@
       $(this).mailcheck({
         suggested: function(element, suggestion) {
             $('.js-email-correction').parent().hide();
-            self.after('<p>Vouliez-vous dire <a href="#" class="js-email-correction">'+suggestion.full+'</a> ?</p>');
+            self.after('<p class="registration__help">{{ "global.helper.typo"|trans({}, "CapcoAppBundle") }} <a href="#" class="js-email-correction">'+suggestion.full+'</a> ?</p>');
             lastSuggestion = suggestion.full;
         }
       });

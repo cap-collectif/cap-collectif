@@ -8,6 +8,8 @@ global:
     title: Menu
   form:
     mandatory: Ce champ est obligatoire.
+  helper:
+    typo: Vouliez-vous dire
 
 #Errors
 error:
