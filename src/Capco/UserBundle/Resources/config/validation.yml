@@ -1,32 +1,34 @@
 Capco\UserBundle\Entity\User:
   constraints:
-    - Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity: { fields: email, message: already_used_email }
+    - Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity: { fields: email, message: already_used_email, groups: [registration, profile] }
   properties:
     username:
-      - NotBlank: { message: username.blank }
-      - Length: { min: 2, max: 128, minMessage: username.minMessage }
+      - NotBlank: { message: username.blank, groups: [registration, profile] }
+      - Length: { min: 2, max: 128, minMessage: username.minMessage, groups: [registration, profile] }
     plainPassword:
-      - NotBlank: { message: password.blank }
-      - Length: { min: 8, max: 128, minMessage: password.minMessage }
+      - NotBlank: { message: password.blank, groups: [registration] }
+      - Length: { min: 8, max: 128, minMessage: password.minMessage, groups: [registration] }
     isTermsAccepted:
-      - NotNull: { message: charte.blank }
-      - "True": { message: charte.blank }
+      - NotNull: { message: charte.blank, groups: [registration] }
+      - "True": { message: charte.blank, groups: [registration] }
     email:
-      - NotBlank: { message: email.blank }
-      - Email: { checkMX: true, message: email.invalid }
+      - NotBlank: { message: email.blank, groups: [registration, profile] }
+      - Email: { checkMX: true, message: email.invalid, groups: [registration, profile] }
     twitter_url:
-      - Url: ~
-      - Capco\AppBundle\Validator\Constraints\IsSocialNetworkUrl: { social_network: twitter }
+      - Url: { groups: [profile] }
+      - Capco\AppBundle\Validator\Constraints\IsSocialNetworkUrl: { social_network: twitter, groups: [profile] }
     facebook_url:
-      - Url: ~
-      - Capco\AppBundle\Validator\Constraints\IsSocialNetworkUrl: { social_network: facebook }
+      - Url: { groups: [profile] }
+      - Capco\AppBundle\Validator\Constraints\IsSocialNetworkUrl: { social_network: facebook, groups: [profile] }
     google_url:
-      - Url: ~
-      - Capco\AppBundle\Validator\Constraints\IsSocialNetworkUrl: { social_network: gplus }
+      - Url: { groups: [profile] }
+      - Capco\AppBundle\Validator\Constraints\IsSocialNetworkUrl: { social_network: gplus, groups: [profile] }
     Media:
       - Valid: ~
+    website:
+      - Url: { groups: [profile] }
     zipCode:
-      - Range: { min: 100, max: 99999, minMessage: user.register.invalid_zip_code, maxMessage: user.register.invalid_zip_code, invalidMessage: user.register.invalid_zip_code }
+      - Range: { min: 100, max: 99999, minMessage: user.register.invalid_zip_code, maxMessage: user.register.invalid_zip_code, invalidMessage: user.register.invalid_zip_code, groups: [profile] }
 
 Capco\UserBundle\Entity\UserType:
   constraints:
@@ -39,3 +41,9 @@ Capco\UserBundle\Entity\UserType:
       - Length:
           min: 2
           max: 128
+
+FOS\UserBundle\Form\Model\ChangePassword:
+  properties:
+    new:
+      - NotBlank: { message: fos_user.new_password.blank, groups: [ChangePassword, ResetPassword]}
+      - Length: { min: 8, max: 128, minMessage: fos_user.new_password.short, groups: [ChangePassword, ResetPassword]}
