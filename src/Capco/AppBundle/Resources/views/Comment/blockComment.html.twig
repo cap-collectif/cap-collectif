@@ -16,7 +16,7 @@
         {% if profile is defined %}
             <p>{{ 'comment.linked_object' | trans({}, 'CapcoAppBundle') }} <a href="{{ capco_comment_object_url(comment) }}">{{ capco_comment_object(comment) }}</a></p>
         {% endif %}
-        <p class="opinion__text more" style="max-height: 98px;">
+        <p class="opinion__text more" style="">
             {% if comment.isTrashed %}<span class="label label-default" style="position: static">{{ 'comment.trashed.label'|trans({}, 'CapcoAppBundle') }}</span> {% endif %}
             {{ comment.body | escape | nl2br }}
         </p>
