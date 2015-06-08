@@ -5,7 +5,6 @@ namespace Capco\AppBundle\Repository;
 use Capco\AppBundle\Entity\Consultation;
 use Capco\AppBundle\Entity\Theme;
 use Doctrine\ORM\EntityRepository;
-use Doctrine\ORM\QueryBuilder;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 
 /**

@@ -27,5 +27,4 @@ class SynthesisType extends AbstractType
     {
         return 'capco_api_synthesis';
     }
-
 }

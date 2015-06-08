@@ -13,7 +13,7 @@ class SynthesisElementHandler
     protected $em;
     protected $logManager;
 
-    function __construct(EntityManager $em, LogManager $logManager)
+    public function __construct(EntityManager $em, LogManager $logManager)
     {
         $this->em = $em;
         $this->logManager = $logManager;

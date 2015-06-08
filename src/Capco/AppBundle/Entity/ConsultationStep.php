@@ -5,8 +5,6 @@ namespace Capco\AppBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 use JMS\Serializer\Annotation as Serializer;
-use JMS\Serializer\Annotation\Expose;
-use JMS\Serializer\Annotation\Groups;
 
 /**
  * Class ConsultationStep.

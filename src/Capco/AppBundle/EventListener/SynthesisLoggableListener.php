@@ -6,9 +6,8 @@ use Gedmo\Loggable\LoggableListener;
 
 class SynthesisLoggableListener extends LoggableListener
 {
-
     /**
-     * Set username for identification
+     * Set username for identification.
      *
      * We use slug instead of username because username is not unique in our model
      *
@@ -24,9 +23,9 @@ class SynthesisLoggableListener extends LoggableListener
         }
 
         if (is_object($username) && method_exists($username, 'getSlug')) {
-            $this->username = (string)$username->getSlug();
+            $this->username = (string) $username->getSlug();
         } else {
-            throw new \Gedmo\Exception\InvalidArgumentException("Username must be a User with getSlug method or a JWTToken object");
+            throw new \Gedmo\Exception\InvalidArgumentException('Username must be a User with getSlug method or a JWTToken object');
         }
     }
 }

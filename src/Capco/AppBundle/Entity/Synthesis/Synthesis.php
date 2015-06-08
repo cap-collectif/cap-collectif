@@ -9,7 +9,7 @@ use JMS\Serializer\Annotation as Serializer;
 use Hateoas\Configuration\Annotation as Hateoas;
 
 /**
- * Synthesis
+ * Synthesis.
  *
  * @ORM\Table(name="synthesis")
  * @ORM\Entity()
@@ -42,7 +42,6 @@ use Hateoas\Configuration\Annotation as Hateoas;
  */
 class Synthesis
 {
-
     /**
      * @var int
      *
@@ -65,7 +64,7 @@ class Synthesis
      * @ORM\Column(name="source_type", type="string", length=255)
      * @Assert\Choice(choices = {"consultation_step", "file", "none"})
      */
-    private $sourceType = "none";
+    private $sourceType = 'none';
 
     /**
      * @var
@@ -81,9 +80,9 @@ class Synthesis
      */
     private $elements;
 
-    function __construct()
+    public function __construct()
     {
-        $this->sourceType = "none";
+        $this->sourceType = 'none';
         $this->elements = new ArrayCollection();
     }
 

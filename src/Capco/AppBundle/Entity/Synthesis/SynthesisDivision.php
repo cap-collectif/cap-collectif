@@ -2,17 +2,12 @@
 
 namespace Capco\AppBundle\Entity\Synthesis;
 
-use Symfony\Component\Validator\Constraints as Assert;
-
-use Capco\AppBundle\Entity\Synthesis\SynthesisElement;
-
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
-
 use JMS\Serializer\Annotation as Serializer;
 
 /**
- * SynthesisDivision
+ * SynthesisDivision.
  *
  * @ORM\Table(name="synthesis_division")
  * @ORM\Entity()
@@ -106,6 +101,4 @@ class SynthesisDivision
             $el->setOriginalDivision($this);
         }
     }
-
-
 }

@@ -12,7 +12,6 @@ class SynthesisDivisionType extends AbstractType
     {
         $builder
             ->add('elements', 'collection', array('type' => new SynthesisElementType()));
-        ;
     }
 
     public function setDefaultOptions(OptionsResolverInterface $resolver)
@@ -27,5 +26,4 @@ class SynthesisDivisionType extends AbstractType
     {
         return 'capco_api_synthesis_division';
     }
-
 }

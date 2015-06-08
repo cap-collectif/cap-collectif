@@ -3,7 +3,6 @@
 namespace Capco\AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * Class SynthesisStep.
@@ -12,7 +11,6 @@ use Doctrine\Common\Collections\ArrayCollection;
  */
 class SynthesisStep extends AbstractStep
 {
-
     /**
      * @var
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Synthesis\Synthesis")
@@ -52,6 +50,4 @@ class SynthesisStep extends AbstractStep
     {
         return true;
     }
-
-
 }

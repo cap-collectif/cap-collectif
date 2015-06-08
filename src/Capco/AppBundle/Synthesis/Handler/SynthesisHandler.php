@@ -2,11 +2,7 @@
 
 namespace Capco\AppBundle\Synthesis\Handler;
 
-use Capco\AppBundle\Entity\Argument;
 use Capco\AppBundle\Entity\ConsultationStep;
-use Capco\AppBundle\Entity\Opinion;
-use Capco\AppBundle\Entity\Synthesis\SynthesisElement;
-use Capco\AppBundle\Entity\Synthesis\SynthesisDivision;
 use Doctrine\ORM\EntityManager;
 use Capco\AppBundle\Entity\Synthesis\Synthesis;
 use Capco\AppBundle\Synthesis\Extractor\ConsultationStepExtractor;
@@ -16,7 +12,7 @@ class SynthesisHandler
     protected $em;
     protected $consultationStepExtractor;
 
-    function __construct(EntityManager $em, ConsultationStepExtractor $consultationStepExtractor)
+    public function __construct(EntityManager $em, ConsultationStepExtractor $consultationStepExtractor)
     {
         $this->em = $em;
         $this->consultationStepExtractor = $consultationStepExtractor;
@@ -41,14 +37,16 @@ class SynthesisHandler
     {
         $synthesis->setConsultationStep($consultationStep);
         $synthesis->setSourceType('consultation_step');
+
         return $this->createOrUpdateSynthesis($synthesis);
     }
 
     public function createOrUpdateElementsFromSource(Synthesis $synthesis)
     {
-        if ($synthesis->getSourceType() == "consultation_step") {
+        if ($synthesis->getSourceType() == 'consultation_step') {
             return $this->consultationStepExtractor->createOrUpdateElementsFromConsultationStep($synthesis, $synthesis->getConsultationStep());
         }
+
         return $synthesis;
     }
 }

@@ -417,6 +417,7 @@ abstract class AbstractStep
         if ($this->endAt < $now) {
             return $this->startAt === null || $this->startAt < $now;
         }
+
         return false;
     }
 
@@ -430,6 +431,7 @@ abstract class AbstractStep
         if ($this->startAt > $now) {
             return $this->endAt === null || $this->endAt > $now;
         }
+
         return false;
     }
 

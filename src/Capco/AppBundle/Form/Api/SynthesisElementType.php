@@ -32,5 +32,4 @@ class SynthesisElementType extends AbstractType
     {
         return 'capco_api_synthesis_element';
     }
-
 }

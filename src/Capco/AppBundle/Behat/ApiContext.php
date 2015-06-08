@@ -8,7 +8,6 @@ namespace Capco\AppBundle\Behat;
 
 use Capco\AppBundle\Entity\Synthesis\Synthesis;
 use Capco\AppBundle\Entity\Synthesis\SynthesisElement;
-use Capco\AppBundle\Entity\Synthesis\SynthesisLogItem;
 use Doctrine\ORM\Id\AssignedGenerator;
 use GuzzleHttp\Client;
 use Behat\Gherkin\Node\PyStringNode;
@@ -58,7 +57,6 @@ class ApiContext extends ApplicationContext
      *
      * @param string $username
      * @param string $password
-     *
      */
     protected function createAuthenticatedClient($username = 'test', $password = 'test')
     {
@@ -89,9 +87,9 @@ class ApiContext extends ApplicationContext
         $request = $this->client->createRequest($method, $url, [
             'headers' => [
                 'Authorization' => sprintf('Bearer %s', $this->token),
-                'Content-Type' => 'application/json'
+                'Content-Type' => 'application/json',
             ],
-            'exceptions' => false
+            'exceptions' => false,
         ]);
         $this->response = $this->client->send($request);
     }
@@ -131,7 +129,7 @@ class ApiContext extends ApplicationContext
             'exceptions' => false,
             'headers' => [
                 'Authorization' => sprintf('Bearer %s', $this->token),
-                'Content-Type' => 'application/json'
+                'Content-Type' => 'application/json',
             ],
         ]);
         $this->response = $this->client->send($request);
@@ -164,7 +162,7 @@ class ApiContext extends ApplicationContext
     }
 
     /**
-     * There is a synthesis with id and elements
+     * There is a synthesis with id and elements.
      *
      * @Given there is a synthesis with id :id and elements:
      */
@@ -186,7 +184,6 @@ class ApiContext extends ApplicationContext
         }
 
         foreach ($elementsIds->getRows() as $el) {
-
             $elId = $el[0];
 
             $element = $this->getEntityManager()->getRepository('CapcoAppBundle:Synthesis\SynthesisElement')->find($elId);
@@ -218,7 +215,7 @@ class ApiContext extends ApplicationContext
     }
 
     /**
-     * I create an element in synthesis with values
+     * I create an element in synthesis with values.
      *
      * @Given I create an element in synthesis :id with values:
      */
@@ -258,7 +255,7 @@ class ApiContext extends ApplicationContext
     }
 
     /**
-     * There should be a log on element with sentence
+     * There should be a log on element with sentence.
      *
      * @Then there should be a log on element :id with sentence :sentence
      */
@@ -268,7 +265,7 @@ class ApiContext extends ApplicationContext
         $logs = $this->getService('capco.synthesis.log_manager')->getLogEntries($element);
         $logExists = false;
         foreach ($logs as $log) {
-            if ( in_array($sentence, $this->getService('capco.synthesis.log_manager')->getSentencesForLog($log))) {
+            if (in_array($sentence, $this->getService('capco.synthesis.log_manager')->getSentencesForLog($log))) {
                 $logExists = true;
                 break;
             }
@@ -278,7 +275,7 @@ class ApiContext extends ApplicationContext
     }
 
     /**
-     * There should be a created log on response element with username
+     * There should be a created log on response element with username.
      *
      * @Then there should be a create log on response element with username :username
      */

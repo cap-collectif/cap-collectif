@@ -5,7 +5,6 @@ namespace Capco\AppBundle\EventListener;
 use Capco\AppBundle\Manager\LogManager;
 use JMS\Serializer\EventDispatcher\EventSubscriberInterface;
 use JMS\Serializer\EventDispatcher\ObjectEvent;
-use Symfony\Component\Translation\TranslatorInterface;
 
 class SerializationListener implements EventSubscriberInterface
 {
@@ -32,6 +31,4 @@ class SerializationListener implements EventSubscriberInterface
             $this->logManager->getSentencesForLog($log)
         );
     }
-
-
 }

@@ -3,15 +3,12 @@
 namespace Capco\AppBundle\Entity\Synthesis;
 
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Validator\Constraints as Assert;
 use Gedmo\Mapping\Annotation as Gedmo;
-
 use JMS\Serializer\Annotation as Serializer;
-
 use Hateoas\Configuration\Annotation as Hateoas;
 
 /**
- * SynthesisElement
+ * SynthesisElement.
  *
  * @ORM\Table(name="synthesis_element")
  * @ORM\Entity()
@@ -61,7 +58,6 @@ use Hateoas\Configuration\Annotation as Hateoas;
  */
 class SynthesisElement
 {
-
     /**
      * @var int
      *
@@ -81,7 +77,7 @@ class SynthesisElement
     private $enabled = true;
 
     /**
-     * @var \DateTime $deletedAt
+     * @var \DateTime
      * @Gedmo\Versioned
      * @ORM\Column(name="deleted_at", type="datetime", nullable=true)
      */

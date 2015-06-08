@@ -13,7 +13,7 @@ class ConsultationStepExtractor
 {
     protected $em;
 
-    function __construct(EntityManager $em)
+    public function __construct(EntityManager $em)
     {
         $this->em = $em;
     }
@@ -86,8 +86,8 @@ class ConsultationStepExtractor
         $element->setBody($opinion->getBody());
         $element->setLinkedDataClass(get_class($opinion));
         $element->setLinkedDataId($opinion->getId());
-        return $element;
 
+        return $element;
     }
 
     public function createElementFromArgument(Argument $argument)
@@ -96,6 +96,7 @@ class ConsultationStepExtractor
         $element->setBody($argument->getBody());
         $element->setLinkedDataClass(get_class($argument));
         $element->setLinkedDataId($argument->getId());
+
         return $element;
     }
 }

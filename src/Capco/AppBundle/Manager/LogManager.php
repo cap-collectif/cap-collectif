@@ -47,16 +47,19 @@ class LogManager
             if (array_key_exists('title', $log->getData()) || array_key_exists('body', $log->getData())) {
                 $sentences[] = $this->makeSentence('update', $username, $elementName);
             }
+
             return $sentences;
         }
 
         if ($log->getAction() === 'create' && $log->getObjectClass() === 'Capco\\AppBundle\\Entity\\Synthesis\\SynthesisDivision') {
             $division = $this->em->getRepository('CapcoAppBundle:Synthesis\SynthesisDivision')->find($log->getObjectId());
             $sentences[] = $this->makeSentence('divide', $username, $division->getOriginalElement()->getId());
+
             return $sentences;
         }
 
         $sentences[] = $this->makeSentence($log->getAction(), $username, $elementName);
+
         return $sentences;
     }
 
@@ -66,7 +69,7 @@ class LogManager
 
         if ($entity instanceof SynthesisElement) {
             $divisions = $this->em->getRepository('CapcoAppBundle:Synthesis\SynthesisDivision')->findBy(array(
-                'originalElement' => $entity
+                'originalElement' => $entity,
             ));
             foreach ($divisions as $div) {
                 $logs = array_merge($logs, $this->getLogEntries($div));
@@ -79,6 +82,7 @@ class LogManager
     public function makeSentence($action, $username, $elementName)
     {
         $transBase = 'synthesis.logs.sentence.';
+
         return $this->translator->trans($transBase.$action, array(
             '%author%' => $username,
             '%element%' => $elementName,

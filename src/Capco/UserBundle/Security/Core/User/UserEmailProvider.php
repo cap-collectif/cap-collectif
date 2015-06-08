@@ -16,6 +16,4 @@ class UserEmailProvider extends BaseUserProvider
     {
         return $this->userManager->findUserByEmail($email);
     }
-
-
 }
