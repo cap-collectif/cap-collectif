@@ -30,6 +30,7 @@ exports.config = {
           'bower_components/ckeditor/ckeditor.js',
           'bower_components/bootstrap/assets/javascripts/bootstrap/*.js',
           'bower_components/fancybox/source/jquery.fancybox.pack.js',
+          'app/Resources/js/jsapi.js',
           'app/Resources/js/cookiechoices.js',
           'app/Resources/js/googleCharts.js'
         ],

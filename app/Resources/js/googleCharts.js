@@ -18,9 +18,9 @@
                 data.addColumn('string', 'Task');
                 data.addColumn('number', 'Opinions');
                 data.addRows([
-                    ["d'accord", $(this).data('ok')],
+                    ["D'accord", $(this).data('ok')],
                     ["Mitigé", $(this).data('mitige')],
-                    ["pas d'accord", $(this).data('nok')]
+                    ["Pas d'accord", $(this).data('nok')]
                 ]);
                 options = {
                     legend: 'none',
