@@ -10,6 +10,7 @@ dependencies:
         - echo "memory_limit = 2048M" > ~/.phpenv/versions/$(phpenv global)/etc/conf.d/memory.ini
         - gem install bundler
         - bundle install --clean
+        - mysql -u ubuntu -e "create database symfony"
         - mysql -u ubuntu -e "create database symfony_test"
     post:
         - wget http://selenium-release.storage.googleapis.com/2.44/selenium-server-standalone-2.44.0.jar
