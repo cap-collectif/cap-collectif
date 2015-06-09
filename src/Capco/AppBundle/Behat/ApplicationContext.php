@@ -14,6 +14,8 @@ class ApplicationContext extends UserContext
     public static function reinitDatabase()
     {
         exec('app/console capco:reinit --force -e test');
+        $exportCommand = "mysqldump --opt -h 127.0.0.1 -u root symfony_test > app/dbtest.backup";
+        exec($exportCommand);
     }
 
     /**
@@ -23,12 +25,8 @@ class ApplicationContext extends UserContext
      */
     public static function databaseContainsFixtures()
     {
-        exec('php app/console doctrine:database:drop --force -e test');
-        exec('php app/console doctrine:database:create -e test');
-        exec('php app/console doctrine:schema:update --force -e test');
-        exec('php app/console doctrine:fixtures:load -n -e test');
-        exec('php app/console capco:recalculate-counters -e test');
-        exec('php app/console capco:recalculate-consultations-counters -e test');
+        $importCommand = "mysql -h 127.0.0.1 -u root symfony_test < app/dbtest.backup";
+        exec($importCommand);
     }
 
     /**

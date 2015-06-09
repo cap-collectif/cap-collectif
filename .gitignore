@@ -42,6 +42,7 @@ app/test.db
 app/test.db-journal
 /report/
 behat.yml
+app/dbtest.backup
 
 
 
