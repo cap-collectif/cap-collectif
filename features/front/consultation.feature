@@ -20,9 +20,24 @@ Feature: Consultation
     And I visited "consultations page"
     And I select "Transport" from "capco_app_search_consultation_theme"
     And I wait 2 seconds
-    Then I should see "Stratégie technologique de l'Etat et services publics"
+    Then I should see 2 ".thumbnail--custom" elements
+    And I should see "Stratégie technologique de l'Etat et services publics"
     And I should see "Consultation vide"
     And I should not see "Croissance, innovation, disruption"
+
+  @javascript
+  Scenario: Consultation can be filtered by theme and sorted by contributions number at the same time
+    Given feature "themes" is enabled
+    And I visited "consultations page"
+    And I select "Transport" from "capco_app_search_consultation_theme"
+    And I wait 2 seconds
+    And I select "Nombre de contributions" from "capco_app_search_consultation_sort"
+    And I wait 2 seconds
+    Then I should see 2 ".thumbnail--custom" elements
+    And I should see "Stratégie technologique de l'Etat et services publics"
+    And I should see "Consultation vide"
+    And I should not see "Croissance, innovation, disruption"
+    And "Croissance, innovation, disruption" should be before "Consultation vide" for selector ".thumbnail--custom .figcaption h2 a "
 
   @javascript
   Scenario: Consultation can be filtered by title
@@ -31,7 +46,8 @@ Feature: Consultation
       | capco_app_search_consultation_term | innovation |
     And I click the ".filter__search .btn" element
     And I wait 2 seconds
-    Then I should see "Croissance, innovation, disruption"
+    Then I should see 1 ".thumbnail--custom" elements
+    And I should see "Croissance, innovation, disruption"
     And I should not see "Stratégie technologique de l'Etat et services publics"
     And I should not see "Consultation vide"
 

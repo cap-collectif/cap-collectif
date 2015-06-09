@@ -370,6 +370,8 @@ class ConsultationController extends Controller
             'method' => 'POST',
         ));
 
+        $themesActivated = $this->get('capco.toggle.manager')->isActive('themes');
+
         if ($request->getMethod() == 'POST') {
             $form->handleRequest($request);
 
@@ -378,14 +380,14 @@ class ConsultationController extends Controller
                 $data = $form->getData();
 
                 return $this->redirect($this->generateUrl('app_consultation_search_term', array(
-                    'theme' => $data['theme'] ? $data['theme']->getSlug() : Theme::FILTER_ALL,
+                    'theme' => ($themesActivated && $data['theme']) ? $data['theme']->getSlug() : Theme::FILTER_ALL,
                     'sort' => $data['sort'],
                     'term' => $data['term'],
                 )));
             }
         } else {
             $form->setData(array(
-                'theme' => $em->getRepository('CapcoAppBundle:Theme')->findOneBySlug($theme),
+                'theme' => $themesActivated ? $em->getRepository('CapcoAppBundle:Theme')->findOneBySlug($theme) : null,
                 'sort' => $sort,
                 'term' => $term,
             ));

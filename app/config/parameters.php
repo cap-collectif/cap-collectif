@@ -40,6 +40,8 @@ $container->setParameter('redis_prefix',                set_var('redis_prefix', 
 $container->setParameter('shield_login',                set_var('shield_login', 'admin'));
 $container->setParameter('shield_pwd',                  set_var('shield_pwd', 'admin'));
 
+$container->setParameter('base.url',                    set_var('base.url', 'http://127.0.0.1:8000/'));
+
 $container->setParameter('jwt_private_key_path',        set_var('jwt_private_key_path', '%kernel.root_dir%/var/jwt/private.pem'));
 $container->setParameter('jwt_public_key_path',         set_var('jwt_public_key_path', '%kernel.root_dir%/var/jwt/public.pem'));
 $container->setParameter('jwt_key_pass_phrase',         set_var('jwt_key_pass_phrase', 'iamapassphrase'));

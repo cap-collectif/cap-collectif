@@ -103,12 +103,3 @@ Scenario: Can comment an idea
    When I press "capco_app_idea_vote_submit"
    Then I should see "Merci ! Votre vote a bien été pris en compte."
    And I should see "user" in the "#ideaVotesModal" element
-
-  @database
-  Scenario: Logged in user wants to vote
-    Given I am logged in as user
-    And I visited "idea page" with:
-      | slug | ideacommentable |
-    When I press "capco_app_idea_vote_submit"
-    Then I should see "Merci ! Votre vote a bien été pris en compte."
-    And I should see "user" in the "#ideaVotesModal" element
