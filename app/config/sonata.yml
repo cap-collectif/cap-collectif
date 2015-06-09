@@ -208,12 +208,12 @@ sonata_user:
         form:
             type: capco_user_profile
             validation_groups:
-                - Default
+                - profile
         register:
             form:
                 type: capco_user_registration
                 validation_groups:
-                    - Default
+                    - registration
     admin:
         user:
             class: Capco\AdminBundle\Admin\UserAdmin

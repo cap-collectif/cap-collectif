@@ -8,6 +8,10 @@ registration:
   flash:
     user_created: Merci ! Votre compte a bien été créé.
 
+change_password:
+  flash:
+    success: Votre mot de passe a bien été modifié.
+
 resetting:
   flash:
     success: Votre mot de passe a bien été modifié.

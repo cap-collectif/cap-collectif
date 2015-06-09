@@ -3,9 +3,6 @@ resetting:
     email: Adresse électronique
     invalid_email: %email% n'est pas une adresse électronique valide.
   check_email: Si un compte est associé à l'adresse %email%, vous recevrez un e-mail avec un lien pour réinitialiser votre mot de passe.
-change_password:
-  flash:
-    success: Votre mot de passe a bien été modifié.
 
 form:
   no_type: Sélectionnez une valeur

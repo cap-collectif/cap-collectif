@@ -8,6 +8,8 @@ global:
     title: Menu
   form:
     mandatory: Ce champ est obligatoire.
+  helper:
+    typo: Vouliez-vous dire
 
 #Errors
 error:
@@ -594,9 +596,10 @@ user:
       twitter: S'inscrire avec Twitter
     or: OU
     username:
-      username: Nom complet
+      username: Nom complet *
       is_public: Votre nom sera rendu public sur le site.
-    email: Adresse électronique
+    email: Adresse électronique *
+    password: Mot de passe *
     user_type: Vous êtes :
     terms:
       label: "J'ai lu et j'accepte %cgu%."

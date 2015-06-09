@@ -27,7 +27,7 @@
                 {% if comment.isTrashed %}<span class="label label-default" style="position: static">{{ 'comment.trashed.label'|trans({}, 'CapcoAppBundle') }}</span> {% endif %}
                 <span>{{ comment.body | slice(0, 500) | escape | nl2br }}</span>
                 {% if longComment %}
-                    <span class="read-more-target">{{ comment.body| slice(500) | escape | nl2br }}</span>
+                    <span class="read-more-target">{{ comment.body | escape | nl2br | slice(500) }}</span>
                 {% endif %}
             {% endspaceless %}
         </p>
