@@ -5,6 +5,10 @@
   padding: 15px;
   color: $black;
 
+  .media-body {
+    height: 65px;
+  }
+
   &:hover {
     background-color: $light-gray;
   }
@@ -22,6 +26,8 @@
   }
 
   .media-heading {
+    max-height: 43px;
+    overflow: hidden;
     padding-top: 5px;
     margin-bottom: 0;
   }
@@ -31,7 +37,8 @@
   }
 
   .media__content h2 {
-    height: 81px;
+    margin-top: 10px;
+    height: 61px;
     overflow: hidden;
   }
 }
@@ -39,13 +46,15 @@
 // special case: user thumbnail
 
 .media--user-thumbnail {
-  min-height: 80px;
+
   .media-heading {
     padding-top: 0;
-    height: 24px;
+    height: 22px;
     overflow: hidden;
   }
+
   .media-body {
-    word-break: break-all;
+    height: auto;
+    word-break: break-word;
   }
 }
