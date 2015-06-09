@@ -92,9 +92,6 @@ fos_user:
             from_email:
                 address: "%registration_email_address%"
                 sender_name: "%registration_sender_name%"
-    change_password:
-        form:
-            type: capco_user_change_password
 
 services:
     twig.extension.text:

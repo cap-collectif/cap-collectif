@@ -31,7 +31,6 @@ exports.config = {
           'bower_components/bootstrap/assets/javascripts/bootstrap/*.js',
           'bower_components/fancybox/source/jquery.fancybox.pack.js',
           'app/Resources/js/jsapi.js',
-          'bower_components/mailcheck/src/mailcheck.js',
           'app/Resources/js/cookiechoices.js',
           'app/Resources/js/googleCharts.js'
         ],

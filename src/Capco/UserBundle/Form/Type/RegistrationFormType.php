@@ -2,11 +2,9 @@
 
 namespace Capco\UserBundle\Form\Type;
 
+use Capco\AppBundle\Toggle\Manager;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
-
-use Capco\AppBundle\Toggle\Manager;
 use Capco\AppBundle\SiteParameter\Resolver as SiteParameterResolver;
 
 class RegistrationFormType extends AbstractType
@@ -49,11 +47,6 @@ class RegistrationFormType extends AbstractType
                 'translation_domain' => 'FOSUserBundle',
             ));
         }
-    }
-
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
-    {
-        // registration group is set by sonata
     }
 
     public function getParent()
