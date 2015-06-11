@@ -1,0 +1,41 @@
+<?php
+
+namespace Capco\AppBundle\Command;
+
+use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
+use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Output\OutputInterface;
+
+class UpdateSynthesesCommand extends ContainerAwareCommand
+{
+    protected function configure()
+    {
+        $this
+            ->setName('capco:update-syntheses')
+            ->setDescription('Update the syntheses from their source data')
+        ;
+    }
+
+    protected function execute(InputInterface $input, OutputInterface $output)
+    {
+        $container = $this->getApplication()->getKernel()->getContainer();
+
+        $output->writeln('Updating all syntheses from their source data.');
+
+        $syntheses = $container
+            ->get('doctrine.orm.entity_manager')
+            ->getRepository('CapcoAppBundle:Synthesis\Synthesis')
+            ->findAll()
+        ;
+
+        $synthesisHandler = $container->get('capco.synthesis.synthesis_handler');
+
+        foreach ($syntheses as $synthesis) {
+            $output->write('.');
+            $synthesisHandler->createOrUpdateElementsFromSource($synthesis);
+        }
+        $output->writeln('');
+
+        $output->writeln(count($syntheses).' syntheses updated');
+    }
+}
