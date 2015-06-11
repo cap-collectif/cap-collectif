@@ -85,6 +85,21 @@ class HomepageController extends Controller
      * @Cache(expires="+1 minutes", maxage="60", smaxage="60", public="true")
      * @Template("CapcoAppBundle:Homepage:lastIdeas.html.twig")
      */
+    public function popularIdeasAction($max = 4, $offset = 0, $section = null, $alt = null)
+    {
+        $ideas = $this->getDoctrine()->getRepository('CapcoAppBundle:Idea')->getPopular($max, $offset);
+
+        return [
+            'ideas' => $ideas,
+            'section' => $section,
+            'alt' => $alt,
+        ];
+    }
+
+    /**
+     * @Cache(expires="+1 minutes", maxage="60", smaxage="60", public="true")
+     * @Template("CapcoAppBundle:Homepage:lastIdeas.html.twig")
+     */
     public function lastIdeasAction($max = 4, $offset = 0, $section = null, $alt = null)
     {
         $ideas = $this->getDoctrine()->getRepository('CapcoAppBundle:Idea')->getLast($max, $offset);
