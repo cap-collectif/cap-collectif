@@ -2,6 +2,7 @@
 
 namespace spec\Capco\AppBundle\Synthesis\Extractor;
 
+use Capco\AppBundle\Entity\Synthesis\SynthesisDivision;
 use PhpSpec\ObjectBehavior;
 use Doctrine\ORM\EntityManager;
 use Capco\AppBundle\Entity\ConsultationStep;
@@ -148,22 +149,6 @@ class ConsultationStepExtractorSpec extends ObjectBehavior
         $element->getLinkedDataId()->shouldReturn(42);
     }
 
-    function it_can_update_an_element_from_an_opinion(SynthesisElement $element, Opinion $opinion)
-    {
-        $now = new \DateTime();
-
-        $opinion->getTitle()->willReturn('test')->shouldBeCalled();
-        $opinion->getBody()->willReturn('blabla')->shouldBeCalled();
-        $opinion->getUpdatedAt()->willReturn($now)->shouldBeCalled();
-
-        $element->setTitle('test')->shouldBeCalled();
-        $element->setBody('blabla')->shouldBeCalled();
-        $element->setLinkedDataLastUpdate($now)->shouldBeCalled();
-        $element->setArchived(false)->shouldBeCalled();
-
-        $this->updateElementFromOpinion($element, $opinion)->shouldReturnAnInstanceOf('Capco\AppBundle\Entity\Synthesis\SynthesisElement');
-    }
-
     function it_can_create_an_element_from_an_argument(Argument $argument)
     {
         // Can't mock argument because we need to call get_class() method on it
@@ -177,16 +162,44 @@ class ConsultationStepExtractorSpec extends ObjectBehavior
         $element->getLinkedDataId()->shouldReturn(42);
     }
 
+    function it_can_update_an_element_from_an_object(SynthesisElement $element, SynthesisDivision $division, EntityManager $em, Opinion $object)
+    {
+        $date = new \DateTime();
+        $object->getTitle()->willReturn('test')->shouldBeCalled();
+        $object->getBody()->willReturn('blabla')->shouldBeCalled();
+
+        // Element comes from a division
+        $element->getOriginalDivision()->willReturn($division)->shouldBeCalled();
+        $em->remove($element)->shouldBeCalled();
+        $this->beConstructedWith($em);
+        $this->updateElementFromObject($element, $object)->shouldReturnAnInstanceOf('Capco\AppBundle\Entity\Synthesis\SynthesisElement');
+
+        // Element does not come from a division
+        $element->getOriginalDivision()->willReturn(null)->shouldBeCalled();
+        $element->setLinkedDataLastUpdate($date)->shouldBeCalled();
+        $element->setArchived(false)->shouldBeCalled();
+        $element->setDeletedAt(null)->shouldBeCalled();
+        $element->setTitle('test')->shouldBeCalled();
+        $element->setBody('blabla')->shouldBeCalled();
+        $object->getUpdatedAt()->willReturn($date)->shouldBeCalled();
+
+        $this->updateElementFromObject($element, $object)->shouldReturnAnInstanceOf('Capco\AppBundle\Entity\Synthesis\SynthesisElement');
+    }
+
+    function it_can_update_an_element_from_an_opinion(SynthesisElement $element, Opinion $opinion)
+    {
+        $opinion->getTitle()->willReturn('test')->shouldBeCalled();
+        $opinion->getBody()->willReturn('blabla')->shouldBeCalled();
+        $element->setTitle('test')->shouldBeCalled();
+        $element->setBody('blabla')->shouldBeCalled();
+
+        $this->updateElementFromOpinion($element, $opinion)->shouldReturnAnInstanceOf('Capco\AppBundle\Entity\Synthesis\SynthesisElement');
+    }
+
     function it_can_update_an_element_from_an_argument(SynthesisElement $element, Argument $argument)
     {
-        $now = new \DateTime();
-
         $argument->getBody()->willReturn('blabla')->shouldBeCalled();
-        $argument->getUpdatedAt()->willReturn($now)->shouldBeCalled();
-
         $element->setBody('blabla')->shouldBeCalled();
-        $element->setLinkedDataLastUpdate($now)->shouldBeCalled();
-        $element->setArchived(false)->shouldBeCalled();
 
         $this->updateElementFromArgument($element, $argument)->shouldReturnAnInstanceOf('Capco\AppBundle\Entity\Synthesis\SynthesisElement');
     }

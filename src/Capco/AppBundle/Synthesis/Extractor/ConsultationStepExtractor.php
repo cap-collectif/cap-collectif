@@ -34,9 +34,8 @@ class ConsultationStepExtractor
                 if ($this->isElementRelated($element, $opinion)) {
                     $elementFromOpinion = $element;
                     if ($this->elementIsOutdated($elementFromOpinion, $opinion)) {
-                        $elementFromOpinion = $this->updateElementFromOpinion($elementFromOpinion, $opinion);
+                        $elementFromOpinion = $this->updateElementFromObject($elementFromOpinion, $opinion);
                     }
-                    break;
                 }
             }
 
@@ -53,9 +52,8 @@ class ConsultationStepExtractor
                     if ($this->isElementRelated($element, $argument)) {
                         $elementFromArgument = $element;
                         if ($this->elementIsOutdated($elementFromArgument, $argument)) {
-                            $elementFromArgument = $this->updateElementFromArgument($elementFromArgument, $argument);
+                            $elementFromArgument = $this->updateElementFromObject($elementFromArgument, $argument);
                         }
-                        break;
                     }
                 }
                 if (null === $elementFromArgument) {
@@ -90,18 +88,6 @@ class ConsultationStepExtractor
         return $this->updateElementFromOpinion($element, $opinion);
     }
 
-    public function updateElementFromOpinion(SynthesisElement $element, Opinion $opinion)
-    {
-        $element->setTitle($opinion->getTitle());
-        $element->setBody($opinion->getBody());
-
-        // Update last modified and archive status
-        $element->setLinkedDataLastUpdate($opinion->getUpdatedAt());
-        $element->setArchived(false);
-
-        return $element;
-    }
-
     public function createElementFromArgument(Argument $argument)
     {
         $element = new SynthesisElement();
@@ -111,13 +97,38 @@ class ConsultationStepExtractor
         return $this->updateElementFromArgument($element, $argument);
     }
 
+    public function updateElementFromObject(SynthesisElement $element, $object)
+    {
+        // From now, when source is updated we delete all linked elements that come from a division
+        if ($element->getOriginalDivision()) {
+            $this->em->remove($element);
+            return $element;
+        }
+
+        // Update last modified, archive status and deletion date
+        $element->setLinkedDataLastUpdate($object->getUpdatedAt());
+        $element->setArchived(false);
+        $element->setDeletedAt(null);
+
+        if ($object instanceof Opinion) {
+            return $this->updateElementFromOpinion($element, $object);
+        }
+        if ($object instanceof Argument) {
+            return $this->updateElementFromArgument($element, $object);
+        }
+    }
+
+    public function updateElementFromOpinion(SynthesisElement $element, Opinion $opinion)
+    {
+        $element->setTitle($opinion->getTitle());
+        $element->setBody($opinion->getBody());
+
+        return $element;
+    }
+
     public function updateElementFromArgument(SynthesisElement $element, Argument $argument)
     {
         $element->setBody($argument->getBody());
-
-        // Update last modified and archive status
-        $element->setLinkedDataLastUpdate($argument->getUpdatedAt());
-        $element->setArchived(false);
 
         return $element;
     }
