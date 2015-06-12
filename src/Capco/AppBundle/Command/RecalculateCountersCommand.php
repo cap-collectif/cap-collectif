@@ -75,6 +75,28 @@ class RecalculateCountersCommand extends ContainerAwareCommand
             (select count(sv.id) from CapcoAppBundle:SourceVote sv INNER JOIN CapcoAppBundle:Source s WITH sv.source = s INNER JOIN CapcoAppBundle:Opinion o WITH s.Opinion = o INNER JOIN CapcoAppBundle:ConsultationStep cs WITH o.step = cs where sv.user = u AND sv.confirmed = 1 AND s.isEnabled = 1 AND o.isEnabled = 1 AND cs.isEnabled = 1 group by sv.user)');
         $query->execute();
 
+        // Votes counters
+
+        $query = $em->createQuery('update CapcoAppBundle:Argument a set a.voteCount =
+            (select count(av.id) from CapcoAppBundle:ArgumentVote av where av.argument = a AND av.confirmed = 1 group by av.argument)');
+        $query->execute();
+
+        $query = $em->createQuery('update CapcoAppBundle:Opinion a set a.voteCountOk =
+            (select count(ov.id) from CapcoAppBundle:OpinionVote ov where ov.opinion = a AND ov.confirmed = 1 AND ov.value = 1 group by ov.opinion)');
+        $query->execute();
+
+        $query = $em->createQuery('update CapcoAppBundle:Opinion a set a.voteCountMitige =
+            (select count(ov.id) from CapcoAppBundle:OpinionVote ov where ov.opinion = a AND ov.confirmed = 1 AND ov.value = 0 group by ov.opinion)');
+        $query->execute();
+
+        $query = $em->createQuery('update CapcoAppBundle:Opinion a set a.voteCountNok =
+            (select count(ov.id) from CapcoAppBundle:OpinionVote ov where ov.opinion = a AND ov.confirmed = 1 AND ov.value = -1 group by ov.opinion)');
+        $query->execute();
+
+        $query = $em->createQuery('update CapcoAppBundle:Source s set s.voteCount =
+            (select count(sv.id) from CapcoAppBundle:SourceVote sv where sv.source = s AND sv.confirmed = 1 group by sv.source)');
+        $query->execute();
+
         // Consultation, Opinions & Arguments counters
 
         $query = $em->createQuery('update CapcoAppBundle:Opinion o set o.argumentsCount =
@@ -108,34 +130,6 @@ class RecalculateCountersCommand extends ContainerAwareCommand
         $query = $em->createQuery('update CapcoAppBundle:ConsultationStep cs set cs.trashedSourceCount =
             (select count(s.id) from CapcoAppBundle:Source s INNER JOIN CapcoAppBundle:Opinion o WITH s.Opinion = o where o.step = cs AND s.isEnabled = 1 AND s.isTrashed = 1 GROUP BY o.step)');
         $query->execute();
-
-        // Votes counters
-
-        $query = $em->createQuery('update CapcoAppBundle:Argument a set a.voteCount =
-            (select count(av.id) from CapcoAppBundle:ArgumentVote av where av.argument = a AND av.confirmed = 1 group by av.argument)');
-        $query->execute();
-
-        $query = $em->createQuery('update CapcoAppBundle:Opinion a set a.voteCountOk =
-            (select count(ov.id) from CapcoAppBundle:OpinionVote ov where ov.opinion = a AND ov.confirmed = 1 AND ov.value = 1 group by ov.opinion)');
-        $query->execute();
-
-        $query = $em->createQuery('update CapcoAppBundle:Opinion a set a.voteCountMitige =
-            (select count(ov.id) from CapcoAppBundle:OpinionVote ov where ov.opinion = a AND ov.confirmed = 1 AND ov.value = 0 group by ov.opinion)');
-        $query->execute();
-
-        $query = $em->createQuery('update CapcoAppBundle:Opinion a set a.voteCountNok =
-            (select count(ov.id) from CapcoAppBundle:OpinionVote ov where ov.opinion = a AND ov.confirmed = 1 AND ov.value = -1 group by ov.opinion)');
-        $query->execute();
-
-        $query = $em->createQuery('update CapcoAppBundle:Source s set s.voteCount =
-            (select count(sv.id) from CapcoAppBundle:SourceVote sv where sv.source = s AND sv.confirmed = 1 group by sv.source)');
-        $query->execute();
-
-        $query = $em->createQuery('update CapcoAppBundle:Idea i set i.voteCount =
-            (select count(iv.id) from CapcoAppBundle:IdeaVote iv where iv.idea = i AND iv.confirmed = 1 group by iv.idea)');
-        $query->execute();
-
-        // Comments counters
 
         $query = $em->createQuery('update CapcoAppBundle:Idea i set i.commentsCount =
             (select count(ic.id) from CapcoAppBundle:IdeaComment ic where ic.Idea = i AND ic.isEnabled = 1 AND ic.isTrashed = 0 GROUP BY ic.Idea)');

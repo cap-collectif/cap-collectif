@@ -11,27 +11,12 @@
   max-height: 0;
   font-size: 0;
   transition: .25s ease;
-
-  br {
-    display: none;
-  }
 }
 
-.read-more-state:checked ~ .read-more-wrap {
-
-  .read-more-target {
-    opacity: 1;
-    font-size: inherit;
-    height: auto;
-
-    br {
-      display: initial;
-    }
-  }
-
-  .read-more-dots {
-    display: none;
-  }
+.read-more-state:checked ~ .read-more-wrap .read-more-target {
+  opacity: 1;
+  font-size: inherit;
+  max-height: 999em;
 }
 
 .read-more-state ~ .read-more-trigger:before {

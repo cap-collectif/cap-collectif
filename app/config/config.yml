@@ -238,6 +238,7 @@ fos_rest:
             - { path: ^/api, fallback_format: json }
             - { path: ^/, stop: true }
     body_listener:
+        throw_exception_on_unsupported_content_type: true
         decoders:
             json: fos_rest.decoder.json
     body_converter:
