@@ -94,6 +94,41 @@ class IdeaRepository extends EntityRepository
             ->getSingleScalarResult();
     }
 
+
+    /**
+     * Get popular ideas.
+     *
+     * @param int $limit
+     * @param int $offset
+     *
+     * @return mixed
+     */
+    public function getPopular($limit = 1, $offset = 0)
+    {
+        $qb = $this->getIsEnabledQueryBuilder()
+            ->select('i, a, m, t')
+            ->leftJoin('i.Author', 'a')
+            ->leftJoin('a.Media', 'm')
+            ->leftJoin('i.Theme', 't')
+            ->andWhere('i.isTrashed = :notTrashed')
+            ->setParameter('notTrashed', false)
+            ->addOrderBy('i.voteCount', 'DESC')
+            ->addGroupBy('i.id');
+
+        if ($limit) {
+            $qb->setMaxResults($limit);
+        }
+
+        if ($offset) {
+            $qb->setFirstResult($offset);
+        }
+
+        return $qb
+            ->getQuery()
+            ->execute();
+    }
+
+
     /**
      * Get last ideas.
      *
