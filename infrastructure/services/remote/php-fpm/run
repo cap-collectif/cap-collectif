@@ -19,6 +19,8 @@ else
     php app/console cache:warmup --env=prod --no-debug
 fi
 
+php app/console assets:install --symlink
+
 EOF
 
 exec php5-fpm -y /etc/service/php-fpm/fpm.conf -O

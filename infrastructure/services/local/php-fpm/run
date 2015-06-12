@@ -1,11 +1,14 @@
 #!/bin/bash
 
+
 rm -rf app/cache/*
 
 su capco <<'EOF'
 sleep 10
 cd       /var/www
 
+mkdir -p /var/www/app/cache
+mkdir -p /var/www/app/logs
 chown -R capco:capco /var/www/app/cache
 chown -R capco:capco /var/www/app/logs
 chown -R capco:capco /var/www/web/media
@@ -22,6 +25,8 @@ else
     php app/console doctrine:migrations:migrate --env=dev --no-interaction
     php app/console cache:warmup --env=dev --no-debug
 fi
+
+php app/console assets:install --symlink
 
 EOF
 
