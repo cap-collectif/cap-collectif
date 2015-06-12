@@ -6,6 +6,7 @@ use Capco\AppBundle\Entity\Event;
 use Capco\AppBundle\Entity\EventComment;
 use Capco\AppBundle\Entity\Idea;
 use Capco\AppBundle\Entity\IdeaComment;
+use Capco\AppBundle\Entity\AbstractComment;
 use Capco\AppBundle\Repository\EventCommentRepository;
 use Capco\AppBundle\Repository\EventRepository;
 use Capco\AppBundle\Repository\IdeaCommentRepository;
@@ -47,6 +48,41 @@ class CommentResolverSpec extends ObjectBehavior
         $this->getObjectByTypeAndId('Idea', $objectId)->shouldReturn($idea);
         $this->getObjectByTypeAndId('Event', $objectId)->shouldReturn($event);
 
+    }
+
+    function it_can_get_best_index_for_breaking_comment_body(AbstractComment $comment)
+    {
+        $limit = 10;
+
+        // "Usual" case : text with spaces
+        $comment->getBody()
+            ->willReturn("Bonjour! Je suis un texte avec des espaces.")
+            ->shouldBeCalled();
+        $this->getBestBreakIndexForComment($comment, $limit)->shouldReturn(8);
+
+        // Text too short
+        $comment->getBody()
+            ->willReturn("Bonjour !")
+            ->shouldBeCalled();
+        $this->getBestBreakIndexForComment($comment, $limit)->shouldReturn(10);
+
+        // Text with no spaces or line breaks
+        $comment->getBody()
+            ->willReturn("Anticonstitutionnellement!")
+            ->shouldBeCalled();
+        $this->getBestBreakIndexForComment($comment, $limit)->shouldReturn(10);
+
+        // Text with line break after space
+        $comment->getBody()
+            ->willReturn("Je suis\nune partie de texte\n")
+            ->shouldBeCalled();
+        $this->getBestBreakIndexForComment($comment, $limit)->shouldReturn(7);
+
+        // Text with no spaces but line breaks
+        $comment->getBody()
+            ->willReturn("Je\nsuis\nune\npartie\nde\ntexte\n")
+            ->shouldBeCalled();
+        $this->getBestBreakIndexForComment($comment, $limit)->shouldReturn(7);
     }
 
 
