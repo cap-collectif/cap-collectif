@@ -22,6 +22,8 @@
                             {% endif %}
                             {{ highlighted.content.title }}
                         </a>
+                        <p>
+                            {{ ('highlight.' ~ highlighted.type)|trans({}, 'CapcoAppBundle') }}</p>
                         </div>
                     {% endfor %}
                  </div>

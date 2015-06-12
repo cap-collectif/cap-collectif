@@ -881,6 +881,13 @@ dates:
   part_day: Le %date% de %start_time% à %end_time%
   between: Du %start% au %end%
 
+highlight:
+  idea: Idée
+  event: Evénement
+  blog: Article
+  theme: Thème
+  consultation: Consultation
+
 cnil:
   message: Les cookies assurent le bon fonctionnement de nos services. En utilisant ces derniers, vous acceptez l'utilisation des cookies.
   learn: En savoir plus
