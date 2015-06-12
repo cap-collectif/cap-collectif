@@ -101,7 +101,7 @@
                      <h2>
                        {{ 'idea.vote.listing.title'|transchoice(votes|length, {'%count%': votes|length}, 'CapcoAppBundle') }}
                      </h2>
-                    {% include 'CapcoAppBundle:Idea:votes.html.twig' with {'idea': idea, 'limit': limit} only %}
+                    {% include 'CapcoAppBundle:Idea:votes.html.twig' with {'votes': votes, 'limit': limit} only %}
                     {% if votes|length > limit %}
                         <button type="button" class="btn btn-primary btn--outline" data-toggle="modal" data-target="#ideaVotesModal">
                             {{ 'idea.vote.listing.see_all'|trans({}, 'CapcoAppBundle') }}
@@ -196,7 +196,7 @@
                     <h4 class="modal-title">{{ 'idea.vote.listing.title_all'|trans({}, 'CapcoAppBundle') }}</h4>
                 </div>
                 <div class="modal-body">
-                    {% include 'CapcoAppBundle:Idea:votes.html.twig' with {'idea': idea} only %}
+                    {% include 'CapcoAppBundle:Idea:votes.html.twig' with {'votes': votes} only %}
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-primary" data-dismiss="modal">Fermer</button>
