@@ -1,6 +1,7 @@
 {%  set currentUser = app.user %}
 {% set author = comment.Author %}
-{% set longComment = comment.body | length > 500 ? true : false %}
+{% set commentLimit = 500 %}
+{% set longComment = comment.body | length > commentLimit ? true : false %}
 <li class="opinion  opinion--comment {% if classes is defined %}{{ classes }}{% endif %}" id="comment-{{ comment.id }}">
     <div class="opinion__body">
         {% include 'CapcoUserBundle:Avatar:avatar.html.twig' with { 'user': author, 'link_classes': 'pull-left'} only %}
@@ -19,21 +20,23 @@
         {% endif %}
 
         {% if longComment %}
+            {% set breakIndex = capco_comment_best_break_index(comment, commentLimit) %}
             <input type="checkbox" class="read-more-state" id="readmore-comment-{{ comment.id }}" />
-        {% endif %}
-
-        <p class="opinion__text {% if longComment %}read-more-wrap{% endif %}">
-            {% spaceless %}
-                {% if comment.isTrashed %}<span class="label label-default" style="position: static">{{ 'comment.trashed.label'|trans({}, 'CapcoAppBundle') }}</span> {% endif %}
-                <span>{{ comment.body | slice(0, 500) | escape | nl2br }}</span>
-                {% if longComment %}
-                    <span class="read-more-target">{{ comment.body| slice(500) | escape | nl2br }}</span>
-                {% endif %}
-            {% endspaceless %}
-        </p>
-
-        {% if longComment %}
+            <p class="opinion__text read-more-wrap">
+                {% spaceless %}
+                    {% if comment.isTrashed %}<span class="label label-default" style="position: static">{{ 'comment.trashed.label'|trans({}, 'CapcoAppBundle') }}</span> {% endif %}
+                    <span>{{ comment.body | slice(0, breakIndex) | escape | nl2br }}</span><span class="read-more-dots">...</span>
+                    <span class="read-more-target">{{ comment.body| slice(breakIndex) | escape | nl2br }}</span>
+                {% endspaceless %}
+            </p>
             <label for="readmore-comment-{{ comment.id }}" class="read-more-trigger"></label>
+        {% else %}
+            <p class="opinion__text">
+                {% spaceless %}
+                    {% if comment.isTrashed %}<span class="label label-default" style="position: static">{{ 'comment.trashed.label'|trans({}, 'CapcoAppBundle') }}</span> {% endif %}
+                    {{ comment.body | escape | nl2br }}
+                {% endspaceless %}
+            </p>
         {% endif %}
 
         {% if false == comment.canContribute %}

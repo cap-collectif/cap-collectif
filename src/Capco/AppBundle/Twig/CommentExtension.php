@@ -32,6 +32,7 @@ class CommentExtension extends \Twig_Extension
             new \Twig_SimpleFunction('capco_comment_object_url', array($this, 'getRelatedObjectUrl')),
             new \Twig_SimpleFunction('capco_comment_object', array($this, 'getRelatedObject')),
             new \Twig_SimpleFunction('capco_comment_object_admin_url', array($this, 'getRelatedObjectAdminUrl')),
+            new \Twig_SimpleFunction('capco_comment_best_break_index', array($this, 'getBestBreakIndexForComment')),
         );
     }
 
@@ -58,5 +59,10 @@ class CommentExtension extends \Twig_Extension
     public function canAddCommentOnObject($object)
     {
         return $this->resolver->canAddCommentOn($object);
+    }
+
+    public function getBestBreakIndexForComment(Comment $comment, $limit = 500)
+    {
+        return $this->resolver->getBestBreakIndexForComment($comment, $limit);
     }
 }
