@@ -292,11 +292,12 @@ class IdeaController extends Controller
         $translator = $this->get('translator');
 
         $idea = $em->getRepository('CapcoAppBundle:Idea')->getOneJoinUserReports($slug, $this->getUser());
-        $votes = $em->getRepository('CapcoAppBundle:IdeaVote')->findAllByIdea($idea);
 
-        if (false == $idea->canDisplay()) {
+        if (!$idea || false === $idea->canDisplay()) {
             throw $this->createNotFoundException($translator->trans('idea.error.not_found', array(), 'CapcoAppBundle'));
         }
+
+        $votes = $em->getRepository('CapcoAppBundle:IdeaVote')->findAllByIdea($idea);
 
         $ideaHelper = $this->get('capco.idea.helper');
 
