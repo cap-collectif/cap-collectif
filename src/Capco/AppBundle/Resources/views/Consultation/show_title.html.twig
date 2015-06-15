@@ -111,8 +111,6 @@
             'title': consultation.title
         }) }}
 
-        {% if consultation.exportable %}
-            {% include 'CapcoAppBundle:Consultation:download_button.html.twig' with {'consultation': consultation} only %}
-        {% endif %}
+        {% include 'CapcoAppBundle:Consultation:download_button.html.twig' with {'consultation': consultation} only %}
     </div>
 </div>

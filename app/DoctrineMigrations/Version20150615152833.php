@@ -8,7 +8,7 @@ use Doctrine\DBAL\Schema\Schema;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-class Version20150615160327 extends AbstractMigration
+class Version20150615152833 extends AbstractMigration
 {
     /**
      * @param Schema $schema
@@ -18,7 +18,7 @@ class Version20150615160327 extends AbstractMigration
         // this up() migration is auto-generated, please modify it to your needs
         $this->abortIf($this->connection->getDatabasePlatform()->getName() != 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
-        $this->addSql('ALTER TABLE consultation ADD exportable TINYINT(1) NOT NULL');
+        $this->addSql('ALTER TABLE opinion_type ADD help_text VARCHAR(255) DEFAULT NULL');
     }
 
     /**
@@ -29,6 +29,6 @@ class Version20150615160327 extends AbstractMigration
         // this down() migration is auto-generated, please modify it to your needs
         $this->abortIf($this->connection->getDatabasePlatform()->getName() != 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
-        $this->addSql('ALTER TABLE consultation DROP exportable');
+        $this->addSql('ALTER TABLE opinion_type DROP help_text');
     }
 }

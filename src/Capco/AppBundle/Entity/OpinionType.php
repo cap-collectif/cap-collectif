@@ -106,6 +106,13 @@ class OpinionType
      */
     private $isEnabled;
 
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="help_text", type="string", length=255, nullable=true)
+     */
+    private $helpText = null;
+
     public function __construct()
     {
         $this->voteWidgetType = self::VOTE_WIDGET_TYPE_ACCORD;
@@ -336,5 +343,21 @@ class OpinionType
     public function setIsEnabled($isEnabled)
     {
         $this->isEnabled = $isEnabled;
+    }
+
+    /**
+     * @return string
+     */
+    public function getHelpText()
+    {
+        return $this->helpText;
+    }
+
+    /**
+     * @param string $helpText
+     */
+    public function setHelpText($helpText)
+    {
+        $this->helpText = $helpText;
     }
 }

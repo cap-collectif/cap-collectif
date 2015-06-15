@@ -63,6 +63,9 @@
                                 {% form_theme opinionVoteForm 'CapcoAppBundle:Form:opinion_vote.html.twig' %}
                                 {{ form_start(opinionVoteForm, {'attr': {'class': 'vote-form '} }) }}
                                 {{ form_errors(opinionVoteForm) }}
+                                {% if opinion.opinionType.helpText %}
+                                    <p class="excerpt small" style="margin-bottom: 0">{{ opinion.opinionType.helpText }}</p>
+                                {% endif %}
                                 {{ form_widget(opinionVoteForm.value, {'previousType': previousValue, 'typeStyles': opinionVoteStyles}) }}
                                 {{ form_rest(opinionVoteForm) }}
                                 {{ form_end(opinionVoteForm) }}

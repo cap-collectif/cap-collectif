@@ -6,6 +6,7 @@ Capco\AppBundle\Entity\OpinionType:
         voteWidgetType: 3
         color: red
         isEnabled: 0
+        helpText: <text(200)>
     opinionType2:
         title: Les causes
         shortName: Causes
