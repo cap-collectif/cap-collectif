@@ -38,7 +38,6 @@
 
     <div class="container  container--custom">
 
-        {% if is_feature_enabled('consultations_form') and form is defined %}
         <div class="filter  block">
             <div class="row">
                 {{ form_start(form) }}
@@ -74,7 +73,6 @@
 
             </div>
         </div>
-        {% endif %}
 
         <div class="row">
             {% if consultations|length > 0 %}
@@ -88,17 +86,16 @@
             {% endif %}
         </div>
 
-        {% set route, params = 'app_consultation', {} %}
-        {% if is_feature_enabled('consultations_form') and form is defined %}
-            {% set theme = (form.vars.data.theme is null ? 'all' : form.vars.data.theme) %}
+        {% set theme = (form.vars.data.theme is null ? 'all' : form.vars.data.theme) %}
 
-            {% if form.vars.data.sort is not null or theme != 'all' %}
-                {% if form.vars.data.term is not null %}
-                    {% set route, params = 'app_consultation_search_term', {'sort': form.vars.data.sort, 'theme': theme, 'term': form.vars.data.term } %}
-                {% else %}
-                    {% set route, params = 'app_consultation_search', {'sort': form.vars.data.sort, 'theme': theme } %}
-                {% endif %}
+        {% if form.vars.data.sort is not null or theme != 'all' %}
+            {% if form.vars.data.term is not null %}
+                {% set route, params = 'app_consultation_search_term', {'sort': form.vars.data.sort, 'theme': theme, 'term': form.vars.data.term } %}
+            {% else %}
+                {% set route, params = 'app_consultation_search', {'sort': form.vars.data.sort, 'theme': theme } %}
             {% endif %}
+        {% else %}
+            {% set route, params = 'app_consultation', {} %}
         {% endif %}
 
         {% include 'CapcoAppBundle:Block:pagination.html.twig' with {'current': page, 'nb': nbPage, 'route': route, 'params': params} only  %}

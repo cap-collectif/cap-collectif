@@ -297,6 +297,7 @@ admin:
       short_name: Nom court
       vote_widget_type: Type de vote
       color: Couleur
+      help_text: Texte d'aide pour les votes
       opinions: Propositions
       is_enabled: Contribuable
       created_at: Création
@@ -460,7 +461,6 @@ capco:
     shield_mode: Mode bouclier
     user_type: Types de profil utilisateur
     members_list: Liste des membres
-    consultations_form: Tri des consultations
 
 action_enable: Activer
 action_disable: Désactiver

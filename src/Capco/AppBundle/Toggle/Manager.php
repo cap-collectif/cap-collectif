@@ -25,7 +25,6 @@ class Manager
         'shield_mode',
         'user_type',
         'members_list',
-        'consultations_form',
     );
 
     public function __construct(ToggleManager $toggleManager, ContextFactory $contextFactory, $prefix)
