@@ -24,10 +24,12 @@
                 <div class="block  box">
                     <h2 class="h2">{{ 'consultation.show.contributors.title' | trans({}, 'CapcoAppBundle') }}
                         <span class="small excerpt">{{ contributors | length }}</span>
-                        <a class="btn btn-primary pull-right" href="mailto:?body={{ consultation | capco_first_step_link(true) |escape('url') }}" title="{{ 'share_button.share_on.email' | trans({}, 'CapcoAppBundle') }}">
-                            <i class="cap cap-user-add-2"></i>
-                            {{ 'consultation.share_button' | trans({}, 'CapcoAppBundle') }}
-                        </a>
+                        {% if is_feature_enabled('share_buttons') %}
+                            <a class="btn btn-primary pull-right" href="mailto:?body={{ consultation | capco_first_step_link(true) |escape('url') }}" title="{{ 'share_button.share_on.email' | trans({}, 'CapcoAppBundle') }}">
+                                <i class="cap cap-user-add-2"></i>
+                                {{ 'consultation.share_button' | trans({}, 'CapcoAppBundle') }}
+                            </a>
+                        {% endif %}
                     </h2>
                     <div class="row">
                         {% set offset = pagination*page - pagination %}
