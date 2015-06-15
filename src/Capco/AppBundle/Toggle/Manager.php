@@ -26,7 +26,6 @@ class Manager
         'user_type',
         'members_list',
         'consultations_form',
-        'share_buttons',
     );
 
     public function __construct(ToggleManager $toggleManager, ContextFactory $contextFactory, $prefix)
