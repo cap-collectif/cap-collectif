@@ -283,6 +283,10 @@ class OpinionController extends Controller
             throw new AccessDeniedException($this->get('translator')->trans('error.access_restricted', array(), 'CapcoAppBundle'));
         }
 
+        if ($opinion == null) {
+            throw $this->createNotFoundException($this->get('translator')->trans('opinion.error.not_found', array(), 'CapcoAppBundle'));
+        }
+
         if (false == $opinion->canContribute()) {
             throw new AccessDeniedException($this->get('translator')->trans('opinion.error.no_contribute', array(), 'CapcoAppBundle'));
         }
@@ -342,7 +346,7 @@ class OpinionController extends Controller
     {
         $opinion = $this->getDoctrine()->getRepository('CapcoAppBundle:Opinion')->getOneBySlugJoinUserReports($opinionSlug, $this->getUser());
 
-        if ($opinion == null || false == $opinion->canDisplay()) {
+        if (!$opinion || !$opinion->canDisplay()) {
             throw $this->createNotFoundException($this->get('translator')->trans('opinion.error.not_found', array(), 'CapcoAppBundle'));
         }
 
@@ -464,11 +468,11 @@ class OpinionController extends Controller
      */
     private function handleCreateArgumentForm(Opinion $opinion, Argument $argument, Form $form, Request $request)
     {
-        if (false === $this->get('security.authorization_checker')->isGranted('ROLE_USER')) {
+        if (!$this->get('security.authorization_checker')->isGranted('ROLE_USER')) {
             throw new AccessDeniedException($this->get('translator')->trans('error.access_restricted', array(), 'CapcoAppBundle'));
         }
 
-        if (false == $opinion->canContribute()) {
+        if (!$opinion || false == $opinion->canContribute()) {
             throw new AccessDeniedException($this->get('translator')->trans('opinion.error.no_contribute', array(), 'CapcoAppBundle'));
         }
 
