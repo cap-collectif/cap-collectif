@@ -112,10 +112,6 @@ class OpinionTypeAdmin extends Admin
                 'choices' => OpinionType::$colorsType,
                 'translation_domain' => 'CapcoAppBundle',
             ))
-            ->add('helpText', 'textarea', array(
-                'label' => 'admin.fields.opinion_type.help_text',
-                'required' => false,
-            ))
         ;
     }
 
@@ -135,9 +131,6 @@ class OpinionTypeAdmin extends Admin
                 'label' => 'admin.fields.opinion_type.color',
                 'template' => 'CapcoAdminBundle:OpinionType:color_show_field.html.twig',
                 'typesColors' => OpinionType::$colorsType,
-            ))
-            ->add('helpText', null, array(
-                'label' => 'admin.fields.opinion_type.help_text',
             ))
             ->add('isEnabled', null, array(
                 'label' => 'admin.fields.opinion_type.is_enabled',

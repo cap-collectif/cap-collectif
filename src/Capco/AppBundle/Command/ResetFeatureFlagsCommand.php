@@ -41,6 +41,7 @@ class ResetFeatureFlagsCommand extends ContainerAwareCommand
         $toggleManager->activate('login_twitter');
         $toggleManager->activate('user_type');
         $toggleManager->activate('members_list');
+        $toggleManager->activate('consultations_form');
 
         $toggleManager->deactivate('shield_mode');
 

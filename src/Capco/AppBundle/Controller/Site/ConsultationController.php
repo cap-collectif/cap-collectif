@@ -364,15 +364,20 @@ class ConsultationController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $currentUrl = $this->generateUrl('app_consultation');
+        $toggleManager = $this->get('capco.toggle.manager');
+        $themesActivated = $toggleManager->isActive('themes');
+        $formActivated = $toggleManager->isActive('consultations_form');
 
-        $form = $this->createForm(new ConsultationSearchType($this->get('capco.toggle.manager')), null, array(
-            'action' => $currentUrl,
-            'method' => 'POST',
-        ));
+        if ($formActivated) {
+            $form = $this->createForm(new ConsultationSearchType($this->get('capco.toggle.manager')), null, array(
+                'action' => $currentUrl,
+                'method' => 'POST',
+            ));
+        }
 
-        $themesActivated = $this->get('capco.toggle.manager')->isActive('themes');
+        $themesActivated = $toggleManager->isActive('themes');
 
-        if ($request->getMethod() == 'POST') {
+        if ($request->getMethod() == 'POST' && $formActivated ) {
             $form->handleRequest($request);
 
             if ($form->isValid()) {
@@ -386,11 +391,13 @@ class ConsultationController extends Controller
                 )));
             }
         } else {
-            $form->setData(array(
-                'theme' => $themesActivated ? $em->getRepository('CapcoAppBundle:Theme')->findOneBySlug($theme) : null,
-                'sort' => $sort,
-                'term' => $term,
-            ));
+            if ($formActivated) {
+                $form->setData(array(
+                    'theme' => $themesActivated ? $em->getRepository('CapcoAppBundle:Theme')->findOneBySlug($theme) : null,
+                    'sort' => $sort,
+                    'term' => $term,
+                ));
+            }
         }
 
         $pagination = $this->get('capco.site_parameter.resolver')->getValue('consultations.pagination');
@@ -403,12 +410,17 @@ class ConsultationController extends Controller
             $nbPage = ceil(count($consultations) / $pagination);
         }
 
-        return [
+        $parameters = [
             'consultations' => $consultations,
             'statuses' => Consultation::$openingStatuses,
             'page' => $page,
             'nbPage' => $nbPage,
-            'form' => $form->createView(),
         ];
+
+        if ($formActivated) {
+            $parameters['form'] = $form->createView();
+        }
+
+        return $parameters;
     }
 }
