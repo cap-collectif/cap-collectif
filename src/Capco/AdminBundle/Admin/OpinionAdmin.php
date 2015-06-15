@@ -126,6 +126,7 @@ class OpinionAdmin extends Admin
             ))
             ->add('step', null, array(
                 'label' => 'admin.fields.opinion.step',
+                'required' => true,
             ))
             ->add('OpinionType', 'sonata_type_model', array(
                 'label' => 'admin.fields.opinion.opinion_type',

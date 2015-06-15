@@ -149,6 +149,7 @@ class Opinion
      * @var
      *
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\ConsultationStep", inversedBy="opinions", cascade={"persist"})
+     * @Assert\NotNull()
      */
     private $step;
 
