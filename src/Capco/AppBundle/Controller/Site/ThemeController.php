@@ -13,8 +13,8 @@ use Symfony\Component\HttpFoundation\Request;
 class ThemeController extends Controller
 {
     /**
-     * @Route("/themes/{page}", name="app_theme", requirements={"page" = "\d+"}, defaults={"page" = 1, "_feature_flag" = "themes"} )
-     * @Route("/themes/search/{term}/{page}", name="app_theme_search", requirements={"page" = "\d+"}, defaults={"page" = 1, "_feature_flag" = "themes"} )
+     * @Route("/themes/{page}", name="app_theme", requirements={"page" = "\d+"}, defaults={"page" = 1, "_feature_flags" = "themes"} )
+     * @Route("/themes/search/{term}/{page}", name="app_theme_search", requirements={"page" = "\d+"}, defaults={"page" = 1, "_feature_flags" = "themes"} )
      * @Template("CapcoAppBundle:Theme:index.html.twig")
      *
      * @param $page
@@ -69,7 +69,7 @@ class ThemeController extends Controller
     }
 
     /**
-     * @Route("/themes/{slug}", name="app_theme_show", defaults={"_feature_flag" = "themes"})
+     * @Route("/themes/{slug}", name="app_theme_show", defaults={"_feature_flags" = "themes"})
      * @ParamConverter("theme", class="CapcoAppBundle:Theme", options={"repository_method" = "getOneBySlug"})
      * @Template("CapcoAppBundle:Theme:show.html.twig")
      *

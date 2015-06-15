@@ -8,7 +8,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 
 /**
- * @Route("/register", defaults={"_feature_flag" = "registration"})
+ * @Route("/register", defaults={"_feature_flags" = "registration"})
  */
 class RegistrationController extends BaseController
 {

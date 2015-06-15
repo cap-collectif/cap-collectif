@@ -48,7 +48,11 @@
 
     {% if is_feature_enabled('ideas') %}
         <div class="container  container--custom">
-            <h2 class="h2">{{ 'theme.show.ideas.title'|trans({}, 'CapcoAppBundle') }} <a class="pull-right  btn  btn-primary" href="{{ path('app_idea_create') }}">{{ 'idea.create.button'|trans({}, 'CapcoAppBundle') }}</a></h2>
+            <h2 class="h2">{{ 'theme.show.ideas.title'|trans({}, 'CapcoAppBundle') }}
+                {% if is_feature_enabled('idea_creation') %}
+                    <a class="pull-right  btn  btn-primary" href="{{ path('app_idea_create') }}">{{ 'idea.create.button'|trans({}, 'CapcoAppBundle') }}</a>
+                {% endif %}
+            </h2>
             {{ render(controller('CapcoAppBundle:Site/Theme:lastIdeas', {'theme': theme})) }}
         </div>
     {% endif %}

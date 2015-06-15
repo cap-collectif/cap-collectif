@@ -240,7 +240,7 @@ class ConsultationController extends Controller
     }
 
     /**
-     * @Route("/consultations/{consultationSlug}/events", name="app_consultation_show_events", defaults={"_feature_flag" = "calendar"})
+     * @Route("/consultations/{consultationSlug}/events", name="app_consultation_show_events", defaults={"_feature_flags" = "calendar"})
      * @ParamConverter("consultation", class="CapcoAppBundle:Consultation", options={"mapping": {"consultationSlug": "slug"}})
      * @Template("CapcoAppBundle:Consultation:show_events.html.twig")
      *
@@ -261,7 +261,7 @@ class ConsultationController extends Controller
     }
 
     /**
-     * @Route("/consultations/{consultationSlug}/posts/{page}", name="app_consultation_show_posts", requirements={"page" = "\d+"}, defaults={"_feature_flag" = "blog", "page" = 1} )
+     * @Route("/consultations/{consultationSlug}/posts/{page}", name="app_consultation_show_posts", requirements={"page" = "\d+"}, defaults={"_feature_flags" = "blog", "page" = 1} )
      * @ParamConverter("consultation", class="CapcoAppBundle:Consultation", options={"mapping": {"consultationSlug": "slug"}})
      * @Template("CapcoAppBundle:Consultation:show_posts.html.twig")
      *

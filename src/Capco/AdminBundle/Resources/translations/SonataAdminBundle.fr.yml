@@ -463,6 +463,7 @@ capco:
     members_list: Liste des membres
     consultations_form: Tri des consultations
     share_buttons: Boutons de partage
+    idea_creation: Création d'idées
 
 action_enable: Activer
 action_disable: Désactiver

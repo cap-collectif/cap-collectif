@@ -192,6 +192,7 @@ idea:
     created_at: Date de création
     popularity: Popularité
   none: Il n'y a aucune idée pour le moment. Soyez le premier à %startlink%proposer une idée%endlink%.
+  none_no_create: Il n'y a aucune idée pour le moment.
   error:
     no_contribute: Impossible de contribuer sur cette idée.
     not_author: Impossible de modifier cette idée car vous n'en êtes pas l'auteur.
