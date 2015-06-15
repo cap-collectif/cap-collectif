@@ -17,10 +17,10 @@ use Capco\AppBundle\Form\EventRegistrationType;
 class EventController extends Controller
 {
     /**
-     * @Route("/events", name="app_event", defaults={"_feature_flags" = "calendar"} )
-     * @Route("/events/filter/{theme}", name="app_event_search_theme", defaults={"_feature_flags" = "calendar", "theme" = "all"} )
-     * @Route("/events/filter/{theme}/{consultation}", name="app_event_search_consultation", defaults={"_feature_flags" = "calendar", "theme" = "all", "consultation"="all"} )
-     * @Route("/events/filter/{theme}/{consultation}/{term}", name="app_event_search_term", defaults={"_feature_flags" = "calendar", "theme" = "all", "consultation"="all"} )
+     * @Route("/events", name="app_event", defaults={"_feature_flag" = "calendar"} )
+     * @Route("/events/filter/{theme}", name="app_event_search_theme", defaults={"_feature_flag" = "calendar", "theme" = "all"} )
+     * @Route("/events/filter/{theme}/{consultation}", name="app_event_search_consultation", defaults={"_feature_flag" = "calendar", "theme" = "all", "consultation"="all"} )
+     * @Route("/events/filter/{theme}/{consultation}/{term}", name="app_event_search_term", defaults={"_feature_flag" = "calendar", "theme" = "all", "consultation"="all"} )
      * @Template("CapcoAppBundle:Event:index.html.twig")
      *
      * @param $request
@@ -71,10 +71,10 @@ class EventController extends Controller
     }
 
     /**
-     * @Route("/events/archived", name="app_event_archived", defaults={"_feature_flags" = "calendar"} )
-     * @Route("/events/archived/{theme}", name="app_event_archived_theme", defaults={"_feature_flags" = "calendar", "theme" = "all"} )
-     * @Route("/events/archived/{theme}/{consultation}", name="app_event_archived_consultation", defaults={"_feature_flags" = "calendar", "theme" = "all", "consultation"="all"} )
-     * @Route("/events/archived/{theme}/{consultation}/{term}", name="app_event_archived_term", defaults={"_feature_flags" = "calendar", "theme" = "all", "consultation"="all"} )
+     * @Route("/events/archived", name="app_event_archived", defaults={"_feature_flag" = "calendar"} )
+     * @Route("/events/archived/{theme}", name="app_event_archived_theme", defaults={"_feature_flag" = "calendar", "theme" = "all"} )
+     * @Route("/events/archived/{theme}/{consultation}", name="app_event_archived_consultation", defaults={"_feature_flag" = "calendar", "theme" = "all", "consultation"="all"} )
+     * @Route("/events/archived/{theme}/{consultation}/{term}", name="app_event_archived_term", defaults={"_feature_flag" = "calendar", "theme" = "all", "consultation"="all"} )
      * @Template("CapcoAppBundle:Event:show_archived.html.twig")
      *
      * @param $theme
@@ -123,7 +123,7 @@ class EventController extends Controller
     }
 
     /**
-     * @Route("/events/{slug}", name="app_event_show", defaults={"_feature_flags" = "calendar"})
+     * @Route("/events/{slug}", name="app_event_show", defaults={"_feature_flag" = "calendar"})
      * @ParamConverter("event", options={"mapping": {"slug": "slug"}, "repository_method" = "getOne"})
      * @Template("CapcoAppBundle:Event:show.html.twig")
      *

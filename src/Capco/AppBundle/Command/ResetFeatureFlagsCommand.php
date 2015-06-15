@@ -34,7 +34,6 @@ class ResetFeatureFlagsCommand extends ContainerAwareCommand
         $toggleManager->activate('calendar');
         $toggleManager->activate('newsletter');
         $toggleManager->activate('ideas');
-        $toggleManager->activate('idea_creation');
         $toggleManager->activate('themes');
         $toggleManager->activate('registration');
         $toggleManager->activate('login_facebook');

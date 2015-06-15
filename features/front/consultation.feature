@@ -107,14 +107,3 @@ Feature: Consultation
     Given I visited "home page"
     When I try to download "consultations/croissance-innovation-disruption/consultation/collecte-des-avis/download/xls"
     Then I should see in the header "Content-Type: application/vnd.ms-excel"
-
-  Scenario: Can not have access to download if export is disabled
-    Given I visited "consultation page" with:
-      | consultationSlug   | strategie-technologique-de-l-etat-et-services-publics |
-      | stepSlug           | collecte-des-avis-pour-une-meilleur-strategie         |
-    Then I should not see "Exporter"
-
-  Scenario: Can not download a consultation if export is disabled
-    Given I visited "home page"
-    When I try to download "consultations/strategie-technologique-de-l-etat-et-services-publics/consultation/collecte-des-avis-pour-une-meilleur-strategie/download/xls"
-    Then I should see response status code "404"

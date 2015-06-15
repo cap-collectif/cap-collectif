@@ -223,14 +223,10 @@ class ConsultationController extends Controller
      */
     public function downloadAction($consultation, $step, $format)
     {
-        if (!$consultation || !$consultation->isExportable() || !$step ) {
-            throw $this->createNotFoundException($this->get('translator')->trans('consultation.error.not_found', array(), 'CapcoAppBundle'));
-        }
-
         $resolver = $this->get('capco.consultation.download.resolver');
         $content = $resolver->getContent($step, $format);
 
-        if (!$content) {
+        if (null == $content) {
             throw new NotFoundHttpException('Wrong format');
         }
 
@@ -244,7 +240,7 @@ class ConsultationController extends Controller
     }
 
     /**
-     * @Route("/consultations/{consultationSlug}/events", name="app_consultation_show_events", defaults={"_feature_flags" = "calendar"})
+     * @Route("/consultations/{consultationSlug}/events", name="app_consultation_show_events", defaults={"_feature_flag" = "calendar"})
      * @ParamConverter("consultation", class="CapcoAppBundle:Consultation", options={"mapping": {"consultationSlug": "slug"}})
      * @Template("CapcoAppBundle:Consultation:show_events.html.twig")
      *
@@ -265,7 +261,7 @@ class ConsultationController extends Controller
     }
 
     /**
-     * @Route("/consultations/{consultationSlug}/posts/{page}", name="app_consultation_show_posts", requirements={"page" = "\d+"}, defaults={"_feature_flags" = "blog", "page" = 1} )
+     * @Route("/consultations/{consultationSlug}/posts/{page}", name="app_consultation_show_posts", requirements={"page" = "\d+"}, defaults={"_feature_flag" = "blog", "page" = 1} )
      * @ParamConverter("consultation", class="CapcoAppBundle:Consultation", options={"mapping": {"consultationSlug": "slug"}})
      * @Template("CapcoAppBundle:Consultation:show_posts.html.twig")
      *

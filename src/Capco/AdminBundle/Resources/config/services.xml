@@ -5,15 +5,10 @@
     xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <parameters>
-        <parameter key="capco.type_display_extension.class">Capco\AdminBundle\Twig\TypeDisplayExtension</parameter>
         <parameter key="capco_admin.blog.block.recent_post.class">Capco\AdminBundle\Block\RecentPostBlockService</parameter>
     </parameters>
 
     <services>
-        <service id="capco.twig.type_display" class="%capco.type_display_extension.class%">
-            <argument type="service" id="translator" />
-            <tag name="twig.extension" />
-        </service>
 
         <service id="capco_admin.blog.block.recent_posts" class="%capco_admin.blog.block.recent_post.class%">
             <argument>capco_admin.blog.block.recent_posts</argument>

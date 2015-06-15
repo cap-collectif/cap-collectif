@@ -2,7 +2,6 @@
 
 namespace Application\Migrations;
 
-use Capco\AppBundle\Entity\Menu;
 use Doctrine\DBAL\Migrations\AbstractMigration;
 use Doctrine\DBAL\Schema\Schema;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
@@ -35,38 +34,26 @@ class Version20150309171716 extends AbstractMigration implements ContainerAwareI
 
     public function postUp(Schema $schema)
     {
-        $em = $this->container->get('doctrine.orm.entity_manager');
+        $menuId = $this->connection->fetchColumn('SELECT id FROM menu WHERE type = 1');
 
-        $query = $em->createQuery("SELECT m.id FROM Capco\AppBundle\Entity\Menu m WHERE m.type = :type");
-        $query->setParameter('type', Menu::TYPE_HEADER);
-        $menu = $query->getOneOrNullResult();
-
-        if (null != $menu) {
-            $menuId = $menu['id'];
-        } else {
-            $this->connection->insert('menu', array('type' => Menu::TYPE_HEADER));
+        if (!$menuId) {
+            $this->connection->insert('menu', array('type' => 1));
             $menuId = $this->connection->lastInsertId();
         }
 
-        $query = $em->createQuery("SELECT mi.id FROM Capco\AppBundle\Entity\MenuItem mi WHERE mi.link = :link AND mi.isDeletable = :isDeletable");
-        $query->setParameter('link', 'events');
-        $query->setParameter('isDeletable', false);
-        $menuItem = $query->getOneOrNullResult();
+        $menuItemId = $this->connection->fetchColumn('SELECT id FROM menu_item WHERE link = :link AND is_deletable = :deletable', ['link' => 'events', 'deletable' => false]);
 
-        if (null == $menuItem) {
-            $query = $em->createQuery("SELECT mi.id FROM Capco\AppBundle\Entity\MenuItem mi WHERE mi.link = :link AND mi.isDeletable = :isDeletable");
-            $query->setParameter('link', 'event');
-            $query->setParameter('isDeletable', false);
-            $menuItem = $query->getOneOrNullResult();
+        if (!$menuItemId) {
+            $menuItemId = $this->connection->fetchColumn('SELECT id FROM menu_item WHERE link = :link AND is_deletable = :deletable', ['link' => 'event', 'deletable' => false]);
         }
 
-        if (null != $menuItem) {
+        if (null !== $menuItemId) {
 
             $this->connection->update('menu_item', array(
                 'link' => 'events',
                 'associated_features' => 'blog',
                 ), array(
-                    'id' => $menuItem['id'],
+                    'id' => $menuItemId,
                 )
             );
 

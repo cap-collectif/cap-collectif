@@ -72,13 +72,6 @@ class Consultation
     private $isEnabled = true;
 
     /**
-     * @var bool
-     *
-     * @ORM\Column(name="exportable", type="boolean")
-     */
-    private $exportable = false;
-
-    /**
      * @var \DateTime
      *
      * @ORM\Column(name="published_at", type="datetime", nullable=false)
@@ -261,22 +254,6 @@ class Consultation
         $this->isEnabled = $isEnabled;
 
         return $this;
-    }
-
-    /**
-     * @return boolean
-     */
-    public function isExportable()
-    {
-        return $this->exportable;
-    }
-
-    /**
-     * @param boolean $exportable
-     */
-    public function setExportable($exportable)
-    {
-        $this->exportable = $exportable;
     }
 
     /**

@@ -1,5 +1,0 @@
-Capco\AppBundle\Entity\Menu:
-    menu1:
-        type: 1
-    menu2:
-        type: 2

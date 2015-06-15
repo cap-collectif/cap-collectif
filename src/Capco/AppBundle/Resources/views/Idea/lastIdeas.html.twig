@@ -1,9 +1,5 @@
 <div class="container  block">
-    <h2 class="h2">{{ 'idea.title'|trans({}, 'CapcoAppBundle') }}
-        {% if is_feature_enabled('idea_creation') %}
-            <a class="pull-right  btn  btn-primary" href="{{ path('app_idea_create') }}">{{ 'idea.create.button'|trans({}, 'CapcoAppBundle') }}</a>
-        {% endif %}
-    </h2>
+    <h2 class="h2">{{ 'idea.title'|trans({}, 'CapcoAppBundle') }} <a class="pull-right  btn  btn-primary" href="{{ path('app_idea_create') }}">{{ 'idea.create.button'|trans({}, 'CapcoAppBundle') }}</a></h2>
     {% if ideas|length > 0 %}
         <div class="row">
             {% for idea in ideas %}
@@ -12,10 +8,6 @@
         </div>
         <a href="{{ path('app_idea') }}" class="btn  btn-primary  btn--outline">{{ 'idea.see_all'|trans({}, 'CapcoAppBundle') }}</a>
     {% else %}
-        {% if is_feature_enabled('idea_creation') %}
-            <p>{{ 'idea.none'|trans({'%startlink%': '<a href="'~ path('app_idea_create') ~'">', '%endlink%': '</a>'}, 'CapcoAppBundle')|raw }}</p>
-        {% else %}
-            <p>{{ 'idea.none_no_create'|trans({}, 'CapcoAppBundle') }}</p>
-        {% endif %}
+        <p>{{ 'idea.none'|trans({'%startlink%': '<a href="'~ path('app_idea_create') ~'">', '%endlink%': '</a>'}, 'CapcoAppBundle')|raw }}</p>
     {% endif %}
 </div>

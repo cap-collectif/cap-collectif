@@ -5,7 +5,6 @@ namespace Application\Migrations;
 use Doctrine\DBAL\Migrations\AbstractMigration;
 use Doctrine\DBAL\Schema\Schema;
 use Gedmo\Sluggable\Util\Urlizer;
-use Capco\AppBundle\Entity\Menu;
 
 /**
  * Auto-generated Migration: Please modify to your needs!
@@ -36,10 +35,10 @@ class Version20150416174513 extends AbstractMigration
         }
 
         // Add menu item
-        $menuId = $this->connection->fetchColumn('SELECT id FROM menu m WHERE m.type = :type', array('type' => Menu::TYPE_FOOTER));
+        $menuId = $this->connection->fetchColumn('SELECT id FROM menu WHERE type = 2');
 
         if (null == $menuId) {
-            $this->connection->insert('menu', array('type' => Menu::TYPE_FOOTER));
+            $this->connection->insert('menu', array('type' => 2));
             $menuId = $this->connection->lastInsertId();
         }
 
