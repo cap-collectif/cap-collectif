@@ -1,0 +1,35 @@
+Capco\AppBundle\Entity\AbstractComment:
+    exclusion_policy: ALL
+    properties:
+        id:
+            expose: true
+            type: integer
+            groups: [Comments]
+        body:
+            expose: true
+            type: string
+            groups: [Comments]
+        createdAt:
+            expose: true
+            type: DateTime
+            groups: [Comments]
+        voteCount:
+            expose: true
+            type: integer
+            groups: [Comments]
+        Author:
+            expose: true
+            type: Capco\UserBundle\Entity\User
+            serialized_name: author
+            groups: [Comments, UserMedias]
+        authorName:
+            expose: true
+            type: string
+            groups: [Comments]
+        authorEmail:
+            expose: true
+            type: string
+            groups: [Comments]
+    # virtual_properties:
+        # is_reported_by_user:
+
