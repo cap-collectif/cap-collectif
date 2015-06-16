@@ -8,14 +8,10 @@
     {% transchoice arguments with {'%count%': arguments} from 'CapcoAppBundle'  %}
         consultation.show.meta.argumentsCount
     {% endtranschoice %}
-    {#</br>
-    {% transchoice consultation.sourcesCount with {'%count%': consultation.sourcesCount} from 'CapcoAppBundle'  %}
-        consultation.show.sourcesCount
-    {% endtranschoice %}
     </br>
-    {% transchoice consultation.votesCount with {'%count%': consultation.votesCount} from 'CapcoAppBundle'  %}
-        consultation.show.votesCount
-    {% endtranschoice %}#}
+    {% transchoice consultation.totalSourcesCount with {'%count%': consultation.totalSourcesCount} from 'CapcoAppBundle'  %}
+        consultation.show.meta.sourcesCount
+    {% endtranschoice %}
 {% endmacro %}
 
 {% import _self as render %}
@@ -63,9 +59,20 @@
         {% endif %}
 
         <ul class="nav nav-pills consultation__infos">
+            {% set votesCount = consultation.votesCount %}
+            {% if votesCount > 0 %}
+                <li id="votes-counter-pill">
+                    <div class="value">{{ votesCount }}</div>
+                    <div class="excerpt category">
+                        {% transchoice votesCount from 'CapcoAppBundle' %}
+                        consultation.show.meta.votes_count
+                        {% endtranschoice %}
+                    </div>
+                </li>
+            {% endif %}
             {% set contributionsCount = consultation.contributionsCount %}
             {% if contributionsCount > 0 %}
-                <li data-toggle="tooltip" data-placement="top" data-html="true" data-title="{{ render.contributions_popover(consultation) }}">
+                <li id="contributions-counter-pill" data-toggle="tooltip" data-placement="top" data-html="true" data-title="{{ render.contributions_popover(consultation) }}">
                     <div class="value">{{ contributionsCount }}</div>
                     <div class="excerpt category">
                         {% transchoice contributionsCount from 'CapcoAppBundle' %}
@@ -76,7 +83,7 @@
             {% endif %}
             {% set contributorsCount = consultation.participantsCount %}
             {% if contributorsCount > 0 %}
-                <li>
+                <li id="contributors-counter-pill">
                     <a href="{{ path('app_consultation_show_contributors', {'consultationSlug': consultation.slug}) }}">
                         <div class="value">{{ contributorsCount }}</div>
                         <div class="excerpt category">

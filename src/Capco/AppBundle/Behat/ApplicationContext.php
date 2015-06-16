@@ -112,7 +112,15 @@ class ApplicationContext extends UserContext
      */
     public function iClickElement($element)
     {
-        $something = $this->getSession()->getPage()->find('css', $element)->click();
+        $this->getSession()->getPage()->find('css', $element)->click();
+    }
+
+    /**
+     * @When I hover over the :element element
+     */
+    public function iHoverOverTheElement($element)
+    {
+        $this->getSession()->getPage()->find('css', $element)->mouseOver();
     }
 
     /**
