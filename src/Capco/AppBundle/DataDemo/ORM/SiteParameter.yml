@@ -136,7 +136,7 @@ Capco\AppBundle\Entity\SiteParameter:
         title: Adresse postale
         value: |
             Cap Collectif<br>
-            16 bis avenue Parmentier<br>
+            18 avenue Parmentier<br>
             75011 Paris<br>
         position: 620
         type: 1
