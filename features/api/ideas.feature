@@ -8,15 +8,15 @@ Feature: Ideas
     [
       {
         "id": @integer@,
-        "author": {
-          "id": @integer@,
-          "media": {
-            "url": @string@
-          }
-        },
         "body": @string@,
         "created_at": "@string@.isDateTime()"
         "vote_count": @integer@,
+        "author": {
+          "username": @string@,
+          "media": {
+            "url": @string@
+          }
+        }
       },
       @...@
     ]

@@ -8,4 +8,4 @@ Capco\UserBundle\Entity\User:
         Media:
             expose: true
             serialized_name: media
-            groups: [UserMedias]
+            groups: [UsersInfos]

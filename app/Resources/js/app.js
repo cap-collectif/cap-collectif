@@ -1,5 +1,129 @@
 var App = App || {};
 
+var CommentBody = React.createClass({
+
+    render() {
+        <p className="opinion__text">
+            { this.renderTrashedLabel() }
+            { this.props.comment.body }
+        </p>
+    },
+
+    renderTrashedLabel() {
+        if (this.props.comment.isTrashed) {
+            return(
+                <span className="label label-default" style="position: static">
+                    comment.trashed.label
+                </span>
+            );
+        }
+    }
+
+});
+
+var CommentAuthor = React.createClass({
+
+    render() {
+        <p className="h5  opinion__user">
+            { this.renderAuthorName() }
+        </p>
+    },
+
+    renderAuthorName() {
+        if (this.props.comment.author) {
+            return <a href="#">{ this.props.comment.author.username }</a>
+        }
+        return this.props.comment.authorName;
+    }
+
+});
+
+
+var Comment = React.createClass({
+
+    render() {
+        var comment = this.props.comment;
+        return (
+          <li className="opinion  opinion--comment" >
+            <div className="opinion__body">
+                /** avatar **/
+                <div className="opinion__data">
+
+                    <CommentAuthor comment={comment} />
+                    <p className="excerpt  opinion__date">
+                        { comment.created_at }
+                    </p>
+                    <CommentBody comment={comment} />
+                </div>
+            </div>
+          </li>
+        );
+    }
+});
+
+        // {% include 'CapcoUserBundle:Avatar:avatar.html.twig' with { 'user': author, 'link_classes': 'pull-left'} only %}
+        // <div class="opinion__data">
+        //     <p class="h5  opinion__user">
+        //         {% if null != author %}
+        //             <a href="{{ path('capco_user_profile_show_all', {'slug': author.slug}) }}">{{ author.username }}</a>
+        //         {% else %}
+        //             {{ comment.authorName }}
+        //         {% endif %}
+        //     </p>
+        //     <p class="excerpt  opinion__date">{{ comment.createdAt | localizeddate('long', 'short', app.request.locale) }}</p>
+        // </div>
+        // {% if profile is defined %}
+        //     <p>{{ 'comment.linked_object' | trans({}, 'CapcoAppBundle') }} <a href="{{ capco_comment_object_url(comment) }}">{{ capco_comment_object(comment) }}</a></p>
+        // {% endif %}
+
+var CommentList = React.createClass({
+
+    getInitialState() {
+        return {
+            comments: []
+        };
+    },
+
+    componentDidMount(){
+        fetch('http://local.capcollectif.com/api/ideas/' + this.props.idea + '/comments', {
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            }
+        })
+        .then((response) => { return response.json(); })
+        .then((data) => {
+            this.setState({
+                'comments': data
+            });
+        });
+
+    },
+
+    render() {
+        return (
+          <div>
+                <h1>Hello</h1>
+                <div>
+                {
+                    this.state.comments.map((comment) => {
+                        return <Comment key={comment.id} comment={comment} />;
+                    })
+                }
+                </div>
+          </div>
+        );
+    }
+});
+
+if ($('#render-idea-comments').length) {
+    React.render(
+        <CommentList idea={$('#render-idea-comments').data("idea")} />,
+        document.getElementById('render-idea-comments')
+    );
+}
+
+
 App.module = function ($) {
 
     var equalheight = function(container) {

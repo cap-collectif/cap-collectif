@@ -37,7 +37,7 @@ class IdeasController extends FOSRestController
      *
      * @Get("/ideas/{id}/comments")
      * @ParamConverter("idea", options={"mapping": {"id": "id"}})
-     * @View(serializerGroups={"Comments", "UserMedias"})
+     * @View(serializerGroups={"Comments", "UsersInfos"})
      */
     public function getIdeaCommentsAction(Idea $idea)
     {

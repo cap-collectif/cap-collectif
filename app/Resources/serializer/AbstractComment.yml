@@ -30,6 +30,4 @@ Capco\AppBundle\Entity\AbstractComment:
             expose: true
             type: string
             groups: [Comments]
-    # virtual_properties:
-        # is_reported_by_user:
 

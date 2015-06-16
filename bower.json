@@ -22,7 +22,11 @@
     "fancybox": "~2.1.5",
     "ckeditor": "#full/4.4.7",
     "compass-mixins": "~1.0.2",
-    "mailcheck": "~1.1.0"
+    "mailcheck": "~1.1.0",
+    "react": "~0.13.3",
+    "flux": "~2.0.2",
+    "eventEmitter": "~4.2.11",
+    "fetch": "~0.9.0"
   },
   "overrides": {
     "fancybox": {

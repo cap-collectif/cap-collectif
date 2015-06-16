@@ -4,5 +4,5 @@ Capco\MediaBundle\Entity\Media:
         id:
             expose: true
             type: integer
-            groups: [Default, UserMedia]
+            groups: [Default]
 
