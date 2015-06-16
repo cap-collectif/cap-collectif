@@ -78,32 +78,13 @@ class ContributionResolver
         return count($this->getConsultationContributorsOrdered($consultation));
     }
 
+    // Code may looks ugly but in fact it's highly optimized !
     public function countConsultationContributions(Consultation $consultation)
     {
         $count = 0;
         foreach ($consultation->getSteps() as $step) {
             if ($step->getStep()->isConsultationStep()) {
                 $count += $step->getStep()->getContributionsCount();
-            }
-        }
-
-        return $count;
-    }
-
-    public function countConsultationVotes(Consultation $consultation)
-    {
-        $count = 0;
-        foreach ($consultation->getSteps() as $step) {
-            if ($step->getStep()->isConsultationStep()) {
-                foreach ($step->getStep()->getOpinions() as $opinion) {
-                    $count += $opinion->getVoteCountNok() + $opinion->getVoteCountOk() + $opinion->getVoteCountMitige();
-                    foreach ($opinion->getArguments() as $argument) {
-                        $count += $argument->getVoteCount();
-                    }
-                    foreach ($opinion->getSources() as $source) {
-                        $count += $source->getVoteCount();
-                    }
-                }
             }
         }
 

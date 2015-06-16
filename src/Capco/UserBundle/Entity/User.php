@@ -823,7 +823,7 @@ class User extends BaseUser implements EncoderAwareInterface
 
     public function getContributionsCount()
     {
-        return $this->sourcesCount + $this->ideasCount + $this->argumentsCount + $this->opinionsCount + $this->getCommentsCount();
+        return $this->getVotesCount() + $this->sourcesCount + $this->ideasCount + $this->argumentsCount + $this->opinionsCount + $this->getCommentsCount();
     }
 
     public function getVotesCount()

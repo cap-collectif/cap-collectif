@@ -93,29 +93,6 @@ Feature: Consultation
     And I follow "Actualités"
     And I should see 5 ".media--news" elements
 
-  Scenario: Consultation header should display correct number of votes
-    Given I visited "consultation page" with:
-      | consultationSlug | croissance-innovation-disruption |
-      | stepSlug         | collecte-des-avis                |
-    Then I should see "150 votes"
-
-  @javascript
-  Scenario: Consultation header should display correct number of contributions
-    Given I visited "consultation page" with:
-      | consultationSlug | croissance-innovation-disruption |
-      | stepSlug         | collecte-des-avis                |
-    Then I should see "160 contributions"
-    And I hover over the "#contributions-counter-pill" element
-    And I should see "29 propositions"
-    And I should see "101 arguments"
-    And I should see "30 sources"
-
-  Scenario: Consultation header should display correct number of participants
-    Given I visited "consultation page" with:
-      | consultationSlug | croissance-innovation-disruption |
-      | stepSlug         | collecte-des-avis                |
-    Then I should see "20 participants"
-
   Scenario: Can download a consultation in xslx format
     Given I visited "home page"
     When I try to download "consultations/croissance-innovation-disruption/consultation/collecte-des-avis/download/xlsx"

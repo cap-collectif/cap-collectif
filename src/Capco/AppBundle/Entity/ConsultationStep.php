@@ -285,7 +285,7 @@ class ConsultationStep extends AbstractStep
      */
     public function getContributionsCount()
     {
-        return $this->argumentCount + $this->opinionCount + $this->trashedArgumentCount + $this->trashedOpinionCount + $this->sourcesCount + $this->trashedSourceCount;
+        return $this->argumentCount + $this->opinionCount + $this->trashedArgumentCount + $this->trashedOpinionCount;
     }
 
     /**

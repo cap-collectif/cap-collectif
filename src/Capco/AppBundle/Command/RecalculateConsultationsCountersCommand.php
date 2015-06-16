@@ -46,17 +46,6 @@ class RecalculateConsultationsCountersCommand extends ContainerAwareCommand
             $query->execute();
         }
 
-        // Contributions count
-        foreach ($consultations as $c) {
-            $votes = $contributionResolver->countConsultationVotes($c);
-            $query = $em->createQuery('
-              update CapcoAppBundle:Consultation c
-              set c.votesCount = '.$votes.'
-              where c.id = '.$c->getId()
-            );
-            $query->execute();
-        }
-
         $output->writeln('Calculation completed');
     }
 }

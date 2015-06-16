@@ -164,13 +164,6 @@ class Consultation
     private $contributionsCount = 0;
 
     /**
-     * @var int
-     *
-     * @ORM\Column(name="votes_count", type="integer")
-     */
-    private $votesCount = 0;
-
-    /**
      * Constructor.
      */
     public function __construct()
@@ -573,22 +566,6 @@ class Consultation
         $this->contributionsCount = $contributionsCount;
     }
 
-    /**
-     * @return int
-     */
-    public function getVotesCount()
-    {
-        return $this->votesCount;
-    }
-
-    /**
-     * @param int $votesCount
-     */
-    public function setVotesCount($votesCount)
-    {
-        $this->votesCount = $votesCount;
-    }
-
     // ******************** Custom methods ******************************
 
     /**
@@ -631,18 +608,6 @@ class Consultation
         foreach ($this->steps as $step) {
             if ($step->getStep()->isConsultationStep()) {
                 $count += ($step->getStep()->getArgumentCount() + $step->getStep()->getTrashedArgumentCount());
-            }
-        }
-
-        return $count;
-    }
-
-    public function getTotalSourcesCount()
-    {
-        $count = 0;
-        foreach ($this->steps as $step) {
-            if ($step->getStep()->isConsultationStep()) {
-                $count += ($step->getStep()->getSourcesCount() + $step->getStep()->getTrashedSourceCount());
             }
         }
 
