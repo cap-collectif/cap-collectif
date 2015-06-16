@@ -16,6 +16,7 @@ class SourceVote extends AbstractVote
      * @var
      *
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Source", inversedBy="votes", cascade={"persist"})
+     * @ORM\JoinColumn(name="source_id", referencedColumnName="id", onDelete="CASCADE")
      */
     private $source;
 

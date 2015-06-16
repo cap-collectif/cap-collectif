@@ -16,6 +16,7 @@ class ArgumentVote extends AbstractVote
      * @var
      *
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Argument", inversedBy="votes", cascade={"persist"})
+     * @ORM\JoinColumn(name="argument_id", referencedColumnName="id", onDelete="CASCADE")
      */
     private $argument;
 

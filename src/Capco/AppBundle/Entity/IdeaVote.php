@@ -23,6 +23,7 @@ class IdeaVote extends AbstractVote
      * @var
      *
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Idea", inversedBy="votes", cascade={"persist"})
+     * @ORM\JoinColumn(name="idea_id", referencedColumnName="id", onDelete="CASCADE")
      */
     private $idea;
 
@@ -39,8 +40,8 @@ class IdeaVote extends AbstractVote
 
     public function __toString()
     {
-        if ($this->idea && $this->user) {
-            return $this->getUser().' - '.$this->getIdea();
+        if ($this->idea) {
+            return 'Vote on '.$this->idea;
         }
 
         return 'New idea vote';
