@@ -102,6 +102,7 @@ class ConsultationStepExtractor
         // From now, when source is updated we delete all linked elements that come from a division
         if ($element->getOriginalDivision()) {
             $this->em->remove($element);
+
             return $element;
         }
 

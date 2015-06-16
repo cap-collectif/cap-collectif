@@ -271,7 +271,7 @@ class Consultation
     }
 
     /**
-     * @return boolean
+     * @return bool
      */
     public function isExportable()
     {
@@ -279,7 +279,7 @@ class Consultation
     }
 
     /**
-     * @param boolean $exportable
+     * @param bool $exportable
      */
     public function setExportable($exportable)
     {

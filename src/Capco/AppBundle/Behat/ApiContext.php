@@ -325,7 +325,6 @@ class ApiContext extends ApplicationContext
         $opinion = $this->getEntityManager()->getRepository('CapcoAppBundle:Opinion')->find($id);
 
         if (null !== $opinion) {
-
             $values = $data->getRowsHash();
             if (array_key_exists('title', $values)) {
                 $opinion->setTitle($values['title']);
@@ -340,7 +339,7 @@ class ApiContext extends ApplicationContext
     }
 
     /**
-     * I do nothing for x seconds
+     * I do nothing for x seconds.
      *
      * @Given I do nothing for :seconds seconds
      */
@@ -348,5 +347,4 @@ class ApiContext extends ApplicationContext
     {
         sleep($seconds);
     }
-
 }

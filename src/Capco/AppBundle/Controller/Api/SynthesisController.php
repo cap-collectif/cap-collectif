@@ -6,26 +6,20 @@ use Capco\AppBundle\Entity\ConsultationStep;
 use Capco\AppBundle\Entity\Synthesis\Synthesis;
 use Capco\AppBundle\Entity\Synthesis\SynthesisElement;
 use Capco\AppBundle\Entity\Synthesis\SynthesisDivision;
-
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\Validator\ConstraintViolationListInterface;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
-
 use FOS\RestBundle\Controller\FOSRestController;
 use FOS\RestBundle\Controller\Annotations\View;
 use FOS\RestBundle\Controller\Annotations\Get;
 use FOS\RestBundle\Controller\Annotations\Post;
 use FOS\RestBundle\Controller\Annotations\Put;
 use FOS\RestBundle\Util\Codes;
-use FOS\RestBundle\View\View as ResponseView;
-
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 use JMS\Serializer\SerializationContext;
-
 use Capco\AppBundle\Form\Api\SynthesisType as SynthesisForm;
 use Capco\AppBundle\Form\Api\SynthesisElementType as SynthesisElementForm;
 use Capco\AppBundle\Form\Api\SynthesisDivisionType as SynthesisDivisionForm;
@@ -85,6 +79,7 @@ class SynthesisController extends FOSRestController
         $view->setSerializationContext(SerializationContext::create()->setGroups(array('Default', 'SynthesisDetails')));
         $url = $this->generateUrl('get_synthesis', ['id' => $synthesis->getId()], UrlGeneratorInterface::ABSOLUTE_URL);
         $view->setHeader('Location', $url);
+
         return $view;
     }
 
@@ -115,6 +110,7 @@ class SynthesisController extends FOSRestController
         $view->setSerializationContext(SerializationContext::create()->setGroups(array('Default', 'SynthesisDetails')));
         $url = $this->generateUrl('get_synthesis', ['id' => $synthesis->getId()], UrlGeneratorInterface::ABSOLUTE_URL);
         $view->setHeader('Location', $url);
+
         return $view;
     }
 
@@ -139,7 +135,7 @@ class SynthesisController extends FOSRestController
     }
 
     /**
-     * Update a synthesis
+     * Update a synthesis.
      *
      * @ApiDoc(
      *  resource=true,
@@ -309,12 +305,13 @@ class SynthesisController extends FOSRestController
         $form->submit($request->request->all(), false);
 
         if ($form->isValid()) {
-
             $element = $this->get('capco.synthesis.synthesis_element_handler')->updateElementInSynthesis($element, $synthesis);
 
             $url = $this->generateUrl('get_synthesis_element', ['synthesis_id' => $synthesis->getId(), 'element_id' => $element->getId()], UrlGeneratorInterface::ABSOLUTE_URL);
+
             return $this->redirectView($url);
         }
+
         return $form;
     }
 

@@ -3,14 +3,8 @@
 namespace Capco\AppBundle\Synthesis\Handler;
 
 use Capco\AppBundle\Entity\ConsultationStep;
-use Capco\AppBundle\Entity\Argument;
-use Capco\AppBundle\Entity\Opinion;
 use Capco\AppBundle\Entity\Synthesis\Synthesis;
-use Capco\AppBundle\Entity\Synthesis\SynthesisElement;
-use Capco\AppBundle\Entity\Synthesis\SynthesisDivision;
-
 use Capco\AppBundle\Synthesis\Extractor\ConsultationStepExtractor;
-
 use Doctrine\ORM\EntityManager;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
@@ -55,7 +49,6 @@ class SynthesisHandler
         }
 
         return $synthesis;
-
     }
 
     public function getUpdatedSynthesis($id)
@@ -67,7 +60,6 @@ class SynthesisHandler
         $synthesis = $this->createOrUpdateElementsFromSource($synthesis);
 
         return $synthesis;
-
     }
 
     public function createSynthesisFromConsultationStep(Synthesis $synthesis, ConsultationStep $consultationStep)
@@ -80,9 +72,10 @@ class SynthesisHandler
 
     public function createOrUpdateElementsFromSource(Synthesis $synthesis)
     {
-        if ($synthesis->getSourceType() === "consultation_step") {
+        if ($synthesis->getSourceType() === 'consultation_step') {
             return $this->consultationStepExtractor->createOrUpdateElementsFromConsultationStep($synthesis, $synthesis->getConsultationStep());
         }
+
         return $synthesis;
     }
 }

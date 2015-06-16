@@ -49,6 +49,7 @@ class MenuLinkExtension extends \Twig_Extension
         if (count($errorList) == 0) {
             return $url;
         }
+
         return $this->router->generate('capco_app_cms', array('url' => $url));
     }
 }

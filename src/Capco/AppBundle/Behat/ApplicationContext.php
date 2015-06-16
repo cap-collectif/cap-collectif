@@ -14,7 +14,7 @@ class ApplicationContext extends UserContext
     public static function reinitDatabase()
     {
         exec('app/console capco:reinit --force -e test');
-        $exportCommand = "mysqldump --opt -h 127.0.0.1 -u root symfony_test > app/dbtest.backup";
+        $exportCommand = 'mysqldump --opt -h 127.0.0.1 -u root symfony_test > app/dbtest.backup';
         exec($exportCommand);
     }
 
@@ -25,7 +25,7 @@ class ApplicationContext extends UserContext
      */
     public static function databaseContainsFixtures()
     {
-        $importCommand = "mysql -h 127.0.0.1 -u root symfony_test < app/dbtest.backup";
+        $importCommand = 'mysql -h 127.0.0.1 -u root symfony_test < app/dbtest.backup';
         exec($importCommand);
     }
 

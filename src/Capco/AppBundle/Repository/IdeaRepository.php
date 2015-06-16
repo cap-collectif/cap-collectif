@@ -94,7 +94,6 @@ class IdeaRepository extends EntityRepository
             ->getSingleScalarResult();
     }
 
-
     /**
      * Get popular ideas.
      *
@@ -127,7 +126,6 @@ class IdeaRepository extends EntityRepository
             ->getQuery()
             ->execute();
     }
-
 
     /**
      * Get last ideas.

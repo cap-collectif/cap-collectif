@@ -223,7 +223,7 @@ class ConsultationController extends Controller
      */
     public function downloadAction($consultation, $step, $format)
     {
-        if (!$consultation || !$consultation->isExportable() || !$step ) {
+        if (!$consultation || !$consultation->isExportable() || !$step) {
             throw $this->createNotFoundException($this->get('translator')->trans('consultation.error.not_found', array(), 'CapcoAppBundle'));
         }
 
@@ -381,7 +381,7 @@ class ConsultationController extends Controller
 
         $themesActivated = $toggleManager->isActive('themes');
 
-        if ($request->getMethod() == 'POST' && $formActivated ) {
+        if ($request->getMethod() == 'POST' && $formActivated) {
             $form->handleRequest($request);
 
             if ($form->isValid()) {

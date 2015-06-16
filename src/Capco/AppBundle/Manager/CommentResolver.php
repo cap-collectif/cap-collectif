@@ -167,13 +167,14 @@ class CommentResolver
 
         // else we break at closer space
         if (!$bestIndex) {
-            $bestIndex = strrpos($comment->getBody(), " ", -$offset);
+            $bestIndex = strrpos($comment->getBody(), ' ', -$offset);
         }
 
         // If there is no best index is found or it's too far away from limit we break at limit
         if (!$bestIndex || $limit - $bestIndex > $margin) {
             return $limit;
         }
+
         return $bestIndex;
     }
 }
