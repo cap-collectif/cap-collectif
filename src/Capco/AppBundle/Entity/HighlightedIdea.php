@@ -13,7 +13,6 @@ class HighlightedIdea extends HighlightedContent
 {
     /**
      * @ORM\OneToOne(targetEntity="Idea")
-     * @ORM\JoinColumn(name="idea_id", referencedColumnName="id", onDelete="CASCADE")
      */
     private $idea;
 

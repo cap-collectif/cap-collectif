@@ -13,7 +13,6 @@ class HighlightedConsultation extends HighlightedContent
 {
     /**
      * @ORM\OneToOne(targetEntity="Consultation")
-     * @ORM\JoinColumn(name="consultation_id", referencedColumnName="id", onDelete="CASCADE")
      */
     private $consultation;
 

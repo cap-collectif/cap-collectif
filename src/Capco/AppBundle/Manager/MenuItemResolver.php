@@ -24,26 +24,26 @@ class MenuItemResolver
     public function getEnabledMenuItemsWithChildren($menu)
     {
         if (null !== $menu) {
-            $parentsLinks = $this->repository->getParentItems($menu);
-            $childrenLinks = $this->repository->getChildItems($menu);
+            $parents = $this->repository->getParentItems($menu);
+            $children = $this->repository->getChildItems($menu);
             $links = [];
 
-            foreach ($parentsLinks as $value) {
-                $links[$value['id']] = [
-                    'title' => $value['title'],
-                    'link' => $value['link'],
-                    'hasEnabledFeature' => $this->manager->containsEnabledFeature($value['associatedFeatures']),
+            foreach ($parents as $parent) {
+                $links[$parent->getId()] = [
+                    'title' => $parent->getTitle(),
+                    'link' => $parent->getLink(),
+                    'hasEnabledFeature' => $this->manager->containsEnabledFeature($parent->getAssociatedFeatures()),
                     'children' => [],
                 ];
             }
 
-            foreach ($childrenLinks as $value) {
-                if (array_key_exists($value['parent_id'], $links)) {
-                    $links[$value['parent_id']]['children'][] = [
-                        'id' => $value['id'],
-                        'title' => $value['title'],
-                        'link' => $value['link'],
-                        'hasEnabledFeature' => $this->manager->containsEnabledFeature($value['associatedFeatures']),
+            foreach ($children as $child) {
+                if (array_key_exists($child->getParent()->getId(), $links)) {
+                    $links[$child->getParent()->getId()]['children'][] = [
+                        'id' => $child->getId(),
+                        'title' => $child->getTitle(),
+                        'link' => $child->getLink(),
+                        'hasEnabledFeature' => $this->manager->containsEnabledFeature($child->getAssociatedFeatures()),
                     ];
                 }
             }

@@ -2,7 +2,6 @@
 
 namespace Application\Migrations;
 
-use Capco\AppBundle\Entity\MenuItem;
 use Doctrine\DBAL\Migrations\AbstractMigration;
 use Doctrine\DBAL\Schema\Schema;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
@@ -35,14 +34,10 @@ class Version20150212164448 extends AbstractMigration implements ContainerAwareI
 
     public function postUp(Schema $schema)
     {
-        $em = $this->container->get('doctrine.orm.entity_manager');
-        $query = $em->createQuery("SELECT mi.id FROM Capco\AppBundle\Entity\MenuItem mi WHERE mi.link = :link AND mi.isDeletable = :isDeletable");
-        $query->setParameter('link','ideas');
-        $query->setParameter('isDeletable', false);
-        $ideasMI = $query->getOneOrNullResult();
+        $ideasMIId = $this->connection->fetchColumn('SELECT id FROM menu_item WHERE link = :link AND is_deletable = :deletable', ['link' => 'ideas', 'deletable' => false]);
 
-        if (null != $ideasMI) {
-            $this->connection->update('menu_item', array('associated_features' => 'ideas'), array('id' => $ideasMI['id']));
+        if (null !== $ideasMIId) {
+            $this->connection->update('menu_item', array('associated_features' => 'ideas'), array('id' => $ideasMIId));
         }
 
         $toggleManager = $this->container->get('capco.toggle.manager');
@@ -58,14 +53,10 @@ class Version20150212164448 extends AbstractMigration implements ContainerAwareI
 
     public function postDown(Schema $schema)
     {
-        $em = $this->container->get('doctrine.orm.entity_manager');
-        $query = $em->createQuery("SELECT mi.id FROM Capco\AppBundle\Entity\MenuItem mi WHERE mi.link = :link AND mi.isDeletable = :isDeletable");
-        $query->setParameter('link','ideas');
-        $query->setParameter('isDeletable', false);
-        $ideasMI = $query->getOneOrNullResult();
+        $ideasMIId = $this->connection->fetchColumn('SELECT id FROM menu_item WHERE link = :link AND is_deletable = :deletable', ['link' => 'ideas', 'deletable' => false]);
 
-        if (null != $ideasMI) {
-            $this->connection->update('menu_item', array('associated_features' => 'ideas'), array('id' => $ideasMI['id']));
+        if (null !== $ideasMIId) {
+            $this->connection->update('menu_item', array('associated_features' => 'ideas'), array('id' => $ideasMIId));
         }
     }
 

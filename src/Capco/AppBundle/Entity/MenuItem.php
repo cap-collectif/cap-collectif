@@ -13,6 +13,14 @@ use Gedmo\Mapping\Annotation as Gedmo;
  */
 class MenuItem
 {
+    const TYPE_HEADER = 1;
+    const TYPE_FOOTER = 2;
+
+    public static $menuLabels = [
+        self::TYPE_HEADER => 'menu.type.header',
+        self::TYPE_FOOTER => 'menu.type.footer',
+    ];
+
     /**
      * @var int
      *
@@ -91,19 +99,16 @@ class MenuItem
     /**
      * @var \DateTime
      *
-     * @Gedmo\Timestampable(on="change", field={"title", "link", "Page", "position", "parent", "Menu"})
+     * @Gedmo\Timestampable(on="change", field={"title", "link", "Page", "position", "parent", "menu"})
      * @ORM\Column(name="updated_at", type="datetime")
      */
     private $updatedAt;
 
     /**
-     * @var
-     *
-     * @Gedmo\SortableGroup
-     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Menu", inversedBy="MenuItems", cascade={"persist"})
-     * @ORM\JoinColumn(name="menu_id", referencedColumnName="id")
+     * @var int
+     * @ORM\Column(name="menu", type="integer")
      */
-    private $Menu;
+    private $menu;
 
     /**
      * @var
@@ -288,16 +293,15 @@ class MenuItem
      */
     public function getMenu()
     {
-        return $this->Menu;
+        return $this->menu;
     }
 
     /**
-     * @param mixed $Menu
+     * @param $menu
      */
-    public function setMenu($Menu)
+    public function setMenu($menu)
     {
-        $this->Menu = $Menu;
-        $this->Menu->addMenuItem($this);
+        $this->menu = $menu;
     }
 
     /**
@@ -384,9 +388,6 @@ class MenuItem
      */
     public function deleteMenuItem()
     {
-        if ($this->Menu != null) {
-            $this->Menu->removeMenuItem($this);
-        }
         if ($this->Page != null) {
             $this->Page->removeMenuItem($this);
         }

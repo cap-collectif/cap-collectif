@@ -2,19 +2,19 @@
 
 namespace Capco\AdminBundle\Admin;
 
+use Capco\AppBundle\Entity\MenuItem;
 use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Show\ShowMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
-use Capco\AppBundle\Entity\Menu;
 
 class MenuItemAdmin extends Admin
 {
     protected $datagridValues = array(
         '_sort_order' => 'ASC',
-        '_sort_by' => 'Menu',
+        '_sort_by' => 'menu',
     );
 
     public function createQuery($context = 'list')
@@ -48,9 +48,6 @@ class MenuItemAdmin extends Admin
         $datagridMapper
             ->add('title', null, array(
                 'label' => 'admin.fields.menu_item.title',
-            ))
-            ->add('Menu', null, array(
-                'label' => 'admin.fields.menu_item.menu',
             ))
             ->add('isEnabled', null, array(
                 'label' => 'admin.fields.menu_item.is_enabled',
@@ -86,9 +83,10 @@ class MenuItemAdmin extends Admin
             ->addIdentifier('title', null, array(
                 'label' => 'admin.fields.menu_item.title',
             ))
-            ->add('Menu', null, array(
+            ->add('menu', null, array(
                 'label' => 'admin.fields.menu_item.menu',
                 'template' => 'CapcoAdminBundle:MenuItem:menu_list_field.html.twig',
+                'menuLabels' => MenuItem::$menuLabels,
             ))
             ->add('isEnabled', null, array(
                 'editable' => true,
@@ -133,8 +131,10 @@ class MenuItemAdmin extends Admin
                 'label' => 'admin.fields.menu_item.is_enabled',
                 'required' => false,
             ))
-            ->add('Menu', null, array(
+            ->add('menu', 'choice', array(
                 'label' => 'admin.fields.menu_item.menu',
+                'choices' => MenuItem::$menuLabels,
+                'translation_domain' => 'CapcoAppBundle',
                 'required' => true,
             ))
             ->add('position', null, array(
@@ -181,9 +181,10 @@ class MenuItemAdmin extends Admin
             ->add('title', null, array(
                 'label' => 'admin.fields.menu_item.title',
             ))
-            ->add('Menu', null, array(
+            ->add('menu', null, array(
                 'label' => 'admin.fields.menu_item.menu',
                 'template' => 'CapcoAdminBundle:MenuItem:menu_show_field.html.twig',
+                'menuLabels' => MenuItem::$menuLabels,
             ))
             ->add('isEnabled', null, array(
                 'editable' => false,
@@ -243,9 +244,8 @@ class MenuItemAdmin extends Admin
         $query = $this->modelManager
             ->createQuery($this->getClass(), 'p')
             ->where('p.parent IS NULL')
-            ->leftJoin('p.Menu', 'm')
-            ->andWhere('m.type = :header')
-            ->setParameter('header', Menu::TYPE_HEADER)
+            ->andWhere('p.menu = :header')
+            ->setParameter('header', MenuItem::TYPE_HEADER)
             ->andWhere('p.link IS NULL OR p.link = :blankLink')
             ->setParameter('blankLink', '');
 

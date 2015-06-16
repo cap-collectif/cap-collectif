@@ -80,7 +80,7 @@ class Reporting
      * @var
      *
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Opinion", inversedBy="Reports", cascade={"persist"})
-     * @ORM\JoinColumn(name="opinion_id", referencedColumnName="id", onDelete="CASCADE")
+     * @ORM\JoinColumn(name="opinion_id", referencedColumnName="id")
      */
     private $Opinion;
 
@@ -88,7 +88,7 @@ class Reporting
      * @var
      *
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Source", inversedBy="Reports", cascade={"persist"})
-     * @ORM\JoinColumn(name="source_id", referencedColumnName="id", onDelete="CASCADE")
+     * @ORM\JoinColumn(name="source_id", referencedColumnName="id")
      */
     private $Source;
 
@@ -96,7 +96,7 @@ class Reporting
      * @var
      *
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Argument", inversedBy="Reports", cascade={"persist"})
-     * @ORM\JoinColumn(name="argument_id", referencedColumnName="id", onDelete="CASCADE")
+     * @ORM\JoinColumn(name="argument_id", referencedColumnName="id")
      */
     private $Argument;
 
@@ -104,7 +104,7 @@ class Reporting
      * @var
      *
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Idea", inversedBy="Reports", cascade={"persist"})
-     * @ORM\JoinColumn(name="idea_id", referencedColumnName="id", onDelete="CASCADE")
+     * @ORM\JoinColumn(name="idea_id", referencedColumnName="id")
      */
     private $Idea;
 
@@ -112,7 +112,7 @@ class Reporting
      * @var
      *
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\AbstractComment", inversedBy="Reports", cascade={"persist"})
-     * @ORM\JoinColumn(name="comment_id", referencedColumnName="id", onDelete="CASCADE")
+     * @ORM\JoinColumn(name="comment_id", referencedColumnName="id")
      */
     private $Comment;
 

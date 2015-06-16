@@ -13,7 +13,6 @@ class HighlightedTheme extends HighlightedContent
 {
     /**
      * @ORM\OneToOne(targetEntity="Theme")
-     * @ORM\JoinColumn(name="theme_id", referencedColumnName="id", onDelete="CASCADE")
      */
     private $theme;
 

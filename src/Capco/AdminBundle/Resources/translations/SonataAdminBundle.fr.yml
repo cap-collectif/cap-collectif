@@ -260,7 +260,7 @@ admin:
       ip: Adresse ip
     menu_item:
       title: Titre
-      menu: Type de menu
+      menu: Menu
       is_enabled: Publié
       position: Position
       parent: Parent

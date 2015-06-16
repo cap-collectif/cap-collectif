@@ -13,7 +13,6 @@ class HighlightedEvent extends HighlightedContent
 {
     /**
      * @ORM\OneToOne(targetEntity="Event")
-     * @ORM\JoinColumn(name="event_id", referencedColumnName="id", onDelete="CASCADE")
      */
     private $event;
 
