@@ -36,7 +36,7 @@
         </div>
     </div>
 
-    {% set totalCount = user.opinionsCount + user.argumentsCount + user.sourcesCount + user.commentsCount + user.votesCount %}
+    {% set totalCount = user.opinionsCount + user.argumentsCount + user.sourcesCount + user.commentsCount %}
     {% if is_feature_enabled('ideas') %}
         {% set totalCount = totalCount + user.ideasCount %}
     {% endif %}
