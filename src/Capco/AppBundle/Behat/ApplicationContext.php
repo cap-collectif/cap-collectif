@@ -125,11 +125,12 @@ class ApplicationContext extends UserContext
     }
 
     /**
-     * @When I try to download :url
+     * @When I try to download :path
      */
-    public function iTryToDownload($url)
+    public function iTryToDownload($path)
     {
-        $this->headers = get_headers($this->getSession()->getCurrentUrl().$url);
+        $url = $this->getSession()->getCurrentUrl().$path;
+        $this->headers = get_headers($url);
     }
 
     /**
@@ -137,7 +138,7 @@ class ApplicationContext extends UserContext
      */
     public function iShouldSeeResponseStatusCode($statusCode)
     {
-        $responseStatusCode = $this->response->getStatusCode();
+        $responseStatusCode = $this->getSession()->getStatusCode();
         if (!$responseStatusCode == intval($statusCode)) {
             throw new \Exception(sprintf('Did not see response status code %s, but %s.', $statusCode, $responseStatusCode));
         }

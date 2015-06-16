@@ -223,10 +223,14 @@ class ConsultationController extends Controller
      */
     public function downloadAction($consultation, $step, $format)
     {
+        if (!$consultation || !$consultation->isExportable() || !$step ) {
+            throw $this->createNotFoundException($this->get('translator')->trans('consultation.error.not_found', array(), 'CapcoAppBundle'));
+        }
+
         $resolver = $this->get('capco.consultation.download.resolver');
         $content = $resolver->getContent($step, $format);
 
-        if (null == $content) {
+        if (!$content) {
             throw new NotFoundHttpException('Wrong format');
         }
 

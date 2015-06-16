@@ -173,6 +173,7 @@ admin:
       events: Évènements
       posts_count: Articles
       posts: Articles
+      exportable: Autoriser l'export
     consultation_abstractstep:
       steps: Étapes
       position: Position

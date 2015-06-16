@@ -55,6 +55,9 @@ class ConsultationAdmin extends Admin
             ->add('isEnabled', null, array(
                 'label' => 'admin.fields.consultation.is_enabled',
             ))
+            ->add('exportable', null, array(
+                'label' => 'admin.fields.consultation.exportable',
+            ))
             ->add('publishedAt', null, array(
                 'label' => 'admin.fields.consultation.published_at',
             ))
@@ -88,6 +91,10 @@ class ConsultationAdmin extends Admin
             ->add('isEnabled', null, array(
                 'editable' => true,
                 'label' => 'admin.fields.consultation.is_enabled',
+            ))
+            ->add('exportable', null, array(
+                'editable' => true,
+                'label' => 'admin.fields.consultation.exportable',
             ))
             ->add('publishedAt', null, array(
                 'label' => 'admin.fields.consultation.published_at',
@@ -129,6 +136,10 @@ class ConsultationAdmin extends Admin
             ->with('admin.fields.consultation.group_meta')
             ->add('isEnabled', null, array(
                 'label' => 'admin.fields.consultation.is_enabled',
+                'required' => false,
+            ))
+            ->add('exportable', null, array(
+                'label' => 'admin.fields.consultation.exportable',
                 'required' => false,
             ))
             ->add('publishedAt', 'sonata_type_datetime_picker', array(
@@ -198,6 +209,9 @@ class ConsultationAdmin extends Admin
             ))
             ->add('isEnabled', 'boolean', array(
                 'label' => 'admin.fields.consultation.is_enabled',
+            ))
+            ->add('exportable', null, array(
+                'label' => 'admin.fields.consultation.exportable',
             ))
             ->add('publishedAt', null, array(
                 'label' => 'admin.fields.consultation.published_at',
