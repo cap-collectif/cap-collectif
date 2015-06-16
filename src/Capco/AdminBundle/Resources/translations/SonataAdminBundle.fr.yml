@@ -173,6 +173,7 @@ admin:
       events: Évènements
       posts_count: Articles
       posts: Articles
+      exportable: Autoriser l'export
     consultation_abstractstep:
       steps: Étapes
       position: Position
@@ -259,7 +260,7 @@ admin:
       ip: Adresse ip
     menu_item:
       title: Titre
-      menu: Menu
+      menu: Type de menu
       is_enabled: Publié
       position: Position
       parent: Parent
@@ -463,6 +464,7 @@ capco:
     members_list: Liste des membres
     consultations_form: Tri des consultations
     share_buttons: Boutons de partage
+    idea_creation: Création d'idées
 
 action_enable: Activer
 action_disable: Désactiver

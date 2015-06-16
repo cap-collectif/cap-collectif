@@ -72,6 +72,13 @@ class Consultation
     private $isEnabled = true;
 
     /**
+     * @var bool
+     *
+     * @ORM\Column(name="exportable", type="boolean")
+     */
+    private $exportable = false;
+
+    /**
      * @var \DateTime
      *
      * @ORM\Column(name="published_at", type="datetime", nullable=false)
@@ -155,6 +162,13 @@ class Consultation
      * @ORM\Column(name="contributions_count", type="integer")
      */
     private $contributionsCount = 0;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="votes_count", type="integer")
+     */
+    private $votesCount = 0;
 
     /**
      * Constructor.
@@ -254,6 +268,22 @@ class Consultation
         $this->isEnabled = $isEnabled;
 
         return $this;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function isExportable()
+    {
+        return $this->exportable;
+    }
+
+    /**
+     * @param boolean $exportable
+     */
+    public function setExportable($exportable)
+    {
+        $this->exportable = $exportable;
     }
 
     /**
@@ -543,6 +573,22 @@ class Consultation
         $this->contributionsCount = $contributionsCount;
     }
 
+    /**
+     * @return int
+     */
+    public function getVotesCount()
+    {
+        return $this->votesCount;
+    }
+
+    /**
+     * @param int $votesCount
+     */
+    public function setVotesCount($votesCount)
+    {
+        $this->votesCount = $votesCount;
+    }
+
     // ******************** Custom methods ******************************
 
     /**
@@ -585,6 +631,18 @@ class Consultation
         foreach ($this->steps as $step) {
             if ($step->getStep()->isConsultationStep()) {
                 $count += ($step->getStep()->getArgumentCount() + $step->getStep()->getTrashedArgumentCount());
+            }
+        }
+
+        return $count;
+    }
+
+    public function getTotalSourcesCount()
+    {
+        $count = 0;
+        foreach ($this->steps as $step) {
+            if ($step->getStep()->isConsultationStep()) {
+                $count += ($step->getStep()->getSourcesCount() + $step->getStep()->getTrashedSourceCount());
             }
         }
 

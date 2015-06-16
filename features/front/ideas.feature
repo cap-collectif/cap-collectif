@@ -17,8 +17,19 @@ Scenario: Can see ideas in not empty theme
   Then I should not see "Il n'y a aucune idée pour le moment."
   And I should see 2 ".media--macro" elements
 
+Scenario: Can not create an idea from theme when idea creation is disabled
+  Given feature "themes" is enabled
+  And I visited "themes page"
+  When I follow "Immobilier"
+  Then I should not see "Proposer une idée"
+
+Scenario: Can not create an idea from homepage when idea creation is disabled
+  Given I visited "home page"
+  Then I should not see "Proposer une idée"
+
 Scenario: Can create an idea when logged in
   Given feature "themes" is enabled
+  And feature "idea_creation" is enabled
   And I am logged in as user
   And I visited "ideas page"
   When I follow "Proposer une idée"
@@ -30,8 +41,13 @@ Scenario: Can create an idea when logged in
   And I press "Publier"
   Then I should see "Merci ! Votre idée a bien été enregistrée."
 
-Scenario: Can not create an idea when not logged in
+Scenario: Can not create an idea from ideas page when feature idea_creation is disabled
   Given I visited "ideas page"
+  Then I should not see "Proposer une idée"
+
+Scenario: Can not create an idea when not logged in
+  Given feature "idea_creation" is enabled
+  And I visited "ideas page"
   When I follow "Proposer une idée"
   Then I should see "Connexion"
 

@@ -93,6 +93,29 @@ Feature: Consultation
     And I follow "Actualités"
     And I should see 5 ".media--news" elements
 
+  Scenario: Consultation header should display correct number of votes
+    Given I visited "consultation page" with:
+      | consultationSlug | croissance-innovation-disruption |
+      | stepSlug         | collecte-des-avis                |
+    Then I should see "150 votes"
+
+  @javascript
+  Scenario: Consultation header should display correct number of contributions
+    Given I visited "consultation page" with:
+      | consultationSlug | croissance-innovation-disruption |
+      | stepSlug         | collecte-des-avis                |
+    Then I should see "160 contributions"
+    And I hover over the "#contributions-counter-pill" element
+    And I should see "29 propositions"
+    And I should see "101 arguments"
+    And I should see "30 sources"
+
+  Scenario: Consultation header should display correct number of participants
+    Given I visited "consultation page" with:
+      | consultationSlug | croissance-innovation-disruption |
+      | stepSlug         | collecte-des-avis                |
+    Then I should see "20 participants"
+
   Scenario: Can download a consultation in xslx format
     Given I visited "home page"
     When I try to download "consultations/croissance-innovation-disruption/consultation/collecte-des-avis/download/xlsx"
@@ -107,3 +130,14 @@ Feature: Consultation
     Given I visited "home page"
     When I try to download "consultations/croissance-innovation-disruption/consultation/collecte-des-avis/download/xls"
     Then I should see in the header "Content-Type: application/vnd.ms-excel"
+
+  Scenario: Can not have access to download if export is disabled
+    Given I visited "consultation page" with:
+      | consultationSlug   | strategie-technologique-de-l-etat-et-services-publics |
+      | stepSlug           | collecte-des-avis-pour-une-meilleur-strategie         |
+    Then I should not see "Exporter"
+
+  Scenario: Can not download a consultation if export is disabled
+    Given I visited "home page"
+    When I try to download "consultations/strategie-technologique-de-l-etat-et-services-publics/consultation/collecte-des-avis-pour-une-meilleur-strategie/download/xls"
+    Then I should see response status code "404"

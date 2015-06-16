@@ -2,6 +2,7 @@
 
 namespace Application\Migrations;
 
+use Capco\AppBundle\Entity\Menu;
 use Doctrine\DBAL\Migrations\AbstractMigration;
 use Doctrine\DBAL\Schema\Schema;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
@@ -39,10 +40,16 @@ class Version20150408151960 extends AbstractMigration implements ContainerAwareI
     public function postUp(Schema $schema)
     {
 
-        $menuId = $this->connection->fetchColumn('SELECT id FROM menu WHERE type = 2');
+        $em = $this->container->get('doctrine.orm.entity_manager');
 
-        if (!$menuId) {
-            $this->connection->insert('menu', array('type' => 2));
+        $query = $em->createQuery("SELECT m.id FROM Capco\AppBundle\Entity\Menu m WHERE m.type = :type");
+        $query->setParameter('type', Menu::TYPE_FOOTER);
+        $menu = $query->getOneOrNullResult();
+
+        if (null != $menu) {
+            $menuId = $menu['id'];
+        } else {
+            $this->connection->insert('menu', array('type' => Menu::TYPE_FOOTER));
             $menuId = $this->connection->lastInsertId();
         }
 

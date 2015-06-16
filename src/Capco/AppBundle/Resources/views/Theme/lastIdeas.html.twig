@@ -8,5 +8,9 @@
         <a href="{{ path('app_idea_search', {'theme': theme.slug}) }}" class="btn  btn-primary  btn--outline">{{ 'idea.see_all'|trans({}, 'CapcoAppBundle') }}</a>
     {% endif %}
 {% else %}
-    <p>{{ 'idea.none'|trans({'%startlink%': '<a href="'~ path('app_idea_create') ~'">', '%endlink%': '</a>'}, 'CapcoAppBundle')|raw }}</p>
+    {% if is_feature_enabled('idea_creation') %}
+        <p>{{ 'idea.none'|trans({'%startlink%': '<a href="'~ path('app_idea_create') ~'">', '%endlink%': '</a>'}, 'CapcoAppBundle')|raw }}</p>
+    {% else %}
+        <p>{{ 'idea.none_no_create'|trans({}, 'CapcoAppBundle') }}</p>
+    {% endif %}
 {% endif %}

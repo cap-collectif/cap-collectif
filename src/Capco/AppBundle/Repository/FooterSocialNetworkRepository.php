@@ -19,6 +19,6 @@ class FooterSocialNetworkRepository extends EntityRepository
 
         return $qb
             ->getQuery()
-            ->getArrayResult();
+            ->getScalarResult();
     }
 }

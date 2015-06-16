@@ -55,6 +55,8 @@ class Version20150218164337 extends AbstractMigration implements ContainerAwareI
         $toggleManager = $this->container->get('capco.toggle.manager');
         $toggleManager->activate('calendar');
 
+        $em = $this->container->get('doctrine.orm.entity_manager');
+
         $date = new \DateTime();
         $created = $date->format('Y-m-d H:i:s');
         $updated = $created;
@@ -93,8 +95,11 @@ class Version20150218164337 extends AbstractMigration implements ContainerAwareI
         );
 
         foreach ($newParameters as $values) {
-            $paramId = $this->connection->fetchColumn('SELECT id FROM site_parameter WHERE keyname = :keyname', ['keyname' => $values[0]]);
-            if (!$paramId) {
+
+            $query = $em->createQuery("SELECT sp.id FROM Capco\AppBundle\Entity\SiteParameter sp WHERE sp.keyname = :keyname");
+            $query->setParameter('keyname',$values[0]);
+            $param = $query->getOneOrNullResult();
+            if (null == $param) {
                 $this->connection->executeQuery(
                     "INSERT INTO site_parameter (keyname, title, value, position, type, is_enabled, updated_at, created_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?)",
                     $values
@@ -102,9 +107,13 @@ class Version20150218164337 extends AbstractMigration implements ContainerAwareI
             }
         }
 
-        $menuId = $this->connection->fetchColumn('SELECT id FROM menu WHERE type = 1');
+        $query = $em->createQuery("SELECT m.id FROM Capco\AppBundle\Entity\Menu m WHERE m.type = :type");
+        $query->setParameter('type', 1);
+        $menu = $query->getOneOrNullResult();
 
-        if (!$menuId) {
+        if (null != $menu) {
+            $menuId = $menu['id'];
+        } else {
             $this->connection->insert('menu', array('type' => 1));
             $menuId = $this->connection->lastInsertId();
         }
@@ -123,8 +132,11 @@ class Version20150218164337 extends AbstractMigration implements ContainerAwareI
             $updated,
         );
 
-        $menuItemId = $this->connection->fetchColumn('SELECT id FROM menu_item WHERE link = :link AND is_deletable = :deletable', ['link' => $newMenuValues[1], 'deletable' => $newMenuValues[3]]);
-        if (!$menuItemId) {
+        $query = $em->createQuery("SELECT mi.id FROM Capco\AppBundle\Entity\MenuItem mi WHERE mi.link = :link AND mi.isDeletable = :isDeletable");
+        $query->setParameter('link', $newMenuValues[1]);
+        $query->setParameter('isDeletable', $newMenuValues[3]);
+        $menuItem = $query->getOneOrNullResult();
+        if (null == $menuItem) {
             $this->connection->executeQuery("INSERT INTO menu_item (title, link, is_enabled, is_deletable, isFullyModifiable, position, parent_id, menu_id, associated_features, created_at, updated_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", $newMenuValues);
         }
 

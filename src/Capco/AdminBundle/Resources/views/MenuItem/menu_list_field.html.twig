@@ -1,10 +1,5 @@
 {% extends 'SonataAdminBundle:CRUD:base_list_field.html.twig' %}
 
 {% block field %}
-    {%  set labels = field_description.options.menuLabels %}
-    <div>
-        <p>
-            {{ labels[object.menu] | trans({}, 'CapcoAppBundle')  }}
-        </p>
-    </div>
+    {{ object.menu|trans({}, 'CapcoAppBundle') }}
 {% endblock %}

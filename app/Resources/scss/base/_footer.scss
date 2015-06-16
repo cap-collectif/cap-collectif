@@ -77,15 +77,18 @@
   }
 
   .capco-powered {
-    font-size: 13px;
+    margin-bottom: 10px;
+    img {
+      height: 23px;
+      width: auto;
+      margin-right: 5px;
+    }
+    span {
+      font-size: 13px;
+    }
     a {
       color: inherit;
       text-decoration: underline;
-    }
-    .cap {
-      position: relative;
-      right: 2px;
-      top: 5px;
     }
   }
 

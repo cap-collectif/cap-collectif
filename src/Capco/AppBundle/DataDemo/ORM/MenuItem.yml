@@ -8,7 +8,7 @@ Capco\AppBundle\Entity\MenuItem:
     isFullyModifiable: 0
     position: 1
     parent: null
-    menu: 1
+    menu: @menu1
 
   MenuItem2:
     title: Thèmes
@@ -18,7 +18,7 @@ Capco\AppBundle\Entity\MenuItem:
     isFullyModifiable: 0
     position: 2
     parent: null
-    menu: 1
+    menu: @menu1
     associatedFeatures: [themes]
 
   MenuItem3:
@@ -29,7 +29,7 @@ Capco\AppBundle\Entity\MenuItem:
     isFullyModifiable: 0
     position: 3
     parent: null
-    menu: 1
+    menu: @menu1
 
   MenuItem4:
     title: Boîte à idées
@@ -39,7 +39,7 @@ Capco\AppBundle\Entity\MenuItem:
     isFullyModifiable: 0
     position: 4
     parent: null
-    menu: 1
+    menu: @menu1
     associatedFeatures: [ideas]
 
   MenuItem5:
@@ -50,7 +50,7 @@ Capco\AppBundle\Entity\MenuItem:
     isFullyModifiable: 1
     position: 5
     parent: null
-    menu: 1
+    menu: @menu1
 
   MenuItem6:
     title: Contact
@@ -60,7 +60,7 @@ Capco\AppBundle\Entity\MenuItem:
     isFullyModifiable: 0
     position: 1
     parent: @MenuItem5
-    menu: 1
+    menu: @menu1
 
   MenuItem8:
     title: Charte
@@ -68,7 +68,7 @@ Capco\AppBundle\Entity\MenuItem:
     isDeletable: 0
     position: 6
     parent: @MenuItem5
-    menu: 1
+    menu: @menu1
     link: pages/charte
 
   MenuItem10:
@@ -78,7 +78,7 @@ Capco\AppBundle\Entity\MenuItem:
     isDeletable: 1
     position: 8
     parent: null
-    menu: 2
+    menu: @menu2
 
   MenuItem11:
     title: Actualités
@@ -88,7 +88,7 @@ Capco\AppBundle\Entity\MenuItem:
     isFullyModifiable: 0
     position: 2
     parent: null
-    menu: 1
+    menu: @menu1
     associatedFeatures: [blog]
 
   MenuItem12:
@@ -99,7 +99,7 @@ Capco\AppBundle\Entity\MenuItem:
     isFullyModifiable: 0
     position: 3
     parent: null
-    menu: 1
+    menu: @menu1
     associatedFeatures: [calendar]
 
   MenuItem13:
@@ -110,7 +110,7 @@ Capco\AppBundle\Entity\MenuItem:
     isFullyModifiable: 0
     position: 8
     parent: null
-    menu: 2
+    menu: @menu2
 
   MenuItem14:
     title: Liste des inscrits
@@ -120,5 +120,5 @@ Capco\AppBundle\Entity\MenuItem:
     isFullyModifiable: 0
     associatedFeatures: [members_list]
     position: 2
-    menu: 1
+    menu: @menu1
     parent: @MenuItem5

@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
+use Capco\AppBundle\Entity\Menu;
 use Doctrine\ORM\QueryBuilder;
 
 /**
@@ -10,12 +11,12 @@ use Doctrine\ORM\QueryBuilder;
  */
 class MenuItemRepository extends EntityRepository
 {
-    public function getParentItems($menu)
+    public function getParentItems(Menu $menu)
     {
         $qb = $this->createQueryBuilder('i')
-            ->addSelect('page')
+            ->select('i.id, i.title, i.link, i.associatedFeatures')
             ->andWhere('i.parent IS NULL')
-            ->andWhere('i.menu = :menu')
+            ->andWhere('i.Menu = :menu')
             ->setParameter('menu', $menu)
             ->addOrderBy('i.position', 'ASC');
 
@@ -23,16 +24,16 @@ class MenuItemRepository extends EntityRepository
 
         return $qb
             ->getQuery()
-            ->getResult();
+            ->getArrayResult();
     }
 
-    public function getChildItems($menu)
+    public function getChildItems(Menu $menu)
     {
         $qb = $this->createQueryBuilder('i')
-            ->addSelect('parent', 'page')
-            ->leftJoin('i.parent', 'parent')
+            ->select('i.id, i.title, i.link, i.associatedFeatures, p.id as parent_id')
+            ->leftJoin('i.parent', 'p')
             ->andWhere('i.parent IS NOT NULL')
-            ->andWhere('i.menu = :menu')
+            ->andWhere('i.Menu = :menu')
             ->setParameter('menu', $menu)
             ->addOrderBy('i.position', 'ASC');
 
@@ -40,7 +41,7 @@ class MenuItemRepository extends EntityRepository
 
         return $qb
             ->getQuery()
-            ->getResult();
+            ->getArrayResult();
     }
 
     private function whereIsEnabled(QueryBuilder $qb)

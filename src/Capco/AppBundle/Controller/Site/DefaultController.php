@@ -2,8 +2,8 @@
 
 namespace Capco\AppBundle\Controller\Site;
 
-use Capco\AppBundle\Entity\MenuItem;
 use Capco\AppBundle\Form\ContactType;
+use Capco\AppBundle\Entity\Menu;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Cache;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -70,7 +70,12 @@ class DefaultController extends Controller
      */
     public function footerAction($max = 4, $offset = 0)
     {
-        $footerLinks = $this->getDoctrine()->getRepository('CapcoAppBundle:MenuItem')->getParentItems(MenuItem::TYPE_FOOTER);
+        $footerMenu = $this->getDoctrine()->getRepository('CapcoAppBundle:Menu')->findIdForType(Menu::TYPE_FOOTER);
+        $footerLinks = [];
+
+        if (null !== $footerMenu) {
+            $footerLinks = $this->getDoctrine()->getRepository('CapcoAppBundle:MenuItem')->getParentItems($footerMenu);
+        }
 
         $socialNetworks = $this->getDoctrine()->getRepository('CapcoAppBundle:FooterSocialNetwork')->getEnabled();
 
@@ -86,7 +91,9 @@ class DefaultController extends Controller
      */
     public function navigationAction($pathInfo = null)
     {
-        $headerLinks = $this->get('capco.menu_item.resolver')->getEnabledMenuItemsWithChildren(MenuItem::TYPE_HEADER);
+        $headerMenu = $this->getDoctrine()->getRepository('CapcoAppBundle:Menu')->findIdForType(Menu::TYPE_HEADER);
+
+        $headerLinks = $this->get('capco.menu_item.resolver')->getEnabledMenuItemsWithChildren($headerMenu);
 
         return [
             'pathInfo' => $pathInfo,

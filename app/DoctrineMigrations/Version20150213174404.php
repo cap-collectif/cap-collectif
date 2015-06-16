@@ -2,6 +2,8 @@
 
 namespace Application\Migrations;
 
+use Capco\AppBundle\Entity\Menu;
+use Capco\AppBundle\Entity\MenuItem;
 use Doctrine\DBAL\Migrations\AbstractMigration;
 use Doctrine\DBAL\Schema\Schema;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
@@ -37,15 +39,23 @@ class Version20150213174404 extends AbstractMigration implements ContainerAwareI
         $toggleManager = $this->container->get('capco.toggle.manager');
         $toggleManager->activate('themes');
 
-        $themeMIId = $this->connection->fetchColumn('SELECT id FROM menu_item WHERE link = :link AND is_deletable = :deletable', ['link' => 'themes', 'deletable' => false]);
+        $em = $this->container->get('doctrine.orm.entity_manager');
+        $query = $em->createQuery("SELECT mi.id FROM Capco\AppBundle\Entity\MenuItem mi WHERE mi.link = :link AND mi.isDeletable = :isDeletable");
+        $query->setParameter('link','themes');
+        $query->setParameter('isDeletable', false);
+        $themeMI = $query->getOneOrNullResult();
 
-        if (!$themeMIId) {
-            $headerId = $this->connection->fetchColumn('SELECT id FROM menu WHERE type = 1');
+        if (null == $themeMI) {
+            $query = $em->createQuery("SELECT m.id FROM Capco\AppBundle\Entity\Menu m WHERE m.type = :type");
+            $query->setParameter('type',1);
+            $header = $query->getOneOrNullResult();
 
             // If we havn't a header yet, we want to get one
-            if (!$headerId) {
+            if (null === $header) {
                 $this->connection->insert('menu', array('type' => 1));
                 $headerId = $this->connection->lastInsertId();
+            } else {
+                $headerId = $header['id'];
             }
 
             $date = (new \DateTime())->format('Y-m-d H:i:s');
@@ -64,10 +74,15 @@ class Version20150213174404 extends AbstractMigration implements ContainerAwareI
 
     public function postDown(Schema $schema)
     {
-        $themeMIId = $this->connection->fetchColumn('SELECT id FROM menu_item WHERE link = :link AND is_deletable = :deletable', ['link' => 'themes', 'deletable' => false]);
 
-        if (null !== $themeMIId) {
-            $this->connection->update('menu_item', array('associated_features' => 'themes'), array('id' => $themeMIId));
+        $em = $this->container->get('doctrine.orm.entity_manager');
+        $query = $em->createQuery("SELECT mi.id FROM Capco\AppBundle\Entity\MenuItem mi WHERE mi.link = :link AND mi.isDeletable = :isDeletable");
+        $query->setParameter('link','themes');
+        $query->setParameter('isDeletable', false);
+        $themeMI = $query->getOneOrNullResult();
+
+        if (null != $themeMI) {
+            $this->connection->update('menu_item', array('associated_features' => 'themes'), array('id' => $themeMI['id']));
         }
     }
 }

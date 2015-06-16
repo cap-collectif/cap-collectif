@@ -30,6 +30,7 @@ class LoaderDataFixture extends DataFixtureLoader implements OrderedFixtureInter
             __DIR__.'/Media.yml',
             __DIR__.'/UserType.yml',
             __DIR__.'/User.yml',
+            __DIR__.'/Menu.yml',
             __DIR__.'/MenuItem.yml',
             __DIR__.'/SiteParameter.yml',
             __DIR__.'/NewsletterSubscription.yml',

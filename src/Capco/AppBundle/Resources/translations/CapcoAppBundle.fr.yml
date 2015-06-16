@@ -192,6 +192,7 @@ idea:
     created_at: Date de création
     popularity: Popularité
   none: Il n'y a aucune idée pour le moment. Soyez le premier à %startlink%proposer une idée%endlink%.
+  none_no_create: Il n'y a aucune idée pour le moment.
   error:
     no_contribute: Impossible de contribuer sur cette idée.
     not_author: Impossible de modifier cette idée car vous n'en êtes pas l'auteur.
@@ -272,8 +273,8 @@ consultation:
       remaining_days: "]-Inf, 1] jour restant | ]1,Inf[ jours restants"
       total_count: "]-Inf, 1] contribution | ]1,Inf[ contributions"
       contributors_count: "]-Inf, 1] participant | ]1,Inf[ participants"
+      votes_count: "]-Inf, 1] vote | ]1,Inf[ votes"
       argumentsCount: "]-Inf, 1] %count% argument | ]1,Inf[ %count% arguments"
-      votesCount: "]-Inf, 1] %count% vote | ]1,Inf[ %count% votes"
       opinionsCount: "]-Inf, 1] %count% proposition | ]1,Inf[ %count% propositions"
       sourcesCount: "]-Inf, 1] %count% source | ]1,Inf[ %count% sources"
       read_more: Lire la suite
