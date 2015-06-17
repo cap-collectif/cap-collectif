@@ -339,9 +339,16 @@ services:
         class: Capco\AppBundle\Manager\LogManager
         arguments: [@translator, @fos_user.user_manager, @doctrine.orm.entity_manager]
 
-    capco.synthesis.serialization_listener:
+    capco.serialization_listener:
         class: Capco\AppBundle\EventListener\SerializationListener
         arguments: [@capco.synthesis.log_manager, @sonata.media.provider.image]
+        tags:
+            - { name: "jms_serializer.event_subscriber" }
+
+    capco.comment.serialization_listener:
+        class: Capco\AppBundle\EventListener\CommentSerializationListener
+        arguments: [@router, @security.token_storage]
+        scope: request
         tags:
             - { name: "jms_serializer.event_subscriber" }
 

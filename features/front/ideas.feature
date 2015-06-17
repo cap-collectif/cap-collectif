@@ -56,6 +56,7 @@ Scenario: Can not comment an uncommentable idea
   And I follow "ideaNotCommentable"
   Then I should not see "Commenter"
 
+@javascript @database
 Scenario: Can comment an idea
   Given I visited "ideas page"
   And I follow "ideaCommentable"
@@ -73,14 +74,13 @@ Scenario: Can comment an idea
     Given I am logged in as user
     And I visited "idea page" with:
       | slug | ideacommentable |
-    # TPM fix : this work in dev...
-    # When I vote for the first comment
-    # Then The first comment vote counter should be "1"
-    # And I should see "Merci ! Votre vote a bien été pris en compte."
-    # And I should see "Annuler mon vote"
-    # And I vote for the first comment
-    # And I should see "Votre vote a bien été annulé."
-    # And The first comment vote counter should be "0"
+    When I vote for the first comment
+    Then The first comment vote counter should be "1"
+    And I should see "Merci ! Votre vote a bien été pris en compte."
+    And I should see "Annuler mon vote"
+    And I vote for the first comment
+    And I should see "Votre vote a bien été annulé."
+    And The first comment vote counter should be "0"
 
  @database
  Scenario: Anonymous user wants to vote anonymously

@@ -45,7 +45,7 @@
         {% endif  %}
 
 
-        {% if comment.canContribute and currentUser is not null and currentUser == comment.Author and comment.canContribute %}
+        {% if comment.canContribute and currentUser is not null and currentUser == comment.Author %}
             <a href="{{ path('app_comment_edit' ,{'commentId': comment.id } ) }}" class="btn  btn-dark-gray  btn--outline  btn-xs"><i class="cap cap-pencil-1"></i> {{ 'comment.update.button'|trans({}, 'CapcoAppBundle') }}</a>
         {% endif %}
 

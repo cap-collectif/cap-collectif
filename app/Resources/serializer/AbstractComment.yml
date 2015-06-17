@@ -30,4 +30,13 @@ Capco\AppBundle\Entity\AbstractComment:
             expose: true
             type: string
             groups: [Comments]
+        isTrashed:
+            expose: true
+            type: boolean
+            groups: [Comments]
+    virtual_properties:
+        canContribute:
+            serialized_name: can_contribute
+            type: boolean
+            groups: [Comments]
 

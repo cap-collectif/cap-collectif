@@ -11,6 +11,7 @@ use JMS\Serializer\EventDispatcher\ObjectEvent;
 class SerializationListener implements EventSubscriberInterface
 {
     private $logManager;
+    private $imageProvider;
 
     public function __construct(LogManager $logManager, ImageProvider $imageProvider)
     {

@@ -12,15 +12,14 @@ var CommentVoteButton = React.createClass({
         }
 
         return (
-            <form method="POST" style={{display: 'inline-block'}} action="{{ path('app_comment_vote', {'commentId': comment.id } ) }}">
+            <form method="POST" style={{display: 'inline-block'}} action={this.props.comment._links.vote}>
                 { this.renderVoteButton() }
-                <input type="hidden" name="_csrf_token" value="{{ token }}" />
             </form>
         )
     },
 
     renderVoteButton() {
-        if (this.propos.comment.has_user_voted) {
+        if (this.props.comment.has_user_voted) {
             return (
                 <button className="btn  btn-danger  btn-xs">
                     { this.getIntlMessage('comment.vote.delete') }
