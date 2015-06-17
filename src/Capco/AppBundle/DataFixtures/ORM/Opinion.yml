@@ -50,17 +50,29 @@ Capco\AppBundle\Entity\Opinion:
         Author: @user3
         OpinionType: @opinionType4
 
-    opinion{6..50}:
-            step: @cstep1
-            title: Opinion <current()>
-            body: |
-                 <p><text(100)></p>
-                 <p><text(300)></p>
-            isEnabled: <boolean()>
-            isTrashed: <boolean()>
-            pinned: <boolean()>
-            Author: @user<numberBetween(1, 50)>
-            OpinionType: @opinionType<numberBetween(2, 4)>
+    opinion{6..40}:
+        step: @cstep1
+        title: Opinion <current()>
+        body: |
+             <p><text(100)></p>
+             <p><text(300)></p>
+        isEnabled: <boolean()>
+        isTrashed: false
+        pinned: <boolean()>
+        Author: @user<numberBetween(1, 50)>
+        OpinionType: @opinionType<numberBetween(2, 4)>
+
+    opinion{41..50}:
+        step: @cstep1
+        title: Opinion <current()>
+        body: |
+             <p><text(100)></p>
+             <p><text(300)></p>
+        isEnabled: <boolean()>
+        isTrashed: true
+        pinned: <boolean()>
+        Author: @user<numberBetween(1, 50)>
+        OpinionType: @opinionType<numberBetween(2, 4)>
 
     opinion51:
         step: @cstep2

@@ -141,3 +141,18 @@ Feature: Consultation
     Given I visited "home page"
     When I try to download "consultations/strategie-technologique-de-l-etat-et-services-publics/consultation/collecte-des-avis-pour-une-meilleur-strategie/download/xls"
     Then I should see response status code "404"
+
+  Scenario: Can not access trash if feature is disabled
+    Given I visited "consultation page" with:
+      | consultationSlug | croissance-innovation-disruption |
+      | stepSlug         | collecte-des-avis                |
+    Then I should not see "Corbeille"
+
+  Scenario: Consultation trash display correct numbers of elements
+    Given feature "consultation_trash" is enabled
+    And I am logged in as user
+    And I visited "consultation page" with:
+      | consultationSlug | croissance-innovation-disruption |
+      | stepSlug         | collecte-des-avis                |
+    Then I follow "Corbeille"
+    Then I should see 55 ".opinion" elements

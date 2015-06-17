@@ -5,7 +5,6 @@
             {% for opinionType in currentStep.allowedTypes %}
                 <li class="{% if opinionType.slug == opinionTypeCurrent %}active{% endif %} consultation__nav--{{ opinionType.color }}"><a href="{{ path('app_consultation_show_opinions', {'consultationSlug': consultation.slug, 'stepSlug': currentStep.slug,'opinionTypeSlug': opinionType.slug}) }}">{{ opinionType.shortName }}</a></li>
             {% endfor %}
-            <li class="{% if opinionTypeCurrent == 'trashed' %}active{% endif %} consultation__nav--gray"><a href="{{ path('app_consultation_show_trashed', {'consultationSlug': consultation.slug, 'stepSlug': currentStep.slug}) }}">{{ 'consultation.show.trashed.short_name'|trans({}, 'CapcoAppBundle') }}</a></li>
         </ul>
     </div>
 </div>

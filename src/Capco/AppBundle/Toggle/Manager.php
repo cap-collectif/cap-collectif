@@ -28,6 +28,7 @@ class Manager
         'consultations_form',
         'share_buttons',
         'idea_creation',
+        'consultation_trash',
     );
 
     protected static $categories = array(
