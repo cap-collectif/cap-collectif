@@ -485,6 +485,7 @@ capco:
     share_buttons: Boutons de partage
     idea_creation: Création d'idées
     consultation_trash: Corbeille des consultations
+    idea_trash: Corbeille des idées
 
 action_enable: Activer
 action_disable: Désactiver

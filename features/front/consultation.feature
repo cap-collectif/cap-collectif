@@ -143,10 +143,19 @@ Feature: Consultation
     Then I should see response status code "404"
 
   Scenario: Can not access trash if feature is disabled
-    Given I visited "consultation page" with:
+    Given I am logged in as user
+    And I visited "consultation page" with:
       | consultationSlug | croissance-innovation-disruption |
       | stepSlug         | collecte-des-avis                |
     Then I should not see "Corbeille"
+
+  Scenario: Can not access trash if not logged in
+    Given feature "consultation_trash" is enabled
+    And I visited "consultation page" with:
+      | consultationSlug | croissance-innovation-disruption |
+      | stepSlug         | collecte-des-avis                |
+    And I follow "Corbeille"
+    Then I should see "Se connecter"
 
   Scenario: Consultation trash display correct numbers of elements
     Given feature "consultation_trash" is enabled
@@ -154,8 +163,9 @@ Feature: Consultation
     And I visited "consultation page" with:
       | consultationSlug | croissance-innovation-disruption |
       | stepSlug         | collecte-des-avis                |
-    Then I follow "Corbeille"
-    Then I should see 55 ".opinion" elements
+    And I follow "Corbeille"
+    Then I should see 54 ".opinion__list .opinion" elements
+    And I should see "54" in the "span.badge" element
 
   Scenario: I should not see opinion types menu when only one type is allowed
     Given I visited "consultation page" with:
