@@ -63,6 +63,15 @@ class ConsultationController extends Controller
             throw $this->createNotFoundException($this->get('translator')->trans('consultation.error.not_found', array(), 'CapcoAppBundle'));
         }
 
+        // Redirect if there is only one opinion type allowed
+        if (count($currentStep->getAllowedTypes()) == 1) {
+            return $this->redirect($this->generateUrl('app_consultation_show_opinions', [
+                'consultationSlug' => $consultation->getSlug(),
+                'stepSlug' => $currentStep->getSlug(),
+                'opinionTypeSlug' => $currentStep->getAllowedTypes()->first()->getSlug(),
+            ]));
+        }
+
         if ('POST' === $request->getMethod() && $request->request->has('capco_app_opinions_sort')) {
             $data = $request->request->get('capco_app_opinions_sort');
             $sort = $data['opinionsSort'];

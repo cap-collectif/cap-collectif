@@ -156,3 +156,9 @@ Feature: Consultation
       | stepSlug         | collecte-des-avis                |
     Then I follow "Corbeille"
     Then I should see 55 ".opinion" elements
+
+  Scenario: I should not see opinion types menu when only one type is allowed
+    Given I visited "consultation page" with:
+      | consultationSlug | consultation-vide |
+      | stepSlug         | consultation      |
+    Then I should see 0 ".consultation__nav" on current page

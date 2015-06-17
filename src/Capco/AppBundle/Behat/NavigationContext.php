@@ -36,7 +36,7 @@ class NavigationContext extends PageObjectContext
     /**
      * @When I vote for the first source
      */
-    public function iVoteForFirstSource()
+    public function iVoteForTheFirstSource()
     {
         $this->getPage('opinion page')
              ->voteForFirstSource();

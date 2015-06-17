@@ -23,4 +23,4 @@ Capco\AppBundle\Entity\ConsultationStep:
         isEnabled: true
         startAt: <dateTimeBetween('-40 days', 'now')>
         endAt: <dateTimeBetween('now', '+10 days')>
-        allowedTypes: [@opinionType1, @opinionType2, @opinionType3]
+        allowedTypes: [@opinionType2]
