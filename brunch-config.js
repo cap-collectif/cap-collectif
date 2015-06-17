@@ -14,10 +14,6 @@ exports.config = {
     'watched': ['app/Resources'],
     'public': 'web'
   },
-  modules: {
-    definition: false,
-    wrapper: false
-  },
   conventions: {
     'assets': /^app\/Resources\/assets/
   },
@@ -31,16 +27,21 @@ exports.config = {
           'bower_components/bootstrap/assets/javascripts/bootstrap/*.js',
           'bower_components/fancybox/source/jquery.fancybox.pack.js',
           'bower_components/eventEmitter/EventEmitter.js',
-          'bower_components/react/react.js',
+          'bower_components/react/react-with-addons.js',
           'bower_components/flux/dist/Flux.js',
+          'bower_components/moment/moment.js',
+          'bower_components/moment/locale/fr.js',
           'bower_components/fetch/fetch.js',
+          'bower_components/react-intl/dist/react-intl.min.js',
+          'bower_components/react-intl/dist/locale-data/fr.js',
           'app/Resources/js/jsapi.js',
           'bower_components/mailcheck/src/mailcheck.js',
           'app/Resources/js/cookiechoices.js',
           'app/Resources/js/googleCharts.js'
         ],
         'js/app.js': [
-          'app/Resources/js/app.js'
+          'app/Resources/js/app.js',
+          'app/Resources/js/**/**/*.js'
         ],
         'js/ckeditor/ckeditor.js': [
           'bower_components/ckeditor/ckeditor.js'

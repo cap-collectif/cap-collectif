@@ -26,7 +26,8 @@
     "react": "~0.13.3",
     "flux": "~2.0.2",
     "eventEmitter": "~4.2.11",
-    "fetch": "~0.9.0"
+    "fetch": "~0.9.0",
+    "react-intl": "~1.2.0"
   },
   "overrides": {
     "fancybox": {
@@ -40,6 +41,15 @@
     },
     "mailcheck": {
       "scripts": []
+    },
+    "react": {
+      "main": "react-with-addons.js"
+    },
+    "react-intl": {
+      "main": [
+        "dist/react-intl.min.js",
+        "dist/locale-data/fr.js"
+      ]
     }
   }
 }

@@ -28,7 +28,7 @@
 	{{ parent() }}
 	<script type="text/javascript">
 		$(window).on('load', function() {
-			App.module.equalheight('.thumbnail--custom');window.onresize = App.module.resized('.thumbnail--custom');
+			App.equalheight('.thumbnail--custom');window.onresize = App.resized('.thumbnail--custom');
 		});
 	</script>
 {% endblock %}
