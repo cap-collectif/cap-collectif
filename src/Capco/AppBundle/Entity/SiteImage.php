@@ -72,6 +72,13 @@ class SiteImage
     private $position = 0;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="category", type="text")
+     */
+    private $category = 'settings.global';
+
+    /**
      * Constructor.
      */
     public function __construct()
@@ -228,5 +235,21 @@ class SiteImage
     public function setPosition($position)
     {
         $this->position = $position;
+    }
+
+    /**
+     * @return string
+     */
+    public function getCategory()
+    {
+        return $this->category;
+    }
+
+    /**
+     * @param string $category
+     */
+    public function setCategory($category)
+    {
+        $this->category = $category;
     }
 }

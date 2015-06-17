@@ -1,0 +1,18 @@
+{% set pageItems = ['homepage', 'consultations', 'ideas', 'themes', 'blog', 'events', 'contact', 'registration', 'login', 'members', 'footer'] %}
+{% set settingsItems = ['global', 'shield_mode'] %}
+
+{% if group.label == 'admin.group.pages' %}
+    {% for item in pageItems %}
+        {% set category = 'pages.' ~ item %}
+        {% set label = 'admin.label.pages.' ~ item %}
+        <li><a href="{{ path('capco_admin_settings', {'category': category }) }}"><i class="fa fa-angle-double-right"></i> {{ label |trans({}, 'SonataAdminBundle') }}</a></li>
+    {% endfor %}
+{% endif %}
+
+{% if group.label == 'admin.group.parameters' %}
+    {% for item in settingsItems %}
+        {% set category = 'settings.' ~ item %}
+        {% set label = 'admin.label.settings.' ~ item %}
+        <li><a href="{{ path('capco_admin_settings', {'category': 'settings.' ~ item }) }}"><i class="fa fa-angle-double-right"></i> {{ label |trans({}, 'SonataAdminBundle') }}</a></li>
+    {% endfor %}
+{% endif %}

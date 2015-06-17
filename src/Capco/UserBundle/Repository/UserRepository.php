@@ -145,6 +145,7 @@ class UserRepository extends EntityRepository
             ->addSelect('m', 'ut')
             ->leftJoin('u.Media', 'm')
             ->leftJoin('u.userType', 'ut')
+            ->addOrderBy('u.createdAt', 'DESC')
         ;
 
         if ($type !== null && $type !== UserType::FILTER_ALL) {
@@ -155,16 +156,17 @@ class UserRepository extends EntityRepository
 
         if (isset(User::$sortOrder[$sort]) && User::$sortOrder[$sort] == User::SORT_ORDER_CONTRIBUTIONS_COUNT) {
             $qb = $this->orderByContributionsCount($qb, 'DESC');
-        } else {
-            $qb->orderBy('u.createdAt', 'DESC');
+            $qb->addOrderBy('u.createdAt', 'DESC');
         }
 
+        $query = $qb->getQuery();
+
         if ($nbByPage > 0) {
-            $qb->setFirstResult(($page - 1) * $nbByPage)
+            $query->setFirstResult(($page - 1) * $nbByPage)
                 ->setMaxResults($nbByPage);
         }
 
-        return new Paginator($qb);
+        return new Paginator($query);
     }
 
     /**
@@ -179,7 +181,7 @@ class UserRepository extends EntityRepository
 
     public function orderByContributionsCount(QueryBuilder $qb, $order = 'DESC')
     {
-        return $qb->addSelect('(u.opinionsCount + u.argumentsCount + u.sourcesCount + u.ideasCount + u.ideaCommentsCount + u.postCommentsCount + u.eventCommentsCount) AS HIDDEN contributionsCount')
+        return $qb->addSelect('(u.opinionsCount + u.argumentsCount + u.sourcesCount + u.ideasCount + u.ideaCommentsCount + u.postCommentsCount + u.eventCommentsCount + u.ideaVotesCount + u.commentVotesCount + u.opinionVotesCount + u.argumentVotesCount + u.sourceVotesCount) AS HIDDEN contributionsCount')
             ->orderBy('contributionsCount', $order)
         ;
     }
