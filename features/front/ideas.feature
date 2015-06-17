@@ -127,12 +127,12 @@ Scenario: Can comment an idea
   Scenario: Can not access trash if not logged in
     Given feature "idea_trash" is enabled
     And I visited "ideas page"
-    And I follow "Voir la corbeille"
+    When I follow "Voir la corbeille"
     Then I should see "Se connecter"
 
   Scenario: Ideas trash display correct number of elements
     Given feature "idea_trash" is enabled
     And I am logged in as user
     And I visited "ideas page"
-    And I follow "Voir la corbeille"
-    Then I should see 5 ".media--macro" elements
+    When I follow "Voir la corbeille"
+    Then I should see 7 ".media--macro" elements

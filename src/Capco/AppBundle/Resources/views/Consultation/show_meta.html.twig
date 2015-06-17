@@ -63,20 +63,18 @@
     </div>
 {% endif %}
 
-{% set hasTrashed = is_feature_enabled('consultation_trash') %}
-{% if hasTrashed %}
+{% set showTrash = is_feature_enabled('consultation_trash') %}
+{% if showTrash %}
     <div>
         <h2 class="h5 excerpt">{{ 'consultation.show.meta.data.title'|trans({}, 'CapcoAppBundle') | upper }}</h2>
         <div class="navbar--sub  navbar--no-nb">
             <ul class="nav">
-                {% if hasTrashed %}
-                    <li {% if currentStep == 'trash_step' %} class="active" {% endif %}>
-                        <a href="{{ path('app_consultation_show_trashed', {
-                            'consultationSlug': consultation.slug }) }}">
-                            <p class="navbar__step-title">{{ 'consultation.show.meta.data.trash'|trans({}, 'CapcoAppBundle') }}  <i class="pull-right  excerpt  cap-arrow-66"></i></p>
-                        </a>
-                    </li>
-                {% endif %}
+                <li {% if currentStep == 'trash_step' %} class="active" {% endif %}>
+                    <a href="{{ path('app_consultation_show_trashed', {
+                        'consultationSlug': consultation.slug }) }}">
+                        <p class="navbar__step-title">{{ 'consultation.show.meta.data.trash'|trans({}, 'CapcoAppBundle') }}  <i class="pull-right  excerpt  cap-arrow-66"></i></p>
+                    </a>
+                </li>
             </ul>
         </div>
     </div>

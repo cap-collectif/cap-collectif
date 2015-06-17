@@ -91,7 +91,7 @@ Feature: Consultation
       | consultationSlug | croissance-innovation-disruption |
       | stepSlug         | collecte-des-avis                |
     And I follow "Actualités"
-    And I should see 10 ".media--news" elements
+    And I should see 7 ".media--news" elements
 
   Scenario: Consultation header should display correct number of votes
     Given I visited "consultation page" with:
@@ -104,17 +104,17 @@ Feature: Consultation
     Given I visited "consultation page" with:
       | consultationSlug | croissance-innovation-disruption |
       | stepSlug         | collecte-des-avis                |
-    Then I should see "164 contributions"
+    Then I should see "211 contributions"
     And I hover over the "#contributions-counter-pill" element
-    And I should see "29 propositions"
-    And I should see "105 arguments"
+    And I should see "31 propositions"
+    And I should see "150 arguments"
     And I should see "30 sources"
 
   Scenario: Consultation header should display correct number of participants
     Given I visited "consultation page" with:
       | consultationSlug | croissance-innovation-disruption |
       | stepSlug         | collecte-des-avis                |
-    Then I should see "20 participants"
+    Then I should see "24 participants"
 
   Scenario: Can download a consultation in xslx format
     Given I visited "home page"
@@ -154,7 +154,7 @@ Feature: Consultation
     And I visited "consultation page" with:
       | consultationSlug | croissance-innovation-disruption |
       | stepSlug         | collecte-des-avis                |
-    And I follow "Corbeille"
+    When I follow "Corbeille"
     Then I should see "Se connecter"
 
   Scenario: Consultation trash display correct numbers of elements
@@ -163,9 +163,9 @@ Feature: Consultation
     And I visited "consultation page" with:
       | consultationSlug | croissance-innovation-disruption |
       | stepSlug         | collecte-des-avis                |
-    And I follow "Corbeille"
-    Then I should see 54 ".opinion__list .opinion" elements
-    And I should see "54" in the "span.badge" element
+    When I follow "Corbeille"
+    Then I should see 52 ".opinion__list .opinion" elements
+    And I should see "52" in the "span.badge" element
 
   Scenario: I should not see opinion types menu when only one type is allowed
     Given I visited "consultation page" with:
