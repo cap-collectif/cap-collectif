@@ -64,15 +64,15 @@
 {% block javascripts %}
     {{ parent() }}
     <script type="text/javascript">
-        App.module.pieChart();
-        App.module.customModal('.modal--custom');
+        App.pieChart();
+        App.customModal('.modal--custom');
         $('.more').readmore({
             collapsedHeight: 88,
             moreLink: '<a href="#">{{ 'consultation.show.meta.read_more'|trans({}, 'CapcoAppBundle') }}</a>', //BazingaJsTranslationBundle
             lessLink: '<a href="#">{{ 'consultation.show.meta.read_less'|trans({}, 'CapcoAppBundle') }}</a>'
         });
         {% if consultation.video %}
-            App.module.video('.fancybox');
+            App.video('.fancybox');
         {% endif %}
     </script>
 {% endblock %}

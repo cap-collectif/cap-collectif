@@ -1,35 +1,12 @@
 import CommentList from './components/Comment/CommentList';
-
-var intlData = {
-    locales : ['fr-FR'],
-    messages: {
-        comment: {
-            vote: {
-                submit: 'D\'accord',
-                delete: 'Annuler mon vote'
-            },
-            report: {
-                submit: 'Signaler',
-                reported: 'Signalé'
-            },
-            update: {
-                button: 'Modifier'
-            },
-            trashed: {
-                label: 'Dans la corbeille'
-            }
-        }
-    }
-};
-
+import IntlData from './translations/FR'
 
 if ($('#render-idea-comments').length) {
     React.render(
-        <CommentList idea={$('#render-idea-comments').data("idea")} {...intlData} />,
+        <CommentList idea={$('#render-idea-comments').data("idea")} {...IntlData} />,
         document.getElementById('render-idea-comments')
     );
 }
-
 
 var App = function ($) {
 
@@ -218,7 +195,7 @@ var App = function ($) {
         });
     };
 
-    var AppPublic = {
+    return {
         equalheight: equalheight,
         resized: resized,
         pieChart: pieChart,
@@ -233,8 +210,6 @@ var App = function ($) {
         hideableMessageAndCheckbox: hideableMessageAndCheckbox,
         customModal: customModal,
     };
-
-    return AppPublic;
 
 }(jQuery);
 

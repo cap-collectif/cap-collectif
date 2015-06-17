@@ -82,7 +82,10 @@
     {{ parent() }}
     <script type="text/javascript">
         $(window).on('load', function() {
-            App.module.equalheight('.event-js');window.onresize = App.module.resized('.event-js');
+            App.equalheight('.event-js');
+        });
+        $(window).on('resize', function() {
+            App.resized('.event-js');
         });
     </script>
 {% endblock %}

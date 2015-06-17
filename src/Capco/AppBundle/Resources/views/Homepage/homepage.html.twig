@@ -84,14 +84,24 @@
     {{ parent() }}
     <script type="text/javascript">
         $(window).on('load', function() {
-            App.module.equalheight('.theme');window.onresize = App.module.resized('.theme');
-            App.module.equalheight('.thumbnail--custom');window.onresize = App.module.resized('.thumbnail--custom');
-            App.module.equalheight('.media--macro');window.onresize = App.module.resized('.media--macro');
-            App.module.equalheight('.media--news');window.onresize = App.module.resized('.media--news');
-            App.module.equalheight('.event-js');window.onresize = App.module.resized('.event-js');
-            App.module.equalheight('.video');window.onresize = App.module.resized('.video');
-            App.module.video('.fancybox');
-            App.module.carousel();
+            App.equalheight('.theme');
+            App.equalheight('.thumbnail--custom');
+            App.equalheight('.media--macro');
+            App.equalheight('.media--news');
+            App.equalheight('.event-js');
+            App.equalheight('.video');
+            App.video('.fancybox');
+            App.carousel();
         });
+
+        $(window).on('resize', function() {
+            App.resized('.theme');
+            App.resized('.thumbnail--custom');
+            App.resized('.media--macro');
+            App.resized('.media--news');
+            App.resized('.event-js');
+            App.resized('.video');
+        });
+
     </script>
 {% endblock %}

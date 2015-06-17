@@ -169,7 +169,7 @@
             e.stopPropagation();
         });
         {% if null == app.user %}
-            App.module.initPopovers('.connection-popover-js', {
+            App.initPopovers('.connection-popover-js', {
                 placement: "top",
                 html: "true",
                 trigger: "focus",

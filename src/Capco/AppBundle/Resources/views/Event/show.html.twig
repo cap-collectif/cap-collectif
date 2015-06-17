@@ -194,9 +194,9 @@
     <script src="https://maps.googleapis.com/maps/api/js"></script>
     <script type="text/javascript">
         $(window).on('load', function() {
-            App.module.showMap('.map-canvas');
+            App.showMap('.map-canvas');
             {% if event | capco_event_registration_possible %}
-                App.module.makeSidebar({
+                App.makeSidebar({
                     sidebar: '#sidebar',
                     container: '#sidebar-container',
                     hideable: '.sidebar-hideable',
