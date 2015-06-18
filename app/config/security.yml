@@ -35,19 +35,23 @@ security:
                 path:           /admin/logout
             anonymous:          true
 
-        api:
-            pattern:   ^/api/synthesis
-            context:   user
+        api_login:
+            pattern:  ^/api/syntheses/login
             provider: fos_userbundle
             stateless: true
             anonymous: true
             form_login:
-                check_path:               /api/synthesis/login_check
+                check_path:               /api/syntheses/login_check
                 username_parameter:       username
                 password_parameter:       password
                 success_handler:          lexik_jwt_authentication.handler.authentication_success
                 failure_handler:          lexik_jwt_authentication.handler.authentication_failure
                 require_previous_session: false
+
+        api:
+            pattern:   ^/api/syntheses
+            provider: fos_userbundle
+            stateless: true
             lexik_jwt:
                 authorization_header:
                     enabled: true
@@ -55,7 +59,6 @@ security:
                 query_parameter:
                     enabled: true
                     name: bearer
-
         main:
             pattern:             .*
             context:             user
