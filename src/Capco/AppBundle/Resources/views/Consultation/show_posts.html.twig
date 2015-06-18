@@ -1,4 +1,5 @@
 {% extends '@CapcoApp/Consultation/show.html.twig' %}
+{% set currentStep = 'posts_step' %}
 
 {% block canonical_link %}{{ url('app_consultation_show_posts', {'consultationSlug': consultation.slug}) }}{% endblock %}
 

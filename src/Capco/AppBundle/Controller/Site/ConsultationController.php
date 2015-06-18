@@ -63,15 +63,6 @@ class ConsultationController extends Controller
             throw $this->createNotFoundException($this->get('translator')->trans('consultation.error.not_found', array(), 'CapcoAppBundle'));
         }
 
-        // Redirect if there is only one opinion type allowed
-        if (count($currentStep->getAllowedTypes()) == 1) {
-            return $this->redirect($this->generateUrl('app_consultation_show_opinions', [
-                'consultationSlug' => $consultation->getSlug(),
-                'stepSlug' => $currentStep->getSlug(),
-                'opinionTypeSlug' => $currentStep->getAllowedTypes()->first()->getSlug(),
-            ]));
-        }
-
         if ('POST' === $request->getMethod() && $request->request->has('capco_app_opinions_sort')) {
             $data = $request->request->get('capco_app_opinions_sort');
             $sort = $data['opinionsSort'];
@@ -185,8 +176,9 @@ class ConsultationController extends Controller
     }
 
     /**
-     * @Route("/consultations/{consultationSlug}/trashed", name="app_consultation_show_trashed", defaults={"_feature_flags" = "consultation_trash"} )
+     * @Route("/consultations/{consultationSlug}/consultation/{stepSlug}/trashed", name="app_consultation_show_trashed")
      * @ParamConverter("consultation", class="CapcoAppBundle:Consultation", options={"mapping": {"consultationSlug": "slug"}})
+     * @ParamConverter("currentStep", class="CapcoAppBundle:ConsultationStep", options={"mapping": {"stepSlug": "slug"}})
      * @Template("CapcoAppBundle:Consultation:show_trashed.html.twig")
      *
      * @param Consultation     $consultation
@@ -194,7 +186,7 @@ class ConsultationController extends Controller
      *
      * @return array
      */
-    public function showTrashedAction(Consultation $consultation)
+    public function showTrashedAction(Consultation $consultation, ConsultationStep $currentStep)
     {
         if (false == $consultation->canDisplay()) {
             throw $this->createNotFoundException($this->get('translator')->trans('consultation.error.not_found', array(), 'CapcoAppBundle'));
@@ -204,9 +196,9 @@ class ConsultationController extends Controller
             throw new AccessDeniedException($this->get('translator')->trans('error.access_restricted', array(), 'CapcoAppBundle'));
         }
 
-        $opinions = $this->getDoctrine()->getRepository('CapcoAppBundle:Opinion')->getTrashedByConsultation($consultation);
-        $arguments = $this->getDoctrine()->getRepository('CapcoAppBundle:Argument')->getTrashedByConsultation($consultation);
-        $sources = $this->getDoctrine()->getRepository('CapcoAppBundle:Source')->getTrashedByConsultation($consultation);
+        $opinions = $this->getDoctrine()->getRepository('CapcoAppBundle:Opinion')->getTrashedByConsultationStep($currentStep);
+        $arguments = $this->getDoctrine()->getRepository('CapcoAppBundle:Argument')->getTrashedByConsultationStep($currentStep);
+        $sources = $this->getDoctrine()->getRepository('CapcoAppBundle:Source')->getTrashedByConsultationStep($currentStep);
 
         return [
             'consultation' => $consultation,
@@ -214,6 +206,7 @@ class ConsultationController extends Controller
             'arguments' => $arguments,
             'sources' => $sources,
             'argumentsLabels' => Argument::$argumentTypesLabels,
+            'currentStep' => $currentStep,
         ];
     }
 

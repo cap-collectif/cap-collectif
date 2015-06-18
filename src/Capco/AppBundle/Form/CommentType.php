@@ -23,10 +23,11 @@ class CommentType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('body', 'textarea', array(
+            ->add('body', 'ckeditor', array(
                 'required' => true,
                 'label' => 'comment.form.body',
                 'translation_domain' => 'CapcoAppBundle',
+                'config_name' => 'empty_editor',
             ))
         ;
 

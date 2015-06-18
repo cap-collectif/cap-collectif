@@ -49,7 +49,7 @@ Scenario: Can not create an idea when not logged in
   Given feature "idea_creation" is enabled
   And I visited "ideas page"
   When I follow "Proposer une idée"
-  Then I should see "Se connecter"
+  Then I should see "Connexion"
 
 Scenario: Can not comment an uncommentable idea
   Given I visited "ideas page"
@@ -119,20 +119,3 @@ Scenario: Can comment an idea
    When I press "capco_app_idea_vote_submit"
    Then I should see "Merci ! Votre vote a bien été pris en compte."
    And I should see "user" in the "#ideaVotesModal" element
-
-  Scenario: Can not access trash if feature is disabled
-    Given I visited "ideas page"
-    Then I should not see "Corbeille des idées"
-
-  Scenario: Can not access trash if not logged in
-    Given feature "idea_trash" is enabled
-    And I visited "ideas page"
-    When I follow "Voir la corbeille"
-    Then I should see "Se connecter"
-
-  Scenario: Ideas trash display correct number of elements
-    Given feature "idea_trash" is enabled
-    And I am logged in as user
-    And I visited "ideas page"
-    When I follow "Voir la corbeille"
-    Then I should see 7 ".media--macro" elements

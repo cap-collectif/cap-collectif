@@ -3,28 +3,34 @@ admin.global:
   delete: Supprimer
 
 # Dashboard groups
-admin.group.moderation: Contributions
-admin.group.content: Contenus
+admin.group.content: Contenu
 admin.group.consultation: Consultations
+admin.group.navigation: Navigation
+admin.group.marketing: Communication
+admin.group.ideas: Boite à idées
+admin.group.parameters: Paramètres
 sonata.admin.group.user: Utilisateurs
-admin.group.parameters: Réglages
+admin.group.moderation: Contributions
+admin.group.news: Actualités
+admin.group.configuration: Configuration
 admin.group.pages: Pages
 
 # Dashboard names
-admin.label.page: Pages statiques
+admin.label.page: Pages
 admin.label.menu_item: Navigation
 admin.label.argument: Arguments
 admin.label.argument_vote: "Votes sur les arguments"
 admin.label.consultation: Consultations
+admin.label.feature: Fonctionnalités
 admin.label.footer_social_network: Réseaux sociaux (pied de page)
 admin.label.idea: Idées
 admin.label.idea_vote: "Votes sur les idées"
-admin.label.newsletter_subscription: "Inscrits à la lettre d'information"
+admin.label.newsletter_subscription: "Lettre d'information"
 admin.label.opinion: Propositions
 admin.label.opinion_type: "Types de propositions"
 admin.label.opinion_vote: "Votes sur les propositions"
 admin.label.post: Articles
-admin.label.recent_posts: "Derniers articles"
+admin.label.recent_posts: "Derniers articles du blog"
 admin.label.reporting: Signalements
 admin.label.step: Étapes
 admin.label.theme: Thèmes
@@ -37,30 +43,15 @@ admin.label.source: Sources
 admin.label.posts: Articles
 admin.label.events: Événements
 admin.label.features: Fonctionnalités
-admin.label.video: Vidéos
+admin.label.video: Vidéos de la page d'accueil
 admin.label.comment: Commentaires
 admin.label.comment_vote: Votes sur les commentaires
 admin.label.event_registrations: Inscription à l'événement
 admin.label.consultation_type: Types de consultation
-admin.label.section: Accueil (sections)
+admin.label.section: Accueil
 admin.label.user_type: Types de profil
 admin.label.highlighted: A la une
 admin.label.consultation_abstractstep: Étape d'une consultation
-
-admin.label.pages.homepage: Accueil
-admin.label.pages.ideas: Idées
-admin.label.pages.consultations: Consultations
-admin.label.pages.themes: Thèmes
-admin.label.pages.blog: Actualités
-admin.label.pages.events: Évènements
-admin.label.pages.contact: Contact
-admin.label.pages.registration: Inscription
-admin.label.pages.login: Connexion
-admin.label.pages.members: Liste des membres
-admin.label.pages.footer: Pied de page
-
-admin.label.settings.global: Général
-admin.label.settings.shield_mode: Mode bouclier
 
 # Messages
 admin:
@@ -92,16 +83,6 @@ admin:
       enabled: 'Activé ?'
       module: 'Module'
       action: 'Action'
-
-  settings:
-    header:
-      name: Paramètre
-      enabled: Actif
-      value: Valeur
-      action: Action
-    color:
-      undefined: Non défini
-
 
   fields:
     argument:
@@ -484,8 +465,6 @@ capco:
     consultations_form: Tri des consultations
     share_buttons: Boutons de partage
     idea_creation: Création d'idées
-    consultation_trash: Corbeille des consultations
-    idea_trash: Corbeille des idées
 
 action_enable: Activer
 action_disable: Désactiver
@@ -493,8 +472,8 @@ label_type_no: non
 label_type_yes: oui
 
 # posts
-post_is_public: Publié
-post_is_not_public: Non publié
+post_is_public: publié
+post_is_not_public: non publié
 no_post_found: Aucun article pour le moment
 view_all_posts: Voir tous les articles
 

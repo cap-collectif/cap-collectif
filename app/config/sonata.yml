@@ -17,34 +17,51 @@ sonata_admin:
                     - capco_admin.admin.source
                     - capco_admin.admin.idea
                     - capco_admin.admin.comment
+                    - capco_admin.admin.comment_vote
             admin.group.content:
                 items:
-                    - capco_admin.admin.highlighted
                     - capco_admin.admin.theme
-                    - capco_admin.admin.post
-                    - capco_admin.admin.event
-                    - capco_admin.admin.video
                     - capco_admin.admin.page
                     - sonata.media.admin.media
+                    - capco_admin.admin.video
+                    - capco_admin.admin.highlighted
             admin.group.consultation:
                 items:
                     - capco_admin.admin.consultation
+                    - capco_admin.admin.opinion
                     - capco_admin.admin.opinion_type
+                    - capco_admin.admin.opinion_vote
+                    - capco_admin.admin.argument
+                    - capco_admin.admin.argument_vote
+                    - capco_admin.admin.source
                     - capco_admin.admin.category
                     - capco_admin.admin.consultation_type
+            admin.group.ideas:
+                items:
+                    - capco_admin.admin.idea
+                    - capco_admin.admin.idea_vote
+            admin.group.news:
+                items:
+                    - capco_admin.admin.post
+                    - capco_admin.admin.event
             sonata.admin.group.user:
                 items:
                     - sonata.user.admin.user
                     - capco_admin.admin.user_type
-                    - capco_admin.admin.newsletter_subscription
-            admin.group.parameters:
+            admin.group.marketing:
                 items:
-                    - capco_admin.admin.menu_item
+                    - capco_admin.admin.newsletter_subscription
                     - capco_admin.admin.social_network
                     - capco_admin.admin.footer_social_network
             admin.group.pages:
                 items:
                     - capco_admin.admin.section
+            admin.group.parameters:
+                items:
+                    - capco_admin.admin.site_parameter
+                    - capco_admin.admin.site_image
+                    - capco_admin.admin.site_color
+                    - capco_admin.admin.menu_item
 
 sonata_doctrine_orm_admin:
     templates:

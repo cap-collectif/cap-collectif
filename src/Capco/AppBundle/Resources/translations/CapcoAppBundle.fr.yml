@@ -66,6 +66,7 @@ contact:
   address: Adresse
   tel: Téléphone
   form:
+    title: Ecrivez-nous
     name: Nom
     email: Adresse électronique
     message: Message
@@ -287,9 +288,6 @@ consultation:
         posts: Actualités
         events: Évènements
         contributors: Participants
-      data:
-        title: Données
-        trash: Corbeille
     remaining_days: "]-Inf, 0] Consultation terminée | {1} Dernier jour | ]1,Inf[ %count% jours restants"
     end_at: Date de fin : %date%
     opinions: "]-Inf, 0] Aucune opinion | {1} 1 opinion | ]1,Inf[ %count% opinions"

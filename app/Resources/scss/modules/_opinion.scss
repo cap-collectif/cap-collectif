@@ -193,8 +193,10 @@
         margin-right: 0;
       }
     }
-    textarea {
-      resize: vertical;
+
+    .cke_chrome {
+      border: none;
+      background: none;
     }
   }
 
@@ -333,11 +335,22 @@
     border-bottom: 1px solid $border-color;
     padding-top: 30px;
     padding-bottom: 30px;
+
     .opinion__body {
       overflow: visible;
     }
     .opinion__text {
       word-break: break-word;
+      padding-top: 10px;
+
+      p {
+        line-height: 22px;
+        min-height: 22px;
+        margin-bottom: 0;
+      }
+      p:first-child:empty, p:last-child:empty {
+        display: none;
+      }
     }
     &:first-child {
       padding-top: 15px;

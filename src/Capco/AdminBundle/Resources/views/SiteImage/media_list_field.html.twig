@@ -1,0 +1,9 @@
+{% extends 'SonataAdminBundle:CRUD:base_list_field.html.twig' %}
+
+{% block field %}
+    <div>
+    	{% if object is not null and object.Media is not null %}
+    		{% thumbnail object.Media, 'logo' with {'title': object.Media.name, 'alt': object.Media.name} %}
+    	{% endif %}
+    </div>
+{% endblock %}

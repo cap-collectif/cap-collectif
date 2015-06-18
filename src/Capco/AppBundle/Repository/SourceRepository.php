@@ -40,26 +40,24 @@ class SourceRepository extends EntityRepository
     }
 
     /**
-     * Get all trashed sources for consultation.
+     * Get all trashed sources for consultation step.
      *
      * @param $step
      *
      * @return mixed
      */
-    public function getTrashedByConsultation($consultation)
+    public function getTrashedByConsultationStep(ConsultationStep $step)
     {
         $qb = $this->getIsEnabledQueryBuilder()
             ->addSelect('ca', 'o', 'aut', 'm', 'media')
             ->leftJoin('s.Category', 'ca')
             ->leftJoin('s.Media', 'media')
+            ->leftJoin('s.Opinion', 'o')
             ->leftJoin('s.Author', 'aut')
             ->leftJoin('aut.Media', 'm')
-            ->leftJoin('s.Opinion', 'o')
-            ->leftJoin('o.step', 'step')
-            ->leftJoin('step.consultationAbstractStep', 'cas')
-            ->andWhere('cas.consultation = :consultation')
+            ->andWhere('o.step = :step')
             ->andWhere('s.isTrashed = :trashed')
-            ->setParameter('consultation', $consultation)
+            ->setParameter('step', $step)
             ->setParameter('trashed', true)
             ->orderBy('s.trashedAt', 'DESC');
 

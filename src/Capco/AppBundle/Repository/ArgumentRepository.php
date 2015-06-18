@@ -101,26 +101,24 @@ class ArgumentRepository extends EntityRepository
     }
 
     /**
-     * Get all trashed arguments for consultation.
+     * Get all trashed arguments for consultation step.
      *
      * @param $step
      *
      * @return mixed
      */
-    public function getTrashedByConsultation($consultation)
+    public function getTrashedByConsultationStep($step)
     {
         return $this->getIsEnabledQueryBuilder()
             ->addSelect('o', 'v', 'aut', 'm')
-            ->leftJoin('a.votes', 'v')
-            ->leftJoin('a.Author', 'aut')
-            ->leftJoin('aut.Media', 'm')
             ->leftJoin('a.opinion', 'o')
-            ->leftJoin('o.step', 's')
-            ->leftJoin('s.consultationAbstractStep', 'cas')
-            ->andWhere('cas.consultation = :consultation')
+            ->leftJoin('a.votes', 'v')
+            ->leftJoin('o.Author', 'aut')
+            ->leftJoin('aut.Media', 'm')
             ->andWhere('a.isTrashed = :trashed')
-            ->setParameter('consultation', $consultation)
+            ->andWhere('o.step = :step')
             ->setParameter('trashed', true)
+            ->setParameter('step', $step)
             ->orderBy('a.trashedAt', 'DESC')
             ->getQuery()
             ->getResult();

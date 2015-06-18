@@ -145,36 +145,12 @@ class CommentResolver
         return $comment;
     }
 
-    public function getBestBreakIndexForComment(Comment $comment, $limit = 500, $margin = 75)
+    // Use to handle old comments (before ckeditor)
+    public function formattedCommentBody(Comment $comment)
     {
-        $length = strlen($comment->getBody());
-        if ($length <= $limit) {
-            return $limit;
+        if (0 !== strrpos($comment->getBody(), '<p>')) {
+            return '<p>'.$comment->getBody().'</p>';
         }
-        $offset = $length - $limit;
-        $bestIndex = null;
-
-        // We find the \n, \r or \r\n that is closer to the limit
-        $bestNL = strrpos($comment->getBody(), "\n", -$offset);
-        $bestCR = strrpos($comment->getBody(), "\r", -$offset);
-        $bestCRNL = strrpos($comment->getBody(), "\r\n", -$offset);
-
-        // If at least one of the three characters appears, we want to break here,
-        if ($bestNL || $bestCR || $bestCRNL) {
-            $bestIndex = max($bestNL, $bestCR, $bestCRNL);
-            $bestIndex = $limit - $bestIndex > $margin ? null : $bestIndex;
-        }
-
-        // else we break at closer space
-        if (!$bestIndex) {
-            $bestIndex = strrpos($comment->getBody(), ' ', -$offset);
-        }
-
-        // If there is no best index is found or it's too far away from limit we break at limit
-        if (!$bestIndex || $limit - $bestIndex > $margin) {
-            return $limit;
-        }
-
-        return $bestIndex;
+        return $comment->getBody();
     }
 }

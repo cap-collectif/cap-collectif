@@ -2,14 +2,12 @@ Capco\AppBundle\Entity\SiteParameter:
 
     SiteParameter1:
         keyname: homepage.jumbotron.title
-        category: pages.homepage
         title: Titre/objet du site
         value: Participez à l'élaboration de la loi
         position: 100
         type: 0
     SiteParameter2:
         keyname: homepage.jumbotron.body
-        category: pages.homepage
         title: Accroche du site
         position: 110
         type: 1
@@ -17,43 +15,54 @@ Capco\AppBundle\Entity\SiteParameter:
                <p> Parlement & Citoyens permet aux parlementaires et aux citoyens de travailler ensemble à la résolution de problèmes de société par la rédaction de propositions de loi.</p>
     SiteParameter3:
         keyname: homepage.jumbotron.button
-        category: pages.homepage
         title: Libellé du bouton principal
         value: Comment ça marche ?
         position: 120
         type: 0
     SiteParameter4:
         keyname: homepage.jumbotron.button_link
-        category: pages.homepage
         title: Lien du bouton principal
         value: /pages/comment-ça-marche
         position: 130
         type: 5
+    SiteParameter5:
+        keyname: homepage.jumbotron2.title
+        title: Titre de l'introduction
+        value: Introduction
+        position: 140
+        type: 0
+    SiteParameter6:
+        keyname: homepage.jumbotron2.body
+        title: Texte de l'introduction
+        value: |
+                <p>Introduisez ici votre démarche et vos objectifs.</p>
+                <p><text(500)></p>
+                <p><text(500)></p>
+        position: 150
+        type: 1
     SiteParameter7:
         keyname: footer.text.title
-        category: pages.footer
         title: Titre du pied de page
         value: À propos
         position: 200
         type: 0
     SiteParameter8:
         keyname: footer.text.body
-        category: pages.footer
         title: Texte du pied de page
-        value: Ce site participatif a été réalisé grâce à la plateforme innovante de participation <a alt="Cap Collectif" href="http://www.cap-collectif.com">Cap Collectif</a>, selon les principes de la <a href="http://fr.wikipedia.org/wiki/Gouvernement_ouvert" alt="Wikipédia - Démocratie ouverte">démocratie ouverte</a>.
+        value: |
+           <p>Présentez-vous ici en quelques lignes.</p>
+           <p><text(200)></p>
         position: 210
         type: 1
 
     SiteParameter9:
         keyname: consultations.jumbotron.title
-        category: pages.consultations
         title: Titre de la page "Liste des consultations"
         value: Consultations
         position: 300
         type: 0
     SiteParameter10:
         keyname: consultations.jumbotron.body
-        category: pages.consultations
         title: Accroche de la page "Liste des consultations"
         value: |
               <p><text(100)></p>
@@ -61,7 +70,6 @@ Capco\AppBundle\Entity\SiteParameter:
         type: 1
     SiteParameter11:
         keyname: consultations.content.body
-        category: pages.consultations
         title: Description de la page "Liste des consultations"
         value: |
              <p><text(100)></p>
@@ -70,14 +78,12 @@ Capco\AppBundle\Entity\SiteParameter:
 
     SiteParameter12:
         keyname: ideas.jumbotron.title
-        category: pages.ideas
         title: Titre de la page "Liste des idées"
         value: Idées
         position: 400
         type: 0
     SiteParameter13:
         keyname: ideas.jumbotron.body
-        category: pages.ideas
         title: Accroche de la page "Liste des idées"
         value: |
             <p><text(100)></p>
@@ -85,7 +91,6 @@ Capco\AppBundle\Entity\SiteParameter:
         type: 1
     SiteParameter14:
         keyname: ideas.content.body
-        category: pages.ideas
         title: Description de la page "Liste des idées"
         value: |
             <p><text(100)></p>
@@ -93,14 +98,12 @@ Capco\AppBundle\Entity\SiteParameter:
         type: 1
     SiteParameter15:
         keyname: ideas.trashed.jumbotron.title
-        category: pages.ideas
         title: Titre de la page "Corbeille des idées"
         value: Corbeille des idées
         position: 430
         type: 0
     SiteParameter16:
         keyname: ideas.trashed.content.body
-        category: pages.ideas
         title: Description de la page "Corbeille des idées"
         value: |
                 <p>Les messages se trouvant dans la corbeille sont des contenus signalés abusifs par les utilisateurs ou l'administrateur du site.
@@ -111,14 +114,12 @@ Capco\AppBundle\Entity\SiteParameter:
 
     SiteParameter17:
         keyname: themes.jumbotron.title
-        category: pages.themes
         title: Titre de la page "Liste des thèmes"
         value: Thèmes
         position: 500
         type: 0
     SiteParameter18:
         keyname: themes.jumbotron.body
-        category: pages.themes
         title: Accroche de la page "Liste des thèmes"
         value: |
             <p><text(100)></p>
@@ -126,7 +127,6 @@ Capco\AppBundle\Entity\SiteParameter:
         type: 1
     SiteParameter19:
         keyname: themes.content.body
-        category: pages.themes
         title: Description de la page "Liste des thèmes"
         value: |
            <p><text(100)></p>
@@ -135,7 +135,6 @@ Capco\AppBundle\Entity\SiteParameter:
 
     SiteParameter20:
         keyname: contact.jumbotron.body
-        category: pages.contact
         title: Accroche de la page contact
         value: |
                <p><text(100)></p>
@@ -143,26 +142,23 @@ Capco\AppBundle\Entity\SiteParameter:
         type: 1
     SiteParameter21:
         keyname: contact.content.body
-        category: pages.contact
         title: Texte de la page contact
         value: |
-            <h2>Situez-nous !</h2>
+            <h2>Situez nous !</h2>
             <p><text(250)><p>
         position: 610
         type: 1
     SiteParameter22:
         keyname: contact.content.address
-        category: pages.contact
         title: Adresse postale
         value: |
             Cap Collectif<br>
-            18 avenue Parmentier<br>
+            16 bis avenue Parmentier<br>
             75011 Paris<br>
         position: 620
         type: 1
     SiteParameter23:
         keyname: contact.content.phone_number
-        category: pages.contact
         title: Numéro de téléphone
         value: 06 10 20 30 40
         position: 630
@@ -170,28 +166,24 @@ Capco\AppBundle\Entity\SiteParameter:
 
     SiteParameter24:
         keyname: consultations.pagination
-        category: pages.consultations
         title: Nombre d'éléments pour la pagination des consultations
         value: 16
         position: 700
         type: 2
     SiteParameter25:
         keyname: ideas.pagination
-        category: pages.ideas
         title: Nombre d'éléments pour la pagination des idées
         value: 16
         position: 710
         type: 2
     SiteParameter26:
         keyname: themes.pagination
-        category: pages.themes
         title: Nombre d'éléments pour la pagination des thèmes
         value: 0
         position: 720
         type: 2
     SiteParameterContributorsPagination:
         keyname: contributors.pagination
-        category: pages.consultations
         title: Nombre d'éléments pour la pagination des participants
         value: 18
         position: 730
@@ -199,14 +191,12 @@ Capco\AppBundle\Entity\SiteParameter:
 
     SiteParameter27:
         keyname: signin.cgu.name
-        category: pages.registration
         title: Nom du document à accepter lors de l'inscription (exemples : charte, conditions d'utilisation, etc.)
         value: la charte
         position: 800
         type: 0
     SiteParameter28:
         keyname: signin.cgu.link
-        category: pages.registration
         title: Lien de la charte ou des CGU sur la page d'inscription
         value: /pages/charte
         position: 810
@@ -214,22 +204,19 @@ Capco\AppBundle\Entity\SiteParameter:
 
     SiteParameter29:
         keyname: admin.mail.notifications
-        category: settings.global
         title: Adresse e-mail de réception des notifications (signalements)
-        value: assistance@cap-collectif.com
+        value: sfavot@jolicode.com
         position: 900
         type: 4
     SiteParameter30:
         keyname: admin.mail.contact
-        category: pages.contact
         title: Adresse email de contact
-        value: coucou@cap-collectif.com
+        value: sfavot@jolicode.com
         position: 910
         type: 4
 
     SiteParameter31:
         keyname: global.site.fullname
-        category: settings.global
         title: Nom complet du site
         value: Cap-Collectif
         position: 1
@@ -238,21 +225,18 @@ Capco\AppBundle\Entity\SiteParameter:
     # blog
     SiteParameterBlogPaginationSize:
         keyname: blog.pagination.size
-        category: pages.blog
         title: Nombre d'articles par page du blog
-        value: 10
+        value: 5
         position: 750
         type: 2
     SiteParameterBlogJumbotronBody:
         keyname: blog.jumbotron.body
-        category: pages.blog
         title: Sous-titre de la section blog
         value: Description de la page "Blog"
         position: 760
         type: 1
     SiteParameterBlogJumbotronTitle:
         keyname: blog.jumbotron.title
-        category: pages.blog
         title: Titre de la section blog
         value: Blog
         position: 770
@@ -260,7 +244,6 @@ Capco\AppBundle\Entity\SiteParameter:
 
     SiteParameterScript:
         keyname: global.site.embed_js
-        category: settings.global
         title: Script à insérer dans les pages
         value: ''
         position: 2
@@ -268,28 +251,24 @@ Capco\AppBundle\Entity\SiteParameter:
 
     SiteParameterLoginTop:
         keyname: login.text.top
-        category: pages.login
         title: 'Texte en haut de la page de connexion'
-        value: ''
+        value: '<strong>Attention,</strong> Ce site est réservé aux adhérents du parti politique Nous Citoyens.'
         position: 250
         type: 1
     SiteParameterLoginBottom:
         keyname: login.text.bottom
-        category: pages.login
         title: 'Texte en bas de la page de connexion'
-        value: ''
+        value: 'Les informations recueillies font l’objet d’un traitement informatique destiné au fonctionnement de la plateforme contributive. Le [nom du propriétéaire] est l’unique destinataire de ces données. Conformément à la loi « informatique et libertés » du 6 janvier 1978 modifiée en 2004, vous bénéficiez d’un droit d’accès et de rectification aux informations qui vous concernent, que vous pouvez exercer en vous adressant à [adresse de contact]. Vous pouvez également, pour des motifs légitimes, vous opposer au traitement des données vous concernant.'
         position: 251
         type: 1
     SiteParameterSigninTop:
         keyname: signin.text.top
-        category: pages.registration
         title: "Texte en haut de la page d'inscription"
-        value: ''
+        value: '<strong>Attention,</strong> Ce site est réservé aux adhérents du parti politique Nous Citoyens.'
         position: 252
         type: 1
     SiteParameterSignBottom:
         keyname: signin.text.bottom
-        category: pages.registration
         title: "Texte en bas de la page d'inscription"
         value: 'Les informations recueillies font l’objet d’un traitement informatique destiné au fonctionnement de la plateforme contributive. Le [nom du propriétéaire] est l’unique destinataire de ces données. Conformément à la loi « informatique et libertés » du 6 janvier 1978 modifiée en 2004, vous bénéficiez d’un droit d’accès et de rectification aux informations qui vous concernent, que vous pouvez exercer en vous adressant à [adresse de contact]. Vous pouvez également, pour des motifs légitimes, vous opposer au traitement des données vous concernant.'
         position: 253
@@ -297,14 +276,12 @@ Capco\AppBundle\Entity\SiteParameter:
 
     SiteParameterEventTitle:
         keyname: events.jumbotron.title
-        category: pages.events
         title: Titre de la page "Liste des événements"
         value: Événements
         position: 301
         type: 0
     SiteParameterEventContent:
         keyname: events.jumbotron.body
-        category: pages.events
         title: Accroche de la page "Liste des événements"
         value: |
             <p><text(100)></p>
@@ -312,7 +289,6 @@ Capco\AppBundle\Entity\SiteParameter:
         type: 1
     SiteParameterEventContentPage:
         keyname: events.content.body
-        category: pages.events
         title: Description de la page "Liste des événements"
         value: |
            <p><text(100)></p>
@@ -321,14 +297,12 @@ Capco\AppBundle\Entity\SiteParameter:
 
     SiteParameterShieldUsername:
         keyname: security.shield_mode.username
-        category: settings.shield_mode
         title: "Nom d'utilisateur du mode bouclier"
         value: admin
         position: 1000
         type: 0
     SiteParameterShieldPassword:
         keyname: security.shield_mode.password
-        category: settings.shield_mode
         title: "Mot de passe du mode bouclier"
         value: admin
         position: 1001
@@ -336,7 +310,6 @@ Capco\AppBundle\Entity\SiteParameter:
 
     SiteParameterHomepageDarkening:
         keyname: homepage.jumbotron.darken
-        category: pages.homepage
         title: Assombrissement de l'image de fond sur la page d'accueil
         value: true
         position: 160
