@@ -74,11 +74,14 @@ Scenario: Can comment an idea
     Given I am logged in as user
     And I visited "idea page" with:
       | slug | ideacommentable |
+    And I wait 5 seconds
     When I vote for the first comment
-    Then The first comment vote counter should be "1"
-    And I should see "Merci ! Votre vote a bien été pris en compte."
+    And I wait 5 seconds
+    Then I should see "Merci ! Votre vote a bien été pris en compte."
     And I should see "Annuler mon vote"
+    And The first comment vote counter should be "1"
     And I vote for the first comment
+    And I wait 5 seconds
     And I should see "Votre vote a bien été annulé."
     And The first comment vote counter should be "0"
 

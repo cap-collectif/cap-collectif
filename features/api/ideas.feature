@@ -1,6 +1,5 @@
 Feature: Ideas
 
-  @dev
   Scenario: API client wants to list comments of an idea
     When I send a GET request to "/api/ideas/2/comments"
     Then the JSON response should match:

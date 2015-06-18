@@ -41,7 +41,7 @@ class CommentSerializationListener implements EventSubscriberInterface
         );
 
         $event->getVisitor()->addData('has_user_voted', $this->hasUserVoted($comment));
-        $event->getVisitor()->addData('has_user_reported', $this->hasUserVoted($comment));
+        $event->getVisitor()->addData('has_user_reported', $this->hasUserReported($comment));
         $event->getVisitor()->addData('can_edit', $this->canEdit($comment));
     }
 

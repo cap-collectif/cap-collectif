@@ -1,4 +1,5 @@
 import Comment from './Comment';
+import Fetcher from '../../services/Fetcher';
 
 var CommentList = React.createClass({
     mixins: [ReactIntl.IntlMixin],
@@ -8,14 +9,9 @@ var CommentList = React.createClass({
         };
     },
 
-    componentDidMount(){
-        fetch('http://local.capcollectif.com/api/ideas/' + this.props.idea + '/comments', {
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            }
-        })
-        .then((response) => { return response.json(); })
+    componentDidMount() {
+
+        Fetcher.get('/ideas/'+ this.props.idea + '/comments')
         .then((data) => {
             this.setState({
                 'comments': data

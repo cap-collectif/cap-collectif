@@ -19,12 +19,12 @@ var Comment = React.createClass({
                     <p className="excerpt  opinion__date">
                         <FormattedDate value={comment.created_at} day="numeric" month="long" year="numeric" hour="numeric" minute="numeric" />
                     </p>
-                    <CommentBody comment={comment} />
-                    <CommentVoteButton comment={comment} />&nbsp;
-                    <span className="opinion__votes-nb">{ comment.vote_count }</span>&nbsp;
-                    <CommentReport comment={comment} />&nbsp;
-                    <CommentEdit comment={comment} />
                 </div>
+                <CommentBody comment={comment} />
+                <CommentVoteButton comment={comment} />&nbsp;
+                <span className="opinion__votes-nb">{ comment.vote_count }</span>&nbsp;
+                <CommentReport comment={comment} />&nbsp;
+                <CommentEdit comment={comment} />
             </div>
           </li>
         );

@@ -23,6 +23,7 @@ var App = function ($) {
             topPosition = $el.position().top;
 
             if ($(window).width() > 767) {
+                var currentDiv = 0;
 
                 if (currentRowStart != topPosition) {
                     for (currentDiv = 0; currentDiv < rowDivs.length; currentDiv++) {

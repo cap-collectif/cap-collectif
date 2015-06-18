@@ -22,7 +22,6 @@ security:
             pattern:  ^/(_(profiler|wdt)|css|images|js)/
             security: false
 
-        # -> custom firewall for the admin area of the URL
         admin:
             pattern:            /admin(.*)
             context:            user
@@ -36,26 +35,19 @@ security:
                 path:           /admin/logout
             anonymous:          true
 
-        # -> end custom configuration
-
-        api_login:
-            pattern:  ^/api/login
+        api:
+            pattern:   ^/api/synthesis
+            context:   user
             provider: fos_userbundle
             stateless: true
             anonymous: true
             form_login:
-                check_path:               /api/login_check
+                check_path:               /api/synthesis/login_check
                 username_parameter:       username
                 password_parameter:       password
                 success_handler:          lexik_jwt_authentication.handler.authentication_success
                 failure_handler:          lexik_jwt_authentication.handler.authentication_failure
                 require_previous_session: false
-
-        api:
-            pattern:   ^/api
-            provider: fos_userbundle
-            stateless: true
-            anonymous: true
             lexik_jwt:
                 authorization_header:
                     enabled: true
@@ -64,10 +56,6 @@ security:
                     enabled: true
                     name: bearer
 
-        # default login area for standard users
-
-        # This firewall is used to handle the public login area
-        # This part is handled by the FOS User Bundle
         main:
             pattern:             .*
             context:             user
@@ -78,14 +66,12 @@ security:
                 check_path:     /login_check
                 use_forward:    false
                 failure_path:   null
-#                default_target_path: /profile
             oauth:
                 resource_owners:
                     facebook: "/login/check-facebook"
-                    google: "/login/check-google"
-                    twitter: "/login/check-twitter"
+                    google:   "/login/check-google"
+                    twitter:  "/login/check-twitter"
                 login_path: /login
-#                default_target_path: /profile
 
                 oauth_user_provider:
                     service: my_user_provider
@@ -103,8 +89,7 @@ security:
         - { path: ^/admin/logout$, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/admin/login_check$, role: IS_AUTHENTICATED_ANONYMOUSLY }
 
-        # JWT
-        - { path: ^/api/login, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        # Api
         - { path: ^/api,       role: IS_AUTHENTICATED_ANONYMOUSLY }
 
         # Secured part of the site
