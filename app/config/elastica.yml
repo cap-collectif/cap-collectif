@@ -1,11 +1,222 @@
 fos_elastica:
-    serializer: ~
-    # clients:
-    #     default: { host: localhost, port: 9200 }
-    # indexes:
-    #     app:
-    #         index_name: app_%kernel.environment%
-                # types:
-                    # user:
-    #                     serializer:
-    #                         groups: [elastica, Default]
+  clients:
+    default: { host: localhost, port: 9200 }
+  indexes:
+    app:
+      index_name: app_%kernel.environment%
+      finder: ~
+      types:
+      # User
+        user:
+          indexable_callback: isEnabled
+          mappings:
+            id: ~
+            slug: ~
+            username: ~
+            biography: ~
+          persistence:
+            identifier: slug
+            driver: orm
+            model: Capco\UserBundle\Entity\User
+            provider: ~
+            listener: ~
+            finder: ~
+        # Argument
+        argument:
+          indexable_callback: getIsEnabled
+          mappings:
+            id:
+              type: integer
+            body: ~
+            createdAt: ~
+            updatedAt: ~
+            Author:
+              type: object
+              properties:
+                slug: ~
+          persistence:
+            identifier: id
+            driver: orm
+            model: Capco\AppBundle\Entity\Argument
+            provider: ~
+            listener: ~
+            finder: ~
+        # Consultation
+        consultation:
+          indexable_callback: getIsEnabled
+          mappings:
+            id:
+              type: integer
+            title: ~
+            slug: ~
+            publishedAt: ~
+            createdAt: ~
+            updatedAt: ~
+            Author:
+              type: object
+              properties:
+                slug: ~
+          persistence:
+            identifier: slug
+            driver: orm
+            model: Capco\AppBundle\Entity\Consultation
+            provider: ~
+            listener: ~
+            finder: ~
+        # Comment
+        comment:
+          indexable_callback: getIsEnabled
+          mappings:
+            id:
+              type: integer
+            body: ~
+            createdAt: ~
+            updatedAt: ~
+            Author:
+              type: object
+              properties:
+                slug: ~
+            authorName: ~
+          persistence:
+            identifier: id
+            driver: orm
+            model: Capco\AppBundle\Entity\AbstractComment
+            provider: ~
+            listener: ~
+            finder: ~
+        # Event
+        event:
+          indexable_callback: getIsEnabled
+          mappings:
+            id:
+              type: integer
+            title: ~
+            slug: ~
+            body: ~
+            createdAt: ~
+            updatedAt: ~
+            startAt: ~
+            endAt: ~
+            Author:
+              type: object
+              properties:
+                slug: ~
+          persistence:
+            identifier: slug
+            driver: orm
+            model: Capco\AppBundle\Entity\Event
+            provider: ~
+            listener: ~
+            finder: ~
+        # Idea
+        idea:
+          indexable_callback: getIsEnabled
+          mappings:
+            id:
+              type: integer
+            title: ~
+            slug: ~
+            body: ~
+            object: ~
+            createdAt: ~
+            updatedAt: ~
+            Author:
+              type: object
+              properties:
+                slug: ~
+          persistence:
+            identifier: slug
+            driver: orm
+            model: Capco\AppBundle\Entity\Idea
+            provider: ~
+            listener: ~
+            finder: ~
+        # Opinion
+        opinion:
+          indexable_callback: getIsEnabled
+          mappings:
+            id:
+              type: integer
+            title: ~
+            slug: ~
+            body: ~
+            updatedAt: ~
+            createdAt: ~
+            Author:
+              type: object
+              properties:
+                slug: ~
+          persistence:
+            identifier: slug
+            driver: orm
+            model: Capco\AppBundle\Entity\Opinion
+            provider: ~
+            listener: ~
+            finder: ~
+        # Post
+        post:
+          indexable_callback: getIsPublished
+          mappings:
+            id:
+              type: integer
+            title: ~
+            abstract: ~
+            slug: ~
+            body: ~
+            createdAt: ~
+            updatedAt: ~
+            publishedAt: ~
+            Authors:
+              type: nested
+              properties:
+                slug: ~
+          persistence:
+            identifier: slug
+            driver: orm
+            model: Capco\AppBundle\Entity\Post
+            provider: ~
+            listener: ~
+            finder: ~
+        # Source
+        source:
+          indexable_callback: getIsEnabled
+          mappings:
+            id:
+              type: integer
+            title: ~
+            slug: ~
+            body: ~
+            createdAt: ~
+            updatedAt: ~
+            Author:
+              type: object
+              properties:
+                slug: ~
+          persistence:
+            identifier: slug
+            driver: orm
+            model: Capco\AppBundle\Entity\Source
+            provider: ~
+            listener: ~
+            finder: ~
+        # Theme
+        theme:
+          indexable_callback: getIsEnabled
+          mappings:
+            id: ~
+            title: ~
+            teaser: ~
+            body: ~
+            Author:
+              type: object
+              properties:
+                slug: ~
+            createdAt: ~
+            updatedAt: ~
+          persistence:
+            identifier: slug
+            driver: orm
+            model: Capco\AppBundle\Entity\Theme
+            provider: ~
+            listener: ~
+            finder: ~

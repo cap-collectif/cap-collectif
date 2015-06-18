@@ -914,3 +914,17 @@ synthesis:
   edit:
     button: Éditer
     no_synthesis: Aucune synthèse associée à cette étape.
+
+search:
+  title: Rechercher sur le site
+  form:
+    label:
+      term: Terme recherché
+      type: Type de contributions
+    types:
+      none: Sélectionnez un type de contribution
+      ideas: Idées
+      posts: Articles
+    submit: Rechercher
+  results:
+    title: "]-Inf, 0] Aucun résultat | {1} 1 résultat | ]1,Inf[ %count% résultats"

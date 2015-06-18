@@ -1,0 +1,45 @@
+{% set page_class = "search" %}
+{% extends "CapcoAppBundle::base.html.twig" %}
+
+{% block canonical_link %}{{ url('app_search') }}{% endblock %}
+
+{% block title %}
+        {{ parent() }} - {{ 'search.title' | trans({}, 'CapcoAppBundle') }}
+{% endblock %}
+
+{% block jumbotron %}
+    <div class="jumbotron  jumbotron--custom  jumbotron--bg-1  text-center">
+        <div class="container">
+            <h1>{{ 'search.title' | trans({}, 'CapcoAppBundle') }}</h1>
+        </div>
+    </div>
+{% endblock %}
+
+{% block body %}
+    <div class="container  container--custom">
+        <form method="post">
+            {{ form_errors(form) }}
+            {{ form_rest(form) }}
+            <button type="submit" class="btn btn-primary">{{ 'search.form.submit'|trans({}, 'CapcoAppBundle') }}</button>
+        </form>
+    </div>
+
+    <div class="container  container--custom">
+
+        <h2 class="h2">
+            {% transchoice results | length with { '%count%': results | length} from 'CapcoAppBundle' %}
+                search.results.title
+            {% endtranschoice %}
+        </h2>
+
+        <ul>
+            {% for result in results %}
+                {% set title = result.title is defined ? result.title : result.body | slice(0, 200) %}
+                <li>
+                    {{ title }}
+                    <p class="excerpt small">{{ result.body | striptags }}</p>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+{% endblock %}
