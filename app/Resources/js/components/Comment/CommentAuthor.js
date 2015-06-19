@@ -10,9 +10,13 @@ var CommentAuthor = React.createClass({
 
     renderAuthorName() {
         if (this.props.comment.author) {
-            return <a href="#">{ this.props.comment.author.username }</a>;
+            return (
+                <a href={this.props.comment.author._links.profile}>
+                    { this.props.comment.author.username }
+                </a>
+            );
         }
-        return <a href="#">{ this.props.comment.authorName }</a>;
+        return <span>{ this.props.comment.authorName }</span>;
     }
 
 });

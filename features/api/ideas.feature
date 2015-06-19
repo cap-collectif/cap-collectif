@@ -15,6 +15,9 @@ Feature: Ideas
           "username": @string@,
           "media": {
             "url": @string@
+          },
+          "_links": {
+            "profile": @string@
           }
         },
         "author_email": @null@,

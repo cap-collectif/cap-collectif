@@ -1,5 +1,6 @@
 import Comment from './Comment';
 import Fetcher from '../../services/Fetcher';
+var FormattedMessage  = ReactIntl.FormattedMessage;
 
 var CommentList = React.createClass({
     mixins: [ReactIntl.IntlMixin],
@@ -23,7 +24,12 @@ var CommentList = React.createClass({
     render() {
         return (
             <div>
-                <h2 className="h2">{ this.state.comments.length } commentaires</h2>
+                <h2 className="h2">
+                    <FormattedMessage
+                        message={this.getIntlMessage('comment.list')}
+                        num={this.state.comments.length}
+                    />
+                </h2>
                 <ul className="media-list  opinion__list">
                       {
                           this.state.comments.map((comment) => {

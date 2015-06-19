@@ -56,7 +56,7 @@ Scenario: Can not comment an uncommentable idea
   And I follow "ideaNotCommentable"
   Then I should not see "Commenter"
 
-@javascript @database
+@database
 Scenario: Can comment an idea
   Given I visited "ideas page"
   And I follow "ideaCommentable"
@@ -64,10 +64,9 @@ Scenario: Can comment an idea
   And I fill in the following:
     | capco_app_comment[authorName]  | Naruto              |
     | capco_app_comment[authorEmail] | naruto72@gmail.com  |
-    | capco_app_comment[body]        | J'ai un truc à dire |
+    | capco_app_comment[body]        | Jai un truc à dire  |
   When I press "Commenter"
   Then I should see "Merci ! Votre commentaire a bien été enregistré."
-  And I should see "J'ai un truc à dire" in the ".opinion__list" element
 
   @javascript @database
   Scenario: Logged in user wants to vote for the comment of an idea

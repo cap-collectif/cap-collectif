@@ -1,7 +1,19 @@
 
+
 var CommentVoteButton = React.createClass({
     mixins: [ReactIntl.IntlMixin],
+
     render() {
+        return (
+            <span>
+                { this.renderFormOrDisabled() }
+                &nbsp;
+                <span className="opinion__votes-nb">{ this.props.comment.vote_count }</span>
+            </span>
+        );
+    },
+
+    renderFormOrDisabled() {
         if (!this.props.comment.can_contribute) {
             return (
                 <button disabled="disabled" className="btn  btn-dark-gray  btn-xs">

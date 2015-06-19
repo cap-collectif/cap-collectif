@@ -818,6 +818,7 @@ comment:
     not_found: Commentaire introuvable.
     no_contribute: Impossible de contribuer sur ce commentaire.
     not_author: Vous ne pouvez pas modifier ce commentaire car vous n'en êtes pas l'auteur.
+    alreay_reported: Vil félon, tu pensais pouvoir signaler deux fois ? Que nenni !
 
 # video module
 video:

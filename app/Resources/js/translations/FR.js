@@ -3,6 +3,7 @@ export default {
     locales : ['fr-FR'],
     messages: {
         comment: {
+            list: '{num, plural, =0{} one{# commentaire} other{# commentaires}}',
             vote: {
                 submit: 'D\'accord',
                 delete: 'Annuler mon vote'

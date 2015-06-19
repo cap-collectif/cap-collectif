@@ -22,7 +22,6 @@ var Comment = React.createClass({
                 </div>
                 <CommentBody comment={comment} />
                 <CommentVoteButton comment={comment} />&nbsp;
-                <span className="opinion__votes-nb">{ comment.vote_count }</span>&nbsp;
                 <CommentReport comment={comment} />&nbsp;
                 <CommentEdit comment={comment} />
             </div>

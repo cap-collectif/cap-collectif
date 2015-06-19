@@ -1,10 +1,14 @@
 var CommentBody = React.createClass({
     mixins: [ReactIntl.IntlMixin],
+
     render() {
+        var classes = 'opinion__text';
+        if (this.props.comment.body.length > 500) {
+            classes += ' more';
+        }
         return (
-            <p className="opinion__text">
+            <p className={classes} dangerouslySetInnerHTML={{__html: this.props.comment.body }}>
                 { this.renderTrashedLabel() }
-                { this.props.comment.body }
             </p>
         )
     },

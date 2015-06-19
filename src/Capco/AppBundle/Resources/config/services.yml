@@ -352,6 +352,13 @@ services:
         tags:
             - { name: "jms_serializer.event_subscriber" }
 
+    capco.user.serialization_listener:
+        class: Capco\AppBundle\EventListener\UserSerializationListener
+        arguments: [@router]
+        scope: request
+        tags:
+            - { name: "jms_serializer.event_subscriber" }
+
     capco.synthesis.synthesis_listener:
         class: Capco\AppBundle\EventListener\SynthesisLoggableListener
         calls:

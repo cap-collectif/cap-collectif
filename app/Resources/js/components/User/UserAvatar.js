@@ -1,11 +1,20 @@
 var UserAvatar = React.createClass({
 
     render() {
+
+        if (this.props.user) {
+            return (
+                <a className="pull-left" href={this.props.user._links.profile}>
+                    { this.renderAvatar() }
+                </a>
+            );
+        }
+
         return (
             <a className="pull-left" href="#">
                 { this.renderAvatar() }
             </a>
-        )
+        );
     },
 
     renderAvatar() {
