@@ -91,7 +91,7 @@ Feature: Consultation
       | consultationSlug | croissance-innovation-disruption |
       | stepSlug         | collecte-des-avis                |
     And I follow "Actualités"
-    And I should see 5 ".media--news" elements
+    And I should see 10 ".media--news" elements
 
   Scenario: Consultation header should display correct number of votes
     Given I visited "consultation page" with:
@@ -104,10 +104,10 @@ Feature: Consultation
     Given I visited "consultation page" with:
       | consultationSlug | croissance-innovation-disruption |
       | stepSlug         | collecte-des-avis                |
-    Then I should see "160 contributions"
+    Then I should see "164 contributions"
     And I hover over the "#contributions-counter-pill" element
     And I should see "29 propositions"
-    And I should see "101 arguments"
+    And I should see "105 arguments"
     And I should see "30 sources"
 
   Scenario: Consultation header should display correct number of participants

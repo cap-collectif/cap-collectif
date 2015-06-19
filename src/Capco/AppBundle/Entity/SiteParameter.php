@@ -98,6 +98,13 @@ class SiteParameter
      */
     private $type;
 
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="category", type="text")
+     */
+    private $category = 'settings.global';
+
     public function __toString()
     {
         if ($this->id) {
@@ -284,5 +291,21 @@ class SiteParameter
     public function setType($type)
     {
         $this->type = $type;
+    }
+
+    /**
+     * @return string
+     */
+    public function getCategory()
+    {
+        return $this->category;
+    }
+
+    /**
+     * @param string $category
+     */
+    public function setCategory($category)
+    {
+        $this->category = $category;
     }
 }

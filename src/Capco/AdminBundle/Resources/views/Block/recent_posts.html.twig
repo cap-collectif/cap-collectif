@@ -1,14 +1,14 @@
 {% extends sonata_block.templates.block_base %}
 
 {% block block %}
-    <div class="sonata-news-block-recent-post panel panel-default">
+    <div class="sonata-news-block-recent-post box">
         {% if settings.title %}
-            <div class="panel-heading">
-                <h3 class="sonata-news-block-recent-post panel-title"><i class="fa fa-pencil"></i> {{ settings.title|trans({}, 'SonataAdminBundle') }}</h3>
+            <div class="box-header">
+                <h3 class="sonata-news-block-recent-post box-title"><i class="fa fa-pencil"></i> {{ settings.title|trans({}, 'SonataAdminBundle') }}</h3>
             </div>
         {% endif %}
 
-        <div class="panel-body">
+        <div class="box-body">
             <div class="sonata-blog-post-container list-group">
                 {% for post in posts %}
                     <a class="list-group-item" href="{{ url('admin_capco_app_post_edit', { 'id': post.id }) }}">
