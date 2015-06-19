@@ -6,13 +6,34 @@ Capco\AppBundle\Entity\Argument:
         body: <text(300)>
         isEnabled: true
         isTrashed: false
-    argument{2..200}:
+    argument{2..100}:
         Opinion: @opinion<numberBetween(1, 50)>
         type: <numberBetween(0, 1)>
         Author: @user<numberBetween(1, 5)>
         body: <text(300)>
-        isEnabled: <boolean()>
-        isTrashed: <boolean()>
+        isEnabled: true
+        isTrashed: false
+    argument{101..150}:
+        Opinion: @opinion<numberBetween(1, 50)>
+        type: <numberBetween(0, 1)>
+        Author: @user<numberBetween(1, 5)>
+        body: <text(300)>
+        isEnabled: true
+        isTrashed: true
+    argument{151..175}:
+        Opinion: @opinion<numberBetween(1, 50)>
+        type: <numberBetween(0, 1)>
+        Author: @user<numberBetween(1, 5)>
+        body: <text(300)>
+        isEnabled: false
+        isTrashed: true
+    argument{176..200}:
+        Opinion: @opinion<numberBetween(1, 50)>
+        type: <numberBetween(0, 1)>
+        Author: @user<numberBetween(1, 5)>
+        body: <text(300)>
+        isEnabled: false
+        isTrashed: false
     argument201:
         Opinion: @opinion51
         type: 0

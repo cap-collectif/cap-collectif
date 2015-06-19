@@ -68,21 +68,22 @@ class OpinionRepository extends EntityRepository
     /**
      * Get all trashed opinions.
      *
-     * @param $step
+     * @param $consultation
      *
      * @return array
      */
-    public function getTrashedByConsultationStep($step)
+    public function getTrashedByConsultation($consultation)
     {
         $qb = $this->getIsEnabledQueryBuilder()
             ->addSelect('ot', 's', 'aut', 'm')
             ->leftJoin('o.OpinionType', 'ot')
-            ->leftJoin('o.step', 's')
             ->leftJoin('o.Author', 'aut')
             ->leftJoin('aut.Media', 'm')
-            ->andWhere('o.step = :step')
+            ->leftJoin('o.step', 's')
+            ->leftJoin('s.consultationAbstractStep', 'cas')
+            ->andWhere('cas.consultation = :consultation')
             ->andWhere('o.isTrashed = :trashed')
-            ->setParameter('step', $step)
+            ->setParameter('consultation', $consultation)
             ->setParameter('trashed', true)
             ->orderBy('o.trashedAt', 'DESC');
 

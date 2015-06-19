@@ -91,7 +91,7 @@ Feature: Consultation
       | consultationSlug | croissance-innovation-disruption |
       | stepSlug         | collecte-des-avis                |
     And I follow "Actualités"
-    And I should see 10 ".media--news" elements
+    And I should see 7 ".media--news" elements
 
   Scenario: Consultation header should display correct number of votes
     Given I visited "consultation page" with:
@@ -104,17 +104,17 @@ Feature: Consultation
     Given I visited "consultation page" with:
       | consultationSlug | croissance-innovation-disruption |
       | stepSlug         | collecte-des-avis                |
-    Then I should see "164 contributions"
+    Then I should see "211 contributions"
     And I hover over the "#contributions-counter-pill" element
-    And I should see "29 propositions"
-    And I should see "105 arguments"
+    And I should see "31 propositions"
+    And I should see "150 arguments"
     And I should see "30 sources"
 
   Scenario: Consultation header should display correct number of participants
     Given I visited "consultation page" with:
       | consultationSlug | croissance-innovation-disruption |
       | stepSlug         | collecte-des-avis                |
-    Then I should see "20 participants"
+    Then I should see "24 participants"
 
   Scenario: Can download a consultation in xslx format
     Given I visited "home page"
@@ -141,3 +141,34 @@ Feature: Consultation
     Given I visited "home page"
     When I try to download "consultations/strategie-technologique-de-l-etat-et-services-publics/consultation/collecte-des-avis-pour-une-meilleur-strategie/download/xls"
     Then I should see response status code "404"
+
+  Scenario: Can not access trash if feature is disabled
+    Given I am logged in as user
+    And I visited "consultation page" with:
+      | consultationSlug | croissance-innovation-disruption |
+      | stepSlug         | collecte-des-avis                |
+    Then I should not see "Corbeille"
+
+  Scenario: Can not access trash if not logged in
+    Given feature "consultation_trash" is enabled
+    And I visited "consultation page" with:
+      | consultationSlug | croissance-innovation-disruption |
+      | stepSlug         | collecte-des-avis                |
+    When I follow "Corbeille"
+    Then I should see "Se connecter"
+
+  Scenario: Consultation trash display correct numbers of elements
+    Given feature "consultation_trash" is enabled
+    And I am logged in as user
+    And I visited "consultation page" with:
+      | consultationSlug | croissance-innovation-disruption |
+      | stepSlug         | collecte-des-avis                |
+    When I follow "Corbeille"
+    Then I should see 52 ".opinion__list .opinion" elements
+    And I should see "52" in the "span.badge" element
+
+  Scenario: I should not see opinion types menu when only one type is allowed
+    Given I visited "consultation page" with:
+      | consultationSlug | consultation-vide |
+      | stepSlug         | consultation      |
+    Then I should see 0 ".consultation__nav" on current page

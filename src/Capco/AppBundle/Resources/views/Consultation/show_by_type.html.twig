@@ -3,6 +3,20 @@
 {% block canonical_link %}{{ url('app_consultation_show_opinions', {'consultationSlug': consultation.slug, 'stepSlug': currentStep.slug, 'opinionTypeSlug': opinionType.slug}) }}{% endblock %}
 
 {% block opinions_list %}
+
+    {% if currentStep.allowedTypes | length == 1 and currentStep.body is not null %}
+        <div class="block  block--bordered">
+            <div class="opinion  opinion--current  opinion--default">
+                <div class="opinion__header  opinion__header--mobile-centered">
+                    <h2 class="pull-left  h4  opinion__header__title"> {{ 'consultation.show.meta.intro.title' | trans({}, 'CapcoAppBundle') }}</h2>
+                </div>
+                <div class="box">
+                    <p class="more">{{ currentStep.body|striptags }}</p>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+
     <div class="block  block--bordered">
         <div class="opinion  opinion--{{ opinionType.color }} opinion--default">
             <div class="opinion__header  opinion__header--mobile-centered">
@@ -21,6 +35,7 @@
                 </div>
             </div>
         </div>
+
         {% if(opinions|length > 0) %}
         <ul class="media-list  opinion__list">
             {% for opinion in opinions %}

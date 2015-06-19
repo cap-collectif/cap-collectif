@@ -112,7 +112,7 @@ class IdeaController extends Controller
     }
 
     /**
-     * @Route("/ideas/trashed/{page}", name="app_idea_trashed", requirements={"page" = "\d+"}, defaults={"_feature_flags" = "ideas", "page" = 1} )
+     * @Route("/ideas/trashed/{page}", name="app_idea_trashed", requirements={"page" = "\d+"}, defaults={"_feature_flags" = "ideas,idea_trash", "page" = 1} )
      * @Template("CapcoAppBundle:Idea:show_trashed.html.twig")
      *
      * @param $page
