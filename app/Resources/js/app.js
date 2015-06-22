@@ -1,9 +1,9 @@
-import CommentList from './components/Comment/CommentList';
 import IntlData from './translations/FR'
+import CommentSection from './components/Comment/CommentSection';
 
 if ($('#render-idea-comments').length) {
     React.render(
-        <CommentList idea={$('#render-idea-comments').data("idea")} {...IntlData} />,
+        <CommentSection idea={$('#render-idea-comments').data("idea")} queryParams={{'offset': 0, 'limit': 20}} {...IntlData} />,
         document.getElementById('render-idea-comments')
     );
 }
