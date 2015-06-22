@@ -3,13 +3,8 @@ capco_admin:
     type:     annotation
     prefix:   /
 
-capco_api_synthesis:
+capco_api:
   resource: "@CapcoAppBundle/Controller/Api/SynthesisController.php"
-  type: rest
-  prefix: /api
-
-capco_api_ideas:
-  resource: "@CapcoAppBundle/Controller/Api/IdeasController.php"
   type: rest
   prefix: /api
 
@@ -90,7 +85,7 @@ twitter_login:
     pattern: /login/check-twitter
 
 api_login_check:
-    path: /api/syntheses/login_check
+    path: /api/login_check
 
 # nelmio doc
 NelmioApiDocBundle:

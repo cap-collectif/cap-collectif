@@ -1,8 +1,0 @@
-Capco\MediaBundle\Entity\Media:
-    exclusion_policy: ALL
-    properties:
-        id:
-            expose: true
-            type: integer
-            groups: [Default]
-

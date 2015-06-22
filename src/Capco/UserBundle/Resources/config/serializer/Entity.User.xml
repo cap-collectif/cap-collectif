@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<serializer>
+    <class name="Capco\UserBundle\Entity\User" exclusion-policy="all" xml-root-name="_user">
+        <property name="slug"            type="string"   expose="true" since-version="1.0" groups="Default" />
+    </class>
+</serializer>

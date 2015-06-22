@@ -45,10 +45,7 @@
     {{ parent() }}
     <script type="text/javascript">
         $(window).on('load', function() {
-            App.equalheight('.event-js');
-        });
-        $(window).on('resize', function() {
-            App.resized('.event-js');
+            App.module.equalheight('.event-js');window.onresize = App.module.resized('.event-js');
         });
     </script>
 {% endblock %}

@@ -24,12 +24,7 @@
     {{ parent() }}
     <script type="text/javascript">
         $(window).on('load', function() {
-            App.equalheight('.media--macro');
+            App.module.equalheight('.media--macro');window.onresize = App.module.resized('.media--macro');
         });
-
-        $(window).on('resize', function() {
-            App.resized('.media--macro');
-        });
-
     </script>
 {% endblock %}
