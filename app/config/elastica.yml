@@ -10,10 +10,14 @@ fos_elastica:
         user:
           indexable_callback: isEnabled
           mappings:
-            id: ~
-            slug: ~
-            username: ~
-            biography: ~
+            id:
+              type: long
+            slug:
+              index: not_analyzed
+            username:
+              analyzer: %language_analyzer%
+            biography:
+              analyzer: %language_analyzer%
           persistence:
             identifier: slug
             driver: orm
@@ -26,14 +30,18 @@ fos_elastica:
           indexable_callback: getIsEnabled
           mappings:
             id:
-              type: integer
-            body: ~
-            createdAt: ~
-            updatedAt: ~
+              type: long
+            body:
+              analyzer: %language_analyzer%
+            createdAt:
+              type: date
+            updatedAt:
+              type: date
             Author:
               type: object
               properties:
-                slug: ~
+                slug:
+                  index: not_analyzed
           persistence:
             identifier: id
             driver: orm
@@ -46,16 +54,22 @@ fos_elastica:
           indexable_callback: getIsEnabled
           mappings:
             id:
-              type: integer
-            title: ~
-            slug: ~
-            publishedAt: ~
-            createdAt: ~
-            updatedAt: ~
+              type: long
+            title:
+              analyzer: %language_analyzer%
+            slug:
+              index: not_analyzed
+            publishedAt:
+              type: date
+            createdAt:
+              type: date
+            updatedAt:
+              type: date
             Author:
               type: object
               properties:
-                slug: ~
+                slug:
+                  index: not_analyzed
           persistence:
             identifier: slug
             driver: orm
@@ -68,14 +82,18 @@ fos_elastica:
           indexable_callback: getIsEnabled
           mappings:
             id:
-              type: integer
-            body: ~
-            createdAt: ~
-            updatedAt: ~
+              type: long
+            body:
+              analyzer: %language_analyzer%
+            createdAt:
+              type: date
+            updatedAt:
+              type: date
             Author:
               type: object
               properties:
-                slug: ~
+                slug:
+                  index: not_analyzed
             authorName: ~
           persistence:
             identifier: id
@@ -89,18 +107,26 @@ fos_elastica:
           indexable_callback: getIsEnabled
           mappings:
             id:
-              type: integer
-            title: ~
-            slug: ~
-            body: ~
-            createdAt: ~
-            updatedAt: ~
-            startAt: ~
-            endAt: ~
+              type: long
+            title:
+              analyzer: %language_analyzer%
+            slug:
+              index: not_analyzed
+            body:
+              analyzer: %language_analyzer%
+            createdAt:
+              type: date
+            updatedAt:
+              type: date
+            startAt:
+              type: date
+            endAt:
+              type: date
             Author:
               type: object
               properties:
-                slug: ~
+                slug:
+                  index: not_analyzed
           persistence:
             identifier: slug
             driver: orm
@@ -113,17 +139,24 @@ fos_elastica:
           indexable_callback: getIsEnabled
           mappings:
             id:
-              type: integer
-            title: ~
-            slug: ~
-            body: ~
-            object: ~
-            createdAt: ~
-            updatedAt: ~
+              type: long
+            title:
+              analyzer: %language_analyzer%
+            slug:
+              index: not_analyzed
+            body:
+              analyzer: %language_analyzer%
+            object:
+              analyzer: %language_analyzer%
+            createdAt:
+              type: date
+            updatedAt:
+              type: date
             Author:
               type: object
               properties:
-                slug: ~
+                slug:
+                  index: not_analyzed
           persistence:
             identifier: slug
             driver: orm
@@ -136,16 +169,22 @@ fos_elastica:
           indexable_callback: getIsEnabled
           mappings:
             id:
-              type: integer
-            title: ~
-            slug: ~
-            body: ~
-            updatedAt: ~
-            createdAt: ~
+              type: long
+            title:
+              analyzer: %language_analyzer%
+            slug:
+              index: not_analyzed
+            body:
+              analyzer: %language_analyzer%
+            updatedAt:
+              type: date
+            createdAt:
+              type: date
             Author:
               type: object
               properties:
-                slug: ~
+                slug:
+                  index: not_analyzed
           persistence:
             identifier: slug
             driver: orm
@@ -158,18 +197,26 @@ fos_elastica:
           indexable_callback: getIsPublished
           mappings:
             id:
-              type: integer
-            title: ~
-            abstract: ~
-            slug: ~
-            body: ~
-            createdAt: ~
-            updatedAt: ~
-            publishedAt: ~
+              type: long
+            title:
+              analyzer: %language_analyzer%
+            abstract:
+              analyzer: %language_analyzer%
+            slug:
+              index: not_analyzed
+            body:
+              analyzer: %language_analyzer%
+            createdAt:
+              type: date
+            updatedAt:
+              type: date
+            publishedAt:
+              type: date
             Authors:
               type: nested
               properties:
-                slug: ~
+                slug:
+                  index: not_analyzed
           persistence:
             identifier: slug
             driver: orm
@@ -182,16 +229,22 @@ fos_elastica:
           indexable_callback: getIsEnabled
           mappings:
             id:
-              type: integer
-            title: ~
-            slug: ~
-            body: ~
-            createdAt: ~
-            updatedAt: ~
+              type: long
+            title:
+              analyzer: %language_analyzer%
+            slug:
+              index: not_analyzed
+            body:
+              analyzer: %language_analyzer%
+            createdAt:
+              type: date
+            updatedAt:
+              type: date
             Author:
               type: object
               properties:
-                slug: ~
+                slug:
+                  index: not_analyzed
           persistence:
             identifier: slug
             driver: orm
@@ -203,16 +256,25 @@ fos_elastica:
         theme:
           indexable_callback: getIsEnabled
           mappings:
-            id: ~
-            title: ~
-            teaser: ~
-            body: ~
+            id:
+              type: long
+            title:
+              analyzer: %language_analyzer%
+            slug:
+              index: not_analyzed
+            teaser:
+              analyzer: %language_analyzer%
+            body:
+              analyzer: %language_analyzer%
             Author:
               type: object
               properties:
-                slug: ~
-            createdAt: ~
-            updatedAt: ~
+                slug:
+                  index: not_analyzed
+            createdAt:
+              type: date
+            updatedAt:
+              type: date
           persistence:
             identifier: slug
             driver: orm

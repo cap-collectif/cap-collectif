@@ -39,3 +39,5 @@ parameters:
     jwt_public_key_path:  %kernel.root_dir%/var/jwt/public.pem    # ssh public key path
     jwt_key_pass_phrase:  'iamapassphrase'                        # ssh key pass phrase
     jwt_token_ttl:        86400
+
+    language_analyzer: french                                     # language analyzer to use for elasticsearch

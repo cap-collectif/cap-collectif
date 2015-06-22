@@ -47,6 +47,8 @@ $container->setParameter('jwt_public_key_path',         set_var('jwt_public_key_
 $container->setParameter('jwt_key_pass_phrase',         set_var('jwt_key_pass_phrase', 'iamapassphrase'));
 $container->setParameter('jwt_token_ttl',               set_var('jwt_token_ttl', 86400));
 
+$container->setParameter('language_analyzer',           set_var('language_analyzer', 'french'));
+
 if (file_exists('app/config/parameters.yml') || file_exists('../app/config/parameters.yml')) {
     $loader->import('parameters.yml');
 }
