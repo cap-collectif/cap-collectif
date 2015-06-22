@@ -4,7 +4,7 @@ Feature: Ideas
     When I send a GET request to "/api/ideas/2/comments"
     Then the JSON response should match:
     """
-    "total_count": @integer,
+    "total_count": @integer@,
     "comments":
     [
       {
