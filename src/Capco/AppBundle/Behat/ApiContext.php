@@ -62,7 +62,7 @@ class ApiContext extends ApplicationContext
     {
         $request = $this->client->createRequest(
             'POST',
-            '/api/login_check',
+            '/api/syntheses/login_check',
             [
                 'body' => [
                     'username' => $username,

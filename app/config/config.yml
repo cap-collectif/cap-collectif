@@ -275,8 +275,21 @@ lexik_jwt_authentication:
 
 jms_serializer:
     metadata:
-        auto_detection: true
+        cache: file
+        debug: "%kernel.debug%"
+        file_cache:
+            dir: "%kernel.cache_dir%/serializer"
+        auto_detection: false
         directories:
+            App:
+                namespace_prefix: "Capco\\AppBundle\\Entity"
+                path: "%kernel.root_dir%/Resources/serializer"
+            User:
+                namespace_prefix: "Capco\\UserBundle"
+                path: "@CapcoUserBundle/Resources/config/serializer"
+            Media:
+                namespace_prefix: "Capco\\MediaBundle"
+                path: "@CapcoMediaBundle/Resources/config/serializer"
             FOSUserBundle:
                 namespace_prefix: "FOS\\UserBundle"
                 path: "@CapcoUserBundle/Resources/config/serializer/FOSUserBundle"

@@ -296,6 +296,12 @@ class ReportingController extends Controller
             throw new AccessDeniedException($this->get('translator')->trans('comment.error.no_contribute', array(), 'CapcoAppBundle'));
         }
 
+        $user = $this->getUser();
+
+        if ($comment->userHasReport($user)) {
+            throw new AccessDeniedException($this->get('translator')->trans('comment.error.already_reported', array(), 'CapcoAppBundle'));
+        }
+
         $reporting = new Reporting();
         $form = $this->createForm(new ReportingType(), $reporting);
 
@@ -305,8 +311,8 @@ class ReportingController extends Controller
             if ($form->isValid()) {
                 $em = $this->getDoctrine()->getManager();
                 $reporting->setComment($comment);
-                $reporting->setReporter($this->getUser());
-                $this->get('capco.notify_manager')->sendNotifyMessage($this->getUser(), $reporting->getStatus(), $form->get('body')->getData());
+                $reporting->setReporter($user);
+                $this->get('capco.notify_manager')->sendNotifyMessage($user, $reporting->getStatus(), $form->get('body')->getData());
                 $em->persist($reporting);
                 $em->flush();
                 $this->get('session')->getFlashBag()->add('success', $this->get('translator')->trans('reporting.success'));

@@ -1,13 +1,13 @@
 Capco\AppBundle\Entity\IdeaComment:
     iComment1:
         Idea: @Idea2
-        Author: @user<numberBetween(1, 5)>
+        Author: @user<numberBetween(1, 3)>
         body: <text(300)>
         isEnabled: true
         isTrashed: false
     iComment{2..50}:
         Idea: @Idea<numberBetween(3, 10)>
-        Author: @user<numberBetween(1, 5)>
+        Author: @user<numberBetween(1, 3)>
         body: <text(300)>
         isEnabled: <boolean()>
         isTrashed: <boolean()>

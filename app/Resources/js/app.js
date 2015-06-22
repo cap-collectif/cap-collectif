@@ -1,6 +1,14 @@
-var App = App || {};
+import CommentList from './components/Comment/CommentList';
+import IntlData from './translations/FR'
 
-App.module = function ($) {
+if ($('#render-idea-comments').length) {
+    React.render(
+        <CommentList idea={$('#render-idea-comments').data("idea")} {...IntlData} />,
+        document.getElementById('render-idea-comments')
+    );
+}
+
+var App = function ($) {
 
     var equalheight = function(container) {
         var currentTallest = 0;
@@ -15,6 +23,7 @@ App.module = function ($) {
             topPosition = $el.position().top;
 
             if ($(window).width() > 767) {
+                var currentDiv = 0;
 
                 if (currentRowStart != topPosition) {
                     for (currentDiv = 0; currentDiv < rowDivs.length; currentDiv++) {
@@ -187,7 +196,7 @@ App.module = function ($) {
         });
     };
 
-    var AppPublic = {
+    return {
         equalheight: equalheight,
         resized: resized,
         pieChart: pieChart,
@@ -203,6 +212,6 @@ App.module = function ($) {
         customModal: customModal,
     };
 
-    return AppPublic;
-
 }(jQuery);
+
+export default App;

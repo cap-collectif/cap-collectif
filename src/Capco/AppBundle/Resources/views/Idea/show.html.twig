@@ -112,8 +112,9 @@
 
             {% if capco_comment_can_add(idea) or(capco_comment_can_show(idea) and idea.commentsCount > 0) %}
                 <div class="container  container--thinner container--custom">
+
                     {% if capco_comment_can_show(idea) and idea.commentsCount > 0 %}
-                        {{ render(controller('CapcoAppBundle:Site/Comment:showComments', {'object': idea})) }}
+                        <div id="render-idea-comments" data-idea="{{ idea.id }}"></div>
                     {% endif %}
 
                     {% if capco_comment_can_add(idea) %}
@@ -219,20 +220,20 @@
             heightMargin: 43
         });
         {% if idea.canContribute %}
-            App.module.makeSidebar({
+            App.makeSidebar({
                 sidebar: '#sidebar',
                 container: '#sidebar-container',
                 hideable: '.sidebar-hideable',
                 toggle: '.sidebar-toggle',
                 overlay: '#sidebar-overlay'
             });
-            App.module.hideableMessageAndCheckbox({
+            App.hideableMessageAndCheckbox({
                 message: '.message-hideable-js',
                 checkbox: '.checkbox-hideable-js',
             });
         {% endif %}
         {% if null == app.user %}
-            App.module.initPopovers('.connection-popover-js', {
+            App.initPopovers('.connection-popover-js', {
                 placement: "top",
                 html: "true",
                 trigger: "focus",

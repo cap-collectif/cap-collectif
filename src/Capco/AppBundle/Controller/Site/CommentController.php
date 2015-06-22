@@ -149,43 +149,39 @@ class CommentController extends Controller
         $user = $this->getUser();
 
         if ($request->getMethod() == 'POST') {
-            if ($this->isCsrfTokenValid('comment_vote', $request->get('_csrf_token'))) {
-                $em = $this->getDoctrine()->getManager();
+            $em = $this->getDoctrine()->getManager();
 
-                $commentVote = new CommentVote();
-                $commentVote->setUser($user);
+            $commentVote = new CommentVote();
+            $commentVote->setUser($user);
 
-                $userVote = $em->getRepository('CapcoAppBundle:CommentVote')->findOneBy(array(
-                    'user' => $user,
-                    'comment' => $comment,
-                ));
+            $userVote = $em->getRepository('CapcoAppBundle:CommentVote')->findOneBy(array(
+                'user' => $user,
+                'comment' => $comment,
+            ));
 
-                if ($userVote != null) {
-                    $commentVote = $userVote;
-                }
+            if ($userVote != null) {
+                $commentVote = $userVote;
+            }
 
-                if ($userVote == null) {
-                    $commentVote->setComment($comment);
-                    $em->persist($commentVote);
-                    $this->get('event_dispatcher')->dispatch(
-                        CapcoAppBundleEvents::ABSTRACT_VOTE_CHANGED,
-                        new AbstractVoteChangedEvent($commentVote, 'add')
-                    );
-                    $em->flush();
+            if ($userVote == null) {
+                $commentVote->setComment($comment);
+                $em->persist($commentVote);
+                $this->get('event_dispatcher')->dispatch(
+                    CapcoAppBundleEvents::ABSTRACT_VOTE_CHANGED,
+                    new AbstractVoteChangedEvent($commentVote, 'add')
+                );
+                $em->flush();
 
-                    $this->get('session')->getFlashBag()->add('success', $this->get('translator')->trans('comment.vote.add_success'));
-                } else {
-                    $em->remove($commentVote);
-                    $this->get('event_dispatcher')->dispatch(
-                        CapcoAppBundleEvents::ABSTRACT_VOTE_CHANGED,
-                        new AbstractVoteChangedEvent($commentVote, 'remove')
-                    );
-                    $em->flush();
-
-                    $this->get('session')->getFlashBag()->add('info', $this->get('translator')->trans('comment.vote.remove_success'));
-                }
+                $this->get('session')->getFlashBag()->add('success', $this->get('translator')->trans('comment.vote.add_success'));
             } else {
-                $this->get('session')->getFlashBag()->add('danger', $this->get('translator')->trans('comment.vote.csrf_error'));
+                $em->remove($commentVote);
+                $this->get('event_dispatcher')->dispatch(
+                    CapcoAppBundleEvents::ABSTRACT_VOTE_CHANGED,
+                    new AbstractVoteChangedEvent($commentVote, 'remove')
+                );
+                $em->flush();
+
+                $this->get('session')->getFlashBag()->add('info', $this->get('translator')->trans('comment.vote.remove_success'));
             }
         }
 

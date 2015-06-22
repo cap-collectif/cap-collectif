@@ -61,4 +61,4 @@ Feature: Opinions
       | opinionTypeSlug  | solutions                        |
       | opinionSlug      | opinion-5                        |
     When I click the ".connection-popover-js" element
-    Then I should see "1" in the ".opinion__chart" element
+    Then I should see "1 vote" in the ".opinion__votes" element

@@ -75,12 +75,13 @@
     <script src="{{ asset('js/vendor.js') }}"></script>
     <script src="{{ asset('js/app.js') }}"></script>
     <script type="text/javascript">
+        var App = require('Resources/js/app');
         $(window).on('load', function() {
-            App.module.externalLinks();
-            App.module.autocollapse('.autocollapse-js')
+            App.externalLinks();
+            App.autocollapse('.autocollapse-js')
         });
         $(window).on('resize', function() {
-            App.module.autocollapse('.autocollapse-js');
+            App.autocollapse('.autocollapse-js');
         });
         $(function () {
           $('[data-toggle="tooltip"]').tooltip();
