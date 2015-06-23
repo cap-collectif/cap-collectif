@@ -34,7 +34,7 @@ class SearchResolver
                 $query = new Query($termQuery);
             }
 
-            $query->setSize(5);
+            $query->setSize(10);
             $query->setFrom(0);
 
             $query->setHighlight($this->getHighlightSettings());

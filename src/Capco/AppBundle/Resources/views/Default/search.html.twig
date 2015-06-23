@@ -34,9 +34,14 @@
 
         <ul>
             {% for result in results %}
-                {% set title = result.result.hit['highlight']['title'] is defined ? result.result.hit['highlight']['title'][0] : ( result.result.hit['highlight']['username'] is defined ? result.result.hit['highlight']['username'][0] : ( result.transformed.title is defined ? result.transformed.title : result.result.hit['_type'])) %}
+                {% set title_label = 'search.results.type.' ~ result.result.hit['_type'] %}
+                {% if result.result.hit['_type'] == 'user' %}
+                    {% set title = result.result.hit['highlight']['username'] is defined ? result.result.hit['highlight']['username'][0] : result.transformed.username %}
+                {% else %}
+                    {% set title = result.result.hit['highlight']['title'] is defined ? result.result.hit['highlight']['title'][0] : ( result.transformed.title is defined ? result.transformed.title : null) %}
+                {% endif %}
                 <li>
-                    <h4 class="h4">{{ title | raw }}</h4>
+                    <h4 class="h4">{{ title_label | trans({}, 'CapcoAppBundle') }}{{ title | raw }}</h4>
                     {% for key, highlights in result.result.hit['highlight'] if key != 'title' and key != 'username' %}
                         <p class="excerpt small">
                             {% for excerpt in highlights %}
