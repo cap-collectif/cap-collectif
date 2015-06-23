@@ -4,6 +4,10 @@ fos_elastica:
   indexes:
     app:
       index_name: app_%kernel.environment%
+      settings:
+        index:
+          number_of_shards: 3
+          number_of_replicas: 0
       finder: ~
       types:
       # User
@@ -19,7 +23,6 @@ fos_elastica:
             biography:
               analyzer: %language_analyzer%
           persistence:
-            identifier: slug
             driver: orm
             model: Capco\UserBundle\Entity\User
             provider: ~
@@ -43,7 +46,6 @@ fos_elastica:
                 slug:
                   index: not_analyzed
           persistence:
-            identifier: id
             driver: orm
             model: Capco\AppBundle\Entity\Argument
             provider: ~
@@ -71,7 +73,6 @@ fos_elastica:
                 slug:
                   index: not_analyzed
           persistence:
-            identifier: slug
             driver: orm
             model: Capco\AppBundle\Entity\Consultation
             provider: ~
@@ -83,7 +84,7 @@ fos_elastica:
           mappings:
             id:
               type: long
-            body:
+            strippedBody:
               analyzer: %language_analyzer%
             createdAt:
               type: date
@@ -96,7 +97,6 @@ fos_elastica:
                   index: not_analyzed
             authorName: ~
           persistence:
-            identifier: id
             driver: orm
             model: Capco\AppBundle\Entity\AbstractComment
             provider: ~
@@ -112,7 +112,7 @@ fos_elastica:
               analyzer: %language_analyzer%
             slug:
               index: not_analyzed
-            body:
+            strippedBody:
               analyzer: %language_analyzer%
             createdAt:
               type: date
@@ -128,7 +128,6 @@ fos_elastica:
                 slug:
                   index: not_analyzed
           persistence:
-            identifier: slug
             driver: orm
             model: Capco\AppBundle\Entity\Event
             provider: ~
@@ -144,9 +143,9 @@ fos_elastica:
               analyzer: %language_analyzer%
             slug:
               index: not_analyzed
-            body:
+            strippedBody:
               analyzer: %language_analyzer%
-            object:
+            strippedObject:
               analyzer: %language_analyzer%
             createdAt:
               type: date
@@ -158,7 +157,6 @@ fos_elastica:
                 slug:
                   index: not_analyzed
           persistence:
-            identifier: slug
             driver: orm
             model: Capco\AppBundle\Entity\Idea
             provider: ~
@@ -174,7 +172,7 @@ fos_elastica:
               analyzer: %language_analyzer%
             slug:
               index: not_analyzed
-            body:
+            strippedBody:
               analyzer: %language_analyzer%
             updatedAt:
               type: date
@@ -186,7 +184,6 @@ fos_elastica:
                 slug:
                   index: not_analyzed
           persistence:
-            identifier: slug
             driver: orm
             model: Capco\AppBundle\Entity\Opinion
             provider: ~
@@ -204,7 +201,7 @@ fos_elastica:
               analyzer: %language_analyzer%
             slug:
               index: not_analyzed
-            body:
+            strippedBody:
               analyzer: %language_analyzer%
             createdAt:
               type: date
@@ -218,7 +215,6 @@ fos_elastica:
                 slug:
                   index: not_analyzed
           persistence:
-            identifier: slug
             driver: orm
             model: Capco\AppBundle\Entity\Post
             provider: ~
@@ -246,7 +242,6 @@ fos_elastica:
                 slug:
                   index: not_analyzed
           persistence:
-            identifier: slug
             driver: orm
             model: Capco\AppBundle\Entity\Source
             provider: ~
@@ -264,7 +259,7 @@ fos_elastica:
               index: not_analyzed
             teaser:
               analyzer: %language_analyzer%
-            body:
+            strippedBody:
               analyzer: %language_analyzer%
             Author:
               type: object
@@ -276,7 +271,6 @@ fos_elastica:
             updatedAt:
               type: date
           persistence:
-            identifier: slug
             driver: orm
             model: Capco\AppBundle\Entity\Theme
             provider: ~

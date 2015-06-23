@@ -34,10 +34,17 @@
 
         <ul>
             {% for result in results %}
-                {% set title = result.title is defined ? result.title : result.body | slice(0, 200) %}
+                {{ dump(result) }}
+                {% set title = result.result.hit['highlight']['title'] is defined ? result.result.hit['highlight']['title'][0] : ( result.result.hit['highlight']['username'] is defined ? result.result.hit['highlight']['username'][0] : ( result.transformed.title is defined ? result.transformed.title : result.result.hit['_type'])) %}
                 <li>
-                    {{ title }}
-                    <p class="excerpt small">{{ result.body | striptags }}</p>
+                    <h4 class="h4">{{ title | raw }}</h4>
+                    {% for key, highlights in result.result.hit['highlight'] if key != 'title' and key != 'username' %}
+                        <p class="excerpt small">
+                            {% for excerpt in highlights %}
+                                ...{{ excerpt | raw }}...
+                            {% endfor %}
+                        </p>
+                    {% endfor %}
                 </li>
             {% endfor %}
         </ul>

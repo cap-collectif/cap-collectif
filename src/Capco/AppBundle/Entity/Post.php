@@ -507,6 +507,13 @@ class Post implements CommentableInterface
     }
 
     // **************************** Commentable Methods **************************
+
+    // Used by elasticsearch for indexing
+    public function getStrippedBody()
+    {
+        return strip_tags(html_entity_decode($this->body, ENT_QUOTES|ENT_HTML401, 'UTF-8'));
+    }
+
     public function getClassName()
     {
         return 'Post';

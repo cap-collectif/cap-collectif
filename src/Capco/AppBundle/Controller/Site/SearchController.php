@@ -3,7 +3,6 @@
 namespace Capco\AppBundle\Controller\Site;
 
 use Elastica\Query;
-use Elastica\Query\Terms;
 use Elastica\Query\Bool;
 use Elastica\Query\MultiMatch;
 
@@ -56,15 +55,42 @@ class SearchController extends Controller
             $termQuery = new MultiMatch();
             $termQuery->setQuery($term);
             $termQuery->setFields([
-                'title^10',
+                'title^5',
+                'strippedBody',
+                'strippedObject',
                 'body',
                 'teaser',
-                'excerpt'
+                'excerpt',
+                'username',
+                'biography^5',
             ]);
 
             $boolQuery->addMust($termQuery);
 
-            $results = $finder->find($boolQuery);
+            $query = new Query($boolQuery);
+
+            $query->setSize(5);
+            $query->setFrom(0);
+
+            $query->setHighlight(array(
+                "pre_tags" => ["<span class=\"search__highlight\">"],
+                "post_tags" => ["</span>"],
+                "order" => "score",
+                "number_of_fragments" => 3,
+                "fields" => array(
+                    "title" => array('number_of_fragments' => 0,),
+                    "strippedObject" => new \stdClass,
+                    "strippedBody" => new \stdClass,
+                    "body" => new \stdClass,
+                    "teaser" => new \stdClass,
+                    "excerpt" => new \stdClass,
+                    "username" => array('number_of_fragments' => 0,),
+                    "biography" => new \stdClass,
+                )
+            ));
+
+            // Returns a mixed array of any objects mapped + highlights
+            $results = $finder->findHybrid($query);
         }
 
         return [
