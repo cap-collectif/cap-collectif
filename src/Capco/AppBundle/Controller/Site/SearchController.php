@@ -2,10 +2,6 @@
 
 namespace Capco\AppBundle\Controller\Site;
 
-use Elastica\Query;
-use Elastica\Query\Bool;
-use Elastica\Query\MultiMatch;
-
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
@@ -40,58 +36,9 @@ class SearchController extends Controller
             }
         }
 
-        $results = array();
         $form->setData(['term' => $term, 'type' => $type]);
 
-        if ($term) {
-            $finder = $this->container->get('fos_elastica.finder.app');
-
-            if (null !== $type) {
-                $finder = $this->container->get('fos_elastica.finder.app.'.$type);
-            }
-
-            $boolQuery = new Bool();
-
-            $termQuery = new MultiMatch();
-            $termQuery->setQuery($term);
-            $termQuery->setFields([
-                'title^5',
-                'strippedBody',
-                'strippedObject',
-                'body',
-                'teaser',
-                'excerpt',
-                'username',
-                'biography^5',
-            ]);
-
-            $boolQuery->addMust($termQuery);
-
-            $query = new Query($boolQuery);
-
-            $query->setSize(5);
-            $query->setFrom(0);
-
-            $query->setHighlight(array(
-                "pre_tags" => ["<span class=\"search__highlight\">"],
-                "post_tags" => ["</span>"],
-                "order" => "score",
-                "number_of_fragments" => 3,
-                "fields" => array(
-                    "title" => array('number_of_fragments' => 0,),
-                    "strippedObject" => new \stdClass,
-                    "strippedBody" => new \stdClass,
-                    "body" => new \stdClass,
-                    "teaser" => new \stdClass,
-                    "excerpt" => new \stdClass,
-                    "username" => array('number_of_fragments' => 0,),
-                    "biography" => new \stdClass,
-                )
-            ));
-
-            // Returns a mixed array of any objects mapped + highlights
-            $results = $finder->findHybrid($query);
-        }
+        $results = $this->container->get('capco.search.resolver')->searchAll($term, $type);
 
         return [
             'form' => $form->createView(),

@@ -34,7 +34,6 @@
 
         <ul>
             {% for result in results %}
-                {{ dump(result) }}
                 {% set title = result.result.hit['highlight']['title'] is defined ? result.result.hit['highlight']['title'][0] : ( result.result.hit['highlight']['username'] is defined ? result.result.hit['highlight']['username'][0] : ( result.transformed.title is defined ? result.transformed.title : result.result.hit['_type'])) %}
                 <li>
                     <h4 class="h4">{{ title | raw }}</h4>

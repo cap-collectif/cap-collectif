@@ -375,3 +375,7 @@ services:
     capco.synthesis.consultation_step_extractor:
         class: Capco\AppBundle\Synthesis\Extractor\ConsultationStepExtractor
         arguments: [@doctrine.orm.entity_manager, @translator, @router]
+
+    capco.search.resolver:
+        class: Capco\AppBundle\Resolver\SearchResolver
+        arguments: [@fos_elastica.finder.app]
