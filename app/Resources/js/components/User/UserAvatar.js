@@ -1,6 +1,4 @@
-
 var UserAvatar = React.createClass({
-    // mixins: [ReactIntl.IntlMixin],
 
     render() {
 

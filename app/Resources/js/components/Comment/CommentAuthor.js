@@ -1,5 +1,4 @@
 var CommentAuthor = React.createClass({
-    mixins: [ReactIntl.IntlMixin],
 
     render() {
         return (

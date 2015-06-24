@@ -18,9 +18,6 @@ export default {
             trashed: {
                 label: 'Dans la corbeille'
             }
-        },
-        global: {
-            more: 'Voir plus'
         }
     }
 };

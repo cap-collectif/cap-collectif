@@ -1,7 +1,6 @@
 
 var CommentReport = React.createClass({
     mixins: [ReactIntl.IntlMixin],
-
     render() {
         if (this.props.comment.has_user_reported) {
             return (
