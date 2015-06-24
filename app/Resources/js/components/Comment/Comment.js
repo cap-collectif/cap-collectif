@@ -8,6 +8,8 @@ import CommentEdit from './CommentEdit';
 var FormattedDate = ReactIntl.FormattedDate;
 
 var Comment = React.createClass({
+    mixins: [ReactIntl.IntlMixin],
+
     render() {
         var comment = this.props.comment;
         return (

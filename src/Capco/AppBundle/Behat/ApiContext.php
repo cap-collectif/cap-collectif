@@ -339,6 +339,18 @@ class ApiContext extends ApplicationContext
     }
 
     /**
+     * @Then the comments should be ordered by popularity
+     */
+    public function commentsOrderedByPopularity()
+    {
+        $max = 100000;
+        foreach ($this->response->json()['comments'] as $comment) {
+            \PHPUnit_Framework_Assert::assertGreaterThanOrEqual($comment['vote_count'], $max);
+            $max = $comment['vote_count'];
+        }
+    }
+
+    /**
      * I do nothing for x seconds.
      *
      * @Given I do nothing for :seconds seconds

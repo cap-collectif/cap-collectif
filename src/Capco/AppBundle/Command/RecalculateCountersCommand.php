@@ -135,6 +135,18 @@ class RecalculateCountersCommand extends ContainerAwareCommand
             (select count(iv.id) from CapcoAppBundle:IdeaVote iv where iv.idea = i AND iv.confirmed = 1 group by iv.idea)');
         $query->execute();
 
+        $query = $em->createQuery('update CapcoAppBundle:IdeaComment c set c.voteCount =
+            (select count(cv.id) from CapcoAppBundle:CommentVote cv where cv.comment = c AND cv.confirmed = 1 group by cv.comment)');
+        $query->execute();
+
+        $query = $em->createQuery('update CapcoAppBundle:IdeaComment c set c.voteCount =
+            (select count(cv.id) from CapcoAppBundle:CommentVote cv where cv.comment = c AND cv.confirmed = 1 group by cv.comment)');
+        $query->execute();
+
+        $query = $em->createQuery('update CapcoAppBundle:EventComment c set c.voteCount =
+            (select count(cv.id) from CapcoAppBundle:CommentVote cv where cv.comment = c AND cv.confirmed = 1 group by cv.comment)');
+        $query->execute();
+
         // Comments counters
 
         $query = $em->createQuery('update CapcoAppBundle:Idea i set i.commentsCount =
