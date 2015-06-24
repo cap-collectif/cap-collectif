@@ -212,13 +212,6 @@
 {% block javascripts %}
     {{ parent() }}
     <script type="text/javascript">
-        $('.more').readmore({
-            collapsedHeight: 120,
-            moreLink: '<a href="#">{{ 'comment.read_more'|trans({}, 'CapcoAppBundle') }}</a>',
-            lessLink: '<a href="#">{{ 'comment.read_less'|trans({}, 'CapcoAppBundle') }}</a>',
-            speed: 350,
-            heightMargin: 43
-        });
         {% if idea.canContribute %}
             App.makeSidebar({
                 sidebar: '#sidebar',

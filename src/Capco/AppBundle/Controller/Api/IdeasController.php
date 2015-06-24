@@ -40,7 +40,7 @@ class IdeasController extends FOSRestController
      * @Get("/ideas/{id}/comments")
      * @ParamConverter("idea", options={"mapping": {"id": "id"}})
      * @QueryParam(name="offset", requirements="[0-9.]+", default="0")
-     * @QueryParam(name="limit", requirements="[0-9.]+", default="20")
+     * @QueryParam(name="limit", requirements="[0-9.]+", default="10")
      * @QueryParam(name="filter", requirements="(last|popular)", default="last")
      * @View(serializerGroups={"Comments", "UsersInfos"})
      */
@@ -54,14 +54,13 @@ class IdeasController extends FOSRestController
                     ->getRepository('CapcoAppBundle:IdeaComment')
                     ->getEnabledByIdea($idea, $offset, $limit, $filter);
 
-        $c = count($paginator);
         $comments = [];
         foreach ($paginator as $comment) {
             $comments[] = $comment;
         }
 
         return [
-            'total_count' => $c,
+            'total_count' => count($paginator),
             'comments' => $comments
         ];
     }

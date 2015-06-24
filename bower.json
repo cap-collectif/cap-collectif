@@ -17,7 +17,6 @@
   ],
   "dependencies": {
     "bootstrap": "https://github.com/twbs/bootstrap-sass/archive/v3.2.0.tar.gz",
-    "readmore": "*",
     "jquery-minicolors": "~2.1.10",
     "fancybox": "~2.1.5",
     "ckeditor": "#full/4.4.7",
@@ -35,9 +34,6 @@
     },
     "ckeditor": {
       "main": "ckeditor.js"
-    },
-    "readmore": {
-      "main": "readmore.js"
     },
     "mailcheck": {
       "scripts": []

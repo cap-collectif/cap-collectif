@@ -20,7 +20,10 @@ export default {
             }
         },
         global: {
-            more: 'Voir plus'
+            more: 'Voir plus',
+            popular: 'Populaire',
+            last: 'Récent',
+            read_more: 'Afficher la suite'
         }
     }
 };

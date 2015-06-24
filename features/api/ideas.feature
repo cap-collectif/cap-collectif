@@ -67,7 +67,6 @@ Feature: Ideas
     }
     """
 
-  @test
   Scenario: API client wants to find popular comments of an idea
     When I send a GET request to "/api/ideas/3/comments?filter=popular"
     Then the JSON response should match:

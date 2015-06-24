@@ -17,7 +17,7 @@ class IdeaCommentRepository extends EntityRepository
      *
      * @return array
      */
-    public function getEnabledByIdea($idea, $offset = 0, $limit = 20, $filter = 'last')
+    public function getEnabledByIdea($idea, $offset = 0, $limit = 10, $filter = 'last')
     {
         $qb = $this->getIsEnabledQueryBuilder()
             ->addSelect('aut', 'm', 'v', 'i', 'r')

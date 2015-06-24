@@ -15,22 +15,23 @@ var CommentSection = React.createClass({
     },
 
     componentDidMount() {
-        this.refreshComments();
+        this.loadCommentsFromServer();
+        setInterval(this.loadCommentsFromServer, 5000);
     },
 
     render() {
         return (
         <div>
             <div className="row h2">
-                <h2 className="col-xs-6">
+                <h2 className="col-sm-6">
                     <FormattedMessage
                         message={this.getIntlMessage('comment.list')}
                         num={this.state.comments_total}
                     />
                 </h2>
-                <select id="comment-filter" className="col-xs-6" value={this.state.filter} onChange={() => this.updateSelectedValue()}>
-                  <option value="popular">Populaire</option>
-                  <option value="last">Récent</option>
+                <select id="comment-filter" className="col-sm-6 hidden-xs" value={this.state.filter} onChange={() => this.updateSelectedValue()}>
+                  <option value="popular">{this.getIntlMessage('global.popular')}</option>
+                  <option value="last">{this.getIntlMessage('global.last')}</option>
                 </select>
             </div>
             <CommentList comments={this.state.comments} />
@@ -51,7 +52,7 @@ var CommentSection = React.createClass({
 
     componentDidUpdate(prevProps, prevState) {
         if (this.state.filter != prevState.filter) {
-            this.refreshComments();
+            this.loadCommentsFromServer();
         }
     },
 
@@ -67,7 +68,7 @@ var CommentSection = React.createClass({
         return ;
     },
 
-    refreshComments() {
+    loadCommentsFromServer() {
         Fetcher
         .get('/ideas/'+ this.props.idea +
              '/comments?offset=' + this.props.queryParams.offset +
@@ -85,7 +86,7 @@ var CommentSection = React.createClass({
 
     loadMore() {
         this.props.queryParams.limit += 20;
-        this.refreshComments();
+        this.loadCommentsFromServer();
     }
 
 });
