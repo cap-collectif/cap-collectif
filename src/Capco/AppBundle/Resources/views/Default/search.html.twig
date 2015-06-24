@@ -45,7 +45,7 @@
                     {% for key, highlights in result.result.hit['highlight'] if key != 'title' and key != 'username' %}
                         <p class="excerpt small">
                             {% for excerpt in highlights %}
-                                ...{{ excerpt | raw }}...
+                                {{ excerpt | raw }}...
                             {% endfor %}
                         </p>
                     {% endfor %}

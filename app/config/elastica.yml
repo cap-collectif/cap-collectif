@@ -20,8 +20,10 @@ fos_elastica:
               index: not_analyzed
             username:
               analyzer: %language_analyzer%
+              index_options: offsets
             biography:
               analyzer: %language_analyzer%
+              index_options: offsets
           persistence:
             driver: orm
             model: Capco\UserBundle\Entity\User
@@ -36,6 +38,7 @@ fos_elastica:
               type: long
             body:
               analyzer: %language_analyzer%
+              index_options: offsets
             createdAt:
               type: date
             updatedAt:
@@ -59,6 +62,7 @@ fos_elastica:
               type: long
             title:
               analyzer: %language_analyzer%
+              index_options: offsets
             slug:
               index: not_analyzed
             publishedAt:
@@ -86,6 +90,7 @@ fos_elastica:
               type: long
             strippedBody:
               analyzer: %language_analyzer%
+              index_options: offsets
             createdAt:
               type: date
             updatedAt:
@@ -110,10 +115,12 @@ fos_elastica:
               type: long
             title:
               analyzer: %language_analyzer%
+              index_options: offsets
             slug:
               index: not_analyzed
             strippedBody:
               analyzer: %language_analyzer%
+              index_options: offsets
             createdAt:
               type: date
             updatedAt:
@@ -141,12 +148,15 @@ fos_elastica:
               type: long
             title:
               analyzer: %language_analyzer%
+              index_options: offsets
             slug:
               index: not_analyzed
             strippedBody:
               analyzer: %language_analyzer%
+              index_options: offsets
             strippedObject:
               analyzer: %language_analyzer%
+              index_options: offsets
             createdAt:
               type: date
             updatedAt:
@@ -170,10 +180,12 @@ fos_elastica:
               type: long
             title:
               analyzer: %language_analyzer%
+              index_options: offsets
             slug:
               index: not_analyzed
             strippedBody:
               analyzer: %language_analyzer%
+              index_options: offsets
             updatedAt:
               type: date
             createdAt:
@@ -197,12 +209,15 @@ fos_elastica:
               type: long
             title:
               analyzer: %language_analyzer%
+              index_options: offsets
             abstract:
               analyzer: %language_analyzer%
+              index_options: offsets
             slug:
               index: not_analyzed
             strippedBody:
               analyzer: %language_analyzer%
+              index_options: offsets
             createdAt:
               type: date
             updatedAt:
@@ -228,10 +243,12 @@ fos_elastica:
               type: long
             title:
               analyzer: %language_analyzer%
+              index_options: offsets
             slug:
               index: not_analyzed
             body:
               analyzer: %language_analyzer%
+              index_options: offsets
             createdAt:
               type: date
             updatedAt:
@@ -255,12 +272,15 @@ fos_elastica:
               type: long
             title:
               analyzer: %language_analyzer%
+              index_options: offsets
             slug:
               index: not_analyzed
             teaser:
               analyzer: %language_analyzer%
+              index_options: offsets
             strippedBody:
               analyzer: %language_analyzer%
+              index_options: offsets
             Author:
               type: object
               properties:

@@ -922,9 +922,17 @@ search:
       term: Terme recherché
       type: Type de contributions
     types:
-      none: Sélectionnez un type de contribution
+      none: Tous
       ideas: Idées
+      comments: Commentaires
+      arguments: Arguments
+      consultations: Consultations
+      events: Évènements
+      opinions: Propositions
       posts: Articles
+      sources: Sources
+      themes: Thèmes
+      users: Membres
     submit: Rechercher
   results:
     title: "]-Inf, 0] Aucun résultat | {1} 1 résultat | ]1,Inf[ %count% résultats"

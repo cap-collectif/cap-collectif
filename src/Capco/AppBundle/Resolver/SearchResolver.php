@@ -77,8 +77,8 @@ class SearchResolver
         return array(
             "pre_tags" => ["<span class=\"search__highlight\">"],
             "post_tags" => ["</span>"],
-            "order" => "score",
             "number_of_fragments" => 3,
+            "fragment_size" => 175,
             "fields" => array(
                 "title" => array('number_of_fragments' => 0,),
                 "strippedObject" => new \stdClass,

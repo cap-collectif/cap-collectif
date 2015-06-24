@@ -28,6 +28,14 @@ class SearchType extends AbstractType
                 'choices' => [
                     'idea' => 'search.form.types.ideas',
                     'post' => 'search.form.types.posts',
+                    'comment' => 'search.form.types.comments',
+                    'argument' => 'search.form.types.arguments',
+                    'consultation' => 'search.form.types.consultations',
+                    'event' => 'search.form.types.events',
+                    'opinion' => 'search.form.types.opinions',
+                    'source' => 'search.form.types.sources',
+                    'theme' => 'search.form.types.themes',
+                    'user' => 'search.form.types.users',
                 ]
             ))
         ;
