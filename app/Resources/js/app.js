@@ -209,7 +209,7 @@ var App = function ($) {
         makeSidebar: makeSidebar,
         carousel: carousel,
         hideableMessageAndCheckbox: hideableMessageAndCheckbox,
-        customModal: customModal,
+        customModal: customModal
     };
 
 }(jQuery);
