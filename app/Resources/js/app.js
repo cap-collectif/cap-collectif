@@ -1,9 +1,9 @@
+import CommentList from './components/Comment/CommentList';
 import IntlData from './translations/FR'
-import CommentSection from './components/Comment/CommentSection';
 
 if ($('#render-idea-comments').length) {
     React.render(
-        <CommentSection idea={$('#render-idea-comments').data("idea")} queryParams={{'offset': 0, 'limit': 20}} {...IntlData} />,
+        <CommentList idea={$('#render-idea-comments').data("idea")} {...IntlData} />,
         document.getElementById('render-idea-comments')
     );
 }
@@ -209,7 +209,7 @@ var App = function ($) {
         makeSidebar: makeSidebar,
         carousel: carousel,
         hideableMessageAndCheckbox: hideableMessageAndCheckbox,
-        customModal: customModal,
+        customModal: customModal
     };
 
 }(jQuery);

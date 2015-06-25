@@ -2,7 +2,6 @@
 
 namespace Capco\AppBundle\Repository;
 
-use Doctrine\ORM\Tools\Pagination\Paginator;
 use Doctrine\ORM\EntityRepository;
 
 /**
@@ -17,7 +16,7 @@ class IdeaCommentRepository extends EntityRepository
      *
      * @return array
      */
-    public function getEnabledByIdea($idea, $offset = 0, $limit = 10, $filter = 'last')
+    public function getEnabledByIdea($idea)
     {
         $qb = $this->getIsEnabledQueryBuilder()
             ->addSelect('aut', 'm', 'v', 'i', 'r')
@@ -30,21 +29,11 @@ class IdeaCommentRepository extends EntityRepository
             ->andWhere('c.isTrashed = :notTrashed')
             ->setParameter('idea', $idea)
             ->setParameter('notTrashed', false)
+            ->addOrderBy('c.updatedAt', 'ASC')
         ;
 
-        if ($filter === 'last') {
-            $qb->addOrderBy('c.updatedAt', 'DESC');
-        }
-
-        if ($filter === 'popular') {
-            $qb->addOrderBy('c.voteCount', 'DESC');
-        }
-
-        $qb
-            ->setFirstResult($offset)
-            ->setMaxResults($limit);
-
-        return new Paginator($qb);
+        return $qb->getQuery()
+            ->getResult();
     }
 
     protected function getIsEnabledQueryBuilder()

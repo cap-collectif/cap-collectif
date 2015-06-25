@@ -52,13 +52,13 @@ class Section
             'nbObjects' => true,
         ],
         'news' => [
-            'title' => false,
+            'title' => true,
             'teaser' => true,
             'body' => false,
             'nbObjects' => true,
         ],
         'events' => [
-            'title' => false,
+            'title' => true,
             'teaser' => true,
             'body' => false,
             'nbObjects' => true,
