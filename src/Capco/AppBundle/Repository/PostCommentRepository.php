@@ -3,6 +3,8 @@
 namespace Capco\AppBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\Tools\Pagination\Paginator;
+
 
 /**
  * PostCommentRepository.
@@ -16,7 +18,7 @@ class PostCommentRepository extends EntityRepository
      *
      * @return array
      */
-    public function getEnabledByPost($post)
+    public function getEnabledByPost($post, $offset = 0, $limit = 10, $filter = 'last')
     {
         $qb = $this->getIsEnabledQueryBuilder()
             ->addSelect('aut', 'm', 'v', 'p', 'r')
@@ -29,12 +31,23 @@ class PostCommentRepository extends EntityRepository
             ->andWhere('c.isTrashed = :notTrashed')
             ->setParameter('post', $post)
             ->setParameter('notTrashed', false)
-            ->addOrderBy('c.updatedAt', 'ASC')
         ;
 
-        return $qb->getQuery()
-            ->getResult();
+        if ($filter === 'last') {
+            $qb->addOrderBy('c.updatedAt', 'DESC');
+        }
+
+        if ($filter === 'popular') {
+            $qb->addOrderBy('c.voteCount', 'DESC');
+        }
+
+        $qb
+            ->setFirstResult($offset)
+            ->setMaxResults($limit);
+
+        return new Paginator($qb);
     }
+
 
     protected function getIsEnabledQueryBuilder()
     {

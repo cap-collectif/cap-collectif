@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\Tools\Pagination\Paginator;
 
 /**
  * EventCommentRepository.
@@ -16,7 +17,7 @@ class EventCommentRepository extends EntityRepository
      *
      * @return array
      */
-    public function getEnabledByEvent($event)
+    public function getEnabledByEvent($event, $offset = 0, $limit = 10, $filter = 'last')
     {
         $qb = $this->getIsEnabledQueryBuilder()
             ->addSelect('aut', 'm', 'v', 'e', 'r')
@@ -32,8 +33,19 @@ class EventCommentRepository extends EntityRepository
             ->addOrderBy('c.updatedAt', 'ASC')
         ;
 
-        return $qb->getQuery()
-            ->getResult();
+        if ($filter === 'last') {
+            $qb->addOrderBy('c.updatedAt', 'DESC');
+        }
+
+        if ($filter === 'popular') {
+            $qb->addOrderBy('c.voteCount', 'DESC');
+        }
+
+        $qb
+            ->setFirstResult($offset)
+            ->setMaxResults($limit);
+
+        return new Paginator($qb);
     }
 
     protected function getIsEnabledQueryBuilder()

@@ -39,10 +39,10 @@ var CommentSection = React.createClass({
     },
 
     renderFilter() {
-        if (this.state.comments_total > 0) {
+        if (this.state.comments_total > 1) {
             return (
                 <div className="col-sm-6 hidden-xs">
-                    <select className="h2 form-control" value={this.state.filter} onChange={() => this.updateSelectedValue()}>
+                    <select id="comments-filter" className="h2 form-control" value={this.state.filter} onChange={() => this.updateSelectedValue()}>
                       <option value="popular">{this.getIntlMessage('global.popular')}</option>
                       <option value="last">{this.getIntlMessage('global.last')}</option>
                     </select>
@@ -56,7 +56,7 @@ var CommentSection = React.createClass({
         this.setState({
             'comments_total': this.state.comments_total,
             'comments': this.state.comments,
-            'filter': $("#comment-filter").val()
+            'filter': $("#comments-filter").val()
         });
 
     },
@@ -81,7 +81,7 @@ var CommentSection = React.createClass({
 
     loadCommentsFromServer() {
         Fetcher
-        .get('/ideas/'+ this.props.idea +
+        .get('/' + this.props.uri + '/' + this.props.object +
              '/comments?offset=' + this.props.queryParams.offset +
              '&limit=' + this.props.queryParams.limit +
              '&filter=' + this.state.filter

@@ -1,13 +1,30 @@
 import IntlData from './translations/FR'
 import CommentSection from './components/Comment/CommentSection';
 
+// We enable React apps
 if ($('#render-idea-comments').length) {
     React.render(
-        <CommentSection idea={$('#render-idea-comments').data("idea")} queryParams={{'offset': 0, 'limit': 20}} {...IntlData} />,
+        <CommentSection uri="ideas" object={$('#render-idea-comments').data("idea")} queryParams={{'offset': 0, 'limit': 20}} {...IntlData} />,
         document.getElementById('render-idea-comments')
     );
 }
 
+if ($('#render-post-comments').length) {
+    React.render(
+        <CommentSection uri="posts" object={$('#render-post-comments').data("post")} queryParams={{'offset': 0, 'limit': 20}} {...IntlData} />,
+        document.getElementById('render-post-comments')
+    );
+}
+
+if ($('#render-event-comments').length) {
+    React.render(
+        <CommentSection uri="events" object={$('#render-event-comments').data("event")} queryParams={{'offset': 0, 'limit': 20}} {...IntlData} />,
+        document.getElementById('render-event-comments')
+    );
+}
+
+
+// Our global App for symfony
 var App = function ($) {
 
     var equalheight = function(container) {

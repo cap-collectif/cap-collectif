@@ -48,7 +48,7 @@
     {% if capco_comment_can_add(post) or (capco_comment_can_show(post) and post.commentsCount > 0) %}
         <div class="container  container--custom  container--thinner">
             {% if capco_comment_can_show(post) and post.commentsCount > 0 %}
-                {{ render(controller('CapcoAppBundle:Site/Comment:showComments', {'object': post})) }}
+                <div id="render-post-comments" data-post="{{ post.id }}"></div>
             {% endif %}
 
             {% if capco_comment_can_add(post) %}
