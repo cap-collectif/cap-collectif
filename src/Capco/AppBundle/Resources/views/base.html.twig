@@ -75,7 +75,11 @@
     <script src="{{ asset('js/vendor.js') }}"></script>
     <script src="{{ asset('js/app.js') }}"></script>
     <script type="text/javascript">
+        require('Resources/js/jsapi');
+        require('Resources/js/googleCharts');
+        var cookieChoices = require('Resources/js/cookiechoices');
         var App = require('Resources/js/app');
+
         $(window).on('load', function() {
             App.externalLinks();
             App.autocollapse('.autocollapse-js')

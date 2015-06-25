@@ -144,13 +144,4 @@ class CommentResolver
 
         return $comment;
     }
-
-    // Use to handle old comments (before ckeditor)
-    public function formattedCommentBody(Comment $comment)
-    {
-        if (0 !== strrpos($comment->getBody(), '<p>')) {
-            return '<p>'.$comment->getBody().'</p>';
-        }
-        return $comment->getBody();
-    }
 }

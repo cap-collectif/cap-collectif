@@ -47,16 +47,12 @@
                 {% include 'CapcoUserBundle:Avatar:avatar.html.twig' with {'user': consultation.Author, 'classes': 'media-object', 'link_classes': 'pull-left'} only %}
                 <div class="media-body">
                     <p class="media--aligned  excerpt">
-                        {% spaceless %}
-                            <a href="{{ path('capco_user_profile_show_all', {'slug': consultation.Author.slug}) }}">{{ consultation.Author.username }}</a>
-                            {% if is_feature_enabled('themes') and consultation.Themes | length > 0 %}
-                                {{ 'consultation.show.in_theme' | trans({}, 'CapcoAppBundle') }}
-                                {% for theme in consultation.Themes %}
-                                    <a href="{{ path('app_theme_show', {'slug': theme.slug}) }}">{{ theme.title }}</a>{% if not loop.last %},{% endif %}
-                                {% endfor %}
-                            {% endif %}<span>,</span>
-                            {{ 'consultation.show.on_date' | trans({'%date%': consultation.publishedAt | localizeddate('long', 'none')}, 'CapcoAppBundle') }}
-                        {% endspaceless %}
+                        <a href="{{ path('capco_user_profile_show_all', {'slug': consultation.Author.slug}) }}">
+                            {{ consultation.Author.username }}
+                        </a>{{ 'consultation.show.in_theme' | trans({}, 'CapcoAppBundle') }}
+                        {% for theme in consultation.Themes %}
+                        <a href="{{ path('app_theme_show', {'slug': theme.slug}) }}">{{ theme.title }}</a>{% if not loop.last %},{% endif %}{% endfor %},
+                        {{ 'consultation.show.on_date' | trans({'%date%': consultation.publishedAt | localizeddate('long', 'none')}, 'CapcoAppBundle') }}
                     </p>
                 </div>
             </div>

@@ -17,8 +17,10 @@ use FOS\RestBundle\Controller\Annotations\View;
 use FOS\RestBundle\Controller\Annotations\Get;
 use FOS\RestBundle\Controller\Annotations\Post;
 use FOS\RestBundle\Controller\Annotations\Put;
+use FOS\RestBundle\Controller\Annotations\QueryParam;
 
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
+use FOS\RestBundle\Request\ParamFetcherInterface;
 
 class IdeasController extends FOSRestController
 {
@@ -37,13 +39,30 @@ class IdeasController extends FOSRestController
      *
      * @Get("/ideas/{id}/comments")
      * @ParamConverter("idea", options={"mapping": {"id": "id"}})
+     * @QueryParam(name="offset", requirements="[0-9.]+", default="0")
+     * @QueryParam(name="limit", requirements="[0-9.]+", default="10")
+     * @QueryParam(name="filter", requirements="(last|popular)", default="last")
      * @View(serializerGroups={"Comments", "UsersInfos"})
      */
-    public function getIdeaCommentsAction(Idea $idea)
+    public function getIdeaCommentsAction(Idea $idea, ParamFetcherInterface $paramFetcher)
     {
-        return $this->getDoctrine()->getManager()
+        $offset = $paramFetcher->get('offset');
+        $limit = $paramFetcher->get('limit');
+        $filter = $paramFetcher->get('filter');
+
+        $paginator = $this->getDoctrine()->getManager()
                     ->getRepository('CapcoAppBundle:IdeaComment')
-                    ->getEnabledByIdea($idea);
+                    ->getEnabledByIdea($idea, $offset, $limit, $filter);
+
+        $comments = [];
+        foreach ($paginator as $comment) {
+            $comments[] = $comment;
+        }
+
+        return [
+            'total_count' => count($paginator),
+            'comments' => $comments
+        ];
     }
 
 }

@@ -1,3 +1,4 @@
+
 var UserAvatar = React.createClass({
 
     render() {

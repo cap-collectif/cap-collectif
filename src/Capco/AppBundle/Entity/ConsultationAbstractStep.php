@@ -31,7 +31,7 @@ class ConsultationAbstractStep
     protected $consultation;
 
     /**
-     * @ORM\OneToOne(targetEntity="Capco\AppBundle\Entity\AbstractStep", inversedBy="consultationAbstractStep", cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity="Capco\AppBundle\Entity\AbstractStep", inversedBy="consultationAbstractStep", cascade={"persist"})
      * @ORM\JoinColumn(name="step_id", referencedColumnName="id", nullable=false, onDelete="CASCADE")
      * @Assert\NotNull()
      **/

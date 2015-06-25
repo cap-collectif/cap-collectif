@@ -18,6 +18,12 @@ export default {
             trashed: {
                 label: 'Dans la corbeille'
             }
+        },
+        global: {
+            more: 'Voir plus',
+            popular: 'Populaire',
+            last: 'Récent',
+            read_more: 'Afficher la suite'
         }
     }
 };

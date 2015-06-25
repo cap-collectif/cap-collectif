@@ -1,14 +1,8 @@
-(function(window) {
 
-  if (!!window.cookieChoices) {
-    return window.cookieChoices;
-  }
+var document = window.document;
+var supportsTextContent = 'textContent' in document.body;
 
-  var document = window.document;
-  // IE8 does not support textContent, so we should fallback to innerText.
-  var supportsTextContent = 'textContent' in document.body;
-
-  var cookieChoices = (function() {
+var cookieChoices = function() {
 
     var cookieName = 'displayCookieConsent';
     var cookieConsentId = 'cookieChoiceInfo';
@@ -81,11 +75,11 @@
       }
     }
 
-    function showCookieConsentBar(cookieText, dismissText, linkText, linkHref) {
+    var showCookieConsentBar = function(cookieText, dismissText, linkText, linkHref) {
       _showCookieConsent(cookieText, dismissText, linkText, linkHref, false);
     }
 
-    function showCookieConsentDialog(cookieText, dismissText, linkText, linkHref) {
+    var showCookieConsentDialog = function(cookieText, dismissText, linkText, linkHref) {
       _showCookieConsent(cookieText, dismissText, linkText, linkHref, true);
     }
 
@@ -108,12 +102,10 @@
       return !document.cookie.match(new RegExp(cookieName + '=([^;]+)'));
     }
 
-    var exports = {};
-    exports.showCookieConsentBar = showCookieConsentBar;
-    exports.showCookieConsentDialog = showCookieConsentDialog;
-    return exports;
-  })();
+    return {
+        showCookieConsentBar: showCookieConsentBar,
+        showCookieConsentDialog: showCookieConsentDialog,
+    };
+};
 
-  window.cookieChoices = cookieChoices;
-  return cookieChoices;
-})(this);
+export default new cookieChoices();

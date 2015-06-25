@@ -33,9 +33,9 @@ exports.config = {
           'bower_components/react-intl/dist/react-intl.min.js',
           'bower_components/react-intl/dist/locale-data/fr.js',
           'app/Resources/js/jsapi.js',
-          'bower_components/mailcheck/src/mailcheck.js',
           'app/Resources/js/cookiechoices.js',
-          'app/Resources/js/googleCharts.js'
+          'app/Resources/js/googleCharts.js',
+          'bower_components/mailcheck/src/mailcheck.js'
         ],
         'js/app.js': [
           'app/Resources/js/app.js',
@@ -61,6 +61,9 @@ exports.config = {
     }
   },
   plugins: {
+    babel: {
+      stage: 0
+    },
     sass: {
       allowCache: true,
       mode: 'native',

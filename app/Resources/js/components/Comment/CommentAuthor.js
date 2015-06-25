@@ -1,4 +1,5 @@
 var CommentAuthor = React.createClass({
+    mixins: [ReactIntl.IntlMixin],
 
     render() {
         return (
@@ -16,7 +17,7 @@ var CommentAuthor = React.createClass({
                 </a>
             );
         }
-        return <span>{ this.props.comment.authorName }</span>;
+        return <span>{ this.props.comment.author_name }</span>;
     }
 
 });
