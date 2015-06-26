@@ -11,4 +11,3 @@ Scenario: Can comment an event
     | capco_app_comment[body]        | J'ai un truc à dire |
   When I press "Commenter"
   Then I should see "Merci ! Votre commentaire a bien été enregistré."
-  And I should see "J'ai un truc à dire" in the ".opinion__list" element

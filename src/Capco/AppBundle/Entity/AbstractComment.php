@@ -81,6 +81,19 @@ abstract class AbstractComment
     protected $Author;
 
     /**
+     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\AbstractComment", inversedBy="answers")
+     * @ORM\JoinColumn(name="parent_id", referencedColumnName="id", onDelete="CASCADE", nullable=true)
+     */
+    protected $parent;
+
+    /**
+     * @var
+     *
+     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\AbstractComment", mappedBy="parent", cascade={"persist", "remove"}, orphanRemoval=true)
+     */
+    protected $answers;
+
+    /**
      * @var
      *
      * @ORM\Column(name="author_name", type="string", nullable=true)
@@ -141,6 +154,7 @@ abstract class AbstractComment
     public function __construct()
     {
         $this->votes = new ArrayCollection();
+        $this->answers = new ArrayCollection();
         $this->Reports = new ArrayCollection();
         $this->updatedAt = new \Datetime();
         $this->voteCount = 0;
@@ -278,6 +292,24 @@ abstract class AbstractComment
     /**
      * @return mixed
      */
+    public function getParent()
+    {
+        return $this->parent;
+    }
+
+    /**
+     * @param mixed $parent
+     */
+    public function setParent($parent)
+    {
+        $this->parent = $parent;
+
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
     public function getAuthorName()
     {
         return $this->authorName;
@@ -325,6 +357,40 @@ abstract class AbstractComment
     public function setAuthorIp($authorIp)
     {
         $this->authorIp = $authorIp;
+    }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getAnswers()
+    {
+        return $this->answers;
+    }
+
+    /**
+     * @param $answer
+     *
+     * @return $this
+     */
+    public function addAnswer($answer)
+    {
+        if (!$this->answers->contains($answer)) {
+            $this->answers->add($answer);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @param $answer
+     *
+     * @return $this
+     */
+    public function removeAnswer($answer)
+    {
+        $this->answers->removeElement($answer);
+
+        return $this;
     }
 
     /**

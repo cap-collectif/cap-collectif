@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\Controller\Api;
 
 use Capco\AppBundle\Entity\Idea;
+use Capco\AppBundle\Entity\IdeaComment;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
@@ -98,5 +99,37 @@ class IdeasController extends FOSRestController
         ];
     }
 
+    /**
+     * Add an idea comment.
+     *
+     * @ApiDoc(
+     *  resource=true,
+     *  description="Get idea comments",
+     *  statusCodes={
+     *    200 = "Returned when successful",
+     *    404 = "Idea does not exist",
+     *  }
+     * )
+     *
+     * @Post("/ideas/{id}/comments")
+     * @ParamConverter("idea", options={"mapping": {"id": "id"}})
+     * @ParamConverter("comment", converter="fos_rest.request_body")
+     * @View(serializerGroups={"Comments", "UsersInfos"})
+     */
+    public function postIdeaCommentsAction(Idea $idea, IdeaComment $comment, ConstraintViolationListInterface $validationErrors)
+    {
+        if ($validationErrors->count() > 0) {
+            throw new BadRequestHttpException($validationErrors->__toString());
+        }
+
+        $comment->setIdea($idea);
+
+
+        $this->getDoctrine()->getManager()->persist($environment);
+        $this->getDoctrine()->getManager()->flush();
+
+        $url = $this->generateUrl('get_instance', ['name' => $instance->getName()], UrlGeneratorInterface::ABSOLUTE_URL);
+        return $this->redirectView($url);
+    }
 
 }
