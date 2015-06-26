@@ -8,10 +8,16 @@ use Capco\AppBundle\Entity\IdeaComment;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\Validator\ConstraintViolationListInterface;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
+
+use Capco\AppBundle\Form\CommentType;
+use Capco\AppBundle\CapcoAppBundleEvents;
+use Capco\AppBundle\Event\AbstractCommentChangedEvent;
+
 
 use FOS\RestBundle\Controller\FOSRestController;
 use FOS\RestBundle\Controller\Annotations\View;
@@ -104,32 +110,41 @@ class IdeasController extends FOSRestController
      *
      * @ApiDoc(
      *  resource=true,
-     *  description="Get idea comments",
+     *  description="Post an idea comments",
      *  statusCodes={
-     *    200 = "Returned when successful",
+     *    201 = "Returned when successful",
      *    404 = "Idea does not exist",
      *  }
      * )
      *
      * @Post("/ideas/{id}/comments")
      * @ParamConverter("idea", options={"mapping": {"id": "id"}})
-     * @ParamConverter("comment", converter="fos_rest.request_body")
-     * @View(serializerGroups={"Comments", "UsersInfos"})
+     * @View(statusCode=201, serializerGroups={"Comments", "UsersInfos"})
      */
-    public function postIdeaCommentsAction(Idea $idea, IdeaComment $comment, ConstraintViolationListInterface $validationErrors)
+    public function postIdeaCommentsAction(Request $request, Idea $idea)
     {
-        if ($validationErrors->count() > 0) {
-            throw new BadRequestHttpException($validationErrors->__toString());
+        $user = $this->getUser();
+        $comment = (new IdeaComment())
+                    ->setAuthorIp($request->getClientIp())
+                    ->setAuthor($user)
+                    ->setIdea($idea)
+                    ->setIsEnabled(true)
+                ;
+
+
+        $form = $this->createForm(new CommentType($user), $comment);
+        $form->handleRequest($request);
+
+        if (!$form->isValid()) {
+            return $form;
         }
 
-        $comment->setIdea($idea);
-
-
-        $this->getDoctrine()->getManager()->persist($environment);
+        $this->getDoctrine()->getManager()->persist($comment);
         $this->getDoctrine()->getManager()->flush();
-
-        $url = $this->generateUrl('get_instance', ['name' => $instance->getName()], UrlGeneratorInterface::ABSOLUTE_URL);
-        return $this->redirectView($url);
+        $this->get('event_dispatcher')->dispatch(
+            CapcoAppBundleEvents::ABSTRACT_COMMENT_CHANGED,
+            new AbstractCommentChangedEvent($comment, 'add')
+        );
     }
 
 }

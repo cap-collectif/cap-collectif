@@ -28,9 +28,8 @@ class PostCommentRepository extends EntityRepository
             ->leftJoin('c.Reports', 'r')
             ->leftJoin('c.Post', 'p')
             ->andWhere('c.Post = :post')
-            ->andWhere('c.isTrashed = :notTrashed')
+            ->andWhere('c.isTrashed = false')
             ->setParameter('post', $post)
-            ->setParameter('notTrashed', false)
         ;
 
         if ($filter === 'last') {

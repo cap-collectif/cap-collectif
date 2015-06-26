@@ -92,3 +92,36 @@ Feature: Ideas
     }
     """
     And the comments should be ordered by popularity
+
+  @test
+  Scenario: anonymous API client wants to add a comment
+    When I send a POST request to "/api/ideas/3/comments" with json:
+    """
+    {
+      "authorName": "Kéké du bled",
+      "authorEmail": "vivele94@gmail.com",
+      "body": "Vive moi qui suis plus fort que www.google.fr !"
+    }
+    """
+    Then the JSON response status code should be 201
+
+  @test
+  Scenario: anonymous API client wants to add a comment
+    When I send a POST request to "/api/ideas/3/comments" with json:
+    """
+    {
+      "body": "Vive moi qui suis plus fort que www.google.fr !"
+    }
+    """
+    Then the JSON response status code should be 400
+
+  @test
+  Scenario: logged in API client wants to add a comment
+    Given I am logged in to api as user
+    When I send a POST request to "/api/ideas/3/comments" with json:
+    """
+    {
+      "body": "Vive moi qui suis plus fort que www.google.fr !"
+    }
+    """
+    Then the JSON response status code should be 201

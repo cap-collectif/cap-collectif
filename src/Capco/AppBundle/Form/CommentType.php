@@ -51,8 +51,7 @@ class CommentType extends AbstractType
     {
         $resolver->setDefaults(array(
             'data_class' => 'Capco\AppBundle\Entity\AbstractComment',
-            'csrf_protection' => true,
-            'csrf_field_name' => '_token',
+            'csrf_protection' => false,
         ));
     }
 
@@ -61,6 +60,6 @@ class CommentType extends AbstractType
      */
     public function getName()
     {
-        return 'capco_app_comment';
+        return '';
     }
 }

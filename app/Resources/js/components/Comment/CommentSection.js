@@ -1,4 +1,5 @@
 import CommentList from './CommentList';
+import CommentForm from './CommentForm';
 import Fetcher from '../../services/Fetcher';
 var FormattedMessage  = ReactIntl.FormattedMessage;
 
@@ -34,6 +35,10 @@ var CommentSection = React.createClass({
             </div>
             <CommentList comments={this.state.comments} can_report={this.state.can_report} />
             { this.renderLoadMore() }
+            <h2>Publier un commentaire</h2>
+            <div className="opinion__data">
+                <CommentForm comment={this.state.comment} />
+            </div>
         </div>
         );
     },

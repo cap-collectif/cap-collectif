@@ -357,6 +357,8 @@ abstract class AbstractComment
     public function setAuthorIp($authorIp)
     {
         $this->authorIp = $authorIp;
+
+        return $this;
     }
 
     /**
