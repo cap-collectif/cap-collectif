@@ -24,7 +24,7 @@ var Comment = React.createClass({
                 </div>
                 <CommentBody comment={comment} />
                 <CommentVoteButton comment={comment} />&nbsp;
-                <CommentReport comment={comment} />&nbsp;
+                <CommentReport comment={comment} can_report={this.props.can_report} />&nbsp;
                 <CommentEdit comment={comment} />
             </div>
           </li>

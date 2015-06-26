@@ -3,6 +3,10 @@ var CommentReport = React.createClass({
     mixins: [ReactIntl.IntlMixin],
 
     render() {
+        if (!this.props.can_report) {
+            return null;
+        }
+
         if (this.props.comment.has_user_reported) {
             return (
                 <button disabled="disabled" className="btn btn-xs btn-dark-gray">

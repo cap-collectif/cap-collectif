@@ -30,32 +30,7 @@ class Manager
         'idea_creation',
         'consultation_trash',
         'idea_trash',
-    );
-
-    protected static $categories = array(
-        'pages.blog' => ['blog'],
-        'pages.events' => ['calendar'],
-        'pages.ideas' => [
-            'ideas',
-            'idea_creation'
-        ],
-        'pages.themes' => ['themes'],
-        'pages.consultations' => ['consultations_form'],
-        'pages.registration' => [
-            'registration',
-            'user_type',
-        ],
-        'pages.members' => ['members_list'],
-        'pages.login' => [
-            'login_facebook',
-            'login_gplus',
-            'login_twitter',
-        ],
-        'settings.global' => [
-            'newsletter',
-            'share_buttons',
-        ],
-        'settings.shield_mode' => ['shield_mode']
+        'reporting',
     );
 
     public function __construct(ToggleManager $toggleManager, ContextFactory $contextFactory, $prefix)
@@ -176,28 +151,5 @@ class Manager
         }
 
         return false;
-    }
-
-    public function getTogglesByCategory($category)
-    {
-        $toggles = [];
-        if (array_key_exists($category, self::$categories)) {
-            foreach (self::$categories[$category] as $name) {
-                $toggles[$name] = $this->isActive($name);
-            }
-        }
-
-        return $toggles;
-    }
-
-    public function findCategoryForToggle ($toggle)
-    {
-        foreach (self::$categories as $category => $toggles) {
-            if (in_array($toggle, $toggles)) {
-                return $category;
-            }
-        }
-
-        return null;
     }
 }
