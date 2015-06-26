@@ -4,7 +4,7 @@ var CommentReport = React.createClass({
 
     render() {
         if (!this.props.can_report) {
-            return null;
+            return;
         }
 
         if (this.props.comment.has_user_reported) {
