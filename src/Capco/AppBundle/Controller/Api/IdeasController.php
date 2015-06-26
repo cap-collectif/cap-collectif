@@ -64,7 +64,7 @@ class IdeasController extends FOSRestController
         return [
             'total_count' => count($paginator),
             'comments' => $comments,
-            'canReport' => $canReport,
+            'can_report' => $canReport,
         ];
     }
 

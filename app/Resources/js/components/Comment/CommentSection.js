@@ -90,7 +90,7 @@ var CommentSection = React.createClass({
             this.setState({
                 'comments_total': data.total_count,
                 'comments': data.comments,
-                'can_report': data.canReport,
+                'can_report': data.can_report,
                 'filter': this.state.filter
             });
         });

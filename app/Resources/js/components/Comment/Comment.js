@@ -24,11 +24,18 @@ var Comment = React.createClass({
                 </div>
                 <CommentBody comment={comment} />
                 <CommentVoteButton comment={comment} />&nbsp;
-                <CommentReport comment={comment} can_report={this.props.can_report} />&nbsp;
+                { this.renderReporting(comment) }&nbsp;
                 <CommentEdit comment={comment} />
             </div>
           </li>
         );
+    },
+    renderReporting(comment) {
+        if (this.props.can_report) {
+            return (
+                <CommentReport comment={comment} />
+            );
+        }
     }
 });
 

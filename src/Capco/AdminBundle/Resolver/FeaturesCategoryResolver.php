@@ -62,10 +62,10 @@ class FeaturesCategoryResolver
 
     public function isCategoryEnabled($category)
     {
-        if (!array_key_exists($category, $this::$categories)) {
+        if (!array_key_exists($category, self::$categories)) {
             return false;
         }
-        return $this->manager->hasOneActive($this::$categories[$category]['conditions']);
+        return $this->manager->hasOneActive(self::$categories[$category]['conditions']);
     }
 
     public function isAdminEnabled($admin)
@@ -79,8 +79,8 @@ class FeaturesCategoryResolver
     public function getTogglesByCategory($category)
     {
         $toggles = [];
-        if (array_key_exists($category, $this::$categories)) {
-            foreach ($this::$categories[$category]['features'] as $feature) {
+        if (array_key_exists($category, self::$categories)) {
+            foreach (self::$categories[$category]['features'] as $feature) {
                 $toggles[$feature] = $this->manager->isActive($feature);
             }
         }
@@ -102,7 +102,7 @@ class FeaturesCategoryResolver
     public function getEnabledPagesCategories() {
 
         $categories = [];
-        foreach ($this::$categories as $name => $cat) {
+        foreach (self::$categories as $name => $cat) {
             if (strrpos($name, 'pages.') === 0 && $this->manager->hasOneActive($cat['conditions'])) {
                 $categories[] = $name;
             }
@@ -114,7 +114,7 @@ class FeaturesCategoryResolver
     public function getEnabledSettingsCategories() {
 
         $categories = [];
-        foreach ($this::$categories as $name => $cat) {
+        foreach (self::$categories as $name => $cat) {
             if (strrpos($name, 'settings.') === 0 && $this->manager->hasOneActive($cat['conditions'])) {
                 $categories[] = $name;
             }
@@ -127,7 +127,8 @@ class FeaturesCategoryResolver
     {
         if (strrpos($category, 'settings.') === 0) {
             return 'admin.group.parameters';
-        } elseif(strrpos($category, 'pages.') === 0) {
+        }
+        if (strrpos($category, 'pages.') === 0) {
             return 'admin.group.pages';
         }
         return null;
