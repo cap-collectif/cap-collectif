@@ -43,7 +43,8 @@ app/test.db-journal
 /report/
 behat.yml
 app/dbtest.backup
-
+mails.txt
+dump.txt
 
 
 # OS X
