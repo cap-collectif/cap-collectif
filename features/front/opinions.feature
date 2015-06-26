@@ -39,7 +39,8 @@ Feature: Opinions
     Then I should see "Connection form" on "login page"
 
   Scenario: Logged in user can report an opinion
-    Given I am logged in as user
+    Given feature "reporting" is enabled
+    And I am logged in as user
     And I visited "opinion page" with:
       | consultationSlug | croissance-innovation-disruption |
       | stepSlug         | collecte-des-avis                |

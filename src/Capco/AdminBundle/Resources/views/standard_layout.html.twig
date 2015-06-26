@@ -47,8 +47,7 @@
                 {% set item_count = 0 %}
                 {% if display %}
                     {% for admin in group.items if item_count == 0 %}
-                        {% set featureEnabled = (admin.getFeatures is not defined or has_feature_enabled(admin.getFeatures) ) %}
-                        {% if admin.hasroute('list') and admin.isGranted('LIST') and featureEnabled %}
+                        {% if admin.hasroute('list') and admin.isGranted('LIST') and is_admin_enabled(admin) %}
                             {% set item_count = item_count+1 %}
                         {% endif %}
                     {% endfor %}
@@ -58,6 +57,8 @@
                     {% set active = false %}
                     {% for admin in group.items %}
                         {% if admin.hasroute('list') and admin.isGranted('LIST') and app.request.get('_sonata_admin') == admin.code %}
+                            {% set active = true %}
+                        {% elseif current_group_label is defined and current_group_label == group.label %}
                             {% set active = true %}
                         {% endif %}
                     {% endfor %}
@@ -70,13 +71,12 @@
                         <ul class="treeview-menu{% if active %} active{% endif %}">
 
                             {% for admin in group.items %}
-                                {% set featureEnabled = (admin.getFeatures is not defined or has_feature_enabled(admin.getFeatures) ) %}
-                                {% if admin.hasroute('list') and admin.isGranted('LIST') and featureEnabled %}
+                                {% if admin.hasroute('list') and admin.isGranted('LIST') and is_admin_enabled(admin) %}
                                     <li{% if app.request.get('_sonata_admin') == admin.code %} class="active"{% endif %}><a href="{{ admin.generateUrl('list')}}"><i class="fa fa-angle-double-right"></i> {{ admin.label|trans({}, admin.translationdomain) }}</a></li>
                                 {% endif %}
                             {% endfor %}
 
-                            {% include 'CapcoAdminBundle:Settings:list_items.html.twig' with {'group': group} only %}
+                            {% include 'CapcoAdminBundle:Settings:list_items.html.twig' %}
                         </ul>
                     </li>
                 {% endif %}

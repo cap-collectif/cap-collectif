@@ -141,4 +141,11 @@ class ReportingAdmin extends Admin
         $collection->add('disable', $this->getRouterIdParameter().'/disable');
         $collection->add('trash', $this->getRouterIdParameter().'/trash');
     }
+
+    public function getFeatures()
+    {
+        return array(
+            'reporting',
+        );
+    }
 }

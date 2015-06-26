@@ -36,7 +36,9 @@ class SettingsController extends Controller
             'category' => $category,
         ], ['position' => 'ASC']);
 
-        $toggles = $this->get('capco.toggle.manager')->getTogglesByCategory($category);
+        $featuresCategoryResolver = $this->get('capco.admin.features_category_resolver');
+        $toggles = $featuresCategoryResolver->getTogglesByCategory($category);
+        $group = $featuresCategoryResolver->getGroupNameForCategory($category);
 
         return array(
             'admin_pool' => $admin_pool,
@@ -45,6 +47,7 @@ class SettingsController extends Controller
             'colors' => $colors,
             'images' => $images,
             'toggles' => $toggles,
+            'current_group_label' => $group,
         );
     }
 
@@ -69,7 +72,7 @@ class SettingsController extends Controller
 
         $this->get('sonata.core.flashmessage.manager')->getSession()->getFlashBag()->add('success', $message);
 
-        $category = $toggleManager->findCategoryForToggle($toggle);
+        $category = $this->get('capco.admin.features_category_resolver')->findCategoryForToggle($toggle);
 
         return $this->redirect($this->generateUrl('capco_admin_settings', ['category' => $category]));
     }

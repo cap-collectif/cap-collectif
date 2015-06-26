@@ -95,13 +95,15 @@
                                     }) }}
                                 </div>
 
-                                <div class="opinion__vote-group">
-                                    {% if opinion.reports | length > 0 %}
-                                        <button disabled="disabled" class="btn  btn-dark-gray"><i class="cap cap-flag-1"></i> {{ 'opinion.report.reported'|trans({}, 'CapcoAppBundle') }}</button>
-                                    {% else %}
-                                        <a href="{{ path('app_report_opinion' ,{'consultationSlug': consultation.slug, 'stepSlug': currentStep.slug, 'opinionTypeSlug': opinionType.slug, 'opinionSlug': opinion.slug } ) }}" class="btn  btn-dark-gray  btn--outline  connection-popover-js"><i class="cap cap-flag-1"></i> {{ 'opinion.report.submit'|trans({}, 'CapcoAppBundle') }}</a>
-                                    {% endif %}
-                                </div>
+                                {% if is_feature_enabled('reporting') %}
+                                    <div class="opinion__vote-group">
+                                        {% if opinion.reports | length > 0 %}
+                                            <button disabled="disabled" class="btn  btn-dark-gray"><i class="cap cap-flag-1"></i> {{ 'opinion.report.reported'|trans({}, 'CapcoAppBundle') }}</button>
+                                        {% else %}
+                                            <a href="{{ path('app_report_opinion' ,{'consultationSlug': consultation.slug, 'stepSlug': currentStep.slug, 'opinionTypeSlug': opinionType.slug, 'opinionSlug': opinion.slug } ) }}" class="btn  btn-dark-gray  btn--outline  connection-popover-js"><i class="cap cap-flag-1"></i> {{ 'opinion.report.submit'|trans({}, 'CapcoAppBundle') }}</a>
+                                        {% endif %}
+                                    </div>
+                                {% endif %}
 
                                 {% if opinion.canContribute and app.user is not null and app.user == opinion.Author %}
                                     <div class="opinion__vote-group">

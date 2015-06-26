@@ -21,7 +21,7 @@ use Symfony\Component\Form\Form;
 class ReportingController extends Controller
 {
     /**
-     * @Route("/consultations/{consultationSlug}/consultation/{stepSlug}/opinions/{opinionTypeSlug}/{opinionSlug}/report", name="app_report_opinion")
+     * @Route("/consultations/{consultationSlug}/consultation/{stepSlug}/opinions/{opinionTypeSlug}/{opinionSlug}/report", name="app_report_opinion", defaults={"_feature_flags" = "reporting"})
      * @Template("CapcoAppBundle:Reporting:create.html.twig")
      *
      * @param $request
@@ -88,7 +88,7 @@ class ReportingController extends Controller
     }
 
     /**
-     * @Route("/consultations/{consultationSlug}/consultation/{stepSlug}/opinions/{opinionTypeSlug}/{opinionSlug}/sources/{sourceSlug}/report", name="app_report_source")
+     * @Route("/consultations/{consultationSlug}/consultation/{stepSlug}/opinions/{opinionTypeSlug}/{opinionSlug}/sources/{sourceSlug}/report", name="app_report_source", defaults={"_feature_flags" = "reporting"})
      * @Template("CapcoAppBundle:Reporting:create.html.twig")
      *
      * @param $request
@@ -159,7 +159,7 @@ class ReportingController extends Controller
     }
 
     /**
-     * @Route("/consultations/{consultationSlug}/consultation/{stepSlug}/opinions/{opinionTypeSlug}/{opinionSlug}/arguments/{argumentId}/report", name="app_report_argument")
+     * @Route("/consultations/{consultationSlug}/consultation/{stepSlug}/opinions/{opinionTypeSlug}/{opinionSlug}/arguments/{argumentId}/report", name="app_report_argument", defaults={"_feature_flags" = "reporting"})
      * @Template("CapcoAppBundle:Reporting:create.html.twig")
      *
      * @param $request
@@ -230,7 +230,7 @@ class ReportingController extends Controller
     }
 
     /**
-     * @Route("/ideas/{idea_slug}/report", name="app_report_idea")
+     * @Route("/ideas/{idea_slug}/report", name="app_report_idea", defaults={"_feature_flags" = "ideas,reporting"})
      * @ParamConverter("idea", class="CapcoAppBundle:Idea", options={"mapping": {"idea_slug": "slug"}})
      * @Template("CapcoAppBundle:Reporting:create.html.twig")
      *
@@ -277,7 +277,7 @@ class ReportingController extends Controller
     }
 
     /**
-     * @Route("/comments/{commentId}/report", name="app_report_comment")
+     * @Route("/comments/{commentId}/report", name="app_report_comment", defaults={"_feature_flags" = "reporting"})
      * @ParamConverter("comment", class="CapcoAppBundle:AbstractComment", options={"mapping": {"commentId": "id"}})
      * @Template("CapcoAppBundle:Reporting:create.html.twig")
      *

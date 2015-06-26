@@ -28,6 +28,7 @@ class ConsultationAbstractStepAdmin extends Admin
                 'label' => 'admin.fields.consultation_abstractstep.steps',
                 'translation_domain' => 'SonataAdminBundle',
                 'btn_delete' => false,
+                'btn_add' => 'admin.fields.consultation_abstractstep.steps_add',
             ))
         ;
     }

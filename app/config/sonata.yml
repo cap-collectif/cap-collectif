@@ -4,6 +4,8 @@ sonata_admin:
         pager_links: 5 # pager max links to display
     templates:
         layout: CapcoAdminBundle::standard_layout.html.twig
+        list_block: CapcoAdminBundle:Block:block_admin_list.html.twig
+        add_block: CapcoAdminBundle:Core:add_block.html.twig
     dashboard:
         blocks:
             - { position: left,  type: sonata.admin.block.admin_list, settings: { groups: [admin.group.moderation] } }

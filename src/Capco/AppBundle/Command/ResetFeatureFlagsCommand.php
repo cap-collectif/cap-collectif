@@ -46,6 +46,7 @@ class ResetFeatureFlagsCommand extends ContainerAwareCommand
         $toggleManager->activate('share_buttons');
         $toggleManager->activate('consultation_trash');
         $toggleManager->activate('idea_trash');
+        $toggleManager->activate('reporting');
 
         $toggleManager->deactivate('shield_mode');
 

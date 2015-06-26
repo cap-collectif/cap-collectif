@@ -33,10 +33,12 @@
             {% endif %}
             <span class="nb-votes">{{ source.voteCount }}</span>
 
-            {% if source.reports | length > 0 %}
-                <button disabled="disabled" class="btn btn-xs btn-dark-gray"><i class="cap cap-flag-1"></i> {{ 'source.report.reported'|trans({}, 'CapcoAppBundle') }}</button>
-            {% else %}
-                <a href="{{ path('app_report_source' ,{'consultationSlug': consultation.slug, 'stepSlug': opinion.step.slug, 'opinionTypeSlug': opinionType.slug, 'opinionSlug': opinion.slug, 'sourceSlug': source.slug } ) }}" class="btn btn-xs btn-dark-gray  btn--outline"><i class="cap cap-flag-1"></i> {{ 'source.report.submit'|trans({}, 'CapcoAppBundle') }}</a>
+            {% if is_feature_enabled('reporting') %}
+                {% if source.reports | length > 0 %}
+                    <button disabled="disabled" class="btn btn-xs btn-dark-gray"><i class="cap cap-flag-1"></i> {{ 'source.report.reported'|trans({}, 'CapcoAppBundle') }}</button>
+                {% else %}
+                    <a href="{{ path('app_report_source' ,{'consultationSlug': consultation.slug, 'stepSlug': opinion.step.slug, 'opinionTypeSlug': opinionType.slug, 'opinionSlug': opinion.slug, 'sourceSlug': source.slug } ) }}" class="btn btn-xs btn-dark-gray  btn--outline"><i class="cap cap-flag-1"></i> {{ 'source.report.submit'|trans({}, 'CapcoAppBundle') }}</a>
+                {% endif %}
             {% endif %}
 
             {% if source.canContribute and app.user is not null and app.user == source.Author %}

@@ -9,7 +9,7 @@ var CommentList = React.createClass({
             <ul className="media-list  opinion__list">
                 {
                     this.props.comments.map((comment) => {
-                        return <Comment key={comment.id} comment={comment} />;
+                        return <Comment key={comment.id} comment={comment} can_report={this.props.can_report} />;
                     })
                 }
             </ul>

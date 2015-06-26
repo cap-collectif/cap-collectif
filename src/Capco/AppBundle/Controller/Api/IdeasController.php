@@ -59,9 +59,12 @@ class IdeasController extends FOSRestController
             $comments[] = $comment;
         }
 
+        $canReport = $this->get('capco.toggle.manager')->isActive('reporting');
+
         return [
             'total_count' => count($paginator),
-            'comments' => $comments
+            'comments' => $comments,
+            'can_report' => $canReport,
         ];
     }
 
