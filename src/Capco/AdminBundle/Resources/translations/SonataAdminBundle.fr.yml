@@ -60,7 +60,6 @@ admin.label.pages.members: Liste des membres
 admin.label.pages.footer: Pied de page
 
 admin.label.settings.global: Général
-admin.label.settings.modules: Modules
 admin.label.settings.shield_mode: Mode bouclier
 
 # Messages
@@ -196,7 +195,6 @@ admin:
       exportable: Autoriser l'export
     consultation_abstractstep:
       steps: Étapes
-      steps_add: Choisissez le type d'étape
       position: Position
     consultation_type:
       title: Titre
@@ -488,7 +486,6 @@ capco:
     idea_creation: Création d'idées
     consultation_trash: Corbeille des consultations
     idea_trash: Corbeille des idées
-    reporting: Signalement
 
 action_enable: Activer
 action_disable: Désactiver
@@ -523,11 +520,11 @@ user:
     votes: "{1} 1 vote | ]1,Inf[ %count% votes"
 
 highlighted_content.limit_info: 5 contenus à la une maximum
-highlighted_post: un article à la une
-highlighted_idea: une idée à la une
-highlighted_theme: un thème à la une
-highlighted_event: un événement à la une
-highlighted_consultation: une consultation à la une
+highlighted_post: un article
+highlighted_idea: une idée
+highlighted_theme: un thème
+highlighted_event: un événement
+highlighted_consultation: une consultation
 idea_comment: un commentaire sur une idée
 event_comment: un commentaire sur un événement
 post_comment: un commentaire sur un article

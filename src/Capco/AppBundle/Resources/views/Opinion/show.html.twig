@@ -24,7 +24,7 @@
 
         {% if currentStep.isFuture %}
             <div class="alert alert-info alert-dismissible  block" role="alert">
-                <p><strong>{{ 'consultation.show.alert.future.title'|trans({}, 'CapcoAppBundle') }}</strong> {{ 'consultation.show.alert.future.text'|trans({'%date%': '<strong>' ~ consultation.getOpenedAt| localizeddate('long', 'none', app.request.locale) ~ '</strong>'}, 'CapcoAppBundle') | raw }}</p>
+                <p><strong>{{ 'consultation.show.alert.future.title'|trans({}, 'CapcoAppBundle') }}</strong> {{ 'consultation.show.alert.future.text'|trans({'%date%': '<strong>' ~ currentStep.startAt | localizeddate('long', 'none', app.request.locale) ~ '</strong>'}, 'CapcoAppBundle') | raw }}</p>
             </div>
         {% endif %}
 
@@ -95,15 +95,13 @@
                                     }) }}
                                 </div>
 
-                                {% if is_feature_enabled('reporting') %}
-                                    <div class="opinion__vote-group">
-                                        {% if opinion.reports | length > 0 %}
-                                            <button disabled="disabled" class="btn  btn-dark-gray"><i class="cap cap-flag-1"></i> {{ 'opinion.report.reported'|trans({}, 'CapcoAppBundle') }}</button>
-                                        {% else %}
-                                            <a href="{{ path('app_report_opinion' ,{'consultationSlug': consultation.slug, 'stepSlug': currentStep.slug, 'opinionTypeSlug': opinionType.slug, 'opinionSlug': opinion.slug } ) }}" class="btn  btn-dark-gray  btn--outline  connection-popover-js"><i class="cap cap-flag-1"></i> {{ 'opinion.report.submit'|trans({}, 'CapcoAppBundle') }}</a>
-                                        {% endif %}
-                                    </div>
-                                {% endif %}
+                                <div class="opinion__vote-group">
+                                    {% if opinion.reports | length > 0 %}
+                                        <button disabled="disabled" class="btn  btn-dark-gray"><i class="cap cap-flag-1"></i> {{ 'opinion.report.reported'|trans({}, 'CapcoAppBundle') }}</button>
+                                    {% else %}
+                                        <a href="{{ path('app_report_opinion' ,{'consultationSlug': consultation.slug, 'stepSlug': currentStep.slug, 'opinionTypeSlug': opinionType.slug, 'opinionSlug': opinion.slug } ) }}" class="btn  btn-dark-gray  btn--outline  connection-popover-js"><i class="cap cap-flag-1"></i> {{ 'opinion.report.submit'|trans({}, 'CapcoAppBundle') }}</a>
+                                    {% endif %}
+                                </div>
 
                                 {% if opinion.canContribute and app.user is not null and app.user == opinion.Author %}
                                     <div class="opinion__vote-group">

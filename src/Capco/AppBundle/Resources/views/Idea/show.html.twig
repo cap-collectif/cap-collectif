@@ -76,16 +76,14 @@
                     }) }}
 
                     <div class="pull-right no-float-mobile">
-                        {% if is_feature_enabled('reporting') %}
-                            {% if idea.reports | length == 0 %}
-                                <a href="{{ path('app_report_idea' ,{'idea_slug': idea.slug } ) }}" class="btn btn-dark-gray  btn--outline  connection-popover-js">
-                                    <i class="cap cap-flag-1"></i> {{ 'idea.report.submit'|trans({}, 'CapcoAppBundle') }}
-                                </a>
-                            {% else %}
-                                <button disabled="disabled" class="btn btn-dark-gray">
-                                    <i class="cap cap-flag-1"></i> {{ 'idea.report.reported'|trans({}, 'CapcoAppBundle') }}
-                                </button>
-                            {% endif %}
+                        {% if idea.reports | length == 0 %}
+                            <a href="{{ path('app_report_idea' ,{'idea_slug': idea.slug } ) }}" class="btn btn-dark-gray  btn--outline  connection-popover-js">
+                                <i class="cap cap-flag-1"></i> {{ 'idea.report.submit'|trans({}, 'CapcoAppBundle') }}
+                            </a>
+                        {% else %}
+                            <button disabled="disabled" class="btn btn-dark-gray">
+                                <i class="cap cap-flag-1"></i> {{ 'idea.report.reported'|trans({}, 'CapcoAppBundle') }}
+                            </button>
                         {% endif %}
 
                         {% if idea.canContribute and app.user.id is defined and app.user.id == idea.Author.id %}

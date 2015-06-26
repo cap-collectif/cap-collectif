@@ -10,7 +10,6 @@ var CommentSection = React.createClass({
         return {
             comments_total: 0,
             comments: [],
-            can_report: true,
             filter: 'last'
         };
     },
@@ -32,7 +31,7 @@ var CommentSection = React.createClass({
                 </h2>
                 { this.renderFilter() }
             </div>
-            <CommentList comments={this.state.comments} can_report={this.state.can_report} />
+            <CommentList comments={this.state.comments} />
             { this.renderLoadMore() }
         </div>
         );
@@ -90,7 +89,6 @@ var CommentSection = React.createClass({
             this.setState({
                 'comments_total': data.total_count,
                 'comments': data.comments,
-                'can_report': data.can_report,
                 'filter': this.state.filter
             });
         });
