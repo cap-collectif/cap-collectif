@@ -119,9 +119,6 @@
                         <div id="render-idea-comments" data-idea="{{ idea.id }}"></div>
                     {% endif %}
 
-                    {% if capco_comment_can_add(idea) %}
-                        {{ render(controller('CapcoAppBundle:Site/Comment:create', {'objectId': idea.id, 'objectType': idea.className})) }}
-                    {% endif %}
                 </div>
             {% endif %}
 

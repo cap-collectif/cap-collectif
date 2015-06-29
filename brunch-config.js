@@ -32,6 +32,7 @@ exports.config = {
           'bower_components/fetch/fetch.js',
           'bower_components/react-intl/dist/react-intl.min.js',
           'bower_components/react-intl/dist/locale-data/fr.js',
+          'bower_components/autosize/dist/autosize.js',
           'app/Resources/js/jsapi.js',
           'app/Resources/js/cookiechoices.js',
           'app/Resources/js/googleCharts.js',

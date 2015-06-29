@@ -27,7 +27,8 @@
     "flux": "~2.0.2",
     "eventEmitter": "~4.2.11",
     "fetch": "~0.9.0",
-    "react-intl": "~1.2.0"
+    "react-intl": "~1.2.0",
+    "autosize": "~3.0.6"
   },
   "overrides": {
     "fancybox": {

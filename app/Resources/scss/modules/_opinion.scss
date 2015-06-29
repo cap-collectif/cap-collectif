@@ -349,6 +349,21 @@
   }
 }
 
+// List of comment answers
+.comment-answers {
+  .opinion__list {
+    .opinion--comment {
+      padding-top: 10px;
+      padding-bottom: 10px;
+      border-bottom: 0;
+    }
+  }
+}
+
+.commentAnswerForm {
+  padding-left: 40px;
+}
+
 // List of comments
 .media-list {
   .opinion--comment {

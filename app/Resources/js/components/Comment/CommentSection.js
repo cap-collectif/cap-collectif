@@ -33,11 +33,11 @@ var CommentSection = React.createClass({
                 </h2>
                 { this.renderFilter() }
             </div>
-            <CommentList comments={this.state.comments} can_report={this.state.can_report} />
+            <CommentList comments={this.state.comments}  root={true} can_report={this.state.can_report} />
             { this.renderLoadMore() }
             <h2>Publier un commentaire</h2>
             <div className="opinion__data">
-                <CommentForm comment={this.state.comment} />
+                <CommentForm uri={this.props.uri} object={this.props.object} />
             </div>
         </div>
         );

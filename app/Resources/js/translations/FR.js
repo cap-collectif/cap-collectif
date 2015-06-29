@@ -17,12 +17,19 @@ export default {
             },
             trashed: {
                 label: 'Dans la corbeille'
-            }
+            },
+            with_my_account: 'Commenter avec mon compte'
         },
         global: {
             more: 'Voir plus',
+            answer: 'Répondre',
+            comment: 'Ecrire un commentaire...',
+            name: 'Nom',
+            masked_email: 'Adresse électronique (masquée)',
+            message: 'Message',
             popular: 'Populaire',
             last: 'Récent',
+            all_required: 'Tous les champs sont obligatoires.',
             read_more: 'Afficher la suite'
         }
     }

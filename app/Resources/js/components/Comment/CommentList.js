@@ -10,6 +10,10 @@ var CommentList = React.createClass({
                 {
                     this.props.comments.map((comment) => {
                         return <Comment key={comment.id} comment={comment} can_report={this.props.can_report} />;
+                        if (comment.can_contribute) {
+                            return <Comment key={comment.id} comment={comment} root={this.props.root} />;
+                        }
+                        return ;
                     })
                 }
             </ul>
