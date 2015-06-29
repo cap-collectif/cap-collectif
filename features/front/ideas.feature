@@ -56,15 +56,16 @@ Scenario: Can not comment an uncommentable idea
   And I follow "ideaNotCommentable"
   Then I should not see "Commenter"
 
-@database
+@datbase @javascript @test
 Scenario: Can comment an idea
   Given I visited "ideas page"
   And I follow "ideaCommentable"
+  And I wait 5 seconds
   And I should see "Commenter avec mon compte"
   And I fill in the following:
-    | capco_app_comment[authorName]  | Naruto              |
-    | capco_app_comment[authorEmail] | naruto72@gmail.com  |
-    | capco_app_comment[body]        | Jai un truc à dire  |
+    | commentName  | Naruto              |
+    | commentEmail | naruto72@gmail.com  |
+    | commentInput | Jai un truc à dire  |
   When I press "Commenter"
   Then I should see "Merci ! Votre commentaire a bien été enregistré."
 

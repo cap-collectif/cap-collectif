@@ -18,6 +18,7 @@ export default {
             trashed: {
                 label: 'Dans la corbeille'
             },
+            submit: 'Commenter',
             with_my_account: 'Commenter avec mon compte'
         },
         global: {

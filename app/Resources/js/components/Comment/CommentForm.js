@@ -71,13 +71,15 @@ var CommentForm = React.createClass({
         var comment = this.props.comment;
         return (
             <form className="commentForm">
+                { this.renderAnonymous() }
+                { this.renderLoggedIn() }
                 <div className="form-group">
                     <label for="commentInput" className="control-label  h5">
                         { this.getIntlMessage('global.message') }
                     </label>
                     <textarea valueLink={this.linkState('body')} rows="5" id="commentInput" className="form-control" />
                 </div>
-                <input className="btn  btn-primary" type="submit" onClick={this.create.bind(this)} />
+                <input className="btn  btn-primary" type="submit" value={this.getIntlMessage('comment.submit')} onClick={this.create.bind(this)} />
             </form>
         );
     }

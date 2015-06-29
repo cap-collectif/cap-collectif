@@ -1,5 +1,6 @@
 Feature: Events
 
+@datbase @javascripts @test
 Scenario: Can comment an event
   Given feature "calendar" is enabled
   And I visited "events page"
