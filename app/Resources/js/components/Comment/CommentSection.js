@@ -18,7 +18,6 @@ var CommentSection = React.createClass({
 
     componentDidMount() {
         this.loadCommentsFromServer();
-        setInterval(this.loadCommentsFromServer, 5000);
     },
 
     render() {
@@ -74,6 +73,8 @@ var CommentSection = React.createClass({
 
     renderLoadMore() {
 
+        console.log(this.props.queryParams.limit);
+        console.log(this.state.comments_total);
         if (this.props.queryParams.limit < this.state.comments_total) {
             return (
                 <button className="btn btn-default" onClick={this.loadMore.bind(this)}>

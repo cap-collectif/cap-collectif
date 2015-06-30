@@ -28,6 +28,7 @@ class IdeaCommentRepository extends EntityRepository
             ->leftJoin('c.Idea', 'i')
             ->leftJoin('c.answers', 'ans')
             ->andWhere('c.Idea = :idea')
+            ->andWhere('c.parent is NULL')
             ->andWhere('c.isTrashed = :notTrashed')
             ->setParameter('idea', $idea)
             ->setParameter('notTrashed', false)
