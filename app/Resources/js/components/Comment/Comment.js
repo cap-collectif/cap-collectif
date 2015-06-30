@@ -15,11 +15,13 @@ var Comment = React.createClass({
     getInitialState() {
         if (this.props.comment.answers.length > 0) {
             return {
-                commentFormShown: true
+                commentFormShown: true,
+                commentFormFocus: false
             }
         }
         return {
-            commentFormShown: false
+            commentFormShown: false,
+            commentFormFocus: false
         }
     },
 
@@ -50,7 +52,7 @@ var Comment = React.createClass({
                     : <span />
                 )}
                 {(this.state.commentFormShown === true
-                    ? <CommentAnswerForm comment={comment} />
+                    ? <CommentAnswerForm {...this.props} focus={this.state.commentFormFocus}/>
                     : <span />
                 )}
             </div>
@@ -68,7 +70,8 @@ var Comment = React.createClass({
 
     answer() {
         this.setState({
-            commentFormShown: true
+            commentFormShown: true,
+            commentFormFocus: true
         });
     }
 

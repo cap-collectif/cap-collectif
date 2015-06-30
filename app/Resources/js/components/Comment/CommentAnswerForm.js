@@ -10,6 +10,12 @@ var CommentAnswerForm = React.createClass({
         };
     },
 
+    componentDidMount() {
+        if (this.props.focus) {
+            React.findDOMNode(this.refs.body).focus();
+        }
+    },
+
     create(e) {
         e.preventDefault();
         CommentActions.create(this.props.uri, this.props.object, this.state);
@@ -31,7 +37,7 @@ var CommentAnswerForm = React.createClass({
         return (
             <form className="commentAnswerForm">
                 <div className="form-group">
-                    <textarea valueLink={this.linkState('body')} name="body" rows="1" required="required" className="form-control comment-textarea" placeholder={this.getIntlMessage('global.comment')} />
+                    <textarea valueLink={this.linkState('body')} ref="body" name="body" rows="1" required="required" className="form-control comment-textarea" placeholder={this.getIntlMessage('global.comment')} />
                 </div>
                 { this.renderSubmit() }
             </form>
