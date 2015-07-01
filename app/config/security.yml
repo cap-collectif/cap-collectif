@@ -36,12 +36,12 @@ security:
             anonymous:          true
 
         api_login:
-            pattern:  ^/api/syntheses/login
+            pattern:  ^/api/login
             provider: fos_userbundle
             stateless: true
             anonymous: true
             form_login:
-                check_path:               /api/syntheses/login_check
+                check_path:               /api/login_check
                 username_parameter:       username
                 password_parameter:       password
                 success_handler:          lexik_jwt_authentication.handler.authentication_success
@@ -49,9 +49,10 @@ security:
                 require_previous_session: false
 
         api:
-            pattern:   ^/api/syntheses
+            pattern:   ^/api
             provider: fos_userbundle
             stateless: true
+            anonymous: true
             lexik_jwt:
                 authorization_header:
                     enabled: true

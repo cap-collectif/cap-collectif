@@ -1,6 +1,9 @@
 import CommentList from './CommentList';
 import CommentForm from './CommentForm';
 import Fetcher from '../../services/Fetcher';
+import CommentActions from '../../actions/CommentActions';
+import CommentStore from '../../stores/CommentStore';
+
 var FormattedMessage  = ReactIntl.FormattedMessage;
 
 
@@ -12,17 +15,40 @@ var CommentSection = React.createClass({
             comments_total: 0,
             comments: [],
             can_report: true,
+            loaded: false,
             filter: 'last'
         };
+    },
+
+    componentWillMount() {
+        CommentStore.addChangeListener(this._onChange);
     },
 
     componentDidMount() {
         this.loadCommentsFromServer();
     },
 
+    componentWillUnmount() {
+        CommentStore.removeChangeListener(this._onChange);
+    },
+
+    _onChange() {
+       if (CommentStore.isSync) {
+            this.setState({
+                 comments_total: CommentStore.count,
+                 comments: CommentStore.comments,
+                 loaded: true,
+                 filter: this.state.filter
+            });
+            return ;
+       }
+       this.loadCommentsFromServer();
+    },
+
     render() {
         return (
         <div>
+            { this.renderLoader() }
             <div className="row">
                 <h2 className="h2 col-sm-6">
                     <FormattedMessage
@@ -34,12 +60,22 @@ var CommentSection = React.createClass({
             </div>
             <CommentList {...this.props} comments={this.state.comments}  root={true} can_report={this.state.can_report} />
             { this.renderLoadMore() }
-            <h2>Publier un commentaire</h2>
-            <div className="opinion__data">
-                <CommentForm uri={this.props.uri} object={this.props.object} />
-            </div>
+            <h4>Publier un commentaire</h4>
+            <CommentForm uri={this.props.uri} object={this.props.object} />
         </div>
         );
+    },
+
+    renderLoader() {
+        if (!this.state.loaded) {
+            return (
+                <div className= "row">
+                    <div className="col-sm-2 col-sm-offset-5">
+                         <div className="spinner-loader"></div>
+                    </div>
+                </div>
+            );
+        }
     },
 
     renderFilter() {
@@ -58,9 +94,10 @@ var CommentSection = React.createClass({
     updateSelectedValue(e) {
 
         this.setState({
-            'comments_total': this.state.comments_total,
-            'comments': this.state.comments,
-            'filter': $("#comments-filter").val()
+            comments_total: this.state.comments_total,
+            comments: this.state.comments,
+            loaded: true,
+            filter: $("#comments-filter").val()
         });
 
     },
@@ -72,9 +109,6 @@ var CommentSection = React.createClass({
     },
 
     renderLoadMore() {
-
-        console.log(this.props.queryParams.limit);
-        console.log(this.state.comments_total);
         if (this.props.queryParams.limit < this.state.comments_total) {
             return (
                 <button className="btn btn-default" onClick={this.loadMore.bind(this)}>
@@ -86,20 +120,13 @@ var CommentSection = React.createClass({
     },
 
     loadCommentsFromServer() {
-        Fetcher
-        .get('/' + this.props.uri + '/' + this.props.object +
-             '/comments?offset=' + this.props.queryParams.offset +
-             '&limit=' + this.props.queryParams.limit +
-             '&filter=' + this.state.filter
-        )
-        .then((data) => {
-            this.setState({
-                'comments_total': data.total_count,
-                'comments': data.comments,
-                'can_report': data.can_report,
-                'filter': this.state.filter
-            });
-        });
+        CommentActions.loadFromServer(
+            this.props.uri,
+            this.props.object,
+            this.props.queryParams.offset,
+            this.props.queryParams.limit,
+            this.state.filter
+        );
     },
 
     loadMore() {

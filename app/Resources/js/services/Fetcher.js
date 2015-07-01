@@ -1,6 +1,7 @@
 'use strict';
 
 import config from '../config';
+import LoginStore from '../stores/LoginStore';
 
 function status(response) {
   if (response.status >= 200 && response.status < 300) {
@@ -14,10 +15,16 @@ function json(response) {
 };
 
 function createHeaders() {
-  return {
+  var headers = {
     'Accept': 'application/json',
-    'Content-Type': 'application/json',
+    'Content-Type': 'application/json'
   };
+
+  if(LoginStore.jwt != null) {
+     headers.Authorization = 'Bearer ' + LoginStore.jwt;
+  }
+
+  return headers;
 }
 
 
@@ -26,7 +33,6 @@ class Fetcher {
   get(uri) {
     return fetch(config.api + uri, {
       method: 'get',
-      credentials: 'same-origin',
       headers: createHeaders()
     })
     .then(status)
@@ -36,18 +42,15 @@ class Fetcher {
   post(uri, body) {
     return fetch(config.api + uri, {
         method: 'post',
-        credentials: 'same-origin',
         headers: createHeaders(),
         body: JSON.stringify(body)
       })
       .then(status)
-      .then(json);
   }
 
   put(uri, body) {
     return fetch(config.api + uri, {
         method: 'put',
-        credentials: 'same-origin',
         headers: createHeaders(),
         body: JSON.stringify(body)
       })
@@ -58,7 +61,6 @@ class Fetcher {
   delete(uri) {
     return fetch(config.api + uri, {
       method: 'delete',
-      credentials: 'same-origin',
       headers: createHeaders()
     })
     .then(status)

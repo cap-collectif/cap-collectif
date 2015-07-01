@@ -11,7 +11,6 @@ var CommentAnswerForm = React.createClass({
     },
 
     componentDidMount() {
-        console.log('mount: ' + this.props.focus);
         if (this.props.focus) {
             React.findDOMNode(this.refs.body).focus();
         }
@@ -19,16 +18,14 @@ var CommentAnswerForm = React.createClass({
 
     create(e) {
         e.preventDefault();
-        CommentActions.create(this.props.uri, this.props.object, this.state);
+        var data = this.state;
+        data.parent = this.props.comment.id;
+        CommentActions.create(this.props.uri, this.props.object, data);
         this.setState(this.getInitialState());
     },
 
     componentWillUpdate(nextProps, nextState) {
-        console.log('will update: ' + this.props.focus + nextProps.focus);
-        console.log(React.findDOMNode(this.refs.body));
-        console.log($(React.findDOMNode(this.refs.body)).is(':focus'));
         if (nextProps.focus && !$(React.findDOMNode(this.refs.body)).is(':focus')) {
-            console.log('set focus');
             React.findDOMNode(this.refs.body).focus();
         }
     },

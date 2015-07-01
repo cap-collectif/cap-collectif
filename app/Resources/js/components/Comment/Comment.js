@@ -6,6 +6,7 @@ import CommentReport from './CommentReport';
 import CommentEdit from './CommentEdit';
 import CommentAnswers from './CommentAnswers';
 import CommentAnswerForm from './CommentAnswerForm';
+import LoginStore from '../../stores/LoginStore';
 
 var FormattedDate = ReactIntl.FormattedDate;
 
@@ -41,7 +42,7 @@ var Comment = React.createClass({
                 <CommentVoteButton comment={comment} />&nbsp;
                 { this.renderReporting(comment) }&nbsp;
                 <CommentEdit comment={comment} />
-                {(this.props.root === true
+                {(this.props.root === true && LoginStore.isLoggedIn()
                     ? <a onClick={ this.answer.bind(this) } className="btn btn-xs btn-dark-gray btn--outline">
                         { this.getIntlMessage('global.answer') }
                       </a>
@@ -51,7 +52,7 @@ var Comment = React.createClass({
                     ? <CommentAnswers comments={comment.answers} />
                     : <span />
                 )}
-                {(this.state.answerFormShown === true
+                {(this.state.answerFormShown === true && LoginStore.isLoggedIn()
                     ? <CommentAnswerForm {...this.props} focus={this.state.answerFormFocus}/>
                     : <span />
                 )}

@@ -110,7 +110,7 @@ twitter_login:
     pattern: /login/check-twitter
 
 api_login_check:
-    path: /api/syntheses/login_check
+    path: /api/login_check
 
 # nelmio doc
 NelmioApiDocBundle:

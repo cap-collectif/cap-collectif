@@ -41,6 +41,12 @@ class CommentType extends AbstractType
                     'translation_domain' => 'CapcoAppBundle',
                 ))
             ;
+        } else {
+            $builder
+                ->add('parent', null, [
+                    'required' => false
+                ])
+            ;
         }
     }
 

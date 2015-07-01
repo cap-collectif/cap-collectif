@@ -3,7 +3,7 @@ var UserAvatar = React.createClass({
 
     render() {
 
-        if (this.props.user) {
+        if (this.props.user && this.props.user._links) {
             return (
                 <a className="pull-left" href={this.props.user._links.profile}>
                     { this.renderAvatar() }

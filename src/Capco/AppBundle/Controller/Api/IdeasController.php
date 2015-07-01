@@ -124,6 +124,7 @@ class IdeasController extends FOSRestController
     public function postIdeaCommentsAction(Request $request, Idea $idea)
     {
         $user = $this->getUser();
+
         $comment = (new IdeaComment())
                     ->setAuthorIp($request->getClientIp())
                     ->setAuthor($user)
@@ -137,6 +138,13 @@ class IdeasController extends FOSRestController
 
         if (!$form->isValid()) {
             return $form;
+        }
+
+        $parent = $comment->getParent();
+        if ($parent) {
+            if ($idea != $parent->getIdea()) {
+                throw $this->createNotFoundException('This parent comment is not linked to this idea');
+            }
         }
 
         $this->getDoctrine()->getManager()->persist($comment);

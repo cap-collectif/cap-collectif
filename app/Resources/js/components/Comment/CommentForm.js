@@ -1,5 +1,6 @@
 import CommentActions from '../../actions/CommentActions';
 import UserAvatar from '../User/UserAvatar';
+import LoginStore from '../../stores/LoginStore';
 
 var FormattedDate = ReactIntl.FormattedDate;
 
@@ -18,17 +19,13 @@ var CommentForm = React.createClass({
         this.setState(this.getInitialState());
     },
 
-    isAnonymous() {
-        return true;
-    },
-
     componentDidUpdate() {
         autosize($('#commentInput'));
     },
 
     renderAnonymous() {
 
-        if (this.isAnonymous()) {
+        if (!LoginStore.isLoggedIn()) {
             return (
                 <div>
                     <p className="excerpt">{ this.getIntlMessage('global.all_required') }</p>
@@ -60,27 +57,43 @@ var CommentForm = React.createClass({
     },
 
     renderLoggedIn() {
-        if (!this.isAnonymous()) {
-                return (
-                    <UserAvatar user={comment.user} />
-                );
+        if (LoginStore.isLoggedIn()) {
+            var user = LoginStore.user;
+            console.log(user);
+            console.log(user.username);
+            return (
+                <div className="media">
+                    <UserAvatar user={user} />
+                    <div className="media-body">
+                        <p className="media--aligned excerpt">
+                            <a href={user._links.profile}>
+                                { user.username }
+                            </a>
+                        </p>
+                    </div>
+                </div>
+            );
         }
     },
 
     render() {
         var comment = this.props.comment;
         return (
-            <form className="commentForm">
-                { this.renderAnonymous() }
+            <div>
                 { this.renderLoggedIn() }
-                <div className="form-group">
-                    <label for="commentInput" className="control-label  h5">
-                        { this.getIntlMessage('global.message') }
-                    </label>
-                    <textarea valueLink={this.linkState('body')} rows="5" id="commentInput" className="form-control" />
+                <div className="opinion__data">
+                    <form className="commentForm">
+                        { this.renderAnonymous() }
+                        <div className="form-group">
+                            <label for="commentInput" className="control-label  h5">
+                                { this.getIntlMessage('global.message') }
+                            </label>
+                            <textarea valueLink={this.linkState('body')} rows="5" id="commentInput" className="form-control" />
+                        </div>
+                        <input className="btn  btn-primary" type="submit" value={this.getIntlMessage('comment.submit')} onClick={this.create.bind(this)} />
+                    </form>
                 </div>
-                <input className="btn  btn-primary" type="submit" value={this.getIntlMessage('comment.submit')} onClick={this.create.bind(this)} />
-            </form>
+            </div>
         );
     }
 });

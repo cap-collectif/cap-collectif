@@ -28,7 +28,10 @@
     "eventEmitter": "~4.2.11",
     "fetch": "~0.9.0",
     "react-intl": "~1.2.0",
-    "autosize": "~3.0.6"
+    "autosize": "~3.0.6",
+    "react-loader": "~1.2.0",
+    "loaders.css": "~0.1.1",
+    "css-spinners": "~2.1.0"
   },
   "overrides": {
     "fancybox": {

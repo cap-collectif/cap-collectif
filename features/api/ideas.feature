@@ -121,7 +121,41 @@ Feature: Ideas
     When I send a POST request to "/api/ideas/3/comments" with json:
     """
     {
-      "body": "Vive moi qui suis plus fort que www.google.fr !"
+      "body": "Vive moi user ! Réponds à ça si tu l'oses."
     }
     """
     Then the JSON response status code should be 201
+
+
+
+  @test
+  Scenario: logged in API client wants to add a comment
+    Given I am logged in to api as user
+    When I send a POST request to "/api/ideas/3/comments" with json:
+    """
+    {
+      "parent": 1,
+      "body": "Oh oui j'ose :-P"
+    }
+    """
+    Then the JSON response status code should be 201
+
+  @test @security
+  Scenario: logged in API client wants to add a comment
+    Given I am logged in to api as user
+    When I send a POST request to "/api/ideas/3/comments" with json:
+    """
+    {
+      "parent": 2,
+      "body": "Pr0 Hacker"
+    }
+    """
+    Then the JSON response status code should be 404
+    And the JSON response should match:
+    """
+    {
+      "code": 404,
+      "message": "This parent comment is not linked to this idea",
+      "errors": @null@
+    }
+    """
