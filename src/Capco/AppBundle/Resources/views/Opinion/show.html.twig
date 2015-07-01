@@ -176,7 +176,9 @@
                 html: "true",
                 trigger: "focus",
                 title: "{{ 'user.login.popover.title'|trans({}, 'CapcoAppBundle') }}",
-                content: "<p>{{ 'user.login.popover.body'|trans({}, 'CapcoAppBundle') }}</p><p><a href='{{ path('fos_user_registration_register') }}' class='btn  btn-success  center-block'>{{ 'user.login.popover.signin'|trans({}, 'CapcoAppBundle') }}</a></p><p><a href='{{ path('fos_user_security_login') }}' class='btn  btn-default  center-block'>{{ 'user.login.popover.login'|trans({}, 'CapcoAppBundle') }}</a></p>"
+                content: "<p>{{ 'user.login.popover.body'|trans({}, 'CapcoAppBundle') }}</p>"
+                {% if is_feature_enabled("registration") %} + "<p><a href='{{ path('fos_user_registration_register') }}' class='btn  btn-success  center-block'>{{ 'user.login.popover.signin'|trans({}, 'CapcoAppBundle') }}</a></p>" {% endif %}
+                +"<p><a href='{{ path('fos_user_security_login') }}' class='btn  btn-default  center-block'>{{ 'user.login.popover.login'|trans({}, 'CapcoAppBundle') }}</a></p>"
             });
         {% endif %}
     </script>
