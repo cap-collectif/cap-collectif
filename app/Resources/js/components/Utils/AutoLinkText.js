@@ -16,14 +16,14 @@ function prepareElements(text) {
 
   this.forEach((match) => {
     if (match.position.start !== 0) {
-      elements.push(<span>{text.slice(lastIndex, match.position.start)}</span>);
+      elements.push(<span dangerouslySetInnerHTML={{__html: text.slice(lastIndex, match.position.start) }} />);
     }
-    elements.push(<a href={match.getAnchorHref()}>{match.getAnchorText()}</a>);
+    elements.push(<a href={match.getAnchorHref()} target="_blank">{match.getAnchorText()}</a>);
     lastIndex = match.position.end;
   });
 
   if (lastIndex < text.length) {
-    elements.push(<span>{text.slice(lastIndex)}</span>);
+    elements.push(<span dangerouslySetInnerHTML={{__html: text.slice(lastIndex) }} />);
   }
 
   return elements;

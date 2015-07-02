@@ -114,7 +114,7 @@ class DefaultController extends Controller
 
         return new JsonResponse([
             'token' => $token,
-            'user' => $userDataPhp
+            'user' => $userData
         ]);
     }
 

@@ -17,6 +17,7 @@ var CommentForm = React.createClass({
         e.preventDefault();
         CommentActions.create(this.props.uri, this.props.object, this.state);
         this.setState(this.getInitialState());
+        autosize.destroy(React.findDOMNode(this.refs.body));
     },
 
     componentDidUpdate() {
@@ -59,8 +60,6 @@ var CommentForm = React.createClass({
     renderLoggedIn() {
         if (LoginStore.isLoggedIn()) {
             var user = LoginStore.user;
-            console.log(user);
-            console.log(user.username);
             return (
                 <div className="media">
                     <UserAvatar user={user} />
@@ -88,7 +87,7 @@ var CommentForm = React.createClass({
                             <label for="commentInput" className="control-label  h5">
                                 { this.getIntlMessage('global.message') }
                             </label>
-                            <textarea valueLink={this.linkState('body')} rows="5" id="commentInput" className="form-control" />
+                            <textarea valueLink={this.linkState('body')} placeholder={this.getIntlMessage('global.comment')} ref="body" rows="5" id="commentInput" className="form-control" />
                         </div>
                         <input className="btn  btn-primary" type="submit" value={this.getIntlMessage('comment.submit')} onClick={this.create.bind(this)} />
                     </form>

@@ -16,32 +16,48 @@ var CommentSection = React.createClass({
             comments: [],
             can_report: true,
             loaded: false,
-            filter: 'last'
+            loadingMore: false,
+            filter: 'last',
+            offset: 0,
+            limit: 10
         };
     },
 
     componentWillMount() {
-        CommentStore.addChangeListener(this._onChange);
+        CommentStore.addChangeListener(this.onChange);
+    },
+
+    componentWillUnmount() {
+        CommentStore.removeChangeListener(this.onChange);
     },
 
     componentDidMount() {
         this.loadCommentsFromServer();
     },
 
-    componentWillUnmount() {
-        CommentStore.removeChangeListener(this._onChange);
+    componentDidUpdate(prevProps, prevState) {
+        if (this.state.filter != prevState.filter) {
+            this.loadCommentsFromServer();
+        }
     },
 
-    _onChange() {
+    onChange() {
        if (CommentStore.isSync) {
             this.setState({
                  comments_total: CommentStore.count,
                  comments: CommentStore.comments,
                  loaded: true,
-                 filter: this.state.filter
+                 loadingMore: false,
             });
-            return ;
+
+            let loadMoreButton = React.findDOMNode(this.refs.loadMore);
+            if (loadMoreButton) {
+                $(loadMoreButton).button('reset');
+            }
+
+            return;
        }
+
        this.loadCommentsFromServer();
     },
 
@@ -60,7 +76,7 @@ var CommentSection = React.createClass({
             </div>
             <CommentList {...this.props} comments={this.state.comments}  root={true} can_report={this.state.can_report} />
             { this.renderLoadMore() }
-            <h4>Publier un commentaire</h4>
+            <h4>{this.getIntlMessage('comment.publish')}</h4>
             <CommentForm uri={this.props.uri} object={this.props.object} />
         </div>
         );
@@ -85,33 +101,17 @@ var CommentSection = React.createClass({
                     <select id="comments-filter" className="h2 form-control" value={this.state.filter} onChange={() => this.updateSelectedValue()}>
                       <option value="popular">{this.getIntlMessage('global.popular')}</option>
                       <option value="last">{this.getIntlMessage('global.last')}</option>
+                      <option value="old">{this.getIntlMessage('global.old')}</option>
                     </select>
                 </div>
             );
         }
     },
 
-    updateSelectedValue(e) {
-
-        this.setState({
-            comments_total: this.state.comments_total,
-            comments: this.state.comments,
-            loaded: true,
-            filter: $("#comments-filter").val()
-        });
-
-    },
-
-    componentDidUpdate(prevProps, prevState) {
-        if (this.state.filter != prevState.filter) {
-            this.loadCommentsFromServer();
-        }
-    },
-
     renderLoadMore() {
-        if (this.props.queryParams.limit < this.state.comments_total) {
+        if (this.state.limit < this.state.comments_total) {
             return (
-                <button className="btn btn-default" onClick={this.loadMore.bind(this)}>
+                <button className="btn btn-block btn-default" ref="loadMore" data-loading-text="Loading..." onClick={this.loadMore.bind(this)}>
                     { this.getIntlMessage('global.more') }
                 </button>
             );
@@ -119,19 +119,31 @@ var CommentSection = React.createClass({
         return ;
     },
 
+    updateSelectedValue(e) {
+        this.setState({
+            filter: $("#comments-filter").val()
+        });
+    },
+
     loadCommentsFromServer() {
         CommentActions.loadFromServer(
             this.props.uri,
             this.props.object,
-            this.props.queryParams.offset,
-            this.props.queryParams.limit,
+            this.state.offset,
+            this.state.limit,
             this.state.filter
         );
     },
 
     loadMore() {
-        this.props.queryParams.limit += 20;
-        this.loadCommentsFromServer();
+
+        $(React.findDOMNode(this.refs.loadMore)).button('loading');
+        this.setState({
+            loadingMore: true,
+            limit: this.state.limit + 10
+        }, () => {
+            this.loadCommentsFromServer();
+        });
     }
 
 });

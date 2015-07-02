@@ -5,9 +5,9 @@ import LoginActions from '../actions/LoginActions';
 
 function status(response) {
   if (response.status >= 200 && response.status < 300) {
-    return response
+    return response;
   }
-  throw new Error(response.statusText)
+  throw new Error(response.statusText);
 };
 
 function json(response) {
@@ -29,6 +29,10 @@ class AuthService {
     .then(json)
     .then((data) => {
         LoginActions.loginUser(data.token, data.user);
+    })
+    .catch((error) => {
+      console.log('Login as Anonymous');
+      LoginActions.logoutUser();
     });
   }
 

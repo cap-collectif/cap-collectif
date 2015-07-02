@@ -31,7 +31,8 @@
     "autosize": "~3.0.6",
     "react-loader": "~1.2.0",
     "loaders.css": "~0.1.1",
-    "css-spinners": "~2.1.0"
+    "css-spinners": "~2.1.0",
+    "jquery.scrollTo": "~2.1.1"
   },
   "overrides": {
     "fancybox": {

@@ -19,6 +19,7 @@ export default {
                 label: 'Dans la corbeille'
             },
             submit: 'Commenter',
+            publish: 'Publier un commentaire',
             with_my_account: 'Commenter avec mon compte'
         },
         global: {
@@ -30,6 +31,7 @@ export default {
             message: 'Message',
             popular: 'Populaire',
             last: 'Récent',
+            old: 'Ancien',
             all_required: 'Tous les champs sont obligatoires.',
             read_more: 'Afficher la suite'
         }

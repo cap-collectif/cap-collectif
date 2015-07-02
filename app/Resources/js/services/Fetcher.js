@@ -5,9 +5,9 @@ import LoginStore from '../stores/LoginStore';
 
 function status(response) {
   if (response.status >= 200 && response.status < 300) {
-    return response
+    return response;
   }
-  throw new Error(response.statusText)
+  throw new Error(response.statusText);
 };
 
 function json(response) {

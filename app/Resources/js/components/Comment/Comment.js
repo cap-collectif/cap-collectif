@@ -41,7 +41,7 @@ var Comment = React.createClass({
                 <CommentBody comment={comment} />
                 <CommentVoteButton comment={comment} />&nbsp;
                 { this.renderReporting(comment) }&nbsp;
-                <CommentEdit comment={comment} />
+                <CommentEdit comment={comment} />&nbsp;
                 {(this.props.root === true && LoginStore.isLoggedIn()
                     ? <a onClick={ this.answer.bind(this) } className="btn btn-xs btn-dark-gray btn--outline">
                         { this.getIntlMessage('global.answer') }

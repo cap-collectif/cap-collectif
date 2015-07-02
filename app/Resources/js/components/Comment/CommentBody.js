@@ -29,16 +29,17 @@ var CommentBody = React.createClass({
             text += ' ';
         }
 
-        return text;
+        return text.replace(new RegExp('\r?\n','g'), '<br />');
     },
+
 
     render() {
         return (
-            <p className='opinion__text'>
+            <div className='opinion__text'>
                 { this.renderTrashedLabel() }
                 <AutoLinkText text={this.generateText()} />
                 { this.renderReadMoreOrLess() }
-            </p>
+            </div>
         )
     },
 

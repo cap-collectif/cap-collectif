@@ -48,7 +48,7 @@ class IdeasController extends FOSRestController
      * @ParamConverter("idea", options={"mapping": {"id": "id"}})
      * @QueryParam(name="offset", requirements="[0-9.]+", default="0")
      * @QueryParam(name="limit", requirements="[0-9.]+", default="10")
-     * @QueryParam(name="filter", requirements="(last|popular)", default="last")
+     * @QueryParam(name="filter", requirements="(old|last|popular)", default="last")
      * @View(serializerGroups={"Comments", "UsersInfos"})
      */
     public function getIdeaCommentsAction(Idea $idea, ParamFetcherInterface $paramFetcher)
@@ -67,6 +67,9 @@ class IdeasController extends FOSRestController
         }
 
         $canReport = $this->get('capco.toggle.manager')->isActive('reporting');
+        $count = $this->getDoctrine()->getManager()
+                      ->getRepository('CapcoAppBundle:IdeaComment')
+                      ->countCommentsAndAnswersEnabledByIdea($idea);
 
         return [
             'total_count' => count($paginator),

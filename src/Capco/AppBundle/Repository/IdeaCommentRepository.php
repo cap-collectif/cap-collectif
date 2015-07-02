@@ -34,6 +34,10 @@ class IdeaCommentRepository extends EntityRepository
             ->setParameter('notTrashed', false)
         ;
 
+        if ($filter === 'old') {
+            $qb->addOrderBy('c.updatedAt', 'ASC');
+        }
+
         if ($filter === 'last') {
             $qb->addOrderBy('c.updatedAt', 'DESC');
         }
@@ -48,6 +52,9 @@ class IdeaCommentRepository extends EntityRepository
 
         return new Paginator($qb);
     }
+
+
+    // countCommentsAndAnswersEnabledByIdea
 
     protected function getIsEnabledQueryBuilder()
     {
