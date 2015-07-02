@@ -122,32 +122,6 @@ class UserRepository extends EntityRepository
         return $qb->getQuery()->getResult();
     }
 
-    public function getEnabledWith($type = null, $from = null, $to = null)
-    {
-        $qb = $this->getIsEnabledQueryBuilder();
-
-        if ($type) {
-            $qb->andWhere('u.userType = :type')
-               ->setParameter('type', $type)
-               ;
-        }
-
-        if ($from) {
-            $qb->andWhere('u.createdAt >= :from')
-               ->setParameter('from', $from)
-               ;
-        }
-
-        if ($to) {
-            $qb->andWhere('u.createdAt <= :to')
-               ->setParameter('to', $to)
-               ;
-        }
-
-
-        return $qb->getQuery()->getResult();
-    }
-
     /**
      * Get search results.
      *
