@@ -68,4 +68,36 @@ class IdeasController extends FOSRestController
         ];
     }
 
+    /**
+     * Get ideas.
+     *
+     * @ApiDoc(
+     *  resource=true,
+     *  description="Get ideas",
+     *  statusCodes={
+     *    200 = "Returned when successful",
+     *    404 = "Idea does not exist",
+     *  }
+     * )
+     *
+     * @Get("/ideas")
+     * @QueryParam(name="from", nullable=true)
+     * @QueryParam(name="to", nullable=true)
+     * @View(serializerGroups={})
+     */
+    public function getIdeasAction(ParamFetcherInterface $paramFetcher)
+    {
+        $from = $paramFetcher->get('from');
+        $to = $paramFetcher->get('to');
+
+        $ideas = $this->getDoctrine()->getManager()
+                    ->getRepository('CapcoAppBundle:Idea')
+                    ->getEnabledWith($from, $to);
+
+        return [
+            'count' => count($ideas),
+        ];
+    }
+
+
 }
