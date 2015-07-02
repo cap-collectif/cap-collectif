@@ -7,10 +7,6 @@ use Capco\AppBundle\Toggle\Manager;
 class FeaturesCategoryResolver
 {
     protected static $categories = array(
-        'pages.homepage' => [
-            'conditions' => [],
-            'features' => [],
-        ],
         'pages.blog' => [
             'conditions' => ['blog'],
             'features' => [],
@@ -21,7 +17,7 @@ class FeaturesCategoryResolver
         ],
         'pages.ideas' => [
             'conditions' => ['ideas'],
-            'features' => ['idea_creation', 'idea_trash'],
+            'features' => ['idea_creation'],
         ],
         'pages.themes' => [
             'conditions' => ['themes'],
@@ -29,7 +25,7 @@ class FeaturesCategoryResolver
         ],
         'pages.consultations' => [
             'conditions' => [],
-            'features' => ['consultations_form', 'consultation_trash'],
+            'features' => ['consultations_form'],
         ],
         'pages.registration' => [
             'conditions' => ['registration'],
@@ -42,14 +38,6 @@ class FeaturesCategoryResolver
         'pages.login' => [
             'conditions' => [],
             'features' => ['login_facebook', 'login_gplus', 'login_twitter'],
-        ],
-        'pages.contact' => [
-            'conditions' => [],
-            'features' => [],
-        ],
-        'pages.footer' => [
-            'conditions' => [],
-            'features' => [],
         ],
         'settings.global' => [
             'conditions' => [],
