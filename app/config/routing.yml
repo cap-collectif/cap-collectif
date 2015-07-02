@@ -13,6 +13,11 @@ capco_api_ideas:
   type: rest
   prefix: /api
 
+capco_api_comments:
+  resource: "@CapcoAppBundle/Controller/Api/CommentsController.php"
+  type: rest
+  prefix: /api
+
 capco_api_users:
   resource: "@CapcoAppBundle/Controller/Api/UsersController.php"
   type: rest
