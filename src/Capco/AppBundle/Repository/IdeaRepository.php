@@ -333,27 +333,6 @@ class IdeaRepository extends EntityRepository
     }
 
     /**
-     * Get Ideas
-     */
-    public function getEnabledWith($from = null, $to = null)
-    {
-        $qb = $this->getIsEnabledQueryBuilder();
-
-        if ($from) {
-            $qb->andWhere('i.createdAt >= :from')
-               ->setParameter('from', $from);
-        }
-
-        if ($to) {
-            $qb->andWhere('i.createdAt <= :to')
-               ->setParameter('to', $to);
-        }
-
-        return $qb->getQuery()->getResult();
-    }
-
-
-    /**
      * Get last ideas by theme.
      *
      * @param theme
