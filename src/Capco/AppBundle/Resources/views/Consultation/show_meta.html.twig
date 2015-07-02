@@ -6,7 +6,7 @@
             {% set now = date("now") %}
             {% for consultationAbstractStep in consultation.steps %}
                 {% set step = consultationAbstractStep.step %}
-                <li {% if currentStep == step.slug %} class="active" {% endif %}>
+                <li {% if (currentStep == 'consultation_step' and step.isConsultationStep) or currentStep == step.slug %} class="active" {% endif %}>
                     <a href="{{ step | capco_step_link }}">
                         <div class="navbar__step-nb">{{ nb }}</div>
                         <div class="navbar__step">

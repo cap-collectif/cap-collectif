@@ -71,6 +71,25 @@ class AbstractCommentRepository extends EntityRepository
             ->execute();
     }
 
+    public function getEnabledWith($from = null, $to = null)
+    {
+        $qb = $this->getIsEnabledQueryBuilder();
+
+        if ($from) {
+            $qb->andWhere('u.createdAt >= :from')
+               ->setParameter('from', $from)
+               ;
+        }
+
+        if ($to) {
+            $qb->andWhere('u.createdAt <= :to')
+               ->setParameter('to', $to)
+               ;
+        }
+
+        return $qb->getQuery()->getResult();
+    }
+
     protected function getIsEnabledQueryBuilder()
     {
         return $this->createQueryBuilder('c')

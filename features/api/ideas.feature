@@ -1,5 +1,14 @@
 Feature: Ideas
 
+  Scenario: API client wants to know the number of ideas
+    When I send a GET request to "/api/ideas"
+    Then the JSON response should match:
+    """
+    {
+      "count": "@integer@.greaterThan(0)"
+    }
+    """
+
   Scenario: API client wants to list comments of an idea
     When I send a GET request to "/api/ideas/3/comments"
     Then the JSON response should match:
