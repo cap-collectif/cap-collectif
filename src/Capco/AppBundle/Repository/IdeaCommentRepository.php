@@ -54,7 +54,17 @@ class IdeaCommentRepository extends EntityRepository
     }
 
 
-    // countCommentsAndAnswersEnabledByIdea
+    public function countCommentsAndAnswersEnabledByIdea($idea)
+    {
+        $qb = $this->getIsEnabledQueryBuilder()
+                   ->select('count(c.id)')
+                   ->leftJoin('c.Idea', 'i')
+                   ->andWhere('c.Idea = :idea')
+                   ->setParameter('idea', $idea)
+                ;
+
+        return $qb->getQuery()->getSingleScalarResult();
+    }
 
     protected function getIsEnabledQueryBuilder()
     {

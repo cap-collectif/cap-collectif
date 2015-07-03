@@ -76,7 +76,7 @@ exports.config = {
       }
     },
     'fb-flo': {
-      'port': 8888
+      port: 8888,
     },
     cleancss: {
       keepSpecialComments: 0,

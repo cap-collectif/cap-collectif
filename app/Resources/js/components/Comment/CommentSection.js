@@ -12,11 +12,12 @@ var CommentSection = React.createClass({
 
     getInitialState() {
         return {
-            comments_total: 0,
+            countWithAnswers: 0,
+            count: 0,
             comments: [],
-            can_report: true,
-            loaded: false,
-            loadingMore: false,
+            isReportingEnabled: true,
+            isLoading: true,
+            isLoadingMore: false,
             filter: 'last',
             offset: 0,
             limit: 10
@@ -41,49 +42,59 @@ var CommentSection = React.createClass({
         }
     },
 
-    onChange() {
-       if (CommentStore.isSync) {
-            this.setState({
-                 comments_total: CommentStore.count,
-                 comments: CommentStore.comments,
-                 loaded: true,
-                 loadingMore: false,
-            });
-
-            let loadMoreButton = React.findDOMNode(this.refs.loadMore);
-            if (loadMoreButton) {
-                $(loadMoreButton).button('reset');
-            }
-
-            return;
-       }
-
-       this.loadCommentsFromServer();
-    },
-
     render() {
         return (
         <div>
-            { this.renderLoader() }
             <div className="row">
                 <h2 className="h2 col-sm-6">
                     <FormattedMessage
                         message={this.getIntlMessage('comment.list')}
-                        num={this.state.comments_total}
+                        num={this.state.countWithAnswers}
                     />
                 </h2>
                 { this.renderFilter() }
             </div>
-            <CommentList {...this.props} comments={this.state.comments}  root={true} can_report={this.state.can_report} />
+            { this.renderLoader() }
+            {(!this.state.isLoading
+                ? <CommentForm uri={this.props.uri} object={this.props.object} />
+                : <span />
+            )}
+            <CommentList {...this.props}
+                         comments={this.state.comments}
+                         root={true}
+                         isReportingEnabled={this.state.isReportingEnabled}
+            />
             { this.renderLoadMore() }
-            <h4>{this.getIntlMessage('comment.publish')}</h4>
-            <CommentForm uri={this.props.uri} object={this.props.object} />
         </div>
         );
     },
 
+    onChange() {
+       if (CommentStore.isSync) {
+            this.setState({
+                 countWithAnswers: CommentStore.countWithAnswers,
+                 count: CommentStore.count,
+                 isReportingEnabled: CommentStore.isReportingEnabled,
+                 comments: CommentStore.comments,
+                 isLoading: false,
+                 isLoadingMore: false,
+            }, () => {
+                this.resetLoadMoreButton();
+            });
+
+            return;
+       }
+
+        this.setState({
+            isLoading: true,
+        }, () => {
+            this.loadCommentsFromServer();
+        });
+    },
+
+
     renderLoader() {
-        if (!this.state.loaded) {
+        if (this.state.isLoading) {
             return (
                 <div className= "row">
                     <div className="col-sm-2 col-sm-offset-5">
@@ -95,10 +106,10 @@ var CommentSection = React.createClass({
     },
 
     renderFilter() {
-        if (this.state.comments_total > 1) {
+        if (this.state.count > 1) {
             return (
                 <div className="col-sm-6 hidden-xs">
-                    <select id="comments-filter" className="h2 form-control" value={this.state.filter} onChange={() => this.updateSelectedValue()}>
+                    <select ref="filter" className="h2 form-control" value={this.state.filter} onChange={() => this.updateSelectedValue()}>
                       <option value="popular">{this.getIntlMessage('global.popular')}</option>
                       <option value="last">{this.getIntlMessage('global.last')}</option>
                       <option value="old">{this.getIntlMessage('global.old')}</option>
@@ -109,10 +120,10 @@ var CommentSection = React.createClass({
     },
 
     renderLoadMore() {
-        if (this.state.limit < this.state.comments_total) {
+        if (!this.state.isLoading && (this.state.limit < this.state.count || this.state.isLoadingMore)) {
             return (
-                <button className="btn btn-block btn-default" ref="loadMore" data-loading-text="Loading..." onClick={this.loadMore.bind(this)}>
-                    { this.getIntlMessage('global.more') }
+                <button className="btn btn-block btn-grey" ref="loadMore" data-loading-text={this.getIntlMessage('global.loading')} onClick={this.loadMore.bind(this)}>
+                    { this.getIntlMessage('comment.more') }
                 </button>
             );
         }
@@ -121,7 +132,9 @@ var CommentSection = React.createClass({
 
     updateSelectedValue(e) {
         this.setState({
-            filter: $("#comments-filter").val()
+            filter: $(React.findDOMNode(this.refs.filter)).val(),
+            isLoading: true,
+            comments: []
         });
     },
 
@@ -135,11 +148,19 @@ var CommentSection = React.createClass({
         );
     },
 
+    resetLoadMoreButton() {
+        let loadMoreButton = React.findDOMNode(this.refs.loadMore);
+        if (loadMoreButton) {
+            $(loadMoreButton).button('reset');
+        }
+    },
+
     loadMore() {
 
         $(React.findDOMNode(this.refs.loadMore)).button('loading');
+
         this.setState({
-            loadingMore: true,
+            isLoadingMore: true,
             limit: this.state.limit + 10
         }, () => {
             this.loadCommentsFromServer();

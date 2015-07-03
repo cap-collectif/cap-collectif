@@ -2,6 +2,7 @@ import IntlData from './translations/FR'
 import CommentSection from './components/Comment/CommentSection';
 import AuthService from './services/AuthService';
 
+
 AuthService
 .login()
 .then(() => {

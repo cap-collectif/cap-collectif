@@ -3,6 +3,8 @@ Feature: Ideas
 Background:
   Given feature "ideas" is enabled
 
+# Themes
+
 Scenario: Can see no ideas in empty theme
   Given feature "themes" is enabled
   And I visited "themes page"
@@ -23,9 +25,16 @@ Scenario: Can not create an idea from theme when idea creation is disabled
   When I follow "Immobilier"
   Then I should not see "Proposer une idée"
 
+
+# Homepage
+
 Scenario: Can not create an idea from homepage when idea creation is disabled
   Given I visited "home page"
   Then I should not see "Proposer une idée"
+
+
+
+# Create
 
 Scenario: Can create an idea when logged in
   Given feature "themes" is enabled
@@ -51,6 +60,8 @@ Scenario: Can not create an idea when not logged in
   When I follow "Proposer une idée"
   Then I should see "Se connecter"
 
+# Comments
+
 Scenario: Can not comment an uncommentable idea
   Given I visited "ideas page"
   And I follow "ideaNotCommentable"
@@ -69,8 +80,28 @@ Scenario: Can comment an idea
   When I press "Commenter"
   Then I should see "Merci ! Votre commentaire a bien été enregistré."
 
+## Comments reporting
+
   @javascript @database
-  Scenario: Logged in user wants to vote for the comment of an idea
+  Scenario: Logged in user wants to report a comment of an idea
+    Given I am logged in as user
+    And I visited "idea page" with:
+      | slug | ideacommentable |
+    And I wait 5 seconds
+    When I report the first comment
+    # And I wait 5 seconds
+    # Then I should see "Merci ! Votre vote a bien été pris en compte."
+    # And I should see "Annuler mon vote"
+    # And The first comment vote counter should be "1"
+    # And I vote for the first comment
+    # And I wait 5 seconds
+    # And I should see "Votre vote a bien été annulé."
+    # And The first comment vote counter should be "0"
+
+## Comments vote
+
+  @javascript @database
+  Scenario: Logged in user wants to vote for a comment of an idea
     Given I am logged in as user
     And I visited "idea page" with:
       | slug | ideacommentable |
@@ -84,6 +115,8 @@ Scenario: Can comment an idea
     And I wait 5 seconds
     And I should see "Votre vote a bien été annulé."
     And The first comment vote counter should be "0"
+
+# Votes
 
  @database
  Scenario: Anonymous user wants to vote anonymously
@@ -122,6 +155,8 @@ Scenario: Can comment an idea
    When I press "capco_app_idea_vote_submit"
    Then I should see "Merci ! Votre vote a bien été pris en compte."
    And I should see "user" in the "#ideaVotesModal" element
+
+# Trash
 
   Scenario: Can not access trash if feature is disabled
     Given I visited "ideas page"

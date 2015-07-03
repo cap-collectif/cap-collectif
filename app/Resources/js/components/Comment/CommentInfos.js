@@ -1,11 +1,24 @@
-var CommentAuthor = React.createClass({
+var CommentInfos = React.createClass({
     mixins: [ReactIntl.IntlMixin],
 
     render() {
         return (
             <p className="h5  opinion__user">
                 { this.renderAuthorName() }
+                &nbsp;&nbsp;
+                { this.renderDate() }
             </p>
+        );
+    },
+
+    renderDate() {
+        return (
+            <span className="excerpt">
+                <ReactIntl.FormattedDate value={this.props.comment.created_at}
+                                         day="numeric" month="long" year="numeric"
+                                         hour="numeric" minute="numeric"
+                 />
+            </span>
         );
     },
 
@@ -22,4 +35,4 @@ var CommentAuthor = React.createClass({
 
 });
 
-export default CommentAuthor;
+export default CommentInfos;

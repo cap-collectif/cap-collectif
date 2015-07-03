@@ -18,10 +18,10 @@ var CommentAnswerForm = React.createClass({
 
     create(e) {
         e.preventDefault();
-        var data = this.state;
+        let data = this.state;
         data.parent = this.props.comment.id;
         CommentActions.create(this.props.uri, this.props.object, data);
-        this.setState(this.getInitialState());
+        this.setState({ body: ''});
         autosize.destroy(React.findDOMNode(this.refs.body));
     },
 
@@ -32,7 +32,7 @@ var CommentAnswerForm = React.createClass({
     },
 
     componentDidUpdate() {
-        autosize($('.comment-textarea'));
+        autosize($(React.findDOMNode(this.refs.body)));
     },
 
     renderSubmit() {
@@ -47,7 +47,7 @@ var CommentAnswerForm = React.createClass({
             <form className="commentAnswerForm">
                 <div className="form-group">
                     <textarea valueLink={this.linkState('body')} ref="body" name="body"
-                              rows="1" required="required" className="form-control comment-textarea"
+                              rows="1" required="required" className="form-control"
                               placeholder={this.getIntlMessage('global.comment')}
                     />
                 </div>

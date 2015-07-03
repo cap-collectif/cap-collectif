@@ -1,5 +1,5 @@
 import UserAvatar from '../User/UserAvatar';
-import CommentAuthor from './CommentAuthor';
+import CommentInfos from './CommentInfos';
 import CommentBody from './CommentBody';
 import CommentVoteButton from './CommentVoteButton';
 import CommentReport from './CommentReport';
@@ -7,8 +7,6 @@ import CommentEdit from './CommentEdit';
 import CommentAnswers from './CommentAnswers';
 import CommentAnswerForm from './CommentAnswerForm';
 import LoginStore from '../../stores/LoginStore';
-
-var FormattedDate = ReactIntl.FormattedDate;
 
 var Comment = React.createClass({
     mixins: [ReactIntl.IntlMixin],
@@ -31,25 +29,28 @@ var Comment = React.createClass({
         return (
           <li className="opinion  opinion--comment" >
             <div className="opinion__body">
-                <UserAvatar user={comment.user} />
+                <UserAvatar user={comment.author} />
                 <div className="opinion__data">
-                    <CommentAuthor comment={comment} />
-                    <p className="excerpt  opinion__date">
-                        <FormattedDate value={comment.created_at} day="numeric" month="long" year="numeric" hour="numeric" minute="numeric" />
-                    </p>
+                    <CommentInfos comment={comment} />
                 </div>
                 <CommentBody comment={comment} />
                 <CommentVoteButton comment={comment} />&nbsp;
-                { this.renderReporting(comment) }&nbsp;
-                <CommentEdit comment={comment} />&nbsp;
-                {(this.props.root === true && LoginStore.isLoggedIn()
+                {(this.props.root === true
                     ? <a onClick={ this.answer.bind(this) } className="btn btn-xs btn-dark-gray btn--outline">
+                        <i className="cap-reply-mail-2"></i>
                         { this.getIntlMessage('global.answer') }
                       </a>
                     : <span />
                 )}
+                &nbsp;
+                {(this.props.isReportingEnabled === true
+                    ? <CommentReport comment={comment} />
+                    : <span />
+                )}
+                &nbsp;
+                <CommentEdit comment={comment} />&nbsp;
                 {(this.props.root === true
-                    ? <CommentAnswers comments={comment.answers} />
+                    ? <CommentAnswers isReportingEnabled={this.props.isReportingEnabled} comments={comment.answers} />
                     : <span />
                 )}
                 {(this.state.answerFormShown === true && LoginStore.isLoggedIn()
@@ -59,14 +60,6 @@ var Comment = React.createClass({
             </div>
           </li>
         );
-    },
-
-    renderReporting(comment) {
-        if (this.props.can_report) {
-            return (
-                <CommentReport comment={comment} />
-            );
-        }
     },
 
     answer() {

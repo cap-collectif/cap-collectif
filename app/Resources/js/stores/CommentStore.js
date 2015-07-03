@@ -8,6 +8,8 @@ class CommentStore extends BaseStore {
     this.register(this._registerToActions.bind(this));
     this._comments = [];
     this._commentsCount = 0;
+    this._commentsAndAnswersCount = 0;
+    this._isReportingEnabled = true;
     this._isSync = true;
   }
 
@@ -15,7 +17,10 @@ class CommentStore extends BaseStore {
     switch(action.actionType) {
       case RECEIVE_COMMENTS:
         this._comments = action.comments;
-        this._commentsCount = action.comments_total;
+        this._commentsCount = action.comments_count;
+        this._commentsAndAnswersCount = action.comments_total;
+        this._commentsAndAnswersCount = action.comments_and_answers_count;
+        this._isReportingEnabled = action.is_reporting_enabled;
         this._isSync = true;
         this.emitChange();
         break;
@@ -32,8 +37,16 @@ class CommentStore extends BaseStore {
     return this._isSync;
   }
 
+  get isReportingEnabled() {
+    return this._isReportingEnabled;
+  }
+
   get comments() {
     return this._comments;
+  }
+
+  get countWithAnswers() {
+    return this._commentsAndAnswersCount;
   }
 
   get count() {

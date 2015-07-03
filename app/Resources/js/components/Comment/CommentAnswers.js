@@ -8,11 +8,11 @@ var CommentAnswers = React.createClass({
         if (this.props.comments) {
             return (
                 <span className="comment-answers">
-                    <CommentList comments={this.props.comments} root={false}/>
+                    <CommentList comments={this.props.comments} isReportingEnabled={this.props.isReportingEnabled} root={false}/>
                 </span>
             );
         }
-        return <ul></ul>;
+        return;
     }
 });
 

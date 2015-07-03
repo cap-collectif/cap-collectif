@@ -66,15 +66,15 @@ class IdeasController extends FOSRestController
             $comments[] = $comment;
         }
 
-        $canReport = $this->get('capco.toggle.manager')->isActive('reporting');
-        $count = $this->getDoctrine()->getManager()
+        $countWithAnswers = $this->getDoctrine()->getManager()
                       ->getRepository('CapcoAppBundle:IdeaComment')
                       ->countCommentsAndAnswersEnabledByIdea($idea);
 
         return [
-            'total_count' => count($paginator),
+            'comments_and_answers_count' => $countWithAnswers,
+            'comments_count' => count($paginator),
             'comments' => $comments,
-            'can_report' => $canReport,
+            'is_reporting_enabled' => $this->get('capco.toggle.manager')->isActive('reporting')
         ];
     }
 

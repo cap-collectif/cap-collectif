@@ -18,20 +18,24 @@ export default {
             trashed: {
                 label: 'Dans la corbeille'
             },
+            more: 'Voir plus de commentaires',
             submit: 'Commenter',
+            public_name: 'Votre nom sera rendu public sur la plateforme.',
             publish: 'Publier un commentaire',
-            with_my_account: 'Commenter avec mon compte'
+            with_my_account: 'Commenter avec mon compte',
+            without_account: 'Commenter sans créer de compte'
         },
         global: {
             more: 'Voir plus',
             answer: 'Répondre',
+            loading: 'Loading...',
+            login: 'Connexion',
             comment: 'Ecrire un commentaire...',
-            name: 'Nom',
-            masked_email: 'Adresse électronique (masquée)',
-            message: 'Message',
-            popular: 'Populaire',
-            last: 'Récent',
-            old: 'Ancien',
+            name: 'Nom ',
+            hidden_email: 'Adresse électronique (cachée)',
+            popular: 'Les plus populaires',
+            last: 'Les plus récents',
+            old: 'Les plus anciens',
             all_required: 'Tous les champs sont obligatoires.',
             read_more: 'Afficher la suite'
         }

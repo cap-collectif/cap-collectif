@@ -31,7 +31,7 @@ class SerializationListener implements EventSubscriberInterface
     {
         $event->getVisitor()->addData(
             'url',
-            $this->imageProvider->generatePublicUrl($event->getObject(), 'reference')
+            '/media' . $this->imageProvider->generatePublicUrl($event->getObject(), 'reference')
         );
     }
 

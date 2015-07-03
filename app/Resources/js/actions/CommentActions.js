@@ -28,11 +28,8 @@ export default {
          '&filter=' + filter
     )
     .then((data) => {
-        AppDispatcher.dispatch({
-          actionType: RECEIVE_COMMENTS,
-          'comments_total': data.total_count,
-          'comments': data.comments,
-        });
+        data.actionType = RECEIVE_COMMENTS;
+        AppDispatcher.dispatch(data);
         return true;
     });
 
