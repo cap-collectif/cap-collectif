@@ -5,7 +5,7 @@ var CommentInfos = React.createClass({
         return (
             <p className="h5  opinion__user">
                 { this.renderAuthorName() }
-                &nbsp;&nbsp;
+                { '  ' }
                 { this.renderDate() }
             </p>
         );

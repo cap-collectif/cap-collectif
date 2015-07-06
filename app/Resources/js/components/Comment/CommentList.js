@@ -5,8 +5,20 @@ var CommentList = React.createClass({
     mixins: [ReactIntl.IntlMixin],
 
     render() {
+
+        if (this.props.comments.length === 0) {
+            return <ul></ul>
+        }
+
+
+        var classes = React.addons.classSet({
+            'media-list': true,
+            'opinion__list': true,
+            'comment-answers': !this.props.root
+        });
+
         return (
-            <ul className="media-list  opinion__list">
+            <ul className={classes}>
                 {
                     this.props.comments.map((comment) => {
                         if (comment.can_contribute) {

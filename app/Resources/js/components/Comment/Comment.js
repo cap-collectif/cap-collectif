@@ -5,7 +5,8 @@ import CommentVoteButton from './CommentVoteButton';
 import CommentReport from './CommentReport';
 import CommentEdit from './CommentEdit';
 import CommentAnswers from './CommentAnswers';
-import CommentAnswerForm from './CommentAnswerForm';
+import CommentForm from './CommentForm';
+import CommentActions from '../../actions/CommentActions';
 import LoginStore from '../../stores/LoginStore';
 
 var Comment = React.createClass({
@@ -24,6 +25,18 @@ var Comment = React.createClass({
         }
     },
 
+    comment(data) {
+        data.parent = this.props.comment.id;
+        return CommentActions.create(this.props.uri, this.props.object, data);
+    },
+
+    isTheUserTheAuthor() {
+       if (this.props.comment.author == null || !LoginStore.isLoggedIn()) {
+            return false;
+       }
+       return LoginStore.user.username === this.props.comment.author.username;
+    },
+
     render() {
         var comment = this.props.comment;
         return (
@@ -34,27 +47,34 @@ var Comment = React.createClass({
                     <CommentInfos comment={comment} />
                 </div>
                 <CommentBody comment={comment} />
-                <CommentVoteButton comment={comment} />&nbsp;
-                {(this.props.root === true
-                    ? <a onClick={ this.answer.bind(this) } className="btn btn-xs btn-dark-gray btn--outline">
-                        <i className="cap-reply-mail-2"></i>
-                        { this.getIntlMessage('global.answer') }
-                      </a>
-                    : <span />
-                )}
-                &nbsp;
-                {(this.props.isReportingEnabled === true
-                    ? <CommentReport comment={comment} />
-                    : <span />
-                )}
-                &nbsp;
-                <CommentEdit comment={comment} />&nbsp;
+                <div className="comment__buttons">
+                    {(!this.isTheUserTheAuthor()
+                        ? <CommentVoteButton comment={comment} />
+                        : <span />
+                    )}
+                    {' '}
+                    {(this.props.root === true
+                        ? <a onClick={ this.answer.bind(this) } className="btn btn-xs btn-dark-gray btn--outline">
+                            <i className="cap-reply-mail-2"></i>
+                            { this.getIntlMessage('global.answer') }
+                          </a>
+                        : <span />
+                    )}
+                    {' '}
+                    {(this.props.isReportingEnabled === true && !this.isTheUserTheAuthor()
+                        ? <CommentReport comment={comment} />
+                        : <span />
+                    )}
+                    {' '}
+                    <CommentEdit comment={comment} />
+                    {' '}
+                </div>
                 {(this.props.root === true
                     ? <CommentAnswers isReportingEnabled={this.props.isReportingEnabled} comments={comment.answers} />
                     : <span />
                 )}
-                {(this.state.answerFormShown === true && LoginStore.isLoggedIn()
-                    ? <CommentAnswerForm {...this.props} focus={this.state.answerFormFocus}/>
+                {(this.state.answerFormShown === true
+                    ? <CommentForm comment={this.comment.bind(this)} focus={this.state.answerFormFocus} isAnswer={true}/>
                     : <span />
                 )}
             </div>
@@ -66,8 +86,7 @@ var Comment = React.createClass({
         this.setState({
             answerFormShown: true,
             answerFormFocus: true
-        });
-        this.forceUpdate();
+        }, () => {console.log('setState', this.state.answerFormFocus)});
     }
 
 });

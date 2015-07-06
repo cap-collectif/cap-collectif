@@ -1,3 +1,65 @@
-.big-label {
-  width: 100%;
+.comment-answer-form {
+    margin-left: 55px;
+    padding-left: 15px;
+    border-left: $border-color 3px solid;
+}
+
+.media-list .opinion--comment .media-list {
+   padding-top: 10px;
+   margin-left: 15px;
+}
+
+#render-idea-comments .opinion__text {
+    padding-left: 55px;
+}
+#render-idea-comments svg {
+  margin-right: 10px;
+  display: block;
+}
+
+#render-idea-comments .opinion__data {
+  overflow: hidden;
+}
+
+#render-idea-comments .btn-grey {
+    margin-top: 20px;
+}
+
+.comment-answers li {
+    border-left: $border-color 3px solid;
+    padding-left: 5px;
+}
+
+// FAIRE UN BLOCK comm + rep
+// + de marges
+// bug focus on load more
+
+.opinion__list .opinion--comment:first-child {
+  padding-top: 0;
+}
+
+.opinion__list .opinion--comment:last-child {
+  margin-bottom: 10px;
+}
+
+.opinion__list .opinion--comment {
+    padding-bottom: 0;
+    padding-top: 10px;
+}
+
+.comment-answers .opinion__body {
+    padding-left: 10px;
+}
+
+.comment__buttons {
+    padding-left: 55px;
+    padding-bottom: 10px;
+}
+
+.opinion__list .opinion--comment {
+    margin-bottom: 0;
+}
+
+.opinion__list .opinion--comment:last-child {
+    margin-bottom: 0;
 }

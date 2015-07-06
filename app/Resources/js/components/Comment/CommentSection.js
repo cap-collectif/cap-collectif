@@ -42,6 +42,11 @@ var CommentSection = React.createClass({
         }
     },
 
+
+    comment(data) {
+        return CommentActions.create(this.props.uri, this.props.object, data);
+    },
+
     render() {
         return (
         <div>
@@ -56,7 +61,7 @@ var CommentSection = React.createClass({
             </div>
             { this.renderLoader() }
             {(!this.state.isLoading
-                ? <CommentForm uri={this.props.uri} object={this.props.object} />
+                ? <CommentForm comment={this.comment.bind(this)} focus={false} />
                 : <span />
             )}
             <CommentList {...this.props}
@@ -97,7 +102,7 @@ var CommentSection = React.createClass({
         if (this.state.isLoading) {
             return (
                 <div className= "row">
-                    <div className="col-sm-2 col-sm-offset-5">
+                    <div className="col-xs-2 col-xs-offset-6">
                          <div className="spinner-loader"></div>
                     </div>
                 </div>

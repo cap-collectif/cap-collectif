@@ -1,21 +1,96 @@
 import CommentActions from '../../actions/CommentActions';
 import UserAvatar from '../User/UserAvatar';
 import LoginStore from '../../stores/LoginStore';
+import Validator from '../../services/Validator';
 
 var CommentForm = React.createClass({
     mixins: [ReactIntl.IntlMixin, React.addons.LinkedStateMixin],
 
-    getInitialState(  ) {
+    getInitialState() {
         return {
             body: '',
+            submited: false,
+            expanded: false
         };
     },
 
+    isValid(field) {
+
+        if (!this.state.submited) {
+            return true;
+        }
+
+        if (field === 'authorEmail') {
+            return new Validator(this.state.authorEmail).isEmail();
+        }
+        if (field === 'authorName') {
+            return new Validator(this.state.authorName).min(2);
+        }
+        if (field === 'body') {
+            return new Validator(this.state.body).min(2);
+        }
+
+        if (!field) {
+            if (LoginStore.isLoggedIn()) {
+                return this.isValid('body');
+            }
+            return this.isValid('body') && this.isValid('authorEmail') && this.isValid('authorName');
+        }
+
+    },
+
+    getClasses(field) {
+      return React.addons.classSet({
+        'form-group': true,
+        'has-error': !this.isValid(field)
+      });
+    },
+
+    getFormClasses() {
+      return React.addons.classSet({
+        'comment-answer-form': this.props.isAnswer
+      });
+    },
+
     create(e) {
+        console.log('create');
         e.preventDefault();
-        CommentActions.create(this.props.uri, this.props.object, this.state);
-        this.setState(this.getInitialState());
-        autosize.destroy(React.findDOMNode(this.refs.body));
+
+        this.setState({
+            submited: true
+        }, () => {
+
+            console.log('cc', this.state);
+
+            if (!this.isValid()) {
+                return;
+            }
+
+            var data = this.state;
+            delete data.expanded;
+            delete data.submited;
+            this.props.comment(data)
+            .catch(() => {
+                alert('Désolé, un problème est survenu lors de l\'ajout de votre commentaire.');
+                this.setState(data);
+            });
+            this.setState(this.getInitialState());
+            autosize.destroy(React.findDOMNode(this.refs.body));
+        });
+    },
+
+    componentDidMount() {
+        if (this.props.focus) {
+            React.findDOMNode(this.refs.body).focus();
+        }
+    },
+
+
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.focus) {
+            React.findDOMNode(this.refs.body).focus();
+            this.setState({'expanded': true});
+        }
     },
 
     componentDidUpdate() {
@@ -30,32 +105,45 @@ var CommentForm = React.createClass({
                     <div className="row">
                         <div className="col-sm-12  col-md-6">
                             <p>{ this.getIntlMessage('comment.with_my_account') }</p>
-                            <a className="btn btn-block btn-primary" href={window.location.protocol + '//' + window.location.host + '/login'} >
+                            <a className="btn btn-primary" href={window.location.protocol + '//' + window.location.host + '/login'} >
                                { this.getIntlMessage('global.login') }
                             </a>
+                            <h5>{ this.getIntlMessage('comment.why_create_account') }</h5>
+                            <p className="excerpt">
+                                { this.getIntlMessage('comment.create_account_reason_1') }
+                                <br />
+                                { this.getIntlMessage('comment.create_account_reason_2') }
+                                <br />
+                                { this.getIntlMessage('comment.create_account_reason_3') }
+                            </p>
                         </div>
                         <div className="col-sm-12  col-md-6">
                             <p>{ this.getIntlMessage('comment.without_account') }</p>
-                            <div className="form-group">
-                                <label for="commentName" className="control-label h5 big-label">
-                                    { this.getIntlMessage('global.name') }
+                            <div className={this.getClasses('authorName')}>
+                                <label for="authorName" className="control-label h5 big-label">
+                                    { this.getIntlMessage('global.fullname') }
                                 </label>
-                                <input valueLink={this.linkState('authorName')} type="text" id="commentName"
+                                <input valueLink={this.linkState('authorName')}
+                                       type="text" id="authorName"
                                        name="authorName" className="form-control"
                                 />
                                 <p className="excerpt">
                                     { this.getIntlMessage('comment.public_name') }
                                 </p>
                             </div>
-                            <div className="form-group">
-                                <label for="commentEmail" className="control-label  h5">
+                            <div className={ this.getClasses('authorEmail') }>
+                                <label for="authorEmail" className="control-label  h5">
                                     { this.getIntlMessage('global.hidden_email') }
                                 </label>
-                                <input valueLink={this.linkState('authorEmail')} type="email" id="commentEmail"
+                                <input valueLink={this.linkState('authorEmail')}
+                                       type="email" id="authorEmail"
                                        name="authorEmail" className="form-control"
                                 />
+                                <p className="excerpt">
+                                    { this.getIntlMessage('comment.email_info') }
+                                </p>
                             </div>
-                            <button className="btn btn-block btn-success" onClick={this.create.bind(this)}>
+                            <button className="btn btn-success" onClick={this.create.bind(this)}>
                                 { this.getIntlMessage('comment.submit') }
                             </button>
                         </div>
@@ -68,14 +156,14 @@ var CommentForm = React.createClass({
 
     renderUserAvatar() {
         return (
-            <div className="media col-sm-1">
+            <div>
                 <UserAvatar user={LoginStore.user} />
             </div>
         );
     },
 
     renderCommentButton() {
-        if (this.state.body.length > 2) {
+        if (this.state.expanded || this.state.body.length >= 1) {
             if (LoginStore.isLoggedIn()) {
                 return (
                     <input className="btn btn-primary" type="submit"
@@ -92,15 +180,22 @@ var CommentForm = React.createClass({
         }
     },
 
+    expand(newSate) {
+        this.setState({'expanded': newSate});
+    },
+
     render() {
         var comment = this.props.comment;
         return (
-            <div className="row">
+            <div className={ this.getFormClasses() }>
                 { this.renderUserAvatar() }
-                <div className="opinion__data col-sm-11">
+                <div className="opinion__data">
                     <form>
-                        <div className="form-group">
-                            <textarea valueLink={this.linkState('body')} placeholder={this.getIntlMessage('global.comment')}
+                        <div className={ this.getClasses('body') }>
+                            <textarea valueLink={this.linkState('body')}
+                                      onFocus={this.expand.bind(this, true)}
+                                      onBlur={this.expand.bind(this, false)}
+                                      placeholder={this.getIntlMessage('global.comment')}
                                       ref="body" rows="2" className="form-control"
                             />
                         </div>

@@ -8,7 +8,7 @@ export default {
 
   create: (uri, object, data) => {
 
-    Fetcher
+    return Fetcher
     .post('/' + uri + '/' + object + '/comments', data)
     .then(() => {
       AppDispatcher.dispatch({

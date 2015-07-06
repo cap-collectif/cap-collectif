@@ -10,10 +10,12 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 class CommentType extends AbstractType
 {
     private $user;
+    private $action;
 
-    public function __construct(User $user = null)
+    public function __construct(User $user = null, $action = 'create')
     {
         $this->user = $user;
+        $this->action = $action;
     }
 
     /**
@@ -30,6 +32,14 @@ class CommentType extends AbstractType
             ))
         ;
 
+        if ($this->action === 'create') {
+            $builder
+                ->add('parent', null, [
+                    'required' => false
+                ])
+            ;
+        }
+
         if (null == $this->user) {
             $builder
                 ->add('authorName', null, array(
@@ -40,12 +50,6 @@ class CommentType extends AbstractType
                     'required' => true,
                     'translation_domain' => 'CapcoAppBundle',
                 ))
-            ;
-        } else {
-            $builder
-                ->add('parent', null, [
-                    'required' => false
-                ])
             ;
         }
     }
