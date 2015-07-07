@@ -195,6 +195,7 @@ var CommentForm = React.createClass({
                     <form>
                         <div className={ this.getClasses('body') }>
                             <textarea valueLink={this.linkState('body')}
+                                      name="body"
                                       onFocus={this.expand.bind(this, true)}
                                       placeholder={this.getIntlMessage('global.comment')}
                                       ref="body" rows="2" className="form-control"
