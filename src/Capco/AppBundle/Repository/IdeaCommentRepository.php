@@ -10,13 +10,7 @@ use Doctrine\ORM\EntityRepository;
  */
 class IdeaCommentRepository extends EntityRepository
 {
-    /**
-     * Get all enabled comments by idea.
-     *
-     * @param $idea
-     *
-     * @return array
-     */
+
     public function getEnabledByIdea($idea, $offset = 0, $limit = 10, $filter = 'last')
     {
         $qb = $this->getIsEnabledQueryBuilder()

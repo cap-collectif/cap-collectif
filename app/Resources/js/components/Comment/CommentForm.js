@@ -155,14 +155,6 @@ var CommentForm = React.createClass({
 
     },
 
-    renderUserAvatar() {
-        return (
-            <div>
-                <UserAvatar user={LoginStore.user} />
-            </div>
-        );
-    },
-
     renderCommentButton() {
         if (this.state.expanded || this.state.body.length >= 1) {
             if (LoginStore.isLoggedIn()) {
@@ -198,7 +190,7 @@ var CommentForm = React.createClass({
         var comment = this.props.comment;
         return (
             <div className={ this.getFormClasses() }>
-                { this.renderUserAvatar() }
+                <UserAvatar user={LoginStore.user} />
                 <div className="opinion__data" onBlur={this.expand.bind(this, false)}>
                     <form>
                         <div className={ this.getClasses('body') }>

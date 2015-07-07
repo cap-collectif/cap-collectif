@@ -11,13 +11,7 @@ use Doctrine\ORM\Tools\Pagination\Paginator;
  */
 class PostCommentRepository extends EntityRepository
 {
-    /**
-     * Get all enabled comments by post.
-     *
-     * @param $idea
-     *
-     * @return array
-     */
+
     public function getEnabledByPost($post, $offset = 0, $limit = 10, $filter = 'last')
     {
         $qb = $this->getIsEnabledQueryBuilder()
@@ -28,9 +22,14 @@ class PostCommentRepository extends EntityRepository
             ->leftJoin('c.Reports', 'r')
             ->leftJoin('c.Post', 'p')
             ->andWhere('c.Post = :post')
+            ->andWhere('c.parent is NULL')
             ->andWhere('c.isTrashed = false')
             ->setParameter('post', $post)
         ;
+
+        if ($filter === 'old') {
+            $qb->addOrderBy('c.updatedAt', 'ASC');
+        }
 
         if ($filter === 'last') {
             $qb->addOrderBy('c.updatedAt', 'DESC');
@@ -45,6 +44,18 @@ class PostCommentRepository extends EntityRepository
             ->setMaxResults($limit);
 
         return new Paginator($qb);
+    }
+
+    public function countCommentsAndAnswersEnabledByPost($post)
+    {
+        $qb = $this->getIsEnabledQueryBuilder()
+                   ->select('count(c.id)')
+                   ->leftJoin('c.Post', 'i')
+                   ->andWhere('c.Post = :post')
+                   ->setParameter('post', $post)
+                ;
+
+        return $qb->getQuery()->getSingleScalarResult();
     }
 
 
