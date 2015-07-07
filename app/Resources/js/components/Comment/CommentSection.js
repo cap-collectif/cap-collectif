@@ -49,7 +49,7 @@ var CommentSection = React.createClass({
 
     render() {
         return (
-        <div>
+        <div className="comments__section">
             <div className="row">
                 <h2 className="h2 col-sm-6">
                     <FormattedMessage

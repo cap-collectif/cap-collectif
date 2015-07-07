@@ -1,65 +1,77 @@
 .comment-answer-form {
-    margin-left: 55px;
     padding-left: 15px;
-    border-left: $border-color 3px solid;
+}
+
+.comment-answer-form ul {
+    list-style-type: disc;
 }
 
 .media-list .opinion--comment .media-list {
-   padding-top: 10px;
-   margin-left: 15px;
+   padding-top: 0;
+   margin-left: 0;
+   padding-left: 0;
 }
 
-#render-idea-comments .opinion__text {
-    padding-left: 55px;
-}
-#render-idea-comments svg {
+.comments__section svg, .comments__section .pull-left img {
   margin-right: 10px;
   display: block;
 }
 
-#render-idea-comments .opinion__data {
-  overflow: hidden;
+.comments__section {
+
+    .opinion__data {
+        overflow: hidden;
+    }
+
+    .btn-grey {
+        margin-top: 20px;
+    }
+
+    .opinion__text {
+        padding-left: 55px;
+    }
+
 }
 
-#render-idea-comments .btn-grey {
-    margin-top: 20px;
+
+.comment-answers {
+    li {
+        padding-left: 5px;
+    }
+
+    .opinion__body {
+        padding-left: 10px;
+    }
+
 }
 
-.comment-answers li {
+.comment-answers-block {
+    margin-left: 55px;
     border-left: $border-color 3px solid;
-    padding-left: 5px;
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
 
-// FAIRE UN BLOCK comm + rep
-// + de marges
-// bug focus on load more
+.opinion__list {
 
-.opinion__list .opinion--comment:first-child {
-  padding-top: 0;
-}
+    .opinion--comment:first-child {
+        margin-top: 20px;
+    }
 
-.opinion__list .opinion--comment:last-child {
-  margin-bottom: 10px;
-}
+    .opinion--comment:last-child {
+        margin-bottom: 10px;
+        margin-bottom: 0;
+    }
 
-.opinion__list .opinion--comment {
-    padding-bottom: 0;
-    padding-top: 10px;
-}
+    .opinion--comment {
+        padding-bottom: 0;
+        padding-top: 10px;
+        margin-bottom: 0;
+    }
 
-.comment-answers .opinion__body {
-    padding-left: 10px;
 }
 
 .comment__buttons {
     padding-left: 55px;
     padding-bottom: 10px;
-}
-
-.opinion__list .opinion--comment {
-    margin-bottom: 0;
-}
-
-.opinion__list .opinion--comment:last-child {
-    margin-bottom: 0;
 }

@@ -53,14 +53,11 @@ var CommentForm = React.createClass({
     },
 
     create(e) {
-        console.log('create');
         e.preventDefault();
 
         this.setState({
             submited: true
         }, () => {
-
-            console.log('cc', this.state);
 
             if (!this.isValid()) {
                 return;
@@ -109,41 +106,45 @@ var CommentForm = React.createClass({
                                { this.getIntlMessage('global.login') }
                             </a>
                             <h5>{ this.getIntlMessage('comment.why_create_account') }</h5>
-                            <p className="excerpt">
-                                { this.getIntlMessage('comment.create_account_reason_1') }
-                                <br />
-                                { this.getIntlMessage('comment.create_account_reason_2') }
-                                <br />
-                                { this.getIntlMessage('comment.create_account_reason_3') }
-                            </p>
+                            <ul className="excerpt small">
+                                <li>
+                                    { this.getIntlMessage('comment.create_account_reason_1') }
+                                </li>
+                                <li>
+                                    { this.getIntlMessage('comment.create_account_reason_2') }
+                                </li>
+                                <li>
+                                    { this.getIntlMessage('comment.create_account_reason_3') }
+                                </li>
+                            </ul>
                         </div>
                         <div className="col-sm-12  col-md-6">
                             <p>{ this.getIntlMessage('comment.without_account') }</p>
                             <div className={this.getClasses('authorName')}>
-                                <label for="authorName" className="control-label h5 big-label">
+                                <label for="authorName" className="control-label h5">
                                     { this.getIntlMessage('global.fullname') }
                                 </label>
                                 <input valueLink={this.linkState('authorName')}
                                        type="text" id="authorName"
                                        name="authorName" className="form-control"
                                 />
-                                <p className="excerpt">
+                                <p className="excerpt small">
                                     { this.getIntlMessage('comment.public_name') }
                                 </p>
                             </div>
                             <div className={ this.getClasses('authorEmail') }>
-                                <label for="authorEmail" className="control-label  h5">
+                                <label for="authorEmail" className="control-label h5">
                                     { this.getIntlMessage('global.hidden_email') }
                                 </label>
                                 <input valueLink={this.linkState('authorEmail')}
                                        type="email" id="authorEmail"
                                        name="authorEmail" className="form-control"
                                 />
-                                <p className="excerpt">
+                                <p className="excerpt small">
                                     { this.getIntlMessage('comment.email_info') }
                                 </p>
                             </div>
-                            <button className="btn btn-success" onClick={this.create.bind(this)}>
+                            <button ref="create" className="btn btn-primary" onClick={this.create.bind(this)}>
                                 { this.getIntlMessage('comment.submit') }
                             </button>
                         </div>
@@ -181,6 +182,15 @@ var CommentForm = React.createClass({
     },
 
     expand(newSate) {
+        if (!newSate) {
+             if (event.relatedTarget && $(event.relatedTarget).is(':button')) {
+                return; // clicked on comment button
+             }
+             if (this.state.body.length === 0) {
+                this.setState({expanded: newSate, submited: false});
+                return;
+             }
+        }
         this.setState({'expanded': newSate});
     },
 
@@ -189,12 +199,11 @@ var CommentForm = React.createClass({
         return (
             <div className={ this.getFormClasses() }>
                 { this.renderUserAvatar() }
-                <div className="opinion__data">
+                <div className="opinion__data" onBlur={this.expand.bind(this, false)}>
                     <form>
                         <div className={ this.getClasses('body') }>
                             <textarea valueLink={this.linkState('body')}
                                       onFocus={this.expand.bind(this, true)}
-                                      onBlur={this.expand.bind(this, false)}
                                       placeholder={this.getIntlMessage('global.comment')}
                                       ref="body" rows="2" className="form-control"
                             />

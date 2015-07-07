@@ -69,14 +69,16 @@ var Comment = React.createClass({
                     <CommentEdit comment={comment} />
                     {' '}
                 </div>
-                {(this.props.root === true
-                    ? <CommentAnswers isReportingEnabled={this.props.isReportingEnabled} comments={comment.answers} />
-                    : <span />
-                )}
-                {(this.state.answerFormShown === true
-                    ? <CommentForm comment={this.comment.bind(this)} focus={this.state.answerFormFocus} isAnswer={true}/>
-                    : <span />
-                )}
+                <div className="comment-answers-block">
+                    {(this.props.root === true
+                        ? <CommentAnswers isReportingEnabled={this.props.isReportingEnabled} comments={comment.answers} />
+                        : <span />
+                    )}
+                    {(this.state.answerFormShown === true
+                        ? <CommentForm comment={this.comment.bind(this)} focus={this.state.answerFormFocus} isAnswer={true}/>
+                        : <span />
+                    )}
+                </div>
             </div>
           </li>
         );
@@ -86,7 +88,7 @@ var Comment = React.createClass({
         this.setState({
             answerFormShown: true,
             answerFormFocus: true
-        }, () => {console.log('setState', this.state.answerFormFocus)});
+        });
     }
 
 });
