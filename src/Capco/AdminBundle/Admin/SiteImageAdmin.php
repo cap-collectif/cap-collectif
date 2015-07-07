@@ -9,7 +9,6 @@ use Sonata\CoreBundle\Model\Metadata;
 
 class SiteImageAdmin extends Admin
 {
-
     /**
      * @param FormMapper $formMapper
      */

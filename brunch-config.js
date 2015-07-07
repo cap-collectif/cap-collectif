@@ -33,8 +33,6 @@ exports.config = {
           'bower_components/react-intl/dist/react-intl.min.js',
           'bower_components/react-intl/dist/locale-data/fr.js',
           'bower_components/autosize/dist/autosize.js',
-          'bower_components/spin.js/spin.js',
-          'bower_components/react-loader/lib/react-loader.js',
           'app/Resources/js/jsapi.js',
           'app/Resources/js/cookiechoices.js',
           'app/Resources/js/googleCharts.js',

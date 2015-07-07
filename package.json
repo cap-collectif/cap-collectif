@@ -23,11 +23,8 @@
     "clean-css-brunch": "^1.7.2",
     "css-brunch": "^1.7.0",
     "javascript-brunch": "^1.7.1",
-    "joi": "^6.5.0",
     "process-env-brunch": "^1.4.4-d",
     "react": "^0.13.3",
-    "react-autolink-text": "^1.0.2",
-    "react-validation-mixin": "^4.1.0",
     "sass-brunch": "^1.8.10",
     "uglify-js-brunch": "^1.7.8"
   },

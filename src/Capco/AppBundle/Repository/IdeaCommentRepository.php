@@ -10,7 +10,6 @@ use Doctrine\ORM\EntityRepository;
  */
 class IdeaCommentRepository extends EntityRepository
 {
-
     public function getEnabledByIdea($idea, $offset = 0, $limit = 10, $filter = 'last')
     {
         $qb = $this->getIsEnabledQueryBuilder()
@@ -46,7 +45,6 @@ class IdeaCommentRepository extends EntityRepository
 
         return new Paginator($qb);
     }
-
 
     public function countCommentsAndAnswersEnabledByIdea($idea)
     {

@@ -4,34 +4,21 @@ namespace Capco\AppBundle\Controller\Api;
 
 use Capco\AppBundle\Entity\Idea;
 use Capco\AppBundle\Entity\IdeaComment;
-
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\JsonResponse;
-use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
-use Symfony\Component\Validator\ConstraintViolationListInterface;
-use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
-
 use Capco\AppBundle\Form\CommentType;
 use Capco\AppBundle\CapcoAppBundleEvents;
 use Capco\AppBundle\Event\AbstractCommentChangedEvent;
-
-
 use FOS\RestBundle\Controller\FOSRestController;
 use FOS\RestBundle\Controller\Annotations\View;
 use FOS\RestBundle\Controller\Annotations\Get;
 use FOS\RestBundle\Controller\Annotations\Post;
-use FOS\RestBundle\Controller\Annotations\Put;
 use FOS\RestBundle\Controller\Annotations\QueryParam;
-
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 use FOS\RestBundle\Request\ParamFetcherInterface;
 
 class IdeasController extends FOSRestController
 {
-
     /**
      * Get idea comments.
      *
@@ -74,7 +61,7 @@ class IdeasController extends FOSRestController
             'comments_and_answers_count' => intval($countWithAnswers),
             'comments_count' => count($paginator),
             'comments' => $comments,
-            'is_reporting_enabled' => $this->get('capco.toggle.manager')->isActive('reporting')
+            'is_reporting_enabled' => $this->get('capco.toggle.manager')->isActive('reporting'),
         ];
     }
 
@@ -135,7 +122,6 @@ class IdeasController extends FOSRestController
                     ->setIsEnabled(true)
                 ;
 
-
         $form = $this->createForm(new CommentType($user), $comment);
         $form->handleRequest($request);
 
@@ -157,5 +143,4 @@ class IdeasController extends FOSRestController
             new AbstractCommentChangedEvent($comment, 'add')
         );
     }
-
 }

@@ -7,7 +7,6 @@ use Sonata\MediaBundle\Provider\ImageProvider;
 use JMS\Serializer\EventDispatcher\EventSubscriberInterface;
 use JMS\Serializer\EventDispatcher\ObjectEvent;
 
-
 class SerializationListener implements EventSubscriberInterface
 {
     private $logManager;
@@ -31,7 +30,7 @@ class SerializationListener implements EventSubscriberInterface
     {
         $event->getVisitor()->addData(
             'url',
-            '/media' . $this->imageProvider->generatePublicUrl($event->getObject(), 'reference')
+            '/media'.$this->imageProvider->generatePublicUrl($event->getObject(), 'reference')
         );
     }
 

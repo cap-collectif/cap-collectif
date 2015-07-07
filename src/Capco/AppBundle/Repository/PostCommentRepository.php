@@ -5,13 +5,11 @@ namespace Capco\AppBundle\Repository;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 
-
 /**
  * PostCommentRepository.
  */
 class PostCommentRepository extends EntityRepository
 {
-
     public function getEnabledByPost($post, $offset = 0, $limit = 10, $filter = 'last')
     {
         $qb = $this->getIsEnabledQueryBuilder()
@@ -57,7 +55,6 @@ class PostCommentRepository extends EntityRepository
 
         return $qb->getQuery()->getSingleScalarResult();
     }
-
 
     protected function getIsEnabledQueryBuilder()
     {

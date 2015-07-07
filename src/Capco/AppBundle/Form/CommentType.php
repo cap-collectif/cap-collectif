@@ -35,7 +35,7 @@ class CommentType extends AbstractType
         if ($this->action === 'create') {
             $builder
                 ->add('parent', null, [
-                    'required' => false
+                    'required' => false,
                 ])
             ;
         }

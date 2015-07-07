@@ -10,7 +10,6 @@ use Doctrine\ORM\Tools\Pagination\Paginator;
  */
 class EventCommentRepository extends EntityRepository
 {
-
     public function getEnabledByEvent($event, $offset = 0, $limit = 10, $filter = 'last')
     {
         $qb = $this->getIsEnabledQueryBuilder()
@@ -46,7 +45,6 @@ class EventCommentRepository extends EntityRepository
 
         return new Paginator($qb);
     }
-
 
     public function countCommentsAndAnswersEnabledByEvent($event)
     {
