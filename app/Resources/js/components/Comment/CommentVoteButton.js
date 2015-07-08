@@ -18,6 +18,7 @@ var CommentVoteButton = React.createClass({
             return (
                 <button disabled="disabled" className="btn  btn-dark-gray  btn-xs">
                     <i className="cap-hand-like-2"></i>
+                    { ' ' }
                     { this.getIntlMessage('comment.vote.submit') }
                 </button>
             );
@@ -42,6 +43,7 @@ var CommentVoteButton = React.createClass({
         return (
             <button className="btn  btn-success  btn--outline  btn-xs">
                 <i className="cap-hand-like-2"></i>
+                { ' ' }
                 { this.getIntlMessage('comment.vote.submit') }
             </button>
         );

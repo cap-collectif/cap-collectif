@@ -76,7 +76,6 @@ var CommentForm = React.createClass({
             this.props.comment(data)
             .then(() => {
                 this.setState(this.getInitialState());
-                autosize.destroy(React.findDOMNode(this.refs.body));
                 $(commentButton).button('reset');
             })
             .catch(() => {
@@ -84,6 +83,7 @@ var CommentForm = React.createClass({
                 this.setState(data);
                 $(commentButton).button('reset');
             });
+            autosize.destroy(React.findDOMNode(this.refs.body));
         });
     },
 

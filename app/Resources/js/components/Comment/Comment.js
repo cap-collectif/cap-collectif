@@ -56,6 +56,7 @@ var Comment = React.createClass({
                     {(this.props.root === true
                         ? <a onClick={ this.answer.bind(this) } className="btn btn-xs btn-dark-gray btn--outline">
                             <i className="cap-reply-mail-2"></i>
+                            { ' ' }
                             { this.getIntlMessage('global.answer') }
                           </a>
                         : <span />

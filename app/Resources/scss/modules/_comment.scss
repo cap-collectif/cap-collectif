@@ -22,10 +22,6 @@
         overflow: hidden;
     }
 
-    .btn {
-        margin-top: 20px;
-    }
-
     .opinion__text {
         padding-left: 55px;
     }
@@ -34,9 +30,9 @@
 
 // List of comment answers
 .comment-answers {
+
   .opinion__list {
     .opinion--comment {
-      padding-top: 10px;
       padding-bottom: 10px;
       border-bottom: 0;
     }
@@ -69,7 +65,7 @@
     }
 
     .opinion--comment:last-child {
-        margin-bottom: 0;
+        margin-bottom: 15px;
     }
 
     .opinion--comment {
@@ -77,7 +73,6 @@
         padding-top: 10px;
         margin-bottom: 0;
     }
-
 }
 
 .comment__buttons {
