@@ -63,16 +63,23 @@ var CommentForm = React.createClass({
                 return;
             }
 
+            $(React.findDOMNode(this.refs.create)).button('loading');
+
+
             var data = this.state;
             delete data.expanded;
             delete data.submited;
             this.props.comment(data)
+            .then(() => {
+                this.setState(this.getInitialState());
+                autosize.destroy(React.findDOMNode(this.refs.body));
+                $(React.findDOMNode(this.refs.create)).button('reset');
+            })
             .catch(() => {
                 alert('Désolé, un problème est survenu lors de l\'ajout de votre commentaire.');
                 this.setState(data);
+                $(React.findDOMNode(this.refs.create)).button('reset');
             });
-            this.setState(this.getInitialState());
-            autosize.destroy(React.findDOMNode(this.refs.body));
         });
     },
 
@@ -144,7 +151,7 @@ var CommentForm = React.createClass({
                                     { this.getIntlMessage('comment.email_info') }
                                 </p>
                             </div>
-                            <button ref="create" className="btn btn-primary" onClick={this.create.bind(this)}>
+                            <button ref="create" className="btn btn-primary" data-loading-text={this.getIntlMessage('global.loading')} onClick={this.create.bind(this)}>
                                 { this.getIntlMessage('comment.submit') }
                             </button>
                         </div>

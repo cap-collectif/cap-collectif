@@ -33,7 +33,7 @@ export default {
         global: {
             more: 'Voir plus',
             answer: 'Répondre',
-            loading: 'Loading...',
+            loading: 'Chargement...',
             login: 'Connexion',
             comment: 'Ecrire un commentaire...',
             name: 'Nom ',
