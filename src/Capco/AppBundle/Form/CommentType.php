@@ -10,12 +10,10 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 class CommentType extends AbstractType
 {
     private $user;
-    private $action;
 
-    public function __construct(User $user = null, $action = 'create')
+    public function __construct(User $user = null)
     {
         $this->user = $user;
-        $this->action = $action;
     }
 
     /**
@@ -31,14 +29,6 @@ class CommentType extends AbstractType
                 'translation_domain' => 'CapcoAppBundle',
             ))
         ;
-
-        if ($this->action === 'create') {
-            $builder
-                ->add('parent', null, [
-                    'required' => false,
-                ])
-            ;
-        }
 
         if (null == $this->user) {
             $builder
@@ -61,7 +51,8 @@ class CommentType extends AbstractType
     {
         $resolver->setDefaults(array(
             'data_class' => 'Capco\AppBundle\Entity\AbstractComment',
-            'csrf_protection' => false,
+            'csrf_protection' => true,
+            'csrf_field_name' => '_token',
         ));
     }
 
@@ -70,6 +61,6 @@ class CommentType extends AbstractType
      */
     public function getName()
     {
-        return '';
+        return 'capco_app_comment';
     }
 }

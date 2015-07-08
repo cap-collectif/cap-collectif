@@ -91,7 +91,7 @@ Feature: Consultation
       | consultationSlug | croissance-innovation-disruption |
       | stepSlug         | collecte-des-avis                |
     And I follow "Actualités"
-    And I should see 10 ".media--news" elements
+    And I should see 7 ".media--news" elements
 
   Scenario: Consultation header should display correct number of votes
     Given I visited "consultation page" with:

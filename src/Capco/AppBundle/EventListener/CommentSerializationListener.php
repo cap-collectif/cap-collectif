@@ -2,6 +2,8 @@
 
 namespace Capco\AppBundle\EventListener;
 
+use Capco\AppBundle\Manager\LogManager;
+use Sonata\MediaBundle\Provider\ImageProvider;
 use JMS\Serializer\EventDispatcher\EventSubscriberInterface;
 use JMS\Serializer\EventDispatcher\ObjectEvent;
 use Symfony\Component\Routing\RouterInterface;
@@ -21,13 +23,11 @@ class CommentSerializationListener implements EventSubscriberInterface
     public static function getSubscribedEvents()
     {
         return [
-            ['event' => 'serializer.post_serialize', 'class' => 'Capco\AppBundle\Entity\IdeaComment', 'method' => 'onPostAbstractCommentSerialize'],
-            ['event' => 'serializer.post_serialize', 'class' => 'Capco\AppBundle\Entity\PostComment', 'method' => 'onPostAbstractCommentSerialize'],
-            ['event' => 'serializer.post_serialize', 'class' => 'Capco\AppBundle\Entity\EventComment', 'method' => 'onPostAbstractCommentSerialize'],
+            ['event' => 'serializer.post_serialize', 'class' => 'Capco\AppBundle\Entity\IdeaComment', 'method' => 'onPostIdeaCommentSerialize'],
         ];
     }
 
-    public function onPostAbstractCommentSerialize(ObjectEvent $event)
+    public function onPostIdeaCommentSerialize(ObjectEvent $event)
     {
         $comment = $event->getObject();
 
@@ -45,33 +45,27 @@ class CommentSerializationListener implements EventSubscriberInterface
         $event->getVisitor()->addData('can_edit', $this->canEdit($comment));
     }
 
-    private function canEdit($comment)
-    {
+    private function canEdit($comment) {
         $user = $this->tokenStorage->getToken()->getUser();
-        if ($user === 'anon.') {
+        if ($user === "anon.") {
             return false;
         }
-
         return $comment->canContribute() && $comment->getAuthor() == $user;
     }
 
-    private function hasUserVoted($comment)
-    {
+    private function hasUserVoted($comment) {
         $user = $this->tokenStorage->getToken()->getUser();
-        if ($user === 'anon.') {
+        if ($user === "anon.") {
             return false;
         }
-
         return $comment->userHasVote($user);
     }
 
-    private function hasUserReported($comment)
-    {
+    private function hasUserReported($comment) {
         $user = $this->tokenStorage->getToken()->getUser();
-        if ($user === 'anon.') {
+        if ($user === "anon.") {
             return false;
         }
-
         return $comment->userHasReport($user);
     }
 }

@@ -5,3 +5,4 @@ Capco\MediaBundle\Entity\Media:
             expose: true
             type: integer
             groups: [Default]
+

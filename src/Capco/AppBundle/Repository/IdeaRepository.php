@@ -333,7 +333,7 @@ class IdeaRepository extends EntityRepository
     }
 
     /**
-     * Get Ideas.
+     * Get Ideas
      */
     public function getEnabledWith($from = null, $to = null)
     {
@@ -351,6 +351,7 @@ class IdeaRepository extends EntityRepository
 
         return $qb->getQuery()->getResult();
     }
+
 
     /**
      * Get last ideas by theme.

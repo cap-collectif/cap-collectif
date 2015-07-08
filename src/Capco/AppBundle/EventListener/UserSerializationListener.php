@@ -5,6 +5,7 @@ namespace Capco\AppBundle\EventListener;
 use JMS\Serializer\EventDispatcher\EventSubscriberInterface;
 use JMS\Serializer\EventDispatcher\ObjectEvent;
 use Symfony\Component\Routing\RouterInterface;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
 class UserSerializationListener implements EventSubscriberInterface
 {
@@ -32,5 +33,7 @@ class UserSerializationListener implements EventSubscriberInterface
                 'profile' => $this->router->generate('capco_user_profile_show_all', ['slug' => $user->getSlug()], true),
             ]
         );
+
     }
+
 }

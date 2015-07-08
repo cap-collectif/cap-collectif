@@ -9,7 +9,7 @@ use Symfony\Component\HttpFoundation\Request;
 class SiteParameterController extends Controller
 {
     /**
-     * Redirect the user depending on his choice.
+     * Redirect the user depend on this choice
      *
      * @param object  $object
      * @param Request $request
@@ -22,4 +22,5 @@ class SiteParameterController extends Controller
 
         return new RedirectResponse($url);
     }
+
 }

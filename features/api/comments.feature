@@ -8,5 +8,3 @@ Feature: Comments
       "count": "@integer@.greaterThan(0)"
     }
     """
-
-

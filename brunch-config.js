@@ -27,19 +27,11 @@ exports.config = {
           'bower_components/bootstrap/assets/javascripts/bootstrap/*.js',
           'bower_components/fancybox/source/jquery.fancybox.pack.js',
           'bower_components/eventEmitter/EventEmitter.js',
-
-          // safari polyfills
-          'bower_components/es6-promise/promise.js',
-          'bower_components/intl/Intl.js',
-          'bower_components/intl/locale-data/jsonp/fr.js',
-          // end
-
           'bower_components/react/react-with-addons.js',
           'bower_components/flux/dist/Flux.js',
           'bower_components/fetch/fetch.js',
           'bower_components/react-intl/dist/react-intl.min.js',
           'bower_components/react-intl/dist/locale-data/fr.js',
-          'bower_components/autosize/dist/autosize.js',
           'app/Resources/js/jsapi.js',
           'app/Resources/js/cookiechoices.js',
           'app/Resources/js/googleCharts.js',
@@ -61,7 +53,6 @@ exports.config = {
       joinTo: {
         'css/style.css' : [
           'bower_components/bootstrap/assets/stylesheets/bootstrap.scss',
-          'bower_components/css-spinners/css/spinners.css',
           'app/Resources/scss/style.scss'
         ],
         'css/jquery.minicolors.css' : ['bower_components/jquery-minicolors/jquery.minicolors.css'],
@@ -81,7 +72,7 @@ exports.config = {
       }
     },
     'fb-flo': {
-      port: 8888,
+      'port': 8888
     },
     cleancss: {
       keepSpecialComments: 0,

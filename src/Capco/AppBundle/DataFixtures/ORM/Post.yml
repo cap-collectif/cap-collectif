@@ -9,7 +9,7 @@ Capco\AppBundle\Entity\Post:
          <h3><text(10)></h3>
          <p><text(300)></p>
     isPublished: true
-    publishedAt: <dateTimeBetween('-100 days', '-10 days')>
+    publishedAt: <dateTimeBetween('-100 days', '+10 days')>
     Authors:
         - @user<numberBetween(1,5)>
     Media: @MediaConsultation<numberBetween(1,3)>

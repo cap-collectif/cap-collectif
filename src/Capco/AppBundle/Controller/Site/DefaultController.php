@@ -9,8 +9,6 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Cache;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\JsonResponse;
-use JMS\Serializer\SerializationContext;
 
 class DefaultController extends Controller
 {
@@ -94,27 +92,5 @@ class DefaultController extends Controller
             'pathInfo' => $pathInfo,
             'headerLinks' => $headerLinks,
         ];
-    }
-
-    /**
-     * @Route("/get_api_token", name="app_get_api_token")
-     */
-    public function getTokenAction()
-    {
-        if (false === $this->get('security.authorization_checker')->isGranted('ROLE_USER')) {
-            return new JsonResponse(['error' => 'You are not authenticated.'], 400);
-        }
-
-        $user = $this->getUser();
-
-        $token = $this->get('lexik_jwt_authentication.jwt_manager')
-                      ->create($user);
-
-        $userData = $this->get('jms_serializer')->serialize($user, 'json', SerializationContext::create()->setGroups(['Default', 'UsersInfos']));
-
-        return new JsonResponse([
-            'token' => $token,
-            'user' => $userData,
-        ]);
     }
 }

@@ -1,5 +1,3 @@
-import AutoLinkText from '../Utils/AutoLinkText';
-
 var CommentBody = React.createClass({
     mixins: [ReactIntl.IntlMixin],
 
@@ -24,22 +22,21 @@ var CommentBody = React.createClass({
             text = text.substr(0, Math.min(text.length, text.lastIndexOf(" ")));
 
             if (text.indexOf('.', text.length - 1) == -1) {
-                text += '...';
+                text += '&hellip;';
             }
             text += ' ';
         }
 
-        return text.replace(new RegExp('\r?\n','g'), '<br />');
+        return text;
     },
-
 
     render() {
         return (
-            <div className='opinion__text'>
+            <p className='opinion__text'>
                 { this.renderTrashedLabel() }
-                <AutoLinkText text={this.generateText()} />
+                <span dangerouslySetInnerHTML={{__html: this.generateText() }}></span>
                 { this.renderReadMoreOrLess() }
-            </div>
+            </p>
         )
     },
 

@@ -9,6 +9,7 @@ use Sonata\AdminBundle\Route\RouteCollection;
 
 class SiteParameterAdmin extends Admin
 {
+
     /**
      * @param FormMapper $formMapper
      */

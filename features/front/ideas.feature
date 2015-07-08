@@ -3,8 +3,6 @@ Feature: Ideas
 Background:
   Given feature "ideas" is enabled
 
-# Themes
-
 Scenario: Can see no ideas in empty theme
   Given feature "themes" is enabled
   And I visited "themes page"
@@ -25,16 +23,9 @@ Scenario: Can not create an idea from theme when idea creation is disabled
   When I follow "Immobilier"
   Then I should not see "Proposer une idée"
 
-
-# Homepage
-
 Scenario: Can not create an idea from homepage when idea creation is disabled
   Given I visited "home page"
   Then I should not see "Proposer une idée"
-
-
-
-# Create
 
 Scenario: Can create an idea when logged in
   Given feature "themes" is enabled
@@ -60,62 +51,25 @@ Scenario: Can not create an idea when not logged in
   When I follow "Proposer une idée"
   Then I should see "Se connecter"
 
-# Comments
-
 Scenario: Can not comment an uncommentable idea
   Given I visited "ideas page"
   And I follow "ideaNotCommentable"
   Then I should not see "Commenter"
 
-  ## Add a comment
-
-  @database @javascript
-  Scenario: Anonymous wants to comment an idea
-    Given I visited "ideas page"
-    And I follow "ideaCommentable"
-    And I wait 3 seconds
-    And I fill in the following:
-      | body        | J'ai un truc à dire |
-    And I should see "Commenter avec mon compte"
-    And I should see "Commenter sans créer de compte"
-    And I fill in the following:
-      | authorName  | Naruto              |
-      | authorEmail | naruto72@gmail.com  |
-    When I press "Commenter"
-    And I wait 3 seconds
-    Then I should see "J'ai un truc à dire" in the ".opinion__list" element
-
-  @database @javascript
-  Scenario: Logged in user wants to comment an idea
-    Given I am logged in as user
-    And I visited "ideas page"
-    And I follow "ideaCommentable"
-    And I wait 3 seconds
-    And I fill in the following:
-      | body        | J'ai un truc à dire |
-    And I should not see "Commenter avec mon compte"
-    And I should not see "Commenter sans créer de compte"
-    When I press "Commenter"
-    And I wait 3 seconds
-    Then I should see "J'ai un truc à dire" in the ".opinion__list" element
-
-  @database @javascript
-  Scenario: Anonymous wants to comment an idea without email
-    Given I visited "ideas page"
-    And I follow "ideaCommentable"
-    And I wait 3 seconds
-    And I fill in the following:
-      | body        | J'ai un truc à dire |
-    And I fill in the following:
-      | authorName  | Naruto              |
-    When I press "Commenter"
-    And I wait 3 seconds
-    Then I should not see "J'ai un truc à dire" in the ".opinion__list" element
-
-## Comments vote
+@database
+Scenario: Can comment an idea
+  Given I visited "ideas page"
+  And I follow "ideaCommentable"
+  And I should see "Commenter avec mon compte"
+  And I fill in the following:
+    | capco_app_comment[authorName]  | Naruto              |
+    | capco_app_comment[authorEmail] | naruto72@gmail.com  |
+    | capco_app_comment[body]        | Jai un truc à dire  |
+  When I press "Commenter"
+  Then I should see "Merci ! Votre commentaire a bien été enregistré."
 
   @javascript @database
-  Scenario: Logged in user wants to vote for a comment of an idea
+  Scenario: Logged in user wants to vote for the comment of an idea
     Given I am logged in as user
     And I visited "idea page" with:
       | slug | ideacommentable |
@@ -129,8 +83,6 @@ Scenario: Can not comment an uncommentable idea
     And I wait 5 seconds
     And I should see "Votre vote a bien été annulé."
     And The first comment vote counter should be "0"
-
-# Votes
 
  @database
  Scenario: Anonymous user wants to vote anonymously
@@ -169,8 +121,6 @@ Scenario: Can not comment an uncommentable idea
    When I press "capco_app_idea_vote_submit"
    Then I should see "Merci ! Votre vote a bien été pris en compte."
    And I should see "user" in the "#ideaVotesModal" element
-
-# Trash
 
   Scenario: Can not access trash if feature is disabled
     Given I visited "ideas page"
