@@ -4,7 +4,7 @@ Feature: Login Restful Api
   So I can access the application
 
 Scenario: Anonymous API client wants to login with correct credentials
-    When I send a POST request to "/api/syntheses/login_check" with json:
+    When I send a POST request to "/api/login_check" with json:
 """
 {
   "username": "user@test.com",
@@ -20,7 +20,7 @@ Scenario: Anonymous API client wants to login with correct credentials
 
 @security
 Scenario: Anonymous API client wants to login with a wrong password
-    When I send a POST request to "/api/syntheses/login_check" with json:
+    When I send a POST request to "/api/login_check" with json:
 """
 {
   "username": "user@test.com",

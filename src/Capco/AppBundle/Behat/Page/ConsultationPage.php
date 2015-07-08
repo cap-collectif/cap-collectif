@@ -39,6 +39,4 @@ class ConsultationPage extends Page
             }
         }
     }
-
-
 }

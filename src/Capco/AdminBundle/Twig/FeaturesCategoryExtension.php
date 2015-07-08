@@ -25,6 +25,7 @@ class FeaturesCategoryExtension extends \Twig_Extension
 
     /**
      * @param $category
+     *
      * @return bool
      */
     public function isCategoryEnabled($category)
@@ -34,6 +35,7 @@ class FeaturesCategoryExtension extends \Twig_Extension
 
     /**
      * @param AdminInterface $admin
+     *
      * @return bool
      */
     public function isAdminEnabled($admin)
@@ -42,7 +44,8 @@ class FeaturesCategoryExtension extends \Twig_Extension
     }
 
     /**
-     * Return enabled categories for pages group
+     * Return enabled categories for pages group.
+     *
      * @return array
      */
     public function getEnabledPagesCategories()
@@ -52,6 +55,7 @@ class FeaturesCategoryExtension extends \Twig_Extension
 
     /**
      * Return enabled categories for settings group.
+     *
      * @return array
      */
     public function getEnabledSettingsCategories()

@@ -115,13 +115,10 @@
             {% if capco_comment_can_add(idea) or(capco_comment_can_show(idea) and idea.commentsCount > 0) %}
                 <div class="container  container--thinner container--custom">
 
-                    {% if capco_comment_can_show(idea) and idea.commentsCount > 0 %}
+                    {% if capco_comment_can_show(idea) %}
                         <div id="render-idea-comments" data-idea="{{ idea.id }}"></div>
                     {% endif %}
 
-                    {% if capco_comment_can_add(idea) %}
-                        {{ render(controller('CapcoAppBundle:Site/Comment:create', {'objectId': idea.id, 'objectType': idea.className})) }}
-                    {% endif %}
                 </div>
             {% endif %}
 

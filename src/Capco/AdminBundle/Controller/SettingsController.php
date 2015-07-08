@@ -10,7 +10,6 @@ use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 class SettingsController extends Controller
 {
-
     /**
      * @Route("/admin/settings/{category}/list", name="capco_admin_settings")
      * @Template()

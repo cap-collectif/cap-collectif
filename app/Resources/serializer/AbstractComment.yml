@@ -34,6 +34,9 @@ Capco\AppBundle\Entity\AbstractComment:
             expose: true
             type: boolean
             groups: [Comments]
+        answers:
+            expose: true
+            groups: [Comments, UserMedias]
     virtual_properties:
         canContribute:
             serialized_name: can_contribute

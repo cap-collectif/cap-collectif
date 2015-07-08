@@ -23,6 +23,16 @@ capco_api_users:
   type: rest
   prefix: /api
 
+capco_api_events:
+  resource: "@CapcoAppBundle/Controller/Api/EventsController.php"
+  type: rest
+  prefix: /api
+
+capco_api_posts:
+  resource: "@CapcoAppBundle/Controller/Api/PostsController.php"
+  type: rest
+  prefix: /api
+
 capco_app:
     resource: "@CapcoAppBundle/Controller/Site"
     type:     annotation
@@ -100,7 +110,7 @@ twitter_login:
     pattern: /login/check-twitter
 
 api_login_check:
-    path: /api/syntheses/login_check
+    path: /api/login_check
 
 # nelmio doc
 NelmioApiDocBundle:

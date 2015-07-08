@@ -62,7 +62,7 @@ class FeaturesCategoryResolver
         'settings.shield_mode' => [
             'conditions' => [],
             'features' => ['shield_mode'],
-        ]
+        ],
     );
 
     protected $manager;
@@ -77,6 +77,7 @@ class FeaturesCategoryResolver
         if (!array_key_exists($category, self::$categories)) {
             return false;
         }
+
         return $this->manager->hasOneActive(self::$categories[$category]['conditions']);
     }
 
@@ -85,6 +86,7 @@ class FeaturesCategoryResolver
         if (method_exists($admin, 'getFeatures')) {
             return $this->manager->hasOneActive($admin->getFeatures());
         }
+
         return true;
     }
 
@@ -100,7 +102,7 @@ class FeaturesCategoryResolver
         return $toggles;
     }
 
-    public function findCategoryForToggle ($toggle)
+    public function findCategoryForToggle($toggle)
     {
         foreach (self::$categories as $name => $category) {
             if (in_array($toggle, $category['features'])) {
@@ -108,11 +110,11 @@ class FeaturesCategoryResolver
             }
         }
 
-        return null;
+        return;
     }
 
-    public function getEnabledPagesCategories() {
-
+    public function getEnabledPagesCategories()
+    {
         $categories = [];
         foreach (self::$categories as $name => $cat) {
             if (strrpos($name, 'pages.') === 0 && $this->manager->hasOneActive($cat['conditions'])) {
@@ -123,8 +125,8 @@ class FeaturesCategoryResolver
         return $categories;
     }
 
-    public function getEnabledSettingsCategories() {
-
+    public function getEnabledSettingsCategories()
+    {
         $categories = [];
         foreach (self::$categories as $name => $cat) {
             if (strrpos($name, 'settings.') === 0 && $this->manager->hasOneActive($cat['conditions'])) {
@@ -143,6 +145,7 @@ class FeaturesCategoryResolver
         if (strrpos($category, 'pages.') === 0) {
             return 'admin.group.pages';
         }
-        return null;
+
+        return;
     }
 }
