@@ -206,7 +206,7 @@ Feature: Ideas comments
       "body": "Pr0 Hacker"
     }
     """
-    Then the JSON response status code should be 404
+    Then the JSON response status code should be 400
     And the JSON response should match:
     """
     {
