@@ -37,3 +37,7 @@ email:
 
 charte:
   blank: Veuillez cocher la case pour accepter la charte.
+
+synthesis:
+  consultation_step:
+    is_not_set: Vous devez spécifier une étape de consultation.

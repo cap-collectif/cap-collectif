@@ -7,6 +7,7 @@ use Capco\AppBundle\Manager\LogManager;
 use Capco\AppBundle\Entity\Synthesis\Synthesis;
 use Capco\AppBundle\Entity\Synthesis\SynthesisElement;
 use Capco\AppBundle\Entity\Synthesis\SynthesisDivision;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class SynthesisElementHandler
 {
@@ -25,7 +26,18 @@ class SynthesisElementHandler
             throw new NotFoundHttpException(sprintf('The resource \'%s\' was not found.', $id));
         }
 
-        return $this->em->getRepository('CapcoAppBundle:Synthesis\SynthesisElement')->findBy(array(
+        return $this->em->getRepository('CapcoAppBundle:Synthesis\SynthesisElement')->getWith(array(
+            'synthesis' => $synthesis,
+        ));
+    }
+
+    public function countAllElementsFromSynthesis($id)
+    {
+        if (!($synthesis = $this->em->getRepository('CapcoAppBundle:Synthesis\Synthesis')->find($id))) {
+            throw new NotFoundHttpException(sprintf('The resource \'%s\' was not found.', $id));
+        }
+
+        return $this->em->getRepository('CapcoAppBundle:Synthesis\SynthesisElement')->countWith(array(
             'synthesis' => $synthesis,
         ));
     }
@@ -36,9 +48,97 @@ class SynthesisElementHandler
             throw new NotFoundHttpException(sprintf('The resource \'%s\' was not found.', $id));
         }
 
-        return $this->em->getRepository('CapcoAppBundle:Synthesis\SynthesisElement')->findBy(array(
+        return $this->em->getRepository('CapcoAppBundle:Synthesis\SynthesisElement')->getWith(array(
             'synthesis' => $synthesis,
             'archived' => false,
+            'enabled' => true,
+        ));
+    }
+
+    public function countNewElementsFromSynthesis($id)
+    {
+        if (!($synthesis = $this->em->getRepository('CapcoAppBundle:Synthesis\Synthesis')->find($id))) {
+            throw new NotFoundHttpException(sprintf('The resource \'%s\' was not found.', $id));
+        }
+
+        return $this->em->getRepository('CapcoAppBundle:Synthesis\SynthesisElement')->countWith(array(
+            'synthesis' => $synthesis,
+            'archived' => false,
+            'enabled' => true,
+        ));
+    }
+
+    public function getUnpublishedElementsFromSynthesis($id)
+    {
+        if (!($synthesis = $this->em->getRepository('CapcoAppBundle:Synthesis\Synthesis')->find($id))) {
+            throw new NotFoundHttpException(sprintf('The resource \'%s\' was not found.', $id));
+        }
+
+        return $this->em->getRepository('CapcoAppBundle:Synthesis\SynthesisElement')->getWith(array(
+            'synthesis' => $synthesis,
+            'enabled' => false,
+        ));
+    }
+
+    public function countUnpublishedElementsFromSynthesis($id)
+    {
+        if (!($synthesis = $this->em->getRepository('CapcoAppBundle:Synthesis\Synthesis')->find($id))) {
+            throw new NotFoundHttpException(sprintf('The resource \'%s\' was not found.', $id));
+        }
+
+        return $this->em->getRepository('CapcoAppBundle:Synthesis\SynthesisElement')->countWith(array(
+            'synthesis' => $synthesis,
+            'enabled' => false,
+        ));
+    }
+
+    public function getArchivedElementsFromSynthesis($id)
+    {
+        if (!($synthesis = $this->em->getRepository('CapcoAppBundle:Synthesis\Synthesis')->find($id))) {
+            throw new NotFoundHttpException(sprintf('The resource \'%s\' was not found.', $id));
+        }
+
+        return $this->em->getRepository('CapcoAppBundle:Synthesis\SynthesisElement')->getWith(array(
+            'synthesis' => $synthesis,
+            'archived' => true,
+            'enabled' => true,
+        ));
+    }
+
+    public function countArchivedElementsFromSynthesis($id)
+    {
+        if (!($synthesis = $this->em->getRepository('CapcoAppBundle:Synthesis\Synthesis')->find($id))) {
+            throw new NotFoundHttpException(sprintf('The resource \'%s\' was not found.', $id));
+        }
+
+        return $this->em->getRepository('CapcoAppBundle:Synthesis\SynthesisElement')->countWith(array(
+            'synthesis' => $synthesis,
+            'archived' => true,
+            'enabled' => true,
+        ));
+    }
+
+    public function getRootElementsFromSynthesis($id)
+    {
+        if (!($synthesis = $this->em->getRepository('CapcoAppBundle:Synthesis\Synthesis')->find($id))) {
+            throw new NotFoundHttpException(sprintf('The resource \'%s\' was not found.', $id));
+        }
+
+        return $this->em->getRepository('CapcoAppBundle:Synthesis\SynthesisElement')->getWith(array(
+            'synthesis' => $synthesis,
+            'parent' => null,
+        ));
+    }
+
+    public function countRootElementsFromSynthesis($id)
+    {
+        if (!($synthesis = $this->em->getRepository('CapcoAppBundle:Synthesis\Synthesis')->find($id))) {
+            throw new NotFoundHttpException(sprintf('The resource \'%s\' was not found.', $id));
+        }
+
+        return $this->em->getRepository('CapcoAppBundle:Synthesis\SynthesisElement')->countWith(array(
+            'synthesis' => $synthesis,
+            'parent' => null,
         ));
     }
 
@@ -66,7 +166,9 @@ class SynthesisElementHandler
             $el->setLinkedDataClass($element->getLinkedDataClass());
             $el->setLinkedDataId($element->getLinkedDataId());
             $el->setSynthesis($synthesis);
-            $el->setParent($element->getParent());
+            if ($element->getParent()) {
+                $element->getParent()->addChild($this);
+            }
             $el->setNotation($element->getNotation());
             $el->setOriginalDivision($division);
             $this->em->persist($el);

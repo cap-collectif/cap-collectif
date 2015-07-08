@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Used to override fos user serialization config.
- Basically just make username available "Default" serialization group. -->
+ Basically just make username available to "Default" serialization group. -->
 
 
 <serializer>

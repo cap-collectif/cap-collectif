@@ -1,11 +1,20 @@
 Capco\UserBundle\Entity\User:
     exclusion_policy: ALL
     properties:
-        slug:
-            expose: true
-            type: string
-            groups: [Default]
-        Media:
-            expose: true
-            serialized_name: media
-            groups: [UsersInfos]
+      slug:
+        expose: true
+        type: string
+        groups: [Default]
+      Media:
+        expose: true
+        serialized_name: media
+        groups: [UsersInfos, UserDetails]
+    virtual_properties:
+      getDisplayName:
+        serialized_name: display_name
+        type: string
+        groups: [UserDetails]
+      getUniqueIdentifier:
+        serialized_name: unique_id
+        type: string
+        groups: [UserDetails]

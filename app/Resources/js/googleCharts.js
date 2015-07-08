@@ -8,15 +8,15 @@
         }
 
         this.each(function () {
-            if ($('#piechart-' + $(this).data('opinion-id')).length) {
+            if ($('#piechart-' + $(this).data('pie-id')).length) {
 
-                var chart_opinion;
+                var pie_chart;
                 var options;
                 var data;
 
                 data = new google.visualization.DataTable();
                 data.addColumn('string', 'Task');
-                data.addColumn('number', 'Opinions');
+                data.addColumn('number', 'Values');
                 data.addRows([
                     ["D'accord", $(this).data('ok')],
                     ["Mitigé", $(this).data('mitige')],
@@ -28,8 +28,8 @@
                     pieSliceText: 'value',
                     backgroundColor: 'transparent'
                 };
-                chart_opinion = new google.visualization.PieChart(document.getElementById('piechart-' + $(this).data('opinion-id')));
-                chart_opinion.draw(data, options);
+                pie_chart = new google.visualization.PieChart(document.getElementById('piechart-' + $(this).data('pie-id')));
+                pie_chart.draw(data, options);
             }
         });
 

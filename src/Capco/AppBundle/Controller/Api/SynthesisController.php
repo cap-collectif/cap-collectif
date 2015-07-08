@@ -24,9 +24,6 @@ use Capco\AppBundle\Form\Api\SynthesisType as SynthesisForm;
 use Capco\AppBundle\Form\Api\SynthesisElementType as SynthesisElementForm;
 use Capco\AppBundle\Form\Api\SynthesisDivisionType as SynthesisDivisionForm;
 
-/**
- * @Security("has_role('ROLE_ADMIN')")
- */
 class SynthesisController extends FOSRestController
 {
     /**
@@ -44,8 +41,9 @@ class SynthesisController extends FOSRestController
      *  }
      * )
      *
+     * @Security("has_role('ROLE_ADMIN')")
      * @Get("/syntheses")
-     * @View(serializerGroups={"Default"})
+     * @View(serializerGroups={"Syntheses", "Elements"})
      */
     public function getSynthesesAction()
     {
@@ -64,6 +62,7 @@ class SynthesisController extends FOSRestController
      *  }
      * )
      *
+     * @Security("has_role('ROLE_ADMIN')")
      * @Post("/syntheses")
      * @ParamConverter("synthesis", converter="fos_rest.request_body")
      */
@@ -76,7 +75,7 @@ class SynthesisController extends FOSRestController
         $synthesis = $this->get('capco.synthesis.synthesis_handler')->createSynthesis($synthesis);
 
         $view = $this->view($synthesis, Codes::HTTP_CREATED);
-        $view->setSerializationContext(SerializationContext::create()->setGroups(array('Default', 'SynthesisDetails')));
+        $view->setSerializationContext(SerializationContext::create()->setGroups(array('SynthesisDetails', 'Elements')));
         $url = $this->generateUrl('get_synthesis', ['id' => $synthesis->getId()], UrlGeneratorInterface::ABSOLUTE_URL);
         $view->setHeader('Location', $url);
 
@@ -95,6 +94,7 @@ class SynthesisController extends FOSRestController
      *  }
      * )
      *
+     * @Security("has_role('ROLE_ADMIN')")
      * @Post("/syntheses/from-consultation-step/{id}")
      * @ParamConverter("consultationStep", options={"mapping": {"id": "id"}})
      * @ParamConverter("synthesis", converter="fos_rest.request_body")
@@ -107,7 +107,7 @@ class SynthesisController extends FOSRestController
         $synthesis = $this->get('capco.synthesis.synthesis_handler')->createSynthesisFromConsultationStep($synthesis, $consultationStep);
 
         $view = $this->view($synthesis, Codes::HTTP_CREATED);
-        $view->setSerializationContext(SerializationContext::create()->setGroups(array('Default', 'SynthesisDetails')));
+        $view->setSerializationContext(SerializationContext::create()->setGroups(array('SynthesisDetails', 'Elements')));
         $url = $this->generateUrl('get_synthesis', ['id' => $synthesis->getId()], UrlGeneratorInterface::ABSOLUTE_URL);
         $view->setHeader('Location', $url);
 
@@ -127,7 +127,7 @@ class SynthesisController extends FOSRestController
      * )
      *
      * @Get("/syntheses/{id}")
-     * @View(serializerGroups={"Default", "SynthesisDetails"})
+     * @View(serializerGroups={"SynthesisDetails", "Elements"})
      */
     public function getSynthesisAction($id)
     {
@@ -146,9 +146,10 @@ class SynthesisController extends FOSRestController
      *  }
      * )
      *
+     * @Security("has_role('ROLE_ADMIN')")
      * @Put("/syntheses/{id}")
      * @ParamConverter("synthesis", options={"mapping": {"id": "id"}})
-     * @View(serializerGroups={"Default", "SynthesisDetails"})
+     * @View(serializerGroups={"SynthesisDetails", "Elements"})
      */
     public function updateSynthesisAction(Request $request, Synthesis $synthesis)
     {
@@ -156,9 +157,8 @@ class SynthesisController extends FOSRestController
         $form->submit($request->request->all(), false);
         if ($form->isValid()) {
             $synthesis = $this->get('capco.synthesis.synthesis_handler')->updateSynthesis($synthesis);
-            $url = $this->generateUrl('get_synthesis', ['id' => $synthesis->getId()], UrlGeneratorInterface::ABSOLUTE_URL);
 
-            return $this->redirectView($url);
+            return $synthesis;
         }
 
         return $form;
@@ -177,7 +177,7 @@ class SynthesisController extends FOSRestController
      * )
      *
      * @Get("/syntheses/{id}/updated")
-     * @View(serializerGroups={"Default", "SynthesisDetails"})
+     * @View(serializerGroups={"SynthesisDetails", "Elements"})
      */
     public function getUpdatedSynthesisAction($id)
     {
@@ -198,8 +198,9 @@ class SynthesisController extends FOSRestController
      *  }
      * )
      *
+     * @Security("has_role('ROLE_ADMIN')")
      * @Get("/syntheses/{id}/elements")
-     * @View(serializerGroups={"Default"})
+     * @View(serializerGroups={"ElementDetails", "UserDetails"})
      */
     public function getSynthesisElementsAction($id)
     {
@@ -207,25 +208,203 @@ class SynthesisController extends FOSRestController
     }
 
     /**
-     * Get unarchived synthesis elements.
+     * Count synthesis elements.
      *
      * @return array|\Capco\AppBundle\Entity\Synthesis\SynthesisElement[]
      *
      * @ApiDoc(
      *  resource=true,
-     *  description="Get all the elements of a synthesis that are not yet archived",
+     *  description="Count all the elements of a synthesis",
      *  statusCodes={
-     *    200 = "Syntheses element found",
-     *    404 = "No syntheses element found",
+     *    200 = "Success",
      *  }
      * )
      *
+     * @Security("has_role('ROLE_ADMIN')")
+     * @Get("/syntheses/{id}/elements/count")
+     * @View()
+     */
+    public function countSynthesisElementsAction($id)
+    {
+        return ['count' => $this->get('capco.synthesis.synthesis_element_handler')->countAllElementsFromSynthesis($id)];
+    }
+
+    /**
+     * Get new synthesis elements.
+     *
+     * @return array|\Capco\AppBundle\Entity\Synthesis\SynthesisElement[]
+     *
+     * @ApiDoc(
+     *  resource=true,
+     *  description="Get new synthesis elements",
+     *  statusCodes={
+     *    200 = "Success",
+     *    404 = "Synthesis not found",
+     *  }
+     * )
+     *
+     * @Security("has_role('ROLE_ADMIN')")
      * @Get("/syntheses/{id}/elements/new")
-     * @View(serializerGroups={"Default", "Details"})
+     * @View(serializerGroups={"ElementDetails", "UserDetails"})
      */
     public function getNewSynthesisElementsAction($id)
     {
         return $this->get('capco.synthesis.synthesis_element_handler')->getNewElementsFromSynthesis($id);
+    }
+
+    /**
+     * Count new synthesis elements.
+     *
+     * @return array|\Capco\AppBundle\Entity\Synthesis\SynthesisElement[]
+     *
+     * @ApiDoc(
+     *  resource=true,
+     *  description="Count new elements of a synthesis",
+     *  statusCodes={
+     *    200 = "Success",
+     *  }
+     * )
+     *
+     * @Security("has_role('ROLE_ADMIN')")
+     * @Get("/syntheses/{id}/elements/new/count")
+     * @View()
+     */
+    public function countNewSynthesisElementsAction($id)
+    {
+        return ['count' => $this->get('capco.synthesis.synthesis_element_handler')->countNewElementsFromSynthesis($id)];
+    }
+
+    /**
+     * Get archived synthesis elements.
+     *
+     * @return array|\Capco\AppBundle\Entity\Synthesis\SynthesisElement[]
+     *
+     * @ApiDoc(
+     *  resource=true,
+     *  description="Get all the elements of a synthesis that are archived",
+     *  statusCodes={
+     *    200 = "Success",
+     *    404 = "Synthesis not found",
+     *  }
+     * )
+     *
+     * @Get("/syntheses/{id}/elements/archived")
+     * @View(serializerGroups={"ElementDetails", "UserDetails"})
+     */
+    public function getArchivedSynthesisElementsAction($id)
+    {
+        return $this->get('capco.synthesis.synthesis_element_handler')->getArchivedElementsFromSynthesis($id);
+    }
+
+    /**
+     * Count archived synthesis elements.
+     *
+     * @return array|\Capco\AppBundle\Entity\Synthesis\SynthesisElement[]
+     *
+     * @ApiDoc(
+     *  resource=true,
+     *  description="Count archived elements of a synthesis",
+     *  statusCodes={
+     *    200 = "Success",
+     *  }
+     * )
+     *
+     * @Get("/syntheses/{id}/elements/archived/count")
+     * @View()
+     */
+    public function countArchivedSynthesisElementsAction($id)
+    {
+        return ['count' => $this->get('capco.synthesis.synthesis_element_handler')->countArchivedElementsFromSynthesis($id)];
+    }
+
+    /**
+     * Get unpublished synthesis elements.
+     *
+     * @return array|\Capco\AppBundle\Entity\Synthesis\SynthesisElement[]
+     *
+     * @ApiDoc(
+     *  resource=true,
+     *  description="Get all the elements of a synthesis that are unpublished",
+     *  statusCodes={
+     *    200 = "Success",
+     *    404 = "Synthesis not found",
+     *  }
+     * )
+     *
+     * @Security("has_role('ROLE_ADMIN')")
+     * @Get("/syntheses/{id}/elements/unpublished")
+     * @View(serializerGroups={"ElementDetails", "UserDetails"})
+     */
+    public function getUnpublishedSynthesisElementsAction($id)
+    {
+        return $this->get('capco.synthesis.synthesis_element_handler')->getUnpublishedElementsFromSynthesis($id);
+    }
+
+    /**
+     * Count unpublished synthesis elements.
+     *
+     * @return array|\Capco\AppBundle\Entity\Synthesis\SynthesisElement[]
+     *
+     * @ApiDoc(
+     *  resource=true,
+     *  description="Count unpublished elements of a synthesis",
+     *  statusCodes={
+     *    200 = "Success",
+     *  }
+     * )
+     *
+     * @Security("has_role('ROLE_ADMIN')")
+     * @Get("/syntheses/{id}/elements/unpublished/count")
+     * @View()
+     */
+    public function countUnpublishedSynthesisElementsAction($id)
+    {
+        return ['count' => $this->get('capco.synthesis.synthesis_element_handler')->countUnpublishedElementsFromSynthesis($id)];
+    }
+
+    /**
+     * Get root synthesis elements.
+     *
+     * @return array|\Capco\AppBundle\Entity\Synthesis\SynthesisElement[]
+     *
+     * @ApiDoc(
+     *  resource=true,
+     *  description="Get root elements of a synthesis",
+     *  statusCodes={
+     *    200 = "Success",
+     *    404 = "Synthesis not found",
+     *  }
+     * )
+     *
+     * @Security("has_role('ROLE_ADMIN')")
+     * @Get("/syntheses/{id}/elements/root")
+     * @View(serializerGroups={"ElementDetails", "UserDetails"})
+     */
+    public function getRootSynthesisElementsAction($id)
+    {
+        return $this->get('capco.synthesis.synthesis_element_handler')->getRootElementsFromSynthesis($id);
+    }
+
+    /**
+     * Count root synthesis elements.
+     *
+     * @return array|\Capco\AppBundle\Entity\Synthesis\SynthesisElement[]
+     *
+     * @ApiDoc(
+     *  resource=true,
+     *  description="Count root elements of a synthesis",
+     *  statusCodes={
+     *    200 = "Success",
+     *  }
+     * )
+     *
+     * @Security("has_role('ROLE_ADMIN')")
+     * @Get("/syntheses/{id}/elements/root/count")
+     * @View()
+     */
+    public function countRootSynthesisElementsAction($id)
+    {
+        return ['count' => $this->get('capco.synthesis.synthesis_element_handler')->countRootElementsFromSynthesis($id)];
     }
 
     /**
@@ -243,7 +422,7 @@ class SynthesisController extends FOSRestController
      * @Get("/syntheses/{synthesis_id}/elements/{element_id}")
      * @ParamConverter("synthesis", options={"mapping": {"synthesis_id": "id"}})
      * @ParamConverter("element", options={"mapping": {"element_id": "id"}})
-     * @View(serializerGroups={"Default", "ElementDetails"})
+     * @View(serializerGroups={"ElementDetails", "UserDetails"})
      */
     public function getSynthesisElementAction(Synthesis $synthesis, SynthesisElement $element)
     {
@@ -262,6 +441,7 @@ class SynthesisController extends FOSRestController
      *  }
      * )
      *
+     * @Security("has_role('ROLE_ADMIN')")
      * @Post("/syntheses/{id}/elements")
      * @ParamConverter("synthesis", options={"mapping": {"id": "id"}})
      * @ParamConverter("element", converter="fos_rest.request_body")
@@ -275,7 +455,7 @@ class SynthesisController extends FOSRestController
         $element = $this->get('capco.synthesis.synthesis_element_handler')->createElementInSynthesis($element, $synthesis);
 
         $view = $this->view($element, Codes::HTTP_CREATED);
-        $view->setSerializationContext(SerializationContext::create()->setGroups(array('Default', 'ElementDetails')));
+        $view->setSerializationContext(SerializationContext::create()->setGroups(array('ElementDetails', 'UserDetails')));
         $url = $this->generateUrl('get_synthesis_element', ['synthesis_id' => $synthesis->getId(), 'element_id' => $element->getId()], UrlGeneratorInterface::ABSOLUTE_URL);
         $view->setHeader('Location', $url);
 
@@ -294,10 +474,11 @@ class SynthesisController extends FOSRestController
      *  }
      * )
      *
+     * @Security("has_role('ROLE_ADMIN')")
      * @Put("/syntheses/{synthesis_id}/elements/{element_id}")
      * @ParamConverter("synthesis", options={"mapping": {"synthesis_id": "id"}})
      * @ParamConverter("element", options={"mapping": {"element_id": "id"}})
-     * @View(serializerGroups={"Default", "ElementDetails"})
+     * @View(serializerGroups={"ElementDetails", "UserDetails"})
      */
     public function updateSynthesisElementAction(Request $request, Synthesis $synthesis, SynthesisElement $element)
     {
@@ -307,9 +488,7 @@ class SynthesisController extends FOSRestController
         if ($form->isValid()) {
             $element = $this->get('capco.synthesis.synthesis_element_handler')->updateElementInSynthesis($element, $synthesis);
 
-            $url = $this->generateUrl('get_synthesis_element', ['synthesis_id' => $synthesis->getId(), 'element_id' => $element->getId()], UrlGeneratorInterface::ABSOLUTE_URL);
-
-            return $this->redirectView($url);
+            return $element;
         }
 
         return $form;
@@ -327,11 +506,12 @@ class SynthesisController extends FOSRestController
      *  }
      * )
      *
+     * @Security("has_role('ROLE_ADMIN')")
      * @Post("/syntheses/{synthesis_id}/elements/{element_id}/divisions")
      * @ParamConverter("synthesis", options={"mapping": {"synthesis_id": "id"}})
      * @ParamConverter("element", options={"mapping": {"element_id": "id"}})
      * @ParamConverter("division", converter="fos_rest.request_body")
-     * @View(serializerGroups={"Default"})
+     * @View(serializerGroups={"SynthesisDetails", "Elements"})
      */
     public function divideSynthesisElementAction(Request $request, Synthesis $synthesis, SynthesisElement $element, SynthesisDivision $division)
     {
@@ -361,10 +541,11 @@ class SynthesisController extends FOSRestController
      *  }
      * )
      *
+     * @Security("has_role('ROLE_ADMIN')")
      * @Get("/syntheses/{synthesis_id}/elements/{element_id}/history")
      * @ParamConverter("synthesis", options={"mapping": {"synthesis_id": "id"}})
      * @ParamConverter("element", options={"mapping": {"element_id": "id"}})
-     * @View(serializerGroups={"Default"})
+     * @View(serializerGroups={"Elements", "LogDetails"})
      */
     public function getSynthesisElementHistoryAction(Request $request, Synthesis $synthesis, SynthesisElement $element)
     {

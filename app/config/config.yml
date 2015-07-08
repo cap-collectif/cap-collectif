@@ -65,6 +65,9 @@ doctrine:
             alias: GedmoLoggable
             prefix: Gedmo\Loggable\Entity
             dir: "%kernel.root_dir%/../vendor/gedmo/doctrine-extensions/lib/Gedmo/Loggable/Entity"
+        resolve_target_entities:
+          # Used to tell synthesis tool wich entity to use for users. If none is defined in the project, you can use Capco\AppBundle\Entity\Synthesis\SynthesisUser
+          Capco\AppBundle\Entity\Synthesis\SynthesisUserInterface: Capco\UserBundle\Entity\User
 
 swiftmailer:
     transport: "%mailer_transport%"

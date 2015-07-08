@@ -2,16 +2,18 @@
 
 namespace Capco\AppBundle\Entity\Synthesis;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use JMS\Serializer\Annotation as Serializer;
 use Hateoas\Configuration\Annotation as Hateoas;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * SynthesisElement.
  *
  * @ORM\Table(name="synthesis_element")
- * @ORM\Entity()
+ * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\Synthesis\SynthesisElementRepository")
  * @ORM\HasLifecycleCallbacks()
  * @Gedmo\Loggable()
  * @Gedmo\SoftDeleteable(fieldName="deletedAt")
@@ -24,7 +26,8 @@ use Hateoas\Configuration\Annotation as Hateoas;
  *              "synthesis_id" = "expr(object.getSynthesis().getId())",
  *              "element_id" = "expr(object.getId())"
  *          }
- *      )
+ *      ),
+ *      exclusion = @Hateoas\Exclusion(groups = {"Elements", "ElementDetails"})
  * )
  * @Hateoas\Relation(
  *      "divide",
@@ -34,7 +37,8 @@ use Hateoas\Configuration\Annotation as Hateoas;
  *              "synthesis_id" = "expr(object.getSynthesis().getId())",
  *              "element_id" = "expr(object.getId())"
  *          }
- *      )
+ *      ),
+ *      exclusion = @Hateoas\Exclusion(groups = {"Elements", "ElementDetails"})
  * )
  * @Hateoas\Relation(
  *      "history",
@@ -44,17 +48,8 @@ use Hateoas\Configuration\Annotation as Hateoas;
  *              "synthesis_id" = "expr(object.getSynthesis().getId())",
  *              "element_id" = "expr(object.getId())"
  *          }
- *      )
- * )
- * @Hateoas\Relation(
- *      name = "parent",
- *      embedded = @Hateoas\Embedded(
- *          "expr(object.getParent())",
- *          exclusion = @Hateoas\Exclusion(
- *              groups = {"ElementDetails"},
- *              excludeIf = "expr(!object.getParent())"
- *          )
- *      )
+ *      ),
+ *      exclusion = @Hateoas\Exclusion(groups = {"Elements", "ElementDetails"})
  * )
  */
 class SynthesisElement
@@ -66,6 +61,7 @@ class SynthesisElement
      * @ORM\Column(name="id", type="guid")
      * @ORM\GeneratedValue(strategy="UUID")
      * @Serializer\Expose
+     * @Serializer\Groups({"Elements", "ElementDetails"})
      */
     private $id;
 
@@ -81,6 +77,8 @@ class SynthesisElement
      * @var \DateTime
      * @ORM\Column(name="created_at", type="datetime")
      * @Gedmo\Timestampable(on="create")
+     * @Serializer\Expose
+     * @Serializer\Groups({"ElementDetails"})
      */
     private $createdAt;
 
@@ -88,6 +86,8 @@ class SynthesisElement
      * @var \DateTime
      * @Gedmo\Timestampable(on="change", field={"title", "body", "archived", "enabled", "parent", "notation"})
      * @ORM\Column(name="updated_at", type="datetime")
+     * @Serializer\Expose
+     * @Serializer\Groups({"ElementDetails"})
      */
     private $updatedAt;
 
@@ -115,6 +115,15 @@ class SynthesisElement
 
     /**
      * @var
+     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Synthesis\SynthesisUserInterface")
+     * @ORM\JoinColumn(name="author_id", referencedColumnName="id", onDelete="SET NULL")
+     * @Serializer\Expose
+     * @Serializer\Groups({"ElementDetails", "UserDetails"})
+     */
+    private $author;
+
+    /**
+     * @var
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Synthesis\SynthesisDivision", inversedBy="elements", cascade={"persist"})
      * @ORM\JoinColumn(name="original_division_id", referencedColumnName="id", nullable=true, onDelete="SET NULL")
      * @Gedmo\Versioned
@@ -123,11 +132,30 @@ class SynthesisElement
 
     /**
      * @var
-     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Synthesis\SynthesisElement")
+     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Synthesis\SynthesisElement", inversedBy="children", cascade={"persist"})
      * @Gedmo\Versioned
-     * @ORM\JoinColumn(name="parent_id", referencedColumnName="id", nullable=true, onDelete="CASCADE")
+     * @ORM\JoinColumn(name="parent_id", referencedColumnName="id", nullable=true, onDelete="SET NULL")
+     * @Serializer\Expose
+     * @Serializer\Groups({"ElementDetails"})
      */
     private $parent = null;
+
+    /**
+     * @var
+     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\Synthesis\SynthesisElement", mappedBy="parent", cascade={"persist"})
+     * @Serializer\Expose
+     * @Serializer\Groups({"ElementDetails"})
+     */
+    private $children;
+
+    /**
+     * @var string
+     * @ORM\Column(name="display_type", type="string", length=255, nullable=false)
+     * @Assert\Choice(choices={"folder", "contribution"})
+     * @Serializer\Expose
+     * @Serializer\Groups({"ElementDetails"})
+     */
+    private $displayType;
 
     /**
      * @var string
@@ -135,6 +163,7 @@ class SynthesisElement
      * @ORM\Column(name="title", type="string", length=255, nullable=true)
      * @Gedmo\Versioned
      * @Serializer\Expose
+     * @Serializer\Groups({"Elements", "ElementDetails"})
      */
     private $title;
 
@@ -159,6 +188,16 @@ class SynthesisElement
     private $notation;
 
     /**
+     * @var int
+     *
+     * @ORM\Column(name="votes", type="array", nullable=true)
+     * @Gedmo\Versioned
+     * @Serializer\Expose
+     * @Serializer\Groups({"ElementDetails"})
+     */
+    private $votes;
+
+    /**
      * @var string
      *
      * @ORM\Column(name="linked_data_class", type="string", length=255, nullable=true)
@@ -178,6 +217,23 @@ class SynthesisElement
      * @ORM\Column(name="linked_data_last_update", type="datetime", nullable=true)
      */
     private $linkedDataLastUpdate = null;
+
+    /**
+     * @var \DateTime
+     * @ORM\Column(name="linked_data_creation", type="datetime", nullable=true)
+     * @Serializer\Expose
+     * @Serializer\Groups({"ElementDetails"})
+     * @Serializer\SerializedName("linkedDataCreation")
+     */
+    private $linkedDataCreation = null;
+
+    public function __construct()
+    {
+        $this->updatedAt = new \DateTime();
+        $this->votes = array();
+        $this->children = new ArrayCollection();
+        $this->displayType = 'folder';
+    }
 
     /**
      * Get id.
@@ -211,6 +267,22 @@ class SynthesisElement
     public function setSynthesis(Synthesis $synthesis)
     {
         $this->synthesis = $synthesis;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getAuthor()
+    {
+        return $this->author;
+    }
+
+    /**
+     * @param mixed $author
+     */
+    public function setAuthor($author)
+    {
+        $this->author = $author;
     }
 
     /**
@@ -294,6 +366,50 @@ class SynthesisElement
     }
 
     /**
+     * @return mixed
+     */
+    public function getChildren()
+    {
+        return $this->children;
+    }
+
+    public function addChild($child)
+    {
+        if ($child && !$this->children->contains($child)) {
+            $this->children[] = $child;
+            $child->setParent($this);
+        }
+
+        return $this;
+    }
+
+    public function removeChild($child)
+    {
+        if ($child) {
+            $this->children->remove($child);
+            $child->setParent(null);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getDisplayType()
+    {
+        return $this->displayType;
+    }
+
+    /**
+     * @param mixed $displayType
+     */
+    public function setDisplayType($displayType)
+    {
+        $this->displayType = $displayType;
+    }
+
+    /**
      * @return string
      */
     public function getTitle()
@@ -374,6 +490,22 @@ class SynthesisElement
     }
 
     /**
+     * @return $votes
+     */
+    public function getVotes()
+    {
+        return $this->votes;
+    }
+
+    /**
+     * @param $votes
+     */
+    public function setVotes($votes)
+    {
+        $this->votes = $votes;
+    }
+
+    /**
      * @return string
      */
     public function getLinkedDataClass()
@@ -387,6 +519,22 @@ class SynthesisElement
     public function setLinkedDataClass($linkedDataClass)
     {
         $this->linkedDataClass = $linkedDataClass;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getLinkedDataCreation()
+    {
+        return $this->linkedDataCreation;
+    }
+
+    /**
+     * @param mixed $linkedDataCreation
+     */
+    public function setLinkedDataCreation($linkedDataCreation)
+    {
+        $this->linkedDataCreation = $linkedDataCreation;
     }
 
     /**
@@ -421,6 +569,20 @@ class SynthesisElement
         $this->linkedDataLastUpdate = $linkedDataLastUpdate;
     }
 
+    //************************** Custom methods *****************************
+
+    /**
+     * @Serializer\VirtualProperty
+     * @Serializer\SerializedName("hasLinkedData")
+     * @Serializer\Groups({"ElementDetails"})
+     *
+     * @return string
+     */
+    public function hasLinkedData()
+    {
+        return $this->linkedDataClass && $this->linkedDataId;
+    }
+
     // ************************* Lifecycle ***********************************
 
     /**
@@ -430,6 +592,15 @@ class SynthesisElement
     {
         if ($this->updatedAt === null) {
             $this->updatedAt = new \DateTime();
+        }
+        if ($this->votes === null) {
+            $this->votes = array();
+        }
+        if ($this->children === null) {
+            $this->children = new ArrayCollection();
+        }
+        if ($this->displayType === null) {
+            $this->displayType = 'folder';
         }
     }
 }

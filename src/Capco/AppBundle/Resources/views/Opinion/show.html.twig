@@ -36,7 +36,7 @@
             {% set nbVotes = (opinion.getVoteCountAll) %}
             {% set nbArguments = (opinion.argumentsCount) %}
             {% set nbSources = (opinion.sourcesCount) %}
-            <div class="col-xs-12  col-sm-8  col-md-9 has-chart" id="details" data-ok="{{ opinion.voteCountOk }}" data-nok="{{ opinion.voteCountNok }}" data-mitige="{{ opinion.voteCountMitige }}" data-opinion-id="{{ opinion.id }}">
+            <div class="col-xs-12  col-sm-8  col-md-9 has-chart" id="details" data-ok="{{ opinion.voteCountOk }}" data-nok="{{ opinion.voteCountNok }}" data-mitige="{{ opinion.voteCountMitige }}" data-pie-id="{{ opinion.id }}">
                 <div class="block  block--bordered  opinion__details">
                     <div class="opinion  opinion--{{ opinion.opinionType.color }}  opinion--current">
                         <div class="opinion__header  opinion__header--centered">

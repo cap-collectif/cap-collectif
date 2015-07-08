@@ -40,6 +40,7 @@ security:
             provider: fos_userbundle
             stateless: true
             anonymous: true
+            context:         user
             form_login:
                 check_path:               /api/login_check
                 username_parameter:       username
@@ -53,6 +54,7 @@ security:
             provider: fos_userbundle
             stateless: true
             anonymous: true
+            context:   user
             lexik_jwt:
                 authorization_header:
                     enabled: true
@@ -65,7 +67,7 @@ security:
             context:             user
             form_login:
                 provider:       fos_userbundle
-                csrf_provider: form.csrf_provider
+                csrf_provider:  form.csrf_provider
                 login_path:     /login
                 check_path:     /login_check
                 use_forward:    false
@@ -88,7 +90,7 @@ security:
         - { path: ^/register, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
 
-        # Admin login page needs to be access without credential
+        # Admin login page needs to be accessed without credential
         - { path: ^/admin/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/admin/logout$, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/admin/login_check$, role: IS_AUTHENTICATED_ANONYMOUSLY }

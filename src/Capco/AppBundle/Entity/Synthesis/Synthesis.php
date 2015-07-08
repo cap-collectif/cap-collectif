@@ -7,6 +7,8 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use JMS\Serializer\Annotation as Serializer;
 use Hateoas\Configuration\Annotation as Hateoas;
+use Capco\AppBundle\Validator\Constraints as CapcoAssert;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * Synthesis.
@@ -14,7 +16,9 @@ use Hateoas\Configuration\Annotation as Hateoas;
  * @ORM\Table(name="synthesis")
  * @ORM\Entity()
  * @ORM\HasLifecycleCallbacks()
+ * @Gedmo\SoftDeleteable(fieldName="deletedAt")
  * @Serializer\ExclusionPolicy("all")
+ * @CapcoAssert\ConsultationStepExists()
  * @Hateoas\Relation(
  *      "self",
  *      href = @Hateoas\Route(
@@ -22,7 +26,8 @@ use Hateoas\Configuration\Annotation as Hateoas;
  *          parameters = {
  *              "id" = "expr(object.getId())"
  *          }
- *      )
+ *      ),
+ *      exclusion = @Hateoas\Exclusion(groups = {"Syntheses", "SynthesisDetails"})
  * )
  * @Hateoas\Relation(
  *      "elements",
@@ -31,18 +36,20 @@ use Hateoas\Configuration\Annotation as Hateoas;
  *          parameters = {
  *              "id" = "expr(object.getId())"
  *          }
- *      )
- * )
- * @Hateoas\Relation(
- *      name = "elements",
- *      embedded = @Hateoas\Embedded(
- *          "expr(object.getElements())",
- *          exclusion = @Hateoas\Exclusion(excludeIf = "expr(!object.getElements() or object.getElements().isEmpty())")
- *      )
+ *      ),
+ *      exclusion = @Hateoas\Exclusion(groups = {"Syntheses", "SynthesisDetails"})
  * )
  */
 class Synthesis
 {
+    const SOURCE_TYPE_NONE = 'none';
+    const SOURCE_TYPE_CONSULTATION = 'consultation_step';
+
+    public static $sourceTypesLabels = [
+        self::SOURCE_TYPE_CONSULTATION => 'synthesis.source_types.consultation_step',
+        self::SOURCE_TYPE_NONE => 'synthesis.source_types.none',
+    ];
+
     /**
      * @var int
      *
@@ -50,6 +57,7 @@ class Synthesis
      * @ORM\Column(name="id", type="guid")
      * @ORM\GeneratedValue(strategy="UUID")
      * @Serializer\Expose
+     * @Serializer\Groups({"Syntheses", "SynthesisDetails"})
      */
     private $id;
 
@@ -59,6 +67,13 @@ class Synthesis
      * @Serializer\Groups({"SynthesisDetails"})
      */
     private $enabled = false;
+
+    /**
+     * @ORM\Column(name="editable", type="boolean")
+     * @Serializer\Expose
+     * @Serializer\Groups({"SynthesisDetails"})
+     */
+    private $editable = true;
 
     /**
      * @var string
@@ -78,8 +93,16 @@ class Synthesis
     /**
      * @var
      * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\Synthesis\SynthesisElement", mappedBy="synthesis", cascade={"persist", "remove"}, orphanRemoval=true)
+     * @Serializer\Expose
+     * @Serializer\Groups({"Syntheses", "SynthesisDetails", "Elements"})
      */
     private $elements;
+
+    /**
+     * @var \DateTime
+     * @ORM\Column(name="deleted_at", type="datetime", nullable=true)
+     */
+    private $deletedAt;
 
     public function __construct()
     {
@@ -122,6 +145,22 @@ class Synthesis
         $this->enabled = $enabled;
 
         return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function isEditable()
+    {
+        return $this->editable;
+    }
+
+    /**
+     * @param mixed $editable
+     */
+    public function setEditable($editable)
+    {
+        $this->editable = $editable;
     }
 
     /**
@@ -189,6 +228,22 @@ class Synthesis
         $this->elements->removeElement($element);
 
         return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getDeletedAt()
+    {
+        return $this->deletedAt;
+    }
+
+    /**
+     * @param mixed $deletedAt
+     */
+    public function setDeletedAt($deletedAt)
+    {
+        $this->deletedAt = $deletedAt;
     }
 
     // ************************* Lifecycle ***********************************

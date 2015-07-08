@@ -46,6 +46,7 @@ admin.label.section: Accueil (sections)
 admin.label.user_type: Types de profil
 admin.label.highlighted: A la une
 admin.label.consultation_abstractstep: Étape d'une consultation
+admin.label.synthesis: Synthèse
 
 admin.label.pages.homepage: Accueil
 admin.label.pages.ideas: Idées
@@ -87,6 +88,8 @@ admin:
     event:
       adress: Il est nécessaire de spécifier au moins l'adresse et la ville pour afficher la carte.
       endAt: Si l'évènement ne dure qu'une journée, ne renseignez pas de date de fin.
+    synthesis:
+      consultation_step: La création d'une nouvelle synthèse à partir d'une étape de consultation peut prendre un peu de temps, toutes les contributions étant exportées vers l'outil de synthèse. Pas d'inquiétude, cela est tout à fait normal.
 
   features:
     title:
@@ -406,6 +409,13 @@ admin:
       body: Contenu
       updated_at: Mise à jour
       created_at: Création
+      synthesis: Synthèse
+    synthesis:
+      enabled: Publiée
+      editable: Contribuable
+      consultation_step: Étape de consultation
+      consultation_step_empty: Aucune
+      source_type: Source des données
     theme:
       title: Titre
       is_enabled: Publié
@@ -534,3 +544,4 @@ post_comment: un commentaire sur un article
 other_step: Autre étape
 consultation_step: Étape de consultation
 presentation_step: Étape de présentation
+synthesis_step: Étape de synthèse

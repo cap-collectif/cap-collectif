@@ -58,7 +58,7 @@ class ConsultationStepExtractor
                 }
                 if (null === $elementFromArgument) {
                     $elementFromArgument = $this->createElementFromArgument($argument);
-                    $elementFromArgument->setParent($elementFromOpinion);
+                    $elementFromOpinion->addChild($elementFromArgument);
                     $synthesis->addElement($elementFromArgument);
                 }
             }
@@ -84,6 +84,8 @@ class ConsultationStepExtractor
         $element = new SynthesisElement();
         $element->setLinkedDataClass(get_class($opinion));
         $element->setLinkedDataId($opinion->getId());
+        $element->setLinkedDataCreation($opinion->getCreatedAt());
+        $element->setDisplayType('contribution');
 
         return $this->updateElementFromOpinion($element, $opinion);
     }
@@ -93,6 +95,8 @@ class ConsultationStepExtractor
         $element = new SynthesisElement();
         $element->setLinkedDataClass(get_class($argument));
         $element->setLinkedDataId($argument->getId());
+        $element->setLinkedDataCreation($argument->getCreatedAt());
+        $element->setDisplayType('contribution');
 
         return $this->updateElementFromArgument($element, $argument);
     }
@@ -121,15 +125,33 @@ class ConsultationStepExtractor
 
     public function updateElementFromOpinion(SynthesisElement $element, Opinion $opinion)
     {
+        // Set author
+        $element->setAuthor($opinion->getAuthor());
+
         $element->setTitle($opinion->getTitle());
         $element->setBody($opinion->getBody());
+
+        // Set votes
+        $votes = array();
+        $votes['-1'] = $opinion->getVoteCountNok();
+        $votes['0'] = $opinion->getVoteCountMitige();
+        $votes['1'] = $opinion->getVoteCountOk();
+        $element->setVotes($votes);
 
         return $element;
     }
 
     public function updateElementFromArgument(SynthesisElement $element, Argument $argument)
     {
+        // Set author
+        $element->setAuthor($argument->getAuthor());
+
         $element->setBody($argument->getBody());
+
+        // Set votes
+        $votes = array();
+        $votes['1'] = $argument->getVoteCount();
+        $element->setVotes($votes);
 
         return $element;
     }

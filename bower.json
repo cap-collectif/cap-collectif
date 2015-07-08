@@ -30,7 +30,8 @@
     "react-intl": "~1.2.0",
     "autosize": "~3.0.6",
     "css-spinners": "~2.1.0",
-    "es6-promise": "~2.2.0"
+    "es6-promise": "~2.2.0",
+    "react-router": "~0.13.3"
   },
   "overrides": {
     "fancybox": {

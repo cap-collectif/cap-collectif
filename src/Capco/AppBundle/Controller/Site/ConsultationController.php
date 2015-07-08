@@ -89,7 +89,6 @@ class ConsultationController extends Controller
 
         return [
             'consultation' => $consultation,
-            'statuses' => Theme::$statuses,
             'currentStep' => $currentStep,
         ];
     }
@@ -423,7 +422,6 @@ class ConsultationController extends Controller
 
         $parameters = [
             'consultations' => $consultations,
-            'statuses' => Consultation::$openingStatuses,
             'page' => $page,
             'nbPage' => $nbPage,
         ];

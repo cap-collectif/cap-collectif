@@ -118,12 +118,13 @@
             </ul>
         {% endif %}
 
-        {% set consultationStepOpen = consultation.consultationStepOpen %}
-        {% if consultationStepOpen and consultationStepOpen.canContribute %}
-            <a class="btn  btn-primary" href="{{ path('app_consultation_show', {'consultationSlug': consultation.slug, 'stepSlug': consultationStepOpen.slug}) }}">{{ 'step.presentation.participe' | trans({}, 'CapcoAppBundle') }}</a>
-        {% endif %}
-
         <div style="margin-top: 15px">
+
+            {% set consultationStepOpen = consultation.consultationStepOpen %}
+            {% if consultationStepOpen and consultationStepOpen.canContribute %}
+                <a class="btn  btn-primary" href="{{ path('app_consultation_show', {'consultationSlug': consultation.slug, 'stepSlug': consultationStepOpen.slug}) }}">{{ 'step.presentation.participe' | trans({}, 'CapcoAppBundle') }}</a>
+            {% endif %}
+
             {{ sonata_block_render({'type': 'capco.block.service.share_button'}, {
                 'url': (consultation | capco_first_step_link(true)),
                 'title': consultation.title

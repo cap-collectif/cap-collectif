@@ -5,6 +5,7 @@ namespace spec\Capco\AppBundle\Synthesis\Handler;
 use Capco\AppBundle\Entity\Synthesis\Synthesis;
 use Capco\AppBundle\Entity\Synthesis\SynthesisDivision;
 use Capco\AppBundle\Entity\Synthesis\SynthesisElement;
+use Capco\AppBundle\Repository\Synthesis\SynthesisElementRepository;
 use PhpSpec\ObjectBehavior;
 use Capco\AppBundle\Manager\LogManager;
 use Doctrine\ORM\EntityManager;
@@ -24,12 +25,12 @@ class SynthesisElementHandlerSpec extends ObjectBehavior
         $this->shouldHaveType('Capco\AppBundle\Synthesis\Handler\SynthesisElementHandler');
     }
 
-    function it_can_get_all_elements_from_synthesis(EntityManager $em, LogManager $logManager, EntityRepository $synthesisRepo, EntityRepository $synthesisElementRepo, ArrayCollection $collection, Synthesis $synthesis, $id)
+    function it_can_get_all_elements_from_synthesis(EntityManager $em, LogManager $logManager, EntityRepository $synthesisRepo, SynthesisElementRepository $synthesisElementRepo, ArrayCollection $collection, Synthesis $synthesis, $id)
     {
         $em->getRepository('CapcoAppBundle:Synthesis\Synthesis')->willReturn($synthesisRepo)->shouldBeCalled();
         $em->getRepository('CapcoAppBundle:Synthesis\SynthesisElement')->willReturn($synthesisElementRepo)->shouldBeCalled();
         $synthesisRepo->find($id)->willReturn($synthesis)->shouldBeCalled();
-        $synthesisElementRepo->findBy(array(
+        $synthesisElementRepo->getWith(array(
             'synthesis' => $synthesis
         ))->willReturn($collection)->shouldBeCalled();
 
@@ -37,14 +38,15 @@ class SynthesisElementHandlerSpec extends ObjectBehavior
         $this->getAllElementsFromSynthesis($id)->shouldReturnAnInstanceOf('Doctrine\Common\Collections\ArrayCollection');
     }
 
-    function it_can_get_new_elements_from_synthesis(EntityManager $em, LogManager $logManager, EntityRepository $synthesisRepo, EntityRepository $synthesisElementRepo, ArrayCollection $collection, Synthesis $synthesis, $id)
+    function it_can_get_new_elements_from_synthesis(EntityManager $em, LogManager $logManager, EntityRepository $synthesisRepo, SynthesisElementRepository $synthesisElementRepo, ArrayCollection $collection, Synthesis $synthesis, $id)
     {
         $em->getRepository('CapcoAppBundle:Synthesis\Synthesis')->willReturn($synthesisRepo)->shouldBeCalled();
         $em->getRepository('CapcoAppBundle:Synthesis\SynthesisElement')->willReturn($synthesisElementRepo)->shouldBeCalled();
         $synthesisRepo->find($id)->willReturn($synthesis)->shouldBeCalled();
-        $synthesisElementRepo->findBy(array(
+        $synthesisElementRepo->getWith(array(
             'synthesis' => $synthesis,
             'archived' => false,
+            'enabled' => true,
         ))->willReturn($collection)->shouldBeCalled();
 
         $this->beConstructedWith($em, $logManager);

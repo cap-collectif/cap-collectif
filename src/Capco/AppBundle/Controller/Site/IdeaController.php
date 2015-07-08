@@ -31,7 +31,7 @@ class IdeaController extends Controller
      */
     public function createAction(Request $request)
     {
-        if (!$this->get('security.context')->isGranted('ROLE_USER')) {
+        if (!$this->get('security.authorization_checker')->isGranted('ROLE_USER')) {
             throw new AccessDeniedException($this->get('translator')->trans('error.access_restricted', array(), 'CapcoAppBundle'));
         }
 

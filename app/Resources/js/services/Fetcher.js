@@ -11,7 +11,10 @@ function status(response) {
 };
 
 function json(response) {
-   return response.json();
+  if (response) {
+    return response.json()
+  }
+  return {};
 };
 
 function createHeaders() {

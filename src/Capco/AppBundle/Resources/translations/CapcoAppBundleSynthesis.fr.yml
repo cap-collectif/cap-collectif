@@ -1,12 +1,17 @@
 synthesis:
-   logs:
-      sentence:
-          create: %author% a créé l'élément %element%
-          remove: %author% a supprimé l'élément %element%
-          update: %author% a mis à jour l'élément %element%
-          move: %author% a déplacé l'élément %element%
-          publish: %author% a publié l'élément %element%
-          unpublish: %author% a dépublié l'élément %element%
-          archive: %author% a marqué l'élément %element% comme traité
-          note: %author% a modifié la note de l'élément %element%
-          divide: %author% a divisé l'élément %element%
+
+  logs:
+    sentence:
+      create: %author% a créé l'élément %element%
+      remove: %author% a supprimé l'élément %element%
+      update: %author% a mis à jour l'élément %element%
+      move: %author% a déplacé l'élément %element%
+      publish: %author% a publié l'élément %element%
+      unpublish: %author% a dépublié l'élément %element%
+      archive: %author% a marqué l'élément %element% comme traité
+      note: %author% a modifié la note de l'élément %element%
+      divide: %author% a divisé l'élément %element%
+
+  source_types:
+    none: Aucune
+    consultation_step: Étape de consultation

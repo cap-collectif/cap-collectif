@@ -3,6 +3,7 @@
 namespace spec\Capco\AppBundle\Synthesis\Extractor;
 
 use Capco\AppBundle\Entity\Synthesis\SynthesisDivision;
+use Capco\UserBundle\Entity\User;
 use PhpSpec\ObjectBehavior;
 use Doctrine\ORM\EntityManager;
 use Capco\AppBundle\Entity\ConsultationStep;
@@ -162,11 +163,15 @@ class ConsultationStepExtractorSpec extends ObjectBehavior
         $element->getLinkedDataId()->shouldReturn(42);
     }
 
-    function it_can_update_an_element_from_an_object(SynthesisElement $element, SynthesisDivision $division, EntityManager $em, Opinion $object)
+    function it_can_update_an_element_from_an_object(SynthesisElement $element, SynthesisDivision $division, User $author, EntityManager $em, Opinion $object)
     {
         $date = new \DateTime();
         $object->getTitle()->willReturn('test')->shouldBeCalled();
         $object->getBody()->willReturn('blabla')->shouldBeCalled();
+        $object->getAuthor()->willReturn($author)->shouldBeCalled();
+        $object->getVoteCountOk()->willReturn(25)->shouldBeCalled();
+        $object->getVoteCountNok()->willReturn(25)->shouldBeCalled();
+        $object->getVoteCountMitige()->willReturn(25)->shouldBeCalled();
 
         // Element comes from a division
         $element->getOriginalDivision()->willReturn($division)->shouldBeCalled();
@@ -177,29 +182,41 @@ class ConsultationStepExtractorSpec extends ObjectBehavior
         // Element does not come from a division
         $element->getOriginalDivision()->willReturn(null)->shouldBeCalled();
         $element->setLinkedDataLastUpdate($date)->shouldBeCalled();
+        $element->setAuthor($author)->shouldBeCalled();
         $element->setArchived(false)->shouldBeCalled();
         $element->setDeletedAt(null)->shouldBeCalled();
         $element->setTitle('test')->shouldBeCalled();
         $element->setBody('blabla')->shouldBeCalled();
+        $element->setVotes([-1 => 25, 0 => 25, 1 => 25])->shouldBeCalled();
         $object->getUpdatedAt()->willReturn($date)->shouldBeCalled();
 
         $this->updateElementFromObject($element, $object)->shouldReturnAnInstanceOf('Capco\AppBundle\Entity\Synthesis\SynthesisElement');
     }
 
-    function it_can_update_an_element_from_an_opinion(SynthesisElement $element, Opinion $opinion)
+    function it_can_update_an_element_from_an_opinion(SynthesisElement $element, Opinion $opinion, User $author)
     {
         $opinion->getTitle()->willReturn('test')->shouldBeCalled();
         $opinion->getBody()->willReturn('blabla')->shouldBeCalled();
+        $opinion->getAuthor()->willReturn($author)->shouldBeCalled();
+        $opinion->getVoteCountOk()->willReturn(25)->shouldBeCalled();
+        $opinion->getVoteCountNok()->willReturn(25)->shouldBeCalled();
+        $opinion->getVoteCountMitige()->willReturn(25)->shouldBeCalled();
         $element->setTitle('test')->shouldBeCalled();
         $element->setBody('blabla')->shouldBeCalled();
+        $element->setAuthor($author)->shouldBeCalled();
+        $element->setVotes([-1 => 25, 0 => 25, 1 => 25])->shouldBeCalled();
 
         $this->updateElementFromOpinion($element, $opinion)->shouldReturnAnInstanceOf('Capco\AppBundle\Entity\Synthesis\SynthesisElement');
     }
 
-    function it_can_update_an_element_from_an_argument(SynthesisElement $element, Argument $argument)
+    function it_can_update_an_element_from_an_argument(SynthesisElement $element, Argument $argument, User $author)
     {
         $argument->getBody()->willReturn('blabla')->shouldBeCalled();
+        $argument->getAuthor()->willReturn($author)->shouldBeCalled();
+        $argument->getVoteCount()->willReturn(25)->shouldBeCalled();
         $element->setBody('blabla')->shouldBeCalled();
+        $element->setAuthor($author)->shouldBeCalled();
+        $element->setVotes([1 => 25])->shouldBeCalled();
 
         $this->updateElementFromArgument($element, $argument)->shouldReturnAnInstanceOf('Capco\AppBundle\Entity\Synthesis\SynthesisElement');
     }

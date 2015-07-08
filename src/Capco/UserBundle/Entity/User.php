@@ -11,6 +11,7 @@
 
 namespace Capco\UserBundle\Entity;
 
+use Capco\AppBundle\Entity\Synthesis\SynthesisUserInterface;
 use Sonata\UserBundle\Entity\BaseUser as BaseUser;
 use Sonata\UserBundle\Model\UserInterface;
 use Symfony\Component\Security\Core\Encoder\EncoderAwareInterface;
@@ -24,7 +25,7 @@ use Doctrine\Common\Collections\ArrayCollection;
  *
  * @author <yourname> <youremail>
  */
-class User extends BaseUser implements EncoderAwareInterface
+class User extends BaseUser implements EncoderAwareInterface, SynthesisUserInterface
 {
     const SORT_ORDER_CREATED_AT = 0;
     const SORT_ORDER_CONTRIBUTIONS_COUNT = 1;
@@ -94,7 +95,7 @@ class User extends BaseUser implements EncoderAwareInterface
     protected $twitter_url;
 
     /**
-     * @var Capco\MediaBundle\Entity\Media
+     * @var
      */
     protected $Media;
 
@@ -834,5 +835,27 @@ class User extends BaseUser implements EncoderAwareInterface
     public function getCommentsCount()
     {
         return $this->ideaCommentsCount + $this->postCommentsCount + $this->eventCommentsCount;
+    }
+
+    // ********************* Methods for synthesis tool **************************
+
+    /**
+     * Get unique identifier.
+     *
+     * @return int
+     */
+    public function getUniqueIdentifier()
+    {
+        return $this->slug;
+    }
+
+    /**
+     * Get display name.
+     *
+     * @return string
+     */
+    public function getDisplayName()
+    {
+        return $this->username;
     }
 }

@@ -2,6 +2,7 @@ Feature: Synthesis
   As an API client
   I want to manage syntheses
 
+  @database
   Scenario: API client wants to list syntheses
     Given I am logged in to api as admin
     And there is a synthesis with id "42" and elements:
@@ -12,40 +13,29 @@ Feature: Synthesis
     [
       {
         "id": @string@,
+        "elements": [
+          {
+            "id": @string@,
+            "title": @string@,
+            "_links": {
+              "self": { "href": "@string@.startsWith('/api/syntheses/').contains('/elements/')" },
+              "divide": { "href": "@string@.startsWith('/api/syntheses/').contains('/elements/').endsWith('/divisions')" },
+              "history": { "href": "@string@.startsWith('/api/syntheses/').contains('/elements/').endsWith('/history')" }
+            }
+          }
+        ],
         "_links": {
           "self": { "href": "@string@.startsWith('/api/syntheses/')" },
           "elements": { "href": "@string@.startsWith('/api/syntheses/').endsWith('/elements')" }
-        },
-        "_embedded": {
-          "elements": [
-            {
-              "id": @string@,
-              "title": @string@,
-              "_links": {
-                "self": { "href": "@string@.startsWith('/api/syntheses/').contains('/elements/')" },
-                "divide": { "href": "@string@.startsWith('/api/syntheses/').contains('/elements/').endsWith('/divisions')" },
-                "history": { "href": "@string@.startsWith('/api/syntheses/').contains('/elements/').endsWith('/history')" }
-              }
-            }
-          ]
         }
       },
       @...@
     ]
     """
 
-  Scenario: Non admin API client wants to list syntheses
-    Given I am logged in to api as user
-    And I send a GET request to "/api/syntheses"
-    Then the JSON response status code should be 403
-
-  Scenario: Anonymous API client wants to list syntheses
-    Given I send a GET request to "/api/syntheses"
-    Then the JSON response status code should be 401
-
+  @database
   Scenario: API client wants to get a synthesis
-    Given I am logged in to api as admin
-    And there is a synthesis with id "42" and elements:
+    Given there is a synthesis with id "42" and elements:
       | 43 |
     And I send a GET request to "/api/syntheses/42"
     Then the JSON response should match:
@@ -53,40 +43,25 @@ Feature: Synthesis
     {
       "id": "42",
       "enabled": true,
+      "editable": true,
       "_links": {
         "self": { "href": "/api/syntheses/42" },
         "elements": { "href": "/api/syntheses/42/elements" }
       },
-      "_embedded": {
-        "elements": [
-          {
-            "id": "43",
-            "title": "Je suis un élément",
-            "_links": {
-              "self": { "href": "/api/syntheses/42/elements/43" },
-              "divide": { "href": "/api/syntheses/42/elements/43/divisions" },
-              "history": { "href": "/api/syntheses/42/elements/43/history" }
-            }
+      "elements": [
+        {
+          "id": "43",
+          "title": "Je suis un élément",
+          "_links": {
+            "self": { "href": "/api/syntheses/42/elements/43" },
+            "divide": { "href": "/api/syntheses/42/elements/43/divisions" },
+            "history": { "href": "/api/syntheses/42/elements/43/history" }
           }
-        ]
-      }
+        }
+      ]
     }
     """
 
-  Scenario: Non admin API client wants to get a synthesis
-    Given I am logged in to api as user
-    And there is a synthesis with id "42" and elements:
-      | 43 |
-    And I send a GET request to "/api/syntheses/42"
-    Then the JSON response status code should be 403
-
-  Scenario: Anonymous API client wants to get a synthesis
-    Given there is a synthesis with id "42" and elements:
-      | 43 |
-    And I send a GET request to "/api/syntheses/42"
-    Then the JSON response status code should be 401
-
-  @database
   Scenario: API client wants to create a synthesis
     Given I am logged in to api as admin
     And I send a POST request to "/api/syntheses" with json:
@@ -101,6 +76,8 @@ Feature: Synthesis
     {
       "id": @string@,
       "enabled": true,
+      "editable": true,
+      "elements": [],
       "_links": {
         "self": { "href": "@string@.startsWith('/api/syntheses/')" },
         "elements": { "href": "@string@.startsWith('/api/syntheses/').endsWith('/elements')" }
@@ -127,7 +104,6 @@ Feature: Synthesis
     """
     Then the JSON response status code should be 401
 
-  @database
   Scenario: API client wants to create a synthesis from a consultation step
     Given I am logged in to api as admin
     And I send a POST request to "/api/syntheses/from-consultation-step/2" with json:
@@ -142,47 +118,46 @@ Feature: Synthesis
     {
       "id": @string@,
       "enabled": true,
+      "editable": true,
+      "elements": [
+        {
+          "id": @string@,
+          "title": "Opinion 51",
+          "_links": {
+            "self": { "href": "@string@.startsWith('/api/syntheses/').contains('/elements')" },
+            "divide": { "href": "@string@.startsWith('/api/syntheses/').contains('/elements/').endsWith('/divisions')" },
+            "history": { "href": "@string@.startsWith('/api/syntheses/').contains('/elements/').endsWith('/history')" }
+          }
+        },
+        {
+          "id": @string@,
+          "title": @null@,
+          "_links": "@*@"
+        },
+        {
+          "id": @string@,
+          "title": @null@,
+          "_links": "@*@"
+        },
+        {
+          "id": @string@,
+          "title": "Opinion 52",
+          "_links": "@*@"
+        },
+        {
+          "id": @string@,
+          "title": @null@,
+          "_links": "@*@"
+        },
+        {
+          "id": @string@,
+          "title": "Opinion 53",
+          "_links": "@*@"
+        }
+      ],
       "_links": {
         "self": { "href": "@string@.startsWith('/api/syntheses/')" },
         "elements": { "href": "@string@.startsWith('/api/syntheses/').endsWith('/elements')" }
-      },
-      "_embedded": {
-        "elements": [
-          {
-            "id": @string@,
-            "title": "Opinion 51",
-            "_links": {
-              "self": { "href": "@string@.startsWith('/api/syntheses/').contains('/elements')" },
-              "divide": { "href": "@string@.startsWith('/api/syntheses/').contains('/elements/').endsWith('/divisions')" },
-              "history": { "href": "@string@.startsWith('/api/syntheses/').contains('/elements/').endsWith('/history')" }
-            }
-          },
-          {
-            "id": @string@,
-            "title": @null@,
-            "_links": "@*@"
-          },
-          {
-            "id": @string@,
-            "title": @null@,
-            "_links": "@*@"
-          },
-          {
-            "id": @string@,
-            "title": "Opinion 52",
-            "_links": "@*@"
-          },
-          {
-            "id": @string@,
-            "title": @null@,
-            "_links": "@*@"
-          },
-          {
-            "id": @string@,
-            "title": "Opinion 53",
-            "_links": "@*@"
-          }
-        ]
       }
     }
     """
@@ -204,26 +179,26 @@ Feature: Synthesis
     {
       "id": "42",
       "enabled": false,
+      "editable": true,
+      "elements": [
+        {
+          "id": "43",
+          "title": "Je suis un élément",
+          "_links": {
+            "self": { "href": "/api/syntheses/42/elements/43" },
+            "divide": { "href": "/api/syntheses/42/elements/43/divisions" },
+            "history": { "href": "/api/syntheses/42/elements/43/history" }
+          }
+        }
+      ],
       "_links": {
         "self": { "href": "/api/syntheses/42" },
         "elements": { "href": "/api/syntheses/42/elements" }
-      },
-      "_embedded": {
-        "elements": [
-          {
-            "id": "43",
-            "title": "Je suis un élément",
-            "_links": {
-              "self": { "href": "/api/syntheses/42/elements/43" },
-              "divide": { "href": "/api/syntheses/42/elements/43/divisions" },
-              "history": { "href": "/api/syntheses/42/elements/43/history" }
-            }
-          }
-        ]
       }
     }
     """
 
+  @database
   Scenario: Non admin API client wants to update a synthesis
     Given I am logged in to api as user
     And there is a synthesis with id "42" and elements:
@@ -236,6 +211,7 @@ Feature: Synthesis
     """
     Then the JSON response status code should be 403
 
+  @database
   Scenario: Anonymous API client wants to update a synthesis
     Given there is a synthesis with id "42" and elements:
       | 43 |
@@ -247,6 +223,7 @@ Feature: Synthesis
     """
     Then the JSON response status code should be 401
 
+  @database
   Scenario: API client wants to get synthesis elements
     Given I am logged in to api as admin
     And there is a synthesis with id "42" and elements:
@@ -256,8 +233,30 @@ Feature: Synthesis
     """
     [
       {
+        "hasLinkedData": false,
         "id": "43",
+        "enabled": true,
+        "created_at": "@string@.isDateTime()",
+        "updated_at": "@string@.isDateTime()",
+        "archived": false,
+        "author": {
+          "display_name": "sfavot",
+          "unique_id": "sfavot",
+          "media": {
+            "url": @string@
+          },
+          "_links": {
+            "profile": @string@
+          }
+        },
+        "parent": @null@,
+        "children": [],
+        "display_type": "folder",
         "title": "Je suis un élément",
+        "body": "blabla",
+        "notation": 4,
+        "votes": {"-1": 21, "0":12, "1": 43},
+        "linkedDataCreation": @null@,
         "_links": {
           "self": { "href": "/api/syntheses/42/elements/43" },
           "divide": { "href": "/api/syntheses/42/elements/43/divisions" },
@@ -267,18 +266,16 @@ Feature: Synthesis
     ]
     """
 
-  Scenario: Non admin API client wants to get synthesis elements
-    Given I am logged in to api as user
+  @database
+  Scenario: API client wants to get synthesis elements count
+    Given I am logged in to api as admin
     And there is a synthesis with id "42" and elements:
       | 43 |
-    And I send a GET request to "/api/syntheses/42/elements"
-    Then the JSON response status code should be 403
-
-  Scenario: Anonymous API client wants to get synthesis elements
-    Given there is a synthesis with id "42" and elements:
-      | 43 |
-    And I send a GET request to "/api/syntheses/42/elements"
-    Then the JSON response status code should be 401
+    And I send a GET request to "/api/syntheses/42/elements/count"
+    Then the JSON response should match:
+    """
+    {"count": "1"}
+    """
 
   @database
   Scenario: API client wants to get new synthesis elements
@@ -293,8 +290,30 @@ Feature: Synthesis
     """
     [
       {
+        "hasLinkedData": false,
         "id": "43",
+        "enabled": true,
+        "created_at": "@string@.isDateTime()",
+        "updated_at": "@string@.isDateTime()",
+        "archived": false,
+        "author": {
+          "display_name": "sfavot",
+          "unique_id": "sfavot",
+          "media": {
+            "url": @string@
+          },
+          "_links": {
+            "profile": @string@
+          }
+        },
+        "parent": @null@,
+        "children": [],
+        "display_type": "folder",
         "title": "Je suis un élément",
+        "body": "blabla",
+        "notation": 4,
+        "votes": {"-1": 21, "0":12, "1": 43},
+        "linkedDataCreation": @null@,
         "_links": {
           "self": { "href": "/api/syntheses/42/elements/43" },
           "divide": { "href": "/api/syntheses/42/elements/43/divisions" },
@@ -304,20 +323,198 @@ Feature: Synthesis
     ]
     """
 
-  Scenario: API client wants to get a synthesis element
+  @database
+  Scenario: API client wants to get new synthesis elements count
     Given I am logged in to api as admin
     And there is a synthesis with id "42" and elements:
+      | 43 |
+    And I create an element in synthesis 42 with values:
+      | id       | 44   |
+      | archived | true |
+    And I send a GET request to "/api/syntheses/42/elements/new/count"
+    Then the JSON response should match:
+    """
+    {"count": "1"}
+    """
+
+  @database
+  Scenario: API client wants to get archived synthesis elements
+    Given there is a synthesis with id "42" and elements:
+      | 43 |
+    And I create an element in synthesis 42 with values:
+      | id       | 44   |
+      | archived | true |
+    And I send a GET request to "/api/syntheses/42/elements/archived"
+    Then the JSON response should match:
+    """
+    [
+      {
+        "hasLinkedData": false,
+        "id": "44",
+        "enabled": true,
+        "created_at": "@string@.isDateTime()",
+        "updated_at": "@string@.isDateTime()",
+        "archived": true,
+        "author": @null@,
+        "parent": @null@,
+        "children": [],
+        "display_type": "folder",
+        "title": @null@,
+        "body": "blabla",
+        "notation": @null@,
+        "votes": [],
+        "linkedDataCreation": @null@,
+        "_links": {
+          "self": { "href": "/api/syntheses/42/elements/44" },
+          "divide": { "href": "/api/syntheses/42/elements/44/divisions" },
+          "history": { "href": "/api/syntheses/42/elements/44/history" }
+        }
+      }
+    ]
+    """
+
+  @database
+  Scenario: API client wants to get archived synthesis elements count
+    Given there is a synthesis with id "42" and elements:
+      | 43 |
+    And I create an element in synthesis 42 with values:
+      | id       | 44   |
+      | archived | true |
+    And I send a GET request to "/api/syntheses/42/elements/archived/count"
+    Then the JSON response should match:
+    """
+    {"count": "1"}
+    """
+
+  @database
+  Scenario: API client wants to get unpublished synthesis elements
+    Given I am logged in to api as admin
+    And there is a synthesis with id "42" and elements:
+      | 43 |
+    And I create an element in synthesis 42 with values:
+      | id       | 44   |
+      | enabled | false |
+    And I send a GET request to "/api/syntheses/42/elements/unpublished"
+    Then the JSON response should match:
+    """
+    [
+      {
+        "hasLinkedData": false,
+        "id": "44",
+        "enabled": false,
+        "created_at": "@string@.isDateTime()",
+        "updated_at": "@string@.isDateTime()",
+        "archived": false,
+        "author": @null@,
+        "parent": @null@,
+        "children": [],
+        "display_type": "folder",
+        "title": @null@,
+        "body": "blabla",
+        "notation": @null@,
+        "votes": [],
+        "linkedDataCreation": @null@,
+        "_links": {
+          "self": { "href": "/api/syntheses/42/elements/44" },
+          "divide": { "href": "/api/syntheses/42/elements/44/divisions" },
+          "history": { "href": "/api/syntheses/42/elements/44/history" }
+        }
+      }
+    ]
+    """
+
+  @database
+  Scenario: API client wants to get unpublished synthesis elements count
+    Given I am logged in to api as admin
+    And there is a synthesis with id "42" and elements:
+      | 43 |
+    And I create an element in synthesis 42 with values:
+      | id       | 44   |
+      | enabled | false |
+    And I send a GET request to "/api/syntheses/42/elements/unpublished/count"
+    Then the JSON response should match:
+    """
+    {"count": "1"}
+    """
+
+  @database
+  Scenario: API client wants to get root synthesis elements
+    Given I am logged in to api as admin
+    And there is a synthesis with id "48" based on consultation step 2
+    And I send a GET request to "/api/syntheses/48/elements/root"
+    Then the JSON response should match:
+    """
+    [
+      {
+        "hasLinkedData": true,
+        "id": @string@,
+        "enabled": true,
+        "created_at": "@string@.isDateTime()",
+        "updated_at": "@string@.isDateTime()",
+        "archived": false,
+        "author": @...@,
+        "parent": @null@,
+        "children": [
+          @...@
+        ],
+        "display_type": "contribution",
+        "title": "Opinion 51",
+        "body": "blabla",
+        "notation": @null@,
+        "votes": [],
+        "linkedDataCreation": "@string@.isDateTime()",
+        "_links": {
+          "self": { "href": "@string@.startsWith('/api/syntheses/48/elements/')" },
+          "divide": { "href": "@string@.startsWith('/api/syntheses/48/elements/').endsWith('/divisions')" },
+          "history": { "href": "@string@.startsWith('/api/syntheses/48/elements/').endsWith('/history')" }
+        }
+      },
+      @...@
+    ]
+    """
+
+  @database
+  Scenario: API client wants to get root synthesis elements count
+    Given I am logged in to api as admin
+    And there is a synthesis with id "48" based on consultation step 2
+    And I send a GET request to "/api/syntheses/48/elements/root/count"
+    Then the JSON response should match:
+    """
+    {"count": "3"}
+    """
+
+  @database
+  Scenario: API client wants to get a synthesis element
+    Given there is a synthesis with id "42" and elements:
       | 43 |
     And I send a GET request to "/api/syntheses/42/elements/43"
     Then the JSON response should match:
     """
     {
+      "hasLinkedData": false,
       "id": "43",
       "enabled": true,
+      "created_at": "@string@.isDateTime()",
+      "updated_at": "@string@.isDateTime()",
       "archived": false,
+      "author": {
+        "display_name": "sfavot",
+        "unique_id": "sfavot",
+        "media": {
+          "url": @string@
+        },
+        "_links": {
+          "profile": @string@
+        }
+      },
+      "parent": @null@,
+      "children": [],
+      "display_type": "folder",
       "title": "Je suis un élément",
       "body": "blabla",
       "notation": 4,
+      "votes": {"-1": 21, "0":12, "1": 43},
+      "linkedDataCreation": @null@,
       "_links": {
         "self": { "href": "/api/syntheses/42/elements/43" },
         "divide": { "href": "/api/syntheses/42/elements/43/divisions" },
@@ -325,19 +522,6 @@ Feature: Synthesis
       }
     }
     """
-
-  Scenario: Non admin API client wants to get a synthesis element
-    Given I am logged in to api as user
-    And there is a synthesis with id "42" and elements:
-      | 43 |
-    And I send a GET request to "/api/syntheses/42/elements/43"
-    Then the JSON response status code should be 403
-
-  Scenario: Anonymous API client wants to get a synthesis element
-    Given there is a synthesis with id "42" and elements:
-      | 43 |
-    And I send a GET request to "/api/syntheses/42/elements/43"
-    Then the JSON response status code should be 401
 
   @database
   Scenario: API client wants to create a synthesis element
@@ -356,12 +540,21 @@ Feature: Synthesis
     And the JSON response should match:
     """
     {
+      "hasLinkedData": false,
       "id": @string@,
       "enabled": true,
+      "created_at": "@string@.isDateTime()",
+      "updated_at": "@string@.isDateTime()",
       "archived": false,
+      "author": @null@,
+      "parent": @null@,
+      "children": [],
+      "display_type": "folder",
       "title": "Coucou, je suis un élément.",
       "body": "blabla",
       "notation": 5,
+      "votes": [],
+      "linkedDataCreation": @null@,
       "_links": {
         "self": { "href": "@string@.startsWith('/api/syntheses/42/elements/')" },
         "divide": { "href": "@string@.startsWith('/api/syntheses/42/elements/').endsWith('/divisions')" },
@@ -371,6 +564,7 @@ Feature: Synthesis
     """
     And there should be a create log on response element with username "admin"
 
+  @database
   Scenario: Non admin API client wants to create a synthesis element
     Given I am logged in to api as user
     And there is a synthesis with id "42" and elements:
@@ -385,6 +579,7 @@ Feature: Synthesis
     """
     Then the JSON response status code should be 403
 
+  @database
   Scenario: Anonymous API client wants to create a synthesis element
     Given there is a synthesis with id "42" and elements:
       | 43 |
@@ -414,12 +609,30 @@ Feature: Synthesis
     And the JSON response should match:
     """
     {
+      "hasLinkedData": false,
       "id": "43",
       "enabled": true,
+      "created_at": "@string@.isDateTime()",
+      "updated_at": "@string@.isDateTime()",
       "archived": false,
+      "author": {
+        "display_name": "sfavot",
+        "unique_id": "sfavot",
+        "media": {
+          "url": @string@
+        },
+        "_links": {
+          "profile": @string@
+        }
+      },
+      "parent": @null@,
+      "children": [],
+      "display_type": "folder",
       "title": "Je suis un élément",
       "body": "blabla",
       "notation": 2,
+      "votes": {"-1": 21, "0":12, "1": 43},
+      "linkedDataCreation": @null@,
       "_links": {
         "self": { "href": "/api/syntheses/42/elements/43" },
         "divide": { "href": "/api/syntheses/42/elements/43/divisions" },
@@ -428,6 +641,7 @@ Feature: Synthesis
     }
     """
 
+  @database
   Scenario: Non admin API client wants to update a synthesis element
     Given I am logged in to api as user
     And there is a synthesis with id "42" and elements:
@@ -441,6 +655,7 @@ Feature: Synthesis
     """
     Then the JSON response status code should be 403
 
+  @database
   Scenario: Anonymous API client wants to update a synthesis element
     Given there is a synthesis with id "42" and elements:
       | 43 |
@@ -483,6 +698,7 @@ Feature: Synthesis
     Then the JSON response status code should be 201
     And there should be a log on element 43 with sentence "admin a divisé l'élément 43"
 
+  @database
   Scenario: Non admin API client wants to divide a synthesis element
     Given I am logged in to api as user
     And there is a synthesis with id "42" and elements:
@@ -511,6 +727,7 @@ Feature: Synthesis
     """
     Then the JSON response status code should be 403
 
+  @database
   Scenario: Anonymous API client wants to divide a synthesis element
     Given there is a synthesis with id "42" and elements:
       | 43 |
@@ -538,6 +755,7 @@ Feature: Synthesis
     """
     Then the JSON response status code should be 401
 
+  @database
   Scenario: API client wants to get a synthesis element history
     Given I am logged in to api as admin
     And there is a synthesis with id "42" and elements:
@@ -652,8 +870,7 @@ Feature: Synthesis
 
   @database
   Scenario: After updating an opinion, I want to get the updated synthesis
-    Given I am logged in to api as admin
-    And there is a synthesis with id "48" based on consultation step 2
+    Given there is a synthesis with id "48" based on consultation step 2
     And I do nothing for 2 seconds
     When I update opinion 51 with values:
       | title | Je suis le nouveau titre |
@@ -663,23 +880,22 @@ Feature: Synthesis
     {
       "id": "48",
       "enabled": true,
+      "editable": true,
+      "elements": [
+        {
+          "id": @string@,
+          "title": "Je suis le nouveau titre",
+          "_links": {
+            "self": { "href": "@string@.startsWith('/api/syntheses/48/elements/')" },
+            "divide": { "href": "@string@.startsWith('/api/syntheses/48/elements/').endsWith('/divisions')" },
+            "history": { "href": "@string@.startsWith('/api/syntheses/48/elements/').endsWith('/history')" }
+          }
+        },
+        @...@
+      ],
       "_links": {
         "self": { "href": "/api/syntheses/48" },
         "elements": { "href": "/api/syntheses/48/elements" }
-      },
-      "_embedded": {
-        "elements": [
-          {
-            "id": @string@,
-            "title": "Je suis le nouveau titre",
-            "_links": {
-              "self": { "href": "@string@.startsWith('/api/syntheses/48/elements/')" },
-              "divide": { "href": "@string@.startsWith('/api/syntheses/48/elements/').endsWith('/divisions')" },
-              "history": { "href": "@string@.startsWith('/api/syntheses/48/elements/').endsWith('/history')" }
-            }
-          },
-          @...@
-        ]
       }
     }
     """

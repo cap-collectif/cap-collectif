@@ -27,6 +27,9 @@ class StepResolver
             if ($step->isOtherStep()) {
                 return $this->router->generate('app_consultation_show_step', array('consultationSlug' => $step->getConsultation()->getSlug(), 'stepSlug' => $step->getSlug()), $absolute);
             }
+            if ($step->isSynthesisStep()) {
+                return $this->router->generate('app_consultation_show_synthesis', array('consultationSlug' => $step->getConsultation()->getSlug(), 'stepSlug' => $step->getSlug()), $absolute);
+            }
         }
 
         return;

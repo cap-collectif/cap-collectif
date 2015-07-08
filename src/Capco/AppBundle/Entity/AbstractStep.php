@@ -329,7 +329,11 @@ abstract class AbstractStep
      */
     public function getConsultation()
     {
-        return $this->consultationAbstractStep->getConsultation();
+        if ($this->consultationAbstractStep) {
+            return $this->consultationAbstractStep->getConsultation();
+        }
+
+        return;
     }
 
     /**

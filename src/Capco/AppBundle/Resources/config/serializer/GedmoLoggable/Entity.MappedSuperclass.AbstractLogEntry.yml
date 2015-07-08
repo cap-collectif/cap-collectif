@@ -4,9 +4,13 @@ Gedmo\Loggable\Entity\MappedSuperclass\AbstractLogEntry:
     properties:
       id:
         expose: true
+        groups: [Logs, LogDetails]
       action:
         expose: true
+        groups: [LogDetails]
       loggedAt:
         expose: true
+        groups: [LogDetails]
       version:
         expose: true
+        groups: [LogDetails]

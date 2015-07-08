@@ -169,6 +169,7 @@ class ApiContext extends ApplicationContext
     public function thereIsASynthesisWithIdAndElements($id, TableNode $elementsIds)
     {
         $synthesis = $this->getEntityManager()->getRepository('CapcoAppBundle:Synthesis\Synthesis')->find($id);
+        $author = $this->getService('fos_user.user_manager')->findOneBy(['slug' => 'sfavot']);
 
         if (null === $synthesis) {
             // Create synthesis
@@ -196,6 +197,8 @@ class ApiContext extends ApplicationContext
                 $element->setTitle('Je suis un nouvel élément');
                 $element->setBody('blabla');
                 $element->setNotation(4);
+                $element->setVotes(['-1' => 21, '0' => 12, '1' => 43]);
+                $element->setAuthor($author);
 
                 // Set id
                 $element->setId($elId);

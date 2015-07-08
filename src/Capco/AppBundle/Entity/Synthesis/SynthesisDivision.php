@@ -23,6 +23,7 @@ class SynthesisDivision
      * @ORM\Column(name="id", type="guid")
      * @ORM\GeneratedValue(strategy="UUID")
      * @Serializer\Expose
+     * @Serializer\Groups({"Elements"})
      */
     private $id;
 
@@ -38,6 +39,7 @@ class SynthesisDivision
      * @Serializer\Type("ArrayCollection<Capco\AppBundle\Entity\Synthesis\SynthesisElement>")
      * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\Synthesis\SynthesisElement", mappedBy="originalDivision", cascade={"persist"})
      * @Serializer\Expose
+     * @Serializer\Groups({"Elements"})
      */
     private $elements;
 

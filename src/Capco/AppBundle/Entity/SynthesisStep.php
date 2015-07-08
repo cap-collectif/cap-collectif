@@ -13,7 +13,7 @@ class SynthesisStep extends AbstractStep
 {
     /**
      * @var
-     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Synthesis\Synthesis")
+     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Synthesis\Synthesis", cascade={"persist", "remove"})
      * @ORM\JoinColumn(name="synthesis_id", referencedColumnName="id", onDelete="SET NULL")
      */
     private $synthesis = null;
