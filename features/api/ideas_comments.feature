@@ -20,7 +20,7 @@ Feature: Events comments
           "author": {
             "username": @string@,
             "media": {
-              "url": @string@
+              "url": "@string@.startsWith('/media')"
             },
             "_links": {
               "profile": @string@
@@ -172,6 +172,46 @@ Feature: Events comments
     {
       "code": 404,
       "message": "This parent comment is not linked to this idea",
+      "errors": @null@
+    }
+    """
+
+  @security
+  Scenario: logged in API client wants to add a comment to the wrong idea
+    Given I am logged in to api as user
+    When I send a POST request to "/api/ideas/3/comments" with json:
+    """
+    {
+      "parent": 2,
+      "body": "Pr0 Hacker"
+    }
+    """
+    Then the JSON response status code should be 404
+    And the JSON response should match:
+    """
+    {
+      "code": 404,
+      "message": "This parent comment is not linked to this idea",
+      "errors": @null@
+    }
+    """
+
+  @security
+  Scenario: logged in API client wants to add an answer to an answer
+    Given I am logged in to api as user
+    When I send a POST request to "/api/ideas/3/comments" with json:
+    """
+    {
+      "parent": 149,
+      "body": "Pr0 Hacker"
+    }
+    """
+    Then the JSON response status code should be 404
+    And the JSON response should match:
+    """
+    {
+      "code": 404,
+      "message": "You can't answer the answer of a comment.",
       "errors": @null@
     }
     """

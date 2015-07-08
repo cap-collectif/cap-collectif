@@ -104,7 +104,11 @@ class EventsController extends FOSRestController
             if ($event != $parent->getEvent()) {
                 throw $this->createNotFoundException('This parent comment is not linked to this event');
             }
+            if ($parent->getParent() != null) {
+                throw new BadRequestHttpException('You can\'t answer the answer of a comment.');
+            }
         }
+
 
         $this->getDoctrine()->getManager()->persist($comment);
         $this->getDoctrine()->getManager()->flush();

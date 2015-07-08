@@ -31,7 +31,7 @@ var Comment = React.createClass({
     },
 
     isTheUserTheAuthor() {
-       if (this.props.comment.author == null || !LoginStore.isLoggedIn()) {
+       if (this.props.comment.author === null || !LoginStore.isLoggedIn()) {
             return false;
        }
        return LoginStore.user.username === this.props.comment.author.username;

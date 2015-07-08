@@ -29,7 +29,8 @@
     "fetch": "~0.9.0",
     "react-intl": "~1.2.0",
     "autosize": "~3.0.6",
-    "css-spinners": "~2.1.0"
+    "css-spinners": "~2.1.0",
+    "es6-promise": "~2.2.0"
   },
   "overrides": {
     "fancybox": {
@@ -48,7 +49,10 @@
       "main": "react-with-addons.js"
     },
     "intl": {
-      "main": []
+      "main": [
+        "Intl.js",
+        "locale-data/jsonp/fr.js"
+      ]
     },
     "react-intl": {
       "main": [

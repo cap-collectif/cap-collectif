@@ -23,7 +23,7 @@
         overflow: hidden;
     }
 
-    .btn-grey {
+    .btn {
         margin-top: 20px;
     }
 
@@ -33,16 +33,27 @@
 
 }
 
-
+// List of comment answers
 .comment-answers {
-    li {
+  .opinion__list {
+    .opinion--comment {
+      padding-top: 10px;
+      padding-bottom: 10px;
+      border-bottom: 0;
+    }
+  }
+
+  li {
         padding-left: 5px;
-    }
+  }
 
-    .opinion__body {
-        padding-left: 10px;
-    }
+  .opinion__body {
+    padding-left: 10px;
+  }
+}
 
+.commentAnswerForm {
+  padding-left: 40px;
 }
 
 .comment-answers-block {
@@ -59,7 +70,6 @@
     }
 
     .opinion--comment:last-child {
-        margin-bottom: 10px;
         margin-bottom: 0;
     }
 

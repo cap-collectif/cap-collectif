@@ -18,6 +18,7 @@ export default {
             trashed: {
                 label: 'Dans la corbeille'
             },
+            submit_error: 'Désolé, un problème est survenu lors de l\'ajout de votre commentaire.',
             more: 'Voir plus de commentaires',
             submit: 'Commenter',
             public_name: 'Votre nom sera rendu public sur la plateforme.',

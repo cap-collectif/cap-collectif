@@ -7,9 +7,9 @@ var CommentAnswers = React.createClass({
     render() {
         if (this.props.comments) {
             return (
-                <span>
+                <div className="">
                     <CommentList comments={this.props.comments} isReportingEnabled={this.props.isReportingEnabled} root={false}/>
-                </span>
+                </div>
             );
         }
         return;

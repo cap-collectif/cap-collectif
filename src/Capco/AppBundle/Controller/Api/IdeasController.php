@@ -6,6 +6,7 @@ use Capco\AppBundle\Entity\Idea;
 use Capco\AppBundle\Entity\IdeaComment;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Capco\AppBundle\Form\CommentType;
 use Capco\AppBundle\CapcoAppBundleEvents;
 use Capco\AppBundle\Event\AbstractCommentChangedEvent;
@@ -133,6 +134,9 @@ class IdeasController extends FOSRestController
         if ($parent) {
             if ($idea != $parent->getIdea()) {
                 throw $this->createNotFoundException('This parent comment is not linked to this idea');
+            }
+            if ($parent->getParent() != null) {
+                throw new BadRequestHttpException('You can\'t answer the answer of a comment.');
             }
         }
 

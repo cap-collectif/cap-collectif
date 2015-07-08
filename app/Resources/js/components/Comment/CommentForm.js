@@ -9,14 +9,14 @@ var CommentForm = React.createClass({
     getInitialState() {
         return {
             body: '',
-            submited: false,
+            submitted: false,
             expanded: false
         };
     },
 
     isValid(field) {
 
-        if (!this.state.submited) {
+        if (!this.state.submitted) {
             return true;
         }
 
@@ -56,29 +56,33 @@ var CommentForm = React.createClass({
         e.preventDefault();
 
         this.setState({
-            submited: true
+            submitted: true
         }, () => {
 
             if (!this.isValid()) {
                 return;
             }
 
-            $(React.findDOMNode(this.refs.create)).button('loading');
+            var commentButton = React.findDOMNode(this.refs.loggedInComment)
+                                ? React.findDOMNode(this.refs.loggedInComment)
+                                : React.findDOMNode(this.refs.anonymousComment)
+                            ;
 
+            $(commentButton).button('loading');
 
             var data = this.state;
             delete data.expanded;
-            delete data.submited;
+            delete data.submitted;
             this.props.comment(data)
             .then(() => {
                 this.setState(this.getInitialState());
                 autosize.destroy(React.findDOMNode(this.refs.body));
-                $(React.findDOMNode(this.refs.create)).button('reset');
+                $(commentButton).button('reset');
             })
             .catch(() => {
-                alert('Désolé, un problème est survenu lors de l\'ajout de votre commentaire.');
+                alert(this.getIntlMessage('comment.submit_error'));
                 this.setState(data);
-                $(React.findDOMNode(this.refs.create)).button('reset');
+                $(commentButton).button('reset');
             });
         });
     },
@@ -151,7 +155,7 @@ var CommentForm = React.createClass({
                                     { this.getIntlMessage('comment.email_info') }
                                 </p>
                             </div>
-                            <button ref="create" className="btn btn-primary" data-loading-text={this.getIntlMessage('global.loading')} onClick={this.create.bind(this)}>
+                            <button ref="anonymousComment" className="btn btn-primary" data-loading-text={this.getIntlMessage('global.loading')} onClick={this.create.bind(this)}>
                                 { this.getIntlMessage('comment.submit') }
                             </button>
                         </div>
@@ -166,10 +170,12 @@ var CommentForm = React.createClass({
         if (this.state.expanded || this.state.body.length >= 1) {
             if (LoginStore.isLoggedIn()) {
                 return (
-                    <input className="btn btn-primary" type="submit"
-                           value={this.getIntlMessage('comment.submit')}
+                    <button ref="loggedInComment" data-loading-text={this.getIntlMessage('global.loading')}
+                           className="btn btn-primary"
                            onClick={this.create.bind(this)}
-                    />
+                    >
+                        {this.getIntlMessage('comment.submit')}
+                    </button>
                 );
             }
             return (
@@ -180,17 +186,17 @@ var CommentForm = React.createClass({
         }
     },
 
-    expand(newSate) {
-        if (!newSate) {
+    expand(newState) {
+        if (!newState) {
              if (event.relatedTarget && $(event.relatedTarget).is(':button')) {
                 return; // clicked on comment button
              }
              if (this.state.body.length === 0) {
-                this.setState({expanded: newSate, submited: false});
+                this.setState({expanded: newState, submitted: false});
                 return;
              }
         }
-        this.setState({'expanded': newSate});
+        this.setState({'expanded': newState});
     },
 
     render() {

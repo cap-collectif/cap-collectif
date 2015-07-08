@@ -6,6 +6,7 @@ import CommentStore from '../../stores/CommentStore';
 
 var FormattedMessage  = ReactIntl.FormattedMessage;
 
+const MessagePagination = 10;
 
 var CommentSection = React.createClass({
     mixins: [ReactIntl.IntlMixin],
@@ -20,7 +21,7 @@ var CommentSection = React.createClass({
             isLoadingMore: false,
             filter: 'last',
             offset: 0,
-            limit: 10
+            limit: MessagePagination
         };
     },
 
@@ -49,34 +50,37 @@ var CommentSection = React.createClass({
 
     render() {
         return (
-        <div className="comments__section">
-            <div className="row">
-                <h2 className="h2 col-sm-6">
-                    <FormattedMessage
-                        message={this.getIntlMessage('comment.list')}
-                        num={this.state.countWithAnswers}
-                    />
-                </h2>
-                { this.renderFilter() }
+            <div className="comments__section">
+                <div className="row">
+                    <h2 className="h2 col-sm-6">
+                        <FormattedMessage
+                            message={this.getIntlMessage('comment.list')}
+                            num={this.state.countWithAnswers}
+                        />
+                    </h2>
+                    { this.renderFilter() }
+                </div>
+                { this.renderLoader() }
+                {(!this.state.isLoading
+                    ? <CommentForm comment={this.comment.bind(this)} focus={false} />
+                    : <span />
+                )}
+                <CommentList {...this.props}
+                             comments={this.state.comments}
+                             root={true}
+                             isReportingEnabled={this.state.isReportingEnabled}
+                />
+                { this.renderLoadMore() }
             </div>
-            { this.renderLoader() }
-            {(!this.state.isLoading
-                ? <CommentForm comment={this.comment.bind(this)} focus={false} />
-                : <span />
-            )}
-            <CommentList {...this.props}
-                         comments={this.state.comments}
-                         root={true}
-                         isReportingEnabled={this.state.isReportingEnabled}
-            />
-            { this.renderLoadMore() }
-        </div>
         );
     },
 
     onChange() {
+
        if (CommentStore.isSync) {
-            this.setState({
+
+            this.setState(
+            {
                  countWithAnswers: CommentStore.countWithAnswers,
                  count: CommentStore.count,
                  isReportingEnabled: CommentStore.isReportingEnabled,
@@ -127,7 +131,7 @@ var CommentSection = React.createClass({
     renderLoadMore() {
         if (!this.state.isLoading && (this.state.limit < this.state.count || this.state.isLoadingMore)) {
             return (
-                <button className="btn btn-block btn-grey" ref="loadMore" data-loading-text={this.getIntlMessage('global.loading')} onClick={this.loadMore.bind(this)}>
+                <button className="btn btn-block btn-darkgrey" ref="loadMore" data-loading-text={this.getIntlMessage('global.loading')} onClick={this.loadMore.bind(this)}>
                     { this.getIntlMessage('comment.more') }
                 </button>
             );
@@ -166,7 +170,7 @@ var CommentSection = React.createClass({
 
         this.setState({
             isLoadingMore: true,
-            limit: this.state.limit + 10
+            limit: this.state.limit + MessagePagination
         }, () => {
             this.loadCommentsFromServer();
         });

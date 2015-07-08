@@ -104,6 +104,9 @@ class PostsController extends FOSRestController
             if ($post != $parent->getPost()) {
                 throw $this->createNotFoundException('This parent comment is not linked to this post');
             }
+            if ($parent->getParent() != null) {
+                throw new BadRequestHttpException('You can\'t answer the answer of a comment.');
+            }
         }
 
         $this->getDoctrine()->getManager()->persist($comment);

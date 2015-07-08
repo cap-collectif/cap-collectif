@@ -18,7 +18,7 @@ function prepareElements(text) {
     if (match.position.start !== 0) {
       elements.push(<span dangerouslySetInnerHTML={{__html: text.slice(lastIndex, match.position.start) }} />);
     }
-    elements.push(<a href={match.getAnchorHref()} target="_blank">{match.getAnchorText()}</a>);
+    elements.push(<a href={match.getAnchorHref()} className="external-link">{match.getAnchorText()}</a>);
     lastIndex = match.position.end;
   });
 

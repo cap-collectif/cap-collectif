@@ -2,7 +2,7 @@ Feature: Posts comments
 
 ## List Comments
 
-  Scenario: API client wants to list comments of an idea
+  Scenario: API client wants to list comments of a blogpost
     When I send a GET request to "/api/posts/3/comments"
     Then the JSON response should match:
     """
@@ -20,7 +20,7 @@ Feature: Posts comments
           "author": {
             "username": @string@,
             "media": {
-              "url": @string@
+              "url": "@string@.startsWith('/media')"
             },
             "_links": {
               "profile": @string@
@@ -45,7 +45,7 @@ Feature: Posts comments
     }
     """
 
-  Scenario: API client wants to find the first comment of an idea
+  Scenario: API client wants to find the first comment of a blogpost
     When I send a GET request to "/api/posts/3/comments?limit=1"
     Then the JSON response should match:
     """
@@ -75,7 +75,7 @@ Feature: Posts comments
     }
     """
 
-  Scenario: API client wants to find popular comments of an idea
+  Scenario: API client wants to find popular comments of a blogpost
     When I send a GET request to "/api/posts/3/comments?filter=popular"
     Then the JSON response should match:
     """

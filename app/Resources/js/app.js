@@ -119,7 +119,7 @@ var App = function ($) {
     };
 
     var externalLinks = function() {
-        $('.external-link').on('click', function(e){
+        $(document).on('click', '.external-link', function(e){
             window.open($(this).attr('href'));
             return false;
         });

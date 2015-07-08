@@ -1,3 +1,5 @@
+var FormattedDate = ReactIntl.FormattedDate;
+
 var CommentInfos = React.createClass({
     mixins: [ReactIntl.IntlMixin],
 
@@ -12,11 +14,15 @@ var CommentInfos = React.createClass({
     },
 
     renderDate() {
+        if (navigator.userAgent.indexOf('Safari') != -1 && navigator.userAgent.indexOf('Chrome') == -1) {
+            return;
+        }
         return (
             <span className="excerpt">
-                <ReactIntl.FormattedDate value={this.props.comment.created_at}
-                                         day="numeric" month="long" year="numeric"
-                                         hour="numeric" minute="numeric"
+                <FormattedDate
+                    value={this.props.comment.created_at}
+                    day="numeric" month="long" year="numeric"
+                    hour="numeric" minute="numeric"
                  />
             </span>
         );
