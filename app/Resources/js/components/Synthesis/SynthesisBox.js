@@ -56,7 +56,9 @@ var SynthesisBox = React.createClass({
     if (this.state.errors.length > 0) {
       return (
         <div className="alert alert-danger alert-dismissible">
-          <button type="button" className="close" data-dismiss="alert" aria-label={this.getIntlMessage('common.errors.close')}><span aria-hidden="true">&times;</span></button>
+          <button type="button" className="close" data-dismiss="alert" aria-label={this.getIntlMessage('common.errors.close')}>
+            <span aria-hidden="true">&times;</span>
+          </button>
           {
             this.state.errors.map((error) => {
               return (
@@ -75,7 +77,6 @@ var SynthesisBox = React.createClass({
     this.setState({
       errors: SynthesisElementStore.errors
     });
-    return;
   },
 
   loadSynthesisFromServer() {

@@ -4,8 +4,7 @@ var DisableButtons = React.createClass({
   mixins: [ReactIntl.IntlMixin],
 
   disable(e) {
-    var value = !this.props.element.enabled;
-    var data = { 'enabled': value };
+    var data = { 'enabled': !this.props.element.enabled };
     SynthesisElementActions.disable(this.props.synthesis.id, this.props.element.id, data);
   },
 

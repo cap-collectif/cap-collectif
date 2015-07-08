@@ -51,7 +51,6 @@ var ElementTree = React.createClass({
   },
 
   renderItemIcon(element) {
-    console.log(element);
     if (element.display_type === 'contribution') {
       return <i className="elements-tree__item-icon cap cap-baloon-1"></i>;
     }
@@ -61,7 +60,7 @@ var ElementTree = React.createClass({
   renderItemBody(element) {
     return (
       <p className="elements-tree__item-body">
-        <span><ElementTitle element={element} /></span>
+        <ElementTitle element={element} />
         <br/>
         <span className="small excerpt">
           <FormattedMessage

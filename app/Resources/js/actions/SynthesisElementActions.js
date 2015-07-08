@@ -14,7 +14,6 @@ var updateElementFromData = (synthesis, element, data) => {
       return true;
     })
     .catch((error) => {
-      console.log(error);
       AppDispatcher.dispatch({
         actionType: UPDATE_ELEMENT_FAILURE,
         error: 'common.errors.update_error'
