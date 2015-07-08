@@ -24,7 +24,6 @@ class EventCommentRepository extends EntityRepository
             ->andWhere('c.isTrashed = :notTrashed')
             ->setParameter('event', $event)
             ->setParameter('notTrashed', false)
-            ->addOrderBy('c.updatedAt', 'ASC')
         ;
 
         if ($filter === 'old') {

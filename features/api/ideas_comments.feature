@@ -1,4 +1,4 @@
-Feature: Events comments
+Feature: Ideas comments
 
 ## List Comments
 
@@ -210,7 +210,7 @@ Feature: Events comments
     And the JSON response should match:
     """
     {
-      "code": 404,
+      "code": 400,
       "message": "You can't answer the answer of a comment.",
       "errors": @null@
     }

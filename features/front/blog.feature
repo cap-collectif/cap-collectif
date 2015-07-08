@@ -4,7 +4,7 @@ Background:
   Given feature "blog" is enabled
 
 @database @javascript
-Scenario: Anonymous wants to comment an event
+Scenario: Anonymous wants to comment a blogpost
   Given I visited "blog page"
   And I follow "Post 2"
   And I wait 3 seconds
@@ -18,7 +18,7 @@ Scenario: Anonymous wants to comment an event
   Then I should see "J'ai un truc à dire" in the ".opinion__list" element
 
 @database @javascript
-Scenario: Logged in user wants to comment an event
+Scenario: Logged in user wants to comment a blogpost
   Given I am logged in as user
   And I visited "blog page"
   And I follow "Post 2"
@@ -32,7 +32,7 @@ Scenario: Logged in user wants to comment an event
   Then I should see "J'ai un truc à dire" in the ".opinion__list" element
 
 @javascript
-Scenario: Anonymous wants to comment an event without email
+Scenario: Anonymous wants to comment a blogpost without email
   Given I visited "blog page"
   And I follow "Post 2"
   And I wait 3 seconds

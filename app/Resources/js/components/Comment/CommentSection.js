@@ -131,7 +131,7 @@ var CommentSection = React.createClass({
     renderLoadMore() {
         if (!this.state.isLoading && (this.state.limit < this.state.count || this.state.isLoadingMore)) {
             return (
-                <button className="btn btn-block btn-darkgrey" ref="loadMore" data-loading-text={this.getIntlMessage('global.loading')} onClick={this.loadMore.bind(this)}>
+                <button className="btn btn-block btn-dark-grey" ref="loadMore" data-loading-text={this.getIntlMessage('global.loading')} onClick={this.loadMore.bind(this)}>
                     { this.getIntlMessage('comment.more') }
                 </button>
             );
