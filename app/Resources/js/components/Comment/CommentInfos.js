@@ -9,6 +9,7 @@ var CommentInfos = React.createClass({
                 { this.renderAuthorName() }
                 { '  ' }
                 { this.renderDate() }
+                { this.renderEditionDate() }
             </p>
         );
     },
@@ -21,6 +22,28 @@ var CommentInfos = React.createClass({
             <span className="excerpt">
                 <FormattedDate
                     value={this.props.comment.created_at}
+                    day="numeric" month="long" year="numeric"
+                    hour="numeric" minute="numeric"
+                 />
+            </span>
+        );
+    },
+
+
+    renderEditionDate() {
+        if (navigator.userAgent.indexOf('Safari') != -1 && navigator.userAgent.indexOf('Chrome') == -1) {
+            return;
+        }
+        if (this.props.comment.updated_at === this.props.comment.created_at) {
+            return;
+        }
+        return (
+            <span className="excerpt">
+                { ' - ' }
+                { this.getIntlMessage('comment.edited') }
+                { ' ' }
+                <FormattedDate
+                    value={this.props.comment.updated_at}
                     day="numeric" month="long" year="numeric"
                     hour="numeric" minute="numeric"
                  />

@@ -188,11 +188,14 @@ var CommentForm = React.createClass({
 
     expand(newState) {
         if (!newState) {
-             if (event.relatedTarget && $(event.relatedTarget).is(':button')) {
-                return; // clicked on comment button
+
+             var $block = $(React.findDOMNode(this.refs.commentBlock));
+
+             if (event.relatedTarget && ($(event.relatedTarget).is($block) || $block.has($(event.relatedTarget)).length)) {
+                return; // clicked on an element inside comment block
              }
              if (this.state.body.length === 0) {
-                this.setState({expanded: newState, submitted: false});
+                this.setState({expanded: false, submitted: false});
                 return;
              }
         }
@@ -204,7 +207,7 @@ var CommentForm = React.createClass({
         return (
             <div className={ this.getFormClasses() }>
                 <UserAvatar user={LoginStore.user} />
-                <div className="opinion__data" onBlur={this.expand.bind(this, false)}>
+                <div className="opinion__data" ref="commentBlock" onBlur={this.expand.bind(this, false)}>
                     <form>
                         <div className={ this.getClasses('body') }>
                             <textarea valueLink={this.linkState('body')}

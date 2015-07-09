@@ -13,6 +13,10 @@ Capco\AppBundle\Entity\AbstractComment:
             expose: true
             type: DateTime
             groups: [Comments]
+        updatedAt:
+            expose: true
+            type: DateTime
+            groups: [Comments]
         voteCount:
             expose: true
             type: integer

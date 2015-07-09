@@ -3,7 +3,7 @@ export default {
     locales : ['fr-FR'],
     messages: {
         comment: {
-            list: '{num, plural, =0{} one{# commentaire} other{# commentaires}}',
+            list: '{num, plural, =0{0 commentaire} one{# commentaire} other{# commentaires}}',
             vote: {
                 submit: 'D\'accord',
                 delete: 'Annuler mon vote'
@@ -18,6 +18,7 @@ export default {
             trashed: {
                 label: 'Dans la corbeille'
             },
+            edited: 'édité le',
             submit_error: 'Désolé, un problème est survenu lors de l\'ajout de votre commentaire.',
             more: 'Voir plus de commentaires',
             submit: 'Commenter',

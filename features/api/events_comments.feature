@@ -16,6 +16,7 @@ Feature: Events comments
           "id": @integer@,
           "body": @string@,
           "created_at": "@string@.isDateTime()",
+          "updated_at": "@string@.isDateTime()",
           "vote_count": @integer@,
           "author": {
             "username": @string@,
@@ -59,6 +60,7 @@ Feature: Events comments
           "id": @integer@,
           "body": @string@,
           "created_at": "@string@.isDateTime()",
+          "updated_at": "@string@.isDateTime()",
           "vote_count": @integer@,
           "author": @...@,
           "answers": @...@,
