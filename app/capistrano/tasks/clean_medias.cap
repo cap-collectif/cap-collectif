@@ -1,6 +1,6 @@
 namespace :capco do
     desc 'clean medias'
-    task :clean-medias do
+    task :clean_medias do
         invoke 'symfony:console', 'capco:clean-lost-medias', '--force --no-interaction'
     end
 end

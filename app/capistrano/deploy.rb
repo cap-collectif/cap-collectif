@@ -98,4 +98,4 @@ after 'bower:install', 'brunch:build'
 before "deploy:set_permissions:check", 'symfony:cache_create'
 before "composer:install", "deploy:set_permissions:acl"
 after 'deploy:finished', 'capco:recalculate'
-after 'deploy:finished', 'capco:clean-medias'
+after 'deploy:finished', 'capco:clean_medias'
