@@ -30,6 +30,13 @@ class SiteColor
     private $keyname;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="title", type="string", length=255)
+     */
+    private $title;
+
+    /**
      * @var bool
      *
      * @ORM\Column(name="is_enabled", type="boolean")
@@ -119,6 +126,30 @@ class SiteColor
     public function getKeyname()
     {
         return $this->keyname;
+    }
+
+    /**
+     * Set title.
+     *
+     * @param string $title
+     *
+     * @return SiteImage
+     */
+    public function setTitle($title)
+    {
+        $this->title = $title;
+
+        return $this;
+    }
+
+    /**
+     * Get title.
+     *
+     * @return string
+     */
+    public function getTitle()
+    {
+        return $this->title;
     }
 
     /**

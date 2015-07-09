@@ -54,6 +54,13 @@ class SiteParameter
     /**
      * @var string
      *
+     * @ORM\Column(name="title", type="string", length=255)
+     */
+    private $title;
+
+    /**
+     * @var string
+     *
      * @ORM\Column(name="value", type="text")
      */
     private $value;
@@ -148,6 +155,30 @@ class SiteParameter
     public function getKeyname()
     {
         return $this->keyname;
+    }
+
+    /**
+     * Set title.
+     *
+     * @param string $title
+     *
+     * @return SiteParameter
+     */
+    public function setTitle($title)
+    {
+        $this->title = $title;
+
+        return $this;
+    }
+
+    /**
+     * Get title.
+     *
+     * @return string
+     */
+    public function getTitle()
+    {
+        return $this->title;
     }
 
     /**

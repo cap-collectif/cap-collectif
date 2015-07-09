@@ -1,4 +1,4 @@
-import {RECEIVE_COUNT_NEW, RECEIVE_ELEMENT, ARCHIVE_ELEMENT, UPDATE_ELEMENT, NOTE_ELEMENT, DISABLE_ELEMENT, MOVE_ELEMENT, UPDATE_ELEMENT_SUCCESS, UPDATE_ELEMENT_FAILURE} from '../constants/SynthesisElementConstants';
+import {RECEIVE_COUNT, RECEIVE_ELEMENTS, RECEIVE_ELEMENT, ARCHIVE_ELEMENT, UPDATE_ELEMENT, NOTE_ELEMENT, DISABLE_ELEMENT, MOVE_ELEMENT, UPDATE_ELEMENT_SUCCESS, UPDATE_ELEMENT_FAILURE} from '../constants/SynthesisElementConstants';
 import BaseStore from './BaseStore';
 
 class SynthesisElementStore extends BaseStore {
@@ -7,20 +7,26 @@ class SynthesisElementStore extends BaseStore {
     super();
     this.register(this._registerToActions.bind(this));
     this._element = null;
-    this._countNew = 0;
+    this._elements = [];
+    this._count = 0;
     this._isSync = true;
     this._errors = [];
   }
 
   _registerToActions(action) {
     switch(action.actionType) {
-      case RECEIVE_COUNT_NEW:
-        this._countNew = action.count;
+      case RECEIVE_COUNT:
+        this._count = action.count;
         this._isSync = true;
         this.emitChange();
         break;
       case RECEIVE_ELEMENT:
         this._element = action.element;
+        this._isSync = true;
+        this.emitChange();
+        break;
+      case RECEIVE_ELEMENTS:
+        this._elements = action.elements;
         this._isSync = true;
         this.emitChange();
         break;
@@ -66,8 +72,12 @@ class SynthesisElementStore extends BaseStore {
     return this._element;
   }
 
-  get countNew() {
-    return this._countNew;
+  get elements() {
+    return this._elements;
+  }
+
+  get count() {
+    return this._count;
   }
 
   get errors() {

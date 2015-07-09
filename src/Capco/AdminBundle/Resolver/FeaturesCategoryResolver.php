@@ -21,11 +21,7 @@ class FeaturesCategoryResolver
         ],
         'pages.ideas' => [
             'conditions' => ['ideas'],
-            'features' => ['idea_creation'],
-        ],
-        'pages.ideas_trash' => [
-            'conditions' => ['ideas'],
-            'features' => ['idea_trash'],
+            'features' => ['idea_creation', 'idea_trash'],
         ],
         'pages.themes' => [
             'conditions' => ['themes'],
@@ -63,17 +59,9 @@ class FeaturesCategoryResolver
             'conditions' => [],
             'features' => ['blog', 'calendar', 'ideas', 'themes', 'registration', 'members_list', 'reporting', 'newsletter', 'share_buttons'],
         ],
-        'settings.notifications' => [
-            'conditions' => [],
-            'features' => [],
-        ],
         'settings.shield_mode' => [
             'conditions' => [],
             'features' => ['shield_mode'],
-        ],
-        'settings.appearance' => [
-            'conditions' => [],
-            'features' => [],
         ],
     );
 

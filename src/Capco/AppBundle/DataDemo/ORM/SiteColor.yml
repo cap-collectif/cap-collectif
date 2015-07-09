@@ -1,159 +1,191 @@
 Capco\AppBundle\Entity\SiteColor:
     SiteColor1:
         keyname: color.body.bg
-        category: settings.appearance
+        category: settings.global
         value: '#ffffff'
+        title: Fond du site
         position: 1
     SiteColor2:
         keyname: color.body.text
-        category: settings.appearance
+        category: settings.global
+        title: Texte du site
         value: '#333333'
         position: 2
     SiteColor3:
         keyname: color.header.bg
-        category: settings.appearance
+        category: settings.global
+        title: Fond de l'en-tête
         value: '#16a085'
         position: 3
     SiteColor41:
         keyname: color.header.title
-        category: settings.appearance
+        category: settings.global
+        title: Titre de l'en-tête
         value: '#ffffff'
         position: 4
     SiteColor4:
         keyname: color.header.text
-        category: settings.appearance
+        category: settings.global
+        title: Texte de l'en-tête
         value: '#ffffff'
         position: 4
     SiteColor5:
         keyname: color.header2.bg
         category: pages.homepage
+        title: Fond de l'en-tête secondaire
         value: '#1abc9c'
         position: 5
     SiteColor6:
         keyname: color.header2.text
         category: pages.homepage
+        title: Texte de l'en-tête secondaire
         value: '#ffffff'
         position: 6
     SiteColor7:
         keyname: color.header2.title
         category: pages.homepage
+        title: Titre de l'en-tête secondaire
         value: '#ffffff'
         position: 7
     SiteColor8:
-        keyname: color.btn.bg
+        keyname: color.btn
         category: pages.homepage
+        title: Bouton de l'en-tête
         value: '#1abc9c'
         position: 8
     SiteColor9:
         keyname: color.btn.text
         category: pages.homepage
+        title: Libellé du bouton de l'en-tête
         value: '#ffffff'
         position: 9
     SiteColor10:
         keyname: color.h1
-        category: settings.appearance
+        category: settings.global
+        title: Texte du titre 1 (h1)
         position: 10
     SiteColor11:
         keyname: color.h2
-        category: settings.appearance
+        category: settings.global
+        title: Texte du titre 2 (h2)
         value: '#16a085'
         position: 11
     SiteColor12:
         keyname: color.h3
-        category: settings.appearance
+        category: settings.global
+        title: Texte du titre 3 (h3)
         value: '#1abc9c'
         position: 12
     SiteColor13:
         keyname: color.h4
-        category: settings.appearance
+        category: settings.global
+        title: Texte du titre 4 (h4)
         position: 13
     SiteColor14:
         keyname: color.h5
-        category: settings.appearance
+        category: settings.global
+        title: Texte du titre 5 (h5)
         position: 14
     SiteColor15:
         keyname: color.h6
-        category: settings.appearance
+        category: settings.global
+        title: Texte du titre 6 (h6)
         position: 15
     SiteColor16:
-        keyname: color.btn.primary.bg
-        category: settings.appearance
+        keyname: color.btn.primary
+        category: settings.global
+        title: Couleur primaire
         value: '#1abc9c'
         position: 16
     SiteColor17:
         keyname: color.btn.primary.text
-        category: settings.appearance
+        category: settings.global
+        title: Libellé primaire
         value: '#ffffff'
         position: 17
     SiteColor18:
-        keyname: color.link.default
-        category: settings.appearance
+        keyname: color.link
+        category: settings.global
+        title: Liens
         value: '#16a085'
         position: 18
     SiteColor19:
         keyname: color.link.hover
-        category: settings.appearance
+        category: settings.global
+        title: Liens au survol
         value: '#1abc9c'
         position: 19
     SiteColor20:
         keyname: color.footer.text
         category: pages.footer
+        title: Texte du pied de page
         value: '#ffffff'
         position: 20
     SiteColor21:
         keyname: color.footer.bg
         category: pages.footer
+        title: Fond du pied de page
         value: '#1abc9c'
         position: 21
     SiteColor22:
         keyname: color.footer2.text
         category: pages.footer
+        title: Texte du pied de page secondaire
         value: '#ffffff'
         position: 22
     SiteColor23:
         keyname: color.footer2.bg
         category: pages.footer
+        title: Fond du pied de page secondaire
         value: '#16a085'
         position: 23
     SiteColor24:
         keyname: color.section.bg
-        category: settings.appearance
+        category: settings.global
+        title: Fond des sections
         value: '#f6f6f6'
         position: 2
     SiteColor25:
         keyname: color.section.text
-        category: settings.appearance
+        category: settings.global
+        title: Texte des sections
         value: '#000000'
         position: 2
 
     SiteColor26:
         keyname: color.main_menu.text
-        category: settings.appearance
+        category: settings.global
+        title: Libellés du menu
         value: ''
         position: 24
     SiteColor27:
         keyname: color.main_menu.text_active
-        category: settings.appearance
+        category: settings.global
+        title: Libellés du menu actif
         value: ''
         position: 25
     SiteColor28:
         keyname: color.main_menu.text_hover
-        category: settings.appearance
+        category: settings.global
+        title: Libellés du menu au survol
         value: ''
         position: 25
     SiteColor29:
         keyname: color.main_menu.bg
-        category: settings.appearance
+        category: settings.global
+        title: Fond du menu
         value: ''
         position: 26
     SiteColor30:
         keyname: color.main_menu.bg_active
-        category: settings.appearance
+        category: settings.global
+        title: Fond des éléments de menu au survol et actif
         value: ''
         position: 27
 
     SiteColor31:
         keyname: color.footer.title
         category: pages.footer
+        title: Titre du pied de page
         value: '#ffffff'
         position: 21

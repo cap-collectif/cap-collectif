@@ -68,28 +68,28 @@ var SideMenu = React.createClass({
   getContributionsMenuItems() {
     return [
       {
-        "link": "inbox",
+        "link": "/inbox/new",
         "color":"blue",
         "icon": "cap-download-6",
         "label": "inbox",
         "nb": '(' + this.state.countNew + ')'
       },
       {
-        "link": "archived",
+        "link": "/inbox/archived",
         "color":"green",
         "icon": "cap-check-4",
         "label": "archived",
         "nb": null
       },
       {
-        "link": "unpublished",
+        "link": "/inbox/unpublished",
         "color":"grey",
         "icon": "cap-delete-2",
         "label": "unpublished",
         "nb": null
       },
       {
-        "link": "all",
+        "link": "/inbox/all",
         "color":"grey",
         "icon": "cap-baloon",
         "label": "all",
@@ -120,7 +120,7 @@ var SideMenu = React.createClass({
   onChange() {
     if (SynthesisElementStore.isSync) {
       this.setState({
-        countNew: SynthesisElementStore.countNew
+        countNew: SynthesisElementStore.count
       });
       return;
     }
@@ -128,8 +128,9 @@ var SideMenu = React.createClass({
   },
 
   loadNewElementsCountFromServer() {
-    SynthesisElementActions.loadNewElementsCountFromServer(
-      this.props.synthesis.id
+    SynthesisElementActions.loadElementsCountFromServer(
+      this.props.synthesis.id,
+      'new'
     );
   }
 
