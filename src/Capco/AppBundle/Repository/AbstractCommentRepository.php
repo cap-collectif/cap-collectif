@@ -76,13 +76,13 @@ class AbstractCommentRepository extends EntityRepository
         $qb = $this->getIsEnabledQueryBuilder();
 
         if ($from) {
-            $qb->andWhere('u.createdAt >= :from')
+            $qb->andWhere('c.createdAt >= :from')
                ->setParameter('from', $from)
                ;
         }
 
         if ($to) {
-            $qb->andWhere('u.createdAt <= :to')
+            $qb->andWhere('c.createdAt <= :to')
                ->setParameter('to', $to)
                ;
         }
