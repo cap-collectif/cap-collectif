@@ -1,0 +1,153 @@
+admin:
+  mail:
+    contact: Adresse email de contact
+    notifications: Adresse électronique
+
+blog:
+  jumbotron:
+    body: Accroche
+    title: Titre
+  pagination:
+    size: Nombre d'articles par page
+
+color:
+  body:
+    bg: Fond du site
+    text: Texte du site
+  btn:
+    bg: Couleur du bouton
+    primary:
+      bg: Couleur primaire
+      text: Libellé primaire
+    text: Couleur du texte du bouton
+  footer:
+    bg: Couleur de fond
+    text: Couleur du texte
+    title: Couleur du titre
+  footer2:
+    bg: Couleur de fond secondaire
+    text: Couleur du texte secondaire
+  h1: Texte du titre 1 (h1)
+  h2: Texte du titre 2 (h2)
+  h3: Texte du titre 3 (h3)
+  h4: Texte du titre 4 (h4)
+  h5: Texte du titre 5 (h5)
+  h6: Texte du titre 6 (h6)
+  header:
+    bg: Fond de l'en-tête
+    text: Texte de l'en-tête
+    title: Titre de l'en-tête
+  header2:
+    bg: Couleur de fond de l'en-tête secondaire
+    text: Couleur du texte de l'en-tête secondaire
+    title: Couleur du titre de l'en-tête secondaire
+  link:
+    default: Lien
+    hover: Liens au survol
+  main_menu:
+    bg: Fond du menu
+    bg_active: Fond des éléments de menu au survol et actif
+    text: Libellés du menu
+    text_active: Libellés du menu actif
+    text_hover: Libellés du menu au survol
+  section:
+    bg: Fond des sections
+    text: Texte des sections
+
+consultations:
+  content:
+    body: Description
+  jumbotron:
+    body: Accroche
+    title: Titre
+  pagination: Nombre de consultations par page
+
+contact:
+  content:
+    address: Adresse postale
+    body: Description
+    phone_number: Numéro de téléphone
+  jumbotron:
+    body: Accroche
+
+contributors:
+  pagination: Nombre de participants par page
+
+events:
+  content:
+    body: Description
+  jumbotron:
+    body: Accroche
+    title: Titre
+
+footer:
+  text:
+    body: Contenu
+    title: Titre
+
+global:
+  site:
+    embed_js: Script de suivi analytique
+    fullname: Titre du site
+
+homepage:
+  jumbotron:
+    body: Accroche du site
+    button: Libellé du bouton principal
+    button_link: Lien du bouton principal
+    darken: Assombrissement de l'image de fond
+    title: Titre/objet du site
+
+ideas:
+  content:
+    body: Description
+  jumbotron:
+    body: Accroche
+    title: Titre
+  pagination: Nombre d'idées par page
+  trashed:
+    content:
+      body: Description
+    jumbotron:
+      title: Titre
+
+image:
+  default_avatar: Avatar par défaut
+  header: Image de fond
+  logo: Logo
+  picto: Pictogramme
+
+login:
+  text:
+    bottom: Mention en bas de page
+    top: Message d'avertissement
+
+members:
+  content:
+    body: Description
+  jumbotron:
+    body: Accroche
+    title: Titre
+  pagination:
+    size: Nombre d'inscrits par page
+
+security:
+  shield_mode:
+    password: Mot de passe
+    username: Identifiant
+
+signin:
+  cgu:
+    link: Lien du document à accepter
+    name: Nom du document à accepter (Exemples : la charte, les conditions d'utilisation, etc.)
+  text:
+    bottom: Mention en bas de page
+    top: Message d'avertissement
+
+themes:
+  content:
+    body: Description
+  jumbotron:
+    body: Accroche
+    title: Titre
+  pagination: Nombre de thèmes par page
