@@ -5,8 +5,6 @@ namespace Capco\AppBundle\Entity\Synthesis;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
-use JMS\Serializer\Annotation as Serializer;
-use Hateoas\Configuration\Annotation as Hateoas;
 use Capco\AppBundle\Validator\Constraints as CapcoAssert;
 use Gedmo\Mapping\Annotation as Gedmo;
 
@@ -17,28 +15,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
  * @ORM\Entity()
  * @ORM\HasLifecycleCallbacks()
  * @Gedmo\SoftDeleteable(fieldName="deletedAt")
- * @Serializer\ExclusionPolicy("all")
  * @CapcoAssert\ConsultationStepExists()
- * @Hateoas\Relation(
- *      "self",
- *      href = @Hateoas\Route(
- *          "get_synthesis",
- *          parameters = {
- *              "id" = "expr(object.getId())"
- *          }
- *      ),
- *      exclusion = @Hateoas\Exclusion(groups = {"Syntheses", "SynthesisDetails"})
- * )
- * @Hateoas\Relation(
- *      "elements",
- *      href = @Hateoas\Route(
- *          "get_synthesis_elements",
- *          parameters = {
- *              "id" = "expr(object.getId())"
- *          }
- *      ),
- *      exclusion = @Hateoas\Exclusion(groups = {"Syntheses", "SynthesisDetails"})
- * )
  */
 class Synthesis
 {
@@ -56,22 +33,16 @@ class Synthesis
      * @ORM\Id
      * @ORM\Column(name="id", type="guid")
      * @ORM\GeneratedValue(strategy="UUID")
-     * @Serializer\Expose
-     * @Serializer\Groups({"Syntheses", "SynthesisDetails"})
      */
     private $id;
 
     /**
      * @ORM\Column(name="enabled", type="boolean")
-     * @Serializer\Expose
-     * @Serializer\Groups({"SynthesisDetails"})
      */
     private $enabled = false;
 
     /**
      * @ORM\Column(name="editable", type="boolean")
-     * @Serializer\Expose
-     * @Serializer\Groups({"SynthesisDetails"})
      */
     private $editable = true;
 
@@ -86,15 +57,12 @@ class Synthesis
      * @var
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\ConsultationStep")
      * @ORM\JoinColumn(name="consultation_step_id", referencedColumnName="id", nullable=true, onDelete="SET NULL")
-     * @Serializer\Type("Capco\AppBundle\Entity\ConsultationStep")
      */
     private $consultationStep = null;
 
     /**
      * @var
      * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\Synthesis\SynthesisElement", mappedBy="synthesis", cascade={"persist", "remove"}, orphanRemoval=true)
-     * @Serializer\Expose
-     * @Serializer\Groups({"Syntheses", "SynthesisDetails", "Elements"})
      */
     private $elements;
 
