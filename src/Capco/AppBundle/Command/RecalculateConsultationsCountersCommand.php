@@ -46,7 +46,7 @@ class RecalculateConsultationsCountersCommand extends ContainerAwareCommand
             $query->execute();
         }
 
-        // Contributions count
+        // Votes count
         foreach ($consultations as $c) {
             $votes = $contributionResolver->countConsultationVotes($c);
             $query = $em->createQuery('
