@@ -30,13 +30,6 @@ class SiteImage
     private $keyname;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="title", type="string", length=255)
-     */
-    private $title;
-
-    /**
      * @var
      *
      * @ORM\ManyToOne(targetEntity="Capco\MediaBundle\Entity\Media", cascade={"persist"})
@@ -118,30 +111,6 @@ class SiteImage
     public function getKeyname()
     {
         return $this->keyname;
-    }
-
-    /**
-     * Set title.
-     *
-     * @param string $title
-     *
-     * @return SiteImage
-     */
-    public function setTitle($title)
-    {
-        $this->title = $title;
-
-        return $this;
-    }
-
-    /**
-     * Get title.
-     *
-     * @return string
-     */
-    public function getTitle()
-    {
-        return $this->title;
     }
 
     /**

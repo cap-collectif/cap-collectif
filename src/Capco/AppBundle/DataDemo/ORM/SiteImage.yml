@@ -1,29 +1,25 @@
 Capco\AppBundle\Entity\SiteImage:
     SiteImage1:
         keyname: image.logo
-        category: settings.global
-        title: Logo
+        category: settings.appearance
         media: @Logo
         isEnabled: true
         position: 1
     SiteImage2:
         keyname: image.header
         category: pages.homepage
-        title: header
         media: @header
         isEnabled: true
         position: 2
     SiteImage3:
         keyname: image.picto
         category: pages.homepage
-        title: Picto
         media: @picto
         isEnabled: true
         position: 3
     SiteImage4:
         keyname: image.default_avatar
-        category: settings.global
-        title: Avatar par défaut
+        category: settings.appearance
         media: null
         isEnabled: false
         position: 4
