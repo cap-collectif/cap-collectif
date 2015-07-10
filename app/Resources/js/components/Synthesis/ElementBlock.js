@@ -4,7 +4,6 @@ import ElementTitle from './ElementTitle';
 import ElementBreadcrumb from './ElementBreadcrumb';
 
 var FormattedDate = ReactIntl.FormattedDate;
-let Link = ReactRouter.Link;
 
 var ElementBlock = React.createClass({
   mixins: [ReactIntl.IntlMixin],
@@ -73,9 +72,9 @@ var ElementBlock = React.createClass({
   },
 
   renderDate() {
-    if (this.props.element.has_linked_data) {
-      if (this.props.element.linked_data_creation) {
-        return <FormattedDate value={this.props.element.linked_data_creation} day="numeric" month="long" year="numeric" />;
+    if (this.props.element.hasLinkedData) {
+      if (this.props.element.linkedDataCreation) {
+        return <FormattedDate value={this.props.element.linkedDataCreation} day="numeric" month="long" year="numeric" />;
       }
       return this.getIntlMessage('common.elements.no_source_date');
     }

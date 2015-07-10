@@ -25,32 +25,90 @@ class SynthesisElementHandlerSpec extends ObjectBehavior
         $this->shouldHaveType('Capco\AppBundle\Synthesis\Handler\SynthesisElementHandler');
     }
 
-    function it_can_get_all_elements_from_synthesis(EntityManager $em, LogManager $logManager, EntityRepository $synthesisRepo, SynthesisElementRepository $synthesisElementRepo, ArrayCollection $collection, Synthesis $synthesis, $id)
+    function it_can_get_elements_from_synthesis_by_type(EntityManager $em, LogManager $logManager, SynthesisElementRepository $synthesisElementRepo, ArrayCollection $collection, Synthesis $synthesis)
     {
-        $em->getRepository('CapcoAppBundle:Synthesis\Synthesis')->willReturn($synthesisRepo)->shouldBeCalled();
         $em->getRepository('CapcoAppBundle:Synthesis\SynthesisElement')->willReturn($synthesisElementRepo)->shouldBeCalled();
-        $synthesisRepo->find($id)->willReturn($synthesis)->shouldBeCalled();
+        $this->beConstructedWith($em, $logManager);
+
+        $type = 'all';
         $synthesisElementRepo->getWith(array(
             'synthesis' => $synthesis
         ))->willReturn($collection)->shouldBeCalled();
+        $this->getElementsFromSynthesisByType($synthesis, $type)->shouldReturnAnInstanceOf('Doctrine\Common\Collections\ArrayCollection');
 
-        $this->beConstructedWith($em, $logManager);
-        $this->getAllElementsFromSynthesis($id)->shouldReturnAnInstanceOf('Doctrine\Common\Collections\ArrayCollection');
-    }
-
-    function it_can_get_new_elements_from_synthesis(EntityManager $em, LogManager $logManager, EntityRepository $synthesisRepo, SynthesisElementRepository $synthesisElementRepo, ArrayCollection $collection, Synthesis $synthesis, $id)
-    {
-        $em->getRepository('CapcoAppBundle:Synthesis\Synthesis')->willReturn($synthesisRepo)->shouldBeCalled();
-        $em->getRepository('CapcoAppBundle:Synthesis\SynthesisElement')->willReturn($synthesisElementRepo)->shouldBeCalled();
-        $synthesisRepo->find($id)->willReturn($synthesis)->shouldBeCalled();
+        $type = 'new';
         $synthesisElementRepo->getWith(array(
             'synthesis' => $synthesis,
             'archived' => false,
             'enabled' => true,
         ))->willReturn($collection)->shouldBeCalled();
+        $this->getElementsFromSynthesisByType($synthesis, $type)->shouldReturnAnInstanceOf('Doctrine\Common\Collections\ArrayCollection');
 
+        $type = 'unpublished';
+        $synthesisElementRepo->getWith(array(
+            'synthesis' => $synthesis,
+            'enabled' => false,
+        ))->willReturn($collection)->shouldBeCalled();
+        $this->getElementsFromSynthesisByType($synthesis, $type)->shouldReturnAnInstanceOf('Doctrine\Common\Collections\ArrayCollection');
+
+        $type = 'archived';
+        $synthesisElementRepo->getWith(array(
+            'synthesis' => $synthesis,
+            'archived' => true,
+            'enabled' => true,
+        ))->willReturn($collection)->shouldBeCalled();
+        $this->getElementsFromSynthesisByType($synthesis, $type)->shouldReturnAnInstanceOf('Doctrine\Common\Collections\ArrayCollection');
+
+        $type = 'root';
+        $synthesisElementRepo->getWith(array(
+            'synthesis' => $synthesis,
+            'parent' => null,
+            'enabled' => true,
+        ))->willReturn($collection)->shouldBeCalled();
+        $this->getElementsFromSynthesisByType($synthesis, $type)->shouldReturnAnInstanceOf('Doctrine\Common\Collections\ArrayCollection');
+    }
+
+    function it_can_count_elements_from_synthesis_by_type(EntityManager $em, LogManager $logManager, SynthesisElementRepository $synthesisElementRepo, Synthesis $synthesis)
+    {
+        $em->getRepository('CapcoAppBundle:Synthesis\SynthesisElement')->willReturn($synthesisElementRepo)->shouldBeCalled();
         $this->beConstructedWith($em, $logManager);
-        $this->getNewElementsFromSynthesis($id)->shouldReturnAnInstanceOf('Doctrine\Common\Collections\ArrayCollection');
+
+        $type = 'all';
+        $synthesisElementRepo->countWith(array(
+            'synthesis' => $synthesis
+        ))->willReturn(2)->shouldBeCalled();
+        $this->countElementsFromSynthesisByType($synthesis, $type)->shouldBeInteger();
+
+        $type = 'new';
+        $synthesisElementRepo->countWith(array(
+            'synthesis' => $synthesis,
+            'archived' => false,
+            'enabled' => true,
+        ))->willReturn(1)->shouldBeCalled();
+        $this->countElementsFromSynthesisByType($synthesis, $type)->shouldBeInteger();
+
+        $type = 'unpublished';
+        $synthesisElementRepo->countWith(array(
+            'synthesis' => $synthesis,
+            'enabled' => false,
+        ))->willReturn(0)->shouldBeCalled();
+        $this->countElementsFromSynthesisByType($synthesis, $type)->shouldBeInteger();
+
+        $type = 'archived';
+        $synthesisElementRepo->countWith(array(
+            'synthesis' => $synthesis,
+            'archived' => true,
+            'enabled' => true,
+        ))->willReturn(5)->shouldBeCalled();
+        $this->countElementsFromSynthesisByType($synthesis, $type)->shouldBeInteger();
+
+        $type = 'root';
+        $synthesisElementRepo->countWith(array(
+            'synthesis' => $synthesis,
+            'parent' => null,
+            'enabled' => true,
+        ))->willReturn(3)->shouldBeCalled();
+        $this->countElementsFromSynthesisByType($synthesis, $type)->shouldBeInteger();
     }
 
     function it_can_create_element_in_synthesis(EntityManager $em, LogManager $logManager, SynthesisElement $element, Synthesis $synthesis)

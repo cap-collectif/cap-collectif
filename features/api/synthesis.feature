@@ -228,12 +228,12 @@ Feature: Synthesis
     Given I am logged in to api as admin
     And there is a synthesis with id "42" and elements:
       | 43 |
-    And I send a GET request to "/api/syntheses/42/elements"
+    And I send a GET request to "/api/syntheses/42/elements?type=all"
     Then the JSON response should match:
     """
     [
       {
-        "has_linked_data": false,
+        "hasLinkedData": false,
         "id": "43",
         "enabled": true,
         "created_at": "@string@.isDateTime()",
@@ -256,7 +256,7 @@ Feature: Synthesis
         "body": "blabla",
         "notation": 4,
         "votes": {"-1": 21, "0":12, "1": 43},
-        "linked_data_creation": @null@,
+        "linkedDataCreation": @null@,
         "_links": {
           "self": { "href": "/api/syntheses/42/elements/43" },
           "divide": { "href": "/api/syntheses/42/elements/43/divisions" },
@@ -271,7 +271,7 @@ Feature: Synthesis
     Given I am logged in to api as admin
     And there is a synthesis with id "42" and elements:
       | 43 |
-    And I send a GET request to "/api/syntheses/42/elements/count"
+    And I send a GET request to "/api/syntheses/42/elements/count?type=all"
     Then the JSON response should match:
     """
     {"count": "1"}
@@ -285,12 +285,12 @@ Feature: Synthesis
     And I create an element in synthesis 42 with values:
       | id       | 44   |
       | archived | true |
-    And I send a GET request to "/api/syntheses/42/elements/new"
+    And I send a GET request to "/api/syntheses/42/elements?type=new"
     Then the JSON response should match:
     """
     [
       {
-        "has_linked_data": false,
+        "hasLinkedData": false,
         "id": "43",
         "enabled": true,
         "created_at": "@string@.isDateTime()",
@@ -313,7 +313,7 @@ Feature: Synthesis
         "body": "blabla",
         "notation": 4,
         "votes": {"-1": 21, "0":12, "1": 43},
-        "linked_data_creation": @null@,
+        "linkedDataCreation": @null@,
         "_links": {
           "self": { "href": "/api/syntheses/42/elements/43" },
           "divide": { "href": "/api/syntheses/42/elements/43/divisions" },
@@ -331,7 +331,7 @@ Feature: Synthesis
     And I create an element in synthesis 42 with values:
       | id       | 44   |
       | archived | true |
-    And I send a GET request to "/api/syntheses/42/elements/new/count"
+    And I send a GET request to "/api/syntheses/42/elements/count?type=new"
     Then the JSON response should match:
     """
     {"count": "1"}
@@ -344,12 +344,12 @@ Feature: Synthesis
     And I create an element in synthesis 42 with values:
       | id       | 44   |
       | archived | true |
-    And I send a GET request to "/api/syntheses/42/elements/archived"
+    And I send a GET request to "/api/syntheses/42/elements?type=archived"
     Then the JSON response should match:
     """
     [
       {
-        "has_linked_data": false,
+        "hasLinkedData": false,
         "id": "44",
         "enabled": true,
         "created_at": "@string@.isDateTime()",
@@ -363,7 +363,7 @@ Feature: Synthesis
         "body": "blabla",
         "notation": @null@,
         "votes": [],
-        "linked_data_creation": @null@,
+        "linkedDataCreation": @null@,
         "_links": {
           "self": { "href": "/api/syntheses/42/elements/44" },
           "divide": { "href": "/api/syntheses/42/elements/44/divisions" },
@@ -380,7 +380,7 @@ Feature: Synthesis
     And I create an element in synthesis 42 with values:
       | id       | 44   |
       | archived | true |
-    And I send a GET request to "/api/syntheses/42/elements/archived/count"
+    And I send a GET request to "/api/syntheses/42/elements/count?type=archived"
     Then the JSON response should match:
     """
     {"count": "1"}
@@ -394,12 +394,12 @@ Feature: Synthesis
     And I create an element in synthesis 42 with values:
       | id       | 44   |
       | enabled | false |
-    And I send a GET request to "/api/syntheses/42/elements/unpublished"
+    And I send a GET request to "/api/syntheses/42/elements?type=unpublished"
     Then the JSON response should match:
     """
     [
       {
-        "has_linked_data": false,
+        "hasLinkedData": false,
         "id": "44",
         "enabled": false,
         "created_at": "@string@.isDateTime()",
@@ -413,7 +413,7 @@ Feature: Synthesis
         "body": "blabla",
         "notation": @null@,
         "votes": [],
-        "linked_data_creation": @null@,
+        "linkedDataCreation": @null@,
         "_links": {
           "self": { "href": "/api/syntheses/42/elements/44" },
           "divide": { "href": "/api/syntheses/42/elements/44/divisions" },
@@ -431,7 +431,7 @@ Feature: Synthesis
     And I create an element in synthesis 42 with values:
       | id       | 44   |
       | enabled | false |
-    And I send a GET request to "/api/syntheses/42/elements/unpublished/count"
+    And I send a GET request to "/api/syntheses/42/elements/count?type=unpublished"
     Then the JSON response should match:
     """
     {"count": "1"}
@@ -441,12 +441,12 @@ Feature: Synthesis
   Scenario: API client wants to get root synthesis elements
     Given I am logged in to api as admin
     And there is a synthesis with id "48" based on consultation step 2
-    And I send a GET request to "/api/syntheses/48/elements/root"
+    And I send a GET request to "/api/syntheses/48/elements?type=root"
     Then the JSON response should match:
     """
     [
       {
-        "has_linked_data": true,
+        "hasLinkedData": true,
         "id": @string@,
         "enabled": true,
         "created_at": "@string@.isDateTime()",
@@ -462,7 +462,7 @@ Feature: Synthesis
         "body": "blabla",
         "notation": @null@,
         "votes": [],
-        "linked_data_creation": "@string@.isDateTime()",
+        "linkedDataCreation": "@string@.isDateTime()",
         "_links": {
           "self": { "href": "@string@.startsWith('/api/syntheses/48/elements/')" },
           "divide": { "href": "@string@.startsWith('/api/syntheses/48/elements/').endsWith('/divisions')" },
@@ -477,7 +477,7 @@ Feature: Synthesis
   Scenario: API client wants to get root synthesis elements count
     Given I am logged in to api as admin
     And there is a synthesis with id "48" based on consultation step 2
-    And I send a GET request to "/api/syntheses/48/elements/root/count"
+    And I send a GET request to "/api/syntheses/48/elements/count?type=root"
     Then the JSON response should match:
     """
     {"count": "3"}
@@ -491,7 +491,7 @@ Feature: Synthesis
     Then the JSON response should match:
     """
     {
-      "has_linked_data": false,
+      "hasLinkedData": false,
       "id": "43",
       "enabled": true,
       "created_at": "@string@.isDateTime()",
@@ -514,7 +514,7 @@ Feature: Synthesis
       "body": "blabla",
       "notation": 4,
       "votes": {"-1": 21, "0":12, "1": 43},
-      "linked_data_creation": @null@,
+      "linkedDataCreation": @null@,
       "_links": {
         "self": { "href": "/api/syntheses/42/elements/43" },
         "divide": { "href": "/api/syntheses/42/elements/43/divisions" },
@@ -540,7 +540,7 @@ Feature: Synthesis
     And the JSON response should match:
     """
     {
-      "has_linked_data": false,
+      "hasLinkedData": false,
       "id": @string@,
       "enabled": true,
       "created_at": "@string@.isDateTime()",
@@ -554,7 +554,7 @@ Feature: Synthesis
       "body": "blabla",
       "notation": 5,
       "votes": [],
-      "linked_data_creation": @null@,
+      "linkedDataCreation": @null@,
       "_links": {
         "self": { "href": "@string@.startsWith('/api/syntheses/42/elements/')" },
         "divide": { "href": "@string@.startsWith('/api/syntheses/42/elements/').endsWith('/divisions')" },
@@ -609,7 +609,7 @@ Feature: Synthesis
     And the JSON response should match:
     """
     {
-      "has_linked_data": false,
+      "hasLinkedData": false,
       "id": "43",
       "enabled": true,
       "created_at": "@string@.isDateTime()",
@@ -632,7 +632,7 @@ Feature: Synthesis
       "body": "blabla",
       "notation": 2,
       "votes": {"-1": 21, "0":12, "1": 43},
-      "linked_data_creation": @null@,
+      "linkedDataCreation": @null@,
       "_links": {
         "self": { "href": "/api/syntheses/42/elements/43" },
         "divide": { "href": "/api/syntheses/42/elements/43/divisions" },
