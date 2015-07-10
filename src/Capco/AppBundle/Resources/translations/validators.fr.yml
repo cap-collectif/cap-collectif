@@ -19,6 +19,7 @@ idea:
     vote:
         already: Cette adresse électronique a déjà été utilisée pour soutenir cette idée.
         no_message_when_private_error: Vous ne pouvez pas poster de commentaire en tant qu'anonyme.
+    votes_not_confirmed: Merci de confirmer la perte de vos votes pour continuer.
 
 date:
     end_before_start: La date de fin ne peut pas être antérieure à la date de début.
@@ -41,3 +42,12 @@ charte:
 synthesis:
   consultation_step:
     is_not_set: Vous devez spécifier une étape de consultation.
+
+opinion:
+  votes_not_confirmed: Merci de confirmer la perte de vos votes pour continuer.
+
+argument:
+  votes_not_confirmed: Merci de confirmer la perte de vos votes pour continuer.
+
+comment:
+  votes_not_confirmed: Merci de confirmer la perte de vos votes pour continuer.

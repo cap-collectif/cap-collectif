@@ -2,7 +2,7 @@ Capco\AppBundle\Entity\Argument:
     argument1:
         Opinion: @opinion2
         type: 0
-        Author: @user<numberBetween(1, 5)>
+        Author: @user5
         body: <text(300)>
         isEnabled: true
         isTrashed: false

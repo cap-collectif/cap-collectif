@@ -3,3 +3,8 @@ Capco\AppBundle\Entity\IdeaVote:
         idea: @Idea<numberBetween(1, 2)>
         user: @user<numberBetween(6, 500)>
         confirmed: true
+
+    ideaVote501:
+      idea: @Idea21
+      user: @user<numberBetween(6, 500)>
+      confirmed: true

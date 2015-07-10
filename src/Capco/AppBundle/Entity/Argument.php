@@ -465,6 +465,7 @@ class Argument
         foreach ($this->votes as $vote) {
             $vote->setConfirmed(false);
         }
+        $this->voteCount = 0;
 
         return $this;
     }
