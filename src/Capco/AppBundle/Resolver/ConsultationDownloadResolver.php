@@ -2,7 +2,6 @@
 
 namespace Capco\AppBundle\Resolver;
 
-use Capco\AppBundle\Entity\AbstractVote;
 use Capco\AppBundle\Entity\Argument;
 use Capco\AppBundle\Entity\ConsultationStep;
 use Capco\AppBundle\Entity\Opinion;
@@ -128,7 +127,6 @@ class ConsultationDownloadResolver
         $opinions = $this->em->getRepository('CapcoAppBundle:Opinion')->getEnabledByConsultationStep($consultationStep);
         $arguments = $this->em->getRepository('CapcoAppBundle:Argument')->getEnabledByConsultationStep($consultationStep);
         $sources = $this->em->getRepository('CapcoAppBundle:Source')->getEnabledByConsultationStep($consultationStep);
-        $votes = $this->getEnabledVotesByConsultationStep($consultationStep);
 
         $data = array(
             'published' => array(),
@@ -164,13 +162,6 @@ class ConsultationDownloadResolver
                 $data['unpublished'][] = $item;
             }
         }
-
-        // Votes
-        foreach ($votes as $vote) {
-            $item = $this->getVoteItem($vote);
-            $data['published'][] = $item;
-        }
-
 
         return $data;
     }
@@ -254,89 +245,6 @@ class ConsultationDownloadResolver
             'trashed_date' => $this->dateToString($source->getTrashedAt()),
             'trashed_reason' => $source->getTrashedReason(),
         );
-    }
-
-    private function getVoteItem($vote)
-    {
-        return $item = array(
-            'opinion_title' => $this->translator->trans('consultation_download.values.non_applicable', array(), 'CapcoAppBundle'),
-            'content_type' => $this->translator->trans('consultation_download.values.content_type.vote', array(), 'CapcoAppBundle'),
-            'opinion_type' => $this->translator->trans('consultation_download.values.non_applicable', array(), 'CapcoAppBundle'),
-            'category' => $this->getVoteValue($vote),
-            'content' => $this->translator->trans('consultation_download.values.non_applicable', array(), 'CapcoAppBundle'),
-            'link' => $this->getVoteObject($vote),
-            'created' => $this->dateToString($vote->getCreatedAt()),
-            'updated' => $this->translator->trans('consultation_download.values.non_applicable', array(), 'CapcoAppBundle'),
-            'author' => $vote->getUser()->getUsername(),
-            'score' => $this->translator->trans('consultation_download.values.non_applicable', array(), 'CapcoAppBundle'),
-            'total_votes' => $this->translator->trans('consultation_download.values.non_applicable', array(), 'CapcoAppBundle'),
-            'votes_ok' => $this->translator->trans('consultation_download.values.non_applicable', array(), 'CapcoAppBundle'),
-            'votes_mitigated' => $this->translator->trans('consultation_download.values.non_applicable', array(), 'CapcoAppBundle'),
-            'votes_nok' => $this->translator->trans('consultation_download.values.non_applicable', array(), 'CapcoAppBundle'),
-            'sources' => $this->translator->trans('consultation_download.values.non_applicable', array(), 'CapcoAppBundle'),
-            'total_arguments' => $this->translator->trans('consultation_download.values.non_applicable', array(), 'CapcoAppBundle'),
-            'arguments_ok' => $this->translator->trans('consultation_download.values.non_applicable', array(), 'CapcoAppBundle'),
-            'arguments_nok' => $this->translator->trans('consultation_download.values.non_applicable', array(), 'CapcoAppBundle'),
-            'trashed' => $this->translator->trans('consultation_download.values.non_applicable', array(), 'CapcoAppBundle'),
-            'trashed_date' => $this->translator->trans('consultation_download.values.non_applicable', array(), 'CapcoAppBundle'),
-            'trashed_reason' => $this->translator->trans('consultation_download.values.non_applicable', array(), 'CapcoAppBundle'),
-        );
-    }
-
-    private function getEnabledVotesByConsultationStep($consultationStep)
-    {
-        $votes = [];
-        foreach ($consultationStep->getOpinions() as $opinion) {
-            foreach ($opinion->getVotes() as $vote) {
-                if ($vote->isConfirmed()) {
-                    $votes[] = $vote;
-                }
-            }
-            foreach ($opinion->getArguments() as $argument) {
-                foreach ($argument->getVotes() as $vote) {
-                    if ($vote->isConfirmed()) {
-                        $votes[] = $vote;
-                    }
-                }
-            }
-            foreach ($opinion->getSources() as $source) {
-                foreach ($source->getVotes() as $vote) {
-                    if ($vote->isConfirmed()) {
-                        $votes[] = $vote;
-                    }
-                }
-            }
-        }
-
-        return $votes;
-    }
-
-    private function getVoteValue($vote)
-    {
-        if ($vote->getValue() == -1) {
-            return $this->translator->trans('consultation_download.values.votes.nok', array(), 'CapcoAppBundle');
-        }
-        if ($vote->getValue() == 0) {
-            return $this->translator->trans('consultation_download.values.votes.mitige', array(), 'CapcoAppBundle');
-        }
-        if ($vote->getValue() == 1) {
-            return $this->translator->trans('consultation_download.values.votes.ok', array(), 'CapcoAppBundle');
-        }
-        return $this->translator->trans('consultation_download.values.votes.ok', array(), 'CapcoAppBundle');
-    }
-
-    private function getVoteObject($vote)
-    {
-        $object = $vote->getRelatedEntity();
-        if ($object instanceof Opinion) {
-            return $this->translator->trans('consultation_download.values.vote_opinion', array('%name%' => $object->getTitle()), 'CapcoAppBundle');
-        }
-        if ($object instanceof Argument) {
-            return $this->translator->trans('consultation_download.values.vote_argument', array('%id%' => $object->getId()), 'CapcoAppBundle');
-        }
-        if ($object instanceof Source) {
-            return $this->translator->trans('consultation_download.values.vote_source', array('%name%' => $object->getTitle()), 'CapcoAppBundle');
-        }
     }
 
     private function calculateScore($ok, $mitigated, $nok)

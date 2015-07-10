@@ -137,7 +137,7 @@ class SitemapsController extends Controller
         )) as $step) {
             if ($step->getConsultation()->canDisplay()) {
                 $urls[] = array(
-                    'loc' => $stepResolver->getLink($step, true),
+                    'loc' => $stepResolver->getLink($step, false),
                     'priority' => '0.5',
                     'lastmod' => $step->getUpdatedAt()->format(\DateTime::W3C),
                     'changefreq' => 'weekly',

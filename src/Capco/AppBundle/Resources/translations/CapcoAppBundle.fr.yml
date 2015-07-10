@@ -860,18 +860,10 @@ consultation_download:
       opinion: Proposition
       argument: Argument
       source: Source
-      vote: Vote
     link:
       media: Fichier
     yes: Oui
     no: Non
-    votes:
-      nok: Contre
-      mitige: Mitigé
-      ok: Pour
-    vote_opinion: Proposition "%name%"
-    vote_source: Source "%name%"
-    vote_argument: Argument "%id%"
 
 votes:
   none: Il n'y a pas de votes.
