@@ -229,12 +229,8 @@ class ConsultationController extends Controller
      */
     public function downloadAction($consultation, $step, $format)
     {
-        if (!$consultation || !$step) {
+        if (!$consultation || !$consultation->isExportable() || !$step) {
             throw $this->createNotFoundException($this->get('translator')->trans('consultation.error.not_found', array(), 'CapcoAppBundle'));
-        }
-
-        if (!$consultation->isExportable() && !$this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')) {
-            throw new AccessDeniedException($this->get('translator')->trans('consultation.error.not_exportable', array(), 'CapcoAppBundle'));
         }
 
         $resolver = $this->get('capco.consultation.download.resolver');

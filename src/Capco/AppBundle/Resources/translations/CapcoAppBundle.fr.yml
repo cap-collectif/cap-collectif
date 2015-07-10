@@ -317,7 +317,6 @@ consultation:
   error:
     not_found: Consultation introuvable.
     no_contribute: Impossible de contribuer sur cette consultation.
-    not_exportable: Impossible de télécharger cette consultation.
   contributors:
     no: Il n'y a pas encore de participants pour le moment.
     participate: Soyez le premier à %link%participer%endlink%.
@@ -861,10 +860,18 @@ consultation_download:
       opinion: Proposition
       argument: Argument
       source: Source
+      vote: Vote
     link:
       media: Fichier
     yes: Oui
     no: Non
+    votes:
+      nok: Contre
+      mitige: Mitigé
+      ok: Pour
+    vote_opinion: Proposition "%name%"
+    vote_source: Source "%name%"
+    vote_argument: Argument "%id%"
 
 votes:
   none: Il n'y a pas de votes.

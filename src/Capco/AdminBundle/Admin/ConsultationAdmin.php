@@ -102,9 +102,6 @@ class ConsultationAdmin extends Admin
             ->add('_action', 'actions', array(
                 'actions' => array(
                     'show' => array(),
-                    'download' => array(
-                        'template' => 'CapcoAdminBundle:CRUD:list__action_download.html.twig',
-                    ),
                     'edit' => array(),
                     'delete' => array(),
                 ),
