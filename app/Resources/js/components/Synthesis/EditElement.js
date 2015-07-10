@@ -12,8 +12,7 @@ var EditElement = React.createClass({
 
   getInitialState() {
     return {
-      element: null,
-      isLoading: true
+      element: null
     };
   },
 
@@ -33,14 +32,13 @@ var EditElement = React.createClass({
     var element = this.props.element;
     return (
       <div className="block synthesis--edit__content">
-        {this.renderLoader()}
         {this.renderElementPanel()}
       </div>
     );
   },
 
   renderElementPanel() {
-    if (!this.state.isLoading && this.state.element) {
+    if (this.state.element) {
       var element = this.state.element;
       return (
         <div className="panel panel-warning synthesis__element-panel">
@@ -65,27 +63,13 @@ var EditElement = React.createClass({
     }
   },
 
-  renderLoader() {
-    if (this.state.isLoading) {
-      return (
-        <div className= "row">
-          <div className="col-xs-2 col-xs-offset-5 spinner-loader-container">
-            <div className="spinner-loader"></div>
-          </div>
-        </div>
-      );
-    }
-  },
-
   onChange() {
     if (SynthesisElementStore.isSync) {
       this.setState({
-        element: SynthesisElementStore.element,
-        isLoading: false
+        element: SynthesisElementStore.element
       });
       return;
     }
-
     this.loadElementFromServer();
   },
 

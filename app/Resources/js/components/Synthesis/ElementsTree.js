@@ -1,7 +1,5 @@
 import ElementTitle from './ElementTitle';
 import Fetcher from '../../services/Fetcher';
-import SynthesisElementStore from '../../stores/SynthesisElementStore';
-import SynthesisElementActions from '../../actions/SynthesisElementActions';
 
 var FormattedMessage  = ReactIntl.FormattedMessage;
 
@@ -10,17 +8,8 @@ var ElementTree = React.createClass({
 
   getInitialState() {
     return {
-      rootElements: [],
-      isLoading: true
+      rootElements: []
     };
-  },
-
-  componentWillMount() {
-    SynthesisElementStore.addChangeListener(this.onChange);
-  },
-
-  componentWillUnmount() {
-    SynthesisElementStore.removeChangeListener(this.onChange);
   },
 
   componentDidMount() {
@@ -30,29 +19,26 @@ var ElementTree = React.createClass({
   render() {
     return (
       <div className="synthesis__elements-tree">
-        {this.renderLoader()}
         {this.renderTreeItems(this.state.rootElements, 0)}
       </div>
     );
   },
 
   renderTreeItems(elements, level) {
-    if (elements) {
-      return (
-        <ul className={"elements-tree__list tree-level-" + level}>
-          {
-            elements.map((element) => {
-              return (
-                <li className="elements-tree__item">
-                  {this.renderTreeItemContent(element)}
-                  {this.renderTreeItems(element.children, level + 1)}
-                </li>
-              );
-            })
-            }
-        </ul>
-      );
-    }
+    return (
+      <ul className={"elements-tree__list tree-level-" + level}>
+        {
+          elements.map((element) => {
+            return (
+              <li className="elements-tree__item">
+                {this.renderTreeItemContent(element)}
+                {this.renderTreeItems(element.children, level+1)}
+              </li>
+            );
+          })
+        }
+      </ul>
+    );
   },
 
   renderTreeItemContent(element) {
@@ -86,39 +72,14 @@ var ElementTree = React.createClass({
     );
   },
 
-  renderLoader() {
-    if (this.state.isLoading) {
-      return (
-        <div className= "row">
-          <div className="col-xs-2 col-xs-offset-5 spinner-loader-container">
-            <div className="spinner-loader"></div>
-          </div>
-        </div>
-      );
-    }
-  },
-
-  onChange() {
-    if (SynthesisElementStore.isSync) {
-      this.setState({
-        rootElements: SynthesisElementStore.elements,
-        isLoading: false
-      });
-      return;
-    }
-
-    this.setState({
-      isLoading: true
-    }, () => {
-      this.loadPublishedRootElementsFromServer();
-    });
-  },
-
   loadPublishedRootElementsFromServer() {
-    SynthesisElementActions.loadElementsFromServer(
-      this.props.synthesis.id,
-      'root'
-    );
+    Fetcher
+      .get('/syntheses/'+ this.props.synthesis.id + '/elements/root')
+      .then((data) => {
+        this.setState({
+          rootElements: data
+        });
+      });
   }
 
 });

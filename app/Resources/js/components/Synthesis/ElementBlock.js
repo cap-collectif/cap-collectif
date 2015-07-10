@@ -4,6 +4,7 @@ import ElementTitle from './ElementTitle';
 import ElementBreadcrumb from './ElementBreadcrumb';
 
 var FormattedDate = ReactIntl.FormattedDate;
+let Link = ReactRouter.Link;
 
 var ElementBlock = React.createClass({
   mixins: [ReactIntl.IntlMixin],

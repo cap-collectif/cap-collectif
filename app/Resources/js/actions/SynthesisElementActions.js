@@ -2,7 +2,7 @@
 
 import AppDispatcher from '../dispatchers/AppDispatcher';
 import Fetcher from '../services/Fetcher';
-import {RECEIVE_COUNT, RECEIVE_ELEMENTS, RECEIVE_ELEMENT, ARCHIVE_ELEMENT, UPDATE_ELEMENT, NOTE_ELEMENT, DISABLE_ELEMENT, MOVE_ELEMENT, UPDATE_ELEMENT_SUCCESS, UPDATE_ELEMENT_FAILURE} from '../constants/SynthesisElementConstants';
+import {RECEIVE_COUNT_NEW, RECEIVE_ELEMENT, ARCHIVE_ELEMENT, UPDATE_ELEMENT, NOTE_ELEMENT, DISABLE_ELEMENT, MOVE_ELEMENT, UPDATE_ELEMENT_SUCCESS, UPDATE_ELEMENT_FAILURE} from '../constants/SynthesisElementConstants';
 
 var updateElementFromData = (synthesis, element, data) => {
   return Fetcher
@@ -75,23 +75,11 @@ export default {
     });
   },
 
-  loadElementsFromServer: (synthesis, type) => {
+  loadNewElementsCountFromServer: (synthesis) => {
     Fetcher
-      .get('/syntheses/'+ synthesis + '/elements?type=' + type)
+      .get('/syntheses/'+ synthesis + '/elements/new/count')
       .then((data) => {
-        AppDispatcher.dispatch({
-          actionType: RECEIVE_ELEMENTS,
-          elements: data
-        });
-        return true;
-      });
-  },
-
-  loadElementsCountFromServer: (synthesis, type) => {
-    Fetcher
-      .get('/syntheses/'+ synthesis + '/elements/count?type=' + type)
-      .then((data) => {
-        data.actionType = RECEIVE_COUNT;
+        data.actionType = RECEIVE_COUNT_NEW;
         AppDispatcher.dispatch(data);
         return true;
     });

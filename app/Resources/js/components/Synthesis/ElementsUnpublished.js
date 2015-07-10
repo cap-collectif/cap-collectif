@@ -1,17 +1,17 @@
 import Fetcher from '../../services/Fetcher';
 import ElementsList from './ElementsList';
 
-var ElementsInbox = React.createClass({
+var ElementsUnpublished = React.createClass({
   mixins: [ReactIntl.IntlMixin],
 
   getInitialState() {
     return {
-      newElements: []
+      unpublishedElements: []
     };
   },
 
   componentDidMount() {
-    this.loadNewElementsFromServer();
+    this.loadUnpublishedElementsFromServer();
   },
 
   render() {
@@ -23,30 +23,30 @@ var ElementsInbox = React.createClass({
   },
 
   renderList() {
-    if (this.state.newElements.length > 0) {
+    if (this.state.unpublishedElements.length > 0) {
       return (
-        <ElementsList elements={this.state.newElements} />
+        <ElementsList elements={this.state.unpublishedElements} />
       );
     }
     return (
       <div className="box synthesis__elements-list--empty  text-center">
         <p className="icon  cap-bubble-attention-6"></p>
-        <p>{this.getIntlMessage('edition.inbox.none')}</p>
+        <p>{this.getIntlMessage('edition.unpublished.none')}</p>
       </div>
     );
 
   },
 
-  loadNewElementsFromServer() {
+  loadUnpublishedElementsFromServer() {
     Fetcher
-      .get('/syntheses/'+ this.props.synthesis.id + '/elements/new')
+      .get('/syntheses/'+ this.props.synthesis.id + '/elements/unpublished')
       .then((data) => {
         this.setState({
-          'newElements': data
+          'unpublishedElements': data
         });
       });
   }
 
 });
 
-export default ElementsInbox;
+export default ElementsUnpublished;

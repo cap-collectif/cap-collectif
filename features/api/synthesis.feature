@@ -228,7 +228,7 @@ Feature: Synthesis
     Given I am logged in to api as admin
     And there is a synthesis with id "42" and elements:
       | 43 |
-    And I send a GET request to "/api/syntheses/42/elements?type=all"
+    And I send a GET request to "/api/syntheses/42/elements"
     Then the JSON response should match:
     """
     [
@@ -271,7 +271,7 @@ Feature: Synthesis
     Given I am logged in to api as admin
     And there is a synthesis with id "42" and elements:
       | 43 |
-    And I send a GET request to "/api/syntheses/42/elements/count?type=all"
+    And I send a GET request to "/api/syntheses/42/elements/count"
     Then the JSON response should match:
     """
     {"count": "1"}
@@ -285,7 +285,7 @@ Feature: Synthesis
     And I create an element in synthesis 42 with values:
       | id       | 44   |
       | archived | true |
-    And I send a GET request to "/api/syntheses/42/elements?type=new"
+    And I send a GET request to "/api/syntheses/42/elements/new"
     Then the JSON response should match:
     """
     [
@@ -331,7 +331,7 @@ Feature: Synthesis
     And I create an element in synthesis 42 with values:
       | id       | 44   |
       | archived | true |
-    And I send a GET request to "/api/syntheses/42/elements/count?type=new"
+    And I send a GET request to "/api/syntheses/42/elements/new/count"
     Then the JSON response should match:
     """
     {"count": "1"}
@@ -344,7 +344,7 @@ Feature: Synthesis
     And I create an element in synthesis 42 with values:
       | id       | 44   |
       | archived | true |
-    And I send a GET request to "/api/syntheses/42/elements?type=archived"
+    And I send a GET request to "/api/syntheses/42/elements/archived"
     Then the JSON response should match:
     """
     [
@@ -380,7 +380,7 @@ Feature: Synthesis
     And I create an element in synthesis 42 with values:
       | id       | 44   |
       | archived | true |
-    And I send a GET request to "/api/syntheses/42/elements/count?type=archived"
+    And I send a GET request to "/api/syntheses/42/elements/archived/count"
     Then the JSON response should match:
     """
     {"count": "1"}
@@ -394,7 +394,7 @@ Feature: Synthesis
     And I create an element in synthesis 42 with values:
       | id       | 44   |
       | enabled | false |
-    And I send a GET request to "/api/syntheses/42/elements?type=unpublished"
+    And I send a GET request to "/api/syntheses/42/elements/unpublished"
     Then the JSON response should match:
     """
     [
@@ -431,7 +431,7 @@ Feature: Synthesis
     And I create an element in synthesis 42 with values:
       | id       | 44   |
       | enabled | false |
-    And I send a GET request to "/api/syntheses/42/elements/count?type=unpublished"
+    And I send a GET request to "/api/syntheses/42/elements/unpublished/count"
     Then the JSON response should match:
     """
     {"count": "1"}
@@ -441,7 +441,7 @@ Feature: Synthesis
   Scenario: API client wants to get root synthesis elements
     Given I am logged in to api as admin
     And there is a synthesis with id "48" based on consultation step 2
-    And I send a GET request to "/api/syntheses/48/elements?type=root"
+    And I send a GET request to "/api/syntheses/48/elements/root"
     Then the JSON response should match:
     """
     [
@@ -477,7 +477,7 @@ Feature: Synthesis
   Scenario: API client wants to get root synthesis elements count
     Given I am logged in to api as admin
     And there is a synthesis with id "48" based on consultation step 2
-    And I send a GET request to "/api/syntheses/48/elements/count?type=root"
+    And I send a GET request to "/api/syntheses/48/elements/root/count"
     Then the JSON response should match:
     """
     {"count": "3"}

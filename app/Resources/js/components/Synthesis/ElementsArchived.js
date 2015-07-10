@@ -1,17 +1,17 @@
 import Fetcher from '../../services/Fetcher';
 import ElementsList from './ElementsList';
 
-var ElementsInbox = React.createClass({
+var ElementsArchived = React.createClass({
   mixins: [ReactIntl.IntlMixin],
 
   getInitialState() {
     return {
-      newElements: []
+      archivedElements: []
     };
   },
 
   componentDidMount() {
-    this.loadNewElementsFromServer();
+    this.loadArchivedElementsFromServer();
   },
 
   render() {
@@ -23,30 +23,30 @@ var ElementsInbox = React.createClass({
   },
 
   renderList() {
-    if (this.state.newElements.length > 0) {
+    if (this.state.archivedElements.length > 0) {
       return (
-        <ElementsList elements={this.state.newElements} />
+        <ElementsList elements={this.state.archivedElements} />
       );
     }
     return (
       <div className="box synthesis__elements-list--empty  text-center">
         <p className="icon  cap-bubble-attention-6"></p>
-        <p>{this.getIntlMessage('edition.inbox.none')}</p>
+        <p>{this.getIntlMessage('edition.archived.none')}</p>
       </div>
     );
 
   },
 
-  loadNewElementsFromServer() {
+  loadArchivedElementsFromServer() {
     Fetcher
-      .get('/syntheses/'+ this.props.synthesis.id + '/elements/new')
+      .get('/syntheses/'+ this.props.synthesis.id + '/elements/archived')
       .then((data) => {
         this.setState({
-          'newElements': data
+          'archivedElements': data
         });
       });
   }
 
 });
 
-export default ElementsInbox;
+export default ElementsArchived;

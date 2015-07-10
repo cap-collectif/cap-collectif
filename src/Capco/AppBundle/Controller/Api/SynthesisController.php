@@ -6,27 +6,20 @@ use Capco\AppBundle\Entity\ConsultationStep;
 use Capco\AppBundle\Entity\Synthesis\Synthesis;
 use Capco\AppBundle\Entity\Synthesis\SynthesisElement;
 use Capco\AppBundle\Entity\Synthesis\SynthesisDivision;
-
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
-use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Symfony\Component\Validator\ConstraintViolationListInterface;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
-
 use FOS\RestBundle\Controller\FOSRestController;
 use FOS\RestBundle\Controller\Annotations\View;
 use FOS\RestBundle\Controller\Annotations\Get;
 use FOS\RestBundle\Controller\Annotations\Post;
 use FOS\RestBundle\Controller\Annotations\Put;
 use FOS\RestBundle\Util\Codes;
-use FOS\RestBundle\Request\ParamFetcherInterface;
-use FOS\RestBundle\Controller\Annotations\QueryParam;
-
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 use JMS\Serializer\SerializationContext;
-
 use Capco\AppBundle\Form\Api\SynthesisType as SynthesisForm;
 use Capco\AppBundle\Form\Api\SynthesisElementType as SynthesisElementForm;
 use Capco\AppBundle\Form\Api\SynthesisDivisionType as SynthesisDivisionForm;
@@ -192,61 +185,226 @@ class SynthesisController extends FOSRestController
     }
 
     /**
-     * Get synthesis elements filtered by type.
+     * Get synthesis elements.
      *
      * @return array|\Capco\AppBundle\Entity\Synthesis\SynthesisElement[]
      *
      * @ApiDoc(
      *  resource=true,
-     *  description="Get the elements of a synthesis, filtered by type",
+     *  description="Get all the elements of a synthesis",
      *  statusCodes={
      *    200 = "Syntheses element found",
+     *    404 = "No syntheses element found",
+     *  }
+     * )
+     *
+     * @Security("has_role('ROLE_ADMIN')")
+     * @Get("/syntheses/{id}/elements")
+     * @View(serializerGroups={"ElementDetails", "UserDetails"})
+     */
+    public function getSynthesisElementsAction($id)
+    {
+        return $this->get('capco.synthesis.synthesis_element_handler')->getAllElementsFromSynthesis($id);
+    }
+
+    /**
+     * Count synthesis elements.
+     *
+     * @return array|\Capco\AppBundle\Entity\Synthesis\SynthesisElement[]
+     *
+     * @ApiDoc(
+     *  resource=true,
+     *  description="Count all the elements of a synthesis",
+     *  statusCodes={
+     *    200 = "Success",
+     *  }
+     * )
+     *
+     * @Security("has_role('ROLE_ADMIN')")
+     * @Get("/syntheses/{id}/elements/count")
+     * @View()
+     */
+    public function countSynthesisElementsAction($id)
+    {
+        return ['count' => $this->get('capco.synthesis.synthesis_element_handler')->countAllElementsFromSynthesis($id)];
+    }
+
+    /**
+     * Get new synthesis elements.
+     *
+     * @return array|\Capco\AppBundle\Entity\Synthesis\SynthesisElement[]
+     *
+     * @ApiDoc(
+     *  resource=true,
+     *  description="Get new synthesis elements",
+     *  statusCodes={
+     *    200 = "Success",
      *    404 = "Synthesis not found",
      *  }
      * )
      *
-     * @ParamConverter("synthesis", options={"mapping": {"id": "id"}})
-     * @QueryParam(name="type", nullable=true)
-     * @Get("/syntheses/{id}/elements")
+     * @Security("has_role('ROLE_ADMIN')")
+     * @Get("/syntheses/{id}/elements/new")
      * @View(serializerGroups={"ElementDetails", "UserDetails"})
      */
-    public function getSynthesisElementsAction(ParamFetcherInterface $paramFetcher, Synthesis $synthesis)
+    public function getNewSynthesisElementsAction($id)
     {
-        $type = $paramFetcher->get('type');
-        if ($type !== 'archived' && !$this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')) {
-            throw new AccessDeniedException();
-        }
-
-        return $this->get('capco.synthesis.synthesis_element_handler')->getElementsFromSynthesisByType($synthesis, $type);
+        return $this->get('capco.synthesis.synthesis_element_handler')->getNewElementsFromSynthesis($id);
     }
 
     /**
-     * Count synthesis elements filtered by type.
+     * Count new synthesis elements.
      *
      * @return array|\Capco\AppBundle\Entity\Synthesis\SynthesisElement[]
      *
      * @ApiDoc(
      *  resource=true,
-     *  description="Count the elements of a synthesis, filtered by type",
+     *  description="Count new elements of a synthesis",
      *  statusCodes={
      *    200 = "Success",
-    *     404 = "Synthesis not found",
      *  }
      * )
      *
-     * @ParamConverter("synthesis", options={"mapping": {"id": "id"}})
-     * @QueryParam(name="type", nullable=true)
-     * @Get("/syntheses/{id}/elements/count")
+     * @Security("has_role('ROLE_ADMIN')")
+     * @Get("/syntheses/{id}/elements/new/count")
      * @View()
      */
-    public function countSynthesisElementsAction(ParamFetcherInterface $paramFetcher, Synthesis $synthesis)
+    public function countNewSynthesisElementsAction($id)
     {
-        $type = $paramFetcher->get('type');
-        if ($type !== 'archived' && !$this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')) {
-            throw new AccessDeniedException();
-        }
+        return ['count' => $this->get('capco.synthesis.synthesis_element_handler')->countNewElementsFromSynthesis($id)];
+    }
 
-        return ['count' => $this->get('capco.synthesis.synthesis_element_handler')->countElementsFromSynthesisByType($synthesis, $type)];
+    /**
+     * Get archived synthesis elements.
+     *
+     * @return array|\Capco\AppBundle\Entity\Synthesis\SynthesisElement[]
+     *
+     * @ApiDoc(
+     *  resource=true,
+     *  description="Get all the elements of a synthesis that are archived",
+     *  statusCodes={
+     *    200 = "Success",
+     *    404 = "Synthesis not found",
+     *  }
+     * )
+     *
+     * @Get("/syntheses/{id}/elements/archived")
+     * @View(serializerGroups={"ElementDetails", "UserDetails"})
+     */
+    public function getArchivedSynthesisElementsAction($id)
+    {
+        return $this->get('capco.synthesis.synthesis_element_handler')->getArchivedElementsFromSynthesis($id);
+    }
+
+    /**
+     * Count archived synthesis elements.
+     *
+     * @return array|\Capco\AppBundle\Entity\Synthesis\SynthesisElement[]
+     *
+     * @ApiDoc(
+     *  resource=true,
+     *  description="Count archived elements of a synthesis",
+     *  statusCodes={
+     *    200 = "Success",
+     *  }
+     * )
+     *
+     * @Get("/syntheses/{id}/elements/archived/count")
+     * @View()
+     */
+    public function countArchivedSynthesisElementsAction($id)
+    {
+        return ['count' => $this->get('capco.synthesis.synthesis_element_handler')->countArchivedElementsFromSynthesis($id)];
+    }
+
+    /**
+     * Get unpublished synthesis elements.
+     *
+     * @return array|\Capco\AppBundle\Entity\Synthesis\SynthesisElement[]
+     *
+     * @ApiDoc(
+     *  resource=true,
+     *  description="Get all the elements of a synthesis that are unpublished",
+     *  statusCodes={
+     *    200 = "Success",
+     *    404 = "Synthesis not found",
+     *  }
+     * )
+     *
+     * @Security("has_role('ROLE_ADMIN')")
+     * @Get("/syntheses/{id}/elements/unpublished")
+     * @View(serializerGroups={"ElementDetails", "UserDetails"})
+     */
+    public function getUnpublishedSynthesisElementsAction($id)
+    {
+        return $this->get('capco.synthesis.synthesis_element_handler')->getUnpublishedElementsFromSynthesis($id);
+    }
+
+    /**
+     * Count unpublished synthesis elements.
+     *
+     * @return array|\Capco\AppBundle\Entity\Synthesis\SynthesisElement[]
+     *
+     * @ApiDoc(
+     *  resource=true,
+     *  description="Count unpublished elements of a synthesis",
+     *  statusCodes={
+     *    200 = "Success",
+     *  }
+     * )
+     *
+     * @Security("has_role('ROLE_ADMIN')")
+     * @Get("/syntheses/{id}/elements/unpublished/count")
+     * @View()
+     */
+    public function countUnpublishedSynthesisElementsAction($id)
+    {
+        return ['count' => $this->get('capco.synthesis.synthesis_element_handler')->countUnpublishedElementsFromSynthesis($id)];
+    }
+
+    /**
+     * Get root synthesis elements.
+     *
+     * @return array|\Capco\AppBundle\Entity\Synthesis\SynthesisElement[]
+     *
+     * @ApiDoc(
+     *  resource=true,
+     *  description="Get root elements of a synthesis",
+     *  statusCodes={
+     *    200 = "Success",
+     *    404 = "Synthesis not found",
+     *  }
+     * )
+     *
+     * @Security("has_role('ROLE_ADMIN')")
+     * @Get("/syntheses/{id}/elements/root")
+     * @View(serializerGroups={"ElementDetails", "UserDetails"})
+     */
+    public function getRootSynthesisElementsAction($id)
+    {
+        return $this->get('capco.synthesis.synthesis_element_handler')->getRootElementsFromSynthesis($id);
+    }
+
+    /**
+     * Count root synthesis elements.
+     *
+     * @return array|\Capco\AppBundle\Entity\Synthesis\SynthesisElement[]
+     *
+     * @ApiDoc(
+     *  resource=true,
+     *  description="Count root elements of a synthesis",
+     *  statusCodes={
+     *    200 = "Success",
+     *  }
+     * )
+     *
+     * @Security("has_role('ROLE_ADMIN')")
+     * @Get("/syntheses/{id}/elements/root/count")
+     * @View()
+     */
+    public function countRootSynthesisElementsAction($id)
+    {
+        return ['count' => $this->get('capco.synthesis.synthesis_element_handler')->countRootElementsFromSynthesis($id)];
     }
 
     /**

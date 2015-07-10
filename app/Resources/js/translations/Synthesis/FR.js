@@ -30,7 +30,16 @@ export default {
         new_folder: 'Nouveau dossier'
       },
       inbox: {
-        none: 'Aucune contribution à afficher.'
+        none: 'Aucune contribution non traitée.'
+      },
+      archived: {
+        none: 'Aucune contribution traitée.'
+      },
+      unpublished: {
+        none: 'Aucune contribution dépubliée.'
+      },
+      all: {
+        none: 'Aucune contribution.'
       }
     }
   }

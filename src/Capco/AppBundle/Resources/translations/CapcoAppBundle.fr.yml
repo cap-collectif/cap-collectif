@@ -317,6 +317,7 @@ consultation:
   error:
     not_found: Consultation introuvable.
     no_contribute: Impossible de contribuer sur cette consultation.
+    not_exportable: Impossible de télécharger cette consultation.
   contributors:
     no: Il n'y a pas encore de participants pour le moment.
     participate: Soyez le premier à %link%participer%endlink%.
