@@ -1,5 +1,3 @@
-'use strict';
-
 class Validator {
 
   constructor(value) {
@@ -11,7 +9,7 @@ class Validator {
   }
 
   isEmail() {
-    var re = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,15}(?:\.[a-z]{2})?)$/i;
+    const re = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,15}(?:\.[a-z]{2})?)$/i;
     return this.value && re.test(this.value);
   }
 

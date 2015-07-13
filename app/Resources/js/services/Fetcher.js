@@ -1,5 +1,3 @@
-'use strict';
-
 import config from '../config';
 import LoginStore from '../stores/LoginStore';
 
@@ -8,23 +6,23 @@ function status(response) {
     return response;
   }
   throw new Error(response.statusText);
-};
+}
 
 function json(response) {
   if (response) {
-    return response.json()
+    return response.json();
   }
   return {};
-};
+}
 
 function createHeaders() {
-  var headers = {
+  let headers = {
     'Accept': 'application/json',
-    'Content-Type': 'application/json'
+    'Content-Type': 'application/json',
   };
 
-  if(LoginStore.jwt != null) {
-     headers.Authorization = 'Bearer ' + LoginStore.jwt;
+  if (LoginStore.jwt !== null) {
+    headers.Authorization = 'Bearer ' + LoginStore.jwt;
   }
 
   return headers;
@@ -36,7 +34,7 @@ class Fetcher {
   get(uri) {
     return fetch(config.api + uri, {
       method: 'get',
-      headers: createHeaders()
+      headers: createHeaders(),
     })
     .then(status)
     .then(json);
@@ -46,16 +44,16 @@ class Fetcher {
     return fetch(config.api + uri, {
         method: 'post',
         headers: createHeaders(),
-        body: JSON.stringify(body)
+        body: JSON.stringify(body),
       })
-      .then(status)
+      .then(status);
   }
 
   put(uri, body) {
     return fetch(config.api + uri, {
         method: 'put',
         headers: createHeaders(),
-        body: JSON.stringify(body)
+        body: JSON.stringify(body),
       })
       .then(status)
       .then(json);
@@ -64,7 +62,7 @@ class Fetcher {
   delete(uri) {
     return fetch(config.api + uri, {
       method: 'delete',
-      headers: createHeaders()
+      headers: createHeaders(),
     })
     .then(status)
     .then(json);
