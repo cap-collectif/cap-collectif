@@ -233,7 +233,7 @@ Feature: Synthesis
     """
     [
       {
-        "hasLinkedData": false,
+        "has_linked_data": false,
         "id": "43",
         "enabled": true,
         "created_at": "@string@.isDateTime()",
@@ -256,7 +256,7 @@ Feature: Synthesis
         "body": "blabla",
         "notation": 4,
         "votes": {"-1": 21, "0":12, "1": 43},
-        "linkedDataCreation": @null@,
+        "linked_data_creation": @null@,
         "_links": {
           "self": { "href": "/api/syntheses/42/elements/43" },
           "divide": { "href": "/api/syntheses/42/elements/43/divisions" },
@@ -290,7 +290,7 @@ Feature: Synthesis
     """
     [
       {
-        "hasLinkedData": false,
+        "has_linked_data": false,
         "id": "43",
         "enabled": true,
         "created_at": "@string@.isDateTime()",
@@ -313,7 +313,7 @@ Feature: Synthesis
         "body": "blabla",
         "notation": 4,
         "votes": {"-1": 21, "0":12, "1": 43},
-        "linkedDataCreation": @null@,
+        "linked_data_creation": @null@,
         "_links": {
           "self": { "href": "/api/syntheses/42/elements/43" },
           "divide": { "href": "/api/syntheses/42/elements/43/divisions" },
@@ -349,7 +349,7 @@ Feature: Synthesis
     """
     [
       {
-        "hasLinkedData": false,
+        "has_linked_data": false,
         "id": "44",
         "enabled": true,
         "created_at": "@string@.isDateTime()",
@@ -363,7 +363,7 @@ Feature: Synthesis
         "body": "blabla",
         "notation": @null@,
         "votes": [],
-        "linkedDataCreation": @null@,
+        "linked_data_creation": @null@,
         "_links": {
           "self": { "href": "/api/syntheses/42/elements/44" },
           "divide": { "href": "/api/syntheses/42/elements/44/divisions" },
@@ -399,7 +399,7 @@ Feature: Synthesis
     """
     [
       {
-        "hasLinkedData": false,
+        "has_linked_data": false,
         "id": "44",
         "enabled": false,
         "created_at": "@string@.isDateTime()",
@@ -413,7 +413,7 @@ Feature: Synthesis
         "body": "blabla",
         "notation": @null@,
         "votes": [],
-        "linkedDataCreation": @null@,
+        "linked_data_creation": @null@,
         "_links": {
           "self": { "href": "/api/syntheses/42/elements/44" },
           "divide": { "href": "/api/syntheses/42/elements/44/divisions" },
@@ -446,7 +446,7 @@ Feature: Synthesis
     """
     [
       {
-        "hasLinkedData": true,
+        "has_linked_data": true,
         "id": @string@,
         "enabled": true,
         "created_at": "@string@.isDateTime()",
@@ -462,7 +462,7 @@ Feature: Synthesis
         "body": "blabla",
         "notation": @null@,
         "votes": [],
-        "linkedDataCreation": "@string@.isDateTime()",
+        "linked_data_creation": "@string@.isDateTime()",
         "_links": {
           "self": { "href": "@string@.startsWith('/api/syntheses/48/elements/')" },
           "divide": { "href": "@string@.startsWith('/api/syntheses/48/elements/').endsWith('/divisions')" },
@@ -491,7 +491,7 @@ Feature: Synthesis
     Then the JSON response should match:
     """
     {
-      "hasLinkedData": false,
+      "has_linked_data": false,
       "id": "43",
       "enabled": true,
       "created_at": "@string@.isDateTime()",
@@ -514,7 +514,7 @@ Feature: Synthesis
       "body": "blabla",
       "notation": 4,
       "votes": {"-1": 21, "0":12, "1": 43},
-      "linkedDataCreation": @null@,
+      "linked_data_creation": @null@,
       "_links": {
         "self": { "href": "/api/syntheses/42/elements/43" },
         "divide": { "href": "/api/syntheses/42/elements/43/divisions" },
@@ -540,7 +540,7 @@ Feature: Synthesis
     And the JSON response should match:
     """
     {
-      "hasLinkedData": false,
+      "has_linked_data": false,
       "id": @string@,
       "enabled": true,
       "created_at": "@string@.isDateTime()",
@@ -554,7 +554,7 @@ Feature: Synthesis
       "body": "blabla",
       "notation": 5,
       "votes": [],
-      "linkedDataCreation": @null@,
+      "linked_data_creation": @null@,
       "_links": {
         "self": { "href": "@string@.startsWith('/api/syntheses/42/elements/')" },
         "divide": { "href": "@string@.startsWith('/api/syntheses/42/elements/').endsWith('/divisions')" },
@@ -609,7 +609,7 @@ Feature: Synthesis
     And the JSON response should match:
     """
     {
-      "hasLinkedData": false,
+      "has_linked_data": false,
       "id": "43",
       "enabled": true,
       "created_at": "@string@.isDateTime()",
@@ -632,7 +632,7 @@ Feature: Synthesis
       "body": "blabla",
       "notation": 2,
       "votes": {"-1": 21, "0":12, "1": 43},
-      "linkedDataCreation": @null@,
+      "linked_data_creation": @null@,
       "_links": {
         "self": { "href": "/api/syntheses/42/elements/43" },
         "divide": { "href": "/api/syntheses/42/elements/43/divisions" },

@@ -1,0 +1,80 @@
+Capco\AppBundle\Entity\Synthesis\SynthesisElement:
+  exclusion_policy: ALL
+  properties:
+    id:
+      expose: true
+      groups: [Elements, ElementDetails]
+    enabled:
+      expose: true
+      groups: [ElementDetails]
+    createdAt:
+      expose: true
+      groups: [ElementDetails]
+    updatedAt:
+      expose: true
+      groups: [ElementDetails]
+    archived:
+      expose: true
+      groups: [ElementDetails]
+    author:
+      expose: true
+      groups: [ElementDetails, UserDetails]
+    parent:
+      type: Capco\AppBundle\Entity\Synthesis\SynthesisElement
+      expose: true
+      groups: [ElementDetails]
+    children:
+      type: ArrayCollection<Capco\AppBundle\Entity\Synthesis\SynthesisElement>
+      expose: true
+      groups: [ElementDetails]
+    displayType:
+      expose: true
+      groups: [ElementDetails]
+    title:
+      expose: true
+      groups: [Elements, ElementDetails]
+    body:
+      expose: true
+      groups: [ElementDetails]
+    notation:
+      expose: true
+      groups: [ElementDetails]
+    votes:
+      expose: true
+      groups: [ElementDetails]
+    linkedDataCreation:
+      expose: true
+      groups: [ElementDetails]
+  virtual_properties:
+    hasLinkedData:
+      serialized_name: has_linked_data
+      groups: [ElementDetails]
+  relations:
+    -
+      rel: self
+      href:
+        route: get_synthesis_element
+        parameters:
+          synthesis_id: expr(object.getSynthesis().getId())
+          element_id: expr(object.getId())
+      exclusion:
+        groups: [Elements, ElementDetails]
+    -
+      rel: divide
+      href:
+        route: divide_synthesis_element
+        parameters:
+          synthesis_id: expr(object.getSynthesis().getId())
+          element_id: expr(object.getId())
+      exclusion:
+        groups: [Elements, ElementDetails]
+    -
+      rel: history
+      href:
+        route: get_synthesis_element_history
+        parameters:
+          synthesis_id: expr(object.getSynthesis().getId())
+          element_id: expr(object.getId())
+      exclusion:
+        groups: [Elements, ElementDetails]
+
