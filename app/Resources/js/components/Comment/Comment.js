@@ -11,11 +11,11 @@ import LoginStore from '../../stores/LoginStore';
 
 const Comment = React.createClass({
   propTypes: {
-    uri: React.PropType.string,
-    object: React.PropType.number,
-    comment: React.PropType.object,
-    root: React.PropType.bool,
-    isReportingEnabled: React.PropType.bool,
+    uri: React.PropTypes.string,
+    object: React.PropTypes.number,
+    comment: React.PropTypes.object,
+    root: React.PropTypes.bool,
+    isReportingEnabled: React.PropTypes.bool,
   },
   mixins: [ReactIntl.IntlMixin],
 

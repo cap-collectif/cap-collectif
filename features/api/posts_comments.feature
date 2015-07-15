@@ -20,6 +20,8 @@ Feature: Posts comments
           "vote_count": @integer@,
           "author": {
             "username": @string@,
+            "display_name": @string@,
+            "unique_id": @string@,
             "media": {
               "url": "@string@.startsWith('/media')"
             },
