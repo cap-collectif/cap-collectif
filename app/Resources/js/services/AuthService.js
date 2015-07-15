@@ -1,3 +1,6 @@
+'use strict';
+
+import Fetcher from './Fetcher';
 import LoginActions from '../actions/LoginActions';
 
 function status(response) {
@@ -19,15 +22,15 @@ class AuthService {
       credentials: 'same-origin',
       headers: {
         'Accept': 'application/json',
-        'Content-Type': 'application/json',
-      },
+        'Content-Type': 'application/json'
+      }
     })
     .then(status)
     .then(json)
     .then((data) => {
-      LoginActions.loginUser(data.token, data.user);
+        LoginActions.loginUser(data.token, data.user);
     })
-    .catch(() => {
+    .catch((error) => {
       console.log('Login as Anonymous');
       LoginActions.logoutUser();
     });

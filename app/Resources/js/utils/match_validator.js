@@ -1,4 +1,3 @@
-/*eslint-disable */
 const uriSchemeRegex = /^[A-Za-z][-.+A-Za-z0-9]+:/;
 const hasFullProtocolRegex = /^[A-Za-z][-.+A-Za-z0-9]+:\/\//;
 const hasWordCharAfterProtocolRegex = /:[^\s]*?[A-Za-z]/;
@@ -34,7 +33,7 @@ const invalidProtocolRelMatchRegex = /^[\w]\/\//;
  *   processed.
  */
 export function isValidMatch(urlMatch, protocolUrlMatch, protocolRelativeMatch) {
-  if (
+  if(
     (protocolUrlMatch && !isValidUriScheme(protocolUrlMatch)) ||
     urlMatchDoesNotHaveProtocolOrDot(urlMatch, protocolUrlMatch) || // At least one period ('.') must exist in the URL match for us to consider it an actual URL, *unless* it was a full protocol match (like 'http://localhost')
     urlMatchDoesNotHaveAtLeastOneWordChar(urlMatch, protocolUrlMatch) || // At least one letter character must exist in the domain name after a protocol match. Ex: skip over something like "git:1.0"
@@ -56,7 +55,7 @@ export function isValidMatch(urlMatch, protocolUrlMatch, protocolRelativeMatch) 
  * @return {Boolean} `true` if the scheme is a valid one, `false` otherwise.
  */
 function isValidUriScheme(uriSchemeMatch) {
-  let uriScheme = uriSchemeMatch.match(uriSchemeRegex)[0].toLowerCase();
+  var uriScheme = uriSchemeMatch.match(uriSchemeRegex)[0].toLowerCase();
 
   return (uriScheme !== 'javascript:' && uriScheme !== 'vbscript:');
 }
@@ -104,7 +103,7 @@ function urlMatchDoesNotHaveProtocolOrDot(urlMatch, protocolUrlMatch) {
  *   character in it after the protocol, `false` otherwise.
  */
 function urlMatchDoesNotHaveAtLeastOneWordChar(urlMatch, protocolUrlMatch) {
-  if (urlMatch && protocolUrlMatch) {
+  if(urlMatch && protocolUrlMatch) {
     return !hasWordCharAfterProtocolRegex.test(urlMatch);
   } else {
     return false;

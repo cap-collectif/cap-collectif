@@ -50,8 +50,8 @@ class IdeaCommentRepository extends EntityRepository
     {
         $qb = $this->getIsEnabledQueryBuilder()
                    ->select('count(c.id)')
+                   ->leftJoin('c.Idea', 'i')
                    ->andWhere('c.Idea = :idea')
-                   ->andWhere('c.isTrashed = false')
                    ->setParameter('idea', $idea)
                 ;
 

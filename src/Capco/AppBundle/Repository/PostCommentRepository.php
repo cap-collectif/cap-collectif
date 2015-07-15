@@ -48,8 +48,8 @@ class PostCommentRepository extends EntityRepository
     {
         $qb = $this->getIsEnabledQueryBuilder()
                    ->select('count(c.id)')
+                   ->leftJoin('c.Post', 'i')
                    ->andWhere('c.Post = :post')
-                   ->andWhere('c.isTrashed = false')
                    ->setParameter('post', $post)
                 ;
 

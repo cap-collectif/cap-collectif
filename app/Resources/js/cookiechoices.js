@@ -1,4 +1,4 @@
-/*eslint-disable */
+
 var document = window.document;
 var supportsTextContent = 'textContent' in document.body;
 

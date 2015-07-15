@@ -49,8 +49,8 @@ class EventCommentRepository extends EntityRepository
     {
         $qb = $this->getIsEnabledQueryBuilder()
                    ->select('count(c.id)')
+                   ->leftJoin('c.Event', 'e')
                    ->andWhere('c.Event = :event')
-                   ->andWhere('c.isTrashed = false')
                    ->setParameter('event', $event)
                 ;
 
