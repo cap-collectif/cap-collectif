@@ -117,8 +117,8 @@ Feature: Posts comments
     When I send a POST request to "/api/posts/3/comments" with json:
     """
     {
-      "parent": 201,
-      "authorName": "Kéké du bled",
+      "parent": 202,
+      "authorName": "Kéké",
       "authorEmail": "vivele94@gmail.com",
       "body": "Ma super réponse"
     }
@@ -154,7 +154,7 @@ Feature: Posts comments
     When I send a POST request to "/api/posts/3/comments" with json:
     """
     {
-      "parent": 201,
+      "parent": 202,
       "body": "Oh oui j'ose :-P"
     }
     """
@@ -166,7 +166,7 @@ Feature: Posts comments
     When I send a POST request to "/api/posts/3/comments" with json:
     """
     {
-      "parent": 202,
+      "parent": 201,
       "body": "Pr0 Hacker"
     }
     """

@@ -217,4 +217,4 @@ Scenario: Can not comment an uncommentable idea
     And I am logged in as user
     And I visited "ideas page"
     When I follow "Voir la corbeille"
-    Then I should see 7 ".media--macro" elements
+    Then I should see 6 ".media--macro" elements

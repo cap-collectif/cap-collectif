@@ -9,7 +9,7 @@ Scenario: Author of a comment loose their votes when updating it
   And I visited "ideas page"
   And I follow "Troisième idée"
   And I wait 5 seconds
-  And I should see "5" in the ".opinion__votes-nb" element
+  And I should see "3" in the ".opinion--comment .opinion__votes-nb" element
   When I follow "Modifier"
   And I fill in the following:
     | body      | Je modifie mon commentaire !   |
@@ -17,7 +17,7 @@ Scenario: Author of a comment loose their votes when updating it
   And I press "Modifier"
   Then I should see "Merci ! Votre commentaire a bien été modifié."
   And I wait 5 seconds
-  And I should see "0" in the ".opinion__votes-nb" element
+  And I should see "0" in the ".opinion--comment .opinion__votes-nb" element
 
   @javascript
 Scenario: Non author of a comment wants to update it

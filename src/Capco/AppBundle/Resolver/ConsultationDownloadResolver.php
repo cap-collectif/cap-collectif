@@ -313,13 +313,17 @@ class ConsultationDownloadResolver
 
     private function getVoteValue($vote)
     {
-        if ($vote->getValue() == -1) {
-            return $this->translator->trans('consultation_download.values.votes.nok', array(), 'CapcoAppBundle');
-        }
-        if ($vote->getValue() == 0) {
-            return $this->translator->trans('consultation_download.values.votes.mitige', array(), 'CapcoAppBundle');
-        }
-        if ($vote->getValue() == 1) {
+        if (method_exists($vote, 'getValue')) {
+            if ($vote->getValue() == -1) {
+                return $this->translator->trans('consultation_download.values.votes.nok', array(), 'CapcoAppBundle');
+            }
+            if ($vote->getValue() == 0) {
+                return $this->translator->trans('consultation_download.values.votes.mitige', array(), 'CapcoAppBundle');
+            }
+            if ($vote->getValue() == 1) {
+                return $this->translator->trans('consultation_download.values.votes.ok', array(), 'CapcoAppBundle');
+            }
+
             return $this->translator->trans('consultation_download.values.votes.ok', array(), 'CapcoAppBundle');
         }
         return $this->translator->trans('consultation_download.values.votes.ok', array(), 'CapcoAppBundle');
