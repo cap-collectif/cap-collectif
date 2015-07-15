@@ -1,26 +1,23 @@
-'use strict';
-
 import SynthesisBox from './components/Synthesis/SynthesisBox';
-
 import ElementsInbox from './components/Synthesis/ElementsInbox';
 import ElementsTree from './components/Synthesis/ElementsTree';
-
 import EditElement from './components/Synthesis/EditElement';
 
-let Route = ReactRouter.Route;
-let DefaultRoute = ReactRouter.DefaultRoute;
+const Route = ReactRouter.Route;
+const DefaultRoute = ReactRouter.DefaultRoute;
 
-var RedirectToDefaultInbox =
-  React.createClass({
-    statics: {
-      willTransitionTo (transition, params) {
-        transition.redirect('/inbox/new');
-      }
+const RedirectToDefaultInbox = React.createClass({
+  statics: {
+    willTransitionTo(transition) {
+      transition.redirect('/inbox/new');
     },
-    render() {
-      return null;
-    }
-  });
+  },
+
+  render() {
+    return null;
+  },
+
+});
 
 export default (
   <Route handler={SynthesisBox}>

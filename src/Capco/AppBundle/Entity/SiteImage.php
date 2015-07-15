@@ -79,14 +79,6 @@ class SiteImage
         $this->updatedAt = new \Datetime();
     }
 
-    public function __toString()
-    {
-        if ($this->id) {
-            return $this->getKeyname();
-        }
-        return 'New image';
-    }
-
     /**
      * Get id.
      *

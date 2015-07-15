@@ -1,15 +1,5 @@
 import matchParser from '../../utils/match_parser';
 
-export default class AutoLinkText extends React.Component {
-
-  render() {
-    const text = this.props.text || '';
-    return (
-      <span>{matchParser(text)::prepareElements(text)::truncate(this.props.maxLength)::keyElements()}</span>
-    );
-  }
-}
-
 function prepareElements(text) {
   let elements = [];
   let lastIndex = 0;
@@ -62,10 +52,20 @@ function keyElements() {
   });
 }
 
+export default class AutoLinkText extends React.Component {
+
+  render() {
+    const text = this.props.text || '';
+    return (
+      <span>{matchParser(text)::prepareElements(text)::truncate(this.props.maxLength)::keyElements()}</span>
+    );
+  }
+}
+
 AutoLinkText.propTypes = {
   text: React.PropTypes.string,
   maxLength: React.PropTypes.oneOfType([
     React.PropTypes.number,
-    React.PropTypes.string
-  ])
+    React.PropTypes.string,
+  ]),
 };

@@ -1,22 +1,22 @@
 
 export default {
-    locales : ['fr-FR'],
+    locales: ['fr-FR'],
     messages: {
         comment: {
             list: '{num, plural, =0{0 commentaire} one{# commentaire} other{# commentaires}}',
             vote: {
                 submit: 'D\'accord',
-                delete: 'Annuler mon vote'
+                remove: 'Annuler mon vote',
             },
             report: {
                 submit: 'Signaler',
-                reported: 'Signalé'
+                reported: 'Signalé',
             },
             update: {
-                button: 'Modifier'
+                button: 'Modifier',
             },
             trashed: {
-                label: 'Dans la corbeille'
+                label: 'Dans la corbeille',
             },
             edited: 'édité le',
             submit_error: 'Désolé, un problème est survenu lors de l\'ajout de votre commentaire.',
@@ -30,7 +30,7 @@ export default {
             create_account_reason_2: 'modifier/supprimer vos commentaires',
             create_account_reason_3: 'lier vos commentaires à votre profil',
             with_my_account: 'Commenter avec mon compte',
-            without_account: 'Commenter sans créer de compte'
+            without_account: 'Commenter sans créer de compte',
         },
         global: {
             more: 'Voir plus',
@@ -45,7 +45,7 @@ export default {
             last: 'Les plus récents',
             old: 'Les plus anciens',
             all_required: 'Tous les champs sont obligatoires.',
-            read_more: 'Afficher la suite'
-        }
-    }
+            read_more: 'Afficher la suite',
+        },
+    },
 };

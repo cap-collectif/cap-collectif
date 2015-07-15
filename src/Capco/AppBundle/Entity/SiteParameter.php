@@ -101,9 +101,10 @@ class SiteParameter
     public function __toString()
     {
         if ($this->id) {
-            return $this->getKeyname();
+            return $this->getTitle();
+        } else {
+            return 'New parameter';
         }
-        return 'New parameter';
     }
 
     /**
