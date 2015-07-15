@@ -1,11 +1,33 @@
 import ElementTitle from './ElementTitle';
-let Link = ReactRouter.Link;
+const Link = ReactRouter.Link;
 
-var ElementBreadcrumb = React.createClass({
+const ElementBreadcrumb = React.createClass({
+  propTypes: {
+    element: React.PropTypes.object,
+  },
   mixins: [ReactIntl.IntlMixin],
 
+  getElementBreadcrumbItems(element, parents = []) {
+    if (element.parent) {
+      parents.push(element.parent);
+      return this.getElementBreadcrumbItems(element.parent, parents);
+    }
+    return parents.reverse().push(this.props.element);
+  },
+
+  renderBreadCrumbItem(element) {
+    return (
+      <span className="element__breadcrumb-item">
+        <span className="element__breadcrumb-arrow"> > </span>
+        <Link to={'/element/' + element.id} >
+          <ElementTitle element={element} />
+        </Link>
+      </span>
+    );
+  },
+
   render() {
-    var items = this.getElementBreadcrumbItems(this.props.element);
+    const items = this.getElementBreadcrumbItems(this.props.element);
     return (
       <p className="small  excerpt breadcrumb-item">
         <i className="cap cap-folder-2"></i>
@@ -13,31 +35,10 @@ var ElementBreadcrumb = React.createClass({
           items.map((element) => {
             return this.renderBreadCrumbItem(element);
           })
-        }
+          }
       </p>
     );
   },
-
-  renderBreadCrumbItem(element) {
-    return (
-      <span className="element__breadcrumb-item">
-        <span className="element__breadcrumb-arrow"> > </span>
-        <Link to={"/element/" + element.id} >
-          <ElementTitle element={element} />
-        </Link>
-      </span>
-    );
-  },
-
-  getElementBreadcrumbItems(element, parents = []) {
-    if (element.parent) {
-      parents.push(element.parent);
-      return this.getElementBreadcrumbItems(element.parent, parents);
-    }
-    parents = parents.reverse();
-    parents.push(this.props.element);
-    return parents;
-  }
 
 
 });

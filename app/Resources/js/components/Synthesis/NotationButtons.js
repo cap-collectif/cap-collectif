@@ -1,15 +1,24 @@
 import SynthesisElementActions from '../../actions/SynthesisElementActions';
 
-var NotationButtons = React.createClass({
+const NotationButtons = React.createClass({
+  propTypes: {
+    synthesis: React.PropTypes.object,
+    element: React.PropTypes.object,
+  },
   mixins: [ReactIntl.IntlMixin],
 
-  note(value) {
-    var data = { 'notation': value };
-    SynthesisElementActions.note(this.props.synthesis.id, this.props.element.id, data);
+  getNotationStarsClasses() {
+    let classes = [];
+    for (let i = 0; i < 5; i++) {
+      if (i < this.props.element.notation) {
+        classes[i] = 'active';
+      }
+    }
+    return classes;
   },
 
   render() {
-    var classes = this.getNotationStarsClasses();
+    const classes = this.getNotationStarsClasses();
     return (
       <div className="element__action">
         <div className="element__action-notation btn btn-default btn-lg" title="Noter">
@@ -33,15 +42,10 @@ var NotationButtons = React.createClass({
     );
   },
 
-  getNotationStarsClasses() {
-    var classes = [];
-    for (var i = 0; i < 5; i++) {
-      if (i < this.props.element.notation) {
-        classes[i] = 'active';
-      }
-    }
-    return classes;
-  }
+  note(value) {
+    const data = { 'notation': value };
+    SynthesisElementActions.note(this.props.synthesis.id, this.props.element.id, data);
+  },
 
 });
 

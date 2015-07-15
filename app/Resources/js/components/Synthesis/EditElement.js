@@ -1,19 +1,20 @@
-import UserAvatar from '../User/UserAvatar';
-import UserLink from '../User/UserLink';
-import Fetcher from '../../services/Fetcher';
 import ElementTitle from './ElementTitle';
 import ElementBlock from './ElementBlock';
 import ElementButtons from './ElementButtons';
 import SynthesisElementStore from '../../stores/SynthesisElementStore';
 import SynthesisElementActions from '../../actions/SynthesisElementActions';
 
-var EditElement = React.createClass({
+const EditElement = React.createClass({
+  propTypes: {
+    synthesis: React.PropTypes.object,
+    params: React.PropTypes.object,
+  },
   mixins: [ReactIntl.IntlMixin],
 
   getInitialState() {
     return {
       element: null,
-      isLoading: true
+      isLoading: true,
     };
   },
 
@@ -21,27 +22,29 @@ var EditElement = React.createClass({
     SynthesisElementStore.addChangeListener(this.onChange);
   },
 
-  componentWillUnmount() {
-    SynthesisElementStore.removeChangeListener(this.onChange);
-  },
-
   componentDidMount() {
     this.loadElementFromServer();
   },
 
-  render() {
-    var element = this.props.element;
-    return (
-      <div className="block synthesis--edit__content">
-        {this.renderLoader()}
-        {this.renderElementPanel()}
-      </div>
-    );
+  componentWillUnmount() {
+    SynthesisElementStore.removeChangeListener(this.onChange);
+  },
+
+  onChange() {
+    if (SynthesisElementStore.isSync) {
+      this.setState({
+        element: SynthesisElementStore.element,
+        isLoading: false,
+      });
+      return;
+    }
+
+    this.loadElementFromServer();
   },
 
   renderElementPanel() {
-    if (!this.state.isLoading && this.state.element) {
-      var element = this.state.element;
+    const element = this.state.element;
+    if (!this.state.isLoading && element) {
       return (
         <div className="panel panel-warning synthesis__element-panel">
           <div className="panel-heading box">
@@ -55,7 +58,7 @@ var EditElement = React.createClass({
                 <ElementBlock element={this.state.element} />
               </div>
               <div className="element__description box has-chart">
-                <p>{element.body.replace(/(<([^>]+)>)/ig,"")}</p>
+                <p>{element.body.replace(/(<([^>]+)>)/ig, '')}</p>
               </div>
               <ElementButtons {...this.props} element={this.state.element} />
             </div>
@@ -77,16 +80,13 @@ var EditElement = React.createClass({
     }
   },
 
-  onChange() {
-    if (SynthesisElementStore.isSync) {
-      this.setState({
-        element: SynthesisElementStore.element,
-        isLoading: false
-      });
-      return;
-    }
-
-    this.loadElementFromServer();
+  render() {
+    return (
+      <div className="block synthesis--edit__content">
+        {this.renderLoader()}
+        {this.renderElementPanel()}
+      </div>
+    );
   },
 
   loadElementFromServer() {
@@ -94,7 +94,7 @@ var EditElement = React.createClass({
       this.props.synthesis.id,
       this.props.params.element_id
     );
-  }
+  },
 
 });
 

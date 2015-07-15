@@ -1,4 +1,4 @@
-import {RECEIVE_COUNT, RECEIVE_ELEMENTS, RECEIVE_ELEMENT, ARCHIVE_ELEMENT, UPDATE_ELEMENT, NOTE_ELEMENT, DISABLE_ELEMENT, MOVE_ELEMENT, UPDATE_ELEMENT_SUCCESS, UPDATE_ELEMENT_FAILURE} from '../constants/SynthesisElementConstants';
+import {RECEIVE_COUNT, RECEIVE_ELEMENTS, RECEIVE_ELEMENT, ARCHIVE_ELEMENT, NOTE_ELEMENT, DISABLE_ELEMENT, MOVE_ELEMENT, UPDATE_ELEMENT_SUCCESS, UPDATE_ELEMENT_FAILURE} from '../constants/SynthesisElementConstants';
 import BaseStore from './BaseStore';
 
 class SynthesisElementStore extends BaseStore {
@@ -14,7 +14,7 @@ class SynthesisElementStore extends BaseStore {
   }
 
   _registerToActions(action) {
-    switch(action.actionType) {
+    switch (action.actionType) {
       case RECEIVE_COUNT:
         this._count = action.count;
         this._isSync = true;

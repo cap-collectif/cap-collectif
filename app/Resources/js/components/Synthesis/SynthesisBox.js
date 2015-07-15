@@ -3,13 +3,17 @@ import ViewBox from './ViewBox';
 import EditBox from './EditBox';
 import SynthesisElementStore from '../../stores/SynthesisElementStore';
 
-var SynthesisBox = React.createClass({
+const SynthesisBox = React.createClass({
+  propTypes: {
+    mode: React.PropTypes.string,
+    synthesis_id: React.PropTypes.string,
+  },
   mixins: [ReactIntl.IntlMixin],
 
   getInitialState() {
     return {
       synthesis: null,
-      errors: []
+      errors: [],
     };
   },
 
@@ -17,21 +21,18 @@ var SynthesisBox = React.createClass({
     SynthesisElementStore.addChangeListener(this.onChange);
   },
 
-  componentWillUnmount() {
-    SynthesisElementStore.removeChangeListener(this.onChange);
-  },
-
   componentDidMount() {
     this.loadSynthesisFromServer();
   },
 
-  render() {
-    return (
-      <div className="synthesis__box" >
-        {this.renderErrors()}
-        { this.renderBoxMode() }
-      </div>
-    );
+  componentWillUnmount() {
+    SynthesisElementStore.removeChangeListener(this.onChange);
+  },
+
+  onChange() {
+    this.setState({
+      errors: SynthesisElementStore.errors,
+    });
   },
 
   renderBoxMode() {
@@ -73,21 +74,24 @@ var SynthesisBox = React.createClass({
     }
   },
 
-  onChange() {
-    this.setState({
-      errors: SynthesisElementStore.errors
-    });
+  render() {
+    return (
+      <div className="synthesis__box" >
+        {this.renderErrors()}
+        { this.renderBoxMode() }
+      </div>
+    );
   },
 
   loadSynthesisFromServer() {
-      Fetcher
-        .get('/syntheses/'+ this.props.synthesis_id)
-        .then((data) => {
-            this.setState({
-              'synthesis': data
-            });
+    Fetcher
+      .get('/syntheses/' + this.props.synthesis_id)
+      .then((data) => {
+        this.setState({
+          'synthesis': data,
+        });
       });
-  }
+  },
 
 });
 

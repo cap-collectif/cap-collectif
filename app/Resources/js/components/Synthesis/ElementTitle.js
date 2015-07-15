@@ -1,18 +1,21 @@
-let Link = ReactRouter.Link;
+const Link = ReactRouter.Link;
 
-var ElementTitle = React.createClass({
+const ElementTitle = React.createClass({
+  propTypes: {
+    element: React.PropTypes.object,
+  },
   mixins: [ReactIntl.IntlMixin],
 
   render() {
     if (this.props.element.title) {
       return (
-        <Link to={"/element/" + this.props.element.id} >{this.props.element.title}</Link>
+        <Link to={'/element/' + this.props.element.id} >{this.props.element.title}</Link>
       );
     }
     return (
-      <Link to={"/element/" + this.props.element.id} >{this.getIntlMessage('common.elements.default_title')}</Link>
+      <Link to={'/element/' + this.props.element.id} >{this.getIntlMessage('common.elements.default_title')}</Link>
     );
-  }
+  },
 
 });
 

@@ -1,26 +1,20 @@
 import ViewElement from './ViewElement';
 import Fetcher from '../../services/Fetcher';
-let Link = ReactRouter.Link;
 
-var ViewBox = React.createClass({
+const ViewBox = React.createClass({
+  propTypes: {
+    synthesis: React.PropTypes.object,
+  },
   mixins: [ReactIntl.IntlMixin],
 
   getInitialState() {
     return {
-      elements: []
+      elements: [],
     };
   },
 
   componentDidMount() {
     this.loadArchivedElementsFromServer();
-  },
-
-  render() {
-    return (
-      <div className="synthesis__view">
-        {this.renderElementsList()}
-      </div>
-    );
   },
 
   renderElementsList() {
@@ -39,15 +33,23 @@ var ViewBox = React.createClass({
     }
   },
 
+  render() {
+    return (
+      <div className="synthesis__view">
+        {this.renderElementsList()}
+      </div>
+    );
+  },
+
   loadArchivedElementsFromServer() {
     Fetcher
-      .get('/syntheses/'+ this.props.synthesis.id + '/elements/archived')
+      .get('/syntheses/' + this.props.synthesis.id + '/elements/archived')
       .then((data) => {
         this.setState({
-          'elements': data
+          'elements': data,
         });
       });
-  }
+  },
 
 });
 
