@@ -1,15 +1,8 @@
 const CommentVoteButton = React.createClass({
-  mixins: [ReactIntl.IntlMixin],
-
-  render() {
-    return (
-      <span>
-        { this.renderFormOrDisabled() }
-        { ' ' }
-        <span className="opinion__votes-nb">{ this.props.comment.vote_count }</span>
-      </span>
-    );
+  propTypes: {
+    comment: React.PropTypes.object,
   },
+  mixins: [ReactIntl.IntlMixin],
 
   renderFormOrDisabled() {
     if (!this.props.comment.can_contribute) {
@@ -33,7 +26,7 @@ const CommentVoteButton = React.createClass({
     if (this.props.comment.has_user_voted) {
       return (
         <button className="btn btn-danger btn-xs">
-          { this.getIntlMessage('comment.vote.delete') }
+          { this.getIntlMessage('comment.vote.remove') }
         </button>
       );
     }
@@ -45,7 +38,17 @@ const CommentVoteButton = React.createClass({
         { this.getIntlMessage('comment.vote.submit') }
       </button>
     );
-  }
+  },
+
+  render() {
+    return (
+      <span>
+        { this.renderFormOrDisabled() }
+        { ' ' }
+        <span className="opinion__votes-nb">{ this.props.comment.vote_count }</span>
+      </span>
+    );
+  },
 
 });
 

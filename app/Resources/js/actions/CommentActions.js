@@ -1,5 +1,3 @@
-'use strict';
-
 import AppDispatcher from '../dispatchers/AppDispatcher';
 import Fetcher from '../services/Fetcher';
 import {CREATE_COMMENT, RECEIVE_COMMENTS} from '../constants/CommentConstants';
@@ -7,7 +5,6 @@ import {CREATE_COMMENT, RECEIVE_COMMENTS} from '../constants/CommentConstants';
 export default {
 
   create: (uri, object, data) => {
-
     return Fetcher
     .post('/' + uri + '/' + object + '/comments', data)
     .then(() => {
@@ -16,11 +13,9 @@ export default {
       });
       return true;
     });
-
   },
 
   loadFromServer: (uri, object, offset, limit, filter) => {
-
     Fetcher
     .get('/' + uri + '/' + object +
          '/comments?offset=' + offset +
@@ -32,9 +27,6 @@ export default {
         AppDispatcher.dispatch(data);
         return true;
     });
+  },
 
-  }
-
-
-
-}
+};

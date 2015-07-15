@@ -1,4 +1,7 @@
 var UserLink = React.createClass({
+  propTypes: {
+    user: React.PropTypes.object
+  },
 
   render() {
     if (this.props.user) {
@@ -7,7 +10,8 @@ var UserLink = React.createClass({
       );
     }
     return <span></span>;
-  }
+  },
+
 });
 
 export default UserLink;

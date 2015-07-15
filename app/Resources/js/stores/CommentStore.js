@@ -14,7 +14,7 @@ class CommentStore extends BaseStore {
   }
 
   _registerToActions(action) {
-    switch(action.actionType) {
+    switch (action.actionType) {
       case RECEIVE_COMMENTS:
         this._comments = action.comments;
         this._commentsCount = action.comments_count;
@@ -22,7 +22,6 @@ class CommentStore extends BaseStore {
         this._commentsAndAnswersCount = action.comments_and_answers_count;
         this._isReportingEnabled = action.is_reporting_enabled;
         this._isSync = true;
-        console.log('RECEIVE_COMMENTS emit CHANGE');
         this.emitChange();
         break;
       case CREATE_COMMENT:
@@ -31,7 +30,7 @@ class CommentStore extends BaseStore {
         break;
       default:
         break;
-    };
+    }
   }
 
   get isSync() {

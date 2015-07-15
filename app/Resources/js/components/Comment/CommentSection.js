@@ -77,18 +77,17 @@ const CommentSection = React.createClass({
   },
 
   onChange() {
-
     if (CommentStore.isSync) {
       this.setState(
       {
-           countWithAnswers: CommentStore.countWithAnswers,
-           count: CommentStore.count,
-           isReportingEnabled: CommentStore.isReportingEnabled,
-           comments: CommentStore.comments,
-           isLoading: false,
-           isLoadingMore: false,
+        countWithAnswers: CommentStore.countWithAnswers,
+        count: CommentStore.count,
+        isReportingEnabled: CommentStore.isReportingEnabled,
+        comments: CommentStore.comments,
+        isLoading: false,
+        isLoadingMore: false,
       }, () => {
-          this.resetLoadMoreButton();
+        this.resetLoadMoreButton();
       });
       return;
     }
@@ -138,7 +137,7 @@ const CommentSection = React.createClass({
     return;
   },
 
-  updateSelectedValue(e) {
+  updateSelectedValue() {
     this.setState({
         filter: $(React.findDOMNode(this.refs.filter)).val(),
         isLoading: true,
@@ -157,20 +156,19 @@ const CommentSection = React.createClass({
   },
 
   resetLoadMoreButton() {
-    let loadMoreButton = React.findDOMNode(this.refs.loadMore);
+    const loadMoreButton = React.findDOMNode(this.refs.loadMore);
     if (loadMoreButton) {
         $(loadMoreButton).button('reset');
     }
   },
 
   loadMore() {
-
     $(React.findDOMNode(this.refs.loadMore)).button('loading');
     this.setState({
         isLoadingMore: true,
         limit: this.state.limit + MessagePagination
     }, () => {
-        this.loadCommentsFromServer();
+      this.loadCommentsFromServer();
     });
   },
 

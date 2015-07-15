@@ -1,3 +1,4 @@
+/*eslint-disable */
 const uriSchemeRegex = /^[A-Za-z][-.+A-Za-z0-9]+:/;
 const hasFullProtocolRegex = /^[A-Za-z][-.+A-Za-z0-9]+:\/\//;
 const hasWordCharAfterProtocolRegex = /:[^\s]*?[A-Za-z]/;
