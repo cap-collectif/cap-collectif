@@ -5,7 +5,7 @@ export default {
       elements: {
         nb: '{num, plural, =0{} one{# contribution} other{# contributions}}',
         default_title: 'Contribution',
-        no_source_date: 'Non renseigné',
+        no_source_date: 'Date non renseignée',
       },
       errors: {
         not_enabled: 'La synthèse est en cours de rédaction et sera bientôt disponible.',

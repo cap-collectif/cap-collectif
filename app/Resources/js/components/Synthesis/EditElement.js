@@ -55,16 +55,22 @@ const EditElement = React.createClass({
           <div id="element-details">
             <div className="panel-body">
               <div className="element box">
-                <ElementBlock element={this.state.element} />
+                <ElementBlock element={element} />
               </div>
               <div className="element__description box has-chart">
-                <p>{element.body.replace(/(<([^>]+)>)/ig, '')}</p>
+                {this.renderElementBody()}
               </div>
-              <ElementButtons {...this.props} element={this.state.element} />
+              <ElementButtons {...this.props} element={element} />
             </div>
           </div>
         </div>
       );
+    }
+  },
+
+  renderElementBody() {
+    if (this.state.element.body) {
+      return <p>{this.state.element.body.replace(/(<([^>]+)>)/ig, '')}</p>;
     }
   },
 

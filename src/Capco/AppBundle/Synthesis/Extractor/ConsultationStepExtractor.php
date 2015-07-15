@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\Synthesis\Extractor;
 
+use Capco\AppBundle\Entity\OpinionType;
 use Doctrine\ORM\EntityManager;
 use Capco\AppBundle\Entity\Synthesis\Synthesis;
 use Capco\AppBundle\Entity\Synthesis\SynthesisElement;
@@ -26,40 +27,63 @@ class ConsultationStepExtractor
 
         $previousElements = $synthesis->getElements();
 
-        // Opinions
-        $opinions = $consultationStep->getOpinions();
-        foreach ($opinions as $opinion) {
-            $elementFromOpinion = null;
+        // Opinion types
+        $opinionTypes = $consultationStep->getAllowedTypes();
+        foreach ($opinionTypes as $ot) {
+            $elementFromOT = null;
             foreach ($previousElements as $element) {
-                if ($this->isElementRelated($element, $opinion)) {
-                    $elementFromOpinion = $element;
-                    if ($this->elementIsOutdated($elementFromOpinion, $opinion)) {
-                        $elementFromOpinion = $this->updateElementFromObject($elementFromOpinion, $opinion);
+                if ($this->isElementRelated($element, $ot)) {
+                    $elementFromOT = $element;
+                    if ($this->elementIsOutdated($elementFromOT, $ot)) {
+                        $elementFromOT = $this->updateElementFromObject($elementFromOT, $ot);
                     }
                 }
             }
 
-            if (null === $elementFromOpinion) {
-                $elementFromOpinion = $this->createElementFromOpinion($opinion);
-                $synthesis->addElement($elementFromOpinion);
+            if (null === $elementFromOT) {
+                $elementFromOT = $this->createElementFromOpinionType($ot);
+                $synthesis->addElement($elementFromOT);
             }
 
-            // Arguments
-            $arguments = $opinion->getArguments();
-            foreach ($arguments as $argument) {
-                $elementFromArgument = null;
+            // Opinions
+            $opinions = $this->em->getRepository('CapcoAppBundle:Opinion')->findBy([
+                'step' => $consultationStep,
+                'OpinionType' => $ot,
+            ]);
+            foreach ($opinions as $opinion) {
+                $elementFromOpinion = null;
                 foreach ($previousElements as $element) {
-                    if ($this->isElementRelated($element, $argument)) {
-                        $elementFromArgument = $element;
-                        if ($this->elementIsOutdated($elementFromArgument, $argument)) {
-                            $elementFromArgument = $this->updateElementFromObject($elementFromArgument, $argument);
+                    if ($this->isElementRelated($element, $opinion)) {
+                        $elementFromOpinion = $element;
+                        if ($this->elementIsOutdated($elementFromOpinion, $opinion)) {
+                            $elementFromOpinion = $this->updateElementFromObject($elementFromOpinion, $opinion);
                         }
                     }
                 }
-                if (null === $elementFromArgument) {
-                    $elementFromArgument = $this->createElementFromArgument($argument);
-                    $elementFromOpinion->addChild($elementFromArgument);
-                    $synthesis->addElement($elementFromArgument);
+
+                if (null === $elementFromOpinion) {
+                    $elementFromOpinion = $this->createElementFromOpinion($opinion);
+                    $elementFromOT->addChild($elementFromOpinion);
+                    $synthesis->addElement($elementFromOpinion);
+                }
+
+                // Arguments
+                $arguments = $opinion->getArguments();
+                foreach ($arguments as $argument) {
+                    $elementFromArgument = null;
+                    foreach ($previousElements as $element) {
+                        if ($this->isElementRelated($element, $argument)) {
+                            $elementFromArgument = $element;
+                            if ($this->elementIsOutdated($elementFromArgument, $argument)) {
+                                $elementFromArgument = $this->updateElementFromObject($elementFromArgument, $argument);
+                            }
+                        }
+                    }
+                    if (null === $elementFromArgument) {
+                        $elementFromArgument = $this->createElementFromArgument($argument);
+                        $elementFromOpinion->addChild($elementFromArgument);
+                        $synthesis->addElement($elementFromArgument);
+                    }
                 }
             }
         }
@@ -77,6 +101,17 @@ class ConsultationStepExtractor
     public function elementIsOutdated(SynthesisElement $element, $object)
     {
         return $object->getUpdatedAt() > $element->getLinkedDataLastUpdate();
+    }
+
+    public function createElementFromOpinionType(OpinionType $opinionType)
+    {
+        $element = new SynthesisElement();
+        $element->setLinkedDataClass(get_class($opinionType));
+        $element->setLinkedDataId($opinionType->getId());
+        $element->setLinkedDataCreation($opinionType->getCreatedAt());
+        $element->setDisplayType('folder');
+
+        return $this->updateElementFromOpinionType($element, $opinionType);
     }
 
     public function createElementFromOpinion(Opinion $opinion)
@@ -115,12 +150,29 @@ class ConsultationStepExtractor
         $element->setArchived(false);
         $element->setDeletedAt(null);
 
+        if ($object instanceof OpinionType) {
+            return $this->updateElementFromOpinionType($element, $object);
+        }
         if ($object instanceof Opinion) {
             return $this->updateElementFromOpinion($element, $object);
         }
         if ($object instanceof Argument) {
             return $this->updateElementFromArgument($element, $object);
         }
+    }
+
+    public function updateElementFromOpinionType(SynthesisElement $element, OpinionType $opinionType)
+    {
+        // Set author
+        $element->setAuthor(null);
+
+        $element->setTitle($opinionType->getTitle());
+        $element->setBody(null);
+
+        // Set votes
+        $element->setVotes([]);
+
+        return $element;
     }
 
     public function updateElementFromOpinion(SynthesisElement $element, Opinion $opinion)

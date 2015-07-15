@@ -22,6 +22,14 @@ const ElementBlock = React.createClass({
     return classes;
   },
 
+  renderAuthor() {
+    if (this.props.element.author) {
+      return (
+        <span><UserLink user={this.props.element.author} /> • </span>
+      );
+    }
+  },
+
   renderNotationStars() {
     const classes = this.getNotationStarsClasses();
     return (
@@ -53,6 +61,9 @@ const ElementBlock = React.createClass({
   },
 
   renderDate() {
+    if (navigator.userAgent.indexOf('Safari') !== -1 && navigator.userAgent.indexOf('Chrome') === -1) {
+      return this.getIntlMessage('common.elements.no_source_date');
+    }
     if (this.props.element.has_linked_data) {
       if (this.props.element.linked_data_creation) {
         return <FormattedDate value={this.props.element.linked_data_creation} day="numeric" month="long" year="numeric" />;
@@ -69,7 +80,7 @@ const ElementBlock = React.createClass({
         <UserAvatar user={element.author} />
         <div className="element__data">
           <p className="element__user excerpt  small">
-            <UserLink user={element.author} /> • {this.renderDate()}
+            {this.renderAuthor()} {this.renderDate()}
             <span className="element__notation">
                 {this.renderNotationStars()}
             </span>
