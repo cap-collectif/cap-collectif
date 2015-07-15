@@ -1,11 +1,12 @@
 const CommentVoteButton = React.createClass({
   propTypes: {
     comment: React.PropTypes.object,
+    userIsAuthor: React.PropTypes.boolean,
   },
   mixins: [ReactIntl.IntlMixin],
 
   renderFormOrDisabled() {
-    if (!this.props.comment.can_contribute) {
+    if (!this.props.comment.can_contribute || this.props.userIsAuthor) {
       return (
         <button disabled="disabled" className="btn btn-dark-gray btn-xs">
           <i className="cap-hand-like-2"></i>

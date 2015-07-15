@@ -43,10 +43,7 @@ const Comment = React.createClass({
           </div>
           <CommentBody comment={comment} />
           <div className="comment__buttons">
-            {(!this.isTheUserTheAuthor()
-              ? <CommentVoteButton comment={comment} />
-              : <span />
-            )}
+            <CommentVoteButton comment={comment} userIsAuthor={this.isTheUserTheAuthor()} />
             {' '}
             {(this.props.root === true
               ? <a onClick={ this.answer.bind(this) } className="btn btn-xs btn-dark-gray btn--outline">
@@ -89,7 +86,7 @@ const Comment = React.createClass({
     if (this.props.comment.author === null || !LoginStore.isLoggedIn()) {
       return false;
     }
-    return LoginStore.user.username === this.props.comment.author.username;
+    return LoginStore.user.unique_id === this.props.comment.author.unique_id;
   },
 
   answer() {
