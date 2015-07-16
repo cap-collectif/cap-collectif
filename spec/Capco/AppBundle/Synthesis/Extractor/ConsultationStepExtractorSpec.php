@@ -15,12 +15,13 @@ use Capco\AppBundle\Entity\Synthesis\Synthesis;
 use Capco\AppBundle\Entity\Synthesis\SynthesisElement;
 use Doctrine\Common\Collections\ArrayCollection;
 use Prophecy\Argument as ProphecyArgument;
+use Symfony\Component\Translation\TranslatorInterface;
 
 class ConsultationStepExtractorSpec extends ObjectBehavior
 {
-    function let(EntityManager $em)
+    function let(EntityManager $em, TranslatorInterface $translator)
     {
-        $this->beConstructedWith($em);
+        $this->beConstructedWith($em, $translator);
     }
 
     function it_is_initializable()
@@ -151,6 +152,17 @@ class ConsultationStepExtractorSpec extends ObjectBehavior
         $this->elementIsOutdated($element, $opinion)->shouldReturn(false);
     }
 
+    function it_can_get_arguments_folder(SynthesisElement $opinionElement, Synthesis $synthesis, SynthesisElement $proFolder)
+    {
+        $opinionElement->getChildren()->willReturn([$proFolder])->shouldBeCalled();
+        $proFolder->getDisplayType()->willReturn('folder')->shouldBeCalled();
+        $proFolder->getTitle()->willReturn('Arguments pour')->shouldBeCalled();
+        $opinionElement->addChild(ProphecyArgument::any())->shouldBeCalled();
+        $synthesis->addElement(ProphecyArgument::any())->shouldBeCalled();
+        $folder = $this->getArgumentsFolder($opinionElement, 0, $synthesis);
+        $folder->shouldBeAnInstanceOf('Capco\AppBundle\Entity\Synthesis\SynthesisElement');
+    }
+
     function it_can_create_an_element_from_an_opinion_type()
     {
         // Can't mock opinion because we need to call get_class() method on it
@@ -196,7 +208,7 @@ class ConsultationStepExtractorSpec extends ObjectBehavior
         $element->getDisplayType()->shouldReturn('contribution');
     }
 
-    function it_can_update_an_element_from_an_object(SynthesisElement $element, SynthesisDivision $division, User $author, EntityManager $em, Opinion $object)
+    function it_can_update_an_element_from_an_object(SynthesisElement $element, SynthesisDivision $division, User $author, EntityManager $em, TranslatorInterface $translator, Opinion $object)
     {
         $date = new \DateTime();
         $object->getTitle()->willReturn('test')->shouldBeCalled();
@@ -209,7 +221,7 @@ class ConsultationStepExtractorSpec extends ObjectBehavior
         // Element comes from a division
         $element->getOriginalDivision()->willReturn($division)->shouldBeCalled();
         $em->remove($element)->shouldBeCalled();
-        $this->beConstructedWith($em);
+        $this->beConstructedWith($em, $translator);
         $this->updateElementFromObject($element, $object)->shouldReturnAnInstanceOf('Capco\AppBundle\Entity\Synthesis\SynthesisElement');
 
         // Element does not come from a division

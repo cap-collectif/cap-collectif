@@ -138,6 +138,16 @@ Feature: Synthesis
         },
         {
           "id": @string@,
+          "title": "Arguments pour",
+          "_links": "@*@"
+        },
+        {
+          "id": @string@,
+          "title": "Arguments contre",
+          "_links": "@*@"
+        },
+        {
+          "id": @string@,
           "title": @null@,
           "_links": "@*@"
         },
@@ -153,6 +163,16 @@ Feature: Synthesis
         },
         {
           "id": @string@,
+          "title": "Arguments pour",
+          "_links": "@*@"
+        },
+        {
+          "id": @string@,
+          "title": "Arguments contre",
+          "_links": "@*@"
+        },
+        {
+          "id": @string@,
           "title": @null@,
           "_links": "@*@"
         },
@@ -164,6 +184,16 @@ Feature: Synthesis
         {
           "id": @string@,
           "title": "Opinion 53",
+          "_links": "@*@"
+        },
+        {
+          "id": @string@,
+          "title": "Arguments pour",
+          "_links": "@*@"
+        },
+        {
+          "id": @string@,
+          "title": "Arguments contre",
           "_links": "@*@"
         }
       ],
