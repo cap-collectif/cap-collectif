@@ -38,6 +38,9 @@ Capco\AppBundle\Entity\Synthesis\SynthesisElement:
     body:
       expose: true
       groups: [ElementDetails]
+    link:
+      expose: true
+      groups: [ElementDetails]
     notation:
       expose: true
       groups: [ElementsList, ElementDetails]

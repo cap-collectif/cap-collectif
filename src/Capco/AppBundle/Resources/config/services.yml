@@ -374,4 +374,4 @@ services:
 
     capco.synthesis.consultation_step_extractor:
         class: Capco\AppBundle\Synthesis\Extractor\ConsultationStepExtractor
-        arguments: [@doctrine.orm.entity_manager, @translator]
+        arguments: [@doctrine.orm.entity_manager, @translator, @router]

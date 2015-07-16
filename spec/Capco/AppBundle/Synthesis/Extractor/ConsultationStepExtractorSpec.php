@@ -3,6 +3,7 @@
 namespace spec\Capco\AppBundle\Synthesis\Extractor;
 
 use Capco\AppBundle\Entity\OpinionType;
+use Capco\AppBundle\Entity\Source;
 use Capco\AppBundle\Entity\Synthesis\SynthesisDivision;
 use Capco\AppBundle\Repository\OpinionRepository;
 use Capco\UserBundle\Entity\User;
@@ -16,12 +17,13 @@ use Capco\AppBundle\Entity\Synthesis\SynthesisElement;
 use Doctrine\Common\Collections\ArrayCollection;
 use Prophecy\Argument as ProphecyArgument;
 use Symfony\Component\Translation\TranslatorInterface;
+use Symfony\Bundle\FrameworkBundle\Routing\Router;
 
 class ConsultationStepExtractorSpec extends ObjectBehavior
 {
-    function let(EntityManager $em, TranslatorInterface $translator)
+    function let(EntityManager $em, TranslatorInterface $translator, Router $router)
     {
-        $this->beConstructedWith($em, $translator);
+        $this->beConstructedWith($em, $translator, $router);
     }
 
     function it_is_initializable()
@@ -208,7 +210,24 @@ class ConsultationStepExtractorSpec extends ObjectBehavior
         $element->getDisplayType()->shouldReturn('contribution');
     }
 
-    function it_can_update_an_element_from_an_object(SynthesisElement $element, SynthesisDivision $division, User $author, EntityManager $em, TranslatorInterface $translator, Opinion $object)
+    function it_can_create_an_element_from_a_source(Source $source)
+    {
+        // Can't mock source because we need to call get_class() method on it
+        $source = new Source();
+        $source->setId(42);
+        $source->setTitle('Titre');
+        $source->setBody('blabla');
+
+        $element = $this->createElementFromSource($source);
+        $element->shouldBeAnInstanceOf('Capco\AppBundle\Entity\Synthesis\SynthesisElement');
+        $element->getTitle()->shouldReturn('Titre');
+        $element->getBody()->shouldReturn('blabla');
+        $element->getLink()->shouldReturn(null);
+        $element->getLinkedDataId()->shouldReturn(42);
+        $element->getDisplayType()->shouldReturn('source');
+    }
+
+    function it_can_update_an_element_from_an_object(SynthesisElement $element, SynthesisDivision $division, User $author, EntityManager $em, TranslatorInterface $translator, Router $router, Opinion $object)
     {
         $date = new \DateTime();
         $object->getTitle()->willReturn('test')->shouldBeCalled();
@@ -221,7 +240,7 @@ class ConsultationStepExtractorSpec extends ObjectBehavior
         // Element comes from a division
         $element->getOriginalDivision()->willReturn($division)->shouldBeCalled();
         $em->remove($element)->shouldBeCalled();
-        $this->beConstructedWith($em, $translator);
+        $this->beConstructedWith($em, $translator, $router);
         $this->updateElementFromObject($element, $object)->shouldReturnAnInstanceOf('Capco\AppBundle\Entity\Synthesis\SynthesisElement');
 
         // Element does not come from a division
@@ -257,6 +276,7 @@ class ConsultationStepExtractorSpec extends ObjectBehavior
         $opinion->getVoteCountOk()->willReturn(25)->shouldBeCalled();
         $opinion->getVoteCountNok()->willReturn(25)->shouldBeCalled();
         $opinion->getVoteCountMitige()->willReturn(25)->shouldBeCalled();
+
         $element->setTitle('test')->shouldBeCalled();
         $element->setBody('blabla')->shouldBeCalled();
         $element->setAuthor($author)->shouldBeCalled();
@@ -265,11 +285,29 @@ class ConsultationStepExtractorSpec extends ObjectBehavior
         $this->updateElementFromOpinion($element, $opinion)->shouldReturnAnInstanceOf('Capco\AppBundle\Entity\Synthesis\SynthesisElement');
     }
 
+    function it_can_update_an_element_from_a_source(SynthesisElement $element, Source $source, User $author)
+    {
+        $source->getTitle()->willReturn('Titre')->shouldBeCalled();
+        $source->getBody()->willReturn('blabla')->shouldBeCalled();
+        $source->getAuthor()->willReturn($author)->shouldBeCalled();
+        $source->getVoteCount()->willReturn(25)->shouldBeCalled();
+        $source->getMedia()->willReturn(null)->shouldBeCalled();
+        $source->getLink()->willReturn(null)->shouldBeCalled();
+
+        $element->setTitle('Titre')->shouldBeCalled();
+        $element->setBody('blabla')->shouldBeCalled();
+        $element->setAuthor($author)->shouldBeCalled();
+        $element->setVotes([1 => 25])->shouldBeCalled();
+
+        $this->updateElementFromSource($element, $source)->shouldReturnAnInstanceOf('Capco\AppBundle\Entity\Synthesis\SynthesisElement');
+    }
+
     function it_can_update_an_element_from_an_argument(SynthesisElement $element, Argument $argument, User $author)
     {
         $argument->getBody()->willReturn('blabla')->shouldBeCalled();
         $argument->getAuthor()->willReturn($author)->shouldBeCalled();
         $argument->getVoteCount()->willReturn(25)->shouldBeCalled();
+
         $element->setBody('blabla')->shouldBeCalled();
         $element->setAuthor($author)->shouldBeCalled();
         $element->setVotes([1 => 25])->shouldBeCalled();

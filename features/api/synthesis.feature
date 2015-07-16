@@ -143,6 +143,11 @@ Feature: Synthesis
         },
         {
           "id": @string@,
+          "title": "Sources",
+          "_links": "@*@"
+        },
+        {
+          "id": @string@,
           "title": "Les causes",
           "_links": "@*@"
         },
@@ -173,6 +178,11 @@ Feature: Synthesis
         },
         {
           "id": @string@,
+          "title": "Sources",
+          "_links": "@*@"
+        },
+        {
+          "id": @string@,
           "title": "Opinion 53",
           "_links": "@*@"
         },
@@ -184,6 +194,11 @@ Feature: Synthesis
         {
           "id": @string@,
           "title": "Arguments contre",
+          "_links": "@*@"
+        },
+        {
+          "id": @string@,
+          "title": "Sources",
           "_links": "@*@"
         }
       ],
@@ -201,7 +216,7 @@ Feature: Synthesis
     And I send a GET request to "/api/syntheses/48/elements/count?type=all"
     Then the JSON response should match:
     """
-    {"count": "14"}
+    {"count": "17"}
     """
 
   @database
@@ -561,6 +576,7 @@ Feature: Synthesis
       "display_type": "folder",
       "title": "Je suis un élément",
       "body": "blabla",
+      "link": @null@,
       "notation": 4,
       "votes": {"-1": 21, "0":12, "1": 43},
       "linked_data_creation": @null@,
@@ -601,6 +617,7 @@ Feature: Synthesis
       "display_type": "folder",
       "title": "Coucou, je suis un élément.",
       "body": "blabla",
+      "link": @null@,
       "notation": 5,
       "votes": [],
       "linked_data_creation": @null@,
@@ -679,6 +696,7 @@ Feature: Synthesis
       "display_type": "folder",
       "title": "Je suis un élément",
       "body": "blabla",
+      "link": @null@,
       "notation": 2,
       "votes": {"-1": 21, "0":12, "1": 43},
       "linked_data_creation": @null@,

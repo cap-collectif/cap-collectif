@@ -15,22 +15,16 @@ class ContactType extends AbstractType
     {
         $builder->add('name', 'text', array(
                 'label' => 'contact.form.name',
-                'required' => true,
-                'constraints' => [new NotBlank(['message' => 'contact.no_name'])]
             ))
             ->add('email', 'email', array(
                 'label' => 'contact.form.email',
-                'required' => true,
-                'constraints' => [new NotBlank(['message' => 'contact.no_email']), new Email(['checkMX' => true])]
             ))
             ->add('message', 'textarea', array(
                 'label' => 'contact.form.message',
-                'required' => true,
                 'attr' => array(
                     'rows' => '10',
                     'cols' => '30',
                 ),
-                'constraints' => [new NotBlank(['message' => 'contact.no_message'])]
             ))
         ;
     }
@@ -42,7 +36,20 @@ class ContactType extends AbstractType
 
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
+        $collectionConstraint = new Collection(array(
+                'name' => array(
+                    new NotBlank(),
+                ),
+                'email' => array(
+                    new Email(),
+                ),
+                'message' => array(
+                    new NotBlank(),
+                ),
+            ));
+
         $resolver->setDefaults(array(
+            'constraints' => $collectionConstraint,
             'translation_domain' => 'CapcoAppBundle',
         ));
     }

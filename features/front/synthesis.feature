@@ -57,7 +57,7 @@ Scenario: Admin wants to see archived elements list
   And I wait 5 seconds
   And I follow "Traitées"
   And I wait 5 seconds
-  Then I should see 8 ".element" elements
+  Then I should see 11 ".element" elements
 
 @javascript
 Scenario: Admin wants to see unpublished elements list
@@ -83,7 +83,7 @@ Scenario: Admin wants to see all elements list
   And I wait 5 seconds
   And I follow "Toutes"
   And I wait 5 seconds
-  Then I should see 14 ".element" elements
+  Then I should see 17 ".element" elements
 
 @javascript
 Scenario: Admin wants to see elements tree
@@ -98,7 +98,7 @@ Scenario: Admin wants to see elements tree
   And I wait 5 seconds
   Then I should see 2 ".tree-level-0 > .elements-tree__item" elements
   And I should see 3 ".tree-level-1 > .elements-tree__item" elements
-  And I should see 6 ".tree-level-2 > .elements-tree__item" elements
+  And I should see 9 ".tree-level-2 > .elements-tree__item" elements
   And I should see 3 ".tree-level-3 > .elements-tree__item" elements
 
   # Element details
@@ -168,4 +168,4 @@ Scenario: Admin wants to archive an element
   Then I should see 1 ".element__status-icon.cap-check-4" element
   And I follow "Traitées"
   And I wait 5 seconds
-  And I should see 9 ".element" elements
+  And I should see 12 ".element" elements

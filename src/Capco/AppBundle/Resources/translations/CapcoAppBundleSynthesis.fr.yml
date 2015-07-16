@@ -20,3 +20,4 @@ synthesis:
     arguments:
       pros: Arguments pour
       cons: Arguments contre
+    sources: Sources

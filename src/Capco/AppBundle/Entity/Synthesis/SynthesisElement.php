@@ -99,7 +99,7 @@ class SynthesisElement
     /**
      * @var string
      * @ORM\Column(name="display_type", type="string", length=255, nullable=false)
-     * @Assert\Choice(choices={"folder", "contribution"})
+     * @Assert\Choice(choices={"folder", "contribution", "source"})
      */
     private $displayType;
 
@@ -118,6 +118,15 @@ class SynthesisElement
      * @Gedmo\Versioned
      */
     private $body;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="link", type="text", nullable=true)
+     * @Gedmo\Versioned
+     * @Assert\Url()
+     */
+    private $link;
 
     /**
      * @var int
@@ -374,6 +383,22 @@ class SynthesisElement
     public function setBody($body)
     {
         $this->body = $body;
+    }
+
+    /**
+     * @return string
+     */
+    public function getLink()
+    {
+        return $this->link;
+    }
+
+    /**
+     * @param string $link
+     */
+    public function setLink($link)
+    {
+        $this->link = $link;
     }
 
     /**
