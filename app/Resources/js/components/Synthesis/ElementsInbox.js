@@ -16,6 +16,12 @@ const ElementsInbox = React.createClass({
     };
   },
 
+  getDefaultProps() {
+    return {
+      params: {type: 'new'},
+    };
+  },
+
   componentWillMount() {
     SynthesisElementStore.addChangeListener(this.onChange);
   },
@@ -29,7 +35,7 @@ const ElementsInbox = React.createClass({
       this.setState({
         isLoading: true,
       });
-      this.loadElementsByTypeFromServer();
+      this.loadElementsByTypeFromServer(nextProps.params.type);
     }
   },
 
@@ -90,10 +96,10 @@ const ElementsInbox = React.createClass({
     );
   },
 
-  loadElementsByTypeFromServer() {
+  loadElementsByTypeFromServer(type = this.props.params.type) {
     SynthesisElementActions.loadElementsFromServer(
       this.props.synthesis.id,
-      this.props.params.type
+      type
     );
   },
 

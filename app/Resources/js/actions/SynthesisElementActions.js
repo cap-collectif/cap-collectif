@@ -85,6 +85,18 @@ export default {
       });
   },
 
+  loadRootElementsFromServer: (synthesis) => {
+    Fetcher
+      .get('/syntheses/' + synthesis + '/elements/root')
+      .then((data) => {
+        AppDispatcher.dispatch({
+          actionType: RECEIVE_ELEMENTS,
+          elements: data,
+        });
+        return true;
+      });
+  },
+
   loadElementsCountFromServer: (synthesis, type) => {
     Fetcher
       .get('/syntheses/' + synthesis + '/elements/count?type=' + type)

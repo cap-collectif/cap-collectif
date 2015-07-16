@@ -1,7 +1,7 @@
 const CommentVoteButton = React.createClass({
   propTypes: {
     comment: React.PropTypes.object,
-    userIsAuthor: React.PropTypes.boolean,
+    userIsAuthor: React.PropTypes.bool,
   },
   mixins: [ReactIntl.IntlMixin],
 

@@ -208,7 +208,7 @@ class SynthesisController extends FOSRestController
      * @ParamConverter("synthesis", options={"mapping": {"id": "id"}})
      * @QueryParam(name="type", nullable=true)
      * @Get("/syntheses/{id}/elements")
-     * @View(serializerGroups={"ElementDetails", "UserDetails"})
+     * @View(serializerGroups={"ElementsList", "UserDetails"})
      */
     public function getSynthesisElementsAction(ParamFetcherInterface $paramFetcher, Synthesis $synthesis)
     {
@@ -218,6 +218,29 @@ class SynthesisController extends FOSRestController
         }
 
         return $this->get('capco.synthesis.synthesis_element_handler')->getElementsFromSynthesisByType($synthesis, $type);
+    }
+
+    /**
+     * Get root synthesis elements.
+     *
+     * @return array|\Capco\AppBundle\Entity\Synthesis\SynthesisElement[]
+     *
+     * @ApiDoc(
+     *  resource=true,
+     *  description="Get the root elements of a synthesis",
+     *  statusCodes={
+     *    200 = "Syntheses element found",
+     *    404 = "Synthesis not found",
+     *  }
+     * )
+     *
+     * @ParamConverter("synthesis", options={"mapping": {"id": "id"}})
+     * @Get("/syntheses/{id}/elements/root")
+     * @View(serializerGroups={"ElementsList", "ElementsTree", "UserDetails"})
+     */
+    public function getSynthesisElementsTreeAction(Synthesis $synthesis)
+    {
+        return $this->get('capco.synthesis.synthesis_element_handler')->getElementsFromSynthesisByType($synthesis, 'root');
     }
 
     /**

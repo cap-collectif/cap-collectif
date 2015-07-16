@@ -159,4 +159,41 @@ class ApplicationContext extends UserContext
     {
         assert(in_array($header, $this->headers), "Did not see \"$header\" in the headers.");
     }
+
+    /**
+     * Checks if an element has a class
+     * Copyright neemzy https://github.com/neemzy/patchwork-core
+     *
+     * @Then /^"([^"]*)" element should have class "([^"]*)"$/
+     *
+     * @return void
+     */
+    public function elementShouldHaveClass($selector, $class)
+    {
+        $session = $this->getSession();
+        $page = $session->getPage();
+        $element = $page->find('css', $selector);
+        if (!$element) {
+            throw new ElementNotFoundException($session, 'Element "'.$selector.'"');
+        }
+        \PHPUnit_Framework_TestCase::assertTrue($element->hasClass($class));
+    }
+    /**
+     * Checks if an element doesn't have a class
+     * Copyright neemzy https://github.com/neemzy/patchwork-core
+     *
+     * @Then /^"([^"]*)" element should not have class "([^"]*)"$/
+     *
+     * @return void
+     */
+    public function elementShouldNotHaveClass($selector, $class)
+    {
+        $session = $this->getSession();
+        $page = $session->getPage();
+        $element = $page->find('css', $selector);
+        if (!$element) {
+            throw new ElementNotFoundException($session, 'Element "'.$selector.'"');
+        }
+        \PHPUnit_Framework_TestCase::assertFalse($element->hasClass($class));
+    }
 }

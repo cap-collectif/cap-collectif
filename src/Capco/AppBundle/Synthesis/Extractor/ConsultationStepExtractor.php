@@ -125,6 +125,7 @@ class ConsultationStepExtractor
         $folder = new SynthesisElement();
         $folder->setTitle($label);
         $folder->setDisplayType('folder');
+        $folder->setArchived(true);
         $opinionElement->addChild($folder);
         $synthesis->addElement($folder);
         return $folder;
@@ -149,6 +150,7 @@ class ConsultationStepExtractor
         $element->setLinkedDataId($opinionType->getId());
         $element->setLinkedDataCreation($opinionType->getCreatedAt());
         $element->setDisplayType('folder');
+        $element->setArchived(true);
 
         return $this->updateElementFromOpinionType($element, $opinionType);
     }

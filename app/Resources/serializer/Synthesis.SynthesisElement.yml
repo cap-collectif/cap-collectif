@@ -3,52 +3,54 @@ Capco\AppBundle\Entity\Synthesis\SynthesisElement:
   properties:
     id:
       expose: true
-      groups: [Elements, ElementDetails]
+      groups: [Elements, ElementsList, ElementDetails]
     enabled:
       expose: true
-      groups: [ElementDetails]
+      groups: [ElementsList, ElementDetails]
     createdAt:
       expose: true
-      groups: [ElementDetails]
+      groups: [ElementsList, ElementDetails]
     updatedAt:
       expose: true
-      groups: [ElementDetails]
+      groups: [ElementsList, ElementDetails]
     archived:
       expose: true
-      groups: [ElementDetails]
+      groups: [ElementsList, ElementDetails]
     author:
       expose: true
-      groups: [ElementDetails, UserDetails]
+      groups: [ElementsList, ElementDetails, UserDetails]
     parent:
       type: Capco\AppBundle\Entity\Synthesis\SynthesisElement
       expose: true
-      groups: [ElementDetails]
+      groups: [ElementsList, ElementDetails]
+      max_depth: 3
     children:
       type: ArrayCollection<Capco\AppBundle\Entity\Synthesis\SynthesisElement>
       expose: true
-      groups: [ElementDetails]
+      groups: [ElementsTree, ElementDetails]
+      max_depth: 1
     displayType:
       expose: true
-      groups: [ElementDetails]
+      groups: [ElementsList, ElementDetails]
     title:
       expose: true
-      groups: [Elements, ElementDetails]
+      groups: [ElementsList, Elements, ElementDetails]
     body:
       expose: true
       groups: [ElementDetails]
     notation:
       expose: true
-      groups: [ElementDetails]
+      groups: [ElementsList, ElementDetails]
     votes:
       expose: true
       groups: [ElementDetails]
     linkedDataCreation:
       expose: true
-      groups: [ElementDetails]
+      groups: [ElementsList, ElementDetails]
   virtual_properties:
     hasLinkedData:
       serialized_name: has_linked_data
-      groups: [ElementDetails]
+      groups: [ElementsList, ElementDetails]
   relations:
     -
       rel: self
@@ -58,7 +60,7 @@ Capco\AppBundle\Entity\Synthesis\SynthesisElement:
           synthesis_id: expr(object.getSynthesis().getId())
           element_id: expr(object.getId())
       exclusion:
-        groups: [Elements, ElementDetails]
+        groups: [Elements, ElementsList, ElementDetails]
     -
       rel: divide
       href:
@@ -67,7 +69,7 @@ Capco\AppBundle\Entity\Synthesis\SynthesisElement:
           synthesis_id: expr(object.getSynthesis().getId())
           element_id: expr(object.getId())
       exclusion:
-        groups: [Elements, ElementDetails]
+        groups: [Elements, ElementsList, ElementDetails]
     -
       rel: history
       href:
@@ -76,5 +78,5 @@ Capco\AppBundle\Entity\Synthesis\SynthesisElement:
           synthesis_id: expr(object.getSynthesis().getId())
           element_id: expr(object.getId())
       exclusion:
-        groups: [Elements, ElementDetails]
+        groups: [Elements, ElementsList, ElementDetails]
 

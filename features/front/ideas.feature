@@ -32,8 +32,6 @@ Scenario: Can not create an idea from homepage when idea creation is disabled
   Given I visited "home page"
   Then I should not see "Proposer une idée"
 
-
-
 # Create
 
 Scenario: Can create an idea when logged in

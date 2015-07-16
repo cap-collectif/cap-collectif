@@ -13,17 +13,7 @@ Feature: Synthesis
     [
       {
         "id": @string@,
-        "elements": [
-          {
-            "id": @string@,
-            "title": @string@,
-            "_links": {
-              "self": { "href": "@string@.startsWith('/api/syntheses/').contains('/elements/')" },
-              "divide": { "href": "@string@.startsWith('/api/syntheses/').contains('/elements/').endsWith('/divisions')" },
-              "history": { "href": "@string@.startsWith('/api/syntheses/').contains('/elements/').endsWith('/history')" }
-            }
-          }
-        ],
+        "elements": @array@,
         "_links": {
           "self": { "href": "@string@.startsWith('/api/syntheses/')" },
           "elements": { "href": "@string@.startsWith('/api/syntheses/').endsWith('/elements')" }
@@ -205,6 +195,16 @@ Feature: Synthesis
     """
 
   @database
+  Scenario: API client wants to get count synthesis elements from consultation step
+    Given I am logged in to api as admin
+    And there is a synthesis with id "48" based on consultation step 2
+    And I send a GET request to "/api/syntheses/48/elements/count?type=all"
+    Then the JSON response should match:
+    """
+    {"count": "14"}
+    """
+
+  @database
   Scenario: API client wants to update a synthesis
     Given I am logged in to api as admin
     And there is a synthesis with id "42" and elements:
@@ -292,12 +292,9 @@ Feature: Synthesis
           }
         },
         "parent": @null@,
-        "children": [],
         "display_type": "folder",
         "title": "Je suis un élément",
-        "body": "blabla",
         "notation": 4,
-        "votes": {"-1": 21, "0":12, "1": 43},
         "linked_data_creation": @null@,
         "_links": {
           "self": { "href": "/api/syntheses/42/elements/43" },
@@ -349,12 +346,9 @@ Feature: Synthesis
           }
         },
         "parent": @null@,
-        "children": [],
         "display_type": "folder",
         "title": "Je suis un élément",
-        "body": "blabla",
         "notation": 4,
-        "votes": {"-1": 21, "0":12, "1": 43},
         "linked_data_creation": @null@,
         "_links": {
           "self": { "href": "/api/syntheses/42/elements/43" },
@@ -399,12 +393,9 @@ Feature: Synthesis
         "archived": true,
         "author": @null@,
         "parent": @null@,
-        "children": [],
         "display_type": "folder",
         "title": @null@,
-        "body": "blabla",
         "notation": @null@,
-        "votes": [],
         "linked_data_creation": @null@,
         "_links": {
           "self": { "href": "/api/syntheses/42/elements/44" },
@@ -449,12 +440,9 @@ Feature: Synthesis
         "archived": false,
         "author": @null@,
         "parent": @null@,
-        "children": [],
         "display_type": "folder",
         "title": @null@,
-        "body": "blabla",
         "notation": @null@,
-        "votes": [],
         "linked_data_creation": @null@,
         "_links": {
           "self": { "href": "/api/syntheses/42/elements/44" },
@@ -483,7 +471,7 @@ Feature: Synthesis
   Scenario: API client wants to get root synthesis elements
     Given I am logged in to api as admin
     And there is a synthesis with id "48" based on consultation step 2
-    And I send a GET request to "/api/syntheses/48/elements?type=root"
+    And I send a GET request to "/api/syntheses/48/elements/root"
     Then the JSON response should match:
     """
     [
@@ -493,17 +481,15 @@ Feature: Synthesis
         "enabled": true,
         "created_at": "@string@.isDateTime()",
         "updated_at": "@string@.isDateTime()",
-        "archived": false,
-        "author": @...@,
+        "archived": true,
+        "author": @null@,
         "parent": @null@,
         "children": [
           @...@
         ],
         "display_type": "folder",
         "title": "Le problème constaté",
-        "body": "blabla",
         "notation": @null@,
-        "votes": [],
         "linked_data_creation": "@string@.isDateTime()",
         "_links": {
           "self": { "href": "@string@.startsWith('/api/syntheses/48/elements/')" },
@@ -517,7 +503,7 @@ Feature: Synthesis
         "enabled": true,
         "created_at": "@string@.isDateTime()",
         "updated_at": "@string@.isDateTime()",
-        "archived": false,
+        "archived": true,
         "author": @...@,
         "parent": @null@,
         "children": [
@@ -525,9 +511,7 @@ Feature: Synthesis
         ],
         "display_type": "folder",
         "title": "Les causes",
-        "body": "blabla",
         "notation": @null@,
-        "votes": [],
         "linked_data_creation": "@string@.isDateTime()",
         "_links": {
           "self": { "href": "@string@.startsWith('/api/syntheses/48/elements/')" },

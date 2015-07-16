@@ -1,6 +1,0 @@
-Capco\AppBundle\Entity\Synthesis\SynthesisElement:
-    sElement1:
-        synthesis: @synthesis1
-        title: "Premier élément de synthèse"
-        body: <text(100)>
-        notation: 4

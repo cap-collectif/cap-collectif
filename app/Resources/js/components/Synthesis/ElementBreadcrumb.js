@@ -12,7 +12,7 @@ const ElementBreadcrumb = React.createClass({
       parents.push(element.parent);
       return this.getElementBreadcrumbItems(element.parent, parents);
     }
-    let items = parents.reverse()
+    let items = parents.reverse();
     items.push(this.props.element);
     return items;
   },
@@ -31,7 +31,7 @@ const ElementBreadcrumb = React.createClass({
   render() {
     const items = this.getElementBreadcrumbItems(this.props.element);
     return (
-      <p className="small  excerpt breadcrumb-item">
+      <p className="small excerpt element__breadcrumb">
         <i className="cap cap-folder-2"></i>
         {
           items.map((element) => {

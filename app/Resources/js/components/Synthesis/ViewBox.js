@@ -1,5 +1,6 @@
 import ViewElement from './ViewElement';
-import Fetcher from '../../services/Fetcher';
+import SynthesisElementStore from '../../stores/SynthesisElementStore';
+import SynthesisElementActions from '../../actions/SynthesisElementActions';
 
 const ViewBox = React.createClass({
   propTypes: {
@@ -10,11 +11,36 @@ const ViewBox = React.createClass({
   getInitialState() {
     return {
       elements: [],
+      isLoading: true,
     };
+  },
+
+  componentWillMount() {
+    SynthesisElementStore.addChangeListener(this.onChange);
   },
 
   componentDidMount() {
     this.loadArchivedElementsFromServer();
+  },
+
+  componentWillUnmount() {
+    SynthesisElementStore.removeChangeListener(this.onChange);
+  },
+
+  onChange() {
+    if (SynthesisElementStore.isSync) {
+      this.setState({
+        elements: SynthesisElementStore.elements,
+        isLoading: false,
+      });
+      return;
+    }
+
+    this.setState({
+      isLoading: true,
+    }, () => {
+      this.loadArchivedElementsFromServer();
+    });
   },
 
   renderElementsList() {
@@ -33,22 +59,32 @@ const ViewBox = React.createClass({
     }
   },
 
+  renderLoader() {
+    if (this.state.isLoading) {
+      return (
+        <div className= "row">
+          <div className="col-xs-2 col-xs-offset-5 spinner-loader-container">
+            <div className="spinner-loader"></div>
+          </div>
+        </div>
+      );
+    }
+  },
+
   render() {
     return (
       <div className="synthesis__view">
+        {this.renderLoader()}
         {this.renderElementsList()}
       </div>
     );
   },
 
   loadArchivedElementsFromServer() {
-    Fetcher
-      .get('/syntheses/' + this.props.synthesis.id + '/elements/archived')
-      .then((data) => {
-        this.setState({
-          'elements': data,
-        });
-      });
+    SynthesisElementActions.loadElementsFromServer(
+      this.props.synthesis.id,
+      'archived'
+    );
   },
 
 });

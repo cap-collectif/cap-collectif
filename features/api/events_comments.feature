@@ -105,7 +105,7 @@ Feature: Events comments
     When I send a POST request to "/api/events/3/comments" with json:
     """
     {
-      "authorName": "Kéké du bled",
+      "authorName": "Kéké",
       "authorEmail": "vivele94@gmail.com",
       "body": "Vive moi qui suis plus fort que www.google.fr !"
     }

@@ -1,0 +1,9 @@
+Capco\AppBundle\Entity\SynthesisStep:
+    sstep1:
+        title: Synthèse
+        body: Voici la synthèse
+        isEnabled: true
+        synthesis: @synthesis1
+        body: |
+            <p>Afficher le texte pour la préparation de la synthèse</p>
+            <p><text(1000)></p>
