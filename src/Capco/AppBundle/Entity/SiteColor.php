@@ -81,10 +81,9 @@ class SiteColor
     public function __toString()
     {
         if ($this->id) {
-            return $this->getTitle();
-        } else {
-            return 'New color';
+            return $this->getKeyname();
         }
+        return 'New color';
     }
 
     /**

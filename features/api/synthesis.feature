@@ -62,6 +62,7 @@ Feature: Synthesis
     }
     """
 
+    @database
   Scenario: API client wants to create a synthesis
     Given I am logged in to api as admin
     And I send a POST request to "/api/syntheses" with json:
@@ -104,6 +105,7 @@ Feature: Synthesis
     """
     Then the JSON response status code should be 401
 
+  @database
   Scenario: API client wants to create a synthesis from a consultation step
     Given I am logged in to api as admin
     And I send a POST request to "/api/syntheses/from-consultation-step/2" with json:
@@ -121,27 +123,57 @@ Feature: Synthesis
       "editable": true,
       "elements": [
         {
-          "id": @string@,
-          "title": "Opinion 51",
-          "_links": {
-            "self": { "href": "@string@.startsWith('/api/syntheses/').contains('/elements')" },
-            "divide": { "href": "@string@.startsWith('/api/syntheses/').contains('/elements/').endsWith('/divisions')" },
-            "history": { "href": "@string@.startsWith('/api/syntheses/').contains('/elements/').endsWith('/history')" }
-          }
-        },
-        {
-          "id": @string@,
-          "title": @null@,
-          "_links": "@*@"
-        },
-        {
-          "id": @string@,
-          "title": @null@,
-          "_links": "@*@"
+            "id": @string@,
+            "title": "Le problème constaté",
+            "_links": {
+              "self": { "href": "@string@.startsWith('/api/syntheses/').contains('/elements')" },
+              "divide": { "href": "@string@.startsWith('/api/syntheses/').contains('/elements/').endsWith('/divisions')" },
+              "history": { "href": "@string@.startsWith('/api/syntheses/').contains('/elements/').endsWith('/history')" }
+            }
         },
         {
           "id": @string@,
           "title": "Opinion 52",
+          "_links": "@*@"
+        },
+        {
+          "id": @string@,
+          "title": "Arguments pour",
+          "_links": "@*@"
+        },
+        {
+          "id": @string@,
+          "title": "Arguments contre",
+          "_links": "@*@"
+        },
+        {
+          "id": @string@,
+          "title": @null@,
+          "_links": "@*@"
+        },
+        {
+          "id": @string@,
+          "title": "Les causes",
+          "_links": "@*@"
+        },
+        {
+          "id": @string@,
+          "title": "Opinion 51",
+          "_links": "@*@"
+        },
+        {
+          "id": @string@,
+          "title": "Arguments pour",
+          "_links": "@*@"
+        },
+        {
+          "id": @string@,
+          "title": "Arguments contre",
+          "_links": "@*@"
+        },
+        {
+          "id": @string@,
+          "title": @null@,
           "_links": "@*@"
         },
         {
@@ -152,6 +184,16 @@ Feature: Synthesis
         {
           "id": @string@,
           "title": "Opinion 53",
+          "_links": "@*@"
+        },
+        {
+          "id": @string@,
+          "title": "Arguments pour",
+          "_links": "@*@"
+        },
+        {
+          "id": @string@,
+          "title": "Arguments contre",
           "_links": "@*@"
         }
       ],
@@ -233,7 +275,7 @@ Feature: Synthesis
     """
     [
       {
-        "hasLinkedData": false,
+        "has_linked_data": false,
         "id": "43",
         "enabled": true,
         "created_at": "@string@.isDateTime()",
@@ -256,7 +298,7 @@ Feature: Synthesis
         "body": "blabla",
         "notation": 4,
         "votes": {"-1": 21, "0":12, "1": 43},
-        "linkedDataCreation": @null@,
+        "linked_data_creation": @null@,
         "_links": {
           "self": { "href": "/api/syntheses/42/elements/43" },
           "divide": { "href": "/api/syntheses/42/elements/43/divisions" },
@@ -290,7 +332,7 @@ Feature: Synthesis
     """
     [
       {
-        "hasLinkedData": false,
+        "has_linked_data": false,
         "id": "43",
         "enabled": true,
         "created_at": "@string@.isDateTime()",
@@ -313,7 +355,7 @@ Feature: Synthesis
         "body": "blabla",
         "notation": 4,
         "votes": {"-1": 21, "0":12, "1": 43},
-        "linkedDataCreation": @null@,
+        "linked_data_creation": @null@,
         "_links": {
           "self": { "href": "/api/syntheses/42/elements/43" },
           "divide": { "href": "/api/syntheses/42/elements/43/divisions" },
@@ -349,7 +391,7 @@ Feature: Synthesis
     """
     [
       {
-        "hasLinkedData": false,
+        "has_linked_data": false,
         "id": "44",
         "enabled": true,
         "created_at": "@string@.isDateTime()",
@@ -363,7 +405,7 @@ Feature: Synthesis
         "body": "blabla",
         "notation": @null@,
         "votes": [],
-        "linkedDataCreation": @null@,
+        "linked_data_creation": @null@,
         "_links": {
           "self": { "href": "/api/syntheses/42/elements/44" },
           "divide": { "href": "/api/syntheses/42/elements/44/divisions" },
@@ -399,7 +441,7 @@ Feature: Synthesis
     """
     [
       {
-        "hasLinkedData": false,
+        "has_linked_data": false,
         "id": "44",
         "enabled": false,
         "created_at": "@string@.isDateTime()",
@@ -413,7 +455,7 @@ Feature: Synthesis
         "body": "blabla",
         "notation": @null@,
         "votes": [],
-        "linkedDataCreation": @null@,
+        "linked_data_creation": @null@,
         "_links": {
           "self": { "href": "/api/syntheses/42/elements/44" },
           "divide": { "href": "/api/syntheses/42/elements/44/divisions" },
@@ -446,7 +488,7 @@ Feature: Synthesis
     """
     [
       {
-        "hasLinkedData": true,
+        "has_linked_data": true,
         "id": @string@,
         "enabled": true,
         "created_at": "@string@.isDateTime()",
@@ -457,19 +499,42 @@ Feature: Synthesis
         "children": [
           @...@
         ],
-        "display_type": "contribution",
-        "title": "Opinion 51",
+        "display_type": "folder",
+        "title": "Le problème constaté",
         "body": "blabla",
         "notation": @null@,
         "votes": [],
-        "linkedDataCreation": "@string@.isDateTime()",
+        "linked_data_creation": "@string@.isDateTime()",
         "_links": {
           "self": { "href": "@string@.startsWith('/api/syntheses/48/elements/')" },
           "divide": { "href": "@string@.startsWith('/api/syntheses/48/elements/').endsWith('/divisions')" },
           "history": { "href": "@string@.startsWith('/api/syntheses/48/elements/').endsWith('/history')" }
         }
       },
-      @...@
+      {
+        "has_linked_data": true,
+        "id": @string@,
+        "enabled": true,
+        "created_at": "@string@.isDateTime()",
+        "updated_at": "@string@.isDateTime()",
+        "archived": false,
+        "author": @...@,
+        "parent": @null@,
+        "children": [
+          @...@
+        ],
+        "display_type": "folder",
+        "title": "Les causes",
+        "body": "blabla",
+        "notation": @null@,
+        "votes": [],
+        "linked_data_creation": "@string@.isDateTime()",
+        "_links": {
+          "self": { "href": "@string@.startsWith('/api/syntheses/48/elements/')" },
+          "divide": { "href": "@string@.startsWith('/api/syntheses/48/elements/').endsWith('/divisions')" },
+          "history": { "href": "@string@.startsWith('/api/syntheses/48/elements/').endsWith('/history')" }
+        }
+      }
     ]
     """
 
@@ -480,7 +545,7 @@ Feature: Synthesis
     And I send a GET request to "/api/syntheses/48/elements/count?type=root"
     Then the JSON response should match:
     """
-    {"count": "3"}
+    {"count": "2"}
     """
 
   @database
@@ -491,7 +556,7 @@ Feature: Synthesis
     Then the JSON response should match:
     """
     {
-      "hasLinkedData": false,
+      "has_linked_data": false,
       "id": "43",
       "enabled": true,
       "created_at": "@string@.isDateTime()",
@@ -514,7 +579,7 @@ Feature: Synthesis
       "body": "blabla",
       "notation": 4,
       "votes": {"-1": 21, "0":12, "1": 43},
-      "linkedDataCreation": @null@,
+      "linked_data_creation": @null@,
       "_links": {
         "self": { "href": "/api/syntheses/42/elements/43" },
         "divide": { "href": "/api/syntheses/42/elements/43/divisions" },
@@ -540,7 +605,7 @@ Feature: Synthesis
     And the JSON response should match:
     """
     {
-      "hasLinkedData": false,
+      "has_linked_data": false,
       "id": @string@,
       "enabled": true,
       "created_at": "@string@.isDateTime()",
@@ -554,7 +619,7 @@ Feature: Synthesis
       "body": "blabla",
       "notation": 5,
       "votes": [],
-      "linkedDataCreation": @null@,
+      "linked_data_creation": @null@,
       "_links": {
         "self": { "href": "@string@.startsWith('/api/syntheses/42/elements/')" },
         "divide": { "href": "@string@.startsWith('/api/syntheses/42/elements/').endsWith('/divisions')" },
@@ -609,7 +674,7 @@ Feature: Synthesis
     And the JSON response should match:
     """
     {
-      "hasLinkedData": false,
+      "has_linked_data": false,
       "id": "43",
       "enabled": true,
       "created_at": "@string@.isDateTime()",
@@ -632,7 +697,7 @@ Feature: Synthesis
       "body": "blabla",
       "notation": 2,
       "votes": {"-1": 21, "0":12, "1": 43},
-      "linkedDataCreation": @null@,
+      "linked_data_creation": @null@,
       "_links": {
         "self": { "href": "/api/syntheses/42/elements/43" },
         "divide": { "href": "/api/syntheses/42/elements/43/divisions" },
@@ -882,6 +947,7 @@ Feature: Synthesis
       "enabled": true,
       "editable": true,
       "elements": [
+        @...@,
         {
           "id": @string@,
           "title": "Je suis le nouveau titre",

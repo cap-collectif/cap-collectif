@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "bc3960587d06de704877ac985a893e42",
+    "hash": "886ee3ea37dc57e4eb21c72010ac3c99",
     "packages": [
         {
             "name": "behat/transliterator",
@@ -56,7 +56,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/cocur/slugify/zipball/5d8e48f750e4ed6528f08fe560a5032a373c3550",
+                "url": "https://api.github.com/repos/cocur/slugify/zipball/64360a07d565c0a212fc3735e1834123b4b99416",
                 "reference": "00ff0cb27e986c4a33a4682790ea527e1a9f420b",
                 "shasum": ""
             },
@@ -1582,7 +1582,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/fzaninotto/Faker/zipball/6615c01b7b2a9c46f4cc426f860866a122eae0af",
+                "url": "https://api.github.com/repos/fzaninotto/Faker/zipball/b1abe41e1357ad790398d7a668b19ac733b4e1c1",
                 "reference": "a3aad09dc8b0f4767e113fc2a7e8fd2ccb11aa65",
                 "shasum": ""
             },
@@ -2258,6 +2258,59 @@
             "time": "2015-03-24 16:48:01"
         },
         {
+            "name": "jolicode/jolinotif",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/jolicode/JoliNotif.git",
+                "reference": "6d443ada2860f1497299f0b6a01bc47a6f028360"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/jolicode/JoliNotif/zipball/6d443ada2860f1497299f0b6a01bc47a6f028360",
+                "reference": "6d443ada2860f1497299f0b6a01bc47a6f028360",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.4.0",
+                "symfony/process": "~2.3"
+            },
+            "require-dev": {
+                "fabpot/php-cs-fixer": "~1.5",
+                "phpunit/phpunit": "~4.5"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Joli\\JoliNotif\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Loïck Piera",
+                    "email": "pyrech@gmail.com"
+                }
+            ],
+            "description": "Send desktop notifications on Windows, Linux, MacOS.",
+            "keywords": [
+                "MAC",
+                "growl",
+                "linux",
+                "notification",
+                "windows"
+            ],
+            "time": "2015-07-06 17:49:07"
+        },
+        {
             "name": "jolicode/jolitypo",
             "version": "dev-master",
             "source": {
@@ -2267,7 +2320,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jolicode/JoliTypo/zipball/f2111bcb3cf3bd6ed1231ebaee64c381a819ba8e",
+                "url": "https://api.github.com/repos/jolicode/JoliTypo/zipball/a6bd9bb3b1fecb0ab7662d86d666f88c7e5e2ba7",
                 "reference": "f2111bcb3cf3bd6ed1231ebaee64c381a819ba8e",
                 "shasum": ""
             },
@@ -2491,7 +2544,7 @@
                     "email": "stof@notk.org"
                 },
                 {
-                    "name": "KnpLabs",
+                    "name": "Knplabs",
                     "homepage": "http://knplabs.com"
                 },
                 {
@@ -2622,7 +2675,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/lexik/LexikJWTAuthenticationBundle/zipball/fb8c731e564bd5e1070fa9b0510aceea665b6da6",
+                "url": "https://api.github.com/repos/lexik/LexikJWTAuthenticationBundle/zipball/68703549f146ae3f23872b4df107fdee40405c5b",
                 "reference": "27dbf11e889a8fdb6d415a69e88b3e6d8c3a76eb",
                 "shasum": ""
             },
@@ -2858,7 +2911,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Seldaek/monolog/zipball/6dd76b944d42d7b27bb3d09cd0f6fa88a80817f5",
+                "url": "https://api.github.com/repos/Seldaek/monolog/zipball/c5b08724f4b11fd90a2c36a64d4868bcee7ba6a4",
                 "reference": "77aef55318035d37dbd4e87ea0c37a191f3e766e",
                 "shasum": ""
             },
@@ -3042,7 +3095,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nelmio/NelmioApiDocBundle/zipball/787f69561b4803e2eb3824224524505c0c849da4",
+                "url": "https://api.github.com/repos/nelmio/NelmioApiDocBundle/zipball/0699c45dcc02f98626431996e288deb93f34a6ab",
                 "reference": "a679eb80891fc037c9356a381a92d090a83533cb",
                 "shasum": ""
             },
@@ -3927,7 +3980,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sonata-project/SonataAdminBundle/zipball/899922304b0c35c208318a1ef0ed6feda68fa612",
+                "url": "https://api.github.com/repos/sonata-project/SonataAdminBundle/zipball/ee435fb4b12451ec6bc53ddec38c39974a822bce",
                 "reference": "61300928d08bf9a20fae974266759e4f76cb54e2",
                 "shasum": ""
             },
@@ -4137,7 +4190,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sonata-project/SonataClassificationBundle/zipball/f0a60006ec676df2ecde09ac9667d14411f0b726",
+                "url": "https://api.github.com/repos/sonata-project/SonataClassificationBundle/zipball/edd5f24121455b5a91d801b1bd70a699a5d45e64",
                 "reference": "afd0e4c9ea6b17300d186b0d74700bc0b21a0cba",
                 "shasum": ""
             },
@@ -4827,7 +4880,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sonata-project/SonataUserBundle/zipball/70c1b9fded5562db6aa7089eafb4b90d783837f8",
+                "url": "https://api.github.com/repos/sonata-project/SonataUserBundle/zipball/098fb0063301503754346495599ac67106f47118",
                 "reference": "f28cc89bbc2c201b736b17b6519e126c95b511dc",
                 "shasum": ""
             },
@@ -5130,7 +5183,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/symfony/zipball/ecd8bd9add93cd48269e633acc1b40386fd644a0",
+                "url": "https://api.github.com/repos/symfony/symfony/zipball/7783573d16994ab6544d0da583b6a76b2024f191",
                 "reference": "29027eead64a453a74726d735de32e581304a512",
                 "shasum": ""
             },
@@ -5411,7 +5464,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/geocoder-php/Geocoder/zipball/94c6a83af9b213aac732324c8b4d7faa26e0b190",
+                "url": "https://api.github.com/repos/geocoder-php/Geocoder/zipball/fa2bc39bda5c1896984311250ecfa6bea29071b1",
                 "reference": "a0d815971a93385733f99d160ba8b6a4342b193a",
                 "shasum": ""
             },
@@ -6812,7 +6865,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/php-code-coverage/zipball/df88fdf48a61af29cc309545f9c8d425c63b8852",
+                "url": "https://api.github.com/repos/sebastianbergmann/php-code-coverage/zipball/1ba1290e47c3275be779967de1516e2989b6e130",
                 "reference": "688b6a58acb19c1899dc887b1efb6403dc6dc0bd",
                 "shasum": ""
             },
@@ -7058,7 +7111,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/dbf851f497ed0055290f70c5a9d4877967405884",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/e1cc5855b0dde3d6efa2df0350c72b84aa84771d",
                 "reference": "2c1abada32236c49c8cb362293210b5a79d5c5a9",
                 "shasum": ""
             },
@@ -7130,7 +7183,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit-mock-objects/zipball/e4862226480f86ea18ef773212ec1e2acd42ba64",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit-mock-objects/zipball/a1304c50e6982bf6d1fa5131ee276bbc6229d80b",
                 "reference": "5034a3d9f2057a7b7d6ad03a984509dadfdda3cc",
                 "shasum": ""
             },
@@ -7885,6 +7938,7 @@
         "nelmio/api-doc-bundle": 20,
         "lexik/jwt-authentication-bundle": 20,
         "willdurand/hateoas-bundle": 20,
+        "jolicode/jolinotif": 20,
         "behat/symfony2-extension": 20,
         "behat/mink-extension": 20,
         "behat/mink-selenium2-driver": 20,

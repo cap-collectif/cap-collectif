@@ -11,11 +11,11 @@ import LoginStore from '../../stores/LoginStore';
 
 const Comment = React.createClass({
   propTypes: {
-    uri: React.PropType.string,
-    object: React.PropType.number,
-    comment: React.PropType.object,
-    root: React.PropType.bool,
-    isReportingEnabled: React.PropType.bool,
+    uri: React.PropTypes.string,
+    object: React.PropTypes.number,
+    comment: React.PropTypes.object,
+    root: React.PropTypes.bool,
+    isReportingEnabled: React.PropTypes.bool,
   },
   mixins: [ReactIntl.IntlMixin],
 
@@ -43,10 +43,7 @@ const Comment = React.createClass({
           </div>
           <CommentBody comment={comment} />
           <div className="comment__buttons">
-            {(!this.isTheUserTheAuthor()
-              ? <CommentVoteButton comment={comment} />
-              : <span />
-            )}
+            <CommentVoteButton comment={comment} userIsAuthor={this.isTheUserTheAuthor()} />
             {' '}
             {(this.props.root === true
               ? <a onClick={ this.answer.bind(this) } className="btn btn-xs btn-dark-gray btn--outline">
@@ -89,7 +86,7 @@ const Comment = React.createClass({
     if (this.props.comment.author === null || !LoginStore.isLoggedIn()) {
       return false;
     }
-    return LoginStore.user.username === this.props.comment.author.username;
+    return LoginStore.user.unique_id === this.props.comment.author.unique_id;
   },
 
   answer() {

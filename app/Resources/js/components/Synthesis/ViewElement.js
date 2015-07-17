@@ -1,14 +1,8 @@
-var ViewElement = React.createClass({
-  mixins: [ReactIntl.IntlMixin],
-
-  render() {
-    return (
-      <li className="synthesis__element">
-        {this.renderElementTitle()}
-        {this.renderElementBody()}
-      </li>
-    );
+const ViewElement = React.createClass({
+  propTypes: {
+    element: React.PropTypes.object,
   },
+  mixins: [ReactIntl.IntlMixin],
 
   renderElementTitle() {
     if (this.props.element) {
@@ -26,10 +20,19 @@ var ViewElement = React.createClass({
   renderElementBody() {
     if (this.props.element) {
       return (
-        <p className="synthesis__element__body">{this.props.element.body.replace(/(<([^>]+)>)/ig,"")}</p>
+        <p className="synthesis__element__body">{this.props.element.body.replace(/(<([^>]+)>)/ig, '')}</p>
       );
     }
-  }
+  },
+
+  render() {
+    return (
+      <li className="synthesis__element">
+        {this.renderElementTitle()}
+        {this.renderElementBody()}
+      </li>
+    );
+  },
 
 });
 

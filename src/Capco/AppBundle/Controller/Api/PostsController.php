@@ -101,7 +101,7 @@ class PostsController extends FOSRestController
 
         $parent = $comment->getParent();
         if ($parent) {
-            if ($post != $parent->getPost()) {
+            if (!$parent instanceof PostComment || $post != $parent->getPost()) {
                 throw $this->createNotFoundException('This parent comment is not linked to this post');
             }
             if ($parent->getParent() != null) {

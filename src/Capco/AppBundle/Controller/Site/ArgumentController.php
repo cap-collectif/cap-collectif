@@ -170,7 +170,7 @@ class ArgumentController extends Controller
             throw new AccessDeniedException($this->get('translator')->trans('argument.error.not_author', array(), 'CapcoAppBundle'));
         }
 
-        $form = $this->createForm(new ArgumentForm(), $argument);
+        $form = $this->createForm(new ArgumentForm('edit'), $argument);
         if ($request->getMethod() == 'POST') {
             $form->handleRequest($request);
 

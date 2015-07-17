@@ -1,19 +1,19 @@
 export default {
-  locales : ['fr-FR'],
+  locales: ['fr-FR'],
   messages: {
     common: {
       elements: {
         nb: '{num, plural, =0{} one{# contribution} other{# contributions}}',
-        default_title: "Contribution",
-        no_source_date: "Non renseigné"
+        default_title: 'Contribution',
+        no_source_date: 'Date non renseignée',
       },
       errors: {
-        not_enabled: "La synthèse est en cours de rédaction et sera bientôt disponible.",
-        no_synthesis: "La synthèse n'a pas encore été rédigée. Elle sera disponible prochainement.",
-        incorrect_mode: "Un problème est survenu. Veuillez réessayer.",
-        update_error: "Une erreur est survenue, merci de réessayer cette action ultérieurement.",
-        close: "Fermer"
-      }
+        not_enabled: 'La synthèse est en cours de rédaction et sera bientôt disponible.',
+        no_synthesis: 'La synthèse n\'a pas encore été rédigée. Elle sera disponible prochainement.',
+        incorrect_mode: 'Un problème est survenu. Veuillez réessayer.',
+        update_error: 'Une erreur est survenue, merci de réessayer cette action ultérieurement.',
+        close: 'Fermer',
+      },
     },
     view: {
     },
@@ -27,11 +27,11 @@ export default {
         unpublished: 'Dépubliées',
         all: 'Toutes',
         tree: 'Arborescence',
-        new_folder: 'Nouveau dossier'
+        new_folder: 'Nouveau dossier',
       },
       inbox: {
-        none: 'Aucune contribution à afficher.'
-      }
-    }
-  }
+        none: 'Aucune contribution à afficher.',
+      },
+    },
+  },
 };

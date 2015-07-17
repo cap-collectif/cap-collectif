@@ -17,14 +17,19 @@
                     <div class="dialog__header  box">
                         <h1 class="h4  dialog__title">{{ 'argument.update.title'|trans({}, 'CapcoAppBundle') }}</h1>
                     </div>
-                    <div class="dialog__message  box">
-                        <p>{{ 'argument.update.alert'|trans({}, 'CapcoAppBundle') }}</p>
-                    </div>
                     <form method="post" {{ form_enctype(form) }}>
                         <div class="dialog__body  box">
                             <div class="media">
                                 {% include 'CapcoUserBundle:Avatar:avatar.html.twig' with { 'user': argument.Author, 'classes': 'media-object', 'link_classes': 'pull-left'} only %}
                                 <div class="media-body">
+                                    {% if form.confirm %}
+                                        {{ form_errors(form.confirm) }}
+                                        <div class="alert alert-warning  edit-confirm-alert">
+                                            <div class="checkbox form-group">
+                                                {{ form_widget(form.confirm) }}
+                                            </div>
+                                        </div>
+                                    {% endif %}
                                     {{form_widget(form.body)}}
                                     {{ form_rest(form) }}
                                 </div>

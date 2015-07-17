@@ -1,0 +1,5 @@
+Capco\AppBundle\Entity\ArgumentVote:
+    argumentVote{1..5}:
+        argument: @argument1
+        user: @user<numberBetween(1, 4)>
+        confirmed: true

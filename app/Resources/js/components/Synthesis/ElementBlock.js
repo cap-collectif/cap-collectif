@@ -3,35 +3,35 @@ import UserLink from '../User/UserLink';
 import ElementTitle from './ElementTitle';
 import ElementBreadcrumb from './ElementBreadcrumb';
 
-var FormattedDate = ReactIntl.FormattedDate;
+const FormattedDate = ReactIntl.FormattedDate;
 
-var ElementBlock = React.createClass({
+const ElementBlock = React.createClass({
+  propTypes: {
+    element: React.PropTypes.object,
+  },
   mixins: [ReactIntl.IntlMixin],
 
-  render() {
-    var element = this.props.element;
-    return (
-        <div className="element__body">
-          <UserAvatar user={element.author} />
-          <div className="element__data">
-            <p className="element__user excerpt  small">
-              <UserLink user={element.author} /> • {this.renderDate()}
-              <span className="element__notation">
-                {this.renderNotationStars()}
-              </span>
-            </p>
-            <h3 className="element__title ">
-              <ElementTitle element={element} />
-            </h3>
-            <ElementBreadcrumb element={element} />
-          </div>
-          {this.renderStatus()}
-        </div>
-    )
+  getNotationStarsClasses() {
+    const notation = this.props.element.notation ? this.props.element.notation : 0;
+    let classes = [];
+    for (let i = 0; i < 5; i++) {
+      if (i < notation) {
+        classes[i] = 'active';
+      }
+    }
+    return classes;
+  },
+
+  renderAuthor() {
+    if (this.props.element.author) {
+      return (
+        <span><UserLink user={this.props.element.author} /> • </span>
+      );
+    }
   },
 
   renderNotationStars() {
-    var classes = this.getNotationStarsClasses();
+    const classes = this.getNotationStarsClasses();
     return (
       <span className="element__notation">
         <span className={classes[0]}><i className="cap cap-star-1"></i></span>
@@ -41,17 +41,6 @@ var ElementBlock = React.createClass({
         <span className={classes[4]}><i className="cap cap-star-1"></i></span>
       </span>
     );
-  },
-
-  getNotationStarsClasses() {
-    var notation = this.props.element.notation ? this.props.element.notation : 0;
-    var classes = [];
-    for (var i = 0; i < 5; i++) {
-      if (i < notation) {
-        classes[i] = 'active';
-      }
-    }
-    return classes;
   },
 
   renderStatus() {
@@ -72,14 +61,39 @@ var ElementBlock = React.createClass({
   },
 
   renderDate() {
-    if (this.props.element.hasLinkedData) {
-      if (this.props.element.linkedDataCreation) {
-        return <FormattedDate value={this.props.element.linkedDataCreation} day="numeric" month="long" year="numeric" />;
+    if (navigator.userAgent.indexOf('Safari') !== -1 && navigator.userAgent.indexOf('Chrome') === -1) {
+      return this.getIntlMessage('common.elements.no_source_date');
+    }
+    if (this.props.element.has_linked_data) {
+      if (this.props.element.linked_data_creation) {
+        return <FormattedDate value={this.props.element.linked_data_creation} day="numeric" month="long" year="numeric" />;
       }
       return this.getIntlMessage('common.elements.no_source_date');
     }
-    return <FormattedDate value={element.updated_at} day="numeric" month="long" year="numeric" />;
-  }
+    return <FormattedDate value={this.props.element.updated_at} day="numeric" month="long" year="numeric" />;
+  },
+
+  render() {
+    const element = this.props.element;
+    return (
+      <div className="element__body">
+        <UserAvatar user={element.author} />
+        <div className="element__data">
+          <p className="element__user excerpt  small">
+            {this.renderAuthor()} {this.renderDate()}
+            <span className="element__notation">
+                {this.renderNotationStars()}
+            </span>
+          </p>
+          <h3 className="element__title ">
+            <ElementTitle element={element} />
+          </h3>
+          <ElementBreadcrumb element={element} />
+        </div>
+          {this.renderStatus()}
+      </div>
+    );
+  },
 
 });
 

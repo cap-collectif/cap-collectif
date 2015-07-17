@@ -108,7 +108,7 @@ class OpinionController extends Controller
         $opinion->setIsEnabled(true);
         $opinion->setStep($currentStep);
 
-        $form = $this->createForm(new OpinionForm(), $opinion);
+        $form = $this->createForm(new OpinionForm('create'), $opinion);
 
         if ($request->getMethod() == 'POST') {
             $form->handleRequest($request);
@@ -241,7 +241,7 @@ class OpinionController extends Controller
             throw new AccessDeniedException($this->get('translator')->trans('opinion.error.not_author', array(), 'CapcoAppBundle'));
         }
 
-        $form = $this->createForm(new OpinionForm(), $opinion);
+        $form = $this->createForm(new OpinionForm('edit'), $opinion);
         if ($request->getMethod() == 'POST') {
             $form->handleRequest($request);
 
@@ -360,8 +360,8 @@ class OpinionController extends Controller
         $argument = new Argument();
         $argument->setAuthor($this->getUser());
 
-        $argumentFormYes = $this->get('form.factory')->createNamedBuilder('argumentFormYes', new ArgumentForm(), $argument)->getForm();
-        $argumentFormNo = $this->get('form.factory')->createNamedBuilder('argumentFormNo', new ArgumentForm(), $argument)->getForm();
+        $argumentFormYes = $this->get('form.factory')->createNamedBuilder('argumentFormYes', new ArgumentForm('create'), $argument)->getForm();
+        $argumentFormNo = $this->get('form.factory')->createNamedBuilder('argumentFormNo', new ArgumentForm('create'), $argument)->getForm();
 
         // OpinionVote forms
         $opinionVote = null;

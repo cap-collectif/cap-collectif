@@ -4,7 +4,6 @@ namespace Capco\AppBundle\Entity\Synthesis;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
-use JMS\Serializer\Annotation as Serializer;
 
 /**
  * Synthesis.
@@ -20,8 +19,6 @@ class SynthesisUser implements SynthesisUserInterface
      * @ORM\Id
      * @ORM\Column(name="id", type="guid")
      * @ORM\GeneratedValue(strategy="UUID")
-     * @Serializer\Expose
-     * @Serializer\Groups({"Users"})
      */
     private $id;
 
@@ -29,8 +26,6 @@ class SynthesisUser implements SynthesisUserInterface
      * @var string
      * @ORM\Column(name="display_name", type="string", length=255)
      * @Assert\NotNull
-     * @Serializer\Expose
-     * @Serializer\Groups({"Users"})
      */
     private $displayName;
 
@@ -38,8 +33,6 @@ class SynthesisUser implements SynthesisUserInterface
      * @var string
      * @ORM\Column(name="unique_identifier", type="string", length=255)
      * @Assert\NotNull
-     * @Serializer\Expose
-     * @Serializer\Groups({"Users", "UserInfos"})
      */
     private $uniqueIdentifier;
 

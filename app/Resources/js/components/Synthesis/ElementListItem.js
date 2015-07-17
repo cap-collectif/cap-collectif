@@ -1,6 +1,9 @@
 import ElementBlock from './ElementBlock';
 
-var ElementListItem = React.createClass({
+const ElementListItem = React.createClass({
+  propTypes: {
+    element: React.PropTypes.object,
+  },
   mixins: [ReactIntl.IntlMixin],
 
   render() {
@@ -8,8 +11,8 @@ var ElementListItem = React.createClass({
       <li className="element box">
         <ElementBlock element={this.props.element} />
       </li>
-    )
-  }
+    );
+  },
 
 });
 

@@ -36,7 +36,6 @@ const CommentForm = React.createClass({
   },
 
   renderAnonymous() {
-
     if (!LoginStore.isLoggedIn()) {
       return (
           <div>
@@ -175,7 +174,7 @@ const CommentForm = React.createClass({
       ;
       $(commentButton).button('loading');
 
-      let data = this.state;
+      const data = this.state;
       delete data.expanded;
       delete data.submitted;
       this.props.comment(data)
