@@ -2,7 +2,11 @@
 
 namespace Capco\AppBundle\Behat;
 
+use Behat\Testwork\Hook\Scope\AfterSuiteScope;
+use Behat\Testwork\Tester\Result\TestResult;
 use Capco\AppBundle\Toggle\Manager;
+use Joli\JoliNotif\Notification;
+use Joli\JoliNotif\NotifierFactory;
 
 class ApplicationContext extends UserContext
 {
@@ -35,6 +39,31 @@ class ApplicationContext extends UserContext
     public static function reinitFeatures()
     {
         exec('php app/console capco:reset-feature-flags --force');
+    }
+
+    /**
+     * @AfterSuite
+     * @param $suiteScope
+     */
+    public static function notifiyEnd(AfterSuiteScope $suiteScope)
+    {
+        $suiteName = $suiteScope->getSuite()->getName();
+        $resultCode = $suiteScope->getTestResult()->getResultCode();
+        if ($notifier = NotifierFactory::create()) {
+            $notification = new Notification();
+            if ($resultCode === TestResult::PASSED ) {
+                $notification
+                    ->setTitle('Behat suite ended successfully')
+                    ->setBody('Suite "' . $suiteName . '" has ended without errors (for once). Congrats !')
+                ;
+            } else if ($resultCode === TestResult::FAILED ) {
+                $notification
+                    ->setTitle('Behat suite ended with errors')
+                    ->setBody('Suite "' . $suiteName . '" has ended with errors. Go check it out you moron !')
+                ;
+            }
+            $notifier->send($notification);
+        }
     }
 
     /**

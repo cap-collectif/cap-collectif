@@ -69,7 +69,7 @@ Scenario: Author of an idea loose their votes when updating it
     | capco_appbundle_ideaupdatetype_body      | Je modifie mon idée !   |
   And I check "capco_appbundle_ideaupdatetype_confirm"
   And I press "Modifier"
-  Then I should see "Merci ! Votre idée a bien été modifée."
+  Then I should see "Merci ! Votre idée a bien été modifiée."
   And I should not see "1 vote"
 
 Scenario: Non author of an idea wants to update it
@@ -215,4 +215,4 @@ Scenario: Can not comment an uncommentable idea
     And I am logged in as user
     And I visited "ideas page"
     When I follow "Voir la corbeille"
-    Then I should see 6 ".media--macro" elements
+    Then I should see 7 ".media--macro" elements

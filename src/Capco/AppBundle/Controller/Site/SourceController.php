@@ -53,7 +53,7 @@ class SourceController extends Controller
         $source = new Source();
         $source->setAuthor($this->getUser());
 
-        $form = $this->createForm(new SourcesType(), $source);
+        $form = $this->createForm(new SourcesType('create'), $source);
 
         if ($request->getMethod() == 'POST') {
             $form->handleRequest($request);
@@ -187,7 +187,7 @@ class SourceController extends Controller
             throw new AccessDeniedException($this->get('translator')->trans('source.error.not_author', array(), 'CapcoAppBundle'));
         }
 
-        $form = $this->createForm(new SourcesType(), $source);
+        $form = $this->createForm(new SourcesType('edit'), $source);
         if ($request->getMethod() == 'POST') {
             $form->handleRequest($request);
 

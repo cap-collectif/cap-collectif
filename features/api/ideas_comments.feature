@@ -166,7 +166,7 @@ Feature: Ideas comments
     When I send a POST request to "/api/ideas/4/comments" with json:
     """
     {
-      "parent": 2,
+      "parent": 57,
       "body": "Pr0 Hacker"
     }
     """
@@ -186,7 +186,7 @@ Feature: Ideas comments
     When I send a POST request to "/api/ideas/4/comments" with json:
     """
     {
-      "parent": 2,
+      "parent": 55,
       "body": "Pr0 Hacker"
     }
     """
@@ -206,7 +206,7 @@ Feature: Ideas comments
     When I send a POST request to "/api/ideas/4/comments" with json:
     """
     {
-      "parent": 149,
+      "parent": 5,
       "body": "Pr0 Hacker"
     }
     """

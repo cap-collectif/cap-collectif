@@ -132,8 +132,8 @@ idea:
     title: Modifier une idée
     text: Vous éditez une idée déjà existante, ne le changez pas trop pour éviter aux membres de ne pas comprendre.
     alert: Attention ! En modifiant votre idée, vous perdrez les votes qui lui sont associés.
-    success: Merci ! Votre idée a bien été modifée.
-    error: Erreur, votre idée n'a pas pu être modifée.
+    success: Merci ! Votre idée a bien été modifiée.
+    error: Erreur, votre idée n'a pas pu être modifiée.
   delete:
     title: Supprimer une idée
     text: Êtes-vous certain de vouloir supprimer le contenu ?

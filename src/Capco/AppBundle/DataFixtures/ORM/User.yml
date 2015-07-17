@@ -86,3 +86,16 @@ Capco\UserBundle\Entity\User:
         roles:
          - 'ROLE_USER'
         isTermsAccepted: true
+
+    user501:
+        username: spyl
+        firstname: Aurélien
+        lastname: David
+        email: adavid@jolicode.com
+        enabled: true
+        userType: @UserType1
+        plainPassword: toto
+        roles:
+         - 'ROLE_SUPER_ADMIN'
+        Media: @MediaUser4
+        isTermsAccepted: true

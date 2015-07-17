@@ -56,3 +56,6 @@ argument:
 
 comment:
   votes_not_confirmed: Merci de confirmer la perte de vos votes pour continuer.
+
+source:
+  votes_not_confirmed: Merci de confirmer la perte de vos votes pour continuer.

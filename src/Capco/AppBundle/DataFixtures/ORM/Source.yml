@@ -1,9 +1,17 @@
 Capco\AppBundle\Entity\Source:
-    source{1..6}:
+    source1:
+        title: Ma source
+        body: blabla
+        Author: @user5
+        Opinion: @opinion1
+        Category: @Category2
+        link: http://www.google.fr
+        voteCount: 0
+    source{2..6}:
         title: <text(20)>
         body: <text(1000)>
-        Author: @user<numberBetween(1,4)>
-        Opinion: @opinion<current()>
+        Author: @user<numberBetween(1,3)>
+        Opinion: @opinion<numberBetween(1,5)>
         Category: @Category<numberBetween(1,5)>
         link: http://www.cap-collectif.com/
         voteCount: 0

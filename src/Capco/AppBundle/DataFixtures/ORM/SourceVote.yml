@@ -1,0 +1,5 @@
+Capco\AppBundle\Entity\SourceVote:
+    sourceVote1:
+        Source: @source1
+        user: @user<numberBetween(1, 4)>
+        confirmed: true

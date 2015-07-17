@@ -58,6 +58,12 @@ Capco\MediaBundle\Entity\Media:
         name:          Xavier Lacot
         context:       @MediaContext1
 
+    MediaUser4:
+        binaryContent: ../files/user/spyl.jpg
+        enabled:       true
+        name:          Spyl
+        context:       @MediaContext1
+
 
     #SiteImages
     Logo:

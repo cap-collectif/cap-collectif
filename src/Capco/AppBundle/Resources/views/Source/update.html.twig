@@ -25,7 +25,15 @@
                             <div class="media">
                                 {% include 'CapcoUserBundle:Avatar:avatar.html.twig' with { 'user': app.user, 'classes': 'media-object', 'link_classes': 'pull-left'} only %}
                                 <div class="media-body">
-                                    {{ form_errors(form) }}
+                                    {% if form.confirm %}
+                                        {{ form_errors(form.confirm) }}
+                                        <div class="alert alert-warning  edit-confirm-alert">
+                                            <div class="checkbox form-group">
+                                                {{ form_widget(form.confirm) }}
+                                            </div>
+                                        </div>
+                                    {% endif %}
+                                    {{ form_errors(form.type) }}
                                     {{ form_widget(form.type, {'buttonActive': buttonActive}) }}
                                     <div class="box">
                                         {{ form_row(form.type) }}

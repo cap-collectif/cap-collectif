@@ -142,8 +142,8 @@ idea:
     submit: Modifier
     title: Modifier une idée
     text: Attention ! En modifiant votre idée, vous perdrez tous les votes qui lui sont associés.
-    success: Merci ! Votre idée a bien été modifée.
-    error: Erreur, votre idée n'a pas pu être modifée.
+    success: Merci ! Votre idée a bien été modifiée.
+    error: Erreur, votre idée n'a pas pu être modifiée.
   delete:
     page_title: Supprimer l'idée %title%
     title: Supprimer une idée
@@ -440,6 +440,7 @@ source:
     type: Type
     category: Type
     file: Pièce jointe
+    confirm: En modifiant ma source, je comprends que les votes qui lui sont associés seront réinitialisés.
   type:
     link: Lien
     file: Fichier

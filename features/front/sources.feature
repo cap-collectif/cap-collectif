@@ -40,3 +40,42 @@ Feature: Source
     Then I should see "Annuler mon vote"
     When I vote for the first source
     Then I should see "Votre vote a bien été annulé."
+
+ # Update
+Scenario: Author of a source loose their votes when updating it
+  Given I am logged in as user
+  And I visited "opinion page" with:
+    | consultationSlug | croissance-innovation-disruption |
+    | stepSlug         | collecte-des-avis                |
+    | opinionTypeSlug  | problemes                        |
+    | opinionSlug      | opinion-1                        |
+  And I should see "1" in the ".opinion--source .nb-votes" element
+  When I follow "Modifier"
+  And I fill in the following:
+    | capco_app_source_body      | Je modifie ma source !   |
+  And I check "capco_app_source_confirm"
+  And I press "Modifier"
+  Then I should see "Merci ! Votre source a bien été modifiée."
+  And I should see "0" in the ".opinion--source .nb-votes" element
+
+Scenario: Non author of a source wants to update it
+  Given I am logged in as admin
+  And I visited "opinion page" with:
+    | consultationSlug | croissance-innovation-disruption |
+    | stepSlug         | collecte-des-avis                |
+    | opinionTypeSlug  | problemes                        |
+    | opinionSlug      | opinion-1                        |
+  Then I should not see "Modifier" in the ".pull-right" element
+
+Scenario: Author of a source try to update without checking the confirm checkbox
+  Given I am logged in as user
+  And I visited "opinion page" with:
+    | consultationSlug | croissance-innovation-disruption |
+    | stepSlug         | collecte-des-avis                |
+    | opinionTypeSlug  | problemes                        |
+    | opinionSlug      | opinion-1                        |
+  When I follow "Modifier"
+  And I fill in the following:
+    | capco_app_source_body      | Je modifie ma source !   |
+  And I press "Modifier"
+  Then I should see "Merci de confirmer la perte de vos votes pour continuer."

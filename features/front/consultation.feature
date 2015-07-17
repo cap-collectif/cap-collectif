@@ -97,16 +97,16 @@ Feature: Consultation
     Given I visited "consultation page" with:
       | consultationSlug | croissance-innovation-disruption |
       | stepSlug         | collecte-des-avis                |
-    Then I should see "205 votes"
+    Then I should see "206 votes"
 
   @javascript
   Scenario: Consultation header should display correct number of contributions
     Given I visited "consultation page" with:
       | consultationSlug | croissance-innovation-disruption |
       | stepSlug         | collecte-des-avis                |
-    Then I should see "211 contributions"
+    Then I should see "205 contributions"
     And I hover over the "#contributions-counter-pill" element
-    And I should see "31 propositions"
+    And I should see "25 propositions"
     And I should see "150 arguments"
     And I should see "30 sources"
 
@@ -114,7 +114,7 @@ Feature: Consultation
     Given I visited "consultation page" with:
       | consultationSlug | croissance-innovation-disruption |
       | stepSlug         | collecte-des-avis                |
-    Then I should see "24 participants"
+    Then I should see "22 participants"
 
   Scenario: Can download a consultation in xslx format
     Given I visited "home page"
@@ -164,8 +164,8 @@ Feature: Consultation
       | consultationSlug | croissance-innovation-disruption |
       | stepSlug         | collecte-des-avis                |
     When I follow "Corbeille"
-    Then I should see 52 ".opinion__list .opinion" elements
-    And I should see "52" in the "span.badge" element
+    Then I should see 56 ".opinion__list .opinion" elements
+    And I should see "56" in the "span.badge" element
 
   Scenario: I should not see opinion types menu when only one type is allowed
     Given I visited "consultation page" with:
