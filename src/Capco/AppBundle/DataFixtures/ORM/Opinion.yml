@@ -27,7 +27,7 @@ Capco\AppBundle\Entity\Opinion:
              <p><text(300)></p>
         isEnabled: true
         isTrashed: false
-        Author: @user5
+        Author: @user1
         OpinionType: @opinionType3
     opinion4:
         step: @cstep1

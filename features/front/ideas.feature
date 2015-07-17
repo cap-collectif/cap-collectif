@@ -17,7 +17,7 @@ Scenario: Can see ideas in not empty theme
   And I visited "themes page"
   When I follow "Immobilier"
   Then I should not see "Il n'y a aucune idée pour le moment."
-  And I should see 3 ".media--macro" elements
+  And I should see 2 ".media--macro" elements
 
 Scenario: Can not create an idea from theme when idea creation is disabled
   Given feature "themes" is enabled
@@ -59,36 +59,6 @@ Scenario: Can not create an idea when not logged in
   And I visited "ideas page"
   When I follow "Proposer une idée"
   Then I should see "Se connecter"
-
-# Update
-Scenario: Author of an idea loose their votes when updating it
-  Given I am logged in as user
-  And I visited "ideas page"
-  And I follow "Dernière idée"
-  And I should see "1 vote" in the ".idea__votes-nb" element
-  When I follow "Modifier"
-  And I fill in the following:
-    | capco_appbundle_ideaupdatetype_body      | Je modifie mon idée !   |
-  And I check "capco_appbundle_ideaupdatetype_confirm"
-  And I press "Modifier"
-  Then I should see "Merci ! Votre idée a bien été modifée."
-  And I should not see "1 vote"
-
-Scenario: Non author of an idea wants to update it
-  Given I am logged in as admin
-  And I visited "ideas page"
-  And I follow "Dernière idée"
-  Then I should not see "Modifier" in the ".pull-right" element
-
-Scenario: Author of an idea try to update without checking the confirm checkbox
-  Given I am logged in as user
-  And I visited "ideas page"
-  And I follow "Dernière idée"
-  When I follow "Modifier"
-  And I fill in the following:
-    | capco_appbundle_ideaupdatetype_body      | Je modifie mon idée !   |
-  And I press "Modifier"
-  Then I should see "Merci de confirmer la perte de vos votes pour continuer."
 
 # Comments
 
@@ -217,4 +187,4 @@ Scenario: Can not comment an uncommentable idea
     And I am logged in as user
     And I visited "ideas page"
     When I follow "Voir la corbeille"
-    Then I should see 6 ".media--macro" elements
+    Then I should see 7 ".media--macro" elements

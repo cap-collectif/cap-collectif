@@ -1,9 +1,6 @@
 import ElementListItem from './ElementListItem';
 
-const ElementsList = React.createClass({
-  propTypes: {
-    elements: React.PropTypes.array,
-  },
+var ElementsList = React.createClass({
   mixins: [ReactIntl.IntlMixin],
 
   render() {
@@ -15,8 +12,8 @@ const ElementsList = React.createClass({
           })
         }
       </ul>
-    );
-  },
+    )
+  }
 
 });
 

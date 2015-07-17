@@ -28,50 +28,11 @@ Feature: Arguments
       | stepSlug         | collecte-des-avis                |
       | opinionTypeSlug  | causes                           |
       | opinionSlug      | opinion-2                        |
-    When I click the "#arg-55 .btn" element
-    Then I should see "1" in the "#arg-55 .opinion__votes-nb" element
+    When I click the ".opinion__arguments--no .opinion__body .btn" element
+    Then I should see "1" in the ".opinion__arguments--no .opinion__body .opinion__votes-nb" element
     And I wait "2" seconds
     And I should see "Merci ! Votre vote a bien été pris en compte."
     And I should see "Annuler mon vote"
-    And I click the "#arg-55 .btn" element
+    And I click the ".opinion__arguments--no .opinion__body .btn" element
     And I should see "Votre vote a bien été annulé."
-    And I should see "0" in the "#arg-55 .opinion__votes-nb" element
-
-  @database
-  Scenario: Author of an argument loose their votes when updating it
-    Given I am logged in as user
-    And I visited "opinion page" with:
-      | consultationSlug | croissance-innovation-disruption |
-      | stepSlug         | collecte-des-avis                |
-      | opinionTypeSlug  | causes                           |
-      | opinionSlug      | opinion-2                        |
-    And I should see "5" in the "#arg-1 .opinion__votes-nb" element
-    When I follow "Modifier"
-    And I fill in the following:
-      | capco_app_argument_body      | Je modifie mon argument !   |
-    And I check "capco_app_argument_confirm"
-    And I press "Modifier"
-    Then I should see "Merci ! Votre argument a bien été modifié."
-    And I should see "0" in the "#arg-1 .opinion__votes-nb" element
-
-  Scenario: Non author of an argument wants to update it
-    Given I am logged in as admin
-    And I visited "opinion page" with:
-      | consultationSlug | croissance-innovation-disruption |
-      | stepSlug         | collecte-des-avis                |
-      | opinionTypeSlug  | causes                           |
-      | opinionSlug      | opinion-2                        |
-    Then I should not see "Modifier" in the "#arg-1" element
-
-  Scenario: Author of an argument try to update without checking the confirm checkbox
-    Given I am logged in as user
-    And I visited "opinion page" with:
-      | consultationSlug | croissance-innovation-disruption |
-      | stepSlug         | collecte-des-avis                |
-      | opinionTypeSlug  | causes                           |
-      | opinionSlug      | opinion-2                        |
-    When I follow "Modifier"
-    And I fill in the following:
-      | capco_app_argument_body      | Je modifie mon argument !   |
-    And I press "Modifier"
-    Then I should see "Merci de confirmer la perte de vos votes pour continuer."
+    And I should see "0" in the ".opinion__arguments--no .opinion__body .opinion__votes-nb" element

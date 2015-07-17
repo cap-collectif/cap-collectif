@@ -20,8 +20,6 @@ Feature: Events comments
           "vote_count": @integer@,
           "author": {
             "username": @string@,
-            "display_name": @string@,
-            "unique_id": @string@,
             "media": {
               "url": "@string@.startsWith('/media')"
             },
@@ -117,8 +115,8 @@ Feature: Events comments
     When I send a POST request to "/api/events/3/comments" with json:
     """
     {
-      "parent": 152,
-      "authorName": "Kéké",
+      "parent": 151,
+      "authorName": "Kéké du bled",
       "authorEmail": "vivele94@gmail.com",
       "body": "Ma super réponse"
     }
@@ -154,7 +152,7 @@ Feature: Events comments
     When I send a POST request to "/api/events/3/comments" with json:
     """
     {
-      "parent": 152,
+      "parent": 151,
       "body": "Oh oui j'ose :-P"
     }
     """

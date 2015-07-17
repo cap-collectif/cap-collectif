@@ -100,7 +100,7 @@
             {% if votes | length > 0 %}
                 {% set limit = 6 %}
                 <div class="container  container--thinner  container--custom">
-                     <h2 class="idea__votes-nb">
+                     <h2>
                        {{ 'idea.vote.listing.title'|transchoice(votes|length, {'%count%': votes|length}, 'CapcoAppBundle') }}
                      </h2>
                     {% include 'CapcoAppBundle:Idea:votes.html.twig' with {'votes': votes, 'limit': limit} only %}

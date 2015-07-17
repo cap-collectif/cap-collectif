@@ -53,7 +53,7 @@ export default function(text='') {
   const regex = new RegExp(urlRegex, 'gi');
   const matches = [];
 
-  let match;
+  var match;
   while ((match = regex.exec(text)) !== null) {
     let [matchedText, protocolUrlMatch, wwwProtocolRelativeMatch, tldProtocolRelativeMatch] = match;
     const protocolRelativeMatch = wwwProtocolRelativeMatch || tldProtocolRelativeMatch;
@@ -73,10 +73,10 @@ export default function(text='') {
     }
 
     if (isValidMatch(matchedText, protocolUrlMatch, protocolRelativeMatch)) {
-      const position = {start: match.index, end: regex.lastIndex};
+      let position = {start: match.index, end: regex.lastIndex};
       matches.push(new URLMatch(matchedText, protocolUrlMatch, protocolRelativeMatch, position));
     }
   }
 
   return matches;
-}
+};

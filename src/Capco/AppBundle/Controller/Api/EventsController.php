@@ -101,7 +101,7 @@ class EventsController extends FOSRestController
 
         $parent = $comment->getParent();
         if ($parent) {
-            if (!$parent instanceof EventComment || $event != $parent->getEvent()) {
+            if ($event != $parent->getEvent()) {
                 throw $this->createNotFoundException('This parent comment is not linked to this event');
             }
             if ($parent->getParent() != null) {

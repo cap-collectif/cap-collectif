@@ -36,19 +36,6 @@ class SiteImageAdmin extends Admin
         $collection->clearExcept(['edit']);
     }
 
-    public function toString($object)
-    {
-        if (!is_object($object)) {
-            return '';
-        }
-
-        if (method_exists($object, '__toString') && null !== $object->__toString()) {
-            return $this->getConfigurationPool()->getContainer()->get('translator')->trans((string) $object, [], 'CapcoAdminParameters');
-        }
-
-        return parent::toString($object);
-    }
-
     // For mosaic view
     public function getObjectMetadata($object)
     {

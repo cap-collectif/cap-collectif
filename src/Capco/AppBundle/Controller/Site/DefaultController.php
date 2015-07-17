@@ -102,7 +102,7 @@ class DefaultController extends Controller
     public function getTokenAction()
     {
         if (false === $this->get('security.authorization_checker')->isGranted('ROLE_USER')) {
-            return new JsonResponse(['error' => 'You are not authenticated.'], 401);
+            return new JsonResponse(['error' => 'You are not authenticated.'], 400);
         }
 
         $user = $this->getUser();

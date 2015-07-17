@@ -8,8 +8,6 @@ use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Input\ArrayInput;
 use Doctrine\DBAL\Exception\ConnectionException;
-use Joli\JoliNotif\Notification;
-use Joli\JoliNotif\NotifierFactory;
 
 class ReinitCommand extends ContainerAwareCommand
 {
@@ -30,20 +28,10 @@ class ReinitCommand extends ContainerAwareCommand
             return;
         }
 
-        $notifier = NotifierFactory::create();
-
         try {
             $this->dropDatabase($output);
         } catch (ConnectionException $e) {
             $output->writeln('<error>Database could not be deleted - maybe it didn\'t exist?</error>');
-            if ($notifier) {
-                $notifier
-                    ->send(
-                        (new Notification())
-                            ->setTitle('Warning')
-                            ->setBody('Database could not be deleted.')
-                    );
-            }
         }
 
         $this->createDatabase($output);
@@ -54,15 +42,6 @@ class ReinitCommand extends ContainerAwareCommand
         $this->recalculateConsultationsCounters($output);
 
         $output->writeln('Reinit completed');
-
-        if ($notifier) {
-            $notifier
-                ->send(
-                    (new Notification())
-                        ->setTitle('Success')
-                        ->setBody('Database reseted.')
-                );
-        }
     }
 
     protected function createDatabase(OutputInterface $output)

@@ -1,19 +1,17 @@
 import ElementTitle from './ElementTitle';
+import Fetcher from '../../services/Fetcher';
 import SynthesisElementStore from '../../stores/SynthesisElementStore';
 import SynthesisElementActions from '../../actions/SynthesisElementActions';
 
-const FormattedMessage = ReactIntl.FormattedMessage;
+var FormattedMessage  = ReactIntl.FormattedMessage;
 
-const ElementTree = React.createClass({
-  propTypes: {
-    synthesis: React.PropTypes.object,
-  },
+var ElementTree = React.createClass({
   mixins: [ReactIntl.IntlMixin],
 
   getInitialState() {
     return {
       rootElements: [],
-      isLoading: true,
+      isLoading: true
     };
   },
 
@@ -21,34 +19,27 @@ const ElementTree = React.createClass({
     SynthesisElementStore.addChangeListener(this.onChange);
   },
 
-  componentDidMount() {
-    this.loadPublishedRootElementsFromServer();
-  },
-
   componentWillUnmount() {
     SynthesisElementStore.removeChangeListener(this.onChange);
   },
 
-  onChange() {
-    if (SynthesisElementStore.isSync) {
-      this.setState({
-        rootElements: SynthesisElementStore.elements,
-        isLoading: false,
-      });
-      return;
-    }
+  componentDidMount() {
+    this.loadPublishedRootElementsFromServer();
+  },
 
-    this.setState({
-      isLoading: true,
-    }, () => {
-      this.loadPublishedRootElementsFromServer();
-    });
+  render() {
+    return (
+      <div className="synthesis__elements-tree">
+        {this.renderLoader()}
+        {this.renderTreeItems(this.state.rootElements, 0)}
+      </div>
+    );
   },
 
   renderTreeItems(elements, level) {
     if (elements) {
       return (
-        <ul className={'elements-tree__list tree-level-' + level}>
+        <ul className={"elements-tree__list tree-level-" + level}>
           {
             elements.map((element) => {
               return (
@@ -107,13 +98,20 @@ const ElementTree = React.createClass({
     }
   },
 
-  render() {
-    return (
-      <div className="synthesis__elements-tree">
-        {this.renderLoader()}
-        {this.renderTreeItems(this.state.rootElements, 0)}
-      </div>
-    );
+  onChange() {
+    if (SynthesisElementStore.isSync) {
+      this.setState({
+        rootElements: SynthesisElementStore.elements,
+        isLoading: false
+      });
+      return;
+    }
+
+    this.setState({
+      isLoading: true
+    }, () => {
+      this.loadPublishedRootElementsFromServer();
+    });
   },
 
   loadPublishedRootElementsFromServer() {
@@ -121,7 +119,7 @@ const ElementTree = React.createClass({
       this.props.synthesis.id,
       'root'
     );
-  },
+  }
 
 });
 

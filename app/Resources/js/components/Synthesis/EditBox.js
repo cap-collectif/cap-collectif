@@ -1,11 +1,8 @@
 import SideMenu from './SideMenu';
 
-const RouteHandler = ReactRouter.RouteHandler;
+let RouteHandler = ReactRouter.RouteHandler;
 
-const EditBox = React.createClass({
-  propTypes: {
-    synthesis: React.PropTypes.object,
-  },
+var EditBox = React.createClass({
   mixins: [ReactIntl.IntlMixin],
 
   render() {
@@ -24,7 +21,7 @@ const EditBox = React.createClass({
         </div>
       );
     }
-  },
+  }
 
 });
 

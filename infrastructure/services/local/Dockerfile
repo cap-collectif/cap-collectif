@@ -42,6 +42,7 @@ COPY redis/run             /etc/service/redis/run
 COPY cron/run              /etc/service/cron/run
 
 # Configuration
+COPY mysql/capco.cnf       /etc/mysql/conf.d/capco.cnf
 COPY nginx/nginx.conf      /etc/nginx/nginx.conf
 COPY php-fpm/fpm.conf      /etc/service/php-fpm/fpm.conf
 COPY php-fpm/capco.ini     /etc/php5/fpm/conf.d/capco.ini

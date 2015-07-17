@@ -2,7 +2,7 @@ import AutoLinkText from '../Utils/AutoLinkText';
 
 const CommentBody = React.createClass({
   propTypes: {
-    comment: React.PropTypes.object,
+    comment: React.PropType.object,
   },
   mixins: [ReactIntl.IntlMixin],
 

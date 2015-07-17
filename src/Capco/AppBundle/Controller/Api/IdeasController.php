@@ -132,7 +132,7 @@ class IdeasController extends FOSRestController
 
         $parent = $comment->getParent();
         if ($parent) {
-            if (!$parent instanceof IdeaComment || $idea != $parent->getIdea()) {
+            if ($idea != $parent->getIdea()) {
                 throw $this->createNotFoundException('This parent comment is not linked to this idea');
             }
             if ($parent->getParent() != null) {

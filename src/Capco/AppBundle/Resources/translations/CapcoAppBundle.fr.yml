@@ -162,7 +162,6 @@ idea:
     media: Image
     empty_theme: Choisissez une valeur
     url_help: Indiquez un site proposant des informations complémentaires.
-    confirm: En modifiant mon idée, je comprends que les votes qui lui sont associés seront réinitialisés.
   vote:
     submit: Soutenir
     private: Rendre mon soutien anonyme
@@ -369,7 +368,6 @@ argument:
     error: Erreur, impossible de supprimer l'argument.
   form:
     body: Contenu
-    confirm: En modifiant mon argument, je comprends que les votes qui lui sont associés seront réinitialisés.
   show:
     nb: "]-Inf, 0] Aucun argument | {1} 1 argument | ]1,Inf[ %count% arguments"
     type:
@@ -499,7 +497,6 @@ opinion:
     title: Titre
     body: Contenu
     vote: Vote
-    confirm: En modifiant ma proposition, je comprends que les votes qui lui sont associés seront réinitialisés.
   vote:
     add:
       success: Merci ! Votre vote a bien été pris en compte.
@@ -804,7 +801,6 @@ comment:
     body: Message
     name: Nom
     email: Adresse électronique
-    confirm: En modifiant mon commentaire, je comprends que les votes qui lui sont associés seront réinitialisés.
   sort:
     date: Date
     popularity: Nombre de votes

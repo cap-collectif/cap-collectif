@@ -13,8 +13,8 @@ Capco\UserBundle\Entity\User:
       getDisplayName:
         serialized_name: display_name
         type: string
-        groups: [UserDetails, UsersInfos]
+        groups: [UserDetails]
       getUniqueIdentifier:
         serialized_name: unique_id
         type: string
-        groups: [UserDetails, UsersInfos]
+        groups: [UserDetails]

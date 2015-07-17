@@ -31,7 +31,7 @@ Capco\AppBundle\Entity\Idea:
         Media: @MediaIdea2
 
     Idea3:
-        title: Troisième idée
+        title: <text(38)>
         body: |
             <p><text(100)></p>
             <h2>Un beau titre</h2>
@@ -70,17 +70,3 @@ Capco\AppBundle\Entity\Idea:
         Author: @user*
         createdAt: <dateTimeBetween('-30 days','now')>
         isTrashed: <boolean()>
-
-    Idea21:
-        title: Dernière idée
-        body: |
-              <p><text(100)></p>
-              <h2>Mon titre</h2>
-              <p><text(500)></p>
-              <h3>Un autre titre</h3>
-              <p><text(300)></p>
-        object: <p>Objet</p>
-        Theme: @theme1
-        Author: @user5
-        createdAt: <(new \DateTime('2015-01-21'))>
-        isTrashed: false

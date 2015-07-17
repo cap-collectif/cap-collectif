@@ -3,13 +3,11 @@ import DisableButtons from './DisableButtons';
 import MoveButtons from './MoveButtons';
 import ArchiveButtons from './ArchiveButtons';
 
-const ElementButtons = React.createClass({
-  propTypes: {
-    element: React.PropTypes.object,
-  },
+var ElementButtons = React.createClass({
   mixins: [ReactIntl.IntlMixin],
 
   render() {
+    var element = this.props.element;
     return (
       <div className="element__actions box text-center">
         <NotationButtons {...this.props} />
@@ -18,7 +16,7 @@ const ElementButtons = React.createClass({
         <ArchiveButtons {...this.props} />
       </div>
     );
-  },
+  }
 
 });
 

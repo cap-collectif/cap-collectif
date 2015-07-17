@@ -1,18 +1,15 @@
+import Fetcher from '../../services/Fetcher';
 import ElementsList from './ElementsList';
 import SynthesisElementStore from '../../stores/SynthesisElementStore';
 import SynthesisElementActions from '../../actions/SynthesisElementActions';
 
-const ElementsInbox = React.createClass({
-  propTypes: {
-    params: React.PropTypes.object,
-    synthesis: React.PropTypes.object,
-  },
+var ElementsInbox = React.createClass({
   mixins: [ReactIntl.IntlMixin],
 
   getInitialState() {
     return {
       elements: [],
-      isLoading: true,
+      isLoading: true
     };
   },
 
@@ -20,37 +17,30 @@ const ElementsInbox = React.createClass({
     SynthesisElementStore.addChangeListener(this.onChange);
   },
 
-  componentDidMount() {
-    this.loadElementsByTypeFromServer();
-  },
-
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.params.type !== this.props.params.type) {
-      this.setState({
-        isLoading: true,
-      });
-      this.loadElementsByTypeFromServer();
-    }
-  },
-
   componentWillUnmount() {
     SynthesisElementStore.removeChangeListener(this.onChange);
   },
 
-  onChange() {
-    if (SynthesisElementStore.isSync) {
-      this.setState({
-        elements: SynthesisElementStore.elements,
-        isLoading: false,
-      });
-      return;
-    }
+  componentDidMount() {
+    this.loadElementsByTypeFromServer();
+  },
 
-    this.setState({
-      isLoading: true,
-    }, () => {
+  componentDidUpdate(prevProps, prevState) {
+    if (prevProps.params.type !== this.props.params.type) {
+      this.setState({
+        isLoading: true
+      });
       this.loadElementsByTypeFromServer();
-    });
+    }
+  },
+
+  render() {
+    return (
+      <div className="block block--bordered synthesis--edit__content">
+        {this.renderLoader()}
+        {this.renderList()}
+      </div>
+    );
   },
 
   renderList() {
@@ -81,13 +71,20 @@ const ElementsInbox = React.createClass({
     }
   },
 
-  render() {
-    return (
-      <div className="block block--bordered synthesis--edit__content">
-        {this.renderLoader()}
-        {this.renderList()}
-      </div>
-    );
+  onChange() {
+    if (SynthesisElementStore.isSync) {
+      this.setState({
+        elements: SynthesisElementStore.elements,
+        isLoading: false
+      });
+      return;
+    }
+
+    this.setState({
+      isLoading: true
+    }, () => {
+      this.loadElementsByTypeFromServer();
+    });
   },
 
   loadElementsByTypeFromServer() {
@@ -95,7 +92,7 @@ const ElementsInbox = React.createClass({
       this.props.synthesis.id,
       this.props.params.type
     );
-  },
+  }
 
 });
 

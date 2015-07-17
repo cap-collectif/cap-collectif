@@ -15,8 +15,3 @@ synthesis:
   source_types:
     none: Aucune
     consultation_step: Étape de consultation
-
-  consultation_step:
-    arguments:
-      pros: Arguments pour
-      cons: Arguments contre

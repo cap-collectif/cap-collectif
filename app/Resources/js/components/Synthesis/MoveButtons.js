@@ -1,7 +1,4 @@
-const MoveButtons = React.createClass({
-  propTypes: {
-    element: React.PropTypes.object,
-  },
+var MoveButtons = React.createClass({
   mixins: [ReactIntl.IntlMixin],
 
   render() {
@@ -13,7 +10,7 @@ const MoveButtons = React.createClass({
         </div>
       </div>
     );
-  },
+  }
 
 });
 

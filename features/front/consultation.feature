@@ -91,13 +91,13 @@ Feature: Consultation
       | consultationSlug | croissance-innovation-disruption |
       | stepSlug         | collecte-des-avis                |
     And I follow "Actualités"
-    And I should see 9 ".media--news" elements
+    And I should see 10 ".media--news" elements
 
   Scenario: Consultation header should display correct number of votes
     Given I visited "consultation page" with:
       | consultationSlug | croissance-innovation-disruption |
       | stepSlug         | collecte-des-avis                |
-    Then I should see "205 votes"
+    Then I should see "150 votes"
 
   @javascript
   Scenario: Consultation header should display correct number of contributions

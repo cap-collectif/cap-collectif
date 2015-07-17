@@ -53,51 +53,13 @@ Feature: Opinions
     And I press "Signaler"
     Then I should see "Merci ! Votre signalement a bien été pris en compte."
 
-  Scenario: Author of an opinion loose their votes when updating it
-    Given I am logged in as user
-    And I visited "opinion page" with:
-      | consultationSlug | croissance-innovation-disruption |
-      | stepSlug         | collecte-des-avis                |
-      | opinionTypeSlug  | enjeux                           |
-      | opinionSlug      | opinion-3                        |
-    And I should see "50 votes" in the ".opinion__votes" element
-    When I follow "Modifier"
-    And I fill in the following:
-      | capco_app_opinion_body      | Je modifie ma proposition !   |
-    And I check "capco_app_opinion_confirm"
-    And I press "Modifier"
-    Then I should see "Merci ! Votre proposition a bien été modifiée."
-    And I should see "Aucun vote" in the ".opinion__votes" element
-
-  Scenario: Non author of an opinion wants to update it
-    Given I am logged in as admin
-    And I visited "opinion page" with:
-      | consultationSlug | croissance-innovation-disruption |
-      | stepSlug         | collecte-des-avis                |
-      | opinionTypeSlug  | enjeux                           |
-      | opinionSlug      | opinion-3                        |
-    Then I should not see "Modifier"
-
-  Scenario: Author of an opinion try to update without checking the confirm checkbox
-    Given I am logged in as user
-    And I visited "opinion page" with:
-      | consultationSlug | croissance-innovation-disruption |
-      | stepSlug         | collecte-des-avis                |
-      | opinionTypeSlug  | enjeux                           |
-      | opinionSlug      | opinion-3                        |
-    When I follow "Modifier"
-    And I fill in the following:
-      | capco_app_opinion_body      | Je modifie ma proposition !   |
-    And I press "Modifier"
-    Then I should see "Merci de confirmer la perte de vos votes pour continuer."
-
   @javascript @database
   Scenario: Logged in user wants to vote
     Given I am logged in as user
     And I visited "opinion page" with:
       | consultationSlug | croissance-innovation-disruption |
       | stepSlug         | collecte-des-avis                |
-      | opinionTypeSlug  | problemes                        |
-      | opinionSlug      | opinion-1                        |
+      | opinionTypeSlug  | solutions                        |
+      | opinionSlug      | opinion-5                        |
     When I click the ".connection-popover-js" element
     Then I should see "1 vote" in the ".opinion__votes" element
