@@ -53,6 +53,7 @@ class ReinitCommand extends ContainerAwareCommand
         $this->recalculateCounters($output);
         $this->recalculateConsultationsCounters($output);
         $this->updateSyntheses($output);
+        $this->populateElastica($output);
 
         $output->writeln('Reinit completed');
 
@@ -134,6 +135,14 @@ class ReinitCommand extends ContainerAwareCommand
     protected function updateSyntheses(OutputInterface $output)
     {
         $command = $this->getApplication()->find('capco:update-syntheses');
+        $input = new ArrayInput(array(''));
+        $input->setInteractive(false);
+        $command->run($input, $output);
+    }
+
+    protected function populateElastica(OutputInterface $output)
+    {
+        $command = $this->getApplication()->find('fos:elastica:populate');
         $input = new ArrayInput(array(''));
         $input->setInteractive(false);
         $command->run($input, $output);
