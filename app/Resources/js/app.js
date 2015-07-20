@@ -149,7 +149,7 @@ var App = function ($) {
         $navbars.each(function() {
             $(this).removeClass('collapsed');
             $('body').removeClass('higher-navbar');
-            if ($(this).innerHeight() > 50) {
+            if ($(this).innerHeight() > 52) {
                 $(this).addClass('collapsed');
                 $('body').addClass('higher-navbar');
             }
