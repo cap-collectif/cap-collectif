@@ -21,10 +21,6 @@ class SearchController extends Controller
      */
     public function searchAction(Request $request, $term = null, $type = null)
     {
-        if (!$this->get('security.authorization_checker')->isGranted('ROLE_USER')) {
-            throw new AccessDeniedException($this->get('translator')->trans('error.access_restricted', array(), 'CapcoAppBundle'));
-        }
-
         $form = $this->createForm(new SearchForm());
 
         if ($request->getMethod() == 'POST') {
@@ -33,10 +29,7 @@ class SearchController extends Controller
             if ($form->isValid()) {
                 // redirect to the results page (avoids reload alerts)
                 $data = $form->getData();
-
-                if ($form->isValid()) {
-                    return $this->redirect($this->generateUrl('app_search', ['term' => $data['term'], 'type' => $data['type']]));
-                }
+                return $this->redirect($this->generateUrl('app_search', ['term' => $data['term'], 'type' => $data['type']]));
             }
         }
 

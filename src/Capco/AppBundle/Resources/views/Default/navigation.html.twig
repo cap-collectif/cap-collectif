@@ -26,28 +26,32 @@
         {% endfor %}
     </ul>
 
-    {# Connection button #}
-    {% if app.user %}
-        <ul class="nav navbar-nav navbar-right">
-            <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{ app.user.username }}<span class="caret"></span></a>
-                <ul class="dropdown-menu" role="menu">
-                    {% if is_granted('ROLE_ADMIN') %}
-                        <li><a href="{{ path('sonata_admin_dashboard') }}">{{ 'header.administration'|trans({}, 'CapcoAppBundle') }}</a></li>
-                    {% endif %}
-                    <li><a href="{{ path('fos_user_profile_show') }}">{{ 'header.profile'|trans({}, 'CapcoAppBundle') }}</a></li>
-                    <li><a href="{{ path('fos_user_profile_edit') }}">{{ 'header.user_settings'|trans({}, 'CapcoAppBundle') }}</a></li>
-                    <li class="divider"></li>
-                    <li><a href="{{ path('fos_user_security_logout') }}"> {{ 'layout.logout'|trans({}, 'FOSUserBundle') }} </a></li>
-                </ul>
-            </li>
-        </ul>
-    {% else %}
+    {# Connection and search #}
     <div class="nav navbar-right">
-        {% if is_feature_enabled('registration') %}
-            <a href="{{ path('fos_user_registration_register') }}" class="btn  btn-primary  btn-brand  navbar-btn">{{ 'layout.register'|trans({}, 'FOSUserBundle') }}</a>
+        <a class="{% if pathInfo starts with '/search' %} active {% endif %} navbar__search" href="{{ path('app_search', {}) }}">
+            <i class="cap cap-magnifier"></i> <span class="visible-xs">{{ 'global.menu.search' | trans({}, 'CapcoAppBundle') }}</span>
+        </a>
+        {% if app.user %}
+            <ul class="nav navbar-nav navbar-right">
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{ app.user.username }}<span class="caret"></span></a>
+                    <ul class="dropdown-menu" role="menu">
+                        {% if is_granted('ROLE_ADMIN') %}
+                            <li><a href="{{ path('sonata_admin_dashboard') }}">{{ 'header.administration'|trans({}, 'CapcoAppBundle') }}</a></li>
+                        {% endif %}
+                        <li><a href="{{ path('fos_user_profile_show') }}">{{ 'header.profile'|trans({}, 'CapcoAppBundle') }}</a></li>
+                        <li><a href="{{ path('fos_user_profile_edit') }}">{{ 'header.user_settings'|trans({}, 'CapcoAppBundle') }}</a></li>
+                        <li class="divider"></li>
+                        <li><a href="{{ path('fos_user_security_logout') }}"> {{ 'layout.logout'|trans({}, 'FOSUserBundle') }} </a></li>
+                    </ul>
+                </li>
+            </ul>
+        {% else %}
+            {% if is_feature_enabled('registration') %}
+                <a href="{{ path('fos_user_registration_register') }}" class="btn  btn-primary  btn-brand  navbar-btn">{{ 'layout.register'|trans({}, 'FOSUserBundle') }}</a>
+            {% endif %}
+            <a href="{{ path('fos_user_security_login') }}" class="btn  btn-darkest-gray  navbar-btn  btn--connection">{{ 'layout.login'|trans({}, 'FOSUserBundle') }}</a>
         {% endif %}
-        <a href="{{ path('fos_user_security_login') }}" class="btn  btn-darkest-gray  navbar-btn  btn--connection">{{ 'layout.login'|trans({}, 'FOSUserBundle') }}</a>
     </div>
-    {% endif %}
+
 </div>

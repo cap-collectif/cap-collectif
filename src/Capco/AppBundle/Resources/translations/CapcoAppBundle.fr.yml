@@ -7,6 +7,7 @@ global:
   menu:
     title: Menu
     see_more: Plus
+    search: Rechercher
   form:
     mandatory: Ce champ est obligatoire.
   helper:

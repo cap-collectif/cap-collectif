@@ -1,6 +1,22 @@
 /* ===============================================================
     $Navbar
 ================================================================*/
+
+// Search button
+a.navbar__search {
+  color: $white;
+  font-size: larger;
+  padding: 11px 12px;
+  display: inline-block;
+
+  &:hover,
+  &:focus,
+  &:active,
+  &.active {
+    text-decoration: none;
+  }
+}
+
 //Fix for mobile view
 .container-fluid > .navbar-collapse,
 .container-fluid > .navbar-header,
@@ -31,6 +47,18 @@
   }
   .navbar__toggle-label {
     padding-left: 5px;
+  }
+}
+
+@media (max-width: $screen-xs-max) {
+  a.navbar__search {
+    display: block;
+    font-size: 16px;
+    margin: -6px -15px;
+
+    span {
+      display: inline !important;
+    }
   }
 }
 
