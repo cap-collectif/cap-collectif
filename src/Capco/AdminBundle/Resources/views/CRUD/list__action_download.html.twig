@@ -2,9 +2,9 @@
 {% if consultationSteps | length > 0 %}
 
     {% if consultationSteps | length == 1 %}
-        <button class="btn btn-default btn-sm view_link" data-toggle="modal" data-target="#download-consultation-modal-{{ consultationSteps[0].step.id }}">
+        <a href="" class="btn btn-default btn-sm view_link" data-toggle="modal" data-target="#download-consultation-modal-{{ consultationSteps[0].step.id }}">
             <i class="cap cap-download-2"></i> {{ 'consultation.download.button' | trans({}, 'CapcoAppBundle') }}
-        </button>
+        </a>
     {% else %}
         <div style="position: relative;">
             <a class="btn btn-sm btn-default view_link sonata-ba-action dropdown-toggle" type="button" data-toggle="dropdown"><i class="cap cap-download-2"></i> {{ 'consultation.download.button' | trans({}, 'CapcoAppBundle') }} <span class="caret"></span></a>
