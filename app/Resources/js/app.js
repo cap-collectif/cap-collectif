@@ -144,16 +144,44 @@ var App = function ($) {
         });
     };
 
-    var autocollapse = function(navbars) {
-        var $navbars = $(navbars);
-        $navbars.each(function() {
-            $(this).removeClass('collapsed');
-            $('body').removeClass('higher-navbar');
-            if ($(this).innerHeight() > 52) {
-                $(this).addClass('collapsed');
-                $('body').addClass('higher-navbar');
+    var navbarAutocollapse = function(label) {
+        $('#navbar-content').append($("#navbar-content li.hideshow ul").html());
+        $('#navbar-content li.hideshow').remove();
+
+        if (window.matchMedia("(min-width: 768px)").matches) {
+
+          const occupiedWidth = $(".navbar-header").width() + $(".navbar-right").width() + 80;
+          const maxWidth = $("#main-navbar > .container").width() - occupiedWidth;
+          let menuHtml = '';
+
+          let width = 0;
+          $('#navbar-content').children().each(function () {
+            width += $(this).outerWidth(true);
+            if (maxWidth < width) {
+              // Get outer html of children element
+              menuHtml += $(this).clone().wrap('<div>').parent().html();
+              $(this).remove();
             }
-        });
+          });
+
+          $('#navbar-content').append(
+            '<li class="hideshow dropdown">'
+            + '<a href="#" class="dropdown-toggle" data-toggle="dropdown">' + label + ' <span class="caret"></span></a>'
+            + '<ul class="dropdown-menu">' + menuHtml + '</ul>'
+            + '</li>'
+          );
+
+          $("#navbar-content li.hideshow").on("click", ".dropdown-menu", function (e) {
+            $(this).parent().is(".open") && e.stopPropagation();
+          });
+
+          if (menuHtml === '') {
+            $("#navbar-content li.hideshow").hide();
+          } else {
+            $("#navbar-content li.hideshow").show();
+          }
+        }
+
     };
 
     var initPopovers = function(triggers, options) {
@@ -226,7 +254,7 @@ var App = function ($) {
         video: video,
         externalLinks: externalLinks,
         showMap: showMap,
-        autocollapse: autocollapse,
+        navbarAutocollapse: navbarAutocollapse,
         initPopovers: initPopovers,
         makeSidebar: makeSidebar,
         carousel: carousel,

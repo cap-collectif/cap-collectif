@@ -8,6 +8,12 @@ body {
   font-size: $font-size-base;
 }
 
+@media (max-width: $screen-xs-max) {
+  body {
+    padding-top: $navbar-collapsed-height;
+  }
+}
+
 .main {
   background-color: $main-bg;
   overflow: hidden;

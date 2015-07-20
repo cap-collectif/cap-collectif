@@ -6,6 +6,7 @@ global:
   capco_powered: Propulsé par %startlink%Cap-Collectif%endlink%
   menu:
     title: Menu
+    see_more: Plus
   form:
     mandatory: Ce champ est obligatoire.
   helper:

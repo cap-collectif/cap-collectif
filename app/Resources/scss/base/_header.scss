@@ -1,7 +1,7 @@
 /* ===============================================================
     $Navbar
 ================================================================*/
-//Fix margin in mobile view
+//Fix for mobile view
 .container-fluid > .navbar-collapse,
 .container-fluid > .navbar-header,
 .container > .navbar-collapse,
@@ -34,66 +34,54 @@
   }
 }
 
-// Collapsed navbar
+// Auto collapse (desktop or tablet view only)
 
-body.higher-navbar {
-  padding-top: 59px;
-}
+#navbar-content li.hideshow {
+  position: relative;
 
-.navbar.collapsed {
-  overflow: auto;
-
-  .navbar-header,
-  .navbar-left,
-  .navbar-right,
-  .navbar-nav,
-  .navbar-nav>li,
-  .navbar-nav .open .dropdown-menu {
-      float: none !important;
+  ul {
+    position: absolute;
+    left: 0px;
   }
-  .navbar-toggle {
+
+  // Sub dropdown
+  li.dropdown {
+    position: relative;
+
+    .caret {
+      display: none;
+    }
+
+    & > .dropdown-menu {
+      position: absolute;
+      top: 0;
+      left: 100%;
+      margin-top: -6px;
+      margin-left: -1px;
+    }
+
+    &:hover > .dropdown-menu,
+    &:active > .dropdown-menu {
       display: block;
-  }
-  .navbar-collapse {
-      border-top: 1px solid transparent;
-      box-shadow: inset 0 1px 0 rgba(255,255,255,0.1);
-  }
-  .navbar-fixed-top {
-    top: 0;
-    border-width: 0 0 1px;
-  }
-  .navbar-collapse.collapse {
-      display: none!important;
-  }
-  .navbar-nav {
-      margin: 7.5px -15px;
-  }
-  .navbar-nav>li>a {
-      padding-top: 10px;
-      padding-bottom: 10px;
-  }
-  .navbar-nav .open .dropdown-menu {
-    position: static;
-    width: auto;
-    margin-top: 0;
-    background-color: transparent;
-    border: 0;
-    box-shadow: none;
-    > li > a,
-    .dropdown-header {
-      padding: 5px 15px 5px 25px;
     }
-    > li > a {
-      line-height: $line-height-computed;
-      &:hover,
-      &:focus {
-        background-image: none;
-      }
+
+    & > a:after {
+      display: block;
+      content: "";
+      float: right;
+      width: 0;
+      height: 0;
+      border-color: transparent;
+      border-style: solid;
+      border-width: 5px 0 5px 5px;
+      border-left-color: $border-color;
+      margin-top: 5px;
+      margin-right: -10px;
     }
-  }
-  .collapse.in {
-    display: block !important;
-    overflow-y: auto;
+
+    &:hover > a:after {
+      border-left-color: $white;
+    }
   }
 }
 

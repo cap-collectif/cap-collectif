@@ -82,10 +82,10 @@
 
         $(window).on('load', function() {
             App.externalLinks();
-            App.autocollapse('.autocollapse-js')
+            App.navbarAutocollapse("{{ 'global.menu.see_more' | trans({}, 'CapcoAppBundle') }}");
         });
         $(window).on('resize', function() {
-            App.autocollapse('.autocollapse-js');
+            App.navbarAutocollapse("{{ 'global.menu.see_more' | trans({}, 'CapcoAppBundle') }}");
         });
         $(function () {
           $('[data-toggle="tooltip"]').tooltip();
