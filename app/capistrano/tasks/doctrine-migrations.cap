@@ -1,6 +1,0 @@
-namespace :symfony do
-    desc 'doctrine migrations'
-    task :migrate do
-        invoke 'symfony:console', 'doctrine:migrations:migrate', '--no-interaction'
-    end
-end
