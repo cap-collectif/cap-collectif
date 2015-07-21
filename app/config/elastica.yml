@@ -24,6 +24,10 @@ fos_elastica:
             biography:
               analyzer: %language_analyzer%
               index_options: offsets
+            createdAt:
+              type: date
+            updatedAt:
+              type: date
           persistence:
             driver: orm
             model: Capco\UserBundle\Entity\User

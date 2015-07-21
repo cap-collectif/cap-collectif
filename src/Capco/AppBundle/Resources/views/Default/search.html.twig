@@ -33,7 +33,7 @@
 
             <div class="row">
 
-                <div class="col-xs-12 col-sm-4 col-md-3 block--mobile">
+                <div class="col-xs-12 col-sm-3 block--mobile">
 
                     <h2 class="h5 excerpt" style="margin-top: 0;">{{ 'search.sharpen' | trans({}, 'CapcoAppBundle') }}</h2>
 
@@ -49,7 +49,7 @@
 
                 </div>
 
-                <div class="col-xs-12 col-sm-8 col-md-9 block">
+                <div class="col-xs-12 col-sm-9">
                     <h2 class="h2" style="margin-top: 0;">
                         {% transchoice results | length with { '%count%': results | length} from 'CapcoAppBundle' %}
                         search.results.title
@@ -61,16 +61,27 @@
 
                     <hr class="hr--no-margin"/>
 
-                    <ul>
+                    <ul class="search__results">
                         {% for result in results %}
-                            {% set title_label = 'search.results.type.' ~ result.result.hit['_type'] %}
+                            {% set default_title = 'search.results.default_title' | trans({}, 'CapcoAppBundle') %}
+                            {% set type_label = 'search.results.type.' ~ result.result.hit['_type'] %}
                             {% if result.result.hit['_type'] == 'user' %}
                                 {% set title = result.result.hit['highlight']['username'] is defined ? result.result.hit['highlight']['username'][0] : result.transformed.username %}
                             {% else %}
-                                {% set title = result.result.hit['highlight']['title'] is defined ? result.result.hit['highlight']['title'][0] : ( result.transformed.title is defined ? result.transformed.title : null) %}
+                                {% set title = result.result.hit['highlight']['title'] is defined ? result.result.hit['highlight']['title'][0] : ( result.transformed.title is defined ? result.transformed.title : default_title) %}
                             {% endif %}
                             <li>
-                                <h4 class="h4">{{ title_label | trans({}, 'CapcoAppBundle') }}{{ title | raw }}</h4>
+                                <h4 class="h4 search-result__title">
+                                        <span class="label label-default search-result__type">
+                                            {{ type_label | trans({}, 'CapcoAppBundle') }}
+                                        </span>
+                                        <a class="search-result__link" href="{{ result.transformed | capco_url }}">
+                                            {{ title | raw }}
+                                        </a>
+                                        <span class="small excerpt search-result__date">
+                                            {{ result.result.hit['_source']['updatedAt'] | localizeddate('medium', 'none', app.request.locale) }}
+                                        </span>
+                                </h4>
                                 {% for key, highlights in result.result.hit['highlight'] if key != 'title' and key != 'username' %}
                                     <p class="excerpt small">
                                         {% for excerpt in highlights %}
@@ -94,8 +105,8 @@
     <script type="text/javascript">
         $(".radio input:checked").parent().addClass('active');
         $(".search__choice-panel > div").on('change', function() {
-            $(".radio input").parent().removeClass('active');
-            $(".radio input:checked").parent().addClass('active');
+            $(".search__choice-panel .radio input").parent().removeClass('active');
+            $(".search__choice-panel .radio input:checked").parent().addClass('active');
             $("#capco_app_search").submit();
         });
     </script>

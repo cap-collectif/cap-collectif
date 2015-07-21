@@ -29,6 +29,31 @@
   }
 }
 
+.search__results {
+  list-style-type: none;
+  padding-left: 0;
+  margin-bottom: 0;
+
+  li {
+    padding-top: 5px;
+  }
+
+  li:first-child {
+    padding-top: 0;
+  }
+}
+
+.search-result__title {
+  line-height: normal;
+}
+
+.search-result__type {
+  margin-right: 5px;
+}
+
+.search-result__date {
+  padding-left: 10px;
+}
 
 // Highlighted results
 .search__highlight {

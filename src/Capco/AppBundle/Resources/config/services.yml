@@ -379,3 +379,9 @@ services:
     capco.search.resolver:
         class: Capco\AppBundle\Resolver\SearchResolver
         arguments: [@fos_elastica.finder.app]
+
+    capco.twig.url:
+            class: Capco\AppBundle\Twig\UrlExtension
+            arguments: [@router, @capco.comment.resolver, @capco.step.resolver]
+            tags:
+              - { name: twig.extension }
