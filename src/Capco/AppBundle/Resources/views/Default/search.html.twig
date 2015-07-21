@@ -1,4 +1,3 @@
-{% set page_class = "search" %}
 {% extends "CapcoAppBundle::base.html.twig" %}
 
 {% block canonical_link %}{{ url('app_search') }}{% endblock %}
@@ -16,41 +15,88 @@
 {% endblock %}
 
 {% block body %}
-    <div class="container  container--custom">
-        <form method="post">
-            {{ form_errors(form) }}
-            {{ form_rest(form) }}
-            <button type="submit" class="btn btn-primary">{{ 'search.form.submit'|trans({}, 'CapcoAppBundle') }}</button>
-        </form>
-    </div>
+    <form id="capco_app_search" name="capco_app_search" method="post">
 
-    <div class="container  container--custom">
+        <div class="container  container--custom">
+            {{ form_errors(form.term) }}
+            <div clas="row">
+                <div class="col-xs-12 col-sm-9 col-md-6 input-group">
+                    {{ form_widget(form.term) }}
+                    <span class="input-group-btn">
+                        <button class="btn btn-primary" type="submit"><i class="cap cap-magnifier"></i></button>
+                    </span>
+                </div>
+            </div>
+        </div>
 
-        <h2 class="h2">
-            {% transchoice results | length with { '%count%': results | length} from 'CapcoAppBundle' %}
-                search.results.title
-            {% endtranschoice %}
-        </h2>
+        <div class="container  container--custom">
 
-        <ul>
-            {% for result in results %}
-                {% set title_label = 'search.results.type.' ~ result.result.hit['_type'] %}
-                {% if result.result.hit['_type'] == 'user' %}
-                    {% set title = result.result.hit['highlight']['username'] is defined ? result.result.hit['highlight']['username'][0] : result.transformed.username %}
-                {% else %}
-                    {% set title = result.result.hit['highlight']['title'] is defined ? result.result.hit['highlight']['title'][0] : ( result.transformed.title is defined ? result.transformed.title : null) %}
-                {% endif %}
-                <li>
-                    <h4 class="h4">{{ title_label | trans({}, 'CapcoAppBundle') }}{{ title | raw }}</h4>
-                    {% for key, highlights in result.result.hit['highlight'] if key != 'title' and key != 'username' %}
-                        <p class="excerpt small">
-                            {% for excerpt in highlights %}
-                                {{ excerpt | raw }}...
-                            {% endfor %}
-                        </p>
-                    {% endfor %}
-                </li>
-            {% endfor %}
-        </ul>
-    </div>
+            <div class="row">
+
+                <div class="col-xs-12 col-sm-4 col-md-3 block--mobile">
+
+                    <h2 class="h5 excerpt" style="margin-top: 0;">{{ 'search.sharpen' | trans({}, 'CapcoAppBundle') }}</h2>
+
+                    {# Type #}
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">{{ 'search.form.label.type' | trans({}, 'CapcoAppBundle') }}</h3>
+                        </div>
+                        <div class="panel-body search__choice-panel">
+                            {{ form_widget(form.type) }}
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="col-xs-12 col-sm-8 col-md-9 block">
+                    <h2 class="h2" style="margin-top: 0;">
+                        {% transchoice results | length with { '%count%': results | length} from 'CapcoAppBundle' %}
+                        search.results.title
+                        {% endtranschoice %}
+                        <span class="pull-right">
+                            {{ form_widget(form.sort) }}
+                        </span>
+                    </h2>
+
+                    <hr class="hr--no-margin"/>
+
+                    <ul>
+                        {% for result in results %}
+                            {% set title_label = 'search.results.type.' ~ result.result.hit['_type'] %}
+                            {% if result.result.hit['_type'] == 'user' %}
+                                {% set title = result.result.hit['highlight']['username'] is defined ? result.result.hit['highlight']['username'][0] : result.transformed.username %}
+                            {% else %}
+                                {% set title = result.result.hit['highlight']['title'] is defined ? result.result.hit['highlight']['title'][0] : ( result.transformed.title is defined ? result.transformed.title : null) %}
+                            {% endif %}
+                            <li>
+                                <h4 class="h4">{{ title_label | trans({}, 'CapcoAppBundle') }}{{ title | raw }}</h4>
+                                {% for key, highlights in result.result.hit['highlight'] if key != 'title' and key != 'username' %}
+                                    <p class="excerpt small">
+                                        {% for excerpt in highlights %}
+                                            {{ excerpt | raw }}...
+                                        {% endfor %}
+                                    </p>
+                                {% endfor %}
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+
+            </div>
+
+        </div>
+    </form>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script type="text/javascript">
+        $(".radio input:checked").parent().addClass('active');
+        $(".search__choice-panel > div").on('change', function() {
+            $(".radio input").parent().removeClass('active');
+            $(".radio input:checked").parent().addClass('active');
+            $("#capco_app_search").submit();
+        });
+    </script>
 {% endblock %}

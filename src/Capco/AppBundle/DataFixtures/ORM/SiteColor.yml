@@ -88,12 +88,12 @@ Capco\AppBundle\Entity\SiteColor:
     SiteColor18:
         keyname: color.link.default
         category: settings.appearance
-        value: '#16a085'
+        value: '#1abc9c'
         position: 18
     SiteColor19:
         keyname: color.link.hover
         category: settings.appearance
-        value: '#1abc9c'
+        value: '#16a085'
         position: 19
     SiteColor20:
         keyname: color.footer.text

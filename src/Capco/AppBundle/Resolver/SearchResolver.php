@@ -20,7 +20,7 @@ class SearchResolver
     }
 
     // search by term and type in elasticsearch
-    public function searchAll($term, $type = null)
+    public function searchAll($term, $type = 'all', $sort = 'score')
     {
         $results = array();
 
@@ -28,7 +28,7 @@ class SearchResolver
 
             $termQuery = $this->getTermQuery($term);
 
-            if (null !== $type) {
+            if ('all' !== $type) {
                 $query = new Query($this->getTypeFilteredQuery($type, $termQuery));
             } else {
                 $query = new Query($termQuery);
@@ -36,6 +36,10 @@ class SearchResolver
 
             $query->setSize(10);
             $query->setFrom(0);
+
+            if ($sort !== 'score') {
+                $query->setSort($this->getSortSettings($sort));
+            }
 
             $query->setHighlight($this->getHighlightSettings());
 
@@ -71,24 +75,42 @@ class SearchResolver
         return $termQuery;
     }
 
+    protected function getSortSettings($sort)
+    {
+        $term = null;
+        if ($sort === 'date') {
+            $term = 'updatedAt';
+        }
+        if ($term === null) {
+            return;
+        }
+
+        return [
+            $term => [
+                "order" => "desc",
+            ],
+        ];
+
+    }
+
     // get array of settings for highlighted results
     protected function getHighlightSettings()
     {
-        return array(
+        return [
             "pre_tags" => ["<span class=\"search__highlight\">"],
             "post_tags" => ["</span>"],
             "number_of_fragments" => 3,
             "fragment_size" => 175,
-            "fields" => array(
-                "title" => array('number_of_fragments' => 0,),
+            "fields" => [
+                "title" => ['number_of_fragments' => 0,],
                 "strippedObject" => new \stdClass,
                 "strippedBody" => new \stdClass,
                 "body" => new \stdClass,
                 "teaser" => new \stdClass,
                 "excerpt" => new \stdClass,
-                "username" => array('number_of_fragments' => 0,),
+                "username" => ['number_of_fragments' => 0,],
                 "biography" => new \stdClass,
-            )
-        );
+            ]
+        ];
     }
 }

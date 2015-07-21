@@ -59,3 +59,6 @@ comment:
 
 source:
   votes_not_confirmed: Merci de confirmer la perte de vos votes pour continuer.
+
+search:
+  no_term: Veuillez entrer un ou plusieurs mots à rechercher.

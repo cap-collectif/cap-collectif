@@ -5,9 +5,19 @@ namespace Capco\AppBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Capco\AppBundle\Toggle\Manager;
+use Capco\AppBundle\Repository\ThemeRepository;
+use Symfony\Component\Validator\Constraints\NotBlank;
 
 class SearchType extends AbstractType
 {
+    private $toggleManager;
+
+    public function __construct(Manager $toggleManager)
+    {
+        $this->toggleManager = $toggleManager;
+    }
+
     /**
      * @param FormBuilderInterface $builder
      * @param array                $options
@@ -15,17 +25,20 @@ class SearchType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('term', 'text', array(
+            ->add('term', 'text', [
                 'required' => true,
                 'label' => 'search.form.label.term',
                 'translation_domain' => 'CapcoAppBundle',
-            ))
+                'constraints' => [new NotBlank(['message' => 'search.no_term'])],
+                'attr' => ['placeholder' => 'search.form.placeholder.term',]
+            ])
             ->add('type', 'choice', array(
                 'required' => false,
-                'label' => 'search.form.label.type',
                 'translation_domain' => 'CapcoAppBundle',
-                'empty_value' => 'search.form.types.none',
+                'empty_value' => false,
+                'expanded' => true,
                 'choices' => [
+                    'all' => 'search.form.types.all',
                     'idea' => 'search.form.types.ideas',
                     'post' => 'search.form.types.posts',
                     'comment' => 'search.form.types.comments',
@@ -36,9 +49,30 @@ class SearchType extends AbstractType
                     'source' => 'search.form.types.sources',
                     'theme' => 'search.form.types.themes',
                     'user' => 'search.form.types.users',
-                ]
+                ],
+            ))
+            ->add('sort', 'choice', array(
+                'required' => false,
+                'translation_domain' => 'CapcoAppBundle',
+                'empty_value' => false,
+                'choices' => [
+                    'score' => 'search.form.sort.score',
+                    'date' => 'search.form.sort.date',
+                ],
+                'attr' => array('onchange' => 'this.form.submit()'),
             ))
         ;
+    }
+
+    /**
+     * @param OptionsResolverInterface $resolver
+     */
+    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    {
+        $resolver->setDefaults(array(
+            'csrf_protection' => false,
+            'translation_domain' => 'CapcoAppBundle',
+        ));
     }
 
     /**

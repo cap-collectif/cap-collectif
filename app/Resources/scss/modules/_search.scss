@@ -2,6 +2,34 @@
    $Search
 ================================================================*/
 
+// Choice expanded
+.search__choice-panel {
+  .radio {
+    margin-top: 7px;
+    margin-bottom: 0;
+  }
+  .radio input {
+    display: none;
+  }
+  .radio label {
+    padding-left: 0;
+    color: $link-color;
+
+    &:hover,
+    &:active,
+    &.active,
+    &:focus {
+      text-decoration: underline;
+      color: $link-hover-color;
+    }
+  }
+
+  .radio:first-child {
+    margin-top: 0;
+  }
+}
+
+
 // Highlighted results
 .search__highlight {
   font-weight: bold;

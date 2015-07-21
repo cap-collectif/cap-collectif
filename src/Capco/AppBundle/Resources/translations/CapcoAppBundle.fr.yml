@@ -918,12 +918,18 @@ synthesis:
 
 search:
   title: Rechercher sur le site
+  sharpen: AFFINER MA RECHERCHE
   form:
     label:
       term: Terme recherché
-      type: Type de contributions
+      type: Type
+      theme: Thème
+      time_period: Période
+      sort: Trier par
+      start_date: Du :
+      end_date: Au :
     types:
-      none: Tous
+      all: Tous
       ideas: Idées
       comments: Commentaires
       arguments: Arguments
@@ -934,7 +940,14 @@ search:
       sources: Sources
       themes: Thèmes
       users: Membres
+    themes:
+      all: Tous
+    sort:
+      date: Date
+      score: Pertinence
     submit: Rechercher
+    placeholder:
+      term: Entrez un ou plusieurs mots-clés.
   results:
     title: "]-Inf, 0] Aucun résultat | {1} 1 résultat | ]1,Inf[ %count% résultats"
     type:

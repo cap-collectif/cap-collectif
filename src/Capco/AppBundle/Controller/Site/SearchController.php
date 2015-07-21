@@ -14,14 +14,16 @@ class SearchController extends Controller
     /**
      * @param Request $request
      * @param $term
+     * @param $sort
+     * @param $type
      * @return array|\Symfony\Component\HttpFoundation\RedirectResponse
      *
-     * @Route("/search/{term}/{type}", name="app_search")
+     * @Route("/search/{term}/{sort}/{type}", name="app_search")
      * @Template("CapcoAppBundle:Default:search.html.twig")
      */
-    public function searchAction(Request $request, $term = null, $type = null)
+    public function searchAction(Request $request, $term = null, $sort = 'score', $type = 'all')
     {
-        $form = $this->createForm(new SearchForm());
+        $form = $this->createForm(new SearchForm($this->get('capco.toggle.manager')));
 
         if ($request->getMethod() == 'POST') {
             $form->handleRequest($request);
@@ -29,19 +31,20 @@ class SearchController extends Controller
             if ($form->isValid()) {
                 // redirect to the results page (avoids reload alerts)
                 $data = $form->getData();
-                return $this->redirect($this->generateUrl('app_search', ['term' => $data['term'], 'type' => $data['type']]));
+                return $this->redirect($this->generateUrl('app_search', $data));
             }
+        } else {
+            $form->setData(['term' => $term, 'type' => $type, 'sort' => $sort]);
         }
 
-        $form->setData(['term' => $term, 'type' => $type]);
-
-        $results = $this->container->get('capco.search.resolver')->searchAll($term, $type);
+        $results = $this->container->get('capco.search.resolver')->searchAll($term, $type, $sort);
 
         return [
             'form' => $form->createView(),
             'results' => $results,
             'term' => $term,
             'type' => $type,
+            'sort' => $sort,
         ];
     }
 }

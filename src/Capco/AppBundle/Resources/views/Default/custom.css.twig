@@ -36,17 +36,17 @@
 {% set sectionText = capco_site_color_value('color.section.text') %}
 {% if null == sectionText %}{% set sectionText = '#000' %}{% endif %}
 
-{% set btn = capco_site_color_value('color.btn') %}
+{% set btn = capco_site_color_value('color.btn.bg') %}
 {% if null == btn %}{% set btn = '#1ABC9C' %}{% endif %}
 {% set btnText = capco_site_color_value('color.btn.text') %}
 {% if null == btnText %}{% set btnText = '#FFF' %}{% endif %}
 
-{% set btnPrimary = capco_site_color_value('color.btn.primary') %}
+{% set btnPrimary = capco_site_color_value('color.btn.primary.bg') %}
 {% if null == btnPrimary %}{% set btnPrimary = '#1abc9c' %}{% endif %}
 {% set btnPrimaryText = capco_site_color_value('color.btn.primary.text') %}
 {% if null == btnPrimaryText %}{% set btnPrimaryText = '#FFF' %}{% endif %}
 
-{% set link = capco_site_color_value('color.link') %}
+{% set link = capco_site_color_value('color.link.default') %}
 {% if null == link %}{% set link = '#16a085' %}{% endif %}
 {% set linkHover = capco_site_color_value('color.link.hover') %}
 {% if null == linkHover %}{% set linkHover = '#1abc9c' %}{% endif %}
@@ -73,7 +73,7 @@
     a:focus,
     .opinion .opinion__body .opinion__title a:hover,
     .opinion .opinion__body .opinion__user a:hover {
-        color: {{ link }};
+        color: {{ linkHover }};
     }
 
     .opinion__header .opinion__header__title,
@@ -447,6 +447,17 @@
         background-color: {{ menuText }};
         color: {{ menuBg }};
         border-color: {{ menuBg }};
+    }
+
+    .search__choice-panel .radio label {
+        color: {{ link }};
+    }
+
+    .search__choice-panel .radio label:hover,
+    .search__choice-panel .radio label:focus,
+    .search__choice-panel .radio label:active,
+    .search__choice-panel .radio label.active {
+        color: {{ linkHover }};
     }
 
 
