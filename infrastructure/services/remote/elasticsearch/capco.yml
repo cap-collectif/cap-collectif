@@ -1,0 +1,5 @@
+cluster:
+  name: capco
+
+marvel.agent.enabled: false
+script.disable_dynamic: false
