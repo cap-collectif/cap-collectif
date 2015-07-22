@@ -1,0 +1,73 @@
+GIT
+  remote: git://github.com/capistrano/symfony.git
+  revision: 010f37a7477a34ca86e41ab4eed2a7ff7ae25ae3
+  specs:
+    capistrano-symfony (0.4.0)
+      capistrano (~> 3.1)
+      capistrano-composer (~> 0.0.3)
+      capistrano-file-permissions (~> 0.1.0)
+
+GEM
+  remote: https://rubygems.org/
+  specs:
+    capistrano (3.3.5)
+      capistrano-stats (~> 1.1.0)
+      i18n
+      rake (>= 10.0.0)
+      sshkit (~> 1.3)
+    capistrano-bower (1.0.0)
+      capistrano (~> 3.0)
+    capistrano-composer (0.0.5)
+      capistrano (>= 3.0.0.pre)
+    capistrano-copy-files (0.0.1)
+      capistrano (>= 3.0.0)
+    capistrano-file-permissions (0.1.0)
+      capistrano (>= 3.0.0)
+    capistrano-npm (1.0.1)
+      capistrano (>= 3.0.0)
+    capistrano-slackify (2.2.0)
+      capistrano (>= 3.1.0)
+      multi_json
+    capistrano-stats (1.1.1)
+    chunky_png (1.3.4)
+    colorize (0.7.5)
+    compass (1.0.3)
+      chunky_png (~> 1.2)
+      compass-core (~> 1.0.2)
+      compass-import-once (~> 1.0.5)
+      rb-fsevent (>= 0.9.3)
+      rb-inotify (>= 0.9)
+      sass (>= 3.3.13, < 3.5)
+    compass-core (1.0.3)
+      multi_json (~> 1.0)
+      sass (>= 3.3.0, < 3.5)
+    compass-import-once (1.0.5)
+      sass (>= 3.2, < 3.5)
+    ffi (1.9.6)
+    i18n (0.7.0)
+    multi_json (1.10.1)
+    net-scp (1.2.1)
+      net-ssh (>= 2.6.5)
+    net-ssh (2.9.2)
+    rake (10.4.2)
+    rb-fsevent (0.9.4)
+    rb-inotify (0.9.5)
+      ffi (>= 0.5.0)
+    sass (3.4.13)
+    sshkit (1.6.1)
+      colorize (>= 0.7.0)
+      net-scp (>= 1.1.2)
+      net-ssh (>= 2.8.0)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  capistrano (~> 3.1)
+  capistrano-bower
+  capistrano-copy-files
+  capistrano-npm
+  capistrano-slackify
+  capistrano-symfony (~> 0.1)!
+  compass
+  sass

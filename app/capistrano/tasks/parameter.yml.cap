@@ -1,0 +1,15 @@
+namespace :symfony do
+    desc 'Install parameters.yml'
+    task :parameters do
+        on roles(:web) do
+            execute "mkdir -p #{shared_path}/app/config"
+
+            if File.exists?(fetch(:parameters_yml_file))
+                info "uploading the parameters.yml file which exists locally"
+                upload! fetch(:parameters_yml_file), "#{shared_path}/app/config/parameters.yml"
+            else
+                info "not uploading a parameters.yml file, as it does not exist locally"
+            end
+        end
+    end
+end
