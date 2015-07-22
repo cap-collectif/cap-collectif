@@ -56,7 +56,12 @@ class ApplicationContext extends UserContext
                     ->setTitle('Behat suite ended successfully')
                     ->setBody('Suite "' . $suiteName . '" has ended without errors (for once). Congrats !')
                 ;
-            } else if ($resultCode === TestResult::FAILED ) {
+            } else if ($resultCode === TestResult::SKIPPED ) {
+                $notification
+                    ->setTitle('Behat suite ended with skipped steps')
+                    ->setBody('Suite "' . $suiteName . '" has ended successfully but some steps have been skipped.')
+                ;
+            } else {
                 $notification
                     ->setTitle('Behat suite ended with errors')
                     ->setBody('Suite "' . $suiteName . '" has ended with errors. Go check it out you moron !')

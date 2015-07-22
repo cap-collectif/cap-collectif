@@ -24,6 +24,7 @@ fi
 
 php app/console cache:clear --env=prod --no-debug
 php app/console assets:install --symlink
+php app/console fos:elastica:populate --env=prod
 
 EOF
 

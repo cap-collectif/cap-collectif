@@ -10,18 +10,19 @@ use Elastica\Query\Bool;
 use Elastica\Query\MultiMatch;
 use Elastica\Query\Filtered;
 use Elastica\Filter\Type;
+use FOS\ElasticaBundle\Transformer\ElasticaToModelTransformerInterface;
 use Pagerfanta\Adapter\ArrayAdapter;
 use Pagerfanta\Pagerfanta;
 
 class SearchResolver
 {
-    protected $finder;
     protected $index;
+    protected $transformer;
 
-    public function __construct(FinderInterface $finder, Index $index)
+    public function __construct(Index $index, ElasticaToModelTransformerInterface $transformer)
     {
-        $this->finder = $finder;
         $this->index = $index;
+        $this->transformer = $transformer;
     }
 
     // search by term and type in elasticsearch
@@ -41,10 +42,6 @@ class SearchResolver
                 $query = new Query($termQuery);
             }
 
-            // Special request to count results
-            // We do it before setting highlight to minimize performance issues
-            $count = $this->index->search($query)->getTotalHits();
-
             if ($sort !== null && $sort !== 'score') {
                 $query->setSort($this->getSortSettings($sort));
             }
@@ -54,8 +51,10 @@ class SearchResolver
             $query->setFrom($from);
             $query->setSize($size);
 
-            // Returns a mixed array of any objects mapped + highlights
-            $results = $this->finder->findHybrid($query);
+            $resultSet = $this->index->search($query);
+            $count = $resultSet->getTotalHits();
+
+            $results = $this->transformer->hybridTransform($resultSet->getResults());
 
         }
 

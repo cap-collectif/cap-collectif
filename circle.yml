@@ -1,8 +1,6 @@
 machine:
     php:
         version: 5.5.15
-    services:
-        - elasticsearch
 
 dependencies:
     override:
@@ -20,6 +18,9 @@ dependencies:
             background: true
         - curl http://get.sensiolabs.org/php-cs-fixer.phar -o php-cs-fixer
         - sudo chmod a+x php-cs-fixer
+        - wget https://download.elastic.co/elasticsearch/elasticsearch/elasticsearch-1.7.0.tar.gz
+        - tar -xvf elasticsearch-1.7.0.tar.gz
+        - elasticsearch-1.7.0/bin/elasticsearch: {background: true}
         - npm install -g brunch
         - pip install fabric requests libsaas
 

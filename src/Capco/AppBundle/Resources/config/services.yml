@@ -378,7 +378,7 @@ services:
 
   capco.search.resolver:
     class: Capco\AppBundle\Resolver\SearchResolver
-    arguments: [@fos_elastica.finder.app, @fos_elastica.index]
+    arguments: [@fos_elastica.index, @fos_elastica.elastica_to_model_transformer.collection.app]
 
   capco.twig.url:
     class: Capco\AppBundle\Twig\UrlExtension

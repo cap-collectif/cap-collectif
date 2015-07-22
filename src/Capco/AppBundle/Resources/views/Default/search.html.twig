@@ -23,7 +23,7 @@
                 <div class="col-xs-12 col-sm-9 col-md-6 input-group">
                     {{ form_widget(form.term) }}
                     <span class="input-group-btn">
-                        <button class="btn btn-primary" type="submit"><i class="cap cap-magnifier"></i></button>
+                        <button class="btn btn-primary" type="submit"><i class="cap cap-magnifier"></i><span class="sr-only">{{ 'search.form.submit' | trans({}, 'CapcoAppBundle') }}</span></button>
                     </span>
                 </div>
             </div>
@@ -50,7 +50,7 @@
                 </div>
 
                 <div class="col-xs-12 col-sm-9">
-                    <h2 class="h2" style="margin-top: 0;">
+                    <h2 class="h2 search__results-nb" style="margin-top: 0;">
                         {% transchoice count with { '%count%': count} from 'CapcoAppBundle' %}
                         search.results.title
                         {% endtranschoice %}
