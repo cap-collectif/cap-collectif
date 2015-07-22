@@ -11,17 +11,24 @@ application:
     volumes_from:
         - redisdata
         - applicationdata
+        - elasticsearchdata
 
 applicationdata:
     build: infrastructure/services/applicationdata
     volumes:
-        - data/media/:/var/www/web/media
+        - data/media:/var/www/web/media
     command: echo "I'm a data container"
 
 redisdata:
     build: infrastructure/services/redisdata
     volumes:
         - data/redis:/data
+    command: echo "I'm a data container"
+
+elasticsearchdata:
+    build: infrastructure/services/elasticsearchdata
+    volumes:
+        - data/elasticsearch:/etc/elasticsearch/data
     command: echo "I'm a data container"
 
 builder:

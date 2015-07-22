@@ -1,0 +1,3 @@
+#!/bin/bash
+
+exec /etc/elasticsearch/bin/elasticsearch
