@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\Resolver;
 
+use Elastica\Index;
 use FOS\ElasticaBundle\Finder\FinderInterface;
 
 use Elastica\Query;
@@ -9,20 +10,26 @@ use Elastica\Query\Bool;
 use Elastica\Query\MultiMatch;
 use Elastica\Query\Filtered;
 use Elastica\Filter\Type;
+use Pagerfanta\Adapter\ArrayAdapter;
+use Pagerfanta\Pagerfanta;
 
 class SearchResolver
 {
     protected $finder;
+    protected $index;
 
-    public function __construct(FinderInterface $finder)
+    public function __construct(FinderInterface $finder, Index $index)
     {
         $this->finder = $finder;
+        $this->index = $index;
     }
 
     // search by term and type in elasticsearch
-    public function searchAll($term, $type = 'all', $sort = 'score')
+    public function searchAll($size, $page, $term, $type = 'all', $sort = 'score')
     {
         $results = array();
+        $count = 0;
+        $from = ($page - 1) * $size;
 
         if ($term) {
 
@@ -34,20 +41,25 @@ class SearchResolver
                 $query = new Query($termQuery);
             }
 
-            $query->setSize(10);
-            $query->setFrom(0);
+            // Special request to count results
+            // We do it before setting highlight to minimize performance issues
+            $count = $this->index->search($query)->getTotalHits();
 
-            if ($sort !== 'score') {
+            if ($sort !== null && $sort !== 'score') {
                 $query->setSort($this->getSortSettings($sort));
             }
 
             $query->setHighlight($this->getHighlightSettings());
 
+            $query->setFrom($from);
+            $query->setSize($size);
+
             // Returns a mixed array of any objects mapped + highlights
             $results = $this->finder->findHybrid($query);
+
         }
 
-        return $results;
+        return ['count' => $count, 'results' => $results];
     }
 
     // get filtered query with type filter and term query

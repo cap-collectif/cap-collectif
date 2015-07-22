@@ -51,7 +51,7 @@
 
                 <div class="col-xs-12 col-sm-9">
                     <h2 class="h2" style="margin-top: 0;">
-                        {% transchoice results | length with { '%count%': results | length} from 'CapcoAppBundle' %}
+                        {% transchoice count with { '%count%': count} from 'CapcoAppBundle' %}
                         search.results.title
                         {% endtranschoice %}
                         <span class="pull-right">
@@ -61,7 +61,7 @@
 
                     <hr class="hr--no-margin"/>
 
-                    <ul class="search__results">
+                    <ul class="search__results {% if nbPages > 1 %} block {% endif %}">
                         {% for result in results %}
                             {% set default_title = 'search.results.default_title' | trans({}, 'CapcoAppBundle') %}
                             {% set type_label = 'search.results.type.' ~ result.result.hit['_type'] %}
@@ -92,6 +92,9 @@
                             </li>
                         {% endfor %}
                     </ul>
+
+                    {% set route, params =  'app_search', form.vars.data %}
+                    {% include 'CapcoAppBundle:Block:pagination.html.twig' with {'current': page, 'nb': nbPages, 'route': route, 'params': params} only  %}
                 </div>
 
             </div>

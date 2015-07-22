@@ -32,7 +32,6 @@
 .search__results {
   list-style-type: none;
   padding-left: 0;
-  margin-bottom: 0;
 
   li {
     padding-top: 5px;
@@ -58,6 +57,5 @@
 // Highlighted results
 .search__highlight {
   font-weight: bold;
-  background-color: yellow;
   color: $black;
 }
