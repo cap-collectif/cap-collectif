@@ -26,7 +26,7 @@ redisdata:
     command: echo "I'm a data container"
 
 elasticsearchdata:
-    image: busybox:latest
+    build: infrastructure/services/elasticsearchdata
     volumes:
         - data/elasticsearch:/etc/elasticsearch/data
     command: echo "I'm a data container"
