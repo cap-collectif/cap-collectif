@@ -29,9 +29,9 @@ const SideMenu = React.createClass({
   },
 
   onChange() {
-    if (SynthesisElementStore.isSync) {
+    if (SynthesisElementStore.isCountSync) {
       this.setState({
-        countNew: SynthesisElementStore.count,
+        countNew: SynthesisElementStore.countNew,
       });
       return;
     }

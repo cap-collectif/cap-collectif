@@ -1,7 +1,6 @@
-import NotationButtons from './NotationButtons';
-import DisableButtons from './DisableButtons';
-import MoveButtons from './MoveButtons';
-import ArchiveButtons from './ArchiveButtons';
+import PublishButton from './PublishButton';
+import DivideButton from './DivideButton';
+import IgnoreButton from './IgnoreButton';
 
 const ElementButtons = React.createClass({
   propTypes: {
@@ -12,10 +11,9 @@ const ElementButtons = React.createClass({
   render() {
     return (
       <div className="element__actions box text-center">
-        <NotationButtons {...this.props} />
-        <DisableButtons {...this.props} />
-        <MoveButtons {...this.props} />
-        <ArchiveButtons {...this.props} />
+        <PublishButton {...this.props} />
+        <DivideButton {...this.props} />
+        <IgnoreButton {...this.props} />
       </div>
     );
   },

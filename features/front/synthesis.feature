@@ -3,7 +3,7 @@ Feature: Synthesis
 # View
 
 @javascript
-Scenario: User wants to see synthesis view
+Scenario: Anonymous wants to see synthesis view
   Given I visited "consultation page" with:
     | consultationSlug   | strategie-technologique-de-l-etat-et-services-publics |
     | stepSlug           | collecte-des-avis-pour-une-meilleur-strategie         |
@@ -116,7 +116,7 @@ Scenario: Admin wants to see an element details
   # Actions
 
 @javascript @database
-Scenario: Admin wants to note an element
+Scenario: Admin wants to ignore an element
   Given I am logged in as admin
   And I visited "consultation page" with:
     | consultationSlug | strategie-technologique-de-l-etat-et-services-publics |
@@ -126,34 +126,16 @@ Scenario: Admin wants to note an element
   And I wait 5 seconds
   And I follow "Opinion 51"
   And I wait 5 seconds
-  And I click the "#notation-button-2" element
-  Then "#notation-star-1" element should have class "active"
-  And "#notation-star-2" element should have class "active"
-  And "#notation-star-3" element should not have class "active"
-  And "#notation-star-4" element should not have class "active"
-  And "#notation-star-5" element should not have class "active"
-
-@javascript @database
-Scenario: Admin wants to disable an element
-  Given I am logged in as admin
-  And I visited "consultation page" with:
-    | consultationSlug | strategie-technologique-de-l-etat-et-services-publics |
-    | stepSlug         | collecte-des-avis-pour-une-meilleur-strategie         |
-  And I follow "Synthèse"
-  And I follow "Éditer"
-  And I wait 5 seconds
-  And I follow "Opinion 51"
-  And I wait 5 seconds
-  And I click the ".element__action-disable button" element
+  And I click the ".element__action-ignore" element
   And I follow "Dépubliées"
   And I wait 5 seconds
   And I should see 1 ".element" element
   And I follow "Traitées"
   And I wait 5 seconds
-  And I should see 1 ".element" element
+  And I should see 12 ".element" element
 
 @javascript @database
-Scenario: Admin wants to archive an element
+Scenario: Admin wants to publish an element
   Given I am logged in as admin
   And I visited "consultation page" with:
     | consultationSlug | strategie-technologique-de-l-etat-et-services-publics |
@@ -161,9 +143,9 @@ Scenario: Admin wants to archive an element
   And I follow "Synthèse"
   And I follow "Éditer"
   And I wait 5 seconds
-  And I follow "Opinion 51"
+  And I follow "Opinion 52"
   And I wait 5 seconds
-  And I click the ".element__action-archive button" element
+  And I click the ".element__action-publish" element
   And I follow "Traitées"
   And I wait 5 seconds
-  And I should see 1 ".element" elements
+  And I should see 12 ".element" elements

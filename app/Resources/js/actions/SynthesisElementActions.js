@@ -1,20 +1,21 @@
 import AppDispatcher from '../dispatchers/AppDispatcher';
 import Fetcher from '../services/Fetcher';
-import {RECEIVE_COUNT, RECEIVE_ELEMENTS, RECEIVE_ELEMENT, ARCHIVE_ELEMENT, UPDATE_ELEMENT, NOTE_ELEMENT, DISABLE_ELEMENT, MOVE_ELEMENT, UPDATE_ELEMENT_SUCCESS, UPDATE_ELEMENT_FAILURE} from '../constants/SynthesisElementConstants';
+import {RECEIVE_COUNT, RECEIVE_ELEMENTS, RECEIVE_ELEMENT, ARCHIVE_ELEMENT, UPDATE_ELEMENT, NOTE_ELEMENT, MOVE_ELEMENT, UPDATE_ELEMENT_SUCCESS, UPDATE_ELEMENT_FAILURE} from '../constants/SynthesisElementConstants';
 
-const updateElementFromData = (synthesis, element, data) => {
+const updateElementFromData = (synthesis, element, data, successMessage = 'common.success.update_success', errorMessage = 'common.errors.update_error') => {
   return Fetcher
     .put('/syntheses/' + synthesis + '/elements/' + element, data)
     .then(() => {
       AppDispatcher.dispatch({
         actionType: UPDATE_ELEMENT_SUCCESS,
+        message: successMessage,
       });
       return true;
     })
     .catch(() => {
       AppDispatcher.dispatch({
         actionType: UPDATE_ELEMENT_FAILURE,
-        error: 'common.errors.update_error',
+        message: errorMessage,
       });
       return false;
     });
@@ -26,22 +27,15 @@ export default {
     AppDispatcher.dispatch({
       actionType: ARCHIVE_ELEMENT,
       archived: data.archived,
+      published: data.published,
     });
-    updateElementFromData(synthesis, element, data);
+    updateElementFromData(synthesis, element, data, 'common.success.archive_success', 'common.errors.archive_error');
   },
 
   note: (synthesis, element, data) => {
     AppDispatcher.dispatch({
       actionType: NOTE_ELEMENT,
       notation: data.notation,
-    });
-    updateElementFromData(synthesis, element, data);
-  },
-
-  disable: (synthesis, element, data) => {
-    AppDispatcher.dispatch({
-      actionType: DISABLE_ELEMENT,
-      enabled: data.enabled,
     });
     updateElementFromData(synthesis, element, data);
   },
@@ -79,6 +73,7 @@ export default {
       .then((data) => {
         AppDispatcher.dispatch({
           actionType: RECEIVE_ELEMENTS,
+          type: type,
           elements: data,
         });
         return true;
@@ -91,6 +86,7 @@ export default {
       .then((data) => {
         AppDispatcher.dispatch({
           actionType: RECEIVE_ELEMENTS,
+          type: 'tree',
           elements: data,
         });
         return true;
@@ -101,8 +97,11 @@ export default {
     Fetcher
       .get('/syntheses/' + synthesis + '/elements/count?type=' + type)
       .then((data) => {
-        data.actionType = RECEIVE_COUNT;
-        AppDispatcher.dispatch(data);
+        AppDispatcher.dispatch({
+          actionType: RECEIVE_COUNT,
+          type: type,
+          count: data.count,
+        });
         return true;
       });
   },

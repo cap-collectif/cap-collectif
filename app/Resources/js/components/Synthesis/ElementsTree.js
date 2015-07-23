@@ -30,9 +30,9 @@ const ElementTree = React.createClass({
   },
 
   onChange() {
-    if (SynthesisElementStore.isSync) {
+    if (SynthesisElementStore.isInboxSync.tree) {
       this.setState({
-        rootElements: SynthesisElementStore.elements,
+        rootElements: SynthesisElementStore.elements.tree,
         isLoading: false,
       });
       return;

@@ -13,7 +13,10 @@ const SynthesisBox = React.createClass({
   getInitialState() {
     return {
       synthesis: null,
-      errors: [],
+      messages: {
+        'errors': [],
+        'success': [],
+      },
     };
   },
 
@@ -31,7 +34,7 @@ const SynthesisBox = React.createClass({
 
   onChange() {
     this.setState({
-      errors: SynthesisElementStore.errors,
+      messages: SynthesisElementStore.messages,
     });
   },
 
@@ -53,15 +56,15 @@ const SynthesisBox = React.createClass({
     }
   },
 
-  renderErrors() {
-    if (this.state.errors.length > 0) {
+  renderErrorMessages() {
+    if (this.state.messages.errors.length > 0) {
       return (
         <div className="alert alert-danger alert-dismissible">
           <button type="button" className="close" data-dismiss="alert" aria-label={this.getIntlMessage('common.errors.close')}>
             <span aria-hidden="true">&times;</span>
           </button>
           {
-            this.state.errors.map((error) => {
+            this.state.messages.errors.map((error) => {
               return (
                 <p className="error">
                   {this.getIntlMessage(error)}
@@ -74,10 +77,33 @@ const SynthesisBox = React.createClass({
     }
   },
 
+  renderSuccessMessages() {
+    if (this.state.messages.success.length > 0) {
+      return (
+        <div className="alert alert-success alert-dismissible">
+          <button type="button" className="close" data-dismiss="alert" aria-label={this.getIntlMessage('common.errors.close')}>
+            <span aria-hidden="true">&times;</span>
+          </button>
+          {
+            this.state.messages.success.map((success) => {
+              return (
+                <p className="success">
+                  {this.getIntlMessage(success)}
+                </p>
+              );
+            })
+            }
+        </div>
+      );
+    }
+  },
+
+
   render() {
     return (
       <div className="synthesis__box" >
-        {this.renderErrors()}
+        {this.renderErrorMessages()}
+        {this.renderSuccessMessages()}
         { this.renderBoxMode() }
       </div>
     );

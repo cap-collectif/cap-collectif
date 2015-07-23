@@ -352,7 +352,6 @@ class SynthesisController extends FOSRestController
 
         if ($form->isValid()) {
             $element = $this->get('capco.synthesis.synthesis_element_handler')->updateElementInSynthesis($element, $synthesis);
-
             return $element;
         }
 

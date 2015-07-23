@@ -12,7 +12,12 @@ export default {
         no_synthesis: 'La synthèse n\'a pas encore été rédigée. Elle sera disponible prochainement.',
         incorrect_mode: 'Un problème est survenu. Veuillez réessayer.',
         update_error: 'Une erreur est survenue, merci de réessayer cette action ultérieurement.',
+        archive_error: 'Impossible de traiter cet élément',
         close: 'Fermer',
+      },
+      success: {
+        update_success: 'L\'opération a été réalisée avec succès.',
+        archive_success: 'L\'élément a été traité avec succès.',
       },
     },
     view: {

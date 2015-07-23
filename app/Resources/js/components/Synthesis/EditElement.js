@@ -31,7 +31,7 @@ const EditElement = React.createClass({
   },
 
   onChange() {
-    if (SynthesisElementStore.isSync) {
+    if (SynthesisElementStore.isElementSync) {
       this.setState({
         element: SynthesisElementStore.element,
         isLoading: false,

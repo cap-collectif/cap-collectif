@@ -27,7 +27,7 @@ const ElementsInbox = React.createClass({
   },
 
   componentDidMount() {
-    this.loadElementsByTypeFromServer();
+    this.onChange();
   },
 
   componentWillReceiveProps(nextProps) {
@@ -44,9 +44,9 @@ const ElementsInbox = React.createClass({
   },
 
   onChange() {
-    if (SynthesisElementStore.isSync) {
+    if (SynthesisElementStore.isInboxSync[this.props.params.type]) {
       this.setState({
-        elements: SynthesisElementStore.elements,
+        elements: SynthesisElementStore.elements[this.props.params.type],
         isLoading: false,
       });
       return;
