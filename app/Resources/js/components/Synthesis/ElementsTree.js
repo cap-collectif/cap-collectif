@@ -117,7 +117,7 @@ const ElementTree = React.createClass({
   },
 
   loadPublishedRootElementsFromServer() {
-    SynthesisElementActions.loadRootElementsFromServer(
+    SynthesisElementActions.loadElementsTreeFromServer(
       this.props.synthesis.id
     );
   },

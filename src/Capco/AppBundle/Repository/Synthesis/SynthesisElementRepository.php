@@ -9,7 +9,7 @@ use Doctrine\ORM\EntityRepository;
  */
 class SynthesisElementRepository extends EntityRepository
 {
-    protected static $allowedFields = ['synthesis', 'enabled', 'archived', 'parent'];
+    protected static $allowedFields = ['synthesis', 'published', 'archived', 'parent'];
 
     /**
      * Cout elements with values.

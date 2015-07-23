@@ -4,7 +4,7 @@ Capco\AppBundle\Entity\Synthesis\SynthesisElement:
     id:
       expose: true
       groups: [Elements, ElementsList, ElementDetails]
-    enabled:
+    published:
       expose: true
       groups: [ElementsList, ElementDetails]
     createdAt:
@@ -29,6 +29,8 @@ Capco\AppBundle\Entity\Synthesis\SynthesisElement:
       expose: true
       groups: [ElementsTree, ElementDetails]
       max_depth: 1
+      accessor:
+        getter: getPublishedChildren
     displayType:
       expose: true
       groups: [ElementsList, ElementDetails]

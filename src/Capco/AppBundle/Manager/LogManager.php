@@ -31,8 +31,8 @@ class LogManager
             if (array_key_exists('parent', $log->getData())) {
                 $sentences[] = $this->makeSentence('move', $username, $elementName);
             }
-            if (array_key_exists('enabled', $log->getData())) {
-                if ($log->getData()['enabled'] === true) {
+            if (array_key_exists('published', $log->getData())) {
+                if ($log->getData()['published'] === true) {
                     $sentences[] = $this->makeSentence('publish', $username, $elementName);
                 } else {
                     $sentences[] = $this->makeSentence('unpublish', $username, $elementName);
