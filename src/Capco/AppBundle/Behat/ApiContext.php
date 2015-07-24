@@ -268,8 +268,8 @@ class ApiContext extends ApplicationContext
         if (array_key_exists('notation', $values)) {
             $element->setNotation($values['notation']);
         }
-        if (array_key_exists('enabled', $values)) {
-            $element->setEnabled(filter_var($values['enabled'], FILTER_VALIDATE_BOOLEAN));
+        if (array_key_exists('published', $values)) {
+            $element->setPublished(filter_var($values['published'], FILTER_VALIDATE_BOOLEAN));
         }
         if (array_key_exists('archived', $values)) {
             $element->setArchived(filter_var($values['archived'], FILTER_VALIDATE_BOOLEAN));

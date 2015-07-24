@@ -85,9 +85,9 @@ export default {
       });
   },
 
-  loadRootElementsFromServer: (synthesis) => {
+  loadElementsTreeFromServer: (synthesis) => {
     Fetcher
-      .get('/syntheses/' + synthesis + '/elements/root')
+      .get('/syntheses/' + synthesis + '/elements/tree')
       .then((data) => {
         AppDispatcher.dispatch({
           actionType: RECEIVE_ELEMENTS,

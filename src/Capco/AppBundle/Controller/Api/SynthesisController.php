@@ -221,13 +221,13 @@ class SynthesisController extends FOSRestController
     }
 
     /**
-     * Get root synthesis elements.
+     * Get published synthesis elements tree.
      *
      * @return array|\Capco\AppBundle\Entity\Synthesis\SynthesisElement[]
      *
      * @ApiDoc(
      *  resource=true,
-     *  description="Get the root elements of a synthesis",
+     *  description="Get the tree of published elements of a synthesis",
      *  statusCodes={
      *    200 = "Syntheses element found",
      *    404 = "Synthesis not found",
@@ -235,12 +235,12 @@ class SynthesisController extends FOSRestController
      * )
      *
      * @ParamConverter("synthesis", options={"mapping": {"id": "id"}})
-     * @Get("/syntheses/{id}/elements/root")
+     * @Get("/syntheses/{id}/elements/tree")
      * @View(serializerGroups={"ElementsList", "ElementsTree", "UserDetails"})
      */
-    public function getSynthesisElementsTreeAction(Synthesis $synthesis)
+    public function getPublishedSynthesisElementsTreeAction(Synthesis $synthesis)
     {
-        return $this->get('capco.synthesis.synthesis_element_handler')->getElementsFromSynthesisByType($synthesis, 'root');
+        return $this->get('capco.synthesis.synthesis_element_handler')->getElementsFromSynthesisByType($synthesis, 'tree');
     }
 
     /**

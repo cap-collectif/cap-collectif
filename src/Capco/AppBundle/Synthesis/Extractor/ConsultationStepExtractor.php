@@ -152,6 +152,7 @@ class ConsultationStepExtractor
         $folder->setTitle($label);
         $folder->setDisplayType('folder');
         $folder->setArchived(true);
+        $folder->setPublished(true);
         $opinionElement->addChild($folder);
         $synthesis->addElement($folder);
         return $folder;
@@ -175,6 +176,7 @@ class ConsultationStepExtractor
         $folder->setTitle($label);
         $folder->setDisplayType('folder');
         $folder->setArchived(true);
+        $folder->setPublished(true);
         $opinionElement->addChild($folder);
         $synthesis->addElement($folder);
         return $folder;
@@ -194,14 +196,15 @@ class ConsultationStepExtractor
 
     public function createElementFromOpinionType(OpinionType $opinionType)
     {
-        $element = new SynthesisElement();
-        $element->setLinkedDataClass(get_class($opinionType));
-        $element->setLinkedDataId($opinionType->getId());
-        $element->setLinkedDataCreation($opinionType->getCreatedAt());
-        $element->setDisplayType('folder');
-        $element->setArchived(true);
+        $folder = new SynthesisElement();
+        $folder->setLinkedDataClass(get_class($opinionType));
+        $folder->setLinkedDataId($opinionType->getId());
+        $folder->setLinkedDataCreation($opinionType->getCreatedAt());
+        $folder->setDisplayType('folder');
+        $folder->setArchived(true);
+        $folder->setPublished(true);
 
-        return $this->updateElementFromOpinionType($element, $opinionType);
+        return $this->updateElementFromOpinionType($folder, $opinionType);
     }
 
     public function createElementFromOpinion(Opinion $opinion)
@@ -249,6 +252,7 @@ class ConsultationStepExtractor
         // Update last modified, archive status and deletion date
         $element->setLinkedDataLastUpdate($object->getUpdatedAt());
         $element->setArchived(false);
+        $element->setPublished(false);
         $element->setDeletedAt(null);
 
         if ($object instanceof OpinionType) {

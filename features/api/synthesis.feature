@@ -292,7 +292,7 @@ Feature: Synthesis
       {
         "has_linked_data": false,
         "id": "43",
-        "enabled": true,
+        "published": false,
         "created_at": "@string@.isDateTime()",
         "updated_at": "@string@.isDateTime()",
         "archived": false,
@@ -346,7 +346,7 @@ Feature: Synthesis
       {
         "has_linked_data": false,
         "id": "43",
-        "enabled": true,
+        "published": false,
         "created_at": "@string@.isDateTime()",
         "updated_at": "@string@.isDateTime()",
         "archived": false,
@@ -402,7 +402,7 @@ Feature: Synthesis
       {
         "has_linked_data": false,
         "id": "44",
-        "enabled": true,
+        "published": false,
         "created_at": "@string@.isDateTime()",
         "updated_at": "@string@.isDateTime()",
         "archived": true,
@@ -440,8 +440,9 @@ Feature: Synthesis
     And there is a synthesis with id "42" and elements:
       | 43 |
     And I create an element in synthesis 42 with values:
-      | id       | 44   |
-      | enabled | false |
+      | id        | 44    |
+      | archived  | true  |
+      | published | false |
     And I send a GET request to "/api/syntheses/42/elements?type=unpublished"
     Then the JSON response should match:
     """
@@ -449,10 +450,10 @@ Feature: Synthesis
       {
         "has_linked_data": false,
         "id": "44",
-        "enabled": false,
+        "published": false,
         "created_at": "@string@.isDateTime()",
         "updated_at": "@string@.isDateTime()",
-        "archived": false,
+        "archived": true,
         "author": @null@,
         "parent": @null@,
         "display_type": "folder",
@@ -474,8 +475,9 @@ Feature: Synthesis
     And there is a synthesis with id "42" and elements:
       | 43 |
     And I create an element in synthesis 42 with values:
-      | id       | 44   |
-      | enabled | false |
+      | id        | 44    |
+      | archived  | true  |
+      | published | false |
     And I send a GET request to "/api/syntheses/42/elements/count?type=unpublished"
     Then the JSON response should match:
     """
@@ -483,25 +485,23 @@ Feature: Synthesis
     """
 
   @database
-  Scenario: API client wants to get root synthesis elements
+  Scenario: API client wants to get synthesis elements tree
     Given I am logged in to api as admin
     And there is a synthesis with id "48" based on consultation step 2
-    And I send a GET request to "/api/syntheses/48/elements/root"
+    And I send a GET request to "/api/syntheses/48/elements/tree"
     Then the JSON response should match:
     """
     [
       {
         "has_linked_data": true,
         "id": @string@,
-        "enabled": true,
+        "published": true,
         "created_at": "@string@.isDateTime()",
         "updated_at": "@string@.isDateTime()",
         "archived": true,
         "author": @null@,
         "parent": @null@,
-        "children": [
-          @...@
-        ],
+        "children": [],
         "display_type": "folder",
         "title": "Le problème constaté",
         "notation": @null@,
@@ -515,15 +515,13 @@ Feature: Synthesis
       {
         "has_linked_data": true,
         "id": @string@,
-        "enabled": true,
+        "published": true,
         "created_at": "@string@.isDateTime()",
         "updated_at": "@string@.isDateTime()",
         "archived": true,
-        "author": @...@,
+        "author": @null@,
         "parent": @null@,
-        "children": [
-          @...@
-        ],
+        "children": [],
         "display_type": "folder",
         "title": "Les causes",
         "notation": @null@,
@@ -541,7 +539,7 @@ Feature: Synthesis
   Scenario: API client wants to get root synthesis elements count
     Given I am logged in to api as admin
     And there is a synthesis with id "48" based on consultation step 2
-    And I send a GET request to "/api/syntheses/48/elements/count?type=root"
+    And I send a GET request to "/api/syntheses/48/elements/count?type=tree"
     Then the JSON response should match:
     """
     {"count": "2"}
@@ -557,7 +555,7 @@ Feature: Synthesis
     {
       "has_linked_data": false,
       "id": "43",
-      "enabled": true,
+      "published": false,
       "created_at": "@string@.isDateTime()",
       "updated_at": "@string@.isDateTime()",
       "archived": false,
@@ -607,7 +605,7 @@ Feature: Synthesis
     {
       "has_linked_data": false,
       "id": @string@,
-      "enabled": true,
+      "published": false,
       "created_at": "@string@.isDateTime()",
       "updated_at": "@string@.isDateTime()",
       "archived": false,
@@ -667,7 +665,7 @@ Feature: Synthesis
     And I send a PUT request to "/api/syntheses/42/elements/43" with json:
     """
     {
-      "enabled": true,
+      "published": true,
       "notation": 2
     }
     """
@@ -677,7 +675,7 @@ Feature: Synthesis
     {
       "has_linked_data": false,
       "id": "43",
-      "enabled": true,
+      "published": true,
       "created_at": "@string@.isDateTime()",
       "updated_at": "@string@.isDateTime()",
       "archived": false,
@@ -716,7 +714,7 @@ Feature: Synthesis
     And I send a PUT request to "/api/syntheses/42/elements/43" with json:
     """
     {
-      "enabled": true,
+      "published": true,
       "notation": 2
     }
     """
@@ -729,7 +727,7 @@ Feature: Synthesis
     And I send a PUT request to "/api/syntheses/42/elements/43" with json:
     """
     {
-      "enabled": true,
+      "published": true,
       "notation": 2
     }
     """
@@ -886,12 +884,12 @@ Feature: Synthesis
     And there is a synthesis with id "42" and elements:
       | 43 |
     And I create an element in synthesis 42 with values:
-      | id       | 47                          |
-      | enabled  | false                       |
+      | id         | 47                          |
+      | published  | false                       |
     And I send a PUT request to "/api/syntheses/42/elements/47" with json:
     """
     {
-      "enabled": true
+      "published": true
     }
     """
     Then there should be a log on element 47 with sentence "admin a publié l'élément 47"
@@ -901,13 +899,16 @@ Feature: Synthesis
     Given I am logged in to api as admin
     And there is a synthesis with id "42" and elements:
       | 43 |
-    And I send a PUT request to "/api/syntheses/42/elements/43" with json:
+    And I create an element in synthesis 42 with values:
+      | id        | 47    |
+      | published | true |
+    And I send a PUT request to "/api/syntheses/42/elements/47" with json:
     """
     {
-      "enabled": false
+      "published": false
     }
     """
-    Then there should be a log on element 43 with sentence "admin a dépublié l'élément 43"
+    Then there should be a log on element 47 with sentence "admin a dépublié l'élément 47"
 
   @database
   Scenario: After archiving an element, there should be an 'archive' log

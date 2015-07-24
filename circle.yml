@@ -8,6 +8,8 @@ dependencies:
             timeout: 3600
     pre:
         - echo "memory_limit = 2048M" > ~/.phpenv/versions/$(phpenv global)/etc/conf.d/memory.ini
+        - gem install bundler
+        - bundle install --clean
         - mysql -u ubuntu -e "create database symfony"
         - mysql -u ubuntu -e "create database symfony_test"
     post:
@@ -19,15 +21,12 @@ dependencies:
         - npm install -g brunch
         - pip install fabric requests libsaas
 
-# This is not a real deployment we only update the code
-# because the 'infrastructure' folder which contains the
-# dockerfiles is used by deploymenttools
 deployment:
     preprod:
         branch: develop
         commands:
-            - "ssh capco@***REMOVED*** 'cd CapCollectif-SF2 && git pull'"
-            - "ssh capco@***REMOVED*** 'cd CapCollectif-DeploymentTools && fab deploy:preprod'"
+            - bundle exec cap preprod deploy
+
 test:
     pre:
         - echo "memory_limit = 2048M" > ~/.phpenv/versions/$(phpenv global)/etc/conf.d/memory.ini
@@ -40,3 +39,22 @@ test:
         - fab circleci lint:pr=$CI_PULL_REQUEST
         - fab test
 
+## WIP run tests with Docker
+
+# machine:
+#     services:
+#       - docker
+
+# dependencies:
+#     override:
+#         - sudo pip install -r requirements.txt
+#         - docker-compose build
+
+# test:
+#   override:
+#     - docker-compose up -d
+#     - sleep 400
+#     - docker-compose logs:
+#         background: true
+#     - docker-compose run application bin/phpspec run
+#     - docker-compose run --rm behat ./bin/behat
