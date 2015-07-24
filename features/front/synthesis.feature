@@ -97,9 +97,6 @@ Scenario: Admin wants to see elements tree
   And I follow "Arborescence"
   And I wait 5 seconds
   Then I should see 2 ".tree-level-0 > .elements-tree__item" elements
-  And I should see 3 ".tree-level-1 > .elements-tree__item" elements
-  And I should see 9 ".tree-level-2 > .elements-tree__item" elements
-  And I should see 3 ".tree-level-3 > .elements-tree__item" elements
 
   # Element details
 
@@ -148,8 +145,10 @@ Scenario: Admin wants to disable an element
   And I follow "Opinion 51"
   And I wait 5 seconds
   And I click the ".element__action-disable button" element
-  Then I should see 1 ".element__status-icon.cap-delete-2" element
   And I follow "Dépubliées"
+  And I wait 5 seconds
+  And I should see 1 ".element" element
+  And I follow "Traitées"
   And I wait 5 seconds
   And I should see 1 ".element" element
 
@@ -165,7 +164,6 @@ Scenario: Admin wants to archive an element
   And I follow "Opinion 51"
   And I wait 5 seconds
   And I click the ".element__action-archive button" element
-  Then I should see 1 ".element__status-icon.cap-check-4" element
   And I follow "Traitées"
   And I wait 5 seconds
-  And I should see 12 ".element" elements
+  And I should see 1 ".element" elements
