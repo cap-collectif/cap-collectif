@@ -31,7 +31,7 @@ Feature: Arguments
       | opinionSlug      | opinion-2                        |
     When I click the "#arg-45 .btn" element
     Then I should see "1" in the "#arg-45 .opinion__votes-nb" element
-    And I wait 5 seconds
+    And I wait "2" seconds
     And I should see "Merci ! Votre vote a bien été pris en compte."
     And I should see "Annuler mon vote"
     And I click the "#arg-45 .btn" element

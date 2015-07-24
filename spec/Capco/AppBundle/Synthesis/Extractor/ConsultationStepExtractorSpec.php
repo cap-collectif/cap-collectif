@@ -248,7 +248,6 @@ class ConsultationStepExtractorSpec extends ObjectBehavior
         $element->setLinkedDataLastUpdate($date)->shouldBeCalled();
         $element->setAuthor($author)->shouldBeCalled();
         $element->setArchived(false)->shouldBeCalled();
-        $element->setPublished(false)->shouldBeCalled();
         $element->setDeletedAt(null)->shouldBeCalled();
         $element->setTitle('test')->shouldBeCalled();
         $element->setBody('blabla')->shouldBeCalled();
