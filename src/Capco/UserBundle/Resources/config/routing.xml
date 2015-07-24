@@ -4,19 +4,19 @@
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:schemaLocation="http://symfony.com/schema/routing http://symfony.com/schema/routing/routing-1.0.xsd">
 
-    <route id="hwi_oauth_connect_service" path="/service/{service}">
+    <route id="hwi_oauth_connect_service" pattern="/service/{service}">
         <default key="_controller">CapcoUserBundle:OauthConnect:connectService</default>
     </route>
 
-    <route id="hwi_oauth_connect_registration" path="/registration/{key}">
+    <route id="hwi_oauth_connect_registration" pattern="/registration/{key}">
         <default key="_controller">CapcoUserBundle:OauthConnect:registration</default>
     </route>
 
-    <route id="hwi_oauth_connect" path="/">
+    <route id="hwi_oauth_connect" pattern="/">
         <default key="_controller">CapcoUserBundle:OauthConnect:connect</default>
     </route>
 
-    <route id="hwi_oauth_service_redirect" path="/{service}">
+    <route id="hwi_oauth_service_redirect" pattern="/{service}">
         <default key="_controller">CapcoUserBundle:OauthConnect:redirectToService</default>
     </route>
 </routes>

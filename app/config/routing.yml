@@ -101,13 +101,13 @@ hwi_oauth_redirect:
     prefix: /login
 
 facebook_login:
-    path: /login/check-facebook
+    pattern: /login/check-facebook
 
 google_login:
-    path: /login/check-google
+    pattern: /login/check-google
 
 twitter_login:
-    path: /login/check-twitter
+    pattern: /login/check-twitter
 
 api_login_check:
     path: /api/login_check

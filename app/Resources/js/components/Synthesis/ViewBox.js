@@ -20,7 +20,7 @@ const ViewBox = React.createClass({
   },
 
   componentDidMount() {
-    this.loadRootElementsFromServer();
+    this.loadArchivedElementsFromServer();
   },
 
   componentWillUnmount() {
@@ -39,7 +39,7 @@ const ViewBox = React.createClass({
     this.setState({
       isLoading: true,
     }, () => {
-      this.loadRootElementsFromServer();
+      this.loadArchivedElementsFromServer();
     });
   },
 
@@ -80,9 +80,10 @@ const ViewBox = React.createClass({
     );
   },
 
-  loadRootElementsFromServer() {
-    SynthesisElementActions.loadElementsTreeFromServer(
-      this.props.synthesis.id
+  loadArchivedElementsFromServer() {
+    SynthesisElementActions.loadElementsFromServer(
+      this.props.synthesis.id,
+      'archived'
     );
   },
 

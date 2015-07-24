@@ -28,10 +28,10 @@ class SynthesisElement
     private $id;
 
     /**
-     * @ORM\Column(name="published", type="boolean")
+     * @ORM\Column(name="enabled", type="boolean")
      * @Gedmo\Versioned
      */
-    private $published = false;
+    private $enabled = true;
 
     /**
      * @var \DateTime
@@ -42,7 +42,7 @@ class SynthesisElement
 
     /**
      * @var \DateTime
-     * @Gedmo\Timestampable(on="change", field={"title", "body", "archived", "published", "parent", "notation"})
+     * @Gedmo\Timestampable(on="change", field={"title", "body", "archived", "enabled", "parent", "notation"})
      * @ORM\Column(name="updated_at", type="datetime")
      */
     private $updatedAt;
@@ -404,17 +404,17 @@ class SynthesisElement
     /**
      * @return mixed
      */
-    public function isPublished()
+    public function isEnabled()
     {
-        return $this->published;
+        return $this->enabled;
     }
 
     /**
-     * @param mixed $published
+     * @param mixed $enabled
      */
-    public function setPublished($published)
+    public function setEnabled($enabled)
     {
-        $this->published = $published;
+        $this->enabled = $enabled;
     }
 
     /**
@@ -537,17 +537,6 @@ class SynthesisElement
     public function hasLinkedData()
     {
         return $this->linkedDataClass && $this->linkedDataId;
-    }
-
-    public function getPublishedChildren()
-    {
-        $children = new ArrayCollection();
-        foreach ($children as $child) {
-            if ($child->getArchived() && $child->getPublished) {
-                $children->add($child);
-            }
-        }
-        return $children;
     }
 
     // ************************* Lifecycle ***********************************

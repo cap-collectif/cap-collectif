@@ -14,7 +14,7 @@ class SynthesisElementHandler
     protected $em;
     protected $logManager;
 
-    protected static $types = ['all', 'archived', 'new', 'unpublished', 'published', 'tree'];
+    protected static $types = ['all', 'archived', 'new', 'unpublished', 'root'];
 
     public function __construct(EntityManager $em, LogManager $logManager)
     {
@@ -22,9 +22,9 @@ class SynthesisElementHandler
         $this->logManager = $logManager;
     }
 
-    protected function getTypeConditions($type = null)
+    public function getTypeConditions($type = null)
     {
-        if ($type === null || !in_array($type, self::$types)) {
+        if ($type !== null && !in_array($type, self::$types)) {
             throw new NotFoundHttpException();
         }
 
@@ -34,23 +34,18 @@ class SynthesisElementHandler
                 break;
             case 'new':
                 $conditions['archived'] = false;
+                $conditions['enabled'] = true;
                 break;
             case 'unpublished':
-                $conditions['archived'] = true;
-                $conditions['published'] = false;
+                $conditions['enabled'] = false;
                 break;
             case 'archived':
                 $conditions['archived'] = true;
+                $conditions['enabled'] = true;
                 break;
-            case 'published':
-                $conditions['archived'] = true;
-                $conditions['published'] = true;
-                break;
-            case 'tree':
+            case 'root':
                 $conditions['parent'] = null;
-                $conditions['archived'] = true;
-                $conditions['published'] = true;
-                break;
+                $conditions['enabled'] = true;
             default:
                 break;
         }

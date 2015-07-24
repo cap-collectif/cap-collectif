@@ -12,7 +12,7 @@ const ElementBlock = React.createClass({
   mixins: [ReactIntl.IntlMixin],
 
   getNotationStarsClasses() {
-    const notation = this.props.element.notation;
+    const notation = this.props.element.notation ? this.props.element.notation : 0;
     let classes = [];
     for (let i = 0; i < 5; i++) {
       if (i < notation) {
@@ -31,32 +31,30 @@ const ElementBlock = React.createClass({
   },
 
   renderNotationStars() {
-    if (this.props.element.notation !== null) {
-      const classes = this.getNotationStarsClasses();
-      return (
-        <span className="element__notation">
-          <span id="notation-star-1" className={classes[0]}><i className="cap cap-star-1"></i></span>
-          <span id="notation-star-2" className={classes[1]}><i className="cap cap-star-1"></i></span>
-          <span id="notation-star-3" className={classes[2]}><i className="cap cap-star-1"></i></span>
-          <span id="notation-star-4" className={classes[3]}><i className="cap cap-star-1"></i></span>
-          <span id="notation-star-5" className={classes[4]}><i className="cap cap-star-1"></i></span>
-        </span>
-      );
-    }
+    const classes = this.getNotationStarsClasses();
+    return (
+      <span className="element__notation">
+        <span id="notation-star-1" className={classes[0]}><i className="cap cap-star-1"></i></span>
+        <span id="notation-star-2" className={classes[1]}><i className="cap cap-star-1"></i></span>
+        <span id="notation-star-3" className={classes[2]}><i className="cap cap-star-1"></i></span>
+        <span id="notation-star-4" className={classes[3]}><i className="cap cap-star-1"></i></span>
+        <span id="notation-star-5" className={classes[4]}><i className="cap cap-star-1"></i></span>
+      </span>
+    );
   },
 
   renderStatus() {
-    if (this.props.element.archived) {
-      if (this.props.element.published) {
-        return (
-          <div className="element__status">
-            <i className="element__status-icon icon--green cap-check-4"></i>
-          </div>
-        );
-      }
+    if (!this.props.element.enabled) {
       return (
         <div className="element__status">
           <i className="element__status-icon icon--grey cap-delete-2"></i>
+        </div>
+      );
+    }
+    if (this.props.element.archived) {
+      return (
+        <div className="element__status">
+          <i className="element__status-icon icon--green cap-check-4"></i>
         </div>
       );
     }
@@ -83,7 +81,9 @@ const ElementBlock = React.createClass({
         <div className="element__data">
           <p className="element__user excerpt  small">
             {this.renderAuthor()} {this.renderDate()}
-            {this.renderNotationStars()}
+            <span className="element__notation">
+                {this.renderNotationStars()}
+            </span>
           </p>
           <h3 className="element__title ">
             <ElementTitle element={element} />
