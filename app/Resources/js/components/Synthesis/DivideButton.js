@@ -1,3 +1,5 @@
+const Button = ReactBootstrap.Button;
+
 const DivideButton = React.createClass({
   propTypes: {
     element: React.PropTypes.object,
@@ -7,7 +9,7 @@ const DivideButton = React.createClass({
   render() {
     return (
       <div className="element__action">
-        <button type="button" className="element__action-divide btn btn-default btn-lg"><i className="cap cap-scissor-1"></i></button>
+        <Button bsSize="large" type="button" className="element__action-divide"><i className="cap cap-scissor-1"></i></Button>
       </div>
     );
   },

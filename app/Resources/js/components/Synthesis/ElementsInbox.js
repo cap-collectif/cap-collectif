@@ -44,7 +44,7 @@ const ElementsInbox = React.createClass({
   },
 
   onChange() {
-    if (SynthesisElementStore.isInboxSync[this.props.params.type]) {
+    if (!SynthesisElementStore.isProcessing && SynthesisElementStore.isInboxSync[this.props.params.type]) {
       this.setState({
         elements: SynthesisElementStore.elements[this.props.params.type],
         isLoading: false,

@@ -1,5 +1,7 @@
 import SynthesisElementActions from '../../actions/SynthesisElementActions';
 
+const Button = ReactBootstrap.Button;
+
 const IgnoreButton = React.createClass({
   propTypes: {
     synthesis: React.PropTypes.object,
@@ -10,7 +12,7 @@ const IgnoreButton = React.createClass({
   render() {
     return (
       <div className="element__action">
-        <button type="button" className="element__action-ignore btn btn-lg btn-default" onClick={this.ignore.bind(this)}><i className="cap cap-delete-2"></i></button>
+        <Button bsSize="large" type="button" className="element__action-ignore" onClick={this.ignore.bind(this)}><i className="cap cap-delete-2"></i></Button>
       </div>
     );
   },
