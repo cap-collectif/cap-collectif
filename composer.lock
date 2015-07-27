@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "ef045098dd65bee3b172e6fc89fab4c6",
+    "hash": "369c4799519719fe7feebdf0fcba88c1",
     "packages": [
         {
             "name": "behat/transliterator",
@@ -315,16 +315,16 @@
         },
         {
             "name": "doctrine/common",
-            "version": "2.5.x-dev",
+            "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/common.git",
-                "reference": "26727ba78de21a824dcbfa5a8ab52c21fe7d71d5"
+                "reference": "ff72726b0876638fa7db2f28b0f26e3f1f6656ca"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/common/zipball/26727ba78de21a824dcbfa5a8ab52c21fe7d71d5",
-                "reference": "26727ba78de21a824dcbfa5a8ab52c21fe7d71d5",
+                "url": "https://api.github.com/repos/doctrine/common/zipball/ff72726b0876638fa7db2f28b0f26e3f1f6656ca",
+                "reference": "ff72726b0876638fa7db2f28b0f26e3f1f6656ca",
                 "shasum": ""
             },
             "require": {
@@ -341,7 +341,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.5.x-dev"
+                    "dev-master": "2.6.x-dev"
                 }
             },
             "autoload": {
@@ -384,7 +384,7 @@
                 "persistence",
                 "spl"
             ],
-            "time": "2015-04-15 22:02:48"
+            "time": "2015-05-13 13:35:24"
         },
         {
             "name": "doctrine/data-fixtures",
@@ -445,38 +445,30 @@
         },
         {
             "name": "doctrine/dbal",
-            "version": "dev-master",
+            "version": "2.4.x-dev",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/dbal.git",
-                "reference": "a0a43c0eb15ed66e71f8160b6bb25f4071ed22ca"
+                "reference": "4845507add849eea92e88f38882d826301e22cfb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/dbal/zipball/8f0b6b70ce07ccc50c9fce8a131373fc9a8bbd17",
-                "reference": "a0a43c0eb15ed66e71f8160b6bb25f4071ed22ca",
+                "url": "https://api.github.com/repos/doctrine/dbal/zipball/4845507add849eea92e88f38882d826301e22cfb",
+                "reference": "4845507add849eea92e88f38882d826301e22cfb",
                 "shasum": ""
             },
             "require": {
-                "doctrine/common": ">=2.4,<2.6-dev",
+                "doctrine/common": "~2.4",
                 "php": ">=5.3.2"
             },
             "require-dev": {
-                "phpunit/phpunit": "4.*",
-                "symfony/console": "2.*"
+                "phpunit/phpunit": "3.7.*",
+                "symfony/console": "~2.0"
             },
             "suggest": {
                 "symfony/console": "For helpful console commands such as SQL execution and import of files."
             },
-            "bin": [
-                "bin/doctrine-dbal"
-            ],
             "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "2.6.x-dev"
-                }
-            },
             "autoload": {
                 "psr-0": {
                     "Doctrine\\DBAL\\": "lib/"
@@ -512,7 +504,7 @@
                 "persistence",
                 "queryobject"
             ],
-            "time": "2015-05-22 15:34:58"
+            "time": "2015-04-30 17:02:20"
         },
         {
             "name": "doctrine/doctrine-bundle",
@@ -2854,12 +2846,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Seldaek/monolog.git",
-                "reference": "c5b08724f4b11fd90a2c36a64d4868bcee7ba6a4"
+                "reference": "e4f45be5dcfeb54c45f85b50cdbb3ef8a2bfbd81"
             },
             "dist": {
                 "type": "zip",
                 "url": "https://api.github.com/repos/Seldaek/monolog/zipball/e4f45be5dcfeb54c45f85b50cdbb3ef8a2bfbd81",
-                "reference": "c5b08724f4b11fd90a2c36a64d4868bcee7ba6a4",
+                "reference": "e4f45be5dcfeb54c45f85b50cdbb3ef8a2bfbd81",
                 "shasum": ""
             },
             "require": {
@@ -2922,7 +2914,7 @@
                 "logging",
                 "psr-3"
             ],
-            "time": "2015-07-14 09:27:59"
+            "time": "2015-07-20 18:31:46"
         },
         {
             "name": "namshi/jose",
@@ -3774,16 +3766,16 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sensiolabs/SensioDistributionBundle.git",
-                "reference": "f1758b30096202aeede61f79a1dffd69da091517"
+                "reference": "5d946ffe02aad32ceef2a13388d57acee1c9a082"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sensiolabs/SensioDistributionBundle/zipball/f1758b30096202aeede61f79a1dffd69da091517",
-                "reference": "f1758b30096202aeede61f79a1dffd69da091517",
+                "url": "https://api.github.com/repos/sensiolabs/SensioDistributionBundle/zipball/5d946ffe02aad32ceef2a13388d57acee1c9a082",
+                "reference": "5d946ffe02aad32ceef2a13388d57acee1c9a082",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.3.3",
+                "php": ">=5.3.9",
                 "sensiolabs/security-checker": "~2.0",
                 "symfony/class-loader": "~2.2",
                 "symfony/framework-bundle": "~2.3",
@@ -3802,7 +3794,7 @@
             "type": "symfony-bundle",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "3.0.x-dev"
+                    "dev-master": "4.0.x-dev"
                 }
             },
             "autoload": {
@@ -3825,7 +3817,7 @@
                 "configuration",
                 "distribution"
             ],
-            "time": "2015-06-05 22:32:22"
+            "time": "2015-07-27 10:03:48"
         },
         {
             "name": "sensio/framework-extra-bundle",
@@ -7023,16 +7015,16 @@
         },
         {
             "name": "phpunit/php-timer",
-            "version": "1.0.6",
+            "version": "1.0.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/php-timer.git",
-                "reference": "83fe1bdc5d47658b727595c14da140da92b3d66d"
+                "reference": "3e82f4e9fc92665fafd9157568e4dcb01d014e5b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/php-timer/zipball/83fe1bdc5d47658b727595c14da140da92b3d66d",
-                "reference": "83fe1bdc5d47658b727595c14da140da92b3d66d",
+                "url": "https://api.github.com/repos/sebastianbergmann/php-timer/zipball/3e82f4e9fc92665fafd9157568e4dcb01d014e5b",
+                "reference": "3e82f4e9fc92665fafd9157568e4dcb01d014e5b",
                 "shasum": ""
             },
             "require": {
@@ -7060,7 +7052,7 @@
             "keywords": [
                 "timer"
             ],
-            "time": "2015-06-13 07:35:30"
+            "time": "2015-06-21 08:01:12"
         },
         {
             "name": "phpunit/php-token-stream",
@@ -7288,12 +7280,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/comparator.git",
-                "reference": "1dd8869519a225f7f2b9eb663e225298fade819e"
+                "reference": "937efb279bd37a375bcadf584dec0726f84dbf22"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/comparator/zipball/dee3fd1828677b2182c076ad2caecbb5c7bdbf1c",
-                "reference": "1dd8869519a225f7f2b9eb663e225298fade819e",
+                "url": "https://api.github.com/repos/sebastianbergmann/comparator/zipball/937efb279bd37a375bcadf584dec0726f84dbf22",
+                "reference": "937efb279bd37a375bcadf584dec0726f84dbf22",
                 "shasum": ""
             },
             "require": {
@@ -7307,7 +7299,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.1.x-dev"
+                    "dev-master": "1.2.x-dev"
                 }
             },
             "autoload": {
@@ -7344,7 +7336,7 @@
                 "compare",
                 "equality"
             ],
-            "time": "2015-01-29 16:28:08"
+            "time": "2015-07-26 15:48:44"
         },
         {
             "name": "sebastian/diff",
@@ -7960,7 +7952,7 @@
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
-        "php": ">=5.3.3"
+        "php": ">=5.3.9"
     },
     "platform-dev": []
 }

@@ -25,7 +25,7 @@ class SynthesisDivision
 
     /**
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Synthesis\SynthesisElement", cascade={"persist"})
-     * @ORM\JoinColumn(name="original_element_id", referencedColumnName="id")
+     * @ORM\JoinColumn(name="original_element_id", referencedColumnName="id", onDelete="CASCADE")
      * @Gedmo\Versioned
      */
     private $originalElement;
