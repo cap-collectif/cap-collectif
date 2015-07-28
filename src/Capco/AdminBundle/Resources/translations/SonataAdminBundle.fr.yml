@@ -306,6 +306,7 @@ admin:
       body: Contenu
       step: Étape
       opinion_type: Type de proposition
+      position: Position
       is_enabled: Publié
       is_trashed: Dans la corbeille
       updated_at: Mise à jour
@@ -327,6 +328,7 @@ admin:
       color: Couleur
       help_text: Texte d'aide pour les votes
       opinions: Propositions
+      default_filter: Filtre par défaut
       is_enabled: Contribuable
       created_at: Création
       updated_at: Mise à jour

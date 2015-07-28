@@ -60,15 +60,17 @@ class ConsultationController extends Controller
         $em = $this->getDoctrine()->getManager();
 
         if (false === $currentStep->canDisplay()) {
-            throw $this->createNotFoundException($this->get('translator')->trans('consultation.error.not_found', array(), 'CapcoAppBundle'));
+            throw $this->createNotFoundException($this->get('translator')->trans('consultation.error.not_found', [], 'CapcoAppBundle'));
         }
 
         // Redirect if there is only one opinion type allowed
         if (count($currentStep->getAllowedTypes()) == 1) {
-            return $this->redirect($this->generateUrl('app_consultation_show_opinions', [
+            $opinionType = $currentStep->getAllowedTypes()->first();
+            return $this->redirect($this->generateUrl('app_consultation_show_opinions_sorted', [
                 'consultationSlug' => $consultation->getSlug(),
                 'stepSlug' => $currentStep->getSlug(),
-                'opinionTypeSlug' => $currentStep->getAllowedTypes()->first()->getSlug(),
+                'opinionTypeSlug' => $opinionType->getSlug(),
+                'opinionsSort' => $opinionType->getDefaultFilter(),
             ]));
         }
 
@@ -103,12 +105,19 @@ class ConsultationController extends Controller
      */
     public function showOpinionsAction(Consultation $consultation, ConsultationStep $currentStep)
     {
-        $blocks = null;
+        $blocks = [];
         if (count($currentStep->getAllowedTypes()) > 0) {
-            $blocks = $this->getDoctrine()->getRepository('CapcoAppBundle:OpinionType')->getAllowedWithOpinionCount($currentStep);
+
+            $blocks = $this->getDoctrine()
+                           ->getRepository('CapcoAppBundle:OpinionType')
+                           ->getAllowedWithOpinionCount($currentStep);
+
             foreach ($blocks as $key => $block) {
-                $blocks[$key]['opinions'] = $this->getDoctrine()->getRepository('CapcoAppBundle:Opinion')->getByConsultationStepAndOpinionTypeOrdered($currentStep, $block['id']);
-                $form = $this->createForm(new OpinionsSortType($block['slug']));
+                $blocks[$key]['opinions'] = $this->getDoctrine()
+                                                 ->getRepository('CapcoAppBundle:Opinion')
+                                                 ->getByConsultationStepAndOpinionTypeOrdered($currentStep, $block['id'], 5, $block['defaultFilter'])
+                                            ;
+                $form = $this->createForm(new OpinionsSortType($block));
                 $blocks[$key]['sortForm'] = $form->createView();
             }
         }
@@ -122,7 +131,7 @@ class ConsultationController extends Controller
 
     /**
      * @Route("/consultations/{consultationSlug}/consultation/{stepSlug}/opinions/{opinionTypeSlug}/{page}", name="app_consultation_show_opinions", requirements={"page" = "\d+"}, defaults={"page" = 1})
-     * @Route("/consultations/{consultationSlug}/consultation/{stepSlug}/opinions/{opinionTypeSlug}/{opinionsSort}/{page}", name="app_consultation_show_opinions_sorted", requirements={"page" = "\d+","opinionsSort" = "date|comments|votes"}, defaults={"page" = 1})
+     * @Route("/consultations/{consultationSlug}/consultation/{stepSlug}/opinions/{opinionTypeSlug}/{opinionsSort}/{page}", name="app_consultation_show_opinions_sorted", requirements={"page" = "\d+","opinionsSort" = "date|comments|votes|positions"}, defaults={"page" = 1})
      * @ParamConverter("consultation", class="CapcoAppBundle:Consultation", options={"mapping": {"consultationSlug": "slug"}})
      * @ParamConverter("currentStep", class="CapcoAppBundle:ConsultationStep", options={"mapping": {"stepSlug": "slug"}})
      * @ParamConverter("opinionType", class="CapcoAppBundle:OpinionType", options={"mapping": {"opinionTypeSlug": "slug"}})
@@ -140,14 +149,15 @@ class ConsultationController extends Controller
     public function showByTypeAction(Consultation $consultation, ConsultationStep $currentStep, OpinionType $opinionType, $page, Request $request, $opinionsSort = null)
     {
         if (false == $currentStep->canDisplay()) {
-            throw $this->createNotFoundException($this->get('translator')->trans('consultation.error.not_found', array(), 'CapcoAppBundle'));
+            throw $this->createNotFoundException($this->get('translator')->trans('consultation.error.not_found', [], 'CapcoAppBundle'));
         }
 
         if (false == $currentStep->allowType($opinionType)) {
             throw new NotFoundHttpException('This type does not exist for this consultation');
         }
 
-        $form = $this->createForm(new OpinionsSortType());
+        $sortData = ['slug' => $opinionType->getSlug(), 'defaultFilter' => $opinionsSort];
+        $form = $this->createForm(new OpinionsSortType($sortData));
 
         if ('POST' === $request->getMethod()) {
             $form->handleRequest($request);
@@ -196,11 +206,11 @@ class ConsultationController extends Controller
     public function showTrashedAction(Consultation $consultation)
     {
         if (false == $consultation->canDisplay()) {
-            throw $this->createNotFoundException($this->get('translator')->trans('consultation.error.not_found', array(), 'CapcoAppBundle'));
+            throw $this->createNotFoundException($this->get('translator')->trans('consultation.error.not_found', [], 'CapcoAppBundle'));
         }
 
         if (false === $this->get('security.authorization_checker')->isGranted('ROLE_USER')) {
-            throw new AccessDeniedException($this->get('translator')->trans('error.access_restricted', array(), 'CapcoAppBundle'));
+            throw new AccessDeniedException($this->get('translator')->trans('error.access_restricted', [], 'CapcoAppBundle'));
         }
 
         $opinions = $this->getDoctrine()->getRepository('CapcoAppBundle:Opinion')->getTrashedByConsultation($consultation);
@@ -230,11 +240,11 @@ class ConsultationController extends Controller
     public function downloadAction($consultation, $step, $format)
     {
         if (!$consultation || !$step) {
-            throw $this->createNotFoundException($this->get('translator')->trans('consultation.error.not_found', array(), 'CapcoAppBundle'));
+            throw $this->createNotFoundException($this->get('translator')->trans('consultation.error.not_found', [], 'CapcoAppBundle'));
         }
 
         if (!$consultation->isExportable() && !$this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')) {
-            throw new AccessDeniedException($this->get('translator')->trans('consultation.error.not_exportable', array(), 'CapcoAppBundle'));
+            throw new AccessDeniedException($this->get('translator')->trans('consultation.error.not_exportable', [], 'CapcoAppBundle'));
         }
 
         $resolver = $this->get('capco.consultation.download.resolver');

@@ -75,6 +75,9 @@ class OpinionTypeAdmin extends Admin
             ->add('updatedAt', 'datetime', array(
                 'label' => 'admin.fields.opinion_type.updated_at',
             ))
+            ->add('defaultFilter', null, array(
+                'label' => 'admin.fields.opinion_type.default_filter',
+            ))
             ->add('position', null, array(
                 'label' => 'admin.fields.opinion_type.position',
             ))
@@ -106,6 +109,11 @@ class OpinionTypeAdmin extends Admin
             ))
             ->add('position', null, array(
                 'label' => 'admin.fields.opinion_type.position',
+            ))
+            ->add('defaultFilter', 'choice', array(
+                'label' => 'admin.fields.opinion_type.default_filter',
+                'choices' => Opinion::$sortCriteras,
+                'translation_domain' => 'CapcoAppBundle',
             ))
             ->add('color', 'choice', array(
                 'label' => 'admin.fields.opinion_type.color',
@@ -141,6 +149,9 @@ class OpinionTypeAdmin extends Admin
             ))
             ->add('isEnabled', null, array(
                 'label' => 'admin.fields.opinion_type.is_enabled',
+            ))
+            ->add('defaultFilter', null, array(
+                'label' => 'admin.fields.opinion_type.default_filter',
             ))
             ->add('position', null, array(
                 'label' => 'admin.fields.opinion_type.position',

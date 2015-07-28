@@ -20,6 +20,7 @@ class Opinion
         'votes' => 'opinion.sort.votes',
         'comments' => 'opinion.sort.comments',
         'date' => 'opinion.sort.date',
+        'positions' => 'opinion.sort.positions',
     ];
 
     /**
@@ -93,6 +94,13 @@ class Opinion
      * @ORM\Column(name="trashed_reason", type="text", nullable=true)
      */
     private $trashedReason = null;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="position", type="integer")
+     */
+    private $position = 0;
 
     /**
      * @var int
@@ -224,6 +232,26 @@ class Opinion
     public function setId($id)
     {
         $this->id = $id;
+    }
+
+    /**
+     * Get position.
+     *
+     * @return int
+     */
+    public function getPosition()
+    {
+        return $this->position;
+    }
+
+    /**
+     * @param int $position
+     */
+    public function setPosition($position)
+    {
+        $this->position = $position;
+
+        return $this;
     }
 
     /**

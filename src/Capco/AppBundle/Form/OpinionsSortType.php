@@ -8,11 +8,11 @@ use Capco\AppBundle\Entity\Opinion;
 
 class OpinionsSortType extends AbstractType
 {
-    protected $opinionType;
+    protected $data;
 
-    public function __construct($opinionType = null)
+    public function __construct($data = null)
     {
-        $this->opinionType = $opinionType;
+        $this->data = $data;
     }
 
     /**
@@ -21,19 +21,30 @@ class OpinionsSortType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder
-            ->add('opinionsSort', 'choice', array(
-                'required' => false,
+        $data = [
+            'required' => false,
+            'choices' => Opinion::$sortCriterias,
+            'translation_domain' => 'CapcoAppBundle',
+            'label' => 'opinion.sort.label',
+            'empty_value' => false,
+        ];
+
+        if ($this->data) {
+            dump($this->data['defaultFilter']);
+            $data = [
+                'required' => true,
                 'choices' => Opinion::$sortCriterias,
                 'translation_domain' => 'CapcoAppBundle',
                 'label' => 'opinion.sort.label',
-                'empty_value' => false,
-            ))
-        ;
+                'data' => $this->data['defaultFilter'],
+            ];
+        }
 
-        if (null !== $this->opinionType) {
+        $builder->add('opinionsSort', 'choice', $data);
+
+        if ($this->data) {
             $builder->add('opinionType', 'hidden', array(
-                'data' => $this->opinionType,
+                'data' => $this->data['slug'],
             ));
         }
     }

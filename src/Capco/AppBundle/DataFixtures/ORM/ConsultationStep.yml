@@ -24,3 +24,9 @@ Capco\AppBundle\Entity\ConsultationStep:
         startAt: <dateTimeBetween('-40 days', 'now')>
         endAt: <dateTimeBetween('now', '+10 days')>
         allowedTypes: [@opinionType2]
+    cstep5:
+        title: Elaboration de la Loi
+        isEnabled: true
+        startAt: <dateTimeBetween('-40 days', 'now')>
+        endAt: <dateTimeBetween('now', '+10 days')>
+        allowedTypes: [@opinionType5]

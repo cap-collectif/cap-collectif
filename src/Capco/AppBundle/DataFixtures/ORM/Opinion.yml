@@ -135,3 +135,40 @@ Capco\AppBundle\Entity\Opinion:
         isTrashed: false
         Author: @user2
         OpinionType: @opinionType3
+
+
+    opinion57:
+        step: @cstep5
+        title: Article 1
+        body: |
+             <p><text(100)></p>
+             <p><text(300)></p>
+        isEnabled: true
+        isTrashed: false
+        Author: @user2
+        OpinionType: @opinionType5
+        position: 1
+
+    opinion58:
+        step: @cstep5
+        title: Article 3
+        body: |
+             <p><text(100)></p>
+             <p><text(300)></p>
+        isEnabled: true
+        isTrashed: false
+        Author: @user2
+        OpinionType: @opinionType5
+        position: 3
+
+    opinion59:
+        step: @cstep5
+        title: Article 2
+        body: |
+             <p><text(100)></p>
+             <p><text(300)></p>
+        isEnabled: true
+        isTrashed: false
+        Author: @user2
+        OpinionType: @opinionType5
+        position: 2

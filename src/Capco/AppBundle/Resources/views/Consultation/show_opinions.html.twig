@@ -1,9 +1,11 @@
-{% if (blocks|length > 0) %}
+{% if blocks|length > 0 %}
     {% for block in blocks %}
     <div class="block  block--bordered">
         <div class="opinion  opinion--{{ block.color }}  opinion--default">
             <div class="opinion__header  opinion__header--mobile-centered">
-                <h2 class="pull-left  h4  opinion__header__title"> {{ block.title }} <span class="badge">{{ block.total_opinions_count }}</span></h2>
+                <h2 class="pull-left  h4  opinion__header__title">
+                    {{ block.title }} <span class="badge">{{ block.total_opinions_count }}</span>
+                </h2>
                 <div class="pull-right  opinion__header__filter">
                     {{ form_start(block.sortForm) }}
                     {{ form_label(block.sortForm.opinionsSort, null, {'label_attr':{"class":"control-label  sr-only"} }) }}
@@ -33,7 +35,7 @@
             {% endif %}
         {% else %}
             <div class="opinion-type__empty-block  text-center">
-                <p class="icon  cap-bubble-attention-6"></p>
+                <p class="icon cap-bubble-attention-6"></p>
                 <p>{{ 'opinion.show.none'|trans({}, 'CapcoAppBundle') }}</p>
             </div>
         {% endif %}

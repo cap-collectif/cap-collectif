@@ -515,6 +515,7 @@ opinion:
     submit: Signaler
     reported: Signalé
   sort:
+    positions: Positions
     date: Les plus récents
     votes: Les plus votés
     comments: Les plus commentés
@@ -557,6 +558,11 @@ opinion_type:
     bluedark: Bleu foncé
     default: Gris
     white: Blanc
+  filters:
+    date: Date de création
+    votes: Les plus votés
+    comments: Les plus commentés
+    position: Position
 
 page:
   error:

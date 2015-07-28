@@ -176,13 +176,15 @@ class OpinionRepository extends EntityRepository
             ->orderBy('o.pinned', 'DESC')
         ;
 
-        if (null != $opinionsSort) {
+        if ($opinionsSort) {
             if ($opinionsSort == 'date') {
                 $qb->addOrderBy('o.updatedAt', 'DESC');
             } elseif ($opinionsSort == 'votes') {
                 $qb->addOrderBy('vnb', 'DESC');
             } elseif ($opinionsSort == 'comments') {
                 $qb->addOrderBy('o.argumentsCount', 'DESC');
+            } elseif ($opinionsSort == 'positions') {
+                $qb->addOrderBy('o.position', 'ASC');
             }
         }
 
@@ -204,7 +206,7 @@ class OpinionRepository extends EntityRepository
      *
      * @return mixed
      */
-    public function getByConsultationStepAndOpinionTypeOrdered($step, $ot, $limit = 5)
+    public function getByConsultationStepAndOpinionTypeOrdered($step, $ot, $limit = 5, $opinionsSort = null)
     {
         $qb = $this->getIsEnabledQueryBuilder('o')
             ->addSelect('ot', 'aut', '(o.voteCountMitige + o.voteCountOk + o.voteCountNok) as HIDDEN vnb')
@@ -217,9 +219,22 @@ class OpinionRepository extends EntityRepository
             ->setParameter('ot', $ot)
             ->setParameter('notTrashed', false)
             ->orderBy('o.pinned', 'DESC')
-            ->addOrderBy('vnb', 'DESC')
-            ->setMaxResults($limit)
-            ;
+        ;
+
+        if ($opinionsSort) {
+            if ($opinionsSort == 'date') {
+                $qb->addOrderBy('o.updatedAt', 'DESC');
+            } elseif ($opinionsSort == 'votes') {
+                $qb->addOrderBy('vnb', 'DESC');
+            } elseif ($opinionsSort == 'comments') {
+                $qb->addOrderBy('o.argumentsCount', 'DESC');
+            } elseif ($opinionsSort == 'positions') {
+                $qb->addOrderBy('o.position', 'ASC');
+            }
+        }
+
+        $qb->addOrderBy('vnb', 'DESC')
+            ->setMaxResults($limit);
 
         return $qb
             ->getQuery()

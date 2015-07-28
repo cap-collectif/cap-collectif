@@ -100,6 +100,13 @@ class OpinionType
     private $color;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="default_filter", type="string", length=50)
+     */
+    private $defaultFilter;
+
+    /**
      * @var bool
      *
      * @ORM\Column(name="is_enabled", type="boolean")
@@ -239,6 +246,30 @@ class OpinionType
     public function setPosition($position)
     {
         $this->position = $position;
+
+        return $this;
+    }
+
+    /**
+     * Get defaultFilter.
+     *
+     * @return int
+     */
+    public function getDefaultFilter()
+    {
+        return $this->defaultFilter;
+    }
+
+    /**
+     * Set defaultFilter.
+     *
+     * @param int $defaultFilter
+     *
+     * @return OpinionType
+     */
+    public function setDefaultFilter($defaultFilter)
+    {
+        $this->defaultFilter = $defaultFilter;
 
         return $this;
     }

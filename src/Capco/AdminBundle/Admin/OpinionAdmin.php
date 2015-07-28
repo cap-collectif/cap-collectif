@@ -77,6 +77,9 @@ class OpinionAdmin extends Admin
                 'mapped' => false,
                 'template' => 'CapcoAdminBundle:Opinion:vote_count_list_field.html.twig',
             ))
+            ->add('position', null, array(
+                'label' => 'admin.fields.opinion.position',
+            ))
             ->add('argumentsCount', null, array(
                 'label' => 'admin.fields.opinion.argument_count',
             ))
@@ -128,6 +131,9 @@ class OpinionAdmin extends Admin
                 'label' => 'admin.fields.opinion.step',
                 'required' => true,
             ))
+            ->add('position', null, array(
+                'label' => 'admin.fields.opinion.position',
+            ))
             ->add('OpinionType', 'sonata_type_model', array(
                 'label' => 'admin.fields.opinion.opinion_type',
             ))
@@ -168,6 +174,9 @@ class OpinionAdmin extends Admin
             ))
             ->add('step', null, array(
                 'label' => 'admin.fields.opinion.step',
+            ))
+            ->add('position', null, array(
+                'label' => 'admin.fields.opinion.position',
             ))
             ->add('OpinionType', null, array(
                 'label' => 'admin.fields.opinion.opinion_type',
