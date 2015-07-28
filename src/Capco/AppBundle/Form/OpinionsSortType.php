@@ -30,7 +30,6 @@ class OpinionsSortType extends AbstractType
         ];
 
         if ($this->data) {
-            dump($this->data['defaultFilter']);
             $data = [
                 'required' => true,
                 'choices' => Opinion::$sortCriterias,

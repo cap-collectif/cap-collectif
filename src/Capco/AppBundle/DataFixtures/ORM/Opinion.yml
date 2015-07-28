@@ -136,7 +136,6 @@ Capco\AppBundle\Entity\Opinion:
         Author: @user2
         OpinionType: @opinionType3
 
-
     opinion57:
         step: @cstep5
         title: Article 1
@@ -148,7 +147,6 @@ Capco\AppBundle\Entity\Opinion:
         Author: @user2
         OpinionType: @opinionType5
         position: 1
-
     opinion58:
         step: @cstep5
         title: Article 3
@@ -160,7 +158,6 @@ Capco\AppBundle\Entity\Opinion:
         Author: @user2
         OpinionType: @opinionType5
         position: 3
-
     opinion59:
         step: @cstep5
         title: Article 2

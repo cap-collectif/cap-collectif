@@ -558,11 +558,6 @@ opinion_type:
     bluedark: Bleu foncé
     default: Gris
     white: Blanc
-  filters:
-    date: Date de création
-    votes: Les plus votés
-    comments: Les plus commentés
-    position: Position
 
 page:
   error:
