@@ -56,7 +56,7 @@
         "egeloen/ckeditor-bundle": "~3.0@dev",
         "mewesk/twig-excel-bundle": "~1.0@dev",
         "friendsofsymfony/elastica-bundle": "^3.2@dev",
-        "jms/serializer-bundle": "0.13.*@dev",
+        "jms/serializer-bundle": "~1.0@dev",
         "nelmio/api-doc-bundle": "~2.9@dev",
         "friendsofsymfony/rest-bundle": "1.5.*",
         "lexik/jwt-authentication-bundle": "~1.0@dev",
@@ -75,7 +75,6 @@
         "bossa/phpspec2-expect": "*",
         "phpspec/phpspec": "~2.0",
         "guzzlehttp/guzzle": "~5.0@dev",
-        "phpunit/phpunit": "~4.8@dev",
         "coduo/php-matcher": "1.1.*",
         "jolicode/jolinotif": "^1.0@dev"
     },
