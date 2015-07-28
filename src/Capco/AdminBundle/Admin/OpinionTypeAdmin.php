@@ -41,6 +41,9 @@ class OpinionTypeAdmin extends Admin
             ->add('isEnabled', null, array(
                 'label' => 'admin.fields.opinion_type.is_enabled',
             ))
+            ->add('versionable', null, array(
+                'label' => 'admin.fields.opinion_type.versionable',
+            ))
             ->add('updatedAt', null, array(
                 'label' => 'admin.fields.opinion_type.updated_at',
             ))
@@ -73,6 +76,10 @@ class OpinionTypeAdmin extends Admin
                 'label' => 'admin.fields.opinion_type.is_enabled',
                 'editable' => true,
             ))
+            ->add('versionable', null, array(
+                'label' => 'admin.fields.opinion_type.versionable',
+                'editable' => true,
+            ))
             ->add('updatedAt', 'datetime', array(
                 'label' => 'admin.fields.opinion_type.updated_at',
             ))
@@ -103,6 +110,10 @@ class OpinionTypeAdmin extends Admin
             ))
             ->add('isEnabled', null, array(
                 'label' => 'admin.fields.opinion_type.is_enabled',
+                'required' => false,
+            ))
+            ->add('versionable', null, array(
+                'label' => 'admin.fields.opinion_type.versionable',
                 'required' => false,
             ))
             ->add('shortName', null, array(
@@ -153,6 +164,9 @@ class OpinionTypeAdmin extends Admin
             ))
             ->add('defaultFilter', null, array(
                 'label' => 'admin.fields.opinion_type.default_filter',
+            ))
+            ->add('versionable', null, array(
+                'label' => 'admin.fields.opinion_type.versionable',
             ))
             ->add('position', null, array(
                 'label' => 'admin.fields.opinion_type.position',

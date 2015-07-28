@@ -33,6 +33,11 @@ capco_api_posts:
   type: rest
   prefix: /api
 
+capco_api_opinions:
+  resource: "@CapcoAppBundle/Controller/Api/OpinionsController.php"
+  type: rest
+  prefix: /api
+
 capco_app:
     resource: "@CapcoAppBundle/Controller/Site"
     type:     annotation

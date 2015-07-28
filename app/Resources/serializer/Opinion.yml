@@ -1,0 +1,36 @@
+Capco\AppBundle\Entity\Opinion:
+    exclusion_policy: ALL
+    properties:
+        id:
+            expose: true
+            type: integer
+            groups: [Opinions]
+        title:
+            expose: true
+            type: string
+            groups: [Opinions]
+        body:
+            expose: true
+            type: string
+            groups: [Opinions]
+        createdAt:
+            expose: true
+            type: DateTime
+            groups: [Opinions]
+        updatedAt:
+            expose: true
+            type: DateTime
+            groups: [Opinions]
+        voteCount:
+            expose: true
+            type: integer
+            groups: [Opinions]
+        Author:
+            expose: true
+            type: Capco\UserBundle\Entity\User
+            serialized_name: author
+            groups: [Opinions, UserMedias]
+        isTrashed:
+            expose: true
+            type: boolean
+            groups: [Opinions]

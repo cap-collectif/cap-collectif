@@ -22,27 +22,10 @@ class OpinionsType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        if ($this->action === 'edit') {
-            $builder
-                ->add('confirm', 'checkbox', array(
-                    'mapped' => false,
-                    'label' => 'opinion.form.confirm',
-                    'required' => true,
-                    'constraints' => [new True(['message' => 'opinion.votes_not_confirmed'])]
-                ))
-            ;
-        }
-
         $builder
-            ->add('title', 'text', array(
-                'label' => 'opinion.form.title',
-                'required' => true,
-            ))
-            ->add('body', 'ckeditor', array(
-                'label' => 'opinion.form.body',
-                'required' => true,
-                'config_name' => 'user_editor',
-            ))
+            ->add('parent', null, ['required' => true])
+            ->add('title', null, ['required' => true])
+            ->add('body', null, ['required' => true])
         ;
     }
 
@@ -51,12 +34,11 @@ class OpinionsType extends AbstractType
      */
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
-        $resolver->setDefaults(array(
+        $resolver->setDefaults([
             'data_class' => 'Capco\AppBundle\Entity\Opinion',
-            'csrf_protection' => true,
-            'csrf_field_name' => '_token',
+            'csrf_protection' => false,
             'translation_domain' => 'CapcoAppBundle',
-        ));
+        ]);
     }
 
     /**
@@ -64,6 +46,6 @@ class OpinionsType extends AbstractType
      */
     public function getName()
     {
-        return 'capco_app_opinion';
+        return '';
     }
 }

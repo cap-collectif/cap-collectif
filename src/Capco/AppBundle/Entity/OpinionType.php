@@ -114,6 +114,13 @@ class OpinionType
     private $isEnabled;
 
     /**
+     * @var bool
+     *
+     * @ORM\Column(name="versionable", type="boolean")
+     */
+    private $versionable = false;
+
+    /**
      * @var string
      *
      * @ORM\Column(name="help_text", type="string", length=255, nullable=true)
@@ -382,6 +389,18 @@ class OpinionType
     public function setIsEnabled($isEnabled)
     {
         $this->isEnabled = $isEnabled;
+    }
+
+    public function isVersionable()
+    {
+        return $this->versionable;
+    }
+
+    public function setVersionable($versionable)
+    {
+        $this->versionable = $versionable;
+
+        return $this;
     }
 
     /**

@@ -188,6 +188,16 @@ class Opinion
     private $Reports;
 
     /**
+     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Opinion", inversedBy="versions", cascade={"persist"})
+     */
+    private $parent;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\Opinion", mappedBy="parent", cascade={"persist", "remove"})
+     */
+    private $versions;
+
+    /**
      * @var bool
      *
      * @ORM\Column(name="pinned", type="boolean")
@@ -200,6 +210,8 @@ class Opinion
         $this->Reports = new ArrayCollection();
         $this->arguments = new ArrayCollection();
         $this->Sources = new ArrayCollection();
+        $this->versions = new ArrayCollection();
+
         $this->updatedAt = new \Datetime();
         $this->createdAt = new \Datetime();
 
@@ -713,6 +725,39 @@ class Opinion
     public function removeReport(Reporting $report)
     {
         $this->Reports->removeElement($report);
+
+        return $this;
+    }
+
+    public function setParent(Opinion $parent)
+    {
+        $this->parent = $parent;
+
+        return $this;
+    }
+
+    public function getParent()
+    {
+        return $this->parent;
+    }
+
+    public function getVersions()
+    {
+        return $this->versions;
+    }
+
+    public function addVersion(Opinion $version)
+    {
+        if (!$this->versions->contains($version)) {
+            $this->versions->add($version);
+        }
+
+        return $this;
+    }
+
+    public function removeVersion(Opinion $version)
+    {
+        $this->versions->removeElement($version);
 
         return $this;
     }
