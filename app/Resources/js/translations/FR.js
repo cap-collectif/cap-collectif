@@ -32,6 +32,10 @@ export default {
             with_my_account: 'Commenter avec mon compte',
             without_account: 'Commenter sans créer de compte',
         },
+        opinion: {
+            no_new_version: 'Aucune nouvelle version proposée',
+            add_new_version: 'Proposer une nouvelle version',
+        },
         global: {
             more: 'Voir plus',
             answer: 'Répondre',

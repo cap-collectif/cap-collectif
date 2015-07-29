@@ -3,8 +3,6 @@ import OpinionVersionForm from './OpinionVersionForm';
 import OpinionActions from '../../actions/OpinionActions';
 import Fetcher from '../../services/Fetcher';
 
-const FormattedMessage = ReactIntl.FormattedMessage;
-
 const OpinionVersionsBox = React.createClass({
   propTypes: {
     opinion: React.PropTypes.number,
@@ -47,7 +45,7 @@ const OpinionVersionsBox = React.createClass({
   renderFilter() {
     if (this.state.count > 1) {
       return (
-        <div className="col-xs-offset-2 col-sm-4 hidden-xs">
+        <div className="col-xs-offset-4 col-xs-4 hidden-xs">
           <select ref="filter" className="h2 form-control" value={this.state.filter} onChange={() => this.updateSelectedValue()}>
             <option value="popular">{this.getIntlMessage('global.popular')}</option>
             <option value="last">{this.getIntlMessage('global.last')}</option>
@@ -62,13 +60,17 @@ const OpinionVersionsBox = React.createClass({
     return (
       <div className="">
         <div className="row">
+          <a className="btn btn-primary">
+              { this.getIntlMessage('opinion.add_new_version')}
+          </a>
           <OpinionVersionForm opinion={this.props.opinion} />
           { this.renderFilter() }
         </div>
         { this.renderLoader() }
-        <OpinionVersionList {...this.props}
-          versions={this.state.versions}
-        />
+        {!this.state.isLoading
+          ? <OpinionVersionList {...this.props} versions={this.state.versions} />
+          : <span />
+        }
       </div>
     );
   },

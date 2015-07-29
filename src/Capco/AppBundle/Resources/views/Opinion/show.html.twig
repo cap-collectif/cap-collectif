@@ -126,11 +126,13 @@
                             x Arguments
                         </a>
                     </li>
-                    <li role="presentation">
-                        <a href="#versions" aria-controls="versions" role="tab" data-toggle="tab">
-                            x Nouvelles versions
-                        </a>
-                    </li>
+                    {% if opinion.opinionType.isVersionable %}
+                        <li role="presentation">
+                            <a href="#versions" aria-controls="versions" role="tab" data-toggle="tab">
+                                x Nouvelles versions
+                            </a>
+                        </li>
+                    {% endif %}
                     <li role="presentation">
                         <a href="#sources" aria-controls="sources" role="tab" data-toggle="tab">
                             {% transchoice (sources|length) with {'%count%': (sources|length)} from 'CapcoAppBundle' %}source.show.count{% endtranschoice %}
@@ -155,7 +157,11 @@
                                     {% set form = argumentFormYes %}
                                     {% include '@CapcoApp/Argument/create.html.twig' %}
                                 {% endif %}
-                                {{ render(controller('CapcoAppBundle:Site/Argument:showArguments', {'consultation': consultation, 'step': currentStep, 'opinionType': opinionType, 'opinion': opinion, 'type': 1, 'form': sortArgumentsForm, 'argumentSort': argumentSort})) }}
+                                {{ render(controller('CapcoAppBundle:Site/Argument:showArguments', {
+                                    'consultation': consultation, 'step': currentStep, 'opinionType': opinionType,
+                                    'opinion': opinion, 'type': 1, 'form': sortArgumentsForm, 'argumentSort': argumentSort
+                                    }))
+                                }}
                             </div>
                             <div class="col-sm-12  col-md-6">
                                 {% if opinion.canContribute %}
@@ -163,15 +169,21 @@
                                     {% set form = argumentFormNo %}
                                     {% include '@CapcoApp/Argument/create.html.twig' %}
                                 {% endif %}
-                                {{ render(controller('CapcoAppBundle:Site/Argument:showArguments', {'consultation': consultation, 'opinionType': opinionType, 'opinion': opinion, 'type': 0, 'form': sortArgumentsForm, 'argumentSort': argumentSort})) }}
+                                {{ render(controller('CapcoAppBundle:Site/Argument:showArguments', {
+                                    'consultation': consultation, 'opinionType': opinionType, 'opinion': opinion,
+                                    'type': 0, 'form': sortArgumentsForm, 'argumentSort': argumentSort
+                                    }))
+                                }}
                             </div>
                         </div>
                     </div>
 
                     <!-- Nouvelles versions -->
-                    <div role="tabpanel" class="tab-pane" id="versions">
-                        <div id="render-opinion-versions" data-opinion="{{ opinion.id }}"></div>
-                    </div>
+                    {% if opinion.opinionType.isVersionable %}
+                        <div role="tabpanel" class="tab-pane" id="versions">
+                            <div id="render-opinion-versions" data-opinion="{{ opinion.id }}"></div>
+                        </div>
+                    {% endif %}
 
                     <!-- Nouvelles versions -->
                     <div role="tabpanel" class="tab-pane" id="sources">
@@ -198,8 +210,6 @@
                   </div>
 
                 </div>
-
-
 
             </div> <!-- col-xs-12  col-sm-4  col-md-3 -->
         </div> <!-- .row -->

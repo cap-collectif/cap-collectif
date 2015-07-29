@@ -8,7 +8,13 @@ const OpinionVersionList = React.createClass({
 
   render() {
     if (this.props.versions.length === 0) {
-      return <p>Y en a pas :-'(</p>;
+      return (
+        <p className="text-center">
+          <i className="cap-32 cap-baloon-1"></i>
+          <br/>
+          { this.getIntlMessage('opinion.no_new_version') }
+        </p>
+      );
     }
 
     const classes = React.addons.classSet({
