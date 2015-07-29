@@ -297,13 +297,8 @@ $icons-colors:
     transition: color .4s;
     unicode-bidi: embed;
     direction: rtl;
-    margin-right: 5px;
 
-    &:first-child {
-      margin-right: 0;
-    }
-
-    &.active i.cap:before {
+    i.cap:before {
       content: "<";
     }
 
@@ -315,16 +310,8 @@ $icons-colors:
       color: orange !important;
       cursor: pointer;
 
-      i.cap:before {
-        content: "<";
-      }
-
       & ~ a {
         color: orange !important;
-
-        i.cap:before {
-          content: "<";
-        }
       }
     }
   }
@@ -333,85 +320,39 @@ $icons-colors:
 // Elements tree
 .synthesis__elements-tree {
   border: 1px solid $border-color;
-}
 
-.elements-tree__list {
-  list-style: none;
-  padding: 0;
-  margin-bottom: 0;
-}
-.elements-tree__item {
-  position: relative;
-  display: block;
-}
-.elements-tree__item-content {
-  border-top: 1px solid $border-color;
-  position: relative;
-}
-.elements-tree__list:first-child > .elements-tree__item:first-child > .elements-tree__item-content {
-  border-top: 0;
-}
-
-.elements-tree__item-icon {
-  font-size: 25px;
-  color: $gray;
-  margin-right: 10px;
-}
-
-.elements-tree__item-body {
-  display: inline-block;
-}
-
-@for $i from 1 through 50 {
-  .tree-level-#{$i} .elements-tree__item-content {
-    padding-left: $i * 40px;
+  .elements-tree__list {
+    list-style: none;
+    padding: 0;
+    margin-bottom: 0;
   }
-}
-
-// Modal
-.modal__action {
-
-  &:first-child h2 {
-    margin-top: 0;
+  .elements-tree__item {
+    position: relative;
+    display: block;
   }
-
-  .element__action {
-    margin-left: 0;
-    width: 100%;
-  }
-  .action__title-right {
-    margin-left: 10px;
-  }
-  .action__help {
-    margin-top: 5px;
-  }
-
-  .element__action-notation {
-    font-size: 25px;
-  }
-}
-
-// Elements finder
-.elements__finder {
-  border: 1px solid $border-color;
-
   .elements-tree__item-content {
-    cursor: pointer;
+    border-top: 1px solid $border-color;
+    position: relative;
   }
-
-  .elements-tree__item-content.selected {
-    background-color: $brand-primary;
-    color: $white;
+  .elements-tree__list:first-child > .elements-tree__item:first-child > .elements-tree__item-content {
+    border-top: 0;
   }
 
   .elements-tree__item-icon {
-    margin: 0 5px;
+    font-size: 25px;
+    color: $gray;
+    margin-right: 10px;
   }
-}
 
-.elements-tree__item-caret {
-  margin: 0 5px;
-  cursor: pointer;
+  .elements-tree__item-body {
+    display: inline-block;
+  }
+
+  @for $i from 1 through 50 {
+    .tree-level-#{$i} .elements-tree__item-content {
+      padding-left: $i * 40px;
+    }
+  }
 }
 
 // Loader

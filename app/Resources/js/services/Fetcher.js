@@ -16,7 +16,7 @@ function json(response) {
 }
 
 function createHeaders() {
-  const headers = {
+  let headers = {
     'Accept': 'application/json',
     'Content-Type': 'application/json',
   };

@@ -16,11 +16,7 @@ class SynthesisElementType extends AbstractType
             ->add('published', null, ['required' => false])
             ->add('archived', null, ['required' => false])
             ->add('notation', null, ['required' => false])
-            ->add('parent', 'entity', [
-                'class' => 'Capco\AppBundle\Entity\Synthesis\SynthesisElement',
-                'property' => 'id',
-                'required' => false
-            ])
+            ->add('parent', null, ['required' => false])
         ;
     }
 

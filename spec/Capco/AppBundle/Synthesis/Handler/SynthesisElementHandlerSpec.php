@@ -96,30 +96,17 @@ class SynthesisElementHandlerSpec extends ObjectBehavior
 
     }
 
-    function it_can_get_elements__published_tree_from_synthesis(EntityManager $em, LogManager $logManager, SynthesisElementRepository $synthesisElementRepo, ArrayCollection $collection, Synthesis $synthesis)
+    function it_can_get_elements_tree_from_synthesis(EntityManager $em, LogManager $logManager, SynthesisElementRepository $synthesisElementRepo, ArrayCollection $collection, Synthesis $synthesis)
     {
         $em->getRepository('CapcoAppBundle:Synthesis\SynthesisElement')->willReturn($synthesisElementRepo)->shouldBeCalled();
         $this->beConstructedWith($em, $logManager);
 
-        $type = 'tree_published';
+        $type = 'tree';
         $synthesisElementRepo->getWith(array(
             'synthesis' => $synthesis,
             'parent' => null,
             'archived' => true,
             'published' => true,
-        ))->willReturn($collection)->shouldBeCalled();
-        $this->getElementsFromSynthesisByType($synthesis, $type)->shouldReturnAnInstanceOf('Doctrine\Common\Collections\ArrayCollection');
-    }
-
-    function it_can_get_all_elements_tree_from_synthesis(EntityManager $em, LogManager $logManager, SynthesisElementRepository $synthesisElementRepo, ArrayCollection $collection, Synthesis $synthesis)
-    {
-        $em->getRepository('CapcoAppBundle:Synthesis\SynthesisElement')->willReturn($synthesisElementRepo)->shouldBeCalled();
-        $this->beConstructedWith($em, $logManager);
-
-        $type = 'tree_all';
-        $synthesisElementRepo->getWith(array(
-            'synthesis' => $synthesis,
-            'parent' => null,
         ))->willReturn($collection)->shouldBeCalled();
         $this->getElementsFromSynthesisByType($synthesis, $type)->shouldReturnAnInstanceOf('Doctrine\Common\Collections\ArrayCollection');
     }
@@ -190,30 +177,17 @@ class SynthesisElementHandlerSpec extends ObjectBehavior
         $this->countElementsFromSynthesisByType($synthesis, $type)->shouldBeInteger();
     }
 
-    function it_can_count_published_root_elements_from_synthesis_by_type(EntityManager $em, LogManager $logManager, SynthesisElementRepository $synthesisElementRepo, Synthesis $synthesis)
+    function it_can_count_root_elements_from_synthesis_by_type(EntityManager $em, LogManager $logManager, SynthesisElementRepository $synthesisElementRepo, Synthesis $synthesis)
     {
         $em->getRepository('CapcoAppBundle:Synthesis\SynthesisElement')->willReturn($synthesisElementRepo)->shouldBeCalled();
         $this->beConstructedWith($em, $logManager);
 
-        $type = 'tree_published';
+        $type = 'tree';
         $synthesisElementRepo->countWith(array(
             'synthesis' => $synthesis,
             'parent' => null,
             'archived' => true,
             'published' => true,
-        ))->willReturn(3)->shouldBeCalled();
-        $this->countElementsFromSynthesisByType($synthesis, $type)->shouldBeInteger();
-    }
-
-    function it_can_count_all_root_elements_from_synthesis_by_type(EntityManager $em, LogManager $logManager, SynthesisElementRepository $synthesisElementRepo, Synthesis $synthesis)
-    {
-        $em->getRepository('CapcoAppBundle:Synthesis\SynthesisElement')->willReturn($synthesisElementRepo)->shouldBeCalled();
-        $this->beConstructedWith($em, $logManager);
-
-        $type = 'tree_all';
-        $synthesisElementRepo->countWith(array(
-            'synthesis' => $synthesis,
-            'parent' => null,
         ))->willReturn(3)->shouldBeCalled();
         $this->countElementsFromSynthesisByType($synthesis, $type)->shouldBeInteger();
     }

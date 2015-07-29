@@ -37,24 +37,6 @@ export default {
       inbox: {
         none: 'Aucune contribution à afficher.',
       },
-      action: {
-        publish: {
-          title: 'Classer...',
-          btn_cancel: 'Annuler',
-          btn_submit: 'Classer',
-          notation: {
-            title: 'Noter',
-            help: 'Sélectionner des étoiles pour noter.',
-          },
-          parent: {
-            title: 'Déplacer',
-          },
-          optional: 'facultatif',
-        },
-      },
-      finder: {
-        root: 'Synthèse',
-      },
     },
   },
 };

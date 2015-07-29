@@ -30,9 +30,9 @@ const ElementTree = React.createClass({
   },
 
   onChange() {
-    if (!SynthesisElementStore.isProcessing && SynthesisElementStore.isInboxSync.publishedTree) {
+    if (SynthesisElementStore.isInboxSync.tree) {
       this.setState({
-        rootElements: SynthesisElementStore.elements.publishedTree,
+        rootElements: SynthesisElementStore.elements.tree,
         isLoading: false,
       });
       return;
@@ -118,8 +118,7 @@ const ElementTree = React.createClass({
 
   loadPublishedRootElementsFromServer() {
     SynthesisElementActions.loadElementsTreeFromServer(
-      this.props.synthesis.id,
-      'published'
+      this.props.synthesis.id
     );
   },
 

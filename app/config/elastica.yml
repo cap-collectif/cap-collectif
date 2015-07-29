@@ -3,6 +3,7 @@ fos_elastica:
     default: { host: localhost, port: 9200 }
   indexes:
     app:
+      use_alias: true
       index_name: app_%kernel.environment%
       settings:
         index:

@@ -542,23 +542,12 @@ class SynthesisElement
     public function getPublishedChildren()
     {
         $children = new ArrayCollection();
-        foreach ($this->children as $child) {
-            if ($child->isArchived() && $child->isPublished()) {
+        foreach ($children as $child) {
+            if ($child->getArchived() && $child->getPublished) {
                 $children->add($child);
             }
         }
         return $children;
-    }
-
-    public function getParentsIds()
-    {
-        $parentsId = [];
-        $element = $this;
-        while ($element->getParent()) {
-            $element = $element->getParent();
-            $parentsId[] = $element->getId();
-        }
-        return $parentsId;
     }
 
     // ************************* Lifecycle ***********************************
