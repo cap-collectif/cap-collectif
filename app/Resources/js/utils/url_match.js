@@ -55,7 +55,7 @@ export default class URLMatch {
    * @return {String}
    */
   getAnchorHref() {
-    let url = this.getUrl();
+    const url = this.getUrl();
 
     return url.replace( /&amp;/g, '&' );  // any &amp;'s in the URL should be converted back to '&' if they were displayed as &amp; in the source html
   }
@@ -117,9 +117,10 @@ export default class URLMatch {
    * @return {String} The `anchorText`, with the trailing slash removed.
    */
   removeTrailingSlash(anchorText) {
-    if (anchorText.charAt(anchorText.length - 1) === '/') {
-      anchorText = anchorText.slice( 0, -1 );
+    let text = anchorText;
+    if (text.charAt(text.length - 1) === '/') {
+      text = text.slice( 0, -1 );
     }
-    return anchorText;
+    return text;
   }
 }

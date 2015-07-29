@@ -132,10 +132,10 @@ Scenario: Admin wants to ignore an element
   And I should see 1 ".element" element
   And I follow "Traitées"
   And I wait 5 seconds
-  And I should see 12 ".element" element
+  Then I should see 12 ".element" element
 
 @javascript @database
-Scenario: Admin wants to publish an element
+Scenario: Admin wants to publish an element without note or move
   Given I am logged in as admin
   And I visited "consultation page" with:
     | consultationSlug | strategie-technologique-de-l-etat-et-services-publics |
@@ -146,6 +146,71 @@ Scenario: Admin wants to publish an element
   And I follow "Opinion 52"
   And I wait 5 seconds
   And I click the ".element__action-publish" element
+  And I wait 5 seconds
+  And I click the "button[type='submit']" element
+  And I wait 5 seconds
   And I follow "Traitées"
   And I wait 5 seconds
-  And I should see 12 ".element" elements
+  And I should see 12 ".element" element
+  And I follow "Arborescence"
+  And I wait 5 seconds
+  And I should see 2 ".tree-level-0 > .elements-tree__item" elements
+  And I should see 1 ".tree-level-1 > .elements-tree__item" elements
+
+@javascript @database
+Scenario: Admin wants to publish an element with note
+  Given I am logged in as admin
+  And I visited "consultation page" with:
+    | consultationSlug | strategie-technologique-de-l-etat-et-services-publics |
+    | stepSlug         | collecte-des-avis-pour-une-meilleur-strategie         |
+  And I follow "Synthèse"
+  And I follow "Éditer"
+  And I wait 5 seconds
+  And I follow "Opinion 52"
+  And I wait 5 seconds
+  And I click the ".element__action-publish" element
+  And I wait 5 seconds
+  And I click the "#notation-button-4" element
+  And I wait 5 seconds
+  And I click the "button[type='submit']" element
+  And I wait 5 seconds
+  Then I should see 5 ".element" elements
+  And I follow "Traitées"
+  And I wait 5 seconds
+  And I should see 12 ".element" element
+  And I follow "Arborescence"
+  And I wait 5 seconds
+  And I should see 2 ".tree-level-0 > .elements-tree__item" elements
+  And I should see 1 ".tree-level-1 > .elements-tree__item" elements
+  And I follow "Opinion 52"
+  And I wait 5 seconds
+  And "#notation-star-1" element should have class "active"
+  And "#notation-star-2" element should have class "active"
+  And "#notation-star-3" element should have class "active"
+  And "#notation-star-4" element should have class "active"
+  And "#notation-star-5" element should not have class "active"
+
+@javascript @database
+Scenario: Admin wants to publish an element with parent
+  Given I am logged in as admin
+  And I visited "consultation page" with:
+    | consultationSlug | strategie-technologique-de-l-etat-et-services-publics |
+    | stepSlug         | collecte-des-avis-pour-une-meilleur-strategie         |
+  And I follow "Synthèse"
+  And I follow "Éditer"
+  And I wait 5 seconds
+  And I follow "Opinion 52"
+  And I wait 5 seconds
+  And I click the ".element__action-publish" element
+  And I wait 5 seconds
+  And I click the "#element-root" element
+  And I wait 5 seconds
+  And I click the "button[type='submit']" element
+  And I wait 5 seconds
+  Then I should see 5 ".element" elements
+  And I follow "Traitées"
+  And I wait 5 seconds
+  And I should see 12 ".element" element
+  And I follow "Arborescence"
+  And I wait 5 seconds
+  And I should see 3 ".tree-level-0 > .elements-tree__item" elements

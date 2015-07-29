@@ -35,6 +35,19 @@ const CommentForm = React.createClass({
     autosize(React.findDOMNode(this.refs.body));
   },
 
+  getClasses(field) {
+    return React.addons.classSet({
+      'form-group': true,
+      'has-error': !this.isValid(field),
+    });
+  },
+
+  getFormClasses() {
+    return React.addons.classSet({
+      'comment-answer-form': this.props.isAnswer,
+    });
+  },
+
   renderAnonymous() {
     if (!LoginStore.isLoggedIn()) {
       return (
@@ -94,13 +107,6 @@ const CommentForm = React.createClass({
     }
   },
 
-  getClasses(field) {
-    return React.addons.classSet({
-      'form-group': true,
-      'has-error': !this.isValid(field),
-    });
-  },
-
   renderCommentButton() {
     if (this.state.expanded || this.state.body.length >= 1) {
       if (LoginStore.isLoggedIn()) {
@@ -116,20 +122,6 @@ const CommentForm = React.createClass({
 
       return <div>{ this.renderAnonymous() }</div>;
     }
-  },
-
-  expand(newState) {
-    if (!newState) {
-      const $block = $(React.findDOMNode(this.refs.commentBlock));
-      if (event.relatedTarget && ($(event.relatedTarget).is($block) || $block.has($(event.relatedTarget)).length)) {
-        return; // clicked on an element inside comment block
-      }
-      if (this.state.body.length === 0) {
-        this.setState({expanded: false, submitted: false});
-        return;
-      }
-    }
-    this.setState({'expanded': newState});
   },
 
   render() {
@@ -153,10 +145,18 @@ const CommentForm = React.createClass({
     );
   },
 
-  getFormClasses() {
-    return React.addons.classSet({
-      'comment-answer-form': this.props.isAnswer,
-    });
+  expand(newState) {
+    if (!newState) {
+      const $block = $(React.findDOMNode(this.refs.commentBlock));
+      if (event.relatedTarget && ($(event.relatedTarget).is($block) || $block.has($(event.relatedTarget)).length)) {
+        return; // clicked on an element inside comment block
+      }
+      if (this.state.body.length === 0) {
+        this.setState({expanded: false, submitted: false});
+        return;
+      }
+    }
+    this.setState({'expanded': newState});
   },
 
   create(e) {
@@ -192,7 +192,6 @@ const CommentForm = React.createClass({
   },
 
   isValid(field) {
-
     if (!this.state.submitted) {
       return true;
     }

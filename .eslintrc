@@ -9,9 +9,11 @@
     "React": true,
     "ReactRouter": true,
     "ReactIntl": true,
+    "ReactBootstrap": true,
     "Flux": true,
     "EventEmitter",
-    "document": true
+    "document": true,
+    "classNames": true,
   },
   "env": {                           // http://eslint.org/docs/user-guide/configuring.html#specifying-environments
     "browser": true,                 // browser global variables
