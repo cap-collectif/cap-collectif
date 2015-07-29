@@ -8,6 +8,7 @@ dependencies:
             timeout: 3600
     pre:
         - echo "memory_limit = 2048M" > ~/.phpenv/versions/$(phpenv global)/etc/conf.d/memory.ini
+        - echo "always_populate_raw_post_data=-1" > ~/.phpenv/versions/$(phpenv global)/etc/conf.d/custom.ini
         - mysql -u ubuntu -e "create database symfony"
         - mysql -u ubuntu -e "create database symfony_test"
     post:
