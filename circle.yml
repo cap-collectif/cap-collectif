@@ -13,8 +13,7 @@ dependencies:
         - mysql -u ubuntu -e "create database symfony_test"
     post:
         - wget http://selenium-release.storage.googleapis.com/2.44/selenium-server-standalone-2.44.0.jar
-        - java -jar selenium-server-standalone-2.44.0.jar:
-            background: true
+        - java -jar selenium-server-standalone-2.44.0.jar: {background: true}
         - curl http://get.sensiolabs.org/php-cs-fixer.phar -o php-cs-fixer
         - sudo chmod a+x php-cs-fixer
         - wget https://download.elastic.co/elasticsearch/elasticsearch/elasticsearch-1.7.0.tar.gz
@@ -34,10 +33,8 @@ deployment:
             - "ssh capco@***REMOVED*** 'cd CapCollectif-DeploymentTools && fab deploy:preprod'"
 test:
     pre:
-        - echo "memory_limit = 2048M" > ~/.phpenv/versions/$(phpenv global)/etc/conf.d/memory.ini
         - fab build
-        - SYMFONY_ENV=test php app/console server:run --router=app/config/router_test.php:
-            background: true
+        - SYMFONY_ENV=test php app/console server:run --router=app/config/router_test.php: {background: true}
 
     override:
         - fab migrate_test_db
