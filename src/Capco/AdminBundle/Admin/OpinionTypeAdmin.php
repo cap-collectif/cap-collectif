@@ -8,6 +8,7 @@ use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Show\ShowMapper;
 use Capco\AppBundle\Entity\OpinionType;
+use Capco\AppBundle\Entity\Opinion;
 
 class OpinionTypeAdmin extends Admin
 {
@@ -112,7 +113,7 @@ class OpinionTypeAdmin extends Admin
             ))
             ->add('defaultFilter', 'choice', array(
                 'label' => 'admin.fields.opinion_type.default_filter',
-                'choices' => Opinion::$sortCriteras,
+                'choices' => Opinion::$sortCriterias,
                 'translation_domain' => 'CapcoAppBundle',
             ))
             ->add('color', 'choice', array(

@@ -37,6 +37,6 @@ Capco\AppBundle\Entity\OpinionType:
         shortName: Articles
         position: 5
         voteWidgetType: 2
-        color: pink
+        color: blue
         defaultFilter: positions
         isEnabled: true
