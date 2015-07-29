@@ -127,6 +127,8 @@ Scenario: Admin wants to ignore an element
   And I follow "Opinion 51"
   And I wait 5 seconds
   And I click the ".element__action-ignore" element
+  And I wait 5 seconds
+  And I should see "L'élément a été traité avec succès."
   And I follow "Dépubliées"
   And I wait 5 seconds
   And I should see 1 ".element" element
@@ -149,6 +151,7 @@ Scenario: Admin wants to publish an element without note or move
   And I wait 5 seconds
   And I click the "button[type='submit']" element
   And I wait 5 seconds
+  And I should see "L'élément a été traité avec succès."
   And I follow "Traitées"
   And I wait 5 seconds
   And I should see 12 ".element" element
@@ -174,7 +177,7 @@ Scenario: Admin wants to publish an element with note
   And I wait 5 seconds
   And I click the "button[type='submit']" element
   And I wait 5 seconds
-  Then I should see 5 ".element" elements
+  And I should see "L'élément a été traité avec succès."
   And I follow "Traitées"
   And I wait 5 seconds
   And I should see 12 ".element" element
@@ -207,10 +210,27 @@ Scenario: Admin wants to publish an element with parent
   And I wait 5 seconds
   And I click the "button[type='submit']" element
   And I wait 5 seconds
-  Then I should see 5 ".element" elements
+  And I should see "L'élément a été traité avec succès."
   And I follow "Traitées"
   And I wait 5 seconds
   And I should see 12 ".element" element
   And I follow "Arborescence"
   And I wait 5 seconds
   And I should see 3 ".tree-level-0 > .elements-tree__item" elements
+
+@javascript
+Scenario: Admin wants to divide an element without selecting text
+  Given I am logged in as admin
+  And I visited "consultation page" with:
+    | consultationSlug | strategie-technologique-de-l-etat-et-services-publics |
+    | stepSlug         | collecte-des-avis-pour-une-meilleur-strategie         |
+  And I follow "Synthèse"
+  And I follow "Éditer"
+  And I wait 5 seconds
+  And I follow "Opinion 52"
+  And I wait 5 seconds
+  And I click the ".element__action-divide" element
+  And I wait 5 seconds
+  And I click the ".division__create-element" element
+  And I wait 5 seconds
+  Then I should see "Veuillez sélectionner du texte pour créer une contribution."

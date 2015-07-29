@@ -6,7 +6,7 @@ const CommentForm = React.createClass({
   propTypes: {
     isAnswer: React.PropTypes.bool,
     focus: React.PropTypes.bool,
-    comment: React.PropTypes.function,
+    comment: React.PropTypes.func,
   },
   mixins: [ReactIntl.IntlMixin, React.addons.LinkedStateMixin],
 

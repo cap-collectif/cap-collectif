@@ -12,12 +12,14 @@ export default {
         no_synthesis: 'La synthèse n\'a pas encore été rédigée. Elle sera disponible prochainement.',
         incorrect_mode: 'Un problème est survenu. Veuillez réessayer.',
         update_error: 'Une erreur est survenue, merci de réessayer cette action ultérieurement.',
-        archive_error: 'Impossible de traiter cet élément',
+        archive_error: 'Impossible de traiter cet élément. Veuillez réessayer.',
+        divide_error: 'Impossible de diviser cet élement.. Veuillez réessayer.',
         close: 'Fermer',
       },
       success: {
         update_success: 'L\'opération a été réalisée avec succès.',
         archive_success: 'L\'élément a été traité avec succès.',
+        divide_success: 'L\'élément a été divisé avec succès.',
       },
     },
     view: {
@@ -50,6 +52,16 @@ export default {
             title: 'Déplacer',
           },
           optional: 'facultatif',
+        },
+        divide: {
+          title: 'Diviser la contribution',
+          btn_cancel: 'Annuler',
+          btn_submit: 'Diviser',
+          help: {
+            title: 'Information',
+            message: 'Veuillez sélectionner du texte pour créer une contribution.',
+          },
+          create_button: 'Créer à partir d\'une sélection',
         },
       },
       finder: {

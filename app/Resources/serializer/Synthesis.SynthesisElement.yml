@@ -50,6 +50,12 @@ Capco\AppBundle\Entity\Synthesis\SynthesisElement:
     linkedDataCreation:
       expose: true
       groups: [ElementsList, ElementsPublished, ElementDetails]
+    originalDivision:
+      expose: true
+      groups: [ElementDetails]
+    division:
+      expose: true
+      groups: [ElementDetails]
   virtual_properties:
     hasLinkedData:
       serialized_name: has_linked_data
@@ -65,15 +71,6 @@ Capco\AppBundle\Entity\Synthesis\SynthesisElement:
       rel: self
       href:
         route: get_synthesis_element
-        parameters:
-          synthesis_id: expr(object.getSynthesis().getId())
-          element_id: expr(object.getId())
-      exclusion:
-        groups: [Elements, ElementsList, ElementDetails]
-    -
-      rel: divide
-      href:
-        route: divide_synthesis_element
         parameters:
           synthesis_id: expr(object.getSynthesis().getId())
           element_id: expr(object.getId())

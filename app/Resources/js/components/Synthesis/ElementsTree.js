@@ -1,4 +1,5 @@
 import ElementTitle from './ElementTitle';
+import ElementIcon from './ElementIcon';
 import SynthesisElementStore from '../../stores/SynthesisElementStore';
 import SynthesisElementActions from '../../actions/SynthesisElementActions';
 
@@ -67,23 +68,16 @@ const ElementTree = React.createClass({
   renderTreeItemContent(element) {
     return (
       <div className="elements-tree__item-content box">
-        {this.renderItemIcon(element)}
+        <ElementIcon classes="elements-tree__item-icon" element={element} />
         {this.renderItemBody(element)}
       </div>
     );
   },
 
-  renderItemIcon(element) {
-    if (element.display_type === 'contribution') {
-      return <i className="elements-tree__item-icon cap cap-baloon-1"></i>;
-    }
-    return <i className="elements-tree__item-icon cap cap-folder-2"></i>;
-  },
-
   renderItemBody(element) {
     return (
       <p className="elements-tree__item-body">
-        <ElementTitle element={element} />
+        <ElementTitle element={element} classes="element__title" />
         <br/>
         <span className="small excerpt">
           <FormattedMessage

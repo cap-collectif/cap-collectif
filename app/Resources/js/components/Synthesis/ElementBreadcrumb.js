@@ -4,8 +4,15 @@ const Link = ReactRouter.Link;
 const ElementBreadcrumb = React.createClass({
   propTypes: {
     element: React.PropTypes.object,
+    link: React.PropTypes.bool,
   },
   mixins: [ReactIntl.IntlMixin],
+
+  getDefaultProps() {
+    return {
+      link: true,
+    };
+  },
 
   getElementBreadcrumbItems(element, parents = []) {
     if (element.parent) {
@@ -17,13 +24,24 @@ const ElementBreadcrumb = React.createClass({
     return items;
   },
 
-  renderBreadCrumbItem(element) {
-    return (
-      <span className="element__breadcrumb-item">
-        <span className="element__breadcrumb-arrow"> > </span>
+  renderLinkOrSpan(element) {
+    if (this.props.link) {
+      return (
         <Link to={'/element/' + element.id} >
           <ElementTitle element={element} />
         </Link>
+      );
+    }
+    return (
+        <ElementTitle element={element} />
+    );
+  },
+
+  renderBreadCrumbItem(element) {
+    return (
+      <span key={element.id} className="element__breadcrumb-item">
+        <span className="element__breadcrumb-arrow"> > </span>
+        {this.renderLinkOrSpan(element)}
       </span>
     );
   },

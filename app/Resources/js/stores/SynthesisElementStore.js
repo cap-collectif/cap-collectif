@@ -1,29 +1,6 @@
-import {RECEIVE_COUNT, RECEIVE_ELEMENTS, RECEIVE_ELEMENT, ARCHIVE_ELEMENT, NOTE_ELEMENT, MOVE_ELEMENT, UPDATE_ELEMENT_SUCCESS, UPDATE_ELEMENT_FAILURE} from '../constants/SynthesisElementConstants';
+import {RECEIVE_COUNT, RECEIVE_ELEMENTS, RECEIVE_ELEMENT, ARCHIVE_ELEMENT, NOTE_ELEMENT, MOVE_ELEMENT, DIVIDE_ELEMENT, UPDATE_ELEMENT_SUCCESS, UPDATE_ELEMENT_FAILURE} from '../constants/SynthesisElementConstants';
 import BaseStore from './BaseStore';
-
-function getElementIndexFromArray(els, el) {
-  let index = -1;
-  index = els.map((e) => {
-    return e.id;
-  }).indexOf(el.id);
-  return index;
-}
-
-function removeElementFromArray(els, el) {
-  const index = getElementIndexFromArray(els, el);
-  if (index > -1) {
-    els.splice(index, 1);
-  }
-  return els;
-}
-
-function addElementToArray(els, el) {
-  const index = getElementIndexFromArray(els, el);
-  if (index === -1) {
-    els.push(el);
-  }
-  return els;
-}
+import ArrayHelper from '../services/ArrayHelper';
 
 class SynthesisElementStore extends BaseStore {
 
@@ -39,6 +16,7 @@ class SynthesisElementStore extends BaseStore {
       'all': [],
       'publishedTree': [],
       'allTree': [],
+      'fromDivision': [],
     };
     this._countNew = 0;
     this._isProcessing = false;
@@ -52,6 +30,7 @@ class SynthesisElementStore extends BaseStore {
       'all': false,
       'publishedTree': false,
       'allTree': false,
+      'fromDivision': false,
     };
     this._messages = {
       errors: [],
@@ -79,15 +58,15 @@ class SynthesisElementStore extends BaseStore {
       case ARCHIVE_ELEMENT:
         this._resetMessages();
         // Update data
-        this._elements.new = removeElementFromArray(this._elements.new, this._element);
+        this._elements.new = ArrayHelper.removeElementFromArray(this._elements.new, this._element);
         this._countNew = this._elements.new.length;
-        this.elements.archived = addElementToArray(this._elements.archived, this._element);
+        this.elements.archived = ArrayHelper.addElementToArray(this._elements.archived, this._element);
         if (action.published) {
-          this._elements.published = addElementToArray(this._elements.published, this._element);
-          this._elements.unpublished = removeElementFromArray(this._elements.unpublished, this._element);
+          this._elements.published = ArrayHelper.addElementToArray(this._elements.published, this._element);
+          this._elements.unpublished = ArrayHelper.removeElementFromArray(this._elements.unpublished, this._element);
         } else {
-          this._elements.unpublished = addElementToArray(this._elements.unpublished, this._element);
-          this._elements.published = removeElementFromArray(this._elements.published, this._element);
+          this._elements.unpublished = ArrayHelper.addElementToArray(this._elements.unpublished, this._element);
+          this._elements.published = ArrayHelper.removeElementFromArray(this._elements.published, this._element);
         }
         // Apply changes to element
         this._element.archived = action.archived;
@@ -103,6 +82,13 @@ class SynthesisElementStore extends BaseStore {
         break;
       case MOVE_ELEMENT:
         this._element.parent = action.parent;
+        this._resetInboxSync();
+        this._isProcessing = true;
+        this._resetMessages();
+        this.emitChange();
+        break;
+      case DIVIDE_ELEMENT:
+        this._element.division = action.division;
         this._resetInboxSync();
         this._isProcessing = true;
         this._resetMessages();
@@ -171,6 +157,7 @@ class SynthesisElementStore extends BaseStore {
     this._isInboxSync.unpublished = false;
     this._isInboxSync.publishedTree = false;
     this._isInboxSync.allTree = false;
+    this._isInboxSync.fromDivision = false;
   }
 
 }

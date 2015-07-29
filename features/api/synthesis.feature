@@ -44,7 +44,6 @@ Feature: Synthesis
           "title": "Je suis un élément",
           "_links": {
             "self": { "href": "/api/syntheses/42/elements/43" },
-            "divide": { "href": "/api/syntheses/42/elements/43/divisions" },
             "history": { "href": "/api/syntheses/42/elements/43/history" }
           }
         }
@@ -117,7 +116,6 @@ Feature: Synthesis
             "title": "Le problème constaté",
             "_links": {
               "self": { "href": "@string@.startsWith('/api/syntheses/').contains('/elements')" },
-              "divide": { "href": "@string@.startsWith('/api/syntheses/').contains('/elements/').endsWith('/divisions')" },
               "history": { "href": "@string@.startsWith('/api/syntheses/').contains('/elements/').endsWith('/history')" }
             }
         },
@@ -243,7 +241,6 @@ Feature: Synthesis
           "title": "Je suis un élément",
           "_links": {
             "self": { "href": "/api/syntheses/42/elements/43" },
-            "divide": { "href": "/api/syntheses/42/elements/43/divisions" },
             "history": { "href": "/api/syntheses/42/elements/43/history" }
           }
         }
@@ -313,7 +310,6 @@ Feature: Synthesis
         "linked_data_creation": @null@,
         "_links": {
           "self": { "href": "/api/syntheses/42/elements/43" },
-          "divide": { "href": "/api/syntheses/42/elements/43/divisions" },
           "history": { "href": "/api/syntheses/42/elements/43/history" }
         }
       }
@@ -367,7 +363,6 @@ Feature: Synthesis
         "linked_data_creation": @null@,
         "_links": {
           "self": { "href": "/api/syntheses/42/elements/43" },
-          "divide": { "href": "/api/syntheses/42/elements/43/divisions" },
           "history": { "href": "/api/syntheses/42/elements/43/history" }
         }
       }
@@ -415,7 +410,6 @@ Feature: Synthesis
         "linked_data_creation": @null@,
         "_links": {
           "self": { "href": "/api/syntheses/42/elements/44" },
-          "divide": { "href": "/api/syntheses/42/elements/44/divisions" },
           "history": { "href": "/api/syntheses/42/elements/44/history" }
         }
       }
@@ -464,7 +458,6 @@ Feature: Synthesis
         "linked_data_creation": @null@,
         "_links": {
           "self": { "href": "/api/syntheses/42/elements/44" },
-          "divide": { "href": "/api/syntheses/42/elements/44/divisions" },
           "history": { "href": "/api/syntheses/42/elements/44/history" }
         }
       }
@@ -562,7 +555,6 @@ Feature: Synthesis
             "linked_data_creation": "@string@.isDateTime()",
             "_links": {
               "self": { "href": "@string@.startsWith('/api/syntheses/48/elements/')" },
-              "divide": { "href": "@string@.startsWith('/api/syntheses/48/elements/').endsWith('/divisions')" },
               "history": { "href": "@string@.startsWith('/api/syntheses/48/elements/').endsWith('/history')" }
             }
           }
@@ -573,7 +565,6 @@ Feature: Synthesis
         "linked_data_creation": "@string@.isDateTime()",
         "_links": {
           "self": { "href": "@string@.startsWith('/api/syntheses/48/elements/')" },
-          "divide": { "href": "@string@.startsWith('/api/syntheses/48/elements/').endsWith('/divisions')" },
           "history": { "href": "@string@.startsWith('/api/syntheses/48/elements/').endsWith('/history')" }
         }
       },
@@ -596,7 +587,6 @@ Feature: Synthesis
         "linked_data_creation": "@string@.isDateTime()",
         "_links": {
           "self": { "href": "@string@.startsWith('/api/syntheses/48/elements/')" },
-          "divide": { "href": "@string@.startsWith('/api/syntheses/48/elements/').endsWith('/divisions')" },
           "history": { "href": "@string@.startsWith('/api/syntheses/48/elements/').endsWith('/history')" }
         }
       }
@@ -637,6 +627,8 @@ Feature: Synthesis
           "profile": @string@
         }
       },
+      "original_division": @null@,
+      "division": @null@,
       "parent": @null@,
       "children": [],
       "display_type": "folder",
@@ -648,7 +640,6 @@ Feature: Synthesis
       "linked_data_creation": @null@,
       "_links": {
         "self": { "href": "/api/syntheses/42/elements/43" },
-        "divide": { "href": "/api/syntheses/42/elements/43/divisions" },
         "history": { "href": "/api/syntheses/42/elements/43/history" }
       }
     }
@@ -678,6 +669,8 @@ Feature: Synthesis
       "updated_at": "@string@.isDateTime()",
       "archived": false,
       "author": @null@,
+      "original_division": @null@,
+      "division": @null@,
       "parent": @null@,
       "children": [],
       "display_type": "folder",
@@ -689,7 +682,6 @@ Feature: Synthesis
       "linked_data_creation": @null@,
       "_links": {
         "self": { "href": "@string@.startsWith('/api/syntheses/42/elements/')" },
-        "divide": { "href": "@string@.startsWith('/api/syntheses/42/elements/').endsWith('/divisions')" },
         "history": { "href": "@string@.startsWith('/api/syntheses/42/elements/').endsWith('/history')" }
       }
     }
@@ -757,6 +749,8 @@ Feature: Synthesis
           "profile": @string@
         }
       },
+      "original_division": @null@,
+      "division": @null@,
       "parent": @null@,
       "children": [],
       "display_type": "folder",
@@ -768,7 +762,6 @@ Feature: Synthesis
       "linked_data_creation": @null@,
       "_links": {
         "self": { "href": "/api/syntheses/42/elements/43" },
-        "divide": { "href": "/api/syntheses/42/elements/43/divisions" },
         "history": { "href": "/api/syntheses/42/elements/43/history" }
       }
     }
@@ -806,29 +799,96 @@ Feature: Synthesis
     Given I am logged in to api as admin
     And there is a synthesis with id "42" and elements:
       | 43 |
-    And I send a POST request to "/api/syntheses/42/elements/43/divisions" with json:
+    And I send a PUT request to "/api/syntheses/42/elements/43" with json:
     """
     {
-      "elements": [
-        {
-          "title": "Coucou, je suis un élément.",
-          "body": "blabla",
-          "notation": 5
-        },
-        {
-          "title": "Coucou, je suis un autre élément.",
-          "body": "blabla",
-          "notation": 3
-        },
-        {
-          "title": "Coucou, je suis le dernier élément.",
-          "body": "blabla",
-          "notation": 2
-        }
-      ]
+      "archived": true,
+      "published": false,
+      "division": {
+        "elements": [
+          {
+            "title": "Coucou, je suis un élément.",
+            "body": "blabla",
+            "notation": 5,
+            "archived": true,
+            "published": true
+          },
+          {
+            "title": "Coucou, je suis un autre élément.",
+            "body": "blabla",
+            "notation": 3,
+            "archived": true,
+            "published": true
+          },
+          {
+            "title": "Coucou, je suis le dernier élément.",
+            "body": "blabla",
+            "notation": 2,
+            "archived": true,
+            "published": true
+          }
+        ]
+      }
     }
     """
-    Then the JSON response status code should be 201
+    Then the JSON response status code should be 200
+    And the JSON response should match:
+    """
+    {
+      "has_linked_data": false,
+      "id": "43",
+      "published": false,
+      "created_at": "@string@.isDateTime()",
+      "updated_at": "@string@.isDateTime()",
+      "archived": true,
+      "author": @...@,
+      "original_division": @null@,
+      "division": {
+        "id": @string@,
+        "original_element": "43",
+        "elements": [
+          {
+            "has_linked_data": false,
+            "id": @string@,
+            "published": true,
+            "created_at": "@string@.isDateTime()",
+            "updated_at": "@string@.isDateTime()",
+            "archived": true,
+            "author": @...@,
+            "original_division": @string@,
+            "division": @null@,
+            "parent": @null@,
+            "children": [],
+            "display_type": "folder",
+            "title": "Coucou, je suis un élément.",
+            "body": "blabla",
+            "link": @null@,
+            "notation": 5,
+            "votes": [],
+            "linked_data_creation": @null@,
+            "_links": {
+              "self": { "href": "/api/syntheses/42/elements/43" },
+              "history": { "href": "/api/syntheses/42/elements/43/history" }
+            }
+          },
+          @...@
+        ]
+      },
+      "parent": @null@,
+      "children": [],
+      "display_type": "folder",
+      "title": "Je suis un élément",
+      "body": "blabla",
+      "link": @null@,
+      "notation": @null@,
+      "votes": {"-1": 21, "0":12, "1": 43},
+      "linked_data_creation": @null@,
+      "_links": {
+        "self": { "href": "/api/syntheses/42/elements/43" },
+        "history": { "href": "/api/syntheses/42/elements/43/history" }
+      }
+    }
+    """
     And there should be a log on element 43 with sentence "admin a divisé l'élément 43"
 
   @database
@@ -836,26 +896,28 @@ Feature: Synthesis
     Given I am logged in to api as user
     And there is a synthesis with id "42" and elements:
       | 43 |
-    And I send a POST request to "/api/syntheses/42/elements/43/divisions" with json:
+    And I send a PUT request to "/api/syntheses/42/elements/43" with json:
     """
     {
-      "elements": [
-        {
-          "title": "Coucou, je suis un élément.",
-          "body": "blabla",
-          "notation": 5
-        },
-        {
-          "title": "Coucou, je suis un autre élément.",
-          "body": "blabla",
-          "notation": 3
-        },
-        {
-          "title": "Coucou, je suis le dernier élément.",
-          "body": "blabla",
-          "notation": 2
-        }
-      ]
+      "division": {
+        "elements": [
+          {
+            "title": "Coucou, je suis un élément.",
+            "body": "blabla",
+            "notation": 5
+          },
+          {
+            "title": "Coucou, je suis un autre élément.",
+            "body": "blabla",
+            "notation": 3
+          },
+          {
+            "title": "Coucou, je suis le dernier élément.",
+            "body": "blabla",
+            "notation": 2
+          }
+        ]
+      }
     }
     """
     Then the JSON response status code should be 403
@@ -864,26 +926,28 @@ Feature: Synthesis
   Scenario: Anonymous API client wants to divide a synthesis element
     Given there is a synthesis with id "42" and elements:
       | 43 |
-    And I send a POST request to "/api/syntheses/42/elements/43/divisions" with json:
+    And I send a PUT request to "/api/syntheses/42/elements/43" with json:
     """
     {
-      "elements": [
-        {
-          "title": "Coucou, je suis un élément.",
-          "body": "blabla",
-          "notation": 5
-        },
-        {
-          "title": "Coucou, je suis un autre élément.",
-          "body": "blabla",
-          "notation": 3
-        },
-        {
-          "title": "Coucou, je suis le dernier élément.",
-          "body": "blabla",
-          "notation": 2
-        }
-      ]
+      "division": {
+        "elements": [
+          {
+            "title": "Coucou, je suis un élément.",
+            "body": "blabla",
+            "notation": 5
+          },
+          {
+            "title": "Coucou, je suis un autre élément.",
+            "body": "blabla",
+            "notation": 3
+          },
+          {
+            "title": "Coucou, je suis le dernier élément.",
+            "body": "blabla",
+            "notation": 2
+          }
+        ]
+      }
     }
     """
     Then the JSON response status code should be 401
@@ -1024,7 +1088,6 @@ Feature: Synthesis
           "title": "Je suis le nouveau titre",
           "_links": {
             "self": { "href": "@string@.startsWith('/api/syntheses/48/elements/')" },
-            "divide": { "href": "@string@.startsWith('/api/syntheses/48/elements/').endsWith('/divisions')" },
             "history": { "href": "@string@.startsWith('/api/syntheses/48/elements/').endsWith('/history')" }
           }
         },

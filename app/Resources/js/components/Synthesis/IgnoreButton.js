@@ -12,7 +12,7 @@ const IgnoreButton = React.createClass({
   render() {
     return (
       <div className="element__action">
-        <Button bsSize="large" type="button" className="element__action-ignore" onClick={this.ignore.bind(this)}><i className="cap cap-delete-2"></i></Button>
+        <Button bsSize="large" type="button" className="element__action-ignore" onClick={this.ignore.bind(null, this)}><i className="cap cap-delete-2"></i></Button>
       </div>
     );
   },

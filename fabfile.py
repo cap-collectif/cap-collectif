@@ -76,7 +76,7 @@ def lint(pr=''):
 @task
 def test():
     with lcd(env.local_dir):
-        result = local('bin/phpspec run', capture=False)
+        result = local('bin/phpspec run --no-code-generation', capture=False)
         if result.return_code == 0:
             print(green('Tests: OK'))
         elif result.return_code == 1:

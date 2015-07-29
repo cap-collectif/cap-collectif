@@ -4,6 +4,7 @@ const ElementTitle = React.createClass({
   propTypes: {
     element: React.PropTypes.object,
     link: React.PropTypes.bool,
+    classes: React.PropTypes.string,
   },
   mixins: [ReactIntl.IntlMixin],
 
@@ -23,11 +24,11 @@ const ElementTitle = React.createClass({
   render() {
     if (this.props.link) {
       return (
-        <Link to={'/element/' + this.props.element.id} >{this.renderTitle()}</Link>
+        <Link to={'/element/' + this.props.element.id} className={this.props.classes}>{this.renderTitle()}</Link>
       );
     }
     return (
-      <span>{this.renderTitle()}</span>
+      <span className={this.props.classes}>{this.renderTitle()}</span>
     );
   },
 

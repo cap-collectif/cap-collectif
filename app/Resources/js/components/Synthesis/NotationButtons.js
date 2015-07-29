@@ -2,7 +2,7 @@ const Button = ReactBootstrap.Button;
 
 const NotationButtons = React.createClass({
   propTypes: {
-    notation: React.PropTypes.int,
+    notation: React.PropTypes.number,
     onChange: React.PropTypes.func,
     block: React.PropTypes.bool,
   },

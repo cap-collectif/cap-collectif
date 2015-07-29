@@ -1,9 +1,13 @@
-import ElementTitle from './ElementTitle';
-import ElementBlock from './ElementBlock';
-import ElementButtons from './ElementButtons';
-import PublishModal from './PublishModal';
 import SynthesisElementStore from '../../stores/SynthesisElementStore';
 import SynthesisElementActions from '../../actions/SynthesisElementActions';
+import FormattedText from '../../services/FormattedText';
+import ElementTitle from './ElementTitle';
+import ElementBlock from './ElementBlock';
+import PublishButton from './PublishButton';
+import DivideButton from './DivideButton';
+import IgnoreButton from './IgnoreButton';
+import PublishModal from './PublishModal';
+import DivideModal from './DivideModal';
 
 const EditElement = React.createClass({
   propTypes: {
@@ -16,7 +20,8 @@ const EditElement = React.createClass({
     return {
       element: null,
       isLoading: true,
-      showModal: false,
+      showPublishModal: false,
+      showDivideModal: false,
     };
   },
 
@@ -30,7 +35,8 @@ const EditElement = React.createClass({
 
   componentWillUnmount() {
     SynthesisElementStore.removeChangeListener(this.onChange);
-    this.toggleModal(false);
+    this.toggleDivideModal(false);
+    this.togglePublishModal(false);
   },
 
   onChange() {
@@ -61,9 +67,9 @@ const EditElement = React.createClass({
                 <ElementBlock element={element} />
               </div>
               <div className="element__description box has-chart">
-                {this.renderElementBody()}
+                {FormattedText.strip(element.body)}
               </div>
-              <ElementButtons {...this.props} element={element} onModal={this.toggleModal} />
+              {this.renderElementButtons()}
             </div>
           </div>
         </div>
@@ -71,17 +77,30 @@ const EditElement = React.createClass({
     }
   },
 
-  renderElementBody() {
-    if (this.state.element.body) {
-      return <p>{this.state.element.body.replace(/(<([^>]+)>)/ig, '')}</p>;
-    }
+  renderElementButtons() {
+    return (
+      <div className="element__actions box text-center">
+        <PublishButton element={this.state.element} onModal={this.togglePublishModal} />
+        <DivideButton element={this.state.element} onModal={this.toggleDivideModal} />
+        <IgnoreButton synthesis={this.props.synthesis} element={this.state.element} />
+      </div>
+    );
   },
 
   renderPublishModal() {
     const element = this.state.element;
     if (element) {
       return (
-        <PublishModal synthesis={this.props.synthesis} element={element} show={this.state.showModal} toggle={this.toggleModal} />
+        <PublishModal synthesis={this.props.synthesis} element={element} show={this.state.showPublishModal} toggle={this.togglePublishModal} />
+      );
+    }
+  },
+
+  renderDivideModal() {
+    const element = this.state.element;
+    if (element) {
+      return (
+        <DivideModal synthesis={this.props.synthesis} element={element} show={this.state.showDivideModal} toggle={this.toggleDivideModal} />
       );
     }
   },
@@ -104,13 +123,22 @@ const EditElement = React.createClass({
         {this.renderLoader()}
         {this.renderElementPanel()}
         {this.renderPublishModal()}
+        {this.renderDivideModal()}
       </div>
     );
   },
 
-  toggleModal(value) {
+  togglePublishModal(value) {
     this.setState({
-      showModal: value,
+      showDivideModal: false,
+      showPublishModal: value,
+    });
+  },
+
+  toggleDivideModal(value) {
+    this.setState({
+      showPublishModal: false,
+      showDivideModal: value,
     });
   },
 

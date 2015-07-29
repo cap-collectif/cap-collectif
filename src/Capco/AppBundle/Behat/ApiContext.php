@@ -295,7 +295,8 @@ class ApiContext extends ApplicationContext
         $logs = $this->getService('capco.synthesis.log_manager')->getLogEntries($element);
         $logExists = false;
         foreach ($logs as $log) {
-            if (in_array($sentence, $this->getService('capco.synthesis.log_manager')->getSentencesForLog($log))) {
+            $sentences = $this->getService('capco.synthesis.log_manager')->getSentencesForLog($log);
+            if (in_array($sentence, $sentences)) {
                 $logExists = true;
                 break;
             }

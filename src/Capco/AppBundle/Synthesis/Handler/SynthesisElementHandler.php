@@ -84,32 +84,32 @@ class SynthesisElementHandler
 
     public function updateElementInSynthesis(SynthesisElement $element, Synthesis $synthesis)
     {
+        // If we're adding a division to the element, we need to do some stuff
+        if ($element->getDivision()) {
+            $division = $this->updateDivisionFromElementInSynthesis($element->getDivision(), $element, $synthesis);
+        }
+
         $this->em->persist($element);
         $this->em->flush();
 
         return $element;
     }
 
-    public function createDivisionFromElementInSynthesis(SynthesisDivision $division, SynthesisElement $element, Synthesis $synthesis)
+    public function updateDivisionFromElementInSynthesis(SynthesisDivision $division, SynthesisElement $element, Synthesis $synthesis)
     {
         foreach ($division->getElements() as $el) {
+            $el->setSynthesis($synthesis);
+            $el->setAuthor($element->getAuthor());
+            $el->setLink($element->getLink());
+
             $el->setLinkedDataClass($element->getLinkedDataClass());
             $el->setLinkedDataId($element->getLinkedDataId());
-            $el->setSynthesis($synthesis);
-            if ($element->getParent()) {
-                $element->getParent()->addChild($this);
-            }
-            $el->setNotation($element->getNotation());
-            $el->setOriginalDivision($division);
+            $el->setLinkedDataCreation($element->getLinkedDataCreation());
+            $el->setLinkedDataLastUpdate($element->getLinkedDataLastUpdate());
             $this->em->persist($el);
         }
 
-        $division->setOriginalElement($element);
         $this->em->persist($division);
-
-        $this->em->remove($element);
-        $this->em->flush();
-
         return $division;
     }
 

@@ -80,7 +80,15 @@ class SynthesisElement
      * @ORM\JoinColumn(name="original_division_id", referencedColumnName="id", nullable=true, onDelete="SET NULL")
      * @Gedmo\Versioned
      */
-    private $originalDivision;
+    private $originalDivision = null;
+
+    /**
+     * @var
+     * @ORM\OneToOne(targetEntity="Capco\AppBundle\Entity\Synthesis\SynthesisDivision", inversedBy="originalElement", cascade={"persist", "remove"})
+     * @ORM\JoinColumn(name="division_id", referencedColumnName="id", nullable=true, onDelete="SET NULL")
+     * @Gedmo\Versioned
+     */
+    private $division = null;
 
     /**
      * @var
@@ -288,9 +296,28 @@ class SynthesisElement
     /**
      * @param mixed $originalDivision
      */
-    public function setOriginalDivision($originalDivision)
+    public function setOriginalDivision(SynthesisDivision $originalDivision)
     {
         $this->originalDivision = $originalDivision;
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getDivision()
+    {
+        return $this->division;
+    }
+
+    /**
+     * @param mixed $division
+     */
+    public function setDivision(SynthesisDivision $division)
+    {
+        $this->division = $division;
+        $division->setOriginalElement($this);
+        return $this;
     }
 
     /**

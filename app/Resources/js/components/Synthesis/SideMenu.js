@@ -108,7 +108,7 @@ const SideMenu = React.createClass({
 
   renderMenuItem(item) {
     return (
-      <li>
+      <li key={item.label}>
         <Link to={item.link}>
           <div className="menu__icon"><i className={'cap ' + item.icon + ' icon--' + item.color}></i></div>
           <div className="menu__item">

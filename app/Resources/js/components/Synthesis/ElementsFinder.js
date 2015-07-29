@@ -1,10 +1,11 @@
 import ElementTitle from './ElementTitle';
+import ElementIcon from './ElementIcon';
 
 const ElementsFinder = React.createClass({
   propTypes: {
     synthesis: React.PropTypes.object,
     elements: React.PropTypes.array,
-    selectedId: React.PropTypes.int,
+    selectedId: React.PropTypes.string,
     onSelect: React.PropTypes.func,
   },
   mixins: [ReactIntl.IntlMixin],
@@ -65,7 +66,7 @@ const ElementsFinder = React.createClass({
           {
             elements.map((element) => {
               return (
-                <li className="elements-tree__item">
+                <li key={element.id} className="elements-tree__item">
                   {this.renderTreeItemContent(element)}
                   {this.renderTreeItems(element.children, level + 1, this.state.expanded[element.id])}
                 </li>
@@ -85,7 +86,7 @@ const ElementsFinder = React.createClass({
     return (
       <div id={'element-' + element.id} className={classes} onClick={this.select.bind(this, element)}>
         {this.renderItemCaret(element)}
-        {this.renderItemIcon(element)}
+        <ElementIcon classes="elements-tree__item-icon" element={element} />
         {this.renderItemTitle(element)}
       </div>
     );
@@ -104,20 +105,10 @@ const ElementsFinder = React.createClass({
     }
   },
 
-  renderItemIcon(element) {
-    const classes = classNames({
-      'elements-tree__item-icon': true,
-      'cap': true,
-      'cap-baloon-1': element.display_type === 'contribution',
-      'cap-folder-2': element.display_type === 'folder',
-    });
-    return <i className={classes}></i>;
-  },
-
   renderItemTitle(element) {
     return (
       <p className="elements-tree__item-body">
-        <ElementTitle element={element} link={false} />
+        <ElementTitle element={element} classes="element__title" link={false} />
       </p>
     );
   },

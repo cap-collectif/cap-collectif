@@ -233,19 +233,13 @@ class ConsultationStepExtractorSpec extends ObjectBehavior
         $object->getTitle()->willReturn('test')->shouldBeCalled();
         $object->getBody()->willReturn('blabla')->shouldBeCalled();
         $object->getAuthor()->willReturn($author)->shouldBeCalled();
+        $object->getUpdatedAt()->willReturn($date)->shouldBeCalled();
         $object->getVoteCountOk()->willReturn(25)->shouldBeCalled();
         $object->getVoteCountNok()->willReturn(25)->shouldBeCalled();
         $object->getVoteCountMitige()->willReturn(25)->shouldBeCalled();
 
-        // Element comes from a division
-        $element->getOriginalDivision()->willReturn($division)->shouldBeCalled();
-        $em->remove($element)->shouldBeCalled();
-        $this->beConstructedWith($em, $translator, $router);
-        $this->updateElementFromObject($element, $object)->shouldReturnAnInstanceOf('Capco\AppBundle\Entity\Synthesis\SynthesisElement');
-
-        // Element does not come from a division
-        $element->getOriginalDivision()->willReturn(null)->shouldBeCalled();
         $element->setLinkedDataLastUpdate($date)->shouldBeCalled();
+        $element->getOriginalDivision()->willReturn(null)->shouldBeCalled();
         $element->setAuthor($author)->shouldBeCalled();
         $element->setArchived(false)->shouldBeCalled();
         $element->setPublished(false)->shouldBeCalled();
@@ -278,6 +272,7 @@ class ConsultationStepExtractorSpec extends ObjectBehavior
         $opinion->getVoteCountNok()->willReturn(25)->shouldBeCalled();
         $opinion->getVoteCountMitige()->willReturn(25)->shouldBeCalled();
 
+        $element->getOriginalDivision()->willReturn(null)->shouldBeCalled();
         $element->setTitle('test')->shouldBeCalled();
         $element->setBody('blabla')->shouldBeCalled();
         $element->setAuthor($author)->shouldBeCalled();

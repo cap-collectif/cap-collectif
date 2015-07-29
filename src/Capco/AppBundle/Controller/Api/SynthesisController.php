@@ -358,7 +358,7 @@ class SynthesisController extends FOSRestController
      */
     public function updateSynthesisElementAction(Request $request, Synthesis $synthesis, SynthesisElement $element)
     {
-        $form = $this->createForm(new SynthesisElementForm(), $element);
+        $form = $this->createForm(new SynthesisElementForm(true), $element);
         $form->submit($request->request->all(), false);
 
         if ($form->isValid()) {
@@ -366,42 +366,8 @@ class SynthesisController extends FOSRestController
             return $element;
         }
 
-        return $form;
-    }
-
-    /**
-     * Divide a synthesis element.
-     *
-     * @ApiDoc(
-     *  resource=true,
-     *  description="Divide a synthesis element",
-     *  statusCodes={
-     *    201 = "Returned when successful",
-     *    400 = "Returned when division fail",
-     *  }
-     * )
-     *
-     * @Security("has_role('ROLE_ADMIN')")
-     * @Post("/syntheses/{synthesis_id}/elements/{element_id}/divisions")
-     * @ParamConverter("synthesis", options={"mapping": {"synthesis_id": "id"}})
-     * @ParamConverter("element", options={"mapping": {"element_id": "id"}})
-     * @ParamConverter("division", converter="fos_rest.request_body")
-     * @View(serializerGroups={"SynthesisDetails", "Elements"})
-     */
-    public function divideSynthesisElementAction(Request $request, Synthesis $synthesis, SynthesisElement $element, SynthesisDivision $division)
-    {
-        $form = $this->createForm(new SynthesisDivisionForm(), $division);
-        $form->submit($request->request->all(), false);
-
-        if ($form->isValid()) {
-            $division = $this->get('capco.synthesis.synthesis_element_handler')->createDivisionFromElementInSynthesis($division, $element, $synthesis);
-
-            $url = $this->generateUrl('get_synthesis', ['id' => $synthesis->getId()], UrlGeneratorInterface::ABSOLUTE_URL);
-
-            return $this->redirectView($url, Codes::HTTP_CREATED);
-        }
-
-        return $form;
+        $view = $this->view($form->getErrors(true), Codes::HTTP_BAD_REQUEST);
+        return $view;
     }
 
     /**

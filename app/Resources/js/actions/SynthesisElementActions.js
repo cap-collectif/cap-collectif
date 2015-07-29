@@ -1,14 +1,22 @@
 import AppDispatcher from '../dispatchers/AppDispatcher';
 import Fetcher from '../services/Fetcher';
-import {RECEIVE_COUNT, RECEIVE_ELEMENTS, RECEIVE_ELEMENT, ARCHIVE_ELEMENT, UPDATE_ELEMENT, NOTE_ELEMENT, MOVE_ELEMENT, UPDATE_ELEMENT_SUCCESS, UPDATE_ELEMENT_FAILURE} from '../constants/SynthesisElementConstants';
+import {RECEIVE_COUNT, RECEIVE_ELEMENTS, RECEIVE_ELEMENT, ARCHIVE_ELEMENT, NOTE_ELEMENT, MOVE_ELEMENT, DIVIDE_ELEMENT, UPDATE_ELEMENT_SUCCESS, UPDATE_ELEMENT_FAILURE} from '../constants/SynthesisElementConstants';
+
+const idOf = (val) => {
+  if (val === 'root') {
+    return null;
+  }
+  if (typeof val === 'object') {
+    if (val.id === 'root') {
+      return null;
+    }
+    return val.id;
+  }
+  return val;
+};
 
 const updateElementFromData = (synthesis, element, data, successMessage = 'common.success.update_success', errorMessage = 'common.errors.update_error') => {
-  if (typeof data.parent === 'object') {
-    data.parent = data.parent.id;
-  }
-  if (data.parent === 'root') {
-    data.parent = null;
-  }
+  console.log(data);
   return Fetcher
     .put('/syntheses/' + synthesis + '/elements/' + element, data)
     .then(() => {
@@ -40,6 +48,7 @@ export default {
         actionType: MOVE_ELEMENT,
         parent: data.parent,
       });
+      data.parent = idOf(data.parent);
     }
     if (data.notation) {
       AppDispatcher.dispatch({
@@ -47,14 +56,16 @@ export default {
         notation: data.notation,
       });
     }
+    if (data.division) {
+      AppDispatcher.dispatch({
+        actionType: DIVIDE_ELEMENT,
+        division: data.division,
+      });
+      data.division.elements.forEach((el, index) => {
+        data.division.elements[index].parent = idOf(el.parent);
+      });
+    }
     updateElementFromData(synthesis, element, data, 'common.success.archive_success', 'common.errors.archive_error');
-  },
-
-  update: (synthesis, element, data) => {
-    AppDispatcher.dispatch({
-      actionType: UPDATE_ELEMENT,
-    });
-    updateElementFromData(synthesis, element, data);
   },
 
   loadElementFromServer: (synthesis, element) => {

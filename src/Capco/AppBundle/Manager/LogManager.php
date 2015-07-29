@@ -27,6 +27,8 @@ class LogManager
         $sentences = array();
         $username = $this->userManager->findOneBy(array('slug' => $log->getUsername()));
         $elementName = $log->getObjectId();
+
+        // Update actions
         if ($log->getAction() === 'update') {
             if (array_key_exists('parent', $log->getData())) {
                 $sentences[] = $this->makeSentence('move', $username, $elementName);
@@ -47,17 +49,14 @@ class LogManager
             if (array_key_exists('title', $log->getData()) || array_key_exists('body', $log->getData())) {
                 $sentences[] = $this->makeSentence('update', $username, $elementName);
             }
+            if (array_key_exists('division', $log->getData())) {
+                $sentences[] = $this->makeSentence('divide', $username, $elementName);
+            }
 
             return $sentences;
         }
 
-        if ($log->getAction() === 'create' && $log->getObjectClass() === 'Capco\\AppBundle\\Entity\\Synthesis\\SynthesisDivision') {
-            $division = $this->em->getRepository('CapcoAppBundle:Synthesis\SynthesisDivision')->find($log->getObjectId());
-            $sentences[] = $this->makeSentence('divide', $username, $division->getOriginalElement()->getId());
-
-            return $sentences;
-        }
-
+        // Delete or create actions
         $sentences[] = $this->makeSentence($log->getAction(), $username, $elementName);
 
         return $sentences;
@@ -65,18 +64,7 @@ class LogManager
 
     public function getLogEntries($entity)
     {
-        $logs = $this->em->getRepository('GedmoLoggable:LogEntry')->getLogEntries($entity);
-
-        if ($entity instanceof SynthesisElement) {
-            $divisions = $this->em->getRepository('CapcoAppBundle:Synthesis\SynthesisDivision')->findBy(array(
-                'originalElement' => $entity,
-            ));
-            foreach ($divisions as $div) {
-                $logs = array_merge($logs, $this->getLogEntries($div));
-            }
-        }
-
-        return $logs;
+        return $this->em->getRepository('GedmoLoggable:LogEntry')->getLogEntries($entity);
     }
 
     public function makeSentence($action, $username, $elementName)

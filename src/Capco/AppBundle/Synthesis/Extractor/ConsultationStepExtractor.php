@@ -242,18 +242,13 @@ class ConsultationStepExtractor
 
     public function updateElementFromObject(SynthesisElement $element, $object)
     {
-        // From now, when source is updated we delete all linked elements that come from a division
-        if ($element->getOriginalDivision()) {
-            $this->em->remove($element);
-
-            return $element;
-        }
-
         // Update last modified, archive status and deletion date
         $element->setLinkedDataLastUpdate($object->getUpdatedAt());
         $element->setArchived(false);
         $element->setPublished(false);
-        $element->setDeletedAt(null);
+        if (!$element->getOriginalDivision()) {
+            $element->setDeletedAt(null);
+        }
 
         if ($object instanceof OpinionType) {
             return $this->updateElementFromOpinionType($element, $object);
@@ -288,15 +283,17 @@ class ConsultationStepExtractor
         // Set author
         $element->setAuthor($opinion->getAuthor());
 
-        $element->setTitle($opinion->getTitle());
-        $element->setBody($opinion->getBody());
+        if (!$element->getOriginalDivision()) {
+            $element->setTitle($opinion->getTitle());
+            $element->setBody($opinion->getBody());
 
-        // Set votes
-        $votes = array();
-        $votes['-1'] = $opinion->getVoteCountNok();
-        $votes['0'] = $opinion->getVoteCountMitige();
-        $votes['1'] = $opinion->getVoteCountOk();
-        $element->setVotes($votes);
+            // Set votes
+            $votes = array();
+            $votes['-1'] = $opinion->getVoteCountNok();
+            $votes['0'] = $opinion->getVoteCountMitige();
+            $votes['1'] = $opinion->getVoteCountOk();
+            $element->setVotes($votes);
+        }
 
         return $element;
     }

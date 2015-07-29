@@ -237,20 +237,17 @@ class SynthesisElementHandlerSpec extends ObjectBehavior
         $this->updateElementInSynthesis($element, $synthesis)->shouldReturnAnInstanceOf('Capco\AppBundle\Entity\Synthesis\SynthesisElement');
     }
 
-    function it_can_create_a_division_from_element_in_synthesis(EntityManager $em, LogManager $logManager, SynthesisDivision $division, SynthesisElement $element, Synthesis $synthesis, SynthesisElement $element)
+    function it_can_update_a_division_from_element_in_synthesis(EntityManager $em, LogManager $logManager, SynthesisDivision $division, SynthesisElement $element, Synthesis $synthesis, SynthesisElement $element)
     {
         $elements = new ArrayCollection([$element]);
 
         $division->getElements()->willReturn($elements)->shouldBeCalled();
         $em->persist($element)->shouldBeCalled();
 
-        $division->setOriginalElement($element)->shouldBeCalled();
         $em->persist($division)->shouldBeCalled();
-        $em->remove($element)->shouldBeCalled();
-        $em->flush()->shouldBeCalled();
 
         $this->beConstructedWith($em, $logManager);
-        $this->createDivisionFromElementInSynthesis($division, $element, $synthesis)->shouldReturnAnInstanceOf('Capco\AppBundle\Entity\Synthesis\SynthesisDivision');
+        $this->updateDivisionFromElementInSynthesis($division, $element, $synthesis)->shouldReturnAnInstanceOf('Capco\AppBundle\Entity\Synthesis\SynthesisDivision');
     }
 
     function it_can_get_logs_for_element(EntityManager $em, LogManager $logManager, SynthesisElement $element, ArrayCollection $logs)

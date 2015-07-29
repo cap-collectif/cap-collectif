@@ -8,10 +8,17 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 class SynthesisElementType extends AbstractType
 {
+    protected $hasDivision = true;
+
+    function __construct($hasDivision = true)
+    {
+        $this->hasDivision = $hasDivision;
+    }
+
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('title', null, ['required' => true])
+            ->add('title', null, ['required' => false])
             ->add('body', null, ['required' => false])
             ->add('published', null, ['required' => false])
             ->add('archived', null, ['required' => false])
@@ -19,9 +26,16 @@ class SynthesisElementType extends AbstractType
             ->add('parent', 'entity', [
                 'class' => 'Capco\AppBundle\Entity\Synthesis\SynthesisElement',
                 'property' => 'id',
-                'required' => false
+                'required' => false,
             ])
         ;
+
+        if ($this->hasDivision) {
+            $builder->add('division', new SynthesisDivisionType(), [
+                'required' => false,
+                'cascade_validation' => true,
+            ]);
+        }
     }
 
     public function setDefaultOptions(OptionsResolverInterface $resolver)
@@ -34,6 +48,6 @@ class SynthesisElementType extends AbstractType
 
     public function getName()
     {
-        return 'capco_api_synthesis_element';
+        return '';
     }
 }

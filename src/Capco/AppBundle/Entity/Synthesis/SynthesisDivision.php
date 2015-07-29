@@ -2,15 +2,16 @@
 
 namespace Capco\AppBundle\Entity\Synthesis;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * SynthesisDivision.
  *
  * @ORM\Table(name="synthesis_division")
  * @ORM\Entity()
- * @Gedmo\Loggable()
  */
 class SynthesisDivision
 {
@@ -24,9 +25,8 @@ class SynthesisDivision
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Synthesis\SynthesisElement", cascade={"persist"})
-     * @ORM\JoinColumn(name="original_element_id", referencedColumnName="id", onDelete="CASCADE")
-     * @Gedmo\Versioned
+     * @ORM\OneToOne(targetEntity="Capco\AppBundle\Entity\Synthesis\SynthesisElement", mappedBy="division", cascade={"persist"}, orphanRemoval=true)
+     * @ORM\JoinColumn(name="original_element_id", referencedColumnName="id", nullable=false, onDelete="CASCADE")
      */
     private $originalElement;
 
@@ -57,6 +57,7 @@ class SynthesisDivision
     public function setOriginalElement($originalElement)
     {
         $this->originalElement = $originalElement;
+        return $this;
     }
 
     /**
@@ -72,8 +73,9 @@ class SynthesisDivision
      */
     public function addElement(SynthesisElement $element)
     {
-        return $this->elements[] = $element;
         $element->setOriginalDivision($this);
+        $this->elements[] = $element;
+        return $this;
     }
 
     /**
@@ -81,8 +83,9 @@ class SynthesisDivision
      */
     public function removeElement(SynthesisElement $element)
     {
-        return $this->elements->removeElement($element);
+        $this->elements->removeElement($element);
         $element->setOriginalDivision(null);
+        return $this;
     }
 
     /**
@@ -94,5 +97,6 @@ class SynthesisDivision
         foreach ($elements as $el) {
             $el->setOriginalDivision($this);
         }
+        return $this;
     }
 }
