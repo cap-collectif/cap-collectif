@@ -28,7 +28,7 @@ const ViewBox = React.createClass({
   },
 
   onChange() {
-    if (!SynthesisElementStore.isProcessing && SynthesisElementStore.isInboxSync.publishedTree) {
+    if (SynthesisElementStore.isSync) {
       this.setState({
         elements: SynthesisElementStore.elements,
         isLoading: false,
@@ -82,8 +82,7 @@ const ViewBox = React.createClass({
 
   loadRootElementsFromServer() {
     SynthesisElementActions.loadElementsTreeFromServer(
-      this.props.synthesis.id,
-      'published'
+      this.props.synthesis.id
     );
   },
 

@@ -1,7 +1,6 @@
 import ElementTitle from './ElementTitle';
 import ElementBlock from './ElementBlock';
 import ElementButtons from './ElementButtons';
-import PublishModal from './PublishModal';
 import SynthesisElementStore from '../../stores/SynthesisElementStore';
 import SynthesisElementActions from '../../actions/SynthesisElementActions';
 
@@ -16,7 +15,6 @@ const EditElement = React.createClass({
     return {
       element: null,
       isLoading: true,
-      showModal: false,
     };
   },
 
@@ -30,11 +28,10 @@ const EditElement = React.createClass({
 
   componentWillUnmount() {
     SynthesisElementStore.removeChangeListener(this.onChange);
-    this.toggleModal(false);
   },
 
   onChange() {
-    if (!SynthesisElementStore.isProcessing && SynthesisElementStore.isElementSync) {
+    if (SynthesisElementStore.isElementSync) {
       this.setState({
         element: SynthesisElementStore.element,
         isLoading: false,
@@ -63,7 +60,7 @@ const EditElement = React.createClass({
               <div className="element__description box has-chart">
                 {this.renderElementBody()}
               </div>
-              <ElementButtons {...this.props} element={element} onModal={this.toggleModal} />
+              <ElementButtons {...this.props} element={element} />
             </div>
           </div>
         </div>
@@ -77,19 +74,10 @@ const EditElement = React.createClass({
     }
   },
 
-  renderPublishModal() {
-    const element = this.state.element;
-    if (element) {
-      return (
-        <PublishModal synthesis={this.props.synthesis} element={element} show={this.state.showModal} toggle={this.toggleModal} />
-      );
-    }
-  },
-
   renderLoader() {
     if (this.state.isLoading) {
       return (
-        <div className="row">
+        <div className= "row">
           <div className="col-xs-2 col-xs-offset-5 spinner-loader-container">
             <div className="spinner-loader"></div>
           </div>
@@ -103,15 +91,8 @@ const EditElement = React.createClass({
       <div className="block synthesis--edit__content">
         {this.renderLoader()}
         {this.renderElementPanel()}
-        {this.renderPublishModal()}
       </div>
     );
-  },
-
-  toggleModal(value) {
-    this.setState({
-      showModal: value,
-    });
   },
 
   loadElementFromServer() {

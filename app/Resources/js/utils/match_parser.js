@@ -53,12 +53,9 @@ export default function(text='') {
   const regex = new RegExp(urlRegex, 'gi');
   const matches = [];
 
-  let match = regex.exec(text);
-  while (match !== null) {
-    let matchedText = match[0];
-    const protocolUrlMatch = match[1];
-    const wwwProtocolRelativeMatch = match[2];
-    const tldProtocolRelativeMatch = match[3];
+  let match;
+  while ((match = regex.exec(text)) !== null) {
+    let [matchedText, protocolUrlMatch, wwwProtocolRelativeMatch, tldProtocolRelativeMatch] = match;
     const protocolRelativeMatch = wwwProtocolRelativeMatch || tldProtocolRelativeMatch;
 
     // If it's a protocol-relative '//' match, remove the character
@@ -66,7 +63,7 @@ export default function(text='') {
     // the lack of a negative look-behind in JavaScript regular
     // expressions)
     if (protocolRelativeMatch) {
-      const charBeforeMatch = protocolRelativeMatch.match(charBeforeProtocolRelMatchRegex)[1] || '';
+      let charBeforeMatch = protocolRelativeMatch.match(charBeforeProtocolRelMatchRegex)[1] || '';
 
       // fix up the `matchStr` if there was a preceding char before a protocol-relative match, which was needed to determine the match itself (since there are no look-behinds in JS regexes)
       if (charBeforeMatch) {
@@ -79,7 +76,6 @@ export default function(text='') {
       const position = {start: match.index, end: regex.lastIndex};
       matches.push(new URLMatch(matchedText, protocolUrlMatch, protocolRelativeMatch, position));
     }
-    match = regex.exec(text);
   }
 
   return matches;

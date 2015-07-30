@@ -52,7 +52,7 @@ Feature: Synthesis
     }
     """
 
-  @database
+    @database
   Scenario: API client wants to create a synthesis
     Given I am logged in to api as admin
     And I send a POST request to "/api/syntheses" with json:
@@ -210,7 +210,7 @@ Feature: Synthesis
     """
 
   @database
-  Scenario: API client wants to get elements count from consultation step synthesis
+  Scenario: API client wants to get count synthesis elements from consultation step
     Given I am logged in to api as admin
     And there is a synthesis with id "48" based on consultation step 2
     And I send a GET request to "/api/syntheses/48/elements/count?type=all"
@@ -390,8 +390,7 @@ Feature: Synthesis
 
   @database
   Scenario: API client wants to get archived synthesis elements
-    Given I am logged in to api as admin
-    And there is a synthesis with id "42" and elements:
+    Given there is a synthesis with id "42" and elements:
       | 43 |
     And I create an element in synthesis 42 with values:
       | id       | 44   |
@@ -424,8 +423,7 @@ Feature: Synthesis
 
   @database
   Scenario: API client wants to get archived synthesis elements count
-    Given I am logged in to api as admin
-    And there is a synthesis with id "42" and elements:
+    Given there is a synthesis with id "42" and elements:
       | 43 |
     And I create an element in synthesis 42 with values:
       | id       | 44   |
@@ -487,54 +485,15 @@ Feature: Synthesis
     """
 
   @database
-  Scenario: Anonymous wants to get synthesis elements published tree
-    Given there is a synthesis with id "48" based on consultation step 2
-    And I send a GET request to "/api/syntheses/48/elements/tree?type=published"
-    Then the JSON response should match:
-    """
-    [
-      {
-        "has_linked_data": true,
-        "children": [],
-        "parents_ids": [],
-        "id": @string@,
-        "created_at": "@string@.isDateTime()",
-        "updated_at": "@string@.isDateTime()",
-        "author": @null@,
-        "display_type": "folder",
-        "title": "Le problème constaté",
-        "body": @null@,
-        "link": @null@,
-        "linked_data_creation": "@string@.isDateTime()"
-      },
-      {
-        "has_linked_data": true,
-        "children": [],
-        "parents_ids": [],
-        "id": @string@,
-        "created_at": "@string@.isDateTime()",
-        "updated_at": "@string@.isDateTime()",
-        "author": @null@,
-        "display_type": "folder",
-        "title": "Les causes",
-        "body": @null@,
-        "link": @null@,
-        "linked_data_creation": "@string@.isDateTime()"
-      }
-    ]
-    """
-
-  @database
   Scenario: API client wants to get synthesis elements tree
     Given I am logged in to api as admin
     And there is a synthesis with id "48" based on consultation step 2
-    And I send a GET request to "/api/syntheses/48/elements/tree?type=all"
+    And I send a GET request to "/api/syntheses/48/elements/tree"
     Then the JSON response should match:
     """
     [
       {
         "has_linked_data": true,
-        "parents_ids": [],
         "id": @string@,
         "published": true,
         "created_at": "@string@.isDateTime()",
@@ -542,31 +501,7 @@ Feature: Synthesis
         "archived": true,
         "author": @null@,
         "parent": @null@,
-        "children": [
-          {
-            "has_linked_data": true,
-            "parents_ids": [@string@],
-            "id": @string@,
-            "published": false,
-            "created_at": "@string@.isDateTime()",
-            "updated_at": "@string@.isDateTime()",
-            "archived": false,
-            "author": @...@,
-            "parent": @null@,
-            "children": [
-              @...@
-            ],
-            "display_type": "contribution",
-            "title": "Opinion 52",
-            "notation": @null@,
-            "linked_data_creation": "@string@.isDateTime()",
-            "_links": {
-              "self": { "href": "@string@.startsWith('/api/syntheses/48/elements/')" },
-              "divide": { "href": "@string@.startsWith('/api/syntheses/48/elements/').endsWith('/divisions')" },
-              "history": { "href": "@string@.startsWith('/api/syntheses/48/elements/').endsWith('/history')" }
-            }
-          }
-        ],
+        "children": [],
         "display_type": "folder",
         "title": "Le problème constaté",
         "notation": @null@,
@@ -579,7 +514,6 @@ Feature: Synthesis
       },
       {
         "has_linked_data": true,
-        "parents_ids": [],
         "id": @string@,
         "published": true,
         "created_at": "@string@.isDateTime()",
@@ -587,9 +521,7 @@ Feature: Synthesis
         "archived": true,
         "author": @null@,
         "parent": @null@,
-        "children": [
-          @...@
-        ],
+        "children": [],
         "display_type": "folder",
         "title": "Les causes",
         "notation": @null@,
@@ -607,7 +539,7 @@ Feature: Synthesis
   Scenario: API client wants to get root synthesis elements count
     Given I am logged in to api as admin
     And there is a synthesis with id "48" based on consultation step 2
-    And I send a GET request to "/api/syntheses/48/elements/count?type=tree_all"
+    And I send a GET request to "/api/syntheses/48/elements/count?type=tree"
     Then the JSON response should match:
     """
     {"count": "2"}
