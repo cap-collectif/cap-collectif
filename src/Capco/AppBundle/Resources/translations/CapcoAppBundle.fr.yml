@@ -515,7 +515,7 @@ opinion:
     submit: Signaler
     reported: Signalé
   sort:
-    positions: Positions
+    positions: Tri par publication
     date: Les plus récents
     votes: Les plus votés
     comments: Les plus commentés

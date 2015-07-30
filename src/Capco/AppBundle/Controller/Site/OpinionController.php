@@ -115,6 +115,9 @@ class OpinionController extends Controller
 
             if ($form->isValid()) {
                 $em = $this->getDoctrine()->getManager();
+
+                $maxPos = $currentStep->getMaximumPositionByOpinionType($opinionType);
+                $opinion->setPosition($maxPos + 1);
                 $em->persist($opinion);
                 $em->flush();
 

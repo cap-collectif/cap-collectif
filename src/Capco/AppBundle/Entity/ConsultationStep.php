@@ -2,6 +2,8 @@
 
 namespace Capco\AppBundle\Entity;
 
+use Capco\AppBundle\Entity\OpinionType;
+
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 use JMS\Serializer\Annotation as Serializer;
@@ -309,6 +311,17 @@ class ConsultationStep extends AbstractStep
     public function getConsultationType()
     {
         return;
+    }
+
+    public function getMaximumPositionByOpinionType(OpinionType $type)
+    {
+        $position = 0;
+        foreach ($this->getOpinions() as $opinion) {
+            if ($opinion->getOpinionType() == $type && $opinion->getPosition() > $position) {
+                $position = $opinion->getPosition();
+            }
+        }
+        return $position;
     }
 
     public function getAllowedTypesIds()
