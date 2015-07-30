@@ -30,13 +30,8 @@ class OpinionsSortType extends AbstractType
         ];
 
         if ($this->data) {
-            $data = [
-                'required' => true,
-                'choices' => Opinion::$sortCriterias,
-                'translation_domain' => 'CapcoAppBundle',
-                'label' => 'opinion.sort.label',
-                'data' => $this->data['defaultFilter'],
-            ];
+            $data['required'] = true;
+            $data['data'] = $this->data['defaultFilter'];
         }
 
         $builder->add('opinionsSort', 'choice', $data);
