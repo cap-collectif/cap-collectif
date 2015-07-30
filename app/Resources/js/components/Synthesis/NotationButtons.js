@@ -1,16 +1,17 @@
-import SynthesisElementActions from '../../actions/SynthesisElementActions';
+const Button = ReactBootstrap.Button;
 
 const NotationButtons = React.createClass({
   propTypes: {
-    synthesis: React.PropTypes.object,
-    element: React.PropTypes.object,
+    notation: React.PropTypes.int,
+    onChange: React.PropTypes.func,
+    block: React.PropTypes.bool,
   },
   mixins: [ReactIntl.IntlMixin],
 
   getNotationStarsClasses() {
-    let classes = [];
+    const classes = [];
     for (let i = 0; i < 5; i++) {
-      if (i < this.props.element.notation) {
+      if (i < this.props.notation) {
         classes[i] = 'active';
       }
     }
@@ -21,30 +22,31 @@ const NotationButtons = React.createClass({
     const classes = this.getNotationStarsClasses();
     return (
       <div className="element__action">
-        <div className="element__action-notation btn btn-default btn-lg" title="Noter">
+        <Button bsSize="large" className="element__action-notation" block={this.props.block}>
           <a className={classes[4]} id="notation-button-5" onClick={this.note.bind(this, 5)}>
-            <i className="cap cap-star-1"></i>
+            <i className="cap cap-star-1-1"></i>
           </a>
           <a className={classes[3]} id="notation-button-4" onClick={this.note.bind(this, 4)}>
-            <i className="cap cap-star-1"></i>
+            <i className="cap cap-star-1-1"></i>
           </a>
           <a className={classes[2]} id="notation-button-3" onClick={this.note.bind(this, 3)}>
-            <i className="cap cap-star-1"></i>
+            <i className="cap cap-star-1-1"></i>
           </a>
           <a className={classes[1]} id="notation-button-2" onClick={this.note.bind(this, 2)}>
-            <i className="cap cap-star-1"></i>
+            <i className="cap cap-star-1-1"></i>
           </a>
           <a className={classes[0]} id="notation-button-1" onClick={this.note.bind(this, 1)}>
-            <i className="cap cap-star-1"></i>
+            <i className="cap cap-star-1-1"></i>
           </a>
-        </div>
+        </Button>
       </div>
     );
   },
 
   note(value) {
-    const data = { 'notation': value };
-    SynthesisElementActions.note(this.props.synthesis.id, this.props.element.id, data);
+    if (typeof this.props.onChange === 'function') {
+      this.props.onChange(value);
+    }
   },
 
 });

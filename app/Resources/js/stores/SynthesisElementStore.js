@@ -1,12 +1,16 @@
 import {RECEIVE_COUNT, RECEIVE_ELEMENTS, RECEIVE_ELEMENT, ARCHIVE_ELEMENT, NOTE_ELEMENT, MOVE_ELEMENT, UPDATE_ELEMENT_SUCCESS, UPDATE_ELEMENT_FAILURE} from '../constants/SynthesisElementConstants';
 import BaseStore from './BaseStore';
 
-function removeElementFromArray(els, el) {
+function getElementIndexFromArray(els, el) {
   let index = -1;
   index = els.map((e) => {
     return e.id;
   }).indexOf(el.id);
+  return index;
+}
 
+function removeElementFromArray(els, el) {
+  const index = getElementIndexFromArray(els, el);
   if (index > -1) {
     els.splice(index, 1);
   }
@@ -14,11 +18,7 @@ function removeElementFromArray(els, el) {
 }
 
 function addElementToArray(els, el) {
-  let index = -1;
-  index = els.map((e) => {
-    return e.id;
-  }).indexOf(el.id);
-
+  const index = getElementIndexFromArray(els, el);
   if (index === -1) {
     els.push(el);
   }
@@ -37,9 +37,11 @@ class SynthesisElementStore extends BaseStore {
       'published': [],
       'unpublished': [],
       'all': [],
-      'tree': [],
+      'publishedTree': [],
+      'allTree': [],
     };
     this._countNew = 0;
+    this._isProcessing = false;
     this._isElementSync = false;
     this._isCountSync = false;
     this._isInboxSync = {
@@ -48,7 +50,8 @@ class SynthesisElementStore extends BaseStore {
       'published': false,
       'unpublished': false,
       'all': false,
-      'tree': false,
+      'publishedTree': false,
+      'allTree': false,
     };
     this._messages = {
       errors: [],
@@ -93,22 +96,28 @@ class SynthesisElementStore extends BaseStore {
         break;
       case NOTE_ELEMENT:
         this._element.notation = action.notation;
+        this._resetInboxSync();
+        this._isProcessing = true;
         this._resetMessages();
         this.emitChange();
         break;
       case MOVE_ELEMENT:
         this._element.parent = action.parent;
+        this._resetInboxSync();
+        this._isProcessing = true;
         this._resetMessages();
         this.emitChange();
         break;
       case UPDATE_ELEMENT_SUCCESS:
         this._resetMessages();
         this._messages.success.push(action.message);
+        this._isProcessing = false;
         this.emitChange();
         break;
       case UPDATE_ELEMENT_FAILURE:
         this._messages.errors.push(action.message);
         this._messages.success = [];
+        this._isProcessing = false;
         this._isElementSync = false;
         this._isCountSync = false;
         this._resetInboxSync();
@@ -116,6 +125,10 @@ class SynthesisElementStore extends BaseStore {
         break;
       default: break;
     }
+  }
+
+  get isProcessing() {
+    return this._isProcessing;
   }
 
   get isElementSync() {
@@ -156,7 +169,8 @@ class SynthesisElementStore extends BaseStore {
     this._isInboxSync.archived = false;
     this._isInboxSync.published = false;
     this._isInboxSync.unpublished = false;
-    this._isInboxSync.tree = false;
+    this._isInboxSync.publishedTree = false;
+    this._isInboxSync.allTree = false;
   }
 
 }

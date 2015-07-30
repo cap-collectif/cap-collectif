@@ -3,22 +3,22 @@ Capco\AppBundle\Entity\Synthesis\SynthesisElement:
   properties:
     id:
       expose: true
-      groups: [Elements, ElementsList, ElementDetails]
+      groups: [Elements, ElementsList, ElementsPublished, ElementDetails]
     published:
       expose: true
       groups: [ElementsList, ElementDetails]
     createdAt:
       expose: true
-      groups: [ElementsList, ElementDetails]
+      groups: [ElementsList, ElementsPublished, ElementDetails]
     updatedAt:
       expose: true
-      groups: [ElementsList, ElementDetails]
+      groups: [ElementsList, ElementsPublished, ElementDetails]
     archived:
       expose: true
       groups: [ElementsList, ElementDetails]
     author:
       expose: true
-      groups: [ElementsList, ElementDetails, UserDetails]
+      groups: [ElementsList, ElementsPublished, ElementDetails, UserDetails]
     parent:
       type: Capco\AppBundle\Entity\Synthesis\SynthesisElement
       expose: true
@@ -28,21 +28,19 @@ Capco\AppBundle\Entity\Synthesis\SynthesisElement:
       type: ArrayCollection<Capco\AppBundle\Entity\Synthesis\SynthesisElement>
       expose: true
       groups: [ElementsTree, ElementDetails]
-      max_depth: 1
-      accessor:
-        getter: getPublishedChildren
+      max_depth: 2
     displayType:
       expose: true
-      groups: [ElementsList, ElementDetails]
+      groups: [ElementsList, ElementsPublished, ElementDetails]
     title:
       expose: true
-      groups: [ElementsList, Elements, ElementDetails]
+      groups: [ElementsList, ElementsPublished, Elements, ElementDetails]
     body:
       expose: true
-      groups: [ElementDetails]
+      groups: [ElementDetails, ElementsPublished]
     link:
       expose: true
-      groups: [ElementDetails]
+      groups: [ElementDetails, ElementsPublished]
     notation:
       expose: true
       groups: [ElementsList, ElementDetails]
@@ -51,11 +49,17 @@ Capco\AppBundle\Entity\Synthesis\SynthesisElement:
       groups: [ElementDetails]
     linkedDataCreation:
       expose: true
-      groups: [ElementsList, ElementDetails]
+      groups: [ElementsList, ElementsPublished, ElementDetails]
   virtual_properties:
     hasLinkedData:
       serialized_name: has_linked_data
-      groups: [ElementsList, ElementDetails]
+      groups: [ElementsList, ElementsPublished, ElementDetails]
+    getPublishedChildren:
+      serialized_name: children
+      groups: [ElementsPublished]
+    getParentsIds:
+      serialized_name: parents_ids
+      groups: [ElementsTree, ElementsPublished]
   relations:
     -
       rel: self

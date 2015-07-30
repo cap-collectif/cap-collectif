@@ -1,27 +1,25 @@
-import SynthesisElementActions from '../../actions/SynthesisElementActions';
+const Button = ReactBootstrap.Button;
 
 const PublishButton = React.createClass({
   propTypes: {
     synthesis: React.PropTypes.object,
     element: React.PropTypes.object,
+    onModal: React.PropTypes.func,
   },
-  mixins: [ReactIntl.IntlMixin, ReactRouter.Navigation],
+  mixins: [ReactIntl.IntlMixin],
 
   render() {
     return (
       <div className="element__action">
-        <button type="button" className="element__action-publish btn btn-lg btn-default" onClick={this.publish.bind(this)}><i className="cap cap-check-4"></i></button>
+        <Button bsSize="large" type="button" className="element__action-publish" onClick={this.click.bind(this)}><i className="cap cap-check-4"></i></Button>
       </div>
     );
   },
 
-  publish() {
-    const data = {
-      'archived': true,
-      'published': true
-    };
-    SynthesisElementActions.archive(this.props.synthesis.id, this.props.element.id, data);
-    this.transitionTo('inbox', {'type': 'new'});
+  click() {
+    if (typeof this.props.onModal === 'function') {
+      this.props.onModal(true);
+    }
   },
 
 });

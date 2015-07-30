@@ -106,6 +106,7 @@ Feature: Consultation
       | stepSlug         | collecte-des-avis                |
     Then I should see "205 contributions"
     And I hover over the "#contributions-counter-pill" element
+    And I wait 3 seconds
     And I should see "25 propositions"
     And I should see "150 arguments"
     And I should see "30 sources"

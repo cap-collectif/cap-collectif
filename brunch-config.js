@@ -44,7 +44,9 @@ exports.config = {
           'app/Resources/js/cookiechoices.js',
           'app/Resources/js/googleCharts.js',
           'bower_components/mailcheck/src/mailcheck.js',
-          'bower_components/react-router/build/umd/ReactRouter.js'
+          'bower_components/react-router/build/umd/ReactRouter.js',
+          'bower_components/react-bootstrap/react-bootstrap.js',
+          'bower_components/classnames/index.js'
         ],
         'js/app.js': [
           'app/Resources/js/synthesis.js',

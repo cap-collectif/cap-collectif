@@ -1,7 +1,7 @@
 import matchParser from '../../utils/match_parser';
 
 function prepareElements(text) {
-  let elements = [];
+  const elements = [];
   let lastIndex = 0;
 
   this.forEach((match) => {
@@ -22,7 +22,7 @@ function prepareElements(text) {
 function truncate(maxLength) {
   if (!maxLength) return this;
 
-  let elements = [];
+  const elements = [];
   let length = 0;
 
   this.some((el) => {

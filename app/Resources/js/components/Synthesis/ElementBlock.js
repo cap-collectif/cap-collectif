@@ -13,7 +13,7 @@ const ElementBlock = React.createClass({
 
   getNotationStarsClasses() {
     const notation = this.props.element.notation;
-    let classes = [];
+    const classes = [];
     for (let i = 0; i < 5; i++) {
       if (i < notation) {
         classes[i] = 'active';

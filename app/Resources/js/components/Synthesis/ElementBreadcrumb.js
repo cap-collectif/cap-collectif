@@ -12,7 +12,7 @@ const ElementBreadcrumb = React.createClass({
       parents.push(element.parent);
       return this.getElementBreadcrumbItems(element.parent, parents);
     }
-    let items = parents.reverse();
+    const items = parents.reverse();
     items.push(this.props.element);
     return items;
   },

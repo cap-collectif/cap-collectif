@@ -205,6 +205,7 @@ class SynthesisController extends FOSRestController
      *  }
      * )
      *
+     * @Security("has_role('ROLE_ADMIN')")
      * @ParamConverter("synthesis", options={"mapping": {"id": "id"}})
      * @QueryParam(name="type", nullable=true)
      * @Get("/syntheses/{id}/elements")
@@ -213,10 +214,6 @@ class SynthesisController extends FOSRestController
     public function getSynthesisElementsAction(ParamFetcherInterface $paramFetcher, Synthesis $synthesis)
     {
         $type = $paramFetcher->get('type');
-        if ($type !== 'archived' && !$this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')) {
-            throw new AccessDeniedException();
-        }
-
         return $this->get('capco.synthesis.synthesis_element_handler')->getElementsFromSynthesisByType($synthesis, $type);
     }
 
@@ -235,12 +232,26 @@ class SynthesisController extends FOSRestController
      * )
      *
      * @ParamConverter("synthesis", options={"mapping": {"id": "id"}})
+     * @QueryParam(name="type", nullable=true, default="published")
      * @Get("/syntheses/{id}/elements/tree")
-     * @View(serializerGroups={"ElementsList", "ElementsTree", "UserDetails"})
      */
-    public function getPublishedSynthesisElementsTreeAction(Synthesis $synthesis)
+    public function getSynthesisElementsTreeAction(ParamFetcherInterface $paramFetcher, Synthesis $synthesis)
     {
-        return $this->get('capco.synthesis.synthesis_element_handler')->getElementsFromSynthesisByType($synthesis, 'tree');
+        $type = $paramFetcher->get('type');
+        if ($type !== 'published' && !$this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')) {
+            throw new AccessDeniedException();
+        }
+        $tree = $this->get('capco.synthesis.synthesis_element_handler')->getElementsFromSynthesisByType($synthesis, 'tree_'.$type);
+
+        $view = $this->view($tree, Codes::HTTP_OK);
+
+        if ($type === 'all') {
+            $view->setSerializationContext(SerializationContext::create()->setGroups(array('ElementsList', 'ElementsTree', 'UserDetails')));
+        } else {
+            $view->setSerializationContext(SerializationContext::create()->setGroups(array('ElementsPublished', 'UserDetails')));
+        }
+
+        return $view;
     }
 
     /**
@@ -265,7 +276,7 @@ class SynthesisController extends FOSRestController
     public function countSynthesisElementsAction(ParamFetcherInterface $paramFetcher, Synthesis $synthesis)
     {
         $type = $paramFetcher->get('type');
-        if ($type !== 'archived' && !$this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')) {
+        if ($type !== 'published' && !$this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')) {
             throw new AccessDeniedException();
         }
 
