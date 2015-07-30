@@ -16,7 +16,7 @@ Scenario: Anonymous wants to search in comments
     | capco_app_search_term | tempore |
   And I click the "#capco_app_search_type .radio:nth-child(4) label" element
   And I wait 5 seconds
-  Then I should see "16 résultats" in the ".search__results-nb" element
+  Then I should see "14 résultats" in the ".search__results-nb" element
 
 @javascript
 Scenario: Anonymous wants to search in members
@@ -34,7 +34,7 @@ Scenario: Anonymous wants to search sorted by score
     | capco_app_search_term | tempore |
   And I click the "#capco_app_search_type .radio:nth-child(3) label" element
   And I wait 5 seconds
-  Then I should see "5 résultats" in the ".search__results-nb" element
+  Then I should see "4 résultats" in the ".search__results-nb" element
   And "Post 8" should be before "Post 4" for selector ".search__results .search-result__link"
 
 @javascript
@@ -45,5 +45,5 @@ Scenario: Anonymous wants to search sorted by date
   And I click the "#capco_app_search_type .radio:nth-child(3) label" element
   And I select "Date" from "capco_app_search_sort"
   And I wait 5 seconds
-  Then I should see "5 résultats" in the ".search__results-nb" element
-  And "Post 4" should be before "Post 8" for selector ".search__results .search-result__link"
+  Then I should see "4 résultats" in the ".search__results-nb" element
+  And "Post 3" should be before "Post 9" for selector ".search__results .search-result__link"
