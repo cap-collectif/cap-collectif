@@ -35,9 +35,19 @@ export default {
         opinion: {
             no_new_version: 'Aucune nouvelle version proposée',
             add_new_version: 'Proposer une nouvelle version',
+            add_new_version_infos: 'Merci d\'examiner les versions existantes en premier lieu afin de ne pas soumettre de doublon. Vous pouvez voter pour celles existantes !',
+            version: {
+                body: 'Nouvelle version',
+                body_helper: 'Modifiez le texte',
+                comment: 'Exposé des motifs',
+                comment_helper: 'Expliquez pourquoi vous souhaitez apporter ces modifications',
+            },
         },
         global: {
             more: 'Voir plus',
+            publish: 'Publier',
+            cancel: 'Annuler',
+            title: 'Titre',
             answer: 'Répondre',
             loading: 'Chargement...',
             login: 'Connexion',

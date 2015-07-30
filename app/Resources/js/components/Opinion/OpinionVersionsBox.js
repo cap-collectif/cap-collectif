@@ -6,6 +6,7 @@ import Fetcher from '../../services/Fetcher';
 const OpinionVersionsBox = React.createClass({
   propTypes: {
     opinion: React.PropTypes.number,
+    opinionText: React.PropTypes.string,
   },
   mixins: [ReactIntl.IntlMixin],
 
@@ -60,10 +61,7 @@ const OpinionVersionsBox = React.createClass({
     return (
       <div className="">
         <div className="row">
-          <a className="btn btn-primary">
-              { this.getIntlMessage('opinion.add_new_version')}
-          </a>
-          <OpinionVersionForm opinion={this.props.opinion} />
+          <OpinionVersionForm {...this.props} />
           { this.renderFilter() }
         </div>
         { this.renderLoader() }
@@ -73,10 +71,6 @@ const OpinionVersionsBox = React.createClass({
         }
       </div>
     );
-  },
-
-  add(data) {
-    return OpinionActions.createVersion(this.props.opinion, data);
   },
 
   updateSelectedValue() {

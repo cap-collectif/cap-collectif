@@ -5,9 +5,8 @@ import {CREATE_OPINION_VERSION} from '../constants/OpinionVersionConstants';
 export default {
 
   createVersion: (opinion, data) => {
-    data.parent = opinion;
     return Fetcher
-    .post('/opinions/' + opinion + '/version', data)
+    .post('/opinions/' + opinion + '/versions', data)
     .then(() => {
       AppDispatcher.dispatch({
         actionType: CREATE_OPINION_VERSION,

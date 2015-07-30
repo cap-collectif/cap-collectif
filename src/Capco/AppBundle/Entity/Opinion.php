@@ -55,6 +55,13 @@ class Opinion
     private $body;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="comment", type="text")
+     */
+    private $comment;
+
+    /**
      * @var bool
      *
      * @ORM\Column(name="enabled", type="boolean")
@@ -339,6 +346,30 @@ class Opinion
     }
 
     /**
+     * Get comment.
+     *
+     * @return string
+     */
+    public function getComment()
+    {
+        return $this->comment;
+    }
+
+    /**
+     * Set comment.
+     *
+     * @param string $comment
+     *
+     * @return Opinion
+     */
+    public function setComment($comment)
+    {
+        $this->comment = $comment;
+
+        return $this;
+    }
+
+    /**
      * Get isEnabled.
      *
      * @return bool
@@ -553,6 +584,8 @@ class Opinion
     public function setAuthor($Author)
     {
         $this->Author = $Author;
+
+        return $this;
     }
 
     /**

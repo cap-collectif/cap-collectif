@@ -31,7 +31,11 @@ AuthService
 
     if ($('#render-opinion-versions').length) {
         React.render(
-            <OpinionVersionsBox opinion={$('#render-opinion-versions').data("opinion")} {...IntlData} />,
+            <OpinionVersionsBox
+                opinion={$('#render-opinion-versions').data("opinion")}
+                text={$('#render-opinion-versions').data("text")}
+                {...IntlData}
+            />,
             document.getElementById('render-opinion-versions')
         );
     }

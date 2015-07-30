@@ -181,7 +181,7 @@
                     <!-- Nouvelles versions -->
                     {% if opinion.opinionType.isVersionable %}
                         <div role="tabpanel" class="tab-pane" id="versions">
-                            <div id="render-opinion-versions" data-opinion="{{ opinion.id }}"></div>
+                            <div id="render-opinion-versions" data-opinion="{{ opinion.id }}" data-text="{{ opinion.body }}"></div>
                         </div>
                     {% endif %}
 
