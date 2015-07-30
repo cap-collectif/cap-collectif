@@ -76,7 +76,7 @@ Feature: Opinions
       | stepSlug         | collecte-des-avis                |
       | opinionTypeSlug  | enjeux                           |
       | opinionSlug      | opinion-3                        |
-    Then I should not see "Modifier"
+    Then I should not see "Modifier" in the "#arg-3" element
 
   Scenario: Author of an opinion try to update without checking the confirm checkbox
     Given I am logged in as user

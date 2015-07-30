@@ -32,7 +32,7 @@ Feature: Source
       | consultationSlug | croissance-innovation-disruption |
       | stepSlug         | collecte-des-avis                |
       | opinionTypeSlug  | enjeux                           |
-      | opinionSlug      | opinion-3                        |
+      | opinionSlug      | opinion-4                        |
     And I collapse sources list
     When I vote for the first source
     Then I should see "Merci ! Votre vote a bien été pris en compte."
