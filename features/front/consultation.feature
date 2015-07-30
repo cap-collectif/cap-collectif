@@ -27,7 +27,7 @@ Feature: Consultation
     And I visited "consultations page"
     And I select "Transport" from "capco_app_search_consultation_theme"
     And I wait 5 seconds
-    Then I should see 2 ".thumbnail--custom" elements
+    Then I should see 3 ".thumbnail--custom" elements
     And I should see "Stratégie technologique de l'Etat et services publics"
     And I should see "Consultation vide"
     And I should not see "Croissance, innovation, disruption"
@@ -41,7 +41,7 @@ Feature: Consultation
     And I wait 5 seconds
     And I select "Nombre de contributions" from "capco_app_search_consultation_sort"
     And I wait 5 seconds
-    Then I should see 2 ".thumbnail--custom" elements
+    Then I should see 3 ".thumbnail--custom" elements
     And I should see "Stratégie technologique de l'Etat et services publics"
     And I should see "Consultation vide"
     And I should not see "Croissance, innovation, disruption"
@@ -91,7 +91,7 @@ Feature: Consultation
       | consultationSlug | croissance-innovation-disruption |
       | stepSlug         | collecte-des-avis                |
     And I follow "Actualités"
-    And I should see 10 ".media--news" elements
+    And I should see 9 ".media--news" elements
 
   Scenario: Consultation header should display correct number of votes
     Given I visited "consultation page" with:
