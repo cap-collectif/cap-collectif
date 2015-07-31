@@ -38,6 +38,8 @@ Capco\AppBundle\Entity\Event:
         address: 11 Avenue George 5
         city: Paris
         link: http://www.phptour2014.fr
+        consultations: [@cs1]
+        themes: [@theme1, @theme2]
     event3:
         title: Event without registrations
         isEnabled: true

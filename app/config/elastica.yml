@@ -4,7 +4,7 @@ fos_elastica:
   indexes:
     app:
       use_alias: true
-      index_name: app_%kernel.environment%
+      index_name: app_prod
       settings:
         index:
           number_of_shards: 3

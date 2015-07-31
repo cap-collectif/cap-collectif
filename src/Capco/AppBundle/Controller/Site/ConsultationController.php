@@ -409,7 +409,7 @@ class ConsultationController extends Controller
                 $data = $form->getData();
 
                 return $this->redirect($this->generateUrl('app_consultation_search_term', array(
-                    'theme' => ($themesActivated && $data['theme']) ? $data['theme']->getSlug() : Theme::FILTER_ALL,
+                    'theme' => ($themesActivated && array_key_exists('theme', $data) && $data['theme']) ? $data['theme']->getSlug() : Theme::FILTER_ALL,
                     'sort' => $data['sort'],
                     'term' => $data['term'],
                 )));

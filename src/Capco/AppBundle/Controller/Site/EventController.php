@@ -47,7 +47,7 @@ class EventController extends Controller
                 $data = $form->getData();
 
                 return $this->redirect($this->generateUrl('app_event_search_term', array(
-                    'theme' => $data['theme'] ? $data['theme']->getSlug() : Theme::FILTER_ALL,
+                    'theme' => array_key_exists('theme', $data) && $data['theme'] ? $data['theme']->getSlug() : Theme::FILTER_ALL,
                     'consultation' => $data['consultation'] ? $data['consultation']->getSlug() : Consultation::FILTER_ALL,
                     'term' => $data['term'],
                 )));
@@ -101,7 +101,7 @@ class EventController extends Controller
                 $data = $form->getData();
 
                 return $this->redirect($this->generateUrl('app_event_archived_term', array(
-                    'theme' => $data['theme'] ? $data['theme']->getSlug() : Theme::FILTER_ALL,
+                    'theme' => array_key_exists('theme', $data) && $data['theme'] ? $data['theme']->getSlug() : Theme::FILTER_ALL,
                     'consultation' => $data['consultation'] ? $data['consultation']->getSlug() : Consultation::FILTER_ALL,
                     'term' => $data['term'],
                 )));

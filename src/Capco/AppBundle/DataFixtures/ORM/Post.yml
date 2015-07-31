@@ -30,5 +30,5 @@ Capco\AppBundle\Entity\Post:
     Authors:
         - @user<numberBetween(1,5)>
     Media: null
-    consultations: [@cs1]
-    themes: [@theme1]
+    consultations: [@cs2]
+    themes: [@theme2]

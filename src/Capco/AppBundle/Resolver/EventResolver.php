@@ -37,14 +37,14 @@ class EventResolver
     public function getEventsGroupedByYearAndMonth($archived, $themeSlug, $consultationSlug, $term)
     {
         $results = $this->repository->getSearchResults($archived, $themeSlug, $consultationSlug, $term);
+        $events = [];
 
         if (!empty($results)) {
             foreach ($results as $e) {
                 $events[$e->getStartYear()][$e->getStartMonth()][] = $e;
             }
-
-            return $events;
         }
+        return $events;
     }
 
     public function getLastByConsultation($consultationSlug, $limit = null)

@@ -244,7 +244,7 @@ class IdeaController extends Controller
                 $data = $form->getData();
 
                 return $this->redirect($this->generateUrl('app_idea_search_term', array(
-                    'theme' => $data['theme'] ? $data['theme']->getSlug() : Theme::FILTER_ALL,
+                    'theme' => array_key_exists('theme', $data) && $data['theme'] ? $data['theme']->getSlug() : Theme::FILTER_ALL,
                     'sort' => $data['sort'],
                     'term' => $data['term'],
                 )));

@@ -3,7 +3,7 @@ Feature: Posts comments
 ## List Comments
 
   Scenario: API client wants to list comments of a blogpost
-    When I send a GET request to "/api/posts/3/comments"
+    When I send a GET request to "/api/posts/1/comments"
     Then the JSON response should match:
     """
     {
@@ -49,7 +49,7 @@ Feature: Posts comments
     """
 
   Scenario: API client wants to find the first comment of a blogpost
-    When I send a GET request to "/api/posts/3/comments?limit=1"
+    When I send a GET request to "/api/posts/1/comments?limit=1"
     Then the JSON response should match:
     """
     {
@@ -80,12 +80,12 @@ Feature: Posts comments
     """
 
   Scenario: API client wants to find popular comments of a blogpost
-    When I send a GET request to "/api/posts/3/comments?filter=popular"
+    When I send a GET request to "/api/posts/1/comments?filter=popular"
     Then the JSON response should match:
     """
     {
-      "comments_and_answers_count": "@integer@.greaterThan(3)",
-      "comments_count": "@integer@.greaterThan(3)",
+      "comments_and_answers_count": "@integer@.greaterThan(2)",
+      "comments_count": "@integer@.greaterThan(2)",
       "comments":
       [
         @...@
@@ -114,10 +114,10 @@ Feature: Posts comments
 
   @database
   Scenario: Anonymous API client wants to add an answer to a comment
-    When I send a POST request to "/api/posts/3/comments" with json:
+    When I send a POST request to "/api/posts/1/comments" with json:
     """
     {
-      "parent": 152,
+      "parent": 153,
       "authorName": "Kéké",
       "authorEmail": "vivele94@gmail.com",
       "body": "Ma super réponse"
@@ -151,10 +151,10 @@ Feature: Posts comments
   @database
   Scenario: logged in API client wants to add an answer to a comment
     Given I am logged in to api as user
-    When I send a POST request to "/api/posts/3/comments" with json:
+    When I send a POST request to "/api/posts/1/comments" with json:
     """
     {
-      "parent": 152,
+      "parent": 153,
       "body": "Oh oui j'ose :-P"
     }
     """

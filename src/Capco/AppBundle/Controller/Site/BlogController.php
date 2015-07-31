@@ -28,6 +28,7 @@ class BlogController extends Controller
      */
     public function indexAction(Request $request, $page, $theme = null, $consultation = null)
     {
+        dump($theme);
         $em = $this->getDoctrine()->getManager();
         $currentUrl = $this->generateUrl('app_blog');
 
@@ -44,7 +45,7 @@ class BlogController extends Controller
                 $data = $form->getData();
 
                 return $this->redirect($this->generateUrl('app_blog_search_consultation', array(
-                    'theme' => $data['theme'] ? $data['theme']->getSlug() : Theme::FILTER_ALL,
+                    'theme' => array_key_exists('theme', $data) && $data['theme'] ? $data['theme']->getSlug() : Theme::FILTER_ALL,
                     'consultation' => $data['consultation'] ? $data['consultation']->getSlug() : Consultation::FILTER_ALL,
                 )));
             }
@@ -66,13 +67,14 @@ class BlogController extends Controller
 
         //Avoid division by 0 in nbPage calculation
         $nbPage = 1;
-        if ($pagination != 0) {
+        if ($pagination !== 0) {
             $nbPage = ceil(count($posts) / $pagination);
         }
 
         return [
             'posts' => $posts,
             'page' => $page,
+            'theme' => $theme,
             'nbPage' => $nbPage,
             'form' => $form->createView(),
         ];

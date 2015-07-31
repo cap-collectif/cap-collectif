@@ -22,14 +22,12 @@ Feature: Events comments
             "username": @string@,
             "display_name": @string@,
             "unique_id": @string@,
-            "media": {
-              "url": "@string@.startsWith('/media')"
-            },
+            "media": @null@,
             "_links": {
               "profile": @string@
             }
           },
-          "answers": @...@,
+          "answers": [],
           "author_email": @null@,
           "author_name": @null@,
           "is_trashed": @boolean@,
@@ -117,7 +115,7 @@ Feature: Events comments
     When I send a POST request to "/api/events/3/comments" with json:
     """
     {
-      "parent": 202,
+      "parent": 220,
       "authorName": "Kéké",
       "authorEmail": "vivele94@gmail.com",
       "body": "Ma super réponse"
@@ -154,7 +152,7 @@ Feature: Events comments
     When I send a POST request to "/api/events/3/comments" with json:
     """
     {
-      "parent": 202,
+      "parent": 220,
       "body": "Oh oui j'ose :-P"
     }
     """

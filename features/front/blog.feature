@@ -3,6 +3,29 @@ Feature: News
 Background:
   Given feature "blog" is enabled
 
+Scenario: Anonymous wants to list posts
+  Given I visited "blog page"
+  Then I should see 9 ".media--news" elements
+
+@javascript
+Scenario: Posts can be filtered by consultations
+  Given I visited "blog page"
+  And I select "Croissance, innovation, disruption" from "capco_app_search_blog_consultation"
+  And I wait 5 seconds
+  Then I should see 5 ".media--news" elements
+  And I should see "Post 5"
+  And I should not see "Post 8"
+
+@javascript
+Scenario: Post can be filtered by theme
+  Given feature "themes" is enabled
+  And I visited "blog page"
+  And I select "Justice" from "capco_app_search_blog_theme"
+  And I wait 5 seconds
+  Then I should see 4 ".media--news" elements
+  And I should see "Post 8"
+  And I should not see "Post 2"
+
 @database @javascript
 Scenario: Anonymous wants to comment a blogpost
   Given I visited "blog page"

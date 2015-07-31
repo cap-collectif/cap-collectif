@@ -215,7 +215,7 @@ Capco\AppBundle\Entity\SiteParameter:
     SiteParameterBlogJumbotronBody:
         keyname: blog.jumbotron.body
         category: pages.blog
-        value: Description de la page "Blog"
+        value: <p>Description de la page "Blog"</p>
         position: 760
         type: 1
     SiteParameterBlogJumbotronTitle:
