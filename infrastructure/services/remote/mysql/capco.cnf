@@ -1,8 +1,7 @@
 [mysqld]
 
 # This handle : Found 1 prepared transactions! It means that mysqld was not shut down properly last time and critical recovery information (last binlog or tc.log file) was manually deleted after a crash.
-
-tc_heuristic_recover = ROLLBACK
+# tc_heuristic_recover = ROLLBACK
 
 # Uncomment to start recovery mode
 # innodb_force_recovery = 1

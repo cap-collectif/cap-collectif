@@ -7,4 +7,4 @@ if [ ! -f /var/lib/mysql/ibdata1 ]; then
   chown -R mysql:mysql /var/lib/mysql
 fi
 
-exec mysqld_safe --log-error=mysqld_safe_error.log
+exec mysqld_safe --log-error=mysqld_safe_error.log  --tc-heuristic-recover=ROLLBACK
