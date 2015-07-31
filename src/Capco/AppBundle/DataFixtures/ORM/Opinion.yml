@@ -82,6 +82,7 @@ Capco\AppBundle\Entity\Opinion:
         isTrashed: false
         Author: @user5
         OpinionType: @opinionType2
+
     opinion52:
         step: @cstep2
         title: Opinion 52
@@ -92,6 +93,7 @@ Capco\AppBundle\Entity\Opinion:
         isTrashed: false
         Author: @user4
         OpinionType: @opinionType1
+
     opinion53:
         step: @cstep2
         title: Opinion 53
@@ -102,7 +104,6 @@ Capco\AppBundle\Entity\Opinion:
         isTrashed: false
         Author: @user2
         OpinionType: @opinionType2
-
 
 
     opinion54:
@@ -138,15 +139,39 @@ Capco\AppBundle\Entity\Opinion:
 
     opinion57:
         step: @cstep3
-        title: Opinion 56
+        title: Révision 1
         body: |
              <p><text(100)></p>
              <p><text(300)></p>
         isEnabled: true
         isTrashed: false
         Author: @user2
-        parent: @opinion56
-        OpinionType: @opinionType3
+        parent: @opinion53
+        OpinionType: @opinionType2
+
+    opinion58:
+        step: @cstep3
+        title: Révision 2
+        body: |
+             <p><text(100)></p>
+             <p><text(300)></p>
+        isEnabled: true
+        isTrashed: false
+        Author: @user2
+        parent: @opinion53
+        OpinionType: @opinionType2
+
+    opinion59:
+        step: @cstep3
+        title: Révision 3
+        body: |
+             <p><text(100)></p>
+             <p><text(300)></p>
+        isEnabled: true
+        isTrashed: false
+        Author: @user2
+        parent: @opinion53
+        OpinionType: @opinionType2
 
     opinion60:
         step: @cstep5

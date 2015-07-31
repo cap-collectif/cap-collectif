@@ -55,13 +55,7 @@ class OpinionsController extends FOSRestController
             $opinions[] = $opinion;
         }
 
-        // $countWithAnswers = $this->getDoctrine()->getManager()
-        //               ->getRepository('CapcoAppBundle:PostComment')
-        //               ->countCommentsAndAnswersEnabledByPost($post);
-
         return [
-            // 'comments_and_answers_count' => intval($countWithAnswers),
-            // 'comments_count' => count($paginator),
             'versions' => $opinions,
             'isOpinionContributable' => $opinion->canContribute(),
         ];
@@ -87,11 +81,11 @@ class OpinionsController extends FOSRestController
     public function postOpinionVersionAction(Request $request, Opinion $opinion)
     {
         if (!$opinion->canContribute()) {
-            throw new Exception("Can't add a version to an uncontributable opinion.", 1);
+            throw new \Exception("Can't add a version to an uncontributable opinion.", 1);
         }
 
         if (!$opinion->getOpinionType()->isVersionable()) {
-            throw new Exception("Can't add a version to an unversionable opinion.", 1);
+            throw new \Exception("Can't add a version to an unversionable opinion.", 1);
         }
 
         $user = $this->getUser();

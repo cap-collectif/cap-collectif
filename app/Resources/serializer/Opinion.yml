@@ -25,6 +25,14 @@ Capco\AppBundle\Entity\Opinion:
             expose: true
             type: integer
             groups: [Opinions]
+        argumentCount:
+            expose: true
+            type: integer
+            groups: [Opinions]
+        sourceCount:
+            expose: true
+            type: integer
+            groups: [Opinions]
         Author:
             expose: true
             type: Capco\UserBundle\Entity\User
