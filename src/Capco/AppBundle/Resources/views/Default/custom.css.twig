@@ -87,25 +87,25 @@
 
     .navbar--sub .nav li.active a,
     .navbar--sub .nav li.active:hover a {
-        border-color: {{ btnPrimary }};
+        border-color: {{ btnPrimary|raw }};
     }
 
     .navbar--sub .navbar__step-nb {
-        color: {{ btnPrimary }};
+        color: {{ btnPrimary|raw }};
     }
 
     .consultation__infos li .value {
-        color: {{ mainText }};
+        color: {{ mainText|raw }};
     }
 
     .consultation__infos > li > a:hover .category {
-        color: {{ linkHover }};
+        color: {{ linkHover|raw }};
     }
 
     .consultation__nav li.consultation__nav--primary.active a {
-        -moz-box-shadow: {{ btnPrimary }} 0 -3px 0 {{ btnPrimary }} inset;
-        -webkit-box-shadow: {{ btnPrimary }} 0 -3px 0 {{ btnPrimary }} inset;
-        box-shadow: 0 -3px 0 {{ btnPrimary }} inset;
+        -moz-box-shadow: {{ btnPrimary|raw }} 0 -3px 0 {{ btnPrimary|raw }} inset;
+        -webkit-box-shadow: {{ btnPrimary|raw }} 0 -3px 0 {{ btnPrimary|raw }} inset;
+        box-shadow: 0 -3px 0 {{ btnPrimary|raw }} inset;
     }
 
     .nav-pills > li + li {
@@ -113,11 +113,11 @@
     }
 
     .read-more-trigger {
-        color: {{ link }};
+        color: {{ link|raw }};
     }
 
     .read-more-trigger:hover {
-        color: {{ linkHover }};
+        color: {{ linkHover|raw }};
     }
 
     .pagination > li > a,
@@ -126,7 +126,7 @@
     .pagination > li > span,
     .pagination > li > span:hover,
     .pagination > li > span:focus {
-        color: {{ btnPrimary }};
+        color: {{ btnPrimary|raw }};
     }
 
     .pagination >.active > a,
@@ -135,48 +135,48 @@
     .pagination >.active > span,
     .pagination >.active > span:focus,
     .pagination >.active > span:hover {
-        background-color: {{ btnPrimary }};
-        border-color: {{ btnPrimary }};
-        color: {{ btnPrimaryText }};
+        background-color: {{ btnPrimary|raw }};
+        border-color: {{ btnPrimary|raw }};
+        color: {{ btnPrimaryText|raw }};
     }
 
     .dropdown-menu>.active > a,
     .dropdown-menu>.active > a:focus,
     .dropdown-menu>.active > a:hover {
-        background-color: {{ btnPrimary }};
+        background-color: {{ btnPrimary|raw }};
     }
 
     .profile .profile__value a:hover,
     .profile .profile__value.active a,
     .profile .profile__value.active a:hover {
-        -moz-box-shadow: 0 -3px 0 {{ link }} inset;
-        -webkit-box-shadow: 0 -3px 0 {{ link }} inset;
-        box-shadow: 0 -3px 0 {{ link }} inset;
+        -moz-box-shadow: 0 -3px 0 {{ link|raw }} inset;
+        -webkit-box-shadow: 0 -3px 0 {{ link|raw }} inset;
+        box-shadow: 0 -3px 0 {{ link|raw }} inset;
     }
 
     .settings__nav.nav-pills > li.active > a,
     .settings__nav.nav-pills > li.active > a:focus,
     .settings__nav.nav-pills > li.active > a:hover {
-        color: {{ headerText }};
-        background-color: {{ headerBg }};
+        color: {{ headerText|raw }};
+        background-color: {{ headerBg|raw }};
     }
 
     .btn-primary {
-        color: {{ btnPrimaryText }};
-        background-color: {{ btnPrimary }};
-        border-color: {{ btnPrimary }};
+        color: {{ btnPrimaryText|raw }};
+        background-color: {{ btnPrimary|raw }};
+        border-color: {{ btnPrimary|raw }};
     }
 
     .btn--outline.btn-primary:hover {
-        color: {{ btnPrimaryText }};
-        background-color: {{ btnPrimary }};
-        border-color: {{ btnPrimary }};
+        color: {{ btnPrimaryText|raw }};
+        background-color: {{ btnPrimary|raw }};
+        border-color: {{ btnPrimary|raw }};
     }
 
     .btn-primary:hover {
-        color: {{ btnPrimary }};
-        background-color: {{ btnPrimaryText }};
-        border-color: {{ btnPrimary }};
+        color: {{ btnPrimary|raw }};
+        background-color: {{ btnPrimaryText|raw }};
+        border-color: {{ btnPrimary|raw }};
     }
 
     .carousel-sidebar .nav>li>a:hover {
@@ -185,7 +185,7 @@
     .carousel-sidebar .nav>.active>a,
     .carousel-sidebar .nav>.active:focus>a {
         color: black;
-        border-left-color: {{ btnPrimary }};
+        border-left-color: {{ btnPrimary|raw }};
     }
 
     .btn-primary.active,
@@ -193,46 +193,46 @@
     .btn-primary:focus,
     .btn-primary:hover,
     .open > .btn-primary.dropdown-toggle {
-        background-color: {{ btnPrimary }};
-        border-color: {{ btnPrimary }};
-        color: {{ btnPrimaryText }};
+        background-color: {{ btnPrimary|raw }};
+        border-color: {{ btnPrimary|raw }};
+        color: {{ btnPrimaryText|raw }};
     }
 
-    h1, .h1 { color: {{ h1 }};}
-    h2, .h2 { color: {{ h2 }};}
-    h3, .h3 { color: {{ h3 }};}
-    h4, .h4 { color: {{ h4 }};}
-    h5, .h5 { color: {{ h5 }};}
-    h6, .h6 { color: {{ h6 }};}
+    h1, .h1 { color: {{ h1|raw }};}
+    h2, .h2 { color: {{ h2|raw }};}
+    h3, .h3 { color: {{ h3|raw }};}
+    h4, .h4 { color: {{ h4|raw }};}
+    h5, .h5 { color: {{ h5|raw }};}
+    h6, .h6 { color: {{ h6|raw }};}
 
     .main {
-        background-color: {{ mainBg }};
-        color:{{ mainText }};
+        background-color: {{ mainBg|raw }};
+        color:{{ mainText|raw }};
     }
     .jumbotron--bg-1 {
-        background-color: {{ headerBg }};
-        color: {{ headerText }};
+        background-color: {{ headerBg|raw }};
+        color: {{ headerText|raw }};
     }
 
     .jumbotron--bg-1 .btn--outline {
-        border-color: {{ btnText }};
-        color: {{ btnText }};
+        border-color: {{ btnText|raw }};
+        color: {{ btnText|raw }};
     }
 
     .jumbotron--bg-1 .btn--outline:hover,
     .jumbotron--bg-1 .btn--outline:focus,
     .jumbotron--bg-1 .btn--outline:active {
-        background-color: {{ btn }};
-        border-color: {{ btn }};
-        color: {{ btnText }};
+        background-color: {{ btn|raw }};
+        border-color: {{ btn|raw }};
+        color: {{ btnText|raw }};
     }
 
     .footer h2 {
-        color: {{ footerTitle }};
+        color: {{ footerTitle|raw }};
     }
 
     .footer {
-        background-color: {{ footerBg }};
+        background-color: {{ footerBg|raw }};
     }
 
     .footer,
@@ -241,11 +241,11 @@
     .footer a:focus,
     .footer .footer__body a,
     .footer .social-network li a {
-        color: {{ footerText }};
+        color: {{ footerText|raw }};
     }
 
     .jumbotron--bg-1 h1{
-        color: {{ headerTitle }};
+        color: {{ headerTitle|raw }};
     }
 
     .footer .footer__links h1,
@@ -257,37 +257,37 @@
     .footer .footer__links ul li,
     .footer .footer__links ul li a,
     .footer .capco-powered a:hover {
-        background-color: {{ footer2Bg }};
-        color: {{ footer2Text }};
+        background-color: {{ footer2Bg|raw }};
+        color: {{ footer2Text|raw }};
     }
 
     body {
-        background-color: {{ footer2Bg }};
+        background-color: {{ footer2Bg|raw }};
     }
 
     .container--alt,
     .main .container--custom:nth-of-type(odd) {
-        color: {{ sectionText }};
+        color: {{ sectionText|raw }};
     }
 
     .container--alt:after,
     .main .container--custom:nth-of-type(odd):after {
-        background: {{ sectionBg }};
+        background: {{ sectionBg|raw }};
     }
 
     .avatar {
-        background-color: {{ btnPrimary }};
+        background-color: {{ btnPrimary|raw }};
     }
 
     {% if header2Text is not null %}
         .main .container--header2 {
-            color: {{ header2Text }} !important;
+            color: {{ header2Text|raw }} !important;
         }
     {% endif %}
 
     {% if header2Bg is not null %}
         .main .container--header2:after {
-            background-color: {{ header2Bg }} !important;
+            background-color: {{ header2Bg|raw }} !important;
         }
     {% endif %}
 
@@ -297,41 +297,41 @@
         .container--header2 h3,
         .container--header2 h4,
         .container--header2 h5 {
-            color: {{ header2Title }};
+            color: {{ header2Title|raw }};
         }
         .container--header2 h2 {
-            border-bottom-color: {{ header2Title }};
+            border-bottom-color: {{ header2Title|raw }};
         }
     {% endif %}
 
     .btn--outline.btn-primary {
-        color: {{ btnPrimary }};
+        color: {{ btnPrimary|raw }};
         background-color: transparent;
-        border-color: {{ btnPrimary }};
+        border-color: {{ btnPrimary|raw }};
     }
 
     {% if header2Bg is not null %}
         .bg--consultation,
         .bg--theme,
         .bg--post {
-            background-color: {{ btnPrimary }};
+            background-color: {{ btnPrimary|raw }};
         }
     {% endif %}
 
     {% if header2Text is not null %}
         .event .month {
-            color: {{ header2Text }}
+            color: {{ header2Text|raw }}
         }
     {% endif %}
 
     {% if header2Bg is not null %}
     .event .month {
-        background-color: {{ header2Bg }};
+        background-color: {{ header2Bg|raw }};
     }
     {% endif %}
 
     .appendices__item h4 {
-        color: {{ mainText }}
+        color: {{ mainText|raw }}
     }
 
     {% if null != capco_site_image_media('image.header') and app.request.attributes.get('_route') == 'app_homepage' %}
@@ -394,27 +394,27 @@
 
     .navbar-default,
     .navbar-default .dropdown-menu {
-        background-color: {{ menuBg }};
-        color: {{ menuText }};
+        background-color: {{ menuBg|raw }};
+        color: {{ menuText|raw }};
     }
 
     .navbar-default .navbar-nav > li > a,
     .navbar-default .dropdown-menu > li > a,
     .navbar-default a.navbar__search {
-        color: {{ menuText }};
+        color: {{ menuText|raw }};
     }
 
     .navbar-default .navbar-toggle {
-        border-color: {{ menuText }};
+        border-color: {{ menuText|raw }};
     }
 
     .navbar-default .navbar-toggle .icon-bar {
-        background-color: {{ menuText }};
+        background-color: {{ menuText|raw }};
     }
 
     .navbar-default .navbar-toggle:hover .icon-bar,
     .navbar-default .navbar-toggle:focus .icon-bar {
-        background-color: {{ menuTextHover }};
+        background-color: {{ menuTextHover|raw }};
     }
 
     .navbar-default .navbar-nav > .active > a,
@@ -427,8 +427,8 @@
     .navbar-default .dropdown-menu>.active > a:focus,
     .navbar-default .dropdown-menu>.active > a:hover,
     .navbar-default a.navbar__search.active {
-        color: {{ menuTextActive }};
-        background-color: {{ menuBgHover }};
+        color: {{ menuTextActive|raw }};
+        background-color: {{ menuBgHover|raw }};
     }
 
     .navbar-default .navbar-nav > li > a:hover,
@@ -439,25 +439,25 @@
     .navbar-default .navbar-toggle:focus,
     .navbar-default a.navbar__search:hover,
     .navbar-default a.navbar__search:focus {
-        color: {{ menuTextHover }};
-        background-color: {{ menuBgHover }};
+        color: {{ menuTextHover|raw }};
+        background-color: {{ menuBgHover|raw }};
     }
 
     .navbar-default .btn--connection {
-        background-color: {{ menuText }};
-        color: {{ menuBg }};
-        border-color: {{ menuBg }};
+        background-color: {{ menuText|raw }};
+        color: {{ menuBg|raw }};
+        border-color: {{ menuBg|raw }};
     }
 
     .search__choice-panel .radio label {
-        color: {{ link }};
+        color: {{ link|raw }};
     }
 
     .search__choice-panel .radio label:hover,
     .search__choice-panel .radio label:focus,
     .search__choice-panel .radio label:active,
     .search__choice-panel .radio label.active {
-        color: {{ linkHover }};
+        color: {{ linkHover|raw }};
     }
 
 
