@@ -46,7 +46,7 @@ const OpinionVersionsBox = React.createClass({
   renderFilter() {
     if (this.state.count > 1) {
       return (
-        <div className="col-xs-offset-4 col-xs-4 hidden-xs">
+        <div className="pull-right col-xs-5 hidden-xs">
           <select ref="filter" className="h2 form-control" value={this.state.filter} onChange={() => this.updateSelectedValue()}>
             <option value="popular">{this.getIntlMessage('global.popular')}</option>
             <option value="last">{this.getIntlMessage('global.last')}</option>
@@ -59,16 +59,18 @@ const OpinionVersionsBox = React.createClass({
 
   render() {
     return (
-      <div className="">
+      <div>
         <div className="row">
           <OpinionVersionForm {...this.props} />
           { this.renderFilter() }
         </div>
-        { this.renderLoader() }
-        {!this.state.isLoading
-          ? <OpinionVersionList {...this.props} versions={this.state.versions} />
-          : <span />
-        }
+        <div className="row">
+          { this.renderLoader() }
+          {!this.state.isLoading
+            ? <OpinionVersionList {...this.props} versions={this.state.versions} />
+            : <span />
+          }
+        </div>
       </div>
     );
   },

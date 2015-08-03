@@ -11,7 +11,6 @@ export default {
       AppDispatcher.dispatch({
         actionType: CREATE_OPINION_VERSION,
       });
-      return true;
     });
   },
 

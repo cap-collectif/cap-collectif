@@ -7,19 +7,13 @@ const OpinionVersion = React.createClass({
   },
   mixins: [ReactIntl.IntlMixin],
 
-  getInitialState() {
-    return {};
-  },
-
   render() {
     const version = this.props.version;
     return (
       <li className="opinion  opinion--comment" >
         <div className="opinion__body">
           <UserAvatar user={version.author} />
-            <p>
-              { version.body }
-            </p>
+          <div dangerouslySetInnerHTML={{__html: version.body }} />
         </div>
       </li>
     );
