@@ -138,42 +138,6 @@ Capco\AppBundle\Entity\Opinion:
         OpinionType: @opinionType3
 
     opinion57:
-        step: @cstep3
-        title: Révision 1
-        body: |
-             <p><text(100)></p>
-             <p><text(300)></p>
-        isEnabled: true
-        isTrashed: false
-        Author: @user2
-        parent: @opinion53
-        OpinionType: @opinionType2
-
-    opinion58:
-        step: @cstep3
-        title: Révision 2
-        body: |
-             <p><text(100)></p>
-             <p><text(300)></p>
-        isEnabled: true
-        isTrashed: false
-        Author: @user2
-        parent: @opinion53
-        OpinionType: @opinionType2
-
-    opinion59:
-        step: @cstep3
-        title: Révision 3
-        body: |
-             <p><text(100)></p>
-             <p><text(300)></p>
-        isEnabled: true
-        isTrashed: false
-        Author: @user2
-        parent: @opinion53
-        OpinionType: @opinionType2
-
-    opinion60:
         step: @cstep5
         title: Article 1
         body: Je suis l'article-1 du PJL
@@ -202,3 +166,4 @@ Capco\AppBundle\Entity\Opinion:
         Author: @user2
         OpinionType: @opinionType5
         position: 2
+

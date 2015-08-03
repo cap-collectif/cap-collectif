@@ -14,41 +14,6 @@ use Capco\AppBundle\Entity\Opinion;
  */
 class OpinionRepository extends EntityRepository
 {
-
-    public function getEnabledVersionsByOpinion(Opinion $opinion, $offset = 0, $limit = 10, $filter = 'last')
-    {
-        $qb = $this->getIsEnabledQueryBuilder()
-            ->addSelect('author', 'm')
-            ->leftJoin('o.Author', 'author')
-            ->leftJoin('author.Media', 'm')
-            // ->leftJoin('o.votes', 'v')
-            // ->leftJoin('o.Reports', 'r')
-
-            ->andWhere('o.parent = :opinion')
-            ->andWhere('o.isTrashed = false')
-            ->setParameter('opinion', $opinion)
-        ;
-
-        if ($filter === 'old') {
-            $qb->addOrderBy('o.updatedAt', 'ASC');
-        }
-
-        if ($filter === 'last') {
-            $qb->addOrderBy('o.updatedAt', 'DESC');
-        }
-
-        if ($filter === 'popular') {
-            $qb->addOrderBy('o.voteCount', 'DESC');
-        }
-
-        $qb
-            ->setFirstResult($offset)
-            ->setMaxResults($limit);
-
-        return new Paginator($qb);
-    }
-
-
     /**
      * Get one opinion by slug.
      *

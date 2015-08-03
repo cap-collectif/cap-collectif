@@ -42,7 +42,8 @@ const OpinionVersionForm = React.createClass({
     if (!this.state.showModal) {
       return (
         <a className="btn btn-primary" onClick={this.show.bind(this)}>
-          { this.getIntlMessage('opinion.add_new_version')}
+          <i className="cap cap-add-1"></i>
+          { ' ' + this.getIntlMessage('opinion.add_new_version')}
         </a>
       );
     }

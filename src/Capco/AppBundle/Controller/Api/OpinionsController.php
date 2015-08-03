@@ -3,11 +3,14 @@
 namespace Capco\AppBundle\Controller\Api;
 
 use Capco\AppBundle\Entity\Opinion;
+use Capco\AppBundle\Entity\OpinionVersion;
+
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Capco\AppBundle\Form\OpinionVersionType;
 use Capco\AppBundle\CapcoAppBundleEvents;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 
 use FOS\RestBundle\Controller\FOSRestController;
 use FOS\RestBundle\Controller\Annotations\View;
@@ -38,7 +41,7 @@ class OpinionsController extends FOSRestController
      * @QueryParam(name="offset", requirements="[0-9.]+", default="0")
      * @QueryParam(name="limit", requirements="[0-9.]+", default="10")
      * @QueryParam(name="filter", requirements="(old|last|popular)", default="last")
-     * @View(serializerGroups={"Opinions", "UsersInfos"})
+     * @View(serializerGroups={"OpinionVersions", "UsersInfos"})
      */
     public function getOpinionVersionsAction(Opinion $opinion, ParamFetcherInterface $paramFetcher)
     {
@@ -47,16 +50,16 @@ class OpinionsController extends FOSRestController
         $filter = $paramFetcher->get('filter');
 
         $paginator = $this->getDoctrine()->getManager()
-                    ->getRepository('CapcoAppBundle:Opinion')
-                    ->getEnabledVersionsByOpinion($opinion, $offset, $limit, $filter);
+                    ->getRepository('CapcoAppBundle:OpinionVersion')
+                    ->getEnabledByOpinion($opinion, $offset, $limit, $filter);
 
-        $opinions = [];
-        foreach ($paginator as $opinion) {
-            $opinions[] = $opinion;
+        $versions = [];
+        foreach ($paginator as $version) {
+            $versions[] = $version;
         }
 
         return [
-            'versions' => $opinions,
+            'versions' => $versions,
             'isOpinionContributable' => $opinion->canContribute(),
         ];
     }
@@ -74,6 +77,7 @@ class OpinionsController extends FOSRestController
      *  }
      * )
      *
+     * @Security("has_role('ROLE_USER')")
      * @Post("/opinions/{id}/versions")
      * @ParamConverter("opinion", options={"mapping": {"id": "id"}})
      * @View(statusCode=201, serializerGroups={})
@@ -89,7 +93,7 @@ class OpinionsController extends FOSRestController
         }
 
         $user = $this->getUser();
-        $opinionVersion = (new Opinion())
+        $opinionVersion = (new OpinionVersion())
                     ->setAuthor($user)
                     ->setParent($opinion)
                 ;

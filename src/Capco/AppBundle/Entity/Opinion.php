@@ -6,6 +6,9 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Validator\Constraints as Assert;
+use Capco\AppBundle\Traits\TrashableTrait;
+use Capco\AppBundle\Traits\SluggableTitleTrait;
+
 
 /**
  * Opinion.
@@ -16,6 +19,9 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class Opinion
 {
+    use TrashableTrait;
+    use SluggableTitleTrait;
+
     public static $sortCriterias = [
         'votes' => 'opinion.sort.votes',
         'comments' => 'opinion.sort.comments',
@@ -30,21 +36,7 @@ class Opinion
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      */
-    private $id;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="title", type="string", length=255)
-     * @Assert\NotBlank()
-     */
-    private $title;
-
-    /**
-     * @Gedmo\Slug(fields={"title"})
-     * @ORM\Column(length=255)
-     */
-    private $slug;
+    protected $id;
 
     /**
      * @var string
@@ -52,97 +44,69 @@ class Opinion
      * @ORM\Column(name="body", type="text")
      * @Assert\NotBlank()
      */
-    private $body;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="comment", type="text", nullable=true)
-     */
-    private $comment;
+    protected $body;
 
     /**
      * @var bool
      *
      * @ORM\Column(name="enabled", type="boolean")
      */
-    private $isEnabled = true;
+    protected $isEnabled = true;
 
     /**
      * @var \DateTime
      * @ORM\Column(name="created_at", type="datetime")
      */
-    private $createdAt;
+    protected $createdAt;
 
     /**
      * @var \DateTime
      * @Gedmo\Timestampable(on="change", field={"title", "body", "Author", "OpinionType", "Consultation"})
      * @ORM\Column(name="updated_at", type="datetime")
      */
-    private $updatedAt;
-
-    /**
-     * @var bool
-     *
-     * @ORM\Column(name="trashed", type="boolean")
-     */
-    private $isTrashed = false;
-
-    /**
-     * @var \DateTime
-     * @Gedmo\Timestampable(on="change", field={"isTrashed"})
-     * @ORM\Column(name="trashed_at", type="datetime", nullable=true)
-     */
-    private $trashedAt = null;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="trashed_reason", type="text", nullable=true)
-     */
-    private $trashedReason = null;
+    protected $updatedAt;
 
     /**
      * @var int
      *
      * @ORM\Column(name="position", type="integer")
      */
-    private $position = 0;
+    protected $position = 0;
 
     /**
      * @var int
      *
      * @ORM\Column(name="vote_count_nok", type="integer")
      */
-    private $voteCountNok = 0;
+    protected $voteCountNok = 0;
 
     /**
      * @var int
      *
      * @ORM\Column(name="vote_count_ok", type="integer")
      */
-    private $voteCountOk = 0;
+    protected $voteCountOk = 0;
 
     /**
      * @var int
      *
      * @ORM\Column(name="vote_count_mitige", type="integer")
      */
-    private $voteCountMitige = 0;
+    protected $voteCountMitige = 0;
 
     /**
      * @var int
      *
      * @ORM\Column(name="sources_count", type="integer")
      */
-    private $sourcesCount = 0;
+    protected $sourcesCount = 0;
 
     /**
      * @var int
      *
      * @ORM\Column(name="arguments_count", type="integer")
      */
-    private $argumentsCount = 0;
+    protected $argumentsCount = 0;
 
     /**
      * @var string
@@ -150,57 +114,43 @@ class Opinion
      * @ORM\ManyToOne(targetEntity="Capco\UserBundle\Entity\User", inversedBy="opinions")
      * @ORM\JoinColumn(name="author_id", referencedColumnName="id", onDelete="CASCADE")
      */
-    private $Author;
+    protected $Author;
 
     /**
-     * @var
-     *
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\OpinionType", inversedBy="Opinions", cascade={"persist"})
      * @ORM\JoinColumn(name="opinion_type_id", referencedColumnName="id", nullable=false)
      */
     private $OpinionType;
 
     /**
-     * @var
-     *
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\ConsultationStep", inversedBy="opinions", cascade={"persist"})
+     * @ORM\JoinColumn(name="step_id", referencedColumnName="id", nullable=false)
      * @Assert\NotNull()
      */
     private $step;
 
     /**
-     * @var
      * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\Source", mappedBy="Opinion",  cascade={"persist", "remove"}, orphanRemoval=true)
      */
-    private $Sources;
+    protected $Sources;
 
     /**
-     * @var
      * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\Argument", mappedBy="opinion",  cascade={"persist", "remove"}, orphanRemoval=true)
      */
-    private $arguments;
+    protected $arguments;
 
     /**
-     * @var string
-     *
      * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\OpinionVote", mappedBy="opinion", cascade={"persist", "remove"}, orphanRemoval=true)
      */
-    private $votes;
+    protected $votes;
 
     /**
-     * @var string
-     *
      * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\Reporting", mappedBy="Opinion", cascade={"persist", "remove"})
      */
-    private $Reports;
+    protected $Reports;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Opinion", inversedBy="versions", cascade={"persist"})
-     */
-    private $parent;
-
-    /**
-     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\Opinion", mappedBy="parent", cascade={"persist", "remove"})
+     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\OpinionVersion", mappedBy="parent", cascade={"persist", "remove"})
      */
     private $versions;
 
@@ -209,7 +159,7 @@ class Opinion
      *
      * @ORM\Column(name="pinned", type="boolean")
      */
-    private $pinned = false;
+    protected $pinned = false;
 
     public function __construct()
     {
@@ -274,54 +224,6 @@ class Opinion
     }
 
     /**
-     * Get title.
-     *
-     * @return string
-     */
-    public function getTitle()
-    {
-        return $this->title;
-    }
-
-    /**
-     * Set title.
-     *
-     * @param string $title
-     *
-     * @return Opinion
-     */
-    public function setTitle($title)
-    {
-        $this->title = $title;
-
-        return $this;
-    }
-
-    /**
-     * Get slug.
-     *
-     * @return string
-     */
-    public function getSlug()
-    {
-        return $this->slug;
-    }
-
-    /**
-     * Set slug.
-     *
-     * @param string $slug
-     *
-     * @return Opinion
-     */
-    public function setSlug($slug)
-    {
-        $this->slug = $slug;
-
-        return $this;
-    }
-
-    /**
      * Get body.
      *
      * @return string
@@ -341,30 +243,6 @@ class Opinion
     public function setBody($body)
     {
         $this->body = $body;
-
-        return $this;
-    }
-
-    /**
-     * Get comment.
-     *
-     * @return string
-     */
-    public function getComment()
-    {
-        return $this->comment;
-    }
-
-    /**
-     * Set comment.
-     *
-     * @param string $comment
-     *
-     * @return Opinion
-     */
-    public function setComment($comment)
-    {
-        $this->comment = $comment;
 
         return $this;
     }
@@ -413,81 +291,6 @@ class Opinion
         return $this->updatedAt;
     }
 
-    /**
-     * Get isTrashed.
-     *
-     * @return bool
-     */
-    public function getIsTrashed()
-    {
-        return $this->isTrashed;
-    }
-
-    /**
-     * Set isTrashed.
-     *
-     * @param bool $isTrashed
-     *
-     * @return Opinion
-     */
-    public function setIsTrashed($isTrashed)
-    {
-        if (false == $isTrashed) {
-            $this->trashedReason = null;
-            $this->trashedAt = null;
-        }
-        $this->isTrashed = $isTrashed;
-
-        return $this;
-    }
-
-    /**
-     * Get trashedAt.
-     *
-     * @return \DateTime
-     */
-    public function getTrashedAt()
-    {
-        return $this->trashedAt;
-    }
-
-    /**
-     * Set trashedAt.
-     *
-     * @param \DateTime $trashedAt
-     *
-     * @return Opinion
-     */
-    public function setTrashedAt($trashedAt)
-    {
-        $this->trashedAt = $trashedAt;
-
-        return $this;
-    }
-
-    /**
-     * Get trashedReason.
-     *
-     * @return string
-     */
-    public function getTrashedReason()
-    {
-        return $this->trashedReason;
-    }
-
-    /**
-     * Set trashedReason.
-     *
-     * @param string $trashedReason
-     *
-     * @return Opinion
-     */
-    public function setTrashedReason($trashedReason)
-    {
-        $this->trashedReason = $trashedReason;
-
-        return $this;
-    }
     /**
      * @return int
      */
@@ -760,18 +563,6 @@ class Opinion
         $this->Reports->removeElement($report);
 
         return $this;
-    }
-
-    public function setParent(Opinion $parent)
-    {
-        $this->parent = $parent;
-
-        return $this;
-    }
-
-    public function getParent()
-    {
-        return $this->parent;
     }
 
     public function getVersions()

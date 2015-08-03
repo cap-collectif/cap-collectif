@@ -1,0 +1,43 @@
+Capco\AppBundle\Entity\OpinionVersion:
+    exclusion_policy: ALL
+    properties:
+        id:
+            expose: true
+            type: integer
+            groups: [OpinionVersions]
+        title:
+            expose: true
+            type: string
+            groups: [OpinionVersions]
+        body:
+            expose: true
+            type: string
+            groups: [OpinionVersions]
+        createdAt:
+            expose: true
+            type: DateTime
+            groups: [OpinionVersions]
+        updatedAt:
+            expose: true
+            type: DateTime
+            groups: [OpinionVersions]
+        votesCount:
+            expose: true
+            type: integer
+            groups: [OpinionVersions]
+        argumentsCount:
+            expose: true
+            type: integer
+            groups: [OpinionVersions]
+        sourcesCount:
+            expose: true
+            type: integer
+            groups: [OpinionVersions]
+        author:
+            expose: true
+            type: Capco\UserBundle\Entity\User
+            groups: [OpinionVersions, UserMedias]
+        isTrashed:
+            expose: true
+            type: boolean
+            groups: [OpinionVersions]

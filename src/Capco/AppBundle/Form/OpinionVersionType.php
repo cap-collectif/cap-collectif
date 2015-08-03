@@ -17,9 +17,9 @@ class OpinionVersionType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('title', 'text', ['required' => true])
-            ->add('body', 'text', ['required' => true])
-            ->add('comment', 'text', ['required' => true])
+            ->add('title', null, ['required' => true])
+            ->add('body', null, ['required' => true])
+            ->add('comment', null, ['required' => true])
         ;
     }
 
@@ -29,7 +29,7 @@ class OpinionVersionType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'Capco\AppBundle\Entity\Opinion',
+            'data_class' => 'Capco\AppBundle\Entity\OpinionVersion',
             'csrf_protection' => false,
             'translation_domain' => 'CapcoAppBundle',
         ));
