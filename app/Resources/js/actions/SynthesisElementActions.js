@@ -1,6 +1,6 @@
 import AppDispatcher from '../dispatchers/AppDispatcher';
 import Fetcher from '../services/Fetcher';
-import {RECEIVE_COUNT, RECEIVE_ELEMENTS, RECEIVE_ELEMENT, ARCHIVE_ELEMENT, NOTE_ELEMENT, MOVE_ELEMENT, DIVIDE_ELEMENT, UPDATE_ELEMENT_SUCCESS, UPDATE_ELEMENT_FAILURE} from '../constants/SynthesisElementConstants';
+import {RECEIVE_COUNT, RECEIVE_ELEMENTS, RECEIVE_ELEMENT, CREATE_ELEMENT, ARCHIVE_ELEMENT, NOTE_ELEMENT, MOVE_ELEMENT, DIVIDE_ELEMENT, UPDATE_ELEMENT_SUCCESS, UPDATE_ELEMENT_FAILURE, CREATE_ELEMENT_SUCCESS, CREATE_ELEMENT_FAILURE} from '../constants/SynthesisElementConstants';
 
 const idOf = (val) => {
   if (val === 'root') {
@@ -16,7 +16,6 @@ const idOf = (val) => {
 };
 
 const updateElementFromData = (synthesis, element, data, successMessage = 'common.success.update_success', errorMessage = 'common.errors.update_error') => {
-  console.log(data);
   return Fetcher
     .put('/syntheses/' + synthesis + '/elements/' + element, data)
     .then(() => {
@@ -35,7 +34,37 @@ const updateElementFromData = (synthesis, element, data, successMessage = 'commo
     });
 };
 
+const createElementFromData = (synthesis, data, successMessage = 'common.success.update_success', errorMessage = 'common.errors.update_error') => {
+  return Fetcher
+    .post('/syntheses/' + synthesis + '/elements', data)
+    .then(() => {
+      AppDispatcher.dispatch({
+        actionType: CREATE_ELEMENT_SUCCESS,
+        message: successMessage,
+      });
+      return true;
+    })
+    .catch(() => {
+      AppDispatcher.dispatch({
+        actionType: CREATE_ELEMENT_FAILURE,
+        message: errorMessage,
+      });
+      return false;
+    });
+};
+
 export default {
+
+  create: (synthesis, data) => {
+    AppDispatcher.dispatch({
+      actionType: CREATE_ELEMENT,
+      element: data,
+    });
+    if (data.parent) {
+      data.parent = idOf(data.parent);
+    }
+    createElementFromData(synthesis, data, 'common.success.create_success', 'common.errors.create_error');
+  },
 
   archive: (synthesis, element, data) => {
     AppDispatcher.dispatch({
