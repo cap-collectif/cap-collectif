@@ -2,16 +2,16 @@ synthesis:
 
   logs:
     sentence:
-      create: %author% a créé l'élément %element%
-      remove: %author% a supprimé l'élément %element%
-      update: %author% a mis à jour l'élément %element%
-      move: %author% a déplacé l'élément %element%
-      publish: %author% a publié l'élément %element%
-      unpublish: %author% a dépublié l'élément %element%
-      archive: %author% a marqué l'élément %element% comme traité
-      note: %author% a modifié la note de l'élément %element%
-      comment: %author% a commenté l'élément %element%
-      divide: %author% a divisé l'élément %element%
+      create: Création de l'élément
+      remove: %author% a supprimé l'élément
+      update: %author% a mis à jour l'élément
+      move: %author% a déplacé l'élément
+      publish: %author% a publié l'élément
+      unpublish: %author% a dépublié l'élément
+      archive: %author% a marqué l'élément comme traité
+      note: %author% a modifié la note de l'élément
+      comment: %author% a commenté l'élément
+      divide: %author% a divisé l'élément
 
   source_types:
     none: Aucune

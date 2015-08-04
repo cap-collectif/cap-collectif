@@ -305,7 +305,7 @@ class SynthesisController extends FOSRestController
      * @Get("/syntheses/{synthesis_id}/elements/{element_id}")
      * @ParamConverter("synthesis", options={"mapping": {"synthesis_id": "id"}})
      * @ParamConverter("element", options={"mapping": {"element_id": "id"}})
-     * @View(serializerGroups={"ElementDetails", "UserDetails"})
+     * @View(serializerGroups={"ElementDetails", "UserDetails", "LogDetails"})
      */
     public function getSynthesisElementAction(Synthesis $synthesis, SynthesisElement $element)
     {
@@ -337,7 +337,7 @@ class SynthesisController extends FOSRestController
         if ($form->isValid()) {
             $element = $this->get('capco.synthesis.synthesis_element_handler')->createElementInSynthesis($element, $synthesis);
             $view = $this->view($element, Codes::HTTP_CREATED);
-            $view->setSerializationContext(SerializationContext::create()->setGroups(array('ElementDetails', 'UserDetails')));
+            $view->setSerializationContext(SerializationContext::create()->setGroups(array('ElementDetails', 'UserDetails', 'LogDetails')));
             $url = $this->generateUrl('get_synthesis_element', ['synthesis_id' => $synthesis->getId(), 'element_id' => $element->getId()], UrlGeneratorInterface::ABSOLUTE_URL);
             $view->setHeader('Location', $url);
 
@@ -364,7 +364,7 @@ class SynthesisController extends FOSRestController
      * @Put("/syntheses/{synthesis_id}/elements/{element_id}")
      * @ParamConverter("synthesis", options={"mapping": {"synthesis_id": "id"}})
      * @ParamConverter("element", options={"mapping": {"element_id": "id"}})
-     * @View(serializerGroups={"ElementDetails", "UserDetails"})
+     * @View(serializerGroups={"ElementDetails", "UserDetails", "LogDetails"})
      */
     public function updateSynthesisElementAction(Request $request, Synthesis $synthesis, SynthesisElement $element)
     {

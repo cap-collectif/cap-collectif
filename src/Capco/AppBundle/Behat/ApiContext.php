@@ -306,17 +306,17 @@ class ApiContext extends ApplicationContext
     }
 
     /**
-     * There should be a created log on response element with username.
+     * There should be a created log on response element.
      *
-     * @Then there should be a create log on response element with username :username
+     * @Then there should be a create log on response element
      */
-    public function thereShouldBeACreateLogOnResponseElement($username)
+    public function thereShouldBeACreateLogOnResponseElement()
     {
         $this->response->json(); // check if json
         $body = (string) $this->response->getBody();
         $data = json_decode($body, true);
         $elementId = $data['id'];
-        $this->thereShouldBeALogOnElementWithSentence($elementId, $username.' a créé l\'élément '.$elementId);
+        $this->thereShouldBeALogOnElementWithSentence($elementId, 'Création de l\'élément');
     }
 
     /**

@@ -13,6 +13,10 @@
         {
             "type": "vcs",
             "url": "https://github.com/spyl94/SonataMediaBundle"
+        },
+        {
+            "type": "vcs",
+            "url": "https://github.com/ArteGEIE/serializer"
         }
     ],
     "require": {
@@ -57,6 +61,7 @@
         "mewesk/twig-excel-bundle": "~1.0@dev",
         "friendsofsymfony/elastica-bundle": "^3.2@dev",
         "jms/serializer-bundle": "~1.0@dev",
+        "jms/serializer": "dev-fix/2-nested-serializer-calls as 1.0.0",
         "nelmio/api-doc-bundle": "~2.9@dev",
         "friendsofsymfony/rest-bundle": "1.5.*",
         "lexik/jwt-authentication-bundle": "~1.0@dev",

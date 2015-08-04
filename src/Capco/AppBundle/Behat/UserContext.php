@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\Behat;
 
+use Behat\Mink\Exception\UnsupportedDriverActionException;
 use Capco\AppBundle\Entity\EventRegistration;
 
 class UserContext extends DefaultContext
@@ -44,6 +45,11 @@ class UserContext extends DefaultContext
         $this->fillField('_username', $email);
         $this->fillField('_password', $pwd);
         $this->pressButton('Se connecter');
+        try {
+            $this->getSession()->wait(2000);
+        } catch (UnsupportedDriverActionException $e) {
+            // If we're not using JS, we can not (and don't need to) wait
+        }
     }
 
     /**

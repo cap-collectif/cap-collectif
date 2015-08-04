@@ -26,41 +26,40 @@ class LogManager
     {
         $sentences = array();
         $username = $this->userManager->findOneBy(array('slug' => $log->getUsername()));
-        $elementName = $log->getObjectId();
 
         // Update actions
         if ($log->getAction() === 'update') {
             if (array_key_exists('parent', $log->getData())) {
-                $sentences[] = $this->makeSentence('move', $username, $elementName);
+                $sentences[] = $this->makeSentence('move', $username);
             }
             if (array_key_exists('published', $log->getData())) {
                 if ($log->getData()['published'] === true) {
-                    $sentences[] = $this->makeSentence('publish', $username, $elementName);
+                    $sentences[] = $this->makeSentence('publish', $username);
                 } else {
-                    $sentences[] = $this->makeSentence('unpublish', $username, $elementName);
+                    $sentences[] = $this->makeSentence('unpublish', $username);
                 }
             }
             if (array_key_exists('archived', $log->getData()) && $log->getData()['archived'] === true) {
-                $sentences[] = $this->makeSentence('archive', $username, $elementName);
+                $sentences[] = $this->makeSentence('archive', $username);
             }
             if (array_key_exists('notation', $log->getData())) {
-                $sentences[] = $this->makeSentence('note', $username, $elementName);
+                $sentences[] = $this->makeSentence('note', $username);
             }
             if (array_key_exists('comment', $log->getData())) {
-                $sentences[] = $this->makeSentence('comment', $username, $elementName);
+                $sentences[] = $this->makeSentence('comment', $username);
             }
             if (array_key_exists('title', $log->getData()) || array_key_exists('body', $log->getData())) {
-                $sentences[] = $this->makeSentence('update', $username, $elementName);
+                $sentences[] = $this->makeSentence('update', $username);
             }
             if (array_key_exists('division', $log->getData())) {
-                $sentences[] = $this->makeSentence('divide', $username, $elementName);
+                $sentences[] = $this->makeSentence('divide', $username);
             }
 
             return $sentences;
         }
 
         // Delete or create actions
-        $sentences[] = $this->makeSentence($log->getAction(), $username, $elementName);
+        $sentences[] = $this->makeSentence($log->getAction(), $username);
 
         return $sentences;
     }
@@ -70,13 +69,12 @@ class LogManager
         return $this->em->getRepository('GedmoLoggable:LogEntry')->getLogEntries($entity);
     }
 
-    public function makeSentence($action, $username, $elementName)
+    public function makeSentence($action, $username)
     {
         $transBase = 'synthesis.logs.sentence.';
 
         return $this->translator->trans($transBase.$action, array(
             '%author%' => $username,
-            '%element%' => $elementName,
         ), 'CapcoAppBundleSynthesis');
     }
 }

@@ -9,6 +9,8 @@ import IgnoreButton from './IgnoreButton';
 import PublishModal from './PublishModal';
 import DivideModal from './DivideModal';
 
+const FormattedDate = ReactIntl.FormattedDate;
+
 const EditElement = React.createClass({
   propTypes: {
     synthesis: React.PropTypes.object,
@@ -87,6 +89,34 @@ const EditElement = React.createClass({
     );
   },
 
+  renderHistory() {
+    const element = this.state.element;
+    if (element && element.logs.length > 0) {
+      return (
+        <ul className="element__history">
+          {
+            element.logs.map((log) => {
+              return log.sentences.map((sentence) => {
+                return this.renderLogSentence(sentence, log.logged_at);
+              });
+            })
+          }
+        </ul>
+      );
+    }
+  },
+
+  renderLogSentence(sentence, date) {
+    return (
+      <li className="element__history__log">
+        {sentence}
+        <span className="excerpt small pull-right">
+          <FormattedDate value={date} day="numeric" month="long" year="numeric" hour="numeric" minute="numeric" />
+        </span>
+      </li>
+    );
+  },
+
   renderPublishModal() {
     const element = this.state.element;
     if (element) {
@@ -122,6 +152,7 @@ const EditElement = React.createClass({
       <div className="block synthesis--edit__content">
         {this.renderLoader()}
         {this.renderElementPanel()}
+        {this.renderHistory()}
         {this.renderPublishModal()}
         {this.renderDivideModal()}
       </div>
