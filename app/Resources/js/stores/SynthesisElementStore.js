@@ -1,4 +1,4 @@
-import {RECEIVE_COUNT, RECEIVE_ELEMENTS, RECEIVE_ELEMENT, CREATE_ELEMENT, ARCHIVE_ELEMENT, NOTE_ELEMENT, MOVE_ELEMENT, DIVIDE_ELEMENT, UPDATE_ELEMENT_SUCCESS, UPDATE_ELEMENT_FAILURE, CREATE_ELEMENT_SUCCESS, CREATE_ELEMENT_FAILURE} from '../constants/SynthesisElementConstants';
+import {RECEIVE_COUNT, RECEIVE_ELEMENTS, RECEIVE_ELEMENT, ARCHIVE_ELEMENT, NOTE_ELEMENT, MOVE_ELEMENT, DIVIDE_ELEMENT, UPDATE_ELEMENT_SUCCESS, UPDATE_ELEMENT_FAILURE} from '../constants/SynthesisElementConstants';
 import BaseStore from './BaseStore';
 import ArrayHelper from '../services/ArrayHelper';
 
@@ -55,12 +55,6 @@ class SynthesisElementStore extends BaseStore {
         this._isInboxSync[action.type] = true;
         this.emitChange();
         break;
-      case CREATE_ELEMENT:
-        this._resetInboxSync();
-        this._isProcessing = true;
-        this._resetMessages();
-        this.emitChange();
-        break;
       case ARCHIVE_ELEMENT:
         this._resetMessages();
         // Update data
@@ -107,21 +101,6 @@ class SynthesisElementStore extends BaseStore {
         this.emitChange();
         break;
       case UPDATE_ELEMENT_FAILURE:
-        this._messages.errors.push(action.message);
-        this._messages.success = [];
-        this._isProcessing = false;
-        this._isElementSync = false;
-        this._isCountSync = false;
-        this._resetInboxSync();
-        this.emitChange();
-        break;
-      case CREATE_ELEMENT_SUCCESS:
-        this._resetMessages();
-        this._messages.success.push(action.message);
-        this._isProcessing = false;
-        this.emitChange();
-        break;
-      case CREATE_ELEMENT_FAILURE:
         this._messages.errors.push(action.message);
         this._messages.success = [];
         this._isProcessing = false;

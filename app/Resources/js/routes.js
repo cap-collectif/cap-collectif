@@ -27,6 +27,7 @@ export default (
       <Route name="inbox" path=":type" handler={ElementsInbox} />
     </Route>
     <Route name="tree" path="tree" handler={ElementsTree} />
+    <Route name="new_folder" path="new-folder" handler={ElementsInbox} />
     <Route name="show_element" path="element/:element_id" handler={EditElement} />
   </Route>
 );

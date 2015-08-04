@@ -28,7 +28,6 @@ class BlogController extends Controller
      */
     public function indexAction(Request $request, $page, $theme = null, $consultation = null)
     {
-        dump($theme);
         $em = $this->getDoctrine()->getManager();
         $currentUrl = $this->generateUrl('app_blog');
 

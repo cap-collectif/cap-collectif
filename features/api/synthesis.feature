@@ -655,10 +655,7 @@ Feature: Synthesis
     {
       "title": "Coucou, je suis un élément.",
       "body": "blabla",
-      "notation": 5,
-      "archived": true,
-      "published": true,
-      "parent": "43"
+      "notation": 5
     }
     """
     Then the JSON response status code should be 201
@@ -667,14 +664,14 @@ Feature: Synthesis
     {
       "has_linked_data": false,
       "id": @string@,
-      "published": true,
+      "published": false,
       "created_at": "@string@.isDateTime()",
       "updated_at": "@string@.isDateTime()",
-      "archived": true,
+      "archived": false,
       "author": @null@,
       "original_division": @null@,
       "division": @null@,
-      "parent": @...@,
+      "parent": @null@,
       "children": [],
       "display_type": "folder",
       "title": "Coucou, je suis un élément.",

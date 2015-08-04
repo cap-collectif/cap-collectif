@@ -234,29 +234,3 @@ Scenario: Admin wants to divide an element without selecting text
   And I click the ".division__create-element" element
   And I wait 5 seconds
   Then I should see "Veuillez sélectionner du texte pour créer une contribution."
-
-@javascript
-Scenario: Admin wants to create an element
-  Given I am logged in as admin
-  And I visited "consultation page" with:
-    | consultationSlug | strategie-technologique-de-l-etat-et-services-publics |
-    | stepSlug         | collecte-des-avis-pour-une-meilleur-strategie         |
-  And I follow "Synthèse"
-  And I follow "Éditer"
-  And I wait 5 seconds
-  And I click the ".synthesis__action--create" element
-  And I wait 5 seconds
-  And I fill in the following:
-    | new_element_title | Bisous |
-  And I wait 5 seconds
-  And I click the "#element-root" element
-  And I wait 5 seconds
-  And I click the "button[type='submit']" element
-  And I wait 5 seconds
-  Then I follow "Traitées"
-  And I wait 5 seconds
-  And I should see "Bisous"
-  And I follow "Arborescence"
-  And I wait 5 seconds
-  And I should see "Bisous"
-

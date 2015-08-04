@@ -39,16 +39,8 @@ $icons-colors:
           border-top: none;
         }
 
-        & > span {
-          padding: 10px 15px;
-          display: block;
-          cursor: pointer;
-        }
-
-        & > a.active,
-        & > a.active:hover,
-        & > span.active
-        & > span.active:hover {
+        a.active,
+        a.active:hover {
           border-left: 5px solid $brand-primary;
           background-color: $light-gray;
           font-weight: bold;
@@ -58,8 +50,7 @@ $icons-colors:
           }
         }
 
-        &:hover > a,
-        &:hover > span {
+        &:hover a{
           background-color: $light-gray;
         }
       }
