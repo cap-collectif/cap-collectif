@@ -2,6 +2,7 @@ Capco\AppBundle\Entity\Synthesis\SynthesisElement:
   exclusion_policy: ALL
   properties:
     id:
+      type: string
       expose: true
       groups: [Elements, ElementsList, ElementsPublished, ElementDetails]
     published:

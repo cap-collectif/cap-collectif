@@ -71,21 +71,24 @@ class SynthesisController extends FOSRestController
      *
      * @Security("has_role('ROLE_ADMIN')")
      * @Post("/syntheses")
-     * @ParamConverter("synthesis", converter="fos_rest.request_body")
      */
-    public function createSynthesisAction(Synthesis $synthesis, ConstraintViolationListInterface $validationErrors)
+    public function createSynthesisAction(Request $request)
     {
-        if ($validationErrors->count() > 0) {
-            throw new BadRequestHttpException($validationErrors->__toString());
+        $synthesis = new Synthesis();
+        $form = $this->createForm(new SynthesisForm(), $synthesis);
+        $form->submit($request->request->all(), false);
+
+        if ($form->isValid()) {
+            $synthesis = $this->get('capco.synthesis.synthesis_handler')->createSynthesis($synthesis);
+            $view = $this->view($synthesis, Codes::HTTP_CREATED);
+            $view->setSerializationContext(SerializationContext::create()->setGroups(array('SynthesisDetails', 'Elements')));
+            $url = $this->generateUrl('get_synthesis', ['id' => $synthesis->getId()], UrlGeneratorInterface::ABSOLUTE_URL);
+            $view->setHeader('Location', $url);
+
+            return $view;
         }
 
-        $synthesis = $this->get('capco.synthesis.synthesis_handler')->createSynthesis($synthesis);
-
-        $view = $this->view($synthesis, Codes::HTTP_CREATED);
-        $view->setSerializationContext(SerializationContext::create()->setGroups(array('SynthesisDetails', 'Elements')));
-        $url = $this->generateUrl('get_synthesis', ['id' => $synthesis->getId()], UrlGeneratorInterface::ABSOLUTE_URL);
-        $view->setHeader('Location', $url);
-
+        $view = $this->view($form->getErrors(true), Codes::HTTP_BAD_REQUEST);
         return $view;
     }
 
@@ -104,20 +107,24 @@ class SynthesisController extends FOSRestController
      * @Security("has_role('ROLE_ADMIN')")
      * @Post("/syntheses/from-consultation-step/{id}")
      * @ParamConverter("consultationStep", options={"mapping": {"id": "id"}})
-     * @ParamConverter("synthesis", converter="fos_rest.request_body")
      */
-    public function createSynthesisFromConsultationStepAction(ConsultationStep $consultationStep, Synthesis $synthesis, ConstraintViolationListInterface $validationErrors)
+    public function createSynthesisFromConsultationStepAction(Request $request, ConsultationStep $consultationStep)
     {
-        if ($validationErrors->count() > 0) {
-            throw new BadRequestHttpException($validationErrors->__toString());
+        $synthesis = new Synthesis();
+        $form = $this->createForm(new SynthesisForm(), $synthesis);
+        $form->submit($request->request->all(), false);
+
+        if ($form->isValid()) {
+            $synthesis = $this->get('capco.synthesis.synthesis_handler')->createSynthesisFromConsultationStep($synthesis, $consultationStep);
+            $view = $this->view($synthesis, Codes::HTTP_CREATED);
+            $view->setSerializationContext(SerializationContext::create()->setGroups(array('SynthesisDetails', 'Elements')));
+            $url = $this->generateUrl('get_synthesis', ['id' => $synthesis->getId()], UrlGeneratorInterface::ABSOLUTE_URL);
+            $view->setHeader('Location', $url);
+
+            return $view;
         }
-        $synthesis = $this->get('capco.synthesis.synthesis_handler')->createSynthesisFromConsultationStep($synthesis, $consultationStep);
 
-        $view = $this->view($synthesis, Codes::HTTP_CREATED);
-        $view->setSerializationContext(SerializationContext::create()->setGroups(array('SynthesisDetails', 'Elements')));
-        $url = $this->generateUrl('get_synthesis', ['id' => $synthesis->getId()], UrlGeneratorInterface::ABSOLUTE_URL);
-        $view->setHeader('Location', $url);
-
+        $view = $this->view($form->getErrors(true), Codes::HTTP_BAD_REQUEST);
         return $view;
     }
 
@@ -320,21 +327,24 @@ class SynthesisController extends FOSRestController
      * @Security("has_role('ROLE_ADMIN')")
      * @Post("/syntheses/{id}/elements")
      * @ParamConverter("synthesis", options={"mapping": {"id": "id"}})
-     * @ParamConverter("element", converter="fos_rest.request_body")
      */
-    public function createSynthesisElementAction(Synthesis $synthesis, SynthesisElement $element, ConstraintViolationListInterface $validationErrors)
+    public function createSynthesisElementAction(Request $request, Synthesis $synthesis)
     {
-        if ($validationErrors->count() > 0) {
-            throw new BadRequestHttpException($validationErrors->__toString());
+        $element = new SynthesisElement();
+        $form = $this->createForm(new SynthesisElementForm(false), $element);
+        $form->submit($request->request->all(), false);
+
+        if ($form->isValid()) {
+            $element = $this->get('capco.synthesis.synthesis_element_handler')->createElementInSynthesis($element, $synthesis);
+            $view = $this->view($element, Codes::HTTP_CREATED);
+            $view->setSerializationContext(SerializationContext::create()->setGroups(array('ElementDetails', 'UserDetails')));
+            $url = $this->generateUrl('get_synthesis_element', ['synthesis_id' => $synthesis->getId(), 'element_id' => $element->getId()], UrlGeneratorInterface::ABSOLUTE_URL);
+            $view->setHeader('Location', $url);
+
+            return $view;
         }
 
-        $element = $this->get('capco.synthesis.synthesis_element_handler')->createElementInSynthesis($element, $synthesis);
-
-        $view = $this->view($element, Codes::HTTP_CREATED);
-        $view->setSerializationContext(SerializationContext::create()->setGroups(array('ElementDetails', 'UserDetails')));
-        $url = $this->generateUrl('get_synthesis_element', ['synthesis_id' => $synthesis->getId(), 'element_id' => $element->getId()], UrlGeneratorInterface::ABSOLUTE_URL);
-        $view->setHeader('Location', $url);
-
+        $view = $this->view($form->getErrors(true), Codes::HTTP_BAD_REQUEST);
         return $view;
     }
 

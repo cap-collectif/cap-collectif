@@ -1,8 +1,9 @@
 import SynthesisElementStore from '../../stores/SynthesisElementStore';
 import SynthesisElementActions from '../../actions/SynthesisElementActions';
+import CreateButton from './CreateButton';
+import CreateModal from './CreateModal';
 
 const Link = ReactRouter.Link;
-
 
 const SideMenu = React.createClass({
   propTypes: {
@@ -13,6 +14,7 @@ const SideMenu = React.createClass({
   getInitialState() {
     return {
       countNew: 0,
+      showCreateModal: false,
     };
   },
 
@@ -26,6 +28,7 @@ const SideMenu = React.createClass({
 
   componentWillUnmount() {
     SynthesisElementStore.removeChangeListener(this.onChange);
+    this.toggleCreateModal(false);
   },
 
   onChange() {
@@ -80,27 +83,38 @@ const SideMenu = React.createClass({
         'label': 'tree',
         'nb': null,
       },
-      {
-        'link': 'new_folder',
-        'color': 'black',
-        'icon': 'cap-folder-add',
-        'label': 'new_folder',
-        'nb': null,
-      },
     ];
   },
 
-  renderMenu(items) {
+  renderContributionsMenu() {
+    const items = this.getContributionsMenuItems();
     return (
-      <div className="block menu__block">
+      <div className="block menu__block menu--contributions">
         <ul className="nav">
-            {
-              items.map((item) => {
-                return (
-                  this.renderMenuItem(item)
-                );
-              })
-              }
+          {
+            items.map((item) => {
+              return (
+                this.renderMenuItem(item)
+              );
+            })
+          }
+        </ul>
+      </div>
+    );
+  },
+
+  renderFoldersMenu() {
+    const items = this.getFoldersMenuItems();
+    return (
+      <div className="block menu__block menu--folders">
+        <ul className="nav">
+          {
+            items.map((item) => {
+              return (
+                this.renderMenuItem(item)
+              );
+            })
+          }
         </ul>
       </div>
     );
@@ -119,14 +133,28 @@ const SideMenu = React.createClass({
     );
   },
 
+  renderCreateModal() {
+    return (
+      <CreateModal synthesis={this.props.synthesis} show={this.state.showCreateModal} toggle={this.toggleCreateModal} />
+    );
+  },
+
   render() {
     return (
       <div className="synthesis--edit__menu">
         <h2 className="h5 excerpt">{this.getIntlMessage('edition.menu.contributions')}</h2>
-        {this.renderMenu(this.getContributionsMenuItems())}
-        {this.renderMenu(this.getFoldersMenuItems())}
+        {this.renderContributionsMenu()}
+        {this.renderFoldersMenu()}
+        <CreateButton parent={null} onModal={this.toggleCreateModal} />
+        {this.renderCreateModal()}
       </div>
     );
+  },
+
+  toggleCreateModal(value) {
+    this.setState({
+      showCreateModal: value,
+    });
   },
 
   loadNewElementsCountFromServer() {

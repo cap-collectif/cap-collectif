@@ -75,6 +75,7 @@ class SynthesisElementHandler
     public function createElementInSynthesis(SynthesisElement $element, Synthesis $synthesis)
     {
         $element->setSynthesis($synthesis);
+        $element->setDisplayType('folder');
 
         $this->em->persist($element);
         $this->em->flush();
