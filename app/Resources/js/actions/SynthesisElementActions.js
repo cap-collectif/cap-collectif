@@ -1,6 +1,6 @@
 import AppDispatcher from '../dispatchers/AppDispatcher';
 import Fetcher from '../services/Fetcher';
-import {RECEIVE_COUNT, RECEIVE_ELEMENTS, RECEIVE_ELEMENT, CREATE_ELEMENT, ARCHIVE_ELEMENT, NOTE_ELEMENT, MOVE_ELEMENT, DIVIDE_ELEMENT, UPDATE_ELEMENT_SUCCESS, UPDATE_ELEMENT_FAILURE, CREATE_ELEMENT_SUCCESS, CREATE_ELEMENT_FAILURE} from '../constants/SynthesisElementConstants';
+import {RECEIVE_COUNT, RECEIVE_ELEMENTS, RECEIVE_ELEMENT, CREATE_ELEMENT, ARCHIVE_ELEMENT, NOTE_ELEMENT, COMMENT_ELEMENT, MOVE_ELEMENT, DIVIDE_ELEMENT, UPDATE_ELEMENT_SUCCESS, UPDATE_ELEMENT_FAILURE, CREATE_ELEMENT_SUCCESS, CREATE_ELEMENT_FAILURE} from '../constants/SynthesisElementConstants';
 
 const idOf = (val) => {
   if (val === 'root') {
@@ -83,6 +83,12 @@ export default {
       AppDispatcher.dispatch({
         actionType: NOTE_ELEMENT,
         notation: data.notation,
+      });
+    }
+    if (data.comment) {
+      AppDispatcher.dispatch({
+        actionType: COMMENT_ELEMENT,
+        comment: data.comment,
       });
     }
     if (data.division) {

@@ -60,6 +60,9 @@ export default {
           title: 'Classer...',
           btn_cancel: 'Annuler',
           btn_submit: 'Classer',
+          comment: {
+            title: 'Annoter',
+          },
           notation: {
             title: 'Noter',
             help: 'Sélectionner des étoiles pour noter.',

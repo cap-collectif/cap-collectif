@@ -137,7 +137,7 @@ Scenario: Admin wants to ignore an element
   Then I should see 12 ".element" element
 
 @javascript @database
-Scenario: Admin wants to publish an element without note or move
+Scenario: Admin wants to publish an element without note, comment or parent
   Given I am logged in as admin
   And I visited "consultation page" with:
     | consultationSlug | strategie-technologique-de-l-etat-et-services-publics |
@@ -217,6 +217,29 @@ Scenario: Admin wants to publish an element with parent
   And I follow "Arborescence"
   And I wait 5 seconds
   And I should see 3 ".tree-level-0 > .elements-tree__item" elements
+
+@javascript @database
+Scenario: Admin wants to publish an element with comment
+  Given I am logged in as admin
+  And I visited "consultation page" with:
+    | consultationSlug | strategie-technologique-de-l-etat-et-services-publics |
+    | stepSlug         | collecte-des-avis-pour-une-meilleur-strategie         |
+  And I follow "Synthèse"
+  And I follow "Éditer"
+  And I wait 5 seconds
+  And I follow "Opinion 52"
+  And I wait 5 seconds
+  And I click the ".element__action-publish" element
+  And I wait 5 seconds
+  And I fill in the following:
+    | publish_element_comment | Cette contribution est inutile ! |
+  And I wait 5 seconds
+  And I click the "button[type='submit']" element
+  And I wait 5 seconds
+  And I should see "L'élément a été traité avec succès."
+  And I follow "Traitées"
+  And I wait 5 seconds
+  And I should see 12 ".element" element
 
 @javascript
 Scenario: Admin wants to divide an element without selecting text

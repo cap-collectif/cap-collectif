@@ -636,6 +636,7 @@ Feature: Synthesis
       "body": "blabla",
       "link": @null@,
       "notation": 4,
+      "comment": @null@,
       "votes": {"-1": 21, "0":12, "1": 43},
       "linked_data_creation": @null@,
       "_links": {
@@ -681,6 +682,7 @@ Feature: Synthesis
       "body": "blabla",
       "link": @null@,
       "notation": 5,
+      "comment": @null@,
       "votes": [],
       "linked_data_creation": @null@,
       "_links": {
@@ -729,7 +731,8 @@ Feature: Synthesis
     """
     {
       "published": true,
-      "notation": 2
+      "notation": 2,
+      "comment": "Cet argument est vraiment nul !"
     }
     """
     Then the JSON response status code should be 200
@@ -761,6 +764,7 @@ Feature: Synthesis
       "body": "blabla",
       "link": @null@,
       "notation": 2,
+      "comment": "Cet argument est vraiment nul !",
       "votes": {"-1": 21, "0":12, "1": 43},
       "linked_data_creation": @null@,
       "_links": {
@@ -884,6 +888,7 @@ Feature: Synthesis
       "body": "blabla",
       "link": @null@,
       "notation": @null@,
+      "comment": @null@,
       "votes": {"-1": 21, "0":12, "1": 43},
       "linked_data_creation": @null@,
       "_links": {
@@ -1070,6 +1075,19 @@ Feature: Synthesis
     }
     """
     Then there should be a log on element 43 with sentence "admin a modifié la note de l'élément 43"
+
+  @database
+  Scenario: After commenting an element, there should be a 'comment' log
+    Given I am logged in to api as admin
+    And there is a synthesis with id "42" and elements:
+      | 43 |
+    And I send a PUT request to "/api/syntheses/42/elements/43" with json:
+    """
+    {
+      "comment": "Super contribution !"
+    }
+    """
+    Then there should be a log on element 43 with sentence "admin a commenté l'élément 43"
 
   @database
   Scenario: After updating an opinion, I want to get the updated synthesis

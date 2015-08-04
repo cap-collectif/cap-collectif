@@ -1,4 +1,4 @@
-import {RECEIVE_COUNT, RECEIVE_ELEMENTS, RECEIVE_ELEMENT, CREATE_ELEMENT, ARCHIVE_ELEMENT, NOTE_ELEMENT, MOVE_ELEMENT, DIVIDE_ELEMENT, UPDATE_ELEMENT_SUCCESS, UPDATE_ELEMENT_FAILURE, CREATE_ELEMENT_SUCCESS, CREATE_ELEMENT_FAILURE} from '../constants/SynthesisElementConstants';
+import {RECEIVE_COUNT, RECEIVE_ELEMENTS, RECEIVE_ELEMENT, CREATE_ELEMENT, ARCHIVE_ELEMENT, NOTE_ELEMENT, COMMENT_ELEMENT, MOVE_ELEMENT, DIVIDE_ELEMENT, UPDATE_ELEMENT_SUCCESS, UPDATE_ELEMENT_FAILURE, CREATE_ELEMENT_SUCCESS, CREATE_ELEMENT_FAILURE} from '../constants/SynthesisElementConstants';
 import BaseStore from './BaseStore';
 import ArrayHelper from '../services/ArrayHelper';
 
@@ -81,6 +81,13 @@ class SynthesisElementStore extends BaseStore {
         break;
       case NOTE_ELEMENT:
         this._element.notation = action.notation;
+        this._resetInboxSync();
+        this._isProcessing = true;
+        this._resetMessages();
+        this.emitChange();
+        break;
+      case COMMENT_ELEMENT:
+        this._element.comment = action.comment;
         this._resetInboxSync();
         this._isProcessing = true;
         this._resetMessages();

@@ -5,6 +5,7 @@ import ElementsFinder from './ElementsFinder';
 
 const Button = ReactBootstrap.Button;
 const Modal = ReactBootstrap.Modal;
+const Input = ReactBootstrap.Input;
 
 const PublishModal = React.createClass({
   propTypes: {
@@ -14,12 +15,13 @@ const PublishModal = React.createClass({
     toggle: React.PropTypes.func,
     process: React.PropTypes.func,
   },
-  mixins: [ReactIntl.IntlMixin, ReactRouter.Navigation],
+  mixins: [ReactIntl.IntlMixin, ReactRouter.Navigation, React.addons.LinkedStateMixin],
 
   getInitialState() {
     return {
       notation: this.props.element ? this.props.element.notation : null,
       parent: this.props.element ? this.props.element.parent : null,
+      comment: this.props.element ? this.props.element.comment : null,
       isLoading: true,
       elementsTree: [],
     };
@@ -45,6 +47,7 @@ const PublishModal = React.createClass({
         this.setState({
           notation: nextProps.element.notation,
           parent: nextProps.element.parent,
+          comment: nextProps.element.comment,
         });
       }
     }
@@ -82,27 +85,11 @@ const PublishModal = React.createClass({
     }
   },
 
-  renderNotation() {
-    return (
-      <div className="modal__action">
-        <h2 className="h4">
-          <i className="cap cap-star-1-1"></i>
-          {' ' + this.getIntlMessage('edition.action.publish.notation.title')}
-          <span className="small excerpt action__title-right">{'\t' + this.getIntlMessage('edition.action.publish.optional')}</span>
-        </h2>
-        <NotationButtons notation={this.state.notation} onChange={this.setNotation} block={true} />
-        <p className="small excerpt action__help">{this.getIntlMessage('edition.action.publish.notation.help')}</p>
-      </div>
-    );
-  },
-
   renderParent() {
     return (
       <div className="modal__action">
         <h2 className="h4">
-          <i className="cap cap-folder-2-1"></i>
           {' ' + this.getIntlMessage('edition.action.publish.parent.title')}
-          <span className="small excerpt action__title-right">{'\t' + this.getIntlMessage('edition.action.publish.optional')}</span>
         </h2>
         {this.renderLoader()}
         {this.renderParentFinder()}
@@ -119,6 +106,33 @@ const PublishModal = React.createClass({
     }
   },
 
+  renderNotation() {
+    return (
+      <div className="modal__action">
+        <h2 className="h4">
+          {' ' + this.getIntlMessage('edition.action.publish.notation.title')}
+          <span className="small excerpt action__title-right">{'\t' + this.getIntlMessage('edition.action.publish.optional')}</span>
+        </h2>
+        <NotationButtons notation={this.state.notation} onChange={this.setNotation} block={true} />
+        <p className="small excerpt action__help">{this.getIntlMessage('edition.action.publish.notation.help')}</p>
+      </div>
+    );
+  },
+
+  renderComment() {
+    return (
+      <div className="modal__action">
+        <h2 className="h4">
+          {' ' + this.getIntlMessage('edition.action.publish.comment.title')}
+          <span className="small excerpt action__title-right">{'\t' + this.getIntlMessage('edition.action.publish.optional')}</span>
+        </h2>
+        <form id="publish_element" name="publish_element">
+          <Input type="textarea" id="publish_element_comment" name="publish_element[comment]" className="publish-element__comment" valueLink={this.linkState('comment')} />
+        </form>
+      </div>
+    );
+  },
+
   render() {
     return (
     <Modal show={this.props.show} onHide={this.hide} animation={false} dialogClassName="modal--publish">
@@ -126,8 +140,9 @@ const PublishModal = React.createClass({
         <Modal.Title>{this.getIntlMessage('edition.action.publish.title')}</Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        {this.renderNotation()}
         {this.renderParent()}
+        {this.renderNotation()}
+        {this.renderComment()}
       </Modal.Body>
       <Modal.Footer>
         <Button type="button" onClick={this.hide.bind(null, this)}>{this.getIntlMessage('edition.action.publish.btn_cancel')}</Button>
@@ -167,6 +182,7 @@ const PublishModal = React.createClass({
       'published': true,
       'notation': this.state.notation ? this.state.notation : 0,
       'parent': this.state.parent,
+      'comment': this.state.comment,
     };
     if (typeof this.props.process === 'function') {
       const element = this.props.element;
@@ -174,6 +190,7 @@ const PublishModal = React.createClass({
       element.published = data.published;
       element.notation = data.notation;
       element.parent = data.parent;
+      element.comment = data.comment;
       this.props.process(element);
       return;
     }

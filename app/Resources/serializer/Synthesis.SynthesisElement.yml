@@ -45,6 +45,9 @@ Capco\AppBundle\Entity\Synthesis\SynthesisElement:
     notation:
       expose: true
       groups: [ElementsList, ElementDetails]
+    comment:
+      expose: true
+      groups: [ElementDetails]
     votes:
       expose: true
       groups: [ElementDetails]

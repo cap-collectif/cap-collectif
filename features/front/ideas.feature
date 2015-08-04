@@ -110,7 +110,7 @@ Scenario: Can not comment an uncommentable idea
       | authorName  | Naruto              |
       | authorEmail | naruto72@gmail.com  |
     When I press "Commenter"
-    And I wait 5 seconds
+    And I wait 10 seconds
     Then I should see "J'ai un truc à dire" in the ".opinion__list" element
 
   @database @javascript

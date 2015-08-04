@@ -145,6 +145,14 @@ class SynthesisElement
     private $notation;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="comment", type="text", nullable=true)
+     * @Gedmo\Versioned
+     */
+    private $comment;
+
+    /**
      * @var int
      *
      * @ORM\Column(name="votes", type="array", nullable=true)
@@ -474,6 +482,22 @@ class SynthesisElement
     public function setNotation($notation)
     {
         $this->notation = $notation;
+    }
+
+    /**
+     * @return string
+     */
+    public function getComment()
+    {
+        return $this->comment;
+    }
+
+    /**
+     * @param string $comment
+     */
+    public function setComment($comment)
+    {
+        $this->comment = $comment;
     }
 
     /**

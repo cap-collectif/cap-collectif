@@ -10,6 +10,7 @@ synthesis:
       unpublish: %author% a dépublié l'élément %element%
       archive: %author% a marqué l'élément %element% comme traité
       note: %author% a modifié la note de l'élément %element%
+      comment: %author% a commenté l'élément %element%
       divide: %author% a divisé l'élément %element%
 
   source_types:

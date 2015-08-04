@@ -46,6 +46,9 @@ class LogManager
             if (array_key_exists('notation', $log->getData())) {
                 $sentences[] = $this->makeSentence('note', $username, $elementName);
             }
+            if (array_key_exists('comment', $log->getData())) {
+                $sentences[] = $this->makeSentence('comment', $username, $elementName);
+            }
             if (array_key_exists('title', $log->getData()) || array_key_exists('body', $log->getData())) {
                 $sentences[] = $this->makeSentence('update', $username, $elementName);
             }
