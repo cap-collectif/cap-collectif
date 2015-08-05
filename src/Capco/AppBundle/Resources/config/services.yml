@@ -352,6 +352,13 @@ services:
     tags:
       - { name: "jms_serializer.event_subscriber" }
 
+  capco.opinion.serialization_listener:
+    class: Capco\AppBundle\EventListener\OpinionSerializationListener
+    arguments: [@router, @security.token_storage]
+    scope: request
+    tags:
+      - { name: "jms_serializer.event_subscriber" }
+
   capco.user.serialization_listener:
     class: Capco\AppBundle\EventListener\UserSerializationListener
     arguments: [@router]

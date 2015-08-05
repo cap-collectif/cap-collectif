@@ -32,14 +32,22 @@ class OpinionSerializationListener implements EventSubscriberInterface
     public function onPostOpinionVersion(ObjectEvent $event)
     {
         $version = $event->getObject();
+        $opinion = $version->getParent();
+        $opinionType = $opinion->getOpinionType();
+        $step = $opinion->getStep();
+        $consultation = $step->getConsultationAbstractStep()->getConsultation();
 
-        // $event->getVisitor()->addData(
-        //     '_links',
-        //     [
-        //         'show' => $this->router->generate('app_comment_vote', [
-        //                         'commentId' => $comment->getId()
-        //                 ], true),
-        //     ]
-        // );
+        $event->getVisitor()->addData(
+            '_links',
+            [
+                'show' => $this->router->generate('app_consultation_show_opinion_version', [
+                        'consultationSlug' => $consultation->getSlug(),
+                        'stepSlug' => $step->getSlug(),
+                        'opinionTypeSlug' => $opinionType->getSlug(),
+                        'opinionSlug' => $opinion->getSlug(),
+                        'versionSlug' => $version->getSlug(),
+                    ], true),
+            ]
+        );
     }
 }

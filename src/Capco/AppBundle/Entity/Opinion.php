@@ -8,7 +8,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Validator\Constraints as Assert;
 use Capco\AppBundle\Traits\TrashableTrait;
 use Capco\AppBundle\Traits\SluggableTitleTrait;
-
+use Capco\AppBundle\Traits\VotableTrait;
 
 /**
  * Opinion.
@@ -21,6 +21,7 @@ class Opinion
 {
     use TrashableTrait;
     use SluggableTitleTrait;
+    use VotableTrait;
 
     public static $sortCriterias = [
         'votes' => 'opinion.sort.votes',
@@ -72,27 +73,6 @@ class Opinion
      * @ORM\Column(name="position", type="integer")
      */
     protected $position = 0;
-
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="vote_count_nok", type="integer")
-     */
-    protected $voteCountNok = 0;
-
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="vote_count_ok", type="integer")
-     */
-    protected $voteCountOk = 0;
-
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="vote_count_mitige", type="integer")
-     */
-    protected $voteCountMitige = 0;
 
     /**
      * @var int
@@ -291,55 +271,7 @@ class Opinion
         return $this->updatedAt;
     }
 
-    /**
-     * @return int
-     */
-    public function getVoteCountNok()
-    {
-        return $this->voteCountNok;
-    }
 
-    /**
-     * @param $voteCountNok
-     *
-     * @return $this
-     */
-    public function setVoteCountNok($voteCountNok)
-    {
-        $this->voteCountNok = $voteCountNok;
-    }
-
-    /**
-     * @return int
-     */
-    public function getVoteCountOk()
-    {
-        return $this->voteCountOk;
-    }
-
-    /**
-     * @param int $voteCountOk
-     */
-    public function setVoteCountOk($voteCountOk)
-    {
-        $this->voteCountOk = $voteCountOk;
-    }
-
-    /**
-     * @return int
-     */
-    public function getVoteCountMitige()
-    {
-        return $this->voteCountMitige;
-    }
-
-    /**
-     * @param int $voteCountMitige
-     */
-    public function setVoteCountMitige($voteCountMitige)
-    {
-        $this->voteCountMitige = $voteCountMitige;
-    }
 
     /**
      * @return int
@@ -667,14 +599,6 @@ class Opinion
         $this->voteCountOk = 0;
 
         return $this;
-    }
-
-    /**
-     * @return int
-     */
-    public function getVoteCountAll()
-    {
-        return $this->getVoteCountMitige() + $this->getVoteCountNok() + $this->getVoteCountOk();
     }
 
     /**

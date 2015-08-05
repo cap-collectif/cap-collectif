@@ -18,6 +18,10 @@ Feature: Opinions
           "is_trashed": @boolean@,
           "arguments_count": @integer@,
           "sources_count": @integer@,
+          "votes_nok": @integer@,
+          "votes_ok": @integer@,
+          "votes_mitige": @integer@,
+          "votes_total": @integer@,
           "author": {
             "username": @string@,
             "display_name": @string@,
@@ -97,3 +101,24 @@ Feature: Opinions
       "errors": @null@
     }
     """
+
+## Vote
+
+  @database
+  Scenario: logged in API client wants to add a version vote
+    Given I am logged in to api as user
+    When I send a POST request to "/api/opinions/57/versions/1/votes" with json:
+    """
+    {
+      "value": 1
+    }
+    """
+    Then the JSON response status code should be 201
+    # When I send a PUT request to "/api/opinions/57/versions/1/votes" with json:
+    # When I send a POST request to "/api/opinions/57/versions/1/votes" with json:
+    # """
+    # {
+    #   "value": -1
+    # }
+    # """
+

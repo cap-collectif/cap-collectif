@@ -23,6 +23,43 @@ const OpinionVersionForm = React.createClass({
     };
   },
 
+  componentDidUpdate(prevProps, prevState) {
+
+    CKEDITOR.basePath = "/js/ckeditor/";
+
+    if (this.state.showModal && !prevState.showModal) {
+
+      const ckeditorConfig = {
+          "removePlugins": "elementspath",
+          "toolbar":[
+            ["Undo","Redo"],
+            ["Format"],
+            ["Bold","Italic","Underline","Strike"],
+            ["NumberedList","BulletedList","-","Outdent","Indent","-","Blockquote"],
+            ["Link","Unlink"],
+            ["Image","Table","HorizontalRule"],
+            ["Maximize"]
+          ],
+          "language":"fr",
+          "skin":"bootstrapck",
+          "extraPlugins":"autolink,autogrow",
+          "extraAllowedContent":"a[!href,_src,target,class]"
+      };
+
+      let bodyEditor = CKEDITOR.replace("body-editor", ckeditorConfig);
+      let commentEditor = CKEDITOR.replace("comment-editor", ckeditorConfig);
+
+      bodyEditor.on('change', (evt) => {
+        this.setState({body: evt.editor.getData()});
+      });
+
+      commentEditor.on('change', (evt) => {
+        this.setState({comment: evt.editor.getData()});
+      });
+
+    }
+  },
+
   getClasses(field) {
     return React.addons.classSet({
       'form-group': true,
@@ -39,72 +76,66 @@ const OpinionVersionForm = React.createClass({
   },
 
   render() {
-
-    if (!this.state.showModal) {
-      return (
-        <div className="col-xs-5">
-          <a className="btn btn-primary" onClick={this.show.bind(this)}>
-            <i className="cap cap-add-1"></i>
-            { ' ' + this.getIntlMessage('opinion.add_new_version')}
-          </a>
-        </div>
-      );
-    }
-
     return (
-      <Modal {...this.props} animation={false} show={true} onHide={this.close.bind(this)} bsSize='large' aria-labelledby='contained-modal-title-lg'>
-        <Modal.Header closeButton>
-          <Modal.Title id='contained-modal-title-lg'>
-            { this.getIntlMessage('opinion.add_new_version') }
-          </Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <p className="text-centered">
-            { this.getIntlMessage('opinion.add_new_version_infos') }
-          </p>
-          <form>
-            <Input
-              type='text'
-              valueLink={this.linkState('title')}
-              placeholder={this.getIntlMessage('global.title')}
-              label={this.getIntlMessage('global.title')}
-            />
-            <Input
-              type='textarea'
-              className="ckeditor"
-              valueLink={this.linkState('body')}
-              label={this.getIntlMessage('opinion.version.body')}
-              help={this.getIntlMessage('opinion.version.body_helper')}
-              wrapperClassName="excerpt small"
-            />
-            <Input
-              type='textarea'
-              className="ckeditor"
-              valueLink={this.linkState('comment')}
-              label={this.getIntlMessage('opinion.version.comment')}
-              help={this.getIntlMessage('opinion.version.comment_helper')}
-              wrapperClassName="excerpt small"
-            />
-          </form>
-        </Modal.Body>
-        <Modal.Footer>
-          <Button
-            onClick={this.close.bind(this)}
-          >
-            {this.getIntlMessage('global.cancel')}
-          </Button>
-          <Button
-            disabled={this.state.isSubmitting}
-            onClick={!this.state.isSubmitting ? this.create.bind(this) : null}
-            bsStyle='primary'
-          >
-            {this.state.isSubmitting
-              ? this.getIntlMessage('global.loading')
-              : this.getIntlMessage('global.publish')
-            }
-          </Button>
-        </Modal.Footer>
-      </Modal>
+      <div className="col-xs-5">
+        <a className="btn btn-primary" onClick={this.show.bind(this)}>
+          <i className="cap cap-add-1"></i>
+          { ' ' + this.getIntlMessage('opinion.add_new_version')}
+        </a>
+        <Modal {...this.props} animation={false} show={this.state.showModal} onHide={this.close.bind(this)} bsSize='large' aria-labelledby='contained-modal-title-lg'>
+          <Modal.Header closeButton>
+            <Modal.Title id='contained-modal-title-lg'>
+              { this.getIntlMessage('opinion.add_new_version') }
+            </Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <p className="text-centered">
+              { this.getIntlMessage('opinion.add_new_version_infos') }
+            </p>
+            <form>
+              <Input
+                type='text'
+                valueLink={this.linkState('title')}
+                placeholder={this.getIntlMessage('global.title')}
+                label={this.getIntlMessage('global.title')}
+              />
+              <Input
+                type='textarea'
+                name='body-editor'
+                rows="10" cols="80"
+                valueLink={this.linkState('body')}
+                label={this.getIntlMessage('opinion.version.body')}
+                help={this.getIntlMessage('opinion.version.body_helper')}
+                wrapperClassName="excerpt small"
+              />
+              <Input
+                type='textarea'
+                name='comment-editor'
+                rows="10" cols="80"
+                valueLink={this.linkState('comment')}
+                label={this.getIntlMessage('opinion.version.comment')}
+                help={this.getIntlMessage('opinion.version.comment_helper')}
+                wrapperClassName="excerpt small"
+              />
+            </form>
+          </Modal.Body>
+          <Modal.Footer>
+            <Button onClick={this.close.bind(this)}>
+              {this.getIntlMessage('global.cancel')}
+            </Button>
+            <Button
+              disabled={this.state.isSubmitting}
+              onClick={!this.state.isSubmitting ? this.create.bind(this) : null}
+              bsStyle='primary'
+            >
+              {this.state.isSubmitting
+                ? this.getIntlMessage('global.loading')
+                : this.getIntlMessage('global.publish')
+              }
+            </Button>
+          </Modal.Footer>
+        </Modal>
+      </div>
     );
   },
 
@@ -129,7 +160,7 @@ const OpinionVersionForm = React.createClass({
       OpinionActions
       .createVersion(this.props.opinion, data)
       .then(() => {
-        this.setState({isSubmitting: false, submitted: false});
+        this.setState(this.getInitialState());
         this.close();
         return true;
       })

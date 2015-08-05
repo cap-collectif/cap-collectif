@@ -43,6 +43,11 @@ export default {
                 comment_helper: 'Expliquez pourquoi vous souhaitez apporter ces modifications',
             },
         },
+        vote: {
+            ok: 'D\'accord',
+            mitige: 'Mitigé',
+            nok: 'Pas d\'accord',
+        },
         global: {
             more: 'Voir plus',
             publish: 'Publier',

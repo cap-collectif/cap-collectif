@@ -10,6 +10,7 @@ use Capco\AppBundle\Traits\TrashableTrait;
 use Capco\AppBundle\Traits\EnableTrait;
 use Capco\AppBundle\Traits\SluggableTitleTrait;
 use Capco\AppBundle\Traits\TimestampableTrait;
+use Capco\AppBundle\Traits\VotableTrait;
 
 /**
  * Opinion Version.
@@ -24,6 +25,7 @@ class OpinionVersion
     use EnableTrait;
     use SluggableTitleTrait;
     use TimestampableTrait;
+    use VotableTrait;
 
     /**
      * @var int
@@ -80,6 +82,10 @@ class OpinionVersion
      */
     protected $argumentsCount = 0;
 
+    public function getId()
+    {
+        return $this->id;
+    }
 
     public function __toString()
     {

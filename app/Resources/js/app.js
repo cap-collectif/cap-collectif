@@ -2,6 +2,7 @@
 import IntlData from './translations/FR'
 import CommentSection from './components/Comment/CommentSection';
 import OpinionVersionsBox from './components/Opinion/OpinionVersionsBox';
+import OpinionPage from './components/Opinion/OpinionPage';
 import AuthService from './services/AuthService';
 
 AuthService
@@ -40,6 +41,16 @@ AuthService
         );
     }
 
+    if ($('#render-opinion-version').length) {
+        React.render(
+            <OpinionPage
+                opinionId={$('#render-opinion-version').data('opinion')}
+                versionId={$('#render-opinion-version').data('version')}
+                {...IntlData}
+            />,
+            document.getElementById('render-opinion-version')
+        );
+    }
 });
 
 // Our global App for symfony
