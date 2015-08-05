@@ -1,6 +1,7 @@
 import SynthesisElementStore from '../../stores/SynthesisElementStore';
 import SynthesisElementActions from '../../actions/SynthesisElementActions';
 import FormattedText from '../../services/FormattedText';
+import Loader from '../Utils/Loader';
 import ElementTitle from './ElementTitle';
 import ElementBlock from './ElementBlock';
 import PublishButton from './PublishButton';
@@ -135,22 +136,10 @@ const EditElement = React.createClass({
     }
   },
 
-  renderLoader() {
-    if (this.state.isLoading) {
-      return (
-        <div className="row">
-          <div className="col-xs-2 col-xs-offset-5 spinner-loader-container">
-            <div className="spinner-loader"></div>
-          </div>
-        </div>
-      );
-    }
-  },
-
   render() {
     return (
       <div className="block synthesis--edit__content">
-        {this.renderLoader()}
+        <Loader show={this.state.isLoading} />
         {this.renderElementPanel()}
         {this.renderHistory()}
         {this.renderPublishModal()}
