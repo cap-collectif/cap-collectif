@@ -5,12 +5,15 @@ namespace Capco\AppBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Validator\Constraints as Assert;
+use Doctrine\Common\Collections\ArrayCollection;
 
 use Capco\AppBundle\Traits\TrashableTrait;
 use Capco\AppBundle\Traits\EnableTrait;
 use Capco\AppBundle\Traits\SluggableTitleTrait;
 use Capco\AppBundle\Traits\TimestampableTrait;
 use Capco\AppBundle\Traits\VotableTrait;
+use Capco\AppBundle\Entity\OpinionVersionVote;
+use Capco\UserBundle\Entity\User;
 
 /**
  * Opinion Version.
@@ -26,6 +29,28 @@ class OpinionVersion
     use SluggableTitleTrait;
     use TimestampableTrait;
     use VotableTrait;
+
+    public function getVoteValueByUser(User $user) {
+
+        foreach ($this->votes as $vote) {
+            if ($vote->getUser() == $user) {
+                return $vote->getValue();
+            }
+        }
+
+        return null;
+    }
+
+    public function userHasReport(User $user)
+    {
+        foreach ($this->reports as $report) {
+            if ($report->getReporter() == $user) {
+                return true;
+            }
+        }
+
+        return false;
+    }
 
     /**
      * @var int
@@ -81,6 +106,43 @@ class OpinionVersion
      * @ORM\Column(name="arguments_count", type="integer")
      */
     protected $argumentsCount = 0;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\OpinionVersionVote", mappedBy="opinionVersion", cascade={"persist", "remove"}, orphanRemoval=true)
+     */
+    protected $votes;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\Reporting", mappedBy="opinionVersion", cascade={"persist", "remove"})
+     */
+    protected $reports;
+
+
+    public function __construct() {
+        $this->votes = new ArrayCollection();
+        $this->reports = new ArrayCollection();
+    }
+
+    public function getReports()
+    {
+        return $this->reports;
+    }
+
+    public function addReport(Reporting $report)
+    {
+        if (!$this->reports->contains($report)) {
+            $this->reports->add($report);
+        }
+
+        return $this;
+    }
+
+    public function removeReport(Reporting $report)
+    {
+        $this->reports->removeElement($report);
+
+        return $this;
+    }
 
     public function getId()
     {
@@ -145,4 +207,24 @@ class OpinionVersion
         return $this->parent;
     }
 
+    public function getVotes()
+    {
+        return $this->votes;
+    }
+
+    public function addVote(OpinionVersionVote $vote)
+    {
+        if (!$this->votes->contains($vote)) {
+            $this->votes->add($vote);
+        }
+
+        return $this;
+    }
+
+    public function removeVote(OpinionVersionVote  $vote)
+    {
+        $this->votes->removeElement($vote);
+
+        return $this;
+    }
 }

@@ -55,7 +55,7 @@ const OpinionPage = React.createClass({
         <div className="row">
           { this.renderLoader() }
           {!this.state.isLoading
-            ? <OpinionBox opinion={this.state.opinion} />
+            ? <OpinionBox {...this.props} opinion={this.state.opinion} />
             : <span />
           }
           <TabbedArea defaultActiveKey={1} animation={false}>

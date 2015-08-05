@@ -26,7 +26,8 @@
     &.btn-#{$name} {
       border: 1px solid $border;
       color: $bg;
-      &:hover {
+      &:hover,
+      &.active {
         background-color: $bg;
         color: $color;
       }

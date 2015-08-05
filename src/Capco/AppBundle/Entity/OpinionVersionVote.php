@@ -55,7 +55,7 @@ class OpinionVersionVote extends AbstractVote
      * @var
      *
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\OpinionVersion", inversedBy="votes", cascade={"persist"})
-     * @ORM\JoinColumn(name="opinion_id", referencedColumnName="id", onDelete="CASCADE")
+     * @ORM\JoinColumn(name="opinion_version_id", referencedColumnName="id", onDelete="CASCADE")
      */
     private $opinionVersion;
 
@@ -97,7 +97,9 @@ class OpinionVersionVote extends AbstractVote
     public function setOpinionVersion(OpinionVersion $version)
     {
         $this->opinionVersion = $version;
-        $this->opinionVersion->addVote($this);
+        // $this->opinionVersion->addVote($this);
+
+        return $this;
     }
 
     public function getRelatedEntity()

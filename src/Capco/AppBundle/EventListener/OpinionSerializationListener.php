@@ -36,18 +36,34 @@ class OpinionSerializationListener implements EventSubscriberInterface
         $opinionType = $opinion->getOpinionType();
         $step = $opinion->getStep();
         $consultation = $step->getConsultationAbstractStep()->getConsultation();
+        $user = $this->tokenStorage->getToken()->getUser();
 
         $event->getVisitor()->addData(
-            '_links',
-            [
+            '_links', [
                 'show' => $this->router->generate('app_consultation_show_opinion_version', [
-                        'consultationSlug' => $consultation->getSlug(),
-                        'stepSlug' => $step->getSlug(),
-                        'opinionTypeSlug' => $opinionType->getSlug(),
-                        'opinionSlug' => $opinion->getSlug(),
-                        'versionSlug' => $version->getSlug(),
-                    ], true),
+                    'consultationSlug' => $consultation->getSlug(),
+                    'stepSlug' => $step->getSlug(),
+                    'opinionTypeSlug' => $opinionType->getSlug(),
+                    'opinionSlug' => $opinion->getSlug(),
+                    'versionSlug' => $version->getSlug(),
+                ], true),
+                'report' => $this->router->generate('app_report_opinion_version', [
+                    'consultationSlug' => $consultation->getSlug(),
+                    'stepSlug' => $step->getSlug(),
+                    'opinionTypeSlug' => $opinionType->getSlug(),
+                    'opinionSlug' => $opinion->getSlug(),
+                    'versionSlug' => $version->getSlug(),
+                ], true),
             ]
         );
+
+        $event->getVisitor()->addData(
+            'user_vote', $user === "anon." ? null : $version->getVoteValueByUser($user)
+        );
+
+        $event->getVisitor()->addData(
+            'has_user_reported', $user === "anon." ? false : $version->userHasReport($user)
+        );
+
     }
 }

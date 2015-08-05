@@ -104,21 +104,34 @@ Feature: Opinions
 
 ## Vote
 
+  ### As an Anonymous
+
   @database
-  Scenario: logged in API client wants to add a version vote
-    Given I am logged in to api as user
-    When I send a POST request to "/api/opinions/57/versions/1/votes" with json:
+  Scenario: Anonymous API client wants to add a version
+    When I send a PUT request to "/api/opinions/57/versions/1/votes" with json:
     """
     {
       "value": 1
     }
     """
-    Then the JSON response status code should be 201
-    # When I send a PUT request to "/api/opinions/57/versions/1/votes" with json:
-    # When I send a POST request to "/api/opinions/57/versions/1/votes" with json:
-    # """
-    # {
-    #   "value": -1
-    # }
-    # """
+    Then the JSON response status code should be 401
+
+  ### As a Logged in user
+  @database
+  Scenario: logged in API client wants to add a version vote
+    Given I am logged in to api as user
+    When I send a PUT request to "/api/opinions/57/versions/1/votes" with json:
+    """
+    {
+      "value": 1
+    }
+    """
+    Then the JSON response status code should be 204
+    When I send a PUT request to "/api/opinions/57/versions/1/votes" with json:
+    """
+    {
+      "value": -1
+    }
+    """
+    Then the JSON response status code should be 204
 

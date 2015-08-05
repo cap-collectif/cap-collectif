@@ -18,6 +18,7 @@ use FOS\RestBundle\Controller\FOSRestController;
 use FOS\RestBundle\Controller\Annotations\View;
 use FOS\RestBundle\Controller\Annotations\Get;
 use FOS\RestBundle\Controller\Annotations\Post;
+use FOS\RestBundle\Controller\Annotations\Put;
 use FOS\RestBundle\Controller\Annotations\QueryParam;
 
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
@@ -91,7 +92,7 @@ class OpinionsController extends FOSRestController
      * @ParamConverter("opinion", options={"mapping": {"opinionId": "id"}})
      * @ParamConverter("version", options={"mapping": {"versionId": "id"}})
      * @ParamConverter("vote", converter="fos_rest.request_body")
-     * @View(statusCode=201, serializerGroups={})
+     * @View(statusCode=204, serializerGroups={})
      */
     public function postOpinionVersionVoteAction(Opinion $opinion, OpinionVersion $version, OpinionVersionVote $vote, ConstraintViolationListInterface $validationErrors)
     {
@@ -111,14 +112,18 @@ class OpinionsController extends FOSRestController
         if ($previousVote) {
             $previousVote->setValue($vote->getValue());
             $this->getDoctrine()->getManager()->flush();
-            return ;
+            return;
         }
 
         if ($validationErrors->count() > 0) {
             throw new BadRequestHttpException($validationErrors->__toString());
         }
 
-        $vote->setConfirmed(true);
+        $vote
+            ->setConfirmed(true)
+            ->setOpinionVersion($version)
+            ->setUser($user)
+        ;
 
         $this->getDoctrine()->getManager()->persist($vote);
         $this->getDoctrine()->getManager()->flush();

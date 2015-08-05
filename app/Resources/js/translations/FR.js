@@ -47,6 +47,12 @@ export default {
             ok: 'D\'accord',
             mitige: 'Mitigé',
             nok: 'Pas d\'accord',
+            popover: {
+                title: 'Connectez-vous pour contribuer',
+                body: 'Vous devez être connecté pour réaliser cette action.',
+                login: 'Connexion',
+                signin: 'Inscription',
+            },
         },
         global: {
             more: 'Voir plus',

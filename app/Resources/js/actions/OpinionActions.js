@@ -14,4 +14,13 @@ export default {
     });
   },
 
+  voteForVersion: (opinion, version, data) => {
+    return Fetcher
+    .put('/opinions/' + opinion + '/versions/' + version + '/votes', data)
+    .then(() => {
+      return true;
+    });
+  },
+
+
 };
