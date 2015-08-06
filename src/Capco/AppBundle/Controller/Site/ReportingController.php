@@ -60,12 +60,13 @@ class ReportingController extends Controller
 
                 return $this->redirect(
                     $this->generateUrl(
-                        'app_consultation_show_opinion',
+                        'app_consultation_show_opinion_version',
                         [
                             'consultationSlug' => $consultation->getSlug(),
                             'stepSlug' => $currentStep->getSlug(),
                             'opinionTypeSlug' => $opinionType->getSlug(),
                             'opinionSlug' => $opinion->getSlug(),
+                            'versionSlug' => $version->getSlug(),
                         ]
                     )
                 );

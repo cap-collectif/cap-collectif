@@ -49,22 +49,32 @@ const OpinionBox = React.createClass({
 
   render() {
     const opinion = this.props.opinion;
+    const diff = JsDiff.diffWords(opinion.parent.body, opinion.body);
+    let htmlBody = "";
+    diff.forEach(function(part){
+      var color = part.added ? 'green' : part.removed ? 'red' : 'grey';
+      var decoration = color === 'red' ? 'line-through' : 'none';
+      htmlBody += '<span style="color: ' + color + '; text-decoration: ' + decoration + '">' + part.value + '</span>';
+    });
+
+
+    const colorClass = 'opinion opinion--' + opinion.parent.type.color + ' opinion--current';
     return (
       <div className="block block--bordered opinion__details">
-        <div className="opinion opinion--red opinion--current">
+        <div className={colorClass}>
           <div className="opinion__header opinion__header--centered">
-            <a className="neutral-hover pull-left h4 opinion__header__back" href="/consultations/open-data-liberer-les-donnees-publiques/consultation/consultation-1/opinions/probleme">
+            <a className="neutral-hover pull-left h4 opinion__header__back" href={opinion.parent._links.show}>
               <i className="cap cap-arrow-1"></i>
               <span className="hidden-xs  hidden-sm"> Retour</span>
             </a>
-            <h2 className="h4 opinion__header__title">Problème </h2>
+            <h2 className="h4 opinion__header__title"> {opinion.parent.type.title}</h2>
           </div>
           <OpinionPreview opinion={opinion} />
         </div>
         <div className="opinion__description">
           <div ref="piechart" className="opinion__chart center-block" />
-          { opinion.body }
-          <div className="opinion__buttons">
+          <div dangerouslySetInnerHTML={{__html: htmlBody}} />
+          <div className="opinion__buttons" style={{marginBottom: 0}}>
             <OpinionButtons {...this.props} opinion={opinion} />
           </div>
         </div>

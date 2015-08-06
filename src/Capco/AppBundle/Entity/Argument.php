@@ -109,31 +109,30 @@ class Argument
     private $trashedReason = null;
 
     /**
-     * @var
-     *
      * @ORM\ManyToOne(targetEntity="Capco\UserBundle\Entity\User", inversedBy="arguments")
      * @ORM\JoinColumn(name="author_id", referencedColumnName="id", onDelete="CASCADE")
      */
     private $Author;
 
     /**
-     * @var
-     *
      * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\ArgumentVote", mappedBy="argument", cascade={"persist", "remove"}, orphanRemoval=true)
      */
     private $votes;
 
     /**
-     * @var
-     *
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Opinion", inversedBy="arguments", cascade={"persist"})
      * @ORM\JoinColumn(name="opinion_id", referencedColumnName="id", onDelete="CASCADE")
      */
     private $opinion;
 
+    // ONE OF opinion or opinionVersion : should be in separate classes TODO
     /**
-     * @var string
-     *
+     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\OpinionVersion", inversedBy="arguments", cascade={"persist"})
+     * @ORM\JoinColumn(name="opinion_id", referencedColumnName="id", onDelete="CASCADE")
+     */
+    private $opinionVersion;
+
+    /**
      * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\Reporting", mappedBy="Argument", cascade={"persist", "remove"})
      */
     private $Reports;
@@ -142,7 +141,7 @@ class Argument
     {
         $this->votes = new ArrayCollection();
         $this->Reports = new ArrayCollection();
-        $this->updatedAt = new \Datetime();
+        $this->updatedAt = new \DateTime();
         $this->voteCount = 0;
     }
 
@@ -215,6 +214,13 @@ class Argument
     public function getUpdatedAt()
     {
         return $this->updatedAt;
+    }
+
+    public function setUpdatedAt(\DateTime $date)
+    {
+        $this->updatedAt = $date;
+
+        return $this;
     }
 
     /**
@@ -367,6 +373,8 @@ class Argument
     public function setAuthor($Author)
     {
         $this->Author = $Author;
+
+        return $this;
     }
 
     /**
@@ -419,8 +427,22 @@ class Argument
     {
         $this->opinion = $opinion;
         $opinion->addArgument($this);
+
+        return $this;
     }
 
+    public function getOpinionVersion()
+    {
+        return $this->opinionVersion;
+    }
+
+    public function setOpinionVersion($opinionVersion)
+    {
+        $this->opinionVersion = $opinionVersion;
+        // $opinion->addArgument($this);
+
+        return $this;
+    }
     /**
      * @return string
      */

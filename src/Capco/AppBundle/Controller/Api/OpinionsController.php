@@ -5,6 +5,8 @@ namespace Capco\AppBundle\Controller\Api;
 use Capco\AppBundle\Entity\Opinion;
 use Capco\AppBundle\Entity\OpinionVersion;
 use Capco\AppBundle\Entity\OpinionVersionVote;
+use Capco\AppBundle\Entity\Argument;
+
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\HttpFoundation\Request;
@@ -83,6 +85,41 @@ class OpinionsController extends FOSRestController
         ];
     }
 
+    /**
+     * Add an opinion version argument.
+     *
+     * @Security("has_role('ROLE_USER')")
+     * @Post("/opinions/{opinionId}/versions/{versionId}/arguments")
+     * @ParamConverter("opinion", options={"mapping": {"opinionId": "id"}})
+     * @ParamConverter("version", options={"mapping": {"versionId": "id"}})
+     * @ParamConverter("argument", converter="fos_rest.request_body")
+     * @View(statusCode=201, serializerGroups={})
+     */
+    public function postOpinionVersionArgumentAction(Opinion $opinion, OpinionVersion $version, Argument $argument, ConstraintViolationListInterface $validationErrors)
+    {
+        if (!$opinion->canContribute()) {
+            throw new \Exception("Can't add a vote to an uncontributable opinion.", 1);
+        }
+
+        if (!$opinion->getOpinionType()->isVersionable()) {
+            throw new \Exception("Can't add a version to an unversionable opinion.", 1);
+        }
+
+        $user = $this->getUser();
+
+        if ($validationErrors->count() > 0) {
+            throw new BadRequestHttpException($validationErrors->__toString());
+        }
+
+        $argument
+            ->setOpinionVersion($version)
+            ->setAuthor($user)
+            ->setUpdatedAt(new \Datetime())
+        ;
+
+        $this->getDoctrine()->getManager()->persist($argument);
+        $this->getDoctrine()->getManager()->flush();
+    }
 
     /**
      * Add an opinion version vote.

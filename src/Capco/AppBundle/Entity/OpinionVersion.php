@@ -83,12 +83,12 @@ class OpinionVersion
     protected $author;
 
     /**
-     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\Argument", mappedBy="version", cascade={"persist", "remove"}, orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\Argument", mappedBy="opinionVersion", cascade={"persist", "remove"}, orphanRemoval=true)
      */
     protected $arguments;
 
     /**
-     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\Source", mappedBy="version", cascade={"persist", "remove"}, orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\Source", mappedBy="opinionVersion", cascade={"persist", "remove"}, orphanRemoval=true)
      */
     protected $sources;
 

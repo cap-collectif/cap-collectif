@@ -1,21 +1,21 @@
-Capco\AppBundle\Entity\Opinion:
+Capco\AppBundle\Entity\Source:
     exclusion_policy: ALL
     properties:
         id:
             expose: true
             type: integer
             groups: [Opinions, OpinionVersions]
-        title:
-            expose: true
-            type: string
-            groups: [Opinions, OpinionVersions]
         body:
             expose: true
             type: string
             groups: [Opinions, OpinionVersions]
-        OpinionType:
+        title:
             expose: true
-            serialized_name: type
+            type: string
+            groups: [Opinions, OpinionVersions]
+        link:
+            expose: true
+            type: string
             groups: [Opinions, OpinionVersions]
         createdAt:
             expose: true
@@ -29,20 +29,16 @@ Capco\AppBundle\Entity\Opinion:
             expose: true
             type: integer
             groups: [Opinions]
-        argumentCount:
-            expose: true
-            type: integer
-            groups: [Opinions]
-        sourceCount:
-            expose: true
-            type: integer
-            groups: [Opinions]
         Author:
             expose: true
             type: Capco\UserBundle\Entity\User
             serialized_name: author
             groups: [Opinions, UserMedias]
         isTrashed:
+            expose: true
+            type: boolean
+            groups: [Opinions]
+        isEnabled:
             expose: true
             type: boolean
             groups: [Opinions]

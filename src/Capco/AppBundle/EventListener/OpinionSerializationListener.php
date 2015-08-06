@@ -26,6 +26,11 @@ class OpinionSerializationListener implements EventSubscriberInterface
                 'class' => 'Capco\AppBundle\Entity\OpinionVersion',
                 'method' => 'onPostOpinionVersion',
             ],
+            [
+                'event' => 'serializer.post_serialize',
+                'class' => 'Capco\AppBundle\Entity\Opinion',
+                'method' => 'onPostOpinion',
+            ],
         ];
     }
 
@@ -66,4 +71,40 @@ class OpinionSerializationListener implements EventSubscriberInterface
         );
 
     }
+
+    public function onPostOpinion(ObjectEvent $event)
+    {
+        $opinion = $event->getObject();
+        $opinionType = $opinion->getOpinionType();
+        $step = $opinion->getStep();
+        $consultation = $step->getConsultationAbstractStep()->getConsultation();
+        $user = $this->tokenStorage->getToken()->getUser();
+
+        $event->getVisitor()->addData(
+            '_links', [
+                'show' => $this->router->generate('app_consultation_show_opinion', [
+                    'consultationSlug' => $consultation->getSlug(),
+                    'stepSlug' => $step->getSlug(),
+                    'opinionTypeSlug' => $opinionType->getSlug(),
+                    'opinionSlug' => $opinion->getSlug(),
+                ], true),
+                'report' => $this->router->generate('app_report_opinion', [
+                    'consultationSlug' => $consultation->getSlug(),
+                    'stepSlug' => $step->getSlug(),
+                    'opinionTypeSlug' => $opinionType->getSlug(),
+                    'opinionSlug' => $opinion->getSlug(),
+                ], true),
+            ]
+        );
+
+        // $event->getVisitor()->addData(
+        //     'user_vote', $user === "anon." ? null : $version->getVoteValueByUser($user)
+        // );
+
+        // $event->getVisitor()->addData(
+        //     'has_user_reported', $user === "anon." ? false : $version->userHasReport($user)
+        // );
+
+    }
+
 }

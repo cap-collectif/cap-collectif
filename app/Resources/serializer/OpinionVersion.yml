@@ -13,6 +13,9 @@ Capco\AppBundle\Entity\OpinionVersion:
             expose: true
             type: string
             groups: [OpinionVersions]
+        parent:
+            expose: true
+            groups: [OpinionVersions]
         createdAt:
             expose: true
             type: DateTime
@@ -36,10 +39,16 @@ Capco\AppBundle\Entity\OpinionVersion:
             type: integer
             serialized_name: votes_mitige
             groups: [OpinionVersions]
+        arguments:
+            expose: true
+            groups: [OpinionVersions]
         argumentsCount:
             expose: true
             type: integer
             groups: [OpinionVersions]
+        # sources:
+        #     expose: true
+        #     groups: [OpinionVersions]
         sourcesCount:
             expose: true
             type: integer

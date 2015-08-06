@@ -55,6 +55,10 @@ export default {
             },
         },
         global: {
+            report: {
+                submit: 'Signaler',
+                reported: 'Signalé',
+            },
             more: 'Voir plus',
             publish: 'Publier',
             cancel: 'Annuler',

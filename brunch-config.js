@@ -40,6 +40,9 @@ exports.config = {
           'bower_components/react-intl/dist/react-intl.min.js',
           'bower_components/react-intl/dist/locale-data/fr.js',
           'bower_components/autosize/dist/autosize.js',
+
+          'bower_components/jsdiff/diff.js',
+
           'app/Resources/js/jsapi.js',
           'app/Resources/js/cookiechoices.js',
           'app/Resources/js/googleCharts.js',
@@ -78,11 +81,7 @@ exports.config = {
       stage: 0
     },
     sass: {
-      allowCache: true,
-      mode: 'native',
-      options: {
-        includePaths: ['bower_components/bootstrap/assets/stylesheets/bootstrap']
-      }
+      mode: 'native'
     },
     'fb-flo': {
       port: 8888,

@@ -115,13 +115,15 @@ const OpinionButtons = React.createClass({
 */
 
   render() {
+    const reported = this.props.opinion.has_user_reported;
     return (
       <ButtonToolbar>
         { this.renderButton('ok') }
         { this.renderButton('mitige') }
         { this.renderButton('nok') }
-        <Button className="pull-right" href={this.props.opinion._links.report}>
-          <i className="cap cap-flag-1"></i> Signaler
+        <Button className="pull-right btn--outline btn-dark-gray" href={reported ? "#" : this.props.opinion._links.report} active={reported}>
+          <i className="cap cap-flag-1"></i>
+          {' ' + reported ? this.getIntlMessage('global.report.reported') : this.getIntlMessage('global.report.submit') }
         </Button>
       </ButtonToolbar>
     );

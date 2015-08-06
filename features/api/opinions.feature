@@ -135,3 +135,32 @@ Feature: Opinions
     """
     Then the JSON response status code should be 204
 
+## Argument
+
+  ### As an Anonymous
+
+  @database @dev
+  Scenario: Anonymous API client wants to add an argument to an opinion version
+    When I send a POST request to "/api/opinions/57/versions/1/arguments" with json:
+    """
+    {
+      "type": 1,
+      "body": "Tu veux voir mon gros argument ?"
+    }
+    """
+    Then the JSON response status code should be 401
+
+  ### As a Logged in user
+  @database @dev
+  Scenario: logged in API client wants to add an argument to an opinion version
+    Given I am logged in to api as user
+    When I send a POST request to "/api/opinions/57/versions/1/arguments" with json:
+    """
+    {
+      "type": 1,
+      "body": "Tu veux voir mon gros argument ?"
+    }
+    """
+    Then the JSON response status code should be 201
+
+
