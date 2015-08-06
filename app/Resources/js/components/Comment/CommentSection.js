@@ -2,7 +2,6 @@ import CommentList from './CommentList';
 import CommentForm from './CommentForm';
 import CommentActions from '../../actions/CommentActions';
 import CommentStore from '../../stores/CommentStore';
-import Loader from '../Utils/Loader';
 
 const FormattedMessage = ReactIntl.FormattedMessage;
 const MessagePagination = 10;
@@ -69,6 +68,18 @@ const CommentSection = React.createClass({
     });
   },
 
+  renderLoader() {
+    if (this.state.isLoading) {
+      return (
+        <div className= "row">
+          <div className="col-xs-2 col-xs-offset-6">
+            <div className="spinner-loader"></div>
+          </div>
+        </div>
+      );
+    }
+  },
+
   renderFilter() {
     if (this.state.count > 1) {
       return (
@@ -106,7 +117,7 @@ const CommentSection = React.createClass({
           </h2>
           { this.renderFilter() }
         </div>
-        <Loader show={this.state.isLoading} />
+        { this.renderLoader() }
         {(!this.state.isLoading
             ? <CommentForm comment={this.comment.bind(this)} focus={false} />
             : <span />

@@ -1,5 +1,4 @@
 import ViewElement from './ViewElement';
-import Loader from '../Utils/Loader';
 import SynthesisElementStore from '../../stores/SynthesisElementStore';
 import SynthesisElementActions from '../../actions/SynthesisElementActions';
 
@@ -60,10 +59,22 @@ const ViewBox = React.createClass({
     }
   },
 
+  renderLoader() {
+    if (this.state.isLoading) {
+      return (
+        <div className= "row">
+          <div className="col-xs-2 col-xs-offset-5 spinner-loader-container">
+            <div className="spinner-loader"></div>
+          </div>
+        </div>
+      );
+    }
+  },
+
   render() {
     return (
       <div className="synthesis__view">
-        <Loader show={this.state.isLoading} />
+        {this.renderLoader()}
         {this.renderElementsList()}
       </div>
     );
