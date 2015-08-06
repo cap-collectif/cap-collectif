@@ -2,6 +2,7 @@ import SynthesisElementStore from '../../stores/SynthesisElementStore';
 import SynthesisElementActions from '../../actions/SynthesisElementActions';
 import NotationButtons from './NotationButtons';
 import ElementsFinder from './ElementsFinder';
+import Loader from '../Utils/Loader';
 
 const Button = ReactBootstrap.Button;
 const Modal = ReactBootstrap.Modal;
@@ -73,25 +74,13 @@ const PublishModal = React.createClass({
     });
   },
 
-  renderLoader() {
-    if (this.state.isLoading) {
-      return (
-        <div className= "row">
-          <div className="col-xs-2 col-xs-offset-5 spinner-loader-container">
-            <div className="spinner-loader"></div>
-          </div>
-        </div>
-      );
-    }
-  },
-
   renderParent() {
     return (
       <div className="modal__action">
         <h2 className="h4">
           {' ' + this.getIntlMessage('edition.action.publish.parent.title')}
         </h2>
-        {this.renderLoader()}
+        <Loader show={this.state.isLoading} />
         {this.renderParentFinder()}
       </div>
     );

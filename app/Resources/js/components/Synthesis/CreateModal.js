@@ -1,6 +1,7 @@
 import SynthesisElementStore from '../../stores/SynthesisElementStore';
 import SynthesisElementActions from '../../actions/SynthesisElementActions';
 import ElementsFinder from './ElementsFinder';
+import Loader from '../Utils/Loader';
 
 const Button = ReactBootstrap.Button;
 const Modal = ReactBootstrap.Modal;
@@ -59,18 +60,6 @@ const CreateModal = React.createClass({
     });
   },
 
-  renderLoader() {
-    if (this.state.isLoading) {
-      return (
-        <div className= "row">
-          <div className="col-xs-2 col-xs-offset-5 spinner-loader-container">
-            <div className="spinner-loader"></div>
-          </div>
-        </div>
-      );
-    }
-  },
-
   renderName() {
     return (
       <form name="new_element">
@@ -91,7 +80,7 @@ const CreateModal = React.createClass({
           {' ' + this.getIntlMessage('edition.action.create.parent.label')}
           <span className="small excerpt action__title-right">{'\t' + this.getIntlMessage('edition.action.create.optional')}</span>
         </h2>
-        {this.renderLoader()}
+        <Loader show={this.state.isLoading} />
         {this.renderParentFinder()}
       </div>
     );

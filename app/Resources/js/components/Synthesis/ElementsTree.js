@@ -1,5 +1,6 @@
 import ElementTitle from './ElementTitle';
 import ElementIcon from './ElementIcon';
+import Loader from '../Utils/Loader';
 import SynthesisElementStore from '../../stores/SynthesisElementStore';
 import SynthesisElementActions from '../../actions/SynthesisElementActions';
 
@@ -89,22 +90,10 @@ const ElementTree = React.createClass({
     );
   },
 
-  renderLoader() {
-    if (this.state.isLoading) {
-      return (
-        <div className= "row">
-          <div className="col-xs-2 col-xs-offset-5 spinner-loader-container">
-            <div className="spinner-loader"></div>
-          </div>
-        </div>
-      );
-    }
-  },
-
   render() {
     return (
       <div className="synthesis__elements-tree">
-        {this.renderLoader()}
+        <Loader show={this.state.isLoading} />
         {this.renderTreeItems(this.state.rootElements, 0)}
       </div>
     );
