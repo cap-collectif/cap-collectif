@@ -6,6 +6,7 @@ Capco\AppBundle\Entity\OpinionType:
         voteWidgetType: 3
         color: red
         isEnabled: false
+        defaultFilter: votes
     opinionType2:
         title: Les enjeux
         shortName: Enjeux
@@ -13,6 +14,7 @@ Capco\AppBundle\Entity\OpinionType:
         voteWidgetType: 3
         color: bluedark
         isEnabled: true
+        defaultFilter: votes
     opinionType3:
         title: Les cause
         shortName: Causes
@@ -20,6 +22,7 @@ Capco\AppBundle\Entity\OpinionType:
         voteWidgetType: 3
         color: orange
         isEnabled: true
+        defaultFilter: votes
     opinionType4:
         title: Les solutions
         shortName: Solutions
@@ -27,3 +30,4 @@ Capco\AppBundle\Entity\OpinionType:
         voteWidgetType: 3
         color: green
         isEnabled: true
+        defaultFilter: votes

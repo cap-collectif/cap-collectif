@@ -1,5 +1,4 @@
 import ElementsList from './ElementsList';
-import Loader from '../Utils/Loader';
 import SynthesisElementStore from '../../stores/SynthesisElementStore';
 import SynthesisElementActions from '../../actions/SynthesisElementActions';
 
@@ -76,10 +75,22 @@ const ElementsInbox = React.createClass({
     }
   },
 
+  renderLoader() {
+    if (this.state.isLoading) {
+      return (
+        <div className= "row">
+          <div className="col-xs-2 col-xs-offset-5 spinner-loader-container">
+            <div className="spinner-loader"></div>
+          </div>
+        </div>
+      );
+    }
+  },
+
   render() {
     return (
       <div className="block block--bordered synthesis--edit__content">
-        <Loader show={this.state.isLoading} />
+        {this.renderLoader()}
         {this.renderList()}
       </div>
     );
