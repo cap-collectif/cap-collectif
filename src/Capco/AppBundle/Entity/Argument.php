@@ -128,7 +128,7 @@ class Argument
     // ONE OF opinion or opinionVersion : should be in separate classes TODO
     /**
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\OpinionVersion", inversedBy="arguments", cascade={"persist"})
-     * @ORM\JoinColumn(name="opinion_id", referencedColumnName="id", onDelete="CASCADE")
+     * @ORM\JoinColumn(name="opinion_version_id", referencedColumnName="id", onDelete="CASCADE")
      */
     private $opinionVersion;
 

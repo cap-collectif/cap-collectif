@@ -63,8 +63,15 @@ Capco\AppBundle\Entity\Argument:
         isEnabled: true
         isTrashed: false
     argument204:
-        Opinion: @opinion57
+        opinionVersion: @version1
         type: 0
+        Author: @user<numberBetween(1, 5)>
+        body: <text(300)>
+        isEnabled: true
+        isTrashed: false
+    argument205:
+        opinionVersion: @version1
+        type: 1
         Author: @user<numberBetween(1, 5)>
         body: <text(300)>
         isEnabled: true

@@ -46,9 +46,9 @@ Capco\AppBundle\Entity\OpinionVersion:
             expose: true
             type: integer
             groups: [OpinionVersions]
-        # sources:
-        #     expose: true
-        #     groups: [OpinionVersions]
+        sources:
+            expose: true
+            groups: [OpinionVersions]
         sourcesCount:
             expose: true
             type: integer
