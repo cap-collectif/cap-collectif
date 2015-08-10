@@ -3,62 +3,21 @@ import Validator from '../../services/Validator';
 import OpinionActions from '../../actions/OpinionActions';
 import LoginOverlay from '../Utils/LoginOverlay';
 
-const Modal = ReactBootstrap.Modal;
 const Button = ReactBootstrap.Button;
 const Input = ReactBootstrap.Input;
 
-const OpinionVersionForm = React.createClass({
+const OpinionSourceForm = React.createClass({
   propTypes: {
-    text: React.PropTypes.string,
+    opinion: React.PropTypes.object,
   },
   mixins: [ReactIntl.IntlMixin, React.addons.LinkedStateMixin],
 
   getInitialState() {
     return {
-      title: '',
       body: this.props.text,
-      comment: '',
-      showModal: false,
       submitted: false,
       isSubmitting: false,
     };
-  },
-
-  componentDidUpdate(prevProps, prevState) {
-
-    CKEDITOR.basePath = "/js/ckeditor/";
-
-    if (this.state.showModal && !prevState.showModal) {
-
-      const ckeditorConfig = {
-          "removePlugins": "elementspath",
-          "toolbar":[
-            ["Undo","Redo"],
-            ["Format"],
-            ["Bold","Italic","Underline","Strike"],
-            ["NumberedList","BulletedList","-","Outdent","Indent","-","Blockquote"],
-            ["Link","Unlink"],
-            ["Image","Table","HorizontalRule"],
-            ["Maximize"]
-          ],
-          "language":"fr",
-          "skin":"bootstrapck",
-          "extraPlugins":"autolink,autogrow",
-          "extraAllowedContent":"a[!href,_src,target,class]"
-      };
-
-      let bodyEditor = CKEDITOR.replace("body-editor", ckeditorConfig);
-      let commentEditor = CKEDITOR.replace("comment-editor", ckeditorConfig);
-
-      bodyEditor.on('change', (evt) => {
-        this.setState({body: evt.editor.getData()});
-      });
-
-      commentEditor.on('change', (evt) => {
-        this.setState({comment: evt.editor.getData()});
-      });
-
-    }
   },
 
   getClasses(field) {
@@ -68,13 +27,6 @@ const OpinionVersionForm = React.createClass({
     });
   },
 
-  close() {
-    this.setState({showModal: false});
-  },
-
-  show() {
-    this.setState({showModal: true});
-  },
 
   renderCreateButton() {
     return (
@@ -92,14 +44,20 @@ const OpinionVersionForm = React.createClass({
         <Modal {...this.props} animation={false} show={this.state.showModal} onHide={this.close.bind(this)} bsSize='large' aria-labelledby='contained-modal-title-lg'>
           <Modal.Header closeButton>
             <Modal.Title id='contained-modal-title-lg'>
-              { this.getIntlMessage('opinion.add_new_version') }
+              { this.getIntlMessage('source.add') }
             </Modal.Title>
           </Modal.Header>
           <Modal.Body>
             <p className="text-centered">
-              { this.getIntlMessage('opinion.add_new_version_infos') }
+              { this.getIntlMessage('sources.infos') }
             </p>
             <form>
+              <Input
+                type='text'
+                valueLink={this.linkState('link')}
+                placeholder={this.getIntlMessage('global.link')}
+                label={this.getIntlMessage('global.link')}
+              />
               <Input
                 type='text'
                 valueLink={this.linkState('title')}
@@ -151,28 +109,24 @@ const OpinionVersionForm = React.createClass({
 
     this.setState({ submitted: true}, () => {
 
-      console.log('id valid', this.isValid());
       if (!this.isValid()) {
         return;
       }
 
-      this.setState({isSubmitting: true});
-
       const data = {
-        title: this.state.title,
         body: this.state.body,
-        comment: this.state.comment,
+        type: this.props.type === 'yes' ? 1 : 0,
       };
 
       OpinionActions
-      .createVersion(this.props.opinion, data)
+      .addVersionSource(this.props.opinion.parent.id, this.props.opinion.id, data)
       .then(() => {
         this.setState(this.getInitialState());
-        this.close();
+        location.reload(); // TODO when enough time
         return true;
       })
       .catch(() => {
-        this.setState({isSubmitting: false, submitted: false});
+        this.setState({submitted: false});
       });
 
     });
@@ -184,21 +138,13 @@ const OpinionVersionForm = React.createClass({
       return true;
     }
 
-    if (field === 'title') {
-      return new Validator(this.state.title).min(2);
-    }
-
     if (field === 'body') {
       return new Validator(this.state.body).min(2);
     }
 
-    if (field === 'comment') {
-      return new Validator(this.state.comment).min(2);
-    }
-
-    return this.isValid('title') && this.isValid('body') && this.isValid('comment');
+    return this.isValid('body');
   },
 
 });
 
-export default OpinionVersionForm;
+export default OpinionSourceForm;

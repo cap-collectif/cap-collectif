@@ -52,6 +52,29 @@ class OpinionVersion
         return false;
     }
 
+    public function getArgumentForCount()
+    {
+        $i = 0;
+        foreach ($this->arguments as $argument) {
+            if ($argument->getType() === Argument::TYPE_FOR) {
+                $i++;
+            }
+        }
+        return $i;
+    }
+
+    public function getArgumentAgainstCount()
+    {
+        $i = 0;
+        foreach ($this->arguments as $argument) {
+            if ($argument->getType() === Argument::TYPE_AGAINST) {
+                $i++;
+            }
+        }
+        return $i;
+    }
+
+
     /**
      * @var int
      *

@@ -32,10 +32,12 @@ Capco\AppBundle\Entity\Opinion:
         argumentCount:
             expose: true
             type: integer
+            serialized_name: arguments_count
             groups: [Opinions]
         sourceCount:
             expose: true
             type: integer
+            serialized_name: sources_count
             groups: [Opinions]
         Author:
             expose: true
@@ -45,4 +47,13 @@ Capco\AppBundle\Entity\Opinion:
         isTrashed:
             expose: true
             type: boolean
+            groups: [Opinions]
+    virtual_properties:
+        getArgumentForCount:
+            type: integer
+            serialized_name: arguments_yes_count
+            groups: [Opinions]
+        getArgumentAgainstCount:
+            type: integer
+            serialized_name: arguments_no_count
             groups: [Opinions]

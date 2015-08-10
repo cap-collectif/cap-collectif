@@ -44,7 +44,7 @@
                                 <i class="cap cap-arrow-1"></i>
                                 <span class="hidden-xs  hidden-sm"> {{ 'opinion.show.back'|trans({}, 'CapcoAppBundle') }}</span>
                             </a>
-                            <h2 class="h4  opinion__header__title">{{ opinion.opinionType.shortName|capitalize }} </h2>
+                            <h2 class="h4 opinion__header__title">{{ opinion.opinionType.shortName|capitalize }} </h2>
                         </div>
                         {% include 'CapcoAppBundle:Opinion:opinion_body.html.twig' %}
                     </div>
@@ -123,24 +123,19 @@
                   <ul class="nav nav-tabs" role="tablist">
                     <li role="presentation" class="active">
                         <a href="#arguments" aria-controls="arguments" role="tab" data-toggle="tab">
-                            x Arguments
+                            {% transchoice (opinion.arguments|length) with {'%count%': (opinion.arguments|length)} from 'CapcoAppBundle' %}argument.count{% endtranschoice %}
                         </a>
                     </li>
                     {% if opinion.opinionType.isVersionable %}
                         <li role="presentation">
                             <a href="#versions" aria-controls="versions" role="tab" data-toggle="tab">
-                                x Nouvelles versions
+                                {% transchoice (opinion.versions|length) with {'%count%': (opinion.versions|length)} from 'CapcoAppBundle' %}version.show.count{% endtranschoice %}
                             </a>
                         </li>
                     {% endif %}
                     <li role="presentation">
                         <a href="#sources" aria-controls="sources" role="tab" data-toggle="tab">
                             {% transchoice (sources|length) with {'%count%': (sources|length)} from 'CapcoAppBundle' %}source.show.count{% endtranschoice %}
-                        </a>
-                    </li>
-                    <li role="presentation">
-                        <a href="#links" aria-controls="links" role="tab" data-toggle="tab">
-                            x Liaisons
                         </a>
                     </li>
                   </ul>
@@ -185,7 +180,7 @@
                         </div>
                     {% endif %}
 
-                    <!-- Nouvelles versions -->
+                    <!-- Sources -->
                     <div role="tabpanel" class="tab-pane" id="sources">
                         {% if opinion.canContribute %}
                             <a href="{{ path('app_new_source' ,{'consultationSlug': consultation.slug, 'stepSlug': currentStep.slug, 'opinionTypeSlug': opinionType.slug, 'opinionSlug': opinion.slug} ) }}" class="btn btn-primary" data-container="body">
@@ -202,10 +197,6 @@
                                 </ul>
                             </div>
                         {% endif %}
-                    </div>
-
-                    <div role="tabpanel" class="tab-pane" id="links">
-                        ...
                     </div>
                   </div>
 

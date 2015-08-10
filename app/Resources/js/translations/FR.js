@@ -32,6 +32,21 @@ export default {
             with_my_account: 'Commenter avec mon compte',
             without_account: 'Commenter sans créer de compte',
         },
+        source: {
+            add: 'Créer une source',
+            link: 'Lien de la source',
+            infos: 'Merci d\'examiner les sources existantes en premier lieu afin de ne pas soumettre de doublon. Vous pouvez voter pour celles existantes !',
+        },
+        argument: {
+            yes: {
+                add: 'Ajouter un argument pour',
+                list: '{num, plural, =0{0 argument pour} one{# argument pour} other{# arguments pour}}',
+            },
+            no: {
+                add: 'Ajouter un argument contre',
+                list: '{num, plural, =0{0 argument contre} one{# argument contre} other{# arguments contre}}',
+            },
+        },
         opinion: {
             no_new_version: 'Aucune nouvelle version proposée',
             add_new_version: 'Proposer une nouvelle version',
@@ -47,6 +62,7 @@ export default {
             ok: 'D\'accord',
             mitige: 'Mitigé',
             nok: 'Pas d\'accord',
+            cancel: 'Annuler mon vote',
             popover: {
                 title: 'Connectez-vous pour contribuer',
                 body: 'Vous devez être connecté pour réaliser cette action.',

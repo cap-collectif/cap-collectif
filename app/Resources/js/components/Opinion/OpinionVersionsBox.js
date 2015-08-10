@@ -47,7 +47,7 @@ const OpinionVersionsBox = React.createClass({
     if (this.state.count > 1) {
       return (
         <div className="pull-right col-xs-5 hidden-xs">
-          <select ref="filter" className="h2 form-control" value={this.state.filter} onChange={() => this.updateSelectedValue()}>
+          <select ref="filter" className="form-control" value={this.state.filter} onChange={() => this.updateSelectedValue()}>
             <option value="popular">{this.getIntlMessage('global.popular')}</option>
             <option value="last">{this.getIntlMessage('global.last')}</option>
             <option value="old">{this.getIntlMessage('global.old')}</option>

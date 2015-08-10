@@ -23,6 +23,7 @@ Capco\AppBundle\Entity\Argument:
         voteCount:
             expose: true
             type: integer
+            serialized_name: votes_count
             groups: [Opinions]
         Author:
             expose: true

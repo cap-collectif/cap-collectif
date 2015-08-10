@@ -66,4 +66,11 @@ Capco\AppBundle\Entity\OpinionVersion:
             serialized_name: votes_total
             type: integer
             groups: [OpinionVersions]
-
+        getArgumentForCount:
+            type: integer
+            serialized_name: arguments_yes_count
+            groups: [OpinionVersions]
+        getArgumentAgainstCount:
+            type: integer
+            serialized_name: arguments_no_count
+            groups: [OpinionVersions]

@@ -557,6 +557,14 @@ class Argument
         return $excerpt;
     }
 
+    public function getLinkedOpinion()
+    {
+        if ($this->opinion) {
+            return $this->opinion;
+        }
+        return $this->opinionVersion->getParent();
+    }
+
     // ************************* Lifecycle ***********************************
 
     /**

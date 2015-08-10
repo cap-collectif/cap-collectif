@@ -19,11 +19,10 @@ const OpinionVersionList = React.createClass({
 
     const classes = React.addons.classSet({
       'media-list': true,
-      'opinion__list': true,
     });
 
     return (
-      <ul className={classes}>
+      <ul className={classes} style={{ marginTop: '20px'}}>
         {
           this.props.versions.map((version) => {
             return <OpinionVersion {...this.props} key={version.id} version={version} />;
