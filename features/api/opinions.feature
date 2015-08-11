@@ -117,7 +117,7 @@ Feature: Opinions
     Then the JSON response status code should be 401
 
   ### As a Logged in user
-  @database
+  @database @dev
   Scenario: logged in API client wants to add a version vote
     Given I am logged in to api as user
     When I send a PUT request to "/api/opinions/57/versions/1/votes" with json:
@@ -133,6 +133,8 @@ Feature: Opinions
       "value": -1
     }
     """
+    Then the JSON response status code should be 204
+    When I send a DELETE request to "/api/opinions/57/versions/1/votes"
     Then the JSON response status code should be 204
 
 ## Argument
@@ -164,3 +166,33 @@ Feature: Opinions
     Then the JSON response status code should be 201
 
 
+## Source
+
+  ### As an Anonymous
+  @database
+  Scenario: logged in API client wants to add a source to an opinion version
+    When I send a POST request to "/api/opinions/57/versions/1/sources" with json:
+    """
+    {
+      "link": "http://google.com",
+      "title": "Je suis une source",
+      "body": "Jai un corps mais pas de bras :'(",
+      "Category": 1
+    }
+    """
+    Then the JSON response status code should be 401
+
+  ### As a Logged in user
+  @database @dev
+  Scenario: logged in API client wants to add an argument to an opinion version
+    Given I am logged in to api as user
+    When I send a POST request to "/api/opinions/57/versions/1/sources" with json:
+    """
+    {
+      "link": "http://google.com",
+      "title": "Je suis une source",
+      "body": "Jai un corps mais pas de bras :'(",
+      "Category": 1
+    }
+    """
+    Then the JSON response status code should be 201

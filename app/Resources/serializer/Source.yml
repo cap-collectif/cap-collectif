@@ -20,20 +20,21 @@ Capco\AppBundle\Entity\Source:
         createdAt:
             expose: true
             type: DateTime
-            groups: [Opinions]
+            groups: [Opinions, OpinionVersions]
         updatedAt:
             expose: true
             type: DateTime
-            groups: [Opinions]
+            groups: [Opinions, OpinionVersions]
         voteCount:
             expose: true
             type: integer
-            groups: [Opinions]
+            serialized_name: votes_count
+            groups: [Opinions, OpinionVersions]
         Author:
             expose: true
             type: Capco\UserBundle\Entity\User
             serialized_name: author
-            groups: [Opinions, UserMedias]
+            groups: [Opinions,, OpinionVersions, UserMedias]
         isTrashed:
             expose: true
             type: boolean

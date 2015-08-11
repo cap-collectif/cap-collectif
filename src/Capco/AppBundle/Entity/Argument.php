@@ -519,7 +519,7 @@ class Argument
     {
         if ($user != null) {
             foreach ($this->Reports as $report) {
-                if ($report->getUser() == $user) {
+                if ($report->getReporter() == $user) {
                     return true;
                 }
             }
@@ -533,7 +533,7 @@ class Argument
      */
     public function canDisplay()
     {
-        return $this->isEnabled && $this->opinion->canDisplay();
+        return $this->isEnabled && $this->getLinkedOpinion()->canDisplay();
     }
 
     /**
@@ -541,7 +541,7 @@ class Argument
      */
     public function canContribute()
     {
-        return $this->isEnabled && !$this->isTrashed && $this->opinion->canContribute();
+        return $this->isEnabled && !$this->isTrashed && $this->getLinkedOpinion()->canContribute();
     }
 
     /**

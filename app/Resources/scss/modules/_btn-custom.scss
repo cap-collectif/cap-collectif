@@ -35,3 +35,9 @@
   }
 
 }
+
+
+/* This problem may be specific to MacOS with Chrome */
+.btn:focus, .btn:active:focus {
+  outline: none !important;
+}

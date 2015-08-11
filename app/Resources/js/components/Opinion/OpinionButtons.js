@@ -1,5 +1,7 @@
 import OpinionActions from '../../actions/OpinionActions';
 import LoginStore from '../../stores/LoginStore';
+import LoginOverlay from '../Utils/LoginOverlay';
+
 
 const ButtonToolbar = ReactBootstrap.ButtonToolbar;
 const Button = ReactBootstrap.Button;
@@ -16,21 +18,35 @@ const OpinionButtons = React.createClass({
 
   getInitialState() {
     return {
-      vote: this.props.opinion.user_vote,
+      hasInitiallyVoted: this.props.opinion.user_vote,
+      hasVoted: null,
     };
   },
 
+  currentVote() {
+    return this.state.hasVoted != null ? this.state.hasVoted : this.state.hasInitiallyVoted;
+  },
+
+  isCurrentVote(value) {
+    return value === this.currentVote();
+  },
+
   vote(value) {
-    this.setState({vote: value});
+    this.setState({hasVoted: value});
     OpinionActions.voteForVersion(this.props.opinionId, this.props.versionId, {value: value});
   },
 
-  renderVoteButton(type, enable) {
+  deleteVote() {
+    this.setState({hasVoted: null, hasInitiallyVoted: null});
+    OpinionActions.voteForVersion(this.props.opinionId, this.props.versionId);
+  },
+
+  renderVoteButton(type) {
     if (type === 'ok') {
       return (
         <Button bsStyle='success' className="btn--outline"
-                onClick={enable ? this.vote.bind(this, 1) : null}
-                active={this.state.vote === 1 ? true : false}
+                onClick={LoginStore.isLoggedIn() ? this.vote.bind(this, 1) : null}
+                active={this.isCurrentVote(1)}
         >
           <i className="cap cap-hand-like-2-1"></i>
           { ' ' + this.getIntlMessage('vote.ok') }
@@ -40,8 +56,8 @@ const OpinionButtons = React.createClass({
     if (type === 'mitige') {
       return (
         <Button bsStyle='warning' className="btn--outline"
-                onClick={enable ? this.vote.bind(this, 0) : null}
-                active={this.state.vote === 0 ? true : false}
+                onClick={LoginStore.isLoggedIn() ? this.vote.bind(this, 0) : null}
+                active={this.isCurrentVote(0)}
         >
           <i className="cap cap-hand-like-2 icon-rotate"></i>
           { ' ' + this.getIntlMessage('vote.mitige') }
@@ -51,40 +67,14 @@ const OpinionButtons = React.createClass({
     if (type === 'nok') {
       return (
         <Button bsStyle='danger' className="btn--outline"
-                onClick={enable ? this.vote.bind(this, -1) : null}
-                active={this.state.vote === -1 ? true : false}
+                onClick={LoginStore.isLoggedIn() ? this.vote.bind(this, -1) : null}
+                active={this.isCurrentVote(-1)}
         >
           <i className="cap cap-hand-unlike-2-1"></i>
           { ' ' + this.getIntlMessage('vote.nok') }
         </Button>
       );
     }
-  },
-
-  // We add Popover if user is not connected
-  renderButton(type) {
-    if (LoginStore.isLoggedIn()) {
-      return this.renderVoteButton(type, true);
-    }
-
-    return (
-      <OverlayTrigger rootClose trigger='click' placement='top' overlay={
-          <Popover title={this.getIntlMessage('vote.popover.title')}>
-            <p>
-              { this.getIntlMessage('vote.popover.body') }
-            </p>
-            {this.props.isRegistrationEnabled
-              ? <p><a href='/register' className='btn btn-success center-block'>{ this.getIntlMessage('vote.popover.signin') }</a></p>
-              : <span />
-            }
-            <p>
-              <Button href='/login' bsStyle='success' className="center-block">{ this.getIntlMessage('vote.popover.login') }</Button>
-            </p>
-          </Popover>}
-      >
-        { this.renderVoteButton(type, false) }
-      </OverlayTrigger>
-    );
   },
 
 /*
@@ -118,9 +108,15 @@ const OpinionButtons = React.createClass({
     const reported = this.props.opinion.has_user_reported;
     return (
       <ButtonToolbar>
-        { this.renderButton('ok') }
-        { this.renderButton('mitige') }
-        { this.renderButton('nok') }
+        <LoginOverlay children={ this.renderVoteButton('ok') } />
+        <LoginOverlay children={ this.renderVoteButton('mitige') } />
+        <LoginOverlay children={ this.renderVoteButton('nok') } />
+        {(this.currentVote() != null
+          ? <Button bsStyle='info' className="btn--outline" active={true}>
+              { this.getIntlMessage('vote.cancel') }
+            </Button>
+          : <span />
+        )}
         <Button className="pull-right btn--outline btn-dark-gray" href={reported ? "#" : this.props.opinion._links.report} active={reported}>
           <i className="cap cap-flag-1"></i>
           {' ' + reported ? this.getIntlMessage('global.report.reported') : this.getIntlMessage('global.report.submit') }

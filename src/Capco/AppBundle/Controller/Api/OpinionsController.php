@@ -6,6 +6,10 @@ use Capco\AppBundle\Entity\Opinion;
 use Capco\AppBundle\Entity\OpinionVersion;
 use Capco\AppBundle\Entity\OpinionVersionVote;
 use Capco\AppBundle\Entity\Argument;
+use Capco\AppBundle\Entity\Source;
+
+use Capco\AppBundle\Form\ApiSourceType;
+
 
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
@@ -21,6 +25,7 @@ use FOS\RestBundle\Controller\Annotations\View;
 use FOS\RestBundle\Controller\Annotations\Get;
 use FOS\RestBundle\Controller\Annotations\Post;
 use FOS\RestBundle\Controller\Annotations\Put;
+use FOS\RestBundle\Controller\Annotations\Delete;
 use FOS\RestBundle\Controller\Annotations\QueryParam;
 
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
@@ -85,6 +90,46 @@ class OpinionsController extends FOSRestController
         ];
     }
 
+
+    /**
+     * Add an opinion version source.
+     *
+     * @Security("has_role('ROLE_USER')")
+     * @Post("/opinions/{opinionId}/versions/{versionId}/sources")
+     * @ParamConverter("opinion", options={"mapping": {"opinionId": "id"}})
+     * @ParamConverter("version", options={"mapping": {"versionId": "id"}})
+     * @View(statusCode=201, serializerGroups={})
+     */
+    public function postOpinionVersionSourceAction(Request $request, Opinion $opinion, OpinionVersion $version)
+    {
+        if (!$opinion->canContribute()) {
+            throw new \Exception("Can't add a source to an uncontributable opinion.", 1);
+        }
+
+        if (!$opinion->getOpinionType()->isVersionable()) {
+            throw new \Exception("Can't add a version to an unversionable opinion.", 1);
+        }
+
+        $user = $this->getUser();
+        $source = (new Source())
+                    ->setAuthor($user)
+                    ->setType(Source::LINK)
+                    ->setOpinionVersion($version)
+                    ->setIsEnabled(true)
+                    ->setUpdatedAt(new \Datetime())
+                ;
+
+        $form = $this->createForm(new ApiSourceType(), $source);
+        $form->handleRequest($request);
+
+        if (!$form->isValid()) {
+            return $form;
+        }
+
+        $this->getDoctrine()->getManager()->persist($source);
+        $this->getDoctrine()->getManager()->flush();
+    }
+
     /**
      * Add an opinion version argument.
      *
@@ -122,8 +167,6 @@ class OpinionsController extends FOSRestController
     }
 
     /**
-     * Add an opinion version vote.
-     *
      * @Security("has_role('ROLE_USER')")
      * @Put("/opinions/{opinionId}/versions/{versionId}/votes")
      * @ParamConverter("opinion", options={"mapping": {"opinionId": "id"}})
@@ -131,7 +174,7 @@ class OpinionsController extends FOSRestController
      * @ParamConverter("vote", converter="fos_rest.request_body")
      * @View(statusCode=204, serializerGroups={})
      */
-    public function postOpinionVersionVoteAction(Opinion $opinion, OpinionVersion $version, OpinionVersionVote $vote, ConstraintViolationListInterface $validationErrors)
+    public function putOpinionVersionVoteAction(Opinion $opinion, OpinionVersion $version, OpinionVersionVote $vote, ConstraintViolationListInterface $validationErrors)
     {
         if (!$opinion->canContribute()) {
             throw new \Exception("Can't add a vote to an uncontributable opinion.", 1);
@@ -167,8 +210,36 @@ class OpinionsController extends FOSRestController
     }
 
     /**
-     * Add an opinion version vote.
-     *
+     * @Security("has_role('ROLE_USER')")
+     * @Delete("/opinions/{opinionId}/versions/{versionId}/votes")
+     * @ParamConverter("opinion", options={"mapping": {"opinionId": "id"}})
+     * @ParamConverter("version", options={"mapping": {"versionId": "id"}})
+     * @View()
+     */
+    public function deleteOpinionVersionVoteAction(Opinion $opinion, OpinionVersion $version)
+    {
+        if (!$opinion->canContribute()) {
+            throw new BadRequestHttpException("Uncontributable opinion.");
+        }
+
+        if (!$opinion->getOpinionType()->isVersionable()) {
+            throw new BadRequestHttpException("Unversionable opinion.");
+        }
+
+        $vote = $this->getDoctrine()->getManager()
+                     ->getRepository('CapcoAppBundle:OpinionVersionVote')
+                     ->findOneBy(['user' => $this->getUser(), 'opinionVersion' => $version]);
+
+        if (!$vote) {
+            throw new BadRequestHttpException("You have not voted for this opinion version.");
+        }
+
+        $this->getDoctrine()->getManager()->remove($vote);
+        $this->getDoctrine()->getManager()->flush();
+    }
+
+
+    /**
      * @Security("has_role('ROLE_USER')")
      * @Post("/opinions/{id}/versions")
      * @ParamConverter("opinion", options={"mapping": {"id": "id"}})

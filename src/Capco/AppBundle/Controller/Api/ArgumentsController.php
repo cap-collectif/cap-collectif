@@ -16,28 +16,25 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use FOS\RestBundle\Controller\FOSRestController;
 use FOS\RestBundle\Controller\Annotations\View;
 use FOS\RestBundle\Controller\Annotations\Get;
+use FOS\RestBundle\Controller\Annotations\Put;
 use FOS\RestBundle\Controller\Annotations\Post;
 use FOS\RestBundle\Controller\Annotations\Delete;
 use FOS\RestBundle\Controller\Annotations\QueryParam;
-
-use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 use FOS\RestBundle\Request\ParamFetcherInterface;
 
 class ArgumentsController extends FOSRestController
 {
     /**
-     * Add an argument vote.
-     *
      * @Security("has_role('ROLE_USER')")
      * @Post("/arguments/{argumentId}/votes")
      * @ParamConverter("argument", options={"mapping": {"argumentId": "id"}})
      * @ParamConverter("vote", converter="fos_rest.request_body")
      * @View(statusCode=201, serializerGroups={})
      */
-    public function postVoteAction(Argument $argument, ArgumentVote $vote, ConstraintViolationListInterface $validationErrors)
+    public function postArgumentVoteAction(Argument $argument, ArgumentVote $vote, ConstraintViolationListInterface $validationErrors)
     {
-        if (!$argument->getLinkedOpinion()->canContribute()) {
-            throw new BadRequestHttpException("Can't add a vote to an uncontributable opinion.");
+        if (!$argument->canContribute()) {
+            throw new BadRequestHttpException("Uncontributable argument.");
         }
 
         $user = $this->getUser();
@@ -63,18 +60,36 @@ class ArgumentsController extends FOSRestController
         $this->getDoctrine()->getManager()->flush();
     }
 
+
     /**
-     * Delete an argument vote.
-     *
+     * @Security("has_role('ROLE_USER')")
+     * @Put("/arguments/{argumentId}")
+     * @ParamConverter("argument", options={"mapping": {"argumentId": "id"}})
+     * @View(statusCode=204, serializerGroups={})
+     */
+    public function putArgumentAction(Request $request, Argument $argument)
+    {
+        if (!$argument->canContribute()) {
+            throw new BadRequestHttpException("Uncontributable argument.");
+        }
+
+        if ($argument->getAuthor() != $this->getUser()) {
+            throw new BadRequestHttpException("You are not the author of this argument.");
+        }
+
+        // In the future we will implement this
+    }
+
+    /**
      * @Security("has_role('ROLE_USER')")
      * @Delete("/arguments/{argumentId}/votes")
      * @ParamConverter("argument", options={"mapping": {"argumentId": "id"}})
-     * @View(statusCode=200, serializerGroups={})
+     * @View()
      */
-    public function deleteVoteAction(Argument $argument)
+    public function deleteArgumentVoteAction(Argument $argument)
     {
         if (!$argument->getLinkedOpinion()->canContribute()) {
-            throw new BadRequestHttpException("Can't delete a vote to an uncontributable opinion.");
+            throw new BadRequestHttpException("Uncontributable opinion.");
         }
         $vote = $this->getDoctrine()->getManager()
                      ->getRepository('CapcoAppBundle:ArgumentVote')

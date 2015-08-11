@@ -7,7 +7,7 @@ import Fetcher from '../../services/Fetcher';
 
 const OpinionBox = React.createClass({
   propTypes: {
-    opinion: React.PropTypes.object.Required,
+    opinion: React.PropTypes.object.isRequired,
   },
   mixins: [ReactIntl.IntlMixin],
 

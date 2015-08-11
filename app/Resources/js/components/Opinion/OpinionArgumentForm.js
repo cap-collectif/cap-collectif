@@ -20,11 +20,12 @@ const OpinionArgumentForm = React.createClass({
     };
   },
 
-  getClasses(field) {
-    return React.addons.classSet({
-      'form-group': true,
-      'has-error': !this.isValid(field),
-    });
+  componentDidUpdate() {
+    autosize(React.findDOMNode(this.refs.body).querySelector('textarea'));
+  },
+
+  getStyle(field) {
+    return !this.isValid(field) ? 'error' : this.state.submitted ? 'success' : '';
   },
 
   render() {
@@ -35,7 +36,9 @@ const OpinionArgumentForm = React.createClass({
             <LoginOverlay children={
               <Input
                 type='textarea'
-                rows="2" cols="80"
+                rows="2"
+                ref="body"
+                bsStyle={this.getStyle('title')}
                 valueLink={this.linkState('body')}
                 placeholder={this.getIntlMessage('argument.' + this.props.type + '.add')}
                 label={this.getIntlMessage('argument.' + this.props.type + '.add')}
@@ -79,6 +82,7 @@ const OpinionArgumentForm = React.createClass({
       .addVersionArgument(this.props.opinion.parent.id, this.props.opinion.id, data)
       .then(() => {
         this.setState(this.getInitialState());
+        autosize.destroy(React.findDOMNode(this.refs.body));
         location.reload(); // TODO when enough time
         return true;
       })

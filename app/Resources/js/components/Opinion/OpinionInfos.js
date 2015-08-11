@@ -2,7 +2,7 @@ const FormattedDate = ReactIntl.FormattedDate;
 
 const OpinionInfos = React.createClass({
   propTypes: {
-    opinion: React.PropTypes.object,
+    opinion: React.PropTypes.object.isRequired,
   },
   mixins: [ReactIntl.IntlMixin],
 
@@ -33,7 +33,7 @@ const OpinionInfos = React.createClass({
     return (
       <span className="excerpt">
         { ' - ' }
-        { this.getIntlMessage('opinion.edited') }
+        { this.getIntlMessage('global.edited') }
         { ' • ' }
         <FormattedDate
             value={this.props.opinion.updated_at}
@@ -60,7 +60,7 @@ const OpinionInfos = React.createClass({
     return (
       <p className="h5 opinion__user">
         { this.renderAuthorName() }
-        { '  ' }
+        { ' • ' }
         { this.renderDate() }
         { this.renderEditionDate() }
       </p>

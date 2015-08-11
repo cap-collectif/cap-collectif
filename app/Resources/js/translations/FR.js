@@ -34,7 +34,10 @@ export default {
         },
         source: {
             add: 'Créer une source',
-            link: 'Lien de la source',
+            link: 'Lien',
+            title: 'Titre',
+            body: 'Description',
+            type: 'Type',
             infos: 'Merci d\'examiner les sources existantes en premier lieu afin de ne pas soumettre de doublon. Vous pouvez voter pour celles existantes !',
         },
         argument: {
@@ -50,6 +53,7 @@ export default {
         opinion: {
             no_new_version: 'Aucune nouvelle version proposée',
             add_new_version: 'Proposer une nouvelle version',
+            add_new_source: 'Proposer une source',
             add_new_version_infos: 'Merci d\'examiner les versions existantes en premier lieu afin de ne pas soumettre de doublon. Vous pouvez voter pour celles existantes !',
             version: {
                 body: 'Nouvelle version',
@@ -77,6 +81,9 @@ export default {
             },
             more: 'Voir plus',
             publish: 'Publier',
+            edited: 'édité le',
+            edit: 'Modifier',
+            link: 'Lien',
             cancel: 'Annuler',
             title: 'Titre',
             answer: 'Répondre',

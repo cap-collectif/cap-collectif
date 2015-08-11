@@ -5,34 +5,44 @@ import LoginOverlay from '../Utils/LoginOverlay';
 
 const Button = ReactBootstrap.Button;
 const Input = ReactBootstrap.Input;
+const Modal = ReactBootstrap.Modal;
 
 const OpinionSourceForm = React.createClass({
   propTypes: {
-    opinion: React.PropTypes.object,
+    opinion: React.PropTypes.object.isRequired,
+    categories: React.PropTypes.array.isRequired,
   },
   mixins: [ReactIntl.IntlMixin, React.addons.LinkedStateMixin],
 
   getInitialState() {
     return {
-      body: this.props.text,
+      link: '',
+      title: '',
+      body: '',
+      category: this.props.categories.length > 1 ? this.props.categories[0].id : '0',
       submitted: false,
       isSubmitting: false,
+      showModal: false,
     };
   },
 
-  getClasses(field) {
-    return React.addons.classSet({
-      'form-group': true,
-      'has-error': !this.isValid(field),
-    });
+  close() {
+    this.setState({showModal: false});
   },
 
+  show() {
+    this.setState({showModal: true});
+  },
+
+  getStyle(field) {
+    return !this.isValid(field) ? 'error' : this.state.submitted ? 'success' : '';
+  },
 
   renderCreateButton() {
     return (
       <a className="btn btn-primary" onClick={LoginStore.isLoggedIn() ? this.show.bind(this) : null}>
         <i className="cap cap-add-1"></i>
-        { ' ' + this.getIntlMessage('opinion.add_new_version')}
+        { ' ' + this.getIntlMessage('opinion.add_new_source')}
       </a>
     );
   },
@@ -48,38 +58,43 @@ const OpinionSourceForm = React.createClass({
             </Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            <p className="text-centered">
-              { this.getIntlMessage('sources.infos') }
-            </p>
+            <div className="modal-top-warning">
+              <p>
+                { this.getIntlMessage('source.infos') }
+              </p>
+            </div>
             <form>
               <Input
                 type='text'
-                valueLink={this.linkState('link')}
-                placeholder={this.getIntlMessage('global.link')}
-                label={this.getIntlMessage('global.link')}
+                bsStyle={this.getStyle('title')}
+                valueLink={this.linkState('title')}
+                label={this.getIntlMessage('source.title')}
               />
+              <Input
+                type='select'
+                bsStyle={this.getStyle('type')}
+                label={this.getIntlMessage('source.type')}
+                valueLink={this.linkState('category')}
+              >
+                {
+                  this.props.categories.map((category) => {
+                    return <option value={category.id}>{category.title}</option>
+                  })
+                }
+              </Input>
               <Input
                 type='text'
-                valueLink={this.linkState('title')}
-                placeholder={this.getIntlMessage('global.title')}
-                label={this.getIntlMessage('global.title')}
+                bsStyle={this.getStyle('link')}
+                valueLink={this.linkState('link')}
+                placeholder="http://"
+                label={this.getIntlMessage('source.link')}
               />
               <Input
                 type='textarea'
-                name='body-editor'
                 rows="10" cols="80"
+                bsStyle={this.getStyle('body')}
                 valueLink={this.linkState('body')}
-                label={this.getIntlMessage('opinion.version.body')}
-                help={this.getIntlMessage('opinion.version.body_helper')}
-                wrapperClassName="excerpt small"
-              />
-              <Input
-                type='textarea'
-                name='comment-editor'
-                rows="10" cols="80"
-                valueLink={this.linkState('comment')}
-                label={this.getIntlMessage('opinion.version.comment')}
-                help={this.getIntlMessage('opinion.version.comment_helper')}
+                label={this.getIntlMessage('source.body')}
                 wrapperClassName="excerpt small"
               />
             </form>
@@ -107,15 +122,17 @@ const OpinionSourceForm = React.createClass({
   create(e) {
     e.preventDefault();
 
-    this.setState({ submitted: true}, () => {
+    this.setState({submitted: true}, () => {
 
       if (!this.isValid()) {
         return;
       }
 
       const data = {
+        link: this.state.link,
+        title: this.state.title,
         body: this.state.body,
-        type: this.props.type === 'yes' ? 1 : 0,
+        Category: parseInt(this.state.category),
       };
 
       OpinionActions
@@ -138,11 +155,23 @@ const OpinionSourceForm = React.createClass({
       return true;
     }
 
+    if (field === 'type') {
+      return true;
+    }
+
+    if (field === 'link') {
+      return new Validator(this.state.link).isUrl();
+    }
+
+    if (field === 'title') {
+      return new Validator(this.state.title).min(2);
+    }
+
     if (field === 'body') {
       return new Validator(this.state.body).min(2);
     }
 
-    return this.isValid('body');
+    return this.isValid('body') && this.isValid('link') && this.isValid('title');
   },
 
 });

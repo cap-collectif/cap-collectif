@@ -13,6 +13,12 @@ class Validator {
     return this.value && re.test(this.value);
   }
 
+  isUrl() {
+    const urlPattern = /(^|\s)((https?:\/\/)?[\w-]+(\.[\w-]+)+\.?(:\d+)?(\/\S*)?)/gi;
+    console.log(this.value);
+    return this.value && urlPattern.test(this.value);
+  }
+
 }
 
 export default Validator;

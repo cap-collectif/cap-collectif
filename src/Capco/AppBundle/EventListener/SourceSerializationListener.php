@@ -7,7 +7,7 @@ use JMS\Serializer\EventDispatcher\ObjectEvent;
 use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
-class ArgumentSerializationListener implements EventSubscriberInterface
+class SourceSerializationListener implements EventSubscriberInterface
 {
     private $router;
     private $tokenStorage;
@@ -23,16 +23,16 @@ class ArgumentSerializationListener implements EventSubscriberInterface
         return [
             [
                 'event' => 'serializer.post_serialize',
-                'class' => 'Capco\AppBundle\Entity\Argument',
-                'method' => 'onPostArgument',
+                'class' => 'Capco\AppBundle\Entity\Source',
+                'method' => 'onPostSource',
             ]
         ];
     }
 
-    public function onPostArgument(ObjectEvent $event)
+    public function onPostSource(ObjectEvent $event)
     {
-        $argument = $event->getObject();
-        $opinion = $argument->getLinkedOpinion();
+        $source = $event->getObject();
+        $opinion = $source->getLinkedOpinion();
         $opinionType = $opinion->getOpinionType();
         $step = $opinion->getStep();
         $consultation = $step->getConsultationAbstractStep()->getConsultation();
@@ -40,29 +40,29 @@ class ArgumentSerializationListener implements EventSubscriberInterface
 
         $event->getVisitor()->addData(
             '_links', [
-                'edit' => $this->router->generate('app_consultation_edit_argument', [
+                'edit' => $this->router->generate('app_edit_source', [
                     'consultationSlug' => $consultation->getSlug(),
                     'stepSlug' => $step->getSlug(),
                     'opinionTypeSlug' => $opinionType->getSlug(),
                     'opinionSlug' => $opinion->getSlug(),
-                    'argumentId' => $argument->getId(),
+                    'sourceSlug' => $source->getSlug(),
                 ], true),
-                'report' => $this->router->generate('app_report_argument', [
+                'report' => $this->router->generate('app_report_source', [
                     'consultationSlug' => $consultation->getSlug(),
                     'stepSlug' => $step->getSlug(),
                     'opinionTypeSlug' => $opinionType->getSlug(),
                     'opinionSlug' => $opinion->getSlug(),
-                    'argumentId' => $argument->getId(),
+                    'sourceSlug' => $source->getSlug(),
                 ], true),
             ]
         );
 
         $event->getVisitor()->addData(
-            'has_user_voted', $user === "anon." ? false : $argument->userHasVote($user)
+            'has_user_voted', $user === "anon." ? false : $source->userHasVote($user)
         );
 
         $event->getVisitor()->addData(
-            'has_user_reported', $user === "anon." ? false : $argument->userHasReport($user)
+            'has_user_reported', $user === "anon." ? false : $source->userHasReport($user)
         );
 
     }

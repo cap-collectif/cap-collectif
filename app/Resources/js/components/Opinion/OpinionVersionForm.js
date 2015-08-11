@@ -96,9 +96,11 @@ const OpinionVersionForm = React.createClass({
             </Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            <p className="text-centered">
-              { this.getIntlMessage('opinion.add_new_version_infos') }
-            </p>
+            <div className="modal-top-warning">
+              <p>
+                { this.getIntlMessage('opinion.add_new_version_infos') }
+              </p>
+            </div>
             <form>
               <Input
                 type='text'
@@ -169,6 +171,7 @@ const OpinionVersionForm = React.createClass({
       .then(() => {
         this.setState(this.getInitialState());
         this.close();
+        location.reload(); // TODO when enough time
         return true;
       })
       .catch(() => {

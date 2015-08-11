@@ -1,38 +1,38 @@
-import ArgumentActions from '../../actions/ArgumentActions';
+import SourceActions from '../../actions/SourceActions';
 import LoginStore from '../../stores/LoginStore';
 import LoginOverlay from '../Utils/LoginOverlay';
 
 const Button = ReactBootstrap.Button;
 const OverlayTrigger = ReactBootstrap.OverlayTrigger;
 
-const OpinionArgumentButtons = React.createClass({
+const OpinionSourceButtons = React.createClass({
   propTypes: {
-    argument: React.PropTypes.object,
+    source: React.PropTypes.object.isRequired,
   },
   mixins: [ReactIntl.IntlMixin],
 
   getInitialState() {
     return {
-      hasInitiallyVoted: this.props.argument.has_user_voted,
+      hasInitiallyVoted: this.props.source.has_user_voted,
       hasVoted: false,
     };
   },
 
   vote() {
     this.setState({hasVoted: true});
-    ArgumentActions.addVote(this.props.argument.id);
+    SourceActions.addVote(this.props.source.id);
   },
 
   deleteVote() {
     this.setState({hasVoted: false});
-    ArgumentActions.deleteVote(this.props.argument.id);
+    SourceActions.deleteVote(this.props.source.id);
   },
 
   isTheUserTheAuthor() {
-    if (this.props.argument.author === null || !LoginStore.isLoggedIn()) {
+    if (this.props.source.author === null || !LoginStore.isLoggedIn()) {
       return false;
     }
-    return LoginStore.user.unique_id === this.props.argument.author.unique_id;
+    return LoginStore.user.unique_id === this.props.source.author.unique_id;
   },
 
   renderVoteButton() {
@@ -50,9 +50,9 @@ const OpinionArgumentButtons = React.createClass({
     );
   },
 
-  renderReportButton() {
+ renderReportButton() {
     if (!this.isTheUserTheAuthor()) {
-      if (this.props.argument.has_user_reported) {
+      if (this.props.source.has_user_reported) {
         return (
           <Button bsSize="xsmall" className="btn-dark-gray active">
             <i className="cap cap-flag-1"></i>
@@ -61,7 +61,7 @@ const OpinionArgumentButtons = React.createClass({
         );
       }
       return (
-        <Button href={this.props.argument._links.report} bsSize="xsmall" className="btn-dark-gray btn--outline">
+        <Button href={this.props.source._links.report} bsSize="xsmall" className="btn-dark-gray btn--outline">
           <i className="cap cap-flag-1"></i>
           {this.getIntlMessage('global.report.submit')}
         </Button>
@@ -73,7 +73,7 @@ const OpinionArgumentButtons = React.createClass({
   renderEditButton() {
     if (this.isTheUserTheAuthor()) {
       return (
-        <Button href={this.props.argument._links.edit} bsSize="xsmall" className="btn-dark-gray btn--outline">
+        <Button href={this.props.source._links.edit} bsSize="xsmall" className="btn-dark-gray btn--outline">
           <i className="cap cap-pencil-1"></i>
           {this.getIntlMessage('global.edit')}
         </Button>
@@ -83,7 +83,7 @@ const OpinionArgumentButtons = React.createClass({
   },
 
   render() {
-    const argument = this.props.argument;
+    const source = this.props.source;
     return (
       <div>
         <form style={{display: 'inline-block'}}>
@@ -91,7 +91,7 @@ const OpinionArgumentButtons = React.createClass({
         </form>
         { ' ' }
         <span className="opinion__votes-nb">
-          { argument.votes_count + (this.state.hasVoted ? 1 : 0)}
+          { source.votes_count + (this.state.hasVoted ? 1 : 0)}
         </span>
         { ' ' }
         <LoginOverlay children={ this.renderReportButton() } />
@@ -102,4 +102,4 @@ const OpinionArgumentButtons = React.createClass({
 
 });
 
-export default OpinionArgumentButtons;
+export default OpinionSourceButtons;

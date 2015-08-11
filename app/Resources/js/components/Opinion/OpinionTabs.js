@@ -24,7 +24,12 @@ const OpinionTabs = React.createClass({
   },
 
   componentDidMount() {
-
+    Fetcher
+    .get('/categories')
+    .then((data) => {
+      this.setState({categories: data});
+      return true;
+    });
   },
 
   render() {
@@ -33,13 +38,13 @@ const OpinionTabs = React.createClass({
         <TabPane eventKey={1} tab={this.props.opinion.arguments_count + ' Arguments'}>
           <div className="row">
             <div className="col-sm-12 col-md-6">
-               <div className="opinion  opinion--add-argument  block  block--bordered">
+               <div className="opinion opinion--add-argument block block--bordered">
                   <OpinionArgumentForm type="yes" opinion={this.props.opinion} />
                 </div>
                 <OpinionArgumentList type="yes" opinion={this.props.opinion} />
             </div>
             <div className="col-sm-12 col-md-6">
-              <div className="opinion  opinion--add-argument  block  block--bordered">
+              <div className="opinion opinion--add-argument block block--bordered">
                 <OpinionArgumentForm type="no" opinion={this.props.opinion} />
               </div>
               <OpinionArgumentList type="no" opinion={this.props.opinion} />
@@ -47,9 +52,12 @@ const OpinionTabs = React.createClass({
           </div>
         </TabPane>
         <TabPane eventKey={2} tab={this.props.opinion.sources_count +' Sources'}>
+          <br />
           <div className="row">
-            <OpinionSourceForm opinion={this.props.opinion} />
-            <OpinionSourceList opinion={this.props.opinion} />
+            <OpinionSourceForm categories={this.state.categories} opinion={this.props.opinion} />
+          </div>
+          <div className="row">
+            <OpinionSourceList sources={this.props.opinion.sources} />
           </div>
         </TabPane>
       </TabbedArea>
