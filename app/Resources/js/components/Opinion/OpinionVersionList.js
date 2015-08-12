@@ -2,7 +2,7 @@ import OpinionVersion from './OpinionVersion';
 
 const OpinionVersionList = React.createClass({
   propTypes: {
-    versions: React.PropTypes.array,
+    versions: React.PropTypes.array.isRequired,
   },
   mixins: [ReactIntl.IntlMixin],
 
@@ -17,15 +17,11 @@ const OpinionVersionList = React.createClass({
       );
     }
 
-    const classes = React.addons.classSet({
-      'media-list': true,
-    });
-
     return (
-      <ul className={classes} style={{ marginTop: '20px'}}>
+      <ul className="media-list" style={{ marginTop: '20px'}}>
         {
           this.props.versions.map((version) => {
-            return <OpinionVersion {...this.props} key={version.id} version={version} />;
+            return <OpinionVersion key={version.id} version={version} />;
           })
         }
       </ul>

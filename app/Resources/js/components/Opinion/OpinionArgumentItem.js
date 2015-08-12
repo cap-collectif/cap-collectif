@@ -1,10 +1,6 @@
 import UserAvatar from '../User/UserAvatar';
 import UserLink from '../User/UserLink';
-import LoginOverlay from '../Utils/LoginOverlay';
 import OpinionArgumentButtons from './OpinionArgumentButtons';
-import LoginStore from '../../stores/LoginStore';
-
-const Button = ReactBootstrap.Button;
 
 const OpinionArgumentItem = React.createClass({
   propTypes: {

@@ -1,5 +1,4 @@
 import UserAvatar from '../User/UserAvatar';
-import LoginStore from '../../stores/LoginStore';
 import OpinionInfos from './OpinionInfos';
 
 const OpinionPreview = React.createClass({

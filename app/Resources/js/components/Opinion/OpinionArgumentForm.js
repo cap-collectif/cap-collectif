@@ -8,13 +8,14 @@ const Input = ReactBootstrap.Input;
 
 const OpinionArgumentForm = React.createClass({
   propTypes: {
-    type: React.PropTypes.string,
+    type: React.PropTypes.string.isRequired,
+    opinion: React.PropTypes.object.isRequired,
   },
   mixins: [ReactIntl.IntlMixin, React.addons.LinkedStateMixin],
 
   getInitialState() {
     return {
-      body: this.props.text,
+      body: '',
       submitted: false,
       isSubmitting: false,
     };
@@ -35,7 +36,7 @@ const OpinionArgumentForm = React.createClass({
           <form>
             <LoginOverlay children={
               <Input
-                type='textarea'
+                type="textarea"
                 rows="2"
                 ref="body"
                 bsStyle={this.getStyle('title')}
@@ -49,7 +50,7 @@ const OpinionArgumentForm = React.createClass({
               ? <Button
                   disabled={this.state.isSubmitting}
                   onClick={!this.state.isSubmitting ? this.create.bind(this) : null}
-                  bsStyle='primary'
+                  bsStyle="primary"
                 >
                   {this.state.isSubmitting
                     ? this.getIntlMessage('global.loading')
@@ -66,13 +67,10 @@ const OpinionArgumentForm = React.createClass({
 
   create(e) {
     e.preventDefault();
-
     this.setState({ submitted: true}, () => {
-
       if (!this.isValid()) {
         return;
       }
-
       const data = {
         body: this.state.body,
         type: this.props.type === 'yes' ? 1 : 0,
@@ -89,12 +87,10 @@ const OpinionArgumentForm = React.createClass({
       .catch(() => {
         this.setState({submitted: false});
       });
-
     });
   },
 
   isValid(field) {
-
     if (!this.state.submitted) {
       return true;
     }

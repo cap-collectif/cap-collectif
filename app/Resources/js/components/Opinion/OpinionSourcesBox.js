@@ -1,5 +1,5 @@
-import OpinionVersionList from './OpinionVersionList';
-import OpinionVersionForm from './OpinionVersionForm';
+import OpinionSourceList from './OpinionSourceList';
+import OpinionSourceForm from './OpinionSourceForm';
 import Fetcher from '../../services/Fetcher';
 
 const Row = ReactBootstrap.Row;
@@ -8,13 +8,14 @@ const Col = ReactBootstrap.Col;
 const OpinionDataBox = React.createClass({
   propTypes: {
     opinionId: React.PropTypes.number.isRequired,
-    opinionBody: React.PropTypes.string.isRequired,
   },
   mixins: [ReactIntl.IntlMixin],
 
   getInitialState() {
     return {
-      versions: [],
+      isOpinionContributable: false,
+      sources: [],
+      categories: [],
       isLoading: true,
       filter: 'last',
       offset: 0,
@@ -24,6 +25,12 @@ const OpinionDataBox = React.createClass({
 
   componentDidMount() {
     this.loadDataFromServer();
+    Fetcher
+    .get('/categories')
+    .then((data) => {
+      this.setState({categories: data});
+      return true;
+    });
   },
 
   componentDidUpdate(prevProps, prevState) {
@@ -35,25 +42,25 @@ const OpinionDataBox = React.createClass({
   renderLoader() {
     if (this.state.isLoading) {
       return (
-        <div className= "row">
+        <Row>
           <div className="col-xs-2 col-xs-offset-6">
             <div className="spinner-loader"></div>
           </div>
-        </div>
+        </Row>
       );
     }
   },
 
   renderFilter() {
-    if (this.state.versions.length > 1) {
+    if (this.state.sources.length > 1) {
       return (
-        <Col sm={5} className="pull-right hidden-xs">
+        <div className="pull-right col-xs-5 hidden-xs">
           <select ref="filter" className="form-control" value={this.state.filter} onChange={() => this.updateSelectedValue()}>
             <option value="popular">{this.getIntlMessage('global.popular')}</option>
             <option value="last">{this.getIntlMessage('global.last')}</option>
             <option value="old">{this.getIntlMessage('global.old')}</option>
           </select>
-        </Col>
+        </div>
       );
     }
   },
@@ -62,13 +69,16 @@ const OpinionDataBox = React.createClass({
     return (
       <Col xs={12}>
         <Row>
-          <OpinionVersionForm {...this.props} />
+          {this.state.isOpinionContributable
+            ? <OpinionSourceForm {...this.props} categories={this.state.categories} />
+            : <span />
+          }
           { this.renderFilter() }
         </Row>
         <Row>
           { this.renderLoader() }
           {!this.state.isLoading
-            ? <OpinionVersionList versions={this.state.versions} />
+            ? <OpinionSourceList sources={this.state.sources} />
             : <span />
           }
         </Row>
@@ -78,9 +88,9 @@ const OpinionDataBox = React.createClass({
 
   updateSelectedValue() {
     this.setState({
-        filter: $(React.findDOMNode(this.refs.filter)).val(),
-        isLoading: true,
-        versions: [],
+      filter: $(React.findDOMNode(this.refs.filter)).val(),
+      isLoading: true,
+      sources: [],
     });
   },
 
@@ -88,15 +98,12 @@ const OpinionDataBox = React.createClass({
     this.setState({'isLoading': true});
 
     Fetcher
-    .get('/opinions/' + this.props.opinionId +
-         '/versions?offset=' + this.state.offset +
-         '&limit=' + this.state.limit +
-         '&filter=' + this.state.filter
-    )
+    .get(`/opinions/${this.props.opinionId}/sources?offset=${this.state.offset}&limit=${this.state.limit}&filter=${this.state.filter}`)
     .then((data) => {
       this.setState({
-        'isLoading': false,
-        'versions': data.versions,
+        isLoading: false,
+        sources: data.sources,
+        isOpinionContributable: data.isOpinionContributable,
       });
       return true;
     });

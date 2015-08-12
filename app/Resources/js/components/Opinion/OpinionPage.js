@@ -1,14 +1,10 @@
-import OpinionVersionList from './OpinionVersionList';
-import OpinionVersionForm from './OpinionVersionForm';
 import OpinionBox from './OpinionBox';
 import OpinionTabs from './OpinionTabs';
-import OpinionActions from '../../actions/OpinionActions';
 import Fetcher from '../../services/Fetcher';
 
 const OpinionPage = React.createClass({
   propTypes: {
-    opinionId: React.PropTypes.number,
-    opinionInitialText: React.PropTypes.text,
+    opinionId: React.PropTypes.number.isRequired,
     versionId: React.PropTypes.number,
   },
   mixins: [ReactIntl.IntlMixin],
@@ -21,25 +17,13 @@ const OpinionPage = React.createClass({
   },
 
   componentDidMount() {
-
-    Fetcher
-    .get('/opinions/' + this.props.opinionId +
-         '/versions/' + this.props.versionId
-    )
-    .then((data) => {
-      this.setState({
-        opinion: data.version,
-        isLoading: false
-      });
-      return true;
-    });
-
+    this.loadOpinion();
   },
 
   renderLoader() {
     if (this.state.isLoading) {
       return (
-        <div className= "row">
+        <div className="row">
           <div className="col-xs-2 col-xs-offset-6">
             <div className="spinner-loader"></div>
           </div>
@@ -64,6 +48,20 @@ const OpinionPage = React.createClass({
         </div>
       </div>
     );
+  },
+
+  loadOpinion() {
+    if (this.props.versionId) {
+      Fetcher
+      .get('/opinions/' + this.props.opinionId + '/versions/' + this.props.versionId)
+      .then((data) => {
+        this.setState({
+          opinion: data.version,
+          isLoading: false,
+        });
+        return true;
+      });
+    }
   },
 
 });

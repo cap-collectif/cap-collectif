@@ -2,6 +2,7 @@
 import IntlData from './translations/FR'
 import CommentSection from './components/Comment/CommentSection';
 import OpinionVersionsBox from './components/Opinion/OpinionVersionsBox';
+import OpinionSourcesBox from './components/Opinion/OpinionSourcesBox';
 import OpinionPage from './components/Opinion/OpinionPage';
 import AuthService from './services/AuthService';
 
@@ -33,11 +34,21 @@ AuthService
     if ($('#render-opinion-versions').length) {
         React.render(
             <OpinionVersionsBox
-                opinion={$('#render-opinion-versions').data("opinion")}
-                text={$('#render-opinion-versions').data("text")}
+                opinionId={$('#render-opinion-versions').data("opinion")}
+                opinionBody={$('#render-opinion-versions').data("text")}
                 {...IntlData}
             />,
             document.getElementById('render-opinion-versions')
+        );
+    }
+
+    if ($('#render-opinion-sources').length) {
+        React.render(
+            <OpinionSourcesBox
+                opinionId={$('#render-opinion-sources').data("opinion")}
+                {...IntlData}
+            />,
+            document.getElementById('render-opinion-sources')
         );
     }
 

@@ -1,4 +1,3 @@
-import AppDispatcher from '../dispatchers/AppDispatcher';
 import Fetcher from '../services/Fetcher';
 
 export default {

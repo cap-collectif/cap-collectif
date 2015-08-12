@@ -193,7 +193,6 @@ class OpinionVersion
         return $this;
     }
 
-
     public function getComment()
     {
         return $this->comment;

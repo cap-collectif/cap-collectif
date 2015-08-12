@@ -52,6 +52,7 @@ export default {
         },
         opinion: {
             no_new_version: 'Aucune nouvelle version proposée',
+            no_new_source: 'Aucune source proposée',
             add_new_version: 'Proposer une nouvelle version',
             add_new_source: 'Proposer une source',
             add_new_version_infos: 'Merci d\'examiner les versions existantes en premier lieu afin de ne pas soumettre de doublon. Vous pouvez voter pour celles existantes !',
@@ -79,6 +80,7 @@ export default {
                 submit: 'Signaler',
                 reported: 'Signalé',
             },
+            select: 'Choisir une valeur',
             more: 'Voir plus',
             publish: 'Publier',
             edited: 'édité le',

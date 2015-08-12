@@ -9,6 +9,11 @@ Capco\AppBundle\Entity\Source:
             expose: true
             type: string
             groups: [Opinions, OpinionVersions]
+        Category:
+            expose: true
+            type: string
+            serialized_name: category
+            groups: [Opinions, OpinionVersions]
         title:
             expose: true
             type: string
@@ -34,7 +39,7 @@ Capco\AppBundle\Entity\Source:
             expose: true
             type: Capco\UserBundle\Entity\User
             serialized_name: author
-            groups: [Opinions,, OpinionVersions, UserMedias]
+            groups: [Opinions, OpinionVersions, UsersInfos]
         isTrashed:
             expose: true
             type: boolean

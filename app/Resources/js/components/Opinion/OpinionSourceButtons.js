@@ -3,7 +3,6 @@ import LoginStore from '../../stores/LoginStore';
 import LoginOverlay from '../Utils/LoginOverlay';
 
 const Button = ReactBootstrap.Button;
-const OverlayTrigger = ReactBootstrap.OverlayTrigger;
 
 const OpinionSourceButtons = React.createClass({
   propTypes: {
@@ -18,26 +17,9 @@ const OpinionSourceButtons = React.createClass({
     };
   },
 
-  vote() {
-    this.setState({hasVoted: true});
-    SourceActions.addVote(this.props.source.id);
-  },
-
-  deleteVote() {
-    this.setState({hasVoted: false});
-    SourceActions.deleteVote(this.props.source.id);
-  },
-
-  isTheUserTheAuthor() {
-    if (this.props.source.author === null || !LoginStore.isLoggedIn()) {
-      return false;
-    }
-    return LoginStore.user.unique_id === this.props.source.author.unique_id;
-  },
-
   renderVoteButton() {
     if (this.state.hasInitiallyVoted || this.state.hasVoted) {
-     return (
+      return (
         <Button bsStyle="danger" bsSize="xsmall" className="btn--outline" onClick={!LoginStore.isLoggedIn() ? null : this.deleteVote.bind(null, this)}>
           { this.getIntlMessage('vote.cancel') }
         </Button>
@@ -98,6 +80,23 @@ const OpinionSourceButtons = React.createClass({
         { this.renderEditButton() }
       </div>
     );
+  },
+
+  vote() {
+    this.setState({hasVoted: true});
+    SourceActions.addVote(this.props.source.id);
+  },
+
+  deleteVote() {
+    this.setState({hasVoted: false});
+    SourceActions.deleteVote(this.props.source.id);
+  },
+
+  isTheUserTheAuthor() {
+    if (this.props.source.author === null || !LoginStore.isLoggedIn()) {
+      return false;
+    }
+    return LoginStore.user.unique_id === this.props.source.author.unique_id;
   },
 
 });

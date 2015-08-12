@@ -1,41 +1,29 @@
-import UserAvatar from '../User/UserAvatar';
-import LoginStore from '../../stores/LoginStore';
 import OpinionPreview from './OpinionPreview';
 
 const OpinionVersion = React.createClass({
   propTypes: {
-    version: React.PropTypes.object,
+    version: React.PropTypes.object.isRequired,
   },
   mixins: [ReactIntl.IntlMixin],
 
   componentDidMount() {
+    const PieChart = google.visualization.PieChart;
+    const DataTable = google.visualization.arrayToDataTable;
 
-    let data = new google.visualization.DataTable();
-
-    // let data = new google.visualization.arrayToDataTable([
-    //   ['D\'accord',     this.props.version.votes_ok ? 5 : 6],
-    //   ['Mitigé',        this.props.version.votes_mitige ? 5 : 6],
-    //   ['Pas d\'accord', this.props.version.votes_nok ? 5 : 6],
-    // ]);
-
-    data.addColumn('string', 'Task');
-    data.addColumn('number', 'Values');
-    data.addRows([
-      ["D'accord", this.props.version.votes_ok],
-      ["Mitigé", this.props.version.votes_mitige],
-      ["Pas d'accord", this.props.version.votes_nok]
-    ]);
-
-    const pieChart = new google.visualization.PieChart(React.findDOMNode(this.refs.piechart));
-    pieChart.draw(data, {
-      legend: 'none',
-      colors: ['#5cb85c', '#f0ad4e', '#d9534f'],
-      pieSliceText: 'value',
-      height: 90,
-      width: 145,
-      backgroundColor: 'transparent'
-    });
-
+    (new PieChart(React.findDOMNode(this.refs.piechart))).draw(
+      new DataTable([
+        [{type: 'string'}, {type: 'number'}],
+        ['D\'accord', this.props.version.votes_ok],
+        ['Mitigé', this.props.version.votes_mitige],
+        ['Pas d\'accord', this.props.version.votes_nok],
+      ]), {
+        legend: 'none',
+        colors: ['#5cb85c', '#f0ad4e', '#d9534f'],
+        pieSliceText: 'value',
+        height: 90,
+        width: 145,
+        backgroundColor: 'transparent',
+      });
   },
 
   render() {

@@ -1,9 +1,5 @@
-import OpinionVersionList from './OpinionVersionList';
-import OpinionVersionForm from './OpinionVersionForm';
 import OpinionPreview from './OpinionPreview';
 import OpinionButtons from './OpinionButtons';
-import OpinionActions from '../../actions/OpinionActions';
-import Fetcher from '../../services/Fetcher';
 
 const OpinionBox = React.createClass({
   propTypes: {
@@ -17,46 +13,32 @@ const OpinionBox = React.createClass({
   },
 
   componentDidMount() {
+    const PieChart = google.visualization.PieChart;
+    const DataTable = google.visualization.arrayToDataTable;
 
-    let data = new google.visualization.DataTable();
-
-    // let data = new google.visualization.arrayToDataTable([
-    //   ['D\'accord',     this.props.version.votes_ok ? 5 : 6],
-    //   ['Mitigé',        this.props.version.votes_mitige ? 5 : 6],
-    //   ['Pas d\'accord', this.props.version.votes_nok ? 5 : 6],
-    // ]);
-
-    data.addColumn('string', 'Task');
-    data.addColumn('number', 'Values');
-    data.addRows([
-      ["D'accord", this.props.opinion.votes_ok],
-      ["Mitigé", this.props.opinion.votes_mitige],
-      ["Pas d'accord", this.props.opinion.votes_nok]
-    ]);
-
-    const pieChart = new google.visualization.PieChart(React.findDOMNode(this.refs.piechart));
-    pieChart.draw(data, {
-      legend: 'none',
-      colors: ['#5cb85c', '#f0ad4e', '#d9534f'],
-      pieSliceText: 'value',
-      // height: 90,
-      // width: 145,
-      backgroundColor: 'transparent'
-    });
-
+    (new PieChart(React.findDOMNode(this.refs.piechart))).draw(
+      new DataTable([
+        [{type: 'string'}, {type: 'number'}],
+        ['D\'accord', this.props.opinion.votes_ok],
+        ['Mitigé', this.props.opinion.votes_mitige],
+        ['Pas d\'accord', this.props.opinion.votes_nok],
+      ]), {
+        legend: 'none',
+        colors: ['#5cb85c', '#f0ad4e', '#d9534f'],
+        pieSliceText: 'value',
+        backgroundColor: 'transparent',
+      });
   },
-
 
   render() {
     const opinion = this.props.opinion;
     const diff = JsDiff.diffWords(opinion.parent.body, opinion.body);
-    let htmlBody = "";
-    diff.forEach(function(part){
-      var color = part.added ? 'green' : part.removed ? 'red' : 'grey';
-      var decoration = color === 'red' ? 'line-through' : 'none';
+    let htmlBody = '';
+    diff.forEach((part) => {
+      const color = part.added ? 'green' : part.removed ? 'red' : 'grey';
+      const decoration = color === 'red' ? 'line-through' : 'none';
       htmlBody += '<span style="color: ' + color + '; text-decoration: ' + decoration + '">' + part.value + '</span>';
     });
-
 
     const colorClass = 'opinion opinion--' + opinion.parent.type.color + ' opinion--current';
     return (

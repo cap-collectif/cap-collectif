@@ -19,19 +19,11 @@ const OpinionSourceForm = React.createClass({
       link: '',
       title: '',
       body: '',
-      category: this.props.categories.length > 1 ? this.props.categories[0].id : '0',
+      category: null,
       submitted: false,
       isSubmitting: false,
       showModal: false,
     };
-  },
-
-  close() {
-    this.setState({showModal: false});
-  },
-
-  show() {
-    this.setState({showModal: true});
   },
 
   getStyle(field) {
@@ -51,9 +43,10 @@ const OpinionSourceForm = React.createClass({
     return (
       <div className="col-xs-5">
         <LoginOverlay children={this.renderCreateButton()} />
-        <Modal {...this.props} animation={false} show={this.state.showModal} onHide={this.close.bind(this)} bsSize='large' aria-labelledby='contained-modal-title-lg'>
+        <Modal {...this.props} animation={false} show={this.state.showModal} onHide={this.close.bind(this)}
+               bsSize="large" aria-labelledby="contained-modal-title-lg">
           <Modal.Header closeButton>
-            <Modal.Title id='contained-modal-title-lg'>
+            <Modal.Title id="contained-modal-title-lg">
               { this.getIntlMessage('source.add') }
             </Modal.Title>
           </Modal.Header>
@@ -65,32 +58,33 @@ const OpinionSourceForm = React.createClass({
             </div>
             <form>
               <Input
-                type='text'
+                type="text"
                 bsStyle={this.getStyle('title')}
                 valueLink={this.linkState('title')}
                 label={this.getIntlMessage('source.title')}
               />
               <Input
-                type='select'
+                type="select"
                 bsStyle={this.getStyle('type')}
                 label={this.getIntlMessage('source.type')}
                 valueLink={this.linkState('category')}
               >
+                <option value="" disabled selected>{this.getIntlMessage('global.select')}</option>
                 {
                   this.props.categories.map((category) => {
-                    return <option value={category.id}>{category.title}</option>
+                    return <option value={category.id}>{category.title}</option>;
                   })
                 }
               </Input>
               <Input
-                type='text'
+                type="text"
                 bsStyle={this.getStyle('link')}
                 valueLink={this.linkState('link')}
                 placeholder="http://"
                 label={this.getIntlMessage('source.link')}
               />
               <Input
-                type='textarea'
+                type="textarea"
                 rows="10" cols="80"
                 bsStyle={this.getStyle('body')}
                 valueLink={this.linkState('body')}
@@ -106,7 +100,7 @@ const OpinionSourceForm = React.createClass({
             <Button
               disabled={this.state.isSubmitting}
               onClick={!this.state.isSubmitting ? this.create.bind(this) : null}
-              bsStyle='primary'
+              bsStyle="primary"
             >
               {this.state.isSubmitting
                 ? this.getIntlMessage('global.loading')
@@ -119,11 +113,23 @@ const OpinionSourceForm = React.createClass({
     );
   },
 
+  close() {
+    this.setState({showModal: false});
+  },
+
+  show() {
+    this.setState({showModal: true});
+  },
+
+  reload() {
+    this.setState(this.getInitialState());
+    location.reload(); // TODO when enough time
+    return true;
+  },
+
   create(e) {
     e.preventDefault();
-
     this.setState({submitted: true}, () => {
-
       if (!this.isValid()) {
         return;
       }
@@ -132,16 +138,23 @@ const OpinionSourceForm = React.createClass({
         link: this.state.link,
         title: this.state.title,
         body: this.state.body,
-        Category: parseInt(this.state.category),
+        Category: parseInt(this.state.category, 10),
       };
 
+      if (this.props.opinion && this.props.opinion.parent) {
+        OpinionActions
+        .addVersionSource(this.props.opinion.parent.id, this.props.opinion.id, data)
+        .then(() => {this.reload()})
+        .catch(() => {
+          this.setState({submitted: false});
+        });
+
+        return ;
+      }
+
       OpinionActions
-      .addVersionSource(this.props.opinion.parent.id, this.props.opinion.id, data)
-      .then(() => {
-        this.setState(this.getInitialState());
-        location.reload(); // TODO when enough time
-        return true;
-      })
+      .addSource(this.props.opinionId, data)
+      .then(() => {this.reload()})
       .catch(() => {
         this.setState({submitted: false});
       });
@@ -150,13 +163,12 @@ const OpinionSourceForm = React.createClass({
   },
 
   isValid(field) {
-
     if (!this.state.submitted) {
       return true;
     }
 
     if (field === 'type') {
-      return true;
+      return this.state.category !== null;
     }
 
     if (field === 'link') {

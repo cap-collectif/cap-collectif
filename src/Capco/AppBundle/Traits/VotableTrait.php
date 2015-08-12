@@ -2,19 +2,12 @@
 
 namespace Capco\AppBundle\Traits;
 
+use Capco\AppBundle\Entity\OpinionVote;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
 trait VotableTrait
 {
-    /**
-     * @return int
-     */
-    public function getVoteCountAll()
-    {
-        return $this->voteCountNok + $this->voteCountOk + $this->voteCountMitige;
-    }
-
     /**
      * @var int
      *
@@ -35,51 +28,63 @@ trait VotableTrait
      * @ORM\Column(name="vote_count_mitige", type="integer")
      */
     protected $voteCountMitige = 0;
-    /**
-     * @return int
-     */
+
+    public function getVoteCountAll()
+    {
+        return $this->voteCountNok + $this->voteCountOk + $this->voteCountMitige;
+    }
+
+    public function incrementVoteCountByValue($value)
+    {
+        if ($value === OpinionVote::VOTE_OK) {
+            $this->voteCountOk++;
+        }
+        if ($value === OpinionVote::VOTE_NOK) {
+            $this->voteCountNok++;
+        }
+        if ($value === OpinionVote::VOTE_MITIGE) {
+            $this->voteCountMitige++;
+        }
+    }
+
+    public function decrementVoteCountByValue($value)
+    {
+        if ($value === OpinionVote::VOTE_OK) {
+            $this->voteCountOk--;
+        }
+        if ($value === OpinionVote::VOTE_NOK) {
+            $this->voteCountNok--;
+        }
+        if ($value === OpinionVote::VOTE_MITIGE) {
+            $this->voteCountMitige--;
+        }
+    }
+
     public function getVoteCountNok()
     {
         return $this->voteCountNok;
     }
 
-    /**
-     * @param $voteCountNok
-     *
-     * @return $this
-     */
     public function setVoteCountNok($voteCountNok)
     {
         $this->voteCountNok = $voteCountNok;
     }
 
-    /**
-     * @return int
-     */
     public function getVoteCountOk()
     {
         return $this->voteCountOk;
     }
 
-    /**
-     * @param int $voteCountOk
-     */
     public function setVoteCountOk($voteCountOk)
     {
         $this->voteCountOk = $voteCountOk;
     }
 
-    /**
-     * @return int
-     */
     public function getVoteCountMitige()
     {
         return $this->voteCountMitige;
     }
 
-    /**
-     * @param int $voteCountMitige
-     */
     public function setVoteCountMitige($voteCountMitige)
     {
         $this->voteCountMitige = $voteCountMitige;

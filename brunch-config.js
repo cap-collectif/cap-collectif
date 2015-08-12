@@ -24,7 +24,7 @@ exports.config = {
           'bower_components/jquery/dist/jquery.js',
           'bower_components/readmore/readmore.js',
           'bower_components/ckeditor/ckeditor.js',
-          'bower_components/bootstrap/assets/javascripts/bootstrap/*.js',
+          'bower_components/bootstrap-sass/assets/javascripts/bootstrap.js',
           'bower_components/fancybox/source/jquery.fancybox.pack.js',
           'bower_components/eventEmitter/EventEmitter.js',
 

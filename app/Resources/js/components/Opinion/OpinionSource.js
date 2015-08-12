@@ -1,7 +1,6 @@
 import UserAvatar from '../User/UserAvatar';
 import OpinionInfos from './OpinionInfos';
 import OpinionSourceButtons from './OpinionSourceButtons';
-import LoginStore from '../../stores/LoginStore';
 
 const OpinionSource = React.createClass({
   propTypes: {

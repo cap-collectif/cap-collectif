@@ -1,11 +1,7 @@
-import OpinionVersionList from './OpinionVersionList';
-import OpinionVersionForm from './OpinionVersionForm';
-import OpinionBox from './OpinionBox';
 import OpinionArgumentForm from './OpinionArgumentForm';
 import OpinionSourceForm from './OpinionSourceForm';
 import OpinionSourceList from './OpinionSourceList';
 import OpinionArgumentList from './OpinionArgumentList';
-import OpinionActions from '../../actions/OpinionActions';
 import Fetcher from '../../services/Fetcher';
 
 const TabbedArea = ReactBootstrap.TabbedArea;
@@ -13,14 +9,14 @@ const TabPane = ReactBootstrap.TabPane;
 
 const OpinionTabs = React.createClass({
   propTypes: {
-    opinion: React.PropTypes.object,
+    opinion: React.PropTypes.object.isRequired,
   },
   mixins: [ReactIntl.IntlMixin],
 
   getInitialState() {
     return {
       categories: [],
-    }
+    };
   },
 
   componentDidMount() {
@@ -51,7 +47,7 @@ const OpinionTabs = React.createClass({
             </div>
           </div>
         </TabPane>
-        <TabPane eventKey={2} tab={this.props.opinion.sources_count +' Sources'}>
+        <TabPane eventKey={2} tab={this.props.opinion.sources_count + ' Sources'}>
           <br />
           <div className="row">
             <OpinionSourceForm categories={this.state.categories} opinion={this.props.opinion} />
@@ -61,8 +57,8 @@ const OpinionTabs = React.createClass({
           </div>
         </TabPane>
       </TabbedArea>
-      );
-    },
+    );
+  },
 
 });
 

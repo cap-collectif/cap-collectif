@@ -182,21 +182,7 @@
 
                     <!-- Sources -->
                     <div role="tabpanel" class="tab-pane" id="sources">
-                        {% if opinion.canContribute %}
-                            <a href="{{ path('app_new_source' ,{'consultationSlug': consultation.slug, 'stepSlug': currentStep.slug, 'opinionTypeSlug': opinionType.slug, 'opinionSlug': opinion.slug} ) }}" class="btn btn-primary" data-container="body">
-                                <i class="cap cap-add-1"></i> {{ 'source.create.button'|trans({}, 'CapcoAppBundle') }}
-                            </a>
-                        {% endif %}
-                        <br><br>
-                        {% if sources|length > 0 %}
-                            <div class="panel-body block block--bordered">
-                                <ul class="media-list opinion__list">
-                                    {% for source in sources %}
-                                        {% include 'CapcoAppBundle:Source:blockSource.html.twig' with {'source': source, 'opinion': opinion, 'opinionType': opinionType, 'consultation': consultation } only %}
-                                    {% endfor %}
-                                </ul>
-                            </div>
-                        {% endif %}
+                        <div id="render-opinion-sources" data-opinion="{{ opinion.id }}"></div>
                     </div>
                   </div>
 
@@ -210,9 +196,6 @@
 {% block javascripts %}
     {{ parent() }}
     <script type="text/javascript">
-        $("#addSourceLink").on('click', function (e) {
-            e.stopPropagation();
-        });
         {% if null == app.user %}
             App.initPopovers('.connection-popover-js', {
                 placement: "top",

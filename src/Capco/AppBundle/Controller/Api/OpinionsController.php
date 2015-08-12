@@ -33,10 +33,7 @@ use FOS\RestBundle\Request\ParamFetcherInterface;
 
 class OpinionsController extends FOSRestController
 {
-
     /**
-     * Get an opinion version.
-     *
      * @Get("/opinions/{opinionId}/versions/{versionId}")
      * @ParamConverter("opinion", options={"mapping": {"opinionId": "id"}})
      * @ParamConverter("version", options={"mapping": {"versionId": "id"}})
@@ -49,19 +46,7 @@ class OpinionsController extends FOSRestController
         ];
     }
 
-
     /**
-     * Get opinion versions.
-     *
-     * @ApiDoc(
-     *  resource=true,
-     *  description="Get opinion versions",
-     *  statusCodes={
-     *    200 = "Returned when successful",
-     *    404 = "Post does not exist",
-     *  }
-     * )
-     *
      * @Get("/opinions/{id}/versions")
      * @ParamConverter("opinion", options={"mapping": {"id": "id"}})
      * @QueryParam(name="offset", requirements="[0-9.]+", default="0")
@@ -69,7 +54,7 @@ class OpinionsController extends FOSRestController
      * @QueryParam(name="filter", requirements="(old|last|popular)", default="last")
      * @View(serializerGroups={"OpinionVersions", "UsersInfos"})
      */
-    public function getOpinionVersionsAction(Opinion $opinion, ParamFetcherInterface $paramFetcher)
+    public function cgetOpinionVersionsAction(Opinion $opinion, ParamFetcherInterface $paramFetcher)
     {
         $offset = $paramFetcher->get('offset');
         $limit = $paramFetcher->get('limit');
@@ -90,10 +75,68 @@ class OpinionsController extends FOSRestController
         ];
     }
 
+    /**
+     * @Get("/opinions/{id}/sources")
+     * @ParamConverter("opinion", options={"mapping": {"id": "id"}})
+     * @QueryParam(name="offset", requirements="[0-9.]+", default="0")
+     * @QueryParam(name="limit", requirements="[0-9.]+", default="10")
+     * @QueryParam(name="filter", requirements="(old|last|popular)", default="last")
+     * @View(serializerGroups={"Opinions", "UsersInfos"})
+     */
+    public function cgetOpinionSourcesAction(Opinion $opinion, ParamFetcherInterface $paramFetcher)
+    {
+        $offset = $paramFetcher->get('offset');
+        $limit = $paramFetcher->get('limit');
+        $filter = $paramFetcher->get('filter');
+
+        $paginator = $this->getDoctrine()->getManager()
+                    ->getRepository('CapcoAppBundle:Source')
+                    ->getOneByOpinion($opinion, $offset, $limit, $filter);
+
+        $sources = [];
+        foreach ($paginator as $source) {
+            $sources[] = $source;
+        }
+
+        return [
+            'sources' => $sources,
+            'isOpinionContributable' => $opinion->canContribute(),
+        ];
+    }
 
     /**
-     * Add an opinion version source.
-     *
+     * @Security("has_role('ROLE_USER')")
+     * @Post("/opinions/{opinionId}/sources")
+     * @ParamConverter("opinion", options={"mapping": {"opinionId": "id"}})
+     * @View(statusCode=201, serializerGroups={})
+     */
+    public function postOpinionSourceAction(Request $request, Opinion $opinion)
+    {
+        if (!$opinion->canContribute()) {
+            throw new \Exception("Can't add a source to an uncontributable opinion.", 1);
+        }
+
+        $user = $this->getUser();
+        $source = (new Source())
+                    ->setAuthor($user)
+                    ->setType(Source::LINK)
+                    ->setOpinion($opinion)
+                    ->setIsEnabled(true)
+                    ->setUpdatedAt(new \Datetime())
+                ;
+
+        $form = $this->createForm(new ApiSourceType(), $source);
+        $form->handleRequest($request);
+
+        if (!$form->isValid()) {
+            return $form;
+        }
+
+        $this->getDoctrine()->getManager()->persist($source);
+        $this->getDoctrine()->getManager()->flush();
+    }
+
+    /**
      * @Security("has_role('ROLE_USER')")
      * @Post("/opinions/{opinionId}/versions/{versionId}/sources")
      * @ParamConverter("opinion", options={"mapping": {"opinionId": "id"}})
@@ -131,8 +174,6 @@ class OpinionsController extends FOSRestController
     }
 
     /**
-     * Add an opinion version argument.
-     *
      * @Security("has_role('ROLE_USER')")
      * @Post("/opinions/{opinionId}/versions/{versionId}/arguments")
      * @ParamConverter("opinion", options={"mapping": {"opinionId": "id"}})
@@ -190,6 +231,10 @@ class OpinionsController extends FOSRestController
                     ->findOneBy(['user' => $user, 'opinionVersion' => $version]);
 
         if ($previousVote) {
+
+            $version->incrementVoteCountByValue($vote->getValue());
+            $version->decrementVoteCountByValue($previousVote->getValue());
+
             $previousVote->setValue($vote->getValue());
             $this->getDoctrine()->getManager()->flush();
             return;
@@ -205,6 +250,7 @@ class OpinionsController extends FOSRestController
             ->setUser($user)
         ;
 
+        $version->incrementVoteCountByValue($vote->getValue());
         $this->getDoctrine()->getManager()->persist($vote);
         $this->getDoctrine()->getManager()->flush();
     }
@@ -234,6 +280,7 @@ class OpinionsController extends FOSRestController
             throw new BadRequestHttpException("You have not voted for this opinion version.");
         }
 
+        $version->decrementVoteCountByValue($vote->getValue());
         $this->getDoctrine()->getManager()->remove($vote);
         $this->getDoctrine()->getManager()->flush();
     }

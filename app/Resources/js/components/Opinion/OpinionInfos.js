@@ -34,7 +34,7 @@ const OpinionInfos = React.createClass({
       <span className="excerpt">
         { ' - ' }
         { this.getIntlMessage('global.edited') }
-        { ' • ' }
+        { ' ' }
         <FormattedDate
             value={this.props.opinion.updated_at}
             day="numeric" month="long" year="numeric"

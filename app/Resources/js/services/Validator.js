@@ -13,9 +13,16 @@ class Validator {
     return this.value && re.test(this.value);
   }
 
+  isEqual(value) {
+    return this.value === value;
+  }
+
+  notEqual(value) {
+    return !this.isEqual(value);
+  }
+
   isUrl() {
     const urlPattern = /(^|\s)((https?:\/\/)?[\w-]+(\.[\w-]+)+\.?(:\d+)?(\/\S*)?)/gi;
-    console.log(this.value);
     return this.value && urlPattern.test(this.value);
   }
 
