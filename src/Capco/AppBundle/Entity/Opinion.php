@@ -135,6 +135,11 @@ class Opinion
     private $versions;
 
     /**
+     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\OpinionAdditionalElement", mappedBy="opinion",  cascade={"persist", "remove"}, orphanRemoval=true)
+     */
+    protected $additionalElements;
+
+    /**
      * @var bool
      *
      * @ORM\Column(name="pinned", type="boolean")

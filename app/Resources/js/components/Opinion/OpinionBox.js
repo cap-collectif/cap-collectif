@@ -13,6 +13,31 @@ const OpinionBox = React.createClass({
   },
   mixins: [ReactIntl.IntlMixin],
 
+  renderUserAvatarVotes() {
+    const opinion = this.props.opinion;
+    let votes = opinion.votes;
+    let moreVotes = null;
+
+    if (opinion.votes.length > 5) {
+      votes = opinion.votes.slice(0,5);
+      moreVotes = opinion.votes.length - 5;
+    }
+
+    return (
+      <Row>
+      {
+        votes.map((vote) => {
+          return <UserAvatar user={vote.user} style={{marginRight: 5}} />;
+        })
+      }
+      {moreVotes != null
+        ? <span>+ {moreVotes}</span>
+        : <span />
+      }
+      </Row>
+    );
+  },
+
   render() {
     const opinion = this.props.opinion;
     const diff = JsDiff.diffWords(opinion.parent.body, opinion.body);
@@ -30,7 +55,7 @@ const OpinionBox = React.createClass({
           <div className="opinion__header opinion__header--centered">
             <a className="neutral-hover pull-left h4 opinion__header__back" href={opinion.parent._links.show}>
               <i className="cap cap-arrow-1"></i>
-              <span className="hidden-xs  hidden-sm"> {this.getIntlMessage('global.back')}</span>
+              <span className="hidden-xs hidden-sm"> {this.getIntlMessage('global.back')}</span>
             </a>
             <h2 className="h4 opinion__header__title"> {opinion.parent.type.title}</h2>
           </div>
@@ -41,20 +66,12 @@ const OpinionBox = React.createClass({
           <div className="opinion__buttons" style={{marginBottom: 0}}>
             <OpinionButtons {...this.props} opinion={opinion} />
           </div>
-          <Row style={{borderTop: 'black solid', marginTop: 5}}>
+          <Row style={{borderTop: '1px solid #ddd', marginTop: 15}}>
             <Col sm={12} mdOffset={1} md={3} >
               <VotePiechart  top={20} height={180} ok={opinion.votes_ok} nok={opinion.votes_nok} mitige={opinion.votes_mitige} />
             </Col>
             <Col sm={12} md={5} style={{marginTop: 60}}>
-              <Row>
-              {
-                this.props.opinion.votes.map((vote, index) => {
-                  if (index < 10) {
-                    return <UserAvatar user={vote.user} />;
-                  }
-                })
-              }
-              </Row>
+              {this.renderUserAvatarVotes()}
               <Row>
                 <FormattedMessage message={this.getIntlMessage('global.votes')} num={this.props.opinion.votes.length} />
               </Row>

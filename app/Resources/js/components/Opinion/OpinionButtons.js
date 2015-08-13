@@ -61,7 +61,7 @@ const OpinionButtons = React.createClass({
   render() {
     const reported = this.props.opinion.has_user_reported;
     return (
-      <ButtonToolbar>
+      <ButtonToolbar style={{marginTop: 15}}>
         <LoginOverlay children={ this.renderVoteButton('ok') } />
         <LoginOverlay children={ this.renderVoteButton('mitige') } />
         <LoginOverlay children={ this.renderVoteButton('nok') } />
@@ -69,17 +69,30 @@ const OpinionButtons = React.createClass({
           <i className="cap cap-flag-1"></i>
           {' ' + reported ? this.getIntlMessage('global.report.reported') : this.getIntlMessage('global.report.submit') }
         </Button>
-        <DropdownButton className="pull-right" title={<span><i className="cap cap-link"></i> Partager</span>}>
-          <MenuItem eventKey="1" href="http://www.facebook.com/sharer.php?u=http%20actuelles.">
+
+        <DropdownButton className="pull-right dropdown--custom dropdown" title={<span><i className="cap cap-link"></i> Partager</span>}>
+          <MenuItem
+            eventKey="1"
+            href={`http://www.facebook.com/sharer.php?u=${url}&t=${title}`}
+            onclick="window.open(this.href, 'Facebook', config='height=500, width=700, toolbar=no, menubar=no'); return false"
+          >
             <i className="cap cap-facebook"></i> Facebook
           </MenuItem>
-          <MenuItem eventKey="2" href="http://twitter.com/share?url=http20actuelles.">
+          <MenuItem
+            eventKey="2"
+            href={`http://twitter.com/share?url=${url}&text=${title}`}
+            onclick="window.open(this.href, 'Twitter', config='height=500, width=700, toolbar=no, menubar=no'); return false"
+          >
             <i className="cap cap-twitter"></i> Twitter
           </MenuItem>
-          <MenuItem eventKey="3" href="https://plus.google.com/share?url=http%3">
+          <MenuItem
+            eventKey="3"
+            href={`https://plus.google.com/share?url=${url}&title=${title}`}
+            onclick="javascript:window.open(this.href,'', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;"
+          >
             <i className="cap cap-gplus"></i> Google+
           </MenuItem>
-          <MenuItem eventKey="4" href="mailto:?subject=La%20l%Cls">
+          <MenuItem eventKey="4" href={`mailto:?subject=${title}&body=${url}`}>
             <i className="cap cap-mail-2-1"></i> Email
           </MenuItem>
           <MenuItem eventKey="5">

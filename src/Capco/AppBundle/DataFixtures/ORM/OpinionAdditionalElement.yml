@@ -1,0 +1,14 @@
+Capco\AppBundle\Entity\OpinionAdditionalElement:
+
+    adel1:
+        title: Exposé des motifs
+        body: Mes motifs sont nuls
+        enabled: true
+        opinion: @opinion57
+
+    adel1:
+        title: Exposé des motifs
+        body: Mes motifs sont nuls
+        enabled: true
+        opinion: @opinion57
+

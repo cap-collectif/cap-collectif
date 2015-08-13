@@ -75,6 +75,10 @@ export default {
                 signin: 'Inscription',
             },
         },
+        share: {
+            facebook: 'Facebook',
+            twitter: 'Twitter',
+        },
         global: {
             report: {
                 submit: 'Signaler',

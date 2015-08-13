@@ -15,30 +15,26 @@ class OpinionVersionRepository extends EntityRepository
     public function getEnabledByOpinion(Opinion $opinion, $offset = 0, $limit = 10, $filter = 'last')
     {
         $qb = $this->getIsEnabledQueryBuilder()
-            // ->select('o.id', 'author', 'm')
-            ->select('o')
-            // ->resetDqlPart()
+            ->select('o', '(o.voteCountMitige + o.voteCountOk + o.voteCountNok) as HIDDEN vnb')
             ->leftJoin('o.author', 'author')
             ->leftJoin('author.Media', 'm')
-            // ->leftJoin('o.votes', 'v')
-            // ->leftJoin('o.Reports', 'r')
-
+            ->leftJoin('o.votes', 'v')
             ->andWhere('o.parent = :opinion')
             ->andWhere('o.isTrashed = false')
             ->setParameter('opinion', $opinion)
         ;
 
-        // if ($filter === 'old') {
-        //     $qb->addOrderBy('o.updatedAt', 'ASC');
-        // }
+        if ($filter === 'old') {
+            $qb->addOrderBy('o.updatedAt', 'ASC');
+        }
 
-        // if ($filter === 'last') {
-        //     $qb->addOrderBy('o.updatedAt', 'DESC');
-        // }
+        if ($filter === 'last') {
+            $qb->addOrderBy('o.updatedAt', 'DESC');
+        }
 
-        // if ($filter === 'popular') {
-        //     $qb->addOrderBy('o.voteCount', 'DESC');
-        // }
+        if ($filter === 'popular') {
+            $qb->addOrderBy('vnb', 'DESC');
+        }
 
         $qb
             ->setFirstResult($offset)

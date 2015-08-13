@@ -27,7 +27,20 @@ class SourceRepository extends EntityRepository
             ->andWhere('s.isTrashed = false')
             ->andWhere('s.Opinion = :opinion')
             ->setParameter('opinion', $opinion)
-            ->orderBy('s.updatedAt', 'DESC');
+        ;
+
+        if ($filter === 'old') {
+            $qb->addOrderBy('s.updatedAt', 'ASC');
+        }
+
+        if ($filter === 'last') {
+            $qb->addOrderBy('s.updatedAt', 'DESC');
+        }
+
+        if ($filter === 'popular') {
+            $qb->addOrderBy('s.voteCount', 'DESC');
+        }
+
 
         return $qb->getQuery()->getResult();
     }
