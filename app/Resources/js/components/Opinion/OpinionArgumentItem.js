@@ -12,7 +12,7 @@ const OpinionArgumentItem = React.createClass({
   render() {
     const argument = this.props.argument;
     return (
-      <li className="opinion opinion--argument" id="arg-166">
+      <li className="opinion opinion--argument" id={"arg-" + argument.id}>
         <div className="opinion__body box">
           <UserAvatar user={argument.author} />
           <div className="opinion__data">

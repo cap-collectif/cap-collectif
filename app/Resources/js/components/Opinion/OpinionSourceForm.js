@@ -9,6 +9,7 @@ const Modal = ReactBootstrap.Modal;
 
 const OpinionSourceForm = React.createClass({
   propTypes: {
+    opinionId: React.PropTypes.number.isRequired,
     opinion: React.PropTypes.object.isRequired,
     categories: React.PropTypes.array.isRequired,
   },
@@ -59,12 +60,14 @@ const OpinionSourceForm = React.createClass({
             <form>
               <Input
                 type="text"
+                name="sourceTitle"
                 bsStyle={this.getStyle('title')}
                 valueLink={this.linkState('title')}
                 label={this.getIntlMessage('source.title')}
               />
               <Input
                 type="select"
+                name="sourceCategory"
                 bsStyle={this.getStyle('type')}
                 label={this.getIntlMessage('source.type')}
                 valueLink={this.linkState('category')}
@@ -78,6 +81,7 @@ const OpinionSourceForm = React.createClass({
               </Input>
               <Input
                 type="text"
+                name="sourceLink"
                 bsStyle={this.getStyle('link')}
                 valueLink={this.linkState('link')}
                 placeholder="http://"
@@ -85,6 +89,7 @@ const OpinionSourceForm = React.createClass({
               />
               <Input
                 type="textarea"
+                name="sourceBody"
                 rows="10" cols="80"
                 bsStyle={this.getStyle('body')}
                 valueLink={this.linkState('body')}
@@ -144,21 +149,24 @@ const OpinionSourceForm = React.createClass({
       if (this.props.opinion && this.props.opinion.parent) {
         OpinionActions
         .addVersionSource(this.props.opinion.parent.id, this.props.opinion.id, data)
-        .then(() => {this.reload()})
+        .then(() => {
+          this.reload();
+        })
         .catch(() => {
           this.setState({submitted: false});
         });
 
-        return ;
+        return;
       }
 
       OpinionActions
       .addSource(this.props.opinionId, data)
-      .then(() => {this.reload()})
+      .then(() => {
+        this.reload();
+      })
       .catch(() => {
         this.setState({submitted: false});
       });
-
     });
   },
 

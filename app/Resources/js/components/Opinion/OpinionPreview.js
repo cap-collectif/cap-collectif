@@ -1,6 +1,8 @@
 import UserAvatar from '../User/UserAvatar';
 import OpinionInfos from './OpinionInfos';
 
+const FormattedMessage = ReactIntl.FormattedMessage;
+
 const OpinionPreview = React.createClass({
   propTypes: {
     opinion: React.PropTypes.object,
@@ -20,7 +22,11 @@ const OpinionPreview = React.createClass({
             </a>
           </h3>
           <p className="opinion__votes excerpt small">
-            { opinion.votes_total } votes • { opinion.arguments_count } arguments • { opinion.sources_count } sources
+            <FormattedMessage message={this.getIntlMessage('global.votes')} num={opinion.votes_total} />
+            { ' • ' }
+            <FormattedMessage message={this.getIntlMessage('global.arguments')} num={opinion.arguments_count} />
+            { ' • ' }
+            <FormattedMessage message={this.getIntlMessage('global.sources')} num={opinion.sources_count} />
           </p>
         </div>
       </div>

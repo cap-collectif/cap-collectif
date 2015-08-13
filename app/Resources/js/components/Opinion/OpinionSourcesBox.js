@@ -1,5 +1,6 @@
 import OpinionSourceList from './OpinionSourceList';
 import OpinionSourceForm from './OpinionSourceForm';
+import Loader from '../Utils/Loader';
 import Fetcher from '../../services/Fetcher';
 
 const Row = ReactBootstrap.Row;
@@ -39,18 +40,6 @@ const OpinionDataBox = React.createClass({
     }
   },
 
-  renderLoader() {
-    if (this.state.isLoading) {
-      return (
-        <Row>
-          <div className="col-xs-2 col-xs-offset-6">
-            <div className="spinner-loader"></div>
-          </div>
-        </Row>
-      );
-    }
-  },
-
   renderFilter() {
     if (this.state.sources.length > 1) {
       return (
@@ -76,10 +65,9 @@ const OpinionDataBox = React.createClass({
           { this.renderFilter() }
         </Row>
         <Row>
-          { this.renderLoader() }
           {!this.state.isLoading
             ? <OpinionSourceList sources={this.state.sources} />
-            : <span />
+            : <Loader />
           }
         </Row>
       </Col>

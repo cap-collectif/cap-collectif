@@ -4,7 +4,6 @@ import OpinionActions from '../../actions/OpinionActions';
 import LoginOverlay from '../Utils/LoginOverlay';
 import CkeditorMixin from '../../utils/CkeditorMixin';
 
-
 const Modal = ReactBootstrap.Modal;
 const Button = ReactBootstrap.Button;
 const Input = ReactBootstrap.Input;

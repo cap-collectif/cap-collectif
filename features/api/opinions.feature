@@ -5,7 +5,7 @@ Feature: Opinions
   ### List
 
     Scenario: API client wants to list sources of an opinion
-    When I send a GET request to "/api/opinions/sources"
+    When I send a GET request to "/api/opinions/2/sources"
     Then the JSON response should match:
     """
     {
@@ -15,6 +15,7 @@ Feature: Opinions
           "title": @string@,
           "category": @string@,
           "body": @string@,
+          "link": @string@,
           "created_at": "@string@.isDateTime()",
           "updated_at": "@string@.isDateTime()",
           "votes_count": @integer@,
@@ -33,7 +34,7 @@ Feature: Opinions
             "edit": @string@,
             "report": @string@
           },
-          "has_user_voted": @boolean@s,
+          "has_user_voted": @boolean@,
           "has_user_reported": @boolean@
         },
         @...@
@@ -45,7 +46,7 @@ Feature: Opinions
   ### As an Anonymous
   @database
   Scenario: logged in API client wants to add a source to an opinion version
-    When I send a POST request to "/api/opinions/57/sources" with json:
+    When I send a POST request to "/api/opinions/1/sources" with json:
     """
     {
       "link": "http://google.com",
@@ -60,7 +61,7 @@ Feature: Opinions
   @database
   Scenario: logged in API client wants to add an argument to an opinion version
     Given I am logged in to api as user
-    When I send a POST request to "/api/opinions/57/sources" with json:
+    When I send a POST request to "/api/opinions/1/sources" with json:
     """
     {
       "link": "http://google.com",

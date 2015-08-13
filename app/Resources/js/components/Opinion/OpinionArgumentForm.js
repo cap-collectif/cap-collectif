@@ -46,10 +46,10 @@ const OpinionArgumentForm = React.createClass({
                 labelClassName="sr-only"
               />
             } />
-            {(LoginStore.isLoggedIn()
+            {LoginStore.isLoggedIn()
               ? <Button
                   disabled={this.state.isSubmitting}
-                  onClick={!this.state.isSubmitting ? this.create.bind(this) : null}
+                  onClick={this.state.isSubmitting ? null : this.create.bind(this)}
                   bsStyle="primary"
                 >
                   {this.state.isSubmitting
@@ -58,7 +58,7 @@ const OpinionArgumentForm = React.createClass({
                   }
                 </Button>
               : <span />
-            )}
+            }
           </form>
         </div>
       </div>
@@ -67,7 +67,7 @@ const OpinionArgumentForm = React.createClass({
 
   create(e) {
     e.preventDefault();
-    this.setState({ submitted: true}, () => {
+    this.setState({submitted: true}, () => {
       if (!this.isValid()) {
         return;
       }

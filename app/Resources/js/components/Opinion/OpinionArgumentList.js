@@ -38,10 +38,10 @@ const OpinionArgumentList = React.createClass({
       <div className={classes}>
         <div className="opinion__arguments__header row">
           <h4 className="col-xs-6 col-sm-12 col-md-6 h4 opinion__header__title">
-            {(this.props.type === 'yes'
+            {this.props.type === 'yes'
               ? <FormattedMessage message={this.getIntlMessage('argument.yes.list')} num={this.props.opinion.arguments_yes_count} />
               : <FormattedMessage message={this.getIntlMessage('argument.no.list')} num={this.props.opinion.arguments_no_count} />
-            )}
+            }
           </h4>
           <div className="col-xs-6 col-sm-12 col-md-6">
             { /* renderFiler */ }

@@ -1,5 +1,6 @@
 import OpinionVersionList from './OpinionVersionList';
 import OpinionVersionForm from './OpinionVersionForm';
+import Loader from '../Utils/Loader';
 import Fetcher from '../../services/Fetcher';
 
 const Row = ReactBootstrap.Row;
@@ -32,18 +33,6 @@ const OpinionDataBox = React.createClass({
     }
   },
 
-  renderLoader() {
-    if (this.state.isLoading) {
-      return (
-        <div className= "row">
-          <div className="col-xs-2 col-xs-offset-6">
-            <div className="spinner-loader"></div>
-          </div>
-        </div>
-      );
-    }
-  },
-
   renderFilter() {
     if (this.state.versions.length > 1) {
       return (
@@ -66,10 +55,9 @@ const OpinionDataBox = React.createClass({
           { this.renderFilter() }
         </Row>
         <Row>
-          { this.renderLoader() }
           {!this.state.isLoading
             ? <OpinionVersionList versions={this.state.versions} />
-            : <span />
+            : <Loader />
           }
         </Row>
       </Col>
@@ -78,9 +66,9 @@ const OpinionDataBox = React.createClass({
 
   updateSelectedValue() {
     this.setState({
-        filter: $(React.findDOMNode(this.refs.filter)).val(),
-        isLoading: true,
-        versions: [],
+      filter: $(React.findDOMNode(this.refs.filter)).val(),
+      isLoading: true,
+      versions: [],
     });
   },
 
@@ -88,11 +76,7 @@ const OpinionDataBox = React.createClass({
     this.setState({'isLoading': true});
 
     Fetcher
-    .get('/opinions/' + this.props.opinionId +
-         '/versions?offset=' + this.state.offset +
-         '&limit=' + this.state.limit +
-         '&filter=' + this.state.filter
-    )
+    .get(`/opinions/${this.props.opinionId}/versions?offset=${this.state.offset}&limit=${this.state.limit}&filter=${this.state.filter}`)
     .then((data) => {
       this.setState({
         'isLoading': false,
