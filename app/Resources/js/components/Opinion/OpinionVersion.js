@@ -17,7 +17,7 @@ const OpinionVersion = React.createClass({
           <Col xs={12} sm={8} md={9} lg={10}>
             <OpinionPreview opinion={version} />
           </Col>
-          <Col className="hidden-xs col-sm-4 col-md-3 col-lg-2">
+          <Col sm={4} md={3} lg={2} className="hidden-xs">
             <VotePiechart top={10} height={90} width={145} ok={version.votes_ok} nok={version.votes_nok} mitige={version.votes_mitige} />
           </Col>
         </Row>

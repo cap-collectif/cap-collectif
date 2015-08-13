@@ -3,6 +3,8 @@ import OpinionInfos from './OpinionInfos';
 import OpinionSourceButtons from './OpinionSourceButtons';
 
 const Label = ReactBootstrap.Label;
+const Row = ReactBootstrap.Row;
+const Col = ReactBootstrap.Col;
 
 const OpinionSource = React.createClass({
   propTypes: {
@@ -14,8 +16,8 @@ const OpinionSource = React.createClass({
     const source = this.props.source;
     return (
       <li className="opinion block--bordered has-chart">
-        <div className="row">
-          <div className="col-xs-12">
+        <Row>
+          <Col xs={12}>
             <div className="opinion__body box">
               <UserAvatar user={source.author} />
               <div className="opinion__data">
@@ -34,8 +36,8 @@ const OpinionSource = React.createClass({
                 </p>
               </div>
             </div>
-          </div>
-        </div>
+          </Col>
+        </Row>
       </li>
     );
   },

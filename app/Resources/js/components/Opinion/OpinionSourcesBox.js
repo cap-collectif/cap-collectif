@@ -43,13 +43,13 @@ const OpinionDataBox = React.createClass({
   renderFilter() {
     if (this.state.sources.length > 1) {
       return (
-        <div className="pull-right col-xs-5 hidden-xs">
+        <Col xs={5} className="pull-right hidden-xs">
           <select ref="filter" className="form-control" value={this.state.filter} onChange={() => this.updateSelectedValue()}>
             <option value="popular">{this.getIntlMessage('global.popular')}</option>
             <option value="last">{this.getIntlMessage('global.last')}</option>
             <option value="old">{this.getIntlMessage('global.old')}</option>
           </select>
-        </div>
+        </Col>
       );
     }
   },

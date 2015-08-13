@@ -1,4 +1,3 @@
-@source
 Feature: Source
 
   @javascript @database
@@ -10,9 +9,9 @@ Feature: Source
       | opinionTypeSlug  | causes                           |
       | opinionSlug      | opinion-2                        |
     When I follow "1 source"
-    And I wait "1" seconds
+    And I wait "3" seconds
     When I click the "#render-opinion-sources .btn-primary" element
-    And I wait "1" seconds
+    And I wait "3" seconds
     And I fill in the following:
     | sourceLink   | http://www.google.fr     |
     | sourceTitle  | Titre de la source       |
@@ -43,7 +42,7 @@ Feature: Source
       | opinionTypeSlug  | enjeux                           |
       | opinionSlug      | opinion-4                        |
     When I follow "1 source"
-    And I wait "1" seconds
+    And I wait "3" seconds
     When I vote for the first source
     Then I should see "Annuler mon vote"
     When I vote for the first source
@@ -59,11 +58,10 @@ Feature: Source
       | opinionTypeSlug  | problemes                        |
       | opinionSlug      | opinion-1                        |
     When I follow "2 sources"
-    And I wait "1" seconds
+    And I wait "3" seconds
     And The first source vote counter should be "1"
     When I follow "Modifier"
     And I fill in the following:
-      | capco_app_source_body    | Je modifie ma source !   |
     And I check "capco_app_source_confirm"
     And I press "Modifier"
     Then I should see "Merci ! Votre source a bien été modifiée."

@@ -6,6 +6,7 @@ import LoginOverlay from '../Utils/LoginOverlay';
 const Button = ReactBootstrap.Button;
 const Input = ReactBootstrap.Input;
 const Modal = ReactBootstrap.Modal;
+const Col = ReactBootstrap.Col;
 
 const OpinionSourceForm = React.createClass({
   propTypes: {
@@ -33,16 +34,16 @@ const OpinionSourceForm = React.createClass({
 
   renderCreateButton() {
     return (
-      <a className="btn btn-primary" onClick={LoginStore.isLoggedIn() ? this.show.bind(this) : null}>
+      <Button bsStyle="primary" onClick={LoginStore.isLoggedIn() ? this.show.bind(this) : null}>
         <i className="cap cap-add-1"></i>
         { ' ' + this.getIntlMessage('opinion.add_new_source')}
-      </a>
+      </Button>
     );
   },
 
   render() {
     return (
-      <div className="col-xs-5">
+      <Col xs={5}>
         <LoginOverlay children={this.renderCreateButton()} />
         <Modal {...this.props} animation={false} show={this.state.showModal} onHide={this.close.bind(this)}
                bsSize="large" aria-labelledby="contained-modal-title-lg">
@@ -114,7 +115,7 @@ const OpinionSourceForm = React.createClass({
             </Button>
           </Modal.Footer>
         </Modal>
-      </div>
+      </Col>
     );
   },
 
