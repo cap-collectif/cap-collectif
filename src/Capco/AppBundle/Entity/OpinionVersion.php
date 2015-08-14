@@ -74,7 +74,6 @@ class OpinionVersion
         return $i;
     }
 
-
     /**
      * @var int
      *

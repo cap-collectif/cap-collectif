@@ -78,6 +78,8 @@ export default {
         share: {
             facebook: 'Facebook',
             twitter: 'Twitter',
+            googleplus: 'Google+',
+            mail: 'Email',
         },
         global: {
             report: {
@@ -88,6 +90,7 @@ export default {
             sources: '{num, plural, =0{0 source} one{# source} other{# sources}}',
             arguments: '{num, plural, =0{0 argument} one{# argument} other{# arguments}}',
             back: 'Retour',
+            share: 'Partager',
             select: 'Choisir une valeur',
             more: 'Voir plus',
             publish: 'Publier',

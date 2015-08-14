@@ -1,0 +1,13 @@
+Capco\AppBundle\Entity\OpinionTypeAnnexe:
+
+    opinionTypeAnnexe1:
+        title: Exposé des motifs
+        position: 2
+        opinionType: @opinionType5
+
+    opinionTypeAnnexe2:
+        title: Étude d'impact
+        position: 3
+        opinionType: @opinionType5
+
+

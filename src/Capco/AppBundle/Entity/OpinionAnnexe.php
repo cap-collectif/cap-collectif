@@ -7,21 +7,16 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Validator\Constraints as Assert;
-use Capco\AppBundle\Traits\EnableTrait;
 use Capco\AppBundle\Traits\SluggableTitleTrait;
 use Capco\AppBundle\Traits\TimestampableTrait;
 
 /**
- * Source.
- *
- * @ORM\Table(name="opinion_additional_element")
- * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\OpinionAdditionalElementRepository")
+ * @ORM\Table(name="opinion_annexes")
+ * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\OpinionAnnexeRepository")
  * @ORM\HasLifecycleCallbacks()
  */
-class OpinionAdditionalElement
+class OpinionAnnexe
 {
-    use EnableTrait;
-    use SluggableTitleTrait;
     use TimestampableTrait;
 
     /**
@@ -38,7 +33,13 @@ class OpinionAdditionalElement
     private $body;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Opinion", inversedBy="additionalElements", cascade={"persist"})
+     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\OpinionTypeAnnexe", cascade={"persist"})
+     * @ORM\JoinColumn(name="opinion_type_part_id", referencedColumnName="id", nullable=true, onDelete="CASCADE")
+     */
+    private $opinionTypeAnnexe;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Opinion", inversedBy="parts", cascade={"persist"})
      * @ORM\JoinColumn(name="opinion_id", referencedColumnName="id", nullable=true, onDelete="CASCADE")
      */
     private $opinion;
@@ -47,9 +48,8 @@ class OpinionAdditionalElement
     {
         if ($this->id) {
             return $this->getTitle();
-        } else {
-            return 'New additional element';
         }
+        return 'New OpinionAnnexe';
     }
 
     public function getId()
@@ -76,15 +76,29 @@ class OpinionAdditionalElement
         return $this;
     }
 
+    public function getOpinionTypeAnnexe()
+    {
+        return $this->opinionTypeAnnexe;
+    }
+
+    public function setOpinionTypeAnnexe(OpinionTypeAnnexe $opinionTypeAnnexe)
+    {
+        $this->opinionTypeAnnexe = $opinionTypeAnnexe;
+
+        return $this;
+    }
+
     public function getOpinion()
     {
         return $this->opinion;
     }
 
-    public function setOpinion($opinion)
+    public function setOpinion(Opinion $opinion)
     {
         $this->opinion = $opinion;
 
         return $this;
     }
+
+
 }

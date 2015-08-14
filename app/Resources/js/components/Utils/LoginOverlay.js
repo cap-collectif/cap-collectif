@@ -29,14 +29,14 @@ const LoginOverlay = React.createClass({
             <p>
               { this.getIntlMessage('vote.popover.body') }
             </p>
-            {(this.props.isRegistrationEnabled
+            {this.props.isRegistrationEnabled
               ? <p>
-                  <Button href="/render" bsStyle="success" className="center-block">
+                  <Button href="/register" bsStyle="success" className="center-block">
                     { this.getIntlMessage('vote.popover.signin') }
                   </Button>
                 </p>
               : <span />
-            )}
+            }
             <p>
               <Button href="/login" bsStyle="success" className="center-block">
                 { this.getIntlMessage('vote.popover.login') }

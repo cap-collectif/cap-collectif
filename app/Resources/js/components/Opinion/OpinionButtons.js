@@ -1,17 +1,14 @@
 import OpinionActions from '../../actions/OpinionActions';
 import LoginOverlay from '../Utils/LoginOverlay';
+import ShareButtonDropdown from '../Utils/ShareButtonDropdown';
 import LoginStore from '../../stores/LoginStore';
 
 const ButtonToolbar = ReactBootstrap.ButtonToolbar;
 const Button = ReactBootstrap.Button;
-const MenuItem = ReactBootstrap.MenuItem;
-const DropdownButton = ReactBootstrap.DropdownButton;
 
 const OpinionButtons = React.createClass({
   propTypes: {
     opinion: React.PropTypes.object.isRequired,
-    opinionId: React.PropTypes.number.isRequired,
-    versionId: React.PropTypes.number.isRequired,
   },
   mixins: [ReactIntl.IntlMixin],
 
@@ -59,46 +56,20 @@ const OpinionButtons = React.createClass({
   },
 
   render() {
-    const reported = this.props.opinion.has_user_reported;
+    const opinion = this.props.opinion;
+    const reported = opinion.has_user_reported;
     return (
       <ButtonToolbar style={{marginTop: 15}}>
         <LoginOverlay children={ this.renderVoteButton('ok') } />
         <LoginOverlay children={ this.renderVoteButton('mitige') } />
         <LoginOverlay children={ this.renderVoteButton('nok') } />
-        <Button className="pull-right btn--outline btn-dark-gray" href={reported ? '#' : this.props.opinion._links.report} active={reported}>
+        <Button
+          className="pull-right btn--outline btn-dark-gray" href={reported ? null : opinion._links.report} active={reported}>
           <i className="cap cap-flag-1"></i>
-          {' ' + reported ? this.getIntlMessage('global.report.reported') : this.getIntlMessage('global.report.submit') }
+          { ' ' }
+          { reported ? this.getIntlMessage('global.report.reported') : this.getIntlMessage('global.report.submit') }
         </Button>
-
-        <DropdownButton className="pull-right dropdown--custom dropdown" title={<span><i className="cap cap-link"></i> Partager</span>}>
-          <MenuItem
-            eventKey="1"
-            href={`http://www.facebook.com/sharer.php?u=${url}&t=${title}`}
-            onclick="window.open(this.href, 'Facebook', config='height=500, width=700, toolbar=no, menubar=no'); return false"
-          >
-            <i className="cap cap-facebook"></i> Facebook
-          </MenuItem>
-          <MenuItem
-            eventKey="2"
-            href={`http://twitter.com/share?url=${url}&text=${title}`}
-            onclick="window.open(this.href, 'Twitter', config='height=500, width=700, toolbar=no, menubar=no'); return false"
-          >
-            <i className="cap cap-twitter"></i> Twitter
-          </MenuItem>
-          <MenuItem
-            eventKey="3"
-            href={`https://plus.google.com/share?url=${url}&title=${title}`}
-            onclick="javascript:window.open(this.href,'', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;"
-          >
-            <i className="cap cap-gplus"></i> Google+
-          </MenuItem>
-          <MenuItem eventKey="4" href={`mailto:?subject=${title}&body=${url}`}>
-            <i className="cap cap-mail-2-1"></i> Email
-          </MenuItem>
-          <MenuItem eventKey="5">
-            <i className="cap cap-link-1"></i> Lien de partage
-          </MenuItem>
-        </DropdownButton>
+        <ShareButtonDropdown className="pull-right" title={opinion.title} url={opinion._links.show} />
       </ButtonToolbar>
     );
   },
@@ -113,12 +84,12 @@ const OpinionButtons = React.createClass({
 
   vote(value) {
     this.setState({hasVoted: value});
-    OpinionActions.voteForVersion(this.props.opinionId, this.props.versionId, {value: value});
+    OpinionActions.voteForVersion(this.props.opinion.parent.id, this.props.opinion.id, {value: value});
   },
 
   deleteVote() {
     this.setState({hasVoted: null, hasInitiallyVoted: null});
-    OpinionActions.deleteVoteForVersion(this.props.opinionId, this.props.versionId);
+    OpinionActions.deleteVoteForVersion(this.props.opinion.parent.id, this.props.opinion.id);
   },
 
   voteAction(value) {

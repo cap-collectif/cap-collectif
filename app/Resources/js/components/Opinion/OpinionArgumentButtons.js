@@ -34,22 +34,19 @@ const OpinionArgumentButtons = React.createClass({
 
   renderReportButton() {
     if (!this.isTheUserTheAuthor()) {
-      if (this.props.argument.has_user_reported) {
-        return (
-          <Button bsSize="xsmall" className="btn-dark-gray active">
-            <i className="cap cap-flag-1"></i>
-            {this.getIntlMessage('global.report.reported')}
-          </Button>
-        );
-      }
+      const reported = this.props.argument.has_user_reported;
       return (
-        <Button href={this.props.argument._links.report} bsSize="xsmall" className="btn-dark-gray btn--outline">
+        <Button
+          href={reported ? null : this.props.argument._links.report}
+          bsSize="xsmall"
+          active={reported}
+          className="btn-dark-gray btn--outline"
+        >
           <i className="cap cap-flag-1"></i>
-          {this.getIntlMessage('global.report.submit')}
+          {reported ? this.getIntlMessage('global.report.reported') : this.getIntlMessage('global.report.submit')}
         </Button>
       );
     }
-    return <span />;
   },
 
   renderEditButton() {

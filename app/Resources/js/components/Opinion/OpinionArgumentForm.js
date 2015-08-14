@@ -81,7 +81,7 @@ const OpinionArgumentForm = React.createClass({
       .then(() => {
         this.setState(this.getInitialState());
         autosize.destroy(React.findDOMNode(this.refs.body));
-        location.reload(); // TODO when enough time
+        location.reload(); // TODO add realtime
         return true;
       })
       .catch(() => {

@@ -127,20 +127,25 @@ class OpinionType
      */
     private $helpText = null;
 
+    /**
+     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\OpinionTypePart", mappedBy="opinionType",  cascade={"persist", "remove"}, orphanRemoval=true)
+     */
+    protected $parts;
+
     public function __construct()
     {
         $this->voteWidgetType = self::VOTE_WIDGET_TYPE_ACCORD;
         $this->Opinions = new ArrayCollection();
         $this->updatedAt = new \Datetime();
+        $this->parts = new ArrayCollection([new OpinionTypePart('Description')]);
     }
 
     public function __toString()
     {
         if ($this->id) {
             return $this->getTitle();
-        } else {
-            return 'New opinion type';
         }
+        return 'New opinion type';
     }
 
     /**
@@ -355,6 +360,27 @@ class OpinionType
     public function removeOpinion(Opinion $opinion)
     {
         $this->Opinions->removeElement($opinion);
+
+        return $this;
+    }
+
+    public function getParts()
+    {
+        return $this->parts;
+    }
+
+    public function addPart(OpinionTypePart $part)
+    {
+        if (!$this->parts->contains($part)) {
+            $this->parts->add($part);
+        }
+
+        return $this;
+    }
+
+    public function removePart(OpinionTypePart $part)
+    {
+        $this->parts->removeElement($part);
 
         return $this;
     }

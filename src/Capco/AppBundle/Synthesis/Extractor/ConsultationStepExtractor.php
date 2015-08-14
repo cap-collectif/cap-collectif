@@ -270,7 +270,7 @@ class ConsultationStepExtractor
         $element->setAuthor(null);
 
         $element->setTitle($opinionType->getTitle());
-        $element->setBody(null);
+        // $element->setBody(null);
 
         // Set votes
         $element->setVotes([]);
@@ -285,7 +285,7 @@ class ConsultationStepExtractor
 
         if (!$element->getOriginalDivision()) {
             $element->setTitle($opinion->getTitle());
-            $element->setBody($opinion->getBody());
+            // $element->setBody($opinion->getBody());
 
             // Set votes
             $votes = array();
@@ -304,7 +304,7 @@ class ConsultationStepExtractor
         $element->setAuthor($source->getAuthor());
 
         $element->setTitle($source->getTitle());
-        $element->setBody($source->getBody());
+        // $element->setBody($source->getBody());
 
         // Set link
         if ($source->getMedia()) {
@@ -327,7 +327,7 @@ class ConsultationStepExtractor
         // Set author
         $element->setAuthor($argument->getAuthor());
 
-        $element->setBody($argument->getBody());
+        // $element->setBody($argument->getBody());
 
         // Set votes
         $votes = array();

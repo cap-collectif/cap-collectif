@@ -4,7 +4,7 @@ export default {
 
   addVote: (argument) => {
     return Fetcher
-    .post('/arguments/' + argument + '/votes', {})
+    .post(`/arguments/${argument}/votes`, {})
     .then(() => {
       return true;
     });
@@ -12,7 +12,7 @@ export default {
 
   deleteVote: (argument) => {
     return Fetcher
-    .delete('/arguments/' + argument + '/votes')
+    .delete(`/arguments/${argument}/votes`)
     .then(() => {
       return true;
     });

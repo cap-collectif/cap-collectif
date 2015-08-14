@@ -4,33 +4,10 @@ const FormattedMessage = ReactIntl.FormattedMessage;
 
 const OpinionArgumentList = React.createClass({
   propTypes: {
-    opinion: React.PropTypes.object,
-    type: React.PropTypes.string,
+    opinion: React.PropTypes.object.isRequired,
+    type: React.PropTypes.string.isRequired,
   },
   mixins: [ReactIntl.IntlMixin, React.addons.LinkedStateMixin],
-
-  renderFilter() {
-    return (
-      <div className="filter">
-       <form>
-         <div className="formgroup--inline">
-           <label className="control-label hidden-xs control-label">
-             Trier par
-           </label>
-           <label className="control-label sr-only visible-xs control-label">
-             Trier par
-           </label>
-           <span className="formgroup--inline__control">
-               <select className="form-control form-control">
-                 <option value="date">Date</option>
-                 <option value="popularity">Nombre de votes</option>
-               </select>
-           </span>
-         </div>
-         </form>
-       </div>
-    );
-  },
 
   render() {
     const classes = 'block--tablet block--bordered opinion__arguments--' + this.props.type;
@@ -43,9 +20,6 @@ const OpinionArgumentList = React.createClass({
               : <FormattedMessage message={this.getIntlMessage('argument.no.list')} num={this.props.opinion.arguments_no_count} />
             }
           </h4>
-          <div className="col-xs-6 col-sm-12 col-md-6">
-            { /* renderFiler */ }
-          </div>
         </div>
         <ul className="media-list opinion__list">
         {

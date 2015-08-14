@@ -40,14 +40,6 @@ class Opinion
     protected $id;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="body", type="text")
-     * @Assert\NotBlank()
-     */
-    protected $body;
-
-    /**
      * @var bool
      *
      * @ORM\Column(name="enabled", type="boolean")
@@ -62,7 +54,7 @@ class Opinion
 
     /**
      * @var \DateTime
-     * @Gedmo\Timestampable(on="change", field={"title", "body", "Author", "OpinionType", "Consultation"})
+     * @Gedmo\Timestampable(on="change", field={"title", "Author", "OpinionType", "Consultation"})
      * @ORM\Column(name="updated_at", type="datetime")
      */
     protected $updatedAt;
@@ -135,13 +127,11 @@ class Opinion
     private $versions;
 
     /**
-     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\OpinionAdditionalElement", mappedBy="opinion",  cascade={"persist", "remove"}, orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\OpinionPart", mappedBy="opinion",  cascade={"persist", "remove"}, orphanRemoval=true)
      */
-    protected $additionalElements;
+    protected $parts;
 
     /**
-     * @var bool
-     *
      * @ORM\Column(name="pinned", type="boolean")
      */
     protected $pinned = false;
@@ -153,6 +143,8 @@ class Opinion
         $this->arguments = new ArrayCollection();
         $this->Sources = new ArrayCollection();
         $this->versions = new ArrayCollection();
+        $this->parts = new ArrayCollection();
+
 
         $this->updatedAt = new \Datetime();
         $this->createdAt = new \Datetime();
@@ -209,30 +201,6 @@ class Opinion
     }
 
     /**
-     * Get body.
-     *
-     * @return string
-     */
-    public function getBody()
-    {
-        return $this->body;
-    }
-
-    /**
-     * Set body.
-     *
-     * @param string $body
-     *
-     * @return Opinion
-     */
-    public function setBody($body)
-    {
-        $this->body = $body;
-
-        return $this;
-    }
-
-    /**
      * Get isEnabled.
      *
      * @return bool
@@ -275,8 +243,6 @@ class Opinion
     {
         return $this->updatedAt;
     }
-
-
 
     /**
      * @return int
@@ -523,6 +489,27 @@ class Opinion
         return $this;
     }
 
+    public function getParts()
+    {
+        return $this->parts;
+    }
+
+    public function addPart(OpinionPart $part)
+    {
+        if (!$this->parts->contains($part)) {
+            $this->parts->add($part);
+        }
+
+        return $this;
+    }
+
+    public function removePart(OpinionPart $part)
+    {
+        $this->parts->removeElement($part);
+
+        return $this;
+    }
+
     /**
      * @return bool
      */
@@ -540,6 +527,16 @@ class Opinion
     }
 
     // ******************************* Custom methods **************************************
+
+    // Used by elasticsearch for indexing
+    public function getStrippedBody()
+    {
+        $body = '';
+        foreach ($this->parts as $part) {
+            $body += $part->getBody() + ' ';
+        }
+        return strip_tags(html_entity_decode($body, ENT_QUOTES|ENT_HTML401, 'UTF-8'));
+    }
 
     public function getArgumentForCount()
     {
@@ -561,12 +558,6 @@ class Opinion
             }
         }
         return $i;
-    }
-
-    // Used by elasticsearch for indexing
-    public function getStrippedBody()
-    {
-        return strip_tags(html_entity_decode($this->body, ENT_QUOTES|ENT_HTML401, 'UTF-8'));
     }
 
     /**
