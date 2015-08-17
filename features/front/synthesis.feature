@@ -124,17 +124,21 @@ Scenario: Admin wants to ignore an element
   And I follow "Synthèse"
   And I follow "Éditer"
   And I wait 5 seconds
-  And I follow "Opinion 51"
+  And I follow "Traitées"
+  And I wait 5 seconds
+  And I follow "Les causes"
   And I wait 5 seconds
   And I click the ".element__action-ignore" element
+  And I wait 5 seconds
+  And I click the ".modal--confirm__submit" element
   And I wait 5 seconds
   And I should see "L'élément a été traité avec succès."
   And I follow "Dépubliées"
   And I wait 5 seconds
-  And I should see 1 ".element" element
+  And I should see 11 ".element" element
   And I follow "Traitées"
   And I wait 5 seconds
-  Then I should see 12 ".element" element
+  Then I should see 15 ".element" element
 
 @javascript @database
 Scenario: Admin wants to publish an element without note, comment or parent

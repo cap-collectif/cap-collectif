@@ -32,7 +32,7 @@ const SideMenu = React.createClass({
   },
 
   onChange() {
-    if (SynthesisElementStore.isCountSync) {
+    if (!SynthesisElementStore.isProcessing && SynthesisElementStore.isCountSync) {
       this.setState({
         countNew: SynthesisElementStore.countNew,
       });

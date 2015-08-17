@@ -82,6 +82,12 @@ export default {
           },
           create_button: 'Créer à partir d\'une sélection',
         },
+        confirm_ignore: {
+          title: 'Souhaitez-vous vraiment ignorer le dossier "{name}"',
+          body: 'Tous les dossiers et toutes les contributions contenus dans ce dossier seront également ignorés.',
+          btn_cancel: 'Annuler',
+          btn_submit: 'Ignorer',
+        },
       },
       finder: {
         root: 'Synthèse',

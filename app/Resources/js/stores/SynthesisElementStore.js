@@ -64,15 +64,16 @@ class SynthesisElementStore extends BaseStore {
       case ARCHIVE_ELEMENT:
         this._resetMessages();
         // Update data
-        this._elements.new = ArrayHelper.removeElementFromArray(this._elements.new, this._element);
-        this._countNew = this._elements.new.length;
-        this.elements.archived = ArrayHelper.addElementToArray(this._elements.archived, this._element);
-        if (action.published) {
+        // If we ignored an element, lists are not synced anymore
+        if (!action.published) {
+          this._isProcessing = true;
+          this._resetInboxSync();
+        } else {
+          this._elements.new = ArrayHelper.removeElementFromArray(this._elements.new, this._element);
+          this._countNew = this._elements.new.length;
+          this.elements.archived = ArrayHelper.addElementToArray(this._elements.archived, this._element);
           this._elements.published = ArrayHelper.addElementToArray(this._elements.published, this._element);
           this._elements.unpublished = ArrayHelper.removeElementFromArray(this._elements.unpublished, this._element);
-        } else {
-          this._elements.unpublished = ArrayHelper.addElementToArray(this._elements.unpublished, this._element);
-          this._elements.published = ArrayHelper.removeElementFromArray(this._elements.published, this._element);
         }
         // Apply changes to element
         this._element.archived = action.archived;
@@ -118,7 +119,6 @@ class SynthesisElementStore extends BaseStore {
         this._messages.success = [];
         this._isProcessing = false;
         this._isElementSync = false;
-        this._isCountSync = false;
         this._resetInboxSync();
         this.emitChange();
         break;
@@ -133,7 +133,6 @@ class SynthesisElementStore extends BaseStore {
         this._messages.success = [];
         this._isProcessing = false;
         this._isElementSync = false;
-        this._isCountSync = false;
         this._resetInboxSync();
         this.emitChange();
         break;
@@ -186,6 +185,7 @@ class SynthesisElementStore extends BaseStore {
     this._isInboxSync.publishedTree = false;
     this._isInboxSync.allTree = false;
     this._isInboxSync.fromDivision = false;
+    this._isCountSync = false;
   }
 
 }

@@ -90,6 +90,11 @@ class SynthesisElementHandler
             $division = $this->updateDivisionFromElementInSynthesis($element->getDivision(), $element, $synthesis);
         }
 
+        // If we're ignoring the element, all childrens must be ignored
+        if (!$element->isPublished()) {
+            $element = $this->ignoreElementChildren($element);
+        }
+
         $this->em->persist($element);
         $this->em->flush();
 
@@ -112,6 +117,15 @@ class SynthesisElementHandler
 
         $this->em->persist($division);
         return $division;
+    }
+
+    public function ignoreElementChildren(SynthesisElement $element) {
+        foreach ($element->getChildren() as $child) {
+            $child->setPublished(false);
+            $child->setArchived(true);
+            $this->ignoreElementChildren($child);
+        }
+        return $element;
     }
 
     public function getLogsForElement(SynthesisElement $element)

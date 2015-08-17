@@ -124,20 +124,20 @@ const PublishModal = React.createClass({
 
   render() {
     return (
-    <Modal show={this.props.show} onHide={this.hide} animation={false} dialogClassName="modal--publish">
-      <Modal.Header closeButton>
-        <Modal.Title>{this.getIntlMessage('edition.action.publish.title')}</Modal.Title>
-      </Modal.Header>
-      <Modal.Body>
-        {this.renderParent()}
-        {this.renderNotation()}
-        {this.renderComment()}
-      </Modal.Body>
-      <Modal.Footer>
-        <Button type="button" onClick={this.hide.bind(null, this)}>{this.getIntlMessage('edition.action.publish.btn_cancel')}</Button>
-        <Button bsStyle="primary" type="submit" onClick={this.publish.bind(null, this)}>{this.getIntlMessage('edition.action.publish.btn_submit')}</Button>
-      </Modal.Footer>
-    </Modal>
+      <Modal show={this.props.show} onHide={this.hide} animation={false} dialogClassName="modal--publish">
+        <Modal.Header closeButton>
+          <Modal.Title>{this.getIntlMessage('edition.action.publish.title')}</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          {this.renderParent()}
+          {this.renderNotation()}
+          {this.renderComment()}
+        </Modal.Body>
+        <Modal.Footer>
+          <Button type="button" onClick={this.hide.bind(null, this)}>{this.getIntlMessage('edition.action.publish.btn_cancel')}</Button>
+          <Button bsStyle="primary" type="submit" onClick={this.publish.bind(null, this)}>{this.getIntlMessage('edition.action.publish.btn_submit')}</Button>
+        </Modal.Footer>
+      </Modal>
     );
   },
 
