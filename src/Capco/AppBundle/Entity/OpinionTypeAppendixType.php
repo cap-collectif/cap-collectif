@@ -13,11 +13,11 @@ use Capco\AppBundle\Traits\PositionableTrait;
 
 
 /**
- * @ORM\Table(name="opinion_type_annexes")
- * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\OpinionTypeAnnexeRepository")
+ * @ORM\Table(name="opinion_type_appendices_type")
+ * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\OpinionTypeAppendixTypeRepository")
  * @ORM\HasLifecycleCallbacks()
  */
-class OpinionTypeAnnexe
+class OpinionTypeAppendixType
 {
     use SluggableTitleTrait;
     use TimestampableTrait;
@@ -31,7 +31,7 @@ class OpinionTypeAnnexe
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\OpinionType", inversedBy="annexes", cascade={"persist"})
+     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\OpinionType", inversedBy="appendixTypes", cascade={"persist"})
      * @ORM\JoinColumn(name="opinion_type_id", referencedColumnName="id", nullable=true, onDelete="CASCADE")
      */
     private $opinionType;
@@ -48,7 +48,7 @@ class OpinionTypeAnnexe
             return $this->getTitle();
         }
 
-        return 'New OpinionTypeAnnexe';
+        return 'New OpinionTypeAppendixType';
     }
 
     public function getId()

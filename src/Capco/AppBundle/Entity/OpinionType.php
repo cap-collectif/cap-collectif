@@ -128,16 +128,16 @@ class OpinionType
     private $helpText = null;
 
     /**
-     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\OpinionTypePart", mappedBy="opinionType",  cascade={"persist", "remove"}, orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\OpinionTypeAppendixType", mappedBy="opinionType",  cascade={"persist", "remove"}, orphanRemoval=true)
      */
-    protected $parts;
+    protected $appendixTypes;
 
     public function __construct()
     {
         $this->voteWidgetType = self::VOTE_WIDGET_TYPE_ACCORD;
         $this->Opinions = new ArrayCollection();
         $this->updatedAt = new \Datetime();
-        $this->parts = new ArrayCollection([new OpinionTypePart('Description')]);
+        $this->appendixTypes = new ArrayCollection([new OpinionTypeAppendixType('Description')]);
     }
 
     public function __toString()
@@ -364,23 +364,23 @@ class OpinionType
         return $this;
     }
 
-    public function getParts()
+    public function getAppendixTypes()
     {
-        return $this->parts;
+        return $this->appendixTypes;
     }
 
-    public function addPart(OpinionTypePart $part)
+    public function addAppendixType(OpinionTypeAppendixType $appendixType)
     {
-        if (!$this->parts->contains($part)) {
-            $this->parts->add($part);
+        if (!$this->appendixTypes->contains($appendixType)) {
+            $this->appendixTypes->add($appendixType);
         }
 
         return $this;
     }
 
-    public function removePart(OpinionTypePart $part)
+    public function removeAppendixType(OpinionTypeAppendixType $appendixType)
     {
-        $this->parts->removeElement($part);
+        $this->appendixTypes->removeElement($appendixType);
 
         return $this;
     }

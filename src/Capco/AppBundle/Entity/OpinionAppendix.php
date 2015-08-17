@@ -12,10 +12,10 @@ use Capco\AppBundle\Traits\TimestampableTrait;
 
 /**
  * @ORM\Table(name="opinion_annexes")
- * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\OpinionAnnexeRepository")
+ * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\OpinionAppendixRepository")
  * @ORM\HasLifecycleCallbacks()
  */
-class OpinionAnnexe
+class OpinionAppendix
 {
     use TimestampableTrait;
 
@@ -33,13 +33,13 @@ class OpinionAnnexe
     private $body;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\OpinionTypeAnnexe", cascade={"persist"})
+     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\OpinionTypeAppendixType", cascade={"persist"})
      * @ORM\JoinColumn(name="opinion_type_part_id", referencedColumnName="id", nullable=true, onDelete="CASCADE")
      */
-    private $opinionTypeAnnexe;
+    private $opinionTypeAppendixType;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Opinion", inversedBy="parts", cascade={"persist"})
+     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Opinion", inversedBy="appendicies", cascade={"persist"})
      * @ORM\JoinColumn(name="opinion_id", referencedColumnName="id", nullable=true, onDelete="CASCADE")
      */
     private $opinion;
@@ -49,7 +49,7 @@ class OpinionAnnexe
         if ($this->id) {
             return $this->getTitle();
         }
-        return 'New OpinionAnnexe';
+        return 'New OpinionAppendix';
     }
 
     public function getId()
@@ -76,14 +76,14 @@ class OpinionAnnexe
         return $this;
     }
 
-    public function getOpinionTypeAnnexe()
+    public function getOpinionTypeAppendixType()
     {
-        return $this->opinionTypeAnnexe;
+        return $this->opinionTypeAppendixType;
     }
 
-    public function setOpinionTypeAnnexe(OpinionTypeAnnexe $opinionTypeAnnexe)
+    public function setOpinionTypeAppendixType(OpinionTypeAppendixType $opinionTypeAppendixType)
     {
-        $this->opinionTypeAnnexe = $opinionTypeAnnexe;
+        $this->opinionTypeAppendixType = $opinionTypeAppendixType;
 
         return $this;
     }

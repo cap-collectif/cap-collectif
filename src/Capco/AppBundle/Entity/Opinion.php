@@ -60,22 +60,22 @@ class Opinion
     protected $updatedAt;
 
     /**
-     * @var int
-     *
+     * @ORM\Column(name="body", type="text")
+     * @Assert\NotBlank()
+     */
+    protected $body;
+
+    /**
      * @ORM\Column(name="position", type="integer")
      */
     protected $position = 0;
 
     /**
-     * @var int
-     *
      * @ORM\Column(name="sources_count", type="integer")
      */
     protected $sourcesCount = 0;
 
     /**
-     * @var int
-     *
      * @ORM\Column(name="arguments_count", type="integer")
      */
     protected $argumentsCount = 0;
@@ -127,9 +127,9 @@ class Opinion
     private $versions;
 
     /**
-     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\OpinionPart", mappedBy="opinion",  cascade={"persist", "remove"}, orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\OpinionAppendix", mappedBy="opinion",  cascade={"persist", "remove"}, orphanRemoval=true)
      */
-    protected $parts;
+    protected $appendicies;
 
     /**
      * @ORM\Column(name="pinned", type="boolean")
@@ -143,7 +143,7 @@ class Opinion
         $this->arguments = new ArrayCollection();
         $this->Sources = new ArrayCollection();
         $this->versions = new ArrayCollection();
-        $this->parts = new ArrayCollection();
+        $this->appendicies = new ArrayCollection();
 
 
         $this->updatedAt = new \Datetime();
@@ -220,6 +220,18 @@ class Opinion
     public function setIsEnabled($isEnabled)
     {
         $this->isEnabled = $isEnabled;
+
+        return $this;
+    }
+
+    public function getBody()
+    {
+        return $this->body;
+    }
+
+    public function setBody($body)
+    {
+        $this->body = $body;
 
         return $this;
     }
@@ -489,23 +501,23 @@ class Opinion
         return $this;
     }
 
-    public function getParts()
+    public function getAppendices()
     {
-        return $this->parts;
+        return $this->appendicies;
     }
 
-    public function addPart(OpinionPart $part)
+    public function addAppendix(OpinionAppendix $appendix)
     {
-        if (!$this->parts->contains($part)) {
-            $this->parts->add($part);
+        if (!$this->appendicies->contains($appendix)) {
+            $this->appendicies->add($appendix);
         }
 
         return $this;
     }
 
-    public function removePart(OpinionPart $part)
+    public function removeAppendix(OpinionAppendix $appendix)
     {
-        $this->parts->removeElement($part);
+        $this->appendicies->removeElement($appendix);
 
         return $this;
     }
@@ -531,11 +543,7 @@ class Opinion
     // Used by elasticsearch for indexing
     public function getStrippedBody()
     {
-        $body = '';
-        foreach ($this->parts as $part) {
-            $body += $part->getBody() + ' ';
-        }
-        return strip_tags(html_entity_decode($body, ENT_QUOTES|ENT_HTML401, 'UTF-8'));
+        return strip_tags(html_entity_decode($this->body, ENT_QUOTES|ENT_HTML401, 'UTF-8'));
     }
 
     public function getArgumentForCount()

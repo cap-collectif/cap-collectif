@@ -66,17 +66,20 @@ const OpinionBox = React.createClass({
           <div className="opinion__buttons" style={{marginBottom: 0}}>
             <OpinionButtons {...this.props} opinion={opinion} />
           </div>
-          <Row style={{borderTop: '1px solid #ddd', marginTop: 15}}>
-            <Col sm={12} mdOffset={1} md={3} >
-              <VotePiechart  top={20} height={180} ok={opinion.votes_ok} nok={opinion.votes_nok} mitige={opinion.votes_mitige} />
-            </Col>
-            <Col sm={12} md={5} style={{marginTop: 60}}>
-              {this.renderUserAvatarVotes()}
-              <Row>
-                <FormattedMessage message={this.getIntlMessage('global.votes')} num={this.props.opinion.votes.length} />
-              </Row>
-            </Col>
-          </Row>
+          {opinion.votes.length > 1
+          ? <Row style={{borderTop: '1px solid #ddd', marginTop: 15}}>
+              <Col sm={12} mdOffset={1} md={3} >
+                <VotePiechart  top={20} height={180} ok={opinion.votes_ok} nok={opinion.votes_nok} mitige={opinion.votes_mitige} />
+              </Col>
+              <Col sm={12} md={5} style={{marginTop: 60}}>
+                {this.renderUserAvatarVotes()}
+                <Row>
+                  <FormattedMessage message={this.getIntlMessage('global.votes')} num={opinion.votes.length} />
+                </Row>
+              </Col>
+            </Row>
+          : <span />
+          }
         </div>
       </div>
     );

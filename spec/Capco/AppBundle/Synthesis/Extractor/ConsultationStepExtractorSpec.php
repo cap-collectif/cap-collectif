@@ -175,7 +175,7 @@ class ConsultationStepExtractorSpec extends ObjectBehavior
         $element = $this->createElementFromOpinionType($opinionType);
         $element->shouldBeAnInstanceOf('Capco\AppBundle\Entity\Synthesis\SynthesisElement');
         $element->getTitle()->shouldReturn('Les causes');
-        // $element->getBody()->shouldReturn(null);
+        $element->getBody()->shouldReturn(null);
         $element->getLinkedDataId()->shouldReturn(42);
         $element->getDisplayType()->shouldReturn('folder');
     }
@@ -186,12 +186,12 @@ class ConsultationStepExtractorSpec extends ObjectBehavior
         $opinion = new Opinion();
         $opinion->setId(42);
         $opinion->setTitle('test');
-        // $opinion->setBody('blabla');
+        $opinion->setBody('blabla');
 
         $element = $this->createElementFromOpinion($opinion);
         $element->shouldBeAnInstanceOf('Capco\AppBundle\Entity\Synthesis\SynthesisElement');
         $element->getTitle()->shouldReturn('test');
-        // $element->getBody()->shouldReturn('blabla');
+        $element->getBody()->shouldReturn('blabla');
         $element->getLinkedDataId()->shouldReturn(42);
         $element->getDisplayType()->shouldReturn('contribution');
     }
@@ -201,11 +201,11 @@ class ConsultationStepExtractorSpec extends ObjectBehavior
         // Can't mock argument because we need to call get_class() method on it
         $argument = new Argument();
         $argument->setId(42);
-        // $argument->setBody('blabla');
+        $argument->setBody('blabla');
 
         $element = $this->createElementFromArgument($argument);
         $element->shouldBeAnInstanceOf('Capco\AppBundle\Entity\Synthesis\SynthesisElement');
-        // $element->getBody()->shouldReturn('blabla');
+        $element->getBody()->shouldReturn('blabla');
         $element->getLinkedDataId()->shouldReturn(42);
         $element->getDisplayType()->shouldReturn('contribution');
     }
@@ -216,12 +216,12 @@ class ConsultationStepExtractorSpec extends ObjectBehavior
         $source = new Source();
         $source->setId(42);
         $source->setTitle('Titre');
-        // $source->setBody('blabla');
+        $source->setBody('blabla');
 
         $element = $this->createElementFromSource($source);
         $element->shouldBeAnInstanceOf('Capco\AppBundle\Entity\Synthesis\SynthesisElement');
         $element->getTitle()->shouldReturn('Titre');
-        // $element->getBody()->shouldReturn('blabla');
+        $element->getBody()->shouldReturn('blabla');
         $element->getLink()->shouldReturn(null);
         $element->getLinkedDataId()->shouldReturn(42);
         $element->getDisplayType()->shouldReturn('source');
@@ -231,7 +231,7 @@ class ConsultationStepExtractorSpec extends ObjectBehavior
     {
         $date = new \DateTime();
         $object->getTitle()->willReturn('test')->shouldBeCalled();
-        // $object->getBody()->willReturn('blabla')->shouldBeCalled();
+        $object->getBody()->willReturn('blabla')->shouldBeCalled();
         $object->getAuthor()->willReturn($author)->shouldBeCalled();
         $object->getUpdatedAt()->willReturn($date)->shouldBeCalled();
         $object->getVoteCountOk()->willReturn(25)->shouldBeCalled();
@@ -245,7 +245,7 @@ class ConsultationStepExtractorSpec extends ObjectBehavior
         $element->setPublished(false)->shouldBeCalled();
         $element->setDeletedAt(null)->shouldBeCalled();
         $element->setTitle('test')->shouldBeCalled();
-        // $element->setBody('blabla')->shouldBeCalled();
+        $element->setBody('blabla')->shouldBeCalled();
         $element->setVotes([-1 => 25, 0 => 25, 1 => 25])->shouldBeCalled();
         $object->getUpdatedAt()->willReturn($date)->shouldBeCalled();
 
@@ -256,7 +256,7 @@ class ConsultationStepExtractorSpec extends ObjectBehavior
     {
         $opinionType->getTitle()->willReturn('Les causes')->shouldBeCalled();
         $element->setTitle('Les causes')->shouldBeCalled();
-        // $element->setBody(null)->shouldBeCalled();
+        $element->setBody(null)->shouldBeCalled();
         $element->setAuthor(null)->shouldBeCalled();
         $element->setVotes([])->shouldBeCalled();
 
@@ -266,7 +266,7 @@ class ConsultationStepExtractorSpec extends ObjectBehavior
     function it_can_update_an_element_from_an_opinion(SynthesisElement $element, Opinion $opinion, User $author)
     {
         $opinion->getTitle()->willReturn('test')->shouldBeCalled();
-        // $opinion->getBody()->willReturn('blabla')->shouldBeCalled();
+        $opinion->getBody()->willReturn('blabla')->shouldBeCalled();
         $opinion->getAuthor()->willReturn($author)->shouldBeCalled();
         $opinion->getVoteCountOk()->willReturn(25)->shouldBeCalled();
         $opinion->getVoteCountNok()->willReturn(25)->shouldBeCalled();
@@ -274,7 +274,7 @@ class ConsultationStepExtractorSpec extends ObjectBehavior
 
         $element->getOriginalDivision()->willReturn(null)->shouldBeCalled();
         $element->setTitle('test')->shouldBeCalled();
-        // $element->setBody('blabla')->shouldBeCalled();
+        $element->setBody('blabla')->shouldBeCalled();
         $element->setAuthor($author)->shouldBeCalled();
         $element->setVotes([-1 => 25, 0 => 25, 1 => 25])->shouldBeCalled();
 
@@ -284,14 +284,14 @@ class ConsultationStepExtractorSpec extends ObjectBehavior
     function it_can_update_an_element_from_a_source(SynthesisElement $element, Source $source, User $author)
     {
         $source->getTitle()->willReturn('Titre')->shouldBeCalled();
-        // $source->getBody()->willReturn('blabla')->shouldBeCalled();
+        $source->getBody()->willReturn('blabla')->shouldBeCalled();
         $source->getAuthor()->willReturn($author)->shouldBeCalled();
         $source->getVoteCount()->willReturn(25)->shouldBeCalled();
         $source->getMedia()->willReturn(null)->shouldBeCalled();
         $source->getLink()->willReturn(null)->shouldBeCalled();
 
         $element->setTitle('Titre')->shouldBeCalled();
-        // $element->setBody('blabla')->shouldBeCalled();
+        $element->setBody('blabla')->shouldBeCalled();
         $element->setAuthor($author)->shouldBeCalled();
         $element->setVotes([1 => 25])->shouldBeCalled();
 
@@ -300,11 +300,11 @@ class ConsultationStepExtractorSpec extends ObjectBehavior
 
     function it_can_update_an_element_from_an_argument(SynthesisElement $element, Argument $argument, User $author)
     {
-        // $argument->getBody()->willReturn('blabla')->shouldBeCalled();
+        $argument->getBody()->willReturn('blabla')->shouldBeCalled();
         $argument->getAuthor()->willReturn($author)->shouldBeCalled();
         $argument->getVoteCount()->willReturn(25)->shouldBeCalled();
 
-        // $element->setBody('blabla')->shouldBeCalled();
+        $element->setBody('blabla')->shouldBeCalled();
         $element->setAuthor($author)->shouldBeCalled();
         $element->setVotes([1 => 25])->shouldBeCalled();
 
