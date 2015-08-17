@@ -397,12 +397,6 @@ argument:
     not_found: Argument introuvable.
     no_contribute: Impossible de contribuer sur cet argument.
     not_author: Vous ne pouvez pas modifier cet argument car vous n'en êtes pas l'auteur.
-  count: "]-Inf, 0] Aucun argument | {1} 1 argument | ]1,Inf[ %count% arguments"
-
-version:
-  show:
-    count: "]-Inf, 0] Aucune nouvelle version | {1} 1 nouvelle version | ]1,Inf[ %count% nouvelles versions"
-
 
 source:
   create:

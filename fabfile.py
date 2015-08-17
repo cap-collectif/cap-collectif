@@ -51,11 +51,6 @@ def migrate_test_db():
         local('php app/console doctrine:migration:migrate -n -e test')
 
 @task
-def load_base_data():
-    with lcd(env.local_dir):
-        local('php app/console capco:load-base-data -n -e test')
-
-@task
 def reinit_data():
     with lcd(env.local_dir):
         local('php app/console capco:reinit --force')

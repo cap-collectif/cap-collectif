@@ -1,9 +1,6 @@
 /*eslint-disable */
 import IntlData from './translations/FR'
 import CommentSection from './components/Comment/CommentSection';
-import OpinionVersionsBox from './components/Opinion/OpinionVersionsBox';
-import OpinionSourcesBox from './components/Opinion/OpinionSourcesBox';
-import OpinionPage from './components/Opinion/OpinionPage';
 import AuthService from './services/AuthService';
 
 AuthService
@@ -28,38 +25,6 @@ AuthService
         React.render(
             <CommentSection uri="events" object={$('#render-event-comments').data("event")} {...IntlData} />,
             document.getElementById('render-event-comments')
-        );
-    }
-
-    if ($('#render-opinion-versions').length) {
-        React.render(
-            <OpinionVersionsBox
-                opinionId={$('#render-opinion-versions').data("opinion")}
-                opinionBody={$('#render-opinion-versions').data("text")}
-                {...IntlData}
-            />,
-            document.getElementById('render-opinion-versions')
-        );
-    }
-
-    if ($('#render-opinion-sources').length) {
-        React.render(
-            <OpinionSourcesBox
-                opinionId={$('#render-opinion-sources').data("opinion")}
-                {...IntlData}
-            />,
-            document.getElementById('render-opinion-sources')
-        );
-    }
-
-    if ($('#render-opinion-version').length) {
-        React.render(
-            <OpinionPage
-                opinionId={$('#render-opinion-version').data('opinion')}
-                versionId={$('#render-opinion-version').data('version')}
-                {...IntlData}
-            />,
-            document.getElementById('render-opinion-version')
         );
     }
 });

@@ -3,7 +3,6 @@ const svg = '<svg class="img-circle avatar media-object" version="1.1" id="Calqu
 const UserAvatar = React.createClass({
   propTypes: {
     user: React.PropTypes.object,
-    style: React.PropTypes.object,
   },
 
   renderAvatar() {
@@ -16,14 +15,14 @@ const UserAvatar = React.createClass({
   render() {
     if (this.props.user && this.props.user._links) {
       return (
-        <a className="pull-left" href={this.props.user._links.profile} style={this.props.style}>
+        <a className="pull-left" href={this.props.user._links.profile}>
           { this.renderAvatar() }
         </a>
       );
     }
 
     return (
-      <a className="pull-left" href="#" style={this.props.style}>
+      <a className="pull-left" href="#">
         { this.renderAvatar() }
       </a>
     );

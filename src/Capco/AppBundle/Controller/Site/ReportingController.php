@@ -21,67 +21,6 @@ use Symfony\Component\Form\Form;
 class ReportingController extends Controller
 {
     /**
-     * @Route("/consultations/{consultationSlug}/consultation/{stepSlug}/opinions/{opinionTypeSlug}/{opinionSlug}/versions/{versionSlug}/report", name="app_report_opinion_version", defaults={"_feature_flags" = "reporting"})
-     * @Template("CapcoAppBundle:Reporting:create.html.twig")
-     */
-    public function reportingOpinionVersionAction($consultationSlug, $stepSlug, $opinionTypeSlug, $opinionSlug, $versionSlug, Request $request)
-    {
-        if (false === $this->get('security.authorization_checker')->isGranted('ROLE_USER')) {
-            throw new AccessDeniedException($this->get('translator')->trans('error.access_restricted', array(), 'CapcoAppBundle'));
-        }
-
-        $opinion = $this->getDoctrine()->getRepository('CapcoAppBundle:Opinion')->getOneBySlug($opinionSlug);
-        $version = $this->getDoctrine()->getRepository('CapcoAppBundle:OpinionVersion')->findOneBySlug($versionSlug);
-
-        if ($version == null) {
-            throw $this->createNotFoundException($this->get('translator')->trans('opinion.error.not_found', array(), 'CapcoAppBundle'));
-        }
-
-        if (false == $opinion->canDisplay()) {
-            throw new AccessDeniedException($this->get('translator')->trans('opinion.error.no_contribute', array(), 'CapcoAppBundle'));
-        }
-
-        $opinionType = $opinion->getOpinionType();
-        $currentStep = $opinion->getStep();
-        $consultation = $currentStep->getConsultation();
-
-        $reporting = new Reporting();
-        $form = $this->createForm(new ReportingType(), $reporting);
-
-        if ($request->getMethod() == 'POST') {
-            if ($form->handleRequest($request)->isValid()) {
-                $em = $this->getDoctrine()->getManager();
-                $reporting->setOpinionVersion($version);
-                $reporting->setReporter($this->getUser());
-                $this->get('capco.notify_manager')->sendNotifyMessage($this->getUser(), $reporting->getStatus(), $form->get('body')->getData());
-                $em->persist($reporting);
-                $em->flush();
-                $this->get('session')->getFlashBag()->add('success', $this->get('translator')->trans('reporting.success'));
-
-                return $this->redirect(
-                    $this->generateUrl(
-                        'app_consultation_show_opinion_version',
-                        [
-                            'consultationSlug' => $consultation->getSlug(),
-                            'stepSlug' => $currentStep->getSlug(),
-                            'opinionTypeSlug' => $opinionType->getSlug(),
-                            'opinionSlug' => $opinion->getSlug(),
-                            'versionSlug' => $version->getSlug(),
-                        ]
-                    )
-                );
-            } else {
-                $this->get('session')->getFlashBag()->add('danger', $this->get('translator')->trans('reporting.error'));
-            }
-        }
-
-        return [
-            'opinion' => $opinion,
-            'form' => $form->createView(),
-        ];
-    }
-
-    /**
      * @Route("/consultations/{consultationSlug}/consultation/{stepSlug}/opinions/{opinionTypeSlug}/{opinionSlug}/report", name="app_report_opinion", defaults={"_feature_flags" = "reporting"})
      * @Template("CapcoAppBundle:Reporting:create.html.twig")
      *
@@ -177,7 +116,7 @@ class ReportingController extends Controller
             throw new AccessDeniedException($this->get('translator')->trans('source.error.no_contribute', array(), 'CapcoAppBundle'));
         }
 
-        $opinion = $source->getLinkedOpinion();
+        $opinion = $source->getOpinion();
         $opinionType = $opinion->getOpinionType();
         $currentStep = $opinion->getStep();
         $consultation = $currentStep->getConsultation();
@@ -248,7 +187,7 @@ class ReportingController extends Controller
             throw new AccessDeniedException($this->get('translator')->trans('argument.error.no_contribute', array(), 'CapcoAppBundle'));
         }
 
-        $opinion = $argument->getLinkedOpinion();
+        $opinion = $argument->getOpinion();
         $opinionType = $opinion->getOpinionType();
         $currentStep = $opinion->getStep();
         $consultation = $currentStep->getConsultation();

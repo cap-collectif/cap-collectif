@@ -25,38 +25,6 @@ use Capco\AppBundle\Event\OpinionVoteChangedEvent;
 
 class OpinionController extends Controller
 {
-
-    /**
-     * @Route("/consultations/{consultationSlug}/consultation/{stepSlug}/opinions/{opinionTypeSlug}/{opinionSlug}/versions/{versionSlug}", name="app_consultation_show_opinion_version")
-     * @Template("CapcoAppBundle:Opinion:show_version.html.twig")
-     */
-    public function showOpinionVersionAction(Request $request, $consultationSlug, $stepSlug, $opinionTypeSlug, $opinionSlug, $versionSlug)
-    {
-        $opinion = $this->getDoctrine()->getRepository('CapcoAppBundle:Opinion')->getOneBySlugJoinUserReports($opinionSlug, $this->getUser());
-
-        $version = $this->getDoctrine()->getRepository('CapcoAppBundle:OpinionVersion')->findOneBySlug($versionSlug);
-
-        if (!$opinion || !$opinion->canDisplay()) {
-            throw $this->createNotFoundException($this->get('translator')->trans('opinion.error.not_found', array(), 'CapcoAppBundle'));
-        }
-
-        $currentStep = $opinion->getStep();
-        $sources = $this->getDoctrine()->getRepository('CapcoAppBundle:Source')->getByOpinionJoinUserReports($opinion, $this->getUser());
-
-        $steps = $this->getDoctrine()->getRepository('CapcoAppBundle:AbstractStep')->getByConsultation($consultationSlug);
-
-        return [
-            'version' => $version,
-            'currentStep' => $currentStep,
-            'consultation' => $currentStep->getConsultation(),
-            'opinion' => $opinion,
-            'sources' => $sources,
-            'opinionType' => $opinion->getOpinionType(),
-            'votes' => $opinion->getVotes(),
-            'consultation_steps' => $steps,
-        ];
-    }
-
     /**
      * @Route("/secure/consultations/{consultationSlug}/consultation/{stepSlug}/opinions/{opinionTypeSlug}/{opinionSlug}/remove/{opinionVote}", name="app_consultation_cancel_vote")
      *

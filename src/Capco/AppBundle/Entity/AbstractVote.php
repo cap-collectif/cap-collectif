@@ -19,7 +19,6 @@ use Capco\AppBundle\Traits\ConfirmableTrait;
  *      "idea"     = "IdeaVote",
  *      "comment"  = "CommentVote",
  *      "opinion"  = "OpinionVote",
- *      "opinionVersion"  = "OpinionVersionVote",
  *      "argument" = "ArgumentVote",
  *      "source"   = "SourceVote"
  * })

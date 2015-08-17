@@ -111,14 +111,6 @@ class Reporting
     /**
      * @var
      *
-     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\OpinionVersion", inversedBy="Reports", cascade={"persist"})
-     * @ORM\JoinColumn(name="opinion_version_id", referencedColumnName="id", onDelete="CASCADE")
-     */
-    private $opinionVersion;
-
-    /**
-     * @var
-     *
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\AbstractComment", inversedBy="Reports", cascade={"persist"})
      * @ORM\JoinColumn(name="comment_id", referencedColumnName="id", onDelete="CASCADE")
      */
@@ -292,17 +284,6 @@ class Reporting
         $this->Idea->addReport($this);
     }
 
-    public function getOpinionVersion()
-    {
-        return $this->opinionVersion;
-    }
-
-    public function setOpinionVersion($opinionVersion)
-    {
-        $this->opinionVersion = $opinionVersion;
-        // $this->opinionVersion->addReport($this);
-    }
-
     /**
      * @return mixed
      */
@@ -350,9 +331,8 @@ class Reporting
             return $this->Idea;
         } elseif ($this->Comment != null) {
             return $this->Comment;
-        } elseif ($this->opinionVersion != null) {
-            return $this->opinionVersion;
         }
+
         return;
     }
 

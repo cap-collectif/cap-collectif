@@ -55,7 +55,8 @@ class Fetcher {
         headers: createHeaders(),
         body: JSON.stringify(body),
       })
-      .then(status);
+      .then(status)
+      .then(json);
   }
 
   delete(uri) {
@@ -63,7 +64,8 @@ class Fetcher {
       method: 'delete',
       headers: createHeaders(),
     })
-    .then(status);
+    .then(status)
+    .then(json);
   }
 
 }

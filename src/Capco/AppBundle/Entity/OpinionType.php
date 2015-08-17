@@ -114,38 +114,26 @@ class OpinionType
     private $isEnabled;
 
     /**
-     * @var bool
-     *
-     * @ORM\Column(name="versionable", type="boolean")
-     */
-    private $versionable = false;
-
-    /**
      * @var string
      *
      * @ORM\Column(name="help_text", type="string", length=255, nullable=true)
      */
     private $helpText = null;
 
-    /**
-     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\OpinionTypeAppendixType", mappedBy="opinionType",  cascade={"persist", "remove"}, orphanRemoval=true)
-     */
-    protected $appendixTypes;
-
     public function __construct()
     {
         $this->voteWidgetType = self::VOTE_WIDGET_TYPE_ACCORD;
         $this->Opinions = new ArrayCollection();
         $this->updatedAt = new \Datetime();
-        $this->appendixTypes = new ArrayCollection([new OpinionTypeAppendixType('Description')]);
     }
 
     public function __toString()
     {
         if ($this->id) {
             return $this->getTitle();
+        } else {
+            return 'New opinion type';
         }
-        return 'New opinion type';
     }
 
     /**
@@ -364,27 +352,6 @@ class OpinionType
         return $this;
     }
 
-    public function getAppendixTypes()
-    {
-        return $this->appendixTypes;
-    }
-
-    public function addAppendixType(OpinionTypeAppendixType $appendixType)
-    {
-        if (!$this->appendixTypes->contains($appendixType)) {
-            $this->appendixTypes->add($appendixType);
-        }
-
-        return $this;
-    }
-
-    public function removeAppendixType(OpinionTypeAppendixType $appendixType)
-    {
-        $this->appendixTypes->removeElement($appendixType);
-
-        return $this;
-    }
-
     /**
      * @return string
      */
@@ -415,18 +382,6 @@ class OpinionType
     public function setIsEnabled($isEnabled)
     {
         $this->isEnabled = $isEnabled;
-    }
-
-    public function isVersionable()
-    {
-        return $this->versionable;
-    }
-
-    public function setVersionable($versionable)
-    {
-        $this->versionable = $versionable;
-
-        return $this;
     }
 
     /**

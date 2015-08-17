@@ -21,8 +21,7 @@ class OpinionPage extends Page
         'Argument no field' => '#argno-input',
         'Argument no buttons' => '.argno-btns',
         'Sources list' => '.panel--sources .panel-heading',
-        'first source vote count' => '#render-opinion-sources li:first-child .opinion__votes-nb',
-        'Vote first source' => '#render-opinion-sources li:first-child .btn',
+        'Vote first source' => '.panel-body .media form',
     );
 
     public function submitArgument($type, $text)
@@ -33,11 +32,10 @@ class OpinionPage extends Page
         $button->press();
     }
 
-    public function getFirstSourceVoteCounter()
+    public function collapseSourcesList()
     {
-        return $this->getElement('first source vote count')->getText();
+        $this->getElement('Sources list')->click();
     }
-
 
     public function voteForFirstSource()
     {

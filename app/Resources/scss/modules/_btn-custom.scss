@@ -26,18 +26,11 @@
     &.btn-#{$name} {
       border: 1px solid $border;
       color: $bg;
-      &:hover,
-      &.active {
+      &:hover {
         background-color: $bg;
         color: $color;
       }
     }
   }
 
-}
-
-
-/* This problem may be specific to MacOS with Chrome */
-.btn:focus, .btn:active:focus {
-  outline: none !important;
 }

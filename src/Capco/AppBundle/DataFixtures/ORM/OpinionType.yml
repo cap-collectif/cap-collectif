@@ -40,4 +40,3 @@ Capco\AppBundle\Entity\OpinionType:
         color: blue
         defaultFilter: positions
         isEnabled: true
-        versionable: true

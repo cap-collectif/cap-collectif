@@ -136,8 +136,6 @@ class User extends BaseUser implements EncoderAwareInterface, SynthesisUserInter
 
     protected $opinions;
 
-    protected $opinionVersions;
-
     protected $ideas;
 
     protected $comments;
@@ -221,7 +219,6 @@ class User extends BaseUser implements EncoderAwareInterface, SynthesisUserInter
         $this->encoder = $encoder;
         $this->roles = array('ROLE_USER');
         $this->opinions = new ArrayCollection();
-        $this->opinionVersions = new ArrayCollection();
         $this->ideas = new ArrayCollection();
         $this->comments = new ArrayCollection();
         $this->arguments = new ArrayCollection();
@@ -524,11 +521,6 @@ class User extends BaseUser implements EncoderAwareInterface, SynthesisUserInter
     public function getOpinions()
     {
         return $this->opinions;
-    }
-
-    public function getOpinionVersions()
-    {
-        return $this->opinionVersions;
     }
 
     public function getIdeas()

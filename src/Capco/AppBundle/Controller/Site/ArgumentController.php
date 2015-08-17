@@ -158,7 +158,7 @@ class ArgumentController extends Controller
             throw new AccessDeniedException($this->get('translator')->trans('argument.error.no_contribute', array(), 'CapcoAppBundle'));
         }
 
-        $opinion = $argument->getLinkedOpinion();
+        $opinion = $argument->getOpinion();
         $opinionType = $opinion->getOpinionType();
         $currentStep = $opinion->getStep();
         $consultation = $currentStep->getConsultation();

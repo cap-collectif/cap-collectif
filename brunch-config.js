@@ -24,7 +24,7 @@ exports.config = {
           'bower_components/jquery/dist/jquery.js',
           'bower_components/readmore/readmore.js',
           'bower_components/ckeditor/ckeditor.js',
-          'bower_components/bootstrap-sass/assets/javascripts/bootstrap.js',
+          'bower_components/bootstrap/assets/javascripts/bootstrap/*.js',
           'bower_components/fancybox/source/jquery.fancybox.pack.js',
           'bower_components/eventEmitter/EventEmitter.js',
 
@@ -40,9 +40,6 @@ exports.config = {
           'bower_components/react-intl/dist/react-intl.min.js',
           'bower_components/react-intl/dist/locale-data/fr.js',
           'bower_components/autosize/dist/autosize.js',
-
-          'bower_components/jsdiff/diff.js',
-
           'app/Resources/js/jsapi.js',
           'app/Resources/js/cookiechoices.js',
           'app/Resources/js/googleCharts.js',
@@ -81,7 +78,11 @@ exports.config = {
       stage: 0
     },
     sass: {
-      mode: 'native'
+      allowCache: true,
+      mode: 'native',
+      options: {
+        includePaths: ['bower_components/bootstrap/assets/stylesheets/bootstrap']
+      }
     },
     'fb-flo': {
       port: 8888,

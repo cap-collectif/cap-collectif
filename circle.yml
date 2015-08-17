@@ -38,7 +38,6 @@ test:
 
     override:
         - fab migrate_test_db
-        - fab load_base_data
-        - fab test
         - fab circleci lint:pr=$CI_PULL_REQUEST
+        - fab test
 

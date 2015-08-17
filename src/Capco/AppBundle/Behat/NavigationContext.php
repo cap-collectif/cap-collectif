@@ -24,6 +24,16 @@ class NavigationContext extends PageObjectContext
     }
 
     /**
+     * @When I collapse sources list
+     */
+    public function iCollapseSourcesList()
+    {
+        $this->getPage('opinion page')
+             ->collapseSourcesList();
+        sleep(1);
+    }
+
+    /**
      * @When I vote for the first source
      */
     public function iVoteForTheFirstSource()
@@ -39,14 +49,6 @@ class NavigationContext extends PageObjectContext
     {
         $this->getPage('idea page')
              ->voteForFirstComment();
-    }
-
-    /**
-     * @Then The first source vote counter should be :value
-     */
-    public function theFirstSourceVoteCounterShouldBe($value)
-    {
-        expect($this->getPage('opinion page')->getFirstSourceVoteCounter())->toBe($value);
     }
 
     /**

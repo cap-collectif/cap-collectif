@@ -5,7 +5,7 @@ Background:
 
 Scenario: Anonymous wants to list events
   Given I visited "events page"
-  Then I should see 6 ".event" elements
+  Then I should see 7 ".event" elements
 
 Scenario: Anonymous wants to list archived events
   Given I visited "events page"

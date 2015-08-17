@@ -109,30 +109,31 @@ class Argument
     private $trashedReason = null;
 
     /**
+     * @var
+     *
      * @ORM\ManyToOne(targetEntity="Capco\UserBundle\Entity\User", inversedBy="arguments")
      * @ORM\JoinColumn(name="author_id", referencedColumnName="id", onDelete="CASCADE")
      */
     private $Author;
 
     /**
+     * @var
+     *
      * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\ArgumentVote", mappedBy="argument", cascade={"persist", "remove"}, orphanRemoval=true)
      */
     private $votes;
 
     /**
+     * @var
+     *
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Opinion", inversedBy="arguments", cascade={"persist"})
      * @ORM\JoinColumn(name="opinion_id", referencedColumnName="id", onDelete="CASCADE")
      */
     private $opinion;
 
-    // ONE OF opinion or opinionVersion : should be in separate classes TODO
     /**
-     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\OpinionVersion", inversedBy="arguments", cascade={"persist"})
-     * @ORM\JoinColumn(name="opinion_version_id", referencedColumnName="id", onDelete="CASCADE")
-     */
-    private $opinionVersion;
-
-    /**
+     * @var string
+     *
      * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\Reporting", mappedBy="Argument", cascade={"persist", "remove"})
      */
     private $Reports;
@@ -141,7 +142,7 @@ class Argument
     {
         $this->votes = new ArrayCollection();
         $this->Reports = new ArrayCollection();
-        $this->updatedAt = new \DateTime();
+        $this->updatedAt = new \Datetime();
         $this->voteCount = 0;
     }
 
@@ -214,13 +215,6 @@ class Argument
     public function getUpdatedAt()
     {
         return $this->updatedAt;
-    }
-
-    public function setUpdatedAt(\DateTime $date)
-    {
-        $this->updatedAt = $date;
-
-        return $this;
     }
 
     /**
@@ -373,8 +367,6 @@ class Argument
     public function setAuthor($Author)
     {
         $this->Author = $Author;
-
-        return $this;
     }
 
     /**
@@ -427,22 +419,8 @@ class Argument
     {
         $this->opinion = $opinion;
         $opinion->addArgument($this);
-
-        return $this;
     }
 
-    public function getOpinionVersion()
-    {
-        return $this->opinionVersion;
-    }
-
-    public function setOpinionVersion($opinionVersion)
-    {
-        $this->opinionVersion = $opinionVersion;
-        // $opinion->addArgument($this);
-
-        return $this;
-    }
     /**
      * @return string
      */
@@ -519,7 +497,7 @@ class Argument
     {
         if ($user != null) {
             foreach ($this->Reports as $report) {
-                if ($report->getReporter() == $user) {
+                if ($report->getUser() == $user) {
                     return true;
                 }
             }
@@ -533,7 +511,7 @@ class Argument
      */
     public function canDisplay()
     {
-        return $this->isEnabled && $this->getLinkedOpinion()->canDisplay();
+        return $this->isEnabled && $this->opinion->canDisplay();
     }
 
     /**
@@ -541,7 +519,7 @@ class Argument
      */
     public function canContribute()
     {
-        return $this->isEnabled && !$this->isTrashed && $this->getLinkedOpinion()->canContribute();
+        return $this->isEnabled && !$this->isTrashed && $this->opinion->canContribute();
     }
 
     /**
@@ -555,14 +533,6 @@ class Argument
         $excerpt = $excerpt.'...';
 
         return $excerpt;
-    }
-
-    public function getLinkedOpinion()
-    {
-        if ($this->opinion) {
-            return $this->opinion;
-        }
-        return $this->opinionVersion->getParent();
     }
 
     // ************************* Lifecycle ***********************************

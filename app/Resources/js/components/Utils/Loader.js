@@ -6,7 +6,7 @@ const Loader = React.createClass({
 
   getDefaultProps() {
     return {
-      show: true,
+      show: false,
     };
   },
 
