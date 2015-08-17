@@ -34,8 +34,6 @@ $container->setParameter('google_app_secret',           set_var('google_app_secr
 $container->setParameter('twitter_app_id',              set_var('twitter_app_id', '***REMOVED***'));
 $container->setParameter('twitter_app_secret',          set_var('twitter_app_secret', '***REMOVED***'));
 
-$container->setParameter('registration_email_address',  set_var('registration_email_address', 'coucou@cap-collectif.com'));
-$container->setParameter('registration_sender_name',    set_var('registration_sender_name', 'Cap Collectif'));
 $container->setParameter('redis_prefix',                set_var('redis_prefix', 'capco'));
 $container->setParameter('shield_login',                set_var('shield_login', '***REMOVED***'));
 $container->setParameter('shield_pwd',                  set_var('shield_pwd', '***REMOVED***'));

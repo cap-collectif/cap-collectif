@@ -100,13 +100,10 @@ fos_user:
         group_manager: sonata.user.orm.group_manager                    # If you're using doctrine orm (use sonata.user.mongodb.user_manager for mongodb)
     service:
         user_manager: sonata.user.orm.user_manager
-        mailer: fos_user.mailer.default
+        mailer: capco.notify_manager
     registration:
         confirmation:
             enabled:    true
-            from_email:
-                address: "%registration_email_address%"
-                sender_name: "%registration_sender_name%"
     change_password:
         form:
             type: capco_user_change_password
