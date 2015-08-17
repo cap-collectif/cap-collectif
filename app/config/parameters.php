@@ -34,8 +34,6 @@ $container->setParameter('google_app_secret',           set_var('google_app_secr
 $container->setParameter('twitter_app_id',              set_var('twitter_app_id', '***REMOVED***'));
 $container->setParameter('twitter_app_secret',          set_var('twitter_app_secret', '***REMOVED***'));
 
-$container->setParameter('registration_email_address',  set_var('registration_email_address', 'coucou@cap-collectif.com'));
-$container->setParameter('registration_sender_name',    set_var('registration_sender_name', 'Cap Collectif'));
 $container->setParameter('redis_prefix',                set_var('redis_prefix', 'capco'));
 $container->setParameter('shield_login',                set_var('shield_login', '***REMOVED***'));
 $container->setParameter('shield_pwd',                  set_var('shield_pwd', '***REMOVED***'));
@@ -48,6 +46,8 @@ $container->setParameter('jwt_key_pass_phrase',         set_var('jwt_key_pass_ph
 $container->setParameter('jwt_token_ttl',               set_var('jwt_token_ttl', 86400));
 
 $container->setParameter('language_analyzer',           set_var('language_analyzer', 'french'));
+
+$container->setParameter('remember_secret',           set_var('remember_secret', '***REMOVED***'));
 
 if (file_exists('app/config/parameters.yml') || file_exists('../app/config/parameters.yml')) {
     $loader->import('parameters.yml');
