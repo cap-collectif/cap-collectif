@@ -9,6 +9,7 @@ Capco\AppBundle\Entity\OpinionVersion:
         isTrashed: false
         author: @user2
         parent: @opinion57
+        comment: bououh
 
     version2:
         title: Révision 2
@@ -19,6 +20,7 @@ Capco\AppBundle\Entity\OpinionVersion:
         isTrashed: false
         author: @user2
         parent: @opinion57
+        comment: bououh
 
     version3:
         title: Révision 3
@@ -29,4 +31,4 @@ Capco\AppBundle\Entity\OpinionVersion:
         isTrashed: false
         author: @user2
         parent: @opinion57
-
+        comment: bououh

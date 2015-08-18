@@ -22,7 +22,9 @@ Feature: Events comments
             "username": @string@,
             "display_name": @string@,
             "unique_id": @string@,
-            "media": @null@,
+            "media": {
+              "url": @string@
+            },
             "_links": {
               "profile": @string@
             }

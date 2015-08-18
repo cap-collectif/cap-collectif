@@ -12,15 +12,44 @@ Feature: Opinions Versions
           "id": @integer@,
           "title": @string@,
           "body": @string@,
+          "comment": @string@,
           "created_at": "@string@.isDateTime()",
           "updated_at": "@string@.isDateTime()",
           "is_trashed": @boolean@,
+
+          "arguments": @...@,
+          "arguments_yes_count": @integer@,
+          "arguments_no_count": @integer@,
           "arguments_count": @integer@,
+
+          "sources": @...@,
           "sources_count": @integer@,
+
+          "votes": @...@,
           "votes_nok": @integer@,
           "votes_ok": @integer@,
           "votes_mitige": @integer@,
           "votes_total": @integer@,
+
+          "parent": {
+            "isContribuable": @boolean@,
+            "id": @integer@,
+            "body": @string@,
+            "title": @string@,
+            "type": {
+              "id": @integer@,
+              "title": @string@,
+              "color": @string@
+            },
+            "_links": {
+              "show": @string@,
+              "edit": @string@,
+              "report": @string@,
+              "type": @string@
+            },
+            "user_vote": @null@,
+            "has_user_reported": @boolean@
+          },
           "author": {
             "username": @string@,
             "display_name": @string@,
@@ -33,12 +62,14 @@ Feature: Opinions Versions
             }
           },
           "_links": {
-            "show": @string@
-          }
+            "show": @string@,
+            "report": @string@
+          },
+          "user_vote": @null@,
+          "has_user_reported": @boolean@
         },
         @...@
-      ],
-      "isOpinionContributable": @boolean@
+      ]
     }
     """
 

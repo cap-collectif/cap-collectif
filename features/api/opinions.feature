@@ -9,21 +9,35 @@ Feature: Opinions
     {
       "opinion": {
         "isContribuable": @boolean@,
+        "is_trashed": @boolean@,
+
         "id": @integer@,
         "title": @string@,
         "body": @string@,
+
         "created_at": "@string@.isDateTime()",
         "updated_at": "@string@.isDateTime()",
-        "is_trashed": @boolean@,
+
+        "type": {
+          "id": @integer@,
+          "title": @string@,
+          "color": @string@
+        },
+
         "arguments_count": @integer@,
-        "arguments": @array@,
+        "arguments_yes_count": @integer@,
+        "arguments_no_count": @integer@,
+        "arguments": @...@,
+
         "sources_count": @integer@,
-        "sources": @array@,
-        "votes": @array@,
+        "sources": @...@,
+
+        "votes": @...@,
         "votes_nok": @integer@,
         "votes_ok": @integer@,
         "votes_mitige": @integer@,
         "votes_total": @integer@,
+
         "appendicies": [
           {
             "body": @string@,
@@ -34,6 +48,7 @@ Feature: Opinions
           },
           @...@
         ],
+
         "author": {
           "username": @string@,
           "display_name": @string@,
@@ -45,12 +60,14 @@ Feature: Opinions
             "profile": @string@
           }
         },
+
         "_links": {
           "show": @string@,
           "edit": @string@,
           "report": @string@,
           "type": @string@
         },
+
         "has_user_reported": @boolean@,
         "user_vote": @null@
       }
@@ -98,7 +115,7 @@ Feature: Opinions
   ### List
 
     Scenario: API client wants to list sources of an opinion
-    When I send a GET request to "/api/opinions/2/sources"
+    When I send a GET request to "/api/opinions/3/sources"
     Then the JSON response should match:
     """
     {
