@@ -53,7 +53,7 @@ def migrate_test_db():
 @task
 def load_base_data():
     with lcd(env.local_dir):
-        local('php app/console capco:load-base-data -n -e test')
+        local('php app/console capco:load-base-data --force -n -e test')
 
 @task
 def reinit_data():
