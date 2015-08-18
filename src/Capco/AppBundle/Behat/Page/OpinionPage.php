@@ -34,7 +34,7 @@ class OpinionPage extends Page
 
     public function clickAddSource()
     {
-        $this->getElement('source tab')->click();
+        $this->getElement('source add')->click();
     }
 
     public function submitArgument($type, $text)

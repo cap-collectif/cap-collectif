@@ -63,11 +63,11 @@ Feature: Opinions
       | opinionSlug      | opinion-3                        |
     And I wait 5 seconds
     And I should see "50 votes" in the ".opinion__votes" element
-    When I press "Modifier"
+    When I follow "Modifier"
     And I fill in the following:
       | capco_app_opinion_body      | Je modifie ma proposition !   |
     And I check "capco_app_opinion_confirm"
-    And I press "Modifier"
+    And I follow "Modifier"
     Then I should see "Merci ! Votre proposition a bien été modifiée."
     And I should see "Aucun vote" in the ".opinion__votes" element
 
@@ -80,7 +80,7 @@ Feature: Opinions
       | opinionTypeSlug  | enjeux                           |
       | opinionSlug      | opinion-3                        |
     And I wait 5 seconds
-    Then I should not see "Modifier" in the "#arg-3" element
+    Then I should not see "Modifier"
 
   @javascript
   Scenario: Author of an opinion try to update without checking the confirm checkbox
@@ -91,9 +91,9 @@ Feature: Opinions
       | opinionTypeSlug  | enjeux                           |
       | opinionSlug      | opinion-3                        |
     And I wait 5 seconds
-    When I press "Modifier"
+    When I follow "Modifier"
     And I fill in the following:
       | capco_app_opinion_body | Je modifie ma proposition !   |
-    And I press "Modifier"
+    And I follow "Modifier"
     Then I should see "Merci de confirmer la perte de vos votes pour continuer."
 
