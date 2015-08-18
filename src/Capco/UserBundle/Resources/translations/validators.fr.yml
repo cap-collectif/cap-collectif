@@ -1,5 +1,3 @@
-already_used_email: Cette adresse électronique est déjà utilisée.
-
 user:
   register:
     invalid_email: Veuillez entrer une adresse électronique valide.
