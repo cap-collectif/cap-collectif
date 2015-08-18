@@ -1,15 +1,15 @@
 Feature: Source
 
   @javascript @database
-  Scenario: Can create a source in contribuable opinion
+  Scenario: User wants to add a source in a contribuable opinion
     Given I am logged in as user
     And I visited "opinion page" with:
       | consultationSlug | croissance-innovation-disruption |
       | stepSlug         | collecte-des-avis                |
       | opinionTypeSlug  | causes                           |
       | opinionSlug      | opinion-2                        |
-    When I follow "Aucune source"
-    And I wait "3" seconds
+    And I go on the sources tab
+    And I should see "Aucune source"
     When I click the "#render-opinion-sources .btn-primary" element
     And I wait "3" seconds
     And I fill in the following:
@@ -19,7 +19,7 @@ Feature: Source
     And I select "Politique" from "sourceCategory"
     And I click the ".modal-footer .btn-primary" element
     And I wait "5" seconds
-    Then I should see "2 sources"
+    Then I should see "1 source"
 
   @javascript
   Scenario: Can not create a source in non-contribuable consultation
@@ -29,8 +29,7 @@ Feature: Source
       | stepSlug           | collecte-des-avis-pour-une-meilleur-strategie         |
       | opinionTypeSlug    | causes                                                |
       | opinionSlug        | opinion-51                                            |
-    When I follow "Aucune source"
-    And I wait "1" seconds
+    And I go on the sources tab
     Then I should not see "Proposer une source"
 
  @javascript @database
