@@ -1,0 +1,14 @@
+Capco\AppBundle\Entity\OpinionTypeAppendixType:
+    exclusion_policy: ALL
+    properties:
+        id:
+            expose: true
+            type: integer
+        title:
+            expose: true
+            type: string
+            groups: [Opinions]
+        position:
+            expose: true
+            type: integer
+            groups: [Opinions]

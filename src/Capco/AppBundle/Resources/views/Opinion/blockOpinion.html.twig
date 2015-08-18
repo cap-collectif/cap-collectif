@@ -1,7 +1,7 @@
 {% set nbVotes = opinion.getVoteCountAll %}
 {% set nbArguments = opinion.argumentsCount %}
 {% set nbSources = opinion.sourcesCount %}
-<li class="opinion  has-chart" data-ok="{{ opinion.voteCountOk }}" data-nok="{{ opinion.voteCountNok }}" data-mitige="{{ opinion.voteCountMitige }}" data-pie-id="{{ opinion.id }}">
+<li class="opinion has-chart" data-ok="{{ opinion.voteCountOk }}" data-nok="{{ opinion.voteCountNok }}" data-mitige="{{ opinion.voteCountMitige }}" data-pie-id="{{ opinion.id }}">
     <div class="row">
         <div class="col-xs-12  col-sm-8  col-md-9  col-lg-10">
             {% include 'CapcoAppBundle:Opinion:opinion_body.html.twig' %}

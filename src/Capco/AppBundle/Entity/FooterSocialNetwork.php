@@ -4,6 +4,7 @@ namespace Capco\AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
+use Capco\AppBundle\Traits\PositionableTrait;
 
 /**
  * FooterSocialNetwork.
@@ -13,6 +14,8 @@ use Gedmo\Mapping\Annotation as Gedmo;
  */
 class FooterSocialNetwork
 {
+    use PositionableTrait;
+
     public static $socialIcons = [
         'link-1' => 'Site externe',
         'facebook' => 'Facebook',
@@ -58,13 +61,6 @@ class FooterSocialNetwork
      * @ORM\Column(name="style", type="string", length=20)
      */
     private $style;
-
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="position", type="integer")
-     */
-    private $position;
 
     /**
      * @var bool
@@ -186,30 +182,6 @@ class FooterSocialNetwork
     public function getStyle()
     {
         return $this->style;
-    }
-
-    /**
-     * Set position.
-     *
-     * @param int $position
-     *
-     * @return FooterSocialNetwork
-     */
-    public function setPosition($position)
-    {
-        $this->position = $position;
-
-        return $this;
-    }
-
-    /**
-     * Get position.
-     *
-     * @return int
-     */
-    public function getPosition()
-    {
-        return $this->position;
     }
 
     /**

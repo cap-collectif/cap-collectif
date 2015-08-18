@@ -9,9 +9,9 @@ class LoaderDataFixture extends DataFixtureLoader implements OrderedFixtureInter
 {
     protected function getProcessors()
     {
-        return array(
+        return [
             new MediaProcessor($this->container),
-        );
+        ];
     }
 
     public function getOrder()
@@ -24,7 +24,7 @@ class LoaderDataFixture extends DataFixtureLoader implements OrderedFixtureInter
      */
     protected function getFixtures()
     {
-        return array(
+        return [
             __DIR__.'/MediaContext.yml',
             __DIR__.'/MediaCategory.yml',
             __DIR__.'/Media.yml',
@@ -42,13 +42,16 @@ class LoaderDataFixture extends DataFixtureLoader implements OrderedFixtureInter
             __DIR__.'/IdeaComment.yml',
             __DIR__.'/IdeaVote.yml',
             __DIR__.'/OpinionType.yml',
+            __DIR__.'/OpinionTypeAppendixType.yml',
             __DIR__.'/ConsultationType.yml',
             __DIR__.'/Consultation.yml',
             __DIR__.'/ConsultationStep.yml',
             __DIR__.'/PresentationStep.yml',
             __DIR__.'/OtherStep.yml',
             __DIR__.'/Opinion.yml',
+            __DIR__.'/OpinionAppendix.yml',
             __DIR__.'/OpinionVote.yml',
+            __DIR__.'/OpinionVersion.yml',
             __DIR__.'/Category.yml',
             __DIR__.'/Source.yml',
             __DIR__.'/SourceVote.yml',
@@ -67,6 +70,6 @@ class LoaderDataFixture extends DataFixtureLoader implements OrderedFixtureInter
             __DIR__.'/Video.yml',
             __DIR__.'/Section.yml',
             __DIR__.'/HighlightedContent.yml',
-        );
+        ];
     }
 }

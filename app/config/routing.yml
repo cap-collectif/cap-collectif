@@ -3,6 +3,7 @@ capco_admin:
     type:     annotation
     prefix:   /
 
+# API
 capco_api_synthesis:
   resource: "@CapcoAppBundle/Controller/Api/SynthesisController.php"
   type: rest
@@ -32,6 +33,28 @@ capco_api_posts:
   resource: "@CapcoAppBundle/Controller/Api/PostsController.php"
   type: rest
   prefix: /api
+
+capco_api_opinions:
+  resource: "@CapcoAppBundle/Controller/Api/OpinionsController.php"
+  type: rest
+  prefix: /api
+
+capco_api_arguments:
+  resource: "@CapcoAppBundle/Controller/Api/ArgumentsController.php"
+  type: rest
+  prefix: /api
+
+capco_api_sources:
+  resource: "@CapcoAppBundle/Controller/Api/SourcesController.php"
+  type: rest
+  prefix: /api
+
+capco_api_categories:
+  resource: "@CapcoAppBundle/Controller/Api/CategoriesController.php"
+  type: rest
+  prefix: /api
+
+# App
 
 capco_app:
     resource: "@CapcoAppBundle/Controller/Site"

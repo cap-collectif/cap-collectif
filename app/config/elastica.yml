@@ -3,12 +3,7 @@ fos_elastica:
     default: { host: localhost, port: 9200 }
   indexes:
     app:
-      use_alias: true
       index_name: app_prod
-      settings:
-        index:
-          number_of_shards: 3
-          number_of_replicas: 0
       finder: ~
       types:
       # User

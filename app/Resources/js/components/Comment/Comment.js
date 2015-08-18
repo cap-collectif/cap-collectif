@@ -35,7 +35,7 @@ const Comment = React.createClass({
   render() {
     const comment = this.props.comment;
     return (
-      <li className="opinion  opinion--comment" >
+      <li className="opinion opinion--comment" >
         <div className="opinion__body">
           <UserAvatar user={comment.author} />
           <div className="opinion__data">

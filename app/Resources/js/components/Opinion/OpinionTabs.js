@@ -1,0 +1,73 @@
+import OpinionArgumentForm from './OpinionArgumentForm';
+import OpinionSourceForm from './OpinionSourceForm';
+import OpinionSourceList from './OpinionSourceList';
+import OpinionArgumentList from './OpinionArgumentList';
+import Fetcher from '../../services/Fetcher';
+
+const TabbedArea = ReactBootstrap.TabbedArea;
+const TabPane = ReactBootstrap.TabPane;
+const Row = ReactBootstrap.Row;
+const Col = ReactBootstrap.Col;
+const FormattedMessage = ReactIntl.FormattedMessage;
+
+const OpinionTabs = React.createClass({
+  propTypes: {
+    opinion: React.PropTypes.object.isRequired,
+  },
+  mixins: [ReactIntl.IntlMixin],
+
+  getInitialState() {
+    return {
+      categories: [],
+    };
+  },
+
+  componentDidMount() {
+    Fetcher
+    .get('/categories')
+    .then((data) => {
+      this.setState({categories: data});
+      return true;
+    });
+  },
+
+  render() {
+    const opinion = this.props.opinion;
+    return (
+      <TabbedArea defaultActiveKey={1} animation={false}>
+        <TabPane eventKey={1} tab={
+          <FormattedMessage message={this.getIntlMessage('global.arguments')} num={opinion.arguments_count} />
+        }>
+          <Row>
+            <Col sm={12} md={6}>
+               <div className="opinion opinion--add-argument block block--bordered">
+                  <OpinionArgumentForm type="yes" opinion={this.props.opinion} />
+                </div>
+                <OpinionArgumentList type="yes" opinion={this.props.opinion} />
+            </Col>
+            <Col sm={12} md={6}>
+              <div className="opinion opinion--add-argument block block--bordered">
+                <OpinionArgumentForm type="no" opinion={this.props.opinion} />
+              </div>
+              <OpinionArgumentList type="no" opinion={this.props.opinion} />
+            </Col>
+          </Row>
+        </TabPane>
+        <TabPane eventKey={2} tab={
+          <FormattedMessage message={this.getIntlMessage('global.sources')} num={opinion.sources_count} />
+        }>
+          <br />
+          <Row>
+            <OpinionSourceForm categories={this.state.categories} opinion={this.props.opinion} />
+          </Row>
+          <Row>
+            <OpinionSourceList sources={this.props.opinion.sources} />
+          </Row>
+        </TabPane>
+      </TabbedArea>
+    );
+  },
+
+});
+
+export default OpinionTabs;

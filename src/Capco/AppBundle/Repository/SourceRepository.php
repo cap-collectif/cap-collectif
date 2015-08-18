@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\Repository;
 
 use Capco\AppBundle\Entity\ConsultationStep;
+use Capco\AppBundle\Entity\Opinion;
 use Doctrine\ORM\EntityRepository;
 
 /**
@@ -13,6 +14,38 @@ use Doctrine\ORM\EntityRepository;
  */
 class SourceRepository extends EntityRepository
 {
+
+    public function getOneByOpinion(Opinion $opinion, $offset, $limit, $filter)
+    {
+        $qb = $this->getIsEnabledQueryBuilder()
+            ->addSelect('ca', 'o', 'aut', 'm', 'media')
+            ->leftJoin('s.Category', 'ca')
+            ->leftJoin('s.Media', 'media')
+            ->leftJoin('s.Opinion', 'o')
+            ->leftJoin('s.Author', 'aut')
+            ->leftJoin('aut.Media', 'm')
+            ->andWhere('s.isTrashed = false')
+            ->andWhere('s.Opinion = :opinion')
+            ->setParameter('opinion', $opinion)
+        ;
+
+        if ($filter === 'old') {
+            $qb->addOrderBy('s.updatedAt', 'ASC');
+        }
+
+        if ($filter === 'last') {
+            $qb->addOrderBy('s.updatedAt', 'DESC');
+        }
+
+        if ($filter === 'popular') {
+            $qb->addOrderBy('s.voteCount', 'DESC');
+        }
+
+
+        return $qb->getQuery()->getResult();
+    }
+
+
     /**
      * Get one source by slug.
      *

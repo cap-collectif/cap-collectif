@@ -333,6 +333,7 @@ admin:
       created_at: Création
       updated_at: Mise à jour
       position: Position
+      versionable: Versionable
     opinion_vote:
       opinion: Proposition
       voter: Auteur

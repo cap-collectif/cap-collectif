@@ -31,6 +31,22 @@ services:
         calls:
             - [ setTranslationDomain, [SonataAdminBundle]]
 
+    capco_admin.admin.appendix:
+        class: Capco\AdminBundle\Admin\OpinionAppendixAdmin
+        arguments: [~, Capco\AppBundle\Entity\OpinionAppendix, SonataAdminBundle:CRUD]
+        tags:
+            - {name: sonata.admin, manager_type: orm, group: admin.group.moderation, label: admin.label.appendix}
+        calls:
+            - [ setTranslationDomain, [SonataAdminBundle]]
+
+    capco_admin.admin.appendixTypes:
+        class: Capco\AdminBundle\Admin\OpinionTypeAppendixTypeAdmin
+        arguments: [~, Capco\AppBundle\Entity\OpinionTypeAppendixType, SonataAdminBundle:CRUD]
+        tags:
+            - {name: sonata.admin, manager_type: orm, group: admin.group.moderation, label: admin.label.appendixTypes}
+        calls:
+            - [ setTranslationDomain, [SonataAdminBundle]]
+
     capco_admin.admin.argument_vote:
         class: Capco\AdminBundle\Admin\ArgumentVoteAdmin
         arguments: [~, Capco\AppBundle\Entity\ArgumentVote, SonataAdminBundle:CRUD]

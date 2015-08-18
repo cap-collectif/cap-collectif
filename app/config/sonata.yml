@@ -19,6 +19,7 @@ sonata_admin:
                     - capco_admin.admin.source
                     - capco_admin.admin.idea
                     - capco_admin.admin.comment
+                    - capco_admin.admin.appendix
             admin.group.content:
                 items:
                     - capco_admin.admin.highlighted

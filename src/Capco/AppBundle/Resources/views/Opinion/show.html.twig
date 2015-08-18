@@ -33,132 +33,78 @@
                 {{ render(controller('CapcoAppBundle:Site/Consultation:showMeta', {'consultationSlug': consultation.slug, 'currentStepSlug': currentStep.slug})) }}
             </div>
 
-            {% set nbVotes = (opinion.getVoteCountAll) %}
-            {% set nbArguments = (opinion.argumentsCount) %}
-            {% set nbSources = (opinion.sourcesCount) %}
-            <div class="col-xs-12  col-sm-8  col-md-9 has-chart" id="details" data-ok="{{ opinion.voteCountOk }}" data-nok="{{ opinion.voteCountNok }}" data-mitige="{{ opinion.voteCountMitige }}" data-pie-id="{{ opinion.id }}">
-                <div class="block  block--bordered  opinion__details">
-                    <div class="opinion  opinion--{{ opinion.opinionType.color }}  opinion--current">
-                        <div class="opinion__header  opinion__header--centered">
-                            <a class="neutral-hover  pull-left  h4  opinion__header__back" href="{% if opinion.isTrashed %}{{ path('app_consultation_show_trashed', {'consultationSlug': consultation.slug}) }}{% else %}{{ path('app_consultation_show_opinions', {'consultationSlug': consultation.slug, 'stepSlug': currentStep.slug, 'opinionTypeSlug': opinionType.slug}) }}{% endif %}">
-                                <i class="cap cap-arrow-1"></i>
-                                <span class="hidden-xs  hidden-sm"> {{ 'opinion.show.back'|trans({}, 'CapcoAppBundle') }}</span>
+            <div id="render-opinion" data-opinion="{{ opinion.id }}"></div>
+            <div class="col-xs-12 col-sm-8 col-md-9 pull-right">
+
+                  <!-- Nav tabs -->
+                  <ul class="nav nav-tabs" role="tablist">
+                    <li role="presentation" class="active">
+                        <a href="#arguments" aria-controls="arguments" role="tab" data-toggle="tab">
+                            {% transchoice (opinion.arguments|length) with {'%count%': (opinion.arguments|length)} from 'CapcoAppBundle' %}argument.count{% endtranschoice %}
+                        </a>
+                    </li>
+                    {% if opinion.opinionType.isVersionable %}
+                        <li role="presentation">
+                            <a href="#versions" aria-controls="versions" role="tab" data-toggle="tab">
+                                {% transchoice (opinion.versions|length) with {'%count%': (opinion.versions|length)} from 'CapcoAppBundle' %}version.show.count{% endtranschoice %}
                             </a>
-                            <h2 class="h4  opinion__header__title">{{ opinion.opinionType.shortName|capitalize }} </h2>
+                        </li>
+                    {% endif %}
+                    <li role="presentation">
+                        <a href="#sources" aria-controls="sources" role="tab" data-toggle="tab">
+                            {% transchoice (sources|length) with {'%count%': (sources|length)} from 'CapcoAppBundle' %}source.show.count{% endtranschoice %}
+                        </a>
+                    </li>
+                  </ul>
+
+                  <!-- Tab panes -->
+                  <div class="opinion-tabs tab-content">
+
+                    <!-- Arguments -->
+                    <div role="tabpanel" class="tab-pane active" id="arguments">
+                        <div class="row">
+                            <div class="col-sm-12  col-md-6">
+                                {% if opinion.canContribute %}
+                                    {% set argType = 1 %}
+                                    {% set form = argumentFormYes %}
+                                    {% include '@CapcoApp/Argument/create.html.twig' %}
+                                {% endif %}
+                                {{ render(controller('CapcoAppBundle:Site/Argument:showArguments', {
+                                    'consultation': consultation, 'step': currentStep, 'opinionType': opinionType,
+                                    'opinion': opinion, 'type': 1, 'form': sortArgumentsForm, 'argumentSort': argumentSort
+                                    }))
+                                }}
+                            </div>
+                            <div class="col-sm-12  col-md-6">
+                                {% if opinion.canContribute %}
+                                    {% set argType = 0 %}
+                                    {% set form = argumentFormNo %}
+                                    {% include '@CapcoApp/Argument/create.html.twig' %}
+                                {% endif %}
+                                {{ render(controller('CapcoAppBundle:Site/Argument:showArguments', {
+                                    'consultation': consultation, 'opinionType': opinionType, 'opinion': opinion,
+                                    'type': 0, 'form': sortArgumentsForm, 'argumentSort': argumentSort
+                                    }))
+                                }}
+                            </div>
                         </div>
-                        {% include 'CapcoAppBundle:Opinion:opinion_body.html.twig' %}
                     </div>
 
-                    <div class="opinion__description">
-                        {% if(nbVotes > 0) %}
-                            <div id="piechart-{{ opinion.id }}" class="opinion__chart  center-block"></div>
-                        {% endif %}
-                        {{ opinion.body|raw }}
-                        <div class="opinion__buttons">
-                            {% set opinionVoteCounts = { (opinionVoteTypes['ok']): opinion.voteCountOk, (opinionVoteTypes['nok']): opinion.voteCountNok, (opinionVoteTypes['mitige']): opinion.voteCountMitige } %}
-                            {% set previousValue = null %}
-                            {% if previousVote is not null %}
-                                {% set previousValue = previousVote.value %}
-                            {% endif %}
+                    <!-- Nouvelles versions -->
+                    {% if opinion.opinionType.isVersionable %}
+                        <div role="tabpanel" class="tab-pane" id="versions">
+                            <div id="render-opinion-versions" data-opinion="{{ opinion.id }}" data-text="{{ opinion.body }}"></div>
+                        </div>
+                    {% endif %}
 
-                            {% if opinion.canContribute %}
+                    <!-- Sources -->
+                    <div role="tabpanel" class="tab-pane" id="sources">
+                        <div id="render-opinion-sources" data-opinion="{{ opinion.id }}"></div>
+                    </div>
+                  </div>
 
-                                {% form_theme opinionVoteForm 'CapcoAppBundle:Form:opinion_vote.html.twig' %}
-                                {{ form_start(opinionVoteForm, {'attr': {'class': 'vote-form '} }) }}
-                                {{ form_errors(opinionVoteForm) }}
-                                {% if opinion.opinionType.helpText %}
-                                    <p class="excerpt small" style="margin-bottom: 0">{{ opinion.opinionType.helpText }}</p>
-                                {% endif %}
-                                {{ form_widget(opinionVoteForm.value, {'previousType': previousValue, 'typeStyles': opinionVoteStyles}) }}
-                                {{ form_rest(opinionVoteForm) }}
-                                {{ form_end(opinionVoteForm) }}
-
-                                {% if (previousVote) %}
-                                    <div class="opinion__vote-group">
-                                        {% set tokenRemoveVote = csrf_token('remove_opinion_vote') %}
-                                        <form method="POST" style="display: inline-block;" action="{{ path('app_consultation_cancel_vote' ,{'consultationSlug': consultation.slug, 'stepSlug': currentStep.slug, 'opinionTypeSlug': opinionType.slug, 'opinionSlug': opinion.slug, 'opinionVote': previousVote.id } ) }}">
-                                            <button class="btn  btn-info"> {{ 'source.vote.delete'|trans({}, 'CapcoAppBundle') }}</button>
-                                            <input type="hidden" name="_csrf_token" value="{{ tokenRemoveVote }}">
-                                        </form>
-                                    </div>
-                                {% endif %}
-
-                            {% endif %}
-
-                            <div class="pull-right  opinion__action-buttons">
-
-                                <div class="opinion__vote-group">
-                                    {{ sonata_block_render({'type': 'capco.block.service.share_button'}, {
-                                        'url': (url('app_consultation_show_opinion', {'consultationSlug': consultation.slug, 'stepSlug': currentStep.slug, 'opinionTypeSlug': opinionType.slug, 'opinionSlug': opinion.slug}) ~ '#details'),
-                                        'title': opinion.title,
-                                        'btn_classes': 'btn-dark-gray  btn--outline',
-                                    }) }}
-                                </div>
-
-                                {% if is_feature_enabled('reporting') %}
-                                    <div class="opinion__vote-group">
-                                        {% if opinion.reports | length > 0 %}
-                                            <button disabled="disabled" class="btn  btn-dark-gray"><i class="cap cap-flag-1"></i> {{ 'opinion.report.reported'|trans({}, 'CapcoAppBundle') }}</button>
-                                        {% else %}
-                                            <a href="{{ path('app_report_opinion' ,{'consultationSlug': consultation.slug, 'stepSlug': currentStep.slug, 'opinionTypeSlug': opinionType.slug, 'opinionSlug': opinion.slug } ) }}" class="btn  btn-dark-gray  btn--outline  connection-popover-js"><i class="cap cap-flag-1"></i> {{ 'opinion.report.submit'|trans({}, 'CapcoAppBundle') }}</a>
-                                        {% endif %}
-                                    </div>
-                                {% endif %}
-
-                                {% if opinion.canContribute and app.user is not null and app.user == opinion.Author %}
-                                    <div class="opinion__vote-group">
-                                        <a href="{{ path('app_consultation_edit_opinion' ,{'consultationSlug': consultation.slug, 'stepSlug': currentStep.slug, 'opinionTypeSlug': opinion.opinionType.slug, 'opinionSlug': opinion.slug } ) }}" class="btn  btn-dark-gray  btn--outline"><i class="cap cap-pencil-1"></i> {{ 'opinion.update.button'|trans({}, 'CapcoAppBundle') }}</a>
-                                    </div>
-                                {% endif %}
-
-                            </div>
-
-                        </div> <!-- .opinion__buttons -->
-
-                        <div class="panel-group" id="accordion">
-                            <div class="panel panel-default panel--sources">
-                                <div class="panel-heading" data-toggle="collapse" data-target="#collapseOne" style="cursor:pointer;">
-                                    <h4 class="panel-title">
-                                        {% transchoice (sources|length) with {'%count%': (sources|length)} from 'CapcoAppBundle' %}source.show.count{% endtranschoice %}
-                                        {% if sources|length > 0 %} <i class="cap cap-arrow-67 pull-right"></i>{% endif %}
-                                    </h4>
-                                    {% if opinion.canContribute %}
-                                        <p class="sources__btn"><a id="addSourceLink" href="{{ path('app_new_source' ,{'consultationSlug': consultation.slug, 'stepSlug': currentStep.slug, 'opinionTypeSlug': opinionType.slug, 'opinionSlug': opinion.slug} ) }}" class="btn-sm btn btn-default connection-popover-js" data-container="body"><i class="cap cap-add-1"></i> {{ 'source.create.button'|trans({}, 'CapcoAppBundle') }}</a></p>
-                                    {% endif %}
-                                </div>
-                                {% if sources|length > 0 %}
-                                <div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
-                                    <div class="panel-body">
-                                        <ul class="media-list  opinion__list">
-                                            {% for source in sources %}
-                                                {% include 'CapcoAppBundle:Source:blockSource.html.twig' with {'source': source, 'opinion': opinion, 'opinionType': opinionType, 'consultation': consultation } only %}
-                                            {% endfor %}
-                                        </ul>
-                                    </div>
-                                </div>
-                                {% endif %}
-                            </div>
-                        </div> <!-- .panel-group -->
-                    </div> <!-- .opinion__description -->
                 </div>
-                <div class="row">
-                    <div class="col-sm-12  col-md-6">
-                        {% if opinion.canContribute %}
-                            {% set argType = 1 %}
-                            {% set form = argumentFormYes %}
-                            {% include '@CapcoApp/Argument/create.html.twig' %}
-                        {% endif %}
-                        {{ render(controller('CapcoAppBundle:Site/Argument:showArguments', {'consultation': consultation, 'step': currentStep, 'opinionType': opinionType, 'opinion': opinion, 'type': 1, 'form': sortArgumentsForm, 'argumentSort': argumentSort})) }}
-                    </div>
-                    <div class="col-sm-12  col-md-6">
-                        {% if opinion.canContribute %}
-                            {% set argType = 0 %}
-                            {% set form = argumentFormNo %}
-                            {% include '@CapcoApp/Argument/create.html.twig' %}
-                        {% endif %}
-                        {{ render(controller('CapcoAppBundle:Site/Argument:showArguments', {'consultation': consultation, 'opinionType': opinionType, 'opinion': opinion, 'type': 0, 'form': sortArgumentsForm, 'argumentSort': argumentSort})) }}
-                    </div>
-                </div>
+
             </div> <!-- col-xs-12  col-sm-4  col-md-3 -->
         </div> <!-- .row -->
     </div>
@@ -167,9 +113,6 @@
 {% block javascripts %}
     {{ parent() }}
     <script type="text/javascript">
-        $("#addSourceLink").on('click', function (e) {
-            e.stopPropagation();
-        });
         {% if null == app.user %}
             App.initPopovers('.connection-popover-js', {
                 placement: "top",

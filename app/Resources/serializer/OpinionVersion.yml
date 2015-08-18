@@ -1,0 +1,83 @@
+Capco\AppBundle\Entity\OpinionVersion:
+    exclusion_policy: ALL
+    properties:
+        id:
+            expose: true
+            type: integer
+            groups: [OpinionVersions]
+        title:
+            expose: true
+            type: string
+            groups: [OpinionVersions]
+        body:
+            expose: true
+            type: string
+            groups: [OpinionVersions]
+        comment:
+            expose: true
+            type: string
+            groups: [OpinionVersions]
+        parent:
+            expose: true
+            groups: [OpinionVersions]
+        createdAt:
+            expose: true
+            type: DateTime
+            groups: [OpinionVersions]
+        updatedAt:
+            expose: true
+            type: DateTime
+            groups: [OpinionVersions]
+        voteCountNok:
+            expose: true
+            type: integer
+            serialized_name: votes_nok
+            groups: [OpinionVersions]
+        voteCountOk:
+            expose: true
+            type: integer
+            serialized_name: votes_ok
+            groups: [OpinionVersions]
+        voteCountMitige:
+            expose: true
+            type: integer
+            serialized_name: votes_mitige
+            groups: [OpinionVersions]
+        arguments:
+            expose: true
+            groups: [OpinionVersions]
+        argumentsCount:
+            expose: true
+            type: integer
+            groups: [OpinionVersions]
+        votes:
+            expose: true
+            groups: [OpinionVersions]
+        sources:
+            expose: true
+            groups: [OpinionVersions]
+        sourcesCount:
+            expose: true
+            type: integer
+            groups: [OpinionVersions]
+        author:
+            expose: true
+            type: Capco\UserBundle\Entity\User
+            groups: [OpinionVersions, UserMedias]
+        isTrashed:
+            expose: true
+            type: boolean
+            groups: [OpinionVersions]
+    virtual_properties:
+        getVoteCountAll:
+            serialized_name: votes_total
+            type: integer
+            groups: [OpinionVersions]
+        getArgumentForCount:
+            type: integer
+            serialized_name: arguments_yes_count
+            groups: [OpinionVersions]
+        getArgumentAgainstCount:
+            type: integer
+            serialized_name: arguments_no_count
+            groups: [OpinionVersions]

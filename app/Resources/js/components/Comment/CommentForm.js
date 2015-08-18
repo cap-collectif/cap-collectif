@@ -134,7 +134,7 @@ const CommentForm = React.createClass({
               <textarea valueLink={this.linkState('body')}
                 name="body"
                 onFocus={this.expand.bind(this, true)}
-                placeholder={this.getIntlMessage('global.comment')}
+                placeholder={this.getIntlMessage('comment.write')}
                 ref="body" rows="2" className="form-control"
               />
             </div>

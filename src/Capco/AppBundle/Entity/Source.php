@@ -99,9 +99,16 @@ class Source
      * @var
      *
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Opinion", inversedBy="Sources", cascade={"persist"})
-     * @ORM\JoinColumn(name="opinion_id", referencedColumnName="id", nullable=false, onDelete="CASCADE")
+     * @ORM\JoinColumn(name="opinion_id", referencedColumnName="id", nullable=true, onDelete="CASCADE")
      */
     private $Opinion;
+
+    // ONE OF opinion or opinionVersion : should be in separate classes TODO
+    /**
+     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\OpinionVersion", inversedBy="sources", cascade={"persist"})
+     * @ORM\JoinColumn(name="opinion_version_id", referencedColumnName="id", onDelete="CASCADE")
+     */
+    private $opinionVersion;
 
     /**
      * @var
@@ -204,6 +211,8 @@ class Source
     public function setId($id)
     {
         $this->id = $id;
+
+        return $this;
     }
 
     /**
@@ -244,6 +253,8 @@ class Source
     public function setSlug($slug)
     {
         $this->slug = $slug;
+
+        return $this;
     }
 
     /**
@@ -310,6 +321,13 @@ class Source
         return $this->updatedAt;
     }
 
+    public function setUpdatedAt($updatedAt)
+    {
+        $this->updatedAt = $updatedAt;
+
+        return $this;
+    }
+
     /**
      * Get isEnabled.
      *
@@ -348,6 +366,8 @@ class Source
     public function setAuthor($Author)
     {
         $this->Author = $Author;
+
+        return $this;
     }
 
     /**
@@ -367,6 +387,18 @@ class Source
     {
         $this->Opinion = $Opinion;
         $this->Opinion->addSource($this);
+
+        return $this;
+    }
+
+    public function getOpinionVersion()
+    {
+        return $this->opinionVersion;
+    }
+
+    public function setOpinionVersion($opinionVersion)
+    {
+        $this->opinionVersion = $opinionVersion;
 
         return $this;
     }
@@ -406,6 +438,8 @@ class Source
     public function setMedia($Media)
     {
         $this->Media = $Media;
+
+        return $this;
     }
 
     /**
@@ -422,6 +456,8 @@ class Source
     public function setType($type)
     {
         $this->type = $type;
+
+        return $this;
     }
 
     /**
@@ -506,6 +542,8 @@ class Source
     public function setVoteCount($voteCount)
     {
         $this->voteCount = $voteCount;
+
+        return $this;
     }
 
     /**
@@ -588,9 +626,14 @@ class Source
 
     // *************************** custom methods *******************************
 
-    /**
-     * @return $this
-     */
+    public function getLinkedOpinion()
+    {
+        if ($this->Opinion) {
+            return $this->Opinion;
+        }
+        return $this->opinionVersion->getParent();
+    }
+
     public function resetVotes()
     {
         foreach ($this->votes as $vote) {
@@ -639,12 +682,12 @@ class Source
 
     public function canDisplay()
     {
-        return $this->isEnabled && $this->Opinion->canDisplay();
+        return $this->isEnabled && $this->getLinkedOpinion()->canDisplay();
     }
 
     public function canContribute()
     {
-        return $this->isEnabled && !$this->isTrashed && $this->Opinion->canContribute();
+        return $this->isEnabled && !$this->isTrashed && $this->getLinkedOpinion()->canContribute();
     }
 
     // ******************** Lifecycle ************************************

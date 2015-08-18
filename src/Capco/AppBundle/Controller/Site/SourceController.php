@@ -175,7 +175,7 @@ class SourceController extends Controller
             throw new AccessDeniedException($this->get('translator')->trans('source.error.no_contribute', array(), 'CapcoAppBundle'));
         }
 
-        $opinion = $source->getOpinion();
+        $opinion = $source->getLinkedOpinion();
         $opinionType = $opinion->getOpinionType();
         $currentStep = $opinion->getStep();
         $consultation = $currentStep->getConsultation();
