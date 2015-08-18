@@ -141,7 +141,7 @@ const SideMenu = React.createClass({
 
   render() {
     return (
-      <div className="synthesis--edit__menu">
+      <div className="synthesis__side-menu">
         <h2 className="h5 excerpt">{this.getIntlMessage('edition.menu.contributions')}</h2>
         {this.renderContributionsMenu()}
         {this.renderFoldersMenu()}

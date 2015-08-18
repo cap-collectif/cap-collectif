@@ -392,58 +392,58 @@
     {% endif %}
 
 
-    .navbar-default,
-    .navbar-default .dropdown-menu {
+    #main-navbar,
+    #main-navbar .dropdown-menu {
         background-color: {{ menuBg|raw }};
         color: {{ menuText|raw }};
     }
 
-    .navbar-default .navbar-nav > li > a,
-    .navbar-default .dropdown-menu > li > a,
-    .navbar-default a.navbar__search {
+    #main-navbar .navbar-nav > li > a,
+    #main-navbar .dropdown-menu > li > a,
+    #main-navbar a.navbar__search {
         color: {{ menuText|raw }};
     }
 
-    .navbar-default .navbar-toggle {
+    #main-navbar .navbar-toggle {
         border-color: {{ menuText|raw }};
     }
 
-    .navbar-default .navbar-toggle .icon-bar {
+    #main-navbar .navbar-toggle .icon-bar {
         background-color: {{ menuText|raw }};
     }
 
-    .navbar-default .navbar-toggle:hover .icon-bar,
-    .navbar-default .navbar-toggle:focus .icon-bar {
+    #main-navbar .navbar-toggle:hover .icon-bar,
+    #main-navbar .navbar-toggle:focus .icon-bar {
         background-color: {{ menuTextHover|raw }};
     }
 
-    .navbar-default .navbar-nav > .active > a,
-    .navbar-default .navbar-nav > .active > a:hover,
-    .navbar-default .navbar-nav > .active > a:focus,
-    .navbar-default .navbar-nav > .open > a,
-    .navbar-default .navbar-nav > .open > a:hover,
-    .navbar-default .navbar-nav > .open > a:focus,
-    .navbar-default .dropdown-menu>.active > a,
-    .navbar-default .dropdown-menu>.active > a:focus,
-    .navbar-default .dropdown-menu>.active > a:hover,
-    .navbar-default a.navbar__search.active {
+    #main-navbar .navbar-nav > .active > a,
+    #main-navbar .navbar-nav > .active > a:hover,
+    #main-navbar .navbar-nav > .active > a:focus,
+    #main-navbar .navbar-nav > .open > a,
+    #main-navbar .navbar-nav > .open > a:hover,
+    #main-navbar .navbar-nav > .open > a:focus,
+    #main-navbar .dropdown-menu>.active > a,
+    #main-navbar .dropdown-menu>.active > a:focus,
+    #main-navbar .dropdown-menu>.active > a:hover,
+    #main-navbar a.navbar__search.active {
         color: {{ menuTextActive|raw }};
         background-color: {{ menuBgHover|raw }};
     }
 
-    .navbar-default .navbar-nav > li > a:hover,
-    .navbar-default .navbar-nav > li > a:focus,
-    .navbar-default .dropdown-menu > li > a:hover,
-    .navbar-default .dropdown-menu > li > a:focus,
-    .navbar-default .navbar-toggle:hover,
-    .navbar-default .navbar-toggle:focus,
-    .navbar-default a.navbar__search:hover,
-    .navbar-default a.navbar__search:focus {
+    #main-navbar .navbar-nav > li > a:hover,
+    #main-navbar .navbar-nav > li > a:focus,
+    #main-navbar .dropdown-menu > li > a:hover,
+    #main-navbar .dropdown-menu > li > a:focus,
+    #main-navbar .navbar-toggle:hover,
+    #main-navbar .navbar-toggle:focus,
+    #main-navbar a.navbar__search:hover,
+    #main-navbar a.navbar__search:focus {
         color: {{ menuTextHover|raw }};
         background-color: {{ menuBgHover|raw }};
     }
 
-    .navbar-default .btn--connection {
+    #main-navbar .btn--connection {
         background-color: {{ menuText|raw }};
         color: {{ menuBg|raw }};
         border-color: {{ menuBg|raw }};

@@ -1,0 +1,20 @@
+{% extends '@CapcoApp/layout.html.twig' %}
+
+{% set page_class = "synthesis_page" %}
+
+{% block canonical_link %}{{ url('app_consultation_edit_synthesis', {'consultationSlug': consultation.slug, 'stepSlug': currentStep.slug}) }}{% endblock %}
+
+{% block title %}
+    {{ parent() }} - {{ currentStep.title }}
+{% endblock %}
+
+{% block mainContent %}
+    <div id="render-synthesis-edit-box" data-mode="edit" data-synthesis="{{ currentStep.synthesis.id }}"></div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script type="text/javascript">
+        var Synthesis = require('Resources/js/synthesis');
+    </script>
+{% endblock %}

@@ -9,7 +9,7 @@ const CreateButton = React.createClass({
 
   render() {
     return (
-      <Button bsSize="large" bsStyle="primary" type="button" className="synthesis__action--create btn-block" onClick={this.click.bind(null, this)}>
+      <Button bsStyle="primary" type="button" className="synthesis__action--create btn-block" onClick={this.click.bind(null, this)}>
         <i className="cap cap-folder-add"></i>
         {' ' + this.getIntlMessage('edition.action.create.button')}
       </Button>

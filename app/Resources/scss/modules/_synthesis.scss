@@ -19,8 +19,28 @@ $icons-colors:
   }
 }
 
+// Main navbar
+.synthesis__main-navbar {
+
+  .navbar-brand {
+    padding: 10px;
+    padding-left: 20px;
+
+    img {
+      height: 100%;
+      width: auto;
+      vertical-align: middle;
+    }
+  }
+}
+
+// Container
+.synthesis__container {
+  padding-top: 50px;
+}
+
 // Menu
-.synthesis--edit__menu {
+.synthesis__side-menu {
 
   .menu__block {
     font-size: 14px;
@@ -89,7 +109,7 @@ $icons-colors:
 }
 
 @media (min-width: $screen-sm-min) and (max-width: $screen-sm-max) {
-  .synthesis--edit__menu .menu__block {
+  .synthesis__side-menu .menu__block {
 
     .menu__icon {
       float: none;
