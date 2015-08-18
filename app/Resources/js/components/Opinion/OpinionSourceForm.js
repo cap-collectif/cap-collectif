@@ -34,7 +34,7 @@ const OpinionSourceForm = React.createClass({
 
   renderCreateButton() {
     return (
-      <Button bsStyle="primary" onClick={LoginStore.isLoggedIn() ? this.show.bind(this) : null}>
+      <Button id="addSourceButton" bsStyle="primary" onClick={LoginStore.isLoggedIn() ? this.show.bind(this) : null}>
         <i className="cap cap-add-1"></i>
         { ' ' + this.getIntlMessage('opinion.add_new_source')}
       </Button>

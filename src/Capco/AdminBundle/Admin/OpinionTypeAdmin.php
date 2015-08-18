@@ -143,7 +143,7 @@ class OpinionTypeAdmin extends Admin
             // Appendices
             ->add('appendixTypes', 'sonata_type_collection', [
                 'label' => 'admin.fields.consultation.appendices',
-                'by_reference' => true,
+                'by_reference' => false,
                 'cascade_validation' => true,
                 'required' => false,
             ], [

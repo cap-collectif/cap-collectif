@@ -17,7 +17,7 @@ const OpinionBody = React.createClass({
       const diff = JsDiff.diffWords(opinion.parent.body, opinion.body);
       diff.forEach((part) => {
         const diffColor = part.added ? 'green' : part.removed ? 'red' : 'grey';
-        const decoration = diffColor === 'red' ? 'line-through' : 'none';
+        const decoration = part.removed ? 'line-through' : 'none';
         htmlBody += '<span style="color: ' + diffColor + '; text-decoration: ' + decoration + '">' + part.value + '</span>';
       });
 
@@ -34,7 +34,7 @@ const OpinionBody = React.createClass({
       );
     }
 
-    if (!this.hasAppendicies()) {
+    if (!this.hasAppendices()) {
       return <div dangerouslySetInnerHTML={{__html: opinion.body}} />;
     }
 
@@ -44,7 +44,7 @@ const OpinionBody = React.createClass({
           <div dangerouslySetInnerHTML={{__html: opinion.body}} />
         </TabPane>
         {
-          opinion.appendicies.map((appendix, index) => {
+          opinion.appendices.map((appendix, index) => {
             return (
               <TabPane eventKey={index + 2} tab={appendix.type.title}>
                 <div dangerouslySetInnerHTML={{__html: appendix.body}} />
@@ -60,8 +60,8 @@ const OpinionBody = React.createClass({
     return this.props.opinion.parent ? true : false;
   },
 
-  hasAppendicies() {
-    return this.props.opinion.appendicies.length >= 1;
+  hasAppendices() {
+    return this.props.opinion.appendices.length >= 1;
   },
 
 });

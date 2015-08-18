@@ -9,9 +9,8 @@ Feature: Source
       | opinionTypeSlug  | causes                           |
       | opinionSlug      | opinion-2                        |
     And I go on the sources tab
-    And I should see "Aucune source"
-    When I click the "#render-opinion-sources .btn-primary" element
-    And I wait "3" seconds
+    And I should see "Aucune source proposée"
+    When I want to add a source
     And I fill in the following:
     | sourceLink   | http://www.google.fr     |
     | sourceTitle  | Titre de la source       |
@@ -58,11 +57,11 @@ Feature: Source
     And I go on the sources tab
     And The first source vote counter should be "1"
     When I follow "Modifier"
-    #And I fill in the following:
     And I check "capco_app_source_confirm"
     And I press "Modifier"
     Then I should see "Merci ! Votre source a bien été modifiée."
     And I wait "5" seconds
+    And I go on the sources tab
     And The first source vote counter should be "0"
 
   @javascript

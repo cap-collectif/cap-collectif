@@ -27,9 +27,9 @@ const VotePiechart = React.createClass({
     (new PieChart(React.findDOMNode(this.refs.piechart))).draw(
       new DataTable([
         [{type: 'string'}, {type: 'number'}],
-        ['D\'accord', this.props.ok],
-        ['Mitigé', this.props.mitige],
-        ['Pas d\'accord', this.props.nok],
+        [this.getIntlMessage('vote.ok'), this.props.ok],
+        [this.getIntlMessage('vote.mitige'), this.props.mitige],
+        [this.getIntlMessage('vote.nok'), this.props.nok],
       ]), {
         legend: 'none',
         chartArea: {

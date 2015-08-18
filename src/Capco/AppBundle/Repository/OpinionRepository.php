@@ -16,7 +16,7 @@ class OpinionRepository extends EntityRepository
             ->leftJoin('a.Media', 'm')
             ->leftJoin('o.OpinionType', 'ot')
             ->leftJoin('o.step', 's')
-            ->leftJoin('o.appendicies', 'appendix')
+            ->leftJoin('o.appendices', 'appendix')
             ->andWhere('o.id = :id')
             ->setParameter('id', $id)
             ->addOrderBy('appendix.position', 'ASC')

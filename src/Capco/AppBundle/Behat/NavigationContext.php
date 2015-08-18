@@ -18,6 +18,16 @@ class NavigationContext extends PageObjectContext
     }
 
     /**
+     * @When I want to add a source
+     */
+    public function clickAddSourceTab()
+    {
+        $this->getPage('opinion page')
+             ->clickAddSource();
+        sleep(2);
+    }
+
+    /**
      * @Given I visited :pageName
      */
     public function iVisitedPage($pageName)

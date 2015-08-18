@@ -39,7 +39,7 @@ Capco\AppBundle\Entity\Opinion:
             type: integer
             serialized_name: sources_count
             groups: [Opinions]
-        appendicies:
+        appendices:
             expose: true
             groups: [Opinions]
         votes:

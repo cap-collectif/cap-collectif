@@ -97,13 +97,3 @@ Feature: Opinions
     And I press "Modifier"
     Then I should see "Merci de confirmer la perte de vos votes pour continuer."
 
-  @javascript @database
-  Scenario: Logged in user wants to vote
-    Given I am logged in as user
-    And I visited "opinion page" with:
-      | consultationSlug | croissance-innovation-disruption |
-      | stepSlug         | collecte-des-avis                |
-      | opinionTypeSlug  | problemes                        |
-      | opinionSlug      | opinion-1                        |
-    And I wait 5 seconds
-    Then I should see "1 vote" in the ".opinion__votes" element

@@ -38,7 +38,7 @@ Feature: Opinions
         "votes_mitige": @integer@,
         "votes_total": @integer@,
 
-        "appendicies": [
+        "appendices": [
           {
             "body": @string@,
             "type": {

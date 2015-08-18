@@ -64,6 +64,12 @@ const OpinionButtons = React.createClass({
         {isContribuable ? <LoginOverlay children={ this.renderVoteButton('ok') } /> : null}
         {isContribuable ? <LoginOverlay children={ this.renderVoteButton('mitige') } /> : null}
         {isContribuable ? <LoginOverlay children={ this.renderVoteButton('nok') } /> : null}
+        {isContribuable && this.isTheUserTheAuthor()
+          ? <Button className="pull-right btn--outline btn-dark-gray" href={opinion._links.edit}>
+              { this.getIntlMessage('global.edit') }
+            </Button>
+          : null
+        }
         <Button
           className="pull-right btn--outline btn-dark-gray" href={reported ? null : opinion._links.report} active={reported}>
           <i className="cap cap-flag-1"></i>
@@ -111,6 +117,14 @@ const OpinionButtons = React.createClass({
     }
     return this.isCurrentVote(value) ? this.deleteVote() : this.vote(value);
   },
+
+  isTheUserTheAuthor() {
+    if (this.props.opinion.author === null || !LoginStore.isLoggedIn()) {
+      return false;
+    }
+    return LoginStore.user.unique_id === this.props.opinion.author.unique_id;
+  },
+
 
 });
 
