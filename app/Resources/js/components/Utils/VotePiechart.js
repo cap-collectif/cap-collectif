@@ -10,6 +10,16 @@ const VotePiechart = React.createClass({
   },
   mixins: [ReactIntl.IntlMixin],
 
+
+  getDefaultProps() {
+    return {
+      height: undefined,
+      width: undefined,
+      top: 0,
+      left: 0
+    };
+  },
+
   componentDidMount() {
     const PieChart = google.visualization.PieChart;
     const DataTable = google.visualization.arrayToDataTable;
@@ -23,15 +33,15 @@ const VotePiechart = React.createClass({
       ]), {
         legend: 'none',
         chartArea: {
-          left: this.props.left ? this.props.left : 0,
-          top: this.props.top ? this.props.top : 0,
+          left: this.props.left,
+          top: this.props.top,
           width: '80%',
           height: '80%',
         },
         colors: ['#5cb85c', '#f0ad4e', '#d9534f'],
         pieSliceText: 'value',
-        height: this.props.height ? this.props.height : undefined,
-        width: this.props.width ? this.props.width : undefined,
+        height: this.props.height,
+        width: this.props.width,
         backgroundColor: 'transparent',
       });
   },

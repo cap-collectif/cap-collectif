@@ -20,8 +20,6 @@ use FOS\RestBundle\Request\ParamFetcherInterface;
 class CategoriesController extends FOSRestController
 {
     /**
-     * Get categories.
-     *
      * @Get("/categories")
      * @View(serializerGroups={"Categories"})
      */

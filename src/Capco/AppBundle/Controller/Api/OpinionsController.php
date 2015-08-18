@@ -151,7 +151,6 @@ class OpinionsController extends FOSRestController
 
         return [
             'versions' => $versions,
-            'isOpinionContributable' => $opinion->canContribute(),
         ];
     }
 

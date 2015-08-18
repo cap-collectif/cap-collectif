@@ -124,17 +124,7 @@ class OpinionSerializationListener implements EventSubscriberInterface
 
     public function onPostOpinionType(ObjectEvent $event)
     {
-        $opinionType = $event->getObject();
 
-        // $event->getVisitor()->addData(
-        //     '_links', [
-        //         'show' => $this->router->generate('app_consultation_show_opinions', [
-        //             'consultationSlug' => $consultation->getSlug(),
-        //             'stepSlug' => $step->getSlug(),
-        //             'opinionTypeSlug' => $opinionType->getSlug(),
-        //         ], true),
-        //     ]
-        // );
     }
 
 
