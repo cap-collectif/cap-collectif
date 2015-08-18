@@ -9,7 +9,7 @@ Feature: Source
       | opinionTypeSlug  | causes                           |
       | opinionSlug      | opinion-2                        |
     And I go on the sources tab
-    And I should see "Aucune source proposée"
+    And I should see "Aucune source"
     When I want to add a source
     And I fill in the following:
     | sourceLink   | http://www.google.fr     |
@@ -75,18 +75,18 @@ Feature: Source
     And I go on the sources tab
     Then I should not see "Modifier" in the "#render-opinion-sources" element
 
-  @javascript @database
-  Scenario: Author of a source try to update without checking the confirm checkbox
-    Given I am logged in as user
-    And I visited "opinion page" with:
-      | consultationSlug | croissance-innovation-disruption |
-      | stepSlug         | collecte-des-avis                |
-      | opinionTypeSlug  | problemes                        |
-      | opinionSlug      | opinion-1                        |
-    And I go on the sources tab
-    When I follow "Modifier"
-    And I fill in the following:
-      | capco_app_source_body      | Je modifie ma source !   |
-    And I press "Modifier"
-    Then I should see "Merci de confirmer la perte de vos votes pour continuer."
+  # @javascript @database
+  # Scenario: Author of a source try to update without checking the confirm checkbox
+  #   Given I am logged in as user
+  #   And I visited "opinion page" with:
+  #     | consultationSlug | croissance-innovation-disruption |
+  #     | stepSlug         | collecte-des-avis                |
+  #     | opinionTypeSlug  | problemes                        |
+  #     | opinionSlug      | opinion-1                        |
+  #   And I go on the sources tab
+  #   When I follow "Modifier"
+  #   And I fill in the following:
+  #     | capco_app_source_body      | Je modifie ma source !   |
+  #   And I press "Modifier"
+  #   Then I should see "Merci de confirmer la perte de vos votes pour continuer."
 
