@@ -45,13 +45,13 @@
                     </li>
                     {% if opinion.opinionType.isVersionable %}
                         <li role="presentation">
-                            <a href="#versions" aria-controls="versions" role="tab" data-toggle="tab">
+                            <a id="versionsTab" href="#versions" aria-controls="versions" role="tab" data-toggle="tab">
                                 {% transchoice (opinion.versions|length) with {'%count%': (opinion.versions|length)} from 'CapcoAppBundle' %}version.show.count{% endtranschoice %}
                             </a>
                         </li>
                     {% endif %}
                     <li role="presentation">
-                        <a href="#sources" aria-controls="sources" role="tab" data-toggle="tab">
+                        <a id="sourcesTab" href="#sources" aria-controls="sources" role="tab" data-toggle="tab">
                             {% transchoice (sources|length) with {'%count%': (sources|length)} from 'CapcoAppBundle' %}source.show.count{% endtranschoice %}
                         </a>
                     </li>

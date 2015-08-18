@@ -8,7 +8,7 @@ Feature: Source
       | stepSlug         | collecte-des-avis                |
       | opinionTypeSlug  | causes                           |
       | opinionSlug      | opinion-2                        |
-    When I follow "1 source"
+    When I follow "Aucune source"
     And I wait "3" seconds
     When I click the "#render-opinion-sources .btn-primary" element
     And I wait "3" seconds
@@ -41,8 +41,7 @@ Feature: Source
       | stepSlug         | collecte-des-avis                |
       | opinionTypeSlug  | enjeux                           |
       | opinionSlug      | opinion-4                        |
-    When I follow "1 source"
-    And I wait "3" seconds
+    And I go on the sources tab
     When I vote for the first source
     Then I should see "Annuler mon vote"
     When I vote for the first source
@@ -57,11 +56,10 @@ Feature: Source
       | stepSlug         | collecte-des-avis                |
       | opinionTypeSlug  | problemes                        |
       | opinionSlug      | opinion-1                        |
-    When I follow "2 sources"
-    And I wait "3" seconds
+    And I go on the sources tab
     And The first source vote counter should be "1"
     When I follow "Modifier"
-    And I fill in the following:
+    #And I fill in the following:
     And I check "capco_app_source_confirm"
     And I press "Modifier"
     Then I should see "Merci ! Votre source a bien été modifiée."
@@ -76,7 +74,8 @@ Feature: Source
       | stepSlug         | collecte-des-avis                |
       | opinionTypeSlug  | problemes                        |
       | opinionSlug      | opinion-1                        |
-    Then I should not see "Modifier" in the ".pull-right" element
+    And I go on the sources tab
+    Then I should not see "Modifier" in the "#render-opinion-sources" element
 
   @javascript @database
   Scenario: Author of a source try to update without checking the confirm checkbox
@@ -86,6 +85,7 @@ Feature: Source
       | stepSlug         | collecte-des-avis                |
       | opinionTypeSlug  | problemes                        |
       | opinionSlug      | opinion-1                        |
+    And I go on the sources tab
     When I follow "Modifier"
     And I fill in the following:
       | capco_app_source_body      | Je modifie ma source !   |

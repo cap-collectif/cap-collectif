@@ -23,7 +23,13 @@ class OpinionPage extends Page
         'Sources list' => '.panel--sources .panel-heading',
         'first source vote count' => '#render-opinion-sources li:first-child .opinion__votes-nb',
         'Vote first source' => '#render-opinion-sources li:first-child .btn',
+        'sources tab' => '.sourcesTab',
     );
+
+    public function clickSourcesTab()
+    {
+        $this->getElement('sources tab')->click();
+    }
 
     public function submitArgument($type, $text)
     {

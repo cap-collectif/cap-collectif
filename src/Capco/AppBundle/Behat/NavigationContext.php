@@ -8,6 +8,17 @@ use SensioLabs\Behat\PageObjectExtension\Context\PageObjectContext;
 class NavigationContext extends PageObjectContext
 {
     /**
+     * @When I go on the sources tab
+     */
+    public function iGoOnTheSourcesTab()
+    {
+        $this->getPage('opinion page')
+             ->clickSourcesTab();
+
+        $this->getSession()->wait(2000);
+    }
+
+    /**
      * @Given I visited :pageName
      */
     public function iVisitedPage($pageName)
