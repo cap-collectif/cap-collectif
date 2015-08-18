@@ -16,7 +16,7 @@ const VotePiechart = React.createClass({
       height: undefined,
       width: undefined,
       top: 0,
-      left: 0
+      left: 0,
     };
   },
 
