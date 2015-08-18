@@ -38,7 +38,7 @@ Feature: Arguments
     # And I should see "Votre vote a bien été annulé."
     And I should see "0" in the "#arg-2 .opinion__votes-nb" element
 
-  @database
+  @javascript @database
   Scenario: Author of an argument loose their votes when updating it
     Given I am logged in as user
     And I visited "opinion page" with:

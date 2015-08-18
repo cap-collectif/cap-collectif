@@ -63,7 +63,7 @@ Feature: Opinions
       | opinionSlug      | opinion-3                        |
     And I wait 5 seconds
     And I should see "50 votes" in the ".opinion__votes" element
-    When I follow "Modifier"
+    When I press "Modifier"
     And I fill in the following:
       | capco_app_opinion_body      | Je modifie ma proposition !   |
     And I check "capco_app_opinion_confirm"
@@ -91,7 +91,7 @@ Feature: Opinions
       | opinionTypeSlug  | enjeux                           |
       | opinionSlug      | opinion-3                        |
     And I wait 5 seconds
-    When I follow "Modifier"
+    When I press "Modifier"
     And I fill in the following:
       | capco_app_opinion_body | Je modifie ma proposition !   |
     And I press "Modifier"

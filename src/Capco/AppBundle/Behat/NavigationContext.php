@@ -14,8 +14,7 @@ class NavigationContext extends PageObjectContext
     {
         $this->getPage('opinion page')
              ->clickSourcesTab();
-
-        $this->getSession()->wait(2000);
+        sleep(3);
     }
 
     /**
