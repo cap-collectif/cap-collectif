@@ -28,6 +28,14 @@ function createHeaders() {
   return headers;
 }
 
+// If shield mode is activated, Safari will override the Authorization header, so we need this
+function addAuthorization(req) {
+  if (LoginStore.jwt !== null) {
+    const header = 'Bearer ' + LoginStore.jwt;
+    req.setRequestHeader('Authorization', header);
+  }
+}
+
 
 class Fetcher {
 
@@ -35,6 +43,9 @@ class Fetcher {
     return fetch(config.api + uri, {
       method: 'get',
       headers: createHeaders(),
+      beforeSend: function(req) {
+        addAuthorization(req);
+      },
     })
     .then(status)
     .then(json);
@@ -42,26 +53,35 @@ class Fetcher {
 
   post(uri, body) {
     return fetch(config.api + uri, {
-        method: 'post',
-        headers: createHeaders(),
-        body: JSON.stringify(body),
-      })
-      .then(status);
+      method: 'post',
+      headers: createHeaders(),
+      beforeSend: function(req) {
+        addAuthorization(req);
+      },
+      body: JSON.stringify(body),
+    })
+    .then(status);
   }
 
   put(uri, body) {
     return fetch(config.api + uri, {
-        method: 'put',
-        headers: createHeaders(),
-        body: JSON.stringify(body),
-      })
-      .then(status);
+      method: 'put',
+      headers: createHeaders(),
+      beforeSend: function(req) {
+        addAuthorization(req);
+      },
+      body: JSON.stringify(body),
+    })
+    .then(status)
   }
 
   delete(uri) {
     return fetch(config.api + uri, {
       method: 'delete',
       headers: createHeaders(),
+      beforeSend: function(req) {
+        addAuthorization(req);
+      },
     })
     .then(status);
   }
