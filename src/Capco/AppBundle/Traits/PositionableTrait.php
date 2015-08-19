@@ -3,10 +3,12 @@
 namespace Capco\AppBundle\Traits;
 
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 trait PositionableTrait
 {
     /**
+     * @Gedmo\SortablePosition
      * @ORM\Column(name="position", type="integer")
      */
     private $position;

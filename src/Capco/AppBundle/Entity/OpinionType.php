@@ -373,6 +373,7 @@ class OpinionType
     {
         if (!$this->appendixTypes->contains($appendixType)) {
             $this->appendixTypes->add($appendixType);
+            $appendixType->setOpinionType($this);
         }
 
         return $this;

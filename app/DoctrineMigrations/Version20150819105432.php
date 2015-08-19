@@ -8,7 +8,7 @@ use Doctrine\DBAL\Schema\Schema;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-class Version20150818124532 extends AbstractMigration
+class Version20150819105432 extends AbstractMigration
 {
     /**
      * @param Schema $schema
@@ -19,27 +19,27 @@ class Version20150818124532 extends AbstractMigration
         $this->abortIf($this->connection->getDatabasePlatform()->getName() != 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
         $this->addSql('CREATE TABLE opinion_annexes (id INT AUTO_INCREMENT NOT NULL, opinion_type_part_id INT DEFAULT NULL, opinion_id INT DEFAULT NULL, body LONGTEXT NOT NULL, created_at DATETIME NOT NULL, updated_at DATETIME NOT NULL, INDEX IDX_CE7C748A8DAE1A1E (opinion_type_part_id), INDEX IDX_CE7C748A51885A6A (opinion_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci ENGINE = InnoDB');
-        $this->addSql('CREATE TABLE opinion_type_appendices_type (id INT AUTO_INCREMENT NOT NULL, opinion_type_id INT DEFAULT NULL, title VARCHAR(255) NOT NULL, slug VARCHAR(255) NOT NULL, created_at DATETIME NOT NULL, updated_at DATETIME NOT NULL, position INT NOT NULL, INDEX IDX_A4C8254928FD468D (opinion_type_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci ENGINE = InnoDB');
+        $this->addSql('CREATE TABLE opinion_type_appendices_type (id INT AUTO_INCREMENT NOT NULL, opinion_type_id INT NOT NULL, title VARCHAR(255) NOT NULL, slug VARCHAR(255) NOT NULL, created_at DATETIME NOT NULL, updated_at DATETIME NOT NULL, position INT NOT NULL, INDEX IDX_A4C8254928FD468D (opinion_type_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci ENGINE = InnoDB');
         $this->addSql('CREATE TABLE opinion_version (id INT AUTO_INCREMENT NOT NULL, author_id INT DEFAULT NULL, parent_id INT DEFAULT NULL, body LONGTEXT NOT NULL, comment LONGTEXT DEFAULT NULL, sources_count INT NOT NULL, arguments_count INT NOT NULL, trashed TINYINT(1) NOT NULL, trashed_at DATETIME DEFAULT NULL, trashed_reason LONGTEXT DEFAULT NULL, enabled TINYINT(1) NOT NULL, title VARCHAR(255) NOT NULL, slug VARCHAR(255) NOT NULL, created_at DATETIME NOT NULL, updated_at DATETIME NOT NULL, vote_count_nok INT NOT NULL, vote_count_ok INT NOT NULL, vote_count_mitige INT NOT NULL, INDEX IDX_52AD19DDF675F31B (author_id), INDEX IDX_52AD19DD727ACA70 (parent_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci ENGINE = InnoDB');
         $this->addSql('ALTER TABLE opinion_annexes ADD CONSTRAINT FK_CE7C748A8DAE1A1E FOREIGN KEY (opinion_type_part_id) REFERENCES opinion_type_appendices_type (id) ON DELETE CASCADE');
         $this->addSql('ALTER TABLE opinion_annexes ADD CONSTRAINT FK_CE7C748A51885A6A FOREIGN KEY (opinion_id) REFERENCES opinion (id) ON DELETE CASCADE');
         $this->addSql('ALTER TABLE opinion_type_appendices_type ADD CONSTRAINT FK_A4C8254928FD468D FOREIGN KEY (opinion_type_id) REFERENCES opinion_type (id) ON DELETE CASCADE');
         $this->addSql('ALTER TABLE opinion_version ADD CONSTRAINT FK_52AD19DDF675F31B FOREIGN KEY (author_id) REFERENCES fos_user (id) ON DELETE CASCADE');
         $this->addSql('ALTER TABLE opinion_version ADD CONSTRAINT FK_52AD19DD727ACA70 FOREIGN KEY (parent_id) REFERENCES opinion (id)');
-        $this->addSql('ALTER TABLE opinion CHANGE step_id step_id INT NOT NULL');
-        $this->addSql('ALTER TABLE argument ADD opinion_version_id INT DEFAULT NULL');
-        $this->addSql('ALTER TABLE argument ADD CONSTRAINT FK_D113B0AD077154C FOREIGN KEY (opinion_version_id) REFERENCES opinion_version (id) ON DELETE CASCADE');
-        $this->addSql('CREATE INDEX IDX_D113B0AD077154C ON argument (opinion_version_id)');
-        $this->addSql('ALTER TABLE source ADD opinion_version_id INT DEFAULT NULL, CHANGE opinion_id opinion_id INT DEFAULT NULL');
-        $this->addSql('ALTER TABLE source ADD CONSTRAINT FK_5F8A7F73D077154C FOREIGN KEY (opinion_version_id) REFERENCES opinion_version (id) ON DELETE CASCADE');
-        $this->addSql('CREATE INDEX IDX_5F8A7F73D077154C ON source (opinion_version_id)');
         $this->addSql('ALTER TABLE votes ADD opinion_version_id INT DEFAULT NULL');
         $this->addSql('ALTER TABLE votes ADD CONSTRAINT FK_518B7ACFD077154C FOREIGN KEY (opinion_version_id) REFERENCES opinion_version (id) ON DELETE CASCADE');
         $this->addSql('CREATE INDEX IDX_518B7ACFD077154C ON votes (opinion_version_id)');
+        $this->addSql('ALTER TABLE argument ADD opinion_version_id INT DEFAULT NULL');
+        $this->addSql('ALTER TABLE argument ADD CONSTRAINT FK_D113B0AD077154C FOREIGN KEY (opinion_version_id) REFERENCES opinion_version (id) ON DELETE CASCADE');
+        $this->addSql('CREATE INDEX IDX_D113B0AD077154C ON argument (opinion_version_id)');
+        $this->addSql('ALTER TABLE opinion CHANGE step_id step_id INT NOT NULL');
         $this->addSql('ALTER TABLE opinion_type ADD versionable TINYINT(1) NOT NULL');
         $this->addSql('ALTER TABLE reporting ADD opinion_version_id INT DEFAULT NULL');
         $this->addSql('ALTER TABLE reporting ADD CONSTRAINT FK_BD7CFA9FD077154C FOREIGN KEY (opinion_version_id) REFERENCES opinion_version (id) ON DELETE CASCADE');
         $this->addSql('CREATE INDEX IDX_BD7CFA9FD077154C ON reporting (opinion_version_id)');
+        $this->addSql('ALTER TABLE source ADD opinion_version_id INT DEFAULT NULL, CHANGE opinion_id opinion_id INT DEFAULT NULL');
+        $this->addSql('ALTER TABLE source ADD CONSTRAINT FK_5F8A7F73D077154C FOREIGN KEY (opinion_version_id) REFERENCES opinion_version (id) ON DELETE CASCADE');
+        $this->addSql('CREATE INDEX IDX_5F8A7F73D077154C ON source (opinion_version_id)');
     }
 
     /**
@@ -51,10 +51,10 @@ class Version20150818124532 extends AbstractMigration
         $this->abortIf($this->connection->getDatabasePlatform()->getName() != 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
         $this->addSql('ALTER TABLE opinion_annexes DROP FOREIGN KEY FK_CE7C748A8DAE1A1E');
-        $this->addSql('ALTER TABLE argument DROP FOREIGN KEY FK_D113B0AD077154C');
-        $this->addSql('ALTER TABLE source DROP FOREIGN KEY FK_5F8A7F73D077154C');
         $this->addSql('ALTER TABLE votes DROP FOREIGN KEY FK_518B7ACFD077154C');
+        $this->addSql('ALTER TABLE argument DROP FOREIGN KEY FK_D113B0AD077154C');
         $this->addSql('ALTER TABLE reporting DROP FOREIGN KEY FK_BD7CFA9FD077154C');
+        $this->addSql('ALTER TABLE source DROP FOREIGN KEY FK_5F8A7F73D077154C');
         $this->addSql('DROP TABLE opinion_annexes');
         $this->addSql('DROP TABLE opinion_type_appendices_type');
         $this->addSql('DROP TABLE opinion_version');

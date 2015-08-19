@@ -31,8 +31,9 @@ class OpinionTypeAppendixType
     private $id;
 
     /**
+     * @Gedmo\SortableGroup
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\OpinionType", inversedBy="appendixTypes", cascade={"persist"})
-     * @ORM\JoinColumn(name="opinion_type_id", referencedColumnName="id", nullable=true, onDelete="CASCADE")
+     * @ORM\JoinColumn(name="opinion_type_id", referencedColumnName="id", nullable=false, onDelete="CASCADE")
      */
     private $opinionType;
 
@@ -65,7 +66,6 @@ class OpinionTypeAppendixType
     public function setOpinionType(OpinionType $opinionType)
     {
         $this->opinionType = $opinionType;
-        $opinionType->addAppendixType($this);
 
         return $this;
     }
