@@ -20,13 +20,15 @@ Feature: Events comments
           "vote_count": @integer@,
           "author": {
             "username": @string@,
-            "display_name": @string@,
-            "unique_id": @string@,
+            "displayName": @string@,
+            "uniqueId": @string@,
+            "isAdmin": @boolean@,
             "media": {
               "url": @string@
             },
             "_links": {
-              "profile": @string@
+              "profile": @string@,
+              "settings": @string@
             }
           },
           "answers": [],

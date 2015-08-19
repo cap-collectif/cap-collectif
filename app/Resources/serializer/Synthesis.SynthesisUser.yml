@@ -3,11 +3,13 @@ Capco\AppBundle\Entity\Synthesis\SynthesisUser:
   properties:
     id:
       expose: true
-      groups: [Users]
+      groups: [Users, UserInfos]
     displayName:
       expose: true
-      groups: [Users]
+      groups: [Users, UsersInfos]
     uniqueIdentifier:
       expose: true
       groups: [Users, UserInfos]
-
+    isAdmin:
+      expose: true
+      groups: [UserInfos]

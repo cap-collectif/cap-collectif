@@ -86,7 +86,7 @@ const Comment = React.createClass({
     if (this.props.comment.author === null || !LoginStore.isLoggedIn()) {
       return false;
     }
-    return LoginStore.user.unique_id === this.props.comment.author.unique_id;
+    return LoginStore.user.uniqueId === this.props.comment.author.uniqueId;
   },
 
   answer() {

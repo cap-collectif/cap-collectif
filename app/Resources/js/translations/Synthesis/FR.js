@@ -27,6 +27,23 @@ export default {
     view: {
     },
     edition: {
+      navbar: {
+        search: 'Rechercher',
+        user: {
+          admin: 'Administration',
+          profile: 'Mon profil',
+          settings: 'Paramètres',
+          logout: 'Déconnexion',
+        },
+        second: {
+          brand: 'Synthèse',
+        },
+        filter: {
+          oldest: 'Les plus anciens',
+          newest: 'Les plus récents',
+          popular: 'Les plus populaires',
+        },
+      },
       menu: {
         contributions: 'CONTRIBUTIONS',
         inbox: 'Non traitées',

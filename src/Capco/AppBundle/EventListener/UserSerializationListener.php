@@ -30,6 +30,7 @@ class UserSerializationListener implements EventSubscriberInterface
             '_links',
             [
                 'profile' => $this->router->generate('capco_user_profile_show_all', ['slug' => $user->getSlug()], true),
+                'settings' => $this->router->generate('fos_user_profile_edit', [], true),
             ]
         );
     }

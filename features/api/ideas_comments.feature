@@ -20,13 +20,15 @@ Feature: Ideas comments
           "vote_count": @integer@,
           "author": {
             "username": @string@,
-            "display_name": @string@,
-            "unique_id": @string@,
+            "displayName": @string@,
+            "isAdmin": @boolean@,
+            "uniqueId": @string@,
             "media": {
               "url": "@string@.startsWith('/media')"
             },
             "_links": {
-              "profile": @string@
+              "profile": @string@,
+              "settings": @string@
             }
           },
           "answers": @...@,

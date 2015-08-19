@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html {% if page_class is defined %} class="{{ page_class }}"{% endif %} lang="fr">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -47,7 +47,7 @@
     {% include '@CapcoApp/Default/custom.css.twig' %}
 </head>
 
-<body{% if page_class is defined %} class="{{ page_class }}"{% endif %}>
+<body>
 
 {% block mainContent %}{% endblock %}
 

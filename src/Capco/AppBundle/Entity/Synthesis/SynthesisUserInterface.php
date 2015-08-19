@@ -22,6 +22,13 @@ interface SynthesisUserInterface
     public function getDisplayName();
 
     /**
+     * Tell if user is admin or not.
+     *
+     * @return boolean
+     */
+    public function isAdmin();
+
+    /**
      * Get media.
      *
      * @return Media or null

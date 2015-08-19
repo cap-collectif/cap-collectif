@@ -12,6 +12,20 @@
 
 }
 
+@font-face {
+  font-family: "montserrat-bold";
+  src:url("../fonts/Montserrat-Bold.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "montserrat";
+  src:url("../fonts/Montserrat-Regular.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
 .cap {
   position: relative;
   top: 2px;
@@ -313,4 +327,10 @@
 }
 .cap-tag-1-1:before {
   content: "`";
+}
+.cap-bell:before {
+  content: "{";
+}
+.cap-bell-1:before {
+  content: "|";
 }

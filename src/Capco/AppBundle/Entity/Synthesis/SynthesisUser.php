@@ -37,6 +37,12 @@ class SynthesisUser implements SynthesisUserInterface
     private $uniqueIdentifier;
 
     /**
+     * @var string
+     * @ORM\Column(name="is_admin", type="boolean")
+     */
+    private $isAdmin;
+
+    /**
      * @return mixed
      */
     public function getDisplayName()
@@ -66,6 +72,22 @@ class SynthesisUser implements SynthesisUserInterface
     public function setUniqueIdentifier($uniqueIdentifier)
     {
         $this->uniqueIdentifier = $uniqueIdentifier;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function isAdmin()
+    {
+        return $this->isAdmin;
+    }
+
+    /**
+     * @param mixed $isAdmin
+     */
+    public function setIsAdmin($isAdmin)
+    {
+        $this->isAdmin = $isAdmin;
     }
 
     // ************************* Methods needed by the SynthesisUserInterface ****************

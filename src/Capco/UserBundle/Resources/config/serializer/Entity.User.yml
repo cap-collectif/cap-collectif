@@ -11,10 +11,14 @@ Capco\UserBundle\Entity\User:
         groups: [UsersInfos, UserDetails]
     virtual_properties:
       getDisplayName:
-        serialized_name: display_name
+        serialized_name: displayName
         type: string
         groups: [UserDetails, UsersInfos]
       getUniqueIdentifier:
-        serialized_name: unique_id
+        serialized_name: uniqueId
         type: string
+        groups: [UserDetails, UsersInfos]
+      isAdmin:
+        serialized_name: isAdmin
+        type: boolean
         groups: [UserDetails, UsersInfos]

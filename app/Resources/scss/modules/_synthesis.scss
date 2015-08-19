@@ -10,6 +10,7 @@ $icons-colors:
 ;
 
 // Icon colors
+
 @each $icolor in $icons-colors {
   $name: nth($icolor, 1);
   $color: nth($icolor, 2);
@@ -19,28 +20,103 @@ $icons-colors:
   }
 }
 
-// Main navbar
-.synthesis__main-navbar {
+// 100% height layout with scrollable columns
 
-  .navbar-brand {
-    padding: 10px;
-    padding-left: 20px;
+.synthesis_page body {
+  padding-top: 120px;
+  background-color: $white;
+}
 
-    img {
+.synthesis__container {
+  padding-top: 15px;
+  padding-bottom: 15px;
+}
+
+@media (min-width: 768px) {
+  .synthesis_page,
+  .synthesis_page body,
+  #render-synthesis-edit-box,
+  .synthesis__box,
+  .synthesis__tool {
+    height: 100%;
+    overflow: hidden;
+  }
+
+  .synthesis_page body {
+    padding-top: 120px;
+  }
+
+  // Container
+  .synthesis__container {
+    padding-top: 30px;
+    padding-bottom: 30px;
+    height: 100%;
+
+    .row {
+      position: relative;
       height: 100%;
-      width: auto;
-      vertical-align: middle;
+    }
+  }
+
+  .scrollable-col {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    overflow-y: scroll;
+    height: 100%;
+
+    &.left {
+      left: 0;
+      width: 25%;
+    }
+
+    &.right {
+      right: 0;
+      width: 75%;
     }
   }
 }
 
-// Container
-.synthesis__container {
-  padding-top: 50px;
+// Main navbar
+.synthesis__main-navbar {
+
+  .navbar-brand {
+    font-family: "montserrat-bold" !important;
+    text-transform: uppercase;
+  }
+
+  .navbar__icon-menu {
+    & > a {
+      padding: 8px 15px;
+      font-size: 32px;
+    }
+  }
+
+  .navbar__dropdown > a {
+    padding: 8px 15px;
+  }
+}
+
+// Second navbar
+.synthesis__second-navbar {
+  top: 50px;
+  z-index: 1020;
+  color: $white;
+  background-color: $brand-danger;
+
+  .navbar-brand,
+  .navbar-brand:hover,
+  .navbar-brand:focus {
+    color: $white;
+  }
 }
 
 // Menu
 .synthesis__side-menu {
+
+  h2:first-child {
+    margin-top: 0;
+  }
 
   .menu__block {
     font-size: 14px;
