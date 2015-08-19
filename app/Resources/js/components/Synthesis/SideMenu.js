@@ -142,10 +142,9 @@ const SideMenu = React.createClass({
   render() {
     return (
       <div className="synthesis__side-menu">
-        <h2 className="h5 excerpt">{this.getIntlMessage('edition.menu.contributions')}</h2>
         {this.renderContributionsMenu()}
         {this.renderFoldersMenu()}
-        <CreateButton parent={null} onModal={this.toggleCreateModal} />
+        <CreateButton style={{position: 'fixed', bottom: 0}} parent={null} onModal={this.toggleCreateModal} />
         {this.renderCreateModal()}
       </div>
     );

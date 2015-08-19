@@ -4,12 +4,19 @@ const CreateButton = React.createClass({
   propTypes: {
     parent: React.PropTypes.object,
     onModal: React.PropTypes.func,
+    style: React.PropTypes.object,
   },
   mixins: [ReactIntl.IntlMixin],
 
+  getDefaultProps() {
+    return {
+      style: null,
+    };
+  },
+
   render() {
     return (
-      <Button bsStyle="primary" type="button" className="synthesis__action--create btn-block" onClick={this.click.bind(null, this)}>
+      <Button style={this.props.style} bsStyle="primary" type="button" className="synthesis__action--create btn-block" onClick={this.click.bind(null, this)}>
         <i className="cap cap-folder-add"></i>
         {' ' + this.getIntlMessage('edition.action.create.button')}
       </Button>

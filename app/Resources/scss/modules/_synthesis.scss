@@ -27,11 +27,6 @@ $icons-colors:
   background-color: $white;
 }
 
-.synthesis__container {
-  padding-top: 15px;
-  padding-bottom: 15px;
-}
-
 @media (min-width: 768px) {
   .synthesis_page,
   .synthesis_page body,
@@ -43,13 +38,11 @@ $icons-colors:
   }
 
   .synthesis_page body {
-    padding-top: 120px;
+    padding-top: 100px;
   }
 
   // Container
   .synthesis__container {
-    padding-top: 30px;
-    padding-bottom: 30px;
     height: 100%;
 
     .row {
@@ -64,15 +57,54 @@ $icons-colors:
     bottom: 0;
     overflow-y: scroll;
     height: 100%;
+    padding-top: 15px;
 
     &.left {
       left: 0;
-      width: 25%;
+      width: 30%;
+      background-color: #efefef;
     }
 
     &.right {
       right: 0;
-      width: 75%;
+      width: 70%;
+    }
+  }
+
+  .synthesis__side-menu {
+    height: 100%;
+  }
+}
+
+@media (min-width: 992px) {
+  .scrollable-col {
+    &.left {
+      width: 35%;
+    }
+    &.right {
+      width: 65%;
+    }
+  }
+}
+
+@media (min-width: 1200px) {
+  .scrollable-col {
+    &.left {
+      width: 30%;
+    }
+    &.right {
+      width: 70%;
+    }
+  }
+}
+
+@media (min-width: 1800px) {
+  .scrollable-col {
+    &.left {
+      width: 20%;
+    }
+    &.right {
+      width: 80%;
     }
   }
 }
@@ -114,9 +146,7 @@ $icons-colors:
 // Menu
 .synthesis__side-menu {
 
-  h2:first-child {
-    margin-top: 0;
-  }
+  position: relative;
 
   .menu__block {
     font-size: 14px;
@@ -212,6 +242,11 @@ $icons-colors:
 
   &:hover {
     background-color: $light-gray;
+  }
+
+  .element__breadcrumb {
+    margin-top: 5px;
+    margin-bottom: 0;
   }
 
   // Body of elements blocks
@@ -562,11 +597,6 @@ $icons-colors:
       padding: 15px;
       &:first-child {
         border-top: none;
-      }
-
-      .element__breadcrumb {
-        margin-top: 5px;
-        margin-bottom: 0;
       }
 
       .element__actions {

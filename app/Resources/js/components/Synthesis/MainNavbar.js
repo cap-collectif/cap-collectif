@@ -41,7 +41,7 @@ const MainNavbar = React.createClass({
     return (
       <span>
         <UserAvatar user={LoginStore.user} size={34} classes="" style={{marginRight: '10px'}} anchor={false} />
-        <span>{LoginStore.user.displayName}</span>
+        <span className="hidden-xs">{LoginStore.user.displayName}</span>
       </span>
     );
   },
@@ -71,7 +71,7 @@ const MainNavbar = React.createClass({
 
   render() {
     return (
-      <Navbar fixedTop fluid className="synthesis__main-navbar" brand={this.renderBrand()}>
+      <Navbar fixedTop fluid navExpanded={true} className="synthesis__main-navbar" brand={this.renderBrand()}>
         <Nav navbar right>
           {this.renderNotifications()}
           {this.renderUser()}
