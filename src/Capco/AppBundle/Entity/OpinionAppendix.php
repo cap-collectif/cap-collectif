@@ -11,7 +11,7 @@ use Capco\AppBundle\Traits\SluggableTitleTrait;
 use Capco\AppBundle\Traits\TimestampableTrait;
 
 /**
- * @ORM\Table(name="opinion_annexes")
+ * @ORM\Table(name="opinion_appendices")
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\OpinionAppendixRepository")
  * @ORM\HasLifecycleCallbacks()
  */
