@@ -11,7 +11,7 @@ Feature: Event Registration
     | capco_event_registration_username        | Naruto42             |
     | capco_event_registration_email           | naruto42@gmail.com   |
     And I check "capco_event_registration_private"
-    And I press "S'inscrire à l'évènement"
+    And I press "S'inscrire à l'événement"
     Then I should see "Anonyme" in the "#eventRegistrationModal" element
 
   @database
@@ -21,7 +21,7 @@ Feature: Event Registration
     When I fill in the following:
     | capco_event_registration_username        | Naruto42             |
     | capco_event_registration_email           | naruto42@gmail.com   |
-    And I press "S'inscrire à l'évènement"
+    And I press "S'inscrire à l'événement"
     Then I should see "Naruto42" in the "#eventRegistrationModal" element
 
   @database
@@ -32,8 +32,8 @@ Feature: Event Registration
     When I fill in the following:
     | capco_event_registration_username        | Naruto42             |
     | capco_event_registration_email           | naruto42@gmail.com   |
-    And I press "S'inscrire à l'évènement"
-    Then I should see "Cette adresse électronique a déjà été utilisée pour s'inscrire à l'évènement."
+    And I press "S'inscrire à l'événement"
+    Then I should see "Cette adresse électronique a déjà été utilisée pour s'inscrire à l'événement."
 
   @database
   Scenario: logged user wants to register an event anonymously

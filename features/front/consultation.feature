@@ -83,7 +83,7 @@ Feature: Consultation
       | consultationSlug | croissance-innovation-disruption |
       | stepSlug         | collecte-des-avis                |
     And I follow "Évènements"
-    And I should see 6 ".event" elements
+    And I should see 3 ".event" elements
 
   Scenario: Posts menu for consultation should display correct number of posts
     Given feature "blog" is enabled

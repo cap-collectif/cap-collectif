@@ -260,7 +260,7 @@ Capco\AppBundle\Entity\SiteParameter:
     SiteParameterEventTitle:
         keyname: events.jumbotron.title
         category: pages.events
-        value: Évènements
+        value: Événements
         position: 301
         type: 0
     SiteParameterEventContent:

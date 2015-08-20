@@ -22,6 +22,7 @@ class NavigationContext extends PageObjectContext
      */
     public function clickAddSourceTab()
     {
+        sleep(2);
         $this->getPage('opinion page')
              ->clickAddSource();
         sleep(2);
