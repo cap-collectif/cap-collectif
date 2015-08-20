@@ -186,10 +186,10 @@ Capco\AppBundle\Entity\SiteParameter:
         type: 5
 
     SiteParameter29:
-        keyname: admin.mail.notifications
+        keyname: admin.mail.notifications.receive_address
         category: settings.notifications
         value: assistance@cap-collectif.com
-        position: 900
+        position: 1
         type: 4
     SiteParameter30:
         keyname: admin.mail.contact
@@ -323,3 +323,17 @@ Capco\AppBundle\Entity\SiteParameter:
         value: ''
         position: 782
         type: 1
+
+    SiteParameterEmailSenderName:
+        keyname: admin.mail.notifications.send_name
+        category: settings.notifications
+        value: 'Cap Collectif'
+        position: 2
+        type: 0
+
+    SiteParameterEmailAddress:
+        keyname: admin.mail.notifications.send_address
+        category: settings.notifications
+        value: 'assistance@cap-collectif.com'
+        position: 3
+        type: 4
