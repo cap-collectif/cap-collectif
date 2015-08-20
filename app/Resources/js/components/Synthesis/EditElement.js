@@ -145,7 +145,7 @@ const EditElement = React.createClass({
 
   render() {
     return (
-      <div className="block synthesis--edit__content">
+      <div className="synthesis__element">
         <Loader show={this.state.isLoading} />
         {this.renderElementPanel()}
         {this.renderHistory()}

@@ -44,23 +44,27 @@ export default {
           popular: 'Les plus populaires',
         },
       },
-      menu: {
-        contributions: 'CONTRIBUTIONS',
-        inbox: 'Non traitées',
+      topMenu: {
+        inbox: 'À traiter',
         archived: 'Traitées',
-        reported: 'Signalées',
-        trashed: 'Corbeille',
-        unpublished: 'Dépubliées',
+        published: 'Classées',
+        unpublished: 'Ignorées',
         all: 'Toutes',
-        tree: 'Arborescence',
-        new_folder: 'Nouveau dossier',
       },
-      inbox: {
-        none: 'Aucune contribution à afficher.',
+      sideMenu: {
+        tree: 'Arborescence',
+        newFolder: 'Nouveau dossier',
+        manageFolders: 'Gérer les dossiers',
+      },
+      list: {
+        none: 'Aucun élément.',
+      },
+      finder: {
+        root: 'Synthèse',
       },
       action: {
         create: {
-          button: 'Nouveau dossier',
+          label: 'Nouveau dossier',
           title: 'Nouveau dossier',
           btn_cancel: 'Annuler',
           btn_submit: 'Créer',
@@ -105,9 +109,6 @@ export default {
           btn_cancel: 'Annuler',
           btn_submit: 'Ignorer',
         },
-      },
-      finder: {
-        root: 'Synthèse',
       },
     },
   },

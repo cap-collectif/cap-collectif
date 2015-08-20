@@ -68,9 +68,9 @@ const ElementsInbox = React.createClass({
         );
       }
       return (
-        <div className="box synthesis__elements-list--empty  text-center">
+        <div className="synthesis__elements-list--empty  text-center">
           <p className="icon  cap-bubble-attention-6"></p>
-          <p>{this.getIntlMessage('edition.inbox.none')}</p>
+          <p>{this.getIntlMessage('edition.list.none')}</p>
         </div>
       );
     }
@@ -78,7 +78,7 @@ const ElementsInbox = React.createClass({
 
   render() {
     return (
-      <div className="block block--bordered synthesis--edit__content">
+      <div className="synthesis__inbox">
         <Loader show={this.state.isLoading} />
         {this.renderList()}
       </div>

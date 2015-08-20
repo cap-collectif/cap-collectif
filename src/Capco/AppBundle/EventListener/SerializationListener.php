@@ -9,17 +9,18 @@ use JMS\Serializer\SerializerBuilder;
 use Sonata\MediaBundle\Provider\ImageProvider;
 use JMS\Serializer\EventDispatcher\EventSubscriberInterface;
 use JMS\Serializer\EventDispatcher\ObjectEvent;
+use Sonata\MediaBundle\Twig\Extension\MediaExtension;
 
 class SerializationListener implements EventSubscriberInterface
 {
     private $logManager;
-    private $imageProvider;
+    private $mediaExtension;
     private $serializer;
 
-    public function __construct(LogManager $logManager, ImageProvider $imageProvider, Serializer $serializer)
+    public function __construct(LogManager $logManager, MediaExtension $mediaExtension, Serializer $serializer)
     {
         $this->logManager = $logManager;
-        $this->imageProvider = $imageProvider;
+        $this->mediaExtension = $mediaExtension;
         $this->serializer = $serializer;
     }
 
@@ -36,7 +37,7 @@ class SerializationListener implements EventSubscriberInterface
     {
         $event->getVisitor()->addData(
             'url',
-            $this->imageProvider->generatePublicUrl($event->getObject(), 'default_small')
+            $this->mediaExtension->path($event->getObject(), 'avatar')
         );
     }
 

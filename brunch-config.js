@@ -49,7 +49,8 @@ exports.config = {
           'bower_components/mailcheck/src/mailcheck.js',
           'bower_components/react-router/build/umd/ReactRouter.js',
           'bower_components/react-bootstrap/react-bootstrap.js',
-          'bower_components/classnames/index.js'
+          'bower_components/classnames/index.js',
+          'bower_components/react-router-bootstrap/lib/ReactRouterBootstrap.js'
         ],
         'js/app.js': [
           'app/Resources/js/synthesis.js',

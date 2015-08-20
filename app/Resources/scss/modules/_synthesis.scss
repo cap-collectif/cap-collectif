@@ -1,26 +1,25 @@
 /* ===============================================================
    $Synthesis
 ================================================================*/
-$icons-colors:
-  (blue #377BB5)
-  (green #5FB760)
-  (orange #EEAC57)
-  (grey #808080)
-  (black #2B2C2D)
-;
 
-// Icon colors
+// **************************** Colors ************************************************
+$white: #fff;
+$lightest-gray: #f6f6f6;
+$lighter-gray: #ebebeb;
+$light-gray: #ddd;
+$gray: #999;
+$dark-gray: #666;
+$darker-gray: #333;
+$black: #000;
+$blue: #377BB5;
+$green: #5FB760;
+$orange: #EEAC57;
+$red: #D9534F;
+$dark-red: #A94442;
 
-@each $icolor in $icons-colors {
-  $name: nth($icolor, 1);
-  $color: nth($icolor, 2);
 
-  .icon--#{$name} {
-    color: $color;
-  }
-}
 
-// 100% height layout with scrollable columns
+// **************************** Layout ************************************************
 
 .synthesis_page body {
   padding-top: 120px;
@@ -51,24 +50,31 @@ $icons-colors:
     }
   }
 
-  .scrollable-col {
+  // Columns
+  .col--left,
+  .col--right {
     position: absolute;
     top: 0;
     bottom: 0;
-    overflow-y: scroll;
     height: 100%;
     padding-top: 15px;
+  }
 
-    &.left {
-      left: 0;
-      width: 30%;
-      background-color: #efefef;
-    }
+  .col--scrollable {
+    overflow-y: scroll;
+  }
 
-    &.right {
-      right: 0;
-      width: 70%;
-    }
+  .col--left {
+    left: 0;
+    width: 30%;
+    background-color: $lightest-gray;
+    padding: 0;
+    padding-top: 15px;
+  }
+
+  .col--right {
+    right: 0;
+    width: 70%;
   }
 
   .synthesis__side-menu {
@@ -109,7 +115,9 @@ $icons-colors:
   }
 }
 
-// Main navbar
+
+// **************************** Main navbar ************************************************
+
 .synthesis__main-navbar {
 
   .navbar-brand {
@@ -129,12 +137,14 @@ $icons-colors:
   }
 }
 
-// Second navbar
+
+// ****************************** Second navbar ***************************************
+
 .synthesis__second-navbar {
   top: 50px;
   z-index: 1020;
   color: $white;
-  background-color: $brand-danger;
+  background-color: $red;
 
   .navbar-brand,
   .navbar-brand:hover,
@@ -143,7 +153,9 @@ $icons-colors:
   }
 }
 
-// Menu
+
+// *************************************** Side menu **************************************
+
 .synthesis__side-menu {
 
   position: relative;
@@ -151,13 +163,13 @@ $icons-colors:
   .menu__block {
     font-size: 14px;
     background-color: $white;
-    border: 1px solid $border-color;
+    border: 1px solid $light-gray;
 
     .nav {
 
       li {
         overflow: hidden;
-        border-top: 1px solid $border-color;
+        border-top: 1px solid $light-gray;
         width: 100%;
         position: relative;
 
@@ -175,8 +187,7 @@ $icons-colors:
         & > a.active:hover,
         & > span.active
         & > span.active:hover {
-          border-left: 5px solid $brand-primary;
-          background-color: $light-gray;
+          background-color: $lightest-gray;
           font-weight: bold;
 
           .menu__item-title {
@@ -186,7 +197,7 @@ $icons-colors:
 
         &:hover > a,
         &:hover > span {
-          background-color: $light-gray;
+          background-color: $lightest-gray;
         }
       }
     }
@@ -212,6 +223,13 @@ $icons-colors:
     }
 
   }
+
+  @media (min-width: $screen-sm-min) {
+    .button--down {
+      position: absolute;
+      bottom: 0;
+    }
+  }
 }
 
 @media (min-width: $screen-sm-min) and (max-width: $screen-sm-max) {
@@ -234,14 +252,98 @@ $icons-colors:
   }
 }
 
-// Element
+// ******************************** Top menu *************************************************
+
+.synthesis__top-menu {
+
+  @media (min-width: $screen-sm-min) {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    right: 15px;
+    z-index: 1000;
+
+    .nav > li > a {
+      height: 60px;
+    }
+  }
+
+  .nav {
+    border-bottom: none;
+  }
+
+  .menu__item {
+    border-right: 1px solid $light-gray;
+    border-top: 1px solid $light-gray;
+    background-color: $lightest-gray;
+
+    & > a {
+      margin-right: 0;
+      @include border-radius(0 !important);
+      border: none;
+      color: $black;
+      border-top: 2px solid transparent;
+    }
+  }
+  .menu__item.active {
+    border-top: 1px solid transparent;
+  }
+  .menu__item.active > a {
+    border-left: none;
+    border-right: none;
+  }
+  .menu__item:first-child > a {
+    border-left: 1px solid $light-gray;
+  }
+}
+
+// ******************************* Content ******************************************
+
+.synthesis__content {
+  @media (min-width: $screen-sm-min) {
+    padding-top: 60px;
+    position: relative;
+    height: 100%;
+    z-index: 100;
+    overflow-y: scroll;
+    padding-bottom: 15px;
+  }
+}
+
+// ***************************** Elements list *******************************************
+
+.synthesis__elements-list {
+  border: 1px solid $light-gray;
+  margin-bottom: 0;
+
+  .element {
+    border-top: 1px solid $light-gray;
+    &:first-child {
+      border-top: 0;
+    }
+  }
+}
+
+// Empty elements list
+.synthesis__elements-list--empty {
+  padding: 30px 15px;
+  color: $gray;
+  font-weight: bold;
+  .icon {
+    font-size: 40px;
+    margin-bottom: 0;
+  }
+}
+
+
+// ***************************** Element *************************************************
 .element {
 
   font-size: 15px;
   background-color: $white;
 
   &:hover {
-    background-color: $light-gray;
+    background-color: $lightest-gray;
   }
 
   .element__breadcrumb {
@@ -270,7 +372,7 @@ $icons-colors:
 
       &.excerpt {
         a {
-          color: $excerpt;
+          color: $gray;
         }
       }
     }
@@ -282,13 +384,13 @@ $icons-colors:
         text-decoration: none;
       }
       a:hover {
-        color: $link-color;
+        color: $blue;
       }
     }
 
     .element__title {
       color: black;
-      font-size: $font-size-base;
+      font-size: 16px;
       margin: 0 0 5px;
       font-weight: normal;
       word-break: break-word;
@@ -323,28 +425,6 @@ $icons-colors:
   }
 }
 
-// Elements list
-.synthesis__elements-list {
-  margin-bottom: 0;
-
-  .element {
-    border-top: 1px solid $border-color;
-    &:first-child {
-      border-top: 0;
-    }
-  }
-}
-
-// Empty elements list
-.synthesis__elements-list--empty {
-  color: $dark-gray;
-  font-weight: bold;
-  .icon {
-    font-size: 40px;
-    margin-bottom: 0;
-  }
-}
-
 // Element panel
 .synthesis__element-panel {
 
@@ -369,7 +449,7 @@ $icons-colors:
 }
 
 .element__description {
-  border-top: 1px solid $border-color;
+  border-top: 1px solid $light-gray;
   word-wrap: break-word;
   overflow: hidden;
   .element__chart {
@@ -471,8 +551,10 @@ $icons-colors:
 }
 
 // Elements tree
-.synthesis__elements-tree {
-  border: 1px solid $border-color;
+
+.synthesis__tree {
+  border: 1px solid $light-gray;
+  border-top: none;
 }
 
 .elements-tree__list {
@@ -485,7 +567,7 @@ $icons-colors:
   display: block;
 }
 .elements-tree__item-content {
-  border-top: 1px solid $border-color;
+  border-top: 1px solid $light-gray;
   position: relative;
 }
 .elements-tree__list:first-child > .elements-tree__item:first-child > .elements-tree__item-content {
@@ -533,14 +615,14 @@ $icons-colors:
 
 // Elements finder
 .elements__finder {
-  border: 1px solid $border-color;
+  border: 1px solid $light-gray;
 
   .elements-tree__item-content {
     cursor: pointer;
   }
 
   .elements-tree__item-content.selected {
-    background-color: $brand-primary;
+    background-color: $blue;
     color: $white;
   }
 
@@ -566,8 +648,8 @@ $icons-colors:
   }
 
   .panel--original-element {
-    background-color: $alt-section;
-    border-right: 1px solid $border-color;
+    background-color: $lightest-gray;
+    border-right: 1px solid $light-gray;
 
     .element__title {
       margin-top: 0;
@@ -587,13 +669,13 @@ $icons-colors:
       margin-top: 15px;
       margin-bottom: 0;
       list-style-type: none;
-      border: 1px solid $border-color;
+      border: 1px solid $light-gray;
       padding: 0;
     }
 
     .division__element {
-      border-top: 1px solid $border-color;
-      background-color: $alt-section;
+      border-top: 1px solid $light-gray;
+      background-color: $lightest-gray;
       padding: 15px;
       &:first-child {
         border-top: none;
@@ -606,9 +688,38 @@ $icons-colors:
   }
 }
 
+// ********************************* Utils **********************************************
+
+// Colors
+$items-colors:
+  (blue $blue)
+  (green $green)
+  (orange $orange)
+  (gray $gray)
+  (black $black)
+;
+
+@each $icolor in $items-colors {
+  $name: nth($icolor, 1);
+  $color: nth($icolor, 2);
+
+  .icon--#{$name} {
+    color: $color;
+  }
+
+  .synthesis__top-menu .menu__item--#{$name}.active > a,
+  .synthesis__top-menu .menu__item--#{$name}.active > a:hover,
+  .synthesis__top-menu .menu__item--#{$name}.active > a:focus,
+  .synthesis__top-menu .menu__item--#{$name} > a:hover,
+  .synthesis__top-menu .menu__item--#{$name} > a:focus {
+    border-top: 2px solid $color;
+  }
+}
+
 
 // Loader
 .spinner-loader-container {
-  padding-top: 30px;
+  text-align: center;
+  padding-top: 50px;
   padding-bottom: 30px;
 }

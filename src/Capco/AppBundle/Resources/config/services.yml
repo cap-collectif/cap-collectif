@@ -341,7 +341,7 @@ services:
 
   capco.serialization_listener:
     class: Capco\AppBundle\EventListener\SerializationListener
-    arguments: [@capco.synthesis.log_manager, @sonata.media.provider.image, @jms_serializer]
+    arguments: [@capco.synthesis.log_manager, @sonata.media.twig.extension, @jms_serializer]
     tags:
       - { name: "jms_serializer.event_subscriber" }
 

@@ -41,39 +41,6 @@ const SideMenu = React.createClass({
     this.loadNewElementsCountFromServer();
   },
 
-  getContributionsMenuItems() {
-    return [
-      {
-        'link': '/inbox/new',
-        'color': 'blue',
-        'icon': 'cap-download-6',
-        'label': 'inbox',
-        'nb': '(' + this.state.countNew + ')',
-      },
-      {
-        'link': '/inbox/archived',
-        'color': 'green',
-        'icon': 'cap-check-4',
-        'label': 'archived',
-        'nb': null,
-      },
-      {
-        'link': '/inbox/unpublished',
-        'color': 'grey',
-        'icon': 'cap-delete-2',
-        'label': 'unpublished',
-        'nb': null,
-      },
-      {
-        'link': '/inbox/all',
-        'color': 'grey',
-        'icon': 'cap-baloon',
-        'label': 'all',
-        'nb': null,
-      },
-    ];
-  },
-
   getFoldersMenuItems() {
     return [
       {
@@ -84,23 +51,6 @@ const SideMenu = React.createClass({
         'nb': null,
       },
     ];
-  },
-
-  renderContributionsMenu() {
-    const items = this.getContributionsMenuItems();
-    return (
-      <div className="block menu__block menu--contributions">
-        <ul className="nav">
-          {
-            items.map((item) => {
-              return (
-                this.renderMenuItem(item)
-              );
-            })
-          }
-        </ul>
-      </div>
-    );
   },
 
   renderFoldersMenu() {
@@ -126,7 +76,7 @@ const SideMenu = React.createClass({
         <Link to={item.link}>
           <div className="menu__icon"><i className={'cap ' + item.icon + ' icon--' + item.color}></i></div>
           <div className="menu__item">
-            <h3 className="menu__item-title">{this.getIntlMessage('edition.menu.' + item.label)} {item.nb}</h3>
+            <h3 className="menu__item-title">{this.getIntlMessage('edition.sideMenu.' + item.label)} {item.nb}</h3>
           </div>
         </Link>
       </li>
@@ -142,9 +92,8 @@ const SideMenu = React.createClass({
   render() {
     return (
       <div className="synthesis__side-menu">
-        {this.renderContributionsMenu()}
         {this.renderFoldersMenu()}
-        <CreateButton style={{position: 'fixed', bottom: 0}} parent={null} onModal={this.toggleCreateModal} />
+        <CreateButton className="button--down" parent={null} onModal={this.toggleCreateModal} />
         {this.renderCreateModal()}
       </div>
     );

@@ -92,7 +92,7 @@ const ElementTree = React.createClass({
 
   render() {
     return (
-      <div className="synthesis__elements-tree">
+      <div className="synthesis__tree">
         <Loader show={this.state.isLoading} />
         {this.renderTreeItems(this.state.rootElements, 0)}
       </div>

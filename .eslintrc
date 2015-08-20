@@ -13,6 +13,7 @@
     "ReactRouter": true,
     "ReactIntl": true,
     "ReactBootstrap": true,
+    "ReactRouterBootstrap": true,
     "Flux": true,
     "EventEmitter",
     "document": true,

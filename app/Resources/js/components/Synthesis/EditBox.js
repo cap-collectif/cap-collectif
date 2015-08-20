@@ -1,6 +1,7 @@
-import SideMenu from './SideMenu';
 import MainNavbar from './MainNavbar';
 import SecondNavbar from './SecondNavbar';
+import SideMenu from './SideMenu';
+import TopMenu from './TopMenu';
 
 const RouteHandler = ReactRouter.RouteHandler;
 
@@ -18,11 +19,14 @@ const EditBox = React.createClass({
           <SecondNavbar />
           <div className="synthesis__container container-fluid">
             <div className="row">
-              <div className="scrollable-col left col-xs-12 block--mobile">
+              <div className="col--left col--scrollable col-xs-12 block--mobile">
                 <SideMenu synthesis={this.props.synthesis} />
               </div>
-              <div className="scrollable-col right col-xs-12 block--mobile">
-                <RouteHandler synthesis={this.props.synthesis} />
+              <div className="col--right col-xs-12 block--mobile">
+                <TopMenu synthesis={this.props.synthesis} />
+                <div className="synthesis__content">
+                  <RouteHandler synthesis={this.props.synthesis} />
+                </div>
               </div>
             </div>
           </div>
