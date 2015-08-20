@@ -56,11 +56,6 @@ def load_base_data():
         local('php app/console capco:load-base-data --force -n -e test')
 
 @task
-def validate_schema():
-    with lcd(env.local_dir):
-        local('php app/console doctrine:schema:validate')
-
-@task
 def reinit_data():
     with lcd(env.local_dir):
         local('php app/console capco:reinit --force')
