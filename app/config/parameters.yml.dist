@@ -25,9 +25,6 @@ parameters:
     twitter_app_id: xxxx
     twitter_app_secret: xxxx
 
-    registration_email_address: coucou@cap-collectif.com
-    registration_sender_name: Cap Collectif
-
     redis_prefix: dev
 
     shield_login: ***REMOVED***
