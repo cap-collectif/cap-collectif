@@ -81,11 +81,6 @@ security:
 
                 oauth_user_provider:
                     service: my_user_provider
-            remember_me:
-                key: %remember_secret%
-                lifetime: 31536000
-                path: /
-                domain: ~
             logout:             true
             anonymous:          true
 

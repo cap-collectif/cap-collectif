@@ -69,12 +69,6 @@
                                 </label>
                                 <input type="password" class="form-control" id="password" name="_password" required="required" tabindex="2">
                             </div>
-                            <div class="checkbox login__checkbox">
-                                <label for="remember_me">
-                                    <input type="checkbox" id="remember_me" name="_remember_me"/>
-                                    {{ 'security.login.remember_me'|trans({}, 'FOSUserBundle') }}
-                                </label>
-                            </div>
                             <input type="hidden" name="_csrf_token" value="{{ csrf_token }}"/>
                             <button tabindex="3" type="submit" class="btn  btn-success  btn-block  login__submit">{{ 'user.login.submit' | trans({}, 'CapcoAppBundle') }}</button>
                         </form>

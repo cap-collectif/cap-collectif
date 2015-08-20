@@ -25,6 +25,9 @@ parameters:
     twitter_app_id: xxxx
     twitter_app_secret: xxxx
 
+    registration_email_address: coucou@cap-collectif.com
+    registration_sender_name: Cap Collectif
+
     redis_prefix: dev
 
     shield_login: ***REMOVED***
@@ -38,5 +41,3 @@ parameters:
     jwt_token_ttl:        86400
 
     language_analyzer: french                                     # language analyzer to use for elasticsearch
-
-    remember_secret: '***REMOVED***'                           # secret for remember me functionality

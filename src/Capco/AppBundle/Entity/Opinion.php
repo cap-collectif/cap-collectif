@@ -97,7 +97,7 @@ class Opinion
 
     /**
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\ConsultationStep", inversedBy="opinions", cascade={"persist"})
-     * @ORM\JoinColumn(name="step_id", referencedColumnName="id", nullable=false)
+     * @ORM\JoinColumn(name="step_id", referencedColumnName="id", nullable=true)
      * @Assert\NotNull()
      */
     private $step;
