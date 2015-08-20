@@ -32,14 +32,6 @@ class Version20150819105432 extends AbstractMigration
         $this->addSql('ALTER TABLE argument ADD opinion_version_id INT DEFAULT NULL');
         $this->addSql('ALTER TABLE argument ADD CONSTRAINT FK_D113B0AD077154C FOREIGN KEY (opinion_version_id) REFERENCES opinion_version (id) ON DELETE CASCADE');
         $this->addSql('CREATE INDEX IDX_D113B0AD077154C ON argument (opinion_version_id)');
-        $this->addSql('ALTER TABLE opinion CHANGE step_id step_id INT NOT NULL');
-        $this->addSql('ALTER TABLE opinion_type ADD versionable TINYINT(1) NOT NULL');
-        $this->addSql('ALTER TABLE reporting ADD opinion_version_id INT DEFAULT NULL');
-        $this->addSql('ALTER TABLE reporting ADD CONSTRAINT FK_BD7CFA9FD077154C FOREIGN KEY (opinion_version_id) REFERENCES opinion_version (id) ON DELETE CASCADE');
-        $this->addSql('CREATE INDEX IDX_BD7CFA9FD077154C ON reporting (opinion_version_id)');
-        $this->addSql('ALTER TABLE source ADD opinion_version_id INT DEFAULT NULL, CHANGE opinion_id opinion_id INT DEFAULT NULL');
-        $this->addSql('ALTER TABLE source ADD CONSTRAINT FK_5F8A7F73D077154C FOREIGN KEY (opinion_version_id) REFERENCES opinion_version (id) ON DELETE CASCADE');
-        $this->addSql('CREATE INDEX IDX_5F8A7F73D077154C ON source (opinion_version_id)');
     }
 
     /**
@@ -53,19 +45,11 @@ class Version20150819105432 extends AbstractMigration
         $this->addSql('ALTER TABLE opinion_appendices DROP FOREIGN KEY FK_CE7C748A8DAE1A1E');
         $this->addSql('ALTER TABLE votes DROP FOREIGN KEY FK_518B7ACFD077154C');
         $this->addSql('ALTER TABLE argument DROP FOREIGN KEY FK_D113B0AD077154C');
-        $this->addSql('ALTER TABLE reporting DROP FOREIGN KEY FK_BD7CFA9FD077154C');
-        $this->addSql('ALTER TABLE source DROP FOREIGN KEY FK_5F8A7F73D077154C');
         $this->addSql('DROP TABLE opinion_appendices');
         $this->addSql('DROP TABLE opinion_type_appendices_type');
         $this->addSql('DROP TABLE opinion_version');
         $this->addSql('DROP INDEX IDX_D113B0AD077154C ON argument');
         $this->addSql('ALTER TABLE argument DROP opinion_version_id');
-        $this->addSql('ALTER TABLE opinion CHANGE step_id step_id INT DEFAULT NULL');
-        $this->addSql('ALTER TABLE opinion_type DROP versionable');
-        $this->addSql('DROP INDEX IDX_BD7CFA9FD077154C ON reporting');
-        $this->addSql('ALTER TABLE reporting DROP opinion_version_id');
-        $this->addSql('DROP INDEX IDX_5F8A7F73D077154C ON source');
-        $this->addSql('ALTER TABLE source DROP opinion_version_id, CHANGE opinion_id opinion_id INT NOT NULL');
         $this->addSql('DROP INDEX IDX_518B7ACFD077154C ON votes');
         $this->addSql('ALTER TABLE votes DROP opinion_version_id');
     }
