@@ -124,7 +124,7 @@ services:
   ## Service Notify - send mail
   capco.notify_manager:
     class:     %capco.notify.manager.class%
-    arguments: [@mailer, @templating, @translator, @capco.site_parameter.resolver, @router, {confirmation.template: %fos_user.registration.confirmation.template%, resetting.template: %fos_user.resetting.email.template%}]
+    arguments: [@mailer, @templating, @translator, @capco.site_parameter.resolver]
 
   ## Toggle
   capco.toggle.manager:

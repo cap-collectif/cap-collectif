@@ -4,7 +4,7 @@ registration:
     body: Pour finaliser la création de votre compte, merci de cliquer sur le lien que nous venons de vous envoyer par e-mail à l'adresse %email%.
     content:
       title: Pourquoi dois-je confirmer mon adresse électronique ?
-      body: Pour empêcher les fausses inscriptions, vous envoyer des notifications par e-mail liées au service. Par exemple, vous pourrez recevoir des messages relatifs à la réinitialisation de votre mot de passe si vous avez oublié vos données de connexion.
+      body: Pour empêcher les fausses inscriptions, vous envoyer des notifications par e-mail liées au service. Par exemple, vous ne pourrez recevoir de messages relatifs à la réinitialisation de votre mot de passe si vous avez oublié vos données de connexion.
   flash:
     user_created: Merci ! Votre compte a bien été créé.
 

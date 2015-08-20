@@ -1,10 +1,7 @@
 admin:
   mail:
     contact: Adresse email de contact
-    notifications:
-      receive_address: Adresse électronique de réception des notifications
-      send_name: Nom de l'expéditeur des notifications
-      send_address: Adresse électronique d'envoi des notifications
+    notifications: Adresse électronique
 
 blog:
   jumbotron:

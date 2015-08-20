@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "4eb8b50f50775fb2a1d34cc68d661a38",
+    "hash": "05cea6f288d13b1ded22383439ba6a98",
     "packages": [
         {
             "name": "behat/transliterator",
@@ -2777,16 +2777,16 @@
         },
         {
             "name": "monolog/monolog",
-            "version": "1.16.0",
+            "version": "1.15.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Seldaek/monolog.git",
-                "reference": "c0c0b4bee3aabce7182876b0d912ef2595563db7"
+                "reference": "dc5150cc608f2334c72c3b6a553ec9668a4156b0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Seldaek/monolog/zipball/c0c0b4bee3aabce7182876b0d912ef2595563db7",
-                "reference": "c0c0b4bee3aabce7182876b0d912ef2595563db7",
+                "url": "https://api.github.com/repos/Seldaek/monolog/zipball/dc5150cc608f2334c72c3b6a553ec9668a4156b0",
+                "reference": "dc5150cc608f2334c72c3b6a553ec9668a4156b0",
                 "shasum": ""
             },
             "require": {
@@ -2823,7 +2823,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.16.x-dev"
+                    "dev-master": "1.15.x-dev"
                 }
             },
             "autoload": {
@@ -2849,7 +2849,7 @@
                 "logging",
                 "psr-3"
             ],
-            "time": "2015-08-09 17:44:44"
+            "time": "2015-07-12 13:54:09"
         },
         {
             "name": "namshi/jose",
@@ -3798,16 +3798,16 @@
         },
         {
             "name": "sensiolabs/security-checker",
-            "version": "v3.0.1",
+            "version": "v3.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sensiolabs/security-checker.git",
-                "reference": "7735fd97ff7303d9df776b8dbc970f949399abc9"
+                "reference": "8d32035cfe692efb3dddd0d828f8261280ec9006"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sensiolabs/security-checker/zipball/7735fd97ff7303d9df776b8dbc970f949399abc9",
-                "reference": "7735fd97ff7303d9df776b8dbc970f949399abc9",
+                "url": "https://api.github.com/repos/sensiolabs/security-checker/zipball/8d32035cfe692efb3dddd0d828f8261280ec9006",
+                "reference": "8d32035cfe692efb3dddd0d828f8261280ec9006",
                 "shasum": ""
             },
             "require": {
@@ -3838,7 +3838,7 @@
                 }
             ],
             "description": "A security checker for your composer.lock",
-            "time": "2015-08-11 12:11:25"
+            "time": "2015-08-03 10:03:32"
         },
         {
             "name": "sonata-project/admin-bundle",
@@ -3846,12 +3846,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sonata-project/SonataAdminBundle.git",
-                "reference": "d47fa796b1614b49637837a1e8ef2e22433d0c33"
+                "reference": "652dd3f88c1ec9579fb59a32b972808184e4f017"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sonata-project/SonataAdminBundle/zipball/d47fa796b1614b49637837a1e8ef2e22433d0c33",
-                "reference": "d47fa796b1614b49637837a1e8ef2e22433d0c33",
+                "url": "https://api.github.com/repos/sonata-project/SonataAdminBundle/zipball/652dd3f88c1ec9579fb59a32b972808184e4f017",
+                "reference": "652dd3f88c1ec9579fb59a32b972808184e4f017",
                 "shasum": ""
             },
             "require": {
@@ -3860,7 +3860,7 @@
                 "knplabs/knp-menu": ">=2.0,<3.0",
                 "knplabs/knp-menu-bundle": ">=2.0,<3.0.0",
                 "sonata-project/block-bundle": "~2.3",
-                "sonata-project/core-bundle": "^2.3.6",
+                "sonata-project/core-bundle": "^2.3.2",
                 "sonata-project/exporter": "~1.0",
                 "symfony/class-loader": "~2.3",
                 "symfony/config": "~2.3",
@@ -3871,6 +3871,7 @@
                 "symfony/http-foundation": "~2.3",
                 "symfony/property-access": "~2.3",
                 "symfony/routing": "~2.3",
+                "symfony/security-acl": "~2.3",
                 "symfony/security-bundle": "~2.3",
                 "symfony/translation": "~2.3",
                 "symfony/twig-bridge": "~2.3",
@@ -3883,14 +3884,12 @@
                 "sensio/generator-bundle": "~2.3",
                 "sonata-project/intl-bundle": "~2.1",
                 "symfony/phpunit-bridge": "~2.7|~3.0",
-                "symfony/security-acl": "~2.4",
                 "symfony/yaml": "~2.3"
             },
             "suggest": {
                 "jms/translation-bundle": "Extract message keys from Admins",
                 "sensio/generator-bundle": "Add sonata:admin:generate command",
-                "sonata-project/intl-bundle": "Add localized date and number into the list",
-                "symfony/security-acl": "To make sonata working with Symfony >=2.8"
+                "sonata-project/intl-bundle": "Add localized date and number into the list"
             },
             "type": "symfony-bundle",
             "extra": {
@@ -3926,7 +3925,7 @@
                 "bootstrap",
                 "sonata"
             ],
-            "time": "2015-08-17 15:26:45"
+            "time": "2015-08-04 13:59:41"
         },
         {
             "name": "sonata-project/block-bundle",
@@ -4060,12 +4059,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sonata-project/SonataClassificationBundle.git",
-                "reference": "0c37ac24a83302d973825070f3b9ddf67e1d8599"
+                "reference": "edd5f24121455b5a91d801b1bd70a699a5d45e64"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sonata-project/SonataClassificationBundle/zipball/0c37ac24a83302d973825070f3b9ddf67e1d8599",
-                "reference": "0c37ac24a83302d973825070f3b9ddf67e1d8599",
+                "url": "https://api.github.com/repos/sonata-project/SonataClassificationBundle/zipball/edd5f24121455b5a91d801b1bd70a699a5d45e64",
+                "reference": "edd5f24121455b5a91d801b1bd70a699a5d45e64",
                 "shasum": ""
             },
             "require": {
@@ -4118,20 +4117,20 @@
                 "tag",
                 "taxonomy"
             ],
-            "time": "2015-08-09 10:19:13"
+            "time": "2015-07-13 07:48:31"
         },
         {
             "name": "sonata-project/core-bundle",
-            "version": "2.3.6",
+            "version": "2.3.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sonata-project/SonataCoreBundle.git",
-                "reference": "2f8af76dbf43f6745f32605d7e2df2c645577fde"
+                "reference": "ebb05829aaa9f0fc0afa904bf6b6441ea34cf638"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sonata-project/SonataCoreBundle/zipball/2f8af76dbf43f6745f32605d7e2df2c645577fde",
-                "reference": "2f8af76dbf43f6745f32605d7e2df2c645577fde",
+                "url": "https://api.github.com/repos/sonata-project/SonataCoreBundle/zipball/ebb05829aaa9f0fc0afa904bf6b6441ea34cf638",
+                "reference": "ebb05829aaa9f0fc0afa904bf6b6441ea34cf638",
                 "shasum": ""
             },
             "require": {
@@ -4187,7 +4186,7 @@
             "keywords": [
                 "sonata"
             ],
-            "time": "2015-08-18 08:42:31"
+            "time": "2015-06-16 14:06:45"
         },
         {
             "name": "sonata-project/datagrid-bundle",
@@ -4195,12 +4194,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sonata-project/SonataDatagridBundle.git",
-                "reference": "cc42f2801011d7ebc65edda451a2efa4b4d1fbb9"
+                "reference": "fec0147e99b3db467152d148126e2f894c9369a2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sonata-project/SonataDatagridBundle/zipball/cc42f2801011d7ebc65edda451a2efa4b4d1fbb9",
-                "reference": "cc42f2801011d7ebc65edda451a2efa4b4d1fbb9",
+                "url": "https://api.github.com/repos/sonata-project/SonataDatagridBundle/zipball/fec0147e99b3db467152d148126e2f894c9369a2",
+                "reference": "fec0147e99b3db467152d148126e2f894c9369a2",
                 "shasum": ""
             },
             "require": {
@@ -4244,7 +4243,7 @@
                 "datagrid",
                 "sonata"
             ],
-            "time": "2015-08-06 14:47:50"
+            "time": "2015-07-07 10:54:34"
         },
         {
             "name": "sonata-project/doctrine-extensions",
@@ -4301,12 +4300,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sonata-project/SonataDoctrineORMAdminBundle.git",
-                "reference": "a883b10c09d136de617c1e53c2782648909a8c06"
+                "reference": "2cd709777b571f7f7e294ad4575f38955e6da963"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sonata-project/SonataDoctrineORMAdminBundle/zipball/a883b10c09d136de617c1e53c2782648909a8c06",
-                "reference": "a883b10c09d136de617c1e53c2782648909a8c06",
+                "url": "https://api.github.com/repos/sonata-project/SonataDoctrineORMAdminBundle/zipball/2cd709777b571f7f7e294ad4575f38955e6da963",
+                "reference": "2cd709777b571f7f7e294ad4575f38955e6da963",
                 "shasum": ""
             },
             "require": {
@@ -4366,7 +4365,7 @@
                 "generator",
                 "sonata"
             ],
-            "time": "2015-08-12 15:54:16"
+            "time": "2015-07-07 10:56:05"
         },
         {
             "name": "sonata-project/easy-extends-bundle",
@@ -4605,13 +4604,13 @@
             "version": "dev-master",
             "source": {
                 "type": "git",
-                "url": "https://github.com/sonata-project/SonataMediaBundle.git",
-                "reference": "5b7da8ae4ef7cbaad971094b6d6a07dcfe67dd34"
+                "url": "https://github.com/spyl94/SonataMediaBundle.git",
+                "reference": "d6cb0062cc4f77393959607c2d95137d5f71c57d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sonata-project/SonataMediaBundle/zipball/76a32bf9bb0f9d6ba0d2a31ffedf27cb7d519901",
-                "reference": "5b7da8ae4ef7cbaad971094b6d6a07dcfe67dd34",
+                "url": "https://api.github.com/repos/spyl94/SonataMediaBundle/zipball/5b7da8ae4ef7cbaad971094b6d6a07dcfe67dd34",
+                "reference": "d6cb0062cc4f77393959607c2d95137d5f71c57d",
                 "shasum": ""
             },
             "require": {
@@ -4690,7 +4689,7 @@
                 "vimeo",
                 "youtube"
             ],
-            "time": "2015-08-09 10:20:27"
+            "time": "2015-08-04 08:53:46"
         },
         {
             "name": "sonata-project/notification-bundle",
@@ -4774,12 +4773,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sonata-project/SonataUserBundle.git",
-                "reference": "ec09378a100dfe6285562e864c2286ef9104059e"
+                "reference": "0779677f667a3377ef2a9722c5d126d23fb18604"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sonata-project/SonataUserBundle/zipball/ec09378a100dfe6285562e864c2286ef9104059e",
-                "reference": "ec09378a100dfe6285562e864c2286ef9104059e",
+                "url": "https://api.github.com/repos/sonata-project/SonataUserBundle/zipball/0779677f667a3377ef2a9722c5d126d23fb18604",
+                "reference": "0779677f667a3377ef2a9722c5d126d23fb18604",
                 "shasum": ""
             },
             "require": {
@@ -4844,7 +4843,7 @@
                 "sonata",
                 "user"
             ],
-            "time": "2015-08-06 14:51:16"
+            "time": "2015-07-20 08:11:26"
         },
         {
             "name": "stof/doctrine-extensions-bundle",
@@ -5308,16 +5307,16 @@
         },
         {
             "name": "twig/twig",
-            "version": "v1.20.0",
+            "version": "v1.19.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/twigphp/Twig.git",
-                "reference": "1ea4e5f81c6d005fe84d0b38e1c4f1955eb86844"
+                "reference": "edbeaf43b0a606cdaadc32a11d2673614a377b90"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/twigphp/Twig/zipball/1ea4e5f81c6d005fe84d0b38e1c4f1955eb86844",
-                "reference": "1ea4e5f81c6d005fe84d0b38e1c4f1955eb86844",
+                "url": "https://api.github.com/repos/twigphp/Twig/zipball/edbeaf43b0a606cdaadc32a11d2673614a377b90",
+                "reference": "edbeaf43b0a606cdaadc32a11d2673614a377b90",
                 "shasum": ""
             },
             "require": {
@@ -5326,7 +5325,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.20-dev"
+                    "dev-master": "1.19-dev"
                 }
             },
             "autoload": {
@@ -5361,7 +5360,7 @@
             "keywords": [
                 "templating"
             ],
-            "time": "2015-08-12 15:56:39"
+            "time": "2015-07-31 13:45:26"
         },
         {
             "name": "willdurand/geocoder",
@@ -6819,16 +6818,16 @@
         },
         {
             "name": "phpspec/prophecy",
-            "version": "v1.5.0",
+            "version": "v1.4.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpspec/prophecy.git",
-                "reference": "4745ded9307786b730d7a60df5cb5a6c43cf95f7"
+                "reference": "3132b1f44c7bf2ec4c7eb2d3cb78fdeca760d373"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpspec/prophecy/zipball/4745ded9307786b730d7a60df5cb5a6c43cf95f7",
-                "reference": "4745ded9307786b730d7a60df5cb5a6c43cf95f7",
+                "url": "https://api.github.com/repos/phpspec/prophecy/zipball/3132b1f44c7bf2ec4c7eb2d3cb78fdeca760d373",
+                "reference": "3132b1f44c7bf2ec4c7eb2d3cb78fdeca760d373",
                 "shasum": ""
             },
             "require": {
@@ -6875,7 +6874,7 @@
                 "spy",
                 "stub"
             ],
-            "time": "2015-08-13 10:07:40"
+            "time": "2015-04-27 22:15:08"
         },
         {
             "name": "phpunit/php-code-coverage",
@@ -7070,16 +7069,16 @@
         },
         {
             "name": "phpunit/php-token-stream",
-            "version": "1.4.6",
+            "version": "1.4.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/php-token-stream.git",
-                "reference": "3ab72c62e550370a6cd5dc873e1a04ab57562f5b"
+                "reference": "7a9b0969488c3c54fd62b4d504b3ec758fd005d9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/php-token-stream/zipball/3ab72c62e550370a6cd5dc873e1a04ab57562f5b",
-                "reference": "3ab72c62e550370a6cd5dc873e1a04ab57562f5b",
+                "url": "https://api.github.com/repos/sebastianbergmann/php-token-stream/zipball/7a9b0969488c3c54fd62b4d504b3ec758fd005d9",
+                "reference": "7a9b0969488c3c54fd62b4d504b3ec758fd005d9",
                 "shasum": ""
             },
             "require": {
@@ -7115,7 +7114,7 @@
             "keywords": [
                 "tokenizer"
             ],
-            "time": "2015-08-16 08:51:00"
+            "time": "2015-06-19 03:43:16"
         },
         {
             "name": "phpunit/phpunit",
