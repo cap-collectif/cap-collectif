@@ -36,15 +36,17 @@ const OpinionArgumentButtons = React.createClass({
     if (!this.isTheUserTheAuthor()) {
       const reported = this.props.argument.has_user_reported;
       return (
-        <Button
-          href={reported ? null : this.props.argument._links.report}
-          bsSize="xsmall"
-          active={reported}
-          className="btn-dark-gray btn--outline"
-        >
-          <i className="cap cap-flag-1"></i>
-          {reported ? this.getIntlMessage('global.report.reported') : this.getIntlMessage('global.report.submit')}
-        </Button>
+        <LoginOverlay children={
+          <Button
+            href={reported ? null : this.props.argument._links.report}
+            bsSize="xsmall"
+            active={reported}
+            className="btn-dark-gray btn--outline"
+          >
+            <i className="cap cap-flag-1"></i>
+            {reported ? this.getIntlMessage('global.report.reported') : this.getIntlMessage('global.report.submit')}
+          </Button>
+        } />
       );
     }
   },
@@ -58,7 +60,6 @@ const OpinionArgumentButtons = React.createClass({
         </Button>
       );
     }
-    return <span />;
   },
 
   render() {
@@ -73,7 +74,8 @@ const OpinionArgumentButtons = React.createClass({
           { argument.votes_count + (this.state.hasVoted ? 1 : 0)}
         </span>
         { ' ' }
-        <LoginOverlay children={ this.renderReportButton() } />
+
+        { this.renderReportButton() }
         { this.renderEditButton() }
       </div>
     );

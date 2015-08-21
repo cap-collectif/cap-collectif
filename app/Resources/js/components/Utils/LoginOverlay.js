@@ -7,7 +7,7 @@ const Button = ReactBootstrap.Button;
 const LoginOverlay = React.createClass({
   propTypes: {
     children: React.PropTypes.element.isRequired,
-    isRegistrationEnabled: React.PropTypes.boolean,
+    isRegistrationEnabled: React.PropTypes.bool,
   },
   mixins: [ReactIntl.IntlMixin],
 

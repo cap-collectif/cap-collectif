@@ -10,7 +10,6 @@ const Col = ReactBootstrap.Col;
 
 const OpinionSourceForm = React.createClass({
   propTypes: {
-    opinionId: React.PropTypes.number.isRequired,
     opinion: React.PropTypes.object.isRequired,
     categories: React.PropTypes.array.isRequired,
   },
@@ -161,7 +160,7 @@ const OpinionSourceForm = React.createClass({
       }
 
       OpinionActions
-      .addSource(this.props.opinionId, data)
+      .addSource(this.props.opinion.id, data)
       .then(() => {
         this.reload();
       })
