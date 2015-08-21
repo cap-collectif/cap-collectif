@@ -6,7 +6,7 @@ import Fetcher from '../../services/Fetcher';
 const Row = ReactBootstrap.Row;
 const Col = ReactBootstrap.Col;
 
-const OpinionDataBox = React.createClass({
+const OpinionVersionsBox = React.createClass({
   propTypes: {
     opinionId: React.PropTypes.number.isRequired,
     opinionBody: React.PropTypes.string.isRequired,
@@ -24,12 +24,12 @@ const OpinionDataBox = React.createClass({
   },
 
   componentDidMount() {
-    this.loadDataFromServer();
+    this.loadVersionsFromServer();
   },
 
   componentDidUpdate(prevProps, prevState) {
     if (this.state.filter !== prevState.filter) {
-      this.loadDataFromServer();
+      this.loadVersionsFromServer();
     }
   },
 
@@ -72,7 +72,7 @@ const OpinionDataBox = React.createClass({
     });
   },
 
-  loadDataFromServer() {
+  loadVersionsFromServer() {
     this.setState({'isLoading': true});
 
     Fetcher
@@ -88,4 +88,4 @@ const OpinionDataBox = React.createClass({
 
 });
 
-export default OpinionDataBox;
+export default OpinionVersionsBox;

@@ -10,8 +10,8 @@ const Input = ReactBootstrap.Input;
 
 const OpinionVersionForm = React.createClass({
   propTypes: {
-    opinionId: React.PropTypes.object,
-    opinionBody: React.PropTypes.string,
+    opinionId: React.PropTypes.number.isRequired,
+    opinionBody: React.PropTypes.string.isRequired,
   },
   mixins: [ReactIntl.IntlMixin, React.addons.LinkedStateMixin, CkeditorMixin],
 
@@ -39,7 +39,7 @@ const OpinionVersionForm = React.createClass({
 
   renderCreateButton() {
     return (
-      <Button bsStyle="primary" onClick={LoginStore.isLoggedIn() ? this.show.bind(this) : null}>
+      <Button bsStyle="primary" onClick={LoginStore.isLoggedIn() ? this.show.bind(null, this) : null}>
         <i className="cap cap-add-1"></i>
         { ' ' + this.getIntlMessage('opinion.add_new_version')}
       </Button>
@@ -52,7 +52,7 @@ const OpinionVersionForm = React.createClass({
         <LoginOverlay children={this.renderCreateButton()} />
         <Modal {...this.props}
           animation={false} show={this.state.showModal}
-          onHide={this.close.bind(this)} bsSize="large" aria-labelledby="contained-modal-title-lg"
+          onHide={this.close.bind(null, this)} bsSize="large" aria-labelledby="contained-modal-title-lg"
         >
           <Modal.Header closeButton>
             <Modal.Title id="contained-modal-title-lg">
@@ -96,7 +96,7 @@ const OpinionVersionForm = React.createClass({
             </form>
           </Modal.Body>
           <Modal.Footer>
-            <Button onClick={this.close.bind(this)}>
+            <Button onClick={this.close.bind(null, this)}>
               {this.getIntlMessage('global.cancel')}
             </Button>
             <Button
