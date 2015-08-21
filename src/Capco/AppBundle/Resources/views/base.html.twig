@@ -72,6 +72,10 @@
 {{ render(controller('CapcoAppBundle:Site/Default:footer')) }}
 
 {% block javascripts %}
+    <script type="text/javascript">
+      self.fetch = null;
+    </script>
+
     <script src="{{ asset('js/vendor.js') }}"></script>
     <script src="{{ asset('js/app.js') }}"></script>
     <script type="text/javascript">

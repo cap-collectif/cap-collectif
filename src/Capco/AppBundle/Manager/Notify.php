@@ -32,15 +32,14 @@ class Notify implements MailerInterface
 
     public function sendEmail($to, $fromAddress, $fromName, $body, $subject, $contentType = 'text/html') {
 
-        if ($to && $fromAddress) {
-            $message = \Swift_Message::newInstance()
-                ->setTo($to)
-                ->setSubject($subject)
-                ->setContentType($contentType)
-                ->setBody($body)
-                ->setFrom([$fromAddress => $fromName]);
-            $this->mailer->send($message);
-        }
+        $message = \Swift_Message::newInstance()
+            ->setTo($to)
+            ->setSubject($subject)
+            ->setContentType($contentType)
+            ->setBody($body)
+            ->setFrom([$fromAddress => $fromName])
+        ;
+        $this->mailer->send($message);
     }
 
     // FOS User emails
@@ -76,15 +75,6 @@ class Notify implements MailerInterface
 
         $fromEmail = $this->resolver->getValue('admin.mail.notifications.send_address');
         $fromName = $this->resolver->getValue('admin.mail.notifications.send_name');
-
-        if (!$fromEmail) {
-            $fromEmail = 'assistance@cap-collectif.com';
-        }
-
-        if (!$fromName) {
-            $fromName = 'Cap Collectif';
-        }
-
         $this->sendEmail($toEmail, $fromEmail, $fromName, $body, $subject);
     }
 
@@ -93,23 +83,16 @@ class Notify implements MailerInterface
     public function sendNotifyMessage(User $user, $type, $message)
     {
         $to = $this->resolver->getValue('admin.mail.notifications.receive_address');
-        if ($to) {
-            $subject = $this->translator->trans(
-                'reporting.notification.subject',
-                array(
-                    '%sitename%' => $this->resolver->getValue('global.site.fullname'),
-                ),
-                'CapcoAppBundle'
-            );
-            $template = 'CapcoAppBundle:Mail:notify.html.twig';
-            $type = $this->translator->trans(Reporting::$statusesLabels[$type], array(), 'CapcoAppBundle');
-            $body = $this->templating->render(
-                $template,
-                array('user' => $user, 'type' => $type, 'message' => $message)
-            );
+        $subject = $this->translator->trans('reporting.notification.subject', array(
+                '%sitename%' => $this->resolver->getValue('global.site.fullname'),
+            ),
+            'CapcoAppBundle'
+        );
+        $template = 'CapcoAppBundle:Mail:notify.html.twig';
+        $type = $this->translator->trans(Reporting::$statusesLabels[$type], array(), 'CapcoAppBundle');
+        $body = $this->templating->render($template, array('user' => $user, 'type' => $type, 'message' => $message));
 
-            $this->sendEmail($to, $user->getEmail(), $user->getUsername(), $body, $subject);
-        }
+        $this->sendEmail($to, $user->getEmail(), $user->getUsername(), $body, $subject);
     }
 
 
