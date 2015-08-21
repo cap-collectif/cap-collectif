@@ -102,7 +102,7 @@ const DivideModal = React.createClass({
     if (element) {
       return (
         <li className="division__element">
-          <ElementTitle link={false} classes="element__title" element={element} />
+          <ElementTitle link={false} className="element__title" element={element} />
           <div className="element__body">
             {FormattedText.strip(element.body)}
           </div>

@@ -4,8 +4,6 @@ import ElementTitle from './ElementTitle';
 import ElementIcon from './ElementIcon';
 import Loader from '../Utils/Loader';
 
-const NavItemLink = ReactRouterBootstrap.NavItemLink;
-
 const ElementsFinder = React.createClass({
   propTypes: {
     synthesis: React.PropTypes.object,
@@ -121,7 +119,7 @@ const ElementsFinder = React.createClass({
     return (
       <div id={'element-' + element.id} className={classes} onClick={this.select.bind(this, element)}>
         {this.renderItemCaret(element)}
-        <ElementIcon classes="tree__item__icon" element={element} />
+        <ElementIcon className="tree__item__icon" element={element} />
         {this.renderItemTitle(element)}
       </div>
     );
@@ -142,9 +140,7 @@ const ElementsFinder = React.createClass({
 
   renderItemTitle(element) {
     return (
-      <p className="tree__item__body">
-        <ElementTitle element={element} classes="tree__item__title" link={false} />
-      </p>
+      <ElementTitle element={element} className="tree__item__title" link={false} />
     );
   },
 

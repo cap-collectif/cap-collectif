@@ -68,7 +68,7 @@ const ElementsInbox = React.createClass({
         );
       }
       return (
-        <div className="synthesis__elements-list--empty  text-center">
+        <div className="synthesis__list--empty  text-center">
           <p className="icon  cap-bubble-attention-6"></p>
           <p>{this.getIntlMessage('edition.list.none')}</p>
         </div>

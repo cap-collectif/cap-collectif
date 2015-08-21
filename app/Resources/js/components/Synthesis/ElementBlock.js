@@ -1,5 +1,5 @@
-import UserAvatar from '../User/UserAvatar';
 import UserLink from '../User/UserLink';
+import ElementIcon from './ElementIcon';
 import ElementTitle from './ElementTitle';
 import ElementBreadcrumb from './ElementBreadcrumb';
 import ElementNotation from './ElementNotation';
@@ -21,18 +21,20 @@ const ElementBlock = React.createClass({
   },
 
   renderStatus() {
+    if (this.props.element.division) {
+      return (
+        <i className="element__status cap icon--orange cap-scissor-1"></i>
+      );
+    }
+
     if (this.props.element.archived) {
       if (this.props.element.published) {
         return (
-          <div className="element__status">
-            <i className="element__status-icon icon--green cap-check-4"></i>
-          </div>
+          <i className="element__status cap icon--green cap-tag-1"></i>
         );
       }
       return (
-        <div className="element__status">
-          <i className="element__status-icon icon--grey cap-delete-2"></i>
-        </div>
+        <i className="element__status cap icon--red cap-delete-2"></i>
       );
     }
   },
@@ -53,19 +55,17 @@ const ElementBlock = React.createClass({
   render() {
     const element = this.props.element;
     return (
-      <div className="element__body">
-        <UserAvatar user={element.author} />
-        <div className="element__data">
-          <p className="element__user excerpt  small">
+      <div className="element">
+        <ElementIcon element={element} className="element__icon" />
+        <div className="element__content">
+          <p className="element__metadata">
             {this.renderAuthor()} {this.renderDate()}
             <ElementNotation element={element} />
           </p>
-          <h3 className="element__title ">
-            <ElementTitle element={element} />
-          </h3>
+          <ElementTitle element={element} link={true} className="element__title" />
           <ElementBreadcrumb element={element} />
         </div>
-          {this.renderStatus()}
+        {this.renderStatus()}
       </div>
     );
   },

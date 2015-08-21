@@ -49,7 +49,7 @@ const ElementBreadcrumb = React.createClass({
   render() {
     const items = this.getElementBreadcrumbItems(this.props.element);
     return (
-      <p className="small excerpt element__breadcrumb">
+      <p className="element__breadcrumb">
         <i className="cap cap-folder-2"></i>
         {
           items.map((element) => {

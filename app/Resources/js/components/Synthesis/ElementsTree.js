@@ -69,24 +69,16 @@ const ElementTree = React.createClass({
   renderTreeItemContent(element) {
     return (
       <div className="tree__item__content box">
-        <ElementIcon classes="tree__item__icon" element={element} />
-        {this.renderItemBody(element)}
-      </div>
-    );
-  },
-
-  renderItemBody(element) {
-    return (
-      <p className="tree__item__body">
-        <ElementTitle element={element} classes="tree__item__title" />
+        <ElementIcon className="tree__item__icon" element={element} />
+        <ElementTitle element={element} className="tree__item__title" />
         <br/>
         <span className="small excerpt">
           <FormattedMessage
             message={this.getIntlMessage('common.elements.nb')}
             num={element.children.length}
-          />
+            />
         </span>
-      </p>
+      </div>
     );
   },
 

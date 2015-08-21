@@ -1,5 +1,7 @@
 import ElementListItem from './ElementListItem';
 
+const Nav = ReactBootstrap.Nav;
+
 const ElementsList = React.createClass({
   propTypes: {
     elements: React.PropTypes.array,
@@ -8,13 +10,13 @@ const ElementsList = React.createClass({
 
   render() {
     return (
-      <ul className="media-list synthesis__elements-list">
+      <Nav stacked className="synthesis__list">
         {
           this.props.elements.map((element) => {
             return <ElementListItem key={element.id} element={element} />;
           })
         }
-      </ul>
+      </Nav>
     );
   },
 

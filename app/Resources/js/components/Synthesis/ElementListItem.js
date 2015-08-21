@@ -7,8 +7,13 @@ const ElementListItem = React.createClass({
   mixins: [ReactIntl.IntlMixin],
 
   render() {
+    const classes = classNames({
+      'synthesis__list-item': true,
+      'box': true,
+      'archived': this.props.element.archived,
+    });
     return (
-      <li className="element box">
+      <li className={classes}>
         <ElementBlock element={this.props.element} />
       </li>
     );
