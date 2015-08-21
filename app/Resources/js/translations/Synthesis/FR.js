@@ -52,9 +52,7 @@ export default {
         all: 'Toutes',
       },
       sideMenu: {
-        tree: 'Arborescence',
-        newFolder: 'Nouveau dossier',
-        manageFolders: 'Gérer les dossiers',
+        contributions: 'Les contributions',
       },
       list: {
         none: 'Aucun élément.',
@@ -76,6 +74,9 @@ export default {
             label: 'Imbriquer sous',
           },
           optional: 'Facultatif',
+        },
+        manage: {
+          label: 'Gérer les dossiers',
         },
         publish: {
           title: 'Classer...',

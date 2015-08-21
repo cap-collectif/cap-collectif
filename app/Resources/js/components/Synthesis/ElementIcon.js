@@ -11,6 +11,7 @@ const ElementIcon = React.createClass({
         'cap': true,
         'cap-baloon-1': this.props.element.display_type === 'contribution',
         'cap-folder-2': this.props.element.display_type === 'folder',
+        'cap-book-1': this.props.element.display_type === 'root',
       }) + ' ' + this.props.classes;
       return (
         <i className={classes}></i>

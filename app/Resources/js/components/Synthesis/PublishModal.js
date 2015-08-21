@@ -1,8 +1,6 @@
-import SynthesisElementStore from '../../stores/SynthesisElementStore';
 import SynthesisElementActions from '../../actions/SynthesisElementActions';
 import NotationButtons from './NotationButtons';
 import ElementsFinder from './ElementsFinder';
-import Loader from '../Utils/Loader';
 
 const Button = ReactBootstrap.Button;
 const Modal = ReactBootstrap.Modal;
@@ -23,8 +21,6 @@ const PublishModal = React.createClass({
       notation: this.props.element ? this.props.element.notation : null,
       parent: this.props.element ? this.props.element.parent : null,
       comment: this.props.element ? this.props.element.comment : null,
-      isLoading: true,
-      elementsTree: [],
     };
   },
 
@@ -32,14 +28,6 @@ const PublishModal = React.createClass({
     return {
       process: null,
     };
-  },
-
-  componentWillMount() {
-    SynthesisElementStore.addChangeListener(this.onChange);
-  },
-
-  componentDidMount() {
-    this.loadElementsTreeFromServer();
   },
 
   componentWillReceiveProps(nextProps) {
@@ -54,45 +42,22 @@ const PublishModal = React.createClass({
     }
   },
 
-  componentWillUnmount() {
-    SynthesisElementStore.removeChangeListener(this.onChange);
-  },
-
-  onChange() {
-    if (!SynthesisElementStore.isProcessing && SynthesisElementStore.isInboxSync.allTree) {
-      this.setState({
-        elementsTree: SynthesisElementStore.elements.allTree,
-        isLoading: false,
-      });
-      return;
-    }
-
-    this.setState({
-      isLoading: true,
-    }, () => {
-      this.loadElementsTreeFromServer();
-    });
-  },
-
   renderParent() {
     return (
       <div className="modal__action">
         <h2 className="h4">
           {' ' + this.getIntlMessage('edition.action.publish.parent.title')}
         </h2>
-        <Loader show={this.state.isLoading} />
         {this.renderParentFinder()}
       </div>
     );
   },
 
   renderParentFinder() {
-    if (!this.state.isLoading) {
-      const parentId = this.state.parent ? this.state.parent.id : 'root';
-      return (
-        <ElementsFinder synthesis={this.props.synthesis} elements={this.state.elementsTree} selectedId={parentId} onSelect={this.setParent} />
-      );
-    }
+    const parentId = this.state.parent ? this.state.parent.id : 'root';
+    return (
+      <ElementsFinder synthesis={this.props.synthesis} selectedId={parentId} onSelect={this.setParent} />
+    );
   },
 
   renderNotation() {
@@ -185,13 +150,6 @@ const PublishModal = React.createClass({
     }
     SynthesisElementActions.archive(this.props.synthesis.id, this.props.element.id, data);
     this.transitionTo('inbox', {'type': 'new'});
-  },
-
-  loadElementsTreeFromServer() {
-    SynthesisElementActions.loadElementsTreeFromServer(
-      this.props.synthesis.id,
-      'all'
-    );
   },
 
 });

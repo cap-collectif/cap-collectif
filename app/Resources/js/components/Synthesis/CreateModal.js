@@ -62,14 +62,12 @@ const CreateModal = React.createClass({
 
   renderName() {
     return (
-      <form name="new_element">
-        <div className="modal__action">
-          <h2 className="h4">
-            {' ' + this.getIntlMessage('edition.action.create.name.label')}
-          </h2>
-          <Input type="text" id="new_element_title" name="new_element[title]" className="new-element__title" placeholder={this.getIntlMessage('edition.action.create.name.placeholder')} valueLink={this.linkState('name')} />
-        </div>
-      </form>
+      <div className="modal__action">
+        <h2 className="h4">
+          {' ' + this.getIntlMessage('edition.action.create.name.label')}
+        </h2>
+        <Input type="text" id="new_element_title" name="new_element[title]" className="new-element__title" placeholder={this.getIntlMessage('edition.action.create.name.placeholder')} valueLink={this.linkState('name')} />
+      </div>
     );
   },
 
@@ -107,7 +105,7 @@ const CreateModal = React.createClass({
       </Modal.Body>
       <Modal.Footer>
         <Button type="button" onClick={this.hide.bind(null, this)}>{this.getIntlMessage('edition.action.create.btn_cancel')}</Button>
-        <Button bsStyle="primary" type="submit" onClick={this.create.bind(null, this)}>{this.getIntlMessage('edition.action.create.btn_submit')}</Button>
+        <Button bsStyle="primary" onClick={this.create.bind(null, this)}>{this.getIntlMessage('edition.action.create.btn_submit')}</Button>
       </Modal.Footer>
     </Modal>
     );

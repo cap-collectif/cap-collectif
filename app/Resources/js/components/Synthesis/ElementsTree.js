@@ -50,11 +50,11 @@ const ElementTree = React.createClass({
   renderTreeItems(elements, level) {
     if (elements) {
       return (
-        <ul className={'elements-tree__list tree-level-' + level}>
+        <ul className={'tree__list tree--level-' + level}>
           {
             elements.map((element) => {
               return (
-                <li className="elements-tree__item">
+                <li className="tree__item">
                   {this.renderTreeItemContent(element)}
                   {this.renderTreeItems(element.children, level + 1)}
                 </li>
@@ -68,8 +68,8 @@ const ElementTree = React.createClass({
 
   renderTreeItemContent(element) {
     return (
-      <div className="elements-tree__item-content box">
-        <ElementIcon classes="elements-tree__item-icon" element={element} />
+      <div className="tree__item__content box">
+        <ElementIcon classes="tree__item__icon" element={element} />
         {this.renderItemBody(element)}
       </div>
     );
@@ -77,8 +77,8 @@ const ElementTree = React.createClass({
 
   renderItemBody(element) {
     return (
-      <p className="elements-tree__item-body">
-        <ElementTitle element={element} classes="element__title" />
+      <p className="tree__item__body">
+        <ElementTitle element={element} classes="tree__item__title" />
         <br/>
         <span className="small excerpt">
           <FormattedMessage

@@ -57,11 +57,6 @@ $dark-red: #A94442;
     top: 0;
     bottom: 0;
     height: 100%;
-    padding-top: 15px;
-  }
-
-  .col--scrollable {
-    overflow-y: scroll;
   }
 
   .col--left {
@@ -70,11 +65,13 @@ $dark-red: #A94442;
     background-color: $lightest-gray;
     padding: 0;
     padding-top: 15px;
+    border-right: 1px solid $light-gray;
   }
 
   .col--right {
     right: 0;
     width: 70%;
+    padding-top: 15px;
   }
 
   .synthesis__side-menu {
@@ -83,36 +80,35 @@ $dark-red: #A94442;
 }
 
 @media (min-width: 992px) {
-  .scrollable-col {
-    &.left {
-      width: 35%;
-    }
-    &.right {
-      width: 65%;
-    }
+  .col--left {
+    width: 35%;
+  }
+  .col--right {
+    width: 65%;
   }
 }
 
 @media (min-width: 1200px) {
-  .scrollable-col {
-    &.left {
-      width: 30%;
-    }
-    &.right {
-      width: 70%;
-    }
+  .col--left {
+    width: 30%;
+  }
+  .col--right {
+    width: 70%;
   }
 }
 
 @media (min-width: 1800px) {
-  .scrollable-col {
-    &.left {
-      width: 20%;
-    }
-    &.right {
-      width: 80%;
-    }
+  .col--left {
+    width: 20%;
   }
+  .col--right {
+    width: 80%;
+  }
+}
+
+// **************************** Alerts *****************************************
+.synthesis__box .alert {
+  margin-bottom: 0;
 }
 
 
@@ -160,95 +156,47 @@ $dark-red: #A94442;
 
   position: relative;
 
-  .menu__block {
-    font-size: 14px;
-    background-color: $white;
-    border: 1px solid $light-gray;
-
-    .nav {
-
-      li {
-        overflow: hidden;
-        border-top: 1px solid $light-gray;
-        width: 100%;
-        position: relative;
-
-        &:first-child {
-          border-top: none;
-        }
-
-        & > span {
-          padding: 10px 15px;
-          display: block;
-          cursor: pointer;
-        }
-
-        & > a.active,
-        & > a.active:hover,
-        & > span.active
-        & > span.active:hover {
-          background-color: $lightest-gray;
-          font-weight: bold;
-
-          .menu__item-title {
-            font-weight: 500;
-          }
-        }
-
-        &:hover > a,
-        &:hover > span {
-          background-color: $lightest-gray;
-        }
-      }
+  .menu__link {
+    a {
+      color: $dark-gray;
     }
-
-    .menu__icon {
+    .cap {
       font-size: 25px;
-      color: $black;
-      float: left;
-      padding-bottom: 0;
     }
-
-    .menu__item-title {
-      margin-bottom: 5px;
-      margin-top: 8px;
-      padding-top: 0;
-      color: $black;
-      font-size: 14px;
-      font-weight: normal;
+    &.active {
+      font-weight: 500;
     }
-
-    .menu__item {
-      margin-left: 35px;
-    }
-
   }
 
   @media (min-width: $screen-sm-min) {
-    .button--down {
-      position: absolute;
-      bottom: 0;
+    .menu--fixed {
+      position: relative;
+      z-index: 1000;
+      background-color: $lightest-gray;
+    }
+    .menu__link > a {
+      height: 60px;
+    }
+    .menu__tree {
+      position: relative;
+      height: 100%;
+      z-index: 100;
+      overflow-y: scroll;
+      padding-bottom: 195px;
     }
   }
-}
 
-@media (min-width: $screen-sm-min) and (max-width: $screen-sm-max) {
-  .synthesis__side-menu .menu__block {
-
-    .menu__icon {
-      float: none;
-      padding-top: 0;
-      padding-bottom: 5px;
+  @media (min-width: $screen-sm-min) {
+    .menu__actions {
+      position: absolute;
+      bottom: 0;
+      width: 100%;
     }
+  }
 
-    .menu__item-title {
-      margin-top: 0;
-    }
-
-    .menu__item {
-      margin-left: 0;
-    }
-
+  .menu__action {
+    border-top: 1px solid $light-gray;
+    margin-top: 0;
   }
 }
 
@@ -332,6 +280,94 @@ $dark-red: #A94442;
   .icon {
     font-size: 40px;
     margin-bottom: 0;
+  }
+}
+
+
+// ******************************* Elements tree ****************************************
+
+// Global
+.synthesis__tree {
+  border: 1px solid $light-gray;
+  border-top: none;
+}
+
+.tree__list {
+  list-style: none;
+  padding: 0;
+  margin-bottom: 0;
+}
+
+.tree__item__content.selected {
+  background-color: $blue;
+  color: $white;
+}
+
+.tree__item__caret {
+  margin-right: 10px;
+  cursor: pointer;
+}
+
+.tree__item__body {
+  display: inline-block;
+}
+
+.tree__item__icon {
+  font-size: 25px;
+  margin-right: 7px;
+}
+
+@for $i from 0 through 50 {
+  .tree--level-#{$i} .tree__item__content {
+    padding-left: $i * 40px + 15px;
+  }
+}
+
+// In menu
+.menu__tree .synthesis__tree {
+  border: none;
+  padding-top: 15px;
+
+  .tree__item__content:not(#element-root) {
+    font-size: 15px;
+    .tree__item__icon {
+      font-size: 20px;
+    }
+  }
+
+  .tree__item__content {
+    cursor: pointer;
+    padding-top: 3px;
+    padding-bottom: 3px;
+  }
+
+  .tree__item__content.selected {
+    background-color: $lighter-gray;
+    color: $black;
+  }
+
+  .tree__item__body {
+    margin-bottom: 0;
+  }
+
+  .elements-tree__item-icon {
+    margin: 0 5px;
+  }
+
+  @for $i from 0 through 50 {
+    .tree--level-#{$i} .tree__item__content {
+      padding-left: $i * 20px + 15px;
+    }
+  }
+}
+
+// In content
+.synthesis__content .synthesis__tree {
+  .tree__item__content {
+    border-top: 1px solid $light-gray;
+  }
+  .tree__list:first-child > .tree__item:first-child > .tree__item__content {
+    border-top: 0;
   }
 }
 
@@ -550,46 +586,6 @@ $dark-red: #A94442;
   }
 }
 
-// Elements tree
-
-.synthesis__tree {
-  border: 1px solid $light-gray;
-  border-top: none;
-}
-
-.elements-tree__list {
-  list-style: none;
-  padding: 0;
-  margin-bottom: 0;
-}
-.elements-tree__item {
-  position: relative;
-  display: block;
-}
-.elements-tree__item-content {
-  border-top: 1px solid $light-gray;
-  position: relative;
-}
-.elements-tree__list:first-child > .elements-tree__item:first-child > .elements-tree__item-content {
-  border-top: 0;
-}
-
-.elements-tree__item-icon {
-  font-size: 25px;
-  color: $gray;
-  margin-right: 10px;
-}
-
-.elements-tree__item-body {
-  display: inline-block;
-}
-
-@for $i from 1 through 50 {
-  .tree-level-#{$i} .elements-tree__item-content {
-    padding-left: $i * 40px;
-  }
-}
-
 // Modal
 .modal__action {
 
@@ -611,29 +607,6 @@ $dark-red: #A94442;
   .element__action-notation {
     font-size: 25px;
   }
-}
-
-// Elements finder
-.elements__finder {
-  border: 1px solid $light-gray;
-
-  .elements-tree__item-content {
-    cursor: pointer;
-  }
-
-  .elements-tree__item-content.selected {
-    background-color: $blue;
-    color: $white;
-  }
-
-  .elements-tree__item-icon {
-    margin: 0 5px;
-  }
-}
-
-.elements-tree__item-caret {
-  margin: 0 5px;
-  cursor: pointer;
 }
 
 // Divide modal

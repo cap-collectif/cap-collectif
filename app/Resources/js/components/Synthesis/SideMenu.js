@@ -1,9 +1,9 @@
-import SynthesisElementStore from '../../stores/SynthesisElementStore';
-import SynthesisElementActions from '../../actions/SynthesisElementActions';
-import CreateButton from './CreateButton';
 import CreateModal from './CreateModal';
+import ElementsFinder from './ElementsFinder';
 
-const Link = ReactRouter.Link;
+const Nav = ReactBootstrap.Nav;
+const NavItem = ReactBootstrap.NavItem;
+const NavItemLink = ReactRouterBootstrap.NavItemLink;
 
 const SideMenu = React.createClass({
   propTypes: {
@@ -13,103 +13,74 @@ const SideMenu = React.createClass({
 
   getInitialState() {
     return {
-      countNew: 0,
       showCreateModal: false,
     };
   },
 
-  componentWillMount() {
-    SynthesisElementStore.addChangeListener(this.onChange);
-  },
-
-  componentDidMount() {
-    this.loadNewElementsCountFromServer();
-  },
-
   componentWillUnmount() {
-    SynthesisElementStore.removeChangeListener(this.onChange);
     this.toggleCreateModal(false);
   },
 
-  onChange() {
-    if (!SynthesisElementStore.isProcessing && SynthesisElementStore.isCountSync) {
-      this.setState({
-        countNew: SynthesisElementStore.countNew,
-      });
-      return;
-    }
-    this.loadNewElementsCountFromServer();
-  },
-
-  getFoldersMenuItems() {
-    return [
-      {
-        'link': 'tree',
-        'color': 'black',
-        'icon': 'cap-folder-2',
-        'label': 'tree',
-        'nb': null,
-      },
-    ];
-  },
-
-  renderFoldersMenu() {
-    const items = this.getFoldersMenuItems();
+  renderContributionsButton() {
     return (
-      <div className="block menu__block menu--folders">
-        <ul className="nav">
-          {
-            items.map((item) => {
-              return (
-                this.renderMenuItem(item)
-              );
-            })
-          }
-        </ul>
-      </div>
+        <NavItemLink to="tree" className="menu__link" bsStyle="link">
+          <i className="cap cap-baloon"></i> {this.getIntlMessage('edition.sideMenu.contributions')}
+        </NavItemLink>
     );
   },
 
-  renderMenuItem(item) {
+  renderTree() {
     return (
-      <li key={item.label}>
-        <Link to={item.link}>
-          <div className="menu__icon"><i className={'cap ' + item.icon + ' icon--' + item.color}></i></div>
-          <div className="menu__item">
-            <h3 className="menu__item-title">{this.getIntlMessage('edition.sideMenu.' + item.label)} {item.nb}</h3>
-          </div>
-        </Link>
-      </li>
+      <ElementsFinder synthesis={this.props.synthesis} itemClass="menu__link" />
     );
   },
 
-  renderCreateModal() {
+  renderCreateButton() {
     return (
-      <CreateModal synthesis={this.props.synthesis} show={this.state.showCreateModal} toggle={this.toggleCreateModal} />
+      <NavItem className="menu__link menu__action" onClick={this.showCreateModal.bind(null, this)}>
+          <i className="cap cap-folder-add"></i> {this.getIntlMessage('edition.action.create.label')}
+      </NavItem>
+    );
+  },
+
+  renderManageButton() {
+    return (
+      <NavItemLink className="menu__link menu__action" to="tree">
+        <i className="cap cap-folder-edit"></i> {this.getIntlMessage('edition.action.manage.label')}
+      </NavItemLink>
     );
   },
 
   render() {
     return (
       <div className="synthesis__side-menu">
-        {this.renderFoldersMenu()}
-        <CreateButton className="button--down" parent={null} onModal={this.toggleCreateModal} />
-        {this.renderCreateModal()}
+        <Nav stacked className="menu--fixed">
+          {this.renderContributionsButton()}
+        </Nav>
+        <div className="menu__tree">
+          {this.renderTree()}
+        </div>
+        <Nav stacked className="menu__actions menu--fixed">
+          {this.renderCreateButton()}
+          {this.renderManageButton()}
+        </Nav>
+        <CreateModal synthesis={this.props.synthesis} show={this.state.showCreateModal} toggle={this.toggleCreateModal} />
       </div>
     );
+  },
+
+  showCreateModal() {
+    this.toggleCreateModal(true);
+  },
+
+  hideCreateModal() {
+    this.toggleCreateModal(false);
   },
 
   toggleCreateModal(value) {
     this.setState({
       showCreateModal: value,
     });
-  },
-
-  loadNewElementsCountFromServer() {
-    SynthesisElementActions.loadElementsCountFromServer(
-      this.props.synthesis.id,
-      'new'
-    );
   },
 
 });
