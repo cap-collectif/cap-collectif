@@ -28,12 +28,12 @@ const OpinionSourceForm = React.createClass({
   },
 
   getStyle(field) {
-    return !this.isValid(field) ? 'error' : this.state.submitted ? 'success' : '';
+    return !this.isValid(field) ? 'error' : this.state.submitted ? 'success' : 'default';
   },
 
   renderCreateButton() {
     return (
-      <Button id="addSourceButton" bsStyle="primary" onClick={LoginStore.isLoggedIn() ? this.show.bind(this) : null}>
+      <Button id="addSourceButton" bsStyle="primary" onClick={LoginStore.isLoggedIn() ? this.show.bind(null, this) : null}>
         <i className="cap cap-add-1"></i>
         { ' ' + this.getIntlMessage('opinion.add_new_source')}
       </Button>
@@ -44,7 +44,7 @@ const OpinionSourceForm = React.createClass({
     return (
       <Col xs={5}>
         <LoginOverlay children={this.renderCreateButton()} />
-        <Modal {...this.props} animation={false} show={this.state.showModal} onHide={this.close.bind(this)}
+        <Modal {...this.props} animation={false} show={this.state.showModal} onHide={this.close.bind(null, this)}
                bsSize="large" aria-labelledby="contained-modal-title-lg">
           <Modal.Header closeButton>
             <Modal.Title id="contained-modal-title-lg">
@@ -75,7 +75,7 @@ const OpinionSourceForm = React.createClass({
                 <option value="" disabled selected>{this.getIntlMessage('global.select')}</option>
                 {
                   this.props.categories.map((category) => {
-                    return <option value={category.id}>{category.title}</option>;
+                    return <option key={category.id} value={category.id}>{category.title}</option>;
                   })
                 }
               </Input>
@@ -99,12 +99,12 @@ const OpinionSourceForm = React.createClass({
             </form>
           </Modal.Body>
           <Modal.Footer>
-            <Button onClick={this.close.bind(this)}>
+            <Button onClick={this.close.bind(null, this)}>
               {this.getIntlMessage('global.cancel')}
             </Button>
             <Button
               disabled={this.state.isSubmitting}
-              onClick={!this.state.isSubmitting ? this.create.bind(this) : null}
+              onClick={!this.state.isSubmitting ? this.create.bind(null, this) : null}
               bsStyle="primary"
             >
               {this.state.isSubmitting
@@ -132,8 +132,7 @@ const OpinionSourceForm = React.createClass({
     return true;
   },
 
-  create(e) {
-    e.preventDefault();
+  create() {
     this.setState({submitted: true}, () => {
       if (!this.isValid()) {
         return;
@@ -146,6 +145,7 @@ const OpinionSourceForm = React.createClass({
         Category: parseInt(this.state.category, 10),
       };
 
+      console.log(this.props);
       if (this.props.opinion && this.props.opinion.parent) {
         OpinionActions
         .addVersionSource(this.props.opinion.parent.id, this.props.opinion.id, data)

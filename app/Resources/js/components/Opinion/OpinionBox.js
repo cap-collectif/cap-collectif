@@ -28,7 +28,7 @@ const OpinionBox = React.createClass({
       <Row>
       {
         votes.map((vote) => {
-          return <UserAvatar user={vote.user} style={{marginRight: 5}} />;
+          return <UserAvatar key={vote.user.id} user={vote.user} style={{marginRight: 5}} />;
         })
       }
       {moreVotes !== null

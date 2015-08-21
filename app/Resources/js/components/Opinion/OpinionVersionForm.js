@@ -101,7 +101,7 @@ const OpinionVersionForm = React.createClass({
             </Button>
             <Button
               disabled={this.state.isSubmitting}
-              onClick={!this.state.isSubmitting ? this.create.bind(this) : null}
+              onClick={!this.state.isSubmitting ? this.create.bind(null, this) : null}
               bsStyle="primary"
             >
               {this.state.isSubmitting
@@ -123,9 +123,7 @@ const OpinionVersionForm = React.createClass({
     this.setState({showModal: true});
   },
 
-  create(e) {
-    e.preventDefault();
-
+  create() {
     this.setState({submitted: true}, () => {
       if (!this.isValid()) {
         return;

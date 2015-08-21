@@ -15,6 +15,7 @@ const OpinionDataBox = React.createClass({
   getInitialState() {
     return {
       isOpinionContributable: false,
+      opinion: {id: this.props.opinionId, parent: null},
       sources: [],
       categories: [],
       isLoading: true,
@@ -59,7 +60,7 @@ const OpinionDataBox = React.createClass({
       <Col xs={12}>
         <Row>
           {this.state.isOpinionContributable
-            ? <OpinionSourceForm {...this.props} categories={this.state.categories} />
+            ? <OpinionSourceForm opinion={this.state.opinion} categories={this.state.categories} />
             : <span />
           }
           { this.renderFilter() }

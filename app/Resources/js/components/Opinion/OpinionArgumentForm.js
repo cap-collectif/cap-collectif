@@ -65,8 +65,7 @@ const OpinionArgumentForm = React.createClass({
     );
   },
 
-  create(e) {
-    e.preventDefault();
+  create() {
     this.setState({submitted: true}, () => {
       if (!this.isValid()) {
         return;
