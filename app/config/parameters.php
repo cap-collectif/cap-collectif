@@ -47,6 +47,8 @@ $container->setParameter('jwt_token_ttl',               set_var('jwt_token_ttl',
 
 $container->setParameter('language_analyzer',           set_var('language_analyzer', 'french'));
 
+$container->setParameter('remember_secret',           set_var('remember_secret', '***REMOVED***'));
+
 if (file_exists('app/config/parameters.yml') || file_exists('../app/config/parameters.yml')) {
     $loader->import('parameters.yml');
 }

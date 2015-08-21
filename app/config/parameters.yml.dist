@@ -38,3 +38,5 @@ parameters:
     jwt_token_ttl:        86400
 
     language_analyzer: french                                     # language analyzer to use for elasticsearch
+
+    remember_secret: '***REMOVED***'                           # secret for remember me functionality

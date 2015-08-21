@@ -1,69 +1,68 @@
-registration:
-  check_email:
-    title: Confirmer votre adresse électronique
-    body: Pour finaliser la création de votre compte, merci de cliquer sur le lien que nous venons de vous envoyer par e-mail à l'adresse %email%.
-    content:
-      title: Pourquoi dois-je confirmer mon adresse électronique ?
-      body: Pour empêcher les fausses inscriptions, vous envoyer des notifications par e-mail liées au service. Par exemple, vous pourrez recevoir des messages relatifs à la réinitialisation de votre mot de passe si vous avez oublié vos données de connexion.
-  flash:
-    user_created: Merci ! Votre compte a bien été créé.
-
 change_password:
   flash:
     success: Votre mot de passe a bien été modifié.
+
+form:
+  label_address: Adresse
+  label_address2: Complément d'adresse
+  label_city: Ville
+  label_facebook_url: Lien Facebook
+  label_google_url: Lien Google+
+  label_is_terms_accepted: Termes acceptés
+  label_locked: Verrouillé
+  label_media: Avatar
+  label_neighborhood: Quartier
+  label_real_roles: Rôles
+  label_twitter_url: Lien Twitter
+  label_user_type: Type de profil
+  label_zip_code: Code postal
+
+gender:
+  female: Femme
+  male: Homme
+  unknown: Non communiqué
+
+list:
+  label__action: Action
+  label_updated_at: Mise à jour
+
+registration:
+  check_email:
+    body: Pour finaliser la création de votre compte, merci de cliquer sur le lien que nous venons de vous envoyer par e-mail à l'adresse %email%.
+    content:
+      body: Pour empêcher les fausses inscriptions, vous envoyer des notifications par e-mail liées au service. Par exemple, vous pourrez recevoir des messages relatifs à la réinitialisation de votre mot de passe si vous avez oublié vos données de connexion.
+      title: Pourquoi dois-je confirmer mon adresse électronique ?
+    title: Confirmer votre adresse électronique
+  flash:
+    user_created: Merci ! Votre compte a bien été créé.
 
 resetting:
   flash:
     success: Votre mot de passe a bien été modifié.
 
-gender:
-  unknown: Non communiqué
-  male: Homme
-  female: Femme
-
 roles:
-  user: Utilisateur
   admin: Administrateur
   super_admin: Super administrateur
-
-list:
-  label_updated_at: Mise à jour
-  label__action: Action
-
-form:
-  label_media: Avatar
-  label_user_type: Type de profil
-  label_address: Adresse
-  label_address2: Complément d'adresse
-  label_zip_code: Code postal
-  label_city: Ville
-  label_neighborhood: Quartier
-  label_facebook_url: Lien Facebook
-  label_google_url: Lien Google+
-  label_twitter_url: Lien Twitter
-  label_locked: Verrouillé
-  label_is_terms_accepted: Termes acceptés
-  label_real_roles: Rôles
-
+  user: Utilisateur
 
 show:
-  label_created_at: Création
-  label_updated_at: Mise à jour
-  label_media: Avatar
-  label_user_type: Type de profil
   label_address: Adresse
   label_address2: Complément d'adresse
-  label_zip_code: Code postal
+  label_created_at: Création
+  label_media: Avatar
   label_city: Ville
-  label_neighborhood: Quartier
-  label_facebook_url: Lien Facebook
-  label_facebook_id: Id Facebook
   label_facebook_access_token: Jeton d'accès Facebook
-  label_google_url: Lien Google+
-  label_google_id: Id Google+
+  label_facebook_id: Id Facebook
+  label_facebook_url: Lien Facebook
   label_google_access_token: Jeton d'accès Google+
-  label_twitter_url: Lien Twitter
-  label_twitter_id: Id Twitter
+  label_google_id: Id Google+
+  label_google_url: Lien Google+
+  label_neighborhood: Quartier
   label_twitter_access_token: Jeton d'accès Twitter
+  label_twitter_id: Id Twitter
+  label_twitter_url: Lien Twitter
+  label_updated_at: Mise à jour
+  label_user_type: Type de profil
+  label_zip_code: Code postal
 
 "Gender": Civilité
