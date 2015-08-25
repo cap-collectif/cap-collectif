@@ -51,13 +51,15 @@ Feature: Opinions
 
         "author": {
           "username": @string@,
-          "display_name": @string@,
-          "unique_id": @string@,
+          "displayName": @string@,
+          "uniqueId": @string@,
+          "isAdmin": @boolean@,
           "media": {
             "url": "@string@.startsWith('/media')"
           },
           "_links": {
-            "profile": @string@
+            "profile": @string@,
+            "settings": @string@
           }
         },
 
@@ -131,13 +133,15 @@ Feature: Opinions
           "votes_count": @integer@,
           "author": {
             "username": @string@,
-            "display_name": @string@,
-            "unique_id": @string@,
+            "displayName": @string@,
+            "uniqueId": @string@,
+            "isAdmin": @boolean@,
             "media": {
               "url": "@string@.startsWith('/media')"
             },
             "_links": {
-              "profile": @string@
+              "profile": @string@,
+              "settings": @string@
             }
           },
           "_links": {

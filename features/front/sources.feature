@@ -59,7 +59,8 @@ Feature: Source
     And I wait 3 seconds
     And I go on the sources tab
     And The first source vote counter should be "1"
-    When I follow "Modifier"
+    When I click the "#render-opinion-sources .btn-dark-gray" element
+    And I wait 3 seconds
     And I check "capco_app_source_confirm"
     And I press "Modifier"
     And I wait 3 seconds
@@ -76,8 +77,10 @@ Feature: Source
       | stepSlug         | collecte-des-avis                |
       | opinionTypeSlug  | problemes                        |
       | opinionSlug      | opinion-1                        |
+    And I wait 3 seconds
     And I go on the sources tab
-    When I follow "Modifier"
+    When I click the "#render-opinion-sources .btn-dark-gray" element
+    And I wait 3 seconds
     And I fill in the following:
       | capco_app_source_body      | Je modifie ma source !   |
     And I press "Modifier"

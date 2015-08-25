@@ -96,7 +96,7 @@ const OpinionSourceButtons = React.createClass({
     if (this.props.source.author === null || !LoginStore.isLoggedIn()) {
       return false;
     }
-    return LoginStore.user.unique_id === this.props.source.author.unique_id;
+    return LoginStore.user.uniqueId === this.props.source.author.uniqueId;
   },
 
 });

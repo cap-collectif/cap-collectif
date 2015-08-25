@@ -95,7 +95,7 @@ const OpinionArgumentButtons = React.createClass({
     if (this.props.argument.author === null || !LoginStore.isLoggedIn()) {
       return false;
     }
-    return LoginStore.user.unique_id === this.props.argument.author.unique_id;
+    return LoginStore.user.uniqueId === this.props.argument.author.uniqueId;
   },
 
 

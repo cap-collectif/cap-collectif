@@ -105,7 +105,7 @@ const CreateModal = React.createClass({
       </Modal.Body>
       <Modal.Footer>
         <Button type="button" onClick={this.hide.bind(null, this)}>{this.getIntlMessage('edition.action.create.btn_cancel')}</Button>
-        <Button bsStyle="primary" onClick={this.create.bind(null, this)}>{this.getIntlMessage('edition.action.create.btn_submit')}</Button>
+        <Button type="submit" bsStyle="primary" onClick={this.create.bind(null, this)}>{this.getIntlMessage('edition.action.create.btn_submit')}</Button>
       </Modal.Footer>
     </Modal>
     );

@@ -122,7 +122,7 @@ const OpinionButtons = React.createClass({
     if (this.props.opinion.author === null || !LoginStore.isLoggedIn()) {
       return false;
     }
-    return LoginStore.user.unique_id === this.props.opinion.author.unique_id;
+    return LoginStore.user.uniqueId === this.props.opinion.author.uniqueId;
   },
 
 

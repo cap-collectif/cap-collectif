@@ -8,7 +8,7 @@ Scenario: Anonymous wants to see synthesis view
     | consultationSlug   | strategie-technologique-de-l-etat-et-services-publics |
     | stepSlug           | collecte-des-avis-pour-une-meilleur-strategie         |
   And I follow "Synthèse"
-  And I wait 10 seconds
+  And I wait 5 seconds
   Then I should see 1 ".synthesis__view" elements
 
 
@@ -23,6 +23,7 @@ Scenario: User can not access synthesis edition
     | consultationSlug | strategie-technologique-de-l-etat-et-services-publics |
     | stepSlug         | collecte-des-avis-pour-une-meilleur-strategie         |
   And I follow "Synthèse"
+  And I wait 5 seconds
   Then I should not see "Éditer"
 
 @javascript
@@ -31,6 +32,7 @@ Scenario: Anonymous can not access synthesis edition
     | consultationSlug | strategie-technologique-de-l-etat-et-services-publics |
     | stepSlug         | collecte-des-avis-pour-une-meilleur-strategie         |
   And I follow "Synthèse"
+  And I wait 5 seconds
   Then I should not see "Éditer"
 
   # Lists
@@ -60,6 +62,19 @@ Scenario: Admin wants to see archived elements list
   Then I should see 11 ".element" elements
 
 @javascript
+Scenario: Admin wants to see published elements list
+  Given I am logged in as admin
+  And I visited "consultation page" with:
+    | consultationSlug | strategie-technologique-de-l-etat-et-services-publics |
+    | stepSlug         | collecte-des-avis-pour-une-meilleur-strategie         |
+  And I follow "Synthèse"
+  And I follow "Éditer"
+  And I wait 5 seconds
+  And I follow "Classées"
+  And I wait 5 seconds
+  Then I should see 11 ".element" elements
+
+@javascript
 Scenario: Admin wants to see unpublished elements list
   Given I am logged in as admin
   And I visited "consultation page" with:
@@ -68,7 +83,7 @@ Scenario: Admin wants to see unpublished elements list
   And I follow "Synthèse"
   And I follow "Éditer"
   And I wait 5 seconds
-  And I follow "Dépubliées"
+  And I follow "Ignorées"
   And I wait 5 seconds
   Then I should see 0 ".element" elements
 
@@ -94,9 +109,9 @@ Scenario: Admin wants to see elements tree
   And I follow "Synthèse"
   And I follow "Éditer"
   And I wait 5 seconds
-  And I follow "Arborescence"
+  And I follow "Les contributions"
   And I wait 5 seconds
-  Then I should see 2 ".tree-level-0 > .elements-tree__item" elements
+  Then I should see 2 ".synthesis__content .tree--level-0 > .tree__item" elements
 
   # Element details
 
@@ -133,7 +148,7 @@ Scenario: Admin wants to ignore an element
   And I click the ".modal--confirm__submit" element
   And I wait 5 seconds
   And I should see "L'élément a été traité avec succès."
-  And I follow "Dépubliées"
+  And I follow "Ignorées"
   And I wait 5 seconds
   And I should see 11 ".element" element
   And I follow "Traitées"
@@ -159,10 +174,10 @@ Scenario: Admin wants to publish an element without note, comment or parent
   And I follow "Traitées"
   And I wait 5 seconds
   And I should see 12 ".element" element
-  And I follow "Arborescence"
+  And I follow "Les contributions"
   And I wait 5 seconds
-  And I should see 2 ".tree-level-0 > .elements-tree__item" elements
-  And I should see 1 ".tree-level-1 > .elements-tree__item" elements
+  And I should see 2 ".synthesis__content .tree--level-0 > .tree__item" elements
+  And I should see 1 ".synthesis__content .tree--level-1 > .tree__item" elements
 
 @javascript @database
 Scenario: Admin wants to publish an element with note
@@ -182,13 +197,14 @@ Scenario: Admin wants to publish an element with note
   And I click the "button[type='submit']" element
   And I wait 5 seconds
   And I should see "L'élément a été traité avec succès."
+  And I follow "Les contributions"
+  And I wait 5 seconds
+  And I should see 2 ".synthesis__content .tree--level-0 > .tree__item" elements
+  And I should see 1 ".synthesis__content .tree--level-1 > .tree__item" elements
+  And I should see 3 ".synthesis__content .tree--level-2 > .tree__item" elements
   And I follow "Traitées"
   And I wait 5 seconds
   And I should see 12 ".element" element
-  And I follow "Arborescence"
-  And I wait 5 seconds
-  And I should see 2 ".tree-level-0 > .elements-tree__item" elements
-  And I should see 1 ".tree-level-1 > .elements-tree__item" elements
   And I follow "Opinion 52"
   And I wait 5 seconds
   And "#notation-star-1" element should have class "active"
@@ -209,8 +225,8 @@ Scenario: Admin wants to publish an element with parent
   And I follow "Opinion 52"
   And I wait 5 seconds
   And I click the ".element__action-publish" element
-  And I wait 5 seconds
-  And I click the "#element-root" element
+  And I wait 15 seconds
+  And I click the ".modal--publish #element-root" element
   And I wait 5 seconds
   And I click the "button[type='submit']" element
   And I wait 5 seconds
@@ -218,9 +234,9 @@ Scenario: Admin wants to publish an element with parent
   And I follow "Traitées"
   And I wait 5 seconds
   And I should see 12 ".element" element
-  And I follow "Arborescence"
+  And I follow "Les contributions"
   And I wait 5 seconds
-  And I should see 3 ".tree-level-0 > .elements-tree__item" elements
+  And I should see 3 ".synthesis__content .tree--level-0 > .tree__item" elements
 
 @javascript @database
 Scenario: Admin wants to publish an element with comment
@@ -271,19 +287,19 @@ Scenario: Admin wants to create an element
   And I follow "Synthèse"
   And I follow "Éditer"
   And I wait 5 seconds
-  And I click the ".synthesis__action--create" element
+  And I follow "Nouveau dossier"
   And I wait 5 seconds
   And I fill in the following:
     | new_element_title | Bisous |
   And I wait 5 seconds
-  And I click the "#element-root" element
+  And I click the ".modal--create #element-root" element
   And I wait 5 seconds
   And I click the "button[type='submit']" element
   And I wait 5 seconds
   Then I follow "Traitées"
   And I wait 5 seconds
-  And I should see "Bisous"
-  And I follow "Arborescence"
+  And I should see "Bisous" in the ".synthesis__content" element
+  And I follow "Les contributions"
   And I wait 5 seconds
-  And I should see "Bisous"
+  And I should see "Bisous" in the ".synthesis__content" element
 
