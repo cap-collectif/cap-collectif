@@ -9,7 +9,7 @@ Feature: Source
       | opinionTypeSlug  | causes                           |
       | opinionSlug      | opinion-2                        |
     And I go on the sources tab
-    And I should see "Aucune source"
+    And I should see "Aucune source proposée"
     When I want to add a source
     And I fill in the following:
     | sourceLink   | http://www.google.fr     |
