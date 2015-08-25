@@ -3,9 +3,6 @@ import OpinionVersionForm from './OpinionVersionForm';
 import Loader from '../Utils/Loader';
 import Fetcher from '../../services/Fetcher';
 
-const Row = ReactBootstrap.Row;
-const Col = ReactBootstrap.Col;
-
 const OpinionVersionsBox = React.createClass({
   propTypes: {
     opinionId: React.PropTypes.number.isRequired,
@@ -36,31 +33,25 @@ const OpinionVersionsBox = React.createClass({
   renderFilter() {
     if (this.state.versions.length > 1) {
       return (
-        <Col sm={5} className="pull-right hidden-xs">
-          <select ref="filter" className="form-control" value={this.state.filter} onChange={() => this.updateSelectedValue()}>
-            <option value="popular">{this.getIntlMessage('global.popular')}</option>
-            <option value="last">{this.getIntlMessage('global.last')}</option>
-            <option value="old">{this.getIntlMessage('global.old')}</option>
-          </select>
-        </Col>
+        <select ref="filter" className="hidden-xs pull-right" value={this.state.filter} onChange={() => this.updateSelectedValue()}>
+          <option value="popular">{this.getIntlMessage('global.popular')}</option>
+          <option value="last">{this.getIntlMessage('global.last')}</option>
+          <option value="old">{this.getIntlMessage('global.old')}</option>
+        </select>
       );
     }
   },
 
   render() {
     return (
-      <Col xs={12}>
-        <Row>
-          <OpinionVersionForm {...this.props} />
-          { this.renderFilter() }
-        </Row>
-        <Row>
-          {!this.state.isLoading
-            ? <OpinionVersionList versions={this.state.versions} />
-            : <Loader />
-          }
-        </Row>
-      </Col>
+      <div>
+        <OpinionVersionForm {...this.props} />
+        { this.renderFilter() }
+        {!this.state.isLoading
+          ? <OpinionVersionList versions={this.state.versions} />
+          : <Loader />
+        }
+      </div>
     );
   },
 

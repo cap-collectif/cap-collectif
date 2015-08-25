@@ -48,7 +48,7 @@ const OpinionVersionForm = React.createClass({
 
   render() {
     return (
-      <div className="col-xs-5">
+      <div style={{display: "inline-block"}}>
         <LoginOverlay children={this.renderCreateButton()} />
         <Modal {...this.props}
           animation={false} show={this.state.showModal}

@@ -57,12 +57,8 @@ const OpinionTabs = React.createClass({
           <FormattedMessage message={this.getIntlMessage('global.sources')} num={opinion.sources_count} />
         }>
           <br />
-          <Row>
-            <OpinionSourceForm categories={this.state.categories} opinion={this.props.opinion} />
-          </Row>
-          <Row>
-            <OpinionSourceList sources={this.props.opinion.sources} />
-          </Row>
+          <OpinionSourceForm categories={this.state.categories} opinion={this.props.opinion} />
+          <OpinionSourceList sources={this.props.opinion.sources} />
         </TabPane>
       </TabbedArea>
     );
