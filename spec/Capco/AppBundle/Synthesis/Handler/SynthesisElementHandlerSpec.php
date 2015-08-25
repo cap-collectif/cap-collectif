@@ -229,8 +229,10 @@ class SynthesisElementHandlerSpec extends ObjectBehavior
         $this->createElementInSynthesis($element, $synthesis)->shouldReturnAnInstanceOf('Capco\AppBundle\Entity\Synthesis\SynthesisElement');
     }
 
-    function it_can_update_element_in_synthesis(EntityManager $em, LogManager $logManager, SynthesisElement $element, Synthesis $synthesis)
+    function it_can_update_element_in_synthesis(EntityManager $em, LogManager $logManager, Synthesis $synthesis)
     {
+        $element = new SynthesisElement();
+        $element->setPublished(true);
         $em->persist($element)->shouldBeCalled();
         $em->flush()->shouldBeCalled();
 
