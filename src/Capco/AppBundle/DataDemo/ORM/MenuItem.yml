@@ -92,7 +92,7 @@ Capco\AppBundle\Entity\MenuItem:
     associatedFeatures: [blog]
 
   MenuItem12:
-    title: Événements
+    title: Évènements
     link: events
     isEnabled: 1
     isDeletable: 0

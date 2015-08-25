@@ -29,6 +29,7 @@ class SourcesType extends AbstractType
                 ->add('confirm', 'checkbox', array(
                     'mapped' => false,
                     'label' => 'source.form.confirm',
+                    'translation_domain' => 'CapcoAppBundle',
                     'required' => true,
                     'constraints' => [new True(['message' => 'source.votes_not_confirmed'])]
                 ))
@@ -92,7 +93,6 @@ class SourcesType extends AbstractType
                     return ['Default', 'file'];
                 }
             },
-
         ));
     }
 

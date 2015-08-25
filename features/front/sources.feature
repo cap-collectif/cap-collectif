@@ -10,6 +10,7 @@ Feature: Source
       | opinionSlug      | opinion-2                        |
     And I go on the sources tab
     And I should see "Aucune source proposée"
+    And I wait 3 seconds
     When I want to add a source
     And I fill in the following:
     | sourceLink   | http://www.google.fr     |
@@ -39,6 +40,7 @@ Feature: Source
       | stepSlug         | collecte-des-avis                |
       | opinionTypeSlug  | enjeux                           |
       | opinionSlug      | opinion-4                        |
+    And I wait 3 seconds
     And I go on the sources tab
     When I vote for the first source
     Then I should see "Annuler mon vote"
@@ -54,15 +56,33 @@ Feature: Source
       | stepSlug         | collecte-des-avis                |
       | opinionTypeSlug  | problemes                        |
       | opinionSlug      | opinion-1                        |
+    And I wait 3 seconds
     And I go on the sources tab
     And The first source vote counter should be "1"
     When I follow "Modifier"
     And I check "capco_app_source_confirm"
     And I press "Modifier"
+    And I wait 3 seconds
     Then I should see "Merci ! Votre source a bien été modifiée."
-    And I wait "5" seconds
+    And I wait 5 seconds
     And I go on the sources tab
     And The first source vote counter should be "0"
+
+  @javascript @database
+  Scenario: Author of a source try to update without checking the confirm checkbox
+    Given I am logged in as user
+    And I visited "opinion page" with:
+      | consultationSlug | croissance-innovation-disruption |
+      | stepSlug         | collecte-des-avis                |
+      | opinionTypeSlug  | problemes                        |
+      | opinionSlug      | opinion-1                        |
+    And I go on the sources tab
+    When I follow "Modifier"
+    And I fill in the following:
+      | capco_app_source_body      | Je modifie ma source !   |
+    And I press "Modifier"
+    And I wait 3 seconds
+    Then I should not see "Merci ! Votre source a bien été modifiée."
 
   @javascript
   Scenario: Non author of a source wants to update it
@@ -74,19 +94,4 @@ Feature: Source
       | opinionSlug      | opinion-1                        |
     And I go on the sources tab
     Then I should not see "Modifier" in the "#render-opinion-sources" element
-
-  # @javascript @database
-  # Scenario: Author of a source try to update without checking the confirm checkbox
-  #   Given I am logged in as user
-  #   And I visited "opinion page" with:
-  #     | consultationSlug | croissance-innovation-disruption |
-  #     | stepSlug         | collecte-des-avis                |
-  #     | opinionTypeSlug  | problemes                        |
-  #     | opinionSlug      | opinion-1                        |
-  #   And I go on the sources tab
-  #   When I follow "Modifier"
-  #   And I fill in the following:
-  #     | capco_app_source_body      | Je modifie ma source !   |
-  #   And I press "Modifier"
-  #   Then I should see "Merci de confirmer la perte de vos votes pour continuer."
 

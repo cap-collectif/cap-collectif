@@ -754,7 +754,7 @@ event_registration:
     email: Adresse électronique
     private: Rendre mon inscription privée
     register: S'inscrire
-    submit: S'inscrire à l'événement
+    submit: S'inscrire à l'évènement
     register_success: Merci ! Votre inscription a bien été prise en compte.
     unregister_success: Votre inscription a bien été annulée.
   toggle:

@@ -35,12 +35,12 @@ admin.label.social_network: Réseaux sociaux (page d'accueil)
 admin.label.category: Types de sources
 admin.label.source: Sources
 admin.label.posts: Articles
-admin.label.events: Événements
+admin.label.events: Évènements
 admin.label.features: Fonctionnalités
 admin.label.video: Vidéos
 admin.label.comment: Commentaires
 admin.label.comment_vote: Votes sur les commentaires
-admin.label.event_registrations: Inscription à l'événement
+admin.label.event_registrations: Inscription à l'évènement
 admin.label.consultation_type: Types de consultation
 admin.label.section: Accueil (sections)
 admin.label.user_type: Types de profil
@@ -236,7 +236,7 @@ admin:
       lng: Longitude
       registration_enable: Module d'inscription interne
     event_registration:
-      event: Événement
+      event: Évènement
       registered: Inscrit
       username: Utilisateur externe
       email: Adresse mail externe
@@ -542,10 +542,10 @@ highlighted_content.limit_info: 5 contenus à la une maximum
 highlighted_post: un article à la une
 highlighted_idea: une idée à la une
 highlighted_theme: un thème à la une
-highlighted_event: un événement à la une
+highlighted_event: un évènement à la une
 highlighted_consultation: une consultation à la une
 idea_comment: un commentaire sur une idée
-event_comment: un commentaire sur un événement
+event_comment: un commentaire sur un évènement
 post_comment: un commentaire sur un article
 other_step: Autre étape
 consultation_step: Étape de consultation
