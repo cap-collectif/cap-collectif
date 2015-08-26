@@ -37,7 +37,7 @@ const Comment = React.createClass({
     return (
       <li className="opinion opinion--comment" >
         <div className="opinion__body">
-          <UserAvatar user={comment.author} />
+          <UserAvatar user={comment.author} className="pull-left" />
           <div className="opinion__data">
             <CommentInfos comment={comment} />
           </div>

@@ -13,7 +13,7 @@ const OpinionPreview = React.createClass({
     const opinion = this.props.opinion;
     return (
       <div className="opinion__body box">
-        <UserAvatar user={opinion.author} />
+        <UserAvatar user={opinion.author} className="pull-left" />
         <div className="opinion__data">
           <OpinionInfos opinion={opinion} />
           <h3 className="opinion__title">

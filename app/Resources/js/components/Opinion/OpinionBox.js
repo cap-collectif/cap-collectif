@@ -25,7 +25,7 @@ const OpinionBox = React.createClass({
     }
 
     return (
-      <Row>
+      <div>
       {
         votes.map((vote) => {
           return <UserAvatar key={vote.user.id} user={vote.user} style={{marginRight: 5}} />;
@@ -35,7 +35,7 @@ const OpinionBox = React.createClass({
         ? <span>+ {moreVotes}</span>
         : <span />
       }
-      </Row>
+      </div>
     );
   },
 
@@ -70,9 +70,7 @@ const OpinionBox = React.createClass({
               </Col>
               <Col sm={12} md={5} style={{marginTop: 60}}>
                 {this.renderUserAvatarVotes()}
-                <Row>
-                  <FormattedMessage message={this.getIntlMessage('global.votes')} num={opinion.votes.length} />
-                </Row>
+                <div><FormattedMessage message={this.getIntlMessage('global.votes')} num={opinion.votes.length} /></div>
               </Col>
             </Row>
           : <span />
