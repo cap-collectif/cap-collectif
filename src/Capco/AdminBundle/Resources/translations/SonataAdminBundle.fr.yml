@@ -174,6 +174,7 @@ admin:
       voter: Votant
       created_at: Création
     consultation:
+      appendices: Annexes
       group_content: Contenu
       group_meta: Métadonnées
       group_opinion_types: Type de consultation
