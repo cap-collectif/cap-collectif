@@ -4,7 +4,7 @@ const UserAvatar = React.createClass({
   propTypes: {
     user: React.PropTypes.object,
     size: React.PropTypes.number,
-    className: React.PropTypes.string,
+    classes: React.PropTypes.string,
     style: React.PropTypes.object,
     anchor: React.PropTypes.bool,
   },
@@ -13,7 +13,7 @@ const UserAvatar = React.createClass({
     return {
       user: null,
       size: 45,
-      className: '',
+      classes: 'pull-left',
       style: {},
       anchor: true,
     };
@@ -30,14 +30,14 @@ const UserAvatar = React.createClass({
   render() {
     if (this.props.user && this.props.user._links && this.props.anchor) {
       return (
-        <a className={this.props.className} style={this.props.style} href={this.props.user._links.profile}>
+        <a className={this.props.classes} style={this.props.style} href={this.props.user._links.profile}>
           { this.renderAvatar() }
         </a>
       );
     }
 
     return (
-      <span className={this.props.className} style={this.props.style} >
+      <span className={this.props.classes} style={this.props.style} >
         { this.renderAvatar() }
       </span>
     );

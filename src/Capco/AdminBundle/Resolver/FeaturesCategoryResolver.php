@@ -45,7 +45,7 @@ class FeaturesCategoryResolver
         ],
         'pages.login' => [
             'conditions' => [],
-            'features' => ['login_facebook', 'login_gplus', 'login_twitter'],
+            'features' => [],
         ],
         'pages.contact' => [
             'conditions' => [],
@@ -61,7 +61,7 @@ class FeaturesCategoryResolver
         ],
         'settings.modules' => [
             'conditions' => [],
-            'features' => ['blog', 'calendar', 'ideas', 'themes', 'registration', 'members_list', 'reporting', 'newsletter', 'share_buttons'],
+            'features' => ['blog', 'calendar', 'ideas', 'themes', 'registration', 'members_list', 'reporting', 'newsletter', 'share_buttons', 'login_facebook', 'login_gplus', 'login_twitter'],
         ],
         'settings.notifications' => [
             'conditions' => [],

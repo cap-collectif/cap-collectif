@@ -11,29 +11,15 @@ const Input = ReactBootstrap.Input;
 const OpinionVersionForm = React.createClass({
   propTypes: {
     opinionId: React.PropTypes.number.isRequired,
-    opinionBody: React.PropTypes.string,
-    version: React.PropTypes.object,
-    mode: React.PropTypes.string,
-    className: React.PropTypes.string,
-    style: React.PropTypes.object,
+    opinionBody: React.PropTypes.string.isRequired,
   },
   mixins: [ReactIntl.IntlMixin, React.addons.LinkedStateMixin, CkeditorMixin],
 
-  getDefaultProps() {
-    return {
-      opinionBody: '',
-      mode: 'create',
-      className: '',
-      style: {},
-      version: {},
-    };
-  },
-
   getInitialState() {
     return {
-      title: this.props.version ? this.props.version.title : '',
-      body: this.props.version ? this.props.version.body : this.props.opinionBody,
-      comment: this.props.version ? this.props.version.comment : '',
+      title: '',
+      body: this.props.opinionBody,
+      comment: '',
       showModal: false,
       submitted: false,
       isSubmitting: false,
@@ -51,30 +37,19 @@ const OpinionVersionForm = React.createClass({
     return !this.isValid(field) ? 'error' : this.state.submitted ? 'success' : '';
   },
 
-  renderButton() {
-    if (this.props.mode === 'create') {
-      return (
-        <Button bsStyle="primary" onClick={LoginStore.isLoggedIn() ? this.show.bind(null, this) : null}>
-          <i className="cap cap-add-1"></i>
-          { ' ' + this.getIntlMessage('opinion.add_new_version')}
-        </Button>
-      );
-    }
+  renderCreateButton() {
     return (
-      <Button className="opinion__action--edit pull-right btn--outline btn-dark-gray" onClick={this.show.bind(null, this)}>
-        <i className="cap cap-pencil-1"></i> {this.getIntlMessage('global.edit')}
+      <Button bsStyle="primary" onClick={LoginStore.isLoggedIn() ? this.show.bind(null, this) : null}>
+        <i className="cap cap-add-1"></i>
+        { ' ' + this.getIntlMessage('opinion.add_new_version')}
       </Button>
     );
   },
 
   render() {
-    const style = this.props.style;
-    if (!this.props.style.display) {
-      style.display = 'inline-block';
-    }
     return (
-      <div className={this.props.className} style={style}>
-        <LoginOverlay children={this.renderButton()} />
+      <div className="col-xs-5">
+        <LoginOverlay children={this.renderCreateButton()} />
         <Modal {...this.props}
           animation={false} show={this.state.showModal}
           onHide={this.close.bind(null, this)} bsSize="large" aria-labelledby="contained-modal-title-lg"
@@ -126,21 +101,12 @@ const OpinionVersionForm = React.createClass({
             </Button>
             <Button
               disabled={this.state.isSubmitting}
-              onClick={this.state.isSubmitting
-                ? null
-                : (this.props.mode === 'create'
-                  ? this.create.bind(null, this)
-                  : this.update.bind(null, this)
-                )
-              }
+              onClick={!this.state.isSubmitting ? this.create.bind(null, this) : null}
               bsStyle="primary"
             >
               {this.state.isSubmitting
                 ? this.getIntlMessage('global.loading')
-                : (this.props.mode === 'create'
-                  ? this.getIntlMessage('global.publish')
-                  : this.getIntlMessage('global.edit')
-                )
+                : this.getIntlMessage('global.publish')
               }
             </Button>
           </Modal.Footer>
@@ -182,34 +148,6 @@ const OpinionVersionForm = React.createClass({
       .catch(() => {
         this.setState({isSubmitting: false, submitted: false});
       });
-    });
-  },
-
-  update() {
-    this.setState({submitted: true}, () => {
-      if (!this.isValid()) {
-        return;
-      }
-
-      this.setState({isSubmitting: true});
-
-      const data = {
-        title: this.state.title,
-        body: this.state.body,
-        comment: this.state.comment,
-      };
-
-      OpinionActions
-        .updateVersion(this.props.opinionId, this.props.version.id, data)
-        .then(() => {
-          this.setState(this.getInitialState());
-          this.close();
-          location.reload(); // TODO when enough time
-          return true;
-        })
-        .catch(() => {
-          this.setState({isSubmitting: false, submitted: false});
-        });
     });
   },
 

@@ -397,11 +397,11 @@ argument:
     not_found: Argument introuvable.
     no_contribute: Impossible de contribuer sur cet argument.
     not_author: Vous ne pouvez pas modifier cet argument car vous n'en êtes pas l'auteur.
-  count: "]-Inf, 0] 0 argument | {1} 1 argument | ]1,Inf[ %count% arguments"
+  count: "]-Inf, 0] Aucun argument | {1} 1 argument | ]1,Inf[ %count% arguments"
 
 version:
   show:
-    count: "]-Inf, 0] 0 nouvelle version | {1} 1 nouvelle version | ]1,Inf[ %count% nouvelles versions"
+    count: "]-Inf, 0] Aucune nouvelle version | {1} 1 nouvelle version | ]1,Inf[ %count% nouvelles versions"
 
 
 source:
@@ -453,7 +453,7 @@ source:
     link: Lien
     file: Fichier
   show:
-    count: "]-Inf, 0] 0 source | {1} 1 source | ]1,Inf[ %count% sources"
+    count: "]-Inf, 0] Aucune source | {1} 1 source | ]1,Inf[ %count% sources"
   linked_proposition: Liée à la proposition :
   none: Il n'y a pas de sources.
   error:

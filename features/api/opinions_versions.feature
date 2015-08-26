@@ -4,8 +4,7 @@ Feature: Opinions Versions
 
   Scenario: API client wants to list versions of an opinion
     When I send a GET request to "/api/opinions/57/versions"
-    Then the JSON response status code should be 200
-    And the JSON response should match:
+    Then the JSON response should match:
     """
     {
       "versions": [
@@ -76,80 +75,6 @@ Feature: Opinions Versions
     }
     """
 
-## Get
-
-  Scenario: API client wants to get an opinion version
-    When I send a GET request to "/api/opinions/57/versions/1"
-    Then the JSON response status code should be 200
-    And the JSON response should match:
-    """
-    {
-      "version": {
-        "id": @integer@,
-        "title": @string@,
-        "body": @string@,
-        "comment": @string@,
-        "created_at": "@string@.isDateTime()",
-        "updated_at": "@string@.isDateTime()",
-        "is_trashed": @boolean@,
-
-        "arguments": @...@,
-        "arguments_yes_count": @integer@,
-        "arguments_no_count": @integer@,
-        "arguments_count": @integer@,
-
-        "sources": @...@,
-        "sources_count": @integer@,
-
-        "votes": @...@,
-        "votes_nok": @integer@,
-        "votes_ok": @integer@,
-        "votes_mitige": @integer@,
-        "votes_total": @integer@,
-
-        "parent": {
-          "isContribuable": @boolean@,
-          "id": @integer@,
-          "body": @string@,
-          "title": @string@,
-          "type": {
-            "id": @integer@,
-            "title": @string@,
-            "color": @string@
-          },
-          "_links": {
-            "show": @string@,
-            "edit": @string@,
-            "report": @string@,
-            "type": @string@
-          },
-          "user_vote": @null@,
-          "has_user_reported": @boolean@
-        },
-        "author": {
-          "username": @string@,
-          "displayName": @string@,
-          "uniqueId": @string@,
-          "isAdmin": @boolean@,
-          "media": {
-            "url": "@string@.startsWith('/media')"
-          },
-          "_links": {
-            "profile": @string@,
-            "settings": @string@
-          }
-        },
-        "_links": {
-          "show": @string@,
-          "report": @string@
-        },
-        "user_vote": @null@,
-        "has_user_reported": @boolean@
-      }
-    }
-    """
-
-
 ## Create
 
   ### As an Anonymous
@@ -199,46 +124,19 @@ Feature: Opinions Versions
       "comment": "Un peu de fun dans ce monde trop sobre !"
     }
     """
-    Then the JSON response status code should be 400
+    Then the JSON response status code should be 500
     And the JSON response should match:
     """
     {
-      "code": 400,
+      "code": 500,
       "message": "Can't add a version to an uncontributable opinion.",
       "errors": @null@
     }
     """
 
-## Update
-
-  @database
-  Scenario: Author of a version wants to update it
-    Given I am logged in to api as user
-    When I send a PUT request to "/api/opinions/57/versions/1" with json:
-    """
-    {
-      "title": "Nouveau titre",
-      "body": "Mes modifications blablabla"
-    }
-    """
-    Then the JSON response status code should be 204
-
-  @database
-  Scenario: Non author of a version wants to update it
-    Given I am logged in to api as admin
-    When I send a PUT request to "/api/opinions/57/versions/1" with json:
-    """
-    {
-      "title": "Nouveau titre",
-      "body": "Mes modifications blablabla"
-    }
-    """
-    Then the JSON response status code should be 403
-
-
 ## Vote
 
-  ### As anonymous
+  ### As an Anonymous
 
   @database
   Scenario: Anonymous API client wants to add a version
@@ -250,9 +148,9 @@ Feature: Opinions Versions
     """
     Then the JSON response status code should be 401
 
-  ### As a logged in user
+  ### As a Logged in user
 
-  @database
+  @database @dev
   Scenario: logged in API client wants to add a version vote
     Given I am logged in to api as user
     When I send a PUT request to "/api/opinions/57/versions/1/votes" with json:
@@ -274,9 +172,9 @@ Feature: Opinions Versions
 
 ## Argument
 
-  ### As anonymous
+  ### As an Anonymous
 
-  @database
+  @database @dev
   Scenario: Anonymous API client wants to add an argument to an opinion version
     When I send a POST request to "/api/opinions/57/versions/1/arguments" with json:
     """
@@ -288,7 +186,7 @@ Feature: Opinions Versions
     Then the JSON response status code should be 401
 
   ### As a Logged in user
-  @database
+  @database @dev
   Scenario: logged in API client wants to add an argument to an opinion version
     Given I am logged in to api as user
     When I send a POST request to "/api/opinions/57/versions/1/arguments" with json:
@@ -318,7 +216,7 @@ Feature: Opinions Versions
     Then the JSON response status code should be 401
 
   ### As a Logged in user
-  @database
+  @database @dev
   Scenario: logged in API client wants to add an argument to an opinion version
     Given I am logged in to api as user
     When I send a POST request to "/api/opinions/57/versions/1/sources" with json:

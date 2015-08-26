@@ -140,7 +140,6 @@ class OpinionVersion
 
     public function __construct()
     {
-        $this->arguments = new ArrayCollection();
         $this->votes = new ArrayCollection();
         $this->reports = new ArrayCollection();
     }

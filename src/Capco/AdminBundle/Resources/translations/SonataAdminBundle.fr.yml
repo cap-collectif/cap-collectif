@@ -11,8 +11,6 @@ admin.group.parameters: Réglages
 admin.group.pages: Pages
 
 # Dashboard names
-admin.label.appendix: Annexes
-admin.label.appendixTypes: Type d'annexe
 admin.label.page: Pages statiques
 admin.label.menu_item: Navigation
 admin.label.argument: Arguments
@@ -113,10 +111,6 @@ admin:
 
 
   fields:
-    appendix:
-      opinion: Proposition
-      body: Contenu
-      type: Type
     argument:
       body: Contenu
       type: Type d'argument
@@ -505,9 +499,9 @@ capco:
     shield_mode: Protection du site par mot de passe
     user_type: Types de profil
     members_list: Liste des membres
-    consultations_form: Tri des consultations
+    consultations_form: Filtrer et trier les consultations
     share_buttons: Boutons de partage
-    idea_creation: Création d'idées
+    idea_creation: Soumettre une idée
     consultation_trash: Corbeille des consultations
     idea_trash: Corbeille des idées
     reporting: Signalement
