@@ -115,7 +115,6 @@ class OpinionTypeAdmin extends Admin
                 'label' => 'admin.fields.opinion_type.position',
             ))
 
-
             // Options
             ->add('color', 'choice', array(
                 'label' => 'admin.fields.opinion_type.color',

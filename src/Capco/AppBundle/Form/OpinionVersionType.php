@@ -9,7 +9,6 @@ use Symfony\Component\Validator\Constraints\True;
 
 class OpinionVersionType extends AbstractType
 {
-
     /**
      * @param FormBuilderInterface $builder
      * @param array                $options

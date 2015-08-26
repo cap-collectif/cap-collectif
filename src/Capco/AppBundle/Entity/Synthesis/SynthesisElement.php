@@ -307,6 +307,7 @@ class SynthesisElement
     public function setOriginalDivision(SynthesisDivision $originalDivision)
     {
         $this->originalDivision = $originalDivision;
+
         return $this;
     }
 
@@ -325,6 +326,7 @@ class SynthesisElement
     {
         $this->division = $division;
         $division->setOriginalElement($this);
+
         return $this;
     }
 
@@ -598,6 +600,7 @@ class SynthesisElement
                 $children->add($child);
             }
         }
+
         return $children;
     }
 
@@ -609,6 +612,7 @@ class SynthesisElement
             $element = $element->getParent();
             $parentsId[] = $element->getId();
         }
+
         return $parentsId;
     }
 

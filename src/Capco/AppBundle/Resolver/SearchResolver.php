@@ -3,16 +3,11 @@
 namespace Capco\AppBundle\Resolver;
 
 use Elastica\Index;
-use FOS\ElasticaBundle\Finder\FinderInterface;
-
 use Elastica\Query;
-use Elastica\Query\Bool;
 use Elastica\Query\MultiMatch;
 use Elastica\Query\Filtered;
 use Elastica\Filter\Type;
 use FOS\ElasticaBundle\Transformer\ElasticaToModelTransformerInterface;
-use Pagerfanta\Adapter\ArrayAdapter;
-use Pagerfanta\Pagerfanta;
 
 class SearchResolver
 {
@@ -33,7 +28,6 @@ class SearchResolver
         $from = ($page - 1) * $size;
 
         if ($term) {
-
             $termQuery = $this->getTermQuery($term);
 
             if ('all' !== $type) {
@@ -55,7 +49,6 @@ class SearchResolver
             $count = $resultSet->getTotalHits();
 
             $results = $this->transformer->hybridTransform($resultSet->getResults());
-
         }
 
         return ['count' => $count, 'results' => $results];
@@ -65,6 +58,7 @@ class SearchResolver
     public function getTypeFilteredQuery($type, $termQuery)
     {
         $typeFilter = new Type($type);
+
         return new Filtered($termQuery, $typeFilter);
     }
 
@@ -83,6 +77,7 @@ class SearchResolver
             'username^5',
             'biography',
         ]);
+
         return $termQuery;
     }
 
@@ -98,30 +93,29 @@ class SearchResolver
 
         return [
             $term => [
-                "order" => "desc",
+                'order' => 'desc',
             ],
         ];
-
     }
 
     // get array of settings for highlighted results
     protected function getHighlightSettings()
     {
         return [
-            "pre_tags" => ["<span class=\"search__highlight\">"],
-            "post_tags" => ["</span>"],
-            "number_of_fragments" => 3,
-            "fragment_size" => 175,
-            "fields" => [
-                "title" => ['number_of_fragments' => 0,],
-                "strippedObject" => new \stdClass,
-                "strippedBody" => new \stdClass,
-                "body" => new \stdClass,
-                "teaser" => new \stdClass,
-                "excerpt" => new \stdClass,
-                "username" => ['number_of_fragments' => 0,],
-                "biography" => new \stdClass,
-            ]
+            'pre_tags' => ["<span class=\"search__highlight\">"],
+            'post_tags' => ['</span>'],
+            'number_of_fragments' => 3,
+            'fragment_size' => 175,
+            'fields' => [
+                'title' => ['number_of_fragments' => 0],
+                'strippedObject' => new \stdClass(),
+                'strippedBody' => new \stdClass(),
+                'body' => new \stdClass(),
+                'teaser' => new \stdClass(),
+                'excerpt' => new \stdClass(),
+                'username' => ['number_of_fragments' => 0],
+                'biography' => new \stdClass(),
+            ],
         ];
     }
 }

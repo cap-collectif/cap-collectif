@@ -4,7 +4,6 @@ namespace Capco\AppBundle\Traits;
 
 use Capco\AppBundle\Entity\OpinionVote;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Validator\Constraints as Assert;
 
 trait VotableTrait
 {

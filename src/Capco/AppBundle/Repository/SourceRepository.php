@@ -14,7 +14,6 @@ use Doctrine\ORM\EntityRepository;
  */
 class SourceRepository extends EntityRepository
 {
-
     public function getOneByOpinion(Opinion $opinion, $offset, $limit, $filter)
     {
         $qb = $this->getIsEnabledQueryBuilder()
@@ -41,10 +40,8 @@ class SourceRepository extends EntityRepository
             $qb->addOrderBy('s.voteCount', 'DESC');
         }
 
-
         return $qb->getQuery()->getResult();
     }
-
 
     /**
      * Get one source by slug.

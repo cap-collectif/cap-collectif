@@ -50,7 +50,6 @@ class OpinionPage extends Page
         return $this->getElement('first source vote count')->getText();
     }
 
-
     public function voteForFirstSource()
     {
         $this->getElement('Vote first source')->click();

@@ -6,7 +6,6 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Component\HttpFoundation\Request;
-
 use Capco\AppBundle\Form\SearchType as SearchForm;
 
 class SearchController extends Controller
@@ -17,6 +16,7 @@ class SearchController extends Controller
      * @param $sort
      * @param $type
      * @param $page
+     *
      * @return array|\Symfony\Component\HttpFoundation\RedirectResponse
      *
      * @Route("/search/{term}/{sort}/{type}/{page}", name="app_search", requirements={"page" = "\d+"}, defaults={"page" = 1})
@@ -32,6 +32,7 @@ class SearchController extends Controller
             if ($form->isValid()) {
                 // redirect to the results page (avoids reload alerts)
                 $data = $form->getData();
+
                 return $this->redirect($this->generateUrl('app_search', array_merge($data, ['page' => $page])));
             }
         } else {

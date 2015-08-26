@@ -7,8 +7,6 @@ use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Show\ShowMapper;
-use Sonata\AdminBundle\Route\RouteCollection;
-use Capco\AppBundle\Entity\OpinionAppendix;
 
 class OpinionAppendixAdmin extends Admin
 {
@@ -51,7 +49,6 @@ class OpinionAppendixAdmin extends Admin
                 'label' => 'admin.fields.appendix.type',
             ))
         ;
-
     }
 
     /**
@@ -70,7 +67,6 @@ class OpinionAppendixAdmin extends Admin
                 'label' => 'admin.fields.appendix.type',
             ))
         ;
-
     }
 
     /**

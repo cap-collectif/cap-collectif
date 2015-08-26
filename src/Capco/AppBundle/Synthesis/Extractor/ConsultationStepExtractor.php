@@ -155,13 +155,13 @@ class ConsultationStepExtractor
         $folder->setPublished(true);
         $opinionElement->addChild($folder);
         $synthesis->addElement($folder);
+
         return $folder;
     }
 
     public function getSourcesFolderLabel()
     {
         return $this->translator->trans('synthesis.consultation_step.sources', [], 'CapcoAppBundleSynthesis');
-
     }
 
     public function getArgumentsFolder(SynthesisElement $opinionElement, $value, Synthesis $synthesis)
@@ -179,6 +179,7 @@ class ConsultationStepExtractor
         $folder->setPublished(true);
         $opinionElement->addChild($folder);
         $synthesis->addElement($folder);
+
         return $folder;
     }
 
@@ -187,11 +188,11 @@ class ConsultationStepExtractor
         $label = '';
         if ($value === 1) {
             $label = 'synthesis.consultation_step.arguments.pros';
-        } else if ($value === 0) {
+        } elseif ($value === 0) {
             $label = 'synthesis.consultation_step.arguments.cons';
         }
-        return $this->translator->trans($label, [], 'CapcoAppBundleSynthesis');
 
+        return $this->translator->trans($label, [], 'CapcoAppBundleSynthesis');
     }
 
     public function createElementFromOpinionType(OpinionType $opinionType)
@@ -310,7 +311,7 @@ class ConsultationStepExtractor
         if ($source->getMedia()) {
             $mediaURL = $this->router->generate('sonata_media_download', ['id' => $source->getMedia()->getId()]);
             $element->setLink($mediaURL);
-        } else if ($source->getLink()) {
+        } elseif ($source->getLink()) {
             $element->setLink($source->getLink());
         }
 

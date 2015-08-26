@@ -66,6 +66,7 @@ class ConsultationController extends Controller
         // Redirect if there is only one opinion type allowed
         if (count($currentStep->getAllowedTypes()) == 1) {
             $opinionType = $currentStep->getAllowedTypes()->first();
+
             return $this->redirect($this->generateUrl('app_consultation_show_opinions_sorted', [
                 'consultationSlug' => $consultation->getSlug(),
                 'stepSlug' => $currentStep->getSlug(),
@@ -107,7 +108,6 @@ class ConsultationController extends Controller
     {
         $blocks = [];
         if (count($currentStep->getAllowedTypes()) > 0) {
-
             $blocks = $this->getDoctrine()
                            ->getRepository('CapcoAppBundle:OpinionType')
                            ->getAllowedWithOpinionCount($currentStep);

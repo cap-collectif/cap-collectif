@@ -25,7 +25,7 @@ class SourceSerializationListener implements EventSubscriberInterface
                 'event' => 'serializer.post_serialize',
                 'class' => 'Capco\AppBundle\Entity\Source',
                 'method' => 'onPostSource',
-            ]
+            ],
         ];
     }
 
@@ -58,12 +58,11 @@ class SourceSerializationListener implements EventSubscriberInterface
         );
 
         $event->getVisitor()->addData(
-            'has_user_voted', $user === "anon." ? false : $source->userHasVote($user)
+            'has_user_voted', $user === 'anon.' ? false : $source->userHasVote($user)
         );
 
         $event->getVisitor()->addData(
-            'has_user_reported', $user === "anon." ? false : $source->userHasReport($user)
+            'has_user_reported', $user === 'anon.' ? false : $source->userHasReport($user)
         );
-
     }
 }

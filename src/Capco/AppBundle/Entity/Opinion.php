@@ -146,7 +146,6 @@ class Opinion
         $this->versions = new ArrayCollection();
         $this->appendices = new ArrayCollection();
 
-
         $this->updatedAt = new \Datetime();
         $this->createdAt = new \Datetime();
 
@@ -541,15 +540,15 @@ class Opinion
 
     // ******************************* Custom methods **************************************
 
-    public function getVoteValueByUser(User $user) {
-
+    public function getVoteValueByUser(User $user)
+    {
         foreach ($this->votes as $vote) {
             if ($vote->getUser() == $user) {
                 return $vote->getValue();
             }
         }
 
-        return null;
+        return;
     }
 
     public function userHasReport(User $user)
@@ -577,6 +576,7 @@ class Opinion
                 $i++;
             }
         }
+
         return $i;
     }
 
@@ -588,6 +588,7 @@ class Opinion
                 $i++;
             }
         }
+
         return $i;
     }
 

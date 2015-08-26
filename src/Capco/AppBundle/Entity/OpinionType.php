@@ -145,6 +145,7 @@ class OpinionType
         if ($this->id) {
             return $this->getTitle();
         }
+
         return 'New opinion type';
     }
 

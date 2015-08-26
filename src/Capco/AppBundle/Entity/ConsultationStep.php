@@ -2,8 +2,6 @@
 
 namespace Capco\AppBundle\Entity;
 
-use Capco\AppBundle\Entity\OpinionType;
-
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 use JMS\Serializer\Annotation as Serializer;
@@ -321,6 +319,7 @@ class ConsultationStep extends AbstractStep
                 $position = $opinion->getPosition();
             }
         }
+
         return $position;
     }
 

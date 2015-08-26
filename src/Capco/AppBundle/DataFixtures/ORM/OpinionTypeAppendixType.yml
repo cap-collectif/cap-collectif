@@ -9,5 +9,3 @@ Capco\AppBundle\Entity\OpinionTypeAppendixType:
         title: Étude d'impact
         position: 3
         opinionType: @opinionType5
-
-

@@ -6,7 +6,6 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Capco\AppBundle\Toggle\Manager;
-use Capco\AppBundle\Repository\ThemeRepository;
 use Symfony\Component\Validator\Constraints\NotBlank;
 
 class SearchType extends AbstractType
@@ -30,7 +29,7 @@ class SearchType extends AbstractType
                 'label' => 'search.form.label.term',
                 'translation_domain' => 'CapcoAppBundle',
                 'constraints' => [new NotBlank(['message' => 'search.no_term'])],
-                'attr' => ['placeholder' => 'search.form.placeholder.term',]
+                'attr' => ['placeholder' => 'search.form.placeholder.term'],
             ])
             ->add('type', 'choice', array(
                 'required' => false,

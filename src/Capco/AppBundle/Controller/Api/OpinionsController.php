@@ -9,15 +9,12 @@ use Capco\AppBundle\Entity\OpinionVersionVote;
 use Capco\AppBundle\Entity\Argument;
 use Capco\AppBundle\Entity\Source;
 use Capco\AppBundle\Form\ApiSourceType;
-
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Capco\AppBundle\Form\OpinionVersionType;
 use Symfony\Component\Validator\ConstraintViolationListInterface;
-use Capco\AppBundle\CapcoAppBundleEvents;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
-
 use FOS\RestBundle\Controller\FOSRestController;
 use FOS\RestBundle\Controller\Annotations\View;
 use FOS\RestBundle\Controller\Annotations\Get;
@@ -25,13 +22,10 @@ use FOS\RestBundle\Controller\Annotations\Post;
 use FOS\RestBundle\Controller\Annotations\Put;
 use FOS\RestBundle\Controller\Annotations\Delete;
 use FOS\RestBundle\Controller\Annotations\QueryParam;
-
-use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 use FOS\RestBundle\Request\ParamFetcherInterface;
 
 class OpinionsController extends FOSRestController
 {
-
     /**
      * @Get("/opinions/{id}")
      * @ParamConverter("opinion", options={"mapping": {"id": "id"}, "method": "getOne"})
@@ -44,7 +38,6 @@ class OpinionsController extends FOSRestController
         ];
     }
 
-
     /**
      * @Security("has_role('ROLE_USER')")
      * @Put("/opinions/{id}/votes")
@@ -55,7 +48,7 @@ class OpinionsController extends FOSRestController
     public function putOpinionVoteAction(Opinion $opinion, OpinionVote $vote, ConstraintViolationListInterface $validationErrors)
     {
         if (!$opinion->canContribute()) {
-            throw new \Exception("Uncontributable opinion.", 1);
+            throw new \Exception('Uncontributable opinion.', 1);
         }
 
         $user = $this->getUser();
@@ -64,12 +57,12 @@ class OpinionsController extends FOSRestController
                     ->findOneBy(['user' => $user, 'opinion' => $opinion]);
 
         if ($previousVote) {
-
             $opinion->incrementVoteCountByValue($vote->getValue());
             $opinion->decrementVoteCountByValue($previousVote->getValue());
 
             $previousVote->setValue($vote->getValue());
             $this->getDoctrine()->getManager()->flush();
+
             return;
         }
 
@@ -97,7 +90,7 @@ class OpinionsController extends FOSRestController
     public function deleteOpinionVoteAction(Opinion $opinion)
     {
         if (!$opinion->canContribute()) {
-            throw new BadRequestHttpException("Uncontributable opinion.");
+            throw new BadRequestHttpException('Uncontributable opinion.');
         }
 
         $vote = $this->getDoctrine()->getManager()
@@ -105,7 +98,7 @@ class OpinionsController extends FOSRestController
                      ->findOneBy(['user' => $this->getUser(), 'opinion' => $opinion]);
 
         if (!$vote) {
-            throw new BadRequestHttpException("You have not voted for this opinion.");
+            throw new BadRequestHttpException('You have not voted for this opinion.');
         }
 
         $opinion->decrementVoteCountByValue($vote->getValue());
@@ -310,12 +303,12 @@ class OpinionsController extends FOSRestController
                     ->findOneBy(['user' => $user, 'opinionVersion' => $version]);
 
         if ($previousVote) {
-
             $version->incrementVoteCountByValue($vote->getValue());
             $version->decrementVoteCountByValue($previousVote->getValue());
 
             $previousVote->setValue($vote->getValue());
             $this->getDoctrine()->getManager()->flush();
+
             return;
         }
 
@@ -344,11 +337,11 @@ class OpinionsController extends FOSRestController
     public function deleteOpinionVersionVoteAction(Opinion $opinion, OpinionVersion $version)
     {
         if (!$opinion->canContribute()) {
-            throw new BadRequestHttpException("Uncontributable opinion.");
+            throw new BadRequestHttpException('Uncontributable opinion.');
         }
 
         if (!$opinion->getOpinionType()->isVersionable()) {
-            throw new BadRequestHttpException("Unversionable opinion.");
+            throw new BadRequestHttpException('Unversionable opinion.');
         }
 
         $vote = $this->getDoctrine()->getManager()
@@ -356,14 +349,13 @@ class OpinionsController extends FOSRestController
                      ->findOneBy(['user' => $this->getUser(), 'opinionVersion' => $version]);
 
         if (!$vote) {
-            throw new BadRequestHttpException("You have not voted for this opinion version.");
+            throw new BadRequestHttpException('You have not voted for this opinion version.');
         }
 
         $version->decrementVoteCountByValue($vote->getValue());
         $this->getDoctrine()->getManager()->remove($vote);
         $this->getDoctrine()->getManager()->flush();
     }
-
 
     /**
      * @Security("has_role('ROLE_USER')")
@@ -380,7 +372,6 @@ class OpinionsController extends FOSRestController
         if (!$opinion->getOpinionType()->isVersionable()) {
             throw new \Exception("Can't add a version to an unversionable opinion.", 1);
         }
-
 
         $user = $this->getUser();
         $opinionVersion = (new OpinionVersion())

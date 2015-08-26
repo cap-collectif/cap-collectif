@@ -2,10 +2,7 @@
 
 namespace Capco\AppBundle\Entity\Synthesis;
 
-use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
-use Gedmo\Mapping\Annotation as Gedmo;
-use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * SynthesisDivision.
@@ -57,6 +54,7 @@ class SynthesisDivision
     public function setOriginalElement($originalElement)
     {
         $this->originalElement = $originalElement;
+
         return $this;
     }
 
@@ -75,6 +73,7 @@ class SynthesisDivision
     {
         $element->setOriginalDivision($this);
         $this->elements[] = $element;
+
         return $this;
     }
 
@@ -85,6 +84,7 @@ class SynthesisDivision
     {
         $this->elements->removeElement($element);
         $element->setOriginalDivision(null);
+
         return $this;
     }
 
@@ -97,6 +97,7 @@ class SynthesisDivision
         foreach ($elements as $el) {
             $el->setOriginalDivision($this);
         }
+
         return $this;
     }
 }

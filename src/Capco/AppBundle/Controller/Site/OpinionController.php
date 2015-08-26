@@ -25,7 +25,6 @@ use Capco\AppBundle\Event\OpinionVoteChangedEvent;
 
 class OpinionController extends Controller
 {
-
     /**
      * @Route("/consultations/{consultationSlug}/consultation/{stepSlug}/opinions/{opinionTypeSlug}/{opinionSlug}/versions/{versionSlug}", name="app_consultation_show_opinion_version")
      * @Template("CapcoAppBundle:Opinion:show_version.html.twig")

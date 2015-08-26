@@ -4,24 +4,14 @@ namespace Capco\AppBundle\Controller\Api;
 
 use Capco\AppBundle\Entity\SourceVote;
 use Capco\AppBundle\Entity\Source;
-
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
-use Capco\AppBundle\Form\OpinionVersionType;
 use Symfony\Component\Validator\ConstraintViolationListInterface;
-use Capco\AppBundle\CapcoAppBundleEvents;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
-
 use FOS\RestBundle\Controller\FOSRestController;
 use FOS\RestBundle\Controller\Annotations\View;
-use FOS\RestBundle\Controller\Annotations\Get;
 use FOS\RestBundle\Controller\Annotations\Post;
 use FOS\RestBundle\Controller\Annotations\Delete;
-use FOS\RestBundle\Controller\Annotations\QueryParam;
-
-use Nelmio\ApiDocBundle\Annotation\ApiDoc;
-use FOS\RestBundle\Request\ParamFetcherInterface;
 
 class SourcesController extends FOSRestController
 {
@@ -35,7 +25,7 @@ class SourcesController extends FOSRestController
     public function postSourceVoteAction(Source $source, SourceVote $vote, ConstraintViolationListInterface $validationErrors)
     {
         if (!$source->canContribute()) {
-            throw new BadRequestHttpException("Uncontributable source.");
+            throw new BadRequestHttpException('Uncontributable source.');
         }
 
         $user = $this->getUser();
@@ -44,7 +34,7 @@ class SourcesController extends FOSRestController
                     ->findOneBy(['user' => $user, 'source' => $source]);
 
         if ($previousVote) {
-            throw new BadRequestHttpException("Already voted.");
+            throw new BadRequestHttpException('Already voted.');
         }
 
         if ($validationErrors->count() > 0) {
@@ -70,7 +60,7 @@ class SourcesController extends FOSRestController
     public function deleteSourceVoteAction(Source $source)
     {
         if (!$source->canContribute()) {
-            throw new BadRequestHttpException("Uncontributable source.");
+            throw new BadRequestHttpException('Uncontributable source.');
         }
 
         $vote = $this->getDoctrine()->getManager()
@@ -78,11 +68,10 @@ class SourcesController extends FOSRestController
                      ->findOneBy(['user' => $this->getUser(), 'source' => $source]);
 
         if (!$vote) {
-            throw new BadRequestHttpException("You have not voted for this source.");
+            throw new BadRequestHttpException('You have not voted for this source.');
         }
 
         $this->getDoctrine()->getManager()->remove($vote);
         $this->getDoctrine()->getManager()->flush();
     }
-
 }

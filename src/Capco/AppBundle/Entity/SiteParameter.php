@@ -103,6 +103,7 @@ class SiteParameter
         if ($this->id) {
             return $this->getKeyname();
         }
+
         return 'New parameter';
     }
 

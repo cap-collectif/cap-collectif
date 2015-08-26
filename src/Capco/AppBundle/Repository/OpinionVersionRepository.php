@@ -4,7 +4,6 @@ namespace Capco\AppBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\Tools\Pagination\Paginator;
-use Capco\AppBundle\Entity\OpinionVersion;
 use Capco\AppBundle\Entity\Opinion;
 
 /**
@@ -43,12 +42,10 @@ class OpinionVersionRepository extends EntityRepository
         return new Paginator($qb);
     }
 
-
     protected function getIsEnabledQueryBuilder($alias = 'o')
     {
         return $this->createQueryBuilder($alias)
                     ->andWhere($alias.'.enabled = true')
                 ;
     }
-
 }

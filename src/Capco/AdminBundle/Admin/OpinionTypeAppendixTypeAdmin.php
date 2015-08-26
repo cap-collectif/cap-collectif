@@ -8,7 +8,6 @@ use Sonata\AdminBundle\Route\RouteCollection;
 
 class OpinionTypeAppendixTypeAdmin extends Admin
 {
-
     protected $formOptions = array(
         'cascade_validation' => true,
     );
@@ -32,5 +31,4 @@ class OpinionTypeAppendixTypeAdmin extends Admin
     {
         $collection->clearExcept(array('create', 'edit', 'delete'));
     }
-
 }

@@ -2,12 +2,8 @@
 
 namespace Capco\AppBundle\Entity;
 
-use Capco\UserBundle\Entity\User;
-use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
-use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Validator\Constraints as Assert;
-use Capco\AppBundle\Traits\SluggableTitleTrait;
 use Capco\AppBundle\Traits\TimestampableTrait;
 
 /**
@@ -49,6 +45,7 @@ class OpinionAppendix
         if ($this->id) {
             return $this->getTitle();
         }
+
         return 'New OpinionAppendix';
     }
 
@@ -99,6 +96,4 @@ class OpinionAppendix
 
         return $this;
     }
-
-
 }

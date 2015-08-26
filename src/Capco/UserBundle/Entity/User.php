@@ -870,7 +870,7 @@ class User extends BaseUser implements EncoderAwareInterface, SynthesisUserInter
     /**
      * Tell if user has role admin or super admin.
      *
-     * @return boolean
+     * @return bool
      */
     public function isAdmin()
     {

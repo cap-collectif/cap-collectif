@@ -180,4 +180,3 @@ Capco\AppBundle\Entity\Opinion:
         Author: @user2
         OpinionType: @opinionType5
         position: 2
-

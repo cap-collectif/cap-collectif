@@ -44,6 +44,7 @@ class EventResolver
                 $events[$e->getStartYear()][$e->getStartMonth()][] = $e;
             }
         }
+
         return $events;
     }
 

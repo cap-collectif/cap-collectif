@@ -3,16 +3,13 @@
 namespace Capco\AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\Common\Collections\ArrayCollection;
-
 use Capco\AppBundle\Traits\TrashableTrait;
 use Capco\AppBundle\Traits\EnableTrait;
 use Capco\AppBundle\Traits\SluggableTitleTrait;
 use Capco\AppBundle\Traits\TimestampableTrait;
 use Capco\AppBundle\Traits\VotableTrait;
-use Capco\AppBundle\Entity\OpinionVersionVote;
 use Capco\UserBundle\Entity\User;
 
 /**
@@ -30,15 +27,15 @@ class OpinionVersion
     use TimestampableTrait;
     use VotableTrait;
 
-    public function getVoteValueByUser(User $user) {
-
+    public function getVoteValueByUser(User $user)
+    {
         foreach ($this->votes as $vote) {
             if ($vote->getUser() == $user) {
                 return $vote->getValue();
             }
         }
 
-        return null;
+        return;
     }
 
     public function userHasReport(User $user)
@@ -60,6 +57,7 @@ class OpinionVersion
                 $i++;
             }
         }
+
         return $i;
     }
 
@@ -71,6 +69,7 @@ class OpinionVersion
                 $i++;
             }
         }
+
         return $i;
     }
 
@@ -139,8 +138,8 @@ class OpinionVersion
      */
     protected $reports;
 
-
-    public function __construct() {
+    public function __construct()
+    {
         $this->votes = new ArrayCollection();
         $this->reports = new ArrayCollection();
     }

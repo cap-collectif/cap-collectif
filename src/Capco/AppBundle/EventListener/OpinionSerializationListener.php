@@ -68,13 +68,12 @@ class OpinionSerializationListener implements EventSubscriberInterface
         );
 
         $event->getVisitor()->addData(
-            'user_vote', $user === "anon." ? null : $version->getVoteValueByUser($user)
+            'user_vote', $user === 'anon.' ? null : $version->getVoteValueByUser($user)
         );
 
         $event->getVisitor()->addData(
-            'has_user_reported', $user === "anon." ? false : $version->userHasReport($user)
+            'has_user_reported', $user === 'anon.' ? false : $version->userHasReport($user)
         );
-
     }
 
     public function onPostOpinion(ObjectEvent $event)
@@ -114,18 +113,15 @@ class OpinionSerializationListener implements EventSubscriberInterface
         );
 
         $event->getVisitor()->addData(
-            'user_vote', $user === "anon." ? null : $opinion->getVoteValueByUser($user)
+            'user_vote', $user === 'anon.' ? null : $opinion->getVoteValueByUser($user)
         );
 
         $event->getVisitor()->addData(
-            'has_user_reported', $user === "anon." ? false : $opinion->userHasReport($user)
+            'has_user_reported', $user === 'anon.' ? false : $opinion->userHasReport($user)
         );
     }
 
     public function onPostOpinionType(ObjectEvent $event)
     {
-
     }
-
-
 }

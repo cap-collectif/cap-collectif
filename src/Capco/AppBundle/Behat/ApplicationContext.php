@@ -43,6 +43,7 @@ class ApplicationContext extends UserContext
 
     /**
      * @AfterSuite
+     *
      * @param $suiteScope
      */
     public static function notifiyEnd(AfterSuiteScope $suiteScope)
@@ -51,20 +52,20 @@ class ApplicationContext extends UserContext
         $resultCode = $suiteScope->getTestResult()->getResultCode();
         if ($notifier = NotifierFactory::create()) {
             $notification = new Notification();
-            if ($resultCode === TestResult::PASSED ) {
+            if ($resultCode === TestResult::PASSED) {
                 $notification
                     ->setTitle('Behat suite ended successfully')
-                    ->setBody('Suite "' . $suiteName . '" has ended without errors (for once). Congrats !')
+                    ->setBody('Suite "'.$suiteName.'" has ended without errors (for once). Congrats !')
                 ;
-            } else if ($resultCode === TestResult::SKIPPED ) {
+            } elseif ($resultCode === TestResult::SKIPPED) {
                 $notification
                     ->setTitle('Behat suite ended with skipped steps')
-                    ->setBody('Suite "' . $suiteName . '" has ended successfully but some steps have been skipped.')
+                    ->setBody('Suite "'.$suiteName.'" has ended successfully but some steps have been skipped.')
                 ;
             } else {
                 $notification
                     ->setTitle('Behat suite ended with errors')
-                    ->setBody('Suite "' . $suiteName . '" has ended with errors. Go check it out you moron !')
+                    ->setBody('Suite "'.$suiteName.'" has ended with errors. Go check it out you moron !')
                 ;
             }
             $notifier->send($notification);
@@ -196,11 +197,9 @@ class ApplicationContext extends UserContext
 
     /**
      * Checks if an element has a class
-     * Copyright neemzy https://github.com/neemzy/patchwork-core
+     * Copyright neemzy https://github.com/neemzy/patchwork-core.
      *
      * @Then /^"([^"]*)" element should have class "([^"]*)"$/
-     *
-     * @return void
      */
     public function elementShouldHaveClass($selector, $class)
     {
@@ -214,11 +213,9 @@ class ApplicationContext extends UserContext
     }
     /**
      * Checks if an element doesn't have a class
-     * Copyright neemzy https://github.com/neemzy/patchwork-core
+     * Copyright neemzy https://github.com/neemzy/patchwork-core.
      *
      * @Then /^"([^"]*)" element should not have class "([^"]*)"$/
-     *
-     * @return void
      */
     public function elementShouldNotHaveClass($selector, $class)
     {

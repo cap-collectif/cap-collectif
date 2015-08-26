@@ -10,7 +10,7 @@ class SynthesisElementType extends AbstractType
 {
     protected $hasDivision = true;
 
-    function __construct($hasDivision = true)
+    public function __construct($hasDivision = true)
     {
         $this->hasDivision = $hasDivision;
     }

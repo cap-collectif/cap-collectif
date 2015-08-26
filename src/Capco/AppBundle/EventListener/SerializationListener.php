@@ -5,8 +5,6 @@ namespace Capco\AppBundle\EventListener;
 use Capco\AppBundle\Manager\LogManager;
 use JMS\Serializer\SerializationContext;
 use JMS\Serializer\Serializer;
-use JMS\Serializer\SerializerBuilder;
-use Sonata\MediaBundle\Provider\ImageProvider;
 use JMS\Serializer\EventDispatcher\EventSubscriberInterface;
 use JMS\Serializer\EventDispatcher\ObjectEvent;
 use Sonata\MediaBundle\Twig\Extension\MediaExtension;

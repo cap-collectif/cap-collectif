@@ -6,8 +6,6 @@ use Doctrine\ORM\EntityManager;
 use Gedmo\Loggable\Entity\LogEntry;
 use Sonata\UserBundle\Entity\UserManager;
 use Symfony\Component\Translation\TranslatorInterface;
-use Capco\AppBundle\Entity\Synthesis\SynthesisDivision;
-use Capco\AppBundle\Entity\Synthesis\SynthesisElement;
 
 class LogManager
 {

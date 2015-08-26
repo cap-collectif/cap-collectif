@@ -31,7 +31,7 @@ class CommentType extends AbstractType
                     'mapped' => false,
                     'label' => 'comment.form.confirm',
                     'required' => true,
-                    'constraints' => [new True(['message' => 'comment.votes_not_confirmed'])]
+                    'constraints' => [new True(['message' => 'comment.votes_not_confirmed'])],
                 ))
             ;
         }

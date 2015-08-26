@@ -631,6 +631,7 @@ class Source
         if ($this->Opinion) {
             return $this->Opinion;
         }
+
         return $this->opinionVersion->getParent();
     }
 

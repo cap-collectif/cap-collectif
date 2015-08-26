@@ -2,7 +2,6 @@
 
 namespace Capco\AppBundle\Resolver;
 
-use Capco\AppBundle\Entity\AbstractVote;
 use Capco\AppBundle\Entity\Argument;
 use Capco\AppBundle\Entity\ConsultationStep;
 use Capco\AppBundle\Entity\Opinion;
@@ -171,7 +170,6 @@ class ConsultationDownloadResolver
             $data['published'][] = $item;
         }
 
-
         return $data;
     }
 
@@ -326,6 +324,7 @@ class ConsultationDownloadResolver
 
             return $this->translator->trans('consultation_download.values.votes.ok', array(), 'CapcoAppBundle');
         }
+
         return $this->translator->trans('consultation_download.values.votes.ok', array(), 'CapcoAppBundle');
     }
 

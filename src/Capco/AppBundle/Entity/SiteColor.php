@@ -83,6 +83,7 @@ class SiteColor
         if ($this->id) {
             return $this->getKeyname();
         }
+
         return 'New color';
     }
 

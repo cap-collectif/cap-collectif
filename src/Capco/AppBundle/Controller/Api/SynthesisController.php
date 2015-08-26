@@ -5,16 +5,11 @@ namespace Capco\AppBundle\Controller\Api;
 use Capco\AppBundle\Entity\ConsultationStep;
 use Capco\AppBundle\Entity\Synthesis\Synthesis;
 use Capco\AppBundle\Entity\Synthesis\SynthesisElement;
-use Capco\AppBundle\Entity\Synthesis\SynthesisDivision;
-
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
-use Symfony\Component\Validator\ConstraintViolationListInterface;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
-
 use FOS\RestBundle\Controller\FOSRestController;
 use FOS\RestBundle\Controller\Annotations\View;
 use FOS\RestBundle\Controller\Annotations\Get;
@@ -23,13 +18,10 @@ use FOS\RestBundle\Controller\Annotations\Put;
 use FOS\RestBundle\Util\Codes;
 use FOS\RestBundle\Request\ParamFetcherInterface;
 use FOS\RestBundle\Controller\Annotations\QueryParam;
-
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 use JMS\Serializer\SerializationContext;
-
 use Capco\AppBundle\Form\Api\SynthesisType as SynthesisForm;
 use Capco\AppBundle\Form\Api\SynthesisElementType as SynthesisElementForm;
-use Capco\AppBundle\Form\Api\SynthesisDivisionType as SynthesisDivisionForm;
 
 class SynthesisController extends FOSRestController
 {
@@ -89,6 +81,7 @@ class SynthesisController extends FOSRestController
         }
 
         $view = $this->view($form->getErrors(true), Codes::HTTP_BAD_REQUEST);
+
         return $view;
     }
 
@@ -125,6 +118,7 @@ class SynthesisController extends FOSRestController
         }
 
         $view = $this->view($form->getErrors(true), Codes::HTTP_BAD_REQUEST);
+
         return $view;
     }
 
@@ -221,6 +215,7 @@ class SynthesisController extends FOSRestController
     public function getSynthesisElementsAction(ParamFetcherInterface $paramFetcher, Synthesis $synthesis)
     {
         $type = $paramFetcher->get('type');
+
         return $this->get('capco.synthesis.synthesis_element_handler')->getElementsFromSynthesisByType($synthesis, $type);
     }
 
@@ -271,7 +266,7 @@ class SynthesisController extends FOSRestController
      *  description="Count the elements of a synthesis, filtered by type",
      *  statusCodes={
      *    200 = "Success",
-    *     404 = "Synthesis not found",
+     *     404 = "Synthesis not found",
      *  }
      * )
      *
@@ -345,6 +340,7 @@ class SynthesisController extends FOSRestController
         }
 
         $view = $this->view($form->getErrors(true), Codes::HTTP_BAD_REQUEST);
+
         return $view;
     }
 
@@ -373,10 +369,12 @@ class SynthesisController extends FOSRestController
 
         if ($form->isValid()) {
             $element = $this->get('capco.synthesis.synthesis_element_handler')->updateElementInSynthesis($element, $synthesis);
+
             return $element;
         }
 
         $view = $this->view($form->getErrors(true), Codes::HTTP_BAD_REQUEST);
+
         return $view;
     }
 

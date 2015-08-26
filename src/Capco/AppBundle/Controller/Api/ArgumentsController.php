@@ -4,23 +4,16 @@ namespace Capco\AppBundle\Controller\Api;
 
 use Capco\AppBundle\Entity\ArgumentVote;
 use Capco\AppBundle\Entity\Argument;
-
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
-use Capco\AppBundle\Form\OpinionVersionType;
 use Symfony\Component\Validator\ConstraintViolationListInterface;
-use Capco\AppBundle\CapcoAppBundleEvents;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
-
 use FOS\RestBundle\Controller\FOSRestController;
 use FOS\RestBundle\Controller\Annotations\View;
-use FOS\RestBundle\Controller\Annotations\Get;
 use FOS\RestBundle\Controller\Annotations\Put;
 use FOS\RestBundle\Controller\Annotations\Post;
 use FOS\RestBundle\Controller\Annotations\Delete;
-use FOS\RestBundle\Controller\Annotations\QueryParam;
-use FOS\RestBundle\Request\ParamFetcherInterface;
 
 class ArgumentsController extends FOSRestController
 {
@@ -34,7 +27,7 @@ class ArgumentsController extends FOSRestController
     public function postArgumentVoteAction(Argument $argument, ArgumentVote $vote, ConstraintViolationListInterface $validationErrors)
     {
         if (!$argument->canContribute()) {
-            throw new BadRequestHttpException("Uncontributable argument.");
+            throw new BadRequestHttpException('Uncontributable argument.');
         }
 
         $user = $this->getUser();
@@ -43,7 +36,7 @@ class ArgumentsController extends FOSRestController
                     ->findOneBy(['user' => $user, 'argument' => $argument]);
 
         if ($previousVote) {
-            throw new BadRequestHttpException("Already voted.");
+            throw new BadRequestHttpException('Already voted.');
         }
 
         if ($validationErrors->count() > 0) {
@@ -60,7 +53,6 @@ class ArgumentsController extends FOSRestController
         $this->getDoctrine()->getManager()->flush();
     }
 
-
     /**
      * @Security("has_role('ROLE_USER')")
      * @Put("/arguments/{argumentId}")
@@ -70,11 +62,11 @@ class ArgumentsController extends FOSRestController
     public function putArgumentAction(Request $request, Argument $argument)
     {
         if (!$argument->canContribute()) {
-            throw new BadRequestHttpException("Uncontributable argument.");
+            throw new BadRequestHttpException('Uncontributable argument.');
         }
 
         if ($argument->getAuthor() != $this->getUser()) {
-            throw new BadRequestHttpException("You are not the author of this argument.");
+            throw new BadRequestHttpException('You are not the author of this argument.');
         }
 
         // In the future we will implement this
@@ -89,18 +81,17 @@ class ArgumentsController extends FOSRestController
     public function deleteArgumentVoteAction(Argument $argument)
     {
         if (!$argument->getLinkedOpinion()->canContribute()) {
-            throw new BadRequestHttpException("Uncontributable opinion.");
+            throw new BadRequestHttpException('Uncontributable opinion.');
         }
         $vote = $this->getDoctrine()->getManager()
                      ->getRepository('CapcoAppBundle:ArgumentVote')
                      ->findOneBy(['user' => $this->getUser(), 'argument' => $argument]);
 
         if (!$vote) {
-            throw new BadRequestHttpException("You have not voted for this argument.");
+            throw new BadRequestHttpException('You have not voted for this argument.');
         }
 
         $this->getDoctrine()->getManager()->remove($vote);
         $this->getDoctrine()->getManager()->flush();
     }
-
 }

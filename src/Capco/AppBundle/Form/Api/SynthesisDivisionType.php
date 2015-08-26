@@ -5,7 +5,6 @@ namespace Capco\AppBundle\Form\Api;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
-use Capco\AppBundle\Form\Api\SynthesisElementType;
 
 class SynthesisDivisionType extends AbstractType
 {

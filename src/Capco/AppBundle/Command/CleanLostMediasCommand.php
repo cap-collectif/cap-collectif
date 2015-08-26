@@ -7,7 +7,6 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 
-
 class CleanLostMediasCommand extends ContainerAwareCommand
 {
     protected function configure()
@@ -24,6 +23,7 @@ class CleanLostMediasCommand extends ContainerAwareCommand
         if (!$input->getOption('force')) {
             $output->writeln('This command will remove some data in your project, if you\'re sure that you want those modifications, go ahead and add --force');
             $output->writeln('Please set the --force option to run this command');
+
             return;
         }
 
@@ -32,7 +32,7 @@ class CleanLostMediasCommand extends ContainerAwareCommand
         $medias = $em->getRepository('CapcoMediaBundle:Media')->findAll();
         $baseDir = $this->getContainer()->getParameter('kernel.root_dir');
 
-        $output->writeln(count($medias) . ' medias found.');
+        $output->writeln(count($medias).' medias found.');
 
         foreach ($medias as $media) {
             try {
@@ -44,7 +44,6 @@ class CleanLostMediasCommand extends ContainerAwareCommand
                 // load the file content from the abstracted file system
                 $tmpFile = sprintf('%s.%s', tempnam(sys_get_temp_dir(), 'sonata_media_liip_imagine'), $media->getExtension());
                 file_put_contents($tmpFile, $file->getContent());
-
             } catch (\Exception $e) {
                 $output->writeln('Media '.$media.' was not found and will be removed.');
                 $mediasToRemove[] = $media;
@@ -56,6 +55,6 @@ class CleanLostMediasCommand extends ContainerAwareCommand
         }
         $em->flush();
 
-        $output->writeln(count($mediasToRemove) . ' medias have been removed.');
+        $output->writeln(count($mediasToRemove).' medias have been removed.');
     }
 }

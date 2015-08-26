@@ -11,7 +11,7 @@ class ArgumentType extends AbstractType
 {
     protected $action;
 
-    function __construct($action)
+    public function __construct($action)
     {
         $this->action = $action;
     }
@@ -28,7 +28,7 @@ class ArgumentType extends AbstractType
                     'mapped' => false,
                     'label' => 'argument.form.confirm',
                     'required' => true,
-                    'constraints' => [new True(['message' => 'argument.votes_not_confirmed'])]
+                    'constraints' => [new True(['message' => 'argument.votes_not_confirmed'])],
                 ))
             ;
         }

@@ -25,7 +25,7 @@ class ArgumentSerializationListener implements EventSubscriberInterface
                 'event' => 'serializer.post_serialize',
                 'class' => 'Capco\AppBundle\Entity\Argument',
                 'method' => 'onPostArgument',
-            ]
+            ],
         ];
     }
 
@@ -58,12 +58,11 @@ class ArgumentSerializationListener implements EventSubscriberInterface
         );
 
         $event->getVisitor()->addData(
-            'has_user_voted', $user === "anon." ? false : $argument->userHasVote($user)
+            'has_user_voted', $user === 'anon.' ? false : $argument->userHasVote($user)
         );
 
         $event->getVisitor()->addData(
-            'has_user_reported', $user === "anon." ? false : $argument->userHasReport($user)
+            'has_user_reported', $user === 'anon.' ? false : $argument->userHasReport($user)
         );
-
     }
 }

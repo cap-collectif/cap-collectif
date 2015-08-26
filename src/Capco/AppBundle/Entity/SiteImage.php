@@ -84,6 +84,7 @@ class SiteImage
         if ($this->id) {
             return $this->getKeyname();
         }
+
         return 'New image';
     }
 

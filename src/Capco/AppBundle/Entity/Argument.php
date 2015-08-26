@@ -562,6 +562,7 @@ class Argument
         if ($this->opinion) {
             return $this->opinion;
         }
+
         return $this->opinionVersion->getParent();
     }
 

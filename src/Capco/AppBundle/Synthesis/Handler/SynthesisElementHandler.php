@@ -57,18 +57,21 @@ class SynthesisElementHandler
             default:
                 break;
         }
+
         return $conditions;
     }
 
     public function getElementsFromSynthesisByType($synthesis, $type = null)
     {
         $values = array_merge(['synthesis' => $synthesis], $this->getTypeConditions($type));
+
         return $this->em->getRepository('CapcoAppBundle:Synthesis\SynthesisElement')->getWith($values);
     }
 
     public function countElementsFromSynthesisByType($synthesis, $type = null)
     {
         $values = array_merge(['synthesis' => $synthesis], $this->getTypeConditions($type));
+
         return $this->em->getRepository('CapcoAppBundle:Synthesis\SynthesisElement')->countWith($values);
     }
 
@@ -116,15 +119,18 @@ class SynthesisElementHandler
         }
 
         $this->em->persist($division);
+
         return $division;
     }
 
-    public function ignoreElementChildren(SynthesisElement $element) {
+    public function ignoreElementChildren(SynthesisElement $element)
+    {
         foreach ($element->getChildren() as $child) {
             $child->setPublished(false);
             $child->setArchived(true);
             $this->ignoreElementChildren($child);
         }
+
         return $element;
     }
 

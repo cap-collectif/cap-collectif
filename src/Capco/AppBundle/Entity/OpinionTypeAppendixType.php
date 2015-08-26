@@ -2,15 +2,11 @@
 
 namespace Capco\AppBundle\Entity;
 
-use Capco\UserBundle\Entity\User;
-use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
-use Symfony\Component\Validator\Constraints as Assert;
 use Capco\AppBundle\Traits\SluggableTitleTrait;
 use Capco\AppBundle\Traits\TimestampableTrait;
 use Capco\AppBundle\Traits\PositionableTrait;
-
 
 /**
  * @ORM\Table(name="opinion_type_appendices_type")

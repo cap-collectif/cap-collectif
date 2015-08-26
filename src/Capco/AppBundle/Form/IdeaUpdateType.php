@@ -18,7 +18,7 @@ class IdeaUpdateType extends IdeaType
                 'mapped' => false,
                 'label' => 'idea.form.confirm',
                 'required' => true,
-                'constraints' => [new True(['message' => 'idea.votes_not_confirmed'])]
+                'constraints' => [new True(['message' => 'idea.votes_not_confirmed'])],
             ))
         ;
 

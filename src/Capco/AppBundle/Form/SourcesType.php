@@ -13,7 +13,7 @@ class SourcesType extends AbstractType
 {
     protected $action;
 
-    function __construct($action)
+    public function __construct($action)
     {
         $this->action = $action;
     }
@@ -31,7 +31,7 @@ class SourcesType extends AbstractType
                     'label' => 'source.form.confirm',
                     'translation_domain' => 'CapcoAppBundle',
                     'required' => true,
-                    'constraints' => [new True(['message' => 'source.votes_not_confirmed'])]
+                    'constraints' => [new True(['message' => 'source.votes_not_confirmed'])],
                 ))
             ;
         }

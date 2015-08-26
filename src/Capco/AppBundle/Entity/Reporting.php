@@ -353,6 +353,7 @@ class Reporting
         } elseif ($this->opinionVersion != null) {
             return $this->opinionVersion;
         }
+
         return;
     }
 

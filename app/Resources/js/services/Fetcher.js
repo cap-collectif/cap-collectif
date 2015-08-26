@@ -72,7 +72,7 @@ class Fetcher {
       },
       body: JSON.stringify(body),
     })
-    .then(status)
+    .then(status);
   }
 
   delete(uri) {

@@ -24,12 +24,14 @@ trait TimestampableTrait
     /**
      * Sets createdAt.
      *
-     * @param  \DateTime $createdAt
+     * @param \DateTime $createdAt
+     *
      * @return $this
      */
     public function setCreatedAt(\DateTime $createdAt)
     {
         $this->createdAt = $createdAt;
+
         return $this;
     }
 
@@ -46,12 +48,14 @@ trait TimestampableTrait
     /**
      * Sets updatedAt.
      *
-     * @param  \DateTime $updatedAt
+     * @param \DateTime $updatedAt
+     *
      * @return $this
      */
     public function setUpdatedAt(\DateTime $updatedAt)
     {
         $this->updatedAt = $updatedAt;
+
         return $this;
     }
 

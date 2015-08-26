@@ -5,7 +5,6 @@ namespace Capco\AppBundle\Form;
 use Capco\AppBundle\Entity\Source;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\Form\FormInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 class ApiSourceType extends AbstractType
@@ -18,7 +17,7 @@ class ApiSourceType extends AbstractType
             ->add('Category', null, ['required' => true])
             ->add('link', 'url', [
                 'required' => true,
-                'default_protocol' => 'http'
+                'default_protocol' => 'http',
             ])
         ;
     }

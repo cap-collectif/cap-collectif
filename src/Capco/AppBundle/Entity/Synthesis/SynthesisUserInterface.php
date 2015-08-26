@@ -24,7 +24,7 @@ interface SynthesisUserInterface
     /**
      * Tell if user is admin or not.
      *
-     * @return boolean
+     * @return bool
      */
     public function isAdmin();
 

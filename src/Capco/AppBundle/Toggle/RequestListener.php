@@ -42,12 +42,12 @@ class RequestListener
                     $username = 'admin';
                 }
                 $pwd = $this->siteParameterResolver->getValue('security.shield_mode.password');
-                $authString = base64_encode($username . ':' . $pwd);
+                $authString = base64_encode($username.':'.$pwd);
 
                 // Maintenance authentication
                 $maintenanceAuthString = null;
                 if ($this->shieldLogin != null && $this->shieldLogin != '' && $this->shieldPwd != null && $this->shieldPwd != '') {
-                    $maintenanceAuthString = base64_encode($this->shieldLogin . ':' . $this->shieldPwd);
+                    $maintenanceAuthString = base64_encode($this->shieldLogin.':'.$this->shieldPwd);
                 }
 
                 if (false === strpos($header, $authString) && null != $maintenanceAuthString && false === strpos(

@@ -30,8 +30,8 @@ class Notify implements MailerInterface
         $this->parameters = $parameters;
     }
 
-    public function sendEmail($to, $fromAddress, $fromName, $body, $subject, $contentType = 'text/html') {
-
+    public function sendEmail($to, $fromAddress, $fromName, $body, $subject, $contentType = 'text/html')
+    {
         if ($to && $fromAddress) {
             $message = \Swift_Message::newInstance()
                 ->setTo($to)
@@ -51,7 +51,7 @@ class Notify implements MailerInterface
         $url = $this->router->generate('fos_user_registration_confirm', array('token' => $user->getConfirmationToken()), true);
         $rendered = $this->templating->render($template, array(
             'user' => $user,
-            'confirmationUrl' =>  $url
+            'confirmationUrl' =>  $url,
         ));
         $this->sendFOSEmail($rendered, $user->getEmail());
     }
@@ -62,7 +62,7 @@ class Notify implements MailerInterface
         $url = $this->router->generate('fos_user_resetting_reset', array('token' => $user->getConfirmationToken()), true);
         $rendered = $this->templating->render($template, array(
             'user' => $user,
-            'confirmationUrl' => $url
+            'confirmationUrl' => $url,
         ));
         $this->sendFOSEmail($rendered, $user->getEmail());
     }
@@ -111,6 +111,4 @@ class Notify implements MailerInterface
             $this->sendEmail($to, $user->getEmail(), $user->getUsername(), $body, $subject);
         }
     }
-
-
 }

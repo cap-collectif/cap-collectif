@@ -7,7 +7,6 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Validator\Constraints\Email;
 use Symfony\Component\Validator\Constraints\NotBlank;
-use Symfony\Component\Validator\Constraints\Collection;
 
 class ContactType extends AbstractType
 {
@@ -16,12 +15,12 @@ class ContactType extends AbstractType
         $builder->add('name', 'text', array(
                 'label' => 'contact.form.name',
                 'required' => true,
-                'constraints' => [new NotBlank(['message' => 'contact.no_name'])]
+                'constraints' => [new NotBlank(['message' => 'contact.no_name'])],
             ))
             ->add('email', 'email', array(
                 'label' => 'contact.form.email',
                 'required' => true,
-                'constraints' => [new NotBlank(['message' => 'contact.no_email']), new Email(['checkMX' => true])]
+                'constraints' => [new NotBlank(['message' => 'contact.no_email']), new Email(['checkMX' => true])],
             ))
             ->add('message', 'textarea', array(
                 'label' => 'contact.form.message',
@@ -30,7 +29,7 @@ class ContactType extends AbstractType
                     'rows' => '10',
                     'cols' => '30',
                 ),
-                'constraints' => [new NotBlank(['message' => 'contact.no_message'])]
+                'constraints' => [new NotBlank(['message' => 'contact.no_message'])],
             ))
         ;
     }
