@@ -56,7 +56,7 @@ const OpinionBox = React.createClass({
             </a>
             <h2 className="h4 opinion__header__title"> {backTitle}</h2>
           </div>
-          <OpinionPreview opinion={opinion} />
+          <OpinionPreview opinion={opinion} link={false} />
         </div>
         <div className="opinion__description">
           <OpinionBody opinion={opinion} />

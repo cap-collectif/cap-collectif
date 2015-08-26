@@ -156,7 +156,8 @@ class ConsultationController extends Controller
             throw new NotFoundHttpException('This type does not exist for this consultation');
         }
 
-        $sortData = ['slug' => $opinionType->getSlug(), 'defaultFilter' => $opinionsSort];
+        $filter = $opinionsSort ? $opinionsSort : $opinionType->getDefaultFilter();
+        $sortData = ['slug' => $opinionType->getSlug(), 'defaultFilter' => $filter];
         $form = $this->createForm(new OpinionsSortType($sortData));
 
         if ('POST' === $request->getMethod()) {
@@ -173,12 +174,12 @@ class ConsultationController extends Controller
             }
         } else {
             $form->setData(array(
-                'opinionsSort' => $opinionsSort,
+                'opinionsSort' => $filter,
             ));
         }
 
         $currentUrl = $this->generateUrl('app_consultation_show_opinions', ['consultationSlug' => $consultation->getSlug(), 'stepSlug' => $currentStep->getSlug(), 'opinionTypeSlug' => $opinionType->getSlug()]);
-        $opinions = $this->getDoctrine()->getRepository('CapcoAppBundle:Opinion')->getByOpinionTypeAndConsultationStepOrdered($currentStep, $opinionType, 10, $page, $opinionsSort);
+        $opinions = $this->getDoctrine()->getRepository('CapcoAppBundle:Opinion')->getByOpinionTypeAndConsultationStepOrdered($currentStep, $opinionType, 10, $page, $filter);
 
         return [
             'currentUrl' => $currentUrl,
@@ -188,7 +189,7 @@ class ConsultationController extends Controller
             'page' => $page,
             'nbPage' => ceil(count($opinions) / 10),
             'sortOpinionsForm' => $form->createView(),
-            'opinionsSort' => $opinionsSort,
+            'opinionsSort' => $filter,
             'currentStep' => $currentStep,
         ];
     }

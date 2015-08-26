@@ -11,6 +11,8 @@ admin.group.parameters: Réglages
 admin.group.pages: Pages
 
 # Dashboard names
+admin.label.appendix: Annexes
+admin.label.appendixTypes: Type d'annexe
 admin.label.page: Pages statiques
 admin.label.menu_item: Navigation
 admin.label.argument: Arguments
@@ -111,6 +113,10 @@ admin:
 
 
   fields:
+    appendix:
+      opinion: Proposition
+      body: Contenu
+      type: Type
     argument:
       body: Contenu
       type: Type d'argument

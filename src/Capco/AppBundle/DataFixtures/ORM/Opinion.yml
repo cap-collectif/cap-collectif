@@ -180,3 +180,15 @@ Capco\AppBundle\Entity\Opinion:
         Author: @user2
         OpinionType: @opinionType5
         position: 2
+
+    opinion{60..70}:
+        step: @cstep5
+        title: Article
+        body: |
+             <p><text(100)></p>
+             <p><text(300)></p>
+        isEnabled: true
+        isTrashed: false
+        Author: @user2
+        OpinionType: @opinionType5
+        position: 2
