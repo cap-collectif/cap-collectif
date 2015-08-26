@@ -33,7 +33,7 @@ trait VotableTrait
         return $this->voteCountNok + $this->voteCountOk + $this->voteCountMitige;
     }
 
-    public function incrementVoteCountByValue($value)
+    public function incrementVoteCountByType($value)
     {
         if ($value === OpinionVote::VOTE_OK) {
             $this->voteCountOk++;
@@ -46,7 +46,7 @@ trait VotableTrait
         }
     }
 
-    public function decrementVoteCountByValue($value)
+    public function decrementVoteCountByType($value)
     {
         if ($value === OpinionVote::VOTE_OK) {
             $this->voteCountOk--;

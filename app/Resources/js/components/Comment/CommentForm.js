@@ -127,7 +127,7 @@ const CommentForm = React.createClass({
   render() {
     return (
       <div className={ this.getFormClasses() }>
-        <UserAvatar user={LoginStore.user} />
+        <UserAvatar user={LoginStore.user} className="pull-left" />
         <div className="opinion__data" ref="commentBlock" onBlur={this.expand.bind(this, false)}>
           <form>
             <div className={ this.getClasses('body') }>

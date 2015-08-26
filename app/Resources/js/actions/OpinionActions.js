@@ -1,6 +1,6 @@
 import AppDispatcher from '../dispatchers/AppDispatcher';
 import Fetcher from '../services/Fetcher';
-import {CREATE_OPINION_VERSION, CREATE_OPINION_VERSION_VOTE} from '../constants/OpinionVersionConstants';
+import {CREATE_OPINION_VERSION, UPDATE_OPINION_VERSION, CREATE_OPINION_VERSION_VOTE} from '../constants/OpinionVersionConstants';
 
 export default {
 
@@ -28,6 +28,16 @@ export default {
         actionType: CREATE_OPINION_VERSION,
       });
     });
+  },
+
+  updateVersion: (opinion, version, data) => {
+    return Fetcher
+      .put(`/opinions/${opinion}/versions/${version}`, data)
+      .then(() => {
+        AppDispatcher.dispatch({
+          actionType: UPDATE_OPINION_VERSION,
+        });
+      });
   },
 
   voteForVersion: (opinion, version, data) => {

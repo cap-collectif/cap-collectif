@@ -1,4 +1,4 @@
-Feature: News
+Feature: Blog
 
 Background:
   Given feature "blog" is enabled

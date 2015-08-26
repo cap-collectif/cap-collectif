@@ -51,7 +51,7 @@ Capco\AppBundle\Entity\Opinion:
         isEnabled: true
         isTrashed: false
         Author: @user3
-        OpinionType: @opinionType4
+        OpinionType: @opinionType3
 
 # Consultation 2
 
@@ -165,7 +165,7 @@ Capco\AppBundle\Entity\Opinion:
              <p><text(300)></p>
         isEnabled: true
         isTrashed: false
-        Author: @user2
+        Author: @user5
         OpinionType: @opinionType5
         position: 3
 

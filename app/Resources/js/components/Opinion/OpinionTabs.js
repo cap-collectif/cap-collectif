@@ -35,7 +35,7 @@ const OpinionTabs = React.createClass({
     const opinion = this.props.opinion;
     return (
       <TabbedArea defaultActiveKey={1} animation={false}>
-        <TabPane eventKey={1} tab={
+        <TabPane className="opinion-tabs" eventKey={1} tab={
           <FormattedMessage message={this.getIntlMessage('global.arguments')} num={opinion.arguments_count} />
         }>
           <Row>
@@ -53,16 +53,12 @@ const OpinionTabs = React.createClass({
             </Col>
           </Row>
         </TabPane>
-        <TabPane eventKey={2} tab={
+        <TabPane className="opinion-tabs" eventKey={2} tab={
           <FormattedMessage message={this.getIntlMessage('global.sources')} num={opinion.sources_count} />
         }>
           <br />
-          <Row>
-            <OpinionSourceForm categories={this.state.categories} opinion={this.props.opinion} />
-          </Row>
-          <Row>
-            <OpinionSourceList sources={this.props.opinion.sources} />
-          </Row>
+          <OpinionSourceForm categories={this.state.categories} opinion={this.props.opinion} />
+          <OpinionSourceList sources={this.props.opinion.sources} />
         </TabPane>
       </TabbedArea>
     );

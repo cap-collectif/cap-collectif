@@ -19,7 +19,7 @@ const OpinionSource = React.createClass({
         <Row>
           <Col xs={12}>
             <div className="opinion__body box">
-              <UserAvatar user={source.author} />
+              <UserAvatar user={source.author} className="pull-left" />
               <div className="opinion__data">
                 <OpinionInfos opinion={source} />
                 <h3 className="opinion__title">

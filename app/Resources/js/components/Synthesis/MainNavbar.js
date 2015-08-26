@@ -40,7 +40,7 @@ const MainNavbar = React.createClass({
   renderUserButtonTitle() {
     return (
       <span>
-        <UserAvatar user={LoginStore.user} size={34} classes="" style={{marginRight: '10px'}} anchor={false} />
+        <UserAvatar user={LoginStore.user} size={34} style={{marginRight: '10px'}} anchor={false} />
         <span className="hidden-xs">{LoginStore.user.displayName}</span>
       </span>
     );

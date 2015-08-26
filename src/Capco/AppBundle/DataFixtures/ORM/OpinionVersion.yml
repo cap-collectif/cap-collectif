@@ -7,7 +7,7 @@ Capco\AppBundle\Entity\OpinionVersion:
              <p><text(300)></p>
         enabled: true
         isTrashed: false
-        author: @user2
+        author: @user5
         parent: @opinion57
         comment: bououh
 

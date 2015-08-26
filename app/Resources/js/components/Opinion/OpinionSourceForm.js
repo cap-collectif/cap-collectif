@@ -6,7 +6,6 @@ import LoginOverlay from '../Utils/LoginOverlay';
 const Button = ReactBootstrap.Button;
 const Input = ReactBootstrap.Input;
 const Modal = ReactBootstrap.Modal;
-const Col = ReactBootstrap.Col;
 
 const OpinionSourceForm = React.createClass({
   propTypes: {
@@ -42,7 +41,7 @@ const OpinionSourceForm = React.createClass({
 
   render() {
     return (
-      <Col xs={5}>
+      <div>
         <LoginOverlay children={this.renderCreateButton()} />
         <Modal {...this.props} animation={false} show={this.state.showModal} onHide={this.close.bind(null, this)}
                bsSize="large" aria-labelledby="contained-modal-title-lg">
@@ -114,7 +113,7 @@ const OpinionSourceForm = React.createClass({
             </Button>
           </Modal.Footer>
         </Modal>
-      </Col>
+      </div>
     );
   },
 
@@ -145,7 +144,6 @@ const OpinionSourceForm = React.createClass({
         Category: parseInt(this.state.category, 10),
       };
 
-      console.log(this.props);
       if (this.props.opinion && this.props.opinion.parent) {
         OpinionActions
         .addVersionSource(this.props.opinion.parent.id, this.props.opinion.id, data)

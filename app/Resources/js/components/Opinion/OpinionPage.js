@@ -3,9 +3,6 @@ import OpinionTabs from './OpinionTabs';
 import Fetcher from '../../services/Fetcher';
 import Loader from '../Utils/Loader';
 
-const Row = ReactBootstrap.Row;
-const Col = ReactBootstrap.Col;
-
 const OpinionPage = React.createClass({
   propTypes: {
     opinionId: React.PropTypes.number.isRequired,
@@ -26,19 +23,17 @@ const OpinionPage = React.createClass({
 
   render() {
     return (
-      <Col xs={12} sm={8} md={9} className="has-chart">
-        <Row>
-          <Loader show={this.state.isLoading} />
-          {!this.state.isLoading
-            ? <OpinionBox {...this.props} opinion={this.state.opinion} />
-            : <span />
-          }
-          {!this.state.isLoading && this.state.opinion.parent // for now only version use full react tabs
-            ? <OpinionTabs {...this.props} opinion={this.state.opinion} />
-            : <span />
-          }
-        </Row>
-      </Col>
+      <div className="has-chart">
+        <Loader show={this.state.isLoading} />
+        {!this.state.isLoading
+          ? <OpinionBox {...this.props} opinion={this.state.opinion} />
+          : null
+        }
+        {!this.state.isLoading && this.state.opinion.parent // for now only version use full react tabs
+          ? <OpinionTabs {...this.props} opinion={this.state.opinion} />
+          : null
+        }
+      </div>
     );
   },
 
