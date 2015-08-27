@@ -83,14 +83,11 @@ security:
             remember_me:
                 key: %remember_secret%
                 lifetime: 31536000
-                path: ~
+                path: /
                 domain: ~
                 remember_me_parameter: _remember_me
-                user_provider: fos_userbundle
-            logout:
-              path: /logout
-              target: /
-            anonymous: true
+            logout:             true
+            anonymous:          true
 
     access_control:
         # URL of FOSUserBundle which need to be available to anonymous users
