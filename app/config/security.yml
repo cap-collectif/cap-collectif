@@ -64,7 +64,6 @@ security:
                     name: bearer
         main:
             pattern:             .*
-            context:             user
             form_login:
                 provider:       fos_userbundle
                 csrf_provider:  form.csrf_provider
@@ -86,6 +85,7 @@ security:
                 lifetime: 31536000
                 path: /
                 domain: ~
+                remember_me_parameter: _remember_me
             logout:             true
             anonymous:          true
 

@@ -111,16 +111,17 @@ _imagine:
     type:     imagine
 
 #HWIOAuthBundle routes
+
 hwi_oauth_security:
-    resource: "@CapcoUserBundle/Resources/config/routing.xml"
+    resource: "@HWIOAuthBundle/Resources/config/routing/login.xml"
     prefix: /login
 
 hwi_oauth_connect:
-    resource: "@CapcoUserBundle/Resources/config/routing.xml"
+    resource: "@HWIOAuthBundle/Resources/config/routing/connect.xml"
     prefix: /login
 
 hwi_oauth_redirect:
-    resource: "@CapcoUserBundle/Resources/config/routing.xml"
+    resource: "@HWIOAuthBundle/Resources/config/routing/redirect.xml"
     prefix: /login
 
 facebook_login:
