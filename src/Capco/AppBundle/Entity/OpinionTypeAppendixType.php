@@ -9,14 +9,12 @@ use Capco\AppBundle\Traits\TimestampableTrait;
 use Capco\AppBundle\Traits\PositionableTrait;
 
 /**
- * @ORM\Table(name="opinion_type_appendices_type")
+ * @ORM\Table(name="opinion_type_appendix_type")
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\OpinionTypeAppendixTypeRepository")
  * @ORM\HasLifecycleCallbacks()
  */
 class OpinionTypeAppendixType
 {
-    use SluggableTitleTrait;
-    use TimestampableTrait;
     use PositionableTrait;
 
     /**
@@ -33,10 +31,17 @@ class OpinionTypeAppendixType
      */
     private $opinionType;
 
+    /**
+     * @Gedmo\SortableGroup
+     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\AppendixType", inversedBy="opinionTypes", cascade={"persist"})
+     * @ORM\JoinColumn(name="appendix_type_id", referencedColumnName="id", nullable=false, onDelete="CASCADE")
+     */
+    private $appendixType;
+
     public function __toString()
     {
         if ($this->id) {
-            return $this->getTitle();
+            return $this->id;
         }
 
         return 'New OpinionTypeAppendixType';
@@ -63,6 +68,24 @@ class OpinionTypeAppendixType
     {
         $this->opinionType = $opinionType;
 
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getAppendixType()
+    {
+        return $this->appendixType;
+    }
+
+    /**
+     * @param mixed $appendixType
+     * @return this
+     */
+    public function setAppendixType($appendixType)
+    {
+        $this->appendixType = $appendixType;
         return $this;
     }
 }

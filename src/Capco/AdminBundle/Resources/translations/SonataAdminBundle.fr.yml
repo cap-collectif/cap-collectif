@@ -329,6 +329,9 @@ admin:
       pinned: Épinglé
       pinned_long: Épinglé en haut de la liste
     opinion_type:
+      group_info: Type de proposition
+      group_options: Options
+      group_appendices: Annexes
       title: Titre
       short_name: Nom court
       vote_widget_type: Type de vote

@@ -105,51 +105,64 @@ class OpinionTypeAdmin extends Admin
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
-            ->add('title', null, array(
-                'label' => 'admin.fields.opinion_type.title',
-            ))
-            ->add('shortName', null, array(
-                'label' => 'admin.fields.opinion_type.short_name',
-            ))
-            ->add('position', null, array(
-                'label' => 'admin.fields.opinion_type.position',
-            ))
+            ->with('admin.fields.opinion_type.group_info', array('class' => 'col-md-12'))->end()
+            ->with('admin.fields.opinion_type.group_options', array('class' => 'col-md-12'))->end()
+            ->with('admin.fields.opinion_type.group_appendices', array('class' => 'col-md-12'))->end()
+            ->end()
+        ;
+
+        $formMapper
+            // Info
+            ->with('admin.fields.opinion_type.group_info')
+                ->add('title', null, array(
+                    'label' => 'admin.fields.opinion_type.title',
+                ))
+                ->add('shortName', null, array(
+                    'label' => 'admin.fields.opinion_type.short_name',
+                ))
+                ->add('position', null, array(
+                    'label' => 'admin.fields.opinion_type.position',
+                ))
+            ->end()
 
             // Options
-            ->add('color', 'choice', array(
-                'label' => 'admin.fields.opinion_type.color',
-                'choices' => OpinionType::$colorsType,
-                'translation_domain' => 'CapcoAppBundle',
-            ))
-            ->add('versionable', null, array(
-                'label' => 'admin.fields.opinion_type.versionable',
-                'required' => false,
-            ))
-            ->add('isEnabled', null, array(
-                'label' => 'admin.fields.opinion_type.is_enabled',
-                'required' => false,
-            ))
-            ->add('defaultFilter', 'choice', array(
-                'label' => 'admin.fields.opinion_type.default_filter',
-                'choices' => Opinion::$sortCriterias,
-                'translation_domain' => 'CapcoAppBundle',
-            ))
-            ->add('helpText', 'textarea', array(
-                'label' => 'admin.fields.opinion_type.help_text',
-                'required' => false,
-            ))
+            ->with('admin.fields.opinion_type.group_options')
+                ->add('isEnabled', null, array(
+                    'label' => 'admin.fields.opinion_type.is_enabled',
+                    'required' => false,
+                ))
+                ->add('color', 'choice', array(
+                    'label' => 'admin.fields.opinion_type.color',
+                    'choices' => OpinionType::$colorsType,
+                    'translation_domain' => 'CapcoAppBundle',
+                ))
+                ->add('versionable', null, array(
+                    'label' => 'admin.fields.opinion_type.versionable',
+                    'required' => false,
+                ))
+                ->add('defaultFilter', 'choice', array(
+                    'label' => 'admin.fields.opinion_type.default_filter',
+                    'choices' => Opinion::$sortCriterias,
+                    'translation_domain' => 'CapcoAppBundle',
+                ))
+                ->add('helpText', 'textarea', array(
+                    'label' => 'admin.fields.opinion_type.help_text',
+                    'required' => false,
+                ))
+            ->end()
 
             // Appendices
-            ->add('appendixTypes', 'sonata_type_collection', [
-                'label' => 'admin.fields.consultation.appendices',
-                'by_reference' => false,
-                'required' => false,
-            ], [
-                'edit' => 'inline',
-                'inline' => 'table',
-                'sortable' => 'position',
-            ])
-
+            ->with('admin.fields.opinion_type.group_appendices')
+                ->add('appendixTypes', 'sonata_type_collection', [
+                    'label' => 'admin.fields.consultation.appendices',
+                    'by_reference' => false,
+                    'required' => false,
+                ], [
+                    'edit' => 'inline',
+                    'inline' => 'table',
+                    'sortable' => 'position',
+                ])
+            ->end()
         ;
     }
 
