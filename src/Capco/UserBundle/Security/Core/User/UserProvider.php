@@ -17,7 +17,7 @@ class UserProvider extends FOSUBUserProvider
     public function connect(UserInterface $user, UserResponseInterface $response)
     {
         $property = $this->getProperty($response);
-        $username = $response->getUsername();
+        $email = $response->getEmail() ? $response->getEmail() : $response->getUsername();
 
         //on connect - get the access token and the user ID
         $service = $response->getResourceOwner()->getName();
@@ -26,14 +26,14 @@ class UserProvider extends FOSUBUserProvider
         $setter_token = $setter.'AccessToken';
 
         //we "disconnect" previously connected users
-        if (null !== $previousUser = $this->userManager->findUserBy(array($property => $username))) {
+        if (null !== $previousUser = $this->userManager->findUserByEmail($email)) {
             $previousUser->$setter_id(null);
             $previousUser->$setter_token(null);
             $this->userManager->updateUser($previousUser);
         }
 
         //we connect current user
-        $user->$setter_id($username);
+        $user->$setter_id($response->getUsername());
         $user->$setter_token($response->getAccessToken());
         $this->userManager->updateUser($user);
     }
@@ -43,16 +43,13 @@ class UserProvider extends FOSUBUserProvider
      */
     public function loadUserByOAuthUserResponse(UserResponseInterface $response)
     {
-        $username = $response->getUsername();
-        $user = $this->userManager->findUserBy(array($this->getProperty($response) => $username));
+        $email = $response->getEmail() ? $response->getEmail() : 'twitter_'.$response->getUsername();
+        $user = $this->userManager->findUserByEmail($email);
 
-        if (null === $user) {
-            $user = $this->userManager->findUserByEmail($response->getEmail());
-        }
         if (null === $user) {
             $user = $this->userManager->createUser();
             $user->setUsername($response->getNickname());
-            $user->setEmail($response->getEmail());
+            $user->setEmail($email);
             $user->setPlainPassword(self::random_string(20));
             $user->setEnabled(true);
             $user->setIsTermsAccepted(true);
@@ -62,7 +59,7 @@ class UserProvider extends FOSUBUserProvider
         $setter = 'set'.ucfirst($service);
         $setter_id = $setter.'Id';
         $setter_token = $setter.'AccessToken';
-        $user->$setter_id($username);
+        $user->$setter_id($response->getUsername());
         $user->$setter_token($response->getAccessToken());
 
         $this->userManager->updateUser($user);

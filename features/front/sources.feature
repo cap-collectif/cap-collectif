@@ -8,6 +8,7 @@ Feature: Source
       | stepSlug         | collecte-des-avis                |
       | opinionTypeSlug  | causes                           |
       | opinionSlug      | opinion-2                        |
+    And I wait 3 seconds
     And I go on the sources tab
     And I should see "Aucune source proposée"
     And I wait 3 seconds
