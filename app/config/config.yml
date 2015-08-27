@@ -1,3 +1,6 @@
+parameters:
+  security.authentication.rememberme.services.simplehash.class: Capco\UserBundle\Services\TokenBasedRememberMeServices
+
 imports:
     - { resource: parameters.php }
     - { resource: security.yml }
