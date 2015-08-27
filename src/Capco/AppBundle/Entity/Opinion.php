@@ -506,16 +506,17 @@ class Opinion
         return $this->appendices;
     }
 
-    public function addAppendix(OpinionAppendix $appendix)
+    public function addAppendice(OpinionAppendix $appendix)
     {
         if (!$this->appendices->contains($appendix)) {
+            $appendix->setOpinion($this);
             $this->appendices->add($appendix);
         }
 
         return $this;
     }
 
-    public function removeAppendix(OpinionAppendix $appendix)
+    public function removeAppendice(OpinionAppendix $appendix)
     {
         $this->appendices->removeElement($appendix);
 

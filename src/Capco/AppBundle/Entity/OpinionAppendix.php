@@ -42,7 +42,7 @@ class OpinionAppendix
     public function __toString()
     {
         if ($this->id) {
-            return $this->id;
+            return (string) $this->id;
         }
 
         return 'New OpinionAppendix';

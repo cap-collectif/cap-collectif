@@ -25,6 +25,11 @@ class AppendixType
     private $id;
 
     /**
+     * @ORM\Column(name="help", type="text")
+     */
+    private $helpText;
+
+    /**
      * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\OpinionTypeAppendixType", cascade={"persist", "remove"}, mappedBy="appendixType", orphanRemoval = true)
      */
     private $opinionTypes;
@@ -55,6 +60,22 @@ class AppendixType
         $this->id = $id;
 
         return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getHelpText()
+    {
+        return $this->helpText;
+    }
+
+    /**
+     * @param mixed $helpText
+     */
+    public function setHelpText($helpText)
+    {
+        $this->helpText = $helpText;
     }
 
     /**

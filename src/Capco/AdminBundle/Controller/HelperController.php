@@ -3,6 +3,7 @@
 namespace Capco\AdminBundle\Controller;
 
 use Capco\AppBundle\Repository\ConsultationTypeRepository;
+use Capco\AppBundle\Repository\OpinionTypeAppendixTypeRepository;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -15,10 +16,12 @@ use Symfony\Component\HttpFoundation\Request;
 class HelperController
 {
     protected $consultationTypeRepo;
+    protected $opinionTypeAppendixTypeRepo;
 
-    public function __construct(ConsultationTypeRepository $consultationTypeRepository)
+    public function __construct(ConsultationTypeRepository $consultationTypeRepository, OpinionTypeAppendixTypeRepository $opinionTypeAppendixTypeRepo)
     {
         $this->consultationTypeRepo = $consultationTypeRepository;
+        $this->opinionTypeAppendixTypeRepo = $opinionTypeAppendixTypeRepo;
     }
 
     /**
@@ -41,5 +44,27 @@ class HelperController
         }
 
         return new JsonResponse($opinionTypes);
+    }
+
+    /**
+     * @Route("/get_allowed_appendices", name="capco_admin_get_allowed_appendices")
+     *
+     * @return JsonResponse
+     */
+    public function getAllowedAppendicesFromOpinionTypeAction(Request $request)
+    {
+        $opinionTypeId = $request->get('opinionTypeId');
+
+        if (null == $opinionTypeId) {
+            return new JsonResponse(array());
+        }
+
+        $appendicesTypes = $this->opinionTypeAppendixTypeRepo->getAppendixTypesByOpinionTypes($opinionTypeId);
+
+        if (null == $appendicesTypes) {
+            return new JsonResponse(array());
+        }
+
+        return new JsonResponse($appendicesTypes);
     }
 }

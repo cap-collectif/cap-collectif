@@ -447,4 +447,13 @@ class OpinionType
     {
         $this->helpText = $helpText;
     }
+
+    public function getAllAppendixTypes()
+    {
+        $types = new ArrayCollection();
+        foreach ($this->appendixTypes as $otat) {
+            $types->add($otat->getAppendixType());
+        }
+        return $types;
+    }
 }
