@@ -2,7 +2,6 @@ import OpinionActions from '../../actions/OpinionActions';
 import LoginOverlay from '../Utils/LoginOverlay';
 import ShareButtonDropdown from '../Utils/ShareButtonDropdown';
 import LoginStore from '../../stores/LoginStore';
-import OpinionVersionForm from './OpinionVersionForm';
 
 const ButtonToolbar = ReactBootstrap.ButtonToolbar;
 const Button = ReactBootstrap.Button;
@@ -56,42 +55,27 @@ const OpinionButtons = React.createClass({
     }
   },
 
-  renderEditButton() {
-    if (this.isContribuable() && this.isTheUserTheAuthor()) {
-      if (this.isVersion()) {
-        return (
-          <OpinionVersionForm className="pull-right" style={{marginLeft: '5px'}} mode="edit" opinionId={this.props.opinion.parent.id} version={this.props.opinion} />
-        );
-      }
-      return (
-        <Button className="opinion__action--edit pull-right btn--outline btn-dark-gray" href={this.props.opinion._links.edit}>
-          <i className="cap cap-pencil-1"></i> {this.getIntlMessage('global.edit')}
-        </Button>
-      );
-    }
-  },
-
-  renderReportButton() {
-    const reported = this.props.opinion.has_user_reported;
-    return (
-      <Button
-        className="opinion__action--report pull-right btn--outline btn-dark-gray" href={reported ? null : this.props.opinion._links.report} active={reported}>
-        <i className="cap cap-flag-1"></i>
-        { ' ' }
-        { reported ? this.getIntlMessage('global.report.reported') : this.getIntlMessage('global.report.submit') }
-      </Button>
-    );
-  },
-
   render() {
     const opinion = this.props.opinion;
+    const reported = opinion.has_user_reported;
+    const isContribuable = this.isVersion() ? opinion.parent.isContribuable : opinion.isContribuable;
     return (
       <ButtonToolbar style={{marginTop: 15}}>
-        {this.isContribuable() ? <LoginOverlay children={ this.renderVoteButton('ok') } /> : null}
-        {this.isContribuable() ? <LoginOverlay children={ this.renderVoteButton('mitige') } /> : null}
-        {this.isContribuable() ? <LoginOverlay children={ this.renderVoteButton('nok') } /> : null}
-        {this.renderEditButton()}
-        {this.renderReportButton()}
+        {isContribuable ? <LoginOverlay children={ this.renderVoteButton('ok') } /> : null}
+        {isContribuable ? <LoginOverlay children={ this.renderVoteButton('mitige') } /> : null}
+        {isContribuable ? <LoginOverlay children={ this.renderVoteButton('nok') } /> : null}
+        {isContribuable && this.isTheUserTheAuthor()
+          ? <Button className="pull-right btn--outline btn-dark-gray" href={opinion._links.edit}>
+              { this.getIntlMessage('global.edit') }
+            </Button>
+          : null
+        }
+        <Button
+          className="pull-right btn--outline btn-dark-gray" href={reported ? null : opinion._links.report} active={reported}>
+          <i className="cap cap-flag-1"></i>
+          { ' ' }
+          { reported ? this.getIntlMessage('global.report.reported') : this.getIntlMessage('global.report.submit') }
+        </Button>
         <ShareButtonDropdown className="pull-right" title={opinion.title} url={opinion._links.show} />
       </ButtonToolbar>
     );
@@ -99,10 +83,6 @@ const OpinionButtons = React.createClass({
 
   isVersion() {
     return this.props.opinion.parent ? true : false;
-  },
-
-  isContribuable() {
-    return this.isVersion() ? this.props.opinion.parent.isContribuable : this.props.opinion.isContribuable;
   },
 
  currentVote() {

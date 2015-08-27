@@ -81,7 +81,7 @@ Feature: Opinions
   ### As an Anonymous
 
   @database
-  Scenario: Anonymous API client wants to vote on an opinion
+  Scenario: Anonymous API client wants to add a version
     When I send a PUT request to "/api/opinions/57/votes" with json:
     """
     {
@@ -92,10 +92,9 @@ Feature: Opinions
 
   ### As a Logged in user
 
-  @database
-  Scenario: logged in API client wants to vote on an opinion
+  @database @dev
+  Scenario: logged in API client wants to add a version vote
     Given I am logged in to api as user
-    # create
     When I send a PUT request to "/api/opinions/57/votes" with json:
     """
     {
@@ -103,7 +102,6 @@ Feature: Opinions
     }
     """
     Then the JSON response status code should be 204
-    # update
     When I send a PUT request to "/api/opinions/57/votes" with json:
     """
     {
@@ -111,7 +109,6 @@ Feature: Opinions
     }
     """
     Then the JSON response status code should be 204
-    # delete
     When I send a DELETE request to "/api/opinions/57/votes"
     Then the JSON response status code should be 204
 

@@ -14,7 +14,7 @@ const OpinionArgumentItem = React.createClass({
     return (
       <li className="opinion opinion--argument" id={'arg-' + argument.id}>
         <div className="opinion__body box">
-          <UserAvatar user={argument.author} className="pull-left" />
+          <UserAvatar user={argument.author} />
           <div className="opinion__data">
             <p className="h5 opinion__user">
               <UserLink user={argument.author} />

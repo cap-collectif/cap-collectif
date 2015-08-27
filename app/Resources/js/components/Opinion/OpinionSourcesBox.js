@@ -3,6 +3,9 @@ import OpinionSourceForm from './OpinionSourceForm';
 import Loader from '../Utils/Loader';
 import Fetcher from '../../services/Fetcher';
 
+const Row = ReactBootstrap.Row;
+const Col = ReactBootstrap.Col;
+
 const OpinionSourcesBox = React.createClass({
   propTypes: {
     opinionId: React.PropTypes.number.isRequired,
@@ -41,28 +44,34 @@ const OpinionSourcesBox = React.createClass({
   renderFilter() {
     if (this.state.sources.length > 1) {
       return (
-        <select ref="filter" className="hidden-xs pull-right" value={this.state.filter} onChange={() => this.updateSelectedValue()}>
-          <option value="popular">{this.getIntlMessage('global.popular')}</option>
-          <option value="last">{this.getIntlMessage('global.last')}</option>
-          <option value="old">{this.getIntlMessage('global.old')}</option>
-        </select>
+        <Col xs={5} className="pull-right hidden-xs">
+          <select ref="filter" className="form-control" value={this.state.filter} onChange={() => this.updateSelectedValue()}>
+            <option value="popular">{this.getIntlMessage('global.popular')}</option>
+            <option value="last">{this.getIntlMessage('global.last')}</option>
+            <option value="old">{this.getIntlMessage('global.old')}</option>
+          </select>
+        </Col>
       );
     }
   },
 
   render() {
     return (
-      <div>
-        {this.state.isOpinionContributable
-          ? <OpinionSourceForm opinion={this.state.opinion} categories={this.state.categories} />
-          : <span />
-        }
-        { this.renderFilter() }
-        {!this.state.isLoading
-          ? <OpinionSourceList sources={this.state.sources} />
-          : <Loader />
-        }
-      </div>
+      <Col xs={12}>
+        <Row>
+          {this.state.isOpinionContributable
+            ? <OpinionSourceForm opinion={this.state.opinion} categories={this.state.categories} />
+            : <span />
+          }
+          { this.renderFilter() }
+        </Row>
+        <Row>
+          {!this.state.isLoading
+            ? <OpinionSourceList sources={this.state.sources} />
+            : <Loader />
+          }
+        </Row>
+      </Col>
     );
   },
 

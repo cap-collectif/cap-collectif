@@ -29,12 +29,13 @@ Feature: Arguments
       | stepSlug         | collecte-des-avis                |
       | opinionTypeSlug  | causes                           |
       | opinionSlug      | opinion-2                        |
-    And I wait 3 seconds
-    When I click the "#arg-2 .btn-success" element
+    When I click the "#arg-2 .btn" element
     Then I should see "1" in the "#arg-2 .opinion__votes-nb" element
+    And I wait 5 seconds
     And I should see "Merci ! Votre vote a bien été pris en compte."
     And I should see "Annuler mon vote"
-    And I click the "#arg-2 .btn-danger" element
+    And I click the "#arg-2 .btn" element
+    # And I should see "Votre vote a bien été annulé."
     And I should see "0" in the "#arg-2 .opinion__votes-nb" element
 
   @javascript @database

@@ -39,38 +39,32 @@ const ShareButtonDropdown = React.createClass({
     );
   },
 
-  facebook() {
-    this.openSharer(
-      `http://www.facebook.com/sharer.php?u=${this.props.url}&t=${this.props.title}`,
-      'Facebook'
-    );
-  },
-
-  twitter() {
-    this.openSharer(
-      `https://twitter.com/share?url=${this.props.url}&text=${this.props.title}`,
-      'Twitter'
-    );
-  },
-
-  googleplus() {
-    this.openSharer(
-      `https://plus.google.com/share?url=${this.props.url}&title=${this.props.title}`,
-      'Google+'
-    );
-  },
-
-  openSharer(href, name) {
-    const height = 500;
-    const width = 700;
+  facebook(height = 500, width = 700) {
     const top = (screen.height / 2) - (height / 2);
     const left = (screen.width / 2) - (width / 2);
     window.open(
-      href,
-      name,
-      `top=${top},left=${left},menubar=0,toolbar=0,status=0,width=${width},height=${height}`
+      `http://www.facebook.com/sharer.php?u=${this.props.url}&t=${this.props.title}`,
+      'sharer',
+      `top=${top},left=${left},toolbar=0,status=0,width=${width},height=${height}`
     );
   },
+
+  twitter(height = 500, width = 700) {
+    window.open(
+      `https://twitter.com/share?url=${this.props.url}&text=${this.props.title}`,
+      'sharer',
+      `toolbar=0, menubar=0, width=${width},height=${height}`
+    );
+  },
+
+  googleplus(height = 600, width = 600) {
+    window.open(
+      `https://plus.google.com/share?url=${this.props.url}&title=${this.props.title}`,
+      'sharer',
+      `toolbar=0, menubar=0, width=${width},height=${height}`
+    );
+  },
+
 
 });
 

@@ -33,33 +33,33 @@
                 {{ render(controller('CapcoAppBundle:Site/Consultation:showMeta', {'consultationSlug': consultation.slug, 'currentStepSlug': currentStep.slug})) }}
             </div>
 
-            <div class="col-md-9 col-sm-8 col-xs-12">
+            <div id="render-opinion" data-opinion="{{ opinion.id }}"></div>
+            <div class="col-xs-12 col-sm-8 col-md-9 pull-right">
 
-                <div id="render-opinion" data-opinion="{{ opinion.id }}"></div>
-
-                    <!-- Nav tabs -->
-                    <ul class="nav nav-tabs" role="tablist">
-                        <li role="presentation" class="active">
-                            <a href="#arguments" aria-controls="arguments" role="tab" data-toggle="tab">
-                                {% transchoice (opinion.arguments|length) with {'%count%': (opinion.arguments|length)} from 'CapcoAppBundle' %}argument.count{% endtranschoice %}
-                            </a>
-                        </li>
-                        {% if opinion.opinionType.isVersionable %}
-                            <li role="presentation">
-                                <a id="versionsTab" href="#versions" aria-controls="versions" role="tab" data-toggle="tab">
-                                    {% transchoice (opinion.versions|length) with {'%count%': (opinion.versions|length)} from 'CapcoAppBundle' %}version.show.count{% endtranschoice %}
-                                </a>
-                            </li>
-                        {% endif %}
+                  <!-- Nav tabs -->
+                  <ul class="nav nav-tabs" role="tablist">
+                    <li role="presentation" class="active">
+                        <a href="#arguments" aria-controls="arguments" role="tab" data-toggle="tab">
+                            {% transchoice (opinion.arguments|length) with {'%count%': (opinion.arguments|length)} from 'CapcoAppBundle' %}argument.count{% endtranschoice %}
+                        </a>
+                    </li>
+                    {% if opinion.opinionType.isVersionable %}
                         <li role="presentation">
-                            <a id="sourcesTab" href="#sources" aria-controls="sources" role="tab" data-toggle="tab">
-                                {% transchoice (sources|length) with {'%count%': (sources|length)} from 'CapcoAppBundle' %}source.show.count{% endtranschoice %}
+                            <a id="versionsTab" href="#versions" aria-controls="versions" role="tab" data-toggle="tab">
+                                {% transchoice (opinion.versions|length) with {'%count%': (opinion.versions|length)} from 'CapcoAppBundle' %}version.show.count{% endtranschoice %}
                             </a>
                         </li>
-                    </ul>
+                    {% endif %}
+                    <li role="presentation">
+                        <a id="sourcesTab" href="#sources" aria-controls="sources" role="tab" data-toggle="tab">
+                            {% transchoice (sources|length) with {'%count%': (sources|length)} from 'CapcoAppBundle' %}source.show.count{% endtranschoice %}
+                        </a>
+                    </li>
+                  </ul>
 
-                    <!-- Tab panes -->
-                    <div class="opinion-tabs tab-content">
+                  <!-- Tab panes -->
+                  <div class="opinion-tabs tab-content">
+
                     <!-- Arguments -->
                     <div role="tabpanel" class="tab-pane active" id="arguments">
                         <div class="row">
@@ -101,9 +101,9 @@
                     <div role="tabpanel" class="tab-pane" id="sources">
                         <div id="render-opinion-sources" data-opinion="{{ opinion.id }}"></div>
                     </div>
+                  </div>
 
                 </div>
-            </div>
 
             </div> <!-- col-xs-12  col-sm-4  col-md-3 -->
         </div> <!-- .row -->
