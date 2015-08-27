@@ -7,22 +7,37 @@ import CkeditorMixin from '../../utils/CkeditorMixin';
 const Modal = ReactBootstrap.Modal;
 const Button = ReactBootstrap.Button;
 const Input = ReactBootstrap.Input;
+const Alert = ReactBootstrap.Alert;
 
 const OpinionVersionForm = React.createClass({
   propTypes: {
     opinionId: React.PropTypes.number.isRequired,
-    opinionBody: React.PropTypes.string.isRequired,
+    opinionBody: React.PropTypes.string,
+    version: React.PropTypes.object,
+    mode: React.PropTypes.string,
+    className: React.PropTypes.string,
+    style: React.PropTypes.object,
   },
   mixins: [ReactIntl.IntlMixin, React.addons.LinkedStateMixin, CkeditorMixin],
 
+  getDefaultProps() {
+    return {
+      opinionBody: '',
+      mode: 'create',
+      className: '',
+      style: {},
+    };
+  },
+
   getInitialState() {
     return {
-      title: '',
-      body: this.props.opinionBody,
-      comment: '',
+      title: this.props.version ? this.props.version.title : '',
+      body: this.props.version ? this.props.version.body : this.props.opinionBody,
+      comment: this.props.version ? this.props.version.comment : null,
       showModal: false,
       submitted: false,
       isSubmitting: false,
+      errors: [],
     };
   },
 
@@ -37,19 +52,44 @@ const OpinionVersionForm = React.createClass({
     return !this.isValid(field) ? 'error' : this.state.submitted ? 'success' : '';
   },
 
-  renderCreateButton() {
+  renderErrors() {
+    if (this.state.errors.length > 0) {
+      return (
+        <Alert bsStyle="danger">
+          {
+            this.state.errors.map((error) => {
+              return <p>{error}</p>;
+            })
+          }
+        </Alert>
+      );
+    }
+  },
+
+  renderButton() {
+    if (this.props.mode === 'create') {
+      return (
+        <Button bsStyle="primary" onClick={LoginStore.isLoggedIn() ? this.show.bind(null, this) : null}>
+          <i className="cap cap-add-1"></i>
+          { ' ' + this.getIntlMessage('opinion.add_new_version')}
+        </Button>
+      );
+    }
     return (
-      <Button bsStyle="primary" onClick={LoginStore.isLoggedIn() ? this.show.bind(null, this) : null}>
-        <i className="cap cap-add-1"></i>
-        { ' ' + this.getIntlMessage('opinion.add_new_version')}
+      <Button className="opinion__action--edit pull-right btn--outline btn-dark-gray" onClick={this.show.bind(null, this)}>
+        <i className="cap cap-pencil-1"></i> {this.getIntlMessage('global.edit')}
       </Button>
     );
   },
 
   render() {
+    const style = this.props.style;
+    if (!this.props.style.display) {
+      style.display = 'inline-block';
+    }
     return (
-      <div className="col-xs-5">
-        <LoginOverlay children={this.renderCreateButton()} />
+      <div className={this.props.className} style={style}>
+        <LoginOverlay children={this.renderButton()} />
         <Modal {...this.props}
           animation={false} show={this.state.showModal}
           onHide={this.close.bind(null, this)} bsSize="large" aria-labelledby="contained-modal-title-lg"
@@ -65,13 +105,14 @@ const OpinionVersionForm = React.createClass({
                 { this.getIntlMessage('opinion.add_new_version_infos') }
               </p>
             </div>
+            {this.renderErrors()}
             <form>
               <Input
                 type="text"
                 bsStyle={this.getStyle('title')}
                 valueLink={this.linkState('title')}
                 placeholder={this.getIntlMessage('global.title')}
-                label={this.getIntlMessage('global.title')}
+                label={this.getIntlMessage('opinion.version.title')}
               />
               <Input
                 type="textarea"
@@ -101,12 +142,21 @@ const OpinionVersionForm = React.createClass({
             </Button>
             <Button
               disabled={this.state.isSubmitting}
-              onClick={!this.state.isSubmitting ? this.create.bind(null, this) : null}
+              onClick={this.state.isSubmitting
+                ? null
+                : (this.props.mode === 'create'
+                  ? this.create.bind(null, this)
+                  : this.update.bind(null, this)
+                )
+              }
               bsStyle="primary"
             >
               {this.state.isSubmitting
                 ? this.getIntlMessage('global.loading')
-                : this.getIntlMessage('global.publish')
+                : (this.props.mode === 'create'
+                  ? this.getIntlMessage('global.publish')
+                  : this.getIntlMessage('global.edit')
+                )
               }
             </Button>
           </Modal.Footer>
@@ -126,6 +176,7 @@ const OpinionVersionForm = React.createClass({
   create() {
     this.setState({submitted: true}, () => {
       if (!this.isValid()) {
+        this.setErrors();
         return;
       }
 
@@ -151,6 +202,35 @@ const OpinionVersionForm = React.createClass({
     });
   },
 
+  update() {
+    this.setState({submitted: true}, () => {
+      if (!this.isValid()) {
+        this.setErrors();
+        return;
+      }
+
+      this.setState({isSubmitting: true});
+
+      const data = {
+        title: this.state.title,
+        body: this.state.body,
+        comment: this.state.comment,
+      };
+
+      OpinionActions
+        .updateVersion(this.props.opinionId, this.props.version.id, data)
+        .then(() => {
+          this.setState(this.getInitialState());
+          this.close();
+          location.reload(); // TODO when enough time
+          return true;
+        })
+        .catch(() => {
+          this.setState({isSubmitting: false, submitted: false});
+        });
+    });
+  },
+
   isValid(field) {
     if (!this.state.submitted) {
       return true;
@@ -169,6 +249,19 @@ const OpinionVersionForm = React.createClass({
     }
 
     return this.isValid('title') && this.isValid('body') && this.isValid('comment');
+  },
+
+  setErrors() {
+    const errors = [];
+    if (!this.isValid('title')) {
+      errors.push(this.getIntlMessage('opinion.version.title_error'));
+    }
+    if (!this.isValid('body')) {
+      errors.push(this.getIntlMessage('opinion.version.body_error'));
+    }
+    this.setState({
+      errors: errors,
+    });
   },
 
 });

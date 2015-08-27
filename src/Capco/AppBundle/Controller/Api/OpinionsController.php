@@ -15,6 +15,8 @@ use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Capco\AppBundle\Form\OpinionVersionType;
 use Symfony\Component\Validator\ConstraintViolationListInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
+use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 use FOS\RestBundle\Controller\FOSRestController;
 use FOS\RestBundle\Controller\Annotations\View;
 use FOS\RestBundle\Controller\Annotations\Get;
@@ -27,9 +29,20 @@ use FOS\RestBundle\Request\ParamFetcherInterface;
 class OpinionsController extends FOSRestController
 {
     /**
+     * Get an opinion.
+     *
+     * @ApiDoc(
+     *  resource=true,
+     *  description="Get an opinion",
+     *  statusCodes={
+     *    200 = "Returned when successful",
+     *    404 = "Returned when opinion is not found",
+     *  }
+     * )
+     *
      * @Get("/opinions/{id}")
      * @ParamConverter("opinion", options={"mapping": {"id": "id"}, "method": "getOne"})
-     * @View(serializerGroups={"Opinions", "UsersInfos", "UserMedias"})
+     * @View(statusCode=200, serializerGroups={"Opinions", "UsersInfos", "UserMedias"})
      */
     public function getOpinionAction(Opinion $opinion)
     {
@@ -39,6 +52,18 @@ class OpinionsController extends FOSRestController
     }
 
     /**
+     * Vote on an opinion.
+     *
+     * @ApiDoc(
+     *  resource=true,
+     *  description="Vote on an opinion",
+     *  statusCodes={
+     *    204 = "Returned when successful",
+     *    400 = "Returned when opinion is not contribuable",
+     *    404 = "Returned when opinion is not found",
+     *  }
+     * )
+     *
      * @Security("has_role('ROLE_USER')")
      * @Put("/opinions/{id}/votes")
      * @ParamConverter("opinion", options={"mapping": {"id": "id"}})
@@ -48,26 +73,26 @@ class OpinionsController extends FOSRestController
     public function putOpinionVoteAction(Opinion $opinion, OpinionVote $vote, ConstraintViolationListInterface $validationErrors)
     {
         if (!$opinion->canContribute()) {
-            throw new \Exception('Uncontributable opinion.', 1);
-        }
-
-        $user = $this->getUser();
-        $previousVote = $this->getDoctrine()->getManager()
-                    ->getRepository('CapcoAppBundle:OpinionVote')
-                    ->findOneBy(['user' => $user, 'opinion' => $opinion]);
-
-        if ($previousVote) {
-            $opinion->incrementVoteCountByValue($vote->getValue());
-            $opinion->decrementVoteCountByValue($previousVote->getValue());
-
-            $previousVote->setValue($vote->getValue());
-            $this->getDoctrine()->getManager()->flush();
-
-            return;
+            throw new BadRequestHttpException('Uncontribuable opinion.');
         }
 
         if ($validationErrors->count() > 0) {
             throw new BadRequestHttpException($validationErrors->__toString());
+        }
+
+        $user = $this->getUser();
+        $previousVote = $this->get('doctrine.orm.entity_manager')
+                    ->getRepository('CapcoAppBundle:OpinionVote')
+                    ->findOneBy(['user' => $user, 'opinion' => $opinion]);
+
+        if ($previousVote) {
+            $opinion->incrementVoteCountByType($vote->getValue());
+            $opinion->decrementVoteCountByType($previousVote->getValue());
+
+            $previousVote->setValue($vote->getValue());
+            $this->get('doctrine.orm.entity_manager')->flush();
+
+            return $previousVote;
         }
 
         $vote
@@ -76,24 +101,38 @@ class OpinionsController extends FOSRestController
             ->setUser($user)
         ;
 
-        $opinion->incrementVoteCountByValue($vote->getValue());
-        $this->getDoctrine()->getManager()->persist($vote);
-        $this->getDoctrine()->getManager()->flush();
+        $opinion->incrementVoteCountByType($vote->getValue());
+        $this->get('doctrine.orm.entity_manager')->persist($vote);
+        $this->get('doctrine.orm.entity_manager')->flush();
+
+        return $vote;
     }
 
     /**
+     * Delete a vote on an opinion.
+     *
+     * @ApiDoc(
+     *  resource=true,
+     *  description="Delete a vote on an opinion",
+     *  statusCodes={
+     *    200 = "Returned when successful",
+     *    400 = "Returned when opinion is not contribuable or user has no vote in the opinion",
+     *    404 = "Returned when opinion not found",
+     *  }
+     * )
+     *
      * @Security("has_role('ROLE_USER')")
      * @Delete("/opinions/{id}/votes")
      * @ParamConverter("opinion", options={"mapping": {"id": "id"}})
-     * @View()
+     * @View(statusCode=204, serializerGroups={})
      */
     public function deleteOpinionVoteAction(Opinion $opinion)
     {
         if (!$opinion->canContribute()) {
-            throw new BadRequestHttpException('Uncontributable opinion.');
+            throw new BadRequestHttpException('Uncontribuable opinion.');
         }
 
-        $vote = $this->getDoctrine()->getManager()
+        $vote = $this->get('doctrine.orm.entity_manager')
                      ->getRepository('CapcoAppBundle:OpinionVote')
                      ->findOneBy(['user' => $this->getUser(), 'opinion' => $opinion]);
 
@@ -101,31 +140,29 @@ class OpinionsController extends FOSRestController
             throw new BadRequestHttpException('You have not voted for this opinion.');
         }
 
-        $opinion->decrementVoteCountByValue($vote->getValue());
-        $this->getDoctrine()->getManager()->remove($vote);
-        $this->getDoctrine()->getManager()->flush();
+        $opinion->decrementVoteCountByType($vote->getValue());
+        $this->get('doctrine.orm.entity_manager')->remove($vote);
+        $this->get('doctrine.orm.entity_manager')->flush();
     }
 
     /**
-     * @Get("/opinions/{opinionId}/versions/{versionId}")
-     * @ParamConverter("opinion", options={"mapping": {"opinionId": "id"}})
-     * @ParamConverter("version", options={"mapping": {"versionId": "id"}})
-     * @View(serializerGroups={"OpinionVersions", "UsersInfos"})
-     */
-    public function getOpinionVersionAction(Opinion $opinion, OpinionVersion $version)
-    {
-        return [
-            'version' => $version,
-        ];
-    }
-
-    /**
+     * Get all versions of an opinion.
+     *
+     * @ApiDoc(
+     *  resource=true,
+     *  description="Get all versions of an opinion",
+     *  statusCodes={
+     *    200 = "Returned when successful",
+     *    404 = "Returned when opinion not found",
+     *  }
+     * )
+     *
      * @Get("/opinions/{id}/versions")
-     * @ParamConverter("opinion", options={"mapping": {"id": "id"}})
+     * @ParamConverter("opinion", options={"mapping": {"id": "id"}, "method": "getOne"})
      * @QueryParam(name="offset", requirements="[0-9.]+", default="0")
      * @QueryParam(name="limit", requirements="[0-9.]+", default="10")
      * @QueryParam(name="filter", requirements="(old|last|popular)", default="last")
-     * @View(serializerGroups={"OpinionVersions", "UsersInfos"})
+     * @View(statusCode=200, serializerGroups={"OpinionVersions", "UsersInfos"})
      */
     public function cgetOpinionVersionsAction(Opinion $opinion, ParamFetcherInterface $paramFetcher)
     {
@@ -148,8 +185,136 @@ class OpinionsController extends FOSRestController
     }
 
     /**
-     * @Get("/opinions/{id}/sources")
+     * Get an opinion version.
+     *
+     * @ApiDoc(
+     *  resource=true,
+     *  description="Get an opinion version",
+     *  statusCodes={
+     *    200 = "Returned when successful",
+     *    404 = "Returned when opinion or opinion version not found",
+     *  }
+     * )
+     *
+     * @Get("/opinions/{opinionId}/versions/{versionId}")
+     * @ParamConverter("opinion", options={"mapping": {"opinionId": "id"}, "method": "getOne"})
+     * @ParamConverter("version", options={"mapping": {"versionId": "id"}})
+     * @View(statusCode=200, serializerGroups={"OpinionVersions", "UsersInfos"})
+     */
+    public function getOpinionVersionAction(Opinion $opinion, OpinionVersion $version)
+    {
+        return [
+            'version' => $version,
+        ];
+    }
+
+    /**
+     * Create an opinion version.
+     *
+     * @ApiDoc(
+     *  resource=true,
+     *  description="Create an opinion version.",
+     *  statusCodes={
+     *    201 = "Returned when successful",
+     *    404 = "Returned when opinion not found",
+     *  }
+     * )
+     *
+     * @Security("has_role('ROLE_USER')")
+     * @Post("/opinions/{id}/versions")
      * @ParamConverter("opinion", options={"mapping": {"id": "id"}})
+     * @View(statusCode=201, serializerGroups={})
+     */
+    public function postOpinionVersionAction(Request $request, Opinion $opinion)
+    {
+        if (!$opinion->canContribute()) {
+            throw new BadRequestHttpException("Can't add a version to an uncontributable opinion.");
+        }
+
+        if (!$opinion->getOpinionType()->isVersionable()) {
+            throw new BadRequestHttpException("Can't add a version to an unversionable opinion.");
+        }
+
+        $user = $this->getUser();
+        $opinionVersion = (new OpinionVersion())
+            ->setAuthor($user)
+            ->setParent($opinion)
+        ;
+
+        $form = $this->createForm(new OpinionVersionType(), $opinionVersion);
+        $form->submit($request->request->all(), false);
+
+        if ($form->isValid()) {
+            $this->getDoctrine()->getManager()->persist($opinionVersion);
+            $this->getDoctrine()->getManager()->flush();
+
+            return $opinionVersion;
+        }
+
+        $view = $this->view($form->getErrors(true), Codes::HTTP_BAD_REQUEST);
+
+        return $view;
+    }
+
+    /**
+     * Update an opinion version.
+     *
+     * @ApiDoc(
+     *  resource=true,
+     *  description="Update an opinion version",
+     *  statusCodes={
+     *    204 = "Returned when successful",
+     *    403 = "Returned when requesting user is not the version's author",
+     *    400 = "Returned when update fail",
+     *  }
+     * )
+     *
+     * @Security("has_role('ROLE_USER')")
+     * @Put("/opinions/{opinionId}/versions/{versionId}")
+     * @ParamConverter("opinion", options={"mapping": {"opinionId": "id"}})
+     * @ParamConverter("opinionVersion", options={"mapping": {"versionId": "id"}})
+     * @View(statusCode=204, serializerGroups={})
+     */
+    public function putOpinionVersionAction(Request $request, Opinion $opinion, OpinionVersion $opinionVersion)
+    {
+        if (!$opinion->canContribute()) {
+            throw new BadRequestHttpException("Can't add a version to an uncontributable opinion.");
+        }
+
+        $user = $this->getUser();
+        if ($user !== $opinionVersion->getAuthor()) {
+            throw new AccessDeniedException();
+        }
+
+        $form = $this->createForm(new OpinionVersionType(), $opinionVersion);
+        $form->submit($request->request->all(), false);
+
+        if ($form->isValid()) {
+            $this->get('doctrine.orm.entity_manager')->persist($opinionVersion);
+            $this->get('doctrine.orm.entity_manager')->flush();
+
+            return $opinionVersion;
+        }
+
+        $view = $this->view($form->getErrors(true), Codes::HTTP_BAD_REQUEST);
+
+        return $view;
+    }
+
+    /**
+     * Get all sources of an opinion.
+     *
+     * @ApiDoc(
+     *  resource=true,
+     *  description="Get all sources of an opinion.",
+     *  statusCodes={
+     *    200 = "Returned when successful",
+     *    404 = "Returned when opinion not found",
+     *  }
+     * )
+     *
+     * @Get("/opinions/{id}/sources")
+     * @ParamConverter("opinion", options={"mapping": {"id": "id"}, "method": "getOne"})
      * @QueryParam(name="offset", requirements="[0-9.]+", default="0")
      * @QueryParam(name="limit", requirements="[0-9.]+", default="10")
      * @QueryParam(name="filter", requirements="(old|last|popular)", default="last")
@@ -177,6 +342,17 @@ class OpinionsController extends FOSRestController
     }
 
     /**
+     * Post a source for an opinion.
+     *
+     * @ApiDoc(
+     *  resource=true,
+     *  description="Post a source for an opinion.",
+     *  statusCodes={
+     *    201 = "Returned when successful",
+     *    404 = "Returned when opinion not found",
+     *  }
+     * )
+     *
      * @Security("has_role('ROLE_USER')")
      * @Post("/opinions/{opinionId}/sources")
      * @ParamConverter("opinion", options={"mapping": {"opinionId": "id"}})
@@ -185,7 +361,7 @@ class OpinionsController extends FOSRestController
     public function postOpinionSourceAction(Request $request, Opinion $opinion)
     {
         if (!$opinion->canContribute()) {
-            throw new \Exception("Can't add a source to an uncontributable opinion.", 1);
+            throw new BadRequestHttpException("Can't add a source to an uncontributable opinion.");
         }
 
         $user = $this->getUser();
@@ -198,17 +374,32 @@ class OpinionsController extends FOSRestController
                 ;
 
         $form = $this->createForm(new ApiSourceType(), $source);
-        $form->handleRequest($request);
+        $form->submit($request->request->all(), false);
 
-        if (!$form->isValid()) {
-            return $form;
+        if ($form->isValid()) {
+            $this->getDoctrine()->getManager()->persist($source);
+            $this->getDoctrine()->getManager()->flush();
+
+            return $source;
         }
 
-        $this->getDoctrine()->getManager()->persist($source);
-        $this->getDoctrine()->getManager()->flush();
+        $view = $this->view($form->getErrors(true), Codes::HTTP_BAD_REQUEST);
+
+        return $view;
     }
 
     /**
+     * Post a source for an opinion version.
+     *
+     * @ApiDoc(
+     *  resource=true,
+     *  description="Post a source for an opinion version.",
+     *  statusCodes={
+     *    201 = "Returned when successful",
+     *    404 = "Returned when opinion or opinion version not found",
+     *  }
+     * )
+     *
      * @Security("has_role('ROLE_USER')")
      * @Post("/opinions/{opinionId}/versions/{versionId}/sources")
      * @ParamConverter("opinion", options={"mapping": {"opinionId": "id"}})
@@ -218,11 +409,11 @@ class OpinionsController extends FOSRestController
     public function postOpinionVersionSourceAction(Request $request, Opinion $opinion, OpinionVersion $version)
     {
         if (!$opinion->canContribute()) {
-            throw new \Exception("Can't add a source to an uncontributable opinion.", 1);
+            throw new BadRequestHttpException("Can't add a source to an uncontributable opinion.");
         }
 
         if (!$opinion->getOpinionType()->isVersionable()) {
-            throw new \Exception("Can't add a version to an unversionable opinion.", 1);
+            throw new BadRequestHttpException("Can't add a version to an unversionable opinion.");
         }
 
         $user = $this->getUser();
@@ -235,17 +426,32 @@ class OpinionsController extends FOSRestController
                 ;
 
         $form = $this->createForm(new ApiSourceType(), $source);
-        $form->handleRequest($request);
+        $form->submit($request->request->all(), false);
 
-        if (!$form->isValid()) {
-            return $form;
+        if ($form->isValid()) {
+            $this->getDoctrine()->getManager()->persist($source);
+            $this->getDoctrine()->getManager()->flush();
+
+            return $source;
         }
 
-        $this->getDoctrine()->getManager()->persist($source);
-        $this->getDoctrine()->getManager()->flush();
+        $view = $this->view($form->getErrors(true), Codes::HTTP_BAD_REQUEST);
+
+        return $view;
     }
 
     /**
+     * Post an argument for an opinion version.
+     *
+     * @ApiDoc(
+     *  resource=true,
+     *  description="Post an argument for an opinion version.",
+     *  statusCodes={
+     *    201 = "Returned when successful",
+     *    404 = "Returned when opinion or opinion version not found",
+     *  }
+     * )
+     *
      * @Security("has_role('ROLE_USER')")
      * @Post("/opinions/{opinionId}/versions/{versionId}/arguments")
      * @ParamConverter("opinion", options={"mapping": {"opinionId": "id"}})
@@ -256,18 +462,18 @@ class OpinionsController extends FOSRestController
     public function postOpinionVersionArgumentAction(Opinion $opinion, OpinionVersion $version, Argument $argument, ConstraintViolationListInterface $validationErrors)
     {
         if (!$opinion->canContribute()) {
-            throw new \Exception("Can't add a vote to an uncontributable opinion.", 1);
+            throw new BadRequestHttpException("Can't add a vote to an uncontributable opinion.");
         }
 
         if (!$opinion->getOpinionType()->isVersionable()) {
-            throw new \Exception("Can't add a version to an unversionable opinion.", 1);
+            throw new BadRequestHttpException("Can't add a version to an unversionable opinion.");
         }
-
-        $user = $this->getUser();
 
         if ($validationErrors->count() > 0) {
             throw new BadRequestHttpException($validationErrors->__toString());
         }
+
+        $user = $this->getUser();
 
         $argument
             ->setOpinionVersion($version)
@@ -280,6 +486,17 @@ class OpinionsController extends FOSRestController
     }
 
     /**
+     * Put a vote for an opinion version.
+     *
+     * @ApiDoc(
+     *  resource=true,
+     *  description="Put a vote for an opinion version.",
+     *  statusCodes={
+     *    204 = "Returned when successful",
+     *    404 = "Returned when opinion or opinion version not found",
+     *  }
+     * )
+     *
      * @Security("has_role('ROLE_USER')")
      * @Put("/opinions/{opinionId}/versions/{versionId}/votes")
      * @ParamConverter("opinion", options={"mapping": {"opinionId": "id"}})
@@ -290,11 +507,15 @@ class OpinionsController extends FOSRestController
     public function putOpinionVersionVoteAction(Opinion $opinion, OpinionVersion $version, OpinionVersionVote $vote, ConstraintViolationListInterface $validationErrors)
     {
         if (!$opinion->canContribute()) {
-            throw new \Exception("Can't add a vote to an uncontributable opinion.", 1);
+            throw new BadRequestHttpException("Can't add a vote to an uncontributable opinion.");
         }
 
         if (!$opinion->getOpinionType()->isVersionable()) {
-            throw new \Exception("Can't add a version to an unversionable opinion.", 1);
+            throw new BadRequestHttpException("Can't add a version to an unversionable opinion.");
+        }
+
+        if ($validationErrors->count() > 0) {
+            throw new BadRequestHttpException($validationErrors->__toString());
         }
 
         $user = $this->getUser();
@@ -303,17 +524,13 @@ class OpinionsController extends FOSRestController
                     ->findOneBy(['user' => $user, 'opinionVersion' => $version]);
 
         if ($previousVote) {
-            $version->incrementVoteCountByValue($vote->getValue());
-            $version->decrementVoteCountByValue($previousVote->getValue());
+            $version->incrementVoteCountByType($vote->getValue());
+            $version->decrementVoteCountByType($previousVote->getValue());
 
             $previousVote->setValue($vote->getValue());
             $this->getDoctrine()->getManager()->flush();
 
-            return;
-        }
-
-        if ($validationErrors->count() > 0) {
-            throw new BadRequestHttpException($validationErrors->__toString());
+            return $previousVote;
         }
 
         $vote
@@ -322,17 +539,30 @@ class OpinionsController extends FOSRestController
             ->setUser($user)
         ;
 
-        $version->incrementVoteCountByValue($vote->getValue());
+        $version->incrementVoteCountByType($vote->getValue());
         $this->getDoctrine()->getManager()->persist($vote);
         $this->getDoctrine()->getManager()->flush();
+
+        return $vote;
     }
 
     /**
+     * Delete a vote from an opinion version.
+     *
+     * @ApiDoc(
+     *  resource=true,
+     *  description="Delete a vote from an opinion version.",
+     *  statusCodes={
+     *    204 = "Returned when successful",
+     *    404 = "Returned when opinion or opinion version not found",
+     *  }
+     * )
+     *
      * @Security("has_role('ROLE_USER')")
      * @Delete("/opinions/{opinionId}/versions/{versionId}/votes")
      * @ParamConverter("opinion", options={"mapping": {"opinionId": "id"}})
      * @ParamConverter("version", options={"mapping": {"versionId": "id"}})
-     * @View()
+     * @View(statusCode=204, serializerGroups={})
      */
     public function deleteOpinionVersionVoteAction(Opinion $opinion, OpinionVersion $version)
     {
@@ -352,41 +582,8 @@ class OpinionsController extends FOSRestController
             throw new BadRequestHttpException('You have not voted for this opinion version.');
         }
 
-        $version->decrementVoteCountByValue($vote->getValue());
+        $version->decrementVoteCountByType($vote->getValue());
         $this->getDoctrine()->getManager()->remove($vote);
-        $this->getDoctrine()->getManager()->flush();
-    }
-
-    /**
-     * @Security("has_role('ROLE_USER')")
-     * @Post("/opinions/{id}/versions")
-     * @ParamConverter("opinion", options={"mapping": {"id": "id"}})
-     * @View(statusCode=201, serializerGroups={})
-     */
-    public function postOpinionVersionAction(Request $request, Opinion $opinion)
-    {
-        if (!$opinion->canContribute()) {
-            throw new \Exception("Can't add a version to an uncontributable opinion.", 1);
-        }
-
-        if (!$opinion->getOpinionType()->isVersionable()) {
-            throw new \Exception("Can't add a version to an unversionable opinion.", 1);
-        }
-
-        $user = $this->getUser();
-        $opinionVersion = (new OpinionVersion())
-                    ->setAuthor($user)
-                    ->setParent($opinion)
-                ;
-
-        $form = $this->createForm(new OpinionVersionType(), $opinionVersion);
-        $form->handleRequest($request);
-
-        if (!$form->isValid()) {
-            return $form;
-        }
-
-        $this->getDoctrine()->getManager()->persist($opinionVersion);
         $this->getDoctrine()->getManager()->flush();
     }
 }

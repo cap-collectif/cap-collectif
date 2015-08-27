@@ -58,10 +58,13 @@ export default {
             add_new_source: 'Proposer une source',
             add_new_version_infos: 'Merci d\'examiner les versions existantes en premier lieu afin de ne pas soumettre de doublon. Vous pouvez voter pour celles existantes !',
             version: {
-                body: 'Nouvelle version',
+                title: 'Titre *',
+                body: 'Nouvelle version *',
                 body_helper: 'Modifiez le texte',
-                comment: 'Commentaire',
+                comment: 'Commentaire *',
                 comment_helper: 'Expliquez pourquoi vous souhaitez apporter ces modifications',
+                title_error: 'Le titre doit contenir au moins 2 caractères.',
+                body_error: 'Vous devez modifier le contenu de la proposition pour pouvoir proposer une nouvelle version.',
             },
         },
         vote: {

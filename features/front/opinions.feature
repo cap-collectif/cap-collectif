@@ -1,5 +1,6 @@
 Feature: Opinions
 
+  @database
   Scenario: Can create an opinion of contribuable type in opened consultation
     Given I am logged in as user
     And I visited "consultation page" with:
@@ -38,6 +39,7 @@ Feature: Opinions
     And I follow "Proposer"
     Then I should see "Connection form" on "login page"
 
+  @javascript @database
   Scenario: Logged in user can report an opinion
     Given feature "reporting" is enabled
     And I am logged in as user
@@ -46,55 +48,61 @@ Feature: Opinions
       | stepSlug         | collecte-des-avis                |
       | opinionTypeSlug  | solutions                        |
       | opinionSlug      | opinion-5                        |
-    When I follow "Signaler"
+    And I wait 5 seconds
+    When I click the "#render-opinion .opinion__action--report" element
+    And I wait 5 seconds
     And I fill in the following:
       | capco_app_reporting_status | 1                       |
       | capco_app_reporting_body   | Pas terrible tout ça... |
     And I press "Signaler"
+    And I wait 5 seconds
     Then I should see "Merci ! Votre signalement a bien été pris en compte."
 
-  # CKEDITOR fait du popo donc on va remplacer ça en JS bientôt les cocos
-  # @javascript @database
-  # Scenario: Author of an opinion loose their votes when updating it
-  #   Given I am logged in as user
-  #   And I visited "opinion page" with:
-  #     | consultationSlug | croissance-innovation-disruption |
-  #     | stepSlug         | collecte-des-avis                |
-  #     | opinionTypeSlug  | enjeux                           |
-  #     | opinionSlug      | opinion-3                        |
-  #   And I wait 5 seconds
-  #   And I should see "50 votes" in the ".opinion__votes" element
-  #   When I follow "Modifier"
-  #   And I fill in the following:
-  #     | capco_app_opinion_body      | Je modifie ma proposition !   |
-  #   And I check "capco_app_opinion_confirm"
-  #   And I follow "Modifier"
-  #   Then I should see "Merci ! Votre proposition a bien été modifiée."
-  #   And I should see "Aucun vote" in the ".opinion__votes" element
+#  @javascript @database
+#  Scenario: Author of an opinion loose their votes when updating it
+#    Given I am logged in as user
+#    And I visited "opinion page" with:
+#      | consultationSlug | croissance-innovation-disruption |
+#      | stepSlug         | collecte-des-avis                |
+#      | opinionTypeSlug  | enjeux                           |
+#      | opinionSlug      | opinion-3                        |
+#    And I wait 5 seconds
+#    And I should see "50 votes" in the ".opinion__votes" element
+#    When I follow "Modifier"
+#    And I wait 5 seconds
+#    And I fill in the following:
+#      | capco_app_opinion_body | Je modifie ma proposition !   |
+#    And I check "capco_app_opinion_confirm"
+#    And I follow "Modifier"
+#    And I wait 5 seconds
+#    Then I should see "Merci ! Votre proposition a bien été modifiée."
+#    And I should see "0 vote" in the ".opinion__votes" element
 
-  # @javascript
-  # Scenario: Non author of an opinion wants to update it
-  #   Given I am logged in as admin
-  #   And I visited "opinion page" with:
-  #     | consultationSlug | croissance-innovation-disruption |
-  #     | stepSlug         | collecte-des-avis                |
-  #     | opinionTypeSlug  | enjeux                           |
-  #     | opinionSlug      | opinion-3                        |
-  #   And I wait 5 seconds
-  #   Then I should not see "Modifier"
+  @javascript
+  Scenario: Non author of an opinion wants to update it
+    Given I am logged in as admin
+    And I visited "opinion page" with:
+      | consultationSlug | croissance-innovation-disruption |
+      | stepSlug         | collecte-des-avis                |
+      | opinionTypeSlug  | enjeux                           |
+      | opinionSlug      | opinion-3                        |
+    And I wait 5 seconds
+    Then I should not see "Modifier" in the "#render-opinion" element
 
-  # @javascript
-  # Scenario: Author of an opinion try to update without checking the confirm checkbox
-  #   Given I am logged in as user
-  #   And I visited "opinion page" with:
-  #     | consultationSlug | croissance-innovation-disruption |
-  #     | stepSlug         | collecte-des-avis                |
-  #     | opinionTypeSlug  | enjeux                           |
-  #     | opinionSlug      | opinion-3                        |
-  #   And I wait 5 seconds
-  #   When I follow "Modifier"
-  #   And I fill in the following:
-  #     | capco_app_opinion_body | Je modifie ma proposition !   |
-  #   And I follow "Modifier"
-  #   Then I should see "Merci de confirmer la perte de vos votes pour continuer."
+#  @javascript
+#  Scenario: Author of an opinion try to update without checking the confirm checkbox
+#    Given I am logged in as user
+#    And I visited "opinion page" with:
+#      | consultationSlug | croissance-innovation-disruption |
+#      | stepSlug         | collecte-des-avis                |
+#      | opinionTypeSlug  | enjeux                           |
+#      | opinionSlug      | opinion-3                        |
+#    And I wait 5 seconds
+#    When I follow "Modifier"
+#    And I wait 5 seconds
+#    And I fill in the following:
+#      | capco_app_opinion_body | Je modifie ma proposition !   |
+#    And I follow "Modifier"
+#    And I wait 5 seconds
+#    Then I should see "Merci de confirmer la perte de vos votes pour continuer."
 

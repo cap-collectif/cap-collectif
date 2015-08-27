@@ -357,9 +357,9 @@ class SynthesisController extends FOSRestController
      * )
      *
      * @Security("has_role('ROLE_ADMIN')")
-     * @Put("/syntheses/{synthesis_id}/elements/{element_id}")
-     * @ParamConverter("synthesis", options={"mapping": {"synthesis_id": "id"}})
-     * @ParamConverter("element", options={"mapping": {"element_id": "id"}})
+     * @Put("/syntheses/{synthesisId}/elements/{elementId}")
+     * @ParamConverter("synthesis", options={"mapping": {"synthesisId": "id"}})
+     * @ParamConverter("element", options={"mapping": {"elementId": "id"}})
      * @View(serializerGroups={"ElementDetails", "UserDetails", "LogDetails"})
      */
     public function updateSynthesisElementAction(Request $request, Synthesis $synthesis, SynthesisElement $element)
