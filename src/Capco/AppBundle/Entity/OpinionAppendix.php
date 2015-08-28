@@ -9,6 +9,7 @@ use Capco\AppBundle\Traits\TimestampableTrait;
 /**
  * @ORM\Table(name="opinion_appendices")
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\OpinionAppendixRepository")
+ * @ORM\HasLifecycleCallbacks()
  */
 class OpinionAppendix
 {
@@ -28,21 +29,21 @@ class OpinionAppendix
     private $body;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\AppendixType", cascade={"persist"})
-     * @ORM\JoinColumn(name="appendix_type_id", referencedColumnName="id", nullable=false, onDelete="CASCADE")
+     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\OpinionTypeAppendixType", cascade={"persist"})
+     * @ORM\JoinColumn(name="opinion_type_part_id", referencedColumnName="id", nullable=true, onDelete="CASCADE")
      */
-    private $appendixType;
+    private $opinionTypeAppendixType;
 
     /**
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Opinion", inversedBy="appendices", cascade={"persist"})
-     * @ORM\JoinColumn(name="opinion_id", referencedColumnName="id", nullable=false, onDelete="CASCADE")
+     * @ORM\JoinColumn(name="opinion_id", referencedColumnName="id", nullable=true, onDelete="CASCADE")
      */
     private $opinion;
 
     public function __toString()
     {
         if ($this->id) {
-            return (string) $this->id;
+            return $this->getTitle();
         }
 
         return 'New OpinionAppendix';
@@ -72,14 +73,15 @@ class OpinionAppendix
         return $this;
     }
 
-    public function getAppendixType()
+    public function getOpinionTypeAppendixType()
     {
-        return $this->appendixType;
+        return $this->opinionTypeAppendixType;
     }
 
-    public function setAppendixType(AppendixType $appendixType)
+    public function setOpinionTypeAppendixType(OpinionTypeAppendixType $opinionTypeAppendixType)
     {
-        $this->appendixType = $appendixType;
+        $this->opinionTypeAppendixType = $opinionTypeAppendixType;
+
         return $this;
     }
 
@@ -91,6 +93,7 @@ class OpinionAppendix
     public function setOpinion(Opinion $opinion)
     {
         $this->opinion = $opinion;
+
         return $this;
     }
 }

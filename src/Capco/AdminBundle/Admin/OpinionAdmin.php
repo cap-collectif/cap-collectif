@@ -16,27 +16,6 @@ class OpinionAdmin extends Admin
         '_sort_by' => 'title',
     );
 
-    protected $formOptions = array(
-        'cascade_validation' => true,
-    );
-
-    public function getPersistentParameters()
-    {
-        $subject = $this->getSubject();
-        $opinionTypeId = null;
-
-        if ($subject && $subject->getOpinionType()) {
-            $opinionType = $subject->getOpinionType();
-            if ($opinionType) {
-                $opinionTypeId = $opinionType->getId();
-            }
-        }
-
-        return array(
-            'opinion_type_id' => $opinionTypeId,
-        );
-    }
-
     /**
      * @param DatagridMapper $datagridMapper
      */
@@ -138,68 +117,41 @@ class OpinionAdmin extends Admin
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
-            ->with('admin.fields.opinion.group_content', array('class' => 'col-md-12'))->end()
-            ->with('admin.fields.opinion.group_appendices', array('class' => 'col-md-12 appendices-block-js'))->end()
-            ->with('admin.fields.opinion.group_publication', array('class' => 'col-md-12'))->end()
-            ->end()
-        ;
-
-        $formMapper
-            // Content
-            ->with('admin.fields.opinion.group_content')
-                ->add('title', null, array(
-                    'label' => 'admin.fields.opinion.title',
-                ))
-                ->add('Author', 'sonata_type_model', array(
-                    'label' => 'admin.fields.opinion.author',
-                ))
-                ->add('position', null, array(
-                    'label' => 'admin.fields.opinion.position',
-                ))
-                ->add('body', 'ckeditor', array(
-                    'label' => 'admin.fields.opinion.body',
-                    'config_name' => 'admin_editor',
-                ))
-                ->add('step', null, array(
-                    'label' => 'admin.fields.opinion.step',
-                    'required' => true,
-                ))
-                ->add('OpinionType', 'sonata_type_model', array(
-                    'label' => 'admin.fields.opinion.opinion_type',
-                    'attr' => array('class' => 'opinion-type-js'),
-                ))
-            ->end()
-
-            // Appendices
-            ->with('admin.fields.opinion.group_appendices')
-                ->add('appendices', 'sonata_type_collection', array(
-                    'label' => 'admin.fields.opinion.appendices',
-                    'by_reference' => false,
-                    'required' => false,
-                ), array(
-                    'edit' => 'inline',
-                    'inline' => 'table',
-                ))
-            ->end()
-
-            // Publication
-            ->with('admin.fields.opinion.group_publication')
-                ->add('isEnabled', null, array(
-                    'label' => 'admin.fields.opinion.is_enabled',
-                    'required' => false,
-                ))
-                ->add('pinned', null, array(
-                    'label' => 'admin.fields.opinion.pinned_long',
-                    'required' => false,
-                ))
-                ->add('isTrashed', null, array(
-                    'label' => 'admin.fields.opinion.is_trashed',
-                    'required' => false,
-                ))
-                ->add('trashedReason', null, array(
-                    'label' => 'admin.fields.opinion.trashed_reason',
-                ))
-            ->end()
+            ->add('title', null, array(
+                'label' => 'admin.fields.opinion.title',
+            ))
+            ->add('Author', 'sonata_type_model', array(
+                'label' => 'admin.fields.opinion.author',
+            ))
+            ->add('body', 'ckeditor', array(
+                'label' => 'admin.fields.opinion.body',
+                'config_name' => 'admin_editor',
+            ))
+            ->add('step', null, array(
+                'label' => 'admin.fields.opinion.step',
+                'required' => true,
+            ))
+            ->add('position', null, array(
+                'label' => 'admin.fields.opinion.position',
+            ))
+            ->add('OpinionType', 'sonata_type_model', array(
+                'label' => 'admin.fields.opinion.opinion_type',
+            ))
+            ->add('isEnabled', null, array(
+                'label' => 'admin.fields.opinion.is_enabled',
+                'required' => false,
+            ))
+            ->add('pinned', null, array(
+                'label' => 'admin.fields.opinion.pinned_long',
+                'required' => false,
+            ))
+            ->add('isTrashed', null, array(
+                'label' => 'admin.fields.opinion.is_trashed',
+                'required' => false,
+            ))
+            ->add('trashedReason', null, array(
+                'label' => 'admin.fields.opinion.trashed_reason',
+            ))
         ;
     }
 
@@ -278,21 +230,7 @@ class OpinionAdmin extends Admin
         }
     }
 
-    public function getTemplate($name)
+    protected function configureRoutes(RouteCollection $collection)
     {
-        if ($name == 'edit') {
-            return 'CapcoAdminBundle:Opinion:edit.html.twig';
-        }
-
-        return parent::getTemplate($name);
-    }
-
-    public function prePersist($opinion) {
-        $allowedTypes = $opinion->getOpinionType()->getAllAppendixTypes();
-        foreach ($opinion->getAppendices() as $app) {
-            if (!$allowedTypes->contains($app->getAppendixType())) {
-                $opinion->removeAppendix($app);
-            }
-        }
     }
 }

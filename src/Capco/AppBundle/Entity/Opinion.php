@@ -128,7 +128,7 @@ class Opinion
     private $versions;
 
     /**
-     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\OpinionAppendix", mappedBy="opinion",  cascade={"persist", "remove"})
+     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\OpinionAppendix", mappedBy="opinion",  cascade={"persist", "remove"}, orphanRemoval=true)
      */
     protected $appendices;
 
@@ -506,17 +506,16 @@ class Opinion
         return $this->appendices;
     }
 
-    public function addAppendice(OpinionAppendix $appendix)
+    public function addAppendix(OpinionAppendix $appendix)
     {
         if (!$this->appendices->contains($appendix)) {
-            $appendix->setOpinion($this);
             $this->appendices->add($appendix);
         }
 
         return $this;
     }
 
-    public function removeAppendice(OpinionAppendix $appendix)
+    public function removeAppendix(OpinionAppendix $appendix)
     {
         $this->appendices->removeElement($appendix);
 

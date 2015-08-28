@@ -39,15 +39,7 @@ services:
         calls:
             - [ setTranslationDomain, [SonataAdminBundle]]
 
-    capco_admin.admin.appendix_type:
-        class: Capco\AdminBundle\Admin\AppendixTypeAdmin
-        arguments: [~, Capco\AppBundle\Entity\AppendixType, SonataAdminBundle:CRUD]
-        tags:
-            - {name: sonata.admin, manager_type: orm, group: admin.group.consultation, label: admin.label.appendix_type}
-        calls:
-            - [ setTranslationDomain, [SonataAdminBundle]]
-
-    capco_admin.admin.opinionTypeAppendixType:
+    capco_admin.admin.appendixTypes:
         class: Capco\AdminBundle\Admin\OpinionTypeAppendixTypeAdmin
         arguments: [~, Capco\AppBundle\Entity\OpinionTypeAppendixType, SonataAdminBundle:CRUD]
         tags:

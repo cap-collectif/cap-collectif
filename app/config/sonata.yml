@@ -33,7 +33,6 @@ sonata_admin:
                 items:
                     - capco_admin.admin.consultation
                     - capco_admin.admin.opinion_type
-                    - capco_admin.admin.appendix_type
                     - capco_admin.admin.category
                     - capco_admin.admin.consultation_type
             sonata.admin.group.user:

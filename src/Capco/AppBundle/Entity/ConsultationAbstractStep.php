@@ -5,7 +5,6 @@ namespace Capco\AppBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Validator\Constraints as Assert;
-use Capco\AppBundle\Traits\PositionableTrait;
 
 /**
  * Class ConsultationAbstractStep
@@ -16,8 +15,6 @@ use Capco\AppBundle\Traits\PositionableTrait;
  */
 class ConsultationAbstractStep
 {
-    use PositionableTrait;
-
     /**
      * @ORM\Id
      * @ORM\Column(type="integer")
@@ -41,6 +38,12 @@ class ConsultationAbstractStep
     protected $step;
 
     /**
+     * @Gedmo\SortablePosition
+     * @ORM\Column(type="integer")
+     */
+    protected $position;
+
+    /**
      * Get id.
      *
      * @return int
@@ -57,6 +60,30 @@ class ConsultationAbstractStep
         }
 
         return 'undefined step';
+    }
+
+    /**
+     * Set position.
+     *
+     * @param int $position
+     *
+     * @return ConsultationAbstractStep
+     */
+    public function setPosition($position)
+    {
+        $this->position = $position;
+
+        return $this;
+    }
+
+    /**
+     * Get position.
+     *
+     * @return int
+     */
+    public function getPosition()
+    {
+        return $this->position;
     }
 
     /**

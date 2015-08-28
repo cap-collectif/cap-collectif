@@ -18,10 +18,10 @@ class OpinionTypeAppendixTypeAdmin extends Admin
     {
         $formMapper
             ->add('position', null, array(
-                'label' => 'admin.fields.opiniontype_appendixtype.position',
+                'label' => 'admin.fields.consultation_abstractstep.position',
             ))
-            ->add('appendixType', 'sonata_type_model', array(
-                'label' => 'admin.fields.opiniontype_appendixtype.appendix_type',
+            ->add('title', null, array(
+                'label' => 'admin.fields.step.title',
                 'required' => true,
             ))
         ;
