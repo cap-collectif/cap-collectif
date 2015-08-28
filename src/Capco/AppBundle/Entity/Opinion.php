@@ -128,7 +128,7 @@ class Opinion
     private $versions;
 
     /**
-     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\OpinionAppendix", mappedBy="opinion",  cascade={"persist", "remove"}, orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\OpinionAppendix", mappedBy="opinion",  cascade={"persist", "remove"})
      */
     protected $appendices;
 
@@ -506,16 +506,23 @@ class Opinion
         return $this->appendices;
     }
 
-    public function addAppendix(OpinionAppendix $appendix)
+    public function setAppendices($appendices)
+    {
+        $this->appendices = $appendices;
+        return $this;
+    }
+
+    public function addAppendice(OpinionAppendix $appendix)
     {
         if (!$this->appendices->contains($appendix)) {
+            $appendix->setOpinion($this);
             $this->appendices->add($appendix);
         }
 
         return $this;
     }
 
-    public function removeAppendix(OpinionAppendix $appendix)
+    public function removeAppendice(OpinionAppendix $appendix)
     {
         $this->appendices->removeElement($appendix);
 
@@ -695,6 +702,23 @@ class Opinion
         $excerpt = $excerpt.'...';
 
         return $excerpt;
+    }
+
+    public function getSortedAppendices() {
+        $iterator = $this->appendices->getIterator();
+        $iterator->uasort(function ($a, $b) {
+            return ($this->getPositionForAppendixType($a->getAppendixType()) < $this->getPositionForAppendixType($b->getAppendixType())) ? -1 : 1;
+        });
+        return iterator_to_array($iterator);
+    }
+
+    public function getPositionForAppendixType($at) {
+        foreach ($this->getOpinionType()->getAppendixTypes() as $otat) {
+            if ($otat->getAppendixType()->getId() === $at->getId()) {
+                return $otat->getPosition();
+            }
+        }
+        return 0;
     }
 
     // ******************* Lifecycle *********************************

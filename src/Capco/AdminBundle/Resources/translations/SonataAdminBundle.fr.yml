@@ -12,7 +12,7 @@ admin.group.pages: Pages
 
 # Dashboard names
 admin.label.appendix: Annexes
-admin.label.appendixTypes: Type d'annexe
+admin.label.appendix_type: Types d'annexe
 admin.label.page: Pages statiques
 admin.label.menu_item: Navigation
 admin.label.argument: Arguments
@@ -117,6 +117,9 @@ admin:
       opinion: Proposition
       body: Contenu
       type: Type
+    appendix_type:
+      title: Titre
+      help_text: Texte d'aide
     argument:
       body: Contenu
       type: Type d'argument
@@ -307,6 +310,10 @@ admin:
       is_enabled: Abonné
       created_at: Création
     opinion:
+      group_content: Proposition
+      group_appendices: Annexes
+      group_publication: Options de publication
+      appendices: Annexes
       title: Titre
       author: Auteur
       body: Contenu
@@ -328,6 +335,10 @@ admin:
       pinned: Épinglé
       pinned_long: Épinglé en haut de la liste
     opinion_type:
+      group_info: Type de proposition
+      group_options: Options
+      group_appendices: Annexes
+      appendices: Annexes
       title: Titre
       short_name: Nom court
       vote_widget_type: Type de vote
@@ -340,6 +351,10 @@ admin:
       updated_at: Mise à jour
       position: Position
       versionable: Versionable
+    opiniontype_appendixtype:
+      position: Position
+      appendix_type: Type d'annexe
+      appendix_type_add: Ajouter
     opinion_vote:
       opinion: Proposition
       voter: Auteur

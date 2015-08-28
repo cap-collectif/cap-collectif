@@ -9,7 +9,6 @@ use Capco\AppBundle\Traits\TimestampableTrait;
 /**
  * @ORM\Table(name="opinion_appendices")
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\OpinionAppendixRepository")
- * @ORM\HasLifecycleCallbacks()
  */
 class OpinionAppendix
 {
@@ -23,27 +22,26 @@ class OpinionAppendix
     private $id;
 
     /**
-     * @ORM\Column(name="body", type="text")
-     * @Assert\NotBlank()
+     * @ORM\Column(name="body", type="text", nullable=true)
      */
-    private $body;
+    private $body = null;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\OpinionTypeAppendixType", cascade={"persist"})
-     * @ORM\JoinColumn(name="opinion_type_part_id", referencedColumnName="id", nullable=true, onDelete="CASCADE")
+     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\AppendixType", cascade={"persist"})
+     * @ORM\JoinColumn(name="appendix_type_id", referencedColumnName="id", nullable=false, onDelete="CASCADE")
      */
-    private $opinionTypeAppendixType;
+    private $appendixType;
 
     /**
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Opinion", inversedBy="appendices", cascade={"persist"})
-     * @ORM\JoinColumn(name="opinion_id", referencedColumnName="id", nullable=true, onDelete="CASCADE")
+     * @ORM\JoinColumn(name="opinion_id", referencedColumnName="id", nullable=false, onDelete="CASCADE")
      */
     private $opinion;
 
     public function __toString()
     {
         if ($this->id) {
-            return $this->getTitle();
+            return (string) $this->id;
         }
 
         return 'New OpinionAppendix';
@@ -73,15 +71,14 @@ class OpinionAppendix
         return $this;
     }
 
-    public function getOpinionTypeAppendixType()
+    public function getAppendixType()
     {
-        return $this->opinionTypeAppendixType;
+        return $this->appendixType;
     }
 
-    public function setOpinionTypeAppendixType(OpinionTypeAppendixType $opinionTypeAppendixType)
+    public function setAppendixType(AppendixType $appendixType)
     {
-        $this->opinionTypeAppendixType = $opinionTypeAppendixType;
-
+        $this->appendixType = $appendixType;
         return $this;
     }
 
@@ -93,7 +90,6 @@ class OpinionAppendix
     public function setOpinion(Opinion $opinion)
     {
         $this->opinion = $opinion;
-
         return $this;
     }
 }

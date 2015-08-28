@@ -3,6 +3,7 @@
 namespace Capco\AdminBundle\Controller;
 
 use Capco\AppBundle\Repository\ConsultationTypeRepository;
+use Capco\AppBundle\Repository\OpinionTypeAppendixTypeRepository;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -15,10 +16,12 @@ use Symfony\Component\HttpFoundation\Request;
 class HelperController
 {
     protected $consultationTypeRepo;
+    protected $opinionTypeAppendixTypeRepo;
 
-    public function __construct(ConsultationTypeRepository $consultationTypeRepository)
+    public function __construct(ConsultationTypeRepository $consultationTypeRepository, OpinionTypeAppendixTypeRepository $opinionTypeAppendixTypeRepo)
     {
         $this->consultationTypeRepo = $consultationTypeRepository;
+        $this->opinionTypeAppendixTypeRepo = $opinionTypeAppendixTypeRepo;
     }
 
     /**

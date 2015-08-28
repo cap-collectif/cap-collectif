@@ -1,0 +1,9 @@
+{% extends 'SonataAdminBundle:CRUD:base_list.html.twig' %}
+
+{% block actions %}
+{% spaceless %}
+    {% if admin.hasRoute('create') and admin.isGranted('CREATE')%}
+        <li>{% include 'CapcoAdminBundle:Opinion:create_button.html.twig' %}</li>
+    {% endif %}
+{% endspaceless %}
+{% endblock %}

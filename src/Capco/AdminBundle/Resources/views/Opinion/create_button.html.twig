@@ -1,0 +1,14 @@
+{% if admin.hasRoute('create') and admin.isGranted('CREATE')%}
+    {% if opinionTypes | length > 0 %}
+        <li class="divider" role="presentation"></li>
+        {% for opinionType in opinionTypes %}
+            <li>
+                <a href="{{ admin.generateUrl('create', {'opinion_type': opinionType.id}) }}">
+                    <i class="fa fa-plus-circle"></i>
+                    {{ opinionType.shortName | trans({}, admin.translationdomain) }}
+                </a>
+            </li>
+        {% endfor %}
+        <li class="divider" role="presentation"></li>
+    {% endif %}
+{% endif %}

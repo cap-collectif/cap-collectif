@@ -63,9 +63,6 @@ class StepController extends Controller
 
         $em = $this->getDoctrine()->getManager();
         $consultation = $em->getRepository('CapcoAppBundle:Consultation')->getOne($consultationSlug);
-        if (!$consultation) {
-            throw new NotFoundHttpException();
-        }
         $events = $this->get('capco.event.resolver')->getLastByConsultation($consultationSlug, 2);
         $posts = $this->get('capco.blog.post.repository')->getLastPublishedByConsultation($consultationSlug, 2);
         $nbEvents = $this->get('capco.event.resolver')->countEvents(null, null, $consultationSlug, null);
@@ -102,9 +99,6 @@ class StepController extends Controller
 
         $em = $this->getDoctrine()->getManager();
         $consultation = $em->getRepository('CapcoAppBundle:Consultation')->getOne($consultationSlug);
-        if (!$consultation) {
-            throw new NotFoundHttpException();
-        }
 
         return [
             'consultation' => $consultation,
@@ -134,9 +128,6 @@ class StepController extends Controller
 
         $em = $this->getDoctrine()->getManager();
         $consultation = $em->getRepository('CapcoAppBundle:Consultation')->getOne($consultationSlug);
-        if (!$consultation) {
-            throw new NotFoundHttpException();
-        }
 
         return [
             'consultation' => $consultation,

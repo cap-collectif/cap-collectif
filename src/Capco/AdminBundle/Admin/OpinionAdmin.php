@@ -11,9 +11,29 @@ use Sonata\AdminBundle\Route\RouteCollection;
 
 class OpinionAdmin extends Admin
 {
+    public function getPersistentParameters()
+    {
+        $subject = $this->getSubject();
+        $opinionTypeId = null;
+
+        if ($subject && $subject->getOpinionType()) {
+            $opinionTypeId = $subject->getOpinionType()->getId();
+        } else {
+            $opinionTypeId = $this->getRequest()->get('opinion_type_id');
+        }
+
+        return array(
+            'opinion_type' => $opinionTypeId,
+        );
+    }
+
     protected $datagridValues = array(
         '_sort_order' => 'ASC',
         '_sort_by' => 'title',
+    );
+
+    protected $formOptions = array(
+        'cascade_validation' => true,
     );
 
     /**
@@ -69,6 +89,9 @@ class OpinionAdmin extends Admin
             ->add('Author', 'sonata_type_model', array(
                 'label' => 'admin.fields.opinion.author',
             ))
+            ->add('OpinionType', null, array(
+                'label' => 'admin.fields.opinion.opinion_type',
+            ))
             ->add('step', 'sonata_type_model', array(
                 'label' => 'admin.fields.opinion.step',
             ))
@@ -116,42 +139,67 @@ class OpinionAdmin extends Admin
      */
     protected function configureFormFields(FormMapper $formMapper)
     {
+        $subjectHasAppendices = $this->getSubject()->getAppendices()->count() > 0 ? true : false;
+        $classname = $subjectHasAppendices ? '' : 'hidden';
         $formMapper
-            ->add('title', null, array(
-                'label' => 'admin.fields.opinion.title',
-            ))
-            ->add('Author', 'sonata_type_model', array(
-                'label' => 'admin.fields.opinion.author',
-            ))
-            ->add('body', 'ckeditor', array(
-                'label' => 'admin.fields.opinion.body',
-                'config_name' => 'admin_editor',
-            ))
-            ->add('step', null, array(
-                'label' => 'admin.fields.opinion.step',
-                'required' => true,
-            ))
-            ->add('position', null, array(
-                'label' => 'admin.fields.opinion.position',
-            ))
-            ->add('OpinionType', 'sonata_type_model', array(
-                'label' => 'admin.fields.opinion.opinion_type',
-            ))
-            ->add('isEnabled', null, array(
-                'label' => 'admin.fields.opinion.is_enabled',
+            ->with('admin.fields.opinion.group_content', array('class' => 'col-md-12'))->end()
+            ->with('admin.fields.opinion.group_appendices', array('class' => 'col-md-12 '.$classname))->end()
+            ->with('admin.fields.opinion.group_publication', array('class' => 'col-md-12'))->end()
+            ->end()
+        ;
+
+        $formMapper
+            // Content
+            ->with('admin.fields.opinion.group_content')
+                ->add('title', null, array(
+                    'label' => 'admin.fields.opinion.title',
+                ))
+                ->add('Author', 'sonata_type_model', array(
+                    'label' => 'admin.fields.opinion.author',
+                ))
+                ->add('position', null, array(
+                    'label' => 'admin.fields.opinion.position',
+                ))
+                ->add('body', 'ckeditor', array(
+                    'label' => 'admin.fields.opinion.body',
+                    'config_name' => 'admin_editor',
+                ))
+                ->add('step', null, array(
+                    'label' => 'admin.fields.opinion.step',
+                    'required' => true,
+                ))
+            ->end()
+
+            // Appendices
+            ->with('admin.fields.opinion.group_appendices')
+            ->add('appendices', 'sonata_type_collection', array(
+                'label' => 'admin.fields.opinion.appendices',
+                'by_reference' => false,
                 'required' => false,
+                'btn_add' => false,
+                'type_options' => ['delete' => false, 'btn_add' => false,],
+                'attr' => ['class' => $classname],
             ))
-            ->add('pinned', null, array(
-                'label' => 'admin.fields.opinion.pinned_long',
-                'required' => false,
-            ))
-            ->add('isTrashed', null, array(
-                'label' => 'admin.fields.opinion.is_trashed',
-                'required' => false,
-            ))
-            ->add('trashedReason', null, array(
-                'label' => 'admin.fields.opinion.trashed_reason',
-            ))
+            ->end()
+
+            // Publication
+            ->with('admin.fields.opinion.group_publication')
+                ->add('isEnabled', null, array(
+                    'label' => 'admin.fields.opinion.is_enabled',
+                    'required' => false,
+                ))
+                ->add('pinned', null, array(
+                    'label' => 'admin.fields.opinion.pinned_long',
+                    'required' => false,
+                ))
+                ->add('isTrashed', null, array(
+                    'label' => 'admin.fields.opinion.is_trashed',
+                    'required' => false,
+                ))
+                ->add('trashedReason', null, array(
+                    'label' => 'admin.fields.opinion.trashed_reason',
+                ))
+            ->end()
         ;
     }
 
@@ -161,6 +209,7 @@ class OpinionAdmin extends Admin
     protected function configureShowFields(ShowMapper $showMapper)
     {
         $subject = $this->getSubject();
+        $subjectHasAppendices = $this->getSubject()->getAppendices()->count() > 0 ? true : false;
 
         $showMapper
             ->add('title', null, array(
@@ -169,17 +218,28 @@ class OpinionAdmin extends Admin
             ->add('Author', null, array(
                 'label' => 'admin.fields.opinion.author',
             ))
+            ->add('OpinionType', null, array(
+                'label' => 'admin.fields.opinion.opinion_type',
+            ))
             ->add('body', null, array(
                 'label' => 'admin.fields.opinion.body',
             ))
+        ;
+
+        if ($subjectHasAppendices) {
+            $showMapper
+                ->add('appendices', null, array(
+                    'label' => 'admin.fields.opinion.appendices',
+                ))
+            ;
+        }
+
+        $showMapper
             ->add('step', null, array(
                 'label' => 'admin.fields.opinion.step',
             ))
             ->add('position', null, array(
                 'label' => 'admin.fields.opinion.position',
-            ))
-            ->add('OpinionType', null, array(
-                'label' => 'admin.fields.opinion.opinion_type',
             ))
             ->add('voteCountTotal', null, array(
                 'label' => 'admin.fields.opinion.vote_count_total',
@@ -230,7 +290,45 @@ class OpinionAdmin extends Admin
         }
     }
 
+    public function getTemplate($name)
+    {
+        if ($name == 'list') {
+            return 'CapcoAdminBundle:Opinion:list.html.twig';
+        }
+        if ($name == 'edit') {
+            return 'CapcoAdminBundle:Opinion:edit.html.twig';
+        }
+        if ($name == 'show') {
+            return 'CapcoAdminBundle:Opinion:show.html.twig';
+        }
+        if ($name == 'delete') {
+            return 'CapcoAdminBundle:Opinion:delete.html.twig';
+        }
+
+        return parent::getTemplate($name);
+    }
+
+    public function prePersist($opinion) {
+        if (!$opinion->getOpinionType()) {
+            $opinionType = $this->getConfigurationPool()
+                ->getContainer()
+                ->get('doctrine.orm.entity_manager')
+                ->getRepository('CapcoAppBundle:OpinionType')
+                ->find($this->getPersistentParameters('opinion_type'));
+            $opinion->setOpinionType($opinionType);
+
+        }
+    }
+
     protected function configureRoutes(RouteCollection $collection)
     {
+        $collection->clearExcept(array('list', 'show', 'create', 'edit', 'delete'));
     }
+
+    public function getBatchActions()
+    {
+        return null;
+    }
+
+
 }

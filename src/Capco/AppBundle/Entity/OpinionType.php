@@ -129,6 +129,7 @@ class OpinionType
 
     /**
      * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\OpinionTypeAppendixType", mappedBy="opinionType",  cascade={"persist", "remove"}, orphanRemoval=true)
+     * @ORM\OrderBy({"position" = "ASC"})
      */
     protected $appendixTypes;
 
@@ -445,5 +446,14 @@ class OpinionType
     public function setHelpText($helpText)
     {
         $this->helpText = $helpText;
+    }
+
+    public function getAllAppendixTypes()
+    {
+        $types = new ArrayCollection();
+        foreach ($this->appendixTypes as $otat) {
+            $types->add($otat->getAppendixType());
+        }
+        return $types;
     }
 }
