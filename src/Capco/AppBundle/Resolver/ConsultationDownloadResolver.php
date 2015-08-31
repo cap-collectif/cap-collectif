@@ -5,6 +5,7 @@ namespace Capco\AppBundle\Resolver;
 use Capco\AppBundle\Entity\Argument;
 use Capco\AppBundle\Entity\ConsultationStep;
 use Capco\AppBundle\Entity\Opinion;
+use Capco\AppBundle\Entity\OpinionAppendix;
 use Capco\AppBundle\Entity\Source;
 use Doctrine\ORM\EntityManager;
 use Symfony\Bundle\TwigBundle\TwigEngine;
@@ -142,6 +143,14 @@ class ConsultationDownloadResolver
             } else {
                 $data['unpublished'][] = $item;
             }
+            foreach ($opinion->getAppendices() as $appendix) {
+                $item = $this->getAppendixItem($opinion, $appendix);
+                if ($opinion->getIsEnabled() && !$opinion->getIsTrashed()) {
+                    $data['published'][] = $item;
+                } else {
+                    $data['unpublished'][] = $item;
+                }
+            }
         }
 
         // Arguments
@@ -184,6 +193,33 @@ class ConsultationDownloadResolver
             'link' => $this->translator->trans('consultation_download.values.non_applicable', array(), 'CapcoAppBundle'),
             'created' => $this->dateToString($opinion->getCreatedAt()),
             'updated' => $this->dateToString($opinion->getUpdatedAt()),
+            'author' => $opinion->getAuthor()->getUsername(),
+            'score' => $this->calculateScore($opinion->getVoteCountOk(), $opinion->getVoteCountMitige(), $opinion->getVoteCountMitige()),
+            'total_votes' => $opinion->getVoteCountAll(),
+            'votes_ok' => $opinion->getVoteCountOk(),
+            'votes_mitigated' => $opinion->getVoteCountMitige(),
+            'votes_nok' => $opinion->getVoteCountNok(),
+            'sources' => $opinion->getSourcesCount(),
+            'total_arguments' => $opinion->getArgumentsCount(),
+            'arguments_ok' => $opinion->getArgumentsCountByType('yes'),
+            'arguments_nok' => $opinion->getArgumentsCountByType('no'),
+            'trashed' => $this->booleanToString($opinion->getIsTrashed()),
+            'trashed_date' => $this->dateToString($opinion->getTrashedAt()),
+            'trashed_reason' => $opinion->getTrashedReason(),
+        );
+    }
+
+    private function getAppendixItem(Opinion $opinion, OpinionAppendix $appendix)
+    {
+        return $item = array(
+            'opinion_title' => $opinion->getTitle(),
+            'content_type' => $this->translator->trans('consultation_download.values.content_type.opinion', array(), 'CapcoAppBundle'),
+            'opinion_type' => $opinion->getOpinionType()->getShortName(),
+            'category' => $appendix->getAppendixType()->getTitle(),
+            'content' => $this->formatText($appendix->getBody()),
+            'link' => $this->translator->trans('consultation_download.values.non_applicable', array(), 'CapcoAppBundle'),
+            'created' => $this->dateToString($appendix->getCreatedAt()),
+            'updated' => $this->dateToString($appendix->getUpdatedAt()),
             'author' => $opinion->getAuthor()->getUsername(),
             'score' => $this->calculateScore($opinion->getVoteCountOk(), $opinion->getVoteCountMitige(), $opinion->getVoteCountMitige()),
             'total_votes' => $opinion->getVoteCountAll(),
