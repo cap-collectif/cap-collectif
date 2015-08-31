@@ -1,3 +1,5 @@
+import CustomDiff from '../../services/CustomDiff';
+
 const TabbedArea = ReactBootstrap.TabbedArea;
 const TabPane = ReactBootstrap.TabPane;
 const Panel = ReactBootstrap.Panel;
@@ -12,18 +14,11 @@ const OpinionBody = React.createClass({
     const opinion = this.props.opinion;
 
     if (this.isVersion()) {
-      let htmlBody = '';
-
-      const diff = JsDiff.diffWords(opinion.parent.body, opinion.body);
-      diff.forEach((part) => {
-        const diffColor = part.added ? 'green' : part.removed ? 'red' : 'grey';
-        const decoration = part.removed ? 'line-through' : 'none';
-        htmlBody += '<span style="color: ' + diffColor + '; text-decoration: ' + decoration + '">' + part.value + '</span>';
-      });
+      const prettyDiff = CustomDiff.prettyDiff(opinion.parent.body, opinion.body);
 
       return (
         <div>
-          <div dangerouslySetInnerHTML={{__html: htmlBody}} />
+          <div dangerouslySetInnerHTML={{__html: prettyDiff}} />
           {opinion.comment !== null
             ? <Panel header={this.getIntlMessage('global.comment')} style={{marginTop: 20}}>
                 <div dangerouslySetInnerHTML={{__html: opinion.comment}} />
