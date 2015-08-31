@@ -11,12 +11,6 @@ use Sonata\AdminBundle\Show\ShowMapper;
 
 class OpinionAppendixAdmin extends Admin
 {
-
-    protected $datagridValues = array(
-        '_sort_order' => 'ASC',
-        '_sort_by' => 'appendixType.position',
-    );
-
     /**
      * @param FormMapper $formMapper
      */

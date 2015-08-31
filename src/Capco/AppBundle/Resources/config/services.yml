@@ -406,10 +406,3 @@ services:
     arguments: [@router, @capco.comment.resolver, @capco.step.resolver]
     tags:
       - { name: twig.extension }
-
-  capco.opinion_type_appendix_type.repository:
-    class: Capco\AppBundle\Repository\OpinionTypeAppendixTypeRepository
-    factory_service: doctrine.orm.default_entity_manager
-    factory_method: getRepository
-    arguments:
-      - Capco\AppBundle\Entity\OpinionTypeAppendixType

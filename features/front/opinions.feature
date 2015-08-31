@@ -106,3 +106,15 @@ Feature: Opinions
 #    And I wait 5 seconds
 #    Then I should see "Merci de confirmer la perte de vos votes pour continuer."
 
+  @javascript
+  Scenario: Anonymous wants to see opinion appendix
+    Given I visited "opinion page" with:
+      | consultationSlug | projet-de-loi-renseignement      |
+      | stepSlug         | elaboration-de-la-loi            |
+      | opinionTypeSlug  | articles                         |
+      | opinionSlug      | article-1                        |
+    And I wait 5 seconds
+    And I follow "Exposé des motifs"
+    And I wait 3 seconds
+    Then I should see "Motifs 1"
+

@@ -65,7 +65,7 @@ class AppendixTypeAdmin extends Admin
     protected function configureShowFields(ShowMapper $showMapper)
     {
         $showMapper
-            ->addIdentifier('title', null, array(
+            ->add('title', null, array(
                 'label' => 'admin.fields.appendix_type.title',
             ))
             ->add('helpText', null, array(
@@ -85,10 +85,5 @@ class AppendixTypeAdmin extends Admin
                 'label' => 'admin.fields.appendix_type.help_text',
             ))
         ;
-    }
-
-    protected function configureRoutes(RouteCollection $collection)
-    {
-        //$collection->clearExcept(array('create', 'edit', 'delete'));
     }
 }

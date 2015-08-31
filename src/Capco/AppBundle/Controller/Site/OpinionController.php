@@ -8,6 +8,7 @@ use Capco\AppBundle\Entity\ConsultationStep;
 use Capco\AppBundle\Entity\Opinion;
 use Capco\AppBundle\Entity\OpinionType;
 use Capco\AppBundle\Entity\OpinionVote;
+use Capco\AppBundle\Entity\OpinionAppendix;
 use Capco\AppBundle\Form\OpinionsType as OpinionForm;
 use Capco\AppBundle\Form\ArgumentType as ArgumentForm;
 use Capco\AppBundle\Form\OpinionVoteType as OpinionVoteForm;
@@ -136,6 +137,7 @@ class OpinionController extends Controller
         $opinion = new Opinion();
         $opinion->setAuthor($this->getUser());
         $opinion->setOpinionType($opinionType);
+        $opinion = $this->createAppendicesForOpinion($opinion);
         $opinion->setIsEnabled(true);
         $opinion->setStep($currentStep);
 
@@ -521,5 +523,22 @@ class OpinionController extends Controller
         } else {
             $this->get('session')->getFlashBag()->add('danger', $this->get('translator')->trans('argument.create.error'));
         }
+    }
+
+    private function createAppendicesForOpinion(Opinion $opinion)
+    {
+        $appendixTypes = $this->get('doctrine.orm.entity_manager')
+            ->getRepository('CapcoAppBundle:OpinionTypeAppendixType')
+            ->findBy(
+                ['opinionType' => $opinion->getOpinionType()],
+                ['position' => 'ASC']
+            );
+        foreach ($appendixTypes as $otat) {
+            $app = new OpinionAppendix();
+            $app->setAppendixType($otat->getAppendixType());
+            $app->setOpinion($opinion);
+            $opinion->addAppendice($app);
+        }
+        return $opinion;
     }
 }

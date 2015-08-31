@@ -403,6 +403,9 @@ version:
   show:
     count: "]-Inf, 0] 0 nouvelle version | {1} 1 nouvelle version | ]1,Inf[ %count% nouvelles versions"
 
+appendix:
+  form:
+    body: Contenu
 
 source:
   create:

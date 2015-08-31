@@ -25,6 +25,12 @@
                             <div class="media">
                                 {% include 'CapcoUserBundle:Avatar:avatar.html.twig' with { 'user': app.user, 'classes': 'media-object', 'link_classes': 'pull-left'} only %}
                                 <div class="media-body">
+                                    {{ form_row(form.title) }}
+                                    {{ form_row(form.body) }}
+                                    {% for app in form.appendices.children %}
+                                        {% set title = app.vars.value.appendixType %}
+                                        {{ form_row(app, {'label': title, 'required': false}) }}
+                                    {% endfor %}
                                     {{ form_rest(form) }}
                                 </div>
                             </div>

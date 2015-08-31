@@ -45,11 +45,13 @@ const OpinionBody = React.createClass({
         </TabPane>
         {
           opinion.appendices.map((appendix, index) => {
-            return (
-              <TabPane eventKey={index + 2} tab={appendix.type.title}>
-                <div dangerouslySetInnerHTML={{__html: appendix.body}} />
-              </TabPane>
-            );
+            if (appendix.body) {
+              return (
+                <TabPane eventKey={index + 2} tab={appendix.type.title}>
+                  <div dangerouslySetInnerHTML={{__html: appendix.body}}/>
+                </TabPane>
+              );
+            }
           })
         }
       </TabbedArea>
