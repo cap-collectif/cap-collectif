@@ -21,8 +21,7 @@ Feature: Opinions
         "type": {
           "id": @integer@,
           "title": @string@,
-          "color": @string@,
-          "voteWidgetType": @integer@
+          "color": @string@
         },
 
         "arguments_count": @integer@,

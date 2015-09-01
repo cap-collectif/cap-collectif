@@ -19,6 +19,9 @@ color:
     text: Texte du site
   btn:
     bg: Couleur du bouton
+    ghost:
+      bg: Bouton transparent
+      text: Bouton transparent au survol
     primary:
       bg: Couleur primaire
       text: Libellé primaire
@@ -44,6 +47,9 @@ color:
     bg: Couleur de fond de l'en-tête secondaire
     text: Couleur du texte de l'en-tête secondaire
     title: Couleur du titre de l'en-tête secondaire
+  home:
+    bg: Couleur de fond de l'en-tête
+    title: Couleur du titre de l'en-tête
   link:
     default: Lien
     hover: Liens au survol
