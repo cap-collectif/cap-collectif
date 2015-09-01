@@ -45,7 +45,6 @@ Feature: Arguments
       | stepSlug         | collecte-des-avis                |
       | opinionTypeSlug  | causes                           |
       | opinionSlug      | opinion-2                        |
-    And I wait 3 seconds
     And I should see "5" in the "#arg-1 .opinion__votes-nb" element
     When I follow "Modifier"
     And I wait 3 seconds

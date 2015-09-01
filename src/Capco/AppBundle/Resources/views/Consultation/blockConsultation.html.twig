@@ -64,8 +64,7 @@
 
             {% set contributorsCount = consultation.participantsCount %}
             {% set contributionsCount = consultation.contributionsCount %}
-            {% set votesCount = consultation.votesCount %}
-            {% if contributionsCount > 0 or contributorsCount > 0 or votesCount > 0 %}
+            {% if contributionsCount > 0 or contributorsCount > 0 %}
                 <div class="thumbnail__numbers">
                     {% if contributorsCount > 0 %}
                         <div class="thumbnail__number-block">
@@ -83,16 +82,6 @@
                             <p class="thumbnail__number__label  excerpt  small">
                                 {% transchoice contributionsCount with {'%count%': contributionsCount} from 'CapcoAppBundle' %}
                                     consultation.show.contributions_no_nb
-                                {% endtranschoice %}
-                            </p>
-                        </div>
-                    {% endif %}
-                    {% if votesCount > 0 %}
-                        <div class="thumbnail__number-block">
-                            <p  class="thumbnail__number">{{ votesCount }}</p>
-                            <p class="thumbnail__number__label  excerpt  small">
-                                {% transchoice votesCount with {'%count%': votesCount} from 'CapcoAppBundle' %}
-                                    consultation.show.votes_no_nb
                                 {% endtranschoice %}
                             </p>
                         </div>

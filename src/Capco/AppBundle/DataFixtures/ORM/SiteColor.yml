@@ -19,16 +19,6 @@ Capco\AppBundle\Entity\SiteColor:
         category: settings.appearance
         value: '#ffffff'
         position: 4
-    SiteColor42:
-        keyname: color.home.bg
-        category: pages.homepage
-        value: '#16a085'
-        position: 1
-    SiteColor43:
-        keyname: color.home.title
-        category: pages.homepage
-        value: '#ffffff'
-        position: 1
     SiteColor4:
         keyname: color.header.text
         category: settings.appearance
@@ -94,16 +84,6 @@ Capco\AppBundle\Entity\SiteColor:
         keyname: color.btn.primary.text
         category: settings.appearance
         value: '#ffffff'
-        position: 17
-    SiteColor171:
-        keyname: color.btn.ghost.bg
-        category: settings.appearance
-        value: '#ffffff'
-        position: 17
-    SiteColor172:
-        keyname: color.btn.ghost.text
-        category: settings.appearance
-        value: '#1abc9c'
         position: 17
     SiteColor18:
         keyname: color.link.default

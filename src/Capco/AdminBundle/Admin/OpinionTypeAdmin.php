@@ -145,6 +145,11 @@ class OpinionTypeAdmin extends Admin
                     'choices' => Opinion::$sortCriterias,
                     'translation_domain' => 'CapcoAppBundle',
                 ))
+                ->add('voteWidgetType', 'choice', array(
+                    'label' => 'admin.fields.opinion_type.vote_widget_type',
+                    'choices' => OpinionType::$voteWidgetLabels,
+                    'translation_domain' => 'CapcoAppBundle',
+                ))
                 ->add('helpText', 'textarea', array(
                     'label' => 'admin.fields.opinion_type.help_text',
                     'required' => false,
@@ -182,6 +187,9 @@ class OpinionTypeAdmin extends Admin
                 'label' => 'admin.fields.opinion_type.color',
                 'template' => 'CapcoAdminBundle:OpinionType:color_show_field.html.twig',
                 'typesColors' => OpinionType::$colorsType,
+            ))
+            ->add('voteWidgetType', null, array(
+                'label' => 'admin.fields.opinion_type.vote_widget_type',
             ))
             ->add('helpText', null, array(
                 'label' => 'admin.fields.opinion_type.help_text',

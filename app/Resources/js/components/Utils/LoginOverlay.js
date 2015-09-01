@@ -6,7 +6,7 @@ const Button = ReactBootstrap.Button;
 
 const LoginOverlay = React.createClass({
   propTypes: {
-    children: React.PropTypes.element.isRequired,
+    children: React.PropTypes.element,
     isRegistrationEnabled: React.PropTypes.bool,
   },
   mixins: [ReactIntl.IntlMixin],
@@ -19,6 +19,9 @@ const LoginOverlay = React.createClass({
 
   // We add Popover if user is not connected
   render() {
+    if (!this.props.children) {
+      return null;
+    }
     if (LoginStore.isLoggedIn()) {
       return this.props.children;
     }
