@@ -21,7 +21,9 @@ const OpinionButtons = React.createClass({
   },
 
   renderVoteButton(type) {
-    if (type === 'ok') {
+    const opinion = this.props.opinion;
+    const voteType = this.isVersion() ? opinion.parent.type.voteWidgetType : opinion.type.voteWidgetType;
+    if (type === 'ok' && (voteType === 1 || voteType === 2)) {
       return (
         <Button bsStyle="success" className="btn--outline"
                 onClick={this.voteAction.bind(this, 1)}
@@ -32,7 +34,7 @@ const OpinionButtons = React.createClass({
         </Button>
       );
     }
-    if (type === 'mitige') {
+    if (type === 'mitige' && voteType === 2) {
       return (
         <Button bsStyle="warning" className="btn--outline"
                 onClick={this.voteAction.bind(this, 0)}
@@ -43,7 +45,7 @@ const OpinionButtons = React.createClass({
         </Button>
       );
     }
-    if (type === 'nok') {
+    if (type === 'nok' && voteType === 2) {
       return (
         <Button bsStyle="danger" className="btn--outline"
                 onClick={this.voteAction.bind(this, -1)}

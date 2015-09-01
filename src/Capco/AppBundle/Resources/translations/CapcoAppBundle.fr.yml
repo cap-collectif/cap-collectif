@@ -474,6 +474,10 @@ opinion:
       ok: D'accord
       nok: Pas d'accord
       mitige: Mitigé
+      widget_type:
+        disabled: Aucun
+        ok: Vote simple
+        both: Vote multiple
     none: Il n'y a pas encore de proposition.
     no_opinion_types: Aucun type d'opinion n'est défini.
     pinned:
