@@ -24,15 +24,9 @@ class OpinionType
         'default' => 'opinion_type.colors.default',
     ];
 
-    const VOTE_WIDGET_DISABLED = 0;
-    const VOTE_WIDGET_OK = 1;
-    const VOTE_WIDGET_BOTH = 2;
-
-    public static $voteWidgetLabels = [
-        self::VOTE_WIDGET_DISABLED => 'opinion.show.vote.widget_type.disabled',
-        self::VOTE_WIDGET_OK => 'opinion.show.vote.widget_type.ok',
-        self::VOTE_WIDGET_BOTH => 'opinion.show.vote.widget_type.both',
-    ];
+    const VOTE_WIDGET_TYPE_DISABLED = 0;
+    const VOTE_WIDGET_TYPE_ACCORD = 1;
+    const VOTE_WIDGET_TYPE_FAVORABLE = 2;
 
     /**
      * @var int
@@ -75,7 +69,7 @@ class OpinionType
      *
      * @ORM\Column(name="vote_widget_type", type="integer")
      */
-    private $voteWidgetType = self::VOTE_WIDGET_BOTH;
+    private $voteWidgetType;
 
     /**
      * @var \DateTime
@@ -141,7 +135,7 @@ class OpinionType
 
     public function __construct()
     {
-        $this->voteWidgetType = self::VOTE_WIDGET_BOTH;
+        $this->voteWidgetType = self::VOTE_WIDGET_TYPE_ACCORD;
         $this->Opinions = new ArrayCollection();
         $this->updatedAt = new \Datetime();
         $this->appendixTypes = new ArrayCollection();
