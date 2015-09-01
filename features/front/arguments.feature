@@ -47,6 +47,7 @@ Feature: Arguments
       | opinionSlug      | opinion-2                        |
     And I should see "5" in the "#arg-1 .opinion__votes-nb" element
     When I follow "Modifier"
+    And I wait 3 seconds
     And I fill in the following:
       | capco_app_argument_body      | Je modifie mon argument !   |
     And I check "capco_app_argument_confirm"
