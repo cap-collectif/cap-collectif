@@ -303,6 +303,7 @@ consultation:
     contributors_nb: "]-Inf, 1] participant | ]1,Inf[ participants"
     opinions_no_nb: "]-Inf, 1] opinion | ]1,Inf[ opinions"
     arguments_no_nb: "]-Inf, 1] argument | ]1,Inf[ arguments"
+    votes_no_nb: "]-Inf, 1] vote | ]1,Inf[ votes"
     global:
       title: Vue d'ensemble
     trashed:

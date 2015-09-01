@@ -14,7 +14,7 @@ function strip(value) {
 
 function everythingHasChanged(diff) {
   const changed = diff.every(function(part) {
-    if (!part.added && !part.removed && part.value !== ' ') {
+    if (!part.added && !part.removed && part.value !== " ") {
       return false;
     }
     return true;

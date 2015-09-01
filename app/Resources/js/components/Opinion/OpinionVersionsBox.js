@@ -3,9 +3,6 @@ import OpinionVersionForm from './OpinionVersionForm';
 import Loader from '../Utils/Loader';
 import Fetcher from '../../services/Fetcher';
 
-const Row = ReactBootstrap.Row;
-const Col = ReactBootstrap.Col;
-
 const OpinionVersionsBox = React.createClass({
   propTypes: {
     opinionId: React.PropTypes.number.isRequired,
@@ -36,7 +33,7 @@ const OpinionVersionsBox = React.createClass({
   renderFilter() {
     if (this.state.versions.length > 1) {
       return (
-        <select ref="filter" className="form-control pull-right" value={this.state.filter} onChange={() => this.updateSelectedValue()}>
+        <select ref="filter" className="hidden-xs pull-right" value={this.state.filter} onChange={() => this.updateSelectedValue()}>
           <option value="popular">{this.getIntlMessage('global.popular')}</option>
           <option value="last">{this.getIntlMessage('global.last')}</option>
           <option value="old">{this.getIntlMessage('global.old')}</option>
@@ -48,14 +45,8 @@ const OpinionVersionsBox = React.createClass({
   render() {
     return (
       <div>
-        <Row>
-          <Col xs={12} sm={6} md={6}>
-            <OpinionVersionForm {...this.props} />
-          </Col>
-          <Col xs={12} sm={6} md={6} className="block--first-mobile">
-            { this.renderFilter() }
-          </Col>
-        </Row>
+        <OpinionVersionForm {...this.props} />
+        { this.renderFilter() }
         {!this.state.isLoading
           ? <OpinionVersionList versions={this.state.versions} />
           : <Loader />
