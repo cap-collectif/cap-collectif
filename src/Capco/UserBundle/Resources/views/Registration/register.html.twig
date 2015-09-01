@@ -21,62 +21,22 @@
 {% block javascripts %}
     {{ parent()}}
     <script>
-        console.log(Mailcheck.defaultDomains);
-        const domains = [
-            '9online.fr',
-            'aliceadsl.fr',
-            'aol.fr',
-            'aol.com',
-            'bbox.fr',
-            'cap-collectif.com',
-            'club-internet.fr',
-            'democratieouverte.org',
-            'free.fr',
-            'gmail.com',
-            'googlemail.com',
-            'hotmail.com',
-            'hotmail.fr',
-            'icloud.com',
-            'jolicode.com',
-            'laposte.net',
-            'live.com',
-            'live.fr',
-            'me.com',
-            'msn.com',
-            'msn.fr',
-            'neuf.fr',
-            'numericable.com',
-            'numericable.fr',
-            'orange.fr',
-            'outlook.com',
-            'outlook.fr',
-            'sfr.fr',
-            'voila.fr',
-            'wanadoo.fr',
-            'yahoo.com',
-            'yahoo.fr',
-        ];
-        var lastSuggestion = "";
-        $('#sonata_user_registration_form_email').on('blur', function() {
-            var self = $(this);
-            $(this).mailcheck({
-                domains: domains,
-                suggested: function(element, suggestion) {
-                    $('.js-email-correction').parent().hide();
-                    self.after('<p class="registration__help">{{ "global.helper.typo"|trans({}, "CapcoAppBundle") }} <a href="#" class="js-email-correction">'+suggestion.full+'</a> ?</p>');
-                    lastSuggestion = suggestion.full;
-                },
-                empty: function (element) {
-                    $('.js-email-correction').parent().hide();
-                    console.log('empty');
-                    self.after('');
-                }
-            });
-        });
+    var lastSuggestion = "";
+    $('#sonata_user_registration_form_email').on('blur', function() {
+      var self = $(this);
+      $(this).mailcheck({
+        suggested: function(element, suggestion) {
+            $('.js-email-correction').parent().hide();
+            self.after('<p class="registration__help">{{ "global.helper.typo"|trans({}, "CapcoAppBundle") }} <a href="#" class="js-email-correction">'+suggestion.full+'</a> ?</p>');
+            lastSuggestion = suggestion.full;
+        }
+      });
+    });
 
-        $(document).on('click', '.js-email-correction', function() {
-            $('#sonata_user_registration_form_email').val(lastSuggestion);
-            $(this).parent().hide();
-        });
+    $(document).on('click', '.js-email-correction', function() {
+        $('#sonata_user_registration_form_email').val(lastSuggestion);
+        $(this).parent().hide();
+    });
+
     </script>
 {% endblock %}
