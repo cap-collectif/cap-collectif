@@ -3,7 +3,6 @@ Capco\AppBundle\Entity\OpinionType:
         title: Le problème constaté
         shortName: Problèmes
         position: 1
-        voteWidgetType: 3
         color: red
         isEnabled: 0
         defaultFilter: votes
@@ -12,7 +11,6 @@ Capco\AppBundle\Entity\OpinionType:
         title: Les causes
         shortName: Causes
         position: 2
-        voteWidgetType: 1
         color: orange
         defaultFilter: votes
         isEnabled: true
@@ -20,7 +18,6 @@ Capco\AppBundle\Entity\OpinionType:
         title: Les enjeux
         shortName: Enjeux
         position: 3
-        voteWidgetType: 2
         color: bluedark
         defaultFilter: votes
         isEnabled: true
@@ -28,7 +25,6 @@ Capco\AppBundle\Entity\OpinionType:
         title: Les solutions
         shortName: Solutions
         position: 4
-        voteWidgetType: 2
         color: green
         defaultFilter: votes
         isEnabled: true
@@ -36,7 +32,6 @@ Capco\AppBundle\Entity\OpinionType:
         title: Articles
         shortName: Articles
         position: 5
-        voteWidgetType: 2
         color: blue
         defaultFilter: positions
         isEnabled: true
