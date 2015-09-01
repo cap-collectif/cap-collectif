@@ -21,7 +21,6 @@
 {% block javascripts %}
     {{ parent()}}
     <script>
-        console.log(Mailcheck.defaultDomains);
         const domains = [
             '9online.fr',
             'aliceadsl.fr',
@@ -68,7 +67,6 @@
                 },
                 empty: function (element) {
                     $('.js-email-correction').parent().hide();
-                    console.log('empty');
                     self.after('');
                 }
             });

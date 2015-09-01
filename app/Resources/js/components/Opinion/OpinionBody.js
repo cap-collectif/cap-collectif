@@ -1,7 +1,5 @@
 import CustomDiff from '../../services/CustomDiff';
 
-const TabbedArea = ReactBootstrap.TabbedArea;
-const TabPane = ReactBootstrap.TabPane;
 const Panel = ReactBootstrap.Panel;
 
 const OpinionBody = React.createClass({
@@ -29,36 +27,11 @@ const OpinionBody = React.createClass({
       );
     }
 
-    if (!this.hasAppendices()) {
-      return <div dangerouslySetInnerHTML={{__html: opinion.body}} />;
-    }
-
-    return (
-      <TabbedArea defaultActiveKey={1} bsStyle="pills" className="nav-center">
-        <TabPane eventKey={1} tab={this.getIntlMessage('global.content')}>
-          <div dangerouslySetInnerHTML={{__html: opinion.body}} />
-        </TabPane>
-        {
-          opinion.appendices.map((appendix, index) => {
-            if (appendix.body) {
-              return (
-                <TabPane eventKey={index + 2} tab={appendix.type.title}>
-                  <div dangerouslySetInnerHTML={{__html: appendix.body}}/>
-                </TabPane>
-              );
-            }
-          })
-        }
-      </TabbedArea>
-    );
+    return <div dangerouslySetInnerHTML={{__html: opinion.body}} />;
   },
 
   isVersion() {
     return this.props.opinion.parent ? true : false;
-  },
-
-  hasAppendices() {
-    return this.props.opinion.appendices.length >= 1;
   },
 
 });

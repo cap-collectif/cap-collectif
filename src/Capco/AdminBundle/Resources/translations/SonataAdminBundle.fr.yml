@@ -11,8 +11,8 @@ admin.group.parameters: Réglages
 admin.group.pages: Pages
 
 # Dashboard names
-admin.label.appendix: Annexes
-admin.label.appendix_type: Types d'annexe
+admin.label.appendix: Éléments de contexte
+admin.label.appendix_type: Éléments de contexte
 admin.label.page: Pages statiques
 admin.label.menu_item: Navigation
 admin.label.argument: Arguments
@@ -311,9 +311,9 @@ admin:
       created_at: Création
     opinion:
       group_content: Proposition
-      group_appendices: Annexes
+      group_appendices: Contexte
       group_publication: Options de publication
-      appendices: Annexes
+      appendices: Éléments de contexte
       title: Titre
       author: Auteur
       body: Contenu
@@ -337,8 +337,8 @@ admin:
     opinion_type:
       group_info: Type de proposition
       group_options: Options
-      group_appendices: Annexes
-      appendices: Annexes
+      group_appendices: Contexte
+      appendices: Éléments de contexte
       title: Titre
       short_name: Nom court
       vote_widget_type: Type de vote
@@ -353,7 +353,7 @@ admin:
       versionable: Versionable
     opiniontype_appendixtype:
       position: Position
-      appendix_type: Type d'annexe
+      appendix_type: Élément de contexte
       appendix_type_add: Ajouter
     opinion_vote:
       opinion: Proposition

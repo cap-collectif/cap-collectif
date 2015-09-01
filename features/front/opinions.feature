@@ -113,8 +113,12 @@ Feature: Opinions
       | stepSlug         | elaboration-de-la-loi            |
       | opinionTypeSlug  | articles                         |
       | opinionSlug      | article-1                        |
-    And I wait 5 seconds
-    And I follow "Exposé des motifs"
     And I wait 3 seconds
     Then I should see "Motifs 1"
+    And I press "Exposé des motifs"
+    And I wait 3 seconds
+    Then I should not see "Motifs 1"
+    And I press "Étude d'impact"
+    And I wait 3 seconds
+    Then I should see "Impacts 1"
 

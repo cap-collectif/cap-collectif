@@ -89,15 +89,18 @@
 {% if null == footer2Bg %}{% set footer2Bg = '#16a085' %}{% endif %}
 
 <style>
-
-    a {
+    a,
+    .btn.btn-link {
         color: {{ link | raw }};
     }
 
     a:hover,
     a:focus,
     .opinion .opinion__body .opinion__title a:hover,
-    .opinion .opinion__body .opinion__user a:hover {
+    .opinion .opinion__body .opinion__user a:hover,
+    .btn.btn-link:hover,
+    .btn.btn-link:active,
+    .btn.btn-link.active {
         color: {{ linkHover | raw }};
     }
 

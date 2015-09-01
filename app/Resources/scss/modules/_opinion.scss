@@ -533,3 +533,21 @@
   padding: 1px 5px;
   vertical-align: middle;
 }
+
+.opinion__appendix__title:hover,
+.opinion__appendix__title:active,
+.opinion__appendix__title.active,
+.opinion__appendix__title:focus {
+  text-decoration: none;
+}
+
+.opinion__appendix__content {
+  border: none;
+  @include box-shadow(none);
+  background-color: transparent;
+  margin-bottom: 0;
+
+  .panel-body {
+    padding: 0;
+  }
+}

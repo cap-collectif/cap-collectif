@@ -1,5 +1,6 @@
 import OpinionPreview from './OpinionPreview';
 import OpinionButtons from './OpinionButtons';
+import OpinionAppendices from './OpinionAppendices';
 import OpinionBody from './OpinionBody';
 import VotePiechart from '../Utils/VotePiechart';
 import UserAvatar from '../User/UserAvatar';
@@ -58,6 +59,7 @@ const OpinionBox = React.createClass({
           </div>
           <OpinionPreview opinion={opinion} link={false} />
         </div>
+        <OpinionAppendices opinion={opinion} />
         <div className="opinion__description">
           <OpinionBody opinion={opinion} />
           <div className="opinion__buttons" style={{marginBottom: 0}}>
