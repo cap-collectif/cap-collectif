@@ -21,6 +21,7 @@ Capco\AppBundle\Entity\OpinionType:
         color: bluedark
         defaultFilter: votes
         isEnabled: true
+        sourceable: false
     opinionType4:
         title: Les solutions
         shortName: Solutions

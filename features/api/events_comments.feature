@@ -23,9 +23,7 @@ Feature: Events comments
             "displayName": @string@,
             "uniqueId": @string@,
             "isAdmin": @boolean@,
-            "media": {
-              "url": @string@
-            },
+            "media": @...@,
             "_links": {
               "profile": @string@,
               "settings": @string@

@@ -350,6 +350,7 @@ admin:
       created_at: Création
       updated_at: Mise à jour
       position: Position
+      sourceable: Sources
       versionable: Versionable
     opiniontype_appendixtype:
       position: Position

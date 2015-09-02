@@ -56,9 +56,7 @@ Feature: Opinions Versions
             "displayName": @string@,
             "uniqueId": @string@,
             "isAdmin": @boolean@,
-            "media": {
-              "url": "@string@.startsWith('/media')"
-            },
+            "media": @...@,
             "_links": {
               "profile": @string@,
               "settings": @string@
@@ -131,9 +129,7 @@ Feature: Opinions Versions
           "displayName": @string@,
           "uniqueId": @string@,
           "isAdmin": @boolean@,
-          "media": {
-            "url": "@string@.startsWith('/media')"
-          },
+          "media": @...@,
           "_links": {
             "profile": @string@,
             "settings": @string@

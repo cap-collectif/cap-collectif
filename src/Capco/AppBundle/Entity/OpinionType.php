@@ -127,6 +127,13 @@ class OpinionType
     private $versionable = false;
 
     /**
+     * @var bool
+     *
+     * @ORM\Column(name="sourceable", type="boolean")
+     */
+    private $sourceable = true;
+
+    /**
      * @var string
      *
      * @ORM\Column(name="help_text", type="string", length=255, nullable=true)
@@ -436,6 +443,22 @@ class OpinionType
         $this->versionable = $versionable;
 
         return $this;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function isSourceable()
+    {
+        return $this->sourceable;
+    }
+
+    /**
+     * @param boolean $sourceable
+     */
+    public function setSourceable($sourceable)
+    {
+        $this->sourceable = $sourceable;
     }
 
     /**

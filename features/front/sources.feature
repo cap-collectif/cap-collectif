@@ -39,8 +39,8 @@ Feature: Source
     And I visited "opinion page" with:
       | consultationSlug | croissance-innovation-disruption |
       | stepSlug         | collecte-des-avis                |
-      | opinionTypeSlug  | enjeux                           |
-      | opinionSlug      | opinion-4                        |
+      | opinionTypeSlug  | problemes                        |
+      | opinionSlug      | opinion-1                        |
     And I wait 3 seconds
     And I go on the sources tab
     When I vote for the first source

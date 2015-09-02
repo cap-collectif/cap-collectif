@@ -23,9 +23,7 @@ Feature: Ideas comments
             "displayName": @string@,
             "isAdmin": @boolean@,
             "uniqueId": @string@,
-            "media": {
-              "url": "@string@.startsWith('/media')"
-            },
+            "media": @...@,
             "_links": {
               "profile": @string@,
               "settings": @string@

@@ -49,7 +49,7 @@ Capco\UserBundle\Entity\User:
         enabled: true
         userType: @UserType1
         plainPassword: admin
-        Media: @MediaUser3
+        Media: null
         roles:
          - 'ROLE_ADMIN'
         isTermsAccepted: true
@@ -61,7 +61,7 @@ Capco\UserBundle\Entity\User:
         email: user@test.com
         enabled: true
         userType: @UserType1
-        Media: @MediaUser3
+        Media: null
         plainPassword: user
         roles:
          - 'ROLE_USER'

@@ -22,7 +22,8 @@ Feature: Opinions
           "id": @integer@,
           "title": @string@,
           "color": @string@,
-          "voteWidgetType": @integer@
+          "voteWidgetType": @integer@,
+          "sourceable": @boolean@
         },
 
         "arguments_count": @integer@,
@@ -55,9 +56,7 @@ Feature: Opinions
           "displayName": @string@,
           "uniqueId": @string@,
           "isAdmin": @boolean@,
-          "media": {
-            "url": "@string@.startsWith('/media')"
-          },
+          "media": @...@,
           "_links": {
             "profile": @string@,
             "settings": @string@
@@ -140,9 +139,7 @@ Feature: Opinions
             "displayName": @string@,
             "uniqueId": @string@,
             "isAdmin": @boolean@,
-            "media": {
-              "url": "@string@.startsWith('/media')"
-            },
+            "media": @...@,
             "_links": {
               "profile": @string@,
               "settings": @string@

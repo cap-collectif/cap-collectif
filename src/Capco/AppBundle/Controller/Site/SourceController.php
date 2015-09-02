@@ -38,11 +38,11 @@ class SourceController extends Controller
 
         $opinion = $this->getDoctrine()->getRepository('CapcoAppBundle:Opinion')->getOneBySlug($opinionSlug);
 
-        if ($opinion == null) {
+        if (!$opinion) {
             throw $this->createNotFoundException($this->get('translator')->trans('opinion.error.not_found', array(), 'CapcoAppBundle'));
         }
 
-        if (false == $opinion->canContribute()) {
+        if (!$opinion->canContribute() || !$opinion->canAddSources()) {
             throw new AccessDeniedException($this->get('translator')->trans('opinion.error.no_contribute', array(), 'CapcoAppBundle'));
         }
 

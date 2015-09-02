@@ -721,6 +721,14 @@ class Opinion
         return 0;
     }
 
+    public function canAddSources()
+    {
+        if ($this->getOpinionType()) {
+            return $this->getOpinionType()->isSourceable();
+        }
+        return false;
+    }
+
     // ******************* Lifecycle *********************************
 
     /**

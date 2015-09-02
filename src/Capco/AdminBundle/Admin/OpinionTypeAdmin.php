@@ -44,6 +44,9 @@ class OpinionTypeAdmin extends Admin
             ->add('versionable', null, array(
                 'label' => 'admin.fields.opinion_type.versionable',
             ))
+            ->add('sourceable', null, array(
+                'label' => 'admin.fields.opinion_type.sourceable',
+            ))
             ->add('updatedAt', null, array(
                 'label' => 'admin.fields.opinion_type.updated_at',
             ))
@@ -80,6 +83,10 @@ class OpinionTypeAdmin extends Admin
                 'label' => 'admin.fields.opinion_type.versionable',
                 'editable' => true,
             ))
+            ->add('sourceable', null, array(
+                'label' => 'admin.fields.opinion_type.sourceable',
+                'editable' => true,
+            ))
             ->add('updatedAt', 'datetime', array(
                 'label' => 'admin.fields.opinion_type.updated_at',
             ))
@@ -114,59 +121,63 @@ class OpinionTypeAdmin extends Admin
         $formMapper
             // Info
             ->with('admin.fields.opinion_type.group_info')
-                ->add('title', null, array(
-                    'label' => 'admin.fields.opinion_type.title',
-                ))
-                ->add('shortName', null, array(
-                    'label' => 'admin.fields.opinion_type.short_name',
-                ))
-                ->add('position', null, array(
-                    'label' => 'admin.fields.opinion_type.position',
-                ))
+            ->add('title', null, array(
+                'label' => 'admin.fields.opinion_type.title',
+            ))
+            ->add('shortName', null, array(
+                'label' => 'admin.fields.opinion_type.short_name',
+            ))
+            ->add('position', null, array(
+                'label' => 'admin.fields.opinion_type.position',
+            ))
             ->end()
 
             // Options
             ->with('admin.fields.opinion_type.group_options')
-                ->add('isEnabled', null, array(
-                    'label' => 'admin.fields.opinion_type.is_enabled',
-                    'required' => false,
-                ))
-                ->add('color', 'choice', array(
-                    'label' => 'admin.fields.opinion_type.color',
-                    'choices' => OpinionType::$colorsType,
-                    'translation_domain' => 'CapcoAppBundle',
-                ))
-                ->add('versionable', null, array(
-                    'label' => 'admin.fields.opinion_type.versionable',
-                    'required' => false,
-                ))
-                ->add('defaultFilter', 'choice', array(
-                    'label' => 'admin.fields.opinion_type.default_filter',
-                    'choices' => Opinion::$sortCriterias,
-                    'translation_domain' => 'CapcoAppBundle',
-                ))
-                ->add('voteWidgetType', 'choice', array(
-                    'label' => 'admin.fields.opinion_type.vote_widget_type',
-                    'choices' => OpinionType::$voteWidgetLabels,
-                    'translation_domain' => 'CapcoAppBundle',
-                ))
-                ->add('helpText', 'textarea', array(
-                    'label' => 'admin.fields.opinion_type.help_text',
-                    'required' => false,
-                ))
+            ->add('isEnabled', null, array(
+                'label' => 'admin.fields.opinion_type.is_enabled',
+                'required' => false,
+            ))
+            ->add('color', 'choice', array(
+                'label' => 'admin.fields.opinion_type.color',
+                'choices' => OpinionType::$colorsType,
+                'translation_domain' => 'CapcoAppBundle',
+            ))
+            ->add('versionable', null, array(
+                'label' => 'admin.fields.opinion_type.versionable',
+                'required' => false,
+            ))
+            ->add('sourceable', null, array(
+                'label' => 'admin.fields.opinion_type.sourceable',
+                'required' => false,
+            ))
+            ->add('defaultFilter', 'choice', array(
+                'label' => 'admin.fields.opinion_type.default_filter',
+                'choices' => Opinion::$sortCriterias,
+                'translation_domain' => 'CapcoAppBundle',
+            ))
+            ->add('voteWidgetType', 'choice', array(
+                'label' => 'admin.fields.opinion_type.vote_widget_type',
+                'choices' => OpinionType::$voteWidgetLabels,
+                'translation_domain' => 'CapcoAppBundle',
+            ))
+            ->add('helpText', 'textarea', array(
+                'label' => 'admin.fields.opinion_type.help_text',
+                'required' => false,
+            ))
             ->end()
 
             // Appendices
             ->with('admin.fields.opinion_type.group_appendices')
-                ->add('appendixTypes', 'sonata_type_collection', [
-                    'label' => 'admin.fields.opinion_type.appendices',
-                    'by_reference' => false,
-                    'required' => false,
-                ], [
-                    'edit' => 'inline',
-                    'inline' => 'table',
-                    'sortable' => 'position',
-                ])
+            ->add('appendixTypes', 'sonata_type_collection', [
+                'label' => 'admin.fields.opinion_type.appendices',
+                'by_reference' => false,
+                'required' => false,
+            ], [
+                'edit' => 'inline',
+                'inline' => 'table',
+                'sortable' => 'position',
+            ])
             ->end()
         ;
     }
@@ -202,6 +213,9 @@ class OpinionTypeAdmin extends Admin
             ))
             ->add('versionable', null, array(
                 'label' => 'admin.fields.opinion_type.versionable',
+            ))
+            ->add('sourceable', null, array(
+                'label' => 'admin.fields.opinion_type.sourceable',
             ))
             ->add('position', null, array(
                 'label' => 'admin.fields.opinion_type.position',
