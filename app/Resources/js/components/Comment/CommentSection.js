@@ -3,7 +3,10 @@ import CommentForm from './CommentForm';
 import CommentActions from '../../actions/CommentActions';
 import CommentStore from '../../stores/CommentStore';
 import Loader from '../Utils/Loader';
+import FlashMessages from '../Utils/FlashMessages';
 
+const Row = ReactBootstrap.Row;
+const Col = ReactBootstrap.Col;
 const FormattedMessage = ReactIntl.FormattedMessage;
 const MessagePagination = 10;
 
@@ -25,6 +28,10 @@ const CommentSection = React.createClass({
       filter: 'last',
       offset: 0,
       limit: MessagePagination,
+      messages: {
+        'errors': [],
+        'success': [],
+      },
     };
   },
 
@@ -47,6 +54,9 @@ const CommentSection = React.createClass({
   },
 
   onChange() {
+    this.setState({
+      messages: CommentStore.messages,
+    });
     if (CommentStore.isSync) {
       this.setState(
       {
@@ -72,13 +82,13 @@ const CommentSection = React.createClass({
   renderFilter() {
     if (this.state.count > 1) {
       return (
-        <div className="col-xs-offset-2 col-sm-4 hidden-xs">
+        <Col xsOffset={2} sm={4} className="hidden-xs">
           <select ref="filter" className="h2 form-control" value={this.state.filter} onChange={() => this.updateSelectedValue()}>
             <option value="popular">{this.getIntlMessage('global.popular')}</option>
             <option value="last">{this.getIntlMessage('global.last')}</option>
             <option value="old">{this.getIntlMessage('global.old')}</option>
           </select>
-        </div>
+        </Col>
       );
     }
   },
@@ -97,15 +107,16 @@ const CommentSection = React.createClass({
   render() {
     return (
       <div className="comments__section">
-        <div className="row">
-          <h2 className="h2 col-sm-6">
+        <FlashMessages errors={this.state.messages.errors} success={this.state.messages.success} />
+        <Row>
+          <Col componentClass="h2" sm={6}>
             <FormattedMessage
               message={this.getIntlMessage('comment.list')}
               num={this.state.countWithAnswers}
             />
-          </h2>
+          </Col>
           { this.renderFilter() }
-        </div>
+        </Row>
         <Loader show={this.state.isLoading} />
         {(!this.state.isLoading
             ? <CommentForm comment={this.comment.bind(this)} focus={false} />

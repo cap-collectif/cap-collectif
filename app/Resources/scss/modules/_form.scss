@@ -20,3 +20,57 @@ Hack form button - radio check
 [data-toggle=buttons] > .btn > .radio label {
   padding-left: 0;
 }
+
+.form-group.has-warning {
+  margin-bottom: 5px;
+}
+
+.flashmessages {
+  margin-bottom: 15px;
+}
+
+.help-block,
+.error-block {
+  font-size: 85%;
+  margin-top: 0;
+  margin-bottom: 5px;
+}
+
+.help-block {
+  color: $excerpt;
+}
+
+.has-warning {
+
+  .form-control {
+    border-color: $warning-text;
+    background-color: $warning-bg;
+  }
+
+  .cke_wysiwyg_frame {
+    background-color: $warning-bg;
+  }
+  .control-label,
+  .error-block {
+    color: $warning-text;
+  }
+
+  .help-block {
+    color: $excerpt;
+  }
+}
+
+.has-success {
+
+  .form-control {
+    border-color: $success-text;
+  }
+  .control-label,
+  .error-block {
+    color: $success-text;
+  }
+
+  .help-block {
+    color: $excerpt;
+  }
+}

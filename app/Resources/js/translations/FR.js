@@ -18,8 +18,14 @@ export default {
             trashed: {
                 label: 'Dans la corbeille',
             },
+            constraints: {
+                author_email: 'Cette valeur n\'est pas une adresse email valide.',
+                author_name: 'Votre nom doit faire au moins 2 caractères',
+                body: 'Votre commentaire doit faire au moins 2 caractères',
+            },
             write: 'Ecrire un commentaire...',
             edited: 'édité le',
+            submit_success: 'Merci ! Votre commentaire a bien été ajouté.',
             submit_error: 'Désolé, un problème est survenu lors de l\'ajout de votre commentaire.',
             more: 'Voir plus de commentaires',
             submit: 'Commenter',
@@ -40,6 +46,12 @@ export default {
             body: 'Description *',
             type: 'Type *',
             infos: 'Merci d\'examiner les sources existantes en premier lieu afin de ne pas soumettre de doublon. Vous pouvez voter pour celles existantes !',
+            constraints: {
+                body: 'Le contenu de la source doit faire au moins 2 caractères.',
+                title: 'Le titre de la source doit faire au moins 2 caractères.',
+                category: 'Veuillez choisir un type pour soumettre une source',
+                link: 'Cette valeur n\'est pas une URL valide.',
+            },
         },
         argument: {
             yes: {
@@ -49,6 +61,10 @@ export default {
             no: {
                 add: 'Ajouter un argument contre',
                 list: '{num, plural, =0{0 argument contre} one{# argument contre} other{# arguments contre}}',
+            },
+            constraints: {
+                min: 'L\'argument doit faire au moins 3 caractères.',
+                max: 'Les arguments sont limités à 2000 caractères. Soyez plus concis ou publiez une nouvelle proposition.',
             },
         },
         opinion: {
@@ -64,7 +80,7 @@ export default {
                 comment: 'Commentaire *',
                 comment_helper: 'Expliquez pourquoi vous souhaitez apporter ces modifications',
                 title_error: 'Le titre doit contenir au moins 2 caractères.',
-                body_error: 'Vous devez modifier le contenu de la proposition pour pouvoir proposer une nouvelle version.',
+                body_error: 'Vous devez modifier le contenu de la proposition d\'origine pour pouvoir proposer une version.',
             },
         },
         vote: {

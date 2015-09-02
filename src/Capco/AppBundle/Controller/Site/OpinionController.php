@@ -428,30 +428,34 @@ class OpinionController extends Controller
             ->getForm();
 
         if ('POST' === $request->getMethod()) {
-            $form = null;
 
             if ($request->request->has('argumentFormYes')) {
                 $argument->setType(Argument::TYPE_FOR);
-                $form = $argumentFormYes;
-                $this->handleCreateArgumentForm($opinion, $argument, $form, $request);
+                $argumentFormYes = $this->handleCreateArgumentForm($opinion, $argument, $argumentFormYes, $request);
+                if ($argumentFormYes === true) {
+                    return $this->redirect($this->generateUrl('app_consultation_show_opinion', ['consultationSlug' => $consultationSlug, 'stepSlug' => $stepSlug, 'opinionTypeSlug' => $opinionTypeSlug, 'opinionSlug' => $opinionSlug]));
+                }
             }
 
             if ($request->request->has('argumentFormNo')) {
                 $argument->setType(Argument::TYPE_AGAINST);
-                $form = $argumentFormNo;
-                $this->handleCreateArgumentForm($opinion, $argument, $form, $request);
+                $argumentFormNo = $this->handleCreateArgumentForm($opinion, $argument, $argumentFormNo, $request);
+                if ($argumentFormNo === true) {
+                    return $this->redirect($this->generateUrl('app_consultation_show_opinion', ['consultationSlug' => $consultationSlug, 'stepSlug' => $stepSlug, 'opinionTypeSlug' => $opinionTypeSlug, 'opinionSlug' => $opinionSlug]));
+                }
             }
 
             if ($request->request->has('opinionVoteForm')) {
-                $form = $opinionVoteForm;
-                $this->handleOpinionVoteForm($opinion, $opinionVote, $userHasVoted, $form, $request);
+                $opinionVoteForm = $this->handleOpinionVoteForm($opinion, $opinionVote, $userHasVoted, $opinionVoteForm, $request);
+                if ($opinionVoteForm === true) {
+                    return $this->redirect($this->generateUrl('app_consultation_show_opinion', ['consultationSlug' => $consultationSlug, 'stepSlug' => $stepSlug, 'opinionTypeSlug' => $opinionTypeSlug, 'opinionSlug' => $opinionSlug]));
+                }
             }
 
             if ($request->request->has('sortArgumentsForm')) {
-                $form = $sortArgumentsForm;
-                $form->handleRequest($request);
-                if ($form->isValid()) {
-                    $data = $form->getData();
+                $sortArgumentsForm->handleRequest($request);
+                if ($sortArgumentsForm->isValid()) {
+                    $data = $sortArgumentsForm->getData();
 
                     return $this->redirect($this->generateUrl('app_consultation_show_opinion_sortarguments', array(
                         'argumentSort' => $data['argumentSort'],
@@ -462,8 +466,6 @@ class OpinionController extends Controller
                     )));
                 }
             }
-
-            return $this->redirect($this->generateUrl('app_consultation_show_opinion', ['consultationSlug' => $consultationSlug, 'stepSlug' => $stepSlug, 'opinionTypeSlug' => $opinionTypeSlug, 'opinionSlug' => $opinionSlug]));
         } else {
             $sortArgumentsForm->get('argumentSort')->setData($argumentSort);
         }
@@ -520,8 +522,10 @@ class OpinionController extends Controller
             $em->persist($argument);
             $em->flush();
             $this->get('session')->getFlashBag()->add('success', $this->get('translator')->trans('argument.create.success'));
+            return true;
         } else {
             $this->get('session')->getFlashBag()->add('danger', $this->get('translator')->trans('argument.create.error'));
+            return $form;
         }
     }
 
