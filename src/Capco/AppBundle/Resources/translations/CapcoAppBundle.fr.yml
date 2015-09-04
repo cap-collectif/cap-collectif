@@ -402,7 +402,7 @@ argument:
 
 version:
   show:
-    count: "]-Inf, 0] 0 autre version | {1} 1 autre version | ]1,Inf[ %count% autres versions"
+    count: "]-Inf, 0] 0 nouvelle version | {1} 1 nouvelle version | ]1,Inf[ %count% nouvelles versions"
 
 appendix:
   form:

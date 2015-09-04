@@ -49,6 +49,12 @@ class Argument
      *
      * @ORM\Column(name="body", type="text")
      * @Assert\NotBlank()
+     * @Assert\Length(
+     *  min="3",
+     *  max="2000",
+     *  minMessage="argument.body.min_length",
+     *  maxMessage="argument.body.max_length",
+     * )
      */
     private $body;
 
