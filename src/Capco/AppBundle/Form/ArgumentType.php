@@ -28,7 +28,6 @@ class ArgumentType extends AbstractType
                     'mapped' => false,
                     'label' => 'argument.form.confirm',
                     'required' => true,
-                    'translation_domain' => 'CapcoAppBundle',
                     'constraints' => [new True(['message' => 'argument.votes_not_confirmed'])],
                 ))
             ;

@@ -9,10 +9,10 @@
             <form method="post" {{ form_enctype(form) }}>
                 <div class="form-group">
                     <label class="sr-only" for="arg{{ type_text }}-input">{{ 'argument.create.label'|trans({}, 'CapcoAppBundle') }} {{ type_display|trans({}, 'CapcoAppBundle') }}</label>
-                    {{ form_errors(form.body) }}
                     <a class="connection-popover-js">
                         {{ form_widget(form.body, {'id': 'arg' ~ type_text ~ '-input', 'attr': {'data-toggle': 'collapse', 'href': '.arg' ~ type_text ~ '-btns', 'rows': 2, 'placeholder':'Ajouter un argument ' ~ type_display|trans({}, 'CapcoAppBundle'), } }) }}
                     </a>
+                    {{ form_errors(form.body) }}
                     {{ form_rest(form) }}
                     {% if null != app.user %}
                         <div class="collapse  arg{{ type_text }}-btns">

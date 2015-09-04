@@ -1,8 +1,7 @@
 import LoginStore from '../../stores/LoginStore';
+import Validator from '../../services/Validator';
 import OpinionActions from '../../actions/OpinionActions';
 import LoginOverlay from '../Utils/LoginOverlay';
-import ValidatorMixin from '../../utils/ValidatorMixin';
-import FlashMessages from '../Utils/FlashMessages';
 
 const Button = ReactBootstrap.Button;
 const Input = ReactBootstrap.Input;
@@ -12,57 +11,40 @@ const OpinionArgumentForm = React.createClass({
     type: React.PropTypes.string.isRequired,
     opinion: React.PropTypes.object.isRequired,
   },
-  mixins: [ReactIntl.IntlMixin, React.addons.LinkedStateMixin, ValidatorMixin],
+  mixins: [ReactIntl.IntlMixin, React.addons.LinkedStateMixin],
 
   getInitialState() {
     return {
       body: '',
+      submitted: false,
       isSubmitting: false,
     };
-  },
-
-  componentDidMount() {
-    this.initForm('form', {
-      body: {
-        min: {value: 3, message: 'argument.constraints.min'},
-        max: {value: 2000, message: 'argument.constraints.max'},
-      },
-    });
   },
 
   componentDidUpdate() {
     autosize(React.findDOMNode(this.refs.body).querySelector('textarea'));
   },
 
-  renderFormErrors(field) {
-    const errors = this.getErrorsMessages(field);
-    if (errors.length > 0) {
-      return <FlashMessages errors={errors} form={true} />;
-    }
-    return null;
+  getStyle(field) {
+    return !this.isValid(field) ? 'error' : this.state.submitted ? 'success' : '';
   },
 
   render() {
     return (
       <div className="opinion__body box">
         <div className="opinion__data">
-          <form ref="form">
+          <form>
             <LoginOverlay children={
-              <div className={'form-group ' + this.getGroupStyle('body')}>
-                <label htmlFor="body" className="control-label h5 sr-only">
-                  {this.getIntlMessage('argument.' + this.props.type + '.add')}
-                </label>
-                <Input
-                  type="textarea"
-                  rows="2"
-                  name="body"
-                  ref="body"
-                  bsStyle={this.getFieldStyle('body')}
-                  valueLink={this.linkState('body')}
-                  placeholder={this.getIntlMessage('argument.' + this.props.type + '.add')}
-                />
-                {this.renderFormErrors('body')}
-              </div>
+              <Input
+                type="textarea"
+                rows="2"
+                ref="body"
+                bsStyle={this.getStyle('title')}
+                valueLink={this.linkState('body')}
+                placeholder={this.getIntlMessage('argument.' + this.props.type + '.add')}
+                label={this.getIntlMessage('argument.' + this.props.type + '.add')}
+                labelClassName="sr-only"
+              />
             } />
             {LoginStore.isLoggedIn()
               ? <Button
@@ -88,9 +70,6 @@ const OpinionArgumentForm = React.createClass({
       if (!this.isValid()) {
         return;
       }
-
-      this.setState({isSubmitting: true});
-
       const data = {
         body: this.state.body,
         type: this.props.type === 'yes' ? 1 : 0,
@@ -105,9 +84,21 @@ const OpinionArgumentForm = React.createClass({
         return true;
       })
       .catch(() => {
-        this.setState({isSubmitting: false, submitted: false});
+        this.setState({submitted: false});
       });
     });
+  },
+
+  isValid(field) {
+    if (!this.state.submitted) {
+      return true;
+    }
+
+    if (field === 'body') {
+      return new Validator(this.state.body).min(2);
+    }
+
+    return this.isValid('body');
   },
 
 });

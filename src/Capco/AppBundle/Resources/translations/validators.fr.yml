@@ -53,9 +53,6 @@ opinion:
 
 argument:
   votes_not_confirmed: Merci de confirmer la perte de vos votes pour continuer.
-  body:
-    min_length: L'argument doit faire au moins {{ limit }} caractères.
-    max_length: Les arguments sont limités à {{ limit }} caractères. Soyez plus concis ou publiez une nouvelle proposition.
 
 comment:
   votes_not_confirmed: Merci de confirmer la perte de vos votes pour continuer.

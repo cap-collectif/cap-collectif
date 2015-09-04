@@ -1,4 +1,4 @@
-import {RECEIVE_COMMENTS, CREATE_COMMENT_SUCCESS, CREATE_COMMENT_FAILURE} from '../constants/CommentConstants';
+import {RECEIVE_COMMENTS, CREATE_COMMENT} from '../constants/CommentConstants';
 import BaseStore from './BaseStore';
 
 class CommentStore extends BaseStore {
@@ -11,10 +11,6 @@ class CommentStore extends BaseStore {
     this._commentsAndAnswersCount = 0;
     this._isReportingEnabled = true;
     this._isSync = true;
-    this._messages = {
-      errors: [],
-      success: [],
-    };
   }
 
   _registerToActions(action) {
@@ -28,15 +24,8 @@ class CommentStore extends BaseStore {
         this._isSync = true;
         this.emitChange();
         break;
-      case CREATE_COMMENT_SUCCESS:
-        this._resetMessages();
-        this._messages.success.push(action.message);
+      case CREATE_COMMENT:
         this._isSync = false;
-        this.emitChange();
-        break;
-      case CREATE_COMMENT_FAILURE:
-        this._resetMessages();
-        this._messages.errors.push(action.message);
         this.emitChange();
         break;
       default:
@@ -62,15 +51,6 @@ class CommentStore extends BaseStore {
 
   get count() {
     return this._commentsCount;
-  }
-
-  get messages() {
-    return this._messages;
-  }
-
-  _resetMessages() {
-    this._messages.errors = [];
-    this._messages.success = [];
   }
 
 }

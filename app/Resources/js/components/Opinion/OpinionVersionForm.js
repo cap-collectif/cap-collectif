@@ -1,13 +1,13 @@
 import LoginStore from '../../stores/LoginStore';
-import ValidatorMixin from '../../utils/ValidatorMixin';
+import Validator from '../../services/Validator';
 import OpinionActions from '../../actions/OpinionActions';
 import LoginOverlay from '../Utils/LoginOverlay';
 import CkeditorMixin from '../../utils/CkeditorMixin';
-import FlashMessages from '../Utils/FlashMessages';
 
 const Modal = ReactBootstrap.Modal;
 const Button = ReactBootstrap.Button;
 const Input = ReactBootstrap.Input;
+const Alert = ReactBootstrap.Alert;
 
 const OpinionVersionForm = React.createClass({
   propTypes: {
@@ -18,7 +18,7 @@ const OpinionVersionForm = React.createClass({
     className: React.PropTypes.string,
     style: React.PropTypes.object,
   },
-  mixins: [ReactIntl.IntlMixin, React.addons.LinkedStateMixin, CkeditorMixin, ValidatorMixin],
+  mixins: [ReactIntl.IntlMixin, React.addons.LinkedStateMixin, CkeditorMixin],
 
   getDefaultProps() {
     return {
@@ -35,20 +35,10 @@ const OpinionVersionForm = React.createClass({
       body: this.props.version ? this.props.version.body : this.props.opinionBody,
       comment: this.props.version ? this.props.version.comment : null,
       showModal: false,
+      submitted: false,
       isSubmitting: false,
+      errors: [],
     };
-  },
-
-  componentDidMount() {
-    const constraints = {
-      title: {
-        min: {value: 2, message: 'opinion.version.title_error'},
-      },
-      body: {
-        notEqual: {value: this.props.opinionBody, message: 'opinion.version.body_error'},
-      },
-    };
-    this.initForm('form', constraints);
   },
 
   componentDidUpdate(prevProps, prevState) {
@@ -58,12 +48,22 @@ const OpinionVersionForm = React.createClass({
     }
   },
 
-  renderFormErrors(field) {
-    const errors = this.getErrorsMessages(field);
-    if (errors.length > 0) {
-      return <FlashMessages errors={errors} form={true} />;
+  getStyle(field) {
+    return !this.isValid(field) ? 'error' : this.state.submitted ? 'success' : '';
+  },
+
+  renderErrors() {
+    if (this.state.errors.length > 0) {
+      return (
+        <Alert bsStyle="danger">
+          {
+            this.state.errors.map((error) => {
+              return <p>{error}</p>;
+            })
+          }
+        </Alert>
+      );
     }
-    return null;
   },
 
   renderButton() {
@@ -100,59 +100,40 @@ const OpinionVersionForm = React.createClass({
             </Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            <div className="modal-top bg-info">
+            <div className="modal-top-warning">
               <p>
                 { this.getIntlMessage('opinion.add_new_version_infos') }
               </p>
             </div>
-            <form ref="form">
-              <div className={'form-group ' + this.getGroupStyle('title')}>
-                <label htmlFor="title" className="control-label h5">
-                  {this.getIntlMessage('opinion.version.title')}
-                </label>
-                <Input
-                  ref="title"
-                  name="title"
-                  type="text"
-                  bsStyle={this.getFieldStyle('title')}
-                  valueLink={this.linkState('title')}
-                  placeholder={this.getIntlMessage('global.title')}
-                />
-                {this.renderFormErrors('title')}
-              </div>
-              <div className={'form-group ' + this.getGroupStyle('body')}>
-                <label htmlFor="body" className="control-label h5">
-                  {this.getIntlMessage('opinion.version.body')}
-                </label>
-                <span className="help-block">
-                  {this.getIntlMessage('opinion.version.body_helper')}
-                </span>
-                <Input
-                  type="textarea"
-                  name="body"
-                  ref="body"
-                  rows="10" cols="80"
-                  bsStyle={this.getFieldStyle('body')}
-                  valueLink={this.linkState('body')}
-                />
-                {this.renderFormErrors('body')}
-              </div>
-              <div className={'form-group ' + this.getGroupStyle('comment')}>
-                <label htmlFor="comment" className="control-label h5">
-                  {this.getIntlMessage('opinion.version.comment')}
-                </label>
-                <span className="help-block">
-                  {this.getIntlMessage('opinion.version.comment_helper')}
-                </span>
-                <Input
-                  type="textarea"
-                  ref="comment"
-                  rows="10" cols="80"
-                  bsStyle={this.getFieldStyle('comment')}
-                  valueLink={this.linkState('comment')}
-                />
-                {this.renderFormErrors('comment')}
-              </div>
+            {this.renderErrors()}
+            <form>
+              <Input
+                type="text"
+                bsStyle={this.getStyle('title')}
+                valueLink={this.linkState('title')}
+                placeholder={this.getIntlMessage('global.title')}
+                label={this.getIntlMessage('opinion.version.title')}
+              />
+              <Input
+                type="textarea"
+                ref="body"
+                rows="10" cols="80"
+                bsStyle={this.getStyle('body')}
+                valueLink={this.linkState('body')}
+                label={this.getIntlMessage('opinion.version.body')}
+                help={this.getIntlMessage('opinion.version.body_helper')}
+                wrapperClassName="excerpt small"
+              />
+              <Input
+                type="textarea"
+                ref="comment"
+                rows="10" cols="80"
+                bsStyle={this.getStyle('comment')}
+                valueLink={this.linkState('comment')}
+                label={this.getIntlMessage('opinion.version.comment')}
+                help={this.getIntlMessage('opinion.version.comment_helper')}
+                wrapperClassName="excerpt small"
+              />
             </form>
           </Modal.Body>
           <Modal.Footer>
@@ -195,6 +176,7 @@ const OpinionVersionForm = React.createClass({
   create() {
     this.setState({submitted: true}, () => {
       if (!this.isValid()) {
+        this.setErrors();
         return;
       }
 
@@ -223,6 +205,7 @@ const OpinionVersionForm = React.createClass({
   update() {
     this.setState({submitted: true}, () => {
       if (!this.isValid()) {
+        this.setErrors();
         return;
       }
 
@@ -245,6 +228,39 @@ const OpinionVersionForm = React.createClass({
         .catch(() => {
           this.setState({isSubmitting: false, submitted: false});
         });
+    });
+  },
+
+  isValid(field) {
+    if (!this.state.submitted) {
+      return true;
+    }
+
+    if (field === 'title') {
+      return new Validator(this.state.title).min(2);
+    }
+
+    if (field === 'body') {
+      return new Validator(this.state.body).notEqual(this.props.opinionBody);
+    }
+
+    if (field === 'comment') {
+      return true;
+    }
+
+    return this.isValid('title') && this.isValid('body') && this.isValid('comment');
+  },
+
+  setErrors() {
+    const errors = [];
+    if (!this.isValid('title')) {
+      errors.push(this.getIntlMessage('opinion.version.title_error'));
+    }
+    if (!this.isValid('body')) {
+      errors.push(this.getIntlMessage('opinion.version.body_error'));
+    }
+    this.setState({
+      errors: errors,
     });
   },
 

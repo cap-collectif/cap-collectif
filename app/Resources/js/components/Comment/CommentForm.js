@@ -1,12 +1,6 @@
 import UserAvatar from '../User/UserAvatar';
 import LoginStore from '../../stores/LoginStore';
-import FlashMessages from '../Utils/FlashMessages';
-import ValidatorMixin from '../../utils/ValidatorMixin';
-
-const Input = ReactBootstrap.Input;
-const Row = ReactBootstrap.Row;
-const Col = ReactBootstrap.Col;
-const Button = ReactBootstrap.Button;
+import Validator from '../../services/Validator';
 
 const CommentForm = React.createClass({
   propTypes: {
@@ -14,15 +8,13 @@ const CommentForm = React.createClass({
     focus: React.PropTypes.bool,
     comment: React.PropTypes.func,
   },
-  mixins: [ReactIntl.IntlMixin, React.addons.LinkedStateMixin, ValidatorMixin],
+  mixins: [ReactIntl.IntlMixin, React.addons.LinkedStateMixin],
 
   getInitialState() {
     return {
       body: '',
+      submitted: false,
       expanded: false,
-      isSubmitting: false,
-      authorName: null,
-      authorEmail: null,
     };
   },
 
@@ -30,25 +22,6 @@ const CommentForm = React.createClass({
     if (this.props.focus) {
       React.findDOMNode(this.refs.body).focus();
     }
-    const constraints = LoginStore.isLoggedIn() ?
-      {
-        body: {
-          min: {value: 2, message: 'comment.constraints.body'},
-        },
-      }
-      : {
-        authorEmail: {
-          isEmail: {message: 'comment.constraints.author_email'},
-        },
-        authorName: {
-          min: {value: 2, message: 'comment.constraints.author_name'},
-        },
-        body: {
-          min: {value: 2, message: 'comment.constraints.body'},
-        },
-      }
-    ;
-    this.initForm('form', constraints);
   },
 
   componentWillReceiveProps(nextProps) {
@@ -62,26 +35,25 @@ const CommentForm = React.createClass({
     autosize(React.findDOMNode(this.refs.body));
   },
 
+  getClasses(field) {
+    return React.addons.classSet({
+      'form-group': true,
+      'has-error': !this.isValid(field),
+    });
+  },
+
   getFormClasses() {
     return React.addons.classSet({
       'comment-answer-form': this.props.isAnswer,
     });
   },
 
-  renderFormErrors(field) {
-    const errors = this.getErrorsMessages(field);
-    if (errors.length > 0) {
-      return <FlashMessages errors={errors} form={true} />;
-    }
-    return null;
-  },
-
   renderAnonymous() {
     if (!LoginStore.isLoggedIn()) {
       return (
           <div>
-              <Row>
-                  <Col sm={12} md={6}>
+              <div className="row">
+                  <div className="col-sm-12  col-md-6">
                       <p>{ this.getIntlMessage('comment.with_my_account') }</p>
                       <a className="btn btn-primary" href={window.location.protocol + '//' + window.location.host + '/login'} >
                          { this.getIntlMessage('global.login') }
@@ -98,49 +70,38 @@ const CommentForm = React.createClass({
                               { this.getIntlMessage('comment.create_account_reason_3') }
                           </li>
                       </ul>
-                  </Col>
-                  <Col sm={12} md={6}>
+                  </div>
+                  <div className="col-sm-12  col-md-6">
                       <p>{ this.getIntlMessage('comment.without_account') }</p>
-                    <div className={'form-group ' + this.getGroupStyle('authorName')}>
+                      <div className={this.getClasses('authorName')}>
                           <label htmlFor="authorName" className="control-label h5">
                               { this.getIntlMessage('global.fullname') }
                           </label>
-                          <span className="help-block">
-                            { this.getIntlMessage('comment.public_name') }
-                          </span>
-                          <Input valueLink={this.linkState('authorName')}
-                                 type="text" ref="authorName" id="authorName"
+                          <input valueLink={this.linkState('authorName')}
+                                 type="text" id="authorName"
                                  name="authorName" className="form-control"
-                                 bsStyle={this.getFieldStyle('authorName')}
                           />
-                          {this.renderFormErrors('authorName')}
+                          <p className="excerpt small">
+                              { this.getIntlMessage('comment.public_name') }
+                          </p>
                       </div>
-                    <div className={'form-group ' + this.getGroupStyle('authorEmail')}>
+                      <div className={ this.getClasses('authorEmail') }>
                           <label htmlFor="authorEmail" className="control-label h5">
                               { this.getIntlMessage('global.hidden_email') }
                           </label>
-                          <span className="help-block">
-                            { this.getIntlMessage('comment.email_info') }
-                          </span>
-                          <Input valueLink={this.linkState('authorEmail')}
-                                 type="email" ref="authorEmail" id="authorEmail"
+                          <input valueLink={this.linkState('authorEmail')}
+                                 type="email" id="authorEmail"
                                  name="authorEmail" className="form-control"
-                                 bsStyle={this.getFieldStyle('authorEmail')}
                           />
-                          {this.renderFormErrors('authorEmail')}
+                          <p className="excerpt small">
+                              { this.getIntlMessage('comment.email_info') }
+                          </p>
                       </div>
-                      <Button ref="anonymousComment"
-                              disabled={this.state.isSubmitting}
-                              onClick={this.state.isSubmitting ? null : this.create.bind(null, this)}
-                              bsStyle="primary"
-                        >
-                        {this.state.isSubmitting
-                          ? this.getIntlMessage('global.loading')
-                          : this.getIntlMessage('comment.submit')
-                        }
-                      </Button>
-                  </Col>
-              </Row>
+                      <button ref="anonymousComment" className="btn btn-primary" data-loading-text={this.getIntlMessage('global.loading')} onClick={this.create.bind(this)}>
+                          { this.getIntlMessage('comment.submit') }
+                      </button>
+                  </div>
+              </div>
           </div>
       );
     }
@@ -150,16 +111,12 @@ const CommentForm = React.createClass({
     if (this.state.expanded || this.state.body.length >= 1) {
       if (LoginStore.isLoggedIn()) {
         return (
-          <Button ref="loggedInComment"
-            disabled={this.state.isSubmitting}
-            onClick={this.state.isSubmitting ? null : this.create.bind(null, this)}
-            bsStyle="primary"
+          <button ref="loggedInComment" data-loading-text={this.getIntlMessage('global.loading')}
+            className="btn btn-primary"
+            onClick={this.create.bind(this)}
           >
-            {this.state.isSubmitting
-              ? this.getIntlMessage('global.loading')
-              : this.getIntlMessage('comment.submit')
-            }
-          </Button>
+            {this.getIntlMessage('comment.submit')}
+          </button>
         );
       }
 
@@ -172,17 +129,14 @@ const CommentForm = React.createClass({
       <div className={ this.getFormClasses() }>
         <UserAvatar user={LoginStore.user} className="pull-left" />
         <div className="opinion__data" ref="commentBlock" onBlur={this.expand.bind(this, false)}>
-          <form ref="form">
-            <div className={'form-group ' + this.getGroupStyle('body')}>
-              <Input valueLink={this.linkState('body')}
-                type="textarea"
+          <form>
+            <div className={ this.getClasses('body') }>
+              <textarea valueLink={this.linkState('body')}
                 name="body"
                 onFocus={this.expand.bind(this, true)}
                 placeholder={this.getIntlMessage('comment.write')}
                 ref="body" rows="2" className="form-control"
-                bsStyle={this.getFieldStyle('body')}
               />
-              {this.renderFormErrors('body')}
             </div>
             { this.renderCommentButton() }
           </form>
@@ -205,31 +159,64 @@ const CommentForm = React.createClass({
     this.setState({'expanded': newState});
   },
 
-  create() {
-    this.setState({submitted: true}, () => {
+  create(e) {
+    e.preventDefault();
+
+    this.setState({
+      submitted: true,
+    }, () => {
       if (!this.isValid()) {
         return;
       }
+      const commentButton = React.findDOMNode(this.refs.loggedInComment)
+        ? React.findDOMNode(this.refs.loggedInComment)
+        : React.findDOMNode(this.refs.anonymousComment)
+      ;
+      $(commentButton).button('loading');
 
-      this.setState({isSubmitting: true});
-
-      const data = {
-        body: this.state.body,
-      };
-      if (!LoginStore.isLoggedIn()) {
-        data.authorName = this.state.authorName;
-        data.authorEmail = this.state.authorEmail;
-      }
-
+      const data = this.state;
+      delete data.expanded;
+      delete data.submitted;
       this.props.comment(data)
       .then(() => {
         this.setState(this.getInitialState());
-        autosize.destroy(React.findDOMNode(this.refs.body));
+        $(commentButton).button('reset');
       })
       .catch(() => {
-        this.setState({isSubmitting: false, submitted: false});
+        alert(this.getIntlMessage('comment.submit_error'));
+        this.setState(data);
+        $(commentButton).button('reset');
       });
+      autosize.destroy(React.findDOMNode(this.refs.body));
     });
+  },
+
+  isValid(field) {
+    if (!this.state.submitted) {
+      return true;
+    }
+
+    if (field === 'authorEmail') {
+      return new Validator(this.state.authorEmail).isEmail();
+    }
+
+    if (field === 'authorName') {
+      return new Validator(this.state.authorName).min(2);
+    }
+
+    if (field === 'body') {
+      return new Validator(this.state.body).min(2);
+    }
+
+    if (!field) {
+      if (LoginStore.isLoggedIn()) {
+        return this.isValid('body');
+      }
+
+      return this.isValid('body') && this.isValid('authorEmail') && this.isValid('authorName');
+    }
+
+    return false;
   },
 
 });

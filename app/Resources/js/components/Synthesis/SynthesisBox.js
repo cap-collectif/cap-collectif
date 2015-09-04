@@ -1,7 +1,6 @@
 import Fetcher from '../../services/Fetcher';
 import ViewBox from './ViewBox';
 import EditBox from './EditBox';
-import FlashMessages from '../Utils/FlashMessages';
 import SynthesisElementStore from '../../stores/SynthesisElementStore';
 
 const SynthesisBox = React.createClass({
@@ -57,10 +56,54 @@ const SynthesisBox = React.createClass({
     }
   },
 
+  renderErrorMessages() {
+    if (this.state.messages.errors.length > 0) {
+      return (
+        <div className="alert alert-danger alert-dismissible">
+          <button type="button" className="close" data-dismiss="alert" aria-label={this.getIntlMessage('common.errors.close')}>
+            <span aria-hidden="true">&times;</span>
+          </button>
+          {
+            this.state.messages.errors.map((error) => {
+              return (
+                <p className="error">
+                  {this.getIntlMessage(error)}
+                </p>
+              );
+            })
+          }
+        </div>
+      );
+    }
+  },
+
+  renderSuccessMessages() {
+    if (this.state.messages.success.length > 0) {
+      return (
+        <div className="alert alert-success alert-dismissible">
+          <button type="button" className="close" data-dismiss="alert" aria-label={this.getIntlMessage('common.errors.close')}>
+            <span aria-hidden="true">&times;</span>
+          </button>
+          {
+            this.state.messages.success.map((success) => {
+              return (
+                <p className="success">
+                  {this.getIntlMessage(success)}
+                </p>
+              );
+            })
+            }
+        </div>
+      );
+    }
+  },
+
+
   render() {
     return (
       <div className="synthesis__box" >
-        <FlashMessages errors={this.state.messages.errors} success={this.state.messages.success} />
+        {this.renderErrorMessages()}
+        {this.renderSuccessMessages()}
         { this.renderBoxMode() }
       </div>
     );
