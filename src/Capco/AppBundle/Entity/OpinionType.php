@@ -29,9 +29,19 @@ class OpinionType
     const VOTE_WIDGET_BOTH = 2;
 
     public static $voteWidgetLabels = [
-        self::VOTE_WIDGET_DISABLED => 'opinion.show.vote.widget_type.disabled',
-        self::VOTE_WIDGET_OK => 'opinion.show.vote.widget_type.ok',
-        self::VOTE_WIDGET_BOTH => 'opinion.show.vote.widget_type.both',
+        self::VOTE_WIDGET_DISABLED => 'opinion_type.widget_type.disabled',
+        self::VOTE_WIDGET_OK => 'opinion_type.widget_type.ok',
+        self::VOTE_WIDGET_BOTH => 'opinion_type.widget_type.both',
+    ];
+
+    const COMMENT_SYSTEM_DISABLED = 0;
+    const COMMENT_SYSTEM_OK = 1;
+    const COMMENT_SYSTEM_BOTH = 2;
+
+    public static $commentSystemLabels = [
+        self::COMMENT_SYSTEM_DISABLED => 'opinion_type.comment_system.disabled',
+        self::COMMENT_SYSTEM_OK => 'opinion_type.comment_system.ok',
+        self::COMMENT_SYSTEM_BOTH => 'opinion_type.comment_system.both',
     ];
 
     /**
@@ -76,6 +86,13 @@ class OpinionType
      * @ORM\Column(name="vote_widget_type", type="integer")
      */
     private $voteWidgetType = self::VOTE_WIDGET_BOTH;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="comment_system", type="integer")
+     */
+    private $commentSystem = self::COMMENT_SYSTEM_BOTH;
 
     /**
      * @var \DateTime
@@ -323,6 +340,22 @@ class OpinionType
         $this->voteWidgetType = $voteWidgetType;
 
         return $this;
+    }
+
+    /**
+     * @return int
+     */
+    public function getCommentSystem()
+    {
+        return $this->commentSystem;
+    }
+
+    /**
+     * @param int $commentSystem
+     */
+    public function setCommentSystem($commentSystem)
+    {
+        $this->commentSystem = $commentSystem;
     }
 
     /**

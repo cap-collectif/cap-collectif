@@ -62,9 +62,13 @@ export default {
                 add: 'Ajouter un argument contre',
                 list: '{num, plural, =0{0 argument contre} one{# argument contre} other{# arguments contre}}',
             },
+            simple: {
+                add: 'Ajouter un avis',
+                list: '{num, plural, =0{0 avis} one{# avis} other{# avis}}',
+            },
             constraints: {
-                min: 'L\'argument doit faire au moins 3 caractères.',
-                max: 'Les arguments sont limités à 2000 caractères. Soyez plus concis ou publiez une nouvelle proposition.',
+                min: 'Le contenu doit faire au moins 3 caractères.',
+                max: 'Les avis sont limités à 2000 caractères. Soyez plus concis ou publiez une nouvelle proposition.',
             },
         },
         opinion: {
@@ -109,6 +113,7 @@ export default {
             },
             votes: '{num, plural, =0{0 vote} one{# vote} other{# votes}}',
             sources: '{num, plural, =0{0 source} one{# source} other{# sources}}',
+            simple_arguments: '{num, plural, =0{0 avis} one{# avis} other{# avis}}',
             arguments: '{num, plural, =0{0 argument} one{# argument} other{# arguments}}',
             back: 'Retour',
             content: 'Contenu',

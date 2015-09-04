@@ -335,6 +335,7 @@ admin:
       pinned: Épinglé
       pinned_long: Épinglé en haut de la liste
     opinion_type:
+      comment_system: Type de commentaire
       group_info: Type de proposition
       group_options: Options
       group_appendices: Contexte

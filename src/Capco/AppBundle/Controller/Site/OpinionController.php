@@ -514,6 +514,14 @@ class OpinionController extends Controller
             throw new AccessDeniedException($this->get('translator')->trans('opinion.error.no_contribute', array(), 'CapcoAppBundle'));
         }
 
+        if ($opinion->getCommentSystem() === OpinionType::COMMENT_SYSTEM_DISABLED) {
+            throw new AccessDeniedException($this->get('translator')->trans('opinion.error.no_contribute', array(), 'CapcoAppBundle'));
+        }
+
+        if ($opinion->getCommentSystem() == OpinionType::COMMENT_SYSTEM_OK && $argument->getType() === Argument::TYPE_AGAINST) {
+            throw new AccessDeniedException($this->get('translator')->trans('opinion.error.no_contribute', array(), 'CapcoAppBundle'));
+        }
+
         $form->handleRequest($request);
 
         if ($form->isValid()) {

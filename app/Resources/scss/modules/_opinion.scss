@@ -513,7 +513,8 @@
   }
 }
 
-.opinion__arguments--yes {
+.opinion__arguments--yes,
+.opinion__arguments--simple {
   .opinion__header__title {
     color: $brand-success;
   }

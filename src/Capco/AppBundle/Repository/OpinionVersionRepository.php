@@ -42,6 +42,32 @@ class OpinionVersionRepository extends EntityRepository
         return new Paginator($qb);
     }
 
+    /**
+     * Get enabled opinions by consultation step.
+     *
+     * @param $step
+     *
+     * @return mixed
+     */
+    public function getEnabledByConsultationStep($step)
+    {
+        $qb = $this->getIsEnabledQueryBuilder('ov')
+            ->addSelect('o', 'ot', 'aut', 'arg', 'sources', 'votes')
+            ->leftJoin('ov.parent', 'o')
+            ->leftJoin('ov.author', 'aut')
+            ->leftJoin('ov.arguments', 'arg')
+            ->leftJoin('ov.sources', 'sources')
+            ->leftJoin('ov.votes', 'votes')
+            ->leftJoin('o.OpinionType', 'ot')
+            ->andWhere('o.step = :step')
+            ->setParameter('step', $step)
+            ->addOrderBy('ov.updatedAt', 'DESC');
+
+        return $qb
+            ->getQuery()
+            ->getResult();
+    }
+
     protected function getIsEnabledQueryBuilder($alias = 'o')
     {
         return $this->createQueryBuilder($alias)

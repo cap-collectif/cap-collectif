@@ -721,12 +721,34 @@ class Opinion
         return 0;
     }
 
+    public function canAddVersions()
+    {
+        if ($this->getOpinionType()) {
+            return $this->getOpinionType()->isVersionable();
+        }
+        return false;
+    }
+
     public function canAddSources()
     {
         if ($this->getOpinionType()) {
             return $this->getOpinionType()->isSourceable();
         }
         return false;
+    }
+
+    public function getCommentSystem()
+    {
+        if ($this->getOpinionType()) {
+            return $this->getOpinionType()->getCommentSystem();
+        }
+        return null;
+    }
+
+    public function canAddComments()
+    {
+        $cs = $this->getCommentSystem();
+        return $cs === 1 || $cs === 2;
     }
 
     // ******************* Lifecycle *********************************

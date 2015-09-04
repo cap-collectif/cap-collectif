@@ -93,8 +93,10 @@ const OpinionArgumentForm = React.createClass({
 
       const data = {
         body: this.state.body,
-        type: this.props.type === 'yes' ? 1 : 0,
+        type: this.props.type === 'yes' || this.props.type === 'simple' ? 1 : 0,
       };
+
+      console.log(data);
 
       OpinionActions
       .addVersionArgument(this.props.opinion.parent.id, this.props.opinion.id, data)

@@ -343,6 +343,8 @@ step:
     open: En cours
     future: À venir
 
+simple_argument:
+  count: "%count% avis"
 
 argument:
   create:
@@ -374,10 +376,14 @@ argument:
     body: Contenu
     confirm: En modifiant mon argument, je comprends que les votes qui lui sont associés seront réinitialisés.
   show:
-    nb: "]-Inf, 0] Aucun argument | {1} 1 argument | ]1,Inf[ %count% arguments"
+    nb:
+     yes: "]-Inf, 1] %count% argument pour | ]1,Inf[ %count% arguments pour"
+     no: "]-Inf, 1] %count% argument contre | ]1,Inf[ %count% arguments contre"
+     simple: "%count% avis"
     type:
-      for: pour
-      against: contre
+      for: Ajouter un argument pour
+      against: Ajouter un argument contre
+      simple: Ajouter un avis
   trashed:
     linked_proposition: Lié à la proposition :
   sort:
@@ -474,10 +480,6 @@ opinion:
       ok: D'accord
       nok: Pas d'accord
       mitige: Mitigé
-      widget_type:
-        disabled: Aucun
-        ok: Vote simple
-        both: Vote multiple
     none: Il n'y a pas encore de proposition.
     no_opinion_types: Aucun type d'opinion n'est défini.
     pinned:
@@ -572,6 +574,14 @@ opinion_type:
     bluedark: Bleu foncé
     default: Gris
     white: Blanc
+  widget_type:
+    disabled: Aucun
+    ok: Vote simple
+    both: Vote multiple
+  comment_system:
+    disabled: Pas de commentaires
+    ok: Dépôt d'avis
+    both: Arguments pour / contre
 
 page:
   error:
@@ -855,7 +865,7 @@ consultation_download:
     published: Contenu publié
     unpublished: Contenu à la corbeille
   label:
-    opinion_title: Titre de la proposition
+    opinion_title: Titre
     content_type: Type de contenu
     opinion_type: Type de proposition
     category: Catégorie
@@ -881,7 +891,9 @@ consultation_download:
     non_applicable: n/a
     content_type:
       opinion: Proposition
+      opinion_version: Version
       argument: Argument
+      simple_argument: Avis
       source: Source
       vote: Vote
     link:
@@ -893,6 +905,7 @@ consultation_download:
       mitige: Mitigé
       ok: Pour
     vote_opinion: Proposition "%name%"
+    vote_version: Version "%name%"
     vote_source: Source "%name%"
     vote_argument: Argument "%id%"
 

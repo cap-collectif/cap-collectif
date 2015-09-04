@@ -19,15 +19,18 @@ class Argument
 {
     const TYPE_AGAINST = 0;
     const TYPE_FOR = 1;
+    const TYPE_SIMPLE = 2;
 
     public static $argumentTypes = [
         self::TYPE_FOR => 'yes',
         self::TYPE_AGAINST => 'no',
+        self::TYPE_SIMPLE => 'simple',
    ];
 
     public static $argumentTypesLabels = [
         self::TYPE_FOR => 'argument.show.type.for',
         self::TYPE_AGAINST => 'argument.show.type.against',
+        self::TYPE_SIMPLE => 'argument.show.type.simple',
     ];
 
     public static $sortCriterias = [

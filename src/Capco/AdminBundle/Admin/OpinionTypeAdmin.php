@@ -32,6 +32,9 @@ class OpinionTypeAdmin extends Admin
             ->add('voteWidgetType', null, array(
                 'label' => 'admin.fields.opinion_type.vote_widget_type',
             ))
+            ->add('commentSystem', null, array(
+                'label' => 'admin.fields.opinion_type.comment_system',
+            ))
             ->add('color', null, array(
                 'label' => 'admin.fields.opinion_type.color',
             ))
@@ -81,10 +84,6 @@ class OpinionTypeAdmin extends Admin
             ))
             ->add('versionable', null, array(
                 'label' => 'admin.fields.opinion_type.versionable',
-                'editable' => true,
-            ))
-            ->add('sourceable', null, array(
-                'label' => 'admin.fields.opinion_type.sourceable',
                 'editable' => true,
             ))
             ->add('updatedAt', 'datetime', array(
@@ -165,6 +164,11 @@ class OpinionTypeAdmin extends Admin
                 'label' => 'admin.fields.opinion_type.help_text',
                 'required' => false,
             ))
+            ->add('commentSystem', 'choice', array(
+                'label' => 'admin.fields.opinion_type.comment_system',
+                'choices' => OpinionType::$commentSystemLabels,
+                'translation_domain' => 'CapcoAppBundle',
+            ))
             ->end()
 
             // Appendices
@@ -201,6 +205,9 @@ class OpinionTypeAdmin extends Admin
             ))
             ->add('voteWidgetType', null, array(
                 'label' => 'admin.fields.opinion_type.vote_widget_type',
+            ))
+            ->add('commentSystem', null, array(
+                'label' => 'admin.fields.opinion_type.comment_system',
             ))
             ->add('helpText', null, array(
                 'label' => 'admin.fields.opinion_type.help_text',

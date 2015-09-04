@@ -23,7 +23,8 @@ Feature: Opinions
           "title": @string@,
           "color": @string@,
           "voteWidgetType": @integer@,
-          "sourceable": @boolean@
+          "sourceable": @boolean@,
+          "commentSystem": @integer@
         },
 
         "arguments_count": @integer@,

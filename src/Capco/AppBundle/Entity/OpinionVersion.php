@@ -73,6 +73,17 @@ class OpinionVersion
         return $i;
     }
 
+    public function getArgumentsCountByType($type)
+    {
+        if ($type === 'yes') {
+            return $this->getArgumentForCount();
+        }
+        if ($type === 'no') {
+            return $this->getArgumentAgainstCount();
+        }
+        return 0;
+    }
+
     /**
      * @var int
      *
@@ -247,5 +258,83 @@ class OpinionVersion
         $this->votes->removeElement($vote);
 
         return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getArguments()
+    {
+        return $this->arguments;
+    }
+
+    /**
+     * @param mixed $arguments
+     */
+    public function setArguments($arguments)
+    {
+        $this->arguments = $arguments;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getSources()
+    {
+        return $this->sources;
+    }
+
+    /**
+     * @param mixed $sources
+     */
+    public function setSources($sources)
+    {
+        $this->sources = $sources;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getSourcesCount()
+    {
+        return $this->sourcesCount;
+    }
+
+    /**
+     * @param mixed $sourcesCount
+     */
+    public function setSourcesCount($sourcesCount)
+    {
+        $this->sourcesCount = $sourcesCount;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getArgumentsCount()
+    {
+        return $this->argumentsCount;
+    }
+
+    /**
+     * @param mixed $argumentsCount
+     */
+    public function setArgumentsCount($argumentsCount)
+    {
+        $this->argumentsCount = $argumentsCount;
+    }
+
+    public function getOpinionType() {
+        if ($this->parent) {
+            return $this->parent->getOpinionType();
+        }
+        return null;
+    }
+
+    public function getCommentSystem() {
+        if ($this->parent) {
+            return $this->parent->getCommentSystem();
+        }
+        return null;
     }
 }

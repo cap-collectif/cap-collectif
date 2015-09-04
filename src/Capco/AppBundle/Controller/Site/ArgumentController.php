@@ -34,6 +34,8 @@ class ArgumentController extends Controller
         $argumentTypeLabel = Argument::$argumentTypesLabels[$type];
         $currentStep = $opinion->getStep();
 
+        $type = ($type === Argument::TYPE_SIMPLE) ? Argument::TYPE_FOR : $type;
+
         $arguments = $this->getDoctrine()
             ->getRepository('CapcoAppBundle:Argument')
             ->getByTypeAndOpinionOrderedJoinUserReports($type, $opinion, $argumentSort, $this->getUser());
