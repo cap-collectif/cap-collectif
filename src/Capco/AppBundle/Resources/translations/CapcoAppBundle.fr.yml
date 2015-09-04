@@ -380,10 +380,14 @@ argument:
      yes: "]-Inf, 1] %count% argument pour | ]1,Inf[ %count% arguments pour"
      no: "]-Inf, 1] %count% argument contre | ]1,Inf[ %count% arguments contre"
      simple: "%count% avis"
-    type:
-      for: Ajouter un argument pour
-      against: Ajouter un argument contre
+    add:
+      yes: Ajouter un argument pour
+      no: Ajouter un argument contre
       simple: Ajouter un avis
+    type:
+      for: Pour
+      against: Contre
+      simple: Avis
   trashed:
     linked_proposition: Lié à la proposition :
   sort:
@@ -865,12 +869,12 @@ consultation_download:
     published: Contenu publié
     unpublished: Contenu à la corbeille
   label:
-    opinion_title: Titre
+    title: Titre
     content_type: Type de contenu
-    opinion_type: Type de proposition
     category: Catégorie
+    related_object: Lié à :
     content: Contenu
-    link: Lié à
+    link: Lien
     created: Création
     updated: Modification
     author: Auteur
@@ -891,23 +895,25 @@ consultation_download:
     non_applicable: n/a
     content_type:
       opinion: Proposition
-      opinion_version: Version
+      version: Version
+      appendix: Élément de contexte
       argument: Argument
       simple_argument: Avis
       source: Source
       vote: Vote
     link:
       media: Fichier
-    yes: Oui
-    no: Non
+    yes: Pour
+    no: Contre
     votes:
       nok: Contre
       mitige: Mitigé
       ok: Pour
-    vote_opinion: Proposition "%name%"
-    vote_version: Version "%name%"
-    vote_source: Source "%name%"
-    vote_argument: Argument "%id%"
+    related:
+      opinion: Proposition "%name%"
+      version: Version "%name%"
+      source: Source "%name%"
+      argument: Argument "%id%"
 
 votes:
   none: Il n'y a pas de votes.

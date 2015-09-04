@@ -35,9 +35,9 @@ class ConsultationDownloadResolver
 
     protected $headers = array(
         'published' => array(
-            'opinion_title',
+            'title',
             'content_type',
-            'opinion_type',
+            'related_object',
             'category',
             'content',
             'link',
@@ -55,9 +55,9 @@ class ConsultationDownloadResolver
             'arguments_nok',
         ),
         'unpublished' => array(
-            'opinion_title',
+            'title',
             'content_type',
-            'opinion_type',
+            'related_object',
             'category',
             'content',
             'link',
@@ -82,12 +82,17 @@ class ConsultationDownloadResolver
     protected $em;
     protected $templating;
     protected $translator;
+    protected $data;
 
     public function __construct(EntityManager $em, TwigEngine $templating, TranslatorInterface $translator)
     {
         $this->em = $em;
         $this->templating = $templating;
         $this->translator = $translator;
+        $this->data = [
+            'published' => [],
+            'unpublished' => [],
+        ];
     }
 
     public function getContent(ConsultationStep $consultationStep, $format)
@@ -125,105 +130,104 @@ class ConsultationDownloadResolver
         return $this->contentTypes[$format];
     }
 
+    /*
+     * Add item in correct section
+     */
+    public function addItemToData($item, $published) {
+        if ($published) {
+            $this->data['published'][] = $item;
+        } else {
+            $this->data['unpublished'][] = $item;
+        }
+    }
+
+    // ********************************** Generate data items **************************************
+
     public function getData($consultationStep)
     {
         $opinions = $this->em->getRepository('CapcoAppBundle:Opinion')->getEnabledByConsultationStep($consultationStep);
-        $versions = $this->em->getRepository('CapcoAppBundle:OpinionVersion')->getEnabledByConsultationStep($consultationStep);
-        $arguments = $this->em->getRepository('CapcoAppBundle:Argument')->getEnabledByConsultationStep($consultationStep);
-        $sources = $this->em->getRepository('CapcoAppBundle:Source')->getEnabledByConsultationStep($consultationStep);
-        $votes = $this->getEnabledVotesByConsultationStep($consultationStep);
+        $this->getOpinionsData($opinions);
 
-        $data = array(
-            'published' => array(),
-            'unpublished' => array(),
-        );
-
-        // 0pinions
-        foreach ($opinions as $opinion) {
-            $item = $this->getOpinionItem($opinion);
-            if ($opinion->getIsEnabled() && !$opinion->getIsTrashed()) {
-                $data['published'][] = $item;
-            } else {
-                $data['unpublished'][] = $item;
-            }
-            foreach ($opinion->getAppendices() as $appendix) {
-                $item = $this->getAppendixItem($opinion, $appendix);
-                if ($opinion->getIsEnabled() && !$opinion->getIsTrashed()) {
-                    $data['published'][] = $item;
-                } else {
-                    $data['unpublished'][] = $item;
-                }
-            }
-        }
-
-        // Versions
-        foreach ($versions as $version) {
-            $item = $this->getOpinionVersionItem($version);
-            if ($version->isEnabled() && !$version->getIsTrashed()) {
-                $data['published'][] = $item;
-            } else {
-                $data['unpublished'][] = $item;
-            }
-            foreach ($version->getArguments() as $argument) {
-                $item = $this->getArgumentItem($argument);
-                if ($version->isEnabled() && !$version->getIsTrashed()) {
-                    $data['published'][] = $item;
-                } else {
-                    $data['unpublished'][] = $item;
-                }
-            }
-            foreach ($version->getSources() as $source) {
-                $item = $this->getSourceItem($source);
-                if ($version->isEnabled() && !$version->getIsTrashed()) {
-                    $data['published'][] = $item;
-                } else {
-                    $data['unpublished'][] = $item;
-                }
-            }
-        }
-
-        // Arguments
-        foreach ($arguments as $argument) {
-            $item = $this->getArgumentItem($argument);
-            if ($argument->getIsEnabled() && !$argument->getIsTrashed()) {
-                $data['published'][] = $item;
-            } else {
-                $data['unpublished'][] = $item;
-            }
-        }
-
-        // Published sources
-        foreach ($sources as $source) {
-            $item = $this->getSourceItem($source);
-            if ($source->getIsEnabled() && !$source->getIsTrashed()) {
-                $data['published'][] = $item;
-            } else {
-                $data['unpublished'][] = $item;
-            }
-        }
-
-        // Votes
-        foreach ($votes as $vote) {
-            $item = $this->getVoteItem($vote);
-            $data['published'][] = $item;
-        }
-
-        return $data;
+        return $this->data;
     }
+
+    public function getOpinionsData($opinions)
+    {
+        foreach ($opinions as $opinion) {
+            if ($opinion->getIsEnabled()) {
+                $this->addItemToData($this->getOpinionItem($opinion), $opinion->isPublished());
+                $this->getAppendicesData($opinion->getAppendices());
+                $this->getVersionsData($opinion->getVersions());
+                $this->getArgumentsData($opinion->getArguments());
+                $this->getSourcesData($opinion->getSources());
+                $this->getVotesData($opinion->getVotes());
+            }
+        }
+    }
+
+    public function getAppendicesData($appendices)
+    {
+        foreach ($appendices as $appendix) {
+            $this->addItemToData($this->getAppendixItem($appendix->getOpinion(), $appendix), $appendix->getOpinion()->isPublished());
+        }
+    }
+
+    public function getVersionsData($versions)
+    {
+        foreach ($versions as $version) {
+            if ($version->isEnabled()) {
+                $this->addItemToData($this->getOpinionVersionItem($version), $version->isPublished());
+                $this->getArgumentsData($version->getArguments());
+                $this->getSourcesData($version->getSources());
+                $this->getVotesData($version->getVotes());
+            }
+        }
+    }
+
+    public function getArgumentsData($arguments)
+    {
+        foreach ($arguments as $argument) {
+            if ($argument->getIsEnabled()) {
+                $this->addItemToData($this->getArgumentItem($argument), $argument->isPublished());
+                $this->getVotesData($argument->getVotes());
+            }
+        }
+    }
+
+    public function getSourcesData($sources)
+    {
+        foreach ($sources as $source) {
+            if ($source->getIsEnabled()) {
+                $this->addItemToData($this->getSourceItem($source), $source->isPublished());
+                $this->getVotesData($source->getVotes());
+            }
+        }
+    }
+
+    public function getVotesData($votes)
+    {
+        foreach ($votes as $vote) {
+            if ($vote->isConfirmed()) {
+                $this->addItemToData($this->getVoteItem($vote), $vote->getRelatedEntity()->isPublished());
+            }
+        }
+    }
+
+    // *************************** Generate items *******************************************
 
     private function getOpinionItem(Opinion $opinion)
     {
         return $item = array(
-            'opinion_title' => $opinion->getTitle(),
+            'title' => $opinion->getTitle(),
             'content_type' => $this->translator->trans('consultation_download.values.content_type.opinion', array(), 'CapcoAppBundle'),
-            'opinion_type' => $opinion->getOpinionType()->getShortName(),
-            'category' => $this->translator->trans('consultation_download.values.non_applicable', array(), 'CapcoAppBundle'),
+            'related_object' => $this->translator->trans('consultation_download.values.non_applicable', array(), 'CapcoAppBundle'),
+            'category' => $opinion->getOpinionType()->getShortName(),
             'content' => $this->formatText($opinion->getBody()),
             'link' => $this->translator->trans('consultation_download.values.non_applicable', array(), 'CapcoAppBundle'),
             'created' => $this->dateToString($opinion->getCreatedAt()),
             'updated' => $this->dateToString($opinion->getUpdatedAt()),
             'author' => $opinion->getAuthor()->getUsername(),
-            'score' => $this->calculateScore($opinion->getVoteCountOk(), $opinion->getVoteCountMitige(), $opinion->getVoteCountMitige()),
+            'score' => $this->calculateScore($opinion->getVoteCountOk(), $opinion->getVoteCountMitige(), $opinion->getVoteCountNok()),
             'total_votes' => $opinion->getVoteCountAll(),
             'votes_ok' => $opinion->getVoteCountOk(),
             'votes_mitigated' => $opinion->getVoteCountMitige(),
@@ -241,24 +245,24 @@ class ConsultationDownloadResolver
     private function getAppendixItem(Opinion $opinion, OpinionAppendix $appendix)
     {
         return $item = array(
-            'opinion_title' => $opinion->getTitle(),
-            'content_type' => $this->translator->trans('consultation_download.values.content_type.opinion', array(), 'CapcoAppBundle'),
-            'opinion_type' => $opinion->getOpinionType()->getShortName(),
+            'title' => $appendix->getAppendixType()->getTitle(),
+            'content_type' => $this->translator->trans('consultation_download.values.content_type.appendix', array(), 'CapcoAppBundle'),
+            'related_object' => $this->translator->trans('consultation_download.values.related.opinion', array('%name%' => $appendix->getOpinion()->getTitle()), 'CapcoAppBundle'),
             'category' => $appendix->getAppendixType()->getTitle(),
             'content' => $this->formatText($appendix->getBody()),
             'link' => $this->translator->trans('consultation_download.values.non_applicable', array(), 'CapcoAppBundle'),
             'created' => $this->dateToString($appendix->getCreatedAt()),
             'updated' => $this->dateToString($appendix->getUpdatedAt()),
             'author' => $opinion->getAuthor()->getUsername(),
-            'score' => $this->calculateScore($opinion->getVoteCountOk(), $opinion->getVoteCountMitige(), $opinion->getVoteCountMitige()),
-            'total_votes' => $opinion->getVoteCountAll(),
-            'votes_ok' => $opinion->getVoteCountOk(),
-            'votes_mitigated' => $opinion->getVoteCountMitige(),
-            'votes_nok' => $opinion->getVoteCountNok(),
-            'sources' => $opinion->getSourcesCount(),
-            'total_arguments' => $opinion->getArgumentsCount(),
-            'arguments_ok' => $opinion->getArgumentsCountByType('yes'),
-            'arguments_nok' => $opinion->getArgumentsCountByType('no'),
+            'score' => $this->translator->trans('consultation_download.values.non_applicable', array(), 'CapcoAppBundle'),
+            'total_votes' => $this->translator->trans('consultation_download.values.non_applicable', array(), 'CapcoAppBundle'),
+            'votes_ok' => $this->translator->trans('consultation_download.values.non_applicable', array(), 'CapcoAppBundle'),
+            'votes_mitigated' => $this->translator->trans('consultation_download.values.non_applicable', array(), 'CapcoAppBundle'),
+            'votes_nok' => $this->translator->trans('consultation_download.values.non_applicable', array(), 'CapcoAppBundle'),
+            'sources' => $this->translator->trans('consultation_download.values.non_applicable', array(), 'CapcoAppBundle'),
+            'total_arguments' => $this->translator->trans('consultation_download.values.non_applicable', array(), 'CapcoAppBundle'),
+            'arguments_ok' => $this->translator->trans('consultation_download.values.non_applicable', array(), 'CapcoAppBundle'),
+            'arguments_nok' => $this->translator->trans('consultation_download.values.non_applicable', array(), 'CapcoAppBundle'),
             'trashed' => $this->booleanToString($opinion->getIsTrashed()),
             'trashed_date' => $this->dateToString($opinion->getTrashedAt()),
             'trashed_reason' => $opinion->getTrashedReason(),
@@ -269,16 +273,16 @@ class ConsultationDownloadResolver
     {
         $opinion = $version->getParent();
         return $item = array(
-            'opinion_title' => $version->getTitle(),
-            'content_type' => $this->translator->trans('consultation_download.values.content_type.opinion_version', array(), 'CapcoAppBundle'),
-            'opinion_type' => $opinion->getOpinionType()->getShortName(),
-            'category' => $this->translator->trans('consultation_download.values.non_applicable', array(), 'CapcoAppBundle'),
+            'title' => $version->getTitle(),
+            'content_type' => $this->translator->trans('consultation_download.values.content_type.version', array(), 'CapcoAppBundle'),
+            'related_object' => $this->translator->trans('consultation_download.values.related.opinion', array('%name%' => $opinion->getTitle()), 'CapcoAppBundle'),
+            'category' => $opinion->getOpinionType()->getShortName(),
             'content' => $this->formatText($version->getBody()),
-            'link' => $this->translator->trans('consultation_download.values.vote_opinion', array('%name%' => $opinion->getTitle()), 'CapcoAppBundle'),
+            'link' => $this->translator->trans('consultation_download.values.non_applicable', array(), 'CapcoAppBundle'),
             'created' => $this->dateToString($version->getCreatedAt()),
             'updated' => $this->dateToString($version->getUpdatedAt()),
             'author' => $version->getAuthor()->getUsername(),
-            'score' => $this->calculateScore($version->getVoteCountOk(), $version->getVoteCountMitige(), $opinion->getVoteCountMitige()),
+            'score' => $this->calculateScore($version->getVoteCountOk(), $version->getVoteCountMitige(), $opinion->getVoteCountNok()),
             'total_votes' => $version->getVoteCountAll(),
             'votes_ok' => $version->getVoteCountOk(),
             'votes_mitigated' => $version->getVoteCountMitige(),
@@ -295,14 +299,26 @@ class ConsultationDownloadResolver
 
     private function getArgumentItem(Argument $argument)
     {
-        $opinion = $argument->getOpinion() ? $argument->getOpinion() : $argument->getOpinionVersion();
+        $parent = $argument->getOpinion() ? $argument->getOpinion() : $argument->getOpinionVersion();
+        $contentType = $parent->getCommentSystem() === OpinionType::COMMENT_SYSTEM_OK
+            ? $this->translator->trans('consultation_download.values.content_type.simple_argument', array(), 'CapcoAppBundle')
+            : $this->translator->trans('consultation_download.values.content_type.argument', array(), 'CapcoAppBundle')
+        ;
+        $category = $parent->getCommentSystem() === OpinionType::COMMENT_SYSTEM_OK
+            ? $this->translator->trans('consultation_download.values.non_applicable', array(), 'CapcoAppBundle')
+            : $this->translator->trans(Argument::$argumentTypesLabels[$argument->getType()], array(), 'CapcoAppBundle')
+        ;
+        $relatedObject = $argument->getOpinionVersion()
+            ? $this->translator->trans('consultation_download.values.related.version', array('%name%' => $parent->getTitle()), 'CapcoAppBundle')
+            : $this->translator->trans('consultation_download.values.related.opinion', array('%name%' => $parent->getTitle()), 'CapcoAppBundle')
+        ;
         $item = array(
-            'opinion_title' => $this->translator->trans('consultation_download.values.non_applicable', array(), 'CapcoAppBundle'),
-            'content_type' => $this->translator->trans('consultation_download.values.content_type.argument', array(), 'CapcoAppBundle'),
-            'opinion_type' => $this->translator->trans('consultation_download.values.non_applicable', array(), 'CapcoAppBundle'),
-            'category' => $this->translator->trans(Argument::$argumentTypesLabels[$argument->getType()], array(), 'CapcoAppBundle'),
+            'title' => $this->translator->trans('consultation_download.values.non_applicable', array(), 'CapcoAppBundle'),
+            'content_type' => $contentType,
+            'category' => $category,
+            'related_object' => $relatedObject,
             'content' => $this->formatText($argument->getBody()),
-            'link' => $this->translator->trans('consultation_download.values.vote_opinion', array('%name%' => $opinion->getTitle()), 'CapcoAppBundle'),
+            'link' => $this->translator->trans('consultation_download.values.non_applicable', array(), 'CapcoAppBundle'),
             'created' => $this->dateToString($argument->getCreatedAt()),
             'updated' => $this->dateToString($argument->getUpdatedAt()),
             'author' => $argument->getAuthor()->getUsername(),
@@ -319,25 +335,22 @@ class ConsultationDownloadResolver
             'trashed_date' => $this->dateToString($argument->getTrashedAt()),
             'trashed_reason' => $argument->getTrashedReason(),
         );
-        if ($opinion->getCommentSystem() === OpinionType::COMMENT_SYSTEM_OK) {
-            $item['content_type'] = $this->translator->trans('consultation_download.values.content_type.simple_argument', array(), 'CapcoAppBundle');
-            $item['category'] = $this->translator->trans('consultation_download.values.non_applicable', array(), 'CapcoAppBundle');
-        }
-        if ($argument->getOpinionVersion()) {
-            $item['link'] = $this->translator->trans('consultation_download.values.vote_version', array('%name%' => $opinion->getTitle()), 'CapcoAppBundle');
-        }
         return $item;
     }
 
     private function getSourceItem(Source $source)
     {
-        $opinion = $source->getOpinion() ? $source->getOpinion() : $source->getOpinionVersion();
+        $parent = $source->getOpinion() ? $source->getOpinion() : $source->getOpinionVersion();
+        $relatedObject = $source->getOpinionVersion()
+            ? $this->translator->trans('consultation_download.values.related.version', array('%name%' => $parent->getTitle()), 'CapcoAppBundle')
+            : $this->translator->trans('consultation_download.values.related.opinion', array('%name%' => $parent->getTitle()), 'CapcoAppBundle')
+        ;
         return $item = array(
-            'opinion_title' => $opinion->getTitle(),
+            'title' => $source->getTitle(),
             'content_type' => $this->translator->trans('consultation_download.values.content_type.source', array(), 'CapcoAppBundle'),
-            'opinion_type' => $this->translator->trans('consultation_download.values.non_applicable', array(), 'CapcoAppBundle'),
             'category' => $source->getCategory(),
-            'content' => $this->formatText($this->getSourceContent($source)),
+            'related_object' => $relatedObject,
+            'content' => $this->formatText($source->getBody()),
             'link' => $this->getSourceLink($source),
             'created' => $this->dateToString($source->getCreatedAt()),
             'updated' => $this->dateToString($source->getUpdatedAt()),
@@ -355,21 +368,18 @@ class ConsultationDownloadResolver
             'trashed_date' => $this->dateToString($source->getTrashedAt()),
             'trashed_reason' => $source->getTrashedReason(),
         );
-        if ($source->getOpinionVersion()) {
-            $item['link'] = $this->translator->trans('consultation_download.values.vote_version', array('%name%' => $opinion->getTitle()), 'CapcoAppBundle');
-        }
     }
 
     private function getVoteItem($vote)
     {
         return $item = array(
-            'opinion_title' => $this->translator->trans('consultation_download.values.non_applicable', array(), 'CapcoAppBundle'),
+            'title' => $this->translator->trans('consultation_download.values.non_applicable', array(), 'CapcoAppBundle'),
             'content_type' => $this->translator->trans('consultation_download.values.content_type.vote', array(), 'CapcoAppBundle'),
-            'opinion_type' => $this->translator->trans('consultation_download.values.non_applicable', array(), 'CapcoAppBundle'),
+            'related_object' => $this->getVoteObject($vote),
             'category' => $this->getVoteValue($vote),
             'content' => $this->translator->trans('consultation_download.values.non_applicable', array(), 'CapcoAppBundle'),
-            'link' => $this->getVoteObject($vote),
-            'created' => $this->dateToString($vote->getCreatedAt()),
+            'link' => $this->translator->trans('consultation_download.values.non_applicable', array(), 'CapcoAppBundle'),
+            'created' => $this->dateToString($vote->getUpdatedAt()),
             'updated' => $this->translator->trans('consultation_download.values.non_applicable', array(), 'CapcoAppBundle'),
             'author' => $vote->getUser()->getUsername(),
             'score' => $this->translator->trans('consultation_download.values.non_applicable', array(), 'CapcoAppBundle'),
@@ -387,34 +397,6 @@ class ConsultationDownloadResolver
         );
     }
 
-    private function getEnabledVotesByConsultationStep($consultationStep)
-    {
-        $votes = [];
-        foreach ($consultationStep->getOpinions() as $opinion) {
-            foreach ($opinion->getVotes() as $vote) {
-                if ($vote->isConfirmed()) {
-                    $votes[] = $vote;
-                }
-            }
-            foreach ($opinion->getArguments() as $argument) {
-                foreach ($argument->getVotes() as $vote) {
-                    if ($vote->isConfirmed()) {
-                        $votes[] = $vote;
-                    }
-                }
-            }
-            foreach ($opinion->getSources() as $source) {
-                foreach ($source->getVotes() as $vote) {
-                    if ($vote->isConfirmed()) {
-                        $votes[] = $vote;
-                    }
-                }
-            }
-        }
-
-        return $votes;
-    }
-
     private function getVoteValue($vote)
     {
         if (method_exists($vote, 'getValue')) {
@@ -427,8 +409,6 @@ class ConsultationDownloadResolver
             if ($vote->getValue() == 1) {
                 return $this->translator->trans('consultation_download.values.votes.ok', array(), 'CapcoAppBundle');
             }
-
-            return $this->translator->trans('consultation_download.values.votes.ok', array(), 'CapcoAppBundle');
         }
 
         return $this->translator->trans('consultation_download.values.votes.ok', array(), 'CapcoAppBundle');
@@ -438,24 +418,22 @@ class ConsultationDownloadResolver
     {
         $object = $vote->getRelatedEntity();
         if ($object instanceof Opinion) {
-            return $this->translator->trans('consultation_download.values.vote_opinion', array('%name%' => $object->getTitle()), 'CapcoAppBundle');
+            return $this->translator->trans('consultation_download.values.related.opinion', array('%name%' => $object->getTitle()), 'CapcoAppBundle');
+        }
+        if ($object instanceof OpinionVersion) {
+            return $this->translator->trans('consultation_download.values.related.version', array('%name%' => $object->getTitle()), 'CapcoAppBundle');
         }
         if ($object instanceof Argument) {
-            return $this->translator->trans('consultation_download.values.vote_argument', array('%id%' => $object->getId()), 'CapcoAppBundle');
+            return $this->translator->trans('consultation_download.values.related.argument', array('%id%' => $object->getId()), 'CapcoAppBundle');
         }
         if ($object instanceof Source) {
-            return $this->translator->trans('consultation_download.values.vote_source', array('%name%' => $object->getTitle()), 'CapcoAppBundle');
+            return $this->translator->trans('consultation_download.values.related.source', array('%name%' => $object->getTitle()), 'CapcoAppBundle');
         }
     }
 
     private function calculateScore($ok, $mitigated, $nok)
     {
         return $ok - $nok;
-    }
-
-    private function getSourceContent($source)
-    {
-        return $source->getTitle()."\r\n".$source->getBody();
     }
 
     private function getSourceLink($source)

@@ -1,5 +1,5 @@
 {% set type_text = argumentTypes[argType] %}
-{% set type_display = argumentTypesLabels[argType] %}
+{% set type_display = 'argument.show.add.' ~ type_text %}
 <div class="opinion  opinion--add-argument  block  block--bordered">
     <div class="opinion__body  box">
         {% if null != app.user %}

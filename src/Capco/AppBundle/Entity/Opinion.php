@@ -692,6 +692,14 @@ class Opinion
     }
 
     /**
+     * @return bool
+     */
+    public function isPublished()
+    {
+        return $this->isEnabled && !$this->isTrashed;
+    }
+
+    /**
      * @param int $nb
      *
      * @return string

@@ -30,7 +30,7 @@ class SourceAdmin extends Admin
                 'label' => 'admin.fields.source.opinion',
             ))
             ->add('Category', null, array(
-                'label' => 'admin.fields.source.opinion',
+                'label' => 'admin.fields.source.category',
             ))
             ->add('link', null, array(
                 'label' => 'admin.fields.source.link',

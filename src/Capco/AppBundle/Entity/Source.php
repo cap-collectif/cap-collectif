@@ -399,6 +399,7 @@ class Source
     public function setOpinionVersion($opinionVersion)
     {
         $this->opinionVersion = $opinionVersion;
+        $this->opinionVersion->addSource($this);
 
         return $this;
     }
@@ -635,6 +636,16 @@ class Source
         return $this->opinionVersion->getParent();
     }
 
+    public function getParent()
+    {
+        if ($this->opinionVersion) {
+            return $this->opinionVersion;
+        }
+
+        return $this->Opinion;
+
+    }
+
     public function resetVotes()
     {
         foreach ($this->votes as $vote) {
@@ -681,14 +692,28 @@ class Source
         return false;
     }
 
+    /**
+     * @return bool
+     */
     public function canDisplay()
     {
-        return $this->isEnabled && $this->getLinkedOpinion()->canDisplay();
+        return $this->isEnabled && $this->getParent()->canDisplay();
     }
 
+    /**
+     * @return bool
+     */
     public function canContribute()
     {
-        return $this->isEnabled && !$this->isTrashed && $this->getLinkedOpinion()->canContribute();
+        return $this->isEnabled && !$this->isTrashed && $this->getParent()->canContribute();
+    }
+
+    /**
+     * @return bool
+     */
+    public function isPublished()
+    {
+        return $this->isEnabled && !$this->isTrashed && $this->getParent()->isPublished();
     }
 
     // ******************** Lifecycle ************************************
@@ -703,6 +728,9 @@ class Source
         }
         if ($this->Opinion != null) {
             $this->Opinion->removeSource($this);
+        }
+        if ($this->opinionVersion != null) {
+            $this->opinionVersion->removeSource($this);
         }
     }
 }

@@ -27,63 +27,6 @@ class OpinionVersion
     use TimestampableTrait;
     use VotableTrait;
 
-    public function getVoteValueByUser(User $user)
-    {
-        foreach ($this->votes as $vote) {
-            if ($vote->getUser() == $user) {
-                return $vote->getValue();
-            }
-        }
-
-        return;
-    }
-
-    public function userHasReport(User $user)
-    {
-        foreach ($this->reports as $report) {
-            if ($report->getReporter() == $user) {
-                return true;
-            }
-        }
-
-        return false;
-    }
-
-    public function getArgumentForCount()
-    {
-        $i = 0;
-        foreach ($this->arguments as $argument) {
-            if ($argument->getType() === Argument::TYPE_FOR) {
-                $i++;
-            }
-        }
-
-        return $i;
-    }
-
-    public function getArgumentAgainstCount()
-    {
-        $i = 0;
-        foreach ($this->arguments as $argument) {
-            if ($argument->getType() === Argument::TYPE_AGAINST) {
-                $i++;
-            }
-        }
-
-        return $i;
-    }
-
-    public function getArgumentsCountByType($type)
-    {
-        if ($type === 'yes') {
-            return $this->getArgumentForCount();
-        }
-        if ($type === 'no') {
-            return $this->getArgumentAgainstCount();
-        }
-        return 0;
-    }
-
     /**
      * @var int
      *
@@ -152,6 +95,7 @@ class OpinionVersion
     public function __construct()
     {
         $this->arguments = new ArrayCollection();
+        $this->sources = new ArrayCollection();
         $this->votes = new ArrayCollection();
         $this->reports = new ArrayCollection();
     }
@@ -277,6 +221,32 @@ class OpinionVersion
     }
 
     /**
+     * @param $argument
+     *
+     * @return $this
+     */
+    public function addArgument(Argument $argument)
+    {
+        if (!$this->arguments->contains($argument)) {
+            $this->arguments->add($argument);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @param Argument $argument
+     *
+     * @return $this
+     */
+    public function removeArgument(Argument $argument)
+    {
+        $this->arguments->removeElement($argument);
+
+        return $this;
+    }
+
+    /**
      * @return mixed
      */
     public function getSources()
@@ -290,6 +260,32 @@ class OpinionVersion
     public function setSources($sources)
     {
         $this->sources = $sources;
+    }
+
+    /**
+     * @param $source
+     *
+     * @return $this
+     */
+    public function addSource($source)
+    {
+        if (!$this->sources->contains($source)) {
+            $this->sources->add($source);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @param $source
+     *
+     * @return $this
+     */
+    public function removeSource($source)
+    {
+        $this->sources->removeElement($source);
+
+        return $this;
     }
 
     /**
@@ -324,6 +320,65 @@ class OpinionVersion
         $this->argumentsCount = $argumentsCount;
     }
 
+    // ******************************* Custom methods **************************************
+
+    public function getVoteValueByUser(User $user)
+    {
+        foreach ($this->votes as $vote) {
+            if ($vote->getUser() == $user) {
+                return $vote->getValue();
+            }
+        }
+
+        return;
+    }
+
+    public function userHasReport(User $user)
+    {
+        foreach ($this->reports as $report) {
+            if ($report->getReporter() == $user) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    public function getArgumentForCount()
+    {
+        $i = 0;
+        foreach ($this->arguments as $argument) {
+            if ($argument->getType() === Argument::TYPE_FOR) {
+                $i++;
+            }
+        }
+
+        return $i;
+    }
+
+    public function getArgumentAgainstCount()
+    {
+        $i = 0;
+        foreach ($this->arguments as $argument) {
+            if ($argument->getType() === Argument::TYPE_AGAINST) {
+                $i++;
+            }
+        }
+
+        return $i;
+    }
+
+    public function getArgumentsCountByType($type)
+    {
+        if ($type === 'yes') {
+            return $this->getArgumentForCount();
+        }
+        if ($type === 'no') {
+            return $this->getArgumentAgainstCount();
+        }
+        return 0;
+    }
+
     public function getOpinionType() {
         if ($this->parent) {
             return $this->parent->getOpinionType();
@@ -336,5 +391,29 @@ class OpinionVersion
             return $this->parent->getCommentSystem();
         }
         return null;
+    }
+
+    /**
+     * @return bool
+     */
+    public function canDisplay()
+    {
+        return $this->enabled && $this->getParent()->canDisplay();
+    }
+
+    /**
+     * @return bool
+     */
+    public function canContribute()
+    {
+        return $this->enabled && !$this->isTrashed && $this->getParent()->canContribute();
+    }
+
+    /**
+     * @return bool
+     */
+    public function isPublished()
+    {
+        return $this->enabled && !$this->isTrashed && $this->parent->isPublished();
     }
 }

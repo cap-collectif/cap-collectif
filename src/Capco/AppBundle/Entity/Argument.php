@@ -159,7 +159,7 @@ class Argument
         if ($this->id) {
             return $this->getBodyExcerpt(50);
         } else {
-            return 'New opinion';
+            return 'New argument';
         }
     }
 
@@ -448,7 +448,7 @@ class Argument
     public function setOpinionVersion($opinionVersion)
     {
         $this->opinionVersion = $opinionVersion;
-        // $opinion->addArgument($this);
+        $opinionVersion->addArgument($this);
 
         return $this;
     }
@@ -542,7 +542,7 @@ class Argument
      */
     public function canDisplay()
     {
-        return $this->isEnabled && $this->getLinkedOpinion()->canDisplay();
+        return $this->isEnabled && $this->getParent()->canDisplay();
     }
 
     /**
@@ -550,7 +550,15 @@ class Argument
      */
     public function canContribute()
     {
-        return $this->isEnabled && !$this->isTrashed && $this->getLinkedOpinion()->canContribute();
+        return $this->isEnabled && !$this->isTrashed && $this->getParent()->canContribute();
+    }
+
+    /**
+     * @return bool
+     */
+    public function isPublished()
+    {
+        return $this->isEnabled && !$this->isTrashed && $this->getParent()->isPublished();
     }
 
     /**
@@ -564,6 +572,16 @@ class Argument
         $excerpt = $excerpt.'...';
 
         return $excerpt;
+    }
+
+    public function getParent()
+    {
+        if ($this->opinionVersion !== null) {
+            return $this->opinionVersion;
+        }
+
+        return $this->opinion;
+
     }
 
     public function getLinkedOpinion()
@@ -584,6 +602,10 @@ class Argument
     {
         if ($this->opinion != null) {
             $this->opinion->removeArgument($this);
+        }
+
+        if ($this->opinionVersion != null) {
+            $this->opinionVersion->removeArgument($this);
         }
     }
 }
