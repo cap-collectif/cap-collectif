@@ -72,6 +72,11 @@ class Opinion
     protected $position = 0;
 
     /**
+     * @ORM\Column(name="versions_count", type="integer")
+     */
+    protected $versionsCount = 0;
+
+    /**
      * @ORM\Column(name="sources_count", type="integer")
      */
     protected $sourcesCount = 0;
@@ -254,6 +259,22 @@ class Opinion
     public function getUpdatedAt()
     {
         return $this->updatedAt;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getVersionsCount()
+    {
+        return $this->versionsCount;
+    }
+
+    /**
+     * @param mixed $versionsCount
+     */
+    public function setVersionsCount($versionsCount)
+    {
+        $this->versionsCount = $versionsCount;
     }
 
     /**

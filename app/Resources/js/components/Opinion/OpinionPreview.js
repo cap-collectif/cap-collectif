@@ -16,6 +16,14 @@ const OpinionPreview = React.createClass({
     };
   },
 
+  getType() {
+    const opinion = this.props.opinion;
+    if (opinion.parent) {
+      return opinion.parent.type;
+    }
+    return opinion.type;
+  },
+
   renderTitle() {
     if (!this.props.link) {
       return (
@@ -33,6 +41,36 @@ const OpinionPreview = React.createClass({
     );
   },
 
+  renderCounters() {
+    const opinion = this.props.opinion;
+    const type = this.getType();
+    const counters = [];
+    if (!opinion.parent && type.versionable) {
+      counters.push(<FormattedMessage message={this.getIntlMessage('global.versions')} num={opinion.versions_count}/>);
+    }
+    if (type.voteWidgetType !== 0) {
+      counters.push(<FormattedMessage message={this.getIntlMessage('global.votes')} num={opinion.votes_total}/>);
+    }
+    if (type.commentSystem !== 0) {
+      counters.push(<FormattedMessage message={this.getIntlMessage('global.arguments')} num={opinion.arguments_count} />);
+    }
+    if (type.sourceable) {
+      counters.push(<FormattedMessage message={this.getIntlMessage('global.sources')} num={opinion.sources_count} />);
+    }
+    return (
+      <p className="opinion__votes excerpt small">
+        {
+          counters.map( (counter, index) => {
+            if (index < (counters.length - 1)) {
+              return <span>{counter}<span> • </span></span>;
+            }
+            return counter;
+          })
+        }
+      </p>
+    );
+  },
+
   render() {
     const opinion = this.props.opinion;
     return (
@@ -41,13 +79,7 @@ const OpinionPreview = React.createClass({
         <div className="opinion__data">
           <OpinionInfos opinion={opinion} />
           {this.renderTitle()}
-          <p className="opinion__votes excerpt small">
-            <FormattedMessage message={this.getIntlMessage('global.votes')} num={opinion.votes_total} />
-            { ' • ' }
-            <FormattedMessage message={this.getIntlMessage('global.arguments')} num={opinion.arguments_count} />
-            { ' • ' }
-            <FormattedMessage message={this.getIntlMessage('global.sources')} num={opinion.sources_count} />
-          </p>
+          {this.renderCounters()}
         </div>
       </div>
     );

@@ -24,6 +24,7 @@ Feature: Opinions
           "color": @string@,
           "voteWidgetType": @integer@,
           "sourceable": @boolean@,
+          "versionable": @boolean@,
           "commentSystem": @integer@
         },
 
@@ -34,6 +35,8 @@ Feature: Opinions
 
         "sources_count": @integer@,
         "sources": @...@,
+
+        "versions_count": @integer@,
 
         "votes": @...@,
         "votes_nok": @integer@,

@@ -245,6 +245,7 @@ class OpinionsController extends FOSRestController
         $form->submit($request->request->all(), false);
 
         if ($form->isValid()) {
+            $opinion->setVersionsCount($opinion->getVersionsCount() + 1);
             $this->getDoctrine()->getManager()->persist($opinionVersion);
             $this->getDoctrine()->getManager()->flush();
 
@@ -377,6 +378,7 @@ class OpinionsController extends FOSRestController
         $form->submit($request->request->all(), false);
 
         if ($form->isValid()) {
+            $opinion->setSourcesCount($opinion->getSourcesCount() + 1);
             $this->getDoctrine()->getManager()->persist($source);
             $this->getDoctrine()->getManager()->flush();
 
@@ -429,6 +431,7 @@ class OpinionsController extends FOSRestController
         $form->submit($request->request->all(), false);
 
         if ($form->isValid()) {
+            $version->setSourcesCount($version->getSourcesCount() + 1);
             $this->getDoctrine()->getManager()->persist($source);
             $this->getDoctrine()->getManager()->flush();
 
@@ -481,6 +484,7 @@ class OpinionsController extends FOSRestController
             ->setUpdatedAt(new \Datetime())
         ;
 
+        $version->setArgumentsCount($version->getArgumentsCount() + 1);
         $this->getDoctrine()->getManager()->persist($argument);
         $this->getDoctrine()->getManager()->flush();
     }

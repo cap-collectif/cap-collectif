@@ -31,6 +31,20 @@ class ConsultationStep extends AbstractStep
     /**
      * @var int
      *
+     * @ORM\Column(name="opinion_versions_count", type="integer")
+     */
+    private $opinionVersionsCount = 0;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="trashed_opinion_versions_count", type="integer")
+     */
+    private $trashedOpinionVersionsCount = 0;
+
+    /**
+     * @var int
+     *
      * @ORM\Column(name="argument_count", type="integer")
      */
     private $argumentCount = 0;
@@ -114,6 +128,38 @@ class ConsultationStep extends AbstractStep
         $this->trashedOpinionCount = $trashedOpinionCount;
 
         return $this;
+    }
+
+    /**
+     * @return int
+     */
+    public function getOpinionVersionsCount()
+    {
+        return $this->opinionVersionsCount;
+    }
+
+    /**
+     * @param int $opinionVersionsCount
+     */
+    public function setOpinionVersionsCount($opinionVersionsCount)
+    {
+        $this->opinionVersionsCount = $opinionVersionsCount;
+    }
+
+    /**
+     * @return int
+     */
+    public function getTrashedOpinionVersionsCount()
+    {
+        return $this->trashedOpinionVersionsCount;
+    }
+
+    /**
+     * @param int $trashedOpinionVersionsCount
+     */
+    public function setTrashedOpinionVersionsCount($trashedOpinionVersionsCount)
+    {
+        $this->trashedOpinionVersionsCount = $trashedOpinionVersionsCount;
     }
 
     /**
@@ -285,7 +331,7 @@ class ConsultationStep extends AbstractStep
      */
     public function getContributionsCount()
     {
-        return $this->argumentCount + $this->opinionCount + $this->trashedArgumentCount + $this->trashedOpinionCount + $this->sourcesCount + $this->trashedSourceCount;
+        return $this->argumentCount + $this->opinionCount + $this->trashedArgumentCount + $this->trashedOpinionCount + $this->opinionVersionsCount + $this->trashedOpinionVersionsCount + $this->sourcesCount + $this->trashedSourceCount;
     }
 
     /**

@@ -97,11 +97,11 @@ class ArgumentController extends Controller
                         'argument' => $argument,
                     ));
 
-                if ($userVote != null) {
+                if ($userVote !== null) {
                     $argumentVote = $userVote;
                 }
 
-                if ($userVote == null) {
+                if ($userVote === null) {
                     $argumentVote->setArgument($argument);
                     $em->persist($argumentVote);
 

@@ -21,9 +21,11 @@ class ContributionResolver
         $sourcesContributors = $this->repository->findConsultationSourceContributorsWithCount($consultation);
         $argumentsContributors = $this->repository->findConsultationArgumentContributorsWithCount($consultation);
         $opinionsContributors = $this->repository->findConsultationOpinionContributorsWithCount($consultation);
+        $versionsContributors = $this->repository->findConsultationVersionContributorsWithCount($consultation);
 
         // Fetch voters
         $opinionsVoters = $this->repository->findConsultationOpinionVotersWithCount($consultation);
+        $versionsVoters = $this->repository->findConsultationVersionVotersWithCount($consultation);
         $argumentsVoters = $this->repository->findConsultationArgumentVotersWithCount($consultation);
         $sourcesVoters = $this->repository->findConsultationSourceVotersWithCount($consultation);
 
@@ -41,8 +43,16 @@ class ContributionResolver
             $contributors[$opinionsContributor['id']]['opinions'] = $opinionsContributor['opinions_count'];
         }
 
+        foreach ($versionsContributors as $versionContributor) {
+            $contributors[$versionContributor['id']]['versions'] = $versionContributor['versions_count'];
+        }
+
         foreach ($opinionsVoters as $opinionsVoter) {
             $contributors[$opinionsVoter['id']]['opinions_votes'] = $opinionsVoter['opinions_votes_count'];
+        }
+
+        foreach ($versionsVoters as $versionVoter) {
+            $contributors[$versionVoter['id']]['versions_votes'] = $versionVoter['versions_votes_count'];
         }
 
         foreach ($argumentsVoters as $argumentsVoter) {
@@ -63,7 +73,9 @@ class ContributionResolver
             $contributor['total'] = isset($contributor['sources']) ? $contributor['sources'] : 0;
             $contributor['total'] += isset($contributor['arguments']) ? $contributor['arguments'] : 0;
             $contributor['total'] += isset($contributor['opinions']) ? $contributor['opinions'] : 0;
+            $contributor['total'] += isset($contributor['versions']) ? $contributor['versions'] : 0;
             $contributor['total'] += isset($contributor['opinions_votes']) ? $contributor['opinions_votes'] : 0;
+            $contributor['total'] += isset($contributor['versions_votes']) ? $contributor['versions_votes'] : 0;
             $contributor['total'] += isset($contributor['arguments_votes']) ? $contributor['arguments_votes'] : 0;
             $contributor['total'] += isset($contributor['sources_votes']) ? $contributor['sources_votes'] : 0;
         }
@@ -96,12 +108,21 @@ class ContributionResolver
         foreach ($consultation->getSteps() as $step) {
             if ($step->getStep()->isConsultationStep()) {
                 foreach ($step->getStep()->getOpinions() as $opinion) {
-                    $count += $opinion->getVoteCountNok() + $opinion->getVoteCountOk() + $opinion->getVoteCountMitige();
+                    $count += $opinion->getVoteCountAll();
                     foreach ($opinion->getArguments() as $argument) {
                         $count += $argument->getVoteCount();
                     }
                     foreach ($opinion->getSources() as $source) {
                         $count += $source->getVoteCount();
+                    }
+                    foreach ($opinion->getVersions() as $version) {
+                        $count += $version->getVoteCountAll();
+                        foreach ($version->getArguments() as $argument) {
+                            $count += $argument->getVoteCount();
+                        }
+                        foreach ($version->getSources() as $source) {
+                            $count += $source->getVoteCount();
+                        }
                     }
                 }
             }

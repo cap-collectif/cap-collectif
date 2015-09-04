@@ -625,6 +625,21 @@ class Consultation
     /**
      * @return int
      */
+    public function getTotalVersionsCount()
+    {
+        $count = 0;
+        foreach ($this->steps as $step) {
+            if ($step->getStep()->isConsultationStep()) {
+                $count += ($step->getStep()->getOpinionVersionsCount() + $step->getStep()->getTrashedOpinionVersionsCount());
+            }
+        }
+
+        return $count;
+    }
+
+    /**
+     * @return int
+     */
     public function getTotalArgumentsCount()
     {
         $count = 0;

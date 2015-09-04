@@ -168,6 +168,11 @@ class User extends BaseUser implements EncoderAwareInterface, SynthesisUserInter
      */
     protected $opinionsCount = 0;
 
+    /**
+     * @var int
+     */
+    protected $opinionVersionsCount = 0;
+
     // Comments
 
     /**
@@ -206,6 +211,11 @@ class User extends BaseUser implements EncoderAwareInterface, SynthesisUserInter
      * @var int
      */
     protected $opinionVotesCount = 0;
+
+    /**
+     * @var int
+     */
+    protected $opinionVersionVotesCount = 0;
 
     /**
      * @var int
@@ -611,6 +621,22 @@ class User extends BaseUser implements EncoderAwareInterface, SynthesisUserInter
     }
 
     /**
+     * @return int
+     */
+    public function getOpinionVersionsCount()
+    {
+        return $this->opinionVersionsCount;
+    }
+
+    /**
+     * @param int $opinionVersionsCount
+     */
+    public function setOpinionVersionsCount($opinionVersionsCount)
+    {
+        $this->opinionVersionsCount = $opinionVersionsCount;
+    }
+
+    /**
      * Sets the value of ideasCount.
      *
      * @param int $ideasCount the ideas count
@@ -714,6 +740,22 @@ class User extends BaseUser implements EncoderAwareInterface, SynthesisUserInter
     public function setOpinionVotesCount($opinionVotesCount)
     {
         $this->opinionVotesCount = $opinionVotesCount;
+    }
+
+    /**
+     * @return int
+     */
+    public function getOpinionVersionVotesCount()
+    {
+        return $this->opinionVersionVotesCount;
+    }
+
+    /**
+     * @param int $opinionVersionVotesCount
+     */
+    public function setOpinionVersionVotesCount($opinionVersionVotesCount)
+    {
+        $this->opinionVersionVotesCount = $opinionVersionVotesCount;
     }
 
     /**
@@ -832,12 +874,12 @@ class User extends BaseUser implements EncoderAwareInterface, SynthesisUserInter
 
     public function getContributionsCount()
     {
-        return $this->sourcesCount + $this->ideasCount + $this->argumentsCount + $this->opinionsCount + $this->getCommentsCount();
+        return $this->sourcesCount + $this->ideasCount + $this->argumentsCount + $this->opinionsCount + $this->opinionVersionsCount + $this->getCommentsCount();
     }
 
     public function getVotesCount()
     {
-        return $this->ideaVotesCount + $this->commentVotesCount + $this->opinionVotesCount + $this->argumentVotesCount + $this->sourceVotesCount;
+        return $this->ideaVotesCount + $this->commentVotesCount + $this->opinionVotesCount + $this->opinionVersionVotesCount + $this->argumentVotesCount + $this->sourceVotesCount;
     }
 
     public function getCommentsCount()

@@ -4,14 +4,26 @@
         consultation.show.meta.opinionsCount
     {% endtranschoice %}
     </br>
+    {% set versions = consultation.totalVersionsCount %}
+    {% if versions > 0 %}
+        {% transchoice versions with {'%count%': versions} from 'CapcoAppBundle'  %}
+            consultation.show.meta.versionsCount
+        {% endtranschoice %}
+        </br>
+    {% endif %}
     {% set arguments = consultation.totalArgumentsCount %}
-    {% transchoice arguments with {'%count%': arguments} from 'CapcoAppBundle'  %}
-        consultation.show.meta.argumentsCount
-    {% endtranschoice %}
-    </br>
-    {% transchoice consultation.totalSourcesCount with {'%count%': consultation.totalSourcesCount} from 'CapcoAppBundle'  %}
-        consultation.show.meta.sourcesCount
-    {% endtranschoice %}
+    {% if arguments > 0 %}
+        {% transchoice arguments with {'%count%': arguments} from 'CapcoAppBundle'  %}
+            consultation.show.meta.argumentsCount
+        {% endtranschoice %}
+        </br>
+    {% endif %}
+    {% set sources = consultation.totalSourcesCount %}
+    {% if sources > 0 %}
+        {% transchoice sources with {'%count%': sources} from 'CapcoAppBundle'  %}
+            consultation.show.meta.sourcesCount
+        {% endtranschoice %}
+    {% endif %}
 {% endmacro %}
 
 {% import _self as render %}

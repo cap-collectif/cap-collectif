@@ -140,6 +140,7 @@ class IdeasController extends FOSRestController
             }
         }
 
+        $idea->setCommentsCount($idea->getCommentsCount() + 1);
         $this->getDoctrine()->getManager()->persist($comment);
         $this->getDoctrine()->getManager()->flush();
         $this->get('event_dispatcher')->dispatch(

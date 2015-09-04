@@ -16,34 +16,38 @@ class UserRepository extends EntityRepository
 {
     public function findConsultationSourceContributorsWithCount(Consultation $consultation)
     {
-        $qb = $this->createQueryBuilder('u')
-            ->select('u.id', 'count(distinct sources) as sources_count')
-            ->leftJoin('u.sources', 'sources', 'WITH', 'sources.isEnabled = 1')
-            ->leftJoin('sources.Opinion', 'sources_opinion', 'WITH', 'sources_opinion.isEnabled = 1')
-            ->leftJoin('sources_opinion.step', 'so_step', 'WITH', 'so_step.isEnabled = 1')
-            ->leftJoin('so_step.consultationAbstractStep', 'cas')
-            ->where('cas.consultation = :consultation')
-            ->groupBy('u')
-            ->setParameter('consultation', $consultation)
-        ;
+        $em = $this->getEntityManager();
+        $query = $em->createQuery('
+          select u.id, count(distinct s) as sources_count
+          from CapcoUserBundle:User u
+          LEFT JOIN CapcoAppBundle:Source s WITH s.Author = u
+          LEFT JOIN CapcoAppBundle:OpinionVersion ov WITH s.opinionVersion = ov
+          LEFT JOIN CapcoAppBundle:Opinion o WITH s.Opinion = o
+          LEFT JOIN CapcoAppBundle:Opinion ovo WITH ov.parent = ovo
+          WHERE s.isEnabled = 1 AND ((s.Opinion IS NOT NULL AND o.isEnabled = 1 AND o.step = :consultation) OR (s.opinionVersion IS NOT NULL AND ov.enabled = 1 AND ovo.isEnabled = 1 AND ovo.step = :consultation))
+          GROUP BY u.id
+        ')
+            ->setParameter('consultation', $consultation);
 
-        return $qb->getQuery()->getResult();
+        return $query->getResult();
     }
 
     public function findConsultationArgumentContributorsWithCount(Consultation $consultation)
     {
-        $qb = $this->createQueryBuilder('u')
-            ->select('u.id', 'count(distinct arguments) as arguments_count')
-            ->leftJoin('u.arguments', 'arguments', 'WITH', 'arguments.isEnabled = 1')
-            ->leftJoin('arguments.opinion', 'arguments_opinion', 'WITH', 'arguments_opinion.isEnabled = 1')
-            ->leftJoin('arguments_opinion.step', 'ao_step', 'WITH', 'ao_step.isEnabled = 1')
-            ->leftJoin('ao_step.consultationAbstractStep', 'cas')
-            ->where('cas.consultation = :consultation')
-            ->groupBy('u')
-            ->setParameter('consultation', $consultation)
-        ;
+        $em = $this->getEntityManager();
+        $query = $em->createQuery('
+          select u.id, count(distinct a) as arguments_count
+          from CapcoUserBundle:User u
+          LEFT JOIN CapcoAppBundle:Argument a WITH a.Author = u
+          LEFT JOIN CapcoAppBundle:OpinionVersion ov WITH a.opinionVersion = ov
+          LEFT JOIN CapcoAppBundle:Opinion o WITH a.opinion = o
+          LEFT JOIN CapcoAppBundle:Opinion ovo WITH ov.parent = ovo
+          WHERE a.isEnabled = 1 AND ((a.opinion IS NOT NULL AND o.isEnabled = 1 AND o.step = :consultation) OR (a.opinionVersion IS NOT NULL AND ov.enabled = 1 AND ovo.isEnabled = 1 AND ovo.step = :consultation))
+          GROUP BY u.id
+        ')
+        ->setParameter('consultation', $consultation);
 
-        return $qb->getQuery()->getResult();
+        return $query->getResult();
     }
 
     public function findConsultationOpinionContributorsWithCount(Consultation $consultation)
@@ -51,6 +55,22 @@ class UserRepository extends EntityRepository
         $qb = $this->createQueryBuilder('u')
             ->select('u.id', 'count(distinct opinions) as opinions_count')
             ->leftJoin('u.opinions', 'opinions', 'WITH', 'opinions.isEnabled = 1')
+            ->leftJoin('opinions.step', 'step', 'WITH', 'step.isEnabled = 1')
+            ->leftJoin('step.consultationAbstractStep', 'cas')
+            ->where('cas.consultation = :consultation')
+            ->groupBy('u')
+            ->setParameter('consultation', $consultation)
+        ;
+
+        return $qb->getQuery()->getResult();
+    }
+
+    public function findConsultationVersionContributorsWithCount(Consultation $consultation)
+    {
+        $qb = $this->createQueryBuilder('u')
+            ->select('u.id', 'count(distinct versions) as versions_count')
+            ->leftJoin('u.opinionVersions', 'versions', 'WITH', 'versions.enabled = 1')
+            ->leftJoin('versions.parent', 'opinions', 'WITH', 'opinions.isEnabled = 1')
             ->leftJoin('opinions.step', 'step', 'WITH', 'step.isEnabled = 1')
             ->leftJoin('step.consultationAbstractStep', 'cas')
             ->where('cas.consultation = :consultation')
@@ -77,15 +97,15 @@ class UserRepository extends EntityRepository
         return $qb->getQuery()->getResult();
     }
 
-    public function findConsultationArgumentVotersWithCount(Consultation $consultation)
+    public function findConsultationVersionVotersWithCount(Consultation $consultation)
     {
         $qb = $this->createQueryBuilder('u')
-            ->select('u.id', 'count(distinct arguments_votes) as arguments_votes_count')
-            ->leftJoin('CapcoAppBundle:ArgumentVote', 'arguments_votes', 'WITH', 'arguments_votes.user = u AND arguments_votes.confirmed = 1')
-            ->leftJoin('arguments_votes.argument', 'arguments_votes_argument', 'WITH', 'arguments_votes_argument.isEnabled = 1')
-            ->leftJoin('arguments_votes_argument.opinion', 'arguments_votes_argument_opinion', 'WITH', 'arguments_votes_argument_opinion.isEnabled = 1')
-            ->leftJoin('arguments_votes_argument_opinion.step', 'arguments_votes_argument_opinion_step', 'WITH', 'arguments_votes_argument_opinion_step.isEnabled = 1')
-            ->leftJoin('arguments_votes_argument_opinion_step.consultationAbstractStep', 'cas')
+            ->select('u.id', 'count(distinct versions_votes) as versions_votes_count')
+            ->leftJoin('CapcoAppBundle:OpinionVersionVote', 'versions_votes', 'WITH', 'versions_votes.user = u AND versions_votes.confirmed = 1')
+            ->leftJoin('versions_votes.opinionVersion', 'versions_votes_version', 'WITH', 'versions_votes_version.enabled = 1')
+            ->leftJoin('versions_votes_version.parent', 'versions_votes_version_parent', 'WITH', 'versions_votes_version_parent.isEnabled = 1')
+            ->leftJoin('versions_votes_version_parent.step', 'versions_votes_version_step', 'WITH', 'versions_votes_version_step.isEnabled = 1')
+            ->leftJoin('versions_votes_version_step.consultationAbstractStep', 'cas')
             ->where('cas.consultation = :consultation')
             ->groupBy('u')
             ->setParameter('consultation', $consultation)
@@ -94,21 +114,40 @@ class UserRepository extends EntityRepository
         return $qb->getQuery()->getResult();
     }
 
+    public function findConsultationArgumentVotersWithCount(Consultation $consultation)
+    {
+        $em = $this->getEntityManager();
+        $query = $em->createQuery('
+          select u.id, count(distinct av) as arguments_votes_count
+          from CapcoUserBundle:User u
+          LEFT JOIN CapcoAppBundle:ArgumentVote av WITH av.user = u
+          LEFT JOIN CapcoAppBundle:Argument a WITH av.argument = a
+          LEFT JOIN CapcoAppBundle:OpinionVersion ov WITH a.opinionVersion = ov
+          LEFT JOIN CapcoAppBundle:Opinion o WITH a.opinion = o
+          LEFT JOIN CapcoAppBundle:Opinion ovo WITH ov.parent = ovo
+          WHERE av.user = u AND av.confirmed = 1 AND a.isEnabled = 1 AND ((a.opinion IS NOT NULL AND o.isEnabled = 1 AND o.step = :consultation) OR (a.opinionVersion IS NOT NULL AND ov.enabled = 1 AND ovo.isEnabled = 1 AND ovo.step = :consultation))
+          GROUP BY av.user
+        ')
+        ->setParameter('consultation', $consultation);
+        return $query->getResult();
+    }
+
     public function findConsultationSourceVotersWithCount(Consultation $consultation)
     {
-        $qb = $this->createQueryBuilder('u')
-            ->select('u.id', 'count(distinct sources_votes) as sources_votes_count')
-            ->leftJoin('CapcoAppBundle:SourceVote', 'sources_votes', 'WITH', 'sources_votes.user = u AND sources_votes.confirmed = 1')
-            ->leftJoin('sources_votes.source', 'sources_votes_source', 'WITH', 'sources_votes_source.isEnabled = 1')
-            ->leftJoin('sources_votes_source.Opinion', 'sources_votes_source_opinion', 'WITH', 'sources_votes_source_opinion.isEnabled = 1')
-            ->leftJoin('sources_votes_source_opinion.step', 'sources_votes_source_opinion_step', 'WITH', 'sources_votes_source_opinion_step.isEnabled = 1')
-            ->leftJoin('sources_votes_source_opinion_step.consultationAbstractStep', 'cas')
-            ->where('cas.consultation = :consultation')
-            ->groupBy('u')
-            ->setParameter('consultation', $consultation)
-        ;
-
-        return $qb->getQuery()->getResult();
+        $em = $this->getEntityManager();
+        $query = $em->createQuery('
+          select u.id, count(distinct sv) as sources_votes_count
+          from CapcoUserBundle:User u
+          LEFT JOIN CapcoAppBundle:SourceVote sv WITH sv.user = u
+          LEFT JOIN CapcoAppBundle:Source s WITH sv.source = s
+          LEFT JOIN CapcoAppBundle:OpinionVersion ov WITH s.opinionVersion = ov
+          LEFT JOIN CapcoAppBundle:Opinion o WITH s.Opinion = o
+          LEFT JOIN CapcoAppBundle:Opinion ovo WITH ov.parent = ovo
+          WHERE sv.user = u AND sv.confirmed = 1 AND s.isEnabled = 1 AND ((s.Opinion IS NOT NULL AND o.isEnabled = 1 AND o.step = :consultation) OR (s.opinionVersion IS NOT NULL AND ov.enabled = 1 AND ovo.isEnabled = 1 AND ovo.step = :consultation))
+          GROUP BY sv.user
+        ')
+            ->setParameter('consultation', $consultation);
+        return $query->getResult();
     }
 
     public function findWithMediaByIds($ids)
@@ -204,7 +243,7 @@ class UserRepository extends EntityRepository
 
     public function orderByContributionsCount(QueryBuilder $qb, $order = 'DESC')
     {
-        return $qb->addSelect('(u.opinionsCount + u.argumentsCount + u.sourcesCount + u.ideasCount + u.ideaCommentsCount + u.postCommentsCount + u.eventCommentsCount) AS HIDDEN contributionsCount')
+        return $qb->addSelect('(u.opinionsCount + u.opinionVersionsCount + u.argumentsCount + u.sourcesCount + u.ideasCount + u.ideaCommentsCount + u.postCommentsCount + u.eventCommentsCount) AS HIDDEN contributionsCount')
             ->orderBy('contributionsCount', $order)
         ;
     }

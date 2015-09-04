@@ -21,6 +21,10 @@ Capco\AppBundle\Entity\OpinionType:
             expose: true
             type: boolean
             groups: [Opinions, OpinionVersions]
+        versionable:
+            expose: true
+            type: boolean
+            groups: [Opinions, OpinionVersions]
         voteWidgetType:
             expose: true
             type: integer

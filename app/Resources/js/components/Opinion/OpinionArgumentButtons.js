@@ -12,15 +12,14 @@ const OpinionArgumentButtons = React.createClass({
 
   getInitialState() {
     return {
-      hasInitiallyVoted: this.props.argument.has_user_voted,
-      hasVoted: false,
+      hasVoted: this.props.argument.has_user_voted,
     };
   },
 
   renderVoteButton() {
-    if (this.state.hasInitiallyVoted || this.state.hasVoted) {
+    if (this.state.hasVoted) {
       return (
-        <Button bsStyle="danger" bsSize="xsmall" className="btn--outline" onClick={!LoginStore.isLoggedIn() ? null : this.deleteVote.bind(null, this)}>
+        <Button bsStyle="danger" bsSize="xsmall" onClick={!LoginStore.isLoggedIn() ? null : this.deleteVote.bind(null, this)}>
           { this.getIntlMessage('vote.cancel') }
         </Button>
       );
@@ -71,7 +70,7 @@ const OpinionArgumentButtons = React.createClass({
         </form>
         { ' ' }
         <span className="opinion__votes-nb">
-          { argument.votes_count + (this.state.hasVoted ? 1 : 0)}
+          { argument.votes_count + (this.hasVotedSince() ? 1 : 0) }
         </span>
         { ' ' }
 
@@ -89,6 +88,10 @@ const OpinionArgumentButtons = React.createClass({
   deleteVote() {
     this.setState({hasVoted: false});
     ArgumentActions.deleteVote(this.props.argument.id);
+  },
+
+  hasVotedSince() {
+    return this.state.hasVoted && !this.props.argument.has_user_voted;
   },
 
   isTheUserTheAuthor() {

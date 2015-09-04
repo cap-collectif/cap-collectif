@@ -12,15 +12,14 @@ const OpinionSourceButtons = React.createClass({
 
   getInitialState() {
     return {
-      hasInitiallyVoted: this.props.source.has_user_voted,
-      hasVoted: false,
+      hasVoted: this.props.source.has_user_voted,
     };
   },
 
   renderVoteButton() {
-    if (this.state.hasInitiallyVoted || this.state.hasVoted) {
+    if (this.state.hasVoted) {
       return (
-        <Button bsStyle="danger" bsSize="xsmall" className="btn--outline" onClick={!LoginStore.isLoggedIn() ? null : this.deleteVote.bind(null, this)}>
+        <Button bsStyle="danger" bsSize="xsmall" onClick={!LoginStore.isLoggedIn() ? null : this.deleteVote.bind(null, this)}>
           { this.getIntlMessage('vote.cancel') }
         </Button>
       );
@@ -73,13 +72,17 @@ const OpinionSourceButtons = React.createClass({
         </form>
         { ' ' }
         <span className="opinion__votes-nb">
-          { source.votes_count + (this.state.hasVoted ? 1 : 0)}
+          { source.votes_count + (this.hasVotedSince() ? 1 : 0)}
         </span>
         { ' ' }
         <LoginOverlay children={ this.renderReportButton() } />
         { this.renderEditButton() }
       </div>
     );
+  },
+
+  hasVotedSince() {
+    return this.state.hasVoted && !this.props.source.has_user_voted;
   },
 
   vote() {

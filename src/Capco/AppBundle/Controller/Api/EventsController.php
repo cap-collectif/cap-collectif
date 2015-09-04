@@ -109,6 +109,7 @@ class EventsController extends FOSRestController
             }
         }
 
+        $event->setCommentsCount($event->getCommentsCount() + 1);
         $this->getDoctrine()->getManager()->persist($comment);
         $this->getDoctrine()->getManager()->flush();
         $this->get('event_dispatcher')->dispatch(

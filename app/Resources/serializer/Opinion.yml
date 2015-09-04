@@ -29,6 +29,11 @@ Capco\AppBundle\Entity\Opinion:
             expose: true
             type: integer
             groups: [Opinions]
+        versionsCount:
+            expose: true
+            type: integer
+            serialized_name: versions_count
+            groups: [Opinions]
         argumentsCount:
             expose: true
             type: integer

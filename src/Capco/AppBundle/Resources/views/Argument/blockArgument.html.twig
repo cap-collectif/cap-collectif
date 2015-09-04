@@ -40,7 +40,7 @@
                     <input type="hidden" name="_csrf_token" value="{{ token }}">
                 </form>
             {% endif %}
-            <span class="opinion__votes-nb">{{ argument.VoteCount }}</span>
+            <span class="opinion__votes-nb">{{ argument.voteCount }}</span>
 
             {{ sonata_block_render({'type': 'capco.block.service.share_button'}, {
                 'url': (url('app_consultation_show_opinion', {'consultationSlug': consultation.slug, 'stepSlug': opinion.step.slug, 'opinionTypeSlug': opinionType.slug, 'opinionSlug': opinion.slug}) ~ '#arg-' ~ argument.id),

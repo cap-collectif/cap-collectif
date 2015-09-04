@@ -59,6 +59,7 @@
         <field name="encoder" column="encoder" type="string" length="255" nullable="true" />
 
         <one-to-many field="opinions" target-entity="Capco\AppBundle\Entity\Opinion" mapped-by="Author" />
+        <one-to-many field="opinionVersions" target-entity="Capco\AppBundle\Entity\OpinionVersion" mapped-by="author" />
         <one-to-many field="ideas" target-entity="Capco\AppBundle\Entity\Idea" mapped-by="Author" />
         <one-to-many field="comments" target-entity="Capco\AppBundle\Entity\AbstractComment" mapped-by="Author" />
         <one-to-many field="arguments" target-entity="Capco\AppBundle\Entity\Argument" mapped-by="Author" />
@@ -73,6 +74,7 @@
         <field name="ideaVotesCount" column="idea_votes_count" type="integer" nullable="false" />
         <field name="commentVotesCount" column="comment_votes_count" type="integer" nullable="false" />
         <field name="opinionVotesCount" column="opinion_votes_count" type="integer" nullable="false" />
+        <field name="opinionVersionVotesCount" column="opinion_version_votes_count" type="integer" nullable="false" />
         <field name="sourceVotesCount" column="source_votes_count" type="integer" nullable="false" />
         <field name="argumentVotesCount" column="argument_votes_count" type="integer" nullable="false" />
 
@@ -80,6 +82,7 @@
         <field name="argumentsCount" column="arguments_count" type="integer" nullable="false" />
         <field name="sourcesCount" column="sources_count" type="integer" nullable="false" />
         <field name="opinionsCount" column="opinions_count" type="integer" nullable="false" />
+        <field name="opinionVersionsCount" column="opinion_versions_count" type="integer" nullable="false" />
 
         <many-to-one field="userType" target-entity="Capco\UserBundle\Entity\UserType">
             <cascade>
