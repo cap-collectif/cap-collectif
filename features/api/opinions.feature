@@ -21,11 +21,14 @@ Feature: Opinions
         "type": {
           "id": @integer@,
           "title": @string@,
-          "color": @string@,
           "voteWidgetType": @integer@,
-          "sourceable": @boolean@,
+          "votesHelpText": @string@,
+          "commentSystem": @integer@,
+          "color": @string@,
           "versionable": @boolean@,
-          "commentSystem": @integer@
+          "sourceable": @boolean@,
+          "votesThreshold": @integer@,
+          "votesThresholdHelpText": @string@
         },
 
         "arguments_count": @integer@,

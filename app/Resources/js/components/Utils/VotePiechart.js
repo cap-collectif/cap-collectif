@@ -35,8 +35,8 @@ const VotePiechart = React.createClass({
         chartArea: {
           left: this.props.left,
           top: this.props.top,
-          width: '80%',
-          height: '80%',
+          width: '100%',
+          height: '85%',
         },
         colors: ['#5cb85c', '#f0ad4e', '#d9534f'],
         pieSliceText: 'value',
@@ -47,7 +47,7 @@ const VotePiechart = React.createClass({
   },
 
   render() {
-    return <div ref="piechart" />;
+    return <div className="opinion__chart" ref="piechart" />;
   },
 
 });

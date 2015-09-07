@@ -96,12 +96,12 @@ Capco\AppBundle\Entity\SiteColor:
         value: '#ffffff'
         position: 17
     SiteColor171:
-        keyname: color.btn.ghost.hover
+        keyname: color.btn.ghost.bg
         category: settings.appearance
         value: '#ffffff'
         position: 17
     SiteColor172:
-        keyname: color.btn.ghost.base
+        keyname: color.btn.ghost.text
         category: settings.appearance
         value: '#1abc9c'
         position: 17

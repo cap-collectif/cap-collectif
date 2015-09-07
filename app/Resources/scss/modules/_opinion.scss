@@ -296,24 +296,11 @@
 }
 
 // Chart
-.opinion__chart-block {
-  padding-left: 0;
-  margin-left: -15px;
-}
-.opinion__chart {
 
-  height: 150px;
-  width: 150px;
-  margin-top: 12px;
-}
-
-.opinion__description .opinion__chart {
-  float: right;
-  margin-top: 0;
-  margin-left: 15px;
-  margin-bottom: 15px;
-  height: 250px;
-  width: 250px;
+.opinion__description .opinion__chart div[dir="ltr"] {
+  @media (max-width: $screen-sm-max) {
+    margin: auto;
+  }
 }
 
 // List of opinions
@@ -370,7 +357,7 @@
 
   .opinion__buttons {
     overflow: hidden;
-    margin-bottom: 30px;
+    margin-bottom: 15px;
     clear: both;
   }
 
@@ -551,4 +538,8 @@
   .panel-body {
     padding: 0;
   }
+}
+
+.progression .progress-bar {
+  min-width: 40px;
 }
