@@ -27,9 +27,6 @@ class ConsultationTypeAdmin extends Admin
             ->add('opinionTypes', null, array(
                 'label' => 'admin.fields.consultation_type.opinion_types',
             ))
-            ->add('enabled', null, array(
-                'label' => 'admin.fields.consultation_type.enabled',
-            ))
             ->add('updatedAt', null, array(
                 'label' => 'admin.fields.consultation_type.updated_at',
             ))
@@ -52,10 +49,6 @@ class ConsultationTypeAdmin extends Admin
             ))
             ->add('opinionTypes', 'sonata_type_model', array(
                 'label' => 'admin.fields.consultation_type.opinion_types',
-            ))
-            ->add('enabled', null, array(
-                'label' => 'admin.fields.consultation_type.enabled',
-                'editable' => true,
             ))
             ->add('updatedAt', null, array(
                 'label' => 'admin.fields.consultation_type.updated_at',
@@ -84,10 +77,7 @@ class ConsultationTypeAdmin extends Admin
                 'by_reference' => false,
                 'multiple' => true,
                 'expanded' => false,
-            ))
-            ->add('enabled', null, array(
-                'label' => 'admin.fields.consultation_type.enabled',
-                'required' => false,
+                'query' => $this->createQueryBuilderForOpinionTypes(),
             ))
         ;
     }
@@ -106,15 +96,22 @@ class ConsultationTypeAdmin extends Admin
             ->add('opinionTypes', 'sonata_type_model', array(
                 'label' => 'admin.fields.consultation_type.opinion_types',
             ))
-            ->add('enabled', null, array(
-                'label' => 'admin.fields.consultation_type.enabled',
-            ))
             ->add('updatedAt', null, array(
                 'label' => 'admin.fields.consultation_type.updated_at',
             ))
             ->add('createdAt', null, array(
                 'label' => 'admin.fields.consultation_type.created_at',
             ))
+        ;
+    }
+
+    private function createQueryBuilderForOpinionTypes()
+    {
+         return $this->getConfigurationPool()
+            ->getContainer()
+            ->get('doctrine.orm.entity_manager')
+            ->getRepository('CapcoAppBundle:OpinionType')
+            ->getRootNodesQuery('position', 'ASC')
         ;
     }
 }

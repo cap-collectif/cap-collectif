@@ -1,5 +1,16 @@
 Capco\AppBundle\Entity\ConsultationType:
-    defaultType:
-        title: Default
-        enabled: true
+    typeAll:
+        title: Toutes
         opinionTypes: [@opinionType1, @opinionType2, @opinionType3, @opinionType4]
+    typeDefault:
+        title: Défaut
+        opinionTypes: [@opinionType1, @opinionType2, @opinionType3]
+    typeSimple:
+        title: Simple
+        opinionTypes: [@opinionType1, @opinionType2]
+    typeCauses:
+        title: Causes
+        opinionTypes: [@opinionType2]
+    typePJL:
+        title: Projet de loi
+        opinionTypes: [@opinionType5]

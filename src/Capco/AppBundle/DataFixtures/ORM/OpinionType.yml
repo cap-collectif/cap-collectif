@@ -42,3 +42,15 @@ Capco\AppBundle\Entity\OpinionType:
         votesHelpText: <text(200)>
         votesThreshold: 5
         votesThresholdHelpText: <text(200)>
+    opinionType6:
+        title: Articles sur le transport
+        shortName: Articles sur le transport
+        position: 6
+        color: orange
+        defaultFilter: positions
+        isEnabled: true
+        versionable: true
+        votesHelpText: <text(200)>
+        votesThreshold: 5
+        votesThresholdHelpText: <text(200)>
+        parent: @opinionType5

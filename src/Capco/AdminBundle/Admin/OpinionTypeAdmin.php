@@ -6,6 +6,7 @@ use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
+use Sonata\AdminBundle\Route\RouteCollection;
 use Sonata\AdminBundle\Show\ShowMapper;
 use Capco\AppBundle\Entity\OpinionType;
 use Capco\AppBundle\Entity\Opinion;
@@ -128,6 +129,10 @@ class OpinionTypeAdmin extends Admin
             ->add('shortName', null, array(
                 'label' => 'admin.fields.opinion_type.short_name',
             ))
+            ->add('parent', 'sonata_type_model', [
+                'label' => 'admin.fields.opinion_type.parent',
+                'required' => false,
+            ])
             ->add('position', null, array(
                 'label' => 'admin.fields.opinion_type.position',
             ))
@@ -259,4 +264,20 @@ class OpinionTypeAdmin extends Admin
             ))
         ;
     }
+
+    public function getTemplate($name)
+    {
+        if ($name === 'list') {
+            return 'CapcoAdminBundle:OpinionType:list.html.twig';
+        }
+        return parent::getTemplate($name);
+    }
+
+
+    protected function configureRoutes(RouteCollection $collection)
+    {
+        $collection->add('tree', 'tree');
+    }
+
+
 }

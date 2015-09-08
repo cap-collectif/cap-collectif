@@ -1,6 +1,8 @@
 #Global
 admin.global:
   delete: Supprimer
+  list_mode: Liste
+  tree_mode: Arboresence
 
 # Dashboard groups
 admin.group.moderation: Contributions
@@ -23,7 +25,7 @@ admin.label.idea: Idées
 admin.label.idea_vote: "Votes sur les idées"
 admin.label.newsletter_subscription: "Inscrits à la lettre d'information"
 admin.label.opinion: Propositions
-admin.label.opinion_type: "Types de propositions"
+admin.label.opinion_type: "Catégories de propositions"
 admin.label.opinion_vote: "Votes sur les propositions"
 admin.label.post: Articles
 admin.label.recent_posts: "Derniers articles"
@@ -73,7 +75,6 @@ admin.label.settings.shield_mode: Mode bouclier
 admin:
   help:
     consultation:
-      consultation_type: Créez de nouveaux modèles dans la section "Types de consultation".
       closed_at: Si la consultation ne dure qu'une journée, renseignez la même date que pour la date de début.
       steps: |
                 Ajoutez ici les étapes postérieures ou antérieures à la consultation (synthèse finale, présentation préliminaire...). L'étape correspondant à la consultation elle-même sera créée automatiquement en fonction des dates renseignées.
@@ -202,8 +203,7 @@ admin:
       created_at: Création
       cover: Image
       video: Vidéo
-      allowed_types: Types de proposition
-      consultation_type: Modèle
+      consultation_type: Type de consultation
       events_count: Évènements
       events: Évènements
       posts_count: Articles
@@ -215,8 +215,7 @@ admin:
       position: Position
     consultation_type:
       title: Titre
-      opinion_types: Types de proposition
-      enabled: Publié
+      opinion_types: Catégories
       updated_at: Mise à jour
       created_at: Création
     event:
@@ -318,7 +317,7 @@ admin:
       author: Auteur
       body: Contenu
       step: Étape
-      opinion_type: Type de proposition
+      opinion_type: Catégorie
       position: Position
       is_enabled: Publié
       is_trashed: Dans la corbeille
@@ -340,13 +339,14 @@ admin:
       created_at: Création
       comment_system: Type de commentaire
       default_filter: Filtre par défaut
-      group_info: Type de proposition
+      group_info: Catégorie
       group_options: Options
       group_votes: Votes
       group_contribution: Contribution
       group_appendices: Contexte
       is_enabled: Autoriser les nouvelles propositions
       opinions: Propositions
+      parent: Parent
       position: Position
       short_name: Nom court
       sourceable: Autoriser les sources
@@ -552,6 +552,10 @@ media:
 form:
   label_enabled: Actif
   label_cdn_is_flushable: À rafraîchir sur le CDN
+
+opinion_type:
+  tree:
+    title: Catégories
 
 user:
   delete:

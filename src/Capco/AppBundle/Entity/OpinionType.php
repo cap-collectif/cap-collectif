@@ -9,6 +9,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
 /**
  * OpinionType.
  *
+ * @Gedmo\Tree(type="nested")
  * @ORM\Table(name="opinion_type")
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\OpinionTypeRepository")
  */
@@ -172,10 +173,45 @@ class OpinionType
     private $votesThresholdHelpText = null;
 
     /**
-     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\OpinionTypeAppendixType", mappedBy="opinionType",  cascade={"persist", "remove"}, orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\OpinionTypeAppendixType", mappedBy="opinionType",  cascade={"persist", "remove"})
      * @ORM\OrderBy({"position" = "ASC"})
      */
     protected $appendixTypes;
+
+    /**
+     * @Gedmo\TreeParent
+     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\OpinionType", inversedBy="children", cascade={"persist"})
+     * @ORM\JoinColumn(name="parent_id", referencedColumnName="id", onDelete="SET NULL", nullable=true)
+     */
+    protected $parent = null;
+
+    /**
+     * @Gedmo\TreeLeft
+     * @ORM\Column(type="integer")
+     */
+    private $lft;
+    /**
+     * @Gedmo\TreeRight
+     * @ORM\Column(type="integer")
+     */
+    private $rgt;
+
+    /**
+     * @Gedmo\TreeRoot
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    protected $root;
+
+    /**
+     * @Gedmo\TreeLevel
+     * @ORM\Column(name="lvl", type="integer")
+     */
+    protected $level;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\OpinionType", mappedBy="parent", cascade={"persist"})
+     */
+    protected $children;
 
     public function __construct()
     {
@@ -183,6 +219,7 @@ class OpinionType
         $this->Opinions = new ArrayCollection();
         $this->updatedAt = new \Datetime();
         $this->appendixTypes = new ArrayCollection();
+        $this->children = new ArrayCollection();
     }
 
     public function __toString()
@@ -554,6 +591,84 @@ class OpinionType
     public function setVotesThresholdHelpText($votesThresholdHelpText)
     {
         $this->votesThresholdHelpText = $votesThresholdHelpText;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getParent()
+    {
+        return $this->parent;
+    }
+
+    /**
+     * @param mixed $parent
+     */
+    public function setParent($parent)
+    {
+        $this->parent = $parent;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getLft()
+    {
+        return $this->lft;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getRgt()
+    {
+        return $this->rgt;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getRoot()
+    {
+        return $this->root;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getLevel()
+    {
+        return $this->level;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getChildren()
+    {
+        return $this->children;
+    }
+
+    /**
+     * @param mixed $child
+     */
+    public function addChild($child)
+    {
+        if ($this->children->contains($child)) {
+            $this->children->add($child);
+        }
+        $child->setParent($this);
+    }
+
+    /**
+     * @param mixed $child
+     */
+    public function removeChild($child)
+    {
+        if ($this->children->contains($child)) {
+            $this->children->removeElement($child);
+        }
+        $child->setParent(null);
     }
 
     public function getAllAppendixTypes()
