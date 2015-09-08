@@ -5,6 +5,7 @@ namespace Capco\AdminBundle\Controller;
 use Capco\AppBundle\Entity\OpinionAppendix;
 use Capco\AppBundle\Entity\Opinion;
 use Sonata\AdminBundle\Controller\CRUDController as Controller;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
@@ -159,7 +160,7 @@ class OpinionController extends Controller
             }
         } else {
             if (!$opinionType) {
-                throw new NotFoundHttpException('This opinion type does not exist.');
+                return new RedirectResponse($this->admin->generateUrl('list'));
             }
         }
 
