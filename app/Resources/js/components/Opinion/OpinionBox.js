@@ -4,9 +4,12 @@ import OpinionAppendices from './OpinionAppendices';
 import OpinionBody from './OpinionBody';
 import VotePiechart from '../Utils/VotePiechart';
 import UserAvatar from '../User/UserAvatar';
+import VotesBar from '../Utils/VotesBar';
 
 const Row = ReactBootstrap.Row;
 const Col = ReactBootstrap.Col;
+const Well = ReactBootstrap.Well;
+
 const FormattedMessage = ReactIntl.FormattedMessage;
 
 const OpinionBox = React.createClass({
@@ -14,6 +17,21 @@ const OpinionBox = React.createClass({
     opinion: React.PropTypes.object.isRequired,
   },
   mixins: [ReactIntl.IntlMixin],
+
+  getMaxVotesValue() {
+    return this.getOpinionType().votesThreshold;
+  },
+
+  getOpinionType() {
+    return this.isVersion() ? this.props.opinion.parent.type : this.props.opinion.type;
+  },
+
+  renderVotesHelpText() {
+    const helpText = this.getOpinionType().votesHelpText;
+    if (helpText) {
+      return <Well bsSize="small" style={{marginBottom: '10px', fontSize: '14px'}}>{helpText}</Well>;
+    }
+  },
 
   renderUserAvatarVotes() {
     const opinion = this.props.opinion;
@@ -26,7 +44,7 @@ const OpinionBox = React.createClass({
     }
 
     return (
-      <div>
+      <div style={{paddingTop: '20px'}}>
       {
         votes.map((vote) => {
           return <UserAvatar key={vote.user.id} user={vote.user} style={{marginRight: 5}} />;
@@ -40,11 +58,60 @@ const OpinionBox = React.createClass({
     );
   },
 
+  renderPieChart() {
+    const opinion = this.props.opinion;
+    return (
+      <VotePiechart top={20} height={180} ok={opinion.votes_ok} nok={opinion.votes_nok}
+                          mitige={opinion.votes_mitige}/>
+    );
+  },
+
+  renderVotesBar() {
+    const opinion = this.props.opinion;
+    return (
+      <div>
+        {this.getOpinionType().votesThreshold ?
+          <VotesBar max={this.getOpinionType().votesThreshold} value={opinion.votes_ok}
+                    helpText={this.getOpinionType().votesThresholdHelpText}/>
+          : null}
+        {this.renderUserAvatarVotes()}
+        <div><FormattedMessage message={this.getIntlMessage('global.votes')} num={opinion.votes.length}/></div>
+      </div>
+    );
+  },
+
+  renderVotes() {
+    const opinion = this.props.opinion;
+    const widgetType = this.getOpinionType().voteWidgetType;
+    if (widgetType !== 0 && (opinion.votes.length > 0 || this.getOpinionType().votesThreshold)) {
+      if (opinion.votes.length > 0 && widgetType === 2) {
+        return (
+          <Row style={{borderTop: '1px solid #ddd'}}>
+            <Col sm={12} md={4}>
+              {this.renderPieChart()}
+            </Col>
+            <Col sm={12} md={7} style={{paddingTop: '15px'}}>
+              {this.renderVotesBar()}
+            </Col>
+          </Row>
+        );
+      }
+      return (
+        <Row style={{borderTop: '1px solid #ddd'}}>
+          <Col sm={12} mdOffset={2} md={8} style={{paddingTop: '15px'}}>
+            {this.renderVotesBar()}
+          </Col>
+        </Row>
+      );
+    }
+    return null;
+  },
+
   render() {
     const opinion = this.props.opinion;
-    const color = this.isVersion() ? opinion.parent.type.color : opinion.type.color;
+    const color = this.getOpinionType().color;
     const backLink = this.isVersion() ? opinion.parent._links.show : opinion._links.type;
-    const backTitle = this.isVersion() ? opinion.parent.type.title : opinion.type.title;
+    const backTitle = this.getOpinionType().title;
 
     const colorClass = 'opinion opinion--' + color + ' opinion--current';
     return (
@@ -62,21 +129,11 @@ const OpinionBox = React.createClass({
         <OpinionAppendices opinion={opinion} />
         <div className="opinion__description">
           <OpinionBody opinion={opinion} />
-          <div className="opinion__buttons" style={{marginBottom: 0}}>
+          <div className="opinion__buttons" style={{marginTop: '15px', marginBottom: '15px'}}>
+            {this.renderVotesHelpText()}
             <OpinionButtons {...this.props} opinion={opinion} />
           </div>
-          {opinion.votes.length >= 1
-          ? <Row style={{borderTop: '1px solid #ddd', marginTop: 15}}>
-              <Col sm={12} mdOffset={1} md={3} >
-                <VotePiechart top={20} height={180} ok={opinion.votes_ok} nok={opinion.votes_nok} mitige={opinion.votes_mitige} />
-              </Col>
-              <Col sm={12} md={5} style={{marginTop: 60}}>
-                {this.renderUserAvatarVotes()}
-                <div><FormattedMessage message={this.getIntlMessage('global.votes')} num={opinion.votes.length} /></div>
-              </Col>
-            </Row>
-          : <span />
-          }
+          {this.renderVotes()}
         </div>
       </div>
     );

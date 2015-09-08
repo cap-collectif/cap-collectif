@@ -10,10 +10,10 @@
 {% set btnPrimaryText = capco_site_color_value('color.btn.primary.text') %}
 {% if null == btnPrimaryText %}{% set btnPrimaryText = '#FFF' %}{% endif %}
 
-{% set btnGhost = capco_site_color_value('color.btn.ghost.bg') %}
-{% if null == btnGhost %}{% set btnGhost = '#fff' %}{% endif %}
-{% set btnGhostText = capco_site_color_value('color.btn.ghost.text') %}
-{% if null == btnGhostText %}{% set btnGhostText = '#1abc9c' %}{% endif %}
+{% set btnGhostBase = capco_site_color_value('color.btn.ghost.base') %}
+{% if null == btnGhostBase %}{% set btnGhostBase = '#1abc9c' %}{% endif %}
+{% set btnGhostHover = capco_site_color_value('color.btn.ghost.hover') %}
+{% if null == btnGhostHover %}{% set btnGhostHover = '#fff' %}{% endif %}
 
 {% set link = capco_site_color_value('color.link.default') %}
 {% if null == link %}{% set link = '#16a085' %}{% endif %}
@@ -196,15 +196,15 @@
     }
 
     .btn--outline.btn-primary {
-        color: {{ btnGhostText | raw }};
+        color: {{ btnGhostBase | raw }};
         background-color: transparent;
-        border-color: {{ btnGhostText | raw }};
+        border-color: {{ btnGhostBase | raw }};
     }
 
     .btn--outline.btn-primary:hover {
-        color: {{ btnGhost | raw }};
-        background-color: {{ btnGhostText | raw }};
-        border-color: {{ btnGhostText | raw }};
+        color: {{ btnGhostHover | raw }};
+        background-color: {{ btnGhostBase | raw }};
+        border-color: {{ btnGhostHover | raw }};
     }
 
     .btn-primary:hover {

@@ -159,15 +159,25 @@ class OpinionTypeAdmin extends Admin
                 'label' => 'admin.fields.opinion_type.vote_widget_type',
                 'choices' => OpinionType::$voteWidgetLabels,
                 'translation_domain' => 'CapcoAppBundle',
+                'required' => true,
             ))
-            ->add('helpText', 'textarea', array(
-                'label' => 'admin.fields.opinion_type.help_text',
+            ->add('votesHelpText', 'textarea', array(
+                'label' => 'admin.fields.opinion_type.votes_help_text',
+                'required' => false,
+            ))
+            ->add('votesThreshold', 'integer', array(
+                'label' => 'admin.fields.opinion_type.votes_threshold',
                 'required' => false,
             ))
             ->add('commentSystem', 'choice', array(
                 'label' => 'admin.fields.opinion_type.comment_system',
                 'choices' => OpinionType::$commentSystemLabels,
                 'translation_domain' => 'CapcoAppBundle',
+                'required' => true,
+            ))
+            ->add('votesThresholdHelpText', 'textarea', array(
+                'label' => 'admin.fields.opinion_type.votes_threshold_help_text',
+                'required' => false,
             ))
             ->end()
 
@@ -206,11 +216,17 @@ class OpinionTypeAdmin extends Admin
             ->add('voteWidgetType', null, array(
                 'label' => 'admin.fields.opinion_type.vote_widget_type',
             ))
+            ->add('votesHelpText', null, array(
+                'label' => 'admin.fields.opinion_type.votes_help_text',
+            ))
+            ->add('votesThreshold', null, array(
+                'label' => 'admin.fields.opinion_type.votes_threshold',
+            ))
             ->add('commentSystem', null, array(
                 'label' => 'admin.fields.opinion_type.comment_system',
             ))
-            ->add('helpText', null, array(
-                'label' => 'admin.fields.opinion_type.help_text',
+            ->add('votesThresholdHelpText', null, array(
+                'label' => 'admin.fields.opinion_type.votes_threshold_help_text',
             ))
             ->add('isEnabled', null, array(
                 'label' => 'admin.fields.opinion_type.is_enabled',
