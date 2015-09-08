@@ -20,8 +20,8 @@ color:
   btn:
     bg: Couleur du bouton
     ghost:
-      bg: Bouton transparent
-      text: Bouton transparent au survol
+      base: Bouton transparent
+      hover: Libellé du bouton transparent au survol
     primary:
       bg: Couleur primaire
       text: Libellé primaire
