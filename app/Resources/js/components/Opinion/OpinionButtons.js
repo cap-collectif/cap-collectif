@@ -88,7 +88,7 @@ const OpinionButtons = React.createClass({
   render() {
     const opinion = this.props.opinion;
     return (
-      <ButtonToolbar>
+      <ButtonToolbar style={{marginTop: 15}}>
         {this.isContribuable() ? <LoginOverlay children={ this.renderVoteButton('ok') } /> : null}
         {this.isContribuable() ? <LoginOverlay children={ this.renderVoteButton('mitige') } /> : null}
         {this.isContribuable() ? <LoginOverlay children={ this.renderVoteButton('nok') } /> : null}

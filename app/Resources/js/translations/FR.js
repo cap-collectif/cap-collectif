@@ -72,9 +72,6 @@ export default {
             },
         },
         opinion: {
-            progress_done: '{num, plural, =0{0 vote favorable} one{# vote favorable} other{# votes favorables}}.',
-            progress_left: '{left, plural, =0{0 nécessaire} one{# nécessaire} other{# nécessaires}} pour atteindre {max}.',
-            progress_reached: 'Cette proposition a atteint le seuil avec {with, plural, =0{0 vote} one{# vote} other{# votes}}.',
             no_new_version: 'Aucune autre version proposée',
             no_new_source: 'Aucune source proposée',
             add_new_version: 'Proposer une autre version',

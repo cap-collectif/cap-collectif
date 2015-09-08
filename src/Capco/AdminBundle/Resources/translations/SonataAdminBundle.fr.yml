@@ -335,26 +335,24 @@ admin:
       pinned: Épinglé
       pinned_long: Épinglé en haut de la liste
     opinion_type:
-      appendices: Éléments de contexte
-      color: Couleur
-      created_at: Création
       comment_system: Type de commentaire
-      default_filter: Filtre par défaut
       group_info: Type de proposition
       group_options: Options
       group_appendices: Contexte
-      is_enabled: Contribuable
-      opinions: Propositions
-      position: Position
-      short_name: Nom court
-      sourceable: Sources
+      appendices: Éléments de contexte
       title: Titre
-      updated_at: Mise à jour
-      versionable: Versionable
+      short_name: Nom court
       vote_widget_type: Type de vote
-      votes_help_text: Texte d'aide pour les votes
-      votes_threshold: Seuil de votes
-      votes_threshold_help_text: Explication pour le seuil de votes
+      color: Couleur
+      help_text: Texte d'aide pour les votes
+      opinions: Propositions
+      default_filter: Filtre par défaut
+      is_enabled: Contribuable
+      created_at: Création
+      updated_at: Mise à jour
+      position: Position
+      sourceable: Sources
+      versionable: Versionable
     opiniontype_appendixtype:
       position: Position
       appendix_type: Élément de contexte

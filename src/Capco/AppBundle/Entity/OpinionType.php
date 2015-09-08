@@ -88,13 +88,6 @@ class OpinionType
     private $voteWidgetType = self::VOTE_WIDGET_BOTH;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="help_text", type="string", length=255, nullable=true)
-     */
-    private $votesHelpText = null;
-
-    /**
      * @var int
      *
      * @ORM\Column(name="comment_system", type="integer")
@@ -158,18 +151,11 @@ class OpinionType
     private $sourceable = true;
 
     /**
-     * @var int
-     *
-     * @ORM\Column(name="votes_threshold", type="integer", nullable=true)
-     */
-    private $votesThreshold = null;
-
-    /**
      * @var string
      *
-     * @ORM\Column(name="threshold_help_text", type="string", length=255, nullable=true)
+     * @ORM\Column(name="help_text", type="string", length=255, nullable=true)
      */
-    private $votesThresholdHelpText = null;
+    private $helpText = null;
 
     /**
      * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\OpinionTypeAppendixType", mappedBy="opinionType",  cascade={"persist", "remove"}, orphanRemoval=true)
@@ -373,22 +359,6 @@ class OpinionType
     }
 
     /**
-     * @return int
-     */
-    public function getVotesThreshold()
-    {
-        return $this->votesThreshold;
-    }
-
-    /**
-     * @param int $votesThreshold
-     */
-    public function setVotesThreshold($votesThreshold)
-    {
-        $this->votesThreshold = $votesThreshold;
-    }
-
-    /**
      * Get createdAt.
      *
      * @return \DateTime
@@ -527,33 +497,17 @@ class OpinionType
     /**
      * @return string
      */
-    public function getVotesHelpText()
+    public function getHelpText()
     {
-        return $this->votesHelpText;
+        return $this->helpText;
     }
 
     /**
-     * @param string $votesHelpText
+     * @param string $helpText
      */
-    public function setVotesHelpText($votesHelpText)
+    public function setHelpText($helpText)
     {
-        $this->votesHelpText = $votesHelpText;
-    }
-
-    /**
-     * @return string
-     */
-    public function getVotesThresholdHelpText()
-    {
-        return $this->votesThresholdHelpText;
-    }
-
-    /**
-     * @param string $votesThresholdHelpText
-     */
-    public function setVotesThresholdHelpText($votesThresholdHelpText)
-    {
-        $this->votesThresholdHelpText = $votesThresholdHelpText;
+        $this->helpText = $helpText;
     }
 
     public function getAllAppendixTypes()

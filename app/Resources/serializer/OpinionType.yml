@@ -35,18 +35,3 @@ Capco\AppBundle\Entity\OpinionType:
             type: integer
             serialized_name: commentSystem
             groups: [Opinions, OpinionVersions]
-        votesThreshold:
-            expose: true
-            type: integer
-            serialized_name: votesThreshold
-            groups: [Opinions, OpinionVersions]
-        votesHelpText:
-            expose: true
-            type: string
-            serialized_name: votesHelpText
-            groups: [Opinions, OpinionVersions]
-        votesThresholdHelpText:
-            expose: true
-            type: string
-            serialized_name: votesThresholdHelpText
-            groups: [Opinions, OpinionVersions]

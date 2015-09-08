@@ -6,9 +6,7 @@ Capco\AppBundle\Entity\OpinionType:
         color: red
         isEnabled: 0
         defaultFilter: votes
-        votesHelpText: <text(200)>
-        votesThreshold: 5
-        votesThresholdHelpText: <text(200)>
+        helpText: <text(200)>
     opinionType2:
         title: Les causes
         shortName: Causes
@@ -39,6 +37,3 @@ Capco\AppBundle\Entity\OpinionType:
         defaultFilter: positions
         isEnabled: true
         versionable: true
-        votesHelpText: <text(200)>
-        votesThreshold: 5
-        votesThresholdHelpText: <text(200)>
