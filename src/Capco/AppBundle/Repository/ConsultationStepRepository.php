@@ -118,7 +118,7 @@ class ConsultationStepRepository extends EntityRepository
     }
 
     /**
-     * Get one by slug with allowed types.
+     * Get one by slug.
      *
      * @param $slug
      *
@@ -126,11 +126,10 @@ class ConsultationStepRepository extends EntityRepository
      *
      * @throws \Doctrine\ORM\NonUniqueResultException
      */
-    public function getOneWithAllowedTypes($slug)
+    public function getOne($slug)
     {
         $qb = $this->getIsEnabledQueryBuilder()
-            ->addSelect('t', 'at')
-            ->leftJoin('cs.allowedTypes', 'at')
+            ->addSelect('t')
             ->andWhere('cs.slug = :slug')
             ->setParameter('slug', $slug)
         ;

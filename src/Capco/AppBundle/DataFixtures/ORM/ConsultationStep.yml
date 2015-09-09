@@ -27,6 +27,7 @@ Capco\AppBundle\Entity\ConsultationStep:
     cstep5:
         title: Elaboration de la Loi
         isEnabled: true
+        body: <text(1000)>
         startAt: <dateTimeBetween('-40 days', 'now')>
         endAt: <dateTimeBetween('now', '+10 days')>
         consultationType: @typePJL

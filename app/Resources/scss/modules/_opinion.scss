@@ -45,7 +45,6 @@
   .opinion__header {
     padding: 2px 15px;
     overflow: hidden;
-    border-bottom: 1px solid $border-color;
 
     .neutral-hover:hover,
     .neutral-hover:focus {
@@ -303,17 +302,23 @@
   }
 }
 
+// Opinion types title
+.opinion-type__title {
+  font-size: 18px;
+}
+@for $i from 0 through 2 {
+  .opinion-type__title.level--#{$i} {
+    font-size: 30px - $i * 4px;
+  }
+}
+
 // List of opinions
 .opinion__list {
   margin-bottom: 0;
 
   .opinion {
     border-top: 1px solid $border-color;
-    &:first-child {
-      border-top: 0;
-    }
   }
-
 
   .opinion--comment {
     border-top: 0;

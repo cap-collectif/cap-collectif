@@ -302,46 +302,4 @@ class ConsultationStep extends AbstractStep
     {
         return $this->argumentCount + $this->opinionCount + $this->trashedArgumentCount + $this->trashedOpinionCount + $this->opinionVersionsCount + $this->trashedOpinionVersionsCount + $this->sourcesCount + $this->trashedSourceCount;
     }
-
-    public function getMaximumPositionByOpinionType(OpinionType $type)
-    {
-        $position = 0;
-        foreach ($this->getOpinions() as $opinion) {
-            if ($opinion->getOpinionType() == $type && $opinion->getPosition() > $position) {
-                $position = $opinion->getPosition();
-            }
-        }
-
-        return $position;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getAllowedTypes()
-    {
-        if ($this->getConsultationType()) {
-            return $this->getConsultationType()->getOpinionTypes();
-        }
-        return new ArrayCollection();
-    }
-
-    /**
-     * @param $opinionType
-     *
-     * @return bool
-     */
-    public function allowType($opinionType)
-    {
-        return $this->getAllowedTypes()->contains($opinionType);
-    }
-
-    public function getAllowedTypesIds()
-    {
-        foreach ($this->getAllowedTypes() as $type) {
-            $typesIds[] = $type->getId();
-        }
-
-        return $typesIds;
-    }
 }

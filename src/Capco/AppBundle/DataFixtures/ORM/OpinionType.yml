@@ -34,7 +34,7 @@ Capco\AppBundle\Entity\OpinionType:
     opinionType5:
         title: Articles
         shortName: Articles
-        position: 5
+        position: 1
         color: blue
         defaultFilter: positions
         isEnabled: true
@@ -43,10 +43,22 @@ Capco\AppBundle\Entity\OpinionType:
         votesThreshold: 5
         votesThresholdHelpText: <text(200)>
     opinionType6:
-        title: Articles sur le transport
-        shortName: Articles sur le transport
-        position: 6
+        title: Sous-partie 1
+        shortName: Sous-partie 1
+        position: 1
         color: orange
+        defaultFilter: positions
+        isEnabled: false
+        versionable: true
+        votesHelpText: <text(200)>
+        votesThreshold: 5
+        votesThresholdHelpText: <text(200)>
+        parent: @opinionType5
+    opinionType7:
+        title: Sous-partie 2
+        shortName: Sous-partie 2
+        position: 2
+        color: red
         defaultFilter: positions
         isEnabled: true
         versionable: true

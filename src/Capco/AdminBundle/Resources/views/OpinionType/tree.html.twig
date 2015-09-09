@@ -6,12 +6,12 @@
         {% for element in collection %}
             <li class="sonata-ba-list-field" objectId="{{ element.id }}" >
                 <div class="sonata-tree__item"{% if depth < 2 %} data-treeview-toggled{% endif %}>
-                    {% if element.__children | length > 0 %}<i class="fa fa-caret-right" data-treeview-toggler></i>{% endif %}
+                    {% if element.children | length > 0 %}<i class="fa fa-caret-right" data-treeview-toggler></i>{% endif %}
                     <a class="sonata-tree__item__edit" href="{{ admin.generateUrl('edit', {'id': element.id}) }}">{{ element.title }}</a>
                 </div>
 
-                {% if element.__children|length %}
-                    {{ _self.navigate_child(element.__children, admin, false, depth + 1) }}
+                {% if element.children|length %}
+                    {{ _self.navigate_child(element.children, admin, false, depth + 1) }}
                 {% endif %}
             </li>
         {% endfor %}

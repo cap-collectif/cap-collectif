@@ -18,6 +18,7 @@ class OpinionTypeController extends Controller
     {
         $opinionTypeRepo = $this->get('doctrine.orm.entity_manager')
             ->getRepository('CapcoAppBundle:OpinionType');
+        $opinionTypeRepo->setChildrenIndex('children');
         $rootOTs = $opinionTypeRepo->childrenHierarchy();
 
         $datagrid = $this->admin->getDatagrid();

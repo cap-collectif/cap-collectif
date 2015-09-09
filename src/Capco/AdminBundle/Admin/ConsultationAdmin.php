@@ -256,11 +256,6 @@ class ConsultationAdmin extends Admin
         ;
     }
 
-    protected function configureRoutes(RouteCollection $collection)
-    {
-        $collection->add('getAllowedTypesFromConsultationType', 'allowed_types_from_consultation_types');
-    }
-
     // For mosaic view
     public function getObjectMetadata($object)
     {

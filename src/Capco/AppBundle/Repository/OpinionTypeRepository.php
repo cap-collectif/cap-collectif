@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\Repository;
 
+use Capco\AppBundle\Entity\ConsultationStep;
 use Doctrine\Common\Collections\ArrayCollection;
 use Gedmo\Tree\Entity\Repository\NestedTreeRepository;
 
@@ -76,22 +77,23 @@ class OpinionTypeRepository extends NestedTreeRepository
     }
 
     /**
-     * Get all opinionTypes with opinions for consultation step.
+     * Get all opinionTypes with opinions count for consultation step.
      *
      * @param $step
+     * @param $allowedTypes
      *
      * @return array
      */
-    public function getAllowedWithOpinionCount($step)
+    public function getAllowedTypesWithOpinionCount(ConsultationStep $step, $allowedTypes)
     {
         $qb = $this->createQueryBuilder('ot')
             ->select('ot.id', 'ot.title', 'ot.color', 'ot.isEnabled',  'ot.slug', 'ot.defaultFilter', 'count(o.id) as total_opinions_count')
             ->leftJoin('ot.Opinions', 'o', 'WITH', 'o.isEnabled = :enabled AND o.step = :step AND o.isTrashed = :notTrashed')
-            ->andWhere('ot.id IN (:allowedTypesIds)')
+            ->andWhere('ot IN (:allowedTypes)')
             ->setParameter('step', $step)
             ->setParameter('enabled', true)
             ->setParameter('notTrashed', false)
-            ->setParameter('allowedTypesIds', $step->getAllowedTypesIds())
+            ->setParameter('allowedTypes', $allowedTypes)
             ->addGroupBy('ot')
             ->orderBy('ot.position', 'ASC')
         ;

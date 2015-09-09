@@ -40,7 +40,6 @@
             </div>
             {% set opinionTypeCurrent = app.request.attributes.get('opinionTypeSlug') %}
             <div class="col-xs-12  col-sm-8  col-md-9" id="details">
-                {% include '@CapcoApp/Consultation/show_nav.html.twig' with {'opinionTypeCurrent': opinionTypeCurrent, 'consultation': consultation} %}
                 {% block opinions_list %}
                     {% if currentStep.body is not null %}
                         <div class="block  block--bordered">
