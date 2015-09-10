@@ -22,7 +22,41 @@ class OpinionTypesResolver
         $this->opinionTypeRepo->setChildrenIndex('children');
     }
 
-    public function getHierarchyForConsultationType(ConsultationType $ct)
+    public function getNavForStep(ConsultationStep $step)
+    {
+        $ct = $step->getConsultationType();
+
+        if ($ct === null) {
+            return [];
+        }
+
+        $options = [
+            'decorate' => true,
+            'rootOpen' => '<ul class="nav">',
+            'rootClose' => '</ul>',
+            'nodeDecorator' => function ($node) {
+                $anchor = '#opinion-type--'. $node['slug'];
+                $levelClass = 'nav--level-'.$node['level'];
+                return
+                    '<a class='.$levelClass.' href="'.$anchor.'">'
+                    .'<i class="fa fa-plus-circle"></i>'
+                    .$node['title']
+                    .'</a>'
+                    ;
+            },
+            'childSort' => ['field' => 'position', 'dir' => 'asc'],
+        ];
+
+        $nav = '<ul class="nav">';
+        foreach ($ct->getOpinionTypes() as $root) {
+            $nav .= $this->opinionTypeRepo->childrenHierarchy($root, false, $options, true);
+        }
+        $nav .= '</ul>';
+
+        return $nav;
+    }
+
+    public function getHierarchyForConsultationType(ConsultationType $ct, $options = [])
     {
         if ($ct === null) {
             return [];
@@ -32,7 +66,7 @@ class OpinionTypesResolver
         foreach ($ct->getOpinionTypes() as $root) {
             $opinionTypes = array_merge(
                 $opinionTypes,
-                $this->opinionTypeRepo->childrenHierarchy($root, false, [], true)
+                $this->opinionTypeRepo->childrenHierarchy($root, false, $options, true)
             );
         }
         return $opinionTypes;

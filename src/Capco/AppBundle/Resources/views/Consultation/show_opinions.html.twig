@@ -2,11 +2,15 @@
 {% macro display_child(collection, depth, currentStep, consultation) %}
     {% for block in collection %}
 
-        <p class="opinion-type__title level--{{ depth }}">{{ block.title }}</p>
+        <p id="opinion-type--{{ block.slug }}" class="anchor-offset text-center opinion-type__title level--{{ depth }}">
+            {{ block.title }}<br>
+            <span class="small excerpt">{{ block.subtitle }}</span>
+        </p>
 
-        {% if block.total_opinions_count > 0 or block.isEnabled == true and currentStep.canContribute %}
+        {% if block.total_opinions_count > 0 or (block.isEnabled == true and currentStep.canContribute) %}
 
-            <div id="opinions--{{ block.slug }}" class="block  block--bordered">
+            <div id="opinions--{{ block.slug }}" class="anchor-offset block  block--bordered">
+
                 <div class="opinion  opinion--{{ block.color }}  opinion--default">
                     <div class="opinion__header  opinion__header--mobile-centered">
                         <h2 class="pull-left  h4  opinion__header__title">

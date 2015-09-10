@@ -552,3 +552,7 @@
 .count__separator:first-of-type {
   display: none;
 }
+
+.block--bordered > .opinion__list:first-child > .opinion:first-child {
+  border-top: none;
+}

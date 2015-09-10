@@ -243,7 +243,7 @@ services:
 
     capco_admin.admin.consultation_type:
         class: Capco\AdminBundle\Admin\ConsultationTypeAdmin
-        arguments: [~, Capco\AppBundle\Entity\ConsultationType, SonataAdminBundle:CRUD]
+        arguments: [~, Capco\AppBundle\Entity\ConsultationType, CapcoAdminBundle:ConsultationType]
         tags:
             - {name: sonata.admin, manager_type: orm, group: admin.group.consultation, label: admin.label.consultation_type}
         calls:

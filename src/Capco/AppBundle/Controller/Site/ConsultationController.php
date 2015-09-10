@@ -78,9 +78,12 @@ class ConsultationController extends Controller
             }
         }
 
+        $nav = $this->get('capco.opinion_types.resolver')->getNavForStep($currentStep);
+
         return [
             'consultation' => $consultation,
             'currentStep' => $currentStep,
+            'nav' => $nav,
         ];
     }
 

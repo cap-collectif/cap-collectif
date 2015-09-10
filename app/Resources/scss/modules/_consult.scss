@@ -2,40 +2,20 @@
    $Consultation
 ================================================================*/
 
-// Navbar
+// Nav
 .consultation__nav {
-  background-color: $white;
+  padding-top: 30px;
 
-  .nav {
-    text-align: center;
-
-    li {
-      float: none;
-      display: inline-block;
-
-      &.active a,
-      a:hover {
-        color: $black;
-        background-color: transparent;
-        @include border-radius(0px);
-      }
-
-      a {
-        color: $dark-gray;
-      }
-    }
+  li > a {
+    color: $black;
+    font-size: 16px;
+    padding: 5px 15px;
+    padding-left: 90px;
   }
 
-  // Colors depending on opinion type
-  @each $type in $opinion-types {
-    $name: nth($type, 1);
-    $color: nth($type, 2);
-    $text: set-link-text-color($color);
-
-    li.consultation__nav--#{$name} {
-      &.active a {
-        @include box-shadow(0 -3px 0 $color inset);
-      }
+  @for $i from 0 through 5 {
+    .nav--level-#{$i} {
+      padding-left: $i * 15px + 15px;
     }
   }
 }

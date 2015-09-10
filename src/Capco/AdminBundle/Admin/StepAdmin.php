@@ -89,13 +89,15 @@ class StepAdmin extends Admin
             ;
         } elseif ($subject instanceof ConsultationStep) {
             $formMapper
-                ->add('body', null, array(
+                ->add('body', 'ckeditor', array(
+                    'config_name' => 'admin_editor',
                     'label' => 'admin.fields.step.body',
                     'required' => false,
                 ))
                 ->add('consultationType', 'sonata_type_model', array(
                     'label' => 'admin.fields.consultation.consultation_type',
                     'required' => true,
+                    'btn_add' => false,
                 ))
             ;
         } elseif ($subject instanceof SynthesisStep) {

@@ -1,7 +1,6 @@
 Capco\AppBundle\Entity\OpinionType:
     opinionType1:
         title: Le problème constaté
-        shortName: Problème
         position: 1
         voteWidgetType: 2
         color: red
@@ -9,15 +8,13 @@ Capco\AppBundle\Entity\OpinionType:
         defaultFilter: votes
     opinionType2:
         title: Les enjeux
-        shortName: Enjeux
         position: 2
         voteWidgetType: 2
         color: bluedark
         isEnabled: true
         defaultFilter: votes
     opinionType3:
-        title: Les cause
-        shortName: Causes
+        title: Les causes
         position: 3
         voteWidgetType: 2
         color: orange
@@ -25,7 +22,6 @@ Capco\AppBundle\Entity\OpinionType:
         defaultFilter: votes
     opinionType4:
         title: Les solutions
-        shortName: Solutions
         position: 4
         voteWidgetType: 2
         color: green

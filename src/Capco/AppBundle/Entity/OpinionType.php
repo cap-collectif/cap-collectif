@@ -64,12 +64,12 @@ class OpinionType
     /**
      * @var string
      *
-     * @ORM\Column(name="short_name", type="string", length=255)
+     * @ORM\Column(name="subtitle", type="string", length=255, nullable=true)
      */
-    private $shortName;
+    private $subtitle;
 
     /**
-     * @Gedmo\Slug(fields={"shortName"})
+     * @Gedmo\Slug(fields={"title", "subtitle"})
      * @ORM\Column(length=255)
      */
     private $slug;
@@ -111,7 +111,7 @@ class OpinionType
 
     /**
      * @var \DateTime
-     * @Gedmo\Timestampable(on="change", field={"title", "shortName", "position", "voteWidgetType", "color"})
+     * @Gedmo\Timestampable(on="change", field={"title", "subtitle", "position", "voteWidgetType", "color"})
      * @ORM\Column(name="updated_at", type="datetime")
      */
     private $updatedAt;
@@ -181,7 +181,7 @@ class OpinionType
     /**
      * @Gedmo\TreeParent
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\OpinionType", inversedBy="children", cascade={"persist"})
-     * @ORM\JoinColumn(name="parent_id", referencedColumnName="id", onDelete="SET NULL", nullable=true)
+     * @ORM\JoinColumn(name="parent_id", referencedColumnName="id", onDelete="CASCADE", nullable=true)
      */
     protected $parent = null;
 
@@ -212,6 +212,12 @@ class OpinionType
      * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\OpinionType", mappedBy="parent", cascade={"persist"})
      */
     protected $children;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\ConsultationType", inversedBy="opinionTypes", cascade={"persist"})
+     * @ORM\JoinColumn(name="consultation_type_id", nullable=true, onDelete="CASCADE")
+     */
+    protected $consultationType;
 
     public function __construct()
     {
@@ -274,27 +280,19 @@ class OpinionType
     }
 
     /**
-     * Get shortName.
-     *
      * @return string
      */
-    public function getShortName()
+    public function getSubtitle()
     {
-        return $this->shortName;
+        return $this->subtitle;
     }
 
     /**
-     * Set shortName.
-     *
-     * @param string $shortName
-     *
-     * @return OpinionType
+     * @param string $subtitle
      */
-    public function setShortName($shortName)
+    public function setSubtitle($subtitle)
     {
-        $this->shortName = $shortName;
-
-        return $this;
+        $this->subtitle = $subtitle;
     }
 
     /**
@@ -669,6 +667,22 @@ class OpinionType
             $this->children->removeElement($child);
         }
         $child->setParent(null);
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getConsultationType()
+    {
+        return $this->consultationType;
+    }
+
+    /**
+     * @param mixed $consultationType
+     */
+    public function setConsultationType($consultationType)
+    {
+        $this->consultationType = $consultationType;
     }
 
     public function getAllAppendixTypes()

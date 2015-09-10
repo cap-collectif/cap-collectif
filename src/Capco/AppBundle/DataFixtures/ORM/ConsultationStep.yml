@@ -4,7 +4,7 @@ Capco\AppBundle\Entity\ConsultationStep:
         isEnabled: true
         startAt: <dateTimeBetween('-40 days', 'now')>
         endAt: <dateTimeBetween('now', '+10 days')>
-        body: <text(1000)>
+        body: <p><text(1000)></p>
         consultationType: @typeDefault
     cstep2:
         title: Collecte des avis pour une meilleur stratégie
@@ -27,7 +27,7 @@ Capco\AppBundle\Entity\ConsultationStep:
     cstep5:
         title: Elaboration de la Loi
         isEnabled: true
-        body: <text(1000)>
+        body: <p><text(1000)></p>
         startAt: <dateTimeBetween('-40 days', 'now')>
         endAt: <dateTimeBetween('now', '+10 days')>
         consultationType: @typePJL

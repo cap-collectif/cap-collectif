@@ -5,70 +5,56 @@ admin.global:
   tree_mode: Arboresence
 
 # Dashboard groups
-admin.group.moderation: Contributions
-admin.group.content: Contenus
 admin.group.consultation: Consultations
-sonata.admin.group.user: Utilisateurs
-admin.group.parameters: Réglages
+admin.group.content: Contenus
+admin.group.moderation: Contributions
 admin.group.pages: Pages
+admin.group.parameters: Réglages
+sonata.admin.group.user: Utilisateurs
 
 # Dashboard names
-admin.label.appendix: Éléments de contexte
 admin.label.appendix_type: Éléments de contexte
-admin.label.page: Pages statiques
-admin.label.menu_item: Navigation
 admin.label.argument: Arguments
-admin.label.argument_vote: "Votes sur les arguments"
+admin.label.category: Types de sources
+admin.label.comment: Commentaires
 admin.label.consultation: Consultations
+admin.label.consultation_type: Structure
+admin.label.events: Évènements
 admin.label.footer_social_network: Réseaux sociaux (pied de page)
+admin.label.highlighted: A la une
 admin.label.idea: Idées
-admin.label.idea_vote: "Votes sur les idées"
+admin.label.menu_item: Navigation
 admin.label.newsletter_subscription: "Inscrits à la lettre d'information"
 admin.label.opinion: Propositions
-admin.label.opinion_type: "Catégories de propositions"
-admin.label.opinion_vote: "Votes sur les propositions"
+admin.label.page: Pages statiques
 admin.label.post: Articles
 admin.label.recent_posts: "Derniers articles"
 admin.label.reporting: Signalements
-admin.label.step: Étapes
-admin.label.theme: Thèmes
-admin.label.site_parameter: Informations
-admin.label.site_image: Images du site
-admin.label.site_color: Couleurs du site
-admin.label.social_network: Réseaux sociaux (page d'accueil)
-admin.label.category: Types de sources
-admin.label.source: Sources
-admin.label.posts: Articles
-admin.label.events: Évènements
-admin.label.features: Fonctionnalités
-admin.label.video: Vidéos
-admin.label.comment: Commentaires
-admin.label.comment_vote: Votes sur les commentaires
-admin.label.event_registrations: Inscription à l'évènement
-admin.label.consultation_type: Types de consultation
 admin.label.section: Accueil (sections)
+admin.label.social_network: Réseaux sociaux (page d'accueil)
+admin.label.source: Sources
+admin.label.step: Étape
+admin.label.theme: Thèmes
 admin.label.user_type: Types de profil
-admin.label.highlighted: A la une
-admin.label.consultation_abstractstep: Étape d'une consultation
-admin.label.synthesis: Synthèse
+admin.label.video: Vidéos
 
+admin.label.pages.blog: Actualités
+admin.label.pages.consultations: Consultations
+admin.label.pages.contact: Contact
+admin.label.pages.events: Évènements
+admin.label.pages.footer: Pied de page
 admin.label.pages.homepage: Accueil
 admin.label.pages.ideas: Idées
 admin.label.pages.ideas_trash: Corbeille des idées
-admin.label.pages.consultations: Consultations
-admin.label.pages.themes: Thèmes
-admin.label.pages.blog: Actualités
-admin.label.pages.events: Évènements
-admin.label.pages.contact: Contact
-admin.label.pages.registration: Inscription
 admin.label.pages.login: Connexion
 admin.label.pages.members: Liste des membres
-admin.label.pages.footer: Pied de page
+admin.label.pages.registration: Inscription
+admin.label.pages.themes: Thèmes
 
+admin.label.settings.appearance: Apparence
 admin.label.settings.global: Général
 admin.label.settings.modules: Fonctionnalités
 admin.label.settings.notifications: Notifications
-admin.label.settings.appearance: Apparence
 admin.label.settings.shield_mode: Mode bouclier
 
 # Messages
@@ -99,16 +85,16 @@ admin:
 
   features:
     title:
+      action: 'Action'
       enabled: 'Activé ?'
       module: 'Module'
-      action: 'Action'
 
   settings:
     header:
-      name: Paramètre
-      enabled: Actif
-      value: Valeur
       action: Action
+      enabled: Actif
+      name: Paramètre
+      value: Valeur
     color:
       undefined: Non défini
 
@@ -178,44 +164,44 @@ admin:
       voter: Votant
       created_at: Création
     consultation:
+      argument_count: Arguments
+      author: Auteur
+      body: Introduction
+      closed_at: Fermé
+      consultation_type: Structure
+      cover: Image
+      created_at: Création
+      events: Évènements
+      events_count: Évènements
+      exportable: Autoriser l'export
       group_content: Contenu
       group_meta: Métadonnées
-      group_opinion_types: Type de consultation
+      group_opinion_types: Structure
       group_steps: Étapes
-      title: Titre
-      author: Auteur
-      teaser: Accroche
-      body: Introduction
-      themes: Thèmes
-      steps: Étapes
-      opening_status: Statut
-      opened_at: Ouvert
-      closed_at: Fermé
-      step_title: Titre de l'étape
-      step_position: Position de l'étape
-      opinion_count: Propositions
-      trashed_opinion_count: Propositions dans la corbeille
-      argument_count: Arguments
-      trashed_argument_count: Arguments dans la corbeille
       is_enabled: Publié
-      published_at: Publication
-      updated_at: Mise à jour
-      created_at: Création
-      cover: Image
-      video: Vidéo
-      consultation_type: Type de consultation
-      events_count: Évènements
-      events: Évènements
-      posts_count: Articles
+      opened_at: Ouvert
+      opening_status: Statut
+      opinion_count: Propositions
       posts: Articles
-      exportable: Autoriser l'export
+      posts_count: Articles
+      published_at: Publication
+      steps: Étapes
+      step_position: Position de l'étape
+      step_title: Titre de l'étape
+      teaser: Accroche
+      title: Titre
+      themes: Thèmes
+      trashed_argument_count: Arguments dans la corbeille
+      trashed_opinion_count: Propositions dans la corbeille
+      updated_at: Mise à jour
+      video: Vidéo
     consultation_abstractstep:
+      position: Position
       steps: Étapes
       steps_add: Choisissez le type d'étape
-      position: Position
     consultation_type:
       title: Titre
-      opinion_types: Catégories
+      opinion_types: Éléments de structure
       updated_at: Mise à jour
       created_at: Création
     event:
@@ -348,8 +334,8 @@ admin:
       opinions: Propositions
       parent: Parent
       position: Position
-      short_name: Nom court
       sourceable: Autoriser les sources
+      subtitle: Sous-titre
       title: Titre
       updated_at: Mise à jour
       versionable: Autoriser les révisions
@@ -439,7 +425,7 @@ admin:
       is_enabled: Publié
       consultation: Consultation
       type: Type d'étape
-      body: Contenu
+      body: Introduction
       updated_at: Mise à jour
       created_at: Création
       synthesis: Synthèse

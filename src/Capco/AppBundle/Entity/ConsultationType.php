@@ -48,8 +48,7 @@ class ConsultationType
 
     /**
      * @var
-     * @ORM\ManyToMany(targetEntity="Capco\AppBundle\Entity\OpinionType")
-     * @ORM\JoinTable(name="consultationtype_opiniontypes")
+     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\OpinionType", mappedBy="consultationType", cascade={"persist", "remove"}, orphanRemoval=true)
      */
     private $opinionTypes;
 

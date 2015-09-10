@@ -8,29 +8,37 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 
 class OpinionTypeController extends Controller
 {
-
-    /**
-     * @param Request $request
-     *
-     * @return \Symfony\Component\HttpFoundation\Response
-     */
-    public function treeAction(Request $request)
+    protected function redirectTo($object, Request $request = null)
     {
-        $opinionTypeRepo = $this->get('doctrine.orm.entity_manager')
-            ->getRepository('CapcoAppBundle:OpinionType');
-        $opinionTypeRepo->setChildrenIndex('children');
-        $rootOTs = $opinionTypeRepo->childrenHierarchy();
+        $url = false;
 
-        $datagrid = $this->admin->getDatagrid();
+        $consultationTypeId = $object->getConsultationType() ? $object->getConsultationType()->getId() : $request->get('consultation_type_id');
 
-        $formView = $datagrid->getForm()->createView();
-        $this->get('twig')->getExtension('form')->renderer->setTheme($formView, $this->admin->getFilterTheme());
+        if (null !== $request->get('btn_update_and_list')) {
+            $url = $this->generateUrl('admin_capco_app_consultationtype_edit', ['id' => $consultationTypeId]);
+        }
+        if (null !== $request->get('btn_create_and_list')) {
+            $url = $this->generateUrl('admin_capco_app_consultationtype_edit', ['id' => $consultationTypeId]);
+        }
 
-        return $this->render('CapcoAdminBundle:OpinionType:tree.html.twig', array(
-            'action'           => 'tree',
-            'root_opinion_types'  => $rootOTs,
-            'form'             => $formView,
-            'csrf_token'       => $this->getCsrfToken('sonata.batch'),
-        ));
+        if (null !== $request->get('btn_create_and_create')) {
+            $params = array();
+            if ($this->admin->hasActiveSubClass()) {
+                $params['subclass'] = $request->get('subclass');
+            }
+            $url = $this->admin->generateUrl('create', $params);
+        }
+
+        if ($this->getRestMethod($request) === 'DELETE') {
+            $consultationTypeId = $request->get('consultation_type_id');
+            $url = $this->generateUrl('admin_capco_app_consultationtype_edit', ['id' => $consultationTypeId]);
+        }
+
+        if (!$url) {
+            $url = $this->admin->generateObjectUrl('edit', $object);
+        }
+
+        return new RedirectResponse($url);
     }
+
 }
