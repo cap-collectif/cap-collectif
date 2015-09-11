@@ -26,7 +26,7 @@ class CustomDiff extends JsDiff.Diff {
 
   tokenize = function(value) {
     const strippedValue = strip(value);
-    return removeEmpty(strippedValue.split(/(?=<parend>|[!,?,.]|<br>)+?()/));
+    return removeEmpty(strippedValue.split(/(\S.+?[.!?])(?=\s+|$|<br>)/));
   };
 
   prettyDiff = function(oldValue, newValue) {
