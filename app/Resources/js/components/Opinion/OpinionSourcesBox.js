@@ -42,9 +42,9 @@ const OpinionSourcesBox = React.createClass({
     if (this.state.sources.length > 1) {
       return (
         <select ref="filter" className="hidden-xs pull-right" value={this.state.filter} onChange={() => this.updateSelectedValue()}>
-          <option value="popular">{this.getIntlMessage('global.popular')}</option>
-          <option value="last">{this.getIntlMessage('global.last')}</option>
-          <option value="old">{this.getIntlMessage('global.old')}</option>
+          <option value="popular">{this.getIntlMessage('global.filter_popular')}</option>
+          <option value="last">{this.getIntlMessage('global.filter_last')}</option>
+          <option value="old">{this.getIntlMessage('global.filter_old')}</option>
         </select>
       );
     }

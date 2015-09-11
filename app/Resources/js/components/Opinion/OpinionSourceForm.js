@@ -31,6 +31,7 @@ const OpinionSourceForm = React.createClass({
       {
         title: {
           min: {value: 2, message: 'source.constraints.title'},
+          notBlank: {message: 'source.constraints.title'},
         },
         body: {
           min: {value: 2, message: 'source.constraints.body'},
@@ -39,6 +40,7 @@ const OpinionSourceForm = React.createClass({
           notBlank: {message: 'source.constraints.category'},
         },
         link: {
+          notBlank: {message: 'source.constraints.link'},
           isUrl: {message: 'source.constraints.link'},
         },
       }
