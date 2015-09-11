@@ -33,17 +33,21 @@ const CommentForm = React.createClass({
     const constraints = LoginStore.isLoggedIn() ?
       {
         body: {
+          notBlank: {message: 'comment.constraints.body'},
           min: {value: 2, message: 'comment.constraints.body'},
         },
       }
       : {
         authorEmail: {
+          notBlank: {message: 'comment.constraints.author_email'},
           isEmail: {message: 'comment.constraints.author_email'},
         },
         authorName: {
+          notBlank: {message: 'comment.constraints.author_name'},
           min: {value: 2, message: 'comment.constraints.author_name'},
         },
         body: {
+          notBlank: {message: 'comment.constraints.body'},
           min: {value: 2, message: 'comment.constraints.body'},
         },
       }
