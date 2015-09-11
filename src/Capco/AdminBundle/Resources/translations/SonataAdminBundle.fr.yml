@@ -342,17 +342,15 @@ admin:
       default_filter: Filtre par défaut
       group_info: Type de proposition
       group_options: Options
-      group_votes: Votes
-      group_contribution: Contribution
       group_appendices: Contexte
-      is_enabled: Autoriser les nouvelles propositions
+      is_enabled: Contribuable
       opinions: Propositions
       position: Position
       short_name: Nom court
-      sourceable: Autoriser les sources
+      sourceable: Sources
       title: Titre
       updated_at: Mise à jour
-      versionable: Autoriser les révisions
+      versionable: Versionable
       vote_widget_type: Type de vote
       votes_help_text: Texte d'aide pour les votes
       votes_threshold: Seuil de votes

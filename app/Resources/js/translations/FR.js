@@ -63,7 +63,7 @@ export default {
                 list: '{num, plural, =0{0 argument contre} one{# argument contre} other{# arguments contre}}',
             },
             simple: {
-                add: 'Déposer un avis',
+                add: 'Ajouter un avis',
                 list: '{num, plural, =0{0 avis} one{# avis} other{# avis}}',
             },
             constraints: {

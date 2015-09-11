@@ -385,7 +385,7 @@ argument:
     add:
       yes: Ajouter un argument pour
       no: Ajouter un argument contre
-      simple: Déposer un avis
+      simple: Ajouter un avis
     type:
       for: Pour
       against: Contre
@@ -393,9 +393,9 @@ argument:
   trashed:
     linked_proposition: Lié à la proposition :
   sort:
-    date: Les plus récents
-    popularity: Les plus votés
-    label: Tri
+    date: Date
+    popularity: Nombre de votes
+    label: Trier par
   none: Il n' y a pas d'arguments.
   vote:
     submit: D'accord
@@ -840,8 +840,8 @@ comment:
     email: Adresse électronique
     confirm: En modifiant mon commentaire, je comprends que les votes qui lui sont associés seront réinitialisés.
   sort:
-    date: Les plus récents
-    popularity: Les plus votés
+    date: Date
+    popularity: Nombre de votes
     label: Trier par
   none: Il n'y a pas de commentaires.
   vote:

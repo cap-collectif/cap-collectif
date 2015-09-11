@@ -113,8 +113,6 @@ class OpinionTypeAdmin extends Admin
         $formMapper
             ->with('admin.fields.opinion_type.group_info', array('class' => 'col-md-12'))->end()
             ->with('admin.fields.opinion_type.group_options', array('class' => 'col-md-12'))->end()
-            ->with('admin.fields.opinion_type.group_votes', array('class' => 'col-md-6'))->end()
-            ->with('admin.fields.opinion_type.group_contribution', array('class' => 'col-md-6'))->end()
             ->with('admin.fields.opinion_type.group_appendices', array('class' => 'col-md-12'))->end()
             ->end()
         ;
@@ -135,19 +133,28 @@ class OpinionTypeAdmin extends Admin
 
             // Options
             ->with('admin.fields.opinion_type.group_options')
+            ->add('isEnabled', null, array(
+                'label' => 'admin.fields.opinion_type.is_enabled',
+                'required' => false,
+            ))
             ->add('color', 'choice', array(
                 'label' => 'admin.fields.opinion_type.color',
                 'choices' => OpinionType::$colorsType,
                 'translation_domain' => 'CapcoAppBundle',
+            ))
+            ->add('versionable', null, array(
+                'label' => 'admin.fields.opinion_type.versionable',
+                'required' => false,
+            ))
+            ->add('sourceable', null, array(
+                'label' => 'admin.fields.opinion_type.sourceable',
+                'required' => false,
             ))
             ->add('defaultFilter', 'choice', array(
                 'label' => 'admin.fields.opinion_type.default_filter',
                 'choices' => Opinion::$sortCriterias,
                 'translation_domain' => 'CapcoAppBundle',
             ))
-            ->end()
-
-            ->with('admin.fields.opinion_type.group_votes')
             ->add('voteWidgetType', 'choice', array(
                 'label' => 'admin.fields.opinion_type.vote_widget_type',
                 'choices' => OpinionType::$voteWidgetLabels,
@@ -162,30 +169,15 @@ class OpinionTypeAdmin extends Admin
                 'label' => 'admin.fields.opinion_type.votes_threshold',
                 'required' => false,
             ))
-            ->add('votesThresholdHelpText', 'textarea', array(
-                'label' => 'admin.fields.opinion_type.votes_threshold_help_text',
-                'required' => false,
-            ))
-            ->end()
-
-            ->with('admin.fields.opinion_type.group_contribution')
-            ->add('isEnabled', null, array(
-                'label' => 'admin.fields.opinion_type.is_enabled',
-                'required' => false,
-            ))
-            ->add('versionable', null, array(
-                'label' => 'admin.fields.opinion_type.versionable',
-                'required' => false,
-            ))
-            ->add('sourceable', null, array(
-                'label' => 'admin.fields.opinion_type.sourceable',
-                'required' => false,
-            ))
             ->add('commentSystem', 'choice', array(
                 'label' => 'admin.fields.opinion_type.comment_system',
                 'choices' => OpinionType::$commentSystemLabels,
                 'translation_domain' => 'CapcoAppBundle',
                 'required' => true,
+            ))
+            ->add('votesThresholdHelpText', 'textarea', array(
+                'label' => 'admin.fields.opinion_type.votes_threshold_help_text',
+                'required' => false,
             ))
             ->end()
 
