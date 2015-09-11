@@ -342,8 +342,10 @@ admin:
       default_filter: Filtre par défaut
       group_info: Type de proposition
       group_options: Options
+      group_votes: Votes
+      group_contribution: Contribution
       group_appendices: Contexte
-      is_enabled: Contribuable
+      is_enabled: Autoriser les nouvelles propositions
       opinions: Propositions
       position: Position
       short_name: Nom court

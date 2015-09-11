@@ -278,7 +278,7 @@ consultation:
       votes_count: "]-Inf, 1] vote | ]1,Inf[ votes"
       argumentsCount: "]-Inf, 1] %count% argument | ]1,Inf[ %count% arguments"
       opinionsCount: "]-Inf, 1] %count% proposition | ]1,Inf[ %count% propositions"
-      versionsCount: "]-Inf, 1] %count% révision | ]1,Inf[ %count% révisions"
+      versionsCount: "]-Inf, 1] %count% autre version | ]1,Inf[ %count% autres versions"
       sourcesCount: "]-Inf, 1] %count% source | ]1,Inf[ %count% sources"
       read_more: Lire la suite
       read_less: Replier
@@ -299,7 +299,7 @@ consultation:
     opinions: "]-Inf, 1] %count% opinion | ]1,Inf[ %count% opinions"
     arguments: "]-Inf, 1] %count% argument | ]1,Inf[ %count% arguments"
     votes: "]-Inf, 1] %count% vote | ]1,Inf[ %count% votes"
-    versions: "]-Inf, 1] %count% révision | ]1,Inf[ %count% révisions"
+    versions: "]-Inf, 1] %count% autre version | ]1,Inf[ %count% autres versions"
     sources: "]-Inf, 1] %count% source | ]1,Inf[ %count% sources"
     contributions_no_nb: "]-Inf, 1] contribution | ]1,Inf[ contributions"
     contributors_nb: "]-Inf, 1] participant | ]1,Inf[ participants"
@@ -385,7 +385,7 @@ argument:
     add:
       yes: Ajouter un argument pour
       no: Ajouter un argument contre
-      simple: Ajouter un avis
+      simple: Déposer un avis
     type:
       for: Pour
       against: Contre
@@ -393,9 +393,9 @@ argument:
   trashed:
     linked_proposition: Lié à la proposition :
   sort:
-    date: Date
-    popularity: Nombre de votes
-    label: Trier par
+    date: Les plus récents
+    popularity: Les plus votés
+    label: Tri
   none: Il n' y a pas d'arguments.
   vote:
     submit: D'accord
@@ -414,7 +414,7 @@ argument:
 
 version:
   show:
-    count: "]-Inf, 0] 0 révision | {1} 1 révision | ]1,Inf[ %count% révisions"
+    count: "]-Inf, 0] 0 autre version | {1} 1 autre version | ]1,Inf[ %count% autres versions"
 
 appendix:
   form:
@@ -840,8 +840,8 @@ comment:
     email: Adresse électronique
     confirm: En modifiant mon commentaire, je comprends que les votes qui lui sont associés seront réinitialisés.
   sort:
-    date: Date
-    popularity: Nombre de votes
+    date: Les plus récents
+    popularity: Les plus votés
     label: Trier par
   none: Il n'y a pas de commentaires.
   vote:
@@ -897,7 +897,7 @@ consultation_download:
     non_applicable: n/a
     content_type:
       opinion: Proposition
-      version: Révision
+      version: Version
       appendix: Élément de contexte
       argument: Argument
       simple_argument: Avis
@@ -913,7 +913,7 @@ consultation_download:
       ok: Pour
     related:
       opinion: Proposition "%name%"
-      version: Révision "%name%"
+      version: Version "%name%"
       source: Source "%name%"
       argument: Argument "%id%"
 
