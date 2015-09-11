@@ -26,21 +26,21 @@
                 {% transchoice nbVotes with {'%count%': nbVotes} from 'CapcoAppBundle' %}
                     consultation.show.votes
                 {% endtranschoice %}
-                •
             {% endif %}
             {% if opinion.opinionType.commentSystem != 0 %}
+                <span class="count__separator"> • </span>
                 {% transchoice nbArguments with {'%count%': nbArguments} from 'CapcoAppBundle' %}
                     consultation.show.arguments
                 {% endtranschoice %}
-                •
             {% endif %}
             {% if opinion.opinionType.versionable %}
+                <span class="count__separator"> • </span>
                 {% transchoice nbVersions with {'%count%': nbVersions} from 'CapcoAppBundle' %}
                 consultation.show.versions
                 {% endtranschoice %}
-                •
             {% endif %}
             {% if opinion.opinionType.sourceable %}
+                <span class="count__separator"> • </span>
                 {% transchoice nbSources with {'%count%': nbSources} from 'CapcoAppBundle' %}
                     consultation.show.sources
                 {% endtranschoice %}

@@ -57,11 +57,11 @@ class Validator {
   }
 
   min(value) {
-    return !this.value || this.value.length >= value;
+    return this.value && this.value.length >= value;
   }
 
   max(value) {
-    return !this.value || this.value.length <= value;
+    return this.value && this.value.length <= value;
   }
 
   isEqual(value) {
@@ -74,12 +74,12 @@ class Validator {
 
   isEmail() {
     const re = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,15}(?:\.[a-z]{2})?)$/i;
-    return !this.value || re.test(this.value);
+    return this.value && re.test(this.value);
   }
 
   isUrl() {
     const urlPattern = /(^|\s)((https?:\/\/)?[\w-]+(\.[\w-]+)+\.?(:\d+)?(\/\S*)?)/gi;
-    return !this.value || urlPattern.test(this.value);
+    return this.value && urlPattern.test(this.value);
   }
 
   notNull() {

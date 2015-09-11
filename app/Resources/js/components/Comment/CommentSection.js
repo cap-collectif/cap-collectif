@@ -84,9 +84,9 @@ const CommentSection = React.createClass({
       return (
         <Col xsOffset={2} sm={4} className="hidden-xs">
           <select ref="filter" className="h2 form-control" value={this.state.filter} onChange={() => this.updateSelectedValue()}>
-            <option value="popular">{this.getIntlMessage('global.filter_popular')}</option>
-            <option value="last">{this.getIntlMessage('global.filter_last')}</option>
-            <option value="old">{this.getIntlMessage('global.filter_old')}</option>
+            <option value="popular">{this.getIntlMessage('global.popular')}</option>
+            <option value="last">{this.getIntlMessage('global.last')}</option>
+            <option value="old">{this.getIntlMessage('global.old')}</option>
           </select>
         </Col>
       );

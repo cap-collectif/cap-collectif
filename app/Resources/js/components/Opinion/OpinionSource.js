@@ -24,7 +24,7 @@ const OpinionSource = React.createClass({
                 <OpinionInfos opinion={source} />
                 <h3 className="opinion__title">
                   <Label bsStyle="primary">{ source.category.title }</Label>
-                  <a className="external-link" href={source.link}>
+                  <a href={source.link}>
                     { source.title }
                   </a>
                 </h3>

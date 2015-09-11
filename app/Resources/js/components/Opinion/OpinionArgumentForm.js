@@ -24,7 +24,6 @@ const OpinionArgumentForm = React.createClass({
   componentDidMount() {
     this.initForm('form', {
       body: {
-        notBlank: {message: 'argument.constraints.min'},
         min: {value: 3, message: 'argument.constraints.min'},
         max: {value: 2000, message: 'argument.constraints.max'},
       },

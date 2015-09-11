@@ -33,11 +33,6 @@ class OpinionVersionRepository extends EntityRepository
 
         if ($filter === 'popular') {
             $qb->addOrderBy('vnb', 'DESC');
-            $qb->addOrderBy('o.updatedAt', 'DESC');
-        }
-        if ($filter === 'comments') {
-            $qb->addOrderBy('o.argumentsCount', 'DESC');
-            $qb->addOrderBy('o.updatedAt', 'DESC');
         }
 
         $qb

@@ -1,7 +1,5 @@
 const MenuItem = ReactBootstrap.MenuItem;
 const DropdownButton = ReactBootstrap.DropdownButton;
-const Button = ReactBootstrap.Button;
-const Modal = ReactBootstrap.Modal;
 
 const ShareButtonDropdown = React.createClass({
   propTypes: {
@@ -15,28 +13,6 @@ const ShareButtonDropdown = React.createClass({
     return {
       className: '',
     };
-  },
-
-  getInitialState() {
-    return {
-      show: false,
-    };
-  },
-
-  renderModal() {
-    return (
-      <Modal show={this.state.show} onHide={this.hideModal} animation={false} dialogClassName="modal--custom">
-        <Modal.Header closeButton>
-          <Modal.Title>{this.getIntlMessage('share.link')}</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <p className="excerpt">{this.props.title}</p>
-          <textarea title={this.getIntlMessage('share.link')} readOnly rows="3">
-            {this.props.url}
-          </textarea>
-        </Modal.Body>
-      </Modal>
-    );
   },
 
   render() {
@@ -59,10 +35,6 @@ const ShareButtonDropdown = React.createClass({
         <MenuItem eventKey="4" href={`mailto:?subject=${this.props.title}&body=${this.props.url}`}>
           <i className="cap cap-mail-2-1"></i> {this.getIntlMessage('share.mail')}
         </MenuItem>
-        <MenuItem eventKey="4" onClick={this.showModal.bind(null, this)}>
-          <i className="cap cap-link-1"></i> {this.getIntlMessage('share.link')}
-        </MenuItem>
-        {this.renderModal()}
       </DropdownButton>
     );
   },
@@ -98,18 +70,6 @@ const ShareButtonDropdown = React.createClass({
       name,
       `top=${top},left=${left},menubar=0,toolbar=0,status=0,width=${width},height=${height}`
     );
-  },
-
-  showModal() {
-    this.setState({
-      show: true,
-    });
-  },
-
-  hideModal() {
-    this.setState({
-      show: false,
-    });
   },
 
 });

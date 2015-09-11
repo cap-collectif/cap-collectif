@@ -42,7 +42,6 @@ const OpinionVersionForm = React.createClass({
   componentDidMount() {
     const constraints = {
       title: {
-        notBlank: {message: 'opinion.version.title_error'},
         min: {value: 2, message: 'opinion.version.title_error'},
       },
       body: {
@@ -117,6 +116,7 @@ const OpinionVersionForm = React.createClass({
                   type="text"
                   bsStyle={this.getFieldStyle('title')}
                   valueLink={this.linkState('title')}
+                  placeholder={this.getIntlMessage('global.title')}
                 />
                 {this.renderFormErrors('title')}
               </div>

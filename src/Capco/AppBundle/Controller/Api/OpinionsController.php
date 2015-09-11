@@ -161,7 +161,7 @@ class OpinionsController extends FOSRestController
      * @ParamConverter("opinion", options={"mapping": {"id": "id"}, "method": "getOne"})
      * @QueryParam(name="offset", requirements="[0-9.]+", default="0")
      * @QueryParam(name="limit", requirements="[0-9.]+", default="10")
-     * @QueryParam(name="filter", requirements="(old|last|popular|comments)", default="last")
+     * @QueryParam(name="filter", requirements="(old|last|popular)", default="last")
      * @View(statusCode=200, serializerGroups={"OpinionVersions", "UsersInfos"})
      */
     public function cgetOpinionVersionsAction(Opinion $opinion, ParamFetcherInterface $paramFetcher)
