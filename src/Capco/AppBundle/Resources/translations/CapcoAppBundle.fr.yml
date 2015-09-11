@@ -385,7 +385,7 @@ argument:
     add:
       yes: Ajouter un argument pour
       no: Ajouter un argument contre
-      simple: Ajouter un avis
+      simple: Déposer un avis
     type:
       for: Pour
       against: Contre
@@ -393,9 +393,9 @@ argument:
   trashed:
     linked_proposition: Lié à la proposition :
   sort:
-    date: Date
-    popularity: Nombre de votes
-    label: Trier par
+    date: Les plus récents
+    popularity: Les plus votés
+    label: Tri
   none: Il n' y a pas d'arguments.
   vote:
     submit: D'accord
@@ -620,11 +620,16 @@ user:
       login: Connexion
       signin: Inscription
   register:
-    confirmation_message:
-      hello: Bonjour %username%,
-      thanks: Merci de vous êtes inscrit à %sitename%. Votre identifiant est : %email%.
-      validate: Pour valider votre compte, merci de vous rendre à cette adresse : %url% (lien à usage unique).
-      bye: À bientôt !
+    confirmation_message: |
+      Bonjour %username%,
+
+      Merci de vous êtes inscrit à %sitename%.
+
+      Pour valider votre compte, merci de vous rendre à cette adresse : %url% (lien à usage unique).
+
+      Votre identifiant est : %email%.
+
+      À bientôt !
     title: Inscription à la plateforme
     social:
       facebook: S'inscrire avec Facebook
@@ -835,8 +840,8 @@ comment:
     email: Adresse électronique
     confirm: En modifiant mon commentaire, je comprends que les votes qui lui sont associés seront réinitialisés.
   sort:
-    date: Date
-    popularity: Nombre de votes
+    date: Les plus récents
+    popularity: Les plus votés
     label: Trier par
   none: Il n'y a pas de commentaires.
   vote:
