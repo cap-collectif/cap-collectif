@@ -278,7 +278,7 @@ consultation:
       votes_count: "]-Inf, 1] vote | ]1,Inf[ votes"
       argumentsCount: "]-Inf, 1] %count% argument | ]1,Inf[ %count% arguments"
       opinionsCount: "]-Inf, 1] %count% proposition | ]1,Inf[ %count% propositions"
-      versionsCount: "]-Inf, 1] %count% autre version | ]1,Inf[ %count% autres versions"
+      versionsCount: "]-Inf, 1] %count% révision | ]1,Inf[ %count% révisions"
       sourcesCount: "]-Inf, 1] %count% source | ]1,Inf[ %count% sources"
       read_more: Lire la suite
       read_less: Replier
@@ -299,7 +299,7 @@ consultation:
     opinions: "]-Inf, 1] %count% opinion | ]1,Inf[ %count% opinions"
     arguments: "]-Inf, 1] %count% argument | ]1,Inf[ %count% arguments"
     votes: "]-Inf, 1] %count% vote | ]1,Inf[ %count% votes"
-    versions: "]-Inf, 1] %count% autre version | ]1,Inf[ %count% autres versions"
+    versions: "]-Inf, 1] %count% révision | ]1,Inf[ %count% révisions"
     sources: "]-Inf, 1] %count% source | ]1,Inf[ %count% sources"
     contributions_no_nb: "]-Inf, 1] contribution | ]1,Inf[ contributions"
     contributors_nb: "]-Inf, 1] participant | ]1,Inf[ participants"
@@ -414,7 +414,7 @@ argument:
 
 version:
   show:
-    count: "]-Inf, 0] 0 autre version | {1} 1 autre version | ]1,Inf[ %count% autres versions"
+    count: "]-Inf, 0] 0 révision | {1} 1 révision | ]1,Inf[ %count% révisions"
 
 appendix:
   form:
@@ -897,7 +897,7 @@ consultation_download:
     non_applicable: n/a
     content_type:
       opinion: Proposition
-      version: Version
+      version: Révision
       appendix: Élément de contexte
       argument: Argument
       simple_argument: Avis
@@ -913,7 +913,7 @@ consultation_download:
       ok: Pour
     related:
       opinion: Proposition "%name%"
-      version: Version "%name%"
+      version: Révision "%name%"
       source: Source "%name%"
       argument: Argument "%id%"
 

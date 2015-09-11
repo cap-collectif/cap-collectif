@@ -45,14 +45,14 @@ const OpinionPreview = React.createClass({
     const opinion = this.props.opinion;
     const type = this.getType();
     const counters = [];
-    if (!opinion.parent && type.versionable) {
-      counters.push(<FormattedMessage message={this.getIntlMessage('global.versions')} num={opinion.versions_count}/>);
-    }
     if (type.voteWidgetType !== 0) {
       counters.push(<FormattedMessage message={this.getIntlMessage('global.votes')} num={opinion.votes_total}/>);
     }
     if (type.commentSystem !== 0) {
       counters.push(<FormattedMessage message={this.getIntlMessage('global.arguments')} num={opinion.arguments_count} />);
+    }
+    if (!opinion.parent && type.versionable) {
+      counters.push(<FormattedMessage message={this.getIntlMessage('global.versions')} num={opinion.versions_count}/>);
     }
     if (type.sourceable) {
       counters.push(<FormattedMessage message={this.getIntlMessage('global.sources')} num={opinion.sources_count} />);

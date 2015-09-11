@@ -347,10 +347,10 @@ admin:
       opinions: Propositions
       position: Position
       short_name: Nom court
-      sourceable: Sources
+      sourceable: Autoriser les sources
       title: Titre
       updated_at: Mise à jour
-      versionable: Versionable
+      versionable: Autoriser les révisions
       vote_widget_type: Type de vote
       votes_help_text: Texte d'aide pour les votes
       votes_threshold: Seuil de votes
