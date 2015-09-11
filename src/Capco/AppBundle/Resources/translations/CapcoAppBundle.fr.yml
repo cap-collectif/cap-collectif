@@ -620,16 +620,11 @@ user:
       login: Connexion
       signin: Inscription
   register:
-    confirmation_message: |
-      Bonjour %username%,
-
-      Merci de vous êtes inscrit à %sitename%.
-
-      Pour valider votre compte, merci de vous rendre à cette adresse : %url% (lien à usage unique).
-
-      Votre identifiant est : %email%.
-
-      À bientôt !
+    confirmation_message:
+      hello: Bonjour %username%,
+      thanks: Merci de vous êtes inscrit à %sitename%. Votre identifiant est : %email%.
+      validate: Pour valider votre compte, merci de vous rendre à cette adresse : %url% (lien à usage unique).
+      bye: À bientôt !
     title: Inscription à la plateforme
     social:
       facebook: S'inscrire avec Facebook

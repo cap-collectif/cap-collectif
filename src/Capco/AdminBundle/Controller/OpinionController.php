@@ -4,7 +4,6 @@ namespace Capco\AdminBundle\Controller;
 
 use Capco\AppBundle\Entity\OpinionAppendix;
 use Capco\AppBundle\Entity\Opinion;
-use Doctrine\Common\Collections\ArrayCollection;
 use Sonata\AdminBundle\Controller\CRUDController as Controller;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -84,7 +83,7 @@ class OpinionController extends Controller
                 ->find($opinionTypeId);
             if ($opinionType) {
                 $object->setOpinionType($opinionType);
-                $object = $this->updateAppendicesForOpinion($object);
+                $object = $this->createAppendicesForOpinion($object);
             }
         }
 
@@ -207,8 +206,6 @@ class OpinionController extends Controller
         if ($preResponse !== null) {
             return $preResponse;
         }
-
-        $object = $this->updateAppendicesForOpinion($object);
 
         $this->admin->setSubject($object);
 
@@ -421,34 +418,18 @@ class OpinionController extends Controller
         return $opinionTypes;
     }
 
-    public function updateAppendicesForOpinion(Opinion $opinion)
+    public function createAppendicesForOpinion(Opinion $opinion)
     {
         $appendixTypes = $this->get('doctrine.orm.entity_manager')
             ->getRepository('CapcoAppBundle:OpinionTypeAppendixType')
             ->findBy(
                 ['opinionType' => $opinion->getOpinionType()],
                 ['position' => 'ASC']
-        );
-        $newAppendices = new ArrayCollection();
-        $currentAppendices = $opinion->getAppendices();
+            );
         foreach ($appendixTypes as $otat) {
-            $found = false;
-            foreach ($currentAppendices as $capp) {
-                if ($capp->getAppendixType() === $otat->getAppendixType()) {
-                    $found = true;
-                    $newAppendices->add($capp);
-                    break;
-                }
-            }
-            if (!$found) {
-                $app = new OpinionAppendix();
-                $app->setAppendixType($otat->getAppendixType());
-                $app->setOpinion($opinion);
-                $newAppendices->add($app);
-            }
-        }
-        $opinion->setAppendices(new ArrayCollection());
-        foreach ($newAppendices as $app) {
+            $app = new OpinionAppendix();
+            $app->setAppendixType($otat->getAppendixType());
+            $app->setOpinion($opinion);
             $opinion->addAppendice($app);
         }
         return $opinion;

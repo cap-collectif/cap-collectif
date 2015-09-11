@@ -5,9 +5,11 @@
 {% endblock %}
 
 {% block body_text %}
-{% autoescape false %}
-{{ 'user.register.confirmation_message'|trans({'%username%': user.username, '%sitename%': capco_site_parameter_value('global.site.fullname'),'%url%': confirmationUrl, '%email%': user.email}, 'CapcoAppBundle') }}
-{% endautoescape %}
+    <p>{{ 'user.register.confirmation_message.hello'|trans({'%username%': user.username}, 'CapcoAppBundle') }}</p>
+    <p>{{ 'user.register.confirmation_message.thanks'|trans({'%sitename%': capco_site_parameter_value('global.site.fullname'), '%email%': user.email}, 'CapcoAppBundle') }}</p>
+    <p>{{ 'user.register.confirmation_message.validate'|trans({'%url%': confirmationUrl}, 'CapcoAppBundle') }}</p>
+    <p>{{ 'user.register.confirmation_message.bye'|trans({}, 'CapcoAppBundle') }}</p>
 {% endblock %}
 
-{% block body_html %}{% endblock %}
+{% block body_html %}
+{% endblock %}

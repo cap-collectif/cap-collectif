@@ -50,7 +50,6 @@ class OpinionsType extends AbstractType
             ))
             ->add('appendices', 'collection', [
                 'type' => new AppendixType(),
-                'label' => false,
             ])
         ;
 
