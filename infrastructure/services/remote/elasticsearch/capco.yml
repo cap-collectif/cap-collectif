@@ -1,5 +1,10 @@
-cluster:
-  name: capco
+# Cluster name identifies your cluster for auto-discovery. If you're running
+# multiple clusters on the same network, make sure you're using unique names.
+#
+cluster.name: capco
+
+# Disable network
+node.local: true
 
 marvel.agent.enabled: false
 script.disable_dynamic: false

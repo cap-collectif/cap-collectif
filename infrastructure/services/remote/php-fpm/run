@@ -18,13 +18,13 @@ if [ "$RESULT" != "0" ]; then
     php app/console doctrine:database:create --env=prod --if-not-exists
     php app/console doctrine:migrations:migrate --env=prod --no-interaction
     php app/console capco:load-base-data --force --env=prod --no-interaction
+    php app/console fos:elastica:populate --env=prod
 else
     php app/console doctrine:migrations:migrate --env=prod --no-interaction
 fi
 
 php app/console cache:clear --env=prod --no-debug
 php app/console assets:install --symlink
-php app/console fos:elastica:populate --env=prod
 
 EOF
 
