@@ -14,6 +14,10 @@ class CommentSerializationListener implements EventSubscriberInterface
 
     public function __construct(RouterInterface $router, TokenStorageInterface $tokenStorage)
     {
+        if (getenv('SYMFONY_USE_SSL')) {
+            $router->getContext()->setScheme('https');
+        }
+
         $this->router = $router;
         $this->tokenStorage = $tokenStorage;
     }
@@ -30,7 +34,6 @@ class CommentSerializationListener implements EventSubscriberInterface
     public function onPostAbstractCommentSerialize(ObjectEvent $event)
     {
         $comment = $event->getObject();
-
         $event->getVisitor()->addData(
             '_links',
             [
