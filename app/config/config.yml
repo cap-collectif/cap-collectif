@@ -32,6 +32,16 @@ framework:
     http_method_override: true
     translator: { fallback: fr }
 
+snc_redis:
+    clients:
+        default:
+            type: predis
+            alias: default
+            dsn: redis://localhost
+        session:
+            type: predis
+            alias: session
+
 twig:
     debug: "%kernel.debug%"
     strict_variables: "%kernel.debug%"

@@ -60,7 +60,7 @@ class AppKernel extends Kernel
             new Qandidate\Bundle\ToggleBundle\QandidateToggleBundle(),
 
             // Redis
-            // new Snc\RedisBundle\SncRedisBundle(),
+            new Snc\RedisBundle\SncRedisBundle(),
 
             // typography concerns
             new Joli\TypoBundle\JoliTypoBundle(),
