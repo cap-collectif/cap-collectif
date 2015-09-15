@@ -51,7 +51,7 @@
         "hwi/oauth-bundle": "~0.4@dev",
         "liip/imagine-bundle": "~0.9",
         "qandidate/toggle-bundle": "~0.1",
-        "predis/predis": "0.8.x-dev",
+        "predis/predis": "~1.0",
         "jolicode/jolitypo-bundle": "dev-master",
 
         "doctrine/doctrine-migrations-bundle": "~1.0",
@@ -65,8 +65,7 @@
         "nelmio/api-doc-bundle": "~2.9",
         "friendsofsymfony/rest-bundle": "~1.7",
         "lexik/jwt-authentication-bundle": "~1.0",
-        "willdurand/hateoas-bundle": "~1.0",
-        "snc/redis-bundle": "1.1.x-dev"
+        "willdurand/hateoas-bundle": "~1.0"
     },
     "require-dev": {
         "sensio/generator-bundle": "~2.3",

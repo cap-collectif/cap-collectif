@@ -33,13 +33,6 @@ class ConsultationType
     private $title;
 
     /**
-     * @var bool
-     *
-     * @ORM\Column(name="enabled", type="boolean", nullable=false)
-     */
-    private $enabled = true;
-
-    /**
      * @var \DateTime
      * @Gedmo\Timestampable(on="create")
      * @ORM\Column(name="created_at", type="datetime")
@@ -48,15 +41,14 @@ class ConsultationType
 
     /**
      * @var \DateTime
-     * @Gedmo\Timestampable(on="change", field={"title", "isEnabled", "opinionTypes"})
+     * @Gedmo\Timestampable(on="change", field={"title", "opinionTypes"})
      * @ORM\Column(name="updated_at", type="datetime")
      */
     private $updatedAt;
 
     /**
      * @var
-     * @ORM\ManyToMany(targetEntity="Capco\AppBundle\Entity\OpinionType")
-     * @ORM\JoinTable(name="consultationtype_opiniontypes")
+     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\OpinionType", mappedBy="consultationType", cascade={"persist", "remove"}, orphanRemoval=true)
      */
     private $opinionTypes;
 
@@ -108,30 +100,6 @@ class ConsultationType
     public function setTitle($title)
     {
         $this->title = $title;
-
-        return $this;
-    }
-
-    /**
-     * Is enabled.
-     *
-     * @return bool
-     */
-    public function enabled()
-    {
-        return $this->enabled;
-    }
-
-    /**
-     * Set enabled.
-     *
-     * @param bool $enabled
-     *
-     * @return Consultation
-     */
-    public function setEnabled($enabled)
-    {
-        $this->enabled = $enabled;
 
         return $this;
     }

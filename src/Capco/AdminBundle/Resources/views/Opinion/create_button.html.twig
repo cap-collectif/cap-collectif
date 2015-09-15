@@ -1,14 +1,14 @@
 {% if admin.hasRoute('create') and admin.isGranted('CREATE')%}
-    {% if opinionTypes | length > 0 %}
-        <li class="divider" role="presentation"></li>
-        {% for opinionType in opinionTypes %}
+    {% if consultationTypes | length > 0 %}
+        {% for consultationType, opinionTypes in consultationTypes %}
             <li>
-                <a href="{{ admin.generateUrl('create', {'opinion_type': opinionType.id}) }}">
-                    <i class="fa fa-plus-circle"></i>
-                    {{ opinionType.shortName | trans({}, admin.translationdomain) }}
-                </a>
+                <span class="dropdown-header">
+                    {{ consultationType }}
+                </span>
             </li>
+            {% for html in opinionTypes %}
+                {{ html | raw }}
+            {% endfor %}
         {% endfor %}
-        <li class="divider" role="presentation"></li>
     {% endif %}
 {% endif %}

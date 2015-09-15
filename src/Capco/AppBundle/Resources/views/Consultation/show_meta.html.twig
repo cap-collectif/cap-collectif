@@ -38,7 +38,7 @@
             <ul class="nav">
                 {% if hasContributors %}
                     <li {% if currentStep == 'contributors_step' %} class="active" {% endif %}>
-                        <a href="{{ path('app_consultation_show_contributors', {
+                        <a id="participants_link" href="{{ path('app_consultation_show_contributors', {
                             'consultationSlug': consultation.slug }) }}">
                            <p class="navbar__step-title">{{ 'consultation.show.meta.info.contributors'|trans({}, 'CapcoAppBundle') }}  <i class="pull-right  excerpt  cap-arrow-66"></i></p>
                         </a>
@@ -46,14 +46,14 @@
                 {% endif %}
                 {% if hasPosts %}
                     <li {% if currentStep == 'posts_step' %} class="active" {% endif %}>
-                        <a href="{{ path('app_consultation_show_posts', {'consultationSlug': consultation.slug}) }}">
+                        <a id="posts_link" href="{{ path('app_consultation_show_posts', {'consultationSlug': consultation.slug}) }}">
                             <p class="navbar__step-title">{{ 'consultation.show.meta.info.posts'|trans({}, 'CapcoAppBundle') }}  <i class="pull-right  excerpt  cap-arrow-66"></i></p>
                         </a>
                     </li>
                 {% endif %}
                 {% if hasEvents %}
                     <li {% if currentStep == 'events_step' %} class="active" {% endif %}>
-                        <a href="{{ path('app_consultation_show_events', {'consultationSlug': consultation.slug}) }}">
+                        <a id="events_link" href="{{ path('app_consultation_show_events', {'consultationSlug': consultation.slug}) }}">
                             <p class="navbar__step-title">{{ 'consultation.show.meta.info.events'|trans({}, 'CapcoAppBundle') }}  <i class="pull-right  excerpt  cap-arrow-66"></i></p>
                         </a>
                     </li>
@@ -65,7 +65,7 @@
 
 {% set showTrash = is_feature_enabled('consultation_trash') %}
 {% if showTrash %}
-    <div>
+    <div class="block">
         <h2 class="h5 excerpt">{{ 'consultation.show.meta.data.title'|trans({}, 'CapcoAppBundle') | upper }}</h2>
         <div class="navbar--sub  navbar--no-nb">
             <ul class="nav">

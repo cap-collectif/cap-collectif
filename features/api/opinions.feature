@@ -21,6 +21,7 @@ Feature: Opinions
         "type": {
           "id": @integer@,
           "title": @string@,
+          "subtitle": @string@,
           "voteWidgetType": @integer@,
           "votesHelpText": @string@,
           "commentSystem": @integer@,

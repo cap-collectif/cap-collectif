@@ -59,9 +59,6 @@ class AppKernel extends Kernel
             // feature activation / deactivation
             new Qandidate\Bundle\ToggleBundle\QandidateToggleBundle(),
 
-            // Redis
-            new Snc\RedisBundle\SncRedisBundle(),
-
             // typography concerns
             new Joli\TypoBundle\JoliTypoBundle(),
 
