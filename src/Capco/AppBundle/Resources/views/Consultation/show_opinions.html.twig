@@ -1,46 +1,65 @@
-{% if blocks|length > 0 %}
-    {% for block in blocks %}
-    <div class="block  block--bordered">
-        <div class="opinion  opinion--{{ block.color }}  opinion--default">
-            <div class="opinion__header  opinion__header--mobile-centered">
-                <h2 class="pull-left  h4  opinion__header__title">
-                    {{ block.title }} <span class="badge">{{ block.total_opinions_count }}</span>
-                </h2>
-                <div class="pull-right  opinion__header__filter">
-                    {{ form_start(block.sortForm) }}
-                    {{ form_label(block.sortForm.opinionsSort, null, {'label_attr':{"class":"control-label  sr-only"} }) }}
-                    {{ form_widget(block.sortForm.opinionsSort, {'attr':{"class":"form-control", 'onchange': 'this.form.submit()'} }) }}
-                    {{ form_end(block.sortForm) }}
-                    {% if block.isEnabled == true and currentStep.canContribute %}
-                        <a href="{{ path('app_consultation_new_opinion' ,{'consultationSlug': consultation.slug, 'stepSlug': currentStep.slug, 'opinionTypeSlug': block.slug } ) }}" class="btn  btn-default">
-                            <i class="cap cap-add-1"></i>
-                            <span class="hidden-xs">{{ 'opinion.create.button'|trans({}, 'CapcoAppBundle') }}</span>
-                        </a>
+{% import _self as tree %}
+{% macro display_child(collection, depth, currentStep, consultation) %}
+    {% for block in collection %}
+
+        <p id="opinion-type--{{ block.slug }}" class="anchor-offset text-center opinion-type__title level--{{ depth }}">
+            {{ block.title }}<br>
+            <span class="small excerpt">{{ block.subtitle }}</span>
+        </p>
+
+        {% if block.total_opinions_count > 0 or (block.isEnabled == true and currentStep.canContribute) %}
+
+            <div id="opinions--{{ block.slug }}" class="anchor-offset block  block--bordered">
+
+                <div class="opinion  opinion--{{ block.color }}  opinion--default">
+                    <div class="opinion__header  opinion__header--mobile-centered">
+                        <h2 class="pull-left  h4  opinion__header__title">
+                            {{ 'consultation.show.opinions' | transchoice(block.total_opinions_count, {}, 'CapcoAppBundle')  }}
+                        </h2>
+                        <div class="pull-right  opinion__header__filter">
+                            {% if block.total_opinions_count > 1 %}
+                                {{ form_start(block.sortForm) }}
+                                {{ form_label(block.sortForm.opinionsSort, null, {'label_attr':{"class":"control-label  sr-only"} }) }}
+                                {{ form_widget(block.sortForm.opinionsSort, {'attr':{"class":"form-control", 'onchange': 'this.form.submit()'} }) }}
+                                {{ form_end(block.sortForm) }}
+                            {% endif %}
+                            {% if block.isEnabled == true and currentStep.canContribute %}
+                                <a id="btn-add--{{ block.slug }}" href="{{ path('app_consultation_new_opinion' ,{'consultationSlug': consultation.slug, 'stepSlug': currentStep.slug, 'opinionTypeSlug': block.slug } ) }}" class="btn  btn-default">
+                                    <i class="cap cap-add-1"></i>
+                                    <span class="hidden-xs">{{ 'opinion.create.button'|trans({}, 'CapcoAppBundle') }}</span>
+                                </a>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+
+                {% if block.total_opinions_count > 0 %}
+                    <ul class="media-list  opinion__list">
+                        {% for opinion in block.opinions %}
+                            {% include 'CapcoAppBundle:Opinion:blockOpinion.html.twig' with {'opinion': opinion, 'opinionType': block} only %}
+                        {% endfor %}
+                    </ul>
+                    {% if block.total_opinions_count > 5  %}
+                        <div class="opinion  opinion__footer  box">
+                            <a href="{{ path('app_consultation_show_opinions', {'consultationSlug': consultation.slug, 'stepSlug': currentStep.slug,'opinionTypeSlug': block.slug}) }}" class="text-center" style="display: block">
+                                {{ 'opinion.show.all'|trans({}, 'CapcoAppBundle') }}
+                            </a>
+                        </div>
                     {% endif %}
-                </div>
-            </div>
-        </div>
-        {% if block.total_opinions_count > 0 %}
-            <ul class="media-list  opinion__list">
-                {% for opinion in block.opinions %}
-                    {% include 'CapcoAppBundle:Opinion:blockOpinion.html.twig' with {'opinion': opinion, 'opinionType': block} only %}
-                {% endfor %}
-            </ul>
-            {% if block.total_opinions_count > 5  %}
-                <div class="opinion  opinion__footer  box">
-                    <a href="{{ path('app_consultation_show_opinions', {'consultationSlug': consultation.slug, 'stepSlug': currentStep.slug,'opinionTypeSlug': block.slug}) }}" class="text-center" style="display: block">
-                        {{ 'opinion.show.all'|trans({}, 'CapcoAppBundle') }}
-                    </a>
-                </div>
-            {% endif %}
-        {% else %}
-            <div class="opinion-type__empty-block  text-center">
-                <p class="icon cap-bubble-attention-6"></p>
-                <p>{{ 'opinion.show.none'|trans({}, 'CapcoAppBundle') }}</p>
+                {% endif %}
+
             </div>
         {% endif %}
-    </div>
+
+        {% if block.children|length %}
+            {{ _self.display_child(block.children, depth + 1, currentStep, consultation) }}
+        {% endif %}
+
     {% endfor %}
+{% endmacro %}
+
+{% if blocks|length > 0 %}
+    {{ tree.display_child(blocks, 0, currentStep, consultation) }}
 {% else %}
     <div class="consultation__empty-block  text-center">
         <p class="icon  cap-bubble-attention-6"></p>

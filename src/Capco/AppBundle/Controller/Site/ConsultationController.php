@@ -47,7 +47,7 @@ class ConsultationController extends Controller
      * @Route("/consultations/{consultationSlug}/consultation/{stepSlug}", name="app_consultation_show")
      * @Template("CapcoAppBundle:Consultation:show.html.twig")
      * @ParamConverter("consultation", class="CapcoAppBundle:Consultation", options={"mapping": {"consultationSlug": "slug"}, "method"="getOne"})
-     * @ParamConverter("currentStep", class="CapcoAppBundle:ConsultationStep", options={"mapping": {"stepSlug": "slug"}, "method"="getOneWithAllowedTypes"})
+     * @ParamConverter("currentStep", class="CapcoAppBundle:ConsultationStep", options={"mapping": {"stepSlug": "slug"}, "method"="getOne"})
      *
      * @param Request          $request
      * @param Consultation     $consultation
@@ -61,18 +61,6 @@ class ConsultationController extends Controller
 
         if (false === $currentStep->canDisplay()) {
             throw $this->createNotFoundException($this->get('translator')->trans('consultation.error.not_found', [], 'CapcoAppBundle'));
-        }
-
-        // Redirect if there is only one opinion type allowed
-        if (count($currentStep->getAllowedTypes()) == 1) {
-            $opinionType = $currentStep->getAllowedTypes()->first();
-
-            return $this->redirect($this->generateUrl('app_consultation_show_opinions_sorted', [
-                'consultationSlug' => $consultation->getSlug(),
-                'stepSlug' => $currentStep->getSlug(),
-                'opinionTypeSlug' => $opinionType->getSlug(),
-                'opinionsSort' => $opinionType->getDefaultFilter(),
-            ]));
         }
 
         if ('POST' === $request->getMethod() && $request->request->has('capco_app_opinions_sort')) {
@@ -90,9 +78,12 @@ class ConsultationController extends Controller
             }
         }
 
+        $nav = $this->get('capco.opinion_types.resolver')->getNavForStep($currentStep);
+
         return [
             'consultation' => $consultation,
             'currentStep' => $currentStep,
+            'nav' => $nav,
         ];
     }
 
@@ -106,24 +97,27 @@ class ConsultationController extends Controller
      */
     public function showOpinionsAction(Consultation $consultation, ConsultationStep $currentStep)
     {
-        $blocks = [];
-        if (count($currentStep->getAllowedTypes()) > 0) {
-            $blocks = $this->getDoctrine()
-                           ->getRepository('CapcoAppBundle:OpinionType')
-                           ->getAllowedWithOpinionCount($currentStep);
+        $tree = $this->get('capco.opinion_types.resolver')
+            ->getGroupedOpinionsForStep($currentStep);
 
-            foreach ($blocks as $key => $block) {
-                $blocks[$key]['opinions'] = $this->getDoctrine()
-                                                 ->getRepository('CapcoAppBundle:Opinion')
-                                                 ->getByConsultationStepAndOpinionTypeOrdered($currentStep, $block['id'], 5, $block['defaultFilter'])
-                                            ;
-                $form = $this->createForm(new OpinionsSortType($block));
-                $blocks[$key]['sortForm'] = $form->createView();
+        $addForm = function ($tree) use (&$addForm) {
+            $childrenTree = [];
+            foreach ($tree as $node) {
+                $form = $this->createForm(new OpinionsSortType($node));
+                $node['sortForm'] = $form->createView();
+                if (count($node['children']) > 0) {
+                    $node['children'] = $addForm($node['children']);
+                }
+                $childrenTree[] = $node;
             }
-        }
+
+            return $childrenTree;
+        };
+
+        $tree = $addForm($tree);
 
         return [
-            'blocks' => $blocks,
+            'blocks' => $tree,
             'consultation' => $consultation,
             'currentStep' => $currentStep,
         ];
@@ -152,7 +146,12 @@ class ConsultationController extends Controller
             throw $this->createNotFoundException($this->get('translator')->trans('consultation.error.not_found', [], 'CapcoAppBundle'));
         }
 
-        if (false == $currentStep->allowType($opinionType)) {
+        $opinionTypesResolver = $this->get('capco.opinion_types.resolver');
+
+        $allowedTypes = $this->get('capco.opinion_types.resolver')
+            ->getHierarchyForConsultationType($currentStep->getConsultationType());
+
+        if (false == $opinionTypesResolver->stepAllowType($currentStep, $opinionType)) {
             throw new NotFoundHttpException('This type does not exist for this consultation');
         }
 
@@ -170,6 +169,7 @@ class ConsultationController extends Controller
                     'stepSlug' => $currentStep->getSlug(),
                     'opinionTypeSlug' => $opinionType->getSlug(),
                     'opinionsSort' => $data['opinionsSort'],
+                    'allowedTypes' => $allowedTypes,
                 )));
             }
         } else {
@@ -180,6 +180,7 @@ class ConsultationController extends Controller
 
         $currentUrl = $this->generateUrl('app_consultation_show_opinions', ['consultationSlug' => $consultation->getSlug(), 'stepSlug' => $currentStep->getSlug(), 'opinionTypeSlug' => $opinionType->getSlug()]);
         $opinions = $this->getDoctrine()->getRepository('CapcoAppBundle:Opinion')->getByOpinionTypeAndConsultationStepOrdered($currentStep, $opinionType, 10, $page, $filter);
+        $nav = $this->get('capco.opinion_types.resolver')->getNavForStep($currentStep);
 
         return [
             'currentUrl' => $currentUrl,
@@ -191,6 +192,8 @@ class ConsultationController extends Controller
             'sortOpinionsForm' => $form->createView(),
             'opinionsSort' => $filter,
             'currentStep' => $currentStep,
+            'allowedTypes' => $allowedTypes,
+            'nav' => $nav,
         ];
     }
 

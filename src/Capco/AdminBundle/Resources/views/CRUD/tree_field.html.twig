@@ -1,0 +1,38 @@
+{% import _self as tree %}
+{% macro show_children(children, admin, depth, ctId) %}
+    <ul>
+        {% for element in children %}
+            <li class="sonata-ba-list-field" objectId="{{ element.id }}" >
+                <div class="sonata-tree__item"{% if depth < 2 %} data-treeview-toggled{% endif %}>
+                    {% if element.__children | length > 0 %}<i class="fa fa-caret-right" data-treeview-toggler></i>{% endif %}
+                    <a class="sonata-tree__item__edit" href="{{ admin.generateUrl('edit', {'id': element.id, 'consultation_type_id': ctId }) }}">{{ element.title }}</a>
+                </div>
+
+                {% if element.__children | length %}
+                    {{ _self.show_children(element.__children, admin, depth + 1, ctId) }}
+                {% endif %}
+            </li>
+        {% endfor %}
+    </ul>
+{% endmacro %}
+
+{% set admin = sonata_admin.field_description.associationadmin %}
+{% set ctId = sonata_admin.admin.subject.id %}
+<ul class="sonata-tree sonata-tree--toggleable js-treeview" style="margin-left: 0;" >
+    {% for key, element in form.children %}
+        {% set id = element.vars.value %}
+        {% set label = element.vars.label %}
+        {% set children = (hierarchy | length > 0 and hierarchy[id] is defined > 0) ? hierarchy[id] : [] %}
+        <li class="sonata-ba-list-field" objectId="{{ id }}" >
+            <div class="sonata-tree__item" data-treeview-toggled>
+                {% if children | length > 0 %}<i class="fa fa-caret-right" data-treeview-toggler></i>{% endif %}
+                {{ form_widget(element, {'attr': {'class': 'hidden', 'checked': true}}) }}
+                <a class="sonata-tree__item__edit" href="{{ admin.generateUrl('edit', {'id': id, 'consultation_type_id': ctId }) }}">{{ label }}</a>
+            </div>
+
+            {% if children | length %}
+                {{ _self.show_children(children, admin, false, 1, ctId) }}
+            {% endif %}
+        </li>
+    {% endfor %}
+</ul>
