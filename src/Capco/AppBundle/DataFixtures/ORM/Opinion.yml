@@ -11,7 +11,7 @@ Capco\AppBundle\Entity\Opinion:
         isEnabled: true
         isTrashed: false
         Author: @user1
-        OpinionType: @opinionType1
+        OpinionType: @opinionType8
     opinion2:
         step: @cstep1
         title: Opinion 2
@@ -21,7 +21,7 @@ Capco\AppBundle\Entity\Opinion:
         isEnabled: true
         isTrashed: false
         Author: @user1
-        OpinionType: @opinionType2
+        OpinionType: @opinionType9
     opinion3:
         step: @cstep1
         title: Opinion 3
@@ -31,7 +31,7 @@ Capco\AppBundle\Entity\Opinion:
         isEnabled: true
         isTrashed: false
         Author: @user5
-        OpinionType: @opinionType3
+        OpinionType: @opinionType10
     opinion4:
         step: @cstep1
         title: Opinion 4
@@ -41,7 +41,7 @@ Capco\AppBundle\Entity\Opinion:
         isEnabled: true
         isTrashed: false
         Author: @user2
-        OpinionType: @opinionType3
+        OpinionType: @opinionType10
     opinion5:
         step: @cstep1
         title: Opinion 5
@@ -51,7 +51,7 @@ Capco\AppBundle\Entity\Opinion:
         isEnabled: true
         isTrashed: false
         Author: @user3
-        OpinionType: @opinionType3
+        OpinionType: @opinionType10
 
 # Consultation 2
 
@@ -65,7 +65,7 @@ Capco\AppBundle\Entity\Opinion:
         isTrashed: false
         pinned: <boolean()>
         Author: @user<numberBetween(1, 50)>
-        OpinionType: @opinionType<numberBetween(2, 4)>
+        OpinionType: @opinionType<numberBetween(9, 10)>
     opinion{41..50}:
         step: @cstep1
         title: Opinion <current()>
@@ -76,7 +76,7 @@ Capco\AppBundle\Entity\Opinion:
         isTrashed: true
         pinned: <boolean()>
         Author: @user<numberBetween(1, 50)>
-        OpinionType: @opinionType<numberBetween(2, 4)>
+        OpinionType: @opinionType<numberBetween(9, 10)>
 
     opinion51:
         step: @cstep2
@@ -85,7 +85,7 @@ Capco\AppBundle\Entity\Opinion:
         isEnabled: true
         isTrashed: false
         Author: @user5
-        OpinionType: @opinionType2
+        OpinionType: @opinionType12
 
     opinion52:
         step: @cstep2
@@ -96,7 +96,7 @@ Capco\AppBundle\Entity\Opinion:
         isEnabled: true
         isTrashed: false
         Author: @user4
-        OpinionType: @opinionType1
+        OpinionType: @opinionType11
 
     opinion53:
         step: @cstep2
@@ -107,7 +107,7 @@ Capco\AppBundle\Entity\Opinion:
         isEnabled: true
         isTrashed: false
         Author: @user2
-        OpinionType: @opinionType2
+        OpinionType: @opinionType12
 
 # Consultation 3
 
@@ -120,7 +120,7 @@ Capco\AppBundle\Entity\Opinion:
         isEnabled: true
         isTrashed: false
         Author: @user5
-        OpinionType: @opinionType1
+        OpinionType: @opinionType8
     opinion55:
         step: @cstep3
         title: Opinion 55
@@ -130,7 +130,7 @@ Capco\AppBundle\Entity\Opinion:
         isEnabled: true
         isTrashed: false
         Author: @user4
-        OpinionType: @opinionType2
+        OpinionType: @opinionType9
     opinion56:
         step: @cstep3
         title: Opinion 56
@@ -140,7 +140,7 @@ Capco\AppBundle\Entity\Opinion:
         isEnabled: true
         isTrashed: false
         Author: @user2
-        OpinionType: @opinionType3
+        OpinionType: @opinionType10
 
 
 # Consultation 5
@@ -180,3 +180,15 @@ Capco\AppBundle\Entity\Opinion:
         Author: @user2
         OpinionType: @opinionType5
         position: 2
+
+    opinion60:
+        step: @cstep5
+        title: Article
+        body: |
+             <p><text(100)></p>
+             <p><text(300)></p>
+        isEnabled: true
+        isTrashed: false
+        Author: @user2
+        OpinionType: @opinionType6
+        position: 1

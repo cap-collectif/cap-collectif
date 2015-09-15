@@ -2,107 +2,49 @@
 
 namespace Capco\AdminBundle\Admin;
 
+use Capco\AppBundle\Entity\ConsultationType;
 use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
+use Sonata\AdminBundle\Route\RouteCollection;
 use Sonata\AdminBundle\Show\ShowMapper;
 use Capco\AppBundle\Entity\OpinionType;
 use Capco\AppBundle\Entity\Opinion;
 
 class OpinionTypeAdmin extends Admin
 {
-    protected $datagridValues = array(
-        '_sort_order' => 'ASC',
-        '_sort_by' => 'title',
-    );
-
-    /**
-     * @param DatagridMapper $datagridMapper
-     */
-    protected function configureDatagridFilters(DatagridMapper $datagridMapper)
+    public function getPersistentParameters()
     {
-        $datagridMapper
-            ->add('title', null, array(
-                'label' => 'admin.fields.opinion_type.title',
-            ))
-            ->add('shortName', null, array(
-                'label' => 'admin.fields.opinion_type.short_name',
-            ))
-            ->add('voteWidgetType', null, array(
-                'label' => 'admin.fields.opinion_type.vote_widget_type',
-            ))
-            ->add('commentSystem', null, array(
-                'label' => 'admin.fields.opinion_type.comment_system',
-            ))
-            ->add('color', null, array(
-                'label' => 'admin.fields.opinion_type.color',
-            ))
-            ->add('Opinions', null, array(
-                'label' => 'admin.fields.opinion_type.opinions',
-            ))
-            ->add('isEnabled', null, array(
-                'label' => 'admin.fields.opinion_type.is_enabled',
-            ))
-            ->add('versionable', null, array(
-                'label' => 'admin.fields.opinion_type.versionable',
-            ))
-            ->add('sourceable', null, array(
-                'label' => 'admin.fields.opinion_type.sourceable',
-            ))
-            ->add('updatedAt', null, array(
-                'label' => 'admin.fields.opinion_type.updated_at',
-            ))
-            ->add('position', null, array(
-                'label' => 'admin.fields.opinion_type.position',
-            ))
-        ;
-    }
+        $subject = $this->getSubject();
+        $consultationTypeId = null;
+        $consultationTypeName = null;
 
-    /**
-     * @param ListMapper $listMapper
-     */
-    protected function configureListFields(ListMapper $listMapper)
-    {
-        unset($this->listModes['mosaic']);
+        if ($subject && $subject->getConsultationType()) {
+            $consultationTypeId = $subject->getConsultationType()->getId();
+        } elseif ($subject && $subject->getRoot()) {
+            $root = $this
+                ->getConfigurationPool()
+                ->getContainer()
+                ->get('doctrine.orm.entity_manager')
+                ->getRepository('CapcoAppBundle:OpinionType')
+                ->find($subject->getRoot())
+            ;
+            if ($root) {
+                $consultationTypeId = $root->getConsultationType()->getId();
+            } else {
+                $consultationTypeId = $this->getRequest()->get('consultation_type_id');
+            }
+        } else {
+            $consultationTypeId = $this->getRequest()->get('consultation_type_id');
+        }
 
-        $listMapper
-            ->addIdentifier('title', null, array(
-                'label' => 'admin.fields.opinion_type.title',
-            ))
-            ->addIdentifier('shortName', null, array(
-                'label' => 'admin.fields.opinion_type.short_name',
-            ))
-            ->add('color', null, array(
-                'label' => 'admin.fields.opinion_type.color',
-                'template' => 'CapcoAdminBundle:OpinionType:color_list_field.html.twig',
-                'typesColors' => OpinionType::$colorsType,
-            ))
-            ->add('isEnabled', null, array(
-                'label' => 'admin.fields.opinion_type.is_enabled',
-                'editable' => true,
-            ))
-            ->add('versionable', null, array(
-                'label' => 'admin.fields.opinion_type.versionable',
-                'editable' => true,
-            ))
-            ->add('updatedAt', 'datetime', array(
-                'label' => 'admin.fields.opinion_type.updated_at',
-            ))
-            ->add('defaultFilter', null, array(
-                'label' => 'admin.fields.opinion_type.default_filter',
-            ))
-            ->add('position', null, array(
-                'label' => 'admin.fields.opinion_type.position',
-            ))
-            ->add('_action', 'actions', array(
-                'actions' => array(
-                    'show' => array(),
-                    'edit' => array(),
-                    'delete' => array(),
-                ),
-            ))
-        ;
+        $consultationTypeName = $this->getRequest()->get('consultation_type_name');
+
+        return array(
+            'consultation_type_id' => $consultationTypeId,
+            'consultation_type_name' => $consultationTypeName,
+        );
     }
 
     /**
@@ -125,9 +67,15 @@ class OpinionTypeAdmin extends Admin
             ->add('title', null, array(
                 'label' => 'admin.fields.opinion_type.title',
             ))
-            ->add('shortName', null, array(
-                'label' => 'admin.fields.opinion_type.short_name',
+            ->add('subtitle', null, array(
+                'label' => 'admin.fields.opinion_type.subtitle',
             ))
+            ->add('parent', 'sonata_type_model', [
+                'label' => 'admin.fields.opinion_type.parent',
+                'required' => false,
+                'query' => $this->createQueryForParent(),
+                'btn_add' => false,
+            ])
             ->add('position', null, array(
                 'label' => 'admin.fields.opinion_type.position',
             ))
@@ -204,59 +152,71 @@ class OpinionTypeAdmin extends Admin
         ;
     }
 
-    /**
-     * @param ShowMapper $showMapper
-     */
-    protected function configureShowFields(ShowMapper $showMapper)
+    private function createQueryForParent()
     {
-        $showMapper
-            ->add('title', null, array(
-                'label' => 'admin.fields.opinion_type.title',
-            ))
-            ->add('shortName', null, array(
-                'label' => 'admin.fields.opinion_type.short_name',
-            ))
-            ->add('color', null, array(
-                'label' => 'admin.fields.opinion_type.color',
-                'template' => 'CapcoAdminBundle:OpinionType:color_show_field.html.twig',
-                'typesColors' => OpinionType::$colorsType,
-            ))
-            ->add('voteWidgetType', null, array(
-                'label' => 'admin.fields.opinion_type.vote_widget_type',
-            ))
-            ->add('votesHelpText', null, array(
-                'label' => 'admin.fields.opinion_type.votes_help_text',
-            ))
-            ->add('votesThreshold', null, array(
-                'label' => 'admin.fields.opinion_type.votes_threshold',
-            ))
-            ->add('commentSystem', null, array(
-                'label' => 'admin.fields.opinion_type.comment_system',
-            ))
-            ->add('votesThresholdHelpText', null, array(
-                'label' => 'admin.fields.opinion_type.votes_threshold_help_text',
-            ))
-            ->add('isEnabled', null, array(
-                'label' => 'admin.fields.opinion_type.is_enabled',
-            ))
-            ->add('defaultFilter', null, array(
-                'label' => 'admin.fields.opinion_type.default_filter',
-            ))
-            ->add('versionable', null, array(
-                'label' => 'admin.fields.opinion_type.versionable',
-            ))
-            ->add('sourceable', null, array(
-                'label' => 'admin.fields.opinion_type.sourceable',
-            ))
-            ->add('position', null, array(
-                'label' => 'admin.fields.opinion_type.position',
-            ))
-            ->add('createdAt', null, array(
-                'label' => 'admin.fields.opinion_type.created_at',
-            ))
-            ->add('updatedAt', 'datetime', array(
-                'label' => 'admin.fields.opinion_type.updated_at',
-            ))
+        $consultationTypeId = $this->getPersistentParameter('consultation_type_id');
+
+        $qb = $this->getConfigurationPool()
+            ->getContainer()
+            ->get('doctrine.orm.entity_manager')
+            ->getRepository('CapcoAppBundle:OpinionType')
+            ->createQueryBuilder('ot')
+            ->where('ot.root IN (
+                SELECT ot2.id
+                FROM CapcoAppBundle:OpinionType ot2
+                LEFT JOIN ot2.consultationType ct
+                WHERE ot2.parent IS NULL
+                AND ct.id = ?0
+            )')
+            ->setParameter(0, $consultationTypeId)
         ;
+
+        if ($this->getSubject()->getId()) {
+            $qb
+                ->andWhere('ot.id != ?1')
+                ->setParameter(1, $this->getSubject()->getId())
+            ;
+        } else {
+            $qb
+                ->andWhere('ot.id IS NULL')
+            ;
+        }
+
+        return $qb->getQuery();
     }
+
+    protected function configureRoutes(RouteCollection $collection)
+    {
+        $collection->clearExcept(['create', 'edit', 'delete']);
+    }
+
+    public function getTemplate($name)
+    {
+        if ($name === 'edit' || $name === 'create') {
+            return 'CapcoAdminBundle:OpinionType:edit.html.twig';
+        }
+        return parent::getTemplate($name); // TODO: Change the autogenerated stub
+    }
+
+
+    public function prePersist($type) {
+        if (!$type->getParent() && !$type->getConsultationType()) {
+            $consultationTypeId = $this->getPersistentParameter('consultation_type_id');
+            if ($consultationTypeId !== null) {
+                $consultationType = $this->getConfigurationPool()
+                    ->getContainer()
+                    ->get('doctrine.orm.entity_manager')
+                    ->getRepository('CapcoAppBundle:ConsultationType')
+                    ->find($consultationTypeId);
+                $type->setConsultationType($consultationType);
+            } else {
+                $consultationType = new ConsultationType();
+                $title = $this->getPersistentParameter('consultation_type_name') ? $this->getPersistentParameter('consultation_type_name') : 'Défaut';
+                $consultationType->setTitle($title);
+                $type->setConsultationType($consultationType);
+            }
+        }
+    }
+
+
 }

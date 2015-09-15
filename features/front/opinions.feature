@@ -6,8 +6,7 @@ Feature: Opinions
     And I visited "consultation page" with:
       | consultationSlug | croissance-innovation-disruption |
       | stepSlug         | collecte-des-avis                |
-    When I follow "Causes"
-    And I follow "Proposer"
+    When I follow "btn-add--les-causes-1"
     And I fill in the following:
       | capco_app_opinion_title     | Titre                           |
       | capco_app_opinion_body      | Description de ma proposition   |
@@ -19,15 +18,13 @@ Feature: Opinions
     And I visited "consultation page" with:
       | consultationSlug | croissance-innovation-disruption |
       | stepSlug         | collecte-des-avis                |
-    When I follow "Problèmes"
-    Then I should not see "Proposer"
+    Then I should not see "Proposer" in the "#opinions--le-probleme-constate-1" element
 
   Scenario: Can not create an opinion in closed consultation
     Given I am logged in as user
     And I visited "consultation page" with:
       | consultationSlug   | strategie-technologique-de-l-etat-et-services-publics |
       | stepSlug           | collecte-des-avis-pour-une-meilleur-strategie         |
-    When I follow "Causes"
     Then I should see "Consultation terminée. La période de participation est maintenant terminée. Merci à tous d'avoir contribué."
     And I should not see "Proposer"
 
@@ -35,8 +32,7 @@ Feature: Opinions
     Given I visited "consultation page" with:
       | consultationSlug | croissance-innovation-disruption |
       | stepSlug         | collecte-des-avis                |
-    When I follow "Causes"
-    And I follow "Proposer"
+    When I follow "btn-add--les-causes-1"
     Then I should see "Connection form" on "login page"
 
   @javascript @database

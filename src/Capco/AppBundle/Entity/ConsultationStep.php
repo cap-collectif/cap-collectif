@@ -78,16 +78,15 @@ class ConsultationStep extends AbstractStep
 
     /**
      * @var
-     * @ORM\ManyToMany(targetEntity="Capco\AppBundle\Entity\OpinionType")
-     * @ORM\JoinTable(name="consultationstep_opiniontypes")
+     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\ConsultationType")
+     * @ORM\JoinColumn(name="consultation_type_id", onDelete="SET NULL", nullable=true)
      */
-    private $allowedTypes;
+    private $consultationType;
 
     public function __construct()
     {
         parent::__construct();
         $this->opinions = new ArrayCollection();
-        $this->allowedTypes = new ArrayCollection();
     }
 
     /**
@@ -271,47 +270,17 @@ class ConsultationStep extends AbstractStep
     /**
      * @return mixed
      */
-    public function getAllowedTypes()
+    public function getConsultationType()
     {
-        return $this->allowedTypes;
+        return $this->consultationType;
     }
 
     /**
-     * @param $allowedTypes
-     *
-     * @return $this
+     * @param mixed $consultationType
      */
-    public function setAllowedTypes($allowedTypes)
+    public function setConsultationType($consultationType)
     {
-        $this->allowedTypes = $allowedTypes;
-
-        return $this;
-    }
-
-    /**
-     * @param $allowedType
-     *
-     * @return $this
-     */
-    public function addAllowedType($allowedType)
-    {
-        if (!$this->allowedTypes->contains($allowedType)) {
-            $this->allowedTypes[] = $allowedType;
-        }
-
-        return $this;
-    }
-
-    /**
-     * @param $allowedType
-     *
-     * @return $this
-     */
-    public function removeAllowedType($allowedType)
-    {
-        $this->allowedTypes->removeElement($allowedType);
-
-        return $this;
+        $this->consultationType = $consultationType;
     }
 
     // **************************** Custom methods *******************************
@@ -332,49 +301,5 @@ class ConsultationStep extends AbstractStep
     public function getContributionsCount()
     {
         return $this->argumentCount + $this->opinionCount + $this->trashedArgumentCount + $this->trashedOpinionCount + $this->opinionVersionsCount + $this->trashedOpinionVersionsCount + $this->sourcesCount + $this->trashedSourceCount;
-    }
-
-    /**
-     * @param $opinionType
-     *
-     * @return bool
-     */
-    public function allowType($opinionType)
-    {
-        return $this->allowedTypes->contains($opinionType);
-    }
-
-    public function setConsultationType(ConsultationType $consultationType)
-    {
-        $this->allowedTypes = $consultationType->getOpinionTypes();
-    }
-
-    /**
-     * Required for sonata admin.
-     */
-    public function getConsultationType()
-    {
-        return;
-    }
-
-    public function getMaximumPositionByOpinionType(OpinionType $type)
-    {
-        $position = 0;
-        foreach ($this->getOpinions() as $opinion) {
-            if ($opinion->getOpinionType() == $type && $opinion->getPosition() > $position) {
-                $position = $opinion->getPosition();
-            }
-        }
-
-        return $position;
-    }
-
-    public function getAllowedTypesIds()
-    {
-        foreach ($this->allowedTypes as $type) {
-            $typesIds[] = $type->getId();
-        }
-
-        return $typesIds;
     }
 }

@@ -15,8 +15,8 @@ const SynthesisBox = React.createClass({
     return {
       synthesis: null,
       messages: {
-        'errors': [],
-        'success': [],
+        errors: [],
+        success: [],
       },
     };
   },
