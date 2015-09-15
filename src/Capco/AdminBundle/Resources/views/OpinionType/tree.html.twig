@@ -1,0 +1,42 @@
+{% extends 'SonataAdminBundle:CRUD:base_list.html.twig' %}
+
+{% import _self as tree %}
+{% macro navigate_child(collection, admin, root, depth) %}
+    <ul{% if root %} class="sonata-tree sonata-tree--toggleable js-treeview"{% endif %}>
+        {% for element in collection %}
+            <li class="sonata-ba-list-field" objectId="{{ element.id }}" >
+                <div class="sonata-tree__item"{% if depth < 2 %} data-treeview-toggled{% endif %}>
+                    {% if element.children | length > 0 %}<i class="fa fa-caret-right" data-treeview-toggler></i>{% endif %}
+                    <a class="sonata-tree__item__edit" href="{{ admin.generateUrl('edit', {'id': element.id}) }}">{{ element.title }}</a>
+                </div>
+
+                {% if element.children|length %}
+                    {{ _self.navigate_child(element.children, admin, false, depth + 1) }}
+                {% endif %}
+            </li>
+        {% endfor %}
+    </ul>
+{% endmacro %}
+
+{% block tab_menu %}
+    {% include 'CapcoAdminBundle:OpinionType:list_tab_menu.html.twig' with {
+    'mode':   'tree',
+    'action': action,
+    'admin':  admin,
+    } only %}
+{% endblock %}
+
+{% block list_table %}
+    <div class="col-xs-12 col-md-12">
+        <div class="box box-primary">
+            <div class="box-header">
+                <h1 class="box-title">
+                    {{ admin.trans('opinion_type.tree.title', {}, admin.translationdomain) }}
+                </h1>
+            </div>
+            <div class="box-content">
+                {{ tree.navigate_child(root_opinion_types, admin, true, 0) }}
+            </div>
+        </div>
+    </div>
+{% endblock %}
