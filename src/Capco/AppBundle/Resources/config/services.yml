@@ -395,7 +395,7 @@ services:
 
   capco.synthesis.consultation_step_extractor:
     class: Capco\AppBundle\Synthesis\Extractor\ConsultationStepExtractor
-    arguments: [@doctrine.orm.entity_manager, @translator, @router, @capco.opinion_types.resolver]
+    arguments: [@doctrine.orm.entity_manager, @translator, @router]
 
   capco.search.resolver:
     class: Capco\AppBundle\Resolver\SearchResolver
@@ -406,21 +406,3 @@ services:
     arguments: [@router, @capco.comment.resolver, @capco.step.resolver]
     tags:
       - { name: twig.extension }
-
-  capco.opinion_type.repository:
-      class: Capco\AppBundle\Repository\OpinionTypeRepository
-      factory_service: doctrine.orm.default_entity_manager
-      factory_method: getRepository
-      arguments:
-        - Capco\AppBundle\Entity\OpinionType
-
-  capco.opinion.repository:
-        class: Capco\AppBundle\Repository\OpinionRepository
-        factory_service: doctrine.orm.default_entity_manager
-        factory_method: getRepository
-        arguments:
-          - Capco\AppBundle\Entity\Opinion
-
-  capco.opinion_types.resolver:
-      class: Capco\AppBundle\Resolver\OpinionTypesResolver
-      arguments: [@capco.opinion_type.repository, @capco.opinion.repository]

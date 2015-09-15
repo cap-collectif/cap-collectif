@@ -1,3 +1,12 @@
-<div class="consultation__nav">
-    {{ nav | raw }}
-</div>
+{% if currentStep.allowedTypes | length > 1 %}
+    <div class="block  block--bordered">
+        <div class="consultation__nav">
+            <ul class="nav  nav-pills">
+                <li class="{% if opinionTypeCurrent is null %}active{% endif %} consultation__nav--primary"><a href="{{ path('app_consultation_show', {'consultationSlug': consultation.slug, 'stepSlug': currentStep.slug}) }}">{{ 'consultation.show.global.title'|trans({}, 'CapcoAppBundle') }}</a></li>
+                {% for opinionType in currentStep.allowedTypes %}
+                    <li class="{% if opinionType.slug == opinionTypeCurrent %}active{% endif %} consultation__nav--{{ opinionType.color }}"><a href="{{ path('app_consultation_show_opinions', {'consultationSlug': consultation.slug, 'stepSlug': currentStep.slug,'opinionTypeSlug': opinionType.slug}) }}">{{ opinionType.shortName }}</a></li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+{% endif %}

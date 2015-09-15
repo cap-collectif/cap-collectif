@@ -149,8 +149,7 @@ class OpinionController extends Controller
             if ($form->isValid()) {
                 $em = $this->getDoctrine()->getManager();
 
-                $maxPos = $this->get('capco.opinion_types.resolver')
-                    ->getMaximumPositionByOpinionTypeAndStep($opinionType, $currentStep);
+                $maxPos = $currentStep->getMaximumPositionByOpinionType($opinionType);
                 $opinion->setPosition($maxPos + 1);
                 $em->persist($opinion);
                 $em->flush();

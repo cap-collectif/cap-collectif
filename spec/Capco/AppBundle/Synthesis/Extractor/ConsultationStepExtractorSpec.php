@@ -2,12 +2,10 @@
 
 namespace spec\Capco\AppBundle\Synthesis\Extractor;
 
-use Capco\AppBundle\Entity\ConsultationType;
 use Capco\AppBundle\Entity\OpinionType;
 use Capco\AppBundle\Entity\Source;
 use Capco\AppBundle\Entity\Synthesis\SynthesisDivision;
 use Capco\AppBundle\Repository\OpinionRepository;
-use Capco\AppBundle\Resolver\OpinionTypesResolver;
 use Capco\UserBundle\Entity\User;
 use PhpSpec\ObjectBehavior;
 use Doctrine\ORM\EntityManager;
@@ -23,9 +21,9 @@ use Symfony\Bundle\FrameworkBundle\Routing\Router;
 
 class ConsultationStepExtractorSpec extends ObjectBehavior
 {
-    function let(EntityManager $em, TranslatorInterface $translator, Router $router, OpinionTypesResolver $opinionTypesResolver)
+    function let(EntityManager $em, TranslatorInterface $translator, Router $router)
     {
-        $this->beConstructedWith($em, $translator, $router, $opinionTypesResolver);
+        $this->beConstructedWith($em, $translator, $router);
     }
 
     function it_is_initializable()
@@ -33,7 +31,7 @@ class ConsultationStepExtractorSpec extends ObjectBehavior
         $this->shouldHaveType('Capco\AppBundle\Synthesis\Extractor\ConsultationStepExtractor');
     }
 
-    function it_can_create_or_update_elements_from_consultation_step(EntityManager $em, OpinionRepository $repo, Synthesis $synthesis, ConsultationStep $consultationStep, OpinionTypesResolver $opinionTypesResolver)
+    function it_can_create_or_update_elements_from_consultation_step(EntityManager $em, OpinionRepository $repo, Synthesis $synthesis, ConsultationStep $consultationStep)
     {
         // Objects can not be mocked because we need to call get_class() method on them
 
@@ -91,9 +89,7 @@ class ConsultationStepExtractorSpec extends ObjectBehavior
         $opinions = new ArrayCollection([$opinion1, $opinion2]);
 
         $synthesis->getElements()->willReturn($currentElements)->shouldBeCalled();
-        $consultationType = new ConsultationType();
-        $consultationStep->getConsultationType()->willReturn($consultationType)->shouldBeCalled();
-        $opinionTypesResolver->getAllForConsultationType($consultationType)->willReturn([$opinionType])->shouldBeCalled();
+        $consultationStep->getAllowedTypes()->willReturn([$opinionType])->shouldBeCalled();
         $em->getRepository('CapcoAppBundle:Opinion')->willReturn($repo)->shouldBeCalled();
         $repo->findBy([
             'step' => $consultationStep,

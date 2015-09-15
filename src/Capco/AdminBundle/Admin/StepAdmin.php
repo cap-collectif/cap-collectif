@@ -89,15 +89,24 @@ class StepAdmin extends Admin
             ;
         } elseif ($subject instanceof ConsultationStep) {
             $formMapper
-                ->add('body', 'ckeditor', array(
-                    'config_name' => 'admin_editor',
+                ->add('body', null, array(
                     'label' => 'admin.fields.step.body',
                     'required' => false,
                 ))
                 ->add('consultationType', 'sonata_type_model', array(
                     'label' => 'admin.fields.consultation.consultation_type',
-                    'required' => true,
-                    'btn_add' => false,
+                    'required' => false,
+                    'mapped' => false,
+                    'class' => 'Capco\AppBundle\Entity\ConsultationType',
+                    'help' => 'admin.help.consultation.consultation_type',
+                    'attr' => array('class' => 'consultation-type-js'),
+                ))
+                ->add('allowedTypes', 'sonata_type_model', array(
+                    'label' => 'admin.fields.consultation.allowed_types',
+                    'required' => false,
+                    'multiple' => true,
+                    'by_reference' => false,
+                    'expanded' => true,
                 ))
             ;
         } elseif ($subject instanceof SynthesisStep) {
@@ -113,6 +122,15 @@ class StepAdmin extends Admin
                 ), ['link_parameters' => ['consultation_id']]
             );
         }
+    }
+
+    public function getTemplate($name)
+    {
+        if ($name == 'edit') {
+            return 'CapcoAdminBundle:Step:edit.html.twig';
+        }
+
+        return parent::getTemplate($name);
     }
 
     protected function configureRoutes(RouteCollection $collection)

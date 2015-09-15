@@ -4,30 +4,29 @@ Capco\AppBundle\Entity\ConsultationStep:
         isEnabled: true
         startAt: <dateTimeBetween('-40 days', 'now')>
         endAt: <dateTimeBetween('now', '+10 days')>
-        body: <p><text(1000)></p>
-        consultationType: @typeDefault
+        body: <text(1000)>
+        allowedTypes: [@opinionType1, @opinionType2, @opinionType3]
     cstep2:
         title: Collecte des avis pour une meilleur stratégie
         isEnabled: true
         startAt: <(new \DateTime('2014-08-14'))>
         endAt: <(new \DateTime('2014-09-27'))>
-        consultationType: @typeSimple
+        allowedTypes: [@opinionType1, @opinionType2]
     cstep3:
         title: Ma futur collecte de proposition
         isEnabled: true
         startAt: <(new \DateTime('2015-09-20'))>
         endAt: <(new \DateTime('2015-10-20'))>
-        consultationType: @typeDefault
+        allowedTypes: [@opinionType1, @opinionType2, @opinionType3]
     cstep4:
         title: Consultation
         isEnabled: true
         startAt: <dateTimeBetween('-40 days', 'now')>
         endAt: <dateTimeBetween('now', '+10 days')>
-        consultationType: @typeCauses
+        allowedTypes: [@opinionType2]
     cstep5:
         title: Elaboration de la Loi
         isEnabled: true
-        body: <p><text(1000)></p>
         startAt: <dateTimeBetween('-40 days', 'now')>
         endAt: <dateTimeBetween('now', '+10 days')>
-        consultationType: @typePJL
+        allowedTypes: [@opinionType5]

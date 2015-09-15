@@ -256,6 +256,20 @@ class ConsultationAdmin extends Admin
         ;
     }
 
+    protected function configureRoutes(RouteCollection $collection)
+    {
+        $collection->add('getAllowedTypesFromConsultationType', 'allowed_types_from_consultation_types');
+    }
+
+    public function getTemplate($name)
+    {
+        if ($name == 'edit') {
+            return 'CapcoAdminBundle:Step:edit.html.twig';
+        }
+
+        return parent::getTemplate($name);
+    }
+
     // For mosaic view
     public function getObjectMetadata($object)
     {

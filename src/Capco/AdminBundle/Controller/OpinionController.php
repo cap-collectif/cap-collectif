@@ -40,7 +40,7 @@ class OpinionController extends Controller
                 'form' => $formView,
                 'datagrid' => $datagrid,
                 'csrf_token' => $this->getCsrfToken('sonata.batch'),
-                'consultationTypes' => $this->getConsultationTypes(),
+                'opinionTypes' => $this->getOpinionTypes(),
             ),
             null,
             $request
@@ -176,7 +176,7 @@ class OpinionController extends Controller
                 'action' => 'create',
                 'form' => $view,
                 'object' => $object,
-                'consultationTypes' => $this->getConsultationTypes(),
+                'opinionTypes' => $this->getOpinionTypes(),
             ),
             null,
             $request
@@ -299,7 +299,7 @@ class OpinionController extends Controller
                 'action' => 'edit',
                 'form' => $view,
                 'object' => $object,
-                'consultationTypes' => $this->getConsultationTypes(),
+                'opinionTypes' => $this->getOpinionTypes(),
             ),
             null,
             $request
@@ -333,7 +333,7 @@ class OpinionController extends Controller
                 'action' => 'show',
                 'object' => $object,
                 'elements' => $this->admin->getShow(),
-                'consultationTypes' => $this->getConsultationTypes(),
+                'opinionTypes' => $this->getOpinionTypes(),
             ),
             null,
             $request
@@ -405,58 +405,20 @@ class OpinionController extends Controller
                 'object' => $object,
                 'action' => 'delete',
                 'csrf_token' => $this->getCsrfToken('sonata.delete'),
-                'consultationTypes' => $this->getConsultationTypes(),
+                'opinionTypes' => $this->getOpinionTypes(),
             ),
             null,
             $request
         );
     }
 
-    public function getConsultationTypes()
+    public function getOpinionTypes()
     {
         $opinionTypes = $this->get('doctrine.orm.entity_manager')
             ->getRepository('CapcoAppBundle:OpinionType')
-            ->createQueryBuilder('ot')
-            ->leftJoin('ot.consultationType', 'ct')
-            ->where('ot.consultationType IS NOT NULL')
-            ->andWhere('ot.parent IS NULL')
-            ->orderBy('ct.id', 'asc')
-            ->getQuery()
-            ->getResult()
-        ;
+            ->findAll();
 
-        $otRepo = $this->get('doctrine.orm.entity_manager')
-            ->getRepository('CapcoAppBundle:OpinionType')
-        ;
-
-        $consultationTypes = [];
-
-        foreach ($opinionTypes as $root) {
-            $ct = $root->getConsultationType()->getTitle();
-            $consultationTypes[$ct][] = $otRepo
-                ->childrenHierarchy($root, false, [
-                    'decorate' => true,
-                    'rootOpen' => '',
-                    'rootClose' => '',
-                    'nodeDecorator' => function ($node) {
-                        $url = $this->admin->generateUrl('create', ['opinion_type' => $node['id']]);
-                        $levelIndicator = ' ';
-                        for ($i = 0; $i < $node['level']; $i++) {
-                            $levelIndicator = '-' . $levelIndicator;
-                        }
-                        return
-                            '<a href="'.$url.'">'
-                                .'<i class="fa fa-plus-circle"></i>'
-                                .$levelIndicator.$node['title']
-                            .'</a>'
-                        ;
-                    },
-                    'childSort' => ['field' => 'position', 'dir' => 'asc'],
-                ], true)
-            ;
-        }
-
-        return $consultationTypes;
+        return $opinionTypes;
     }
 
     public function updateAppendicesForOpinion(Opinion $opinion)

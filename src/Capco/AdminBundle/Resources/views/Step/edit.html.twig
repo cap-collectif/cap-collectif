@@ -1,0 +1,38 @@
+{% extends 'SonataAdminBundle:CRUD:base_edit.html.twig' %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script type="text/javascript">
+
+        $(document).ready(function() {
+
+            $(document).on('change', ".consultation-type-js" , updateAllowedTypes);
+
+            function updateAllowedTypes() {
+                var self = this;
+                var consultationTypeId = $("option:selected", self).val();
+                var allowedTypesId = (self.id).replace('consultationType', 'allowedTypes');
+                var allowedTypes = $("#" + allowedTypesId + " input[type='checkbox']");
+
+                var url = "{{ url('capco_admin_get_allowed_types') }}";
+                $.get(url, {'consultationTypeId': consultationTypeId}, function(data){
+
+                    if (data.length > 0) {
+                        $(allowedTypes).each(function() {
+                            $(this).prop('checked', false);
+                            if ($.inArray($(this).val(), data) != -1) {
+                                $(this).prop('checked', true);
+                            } else {
+                                $(this).prop('checked', false);
+                            }
+                            $(this).iCheck('update');
+                        });
+                    }
+
+                    $(self).select2('val', '');
+
+                });
+            }
+        });
+    </script>
+{% endblock %}
