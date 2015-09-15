@@ -37,19 +37,19 @@
         <div class="row">
             <div class="col-xs-12  col-sm-4  col-md-3  block--mobile">
                 {{ render(controller('CapcoAppBundle:Site/Consultation:showMeta', {'consultationSlug': consultation.slug, 'currentStepSlug': currentStep.slug})) }}
-                {% include 'CapcoAppBundle:Consultation:show_nav.html.twig' with {'nav': nav } %}
             </div>
             {% set opinionTypeCurrent = app.request.attributes.get('opinionTypeSlug') %}
             <div class="col-xs-12  col-sm-8  col-md-9" id="details">
+                {% include '@CapcoApp/Consultation/show_nav.html.twig' with {'opinionTypeCurrent': opinionTypeCurrent, 'consultation': consultation} %}
                 {% block opinions_list %}
                     {% if currentStep.body is not null %}
-                        <p class="text-center opinion-type__title level--0">
-                            {{ 'consultation.show.meta.intro.title' | trans({}, 'CapcoAppBundle') }}
-                        </p>
                         <div class="block  block--bordered">
                             <div class="opinion  opinion--current  opinion--default">
+                                <div class="opinion__header  opinion__header--mobile-centered">
+                                    <h2 class="pull-left  h4  opinion__header__title"> {{ 'consultation.show.meta.intro.title' | trans({}, 'CapcoAppBundle') }}</h2>
+                                </div>
                                 <div class="box">
-                                    <div class="more">{{ currentStep.body | raw }}</div>
+                                    <p class="more">{{ currentStep.body|striptags }}</p>
                                 </div>
                             </div>
                         </div>
@@ -68,8 +68,8 @@
         App.customModal('.modal--custom');
         $('.more').readmore({
             collapsedHeight: 88,
-            moreLink: '<a class="text-center" href="#">{{ 'consultation.show.meta.read_more'|trans({}, 'CapcoAppBundle') }}</a>',
-            lessLink: '<a class="text-center" href="#">{{ 'consultation.show.meta.read_less'|trans({}, 'CapcoAppBundle') }}</a>'
+            moreLink: '<a href="#">{{ 'consultation.show.meta.read_more'|trans({}, 'CapcoAppBundle') }}</a>',
+            lessLink: '<a href="#">{{ 'consultation.show.meta.read_less'|trans({}, 'CapcoAppBundle') }}</a>'
         });
         {% if consultation.video %}
             App.video('.fancybox');

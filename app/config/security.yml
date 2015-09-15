@@ -63,7 +63,7 @@ security:
                     enabled: true
                     name: bearer
         main:
-            pattern:             .*
+            pattern:             ^/
             form_login:
                 provider:       fos_userbundle
                 csrf_provider:  form.csrf_provider
@@ -80,13 +80,13 @@ security:
 
                 oauth_user_provider:
                     service: my_user_provider
-            remember_me:
-                key: %remember_secret%
-                lifetime: 31536000
-                path: ~
-                domain: ~
-                remember_me_parameter: _remember_me
-                user_provider: fos_userbundle
+            # remember_me:
+            #     key: %remember_secret%
+            #     lifetime: 31536000
+            #     path: /
+            #     domain: ~
+            #     # remember_me_parameter: _remember_me
+            #     # user_provider: fos_userbundle
             logout:
               path: /logout
               target: /

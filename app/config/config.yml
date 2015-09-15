@@ -26,11 +26,27 @@ framework:
     trusted_hosts: null
     trusted_proxies: ['127.0.0.1']
     session:
-        handler_id: null
+        handler_id: ~
         # cookie_secure: true
     fragments: null
     http_method_override: true
     translator: { fallback: fr }
+
+snc_redis:
+    clients:
+        default:
+            type: predis
+            alias: default
+            dsn: redis://localhost
+            logging: %kernel.debug%
+        session:
+            type: predis
+            alias: session
+            dsn: redis://localhost/1
+    session:
+        client: session
+        ttl: 1200
+        use_as_default: true
 
 twig:
     debug: "%kernel.debug%"
@@ -63,17 +79,11 @@ doctrine:
           datetime_functions:
             capco_date: Capco\AppBundle\DQL\DateFunction
         mappings:
-          tree:
-            type: annotation
-            prefix: Gedmo\Tree\Entity
-            dir: "%kernel.root_dir%/../vendor/gedmo/doctrine-extensions/lib/Gedmo/Tree/Entity"
-            alias: GedmoTree
           loggable:
             type: annotation
             alias: GedmoLoggable
             prefix: Gedmo\Loggable\Entity
             dir: "%kernel.root_dir%/../vendor/gedmo/doctrine-extensions/lib/Gedmo/Loggable/Entity"
-            is_bundle: false
         resolve_target_entities:
           # Used to tell synthesis tool wich entity to use for users. If none is defined in the project, you can use Capco\AppBundle\Entity\Synthesis\SynthesisUser
           Capco\AppBundle\Entity\Synthesis\SynthesisUserInterface: Capco\UserBundle\Entity\User
@@ -95,7 +105,6 @@ stof_doctrine_extensions:
             sluggable : true
             softdeleteable: true
             loggable: true
-            tree: true
 
 hautelook_alice:
     locale: fr_FR   # default

@@ -1,5 +1,6 @@
 const MenuItem = ReactBootstrap.MenuItem;
 const DropdownButton = ReactBootstrap.DropdownButton;
+const Button = ReactBootstrap.Button;
 const Modal = ReactBootstrap.Modal;
 
 const ShareButtonDropdown = React.createClass({
