@@ -166,7 +166,6 @@ class OpinionAdmin extends Admin
                 ))
                 ->add('step', null, array(
                     'label' => 'admin.fields.opinion.step',
-                    'query_builder' => $this->createQueryBuilderForStep(),
                     'required' => true,
                 ))
             ->end()
@@ -289,39 +288,6 @@ class OpinionAdmin extends Admin
                 ))
             ;
         }
-    }
-
-    private function createQueryBuilderForStep()
-    {
-        $opinionTypeId = $this->getPersistentParameter('opinion_type');
-
-        $root = $this->getConfigurationPool()
-            ->getContainer()
-            ->get('doctrine.orm.entity_manager')
-            ->getRepository('CapcoAppBundle:OpinionType')
-            ->createQueryBuilder('ot')
-            ->where('ot.id IN (SELECT ot2.root FROM CapcoAppBundle:OpinionType ot2 WHERE ot2.id = ?0)')
-            ->setParameter(0, $opinionTypeId)
-            ->getQuery()
-            ->getOneOrNullResult();
-        ;
-
-        if (!$root) {
-            throw new \Exception('Invalid opinion type.');
-        }
-
-        $consultationType = $root->getConsultationType();
-
-        $qb = $this->getConfigurationPool()
-            ->getContainer()
-            ->get('doctrine.orm.entity_manager')
-            ->getRepository('CapcoAppBundle:ConsultationStep')
-            ->createQueryBuilder('cs')
-            ->where('cs.consultationType = ?0')
-            ->setParameter(0, $consultationType)
-        ;
-
-        return $qb;
     }
 
     public function getTemplate($name)

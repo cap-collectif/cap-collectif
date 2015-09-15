@@ -84,8 +84,8 @@ Feature: Posts comments
     Then the JSON response should match:
     """
     {
-      "comments_and_answers_count": "@integer@.greaterThan(1)",
-      "comments_count": "@integer@.greaterThan(1)",
+      "comments_and_answers_count": "@integer@.greaterThan(2)",
+      "comments_count": "@integer@.greaterThan(2)",
       "comments":
       [
         @...@

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "b97aacace5bd17d063707ae9f44c2e48",
+    "hash": "013f3a49a2e381c5aa6463ae94988a93",
     "packages": [
         {
             "name": "behat/transliterator",
@@ -3394,16 +3394,16 @@
         },
         {
             "name": "predis/predis",
-            "version": "0.8.x-dev",
+            "version": "v1.0.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nrk/predis.git",
-                "reference": "192dfd61e54c3d32c9526bba03365fff818e17e4"
+                "reference": "84060b9034d756b4d79641667d7f9efe1aeb8e04"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nrk/predis/zipball/192dfd61e54c3d32c9526bba03365fff818e17e4",
-                "reference": "192dfd61e54c3d32c9526bba03365fff818e17e4",
+                "url": "https://api.github.com/repos/nrk/predis/zipball/84060b9034d756b4d79641667d7f9efe1aeb8e04",
+                "reference": "84060b9034d756b4d79641667d7f9efe1aeb8e04",
                 "shasum": ""
             },
             "require": {
@@ -3418,8 +3418,8 @@
             },
             "type": "library",
             "autoload": {
-                "psr-0": {
-                    "Predis": "lib/"
+                "psr-4": {
+                    "Predis\\": "src/"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -3440,7 +3440,7 @@
                 "predis",
                 "redis"
             ],
-            "time": "2015-07-07 17:11:00"
+            "time": "2015-07-30 18:34:15"
         },
         {
             "name": "psr/http-message",
@@ -8014,7 +8014,6 @@
         "sonata-project/datagrid-bundle": 20,
         "sonata-project/classification-bundle": 20,
         "hwi/oauth-bundle": 20,
-        "predis/predis": 20,
         "jolicode/jolitypo-bundle": 20,
         "jms/serializer": 20,
         "snc/redis-bundle": 20,

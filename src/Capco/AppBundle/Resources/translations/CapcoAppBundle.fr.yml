@@ -296,7 +296,7 @@ consultation:
         trash: Corbeille
     remaining_days: "]-Inf, 0] Consultation terminée | {1} Dernier jour | ]1,Inf[ %count% jours restants"
     end_at: Date de fin : %date%
-    opinions: "]-Inf, 1] %count% proposition | ]1,Inf[ %count% propositions"
+    opinions: "]-Inf, 1] %count% opinion | ]1,Inf[ %count% opinions"
     arguments: "]-Inf, 1] %count% argument | ]1,Inf[ %count% arguments"
     votes: "]-Inf, 1] %count% vote | ]1,Inf[ %count% votes"
     versions: "]-Inf, 1] %count% révision | ]1,Inf[ %count% révisions"

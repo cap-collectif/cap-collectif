@@ -1,4 +1,5 @@
 Capco\AppBundle\Entity\ConsultationType:
     defaultType:
         title: Résolution de problèmes
+        enabled: true
         opinionTypes: [@opinionType1, @opinionType2, @opinionType3, @opinionType4]

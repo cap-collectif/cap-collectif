@@ -4,7 +4,6 @@ namespace Capco\AppBundle\Synthesis\Extractor;
 
 use Capco\AppBundle\Entity\OpinionType;
 use Capco\AppBundle\Entity\Source;
-use Capco\AppBundle\Resolver\OpinionTypesResolver;
 use Doctrine\ORM\EntityManager;
 use Capco\AppBundle\Entity\Synthesis\Synthesis;
 use Capco\AppBundle\Entity\Synthesis\SynthesisElement;
@@ -19,14 +18,12 @@ class ConsultationStepExtractor
     protected $em;
     protected $translator;
     protected $router;
-    protected $opinionTypesResolver;
 
-    public function __construct(EntityManager $em, TranslatorInterface $translator, Router $router, OpinionTypesResolver $opinionTypeResolver)
+    public function __construct(EntityManager $em, TranslatorInterface $translator, Router $router)
     {
         $this->em = $em;
         $this->translator = $translator;
         $this->router = $router;
-        $this->opinionTypesResolver = $opinionTypeResolver;
     }
 
     public function createOrUpdateElementsFromConsultationStep(Synthesis $synthesis, ConsultationStep $consultationStep)
@@ -38,7 +35,7 @@ class ConsultationStepExtractor
         $previousElements = $synthesis->getElements();
 
         // Opinion types
-        $opinionTypes = $this->opinionTypesResolver->getAllForConsultationType($consultationStep->getConsultationType());
+        $opinionTypes = $consultationStep->getAllowedTypes();
         foreach ($opinionTypes as $ot) {
             $elementFromOT = null;
             foreach ($previousElements as $element) {

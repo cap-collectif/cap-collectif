@@ -45,8 +45,6 @@ class OpinionController extends Controller
 
         $steps = $this->getDoctrine()->getRepository('CapcoAppBundle:AbstractStep')->getByConsultation($consultationSlug);
 
-        $nav = $this->get('capco.opinion_types.resolver')->getNavForStep($currentStep);
-
         return [
             'version' => $version,
             'currentStep' => $currentStep,
@@ -56,7 +54,6 @@ class OpinionController extends Controller
             'opinionType' => $opinion->getOpinionType(),
             'votes' => $opinion->getVotes(),
             'consultation_steps' => $steps,
-            'nav' => $nav,
         ];
     }
 
@@ -152,8 +149,7 @@ class OpinionController extends Controller
             if ($form->isValid()) {
                 $em = $this->getDoctrine()->getManager();
 
-                $maxPos = $this->get('capco.opinion_types.resolver')
-                    ->getMaximumPositionByOpinionTypeAndStep($opinionType, $currentStep);
+                $maxPos = $currentStep->getMaximumPositionByOpinionType($opinionType);
                 $opinion->setPosition($maxPos + 1);
                 $em->persist($opinion);
                 $em->flush();
@@ -474,8 +470,6 @@ class OpinionController extends Controller
             $sortArgumentsForm->get('argumentSort')->setData($argumentSort);
         }
 
-        $nav = $this->get('capco.opinion_types.resolver')->getNavForStep($currentStep);
-
         return [
             'currentUrl' => $currentUrl,
             'currentStep' => $currentStep,
@@ -495,7 +489,6 @@ class OpinionController extends Controller
             'opinionVoteForm' => $opinionVoteForm->createView(),
             'sortArgumentsForm' => $sortArgumentsForm,
             'argumentSort' => $argumentSort,
-            'nav' => $nav,
         ];
     }
 

@@ -4,7 +4,7 @@
 
 {% block opinions_list %}
 
-    {% if allowedTypes | length == 1 and currentStep.body is not null %}
+    {% if currentStep.allowedTypes | length == 1 and currentStep.body is not null %}
         <div class="block  block--bordered">
             <div class="opinion  opinion--current  opinion--default">
                 <div class="opinion__header  opinion__header--mobile-centered">

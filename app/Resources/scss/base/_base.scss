@@ -599,11 +599,3 @@ div.embeddedContent {
 svg.avatar {
   vertical-align: middle;
 }
-
-.anchor-offset:before {
-  display: block;
-  content: "";
-  height: 60px;
-  margin-top: -60px;
-  visibility: hidden;
-}

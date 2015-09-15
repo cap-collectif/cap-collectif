@@ -42,8 +42,7 @@
 
  {% block checkbox_widget %}
      {% spaceless %}
-         {% set attr = attr|merge({'class': attr.class|default('') ~ ' checkbox  login__checkbox'}) %}
-         <div {{ block('widget_container_attributes') }}>
+         <div class="checkbox  login__checkbox">
              <label for="{{ id }}">
                  <input type="checkbox" {{ block('widget_attributes') }}{% if value is defined %} value="{{ value }}"{% endif %}{% if checked %} checked="checked"{% endif %} /> {{ label|trans({}, translation_domain | default('SonataAdminBundle')) }}
              </label>

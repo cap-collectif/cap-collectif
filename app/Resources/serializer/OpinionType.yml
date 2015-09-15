@@ -9,10 +9,6 @@ Capco\AppBundle\Entity\OpinionType:
             expose: true
             type: string
             groups: [Opinions, OpinionVersions]
-        subtitle:
-            expose: true
-            type: string
-            groups: [Opinions, OpinionVersions]
         body:
             expose: true
             type: string
