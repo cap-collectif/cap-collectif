@@ -13,16 +13,23 @@ imports:
 
 monolog:
     handlers:
+        file:
+            type: rotating_file
+            path: "%kernel.logs_dir%/%kernel.environment%.log"
+            level: debug
+            max_files: 10  # max number of log files to keep
         main:
             type: fingers_crossed
-            action_level: critical
             handler: grouped
+            action_level: error
+            excluded_404s:
+                - ^/
         grouped:
             type: group
             members: [streamed, buffered]
         streamed:
             type: stream
-            path: "%kernel.logs_dir%/%kernel.environment%.log"
+            path: "%kernel.logs_dir%/%kernel.environment%.error.log"
             level: debug
         buffered:
             type: buffer
