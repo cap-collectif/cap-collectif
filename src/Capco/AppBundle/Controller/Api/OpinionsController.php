@@ -590,30 +590,4 @@ class OpinionsController extends FOSRestController
         $this->getDoctrine()->getManager()->remove($vote);
         $this->getDoctrine()->getManager()->flush();
     }
-
-    /**
-     * @Post("/test/{value}")
-     * @View(statusCode=201, serializerGroups={})
-     */
-    public function postTestAction($value)
-    {
-        return $value;
-    }
-
-    /**
-     * @Post("/test/db/{value}")
-     * @View(statusCode=201, serializerGroups={})
-     */
-    public function postTestDbAction($value)
-    {
-        $post = new \Capco\AppBundle\Entity\Post();
-        $post->setTitle('test');
-        $post->setIsPublished(false);
-        $post->setBody('test');
-        $em = $this->get('doctrine.orm.entity_manager');
-        $em->persist($post);
-        $em->flush();
-
-        return $value;
-    }
 }
