@@ -71,7 +71,6 @@ class ConsultationController extends Controller
             if (null != $sort && null != $opinionTypeSlug) {
                 return $this->redirect($this->generateUrl('app_consultation_show_opinions_sorted', array(
                     'consultationSlug' => $consultation->getSlug(),
-                    'allowedTypes' => $allowedTypes,
                     'stepSlug' => $currentStep->getSlug(),
                     'opinionTypeSlug' => $opinionTypeSlug,
                     'opinionsSort' => $sort,
