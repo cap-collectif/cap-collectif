@@ -42,7 +42,7 @@ snc_redis:
         session:
             type: predis
             alias: session
-            dsn: redis://localhost/1
+            dsn: redis://localhost
     session:
         client: session
         ttl: 1200
