@@ -77,7 +77,6 @@ security:
                     google:   "/login/check-google"
                     twitter:  "/login/check-twitter"
                 login_path: /login
-
                 oauth_user_provider:
                     service: my_user_provider
             # remember_me:
