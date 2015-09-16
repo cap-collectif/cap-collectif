@@ -88,7 +88,6 @@ def test():
     with lcd(env.local_dir):
         local('bin/phpspec run --no-code-generation', capture=False)
         local('bin/behat -s api', capture=False)
-        local('bin/behat -s commands', capture=False)
         local('bin/behat -s front', capture=False)
 
 @task

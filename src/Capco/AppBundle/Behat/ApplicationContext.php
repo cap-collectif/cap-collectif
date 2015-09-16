@@ -23,17 +23,6 @@ class ApplicationContext extends UserContext
     }
 
     /**
-     * @BeforeScenario @purge
-     *
-     * Purge database
-     */
-    public static function purgeDatabase()
-    {
-        exec('app/console doctrine:database:drop --force -e test');
-        exec('app/console doctrine:schema:update --force -e test');
-    }
-
-    /**
      * @AfterScenario @database
      *
      * Recreate database before loading fixtures to make sure we always have the same ids
