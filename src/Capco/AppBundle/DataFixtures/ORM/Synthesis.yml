@@ -4,3 +4,8 @@ Capco\AppBundle\Entity\Synthesis\Synthesis:
         sourceType: consultation_step
         enabled: true
         editable: true
+    synthesis2:
+        consultationStep: @cstep5
+        sourceType: consultation_step
+        enabled: true
+        editable: true

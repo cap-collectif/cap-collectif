@@ -56,7 +56,7 @@ class ThemeController extends Controller
 
         //Avoid division by 0 in nbPage calculation
         $nbPage = 1;
-        if ($pagination != 0) {
+        if ($pagination !== null && $pagination !== 0) {
             $nbPage = ceil(count($themes) / $pagination);
         }
 

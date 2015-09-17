@@ -40,5 +40,4 @@ class OpinionTypeController extends Controller
 
         return new RedirectResponse($url);
     }
-
 }
