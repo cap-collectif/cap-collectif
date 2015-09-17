@@ -32,6 +32,8 @@ const OpinionBody = React.createClass({
       );
     }
 
+    // TODO implements link with jquery
+
     return <div dangerouslySetInnerHTML={{__html: opinion.body}} />;
   },
 

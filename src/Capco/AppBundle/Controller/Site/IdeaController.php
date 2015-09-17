@@ -134,7 +134,7 @@ class IdeaController extends Controller
 
         //Avoid division by 0 in nbPage calculation
         $nbPage = 1;
-        if ($pagination !== null && $pagination !== 0) {
+        if ($pagination != 0) {
             $nbPage = ceil(count($ideas) / $pagination);
         }
 
@@ -264,7 +264,7 @@ class IdeaController extends Controller
 
         //Avoid division by 0 in nbPage calculation
         $nbPage = 1;
-        if ($pagination !== null && $pagination !== 0) {
+        if ($pagination != 0) {
             $nbPage = ceil(count($ideas) / $pagination);
         }
 

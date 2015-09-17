@@ -71,7 +71,6 @@ class ConsultationController extends Controller
             if (null != $sort && null != $opinionTypeSlug) {
                 return $this->redirect($this->generateUrl('app_consultation_show_opinions_sorted', array(
                     'consultationSlug' => $consultation->getSlug(),
-                    'allowedTypes' => $allowedTypes,
                     'stepSlug' => $currentStep->getSlug(),
                     'opinionTypeSlug' => $opinionTypeSlug,
                     'opinionsSort' => $sort,
@@ -312,7 +311,7 @@ class ConsultationController extends Controller
 
         //Avoid division by 0 in nbPage calculation
         $nbPage = 1;
-        if ($pagination !== null && $pagination !== 0) {
+        if ($pagination != 0) {
             $nbPage = ceil(count($posts) / $pagination);
         }
 
@@ -342,7 +341,7 @@ class ConsultationController extends Controller
 
         //Avoid division by 0 in nbPage calculation
         $nbPage = 1;
-        if ($pagination !== null && $pagination !== 0) {
+        if ($pagination != 0) {
             $nbPage = ceil(count($contributors) / $pagination);
         }
 
@@ -435,7 +434,7 @@ class ConsultationController extends Controller
 
         //Avoid division by 0 in nbPage calculation
         $nbPage = 1;
-        if ($pagination !== null && $pagination !== 0) {
+        if ($pagination != 0) {
             $nbPage = ceil(count($consultations) / $pagination);
         }
 

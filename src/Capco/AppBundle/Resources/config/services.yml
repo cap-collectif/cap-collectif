@@ -42,6 +42,9 @@ parameters:
   capco.end_after_start.validator.class: Capco\AppBundle\Validator\Constraints\EndAfterStartValidator
 
 services:
+  import.csvtoarray:
+    class: Capco\AppBundle\Helper\ConvertCsvToArray
+
   capco.site_parameter.repository:
     class: %capco.site_parameter.repository.class%
     factory_service: doctrine.orm.default_entity_manager

@@ -3,7 +3,6 @@
 namespace Capco\AppBundle\Synthesis\Extractor;
 
 use Capco\AppBundle\Entity\OpinionType;
-use Capco\AppBundle\Entity\OpinionVersion;
 use Capco\AppBundle\Entity\Source;
 use Capco\AppBundle\Resolver\OpinionTypesResolver;
 use Doctrine\ORM\EntityManager;
@@ -17,19 +16,10 @@ use Symfony\Component\Routing\Router;
 
 class ConsultationStepExtractor
 {
-    const LABEL_ARG_PROS = 'synthesis.consultation_step.arguments.pros';
-    const LABEL_ARG_CONS = 'synthesis.consultation_step.arguments.cons';
-    const LABEL_ARG_SIMPLE = 'synthesis.consultation_step.arguments.simple';
-    const LABEL_SOURCES = 'synthesis.consultation_step.sources';
-    const LABEL_VERSIONS = 'synthesis.consultation_step.versions';
-
     protected $em;
     protected $translator;
     protected $router;
     protected $opinionTypesResolver;
-    protected $synthesis;
-    protected $consultationStep;
-    protected $previousElements;
 
     public function __construct(EntityManager $em, TranslatorInterface $translator, Router $router, OpinionTypesResolver $opinionTypeResolver)
     {
@@ -39,308 +29,246 @@ class ConsultationStepExtractor
         $this->opinionTypesResolver = $opinionTypeResolver;
     }
 
-    // *********************************** Main method **********************************
-
-    /**
-     * Update or create all elements from consultation step and return updated synthesis.
-     *
-     * @param Synthesis $synthesis
-     * @param ConsultationStep $consultationStep
-     * @return bool|Synthesis
-     */
     public function createOrUpdateElementsFromConsultationStep(Synthesis $synthesis, ConsultationStep $consultationStep)
     {
         if ($consultationStep === null) {
             return false;
         }
 
-        $this->synthesis = $synthesis;
-        $this->consultationStep = $consultationStep;
-        $this->previousElements = $synthesis->getElements();
+        $previousElements = $synthesis->getElements();
 
-        // First we get the opinion types allowed by the consultation step
-        $opinionTypes = $consultationStep->getConsultationType()->getOpinionTypes();
+        // Opinion types
+        $opinionTypes = $this->opinionTypesResolver->getAllForConsultationType($consultationStep->getConsultationType());
+        foreach ($opinionTypes as $ot) {
+            $elementFromOT = null;
+            foreach ($previousElements as $element) {
+                if ($this->isElementRelated($element, $ot)) {
+                    $elementFromOT = $element;
+                    if ($this->elementIsOutdated($elementFromOT, $ot)) {
+                        $elementFromOT = $this->updateElementFromObject($elementFromOT, $ot);
+                    }
+                }
+            }
 
-        // Then we start creating or updating the elements from these opinion types
-        $this->createElementsFromOpinionTypes($opinionTypes);
+            if (null === $elementFromOT) {
+                $elementFromOT = $this->createElementFromOpinionType($ot);
+                $synthesis->addElement($elementFromOT);
+            }
+
+            // Opinions
+            $opinions = $this->em->getRepository('CapcoAppBundle:Opinion')->findBy([
+                'step' => $consultationStep,
+                'OpinionType' => $ot,
+            ]);
+            foreach ($opinions as $opinion) {
+                $elementFromOpinion = null;
+                foreach ($previousElements as $element) {
+                    if ($this->isElementRelated($element, $opinion)) {
+                        $elementFromOpinion = $element;
+                        if ($this->elementIsOutdated($elementFromOpinion, $opinion)) {
+                            $elementFromOpinion = $this->updateElementFromObject($elementFromOpinion, $opinion);
+                        }
+                    }
+                }
+
+                if (null === $elementFromOpinion) {
+                    $elementFromOpinion = $this->createElementFromOpinion($opinion);
+                    $elementFromOT->addChild($elementFromOpinion);
+                    $synthesis->addElement($elementFromOpinion);
+                }
+
+                // Arguments folders
+                $proArgumentsElement = $this->getArgumentsFolder($elementFromOpinion, 1, $synthesis);
+                $consArgumentsElement = $this->getArgumentsFolder($elementFromOpinion, 0, $synthesis);
+
+                // Arguments
+                $arguments = $opinion->getArguments();
+                foreach ($arguments as $argument) {
+                    $elementFromArgument = null;
+                    foreach ($previousElements as $element) {
+                        if ($this->isElementRelated($element, $argument)) {
+                            $elementFromArgument = $element;
+                            if ($this->elementIsOutdated($elementFromArgument, $argument)) {
+                                $elementFromArgument = $this->updateElementFromObject($elementFromArgument, $argument);
+                            }
+                        }
+                    }
+                    if (null === $elementFromArgument) {
+                        $elementFromArgument = $this->createElementFromArgument($argument);
+                        if ($argument->getType() == 1) {
+                            $proArgumentsElement->addChild($elementFromArgument);
+                        } else {
+                            $consArgumentsElement->addChild($elementFromArgument);
+                        }
+                        $synthesis->addElement($elementFromArgument);
+                    }
+                }
+
+                // Sources folder
+                $sourcesElement = $this->getSourcesFolder($elementFromOpinion, $synthesis);
+
+                // Sources
+                $sources = $opinion->getSources();
+                foreach ($sources as $source) {
+                    $elementFromSource = null;
+                    foreach ($previousElements as $element) {
+                        if ($this->isElementRelated($element, $source)) {
+                            $elementFromSource = $element;
+                            if ($this->elementIsOutdated($elementFromSource, $source)) {
+                                $elementFromSource = $this->updateElementFromObject($elementFromSource, $source);
+                            }
+                        }
+                    }
+                    if (null === $elementFromSource) {
+                        $elementFromSource = $this->createElementFromSource($source);
+                        $sourcesElement->addChild($elementFromSource);
+                        $synthesis->addElement($elementFromSource);
+                    }
+                }
+            }
+        }
 
         $this->em->flush();
 
-        return $this->synthesis;
+        return $synthesis;
     }
 
-    
-    // ************************* Creating groups of elements *****************************
-
-    /**
-     * Create or update elements from opinion types and all children elements.
-     *
-     * @param $opinionTypes
-     * @param SynthesisElement|null $parent
-     */
-    public function createElementsFromOpinionTypes($opinionTypes, SynthesisElement $parent = null)
+    public function isElementRelated(SynthesisElement $element, $object)
     {
-        foreach ($opinionTypes as $ot) {
-
-            // Create or update element from opinion type
-            $elementFromOT = $this->getRelatedElement($ot, $parent);
-
-            // Create elements from opinions
-            $opinions = $this->em->getRepository('CapcoAppBundle:Opinion')->findBy([
-                'step' => $this->consultationStep,
-                'OpinionType' => $ot,
-            ]);
-            $this->createElementsFromOpinions($opinions, $elementFromOT);
-
-            //Create elements from opinion type children
-            $this->createElementsFromOpinionTypes($ot->getChildren(), $elementFromOT);
-
-        }
+        return $element->getLinkedDataClass() === get_class($object) && $element->getLinkedDataId() == $object->getId();
     }
 
-    /**
-     * Create or update elements from opinions and all children elements.
-     *
-     * @param $opinions
-     * @param SynthesisElement|null $parent
-     */
-    public function createElementsFromOpinions($opinions, SynthesisElement $parent = null)
+    public function elementIsOutdated(SynthesisElement $element, $object)
     {
-        foreach ($opinions as $opinion) {
-
-            // Create or update element from opinion
-            $elementFromOpinion = $this->getRelatedElement($opinion, $parent);
-
-            // Create elements from arguments
-            if ($opinion->getOpinionType()->getCommentSystem() === 2) {
-                $proArgumentsElement = $this->createFolderInElement(self::LABEL_ARG_PROS, $elementFromOpinion);
-                $consArgumentsElement = $this->createFolderInElement(self::LABEL_ARG_CONS, $elementFromOpinion);
-                $this->createElementsFromArguments($opinion->getArguments(), $proArgumentsElement, $consArgumentsElement);
-            } else if ($opinion->getOpinionType()->getCommentSystem() === 1) {
-                $simpleArgumentsElement = $this->createFolderInElement(self::LABEL_ARG_SIMPLE, $elementFromOpinion);
-                $this->createElementsFromArguments($opinion->getArguments(), $simpleArgumentsElement);
-            }
-
-            // Create elements from sources
-            if ($opinion->getOpinionType()->isSourceable()) {
-                $sourcesElement = $this->createFolderInElement(self::LABEL_SOURCES, $elementFromOpinion);
-                $this->createElementsFromSources($opinion->getSources(), $sourcesElement);
-            }
-
-            // // Create elements from versions
-            if ($opinion->getOpinionType()->isVersionable()) {
-                $versionsElement = $this->createFolderInElement(self::LABEL_VERSIONS, $elementFromOpinion);
-                $this->createElementsFromVersions($opinion->getVersions(), $versionsElement);
-            }
-        }
-
+        return $object->getUpdatedAt() > $element->getLinkedDataLastUpdate();
     }
 
-    /**
-     * Create or update elements from versions and all children elements.
-     *
-     * @param $versions
-     * @param SynthesisElement|null $parent
-     */
-    public function createElementsFromVersions($versions, SynthesisElement $parent = null)
+    public function getSourcesFolder(SynthesisElement $opinionElement, Synthesis $synthesis)
     {
-        foreach ($versions as $version) {
-
-            // Create or update element from version
-            $elementFromVersion = $this->getRelatedElement($version, $parent);
-
-            // Create elements from arguments
-            $proArgumentsElement = $this->createFolderInElement(self::LABEL_ARG_PROS, $elementFromVersion);
-            $consArgumentsElement = $this->createFolderInElement(self::LABEL_ARG_CONS, $elementFromVersion);
-            $this->createElementsFromArguments($version->getArguments(), $proArgumentsElement, $consArgumentsElement);
-
-            // Create elements from sources
-            $sourcesElement = $this->createFolderInElement(self::LABEL_SOURCES, $elementFromVersion);
-            $this->createElementsFromSources($version->getSources(), $sourcesElement);
-        }
-
-    }
-
-    /**
-     * Create or update elements from arguments and all children elements.
-     *
-     * @param $arguments
-     * @param SynthesisElement $prosFolder
-     * @param SynthesisElement $consFolder
-     */
-    public function createElementsFromArguments($arguments, SynthesisElement $prosFolder, SynthesisElement $consFolder = null)
-    {
-        foreach ($arguments as $argument) {
-            if ($argument->getType() === 1 || $consFolder !== null) {
-                // Define parent folder
-                if ($argument->getType() === 1) {
-                    $parent = $prosFolder;
-                } else {
-                    $parent = $consFolder;
-                }
-
-                // Create or update element from argument
-                $elementFromArgument = $this->getRelatedElement($argument, $parent);
-            }
-        }
-    }
-
-    /**
-     * Create or update elements from sources and all children elements.
-     *
-     * @param $sources
-     * @param SynthesisElement $parent
-     */
-    public function createElementsFromSources($sources, SynthesisElement $parent)
-    {
-        foreach ($sources as $source) {
-
-            // Create or update element from source
-            $elementFromSource = $this->getRelatedElement($source, $parent);
-        }
-    }
-
-    // ************************ Generate single elements from data *************************
-
-    /**
-     * Returns updated or created element from a given contribution.
-     *
-     * @param $contribution
-     * @param SynthesisElement $parent
-     * @return null
-     */
-    public function getRelatedElement($contribution, SynthesisElement $parent = null)
-    {
-        $element = null;
-        foreach ($this->previousElements as $el) {
-            if ($this->isElementRelated($el, $contribution)) {
-                $element = $el;
-                if ($this->elementIsOutdated($element, $contribution)) {
-                    $element = $this->updateElementFrom($element, $contribution);
-                }
-            }
-        }
-
-        if (null === $element) {
-            $element = $this->createElementFrom($contribution);
-            $element->setParent($parent);
-            $this->synthesis->addElement($element);
-        }
-        return $element;
-    }
-
-    /**
-     * Get or create a new folder from a provided parent
-     *
-     * @param $label
-     * @param SynthesisElement $parent
-     * @return SynthesisElement
-     */
-    public function createFolderInElement($label, SynthesisElement $parent) {
-        $label = $this->translator->trans($label, [], 'CapcoAppBundleSynthesis');
-
-        // Check if folder already exists
-        foreach ($parent->getChildren() as $el) {
+        $label = $this->getSourcesFolderLabel();
+        foreach ($opinionElement->getChildren() as $el) {
             if ($el->getDisplayType() === 'folder' && $el->getTitle() === $label) {
                 return $el;
             }
         }
-
-        // Otherwise create folder
         $folder = new SynthesisElement();
         $folder->setTitle($label);
         $folder->setDisplayType('folder');
         $folder->setArchived(true);
         $folder->setPublished(true);
-        $folder->setParent($parent);
-        $this->synthesis->addElement($folder);
-        return $folder;
+        $opinionElement->addChild($folder);
+        $synthesis->addElement($folder);
 
+        return $folder;
     }
 
-    /**
-     * Create a new element from a contribution
-     *
-     * @param $contribution
-     * @return SynthesisElement
-     */
-    public function createElementFrom($contribution)
+    public function getSourcesFolderLabel()
     {
-        $element = new SynthesisElement();
-        $element->setLinkedDataClass(get_class($contribution));
-        $element->setLinkedDataId($contribution->getId());
-        $element->setLinkedDataCreation($contribution->getCreatedAt());
-        $element->setLinkedDataLastUpdate($contribution->getUpdatedAt());
+        return $this->translator->trans('synthesis.consultation_step.sources', [], 'CapcoAppBundleSynthesis');
+    }
 
-        if ($contribution instanceof OpinionType) {
-            $element->setDisplayType('folder');
-            $element->setArchived(true);
-            $element->setPublished(true);
-        } else {
-            $element->setDisplayType('contribution');
-            $element->setArchived(false);
-            $element->setPublished(false);
+    public function getArgumentsFolder(SynthesisElement $opinionElement, $value, Synthesis $synthesis)
+    {
+        $label = $this->getArgumentsFolderLabel($value);
+        foreach ($opinionElement->getChildren() as $el) {
+            if ($el->getDisplayType() === 'folder' && $el->getTitle() === $label) {
+                return $el;
+            }
+        }
+        $folder = new SynthesisElement();
+        $folder->setTitle($label);
+        $folder->setDisplayType('folder');
+        $folder->setArchived(true);
+        $folder->setPublished(true);
+        $opinionElement->addChild($folder);
+        $synthesis->addElement($folder);
+
+        return $folder;
+    }
+
+    public function getArgumentsFolderLabel($value)
+    {
+        $label = '';
+        if ($value === 1) {
+            $label = 'synthesis.consultation_step.arguments.pros';
+        } elseif ($value === 0) {
+            $label = 'synthesis.consultation_step.arguments.cons';
         }
 
-        return $this->setDataFrom($element, $contribution);
+        return $this->translator->trans($label, [], 'CapcoAppBundleSynthesis');
     }
 
-    /**
-     * Update an element from a contribution.
-     *
-     * @param SynthesisElement $element
-     * @param $contribution
-     * @return SynthesisElement
-     */
-    public function updateElementFrom(SynthesisElement $element, $contribution)
+    public function createElementFromOpinionType(OpinionType $opinionType)
+    {
+        $folder = new SynthesisElement();
+        $folder->setLinkedDataClass(get_class($opinionType));
+        $folder->setLinkedDataId($opinionType->getId());
+        $folder->setLinkedDataCreation($opinionType->getCreatedAt());
+        $folder->setDisplayType('folder');
+        $folder->setArchived(true);
+        $folder->setPublished(true);
+
+        return $this->updateElementFromOpinionType($folder, $opinionType);
+    }
+
+    public function createElementFromOpinion(Opinion $opinion)
+    {
+        $element = new SynthesisElement();
+        $element->setLinkedDataClass(get_class($opinion));
+        $element->setLinkedDataId($opinion->getId());
+        $element->setLinkedDataCreation($opinion->getCreatedAt());
+        $element->setDisplayType('contribution');
+
+        return $this->updateElementFromOpinion($element, $opinion);
+    }
+
+    public function createElementFromArgument(Argument $argument)
+    {
+        $element = new SynthesisElement();
+        $element->setLinkedDataClass(get_class($argument));
+        $element->setLinkedDataId($argument->getId());
+        $element->setLinkedDataCreation($argument->getCreatedAt());
+        $element->setDisplayType('contribution');
+
+        return $this->updateElementFromArgument($element, $argument);
+    }
+
+    public function createElementFromSource(Source $source)
+    {
+        $element = new SynthesisElement();
+        $element->setLinkedDataClass(get_class($source));
+        $element->setLinkedDataId($source->getId());
+        $element->setLinkedDataCreation($source->getCreatedAt());
+        $element->setDisplayType('source');
+
+        return $this->updateElementFromSource($element, $source);
+    }
+
+    public function updateElementFromObject(SynthesisElement $element, $object)
     {
         // Update last modified, archive status and deletion date
-        $element->setLinkedDataLastUpdate($contribution->getUpdatedAt());
+        $element->setLinkedDataLastUpdate($object->getUpdatedAt());
         $element->setArchived(false);
         $element->setPublished(false);
         if (!$element->getOriginalDivision()) {
             $element->setDeletedAt(null);
         }
 
-        return $this->setDataFrom($element, $contribution);
-    }
-
-    /**
-     * Set data of element from contribution, depending on type.
-     *
-     * @param SynthesisElement $element
-     * @param $contribtution
-     * @return SynthesisElement
-     */
-    public function setDataFrom(SynthesisElement $element, $contribution)
-    {
-        if ($contribution instanceof OpinionType) {
-            return $this->setDataFromOpinionType($element, $contribution);
+        if ($object instanceof OpinionType) {
+            return $this->updateElementFromOpinionType($element, $object);
         }
-        if ($contribution instanceof Opinion) {
-            return $this->setDataFromOpinion($element, $contribution);
+        if ($object instanceof Opinion) {
+            return $this->updateElementFromOpinion($element, $object);
         }
-        if ($contribution instanceof OpinionVersion) {
-            return $this->setDataFromVersion($element, $contribution);
+        if ($object instanceof Source) {
+            return $this->updateElementFromSource($element, $object);
         }
-        if ($contribution instanceof Source) {
-            return $this->setDataFromSource($element, $contribution);
-        }
-        if ($contribution instanceof Argument) {
-            return $this->setDataFromArgument($element, $contribution);
+        if ($object instanceof Argument) {
+            return $this->updateElementFromArgument($element, $object);
         }
     }
 
-    // ************************* Set element data from contributions ***************************
-
-    /**
-     * Set element data from an opinion type.
-     *
-     * @param SynthesisElement $element
-     * @param OpinionType $opinionType
-     * @return SynthesisElement
-     */
-    public function setDataFromOpinionType(SynthesisElement $element, OpinionType $opinionType)
+    public function updateElementFromOpinionType(SynthesisElement $element, OpinionType $opinionType)
     {
         // Set author
         $element->setAuthor(null);
@@ -354,14 +282,7 @@ class ConsultationStepExtractor
         return $element;
     }
 
-    /**
-     * Set element data from an opinion.
-     *
-     * @param SynthesisElement $element
-     * @param Opinion $opinion
-     * @return SynthesisElement
-     */
-    public function setDataFromOpinion(SynthesisElement $element, Opinion $opinion)
+    public function updateElementFromOpinion(SynthesisElement $element, Opinion $opinion)
     {
         // Set author
         $element->setAuthor($opinion->getAuthor());
@@ -381,41 +302,7 @@ class ConsultationStepExtractor
         return $element;
     }
 
-    /**
-     * Set element data from a version.
-     *
-     * @param SynthesisElement $element
-     * @param OpinionVersion $version
-     * @return SynthesisElement
-     */
-    public function setDataFromVersion(SynthesisElement $element, OpinionVersion $version)
-    {
-        // Set author
-        $element->setAuthor($version->getAuthor());
-
-        if (!$element->getOriginalDivision()) {
-            $element->setTitle($version->getTitle());
-            $element->setBody($version->getBody());
-
-            // Set votes
-            $votes = array();
-            $votes['-1'] = $version->getVoteCountNok();
-            $votes['0'] = $version->getVoteCountMitige();
-            $votes['1'] = $version->getVoteCountOk();
-            $element->setVotes($votes);
-        }
-
-        return $element;
-    }
-
-    /**
-     * Set element data from a source.
-     *
-     * @param SynthesisElement $element
-     * @param Source $source
-     * @return SynthesisElement
-     */
-    public function setDataFromSource(SynthesisElement $element, Source $source)
+    public function updateElementFromSource(SynthesisElement $element, Source $source)
     {
         // Set author
         $element->setAuthor($source->getAuthor());
@@ -439,14 +326,7 @@ class ConsultationStepExtractor
         return $element;
     }
 
-    /**
-     * Set element data from an argument.
-     *
-     * @param SynthesisElement $element
-     * @param Argument $argument
-     * @return SynthesisElement
-     */
-    public function setDataFromArgument(SynthesisElement $element, Argument $argument)
+    public function updateElementFromArgument(SynthesisElement $element, Argument $argument)
     {
         // Set author
         $element->setAuthor($argument->getAuthor());
@@ -459,17 +339,5 @@ class ConsultationStepExtractor
         $element->setVotes($votes);
 
         return $element;
-    }
-
-    // ******************************** Helpers **********************************************
-
-    public function isElementRelated(SynthesisElement $element, $object)
-    {
-        return $element->getLinkedDataClass() === get_class($object) && $element->getLinkedDataId() == $object->getId();
-    }
-
-    public function elementIsOutdated(SynthesisElement $element, $object)
-    {
-        return $object->getUpdatedAt() > $element->getLinkedDataLastUpdate();
     }
 }
