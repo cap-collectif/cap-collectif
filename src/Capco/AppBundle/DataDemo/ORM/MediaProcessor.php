@@ -39,7 +39,6 @@ class MediaProcessor implements ProcessorInterface
             $media->setEnabled($object->getEnabled());
             $media->setName($object->getName());
             $media->setContext($object->getContext());
-
             $this->mediaManager->save($media, 'default', 'sonata.media.provider.image');
 
             return $media;

@@ -179,7 +179,7 @@ class ConsultationController extends Controller
         }
 
         $currentUrl = $this->generateUrl('app_consultation_show_opinions', ['consultationSlug' => $consultation->getSlug(), 'stepSlug' => $currentStep->getSlug(), 'opinionTypeSlug' => $opinionType->getSlug()]);
-        $opinions = $this->getDoctrine()->getRepository('CapcoAppBundle:Opinion')->getByOpinionTypeAndConsultationStepOrdered($currentStep, $opinionType->getId(), 10, $page, $filter);
+        $opinions = $this->getDoctrine()->getRepository('CapcoAppBundle:Opinion')->getByOpinionTypeAndConsultationStepOrdered($currentStep, $opinionType, 10, $page, $filter);
         $nav = $this->get('capco.opinion_types.resolver')->getNavForStep($currentStep);
 
         return [
@@ -311,7 +311,7 @@ class ConsultationController extends Controller
 
         //Avoid division by 0 in nbPage calculation
         $nbPage = 1;
-        if ($pagination !== null && $pagination !== 0) {
+        if ($pagination != 0) {
             $nbPage = ceil(count($posts) / $pagination);
         }
 
@@ -341,7 +341,7 @@ class ConsultationController extends Controller
 
         //Avoid division by 0 in nbPage calculation
         $nbPage = 1;
-        if ($pagination !== null && $pagination !== 0) {
+        if ($pagination != 0) {
             $nbPage = ceil(count($contributors) / $pagination);
         }
 
@@ -434,7 +434,7 @@ class ConsultationController extends Controller
 
         //Avoid division by 0 in nbPage calculation
         $nbPage = 1;
-        if ($pagination !== null && $pagination !== 0) {
+        if ($pagination != 0) {
             $nbPage = ceil(count($consultations) / $pagination);
         }
 

@@ -240,9 +240,6 @@ class UserAdmin extends BaseAdmin
             if ($currentUser->hasRole('ROLE_SUPER_ADMIN')) {
                 $formMapper
                     ->with('Roles')
-                    ->add('vip', null, [
-                        'required' => false,
-                    ])
                     ->add(
                         'realRoles',
                         'sonata_security_roles',

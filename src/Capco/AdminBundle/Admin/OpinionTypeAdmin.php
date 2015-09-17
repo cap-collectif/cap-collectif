@@ -218,4 +218,5 @@ class OpinionTypeAdmin extends Admin
         }
     }
 
+
 }

@@ -9,9 +9,6 @@ Capco\UserBundle\Entity\User:
         expose: true
         serialized_name: media
         groups: [UsersInfos, UserDetails]
-      vip:
-        expose: true
-        groups: [UsersInfos, UserDetails]
     virtual_properties:
       getDisplayName:
         serialized_name: displayName

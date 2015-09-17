@@ -297,7 +297,6 @@ Feature: Synthesis
           "displayName": "sfavot",
           "uniqueId": "sfavot",
           "isAdmin": true,
-          "vip": true,
           "media": {
             "url": @string@
           },
@@ -353,7 +352,6 @@ Feature: Synthesis
           "displayName": "sfavot",
           "uniqueId": "sfavot",
           "isAdmin": true,
-          "vip": true,
           "media": {
             "url": @string@
           },
@@ -627,7 +625,6 @@ Feature: Synthesis
         "displayName": "sfavot",
         "uniqueId": "sfavot",
         "isAdmin": true,
-        "vip": true,
         "media": {
           "url": @string@
         },
@@ -779,7 +776,6 @@ Feature: Synthesis
         "displayName": "sfavot",
         "uniqueId": "sfavot",
         "isAdmin": true,
-        "vip": true,
         "media": {
           "url": @string@
         },

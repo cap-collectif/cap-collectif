@@ -43,7 +43,7 @@ export default {
             add: 'Créer une source',
             link: 'Lien *',
             title: 'Titre *',
-            body: 'Description *',
+            body: 'Description',
             type: 'Type *',
             infos: 'Merci d\'examiner les sources existantes en premier lieu afin de ne pas soumettre de doublon. Vous pouvez voter pour celles existantes !',
             constraints: {
