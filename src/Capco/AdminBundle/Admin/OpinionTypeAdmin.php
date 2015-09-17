@@ -20,7 +20,10 @@ class OpinionTypeAdmin extends Admin
         $consultationTypeId = null;
         $consultationTypeName = null;
 
-        if ($subject && $subject->getConsultationType()) {
+        if ($this->hasParentFieldDescription() && $this->getParentFieldDescription()->getAdmin()->getSubject()) {
+            $consultationTypeId = $this->getParentFieldDescription()->getAdmin()->getSubject()->getId();
+        }
+        else if ($subject && $subject->getConsultationType()) {
             $consultationTypeId = $subject->getConsultationType()->getId();
         } elseif ($subject && $subject->getRoot()) {
             $root = $this
@@ -32,10 +35,10 @@ class OpinionTypeAdmin extends Admin
             ;
             if ($root) {
                 $consultationTypeId = $root->getConsultationType()->getId();
-            } else {
-                $consultationTypeId = $this->getRequest()->get('consultation_type_id');
             }
-        } else {
+        }
+
+        if ($consultationTypeId === null) {
             $consultationTypeId = $this->getRequest()->get('consultation_type_id');
         }
 
@@ -176,10 +179,6 @@ class OpinionTypeAdmin extends Admin
                 ->andWhere('ot.id != ?1')
                 ->setParameter(1, $this->getSubject()->getId())
             ;
-        } else {
-            $qb
-                ->andWhere('ot.id IS NULL')
-            ;
         }
 
         return $qb->getQuery();
@@ -217,5 +216,33 @@ class OpinionTypeAdmin extends Admin
             }
         }
     }
+    
+    public function postPersist($object)
+    {
+        $this->verifyTree();
+    }
 
+    public function postUpdate($object)
+    {
+        $this->verifyTree();
+    }
+
+    public function postRemove($object)
+    {
+        $this->verifyTree();
+    }
+
+
+    public function verifyTree() {
+        $em = $this->getConfigurationPool()
+            ->getContainer()
+            ->get('doctrine.orm.entity_manager')
+        ;
+        $repo = $em
+            ->getRepository('CapcoAppBundle:OpinionType')
+        ;
+        $repo->verify();
+        $repo->recover();
+        $em->flush();
+    }
 }
