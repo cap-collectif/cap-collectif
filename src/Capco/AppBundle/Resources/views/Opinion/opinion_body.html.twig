@@ -23,27 +23,27 @@
         </h3>
         <p class="opinion__votes  excerpt  small">
             {% if opinion.opinionType.voteWidgetType != 0 %}
-                {% transchoice nbVotes with {'%count%': nbVotes} from 'CapcoAppBundle' %}
+                <span>{% transchoice nbVotes with {'%count%': nbVotes} from 'CapcoAppBundle' %}
                     consultation.show.votes
-                {% endtranschoice %}
+                {% endtranschoice %}</span>
             {% endif %}
             {% if opinion.opinionType.commentSystem != 0 %}
                 <span class="count__separator"> • </span>
-                {% transchoice nbArguments with {'%count%': nbArguments} from 'CapcoAppBundle' %}
+                <span>{% transchoice nbArguments with {'%count%': nbArguments} from 'CapcoAppBundle' %}
                     consultation.show.arguments
-                {% endtranschoice %}
+                {% endtranschoice %}</span>
             {% endif %}
             {% if opinion.opinionType.versionable %}
                 <span class="count__separator"> • </span>
-                {% transchoice nbVersions with {'%count%': nbVersions} from 'CapcoAppBundle' %}
+                <span>{% transchoice nbVersions with {'%count%': nbVersions} from 'CapcoAppBundle' %}
                 consultation.show.versions
-                {% endtranschoice %}
+                {% endtranschoice %}</span>
             {% endif %}
             {% if opinion.opinionType.sourceable %}
                 <span class="count__separator"> • </span>
-                {% transchoice nbSources with {'%count%': nbSources} from 'CapcoAppBundle' %}
+                <span>{% transchoice nbSources with {'%count%': nbSources} from 'CapcoAppBundle' %}
                     consultation.show.sources
-                {% endtranschoice %}
+                {% endtranschoice %}</span>
             {% endif %}
         </p>
     </div>

@@ -71,7 +71,6 @@ class ConsultationController extends Controller
             if (null != $sort && null != $opinionTypeSlug) {
                 return $this->redirect($this->generateUrl('app_consultation_show_opinions_sorted', array(
                     'consultationSlug' => $consultation->getSlug(),
-                    'allowedTypes' => $allowedTypes,
                     'stepSlug' => $currentStep->getSlug(),
                     'opinionTypeSlug' => $opinionTypeSlug,
                     'opinionsSort' => $sort,
@@ -180,7 +179,7 @@ class ConsultationController extends Controller
         }
 
         $currentUrl = $this->generateUrl('app_consultation_show_opinions', ['consultationSlug' => $consultation->getSlug(), 'stepSlug' => $currentStep->getSlug(), 'opinionTypeSlug' => $opinionType->getSlug()]);
-        $opinions = $this->getDoctrine()->getRepository('CapcoAppBundle:Opinion')->getByOpinionTypeAndConsultationStepOrdered($currentStep, $opinionType, 10, $page, $filter);
+        $opinions = $this->getDoctrine()->getRepository('CapcoAppBundle:Opinion')->getByOpinionTypeAndConsultationStepOrdered($currentStep, $opinionType->getId(), 10, $page, $filter);
         $nav = $this->get('capco.opinion_types.resolver')->getNavForStep($currentStep);
 
         return [

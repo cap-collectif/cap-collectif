@@ -14,8 +14,13 @@ const OpinionSource = React.createClass({
 
   render() {
     const source = this.props.source;
+    const classes = classNames({
+      'opinion': true,
+      'block--bordered': true,
+      'bg-vip': source.author.vip,
+    });
     return (
-      <li className="opinion block--bordered has-chart">
+      <li className={classes}>
         <Row>
           <Col xs={12}>
             <div className="opinion__body box">

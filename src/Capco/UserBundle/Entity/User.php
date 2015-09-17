@@ -224,6 +224,8 @@ class User extends BaseUser implements EncoderAwareInterface, SynthesisUserInter
 
     protected $userType;
 
+    protected $vip = false;
+
     public function __construct($encoder = null)
     {
         parent::__construct();
@@ -850,6 +852,21 @@ class User extends BaseUser implements EncoderAwareInterface, SynthesisUserInter
     public function setUserType($userType)
     {
         $this->userType = $userType;
+    }
+
+    public function isVip()
+    {
+        return $this->vip;
+    }
+
+    /**
+     * @param mixed $vip
+     * @return $this
+     */
+    public function setVip($vip)
+    {
+        $this->vip = $vip;
+        return $this;
     }
 
     // ************************* Custom methods *********************************
