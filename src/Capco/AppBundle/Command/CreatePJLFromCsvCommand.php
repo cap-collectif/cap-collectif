@@ -68,7 +68,8 @@ class CreatePJLFromCsvCommand extends ContainerAwareCommand
         $userType = $em->getRepository('CapcoUserBundle:UserType')
                ->findOneBySlug('institution');
 
-
+        $context = $em->getRepository('CapcoClassificationBundle:Context')
+                      ->find('default');
 
         $media = $this->getContainer()
                       ->get('sonata.media.manager.media')
@@ -76,7 +77,8 @@ class CreatePJLFromCsvCommand extends ContainerAwareCommand
 
         $media->setBinaryContent(realpath(dirname(__FILE__)).'/../../../../pjl/marianne.jpg');
         $media->setEnabled(true);
-        $media->setName('gouvernement pic');
+        $media->setName('pic');
+        $media->setContext($context);
 
          $this->getContainer()
               ->get('sonata.media.manager.media')

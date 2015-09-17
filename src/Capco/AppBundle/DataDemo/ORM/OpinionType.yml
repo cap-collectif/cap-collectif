@@ -6,7 +6,6 @@ Capco\AppBundle\Entity\OpinionType:
         color: red
         isEnabled: false
         defaultFilter: votes
-        consultationType: @defaultType
     opinionType2:
         title: Les enjeux
         position: 2
@@ -14,7 +13,6 @@ Capco\AppBundle\Entity\OpinionType:
         color: bluedark
         isEnabled: true
         defaultFilter: votes
-        consultationType: @defaultType
     opinionType3:
         title: Les causes
         position: 3
@@ -22,7 +20,6 @@ Capco\AppBundle\Entity\OpinionType:
         color: orange
         isEnabled: true
         defaultFilter: votes
-        consultationType: @defaultType
     opinionType4:
         title: Les solutions
         position: 4
@@ -30,50 +27,3 @@ Capco\AppBundle\Entity\OpinionType:
         color: green
         isEnabled: true
         defaultFilter: votes
-        consultationType: @defaultType
-
-    opinionType5:
-        title: Titre Ier
-        subtitle: La circulation des données et du savoir
-        position: 1
-        isEnabled: false
-        consultationType: @pjlType
-        color: red
-        defaultFilter: position
-    opinionType6:
-        title: Titre 2è
-        position: 1
-        isEnabled: false
-        consultationType: @pjlType
-        color: red
-        defaultFilter: position
-    opinionType7:
-        title: Chapitre 1er
-        subtitle: Économie de la donnée
-        position: 1
-        isEnabled: false
-        parent: @opinionType5
-        color: red
-        defaultFilter: position
-    opinionType8:
-        title: Section 1
-        subtitle: Ouverture des données publiques
-        position: 1
-        isEnabled: true
-        parent: @opinionType7
-        voteWidgetType: 2
-        commentSystem: 1
-        color: green
-        isEnabled: true
-        defaultFilter: position
-    opinionType9:
-        title: Section 2
-        subtitle: Service public de la donnée
-        position: 2
-        isEnabled: false
-        parent: @opinionType7
-        voteWidgetType: 1
-        commentSystem: 2
-        color: red
-        isEnabled: true
-        defaultFilter: position

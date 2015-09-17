@@ -93,6 +93,14 @@ class ConsultationStepExtractorSpec extends ObjectBehavior
         $synthesis->getElements()->willReturn($currentElements)->shouldBeCalled();
         $consultationType = new ConsultationType();
         $consultationStep->getConsultationType()->willReturn($consultationType)->shouldBeCalled();
+        $opinionTypesResolver->getAllForConsultationType($consultationType)->willReturn([$opinionType])->shouldBeCalled();
+        $em->getRepository('CapcoAppBundle:Opinion')->willReturn($repo)->shouldBeCalled();
+        $repo->findBy([
+            'step' => $consultationStep,
+            'OpinionType' => $opinionType,
+        ])->willReturn($opinions)->shouldBeCalled();
+
+        $synthesis->addElement(ProphecyArgument::any())->shouldBeCalled();
 
         $em->flush()->shouldBeCalled();
 
@@ -150,6 +158,79 @@ class ConsultationStepExtractorSpec extends ObjectBehavior
         $this->elementIsOutdated($element, $opinion)->shouldReturn(false);
     }
 
+    function it_can_get_arguments_folder(SynthesisElement $opinionElement, Synthesis $synthesis, SynthesisElement $proFolder)
+    {
+        $opinionElement->getChildren()->willReturn([$proFolder])->shouldBeCalled();
+        $proFolder->getDisplayType()->willReturn('folder')->shouldBeCalled();
+        $proFolder->getTitle()->willReturn('Arguments pour')->shouldBeCalled();
+        $opinionElement->addChild(ProphecyArgument::any())->shouldBeCalled();
+        $synthesis->addElement(ProphecyArgument::any())->shouldBeCalled();
+        $folder = $this->getArgumentsFolder($opinionElement, 0, $synthesis);
+        $folder->shouldBeAnInstanceOf('Capco\AppBundle\Entity\Synthesis\SynthesisElement');
+    }
+
+    function it_can_create_an_element_from_an_opinion_type()
+    {
+        // Can't mock opinion because we need to call get_class() method on it
+        $opinionType = new OpinionType();
+        $opinionType->setId(42);
+        $opinionType->setTitle('Les causes');
+
+        $element = $this->createElementFromOpinionType($opinionType);
+        $element->shouldBeAnInstanceOf('Capco\AppBundle\Entity\Synthesis\SynthesisElement');
+        $element->getTitle()->shouldReturn('Les causes');
+        $element->getBody()->shouldReturn(null);
+        $element->getLinkedDataId()->shouldReturn(42);
+        $element->getDisplayType()->shouldReturn('folder');
+    }
+
+    function it_can_create_an_element_from_an_opinion()
+    {
+        // Can't mock opinion because we need to call get_class() method on it
+        $opinion = new Opinion();
+        $opinion->setId(42);
+        $opinion->setTitle('test');
+        $opinion->setBody('blabla');
+
+        $element = $this->createElementFromOpinion($opinion);
+        $element->shouldBeAnInstanceOf('Capco\AppBundle\Entity\Synthesis\SynthesisElement');
+        $element->getTitle()->shouldReturn('test');
+        $element->getBody()->shouldReturn('blabla');
+        $element->getLinkedDataId()->shouldReturn(42);
+        $element->getDisplayType()->shouldReturn('contribution');
+    }
+
+    function it_can_create_an_element_from_an_argument(Argument $argument)
+    {
+        // Can't mock argument because we need to call get_class() method on it
+        $argument = new Argument();
+        $argument->setId(42);
+        $argument->setBody('blabla');
+
+        $element = $this->createElementFromArgument($argument);
+        $element->shouldBeAnInstanceOf('Capco\AppBundle\Entity\Synthesis\SynthesisElement');
+        $element->getBody()->shouldReturn('blabla');
+        $element->getLinkedDataId()->shouldReturn(42);
+        $element->getDisplayType()->shouldReturn('contribution');
+    }
+
+    function it_can_create_an_element_from_a_source(Source $source)
+    {
+        // Can't mock source because we need to call get_class() method on it
+        $source = new Source();
+        $source->setId(42);
+        $source->setTitle('Titre');
+        $source->setBody('blabla');
+
+        $element = $this->createElementFromSource($source);
+        $element->shouldBeAnInstanceOf('Capco\AppBundle\Entity\Synthesis\SynthesisElement');
+        $element->getTitle()->shouldReturn('Titre');
+        $element->getBody()->shouldReturn('blabla');
+        $element->getLink()->shouldReturn(null);
+        $element->getLinkedDataId()->shouldReturn(42);
+        $element->getDisplayType()->shouldReturn('source');
+    }
+
     function it_can_update_an_element_from_an_object(SynthesisElement $element, SynthesisDivision $division, User $author, EntityManager $em, TranslatorInterface $translator, Router $router, Opinion $object)
     {
         $date = new \DateTime();
@@ -163,16 +244,75 @@ class ConsultationStepExtractorSpec extends ObjectBehavior
 
         $element->setLinkedDataLastUpdate($date)->shouldBeCalled();
         $element->getOriginalDivision()->willReturn(null)->shouldBeCalled();
-        $element->setDeletedAt(null)->shouldBeCalled();
+        $element->setAuthor($author)->shouldBeCalled();
         $element->setArchived(false)->shouldBeCalled();
         $element->setPublished(false)->shouldBeCalled();
-
-        $element->setAuthor($author)->shouldBeCalled();
+        $element->setDeletedAt(null)->shouldBeCalled();
         $element->setTitle('test')->shouldBeCalled();
         $element->setBody('blabla')->shouldBeCalled();
         $element->setVotes([-1 => 25, 0 => 25, 1 => 25])->shouldBeCalled();
+        $object->getUpdatedAt()->willReturn($date)->shouldBeCalled();
 
-        $this->updateElementFrom($element, $object)->shouldReturnAnInstanceOf('Capco\AppBundle\Entity\Synthesis\SynthesisElement');
+        $this->updateElementFromObject($element, $object)->shouldReturnAnInstanceOf('Capco\AppBundle\Entity\Synthesis\SynthesisElement');
+    }
+
+    function it_can_update_an_element_from_an_opinion_type(SynthesisElement $element, OpinionType $opinionType)
+    {
+        $opinionType->getTitle()->willReturn('Les causes')->shouldBeCalled();
+        $element->setTitle('Les causes')->shouldBeCalled();
+        $element->setBody(null)->shouldBeCalled();
+        $element->setAuthor(null)->shouldBeCalled();
+        $element->setVotes([])->shouldBeCalled();
+
+        $this->updateElementFromOpinionType($element, $opinionType)->shouldReturnAnInstanceOf('Capco\AppBundle\Entity\Synthesis\SynthesisElement');
+    }
+
+    function it_can_update_an_element_from_an_opinion(SynthesisElement $element, Opinion $opinion, User $author)
+    {
+        $opinion->getTitle()->willReturn('test')->shouldBeCalled();
+        $opinion->getBody()->willReturn('blabla')->shouldBeCalled();
+        $opinion->getAuthor()->willReturn($author)->shouldBeCalled();
+        $opinion->getVoteCountOk()->willReturn(25)->shouldBeCalled();
+        $opinion->getVoteCountNok()->willReturn(25)->shouldBeCalled();
+        $opinion->getVoteCountMitige()->willReturn(25)->shouldBeCalled();
+
+        $element->getOriginalDivision()->willReturn(null)->shouldBeCalled();
+        $element->setTitle('test')->shouldBeCalled();
+        $element->setBody('blabla')->shouldBeCalled();
+        $element->setAuthor($author)->shouldBeCalled();
+        $element->setVotes([-1 => 25, 0 => 25, 1 => 25])->shouldBeCalled();
+
+        $this->updateElementFromOpinion($element, $opinion)->shouldReturnAnInstanceOf('Capco\AppBundle\Entity\Synthesis\SynthesisElement');
+    }
+
+    function it_can_update_an_element_from_a_source(SynthesisElement $element, Source $source, User $author)
+    {
+        $source->getTitle()->willReturn('Titre')->shouldBeCalled();
+        $source->getBody()->willReturn('blabla')->shouldBeCalled();
+        $source->getAuthor()->willReturn($author)->shouldBeCalled();
+        $source->getVoteCount()->willReturn(25)->shouldBeCalled();
+        $source->getMedia()->willReturn(null)->shouldBeCalled();
+        $source->getLink()->willReturn(null)->shouldBeCalled();
+
+        $element->setTitle('Titre')->shouldBeCalled();
+        $element->setBody('blabla')->shouldBeCalled();
+        $element->setAuthor($author)->shouldBeCalled();
+        $element->setVotes([1 => 25])->shouldBeCalled();
+
+        $this->updateElementFromSource($element, $source)->shouldReturnAnInstanceOf('Capco\AppBundle\Entity\Synthesis\SynthesisElement');
+    }
+
+    function it_can_update_an_element_from_an_argument(SynthesisElement $element, Argument $argument, User $author)
+    {
+        $argument->getBody()->willReturn('blabla')->shouldBeCalled();
+        $argument->getAuthor()->willReturn($author)->shouldBeCalled();
+        $argument->getVoteCount()->willReturn(25)->shouldBeCalled();
+
+        $element->setBody('blabla')->shouldBeCalled();
+        $element->setAuthor($author)->shouldBeCalled();
+        $element->setVotes([1 => 25])->shouldBeCalled();
+
+        $this->updateElementFromArgument($element, $argument)->shouldReturnAnInstanceOf('Capco\AppBundle\Entity\Synthesis\SynthesisElement');
     }
 
 }
