@@ -154,6 +154,7 @@ class CreatePJLFromCsvCommand extends ContainerAwareCommand
             $opinionType->setDefaultFilter('positions');
             $opinionType->setIsEnabled($row['contribuable']);
             $opinionType->setVersionable($row['contribuable']);
+            $opinionType->setVotesHelpText('Pensez-vous que cette proposition permet d\'atteindre les objectifs présentés dans l\'exposé des motifs ?');
 
             if (!empty($row['parent'])) {
                 $parent = $this->findOpinionTypeByTitle($row['parent']);
