@@ -50,6 +50,13 @@ class CreatePJLFromCsvCommand extends ContainerAwareCommand
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $this->import($input, $output);
+
+        $em = $this->getContainer()->get('doctrine')->getManager();
+        $senderAddress = $em->getRepository('CapcoAppBundle:SiteParameter')
+               ->findOneByKeyname('admin.mail.notifications.send_address');
+        $senderAddress->setValue('coucou@cap-collectif.com');
+
+        $em->flush();
     }
 
     protected function import(InputInterface $input, OutputInterface $output)
