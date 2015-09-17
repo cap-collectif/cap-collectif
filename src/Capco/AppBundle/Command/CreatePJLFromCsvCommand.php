@@ -8,6 +8,7 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Helper\ProgressBar;
 
+use Capco\UserBundle\Entity\User;
 use Capco\AppBundle\Entity\OpinionType;
 use Capco\AppBundle\Entity\Opinion;
 use Capco\AppBundle\Entity\OpinionAppendix;
@@ -21,6 +22,7 @@ class CreatePJLFromCsvCommand extends ContainerAwareCommand
 {
 
     private $opinionTypes = [];
+    private $username = 'gouvernement';
 
     protected function findOpinionTypeByTitle($title, $parentTitle = false)
     {
@@ -47,16 +49,31 @@ class CreatePJLFromCsvCommand extends ContainerAwareCommand
         ->setDescription('Import from CSV file');
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function generateDefaultContent()
     {
-        $this->import($input, $output);
-
         $em = $this->getContainer()->get('doctrine')->getManager();
+
+        $userType = $em->getRepository('CapcoUserBundle:UserType')
+               ->findOneBySlug('institution');
+
+        $user = new User();
+        $user->setUserName($this->username);
+        $user->setPlainPassword('KvN+j\E43&2U%KAF');
+        $user->setEnabled(true);
+        $user->setUserType($userType);
+        $em->persist($user);
+
         $senderAddress = $em->getRepository('CapcoAppBundle:SiteParameter')
                ->findOneByKeyname('admin.mail.notifications.send_address');
         $senderAddress->setValue('coucou@cap-collectif.com');
 
         $em->flush();
+    }
+
+    protected function execute(InputInterface $input, OutputInterface $output)
+    {
+        $this->generateDefaultContent();
+        $this->import($input, $output);
     }
 
     protected function import(InputInterface $input, OutputInterface $output)
@@ -67,9 +84,8 @@ class CreatePJLFromCsvCommand extends ContainerAwareCommand
 
         $em = $this->getContainer()->get('doctrine')->getManager();
 
-        $username = 'admin'; // TODO
         $user = $em->getRepository('CapcoUserBundle:User')
-                   ->findOneByUsername($username);
+                   ->findOneByUsername($this->username);
 
         $progress = new ProgressBar($output, count($opinionTypesData) + count($opinions));
         $progress->start();
