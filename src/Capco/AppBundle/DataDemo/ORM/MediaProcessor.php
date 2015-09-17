@@ -35,9 +35,9 @@ class MediaProcessor implements ProcessorInterface
     {
         if ($object instanceof \Capco\MediaBundle\Entity\Media) {
             $media = $this->mediaManager->create();
-            $media->setBinaryContent(realpath(dirname(__FILE__)).'/../files/social/facebook.png');
-            $media->setEnabled(true);
-            $media->setName('Gouvernement pic');
+            $media->setBinaryContent(realpath(dirname(__FILE__)).'/'.$object->getBinaryContent());
+            $media->setEnabled($object->getEnabled());
+            $media->setName($object->getName());
             $media->setContext($object->getContext());
 
             $this->mediaManager->save($media, 'default', 'sonata.media.provider.image');

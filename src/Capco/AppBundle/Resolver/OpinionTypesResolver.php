@@ -76,15 +76,15 @@ class OpinionTypesResolver
         return $opinionTypes;
     }
 
-    public function getGroupedOpinionsForStep(ConsultationStep $step)
+    public function getGroupedOpinionsForStep(ConsultationStep $step, $limit = 5, $page = 1)
     {
         $tree = $this->getHierarchyForConsultationType($step->getConsultationType());
 
-        $build = function ($tree) use (&$build, &$step) {
+        $build = function ($tree) use (&$build, &$step, &$limit, &$page) {
             $childrenTree = [];
             foreach ($tree as $node) {
                 $node['opinions'] = $this->opinionRepo
-                    ->getByConsultationStepAndOpinionTypeOrdered($step, $node['id'], 5, $node['defaultFilter'])
+                    ->getByOpinionTypeAndConsultationStepOrdered($step, $node['id'], $limit, $page, $node['defaultFilter'])
                 ;
                 $node['total_opinions_count'] = count($node['opinions']);
                 if (count($node['children']) > 0) {
@@ -142,14 +142,12 @@ class OpinionTypesResolver
 
     }
 
-    public function getMaximumPositionByOpinionTypeAndStep(OpinionType $opinionType, ConsultationStep $step)
+    public function getMaximumPositionByOpinionTypeAndStep($opinionType, ConsultationStep $step)
     {
-        $opinions = $this->opinionRepo
-            ->getByConsultationStepAndOpinionTypeOrdered($step, $opinionType, 5, 'positions')
+        dump($this->opinionRepo
+            ->getMaxPositionByOpinionTypeAndConsultationStep($step, $opinionType));
+        return $this->opinionRepo
+            ->getMaxPositionByOpinionTypeAndConsultationStep($step, $opinionType)
         ;
-
-        $lastOpinion = $opinions[count($opinions) - 1];
-        return $lastOpinion->getPosition();
-
     }
 }

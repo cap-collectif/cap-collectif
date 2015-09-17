@@ -4,23 +4,17 @@
 
 {% block opinions_list %}
 
-    {% if allowedTypes | length == 1 and currentStep.body is not null %}
-        <div class="block  block--bordered">
-            <div class="opinion  opinion--current  opinion--default">
-                <div class="opinion__header  opinion__header--mobile-centered">
-                    <h2 class="pull-left  h4  opinion__header__title"> {{ 'consultation.show.meta.intro.title' | trans({}, 'CapcoAppBundle') }}</h2>
-                </div>
-                <div class="box">
-                    <p class="more">{{ currentStep.body|striptags }}</p>
-                </div>
-            </div>
-        </div>
-    {% endif %}
+    <p id="opinion-type--{{ opinionType.slug }}" class="anchor-offset text-center opinion-type__title level--0">
+        {{ opinionType.title }}<br>
+        <span class="small excerpt">{{ opinionType.subtitle }}</span>
+    </p>
 
-    <div class="block  block--bordered">
+    <div id="opinions--{{ opinionType.slug }}" class="anchor-offset  block  block--bordered">
         <div class="opinion  opinion--{{ opinionType.color }} opinion--default">
             <div class="opinion__header  opinion__header--mobile-centered">
-                <h2 class="h4  opinion__header__title  pull-left">{{ opinionType.title }} <span class="badge">{{ opinions|length }}</span></h2>
+                <h2 class="pull-left  h4  opinion__header__title">
+                    {{ 'consultation.show.opinions' | transchoice(opinions | length, {}, 'CapcoAppBundle')  }}
+                </h2>
                 <div class="pull-right  opinion__header__filter">
                     {{ form_start(sortOpinionsForm) }}
                     {{ form_label(sortOpinionsForm.opinionsSort, null, {'label_attr':{"class":"control-label  sr-only"} }) }}

@@ -35,6 +35,7 @@ const OpinionSourceForm = React.createClass({
         },
         body: {
           min: {value: 2, message: 'source.constraints.body'},
+          notBlank: {message: 'source.constraints.body'},
         },
         category: {
           notBlank: {message: 'source.constraints.category'},

@@ -15,6 +15,7 @@ form:
   label_real_roles: Rôles
   label_twitter_url: Lien Twitter
   label_user_type: Type de profil
+  label_vip: VIP
   label_zip_code: Code postal
 
 gender:
@@ -63,6 +64,7 @@ show:
   label_twitter_url: Lien Twitter
   label_updated_at: Mise à jour
   label_user_type: Type de profil
+  label_vip: VIP
   label_zip_code: Code postal
 
 "Gender": Civilité

@@ -33,10 +33,3 @@ default:
                 - Capco\AppBundle\Behat\ApiContext
                 - Capco\AppBundle\Behat\NavigationContext
             mink_session: default
-        commands:
-            paths: [ %paths.base%/features/commands ]
-            contexts:
-                - Capco\AppBundle\Behat\ApplicationContext
-                - Capco\AppBundle\Behat\NavigationContext
-                - Capco\AppBundle\Behat\CommandContext
-            mink_session: default

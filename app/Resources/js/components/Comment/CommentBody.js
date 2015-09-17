@@ -14,7 +14,7 @@ const CommentBody = React.createClass({
 
   renderReadMoreOrLess() {
     if (this.textShouldBeTruncated() && !this.state.expanded) {
-      return <button className="btn-link" onClick={this.expand.bind(this, true)}>{this.getIntlMessage('global.read_more')}</button>;
+      return <a onClick={this.expand.bind(this, true)}>{this.getIntlMessage('global.read_more')}</a>;
     }
   },
 

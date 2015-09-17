@@ -34,8 +34,13 @@ const Comment = React.createClass({
 
   render() {
     const comment = this.props.comment;
+    const classes = classNames({
+      'opinion': true,
+      'opinion--comment': true,
+      'bg-vip': comment.author && comment.author.vip,
+    });
     return (
-      <li className="opinion opinion--comment" >
+      <li className={classes} >
         <div className="opinion__body">
           <UserAvatar user={comment.author} className="pull-left" />
           <div className="opinion__data">

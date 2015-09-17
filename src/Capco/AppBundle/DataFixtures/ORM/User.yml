@@ -27,6 +27,7 @@ Capco\UserBundle\Entity\User:
         isTermsAccepted: true
         website: www.sfavot.fr
         biography: Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eum earum fuga quaerat expedita minima labore vitae voluptate, repellendus perspiciatis consequuntur cum, dignissimos quas temporibus consequatur tempora est repellat. Architecto, quia.
+        vip: true
 
     user3:
         username: xlacot
@@ -101,3 +102,4 @@ Capco\UserBundle\Entity\User:
          - 'ROLE_SUPER_ADMIN'
         Media: @MediaUser4
         isTermsAccepted: true
+        vip: true

@@ -2,6 +2,8 @@
 
 namespace Capco\AppBundle\Repository;
 
+use Capco\AppBundle\Entity\ConsultationStep;
+use Capco\AppBundle\Entity\OpinionType;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 use Capco\AppBundle\Entity\Opinion;
@@ -164,7 +166,7 @@ class OpinionRepository extends EntityRepository
      * @return Paginator
      * @return mixed
      */
-    public function getByOpinionTypeAndConsultationStepOrdered($step, $opinionType, $nbByPage = 10, $page = 1, $opinionsSort = null)
+    public function getByOpinionTypeAndConsultationStepOrdered(ConsultationStep $step, $opinionTypeId, $nbByPage = 10, $page = 1, $opinionsSort = null)
     {
         if ((int) $page < 1) {
             throw new \InvalidArgumentException(sprintf(
@@ -174,16 +176,15 @@ class OpinionRepository extends EntityRepository
         }
 
         $qb = $this->getIsEnabledQueryBuilder()
-            ->addSelect('ot', 's', 'aut', 'm', '(o.voteCountMitige + o.voteCountOk + o.voteCountNok) as HIDDEN vnb')
+            ->addSelect('ot', 'aut', 'm', '(o.voteCountMitige + o.voteCountOk + o.voteCountNok) as HIDDEN vnb')
             ->leftJoin('o.OpinionType', 'ot')
-            ->leftJoin('o.step', 's')
             ->leftJoin('o.Author', 'aut')
             ->leftJoin('aut.Media', 'm')
             ->andWhere('o.step = :step')
-            ->andWhere('o.OpinionType = :opinionType')
+            ->andWhere('ot.id = :opinionType')
             ->andWhere('o.isTrashed = :notTrashed')
             ->setParameter('step', $step)
-            ->setParameter('opinionType', $opinionType)
+            ->setParameter('opinionType', $opinionTypeId)
             ->setParameter('notTrashed', false)
             ->orderBy('o.pinned', 'DESC')
         ;
@@ -211,46 +212,20 @@ class OpinionRepository extends EntityRepository
         return new Paginator($query);
     }
 
-    /**
-     * Get all opinions by consultation step.
-     *
-     * @param $step
-     *
-     * @return mixed
-     */
-    public function getByConsultationStepAndOpinionTypeOrdered($step, $ot, $limit = 5, $opinionsSort = null)
+    public function getMaxPositionByOpinionTypeAndConsultationStep(ConsultationStep $step, OpinionType $type)
     {
-        $qb = $this->getIsEnabledQueryBuilder('o')
-            ->addSelect('ot', 'aut', '(o.voteCountMitige + o.voteCountOk + o.voteCountNok) as HIDDEN vnb')
-            ->leftJoin('o.OpinionType', 'ot')
-            ->leftJoin('o.Author', 'aut')
+        $qb = $this->getIsEnabledQueryBuilder()
+            ->select('MAX(o.position)')
             ->andWhere('o.step = :step')
-            ->andWhere('ot.id = :ot')
+            ->andWhere('o.OpinionType = :opinionType')
             ->andWhere('o.isTrashed = :notTrashed')
             ->setParameter('step', $step)
-            ->setParameter('ot', $ot)
+            ->setParameter('opinionType', $type)
             ->setParameter('notTrashed', false)
-            ->orderBy('o.pinned', 'DESC')
         ;
 
-        if ($opinionsSort) {
-            if ($opinionsSort == 'date') {
-                $qb->addOrderBy('o.updatedAt', 'DESC');
-            } elseif ($opinionsSort == 'votes') {
-                $qb->addOrderBy('vnb', 'DESC');
-            } elseif ($opinionsSort == 'comments') {
-                $qb->addOrderBy('o.argumentsCount', 'DESC');
-            } elseif ($opinionsSort == 'positions') {
-                $qb->addOrderBy('o.position', 'ASC');
-            }
-        }
+        return $qb->getQuery()->getSingleScalarResult();
 
-        $qb->addOrderBy('vnb', 'DESC')
-            ->setMaxResults($limit);
-
-        return $qb
-            ->getQuery()
-            ->getResult();
     }
 
     /**

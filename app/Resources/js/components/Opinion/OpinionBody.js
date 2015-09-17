@@ -1,5 +1,4 @@
 import CustomDiff from '../../services/CustomDiff';
-import OpinionBodyDiffContent from './OpinionBodyDiffContent';
 
 const Well = ReactBootstrap.Well;
 
@@ -33,7 +32,7 @@ const OpinionBody = React.createClass({
       );
     }
 
-    return <OpinionBodyDiffContent html={opinion.body} />;
+    return <div dangerouslySetInnerHTML={{__html: opinion.body}} />;
   },
 
   isVersion() {
