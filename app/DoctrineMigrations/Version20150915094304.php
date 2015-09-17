@@ -26,8 +26,8 @@ class Version20150915094304 extends AbstractMigration
     {
         $consultationSteps = $this->connection->fetchAll('SELECT id, body FROM step WHERE step_type = ?', ['consultation']);
         foreach ($consultationSteps as $step) {
-            if (!strpos($step['body'], '<p>')) {
-                $newBody = '<p>' + $step['body'] + '</p>';
+            if ($step['body'] !== null && false === strpos($step['body'], '<p>')) {
+                $newBody = '<p>'.$step['body'].'</p>';
                 $newBody = nl2br($newBody);
                 $this->connection->update('step', ['body' => $newBody], ['id' => $step['id']]);
             }
@@ -50,8 +50,14 @@ class Version20150915094304 extends AbstractMigration
     {
         $consultationSteps = $this->connection->fetchAll('SELECT id, body FROM step WHERE step_type = ?', ['consultation']);
         foreach ($consultationSteps as $step) {
-            $newBody = str_replace('<br>', '\n', $step['body']);
-            $this->connection->update('step', ['body' => $newBody], ['id' => $step['id']]);
+            if ($step['body'] !== null) {
+                $newBody = str_replace('<br>', '\n', $step['body']);
+                $newBody = str_replace('<br />', '\n', $step['body']);
+                $newBody = str_replace('<br/>', '\n', $step['body']);
+                $newBody = str_replace('<p>', '', $newBody);
+                $newBody = str_replace('</p>', '', $newBody);
+                $this->connection->update('step', ['body' => $newBody], ['id' => $step['id']]);
+            }
         }
     }
 
