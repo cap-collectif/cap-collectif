@@ -22,7 +22,7 @@ class CreatePJLFromCsvCommand extends ContainerAwareCommand
 {
 
     private $opinionTypes = [];
-    private $username = 'gouvernement';
+    private $username = 'Gouvernement';
     private $password = 'KvN+j\E43&2U%KAF';
 
     private $siteParameters = [
