@@ -58,7 +58,7 @@ const OpinionSourceForm = React.createClass({
 
   renderCreateButton() {
     return (
-      <Button id="addSourceButton" bsStyle="primary" onClick={LoginStore.isLoggedIn() ? this.show.bind(null, this) : null}>
+      <Button id="source-form__add" bsStyle="primary" onClick={LoginStore.isLoggedIn() ? this.show.bind(null, this) : null}>
         <i className="cap cap-add-1"></i>
         { ' ' + this.getIntlMessage('opinion.add_new_source')}
       </Button>
@@ -66,6 +66,10 @@ const OpinionSourceForm = React.createClass({
   },
 
   render() {
+    if (!this.props.opinion.isContribuable) {
+      return null;
+    }
+
     return (
       <div>
         <LoginOverlay children={this.renderCreateButton()} />
@@ -82,7 +86,7 @@ const OpinionSourceForm = React.createClass({
                 { this.getIntlMessage('source.infos') }
               </p>
             </div>
-            <form ref="form">
+            <form id="source-form" ref="form">
               <div className={'form-group ' + this.getGroupStyle('title')}>
                 <label htmlFor="sourceTitle" className="control-label h5">
                   {this.getIntlMessage('source.title')}

@@ -17,6 +17,7 @@ Feature: Opinions Versions
           "created_at": "@string@.isDateTime()",
           "updated_at": "@string@.isDateTime()",
           "is_trashed": @boolean@,
+          "isContribuable": @boolean@,
 
           "arguments": @...@,
           "arguments_yes_count": @integer@,
@@ -90,6 +91,7 @@ Feature: Opinions Versions
         "created_at": "@string@.isDateTime()",
         "updated_at": "@string@.isDateTime()",
         "is_trashed": @boolean@,
+        "isContribuable": @boolean@,
 
         "arguments": @...@,
         "arguments_yes_count": @integer@,

@@ -45,9 +45,8 @@ const OpinionArgumentList = React.createClass({
   },
 
   render() {
-    const classes = 'block--tablet block--bordered opinion__arguments--' + this.props.type;
     return (
-      <div className={classes}>
+      <div id={'opinion__arguments--' + this.props.type} className="block--tablet block--bordered">
         <Row className="opinion__arguments__header">
           <Col xs={12} sm={6} md={6}>
             <h4 className="opinion__header__title">
@@ -93,7 +92,7 @@ const OpinionArgumentList = React.createClass({
   loadArgumentsFromServer() {
     this.setState({'isLoading': true});
 
-    const baseUrl = this.props.opinion.parent !== null ? '/versions/' : '/opinions/';
+    const baseUrl = this.props.opinion.parent ? '/versions/' : '/opinions/';
     const type = this.props.type === 'no' ? 0 : 1;
     Fetcher
       .get(`${baseUrl}${this.props.opinion.id}/arguments?type=${type}&filter=${this.state.filter}`)

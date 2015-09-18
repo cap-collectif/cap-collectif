@@ -137,8 +137,8 @@ Scenario: Can not comment an uncommentable idea
     And I fill in the following:
       | authorName  | Naruto              |
     When I press "Commenter"
-    And I wait 5 seconds
-    Then I should not see "J'ai un truc à dire" in the ".opinion__list" element
+    Then I should see "Cette valeur n'est pas une adresse email valide."
+    And I should not see "J'ai un truc à dire" in the ".opinion__list" element
 
 ## Comments vote
 

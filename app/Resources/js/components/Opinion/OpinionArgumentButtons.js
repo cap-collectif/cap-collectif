@@ -19,13 +19,13 @@ const OpinionArgumentButtons = React.createClass({
   renderVoteButton() {
     if (this.state.hasVoted) {
       return (
-        <Button bsStyle="danger" bsSize="xsmall" onClick={!LoginStore.isLoggedIn() ? null : this.deleteVote.bind(null, this)}>
+        <Button className="argument__btn--vote" bsStyle="danger" bsSize="xsmall" onClick={!LoginStore.isLoggedIn() ? null : this.deleteVote.bind(null, this)}>
           { this.getIntlMessage('vote.cancel') }
         </Button>
       );
     }
     return (
-      <Button bsStyle="success" bsSize="xsmall" className="btn--outline" onClick={!LoginStore.isLoggedIn() ? null : this.vote.bind(null, this)}>
+      <Button bsStyle="success" bsSize="xsmall" className="argument__btn--vote btn--outline" onClick={!LoginStore.isLoggedIn() ? null : this.vote.bind(null, this)}>
         <i className="cap-hand-like-2"></i> { this.getIntlMessage('vote.ok') }
       </Button>
     );
@@ -53,7 +53,7 @@ const OpinionArgumentButtons = React.createClass({
   renderEditButton() {
     if (this.isTheUserTheAuthor()) {
       return (
-        <Button href={this.props.argument._links.edit} bsSize="xsmall" className="btn-dark-gray btn--outline">
+        <Button href={this.props.argument._links.edit} bsSize="xsmall" className="argument__btn--edit btn-dark-gray btn--outline">
           <i className="cap cap-pencil-1"></i>
           {this.getIntlMessage('global.edit')}
         </Button>

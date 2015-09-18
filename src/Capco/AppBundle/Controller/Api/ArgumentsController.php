@@ -47,10 +47,6 @@ class ArgumentsController extends FOSRestController
         $type = $paramFetcher->get('type');
         $filter = $paramFetcher->get('filter');
 
-        if ($type === null) {
-            throw new BadRequestHttpException('This type of argument does not exist');
-        }
-
         $arguments = $this->getDoctrine()->getManager()
             ->getRepository('CapcoAppBundle:Argument')
             ->getByTypeAndOpinionOrderedJoinUserReports($opinion, $type, $filter, $this->getUser());
@@ -82,10 +78,6 @@ class ArgumentsController extends FOSRestController
     {
         $type = $paramFetcher->get('type');
         $filter = $paramFetcher->get('filter');
-
-        if ($type === null) {
-            throw new BadRequestHttpException('This type of argument does not exist');
-        }
 
         $arguments = $this->getDoctrine()->getManager()
             ->getRepository('CapcoAppBundle:Argument')
@@ -130,6 +122,7 @@ class ArgumentsController extends FOSRestController
 
         $argument->setVoteCount($argument->getVoteCount() + 1);
         $this->getDoctrine()->getManager()->persist($vote);
+        $this->getDoctrine()->getManager()->persist($argument);
         $this->getDoctrine()->getManager()->flush();
     }
 

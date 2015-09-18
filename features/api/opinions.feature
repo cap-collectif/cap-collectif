@@ -160,7 +160,8 @@ Feature: Opinions
           },
           "has_user_voted": @boolean@,
           "has_user_reported": @boolean@
-        }
+        },
+        @...@
       ],
       "isOpinionContributable": @boolean@
     }

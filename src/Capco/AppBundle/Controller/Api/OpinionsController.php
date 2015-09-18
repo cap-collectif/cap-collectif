@@ -445,6 +445,47 @@ class OpinionsController extends FOSRestController
     }
 
     /**
+     * Post an argument for an opinion.
+     *
+     * @ApiDoc(
+     *  resource=true,
+     *  description="Post an argument for an opinion.",
+     *  statusCodes={
+     *    201 = "Returned when successful",
+     *    404 = "Returned when opinion not found",
+     *  }
+     * )
+     *
+     * @Security("has_role('ROLE_USER')")
+     * @Post("/opinions/{opinionId}/arguments")
+     * @ParamConverter("opinion", options={"mapping": {"opinionId": "id"}})
+     * @ParamConverter("argument", converter="fos_rest.request_body")
+     * @View(statusCode=201, serializerGroups={})
+     */
+    public function postOpinionArgumentAction(Opinion $opinion, Argument $argument, ConstraintViolationListInterface $validationErrors)
+    {
+        if (!$opinion->canContribute() || $opinion->getOpinionType()->getCommentSystem() === 0) {
+            throw new BadRequestHttpException("Can't add an argument to an uncontributable opinion.");
+        }
+
+        if ($validationErrors->count() > 0) {
+            throw new BadRequestHttpException($validationErrors->__toString());
+        }
+
+        $user = $this->getUser();
+
+        $argument
+            ->setOpinion($opinion)
+            ->setAuthor($user)
+            ->setUpdatedAt(new \Datetime())
+        ;
+
+        $opinion->setArgumentsCount($opinion->getArgumentsCount() + 1);
+        $this->getDoctrine()->getManager()->persist($argument);
+        $this->getDoctrine()->getManager()->flush();
+    }
+
+    /**
      * Post an argument for an opinion version.
      *
      * @ApiDoc(

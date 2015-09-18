@@ -74,10 +74,8 @@ const OpinionPreview = React.createClass({
   render() {
     const opinion = this.props.opinion;
     const classes = classNames({
-      'opinion': true,
       'opinion__body': true,
       'box': true,
-      'bg-vip': opinion.author.vip,
     });
     return (
       <div className={classes} >

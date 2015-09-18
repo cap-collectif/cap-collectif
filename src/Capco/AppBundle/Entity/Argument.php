@@ -33,12 +33,6 @@ class Argument
         self::TYPE_SIMPLE => 'argument.show.type.simple',
     ];
 
-    public static $sortCriterias = [
-        'last' => 'argument.sort.date',
-        'old' => 'argument.sort.oldest',
-        'popular' => 'argument.sort.popularity',
-    ];
-
     /**
      * @var int
      *

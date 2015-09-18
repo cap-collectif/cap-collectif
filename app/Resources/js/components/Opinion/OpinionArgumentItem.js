@@ -16,6 +16,7 @@ const OpinionArgumentItem = React.createClass({
     const classes = classNames({
       'opinion': true,
       'opinion--argument': true,
+      'anchor-offset': true,
       'bg-vip': argument.author.vip,
     });
     return (
