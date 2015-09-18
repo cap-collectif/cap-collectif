@@ -7,24 +7,16 @@ const OpinionAppendices = React.createClass({
   mixins: [ReactIntl.IntlMixin],
 
   render() {
-    if (!this.hasAppendices()) {
+    const opinion = this.props.opinion;
+
+    if (this.isVersion() || !this.hasAppendices()) {
       return null;
     }
-    const opinion = this.props.opinion;
-    const appendices = this.isVersion() ? opinion.parent.appendices : opinion.appendices;
 
     return (
       <div className="opinion__description">
-        {this.isVersion()
-          ?
-          <p>
-            {this.getIntlMessage('opinion.version_parent')}
-            <a href={opinion.parent._links.show} >{opinion.parent.title}</a>
-          </p>
-          : null
-        }
         {
-          appendices.map((appendix, index) => {
+          opinion.appendices.map((appendix, index) => {
             if (appendix.body) {
               return (
                 <OpinionAppendix appendix={appendix} expanded={index === 0} />
@@ -41,11 +33,7 @@ const OpinionAppendices = React.createClass({
   },
 
   hasAppendices() {
-    const appendices = this.isVersion() ? this.props.opinion.parent.appendices : this.props.opinion.appendices;
-    if (!appendices) {
-      return false;
-    }
-    return appendices.some( (app) => {
+    return this.props.opinion.appendices.some( (app) => {
       if (app.body) {
         return true;
       }

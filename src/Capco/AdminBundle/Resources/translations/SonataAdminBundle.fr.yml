@@ -13,24 +13,32 @@ admin.group.parameters: Réglages
 sonata.admin.group.user: Utilisateurs
 
 # Dashboard names
+admin.label.appendix: Éléments de contexte
 admin.label.appendix_type: Éléments de contexte
 admin.label.argument: Arguments
 admin.label.category: Types de sources
 admin.label.comment: Commentaires
 admin.label.consultation: Consultations
+admin.label.consultation_abstractstep: Étape d'une consultation
 admin.label.consultation_type: Structure
 admin.label.events: Évènements
+admin.label.event_registrations: Inscriptions à l'évènement
+admin.label.features: Fonctionnalités
 admin.label.footer_social_network: Réseaux sociaux (pied de page)
 admin.label.highlighted: A la une
 admin.label.idea: Idées
 admin.label.menu_item: Navigation
 admin.label.newsletter_subscription: "Inscrits à la lettre d'information"
 admin.label.opinion: Propositions
+admin.label.opinion_type: Éléments de structure
 admin.label.page: Pages statiques
 admin.label.post: Articles
 admin.label.recent_posts: "Derniers articles"
 admin.label.reporting: Signalements
 admin.label.section: Accueil (sections)
+admin.label.site_parameter: Informations
+admin.label.site_image: Images du site
+admin.label.site_color: Couleurs du site
 admin.label.social_network: Réseaux sociaux (page d'accueil)
 admin.label.source: Sources
 admin.label.step: Étape

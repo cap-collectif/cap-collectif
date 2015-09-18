@@ -46,7 +46,7 @@ Capco\AppBundle\Entity\Opinion:
             groups: [Opinions]
         appendices:
             expose: true
-            groups: [Opinions, OpinionVersions]
+            groups: [Opinions]
         votes:
             expose: true
             groups: [Opinions]

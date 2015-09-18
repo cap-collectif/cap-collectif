@@ -7,8 +7,8 @@ Capco\AppBundle\Entity\OpinionAppendix:
         body:
             expose: true
             type: string
-            groups: [Opinions, OpinionVersions]
+            groups: [Opinions]
         appendixType:
             expose: true
-            groups: [Opinions, OpinionVersions]
+            groups: [Opinions]
             serialized_name: type
