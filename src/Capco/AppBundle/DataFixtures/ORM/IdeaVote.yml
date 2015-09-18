@@ -8,3 +8,9 @@ Capco\AppBundle\Entity\IdeaVote:
       idea: @Idea21
       user: @user<numberBetween(6, 501)>
       confirmed: true
+
+    ideaVote{502...550}:
+      idea: @Idea<numberBetween(1, 2)>
+      username: <username()>
+      email: <email()>
+      confirmed: true

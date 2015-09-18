@@ -41,8 +41,7 @@ Feature: Posts comments
           "has_user_reported": @boolean@,
           "has_user_voted": @boolean@,
           "can_edit": @boolean@
-        },
-        @...@
+        }
       ],
       "is_reporting_enabled": @boolean@
     }
@@ -84,8 +83,8 @@ Feature: Posts comments
     Then the JSON response should match:
     """
     {
-      "comments_and_answers_count": "@integer@.greaterThan(1)",
-      "comments_count": "@integer@.greaterThan(1)",
+      "comments_and_answers_count": "@integer@.greaterThan(0)",
+      "comments_count": "@integer@.greaterThan(0)",
       "comments":
       [
         @...@

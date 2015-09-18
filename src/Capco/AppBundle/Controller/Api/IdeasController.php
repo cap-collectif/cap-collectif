@@ -17,6 +17,7 @@ use FOS\RestBundle\Controller\Annotations\Post;
 use FOS\RestBundle\Controller\Annotations\QueryParam;
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 use FOS\RestBundle\Request\ParamFetcherInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 
 class IdeasController extends FOSRestController
 {
@@ -147,5 +148,48 @@ class IdeasController extends FOSRestController
             CapcoAppBundleEvents::ABSTRACT_COMMENT_CHANGED,
             new AbstractCommentChangedEvent($comment, 'add')
         );
+    }
+
+    /**
+     * Get idea voters.
+     *
+     * @ApiDoc(
+     *  resource=true,
+     *  description="Get idea voters",
+     *  statusCodes={
+     *    200 = "Returned when successful",
+     *    404 = "Idea does not exist",
+     *  }
+     * )
+     *
+     * @Get("/ideas/{id}/voters")
+     * @Security("has_role('ROLE_ADMIN')")
+     * @ParamConverter("idea", options={"mapping": {"id": "id"}})
+     * @View()
+     */
+    public function getIdeaVotersAction(Idea $idea, ParamFetcherInterface $paramFetcher)
+    {
+        $anonymousVoters = $this->getDoctrine()->getManager()
+            ->getRepository('CapcoAppBundle:IdeaVote')
+            ->getAnonymousVotersByIdea($idea);
+
+        $memberVoters = $this->getDoctrine()->getManager()
+            ->getRepository('CapcoAppBundle:IdeaVote')
+            ->getMemberVotersByIdea($idea);
+
+        $voters = [];
+
+        foreach ($anonymousVoters as $v) {
+            $v['isMember'] = false;
+            $voters[] = $v;
+        }
+        foreach ($memberVoters as $v) {
+            $v['isMember'] = true;
+            $voters[] = $v;
+        }
+
+        return [
+            'voters' => $voters,
+        ];
     }
 }

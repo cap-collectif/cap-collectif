@@ -23,4 +23,31 @@ class IdeaVoteRepository extends EntityRepository
             ->getQuery()
             ->getResult();
     }
+
+    public function getAnonymousVotersByIdea(Idea $idea)
+    {
+        return $this->createQueryBuilder('v')
+            ->select('v.username', 'v.email')
+            ->andWhere('v.idea = :idea')
+            ->andWhere('v.confirmed = true')
+            ->andWhere('v.username IS NOT NULL')
+            ->setParameter('idea', $idea)
+            ->addOrderBy('v.updatedAt', 'DESC')
+            ->getQuery()
+            ->getArrayResult();
+    }
+
+    public function getMemberVotersByIdea(Idea $idea)
+    {
+        return $this->createQueryBuilder('v')
+            ->select('u.username as username', 'u.email as email')
+            ->andWhere('v.idea = :idea')
+            ->andWhere('v.confirmed = true')
+            ->leftJoin('v.user', 'u')
+            ->andWhere('v.user IS NOT NULL')
+            ->setParameter('idea', $idea)
+            ->addOrderBy('v.updatedAt', 'DESC')
+            ->getQuery()
+            ->getArrayResult();
+    }
 }

@@ -147,6 +147,7 @@ Feature: Opinions
             "displayName": @string@,
             "uniqueId": @string@,
             "isAdmin": @boolean@,
+            "vip": @boolean@,
             "media": @...@,
             "_links": {
               "profile": @string@,
@@ -159,8 +160,7 @@ Feature: Opinions
           },
           "has_user_voted": @boolean@,
           "has_user_reported": @boolean@
-        },
-        @...@
+        }
       ],
       "isOpinionContributable": @boolean@
     }
