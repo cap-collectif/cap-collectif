@@ -177,3 +177,8 @@ Capco\AppBundle\Entity\SiteColor:
         category: pages.footer
         value: '#ffffff'
         position: 21
+    SiteColor32:
+        keyname: color.user.vip.bg
+        category: settings.appearance
+        value: ''
+        position: 28
