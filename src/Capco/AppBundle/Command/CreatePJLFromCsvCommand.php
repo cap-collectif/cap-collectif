@@ -12,6 +12,7 @@ use Capco\UserBundle\Entity\User;
 use Capco\AppBundle\Entity\OpinionType;
 use Capco\AppBundle\Entity\Opinion;
 use Capco\AppBundle\Entity\OpinionAppendix;
+use Capco\AppBundle\Entity\OpinionTypeAppendixType;
 use Capco\AppBundle\Entity\AppendixType;
 use Capco\AppBundle\Entity\Consultation;
 use Capco\AppBundle\Entity\ConsultationAbstractStep;
@@ -27,6 +28,39 @@ class CreatePJLFromCsvCommand extends ContainerAwareCommand
 
     private $siteParameters = [
         'admin.mail.notifications.send_address' => 'coucou@cap-collectif.com',
+        'homepage.jumbotron.title' => 'Projet de loi numérique',
+        'homepage.jumbotron.body' => '',
+
+    ];
+
+    private $siteColors = [
+        'color.body.bg' => '#ffffff',
+        'color.body.text' => '#333333',
+        'color.header.bg' => '#1c2a88',
+        'color.header.title' => '#ffffff',
+        'color.home.bg' => '#000000',
+        'color.home.title' => '#ffffff',
+        'color.header.text' => '#ffffff',
+        'color.header2.bg' => '#ededed',
+        'color.header2.text' => '#ffffff',
+        'color.header2.title' => '#000000',
+        'color.btn.bg' => '#f01a21',
+        'color.btn.text' => '#ffffff',
+
+        'color.btn.primary.bg' => '#f01a21',
+        'color.btn.primary.text' => '#ffffff',
+        'color.btn.ghost.hover' => '#ffffff',
+        'color.btn.ghost.base' => '#f01a21',
+        'color.link.default' => '#337ab7',
+        'color.link.hover' => '#23527c',
+        'color.footer.text' => '#ffffff',
+        'color.footer.bg' => '#1c2a88',
+        'color.footer2.text' => '#000000',
+        'color.footer2.bg' => '#ebebeb',
+        'color.section.bg' => '#f6f6f6',
+        'color.section.text' => '#000000',
+
+        'color.user.vip.bg' => '#FCF8E3',
     ];
 
     protected function findOpinionTypeByTitle($title, $parentTitle = false, $rootTitle = false)
@@ -61,12 +95,35 @@ class CreatePJLFromCsvCommand extends ContainerAwareCommand
         ->setDescription('Import from CSV file');
     }
 
+    protected function toggleFeatures()
+    {
+        $toggleManager = $this->getContainer()->get('capco.toggle.manager');
+        $toggleManager->deactivate('blog');
+        $toggleManager->deactivate('calendar');
+        $toggleManager->deactivate('newsletter');
+        $toggleManager->deactivate('ideas');
+        $toggleManager->deactivate('idea_creation');
+        $toggleManager->deactivate('themes');
+        $toggleManager->activate('registration');
+        $toggleManager->activate('login_facebook');
+        $toggleManager->activate('login_gplus');
+        $toggleManager->deactivate('login_twitter');
+        $toggleManager->activate('user_type');
+        $toggleManager->activate('members_list');
+        $toggleManager->deactivate('consultations_form');
+        $toggleManager->activate('share_buttons');
+        $toggleManager->activate('consultation_trash');
+        $toggleManager->deactivate('idea_trash');
+        $toggleManager->activate('reporting');
+        $toggleManager->deactivate('shield_mode');
+    }
+
     protected function generateDefaultContent()
     {
         $em = $this->getContainer()->get('doctrine')->getManager();
 
         $userType = $em->getRepository('CapcoUserBundle:UserType')
-               ->findOneBySlug('institution');
+                       ->findOneBySlug('institution');
 
         $context = $em->getRepository('CapcoClassificationBundle:Context')
                       ->find('default');
@@ -99,12 +156,30 @@ class CreatePJLFromCsvCommand extends ContainerAwareCommand
             $param->setValue($value);
         }
 
+        foreach ($this->siteColors as $key => $value) {
+            $param = $em->getRepository('CapcoAppBundle:SiteColor')
+                        ->findOneByKeyname($key)
+                    ;
+            $param->setValue($value);
+        }
+
+        foreach ($em->getRepository('CapcoAppBundle:SocialNetwork')->findAll() as $sn) {
+            $sn->setIsEnabled(false);
+        }
+
         $em->flush();
+    }
+
+    protected function generateMedias()
+    {
+
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
+        $this->toggleFeatures();
         $this->generateDefaultContent();
+        $this->generateMedias();
         $this->import($input, $output);
     }
 
@@ -146,6 +221,22 @@ class CreatePJLFromCsvCommand extends ContainerAwareCommand
 
         $position = 0;
 
+
+
+        $exposayDayMotif = new AppendixType();
+        $exposayDayMotif->setTitle('Exposé des motifs');
+        $exposayDayMotif->setHelpText('Rentrez ici l\'exposé des motifs.');
+
+        $exposayDayMotifType = new OpinionTypeAppendixType();
+        $exposayDayMotifType->setAppendixType($exposayDayMotif);
+
+        $studydImpacti = new AppendixType();
+        $studydImpacti->setTitle('Étude d\'impact');
+        $studydImpacti->setHelpText('Rentrez ici l\'étude d\'impact.');
+
+        $studydImpactiType = new OpinionTypeAppendixType();
+        $studydImpactiType->setAppendixType($studydImpacti);
+
         foreach ($opinionTypesData as $row) {
 
             $opinionType = new OpinionType();
@@ -156,7 +247,9 @@ class CreatePJLFromCsvCommand extends ContainerAwareCommand
             $opinionType->setDefaultFilter('positions');
             $opinionType->setIsEnabled($row['contribuable']);
             $opinionType->setVersionable($row['contribuable']);
-            $opinionType->setVotesHelpText('Pensez-vous que cette proposition permet d\'atteindre les objectifs présentés dans l\'exposé des motifs ?');
+            $opinionType->setVotesHelpText('Pensez-vous que cette proposition permet d\'atteindre les objectifs du gouvernement ?');
+            $opinionType->addAppendixType($exposayDayMotifType);
+            $opinionType->addAppendixType($exposayDayMotifType);
 
             if (!empty($row['parent'])) {
                 $parent = $this->findOpinionTypeByTitle($row['parent']);
@@ -210,9 +303,6 @@ class CreatePJLFromCsvCommand extends ContainerAwareCommand
             $progress->advance(1);
         }
 
-        $appendixType = new AppendixType();
-        $appendixType->setTitle('Exposé des motifs');
-        $appendixType->setHelpText('L\'Exposé des motifs');
 
         foreach ($motives as $row) {
 
@@ -225,9 +315,14 @@ class CreatePJLFromCsvCommand extends ContainerAwareCommand
 
             if (count($opinion->getAppendices()) === 0) {
                 $motif = new OpinionAppendix();
-                $motif->setAppendixType($appendixType);
+                $motif->setAppendixType($exposayDayMotif);
                 $motif->setBody('<p>' . $row['motif'] . '</p>');
                 $opinion->addAppendice($motif);
+
+                $study = new OpinionAppendix();
+                $study->setAppendixType($studydImpacti);
+                $study->setBody('Pas encore d\'études');
+
             } else {
                 $motif = $opinion->getAppendices()[0];
                 $content = $motif->getBody();
