@@ -1,12 +1,14 @@
+import CustomDiff from '../../services/CustomDiff';
+
 const Modal = ReactBootstrap.Modal;
 const Button = ReactBootstrap.Button;
+const OverlayTrigger = ReactBootstrap.OverlayTrigger;
+const Tooltip = ReactBootstrap.Tooltip;
 
 const OpinionBodyDiffModal = React.createClass({
   propTypes: {
     link: React.PropTypes.string.isRequired,
-    old: React.PropTypes.string.isRequired,
-    title: React.PropTypes.string.isRequired,
-    actual: React.PropTypes.string.isRequired,
+    modal: React.PropTypes.object.isRequired,
   },
   mixins: [ReactIntl.IntlMixin],
 
@@ -26,15 +28,26 @@ const OpinionBodyDiffModal = React.createClass({
   render() {
     return (
       <span>
-        <a onClick={this.open.bind(null, this)}>{this.props.link}</a>
+        <OverlayTrigger placement="top" overlay={
+          <Tooltip placement="top" className="in">
+            {this.getIntlMessage('opinion.diff.tooltip')}
+          </Tooltip>
+        }>
+          <a onClick={this.open.bind(null, this)}>
+            {this.props.link}
+          </a>
+        </OverlayTrigger>
         <Modal show={this.state.showModal} onHide={this.close.bind(null, this)}>
           <Modal.Header closeButton>
-            <Modal.Title>Titre</Modal.Title>
+            <Modal.Title>{this.props.modal.title}</Modal.Title>
           </Modal.Header>
           <Modal.Body>
+            <b>{this.getIntlMessage('opinion.diff.title')}</b>
+            <p className="small excerpt">{this.getIntlMessage('opinion.diff.infos')}</p>
+            <div dangerouslySetInnerHTML={{__html: CustomDiff.prettyDiff(this.props.modal.before, this.props.modal.after) }} />
           </Modal.Body>
           <Modal.Footer>
-            <Button onClick={this.close}>Close</Button>
+            <Button bsStyle="primary" onClick={this.close}>{this.getIntlMessage('global.close')}</Button>
           </Modal.Footer>
         </Modal>
       </span>

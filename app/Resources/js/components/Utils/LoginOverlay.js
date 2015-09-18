@@ -41,7 +41,7 @@ const LoginOverlay = React.createClass({
               : null
             }
             <p>
-              <Button href="/login" bsStyle="success" className="center-block">
+              <Button href="/login" bsStyle="default" className="center-block">
                 { this.getIntlMessage('vote.popover.login') }
               </Button>
             </p>

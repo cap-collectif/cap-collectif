@@ -20,8 +20,6 @@ const CkeditorMixin = {
       autoParagraph: false,
       enterMode: CKEDITOR.ENTER_P,
       shiftEnterMode: CKEDITOR.ENTER_BR,
-      ignoreEmptyParagraph: true,
-      fillEmptyBlocks: true,
     };
 
     const editor = CKEDITOR.replace(React.findDOMNode(this.refs[name]).querySelector('textarea'), ckeditorConfig);

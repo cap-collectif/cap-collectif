@@ -9,7 +9,7 @@ const OpinionBodyDiffContent = React.createClass({
   render() {
     const html = this.props.html;
 
-    if (html.indexOf('<span') === -1) {
+    if (html.indexOf('<span') === -1) { // no link detected
       return <div dangerouslySetInnerHTML={{__html: html}} />;
     }
 
@@ -28,10 +28,16 @@ const OpinionBodyDiffContent = React.createClass({
 
     let parts = [];
     sections.forEach((section) => {
+      console.log(section);
       parts.push({
         before: section.slice(0, section.indexOf('<span')),
         link: section.slice(section.indexOf('>') + 1,section.indexOf('</span>')),
-        after: section.slice(section.indexOf('</span>') + 7)
+        after: section.slice(section.indexOf('</span>') + 7),
+        modal: {
+          title: section.substring(section.lastIndexOf('data-diff-title="') + 'data-diff-title="'.length, section.lastIndexOf('" data-diff-before=')),
+          before: section.substring(section.lastIndexOf('data-diff-before="') + 'data-diff-before="'.length, section.lastIndexOf('" data-diff-after=')),
+          after: section.substring(section.lastIndexOf('data-diff-after="') + 'data-diff-after="'.length, section.lastIndexOf('" data-diff-stop')),
+        }
       });
     });
 
@@ -43,7 +49,7 @@ const OpinionBodyDiffContent = React.createClass({
             return (
               <p>
                 <span dangerouslySetInnerHTML={{__html: part.before}} />
-                <OpinionBodyDiffModal link={part.link} />
+                <OpinionBodyDiffModal link={part.link} modal={part.modal} />
                 <span dangerouslySetInnerHTML={{__html: part.after}} />
               </p>
             );

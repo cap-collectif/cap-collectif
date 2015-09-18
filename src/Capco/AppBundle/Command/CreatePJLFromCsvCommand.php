@@ -147,6 +147,7 @@ class CreatePJLFromCsvCommand extends ContainerAwareCommand
         $user->setPlainPassword($this->password);
         $user->setEnabled(true);
         $user->setUserType($userType);
+        $user->setVip(true);
         $em->persist($user);
 
         foreach ($this->siteParameters as $key => $value) {
@@ -290,7 +291,7 @@ class CreatePJLFromCsvCommand extends ContainerAwareCommand
                     throw new \Exception("Unable to find link", 1);
                 }
 
-                $string = '<span data-modal-title="'.$row['modal_title'].'" data-modal-current="'.$row['modal_current'].'" data-modal-next="'.$row['modal_next'].'">' . $row['link'] . '</span>';
+                $string = '<span data-diff-title="'.$row['modal_title'].'" data-diff-before="'.$row['modal_current'].'" data-diff-after="'.$row['modal_next'].'" data-diff-stop="">' . $row['link'] . '</span>';
                 $paragraphe = substr_replace($paragraphe, $string, $pos, strlen($row['link']));
             }
 

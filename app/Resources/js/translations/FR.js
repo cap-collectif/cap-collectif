@@ -91,6 +91,11 @@ export default {
                 title_error: 'Le titre doit contenir au moins 2 caractères.',
                 body_error: 'Vous devez modifier le contenu de la proposition d\'origine pour pouvoir proposer une révision.',
             },
+            diff: {
+                tooltip: 'Voir les modifications',
+                title: 'Modification(s) proposé(s)',
+                infos: 'Les ajouts en vert et les suppression en rouge',
+            },
         },
         vote: {
             ok: 'D\'accord',
@@ -122,6 +127,7 @@ export default {
             simple_arguments: '{num, plural, =0{0 avis} one{# avis} other{# avis}}',
             arguments: '{num, plural, =0{0 argument} one{# argument} other{# arguments}}',
             back: 'Retour',
+            close: 'Fermer',
             content: 'Contenu',
             share: 'Partager',
             select: 'Choisir une valeur',
