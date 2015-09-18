@@ -13,9 +13,6 @@ const OpinionBodyDiffContent = React.createClass({
       return <div dangerouslySetInnerHTML={{__html: html}} />;
     }
 
-    console.log(this.props.html);
-    console.log(this.props.html.split('<p>'));
-
     let sections = [];
 
     this.props.html.split('<p>').forEach((sentence) => {
@@ -24,11 +21,8 @@ const OpinionBodyDiffContent = React.createClass({
       }
     })
 
-    console.log(sections);
-
     let parts = [];
     sections.forEach((section) => {
-      console.log(section);
       parts.push({
         before: section.slice(0, section.indexOf('<span')),
         link: section.slice(section.indexOf('>') + 1,section.indexOf('</span>')),
