@@ -221,14 +221,13 @@ class CreatePJLFromCsvCommand extends ContainerAwareCommand
 
         $position = 0;
 
-
-
         $exposayDayMotif = new AppendixType();
         $exposayDayMotif->setTitle('Exposé des motifs');
         $exposayDayMotif->setHelpText('Rentrez ici l\'exposé des motifs.');
 
         $exposayDayMotifType = new OpinionTypeAppendixType();
         $exposayDayMotifType->setAppendixType($exposayDayMotif);
+        $exposayDayMotifType->setPosition(1);
 
         $studydImpacti = new AppendixType();
         $studydImpacti->setTitle('Étude d\'impact');
@@ -236,6 +235,7 @@ class CreatePJLFromCsvCommand extends ContainerAwareCommand
 
         $studydImpactiType = new OpinionTypeAppendixType();
         $studydImpactiType->setAppendixType($studydImpacti);
+        $studydImpactiType->setPosition(2);
 
         foreach ($opinionTypesData as $row) {
 
