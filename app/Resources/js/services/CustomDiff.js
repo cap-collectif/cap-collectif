@@ -25,8 +25,11 @@ function everythingHasChanged(diff) {
 class CustomDiff extends JsDiff.Diff {
 
   tokenize = function(value) {
-    const strippedValue = strip(value);
-    return removeEmpty(strippedValue.split(/(?=<parend>|[!,?,.]|<br>)+?()/));
+    let strippedValue = strip(value);
+    strippedValue = strippedValue.replace(/(<parend>)/g, "|$1|");
+    strippedValue = strippedValue.replace(/(&nbsp;)/g, "|$1|");
+    strippedValue = strippedValue.replace(/(\s+?)(?=.+?)/g, "|$1|");
+    return removeEmpty(strippedValue.split("|"));
   };
 
   prettyDiff = function(oldValue, newValue) {

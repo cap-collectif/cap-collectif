@@ -88,9 +88,6 @@
 {% set footer2Bg = capco_site_color_value('color.footer2.bg') %}
 {% if null == footer2Bg %}{% set footer2Bg = '#16a085' %}{% endif %}
 
-{# VIP user #}
-{% set vipBg = capco_site_color_value('color.user.vip.bg') %}
-
 <style>
     a,
     .btn.btn-link {
@@ -502,14 +499,6 @@
     .home-page .jumbotron {
         background-color: {{ homeHeaderBg | raw }}
     }
-
-    {% if null != vipBg %}
-        .bg-vip,
-        .bg-vip:hover,
-        .bg-vip:focus {
-            background-color: {{ vipBg | raw }} !important;
-        }
-    {% endif %}
 
 
 </style>

@@ -62,9 +62,6 @@ color:
   section:
     bg: Fond des sections
     text: Texte des sections
-  user:
-    vip:
-      bg: Couleur de fond des utilisateurs VIP
 
 consultations:
   content:
