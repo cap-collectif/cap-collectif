@@ -38,7 +38,7 @@ class ArgumentController extends Controller
 
         $arguments = $this->getDoctrine()
             ->getRepository('CapcoAppBundle:Argument')
-            ->getByTypeAndOpinionOrderedJoinUserReports($type, $opinion, $argumentSort, $this->getUser());
+            ->getByTypeAndOpinionOrderedJoinUserReports($opinion, $type, $argumentSort, $this->getUser());
 
         return [
             'arguments' => $arguments,

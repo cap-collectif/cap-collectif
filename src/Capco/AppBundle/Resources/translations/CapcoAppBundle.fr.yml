@@ -394,6 +394,7 @@ argument:
     linked_proposition: Lié à la proposition :
   sort:
     date: Les plus récents
+    oldest: Les plus anciens
     popularity: Les plus votés
     label: Tri
   none: Il n' y a pas d'arguments.

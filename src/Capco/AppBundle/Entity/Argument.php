@@ -34,8 +34,9 @@ class Argument
     ];
 
     public static $sortCriterias = [
-        'date' => 'argument.sort.date',
-        'popularity' => 'argument.sort.popularity',
+        'last' => 'argument.sort.date',
+        'old' => 'argument.sort.oldest',
+        'popular' => 'argument.sort.popularity',
     ];
 
     /**

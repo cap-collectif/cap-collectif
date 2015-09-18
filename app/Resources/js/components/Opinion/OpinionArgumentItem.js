@@ -2,6 +2,8 @@ import UserAvatar from '../User/UserAvatar';
 import UserLink from '../User/UserLink';
 import OpinionArgumentButtons from './OpinionArgumentButtons';
 
+const FormattedDate = ReactIntl.FormattedDate;
+
 const OpinionArgumentItem = React.createClass({
   propTypes: {
     argument: React.PropTypes.object,
@@ -25,7 +27,11 @@ const OpinionArgumentItem = React.createClass({
               <UserLink user={argument.author} />
             </p>
             <p className="excerpt opinion__date">
-              {argument.created_at}
+              <FormattedDate
+                value={argument.created_at}
+                day="numeric" month="long" year="numeric"
+                hour="numeric" minute="numeric"
+                />
             </p>
           </div>
           <p className="opinion__text">

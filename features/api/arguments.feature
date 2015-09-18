@@ -1,5 +1,90 @@
 Feature: Arguments
 
+## List
+
+  Scenario: API client wants to list arguments of an opinion
+    When I send a GET request to "/api/opinions/27/arguments"
+    Then the JSON response status code should be 200
+    And the JSON response should match:
+    """
+    {
+      "arguments": [
+        {
+          "id": @integer@,
+          "body": @string@,
+          "type": @integer@,
+          "created_at": "@string@.isDateTime()",
+          "updated_at": "@string@.isDateTime()",
+
+          "votes_count": @integer@,
+          "is_trashed": @boolean@,
+          "is_enabled": @boolean@,
+
+          "author": {
+            "username": @string@,
+            "displayName": @string@,
+            "uniqueId": @string@,
+            "isAdmin": @boolean@,
+            "vip": @boolean@,
+            "media": @...@,
+            "_links": {
+              "profile": @string@,
+              "settings": @string@
+            }
+          },
+          "_links": {
+            "edit": @string@,
+            "report": @string@
+          },
+          "has_user_voted": @boolean@,
+          "has_user_reported": @boolean@
+        },
+        @...@
+      ]
+    }
+    """
+
+  Scenario: API client wants to list arguments of an opinion version
+    When I send a GET request to "/api/versions/1/arguments"
+    Then the JSON response status code should be 200
+    And the JSON response should match:
+    """
+    {
+      "arguments": [
+        {
+          "id": @integer@,
+          "body": @string@,
+          "type": @integer@,
+          "created_at": "@string@.isDateTime()",
+          "updated_at": "@string@.isDateTime()",
+
+          "votes_count": @integer@,
+          "is_trashed": @boolean@,
+          "is_enabled": @boolean@,
+
+          "author": {
+            "username": @string@,
+            "displayName": @string@,
+            "uniqueId": @string@,
+            "isAdmin": @boolean@,
+            "vip": @boolean@,
+            "media": @...@,
+            "_links": {
+              "profile": @string@,
+              "settings": @string@
+            }
+          },
+          "_links": {
+            "edit": @string@,
+            "report": @string@
+          },
+          "has_user_voted": @boolean@,
+          "has_user_reported": @boolean@
+        }
+      ]
+    }
+    """
+
 ## Vote
 
   ### As an Anonymous
