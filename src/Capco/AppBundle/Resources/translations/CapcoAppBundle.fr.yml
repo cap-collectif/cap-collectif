@@ -194,7 +194,7 @@ idea:
   sort:
     last: Les plus récentes
     old: Les plus anciennes
-    popular: Les plus votées
+    popular: Les plus soutenues
     comments: Les plus commentées
   none: Il n'y a aucune idée pour le moment. Soyez le premier à %startlink%proposer une idée%endlink%.
   none_no_create: Il n'y a aucune idée pour le moment.
@@ -398,7 +398,7 @@ argument:
   sort:
     date: Les plus récents
     oldest: Les plus anciens
-    popularity: Les plus votés
+    popularity: Les plus populaires
     label: Tri
   none: Il n' y a pas d'arguments.
   vote:
@@ -842,7 +842,7 @@ comment:
     confirm: En modifiant mon commentaire, je comprends que les votes qui lui sont associés seront réinitialisés.
   sort:
     date: Les plus récents
-    popularity: Les plus votés
+    popularity: Les plus populaires
     label: Trier par
   none: Il n'y a pas de commentaires.
   vote:
