@@ -1,9 +1,7 @@
 import OpinionArgumentForm from './OpinionArgumentForm';
-import OpinionSourcesBox from './OpinionSourcesBox';
-import OpinionSourceList from './OpinionSourceList';
 import OpinionArgumentList from './OpinionArgumentList';
 import OpinionVersionsBox from './OpinionVersionsBox';
-import Fetcher from '../../services/Fetcher';
+import OpinionSourcesBox from './OpinionSourcesBox';
 
 const TabbedArea = ReactBootstrap.TabbedArea;
 const TabPane = ReactBootstrap.TabPane;

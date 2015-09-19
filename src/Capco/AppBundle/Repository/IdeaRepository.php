@@ -203,13 +203,13 @@ class IdeaRepository extends EntityRepository
         if ($sort === 'last') {
             $qb->orderBy('i.updatedAt', 'DESC');
             $qb->addOrderBy('i.voteCount', 'DESC');
-        } else if ($sort === 'old') {
+        } elseif ($sort === 'old') {
             $qb->orderBy('i.updatedAt', 'ASC');
             $qb->addOrderBy('i.voteCount', 'DESC');
-        } else if ($sort === 'popular') {
+        } elseif ($sort === 'popular') {
             $qb->orderBy('i.voteCount', 'DESC');
             $qb->addOrderBy('i.updatedAt', 'DESC');
-        } else if ($sort === 'comments') {
+        } elseif ($sort === 'comments') {
             $qb->orderBy('i.commentsCount', 'DESC');
             $qb->addOrderBy('i.updatedAt', 'DESC');
         }

@@ -236,7 +236,6 @@ class OpinionRepository extends EntityRepository
         ;
 
         return $qb->getQuery()->getSingleScalarResult();
-
     }
 
     /**

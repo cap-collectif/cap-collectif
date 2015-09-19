@@ -3,7 +3,6 @@
 namespace Capco\AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Validator\Constraints as Assert;
 use Capco\AppBundle\Traits\TimestampableTrait;
 use Gedmo\Mapping\Annotation as Gedmo;
 
@@ -46,7 +45,7 @@ class OpinionAppendix
      */
     protected $updatedAt;
 
-    function __construct()
+    public function __construct()
     {
         $this->updatedAt = new \DateTime();
     }
@@ -92,6 +91,7 @@ class OpinionAppendix
     public function setAppendixType(AppendixType $appendixType)
     {
         $this->appendixType = $appendixType;
+
         return $this;
     }
 
@@ -103,6 +103,7 @@ class OpinionAppendix
     public function setOpinion(Opinion $opinion)
     {
         $this->opinion = $opinion;
+
         return $this;
     }
 }

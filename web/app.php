@@ -4,7 +4,7 @@ use Symfony\Component\ClassLoader\ApcClassLoader;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Debug\Debug;
 
-$env = getenv('SYMFONY_ENV') ?: 'prod';
+$env = getenv('SYMFONY_ENV') ?: 'dev';
 $debug = ('dev' === $env || 'test' === $env);
 
 $loader = require_once __DIR__.'/../app/bootstrap.php.cache';

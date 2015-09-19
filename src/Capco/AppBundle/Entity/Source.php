@@ -643,7 +643,6 @@ class Source
         }
 
         return $this->Opinion;
-
     }
 
     public function resetVotes()

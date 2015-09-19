@@ -13,7 +13,7 @@ function strip(value) {
 }
 
 function everythingHasChanged(diff) {
-  const changed = diff.every(function(part) {
+  const changed = diff.every(function changed(part) {
     if (!part.added && !part.removed && part.value !== ' ') {
       return false;
     }
@@ -24,15 +24,15 @@ function everythingHasChanged(diff) {
 
 class CustomDiff extends JsDiff.Diff {
 
-  tokenize = function(value) {
+  tokenize = function tokenize(value) {
     let strippedValue = strip(value);
-    strippedValue = strippedValue.replace(/(<parend>)/g, "|$1|");
-    strippedValue = strippedValue.replace(/(&nbsp;)/g, "|$1|");
-    strippedValue = strippedValue.replace(/(\s+?)(?=.+?)/g, "|$1|");
-    return removeEmpty(strippedValue.split("|"));
+    strippedValue = strippedValue.replace(/(<parend>)/g, '|$1|');
+    strippedValue = strippedValue.replace(/(&nbsp;)/g, '|$1|');
+    strippedValue = strippedValue.replace(/(\s+?)(?=.+?)/g, '|$1|');
+    return removeEmpty(strippedValue.split('|'));
   };
 
-  prettyDiff = function(oldValue, newValue) {
+  prettyDiff = function pDiff(oldValue, newValue) {
     let prettyDiff = '';
     // Compute diff
     const diff = this.diff(oldValue, newValue);

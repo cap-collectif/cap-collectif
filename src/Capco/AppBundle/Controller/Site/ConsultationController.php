@@ -11,7 +11,6 @@ use Capco\AppBundle\Entity\AbstractStep;
 use Capco\AppBundle\Entity\ConsultationStep;
 use Capco\AppBundle\Form\ConsultationSearchType;
 use Capco\AppBundle\Form\OpinionsSortType;
-
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
@@ -136,7 +135,7 @@ class ConsultationController extends Controller
      * @param ConsultationStep $currentStep
      * @param OpinionType      $opinionType
      * @param $page
-     * @param Request          $request
+     * @param Request $request
      * @param $opinionsSort
      *
      * @return array

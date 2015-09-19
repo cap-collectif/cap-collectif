@@ -133,7 +133,8 @@ class ConsultationDownloadResolver
     /*
      * Add item in correct section
      */
-    public function addItemToData($item, $published) {
+    public function addItemToData($item, $published)
+    {
         if ($published) {
             $this->data['published'][] = $item;
         } else {
@@ -272,6 +273,7 @@ class ConsultationDownloadResolver
     private function getOpinionVersionItem(OpinionVersion $version)
     {
         $opinion = $version->getParent();
+
         return $item = array(
             'title' => $version->getTitle(),
             'content_type' => $this->translator->trans('consultation_download.values.content_type.version', array(), 'CapcoAppBundle'),
@@ -335,6 +337,7 @@ class ConsultationDownloadResolver
             'trashed_date' => $this->dateToString($argument->getTrashedAt()),
             'trashed_reason' => $argument->getTrashedReason(),
         );
+
         return $item;
     }
 
@@ -345,6 +348,7 @@ class ConsultationDownloadResolver
             ? $this->translator->trans('consultation_download.values.related.version', array('%name%' => $parent->getTitle()), 'CapcoAppBundle')
             : $this->translator->trans('consultation_download.values.related.opinion', array('%name%' => $parent->getTitle()), 'CapcoAppBundle')
         ;
+
         return $item = array(
             'title' => $source->getTitle(),
             'content_type' => $this->translator->trans('consultation_download.values.content_type.source', array(), 'CapcoAppBundle'),

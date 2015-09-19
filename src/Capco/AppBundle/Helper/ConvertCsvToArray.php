@@ -2,11 +2,11 @@
 
 namespace Capco\AppBundle\Helper;
 
-class ConvertCsvToArray {
-
+class ConvertCsvToArray
+{
     public function convert($filename, $delimiter = ';')
     {
-        if(!file_exists($filename) || !is_readable($filename)) {
+        if (!file_exists($filename) || !is_readable($filename)) {
             return false;
         }
 
@@ -15,7 +15,7 @@ class ConvertCsvToArray {
 
         if (($handle = fopen($filename, 'r')) !== false) {
             while (($row = fgetcsv($handle, 0, $delimiter)) !== false) {
-                if(!$header) {
+                if (!$header) {
                     $header = $row;
                 } else {
                     $data[] = array_combine($header, $row);
@@ -23,7 +23,7 @@ class ConvertCsvToArray {
             }
             fclose($handle);
         }
+
         return $data;
     }
-
 }

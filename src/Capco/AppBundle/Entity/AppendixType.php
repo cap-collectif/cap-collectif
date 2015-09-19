@@ -6,7 +6,6 @@ use Capco\AppBundle\Traits\SluggableTitleTrait;
 use Capco\AppBundle\Traits\TimestampableTrait;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Validator\Constraints as Assert;
 use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
@@ -57,8 +56,6 @@ class AppendixType
         return 'New AppendixType';
     }
 
-
-
     public function getId()
     {
         return $this->id;
@@ -99,12 +96,14 @@ class AppendixType
     {
         $opinionType->setAppendixType($this);
         $this->opinionTypes[] = $opinionType;
+
         return $this;
     }
 
     public function removeOpinionType($opinionType)
     {
         $this->opinionTypes->removeElement($opinionType);
+
         return $this;
     }
 }

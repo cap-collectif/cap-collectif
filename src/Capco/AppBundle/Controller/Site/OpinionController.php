@@ -8,7 +8,6 @@ use Capco\AppBundle\Entity\Opinion;
 use Capco\AppBundle\Entity\OpinionType;
 use Capco\AppBundle\Entity\OpinionAppendix;
 use Capco\AppBundle\Form\OpinionsType as OpinionForm;
-
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
@@ -307,6 +306,7 @@ class OpinionController extends Controller
             $app->setOpinion($opinion);
             $opinion->addAppendice($app);
         }
+
         return $opinion;
     }
 }

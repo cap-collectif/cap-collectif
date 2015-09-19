@@ -576,7 +576,6 @@ class Argument
         }
 
         return $this->opinion;
-
     }
 
     public function getLinkedOpinion()

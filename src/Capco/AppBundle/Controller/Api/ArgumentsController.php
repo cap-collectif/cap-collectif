@@ -23,7 +23,6 @@ use Capco\AppBundle\Entity\Opinion;
 
 class ArgumentsController extends FOSRestController
 {
-
     /**
      * Get all arguments of an opinion for specified type.
      *

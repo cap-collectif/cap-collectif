@@ -129,6 +129,7 @@ class UserRepository extends EntityRepository
           GROUP BY av.user
         ')
         ->setParameter('consultation', $consultation);
+
         return $query->getResult();
     }
 
@@ -147,6 +148,7 @@ class UserRepository extends EntityRepository
           GROUP BY sv.user
         ')
             ->setParameter('consultation', $consultation);
+
         return $query->getResult();
     }
 

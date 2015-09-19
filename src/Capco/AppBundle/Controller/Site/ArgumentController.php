@@ -6,7 +6,6 @@ use Capco\AppBundle\Entity\Argument;
 use Capco\AppBundle\Entity\Consultation;
 use Capco\AppBundle\Entity\Opinion;
 use Capco\AppBundle\Form\ArgumentType as ArgumentForm;
-
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
@@ -16,7 +15,6 @@ use Symfony\Component\Form\Form;
 
 class ArgumentController extends Controller
 {
-
     /**
      * @Route("/consultations/{consultationSlug}/consultation/{stepSlug}/opinions/{opinionTypeSlug}/{opinionSlug}/arguments/{argumentId}/edit", name="app_consultation_edit_argument")
      * @Template("CapcoAppBundle:Argument:update.html.twig")

@@ -3,11 +3,9 @@
 namespace Capco\AppBundle\Command;
 
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
-use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Helper\ProgressBar;
-
 use Capco\UserBundle\Entity\User;
 use Capco\AppBundle\Entity\OpinionType;
 use Capco\AppBundle\Entity\Opinion;
@@ -21,7 +19,6 @@ use Capco\AppBundle\Entity\ConsultationType;
 
 class CreatePJLFromCsvCommand extends ContainerAwareCommand
 {
-
     private $opinionTypes = [];
     private $username = 'Gouvernement';
     private $password = 'KvN+j\E43&2U%KAF';
@@ -84,8 +81,7 @@ class CreatePJLFromCsvCommand extends ContainerAwareCommand
                 }
             }
         }
-        throw new \Exception("Unknown opinion title: " . $title, 1);
-
+        throw new \Exception('Unknown opinion title: '.$title, 1);
     }
 
     protected function configure()
@@ -137,7 +133,7 @@ class CreatePJLFromCsvCommand extends ContainerAwareCommand
         $media->setName('pic');
         $media->setContext($context);
 
-         $this->getContainer()
+        $this->getContainer()
               ->get('sonata.media.manager.media')
               ->save($media, 'default', 'sonata.media.provider.image');
 
@@ -173,7 +169,6 @@ class CreatePJLFromCsvCommand extends ContainerAwareCommand
 
     protected function generateMedias()
     {
-
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
@@ -239,7 +234,6 @@ class CreatePJLFromCsvCommand extends ContainerAwareCommand
         $studydImpactiType->setPosition(2);
 
         foreach ($opinionTypesData as $row) {
-
             $opinionType = new OpinionType();
             $opinionType->setTitle($row['title']);
             $opinionType->setSubtitle($row['subtitle']);
@@ -255,7 +249,7 @@ class CreatePJLFromCsvCommand extends ContainerAwareCommand
             if (!empty($row['parent'])) {
                 $parent = $this->findOpinionTypeByTitle($row['parent']);
                 if (!$parent) {
-                    throw new \Exception("Parent does not exist", 1);
+                    throw new \Exception('Parent does not exist', 1);
                 }
                 $opinionType->setParent($parent);
             } else {
@@ -265,12 +259,11 @@ class CreatePJLFromCsvCommand extends ContainerAwareCommand
             $em->persist($opinionType);
             $em->flush();
             $this->opinionTypes[] = $opinionType;
-            $position++;
+            ++$position;
             $progress->advance(1);
         }
 
         foreach ($opinions as $row) {
-
             $opinionType = $this->findOpinionTypeByTitle($row['opinionType'], $row['opinionType_parent'], $row['opinionType_root']);
             $opinion = $em->getRepository('CapcoAppBundle:Opinion')
                           ->findOneByTitle($row['opinion']);
@@ -288,15 +281,15 @@ class CreatePJLFromCsvCommand extends ContainerAwareCommand
             if (!empty($row['link'])) {
                 $pos = strpos($paragraphe, $row['link']);
                 if ($pos === false) {
-                    throw new \Exception("Unable to find link", 1);
+                    throw new \Exception('Unable to find link', 1);
                 }
 
-                $string = '<span data-diff-title="'.$row['modal_title'].'" data-diff-before="'.$row['modal_current'].'" data-diff-after="'.$row['modal_next'].'" data-diff-stop="">' . $row['link'] . '</span>';
+                $string = '<span data-diff-title="'.$row['modal_title'].'" data-diff-before="'.$row['modal_current'].'" data-diff-after="'.$row['modal_next'].'" data-diff-stop="">'.$row['link'].'</span>';
                 $paragraphe = substr_replace($paragraphe, $string, $pos, strlen($row['link']));
             }
 
             $content = $opinion->getBody();
-            $content .= '<p>' . $paragraphe . '</p>';
+            $content .= '<p>'.$paragraphe.'</p>';
             $opinion->setBody($content);
 
             $em->persist($opinion);
@@ -304,30 +297,27 @@ class CreatePJLFromCsvCommand extends ContainerAwareCommand
             $progress->advance(1);
         }
 
-
         foreach ($motives as $row) {
-
             $opinion = $em->getRepository('CapcoAppBundle:Opinion')
                           ->findOneByTitle($row['opinion']);
 
             if (!is_object($opinion)) {
-                throw new \Exception("Unknown title", 1);
+                throw new \Exception('Unknown title', 1);
             }
 
             if (count($opinion->getAppendices()) === 0) {
                 $motif = new OpinionAppendix();
                 $motif->setAppendixType($exposayDayMotif);
-                $motif->setBody('<p>' . $row['motif'] . '</p>');
+                $motif->setBody('<p>'.$row['motif'].'</p>');
                 $opinion->addAppendice($motif);
 
                 $study = new OpinionAppendix();
                 $study->setAppendixType($studydImpacti);
                 $study->setBody('Pas encore d\'études');
-
             } else {
                 $motif = $opinion->getAppendices()[0];
                 $content = $motif->getBody();
-                $content .= '<p>' . $row['motif'] . '</p>';
+                $content .= '<p>'.$row['motif'].'</p>';
                 $motif->setBody($content);
             }
 

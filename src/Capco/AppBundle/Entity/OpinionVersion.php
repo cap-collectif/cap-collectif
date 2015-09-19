@@ -358,7 +358,7 @@ class OpinionVersion
         $i = 0;
         foreach ($this->arguments as $argument) {
             if ($argument->getType() === Argument::TYPE_FOR) {
-                $i++;
+                ++$i;
             }
         }
 
@@ -370,7 +370,7 @@ class OpinionVersion
         $i = 0;
         foreach ($this->arguments as $argument) {
             if ($argument->getType() === Argument::TYPE_AGAINST) {
-                $i++;
+                ++$i;
             }
         }
 
@@ -385,21 +385,26 @@ class OpinionVersion
         if ($type === 'no') {
             return $this->getArgumentAgainstCount();
         }
+
         return 0;
     }
 
-    public function getOpinionType() {
+    public function getOpinionType()
+    {
         if ($this->parent) {
             return $this->parent->getOpinionType();
         }
-        return null;
+
+        return;
     }
 
-    public function getCommentSystem() {
+    public function getCommentSystem()
+    {
         if ($this->parent) {
             return $this->parent->getCommentSystem();
         }
-        return null;
+
+        return;
     }
 
     /**
