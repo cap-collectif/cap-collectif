@@ -25,10 +25,12 @@ class Opinion
     use VotableTrait;
 
     public static $sortCriterias = [
+        'positions' => 'opinion.sort.positions',
+        'last' => 'opinion.sort.last',
+        'old' => 'opinion.sort.old',
+        'favorable' => 'opinion.sort.favorable',
         'votes' => 'opinion.sort.votes',
         'comments' => 'opinion.sort.comments',
-        'date' => 'opinion.sort.date',
-        'positions' => 'opinion.sort.positions',
     ];
 
     /**

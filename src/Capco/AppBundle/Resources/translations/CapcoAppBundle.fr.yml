@@ -541,9 +541,11 @@ opinion:
     submit: Signaler
     reported: Signalé
   sort:
-    positions: Tri par publication
-    date: Les plus récents
+    positions: Ordre de publication
+    last: Les plus récents
+    old: Les plus anciens
     votes: Les plus votés
+    favorable: Les plus favorables
     comments: Les plus commentés
     label: Trier par
   error:
