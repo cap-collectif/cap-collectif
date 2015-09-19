@@ -26,6 +26,9 @@ const OpinionInfos = React.createClass({
       return <span />;
     }
 
+    console.log(this.props.opinion.updated_at);
+    console.log(this.props.opinion.created_at);
+
     if (this.props.opinion.updated_at === this.props.opinion.created_at) {
       return <span />;
     }

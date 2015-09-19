@@ -1,5 +1,5 @@
 import OpinionArgumentForm from './OpinionArgumentForm';
-import OpinionSourceForm from './OpinionSourceForm';
+import OpinionSourcesBox from './OpinionSourcesBox';
 import OpinionSourceList from './OpinionSourceList';
 import OpinionArgumentList from './OpinionArgumentList';
 import OpinionVersionsBox from './OpinionVersionsBox';
@@ -16,21 +16,6 @@ const OpinionTabs = React.createClass({
     opinion: React.PropTypes.object.isRequired,
   },
   mixins: [ReactIntl.IntlMixin],
-
-  getInitialState() {
-    return {
-      categories: [],
-    };
-  },
-
-  componentDidMount() {
-    Fetcher
-    .get('/categories')
-    .then((data) => {
-      this.setState({categories: data});
-      return true;
-    });
-  },
 
   getCommentSystem() {
     return this.props.opinion.parent ? this.props.opinion.parent.type.commentSystem : this.props.opinion.type.commentSystem;
@@ -82,12 +67,7 @@ const OpinionTabs = React.createClass({
   },
 
   renderSourcesContent() {
-    return (
-      <div>
-        <OpinionSourceForm categories={this.state.categories} opinion={this.props.opinion}/>
-        <OpinionSourceList sources={this.props.opinion.sources}/>
-      </div>
-    );
+    return <OpinionSourcesBox opinion={this.props.opinion} />;
   },
 
   render() {

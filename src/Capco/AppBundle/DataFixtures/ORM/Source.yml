@@ -53,3 +53,20 @@ Capco\AppBundle\Entity\Source:
         Category: @Category<numberBetween(1,5)>
         link: https://toto.fr/
         voteCount: 0
+
+    source33:
+        title: <text(20)>
+        body: <text(1000)>
+        Author: @user<numberBetween(1,4)>
+        opinion: @opinion59
+        Category: @Category<numberBetween(1,5)>
+        link: https://www.parlement-et-citoyens.fr/
+        voteCount: 0
+    source34:
+        title: <text(20)>
+        body: <text(1000)>
+        Author: @user<numberBetween(1,4)>
+        opinion: @opinion59
+        Category: @Category<numberBetween(1,5)>
+        link: https://toto.fr/
+        voteCount: 0

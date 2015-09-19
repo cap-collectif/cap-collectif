@@ -330,7 +330,7 @@ class OpinionsController extends FOSRestController
 
         $paginator = $this->getDoctrine()->getManager()
                     ->getRepository('CapcoAppBundle:Source')
-                    ->getOneByOpinion($opinion, $offset, $limit, $filter);
+                    ->getByOpinion($opinion, $offset, $limit, $filter);
 
         $sources = [];
         foreach ($paginator as $source) {
@@ -340,6 +340,47 @@ class OpinionsController extends FOSRestController
         return [
             'sources' => $sources,
             'isOpinionContributable' => $opinion->canContribute(),
+        ];
+    }
+
+    /**
+     * Get all sources of a version.
+     *
+     * @ApiDoc(
+     *  resource=true,
+     *  description="Get all sources of a version.",
+     *  statusCodes={
+     *    200 = "Returned when successful",
+     *    404 = "Returned when opinion not found",
+     *  }
+     * )
+     *
+     * @Get("/opinions/{opinionId}/versions/{versionId}/sources")
+     * @ParamConverter("opinion", options={"mapping": {"opinionId": "id"}, "method": "getOne"})
+     * @ParamConverter("version", options={"mapping": {"versionId": "id"}, "method": "getOne"})
+     * @QueryParam(name="offset", requirements="[0-9.]+", default="0")
+     * @QueryParam(name="limit", requirements="[0-9.]+", default="10")
+     * @QueryParam(name="filter", requirements="(old|last|popular)", default="last")
+     * @View(serializerGroups={"Opinions", "UsersInfos"})
+     */
+    public function cgetOpinionVersionSourcesAction(Opinion $opinion, OpinionVersion $version, ParamFetcherInterface $paramFetcher)
+    {
+        $offset = $paramFetcher->get('offset');
+        $limit = $paramFetcher->get('limit');
+        $filter = $paramFetcher->get('filter');
+
+        $paginator = $this->getDoctrine()->getManager()
+            ->getRepository('CapcoAppBundle:Source')
+            ->getByOpinionVersion($version, $offset, $limit, $filter);
+
+        $sources = [];
+        foreach ($paginator as $source) {
+            $sources[] = $source;
+        }
+
+        return [
+            'sources' => $sources,
+            'isOpinionContributable' => $version->canContribute(),
         ];
     }
 
