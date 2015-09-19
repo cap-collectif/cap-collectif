@@ -55,7 +55,7 @@ class Opinion
 
     /**
      * @var \DateTime
-     * @Gedmo\Timestampable(on="change", field={"title", "Author", "OpinionType", "Consultation"})
+     * @Gedmo\Timestampable(on="change", field={"title", "body", "appendices"})
      * @ORM\Column(name="updated_at", type="datetime")
      */
     protected $updatedAt;

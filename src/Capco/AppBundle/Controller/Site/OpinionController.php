@@ -29,7 +29,7 @@ class OpinionController extends Controller
 
         $version = $this->getDoctrine()->getRepository('CapcoAppBundle:OpinionVersion')->findOneBySlug($versionSlug);
 
-        if (!$opinion || !$opinion->canDisplay()) {
+        if (!$opinion || !$version || !$version->canDisplay()) {
             throw $this->createNotFoundException($this->get('translator')->trans('opinion.error.not_found', array(), 'CapcoAppBundle'));
         }
 
@@ -48,7 +48,6 @@ class OpinionController extends Controller
             'sources' => $sources,
             'opinionType' => $opinion->getOpinionType(),
             'votes' => $opinion->getVotes(),
-            'consultation_steps' => $steps,
             'nav' => $nav,
         ];
     }

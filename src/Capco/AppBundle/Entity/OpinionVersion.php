@@ -11,6 +11,7 @@ use Capco\AppBundle\Traits\SluggableTitleTrait;
 use Capco\AppBundle\Traits\TimestampableTrait;
 use Capco\AppBundle\Traits\VotableTrait;
 use Capco\UserBundle\Entity\User;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * Opinion Version.
@@ -92,8 +93,16 @@ class OpinionVersion
      */
     protected $reports;
 
+    /**
+     * @var \DateTime
+     * @Gedmo\Timestampable(on="change", field={"title", "body", "comment"})
+     * @ORM\Column(name="updated_at", type="datetime")
+     */
+    protected $updatedAt;
+
     public function __construct()
     {
+        $this->updatedAt = new \DateTime();
         $this->arguments = new ArrayCollection();
         $this->sources = new ArrayCollection();
         $this->votes = new ArrayCollection();

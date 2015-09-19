@@ -99,7 +99,7 @@ Feature: Arguments
     Then I should see "Le contenu doit faire au moins 3 caractères."
 
   @javascript @database
-  Scenario: Argument must be at must 20000 chars long
+  Scenario: Argument must be at most 2000 chars long
     Given I am logged in as user
     And I visited "opinion page" with:
       | consultationSlug | croissance-innovation-disruption |

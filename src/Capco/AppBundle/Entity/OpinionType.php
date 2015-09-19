@@ -69,7 +69,7 @@ class OpinionType
     private $subtitle;
 
     /**
-     * @Gedmo\Slug(fields={"title", "subtitle"})
+     * @Gedmo\Slug(fields={"title", "subtitle"}, updatable=false)
      * @ORM\Column(length=255)
      */
     private $slug;
