@@ -23,10 +23,15 @@
                                 {{ 'idea.show.in_theme'|trans({}, 'CapcoAppBundle') }} <a href="{{ path('app_theme_show', {'slug': idea.Theme.slug}) }}">{{ idea.Theme.title }}</a>
                             {% endif %}
                             {{ 'idea.show.on_date'|trans({}, 'CapcoAppBundle') }} {{ idea.createdAt | localizeddate('long', 'none') }}
+                            {% if idea.createdAt != idea.updatedAt %}
+                                • {{ 'global.edited' | trans({'%date%': idea.updatedAt | localizeddate('long', 'none') }, 'CapcoAppBundle') }}
+                            {% endif %}
                             {% if capco_comment_can_show(idea) %}
-                                | {% transchoice idea.commentsCount with {'%count%': idea.commentsCount} from 'CapcoAppBundle' %}
-                                    idea.show.comments
-                                {% endtranschoice %}
+                                | <a href="#comments">
+                                    {% transchoice idea.commentsCount with {'%count%': idea.commentsCount} from 'CapcoAppBundle' %}
+                                        idea.show.comments
+                                    {% endtranschoice %}
+                                </a>
                             {% endif %}
                             {% if idea.isTrashed %}<span class="label label-default">{{ 'idea.show.trashed.label'|trans({}, 'CapcoAppBundle') }}</span>{% endif %}</p>
                     </div>
@@ -113,7 +118,7 @@
             {% endif %}
 
             {% if capco_comment_can_add(idea) or(capco_comment_can_show(idea) and idea.commentsCount > 0) %}
-                <div class="container  container--thinner container--custom">
+                <div id="comments" class="anchor-offset container  container--thinner container--custom">
 
                     {% if capco_comment_can_show(idea) %}
                         <div id="render-idea-comments" data-idea="{{ idea.id }}"></div>

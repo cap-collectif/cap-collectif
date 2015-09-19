@@ -21,16 +21,11 @@ class Idea implements CommentableInterface
 {
     use CommentableTrait;
 
-    const SORT_ORDER_CREATED_AT = 0;
-    const SORT_ORDER_VOTES_COUNT = 1;
-
-    public static $openingStatuses = [
-        'date' => self::SORT_ORDER_CREATED_AT,
-        'popularity' => self::SORT_ORDER_VOTES_COUNT,
-    ];
-    public static $openingStatusesLabels = [
-        'date' => 'idea.sort.created_at',
-        'popularity' => 'idea.sort.popularity',
+    public static $sortCriterias = [
+        'last' => 'idea.sort.last',
+        'old' => 'idea.sort.old',
+        'popular' => 'idea.sort.popular',
+        'comments' => 'idea.sort.comments',
     ];
 
     /**
@@ -543,6 +538,7 @@ class Idea implements CommentableInterface
         foreach ($this->votes as $vote) {
             $vote->setConfirmed(false);
         }
+        $this->voteCount = 0;
     }
 
     /**

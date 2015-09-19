@@ -31,17 +31,6 @@ AuthService
         );
     }
 
-    if ($('#render-opinion-versions').length) {
-        React.render(
-            <OpinionVersionsBox
-                opinionId={$('#render-opinion-versions').data("opinion")}
-                opinionBody={$('#render-opinion-versions').data("text")}
-                {...IntlData}
-            />,
-            document.getElementById('render-opinion-versions')
-        );
-    }
-
     if ($('#render-opinion').length) {
         React.render(
             <OpinionPage
@@ -49,16 +38,6 @@ AuthService
                 {...IntlData}
             />,
             document.getElementById('render-opinion')
-        );
-    }
-
-    if ($('#render-opinion-sources').length) {
-        React.render(
-            <OpinionSourcesBox
-                opinionId={$('#render-opinion-sources').data("opinion")}
-                {...IntlData}
-            />,
-            document.getElementById('render-opinion-sources')
         );
     }
 
