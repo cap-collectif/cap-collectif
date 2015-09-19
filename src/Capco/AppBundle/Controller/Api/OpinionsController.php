@@ -339,7 +339,6 @@ class OpinionsController extends FOSRestController
 
         return [
             'sources' => $sources,
-            'isOpinionContributable' => $opinion->canContribute(),
         ];
     }
 
@@ -380,7 +379,6 @@ class OpinionsController extends FOSRestController
 
         return [
             'sources' => $sources,
-            'isOpinionContributable' => $version->canContribute(),
         ];
     }
 

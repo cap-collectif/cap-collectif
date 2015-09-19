@@ -27,7 +27,9 @@
       border: 1px solid $border;
       color: $bg;
       &:hover,
-      &.active {
+      &.active,
+      &[disabled],
+      &.disabled {
         background-color: $bg;
         color: $color;
       }

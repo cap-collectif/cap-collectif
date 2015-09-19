@@ -9,5 +9,5 @@
 {% endblock %}
 
 {% block content %}
-   <div id="render-opinion-version" data-version="{{ version.id }}" data-opinion="{{ opinion.id }}"></div>
+   <div id="render-opinion-version" data-version="{{ version.id }}" data-opinion="{{ opinion.id }}" data-reporting-enabled={{ is_feature_enabled('reporting') ? "true" : "false" }}></div>
 {% endblock %}

@@ -7,6 +7,7 @@ const Button = ReactBootstrap.Button;
 const OpinionArgumentButtons = React.createClass({
   propTypes: {
     argument: React.PropTypes.object.isRequired,
+    isReportingEnabled: React.PropTypes.bool.isRequired,
   },
   mixins: [ReactIntl.IntlMixin],
 
@@ -19,20 +20,22 @@ const OpinionArgumentButtons = React.createClass({
   renderVoteButton() {
     if (this.state.hasVoted) {
       return (
-        <Button className="argument__btn--vote" bsStyle="danger" bsSize="xsmall" onClick={!LoginStore.isLoggedIn() ? null : this.deleteVote.bind(null, this)}>
+        <Button disabled={!this.props.argument.isContribuable} className="argument__btn--vote" bsStyle="danger" bsSize="xsmall"
+                onClick={!LoginStore.isLoggedIn() ? null : this.deleteVote.bind(null, this)}>
           { this.getIntlMessage('vote.cancel') }
         </Button>
       );
     }
     return (
-      <Button bsStyle="success" bsSize="xsmall" className="argument__btn--vote btn--outline" onClick={!LoginStore.isLoggedIn() ? null : this.vote.bind(null, this)}>
+      <Button disabled={!this.props.argument.isContribuable} bsStyle="success" bsSize="xsmall" className="argument__btn--vote btn--outline"
+              onClick={!LoginStore.isLoggedIn() ? null : this.vote.bind(null, this)}>
         <i className="cap-hand-like-2"></i> { this.getIntlMessage('vote.ok') }
       </Button>
     );
   },
 
   renderReportButton() {
-    if (!this.isTheUserTheAuthor()) {
+    if (this.props.isReportingEnabled && !this.isTheUserTheAuthor()) {
       const reported = this.props.argument.has_user_reported;
       return (
         <LoginOverlay children={
@@ -51,7 +54,7 @@ const OpinionArgumentButtons = React.createClass({
   },
 
   renderEditButton() {
-    if (this.isTheUserTheAuthor()) {
+    if (this.props.argument.isContribuable && this.isTheUserTheAuthor()) {
       return (
         <Button href={this.props.argument._links.edit} bsSize="xsmall" className="argument__btn--edit btn-dark-gray btn--outline">
           <i className="cap cap-pencil-1"></i>

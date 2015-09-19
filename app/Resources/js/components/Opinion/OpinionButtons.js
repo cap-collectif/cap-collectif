@@ -10,6 +10,7 @@ const Button = ReactBootstrap.Button;
 const OpinionButtons = React.createClass({
   propTypes: {
     opinion: React.PropTypes.object.isRequired,
+    isReportingEnabled: React.PropTypes.bool.isRequired,
   },
   mixins: [ReactIntl.IntlMixin],
 
@@ -75,14 +76,17 @@ const OpinionButtons = React.createClass({
 
   renderReportButton() {
     const reported = this.props.opinion.has_user_reported;
-    return (
-      <Button
-        className="opinion__action--report pull-right btn--outline btn-dark-gray" href={reported ? null : this.props.opinion._links.report} active={reported}>
-        <i className="cap cap-flag-1"></i>
-        { ' ' }
-        { reported ? this.getIntlMessage('global.report.reported') : this.getIntlMessage('global.report.submit') }
-      </Button>
-    );
+    if (this.props.isReportingEnabled && !this.isTheUserTheAuthor()) {
+      return (
+        <Button
+          className="opinion__action--report pull-right btn--outline btn-dark-gray"
+          href={reported ? null : this.props.opinion._links.report} active={reported}>
+          <i className="cap cap-flag-1"></i>
+          { ' ' }
+          { reported ? this.getIntlMessage('global.report.reported') : this.getIntlMessage('global.report.submit') }
+        </Button>
+      );
+    }
   },
 
   render() {

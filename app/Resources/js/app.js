@@ -35,6 +35,7 @@ AuthService
         React.render(
             <OpinionPage
                 opinionId={$('#render-opinion').data("opinion")}
+                isReportingEnabled={$('#render-opinion').data("reporting-enabled")}
                 {...IntlData}
             />,
             document.getElementById('render-opinion')
@@ -46,6 +47,7 @@ AuthService
             <OpinionPage
                 opinionId={$('#render-opinion-version').data('opinion')}
                 versionId={$('#render-opinion-version').data('version')}
+                isReportingEnabled={$('#render-opinion-version').data("reporting-enabled")}
                 {...IntlData}
             />,
             document.getElementById('render-opinion-version')

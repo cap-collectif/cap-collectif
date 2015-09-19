@@ -1,17 +1,15 @@
-import OpinionArgumentForm from './OpinionArgumentForm';
-import OpinionArgumentList from './OpinionArgumentList';
+import OpinionArgumentsBox from './OpinionArgumentsBox';
 import OpinionVersionsBox from './OpinionVersionsBox';
 import OpinionSourcesBox from './OpinionSourcesBox';
 
 const TabbedArea = ReactBootstrap.TabbedArea;
 const TabPane = ReactBootstrap.TabPane;
-const Row = ReactBootstrap.Row;
-const Col = ReactBootstrap.Col;
 const FormattedMessage = ReactIntl.FormattedMessage;
 
 const OpinionTabs = React.createClass({
   propTypes: {
     opinion: React.PropTypes.object.isRequired,
+    isReportingEnabled: React.PropTypes.bool.isRequired,
   },
   mixins: [ReactIntl.IntlMixin],
 
@@ -27,45 +25,15 @@ const OpinionTabs = React.createClass({
   },
 
   renderArgumentsContent() {
-    if (this.getCommentSystem() === 2) {
-      return (
-        <Row>
-          <Col sm={12} md={6}>
-            <div className="opinion opinion--add-argument block block--bordered">
-              <OpinionArgumentForm type="yes" opinion={this.props.opinion}/>
-            </div>
-            <OpinionArgumentList type="yes" opinion={this.props.opinion}/>
-          </Col>
-          <Col sm={12} md={6}>
-            <div className="opinion opinion--add-argument block block--bordered">
-              <OpinionArgumentForm type="no" opinion={this.props.opinion}/>
-            </div>
-            <OpinionArgumentList type="no" opinion={this.props.opinion}/>
-          </Col>
-        </Row>
-      );
-    }
-
-    if (this.getCommentSystem() === 1) {
-      return (
-        <div>
-          <div className="opinion opinion--add-argument block block--bordered">
-            <OpinionArgumentForm type="simple" opinion={this.props.opinion}/>
-          </div>
-          <OpinionArgumentList type="simple" opinion={this.props.opinion}/>
-        </div>
-      );
-    }
-
-    return null;
+    return <OpinionArgumentsBox {...this.props} />;
   },
 
   renderVersionsContent() {
-    return <OpinionVersionsBox opinionId={this.props.opinion.id} opinionBody={this.props.opinion.body} />;
+    return <OpinionVersionsBox isReportingEnabled={this.props.isReportingEnabled} opinionId={this.props.opinion.id} opinionBody={this.props.opinion.body} />;
   },
 
   renderSourcesContent() {
-    return <OpinionSourcesBox opinion={this.props.opinion} />;
+    return <OpinionSourcesBox {...this.props} />;
   },
 
   render() {

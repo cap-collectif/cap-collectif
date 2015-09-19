@@ -36,7 +36,7 @@
 
             <div class="col-md-9 col-sm-8 col-xs-12">
                 {% block content %}
-                    <div id="render-opinion" data-opinion="{{ opinion.id }}"></div>
+                    <div id="render-opinion" data-opinion="{{ opinion.id }}" data-reporting-enabled={{ is_feature_enabled('reporting') ? "true" : "false" }}></div>
                 {% endblock %}
             </div>
 

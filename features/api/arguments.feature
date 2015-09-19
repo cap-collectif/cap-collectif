@@ -19,6 +19,7 @@ Feature: Arguments
           "votes_count": @integer@,
           "is_trashed": @boolean@,
           "is_enabled": @boolean@,
+          "isContribuable": @boolean@,
 
           "author": {
             "username": @string@,
@@ -61,6 +62,7 @@ Feature: Arguments
           "votes_count": @integer@,
           "is_trashed": @boolean@,
           "is_enabled": @boolean@,
+          "isContribuable": @boolean@,
 
           "author": {
             "username": @string@,

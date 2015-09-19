@@ -9,6 +9,7 @@ const Col = ReactBootstrap.Col;
 const OpinionSourcesBox = React.createClass({
   propTypes: {
     opinion: React.PropTypes.object.isRequired,
+    isReportingEnabled: React.PropTypes.bool.isRequired,
   },
   mixins: [ReactIntl.IntlMixin],
 
@@ -20,7 +21,6 @@ const OpinionSourcesBox = React.createClass({
       filter: 'last',
       offset: 0,
       limit: 50,
-      isOpinionContributable: false,
     };
   },
 
@@ -50,7 +50,7 @@ const OpinionSourcesBox = React.createClass({
   render() {
     return (
       <div>
-        {this.state.isOpinionContributable
+        {this.props.opinion.isContribuable
           ? <Row>
               <Col xs={12} sm={6} md={6}>
                 <OpinionSourceForm opinion={this.props.opinion} categories={this.state.categories} />
@@ -62,7 +62,7 @@ const OpinionSourcesBox = React.createClass({
           : this.renderFilter()
         }
         {!this.state.isLoading
-          ? <OpinionSourceList sources={this.state.sources} />
+          ? <OpinionSourceList isReportingEnabled={this.props.isReportingEnabled} sources={this.state.sources} />
           : <Loader />
         }
       </div>
@@ -85,18 +85,15 @@ const OpinionSourcesBox = React.createClass({
       : `/opinions/${this.props.opinion.id}`
     ;
 
-    if (this.isVersion()) {
-      Fetcher
-        .get(`${baseUrl}/sources?offset=${this.state.offset}&limit=${this.state.limit}&filter=${this.state.filter}`)
-        .then((data) => {
-          this.setState({
-            isLoading: false,
-            sources: data.sources,
-            isOpinionContributable: data.isOpinionContributable,
-          });
-          return true;
+    Fetcher
+      .get(`${baseUrl}/sources?offset=${this.state.offset}&limit=${this.state.limit}&filter=${this.state.filter}`)
+      .then((data) => {
+        this.setState({
+          isLoading: false,
+          sources: data.sources,
         });
-    }
+        return true;
+      });
   },
 
   loadCategoriesFromServer() {
