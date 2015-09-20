@@ -10,28 +10,14 @@
         {% if block.total_opinions_count > 0 or (block.isEnabled == true and currentStep.canContribute) %}
 
             <div id="opinions--{{ block.slug }}" class="anchor-offset block  block--bordered">
-
-                <div class="opinion  opinion--{{ block.color }}  opinion--default">
-                    <div class="opinion__header  opinion__header--mobile-centered">
-                        <h2 class="pull-left  h4  opinion__header__title">
-                            {{ 'consultation.show.opinions' | transchoice(block.total_opinions_count, {}, 'CapcoAppBundle')  }}
-                        </h2>
-                        <div class="pull-right  opinion__header__filter">
-                            {% if block.total_opinions_count > 1 %}
-                                {{ form_start(block.sortForm) }}
-                                {{ form_label(block.sortForm.opinionsSort, null, {'label_attr':{"class":"control-label  sr-only"} }) }}
-                                {{ form_widget(block.sortForm.opinionsSort, {'attr':{"class":"form-control", 'onchange': 'this.form.submit()'} }) }}
-                                {{ form_end(block.sortForm) }}
-                            {% endif %}
-                            {% if block.isEnabled == true and currentStep.canContribute %}
-                                <a id="btn-add--{{ block.slug }}" href="{{ path('app_consultation_new_opinion' ,{'consultationSlug': consultation.slug, 'stepSlug': currentStep.slug, 'opinionTypeSlug': block.slug } ) }}" class="btn  btn-default">
-                                    <i class="cap cap-add-1"></i>
-                                    <span class="hidden-xs">{{ 'opinion.create.button'|trans({}, 'CapcoAppBundle') }}</span>
-                                </a>
-                            {% endif %}
-                        </div>
-                    </div>
-                </div>
+                {% include 'CapcoAppBundle:Consultation:list_header.html.twig' with {
+                    'consultation': consultation,
+                    'currentStep': currentStep,
+                    'opinionType': block,
+                    'opinions': block.opinions,
+                    'opinions_count': block.total_opinions_count,
+                    'sortOpinionsForm': block.sortForm,
+                } only %}
 
                 {% if block.total_opinions_count > 0 %}
                     <ul class="media-list  opinion__list">

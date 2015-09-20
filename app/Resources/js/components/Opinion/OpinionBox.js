@@ -114,23 +114,25 @@ const OpinionBox = React.createClass({
     const opinion = this.props.opinion;
     const color = this.getOpinionType().color;
     const backLink = this.isVersion() ? opinion.parent._links.show : opinion._links.type;
-    const backTitle = this.getOpinionType().title;
+    const backTitle = this.isVersion() ? opinion.parent.title : this.getOpinionType().title;
+    const headerTitle = this.isVersion() ? 'opinion.header.version' : 'opinion.header.opinion';
 
     const colorClass = 'opinion opinion--' + color + ' opinion--current';
     return (
       <div className="block block--bordered opinion__details">
         <div className={colorClass}>
           <div className="opinion__header opinion__header--centered">
-            <a className="neutral-hover pull-left h4 opinion__header__back" href={backLink}>
-              <i className="cap cap-arrow-1"></i>
-              <span className="hidden-xs hidden-sm"> {this.getIntlMessage('global.back')}</span>
+            <a className="pull-left btn btn-default opinion__header__back" href={backLink}>
+              <i className="cap cap-arrow-1-1"></i>
+              <span className="hidden-xs hidden-sm"> {backTitle}</span>
             </a>
-            <h2 className="h4 opinion__header__title"> {backTitle}</h2>
+            <h2 className="h4 opinion__header__title"> {this.getIntlMessage(headerTitle)}</h2>
           </div>
           <OpinionPreview opinion={opinion} link={false} />
         </div>
         <OpinionAppendices opinion={opinion} />
         <div className="opinion__description">
+          <p className="h4" style={{marginTop: '0'}}>{opinion.title}</p>
           <OpinionBody opinion={opinion} />
           <div className="opinion__buttons" style={{marginTop: '15px', marginBottom: '15px'}}>
             {this.renderVotesHelpText()}

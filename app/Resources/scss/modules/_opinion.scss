@@ -19,25 +19,6 @@
     &.opinion--#{$name} .opinion__header {
       background-color: $color;
       color: $text;
-
-      a,
-      a:hover {
-        color: set-link-text-color($color);
-      }
-      .btn,
-      .btn:hover {
-        color: $black;
-      }
-
-      .btn-link,
-      .btn-link:hover {
-        color: $link-color;
-      }
-
-      .badge {
-        background-color: $text;
-        color: $color;
-      }
     }
   }
 
@@ -45,16 +26,15 @@
   .opinion__header {
     padding: 2px 15px;
     overflow: hidden;
+    border-bottom: 1px solid $border-color;
 
-    .neutral-hover:hover,
-    .neutral-hover:focus {
-      text-decoration: none;
-    }
-
-    .opinion__header__title,
-    .opinion__header__back {
+    .opinion__header__title {
       color: black;
       margin: 10px 0 10px;
+    }
+
+    .opinion__header__back {
+      margin: 3px 0 3px;
     }
 
     .opinion__header__filter {
@@ -318,6 +298,10 @@
 
   .opinion {
     border-top: 1px solid $border-color;
+  }
+
+  .opinion:first-child {
+    border-top: 0;
   }
 
   .opinion--comment {

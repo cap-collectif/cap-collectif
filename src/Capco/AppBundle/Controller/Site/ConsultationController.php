@@ -148,9 +148,6 @@ class ConsultationController extends Controller
 
         $opinionTypesResolver = $this->get('capco.opinion_types.resolver');
 
-        $allowedTypes = $this->get('capco.opinion_types.resolver')
-            ->getHierarchyForConsultationType($currentStep->getConsultationType());
-
         if (false == $opinionTypesResolver->stepAllowType($currentStep, $opinionType)) {
             throw new NotFoundHttpException('This type does not exist for this consultation');
         }
@@ -177,9 +174,18 @@ class ConsultationController extends Controller
             ));
         }
 
-        $currentUrl = $this->generateUrl('app_consultation_show_opinions', ['consultationSlug' => $consultation->getSlug(), 'stepSlug' => $currentStep->getSlug(), 'opinionTypeSlug' => $opinionType->getSlug(), 'page' => $page]);
-        $opinions = $this->getDoctrine()->getRepository('CapcoAppBundle:Opinion')->getByOpinionTypeAndConsultationStepOrdered($currentStep, $opinionType->getId(), 10, $page, $filter);
-        $nav = $this->get('capco.opinion_types.resolver')->getNavForStep($currentStep);
+        $currentUrl = $this
+            ->generateUrl('app_consultation_show_opinions', [
+                'consultationSlug' => $consultation->getSlug(),
+                'stepSlug' => $currentStep->getSlug(),
+                'opinionTypeSlug' => $opinionType->getSlug(),
+                'page' => $page
+            ]);
+        $opinions = $this->getDoctrine()
+            ->getRepository('CapcoAppBundle:Opinion')
+            ->getByOpinionTypeAndConsultationStepOrdered($currentStep, $opinionType->getId(), 10, $page, $filter);
+        $nav = $this->get('capco.opinion_types.resolver')
+            ->getNavForStep($currentStep);
 
         return [
             'currentUrl' => $currentUrl,
@@ -191,7 +197,6 @@ class ConsultationController extends Controller
             'sortOpinionsForm' => $form->createView(),
             'opinionsSort' => $filter,
             'currentStep' => $currentStep,
-            'allowedTypes' => $allowedTypes,
             'nav' => $nav,
         ];
     }

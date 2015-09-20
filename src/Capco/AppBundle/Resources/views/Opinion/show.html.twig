@@ -6,41 +6,6 @@
     {{ parent() }} - {{ opinion.title }}
 {% endblock %}
 
-{% block jumbotron %}
-{% endblock %}
-
-{% block body %}
-    <div class="container  container--custom">
-        {% include '@CapcoApp/Consultation/show_title.html.twig' %}
-    </div>
-
-    <div class="container  container--custom">
-
-        {% if currentStep.isClosed %}
-            <div class="alert alert-info alert-dismissible  block" role="alert">
-                <p><strong>{{ 'consultation.show.alert.ended.title'|trans({}, 'CapcoAppBundle') }}</strong> {{ 'consultation.show.alert.ended.text'|trans({}, 'CapcoAppBundle') }}</p>
-            </div>
-        {% endif %}
-
-        {% if currentStep.isFuture %}
-            <div class="alert alert-info alert-dismissible  block" role="alert">
-                <p><strong>{{ 'consultation.show.alert.future.title'|trans({}, 'CapcoAppBundle') }}</strong> {{ 'consultation.show.alert.future.text'|trans({'%date%': '<strong>' ~ currentStep.startAt | localizeddate('long', 'none', app.request.locale) ~ '</strong>'}, 'CapcoAppBundle') | raw }}</p>
-            </div>
-        {% endif %}
-
-        <div class="row">
-            <div class="col-xs-12  col-sm-4  col-md-3  block--mobile">
-                {{ render(controller('CapcoAppBundle:Site/Consultation:showMeta', {'consultationSlug': consultation.slug, 'currentStepSlug': currentStep.slug})) }}
-                {% include 'CapcoAppBundle:Consultation:show_nav.html.twig' with {'nav': nav } %}
-            </div>
-
-            <div class="col-md-9 col-sm-8 col-xs-12">
-                {% block content %}
-                    <div id="render-opinion" data-opinion="{{ opinion.id }}" data-reporting-enabled={{ is_feature_enabled('reporting') ? "true" : "false" }}></div>
-                {% endblock %}
-            </div>
-
-            </div> <!-- col-xs-12  col-sm-4  col-md-3 -->
-        </div> <!-- .row -->
-    </div>
+{% block content %}
+    <div id="render-opinion" data-opinion="{{ opinion.id }}" data-reporting-enabled={{ is_feature_enabled('reporting') ? "true" : "false" }}></div>
 {% endblock %}
