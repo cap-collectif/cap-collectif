@@ -27,6 +27,11 @@
     <meta name="msapplication-TileImage" content="{{ asset('mstile-144x144.png') }}">
     <meta name="application-name" content="Cap Collectif">
 
+    {% set siteName = capco_site_parameter_value('global.site.fullname') ? capco_site_parameter_value('global.site.fullname') : 'Cap Collectif' %}
+    <meta property="og:site_name" content="{{ siteName }}"/>
+    <meta property="fb:app_id" content="{{ facebook_app_id }}" />
+    {% block metaTags %}{% endblock %}
+
     {% set sitename = capco_site_parameter_value('global.site.fullname') %}
     <title>{% block title %}
         {%  if sitename != null %}

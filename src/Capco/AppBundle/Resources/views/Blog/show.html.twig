@@ -39,10 +39,12 @@
             </div>
         {% endif %}
 
-        {{ sonata_block_render({'type': 'capco.block.service.share_button'}, {
+        {% include 'CapcoAppBundle:Block:share_button.html.twig' with {
             'url': url('app_blog_show', {'slug': post.slug}),
             'title': post.title,
-        }) }}
+            'id': 'post-' ~ post.slug,
+        } only %}
+
     </div>
 
     {% if capco_comment_can_add(post) or (capco_comment_can_show(post) and post.commentsCount > 0) %}

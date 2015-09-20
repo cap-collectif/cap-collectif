@@ -29,12 +29,6 @@
             <button disabled="disabled" class="btn  btn-dark-gray  btn-xs"><i class="cap-hand-like-2"></i> {{ 'argument.vote.submit'|trans({}, 'CapcoAppBundle') }}</button>
             <span class="opinion__votes-nb">{{ argument.voteCount }}</span>
 
-            {{ sonata_block_render({'type': 'capco.block.service.share_button'}, {
-                'url': (url('app_consultation_show_opinion', {'consultationSlug': consultation.slug, 'stepSlug': opinion.step.slug, 'opinionTypeSlug': opinionType.slug, 'opinionSlug': opinion.slug}) ~ '#arg-' ~ argument.id),
-                'title': ('share_button.argument_on'|trans({'%opinion%': opinion.title}, 'CapcoAppBundle')),
-                'btn_classes': 'btn-xs  btn-dark-gray  btn--outline',
-            }) }}
-
             {% if is_feature_enabled('reporting') %}
                 {% if argument.reports | length > 0 %}
                     <button disabled="disabled" class="btn btn-xs btn-dark-gray"><i class="cap cap-flag-1"></i> {{ 'argument.report.reported'|trans({}, 'CapcoAppBundle') }}</button>
