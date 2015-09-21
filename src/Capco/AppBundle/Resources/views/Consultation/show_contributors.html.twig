@@ -2,15 +2,6 @@
 
 {% block canonical_link %}{{ url('app_consultation_show_contributors', {'consultationSlug': consultation.slug}) }}{% endblock %}
 
-{% block metaTags %}
-    <meta property="og:title" content="{{ consultation.title }} - Participants" />
-    <meta property="og:url" content="{{ url('app_consultation_show_contributors', {'consultationSlug': consultation.slug}) }}" />
-    <meta property="og:type" content="consultation" />
-    {% if consultation.Cover %}
-        <meta property="og:image" content="{% path consultation.Cover, 'blockHeader' %}" />
-    {% endif %}
-{% endblock %}
-
 {% block title %}
     {{ parent() }} - {{ 'consultation.show.contributors.title' | trans({}, 'CapcoAppBundle') }}
 {% endblock %}
