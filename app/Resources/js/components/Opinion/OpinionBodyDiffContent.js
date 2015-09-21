@@ -13,25 +13,25 @@ const OpinionBodyDiffContent = React.createClass({
       return <div dangerouslySetInnerHTML={{__html: html}} />;
     }
 
-    const sections = [];
+    let sections = [];
 
     this.props.html.split('<p>').forEach((sentence) => {
       if (sentence.length > 0) {
         sections.push(sentence.replace('</p>', ''));
       }
-    });
+    })
 
-    const parts = [];
+    let parts = [];
     sections.forEach((section) => {
       parts.push({
         before: section.slice(0, section.indexOf('<span')),
-        link: section.slice(section.indexOf('>') + 1, section.indexOf('</span>')),
+        link: section.slice(section.indexOf('>') + 1,section.indexOf('</span>')),
         after: section.slice(section.indexOf('</span>') + 7),
         modal: {
           title: section.substring(section.lastIndexOf('data-diff-title="') + 'data-diff-title="'.length, section.lastIndexOf('" data-diff-before=')),
           before: section.substring(section.lastIndexOf('data-diff-before="') + 'data-diff-before="'.length, section.lastIndexOf('" data-diff-after=')),
           after: section.substring(section.lastIndexOf('data-diff-after="') + 'data-diff-after="'.length, section.lastIndexOf('" data-diff-stop')),
-        },
+        }
       });
     });
 
@@ -39,6 +39,7 @@ const OpinionBodyDiffContent = React.createClass({
       <div>
         {
           parts.map((part) => {
+            console.log(part);
             return (
               <p>
                 <span dangerouslySetInnerHTML={{__html: part.before}} />
@@ -49,7 +50,7 @@ const OpinionBodyDiffContent = React.createClass({
           })
         }
       </div>
-    );
+    );;
   },
 });
 

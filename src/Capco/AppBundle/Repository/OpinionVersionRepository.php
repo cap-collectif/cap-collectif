@@ -23,24 +23,20 @@ class OpinionVersionRepository extends EntityRepository
             ->setParameter('opinion', $opinion)
         ;
 
-        if ($filter == 'last') {
-            $qb->orderBy('o.updatedAt', 'DESC');
-            $qb->addOrderBy('o.voteCountOk', 'DESC');
-        } elseif ($filter == 'old') {
-            $qb->orderBy('o.updatedAt', 'ASC');
-            $qb->addOrderBy('o.voteCountOk', 'DESC');
-        } elseif ($filter == 'favorable') {
-            $qb->orderBy('o.voteCountOk', 'DESC');
-            $qb->addOrderBy('o.voteCountNok', 'ASC');
+        if ($filter === 'old') {
+            $qb->addOrderBy('o.updatedAt', 'ASC');
+        }
+
+        if ($filter === 'last') {
             $qb->addOrderBy('o.updatedAt', 'DESC');
-        } elseif ($filter == 'votes') {
-            $qb->orderBy('vnb', 'DESC');
+        }
+
+        if ($filter === 'popular') {
+            $qb->addOrderBy('vnb', 'DESC');
             $qb->addOrderBy('o.updatedAt', 'DESC');
-        } elseif ($filter == 'comments') {
-            $qb->orderBy('o.argumentsCount', 'DESC');
-            $qb->addOrderBy('o.updatedAt', 'DESC');
-        } elseif ($filter == 'positions') {
-            $qb->orderBy('o.position', 'ASC');
+        }
+        if ($filter === 'comments') {
+            $qb->addOrderBy('o.argumentsCount', 'DESC');
             $qb->addOrderBy('o.updatedAt', 'DESC');
         }
 

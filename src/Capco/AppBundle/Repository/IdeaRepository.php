@@ -171,7 +171,7 @@ class IdeaRepository extends EntityRepository
      *
      * @return Paginator
      */
-    public function getSearchResults($nbByPage = 8, $page = 1, $theme = null, $sort = 'last', $term = null)
+    public function getSearchResults($nbByPage = 8, $page = 1, $theme = null, $sort = null, $term = null)
     {
         if ((int) $page < 1) {
             throw new \InvalidArgumentException(sprintf(
@@ -200,18 +200,10 @@ class IdeaRepository extends EntityRepository
             ;
         }
 
-        if ($sort === 'last') {
-            $qb->orderBy('i.updatedAt', 'DESC');
-            $qb->addOrderBy('i.voteCount', 'DESC');
-        } elseif ($sort === 'old') {
-            $qb->orderBy('i.updatedAt', 'ASC');
-            $qb->addOrderBy('i.voteCount', 'DESC');
-        } elseif ($sort === 'popular') {
+        if (isset(Idea::$openingStatuses[$sort]) && Idea::$openingStatuses[$sort] == Idea::SORT_ORDER_VOTES_COUNT) {
             $qb->orderBy('i.voteCount', 'DESC');
-            $qb->addOrderBy('i.updatedAt', 'DESC');
-        } elseif ($sort === 'comments') {
-            $qb->orderBy('i.commentsCount', 'DESC');
-            $qb->addOrderBy('i.updatedAt', 'DESC');
+        } else {
+            $qb->orderBy('i.createdAt', 'DESC');
         }
 
         $query = $qb->getQuery();

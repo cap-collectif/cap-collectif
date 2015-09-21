@@ -6,7 +6,7 @@ Capco\AppBundle\Entity\Source:
         title: Ma source
         body: blabla
         Author: @user5
-        Opinion: @opinion2
+        Opinion: @opinion1
         Category: @Category2
         link: http://www.google.fr
         voteCount: 0
@@ -14,7 +14,7 @@ Capco\AppBundle\Entity\Source:
         title: <text(20)>
         body: <text(1000)>
         Author: @user<numberBetween(1,3)>
-        Opinion: @opinion<numberBetween(3,5)>
+        Opinion: @opinion<numberBetween(1,5)>
         Category: @Category<numberBetween(1,5)>
         link: http://www.cap-collectif.com/
         voteCount: 0
@@ -50,23 +50,6 @@ Capco\AppBundle\Entity\Source:
         body: <text(1000)>
         Author: @user<numberBetween(1,4)>
         opinionVersion: @version1
-        Category: @Category<numberBetween(1,5)>
-        link: https://toto.fr/
-        voteCount: 0
-
-    source33:
-        title: <text(20)>
-        body: <text(1000)>
-        Author: @user<numberBetween(1,4)>
-        opinion: @opinion59
-        Category: @Category<numberBetween(1,5)>
-        link: https://www.parlement-et-citoyens.fr/
-        voteCount: 0
-    source34:
-        title: <text(20)>
-        body: <text(1000)>
-        Author: @user<numberBetween(1,4)>
-        opinion: @opinion59
         Category: @Category<numberBetween(1,5)>
         link: https://toto.fr/
         voteCount: 0

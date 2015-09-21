@@ -21,11 +21,16 @@ class Idea implements CommentableInterface
 {
     use CommentableTrait;
 
-    public static $sortCriterias = [
-        'last' => 'idea.sort.last',
-        'old' => 'idea.sort.old',
-        'popular' => 'idea.sort.popular',
-        'comments' => 'idea.sort.comments',
+    const SORT_ORDER_CREATED_AT = 0;
+    const SORT_ORDER_VOTES_COUNT = 1;
+
+    public static $openingStatuses = [
+        'date' => self::SORT_ORDER_CREATED_AT,
+        'popularity' => self::SORT_ORDER_VOTES_COUNT,
+    ];
+    public static $openingStatusesLabels = [
+        'date' => 'idea.sort.created_at',
+        'popularity' => 'idea.sort.popularity',
     ];
 
     /**
@@ -47,7 +52,7 @@ class Idea implements CommentableInterface
     private $title;
 
     /**
-     * @Gedmo\Slug(fields={"title"}, updatable=false)
+     * @Gedmo\Slug(fields={"title"})
      * @ORM\Column(length=255)
      */
     private $slug;
@@ -538,7 +543,6 @@ class Idea implements CommentableInterface
         foreach ($this->votes as $vote) {
             $vote->setConfirmed(false);
         }
-        $this->voteCount = 0;
     }
 
     /**
@@ -584,12 +588,12 @@ class Idea implements CommentableInterface
     // Used by elasticsearch for indexing
     public function getStrippedBody()
     {
-        return strip_tags(html_entity_decode($this->body, ENT_QUOTES | ENT_HTML401, 'UTF-8'));
+        return strip_tags(html_entity_decode($this->body, ENT_QUOTES|ENT_HTML401, 'UTF-8'));
     }
 
     public function getStrippedObject()
     {
-        return strip_tags(html_entity_decode($this->object, ENT_QUOTES | ENT_HTML401, 'UTF-8'));
+        return strip_tags(html_entity_decode($this->object, ENT_QUOTES|ENT_HTML401, 'UTF-8'));
     }
 
     public function getClassName()

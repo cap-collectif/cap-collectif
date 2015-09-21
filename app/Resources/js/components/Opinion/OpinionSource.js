@@ -9,7 +9,6 @@ const Col = ReactBootstrap.Col;
 const OpinionSource = React.createClass({
   propTypes: {
     source: React.PropTypes.object,
-    isReportingEnabled: React.PropTypes.bool.isRequired,
   },
   mixins: [ReactIntl.IntlMixin],
 
@@ -21,7 +20,7 @@ const OpinionSource = React.createClass({
       'bg-vip': source.author.vip,
     });
     return (
-      <li className={classes} id={'source-' + source.id}>
+      <li className={classes}>
         <Row>
           <Col xs={12}>
             <div className="opinion__body box">
@@ -38,7 +37,7 @@ const OpinionSource = React.createClass({
                   { source.body }
                 </p>
                 <p className="opinion__votes excerpt small">
-                  <OpinionSourceButtons {...this.props} />
+                  <OpinionSourceButtons source={source} />
                 </p>
               </div>
             </div>

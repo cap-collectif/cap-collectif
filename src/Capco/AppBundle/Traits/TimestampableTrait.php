@@ -15,6 +15,13 @@ trait TimestampableTrait
     protected $createdAt;
 
     /**
+     * @var \DateTime
+     * @Gedmo\Timestampable(on="update")
+     * @ORM\Column(name="updated_at", type="datetime")
+     */
+    protected $updatedAt;
+
+    /**
      * Sets createdAt.
      *
      * @param \DateTime $createdAt

@@ -102,7 +102,7 @@ class SearchResolver
     protected function getHighlightSettings()
     {
         return [
-            'pre_tags' => ['<span class="search__highlight">'],
+            'pre_tags' => ["<span class=\"search__highlight\">"],
             'post_tags' => ['</span>'],
             'number_of_fragments' => 3,
             'fragment_size' => 175,

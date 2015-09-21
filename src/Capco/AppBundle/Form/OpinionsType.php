@@ -53,6 +53,7 @@ class OpinionsType extends AbstractType
                 'label' => false,
             ])
         ;
+
     }
 
     /**

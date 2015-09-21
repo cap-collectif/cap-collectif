@@ -10,7 +10,7 @@ use FOS\UserBundle\Security\UserProvider as BaseUserProvider;
 class UserEmailProvider extends BaseUserProvider
 {
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     protected function findUser($email)
     {

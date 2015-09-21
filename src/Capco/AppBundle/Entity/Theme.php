@@ -52,7 +52,7 @@ class Theme
     private $title;
 
     /**
-     * @Gedmo\Slug(fields={"title"}, updatable=false)
+     * @Gedmo\Slug(fields={"title"})
      * @ORM\Column(length=255)
      */
     private $slug;
@@ -500,7 +500,7 @@ class Theme
     // Used by elasticsearch for indexing
     public function getStrippedBody()
     {
-        return strip_tags(html_entity_decode($this->body, ENT_QUOTES | ENT_HTML401, 'UTF-8'));
+        return strip_tags(html_entity_decode($this->body, ENT_QUOTES|ENT_HTML401, 'UTF-8'));
     }
 
     public function getBodyExcerpt($nb = 100)
@@ -534,7 +534,7 @@ class Theme
         $count = 0;
         foreach ($this->Consultations as $consultation) {
             if ($consultation->getIsEnabled()) {
-                ++$count;
+                $count++;
             }
         }
 
@@ -546,7 +546,7 @@ class Theme
         $count = 0;
         foreach ($this->Ideas as $idea) {
             if ($idea->getIsEnabled()) {
-                ++$count;
+                $count++;
             }
         }
 

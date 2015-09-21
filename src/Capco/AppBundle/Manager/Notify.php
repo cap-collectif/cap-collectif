@@ -51,7 +51,7 @@ class Notify implements MailerInterface
         $url = $this->router->generate('fos_user_registration_confirm', array('token' => $user->getConfirmationToken()), true);
         $rendered = $this->templating->render($template, array(
             'user' => $user,
-            'confirmationUrl' => $url,
+            'confirmationUrl' =>  $url,
         ));
         $this->sendFOSEmail($rendered, $user->getEmail());
     }

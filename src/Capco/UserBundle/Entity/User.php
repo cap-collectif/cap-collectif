@@ -8,6 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
+
 namespace Capco\UserBundle\Entity;
 
 use Capco\AppBundle\Entity\Synthesis\SynthesisUserInterface;
@@ -860,13 +861,11 @@ class User extends BaseUser implements EncoderAwareInterface, SynthesisUserInter
 
     /**
      * @param mixed $vip
-     *
      * @return $this
      */
     public function setVip($vip)
     {
         $this->vip = $vip;
-
         return $this;
     }
 

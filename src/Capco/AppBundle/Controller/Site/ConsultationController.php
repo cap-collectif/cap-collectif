@@ -125,7 +125,7 @@ class ConsultationController extends Controller
 
     /**
      * @Route("/consultations/{consultationSlug}/consultation/{stepSlug}/opinions/{opinionTypeSlug}/{page}", name="app_consultation_show_opinions", requirements={"page" = "\d+"}, defaults={"page" = 1})
-     * @Route("/consultations/{consultationSlug}/consultation/{stepSlug}/opinions/{opinionTypeSlug}/{opinionsSort}/{page}", name="app_consultation_show_opinions_sorted", requirements={"page" = "\d+","opinionsSort" = "last|old|comments|favorable|votes|positions"}, defaults={"page" = 1})
+     * @Route("/consultations/{consultationSlug}/consultation/{stepSlug}/opinions/{opinionTypeSlug}/{opinionsSort}/{page}", name="app_consultation_show_opinions_sorted", requirements={"page" = "\d+","opinionsSort" = "date|comments|votes|positions"}, defaults={"page" = 1})
      * @ParamConverter("consultation", class="CapcoAppBundle:Consultation", options={"mapping": {"consultationSlug": "slug"}})
      * @ParamConverter("currentStep", class="CapcoAppBundle:ConsultationStep", options={"mapping": {"stepSlug": "slug"}})
      * @ParamConverter("opinionType", class="CapcoAppBundle:OpinionType", options={"mapping": {"opinionTypeSlug": "slug"}})
@@ -135,7 +135,7 @@ class ConsultationController extends Controller
      * @param ConsultationStep $currentStep
      * @param OpinionType      $opinionType
      * @param $page
-     * @param Request $request
+     * @param Request          $request
      * @param $opinionsSort
      *
      * @return array
@@ -169,6 +169,7 @@ class ConsultationController extends Controller
                     'stepSlug' => $currentStep->getSlug(),
                     'opinionTypeSlug' => $opinionType->getSlug(),
                     'opinionsSort' => $data['opinionsSort'],
+                    'allowedTypes' => $allowedTypes,
                 )));
             }
         } else {
@@ -177,7 +178,7 @@ class ConsultationController extends Controller
             ));
         }
 
-        $currentUrl = $this->generateUrl('app_consultation_show_opinions', ['consultationSlug' => $consultation->getSlug(), 'stepSlug' => $currentStep->getSlug(), 'opinionTypeSlug' => $opinionType->getSlug(), 'page' => $page]);
+        $currentUrl = $this->generateUrl('app_consultation_show_opinions', ['consultationSlug' => $consultation->getSlug(), 'stepSlug' => $currentStep->getSlug(), 'opinionTypeSlug' => $opinionType->getSlug()]);
         $opinions = $this->getDoctrine()->getRepository('CapcoAppBundle:Opinion')->getByOpinionTypeAndConsultationStepOrdered($currentStep, $opinionType->getId(), 10, $page, $filter);
         $nav = $this->get('capco.opinion_types.resolver')->getNavForStep($currentStep);
 

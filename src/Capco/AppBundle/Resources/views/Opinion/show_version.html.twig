@@ -1,13 +1,49 @@
-{% extends '@CapcoApp/Opinion/show.html.twig' %}
+{% extends '@CapcoApp/Consultation/show.html.twig' %}
 
 {% block canonical_link %}
-    {{ url('app_consultation_show_opinion_version', {'consultationSlug': consultation.slug, 'stepSlug': currentStep.slug, 'opinionTypeSlug': opinionType.slug, 'opinionSlug': opinion.slug, 'versionSlug': version.slug}) }}
+    {{ url('app_consultation_show_opinion', {'consultationSlug': consultation.slug, 'stepSlug': currentStep.slug, 'opinionTypeSlug': opinionType.slug, 'opinionSlug': opinion.slug}) }}
 {% endblock %}
 
 {% block title %}
-    {{ parent() }} - {{ version.title }}
+    {{ parent() }} - {{ opinion.title }}
 {% endblock %}
 
-{% block content %}
-   <div id="render-opinion-version" data-version="{{ version.id }}" data-opinion="{{ opinion.id }}" data-reporting-enabled={{ is_feature_enabled('reporting') ? "true" : "false" }}></div>
+{% block jumbotron %}{% endblock %}
+
+{% block body %}
+    <div class="container container--custom">
+        {% include '@CapcoApp/Consultation/show_title.html.twig' %}
+    </div>
+
+    <div class="container  container--custom">
+
+        {% if currentStep.isClosed %}
+            <div class="alert alert-info alert-dismissible  block" role="alert">
+                <p><strong>{{ 'consultation.show.alert.ended.title'|trans({}, 'CapcoAppBundle') }}</strong> {{ 'consultation.show.alert.ended.text'|trans({}, 'CapcoAppBundle') }}</p>
+            </div>
+        {% endif %}
+
+        {% if currentStep.isFuture %}
+            <div class="alert alert-info alert-dismissible  block" role="alert">
+                <p><strong>{{ 'consultation.show.alert.future.title'|trans({}, 'CapcoAppBundle') }}</strong> {{ 'consultation.show.alert.future.text'|trans({'%date%': '<strong>' ~ currentStep.startAt | localizeddate('long', 'none', app.request.locale) ~ '</strong>'}, 'CapcoAppBundle') | raw }}</p>
+            </div>
+        {% endif %}
+
+        <div class="row">
+
+            <div class="col-xs-12  col-sm-4  col-md-3  block--mobile">
+                {{ render(controller('CapcoAppBundle:Site/Consultation:showMeta', {'consultationSlug': consultation.slug, 'currentStepSlug': currentStep.slug})) }}
+                {% include 'CapcoAppBundle:Consultation:show_nav.html.twig' with {'nav': nav } %}
+            </div>
+
+            <div class="col-md-9 col-sm-8 col-xs-12">
+                <div id="render-opinion-version" data-version="{{ version.id }}" data-opinion="{{ opinion.id }}"></div>
+            </div>
+
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
 {% endblock %}

@@ -4,6 +4,8 @@ namespace Capco\AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
+use Capco\AppBundle\Traits\SluggableTitleTrait;
+use Capco\AppBundle\Traits\TimestampableTrait;
 use Capco\AppBundle\Traits\PositionableTrait;
 
 /**
@@ -79,13 +81,11 @@ class OpinionTypeAppendixType
 
     /**
      * @param mixed $appendixType
-     *
      * @return this
      */
     public function setAppendixType($appendixType)
     {
         $this->appendixType = $appendixType;
-
         return $this;
     }
 }

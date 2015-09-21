@@ -260,7 +260,7 @@ class OpinionController extends Controller
                             'flash_lock_error',
                             array(
                                 '%name%' => $this->escapeHtml($this->admin->toString($object)),
-                                '%link_start%' => '<a href="'.$this->admin->generateObjectUrl('edit', $object).'">',
+                                '%link_start%' => '<a href="' . $this->admin->generateObjectUrl('edit', $object) . '">',
                                 '%link_end%' => '</a>',
                             ),
                             'SonataAdminBundle'
@@ -441,10 +441,9 @@ class OpinionController extends Controller
                     'nodeDecorator' => function ($node) {
                         $url = $this->admin->generateUrl('create', ['opinion_type' => $node['id']]);
                         $levelIndicator = ' ';
-                        for ($i = 0; $i < $node['level']; ++$i) {
-                            $levelIndicator = '-'.$levelIndicator;
+                        for ($i = 0; $i < $node['level']; $i++) {
+                            $levelIndicator = '-' . $levelIndicator;
                         }
-
                         return
                             '<a href="'.$url.'">'
                                 .'<i class="fa fa-plus-circle"></i>'
@@ -490,7 +489,6 @@ class OpinionController extends Controller
         foreach ($newAppendices as $app) {
             $opinion->addAppendice($app);
         }
-
         return $opinion;
     }
 }

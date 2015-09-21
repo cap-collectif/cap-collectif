@@ -5,9 +5,6 @@
         <p class="opinion__user excerpt small">
             <a href="{{ path('capco_user_profile_show_all', {'slug': opinion.Author.slug}) }}">{{ opinion.Author.username }}</a>
             • {{ opinion.createdAt | localizeddate('medium', 'none', app.request.locale) }}
-            {% if opinion.createdAt != opinion.updatedAt %}
-                • {{ 'global.edited' | trans({'%date%': opinion.updatedAt | localizeddate('medium', 'none') }, 'CapcoAppBundle') }}
-            {% endif %}
             {% if opinion.pinned %}
                 <span class="label  label-info" data-toggle="tooltip" data-placement="top" data-container="body" title="{{ 'opinion.show.pinned.tooltip'|trans({}, 'CapcoAppBundle') }}">
                     {{ 'opinion.show.pinned.label'|trans({}, 'CapcoAppBundle') }}

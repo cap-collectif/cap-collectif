@@ -2,12 +2,10 @@ import UserAvatar from '../User/UserAvatar';
 import UserLink from '../User/UserLink';
 import OpinionArgumentButtons from './OpinionArgumentButtons';
 
-const FormattedDate = ReactIntl.FormattedDate;
-
 const OpinionArgumentItem = React.createClass({
   propTypes: {
     argument: React.PropTypes.object,
-    isReportingEnabled: React.PropTypes.bool.isRequired,
+    isReportingEnabled: React.PropTypes.bool,
   },
   mixins: [ReactIntl.IntlMixin],
 
@@ -16,7 +14,6 @@ const OpinionArgumentItem = React.createClass({
     const classes = classNames({
       'opinion': true,
       'opinion--argument': true,
-      'anchor-offset': true,
       'bg-vip': argument.author.vip,
     });
     return (
@@ -28,17 +25,13 @@ const OpinionArgumentItem = React.createClass({
               <UserLink user={argument.author} />
             </p>
             <p className="excerpt opinion__date">
-              <FormattedDate
-                value={argument.created_at}
-                day="numeric" month="long" year="numeric"
-                hour="numeric" minute="numeric"
-                />
+              {argument.created_at}
             </p>
           </div>
           <p className="opinion__text">
             { argument.body }
           </p>
-          <OpinionArgumentButtons argument={argument} isReportingEnabled={this.props.isReportingEnabled} />
+          <OpinionArgumentButtons argument={argument} />
         </div>
       </li>
     );

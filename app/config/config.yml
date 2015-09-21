@@ -57,6 +57,10 @@ twig:
             - 'CapcoAppBundle:Form:media_widgets.html.twig'
             - 'SonataCoreBundle:Form:datepicker.html.twig'
 
+ekino_new_relic:
+    enabled:          true
+    log_exceptions:   true
+
 doctrine:
     dbal:
         driver: "%database_driver%"

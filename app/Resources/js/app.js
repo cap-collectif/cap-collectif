@@ -31,14 +31,34 @@ AuthService
         );
     }
 
+    if ($('#render-opinion-versions').length) {
+        React.render(
+            <OpinionVersionsBox
+                opinionId={$('#render-opinion-versions').data("opinion")}
+                opinionBody={$('#render-opinion-versions').data("text")}
+                {...IntlData}
+            />,
+            document.getElementById('render-opinion-versions')
+        );
+    }
+
     if ($('#render-opinion').length) {
         React.render(
             <OpinionPage
                 opinionId={$('#render-opinion').data("opinion")}
-                isReportingEnabled={$('#render-opinion').data("reporting-enabled")}
                 {...IntlData}
             />,
             document.getElementById('render-opinion')
+        );
+    }
+
+    if ($('#render-opinion-sources').length) {
+        React.render(
+            <OpinionSourcesBox
+                opinionId={$('#render-opinion-sources').data("opinion")}
+                {...IntlData}
+            />,
+            document.getElementById('render-opinion-sources')
         );
     }
 
@@ -47,7 +67,6 @@ AuthService
             <OpinionPage
                 opinionId={$('#render-opinion-version').data('opinion')}
                 versionId={$('#render-opinion-version').data('version')}
-                isReportingEnabled={$('#render-opinion-version').data("reporting-enabled")}
                 {...IntlData}
             />,
             document.getElementById('render-opinion-version')

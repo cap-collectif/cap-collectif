@@ -11,14 +11,8 @@ const OpinionVersion = React.createClass({
 
   render() {
     const version = this.props.version;
-    const classes = classNames({
-      'opinion': true,
-      'block--bordered': true,
-      'has-chart': true,
-      'bg-vip': version.author.vip,
-    });
     return (
-      <li className={classes}>
+      <li className="opinion block--bordered has-chart">
         <Row>
           <Col xs={12} sm={8} md={9} lg={10}>
             <OpinionPreview opinion={version} />

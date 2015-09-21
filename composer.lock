@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "013f3a49a2e381c5aa6463ae94988a93",
+    "hash": "19b25c250485bed6530c65c8ee6bcea5",
     "packages": [
         {
             "name": "behat/transliterator",
@@ -1231,6 +1231,61 @@
                 "json"
             ],
             "time": "2014-12-29 20:25:20"
+        },
+        {
+            "name": "ekino/newrelic-bundle",
+            "version": "1.3.0",
+            "target-dir": "Ekino/Bundle/NewRelicBundle",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/ekino/EkinoNewRelicBundle.git",
+                "reference": "c151167253b2c07613812eb29b7fefdfe9c18987"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/ekino/EkinoNewRelicBundle/zipball/c151167253b2c07613812eb29b7fefdfe9c18987",
+                "reference": "c151167253b2c07613812eb29b7fefdfe9c18987",
+                "shasum": ""
+            },
+            "require-dev": {
+                "silex/silex": "~1.0",
+                "symfony/console": "~2.2",
+                "symfony/framework-bundle": "~2.2",
+                "twig/twig": "1.*"
+            },
+            "suggest": {
+                "sonata-project/block-bundle": "2.2.*@dev"
+            },
+            "type": "symfony-bundle",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.3-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Ekino\\Bundle\\NewRelicBundle": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Thomas Rabaix",
+                    "email": "thomas.rabaix@ekino.com",
+                    "homepage": "http://ekino.com"
+                }
+            ],
+            "description": "Integrate New Relic into Symfony2",
+            "homepage": "https://github.com/ekino/EkinoNewRelicBundle",
+            "keywords": [
+                "metric",
+                "monitoring",
+                "performance"
+            ],
+            "time": "2015-06-23 12:01:58"
         },
         {
             "name": "elao/web-profiler-extra-bundle",
@@ -3917,7 +3972,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sonata-project/SonataAdminBundle/zipball/1e0750a2333aa8ce6581adbde121958b05eb1a84",
+                "url": "https://api.github.com/repos/sonata-project/SonataAdminBundle/zipball/b60b81b3a7799a57faa83b655424922fe47b24d9",
                 "reference": "d47fa796b1614b49637837a1e8ef2e22433d0c33",
                 "shasum": ""
             },
@@ -4131,7 +4186,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sonata-project/SonataClassificationBundle/zipball/3e71fd4aea3fc1606eaca78a6540b7c67731cbc0",
+                "url": "https://api.github.com/repos/sonata-project/SonataClassificationBundle/zipball/ddf354c5367380dd4556c3b855cb48d375368c63",
                 "reference": "0c37ac24a83302d973825070f3b9ddf67e1d8599",
                 "shasum": ""
             },
@@ -5851,7 +5906,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/minkphp/Mink/zipball/79fde5a869feea51bc5ce2d138afb6095a4ed659",
+                "url": "https://api.github.com/repos/minkphp/Mink/zipball/6c129030ec2cc029905cf969a56ca8f087b2dfdf",
                 "reference": "d95155ed2bc5ae940d78be286727a3b712c2513e",
                 "shasum": ""
             },
@@ -5906,7 +5961,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/minkphp/MinkBrowserKitDriver/zipball/46c3e3b04c5e940485ea477fd86788085c11e872",
+                "url": "https://api.github.com/repos/minkphp/MinkBrowserKitDriver/zipball/cbda56b0f9fc1276977077494d739751440802f2",
                 "reference": "d8ced4bb313771ea4194c4a55b42673811ac237b",
                 "shasum": ""
             },
@@ -6020,7 +6075,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/minkphp/MinkSelenium2Driver/zipball/1a527cc2de40a409b0997bf886dfd05068acfb18",
+                "url": "https://api.github.com/repos/minkphp/MinkSelenium2Driver/zipball/42d20138275749c910df5d82affa59916a659f5c",
                 "reference": "3472eb89a0825e25ed83ec5b8f268702b1221c04",
                 "shasum": ""
             },

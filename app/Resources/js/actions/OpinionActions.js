@@ -67,14 +67,6 @@ export default {
     });
   },
 
-  addArgument: (opinion, data) => {
-    return Fetcher
-      .post(`/opinions/${opinion}/arguments`, data)
-      .then(() => {
-        return true;
-      });
-  },
-
   addVersionSource: (opinion, version, data) => {
     return Fetcher
     .post(`/opinions/${opinion}/versions/${version}/sources`, data)

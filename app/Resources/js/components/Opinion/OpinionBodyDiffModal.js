@@ -17,6 +17,14 @@ const OpinionBodyDiffModal = React.createClass({
     return { showModal: false };
   },
 
+  close() {
+    this.setState({ showModal: false });
+  },
+
+  open() {
+    this.setState({ showModal: true });
+  },
+
   render() {
     return (
       <span>
@@ -44,14 +52,6 @@ const OpinionBodyDiffModal = React.createClass({
         </Modal>
       </span>
     );
-  },
-
-  open() {
-    this.setState({ showModal: true });
-  },
-
-  close() {
-    this.setState({ showModal: false });
   },
 
 });

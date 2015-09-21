@@ -3,8 +3,8 @@
 namespace Capco\AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 use Capco\AppBundle\Traits\TimestampableTrait;
-use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * @ORM\Table(name="opinion_appendices")
@@ -37,18 +37,6 @@ class OpinionAppendix
      * @ORM\JoinColumn(name="opinion_id", referencedColumnName="id", nullable=false, onDelete="CASCADE")
      */
     private $opinion;
-
-    /**
-     * @var \DateTime
-     * @Gedmo\Timestampable(on="change", field={"body", "appendixType"})
-     * @ORM\Column(name="updated_at", type="datetime")
-     */
-    protected $updatedAt;
-
-    public function __construct()
-    {
-        $this->updatedAt = new \DateTime();
-    }
 
     public function __toString()
     {
@@ -91,7 +79,6 @@ class OpinionAppendix
     public function setAppendixType(AppendixType $appendixType)
     {
         $this->appendixType = $appendixType;
-
         return $this;
     }
 
@@ -103,7 +90,6 @@ class OpinionAppendix
     public function setOpinion(Opinion $opinion)
     {
         $this->opinion = $opinion;
-
         return $this;
     }
 }

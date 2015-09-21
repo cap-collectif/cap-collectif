@@ -41,8 +41,7 @@ Feature: Posts comments
           "has_user_reported": @boolean@,
           "has_user_voted": @boolean@,
           "can_edit": @boolean@
-        },
-        @...@
+        }
       ],
       "is_reporting_enabled": @boolean@
     }

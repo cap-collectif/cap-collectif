@@ -17,7 +17,7 @@ trait SluggableTitleTrait
     protected $title;
 
     /**
-     * @Gedmo\Slug(fields={"title"}, updatable=false, unique=true)
+     * @Gedmo\Slug(fields={"title"})
      * @ORM\Column(length=255)
      */
     protected $slug;

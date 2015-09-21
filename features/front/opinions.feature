@@ -83,7 +83,7 @@ Feature: Opinions
       | opinionTypeSlug  | enjeux                           |
       | opinionSlug      | opinion-3                        |
     And I wait 5 seconds
-    Then I should not see "Modifier" in the ".opinion__description .opinion__buttons" element
+    Then I should not see "Modifier" in the "#render-opinion" element
 
 #  @javascript
 #  Scenario: Author of an opinion try to update without checking the confirm checkbox

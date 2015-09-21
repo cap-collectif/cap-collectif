@@ -82,8 +82,8 @@ const CommentSection = React.createClass({
   renderFilter() {
     if (this.state.count > 1) {
       return (
-        <Col xsOffset={2} sm={4} className="hidden-xs" style={{marginTop: '30px', marginBottom: '20px'}}>
-          <select ref="filter" className="form-control" value={this.state.filter} onChange={() => this.updateSelectedValue()}>
+        <Col xsOffset={2} sm={4} className="hidden-xs">
+          <select ref="filter" className="h2 form-control" value={this.state.filter} onChange={() => this.updateSelectedValue()}>
             <option value="popular">{this.getIntlMessage('global.filter_popular')}</option>
             <option value="last">{this.getIntlMessage('global.filter_last')}</option>
             <option value="old">{this.getIntlMessage('global.filter_old')}</option>

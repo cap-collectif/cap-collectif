@@ -4,7 +4,6 @@ namespace Capco\AppBundle\Repository;
 
 use Capco\AppBundle\Entity\ConsultationStep;
 use Capco\AppBundle\Entity\Opinion;
-use Capco\AppBundle\Entity\OpinionVersion;
 use Doctrine\ORM\EntityRepository;
 
 /**
@@ -15,7 +14,7 @@ use Doctrine\ORM\EntityRepository;
  */
 class SourceRepository extends EntityRepository
 {
-    public function getByOpinion(Opinion $opinion, $offset, $limit, $filter)
+    public function getOneByOpinion(Opinion $opinion, $offset, $limit, $filter)
     {
         $qb = $this->getIsEnabledQueryBuilder()
             ->addSelect('ca', 'o', 'aut', 'm', 'media')
@@ -39,37 +38,6 @@ class SourceRepository extends EntityRepository
 
         if ($filter === 'popular') {
             $qb->addOrderBy('s.voteCount', 'DESC');
-            $qb->addOrderBy('s.updatedAt', 'DESC');
-        }
-
-        return $qb->getQuery()->getResult();
-    }
-
-    public function getByOpinionVersion(OpinionVersion $version, $offset, $limit, $filter)
-    {
-        $qb = $this->getIsEnabledQueryBuilder()
-            ->addSelect('ca', 'o', 'aut', 'm', 'media')
-            ->leftJoin('s.Category', 'ca')
-            ->leftJoin('s.Media', 'media')
-            ->leftJoin('s.Opinion', 'o')
-            ->leftJoin('s.Author', 'aut')
-            ->leftJoin('aut.Media', 'm')
-            ->andWhere('s.isTrashed = false')
-            ->andWhere('s.opinionVersion = :version')
-            ->setParameter('version', $version)
-        ;
-
-        if ($filter === 'old') {
-            $qb->addOrderBy('s.updatedAt', 'ASC');
-        }
-
-        if ($filter === 'last') {
-            $qb->addOrderBy('s.updatedAt', 'DESC');
-        }
-
-        if ($filter === 'popular') {
-            $qb->addOrderBy('s.voteCount', 'DESC');
-            $qb->addOrderBy('s.updatedAt', 'DESC');
         }
 
         return $qb->getQuery()->getResult();

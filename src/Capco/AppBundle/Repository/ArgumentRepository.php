@@ -23,96 +23,27 @@ class ArgumentRepository extends EntityRepository
      *
      * @return array
      */
-    public function getByTypeAndOpinionOrderedJoinUserReports($opinion, $type = null, $argumentSort = null, $user = null)
+    public function getByTypeAndOpinionOrderedJoinUserReports($type, $opinion, $argumentSort = null, $user = null)
     {
         $qb = $this->getIsEnabledQueryBuilder()
-            ->addSelect('aut', 'm', 'v')
+            ->addSelect('aut', 'm', 'v', 'r')
             ->leftJoin('a.Author', 'aut')
             ->leftJoin('aut.Media', 'm')
             ->leftJoin('a.votes', 'v')
+            ->leftJoin('a.Reports', 'r', 'WITH', 'r.Reporter =  :user')
             ->andWhere('a.isTrashed = :notTrashed')
             ->andWhere('a.opinion = :opinion')
+            ->andWhere('a.type = :type')
             ->setParameter('notTrashed', false)
             ->setParameter('opinion', $opinion)
-        ;
-
-        if ($type !== null) {
-            $qb
-                ->andWhere('a.type = :type')
-                ->setParameter('type', $type)
-            ;
-        }
-
-        if ($user !== null) {
-            $qb
-                ->addSelect('r')
-                ->leftJoin('a.Reports', 'r', 'WITH', 'r.Reporter =  :user')
-                ->setParameter('user', $user)
-            ;
-        }
+            ->setParameter('type', $type)
+            ->setParameter('user', $user);
 
         if (null != $argumentSort) {
-            if ($argumentSort == 'popular') {
+            if ($argumentSort == 'popularity') {
                 $qb->orderBy('a.voteCount', 'DESC');
-            } elseif ($argumentSort == 'last') {
+            } elseif ($argumentSort == 'date') {
                 $qb->orderBy('a.updatedAt', 'DESC');
-            } elseif ($argumentSort == 'old') {
-                $qb->orderBy('a.updatedAt', 'ASC');
-            }
-        }
-
-        $qb->addOrderBy('a.updatedAt', 'DESC');
-
-        return $qb->getQuery()
-            ->getResult();
-    }
-
-    /**
-     * Get all enabled arguments by type and opinion version, sorted by argumentSort.
-     */
-
-    /**
-     * @param $type
-     * @param $opinion
-     * @param null $argumentSort
-     *
-     * @return array
-     */
-    public function getByTypeAndOpinionVersionOrderedJoinUserReports($version, $type = null, $argumentSort = null, $user = null)
-    {
-        $qb = $this->getIsEnabledQueryBuilder()
-            ->addSelect('aut', 'm', 'v')
-            ->leftJoin('a.Author', 'aut')
-            ->leftJoin('aut.Media', 'm')
-            ->leftJoin('a.votes', 'v')
-            ->andWhere('a.isTrashed = :notTrashed')
-            ->andWhere('a.opinionVersion = :version')
-            ->setParameter('notTrashed', false)
-            ->setParameter('version', $version)
-        ;
-
-        if ($type !== null) {
-            $qb
-                ->andWhere('a.type = :type')
-                ->setParameter('type', $type)
-            ;
-        }
-
-        if ($user !== null) {
-            $qb
-                ->addSelect('r')
-                ->leftJoin('a.Reports', 'r', 'WITH', 'r.Reporter =  :user')
-                ->setParameter('user', $user)
-            ;
-        }
-
-        if (null != $argumentSort) {
-            if ($argumentSort == 'popular') {
-                $qb->orderBy('a.voteCount', 'DESC');
-            } elseif ($argumentSort == 'last') {
-                $qb->orderBy('a.updatedAt', 'DESC');
-            } elseif ($argumentSort == 'old') {
-                $qb->orderBy('a.updatedAt', 'ASC');
             }
         }
 

@@ -7,12 +7,12 @@ Feature: Source
       | consultationSlug | croissance-innovation-disruption |
       | stepSlug         | collecte-des-avis                |
       | opinionTypeSlug  | causes                           |
-      | opinionSlug      | opinion-33                       |
+      | opinionSlug      | opinion-2                        |
     And I wait 3 seconds
     And I go on the sources tab
     And I should see "Aucune source proposée"
+    And I wait 3 seconds
     When I want to add a source
-    And I wait 5 seconds
     And I fill in the following:
     | sourceLink   | http://www.google.fr     |
     | sourceTitle  | Titre de la source       |
@@ -30,18 +30,17 @@ Feature: Source
       | stepSlug           | collecte-des-avis-pour-une-meilleur-strategie         |
       | opinionTypeSlug    | causes                                                |
       | opinionSlug        | opinion-51                                            |
-    And I wait 3 seconds
     And I go on the sources tab
     Then I should not see "Proposer une source"
 
  @javascript @database
   Scenario: Can vote for a source
-    Given I am logged in as admin
+    Given I am logged in as user
     And I visited "opinion page" with:
       | consultationSlug | croissance-innovation-disruption |
       | stepSlug         | collecte-des-avis                |
-      | opinionTypeSlug  | causes                           |
-      | opinionSlug      | opinion-2                        |
+      | opinionTypeSlug  | problemes                        |
+      | opinionSlug      | opinion-1                        |
     And I wait 3 seconds
     And I go on the sources tab
     When I vote for the first source
@@ -56,12 +55,12 @@ Feature: Source
     And I visited "opinion page" with:
       | consultationSlug | croissance-innovation-disruption |
       | stepSlug         | collecte-des-avis                |
-      | opinionTypeSlug  | causes                           |
-      | opinionSlug      | opinion-2                        |
+      | opinionTypeSlug  | problemes                        |
+      | opinionSlug      | opinion-1                        |
     And I wait 3 seconds
     And I go on the sources tab
     And The first source vote counter should be "1"
-    When I click the "#source-1 .source__btn--edit" element
+    When I click the "#render-opinion-sources .btn-dark-gray" element
     And I wait 3 seconds
     And I check "capco_app_source_confirm"
     And I press "Modifier"
@@ -77,11 +76,11 @@ Feature: Source
     And I visited "opinion page" with:
       | consultationSlug | croissance-innovation-disruption |
       | stepSlug         | collecte-des-avis                |
-      | opinionTypeSlug  | causes                           |
-      | opinionSlug      | opinion-2                        |
+      | opinionTypeSlug  | problemes                        |
+      | opinionSlug      | opinion-1                        |
     And I wait 3 seconds
     And I go on the sources tab
-    When I click the "#source-1 .source__btn--edit" element
+    When I click the "#render-opinion-sources .btn-dark-gray" element
     And I wait 3 seconds
     And I fill in the following:
       | capco_app_source_body      | Je modifie ma source !   |
@@ -95,9 +94,8 @@ Feature: Source
     And I visited "opinion page" with:
       | consultationSlug | croissance-innovation-disruption |
       | stepSlug         | collecte-des-avis                |
-      | opinionTypeSlug  | causes                           |
-      | opinionSlug      | opinion-2                        |
-    And I wait 3 seconds
+      | opinionTypeSlug  | problemes                        |
+      | opinionSlug      | opinion-1                        |
     And I go on the sources tab
-    Then I should not see "Modifier" in the "#source-1" element
+    Then I should not see "Modifier" in the "#render-opinion-sources" element
 

@@ -16,14 +16,15 @@ class OpinionPage extends Page
 
     protected $elements = array(
         // Arguments
-        'Argument yes field' => '#argument-form--yes textarea',
-        'Argument yes button' => '#argument-form--yes button',
-        'Argument no field' => '#argument-form--no textarea',
-        'Argument no button' => '#argument-form--no button',
-        'first source vote count' => '#sources-list li:first-child .opinion__votes-nb',
-        'Vote first source' => '#sources-list li:first-child .source__btn--vote',
-        'sources tab' => '#opinion__sources___tab',
-        'source add' => '#source-form__add',
+        'Argument yes field' => '#argyes-input',
+        'Argument yes buttons' => '.argyes-btns',
+        'Argument no field' => '#argno-input',
+        'Argument no buttons' => '.argno-btns',
+        'Sources list' => '.panel--sources .panel-heading',
+        'first source vote count' => '#render-opinion-sources li:first-child .opinion__votes-nb',
+        'Vote first source' => '#render-opinion-sources li:first-child .btn',
+        'sources tab' => '#sourcesTab',
+        'source add' => '#addSourceButton',
     );
 
     public function clickSourcesTab()
@@ -39,7 +40,7 @@ class OpinionPage extends Page
     public function submitArgument($type, $text)
     {
         $field = $this->getElement('Argument '.$type.' field');
-        $button = $this->getElement('Argument '.$type.' button');
+        $button = $this->getElement('Argument '.$type.' buttons')->findButton('Publier');
         $field->setValue($text);
         $button->press();
     }

@@ -4,13 +4,12 @@ global:
     close: Fermer
     already_enabled: Votre compte a déjà été activé
   capco_powered: Propulsé par %startlink%Cap-Collectif%endlink%
-  edited: Édité le %date%
-  form:
-      mandatory: Ce champ est obligatoire.
   menu:
     title: Menu
     see_more: Plus
     search: Rechercher
+  form:
+    mandatory: Ce champ est obligatoire.
   helper:
     typo: Vouliez-vous dire
 
@@ -192,10 +191,8 @@ idea:
     all_themes: Tous les thèmes
     no_result:  Il n'y a aucune idée.
   sort:
-    last: Les plus récentes
-    old: Les plus anciennes
-    popular: Les plus soutenues
-    comments: Les plus commentées
+    created_at: Date de création
+    popularity: Popularité
   none: Il n'y a aucune idée pour le moment. Soyez le premier à %startlink%proposer une idée%endlink%.
   none_no_create: Il n'y a aucune idée pour le moment.
   error:
@@ -397,8 +394,7 @@ argument:
     linked_proposition: Lié à la proposition :
   sort:
     date: Les plus récents
-    oldest: Les plus anciens
-    popularity: Les plus populaires
+    popularity: Les plus votés
     label: Tri
   none: Il n' y a pas d'arguments.
   vote:
@@ -541,11 +537,9 @@ opinion:
     submit: Signaler
     reported: Signalé
   sort:
-    positions: Ordre de publication
-    last: Les plus récents
-    old: Les plus anciens
+    positions: Tri par publication
+    date: Les plus récents
     votes: Les plus votés
-    favorable: Les plus favorables
     comments: Les plus commentés
     label: Trier par
   error:
@@ -842,7 +836,7 @@ comment:
     confirm: En modifiant mon commentaire, je comprends que les votes qui lui sont associés seront réinitialisés.
   sort:
     date: Les plus récents
-    popularity: Les plus populaires
+    popularity: Les plus votés
     label: Trier par
   none: Il n'y a pas de commentaires.
   vote:

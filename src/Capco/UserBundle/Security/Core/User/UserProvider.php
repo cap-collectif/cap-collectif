@@ -12,7 +12,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
 class UserProvider extends FOSUBUserProvider
 {
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function connect(UserInterface $user, UserResponseInterface $response)
     {
@@ -77,7 +77,7 @@ class UserProvider extends FOSUBUserProvider
         $key = '';
         $keys = array_merge(range(0, 9), range('a', 'Z'));
 
-        for ($i = 0; $i < $length; ++$i) {
+        for ($i = 0; $i < $length; $i++) {
             $key .= $keys[array_rand($keys)];
         }
 

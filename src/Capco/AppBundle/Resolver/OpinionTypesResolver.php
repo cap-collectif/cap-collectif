@@ -7,6 +7,7 @@ use Capco\AppBundle\Entity\ConsultationType;
 use Capco\AppBundle\Entity\OpinionType;
 use Capco\AppBundle\Repository\OpinionRepository;
 use Capco\AppBundle\Repository\OpinionTypeRepository;
+use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Routing\Router;
 
 class OpinionTypesResolver
@@ -38,9 +39,8 @@ class OpinionTypesResolver
             'rootOpen' => '<ul class="nav">',
             'rootClose' => '</ul>',
             'nodeDecorator' => function ($node) use ($url) {
-                $link = $url.'#opinion-type--'.$node['slug'];
+                $link = $url. '#opinion-type--'. $node['slug'];
                 $levelClass = 'nav--level-'.$node['level'];
-
                 return
                     '<a class='.$levelClass.' href="'.$link.'">'
                     .'<i class="fa fa-plus-circle"></i>'
@@ -73,7 +73,6 @@ class OpinionTypesResolver
                 $this->opinionTypeRepo->childrenHierarchy($root, false, $options, true)
             );
         }
-
         return $opinionTypes;
     }
 
@@ -98,6 +97,7 @@ class OpinionTypesResolver
         };
 
         return $build($tree);
+
     }
 
     public function getAllForConsultationType(ConsultationType $ct)
@@ -113,7 +113,6 @@ class OpinionTypesResolver
                 $this->opinionTypeRepo->getChildren($root, false, 'position', 'asc', true)
             );
         }
-
         return $opinionTypes;
     }
 
@@ -131,7 +130,6 @@ class OpinionTypesResolver
                 break;
             }
         }
-
         return $allowed;
     }
 
@@ -140,15 +138,14 @@ class OpinionTypesResolver
         if (!$step->getConsultationType()) {
             return false;
         }
-
         return $this->consultationTypeAllowType($step->getConsultationType(), $type);
+
     }
 
     public function getMaximumPositionByOpinionTypeAndStep($opinionType, ConsultationStep $step)
     {
         dump($this->opinionRepo
             ->getMaxPositionByOpinionTypeAndConsultationStep($step, $opinionType));
-
         return $this->opinionRepo
             ->getMaxPositionByOpinionTypeAndConsultationStep($step, $opinionType)
         ;

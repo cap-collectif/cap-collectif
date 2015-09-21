@@ -47,7 +47,7 @@ const OpinionArgumentForm = React.createClass({
     return (
       <div className="opinion__body box">
         <div className="opinion__data">
-          <form id={'argument-form--' + this.props.type} ref="form">
+          <form ref="form">
             <LoginOverlay children={
               <div className={'form-group ' + this.getGroupStyle('body')}>
                 <label htmlFor="body" className="control-label h5 sr-only">
@@ -97,36 +97,18 @@ const OpinionArgumentForm = React.createClass({
         type: this.props.type === 'yes' || this.props.type === 'simple' ? 1 : 0,
       };
 
-      if (this.isVersion()) {
-        OpinionActions
-          .addVersionArgument(this.props.opinion.parent.id, this.props.opinion.id, data)
-          .then(() => {
-            this.setState(this.getInitialState());
-            autosize.destroy(React.findDOMNode(this.refs.body));
-            location.reload(); // TODO add realtime
-            return true;
-          })
-          .catch(() => {
-            this.setState({isSubmitting: false, submitted: false});
-          });
-      } else {
-        OpinionActions
-          .addArgument(this.props.opinion.id, data)
-          .then(() => {
-            this.setState(this.getInitialState());
-            autosize.destroy(React.findDOMNode(this.refs.body));
-            location.reload(); // TODO add realtime
-            return true;
-          })
-          .catch(() => {
-            this.setState({isSubmitting: false, submitted: false});
-          });
-      }
+      OpinionActions
+      .addVersionArgument(this.props.opinion.parent.id, this.props.opinion.id, data)
+      .then(() => {
+        this.setState(this.getInitialState());
+        autosize.destroy(React.findDOMNode(this.refs.body));
+        location.reload(); // TODO add realtime
+        return true;
+      })
+      .catch(() => {
+        this.setState({isSubmitting: false, submitted: false});
+      });
     });
-  },
-
-  isVersion() {
-    return this.props.opinion.parent ? true : false;
   },
 
 });

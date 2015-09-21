@@ -51,6 +51,16 @@ RUN \
   rm -f $ES_PKG_NAME.tar.gz && \
   mv /$ES_PKG_NAME /etc/elasticsearch
 
+# Install New Relic Agent
+RUN \
+    echo "deb http://apt.newrelic.com/debian/ newrelic non-free" >> /etc/apt/sources.list.d/newrelic.list && \
+    wget -O - https://download.newrelic.com/548C16BF.gpg | apt-key add - && \
+    apt-get update && \
+    apt-get install -y newrelic-php5 && \
+    # newrelic-install install && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /etc/apt/sources.list.d/*
+
 # Update npm - Install bower
 RUN npm install -g npm && \
     npm install -g bower

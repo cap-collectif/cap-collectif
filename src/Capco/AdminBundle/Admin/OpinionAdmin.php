@@ -178,7 +178,7 @@ class OpinionAdmin extends Admin
                 'by_reference' => false,
                 'required' => false,
                 'btn_add' => false,
-                'type_options' => ['delete' => false, 'btn_add' => false],
+                'type_options' => ['delete' => false, 'btn_add' => false,],
                 'attr' => ['class' => $classname],
             ))
             ->end()
@@ -304,6 +304,7 @@ class OpinionAdmin extends Admin
             ->setParameter(0, $opinionTypeId)
             ->getQuery()
             ->getOneOrNullResult();
+        ;
 
         if (!$root) {
             throw new \Exception('Invalid opinion type.');
@@ -341,8 +342,7 @@ class OpinionAdmin extends Admin
         return parent::getTemplate($name);
     }
 
-    public function prePersist($opinion)
-    {
+    public function prePersist($opinion) {
         if (!$opinion->getOpinionType()) {
             $opinionType = $this->getConfigurationPool()
                 ->getContainer()
@@ -350,6 +350,7 @@ class OpinionAdmin extends Admin
                 ->getRepository('CapcoAppBundle:OpinionType')
                 ->find($this->getPersistentParameters('opinion_type'));
             $opinion->setOpinionType($opinionType);
+
         }
     }
 
@@ -360,6 +361,8 @@ class OpinionAdmin extends Admin
 
     public function getBatchActions()
     {
-        return;
+        return null;
     }
+
+
 }

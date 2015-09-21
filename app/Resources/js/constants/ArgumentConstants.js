@@ -1,5 +1,0 @@
-export default {
-  COMMENT_SYSTEM_NONE: 0,
-  COMMENT_SYSTEM_SIMPLE: 1,
-  COMMENT_SYSTEM_BOTH: 2,
-};

@@ -226,7 +226,7 @@ class IdeaController extends Controller
      *
      * @return array
      */
-    public function indexAction(Request $request, $page, $theme = null, $sort = 'last', $term = null)
+    public function indexAction(Request $request, $page, $theme = null, $sort = null, $term = null)
     {
         $em = $this->getDoctrine()->getManager();
         $currentUrl = $this->generateUrl('app_idea');

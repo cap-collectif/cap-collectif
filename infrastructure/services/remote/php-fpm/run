@@ -10,6 +10,9 @@ chown -R capco:capco /var/www/app/cache
 chown -R capco:capco /var/www/app/logs
 chown -R capco:capco /var/www/web/media
 
+sed -i 's/newrelic.appname = "PHP Application"/newrelic.appname = '"$NR_INSTALL_NAME"'/' /etc/php5/fpm/conf.d/newrelic.ini
+sed -i 's/newrelic.license = "REPLACE_WITH_REAL_KEY"/newrelic.license = '***REMOVED***'/' /etc/php5/fpm/conf.d/newrelic.ini
+
 su capco <<'EOF'
 sleep 10
 cd       /var/www

@@ -69,7 +69,7 @@ class OpinionType
     private $subtitle;
 
     /**
-     * @Gedmo\Slug(fields={"title", "subtitle"}, updatable=false)
+     * @Gedmo\Slug(fields={"title", "subtitle"})
      * @ORM\Column(length=255)
      */
     private $slug;
@@ -544,7 +544,7 @@ class OpinionType
     }
 
     /**
-     * @return bool
+     * @return boolean
      */
     public function isSourceable()
     {
@@ -552,7 +552,7 @@ class OpinionType
     }
 
     /**
-     * @param bool $sourceable
+     * @param boolean $sourceable
      */
     public function setSourceable($sourceable)
     {
@@ -691,7 +691,6 @@ class OpinionType
         foreach ($this->appendixTypes as $otat) {
             $types->add($otat->getAppendixType());
         }
-
         return $types;
     }
 }

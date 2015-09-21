@@ -166,7 +166,7 @@ class OpinionRepository extends EntityRepository
      * @return Paginator
      * @return mixed
      */
-    public function getByOpinionTypeAndConsultationStepOrdered(ConsultationStep $step, $opinionTypeId, $nbByPage = 10, $page = 1, $opinionsSort = 'last')
+    public function getByOpinionTypeAndConsultationStepOrdered(ConsultationStep $step, $opinionTypeId, $nbByPage = 10, $page = 1, $opinionsSort = null)
     {
         if ((int) $page < 1) {
             throw new \InvalidArgumentException(sprintf(
@@ -190,25 +190,14 @@ class OpinionRepository extends EntityRepository
         ;
 
         if ($opinionsSort) {
-            if ($opinionsSort == 'last') {
-                $qb->addOrderBy('o.updatedAt', 'DESC');
-                $qb->addOrderBy('o.voteCountOk', 'DESC');
-            } elseif ($opinionsSort == 'old') {
-                $qb->addOrderBy('o.updatedAt', 'ASC');
-                $qb->addOrderBy('o.voteCountOk', 'DESC');
-            } elseif ($opinionsSort == 'favorable') {
-                $qb->addOrderBy('o.voteCountOk', 'DESC');
-                $qb->addOrderBy('o.voteCountNok', 'ASC');
+            if ($opinionsSort == 'date') {
                 $qb->addOrderBy('o.updatedAt', 'DESC');
             } elseif ($opinionsSort == 'votes') {
                 $qb->addOrderBy('vnb', 'DESC');
-                $qb->addOrderBy('o.updatedAt', 'DESC');
             } elseif ($opinionsSort == 'comments') {
                 $qb->addOrderBy('o.argumentsCount', 'DESC');
-                $qb->addOrderBy('o.updatedAt', 'DESC');
             } elseif ($opinionsSort == 'positions') {
                 $qb->addOrderBy('o.position', 'ASC');
-                $qb->addOrderBy('o.updatedAt', 'DESC');
             }
         }
 
@@ -236,6 +225,7 @@ class OpinionRepository extends EntityRepository
         ;
 
         return $qb->getQuery()->getSingleScalarResult();
+
     }
 
     /**

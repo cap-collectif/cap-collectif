@@ -37,7 +37,7 @@ class Video
     private $title;
 
     /**
-     * @Gedmo\Slug(fields={"title"}, updatable=false)
+     * @Gedmo\Slug(fields={"title"})
      * @ORM\Column(length=255,  nullable=true)
      */
     private $slug;

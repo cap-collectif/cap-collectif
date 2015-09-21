@@ -5,6 +5,7 @@ namespace Capco\AppBundle\Behat;
 use Behat\Gherkin\Node\PyStringNode;
 use Behat\Symfony2Extension\Context\KernelDictionary;
 use Behat\Symfony2Extension\Context\KernelAwareContext;
+
 use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\Console\Input\StringInput;
@@ -34,7 +35,7 @@ class CommandContext implements KernelAwareContext
 
         if (null === $commandParameters) {
             throw new \InvalidArgumentException(
-                'PyStringNode could not be converted to json.'
+                "PyStringNode could not be converted to json."
             );
         }
 
@@ -63,6 +64,7 @@ class CommandContext implements KernelAwareContext
         );
     }
 
+
     private function run($command, $parameters = [])
     {
         $application = new Application($this->kernel);
@@ -88,4 +90,5 @@ class CommandContext implements KernelAwareContext
 
         $this->output = $output;
     }
+
 }

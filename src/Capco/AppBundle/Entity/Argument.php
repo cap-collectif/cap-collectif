@@ -33,6 +33,11 @@ class Argument
         self::TYPE_SIMPLE => 'argument.show.type.simple',
     ];
 
+    public static $sortCriterias = [
+        'date' => 'argument.sort.date',
+        'popularity' => 'argument.sort.popularity',
+    ];
+
     /**
      * @var int
      *
@@ -576,6 +581,7 @@ class Argument
         }
 
         return $this->opinion;
+
     }
 
     public function getLinkedOpinion()

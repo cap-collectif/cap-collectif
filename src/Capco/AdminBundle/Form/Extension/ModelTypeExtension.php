@@ -12,10 +12,11 @@ class ModelTypeExtension extends AbstractTypeExtension
 {
     protected $em;
 
-    public function __construct(EntityManager $em)
+    function __construct(EntityManager $em)
     {
         $this->em = $em;
     }
+
 
     public function configureOptions(OptionsResolver $resolver)
     {
@@ -42,8 +43,11 @@ class ModelTypeExtension extends AbstractTypeExtension
         parent::buildView($view, $form, $options);
     }
 
+
     public function getExtendedType()
     {
         return 'sonata_type_model';
     }
+
+
 }

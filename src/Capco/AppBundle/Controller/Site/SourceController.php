@@ -5,15 +5,80 @@ namespace Capco\AppBundle\Controller\Site;
 use Capco\AppBundle\Entity\Consultation;
 use Capco\AppBundle\Entity\Opinion;
 use Capco\AppBundle\Entity\Source;
+use Capco\AppBundle\Entity\SourceVote;
 use Capco\AppBundle\Form\SourcesType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
+use Symfony\Component\Form\Form;
+use Capco\AppBundle\CapcoAppBundleEvents;
+use Capco\AppBundle\Event\AbstractVoteChangedEvent;
 
 class SourceController extends Controller
 {
+    /**
+     * @Route("/consultations/{consultationSlug}/consultation/{stepSlug}/opinions/{opinionTypeSlug}/{opinionSlug}/sources/add", name="app_new_source")
+     *
+     * @param $consultationSlug
+     * @param $stepSlug
+     * @param $opinionTypeSlug
+     * @param $opinionSlug
+     * @param $request
+     * @Template("CapcoAppBundle:Source:create.html.twig")
+     *
+     * @return array
+     */
+    public function createSourceAction($consultationSlug, $stepSlug, $opinionTypeSlug, $opinionSlug, Request $request)
+    {
+        if (!$this->get('security.authorization_checker')->isGranted('ROLE_USER')) {
+            throw new AccessDeniedException($this->get('translator')->trans('error.access_restricted', array(), 'CapcoAppBundle'));
+        }
+
+        $opinion = $this->getDoctrine()->getRepository('CapcoAppBundle:Opinion')->getOneBySlug($opinionSlug);
+
+        if (!$opinion) {
+            throw $this->createNotFoundException($this->get('translator')->trans('opinion.error.not_found', array(), 'CapcoAppBundle'));
+        }
+
+        if (!$opinion->canContribute() || !$opinion->canAddSources()) {
+            throw new AccessDeniedException($this->get('translator')->trans('opinion.error.no_contribute', array(), 'CapcoAppBundle'));
+        }
+
+        $opinionType = $opinion->getOpinionType();
+        $currentStep = $opinion->getStep();
+        $consultation = $currentStep->getConsultation();
+
+        $source = new Source();
+        $source->setAuthor($this->getUser());
+
+        $form = $this->createForm(new SourcesType('create'), $source);
+
+        if ($request->getMethod() == 'POST') {
+            $form->handleRequest($request);
+
+            if ($form->isValid()) {
+                $source->setOpinion($opinion);
+                $em = $this->getDoctrine()->getManager();
+                $em->persist($source);
+                $em->flush();
+
+                $this->get('session')->getFlashBag()->add('success', $this->get('translator')->trans('source.create.success'));
+
+                return $this->redirect($this->generateUrl('app_consultation_show_opinion', ['consultationSlug' => $consultation->getSlug(), 'stepSlug' => $currentStep->getSlug(), 'opinionTypeSlug' => $opinionType->getSlug(), 'opinionSlug' => $opinion->getSlug()]).'#source'.$source->getId());
+            } else {
+                $this->get('session')->getFlashBag()->add('danger', $this->get('translator')->trans('source.create.error'));
+            }
+        }
+
+        return [
+            'opinion' => $opinion,
+            'form' => $form->createView(),
+            'buttonActive' => $form->get('type')->getData(),
+        ];
+    }
+
     /**
      * @Route("/consultations/{consultationSlug}/consultation/{stepSlug}/opinions/{opinionTypeSlug}/{opinionSlug}/sources/{sourceSlug}/delete", name="app_delete_source")
      *
@@ -162,5 +227,87 @@ class SourceController extends Controller
             'form' => $form->createView(),
             'buttonActive' => $form->get('type')->getData(),
         ];
+    }
+
+    /**
+     * @Route("/secure/consultations/{consultationSlug}/consultation/{stepSlug}/opinions/{opinionTypeSlug}/{opinionSlug}/sources/{sourceSlug}/vote", name="app_consultation_vote_source")
+     *
+     * @param consultationSlug
+     * @param $stepSlug
+     * @param $opinionTypeSlug
+     * @param $opinionSlug
+     * @param $sourceSlug
+     * @param $request
+     *
+     * @return array
+     */
+    public function voteOnSourceAction($consultationSlug, $stepSlug, $opinionTypeSlug, $opinionSlug, $sourceSlug, Request $request)
+    {
+        if (false === $this->get('security.authorization_checker')->isGranted('ROLE_USER')) {
+            throw new AccessDeniedException($this->get('translator')->trans('error.access_restricted', array(), 'CapcoAppBundle'));
+        }
+
+        $source = $this->getDoctrine()->getRepository('CapcoAppBundle:Source')->getOneBySlug($sourceSlug);
+
+        if ($source == null) {
+            throw $this->createNotFoundException($this->get('translator')->trans('source.error.not_found', array(), 'CapcoAppBundle'));
+        }
+
+        if (false == $source->canContribute()) {
+            throw new AccessDeniedException($this->get('translator')->trans('source.error.no_contribute', array(), 'CapcoAppBundle'));
+        }
+
+        $opinion = $source->getOpinion();
+        $opinionType = $opinion->getOpinionType();
+        $currentStep = $opinion->getStep();
+        $consultation = $currentStep->getConsultation();
+
+        $user = $this->getUser();
+
+        if ($request->getMethod() == 'POST') {
+            if ($this->isCsrfTokenValid('source_vote', $request->get('_csrf_token'))) {
+                $em = $this->getDoctrine()->getManager();
+
+                $sourceVote = new SourceVote();
+                $sourceVote->setUser($user);
+
+                $userVote = $em->getRepository('CapcoAppBundle:SourceVote')->findOneBy(array(
+                    'user' => $user,
+                    'source' => $source,
+                ));
+
+                if ($userVote != null) {
+                    $sourceVote = $userVote;
+                }
+
+                if ($userVote == null) {
+                    $sourceVote->setSource($source);
+                    $em->persist($sourceVote);
+                    $this->get('event_dispatcher')->dispatch(
+                        CapcoAppBundleEvents::ABSTRACT_VOTE_CHANGED,
+                        new AbstractVoteChangedEvent($sourceVote, 'add')
+                    );
+
+                    $em->flush();
+
+                    $this->get('session')->getFlashBag()->add('success', $this->get('translator')->trans('source.vote.add_success'));
+                } else {
+                    $em->remove($sourceVote);
+
+                    $this->get('event_dispatcher')->dispatch(
+                        CapcoAppBundleEvents::ABSTRACT_VOTE_CHANGED,
+                        new AbstractVoteChangedEvent($sourceVote, 'remove')
+                    );
+
+                    $em->flush();
+
+                    $this->get('session')->getFlashBag()->add('info', $this->get('translator')->trans('source.vote.remove_success'));
+                }
+            } else {
+                $this->get('session')->getFlashBag()->add('danger', $this->get('translator')->trans('source.vote.csrf_error'));
+            }
+        }
+
+        return $this->redirect($this->generateUrl('app_consultation_show_opinion', ['consultationSlug' => $consultation->getSlug(), 'stepSlug' => $currentStep->getSlug(), 'opinionTypeSlug' => $opinionType->getSlug(), 'opinionSlug' => $opinion->getSlug()]));
     }
 }

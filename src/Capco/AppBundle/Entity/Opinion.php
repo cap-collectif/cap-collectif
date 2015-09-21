@@ -25,12 +25,10 @@ class Opinion
     use VotableTrait;
 
     public static $sortCriterias = [
-        'positions' => 'opinion.sort.positions',
-        'last' => 'opinion.sort.last',
-        'old' => 'opinion.sort.old',
-        'favorable' => 'opinion.sort.favorable',
         'votes' => 'opinion.sort.votes',
         'comments' => 'opinion.sort.comments',
+        'date' => 'opinion.sort.date',
+        'positions' => 'opinion.sort.positions',
     ];
 
     /**
@@ -57,7 +55,7 @@ class Opinion
 
     /**
      * @var \DateTime
-     * @Gedmo\Timestampable(on="change", field={"title", "body", "appendices"})
+     * @Gedmo\Timestampable(on="change", field={"title", "Author", "OpinionType", "Consultation"})
      * @ORM\Column(name="updated_at", type="datetime")
      */
     protected $updatedAt;
@@ -532,7 +530,6 @@ class Opinion
     public function setAppendices($appendices)
     {
         $this->appendices = $appendices;
-
         return $this;
     }
 
@@ -596,7 +593,7 @@ class Opinion
     // Used by elasticsearch for indexing
     public function getStrippedBody()
     {
-        return strip_tags(html_entity_decode($this->body, ENT_QUOTES | ENT_HTML401, 'UTF-8'));
+        return strip_tags(html_entity_decode($this->body, ENT_QUOTES|ENT_HTML401, 'UTF-8'));
     }
 
     public function getArgumentForCount()
@@ -604,7 +601,7 @@ class Opinion
         $i = 0;
         foreach ($this->arguments as $argument) {
             if ($argument->getType() === Argument::TYPE_FOR) {
-                ++$i;
+                $i++;
             }
         }
 
@@ -616,7 +613,7 @@ class Opinion
         $i = 0;
         foreach ($this->arguments as $argument) {
             if ($argument->getType() === Argument::TYPE_AGAINST) {
-                ++$i;
+                $i++;
             }
         }
 
@@ -631,17 +628,17 @@ class Opinion
     public function increaseVotesCount($type)
     {
         if ($type == OpinionVote::$voteTypes['ok']) {
-            ++$this->voteCountOk;
+            $this->voteCountOk++;
 
             return;
         }
         if ($type == OpinionVote::$voteTypes['nok']) {
-            ++$this->voteCountNok;
+            $this->voteCountNok++;
 
             return;
         }
         if ($type == OpinionVote::$voteTypes['mitige']) {
-            ++$this->voteCountMitige;
+            $this->voteCountMitige++;
         }
     }
 
@@ -653,17 +650,17 @@ class Opinion
     public function decreaseVotesCount($type)
     {
         if ($type == OpinionVote::$voteTypes['ok']) {
-            --$this->voteCountOk;
+            $this->voteCountOk--;
 
             return;
         }
         if ($type == OpinionVote::$voteTypes['nok']) {
-            --$this->voteCountNok;
+            $this->voteCountNok--;
 
             return;
         }
         if ($type == OpinionVote::$voteTypes['mitige']) {
-            --$this->voteCountMitige;
+            $this->voteCountMitige--;
         }
     }
 
@@ -692,7 +689,7 @@ class Opinion
         $count = 0;
         foreach ($this->arguments as $arg) {
             if (Argument::$argumentTypes[$arg->getType()] == $type) {
-                ++$count;
+                $count++;
             }
         }
 
@@ -736,24 +733,20 @@ class Opinion
         return $excerpt;
     }
 
-    public function getSortedAppendices()
-    {
+    public function getSortedAppendices() {
         $iterator = $this->appendices->getIterator();
         $iterator->uasort(function ($a, $b) {
             return ($this->getPositionForAppendixType($a->getAppendixType()) < $this->getPositionForAppendixType($b->getAppendixType())) ? -1 : 1;
         });
-
         return iterator_to_array($iterator);
     }
 
-    public function getPositionForAppendixType($at)
-    {
+    public function getPositionForAppendixType($at) {
         foreach ($this->getOpinionType()->getAppendixTypes() as $otat) {
             if ($otat->getAppendixType()->getId() === $at->getId()) {
                 return $otat->getPosition();
             }
         }
-
         return 0;
     }
 
@@ -762,7 +755,6 @@ class Opinion
         if ($this->getOpinionType()) {
             return $this->getOpinionType()->isVersionable();
         }
-
         return false;
     }
 
@@ -771,7 +763,6 @@ class Opinion
         if ($this->getOpinionType()) {
             return $this->getOpinionType()->isSourceable();
         }
-
         return false;
     }
 
@@ -780,14 +771,12 @@ class Opinion
         if ($this->getOpinionType()) {
             return $this->getOpinionType()->getCommentSystem();
         }
-
-        return;
+        return null;
     }
 
     public function canAddComments()
     {
         $cs = $this->getCommentSystem();
-
         return $cs === 1 || $cs === 2;
     }
 
