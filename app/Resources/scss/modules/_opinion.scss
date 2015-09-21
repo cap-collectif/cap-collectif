@@ -478,7 +478,7 @@
   }
 }
 
-.opinion-tabs {
+.opinion-tabs.tab-pane {
   margin-top: 15px;
 }
 
@@ -505,14 +505,14 @@
   }
 }
 
-.opinion__arguments--yes,
-.opinion__arguments--simple {
+#opinion__arguments--yes,
+#opinion__arguments--simple {
   .opinion__header__title {
     color: $brand-success;
   }
 }
 
-.opinion__arguments--no {
+#opinion__arguments--no {
   .opinion__header__title {
     color: $brand-danger;
   }

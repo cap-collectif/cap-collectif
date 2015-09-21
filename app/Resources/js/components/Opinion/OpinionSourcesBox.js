@@ -3,16 +3,18 @@ import OpinionSourceForm from './OpinionSourceForm';
 import Loader from '../Utils/Loader';
 import Fetcher from '../../services/Fetcher';
 
+const Row = ReactBootstrap.Row;
+const Col = ReactBootstrap.Col;
+
 const OpinionSourcesBox = React.createClass({
   propTypes: {
-    opinionId: React.PropTypes.number.isRequired,
+    opinion: React.PropTypes.object.isRequired,
+    isReportingEnabled: React.PropTypes.bool.isRequired,
   },
   mixins: [ReactIntl.IntlMixin],
 
   getInitialState() {
     return {
-      isOpinionContributable: false,
-      opinion: {id: this.props.opinionId, parent: null},
       sources: [],
       categories: [],
       isLoading: true,
@@ -24,12 +26,7 @@ const OpinionSourcesBox = React.createClass({
 
   componentDidMount() {
     this.loadSourcesFromServer();
-    Fetcher
-    .get('/categories')
-    .then((data) => {
-      this.setState({categories: data});
-      return true;
-    });
+    this.loadCategoriesFromServer();
   },
 
   componentDidUpdate(prevProps, prevState) {
@@ -41,7 +38,7 @@ const OpinionSourcesBox = React.createClass({
   renderFilter() {
     if (this.state.sources.length > 1) {
       return (
-        <select ref="filter" className="hidden-xs pull-right" value={this.state.filter} onChange={() => this.updateSelectedValue()}>
+        <select ref="filter" className="form-control pull-right" value={this.state.filter} onChange={() => this.updateSelectedValue()}>
           <option value="popular">{this.getIntlMessage('global.filter_popular')}</option>
           <option value="last">{this.getIntlMessage('global.filter_last')}</option>
           <option value="old">{this.getIntlMessage('global.filter_old')}</option>
@@ -53,13 +50,19 @@ const OpinionSourcesBox = React.createClass({
   render() {
     return (
       <div>
-        {this.state.isOpinionContributable
-          ? <OpinionSourceForm opinion={this.state.opinion} categories={this.state.categories} />
-          : <span />
+        {this.props.opinion.isContribuable
+          ? <Row>
+              <Col xs={12} sm={6} md={6}>
+                <OpinionSourceForm opinion={this.props.opinion} categories={this.state.categories} />
+              </Col>
+              <Col xs={12} sm={6} md={6}>
+                { this.renderFilter() }
+              </Col>
+            </Row>
+          : this.renderFilter()
         }
-        { this.renderFilter() }
         {!this.state.isLoading
-          ? <OpinionSourceList sources={this.state.sources} />
+          ? <OpinionSourceList isReportingEnabled={this.props.isReportingEnabled} sources={this.state.sources} />
           : <Loader />
         }
       </div>
@@ -77,16 +80,33 @@ const OpinionSourcesBox = React.createClass({
   loadSourcesFromServer() {
     this.setState({'isLoading': true});
 
+    const baseUrl = this.isVersion()
+      ? `/opinions/${this.props.opinion.parent.id}/versions/${this.props.opinion.id}`
+      : `/opinions/${this.props.opinion.id}`
+    ;
+
     Fetcher
-    .get(`/opinions/${this.props.opinionId}/sources?offset=${this.state.offset}&limit=${this.state.limit}&filter=${this.state.filter}`)
-    .then((data) => {
-      this.setState({
-        isLoading: false,
-        sources: data.sources,
-        isOpinionContributable: data.isOpinionContributable,
+      .get(`${baseUrl}/sources?offset=${this.state.offset}&limit=${this.state.limit}&filter=${this.state.filter}`)
+      .then((data) => {
+        this.setState({
+          isLoading: false,
+          sources: data.sources,
+        });
+        return true;
       });
-      return true;
-    });
+  },
+
+  loadCategoriesFromServer() {
+    Fetcher
+      .get('/categories')
+      .then((data) => {
+        this.setState({categories: data});
+        return true;
+      });
+  },
+
+  isVersion() {
+    return !!this.props.opinion.parent;
   },
 
 });

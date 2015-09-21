@@ -36,26 +36,26 @@ trait VotableTrait
     public function incrementVoteCountByType($value)
     {
         if ($value === OpinionVote::VOTE_OK) {
-            $this->voteCountOk++;
+            ++$this->voteCountOk;
         }
         if ($value === OpinionVote::VOTE_NOK) {
-            $this->voteCountNok++;
+            ++$this->voteCountNok;
         }
         if ($value === OpinionVote::VOTE_MITIGE) {
-            $this->voteCountMitige++;
+            ++$this->voteCountMitige;
         }
     }
 
     public function decrementVoteCountByType($value)
     {
         if ($value === OpinionVote::VOTE_OK) {
-            $this->voteCountOk--;
+            --$this->voteCountOk;
         }
         if ($value === OpinionVote::VOTE_NOK) {
-            $this->voteCountNok--;
+            --$this->voteCountNok;
         }
         if ($value === OpinionVote::VOTE_MITIGE) {
-            $this->voteCountMitige--;
+            --$this->voteCountMitige;
         }
     }
 

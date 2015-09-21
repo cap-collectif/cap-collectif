@@ -1,3 +1,5 @@
+import {VOTE_WIDGET_SIMPLE, VOTE_WIDGET_BOTH} from '../../constants/VoteConstants';
+
 import OpinionActions from '../../actions/OpinionActions';
 import LoginOverlay from '../Utils/LoginOverlay';
 import ShareButtonDropdown from '../Utils/ShareButtonDropdown';
@@ -10,6 +12,7 @@ const Button = ReactBootstrap.Button;
 const OpinionButtons = React.createClass({
   propTypes: {
     opinion: React.PropTypes.object.isRequired,
+    isReportingEnabled: React.PropTypes.bool.isRequired,
   },
   mixins: [ReactIntl.IntlMixin],
 
@@ -23,7 +26,7 @@ const OpinionButtons = React.createClass({
   renderVoteButton(type) {
     const opinion = this.props.opinion;
     const voteType = this.isVersion() ? opinion.parent.type.voteWidgetType : opinion.type.voteWidgetType;
-    if (type === 'ok' && (voteType === 1 || voteType === 2)) {
+    if (type === 'ok' && (voteType === VOTE_WIDGET_SIMPLE || voteType === VOTE_WIDGET_BOTH)) {
       return (
         <Button bsStyle="success" className="btn--outline"
                 onClick={this.voteAction.bind(this, 1)}
@@ -34,7 +37,7 @@ const OpinionButtons = React.createClass({
         </Button>
       );
     }
-    if (type === 'mitige' && voteType === 2) {
+    if (type === 'mitige' && voteType === VOTE_WIDGET_BOTH) {
       return (
         <Button bsStyle="warning" className="btn--outline"
                 onClick={this.voteAction.bind(this, 0)}
@@ -45,7 +48,7 @@ const OpinionButtons = React.createClass({
         </Button>
       );
     }
-    if (type === 'nok' && voteType === 2) {
+    if (type === 'nok' && voteType === VOTE_WIDGET_BOTH) {
       return (
         <Button bsStyle="danger" className="btn--outline"
                 onClick={this.voteAction.bind(this, -1)}
@@ -75,14 +78,17 @@ const OpinionButtons = React.createClass({
 
   renderReportButton() {
     const reported = this.props.opinion.has_user_reported;
-    return (
-      <Button
-        className="opinion__action--report pull-right btn--outline btn-dark-gray" href={reported ? null : this.props.opinion._links.report} active={reported}>
-        <i className="cap cap-flag-1"></i>
-        { ' ' }
-        { reported ? this.getIntlMessage('global.report.reported') : this.getIntlMessage('global.report.submit') }
-      </Button>
-    );
+    if (this.props.isReportingEnabled && !this.isTheUserTheAuthor()) {
+      return (
+        <Button
+          className="opinion__action--report pull-right btn--outline btn-dark-gray"
+          href={reported ? null : this.props.opinion._links.report} active={reported}>
+          <i className="cap cap-flag-1"></i>
+          { ' ' }
+          { reported ? this.getIntlMessage('global.report.reported') : this.getIntlMessage('global.report.submit') }
+        </Button>
+      );
+    }
   },
 
   render() {

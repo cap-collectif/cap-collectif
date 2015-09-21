@@ -7,6 +7,7 @@ const OpinionPage = React.createClass({
   propTypes: {
     opinionId: React.PropTypes.number.isRequired,
     versionId: React.PropTypes.number,
+    isReportingEnabled: React.PropTypes.bool.isRequired,
   },
   mixins: [ReactIntl.IntlMixin],
 
@@ -29,7 +30,7 @@ const OpinionPage = React.createClass({
           ? <OpinionBox {...this.props} opinion={this.state.opinion} />
           : null
         }
-        {!this.state.isLoading && this.state.opinion.parent // for now only version use full react tabs
+        {!this.state.isLoading
           ? <OpinionTabs {...this.props} opinion={this.state.opinion} />
           : null
         }

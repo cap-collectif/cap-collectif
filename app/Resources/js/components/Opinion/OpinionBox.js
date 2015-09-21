@@ -1,3 +1,5 @@
+import {VOTE_WIDGET_DISABLED, VOTE_WIDGET_BOTH} from '../../constants/VoteConstants';
+
 import OpinionPreview from './OpinionPreview';
 import OpinionButtons from './OpinionButtons';
 import OpinionAppendices from './OpinionAppendices';
@@ -15,6 +17,7 @@ const FormattedMessage = ReactIntl.FormattedMessage;
 const OpinionBox = React.createClass({
   propTypes: {
     opinion: React.PropTypes.object.isRequired,
+    isReportingEnabled: React.PropTypes.bool.isRequired,
   },
   mixins: [ReactIntl.IntlMixin],
 
@@ -83,8 +86,8 @@ const OpinionBox = React.createClass({
   renderVotes() {
     const opinion = this.props.opinion;
     const widgetType = this.getOpinionType().voteWidgetType;
-    if (widgetType !== 0 && (opinion.votes.length > 0 || this.getOpinionType().votesThreshold)) {
-      if (opinion.votes.length > 0 && widgetType === 2) {
+    if (widgetType !== VOTE_WIDGET_DISABLED && (opinion.votes.length > 0 || this.getOpinionType().votesThreshold)) {
+      if (opinion.votes.length > 0 && widgetType === VOTE_WIDGET_BOTH) {
         return (
           <Row style={{borderTop: '1px solid #ddd'}}>
             <Col sm={12} md={4}>

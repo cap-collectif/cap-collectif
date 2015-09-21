@@ -69,6 +69,10 @@ Capco\AppBundle\Entity\OpinionVersion:
             type: boolean
             groups: [OpinionVersions]
     virtual_properties:
+        canContribute:
+            serialized_name: isContribuable
+            type: boolean
+            groups: [OpinionVersions]
         getVoteCountAll:
             serialized_name: votes_total
             type: integer

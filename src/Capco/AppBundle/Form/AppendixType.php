@@ -21,7 +21,6 @@ class AppendixType extends AbstractType
                 'config_name' => 'user_editor',
             ))
         ;
-
     }
 
     /**

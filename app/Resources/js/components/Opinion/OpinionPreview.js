@@ -1,3 +1,6 @@
+import {COMMENT_SYSTEM_NONE} from '../../constants/ArgumentConstants';
+import {VOTE_WIDGET_DISABLED} from '../../constants/VoteConstants';
+
 import UserAvatar from '../User/UserAvatar';
 import OpinionInfos from './OpinionInfos';
 
@@ -45,10 +48,10 @@ const OpinionPreview = React.createClass({
     const opinion = this.props.opinion;
     const type = this.getType();
     const counters = [];
-    if (type.voteWidgetType !== 0) {
+    if (type.voteWidgetType !== VOTE_WIDGET_DISABLED) {
       counters.push(<FormattedMessage message={this.getIntlMessage('global.votes')} num={opinion.votes_total}/>);
     }
-    if (type.commentSystem !== 0) {
+    if (type.commentSystem !== COMMENT_SYSTEM_NONE) {
       counters.push(<FormattedMessage message={this.getIntlMessage('global.arguments')} num={opinion.arguments_count} />);
     }
     if (!opinion.parent && type.versionable) {
@@ -74,10 +77,8 @@ const OpinionPreview = React.createClass({
   render() {
     const opinion = this.props.opinion;
     const classes = classNames({
-      'opinion': true,
       'opinion__body': true,
       'box': true,
-      'bg-vip': opinion.author.vip,
     });
     return (
       <div className={classes} >

@@ -3,7 +3,6 @@
 namespace Capco\AppBundle\Repository;
 
 use Capco\AppBundle\Entity\ConsultationStep;
-use Doctrine\Common\Collections\ArrayCollection;
 use Gedmo\Tree\Entity\Repository\NestedTreeRepository;
 
 /**
@@ -124,6 +123,7 @@ class OpinionTypeRepository extends NestedTreeRepository
             ->where('ot.parent IS NULL')
             ->orderBy('ot.position', 'ASC')
         ;
+
         return $qb->getQuery()->getResult();
     }
 }

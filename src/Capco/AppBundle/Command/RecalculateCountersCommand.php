@@ -117,7 +117,6 @@ class RecalculateCountersCommand extends ContainerAwareCommand
         )');
         $query->execute();
 
-
         // ************************ Consultation step counters ***********************************************
 
         $query = $em->createQuery('update CapcoAppBundle:ConsultationStep cs set cs.opinionCount =
@@ -211,7 +210,6 @@ class RecalculateCountersCommand extends ContainerAwareCommand
             (select count(ov.id) from CapcoAppBundle:OpinionVote ov where ov.opinion = a AND ov.confirmed = 1 AND ov.value = -1 group by ov.opinion)');
         $query->execute();
 
-
         // ******************************** Opinion version counters ****************************************
 
         $query = $em->createQuery('update CapcoAppBundle:OpinionVersion ov set ov.argumentsCount = (
@@ -239,7 +237,6 @@ class RecalculateCountersCommand extends ContainerAwareCommand
         $query = $em->createQuery('update CapcoAppBundle:OpinionVersion ov set ov.voteCountNok =
             (select count(ovv.id) from CapcoAppBundle:OpinionVersionVote ovv where ovv.opinionVersion = ov AND ovv.confirmed = -1 AND ovv.value = 1 group by ovv.opinionVersion)');
         $query->execute();
-
 
         // ************************************ Votes counters **********************************************
 

@@ -104,11 +104,11 @@ Feature: Consultation
     Given I visited "consultation page" with:
       | consultationSlug | croissance-innovation-disruption |
       | stepSlug         | collecte-des-avis                |
-    Then I should see "126 contributions"
+    Then I should see "123 contributions"
     And I hover over the "#contributions-counter-pill" element
-    And I wait 3 seconds
+    And I wait 5 seconds
     And I should see "25 propositions"
-    And I should see "71 arguments"
+    And I should see "68 arguments"
     And I should see "30 sources"
 
   Scenario: Consultation header should display correct number of participants

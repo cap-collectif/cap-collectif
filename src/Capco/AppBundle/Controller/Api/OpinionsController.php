@@ -162,7 +162,7 @@ class OpinionsController extends FOSRestController
      * @ParamConverter("opinion", options={"mapping": {"id": "id"}, "method": "getOne"})
      * @QueryParam(name="offset", requirements="[0-9.]+", default="0")
      * @QueryParam(name="limit", requirements="[0-9.]+", default="10")
-     * @QueryParam(name="filter", requirements="(old|last|popular|comments)", default="last")
+     * @QueryParam(name="filter", requirements="(old|last|votes|favorable|comments)", default="last")
      * @View(statusCode=200, serializerGroups={"OpinionVersions", "UsersInfos"})
      */
     public function cgetOpinionVersionsAction(Opinion $opinion, ParamFetcherInterface $paramFetcher)
@@ -330,7 +330,7 @@ class OpinionsController extends FOSRestController
 
         $paginator = $this->getDoctrine()->getManager()
                     ->getRepository('CapcoAppBundle:Source')
-                    ->getOneByOpinion($opinion, $offset, $limit, $filter);
+                    ->getByOpinion($opinion, $offset, $limit, $filter);
 
         $sources = [];
         foreach ($paginator as $source) {
@@ -339,7 +339,46 @@ class OpinionsController extends FOSRestController
 
         return [
             'sources' => $sources,
-            'isOpinionContributable' => $opinion->canContribute(),
+        ];
+    }
+
+    /**
+     * Get all sources of a version.
+     *
+     * @ApiDoc(
+     *  resource=true,
+     *  description="Get all sources of a version.",
+     *  statusCodes={
+     *    200 = "Returned when successful",
+     *    404 = "Returned when opinion not found",
+     *  }
+     * )
+     *
+     * @Get("/opinions/{opinionId}/versions/{versionId}/sources")
+     * @ParamConverter("opinion", options={"mapping": {"opinionId": "id"}, "method": "getOne"})
+     * @ParamConverter("version", options={"mapping": {"versionId": "id"}, "method": "getOne"})
+     * @QueryParam(name="offset", requirements="[0-9.]+", default="0")
+     * @QueryParam(name="limit", requirements="[0-9.]+", default="10")
+     * @QueryParam(name="filter", requirements="(old|last|popular)", default="last")
+     * @View(serializerGroups={"Opinions", "UsersInfos"})
+     */
+    public function cgetOpinionVersionSourcesAction(Opinion $opinion, OpinionVersion $version, ParamFetcherInterface $paramFetcher)
+    {
+        $offset = $paramFetcher->get('offset');
+        $limit = $paramFetcher->get('limit');
+        $filter = $paramFetcher->get('filter');
+
+        $paginator = $this->getDoctrine()->getManager()
+            ->getRepository('CapcoAppBundle:Source')
+            ->getByOpinionVersion($version, $offset, $limit, $filter);
+
+        $sources = [];
+        foreach ($paginator as $source) {
+            $sources[] = $source;
+        }
+
+        return [
+            'sources' => $sources,
         ];
     }
 
@@ -442,6 +481,47 @@ class OpinionsController extends FOSRestController
         $view = $this->view($form->getErrors(true), Codes::HTTP_BAD_REQUEST);
 
         return $view;
+    }
+
+    /**
+     * Post an argument for an opinion.
+     *
+     * @ApiDoc(
+     *  resource=true,
+     *  description="Post an argument for an opinion.",
+     *  statusCodes={
+     *    201 = "Returned when successful",
+     *    404 = "Returned when opinion not found",
+     *  }
+     * )
+     *
+     * @Security("has_role('ROLE_USER')")
+     * @Post("/opinions/{opinionId}/arguments")
+     * @ParamConverter("opinion", options={"mapping": {"opinionId": "id"}})
+     * @ParamConverter("argument", converter="fos_rest.request_body")
+     * @View(statusCode=201, serializerGroups={})
+     */
+    public function postOpinionArgumentAction(Opinion $opinion, Argument $argument, ConstraintViolationListInterface $validationErrors)
+    {
+        if (!$opinion->canContribute() || $opinion->getOpinionType()->getCommentSystem() === 0) {
+            throw new BadRequestHttpException("Can't add an argument to an uncontributable opinion.");
+        }
+
+        if ($validationErrors->count() > 0) {
+            throw new BadRequestHttpException($validationErrors->__toString());
+        }
+
+        $user = $this->getUser();
+
+        $argument
+            ->setOpinion($opinion)
+            ->setAuthor($user)
+            ->setUpdatedAt(new \Datetime())
+        ;
+
+        $opinion->setArgumentsCount($opinion->getArgumentsCount() + 1);
+        $this->getDoctrine()->getManager()->persist($argument);
+        $this->getDoctrine()->getManager()->flush();
     }
 
     /**

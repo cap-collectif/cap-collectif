@@ -142,6 +142,7 @@ Feature: Opinions
           "created_at": "@string@.isDateTime()",
           "updated_at": "@string@.isDateTime()",
           "votes_count": @integer@,
+          "isContribuable": @boolean@,
           "author": {
             "username": @string@,
             "displayName": @string@,
@@ -160,9 +161,9 @@ Feature: Opinions
           },
           "has_user_voted": @boolean@,
           "has_user_reported": @boolean@
-        }
-      ],
-      "isOpinionContributable": @boolean@
+        },
+        @...@
+      ]
     }
     """
 

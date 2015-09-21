@@ -146,6 +146,8 @@ export default {
             fullname: 'Nom complet *',
             hidden_email: 'Adresse électronique (cachée) *',
             filter_popular: 'Les plus populaires',
+            filter_votes: 'Les plus votés',
+            filter_favorable: 'Les plus favorables',
             filter_last: 'Les plus récents',
             filter_old: 'Les plus anciens',
             filter_comments: 'Les plus commentés',

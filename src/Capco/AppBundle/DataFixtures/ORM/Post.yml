@@ -16,7 +16,7 @@ Capco\AppBundle\Entity\Post:
     consultations: [@cs1]
     themes: [@theme1]
 
-  post{6..10}:
+  post{6..8}:
     title: Post <current()>
     abstract: <text(150)>
     body: |
@@ -26,9 +26,26 @@ Capco\AppBundle\Entity\Post:
          <h3><text(10)></h3>
          <p><text(300)></p>
     isPublished: true
-    publishedAt: <dateTimeBetween('-100 days', '+10 days')>
+    publishedAt: <dateTimeBetween('-100 days', '-10 days')>
     Authors:
         - @user<numberBetween(1,5)>
     Media: null
     consultations: [@cs2]
     themes: [@theme2]
+
+  post{9..10}:
+      title: Post <current()>
+      abstract: <text(150)>
+      body: |
+           <h2><text(10)></h2>
+           <p><text(500)></p>
+           <h2><text(10)></h2>
+           <h3><text(10)></h3>
+           <p><text(300)></p>
+      isPublished: true
+      publishedAt: <dateTimeBetween('+10 days', '+100 days')>
+      Authors:
+          - @user<numberBetween(1,5)>
+      Media: null
+      consultations: [@cs2]
+      themes: [@theme2]

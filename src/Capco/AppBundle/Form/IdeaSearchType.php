@@ -31,7 +31,7 @@ class IdeaSearchType extends AbstractType
             ))
             ->add('sort', 'choice', array(
                 'required' => false,
-                'choices' => Idea::$openingStatusesLabels,
+                'choices' => Idea::$sortCriterias,
                 'translation_domain' => 'CapcoAppBundle',
                 'label' => 'idea.searchform.sort',
                 'empty_value' => false,

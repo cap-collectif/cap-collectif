@@ -38,3 +38,8 @@ Capco\AppBundle\Entity\Argument:
             expose: true
             type: boolean
             groups: [Opinions]
+    virtual_properties:
+        canContribute:
+            serialized_name: isContribuable
+            type: boolean
+            groups: [Opinions, OpinionVersions]

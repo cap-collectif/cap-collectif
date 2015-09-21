@@ -45,7 +45,7 @@ class Post implements CommentableInterface
 
     /**
      * @var string
-     * @Gedmo\Slug(separator="-", unique=true, fields={"title"})
+     * @Gedmo\Slug(separator="-", unique=true, fields={"title"}, updatable=false)
      * @ORM\Column(name="slug", type="string", length=255)
      */
     private $slug;
@@ -511,7 +511,7 @@ class Post implements CommentableInterface
     // Used by elasticsearch for indexing
     public function getStrippedBody()
     {
-        return strip_tags(html_entity_decode($this->body, ENT_QUOTES|ENT_HTML401, 'UTF-8'));
+        return strip_tags(html_entity_decode($this->body, ENT_QUOTES | ENT_HTML401, 'UTF-8'));
     }
 
     public function getClassName()

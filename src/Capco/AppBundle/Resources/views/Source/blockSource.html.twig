@@ -19,18 +19,7 @@
         </p>
 
         {% if trashed is not defined %}
-            {% if false == source.canContribute %}
-                <button disabled="disabled" class="btn  btn-dark-gray  btn-xs"><i class="cap cap-hand-like-2"></i> {{ 'source.vote.submit'|trans({}, 'CapcoAppBundle') }}</button>
-            {% else %}
-                <form method="POST" style="display: inline-block;" action="{{ path('app_consultation_vote_source' ,{'consultationSlug': consultation.slug, 'stepSlug': opinion.step.slug, 'opinionTypeSlug': opinionType.slug, 'opinionSlug': opinion.slug, 'sourceSlug': source.slug } ) }}">
-                    {% if source.userHasVote(app.user) %}
-                        <button class="btn  btn-danger  btn-xs"> {{ 'source.vote.delete'|trans({}, 'CapcoAppBundle') }}</button>
-                    {% else %}
-                        <button class="btn  btn-success  btn--outline  btn-xs"><i class="cap cap-hand-like-2"></i> {{ 'source.vote.submit'|trans({}, 'CapcoAppBundle') }}</button>
-                    {% endif %}
-                    <input type="hidden" name="_csrf_token" value="{{ tokenSource }}">
-                </form>
-            {% endif %}
+            <button disabled="disabled" class="btn  btn-dark-gray  btn-xs"><i class="cap cap-hand-like-2"></i> {{ 'source.vote.submit'|trans({}, 'CapcoAppBundle') }}</button>
             <span class="nb-votes">{{ source.voteCount }}</span>
 
             {% if is_feature_enabled('reporting') %}

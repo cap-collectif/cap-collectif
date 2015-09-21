@@ -20,7 +20,7 @@ class LoaderDataFixture extends DataFixtureLoader implements OrderedFixtureInter
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     protected function getFixtures()
     {

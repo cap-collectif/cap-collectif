@@ -26,20 +26,7 @@
 
         {% if trashed is not defined %}
 
-            {% if false == argument.canContribute %}
-                <button disabled="disabled" class="btn  btn-dark-gray  btn-xs"><i class="cap-hand-like-2"></i> {{ 'argument.vote.submit'|trans({}, 'CapcoAppBundle') }}</button>
-            {% else %}
-                <form method="POST" style="display: inline-block;" action="{{ path('app_consultation_vote_argument' ,{'consultationSlug': consultation.slug, 'stepSlug': opinion.step.slug, 'opinionTypeSlug': opinionType.slug, 'opinionSlug': opinion.slug, 'argumentId': argument.id } ) }}">
-                    {% if argument.userHasVote(currentUser) %}
-                        <button class="btn  btn-danger  btn-xs">{{ 'argument.vote.delete'|trans({}, 'CapcoAppBundle') }}</button>
-                    {% else %}
-                        <a class="connection-popover-js">
-                            <button class="btn  btn-success  btn--outline  btn-xs"><i class="cap-hand-like-2"></i> {{ 'argument.vote.submit'|trans({}, 'CapcoAppBundle') }}</button>
-                        </a>
-                    {% endif %}
-                    <input type="hidden" name="_csrf_token" value="{{ token }}">
-                </form>
-            {% endif %}
+            <button disabled="disabled" class="btn  btn-dark-gray  btn-xs"><i class="cap-hand-like-2"></i> {{ 'argument.vote.submit'|trans({}, 'CapcoAppBundle') }}</button>
             <span class="opinion__votes-nb">{{ argument.voteCount }}</span>
 
             {{ sonata_block_render({'type': 'capco.block.service.share_button'}, {
