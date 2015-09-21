@@ -2,6 +2,20 @@
 
 {% block canonical_link %}{{ url('app_consultation_show', {'consultationSlug': consultation.slug, 'stepSlug': currentStep.slug}) }}{% endblock %}
 
+{% block metaTags %}
+    <meta property="og:title" content="{{ consultation.title }}" />
+    <meta property="og:url" content="{{ url('app_consultation_show', {'consultationSlug': consultation.slug, 'stepSlug': currentStep.slug}) }}" />
+    {% if currentStep is defined and currentStep.body %}
+        <meta property="og:description" content="{{ currentStep.body }}" />
+    {% endif %}
+    <meta property="og:type" content="consultation" />
+    {% if consultation.Cover %}
+        <meta property="og:image" content="{% path consultation.Cover, 'blockHeader' %}" />
+    {% endif %}
+    <meta property="article:author" content="{{ url('capco_user_profile_show_all', {'slug': consultation.Author.slug}) }}" />
+    <meta property="article:publisher" content="{{ url('capco_user_profile_show_all', {'slug': consultation.Author.slug}) }}" />
+{% endblock %}
+
 {% block title %}
     {{ parent() }} - {{ consultation.title }}
 {% endblock %}

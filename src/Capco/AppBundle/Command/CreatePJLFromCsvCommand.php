@@ -44,10 +44,6 @@ class CreatePJLFromCsvCommand extends ContainerAwareCommand
         'color.btn.bg' => '#f01a21',
         'color.btn.text' => '#ffffff',
 
-        'color.h2' => '#16a085',
-        'color.h3' => '#1abc9c',
-
-
         'color.btn.primary.bg' => '#f01a21',
         'color.btn.primary.text' => '#ffffff',
         'color.btn.ghost.hover' => '#ffffff',
@@ -61,7 +57,6 @@ class CreatePJLFromCsvCommand extends ContainerAwareCommand
         'color.section.bg' => '#f6f6f6',
         'color.section.text' => '#000000',
 
-        'color.footer.title' => '#ffffff',
         'color.user.vip.bg' => '#FCF8E3',
     ];
 

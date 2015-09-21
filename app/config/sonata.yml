@@ -72,8 +72,6 @@ sonata_block:
         sonata.media.block.feature_media:
         capco_admin.blog.block.recent_posts:
 
-        capco.block.service.share_button:
-
 sonata_classification:
     class:
         tag:          Capco\ClassificationBundle\Entity\Tag

@@ -65,19 +65,19 @@ const OpinionArgumentList = React.createClass({
         </Row>
         {!this.state.isLoading
           ? <ul className="media-list opinion__list">
-          {
-            this.state.arguments.map((argument) => {
-              if ((this.props.type === 'yes' || this.props.type === 'simple') && argument.type === 1) {
-                return <OpinionArgumentItem {...this.props} key={argument.id} argument={argument} />;
-              }
-              if (this.props.type === 'no' && argument.type === 0) {
-                return <OpinionArgumentItem {...this.props} key={argument.id} argument={argument} />;
-              }
-            })
-          }
-        </ul>
-        : <Loader />
-      }
+            {
+              this.state.arguments.map((argument) => {
+                if ((this.props.type === 'yes' || this.props.type === 'simple') && argument.type === 1) {
+                  return <OpinionArgumentItem {...this.props} key={argument.id} argument={argument} />;
+                }
+                if (this.props.type === 'no' && argument.type === 0) {
+                  return <OpinionArgumentItem {...this.props} key={argument.id} argument={argument} />;
+                }
+              })
+            }
+          </ul>
+          : <Loader />
+        }
     </div>
     );
   },

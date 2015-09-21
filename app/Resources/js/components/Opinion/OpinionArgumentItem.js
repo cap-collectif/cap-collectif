@@ -11,12 +11,27 @@ const OpinionArgumentItem = React.createClass({
   },
   mixins: [ReactIntl.IntlMixin],
 
+  renderDate() {
+    const argument = this.props.argument;
+    if (navigator.userAgent.indexOf('Safari') !== -1 && navigator.userAgent.indexOf('Chrome') === -1) {
+      return null;
+    }
+    return (
+      <p className="excerpt opinion__date">
+        <FormattedDate
+          value={argument.created_at}
+          day="numeric" month="long" year="numeric"
+          hour="numeric" minute="numeric"
+          />
+      </p>
+    );
+  },
+
   render() {
     const argument = this.props.argument;
     const classes = classNames({
       'opinion': true,
       'opinion--argument': true,
-      'anchor-offset': true,
       'bg-vip': argument.author.vip,
     });
     return (
@@ -27,13 +42,7 @@ const OpinionArgumentItem = React.createClass({
             <p className="h5 opinion__user">
               <UserLink user={argument.author} />
             </p>
-            <p className="excerpt opinion__date">
-              <FormattedDate
-                value={argument.created_at}
-                day="numeric" month="long" year="numeric"
-                hour="numeric" minute="numeric"
-                />
-            </p>
+            {this.renderDate()}
           </div>
           <p className="opinion__text">
             { argument.body }

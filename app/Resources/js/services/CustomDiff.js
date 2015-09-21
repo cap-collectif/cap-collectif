@@ -22,26 +22,12 @@ function everythingHasChanged(diff) {
   return !!changed;
 }
 
-function escapeChars(text) {
-  return text
-    .replace(/è/g,'&egrave;')
-    .replace(/é/g,'&eacute;')
-    .replace(/’/g, '&rsquo;')
-    .replace(/'/g, '&#39;')
-    .replace(/à/g, '&agrave;')
-    .replace(/«/g, '&laquo;')
-    .replace(/°/g, '&deg;')
-    .replace(/»/g, '&raquo;')
-    ;
-}
-
 class CustomDiff extends JsDiff.Diff {
 
   tokenize = function tokenize(value) {
     let strippedValue = strip(value);
     strippedValue = strippedValue.replace(/(<parend>)/g, '|$1|');
     strippedValue = strippedValue.replace(/(&nbsp;)/g, '|$1|');
-    strippedValue = strippedValue.replace(/(<br>)/g, '|$1|');
     strippedValue = strippedValue.replace(/(\s+?)(?=.+?)/g, '|$1|');
     return removeEmpty(strippedValue.split('|'));
   };
@@ -49,9 +35,7 @@ class CustomDiff extends JsDiff.Diff {
   prettyDiff = function pDiff(oldValue, newValue) {
     let prettyDiff = '';
     // Compute diff
-    console.log(oldValue);
-    console.log(newValue);
-    const diff = this.diff(escapeChars(oldValue), escapeChars(newValue));
+    const diff = this.diff(oldValue, newValue);
     // All text has been replaced
     if (everythingHasChanged(diff)) {
       return '<div style="color: red; text-decoration: line-through">' + oldValue + '</div>'

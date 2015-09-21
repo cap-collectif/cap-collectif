@@ -93,10 +93,11 @@
                         <a class="btn  btn-primary  external-link" href="{{ event.link }}" class="external-link">{{ 'event.link_button'|trans({}, 'CapcoAppBundle') }}</a>
                     {% endif %}
 
-                    {{ sonata_block_render({'type': 'capco.block.service.share_button'}, {
-                        'url': url('app_event_show', {'slug': event.slug}),
-                        'title': event.title,
-                    }) }}
+                    {% include 'CapcoAppBundle:Block:share_button.html.twig' with {
+                    'url': url('app_event_show', {'slug': event.slug}),
+                    'title': event.title,
+                    'id': 'event-' ~ event.slug,
+                    } only %}
                 </div>
 
                 {% if event.registrations|length > 0 %}
