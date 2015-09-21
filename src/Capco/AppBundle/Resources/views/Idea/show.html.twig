@@ -75,10 +75,11 @@
 
                 <div class="block">
 
-                    {{ sonata_block_render({'type': 'capco.block.service.share_button'}, {
-                        'url': url('app_idea_show', {'slug': idea.slug}),
-                        'title': idea.title,
-                    }) }}
+                    {% include 'CapcoAppBundle:Block:share_button.html.twig' with {
+                    'url': url('app_idea_show', {'slug': idea.slug}),
+                    'title': idea.title,
+                    'id': 'idea-' ~ idea.slug,
+                    } only %}
 
                     <div class="pull-right no-float-mobile">
                         {% if is_feature_enabled('reporting') %}
