@@ -1,3 +1,5 @@
+import {VOTE_WIDGET_SIMPLE, VOTE_WIDGET_BOTH} from '../../constants/VoteConstants';
+
 import OpinionActions from '../../actions/OpinionActions';
 import LoginOverlay from '../Utils/LoginOverlay';
 import ShareButtonDropdown from '../Utils/ShareButtonDropdown';
@@ -24,7 +26,7 @@ const OpinionButtons = React.createClass({
   renderVoteButton(type) {
     const opinion = this.props.opinion;
     const voteType = this.isVersion() ? opinion.parent.type.voteWidgetType : opinion.type.voteWidgetType;
-    if (type === 'ok' && (voteType === 1 || voteType === 2)) {
+    if (type === 'ok' && (voteType === VOTE_WIDGET_SIMPLE || voteType === VOTE_WIDGET_BOTH)) {
       return (
         <Button bsStyle="success" className="btn--outline"
                 onClick={this.voteAction.bind(this, 1)}
@@ -35,7 +37,7 @@ const OpinionButtons = React.createClass({
         </Button>
       );
     }
-    if (type === 'mitige' && voteType === 2) {
+    if (type === 'mitige' && voteType === VOTE_WIDGET_BOTH) {
       return (
         <Button bsStyle="warning" className="btn--outline"
                 onClick={this.voteAction.bind(this, 0)}
@@ -46,7 +48,7 @@ const OpinionButtons = React.createClass({
         </Button>
       );
     }
-    if (type === 'nok' && voteType === 2) {
+    if (type === 'nok' && voteType === VOTE_WIDGET_BOTH) {
       return (
         <Button bsStyle="danger" className="btn--outline"
                 onClick={this.voteAction.bind(this, -1)}

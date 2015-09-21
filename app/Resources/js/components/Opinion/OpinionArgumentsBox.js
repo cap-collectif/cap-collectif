@@ -1,3 +1,5 @@
+import {COMMENT_SYSTEM_SIMPLE, COMMENT_SYSTEM_BOTH} from '../../constants/ArgumentConstants';
+
 import OpinionArgumentList from './OpinionArgumentList';
 import OpinionArgumentForm from './OpinionArgumentForm';
 
@@ -30,7 +32,7 @@ const OpinionArgumentsBox = React.createClass({
   },
 
   render() {
-    if (this.getCommentSystem() === 2) {
+    if (this.getCommentSystem() === COMMENT_SYSTEM_BOTH) {
       return (
         <Row>
           <Col sm={12} md={6}>
@@ -43,7 +45,7 @@ const OpinionArgumentsBox = React.createClass({
       );
     }
 
-    if (this.getCommentSystem() === 1) {
+    if (this.getCommentSystem() === COMMENT_SYSTEM_SIMPLE) {
       return this.renderArgumentsForType('simple');
     }
 

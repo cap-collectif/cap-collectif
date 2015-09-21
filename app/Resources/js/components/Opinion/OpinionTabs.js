@@ -1,3 +1,5 @@
+import {COMMENT_SYSTEM_SIMPLE, COMMENT_SYSTEM_BOTH} from '../../constants/ArgumentConstants';
+
 import OpinionArgumentsBox from './OpinionArgumentsBox';
 import OpinionVersionsBox from './OpinionVersionsBox';
 import OpinionSourcesBox from './OpinionSourcesBox';
@@ -18,7 +20,7 @@ const OpinionTabs = React.createClass({
   },
 
   getArgumentsTrad() {
-    if (this.getCommentSystem() === 2) {
+    if (this.getCommentSystem() === COMMENT_SYSTEM_BOTH) {
       return this.getIntlMessage('global.arguments');
     }
     return this.getIntlMessage('global.simple_arguments');
@@ -95,7 +97,7 @@ const OpinionTabs = React.createClass({
   },
 
   isCommentable() {
-    if (this.getCommentSystem() === 1 || this.getCommentSystem() === 2) {
+    if (this.getCommentSystem() === COMMENT_SYSTEM_SIMPLE || this.getCommentSystem() === COMMENT_SYSTEM_BOTH) {
       return true;
     }
     return false;
