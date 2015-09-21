@@ -72,6 +72,9 @@ class AppKernel extends Kernel
             // Excel files generation
             new MewesK\TwigExcelBundle\MewesKTwigExcelBundle(),
 
+            // NewRelic
+            new Ekino\Bundle\NewRelicBundle\EkinoNewRelicBundle(),
+
             // API
             new \FOS\RestBundle\FOSRestBundle(),
             new \Nelmio\ApiDocBundle\NelmioApiDocBundle(),
