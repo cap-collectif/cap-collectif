@@ -8,6 +8,7 @@ use Capco\AppBundle\Entity\OtherStep;
 use Capco\AppBundle\Entity\ConsultationStep;
 use Capco\AppBundle\Entity\PresentationStep;
 use Capco\AppBundle\Entity\SynthesisStep;
+use Capco\AppBundle\Entity\RankingStep;
 use Sonata\AdminBundle\Route\RouteCollection;
 
 class StepAdmin extends Admin
@@ -112,6 +113,29 @@ class StepAdmin extends Admin
                         'required' => true,
                 ), ['link_parameters' => ['consultation_id']]
             );
+        } elseif ($subject instanceof RankingStep) {
+            $formMapper->add('body', 'ckeditor', [
+                    'config_name' => 'admin_editor',
+                    'label' => 'admin.fields.step.body',
+                    'required' => false,
+                ])
+                ->add('maxOpinions', null, [
+                    'label' => 'admin.fields.step.ranking.max_opinions',
+                    'required' => false,
+                ])
+                ->add('maxVersions', null, [
+                    'label' => 'admin.fields.step.ranking.max_versions',
+                    'required' => false,
+                ])
+                ->add('opinionsDisplayNb', null, [
+                    'label' => 'admin.fields.step.ranking.opinions_display_number',
+                    'required' => true,
+                ])
+                ->add('versionsDisplayNb', null, [
+                    'label' => 'admin.fields.step.ranking.versions_display_number',
+                    'required' => true,
+                ])
+            ;
         }
     }
 

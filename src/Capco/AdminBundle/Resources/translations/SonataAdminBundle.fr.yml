@@ -426,17 +426,22 @@ admin:
       trashed_at: Mise à la corbeille
       trashed_reason: Raison de la mise à la corbeille
     step:
-      title: Titre
-      start_at: Commence
-      end_at: Termine
-      position: Position
-      is_enabled: Publié
-      consultation: Consultation
-      type: Type d'étape
       body: Introduction
-      updated_at: Mise à jour
+      consultation: Consultation
       created_at: Création
+      end_at: Termine
+      is_enabled: Publié
+      position: Position
+      ranking:
+        max_opinions: Taille du classement des propositions
+        max_versions: Taille du classement des révisions
+        opinions_display_number: Nombre de propositions dans l'aperçu du classement
+        versions_display_number: Nombre de révisions dans l'aperçu du classement
+      start_at: Commence
       synthesis: Synthèse
+      title: Titre
+      type: Type d'étape
+      updated_at: Mise à jour
     synthesis:
       enabled: Publiée
       editable: Contribuable
@@ -576,3 +581,4 @@ other_step: Autre étape
 consultation_step: Étape de consultation
 presentation_step: Étape de présentation
 synthesis_step: Étape de synthèse
+ranking_step: Étape de classement
