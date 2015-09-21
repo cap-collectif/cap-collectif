@@ -119,20 +119,12 @@ class StepAdmin extends Admin
                     'label' => 'admin.fields.step.body',
                     'required' => false,
                 ])
-                ->add('maxOpinions', null, [
-                    'label' => 'admin.fields.step.ranking.max_opinions',
-                    'required' => false,
-                ])
-                ->add('maxVersions', null, [
-                    'label' => 'admin.fields.step.ranking.max_versions',
-                    'required' => false,
-                ])
                 ->add('opinionsDisplayNb', null, [
-                    'label' => 'admin.fields.step.ranking.opinions_display_number',
+                    'label' => 'admin.fields.step.opinions_display_number',
                     'required' => true,
                 ])
                 ->add('versionsDisplayNb', null, [
-                    'label' => 'admin.fields.step.ranking.versions_display_number',
+                    'label' => 'admin.fields.step.versions_display_number',
                     'required' => true,
                 ])
             ;

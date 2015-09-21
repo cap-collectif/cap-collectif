@@ -1,0 +1,27 @@
+Capco\AppBundle\Entity\RankingStep:
+    rstep1:
+        title: Classement des propositions et révisions
+        isEnabled: true
+        startAt: <(new \DateTime('2015-04-25'))>
+        endAt: <(new \DateTime('2015-05-25'))>
+        opinionsDisplayNb: 10
+        versionsDisplayNb: 15
+        body: |
+              <p>Coucou je suis le classement !</p>
+              <h3>Un classement</h3>
+              <p><text(1000)></p>
+              <h3>Basé sur les votes</h3>
+              <p><text(500)></p>
+    rstep2:
+        title: Classement
+        isEnabled: true
+        opinionsDisplayNb: 10
+        versionsDisplayNb: 15
+        startAt: <(new \DateTime('2014-09-27'))>
+        endAt: <(new \DateTime('2014-11-20'))>
+        body: |
+              <p>Coucou je suis le classement !</p>
+              <h3>Un classement</h3>
+              <p><text(1000)></p>
+              <h3>Basé sur les votes</h3>
+              <p><text(500)></p>

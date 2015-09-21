@@ -144,6 +144,11 @@ class Opinion
      */
     protected $pinned = false;
 
+    /**
+     * @ORM\Column(name="ranking", type="integer", nullable=true)
+     */
+    protected $ranking = null;
+
     public function __construct()
     {
         $this->votes = new ArrayCollection();
@@ -569,6 +574,22 @@ class Opinion
         $this->pinned = $pinned;
     }
 
+    /**
+     * @return mixed
+     */
+    public function getRanking()
+    {
+        return $this->ranking;
+    }
+
+    /**
+     * @param mixed $ranking
+     */
+    public function setRanking($ranking)
+    {
+        $this->ranking = $ranking;
+    }
+
     // ******************************* Custom methods **************************************
 
     public function getVoteValueByUser(User $user)
@@ -789,6 +810,13 @@ class Opinion
         $cs = $this->getCommentSystem();
 
         return $cs === 1 || $cs === 2;
+    }
+
+    public function getConsultationTop() {
+        if ($this->getStep() && $this->getStep()->getConsultation()) {
+            return $this->getStep()->getConsultation()->getMaxOpinions();
+        }
+        return null;
     }
 
     // ******************* Lifecycle *********************************

@@ -1,0 +1,99 @@
+{% extends '@CapcoApp/Consultation/show.html.twig' %}
+
+{% block canonical_link %}{{ url('app_consultation_show_ranking', {'consultationSlug': consultation.slug, 'stepSlug': currentStep.slug}) }}{% endblock %}
+
+{% block title %}
+    {{ parent() }} - {{ currentStep.title }}
+{% endblock %}
+
+{% block jumbotron %}
+{% endblock %}
+
+{% block body %}
+    <div class="container  container--custom">
+        {% include '@CapcoApp/Consultation/show_title.html.twig' %}
+    </div>
+
+    <div class="container  container--custom">
+        <div class="row">
+            <div class="col-xs-12  col-sm-4  col-md-3">
+                {{ render(controller('CapcoAppBundle:Site/Consultation:showMeta', {
+                        'consultationSlug': consultation.slug,
+                        'currentStepSlug': currentStep.slug,
+                    }))
+                }}
+            </div>
+
+            <div class="col-xs-12  col-sm-8  col-md-9" id="details">
+
+                <h2 class="h2">{{ currentStep.title }}</h2>
+                <div class="block  block--bordered  box">
+                    {{ currentStep.body | raw }}
+
+                    {% if consultation.consultationStepOpen and consultation.consultationStepOpen.canContribute %}
+                        <p><a class="btn  btn-primary" href="{{ path('app_consultation_show', {'consultationSlug': consultation.slug, 'stepSlug': consultation.consultationStepOpen.slug}) }}">{{ 'step.presentation.participe' | trans({}, 'CapcoAppBundle') }}</a></p>
+                    {% endif %}
+                </div>
+
+                <div id="opinions--ranking" class="anchor-offset  block  block--bordered">
+
+                    <div class="opinion opinion--default">
+                        <div class="opinion__header  opinion__header--mobile-centered">
+                            <h2 class="pull-left  h4  opinion__header__title">
+                                {{ 'consultation.ranking.opinions' | transchoice(opinions | length, {}, 'CapcoAppBundle')  }}
+                            </h2>
+                        </div>
+                    </div>
+
+                    {% if (opinions|length > 0) %}
+                        <ul class="media-list  opinion__list">
+                            {% for opinion in opinions %}
+                                {% include 'CapcoAppBundle:Opinion:blockOpinion.html.twig' with {'opinion': opinion, 'opinionType': opinion.opinionType, 'showRanking': true} only %}
+                            {% endfor %}
+                        </ul>
+                        {% if opinions | length > opinionsDisplayNb  %}
+                            <div class="opinion  opinion__footer  box">
+                                <a href="{{ path('app_consultation_show_opinions_ranking', {'consultationSlug': consultation.slug, 'stepSlug': currentStep.slug}) }}" class="text-center" style="display: block">
+                                    {{ 'opinion.show.all'|trans({}, 'CapcoAppBundle') }}
+                                </a>
+                            </div>
+                        {% endif %}
+                    {% else %}
+                        <div class="consultation__empty-block  text-center">
+                            <p class="icon  cap-bubble-attention-6"></p>
+                            <p>{{ 'opinion.show.none'|trans({}, 'CapcoAppBundle') }}</p>
+                        </div>
+                    {% endif %}
+                </div>
+
+                {% if (versions | length > 0) %}
+                    <div id="versions--ranking" class="anchor-offset  block  block--bordered">
+
+                        <div class="opinion opinion--default">
+                            <div class="opinion__header  opinion__header--mobile-centered">
+                                <h2 class="pull-left  h4  opinion__header__title">
+                                    {{ 'consultation.ranking.versions' | transchoice(versions | length, {}, 'CapcoAppBundle')  }}
+                                </h2>
+                            </div>
+                        </div>
+
+                        <ul class="media-list  opinion__list">
+                            {% for version in versions %}
+                                {% include 'CapcoAppBundle:Opinion:blockOpinion.html.twig' with {'opinion': version, 'isVersion': true, 'showRanking': true} only %}
+                            {% endfor %}
+                        </ul>
+                        {% if versions | length > versionsDisplayNb  %}
+                            <div class="opinion  opinion__footer  box">
+                                <a href="{{ path('app_consultation_show_versions_ranking', {'consultationSlug': consultation.slug, 'stepSlug': currentStep.slug}) }}" class="text-center" style="display: block">
+                                    {{ 'opinion.show.all'|trans({}, 'CapcoAppBundle') }}
+                                </a>
+                            </div>
+                        {% endif %}
+                    </div>
+                    {% endif %}
+
+            </div> <!-- col-xs-12  col-sm-8  col-md-9 -->
+        </div> <!-- .row -->
+    </div>
+
+{% endblock %}

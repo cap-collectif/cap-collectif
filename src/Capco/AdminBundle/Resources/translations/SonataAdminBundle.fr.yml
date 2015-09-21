@@ -185,6 +185,7 @@ admin:
       group_content: Contenu
       group_meta: Métadonnées
       group_opinion_types: Structure
+      group_ranking: Classements
       group_steps: Étapes
       is_enabled: Publié
       opened_at: Ouvert
@@ -193,6 +194,9 @@ admin:
       posts: Articles
       posts_count: Articles
       published_at: Publication
+      ranking:
+        max_opinions: Taille du classement des propositions
+        max_versions: Taille du classement des révisions
       steps: Étapes
       step_position: Position de l'étape
       step_title: Titre de l'étape
@@ -432,11 +436,8 @@ admin:
       end_at: Termine
       is_enabled: Publié
       position: Position
-      ranking:
-        max_opinions: Taille du classement des propositions
-        max_versions: Taille du classement des révisions
-        opinions_display_number: Nombre de propositions dans l'aperçu du classement
-        versions_display_number: Nombre de révisions dans l'aperçu du classement
+      opinions_display_number: Nombre de propositions dans l'aperçu du classement
+      versions_display_number: Nombre de révisions dans l'aperçu du classement
       start_at: Commence
       synthesis: Synthèse
       title: Titre
