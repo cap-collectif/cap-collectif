@@ -137,11 +137,10 @@
                 <a class="btn  btn-primary" href="{{ path('app_consultation_show', {'consultationSlug': consultation.slug, 'stepSlug': consultationStepOpen.slug}) }}">{{ 'step.presentation.participe' | trans({}, 'CapcoAppBundle') }}</a>
             {% endif %}
 
-            {% include 'CapcoAppBundle:Block:share_button.html.twig' with {
-            'url': consultation | capco_first_step_link(true),
-            'title': consultation.title,
-            'id': 'consultation-' ~ consultation.slug,
-            } only %}
+            {{ sonata_block_render({'type': 'capco.block.service.share_button'}, {
+                'url': (consultation | capco_first_step_link(true)),
+                'title': consultation.title
+            }) }}
 
             {% if consultation.exportable %}
                 {% include 'CapcoAppBundle:Consultation:download_button.html.twig' with {'consultation': consultation} only %}

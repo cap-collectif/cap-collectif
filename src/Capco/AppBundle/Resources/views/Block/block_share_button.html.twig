@@ -1,6 +1,5 @@
-{% if is_feature_enabled('share_buttons') %}
-    {% set classes = classes is defined ? classes : '' %}
-    {% set btn_classes = btn_classes is defined ? btn_classes : '' %}
+{% block block %}
+    {% if is_feature_enabled('share_buttons') %}
     <div class="dropdown  dropdown--custom  {{ classes }}">
         <button class="btn  btn-default {{ btn_classes }}" type="button" data-toggle="dropdown"><i class="cap cap-link"></i> {{ 'share_button.share' | trans({}, 'CapcoAppBundle') }} <span class="caret"></span></button>
         <ul class="dropdown-menu" role="menu">
@@ -25,14 +24,14 @@
                 </a>
             </li>
             <li>
-                <button class="btn-link" data-toggle="modal" data-target="#shareLink{{ id }}">
+                <button class="btn-link" data-toggle="modal" data-target="#shareLink{{ block.id }}">
                     <i class="cap cap-link-1"></i> {{ 'share_button.link' | trans({}, 'CapcoAppBundle') }}
                 </button>
             </li>
         </ul>
     </div>
 
-    <div class="modal fade  modal--custom" id="shareLink{{ id }}" tabindex="-1" role="dialog" aria-labelledby="{{ title }}" aria-hidden="true">
+    <div class="modal fade  modal--custom" id="shareLink{{ block.id }}" tabindex="-1" role="dialog" aria-labelledby="{{ title }}" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -41,9 +40,10 @@
                 </div>
                 <div class="modal-body">
                     <p class="excerpt">{{ title }}</p>
-                    <textarea id="shareLinkInput{{ id }}" title="{{ 'share_button.share_on.link' | trans({}, 'CapcoAppBundle') }}" readonly rows="3">{{ url }}</textarea>
+                    <textarea id="shareLinkInput{{ block.id }}" title="{{ 'share_button.share_on.link' | trans({}, 'CapcoAppBundle') }}" readonly rows="3">{{ url }}</textarea>
                 </div>
             </div>
         </div>
     </div>
- {% endif %}
+    {% endif %}
+{% endblock %}

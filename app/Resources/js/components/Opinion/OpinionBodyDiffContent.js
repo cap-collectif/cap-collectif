@@ -23,7 +23,7 @@ const OpinionBodyDiffContent = React.createClass({
 
     const parts = [];
     sections.forEach((section) => {
-      if (section.indexOf('<span') == -1) {
+      if (section.indexOf('<span') === -1) {
         parts.push({
           content: section,
           link: false,
@@ -37,7 +37,7 @@ const OpinionBodyDiffContent = React.createClass({
             title: section.substring(section.lastIndexOf('data-diff-title="') + 'data-diff-title="'.length, section.lastIndexOf('" data-diff-before=')),
             before: section.substring(section.lastIndexOf('data-diff-before="') + 'data-diff-before="'.length, section.lastIndexOf('" data-diff-after=')),
             after: section.substring(section.lastIndexOf('data-diff-after="') + 'data-diff-after="'.length, section.lastIndexOf('" data-diff-stop')),
-          }
+          },
         });
       }
     });
