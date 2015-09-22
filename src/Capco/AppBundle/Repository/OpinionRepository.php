@@ -14,15 +14,21 @@ class OpinionRepository extends EntityRepository
     public function getOne($id)
     {
         $qb = $this->getIsEnabledQueryBuilder()
-            ->addSelect('a', 'm', 'ot', 's')
+            ->addSelect('a', 'm', 'ot', 's', 'arg', 'sources')
             ->leftJoin('o.Author', 'a')
             ->leftJoin('a.Media', 'm')
             ->leftJoin('o.OpinionType', 'ot')
+            ->leftJoin('o.arguments', 'arg')
+            ->leftJoin('o.sources', 'sources')
+            ->leftJoin('o.versions', 'versions')
             ->leftJoin('o.step', 's')
             ->leftJoin('o.appendices', 'appendix')
             ->andWhere('o.id = :id')
             ->setParameter('id', $id)
             ->addOrderBy('appendix.position', 'ASC')
+            ->addOrderBy('arg.updatedAt', 'DESC')
+            ->addOrderBy('sources.updatedAt', 'DESC')
+            ->addOrderBy('versions.updatedAt', 'DESC')
         ;
 
         return $qb->getQuery()->getOneOrNullResult();

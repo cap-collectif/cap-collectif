@@ -1,8 +1,22 @@
 import AppDispatcher from '../dispatchers/AppDispatcher';
 import Fetcher from '../services/Fetcher';
-import {CREATE_OPINION_VERSION, UPDATE_OPINION_VERSION, CREATE_OPINION_VERSION_VOTE} from '../constants/OpinionVersionConstants';
+import {RECEIVE_OPINION} from '../constants/OpinionConstants';
 
 export default {
+
+  loadOpinion: (opinionId, versionId) => {
+    const url = versionId ? `/opinions/${opinionId}/versions/${versionId}` : `/opinions/${opinionId}`;
+    Fetcher
+      .get(url)
+      .then((data) => {
+        AppDispatcher.dispatch({
+          actionType: RECEIVE_OPINION,
+          opinion: data.opinion ? data.opinion : data.version,
+          rankingThreshold: data.rankingThreshold,
+        });
+        return true;
+      });
+  },
 
   vote: (opinion, data) => {
     return Fetcher

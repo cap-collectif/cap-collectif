@@ -1,3 +1,6 @@
+import OpinionStore from '../../stores/OpinionStore';
+import OpinionActions from '../../actions/OpinionActions';
+
 import OpinionBox from './OpinionBox';
 import OpinionTabs from './OpinionTabs';
 import Fetcher from '../../services/Fetcher';
@@ -19,11 +22,32 @@ const OpinionPage = React.createClass({
     };
   },
 
+  componentWillMount() {
+    OpinionStore.addChangeListener(this.onChange);
+  },
+
   componentDidMount() {
     this.loadOpinion();
   },
 
+  componentWillUnmount() {
+    OpinionStore.removeChangeListener(this.onChange);
+  },
+
+  onChange() {
+    if (!OpinionStore.isProcessing && OpinionStore.isOpinionSync) {
+      this.setState({
+        opinion: OpinionStore.opinion,
+        isLoading: false,
+      });
+      return;
+    }
+
+    this.loadElementFromServer();
+  },
+
   render() {
+    console.log(this.state.opinion);
     return (
       <div className="has-chart">
         <Loader show={this.state.isLoading} />
@@ -40,29 +64,10 @@ const OpinionPage = React.createClass({
   },
 
   loadOpinion() {
-    if (this.props.versionId) {
-      Fetcher
-      .get(`/opinions/${this.props.opinionId}/versions/${this.props.versionId}`)
-      .then((data) => {
-        this.setState({
-          opinion: data.version,
-          rankingThreshold: data.rankingThreshold,
-          isLoading: false,
-        });
-        return true;
-      });
-      return;
-    }
-    Fetcher
-    .get(`/opinions/${this.props.opinionId}`)
-    .then((data) => {
-      this.setState({
-        opinion: data.opinion,
-        rankingThreshold: data.rankingThreshold,
-        isLoading: false,
-      });
-      return true;
-    });
+    OpinionActions.loadOpinion(
+      this.props.opinionId,
+      this.props.versionId
+    );
   },
 
 });
