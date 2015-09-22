@@ -39,7 +39,7 @@
             'sortOpinionsForm': sortOpinionsForm,
         } only %}
 
-        {% if(opinions|length > 0) %}
+        {% if (opinions|length > 0) %}
         <ul class="media-list  opinion__list">
             {% for opinion in opinions %}
                 {% include 'CapcoAppBundle:Opinion:blockOpinion.html.twig' with {'opinion': opinion, 'opinionType': opinionType} only %}

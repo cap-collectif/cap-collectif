@@ -243,93 +243,94 @@ theme:
 
 #Consultation
 consultation:
-  download:
-    button: Exporter
-    modal:
-      title: Exporter l'étape de consultation "%title%"
-      body: Choisissez le format du fichier :
-      button: Format %format%
-      cancel: Fermer
-    step: Étape %position% : "%title%"
-  share_button: Inviter
-  sort:
-    published_at: Date de publication
-    contributions_nb: Nombre de contributions
-  title: Consultations
-  see_all: Voir toutes les consultations
-  none: Aucune consultation.
-  show:
-    on_date: le %date%
-    events:
-      title: Évènements
-    posts:
-      title: Actualités
-    contributors:
-      title: Participants
-    in_theme: dans
-    alert:
-      ended:
-        title: Consultation terminée.
-        text: La période de participation est maintenant terminée. Merci à tous d'avoir contribué.
-      future:
-        title: Consultation à venir.
-        text: La période de participation débutera le %date%.
-    meta:
-      remaining_days: "]-Inf, 1] jour restant | ]1,Inf[ jours restants"
-      total_count: "]-Inf, 1] contribution | ]1,Inf[ contributions"
-      contributors_count: "]-Inf, 1] participant | ]1,Inf[ participants"
-      votes_count: "]-Inf, 1] vote | ]1,Inf[ votes"
-      argumentsCount: "]-Inf, 1] %count% argument | ]1,Inf[ %count% arguments"
-      opinionsCount: "]-Inf, 1] %count% proposition | ]1,Inf[ %count% propositions"
-      versionsCount: "]-Inf, 1] %count% révision | ]1,Inf[ %count% révisions"
-      sourcesCount: "]-Inf, 1] %count% source | ]1,Inf[ %count% sources"
-      read_more: Lire la suite
-      read_less: Replier
-      intro:
-        title: Introduction
-      step:
-        title: Étapes
-      info:
-        title: Informations
-        posts: Actualités
-        events: Évènements
-        contributors: Participants
-      data:
-        title: Données
-        trash: Corbeille
-    remaining_days: "]-Inf, 0] Consultation terminée | {1} Dernier jour | ]1,Inf[ %count% jours restants"
-    end_at: Date de fin : %date%
-    opinions: "]-Inf, 1] %count% proposition | ]1,Inf[ %count% propositions"
-    arguments: "]-Inf, 1] %count% argument | ]1,Inf[ %count% arguments"
-    votes: "]-Inf, 1] %count% vote | ]1,Inf[ %count% votes"
-    versions: "]-Inf, 1] %count% révision | ]1,Inf[ %count% révisions"
-    sources: "]-Inf, 1] %count% source | ]1,Inf[ %count% sources"
-    contributions_no_nb: "]-Inf, 1] contribution | ]1,Inf[ contributions"
-    contributors_nb: "]-Inf, 1] participant | ]1,Inf[ participants"
-    opinions_no_nb: "]-Inf, 1] opinion | ]1,Inf[ opinions"
-    arguments_no_nb: "]-Inf, 1] argument | ]1,Inf[ arguments"
-    votes_no_nb: "]-Inf, 1] vote | ]1,Inf[ votes"
-    global:
-      title: Vue d'ensemble
-    trashed:
-      title: Corbeille
-      short_name: Corbeille
-      text: La corbeille contient des contributions signalées comme abusives par les utilisateurs et validées par l'auteur.
-      none: Aucun élèment dans la corbeille.
-  searchform:
-    no_result:  Aucune consultation ne correspond à ces critères de recherche.
-    term: Terme
-    sort: Trier :
-    theme: Thème
-    all_themes: Tous les thèmes
-    search: Rechercher
-  error:
-    not_found: Consultation introuvable.
-    no_contribute: Impossible de contribuer sur cette consultation.
-    not_exportable: Impossible de télécharger cette consultation.
   contributors:
     no: Il n'y a pas encore de participants pour le moment.
     participate: Soyez le premier à %link%participer%endlink%.
+  download:
+    button: Exporter
+    modal:
+      body: Choisissez le format du fichier :
+      button: Format %format%
+      cancel: Fermer
+      title: Exporter l'étape de consultation "%title%"
+    step: Étape %position% : "%title%"
+  error:
+    not_exportable: Impossible de télécharger cette consultation.
+    not_found: Consultation introuvable.
+    no_contribute: Impossible de contribuer sur cette consultation.
+  none: Aucune consultation.
+  ranking:
+    opinions: ]-Inf, 1] Classement des propositions | ]1,Inf[ Classement des %count% propositions
+    versions: ]-Inf, 1] Classement des versions | ]1,Inf[ Classement des %count% versions
+  searchform:
+    all_themes: Tous les thèmes
+    no_result:  Aucune consultation ne correspond à ces critères de recherche.
+    search: Rechercher
+    sort: Trier :
+    term: Terme
+    theme: Thème
+  see_all: Voir toutes les consultations
+  share_button: Inviter
+  show:
+    alert:
+      ended:
+        text: La période de participation est maintenant terminée. Merci à tous d'avoir contribué.
+        title: Consultation terminée.
+      future:
+        text: La période de participation débutera le %date%.
+        title: Consultation à venir.
+    arguments: "]-Inf, 1] %count% argument | ]1,Inf[ %count% arguments"
+    arguments_no_nb: "]-Inf, 1] argument | ]1,Inf[ arguments"
+    contributions_no_nb: "]-Inf, 1] contribution | ]1,Inf[ contributions"
+    contributors:
+      title: Participants
+    contributors_nb: "]-Inf, 1] participant | ]1,Inf[ participants"
+    end_at: Date de fin : %date%
+    events:
+      title: Évènements
+    global:
+      title: Vue d'ensemble
+    in_theme: dans
+    meta:
+      argumentsCount: "]-Inf, 1] %count% argument | ]1,Inf[ %count% arguments"
+      contributors_count: "]-Inf, 1] participant | ]1,Inf[ participants"
+      info:
+        contributors: Participants
+        events: Évènements
+        posts: Actualités
+        trash: Corbeille
+        title: Informations
+      intro:
+        title: Introduction
+      opinionsCount: "]-Inf, 1] %count% proposition | ]1,Inf[ %count% propositions"
+      read_less: Replier
+      read_more: Lire la suite
+      remaining_days: "]-Inf, 1] jour restant | ]1,Inf[ jours restants"
+      step:
+        title: Étapes
+      sourcesCount: "]-Inf, 1] %count% source | ]1,Inf[ %count% sources"
+      total_count: "]-Inf, 1] contribution | ]1,Inf[ contributions"
+      versionsCount: "]-Inf, 1] %count% révision | ]1,Inf[ %count% révisions"
+      votes_count: "]-Inf, 1] vote | ]1,Inf[ votes"
+    on_date: le %date%
+    opinions: "]-Inf, 1] %count% proposition | ]1,Inf[ %count% propositions"
+    opinions_no_nb: "]-Inf, 1] opinion | ]1,Inf[ opinions"
+    posts:
+      title: Actualités
+    remaining_days: "]-Inf, 0] Consultation terminée | {1} Dernier jour | ]1,Inf[ %count% jours restants"
+    sources: "]-Inf, 1] %count% source | ]1,Inf[ %count% sources"
+    versions: "]-Inf, 1] %count% révision | ]1,Inf[ %count% révisions"
+    votes: "]-Inf, 1] %count% vote | ]1,Inf[ %count% votes"
+    votes_no_nb: "]-Inf, 1] vote | ]1,Inf[ votes"
+    trashed:
+      none: Aucun élèment dans la corbeille.
+      short_name: Corbeille
+      text: La corbeille contient des contributions signalées comme abusives par les utilisateurs et validées par l'auteur.
+      title: Corbeille
+  sort:
+    contributions_nb: Nombre de contributions
+    published_at: Date de publication
+  title: Consultations
 
 step:
   presentation:
@@ -482,38 +483,43 @@ source:
     not_author: Vous ne pouvez pas modifier cette source car vous n'en êtes pas l'auteur.
 
 opinion:
+  create:
+    button: Proposer
+    cancel: Annuler
+    error: Erreur, impossible de créer une proposition.
+    submit: Publier
+    success: Merci ! Votre proposition a bien été enregistrée.
+    text: Merci d'examiner %type% en premier lieu afin de ne pas soumettre de doublon. Vous pouvez voter pour une proposition existante !
+    title: Faire une proposition
+  delete:
+    cancel: Annuler
+    error: Erreur, impossible de supprimer la proposition.
+    page_title: Supprimer la proposition %title%
+    submit: Supprimer
+    subtitle: Êtes-vous sûr de vouloir supprimer cette proposition ?
+    success: Votre proposition a bien été supprimée.
+    text: Cette suppression marquera la fin de ce contenu à jamais.
+    title: Supprimer une proposition
   show:
-    back: Retour
     all: Voir toutes les propositions
-    vote:
-      cancel: Annuler mon vote
-      ok: D'accord
-      nok: Pas d'accord
-      mitige: Mitigé
+    back: Retour
     none: Il n'y a pas encore de proposition.
     no_opinion_types: Aucun type d'opinion n'est défini.
     pinned:
       label: Épinglé
       tooltip: Cette proposition a été épinglée par l'administrateur.
+    ranking:
+      opinions: Top %max% des propositions
+      versions: Top %max% des révisions
     trashed:
       label: Dans la corbeille
-  create:
-    title: Faire une proposition
-    text: Merci d'examiner %type% en premier lieu afin de ne pas soumettre de doublon. Vous pouvez voter pour une proposition existante !
-    button: Proposer
-    cancel: Annuler
-    submit: Publier
-    success: Merci ! Votre proposition a bien été enregistrée.
-    error: Erreur, impossible de créer une proposition.
-  delete:
-    page_title: Supprimer la proposition %title%
-    title: Supprimer une proposition
-    subtitle: Êtes-vous sûr de vouloir supprimer cette proposition ?
-    text: Cette suppression marquera la fin de ce contenu à jamais.
-    cancel: Annuler
-    submit: Supprimer
-    success: Votre proposition a bien été supprimée.
-    error: Erreur, impossible de supprimer la proposition.
+    versions:
+      none: Il n'y a pas encore de révision.
+    vote:
+      cancel: Annuler mon vote
+      mitige: Mitigé
+      nok: Pas d'accord
+      ok: D'accord
   update:
     page_title: Modifier la proposition %title%
     button: Modifier

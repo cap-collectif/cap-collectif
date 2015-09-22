@@ -171,6 +171,20 @@ class Consultation
     private $votesCount = 0;
 
     /**
+     * @var int
+     *
+     * @ORM\Column(name="opinions_ranking_threshold", type="integer", nullable=true)
+     */
+    private $opinionsRankingThreshold = null;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="versions_ranking_threshold", type="integer", nullable=true)
+     */
+    private $versionsRankingThreshold = null;
+
+    /**
      * Constructor.
      */
     public function __construct()
@@ -587,6 +601,38 @@ class Consultation
     public function setVotesCount($votesCount)
     {
         $this->votesCount = $votesCount;
+    }
+
+    /**
+     * @return int
+     */
+    public function getOpinionsRankingThreshold()
+    {
+        return $this->opinionsRankingThreshold;
+    }
+
+    /**
+     * @param int $opinionsRankingThreshold
+     */
+    public function setOpinionsRankingThreshold($opinionsRankingThreshold)
+    {
+        $this->opinionsRankingThreshold = $opinionsRankingThreshold;
+    }
+
+    /**
+     * @return int
+     */
+    public function getVersionsRankingThreshold()
+    {
+        return $this->versionsRankingThreshold;
+    }
+
+    /**
+     * @param int $versionsRankingThreshold
+     */
+    public function setVersionsRankingThreshold($versionsRankingThreshold)
+    {
+        $this->versionsRankingThreshold = $versionsRankingThreshold;
     }
 
     // ******************** Custom methods ******************************

@@ -52,6 +52,7 @@ class ReinitCommand extends ContainerAwareCommand
         $this->loadToggles($output);
         $this->recalculateCounters($output);
         $this->recalculateConsultationsCounters($output);
+        $this->recalculateRankings($output);
         $this->updateSyntheses($output);
         $this->populateElastica($output);
 
@@ -127,6 +128,14 @@ class ReinitCommand extends ContainerAwareCommand
     protected function recalculateConsultationsCounters(OutputInterface $output)
     {
         $command = $this->getApplication()->find('capco:recalculate-consultations-counters');
+        $input = new ArrayInput(array(''));
+        $input->setInteractive(false);
+        $command->run($input, $output);
+    }
+
+    protected function recalculateRankings(OutputInterface $output)
+    {
+        $command = $this->getApplication()->find('capco:recalculate-rankings');
         $input = new ArrayInput(array(''));
         $input->setInteractive(false);
         $command->run($input, $output);

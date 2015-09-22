@@ -100,6 +100,11 @@ class OpinionVersion
      */
     protected $updatedAt;
 
+    /**
+     * @ORM\Column(name="ranking", type="integer", nullable=true)
+     */
+    protected $ranking = null;
+
     public function __construct()
     {
         $this->updatedAt = new \DateTime();
@@ -327,6 +332,22 @@ class OpinionVersion
     public function setArgumentsCount($argumentsCount)
     {
         $this->argumentsCount = $argumentsCount;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getRanking()
+    {
+        return $this->ranking;
+    }
+
+    /**
+     * @param mixed $ranking
+     */
+    public function setRanking($ranking)
+    {
+        $this->ranking = $ranking;
     }
 
     // ******************************* Custom methods **************************************
