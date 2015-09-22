@@ -15,20 +15,16 @@ class OpinionRepository extends EntityRepository
     {
         $qb = $this->getIsEnabledQueryBuilder()
             ->addSelect('a', 'm', 'ot', 's', 'arg', 'sources')
-            ->leftJoin('o.Author', 'a')
-            ->leftJoin('a.Media', 'm')
-            ->leftJoin('o.OpinionType', 'ot')
-            ->leftJoin('o.arguments', 'arg')
-            ->leftJoin('o.sources', 'sources')
-            ->leftJoin('o.versions', 'versions')
-            ->leftJoin('o.step', 's')
-            ->leftJoin('o.appendices', 'appendix')
+            ->join('o.Author', 'a')
+            ->join('a.Media', 'm')
+            ->join('o.OpinionType', 'ot')
+            ->join('o.arguments', 'arg')
+            ->join('o.sources', 'sources')
+            ->join('o.versions', 'versions')
+            ->join('o.step', 's')
+            ->join('o.appendices', 'appendix')
             ->andWhere('o.id = :id')
             ->setParameter('id', $id)
-            ->addOrderBy('appendix.position', 'ASC')
-            ->addOrderBy('arg.updatedAt', 'DESC')
-            ->addOrderBy('sources.updatedAt', 'DESC')
-            ->addOrderBy('versions.updatedAt', 'DESC')
         ;
 
         return $qb->getQuery()->getOneOrNullResult();

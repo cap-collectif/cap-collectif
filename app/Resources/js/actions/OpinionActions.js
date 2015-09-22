@@ -7,6 +7,9 @@ import {
   UPDATE_OPINION_FAILURE,
   CREATE_OPINION_VOTE,
   DELETE_OPINION_VOTE,
+  RECEIVE_ARGUMENTS,
+  CREATE_ARGUMENT_SUCCESS,
+  CREATE_ARGUMENT_FAILURE,
 
   CREATE_OPINION_VERSION,
   UPDATE_OPINION_VERSION,
@@ -77,6 +80,35 @@ export default {
       });
   },
 
+  // Arguments
+
+  loadArguments: (opinion, type, filter) => {
+    const baseUrl = opinion.parent ? '/versions/' : '/opinions/';
+    return Fetcher
+      .get(`${baseUrl}${opinion.id}/arguments?type=${type}&filter=${filter}`)
+      .then((data) => {
+        AppDispatcher.dispatch({
+          actionType: RECEIVE_ARGUMENTS,
+          arguments: data.arguments,
+          type: type,
+        });
+        return true;
+      });
+  },
+
+  addArgument: (opinion, data) => {
+    const baseUrl = opinion.parent ? `/opinions/${opinion.parent.id}/versions/${opinion.id}` : `/opinions/${opinion.id}`;
+    return Fetcher
+      .post(`${baseUrl}/arguments`, data)
+      .then(() => {
+        AppDispatcher.dispatch({
+          actionType: CREATE_ARGUMENT_SUCCESS,
+          type: data.type,
+        });
+        return true;
+      });
+  },
+
   // Create or update versions
 
   createVersion: (opinion, data) => {
@@ -96,22 +128,6 @@ export default {
         AppDispatcher.dispatch({
           actionType: UPDATE_OPINION_VERSION,
         });
-      });
-  },
-
-  addVersionArgument: (opinion, version, data) => {
-    return Fetcher
-    .post(`/opinions/${opinion}/versions/${version}/arguments`, data)
-    .then(() => {
-      return true;
-    });
-  },
-
-  addArgument: (opinion, data) => {
-    return Fetcher
-      .post(`/opinions/${opinion}/arguments`, data)
-      .then(() => {
-        return true;
       });
   },
 

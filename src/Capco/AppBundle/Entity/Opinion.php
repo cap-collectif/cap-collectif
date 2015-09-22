@@ -112,11 +112,13 @@ class Opinion
 
     /**
      * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\Source", mappedBy="Opinion",  cascade={"persist", "remove"}, orphanRemoval=true)
+     * @ORM\OrderBy({"updatedAt" = "DESC"})
      */
     protected $Sources;
 
     /**
      * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\Argument", mappedBy="opinion",  cascade={"persist", "remove"}, orphanRemoval=true)
+     * @ORM\OrderBy({"updatedAt" = "DESC"})
      */
     protected $arguments;
 
@@ -137,6 +139,7 @@ class Opinion
 
     /**
      * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\OpinionVersion", mappedBy="parent", cascade={"persist", "remove"})
+     * @ORM\OrderBy({"updatedAt" = "DESC"})
      */
     private $versions;
 

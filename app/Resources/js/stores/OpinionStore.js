@@ -6,6 +6,8 @@ import {
   UPDATE_OPINION_FAILURE,
   CREATE_OPINION_VOTE,
   DELETE_OPINION_VOTE,
+  RECEIVE_ARGUMENTS,
+  CREATE_ARGUMENT_SUCCESS,
 
   CREATE_OPINION_VERSION,
   UPDATE_OPINION_VERSION,
@@ -20,6 +22,10 @@ class OpinionStore extends BaseStore {
     this._opinion = null;
     this._rankingThreshold = null;
     this._isOpinionSync = false;
+    this._areArgumentsSync = {
+      0: true,
+      1: true,
+    }
     this._messages = {
       errors: [],
       success: [],
@@ -58,6 +64,28 @@ class OpinionStore extends BaseStore {
         this._opinion.user_vote = null;
         this.emitChange();
         break;
+      case RECEIVE_ARGUMENTS:
+        const args = [];
+        this._opinion.arguments.map ((arg) => {
+          if (arg.type !== action.type) {
+            args.push(arg);
+          }
+        });
+        this._opinion.arguments = args.concat(action.arguments);
+        if (action.type === 0) {
+          this._opinion.arguments_no_count = action.arguments.length;
+        } else if (action.type === 1) {
+          this._opinion.arguments_yes_count = action.arguments.length;
+        }
+        this._opinion.arguments_count = this._opinion.arguments_yes_count + this._opinion.arguments_no_count;
+        this._areArgumentsSync[action.type] = true;
+        this.emitChange();
+        break;
+      case CREATE_ARGUMENT_SUCCESS:
+        this._isProcessing = false;
+        this._areArgumentsSync[action.type] = false;
+        this.emitChange();
+        break;
       case UPDATE_OPINION_SUCCESS:
         this._resetMessages();
         this._messages.success.push(action.message);
@@ -89,6 +117,10 @@ class OpinionStore extends BaseStore {
 
   get isOpinionSync() {
     return this._isOpinionSync;
+  }
+
+  get areArgumentsSync() {
+    return this._areArgumentsSync;
   }
 
   get messages() {

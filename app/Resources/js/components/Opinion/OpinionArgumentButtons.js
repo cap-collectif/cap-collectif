@@ -73,7 +73,7 @@ const OpinionArgumentButtons = React.createClass({
         </form>
         { ' ' }
         <span className="opinion__votes-nb">
-          { argument.votes_count + (this.hasVotedSince() ? 1 : 0) }
+          { argument.votes_count + this.getVoteDiff()}
         </span>
         { ' ' }
 
@@ -93,8 +93,11 @@ const OpinionArgumentButtons = React.createClass({
     ArgumentActions.deleteVote(this.props.argument.id);
   },
 
-  hasVotedSince() {
-    return this.state.hasVoted && !this.props.argument.has_user_voted;
+  getVoteDiff() {
+    if (this.state.hasVoted !== this.props.argument.has_user_voted) {
+      return this.props.argument.has_user_voted ? -1 : 1;
+    }
+    return 0;
   },
 
   isTheUserTheAuthor() {
