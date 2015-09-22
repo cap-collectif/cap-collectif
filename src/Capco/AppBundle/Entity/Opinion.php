@@ -10,7 +10,6 @@ use Capco\AppBundle\Traits\TrashableTrait;
 use Capco\AppBundle\Traits\SluggableTitleTrait;
 use Capco\AppBundle\Traits\VotableTrait;
 use Capco\UserBundle\Entity\User;
-use Capco\AppBundle\Entity\OpinionModal;
 
 /**
  * Opinion.
@@ -119,11 +118,6 @@ class Opinion
      * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\Argument", mappedBy="opinion",  cascade={"persist", "remove"}, orphanRemoval=true)
      */
     protected $arguments;
-
-    /**
-     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\OpinionModal", mappedBy="opinion",  cascade={"persist", "remove"}, orphanRemoval=true)
-     */
-    protected $modals;
 
     /**
      * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\OpinionVote", mappedBy="opinion", cascade={"persist", "remove"}, orphanRemoval=true)
@@ -440,27 +434,6 @@ class Opinion
     public function removeArgument(Argument $argument)
     {
         $this->arguments->removeElement($argument);
-
-        return $this;
-    }
-
-    public function getModals()
-    {
-        return $this->modals;
-    }
-
-    public function addModal(OpinionModal $modal)
-    {
-        if (!$this->modals->contains($modal)) {
-            $this->modals->add($modal);
-        }
-
-        return $this;
-    }
-
-    public function removeModal(OpinionModal $modal)
-    {
-        $this->modals->removeElement($modal);
 
         return $this;
     }

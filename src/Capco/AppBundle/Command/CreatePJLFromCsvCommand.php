@@ -16,7 +16,6 @@ use Capco\AppBundle\Entity\Consultation;
 use Capco\AppBundle\Entity\ConsultationAbstractStep;
 use Capco\AppBundle\Entity\ConsultationStep;
 use Capco\AppBundle\Entity\ConsultationType;
-use Capco\AppBundle\Entity\OpinionModal;
 
 class CreatePJLFromCsvCommand extends ContainerAwareCommand
 {
@@ -200,7 +199,6 @@ class CreatePJLFromCsvCommand extends ContainerAwareCommand
         $progress->start();
 
         $consultation = new Consultation();
-        $consultation->setAuthor($user);
         $consultation->setTitle('PJL Numérique');
 
         $consultationAbsStep = new ConsultationAbstractStep();
@@ -291,14 +289,8 @@ class CreatePJLFromCsvCommand extends ContainerAwareCommand
                     throw new \Exception('Unable to find link', 1);
                 }
 
-                $modal = new OpinionModal();
-                $modal->setOpinion($opinion);
-                $modal->setTitle($row['modal_title']);
-                $modal->setKey($row['link']);
-                $modal->setBefore($row['modal_current']);
-                $modal->setAfter($row['modal_next']);
-
-                $em->persist($modal);
+                $string = '<span data-diff-title="'.$row['modal_title'].'" data-diff-before="'.$row['modal_current'].'" data-diff-after="'.$row['modal_next'].'" data-diff-stop="">'.$row['link'].'</span>';
+                $paragraphe = substr_replace($paragraphe, $string, $pos, strlen($row['link']));
             }
 
             $content = $opinion->getBody();

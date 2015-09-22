@@ -33,7 +33,7 @@ const OpinionBody = React.createClass({
       );
     }
 
-    return <OpinionBodyDiffContent opinion={opinion} />;
+    return <OpinionBodyDiffContent html={opinion.body} />;
   },
 
   isVersion() {
