@@ -22,7 +22,6 @@ use JMS\Serializer\Annotation as Serializer;
  *      "presentation"  = "PresentationStep",
  *      "other"  = "OtherStep",
  *      "synthesis" = "SynthesisStep",
- *      "ranking" = "RankingStep",
  * })
  * @Serializer\ExclusionPolicy("all")
  * @Serializer\Discriminator(field = "step_type", map = {
@@ -30,7 +29,6 @@ use JMS\Serializer\Annotation as Serializer;
  *      "presentation"  = "Capco\AppBundle\Entity\PresentationStep",
  *      "other"  = "Capco\AppBundle\Entity\OtherStep",
  *      "synthesis" = "Capco\AppBundle\Entity\SynthesisStep",
- *      "ranking" = "Capco\AppBundle\Entity\RankingStep",
  * })
  */
 abstract class AbstractStep
@@ -54,7 +52,6 @@ abstract class AbstractStep
         'consultation' => 'step.types.consultation',
         'other' => 'step.types.other',
         'synthesis' => 'step.types.synthesis',
-        'ranking' => 'step.types.ranking',
     ];
 
     /**
@@ -376,11 +373,6 @@ abstract class AbstractStep
     }
 
     public function isSynthesisStep()
-    {
-        return false;
-    }
-
-    public function isRankingStep()
     {
         return false;
     }

@@ -31,8 +31,7 @@
 {% set hasPosts = is_feature_enabled('blog') and consultation.posts | length > 0 %}
 {% set hasEvents = is_feature_enabled('calendar') and consultation.events | length > 0 %}
 {% set hasContributors = consultation.totalOpinionsCount | length > 0 %}
-{% set showTrash = is_feature_enabled('consultation_trash') %}
-{% if hasPosts or hasEvents or hasContributors or showTrash %}
+{% if hasPosts or hasEvents or hasContributors %}
     <div class="block">
         <h2 class="h5 excerpt">{{ 'consultation.show.meta.info.title'|trans({}, 'CapcoAppBundle') | upper }}</h2>
         <div class="navbar--sub  navbar--no-nb">
@@ -59,14 +58,23 @@
                         </a>
                     </li>
                 {% endif %}
-                {% if showTrash %}
-                    <li {% if currentStep == 'trash_step' %} class="active" {% endif %}>
-                        <a href="{{ path('app_consultation_show_trashed', {
-                            'consultationSlug': consultation.slug }) }}">
-                            <p class="navbar__step-title">{{ 'consultation.show.meta.info.trash'|trans({}, 'CapcoAppBundle') }}  <i class="pull-right  excerpt  cap-arrow-66"></i></p>
-                        </a>
-                    </li>
-                {% endif %}
+            </ul>
+        </div>
+    </div>
+{% endif %}
+
+{% set showTrash = is_feature_enabled('consultation_trash') %}
+{% if showTrash %}
+    <div class="block">
+        <h2 class="h5 excerpt">{{ 'consultation.show.meta.data.title'|trans({}, 'CapcoAppBundle') | upper }}</h2>
+        <div class="navbar--sub  navbar--no-nb">
+            <ul class="nav">
+                <li {% if currentStep == 'trash_step' %} class="active" {% endif %}>
+                    <a href="{{ path('app_consultation_show_trashed', {
+                        'consultationSlug': consultation.slug }) }}">
+                        <p class="navbar__step-title">{{ 'consultation.show.meta.data.trash'|trans({}, 'CapcoAppBundle') }}  <i class="pull-right  excerpt  cap-arrow-66"></i></p>
+                    </a>
+                </li>
             </ul>
         </div>
     </div>

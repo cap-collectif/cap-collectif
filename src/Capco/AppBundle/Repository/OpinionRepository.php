@@ -2,7 +2,6 @@
 
 namespace Capco\AppBundle\Repository;
 
-use Capco\AppBundle\Entity\Consultation;
 use Capco\AppBundle\Entity\ConsultationStep;
 use Capco\AppBundle\Entity\OpinionType;
 use Doctrine\ORM\EntityRepository;
@@ -78,48 +77,6 @@ class OpinionRepository extends EntityRepository
 
         return $qb->getQuery()
             ->getOneOrNullResult();
-    }
-
-    /**
-     * Get all opinions in a consultation.
-     *
-     * @param $consultation
-     * @param $orderByRanking
-     * @param $limit
-     * @param $page
-     *
-     * @return mixed
-     */
-    public function getEnabledByConsultation($consultation, $orderByRanking = false, $limit = null, $page = 1)
-    {
-        $qb = $this->getIsEnabledQueryBuilder()
-            ->addSelect('ot', 's', 'aut', 'm')
-            ->leftJoin('o.OpinionType', 'ot')
-            ->leftJoin('o.Author', 'aut')
-            ->leftJoin('aut.Media', 'm')
-            ->leftJoin('o.step', 's')
-            ->leftJoin('s.consultationAbstractStep', 'cas')
-            ->andWhere('cas.consultation = :consultation')
-            ->andWhere('o.isTrashed = :trashed')
-            ->setParameter('consultation', $consultation)
-            ->setParameter('trashed', false)
-        ;
-
-        if ($orderByRanking) {
-            $qb->orderBy('o.ranking', 'ASC');
-        }
-
-        $qb->addOrderBy('o.updatedAt', 'DESC');
-
-        if ($limit !== null && is_int($limit) && 0 < $limit ) {
-            $query = $qb->getQuery()
-                ->setFirstResult(($page - 1) * $limit)
-                ->setMaxResults($limit)
-            ;
-            return new Paginator($query);
-        }
-
-        return $qb->getQuery()->getResult();
     }
 
     /**
@@ -261,8 +218,7 @@ class OpinionRepository extends EntityRepository
 
         $query = $qb->getQuery()
             ->setFirstResult(($page - 1) * $nbByPage)
-            ->setMaxResults($nbByPage)
-        ;
+            ->setMaxResults($nbByPage);
 
         return new Paginator($query);
     }
@@ -298,35 +254,11 @@ class OpinionRepository extends EntityRepository
             ->leftJoin('o.arguments', 'arg')
             ->andWhere('o.step = :step')
             ->setParameter('step', $step)
-            ->addOrderBy('o.updatedAt', 'DESC')
-        ;
+            ->addOrderBy('o.updatedAt', 'DESC');
 
         return $qb
             ->getQuery()
             ->getResult();
-    }
-
-    /**
-     * Get all opinions by consultation ordered by votesCountOk.
-     *
-     * @param $consultation
-     * @return mixed
-     */
-    public function getEnabledByConsultationsOrderedByVotes(Consultation $consultation)
-    {
-        $qb = $this->getIsEnabledQueryBuilder()
-            ->innerJoin('o.step', 's')
-            ->innerJoin('s.consultationAbstractStep', 'cas')
-            ->innerJoin('cas.consultation', 'c')
-            ->andWhere('o.isTrashed = :trashed')
-            ->andWhere('cas.consultation = :consultation')
-            ->setParameter('trashed', false)
-            ->setParameter('consultation', $consultation)
-            ->orderBy('o.voteCountOk', 'DESC')
-            ->addOrderBy('o.updatedAt', 'DESC')
-        ;
-
-        return $qb->getQuery()->getResult();
     }
 
     protected function getIsEnabledQueryBuilder($alias = 'o')

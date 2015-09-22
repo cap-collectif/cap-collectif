@@ -100,11 +100,6 @@ class OpinionVersion
      */
     protected $updatedAt;
 
-    /**
-     * @ORM\Column(name="ranking", type="integer", nullable=true)
-     */
-    protected $ranking = null;
-
     public function __construct()
     {
         $this->updatedAt = new \DateTime();
@@ -334,22 +329,6 @@ class OpinionVersion
         $this->argumentsCount = $argumentsCount;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getRanking()
-    {
-        return $this->ranking;
-    }
-
-    /**
-     * @param mixed $ranking
-     */
-    public function setRanking($ranking)
-    {
-        $this->ranking = $ranking;
-    }
-
     // ******************************* Custom methods **************************************
 
     public function getVoteValueByUser(User $user)
@@ -450,12 +429,5 @@ class OpinionVersion
     public function isPublished()
     {
         return $this->enabled && !$this->isTrashed && $this->parent->isPublished();
-    }
-
-    public function getConsultationTop() {
-        if ($this->getParent() && $this->getParent()->getStep() && $this->getParent()->getStep()->getConsultation()) {
-            return $this->getParent()->getStep()->getConsultation()->getMaxVersions();
-        }
-        return null;
     }
 }

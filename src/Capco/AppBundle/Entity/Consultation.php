@@ -171,20 +171,6 @@ class Consultation
     private $votesCount = 0;
 
     /**
-     * @var int
-     *
-     * @ORM\Column(name="max_opinions", type="integer", nullable=true)
-     */
-    private $maxOpinions = null;
-
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="max_versions", type="integer", nullable=true)
-     */
-    private $maxVersions = null;
-
-    /**
      * Constructor.
      */
     public function __construct()
@@ -601,38 +587,6 @@ class Consultation
     public function setVotesCount($votesCount)
     {
         $this->votesCount = $votesCount;
-    }
-
-    /**
-     * @return int
-     */
-    public function getMaxOpinions()
-    {
-        return $this->maxOpinions;
-    }
-
-    /**
-     * @param int $maxOpinions
-     */
-    public function setMaxOpinions($maxOpinions)
-    {
-        $this->maxOpinions = $maxOpinions;
-    }
-
-    /**
-     * @return int
-     */
-    public function getMaxVersions()
-    {
-        return $this->maxVersions;
-    }
-
-    /**
-     * @param int $maxVersions
-     */
-    public function setMaxVersions($maxVersions)
-    {
-        $this->maxVersions = $maxVersions;
     }
 
     // ******************** Custom methods ******************************

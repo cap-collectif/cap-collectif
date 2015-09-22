@@ -79,10 +79,7 @@ Feature: Opinions
         },
 
         "has_user_reported": @boolean@,
-        "user_vote": @null@,
-
-        "consultationTop": @integer@,
-        "ranking": @integer@
+        "user_vote": @null@
       }
     }
     """

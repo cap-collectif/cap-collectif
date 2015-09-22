@@ -5,7 +5,6 @@ namespace Capco\AppBundle\Controller\Site;
 use Capco\AppBundle\Entity\Consultation;
 use Capco\AppBundle\Entity\OtherStep;
 use Capco\AppBundle\Entity\PresentationStep;
-use Capco\AppBundle\Entity\RankingStep;
 use Capco\AppBundle\Entity\SynthesisStep;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -82,124 +81,6 @@ class StepController extends Controller
             'nbEvents' => $nbEvents,
             'nbPosts' => $nbPosts,
             'contributors' => $contributors,
-        ];
-    }
-
-    /**
-     * @Route("/consultation/{consultationSlug}/ranking/{stepSlug}", name="app_consultation_show_ranking")
-     * @Template("CapcoAppBundle:Step:ranking.html.twig")
-     * @ParamConverter("step", class="CapcoAppBundle:RankingStep", options={"mapping" = {"stepSlug": "slug"}})
-     *
-     * @param $consultationSlug
-     * @param RankingStep $step
-     *
-     * @return array
-     */
-    public function showRankingAction($consultationSlug, RankingStep $step)
-    {
-        if (!$step->canDisplay()) {
-            throw new NotFoundHttpException();
-        }
-
-        $em = $this->getDoctrine()->getManager();
-        $consultation = $em->getRepository('CapcoAppBundle:Consultation')->getOne($consultationSlug);
-        if (!$consultation) {
-            throw new NotFoundHttpException();
-        }
-
-        $opinionsDisplayNb = $step->getOpinionsDisplayNb() !== null ? $step->getOpinionsDisplayNb() : 10;
-        $opinions = $em
-            ->getRepository('CapcoAppBundle:Opinion')
-            ->getEnabledByConsultation($consultation, true, $opinionsDisplayNb)
-        ;
-
-        $versionsDisplayNb = $step->getVersionsDisplayNb() !== null ? $step->getVersionsDisplayNb() : 10;
-        $versions = $em
-            ->getRepository('CapcoAppBundle:OpinionVersion')
-            ->getEnabledByConsultation($consultation, true, $versionsDisplayNb)
-        ;
-
-        return [
-            'consultation' => $consultation,
-            'currentStep' => $step,
-            'opinions' => $opinions,
-            'opinionsDisplayNb' => $opinionsDisplayNb,
-            'versions' => $versions,
-            'versionsDisplayNb' => $versionsDisplayNb,
-        ];
-    }
-
-    /**
-     * @Route("/consultation/{consultationSlug}/ranking/{stepSlug}/opinions/{page}", name="app_consultation_show_opinions_ranking", requirements={"page" = "\d+"}, defaults={"page" = 1})
-     * @Template("CapcoAppBundle:Step:opinions_ranking.html.twig")
-     * @ParamConverter("step", class="CapcoAppBundle:RankingStep", options={"mapping" = {"stepSlug": "slug"}})
-     *
-     * @param $consultationSlug
-     * @param RankingStep $step
-     *
-     * @return array
-     */
-    public function showOpinionsRankingAction($consultationSlug, RankingStep $step, $page = 1)
-    {
-        if (!$step->canDisplay()) {
-            throw new NotFoundHttpException();
-        }
-
-        $em = $this->getDoctrine()->getManager();
-        $consultation = $em->getRepository('CapcoAppBundle:Consultation')->getOne($consultationSlug);
-        if (!$consultation) {
-            throw new NotFoundHttpException();
-        }
-
-        $opinions = $em
-            ->getRepository('CapcoAppBundle:Opinion')
-            ->getEnabledByConsultation($consultation, true, 10, $page)
-        ;
-
-
-        return [
-            'consultation' => $consultation,
-            'currentStep' => $step,
-            'opinions' => $opinions,
-            'page' => $page,
-            'nbPage' => ceil(count($opinions) / 10),
-        ];
-    }
-
-    /**
-     * @Route("/consultation/{consultationSlug}/ranking/{stepSlug}/versions/{page}", name="app_consultation_show_versions_ranking", requirements={"page" = "\d+"}, defaults={"page" = 1})
-     * @Template("CapcoAppBundle:Step:versions_ranking.html.twig")
-     * @ParamConverter("step", class="CapcoAppBundle:RankingStep", options={"mapping" = {"stepSlug": "slug"}})
-     *
-     * @param $consultationSlug
-     * @param RankingStep $step
-     *
-     * @return array
-     */
-    public function showVersionsRankingAction($consultationSlug, RankingStep $step, $page = 1)
-    {
-        if (!$step->canDisplay()) {
-            throw new NotFoundHttpException();
-        }
-
-        $em = $this->getDoctrine()->getManager();
-        $consultation = $em->getRepository('CapcoAppBundle:Consultation')->getOne($consultationSlug);
-        if (!$consultation) {
-            throw new NotFoundHttpException();
-        }
-
-        $versions = $em
-            ->getRepository('CapcoAppBundle:OpinionVersion')
-            ->getEnabledByConsultation($consultation, true, 10, $page)
-        ;
-
-
-        return [
-            'consultation' => $consultation,
-            'currentStep' => $step,
-            'versions' => $versions,
-            'page' => $page,
-            'nbPage' => ceil(count($versions) / 10),
         ];
     }
 

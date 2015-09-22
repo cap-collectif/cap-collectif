@@ -63,12 +63,6 @@ class ConsultationAdmin extends Admin
             ->add('updatedAt', null, array(
                 'label' => 'admin.fields.consultation.updated_at',
             ))
-            ->add('maxOpinions', null, [
-                'label' => 'admin.fields.consultation.ranking.max_opinions',
-            ])
-            ->add('maxVersions', null, [
-                'label' => 'admin.fields.consultation.ranking.max_versions',
-            ])
         ;
     }
 
@@ -124,8 +118,7 @@ class ConsultationAdmin extends Admin
     {
         $formMapper
             ->with('admin.fields.consultation.group_content', array('class' => 'col-md-12'))->end()
-            ->with('admin.fields.consultation.group_meta', array('class' => 'col-md-6'))->end()
-            ->with('admin.fields.consultation.group_ranking', array('class' => 'col-md-6'))->end()
+            ->with('admin.fields.consultation.group_meta', array('class' => 'col-md-12'))->end()
             ->with('admin.fields.consultation.group_steps', array('class' => 'col-md-12'))->end()
             ->end()
         ;
@@ -189,18 +182,6 @@ class ConsultationAdmin extends Admin
                 ), array(
                     'link_parameters' => array('context' => 'consultation'),
             ))
-            ->end()
-
-            // Ranking
-            ->with('admin.fields.consultation.group_ranking')
-            ->add('maxOpinions', null, [
-                'label' => 'admin.fields.consultation.ranking.max_opinions',
-                'required' => false,
-            ])
-            ->add('maxVersions', null, [
-                'label' => 'admin.fields.consultation.ranking.max_versions',
-                'required' => false,
-            ])
             ->end()
 
             // Steps
