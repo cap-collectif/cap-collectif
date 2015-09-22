@@ -26,44 +26,64 @@ class CreatePJLFromCsvCommand extends ContainerAwareCommand
 
     private $siteParameters = [
         'admin.mail.notifications.send_address' => 'coucou@cap-collectif.com',
-        'homepage.jumbotron.title' => 'Projet de loi numérique',
-        'homepage.jumbotron.body' => '',
+        'admin.mail.notifications.receive_address' => 'assistance@cap-collectif.com',
+        'admin.mail.contact' => 'coucou@cap-collectif.com',
+
+        'homepage.jumbotron.title' => '.',
+        'homepage.jumbotron.body' => ' ',
+        'homepage.jumbotron.darken' => 0,
+        'global.site.fullname' => 'République Numérique',
+
+
+        'security.shield_mode.username' => 'Cap Collectif',
+        'security.shield_mode.password' => 'Rg6hd4Tg',
 
     ];
 
     private $siteColors = [
         'color.body.bg' => '#ffffff',
         'color.body.text' => '#333333',
-        'color.header.bg' => '#1c2a88',
+        'color.header.bg' => '#01a0d0',
         'color.header.title' => '#ffffff',
-        'color.home.bg' => '#000000',
+        'color.home.bg' => '#0b6ba8',
         'color.home.title' => '#ffffff',
-        'color.header.text' => '#ffffff',
-        'color.header2.bg' => '#ededed',
-        'color.header2.text' => '#ffffff',
-        'color.header2.title' => '#000000',
-        'color.btn.bg' => '#f01a21',
+        'color.header.text' => '#333333',
+        'color.header2.bg' => '#ffffff',
+        'color.header2.text' => '#333333',
+        'color.header2.title' => '#0b6ba8',
+        'color.btn.bg' => '#0b6ba8',
         'color.btn.text' => '#ffffff',
 
-        'color.h2' => '#16a085',
-        'color.h3' => '#1abc9c',
+        'color.h1' => '#000000',
+        'color.h2' => '#0b6ba8',
+        'color.h3' => '#01a0d0',
+        'color.h4' => '#3c4046',
+        'color.h5' => '#202328',
+        'color.h6' => '#3c4046',
 
-
-        'color.btn.primary.bg' => '#f01a21',
+        'color.btn.primary.bg' => '#01a0d0',
         'color.btn.primary.text' => '#ffffff',
         'color.btn.ghost.hover' => '#ffffff',
-        'color.btn.ghost.base' => '#f01a21',
-        'color.link.default' => '#337ab7',
-        'color.link.hover' => '#23527c',
+        'color.btn.ghost.base' => '#01a0d0',
+
+        'color.link.default' => '#01a0d0',
+        'color.link.hover' => '#0b6ba8',
         'color.footer.text' => '#ffffff',
-        'color.footer.bg' => '#1c2a88',
-        'color.footer2.text' => '#000000',
-        'color.footer2.bg' => '#ebebeb',
+        'color.footer.bg' => '#3c4046',
+
+        'color.footer2.text' => '#ffffff',
+        'color.footer2.bg' => '#202328',
         'color.section.bg' => '#f6f6f6',
         'color.section.text' => '#000000',
 
+        'color.main_menu.text' => '#ffffff',
+        'color.main_menu.text_active' => '#ffffff',
+        'color.main_menu.text_hover' => '#ffffff',
+        'color.main_menu.bg' => '#ffffff',
+        'color.main_menu.bg_active' => '#0b6ba8',
+
         'color.footer.title' => '#ffffff',
-        'color.user.vip.bg' => '#FCF8E3',
+        'color.user.vip.bg' => '#ffffff',
     ];
 
     protected function findOpinionTypeByTitle($title, $parentTitle = false, $rootTitle = false)
@@ -167,7 +187,12 @@ class CreatePJLFromCsvCommand extends ContainerAwareCommand
         }
 
         foreach ($em->getRepository('CapcoAppBundle:SocialNetwork')->findAll() as $sn) {
-            $sn->setIsEnabled(false);
+            $sn->setIsEnabled(true);
+            if ($sn->getTitle() == 'Twitter') {
+                $sn->setLink('https://twitter.com/axellelemaire');
+            } else {
+                $sn->setIsEnabled(false);
+            }
         }
 
         $em->flush();
@@ -193,6 +218,11 @@ class CreatePJLFromCsvCommand extends ContainerAwareCommand
 
         $em = $this->getContainer()->get('doctrine')->getManager();
 
+        $em->getRepository('CapcoUserBundle:User')
+           ->findOneByEmail('admin@cap-collectif.com')
+           ->setUsername('Cap Collectif')
+           ;
+
         $user = $em->getRepository('CapcoUserBundle:User')
                    ->findOneByUsername($this->username);
 
@@ -201,7 +231,7 @@ class CreatePJLFromCsvCommand extends ContainerAwareCommand
 
         $consultation = new Consultation();
         $consultation->setAuthor($user);
-        $consultation->setTitle('PJL Numérique');
+        $consultation->setTitle('Projet de loi numérique');
 
         $consultationAbsStep = new ConsultationAbstractStep();
         $consultationAbsStep->setPosition(0);
