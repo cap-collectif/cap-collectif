@@ -10,12 +10,6 @@
     background-color: $light-gray;
   }
 
-  .ranking__nb {
-    font-size: 25px;
-    padding-left: 15px;
-    padding-top: 15px;
-  }
-
   // Colors depending on opinion type
   @each $type in $opinion-types {
     $name: nth($type, 1);
@@ -545,30 +539,4 @@
 
 .block--bordered > .opinion__list:first-child > .opinion:first-child {
   border-top: none;
-}
-
-// Opinion labels
-.opinion__label {
-  padding-left: 10px;
-
-  i {
-    padding: 3px 3px 0;
-    @include border-radius(3px)
-  }
-
-  // Colors
-  @each $label in $opinion-labels {
-    $name: nth($label, 1);
-    $color: nth($label, 2);
-    $text: set-link-text-color($color);
-
-    &.opinion__label--#{$name} {
-      color: $color;
-
-      i {
-        color: $text;
-        background-color: $color;
-      }
-    }
-  }
 }

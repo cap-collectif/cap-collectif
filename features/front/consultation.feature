@@ -104,18 +104,18 @@ Feature: Consultation
     Given I visited "consultation page" with:
       | consultationSlug | croissance-innovation-disruption |
       | stepSlug         | collecte-des-avis                |
-    Then I should see "122 contributions"
+    Then I should see "123 contributions"
     And I hover over the "#contributions-counter-pill" element
     And I wait 5 seconds
-    And I should see "23 propositions"
-    And I should see "69 arguments"
+    And I should see "25 propositions"
+    And I should see "68 arguments"
     And I should see "30 sources"
 
   Scenario: Consultation header should display correct number of participants
     Given I visited "consultation page" with:
       | consultationSlug | croissance-innovation-disruption |
       | stepSlug         | collecte-des-avis                |
-    Then I should see "21 participants"
+    Then I should see "23 participants"
 
   Scenario: Can download a consultation in xslx format
     Given I visited "home page"

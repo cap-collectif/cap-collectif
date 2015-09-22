@@ -68,13 +68,10 @@ Feature: Opinions Versions
             "report": @string@
           },
           "user_vote": @null@,
-          "has_user_reported": @boolean@,
-
-          "ranking": @integer@
+          "has_user_reported": @boolean@
         },
         @...@
-      ],
-      "rankingThreshold": @integer@
+      ]
     }
     """
 
@@ -145,11 +142,8 @@ Feature: Opinions Versions
           "report": @string@
         },
         "user_vote": @null@,
-        "has_user_reported": @boolean@,
-
-        "ranking": @integer@
-      },
-      "rankingThreshold": @integer@
+        "has_user_reported": @boolean@
+      }
     }
     """
 

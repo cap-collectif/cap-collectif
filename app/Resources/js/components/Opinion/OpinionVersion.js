@@ -7,7 +7,6 @@ const Col = ReactBootstrap.Col;
 const OpinionVersion = React.createClass({
   propTypes: {
     version: React.PropTypes.object.isRequired,
-    rankingThreshold: React.PropTypes.number,
   },
 
   render() {
@@ -22,7 +21,7 @@ const OpinionVersion = React.createClass({
       <li className={classes}>
         <Row>
           <Col xs={12} sm={8} md={9} lg={10}>
-            <OpinionPreview opinion={version} rankingThreshold={this.props.rankingThreshold} />
+            <OpinionPreview opinion={version} />
           </Col>
           <Col sm={4} md={3} lg={2} className="hidden-xs">
             <VotePiechart top={10} height={90} width={145} ok={version.votes_ok} nok={version.votes_nok} mitige={version.votes_mitige} />

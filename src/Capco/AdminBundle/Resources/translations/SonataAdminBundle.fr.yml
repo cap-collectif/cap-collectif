@@ -185,7 +185,6 @@ admin:
       group_content: Contenu
       group_meta: Métadonnées
       group_opinion_types: Structure
-      group_ranking: Classements
       group_steps: Étapes
       is_enabled: Publié
       opened_at: Ouvert
@@ -194,9 +193,6 @@ admin:
       posts: Articles
       posts_count: Articles
       published_at: Publication
-      ranking:
-        opinions_threshold: Taille du classement des propositions
-        versions_threshold: Taille du classement des révisions
       steps: Étapes
       step_position: Position de l'étape
       step_title: Titre de l'étape
@@ -430,19 +426,17 @@ admin:
       trashed_at: Mise à la corbeille
       trashed_reason: Raison de la mise à la corbeille
     step:
-      body: Introduction
-      consultation: Consultation
-      created_at: Création
-      end_at: Termine
-      is_enabled: Publié
-      position: Position
-      nb_opinions_to_display: Nombre de propositions dans l'aperçu du classement
-      nb_versions_to_display: Nombre de révisions dans l'aperçu du classement
-      start_at: Commence
-      synthesis: Synthèse
       title: Titre
+      start_at: Commence
+      end_at: Termine
+      position: Position
+      is_enabled: Publié
+      consultation: Consultation
       type: Type d'étape
+      body: Introduction
       updated_at: Mise à jour
+      created_at: Création
+      synthesis: Synthèse
     synthesis:
       enabled: Publiée
       editable: Contribuable
@@ -582,4 +576,3 @@ other_step: Autre étape
 consultation_step: Étape de consultation
 presentation_step: Étape de présentation
 synthesis_step: Étape de synthèse
-ranking_step: Étape de classement

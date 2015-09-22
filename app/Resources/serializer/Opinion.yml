@@ -81,10 +81,6 @@ Capco\AppBundle\Entity\Opinion:
             expose: true
             type: boolean
             groups: [Opinions]
-        ranking:
-            expose: true
-            type: integer
-            groups: [Opinions]
     virtual_properties:
         canContribute:
             serialized_name: isContribuable

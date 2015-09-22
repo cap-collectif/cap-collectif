@@ -43,11 +43,3 @@ Capco\AppBundle\Entity\ConsultationAbstractStep:
     step: @sstep2
     consultation: @cs5
     position: 2
-  cas13:
-    step: @rstep1
-    consultation: @cs1
-    position: 4
-  cas14:
-    step: @rstep2
-    consultation: @cs5
-    position: 4

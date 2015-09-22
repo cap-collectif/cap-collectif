@@ -10,7 +10,6 @@ const OpinionPreview = React.createClass({
   propTypes: {
     opinion: React.PropTypes.object,
     link: React.PropTypes.bool,
-    rankingThreshold: React.PropTypes.number,
   },
   mixins: [ReactIntl.IntlMixin],
 
@@ -85,7 +84,7 @@ const OpinionPreview = React.createClass({
       <div className={classes} >
         <UserAvatar user={opinion.author} className="pull-left" />
         <div className="opinion__data">
-          <OpinionInfos rankingThreshold={this.props.rankingThreshold} opinion={opinion} />
+          <OpinionInfos opinion={opinion} />
           {this.renderTitle()}
           {this.renderCounters()}
         </div>

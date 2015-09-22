@@ -1,26 +1,16 @@
+{% set consultation = opinion.step.consultation %}
 <div class="opinion__body  box">
     {% include 'CapcoUserBundle:Avatar:avatar.html.twig' with { 'user': opinion.Author, 'link_classes': 'pull-left'} only %}
     <div class="opinion__data">
         <p class="opinion__user excerpt small">
-
             <a href="{{ path('capco_user_profile_show_all', {'slug': opinion.Author.slug}) }}">{{ opinion.Author.username }}</a>
             • {{ opinion.createdAt | localizeddate('medium', 'none', app.request.locale) }}
             {% if opinion.createdAt != opinion.updatedAt %}
                 • {{ 'global.edited' | trans({'%date%': opinion.updatedAt | localizeddate('medium', 'none') }, 'CapcoAppBundle') }}
             {% endif %}
-
-            {% if isVersion == false and opinion.pinned %}
-                <span class="opinion__label opinion__label--blue" data-toggle="tooltip" data-placement="top" data-container="body" title="{{ 'opinion.show.pinned.tooltip'|trans({}, 'CapcoAppBundle') }}">
-                    <i class="cap cap-pin-1"></i>
+            {% if opinion.pinned %}
+                <span class="label  label-info" data-toggle="tooltip" data-placement="top" data-container="body" title="{{ 'opinion.show.pinned.tooltip'|trans({}, 'CapcoAppBundle') }}">
                     {{ 'opinion.show.pinned.label'|trans({}, 'CapcoAppBundle') }}
-                </span>
-            {% endif %}
-
-            {% if top is not null and opinion.ranking <= top %}
-                {% set topLabel = isVersion ? 'opinion.show.ranking.versions' : 'opinion.show.ranking.opinions' %}
-                <span class="opinion__label opinion__label--green">
-                    <i class="cap cap-trophy"></i>
-                    {{ topLabel |trans({'%max%': top}, 'CapcoAppBundle') }}
                 </span>
             {% endif %}
         </p>
@@ -30,36 +20,29 @@
                     {{ 'opinion.show.trashed.label'|trans({}, 'CapcoAppBundle') }}
                 </span>
             {% endif %}
-            {% if isVersion %}
-                <a href="{{ path('app_consultation_show_opinion_version', {'consultationSlug': opinion.parent.step.consultation.slug, 'stepSlug': opinion.parent.step.slug, 'opinionTypeSlug': opinion.parent.opinionType.slug, 'opinionSlug': opinion.parent.slug, 'versionSlug': opinion.slug}) }}">
-                    {{ opinion.title }}
-                </a>
-            {% else %}
-                <a href="{{ path('app_consultation_show_opinion', {'consultationSlug': opinion.step.consultation.slug, 'stepSlug': opinion.step.slug, 'opinionTypeSlug': opinionType.slug, 'opinionSlug': opinion.slug}) }}">
-                    {{ opinion.title }}
-                </a>
-            {% endif %}
+            <a href="{{ path('app_consultation_show_opinion', {'consultationSlug': consultation.slug, 'stepSlug': opinion.step.slug, 'opinionTypeSlug': opinionType.slug, 'opinionSlug': opinion.slug}) }}">
+                {{ opinion.title }}
+            </a>
         </h3>
-        {% set opinionType = isVersion ? opinion.parent.opinionType : opinion.opinionType %}
         <p class="opinion__votes  excerpt  small">
-            {% if opinionType.voteWidgetType != 0 %}
+            {% if opinion.opinionType.voteWidgetType != 0 %}
                 <span>{% transchoice nbVotes with {'%count%': nbVotes} from 'CapcoAppBundle' %}
                     consultation.show.votes
                 {% endtranschoice %}</span>
             {% endif %}
-            {% if opinionType.commentSystem != 0 %}
+            {% if opinion.opinionType.commentSystem != 0 %}
                 <span class="count__separator"> • </span>
                 <span>{% transchoice nbArguments with {'%count%': nbArguments} from 'CapcoAppBundle' %}
                     consultation.show.arguments
                 {% endtranschoice %}</span>
             {% endif %}
-            {% if isVersion == false and opinionType.versionable %}
+            {% if opinion.opinionType.versionable %}
                 <span class="count__separator"> • </span>
                 <span>{% transchoice nbVersions with {'%count%': nbVersions} from 'CapcoAppBundle' %}
                 consultation.show.versions
                 {% endtranschoice %}</span>
             {% endif %}
-            {% if opinionType.sourceable %}
+            {% if opinion.opinionType.sourceable %}
                 <span class="count__separator"> • </span>
                 <span>{% transchoice nbSources with {'%count%': nbSources} from 'CapcoAppBundle' %}
                     consultation.show.sources

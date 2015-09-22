@@ -20,7 +20,6 @@ const OpinionVersionsBox = React.createClass({
       filter: 'last',
       offset: 0,
       limit: 50,
-      rankingThreshold: null,
     };
   },
 
@@ -60,7 +59,7 @@ const OpinionVersionsBox = React.createClass({
           </Col>
         </Row>
         {!this.state.isLoading
-          ? <OpinionVersionList versions={this.state.versions} rankingThreshold={this.state.rankingThreshold} />
+          ? <OpinionVersionList versions={this.state.versions} />
           : <Loader />
         }
       </div>
@@ -84,7 +83,6 @@ const OpinionVersionsBox = React.createClass({
       this.setState({
         'isLoading': false,
         'versions': data.versions,
-        'rankingThreshold': data.rankingThreshold,
       });
       return true;
     });

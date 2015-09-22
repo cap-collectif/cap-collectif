@@ -47,11 +47,8 @@ class OpinionsController extends FOSRestController
      */
     public function getOpinionAction(Opinion $opinion)
     {
-        $consultation = $opinion->getStep()->getConsultation();
-
         return [
             'opinion' => $opinion,
-            'rankingThreshold' => $consultation->getOpinionsRankingThreshold(),
         ];
     }
 
@@ -178,8 +175,6 @@ class OpinionsController extends FOSRestController
                     ->getRepository('CapcoAppBundle:OpinionVersion')
                     ->getEnabledByOpinion($opinion, $offset, $limit, $filter);
 
-        $consultation = $opinion->getStep()->getConsultation();
-
         $versions = [];
         foreach ($paginator as $version) {
             $versions[] = $version;
@@ -187,7 +182,6 @@ class OpinionsController extends FOSRestController
 
         return [
             'versions' => $versions,
-            'rankingThreshold' => $consultation->getVersionsRankingThreshold(),
         ];
     }
 
@@ -210,11 +204,8 @@ class OpinionsController extends FOSRestController
      */
     public function getOpinionVersionAction(Opinion $opinion, OpinionVersion $version)
     {
-        $consultation = $opinion->getStep()->getConsultation();
-
         return [
             'version' => $version,
-            'rankingThreshold' => $consultation->getVersionsRankingThreshold(),
         ];
     }
 

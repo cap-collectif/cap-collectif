@@ -179,7 +179,7 @@ class ConsultationController extends Controller
                 'consultationSlug' => $consultation->getSlug(),
                 'stepSlug' => $currentStep->getSlug(),
                 'opinionTypeSlug' => $opinionType->getSlug(),
-                'page' => $page,
+                'page' => $page
             ]);
         $opinions = $this->getDoctrine()
             ->getRepository('CapcoAppBundle:Opinion')

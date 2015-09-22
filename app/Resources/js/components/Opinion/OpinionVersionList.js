@@ -3,7 +3,6 @@ import OpinionVersion from './OpinionVersion';
 const OpinionVersionList = React.createClass({
   propTypes: {
     versions: React.PropTypes.array.isRequired,
-    rankingThreshold: React.PropTypes.number,
   },
   mixins: [ReactIntl.IntlMixin],
 
@@ -22,7 +21,7 @@ const OpinionVersionList = React.createClass({
       <ul className="media-list" style={{ marginTop: '20px'}}>
         {
           this.props.versions.map((version) => {
-            return <OpinionVersion key={version.id} version={version} rankingThreshold={this.props.rankingThreshold} />;
+            return <OpinionVersion key={version.id} version={version} />;
           })
         }
       </ul>
