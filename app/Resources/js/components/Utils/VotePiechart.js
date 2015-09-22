@@ -21,6 +21,18 @@ const VotePiechart = React.createClass({
   },
 
   componentDidMount() {
+    this.initChart();
+  },
+
+  componentDidUpdate() {
+    this.initChart();
+  },
+
+  render() {
+    return <div className="opinion__chart" ref="piechart" />;
+  },
+
+  initChart() {
     const PieChart = google.visualization.PieChart;
     const DataTable = google.visualization.arrayToDataTable;
 
@@ -44,10 +56,6 @@ const VotePiechart = React.createClass({
         width: this.props.width,
         backgroundColor: 'transparent',
       });
-  },
-
-  render() {
-    return <div className="opinion__chart" ref="piechart" />;
   },
 
 });

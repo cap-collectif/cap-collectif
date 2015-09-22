@@ -1,6 +1,16 @@
 import AppDispatcher from '../dispatchers/AppDispatcher';
+import LoginStore from '../stores/LoginStore';
 import Fetcher from '../services/Fetcher';
-import {RECEIVE_OPINION} from '../constants/OpinionConstants';
+import {
+  RECEIVE_OPINION,
+  UPDATE_OPINION_SUCCESS,
+  UPDATE_OPINION_FAILURE,
+  CREATE_OPINION_VOTE,
+  DELETE_OPINION_VOTE,
+
+  CREATE_OPINION_VERSION,
+  UPDATE_OPINION_VERSION,
+} from '../constants/OpinionConstants';
 
 export default {
 
@@ -18,21 +28,56 @@ export default {
       });
   },
 
-  vote: (opinion, data) => {
+  // Vote for opinion or version
+
+  vote: (opinion, version, data, successMessage = 'opinion.request.create_vote.success', errorMessage = 'opinion.request.failure') => {
+    AppDispatcher.dispatch({
+      actionType: CREATE_OPINION_VOTE,
+      value: data.value,
+      user: LoginStore.user,
+    });
+    const url = version ? `/opinions/${opinion}/versions/${version}/votes` : `/opinions/${opinion}/votes`;
     return Fetcher
-    .put(`/opinions/${opinion}/votes`, data)
+    .put(url, data)
     .then(() => {
+      AppDispatcher.dispatch({
+        actionType: UPDATE_OPINION_SUCCESS,
+        message: successMessage,
+      });
       return true;
+    })
+    .catch(() => {
+      AppDispatcher.dispatch({
+        actionType: UPDATE_OPINION_FAILURE,
+        message: errorMessage,
+      });
     });
   },
 
-  deleteVote: (opinion) => {
-    return Fetcher
-    .delete(`/opinions/${opinion}/votes`)
-    .then(() => {
-      return true;
+  deleteVote: (opinion, version, successMessage = 'opinion.request.delete_vote.success', errorMessage = 'opinion.request.failure') => {
+    AppDispatcher.dispatch({
+      actionType: DELETE_OPINION_VOTE,
+      user: LoginStore.user,
     });
+    const url = version ? `/opinions/${opinion}/versions/${version}/votes` : `/opinions/${opinion}/votes`;
+    return Fetcher
+      .delete(url)
+      .then(() => {
+        AppDispatcher.dispatch({
+          actionType: UPDATE_OPINION_SUCCESS,
+          message: successMessage,
+        });
+        return true;
+      })
+      .catch(() => {
+        AppDispatcher.dispatch({
+          actionType: UPDATE_OPINION_FAILURE,
+          message: errorMessage,
+        });
+      });
   },
+
+  // Create or update versions
 
   createVersion: (opinion, data) => {
     return Fetcher
@@ -52,25 +97,6 @@ export default {
           actionType: UPDATE_OPINION_VERSION,
         });
       });
-  },
-
-  voteForVersion: (opinion, version, data) => {
-    AppDispatcher.dispatch({
-      actionType: CREATE_OPINION_VERSION_VOTE,
-    });
-    return Fetcher
-    .put(`/opinions/${opinion}/versions/${version}/votes`, data)
-    .then(() => {
-      return true;
-    });
-  },
-
-  deleteVoteForVersion: (opinion, version) => {
-    return Fetcher
-    .delete(`/opinions/${opinion}/versions/${version}/votes`)
-    .then(() => {
-      return true;
-    });
   },
 
   addVersionArgument: (opinion, version, data) => {

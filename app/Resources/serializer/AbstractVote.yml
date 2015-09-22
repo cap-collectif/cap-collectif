@@ -1,7 +1,7 @@
 Capco\AppBundle\Entity\AbstractVote:
-    exclusion_policy: ALL
-    properties:
-        user:
-            expose: true
-            type: Capco\UserBundle\Entity\User
-            groups: [OpinionVersions, UserMedias]
+  exclusion_policy: ALL
+  properties:
+    user:
+      expose: true
+      type: Capco\UserBundle\Entity\User
+      groups: [OpinionVersions, UserMedias]
