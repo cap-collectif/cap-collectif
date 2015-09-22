@@ -2,20 +2,21 @@ import OpinionBodyDiffModal from './OpinionBodyDiffModal';
 
 const OpinionBodyDiffContent = React.createClass({
   propTypes: {
-    html: React.PropTypes.string.isRequired,
+    opinion: React.PropTypes.object.isRequired,
   },
   mixins: [ReactIntl.IntlMixin],
 
   render() {
-    const html = this.props.html;
+    const opinion = this.props.opinion;
 
-    if (html.indexOf('<span') === -1) { // no link detected
-      return <div dangerouslySetInnerHTML={{__html: html}} />;
+    if (opinion.modals.length < 1) {
+      return <div dangerouslySetInnerHTML={{__html: opinion.body}} />;
     }
 
+    const modal = opinion.modals[0];
     const sections = [];
 
-    this.props.html.split('<p>').forEach((sentence) => {
+    opinion.body.split('<p>').forEach((sentence) => {
       if (sentence.length > 0) {
         sections.push(sentence.replace('</p>', ''));
       }
@@ -23,21 +24,17 @@ const OpinionBodyDiffContent = React.createClass({
 
     const parts = [];
     sections.forEach((section) => {
-      if (section.indexOf('<span') === -1) {
+      if (section.indexOf(modal.key) === -1) {
         parts.push({
           content: section,
           link: false,
         });
       } else {
         parts.push({
-          before: section.slice(0, section.indexOf('<span')),
-          link: section.slice(section.indexOf('data-diff-stop="">') + 'data-diff-stop="">'.length, section.indexOf('</span>')),
-          after: section.slice(section.indexOf('</span>') + '</span>'.length),
-          modal: {
-            title: section.substring(section.lastIndexOf('data-diff-title="') + 'data-diff-title="'.length, section.lastIndexOf('" data-diff-before=')),
-            before: section.substring(section.lastIndexOf('data-diff-before="') + 'data-diff-before="'.length, section.lastIndexOf('" data-diff-after=')),
-            after: section.substring(section.lastIndexOf('data-diff-after="') + 'data-diff-after="'.length, section.lastIndexOf('" data-diff-stop')),
-          },
+          before: section.slice(0, section.indexOf(modal.key)),
+          link: modal.key,
+          after: section.slice(section.indexOf(modal.key) + modal.key.length),
+          modal: modal,
         });
       }
     });
