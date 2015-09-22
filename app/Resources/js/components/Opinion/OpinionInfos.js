@@ -1,8 +1,10 @@
 const FormattedDate = ReactIntl.FormattedDate;
+const FormattedMessage = ReactIntl.FormattedMessage;
 
 const OpinionInfos = React.createClass({
   propTypes: {
     opinion: React.PropTypes.object.isRequired,
+    rankingThreshold: React.PropTypes.number,
   },
   mixins: [ReactIntl.IntlMixin],
 
@@ -56,6 +58,29 @@ const OpinionInfos = React.createClass({
     return <span>{ this.props.opinion.author_name }</span>;
   },
 
+  renderRankingLabel() {
+    const opinion = this.props.opinion;
+    if (this.props.rankingThreshold !== null && opinion.ranking <= this.props.rankingThreshold) {
+      return (
+        <span className="opinion__label opinion__label--green">
+          <i className="cap cap-trophy"></i>
+          {this.isVersion()
+            ? <FormattedMessage
+            message={this.getIntlMessage('opinion.ranking.versions')}
+            max={this.props.rankingThreshold}
+            />
+            : <FormattedMessage
+            message={this.getIntlMessage('opinion.ranking.opinions')}
+            max={this.props.rankingThreshold}
+            />
+          }
+        </span>
+      );
+    }
+
+    return null;
+  },
+
   render() {
     return (
       <p className="h5 opinion__user">
@@ -63,8 +88,13 @@ const OpinionInfos = React.createClass({
         { ' • ' }
         { this.renderDate() }
         { this.renderEditionDate() }
+        { this.renderRankingLabel() }
       </p>
     );
+  },
+
+  isVersion() {
+    return this.props.opinion.parent ? true : false;
   },
 
 });

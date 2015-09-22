@@ -126,7 +126,7 @@ services:
             - {name: sonata.admin, manager_type: orm, label: admin.label.step}
         calls:
             - [ setTranslationDomain, [SonataAdminBundle]]
-            - [setSubClasses, [{other_step: Capco\AppBundle\Entity\OtherStep, presentation_step: Capco\AppBundle\Entity\PresentationStep, consultation_step: Capco\AppBundle\Entity\ConsultationStep, synthesis_step: Capco\AppBundle\Entity\SynthesisStep}]]
+            - [setSubClasses, [{other_step: Capco\AppBundle\Entity\OtherStep, presentation_step: Capco\AppBundle\Entity\PresentationStep, consultation_step: Capco\AppBundle\Entity\ConsultationStep, synthesis_step: Capco\AppBundle\Entity\SynthesisStep, ranking_step: Capco\AppBundle\Entity\RankingStep}]]
 
     capco_admin.admin.theme:
         class: Capco\AdminBundle\Admin\ThemeAdmin

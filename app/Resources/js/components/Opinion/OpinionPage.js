@@ -15,6 +15,7 @@ const OpinionPage = React.createClass({
     return {
       opinion: null,
       isLoading: true,
+      rankingThreshold: null,
     };
   },
 
@@ -27,7 +28,7 @@ const OpinionPage = React.createClass({
       <div className="has-chart">
         <Loader show={this.state.isLoading} />
         {!this.state.isLoading
-          ? <OpinionBox {...this.props} opinion={this.state.opinion} />
+          ? <OpinionBox {...this.props} rankingThreshold={this.state.rankingThreshold} opinion={this.state.opinion} />
           : null
         }
         {!this.state.isLoading
@@ -45,6 +46,7 @@ const OpinionPage = React.createClass({
       .then((data) => {
         this.setState({
           opinion: data.version,
+          rankingThreshold: data.rankingThreshold,
           isLoading: false,
         });
         return true;
@@ -56,6 +58,7 @@ const OpinionPage = React.createClass({
     .then((data) => {
       this.setState({
         opinion: data.opinion,
+        rankingThreshold: data.rankingThreshold,
         isLoading: false,
       });
       return true;

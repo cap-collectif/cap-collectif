@@ -7,7 +7,7 @@ Feature: Source
       | consultationSlug | croissance-innovation-disruption |
       | stepSlug         | collecte-des-avis                |
       | opinionTypeSlug  | causes                           |
-      | opinionSlug      | opinion-33                       |
+      | opinionSlug      | opinion-23                       |
     And I wait 3 seconds
     And I go on the sources tab
     And I should see "Aucune source proposée"

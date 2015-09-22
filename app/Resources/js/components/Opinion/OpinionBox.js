@@ -18,6 +18,7 @@ const OpinionBox = React.createClass({
   propTypes: {
     opinion: React.PropTypes.object.isRequired,
     isReportingEnabled: React.PropTypes.bool.isRequired,
+    rankingThreshold: React.PropTypes.number,
   },
   mixins: [ReactIntl.IntlMixin],
 
@@ -128,7 +129,7 @@ const OpinionBox = React.createClass({
             </a>
             <h2 className="h4 opinion__header__title"> {this.getIntlMessage(headerTitle)}</h2>
           </div>
-          <OpinionPreview opinion={opinion} link={false} />
+          <OpinionPreview rankingThreshold={this.props.rankingThreshold} opinion={opinion} link={false} />
         </div>
         <OpinionAppendices opinion={opinion} />
         <div className="opinion__description">
