@@ -35,7 +35,7 @@ class CreatePJLFromCsvCommand extends ContainerAwareCommand
         'admin.mail.contact' => 'coucou@cap-collectif.com',
 
         'homepage.jumbotron.button' => '',
-        'homepage.jumbotron.title' => '',
+        'homepage.jumbotron.title' => 'Projet de loi Numérique',
         'homepage.jumbotron.body' => ' ',
         'homepage.jumbotron.darken' => 0,
         'global.site.fullname' => 'République Numérique',
@@ -202,6 +202,7 @@ class CreatePJLFromCsvCommand extends ContainerAwareCommand
             $section->setEnabled(false);
             if ($section->getTitle() == 'Introduction') {
                 $section->setEnabled(true);
+                $section->setBody('Le numérique et ses usages sont au cœur d’un vaste mouvement de transformation de notre économie, de redéfinition de nos espaces publics et privés, et de construction du lien social. Les conséquences de ces évolutions sont dès à présent globales, et dessinent l’avenir de l’ensemble de notre société. La République du 21e siècle sera nécessairement numérique : elle doit anticiper les changements à l’œuvre, en saisir pleinement les opportunités, et dessiner une société conforme à ses principes de liberté, d’égalité et de fraternité.');
             }
         }
 
