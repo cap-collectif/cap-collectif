@@ -154,17 +154,7 @@ class CreatePJLFromCsvCommand extends ContainerAwareCommand
                       ->get('sonata.media.manager.media')
                       ->create();
 
-        $media->setBinaryContent(realpath(dirname(__FILE__)).'/../../../../pjl/marianne.jpg');
-        $media->setEnabled(true);
-        $media->setName('pic');
-        $media->setContext($context);
-
-        $this->getContainer()
-              ->get('sonata.media.manager.media')
-              ->save($media, 'default', 'sonata.media.provider.image');
-
         $user = new User();
-        $user->setMedia($media);
         $user->setUserName($this->username);
         $user->setPlainPassword($this->password);
         $user->setEnabled(true);
