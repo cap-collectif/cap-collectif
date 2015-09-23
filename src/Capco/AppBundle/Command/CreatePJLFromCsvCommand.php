@@ -285,7 +285,7 @@ class CreatePJLFromCsvCommand extends ContainerAwareCommand
 
         $consultationStep = new ConsultationStep();
         $consultationStep->setTitle('Consultation');
-        $consultationStep->setStartAt(new \DateTime());
+        $consultationStep->setStartAt((new \DateTime())->modify('-1 day'));
         $consultationStep->setEndAt((new \DateTime())->modify('+3 weeks'));
 
         $classementStep = new RankingStep();
