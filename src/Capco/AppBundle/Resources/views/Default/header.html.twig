@@ -6,7 +6,7 @@
             {% set logo = capco_site_image_media('image.logo') %}
             {% if(logo != null) %}
                 <a class="navbar-brand" href="{{ path('app_homepage' )}}">
-                    {% thumbnail logo, 'logo' with {'title': logo.name, 'alt': logo.name} %}
+                    {% thumbnail logo, 'logo' with {'title': 'menu.homepage'|trans({}, 'CapcoAppBundle'), 'alt': 'menu.homepage'|trans({}, 'CapcoAppBundle')} %}
                 </a>
             {% endif %}
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
