@@ -197,6 +197,7 @@ admin:
       ranking:
         opinions_threshold: Taille du classement des propositions
         versions_threshold: Taille du classement des révisions
+        include_author: Inclure les contributions de l'auteur
       steps: Étapes
       step_position: Position de l'étape
       step_title: Titre de l'étape

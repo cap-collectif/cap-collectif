@@ -60,7 +60,7 @@ const OpinionInfos = React.createClass({
 
   renderRankingLabel() {
     const opinion = this.props.opinion;
-    if (this.props.rankingThreshold !== null && opinion.ranking <= this.props.rankingThreshold) {
+    if (this.props.rankingThreshold !== null && opinion.ranking !== null && opinion.ranking <= this.props.rankingThreshold) {
       return (
         <span className="opinion__label opinion__label--green">
           <i className="cap cap-trophy"></i>
