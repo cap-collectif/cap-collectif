@@ -16,7 +16,7 @@
                 </span>
             {% endif %}
 
-            {% if top is not null and opinion.ranking <= top %}
+            {% if top is not null and opinion.ranking is not null and opinion.ranking <= top %}
                 {% set topLabel = isVersion ? 'opinion.show.ranking.versions' : 'opinion.show.ranking.opinions' %}
                 <span class="opinion__label opinion__label--green">
                     <i class="cap cap-trophy"></i>

@@ -146,7 +146,7 @@ const OpinionBox = React.createClass({
   },
 
   isVersion() {
-    return this.props.opinion && this.props.opinion.parent ? true : false;
+    return this.props.opinion.parent ? true : false;
   },
 
 

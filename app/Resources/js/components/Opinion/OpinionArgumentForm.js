@@ -97,16 +97,31 @@ const OpinionArgumentForm = React.createClass({
         type: this.props.type === 'yes' || this.props.type === 'simple' ? 1 : 0,
       };
 
-      OpinionActions
-        .addArgument(this.props.opinion, data)
-        .then(() => {
-          this.setState(this.getInitialState());
-          autosize.destroy(React.findDOMNode(this.refs.body));
-          return true;
-        })
-        .catch(() => {
-          this.setState({isSubmitting: false, submitted: false});
-        });
+      if (this.isVersion()) {
+        OpinionActions
+          .addVersionArgument(this.props.opinion.parent.id, this.props.opinion.id, data)
+          .then(() => {
+            this.setState(this.getInitialState());
+            autosize.destroy(React.findDOMNode(this.refs.body));
+            location.reload(); // TODO add realtime
+            return true;
+          })
+          .catch(() => {
+            this.setState({isSubmitting: false, submitted: false});
+          });
+      } else {
+        OpinionActions
+          .addArgument(this.props.opinion.id, data)
+          .then(() => {
+            this.setState(this.getInitialState());
+            autosize.destroy(React.findDOMNode(this.refs.body));
+            location.reload(); // TODO add realtime
+            return true;
+          })
+          .catch(() => {
+            this.setState({isSubmitting: false, submitted: false});
+          });
+      }
     });
   },
 

@@ -5,6 +5,7 @@ namespace Capco\AppBundle\Repository;
 use Capco\AppBundle\Entity\Consultation;
 use Capco\AppBundle\Entity\ConsultationStep;
 use Capco\AppBundle\Entity\OpinionType;
+use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 use Capco\AppBundle\Entity\Opinion;
@@ -14,17 +15,15 @@ class OpinionRepository extends EntityRepository
     public function getOne($id)
     {
         $qb = $this->getIsEnabledQueryBuilder()
-            ->addSelect('a', 'm', 'ot', 's', 'arg', 'sources')
-            ->join('o.Author', 'a')
-            ->join('a.Media', 'm')
-            ->join('o.OpinionType', 'ot')
-            ->join('o.arguments', 'arg')
-            ->join('o.sources', 'sources')
-            ->join('o.versions', 'versions')
-            ->join('o.step', 's')
-            ->join('o.appendices', 'appendix')
+            ->addSelect('a', 'm', 'ot', 's')
+            ->leftJoin('o.Author', 'a')
+            ->leftJoin('a.Media', 'm')
+            ->leftJoin('o.OpinionType', 'ot')
+            ->leftJoin('o.step', 's')
+            ->leftJoin('o.appendices', 'appendix')
             ->andWhere('o.id = :id')
             ->setParameter('id', $id)
+            ->addOrderBy('appendix.position', 'ASC')
         ;
 
         return $qb->getQuery()->getOneOrNullResult();
@@ -86,13 +85,14 @@ class OpinionRepository extends EntityRepository
      * Get all opinions in a consultation.
      *
      * @param $consultation
+     * @param $excludedAuthor
      * @param $orderByRanking
      * @param $limit
      * @param $page
      *
      * @return mixed
      */
-    public function getEnabledByConsultation($consultation, $orderByRanking = false, $limit = null, $page = 1)
+    public function getEnabledByConsultation($consultation, $excludedAuthor = null, $orderByRanking = false, $limit = null, $page = 1)
     {
         $qb = $this->getIsEnabledQueryBuilder()
             ->addSelect('ot', 's', 'aut', 'm')
@@ -107,8 +107,20 @@ class OpinionRepository extends EntityRepository
             ->setParameter('trashed', false)
         ;
 
+        if ($excludedAuthor !== null) {
+            $qb
+                ->andWhere('aut.id != :author')
+                ->setParameter('author', $excludedAuthor)
+            ;
+        }
+
         if ($orderByRanking) {
-            $qb->orderBy('o.ranking', 'ASC');
+            $qb
+                ->orderBy('o.ranking', 'ASC')
+                ->addOrderBy('o.voteCountOk', 'DESC')
+                ->addOrderBy('o.voteCountNok', 'ASC')
+                ->addOrderBy('o.updatedAt', 'DESC')
+            ;
         }
 
         $qb->addOrderBy('o.updatedAt', 'DESC');
@@ -313,10 +325,11 @@ class OpinionRepository extends EntityRepository
      * Get all opinions by consultation ordered by votesCountOk.
      *
      * @param $consultation
+     * @param $excludedAuthor
      *
      * @return mixed
      */
-    public function getEnabledByConsultationsOrderedByVotes(Consultation $consultation)
+    public function getEnabledByConsultationsOrderedByVotes(Consultation $consultation, $excludedAuthor = null)
     {
         $qb = $this->getIsEnabledQueryBuilder()
             ->innerJoin('o.step', 's')
@@ -326,8 +339,18 @@ class OpinionRepository extends EntityRepository
             ->andWhere('cas.consultation = :consultation')
             ->setParameter('trashed', false)
             ->setParameter('consultation', $consultation)
+        ;
+
+        if ($excludedAuthor !== null) {
+            $qb
+                ->innerJoin('o.Author', 'a')
+                ->andWhere('a.id != :author')
+                ->setParameter('author', $excludedAuthor)
+            ;
+        }
+
+        $qb
             ->orderBy('o.voteCountOk', 'DESC')
-            ->addOrderBy('o.updatedAt', 'DESC')
         ;
 
         return $qb->getQuery()->getResult();

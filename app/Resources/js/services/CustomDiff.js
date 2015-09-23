@@ -56,6 +56,8 @@ class CustomDiff extends JsDiff.Diff {
   prettyDiff = function pDiff(oldValue, newValue) {
     let prettyDiff = '';
     // Compute diff
+    console.log(oldValue);
+    console.log(newValue);
     const diff = this.diff(escapeChars(oldValue), escapeChars(newValue));
     // All text has been replaced
     if (everythingHasChanged(diff)) {

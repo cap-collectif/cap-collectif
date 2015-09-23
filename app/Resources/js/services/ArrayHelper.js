@@ -1,24 +1,23 @@
 class ArrayHelper {
 
-  getElementIndexFromArray(els, el, uniqueField = 'id', secondUniqueField = null) {
+  getElementIndexFromArray(els, el, uniqueField = 'id') {
     let index = -1;
-    const valueToCheck = secondUniqueField ? el[uniqueField][secondUniqueField] : el[uniqueField];
     index = els.map((e) => {
-      return secondUniqueField ? e[uniqueField][secondUniqueField] : e[uniqueField];
-    }).indexOf(valueToCheck);
+      return e[uniqueField];
+    }).indexOf(el[uniqueField]);
     return index;
   }
 
-  addElementToArray(els, el, uniqueField = 'id', secondUniqueField = null) {
-    const index = this.getElementIndexFromArray(els, el, uniqueField, secondUniqueField);
+  addElementToArray(els, el, uniqueField = 'id') {
+    const index = this.getElementIndexFromArray(els, el, uniqueField);
     if (index === -1) {
       els.push(el);
     }
     return els;
   }
 
-  removeElementFromArray(els, el, uniqueField = 'id', secondUniqueField = null) {
-    const index = this.getElementIndexFromArray(els, el, uniqueField, secondUniqueField);
+  removeElementFromArray(els, el, uniqueField = 'id') {
+    const index = this.getElementIndexFromArray(els, el, uniqueField);
     if (index > -1) {
       els.splice(index, 1);
     }

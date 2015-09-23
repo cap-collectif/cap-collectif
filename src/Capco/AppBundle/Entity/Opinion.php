@@ -112,13 +112,11 @@ class Opinion
 
     /**
      * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\Source", mappedBy="Opinion",  cascade={"persist", "remove"}, orphanRemoval=true)
-     * @ORM\OrderBy({"updatedAt" = "DESC"})
      */
     protected $Sources;
 
     /**
      * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\Argument", mappedBy="opinion",  cascade={"persist", "remove"}, orphanRemoval=true)
-     * @ORM\OrderBy({"updatedAt" = "DESC"})
      */
     protected $arguments;
 
@@ -139,7 +137,6 @@ class Opinion
 
     /**
      * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\OpinionVersion", mappedBy="parent", cascade={"persist", "remove"})
-     * @ORM\OrderBy({"updatedAt" = "DESC"})
      */
     private $versions;
 
@@ -625,12 +622,12 @@ class Opinion
     public function getVoteValueByUser(User $user)
     {
         foreach ($this->votes as $vote) {
-            if ($vote->getUser() === $user) {
+            if ($vote->getUser() == $user) {
                 return $vote->getValue();
             }
         }
 
-        return null;
+        return;
     }
 
     public function userHasReport(User $user)

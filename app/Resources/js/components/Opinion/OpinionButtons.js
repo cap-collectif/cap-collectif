@@ -16,6 +16,13 @@ const OpinionButtons = React.createClass({
   },
   mixins: [ReactIntl.IntlMixin],
 
+  getInitialState() {
+    return {
+      hasInitiallyVoted: this.props.opinion.user_vote,
+      hasVoted: null,
+    };
+  },
+
   renderVoteButton(type) {
     const opinion = this.props.opinion;
     const voteType = this.isVersion() ? opinion.parent.type.voteWidgetType : opinion.type.voteWidgetType;
@@ -106,21 +113,27 @@ const OpinionButtons = React.createClass({
     return this.isVersion() ? this.props.opinion.parent.isContribuable : this.props.opinion.isContribuable;
   },
 
+ currentVote() {
+    return this.state.hasVoted !== null ? this.state.hasVoted : this.state.hasInitiallyVoted;
+  },
+
   isCurrentVote(value) {
-    return value === this.props.opinion.user_vote;
+    return value === this.currentVote();
   },
 
   vote(value) {
+    this.setState({hasVoted: value});
     if (this.isVersion()) {
-      OpinionActions.vote({value: value}, this.props.opinion.id, this.props.opinion.parent.id);
+      OpinionActions.voteForVersion(this.props.opinion.parent.id, this.props.opinion.id, {value: value});
     } else {
-      OpinionActions.vote({value: value}, this.props.opinion.id);
+      OpinionActions.vote(this.props.opinion.id, {value: value});
     }
   },
 
   deleteVote() {
+    this.setState({hasVoted: null, hasInitiallyVoted: null});
     if (this.isVersion()) {
-      OpinionActions.deleteVote(this.props.opinion.id, this.props.opinion.parent.id);
+      OpinionActions.deleteVoteForVersion(this.props.opinion.parent.id, this.props.opinion.id);
     } else {
       OpinionActions.deleteVote(this.props.opinion.id);
     }

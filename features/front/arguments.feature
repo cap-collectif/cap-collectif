@@ -34,11 +34,11 @@ Feature: Arguments
       | opinionTypeSlug  | causes                           |
       | opinionSlug      | opinion-2                        |
     And I wait 5 seconds
-    When I click the "#arg-28 .argument__btn--vote" element
-    Then I should see "1" in the "#arg-28 .opinion__votes-nb" element
+    When I click the "#arg-24 .argument__btn--vote" element
+    Then I should see "1" in the "#arg-24 .opinion__votes-nb" element
     And I should see "Annuler mon vote"
-    And I click the "#arg-28 .argument__btn--vote" element
-    And I should see "0" in the "#arg-28 .opinion__votes-nb" element
+    And I click the "#arg-24 .argument__btn--vote" element
+    And I should see "0" in the "#arg-24 .opinion__votes-nb" element
 
   @javascript @database
   Scenario: Author of an argument loose their votes when updating it

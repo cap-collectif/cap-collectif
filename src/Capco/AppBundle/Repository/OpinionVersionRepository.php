@@ -82,19 +82,20 @@ class OpinionVersionRepository extends EntityRepository
      * Get all versions in a consultation.
      *
      * @param $consultation
+     * @param $excludedAuthor
      * @param $orderByRanking
      * @param $limit
      * @param $page
      *
      * @return mixed
      */
-    public function getEnabledByConsultation($consultation, $orderByRanking = false, $limit = null, $page = 1)
+    public function getEnabledByConsultation($consultation, $excludedAuthor = null, $orderByRanking = false, $limit = null, $page = 1)
     {
         $qb = $this->getIsEnabledQueryBuilder('ov')
             ->addSelect('o', 'ot', 's', 'aut', 'm')
             ->leftJoin('ov.parent', 'o')
             ->leftJoin('o.OpinionType', 'ot')
-            ->leftJoin('o.Author', 'aut')
+            ->leftJoin('ov.author', 'aut')
             ->leftJoin('aut.Media', 'm')
             ->leftJoin('o.step', 's')
             ->leftJoin('s.consultationAbstractStep', 'cas')
@@ -104,8 +105,20 @@ class OpinionVersionRepository extends EntityRepository
             ->setParameter('trashed', false)
         ;
 
+        if ($excludedAuthor !== null) {
+            $qb
+                ->andWhere('aut.id != :author')
+                ->setParameter('author', $excludedAuthor)
+            ;
+        }
+
         if ($orderByRanking) {
-            $qb->orderBy('ov.ranking', 'ASC');
+            $qb
+                ->orderBy('ov.ranking', 'ASC')
+                ->addOrderBy('ov.voteCountOk', 'DESC')
+                ->addOrderBy('ov.voteCountNok', 'ASC')
+                ->addOrderBy('ov.updatedAt', 'DESC')
+            ;
         }
 
         $qb->addOrderBy('ov.updatedAt', 'DESC');
@@ -129,7 +142,7 @@ class OpinionVersionRepository extends EntityRepository
      *
      * @return mixed
      */
-    public function getEnabledByConsultationsOrderedByVotes(Consultation $consultation)
+    public function getEnabledByConsultationsOrderedByVotes(Consultation $consultation, $excludedAuthor = null)
     {
         $qb = $this->getIsEnabledQueryBuilder('ov')
             ->innerJoin('ov.parent', 'o')
@@ -140,8 +153,18 @@ class OpinionVersionRepository extends EntityRepository
             ->andWhere('cas.consultation = :consultation')
             ->setParameter('trashed', false)
             ->setParameter('consultation', $consultation)
+        ;
+
+        if ($excludedAuthor !== null) {
+            $qb
+                ->innerJoin('ov.author', 'a')
+                ->andWhere('a.id != :author')
+                ->setParameter('author', $excludedAuthor)
+            ;
+        }
+
+        $qb
             ->orderBy('ov.voteCountOk', 'DESC')
-            ->addOrderBy('ov.updatedAt', 'DESC')
         ;
 
         return $qb->getQuery()->getResult();

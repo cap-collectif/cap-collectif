@@ -355,12 +355,12 @@ class OpinionVersion
     public function getVoteValueByUser(User $user)
     {
         foreach ($this->votes as $vote) {
-            if ($vote->getUser() === $user) {
+            if ($vote->getUser() == $user) {
                 return $vote->getValue();
             }
         }
 
-        return null;
+        return;
     }
 
     public function userHasReport(User $user)
