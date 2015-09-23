@@ -151,6 +151,8 @@ class CreatePJLFromCsvCommand extends ContainerAwareCommand
 
         $userType = $em->getRepository('CapcoUserBundle:UserType')
                        ->findOneBySlug('institution');
+        $citoyenType = $em->getRepository('CapcoUserBundle:UserType')
+                       ->findOneBySlug('citoyen');
 
         $context = $em->getRepository('CapcoClassificationBundle:Context')
                       ->find('default');
@@ -172,7 +174,7 @@ class CreatePJLFromCsvCommand extends ContainerAwareCommand
         $bertrand->setEmail('pailhes@gmail.com');
         $bertrand->setPlainPassword('testtest');
         $bertrand->setEnabled(true);
-        $user->setUserType($userType);
+        $user->setUserType($citoyenType);
         $em->persist($bertrand);
 
         foreach ($this->siteParameters as $key => $value) {
@@ -202,6 +204,8 @@ class CreatePJLFromCsvCommand extends ContainerAwareCommand
             $section->setEnabled(false);
             if ($section->getTitle() == 'Introduction') {
                 $section->setEnabled(true);
+                $section->setTitle('Construisons ensemble la République Numérique');
+                $section->setTeaser('<p><span style="color:#FFFFFF ">Contribuez au projet de loi pour une r&eacute;publique num&eacute;rique</span></p>');
                 $section->setBody('Le numérique et ses usages sont au cœur d’un vaste mouvement de transformation de notre économie, de redéfinition de nos espaces publics et privés, et de construction du lien social. Les conséquences de ces évolutions sont dès à présent globales, et dessinent l’avenir de l’ensemble de notre société. La République du 21e siècle sera nécessairement numérique : elle doit anticiper les changements à l’œuvre, en saisir pleinement les opportunités, et dessiner une société conforme à ses principes de liberté, d’égalité et de fraternité.');
             }
         }
