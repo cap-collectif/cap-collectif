@@ -24,7 +24,6 @@ function everythingHasChanged(diff) {
 
 function escapeChars(text) {
   return text
-<<<<<<< HEAD
     .replace(/è/g,'&egrave;')
     .replace(/é/g,'&eacute;')
     .replace(/ê/g,'&ecirc;')
