@@ -6,8 +6,6 @@ use Doctrine\ORM\Mapping as ORM;
 use Capco\AppBundle\Traits\TimestampableTrait;
 use Capco\AppBundle\Traits\SluggableTitleTrait;
 
-use Gedmo\Mapping\Annotation as Gedmo;
-
 /**
  * @ORM\Table(name="opinion_modals")
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\OpinionModalRepository")

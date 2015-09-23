@@ -24,9 +24,9 @@ function everythingHasChanged(diff) {
 
 function escapeChars(text) {
   return text
-    .replace(/è/g,'&egrave;')
-    .replace(/é/g,'&eacute;')
-    .replace(/ê/g,'&ecirc;')
+    .replace(/è/g, '&egrave;')
+    .replace(/é/g, '&eacute;')
+    .replace(/ê/g, '&ecirc;')
     .replace(/’/g, '&rsquo;')
     .replace(/'/g, '&#39;')
     .replace(/à/g, '&agrave;')
@@ -56,8 +56,6 @@ class CustomDiff extends JsDiff.Diff {
   prettyDiff = function pDiff(oldValue, newValue) {
     let prettyDiff = '';
     // Compute diff
-    console.log(oldValue);
-    console.log(newValue);
     const diff = this.diff(escapeChars(oldValue), escapeChars(newValue));
     // All text has been replaced
     if (everythingHasChanged(diff)) {

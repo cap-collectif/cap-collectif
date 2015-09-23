@@ -72,6 +72,15 @@ export default {
             },
         },
         opinion: {
+            request: {
+              failure: 'Une erreur est survenue, veuillez réessayer.',
+              create_vote: {
+                  success: 'Merci ! Votre vote a bien été pris en compte.',
+              },
+              delete_vote: {
+                success: 'Votre vote a bien été supprimé.',
+              },
+            },
             header: {
                 opinion: 'Proposition',
                 version: 'Révision',

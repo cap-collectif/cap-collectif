@@ -107,21 +107,17 @@ class StepController extends Controller
             throw new NotFoundHttpException();
         }
 
-        $excludedAuthor = !$consultation->getIncludeAuthorInRanking() ? $consultation->getAuthor()->getId() : null;
-
         $nbOpinionsToDisplay = $step->getNbOpinionsToDisplay() !== null ? $step->getNbOpinionsToDisplay() : 10;
         $opinions = $em
             ->getRepository('CapcoAppBundle:Opinion')
-            ->getEnabledByConsultation($consultation, $excludedAuthor, true, $nbOpinionsToDisplay)
+            ->getEnabledByConsultation($consultation, true, $nbOpinionsToDisplay)
         ;
 
         $nbVersionsToDisplay = $step->getNbVersionsToDisplay() !== null ? $step->getNbVersionsToDisplay() : 10;
         $versions = $em
             ->getRepository('CapcoAppBundle:OpinionVersion')
-            ->getEnabledByConsultation($consultation, $excludedAuthor, true, $nbVersionsToDisplay)
+            ->getEnabledByConsultation($consultation, true, $nbVersionsToDisplay)
         ;
-
-        dump($versions);
 
         return [
             'consultation' => $consultation,
@@ -155,11 +151,9 @@ class StepController extends Controller
             throw new NotFoundHttpException();
         }
 
-        $excludedAuthor = !$consultation->getIncludeAuthorInRanking() ? $consultation->getAuthor()->getId() : null;
-
         $opinions = $em
             ->getRepository('CapcoAppBundle:Opinion')
-            ->getEnabledByConsultation($consultation, $excludedAuthor, true, 10, $page)
+            ->getEnabledByConsultation($consultation, true, 10, $page)
         ;
 
         return [
@@ -178,7 +172,6 @@ class StepController extends Controller
      *
      * @param $consultationSlug
      * @param RankingStep $step
-     * @param $page
      *
      * @return array
      */
@@ -194,11 +187,9 @@ class StepController extends Controller
             throw new NotFoundHttpException();
         }
 
-        $excludedAuthor = !$consultation->getIncludeAuthorInRanking() ? $consultation->getAuthor()->getId() : null;
-
         $versions = $em
             ->getRepository('CapcoAppBundle:OpinionVersion')
-            ->getEnabledByConsultation($consultation, $excludedAuthor, true, 10, $page)
+            ->getEnabledByConsultation($consultation, true, 10, $page)
         ;
 
         return [

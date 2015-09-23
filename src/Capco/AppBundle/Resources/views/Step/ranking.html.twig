@@ -29,6 +29,10 @@
                 <h2 class="h2">{{ currentStep.title }}</h2>
                 <div class="block  block--bordered  box">
                     {{ currentStep.body | raw }}
+
+                    {% if consultation.consultationStepOpen and consultation.consultationStepOpen.canContribute %}
+                        <p><a class="btn  btn-primary" href="{{ path('app_consultation_show', {'consultationSlug': consultation.slug, 'stepSlug': consultation.consultationStepOpen.slug}) }}">{{ 'step.presentation.participe' | trans({}, 'CapcoAppBundle') }}</a></p>
+                    {% endif %}
                 </div>
 
                 <div id="opinions--ranking" class="anchor-offset  block  block--bordered">

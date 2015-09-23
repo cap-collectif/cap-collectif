@@ -1,6 +1,9 @@
+import OpinionStore from '../../stores/OpinionStore';
+import OpinionActions from '../../actions/OpinionActions';
+import FlashMessages from '../Utils/FlashMessages';
+
 import OpinionBox from './OpinionBox';
 import OpinionTabs from './OpinionTabs';
-import Fetcher from '../../services/Fetcher';
 import Loader from '../Utils/Loader';
 
 const OpinionPage = React.createClass({
@@ -16,22 +19,49 @@ const OpinionPage = React.createClass({
       opinion: null,
       isLoading: true,
       rankingThreshold: null,
+      messages: {
+        errors: [],
+        success: [],
+      },
     };
+  },
+
+  componentWillMount() {
+    OpinionStore.addChangeListener(this.onChange);
   },
 
   componentDidMount() {
     this.loadOpinion();
   },
 
+  componentWillUnmount() {
+    OpinionStore.removeChangeListener(this.onChange);
+  },
+
+  onChange() {
+    if (!OpinionStore.isProcessing && OpinionStore.isOpinionSync) {
+      this.setState({
+        opinion: OpinionStore.opinion,
+        rankingThreshold: OpinionStore.rankingThreshold,
+        isLoading: false,
+        messages: OpinionStore.messages,
+      });
+      return;
+    }
+
+    this.loadElementFromServer();
+  },
+
   render() {
     return (
       <div className="has-chart">
+        <FlashMessages errors={this.state.messages.errors} success={this.state.messages.success} />
         <Loader show={this.state.isLoading} />
-        {!this.state.isLoading
+        {!this.state.isLoading && this.state.opinion
           ? <OpinionBox {...this.props} rankingThreshold={this.state.rankingThreshold} opinion={this.state.opinion} />
           : null
         }
-        {!this.state.isLoading
+        {!this.state.isLoading && this.state.opinion
           ? <OpinionTabs {...this.props} opinion={this.state.opinion} />
           : null
         }
@@ -40,29 +70,10 @@ const OpinionPage = React.createClass({
   },
 
   loadOpinion() {
-    if (this.props.versionId) {
-      Fetcher
-      .get(`/opinions/${this.props.opinionId}/versions/${this.props.versionId}`)
-      .then((data) => {
-        this.setState({
-          opinion: data.version,
-          rankingThreshold: data.rankingThreshold,
-          isLoading: false,
-        });
-        return true;
-      });
-      return;
-    }
-    Fetcher
-    .get(`/opinions/${this.props.opinionId}`)
-    .then((data) => {
-      this.setState({
-        opinion: data.opinion,
-        rankingThreshold: data.rankingThreshold,
-        isLoading: false,
-      });
-      return true;
-    });
+    OpinionActions.loadOpinion(
+      this.props.opinionId,
+      this.props.versionId
+    );
   },
 
 });

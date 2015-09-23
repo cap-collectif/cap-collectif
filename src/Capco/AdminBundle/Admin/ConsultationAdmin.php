@@ -69,9 +69,6 @@ class ConsultationAdmin extends Admin
             ->add('versionsRankingThreshold', null, [
                 'label' => 'admin.fields.consultation.ranking.versions_threshold',
             ])
-            ->add('includeAuthorInRanking', null, [
-                'label' => 'admin.fields.consultation.ranking.include_author',
-            ])
         ;
     }
 
@@ -204,10 +201,6 @@ class ConsultationAdmin extends Admin
                 'label' => 'admin.fields.consultation.ranking.versions_threshold',
                 'required' => false,
             ])
-            ->add('includeAuthorInRanking', null, [
-                'label' => 'admin.fields.consultation.ranking.include_author',
-                'required' => false,
-            ])
             ->end()
 
             // Steps
@@ -278,15 +271,6 @@ class ConsultationAdmin extends Admin
             ->add('updatedAt', null, array(
                 'label' => 'admin.fields.consultation.updated_at',
             ))
-            ->add('opinionsRankingThreshold', null, [
-                'label' => 'admin.fields.consultation.ranking.opinions_threshold',
-            ])
-            ->add('versionsRankingThreshold', null, [
-                'label' => 'admin.fields.consultation.ranking.versions_threshold',
-            ])
-            ->add('includeAuthorInRanking', null, [
-                'label' => 'admin.fields.consultation.ranking.include_author',
-            ])
         ;
     }
 

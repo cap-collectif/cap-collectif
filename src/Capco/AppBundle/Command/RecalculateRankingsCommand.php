@@ -26,11 +26,9 @@ class RecalculateRankingsCommand extends ContainerAwareCommand
 
         foreach ($consultations as $consultation) {
 
-            $excludedAuthor = !$consultation->getIncludeAuthorInRanking() ? $consultation->getAuthor()->getId() : null;
-
             // Opinions
             $opinions = $em->getRepository('CapcoAppBundle:Opinion')
-                ->getEnabledByConsultationsOrderedByVotes($consultation, $excludedAuthor);
+                ->getEnabledByConsultationsOrderedByVotes($consultation)
             ;
             $prevValue = null;
             $prevRanking = 1;
@@ -44,7 +42,7 @@ class RecalculateRankingsCommand extends ContainerAwareCommand
 
             // Versions
             $versions = $em->getRepository('CapcoAppBundle:OpinionVersion')
-                ->getEnabledByConsultationsOrderedByVotes($consultation, $excludedAuthor)
+                ->getEnabledByConsultationsOrderedByVotes($consultation)
             ;
             $prevValue = null;
             $prevRanking = 1;

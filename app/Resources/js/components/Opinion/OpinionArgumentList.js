@@ -1,6 +1,8 @@
+import OpinionStore from '../../stores/OpinionStore';
+import OpinionActions from '../../actions/OpinionActions';
+
 import OpinionArgumentItem from './OpinionArgumentItem';
 import Loader from '../Utils/Loader';
-import Fetcher from '../../services/Fetcher';
 
 const FormattedMessage = ReactIntl.FormattedMessage;
 
@@ -18,19 +20,36 @@ const OpinionArgumentList = React.createClass({
   getInitialState() {
     return {
       arguments: [],
+      count: 0,
       isLoading: true,
       filter: 'last',
     };
   },
 
+  componentWillMount() {
+    OpinionStore.addChangeListener(this.onChange);
+  },
+
   componentDidMount() {
-    this.loadArgumentsFromServer();
+    this.loadArgumentsFromStore();
   },
 
   componentDidUpdate(prevProps, prevState) {
     if (this.state.filter !== prevState.filter) {
-      this.loadArgumentsFromServer();
+      this.loadArguments();
     }
+  },
+
+  componentWillUnmount() {
+    OpinionStore.removeChangeListener(this.onChange);
+  },
+
+  onChange() {
+    this.loadArgumentsFromStore();
+  },
+
+  getNumericType() {
+    return this.props.type === 'no' ? 0 : 1;
   },
 
   renderFilter() {
@@ -90,20 +109,38 @@ const OpinionArgumentList = React.createClass({
     });
   },
 
-  loadArgumentsFromServer() {
-    this.setState({'isLoading': true});
-
-    const baseUrl = this.props.opinion.parent ? '/versions/' : '/opinions/';
-    const type = this.props.type === 'no' ? 0 : 1;
-    Fetcher
-      .get(`${baseUrl}${this.props.opinion.id}/arguments?type=${type}&filter=${this.state.filter}`)
-      .then((data) => {
-        this.setState({
-          'isLoading': false,
-          'arguments': data.arguments,
-        });
-        return true;
+  loadArgumentsFromStore() {
+    if (!OpinionStore.isProcessing && OpinionStore.areArgumentsSync[this.getNumericType()]) {
+      const args = [];
+      OpinionStore.opinion.arguments.map((arg) => {
+        if (arg.type === this.getNumericType()) {
+          args.push(arg);
+        }
       });
+      if (this.state.arguments.length > 0 && this.state.arguments.length !== args.length) {
+        this.setState({
+          filter: 'last',
+        });
+      }
+      this.setState({
+        arguments: args,
+        count: OpinionStore.opinion.arguments_count_ok,
+        isLoading: false,
+      });
+      return;
+    }
+
+    this.loadArguments();
+  },
+
+  loadArguments() {
+    this.setState({'isLoading': true});
+    const type = this.getNumericType();
+    OpinionActions.loadArguments(
+      this.props.opinion,
+      type,
+      this.state.filter
+    );
   },
 
 });

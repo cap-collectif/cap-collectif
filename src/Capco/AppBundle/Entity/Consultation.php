@@ -185,13 +185,6 @@ class Consultation
     private $versionsRankingThreshold = null;
 
     /**
-     * @var int
-     *
-     * @ORM\Column(name="include_author_in_ranking", type="boolean")
-     */
-    private $includeAuthorInRanking = false;
-
-    /**
      * Constructor.
      */
     public function __construct()
@@ -640,22 +633,6 @@ class Consultation
     public function setVersionsRankingThreshold($versionsRankingThreshold)
     {
         $this->versionsRankingThreshold = $versionsRankingThreshold;
-    }
-
-    /**
-     * @return int
-     */
-    public function getIncludeAuthorInRanking()
-    {
-        return $this->includeAuthorInRanking;
-    }
-
-    /**
-     * @param int $includeAuthorInRanking
-     */
-    public function setIncludeAuthorInRanking($includeAuthorInRanking)
-    {
-        $this->includeAuthorInRanking = $includeAuthorInRanking;
     }
 
     // ******************** Custom methods ******************************

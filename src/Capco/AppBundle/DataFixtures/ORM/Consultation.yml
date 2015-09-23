@@ -29,7 +29,7 @@ Capco\AppBundle\Entity\Consultation:
         publishedAt: <dateTimeBetween('+1 days', '+10 days')>
     cs5:
         title: Projet de loi Renseignement
-        Author: @user2
+        Author: @user4
         Cover: @MediaConsultation2
         video: 'http://www.youtube.com/embed/wTcNtgA6gHs?autoplay=1'
         Themes: [@theme1, @theme3]
