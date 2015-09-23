@@ -28,9 +28,11 @@
 
     {# Connection and search #}
     <div class="nav navbar-right">
-        <a class="{% if pathInfo starts with '/search' %} active {% endif %} navbar__search" href="{{ path('app_search', {}) }}">
-            <i class="cap cap-magnifier"></i> <span class="visible-xs">{{ 'global.menu.search' | trans({}, 'CapcoAppBundle') }}</span>
-        </a>
+        {% if is_feature_enabled('search') %}
+            <a class="{% if pathInfo starts with '/search' %} active {% endif %} navbar__search" href="{{ path('app_search', {}) }}">
+                <i class="cap cap-magnifier"></i> <span class="visible-xs">{{ 'global.menu.search' | trans({}, 'CapcoAppBundle') }}</span>
+            </a>
+        {% endif %}
         {% if app.user %}
             <ul class="nav navbar-nav navbar-right">
                 <li class="dropdown">

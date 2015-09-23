@@ -19,7 +19,7 @@ class SearchController extends Controller
      *
      * @return array|\Symfony\Component\HttpFoundation\RedirectResponse
      *
-     * @Route("/search/{term}/{sort}/{type}/{page}", name="app_search", requirements={"page" = "\d+"}, defaults={"page" = 1})
+     * @Route("/search/{term}/{sort}/{type}/{page}", name="app_search", requirements={"page" = "\d+"}, defaults={"page" = 1, "_feature_flags" = "search"})
      * @Template("CapcoAppBundle:Default:search.html.twig")
      */
     public function searchAction(Request $request, $term = '', $sort = 'score', $type = 'all', $page = 1)

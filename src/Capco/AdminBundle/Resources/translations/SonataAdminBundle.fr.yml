@@ -532,6 +532,7 @@ capco:
     consultation_trash: Corbeille des consultations
     idea_trash: Corbeille des idées
     reporting: Signalement
+    search: Rechercher sur le site
 
 action_enable: Activer
 action_disable: Désactiver
