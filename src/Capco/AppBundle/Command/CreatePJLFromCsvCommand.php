@@ -167,6 +167,14 @@ class CreatePJLFromCsvCommand extends ContainerAwareCommand
         $user->setVip(true);
         $em->persist($user);
 
+        $bertrand = new User();
+        $bertrand->setUserName('Bertrand Pailhès');
+        $bertrand->setEmail('pailhes@gmail.com');
+        $bertrand->setPlainPassword('testtest');
+        $bertrand->setEnabled(true);
+        $user->setUserType($userType);
+        $em->persist($bertrand);
+
         foreach ($this->siteParameters as $key => $value) {
             $param = $em->getRepository('CapcoAppBundle:SiteParameter')
                         ->findOneByKeyname($key)
