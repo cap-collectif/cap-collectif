@@ -27,9 +27,11 @@
             <div class="col-xs-12  col-sm-8  col-md-9" id="details">
 
                 <h2 class="h2">{{ currentStep.title }}</h2>
-                <div class="block  block--bordered  box">
-                    {{ currentStep.body | raw }}
-                </div>
+                {% if currentStep.body %}
+                    <div class="block  block--bordered  box">
+                        {{ currentStep.body | raw }}
+                    </div>
+                {% endif %}
 
                 <div id="opinions--ranking" class="anchor-offset  block  block--bordered">
 

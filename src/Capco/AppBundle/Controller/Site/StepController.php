@@ -121,8 +121,6 @@ class StepController extends Controller
             ->getEnabledByConsultation($consultation, $excludedAuthor, true, $nbVersionsToDisplay)
         ;
 
-        dump($versions);
-
         return [
             'consultation' => $consultation,
             'currentStep' => $step,
