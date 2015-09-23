@@ -9,14 +9,19 @@ use Symfony\Component\Console\Helper\ProgressBar;
 use Capco\UserBundle\Entity\User;
 use Capco\AppBundle\Entity\OpinionType;
 use Capco\AppBundle\Entity\Opinion;
+use Capco\AppBundle\Entity\Synthesis\Synthesis;
 use Capco\AppBundle\Entity\OpinionAppendix;
 use Capco\AppBundle\Entity\OpinionTypeAppendixType;
 use Capco\AppBundle\Entity\AppendixType;
 use Capco\AppBundle\Entity\Consultation;
 use Capco\AppBundle\Entity\ConsultationAbstractStep;
+use Capco\AppBundle\Entity\RankingStep;
+use Capco\AppBundle\Entity\SynthesisStep;
+use Capco\AppBundle\Entity\OtherStep;
 use Capco\AppBundle\Entity\ConsultationStep;
 use Capco\AppBundle\Entity\ConsultationType;
 use Capco\AppBundle\Entity\OpinionModal;
+use Capco\AppBundle\Entity\MenuItem;
 
 class CreatePJLFromCsvCommand extends ContainerAwareCommand
 {
@@ -29,7 +34,8 @@ class CreatePJLFromCsvCommand extends ContainerAwareCommand
         'admin.mail.notifications.receive_address' => 'assistance@cap-collectif.com',
         'admin.mail.contact' => 'coucou@cap-collectif.com',
 
-        'homepage.jumbotron.title' => '.',
+        'homepage.jumbotron.button' => '',
+        'homepage.jumbotron.title' => '',
         'homepage.jumbotron.body' => ' ',
         'homepage.jumbotron.darken' => 0,
         'global.site.fullname' => 'République Numérique',
@@ -60,7 +66,7 @@ class CreatePJLFromCsvCommand extends ContainerAwareCommand
         'color.h5' => '#202328',
         'color.h6' => '#3c4046',
 
-        'color.btn.primary.bg' => '#01a0d0',
+        'color.btn.primary.bg' => '#0b6ba8',
         'color.btn.primary.text' => '#ffffff',
         'color.btn.ghost.hover' => '#ffffff',
         'color.btn.ghost.base' => '#01a0d0',
@@ -75,7 +81,7 @@ class CreatePJLFromCsvCommand extends ContainerAwareCommand
         'color.section.bg' => '#f6f6f6',
         'color.section.text' => '#000000',
 
-        'color.main_menu.text' => '#ffffff',
+        'color.main_menu.text' => '#333333',
         'color.main_menu.text_active' => '#ffffff',
         'color.main_menu.text_hover' => '#ffffff',
         'color.main_menu.bg' => '#ffffff',
@@ -184,11 +190,39 @@ class CreatePJLFromCsvCommand extends ContainerAwareCommand
             }
         }
 
+        foreach ($em->getRepository('CapcoAppBundle:Section')->findAll() as $section) {
+            $section->setEnabled(false);
+            if ($section->getTitle() == 'Introduction') {
+                $section->setEnabled(true);
+            }
+        }
+
+        $em->getRepository('CapcoAppBundle:MenuItem')
+               ->findOneByTitle('Consultations')
+               ->setIsEnabled(false)
+        ;
+
+        $menuItem = new MenuItem();
+        $menuItem->setTitle('Consultation');
+        $menuItem->setPosition(2);
+        $menuItem->setMenu(1);
+        $menuItem->setLink('consultations/projet-de-loi-numerique/consultation/consultation');
+
+        $em->persist($menuItem);
         $em->flush();
     }
 
     protected function generateMedias()
     {
+
+        $em = $this->getContainer()->get('doctrine')->getManager();
+
+        foreach ($em->getRepository('CapcoMediaBundle:Media')->findAll() as $media) {
+            $media->setEnabled(false);
+            // if ($media->getName() == 'Introduction') {
+            //     $media->setEnabled(true);
+            // }
+        }
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
@@ -223,19 +257,57 @@ class CreatePJLFromCsvCommand extends ContainerAwareCommand
         $consultation->setTitle('Projet de loi numérique');
 
         $consultationAbsStep = new ConsultationAbstractStep();
-        $consultationAbsStep->setPosition(0);
+        $consultationAbsStep->setPosition(1);
+
+        $classementAbsStep = new ConsultationAbstractStep();
+        $classementAbsStep->setPosition(2);
+
+        $syntheseAbsStep = new ConsultationAbstractStep();
+        $syntheseAbsStep->setPosition(3);
+
+        $otherAbsStep = new ConsultationAbstractStep();
+        $otherAbsStep->setPosition(4);
 
         $consultationStep = new ConsultationStep();
         $consultationStep->setTitle('Consultation');
         $consultationStep->setStartAt(new \DateTime());
         $consultationStep->setEndAt((new \DateTime())->modify('+3 weeks'));
 
+        $classementStep = new RankingStep();
+        $classementStep->setTitle('Réponses du gouvernement');
+        $classementStep->setStartAt(new \DateTime('2015-10-26 09:00:00'));
+        $classementStep->setNbOpinionsToDisplay(5);
+        $classementStep->setNbVersionsToDisplay(5);
+
+        $synthese = (new Synthesis())
+            ->setSourceType('consultation_step')
+            ->setConsultationStep($consultationStep)
+            ->setEditable(true)
+            ->setEnabled(false)
+        ;
+        $syntheseStep = new SynthesisStep();
+        $syntheseStep->setTitle('Synthèse');
+        $syntheseStep->setStartAt(new \DateTime('2015-10-26 09:00:00'));
+        $syntheseStep->setSynthesis($synthese);
+
+        $otherStep = new OtherStep();
+        $otherStep->setTitle('Projet de loi définitif');
+        $otherStep->setStartAt(new \DateTime('2015-11-25 09:00:00'));
+
         $consultationType = new ConsultationType();
         $consultationType->setTitle('PJL');
 
         $consultationStep->setConsultationType($consultationType);
         $consultationAbsStep->setStep($consultationStep);
+
+        $classementAbsStep->setStep($classementStep);
+        $syntheseAbsStep->setStep($syntheseStep);
+        $otherAbsStep->setStep($otherStep);
+
         $consultation->addStep($consultationAbsStep);
+        $consultation->addStep($classementAbsStep);
+        $consultation->addStep($syntheseAbsStep);
+        $consultation->addStep($otherAbsStep);
 
         $em->persist($consultation);
         $em->persist($consultationType);
@@ -247,29 +319,19 @@ class CreatePJLFromCsvCommand extends ContainerAwareCommand
         $exposayDayMotif->setTitle('Exposé des motifs');
         $exposayDayMotif->setHelpText('Rentrez ici l\'exposé des motifs.');
 
-        $exposayDayMotifType = new OpinionTypeAppendixType();
-        $exposayDayMotifType->setAppendixType($exposayDayMotif);
-        $exposayDayMotifType->setPosition(1);
-
-        $studydImpacti = new AppendixType();
-        $studydImpacti->setTitle('Étude d\'impact');
-        $studydImpacti->setHelpText('Rentrez ici l\'étude d\'impact.');
-
-        $studydImpactiType = new OpinionTypeAppendixType();
-        $studydImpactiType->setAppendixType($studydImpacti);
-        $studydImpactiType->setPosition(2);
-
         foreach ($opinionTypesData as $row) {
             $opinionType = new OpinionType();
             $opinionType->setTitle($row['title']);
             $opinionType->setSubtitle($row['subtitle']);
             $opinionType->setPosition($position);
-            $opinionType->setColor('gray');
+            $opinionType->setColor('blue');
             $opinionType->setDefaultFilter('positions');
             $opinionType->setIsEnabled($row['contribuable']);
             $opinionType->setVersionable($row['contribuable']);
             $opinionType->setVotesHelpText('Pensez-vous que cette proposition permet d\'atteindre les objectifs du gouvernement ?');
-            $opinionType->addAppendixType($exposayDayMotifType);
+            $exposayDayMotifType = new OpinionTypeAppendixType();
+            $exposayDayMotifType->setAppendixType($exposayDayMotif);
+            $exposayDayMotifType->setPosition(1);
             $opinionType->addAppendixType($exposayDayMotifType);
 
             if (!empty($row['parent'])) {
@@ -342,10 +404,6 @@ class CreatePJLFromCsvCommand extends ContainerAwareCommand
                 $motif->setAppendixType($exposayDayMotif);
                 $motif->setBody('<p>'.$row['motif'].'</p>');
                 $opinion->addAppendice($motif);
-
-                $study = new OpinionAppendix();
-                $study->setAppendixType($studydImpacti);
-                $study->setBody('Pas encore d\'études');
             } else {
                 $motif = $opinion->getAppendices()[0];
                 $content = $motif->getBody();

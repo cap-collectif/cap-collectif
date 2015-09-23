@@ -129,6 +129,8 @@ class Synthesis
     public function setEditable($editable)
     {
         $this->editable = $editable;
+
+        return $this;
     }
 
     /**
