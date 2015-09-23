@@ -268,6 +268,9 @@ class CreatePJLFromCsvCommand extends ContainerAwareCommand
         $consultation = new Consultation();
         $consultation->setAuthor($user);
         $consultation->setTitle('Projet de loi numérique');
+        $consultation->setPublishedAt(new \DateTime());
+        $consultation->setOpinionsRankingThreshold(60);
+        $consultation->setVersionsRankingThreshold(60);
 
         $consultationAbsStep = new ConsultationAbstractStep();
         $consultationAbsStep->setPosition(1);
