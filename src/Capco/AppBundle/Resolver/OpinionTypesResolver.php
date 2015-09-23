@@ -146,9 +146,6 @@ class OpinionTypesResolver
 
     public function getMaximumPositionByOpinionTypeAndStep($opinionType, ConsultationStep $step)
     {
-        dump($this->opinionRepo
-            ->getMaxPositionByOpinionTypeAndConsultationStep($step, $opinionType));
-
         return $this->opinionRepo
             ->getMaxPositionByOpinionTypeAndConsultationStep($step, $opinionType)
         ;
