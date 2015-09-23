@@ -140,7 +140,7 @@ const OpinionArgumentList = React.createClass({
       this.props.opinion,
       type,
       this.state.filter
-    )
+    );
   },
 
 });

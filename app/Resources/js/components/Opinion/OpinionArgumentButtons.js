@@ -17,6 +17,13 @@ const OpinionArgumentButtons = React.createClass({
     };
   },
 
+  getVoteDiff() {
+    if (this.state.hasVoted !== this.props.argument.has_user_voted) {
+      return this.props.argument.has_user_voted ? -1 : 1;
+    }
+    return 0;
+  },
+
   renderVoteButton() {
     if (this.state.hasVoted) {
       return (
@@ -91,13 +98,6 @@ const OpinionArgumentButtons = React.createClass({
   deleteVote() {
     this.setState({hasVoted: false});
     ArgumentActions.deleteVote(this.props.argument.id);
-  },
-
-  getVoteDiff() {
-    if (this.state.hasVoted !== this.props.argument.has_user_voted) {
-      return this.props.argument.has_user_voted ? -1 : 1;
-    }
-    return 0;
   },
 
   isTheUserTheAuthor() {

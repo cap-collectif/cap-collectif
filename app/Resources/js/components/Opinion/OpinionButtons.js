@@ -112,17 +112,17 @@ const OpinionButtons = React.createClass({
 
   vote(value) {
     if (this.isVersion()) {
-      OpinionActions.vote(this.props.opinion.parent.id, this.props.opinion.id, {value: value});
+      OpinionActions.vote({value: value}, this.props.opinion.id, this.props.opinion.parent.id);
     } else {
-      OpinionActions.vote(this.props.opinion.id, null, {value: value});
+      OpinionActions.vote({value: value}, this.props.opinion.id);
     }
   },
 
   deleteVote() {
     if (this.isVersion()) {
-      OpinionActions.deleteVote(this.props.opinion.parent.id, this.props.opinion.id);
+      OpinionActions.deleteVote(this.props.opinion.id, this.props.opinion.parent.id);
     } else {
-      OpinionActions.deleteVote(this.props.opinion.id, null);
+      OpinionActions.deleteVote(this.props.opinion.id);
     }
   },
 

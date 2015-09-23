@@ -8,9 +8,6 @@ import {
   DELETE_OPINION_VOTE,
   RECEIVE_ARGUMENTS,
   CREATE_ARGUMENT_SUCCESS,
-
-  CREATE_OPINION_VERSION,
-  UPDATE_OPINION_VERSION,
 } from '../constants/OpinionConstants';
 
 class OpinionStore extends BaseStore {
@@ -25,7 +22,7 @@ class OpinionStore extends BaseStore {
     this._areArgumentsSync = {
       0: true,
       1: true,
-    }
+    };
     this._messages = {
       errors: [],
       success: [],
@@ -66,7 +63,7 @@ class OpinionStore extends BaseStore {
         break;
       case RECEIVE_ARGUMENTS:
         const args = [];
-        this._opinion.arguments.map ((arg) => {
+        this._opinion.arguments.map((arg) => {
           if (arg.type !== action.type) {
             args.push(arg);
           }

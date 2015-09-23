@@ -9,7 +9,6 @@ import {
   DELETE_OPINION_VOTE,
   RECEIVE_ARGUMENTS,
   CREATE_ARGUMENT_SUCCESS,
-  CREATE_ARGUMENT_FAILURE,
 
   CREATE_OPINION_VERSION,
   UPDATE_OPINION_VERSION,
@@ -33,13 +32,13 @@ export default {
 
   // Vote for opinion or version
 
-  vote: (opinion, version, data, successMessage = 'opinion.request.create_vote.success', errorMessage = 'opinion.request.failure') => {
+  vote: (data, opinion, parent, successMessage = 'opinion.request.create_vote.success', errorMessage = 'opinion.request.failure') => {
     AppDispatcher.dispatch({
       actionType: CREATE_OPINION_VOTE,
       value: data.value,
       user: LoginStore.user,
     });
-    const url = version ? `/opinions/${opinion}/versions/${version}/votes` : `/opinions/${opinion}/votes`;
+    const url = parent ? `/opinions/${parent}/versions/${opinion}/votes` : `/opinions/${opinion}/votes`;
     return Fetcher
     .put(url, data)
     .then(() => {
@@ -57,12 +56,12 @@ export default {
     });
   },
 
-  deleteVote: (opinion, version, successMessage = 'opinion.request.delete_vote.success', errorMessage = 'opinion.request.failure') => {
+  deleteVote: (opinion, parent, successMessage = 'opinion.request.delete_vote.success', errorMessage = 'opinion.request.failure') => {
     AppDispatcher.dispatch({
       actionType: DELETE_OPINION_VOTE,
       user: LoginStore.user,
     });
-    const url = version ? `/opinions/${opinion}/versions/${version}/votes` : `/opinions/${opinion}/votes`;
+    const url = version ? `/opinions/${parent}/versions/${opinion}/votes` : `/opinions/${opinion}/votes`;
     return Fetcher
       .delete(url)
       .then(() => {
