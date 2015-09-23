@@ -26,11 +26,18 @@ function escapeChars(text) {
   return text
     .replace(/è/g,'&egrave;')
     .replace(/é/g,'&eacute;')
+    .replace(/ê/g,'&ecirc;')
     .replace(/’/g, '&rsquo;')
     .replace(/'/g, '&#39;')
     .replace(/à/g, '&agrave;')
     .replace(/«/g, '&laquo;')
     .replace(/°/g, '&deg;')
+    .replace(/»/g, '&raquo;')
+    .replace(/ç/g, '&ccedil;')
+    .replace(/û/g, '&ucirc;')
+    .replace(/ù/g, '&ugrave;')
+    .replace(/œ/g, '&oelig;')
+    .replace(/»/g, '&raquo;')
     .replace(/»/g, '&raquo;')
     ;
 }
@@ -41,7 +48,7 @@ class CustomDiff extends JsDiff.Diff {
     let strippedValue = strip(value);
     strippedValue = strippedValue.replace(/(<parend>)/g, '|$1|');
     strippedValue = strippedValue.replace(/(&nbsp;)/g, '|$1|');
-    strippedValue = strippedValue.replace(/(<br>)/g, '|$1|');
+    strippedValue = strippedValue.replace(/(<br \/>)/g, '|$1|');
     strippedValue = strippedValue.replace(/(\s+?)(?=.+?)/g, '|$1|');
     return removeEmpty(strippedValue.split('|'));
   };

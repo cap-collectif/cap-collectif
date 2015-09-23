@@ -68,6 +68,9 @@ Capco\AppBundle\Entity\Opinion:
         arguments:
             expose: true
             groups: [Opinions]
+        modals:
+            expose: true
+            groups: [Opinions, OpinionVersions]
         Sources:
             expose: true
             groups: [Opinions]
