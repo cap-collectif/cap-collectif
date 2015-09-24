@@ -366,7 +366,6 @@ class CreatePJLFromCsvCommand extends ContainerAwareCommand
             $progress->advance(1);
         }
 
-        $i = 1;
         foreach ($opinions as $row) {
             $opinionType = $this->findOpinionTypeByTitle($row['opinionType'], $row['opinionType_parent'], $row['opinionType_root']);
             $opinion = $em->getRepository('CapcoAppBundle:Opinion')
@@ -378,8 +377,6 @@ class CreatePJLFromCsvCommand extends ContainerAwareCommand
                 $opinion->setOpinionType($opinionType);
                 $opinion->setAuthor($user);
                 $opinion->setStep($consultationStep);
-                $opinion->setPosition($i);
-                $i++;
             }
 
             $paragraphe = $row['paragraphe'];
