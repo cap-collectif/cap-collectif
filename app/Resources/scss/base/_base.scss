@@ -80,6 +80,9 @@ body {
 
 .main .container--custom:nth-of-type(odd) {
   @extend .container--alt;
+  .section-clear {
+    clear: both;
+  }
 }
 
 .main .container--custom:last-of-type:after {
