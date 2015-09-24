@@ -113,10 +113,11 @@ export default {
   createVersion: (opinion, data) => {
     return Fetcher
     .post(`/opinions/${opinion}/versions`, data)
-    .then(() => {
+    .then((version) => {
       AppDispatcher.dispatch({
         actionType: CREATE_OPINION_VERSION,
       });
+      return version.json();
     });
   },
 

@@ -83,7 +83,7 @@ export default {
             },
             header: {
                 opinion: 'Proposition',
-                version: 'Révision',
+                version: 'Modification',
             },
             ranking: {
                 versions: 'Top {max} des modifications',
@@ -98,10 +98,10 @@ export default {
             add_new_source: 'Proposer une source',
             add_new_version_infos: 'Merci d\'examiner les modifications existantes en premier lieu afin de ne pas soumettre de doublon. Vous pouvez voter pour celles existantes !',
             version_comment: 'Motivation',
-            version_parent: 'Révision de : ',
+            version_parent: 'Modification de : ',
             version: {
                 title: 'Titre *',
-                body: 'Révision *',
+                body: 'Modification *',
                 body_helper: 'Modifiez le texte',
                 comment: 'Motivation',
                 comment_helper: 'Expliquez pourquoi vous souhaitez apporter ces modifications',
