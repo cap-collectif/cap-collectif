@@ -18,7 +18,7 @@
                         <h1 class="h4  dialog__title">{{ 'opinion.create.title'|trans({}, 'CapcoAppBundle') }}</h1>
                     </div>
                     <div class="dialog__message  box">
-                        <p>{{ 'opinion.create.text'|trans({}, 'CapcoAppBundle') }}</p>
+                        <p>{{ 'opinion.create.text'|trans({'%type%' : (opinionType.title|lower)}, 'CapcoAppBundle') }}</p>
                     </div>
                     <form method="post">
                         <div class="dialog__body  box">
