@@ -288,11 +288,3 @@ services:
             - {name: sonata.admin, manager_type: orm, label: admin.label.synthesis}
         calls:
             - [ setTranslationDomain, [SonataAdminBundle]]
-
-    capco_admin.admin.opinion_version:
-        class: Capco\AdminBundle\Admin\OpinionVersionAdmin
-        arguments: [~, Capco\AppBundle\Entity\OpinionVersion, SonataAdminBundle:CRUD]
-        tags:
-            - {name: sonata.admin, manager_type: orm, group: admin.group.moderation, label: admin.label.opinion_version}
-        calls:
-            - [ setTranslationDomain, [SonataAdminBundle]]

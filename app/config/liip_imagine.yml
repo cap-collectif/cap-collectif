@@ -1,4 +1,5 @@
 liip_imagine:
+    driver: imagick
     formats: ['png', 'jpg']
     filter_sets:
         admin:
