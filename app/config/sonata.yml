@@ -155,6 +155,7 @@ sonata_media:
     providers:
         image:
             thumbnail:  sonata.media.thumbnail.liip_imagine
+            adapter: sonata.media.adapter.image.imagick
         vimeo:
             thumbnail:  sonata.media.thumbnail.liip_imagine
         youtube:
