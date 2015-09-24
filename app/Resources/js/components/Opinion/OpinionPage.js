@@ -19,6 +19,7 @@ const OpinionPage = React.createClass({
       opinion: null,
       isLoading: true,
       rankingThreshold: null,
+      opinionTerm: 0,
       messages: {
         errors: [],
         success: [],
@@ -43,13 +44,14 @@ const OpinionPage = React.createClass({
       this.setState({
         opinion: OpinionStore.opinion,
         rankingThreshold: OpinionStore.rankingThreshold,
+        opinionTerm: OpinionStore.opinionTerm,
         isLoading: false,
         messages: OpinionStore.messages,
       });
       return;
     }
 
-    this.loadElementFromServer();
+    this.loadOpinion();
   },
 
   render() {
@@ -58,7 +60,7 @@ const OpinionPage = React.createClass({
         <FlashMessages errors={this.state.messages.errors} success={this.state.messages.success} />
         <Loader show={this.state.isLoading} />
         {!this.state.isLoading && this.state.opinion
-          ? <OpinionBox {...this.props} rankingThreshold={this.state.rankingThreshold} opinion={this.state.opinion} />
+          ? <OpinionBox {...this.props} rankingThreshold={this.state.rankingThreshold} opinionTerm={this.state.opinionTerm} opinion={this.state.opinion} />
           : null
         }
         {!this.state.isLoading && this.state.opinion

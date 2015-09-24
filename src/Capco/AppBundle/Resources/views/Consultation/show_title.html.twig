@@ -1,8 +1,7 @@
 {% macro contributions_popover(consultation) %}
+    {% set opinionLabel = consultation.opinionTerm == 0 ? 'consultation.show.meta.opinionsCount' : 'consultation.show.meta.articlesCount' %}
     {% set opinions = consultation.totalOpinionsCount %}
-    {% transchoice opinions with {'%count%': opinions} from 'CapcoAppBundle'  %}
-        consultation.show.meta.opinionsCount
-    {% endtranschoice %}
+    {{ opinionLabel | transchoice(opinions, {}, 'CapcoAppBundle') }}
     </br>
     {% set versions = consultation.totalVersionsCount %}
     {% if versions > 0 %}

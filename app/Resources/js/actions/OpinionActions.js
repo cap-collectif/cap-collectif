@@ -25,6 +25,7 @@ export default {
           actionType: RECEIVE_OPINION,
           opinion: data.opinion ? data.opinion : data.version,
           rankingThreshold: data.rankingThreshold,
+          opinionTerm: data.opinionTerm,
         });
         return true;
       });

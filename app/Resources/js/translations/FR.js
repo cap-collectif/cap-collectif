@@ -83,11 +83,13 @@ export default {
             },
             header: {
                 opinion: 'Proposition',
+                article: 'Article',
                 version: 'Modification',
             },
             ranking: {
                 versions: 'Top {max} des modifications',
                 opinions: 'Top {max} des propositions',
+                articles: 'Top {max} des articles',
             },
             progress_done: '{num, plural, =0{0 vote favorable} one{# vote favorable} other{# votes favorables}}.',
             progress_left: '{left, plural, =0{0 nécessaire} one{# nécessaire} other{# nécessaires}} pour atteindre {max}.',

@@ -19,6 +19,7 @@ const OpinionBox = React.createClass({
     opinion: React.PropTypes.object.isRequired,
     isReportingEnabled: React.PropTypes.bool.isRequired,
     rankingThreshold: React.PropTypes.number,
+    opinionTerm: React.PropTypes.number,
   },
   mixins: [ReactIntl.IntlMixin],
 
@@ -28,6 +29,14 @@ const OpinionBox = React.createClass({
 
   getOpinionType() {
     return this.isVersion() ? this.props.opinion.parent.type : this.props.opinion.type;
+  },
+
+  getBoxLabel() {
+    return this.isVersion() ? 'opinion.header.version'
+      : this.props.opinionTerm === 0
+        ? 'opinion.header.opinion'
+        : 'opinion.header.article'
+    ;
   },
 
   renderVotesHelpText() {
@@ -116,7 +125,7 @@ const OpinionBox = React.createClass({
     const color = this.getOpinionType().color;
     const backLink = this.isVersion() ? opinion.parent._links.show : opinion._links.type;
     const backTitle = this.isVersion() ? opinion.parent.title : this.getOpinionType().title;
-    const headerTitle = this.isVersion() ? 'opinion.header.version' : 'opinion.header.opinion';
+    const headerTitle = this.getBoxLabel();
 
     const colorClass = 'opinion opinion--' + color + ' opinion--current';
     return (
@@ -127,9 +136,9 @@ const OpinionBox = React.createClass({
               <i className="cap cap-arrow-1-1"></i>
               <span className="hidden-xs hidden-sm"> {backTitle}</span>
             </a>
-            <h2 className="h4 opinion__header__title"> {this.getIntlMessage(headerTitle)}</h2>
+            <h2 className="h4 opinion__header__title">{this.getIntlMessage(headerTitle)}</h2>
           </div>
-          <OpinionPreview rankingThreshold={this.props.rankingThreshold} opinion={opinion} link={false} />
+          <OpinionPreview rankingThreshold={this.props.rankingThreshold} opinionTerm={this.props.opinionTerm} opinion={opinion} link={false} />
         </div>
         <OpinionAppendices opinion={opinion} />
         <div className="opinion__description">

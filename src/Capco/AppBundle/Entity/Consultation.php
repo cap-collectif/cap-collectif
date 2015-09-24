@@ -41,6 +41,14 @@ class Consultation
         'ended' => self::OPENING_STATUS_ENDED,
     ];
 
+    const OPINION_TERM_OPINION = 0;
+    const OPINION_TERM_ARTICLE = 1;
+
+    public static $opinionTermsLabels = [
+        self::OPINION_TERM_OPINION => 'consultation.opinion_term.opinion',
+        self::OPINION_TERM_ARTICLE => 'consultation.opinion_term.article',
+    ];
+
     /**
      * @var int
      *
@@ -185,11 +193,14 @@ class Consultation
     private $versionsRankingThreshold = null;
 
     /**
-     * @var int
-     *
      * @ORM\Column(name="include_author_in_ranking", type="boolean")
      */
     private $includeAuthorInRanking = false;
+
+    /**
+     * @ORM\Column(name="opinion_term", type="integer", nullable=false)
+     */
+    private $opinionTerm = self::OPINION_TERM_OPINION;
 
     /**
      * Constructor.
@@ -656,6 +667,22 @@ class Consultation
     public function setIncludeAuthorInRanking($includeAuthorInRanking)
     {
         $this->includeAuthorInRanking = $includeAuthorInRanking;
+    }
+
+    /**
+     * @return array
+     */
+    public function getOpinionTerm()
+    {
+        return $this->opinionTerm;
+    }
+
+    /**
+     * @param array $opinionTerm
+     */
+    public function setOpinionTerm($opinionTerm)
+    {
+        $this->opinionTerm = $opinionTerm;
     }
 
     // ******************** Custom methods ******************************

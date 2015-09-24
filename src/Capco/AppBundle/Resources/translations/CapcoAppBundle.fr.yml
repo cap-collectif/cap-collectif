@@ -259,7 +259,11 @@ consultation:
     not_found: Consultation introuvable.
     no_contribute: Impossible de contribuer sur cette consultation.
   none: Aucune consultation.
+  opinion_term:
+    opinion: Générique (proposition)
+    article: Texte juridique (article)
   ranking:
+    articles: ]-Inf, 1] Classement des articles | ]1,Inf[ Classement des %count% articles
     opinions: ]-Inf, 1] Classement des propositions | ]1,Inf[ Classement des %count% propositions
     versions: ]-Inf, 1] Classement des versions | ]1,Inf[ Classement des %count% versions
   searchform:
@@ -303,6 +307,7 @@ consultation:
       intro:
         title: Introduction
       opinionsCount: "]-Inf, 1] %count% proposition | ]1,Inf[ %count% propositions"
+      articlesCount: "]-Inf, 1] %count% article | ]1,Inf[ %count% articles"
       read_less: Replier
       read_more: Lire la suite
       remaining_days: "]-Inf, 1] jour restant | ]1,Inf[ jours restants"
@@ -314,6 +319,7 @@ consultation:
       votes_count: "]-Inf, 1] vote | ]1,Inf[ votes"
     on_date: le %date%
     opinions: "]-Inf, 1] %count% proposition | ]1,Inf[ %count% propositions"
+    articles: "]-Inf, 1] %count% article | ]1,Inf[ %count% articles"
     opinions_no_nb: "]-Inf, 1] opinion | ]1,Inf[ opinions"
     posts:
       title: Actualités
@@ -485,11 +491,13 @@ source:
 opinion:
   create:
     button: Proposer
+    article_button: Proposer un article
     cancel: Annuler
     error: Erreur, impossible de créer une proposition.
     submit: Publier
     success: Merci ! Votre proposition a bien été enregistrée.
     text: Merci d'examiner les propositions en premier lieu afin de ne pas soumettre de doublon. Vous pouvez voter pour une proposition existante !
+    article_title: Proposer un article
     title: Faire une proposition
   delete:
     cancel: Annuler
@@ -502,6 +510,7 @@ opinion:
     title: Supprimer une proposition
   show:
     all: Voir toutes les propositions
+    articles_all: Voir tous les articles
     back: Retour
     none: Il n'y a pas encore de proposition.
     no_opinion_types: Aucun type d'opinion n'est défini.
@@ -511,6 +520,7 @@ opinion:
     ranking:
       opinions: Top %max% des propositions
       versions: Top %max% des modifications
+      articles: Top %max% des articles
     trashed:
       label: Dans la corbeille
     versions:

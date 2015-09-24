@@ -192,6 +192,7 @@ admin:
       opened_at: Ouvert
       opening_status: Statut
       opinion_count: Propositions
+      opinion_term: Usage
       posts: Articles
       posts_count: Articles
       published_at: Publication
