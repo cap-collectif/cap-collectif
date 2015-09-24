@@ -31,6 +31,7 @@ admin.label.menu_item: Navigation
 admin.label.newsletter_subscription: "Inscrits à la lettre d'information"
 admin.label.opinion: Propositions
 admin.label.opinion_type: Éléments de structure
+admin.label.opinion_version: Révisions
 admin.label.page: Pages statiques
 admin.label.post: Articles
 admin.label.recent_posts: "Derniers articles"
@@ -360,6 +361,25 @@ admin:
       position: Position
       appendix_type: Élément de contexte
       appendix_type_add: Ajouter
+    opinion_version:
+      argument_count: Arguments
+      author: Auteur
+      body: Contenu
+      created_at: Création
+      comment: Motivation
+      group_content: Contenu
+      group_publication: Options de publication
+      is_enabled: Publié
+      is_trashed: Dans la corbeille
+      parent: Proposition parente
+      source_count: Sources
+      title: Titre
+      trashed_at: Mise à la corbeille
+      trashed_reason: Raison de la mise en corbeille
+      updated_at: Mise à jour
+      vote_count_mitige: Votes mitigés
+      vote_count_nok: Votes contre
+      vote_count_ok: Votes pour
     opinion_vote:
       opinion: Proposition
       voter: Auteur
