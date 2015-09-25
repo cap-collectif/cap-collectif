@@ -190,14 +190,3 @@ $backgrounds:
 .jumbotron--bg-2 {
   border-bottom: 1px solid $border-color;
 }
-
-#skip-links {
-  position: absolute;
-  left: -999999px;
-
-  &:focus {
-    //position: static;
-    left: 0;
-
-  }
-}
