@@ -350,7 +350,7 @@ class CreatePJLFromCsvCommand extends ContainerAwareCommand
             $opinionType->addAppendixType($exposayDayMotifType);
 
             if (!empty($row['parent'])) {
-                $parent = $this->findOpinionTypeByTitle($row['parent']);
+                $parent = $this->findOpinionTypeByTitle($row['parent'], $row['root']);
                 if (!$parent) {
                     throw new \Exception('Parent does not exist', 1);
                 }
