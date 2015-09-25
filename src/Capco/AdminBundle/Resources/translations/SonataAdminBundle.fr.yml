@@ -367,7 +367,7 @@ admin:
       author: Auteur
       body: Contenu
       created_at: Création
-      comment: Motivation
+      comment: Explication
       group_content: Contenu
       group_publication: Options de publication
       is_enabled: Publié
