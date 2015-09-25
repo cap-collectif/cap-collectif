@@ -25,7 +25,7 @@ class OpinionsSortType extends AbstractType
             'required' => false,
             'choices' => Opinion::$sortCriterias,
             'translation_domain' => 'CapcoAppBundle',
-            'label' => false,
+            'label' => 'opinion.sort.label',
             'empty_value' => false,
         ];
 
@@ -48,6 +48,6 @@ class OpinionsSortType extends AbstractType
      */
     public function getName()
     {
-        return 'app_opinions_sort_'.str_replace('-', '_', $this->data['slug']);
+        return 'capco_app_opinions_sort';
     }
 }

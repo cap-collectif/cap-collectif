@@ -70,11 +70,6 @@ export default {
                 min: 'Le contenu doit faire au moins 3 caractères.',
                 max: 'Les avis sont limités à 2000 caractères. Soyez plus concis ou publiez une nouvelle proposition.',
             },
-            filter: {
-                yes: 'Trier les arguments pour',
-                no: 'Trier les arguments contre',
-                simple: 'Trier les avis',
-            },
         },
         opinion: {
             request: {

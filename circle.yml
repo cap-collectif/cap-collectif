@@ -3,11 +3,17 @@ machine:
         version: 5.6.5
 
 dependencies:
+    cache_directories:
+        - bower_components
+        - node_modules
+        - ~/.composer
     override:
         - sudo composer self-update:
             timeout: 3600
     pre:
-        - echo "memory_limit = 2048M" > ~/.phpenv/versions/$(phpenv global)/etc/conf.d/memory.ini
+        - sudo apt-get install libfftw3-double3 libmagickcore5 imagemagick
+        - yes "" | pecl install imagick
+        - echo "memory_limit = 256M" > ~/.phpenv/versions/$(phpenv global)/etc/conf.d/memory.ini
         - echo "always_populate_raw_post_data=-1" > ~/.phpenv/versions/$(phpenv global)/etc/conf.d/custom.ini
         - mysql -u ubuntu -e "create database symfony"
         - mysql -u ubuntu -e "create database symfony_test"
@@ -21,6 +27,10 @@ dependencies:
         - elasticsearch-1.7.0/bin/elasticsearch: {background: true}
         - npm install -g brunch
         - pip install fabric requests libsaas
+        - npm install
+        - bower install --config.interactive=false
+        - composer install --prefer-dist --no-interaction --optimize-autoloader
+
 
 # This is not a real deployment we only update the code
 # because the 'infrastructure' folder which contains the

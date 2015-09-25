@@ -10,10 +10,8 @@
             <div class="pull-right  opinion__header__filter">
                 {% if opinions_count > 1 and sortOpinionsForm is defined %}
                     {{ form_start(sortOpinionsForm) }}
-                        <label class="sr-only control-label" for="app_opinions_sort_{{ opinionType.slug | replace({'-': '_'}) }}_opinionsSort">
-                            {{ 'opinion.sort.label' | trans({'%name%': opinionType.title | lower}, 'CapcoAppBundle') }}
-                        </label>
-                        {{ form_widget(sortOpinionsForm.opinionsSort, {'attr':{'onchange': 'this.form.submit()'} }) }}
+                    {{ form_label(sortOpinionsForm.opinionsSort, null, {'label_attr':{"class":"control-label  sr-only"} }) }}
+                    {{ form_widget(sortOpinionsForm.opinionsSort, {'attr':{"class":"form-control", 'onchange': 'this.form.submit()'} }) }}
                     {{ form_end(sortOpinionsForm) }}
                 {% endif %}
                 {% if opinionType is defined and opinionType.isEnabled == true and currentStep.canContribute %}
