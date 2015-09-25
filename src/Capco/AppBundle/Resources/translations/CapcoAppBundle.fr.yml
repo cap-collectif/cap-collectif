@@ -11,6 +11,12 @@ global:
     title: Menu
     see_more: Plus
     search: Rechercher
+  pagination:
+    first: Aller à la première page
+    previous: Aller à la page précédente
+    page: Aller à la page %page%
+    next: Aller à la page suivante
+    last: Aller à la dernière page
   helper:
     typo: Vouliez-vous dire
 
@@ -563,7 +569,7 @@ opinion:
     votes: Les plus votés
     favorable: Les plus favorables
     comments: Les plus commentés
-    label: Trier par
+    label: Trier %name% par
   error:
     not_found: Proposition introuvable.
     not_author: Vous ne pouvez pas modifier cette proposition car vous n'en êtes pas l'auteur.
