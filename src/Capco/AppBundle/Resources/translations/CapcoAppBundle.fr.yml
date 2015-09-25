@@ -310,7 +310,7 @@ consultation:
         title: Étapes
       sourcesCount: "]-Inf, 1] %count% source | ]1,Inf[ %count% sources"
       total_count: "]-Inf, 1] contribution | ]1,Inf[ contributions"
-      versionsCount: "]-Inf, 1] %count% modification | ]1,Inf[ %count% modifications"
+      versionsCount: "]-Inf, 1] %count% révision | ]1,Inf[ %count% révisions"
       votes_count: "]-Inf, 1] vote | ]1,Inf[ votes"
     on_date: le %date%
     opinions: "]-Inf, 1] %count% proposition | ]1,Inf[ %count% propositions"
@@ -319,7 +319,7 @@ consultation:
       title: Actualités
     remaining_days: "]-Inf, 0] Consultation terminée | {1} Dernier jour | ]1,Inf[ %count% jours restants"
     sources: "]-Inf, 1] %count% source | ]1,Inf[ %count% sources"
-    versions: "]-Inf, 1] %count% modification | ]1,Inf[ %count% modifications"
+    versions: "]-Inf, 1] %count% révision | ]1,Inf[ %count% révisions"
     votes: "]-Inf, 1] %count% vote | ]1,Inf[ %count% votes"
     votes_no_nb: "]-Inf, 1] vote | ]1,Inf[ votes"
     trashed:
@@ -419,7 +419,7 @@ argument:
 
 version:
   show:
-    count: "]-Inf, 0] 0 modification | {1} 1 modification | ]1,Inf[ %count% modifications"
+    count: "]-Inf, 0] 0 révision | {1} 1 révision | ]1,Inf[ %count% révisions"
 
 appendix:
   form:
@@ -489,7 +489,7 @@ opinion:
     error: Erreur, impossible de créer une proposition.
     submit: Publier
     success: Merci ! Votre proposition a bien été enregistrée.
-    text: Merci d'examiner %type% en premier lieu afin de ne pas soumettre de doublon. Vous pouvez voter pour une proposition existante !
+    text: Merci d'examiner les propositions en premier lieu afin de ne pas soumettre de doublon. Vous pouvez voter pour une proposition existante !
     title: Faire une proposition
   delete:
     cancel: Annuler
@@ -510,11 +510,11 @@ opinion:
       tooltip: Cette proposition a été épinglée par l'administrateur.
     ranking:
       opinions: Top %max% des propositions
-      versions: Top %max% des modifications
+      versions: Top %max% des révisions
     trashed:
       label: Dans la corbeille
     versions:
-      none: Il n'y a pas encore de modification.
+      none: Il n'y a pas encore de révision.
     vote:
       cancel: Annuler mon vote
       mitige: Mitigé
@@ -904,7 +904,7 @@ consultation_download:
     non_applicable: n/a
     content_type:
       opinion: Proposition
-      version: Modification
+      version: Révision
       appendix: Élément de contexte
       argument: Argument
       simple_argument: Avis
@@ -920,7 +920,7 @@ consultation_download:
       ok: Pour
     related:
       opinion: Proposition "%name%"
-      version: Modification "%name%"
+      version: Révision "%name%"
       source: Source "%name%"
       argument: Argument "%id%"
 

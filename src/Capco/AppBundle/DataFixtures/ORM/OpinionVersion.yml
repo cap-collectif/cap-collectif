@@ -1,7 +1,7 @@
 Capco\AppBundle\Entity\OpinionVersion:
 
     version1:
-        title: Modification 1
+        title: Révision 1
         body: |
              <p><text(100)></p>
              <p><text(300)></p>
@@ -12,7 +12,7 @@ Capco\AppBundle\Entity\OpinionVersion:
         comment: bououh
 
     version2:
-        title: Modification 2
+        title: Révision 2
         body: |
              <p><text(100)></p>
              <p><text(300)></p>
@@ -23,7 +23,7 @@ Capco\AppBundle\Entity\OpinionVersion:
         comment: bououh
 
     version3:
-        title: Modification 3
+        title: Révision 3
         body: |
              <p><text(100)></p>
              <p><text(300)></p>

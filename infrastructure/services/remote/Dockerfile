@@ -13,7 +13,7 @@ RUN apt-get update && \
     apt-key adv --recv-keys --keyserver keyserver.ubuntu.com 0xcbcb082a1bb943db && \
     wget http://www.dotdeb.org/dotdeb.gpg -O- -q | apt-key add - && \
     apt-get update && \
-    apt-get install -y -qq curl cron nginx php5-fpm php5-cli php5-curl php5-intl php5-mysqli php5-redis php5-xsl php5-gd mariadb-server redis-server && \
+    apt-get install -y -qq curl imagemagick cron nginx php5-fpm php5-cli php5-curl php5-intl php5-mysqli php5-redis php5-xsl php5-imagick mariadb-server redis-server && \
 
     # Configure Redis
     sed -i 's/^\(bind .*\)$/# \1/' /etc/redis/redis.conf && \

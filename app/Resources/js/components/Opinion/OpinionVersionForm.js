@@ -208,10 +208,10 @@ const OpinionVersionForm = React.createClass({
 
       OpinionActions
       .createVersion(this.props.opinionId, data)
-      .then((version) => {
+      .then(() => {
         this.setState(this.getInitialState());
         this.close();
-        window.location.href = window.location.href + '/versions/' + version.slug;
+        location.reload(); // TODO when enough time
         return true;
       })
       .catch(() => {
