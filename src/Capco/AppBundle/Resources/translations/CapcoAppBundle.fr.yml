@@ -489,7 +489,7 @@ opinion:
     error: Erreur, impossible de créer une proposition.
     submit: Publier
     success: Merci ! Votre proposition a bien été enregistrée.
-    text: Merci d'examiner les propositions en premier lieu afin de ne pas soumettre de doublon. Vous pouvez voter pour une proposition existante !
+    text: Merci d'examiner %type% en premier lieu afin de ne pas soumettre de doublon. Vous pouvez voter pour une proposition existante !
     title: Faire une proposition
   delete:
     cancel: Annuler
