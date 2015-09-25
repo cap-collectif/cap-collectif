@@ -1,6 +1,5 @@
 liip_imagine:
     formats: ['png', 'jpg']
-    driver: imagick
     filter_sets:
         admin:
             quality: 100

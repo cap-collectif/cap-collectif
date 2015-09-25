@@ -48,7 +48,7 @@ const OpinionTabs = React.createClass({
       return (
         <TabbedArea defaultActiveKey={1} animation={false}>
           { this.isVersionable()
-            ? <TabPane id="opinion__versions" className="opinion-tabs" eventKey={2} tab={
+            ? <TabPane id="opinion__versions" className="opinion-tabs" eventKey={1} tab={
                 <FormattedMessage message={this.getIntlMessage('global.versions')} num={opinion.versions_count} />
               }>
             {this.renderVersionsContent()}
@@ -56,7 +56,7 @@ const OpinionTabs = React.createClass({
             : null
           }
           { this.isCommentable()
-            ? <TabPane id="opinion__arguments" className="opinion-tabs" eventKey={1} tab={
+            ? <TabPane id="opinion__arguments" className="opinion-tabs" eventKey={2} tab={
                 <FormattedMessage message={this.getArgumentsTrad()} num={this.props.opinion.arguments_count} />
               }>
                 {this.renderArgumentsContent()}
