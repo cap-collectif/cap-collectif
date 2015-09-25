@@ -9,6 +9,10 @@ Capco\AppBundle\Entity\OpinionVersion:
             expose: true
             type: string
             groups: [OpinionVersions]
+        slug:
+            expose: true
+            type: string
+            groups: [OpinionVersions]
         body:
             expose: true
             type: string

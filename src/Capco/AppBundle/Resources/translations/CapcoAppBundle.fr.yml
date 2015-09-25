@@ -310,7 +310,7 @@ consultation:
         title: Étapes
       sourcesCount: "]-Inf, 1] %count% source | ]1,Inf[ %count% sources"
       total_count: "]-Inf, 1] contribution | ]1,Inf[ contributions"
-      versionsCount: "]-Inf, 1] %count% révision | ]1,Inf[ %count% révisions"
+      versionsCount: "]-Inf, 1] %count% modification | ]1,Inf[ %count% modifications"
       votes_count: "]-Inf, 1] vote | ]1,Inf[ votes"
     on_date: le %date%
     opinions: "]-Inf, 1] %count% proposition | ]1,Inf[ %count% propositions"
@@ -319,7 +319,7 @@ consultation:
       title: Actualités
     remaining_days: "]-Inf, 0] Consultation terminée | {1} Dernier jour | ]1,Inf[ %count% jours restants"
     sources: "]-Inf, 1] %count% source | ]1,Inf[ %count% sources"
-    versions: "]-Inf, 1] %count% révision | ]1,Inf[ %count% révisions"
+    versions: "]-Inf, 1] %count% modification | ]1,Inf[ %count% modifications"
     votes: "]-Inf, 1] %count% vote | ]1,Inf[ %count% votes"
     votes_no_nb: "]-Inf, 1] vote | ]1,Inf[ votes"
     trashed:
@@ -419,7 +419,7 @@ argument:
 
 version:
   show:
-    count: "]-Inf, 0] 0 révision | {1} 1 révision | ]1,Inf[ %count% révisions"
+    count: "]-Inf, 0] 0 modification | {1} 1 modification | ]1,Inf[ %count% modifications"
 
 appendix:
   form:
@@ -510,11 +510,11 @@ opinion:
       tooltip: Cette proposition a été épinglée par l'administrateur.
     ranking:
       opinions: Top %max% des propositions
-      versions: Top %max% des révisions
+      versions: Top %max% des modifications
     trashed:
       label: Dans la corbeille
     versions:
-      none: Il n'y a pas encore de révision.
+      none: Il n'y a pas encore de modification.
     vote:
       cancel: Annuler mon vote
       mitige: Mitigé
@@ -904,7 +904,7 @@ consultation_download:
     non_applicable: n/a
     content_type:
       opinion: Proposition
-      version: Révision
+      version: Modification
       appendix: Élément de contexte
       argument: Argument
       simple_argument: Avis
@@ -920,7 +920,7 @@ consultation_download:
       ok: Pour
     related:
       opinion: Proposition "%name%"
-      version: Révision "%name%"
+      version: Modification "%name%"
       source: Source "%name%"
       argument: Argument "%id%"
 

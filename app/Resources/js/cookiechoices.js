@@ -33,7 +33,7 @@ var cookieChoices = function() {
     }
 
     function _createConsentText(cookieText) {
-      var consentText = document.createElement('p');
+      var consentText = document.createElement('span');
       _setElementText(consentText, cookieText);
       return consentText;
     }
