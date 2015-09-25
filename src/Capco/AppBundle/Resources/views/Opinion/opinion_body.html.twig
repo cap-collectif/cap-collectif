@@ -47,16 +47,16 @@
                     consultation.show.votes
                 {% endtranschoice %}</span>
             {% endif %}
-            {% if isVersion == false and opinionType.versionable %}
-                <span class="count__separator"> • </span>
-                <span>{% transchoice nbVersions with {'%count%': nbVersions} from 'CapcoAppBundle' %}
-                    consultation.show.versions
-                    {% endtranschoice %}</span>
-            {% endif %}
             {% if opinionType.commentSystem != 0 %}
                 <span class="count__separator"> • </span>
                 <span>{% transchoice nbArguments with {'%count%': nbArguments} from 'CapcoAppBundle' %}
                     consultation.show.arguments
+                {% endtranschoice %}</span>
+            {% endif %}
+            {% if isVersion == false and opinionType.versionable %}
+                <span class="count__separator"> • </span>
+                <span>{% transchoice nbVersions with {'%count%': nbVersions} from 'CapcoAppBundle' %}
+                consultation.show.versions
                 {% endtranschoice %}</span>
             {% endif %}
             {% if opinionType.sourceable %}

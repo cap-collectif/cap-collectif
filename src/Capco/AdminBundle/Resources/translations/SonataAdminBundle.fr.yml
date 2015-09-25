@@ -31,7 +31,7 @@ admin.label.menu_item: Navigation
 admin.label.newsletter_subscription: "Inscrits à la lettre d'information"
 admin.label.opinion: Propositions
 admin.label.opinion_type: Éléments de structure
-admin.label.opinion_version: Révisions
+admin.label.opinion_version: Modifications
 admin.label.page: Pages statiques
 admin.label.post: Articles
 admin.label.recent_posts: "Derniers articles"
@@ -197,7 +197,7 @@ admin:
       published_at: Publication
       ranking:
         opinions_threshold: Taille du classement des propositions
-        versions_threshold: Taille du classement des révisions
+        versions_threshold: Taille du classement des modifications
         include_author: Inclure les contributions de l'auteur
       steps: Étapes
       step_position: Position de l'étape
@@ -352,7 +352,7 @@ admin:
       subtitle: Sous-titre
       title: Titre
       updated_at: Mise à jour
-      versionable: Autoriser les révisions
+      versionable: Autoriser les modifications
       vote_widget_type: Type de vote
       votes_help_text: Texte d'aide pour les votes
       votes_threshold: Seuil de votes
@@ -458,7 +458,7 @@ admin:
       is_enabled: Publié
       position: Position
       nb_opinions_to_display: Nombre de propositions dans l'aperçu du classement
-      nb_versions_to_display: Nombre de révisions dans l'aperçu du classement
+      nb_versions_to_display: Nombre de modifications dans l'aperçu du classement
       start_at: Commence
       synthesis: Synthèse
       title: Titre
