@@ -74,8 +74,7 @@ Feature: Opinions Versions
         },
         @...@
       ],
-      "rankingThreshold": @integer@,
-      "opinionTerm": @integer@
+      "rankingThreshold": @integer@
     }
     """
 
@@ -150,8 +149,7 @@ Feature: Opinions Versions
 
         "ranking": @integer@
       },
-      "rankingThreshold": @integer@,
-      "opinionTerm": @integer@
+      "rankingThreshold": @integer@
     }
     """
 

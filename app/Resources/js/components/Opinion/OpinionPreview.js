@@ -52,11 +52,11 @@ const OpinionPreview = React.createClass({
     if (type.voteWidgetType !== VOTE_WIDGET_DISABLED) {
       counters.push(<FormattedMessage message={this.getIntlMessage('global.votes')} num={opinion.votes_total}/>);
     }
-    if (!opinion.parent && type.versionable) {
-      counters.push(<FormattedMessage message={this.getIntlMessage('global.versions')} num={opinion.versions_count}/>);
-    }
     if (type.commentSystem !== COMMENT_SYSTEM_NONE) {
       counters.push(<FormattedMessage message={this.getIntlMessage('global.arguments')} num={opinion.arguments_count} />);
+    }
+    if (!opinion.parent && type.versionable) {
+      counters.push(<FormattedMessage message={this.getIntlMessage('global.versions')} num={opinion.versions_count}/>);
     }
     if (type.sourceable) {
       counters.push(<FormattedMessage message={this.getIntlMessage('global.sources')} num={opinion.sources_count} />);

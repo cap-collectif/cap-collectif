@@ -5,7 +5,6 @@ const OpinionInfos = React.createClass({
   propTypes: {
     opinion: React.PropTypes.object.isRequired,
     rankingThreshold: React.PropTypes.number,
-    opinionTerm: React.PropTypes.number,
   },
   mixins: [ReactIntl.IntlMixin],
 
@@ -70,15 +69,10 @@ const OpinionInfos = React.createClass({
             message={this.getIntlMessage('opinion.ranking.versions')}
             max={this.props.rankingThreshold}
             />
-            : this.props.opinionTerm === 0
-              ? <FormattedMessage
-                message={this.getIntlMessage('opinion.ranking.opinions')}
-                max={this.props.rankingThreshold}
-                />
-              : <FormattedMessage
-                message={this.getIntlMessage('opinion.ranking.articles')}
-                max={this.props.rankingThreshold}
-                />
+            : <FormattedMessage
+            message={this.getIntlMessage('opinion.ranking.opinions')}
+            max={this.props.rankingThreshold}
+            />
           }
         </span>
       );

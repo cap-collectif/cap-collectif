@@ -52,7 +52,6 @@ class OpinionsController extends FOSRestController
         return [
             'opinion' => $opinion,
             'rankingThreshold' => $consultation->getOpinionsRankingThreshold(),
-            'opinionTerm' => $consultation->getOpinionTerm(),
         ];
     }
 
@@ -189,7 +188,6 @@ class OpinionsController extends FOSRestController
         return [
             'versions' => $versions,
             'rankingThreshold' => $consultation->getVersionsRankingThreshold(),
-            'opinionTerm' => $consultation->getOpinionTerm(),
         ];
     }
 
@@ -217,7 +215,6 @@ class OpinionsController extends FOSRestController
         return [
             'version' => $version,
             'rankingThreshold' => $consultation->getVersionsRankingThreshold(),
-            'opinionTerm' => $consultation->getOpinionTerm(),
         ];
     }
 

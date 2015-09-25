@@ -1,6 +1,5 @@
 {% set color = opinionType is defined ? opinionType.color : 'default' %}
-{% set buttonLabel = opinionTerm == 0 ? 'opinion.create.button' : 'opinion.create.article_button'  %}
-{% set label = areVersions is defined and areVersions ? 'consultation.show.versions' : opinionTerm == 0 ? 'consultation.show.opinions' : 'consultation.show.articles' %}
+{% set label = areVersions is defined and areVersions ? 'consultation.show.versions' : 'consultation.show.opinions' %}
 <div class="opinion  opinion--{{ color }} opinion--default">
     <div class="opinion__header  opinion__header--mobile-centered">
         <h2 class="pull-left  h4  opinion__header__title">
@@ -10,14 +9,16 @@
             <div class="pull-right  opinion__header__filter">
                 {% if opinions_count > 1 and sortOpinionsForm is defined %}
                     {{ form_start(sortOpinionsForm) }}
-                    {{ form_label(sortOpinionsForm.opinionsSort, null, {'label_attr':{"class":"control-label  sr-only"} }) }}
-                    {{ form_widget(sortOpinionsForm.opinionsSort, {'attr':{"class":"form-control", 'onchange': 'this.form.submit()'} }) }}
+                        <label class="sr-only control-label" for="app_opinions_sort_{{ opinionType.slug | replace({'-': '_'}) }}_opinionsSort">
+                            {{ 'opinion.sort.label' | trans({'%name%': opinionType.title | lower}, 'CapcoAppBundle') }}
+                        </label>
+                        {{ form_widget(sortOpinionsForm.opinionsSort, {'attr':{'onchange': 'this.form.submit()'} }) }}
                     {{ form_end(sortOpinionsForm) }}
                 {% endif %}
                 {% if opinionType is defined and opinionType.isEnabled == true and currentStep.canContribute %}
                     <a id="btn-add--{{ opinionType.slug }}" href="{{ path('app_consultation_new_opinion' ,{'consultationSlug': consultation.slug, 'stepSlug': currentStep.slug, 'opinionTypeSlug': opinionType.slug } ) }}" class="btn  btn-primary">
                         <i class="cap cap-add-1"></i>
-                        <span class="hidden-xs">{{ buttonLabel | trans({}, 'CapcoAppBundle') }}</span>
+                        <span class="hidden-xs">{{ 'opinion.create.button'|trans({}, 'CapcoAppBundle') }}</span>
                     </a>
                 {% endif %}
             </div>

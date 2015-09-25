@@ -192,7 +192,6 @@ admin:
       opened_at: Ouvert
       opening_status: Statut
       opinion_count: Propositions
-      opinion_term: Usage
       posts: Articles
       posts_count: Articles
       published_at: Publication
@@ -367,7 +366,7 @@ admin:
       author: Auteur
       body: Contenu
       created_at: Création
-      comment: Explication
+      comment: Motivation
       group_content: Contenu
       group_publication: Options de publication
       is_enabled: Publié

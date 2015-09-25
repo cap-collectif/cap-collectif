@@ -13,7 +13,7 @@ const OpinionBodyDiffContent = React.createClass({
       return <div dangerouslySetInnerHTML={{__html: opinion.body}} />;
     }
 
-    const modals = opinion.modals;
+    const modal = opinion.modals[0];
     const sections = [];
 
     opinion.body.split('<p>').forEach((sentence) => {
@@ -24,23 +24,17 @@ const OpinionBodyDiffContent = React.createClass({
 
     const parts = [];
     sections.forEach((section) => {
-      let foundModal = false;
-      modals.forEach((modal) => {
-        if (section.indexOf(modal.key) !== -1) {
-          foundModal = modal;
-        }
-      });
-      if (!foundModal) {
+      if (section.indexOf(modal.key) === -1) {
         parts.push({
           content: section,
           link: false,
         });
       } else {
         parts.push({
-          before: section.slice(0, section.indexOf(foundModal.key)),
-          link: foundModal.key,
-          after: section.slice(section.indexOf(foundModal.key) + foundModal.key.length),
-          modal: foundModal,
+          before: section.slice(0, section.indexOf(modal.key)),
+          link: modal.key,
+          after: section.slice(section.indexOf(modal.key) + modal.key.length),
+          modal: modal,
         });
       }
     });

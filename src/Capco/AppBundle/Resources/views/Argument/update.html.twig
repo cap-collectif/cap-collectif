@@ -30,6 +30,7 @@
                                             </div>
                                         </div>
                                     {% endif %}
+                                    {{ form_label(form.body, null, {'label_attr': {'class': 'sr-only'}}) }}
                                     {{form_widget(form.body)}}
                                     {{ form_rest(form) }}
                                 </div>

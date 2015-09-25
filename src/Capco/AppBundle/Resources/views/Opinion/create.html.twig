@@ -10,13 +10,12 @@
 {% endblock %}
 
 {% block body %}
-    {% set title = consultation.opinionTerm == 0 ? 'opinion.create.title' : 'opinion.create.article_title' %}
     <div class="container  container--custom">
         <div class="row">
             <div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2">
                 <div class="dialog  dialog--{{ opinionType.color }}  block--bordered">
                     <div class="dialog__header  box">
-                        <h1 class="h4  dialog__title">{{ title | trans({}, 'CapcoAppBundle') }}</h1>
+                        <h1 class="h4  dialog__title">{{ 'opinion.create.title'|trans({}, 'CapcoAppBundle') }}</h1>
                     </div>
                     <div class="dialog__message  box">
                         <p>{{ 'opinion.create.text'|trans({}, 'CapcoAppBundle') }}</p>
