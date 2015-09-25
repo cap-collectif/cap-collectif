@@ -55,16 +55,11 @@ const OpinionArgumentList = React.createClass({
   renderFilter() {
     if (this.state.arguments.length > 1) {
       return (
-        <Col xs={12} sm={6} md={6} className="block--first-mobile">
-          <label className="sr-only" for={'filter-arguments-' + this.props.type}>
-            {this.getIntlMessage('argument.filter.' + this.props.type)}
-          </label>
-          <select id={'filter-arguments-' + this.props.type} ref="filter" className="form-control pull-right" value={this.state.filter} onChange={() => this.updateSelectedValue()}>
-            <option value="last">{this.getIntlMessage('global.filter_last')}</option>
-            <option value="old">{this.getIntlMessage('global.filter_old')}</option>
-            <option value="popular">{this.getIntlMessage('global.filter_popular')}</option>
-          </select>
-        </Col>
+        <select ref="filter" className="form-control pull-right" value={this.state.filter} onChange={() => this.updateSelectedValue()}>
+          <option value="last">{this.getIntlMessage('global.filter_last')}</option>
+          <option value="old">{this.getIntlMessage('global.filter_old')}</option>
+          <option value="popular">{this.getIntlMessage('global.filter_popular')}</option>
+        </select>
       );
     }
   },
@@ -83,7 +78,9 @@ const OpinionArgumentList = React.createClass({
               }
             </h4>
           </Col>
-          { this.renderFilter() }
+          <Col xs={12} sm={6} md={6} className="block--first-mobile">
+            { this.renderFilter() }
+          </Col>
         </Row>
         {!this.state.isLoading
           ? <ul className="media-list opinion__list">

@@ -50,11 +50,10 @@ const OpinionArgumentForm = React.createClass({
           <form id={'argument-form--' + this.props.type} ref="form">
             <LoginOverlay children={
               <div className={'form-group ' + this.getGroupStyle('body')}>
-                <label htmlFor={'arguments-body-' + this.props.type} className="control-label h5 sr-only">
+                <label htmlFor="body" className="control-label h5 sr-only">
                   {this.getIntlMessage('argument.' + this.props.type + '.add')}
                 </label>
                 <Input
-                  id={'arguments-body-' + this.props.type}
                   type="textarea"
                   rows="2"
                   name="body"

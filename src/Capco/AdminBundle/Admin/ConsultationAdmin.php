@@ -142,6 +142,11 @@ class ConsultationAdmin extends Admin
             ->add('Author', 'sonata_type_model', array(
                 'label' => 'admin.fields.consultation.author',
             ))
+            ->add('opinionTerm', 'choice', array(
+                'label' => 'admin.fields.consultation.opinion_term',
+                'choices' => Consultation::$opinionTermsLabels,
+                'translation_domain' => 'CapcoAppBundle',
+            ))
             ->end()
 
             // Metadata

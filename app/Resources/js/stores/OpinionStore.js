@@ -18,6 +18,7 @@ class OpinionStore extends BaseStore {
     this._isProcessing = false;
     this._opinion = null;
     this._rankingThreshold = null;
+    this._opinionTerm = 0;
     this._isOpinionSync = false;
     this._areArgumentsSync = {
       0: true,
@@ -35,6 +36,7 @@ class OpinionStore extends BaseStore {
       case RECEIVE_OPINION:
         this._opinion = action.opinion;
         this._rankingThreshold = action.rankingThreshold;
+        this._opinionTerm = action.opinionTerm;
         this._isOpinionSync = true;
         this.emitChange();
         break;
@@ -110,6 +112,10 @@ class OpinionStore extends BaseStore {
 
   get rankingThreshold() {
     return this._rankingThreshold;
+  }
+
+  get opinionTerm() {
+    return this._opinionTerm;
   }
 
   get isOpinionSync() {

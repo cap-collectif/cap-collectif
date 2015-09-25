@@ -17,18 +17,20 @@
                     'opinions': block.opinions,
                     'opinions_count': block.total_opinions_count,
                     'sortOpinionsForm': block.sortForm,
+                    'opinionTerm': consultation.opinionTerm,
                 } only %}
 
                 {% if block.total_opinions_count > 0 %}
                     <ul class="media-list  opinion__list">
                         {% for opinion in block.opinions %}
-                            {% include 'CapcoAppBundle:Opinion:blockOpinion.html.twig' with {'opinion': opinion, 'opinionType': block} only %}
+                            {% include 'CapcoAppBundle:Opinion:blockOpinion.html.twig' with {'opinion': opinion, 'opinionType': block, 'opinionTerm': consultation.opinionTerm} only %}
                         {% endfor %}
                     </ul>
                     {% if block.total_opinions_count > 5  %}
+                        {% set showAllLabel = consultation.opinionTerm == 0 ? 'opinion.show.all' : 'opinion.show.articles_all'  %}
                         <div class="opinion  opinion__footer  box">
                             <a href="{{ path('app_consultation_show_opinions', {'consultationSlug': consultation.slug, 'stepSlug': currentStep.slug,'opinionTypeSlug': block.slug}) }}" class="text-center" style="display: block">
-                                {{ 'opinion.show.all'|trans({}, 'CapcoAppBundle') }}
+                                {{ showAllLabel | trans({}, 'CapcoAppBundle') }}
                             </a>
                         </div>
                     {% endif %}

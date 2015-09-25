@@ -83,7 +83,8 @@ Feature: Opinions
 
         "ranking": @integer@
       },
-      "rankingThreshold": @integer@
+      "rankingThreshold": @integer@,
+      "opinionTerm": @integer@
     }
     """
 

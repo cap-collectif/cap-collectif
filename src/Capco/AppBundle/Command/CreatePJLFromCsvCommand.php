@@ -250,6 +250,7 @@ class CreatePJLFromCsvCommand extends ContainerAwareCommand
         $opinionTypesData = $this->getOpinionTypes();
         $opinions = $this->getOpinions();
         $motives = $this->getMotives();
+        $modals = $this->getModals();
 
         $em = $this->getContainer()->get('doctrine')->getManager();
 
@@ -261,7 +262,7 @@ class CreatePJLFromCsvCommand extends ContainerAwareCommand
         $user = $em->getRepository('CapcoUserBundle:User')
                    ->findOneByUsername($this->username);
 
-        $progress = new ProgressBar($output, count($opinionTypesData) + count($opinions));
+        $progress = new ProgressBar($output, count($opinionTypesData) + count($opinions) + count($motives) + count($modals));
         $progress->start();
 
         $consultation = new Consultation();
@@ -350,7 +351,7 @@ class CreatePJLFromCsvCommand extends ContainerAwareCommand
             $opinionType->addAppendixType($exposayDayMotifType);
 
             if (!empty($row['parent'])) {
-                $parent = $this->findOpinionTypeByTitle($row['parent']);
+                $parent = $this->findOpinionTypeByTitle($row['parent'], $row['root']);
                 if (!$parent) {
                     throw new \Exception('Parent does not exist', 1);
                 }
@@ -382,26 +383,8 @@ class CreatePJLFromCsvCommand extends ContainerAwareCommand
                 $i++;
             }
 
-            $paragraphe = $row['paragraphe'];
-
-            if (!empty($row['link'])) {
-                $pos = strpos($paragraphe, $row['link']);
-                if ($pos === false) {
-                    throw new \Exception('Unable to find link', 1);
-                }
-
-                $modal = new OpinionModal();
-                $modal->setOpinion($opinion);
-                $modal->setTitle($row['modal_title']);
-                $modal->setKey($row['link']);
-                $modal->setBefore($row['modal_current']);
-                $modal->setAfter($row['modal_next']);
-
-                $em->persist($modal);
-            }
-
             $content = $opinion->getBody();
-            $content .= '<p>'.$paragraphe.'</p>';
+            $content .= '<p>'.$row['paragraphe'].'</p>';
             $opinion->setBody($content);
 
             $em->persist($opinion);
@@ -414,7 +397,7 @@ class CreatePJLFromCsvCommand extends ContainerAwareCommand
                           ->findOneByTitle($row['opinion']);
 
             if (!is_object($opinion)) {
-                throw new \Exception('Unknown title', 1);
+                throw new \Exception('Unknown title: ' . $row['opinion'], 1);
             }
 
             if (count($opinion->getAppendices()) === 0) {
@@ -429,6 +412,27 @@ class CreatePJLFromCsvCommand extends ContainerAwareCommand
                 $motif->setBody($content);
             }
 
+            $em->flush();
+            $progress->advance(1);
+        }
+
+
+        foreach ($modals as $row) {
+            $opinion = $em->getRepository('CapcoAppBundle:Opinion')
+                          ->findOneByTitle($row['opinion']);
+
+            if (!is_object($opinion)) {
+                throw new \Exception('Unknown title: ' . $row['opinion'], 1);
+            }
+
+            $modal = new OpinionModal();
+            $modal->setOpinion($opinion);
+            $modal->setTitle($row['title']);
+            $modal->setKey($row['key']);
+            $modal->setBefore($row['before']);
+            $modal->setAfter($row['after']);
+
+            $em->persist($modal);
             $em->flush();
             $progress->advance(1);
         }
@@ -448,6 +452,13 @@ class CreatePJLFromCsvCommand extends ContainerAwareCommand
         return $this->getContainer()
                     ->get('import.csvtoarray')
                     ->convert('pjl/motifs.csv');
+    }
+
+    protected function getModals()
+    {
+        return $this->getContainer()
+                    ->get('import.csvtoarray')
+                    ->convert('pjl/modals.csv');
     }
 
     protected function getOpinionTypes()

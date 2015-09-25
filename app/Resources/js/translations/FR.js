@@ -70,11 +70,6 @@ export default {
                 min: 'Le contenu doit faire au moins 3 caractères.',
                 max: 'Les avis sont limités à 2000 caractères. Soyez plus concis ou publiez une nouvelle proposition.',
             },
-            filter: {
-                yes: 'Trier les arguments pour',
-                no: 'Trier les arguments contre',
-                simple: 'Trier les avis',
-            },
         },
         opinion: {
             request: {
@@ -88,11 +83,13 @@ export default {
             },
             header: {
                 opinion: 'Proposition',
+                article: 'Article',
                 version: 'Modification',
             },
             ranking: {
                 versions: 'Top {max} des modifications',
                 opinions: 'Top {max} des propositions',
+                articles: 'Top {max} des articles',
             },
             progress_done: '{num, plural, =0{0 vote favorable} one{# vote favorable} other{# votes favorables}}.',
             progress_left: '{left, plural, =0{0 nécessaire} one{# nécessaire} other{# nécessaires}} pour atteindre {max}.',
@@ -102,13 +99,13 @@ export default {
             add_new_version: 'Proposer une modification',
             add_new_source: 'Proposer une source',
             add_new_version_infos: 'Merci d\'examiner les modifications existantes en premier lieu afin de ne pas soumettre de doublon. Vous pouvez voter pour celles existantes !',
-            version_comment: 'Motivation',
+            version_comment: 'Explication',
             version_parent: 'Modification de : ',
             version: {
                 title: 'Titre *',
                 body: 'Modification *',
                 body_helper: 'Modifiez le texte',
-                comment: 'Motivation',
+                comment: 'Explication',
                 comment_helper: 'Expliquez pourquoi vous souhaitez apporter ces modifications',
                 title_error: 'Le titre doit contenir au moins 2 caractères.',
                 body_error: 'Vous devez modifier le contenu de la proposition d\'origine pour pouvoir proposer une modification.',

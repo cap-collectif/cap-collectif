@@ -17,7 +17,11 @@
             {% endif %}
 
             {% if top is not null and opinion.ranking is not null and opinion.ranking <= top %}
-                {% set topLabel = isVersion ? 'opinion.show.ranking.versions' : 'opinion.show.ranking.opinions' %}
+                {% set topLabel = isVersion ? 'opinion.show.ranking.versions'
+                    : opinionTerm is defined and opinionTerm == 1
+                        ? 'opinion.show.ranking.articles'
+                        : 'opinion.show.ranking.opinions'
+                %}
                 <span class="opinion__label opinion__label--green">
                     <i class="cap cap-trophy"></i>
                     {{ topLabel |trans({'%max%': top}, 'CapcoAppBundle') }}
@@ -47,16 +51,16 @@
                     consultation.show.votes
                 {% endtranschoice %}</span>
             {% endif %}
+            {% if isVersion == false and opinionType.versionable %}
+                <span class="count__separator"> • </span>
+                <span>{% transchoice nbVersions with {'%count%': nbVersions} from 'CapcoAppBundle' %}
+                    consultation.show.versions
+                    {% endtranschoice %}</span>
+            {% endif %}
             {% if opinionType.commentSystem != 0 %}
                 <span class="count__separator"> • </span>
                 <span>{% transchoice nbArguments with {'%count%': nbArguments} from 'CapcoAppBundle' %}
                     consultation.show.arguments
-                {% endtranschoice %}</span>
-            {% endif %}
-            {% if isVersion == false and opinionType.versionable %}
-                <span class="count__separator"> • </span>
-                <span>{% transchoice nbVersions with {'%count%': nbVersions} from 'CapcoAppBundle' %}
-                consultation.show.versions
                 {% endtranschoice %}</span>
             {% endif %}
             {% if opinionType.sourceable %}
