@@ -77,6 +77,10 @@ export default {
             },
         },
         opinion: {
+            appendices: {
+              hide: 'Masquer {title}.',
+              show: 'Afficher {title}',
+            },
             request: {
               failure: 'Une erreur est survenue, veuillez réessayer.',
               create_vote: {

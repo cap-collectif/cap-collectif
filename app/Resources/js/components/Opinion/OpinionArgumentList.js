@@ -56,7 +56,7 @@ const OpinionArgumentList = React.createClass({
     if (this.state.arguments.length > 1) {
       return (
         <Col xs={12} sm={6} md={6} className="block--first-mobile">
-          <label className="sr-only" htmlFor={'filter-arguments-' + this.props.type}>
+          <label className="sr-only" for={'filter-arguments-' + this.props.type}>
             {this.getIntlMessage('argument.filter.' + this.props.type)}
           </label>
           <select id={'filter-arguments-' + this.props.type} ref="filter" className="form-control pull-right" value={this.state.filter} onChange={() => this.updateSelectedValue()}>

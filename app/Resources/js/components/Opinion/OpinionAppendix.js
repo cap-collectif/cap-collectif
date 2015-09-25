@@ -1,6 +1,8 @@
 const Button = ReactBootstrap.Button;
 const Panel = ReactBootstrap.Panel;
 
+const FormattedMessage = ReactIntl.FormattedMessage;
+
 const OpinionAppendix = React.createClass({
   propTypes: {
     appendix: React.PropTypes.object.isRequired,
@@ -40,7 +42,19 @@ const OpinionAppendix = React.createClass({
 
     return (
       <div className="opinion__appendix">
-        <Button className="opinion__appendix__title" bsStyle="link" style={{paddingLeft: '0', fontSize: '18px', fontWeight: '500'}} onClick={this.toggle.bind(null, this)}>
+        <Button className="opinion__appendix__title" bsStyle="link" style={{paddingLeft: '0', fontSize: '18px', fontWeight: '500'}}
+          onClick={this.toggle.bind(null, this)}
+          title={this.state.expanded
+            ? <FormattedMessage
+                message={this.getIntlMessage('opinion.appendices.hide')}
+                title={this.props.appendix.type.title}
+              />
+            : <FormattedMessage
+                message={this.getIntlMessage('opinion.appendices.show')}
+                title={this.props.appendix.type.title}
+              />
+            }
+        >
           {this.renderCaret()}
           {' ' + appendix.type.title}
         </Button>

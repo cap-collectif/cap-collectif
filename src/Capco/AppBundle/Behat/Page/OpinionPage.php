@@ -24,17 +24,11 @@ class OpinionPage extends Page
         'Vote first source' => '#sources-list li:first-child .source__btn--vote',
         'sources tab' => '#opinion__sources___tab',
         'source add' => '#source-form__add',
-        'arguments tab' => '#opinion__arguments___tab',
     );
 
     public function clickSourcesTab()
     {
         $this->getElement('sources tab')->click();
-    }
-
-    public function clickArgumentsTab()
-    {
-        $this->getElement('arguments tab')->click();
     }
 
     public function clickAddSource()
