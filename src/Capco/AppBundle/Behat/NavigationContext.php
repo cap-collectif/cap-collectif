@@ -18,6 +18,16 @@ class NavigationContext extends PageObjectContext
     }
 
     /**
+     * @When I go on the arguments tab
+     */
+    public function iGoOnTheArgumentsTab()
+    {
+        $this->getPage('opinion page')
+            ->clickArgumentsTab();
+        sleep(3);
+    }
+
+    /**
      * @When I want to add a source
      */
     public function clickAddSourceTab()

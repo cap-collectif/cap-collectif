@@ -46,7 +46,7 @@ const OpinionTabs = React.createClass({
 
     if (tabNumber > 1) {
       return (
-        <TabbedArea defaultActiveKey={1} animation={false}>
+        <TabbedArea animation={false}>
           { this.isVersionable()
             ? <TabPane id="opinion__versions" className="opinion-tabs" eventKey={1} tab={
                 <FormattedMessage message={this.getIntlMessage('global.versions')} num={opinion.versions_count} />
