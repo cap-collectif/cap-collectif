@@ -62,6 +62,7 @@ Feature: Arguments
     And I press "Modifier"
     And I wait 5 seconds
     Then I should see "Merci ! Votre argument a bien été modifié."
+    And I go on the arguments tab
     And I should see "0" in the "#arg-1 .opinion__votes-nb" element
 
   @javascript
