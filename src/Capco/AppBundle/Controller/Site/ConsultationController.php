@@ -57,6 +57,8 @@ class ConsultationController extends Controller
      */
     public function showAction(Request $request, Consultation $consultation, ConsultationStep $currentStep)
     {
+        $em = $this->getDoctrine()->getManager();
+
         if (false === $currentStep->canDisplay()) {
             throw $this->createNotFoundException($this->get('translator')->trans('consultation.error.not_found', [], 'CapcoAppBundle'));
         }
@@ -101,7 +103,7 @@ class ConsultationController extends Controller
         $addForm = function ($tree) use (&$addForm) {
             $childrenTree = [];
             foreach ($tree as $node) {
-                $form = $this->createForm(new OpinionsSortType($node), null, ['csrf_protection' => false]);
+                $form = $this->createForm(new OpinionsSortType($node));
                 $node['sortForm'] = $form->createView();
                 if (count($node['children']) > 0) {
                     $node['children'] = $addForm($node['children']);
