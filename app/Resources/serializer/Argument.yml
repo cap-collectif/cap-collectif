@@ -15,11 +15,11 @@ Capco\AppBundle\Entity\Argument:
         createdAt:
             expose: true
             type: DateTime
-            groups: [Opinions]
+            groups: [Opinions, OpinionVersions]
         updatedAt:
             expose: true
             type: DateTime
-            groups: [Opinions]
+            groups: [Opinions, OpinionVersions]
         voteCount:
             expose: true
             type: integer
@@ -33,11 +33,11 @@ Capco\AppBundle\Entity\Argument:
         isTrashed:
             expose: true
             type: boolean
-            groups: [Opinions]
+            groups: [Opinions, OpinionVersions]
         isEnabled:
             expose: true
             type: boolean
-            groups: [Opinions]
+            groups: [Opinions, OpinionVersions]
     virtual_properties:
         canContribute:
             serialized_name: isContribuable
