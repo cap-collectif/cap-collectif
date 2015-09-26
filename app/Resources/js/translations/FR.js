@@ -173,7 +173,6 @@ export default {
       infos: {
         header: '{user} {theme, select, no {le {createdDate}} other {dans {themeLink}, le {createdDate}}}',
       },
-      no_status: 'Aucun statut',
       select: {
         district: 'Sélectionnez un quartier',
         theme: 'Sélectionnez un thème',

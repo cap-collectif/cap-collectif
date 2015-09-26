@@ -8,13 +8,8 @@ const ProposalPreviewFooter = React.createClass({
 
   render() {
     const proposal = this.props.proposal;
-    const statusClasses = {
-      'proposal__status': true,
-      'status--default': !proposal.status,
-    };
-    if (proposal.status) {
-      statusClasses['status--' + proposal.status.color] = true;
-    }
+
+    const classes = 'proposal__status status--' + proposal.status.color;
 
     return (
       <div className="proposal__footer">
@@ -31,13 +26,11 @@ const ProposalPreviewFooter = React.createClass({
             </div>
           </div>
         </div>
-        <div className={classNames(statusClasses)}>
-          {
-            proposal.status
-            ? proposal.status.name
-            : this.getIntlMessage('proposal.no_status')
-          }
-        </div>
+        {
+          proposal.status
+            ? <div className={classes}>{proposal.status.name}</div>
+            : null
+        }
       </div>
     );
   },

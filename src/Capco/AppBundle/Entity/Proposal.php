@@ -92,7 +92,7 @@ class Proposal implements CommentableInterface, VotableInterface
 
     /**
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Status", cascade={"persist"})
-     * @ORM\JoinColumn(name="status_id", referencedColumnName="id", nullable=true, onDelete="SET NULL")
+     * @ORM\JoinColumn(name="status_id", referencedColumnName="id", nullable=true)
      */
     private $status = null;
 
