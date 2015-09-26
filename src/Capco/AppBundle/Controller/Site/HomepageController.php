@@ -19,38 +19,41 @@ class HomepageController extends Controller
      */
     public function homepageAction(Request $request)
     {
-        // Subscription to newsletter
-        $subscription = new NewsletterSubscription();
         $toggleManager = $this->get('capco.toggle.manager');
-
-        $form = $this->createForm(new NewsletterSubscriptionType(), $subscription);
 
         $sections = $this->get('capco.section.resolver')->getDisplayableEnabledOrdered();
 
-        if ($request->getMethod() == 'POST') {
-            $form->handleRequest($request);
+        // Subscription to newsletter
+        if ($newsletterActive = $toggleManager->isActive('newsletter')) {
+            $subscription = new NewsletterSubscription();
 
-            if ($toggleManager->isActive('newsletter') && $form->isValid()) {
-                $alreadyExists = $this->getDoctrine()->getRepository('CapcoAppBundle:NewsletterSubscription')->findOneByEmail($subscription->getEmail());
-                if (null != $alreadyExists) {
-                    $this->get('session')->getFlashBag()->add('info', $this->get('translator')->trans('homepage.newsletter.already_subscribed'));
+            $form = $this->createForm(new NewsletterSubscriptionType(), $subscription);
+
+            if ($request->getMethod() == 'POST') {
+                $form->handleRequest($request);
+
+                if ($toggleManager->isActive('newsletter') && $form->isValid()) {
+                    $alreadyExists = $this->getDoctrine()->getRepository('CapcoAppBundle:NewsletterSubscription')->findOneByEmail($subscription->getEmail());
+                    if (null != $alreadyExists) {
+                        $this->get('session')->getFlashBag()->add('info', $this->get('translator')->trans('homepage.newsletter.already_subscribed'));
+                    } else {
+                        $em = $this->getDoctrine()->getManager();
+                        $em->persist($subscription);
+                        $em->flush();
+                        $this->get('session')->getFlashBag()->add('success', $this->get('translator')->trans('homepage.newsletter.success'));
+                    }
                 } else {
-                    $em = $this->getDoctrine()->getManager();
-                    $em->persist($subscription);
-                    $em->flush();
-                    $this->get('session')->getFlashBag()->add('success', $this->get('translator')->trans('homepage.newsletter.success'));
+                    $this->get('session')->getFlashBag()->add('danger', $this->get('translator')->trans('homepage.newsletter.invalid'));
                 }
-            } else {
-                $this->get('session')->getFlashBag()->add('danger', $this->get('translator')->trans('homepage.newsletter.invalid'));
-            }
 
-            return $this->redirect($this->generateUrl('app_homepage'));
+                return $this->redirect($this->generateUrl('app_homepage'));
+            }
         }
 
-        return array(
-            'form' => $form->createView(),
+        return [
+            'form' => $newsletterActive ? $form->createView() : false,
             'sections' => $sections,
-        );
+        ];
     }
 
     /**
