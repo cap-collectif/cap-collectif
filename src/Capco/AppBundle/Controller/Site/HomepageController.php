@@ -15,7 +15,6 @@ class HomepageController extends Controller
 {
     /**
      * @Route("/", name="app_homepage")
-     * @Template("CapcoAppBundle:Homepage:homepage.html.twig")
      */
     public function homepageAction(Request $request)
     {
@@ -50,10 +49,15 @@ class HomepageController extends Controller
             }
         }
 
-        return [
+        $response = $this->render("CapcoAppBundle:Homepage:homepage.html.twig", array(
             'form' => $newsletterActive ? $form->createView() : false,
-            'sections' => $sections,
-        ];
+            'sections' => $sections
+        ));
+
+        $response->setPublic();
+        $response->setSharedMaxAge(60);
+
+        return $response;
     }
 
     /**
