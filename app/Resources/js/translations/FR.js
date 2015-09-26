@@ -117,8 +117,8 @@ export default {
             },
             diff: {
                 tooltip: 'Voir les modifications',
-                title: 'Modification(s) proposé(s)',
-                infos: 'Les ajouts en vert et les suppression en rouge',
+                title: 'Modification(s) proposée(s)',
+                infos: 'Les ajouts en vert et les suppressions en rouge',
             },
         },
         vote: {
