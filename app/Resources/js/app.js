@@ -272,6 +272,17 @@ var App = function ($) {
         });
     };
 
+    var skipLinks = function() {
+        $('.js-skip-links a').on('focus', function() {
+            $('.js-skip-links').addClass('active');
+            $('body').css('margin-top', $('.js-skip-links').height());
+        });
+        $('.js-skip-links a').on('blur', function() {
+            $('.js-skip-links').removeClass('active');
+            $('body').css('margin-top', '0');
+        });
+    };
+
     return {
         equalheight: equalheight,
         resized: resized,
@@ -285,7 +296,8 @@ var App = function ($) {
         makeSidebar: makeSidebar,
         carousel: carousel,
         hideableMessageAndCheckbox: hideableMessageAndCheckbox,
-        customModal: customModal
+        customModal: customModal,
+        skipLinks: skipLinks
     };
 
 }(jQuery);

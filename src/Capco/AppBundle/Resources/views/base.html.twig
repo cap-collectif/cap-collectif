@@ -17,7 +17,7 @@
     {# Main jumbotron for a primary marketing message or call to action #}
     {% block jumbotron %}{% endblock %}
 
-    <div class="main">
+    <div id="main" class="main" tabindex="-1">
         {% block body %}{% endblock %}
     </div>
 
@@ -37,6 +37,7 @@
         $(window).on('load', function() {
             App.externalLinks();
             App.navbarAutocollapse("{{ 'global.menu.see_more' | trans({}, 'CapcoAppBundle') }}");
+            App.skipLinks();
         });
         $(window).on('resize', function() {
             App.navbarAutocollapse("{{ 'global.menu.see_more' | trans({}, 'CapcoAppBundle') }}");
