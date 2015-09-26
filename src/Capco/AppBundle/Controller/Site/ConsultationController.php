@@ -45,7 +45,6 @@ class ConsultationController extends Controller
 
     /**
      * @Route("/consultations/{consultationSlug}/consultation/{stepSlug}", name="app_consultation_show")
-     * @Template("CapcoAppBundle:Consultation:show.html.twig")
      * @ParamConverter("consultation", class="CapcoAppBundle:Consultation", options={"mapping": {"consultationSlug": "slug"}, "method"="getOne"})
      * @ParamConverter("currentStep", class="CapcoAppBundle:ConsultationStep", options={"mapping": {"stepSlug": "slug"}, "method"="getOne"})
      *
@@ -78,11 +77,18 @@ class ConsultationController extends Controller
 
         $nav = $this->get('capco.opinion_types.resolver')->getNavForStep($currentStep);
 
-        return [
+        $response = $this->render("CapcoAppBundle:Consultation:show.html.twig", array(
             'consultation' => $consultation,
             'currentStep' => $currentStep,
             'nav' => $nav,
-        ];
+        ));
+
+        if ($this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_ANONYMOUSLY')) {
+            $response->setPublic();
+            $response->setSharedMaxAge(30);
+        }
+
+        return $response;
     }
 
     /**

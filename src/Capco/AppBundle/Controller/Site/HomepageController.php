@@ -54,8 +54,10 @@ class HomepageController extends Controller
             'sections' => $sections
         ));
 
-        $response->setPublic();
-        $response->setSharedMaxAge(60);
+        if ($this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_ANONYMOUSLY')) {
+            $response->setPublic();
+            $response->setSharedMaxAge(60);
+        }
 
         return $response;
     }
