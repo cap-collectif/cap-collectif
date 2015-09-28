@@ -1,8 +1,11 @@
 #Global
 admin.global:
+  validate: La contribution a bien été validée.
   delete: Supprimer
   list_mode: Liste
+  trash: La contribution a bien été mise à la corbeille.
   tree_mode: Arboresence
+  unpublish: La contribution a bien été dépubliée.
 
 # Dashboard groups
 admin.group.consultation: Consultations
@@ -34,6 +37,7 @@ admin.label.opinion_type: Éléments de structure
 admin.label.opinion_version: Modifications
 admin.label.page: Pages statiques
 admin.label.post: Articles
+admin.label.recent_contributions: Contributions à traiter
 admin.label.recent_posts: "Derniers articles"
 admin.label.reporting: Signalements
 admin.label.section: Accueil (sections)
@@ -395,14 +399,27 @@ admin:
       menu_items: Menus
       updated_at: Mise à jour
       created_at: Création
+    recent_contributions:
+      actions: Actions
+      author: Auteur
+      body: Contenu
+      consultation: Consultation
+      created_at: Création
+      number: "{1} 1 contribution à traiter| ]1,Inf[ %count% contributions à traiter"
+      published: Publié
+      show: Contribution à traiter
+      title: Titre
+      trashed: Corbeille
+      type: Type
+      updated_at: Mise à jour
     reporting:
       argument: Argument
-      body: Contenu
+      body: Motif
       comment: Commentaire
       created_at: Création
       idea: Idée
-      is_archived: Archivé
-      object: Contenu
+      is_archived: Traité
+      object: Contribution
       opinion: Proposition
       reporter: Auteur
       source: Source
@@ -514,13 +531,31 @@ admin:
     global:
       move_action:
         label: Réordonner
+    recent_contributions:
+      trash:
+        button: Corbeille
+        input_label: Motif de modération
+        message: Êtes-vous sûr de vouloir mettre cette contribution à la corbeille ?
+        submit: Oui, mettre à la corbeille
+        title: Confirmation de mise à la corbeille
+      unpublish:
+        button: Indésirable
+        input_label: Motif de modération
+        message: Êtes-vous sûr de vouloir dépublier cette contribution ?
+        submit: Oui, dépublier
+        title: Confirmation de dépublication
+      validate:
+        button: Approuver
     reporting:
       disable:
-        label: Désactiver le contenu
-        success: Le contenu a été désactivé.
+        label: Dépublier la contribution
+        success: La contribution a été désactivée.
       trash:
-        label: Mettre le contenu à la corbeille
-        success: Le contenu a été placé dans la corbeille.
+        label: Mettre la contribution à la corbeille
+        success: La contribution a été placée dans la corbeille
+      archive:
+          label: Traiter le signalement
+          success: Le signalement a bien été traité.
     menu_item:
       batch_delete:
         denied: Impossible de supprimer certains des éléments de menu sélectionnés.
@@ -562,6 +597,10 @@ action_enable: Activer
 action_disable: Désactiver
 label_type_no: non
 label_type_yes: oui
+
+recent_contributions:
+  not_found: Aucune nouvelle contribution trouvée.
+  view_all: Voir toutes les contributions
 
 # posts
 post_is_public: Publié

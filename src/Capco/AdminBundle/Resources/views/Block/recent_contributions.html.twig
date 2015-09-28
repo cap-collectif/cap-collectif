@@ -1,0 +1,25 @@
+{% extends sonata_block.templates.block_base %}
+
+{% block block %}
+    <div class="sonata-news-block-recent-post box">
+        {% if settings.title %}
+            <div class="box-header">
+                <h3 class="sonata-news-block-recent-post box-title"><i class="fa fa-pencil"></i> {{ settings.title|trans({}, 'SonataAdminBundle') }}</h3>
+            </div>
+        {% endif %}
+
+        <div class="box-body">
+            <div class="sonata-blog-post-container list-group">
+                {% for contribution in contributions %}
+                <a class="list-group-item" href="{{ url('capco_admin_contributions_show', { 'type': contribution.type , 'id': contribution.id }) }}">
+                    {{ contribution.title }} - {{ contribution.updatedAt | format_date }}
+                </a>
+                {% else %}
+                    <a class="list-group-item" href="#">{{ 'recent_contributions.not_found'|trans({}, 'SonataAdminBundle') }}</a>
+                {% endfor %}
+            </div>
+
+            <a href="{{ url('capco_admin_contributions_index') }}" class="btn btn-primary btn-block"><i class="fa fa-list"></i> {{ 'recent_contributions.view_all'|trans({}, 'SonataAdminBundle') }}</a>
+        </div>
+    </div>
+{% endblock %}

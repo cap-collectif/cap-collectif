@@ -70,6 +70,8 @@
                         </a>
                         <ul class="treeview-menu{% if active %} active{% endif %}">
 
+                            {% include 'CapcoAdminBundle:RecentContributions:list_items.html.twig' %}
+
                             {% for admin in group.items %}
                                 {% if admin.hasroute('list') and admin.isGranted('LIST') and is_admin_enabled(admin) %}
                                     <li{% if app.request.get('_sonata_admin') == admin.code %} class="active"{% endif %}><a href="{{ admin.generateUrl('list')}}"><i class="fa fa-angle-double-right"></i> {{ admin.label|trans({}, admin.translationdomain) }}</a></li>

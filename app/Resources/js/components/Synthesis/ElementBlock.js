@@ -3,7 +3,6 @@ import ElementIcon from './ElementIcon';
 import ElementTitle from './ElementTitle';
 import ElementBreadcrumb from './ElementBreadcrumb';
 import ElementNotation from './ElementNotation';
-import BrowserSupport from '../../services/BrowserSupport';
 
 const FormattedDate = ReactIntl.FormattedDate;
 
@@ -41,7 +40,7 @@ const ElementBlock = React.createClass({
   },
 
   renderDate() {
-    if (!BrowserSupport.isFormattedDateAvailable()) {
+    if (navigator.userAgent.indexOf('Safari') !== -1 && navigator.userAgent.indexOf('Chrome') === -1) {
       return this.getIntlMessage('common.elements.no_source_date');
     }
     if (this.props.element.has_linked_data) {

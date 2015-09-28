@@ -1,5 +1,4 @@
 import UserAvatar from '../User/UserAvatar';
-import BrowserSupport from '../../services/BrowserSupport';
 import UserLink from '../User/UserLink';
 import OpinionArgumentButtons from './OpinionArgumentButtons';
 import AutoLinkText from '../Utils/AutoLinkText';
@@ -15,7 +14,7 @@ const OpinionArgumentItem = React.createClass({
 
   renderDate() {
     const argument = this.props.argument;
-    if (!BrowserSupport.isFormattedDateAvailable()) {
+    if (navigator.userAgent.indexOf('Safari') !== -1 && navigator.userAgent.indexOf('Chrome') === -1) {
       return null;
     }
     return (

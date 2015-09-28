@@ -1,4 +1,3 @@
-import BrowserSupport from '../../services/BrowserSupport';
 const FormattedDate = ReactIntl.FormattedDate;
 
 const CommentInfos = React.createClass({
@@ -8,7 +7,7 @@ const CommentInfos = React.createClass({
   mixins: [ReactIntl.IntlMixin],
 
   renderDate() {
-    if (!BrowserSupport.isFormattedDateAvailable()) {
+    if (navigator.userAgent.indexOf('Safari') !== -1 && navigator.userAgent.indexOf('Chrome') === -1) {
       return <span />;
     }
     return (
@@ -23,7 +22,7 @@ const CommentInfos = React.createClass({
   },
 
   renderEditionDate() {
-    if (!BrowserSupport.isFormattedDateAvailable()) {
+    if (navigator.userAgent.indexOf('Safari') !== -1 && navigator.userAgent.indexOf('Chrome') === -1) {
       return <span />;
     }
 
