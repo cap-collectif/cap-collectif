@@ -6,7 +6,6 @@ use Capco\AppBundle\Entity\Idea;
 use Capco\AppBundle\Entity\Argument;
 use Capco\AppBundle\Entity\AbstractComment;
 use Capco\AppBundle\Entity\Opinion;
-use Capco\AppBundle\Entity\OpinionVersion;
 use Capco\AppBundle\Entity\Source;
 use Capco\AppBundle\Entity\AbstractVote as Vote;
 use Capco\AppBundle\Manager\CommentResolver;
@@ -35,25 +34,7 @@ class VoteResolver
         }
 
         if ($object instanceof Argument || $object instanceof Source) {
-            $proposition = $object->getParent();
-            if ($proposition instanceof Opinion) {
-                return $this->router->generate('app_consultation_show_opinion', [
-                    'consultationSlug' => $proposition->getStep()->getConsultation()->getSlug(),
-                    'stepSlug' => $proposition->getStep()->getSlug(),
-                    'opinionTypeSlug' => $proposition->getOpinionType()->getSlug(),
-                    'opinionSlug' => $proposition->getSlug(),
-                ], $absolute);
-            }
-            if ($proposition instanceof OpinionVersion) {
-                $opinion = $proposition->getParent();
-                return $this->router->generate('app_consultation_show_opinion_version', [
-                    'consultationSlug' => $opinion->getStep()->getConsultation()->getSlug(),
-                    'stepSlug' => $opinion->getStep()->getSlug(),
-                    'opinionTypeSlug' => $opinion->getOpinionType()->getSlug(),
-                    'opinionSlug' => $opinion->getSlug(),
-                    'versionSlug' => $proposition->getSlug(),
-                ], $absolute);
-            }
+            return $this->router->generate('app_consultation_show_opinion', array('consultationSlug' => $object->getOpinion()->getStep()->getConsultation()->getSlug(), 'stepSlug' => $object->getOpinion()->getStep()->getSlug(), 'opinionTypeSlug' => $object->getOpinion()->getOpinionType()->getSlug(), 'opinionSlug' => $object->getOpinion()->getSlug()), $absolute);
         }
 
         if ($object instanceof AbstractComment) {
@@ -61,23 +42,7 @@ class VoteResolver
         }
 
         if ($object instanceof Opinion) {
-            return $this->router->generate('app_consultation_show_opinion', [
-                'consultationSlug' => $object->getStep()->getConsultation()->getSlug(),
-                'stepSlug' => $object->getStep()->getSlug(),
-                'opinionTypeSlug' => $object->getOpinionType()->getSlug(),
-                'opinionSlug' => $object->getSlug()
-            ], $absolute);
-        }
-
-        if ($object instanceof OpinionVersion) {
-            $opinion = $object->getParent();
-            return $this->router->generate('app_consultation_show_opinion_version', [
-                'consultationSlug' => $opinion->getStep()->getConsultation()->getSlug(),
-                'stepSlug' => $opinion->getStep()->getSlug(),
-                'opinionTypeSlug' => $opinion->getOpinionType()->getSlug(),
-                'opinionSlug' => $opinion->getSlug(),
-                'versionSlug' => $object->getSlug(),
-            ], $absolute);
+            return $this->router->generate('app_consultation_show_opinion', array('consultationSlug' => $object->getStep()->getConsultation()->getSlug(), 'stepSlug' => $object->getStep()->getSlug(), 'opinionTypeSlug' => $object->getOpinionType()->getSlug(), 'opinionSlug' => $object->getSlug()), $absolute);
         }
 
         return $this->router->generate('app_homepage', array(), $absolute);
