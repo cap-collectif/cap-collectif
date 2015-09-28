@@ -17,12 +17,11 @@ const OpinionArgumentButtons = React.createClass({
     };
   },
 
-  getVoteCount() {
-    let diff = 0;
+  getVoteDiff() {
     if (this.state.hasVoted !== this.props.argument.has_user_voted) {
-      diff = this.props.argument.has_user_voted ? -1 : 1;
+      return this.props.argument.has_user_voted ? -1 : 1;
     }
-    return this.props.argument.votes_count + diff < 0 ? 0 : this.props.argument.votes_count + diff;
+    return 0;
   },
 
   renderVoteButton() {
@@ -74,6 +73,7 @@ const OpinionArgumentButtons = React.createClass({
   },
 
   render() {
+    const argument = this.props.argument;
     return (
       <div>
         <form style={{display: 'inline-block'}}>
@@ -81,9 +81,10 @@ const OpinionArgumentButtons = React.createClass({
         </form>
         { ' ' }
         <span className="opinion__votes-nb">
-          {this.getVoteCount()}
+          { argument.votes_count + this.getVoteDiff()}
         </span>
         { ' ' }
+
         { this.renderReportButton() }
         { this.renderEditButton() }
       </div>
