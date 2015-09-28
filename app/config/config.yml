@@ -46,7 +46,7 @@ snc_redis:
             dsn: redis://localhost
     session:
         client: session
-        ttl: 1200
+        ttl: 3600
         use_as_default: true
 
 twig:
