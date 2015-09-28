@@ -163,7 +163,6 @@ class ArgumentRepository extends EntityRepository
             ->leftJoin('aut.Media', 'm')
             ->leftJoin('a.votes', 'v')
             ->leftJoin('a.opinion', 'o')
-            ->leftJoin('a.opinionVersion', 'ov')
             ->andWhere('a.id = :argument')
             ->setParameter('argument', $argument)
             ->getQuery()

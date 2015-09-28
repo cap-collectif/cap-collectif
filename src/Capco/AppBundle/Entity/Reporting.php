@@ -136,14 +136,6 @@ class Reporting
         $this->updatedAt = new \Datetime();
     }
 
-    function __toString()
-    {
-        if ($this->id) {
-            return 'Signalement de ' . $this->getRelatedObject();
-        }
-        return 'Signalement';
-    }
-
     /**
      * Get id.
      *

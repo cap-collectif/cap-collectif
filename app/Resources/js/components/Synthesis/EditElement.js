@@ -119,7 +119,7 @@ const EditElement = React.createClass({
       <li className="element__history__log">
         {sentence}
         <span className="excerpt small pull-right">
-          <FormattedDate value={moment(date)} day="numeric" month="long" year="numeric" hour="numeric" minute="numeric" />
+          <FormattedDate value={date} day="numeric" month="long" year="numeric" hour="numeric" minute="numeric" />
         </span>
       </li>
     );

@@ -231,11 +231,11 @@ class RecalculateCountersCommand extends ContainerAwareCommand
         $query->execute();
 
         $query = $em->createQuery('update CapcoAppBundle:OpinionVersion ov set ov.voteCountMitige =
-            (select count(ovv.id) from CapcoAppBundle:OpinionVersionVote ovv where ovv.opinionVersion = ov AND ovv.confirmed = 1 AND ovv.value = 0 group by ovv.opinionVersion)');
+            (select count(ovv.id) from CapcoAppBundle:OpinionVersionVote ovv where ovv.opinionVersion = ov AND ovv.confirmed = 0 AND ovv.value = 1 group by ovv.opinionVersion)');
         $query->execute();
 
         $query = $em->createQuery('update CapcoAppBundle:OpinionVersion ov set ov.voteCountNok =
-            (select count(ovv.id) from CapcoAppBundle:OpinionVersionVote ovv where ovv.opinionVersion = ov AND ovv.confirmed = 1 AND ovv.value = -1 group by ovv.opinionVersion)');
+            (select count(ovv.id) from CapcoAppBundle:OpinionVersionVote ovv where ovv.opinionVersion = ov AND ovv.confirmed = -1 AND ovv.value = 1 group by ovv.opinionVersion)');
         $query->execute();
 
         // ************************************ Votes counters **********************************************

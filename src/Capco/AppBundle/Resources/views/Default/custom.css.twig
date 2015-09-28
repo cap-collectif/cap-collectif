@@ -243,12 +243,12 @@
         color: {{ btnPrimaryText | raw }};
     }
 
-    h1, .h1 { color: {{ h1 | default('inherit') | raw }};}
-    h2, .h2 { color: {{ h2 | default('inherit') | raw }};}
-    h3, .h3 { color: {{ h3 | default('inherit') | raw }};}
-    h4, .h4 { color: {{ h4 | default('inherit') | raw }};}
-    h5, .h5 { color: {{ h5 | default('inherit') | raw }};}
-    h6, .h6 { color: {{ h6 | default('inherit') | raw }};}
+    h1, .h1 { color: {{ h1 | raw }};}
+    h2, .h2 { color: {{ h2 | raw }};}
+    h3, .h3 { color: {{ h3 | raw }};}
+    h4, .h4 { color: {{ h4 | raw }};}
+    h5, .h5 { color: {{ h5 | raw }};}
+    h6, .h6 { color: {{ h6 | raw }};}
 
     .main {
         background-color: {{ mainBg | raw }};

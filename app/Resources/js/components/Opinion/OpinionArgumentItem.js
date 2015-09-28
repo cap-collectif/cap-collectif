@@ -1,7 +1,6 @@
 import UserAvatar from '../User/UserAvatar';
 import UserLink from '../User/UserLink';
 import OpinionArgumentButtons from './OpinionArgumentButtons';
-import AutoLinkText from '../Utils/AutoLinkText';
 
 const FormattedDate = ReactIntl.FormattedDate;
 
@@ -14,13 +13,13 @@ const OpinionArgumentItem = React.createClass({
 
   renderDate() {
     const argument = this.props.argument;
-    if (!Modernizr.intl) {
+    if (navigator.userAgent.indexOf('Safari') !== -1 && navigator.userAgent.indexOf('Chrome') === -1) {
       return null;
     }
     return (
       <p className="excerpt opinion__date">
         <FormattedDate
-          value={moment(argument.created_at)}
+          value={argument.created_at}
           day="numeric" month="long" year="numeric"
           hour="numeric" minute="numeric"
           />
@@ -46,7 +45,7 @@ const OpinionArgumentItem = React.createClass({
             {this.renderDate()}
           </div>
           <p className="opinion__text">
-            <AutoLinkText text={argument.body} />
+            { argument.body }
           </p>
           <OpinionArgumentButtons argument={argument} isReportingEnabled={this.props.isReportingEnabled} />
         </div>
