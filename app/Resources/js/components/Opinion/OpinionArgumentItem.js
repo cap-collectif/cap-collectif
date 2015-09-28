@@ -1,7 +1,6 @@
 import UserAvatar from '../User/UserAvatar';
 import UserLink from '../User/UserLink';
 import OpinionArgumentButtons from './OpinionArgumentButtons';
-import AutoLinkText from '../Utils/AutoLinkText';
 
 const FormattedDate = ReactIntl.FormattedDate;
 
@@ -46,7 +45,7 @@ const OpinionArgumentItem = React.createClass({
             {this.renderDate()}
           </div>
           <p className="opinion__text">
-            <AutoLinkText text={argument.body} />
+            { argument.body }
           </p>
           <OpinionArgumentButtons argument={argument} isReportingEnabled={this.props.isReportingEnabled} />
         </div>
