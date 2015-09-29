@@ -451,4 +451,19 @@ class OpinionVersion
     {
         return $this->enabled && !$this->isTrashed && $this->parent->isPublished();
     }
+
+    /**
+     * @return $this
+     */
+    public function resetVotes()
+    {
+        foreach ($this->votes as $vote) {
+            $this->removeVote($vote);
+        }
+        $this->voteCountMitige = 0;
+        $this->voteCountNok = 0;
+        $this->voteCountOk = 0;
+
+        return $this;
+    }
 }
