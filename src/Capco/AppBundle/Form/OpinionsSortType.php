@@ -48,6 +48,6 @@ class OpinionsSortType extends AbstractType
      */
     public function getName()
     {
-        return 'capco_app_opinions_sort';
+        return 'app_opinions_sort_'.str_replace('-', '_', $this->data['slug']);
     }
 }

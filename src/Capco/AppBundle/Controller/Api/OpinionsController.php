@@ -304,6 +304,7 @@ class OpinionsController extends FOSRestController
         $form->submit($request->request->all(), false);
 
         if ($form->isValid()) {
+            $opinionVersion->resetVotes();
             $this->get('doctrine.orm.entity_manager')->persist($opinionVersion);
             $this->get('doctrine.orm.entity_manager')->flush();
 
