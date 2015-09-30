@@ -651,7 +651,7 @@ user:
   register:
     confirmation_message:
       hello: Bonjour %username%,
-      thanks: Merci de vous êtes inscrit à %sitename%. Votre identifiant est : %email%.
+      thanks: Merci de vous être inscrit à %sitename%. Votre identifiant est : %email%.
       validate: Pour valider votre compte, merci de vous rendre à cette adresse : %url% (lien à usage unique).
       bye: À bientôt !
     title: Inscription à la plateforme
