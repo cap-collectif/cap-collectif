@@ -9,6 +9,7 @@ use Capco\AppBundle\Entity\AbstractComment as Comment;
 use Capco\AppBundle\Entity\Post;
 use Capco\AppBundle\Entity\PostComment;
 use Capco\AppBundle\Entity\Idea;
+use Capco\AppBundle\Resolver\UrlResolver;
 use Doctrine\ORM\EntityManager;
 use Symfony\Component\Routing\Router;
 
@@ -16,11 +17,13 @@ class CommentResolver
 {
     protected $em;
     protected $router;
+    protected $urlResolver;
 
-    public function __construct(EntityManager $em, Router $router)
+    public function __construct(EntityManager $em, Router $router, UrlResolver $urlResolver)
     {
         $this->em = $em;
         $this->router = $router;
+        $this->urlResolver = $urlResolver;
     }
 
     public function createCommentForType($objectType)
@@ -77,55 +80,21 @@ class CommentResolver
     {
         $object = $this->getObjectByTypeAndId($objectType, $objectId);
 
-        return $this->getUrlOfObject($object, $absolute);
-    }
-
-    public function getUrlOfObject($object, $absolute = false)
-    {
-        if ($object instanceof Idea) {
-            return $this->router->generate('app_idea_show', array('slug' => $object->getSlug()), $absolute);
-        }
-
-        if ($object instanceof Event) {
-            return $this->router->generate('app_event_show', array('slug' => $object->getSlug()), $absolute);
-        }
-
-        if ($object instanceof Post) {
-            return $this->router->generate('app_blog_show', array('slug' => $object->getSlug()), $absolute);
-        }
-
-        return $this->router->generate('app_homepage', array(), $absolute);
-    }
-
-    public function getAdminUrlOfObject($object, $absolute = false)
-    {
-        if ($object instanceof Idea) {
-            return $this->router->generate('admin_capco_app_idea_show', array('id' => $object->getId()), $absolute);
-        }
-
-        if ($object instanceof Event) {
-            return $this->router->generate('admin_capco_app_event_show', array('id' => $object->getId()), $absolute);
-        }
-
-        if ($object instanceof Post) {
-            return $this->router->generate('admin_capco_app_post_show', array('id' => $object->getId()), $absolute);
-        }
-
-        return '';
+        return $this->urlResolver->getObjectUrl($object, $absolute);
     }
 
     public function getUrlOfRelatedObject(Comment $comment, $absolute = false)
     {
         $object = $this->getRelatedObject($comment);
 
-        return $this->getUrlOfObject($object, $absolute);
+        return $this->urlResolver->getObjectUrl($object, $absolute);
     }
 
     public function getAdminUrlOfRelatedObject(Comment $comment, $absolute = false)
     {
         $object = $this->getRelatedObject($comment);
 
-        return $this->getAdminUrlOfObject($object, $absolute);
+        return $this->urlResolver->getAdminUrlOfObject($object, $absolute);
     }
 
     public function canShowCommentOn($object)
