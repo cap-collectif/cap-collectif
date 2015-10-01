@@ -396,20 +396,18 @@ admin:
       updated_at: Mise à jour
       created_at: Création
     reporting:
-      argument: Argument
-      body: Contenu
-      comment: Commentaire
-      created_at: Création
-      idea: Idée
-      is_archived: Archivé
-      object: Contenu
-      opinion: Proposition
-      reporter: Auteur
-      source: Source
       status: Type de problème
+      reporter: Auteur
+      object: Contenu
       type: Type de contenu
       updated_at: Mise à jour
-      version: Modification
+      created_at: Création
+      opinion: Proposition
+      source: Source
+      argument: Argument
+      idea: Idée
+      comment: Commentaire
+      is_archived: Archivé
     section:
       title: Titre
       position: Position

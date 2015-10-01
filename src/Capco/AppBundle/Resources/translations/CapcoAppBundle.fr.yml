@@ -593,13 +593,9 @@ reporting:
     off_topic: Propos hors-sujet
   notification:
     subject: Un contenu a été signalé sur %sitename%.
-    body: Bonjour,<br> un contenu vient d’être signalé par %username% comme abusif sur %sitename%.
-    message_title: <strong>Motif de signalement</strong>
-    type_title: <strong>Type</strong>
-    contribution: Voir la contribution signalée :
-    contribution_in_bo: dans l'administration
-    contribution_on_site: sur le site
-    contribution_title: <strong>Contribution</strong>
+    body: Bonjour, un contenu vient d’être signalé par %username% comme abusif sur %sitename%.
+    message_title: Message :
+    type_title: Type :
   success: Merci ! Votre signalement a bien été pris en compte.
   error: Erreur, le signalement n'a pas pu être enregistré.
   empty_value: Sélectionnez une valeur
@@ -655,7 +651,7 @@ user:
   register:
     confirmation_message:
       hello: Bonjour %username%,
-      thanks: Merci de vous êtes inscrit à %sitename%. Votre identifiant est : %email%.
+      thanks: Merci de vous être inscrit à %sitename%. Votre identifiant est : %email%.
       validate: Pour valider votre compte, merci de vous rendre à cette adresse : %url% (lien à usage unique).
       bye: À bientôt !
     title: Inscription à la plateforme

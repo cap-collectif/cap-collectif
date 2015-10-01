@@ -19,26 +19,24 @@ class StepController extends Controller
     /**
      * @Route("/consultation/{consultationSlug}/step/{stepSlug}", name="app_consultation_show_step")
      * @Template("CapcoAppBundle:Step:show.html.twig")
-     * @ParamConverter("consultation", class="CapcoAppBundle:Consultation", options={"mapping": {"consultationSlug": "slug"}})
      * @ParamConverter("step", class="CapcoAppBundle:OtherStep", options={"mapping": {"stepSlug": "slug"}})
      *
-     * @param Consultation $consultation
+     * @param $consultationSlug
      * @param OtherStep    $step
      *
      * @return array
      */
-    public function showStepAction(Consultation $consultation, OtherStep $step)
+    public function showStepAction($consultationSlug, OtherStep $step)
     {
-        if (!$step->getConsultation()->canDisplay()) {
-            throw new NotFoundHttpException();
-        }
-
-        if ($step->isConsultationStep()) {
+        if (!$step->canDisplay()) {
             throw new NotFoundHttpException();
         }
 
         $em = $this->getDoctrine()->getManager();
-        $consultation = $em->getRepository('CapcoAppBundle:Consultation')->getOne($consultation->getSlug());
+        $consultation = $em->getRepository('CapcoAppBundle:Consultation')->getOne($consultationSlug);
+        if (!$consultation) {
+            throw new NotFoundHttpException();
+        }
 
         return [
             'consultation' => $consultation,

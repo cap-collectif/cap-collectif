@@ -123,9 +123,9 @@ class EventAdmin extends Admin
     {
         // define group zoning
         $formMapper
-            ->with('admin.fields.event.group_event', ['class' => 'col-md-12'])->end()
-            ->with('admin.fields.event.group_meta', ['class' => 'col-md-6'])->end()
-            ->with('admin.fields.event.group_address', ['class' => 'col-md-6'])->end()
+            ->with('admin.fields.event.group_event', array('class' => 'col-md-12'))->end()
+            ->with('admin.fields.event.group_meta', array('class' => 'col-md-6'))->end()
+            ->with('admin.fields.event.group_address', array('class' => 'col-md-6'))->end()
             ->end()
         ;
 

@@ -10,8 +10,10 @@ import {
   RECEIVE_ARGUMENTS,
   CREATE_ARGUMENT_SUCCESS,
 
-  CREATE_OPINION_VERSION,
-  UPDATE_OPINION_VERSION,
+  CREATE_OPINION_VERSION_SUCCESS,
+  CREATE_OPINION_VERSION_FAILURE,
+  UPDATE_OPINION_VERSION_SUCCESS,
+  UPDATE_OPINION_VERSION_FAILURE,
 } from '../constants/OpinionConstants';
 
 export default {
@@ -116,9 +118,14 @@ export default {
     .post(`/opinions/${opinion}/versions`, data)
     .then((version) => {
       AppDispatcher.dispatch({
-        actionType: CREATE_OPINION_VERSION,
+        actionType: CREATE_OPINION_VERSION_SUCCESS,
       });
       return version.json();
+    })
+    .catch(() => {
+      AppDispatcher.dispatch({
+        actionType: CREATE_OPINION_VERSION_FAILURE,
+      });
     });
   },
 
@@ -127,7 +134,12 @@ export default {
       .put(`/opinions/${opinion}/versions/${version}`, data)
       .then(() => {
         AppDispatcher.dispatch({
-          actionType: UPDATE_OPINION_VERSION,
+          actionType: UPDATE_OPINION_VERSION_SUCCESS,
+        });
+      })
+      .catch(() => {
+        AppDispatcher.dispatch({
+          actionType: UPDATE_OPINION_VERSION_FAILURE,
         });
       });
   },
