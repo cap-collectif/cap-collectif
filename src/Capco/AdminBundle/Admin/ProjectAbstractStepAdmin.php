@@ -8,9 +8,9 @@ use Sonata\AdminBundle\Route\RouteCollection;
 
 class ProjectAbstractStepAdmin extends Admin
 {
-    protected $formOptions = array(
+    protected $formOptions = [
         'cascade_validation' => true,
-    );
+    ];
 
     protected $translationDomain = 'SonataAdminBundle';
 
@@ -29,18 +29,18 @@ class ProjectAbstractStepAdmin extends Admin
         }
 
         $formMapper
-            ->add('position', null, array(
+            ->add('position', null, [
                 'label' => 'admin.fields.project_abstractstep.position',
-            ))
-            ->add('step', 'sonata_type_model_list', array(
-                'required' => true,
-                'label' => 'admin.fields.project_abstractstep.steps',
+            ])
+            ->add('step', 'sonata_type_model_list', [
+                'required'           => true,
+                'label'              => 'admin.fields.project_abstractstep.steps',
                 'translation_domain' => 'SonataAdminBundle',
-                'btn_delete' => false,
-                'btn_add' => 'admin.fields.project_abstractstep.steps_add',
-            ), array(
+                'btn_delete'         => false,
+                'btn_add'            => 'admin.fields.project_abstractstep.steps_add',
+            ], [
                'link_parameters' => ['project_id' => $projectId],
-            ))
+            ])
         ;
     }
 
@@ -55,6 +55,6 @@ class ProjectAbstractStepAdmin extends Admin
 
     protected function configureRoutes(RouteCollection $collection)
     {
-        $collection->clearExcept(array('create', 'delete', 'edit'));
+        $collection->clearExcept(['create', 'delete', 'edit']);
     }
 }

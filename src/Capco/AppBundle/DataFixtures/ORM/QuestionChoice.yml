@@ -1,0 +1,3 @@
+Capco\AppBundle\Entity\QuestionChoice:
+    questionchoice1:
+        question: @question1

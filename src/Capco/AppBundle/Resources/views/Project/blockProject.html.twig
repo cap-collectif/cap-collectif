@@ -21,9 +21,9 @@
         <div class="box">
             <div class="figcaption">
                 {% if is_feature_enabled('themes') %}
-                    {% if project.Themes | length > 0 %}
+                    {% if project.themes | length > 0 %}
                         <span class="excerpt">
-                            {% for theme in project.Themes %}
+                            {% for theme in project.themes %}
                                 {% if (theme.canDisplay) %}
                                     <a class="excerpt" href="{{ path('app_theme_show', {'slug': theme.slug}) }}">
                                         {{ theme.title }}

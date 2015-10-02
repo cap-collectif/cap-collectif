@@ -1,53 +1,57 @@
 Capco\AppBundle\Entity\ProjectAbstractStep:
-  cas1:
+  pas1:
     step: @cstep1
-    project: @cs1
+    project: @p1
     position: 2
-  cas2:
+  pas2:
     step: @cstep2
-    project: @cs2
+    project: @p2
     position: 1
-  cas3:
+  pas3:
     step: @cstep3
-    project: @cs3
+    project: @p3
     position: 1
-  cas4:
+  pas4:
     step: @cstep4
-    project: @cs4
+    project: @p4
     position: 1
-  cas5:
+  pas5:
     step: @ostep1
-    project: @cs1
+    project: @p1
     position: 3
-  cas6:
+  pas6:
     step: @ostep2
-    project: @cs2
+    project: @p2
     position: 2
-  cas7:
+  pas7:
     step: @ostep3
-    project: @cs3
+    project: @p3
     position: 2
-  cas8:
+  pas8:
     step: @pstep1
-    project: @cs1
+    project: @p1
     position: 1
-  cas9:
+  pas9:
     step: @sstep1
-    project: @cs2
+    project: @p2
     position: 3
-  cas10:
+  pas10:
     step: @cstep5
-    project: @cs5
+    project: @p5
     position: 1
-  cas11:
+  pas11:
     step: @sstep2
-    project: @cs5
+    project: @p5
     position: 2
-  cas13:
+  pas13:
     step: @rstep1
-    project: @cs1
+    project: @p1
     position: 4
-  cas14:
+  pas14:
     step: @rstep2
-    project: @cs5
+    project: @p5
     position: 4
+  pas15:
+    step: @collectstep1
+    project: @p6
+    position: 1

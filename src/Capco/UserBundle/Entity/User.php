@@ -139,6 +139,8 @@ class User extends BaseUser implements EncoderAwareInterface, SynthesisUserInter
 
     protected $sources;
 
+    protected $proposals;
+
     /**
      * @var int
      */
@@ -230,6 +232,7 @@ class User extends BaseUser implements EncoderAwareInterface, SynthesisUserInter
         $this->arguments = new ArrayCollection();
         $this->votes = new ArrayCollection();
         $this->sources = new ArrayCollection();
+        $this->proposals = new ArrayCollection();
     }
 
     // for EncoderAwareInterface
@@ -557,6 +560,11 @@ class User extends BaseUser implements EncoderAwareInterface, SynthesisUserInter
     public function getSources()
     {
         return $this->sources;
+    }
+
+    public function getProposals()
+    {
+        return $this->proposals;
     }
 
     /**

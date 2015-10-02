@@ -20,17 +20,17 @@ class ConsultationStepRepository extends EntityRepository
     public function getLastOpen($limit = 1, $offset = 0)
     {
         $qb = $this->getIsEnabledQueryBuilder()
-            ->addSelect('c', 'cas', 't', 'cov')
-            ->leftJoin('cs.projectAbstractStep', 'cas')
-            ->leftJoin('cas.project', 'c')
-            ->leftJoin('c.Themes', 't')
-            ->leftJoin('c.Cover', 'cov')
-            ->andWhere(':now BETWEEN cs.startAt AND cs.endAt')
-            ->andWhere('c.isEnabled = :enabled')
+            ->addSelect('p', 'pas', 't', 'pov')
+            ->leftJoin('ps.projectAbstractStep', 'pas')
+            ->leftJoin('pas.project', 'p')
+            ->leftJoin('p.themes', 't')
+            ->leftJoin('p.Cover', 'pov')
+            ->andWhere(':now BETWEEN cs.startAt AND ps.endAt')
+            ->andWhere('p.isEnabled = :enabled')
             ->setParameter('now', new \DateTime())
             ->setParameter('enabled', true)
-            ->groupBy('cas.project')
-            ->addOrderBy('cs.endAt', 'DESC');
+            ->groupBy('pas.project')
+            ->addOrderBy('ps.endAt', 'DESC');
 
         if ($limit) {
             $qb->setMaxResults($limit);
@@ -56,17 +56,17 @@ class ConsultationStepRepository extends EntityRepository
     public function getLastFuture($limit = 1, $offset = 0)
     {
         $qb = $this->getIsEnabledQueryBuilder()
-            ->addSelect('c', 'cas', 't', 'cov')
-            ->leftJoin('cs.projectAbstractStep', 'cas')
-            ->leftJoin('cas.project', 'c')
-            ->leftJoin('c.Themes', 't')
-            ->leftJoin('c.Cover', 'cov')
-            ->andWhere(':now < cs.startAt')
-            ->andWhere('c.isEnabled = :enabled')
+            ->addSelect('p', 'pas', 't', 'pov')
+            ->leftJoin('ps.projectAbstractStep', 'pas')
+            ->leftJoin('pas.project', 'p')
+            ->leftJoin('p.themes', 't')
+            ->leftJoin('p.Cover', 'pov')
+            ->andWhere(':now < ps.startAt')
+            ->andWhere('p.isEnabled = :enabled')
             ->setParameter('now', new \DateTime())
             ->setParameter('enabled', true)
-            ->groupBy('cas.project')
-            ->addOrderBy('cs.startAt', 'DESC');
+            ->groupBy('pas.project')
+            ->addOrderBy('ps.startAt', 'DESC');
 
         if ($limit) {
             $qb->setMaxResults($limit);
@@ -92,17 +92,17 @@ class ConsultationStepRepository extends EntityRepository
     public function getLastClosed($limit = 1, $offset = 0)
     {
         $qb = $this->getIsEnabledQueryBuilder()
-            ->addSelect('c', 'cas', 't', 'cov')
-            ->leftJoin('cs.projectAbstractStep', 'cas')
-            ->leftJoin('cas.project', 'c')
-            ->leftJoin('c.Themes', 't')
-            ->leftJoin('c.Cover', 'cov')
-            ->andWhere(':now > cs.endAt')
-            ->andWhere('c.isEnabled = :enabled')
+            ->addSelect('p', 'pas', 't', 'pov')
+            ->leftJoin('ps.projectAbstractStep', 'pas')
+            ->leftJoin('pas.project', 'p')
+            ->leftJoin('p.themes', 't')
+            ->leftJoin('p.Cover', 'cov')
+            ->andWhere(':now > ps.endAt')
+            ->andWhere('p.isEnabled = :enabled')
             ->setParameter('now', new \DateTime())
             ->setParameter('enabled', true)
-            ->groupBy('cas.project')
-            ->addOrderBy('cs.startAt', 'ASC');
+            ->groupBy('pas.project')
+            ->addOrderBy('ps.startAt', 'ASC');
 
         if ($limit) {
             $qb->setMaxResults($limit);

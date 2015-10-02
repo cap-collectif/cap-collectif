@@ -1,0 +1,15 @@
+Capco\AppBundle\Entity\Question:
+    exclusion_policy: ALL
+    properties:
+        id:
+            expose: true
+            type: integer
+            groups: [Questions]
+        title:
+            expose: true
+            type: string
+            groups: [Questions]
+        helpType:
+            expose: true
+            type: string
+            groups: [Questions]

@@ -22,6 +22,7 @@ class ConsultationStepsController extends FOSRestController
     /**
      * @Security("has_role('ROLE_USER')")
      * @Post("/projects/{projectId}/steps/{stepId}/opinions")
+     * @Post("/consultations/{projectId}/steps/{stepId}/opinions")
      * @ParamConverter("project", options={"mapping": {"projectId": "id"}})
      * @ParamConverter("step", options={"mapping": {"stepId": "id"}})
      * @View(statusCode=201, serializerGroups={})

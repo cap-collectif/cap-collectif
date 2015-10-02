@@ -53,19 +53,22 @@ class UrlResolver
     public function getStepUrl($step, $absolute = false)
     {
         if ($step->isConsultationStep()) {
-            return $this->router->generate('app_project_show', array('projectSlug' => $step->getProject()->getSlug(), 'stepSlug' => $step->getSlug()), $absolute);
+            return $this->router->generate('app_project_show',              ['projectSlug' => $step->getProject()->getSlug(), 'stepSlug' => $step->getSlug()], $absolute);
         }
         if ($step->isPresentationStep()) {
-            return $this->router->generate('app_project_show_presentation', array('projectSlug' => $step->getProject()->getSlug(), 'stepSlug' => $step->getSlug()), $absolute);
+            return $this->router->generate('app_project_show_presentation', ['projectSlug' => $step->getProject()->getSlug(), 'stepSlug' => $step->getSlug()], $absolute);
         }
         if ($step->isOtherStep()) {
-            return $this->router->generate('app_project_show_step', array('projectSlug' => $step->getProject()->getSlug(), 'stepSlug' => $step->getSlug()), $absolute);
+            return $this->router->generate('app_project_show_step',         ['projectSlug' => $step->getProject()->getSlug(), 'stepSlug' => $step->getSlug()], $absolute);
         }
         if ($step->isSynthesisStep()) {
-            return $this->router->generate('app_project_show_synthesis', array('projectSlug' => $step->getProject()->getSlug(), 'stepSlug' => $step->getSlug()), $absolute);
+            return $this->router->generate('app_project_show_synthesis',    ['projectSlug' => $step->getProject()->getSlug(), 'stepSlug' => $step->getSlug()], $absolute);
         }
         if ($step->isRankingStep()) {
-            return $this->router->generate('app_project_show_ranking', array('projectSlug' => $step->getProject()->getSlug(), 'stepSlug' => $step->getSlug()), $absolute);
+            return $this->router->generate('app_project_show_ranking',      ['projectSlug' => $step->getProject()->getSlug(), 'stepSlug' => $step->getSlug()], $absolute);
+        }
+        if ($step->isCollectStep()) {
+            return $this->router->generate('app_project_show_collect',      ['projectSlug' => $step->getProject()->getSlug(), 'stepSlug' => $step->getSlug()], $absolute);
         }
 
         return '';

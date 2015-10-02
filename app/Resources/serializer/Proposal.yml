@@ -1,0 +1,38 @@
+Capco\AppBundle\Entity\Proposal:
+    exclusion_policy: ALL
+    properties:
+        id:
+            expose: true
+            type: integer
+            groups: [Proposals]
+        title:
+            expose: true
+            type: string
+            groups: [Proposals]
+        body:
+            expose: true
+            type: string
+            groups: [Proposals]
+        author:
+            expose: true
+            type: Capco\UserBundle\Entity\User
+            serialized_name: author
+            groups: [Proposals]
+        proposalReponses:
+            expose: true
+            type: Capco\AppBundle\Entity\ProposalResponse
+            serialized_name: proposalResponses
+            groups: [Proposals]
+        proposalForm:
+            expose: true
+            type: Capco\AppBundle\Entity\ProposalForm
+            serialized_name: proposalForm
+            groups: [Proposals]
+        createdAt:
+            expose: true
+            type: DateTime
+            groups: [Proposals]
+        updatedAt:
+            expose: true
+            type: DateTime
+            groups: [Proposals]

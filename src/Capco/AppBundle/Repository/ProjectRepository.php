@@ -26,13 +26,13 @@ class ProjectRepository extends EntityRepository
      */
     public function getOne($slug)
     {
-        $qb = $this->getIsEnabledQueryBuilder('c')
-            ->addSelect('t', 'cas', 's', 'cov')
-            ->leftJoin('c.Themes', 't', 'WITH', 't.isEnabled = :enabled')
-            ->leftJoin('c.steps', 'cas')
-            ->leftJoin('cas.step', 's')
-            ->leftJoin('c.Cover', 'cov')
-            ->andWhere('c.slug = :slug')
+        $qb = $this->getIsEnabledQueryBuilder('p')
+            ->addSelect('t', 'pas', 's', 'pov')
+            ->leftJoin('p.themes', 't', 'WITH', 't.isEnabled = :enabled')
+            ->leftJoin('p.steps', 'pas')
+            ->leftJoin('pas.step', 's')
+            ->leftJoin('p.Cover', 'pov')
+            ->andWhere('p.slug = :slug')
             ->andWhere('s.isEnabled = :enabled')
             ->setParameter('enabled', true)
             ->setParameter('slug', $slug);
@@ -53,22 +53,22 @@ class ProjectRepository extends EntityRepository
      */
     public function getOneBySlugWithStepsAndEventsAndPosts($slug)
     {
-        $qb = $this->getIsEnabledQueryBuilder('c')
-            ->addSelect('t', 'cas', 's', 'cov', 'p', 'e')
-            ->leftJoin('c.Themes', 't')
-            ->leftJoin('c.steps', 'cas')
-            ->leftJoin('cas.step', 's')
-            ->leftJoin('c.Cover', 'cov')
-            ->leftJoin('c.posts', 'p', 'WITH', 'p.isPublished = :published')
-            ->leftJoin('c.events', 'e', 'WITH', 'e.isEnabled = :enabled')
-            ->andWhere('c.slug = :slug')
+        $qb = $this->getIsEnabledQueryBuilder('p')
+            ->addSelect('t', 'pas', 's', 'pov', 'p', 'e')
+            ->leftJoin('p.themes', 't')
+            ->leftJoin('p.steps', 'pas')
+            ->leftJoin('pas.step', 's')
+            ->leftJoin('p.Cover', 'pov')
+            ->leftJoin('p.posts', 'pst', 'WITH', 'pst.isPublished = :published')
+            ->leftJoin('p.events', 'e', 'WITH', 'e.isEnabled = :enabled')
+            ->andWhere('p.slug = :slug')
             ->andWhere('s.isEnabled = :enabled')
             ->setParameter('slug', $slug)
             ->setParameter('published', true)
             ->setParameter('enabled', true)
             ->addOrderBy('p.publishedAt', 'DESC')
             ->addOrderBy('e.startAt', 'DESC')
-            ->addOrderBy('cas.position', 'ASC')
+            ->addOrderBy('pas.position', 'ASC')
             ->addOrderBy('s.startAt', 'ASC')
         ;
 
@@ -98,12 +98,12 @@ class ProjectRepository extends EntityRepository
         }
 
         $qb = $this->getIsEnabledQueryBuilder()
-            ->addSelect('t', 'cas', 's', 'cov')
-            ->leftJoin('c.Themes', 't')
-            ->leftJoin('c.steps', 'cas')
-            ->leftJoin('cas.step', 's')
-            ->leftJoin('c.Cover', 'cov')
-            ->addOrderBy('c.publishedAt', 'DESC');
+            ->addSelect('t', 'pas', 's', 'pov')
+            ->leftJoin('p.themes', 't')
+            ->leftJoin('p.steps', 'pas')
+            ->leftJoin('pas.step', 's')
+            ->leftJoin('p.Cover', 'pov')
+            ->addOrderBy('p.publishedAt', 'DESC');
 
         if ($theme !== null && $theme !== Theme::FILTER_ALL) {
             $qb->andWhere('t.slug = :theme')
@@ -112,15 +112,15 @@ class ProjectRepository extends EntityRepository
         }
 
         if ($term !== null) {
-            $qb->andWhere('c.title LIKE :term')
+            $qb->andWhere('p.title LIKE :term')
                 ->setParameter('term', '%'.$term.'%')
             ;
         }
 
         if (isset(Project::$sortOrder[$sort]) && Project::$sortOrder[$sort] == Project::SORT_ORDER_CONTRIBUTIONS_COUNT) {
-            $qb->orderBy('c.contributionsCount', 'DESC');
+            $qb->orderBy('p.contributionsCount', 'DESC');
         } else {
-            $qb->orderBy('c.publishedAt', 'DESC');
+            $qb->orderBy('p.publishedAt', 'DESC');
         }
 
         $query = $qb->getQuery();
@@ -144,8 +144,8 @@ class ProjectRepository extends EntityRepository
     public function countSearchResults($themeSlug = null, $term = null)
     {
         $qb = $this->getIsEnabledQueryBuilder()
-            ->select('COUNT(c.id)')
-            ->innerJoin('c.Themes', 't')
+            ->select('COUNT(p.id)')
+            ->innerJoin('p.themes', 't')
         ;
 
         if ($themeSlug !== null && $themeSlug !== Theme::FILTER_ALL) {
@@ -155,7 +155,7 @@ class ProjectRepository extends EntityRepository
         }
 
         if ($term !== null) {
-            $qb->andWhere('c.title LIKE :term')
+            $qb->andWhere('p.title LIKE :term')
                 ->setParameter('term', '%'.$term.'%')
             ;
         }
@@ -177,12 +177,12 @@ class ProjectRepository extends EntityRepository
     public function getLastPublished($limit = 1, $offset = 0)
     {
         $qb = $this->getIsEnabledQueryBuilder()
-            ->addSelect('t', 'cas', 's', 'cov')
-            ->leftJoin('c.Themes', 't')
-            ->leftJoin('c.steps', 'cas')
-            ->leftJoin('cas.step', 's')
-            ->leftJoin('c.Cover', 'cov')
-            ->addOrderBy('c.publishedAt', 'DESC');
+            ->addSelect('t', 'pas', 's', 'pov')
+            ->leftJoin('p.themes', 't')
+            ->leftJoin('p.steps', 'pas')
+            ->leftJoin('pas.step', 's')
+            ->leftJoin('p.Cover', 'pov')
+            ->addOrderBy('p.publishedAt', 'DESC');
 
         if ($limit) {
             $qb->setMaxResults($limit);
@@ -207,14 +207,14 @@ class ProjectRepository extends EntityRepository
     public function getLastByTheme($themeId, $limit = null, $offset = null)
     {
         $qb = $this->getIsEnabledQueryBuilder()
-            ->addSelect('cov', 't', 'cas', 's')
-            ->leftJoin('c.Cover', 'cov')
-            ->leftJoin('c.Themes', 't')
-            ->leftJoin('c.steps', 'cas')
-            ->leftJoin('cas.step', 's')
-            ->andWhere(':theme MEMBER OF c.Themes')
+            ->addSelect('pov', 't', 'pas', 's')
+            ->leftJoin('p.Cover', 'pov')
+            ->leftJoin('p.themes', 't')
+            ->leftJoin('p.steps', 'pas')
+            ->leftJoin('pas.step', 's')
+            ->andWhere(':theme MEMBER OF p.themes')
             ->setParameter('theme', $themeId)
-            ->orderBy('c.publishedAt', 'DESC');
+            ->orderBy('p.publishedAt', 'DESC');
 
         if ($limit) {
             $qb->setMaxResults($limit);
@@ -231,8 +231,8 @@ class ProjectRepository extends EntityRepository
 
     protected function getIsEnabledQueryBuilder()
     {
-        return $this->createQueryBuilder('c')
-            ->andWhere('c.isEnabled = :isEnabled')
+        return $this->createQueryBuilder('p')
+            ->andWhere('p.isEnabled = :isEnabled')
             ->setParameter('isEnabled', true);
     }
 }

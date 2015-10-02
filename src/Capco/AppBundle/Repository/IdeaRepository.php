@@ -62,7 +62,7 @@ class IdeaRepository extends EntityRepository
             ->addSelect('a', 'm', 't')
             ->leftJoin('i.Author', 'a')
             ->leftJoin('a.Media', 'm')
-            ->leftJoin('i.Theme', 't')
+            ->leftJoin('i.theme', 't')
             ->andWhere('i.isTrashed = :trashed')
             ->setParameter('trashed', true);
 
@@ -137,7 +137,7 @@ class IdeaRepository extends EntityRepository
             ->select('i, a, m, t')
             ->leftJoin('i.Author', 'a')
             ->leftJoin('a.Media', 'm')
-            ->leftJoin('i.Theme', 't')
+            ->leftJoin('i.theme', 't')
             ->andWhere('i.isTrashed = :notTrashed')
             ->setParameter('notTrashed', false)
             ->addOrderBy('i.voteCount', 'DESC')
@@ -170,7 +170,7 @@ class IdeaRepository extends EntityRepository
             ->select('i, a, m, t')
             ->leftJoin('i.Author', 'a')
             ->leftJoin('a.Media', 'm')
-            ->leftJoin('i.Theme', 't')
+            ->leftJoin('i.theme', 't')
             ->andWhere('i.isTrashed = :notTrashed')
             ->setParameter('notTrashed', false)
             ->addOrderBy('i.createdAt', 'DESC')
@@ -213,7 +213,7 @@ class IdeaRepository extends EntityRepository
             ->addSelect('a', 'm', 't')
             ->leftJoin('i.Author', 'a')
             ->leftJoin('a.Media', 'm')
-            ->leftJoin('i.Theme', 't')
+            ->leftJoin('i.theme', 't')
             ->andWhere('i.isTrashed = :notTrashed')
             ->setParameter('notTrashed', false);
 
@@ -265,7 +265,7 @@ class IdeaRepository extends EntityRepository
     {
         $qb = $this->getIsEnabledQueryBuilder()
             ->select('COUNT(i.id)')
-            ->innerJoin('i.Theme', 't')
+            ->innerJoin('i.theme', 't')
             ->andWhere('i.isTrashed = :notTrashed')
             ->setParameter('notTrashed', false)
         ;
@@ -327,7 +327,7 @@ class IdeaRepository extends EntityRepository
             ->leftJoin('i.Media', 'media')
             ->leftJoin('i.Author', 'a')
             ->leftJoin('a.Media', 'm')
-            ->leftJoin('i.Theme', 't')
+            ->leftJoin('i.theme', 't')
             ->leftJoin('i.votes', 'v')
             ->leftJoin('i.comments', 'c', 'WITH', 'c.isEnabled = :enabled AND c.isTrashed = :notTrashed')
             ->leftJoin('c.Reports', 'cr')
@@ -356,7 +356,7 @@ class IdeaRepository extends EntityRepository
             ->leftJoin('i.Media', 'media')
             ->leftJoin('i.Author', 'a')
             ->leftJoin('a.Media', 'm')
-            ->leftJoin('i.Theme', 't')
+            ->leftJoin('i.theme', 't')
             ->leftJoin('i.comments', 'c', 'WITH', 'c.isEnabled = :enabled AND c.isTrashed = :notTrashed')
             ->leftJoin('c.Reports', 'cr', 'WITH', 'cr.Reporter =  :user')
             ->setParameter('enabled', true)
@@ -404,7 +404,7 @@ class IdeaRepository extends EntityRepository
             ->select('i, a, m, t')
             ->leftJoin('i.Author', 'a')
             ->leftJoin('a.Media', 'm')
-            ->leftJoin('i.Theme', 't')
+            ->leftJoin('i.theme', 't')
             ->andWhere('i.isTrashed = :notTrashed')
             ->andWhere('t.id = :theme')
             ->setParameter('notTrashed', false)

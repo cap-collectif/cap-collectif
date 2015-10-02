@@ -2,6 +2,7 @@
 
 namespace Capco\AdminBundle\Admin;
 
+use Capco\AppBundle\Entity\CollectStep;
 use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Form\FormMapper;
 use Capco\AppBundle\Entity\OtherStep;
@@ -80,7 +81,7 @@ class StepAdmin extends Admin
             ))
         ;
 
-        if ($subject instanceof PresentationStep || $subject instanceof OtherStep) {
+        if ($subject instanceof PresentationStep || $subject instanceof OtherStep || $subject instanceof CollectStep) {
             $formMapper
                 ->add('body', 'ckeditor', array(
                     'config_name' => 'admin_editor',
@@ -114,7 +115,8 @@ class StepAdmin extends Admin
                 ), ['link_parameters' => ['project_id']]
             );
         } elseif ($subject instanceof RankingStep) {
-            $formMapper->add('body', 'ckeditor', [
+            $formMapper
+                ->add('body', 'ckeditor', [
                     'config_name' => 'admin_editor',
                     'label' => 'admin.fields.step.body',
                     'required' => false,

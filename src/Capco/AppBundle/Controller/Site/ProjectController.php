@@ -4,6 +4,7 @@ namespace Capco\AppBundle\Controller\Site;
 
 use Capco\AppBundle\Entity\Argument;
 use Capco\AppBundle\Entity\Project;
+use Capco\AppBundle\Entity\CollectStep;
 use Capco\AppBundle\Entity\Opinion;
 use Capco\AppBundle\Entity\OpinionType;
 use Capco\AppBundle\Entity\Theme;
@@ -97,9 +98,33 @@ class ProjectController extends Controller
     }
 
     /**
-     * @Route("/projects/{projectSlug}/project/{stepSlug}/opinions/{opinionTypeSlug}/{page}", name="app_project_show_opinions", requirements={"page" = "\d+"}, defaults={"page" = 1})
+     * @Route("/projects/{projectSlug}/consultation/{stepSlug}/propositions", name="app_project_show_proposals", requirements={"page" = "\d+"}, defaults={"page" = 1})
+     * @Route("/consultations/{projectSlug}/projet/{stepSlug}/propositions", name="app_consultation_show_proposals", requirements={"page" = "\d+"}, defaults={"page" = 1})
+     * @ParamConverter("project", class="CapcoAppBundle:Project", options={"mapping": {"projectSlug": "slug"}})
+     * @Template("CapcoAppBundle:Consultation:show_proposals.html.twig")
+     *
+     * @param $project
+     * @param $currentStep
+     *
+     * @return array
+     */
+    public function showProposalsAction(Project $project, CollectStep $currentStep)
+    {
+        $proposalRepository = $this->getDoctrine()->getRepository('CapcoAppBundle:Proposal');
+        $proposalForm = $currentStep->getProposalForm();
+        $proposals = $proposalRepository->getByProposalForm($proposalForm)->getQuery()->getResult();
+
+        return [
+            'proposals'    => $proposals,
+            'project'      => $project,
+            'currentStep'  => $currentStep,
+        ];
+    }
+
+    /**
+     * @Route("/projects/{projectSlug}/consultation/{stepSlug}/opinions/{opinionTypeSlug}/{page}", name="app_project_show_opinions", requirements={"page" = "\d+"}, defaults={"page" = 1})
      * @Route("/consultations/{projectSlug}/consultation/{stepSlug}/opinions/{opinionTypeSlug}/{page}", name="app_consultation_show_opinions", requirements={"page" = "\d+"}, defaults={"page" = 1})
-     * @Route("/projects/{projectSlug}/project/{stepSlug}/opinions/{opinionTypeSlug}/{opinionsSort}/{page}", name="app_project_show_opinions_sorted", requirements={"page" = "\d+","opinionsSort" = "last|old|comments|favorable|votes|positions"}, defaults={"page" = 1})
+     * @Route("/projects/{projectSlug}/consultation/{stepSlug}/opinions/{opinionTypeSlug}/{opinionsSort}/{page}", name="app_project_show_opinions_sorted", requirements={"page" = "\d+","opinionsSort" = "last|old|comments|favorable|votes|positions"}, defaults={"page" = 1})
      * @Route("/consultations/{projectSlug}/consultation/{stepSlug}/opinions/{opinionTypeSlug}/{opinionsSort}/{page}", name="app_consultation_show_opinions_sorted", requirements={"page" = "\d+","opinionsSort" = "last|old|comments|favorable|votes|positions"}, defaults={"page" = 1})
      * @ParamConverter("project", class="CapcoAppBundle:Project", options={"mapping": {"projectSlug": "slug"}})
      * @ParamConverter("currentStep", class="CapcoAppBundle:ConsultationStep", options={"mapping": {"stepSlug": "slug"}})

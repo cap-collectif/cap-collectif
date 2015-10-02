@@ -647,6 +647,7 @@ idea_comment: un commentaire sur une idée
 event_comment: un commentaire sur un évènement
 post_comment: un commentaire sur un article
 other_step: Autre étape
+collect_step: Étape de collecte
 consultation_step: Étape de consultation
 presentation_step: Étape de présentation
 synthesis_step: Étape de synthèse

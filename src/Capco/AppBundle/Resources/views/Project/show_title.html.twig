@@ -60,9 +60,9 @@
                     <p class="media--aligned  excerpt">
                         {% spaceless %}
                             <a href="{{ path('capco_user_profile_show_all', {'slug': project.Author.slug}) }}">{{ project.Author.username }}</a>
-                            {% if is_feature_enabled('themes') and project.Themes | length > 0 %}
+                            {% if is_feature_enabled('themes') and project.themes | length > 0 %}
                                 {{ 'project.show.in_theme' | trans({}, 'CapcoAppBundle') }}
-                                {% for theme in project.Themes %}
+                                {% for theme in project.themes %}
                                     <a href="{{ path('app_theme_show', {'slug': theme.slug}) }}">{{ theme.title }}</a>{% if not loop.last %},{% endif %}
                                 {% endfor %}
                             {% endif %}<span>,</span>

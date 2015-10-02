@@ -27,44 +27,44 @@ class ProjectAdmin extends Admin
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
         $datagridMapper
-            ->add('title', null, array(
+            ->add('title', null, [
                 'label' => 'admin.fields.project.title',
-            ))
+            ])
             ->add('Author', 'doctrine_orm_model_autocomplete', [
                 'label' => 'admin.fields.project.author',
-            ], null, array(
+            ], null, [
                 'property' => 'username',
-            ))
+            ])
         ;
 
         if ($this->getConfigurationPool()->getContainer()->get('capco.toggle.manager')->isActive('themes')) {
-            $datagridMapper->add('Themes', null, array(
+            $datagridMapper->add('themes', null, array(
                 'label' => 'admin.fields.project.themes',
                 ));
         }
 
         $datagridMapper
-            ->add('steps', null, array(
+            ->add('steps', null, [
                 'label' => 'admin.fields.project.steps',
-            ))
-            ->add('events', null, array(
+            ])
+            ->add('events', null, [
                 'label' => 'admin.fields.project.events',
-            ))
-            ->add('posts', null, array(
+            ])
+            ->add('posts', null, [
                 'label' => 'admin.fields.project.posts',
-            ))
-            ->add('isEnabled', null, array(
+            ])
+            ->add('isEnabled', null, [
                 'label' => 'admin.fields.project.is_enabled',
-            ))
-            ->add('exportable', null, array(
+            ])
+            ->add('exportable', null, [
                 'label' => 'admin.fields.project.exportable',
-            ))
-            ->add('publishedAt', null, array(
+            ])
+            ->add('publishedAt', null, [
                 'label' => 'admin.fields.project.published_at',
-            ))
-            ->add('updatedAt', null, array(
+            ])
+            ->add('updatedAt', null, [
                 'label' => 'admin.fields.project.updated_at',
-            ))
+            ])
             ->add('opinionsRankingThreshold', null, [
                 'label' => 'admin.fields.project.ranking.opinions_threshold',
             ])
@@ -83,16 +83,16 @@ class ProjectAdmin extends Admin
     protected function configureListFields(ListMapper $listMapper)
     {
         $listMapper
-            ->addIdentifier('title', null, array(
+            ->addIdentifier('title', null, [
                 'label' => 'admin.fields.project.title',
-            ))
+            ])
             ->add('Author', 'sonata_type_model', array(
                 'label' => 'admin.fields.project.author',
             ))
         ;
 
         if ($this->getConfigurationPool()->getContainer()->get('capco.toggle.manager')->isActive('themes')) {
-            $listMapper->add('Themes', null, array(
+            $listMapper->add('themes', null, array(
                 'label' => 'admin.fields.project.themes',
             ));
         }
@@ -128,10 +128,10 @@ class ProjectAdmin extends Admin
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
-            ->with('admin.fields.project.group_content', array('class' => 'col-md-12'))->end()
-            ->with('admin.fields.project.group_meta', array('class' => 'col-md-6'))->end()
-            ->with('admin.fields.project.group_ranking', array('class' => 'col-md-6'))->end()
-            ->with('admin.fields.project.group_steps', array('class' => 'col-md-12'))->end()
+            ->with('admin.fields.project.group_content', ['class' => 'col-md-12'])->end()
+            ->with('admin.fields.project.group_meta',    ['class' => 'col-md-6'])->end()
+            ->with('admin.fields.project.group_ranking', ['class' => 'col-md-6'])->end()
+            ->with('admin.fields.project.group_steps',   ['class' => 'col-md-12'])->end()
             ->end()
         ;
 
@@ -174,7 +174,7 @@ class ProjectAdmin extends Admin
 
         if ($this->getConfigurationPool()->getContainer()->get('capco.toggle.manager')->isActive('themes')) {
             $formMapper
-                ->add('Themes', 'sonata_type_model', array(
+                ->add('themes', 'sonata_type_model', array(
                 'label' => 'admin.fields.project.themes',
                 'required' => false,
                 'multiple' => true,
@@ -265,7 +265,7 @@ class ProjectAdmin extends Admin
         ;
 
         if ($this->getConfigurationPool()->getContainer()->get('capco.toggle.manager')->isActive('themes')) {
-            $showMapper->add('Themes', null, array(
+            $showMapper->add('themes', null, array(
                 'label' => 'admin.fields.project.themes',
             ));
         }

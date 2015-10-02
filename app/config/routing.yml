@@ -54,6 +54,16 @@ capco_api_opinion_types:
   type: rest
   prefix: /api
 
+capco_api_proposal_forms:
+  resource: "@CapcoAppBundle/Controller/Api/ProposalFormsController.php"
+  type: rest
+  prefix: /api
+
+capco_api_proposals:
+  resource: "@CapcoAppBundle/Controller/Api/ProposalsController.php"
+  type: rest
+  prefix: /api
+
 capco_api_arguments:
   resource: "@CapcoAppBundle/Controller/Api/ArgumentsController.php"
   type: rest

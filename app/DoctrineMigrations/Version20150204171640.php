@@ -33,7 +33,7 @@ class Version20150204171640 extends AbstractMigration implements ContainerAwareI
             }
 
             $date = (new \DateTime())->format('Y-m-d H:i:s');
-            $this->connection->insert('menu_item', array('title' => 'Actualités', 'link' => 'blog', 'is_enabled' => true, 'is_deletable' => 'false', 'isFullyModifiable' => false, 'position' => 2, 'menu_id' => $menuId, 'parent_id' => null, 'created_at' => $date, 'updated_at' => $date));
+            $this->connection->insert('menu_item', array('title' => 'Actualités', 'link' => 'blog', 'is_enabled' => true, 'is_deletable' => 0, 'isFullyModifiable' => 0, 'position' => 2, 'menu_id' => $menuId, 'parent_id' => null, 'created_at' => $date, 'updated_at' => $date));
         }
 
     }

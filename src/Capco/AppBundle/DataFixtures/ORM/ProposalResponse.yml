@@ -1,0 +1,5 @@
+Capco\AppBundle\Entity\ProposalResponse:
+    proposalresponse1:
+        question: @question1
+        proposal: @proposal1
+        value: souhaitable

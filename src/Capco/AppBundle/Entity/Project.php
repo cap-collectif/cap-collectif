@@ -104,7 +104,7 @@ class Project
 
     /**
      * @var \DateTime
-     * @Gedmo\Timestampable(on="change", field={"title", "Author", "Themes", "steps", "Media"})
+     * @Gedmo\Timestampable(on="change", field={"title", "Author", "themes", "steps", "Media"})
      * @ORM\Column(name="updated_at", type="datetime")
      */
     private $updatedAt;
@@ -122,7 +122,7 @@ class Project
      * @ORM\ManyToMany(targetEntity="Capco\AppBundle\Entity\Theme", inversedBy="projects", cascade={"persist"})
      * @ORM\JoinTable(name="theme_project")
      */
-    private $Themes;
+    private $themes;
 
     /**
      * @var \Doctrine\Common\Collections\ArrayCollection
@@ -207,7 +207,7 @@ class Project
      */
     public function __construct()
     {
-        $this->Themes = new ArrayCollection();
+        $this->themes = new ArrayCollection();
         $this->steps = new ArrayCollection();
         $this->events = new ArrayCollection();
         $this->posts = new ArrayCollection();
@@ -381,7 +381,7 @@ class Project
      */
     public function getThemes()
     {
-        return $this->Themes;
+        return $this->themes;
     }
 
     /**
@@ -393,8 +393,8 @@ class Project
      */
     public function addTheme(Theme $theme)
     {
-        if (!$this->Themes->contains($theme)) {
-            $this->Themes->add($theme);
+        if (!$this->themes->contains($theme)) {
+            $this->themes->add($theme);
         }
         $theme->addProject($this);
 
@@ -410,7 +410,7 @@ class Project
      */
     public function removeTheme(Theme $theme)
     {
-        $this->Themes->removeElement($theme);
+        $this->themes->removeElement($theme);
         $theme->removeProject($this);
 
         return $this;
@@ -831,8 +831,8 @@ class Project
      */
     public function deleteProject()
     {
-        if ($this->Themes->count() > 0) {
-            foreach ($this->Themes as $theme) {
+        if ($this->themes->count() > 0) {
+            foreach ($this->themes as $theme) {
                 $theme->removeProject($this);
             }
         }

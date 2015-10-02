@@ -18,7 +18,12 @@ use Capco\AppBundle\Validator\Constraints as CapcoAssert;
  * @ORM\HasLifecycleCallbacks()
  * @ORM\InheritanceType("SINGLE_TABLE")
  * @ORM\DiscriminatorColumn(name = "objectType", type = "string")
- * @ORM\DiscriminatorMap( {"idea" = "IdeaComment", "event" = "EventComment", "post" = "PostComment"} )
+ * @ORM\DiscriminatorMap({
+ *      "idea"     = "IdeaComment",
+ *      "event"    = "EventComment",
+ *      "post"     = "PostComment",
+ *      "proposal" = "ProposalComment"
+ * })
  * @CapcoAssert\HasAuthor
  */
 abstract class AbstractComment

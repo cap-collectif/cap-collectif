@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\Controller\Site;
 
 use Capco\AppBundle\Entity\Project;
+use Capco\AppBundle\Entity\CollectStep;
 use Capco\AppBundle\Entity\OtherStep;
 use Capco\AppBundle\Entity\PresentationStep;
 use Capco\AppBundle\Entity\RankingStep;
@@ -83,6 +84,35 @@ class StepController extends Controller
             'nbEvents' => $nbEvents,
             'nbPosts' => $nbPosts,
             'contributors' => $contributors,
+        ];
+    }
+
+    /**
+     * @Route("/projet/{projectSlug}/collect/{stepSlug}", name="app_project_show_collect")
+     * @Route("/consultation/{consultationSlug}/collect/{stepSlug}", name="app_consultation_show_collect")
+     * @Template("CapcoAppBundle:Step:collect.html.twig")
+     * @ParamConverter("step", class="CapcoAppBundle:CollectStep", options={"mapping" = {"stepSlug": "slug"}})
+     *
+     * @param $projectSlug
+     * @param CollectStep $step
+     *
+     * @return array
+     */
+    public function showCollectAction($projectSlug, CollectStep $step)
+    {
+        if (!$step->canDisplay()) {
+            throw new NotFoundHttpException();
+        }
+
+        $em = $this->getDoctrine()->getManager();
+        $project = $em->getRepository('CapcoAppBundle:Project')->getOne($projectSlug);
+        if (!$project) {
+            throw new NotFoundHttpException();
+        }
+
+        return [
+            'project'      => $project,
+            'currentStep'  => $step,
         ];
     }
 

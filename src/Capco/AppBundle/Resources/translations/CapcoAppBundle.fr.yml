@@ -361,6 +361,8 @@ step:
     closed: Terminé
     open: En cours
     future: À venir
+  collect:
+    title: Collecter
 
 simple_argument:
   count: "%count% avis"

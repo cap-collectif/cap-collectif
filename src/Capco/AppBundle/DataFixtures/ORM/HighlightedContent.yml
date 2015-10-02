@@ -11,7 +11,7 @@ Capco\AppBundle\Entity\HighlightedTheme:
 Capco\AppBundle\Entity\HighlightedProject:
     highlightedProject1:
         position: 3
-        project: @cs1
+        project: @p1
 
 Capco\AppBundle\Entity\HighlightedIdea:
     highlightedIdea1:

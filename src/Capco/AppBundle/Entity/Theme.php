@@ -2,6 +2,9 @@
 
 namespace Capco\AppBundle\Entity;
 
+use Capco\AppBundle\Entity\Idea;
+use Capco\AppBundle\Entity\Proposal;
+use Capco\AppBundle\Entity\Project;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
@@ -117,15 +120,21 @@ class Theme
 
     /**
      * @var
-     * @ORM\ManyToMany(targetEntity="Capco\AppBundle\Entity\Project", mappedBy="Themes", cascade={"persist"})
+     * @ORM\ManyToMany(targetEntity="Capco\AppBundle\Entity\Project", mappedBy="themes", cascade={"persist"})
      */
     private $projects;
 
     /**
      * @var
-     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\Idea", mappedBy="Theme", cascade={"persist", "remove"})
+     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\Idea", mappedBy="theme", cascade={"persist", "remove"})
      */
-    private $Ideas;
+    private $ideas;
+
+    /**
+     * @var
+     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\Proposal", mappedBy="theme", cascade={"persist", "remove"})
+     */
+    private $proposals;
 
     /**
      * @var
@@ -361,6 +370,8 @@ class Theme
      * @param Project $project
      *
      * @return $this
+     * @internal param \Capco\AppBundle\Entity\Project $Project
+     *
      */
     public function removeProject(Project $project)
     {
@@ -376,20 +387,20 @@ class Theme
      */
     public function getIdeas()
     {
-        return $this->Ideas;
+        return $this->ideas;
     }
 
     /**
      * Add idea.
      *
-     * @param \Capco\AppBundle\Entity\Idea $idea
+     * @param Idea $idea
      *
      * @return Theme
      */
-    public function addIdea(\Capco\AppBundle\Entity\Idea $idea)
+    public function addIdea(Idea $idea)
     {
-        if (!$this->Ideas->contains($idea)) {
-            $this->Ideas[] = $idea;
+        if (!$this->ideas->contains($idea)) {
+            $this->ideas[] = $idea;
         }
 
         return $this;
@@ -398,11 +409,47 @@ class Theme
     /**
      * Remove idea.
      *
-     * @param \Capco\AppBundle\Entity\Idea $idea
+     * @param Idea $idea
      */
-    public function removeIdea(\Capco\AppBundle\Entity\Idea $idea)
+    public function removeIdea(Idea $idea)
     {
-        $this->Ideas->removeElement($idea);
+        $this->ideas->removeElement($idea);
+    }
+
+    /**
+     * Get proposals.
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getProposals()
+    {
+        return $this->proposals;
+    }
+
+    /**
+     * Add proposal.
+     *
+     * @param Proposal $proposal
+     *
+     * @return Theme
+     */
+    public function addProposal(Proposal $proposal)
+    {
+        if (!$this->proposals->contains($proposal)) {
+            $this->proposals[] = $proposal;
+        }
+
+        return $this;
+    }
+
+    /**
+     * Remove proposal.
+     *
+     * @param Proposal $proposal
+     */
+    public function removeProposal(Proposal $proposal)
+    {
+        $this->Proposals->removeElement($proposal);
     }
 
     /**
@@ -544,7 +591,7 @@ class Theme
     public function countEnabledIdeas()
     {
         $count = 0;
-        foreach ($this->Ideas as $idea) {
+        foreach ($this->ideas as $idea) {
             if ($idea->getIsEnabled()) {
                 ++$count;
             }

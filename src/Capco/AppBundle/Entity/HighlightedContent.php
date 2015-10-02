@@ -12,11 +12,11 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\InheritanceType("SINGLE_TABLE")
  * @ORM\DiscriminatorColumn(name = "object_type", type = "string")
  * @ORM\DiscriminatorMap({
- *  "post" = "HighlightedPost",
- *  "theme" = "HighlightedTheme",
+ *  "post"    = "HighlightedPost",
+ *  "theme"   = "HighlightedTheme",
  *  "project" = "HighlightedProject",
- *  "idea" = "HighlightedIdea",
- *  "event" = "HighlightedEvent"
+ *  "idea"    = "HighlightedIdea",
+ *  "event"   = "HighlightedEvent"
  * })
  */
 abstract class HighlightedContent

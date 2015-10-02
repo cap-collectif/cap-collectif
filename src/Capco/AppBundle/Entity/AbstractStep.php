@@ -18,19 +18,21 @@ use JMS\Serializer\Annotation as Serializer;
  * @ORM\InheritanceType("SINGLE_TABLE")
  * @ORM\DiscriminatorColumn(name = "step_type", type = "string")
  * @ORM\DiscriminatorMap({
- *      "consultation"     = "ConsultationStep",
+ *      "consultation"  = "ConsultationStep",
  *      "presentation"  = "PresentationStep",
- *      "other"  = "OtherStep",
- *      "synthesis" = "SynthesisStep",
- *      "ranking" = "RankingStep",
+ *      "other"         = "OtherStep",
+ *      "collect"       = "CollectStep",
+ *      "synthesis"     = "SynthesisStep",
+ *      "ranking"       = "RankingStep",
  * })
  * @Serializer\ExclusionPolicy("all")
  * @Serializer\Discriminator(field = "step_type", map = {
- *      "consultation"     = "Capco\AppBundle\Entity\ConsultationStep",
- *      "presentation"  = "Capco\AppBundle\Entity\PresentationStep",
- *      "other"  = "Capco\AppBundle\Entity\OtherStep",
- *      "synthesis" = "Capco\AppBundle\Entity\SynthesisStep",
- *      "ranking" = "Capco\AppBundle\Entity\RankingStep",
+ *      "consultation" = "Capco\AppBundle\Entity\ConsultationStep",
+ *      "presentation" = "Capco\AppBundle\Entity\PresentationStep",
+ *      "other"        = "Capco\AppBundle\Entity\OtherStep",
+ *      "collect"      = "Capco\AppBundle\Entity\CollectStep",
+ *      "synthesis"    = "Capco\AppBundle\Entity\SynthesisStep",
+ *      "ranking"      = "Capco\AppBundle\Entity\RankingStep",
  * })
  */
 abstract class AbstractStep
@@ -42,7 +44,7 @@ abstract class AbstractStep
      */
     public static $stepStatus = [
         'closed' => 'step.status.closed',
-        'open' => 'step.status.open',
+        'open'   => 'step.status.open',
         'future' => 'step.status.future',
     ];
 
@@ -381,6 +383,11 @@ abstract class AbstractStep
     }
 
     public function isRankingStep()
+    {
+        return false;
+    }
+
+    public function isCollectStep()
     {
         return false;
     }

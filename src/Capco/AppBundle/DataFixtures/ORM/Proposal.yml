@@ -1,0 +1,8 @@
+Capco\AppBundle\Entity\Proposal:
+    proposal1:
+        title: Ravalement de la façade de la biliothèque municipale
+        body: |
+             <text(100)>
+        enabled: true
+        isTrashed: false
+        author: @user502

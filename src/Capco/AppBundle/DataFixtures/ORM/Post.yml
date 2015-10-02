@@ -13,7 +13,7 @@ Capco\AppBundle\Entity\Post:
     Authors:
         - @user<numberBetween(1,5)>
     Media: @MediaProject<numberBetween(1,3)>
-    projects: [@cs1]
+    projects: [@p1]
     themes: [@theme1]
 
   post{6..8}:
@@ -30,7 +30,7 @@ Capco\AppBundle\Entity\Post:
     Authors:
         - @user<numberBetween(1,5)>
     Media: null
-    projects: [@cs2]
+    projects: [@p2]
     themes: [@theme2]
 
   post{9..10}:
@@ -47,5 +47,5 @@ Capco\AppBundle\Entity\Post:
       Authors:
           - @user<numberBetween(1,5)>
       Media: null
-      projects: [@cs2]
+      projects: [@p2]
       themes: [@theme2]

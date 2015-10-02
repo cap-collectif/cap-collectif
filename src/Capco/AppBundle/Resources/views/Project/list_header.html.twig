@@ -1,10 +1,11 @@
 {% set color = opinionType is defined ? opinionType.color : 'default' %}
-{% set buttonLabel = opinionTerm == 0 ? 'opinion.create.button' : 'opinion.create.article_button'  %}
-{% set label = areVersions is defined and areVersions ? 'project.show.versions' : opinionTerm == 0 ? 'project.show.opinions' : 'project.show.articles' %}
+{% set buttonLabel = (opinionTerm is defined and opinionTerm == 0) ? 'opinion.create.button' : 'opinion.create.article_button'  %}
+{% set label = areVersions is defined and areVersions ? 'project.show.versions' : (opinionTerm is defined and opinionTerm == 0) ? 'project.show.opinions' : 'project.show.articles' %}
+{% set items = (opinions is defined) ? opinions : proposals %}
 <div class="opinion  opinion--{{ color }} opinion--default">
     <div class="opinion__header  opinion__header--mobile-centered">
         <h2 class="pull-left  h4  opinion__header__title">
-            {{ label | transchoice(opinions | length, {}, 'CapcoAppBundle')  }}
+            {{ label | transchoice(items | length, {}, 'CapcoAppBundle')  }}
         </h2>
         {% if filter is not defined or filter == true %}
             <div class="pull-right  opinion__header__filter">
@@ -29,7 +30,7 @@
                         </ul>
                     </div>
                 {% endif %}
-                {% if opinionType is defined and opinionType.isEnabled == true and currentStep.canContribute %}
+                {% if opinionType is defined and opinionType.isEnabled == true and currentStep.canContribute and currentStep.canContribute %}
                     <a id="btn-add--{{ opinionType.slug }}" href="{{ path('app_project_new_opinion' ,{'projectSlug': project.slug, 'stepSlug': currentStep.slug, 'opinionTypeSlug': opinionType.slug } ) }}" class="btn  btn-primary">
                         <i class="cap cap-add-1"></i>
                         <span class="hidden-xs">{{ buttonLabel | trans({}, 'CapcoAppBundle') }}</span>

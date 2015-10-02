@@ -130,11 +130,11 @@ class Idea implements CommentableInterface
     private $trashedReason = null;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Theme", inversedBy="Ideas", cascade={"persist"})
+     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Theme", inversedBy="ideas", cascade={"persist"})
      * @ORM\JoinColumn(name="theme_id", referencedColumnName="id", nullable=true)
      * @CapcoAssert\HasThemeIfActivated()
      */
-    private $Theme = null;
+    private $theme = null;
 
     /**
      * @var
@@ -357,16 +357,16 @@ class Idea implements CommentableInterface
      */
     public function getTheme()
     {
-        return $this->Theme;
+        return $this->theme;
     }
 
     /**
-     * @param mixed $Theme
+     * @param mixed $theme
      */
-    public function setTheme($Theme)
+    public function setTheme($theme)
     {
-        $this->Theme = $Theme;
-        $Theme->addIdea($this);
+        $this->theme = $theme;
+        $theme->addIdea($this);
     }
 
     /**
@@ -635,8 +635,8 @@ class Idea implements CommentableInterface
      */
     public function deleteIdea()
     {
-        if ($this->Theme != null) {
-            $this->Theme->removeIdea($this);
+        if ($this->theme != null) {
+            $this->theme->removeIdea($this);
         }
     }
 }
