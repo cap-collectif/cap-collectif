@@ -49,6 +49,11 @@ class Validator {
             errors.push(this.rules[rule].message);
           }
           break;
+        case 'isTrue':
+          if (this.isTrue()) {
+            errors.push(this.rules[rule].message);
+          }
+          break;
         default:
           throw new Error('The rule ' + rule + ' does not exist in Validator.');
       }
@@ -88,6 +93,10 @@ class Validator {
 
   notBlank() {
     return this.notNull() && this.value !== '';
+  }
+
+  isTrue() {
+    return !!this.value;
   }
 
 }
