@@ -410,7 +410,8 @@ class Argument
      */
     public function removeVote($vote)
     {
-        $this->votes->removeElement($vote);
+        if ($this->votes->removeElement($vote)) {
+        }
 
         return $this;
     }
@@ -488,7 +489,7 @@ class Argument
     public function resetVotes()
     {
         foreach ($this->votes as $vote) {
-            $this->removeVote($vote);
+            $vote->setConfirmed(false);
         }
         $this->voteCount = 0;
 
@@ -504,7 +505,7 @@ class Argument
     {
         if ($user != null) {
             foreach ($this->votes as $vote) {
-                if ($vote->getUser() == $user && $vote->isConfirmed()) {
+                if ($vote->getUser() == $user) {
                     return true;
                 }
             }

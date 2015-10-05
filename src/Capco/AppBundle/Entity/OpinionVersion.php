@@ -211,7 +211,7 @@ class OpinionVersion
         return $this;
     }
 
-    public function removeVote(OpinionVersionVote $vote)
+    public function removeVote(OpinionVersionVote  $vote)
     {
         $this->votes->removeElement($vote);
 

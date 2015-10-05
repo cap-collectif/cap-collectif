@@ -648,7 +648,7 @@ class Source
     public function resetVotes()
     {
         foreach ($this->votes as $vote) {
-            $this->removeVote($vote);
+            $vote->setConfirmed(false);
         }
         $this->voteCount = 0;
 
@@ -664,7 +664,7 @@ class Source
     {
         if ($user != null) {
             foreach ($this->votes as $vote) {
-                if ($vote->getUser() == $user && $vote->isConfirmed()) {
+                if ($vote->getUser() == $user) {
                     return true;
                 }
             }

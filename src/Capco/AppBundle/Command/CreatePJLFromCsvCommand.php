@@ -163,7 +163,6 @@ class CreatePJLFromCsvCommand extends ContainerAwareCommand
 
         $user = new User();
         $user->setUserName($this->username);
-        $user->setEmail('gouv@gouv.fr');
         $user->setPlainPassword($this->password);
         $user->setEnabled(true);
         $user->setUserType($userType);
