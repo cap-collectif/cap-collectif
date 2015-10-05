@@ -58,10 +58,6 @@ Hack form button - radio check
   .help-block {
     color: $excerpt;
   }
-
-  input[type="checkbox"] + span {
-    color: $warning-text;
-  }
 }
 
 .has-success {
