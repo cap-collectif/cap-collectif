@@ -103,17 +103,3 @@ Capco\UserBundle\Entity\User:
         Media: @MediaUser4
         isTermsAccepted: true
         vip: true
-
-    user502:
-        username: welcomattic
-        firstname: Mathieu
-        lastname: Santostefano
-        email: msantostefano@jolicode.com
-        enabled: true
-        userType: @UserType1
-        plainPassword: capco
-        roles:
-         - 'ROLE_SUPER_ADMIN'
-        Media: @MediaUser5
-        isTermsAccepted: true
-        vip: true

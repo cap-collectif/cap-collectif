@@ -60,7 +60,7 @@ class ReportingAdmin extends Admin
         unset($this->listModes['mosaic']);
 
         $listMapper
-            ->addIdentifier('object', null, array(
+            ->add('object', null, array(
                 'label' => 'admin.fields.reporting.object',
                 'template' => 'CapcoAdminBundle:Reporting:object_list_field.html.twig',
                 'mapped' => false,
@@ -121,9 +121,6 @@ class ReportingAdmin extends Admin
                 'template' => 'CapcoAdminBundle:Reporting:status_show_field.html.twig',
                 'statusLabels' => Reporting::$statusesLabels,
             ))
-            ->add('body', null, [
-                'label' => 'admin.fields.reporting.body',
-            ])
             ->add('isArchived', null, array(
                 'label' => 'admin.fields.reporting.is_archived',
                 'editable' => true,
