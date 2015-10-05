@@ -58,7 +58,7 @@ class UserRepository extends EntityRepository
             ->leftJoin('opinions.step', 'step', 'WITH', 'step.isEnabled = 1')
             ->leftJoin('step.consultationAbstractStep', 'cas')
             ->where('cas.consultation = :consultation')
-            ->groupBy('u')
+            ->groupBy('u.id')
             ->setParameter('consultation', $consultation)
         ;
 
@@ -74,7 +74,7 @@ class UserRepository extends EntityRepository
             ->leftJoin('opinions.step', 'step', 'WITH', 'step.isEnabled = 1')
             ->leftJoin('step.consultationAbstractStep', 'cas')
             ->where('cas.consultation = :consultation')
-            ->groupBy('u')
+            ->groupBy('u.id')
             ->setParameter('consultation', $consultation)
         ;
 
@@ -90,7 +90,7 @@ class UserRepository extends EntityRepository
             ->leftJoin('opinions_votes_opinion.step', 'opinions_votes_opinion_step', 'WITH', 'opinions_votes_opinion_step.isEnabled = 1')
             ->leftJoin('opinions_votes_opinion_step.consultationAbstractStep', 'cas')
             ->where('cas.consultation = :consultation')
-            ->groupBy('u')
+            ->groupBy('u.id')
             ->setParameter('consultation', $consultation)
         ;
 
@@ -107,7 +107,7 @@ class UserRepository extends EntityRepository
             ->leftJoin('versions_votes_version_parent.step', 'versions_votes_version_step', 'WITH', 'versions_votes_version_step.isEnabled = 1')
             ->leftJoin('versions_votes_version_step.consultationAbstractStep', 'cas')
             ->where('cas.consultation = :consultation')
-            ->groupBy('u')
+            ->groupBy('u.id')
             ->setParameter('consultation', $consultation)
         ;
 

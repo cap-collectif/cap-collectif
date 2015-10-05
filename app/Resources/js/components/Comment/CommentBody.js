@@ -26,7 +26,7 @@ const CommentBody = React.createClass({
         </span>
       );
     }
-    return null;
+    return <span />;
   },
 
 
