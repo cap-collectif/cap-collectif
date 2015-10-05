@@ -188,7 +188,7 @@ Capco\AppBundle\Entity\SiteParameter:
     SiteParameter29:
         keyname: admin.mail.notifications.receive_address
         category: settings.notifications
-        value: assistance@cap-collectif.com
+        value: sfavot@jolicode.com
         position: 1
         type: 4
     SiteParameter30:
