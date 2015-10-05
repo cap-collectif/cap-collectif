@@ -37,7 +37,7 @@ const CreateModal = React.createClass({
   },
 
   componentDidMount() {
-    this.loadElementsTreeFromServer();
+    this.fetchElementsTreeFromServer();
   },
 
   componentWillUnmount() {
@@ -45,19 +45,7 @@ const CreateModal = React.createClass({
   },
 
   onChange() {
-    if (!SynthesisElementStore.isProcessing && SynthesisElementStore.isInboxSync.allTree) {
-      this.setState({
-        elementsTree: SynthesisElementStore.elements.allTree,
-        isLoading: false,
-      });
-      return;
-    }
-
-    this.setState({
-      isLoading: true,
-    }, () => {
-      this.loadElementsTreeFromServer();
-    });
+    this.fetchElementsTreeFromServer();
   },
 
   renderName() {
@@ -147,6 +135,22 @@ const CreateModal = React.createClass({
       return;
     }
     SynthesisElementActions.create(this.props.synthesis.id, element);
+  },
+
+  fetchElementsTreeFromServer() {
+    if (!SynthesisElementStore.isProcessing && SynthesisElementStore.isInboxSync.allTree) {
+      this.setState({
+        elementsTree: SynthesisElementStore.elements.allTree,
+        isLoading: false,
+      });
+      return;
+    }
+
+    this.setState({
+      isLoading: true,
+    }, () => {
+      this.loadElementsTreeFromServer();
+    });
   },
 
   loadElementsTreeFromServer() {

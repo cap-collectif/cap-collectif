@@ -115,15 +115,17 @@ export default {
       });
   },
 
-  loadElementsFromServer: (synthesis, type) => {
+  loadElementsFromServer: (synthesis, type, offset, limit) => {
     Fetcher
-      .get('/syntheses/' + synthesis + '/elements?type=' + type)
+      .get('/syntheses/' + synthesis
+        + '/elements?type=' + type
+        + '&offset=' + offset
+        + '&limit=' + limit
+      )
       .then((data) => {
-        AppDispatcher.dispatch({
-          actionType: RECEIVE_ELEMENTS,
-          type: type,
-          elements: data,
-        });
+        data.actionType = RECEIVE_ELEMENTS;
+        data.type = type;
+        AppDispatcher.dispatch(data);
         return true;
       });
   },
@@ -132,11 +134,9 @@ export default {
     Fetcher
       .get('/syntheses/' + synthesis + '/elements/tree?type=' + type)
       .then((data) => {
-        AppDispatcher.dispatch({
-          actionType: RECEIVE_ELEMENTS,
-          type: type + 'Tree',
-          elements: data,
-        });
+        data.actionType = RECEIVE_ELEMENTS;
+        data.type = type + 'Tree';
+        AppDispatcher.dispatch(data);
         return true;
       });
   },

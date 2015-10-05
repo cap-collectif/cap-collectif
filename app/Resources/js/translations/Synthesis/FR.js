@@ -6,6 +6,7 @@ export default {
         nb: '{num, plural, =0{} one{# contribution} other{# contributions}}',
         default_title: 'Contribution',
         no_source_date: 'Date non renseignée',
+        more: 'Voir plus',
       },
       errors: {
         not_enabled: 'La synthèse est en cours de rédaction et sera bientôt disponible.',
@@ -17,6 +18,7 @@ export default {
         divide_error: 'Impossible de diviser cet élement.. Veuillez réessayer.',
         close: 'Fermer',
       },
+      loading: 'Chargement',
       success: {
         create_success: 'L\'élément a été créé avec succès.',
         update_success: 'L\'opération a été réalisée avec succès.',

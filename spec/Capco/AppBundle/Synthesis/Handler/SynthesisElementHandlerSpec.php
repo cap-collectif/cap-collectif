@@ -6,6 +6,7 @@ use Capco\AppBundle\Entity\Synthesis\Synthesis;
 use Capco\AppBundle\Entity\Synthesis\SynthesisDivision;
 use Capco\AppBundle\Entity\Synthesis\SynthesisElement;
 use Capco\AppBundle\Repository\Synthesis\SynthesisElementRepository;
+use Doctrine\ORM\Tools\Pagination\Paginator;
 use PhpSpec\ObjectBehavior;
 use Capco\AppBundle\Manager\LogManager;
 use Doctrine\ORM\EntityManager;
@@ -25,103 +26,138 @@ class SynthesisElementHandlerSpec extends ObjectBehavior
         $this->shouldHaveType('Capco\AppBundle\Synthesis\Handler\SynthesisElementHandler');
     }
 
-    function it_can_get_all_elements_from_synthesis(EntityManager $em, LogManager $logManager, SynthesisElementRepository $synthesisElementRepo, ArrayCollection $collection, Synthesis $synthesis)
+    function it_can_get_all_elements_from_synthesis(EntityManager $em, LogManager $logManager, SynthesisElementRepository $synthesisElementRepo, Paginator $paginator, Synthesis $synthesis)
     {
         $em->getRepository('CapcoAppBundle:Synthesis\SynthesisElement')->willReturn($synthesisElementRepo)->shouldBeCalled();
         $this->beConstructedWith($em, $logManager);
+        $offset = 0;
+        $limit = null;
+
+        $paginator->getIterator()->willReturn(new \ArrayIterator());
+        $paginator->count()->willReturn(17);
 
         $type = 'all';
-        $synthesisElementRepo->getWith(array(
+        $synthesisElementRepo->getWith([
             'synthesis' => $synthesis
-        ))->willReturn($collection)->shouldBeCalled();
-        $this->getElementsFromSynthesisByType($synthesis, $type)->shouldReturnAnInstanceOf('Doctrine\Common\Collections\ArrayCollection');
+        ], $offset, $limit)->willReturn($paginator)->shouldBeCalled();
+        $this->getElementsFromSynthesisByType($synthesis, $type)->shouldBeArray();
 
     }
 
-    function it_can_get_new_elements_from_synthesis(EntityManager $em, LogManager $logManager, SynthesisElementRepository $synthesisElementRepo, ArrayCollection $collection, Synthesis $synthesis)
+    function it_can_get_new_elements_from_synthesis(EntityManager $em, LogManager $logManager, SynthesisElementRepository $synthesisElementRepo, Paginator $paginator, Synthesis $synthesis)
     {
         $em->getRepository('CapcoAppBundle:Synthesis\SynthesisElement')->willReturn($synthesisElementRepo)->shouldBeCalled();
         $this->beConstructedWith($em, $logManager);
+        $offset = 0;
+        $limit = null;
+
+        $paginator->getIterator()->willReturn(new \ArrayIterator());
+        $paginator->count()->willReturn(17);
 
         $type = 'new';
-        $synthesisElementRepo->getWith(array(
+        $synthesisElementRepo->getWith([
             'synthesis' => $synthesis,
             'archived' => false,
-        ))->willReturn($collection)->shouldBeCalled();
-        $this->getElementsFromSynthesisByType($synthesis, $type)->shouldReturnAnInstanceOf('Doctrine\Common\Collections\ArrayCollection');
+        ], $offset, $limit)->willReturn($paginator)->shouldBeCalled();
+        $this->getElementsFromSynthesisByType($synthesis, $type)->shouldBeArray();
 
     }
 
-    function it_can_get_unpublished_elements_from_synthesis(EntityManager $em, LogManager $logManager, SynthesisElementRepository $synthesisElementRepo, ArrayCollection $collection, Synthesis $synthesis)
+    function it_can_get_unpublished_elements_from_synthesis(EntityManager $em, LogManager $logManager, SynthesisElementRepository $synthesisElementRepo, Paginator $paginator, Synthesis $synthesis)
     {
         $em->getRepository('CapcoAppBundle:Synthesis\SynthesisElement')->willReturn($synthesisElementRepo)->shouldBeCalled();
         $this->beConstructedWith($em, $logManager);
+        $offset = 0;
+        $limit = null;
+
+        $paginator->getIterator()->willReturn(new \ArrayIterator());
+        $paginator->count()->willReturn(17);
 
         $type = 'unpublished';
-        $synthesisElementRepo->getWith(array(
+        $synthesisElementRepo->getWith([
             'synthesis' => $synthesis,
             'archived' => true,
             'published' => false,
-        ))->willReturn($collection)->shouldBeCalled();
-        $this->getElementsFromSynthesisByType($synthesis, $type)->shouldReturnAnInstanceOf('Doctrine\Common\Collections\ArrayCollection');
+        ], $offset, $limit)->willReturn($paginator)->shouldBeCalled();
+        $this->getElementsFromSynthesisByType($synthesis, $type)->shouldBeArray();
 
     }
 
-    function it_can_get_published_elements_from_synthesis(EntityManager $em, LogManager $logManager, SynthesisElementRepository $synthesisElementRepo, ArrayCollection $collection, Synthesis $synthesis)
+    function it_can_get_published_elements_from_synthesis(EntityManager $em, LogManager $logManager, SynthesisElementRepository $synthesisElementRepo, Paginator $paginator, Synthesis $synthesis)
     {
         $em->getRepository('CapcoAppBundle:Synthesis\SynthesisElement')->willReturn($synthesisElementRepo)->shouldBeCalled();
         $this->beConstructedWith($em, $logManager);
+        $offset = 0;
+        $limit = null;
+
+        $paginator->getIterator()->willReturn(new \ArrayIterator());
+        $paginator->count()->willReturn(17);
 
         $type = 'published';
-        $synthesisElementRepo->getWith(array(
+        $synthesisElementRepo->getWith([
             'synthesis' => $synthesis,
             'archived' => true,
             'published' => true,
-        ))->willReturn($collection)->shouldBeCalled();
-        $this->getElementsFromSynthesisByType($synthesis, $type)->shouldReturnAnInstanceOf('Doctrine\Common\Collections\ArrayCollection');
+        ], $offset, $limit)->willReturn($paginator)->shouldBeCalled();
+        $this->getElementsFromSynthesisByType($synthesis, $type)->shouldBeArray();
 
     }
 
-    function it_can_get_archived_elements_from_synthesis(EntityManager $em, LogManager $logManager, SynthesisElementRepository $synthesisElementRepo, ArrayCollection $collection, Synthesis $synthesis)
+    function it_can_get_archived_elements_from_synthesis(EntityManager $em, LogManager $logManager, SynthesisElementRepository $synthesisElementRepo, Paginator $paginator, Synthesis $synthesis)
     {
         $em->getRepository('CapcoAppBundle:Synthesis\SynthesisElement')->willReturn($synthesisElementRepo)->shouldBeCalled();
         $this->beConstructedWith($em, $logManager);
+        $offset = 0;
+        $limit = null;
+
+        $paginator->getIterator()->willReturn(new \ArrayIterator());
+        $paginator->count()->willReturn(17);
 
         $type = 'archived';
-        $synthesisElementRepo->getWith(array(
+        $synthesisElementRepo->getWith([
             'synthesis' => $synthesis,
             'archived' => true,
-        ))->willReturn($collection)->shouldBeCalled();
-        $this->getElementsFromSynthesisByType($synthesis, $type)->shouldReturnAnInstanceOf('Doctrine\Common\Collections\ArrayCollection');
+        ], $offset, $limit)->willReturn($paginator)->shouldBeCalled();
+        $this->getElementsFromSynthesisByType($synthesis, $type)->shouldBeArray();
 
     }
 
-    function it_can_get_elements__published_tree_from_synthesis(EntityManager $em, LogManager $logManager, SynthesisElementRepository $synthesisElementRepo, ArrayCollection $collection, Synthesis $synthesis)
+    function it_can_get_elements__published_tree_from_synthesis(EntityManager $em, LogManager $logManager, SynthesisElementRepository $synthesisElementRepo, Paginator $paginator, Synthesis $synthesis)
     {
         $em->getRepository('CapcoAppBundle:Synthesis\SynthesisElement')->willReturn($synthesisElementRepo)->shouldBeCalled();
         $this->beConstructedWith($em, $logManager);
+        $offset = 0;
+        $limit = null;
+
+        $paginator->getIterator()->willReturn(new \ArrayIterator());
+        $paginator->count()->willReturn(17);
 
         $type = 'tree_published';
-        $synthesisElementRepo->getWith(array(
+        $synthesisElementRepo->getWith([
             'synthesis' => $synthesis,
             'parent' => null,
             'archived' => true,
             'published' => true,
-        ))->willReturn($collection)->shouldBeCalled();
-        $this->getElementsFromSynthesisByType($synthesis, $type)->shouldReturnAnInstanceOf('Doctrine\Common\Collections\ArrayCollection');
+        ], $offset, $limit)->willReturn($paginator)->shouldBeCalled();
+        $this->getElementsFromSynthesisByType($synthesis, $type)->shouldBeArray();
     }
 
-    function it_can_get_all_elements_tree_from_synthesis(EntityManager $em, LogManager $logManager, SynthesisElementRepository $synthesisElementRepo, ArrayCollection $collection, Synthesis $synthesis)
+    function it_can_get_all_elements_tree_from_synthesis(EntityManager $em, LogManager $logManager, SynthesisElementRepository $synthesisElementRepo, Paginator $paginator, Synthesis $synthesis)
     {
         $em->getRepository('CapcoAppBundle:Synthesis\SynthesisElement')->willReturn($synthesisElementRepo)->shouldBeCalled();
         $this->beConstructedWith($em, $logManager);
+        $offset = 0;
+        $limit = null;
+
+        $paginator->getIterator()->willReturn(new \ArrayIterator());
+        $paginator->count()->willReturn(17);
 
         $type = 'tree_all';
-        $synthesisElementRepo->getWith(array(
+        $synthesisElementRepo->getWith([
             'synthesis' => $synthesis,
             'parent' => null,
-        ))->willReturn($collection)->shouldBeCalled();
-        $this->getElementsFromSynthesisByType($synthesis, $type)->shouldReturnAnInstanceOf('Doctrine\Common\Collections\ArrayCollection');
+        ], $offset, $limit)->willReturn($paginator)->shouldBeCalled();
+        $this->getElementsFromSynthesisByType($synthesis, $type)->shouldBeArray();
     }
 
     function it_can_count_all_elements_from_synthesis_by_type(EntityManager $em, LogManager $logManager, SynthesisElementRepository $synthesisElementRepo, Synthesis $synthesis)

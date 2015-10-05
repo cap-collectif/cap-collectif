@@ -209,14 +209,18 @@ class SynthesisController extends FOSRestController
      * @Security("has_role('ROLE_ADMIN')")
      * @ParamConverter("synthesis", options={"mapping": {"id": "id"}})
      * @QueryParam(name="type", nullable=true)
+     * @QueryParam(name="offset", nullable=true)
+     * @QueryParam(name="limit", nullable=true)
      * @Get("/syntheses/{id}/elements")
      * @View(serializerGroups={"ElementsList", "UserDetails"})
      */
     public function getSynthesisElementsAction(ParamFetcherInterface $paramFetcher, Synthesis $synthesis)
     {
         $type = $paramFetcher->get('type');
+        $offset = $paramFetcher->get('offset');
+        $limit = $paramFetcher->get('limit');
 
-        return $this->get('capco.synthesis.synthesis_element_handler')->getElementsFromSynthesisByType($synthesis, $type);
+        return $this->get('capco.synthesis.synthesis_element_handler')->getElementsFromSynthesisByType($synthesis, $type, $offset, $limit);
     }
 
     /**

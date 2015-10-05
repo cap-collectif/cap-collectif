@@ -18,7 +18,16 @@ class SynthesisElementStore extends BaseStore {
       'allTree': [],
       'fromDivision': [],
     };
-    this._countNew = 0;
+    this._counts = {
+      'new': 0,
+      'archived': 0,
+      'published': 0,
+      'unpublished': 0,
+      'all': 0,
+      'publishedTree': 0,
+      'allTree': 0,
+      'fromDivision': 0,
+    };
     this._isProcessing = false;
     this._isElementSync = false;
     this._isCountSync = false;
@@ -41,7 +50,7 @@ class SynthesisElementStore extends BaseStore {
   _registerToActions(action) {
     switch (action.actionType) {
       case RECEIVE_COUNT:
-        this._countNew = action.count;
+        this._counts[action.type] = action.count;
         this._isCountSync = true;
         this.emitChange();
         break;
@@ -53,6 +62,7 @@ class SynthesisElementStore extends BaseStore {
       case RECEIVE_ELEMENTS:
         this._elements[action.type] = action.elements;
         this._isInboxSync[action.type] = true;
+        this._counts[action.type] = action.count;
         this.emitChange();
         break;
       case CREATE_ELEMENT:
@@ -70,7 +80,7 @@ class SynthesisElementStore extends BaseStore {
           this._resetInboxSync();
         } else {
           this._elements.new = ArrayHelper.removeElementFromArray(this._elements.new, this._element);
-          this._countNew = this._elements.new.length;
+          this._counts['new'] = this._elements.new.length;
           this.elements.archived = ArrayHelper.addElementToArray(this._elements.archived, this._element);
           this._elements.published = ArrayHelper.addElementToArray(this._elements.published, this._element);
           this._elements.unpublished = ArrayHelper.removeElementFromArray(this._elements.unpublished, this._element);
@@ -164,8 +174,8 @@ class SynthesisElementStore extends BaseStore {
     return this._elements;
   }
 
-  get countNew() {
-    return this._countNew;
+  get counts() {
+    return this._counts;
   }
 
   get messages() {

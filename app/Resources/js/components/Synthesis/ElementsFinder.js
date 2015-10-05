@@ -26,7 +26,7 @@ const ElementsFinder = React.createClass({
   },
 
   componentDidMount() {
-    this.loadElementsTreeFromServer();
+    this.fetchElementsTreeFromServer();
   },
 
   componentWillUnmount() {
@@ -34,20 +34,7 @@ const ElementsFinder = React.createClass({
   },
 
   onChange() {
-    if (!SynthesisElementStore.isProcessing && SynthesisElementStore.isInboxSync.allTree) {
-      this.setState({
-        elements: SynthesisElementStore.elements.allTree,
-        expanded: this.getExpandedBasedOnSelectedId(),
-        isLoading: false,
-      });
-      return;
-    }
-
-    this.setState({
-      isLoading: true,
-    }, () => {
-      this.loadElementsTreeFromServer();
-    });
+    this.fetchElementsTreeFromServer();
   },
 
   getExpandedBasedOnSelectedId() {
@@ -174,6 +161,23 @@ const ElementsFinder = React.createClass({
     if (typeof this.props.onSelect === 'function') {
       this.props.onSelect(element);
     }
+  },
+
+  fetchElementsTreeFromServer() {
+    if (!SynthesisElementStore.isProcessing && SynthesisElementStore.isInboxSync.allTree) {
+      this.setState({
+        elements: SynthesisElementStore.elements.allTree,
+        expanded: this.getExpandedBasedOnSelectedId(),
+        isLoading: false,
+      });
+      return;
+    }
+
+    this.setState({
+      isLoading: true,
+    }, () => {
+      this.loadElementsTreeFromServer();
+    });
   },
 
   loadElementsTreeFromServer() {

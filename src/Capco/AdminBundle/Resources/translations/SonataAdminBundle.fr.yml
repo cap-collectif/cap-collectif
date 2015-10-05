@@ -486,7 +486,7 @@ admin:
       updated_at: Mise à jour
     synthesis:
       enabled: Publiée
-      editable: Contribuable
+      editable: Éditable
       consultation_step: Étape de consultation
       consultation_step_empty: Aucune
       source_type: Source des données

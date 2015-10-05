@@ -61,11 +61,21 @@ class SynthesisElementHandler
         return $conditions;
     }
 
-    public function getElementsFromSynthesisByType($synthesis, $type = null)
+    public function getElementsFromSynthesisByType($synthesis, $type = null, $offset = 0, $limit = null)
     {
         $values = array_merge(['synthesis' => $synthesis], $this->getTypeConditions($type));
 
-        return $this->em->getRepository('CapcoAppBundle:Synthesis\SynthesisElement')->getWith($values);
+        $paginator = $this->em->getRepository('CapcoAppBundle:Synthesis\SynthesisElement')->getWith($values, $offset, $limit);
+
+        $elements = [];
+        foreach ($paginator as $element) {
+            $elements[] = $element;
+        }
+
+        return [
+            'elements' => $elements,
+            'count' => count($paginator),
+        ];
     }
 
     public function countElementsFromSynthesisByType($synthesis, $type = null)

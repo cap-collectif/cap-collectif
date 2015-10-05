@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\Repository\Synthesis;
 
 use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\Tools\Pagination\Paginator;
 
 /**
  * SynthesisElementRepository.
@@ -34,7 +35,7 @@ class SynthesisElementRepository extends EntityRepository
      *
      * @return int
      */
-    public function getWith($values)
+    public function getWith($values, $offset = 0, $limit = 10)
     {
         $qb = $this->createQueryBuilder('se')
             ->addSelect('a', 'am')
@@ -44,9 +45,11 @@ class SynthesisElementRepository extends EntityRepository
 
         $qb = $this->addQueryConditions($qb, $values);
 
-        return $qb
-            ->getQuery()
-            ->getResult();
+        $qb
+            ->setFirstResult($offset)
+            ->setMaxResults($limit);
+
+        return new Paginator($qb);
     }
 
     /**

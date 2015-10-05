@@ -3,6 +3,8 @@ import Loader from '../Utils/Loader';
 import SynthesisElementStore from '../../stores/SynthesisElementStore';
 import SynthesisElementActions from '../../actions/SynthesisElementActions';
 
+const Pagination = 15;
+
 const ElementsInbox = React.createClass({
   propTypes: {
     params: React.PropTypes.object,
@@ -13,7 +15,11 @@ const ElementsInbox = React.createClass({
   getInitialState() {
     return {
       elements: [],
+      count: 0,
       isLoading: true,
+      isLoadingMore: false,
+      offset: 0,
+      limit: Pagination,
     };
   },
 
@@ -35,8 +41,10 @@ const ElementsInbox = React.createClass({
     if (nextProps.params.type !== this.props.params.type) {
       this.setState({
         isLoading: true,
+        limit: Pagination,
+      }, () => {
+        this.loadElementsByTypeFromServer(nextProps.params.type);
       });
-      this.loadElementsByTypeFromServer(nextProps.params.type);
     }
   },
 
@@ -48,8 +56,11 @@ const ElementsInbox = React.createClass({
     if (!SynthesisElementStore.isProcessing && SynthesisElementStore.isInboxSync[this.props.params.type]) {
       this.setState({
         elements: SynthesisElementStore.elements[this.props.params.type],
+        count: SynthesisElementStore.counts[this.props.params.type],
         isLoading: false,
+        isLoadingMore: false,
       });
+      this.resetLoadMoreButton();
       return;
     }
 
@@ -76,20 +87,50 @@ const ElementsInbox = React.createClass({
     }
   },
 
+  renderLoadMore() {
+    if (!this.state.isLoading && (this.state.limit < this.state.count || this.state.isLoadingMore)) {
+      return (
+        <button className="btn btn-block btn-dark-grey" ref="loadMore" data-loading-text={this.getIntlMessage('common.loading')} onClick={this.loadMore.bind(this)}>
+          { this.getIntlMessage('common.elements.more') }
+        </button>
+      );
+    }
+  },
+
   render() {
     return (
       <div className="synthesis__inbox">
         <Loader show={this.state.isLoading} />
         {this.renderList()}
+        {this.renderLoadMore()}
       </div>
     );
+  },
+
+  resetLoadMoreButton() {
+    const loadMoreButton = React.findDOMNode(this.refs.loadMore);
+    if (loadMoreButton) {
+      $(loadMoreButton).button('reset');
+    }
   },
 
   loadElementsByTypeFromServer(type = this.props.params.type) {
     SynthesisElementActions.loadElementsFromServer(
       this.props.synthesis.id,
-      type
+      type,
+      this.state.offset,
+      this.state.limit
     );
+  },
+
+  loadMore() {
+    $(React.findDOMNode(this.refs.loadMore)).button('loading');
+    this.setState({
+      isLoadingMore: true,
+      limit: this.state.limit + Pagination,
+    }, () => {
+      this.loadElementsByTypeFromServer();
+    });
   },
 
 });
