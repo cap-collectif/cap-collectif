@@ -65,7 +65,7 @@ const OpinionBox = React.createClass({
       }
       {moreVotes !== null
         ? <span>+ {moreVotes}</span>
-        : <span />
+        : null
       }
       </div>
     );

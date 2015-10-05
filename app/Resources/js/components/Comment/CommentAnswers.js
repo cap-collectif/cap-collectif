@@ -15,7 +15,7 @@ const CommentAnswers = React.createClass({
         </div>
       );
     }
-    return <span />;
+    return null;
   },
 
 });

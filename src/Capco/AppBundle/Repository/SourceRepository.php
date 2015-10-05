@@ -6,7 +6,6 @@ use Capco\AppBundle\Entity\ConsultationStep;
 use Capco\AppBundle\Entity\Opinion;
 use Capco\AppBundle\Entity\OpinionVersion;
 use Doctrine\ORM\EntityRepository;
-use Doctrine\ORM\Query;
 
 /**
  * SourceRepository.
@@ -16,34 +15,6 @@ use Doctrine\ORM\Query;
  */
 class SourceRepository extends EntityRepository
 {
-    public function getRecentOrdered()
-    {
-        $qb = $this->createQueryBuilder('s')
-            ->select('s.id', 's.title', 's.createdAt', 's.updatedAt', 'a.username as author', 's.isEnabled as published', 's.isTrashed as trashed')
-            ->where('s.validated = :validated')
-            ->leftJoin('s.Author', 'a')
-            ->setParameter('validated', false)
-        ;
-
-        return $qb->getQuery()
-            ->getArrayResult()
-        ;
-    }
-
-    public function getArrayById($id)
-    {
-        $qb = $this->createQueryBuilder('s')
-            ->select('s.id', 's.title', 's.createdAt', 's.updatedAt', 'a.username as author', 's.isEnabled as published', 's.isTrashed as trashed', 's.body as body')
-            ->leftJoin('s.Author', 'a')
-            ->where('s.id = :id')
-            ->setParameter('id', $id)
-        ;
-
-        return $qb->getQuery()
-            ->getOneOrNullResult(Query::HYDRATE_ARRAY)
-            ;
-    }
-
     public function getByOpinion(Opinion $opinion, $offset, $limit, $filter)
     {
         $qb = $this->getIsEnabledQueryBuilder()
@@ -131,15 +102,15 @@ class SourceRepository extends EntityRepository
     }
 
     /**
-     * Get all trashed or unpublished sources for consultation.
+     * Get all trashed sources for consultation.
      *
      * @param $step
      *
      * @return mixed
      */
-    public function getTrashedOrUnpublishedByConsultation($consultation)
+    public function getTrashedByConsultation($consultation)
     {
-        $qb = $this->createQueryBuilder('s')
+        $qb = $this->getIsEnabledQueryBuilder()
             ->addSelect('ca', 'o', 'aut', 'm', 'media')
             ->leftJoin('s.Category', 'ca')
             ->leftJoin('s.Media', 'media')
@@ -150,10 +121,8 @@ class SourceRepository extends EntityRepository
             ->leftJoin('step.consultationAbstractStep', 'cas')
             ->andWhere('cas.consultation = :consultation')
             ->andWhere('s.isTrashed = :trashed')
-            ->orWhere('s.isEnabled = :disabled')
             ->setParameter('consultation', $consultation)
             ->setParameter('trashed', true)
-            ->setParameter('disabled', false)
             ->orderBy('s.trashedAt', 'DESC');
 
         return $qb->getQuery()->getResult();

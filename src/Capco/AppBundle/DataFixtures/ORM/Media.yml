@@ -64,6 +64,11 @@ Capco\MediaBundle\Entity\Media:
         name:          Spyl
         context:       @MediaContext1
 
+    MediaUser5:
+        binaryContent: ../files/user/welcomattic.jpg
+        enabled:       true
+        name:          Welcomattic
+        context:       @MediaContext1
 
     #SiteImages
     Logo:

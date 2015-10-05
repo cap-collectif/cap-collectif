@@ -519,8 +519,6 @@ opinion:
     all: Voir toutes les propositions
     articles_all: Voir tous les articles
     back: Retour
-    disabled:
-      label: Dépublié
     none: Il n'y a pas encore de proposition.
     no_opinion_types: Aucun type d'opinion n'est défini.
     pinned:
@@ -577,12 +575,6 @@ opinion:
     not_found: Proposition introuvable.
     not_author: Vous ne pouvez pas modifier cette proposition car vous n'en êtes pas l'auteur.
     no_contribute: Impossible de contribuer sur cette proposition.
-
-moderation:
-  notification:
-      subject: Votre contribution a fait l'objet d'une modération.
-      body: Bonjour,<br> nous avons le regret de vous informer que votre contribution "%title%" a été déplacée dans la corbeille pour le motif suivant :
-      contribution: Voir votre contribution
 
 reporting:
   create:

@@ -40,16 +40,16 @@ const ElementBlock = React.createClass({
   },
 
   renderDate() {
-    if (navigator.userAgent.indexOf('Safari') !== -1 && navigator.userAgent.indexOf('Chrome') === -1) {
+    if (!Modernizr.intl) {
       return this.getIntlMessage('common.elements.no_source_date');
     }
     if (this.props.element.has_linked_data) {
       if (this.props.element.linked_data_creation) {
-        return <FormattedDate value={this.props.element.linked_data_creation} day="numeric" month="long" year="numeric" />;
+        return <FormattedDate value={moment(this.props.element.linked_data_creation)} day="numeric" month="long" year="numeric" />;
       }
       return this.getIntlMessage('common.elements.no_source_date');
     }
-    return <FormattedDate value={this.props.element.updated_at} day="numeric" month="long" year="numeric" />;
+    return <FormattedDate value={moment(this.props.element.updated_at)} day="numeric" month="long" year="numeric" />;
   },
 
   render() {

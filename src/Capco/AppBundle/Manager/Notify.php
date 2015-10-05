@@ -97,7 +97,7 @@ class Notify implements MailerInterface
         $this->sendEmail($toEmail, $fromEmail, $fromName, $body, $subject);
     }
 
-    // Notifications for reporting and moderation
+    // Notifications to admin emails (reporting)
 
     public function sendNotifyMessage(Reporting $report)
     {
@@ -110,7 +110,7 @@ class Notify implements MailerInterface
                 ),
                 'CapcoAppBundle'
             );
-            $template = 'CapcoAppBundle:Mail:notifyReporting.html.twig';
+            $template = 'CapcoAppBundle:Mail:notify.html.twig';
             $type = $this->translator->trans(Reporting::$statusesLabels[$report->getStatus()], array(), 'CapcoAppBundle');
             $body = $this->templating->render(
                 $template,
@@ -125,26 +125,6 @@ class Notify implements MailerInterface
             );
 
             $this->sendEmail($to, $report->getReporter()->getEmail(), $report->getReporter()->getUsername(), $body, $subject);
-        }
-    }
-
-    public function notifyModeration($contribution)
-    {
-        $from = $this->resolver->getValue('admin.mail.notifications.receive_address');
-        if ($from && $contribution->getAuthor()) {
-            $subject = $this->translator->trans(
-                'moderation.notification.subject', [], 'CapcoAppBundle'
-            );
-            $template = 'CapcoAppBundle:Mail:notifyModeration.html.twig';
-            $body = $this->templating->render(
-                $template,
-                [
-                    'contribution' => $contribution,
-                    'trashUrl' => $this->urlResolver->getTrashedObjectUrl($contribution, true),
-                ]
-            );
-
-            $this->sendEmail($contribution->getAuthor()->getEmail(), $from, $from, $body, $subject);
         }
     }
 }

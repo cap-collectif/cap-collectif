@@ -104,11 +104,11 @@ Feature: Consultation
     Given I visited "consultation page" with:
       | consultationSlug | croissance-innovation-disruption |
       | stepSlug         | collecte-des-avis                |
-    Then I should see "121 contributions"
+    Then I should see "122 contributions"
     And I hover over the "#contributions-counter-pill" element
     And I wait 5 seconds
     And I should see "23 propositions"
-    And I should see "68 arguments"
+    And I should see "69 arguments"
     And I should see "30 sources"
 
   Scenario: Consultation header should display correct number of participants
@@ -165,8 +165,8 @@ Feature: Consultation
       | consultationSlug | croissance-innovation-disruption |
       | stepSlug         | collecte-des-avis                |
     When I follow "Corbeille"
-    Then I should see 132 ".opinion__list .opinion" elements
-    And I should see "132" in the "span.badge" element
+    Then I should see 55 ".opinion__list .opinion" elements
+    And I should see "55" in the "span.badge" element
 
   Scenario: I should not see opinion types menu when only one type is allowed
     Given I visited "consultation page" with:

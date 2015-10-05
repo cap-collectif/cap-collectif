@@ -6,41 +6,12 @@ use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 use Capco\AppBundle\Entity\Idea;
 use Capco\AppBundle\Entity\Theme;
-use Doctrine\ORM\Query;
 
 /**
  * IdeaRepository.
  */
 class IdeaRepository extends EntityRepository
 {
-    public function getRecentOrdered()
-    {
-        $qb = $this->createQueryBuilder('i')
-            ->select('i.id', 'i.title', 'i.createdAt', 'i.updatedAt', 'a.username as author', 'i.isEnabled as published', 'i.isTrashed as trashed')
-            ->where('i.validated = :validated')
-            ->leftJoin('i.Author', 'a')
-            ->setParameter('validated', false)
-        ;
-
-        return $qb->getQuery()
-            ->getArrayResult()
-        ;
-    }
-
-    public function getArrayById($id)
-    {
-        $qb = $this->createQueryBuilder('i')
-            ->select('i.id', 'i.title', 'i.createdAt', 'i.updatedAt', 'a.username as author', 'i.isEnabled as published', 'i.isTrashed as trashed', 'CONCAT(CONCAT(i.object, \'<hr>\'), i.body) as body')
-            ->leftJoin('i.Author', 'a')
-            ->where('i.id = :id')
-            ->setParameter('id', $id)
-        ;
-
-        return $qb->getQuery()
-            ->getOneOrNullResult(Query::HYDRATE_ARRAY)
-        ;
-    }
-
     /**
      * Get all trashed ideas.
      *

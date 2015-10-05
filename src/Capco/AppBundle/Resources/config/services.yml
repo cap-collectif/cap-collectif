@@ -190,7 +190,7 @@ services:
 
   capco.step.resolver:
     class: %capco.step.resolver.class%
-    arguments: [@capco.url.resolver]
+    arguments: [@router]
 
   capco.comment.resolver:
     class: %capco.comment.resolver.class%
@@ -399,7 +399,7 @@ services:
 
   capco.twig.url:
     class: Capco\AppBundle\Twig\UrlExtension
-    arguments: [@capco.url.resolver]
+    arguments: [@router, @capco.comment.resolver, @capco.step.resolver]
     tags:
       - { name: twig.extension }
 

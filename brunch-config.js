@@ -37,7 +37,8 @@ exports.config = {
           'bower_components/react/react-with-addons.js',
           'bower_components/flux/dist/Flux.js',
           'bower_components/fetch/fetch.js',
-          'bower_components/react-intl/dist/react-intl.min.js',
+          'bower_components/moment/moment.js',
+          'bower_components/react-intl/dist/react-intl.js',
           'bower_components/react-intl/dist/locale-data/fr.js',
           'bower_components/autosize/dist/autosize.js',
 
@@ -46,6 +47,7 @@ exports.config = {
           'app/Resources/js/jsapi.js',
           'app/Resources/js/cookiechoices.js',
           'app/Resources/js/googleCharts.js',
+          'app/Resources/js/modernizr.js',
           'bower_components/mailcheck/src/mailcheck.js',
           'bower_components/react-router/build/umd/ReactRouter.js',
           'bower_components/react-bootstrap/react-bootstrap.js',

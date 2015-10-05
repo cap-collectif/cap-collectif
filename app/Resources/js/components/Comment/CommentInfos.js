@@ -7,13 +7,14 @@ const CommentInfos = React.createClass({
   mixins: [ReactIntl.IntlMixin],
 
   renderDate() {
-    if (navigator.userAgent.indexOf('Safari') !== -1 && navigator.userAgent.indexOf('Chrome') === -1) {
-      return <span />;
+    if (!Modernizr.intl) {
+      return null;
     }
+
     return (
       <span className="excerpt">
         <FormattedDate
-            value={this.props.comment.created_at}
+            value={moment(this.props.comment.created_at)}
             day="numeric" month="long" year="numeric"
             hour="numeric" minute="numeric"
          />
@@ -22,12 +23,12 @@ const CommentInfos = React.createClass({
   },
 
   renderEditionDate() {
-    if (navigator.userAgent.indexOf('Safari') !== -1 && navigator.userAgent.indexOf('Chrome') === -1) {
-      return <span />;
+    if (!Modernizr.intl) {
+      return null;
     }
 
-    if (this.props.comment.updated_at === this.props.comment.created_at) {
-      return <span />;
+    if (moment(this.props.comment.updated_at).diff(this.props.comment.created_at, 'seconds') <= 1) {
+      return null;
     }
 
     return (
@@ -36,7 +37,7 @@ const CommentInfos = React.createClass({
         { this.getIntlMessage('comment.edited') }
         { ' ' }
         <FormattedDate
-            value={this.props.comment.updated_at}
+            value={moment(this.props.comment.updated_at)}
             day="numeric" month="long" year="numeric"
             hour="numeric" minute="numeric"
          />

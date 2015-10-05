@@ -2,7 +2,6 @@
 
 namespace Capco\AppBundle\Entity;
 
-use Capco\AppBundle\Traits\ValidableTrait;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -28,7 +27,6 @@ class OpinionVersion
     use SluggableTitleTrait;
     use TimestampableTrait;
     use VotableTrait;
-    use ValidableTrait;
 
     /**
      * @var int

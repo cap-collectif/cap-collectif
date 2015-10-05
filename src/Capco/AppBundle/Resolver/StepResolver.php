@@ -4,20 +4,38 @@ namespace Capco\AppBundle\Resolver;
 
 use Capco\AppBundle\Entity\Consultation;
 use Capco\AppBundle\Entity\AbstractStep;
-use Capco\AppBundle\Resolver\UrlResolver;
+use Symfony\Component\Routing\Router;
 
 class StepResolver
 {
-    private $urlResolver;
+    private $router;
 
-    public function __construct(UrlResolver $urlResolver)
+    public function __construct(Router $router)
     {
-        $this->urlResolver = $urlResolver;
+        $this->router = $router;
     }
 
     public function getLink(AbstractStep $step = null, $absolute = false)
     {
-        return $this->urlResolver->getObjectUrl($step, $absolute);
+        if (null != $step) {
+            if ($step->isConsultationStep()) {
+                return $this->router->generate('app_consultation_show', array('consultationSlug' => $step->getConsultation()->getSlug(), 'stepSlug' => $step->getSlug()), $absolute);
+            }
+            if ($step->isPresentationStep()) {
+                return $this->router->generate('app_consultation_show_presentation', array('consultationSlug' => $step->getConsultation()->getSlug(), 'stepSlug' => $step->getSlug()), $absolute);
+            }
+            if ($step->isOtherStep()) {
+                return $this->router->generate('app_consultation_show_step', array('consultationSlug' => $step->getConsultation()->getSlug(), 'stepSlug' => $step->getSlug()), $absolute);
+            }
+            if ($step->isSynthesisStep()) {
+                return $this->router->generate('app_consultation_show_synthesis', array('consultationSlug' => $step->getConsultation()->getSlug(), 'stepSlug' => $step->getSlug()), $absolute);
+            }
+            if ($step->isRankingStep()) {
+                return $this->router->generate('app_consultation_show_ranking', array('consultationSlug' => $step->getConsultation()->getSlug(), 'stepSlug' => $step->getSlug()), $absolute);
+            }
+        }
+
+        return;
     }
 
     public function getFirstStepLinkForConsultation(Consultation $consultation, $absolute = false)

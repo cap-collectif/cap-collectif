@@ -131,7 +131,6 @@ class SourceController extends Controller
                 $em = $this->getDoctrine()->getManager();
 
                 $source->resetVotes();
-                $source->setValidated(false);
 
                 if ($type === 0) {
                     $source->setMedia(null);

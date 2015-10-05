@@ -7,46 +7,11 @@ use Capco\AppBundle\Entity\ConsultationStep;
 use Capco\AppBundle\Entity\OpinionType;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityRepository;
-use Doctrine\ORM\Query;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 use Capco\AppBundle\Entity\Opinion;
 
 class OpinionRepository extends EntityRepository
 {
-    public function getRecentOrdered()
-    {
-        $qb = $this->createQueryBuilder('o')
-            ->select('o.id', 'o.title', 'o.createdAt', 'o.updatedAt', 'a.username as author', 'o.isEnabled as published', 'o.isTrashed as trashed', 'c.title as consultation')
-            ->where('o.validated = :validated')
-            ->leftJoin('o.Author', 'a')
-            ->leftJoin('o.step', 's')
-            ->leftJoin('s.consultationAbstractStep', 'cas')
-            ->leftJoin('cas.consultation', 'c')
-            ->setParameter('validated', false)
-        ;
-
-        return $qb->getQuery()
-            ->getArrayResult()
-        ;
-    }
-
-    public function getArrayById($id)
-    {
-        $qb = $this->createQueryBuilder('o')
-            ->select('o.id', 'o.title', 'o.createdAt', 'o.updatedAt', 'a.username as author', 'o.isEnabled as published', 'o.isTrashed as trashed', 'o.body as body', 'c.title as consultation')
-            ->leftJoin('o.Author', 'a')
-            ->leftJoin('o.step', 's')
-            ->leftJoin('s.consultationAbstractStep', 'cas')
-            ->leftJoin('cas.consultation', 'c')
-            ->where('o.id = :id')
-            ->setParameter('id', $id)
-        ;
-
-        return $qb->getQuery()
-            ->getOneOrNullResult(Query::HYDRATE_ARRAY)
-        ;
-    }
-
     public function getOne($id)
     {
         $qb = $this->getIsEnabledQueryBuilder()
@@ -175,15 +140,15 @@ class OpinionRepository extends EntityRepository
     }
 
     /**
-     * Get all trashed or unpublished opinions.
+     * Get all trashed opinions.
      *
      * @param $consultation
      *
      * @return array
      */
-    public function getTrashedOrUnpublishedByConsultation($consultation)
+    public function getTrashedByConsultation($consultation)
     {
-        $qb = $this->createQueryBuilder('o')
+        $qb = $this->getIsEnabledQueryBuilder()
             ->addSelect('ot', 's', 'aut', 'm')
             ->leftJoin('o.OpinionType', 'ot')
             ->leftJoin('o.Author', 'aut')
@@ -192,10 +157,8 @@ class OpinionRepository extends EntityRepository
             ->leftJoin('s.consultationAbstractStep', 'cas')
             ->andWhere('cas.consultation = :consultation')
             ->andWhere('o.isTrashed = :trashed')
-            ->orWhere('o.isEnabled = :disabled')
             ->setParameter('consultation', $consultation)
             ->setParameter('trashed', true)
-            ->setParameter('disabled', false)
             ->orderBy('o.trashedAt', 'DESC');
 
         return $qb->getQuery()->getResult();

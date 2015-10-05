@@ -56,12 +56,12 @@ const Comment = React.createClass({
                   { ' ' }
                   { this.getIntlMessage('global.answer') }
                 </a>
-              : <span />
+              : null
             )}
             {' '}
             {(this.props.isReportingEnabled === true && !this.isTheUserTheAuthor()
               ? <CommentReport comment={comment} />
-              : <span />
+              : null
             )}
             {' '}
             <CommentEdit comment={comment} />
@@ -70,11 +70,11 @@ const Comment = React.createClass({
           <div className="comment-answers-block">
             {(this.props.root === true
               ? <CommentAnswers isReportingEnabled={this.props.isReportingEnabled} comments={comment.answers} />
-              : <span />
+              : null
             )}
             {(this.state.answerFormShown === true
               ? <CommentForm comment={this.comment.bind(this)} focus={this.state.answerFormFocus} isAnswer={true}/>
-              : <span />
+              : null
             )}
           </div>
         </div>
