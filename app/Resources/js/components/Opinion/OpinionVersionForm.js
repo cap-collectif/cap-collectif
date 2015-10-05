@@ -40,7 +40,6 @@ const OpinionVersionForm = React.createClass({
   },
 
   componentDidMount() {
-
     const constraints = {
       title: {
         notBlank: {message: 'opinion.version.title_error'},
@@ -50,11 +49,6 @@ const OpinionVersionForm = React.createClass({
         notEqual: {value: this.props.opinionBody, message: 'opinion.version.body_error'},
       },
     };
-    if (this.props.mode === 'edit') {
-      constraints.confirm = {
-        isTrue: {message: 'opinion.version.confirm_error'},
-      };
-    }
     this.initForm('form', constraints);
   },
 
@@ -113,19 +107,6 @@ const OpinionVersionForm = React.createClass({
               </p>
             </div>
             <form ref="form">
-              { this.props.mode === 'edit'
-                ? <div className={'form-group ' + this.getGroupStyle('confirm')}>
-                    <Input
-                      ref="confirm"
-                      name="confirm"
-                      type="checkbox"
-                      bsStyle={this.getFieldStyle('confirm')}
-                      label={this.getIntlMessage('opinion.version.confirm')}
-                    />
-                    {this.renderFormErrors('confirm')}
-                  </div>
-                : null
-              }
               <div className={'form-group ' + this.getGroupStyle('title')}>
                 <label htmlFor="title" className="control-label h5">
                   {this.getIntlMessage('opinion.version.title')}

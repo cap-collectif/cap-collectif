@@ -77,7 +77,7 @@ const OpinionArgumentForm = React.createClass({
                     : this.getIntlMessage('global.publish')
                   }
                 </Button>
-              : <span />
+              : null
             }
           </form>
         </div>

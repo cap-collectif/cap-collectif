@@ -14,7 +14,7 @@ use Capco\UserBundle\Entity\User;
 /**
  * Opinion.
  *
- * @ORM\Table(name="opinion",indexes={@ORM\Index(name="idx_enabled", columns={"id", "enabled"})})
+ * @ORM\Table(name="opinion")
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\OpinionRepository")
  * @ORM\HasLifecycleCallbacks()
  */
@@ -624,7 +624,7 @@ class Opinion
     public function getVoteValueByUser(User $user)
     {
         foreach ($this->votes as $vote) {
-            if ($vote->getUser() === $user && $vote->isConfirmed()) {
+            if ($vote->getUser() === $user) {
                 return $vote->getValue();
             }
         }
@@ -717,10 +717,13 @@ class Opinion
         }
     }
 
+    /**
+     * @return $this
+     */
     public function resetVotes()
     {
         foreach ($this->votes as $vote) {
-            $this->removeVote($vote);
+            $vote->setConfirmed(false);
         }
         $this->voteCountMitige = 0;
         $this->voteCountNok = 0;

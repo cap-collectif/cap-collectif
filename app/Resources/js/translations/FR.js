@@ -114,11 +114,9 @@ export default {
                 title: 'Titre *',
                 body: 'Modification *',
                 body_helper: 'Modifiez le texte',
-                confirm: 'En modifiant ma contribution, je comprends que tous les votes qui lui sont associés seront réinitialisés.',
                 comment: 'Explication',
                 comment_helper: 'Expliquez pourquoi vous souhaitez apporter ces modifications',
                 title_error: 'Le titre doit contenir au moins 2 caractères.',
-                confirm_error: 'Vous devez confirmer la perte de vos votes pour continuer.',
                 body_error: 'Vous devez modifier le contenu de la proposition d\'origine pour pouvoir proposer une modification.',
             },
             diff: {

@@ -11,7 +11,7 @@ use Capco\AppBundle\Traits\ConfirmableTrait;
  * Class AbstractVote.
  *
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\AbstractVoteRepository")
- * @ORM\Table(name="votes",indexes={@ORM\Index(name="idx_voter_confirmed", columns={"voter_id", "confirmed"})})
+ * @ORM\Table(name="votes")
  * @ORM\HasLifecycleCallbacks()
  * @ORM\InheritanceType("SINGLE_TABLE")
  * @ORM\DiscriminatorColumn(name = "voteType", type = "string")
