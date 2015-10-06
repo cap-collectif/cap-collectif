@@ -3,7 +3,6 @@
 namespace Capco\AppBundle\Twig;
 
 use Capco\AppBundle\Resolver\UrlResolver;
-use Symfony\Component\Routing\Router;
 
 class UrlExtension extends \Twig_Extension
 {

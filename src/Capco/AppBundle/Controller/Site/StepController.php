@@ -22,7 +22,7 @@ class StepController extends Controller
      * @ParamConverter("step", class="CapcoAppBundle:OtherStep", options={"mapping": {"stepSlug": "slug"}})
      *
      * @param $consultationSlug
-     * @param OtherStep    $step
+     * @param OtherStep $step
      *
      * @return array
      */

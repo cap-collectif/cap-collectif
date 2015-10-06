@@ -3,7 +3,6 @@
 namespace Capco\AppBundle\Traits;
 
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Validator\Constraints as Assert;
 
 trait ValidableTrait
 {
@@ -22,11 +21,13 @@ trait ValidableTrait
 
     /**
      * @param mixed $validated
+     *
      * @return this
      */
     public function setValidated($validated)
     {
         $this->validated = $validated;
+
         return $this;
     }
 }

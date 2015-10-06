@@ -22,5 +22,4 @@ class CapcoAppBundle extends Bundle
     {
         $container->addCompilerPass(new SonataMediaResizerServicePass());
     }
-
 }

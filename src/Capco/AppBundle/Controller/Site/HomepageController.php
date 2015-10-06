@@ -49,9 +49,9 @@ class HomepageController extends Controller
             }
         }
 
-        $response = $this->render("CapcoAppBundle:Homepage:homepage.html.twig", array(
+        $response = $this->render('CapcoAppBundle:Homepage:homepage.html.twig', array(
             'form' => $newsletterActive ? $form->createView() : false,
-            'sections' => $sections
+            'sections' => $sections,
         ));
 
         if ($this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_ANONYMOUSLY')) {

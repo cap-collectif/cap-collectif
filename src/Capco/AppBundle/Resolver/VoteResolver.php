@@ -2,14 +2,7 @@
 
 namespace Capco\AppBundle\Resolver;
 
-use Capco\AppBundle\Entity\Idea;
-use Capco\AppBundle\Entity\Argument;
-use Capco\AppBundle\Entity\AbstractComment;
-use Capco\AppBundle\Entity\Opinion;
-use Capco\AppBundle\Entity\OpinionVersion;
-use Capco\AppBundle\Entity\Source;
 use Capco\AppBundle\Entity\AbstractVote as Vote;
-use Capco\AppBundle\Manager\CommentResolver;
 use Symfony\Component\Routing\Router;
 
 class VoteResolver

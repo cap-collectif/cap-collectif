@@ -25,13 +25,11 @@ class RecalculateRankingsCommand extends ContainerAwareCommand
             ->findAll();
 
         foreach ($consultations as $consultation) {
-
             $excludedAuthor = !$consultation->getIncludeAuthorInRanking() ? $consultation->getAuthor()->getId() : null;
 
             // Opinions
             $opinions = $em->getRepository('CapcoAppBundle:Opinion')
                 ->getEnabledByConsultationsOrderedByVotes($consultation, $excludedAuthor);
-            ;
             $prevValue = null;
             $prevRanking = 1;
             foreach ($opinions as $key => $opinion) {

@@ -77,7 +77,7 @@ class ConsultationController extends Controller
 
         $nav = $this->get('capco.opinion_types.resolver')->getNavForStep($currentStep);
 
-        $response = $this->render("CapcoAppBundle:Consultation:show.html.twig", array(
+        $response = $this->render('CapcoAppBundle:Consultation:show.html.twig', array(
             'consultation' => $consultation,
             'currentStep' => $currentStep,
             'nav' => $nav,
@@ -210,7 +210,7 @@ class ConsultationController extends Controller
      * @ParamConverter("consultation", class="CapcoAppBundle:Consultation", options={"mapping": {"consultationSlug": "slug"}})
      * @Template("CapcoAppBundle:Consultation:show_trashed.html.twig")
      *
-     * @param Consultation  $consultation
+     * @param Consultation $consultation
      *
      * @return array
      */

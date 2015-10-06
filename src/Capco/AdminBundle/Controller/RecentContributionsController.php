@@ -2,9 +2,7 @@
 
 namespace Capco\AdminBundle\Controller;
 
-use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -99,7 +97,6 @@ class RecentContributionsController extends Controller
         }
 
         if ('POST' === $request->getMethod()) {
-
             $motives = $request->get('motives');
             $contribution->setValidated(true);
             $contribution->setIsEnabled(false);
@@ -122,9 +119,9 @@ class RecentContributionsController extends Controller
         }
 
         return $this->render('CapcoAdminBundle:RecentContributions:confirm.html.twig', [
-            'type'       => $type,
-            'id'         => $id,
-            'del_action'     => 'unpublish',
+            'type' => $type,
+            'id' => $id,
+            'del_action' => 'unpublish',
             'base_template' => 'CapcoAdminBundle::standard_layout.html.twig',
             'admin_pool' => $this->get('sonata.admin.pool'),
         ], null);
@@ -145,7 +142,6 @@ class RecentContributionsController extends Controller
         }
 
         if ('POST' === $request->getMethod()) {
-
             $motives = $request->get('motives');
             $contribution->setValidated(true);
             $contribution->setIsTrashed(true);
@@ -167,9 +163,9 @@ class RecentContributionsController extends Controller
         }
 
         return $this->render('CapcoAdminBundle:RecentContributions:confirm.html.twig', [
-            'type'       => $type,
-            'id'         => $id,
-            'del_action'     => 'trash',
+            'type' => $type,
+            'id' => $id,
+            'del_action' => 'trash',
             'base_template' => 'CapcoAdminBundle::standard_layout.html.twig',
             'admin_pool' => $this->get('sonata.admin.pool'),
         ], null);

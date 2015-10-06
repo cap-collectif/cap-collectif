@@ -17,7 +17,7 @@ const idOf = (val) => {
 
 const updateElementFromData = (synthesis, element, data, successMessage = 'common.success.update_success', errorMessage = 'common.errors.update_error') => {
   return Fetcher
-    .put('/syntheses/' + synthesis + '/elements/' + element, data)
+    .put(`/syntheses/${synthesis}/elements/${element}`, data)
     .then(() => {
       AppDispatcher.dispatch({
         actionType: UPDATE_ELEMENT_SUCCESS,
@@ -36,7 +36,7 @@ const updateElementFromData = (synthesis, element, data, successMessage = 'commo
 
 const createElementFromData = (synthesis, data, successMessage = 'common.success.update_success', errorMessage = 'common.errors.update_error') => {
   return Fetcher
-    .post('/syntheses/' + synthesis + '/elements', data)
+    .post(`/syntheses/${synthesis}/elements`, data)
     .then(() => {
       AppDispatcher.dispatch({
         actionType: CREATE_ELEMENT_SUCCESS,
@@ -105,7 +105,7 @@ export default {
 
   loadElementFromServer: (synthesis, element) => {
     Fetcher
-      .get('/syntheses/' + synthesis + '/elements/' + element)
+      .get(`/syntheses/${synthesis}/elements/${element}`)
       .then((data) => {
         AppDispatcher.dispatch({
           actionType: RECEIVE_ELEMENT,
@@ -117,11 +117,7 @@ export default {
 
   loadElementsFromServer: (synthesis, type, offset, limit) => {
     Fetcher
-      .get('/syntheses/' + synthesis
-        + '/elements?type=' + type
-        + '&offset=' + offset
-        + '&limit=' + limit
-      )
+      .get(`/syntheses/${synthesis}/elements?type=${type}&offset=${offset}&limit=${limit}`)
       .then((data) => {
         data.actionType = RECEIVE_ELEMENTS;
         data.type = type;
@@ -132,7 +128,7 @@ export default {
 
   loadElementsTreeFromServer: (synthesis, type) => {
     Fetcher
-      .get('/syntheses/' + synthesis + '/elements/tree?type=' + type)
+      .get(`/syntheses/${synthesis}/elements/tree?type=${type}`)
       .then((data) => {
         data.actionType = RECEIVE_ELEMENTS;
         data.type = type + 'Tree';
@@ -143,7 +139,7 @@ export default {
 
   loadElementsCountFromServer: (synthesis, type) => {
     Fetcher
-      .get('/syntheses/' + synthesis + '/elements/count?type=' + type)
+      .get(`/syntheses/${synthesis}/elements/count?type=${type}`)
       .then((data) => {
         AppDispatcher.dispatch({
           actionType: RECEIVE_COUNT,

@@ -4,7 +4,6 @@ namespace Capco\AppBundle\Resolver;
 
 use Capco\AppBundle\Entity\Consultation;
 use Capco\AppBundle\Entity\AbstractStep;
-use Capco\AppBundle\Resolver\UrlResolver;
 
 class StepResolver
 {

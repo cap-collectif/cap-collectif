@@ -215,6 +215,4 @@ class OpinionVersionAdmin extends Admin
     {
         return;
     }
-
-
 }

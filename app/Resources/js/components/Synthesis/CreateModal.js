@@ -37,7 +37,7 @@ const CreateModal = React.createClass({
   },
 
   componentDidMount() {
-    this.fetchElementsTreeFromServer();
+    this.fetchElementsTree();
   },
 
   componentWillUnmount() {
@@ -45,7 +45,7 @@ const CreateModal = React.createClass({
   },
 
   onChange() {
-    this.fetchElementsTreeFromServer();
+    this.fetchElementsTree();
   },
 
   renderName() {
@@ -137,7 +137,7 @@ const CreateModal = React.createClass({
     SynthesisElementActions.create(this.props.synthesis.id, element);
   },
 
-  fetchElementsTreeFromServer() {
+  fetchElementsTree() {
     if (!SynthesisElementStore.isProcessing && SynthesisElementStore.isInboxSync.allTree) {
       this.setState({
         elementsTree: SynthesisElementStore.elements.allTree,

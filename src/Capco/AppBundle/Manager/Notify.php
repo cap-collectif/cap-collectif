@@ -2,13 +2,7 @@
 
 namespace Capco\AppBundle\Manager;
 
-use Capco\AppBundle\Entity\AbstractComment;
-use Capco\AppBundle\Entity\Argument;
-use Capco\AppBundle\Entity\Idea;
-use Capco\AppBundle\Entity\Opinion;
-use Capco\AppBundle\Entity\OpinionVersion;
 use Capco\AppBundle\Entity\Reporting;
-use Capco\AppBundle\Entity\Source;
 use Capco\AppBundle\Resolver\UrlResolver;
 use Capco\AppBundle\SiteParameter\Resolver;
 use Capco\UserBundle\Entity\User;

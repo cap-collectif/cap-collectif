@@ -152,8 +152,7 @@ class ReportingAdmin extends Admin
         if ($name === 'show') {
             return 'CapcoAdminBundle:Reporting:show.html.twig';
         }
+
         return parent::getTemplate($name);
     }
-
-
 }

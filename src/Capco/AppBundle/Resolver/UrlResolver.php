@@ -3,7 +3,6 @@
 namespace Capco\AppBundle\Resolver;
 
 use Capco\AppBundle\Entity\AbstractStep;
-use Capco\AppBundle\Entity\Consultation;
 use Capco\AppBundle\Entity\Event;
 use Capco\AppBundle\Entity\Idea;
 use Capco\AppBundle\Entity\Argument;
@@ -12,9 +11,7 @@ use Capco\AppBundle\Entity\Opinion;
 use Capco\AppBundle\Entity\OpinionVersion;
 use Capco\AppBundle\Entity\Post;
 use Capco\AppBundle\Entity\Source;
-use Capco\AppBundle\Entity\AbstractVote as Vote;
 use Capco\AppBundle\Entity\Theme;
-use Capco\AppBundle\Manager\CommentResolver;
 use Capco\UserBundle\Entity\User;
 use Symfony\Component\Routing\Router;
 
@@ -34,12 +31,13 @@ class UrlResolver
                 'consultationSlug' => $object->getStep()->getConsultation()->getSlug(),
                 'stepSlug' => $object->getStep()->getSlug(),
                 'opinionTypeSlug' => $object->getOpinionType()->getSlug(),
-                'opinionSlug' => $object->getSlug()
+                'opinionSlug' => $object->getSlug(),
             ], $absolute);
         }
 
         if ($object instanceof OpinionVersion) {
             $opinion = $object->getParent();
+
             return $this->router->generate('app_consultation_show_opinion_version', [
                 'consultationSlug' => $opinion->getStep()->getConsultation()->getSlug(),
                 'stepSlug' => $opinion->getStep()->getSlug(),
@@ -54,7 +52,6 @@ class UrlResolver
 
     public function getStepUrl($step, $absolute = false)
     {
-
         if ($step->isConsultationStep()) {
             return $this->router->generate('app_consultation_show', array('consultationSlug' => $step->getConsultation()->getSlug(), 'stepSlug' => $step->getSlug()), $absolute);
         }
@@ -70,6 +67,7 @@ class UrlResolver
         if ($step->isRankingStep()) {
             return $this->router->generate('app_consultation_show_ranking', array('consultationSlug' => $step->getConsultation()->getSlug(), 'stepSlug' => $step->getSlug()), $absolute);
         }
+
         return '';
     }
 
@@ -132,7 +130,7 @@ class UrlResolver
             return $url;
         }
 
-        return null;
+        return;
     }
 
     public function getAdminObjectUrl($object, $absolute = false)

@@ -28,7 +28,7 @@ class PageController extends Controller
             throw $this->createNotFoundException($this->get('translator')->trans('page.error.not_found', array(), 'CapcoAppBundle'));
         }
 
-        $response = $this->render("CapcoAppBundle:Page:show.html.twig", array(
+        $response = $this->render('CapcoAppBundle:Page:show.html.twig', array(
             'page' => $page,
         ));
 

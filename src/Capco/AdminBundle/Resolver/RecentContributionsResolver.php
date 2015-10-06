@@ -11,13 +11,13 @@ class RecentContributionsResolver
     protected $em;
     protected $toggleManager;
 
-    function __construct(EntityManager $em, Manager $toggleManager)
+    public function __construct(EntityManager $em, Manager $toggleManager)
     {
         $this->em = $em;
         $this->toggleManager = $toggleManager;
     }
 
-    function getEntityByTypeAndId($type, $id)
+    public function getEntityByTypeAndId($type, $id)
     {
         switch ($type) {
             case 'argument':
@@ -42,10 +42,11 @@ class RecentContributionsResolver
                 throw new NotFoundHttpException('Contribution not found for type '.$type.' and id '.$id);
                 break;
         }
+
         return $result;
     }
 
-    function getContributionByTypeAndId($type, $id)
+    public function getContributionByTypeAndId($type, $id)
     {
         switch ($type) {
             case 'argument':
@@ -74,16 +75,17 @@ class RecentContributionsResolver
         }
 
         $result['type'] = $type;
+
         return $result;
     }
 
-    function getRecentContributions($limit = null)
+    public function getRecentContributions($limit = null)
     {
         $opinions = $this->em
             ->getRepository('CapcoAppBundle:Opinion')
             ->getRecentOrdered();
         foreach ($opinions as $key => $opinion) {
-            $opinions[$key]['type'] ='opinion';
+            $opinions[$key]['type'] = 'opinion';
         }
 
         $versions = $this->em
@@ -91,7 +93,7 @@ class RecentContributionsResolver
             ->getRecentOrdered()
         ;
         foreach ($versions as $key => $version) {
-            $versions[$key]['type'] ='version';
+            $versions[$key]['type'] = 'version';
         }
 
         $arguments = $this->em
@@ -100,7 +102,7 @@ class RecentContributionsResolver
         ;
         foreach ($arguments as $key => $argument) {
             $arguments[$key]['title'] = 'Argument';
-            $arguments[$key]['type'] ='argument';
+            $arguments[$key]['type'] = 'argument';
         }
 
         $sources = $this->em
@@ -108,7 +110,7 @@ class RecentContributionsResolver
             ->getRecentOrdered()
         ;
         foreach ($sources as $key => $source) {
-            $sources[$key]['type'] ='source';
+            $sources[$key]['type'] = 'source';
         }
 
         $ideas = $this->em
@@ -116,7 +118,7 @@ class RecentContributionsResolver
             ->getRecentOrdered()
         ;
         foreach ($ideas as $key => $idea) {
-            $ideas[$key]['type'] ='idea';
+            $ideas[$key]['type'] = 'idea';
         }
 
         $comments = $this->em
@@ -125,15 +127,16 @@ class RecentContributionsResolver
         ;
         foreach ($comments as $key => $comment) {
             $comments[$key]['title'] = 'Commentaire';
-            $comments[$key]['type'] ='comment';
+            $comments[$key]['type'] = 'comment';
         }
 
         $contributions = array_merge($opinions, $arguments, $versions, $sources, $ideas, $comments);
 
-        usort($contributions, function($a, $b) {
+        usort($contributions, function ($a, $b) {
             if ($a['updatedAt'] == $b['updatedAt']) {
                 return 0;
             }
+
             return $a['updatedAt'] < $b['updatedAt'] ? +1 : -1;
         });
 
@@ -143,6 +146,4 @@ class RecentContributionsResolver
 
         return $contributions;
     }
-
-
 }

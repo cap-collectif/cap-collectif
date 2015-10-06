@@ -227,7 +227,6 @@ class CreatePJLFromCsvCommand extends ContainerAwareCommand
 
     protected function generateMedias()
     {
-
         $em = $this->getContainer()->get('doctrine')->getManager();
 
         foreach ($em->getRepository('CapcoMediaBundle:Media')->findAll() as $media) {
@@ -381,7 +380,7 @@ class CreatePJLFromCsvCommand extends ContainerAwareCommand
                 $opinion->setAuthor($user);
                 $opinion->setStep($consultationStep);
                 $opinion->setPosition($i);
-                $i++;
+                ++$i;
             }
 
             $content = $opinion->getBody();
@@ -398,7 +397,7 @@ class CreatePJLFromCsvCommand extends ContainerAwareCommand
                           ->findOneByTitle($row['opinion']);
 
             if (!is_object($opinion)) {
-                throw new \Exception('Unknown title: ' . $row['opinion'], 1);
+                throw new \Exception('Unknown title: '.$row['opinion'], 1);
             }
 
             if (count($opinion->getAppendices()) === 0) {
@@ -417,13 +416,12 @@ class CreatePJLFromCsvCommand extends ContainerAwareCommand
             $progress->advance(1);
         }
 
-
         foreach ($modals as $row) {
             $opinion = $em->getRepository('CapcoAppBundle:Opinion')
                           ->findOneByTitle($row['opinion']);
 
             if (!is_object($opinion)) {
-                throw new \Exception('Unknown title: ' . $row['opinion'], 1);
+                throw new \Exception('Unknown title: '.$row['opinion'], 1);
             }
 
             $modal = new OpinionModal();

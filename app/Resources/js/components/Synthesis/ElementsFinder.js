@@ -26,7 +26,7 @@ const ElementsFinder = React.createClass({
   },
 
   componentDidMount() {
-    this.fetchElementsTreeFromServer();
+    this.fetchElementsTree();
   },
 
   componentWillUnmount() {
@@ -34,7 +34,7 @@ const ElementsFinder = React.createClass({
   },
 
   onChange() {
-    this.fetchElementsTreeFromServer();
+    this.fetchElementsTree();
   },
 
   getExpandedBasedOnSelectedId() {
@@ -163,7 +163,7 @@ const ElementsFinder = React.createClass({
     }
   },
 
-  fetchElementsTreeFromServer() {
+  fetchElementsTree() {
     if (!SynthesisElementStore.isProcessing && SynthesisElementStore.isInboxSync.allTree) {
       this.setState({
         elements: SynthesisElementStore.elements.allTree,

@@ -3,8 +3,6 @@
 namespace Capco\AdminBundle\Block;
 
 use Capco\AdminBundle\Resolver\RecentContributionsResolver;
-use Capco\AppBundle\Toggle\Manager;
-use Doctrine\ORM\EntityManager;
 use Sonata\BlockBundle\Block\BaseBlockService;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\BlockBundle\Model\BlockInterface;

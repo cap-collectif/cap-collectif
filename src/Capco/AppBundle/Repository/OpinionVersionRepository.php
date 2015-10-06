@@ -134,7 +134,6 @@ class OpinionVersionRepository extends EntityRepository
         return new Paginator($qb);
     }
 
-
     public function getByUser($user)
     {
         return $this->getIsEnabledQueryBuilder('ov')
