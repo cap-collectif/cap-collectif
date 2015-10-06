@@ -1,0 +1,65 @@
+{% extends '@CapcoApp/Project/show.html.twig' %}
+
+{% block canonical_link %}{{ url('app_project_show_events', {'projectSlug': project.slug}) }}{% endblock %}
+
+{% block metaTags %}
+    <meta property="og:title" content="{{ project.title }} - Events" />
+    <meta property="og:url" content="{{ url('app_project_show_events', {'projectSlug': project.slug}) }}" />
+    <meta property="og:type" content="project" />
+    {% if project.Cover %}
+        <meta property="og:image" content="{% path project.Cover, 'blockHeader' %}" />
+    {% endif %}
+    <meta property="article:author" content="{{ url('capco_user_profile_show_all', {'slug': project.Author.slug}) }}" />
+    <meta property="article:publisher" content="{{ url('capco_user_profile_show_all', {'slug': project.Author.slug}) }}" />
+{% endblock %}
+
+{% block title %}
+    {{ parent() }} - {{ 'project.show.events.title' | trans({}, 'CapcoAppBundle') }}
+{% endblock %}
+
+{% block jumbotron %}
+{% endblock %}
+
+{% block body %}
+    <div class="container  container--custom">
+        {% include '@CapcoApp/Project/show_title.html.twig' %}
+    </div>
+
+    <div class="container  container--custom">
+        <div class="row">
+            <div class="col-xs-12  col-sm-4  col-md-3">
+                {{ render(controller('CapcoAppBundle:Site/Project:showMeta', {'projectSlug': project.slug, 'currentStepSlug': 'events_step'})) }}
+            </div>
+
+            <div class="col-xs-12  col-sm-8  col-md-9" id="details">
+                <div class="block  box">
+                    <h2 class="h2">{{ 'project.show.events.title' | trans({}, 'CapcoAppBundle') }} <span class="small excerpt">{{ nbEvents }}</span></h2>
+                    {% for year, months in years %}
+                        {% for month, events in months %}
+                            {% set date = (year ~ '-' ~ month ~ '-01') %}
+                            <h3>{{ date | localizeddate('none', 'none', app.request.locale, null, "MMMM Y") | capitalize }}</h3>
+                            <div class="row">
+                                {% for event in events %}
+                                    {% include '@CapcoApp/Event/blockEvent.html.twig' with {'event': event, 'col_classes': 'col-md-6  col-sm-12'} only %}
+                                {% endfor %}
+                            </div>
+                        {% endfor %}
+                    {% endfor %}
+                </div>
+            </div> <!-- col-xs-12  col-sm-8  col-md-9 -->
+        </div> <!-- .row -->
+    </div>
+
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script type="text/javascript">
+        $(window).on('load', function() {
+            App.equalheight('.event-js');
+        });
+        $(window).on('resize', function() {
+            App.resized('.event-js');
+        });
+    </script>
+{% endblock %}

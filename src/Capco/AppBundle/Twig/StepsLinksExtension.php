@@ -37,13 +37,13 @@ class StepsLinksExtension extends \Twig_Extension
         return $this->resolver->getLink($step, $absolute);
     }
 
-    public function getFirstStepLink($consultation, $absolute = false)
+    public function getFirstStepLink($project, $absolute = false)
     {
-        return $this->resolver->getFirstStepLinkForConsultation($consultation, $absolute);
+        return $this->resolver->getFirstStepLinkForProject($project, $absolute);
     }
 
-    public function getCurrentStepLink($consultation, $absolute = false)
+    public function getCurrentStepLink($project, $absolute = false)
     {
-        return $this->resolver->getCurrentStepLinkForConsultation($consultation, $absolute);
+        return $this->resolver->getCurrentStepLinkForProject($project, $absolute);
     }
 }

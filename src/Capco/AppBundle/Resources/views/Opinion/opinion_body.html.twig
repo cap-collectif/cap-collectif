@@ -40,11 +40,11 @@
             {% endif %}
             {% if opinion.isEnabled %}
                 {% if isVersion %}
-                    <a href="{{ path('app_consultation_show_opinion_version', {'consultationSlug': opinion.parent.step.consultation.slug, 'stepSlug': opinion.parent.step.slug, 'opinionTypeSlug': opinion.parent.opinionType.slug, 'opinionSlug': opinion.parent.slug, 'versionSlug': opinion.slug}) }}">
+                    <a href="{{ path('app_project_show_opinion_version', {'projectSlug': opinion.parent.step.project.slug, 'stepSlug': opinion.parent.step.slug, 'opinionTypeSlug': opinion.parent.opinionType.slug, 'opinionSlug': opinion.parent.slug, 'versionSlug': opinion.slug}) }}">
                         {{ opinion.title }}
                     </a>
                 {% else %}
-                    <a href="{{ path('app_consultation_show_opinion', {'consultationSlug': opinion.step.consultation.slug, 'stepSlug': opinion.step.slug, 'opinionTypeSlug': opinionType.slug, 'opinionSlug': opinion.slug}) }}">
+                    <a href="{{ path('app_project_show_opinion', {'projectSlug': opinion.step.project.slug, 'stepSlug': opinion.step.slug, 'opinionTypeSlug': opinionType.slug, 'opinionSlug': opinion.slug}) }}">
                         {{ opinion.title }}
                     </a>
                 {% endif %}
@@ -54,25 +54,25 @@
         <p class="opinion__votes  excerpt  small">
             {% if opinionType.voteWidgetType != 0 %}
                 <span>{% transchoice nbVotes with {'%count%': nbVotes} from 'CapcoAppBundle' %}
-                    consultation.show.votes
+                    project.show.votes
                 {% endtranschoice %}</span>
             {% endif %}
             {% if isVersion == false and opinionType.versionable %}
                 <span class="count__separator"> • </span>
                 <span>{% transchoice nbVersions with {'%count%': nbVersions} from 'CapcoAppBundle' %}
-                    consultation.show.versions
+                    project.show.versions
                     {% endtranschoice %}</span>
             {% endif %}
             {% if opinionType.commentSystem != 0 %}
                 <span class="count__separator"> • </span>
                 <span>{% transchoice nbArguments with {'%count%': nbArguments} from 'CapcoAppBundle' %}
-                    consultation.show.arguments
+                    project.show.arguments
                 {% endtranschoice %}</span>
             {% endif %}
             {% if opinionType.sourceable %}
                 <span class="count__separator"> • </span>
                 <span>{% transchoice nbSources with {'%count%': nbSources} from 'CapcoAppBundle' %}
-                    consultation.show.sources
+                    project.show.sources
                 {% endtranschoice %}</span>
             {% endif %}
         </p>

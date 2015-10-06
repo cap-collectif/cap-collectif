@@ -20,12 +20,12 @@ class OpinionTypeRepository extends NestedTreeRepository
     public function getByUser($user)
     {
         $qb = $this->createQueryBuilder('ot')
-            ->addSelect('o', 's', 'cas', 'c')
+            ->addSelect('o', 's', 'pas', 'p')
             ->leftJoin('ot.Opinions', 'o')
             ->leftJoin('o.step', 's')
-            ->leftJoin('s.consultationAbstractStep', 'cas')
-            ->leftJoin('cas.consultation', 'c')
-            ->andWhere('c.isEnabled = :enabled')
+            ->leftJoin('s.projectAbstractStep', 'pas')
+            ->leftJoin('pas.project', 'p')
+            ->andWhere('p.isEnabled = :enabled')
             ->andWhere('s.isEnabled = :enabled')
             ->andWhere('o.isEnabled = :enabled')
             ->andWhere('o.Author = :author')
@@ -49,16 +49,16 @@ class OpinionTypeRepository extends NestedTreeRepository
     public function countByUser($user)
     {
         $qb = $this->createQueryBuilder('ot')
-            ->addSelect('o', 's', 'cas', 'c')
+            ->addSelect('o', 's', 'cas', 'p')
             ->Join('ot.Opinions', 'o')
             ->leftJoin('o.step', 's')
-            ->leftJoin('s.consultationAbstractStep', 'cas')
-            ->leftJoin('cas.consultation', 'c')
+            ->leftJoin('s.projectAbstractStep', 'pas')
+            ->leftJoin('pas.project', 'p')
             ->addGroupBy('ot.id')
             ->andWhere('o.Author = :author')
             ->andWhere('o.isEnabled = :enabled')
             ->andWhere('s.isEnabled = :enabled')
-            ->andWhere('c.isEnabled = :enabled')
+            ->andWhere('p.isEnabled = :enabled')
             ->setParameter('enabled', true)
             ->setParameter('author', $user)
             ->orderBy('ot.position', 'ASC')
@@ -70,7 +70,7 @@ class OpinionTypeRepository extends NestedTreeRepository
     }
 
     /**
-     * Get all opinionTypes with opinions count for consultation step.
+     * Get all opinionTypes with opinions count for project step.
      *
      * @param $step
      * @param $allowedTypes

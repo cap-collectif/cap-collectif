@@ -1,10 +1,10 @@
 Feature: Opinions
 
   @database
-  Scenario: Can create an opinion of contribuable type in opened consultation
+  Scenario: Can create an opinion of contribuable type in opened project
     Given I am logged in as user
-    And I visited "consultation page" with:
-      | consultationSlug | croissance-innovation-disruption |
+    And I visited "project page" with:
+      | projectSlug | croissance-innovation-disruption |
       | stepSlug         | collecte-des-avis                |
     When I follow "btn-add--les-causes-1"
     And I fill in the following:
@@ -15,22 +15,22 @@ Feature: Opinions
 
   Scenario: Can not create an opinion of non-contribuable type
     Given I am logged in as user
-    And I visited "consultation page" with:
-      | consultationSlug | croissance-innovation-disruption |
+    And I visited "project page" with:
+      | projectSlug | croissance-innovation-disruption |
       | stepSlug         | collecte-des-avis                |
     Then I should not see "Proposer" in the "#opinions--le-probleme-constate-1" element
 
-  Scenario: Can not create an opinion in closed consultation
+  Scenario: Can not create an opinion in closed project
     Given I am logged in as user
-    And I visited "consultation page" with:
-      | consultationSlug   | strategie-technologique-de-l-etat-et-services-publics |
+    And I visited "project page" with:
+      | projectSlug   | strategie-technologique-de-l-etat-et-services-publics |
       | stepSlug           | collecte-des-avis-pour-une-meilleur-strategie         |
-    Then I should see "Consultation terminée. La période de participation est maintenant terminée. Merci à tous d'avoir contribué."
+    Then I should see "Projet participatif terminé. La période de participation est maintenant terminée. Merci à tous d'avoir contribué."
     And I should not see "Proposer"
 
   Scenario: Can not create an opinion when not logged in
-    Given I visited "consultation page" with:
-      | consultationSlug | croissance-innovation-disruption |
+    Given I visited "project page" with:
+      | projectSlug | croissance-innovation-disruption |
       | stepSlug         | collecte-des-avis                |
     When I follow "btn-add--les-causes-1"
     Then I should see "Connection form" on "login page"
@@ -40,7 +40,7 @@ Feature: Opinions
     Given feature "reporting" is enabled
     And I am logged in as user
     And I visited "opinion page" with:
-      | consultationSlug | croissance-innovation-disruption |
+      | projectSlug | croissance-innovation-disruption |
       | stepSlug         | collecte-des-avis                |
       | opinionTypeSlug  | solutions                        |
       | opinionSlug      | opinion-5                        |
@@ -58,7 +58,7 @@ Feature: Opinions
 #  Scenario: Author of an opinion loose their votes when updating it
 #    Given I am logged in as user
 #    And I visited "opinion page" with:
-#      | consultationSlug | croissance-innovation-disruption |
+#      | projectSlug | croissance-innovation-disruption |
 #      | stepSlug         | collecte-des-avis                |
 #      | opinionTypeSlug  | enjeux                           |
 #      | opinionSlug      | opinion-3                        |
@@ -78,7 +78,7 @@ Feature: Opinions
   Scenario: Non author of an opinion wants to update it
     Given I am logged in as admin
     And I visited "opinion page" with:
-      | consultationSlug | croissance-innovation-disruption |
+      | projectSlug | croissance-innovation-disruption |
       | stepSlug         | collecte-des-avis                |
       | opinionTypeSlug  | enjeux                           |
       | opinionSlug      | opinion-3                        |
@@ -89,7 +89,7 @@ Feature: Opinions
 #  Scenario: Author of an opinion try to update without checking the confirm checkbox
 #    Given I am logged in as user
 #    And I visited "opinion page" with:
-#      | consultationSlug | croissance-innovation-disruption |
+#      | projectSlug | croissance-innovation-disruption |
 #      | stepSlug         | collecte-des-avis                |
 #      | opinionTypeSlug  | enjeux                           |
 #      | opinionSlug      | opinion-3                        |
@@ -105,16 +105,16 @@ Feature: Opinions
   @javascript
   Scenario: Anonymous wants to see opinion appendix
     Given I visited "opinion page" with:
-      | consultationSlug | projet-de-loi-renseignement      |
+      | projectSlug | projet-de-loi-renseignement      |
       | stepSlug         | elaboration-de-la-loi            |
       | opinionTypeSlug  | articles                         |
       | opinionSlug      | article-1                        |
-    And I wait 3 seconds
+    And I wait 5 seconds
     Then I should see "Motifs 1"
     And I press "Exposé des motifs"
-    And I wait 3 seconds
+    And I wait 5 seconds
     Then I should not see "Motifs 1"
     And I press "Étude d'impact"
-    And I wait 3 seconds
+    And I wait 5 seconds
     Then I should see "Impacts 1"
 

@@ -4,8 +4,8 @@ Feature: Synthesis
 
 #@javascript
 #Scenario: Anonymous wants to see synthesis view
-#  Given I visited "consultation page" with:
-#    | consultationSlug   | strategie-technologique-de-l-etat-et-services-publics |
+#  Given I visited "project page" with:
+#    | projectSlug        | strategie-technologique-de-l-etat-et-services-publics |
 #    | stepSlug           | collecte-des-avis-pour-une-meilleur-strategie         |
 #  And I follow "Synthèse"
 #  And I wait 5 seconds
@@ -19,8 +19,8 @@ Feature: Synthesis
 @javascript
 Scenario: User can not access synthesis edition
   Given I am logged in as user
-  And I visited "consultation page" with:
-    | consultationSlug | strategie-technologique-de-l-etat-et-services-publics |
+  And I visited "project page" with:
+    | projectSlug | strategie-technologique-de-l-etat-et-services-publics |
     | stepSlug         | collecte-des-avis-pour-une-meilleur-strategie         |
   And I follow "Synthèse"
   And I wait 5 seconds
@@ -28,8 +28,8 @@ Scenario: User can not access synthesis edition
 
 @javascript
 Scenario: Anonymous can not access synthesis edition
-  Given I visited "consultation page" with:
-    | consultationSlug | strategie-technologique-de-l-etat-et-services-publics |
+  Given I visited "project page" with:
+    | projectSlug | strategie-technologique-de-l-etat-et-services-publics |
     | stepSlug         | collecte-des-avis-pour-une-meilleur-strategie         |
   And I follow "Synthèse"
   And I wait 5 seconds
@@ -40,8 +40,8 @@ Scenario: Anonymous can not access synthesis edition
 @javascript
 Scenario: Admin wants to see new elements list
   Given I am logged in as admin
-  And I visited "consultation page" with:
-    | consultationSlug | strategie-technologique-de-l-etat-et-services-publics |
+  And I visited "project page" with:
+    | projectSlug | strategie-technologique-de-l-etat-et-services-publics |
     | stepSlug         | collecte-des-avis-pour-une-meilleur-strategie         |
   And I follow "Synthèse"
   And I follow "Éditer"
@@ -51,8 +51,8 @@ Scenario: Admin wants to see new elements list
 @javascript
 Scenario: Admin wants to see archived elements list
   Given I am logged in as admin
-  And I visited "consultation page" with:
-    | consultationSlug | strategie-technologique-de-l-etat-et-services-publics |
+  And I visited "project page" with:
+    | projectSlug | strategie-technologique-de-l-etat-et-services-publics |
     | stepSlug         | collecte-des-avis-pour-une-meilleur-strategie         |
   And I follow "Synthèse"
   And I follow "Éditer"
@@ -64,8 +64,8 @@ Scenario: Admin wants to see archived elements list
 @javascript
 Scenario: Admin wants to see published elements list
   Given I am logged in as admin
-  And I visited "consultation page" with:
-    | consultationSlug | strategie-technologique-de-l-etat-et-services-publics |
+  And I visited "project page" with:
+    | projectSlug | strategie-technologique-de-l-etat-et-services-publics |
     | stepSlug         | collecte-des-avis-pour-une-meilleur-strategie         |
   And I follow "Synthèse"
   And I follow "Éditer"
@@ -77,8 +77,8 @@ Scenario: Admin wants to see published elements list
 @javascript
 Scenario: Admin wants to see unpublished elements list
   Given I am logged in as admin
-  And I visited "consultation page" with:
-    | consultationSlug | strategie-technologique-de-l-etat-et-services-publics |
+  And I visited "project page" with:
+    | projectSlug | strategie-technologique-de-l-etat-et-services-publics |
     | stepSlug         | collecte-des-avis-pour-une-meilleur-strategie         |
   And I follow "Synthèse"
   And I follow "Éditer"
@@ -90,8 +90,8 @@ Scenario: Admin wants to see unpublished elements list
 @javascript
 Scenario: Admin wants to see all elements list
   Given I am logged in as admin
-  And I visited "consultation page" with:
-    | consultationSlug | strategie-technologique-de-l-etat-et-services-publics |
+  And I visited "project page" with:
+    | projectSlug | strategie-technologique-de-l-etat-et-services-publics |
     | stepSlug         | collecte-des-avis-pour-une-meilleur-strategie         |
   And I follow "Synthèse"
   And I follow "Éditer"
@@ -103,8 +103,8 @@ Scenario: Admin wants to see all elements list
 #@javascript
 #Scenario: Admin wants to see elements tree
 #  Given I am logged in as admin
-#  And I visited "consultation page" with:
-#    | consultationSlug | strategie-technologique-de-l-etat-et-services-publics |
+#  And I visited "project page" with:
+#    | projectSlug      | strategie-technologique-de-l-etat-et-services-publics |
 #    | stepSlug         | collecte-des-avis-pour-une-meilleur-strategie         |
 #  And I follow "Synthèse"
 #  And I follow "Éditer"
@@ -118,8 +118,8 @@ Scenario: Admin wants to see all elements list
 @javascript
 Scenario: Admin wants to see an element details
   Given I am logged in as admin
-  And I visited "consultation page" with:
-    | consultationSlug | strategie-technologique-de-l-etat-et-services-publics |
+  And I visited "project page" with:
+    | projectSlug | strategie-technologique-de-l-etat-et-services-publics |
     | stepSlug         | collecte-des-avis-pour-une-meilleur-strategie         |
   And I follow "Synthèse"
   And I follow "Éditer"
@@ -133,8 +133,8 @@ Scenario: Admin wants to see an element details
 @javascript @database
 Scenario: Admin wants to ignore an element
   Given I am logged in as admin
-  And I visited "consultation page" with:
-    | consultationSlug | strategie-technologique-de-l-etat-et-services-publics |
+  And I visited "project page" with:
+    | projectSlug | strategie-technologique-de-l-etat-et-services-publics |
     | stepSlug         | collecte-des-avis-pour-une-meilleur-strategie         |
   And I follow "Synthèse"
   And I follow "Éditer"
@@ -158,18 +158,18 @@ Scenario: Admin wants to ignore an element
 @javascript @database
 Scenario: Admin wants to publish an element without note, comment or parent
   Given I am logged in as admin
-  And I visited "consultation page" with:
-    | consultationSlug | strategie-technologique-de-l-etat-et-services-publics |
+  And I visited "project page" with:
+    | projectSlug | strategie-technologique-de-l-etat-et-services-publics |
     | stepSlug         | collecte-des-avis-pour-une-meilleur-strategie         |
   And I follow "Synthèse"
   And I follow "Éditer"
-  And I wait 5 seconds
+  And I wait 8 seconds
   And I follow "Opinion 52"
-  And I wait 5 seconds
+  And I wait 8 seconds
   And I click the ".element__action-publish" element
-  And I wait 5 seconds
+  And I wait 8 seconds
   And I click the "button[type='submit']" element
-  And I wait 5 seconds
+  And I wait 8 seconds
   And I should see "L'élément a été traité avec succès."
   And I follow "Traitées"
   And I wait 5 seconds
@@ -178,8 +178,8 @@ Scenario: Admin wants to publish an element without note, comment or parent
 @javascript @database
 Scenario: Admin wants to publish an element with note
   Given I am logged in as admin
-  And I visited "consultation page" with:
-    | consultationSlug | strategie-technologique-de-l-etat-et-services-publics |
+  And I visited "project page" with:
+    | projectSlug | strategie-technologique-de-l-etat-et-services-publics |
     | stepSlug         | collecte-des-avis-pour-une-meilleur-strategie         |
   And I follow "Synthèse"
   And I follow "Éditer"
@@ -207,8 +207,8 @@ Scenario: Admin wants to publish an element with note
 @javascript @database
 Scenario: Admin wants to publish an element with parent
   Given I am logged in as admin
-  And I visited "consultation page" with:
-    | consultationSlug | strategie-technologique-de-l-etat-et-services-publics |
+  And I visited "project page" with:
+    | projectSlug | strategie-technologique-de-l-etat-et-services-publics |
     | stepSlug         | collecte-des-avis-pour-une-meilleur-strategie         |
   And I follow "Synthèse"
   And I follow "Éditer"
@@ -229,8 +229,8 @@ Scenario: Admin wants to publish an element with parent
 @javascript @database
 Scenario: Admin wants to publish an element with comment
   Given I am logged in as admin
-  And I visited "consultation page" with:
-    | consultationSlug | strategie-technologique-de-l-etat-et-services-publics |
+  And I visited "project page" with:
+    | projectSlug | strategie-technologique-de-l-etat-et-services-publics |
     | stepSlug         | collecte-des-avis-pour-une-meilleur-strategie         |
   And I follow "Synthèse"
   And I follow "Éditer"
@@ -252,8 +252,8 @@ Scenario: Admin wants to publish an element with comment
 @javascript @dev
 Scenario: Admin wants to divide an element without selecting text
   Given I am logged in as admin
-  And I visited "consultation page" with:
-    | consultationSlug | strategie-technologique-de-l-etat-et-services-publics |
+  And I visited "project page" with:
+    | projectSlug | strategie-technologique-de-l-etat-et-services-publics |
     | stepSlug         | collecte-des-avis-pour-une-meilleur-strategie         |
   And I follow "Synthèse"
   And I follow "Éditer"
@@ -269,8 +269,8 @@ Scenario: Admin wants to divide an element without selecting text
 @javascript
 Scenario: Admin wants to create an element
   Given I am logged in as admin
-  And I visited "consultation page" with:
-    | consultationSlug | strategie-technologique-de-l-etat-et-services-publics |
+  And I visited "project page" with:
+    | projectSlug | strategie-technologique-de-l-etat-et-services-publics |
     | stepSlug         | collecte-des-avis-pour-une-meilleur-strategie         |
   And I follow "Synthèse"
   And I follow "Éditer"

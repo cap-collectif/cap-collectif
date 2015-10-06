@@ -3,7 +3,7 @@
 namespace Capco\AppBundle\Resolver;
 
 use Capco\AppBundle\Entity\ConsultationStep;
-use Capco\AppBundle\Entity\ConsultationType;
+use Capco\AppBundle\Entity\ConsultationStepType;
 use Capco\AppBundle\Entity\OpinionType;
 use Capco\AppBundle\Repository\OpinionRepository;
 use Capco\AppBundle\Repository\OpinionTypeRepository;
@@ -25,13 +25,13 @@ class OpinionTypesResolver
 
     public function getNavForStep(ConsultationStep $step)
     {
-        $ct = $step->getConsultationType();
+        $ct = $step->getConsultationStepType();
 
         if ($ct === null) {
             return [];
         }
 
-        $url = $this->router->generate('app_consultation_show', ['consultationSlug' => $step->getConsultation()->getSlug(), 'stepSlug' => $step->getSlug()]);
+        $url = $this->router->generate('app_project_show', ['projectSlug' => $step->getProject()->getSlug(), 'stepSlug' => $step->getSlug()]);
 
         $options = [
             'decorate' => true,
@@ -60,7 +60,7 @@ class OpinionTypesResolver
         return $nav;
     }
 
-    public function getHierarchyForConsultationType(ConsultationType $ct, $options = [])
+    public function getHierarchyForConsultationStepType(ConsultationStepType $ct, $options = [])
     {
         if ($ct === null) {
             return [];
@@ -79,7 +79,7 @@ class OpinionTypesResolver
 
     public function getGroupedOpinionsForStep(ConsultationStep $step, $limit = 5, $page = 1)
     {
-        $tree = $this->getHierarchyForConsultationType($step->getConsultationType());
+        $tree = $this->getHierarchyForConsultationStepType($step->getConsultationStepType());
 
         $build = function ($tree) use (&$build, &$step, &$limit, &$page) {
             $childrenTree = [];
@@ -100,7 +100,7 @@ class OpinionTypesResolver
         return $build($tree);
     }
 
-    public function getAllForConsultationType(ConsultationType $ct)
+    public function getAllForConsultationStepType(ConsultationStepType $ct)
     {
         if ($ct === null) {
             return [];
@@ -117,14 +117,14 @@ class OpinionTypesResolver
         return $opinionTypes;
     }
 
-    public function consultationTypeAllowType(ConsultationType $consultationType, OpinionType $opinionType)
+    public function consultationStepTypeAllowType(ConsultationStepType $consultationStepType, OpinionType $opinionType)
     {
-        if ($consultationType === null) {
+        if ($consultationStepType === null) {
             return [];
         }
 
         $allowed = false;
-        $opinionTypes = $this->getAllForConsultationType($consultationType);
+        $opinionTypes = $this->getAllForConsultationStepType($ConsultationStepType);
         foreach ($opinionTypes as $ot) {
             if ($ot->getId() === $opinionType->getId()) {
                 $allowed = true;
@@ -137,11 +137,11 @@ class OpinionTypesResolver
 
     public function stepAllowType(ConsultationStep $step, OpinionType $type)
     {
-        if (!$step->getConsultationType()) {
+        if (!$step->getConsultationStepType()) {
             return false;
         }
 
-        return $this->consultationTypeAllowType($step->getConsultationType(), $type);
+        return $this->consultationStepTypeAllowType($step->getConsultationStepType(), $type);
     }
 
     public function getMaximumPositionByOpinionTypeAndStep($opinionType, ConsultationStep $step)

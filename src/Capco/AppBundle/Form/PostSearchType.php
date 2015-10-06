@@ -6,7 +6,7 @@ use Capco\AppBundle\Toggle\Manager;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Capco\AppBundle\Repository\ThemeRepository;
-use Capco\AppBundle\Repository\ConsultationRepository;
+use Capco\AppBundle\Repository\ProjectRepository;
 
 class PostSearchType extends AbstractType
 {
@@ -40,18 +40,18 @@ class PostSearchType extends AbstractType
             ));
         }
 
-        $builder->add('consultation', 'entity', array(
+        $builder->add('project', 'entity', array(
             'required' => false,
-            'class' => 'CapcoAppBundle:Consultation',
+            'class' => 'CapcoAppBundle:Project',
             'property' => 'title',
-            'label' => 'blog.searchform.consultation',
+            'label' => 'blog.searchform.project',
             'translation_domain' => 'CapcoAppBundle',
-            'query_builder' => function (ConsultationRepository $cr) {
+            'query_builder' => function (ProjectRepository $cr) {
                 return $cr->createQueryBuilder('c')
                     ->where('c.isEnabled = :enabled')
                     ->setParameter('enabled', true);
             },
-            'empty_value' => 'blog.searchform.all_consultations',
+            'empty_value' => 'blog.searchform.all_projects',
             'attr' => array('onchange' => 'this.form.submit()'),
         ));
     }

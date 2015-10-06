@@ -222,10 +222,10 @@ class OpinionType
     protected $children;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\ConsultationType", inversedBy="opinionTypes", cascade={"persist"})
-     * @ORM\JoinColumn(name="consultation_type_id", nullable=true, onDelete="CASCADE")
+     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\ConsultationStepType", inversedBy="opinionTypes", cascade={"persist"})
+     * @ORM\JoinColumn(name="consultation_step_type_id", nullable=true, onDelete="CASCADE")
      */
-    protected $consultationType;
+    protected $consultationStepType;
 
     public function __construct()
     {
@@ -692,17 +692,18 @@ class OpinionType
     /**
      * @return mixed
      */
-    public function getConsultationType()
+    public function getConsultationStepType()
     {
-        return $this->consultationType;
+        return $this->consultationStepType;
     }
 
     /**
-     * @param mixed $consultationType
+     * @param mixed $consultationStepType
+     * @return $this
      */
-    public function setConsultationType($consultationType)
+    public function setConsultationStepType($consultationStepType)
     {
-        $this->consultationType = $consultationType;
+        $this->consultationStepType = $consultationStepType;
 
         return $this;
     }

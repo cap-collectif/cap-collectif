@@ -34,7 +34,7 @@
                                 {% elseif comment is defined %}
                                     <a href="{{ capco_comment_object_url(comment) }}" class="btn  btn-default">{{ 'reporting.create.cancel'|trans({}, 'CapcoAppBundle') }}</a>
                                 {% else %}
-                                    <a href="{{ path('app_consultation_show_opinion', {'consultationSlug': opinion.step.consultation.slug, 'stepSlug': opinion.step.slug, 'opinionTypeSlug': opinion.opinionType.slug, 'opinionSlug': opinion.slug}) }}" class="btn  btn-default">{{ 'reporting.create.cancel'|trans({}, 'CapcoAppBundle') }}</a>
+                                    <a href="{{ path('app_project_show_opinion', {'projectSlug': opinion.step.project.slug, 'stepSlug': opinion.step.slug, 'opinionTypeSlug': opinion.opinionType.slug, 'opinionSlug': opinion.slug}) }}" class="btn  btn-default">{{ 'reporting.create.cancel'|trans({}, 'CapcoAppBundle') }}</a>
                                 {% endif %}
                                 <button type="submit" class="btn  btn-primary">{{ 'reporting.create.submit'|trans({}, 'CapcoAppBundle') }}</button>
                             </div>

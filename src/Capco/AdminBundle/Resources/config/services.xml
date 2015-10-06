@@ -19,7 +19,7 @@
         </service>
 
         <service id="capco.admin.helper_controller" class="Capco\AdminBundle\Controller\HelperController">
-            <argument type="service" id="capco.consultation_type.repository" />
+            <argument type="service" id="capco.consultation_step_type.repository" />
         </service>
 
         <service id="capco.admin.features_category_resolver" class="Capco\AdminBundle\Resolver\FeaturesCategoryResolver">

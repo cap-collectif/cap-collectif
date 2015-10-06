@@ -37,8 +37,8 @@ class EventAdmin extends Admin
         }
 
         $datagridMapper
-            ->add('consultations', null, array(
-                'label' => 'admin.fields.event.consultations',
+            ->add('projects', null, array(
+                'label' => 'admin.fields.event.projects',
             ))
             ->add('Author', 'doctrine_orm_model_autocomplete', [
                 'label' => 'admin.fields.event.author',
@@ -87,8 +87,8 @@ class EventAdmin extends Admin
         }
 
         $listMapper
-            ->add('consultations', null, array(
-                'label' => 'admin.fields.event.consultations',
+            ->add('projects', null, array(
+                'label' => 'admin.fields.event.projects',
             ))
             ->add('Author', 'sonata_type_model', array(
                 'label' => 'admin.fields.event.author',
@@ -195,8 +195,8 @@ class EventAdmin extends Admin
         }
 
         $formMapper
-            ->add('consultations', 'sonata_type_model', array(
-                'label' => 'admin.fields.event.consultations',
+            ->add('projects', 'sonata_type_model', array(
+                'label' => 'admin.fields.event.projects',
                 'required' => false,
                 'multiple' => true,
                 'by_reference' => false,
@@ -261,8 +261,8 @@ class EventAdmin extends Admin
         }
 
         $showMapper
-            ->add('consultation', null, array(
-                'label' => 'admin.fields.event.consultation',
+            ->add('project', null, array(
+                'label' => 'admin.fields.event.project',
             ))
             ->add('Author', null, array(
                 'label' => 'admin.fields.event.author',

@@ -2,7 +2,7 @@
 
 namespace Capco\AppBundle\Resolver;
 
-use Capco\AppBundle\Entity\Consultation;
+use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\AbstractStep;
 
 class StepResolver
@@ -19,13 +19,13 @@ class StepResolver
         return $this->urlResolver->getObjectUrl($step, $absolute);
     }
 
-    public function getFirstStepLinkForConsultation(Consultation $consultation, $absolute = false)
+    public function getFirstStepLinkForProject(Project $project, $absolute = false)
     {
-        return $this->getLink($consultation->getFirstStep(), $absolute);
+        return $this->getLink($project->getFirstStep(), $absolute);
     }
 
-    public function getCurrentStepLinkForConsultation(Consultation $consultation, $absolute = false)
+    public function getCurrentStepLinkForProject(Project $project, $absolute = false)
     {
-        return $this->getLink($consultation->getCurrentStep(), $absolute);
+        return $this->getLink($project->getCurrentStep(), $absolute);
     }
 }

@@ -6,7 +6,7 @@
                 <div id="carousel-highlighted" class="carousel vertical slide" data-ride="carousel" data-interval="false">
                   <div class="carousel-inner" role="listbox">
                     {% for highlighted in highlighteds if has_feature_enabled(highlighted.associatedFeatures) %}
-                        {% if highlighted.type == 'consultation' %}
+                        {% if highlighted.type == 'project' %}
                             {% set url = (highlighted.content | capco_first_step_link) %}
                         {% else %}
                             {% set url = path('app_' ~ highlighted.type ~ '_show', {'slug': highlighted.content.slug}) %}
@@ -17,7 +17,7 @@
                                 {% thumbnail highlighted.media, 'slider' with {'class': 'img-responsive'} %}
                             {% else %}
                                 <span class="bg__wrapper">
-                                    <div class="bg--default bg--consultation"></div>
+                                    <div class="bg--default bg--project"></div>
                                 </span>
                             {% endif %}
                             {{ highlighted.content.title }}

@@ -1,0 +1,41 @@
+{% set color = opinionType is defined ? opinionType.color : 'default' %}
+{% set buttonLabel = opinionTerm == 0 ? 'opinion.create.button' : 'opinion.create.article_button'  %}
+{% set label = areVersions is defined and areVersions ? 'project.show.versions' : opinionTerm == 0 ? 'project.show.opinions' : 'project.show.articles' %}
+<div class="opinion  opinion--{{ color }} opinion--default">
+    <div class="opinion__header  opinion__header--mobile-centered">
+        <h2 class="pull-left  h4  opinion__header__title">
+            {{ label | transchoice(opinions | length, {}, 'CapcoAppBundle')  }}
+        </h2>
+        {% if filter is not defined or filter == true %}
+            <div class="pull-right  opinion__header__filter">
+                {% if opinions_count > 1 %}
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            {% if opinionsSort is defined %}
+                                {{ 'opinion.sort.sorted_by' | trans({'%sortOrder%': ('opinion.sort.' ~ opinionsSort) | trans({}, 'CapcoAppBundle')}, 'CapcoAppBundle') }}
+                            {% else %}
+                                {{ 'opinion.sort.label' | trans({'%name%': opinionType.subtitle}, 'CapcoAppBundle') }}
+                            {% endif %}
+                        <span class="caret"></span></button>
+                        <ul class="dropdown-menu">
+                            {% for opinionSortOrderKey, opinionSortOrder in opinionSortOrders %}
+                                <li>
+                                    <a
+                                        href="{{ path('app_consultation_show_opinions_sorted', {consultationSlug: consultation.slug, stepSlug: currentStep.slug, opinionTypeSlug: opinionType.slug, opinionsSort: opinionSortOrderKey}) }}"
+                                        title="{{ 'opinion.sort.sort_by' | trans({'%name%': opinionType.title ~ ' - ' ~ opinionType.subtitle, '%sortOrder%': ('opinion.sort.' ~ opinionSortOrderKey) | trans({}, 'CapcoAppBundle')}, 'CapcoAppBundle') }}"
+                                        >{{ opinionSortOrder | trans({}, 'CapcoAppBundle') }}</a>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                {% endif %}
+                {% if opinionType is defined and opinionType.isEnabled == true and currentStep.canContribute %}
+                    <a id="btn-add--{{ opinionType.slug }}" href="{{ path('app_project_new_opinion' ,{'projectSlug': project.slug, 'stepSlug': currentStep.slug, 'opinionTypeSlug': opinionType.slug } ) }}" class="btn  btn-primary">
+                        <i class="cap cap-add-1"></i>
+                        <span class="hidden-xs">{{ buttonLabel | trans({}, 'CapcoAppBundle') }}</span>
+                    </a>
+                {% endif %}
+            </div>
+        {% endif %}
+    </div>
+</div>

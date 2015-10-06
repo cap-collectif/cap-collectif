@@ -16,27 +16,27 @@ class EventResolver
     /**
      * @param $archived
      * @param $themeSlug
-     * @param $consultationSlug
+     * @param $projectSlug
      * @param $term
      *
      * @return array
      */
-    public function countEvents($archived, $themeSlug, $consultationSlug, $term)
+    public function countEvents($archived, $themeSlug, $projectSlug, $term)
     {
-        return $this->repository->countSearchResults($archived, $themeSlug, $consultationSlug, $term);
+        return $this->repository->countSearchResults($archived, $themeSlug, $projectSlug, $term);
     }
 
     /**
      * @param $archived
      * @param $themeSlug
-     * @param $consultationSlug
+     * @param $projectSlug
      * @param $term
      *
      * @return array
      */
-    public function getEventsGroupedByYearAndMonth($archived, $themeSlug, $consultationSlug, $term)
+    public function getEventsGroupedByYearAndMonth($archived, $themeSlug, $projectSlug, $term)
     {
-        $results = $this->repository->getSearchResults($archived, $themeSlug, $consultationSlug, $term);
+        $results = $this->repository->getSearchResults($archived, $themeSlug, $projectSlug, $term);
         $events = [];
 
         if (!empty($results)) {
@@ -48,9 +48,9 @@ class EventResolver
         return $events;
     }
 
-    public function getLastByConsultation($consultationSlug, $limit = null)
+    public function getLastByProject($projectSlug, $limit = null)
     {
-        $events = $this->repository->getSearchResults(null, null, $consultationSlug, null, $limit);
+        $events = $this->repository->getSearchResults(null, null, $projectSlug, null, $limit);
 
         return $events;
     }

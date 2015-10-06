@@ -21,15 +21,15 @@ class RecalculateRankingsCommand extends ContainerAwareCommand
         $container = $this->getApplication()->getKernel()->getContainer();
         $em = $container->get('doctrine')->getManager();
 
-        $consultations = $em->getRepository('CapcoAppBundle:Consultation')
+        $projects = $em->getRepository('CapcoAppBundle:Project')
             ->findAll();
 
-        foreach ($consultations as $consultation) {
-            $excludedAuthor = !$consultation->getIncludeAuthorInRanking() ? $consultation->getAuthor()->getId() : null;
+        foreach ($projects as $project) {
+            $excludedAuthor = !$project->getIncludeAuthorInRanking() ? $project->getAuthor()->getId() : null;
 
             // Opinions
             $opinions = $em->getRepository('CapcoAppBundle:Opinion')
-                ->getEnabledByConsultationsOrderedByVotes($consultation, $excludedAuthor);
+                ->getEnabledByProjectsOrderedByVotes($project, $excludedAuthor);
             $prevValue = null;
             $prevRanking = 1;
             foreach ($opinions as $key => $opinion) {
@@ -42,7 +42,7 @@ class RecalculateRankingsCommand extends ContainerAwareCommand
 
             // Versions
             $versions = $em->getRepository('CapcoAppBundle:OpinionVersion')
-                ->getEnabledByConsultationsOrderedByVotes($consultation, $excludedAuthor)
+                ->getEnabledByProjectsOrderedByVotes($project, $excludedAuthor)
             ;
             $prevValue = null;
             $prevRanking = 1;

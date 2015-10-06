@@ -1,6 +1,6 @@
-{% extends '@CapcoApp/Consultation/show.html.twig' %}
+{% extends '@CapcoApp/Project/show.html.twig' %}
 
-{% block canonical_link %}{{ url('app_consultation_show_opinion', {'consultationSlug': consultation.slug, 'stepSlug': currentStep.slug, 'opinionTypeSlug': opinionType.slug, 'opinionSlug': opinion.slug}) }}{% endblock %}
+{% block canonical_link %}{{ url('app_project_show_opinion', {'projectSlug': project.slug, 'stepSlug': currentStep.slug, 'opinionTypeSlug': opinionType.slug, 'opinionSlug': opinion.slug}) }}{% endblock %}
 
 {% block title %}
     {{ parent() }} - {{ opinion.title }}

@@ -1,5 +1,5 @@
 {% set opinion = argument.opinion %}
-{% set consultation = opinion.step.consultation %}
+{% set project = opinion.step.project %}
 {% set opinionType = opinion.opinionType %}
 <li class="opinion  opinion--argument {% if argument.author.isVip %}bg-vip{% endif %}{% if classes is defined %} {{ classes }}{% endif %}" id="arg-{{ argument.id }}">
     <div class="opinion__body  box">
@@ -19,7 +19,7 @@
             </p>
             <p class="excerpt  opinion__date">{{ argument.createdAt | localizeddate('long', 'short', app.request.locale) }}</p>
             {% if profile is defined %}
-                <p>{{ 'argument.trashed.linked_proposition' | trans({}, 'CapcoAppBundle') }} <a href="{{ path('app_consultation_show_opinion', {'consultationSlug': consultation.slug, 'stepSlug': opinion.step.slug, 'opinionTypeSlug': argument.Opinion.OpinionType.slug, 'opinionSlug': argument.Opinion.slug}) }}">{{ argument.Opinion.title }}</a></p>
+                <p>{{ 'argument.trashed.linked_proposition' | trans({}, 'CapcoAppBundle') }} <a href="{{ path('app_project_show_opinion', {'projectSlug': project.slug, 'stepSlug': opinion.step.slug, 'opinionTypeSlug': argument.Opinion.OpinionType.slug, 'opinionSlug': argument.Opinion.slug}) }}">{{ argument.Opinion.title }}</a></p>
             {% endif %}
         </div>
         <p class="opinion__text more" style="max-height: 115px; overflow: hidden; width: 100%">
@@ -46,12 +46,12 @@
                 {% if argument.reports | length > 0 %}
                     <button disabled="disabled" class="btn btn-xs btn-dark-gray"><i class="cap cap-flag-1"></i> {{ 'argument.report.reported'|trans({}, 'CapcoAppBundle') }}</button>
                 {% else %}
-                    <a href="{{ path('app_report_argument' ,{'consultationSlug': consultation.slug, 'stepSlug': opinion.step.slug, 'opinionTypeSlug': opinionType.slug, 'opinionSlug': opinion.slug, 'argumentId': argument.id } ) }}" class="btn btn-xs btn-dark-gray  btn--outline  connection-popover-js"><i class="cap cap-flag-1"></i> {{ 'argument.report.submit'|trans({}, 'CapcoAppBundle') }}</a>
+                    <a href="{{ path('app_report_argument' ,{'projectSlug': project.slug, 'stepSlug': opinion.step.slug, 'opinionTypeSlug': opinionType.slug, 'opinionSlug': opinion.slug, 'argumentId': argument.id } ) }}" class="btn btn-xs btn-dark-gray  btn--outline  connection-popover-js"><i class="cap cap-flag-1"></i> {{ 'argument.report.submit'|trans({}, 'CapcoAppBundle') }}</a>
                 {% endif %}
             {% endif %}
 
             {% if argument.canContribute and currentUser is not null and currentUser == argument.Author %}
-                <a href="{{ path('app_consultation_edit_argument' ,{'consultationSlug': consultation.slug, 'stepSlug': opinion.step.slug, 'opinionTypeSlug': opinionType.slug, 'opinionSlug': opinion.slug, 'argumentId': argument.id } ) }}" class="btn  btn-dark-gray  btn--outline  btn-xs"><i class="cap cap-pencil-1"></i> {{ 'argument.update.button'|trans({}, 'CapcoAppBundle') }}</a>
+                <a href="{{ path('app_project_edit_argument' ,{'projectSlug': project.slug, 'stepSlug': opinion.step.slug, 'opinionTypeSlug': opinionType.slug, 'opinionSlug': opinion.slug, 'argumentId': argument.id } ) }}" class="btn  btn-dark-gray  btn--outline  btn-xs"><i class="cap cap-pencil-1"></i> {{ 'argument.update.button'|trans({}, 'CapcoAppBundle') }}</a>
             {% endif %}
 
         {% else %}

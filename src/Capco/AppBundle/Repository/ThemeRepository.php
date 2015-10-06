@@ -20,7 +20,7 @@ class ThemeRepository extends EntityRepository
     {
         $qb = $this->getIsEnabledQueryBuilder()
             ->addSelect('c', 'i')
-            ->leftJoin('t.Consultations', 'c')
+            ->leftJoin('t.Projects', 'c')
             ->leftJoin('t.Ideas', 'i')
             ->addOrderBy('t.position', 'ASC')
             ->addOrderBy('t.updatedAt', 'DESC')
@@ -46,7 +46,7 @@ class ThemeRepository extends EntityRepository
      *
      * @return Paginator
      */
-    public function getSearchResultsWithConsultationsAndIdeas($nbByPage = 8, $page = 1, $term = null)
+    public function getSearchResultsWithProjectsAndIdeas($nbByPage = 8, $page = 1, $term = null)
     {
         if ((int) $page < 1) {
             throw new \InvalidArgumentException(sprintf(
@@ -57,7 +57,7 @@ class ThemeRepository extends EntityRepository
 
         $qb = $this->getIsEnabledQueryBuilder();
         $qb->addSelect('c, i')
-            ->leftJoin('t.Consultations', 'c')
+            ->leftJoin('t.Projects', 'c')
             ->leftJoin('t.Ideas', 'i')
             ->addOrderBy('t.position', 'ASC')
         ;
@@ -95,7 +95,7 @@ class ThemeRepository extends EntityRepository
             ->leftJoin('t.Author', 'a')
             ->leftJoin('a.Media', 'am')
             ->leftJoin('t.Media', 'm')
-            ->leftJoin('t.Consultations', 'c', 'WITH', 'c.isEnabled = :enabled')
+            ->leftJoin('t.Projects', 'c', 'WITH', 'c.isEnabled = :enabled')
             ->leftJoin('t.Ideas', 'i', 'WITH', 'i.isEnabled = :enabled')
             ->leftJoin('t.posts', 'p', 'WITH', 'p.isPublished = :enabled')
             ->leftJoin('t.events', 'e', 'WITH', 'e.isEnabled = :enabled')

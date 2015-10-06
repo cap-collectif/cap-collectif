@@ -2,7 +2,7 @@
 
 namespace Capco\AppBundle\Repository;
 
-use Capco\AppBundle\Entity\Consultation;
+use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\ConsultationStep;
 use Capco\AppBundle\Entity\OpinionType;
 use Capco\AppBundle\Entity\Opinion;
@@ -16,12 +16,12 @@ class OpinionRepository extends EntityRepository
     public function getRecentOrdered()
     {
         $qb = $this->createQueryBuilder('o')
-            ->select('o.id', 'o.title', 'o.createdAt', 'o.updatedAt', 'a.username as author', 'o.isEnabled as published', 'o.isTrashed as trashed', 'c.title as consultation')
+            ->select('o.id', 'o.title', 'o.createdAt', 'o.updatedAt', 'a.username as author', 'o.isEnabled as published', 'o.isTrashed as trashed', 'c.title as project')
             ->where('o.validated = :validated')
             ->leftJoin('o.Author', 'a')
             ->leftJoin('o.step', 's')
-            ->leftJoin('s.consultationAbstractStep', 'cas')
-            ->leftJoin('cas.consultation', 'c')
+            ->leftJoin('s.projectAbstractStep', 'cas')
+            ->leftJoin('cas.project', 'c')
             ->setParameter('validated', false)
         ;
 
@@ -33,11 +33,11 @@ class OpinionRepository extends EntityRepository
     public function getArrayById($id)
     {
         $qb = $this->createQueryBuilder('o')
-            ->select('o.id', 'o.title', 'o.createdAt', 'o.updatedAt', 'a.username as author', 'o.isEnabled as published', 'o.isTrashed as trashed', 'o.body as body', 'c.title as consultation')
+            ->select('o.id', 'o.title', 'o.createdAt', 'o.updatedAt', 'a.username as author', 'o.isEnabled as published', 'o.isTrashed as trashed', 'o.body as body', 'c.title as project')
             ->leftJoin('o.Author', 'a')
             ->leftJoin('o.step', 's')
-            ->leftJoin('s.consultationAbstractStep', 'cas')
-            ->leftJoin('cas.consultation', 'c')
+            ->leftJoin('s.projectAbstractStep', 'cas')
+            ->leftJoin('cas.project', 'c')
             ->where('o.id = :id')
             ->setParameter('id', $id)
         ;
@@ -176,9 +176,9 @@ class OpinionRepository extends EntityRepository
     }
 
     /**
-     * Get all opinions in a consultation.
+     * Get all opinions in a project.
      *
-     * @param $consultation
+     * @param $project
      * @param $excludedAuthor
      * @param $orderByRanking
      * @param $limit
@@ -186,7 +186,7 @@ class OpinionRepository extends EntityRepository
      *
      * @return mixed
      */
-    public function getEnabledByConsultation($consultation, $excludedAuthor = null, $orderByRanking = false, $limit = null, $page = 1)
+    public function getEnabledByProject($project, $excludedAuthor = null, $orderByRanking = false, $limit = null, $page = 1)
     {
         $qb = $this->getIsEnabledQueryBuilder()
             ->addSelect('ot', 's', 'aut', 'm')
@@ -194,10 +194,10 @@ class OpinionRepository extends EntityRepository
             ->leftJoin('o.Author', 'aut')
             ->leftJoin('aut.Media', 'm')
             ->leftJoin('o.step', 's')
-            ->leftJoin('s.consultationAbstractStep', 'cas')
-            ->andWhere('cas.consultation = :consultation')
+            ->leftJoin('s.projectAbstractStep', 'cas')
+            ->andWhere('cas.project = :project')
             ->andWhere('o.isTrashed = :trashed')
-            ->setParameter('consultation', $consultation)
+            ->setParameter('project', $project)
             ->setParameter('trashed', false)
         ;
 
@@ -234,11 +234,11 @@ class OpinionRepository extends EntityRepository
     /**
      * Get all trashed or unpublished opinions.
      *
-     * @param $consultation
+     * @param $project
      *
      * @return array
      */
-    public function getTrashedOrUnpublishedByConsultation($consultation)
+    public function getTrashedOrUnpublishedByProject($project)
     {
         $qb = $this->createQueryBuilder('o')
             ->addSelect('ot', 's', 'aut', 'm')
@@ -246,11 +246,11 @@ class OpinionRepository extends EntityRepository
             ->leftJoin('o.Author', 'aut')
             ->leftJoin('aut.Media', 'm')
             ->leftJoin('o.step', 's')
-            ->leftJoin('s.consultationAbstractStep', 'cas')
-            ->andWhere('cas.consultation = :consultation')
+            ->leftJoin('s.projectAbstractStep', 'cas')
+            ->andWhere('cas.project = :project')
             ->andWhere('o.isTrashed = :trashed')
             ->orWhere('o.isEnabled = :disabled')
-            ->setParameter('consultation', $consultation)
+            ->setParameter('project', $project)
             ->setParameter('trashed', true)
             ->setParameter('disabled', false)
             ->orderBy('o.trashedAt', 'DESC');
@@ -271,7 +271,7 @@ class OpinionRepository extends EntityRepository
             ->addSelect('ot', 's', 'c', 'aut', 'm')
             ->leftJoin('o.OpinionType', 'ot')
             ->leftJoin('o.step', 's')
-            ->leftJoin('s.consultation', 'c')
+            ->leftJoin('s.project', 'c')
             ->leftJoin('o.Author', 'aut')
             ->leftJoin('aut.Media', 'm')
             ->andWhere('c.isEnabled = :enabled')
@@ -296,7 +296,7 @@ class OpinionRepository extends EntityRepository
         $qb = $this->getIsEnabledQueryBuilder()
             ->select('COUNT(o) as totalOpinions')
             ->leftJoin('o.step', 's')
-            ->leftJoin('s.consultation', 'c')
+            ->leftJoin('s.project', 'c')
             ->andWhere('s.isEnabled = :enabled')
             ->andWhere('c.isEnabled = :enabled')
             ->andWhere('o.isEnabled = :enabled')
@@ -310,7 +310,7 @@ class OpinionRepository extends EntityRepository
     }
 
     /**
-     * Get opinions by opinionType and consultation step.
+     * Get opinions by opinionType and project step.
      *
      * @param $step
      * @param $opinionType
@@ -394,7 +394,7 @@ class OpinionRepository extends EntityRepository
     }
 
     /**
-     * Get enabled opinions by consultation step.
+     * Get enabled opinions by project step.
      *
      * @param $step
      *
@@ -418,23 +418,23 @@ class OpinionRepository extends EntityRepository
     }
 
     /**
-     * Get all opinions by consultation ordered by votesCountOk.
+     * Get all opinions by project ordered by votesCountOk.
      *
-     * @param $consultation
+     * @param $project
      * @param $excludedAuthor
      *
      * @return mixed
      */
-    public function getEnabledByConsultationsOrderedByVotes(Consultation $consultation, $excludedAuthor = null)
+    public function getEnabledByProjectsOrderedByVotes(Project $project, $excludedAuthor = null)
     {
         $qb = $this->getIsEnabledQueryBuilder()
             ->innerJoin('o.step', 's')
-            ->innerJoin('s.consultationAbstractStep', 'cas')
-            ->innerJoin('cas.consultation', 'c')
+            ->innerJoin('s.projectAbstractStep', 'cas')
+            ->innerJoin('cas.project', 'c')
             ->andWhere('o.isTrashed = :trashed')
-            ->andWhere('cas.consultation = :consultation')
+            ->andWhere('cas.project = :project')
             ->setParameter('trashed', false)
-            ->setParameter('consultation', $consultation)
+            ->setParameter('project', $project)
         ;
 
         if ($excludedAuthor !== null) {

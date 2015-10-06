@@ -39,21 +39,21 @@ Capco\AppBundle\Entity\SiteParameter:
         type: 1
 
     SiteParameter9:
-        keyname: consultations.jumbotron.title
-        category: pages.consultations
-        value: Consultations
+        keyname: projects.jumbotron.title
+        category: pages.projects
+        value: Projets participatifs
         position: 300
         type: 0
     SiteParameter10:
-        keyname: consultations.jumbotron.body
-        category: pages.consultations
+        keyname: projects.jumbotron.body
+        category: pages.projects
         value: |
               <p><text(100)></p>
         position: 310
         type: 1
     SiteParameter11:
-        keyname: consultations.content.body
-        category: pages.consultations
+        keyname: projects.content.body
+        category: pages.projects
         value: |
              <p><text(100)></p>
         position: 320
@@ -148,8 +148,8 @@ Capco\AppBundle\Entity\SiteParameter:
         type: 7
 
     SiteParameter24:
-        keyname: consultations.pagination
-        category: pages.consultations
+        keyname: projects.pagination
+        category: pages.projects
         value: 16
         position: 700
         type: 2
@@ -167,7 +167,7 @@ Capco\AppBundle\Entity\SiteParameter:
         type: 2
     SiteParameterContributorsPagination:
         keyname: contributors.pagination
-        category: pages.consultations
+        category: pages.projects
         value: 18
         position: 730
         type: 2

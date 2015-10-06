@@ -32,8 +32,8 @@ class ThemeAdmin extends Admin
             ->add('isEnabled', null, array(
                 'label' => 'admin.fields.theme.is_enabled',
             ))
-            ->add('Consultations', null, array(
-                'label' => 'admin.fields.theme.consultations',
+            ->add('Projects', null, array(
+                'label' => 'admin.fields.theme.projects',
             ))
             ->add('Ideas', null, array(
                 'label' => 'admin.fields.theme.ideas',
@@ -82,9 +82,9 @@ class ThemeAdmin extends Admin
                 'label' => 'admin.fields.theme.ideas_count',
                 'template' => 'CapcoAdminBundle:Theme:ideas_count_list_field.html.twig',
             ))
-            ->add('consultationsCount', null, array(
-                'label' => 'admin.fields.theme.consultations_count',
-                'template' => 'CapcoAdminBundle:Theme:consultations_count_list_field.html.twig',
+            ->add('projectsCount', null, array(
+                'label' => 'admin.fields.theme.projects_count',
+                'template' => 'CapcoAdminBundle:Theme:projects_count_list_field.html.twig',
             ))
             ->add('eventsCount', null, array(
                 'label' => 'admin.fields.theme.events_count',
@@ -190,8 +190,8 @@ class ThemeAdmin extends Admin
             ->add('Author', null, array(
                 'label' => 'admin.fields.theme.author',
             ))
-            ->add('Consultations', null, array(
-                'label' => 'admin.fields.theme.consultations',
+            ->add('Projects', null, array(
+                'label' => 'admin.fields.theme.projects',
             ))
             ->add('Ideas', null, array(
                 'label' => 'admin.fields.theme.ideas',

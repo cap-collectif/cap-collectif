@@ -1,6 +1,6 @@
-{% extends '@CapcoApp/Consultation/show.html.twig' %}
+{% extends '@CapcoApp/Project/show.html.twig' %}
 
-{% block canonical_link %}{{ url('app_consultation_show_synthesis', {'consultationSlug': consultation.slug, 'stepSlug': currentStep.slug}) }}{% endblock %}
+{% block canonical_link %}{{ url('app_project_show_synthesis', {'projectSlug': project.slug, 'stepSlug': currentStep.slug}) }}{% endblock %}
 
 {% block title %}
     {{ parent() }} - {{ currentStep.title }}
@@ -11,20 +11,20 @@
 
 {% block body %}
     <div class="container  container--custom">
-        {% include '@CapcoApp/Consultation/show_title.html.twig' %}
+        {% include '@CapcoApp/Project/show_title.html.twig' %}
     </div>
 
     <div class="container  container--custom">
         <div class="row">
             <div class="col-xs-12  col-sm-4  col-md-3">
-                {{ render(controller('CapcoAppBundle:Site/Consultation:showMeta', {'consultationSlug': consultation.slug, 'currentStepSlug': currentStep.slug})) }}
+                {{ render(controller('CapcoAppBundle:Site/Project:showMeta', {'projectSlug': project.slug, 'currentStepSlug': currentStep.slug})) }}
             </div>
 
             <div class="col-xs-12  col-sm-8  col-md-9" id="details">
                 <h2 class="h2">
                     {{ currentStep.title }}
                     {% if currentStep.synthesis.editable and is_granted('ROLE_ADMIN') %}
-                        <a class="btn btn-primary pull-right" href="{{ path('app_consultation_edit_synthesis', {'consultationSlug': consultation.slug, 'stepSlug': currentStep.slug}) }}" title="{{ 'synthesis.edit.button' | trans({}, 'CapcoAppBundle') }}">
+                        <a class="btn btn-primary pull-right" href="{{ path('app_project_edit_synthesis', {'projectSlug': project.slug, 'stepSlug': currentStep.slug}) }}" title="{{ 'synthesis.edit.button' | trans({}, 'CapcoAppBundle') }}">
                             <i class="cap cap-pencil-1"></i>
                             {{ 'synthesis.edit.button' | trans({}, 'CapcoAppBundle') }}
                         </a>

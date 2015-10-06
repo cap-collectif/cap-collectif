@@ -54,8 +54,8 @@ fos_elastica:
             provider: ~
             listener: ~
             finder: ~
-        # Consultation
-        consultation:
+        # Project
+        project:
           indexable_callback: getIsEnabled
           mappings:
             id:
@@ -78,7 +78,7 @@ fos_elastica:
                   index: not_analyzed
           persistence:
             driver: orm
-            model: Capco\AppBundle\Entity\Consultation
+            model: Capco\AppBundle\Entity\Project
             provider: ~
             listener: ~
             finder: ~

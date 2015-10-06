@@ -14,12 +14,12 @@ class SynthesisAdmin extends Admin
      */
     protected function configureFormFields(FormMapper $formMapper)
     {
-        $consultationId = null;
+        $projectId = null;
 
         if ($this->hasParentFieldDescription()) { // this Admin is embedded
-            $consultationId = $this->getParentFieldDescription()->getAdmin()->getPersistentParameters()['consultation_id'];
+            $projectId = $this->getParentFieldDescription()->getAdmin()->getPersistentParameters()['project_id'];
         } else {
-            $consultationId = $this->getRequest()->get('consultation_id');
+            $projectId = $this->getRequest()->get('project_id');
         }
 
         $formMapper
@@ -44,7 +44,7 @@ class SynthesisAdmin extends Admin
             ->add('consultationStep', 'entity', array(
                 'label' => 'admin.fields.synthesis.consultation_step',
                 'class' => 'CapcoAppBundle:ConsultationStep',
-                'query_builder' => $this->createQueryBuilderForConsultationSteps($consultationId),
+                'query_builder' => $this->createQueryBuilderForConsultationSteps($projectId),
                 'required' => false,
                 'empty_value' => 'admin.fields.synthesis.consultation_step_empty',
                 'help' => 'admin.help.synthesis.consultation_step',
@@ -66,7 +66,7 @@ class SynthesisAdmin extends Admin
         $this->getConfigurationPool()->getContainer()->get('capco.synthesis.synthesis_handler')->createOrUpdateElementsFromSource($synthesis);
     }
 
-    private function createQueryBuilderForConsultationSteps($consultationId)
+    private function createQueryBuilderForConsultationSteps($projectId)
     {
         $qb = $this->modelManager
             ->createQuery('CapcoAppBundle:ConsultationStep', 'cs')
@@ -74,11 +74,11 @@ class SynthesisAdmin extends Admin
             ->setParameter('enabled', true)
         ;
 
-        if ($consultationId) {
+        if ($projectId) {
             $qb
-                ->leftJoin('cs.consultationAbstractStep', 'cas')
-                ->andWhere('cas.consultation = :consultationId')
-                ->setParameter('consultationId', $consultationId)
+                ->leftJoin('cs.projectAbstractStep', 'cas')
+                ->andWhere('cas.project = :projectId')
+                ->setParameter('projectId', $projectId)
             ;
         }
 
