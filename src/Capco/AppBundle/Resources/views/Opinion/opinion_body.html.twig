@@ -29,25 +29,19 @@
             {% endif %}
         </p>
         <h3 class="opinion__title">
-            {% if opinion.isEnabled == false %}
-            <span class="label label-default" style="position: static; margin-right: 5px">
-                    {{ 'opinion.show.disabled.label'|trans({}, 'CapcoAppBundle') }}
-                </span>
-            {% elseif opinion.isTrashed %}
+            {% if trashed is not defined and profile is not defined and opinion.isTrashed %}
                 <span class="label label-default" style="position: static; margin-right: 5px">
                     {{ 'opinion.show.trashed.label'|trans({}, 'CapcoAppBundle') }}
                 </span>
             {% endif %}
-            {% if opinion.isEnabled %}
-                {% if isVersion %}
-                    <a href="{{ path('app_consultation_show_opinion_version', {'consultationSlug': opinion.parent.step.consultation.slug, 'stepSlug': opinion.parent.step.slug, 'opinionTypeSlug': opinion.parent.opinionType.slug, 'opinionSlug': opinion.parent.slug, 'versionSlug': opinion.slug}) }}">
-                        {{ opinion.title }}
-                    </a>
-                {% else %}
-                    <a href="{{ path('app_consultation_show_opinion', {'consultationSlug': opinion.step.consultation.slug, 'stepSlug': opinion.step.slug, 'opinionTypeSlug': opinionType.slug, 'opinionSlug': opinion.slug}) }}">
-                        {{ opinion.title }}
-                    </a>
-                {% endif %}
+            {% if isVersion %}
+                <a href="{{ path('app_consultation_show_opinion_version', {'consultationSlug': opinion.parent.step.consultation.slug, 'stepSlug': opinion.parent.step.slug, 'opinionTypeSlug': opinion.parent.opinionType.slug, 'opinionSlug': opinion.parent.slug, 'versionSlug': opinion.slug}) }}">
+                    {{ opinion.title }}
+                </a>
+            {% else %}
+                <a href="{{ path('app_consultation_show_opinion', {'consultationSlug': opinion.step.consultation.slug, 'stepSlug': opinion.step.slug, 'opinionTypeSlug': opinionType.slug, 'opinionSlug': opinion.slug}) }}">
+                    {{ opinion.title }}
+                </a>
             {% endif %}
         </h3>
         {% set opinionType = isVersion ? opinion.parent.opinionType : opinion.opinionType %}

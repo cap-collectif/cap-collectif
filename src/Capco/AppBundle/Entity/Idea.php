@@ -4,7 +4,6 @@ namespace Capco\AppBundle\Entity;
 
 use Capco\AppBundle\Model\CommentableInterface;
 use Capco\AppBundle\Traits\CommentableTrait;
-use Capco\AppBundle\Traits\ValidableTrait;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
@@ -21,7 +20,6 @@ use Capco\AppBundle\Validator\Constraints as CapcoAssert;
 class Idea implements CommentableInterface
 {
     use CommentableTrait;
-    use ValidableTrait;
 
     public static $sortCriterias = [
         'last' => 'idea.sort.last',

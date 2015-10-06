@@ -63,7 +63,6 @@ class ArgumentController extends Controller
             if ($form->isValid()) {
                 $em = $this->getDoctrine()->getManager();
                 $argument->resetVotes();
-                $argument->setValidated(false);
                 $em->persist($argument);
                 $em->flush();
 

@@ -13,27 +13,41 @@
 
     {% include '@CapcoUser/Profile/showProfile.html.twig' %}
 
-    <div class="container  container--custom">
+    <div class="container container--custom">
         <h2>{{ 'user.profile.show.opinions' | trans({}, 'CapcoAppBundle') }}</h2>
         {% include '@CapcoUser/Profile/opinions.html.twig' %}
     </div>
-    <div class="container  container--custom">
+
+    <div class="container container--custom">
+        <h2>{{ 'user.profile.show.opinions_versions' | trans({}, 'CapcoAppBundle') }}</h2>
+        {% include '@CapcoUser/Profile/opinionVersions.html.twig' %}
+    </div>
+
+    <div class="container container--custom">
         <h2>{{ 'user.profile.show.arguments' | trans({}, 'CapcoAppBundle') }}</h2>
         {% include '@CapcoUser/Profile/arguments.html.twig' %}
     </div>
-    <div class="container  container--custom">
+
+    <div class="container container--custom">
         <h2>{{ 'user.profile.show.sources' | trans({}, 'CapcoAppBundle') }}</h2>
         {% include '@CapcoUser/Profile/sources.html.twig' %}
     </div>
-    <div class="container  container--custom">
-        <h2>{{ 'user.profile.show.ideas' | trans({}, 'CapcoAppBundle') }}</h2>
-        {% include '@CapcoUser/Profile/ideas.html.twig' %}
-    </div>
-    <div class="container  container--custom">
-        <h2>{{ 'user.profile.show.comments' | trans({}, 'CapcoAppBundle') }}</h2>
-        {% include '@CapcoUser/Profile/comments.html.twig' %}
-    </div>
-    <div class="container  container--custom">
+
+    {% if is_feature_enabled('ideas') %}
+        <div class="container container--custom">
+            <h2>{{ 'user.profile.show.ideas' | trans({}, 'CapcoAppBundle') }}</h2>
+            {% include '@CapcoUser/Profile/ideas.html.twig' %}
+        </div>
+    {% endif %}
+
+    {% if is_feature_enabled('ideas') or is_feature_enabled('calendar') or is_feature_enabled('blog') %}
+        <div class="container container--custom">
+            <h2>{{ 'user.profile.show.comments' | trans({}, 'CapcoAppBundle') }}</h2>
+            {% include '@CapcoUser/Profile/comments.html.twig' %}
+        </div>
+    {% endif %}
+
+    <div class="container container--custom">
         <h2>{{ 'user.profile.show.votes' | trans({}, 'CapcoAppBundle') }}</h2>
         {% include '@CapcoUser/Profile/votes.html.twig' %}
     </div>

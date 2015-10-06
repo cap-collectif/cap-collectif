@@ -88,6 +88,13 @@ class ReportingAdmin extends Admin
             ->add('_action', 'actions', array(
                 'actions' => array(
                     'show' => array(),
+                    'disable' => array(
+                        'template' => 'CapcoAdminBundle:CRUD:list__action_disable.html.twig',
+                    ),
+                    'trash' => array(
+                        'template' => 'CapcoAdminBundle:CRUD:list__action_trash.html.twig',
+                    ),
+                    'delete' => array(),
                 ),
             ))
         ;
@@ -134,8 +141,6 @@ class ReportingAdmin extends Admin
     {
         $collection->remove('create');
         $collection->remove('edit');
-        $collection->remove('delete');
-        $collection->add('archive', $this->getRouterIdParameter().'/archive');
         $collection->add('disable', $this->getRouterIdParameter().'/disable');
         $collection->add('trash', $this->getRouterIdParameter().'/trash');
     }
@@ -146,14 +151,4 @@ class ReportingAdmin extends Admin
             'reporting',
         );
     }
-
-    public function getTemplate($name)
-    {
-        if ($name === 'show') {
-            return 'CapcoAdminBundle:Reporting:show.html.twig';
-        }
-        return parent::getTemplate($name);
-    }
-
-
 }

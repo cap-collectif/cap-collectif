@@ -29,7 +29,7 @@
             </div>
 
             <div class="col-xs-12  col-sm-8  col-md-9" id="details">
-                {% set trashedNb = (arguments|length + opinions|length + versions|length + sources|length) %}
+                {% set trashedNb = (arguments|length + opinions|length + sources|length) %}
                 <div class="block  block--bordered">
                     <div class="opinion  opinion--gray opinion--default">
                         <div class="opinion__header  opinion__header--mobile-centered">
@@ -45,22 +45,17 @@
                         </li>
                         {% if opinions|length > 0 %}
                             {% for opinion in opinions %}
-                                {% include 'CapcoAppBundle:Opinion:blockOpinion.html.twig' with {'opinion': opinion, 'opinionType': opinion.opinionType} only %}
-                            {% endfor %}
-                        {% endif %}
-                        {% if versions|length > 0 %}
-                            {% for version in versions %}
-                                {% include 'CapcoAppBundle:Opinion:blockOpinion.html.twig' with {'opinion': version, 'isVersion': true} only %}
+                                {% include 'CapcoAppBundle:Opinion:blockOpinion.html.twig' with {'opinion': opinion, 'opinionType': opinion.opinionType, 'trashed': true} only %}
                             {% endfor %}
                         {% endif %}
                         {% if arguments|length > 0 %}
                             {% for argument in arguments %}
-                                {% include 'CapcoAppBundle:Argument:blockArgument.html.twig' with {'argument': argument, 'argumentsLabels': argumentsLabels} only %}
+                                {% include 'CapcoAppBundle:Argument:blockArgument.html.twig' with {'trashed': true, 'argument': argument, 'argumentsLabels': argumentsLabels} only %}
                             {% endfor %}
                         {% endif %}
                         {% if sources|length > 0 %}
                             {% for source in sources %}
-                                {% include 'CapcoAppBundle:Source:blockSource.html.twig' with {'source': source, 'opinion': source.opinion, 'opinionType': source.opinion.opinionType, 'consultation': consultation } only %}
+                                {% include 'CapcoAppBundle:Source:blockSource.html.twig' with {'source': source, 'opinion': source.opinion, 'opinionType': source.opinion.opinionType, 'consultation': consultation, 'trashed': true } only %}
                             {% endfor %}
                         {% endif %}
                         {% else %}

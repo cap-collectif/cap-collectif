@@ -10,13 +10,13 @@ const OpinionInfos = React.createClass({
   mixins: [ReactIntl.IntlMixin],
 
   renderDate() {
-    if (!Modernizr.intl) {
-      return null;
+    if (navigator.userAgent.indexOf('Safari') !== -1 && navigator.userAgent.indexOf('Chrome') === -1) {
+      return <span />;
     }
     return (
       <span className="excerpt">
         <FormattedDate
-            value={moment(this.props.opinion.created_at)}
+            value={this.props.opinion.created_at}
             day="numeric" month="long" year="numeric"
             hour="numeric" minute="numeric"
          />
@@ -25,12 +25,12 @@ const OpinionInfos = React.createClass({
   },
 
   renderEditionDate() {
-    if (!Modernizr.intl) {
-      return null;
+    if (navigator.userAgent.indexOf('Safari') !== -1 && navigator.userAgent.indexOf('Chrome') === -1) {
+      return <span />;
     }
 
-    if (moment(this.props.opinion.updated_at).diff(this.props.opinion.created_at, 'seconds') <= 1) {
-      return null;
+    if (this.props.opinion.updated_at === this.props.opinion.created_at) {
+      return <span />;
     }
 
     return (
@@ -39,7 +39,7 @@ const OpinionInfos = React.createClass({
         { this.getIntlMessage('global.edited') }
         { ' ' }
         <FormattedDate
-          value={moment(this.props.opinion.updated_at)}
+          value={this.props.opinion.updated_at}
           day="numeric" month="long" year="numeric"
           hour="numeric" minute="numeric"
         />
