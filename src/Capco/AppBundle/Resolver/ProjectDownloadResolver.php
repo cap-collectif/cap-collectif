@@ -146,8 +146,25 @@ class ProjectDownloadResolver
 
     public function getData($consultationStep)
     {
+        // Opinions
         $opinions = $this->em->getRepository('CapcoAppBundle:Opinion')->getEnabledByConsultationStep($consultationStep);
         $this->getOpinionsData($opinions);
+        $opinionsVotes = $this->em->getRepository('CapcoAppBundle:OpinionVote')->getEnabledByConsultationStep($consultationStep);
+        $this->getVotesData($opinionsVotes);
+
+        // Versions
+        $versions = $this->em->getRepository('CapcoAppBundle:OpinionVersion')->getEnabledByConsultationStep($consultationStep);
+        $this->getVersionsData($versions);
+        $versionsVotes = $this->em->getRepository('CapcoAppBundle:OpinionVersionVote')->getEnabledByConsultationStep($consultationStep);
+        $this->getVotesData($versionsVotes);
+
+        // Arguments
+        $arguments = $this->em->getRepository('CapcoAppBundle:Argument')->getEnabledByConsultationStep($consultationStep);
+        $this->getArgumentsData($arguments);
+
+        // Sources
+        $sources = $this->em->getRepository('CapcoAppBundle:Source')->getEnabledByConsultationStep($consultationStep);
+        $this->getSourcesData($sources);
 
         return $this->data;
     }
@@ -158,10 +175,6 @@ class ProjectDownloadResolver
             if ($opinion->getIsEnabled()) {
                 $this->addItemToData($this->getOpinionItem($opinion), $opinion->isPublished());
                 $this->getAppendicesData($opinion->getAppendices());
-                $this->getVersionsData($opinion->getVersions());
-                $this->getArgumentsData($opinion->getArguments());
-                $this->getSourcesData($opinion->getSources());
-                $this->getVotesData($opinion->getVotes());
             }
         }
     }
@@ -178,9 +191,6 @@ class ProjectDownloadResolver
         foreach ($versions as $version) {
             if ($version->isEnabled()) {
                 $this->addItemToData($this->getOpinionVersionItem($version), $version->isPublished());
-                $this->getArgumentsData($version->getArguments());
-                $this->getSourcesData($version->getSources());
-                $this->getVotesData($version->getVotes());
             }
         }
     }
