@@ -211,7 +211,7 @@ class OpinionVersion
         return $this;
     }
 
-    public function removeVote(OpinionVersionVote  $vote)
+    public function removeVote(OpinionVersionVote $vote)
     {
         $this->votes->removeElement($vote);
 
@@ -450,5 +450,20 @@ class OpinionVersion
     public function isPublished()
     {
         return $this->enabled && !$this->isTrashed && $this->parent->isPublished();
+    }
+
+    /**
+     * @return $this
+     */
+    public function resetVotes()
+    {
+        foreach ($this->votes as $vote) {
+            $this->removeVote($vote);
+        }
+        $this->voteCountMitige = 0;
+        $this->voteCountNok = 0;
+        $this->voteCountOk = 0;
+
+        return $this;
     }
 }

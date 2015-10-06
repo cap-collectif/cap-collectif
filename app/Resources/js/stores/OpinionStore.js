@@ -8,6 +8,10 @@ import {
   DELETE_OPINION_VOTE,
   RECEIVE_ARGUMENTS,
   CREATE_ARGUMENT_SUCCESS,
+  CREATE_OPINION_VERSION_SUCCESS,
+  CREATE_OPINION_VERSION_FAILURE,
+  UPDATE_OPINION_VERSION_SUCCESS,
+  UPDATE_OPINION_VERSION_FAILURE,
 } from '../constants/OpinionConstants';
 
 class OpinionStore extends BaseStore {
@@ -80,6 +84,26 @@ class OpinionStore extends BaseStore {
         this._areArgumentsSync[action.type] = true;
         this.emitChange();
         break;
+      case CREATE_OPINION_VERSION_SUCCESS:
+        this._isProcessing = false;
+        this._resetArgumentsSync();
+        this._isOpinionSync = false;
+        break;
+      case CREATE_OPINION_VERSION_FAILURE:
+        this._isProcessing = false;
+        this._resetArgumentsSync();
+        this._isOpinionSync = false;
+        break;
+      case UPDATE_OPINION_VERSION_SUCCESS:
+        this._isProcessing = false;
+        this._resetArgumentsSync();
+        this._isOpinionSync = false;
+        break;
+      case UPDATE_OPINION_VERSION_FAILURE:
+        this._isProcessing = false;
+        this._resetArgumentsSync();
+        this._isOpinionSync = false;
+        break;
       case CREATE_ARGUMENT_SUCCESS:
         this._isProcessing = false;
         this._areArgumentsSync[action.type] = false;
@@ -128,6 +152,11 @@ class OpinionStore extends BaseStore {
 
   get messages() {
     return this._messages;
+  }
+
+  _resetArgumentsSync() {
+    this._areArgumentsSync[0] = false;
+    this._areArgumentsSync[1] = false;
   }
 
   _resetMessages() {

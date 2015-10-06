@@ -2,7 +2,14 @@
 
 namespace Capco\AppBundle\Manager;
 
+use Capco\AppBundle\Entity\AbstractComment;
+use Capco\AppBundle\Entity\Argument;
+use Capco\AppBundle\Entity\Idea;
+use Capco\AppBundle\Entity\Opinion;
+use Capco\AppBundle\Entity\OpinionVersion;
 use Capco\AppBundle\Entity\Reporting;
+use Capco\AppBundle\Entity\Source;
+use Capco\AppBundle\Resolver\UrlResolver;
 use Capco\AppBundle\SiteParameter\Resolver;
 use Capco\UserBundle\Entity\User;
 use FOS\UserBundle\Model\UserInterface;
@@ -19,14 +26,16 @@ class Notify implements MailerInterface
     protected $translator;
     protected $router;
     protected $parameters;
+    protected $urlResolver;
 
-    public function __construct(\Swift_Mailer $mailer, EngineInterface $templating, TranslatorInterface $translator, Resolver $resolver, Router $router, array $parameters)
+    public function __construct(\Swift_Mailer $mailer, EngineInterface $templating, TranslatorInterface $translator, Resolver $resolver, Router $router, UrlResolver $urlResolver, array $parameters)
     {
         $this->mailer = $mailer;
         $this->templating = $templating;
         $this->resolver = $resolver;
         $this->translator = $translator;
         $this->router = $router;
+        $this->urlResolver = $urlResolver;
         $this->parameters = $parameters;
     }
 
@@ -90,7 +99,7 @@ class Notify implements MailerInterface
 
     // Notifications to admin emails (reporting)
 
-    public function sendNotifyMessage(User $user, $type, $message)
+    public function sendNotifyMessage(Reporting $report)
     {
         $to = $this->resolver->getValue('admin.mail.notifications.receive_address');
         if ($to) {
@@ -102,13 +111,20 @@ class Notify implements MailerInterface
                 'CapcoAppBundle'
             );
             $template = 'CapcoAppBundle:Mail:notify.html.twig';
-            $type = $this->translator->trans(Reporting::$statusesLabels[$type], array(), 'CapcoAppBundle');
+            $type = $this->translator->trans(Reporting::$statusesLabels[$report->getStatus()], array(), 'CapcoAppBundle');
             $body = $this->templating->render(
                 $template,
-                array('user' => $user, 'type' => $type, 'message' => $message)
+                [
+                    'user' => $report->getReporter(),
+                    'type' => $type,
+                    'message' => $report->getBody(),
+                    'contribution' => $report->getRelatedObject(),
+                    'siteURL' => $this->urlResolver->getObjectUrl($report->getRelatedObject(), true),
+                    'adminURL' => $this->router->generate('admin_capco_app_reporting_show', ['id' => $report->getRelatedObject()->getId()], true),
+                ]
             );
 
-            $this->sendEmail($to, $user->getEmail(), $user->getUsername(), $body, $subject);
+            $this->sendEmail($to, $report->getReporter()->getEmail(), $report->getReporter()->getUsername(), $body, $subject);
         }
     }
 }

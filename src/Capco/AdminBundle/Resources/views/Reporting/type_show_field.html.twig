@@ -4,12 +4,16 @@
     <div>
         {% if(object.Opinion is not null) %}
             <span>{{ 'admin.fields.reporting.opinion'|trans({}, 'SonataAdminBundle') }}</span>
+        {% elseif (object.opinionVersion is not null) %}
+            <span>{{ 'admin.fields.reporting.version'|trans({}, 'SonataAdminBundle') }}</span>
         {% elseif (object.Source is not null) %}
             <span>{{ 'admin.fields.reporting.source'|trans({}, 'SonataAdminBundle') }}</span>
         {% elseif (object.Argument is not null) %}
             <span>{{ 'admin.fields.reporting.argument'|trans({}, 'SonataAdminBundle') }}</span>
         {% elseif (object.Idea is not null) %}
             <span>{{ 'admin.fields.reporting.idea'|trans({}, 'SonataAdminBundle') }}</span>
+        {% elseif (object.Comment is not null) %}
+            <span>{{ 'admin.fields.reporting.comment'|trans({}, 'SonataAdminBundle') }}</span>
         {% endif %}
     </div>
 {% endblock %}

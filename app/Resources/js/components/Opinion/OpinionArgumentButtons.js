@@ -17,12 +17,15 @@ const OpinionArgumentButtons = React.createClass({
     };
   },
 
+  componentWillReceiveProps(nextProps) {
+    this.setState({
+      hasVoted: nextProps.argument.has_user_voted,
+    });
+  },
+
   getVoteCount() {
-    let diff = 0;
-    if (this.state.hasVoted !== this.props.argument.has_user_voted) {
-      diff = this.props.argument.has_user_voted ? -1 : 1;
-    }
-    return this.props.argument.votes_count + diff < 0 ? 0 : this.props.argument.votes_count + diff;
+    const count = this.props.argument.votes_count;
+    return this.state.hasVoted !== this.props.argument.has_user_voted ? count + 1 : count;
   },
 
   renderVoteButton() {
