@@ -40,10 +40,6 @@
 {% block mainContent %}{% endblock %}
 
 {% block javascripts %}
-    <script type="text/javascript">
-        //self.fetch = null;
-    </script>
-
     <script src="{{ asset('js/vendor.js') }}"></script>
     <script src="{{ asset('js/app.js') }}"></script>
     {% set client_js = capco_site_parameter_value('global.site.embed_js') %}

@@ -101,7 +101,7 @@ const CommentSection = React.createClass({
         </button>
       );
     }
-    return <span />;
+    return null;
   },
 
   render() {
@@ -120,7 +120,7 @@ const CommentSection = React.createClass({
         <Loader show={this.state.isLoading} />
         {(!this.state.isLoading
             ? <CommentForm comment={this.comment.bind(this)} focus={false} />
-            : <span />
+            : null
         )}
         <CommentList {...this.props}
           comments={this.state.comments}

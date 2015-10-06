@@ -32,10 +32,16 @@
 {% block javascripts %}
     {{ parent() }}
     <script type="text/javascript">
+        require('Resources/js/modernizr');
         require('Resources/js/jsapi');
         require('Resources/js/googleCharts');
         var cookieChoices = require('Resources/js/cookiechoices');
         var App = require('Resources/js/app');
+        if (!Modernizr.intl) {
+            require('Resources/js/browserUpdate');
+        }
+    </script>
+
 
         $(window).on('load', function() {
             App.externalLinks();
