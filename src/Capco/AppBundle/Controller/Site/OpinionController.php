@@ -230,6 +230,7 @@ class OpinionController extends Controller
             if ($form->isValid()) {
                 $em = $this->getDoctrine()->getManager();
                 $opinion->resetVotes();
+                $opinion->setValidated(false);
                 $em->persist($opinion);
                 $em->flush();
 

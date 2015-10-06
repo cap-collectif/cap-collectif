@@ -1,0 +1,30 @@
+{% extends base_template %}
+
+{% block content %}
+    {% set title = 'admin.action.recent_contributions.' ~ del_action ~ '.title' %}
+    {% set message = 'admin.action.recent_contributions.' ~ del_action ~ '.message' %}
+    {% set inputLabel = 'admin.action.recent_contributions.' ~ del_action ~ '.input_label' %}
+    {% set submit = 'admin.action.recent_contributions.' ~ del_action ~ '.submit' %}
+    <div class="sonata-ba-delete">
+
+        <div class="box box-danger">
+            <div class="box-header">
+                <h3 class="box-title">{{ title | trans({}, 'SonataAdminBundle') }}</h3>
+            </div>
+            <form method="POST" action="{{ path('capco_admin_contributions_' ~ del_action, {'type': type, 'id': id}) }}">
+                <div class="box-body">
+                    <p>{{ message | trans({}, 'SonataAdminBundle') }}</p>
+                    <label for="motives" class="control-label">{{ inputLabel | trans({}, 'SonataAdminBundle') }}</label>
+                    <textarea class="form-control" name="motives"></textarea>
+                </div>
+                <div class="box-footer clearfix">
+                    <button type="submit" class="btn btn-danger"><i class="glyphicon glyphicon-trash"></i> {{ submit|trans({}, 'SonataAdminBundle') }}</button>
+                    {{ 'delete_or'|trans({}, 'SonataAdminBundle') }}
+                    <a class="btn btn-success" href="{{ path('capco_admin_contributions_show', {'type': type, 'id': id}) }}">
+                        <i class="glyphicon glyphicon-eye"></i>
+                        {{ 'link_action_show'|trans({}, 'SonataAdminBundle') }}</a>
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock %}
