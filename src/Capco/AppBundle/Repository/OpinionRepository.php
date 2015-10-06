@@ -310,7 +310,7 @@ class OpinionRepository extends EntityRepository
     }
 
     /**
-     * Get opinions by opinionType and consultation step.
+     * Get opinions by opinionType and project step.
      *
      * @param $step
      * @param $opinionType
@@ -394,7 +394,7 @@ class OpinionRepository extends EntityRepository
     }
 
     /**
-     * Get enabled opinions by consultation step.
+     * Get enabled opinions by project step.
      *
      * @param $step
      *

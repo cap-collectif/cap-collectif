@@ -161,7 +161,7 @@ class ArgumentRepository extends EntityRepository
     }
 
     /**
-     * Find enabled arguments by consultation step.
+     * Find enabled arguments by project step.
      *
      * @param $step
      *

@@ -6,7 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
-class RecalculateCountersCommand extends ContainerAwareCommand
+class RecalculateProjectsCommand extends ContainerAwareCommand
 {
     protected function configure()
     {
@@ -117,7 +117,7 @@ class RecalculateCountersCommand extends ContainerAwareCommand
         )');
         $query->execute();
 
-        // ************************ Consultation step counters ***********************************************
+        // ************************ Project step counters ***********************************************
 
         $query = $em->createQuery('update CapcoAppBundle:ConsultationStep cs set cs.opinionCount =
             (select count(o.id) from CapcoAppBundle:Opinion o where o.step = cs AND o.isEnabled = 1 AND o.isTrashed = 0 group by o.step)');

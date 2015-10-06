@@ -40,7 +40,7 @@ class ProjectController extends Controller
         ];
     }
 
-    // Page consultation
+    // Page project
 
     /**
      * @Route("/projects/{projectSlug}/consultation/{stepSlug}", name="app_project_show")
