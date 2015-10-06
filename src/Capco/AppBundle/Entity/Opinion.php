@@ -14,7 +14,7 @@ use Capco\UserBundle\Entity\User;
 /**
  * Opinion.
  *
- * @ORM\Table(name="opinion")
+ * @ORM\Table(name="opinion",indexes={@ORM\Index(name="idx_enabled", columns={"id", "enabled"})})
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\OpinionRepository")
  * @ORM\HasLifecycleCallbacks()
  */
