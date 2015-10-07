@@ -51,7 +51,7 @@ const OpinionSourceButtons = React.createClass({
         </Button>
       );
     }
-    return <span />;
+    return null;
   },
 
   renderEditButton() {

@@ -210,8 +210,7 @@ class ConsultationController extends Controller
      * @ParamConverter("consultation", class="CapcoAppBundle:Consultation", options={"mapping": {"consultationSlug": "slug"}})
      * @Template("CapcoAppBundle:Consultation:show_trashed.html.twig")
      *
-     * @param Consultation     $consultation
-     * @param ConsultationStep $currentStep
+     * @param Consultation  $consultation
      *
      * @return array
      */
@@ -225,13 +224,15 @@ class ConsultationController extends Controller
             throw new AccessDeniedException($this->get('translator')->trans('error.access_restricted', [], 'CapcoAppBundle'));
         }
 
-        $opinions = $this->getDoctrine()->getRepository('CapcoAppBundle:Opinion')->getTrashedByConsultation($consultation);
-        $arguments = $this->getDoctrine()->getRepository('CapcoAppBundle:Argument')->getTrashedByConsultation($consultation);
-        $sources = $this->getDoctrine()->getRepository('CapcoAppBundle:Source')->getTrashedByConsultation($consultation);
+        $opinions = $this->getDoctrine()->getRepository('CapcoAppBundle:Opinion')->getTrashedOrUnpublishedByConsultation($consultation);
+        $versions = $this->getDoctrine()->getRepository('CapcoAppBundle:OpinionVersion')->getTrashedOrUnpublishedByConsultation($consultation);
+        $arguments = $this->getDoctrine()->getRepository('CapcoAppBundle:Argument')->getTrashedOrUnpublishedByConsultation($consultation);
+        $sources = $this->getDoctrine()->getRepository('CapcoAppBundle:Source')->getTrashedOrUnpublishedByConsultation($consultation);
 
         return [
             'consultation' => $consultation,
             'opinions' => $opinions,
+            'versions' => $versions,
             'arguments' => $arguments,
             'sources' => $sources,
             'argumentsLabels' => Argument::$argumentTypesLabels,

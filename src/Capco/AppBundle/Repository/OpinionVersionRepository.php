@@ -6,12 +6,77 @@ use Capco\AppBundle\Entity\Consultation;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 use Capco\AppBundle\Entity\Opinion;
+use Doctrine\ORM\Query;
 
 /**
  * OpinionVersionRepository.
  */
 class OpinionVersionRepository extends EntityRepository
 {
+    public function getRecentOrdered()
+    {
+        $qb = $this->createQueryBuilder('o')
+            ->select('o.id', 'o.title', 'o.createdAt', 'o.updatedAt', 'a.username as author', 'o.enabled as published', 'o.isTrashed as trashed', 'c.title as consultation')
+            ->where('o.validated = :validated')
+            ->leftJoin('o.author', 'a')
+            ->leftJoin('o.parent', 'op')
+            ->leftJoin('op.step', 's')
+            ->leftJoin('s.consultationAbstractStep', 'cas')
+            ->leftJoin('cas.consultation', 'c')
+            ->setParameter('validated', false)
+        ;
+
+        return $qb->getQuery()
+            ->getArrayResult()
+        ;
+    }
+
+    public function getArrayById($id)
+    {
+        $qb = $this->createQueryBuilder('o')
+            ->select('o.id', 'o.title', 'o.createdAt', 'o.updatedAt', 'a.username as author', 'o.enabled as published', 'o.isTrashed as trashed', 'CONCAT(CONCAT(o.comment, \'<hr>\'), o.body) as body', 'c.title as consultation')
+            ->leftJoin('o.author', 'a')
+            ->leftJoin('o.parent', 'op')
+            ->leftJoin('op.step', 's')
+            ->leftJoin('s.consultationAbstractStep', 'cas')
+            ->leftJoin('cas.consultation', 'c')
+            ->where('o.id = :id')
+            ->setParameter('id', $id)
+        ;
+
+        return $qb->getQuery()
+            ->getOneOrNullResult(Query::HYDRATE_ARRAY)
+        ;
+    }
+
+    /**
+     * Get trashed or unpublished versions by consultation.
+     *
+     * @param $consultation
+     *
+     * @return array
+     */
+    public function getTrashedOrUnpublishedByConsultation($consultation)
+    {
+        $qb = $this->createQueryBuilder('o')
+            ->addSelect('op', 's', 'aut', 'm')
+            ->leftJoin('o.parent', 'op')
+            ->leftJoin('op.OpinionType', 'ot')
+            ->leftJoin('o.author', 'aut')
+            ->leftJoin('aut.Media', 'm')
+            ->leftJoin('op.step', 's')
+            ->leftJoin('s.consultationAbstractStep', 'cas')
+            ->andWhere('cas.consultation = :consultation')
+            ->andWhere('o.isTrashed = :trashed')
+            ->orWhere('o.enabled = :disabled')
+            ->setParameter('consultation', $consultation)
+            ->setParameter('trashed', true)
+            ->setParameter('disabled', false)
+            ->orderBy('o.trashedAt', 'DESC');
+
+        return $qb->getQuery()->getResult();
+    }
+
     public function getEnabledByOpinion(Opinion $opinion, $offset = 0, $limit = 10, $filter = 'last')
     {
         $qb = $this->getIsEnabledQueryBuilder()
@@ -50,22 +115,6 @@ class OpinionVersionRepository extends EntityRepository
             ->setMaxResults($limit);
 
         return new Paginator($qb);
-    }
-
-
-    public function getByUser($user)
-    {
-        return $this->getIsEnabledQueryBuilder('ov')
-            ->leftJoin('ov.author', 'author')
-            ->addSelect('author')
-            ->leftJoin('author.Media', 'm')
-            ->addSelect('m')
-            ->leftJoin('ov.votes', 'votes')
-            ->addSelect('votes')
-            ->andWhere('ov.author = :author')
-            ->setParameter('author', $user)
-            ->getQuery()
-            ->getResult();
     }
 
     /**

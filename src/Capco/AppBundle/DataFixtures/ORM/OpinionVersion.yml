@@ -32,3 +32,14 @@ Capco\AppBundle\Entity\OpinionVersion:
         author: @user2
         parent: @opinion57
         comment: bououh
+
+    version{4...10}:
+        title: Modification <current()>
+        body: |
+             <p><text(100)></p>
+             <p><text(300)></p>
+        enabled: true
+        isTrashed: true
+        author: @user2
+        parent: @opinion<numberBetween(57,59)>
+        comment: Coeur avec les doigts !

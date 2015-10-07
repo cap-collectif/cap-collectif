@@ -3,12 +3,41 @@
 namespace Capco\AppBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\Query;
 
 /**
  * AbstractCommentRepository.
  */
 class AbstractCommentRepository extends EntityRepository
 {
+    public function getRecentOrdered()
+    {
+        $qb = $this->createQueryBuilder('c')
+            ->select('c.id', 'c.createdAt', 'c.updatedAt', 'a.username as author', 'c.isEnabled as published', 'c.isTrashed as trashed')
+            ->where('c.validated = :validated')
+            ->leftJoin('c.Author', 'a')
+            ->setParameter('validated', false)
+        ;
+
+        return $qb->getQuery()
+            ->getArrayResult()
+            ;
+    }
+
+    public function getArrayById($id)
+    {
+        $qb = $this->createQueryBuilder('c')
+            ->select('c.id', 'c.createdAt', 'c.updatedAt', 'a.username as author', 'c.isEnabled as published', 'c.isTrashed as trashed', 'c.body as body')
+            ->leftJoin('c.Author', 'a')
+            ->where('c.id = :id')
+            ->setParameter('id', $id)
+        ;
+
+        return $qb->getQuery()
+            ->getOneOrNullResult(Query::HYDRATE_ARRAY)
+            ;
+    }
+
     /**
      * Get one comment by id.
      *

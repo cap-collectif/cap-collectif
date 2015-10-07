@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\Entity;
 
+use Capco\AppBundle\Traits\ValidableTrait;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
@@ -14,7 +15,7 @@ use Capco\UserBundle\Entity\User;
 /**
  * Opinion.
  *
- * @ORM\Table(name="opinion")
+ * @ORM\Table(name="opinion",indexes={@ORM\Index(name="idx_enabled", columns={"id", "enabled"})})
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\OpinionRepository")
  * @ORM\HasLifecycleCallbacks()
  */
@@ -23,6 +24,7 @@ class Opinion
     use TrashableTrait;
     use SluggableTitleTrait;
     use VotableTrait;
+    use ValidableTrait;
 
     public static $sortCriterias = [
         'positions' => 'opinion.sort.positions',

@@ -5,12 +5,12 @@ Background:
 
 Scenario: Anonymous wants to list events
   Given I visited "events page"
-  Then I should see 6 ".event" elements
+  Then I should see 5 ".event" elements
 
 Scenario: Anonymous wants to list archived events
   Given I visited "events page"
   And I follow "Voir les évènements passés"
-  Then I should see 3 ".event" elements
+  Then I should see 4 ".event" elements
 
 @javascript
 Scenario: Events can be filtered by consultations

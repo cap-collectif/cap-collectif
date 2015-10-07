@@ -36,5 +36,17 @@
             <tag name="form.type_extension" alias="sonata_type_model" />
         </service>
 
+        <service id="capco_admin.recent_contributions_resolver" class="Capco\AdminBundle\Resolver\RecentContributionsResolver">
+            <argument type="service" id="doctrine.orm.entity_manager" />
+            <argument type="service" id="capco.toggle.manager" />
+        </service>
+
+        <service id="capco_admin.block.recent_contributions" class="Capco\AdminBundle\Block\RecentContributionsBlockService">
+            <argument>capco_admin.block.recent_contributions</argument>
+            <argument type="service" id="templating" />
+            <argument type="service" id="capco_admin.recent_contributions_resolver" />
+            <tag name="sonata.block" />
+        </service>
+
     </services>
 </container>
