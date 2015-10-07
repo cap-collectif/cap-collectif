@@ -98,7 +98,7 @@ Scenario: Admin wants to see all elements list
   And I wait 5 seconds
   And I follow "Toutes"
   And I wait 5 seconds
-  Then I should see 17 ".element" elements
+  Then I should see 15 ".element" elements
 
 @javascript
 Scenario: Admin wants to see elements tree
@@ -261,7 +261,7 @@ Scenario: Admin wants to publish an element with comment
   And I wait 5 seconds
   And I should see 12 ".element" element
 
-@javascript
+@javascript @dev
 Scenario: Admin wants to divide an element without selecting text
   Given I am logged in as admin
   And I visited "consultation page" with:

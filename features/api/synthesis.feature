@@ -285,38 +285,41 @@ Feature: Synthesis
     And I send a GET request to "/api/syntheses/42/elements?type=all"
     Then the JSON response should match:
     """
-    [
-      {
-        "has_linked_data": false,
-        "id": "43",
-        "published": false,
-        "created_at": "@string@.isDateTime()",
-        "updated_at": "@string@.isDateTime()",
-        "archived": false,
-        "author": {
-          "displayName": "sfavot",
-          "uniqueId": "sfavot",
-          "isAdmin": true,
-          "vip": true,
-          "media": {
-            "url": @string@
+    {
+      "elements": [
+        {
+          "has_linked_data": false,
+          "id": "43",
+          "published": false,
+          "created_at": "@string@.isDateTime()",
+          "updated_at": "@string@.isDateTime()",
+          "archived": false,
+          "author": {
+            "displayName": "sfavot",
+            "uniqueId": "sfavot",
+            "isAdmin": true,
+            "vip": true,
+            "media": {
+              "url": @string@
+            },
+            "_links": {
+              "profile": @string@,
+              "settings": @string@
+            }
           },
+          "parent": @null@,
+          "display_type": "folder",
+          "title": "Je suis un élément",
+          "notation": 4,
+          "linked_data_creation": @null@,
           "_links": {
-            "profile": @string@,
-            "settings": @string@
+            "self": { "href": "/api/syntheses/42/elements/43" },
+            "history": { "href": "/api/syntheses/42/elements/43/history" }
           }
-        },
-        "parent": @null@,
-        "display_type": "folder",
-        "title": "Je suis un élément",
-        "notation": 4,
-        "linked_data_creation": @null@,
-        "_links": {
-          "self": { "href": "/api/syntheses/42/elements/43" },
-          "history": { "href": "/api/syntheses/42/elements/43/history" }
         }
-      }
-    ]
+      ],
+      "count": 1
+    }
     """
 
   @database
@@ -341,38 +344,41 @@ Feature: Synthesis
     And I send a GET request to "/api/syntheses/42/elements?type=new"
     Then the JSON response should match:
     """
-    [
-      {
-        "has_linked_data": false,
-        "id": "43",
-        "published": false,
-        "created_at": "@string@.isDateTime()",
-        "updated_at": "@string@.isDateTime()",
-        "archived": false,
-        "author": {
-          "displayName": "sfavot",
-          "uniqueId": "sfavot",
-          "isAdmin": true,
-          "vip": true,
-          "media": {
-            "url": @string@
+    {
+      "elements": [
+        {
+          "has_linked_data": false,
+          "id": "43",
+          "published": false,
+          "created_at": "@string@.isDateTime()",
+          "updated_at": "@string@.isDateTime()",
+          "archived": false,
+          "author": {
+            "displayName": "sfavot",
+            "uniqueId": "sfavot",
+            "isAdmin": true,
+            "vip": true,
+            "media": {
+              "url": @string@
+            },
+            "_links": {
+              "profile": @string@,
+              "settings": @string@
+            }
           },
+          "parent": @null@,
+          "display_type": "folder",
+          "title": "Je suis un élément",
+          "notation": 4,
+          "linked_data_creation": @null@,
           "_links": {
-            "profile": @string@,
-            "settings": @string@
+            "self": { "href": "/api/syntheses/42/elements/43" },
+            "history": { "href": "/api/syntheses/42/elements/43/history" }
           }
-        },
-        "parent": @null@,
-        "display_type": "folder",
-        "title": "Je suis un élément",
-        "notation": 4,
-        "linked_data_creation": @null@,
-        "_links": {
-          "self": { "href": "/api/syntheses/42/elements/43" },
-          "history": { "href": "/api/syntheses/42/elements/43/history" }
         }
-      }
-    ]
+      ],
+      "count": 1
+    }
     """
 
   @database
@@ -400,26 +406,29 @@ Feature: Synthesis
     And I send a GET request to "/api/syntheses/42/elements?type=archived"
     Then the JSON response should match:
     """
-    [
-      {
-        "has_linked_data": false,
-        "id": "44",
-        "published": false,
-        "created_at": "@string@.isDateTime()",
-        "updated_at": "@string@.isDateTime()",
-        "archived": true,
-        "author": @null@,
-        "parent": @null@,
-        "display_type": "folder",
-        "title": @null@,
-        "notation": @null@,
-        "linked_data_creation": @null@,
-        "_links": {
-          "self": { "href": "/api/syntheses/42/elements/44" },
-          "history": { "href": "/api/syntheses/42/elements/44/history" }
+    {
+      "elements": [
+        {
+          "has_linked_data": false,
+          "id": "44",
+          "published": false,
+          "created_at": "@string@.isDateTime()",
+          "updated_at": "@string@.isDateTime()",
+          "archived": true,
+          "author": @null@,
+          "parent": @null@,
+          "display_type": "folder",
+          "title": @null@,
+          "notation": @null@,
+          "linked_data_creation": @null@,
+          "_links": {
+            "self": { "href": "/api/syntheses/42/elements/44" },
+            "history": { "href": "/api/syntheses/42/elements/44/history" }
+          }
         }
-      }
-    ]
+      ],
+      "count": 1
+    }
     """
 
   @database
@@ -448,26 +457,29 @@ Feature: Synthesis
     And I send a GET request to "/api/syntheses/42/elements?type=unpublished"
     Then the JSON response should match:
     """
-    [
-      {
-        "has_linked_data": false,
-        "id": "44",
-        "published": false,
-        "created_at": "@string@.isDateTime()",
-        "updated_at": "@string@.isDateTime()",
-        "archived": true,
-        "author": @null@,
-        "parent": @null@,
-        "display_type": "folder",
-        "title": @null@,
-        "notation": @null@,
-        "linked_data_creation": @null@,
-        "_links": {
-          "self": { "href": "/api/syntheses/42/elements/44" },
-          "history": { "href": "/api/syntheses/42/elements/44/history" }
+    {
+      "elements": [
+        {
+          "has_linked_data": false,
+          "id": "44",
+          "published": false,
+          "created_at": "@string@.isDateTime()",
+          "updated_at": "@string@.isDateTime()",
+          "archived": true,
+          "author": @null@,
+          "parent": @null@,
+          "display_type": "folder",
+          "title": @null@,
+          "notation": @null@,
+          "linked_data_creation": @null@,
+          "_links": {
+            "self": { "href": "/api/syntheses/42/elements/44" },
+            "history": { "href": "/api/syntheses/42/elements/44/history" }
+          }
         }
-      }
-    ]
+      ],
+      "count": 1
+    }
     """
 
   @database
@@ -491,36 +503,39 @@ Feature: Synthesis
     And I send a GET request to "/api/syntheses/48/elements/tree?type=published"
     Then the JSON response should match:
     """
-    [
-      {
-        "has_linked_data": true,
-        "children": [],
-        "parents_ids": [],
-        "id": @string@,
-        "created_at": "@string@.isDateTime()",
-        "updated_at": "@string@.isDateTime()",
-        "author": @null@,
-        "display_type": "folder",
-        "title": "Le problème constaté",
-        "body": @null@,
-        "link": @null@,
-        "linked_data_creation": "@string@.isDateTime()"
-      },
-      {
-        "has_linked_data": true,
-        "children": [],
-        "parents_ids": [],
-        "id": @string@,
-        "created_at": "@string@.isDateTime()",
-        "updated_at": "@string@.isDateTime()",
-        "author": @null@,
-        "display_type": "folder",
-        "title": "Les causes",
-        "body": @null@,
-        "link": @null@,
-        "linked_data_creation": "@string@.isDateTime()"
-      }
-    ]
+    {
+      "elements": [
+        {
+          "has_linked_data": true,
+          "children": [],
+          "parents_ids": [],
+          "id": @string@,
+          "created_at": "@string@.isDateTime()",
+          "updated_at": "@string@.isDateTime()",
+          "author": @null@,
+          "display_type": "folder",
+          "title": "Le problème constaté",
+          "body": @null@,
+          "link": @null@,
+          "linked_data_creation": "@string@.isDateTime()"
+        },
+        {
+          "has_linked_data": true,
+          "children": [],
+          "parents_ids": [],
+          "id": @string@,
+          "created_at": "@string@.isDateTime()",
+          "updated_at": "@string@.isDateTime()",
+          "author": @null@,
+          "display_type": "folder",
+          "title": "Les causes",
+          "body": @null@,
+          "link": @null@,
+          "linked_data_creation": "@string@.isDateTime()"
+        }
+      ],
+      "count": 2
+    }
     """
 
   @database
@@ -530,73 +545,76 @@ Feature: Synthesis
     And I send a GET request to "/api/syntheses/48/elements/tree?type=all"
     Then the JSON response should match:
     """
-    [
-      {
-        "has_linked_data": true,
-        "parents_ids": [],
-        "id": @string@,
-        "published": true,
-        "created_at": "@string@.isDateTime()",
-        "updated_at": "@string@.isDateTime()",
-        "archived": true,
-        "author": @null@,
-        "parent": @null@,
-        "children": [
-          {
-            "has_linked_data": true,
-            "parents_ids": [@string@],
-            "id": @string@,
-            "published": false,
-            "created_at": "@string@.isDateTime()",
-            "updated_at": "@string@.isDateTime()",
-            "archived": false,
-            "author": @...@,
-            "parent": @null@,
-            "children": [
-              @...@
-            ],
-            "display_type": "contribution",
-            "title": "Opinion 52",
-            "notation": @null@,
-            "linked_data_creation": "@string@.isDateTime()",
-            "_links": {
-              "self": { "href": "@string@.startsWith('/api/syntheses/48/elements/')" },
-              "history": { "href": "@string@.startsWith('/api/syntheses/48/elements/').endsWith('/history')" }
+    {
+      "elements": [
+        {
+          "has_linked_data": true,
+          "parents_ids": [],
+          "id": @string@,
+          "published": true,
+          "created_at": "@string@.isDateTime()",
+          "updated_at": "@string@.isDateTime()",
+          "archived": true,
+          "author": @null@,
+          "parent": @null@,
+          "children": [
+            {
+              "has_linked_data": true,
+              "parents_ids": [@string@],
+              "id": @string@,
+              "published": false,
+              "created_at": "@string@.isDateTime()",
+              "updated_at": "@string@.isDateTime()",
+              "archived": false,
+              "author": @...@,
+              "parent": @null@,
+              "children": [
+                @...@
+              ],
+              "display_type": "contribution",
+              "title": "Opinion 52",
+              "notation": @null@,
+              "linked_data_creation": "@string@.isDateTime()",
+              "_links": {
+                "self": { "href": "@string@.startsWith('/api/syntheses/48/elements/')" },
+                "history": { "href": "@string@.startsWith('/api/syntheses/48/elements/').endsWith('/history')" }
+              }
             }
+          ],
+          "display_type": "folder",
+          "title": "Le problème constaté",
+          "notation": @null@,
+          "linked_data_creation": "@string@.isDateTime()",
+          "_links": {
+            "self": { "href": "@string@.startsWith('/api/syntheses/48/elements/')" },
+            "history": { "href": "@string@.startsWith('/api/syntheses/48/elements/').endsWith('/history')" }
           }
-        ],
-        "display_type": "folder",
-        "title": "Le problème constaté",
-        "notation": @null@,
-        "linked_data_creation": "@string@.isDateTime()",
-        "_links": {
-          "self": { "href": "@string@.startsWith('/api/syntheses/48/elements/')" },
-          "history": { "href": "@string@.startsWith('/api/syntheses/48/elements/').endsWith('/history')" }
+        },
+        {
+          "has_linked_data": true,
+          "parents_ids": [],
+          "id": @string@,
+          "published": true,
+          "created_at": "@string@.isDateTime()",
+          "updated_at": "@string@.isDateTime()",
+          "archived": true,
+          "author": @null@,
+          "parent": @null@,
+          "children": [
+            @...@
+          ],
+          "display_type": "folder",
+          "title": "Les causes",
+          "notation": @null@,
+          "linked_data_creation": "@string@.isDateTime()",
+          "_links": {
+            "self": { "href": "@string@.startsWith('/api/syntheses/48/elements/')" },
+            "history": { "href": "@string@.startsWith('/api/syntheses/48/elements/').endsWith('/history')" }
+          }
         }
-      },
-      {
-        "has_linked_data": true,
-        "parents_ids": [],
-        "id": @string@,
-        "published": true,
-        "created_at": "@string@.isDateTime()",
-        "updated_at": "@string@.isDateTime()",
-        "archived": true,
-        "author": @null@,
-        "parent": @null@,
-        "children": [
-          @...@
-        ],
-        "display_type": "folder",
-        "title": "Les causes",
-        "notation": @null@,
-        "linked_data_creation": "@string@.isDateTime()",
-        "_links": {
-          "self": { "href": "@string@.startsWith('/api/syntheses/48/elements/')" },
-          "history": { "href": "@string@.startsWith('/api/syntheses/48/elements/').endsWith('/history')" }
-        }
-      }
-    ]
+      ],
+      "count": 2
+    }
     """
 
   @database
