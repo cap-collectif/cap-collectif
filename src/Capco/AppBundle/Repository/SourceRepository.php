@@ -44,7 +44,7 @@ class SourceRepository extends EntityRepository
             ;
     }
 
-    public function getByOpinion(Opinion $opinion, $offset, $limit, $filter)
+    public function getByOpinion(Opinion $opinion, $offset, $limit, $filter, $trashed = false)
     {
         $qb = $this->getIsEnabledQueryBuilder()
             ->addSelect('ca', 'o', 'aut', 'm', 'media')
@@ -53,9 +53,10 @@ class SourceRepository extends EntityRepository
             ->leftJoin('s.Opinion', 'o')
             ->leftJoin('s.Author', 'aut')
             ->leftJoin('aut.Media', 'm')
-            ->andWhere('s.isTrashed = false')
+            ->andWhere('s.isTrashed = :trashed')
             ->andWhere('s.Opinion = :opinion')
             ->setParameter('opinion', $opinion)
+            ->setParameter('trashed', $trashed)
         ;
 
         if ($filter === 'old') {
@@ -74,7 +75,7 @@ class SourceRepository extends EntityRepository
         return $qb->getQuery()->getResult();
     }
 
-    public function getByOpinionVersion(OpinionVersion $version, $offset, $limit, $filter)
+    public function getByOpinionVersion(OpinionVersion $version, $offset, $limit, $filter, $trashed = false)
     {
         $qb = $this->getIsEnabledQueryBuilder()
             ->addSelect('ca', 'o', 'aut', 'm', 'media')
@@ -83,9 +84,10 @@ class SourceRepository extends EntityRepository
             ->leftJoin('s.Opinion', 'o')
             ->leftJoin('s.Author', 'aut')
             ->leftJoin('aut.Media', 'm')
-            ->andWhere('s.isTrashed = false')
+            ->andWhere('s.isTrashed = :trashed')
             ->andWhere('s.opinionVersion = :version')
             ->setParameter('version', $version)
+            ->setParameter('trashed', $trashed)
         ;
 
         if ($filter === 'old') {

@@ -13,6 +13,22 @@ use Doctrine\ORM\Query;
  */
 class OpinionVersionRepository extends EntityRepository
 {
+
+    public function getOne($id)
+    {
+        $qb = $this->getIsEnabledQueryBuilder('o')
+            ->addSelect('a', 'm', 'argument', 'source')
+            ->leftJoin('o.author', 'a')
+            ->leftJoin('a.Media', 'm')
+            ->leftJoin('o.arguments', 'argument', 'WITH', 'argument.isTrashed = false')
+            ->leftJoin('o.sources', 'source', 'WITH', 'source.isTrashed = false')
+            ->andWhere('o.id = :id')
+            ->setParameter('id', $id)
+        ;
+
+        return $qb->getQuery()->getOneOrNullResult();
+    }
+
     public function getRecentOrdered()
     {
         $qb = $this->createQueryBuilder('o')
@@ -77,7 +93,7 @@ class OpinionVersionRepository extends EntityRepository
         return $qb->getQuery()->getResult();
     }
 
-    public function getEnabledByOpinion(Opinion $opinion, $offset = 0, $limit = 10, $filter = 'last')
+    public function getEnabledByOpinion(Opinion $opinion, $offset = 0, $limit = 10, $filter = 'last', $trashed = false)
     {
         $qb = $this->getIsEnabledQueryBuilder()
             ->select('o', '(o.voteCountMitige + o.voteCountOk + o.voteCountNok) as HIDDEN vnb')
@@ -85,8 +101,9 @@ class OpinionVersionRepository extends EntityRepository
             ->leftJoin('author.Media', 'm')
             ->leftJoin('o.votes', 'v')
             ->andWhere('o.parent = :opinion')
-            ->andWhere('o.isTrashed = false')
+            ->andWhere('o.isTrashed = :trashed')
             ->setParameter('opinion', $opinion)
+            ->setParameter('trashed', $trashed)
         ;
 
         if ($filter == 'last') {

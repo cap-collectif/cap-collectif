@@ -42,7 +42,7 @@ class OpinionsController extends FOSRestController
      * )
      *
      * @Get("/opinions/{id}")
-     * @ParamConverter("opinion", options={"mapping": {"id": "id"}, "method": "getOne"})
+     * @ParamConverter("opinion", options={"mapping": {"id": "id"}, "repository_method": "getOne"})
      * @View(statusCode=200, serializerGroups={"Opinions", "UsersInfos", "UserMedias"})
      */
     public function getOpinionAction(Opinion $opinion)
@@ -163,7 +163,7 @@ class OpinionsController extends FOSRestController
      * )
      *
      * @Get("/opinions/{id}/versions")
-     * @ParamConverter("opinion", options={"mapping": {"id": "id"}, "method": "getOne"})
+     * @ParamConverter("opinion", options={"mapping": {"id": "id"}})
      * @QueryParam(name="offset", requirements="[0-9.]+", default="0")
      * @QueryParam(name="limit", requirements="[0-9.]+", default="10")
      * @QueryParam(name="filter", requirements="(old|last|votes|favorable|comments)", default="last")
@@ -174,10 +174,11 @@ class OpinionsController extends FOSRestController
         $offset = $paramFetcher->get('offset');
         $limit = $paramFetcher->get('limit');
         $filter = $paramFetcher->get('filter');
+        $trashed = false;
 
         $paginator = $this->getDoctrine()->getManager()
                     ->getRepository('CapcoAppBundle:OpinionVersion')
-                    ->getEnabledByOpinion($opinion, $offset, $limit, $filter);
+                    ->getEnabledByOpinion($opinion, $offset, $limit, $filter, $trashed);
 
         $consultation = $opinion->getStep()->getConsultation();
 
@@ -206,8 +207,8 @@ class OpinionsController extends FOSRestController
      * )
      *
      * @Get("/opinions/{opinionId}/versions/{versionId}")
-     * @ParamConverter("opinion", options={"mapping": {"opinionId": "id"}, "method": "getOne"})
-     * @ParamConverter("version", options={"mapping": {"versionId": "id"}})
+     * @ParamConverter("opinion", options={"mapping": {"opinionId": "id"}})
+     * @ParamConverter("version", options={"mapping": {"versionId": "id"}, "repository_method": "getOne", "map_method_signature" = true})
      * @View(statusCode=200, serializerGroups={"OpinionVersions", "UsersInfos"})
      */
     public function getOpinionVersionAction(Opinion $opinion, OpinionVersion $version)
@@ -330,7 +331,7 @@ class OpinionsController extends FOSRestController
      * )
      *
      * @Get("/opinions/{id}/sources")
-     * @ParamConverter("opinion", options={"mapping": {"id": "id"}, "method": "getOne"})
+     * @ParamConverter("opinion", options={"mapping": {"id": "id"}})
      * @QueryParam(name="offset", requirements="[0-9.]+", default="0")
      * @QueryParam(name="limit", requirements="[0-9.]+", default="10")
      * @QueryParam(name="filter", requirements="(old|last|popular)", default="last")
@@ -341,10 +342,11 @@ class OpinionsController extends FOSRestController
         $offset = $paramFetcher->get('offset');
         $limit = $paramFetcher->get('limit');
         $filter = $paramFetcher->get('filter');
+        $trashed = false;
 
         $paginator = $this->getDoctrine()->getManager()
                     ->getRepository('CapcoAppBundle:Source')
-                    ->getByOpinion($opinion, $offset, $limit, $filter);
+                    ->getByOpinion($opinion, $offset, $limit, $filter, $trashed);
 
         $sources = [];
         foreach ($paginator as $source) {
@@ -369,8 +371,8 @@ class OpinionsController extends FOSRestController
      * )
      *
      * @Get("/opinions/{opinionId}/versions/{versionId}/sources")
-     * @ParamConverter("opinion", options={"mapping": {"opinionId": "id"}, "method": "getOne"})
-     * @ParamConverter("version", options={"mapping": {"versionId": "id"}, "method": "getOne"})
+     * @ParamConverter("opinion", options={"mapping": {"opinionId": "id"}})
+     * @ParamConverter("version", options={"mapping": {"versionId": "id"}})
      * @QueryParam(name="offset", requirements="[0-9.]+", default="0")
      * @QueryParam(name="limit", requirements="[0-9.]+", default="10")
      * @QueryParam(name="filter", requirements="(old|last|popular)", default="last")
