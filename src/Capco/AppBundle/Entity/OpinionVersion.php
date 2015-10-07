@@ -352,12 +352,6 @@ class OpinionVersion
         $this->ranking = $ranking;
     }
 
-    // Used by elasticsearch for indexing
-    public function getStrippedBody()
-    {
-        return strip_tags(html_entity_decode($this->body, ENT_QUOTES | ENT_HTML401, 'UTF-8'));
-    }
-
     // ******************************* Custom methods **************************************
 
     public function getVoteValueByUser(User $user)

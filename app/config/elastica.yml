@@ -201,35 +201,6 @@ fos_elastica:
             provider: ~
             listener: ~
             finder: ~
-        # OpinionVersion
-        opinionVersion:
-          indexable_callback: isEnabled
-          mappings:
-            id:
-              type: long
-            title:
-              analyzer: %language_analyzer%
-              index_options: offsets
-            slug:
-              index: not_analyzed
-            strippedBody:
-              analyzer: %language_analyzer%
-              index_options: offsets
-            updatedAt:
-              type: date
-            createdAt:
-              type: date
-            author:
-              type: object
-              properties:
-                slug:
-                  index: not_analyzed
-          persistence:
-            driver: orm
-            model: Capco\AppBundle\Entity\OpinionVersion
-            provider: ~
-            listener: ~
-            finder: ~
         # Post
         post:
           indexable_callback: getIsPublished

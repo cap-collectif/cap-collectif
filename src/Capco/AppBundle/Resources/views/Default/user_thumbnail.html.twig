@@ -22,13 +22,17 @@
                     {{ username }}
                 {% endif %}
             </p>
-            <span class="excerpt  small">
+            <span class="excerpt small">
                 {% if user is not null and not private %}
                     {% if contributions is not defined %}
-                        {% set contributions = user.contributionsCount |default(0) %}
+                        {% set contributions = user.contributionsCount | default(0) %}
                     {% endif %}
-                    {% transchoice  contributions with {'%count%': contributions} from 'CapcoAppBundle' %}
+                    {% set votes = user.getVotesCount() | default(0) %}
+                    {% transchoice contributions with {'%count%': contributions} from 'CapcoAppBundle' %}
                         event_registration.listing.contribution
+                    {% endtranschoice %} •
+                    {% transchoice votes with {'%count%': votes} from 'CapcoAppBundle' %}
+                        event_registration.listing.votes
                     {% endtranschoice %}
                 {% endif %}
             </span>
