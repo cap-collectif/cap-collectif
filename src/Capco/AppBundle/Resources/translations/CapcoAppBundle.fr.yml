@@ -715,7 +715,9 @@ user:
       twitter: Twitter
       all: Contributions
       opinions: Propositions
+      opinions_versions: Modifications
       no_opinions: Il n'y a pas de propositions.
+      no_opinions_versions: Il n'y a pas de modifications.
       ideas: Idées
       no_ideas: Il n'y a pas d'idées.
       arguments: Arguments

@@ -1,7 +1,7 @@
 {% set page_class = "profile-page" %}
 {% extends "CapcoUserBundle::layout.html.twig" %}
 
-{% block canonical_link %}{{ url('capco_user_profile_show_opinions', {'slug': user.slug}) }}{% endblock %}
+{% block canonical_link %}{{ url('capco_user_profile_show_opinions_versions', {'slug': user.slug}) }}{% endblock %}
 
 {% block title %}
     {{ parent() }} - {{ 'user.profile.show.title'|trans({'%name%': user.username }, 'CapcoAppBundle') }}
@@ -11,11 +11,11 @@
 
 {% block fos_user_content %}
     {% include '@CapcoUser/Profile/showProfile.html.twig' %}
-    <div class="container  container--custom">
+    <div class="container container--custom">
         <div class="row">
             <div class="col-xs-12  col-sm-12  col-md-12 col-lg-12" id="details">
-                {% include '@CapcoUser/Profile/opinions.html.twig' with {
-                    'opinionTypesWithUserOpinions': opinionTypesWithUserOpinions
+                {% include '@CapcoUser/Profile/opinionVersions.html.twig' with {
+                    'versions': versions
                 } only %}
             </div>
         </div>

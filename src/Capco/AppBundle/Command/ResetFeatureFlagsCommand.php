@@ -47,8 +47,8 @@ class ResetFeatureFlagsCommand extends ContainerAwareCommand
         $toggleManager->activate('consultation_trash');
         $toggleManager->activate('idea_trash');
         $toggleManager->activate('reporting');
-        $toggleManager->activate('search');
 
+        $toggleManager->deactivate('search');
         $toggleManager->deactivate('shield_mode');
 
         $output->writeln('Feature flags reseted');
