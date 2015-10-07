@@ -715,9 +715,7 @@ user:
       twitter: Twitter
       all: Contributions
       opinions: Propositions
-      opinions_versions: Modifications
       no_opinions: Il n'y a pas de propositions.
-      no_opinions_versions: Il n'y a pas de modifications.
       ideas: Idées
       no_ideas: Il n'y a pas d'idées.
       arguments: Arguments
@@ -1010,6 +1008,7 @@ search:
       consultations: Consultations
       events: Évènements
       opinions: Propositions
+      versions: Modifications
       posts: Articles
       sources: Sources
       themes: Thèmes
@@ -1027,6 +1026,7 @@ search:
     default_title: Voir plus
     type:
       idea: Idée
+      opinionVersion: Modification
       comment: Commentaire
       argument: Argument
       consultation: Consultation

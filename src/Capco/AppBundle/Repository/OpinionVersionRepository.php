@@ -117,22 +117,6 @@ class OpinionVersionRepository extends EntityRepository
         return new Paginator($qb);
     }
 
-
-    public function getByUser($user)
-    {
-        return $this->getIsEnabledQueryBuilder('ov')
-            ->leftJoin('ov.author', 'author')
-            ->addSelect('author')
-            ->leftJoin('author.Media', 'm')
-            ->addSelect('m')
-            ->leftJoin('ov.votes', 'votes')
-            ->addSelect('votes')
-            ->andWhere('ov.author = :author')
-            ->setParameter('author', $user)
-            ->getQuery()
-            ->getResult();
-    }
-
     /**
      * Get enabled opinions by consultation step.
      *

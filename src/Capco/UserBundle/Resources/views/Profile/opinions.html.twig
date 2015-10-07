@@ -1,23 +1,21 @@
-{% for opinionType in opinionTypesWithUserOpinions %}
-    <div class="block block--bordered">
-        <div class="opinion opinion--{{ opinionType.color }} opinion--default">
-            <div class="opinion__header opinion__header--mobile-centered">
-                <h3 class="pull-left  h4  opinion__header__title"> {{ opinionType.title }} <span class="badge">{{ opinionType.Opinions|length }}</span></h3>
+{% if(blocks|length > 0) %}
+    {% for block in blocks %}
+        <div class="block  block--bordered">
+            <div class="opinion  opinion--{{ block.color }}  opinion--default">
+                <div class="opinion__header  opinion__header--mobile-centered">
+                    <h3 class="pull-left  h4  opinion__header__title"> {{ block.title }} <span class="badge">{{ block.Opinions|length }}</span></h3>
                 </div>
+            </div>
+            <ul class="media-list  opinion__list">
+                {% for opinion in block.Opinions %}
+                    {% include 'CapcoAppBundle:Opinion:blockOpinion.html.twig' with {'opinion': opinion, 'opinionType': opinion.opinionType, 'profile': true} only %}
+                {% endfor %}
+            </ul>
         </div>
-        <ul class="media-list  opinion__list">
-            {% for opinion in opinionType.Opinions %}
-                {% include 'CapcoAppBundle:Opinion:blockOpinion.html.twig' with {
-                    'opinion': opinion,
-                    'opinionType': opinion.opinionType,
-                    'profile': true
-                } only %}
-            {% endfor %}
-        </ul>
-    </div>
+    {% endfor %}
 {% else %}
     <div class="consultation__empty-block  text-center">
         <p class="icon  cap-bubble-attention-6"></p>
         <p>{{ 'user.profile.show.no_opinions'|trans({}, 'CapcoAppBundle') }}</p>
     </div>
-{% endfor %}
+{% endif %}

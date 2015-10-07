@@ -23,20 +23,17 @@ class ProfileController extends BaseController
             throw $this->createAccessDeniedException();
         }
 
-        $doctrine = $this->getDoctrine();
         $user = $this->get('security.token_storage')->getToken()->getUser();
-        $opinionTypesWithUserOpinions = $doctrine->getRepository('CapcoAppBundle:OpinionType')->getByUser($user);
-        $versions = $doctrine->getRepository('CapcoAppBundle:OpinionVersion')->getByUser($user);
-        $arguments = $doctrine->getRepository('CapcoAppBundle:Argument')->getByUser($user);
-        $ideas = $doctrine->getRepository('CapcoAppBundle:Idea')->getByUser($user);
-        $sources = $doctrine->getRepository('CapcoAppBundle:Source')->getByUser($user);
-        $comments = $doctrine->getRepository('CapcoAppBundle:AbstractComment')->getByUser($user);
-        $votes = $doctrine->getRepository('CapcoAppBundle:AbstractVote')->getByUser($user);
+        $blocks = $this->getDoctrine()->getRepository('CapcoAppBundle:OpinionType')->getByUser($user);
+        $arguments = $this->getDoctrine()->getRepository('CapcoAppBundle:Argument')->getByUser($user);
+        $ideas = $this->getDoctrine()->getRepository('CapcoAppBundle:Idea')->getByUser($user);
+        $sources = $this->getDoctrine()->getRepository('CapcoAppBundle:Source')->getByUser($user);
+        $comments = $this->getDoctrine()->getRepository('CapcoAppBundle:AbstractComment')->getByUser($user);
+        $votes = $this->getDoctrine()->getRepository('CapcoAppBundle:AbstractVote')->getByUser($user);
 
         return [
             'user' => $user,
-            'opinionTypesWithUserOpinions' => $opinionTypesWithUserOpinions,
-            'versions' => $versions,
+            'blocks' => $blocks,
             'arguments' => $arguments,
             'ideas' => $ideas,
             'sources' => $sources,
@@ -48,23 +45,24 @@ class ProfileController extends BaseController
 
     /**
      * @Route("/user/{slug}", name="capco_user_profile_show_all")
+     *
+     * @param User $user
      * @Template("CapcoUserBundle:Profile:show.html.twig")
+     *
+     * @return array
      */
     public function showUserAction(User $user)
     {
-        $doctrine = $this->getDoctrine();
-        $opinionTypesWithUserOpinions = $doctrine->getRepository('CapcoAppBundle:OpinionType')->getByUser($user);
-        $versions = $doctrine->getRepository('CapcoAppBundle:OpinionVersion')->getByUser($user);
-        $arguments = $doctrine->getRepository('CapcoAppBundle:Argument')->getByUser($user);
-        $ideas = $doctrine->getRepository('CapcoAppBundle:Idea')->getByUser($user);
-        $sources = $doctrine->getRepository('CapcoAppBundle:Source')->getByUser($user);
-        $comments = $doctrine->getRepository('CapcoAppBundle:AbstractComment')->getByUser($user);
-        $votes = $doctrine->getRepository('CapcoAppBundle:AbstractVote')->getByUser($user);
+        $blocks = $this->getDoctrine()->getRepository('CapcoAppBundle:OpinionType')->getByUser($user);
+        $arguments = $this->getDoctrine()->getRepository('CapcoAppBundle:Argument')->getByUser($user);
+        $ideas = $this->getDoctrine()->getRepository('CapcoAppBundle:Idea')->getByUser($user);
+        $sources = $this->getDoctrine()->getRepository('CapcoAppBundle:Source')->getByUser($user);
+        $comments = $this->getDoctrine()->getRepository('CapcoAppBundle:AbstractComment')->getByUser($user);
+        $votes = $this->getDoctrine()->getRepository('CapcoAppBundle:AbstractVote')->getByUser($user);
 
         return [
             'user' => $user,
-            'opinionTypesWithUserOpinions' => $opinionTypesWithUserOpinions,
-            'versions' => $versions,
+            'blocks' => $blocks,
             'arguments' => $arguments,
             'ideas' => $ideas,
             'sources' => $sources,
@@ -76,34 +74,28 @@ class ProfileController extends BaseController
 
     /**
      * @Route("/{slug}/opinions", name="capco_user_profile_show_opinions")
+     *
+     * @param User $user
+     *
+     * @return array
      * @Template("CapcoUserBundle:Profile:showUserOpinions.html.twig")
      */
     public function showOpinionsAction(User $user)
     {
-        $opinionTypesWithUserOpinions = $this->getDoctrine()->getRepository('CapcoAppBundle:OpinionType')->getByUser($user);
+        $blocks = $this->getDoctrine()->getRepository('CapcoAppBundle:OpinionType')->getByUser($user);
 
         return [
             'user' => $user,
-            'opinionTypesWithUserOpinions' => $opinionTypesWithUserOpinions,
-        ];
-    }
-
-    /**
-     * @Route("/{slug}/versions", name="capco_user_profile_show_opinions_versions")
-     * @Template("CapcoUserBundle:Profile:showUserOpinionVersions.html.twig")
-     */
-    public function showOpinionVersionsAction(User $user)
-    {
-        $versions = $this->getDoctrine()->getRepository('CapcoAppBundle:OpinionVersion')->getByUser($user);
-
-        return [
-            'user' => $user,
-            'versions' => $versions,
+            'blocks' => $blocks,
         ];
     }
 
     /**
      * @Route("/{slug}/arguments", name="capco_user_profile_show_arguments")
+     *
+     * @param User $user
+     *
+     * @return array
      * @Template("CapcoUserBundle:Profile:showUserArguments.html.twig")
      */
     public function showArgumentsAction(User $user)
@@ -119,6 +111,10 @@ class ProfileController extends BaseController
 
     /**
      * @Route("/{slug}/ideas", name="capco_user_profile_show_ideas", defaults={"_feature_flags" = "ideas"})
+     *
+     * @param User $user
+     *
+     * @return array
      * @Template("CapcoUserBundle:Profile:showUserIdeas.html.twig")
      */
     public function showIdeasAction(User $user)
@@ -133,6 +129,10 @@ class ProfileController extends BaseController
 
     /**
      * @Route("/{slug}/sources", name="capco_user_profile_show_sources")
+     *
+     * @param User $user
+     *
+     * @return array
      * @Template("CapcoUserBundle:Profile:showUserSources.html.twig")
      */
     public function showSourcesAction(User $user)
@@ -147,6 +147,10 @@ class ProfileController extends BaseController
 
     /**
      * @Route("/{slug}/comments", name="capco_user_profile_show_comments")
+     *
+     * @param User $user
+     *
+     * @return array
      * @Template("CapcoUserBundle:Profile:showUserComments.html.twig")
      */
     public function showCommentsAction(User $user)
@@ -161,6 +165,10 @@ class ProfileController extends BaseController
 
     /**
      * @Route("/{slug}/votes", name="capco_user_profile_show_votes")
+     *
+     * @param User $user
+     *
+     * @return array
      * @Template("CapcoUserBundle:Profile:showUserVotes.html.twig")
      */
     public function showVotesAction(User $user)
