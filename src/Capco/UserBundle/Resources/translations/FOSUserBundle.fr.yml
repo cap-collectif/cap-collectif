@@ -6,3 +6,7 @@ resetting:
 
 form:
   no_type: Sélectionnez une valeur
+
+registration:
+  email:
+    subject: Votre compte sur %sitename%

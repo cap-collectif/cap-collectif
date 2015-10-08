@@ -1,6 +1,6 @@
 {% block subject %}
 {% autoescape false %}
-{{ 'registration.email.subject'|trans({'%username%': user.username, '%confirmationUrl%': confirmationUrl}, 'FOSUserBundle') }}
+{{ 'registration.email.subject'|trans({'%sitename%': capco_site_parameter_value('global.site.fullname'), '%confirmationUrl%': confirmationUrl}, 'FOSUserBundle') }}
 {% endautoescape %}
 {% endblock %}
 
