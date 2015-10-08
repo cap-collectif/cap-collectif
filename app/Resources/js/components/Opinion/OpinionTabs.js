@@ -4,8 +4,8 @@ import OpinionArgumentsBox from './OpinionArgumentsBox';
 import OpinionVersionsBox from './OpinionVersionsBox';
 import OpinionSourcesBox from './OpinionSourcesBox';
 
-const Tabs = ReactBootstrap.Tabs;
-const Tab = ReactBootstrap.Tab;
+const TabbedArea = ReactBootstrap.TabbedArea;
+const TabPane = ReactBootstrap.TabPane;
 const FormattedMessage = ReactIntl.FormattedMessage;
 
 const OpinionTabs = React.createClass({
@@ -46,32 +46,32 @@ const OpinionTabs = React.createClass({
 
     if (tabNumber > 1) {
       return (
-        <Tabs animation={false}>
+        <TabbedArea animation={false}>
           { this.isVersionable()
-            ? <Tab id="opinion__versions" className="opinion-tabs" eventKey={1} tab={
+            ? <TabPane id="opinion__versions" className="opinion-tabs" eventKey={1} tab={
                 <FormattedMessage message={this.getIntlMessage('global.versions')} num={opinion.versions_count} />
               }>
             {this.renderVersionsContent()}
-          </Tab>
+          </TabPane>
             : null
           }
           { this.isCommentable()
-            ? <Tab id="opinion__arguments" className="opinion-tabs" eventKey={2} tab={
+            ? <TabPane id="opinion__arguments" className="opinion-tabs" eventKey={2} tab={
                 <FormattedMessage message={this.getArgumentsTrad()} num={this.props.opinion.arguments_count} />
               }>
                 {this.renderArgumentsContent()}
-              </Tab>
+              </TabPane>
             : null
           }
           { this.isSourceable()
-            ? <Tab id="opinion__sources" className="opinion-tabs" eventKey={3} tab={
+            ? <TabPane id="opinion__sources" className="opinion-tabs" eventKey={3} tab={
                 <FormattedMessage message={this.getIntlMessage('global.sources')} num={opinion.sources_count} />
               }>
                 {this.renderSourcesContent()}
-              </Tab>
+              </TabPane>
             : null
           }
-        </Tabs>
+        </TabbedArea>
       );
     }
 

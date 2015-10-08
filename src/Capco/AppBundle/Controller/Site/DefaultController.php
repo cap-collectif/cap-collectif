@@ -45,7 +45,7 @@ class DefaultController extends Controller
                     ->setFrom($data['email'])
                     ->setReplyTo($data['email'])
                 ;
-                $this->get('swiftmailer.mailer.service')->send($message);
+                $this->get('swiftmailer.mailer.contact')->send($message);
                 $this->get('session')->getFlashBag()->add('success', 'contact.email.sent_success');
 
                 return $this->redirect($this->generateUrl('app_homepage'));

@@ -110,12 +110,12 @@ swiftmailer:
             port: "%mailer_port%"
             username: "%mailer_user%"
             password: "%mailer_password%"
-        service:
+        contact:
             transport: "%mailer_transport%"
-            host: "%mailer_service_host%"
+            host: "%mailer_contact_host%"
             port: "%mailer_port%"
-            username: "%mailer_service_user%"
-            password: "%mailer_service_password%"
+            username: "%mailer_contact_user%"
+            password: "%mailer_contact_password%"
 
 # Stof\DoctrineExtensionBundle configuration
 stof_doctrine_extensions:

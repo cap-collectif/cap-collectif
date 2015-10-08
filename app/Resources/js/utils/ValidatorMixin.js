@@ -48,7 +48,8 @@ const ValidatorMixin = {
   isFieldValid(ref) {
     if (this.refs[ref]) {
       if (this.state.fields[ref]) {
-        const value = this.refs[ref].getValue();
+        const input = this.refs[ref];
+        const value = input.props.type === 'checkbox' ? input.getChecked() : input.getValue();
         const errors = (new Validator(value, this.state.fields[ref].constraints)).getErrors();
         const fields = this.state.fields;
         fields[ref].errors = errors;

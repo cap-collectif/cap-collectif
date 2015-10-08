@@ -113,15 +113,17 @@ const OpinionVersionForm = React.createClass({
             </div>
             <form ref="form">
               { this.props.mode === 'edit'
-                ? <div className={'form-group ' + this.getGroupStyle('confirm')}>
-                    <Input
-                      ref="confirm"
-                      name="confirm"
-                      type="checkbox"
-                      bsStyle={this.getFieldStyle('confirm')}
-                      label={this.getIntlMessage('opinion.version.confirm')}
-                    />
-                    {this.renderFormErrors('confirm')}
+                ? <div className="alert alert-warning edit-confirm-alert">
+                    <div className={'form-group ' + this.getGroupStyle('confirm')}>
+                      <Input
+                        ref="confirm"
+                        name="confirm"
+                        type="checkbox"
+                        bsStyle={this.getFieldStyle('confirm')}
+                        label={this.getIntlMessage('opinion.version.confirm')}
+                      />
+                      {this.renderFormErrors('confirm')}
+                    </div>
                   </div>
                 : null
               }

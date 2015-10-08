@@ -15,7 +15,6 @@ use FOS\UserBundle\Mailer\MailerInterface;
 class Notify implements MailerInterface
 {
     protected $mailer;
-    protected $serviceMailer;
     protected $templating;
     protected $resolver;
     protected $translator;
@@ -23,10 +22,9 @@ class Notify implements MailerInterface
     protected $parameters;
     protected $urlResolver;
 
-    public function __construct(\Swift_Mailer $mailer, \Swift_Mailer $serviceMailer, EngineInterface $templating, TranslatorInterface $translator, Resolver $resolver, Router $router, UrlResolver $urlResolver, array $parameters)
+    public function __construct(\Swift_Mailer $mailer, EngineInterface $templating, TranslatorInterface $translator, Resolver $resolver, Router $router, UrlResolver $urlResolver, array $parameters)
     {
         $this->mailer = $mailer;
-        $this->serviceMailer = $serviceMailer;
         $this->templating = $templating;
         $this->resolver = $resolver;
         $this->translator = $translator;
@@ -35,28 +33,16 @@ class Notify implements MailerInterface
         $this->parameters = $parameters;
     }
 
-    private function generateMessage($to, $fromAddress, $fromName, $body, $subject, $contentType)
-    {
-        return \Swift_Message::newInstance()
-            ->setTo($to)
-            ->setSubject($subject)
-            ->setContentType($contentType)
-            ->setBody($body)
-            ->setFrom([$fromAddress => $fromName])
-        ;
-    }
-
-    public function sendServiceEmail($to, $fromAddress, $fromName, $body, $subject, $contentType = 'text/html')
-    {
-        if ($to && $fromAddress) {
-            $this->serviceMailer->send($this->generateMessage($to, $fromAddress, $fromName, $body, $subject, $contentType));
-        }
-    }
-
     public function sendEmail($to, $fromAddress, $fromName, $body, $subject, $contentType = 'text/html')
     {
         if ($to && $fromAddress) {
-            $this->mailer->send($this->generateMessage($to, $fromAddress, $fromName, $body, $subject, $contentType));
+            $message = \Swift_Message::newInstance()
+                ->setTo($to)
+                ->setSubject($subject)
+                ->setContentType($contentType)
+                ->setBody($body)
+                ->setFrom([$fromAddress => $fromName]);
+            $this->mailer->send($message);
         }
     }
 
@@ -132,7 +118,7 @@ class Notify implements MailerInterface
                 ]
             );
 
-            $this->sendServiceEmail($to, $report->getReporter()->getEmail(), $report->getReporter()->getUsername(), $body, $subject);
+            $this->sendEmail($to, $report->getReporter()->getEmail(), $report->getReporter()->getUsername(), $body, $subject);
         }
     }
 

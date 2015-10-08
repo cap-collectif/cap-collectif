@@ -50,7 +50,7 @@ class Validator {
           }
           break;
         case 'isTrue':
-          if (this.isTrue()) {
+          if (!this.isTrue()) {
             errors.push(this.rules[rule].message);
           }
           break;
