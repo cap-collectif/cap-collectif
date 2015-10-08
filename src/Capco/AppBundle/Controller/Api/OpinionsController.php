@@ -49,14 +49,15 @@ class OpinionsController extends FOSRestController
     {
         $em = $this->get('doctrine.orm.entity_manager');
 
-        $arguments = $em->getRepository('CapcoAppBundle:Opinion')
+        $opinionWithArguments = $em->getRepository('CapcoAppBundle:Opinion')
                         ->getWithArguments($opinion->getId())
-                        ->getArguments()
                     ;
-        $sources = $em->getRepository('CapcoAppBundle:Opinion')
+        $opinionWithSources = $em->getRepository('CapcoAppBundle:Opinion')
                         ->getWithSources($opinion->getId())
-                        ->getSources()
                     ;
+
+        $arguments = is_object($opinionWithArguments) ? $opinionWithArguments->getArguments() : [];
+        $sources = is_object($opinionWithSources) ? $opinionWithSources->getSources() : [];
 
         $opinion->setArguments($arguments);
         $opinion->setSources($sources);
