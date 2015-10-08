@@ -17,12 +17,48 @@ class SearchType extends AbstractType
         $this->toggleManager = $toggleManager;
     }
 
+
+    private function generateChoices()
+    {
+        $choices = [
+            'all' => 'search.form.types.all',
+            'comment' => 'search.form.types.comments',
+            'argument' => 'search.form.types.arguments',
+            'consultation' => 'search.form.types.consultations',
+            'opinion' => 'search.form.types.opinions',
+            'source' => 'search.form.types.sources',
+        ];
+
+        if ($this->toggleManager->isActive('versions')) {
+            $choices['opinionVersion'] = 'search.form.types.versions';
+        }
+
+        if ($this->toggleManager->isActive('ideas')) {
+            $choices['idea'] = 'search.form.types.ideas';
+        }
+        if ($this->toggleManager->isActive('blog')) {
+            $choices['post'] = 'search.form.types.posts';
+        }
+        if ($this->toggleManager->isActive('calendar')) {
+            $choices['event'] = 'search.form.types.events';
+        }
+        if ($this->toggleManager->isActive('calendar')) {
+            $choices['theme'] = 'search.form.types.themes';
+        }
+
+        $choices['user'] = 'search.form.types.users';
+
+        return $choices;
+    }
+
     /**
      * @param FormBuilderInterface $builder
      * @param array                $options
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        $choices = $this->generateChoices();
+
         $builder
             ->add('term', 'text', [
                 'required' => true,
@@ -36,19 +72,7 @@ class SearchType extends AbstractType
                 'translation_domain' => 'CapcoAppBundle',
                 'empty_value' => false,
                 'expanded' => true,
-                'choices' => [
-                    'all' => 'search.form.types.all',
-                    'idea' => 'search.form.types.ideas',
-                    'post' => 'search.form.types.posts',
-                    'comment' => 'search.form.types.comments',
-                    'argument' => 'search.form.types.arguments',
-                    'consultation' => 'search.form.types.consultations',
-                    'event' => 'search.form.types.events',
-                    'opinion' => 'search.form.types.opinions',
-                    'source' => 'search.form.types.sources',
-                    'theme' => 'search.form.types.themes',
-                    'user' => 'search.form.types.users',
-                ],
+                'choices' => $choices,
             ))
             ->add('sort', 'choice', array(
                 'required' => false,

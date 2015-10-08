@@ -23,7 +23,7 @@ class SearchResolver
     // search by term and type in elasticsearch
     public function searchAll($size, $page, $term, $type = 'all', $sort = 'score')
     {
-        $results = array();
+        $results = [];
         $count = 0;
         $from = ($page - 1) * $size;
 
