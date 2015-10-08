@@ -67,7 +67,7 @@
       ]
     },
     "react-router-bootstrap": {
-      "main": ["lib/ReactRouterBootstrap.js"]
+      "main": "lib/ReactRouterBootstrap.js"
     }
   }
 }

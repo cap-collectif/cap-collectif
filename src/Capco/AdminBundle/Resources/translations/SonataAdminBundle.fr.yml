@@ -592,6 +592,7 @@ capco:
     idea_trash: Corbeille des idées
     reporting: Signalement
     search: Rechercher sur le site
+    versions: Modifications
 
 action_enable: Activer
 action_disable: Désactiver
