@@ -163,7 +163,6 @@ export default {
       actionType: SELECT_NAVBAR_ITEM,
       elementId: elementId,
     });
-
   },
 
 };

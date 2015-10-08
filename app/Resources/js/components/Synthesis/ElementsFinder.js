@@ -12,20 +12,16 @@ const ElementsFinder = React.createClass({
   },
   mixins: [ReactIntl.IntlMixin],
 
-  getElementInTreeById(elements, id) {
-    for (let i = 0; i < elements.length; i++) {
-      const element = elements[i];
-      if (element.id === id) {
-        return element;
-      }
-      if (element.children.length > 0) {
-        const found = this.getElementInTreeById(element.children, id);
-        if (found) {
-          return found;
-        }
-      }
-    }
-    return null;
+  getDefaultProps() {
+    return {
+      selectedId: 'root',
+      elements: {},
+      expanded: {
+        root: true,
+      },
+      onSelect: null,
+      onExpand: null,
+    };
   },
 
   getRootElement() {
@@ -103,9 +99,11 @@ const ElementsFinder = React.createClass({
   },
 
   toggleExpand(element) {
+    event.stopPropagation();
     if (typeof this.props.onExpand === 'function') {
       this.props.onExpand(element);
     }
+    return false;
   },
 
   select(element) {

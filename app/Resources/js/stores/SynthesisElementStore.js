@@ -61,6 +61,7 @@ class SynthesisElementStore extends BaseStore {
       case RECEIVE_ELEMENT:
         this._element = action.element;
         this._isElementSync = true;
+        this.updateSelectedId(action.element.id);
         this.emitChange();
         break;
       case RECEIVE_ELEMENTS:
@@ -74,7 +75,7 @@ class SynthesisElementStore extends BaseStore {
         this.emitChange();
         break;
       case SELECT_NAVBAR_ITEM:
-        this._selectedNavbarItem = action.elementId;
+        this.updateSelectedId(action.elementId);
         this.emitChange();
         break;
       case CREATE_ELEMENT:
@@ -216,6 +217,35 @@ class SynthesisElementStore extends BaseStore {
     this._isInboxSync.allTree = false;
     this._isInboxSync.fromDivision = false;
     this._isCountSync = false;
+  }
+
+  updateSelectedId(selected) {
+    this._selectedNavbarItem = selected;
+    const expanded = this._expandedNavbarItems;
+    expanded[selected] = true;
+    const element = this.getElementInTreeById(this._elements.allTree, selected);
+    if (element) {
+      element.parents_ids.map((id) => {
+        expanded[id] = true;
+      });
+    }
+    this._expandedNavbarItems = expanded;
+  }
+
+  getElementInTreeById(elements, id) {
+    for (let i = 0; i < elements.length; i++) {
+      const element = elements[i];
+      if (element.id === id) {
+        return element;
+      }
+      if (element.children.length > 0) {
+        const found = this.getElementInTreeById(element.children, id);
+        if (found) {
+          return found;
+        }
+      }
+    }
+    return null;
   }
 
 }

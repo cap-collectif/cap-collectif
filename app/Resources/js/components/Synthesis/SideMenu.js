@@ -13,7 +13,7 @@ const SideMenu = React.createClass({
   propTypes: {
     synthesis: React.PropTypes.object,
   },
-  mixins: [ReactIntl.IntlMixin],
+  mixins: [ReactIntl.IntlMixin, ReactRouter.Navigation],
 
   getInitialState() {
     return {
@@ -112,7 +112,7 @@ const SideMenu = React.createClass({
           {this.renderCreateButton()}
           {this.renderManageButton()}
         </Nav>
-        <CreateModal synthesis={this.props.synthesis} show={this.state.showCreateModal} toggle={this.toggleCreateModal} />
+        <CreateModal synthesis={this.props.synthesis} show={this.state.showCreateModal} toggle={this.toggleCreateModal} elements={this.state.navbarItems} selectedId={this.state.selectedId} />
       </div>
     );
   },
@@ -123,6 +123,9 @@ const SideMenu = React.createClass({
 
   selectItem(element) {
     SynthesisElementActions.selectNavbarItem(element.id);
+    if (element.id !== 'root') {
+      this.transitionTo('show_element', {'element_id': element.id});
+    }
   },
 
   showCreateModal() {
