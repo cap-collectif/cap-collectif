@@ -18,9 +18,6 @@ const ElementTitle = React.createClass({
     if (this.props.element.title) {
       return this.props.element.title;
     }
-    if (this.props.element.body) {
-      return this.props.element.body.substr(0, 140) + '...';
-    }
     return this.getIntlMessage('common.elements.default_title');
   },
 
