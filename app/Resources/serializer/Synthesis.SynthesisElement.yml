@@ -38,7 +38,7 @@ Capco\AppBundle\Entity\Synthesis\SynthesisElement:
       groups: [ElementsList, ElementsPublished, Elements, ElementDetails]
     body:
       expose: true
-      groups: [ElementDetails, ElementsPublished]
+      groups: [ElementsList, ElementDetails, ElementsPublished]
     link:
       expose: true
       groups: [ElementDetails, ElementsPublished]
