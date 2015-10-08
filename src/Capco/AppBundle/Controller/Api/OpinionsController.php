@@ -56,11 +56,13 @@ class OpinionsController extends FOSRestController
                         ->getWithSources($opinion->getId())
                     ;
 
-        $arguments = is_object($opinionWithArguments) ? $opinionWithArguments->getArguments() : [];
-        $sources = is_object($opinionWithSources) ? $opinionWithSources->getSources() : [];
+        if (is_object($opinionWithArguments)) {
+            $opinion->setArguments($opinionWithArguments->getArguments());
+        }
 
-        $opinion->setArguments($arguments);
-        $opinion->setSources($sources);
+        if (is_object($opinionWithSources)) {
+            $opinion->setSources($opinionWithSources->getSources());
+        }
 
         $consultation = $opinion->getStep()->getConsultation();
 
