@@ -42,7 +42,7 @@ class SearchType extends AbstractType
         if ($this->toggleManager->isActive('calendar')) {
             $choices['event'] = 'search.form.types.events';
         }
-        if ($this->toggleManager->isActive('calendar')) {
+        if ($this->toggleManager->isActive('themes')) {
             $choices['theme'] = 'search.form.types.themes';
         }
 

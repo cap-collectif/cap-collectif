@@ -47,21 +47,6 @@ class OpinionsController extends FOSRestController
      */
     public function getOpinionAction(Opinion $opinion)
     {
-        $em = $this->get('doctrine.orm.entity_manager');
-
-        $opinionWithArguments = $em->getRepository('CapcoAppBundle:Opinion')
-                        ->getWithArguments($opinion->getId())
-                    ;
-        $opinionWithSources = $em->getRepository('CapcoAppBundle:Opinion')
-                        ->getWithSources($opinion->getId())
-                    ;
-
-        $arguments = is_object($opinionWithArguments) ? $opinionWithArguments->getArguments() : [];
-        $sources = is_object($opinionWithSources) ? $opinionWithSources->getSources() : [];
-
-        $opinion->setArguments($arguments);
-        $opinion->setSources($sources);
-
         $consultation = $opinion->getStep()->getConsultation();
 
         return [

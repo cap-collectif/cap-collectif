@@ -50,36 +50,15 @@ class OpinionRepository extends EntityRepository
     public function getOne($id)
     {
         $qb = $this->getIsEnabledQueryBuilder()
-            ->addSelect('a', 'm', 'ot', 's', 'appendix')
+            ->addSelect('a', 'm', 'ot', 's', 'argument', 'source', 'version', 'appendix')
             ->leftJoin('o.Author', 'a')
             ->leftJoin('a.Media', 'm')
             ->leftJoin('o.OpinionType', 'ot')
+            ->leftJoin('o.arguments', 'argument', 'WITH', 'argument.isTrashed = false')
+            ->leftJoin('o.Sources', 'source', 'WITH', 'source.isTrashed = false')
+            ->leftJoin('o.versions', 'version', 'WITH', 'version.isTrashed = false')
             ->leftJoin('o.step', 's')
             ->leftJoin('o.appendices', 'appendix')
-            ->andWhere('o.id = :id')
-            ->setParameter('id', $id)
-        ;
-
-        return $qb->getQuery()->getOneOrNullResult();
-    }
-
-    public function getWithArguments($id)
-    {
-        $qb = $this->getIsEnabledQueryBuilder()
-            ->addSelect('argument')
-            ->innerJoin('o.arguments', 'argument', 'WITH', 'argument.isTrashed = false')
-            ->andWhere('o.id = :id')
-            ->setParameter('id', $id)
-        ;
-
-        return $qb->getQuery()->getOneOrNullResult();
-    }
-
-    public function getWithSources($id)
-    {
-        $qb = $this->getIsEnabledQueryBuilder()
-            ->addSelect('source')
-            ->innerJoin('o.Sources', 'source', 'WITH', 'source.isTrashed = false')
             ->andWhere('o.id = :id')
             ->setParameter('id', $id)
         ;
