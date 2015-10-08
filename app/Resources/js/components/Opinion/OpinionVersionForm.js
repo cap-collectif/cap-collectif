@@ -40,7 +40,6 @@ const OpinionVersionForm = React.createClass({
   },
 
   componentDidMount() {
-
     const constraints = {
       title: {
         notBlank: {message: 'opinion.version.title_error'},
