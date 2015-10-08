@@ -386,6 +386,14 @@ class Opinion
         return $this->Sources;
     }
 
+
+    public function setSources($sources)
+    {
+        $this->sources = $sources;
+
+        return $this;
+    }
+
     /**
      * @param $source
      *
@@ -420,6 +428,13 @@ class Opinion
     public function getArguments()
     {
         return $this->arguments;
+    }
+
+    public function setArguments($arguments)
+    {
+        $this->arguments = $arguments;
+
+        return $this;
     }
 
     /**
