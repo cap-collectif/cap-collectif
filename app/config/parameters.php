@@ -21,6 +21,10 @@ $container->setParameter('mailer_password',             set_var('mailer_password
 $container->setParameter('mailer_host',                 set_var('mailer_host', 'in-v3.mailjet.com'));
 $container->setParameter('mailer_port',                 set_var('mailer_port', 587));
 
+$container->setParameter('mailer_contact_user',         set_var('mailer_contact_user', 'maxime@cap-collectif.com'));
+$container->setParameter('mailer_contact_password',     set_var('mailer_contact_password', '***REMOVED***'));
+$container->setParameter('mailer_contact_host',         set_var('mailer_contact_host', '***REMOVED***'));
+
 $container->setParameter('locale',                      set_var('locale', 'fr'));
 $container->setParameter('secret',                      set_var('secret', '***REMOVED***'));
 $container->setParameter('debug_toolbar',               set_var('debug_toolbar', true));
