@@ -125,8 +125,8 @@ idea:
     object: Objectif
     info: Informations complémentaires
     voted: Vous avez voté
-    votes: "]-Inf, 0] Aucun vote | {1} 1 vote | ]1,Inf[ %count% votes"
-    comments: "]-Inf, 0] Aucun commentaire | {1} 1 commentaire | ]1,Inf[ %count% commentaires"
+    votes: "]-Inf, 0] 0 vote | {1} 1 vote | ]1,Inf[ %count% votes"
+    comments: "]-Inf, 0] 0 commentaire | {1} 1 commentaire | ]1,Inf[ %count% commentaires"
     share: Partager
     report: Signaler
     edit: Modifier
@@ -219,8 +219,8 @@ theme:
     description: Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eos, perspiciatis, cupiditate.
     text_info: Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eos, perspiciatis, cupiditate. Nesciunt eos nam ullam iste iusto similique officia sit enim excepturi numquam natus, ab eum sint perspiciatis repudiandae dolorem.
     search: Rechercher
-    consultations: "]-Inf, 0] Aucune consultation | {1} 1 consultation | ]1,Inf[ %count% consultations"
-    ideas: "]-Inf, 0] Aucune idée | {1} 1 idée | ]1,Inf[ %count% idées"
+    consultations: "]-Inf, 0] 0 consultation | {1} 1 consultation | ]1,Inf[ %count% consultations"
+    ideas: "]-Inf, 0] 0 idée | {1} 1 idée | ]1,Inf[ %count% idées"
     none: Aucun thème
   show:
     consultations:
@@ -747,7 +747,7 @@ blog:
     in_theme: dans
     consultations:
       title: "]-Inf, 1] Consultation liée : | ]1,Inf[ Consultations liées :"
-    comments: "]-Inf, 0] Aucun commentaire | {1} 1 commentaire | ]1,Inf[ %count% commentaires"
+    comments: "]-Inf, 0] 0 commentaire | {1} 1 commentaire | ]1,Inf[ %count% commentaires"
 
 # Features
 features:
@@ -782,7 +782,7 @@ event:
     title: Évènements
     appendices:
       archived:
-        number: "]-Inf, 0] Aucun évènement passé | {1} 1 évènement passé | ]1,Inf[ %count% évènements passés"
+        number: "]-Inf, 0] 0 évènement passé | {1} 1 évènement passé | ]1,Inf[ %count% évènements passés"
   last:
     title: Évènements
   archived: Évènements passés
@@ -794,7 +794,7 @@ event:
   show:
     in_theme: dans
     on_date: le %date%
-    comments: "]-Inf, 0] Aucun commentaire | {1} 1 commentaire | ]1,Inf[ %count% commentaires"
+    comments: "]-Inf, 0] 0 commentaire | {1} 1 commentaire | ]1,Inf[ %count% commentaires"
     consultations:
       title: "]-Inf, 1] Consultation liée : | ]1, Inf[ Consultations liées :"
   link_button: Inscription
@@ -824,12 +824,13 @@ event_registration:
     unsubscribe: Se désinscrire
     cancel: Annuler
   listing:
-    count: ]-Inf, 0] Aucun participant | {1} 1 participant | ]1,Inf[ %count% participants
+    count: ]-Inf, 0] 0 participant | {1} 1 participant | ]1,Inf[ %count% participants
     title: Participants
     see_all: Voir tous les participants
     title_all: Liste des participants
     anonymous: Anonyme
-    contribution: "{0} Aucune contribution | {1} 1 contribution | ]1,Inf[ %count% contributions"
+    contribution: "{0} 0 contribution | {1} 1 contribution | ]1,Inf[ %count% contributions"
+    votes: "{0} 0 vote | {1} 1 vote | ]1,Inf[ %count% votes"
   unsubscribe: Se désinscrire
 
 # comments
