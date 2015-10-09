@@ -1,6 +1,7 @@
 import ArgumentActions from '../../actions/ArgumentActions';
 import LoginStore from '../../stores/LoginStore';
 import LoginOverlay from '../Utils/LoginOverlay';
+import ShareButtonDropdown from '../Utils/ShareButtonDropdown';
 
 const Button = ReactBootstrap.Button;
 
@@ -89,6 +90,10 @@ const OpinionArgumentButtons = React.createClass({
         { ' ' }
         { this.renderReportButton() }
         { this.renderEditButton() }
+        <ShareButtonDropdown
+          url={this.props.argument._links.show}
+          className="btn-xs btn--outline"
+         />
       </div>
     );
   },

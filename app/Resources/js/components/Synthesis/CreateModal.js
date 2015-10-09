@@ -1,5 +1,7 @@
-import ElementsFinder from './ElementsFinder';
+import SynthesisElementStore from '../../stores/SynthesisElementStore';
 import SynthesisElementActions from '../../actions/SynthesisElementActions';
+import ElementsFinder from './ElementsFinder';
+import Loader from '../Utils/Loader';
 
 const Button = ReactBootstrap.Button;
 const Modal = ReactBootstrap.Modal;
@@ -8,8 +10,7 @@ const Input = ReactBootstrap.Input;
 const CreateModal = React.createClass({
   propTypes: {
     synthesis: React.PropTypes.object,
-    selectedId: React.PropTypes.string,
-    elements: React.PropTypes.array,
+    selected: React.PropTypes.string,
     show: React.PropTypes.bool,
     toggle: React.PropTypes.func,
     process: React.PropTypes.func,
@@ -18,59 +19,33 @@ const CreateModal = React.createClass({
 
   getInitialState() {
     return {
+      isLoading: true,
+      elementsTree: [],
       name: null,
-      parent: this.getElementInTreeById(this.props.elements, this.props.selectedId),
-      expanded: this.getExpandedBasedOnSelectedId(),
+      parent: null,
     };
   },
 
   getDefaultProps() {
     return {
       process: null,
-      selectedId: 'root',
     };
   },
 
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.selectedId !== this.props.selectedId) {
-      this.setState({
-        parent: this.getElementInTreeById(nextProps.elements, nextProps.selectedId),
-        expanded: this.getExpandedBasedOnSelectedId(),
-      });
-    }
+  componentWillMount() {
+    SynthesisElementStore.addChangeListener(this.onChange);
   },
 
-  getExpandedBasedOnSelectedId() {
-    const expanded = {
-      root: true,
-    };
-    if (this.props.elements && this.props.selectedId && this.props.selectedId !== 'root') {
-      expanded[this.props.selectedId] = true;
-      const element = this.getElementInTreeById(this.props.elements, this.props.selectedId);
-      if (element) {
-        element.parents_ids.map((id) => {
-          expanded[id] = true;
-        });
-      }
-    }
-    return expanded;
+  componentDidMount() {
+    this.fetchElementsTree();
   },
 
+  componentWillUnmount() {
+    SynthesisElementStore.removeChangeListener(this.onChange);
+  },
 
-  getElementInTreeById(elements, id) {
-    for (let i = 0; i < elements.length; i++) {
-      const element = elements[i];
-      if (element.id === id) {
-        return element;
-      }
-      if (element.children.length > 0) {
-        const found = this.getElementInTreeById(element.children, id);
-        if (found) {
-          return found;
-        }
-      }
-    }
-    return null;
+  onChange() {
+    this.fetchElementsTree();
   },
 
   renderName() {
@@ -91,16 +66,19 @@ const CreateModal = React.createClass({
           {' ' + this.getIntlMessage('edition.action.create.parent.label')}
           <span className="small excerpt action__title-right">{'\t' + this.getIntlMessage('edition.action.create.optional')}</span>
         </h2>
+        <Loader show={this.state.isLoading} />
         {this.renderParentFinder()}
       </div>
     );
   },
 
   renderParentFinder() {
-    const parentId = this.state.parent ? this.state.parent.id : 'root';
-    return (
-      <ElementsFinder synthesis={this.props.synthesis} elements={this.props.elements} expanded={this.state.expanded} selectedId={parentId} onSelect={this.setParent} onExpand={this.expandItem} />
-    );
+    if (!this.state.isLoading) {
+      const parentId = this.state.parent ? this.state.parent.id : 'root';
+      return (
+        <ElementsFinder synthesis={this.props.synthesis} elements={this.state.elementsTree} selectedId={parentId} onSelect={this.setParent} />
+      );
+    }
   },
 
   render() {
@@ -127,14 +105,6 @@ const CreateModal = React.createClass({
 
   hide() {
     this.props.toggle(false);
-  },
-
-  expandItem(element) {
-    const expanded = this.state.expanded;
-    expanded[element.id] = this.state.expanded[element.id] ? false : true;
-    this.setState({
-      expanded: expanded,
-    });
   },
 
   setName(event) {
@@ -165,6 +135,29 @@ const CreateModal = React.createClass({
       return;
     }
     SynthesisElementActions.create(this.props.synthesis.id, element);
+  },
+
+  fetchElementsTree() {
+    if (!SynthesisElementStore.isProcessing && SynthesisElementStore.isInboxSync.allTree) {
+      this.setState({
+        elementsTree: SynthesisElementStore.elements.allTree,
+        isLoading: false,
+      });
+      return;
+    }
+
+    this.setState({
+      isLoading: true,
+    }, () => {
+      this.loadElementsTreeFromServer();
+    });
+  },
+
+  loadElementsTreeFromServer() {
+    SynthesisElementActions.loadElementsTreeFromServer(
+      this.props.synthesis.id,
+      'all'
+    );
   },
 
 });

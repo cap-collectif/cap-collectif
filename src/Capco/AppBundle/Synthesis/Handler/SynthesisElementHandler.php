@@ -2,7 +2,6 @@
 
 namespace Capco\AppBundle\Synthesis\Handler;
 
-use Capco\AppBundle\Entity\Synthesis\SynthesisUserInterface;
 use Doctrine\ORM\EntityManager;
 use Capco\AppBundle\Manager\LogManager;
 use Capco\AppBundle\Entity\Synthesis\Synthesis;
@@ -86,11 +85,10 @@ class SynthesisElementHandler
         return $this->em->getRepository('CapcoAppBundle:Synthesis\SynthesisElement')->countWith($values);
     }
 
-    public function createElementInSynthesis(SynthesisElement $element, Synthesis $synthesis, SynthesisUserInterface $user = null)
+    public function createElementInSynthesis(SynthesisElement $element, Synthesis $synthesis)
     {
         $element->setSynthesis($synthesis);
         $element->setDisplayType('folder');
-        $element->setAuthor($user);
 
         $this->em->persist($element);
         $this->em->flush();
