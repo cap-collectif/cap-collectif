@@ -1,6 +1,6 @@
 import AppDispatcher from '../dispatchers/AppDispatcher';
 import Fetcher from '../services/Fetcher';
-import {RECEIVE_COUNT, RECEIVE_ELEMENTS, RECEIVE_ELEMENT, CREATE_ELEMENT, ARCHIVE_ELEMENT, NOTE_ELEMENT, COMMENT_ELEMENT, MOVE_ELEMENT, DIVIDE_ELEMENT, UPDATE_ELEMENT_SUCCESS, UPDATE_ELEMENT_FAILURE, CREATE_ELEMENT_SUCCESS, CREATE_ELEMENT_FAILURE} from '../constants/SynthesisElementConstants';
+import {RECEIVE_COUNT, RECEIVE_ELEMENTS, RECEIVE_ELEMENT, EXPAND_NAVBAR_ITEM, SELECT_NAVBAR_ITEM, CREATE_ELEMENT, ARCHIVE_ELEMENT, NOTE_ELEMENT, COMMENT_ELEMENT, MOVE_ELEMENT, DIVIDE_ELEMENT, UPDATE_ELEMENT_SUCCESS, UPDATE_ELEMENT_FAILURE, CREATE_ELEMENT_SUCCESS, CREATE_ELEMENT_FAILURE} from '../constants/SynthesisElementConstants';
 
 const idOf = (val) => {
   if (val === 'root') {
@@ -148,6 +148,21 @@ export default {
         });
         return true;
       });
+  },
+
+  expandNavbarItem(elementId, expanded) {
+    AppDispatcher.dispatch({
+      actionType: EXPAND_NAVBAR_ITEM,
+      elementId: elementId,
+      expanded: expanded,
+    });
+  },
+
+  selectNavbarItem(elementId) {
+    AppDispatcher.dispatch({
+      actionType: SELECT_NAVBAR_ITEM,
+      elementId: elementId,
+    });
   },
 
 };

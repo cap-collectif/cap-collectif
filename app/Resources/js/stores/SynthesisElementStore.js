@@ -1,4 +1,4 @@
-import {RECEIVE_COUNT, RECEIVE_ELEMENTS, RECEIVE_ELEMENT, CREATE_ELEMENT, ARCHIVE_ELEMENT, NOTE_ELEMENT, COMMENT_ELEMENT, MOVE_ELEMENT, DIVIDE_ELEMENT, UPDATE_ELEMENT_SUCCESS, UPDATE_ELEMENT_FAILURE, CREATE_ELEMENT_SUCCESS, CREATE_ELEMENT_FAILURE} from '../constants/SynthesisElementConstants';
+import {RECEIVE_COUNT, RECEIVE_ELEMENTS, RECEIVE_ELEMENT, EXPAND_NAVBAR_ITEM, SELECT_NAVBAR_ITEM, CREATE_ELEMENT, ARCHIVE_ELEMENT, NOTE_ELEMENT, COMMENT_ELEMENT, MOVE_ELEMENT, DIVIDE_ELEMENT, UPDATE_ELEMENT_SUCCESS, UPDATE_ELEMENT_FAILURE, CREATE_ELEMENT_SUCCESS, CREATE_ELEMENT_FAILURE} from '../constants/SynthesisElementConstants';
 import BaseStore from './BaseStore';
 import ArrayHelper from '../services/ArrayHelper';
 
@@ -28,6 +28,10 @@ class SynthesisElementStore extends BaseStore {
       'allTree': 0,
       'fromDivision': 0,
     };
+    this._expandedNavbarItems = {
+      root: true,
+    };
+    this._selectedNavbarItem = 'root';
     this._isProcessing = false;
     this._isElementSync = false;
     this._isCountSync = false;
@@ -57,12 +61,21 @@ class SynthesisElementStore extends BaseStore {
       case RECEIVE_ELEMENT:
         this._element = action.element;
         this._isElementSync = true;
+        this.updateSelectedId(action.element.id);
         this.emitChange();
         break;
       case RECEIVE_ELEMENTS:
         this._elements[action.type] = action.elements;
         this._isInboxSync[action.type] = true;
         this._counts[action.type] = action.count;
+        this.emitChange();
+        break;
+      case EXPAND_NAVBAR_ITEM:
+        this._expandedNavbarItems[action.elementId] = action.expanded;
+        this.emitChange();
+        break;
+      case SELECT_NAVBAR_ITEM:
+        this.updateSelectedId(action.elementId);
         this.emitChange();
         break;
       case CREATE_ELEMENT:
@@ -174,6 +187,14 @@ class SynthesisElementStore extends BaseStore {
     return this._elements;
   }
 
+  get expandedNavbarItems() {
+    return this._expandedNavbarItems;
+  }
+
+  get selectedNavbarItem() {
+    return this._selectedNavbarItem;
+  }
+
   get counts() {
     return this._counts;
   }
@@ -196,6 +217,35 @@ class SynthesisElementStore extends BaseStore {
     this._isInboxSync.allTree = false;
     this._isInboxSync.fromDivision = false;
     this._isCountSync = false;
+  }
+
+  updateSelectedId(selected) {
+    this._selectedNavbarItem = selected;
+    const expanded = this._expandedNavbarItems;
+    expanded[selected] = true;
+    const element = this.getElementInTreeById(this._elements.allTree, selected);
+    if (element) {
+      element.parents_ids.map((id) => {
+        expanded[id] = true;
+      });
+    }
+    this._expandedNavbarItems = expanded;
+  }
+
+  getElementInTreeById(elements, id) {
+    for (let i = 0; i < elements.length; i++) {
+      const element = elements[i];
+      if (element.id === id) {
+        return element;
+      }
+      if (element.children.length > 0) {
+        const found = this.getElementInTreeById(element.children, id);
+        if (found) {
+          return found;
+        }
+      }
+    }
+    return null;
   }
 
 }

@@ -15,9 +15,9 @@ use Capco\AppBundle\SiteParameter\Resolver;
 class NotifySpec extends ObjectBehavior
 {
 
-    function let(\Swift_Mailer $mailer, EngineInterface $templating, TranslatorInterface $translator, Resolver $resolver, Router $router, UrlResolver $urlResolver)
+    function let(\Swift_Mailer $mailer, \Swift_Mailer $mailer2, EngineInterface $templating, TranslatorInterface $translator, Resolver $resolver, Router $router, UrlResolver $urlResolver)
     {
-        $this->beConstructedWith($mailer, $templating, $translator, $resolver, $router, $urlResolver, ['confirmation.template' => null, 'resetting.template' => null]);
+        $this->beConstructedWith($mailer, $mailer2, $templating, $translator, $resolver, $router, $urlResolver, ['confirmation.template' => null, 'resetting.template' => null]);
     }
 
 

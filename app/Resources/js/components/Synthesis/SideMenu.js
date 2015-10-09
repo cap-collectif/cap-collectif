@@ -1,5 +1,9 @@
+import SynthesisElementStore from '../../stores/SynthesisElementStore';
+import SynthesisElementActions from '../../actions/SynthesisElementActions';
+
 import CreateModal from './CreateModal';
 import ElementsFinder from './ElementsFinder';
+import Loader from '../Utils/Loader';
 
 const Nav = ReactBootstrap.Nav;
 const NavItem = ReactBootstrap.NavItem;
@@ -9,16 +13,49 @@ const SideMenu = React.createClass({
   propTypes: {
     synthesis: React.PropTypes.object,
   },
-  mixins: [ReactIntl.IntlMixin],
+  mixins: [ReactIntl.IntlMixin, ReactRouter.Navigation],
 
   getInitialState() {
     return {
       showCreateModal: false,
+      navbarItems: [],
+      selectedId: 'root',
+      expanded: {
+        root: true,
+      },
+      isLoading: true,
     };
+  },
+
+  componentWillMount() {
+    SynthesisElementStore.addChangeListener(this.onChange);
+  },
+
+  componentDidMount() {
+    this.loadElementsTreeFromServer();
   },
 
   componentWillUnmount() {
     this.toggleCreateModal(false);
+    SynthesisElementStore.removeChangeListener(this.onChange);
+  },
+
+  onChange() {
+    if (!SynthesisElementStore.isProcessing && SynthesisElementStore.isInboxSync.allTree) {
+      this.setState({
+        navbarItems: SynthesisElementStore.elements.allTree,
+        expanded: SynthesisElementStore.expandedNavbarItems,
+        selectedId: SynthesisElementStore.selectedNavbarItem,
+        isLoading: false,
+      });
+      return;
+    }
+
+    this.setState({
+      isLoading: true,
+    }, () => {
+      this.loadElementsTreeFromServer();
+    });
   },
 
   renderContributionsButton() {
@@ -30,8 +67,19 @@ const SideMenu = React.createClass({
   },
 
   renderTree() {
+    if (this.state.isLoading) {
+      return <Loader show={this.state.isLoading} />;
+    }
     return (
-      <ElementsFinder synthesis={this.props.synthesis} itemClass="menu__link" />
+      <ElementsFinder
+        synthesis={this.props.synthesis}
+        elements={this.state.navbarItems}
+        expanded={this.state.expanded}
+        selectedId={this.state.selectedId}
+        onExpand={this.toggleExpand}
+        onSelect={this.selectItem}
+        itemClass="menu__link"
+      />
     );
   },
 
@@ -64,9 +112,20 @@ const SideMenu = React.createClass({
           {this.renderCreateButton()}
           {this.renderManageButton()}
         </Nav>
-        <CreateModal synthesis={this.props.synthesis} show={this.state.showCreateModal} toggle={this.toggleCreateModal} />
+        <CreateModal synthesis={this.props.synthesis} show={this.state.showCreateModal} toggle={this.toggleCreateModal} elements={this.state.navbarItems} selectedId={this.state.selectedId} />
       </div>
     );
+  },
+
+  toggleExpand(element) {
+    SynthesisElementActions.expandNavbarItem(element.id, !this.state.expanded[element.id]);
+  },
+
+  selectItem(element) {
+    SynthesisElementActions.selectNavbarItem(element.id);
+    if (element.id !== 'root') {
+      this.transitionTo('show_element', {'element_id': element.id});
+    }
   },
 
   showCreateModal() {
@@ -81,6 +140,13 @@ const SideMenu = React.createClass({
     this.setState({
       showCreateModal: value,
     });
+  },
+
+  loadElementsTreeFromServer() {
+    SynthesisElementActions.loadElementsTreeFromServer(
+      this.props.synthesis.id,
+      'all'
+    );
   },
 
 });

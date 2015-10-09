@@ -36,6 +36,16 @@ const EditElement = React.createClass({
     this.loadElementFromServer();
   },
 
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.params.element_id !== this.props.params.element_id) {
+      this.setState({
+        isLoading: true,
+      }, () => {
+        this.loadElementFromServer(nextProps.params.element_id);
+      });
+    }
+  },
+
   componentWillUnmount() {
     SynthesisElementStore.removeChangeListener(this.onChange);
     this.toggleDivideModal(false);
@@ -99,7 +109,7 @@ const EditElement = React.createClass({
 
   renderHistory() {
     const element = this.state.element;
-    if (element && element.logs.length > 0) {
+    if (!this.state.isLoading && element && element.logs.length > 0) {
       return (
         <ul className="element__history">
           {
@@ -127,7 +137,7 @@ const EditElement = React.createClass({
 
   renderPublishModal() {
     const element = this.state.element;
-    if (element) {
+    if (!this.state.isLoading && element) {
       return (
         <PublishModal synthesis={this.props.synthesis} element={element} show={this.state.showPublishModal} toggle={this.togglePublishModal} />
       );
@@ -136,7 +146,7 @@ const EditElement = React.createClass({
 
   renderDivideModal() {
     const element = this.state.element;
-    if (element) {
+    if (!this.state.isLoading && element) {
       return (
         <DivideModal synthesis={this.props.synthesis} element={element} show={this.state.showDivideModal} toggle={this.toggleDivideModal} />
       );
@@ -169,10 +179,10 @@ const EditElement = React.createClass({
     });
   },
 
-  loadElementFromServer() {
+  loadElementFromServer(id = this.props.params.element_id) {
     SynthesisElementActions.loadElementFromServer(
       this.props.synthesis.id,
-      this.props.params.element_id
+      id
     );
   },
 

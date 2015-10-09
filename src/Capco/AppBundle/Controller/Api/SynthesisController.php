@@ -334,7 +334,7 @@ class SynthesisController extends FOSRestController
         $form->submit($request->request->all(), false);
 
         if ($form->isValid()) {
-            $element = $this->get('capco.synthesis.synthesis_element_handler')->createElementInSynthesis($element, $synthesis);
+            $element = $this->get('capco.synthesis.synthesis_element_handler')->createElementInSynthesis($element, $synthesis, $this->getUser());
             $view = $this->view($element, Codes::HTTP_CREATED);
             $view->setSerializationContext(SerializationContext::create()->setGroups(array('ElementDetails', 'UserDetails', 'LogDetails')));
             $url = $this->generateUrl('get_synthesis_element', ['synthesis_id' => $synthesis->getId(), 'element_id' => $element->getId()], UrlGeneratorInterface::ABSOLUTE_URL);
