@@ -72,9 +72,10 @@
                             {% endif %}
                             <li>
                                 <h4 class="h4 search-result__title">
-                                        <span class="label label-default search-result__type">
-                                            {{ type_label | trans({}, 'CapcoAppBundle') }}
-                                        </span>
+                                        <span class="label label-default search-result__type">{{ type_label | trans({}, 'CapcoAppBundle') }}</span>
+                                        {% if result.transformed.isTrashed == true %}
+                                            <span class="label label-default">{{ 'comment.trashed.label' | trans({}, 'CapcoAppBundle') }}</span>
+                                        {% endif %}
                                         <a class="search-result__link" href="{{ result.transformed | capco_url }}">
                                             {{ title | raw }}
                                         </a>

@@ -4,7 +4,7 @@ const Modal = ReactBootstrap.Modal;
 
 const ShareButtonDropdown = React.createClass({
   propTypes: {
-    title: React.PropTypes.string.isRequired,
+    title: React.PropTypes.string,
     url: React.PropTypes.string.isRequired,
     className: React.PropTypes.string,
   },
@@ -13,6 +13,7 @@ const ShareButtonDropdown = React.createClass({
   getDefaultProps() {
     return {
       className: '',
+      title: '',
     };
   },
 
@@ -41,24 +42,25 @@ const ShareButtonDropdown = React.createClass({
   render() {
     return (
       <DropdownButton
+        bsStyle={this.props.bsStyle}
         className={this.props.className + ' dropdown--custom'}
         title={
           <span><i className="cap cap-link"></i> {this.getIntlMessage('global.share')}</span>
         }
       >
-        <MenuItem eventKey="1" onClick={this.facebook.bind(null, this)}>
+        <MenuItem eventKey="1" onSelect={this.facebook.bind(null, this)}>
           <i className="cap cap-facebook"></i> {this.getIntlMessage('share.facebook')}
         </MenuItem>
-        <MenuItem eventKey="2" onClick={this.twitter.bind(null, this)}>
+        <MenuItem eventKey="2" onSelect={this.twitter.bind(null, this)}>
           <i className="cap cap-twitter"></i> {this.getIntlMessage('share.twitter')}
         </MenuItem>
-        <MenuItem eventKey="3" onClick={this.googleplus.bind(null, this)}>
+        <MenuItem eventKey="3" onSelect={this.googleplus.bind(null, this)}>
           <i className="cap cap-gplus"></i> {this.getIntlMessage('share.googleplus')}
         </MenuItem>
         <MenuItem eventKey="4" href={`mailto:?subject=${this.props.title}&body=${this.props.url}`}>
           <i className="cap cap-mail-2-1"></i> {this.getIntlMessage('share.mail')}
         </MenuItem>
-        <MenuItem eventKey="4" onClick={this.showModal.bind(null, this)}>
+        <MenuItem eventKey="4" onSelect={this.showModal.bind(null, this)}>
           <i className="cap cap-link-1"></i> {this.getIntlMessage('share.link')}
         </MenuItem>
         {this.renderModal()}
