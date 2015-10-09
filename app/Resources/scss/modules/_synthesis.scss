@@ -387,13 +387,12 @@ $dark-red: #A94442;
   position: relative;
 
   .element__icon {
-    position: relative;
-    top: -25px;
+    float: left;
     font-size: 25px;
     margin-right: 10px;
 
     @media (max-width: 500px) {
-      top: 0;
+      float: none;
     }
   }
 
