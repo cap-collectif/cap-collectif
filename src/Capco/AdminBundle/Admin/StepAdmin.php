@@ -139,14 +139,14 @@ class StepAdmin extends Admin
     public function prePersist($step)
     {
         if ($step instanceof SynthesisStep) {
-            $this->manageEmbeddedSynthesis($step);
+            //$this->manageEmbeddedSynthesis($step);
         }
     }
 
     public function preUpdate($step)
     {
         if ($step instanceof SynthesisStep) {
-            $this->manageEmbeddedSynthesis($step);
+            //$this->manageEmbeddedSynthesis($step);
         }
     }
 
