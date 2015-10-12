@@ -4,7 +4,7 @@ Capco\AppBundle\Entity\Synthesis\SynthesisElement:
     id:
       type: string
       expose: true
-      groups: [Elements, ElementsList, ElementsPublished, ElementDetails]
+      groups: [ElementsTree, Elements, ElementsList, ElementsPublished, ElementDetails]
     published:
       expose: true
       groups: [ElementsList, ElementDetails]
@@ -20,11 +20,9 @@ Capco\AppBundle\Entity\Synthesis\SynthesisElement:
     author:
       expose: true
       groups: [ElementsList, ElementsPublished, ElementDetails, UserDetails]
-    parent:
-      type: Capco\AppBundle\Entity\Synthesis\SynthesisElement
+    path:
       expose: true
-      groups: [ElementsList, ElementDetails]
-      max_depth: 3
+      groups: [ElementsTree, ElementsList, ElementDetails]
     children:
       type: ArrayCollection<Capco\AppBundle\Entity\Synthesis\SynthesisElement>
       expose: true
@@ -32,13 +30,13 @@ Capco\AppBundle\Entity\Synthesis\SynthesisElement:
       max_depth: 2
     displayType:
       expose: true
-      groups: [ElementsList, ElementsPublished, ElementDetails]
+      groups: [ElementsTree, ElementsList, ElementsPublished, ElementDetails]
     title:
       expose: true
-      groups: [ElementsList, ElementsPublished, Elements, ElementDetails]
+      groups: [ElementsTree, ElementsList, ElementsPublished, Elements, ElementDetails]
     body:
       expose: true
-      groups: [ElementsList, ElementDetails, ElementsPublished]
+      groups: [ElementsTree, ElementsList, ElementDetails, ElementsPublished]
     link:
       expose: true
       groups: [ElementDetails, ElementsPublished]
@@ -46,9 +44,6 @@ Capco\AppBundle\Entity\Synthesis\SynthesisElement:
       expose: true
       groups: [ElementsList, ElementDetails]
     comment:
-      expose: true
-      groups: [ElementDetails]
-    votes:
       expose: true
       groups: [ElementDetails]
     linkedDataCreation:
@@ -60,16 +55,13 @@ Capco\AppBundle\Entity\Synthesis\SynthesisElement:
     division:
       expose: true
       groups: [ElementDetails]
+    lvl:
+      expose: true
+      groups: [ElementsTree, ElementDetails, ElementsPublished]
   virtual_properties:
     hasLinkedData:
       serialized_name: has_linked_data
       groups: [ElementsList, ElementsPublished, ElementDetails]
-    getPublishedChildren:
-      serialized_name: children
-      groups: [ElementsPublished]
-    getParentsIds:
-      serialized_name: parents_ids
-      groups: [ElementsTree, ElementsPublished]
   relations:
     -
       rel: self

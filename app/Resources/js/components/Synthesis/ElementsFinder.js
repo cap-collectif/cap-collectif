@@ -1,9 +1,11 @@
+import SynthesisElementActions from '../../actions/SynthesisElementActions';
 import ElementTitle from './ElementTitle';
 import ElementIcon from './ElementIcon';
 
 const ElementsFinder = React.createClass({
   propTypes: {
     synthesis: React.PropTypes.object,
+    type: React.PropTypes.string,
     selectedId: React.PropTypes.string,
     elements: React.PropTypes.array,
     expanded: React.PropTypes.object,
@@ -73,7 +75,7 @@ const ElementsFinder = React.createClass({
       'cap-arrow-67': this.props.expanded[element.id],
       'cap-arrow-66': !this.props.expanded[element.id],
     });
-    if (element.children.length > 0) {
+    if (element.childrenCount > 0) {
       return (
         <i className={classes} onClick={this.toggleExpand.bind(this, element)}></i>
       );
@@ -100,6 +102,9 @@ const ElementsFinder = React.createClass({
 
   toggleExpand(element) {
     event.stopPropagation();
+    if (element.childrenCount !== element.children.length) {
+      SynthesisElementActions.loadElementsTreeFromServer(this.props.synthesis.id, this.props.type, element.id);
+    }
     if (typeof this.props.onExpand === 'function') {
       this.props.onExpand(element);
     }

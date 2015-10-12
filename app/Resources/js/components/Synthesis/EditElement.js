@@ -53,15 +53,17 @@ const EditElement = React.createClass({
   },
 
   onChange() {
-    if (!SynthesisElementStore.isProcessing && SynthesisElementStore.isElementSync) {
-      this.setState({
-        element: SynthesisElementStore.element,
-        isLoading: false,
-      });
-      return;
-    }
+    if (!SynthesisElementStore.isProcessing) {
+      if (SynthesisElementStore.isElementSync) {
+        this.setState({
+          element: SynthesisElementStore.element,
+          isLoading: false,
+        });
+        return;
+      }
 
-    this.loadElementFromServer();
+      this.loadElementFromServer();
+    }
   },
 
   renderElementPanel() {

@@ -53,22 +53,24 @@ const ElementsInbox = React.createClass({
   },
 
   onChange() {
-    if (!SynthesisElementStore.isProcessing && SynthesisElementStore.isInboxSync[this.props.params.type]) {
-      this.setState({
-        elements: SynthesisElementStore.elements[this.props.params.type],
-        count: SynthesisElementStore.counts[this.props.params.type],
-        isLoading: false,
-        isLoadingMore: false,
-      });
-      this.resetLoadMoreButton();
-      return;
-    }
+    if (!SynthesisElementStore.isProcessing) {
+      if (SynthesisElementStore.isInboxSync[this.props.params.type]) {
+        this.setState({
+          elements: SynthesisElementStore.elements[this.props.params.type],
+          count: SynthesisElementStore.counts[this.props.params.type],
+          isLoading: false,
+          isLoadingMore: false,
+        });
+        this.resetLoadMoreButton();
+        return;
+      }
 
-    this.setState({
-      isLoading: true,
-    }, () => {
-      this.loadElementsByTypeFromServer();
-    });
+      this.setState({
+        isLoading: true,
+      }, () => {
+        this.loadElementsByTypeFromServer();
+      });
+    }
   },
 
   renderList() {
