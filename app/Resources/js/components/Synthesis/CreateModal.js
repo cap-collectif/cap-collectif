@@ -32,7 +32,7 @@ const CreateModal = React.createClass({
   },
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.selectedId !== this.props.selectedId) {
+    if (!this.props.selectedId || nextProps.selectedId !== this.props.selectedId) {
       this.setState({
         parent: this.getElementInTreeById(nextProps.elements, nextProps.selectedId),
         expanded: this.getExpandedBasedOnSelectedId(),
