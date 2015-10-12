@@ -6,6 +6,9 @@ exports.config = {
       plugins: {
         'fb-flo': {
           'enabled': false
+        },
+        'eslint': {
+          'enabled': false
         }
       }
     }
