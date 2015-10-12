@@ -1,4 +1,5 @@
 import SynthesisElementActions from '../../actions/SynthesisElementActions';
+import SynthesisElementStore from '../../stores/SynthesisElementStore';
 import NotationButtons from './NotationButtons';
 import ElementsFinder from './ElementsFinder';
 
@@ -21,6 +22,9 @@ const PublishModal = React.createClass({
       notation: this.props.element ? this.props.element.notation : null,
       parent: this.props.element ? this.props.element.parent : null,
       comment: this.props.element ? this.props.element.comment : null,
+      elements: [],
+      expanded: this.getExpandedBasedOnElement(),
+      isLoading: true,
     };
   },
 
@@ -30,6 +34,14 @@ const PublishModal = React.createClass({
     };
   },
 
+  componentWillMount() {
+    SynthesisElementStore.addChangeListener(this.onChange);
+  },
+
+  componentDidMount() {
+    this.loadElementsTreeFromServer();
+  },
+
   componentWillReceiveProps(nextProps) {
     if (nextProps.element) {
       if (!this.props.element || this.props.element.id !== nextProps.element.id) {
@@ -37,9 +49,64 @@ const PublishModal = React.createClass({
           notation: nextProps.element.notation,
           parent: nextProps.element.parent,
           comment: nextProps.element.comment,
+          expanded: this.getExpandedBasedOnElement(),
         });
       }
     }
+  },
+
+  componentWillUnmount() {
+    SynthesisElementStore.removeChangeListener(this.onChange);
+  },
+
+  onChange() {
+    if (!SynthesisElementStore.isProcessing && SynthesisElementStore.isInboxSync.allTree) {
+      this.setState({
+        elements: SynthesisElementStore.elements.allTree,
+        expanded: SynthesisElementStore.expandedNavbarItems,
+        selectedId: SynthesisElementStore.selectedNavbarItem,
+        isLoading: false,
+      });
+      return;
+    }
+
+    this.setState({
+      isLoading: true,
+    }, () => {
+      this.loadElementsTreeFromServer();
+    });
+  },
+
+  getExpandedBasedOnElement() {
+    const expanded = {
+      root: true,
+    };
+    if (this.props.elements && this.props.element && this.props.element !== 'root') {
+      expanded[this.props.element.id] = true;
+      const element = this.getElementInTreeById(this.props.elements, this.props.element.id);
+      if (element) {
+        element.parents_ids.map((id) => {
+          expanded[id] = true;
+        });
+      }
+    }
+    return expanded;
+  },
+
+  getElementInTreeById(elements, id) {
+    for (let i = 0; i < elements.length; i++) {
+      const element = elements[i];
+      if (element.id === id) {
+        return element;
+      }
+      if (element.children.length > 0) {
+        const found = this.getElementInTreeById(element.children, id);
+        if (found) {
+          return found;
+        }
+      }
+    }
+    return null;
   },
 
   renderParent() {
@@ -56,7 +123,7 @@ const PublishModal = React.createClass({
   renderParentFinder() {
     const parentId = this.state.parent ? this.state.parent.id : 'root';
     return (
-      <ElementsFinder synthesis={this.props.synthesis} selectedId={parentId} onSelect={this.setParent} />
+      <ElementsFinder synthesis={this.props.synthesis} elements={this.state.elements} expanded={this.state.expanded} selectedId={parentId} onSelect={this.setParent} onExpand={this.expandItem} />
     );
   },
 
@@ -150,6 +217,21 @@ const PublishModal = React.createClass({
     }
     SynthesisElementActions.archive(this.props.synthesis.id, this.props.element.id, data);
     this.transitionTo('inbox', {'type': 'new'});
+  },
+
+  expandItem(element) {
+    const expanded = this.state.expanded;
+    expanded[element.id] = this.state.expanded[element.id] ? false : true;
+    this.setState({
+      expanded: expanded,
+    });
+  },
+
+  loadElementsTreeFromServer() {
+    SynthesisElementActions.loadElementsTreeFromServer(
+      this.props.synthesis.id,
+      'all'
+    );
   },
 
 });
