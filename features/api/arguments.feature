@@ -34,6 +34,7 @@ Feature: Arguments
             }
           },
           "_links": {
+            "show": @string@,
             "edit": @string@,
             "report": @string@
           },
@@ -77,6 +78,7 @@ Feature: Arguments
             }
           },
           "_links": {
+            "show": @string@,
             "edit": @string@,
             "report": @string@
           },

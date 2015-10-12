@@ -13,7 +13,6 @@ use Doctrine\ORM\Query;
  */
 class OpinionVersionRepository extends EntityRepository
 {
-
     public function getOne($id)
     {
         $qb = $this->getIsEnabledQueryBuilder('o')

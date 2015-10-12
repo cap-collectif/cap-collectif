@@ -121,7 +121,7 @@ class UrlResolver
         if ($object instanceof Argument || $object instanceof Source) {
             return $this->router
                 ->generate('app_consultation_show_trashed', [
-                    'consultationSlug' => $object->getLinkedOpinion()->getStep()->getConsultation()->getSlug()
+                    'consultationSlug' => $object->getLinkedOpinion()->getStep()->getConsultation()->getSlug(),
                 ], $absolute)
             ;
         }

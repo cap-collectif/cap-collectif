@@ -258,6 +258,7 @@ class SynthesisElementHandlerSpec extends ObjectBehavior
     {
         $element->setSynthesis($synthesis)->shouldBeCalled();
         $element->setDisplayType('folder')->shouldBeCalled();
+        $element->setAuthor(null)->shouldBeCalled();
         $em->persist($element)->shouldBeCalled();
         $em->flush()->shouldBeCalled();
 

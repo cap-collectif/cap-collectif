@@ -44,7 +44,7 @@ class ArgumentSerializationListener implements EventSubscriberInterface
         $consultation = $step->getConsultationAbstractStep()->getConsultation();
         $user = $this->tokenStorage->getToken()->getUser();
 
-        $showUrl = "";
+        $showUrl = '';
 
         $parent = $argument->getParent();
         if ($parent instanceof Opinion) {
@@ -53,15 +53,15 @@ class ArgumentSerializationListener implements EventSubscriberInterface
                 'stepSlug' => $step->getSlug(),
                 'opinionTypeSlug' => $opinionType->getSlug(),
                 'opinionSlug' => $opinion->getSlug(),
-            ], true) . '#arg-' . $argument->getId();
-        } else if ($parent instanceof OpinionVersion) {
+            ], true).'#arg-'.$argument->getId();
+        } elseif ($parent instanceof OpinionVersion) {
             $showUrl = $this->router->generate('app_consultation_show_opinion_version', [
                 'consultationSlug' => $consultation->getSlug(),
                 'stepSlug' => $step->getSlug(),
                 'opinionTypeSlug' => $opinionType->getSlug(),
                 'opinionSlug' => $opinion->getSlug(),
                 'versionSlug' => $parent->getSlug(),
-            ], true) . '#arg-' . $argument->getId();
+            ], true).'#arg-'.$argument->getId();
         }
 
         $event->getVisitor()->addData(

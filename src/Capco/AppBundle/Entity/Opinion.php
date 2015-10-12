@@ -386,7 +386,6 @@ class Opinion
         return $this->Sources;
     }
 
-
     public function setSources($sources)
     {
         $this->sources = $sources;

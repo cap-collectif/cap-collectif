@@ -17,7 +17,6 @@ class SearchType extends AbstractType
         $this->toggleManager = $toggleManager;
     }
 
-
     private function generateChoices()
     {
         $choices = [

@@ -16,7 +16,6 @@ use Doctrine\ORM\Query;
  */
 class SourceRepository extends EntityRepository
 {
-
     public function getRecentOrdered()
     {
         $qb = $this->createQueryBuilder('s')

@@ -53,6 +53,8 @@ $container->setParameter('language_analyzer',           set_var('language_analyz
 
 $container->setParameter('remember_secret',           set_var('remember_secret', '***REMOVED***'));
 
+$container->setParameter('sonata.media.thumbnail.liip_imagine', 'Capco\MediaBundle\Thumbnail\LiipImagineThumbnail');
+
 if (file_exists('app/config/parameters.yml') || file_exists('../app/config/parameters.yml')) {
     $loader->import('parameters.yml');
 }
