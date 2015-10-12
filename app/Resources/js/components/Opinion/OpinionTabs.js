@@ -4,6 +4,7 @@ import OpinionArgumentsBox from './OpinionArgumentsBox';
 import OpinionVersionsBox from './OpinionVersionsBox';
 import OpinionSourcesBox from './OpinionSourcesBox';
 import VoteLinechart from '../Utils/VoteLinechart';
+import OpinionLinksBox from './OpinionLinksBox';
 
 const TabbedArea = ReactBootstrap.TabbedArea;
 const Tab = ReactBootstrap.Tab;
@@ -46,8 +47,16 @@ const OpinionTabs = React.createClass({
     return key;
   },
 
+  getDefaultKey() {
+    return this.isVersionable() ? 'versions' :
+      this.isCommentable() ? 'arguments' :
+      this.isSourceable() ? 'sources' :
+      this.isLinkable() ? 'links' : null;
+  },
+
   getCommentSystem() {
-    return this.props.opinion.parent ? this.props.opinion.parent.type.commentSystem : this.props.opinion.type.commentSystem;
+    const opinion = this.props.opinion;
+    return opinion.parent ? opinion.parent.type.commentSystem : opinion.type.commentSystem;
   },
 
   getArgumentsTrad() {
@@ -74,7 +83,18 @@ const OpinionTabs = React.createClass({
   },
 
   renderVersionsContent() {
-    return <OpinionVersionsBox isReportingEnabled={this.props.isReportingEnabled} isContribuable={this.isContribuable()} opinionId={this.props.opinion.id} opinionBody={this.props.opinion.body} />;
+    return (
+      <OpinionVersionsBox
+        isReportingEnabled={this.props.isReportingEnabled}
+        isContribuable={this.isContribuable()}
+        opinionId={this.props.opinion.id}
+        opinionBody={this.props.opinion.body}
+      />
+    );
+  },
+
+  renderLinksContent() {
+    return <OpinionLinksBox {...this.props}/>;
   },
 
   renderSourcesContent() {
@@ -128,6 +148,14 @@ const OpinionTabs = React.createClass({
               </Tab>
             : null
           }
+          { this.isLinkable()
+            ? <TabPane id="opinion__links" className="opinion-tabs" eventKey={'links'} tab={
+                <FormattedMessage message={this.getIntlMessage('global.links')} num={opinion.connections_count} />
+              }>
+                {this.renderLinksContent()}
+              </TabPane>
+            : null
+          }
         </TabbedArea>
       );
     }
@@ -146,6 +174,10 @@ const OpinionTabs = React.createClass({
     }
 
     return null;
+  },
+
+  isLinkable() {
+    return true;
   },
 
   isSourceable() {

@@ -44,6 +44,11 @@ Capco\AppBundle\Entity\Opinion:
             type: integer
             serialized_name: sources_count
             groups: [Opinions]
+        connectionsCount:
+            expose: true
+            type: integer
+            serialized_name: connections_count
+            groups: [Opinions]
         appendices:
             expose: true
             groups: [Opinions, OpinionVersions]
@@ -66,6 +71,12 @@ Capco\AppBundle\Entity\Opinion:
             serialized_name: votes_mitige
             groups: [Opinions]
         arguments:
+            expose: true
+            groups: [Opinions]
+        link:
+            expose: true
+            groups: [Opinions]
+        connections:
             expose: true
             groups: [Opinions]
         modals:

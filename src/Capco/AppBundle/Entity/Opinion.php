@@ -10,7 +10,9 @@ use Symfony\Component\Validator\Constraints as Assert;
 use Capco\AppBundle\Traits\TrashableTrait;
 use Capco\AppBundle\Traits\SluggableTitleTrait;
 use Capco\AppBundle\Traits\VotableTrait;
+use Capco\AppBundle\Traits\SelfLinkableTrait;
 use Capco\UserBundle\Entity\User;
+use Capco\AppBundle\Entity\Interfaces\SelfLinkableInterface;
 
 /**
  * Opinion.
@@ -19,12 +21,13 @@ use Capco\UserBundle\Entity\User;
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\OpinionRepository")
  * @ORM\HasLifecycleCallbacks()
  */
-class Opinion
+class Opinion implements SelfLinkableInterface
 {
     use TrashableTrait;
     use SluggableTitleTrait;
     use VotableTrait;
     use ValidableTrait;
+    use SelfLinkableTrait;
 
     public static $sortCriterias = [
         'positions' => 'opinion.sort.positions',
@@ -91,8 +94,6 @@ class Opinion
     protected $argumentsCount = 0;
 
     /**
-     * @var string
-     *
      * @ORM\ManyToOne(targetEntity="Capco\UserBundle\Entity\User", inversedBy="opinions")
      * @ORM\JoinColumn(name="author_id", referencedColumnName="id", onDelete="CASCADE")
      */
@@ -167,12 +168,10 @@ class Opinion
         $this->Sources = new ArrayCollection();
         $this->versions = new ArrayCollection();
         $this->appendices = new ArrayCollection();
+        $this->connections = new ArrayCollection();
 
         $this->updatedAt = new \Datetime();
         $this->createdAt = new \Datetime();
-
-        $this->argumentsCount = 0;
-        $this->sourcesCount = 0;
     }
 
     public function __toString()
@@ -558,7 +557,7 @@ class Opinion
         return $this->versions;
     }
 
-    public function addVersion(Opinion $version)
+    public function addVersion(OpinionVersion $version)
     {
         if (!$this->versions->contains($version)) {
             $this->versions->add($version);
@@ -567,7 +566,7 @@ class Opinion
         return $this;
     }
 
-    public function removeVersion(Opinion $version)
+    public function removeVersion(OpinionVersion $version)
     {
         $this->versions->removeElement($version);
 

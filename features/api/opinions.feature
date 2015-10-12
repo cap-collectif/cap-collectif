@@ -2,7 +2,7 @@ Feature: Opinions
 
 ## Get
 
-  Scenario: API client wants to retrieve an opinion
+  Scenario: Anonymous API client wants to retrieve an opinion
     When I send a GET request to "/api/opinions/57"
     Then the JSON response should match:
     """
@@ -58,6 +58,9 @@ Feature: Opinions
           },
           @...@
         ],
+
+        "connections": @...@,
+        "link": @...@,
 
         "author": {
           "username": @string@,
