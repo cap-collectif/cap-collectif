@@ -19,7 +19,7 @@
 {% block content %}
 
     <p id="back-button">
-        <a href={{ path('app_consultation_show', {'consultationSlug': consultation.slug, 'stepSlug': currentStep.slug})  }} class="btn btn-default">
+        <a href="{{ path('app_consultation_show', {'consultationSlug': consultation.slug, 'stepSlug': currentStep.slug})  }}" class="btn btn-default">
             <i class="cap cap-arrow-1-1"></i> {{ 'consultation.show.global.title' | trans({}, 'CapcoAppBundle') }}
         </a>
     </p>
@@ -36,8 +36,9 @@
             'opinionType': opinionType,
             'opinions': opinions,
             'opinions_count': opinions | length,
-            'sortOpinionsForm': sortOpinionsForm,
             'opinionTerm': consultation.opinionTerm,
+            'opinionsSort': opinionsSort,
+            'opinionSortOrders': opinionSortOrders,
         } only %}
 
         {% if (opinions|length > 0) %}
@@ -54,11 +55,11 @@
         {% endif %}
     </div>
 
-    {% if sortOpinionsForm.vars.data.opinionsSort is not null %}
-        {% set route, params = 'app_consultation_show_opinions_sorted', {'consultationSlug': consultation.slug, 'stepSlug': currentStep.slug, 'opinionTypeSlug': opinionType.slug, 'opinionsSort': sortOpinionsForm.vars.data.opinionsSort } %}
-    {% else %}
-        {% set route, params = 'app_consultation_show_opinions', {'consultationSlug': consultation.slug, 'stepSlug': currentStep.slug, 'opinionTypeSlug': opinionType.slug} %}
+    {% set params = {'consultationSlug': consultation.slug, 'stepSlug': currentStep.slug, 'opinionTypeSlug': opinionType.slug } %}
+
+    {% if currentRoute == 'app_consultation_show_opinions_sorted' %}
+        {% set params = params | merge({'opinionsSort': opinionsSort }) %}
     {% endif %}
 
-    {% include 'CapcoAppBundle:Block:pagination.html.twig' with {'current': page, 'nb': nbPage, 'route': route, 'params': params} only  %}
+    {% include 'CapcoAppBundle:Block:pagination.html.twig' with {'current': page, 'nb': nbPage, 'route': currentRoute, 'params': params} only  %}
 {% endblock %}
