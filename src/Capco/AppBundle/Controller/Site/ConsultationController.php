@@ -104,14 +104,23 @@ class ConsultationController extends Controller
         $tree = $this->get('capco.opinion_types.resolver')
             ->getGroupedOpinionsForStep($currentStep);
 
-        $addForm = function ($tree) use (&$addForm) {
+        $addForm = function ($tree) use (&$addForm, $consultation, $currentStep) {
             $childrenTree = [];
+
             foreach ($tree as $node) {
-                $form = $this->createForm(new OpinionsSortType($node), null, ['csrf_protection' => false]);
+                $form = $this->createForm(new OpinionsSortType($node), null, [
+                    'csrf_protection' => false,
+                    'action' => $this->generateUrl('app_consultation_show', [
+                        'consultationSlug' => $consultation->getSlug(),
+                        'stepSlug' => $currentStep->getSlug(),
+                    ]),
+                ]);
                 $node['sortForm'] = $form->createView();
+
                 if (count($node['children']) > 0) {
                     $node['children'] = $addForm($node['children']);
                 }
+
                 $childrenTree[] = $node;
             }
 
