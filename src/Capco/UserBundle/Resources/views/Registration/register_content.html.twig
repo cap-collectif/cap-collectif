@@ -62,6 +62,16 @@
                         </div>
                         {{ form_errors(form.plainPassword) }}
 
+                        {% if is_feature_enabled("zipcode_at_register") %}
+                            <div class="form-group">
+                                <label for="sonata_user_registration_zipcode" class="control-label h5">
+                                    {{ 'user.register.zipcode'|trans({}, 'CapcoAppBundle') }}
+                                </label>
+                                {{ form_widget(form.zipcode) }}
+                            </div>
+                            {{ form_errors(form.zipcode) }}
+                        {% endif %}
+
                         {% if form.isTermsAccepted is defined %}
                             {{ form_widget(form.isTermsAccepted) }}
                             {{ form_errors(form.isTermsAccepted) }}
