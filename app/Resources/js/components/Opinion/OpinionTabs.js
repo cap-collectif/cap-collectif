@@ -26,13 +26,13 @@ const OpinionTabs = React.createClass({
       const hash = window.location.hash;
       if (hash) {
         let key = null;
-        if (hash.indexOf('arg') != -1) {
+        if (hash.indexOf('arg') !== -1) {
           key = 'arguments';
         }
-        if (hash.indexOf('version') != -1) {
+        if (hash.indexOf('version') !== -1) {
           key = 'versions';
         }
-        if (hash.indexOf('source') != -1) {
+        if (hash.indexOf('source') !== -1) {
           key = 'sources';
         }
         this.setState({key: key}, () => {
@@ -42,7 +42,7 @@ const OpinionTabs = React.createClass({
           }
         });
       } else {
-       window.scrollTo(0, 0);
+        window.scrollTo(0, 0);
       }
     };
     scrollToAnchor();
@@ -60,6 +60,12 @@ const OpinionTabs = React.createClass({
     return this.getIntlMessage('global.simple_arguments');
   },
 
+  getDefaultKey() {
+    return this.isVersionable() ? 'versions' :
+      this.isCommentable() ? 'arguments' :
+      this.isSourceable() ? 'sources' : null;
+  },
+
   renderArgumentsContent() {
     return <OpinionArgumentsBox {...this.props} />;
   },
@@ -70,10 +76,6 @@ const OpinionTabs = React.createClass({
 
   renderSourcesContent() {
     return <OpinionSourcesBox {...this.props} />;
-  },
-
-  handleSelect(key) {
-    this.setState({key});
   },
 
   render() {
@@ -126,10 +128,8 @@ const OpinionTabs = React.createClass({
     return null;
   },
 
-  getDefaultKey() {
-    return this.isVersionable() ? 'versions':
-      this.isCommentable() ? 'arguments' :
-      this.isSourceable() ? 'sources' : null;
+  handleSelect(key) {
+    this.setState({key});
   },
 
   isSourceable() {
