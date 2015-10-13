@@ -10,7 +10,7 @@
             <div class="pull-right  opinion__header__filter">
                 {% if opinions_count > 1 and sortOpinionsForm is defined %}
                     {{ form_start(sortOpinionsForm) }}
-                        <label class="sr-only control-label" for="capco_app_opinions_sort_opinionsSort">
+                        <label class="sr-only control-label" for="{{ sortOpinionsForm.children.opinionsSort.vars.id }}">
                             {{ 'opinion.sort.label' | trans({'%name%': opinionType.title | lower}, 'CapcoAppBundle') }}
                         </label>
                         {{ form_widget(sortOpinionsForm.opinionsSort, {'attr':{'onchange': 'this.form.submit()'} }) }}
