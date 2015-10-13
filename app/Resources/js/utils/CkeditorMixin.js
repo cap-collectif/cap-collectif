@@ -1,6 +1,6 @@
 const CkeditorMixin = {
 
-  initializeCkeditor(name) {
+  initializeCkeditor(ref, stateName = false) {
     CKEDITOR.basePath = '/js/ckeditor/';
     const ckeditorConfig = {
       removePlugins: 'elementspath',
@@ -24,7 +24,7 @@ const CkeditorMixin = {
       fillEmptyBlocks: true,
     };
 
-    const editor = CKEDITOR.replace(React.findDOMNode(this.refs[name]).querySelector('textarea'), ckeditorConfig);
+    const editor = CKEDITOR.replace(React.findDOMNode(this.refs[ref]).querySelector('textarea'), ckeditorConfig);
 
     editor.on('instanceReady', (evt) => {
       const blockTags = ['div', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'p', 'pre', 'li', 'blockquote', 'ul', 'ol',
@@ -42,11 +42,18 @@ const CkeditorMixin = {
       }
     });
 
-
     editor.on('change', (evt) => {
-      const diff = {};
-      diff[name] = evt.editor.getData();
-      this.setState(diff);
+
+      if (!stateName) { // compatibility for old forms
+        const diff = {};
+        diff[ref] = evt.editor.getData();
+        this.setState(diff);
+        return;
+      }
+
+      let formData = this.state[stateName];
+      formData[ref] = evt.editor.getData();
+      this.setState({[stateName]: formData});
     });
   },
 

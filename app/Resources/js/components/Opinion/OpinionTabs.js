@@ -4,7 +4,7 @@ import OpinionArgumentsBox from './OpinionArgumentsBox';
 import OpinionVersionsBox from './OpinionVersionsBox';
 import OpinionSourcesBox from './OpinionSourcesBox';
 import VoteLinechart from '../Utils/VoteLinechart';
-import OpinionLinksBox from './OpinionLinksBox';
+import OpinionLinksBox from './Links/OpinionLinksBox';
 
 const TabbedArea = ReactBootstrap.TabbedArea;
 const Tab = ReactBootstrap.Tab;

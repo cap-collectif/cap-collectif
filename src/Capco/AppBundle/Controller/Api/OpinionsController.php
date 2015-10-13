@@ -29,6 +29,56 @@ use FOS\RestBundle\Util\Codes;
 
 class OpinionsController extends FOSRestController
 {
+
+    /**
+     * Create an opinion version.
+     *
+     * @ApiDoc(
+     *  resource=true,
+     *  description="Create an opinion version.",
+     *  statusCodes={
+     *    201 = "Returned when successful",
+     *    404 = "Returned when opinion not found",
+     *  }
+     * )
+     *
+     * @Security("has_role('ROLE_USER')")
+     * @Post("/opinions/{id}/versions")
+     * @ParamConverter("opinion", options={"mapping": {"id": "id"}})
+     * @View(statusCode=201, serializerGroups={})
+     */
+    public function postOpinionAction(Request $request, Opinion $opinion)
+    {
+        if (!$opinion->canContribute()) {
+            throw new BadRequestHttpException("Can't add a version to an uncontributable opinion.");
+        }
+
+        if (!$opinion->getOpinionType()->isVersionable()) {
+            throw new BadRequestHttpException("Can't add a version to an unversionable opinion.");
+        }
+
+        $user = $this->getUser();
+        $opinionVersion = (new OpinionVersion())
+            ->setAuthor($user)
+            ->setParent($opinion)
+        ;
+
+        $form = $this->createForm(new OpinionVersionType(), $opinionVersion);
+        $form->submit($request->request->all(), false);
+
+        if ($form->isValid()) {
+            $opinion->setVersionsCount($opinion->getVersionsCount() + 1);
+            $this->getDoctrine()->getManager()->persist($opinionVersion);
+            $this->getDoctrine()->getManager()->flush();
+
+            return $opinionVersion;
+        }
+
+        $view = $this->view($form->getErrors(true), Codes::HTTP_BAD_REQUEST);
+
+        return $view;
+    }
+
     /**
      * Get an opinion.
      *

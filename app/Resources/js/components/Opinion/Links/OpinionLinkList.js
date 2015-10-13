@@ -3,7 +3,6 @@ import OpinionLink from './OpinionLink';
 const OpinionLinkList = React.createClass({
   propTypes: {
     links: React.PropTypes.array.isRequired,
-    isReportingEnabled: React.PropTypes.bool.isRequired,
   },
   mixins: [ReactIntl.IntlMixin],
 

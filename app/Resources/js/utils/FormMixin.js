@@ -1,0 +1,57 @@
+import Validator from '../services/Validator';
+
+const FormMixin = { // This will be easy to use as an higher-order Component in React 0.14
+
+  isValid() {
+    let isValid = true;
+
+    Object.keys(this.formValidationRules).map((key) => {
+      if (!this.validate(key)) {
+        isValid = false;
+      }
+    });
+
+    return isValid;
+  },
+
+  validate(ref) {
+    if (this.formValidationRules[ref]) {
+
+      const value = this.state.form[ref];
+      const errors = (new Validator(value, this.formValidationRules[ref])).getErrors();
+
+      let formErrors = this.state.errors;
+      formErrors[ref] = errors;
+      this.setState({errors: formErrors});
+
+      return errors.length === 0;
+    }
+
+    console.log(`Unkown reference to ${ref} in formValidationRules`);
+    return false;
+  },
+
+  getFieldStyle(field) {
+    return this.getErrorsMessages(field).length > 0 ?
+      'warning' : this.props.isSubmitting ?
+      'success' : ''
+    ;
+  },
+
+  getGroupStyle(field) {
+    return this.getErrorsMessages(field).length > 0 ?
+      'has-warning' : this.props.isSubmitting ?
+      'has-success' : ''
+    ;
+  },
+
+  getErrorsMessages(ref) {
+    if (ref && this.state.errors[ref]) {
+      return this.state.errors[ref];
+    }
+    return [];
+  },
+
+};
+
+export default FormMixin;

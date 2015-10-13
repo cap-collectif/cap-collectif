@@ -81,6 +81,13 @@ export default {
               hide: 'Masquer {title}.',
               show: 'Afficher {title}',
             },
+            add_new_link: 'Ajouter une proposition liée',
+            title: 'Titre*',
+            title_help: 'Quel est l\'objet de votre proposition ?',
+            body: 'Body',
+            body_help: 'Rédigez votre proposition',
+            type: 'Type de proposition*',
+            type_help: 'Quel est le type de votre proposition ?',
             request: {
               failure: 'Une erreur est survenue, veuillez réessayer.',
               create_vote: {

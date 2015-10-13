@@ -1,5 +1,5 @@
-import UserAvatar from '../User/UserAvatar';
-import OpinionInfos from './OpinionInfos';
+import UserAvatar from '../../User/UserAvatar';
+import OpinionPreview from '../OpinionPreview';
 
 const Label = ReactBootstrap.Label;
 const Row = ReactBootstrap.Row;
@@ -24,9 +24,7 @@ const OpinionLink = React.createClass({
       <li className={classes} >
         <Row>
           <Col xs={12}>
-            <div className="opinion__body box">
-                lalaal
-            </div>
+            <OpinionPreview opinion={this.props.link} />
           </Col>
         </Row>
       </li>
