@@ -33,7 +33,7 @@
             <a href="{{ consultation.video }}" class="play fancybox" data-type="iframe">
         {% endif %}
         {% if consultation.Cover %}
-            {% thumbnail consultation.Cover, 'blockHeader' with {'title': consultation.Cover.name, 'alt': consultation.Cover.name, 'class': 'img-responsive'} %}
+            {% thumbnail consultation.Cover, 'blockHeader' with {'title': consultation.title, 'alt': consultation.title, 'class': 'img-responsive'} %}
         {% else %}
             <div class="bg__wrapper">
                 <div class="bg--default bg--consultation">
