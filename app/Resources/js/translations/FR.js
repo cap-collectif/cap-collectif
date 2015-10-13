@@ -120,6 +120,7 @@ export default {
                 title_error: 'Le titre doit contenir au moins 2 caractères.',
                 confirm_error: 'Vous devez confirmer la perte de vos votes pour continuer.',
                 body_error: 'Vous devez modifier le contenu de la proposition d\'origine pour pouvoir proposer une modification.',
+                filter: 'Trier les modifications',
             },
             diff: {
                 tooltip: 'Voir les modifications',
