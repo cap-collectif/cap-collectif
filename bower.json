@@ -38,6 +38,9 @@
     "moment": "~2.10.6",
     "react-router-bootstrap": "v0.18.1"
   },
+  "resolutions": {
+    "react": "0.13.3"
+  },
   "overrides": {
     "fancybox": {
       "main": "source/jquery.fancybox.pack.js"
