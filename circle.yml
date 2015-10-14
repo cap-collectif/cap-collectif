@@ -11,7 +11,7 @@ dependencies:
         - sudo composer self-update:
             timeout: 3600
     pre:
-        - sudo apt-get install libfftw3-double3 libmagickcore5 imagemagick
+        - sudo apt-get update && sudo apt-get install libfftw3-double3 libmagickcore5 imagemagick
         - yes "" | pecl install imagick
         - echo "memory_limit = 256M" > ~/.phpenv/versions/$(phpenv global)/etc/conf.d/memory.ini
         - echo "always_populate_raw_post_data=-1" > ~/.phpenv/versions/$(phpenv global)/etc/conf.d/custom.ini

@@ -1,5 +1,5 @@
 {% import _self as tree %}
-{% macro display_child(collection, depth, currentStep, consultation, opinionSortOrders) %}
+{% macro display_child(collection, depth, currentStep, consultation) %}
     {% for block in collection %}
 
         <p id="opinion-type--{{ block.slug }}" class="anchor-offset text-center opinion-type__title level--{{ depth }}">
@@ -8,6 +8,7 @@
         </p>
 
         {% if block.total_opinions_count > 0 or (block.isEnabled == true and currentStep.canContribute) %}
+
             <div id="opinions--{{ block.slug }}" class="anchor-offset block  block--bordered">
                 {% include 'CapcoAppBundle:Consultation:list_header.html.twig' with {
                     'consultation': consultation,
@@ -15,8 +16,8 @@
                     'opinionType': block,
                     'opinions': block.opinions,
                     'opinions_count': block.total_opinions_count,
+                    'sortOpinionsForm': block.sortForm,
                     'opinionTerm': consultation.opinionTerm,
-                    'opinionSortOrders': opinionSortOrders,
                 } only %}
 
                 {% if block.total_opinions_count > 0 %}
@@ -39,14 +40,14 @@
         {% endif %}
 
         {% if block.children|length %}
-            {{ _self.display_child(block.children, depth + 1, currentStep, consultation, opinionSortOrders) }}
+            {{ _self.display_child(block.children, depth + 1, currentStep, consultation) }}
         {% endif %}
 
     {% endfor %}
 {% endmacro %}
 
 {% if blocks|length > 0 %}
-    {{ tree.display_child(blocks, 0, currentStep, consultation, opinionSortOrders) }}
+    {{ tree.display_child(blocks, 0, currentStep, consultation) }}
 {% else %}
     <div class="consultation__empty-block  text-center">
         <p class="icon  cap-bubble-attention-6"></p>

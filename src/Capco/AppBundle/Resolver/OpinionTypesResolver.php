@@ -51,11 +51,11 @@ class OpinionTypesResolver
             'childSort' => ['field' => 'position', 'dir' => 'asc'],
         ];
 
-        $nav = '';
-
+        $nav = '<ul class="nav">';
         foreach ($ct->getOpinionTypes() as $root) {
             $nav .= $this->opinionTypeRepo->childrenHierarchy($root, false, $options, true);
         }
+        $nav .= '</ul>';
 
         return $nav;
     }

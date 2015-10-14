@@ -31,7 +31,7 @@
   // Header of opinion blocks
   .opinion__header {
     padding: 2px 15px;
-    height: 44px;
+    overflow: hidden;
     border-bottom: 1px solid $border-color;
 
     .opinion__header__title {
@@ -45,7 +45,6 @@
 
     .opinion__header__filter {
       padding-top: 2px;
-      text-align: right;
 
       form {
         display: inline-block;
@@ -67,27 +66,19 @@
     &.opinion__header--mobile-centered {
       @media (max-width: $screen-xs-max) {
         text-align: center;
-
         .opinion__header__title {
           display: inline-block;
-        }
-        .opinion__header__filter {
-          margin-top: 0;
-          text-align: inherit;
         }
       }
     }
 
     @media (max-width: $screen-sm-max) {
-      height: auto;
-
       .opinion__header__title,
       .opinion__header__filter {
         float: none !important;
       }
       .opinion__header__filter {
         margin-bottom: 10px;
-        margin-top: -40px;
       }
     }
   }
