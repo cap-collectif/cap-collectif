@@ -10,7 +10,6 @@ use Capco\AppBundle\Entity\Theme;
 use Capco\AppBundle\Entity\AbstractStep;
 use Capco\AppBundle\Entity\ConsultationStep;
 use Capco\AppBundle\Form\ConsultationSearchType;
-use Capco\AppBundle\Form\OpinionsSortType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
@@ -60,23 +59,7 @@ class ConsultationController extends Controller
             throw $this->createNotFoundException($this->get('translator')->trans('consultation.error.not_found', [], 'CapcoAppBundle'));
         }
 
-        if ('POST' === $request->getMethod() && $request->request->has('capco_app_opinions_sort')) {
-            $data = $request->request->get('capco_app_opinions_sort');
-            $sort = $data['opinionsSort'];
-            $opinionTypeSlug = $data['opinionType'];
-
-            if (null != $sort && null != $opinionTypeSlug) {
-                return $this->redirect($this->generateUrl('app_consultation_show_opinions_sorted', array(
-                    'consultationSlug' => $consultation->getSlug(),
-                    'stepSlug' => $currentStep->getSlug(),
-                    'opinionTypeSlug' => $opinionTypeSlug,
-                    'opinionsSort' => $sort,
-                )));
-            }
-        }
-
         $nav = $this->get('capco.opinion_types.resolver')->getNavForStep($currentStep);
-
         $response = $this->render('CapcoAppBundle:Consultation:show.html.twig', array(
             'consultation' => $consultation,
             'currentStep' => $currentStep,
@@ -104,26 +87,11 @@ class ConsultationController extends Controller
         $tree = $this->get('capco.opinion_types.resolver')
             ->getGroupedOpinionsForStep($currentStep);
 
-        $addForm = function ($tree) use (&$addForm) {
-            $childrenTree = [];
-            foreach ($tree as $node) {
-                $form = $this->createForm(new OpinionsSortType($node), null, ['csrf_protection' => false]);
-                $node['sortForm'] = $form->createView();
-                if (count($node['children']) > 0) {
-                    $node['children'] = $addForm($node['children']);
-                }
-                $childrenTree[] = $node;
-            }
-
-            return $childrenTree;
-        };
-
-        $tree = $addForm($tree);
-
         return [
             'blocks' => $tree,
             'consultation' => $consultation,
             'currentStep' => $currentStep,
+            'opinionSortOrders' => Opinion::$sortCriterias,
         ];
     }
 
@@ -157,27 +125,6 @@ class ConsultationController extends Controller
         }
 
         $filter = $opinionsSort ? $opinionsSort : $opinionType->getDefaultFilter();
-        $sortData = ['slug' => $opinionType->getSlug(), 'defaultFilter' => $filter];
-        $form = $this->createForm(new OpinionsSortType($sortData));
-
-        if ('POST' === $request->getMethod()) {
-            $form->handleRequest($request);
-            if ($form->isValid()) {
-                $data = $form->getData();
-
-                return $this->redirect($this->generateUrl('app_consultation_show_opinions_sorted', array(
-                    'consultationSlug' => $consultation->getSlug(),
-                    'stepSlug' => $currentStep->getSlug(),
-                    'opinionTypeSlug' => $opinionType->getSlug(),
-                    'opinionsSort' => $data['opinionsSort'],
-                )));
-            }
-        } else {
-            $form->setData(array(
-                'opinionsSort' => $filter,
-            ));
-        }
-
         $currentUrl = $this
             ->generateUrl('app_consultation_show_opinions', [
                 'consultationSlug' => $consultation->getSlug(),
@@ -198,10 +145,11 @@ class ConsultationController extends Controller
             'opinions' => $opinions,
             'page' => $page,
             'nbPage' => ceil(count($opinions) / 10),
-            'sortOpinionsForm' => $form->createView(),
             'opinionsSort' => $filter,
+            'opinionSortOrders' => Opinion::$sortCriterias,
             'currentStep' => $currentStep,
             'nav' => $nav,
+            'currentRoute' => $request->get('_route'),
         ];
     }
 

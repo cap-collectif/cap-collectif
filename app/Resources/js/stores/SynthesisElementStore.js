@@ -93,7 +93,7 @@ class SynthesisElementStore extends BaseStore {
           this._resetInboxSync();
         } else {
           this._elements.new = ArrayHelper.removeElementFromArray(this._elements.new, this._element);
-          this._counts['new'] = this._elements.new.length;
+          this._counts.new = this._elements.new.length;
           this.elements.archived = ArrayHelper.addElementToArray(this._elements.archived, this._element);
           this._elements.published = ArrayHelper.addElementToArray(this._elements.published, this._element);
           this._elements.unpublished = ArrayHelper.removeElementFromArray(this._elements.unpublished, this._element);

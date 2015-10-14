@@ -29,7 +29,7 @@
     {# Connection and search #}
     <div class="nav navbar-right">
         {% if is_feature_enabled('search') %}
-            <a class="{% if pathInfo starts with '/search' %} active {% endif %} navbar__search" href="{{ path('app_search', {}) }}">
+            <a class="{% if pathInfo starts with '/search' %}active {% endif %}navbar__search" href="{{ path('app_search', {}) }}">
                 <i class="cap cap-magnifier"></i> <span class="visible-xs">{{ 'global.menu.search' | trans({}, 'CapcoAppBundle') }}</span>
             </a>
         {% endif %}
@@ -39,12 +39,12 @@
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" role="button">{{ app.user.username }}<span class="caret"></span></a>
                     <ul class="dropdown-menu" role="menu">
                         {% if is_granted('ROLE_ADMIN') %}
-                            <li><a href="{{ path('sonata_admin_dashboard') }}">{{ 'header.administration'|trans({}, 'CapcoAppBundle') }}</a></li>
+                            <li role="menuitem"><a href="{{ path('sonata_admin_dashboard') }}">{{ 'header.administration'|trans({}, 'CapcoAppBundle') }}</a></li>
                         {% endif %}
-                        <li><a href="{{ path('fos_user_profile_show') }}">{{ 'header.profile'|trans({}, 'CapcoAppBundle') }}</a></li>
-                        <li><a href="{{ path('fos_user_profile_edit') }}">{{ 'header.user_settings'|trans({}, 'CapcoAppBundle') }}</a></li>
-                        <li class="divider"></li>
-                        <li><a href="{{ path('fos_user_security_logout') }}"> {{ 'layout.logout'|trans({}, 'FOSUserBundle') }} </a></li>
+                        <li role="menuitem"><a href="{{ path('fos_user_profile_show') }}">{{ 'header.profile'|trans({}, 'CapcoAppBundle') }}</a></li>
+                        <li role="menuitem"><a href="{{ path('fos_user_profile_edit') }}">{{ 'header.user_settings'|trans({}, 'CapcoAppBundle') }}</a></li>
+                        <li class="divider" role="separator"></li>
+                        <li role="menuitem"><a href="{{ path('fos_user_security_logout') }}"> {{ 'layout.logout'|trans({}, 'FOSUserBundle') }} </a></li>
                     </ul>
                 </li>
             </ul>

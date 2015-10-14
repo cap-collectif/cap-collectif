@@ -1,7 +1,7 @@
 {% set opinion = argument.opinion %}
 {% set consultation = opinion.step.consultation %}
 {% set opinionType = opinion.opinionType %}
-<li class="opinion  opinion--argument {% if argument.author.isVip %}bg-vip {% endif %}{% if classes is defined %}{{ classes }}{% endif %}" id="arg-{{ argument.id }}">
+<li class="opinion  opinion--argument {% if argument.author.isVip %}bg-vip{% endif %}{% if classes is defined %} {{ classes }}{% endif %}" id="arg-{{ argument.id }}">
     <div class="opinion__body  box">
         {% if argument.Author is not null %}
             {% include 'CapcoUserBundle:Avatar:avatar.html.twig' with { 'user': argument.Author, 'classes': '', 'link_classes': 'pull-left'} only %}

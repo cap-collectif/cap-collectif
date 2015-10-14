@@ -572,7 +572,9 @@ opinion:
     votes: Les plus votés
     favorable: Les plus favorables
     comments: Les plus commentés
-    label: Trier %name% par
+    label: Trier "%name%" par
+    sort_by: Trier "%name%" selon "%sortOrder%"
+    sorted_by: Trié selon "%sortOrder%"
   error:
     not_found: Proposition introuvable.
     not_author: Vous ne pouvez pas modifier cette proposition car vous n'en êtes pas l'auteur.
@@ -646,6 +648,7 @@ user:
     user_type:
       label: Type de profil
       all_types: Tous les inscrits
+    profile_link: Profil de %username%
   login:
     title: Connexion
     email: Adresse électronique
