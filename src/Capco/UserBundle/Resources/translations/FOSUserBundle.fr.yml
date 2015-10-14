@@ -9,4 +9,4 @@ form:
 
 registration:
   email:
-    subject: Votre compte sur %sitename%
+    subject: %sitename% — Confirmez votre adresse électronique

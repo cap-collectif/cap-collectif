@@ -5,11 +5,30 @@
 {% endblock %}
 
 {% block body_text %}
-    <p>{{ 'user.register.confirmation_message.hello'|trans({'%username%': user.username}, 'CapcoAppBundle') }}</p>
-    <p>{{ 'user.register.confirmation_message.thanks'|trans({'%sitename%': capco_site_parameter_value('global.site.fullname'), '%email%': user.email}, 'CapcoAppBundle') }}</p>
-    <p>{{ 'user.register.confirmation_message.validate'|trans({'%url%': confirmationUrl}, 'CapcoAppBundle') }}</p>
-    <p>{{ 'user.register.confirmation_message.bye'|trans({}, 'CapcoAppBundle') }}</p>
 {% endblock %}
 
 {% block body_html %}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+    <table>
+        <tr>
+            <td>
+                <p>{{ 'user.register.confirmation_message.hello'|trans({'%username%': user.username}, 'CapcoAppBundle') }}</p>
+                <p>{{ 'user.register.confirmation_message.thanks'|trans({'%sitename%': capco_site_parameter_value('global.site.fullname')}, 'CapcoAppBundle') }}</p>
+                <p>{{ 'user.register.confirmation_message.validate'|trans({'%url%': confirmationUrl}, 'CapcoAppBundle') }}</p>
+                <p>{{ 'user.register.confirmation_message.participate'|trans({}, 'CapcoAppBundle') }}</p>
+                <p>{{ 'user.register.confirmation_message.question'|trans({}, 'CapcoAppBundle') }}</p>
+                <p>{{ 'user.register.confirmation_message.bye'|trans({}, 'CapcoAppBundle') }}</p>
+                <hr />
+                <p>{{ 'user.register.confirmation_message.footer1'|trans({'%sitename%': capco_site_parameter_value('global.site.fullname')}, 'CapcoAppBundle') }}</p>
+                <p>{{ 'user.register.confirmation_message.footer2'|trans({}, 'CapcoAppBundle') }}</p>
+            </td>
+        </tr>
+    </table>
+</body>
+</html>
 {% endblock %}
