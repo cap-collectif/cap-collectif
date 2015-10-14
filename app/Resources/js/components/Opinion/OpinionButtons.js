@@ -24,6 +24,7 @@ const OpinionButtons = React.createClass({
         <Button bsStyle="success" className="btn--outline"
                 onClick={this.voteAction.bind(this, 1)}
                 active={this.isCurrentVote(1)}
+                aria-label={this.isCurrentVote(1) ? this.getIntlMessage('vote.aria_label_active.ok') : this.getIntlMessage('vote.aria_label.ok')}
         >
           <i className="cap cap-hand-like-2-1"></i>
           { ' ' + this.getIntlMessage('vote.ok') }
@@ -35,6 +36,7 @@ const OpinionButtons = React.createClass({
         <Button bsStyle="warning" className="btn--outline"
                 onClick={this.voteAction.bind(this, 0)}
                 active={this.isCurrentVote(0)}
+                aria-label={this.isCurrentVote(0) ? this.getIntlMessage('vote.aria_label_active.mitige') : this.getIntlMessage('vote.aria_label.mitige')}
         >
           <i className="cap cap-hand-like-2 icon-rotate"></i>
           { ' ' + this.getIntlMessage('vote.mitige') }
@@ -46,6 +48,7 @@ const OpinionButtons = React.createClass({
         <Button bsStyle="danger" className="btn--outline"
                 onClick={this.voteAction.bind(this, -1)}
                 active={this.isCurrentVote(-1)}
+                aria-label={this.isCurrentVote(-1) ? this.getIntlMessage('vote.aria_label_active.nok') : this.getIntlMessage('vote.aria_label.nok')}
         >
           <i className="cap cap-hand-unlike-2-1"></i>
           { ' ' + this.getIntlMessage('vote.nok') }
