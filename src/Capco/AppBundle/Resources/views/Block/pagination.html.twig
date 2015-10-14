@@ -1,7 +1,7 @@
-{% macro link(p, route, params, pageName) %}
+{% macro link(p, route, params, pageName) %}{% spaceless %}
     {%  set pm = params | merge( { (pageName): p } ) %}
     {{ path(route, pm) }}
-{% endmacro %}
+{% endspaceless %}{% endmacro %}
 {% import _self as render %}
 
 {% if pageName is not defined %}

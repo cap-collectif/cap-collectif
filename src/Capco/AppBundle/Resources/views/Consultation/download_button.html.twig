@@ -10,7 +10,7 @@
             <button class="btn  btn-default" type="button" data-toggle="dropdown"><i class="cap cap-download-2"></i> {{ 'consultation.download.button' | trans({}, 'CapcoAppBundle') }} <span class="caret"></span></button>
             <ul class="dropdown-menu" role="menu">
                 {% for cs in consultationSteps %}
-                    <li>
+                    <li role="menuitem">
                         <button class="btn-link" data-toggle="modal" data-target="#download-consultation-modal-{{ cs.step.id }}">
                             {{ 'consultation.download.step' | trans({'%position%': cs.position, '%title%': cs.step.title}, 'CapcoAppBundle') }}
                         </button>
@@ -21,7 +21,7 @@
     {% endif %}
 
     {% for cs in consultationSteps %}
-        <div class="modal fade modal--custom" id="download-consultation-modal-{{ cs.step.id }}" tabindex="-1" role="dialog" aria-labelledby="{{ 'consultation.download.modal.title' | trans({'%title%': cs.step.title}, 'CapcoAppBundle') }}" aria-hidden="true">
+        <div class="modal fade modal--custom" id="download-consultation-modal-{{ cs.step.id }}" tabindex="-1" role="dialog" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
