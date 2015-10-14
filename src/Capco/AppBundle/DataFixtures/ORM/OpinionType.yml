@@ -3,7 +3,7 @@ Capco\AppBundle\Entity\OpinionType:
         title: Le problème constaté
         position: 1
         color: red
-        isEnabled: 0
+        isEnabled: false
         defaultFilter: votes
         votesHelpText: <text(200)>
         votesThreshold: 5

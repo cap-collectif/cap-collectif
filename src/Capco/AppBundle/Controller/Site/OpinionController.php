@@ -293,6 +293,7 @@ class OpinionController extends Controller
         ];
     }
 
+    // TODO fix this ugly stuff
     private function createAppendicesForOpinion(Opinion $opinion)
     {
         $appendixTypes = $this->get('doctrine.orm.entity_manager')

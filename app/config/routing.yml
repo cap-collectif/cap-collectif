@@ -34,11 +34,10 @@ capco_api_posts:
   type: rest
   prefix: /api
 
-capco_api_consultations_steps:
+capco_api_consultation_steps:
   resource: "@CapcoAppBundle/Controller/Api/ConsultationStepsController.php"
   type: rest
   prefix: /api
-
 
 capco_api_opinions:
   resource: "@CapcoAppBundle/Controller/Api/OpinionsController.php"

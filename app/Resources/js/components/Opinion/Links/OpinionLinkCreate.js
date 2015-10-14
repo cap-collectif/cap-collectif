@@ -56,9 +56,7 @@ const OpinionLinkCreate = React.createClass({
             />
           </Modal.Body>
           <Modal.Footer>
-            <CloseButton
-              onClose={this.close.bind(null, this)}
-            />
+            <CloseButton onClose={this.close.bind(null, this)} />
             <SubmitButton
               isSubmitting={this.state.isSubmitting}
               onSubmit={this.handleSubmit.bind(null, this)}

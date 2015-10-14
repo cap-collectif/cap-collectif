@@ -43,11 +43,6 @@ class OpinionsType extends AbstractType
                 'required' => true,
                 'config_name' => 'user_editor',
             ))
-            ->add('body', 'ckeditor', array(
-                'label' => 'opinion.form.body',
-                'required' => true,
-                'config_name' => 'user_editor',
-            ))
             ->add('appendices', 'collection', [
                 'type' => new AppendixType(),
                 'label' => false,

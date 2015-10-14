@@ -307,6 +307,8 @@ class Opinion implements SelfLinkableInterface
     public function setSourcesCount($sourcesCount)
     {
         $this->sourcesCount = $sourcesCount;
+
+        return $this;
     }
 
     /**
@@ -323,6 +325,8 @@ class Opinion implements SelfLinkableInterface
     public function setArgumentsCount($argumentsCount)
     {
         $this->argumentsCount = $argumentsCount;
+
+        return $this;
     }
 
     /**
@@ -375,6 +379,8 @@ class Opinion implements SelfLinkableInterface
     public function setStep($step)
     {
         $this->step = $step;
+
+        return $this;
     }
 
     /**
@@ -616,6 +622,8 @@ class Opinion implements SelfLinkableInterface
     public function setPinned($pinned)
     {
         $this->pinned = $pinned;
+
+        return $this;
     }
 
     /**
@@ -632,6 +640,8 @@ class Opinion implements SelfLinkableInterface
     public function setRanking($ranking)
     {
         $this->ranking = $ranking;
+
+        return $this;
     }
 
     // ******************************* Custom methods **************************************

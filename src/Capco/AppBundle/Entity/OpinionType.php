@@ -683,6 +683,8 @@ class OpinionType
     public function setConsultationType($consultationType)
     {
         $this->consultationType = $consultationType;
+
+        return $this;
     }
 
     public function getAllAppendixTypes()
@@ -693,5 +695,14 @@ class OpinionType
         }
 
         return $types;
+    }
+
+    public function getAvailableOpinionTypesToCreateLink()
+    {
+        $parent = $this->getParent();
+        if ($parent) {
+            return $parent->getChildren(true);
+        }
+        return $this->getConsultationType()->getOpinionTypes();
     }
 }
