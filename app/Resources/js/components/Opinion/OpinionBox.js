@@ -144,7 +144,7 @@ const OpinionBox = React.createClass({
         <div className="opinion__description">
           <p className="h4" style={{marginTop: '0'}}>{opinion.title}</p>
           <OpinionBody opinion={opinion} />
-          <div className="opinion__buttons" style={{marginTop: '15px', marginBottom: '15px'}} aria-label={this.getIntlMessage('vote.form')}>
+          <div className="opinion__buttons" style={{marginTop: '15px', marginBottom: '15px'}}>
             {this.renderVotesHelpText()}
             <OpinionButtons {...this.props} opinion={opinion} />
           </div>

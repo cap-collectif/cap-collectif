@@ -7,7 +7,6 @@ const ShareButtonDropdown = React.createClass({
     title: React.PropTypes.string,
     url: React.PropTypes.string.isRequired,
     className: React.PropTypes.string,
-    bsStyle: React.PropTypes.string,
   },
   mixins: [ReactIntl.IntlMixin],
 

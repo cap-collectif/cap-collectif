@@ -120,7 +120,6 @@ export default {
                 title_error: 'Le titre doit contenir au moins 2 caractères.',
                 confirm_error: 'Vous devez confirmer la perte de vos votes pour continuer.',
                 body_error: 'Vous devez modifier le contenu de la proposition d\'origine pour pouvoir proposer une modification.',
-                filter: 'Trier les modifications',
             },
             diff: {
                 tooltip: 'Voir les modifications',
@@ -133,22 +132,11 @@ export default {
             mitige: 'Mitigé',
             nok: 'Pas d\'accord',
             cancel: 'Annuler mon vote',
-            form: 'Formulaire de vote',
             popover: {
                 title: 'Connectez-vous pour contribuer',
                 body: 'Vous devez être connecté pour réaliser cette action.',
                 login: 'Connexion',
                 signin: 'Inscription',
-            },
-            aria_label: {
-                ok: 'Souhaitez-vous déclarer être d\'accord avec cette proposition ?',
-                mitige: 'Souhaitez-vous déclarer être mitigé sur cette proposition ?',
-                nok: 'Souhaitez-vous déclarer ne pas être d\'accord avec cette proposition ?',
-            },
-            aria_label_active: {
-                ok: 'Vous avez déclaré être d\'accord avec cette proposition',
-                mitige: 'Vous avez déclaré être mitigé sur cette proposition',
-                nok: 'Vous avez déclaré n\'être pas d\'accord avec cette proposition',
             },
         },
         share: {

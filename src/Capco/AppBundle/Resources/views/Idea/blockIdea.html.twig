@@ -1,5 +1,5 @@
 <div class="col-xs-12  col-sm-6  col-md-4  col-lg-3">
-    <div class="media  media--macro  block  block--bordered {% if idea.author.isVip %}bg-vip{% endif %}">
+    <div class="media  media--macro  block  block--bordered {% if idea.author.isVip %}bg-vip {% endif %}">
         {% include 'CapcoUserBundle:Avatar:avatar.html.twig' with { 'user': idea.Author, 'classes': 'media-object', 'link_classes': 'pull-left'} only %}
         <div class="media-body">
             <p class="media-heading  media--macro__user small"><a href="{{ path('capco_user_profile_show_all', {'slug': idea.Author.slug}) }}">{{ idea.Author.username }}</a></p>
