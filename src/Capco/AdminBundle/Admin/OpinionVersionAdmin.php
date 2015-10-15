@@ -31,10 +31,8 @@ class OpinionVersionAdmin extends Admin
             ->add('comment', null, array(
                 'label' => 'admin.fields.opinion_version.comment',
             ))
-            ->add('author', 'doctrine_orm_model_autocomplete', [
+            ->add('author', null, array(
                 'label' => 'admin.fields.opinion_version.author',
-            ], null, array(
-                'property' => 'username'
             ))
             ->add('parent', null, array(
                 'label' => 'admin.fields.opinion_version.parent',
@@ -112,10 +110,9 @@ class OpinionVersionAdmin extends Admin
                 ->add('title', null, array(
                     'label' => 'admin.fields.opinion_version.title',
                 ))
-                ->add('author', 'sonata_type_model_autocomplete', [
+                ->add('author', 'sonata_type_model', array(
                     'label' => 'admin.fields.opinion_version.author',
-                    'property' => 'username',
-                ])
+                ))
                 ->add('parent', 'sonata_type_model', array(
                     'label' => 'admin.fields.opinion_version.parent',
                 ))

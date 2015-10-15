@@ -14,13 +14,18 @@ const ElementBreadcrumb = React.createClass({
     };
   },
 
-  getElementBreadcrumbItems(element, parents = []) {
-    if (element.parent) {
-      parents.push(element.parent);
-      return this.getElementBreadcrumbItems(element.parent, parents);
-    }
-    const items = parents.reverse();
-    items.push(this.props.element);
+  getElementBreadcrumbItems(element) {
+    const items = [];
+    element.path.split('|').map((data) => {
+      const splitted = data.split('-');
+      const title = splitted.shift();
+      const id = splitted.join('-');
+      const item = {
+        'title': title ? title : null,
+        'id': id,
+      };
+      items.push(item);
+    });
     return items;
   },
 

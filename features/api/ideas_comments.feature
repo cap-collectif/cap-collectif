@@ -175,7 +175,7 @@ Feature: Ideas comments
     """
     {
       "code": 404,
-      "message": "This parent comment is not linked to this idea",
+      "message": "Not Found",
       "errors": @null@
     }
     """
@@ -195,7 +195,7 @@ Feature: Ideas comments
     """
     {
       "code": 404,
-      "message": "This parent comment is not linked to this idea",
+      "message": "Not Found",
       "errors": @null@
     }
     """
@@ -215,7 +215,7 @@ Feature: Ideas comments
     """
     {
       "code": 400,
-      "message": "You can't answer the answer of a comment.",
+      "message": "Bad Request",
       "errors": @null@
     }
     """

@@ -15,7 +15,7 @@ class SynthesisElementHandler
     protected $em;
     protected $logManager;
 
-    protected static $types = ['all', 'archived', 'new', 'unpublished', 'published', 'tree_all', 'tree_published'];
+    protected static $types = ['all', 'archived', 'new', 'unpublished', 'published'];
 
     public function __construct(EntityManager $em, LogManager $logManager)
     {
@@ -47,14 +47,6 @@ class SynthesisElementHandler
                 $conditions['archived'] = true;
                 $conditions['published'] = true;
                 break;
-            case 'tree_all':
-                $conditions['parent'] = null;
-                break;
-            case 'tree_published':
-                $conditions['parent'] = null;
-                $conditions['archived'] = true;
-                $conditions['published'] = true;
-                break;
             default:
                 break;
         }
@@ -79,11 +71,24 @@ class SynthesisElementHandler
         ];
     }
 
+    public function getElementsTreeFromSynthesisByType($synthesis, $type = null, $parentId = null, $depth = null)
+    {
+        $values = array_merge(['synthesis' => $synthesis], $this->getTypeConditions($type));
+
+        $repo = $this->em
+            ->getRepository('CapcoAppBundle:Synthesis\SynthesisElement')
+        ;
+
+        $tree = $repo->getFormattedTree($values, $parentId, $depth);
+
+        return $tree;
+    }
+
     public function countElementsFromSynthesisByType($synthesis, $type = null)
     {
         $values = array_merge(['synthesis' => $synthesis], $this->getTypeConditions($type));
 
-        return $this->em->getRepository('CapcoAppBundle:Synthesis\SynthesisElement')->countWith($values);
+        return intval($this->em->getRepository('CapcoAppBundle:Synthesis\SynthesisElement')->countWith($values));
     }
 
     public function createElementInSynthesis(SynthesisElement $element, Synthesis $synthesis, SynthesisUserInterface $user = null)

@@ -30,10 +30,8 @@ class ConsultationAdmin extends Admin
             ->add('title', null, array(
                 'label' => 'admin.fields.consultation.title',
             ))
-            ->add('Author', 'doctrine_orm_model_autocomplete', [
+            ->add('Author', null, array(
                 'label' => 'admin.fields.consultation.author',
-            ], null, array(
-                'property' => 'username'
             ))
         ;
 
@@ -141,10 +139,9 @@ class ConsultationAdmin extends Admin
             ->add('title', null, array(
                 'label' => 'admin.fields.consultation.title',
             ))
-            ->add('Author', 'sonata_type_model_autocomplete', [
+            ->add('Author', 'sonata_type_model', array(
                 'label' => 'admin.fields.consultation.author',
-                'property' => 'username',
-            ])
+            ))
             ->add('opinionTerm', 'choice', array(
                 'label' => 'admin.fields.consultation.opinion_term',
                 'choices' => Consultation::$opinionTermsLabels,

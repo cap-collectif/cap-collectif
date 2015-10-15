@@ -9,7 +9,7 @@ Capco\AppBundle\Entity\OtherStep:
              <h3>Argumentation</h3>
              <p><text(1000)></p>
     ostep2:
-        title: Mettre en place une proposotion adaptée à la synthèse
+        title: Mettre en place une proposition adaptée à la synthèse
         isEnabled: true
         startAt: <(new \DateTime('2014-09-27'))>
         endAt: <(new \DateTime('2014-11-20'))>

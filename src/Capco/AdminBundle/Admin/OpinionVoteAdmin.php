@@ -26,10 +26,8 @@ class OpinionVoteAdmin extends Admin
             ->add('opinion', null, array(
                 'label' => 'admin.fields.opinion_vote.opinion',
             ))
-            ->add('user', 'doctrine_orm_model_autocomplete', [
+            ->add('user', null, array(
                 'label' => 'admin.fields.opinion_vote.voter',
-            ], null, array(
-                'property' => 'username'
             ))
             ->add('value', null, array(
                 'label' => 'admin.fields.opinion_vote.value',
@@ -112,10 +110,9 @@ class OpinionVoteAdmin extends Admin
             ->add('opinion', 'sonata_type_model', array(
                 'label' => 'admin.fields.opinion_vote.opinion',
             ))
-            ->add('user', 'sonata_type_model_autocomplete', [
+            ->add('user', 'sonata_type_model', array(
                 'label' => 'admin.fields.opinion_vote.voter',
-                'property' => 'username',
-            ])
+            ))
             ->add('value', 'choice', array(
                 'label' => 'admin.fields.opinion_vote.value',
                 'choices' => OpinionVote::$voteTypesLabels,

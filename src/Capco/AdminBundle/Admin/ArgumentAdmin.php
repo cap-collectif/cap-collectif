@@ -29,10 +29,8 @@ class ArgumentAdmin extends Admin
             ->add('opinion', null, array(
                 'label' => 'admin.fields.argument.opinion',
             ))
-            ->add('Author', 'doctrine_orm_model_autocomplete', [
+            ->add('Author', null, array(
                 'label' => 'admin.fields.argument.author',
-            ], null, array(
-                'property' => 'username'
             ))
             ->add('voteCount', null, array(
                 'label' => 'admin.fields.argument.vote_count',
@@ -111,14 +109,12 @@ class ArgumentAdmin extends Admin
                 'label' => 'admin.fields.argument.is_enabled',
                 'required' => false,
             ))
-            ->add('opinion', 'sonata_type_model_autocomplete', [
+            ->add('opinion', 'sonata_type_model', array(
                 'label' => 'admin.fields.argument.opinion',
-                'property' => 'title',
-            ])
-            ->add('Author', 'sonata_type_model_autocomplete', [
+            ))
+            ->add('Author', 'sonata_type_model', array(
                 'label' => 'admin.fields.argument.author',
-                'property' => 'username',
-            ])
+            ))
             ->add('body', null, array(
                 'label' => 'admin.fields.argument.body',
                 'attr' => array(

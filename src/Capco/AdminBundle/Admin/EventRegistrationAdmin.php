@@ -30,11 +30,7 @@ class EventRegistrationAdmin extends Admin
         $datagridMapper
             ->add('event', null, ['label' => 'admin.fields.event_registration.event'])
             ->add('confirmed', null, ['label' => 'admin.fields.event_registration.registered', 'required' => false])
-            ->add('user', 'doctrine_orm_model_autocomplete', [
-                'label' => 'admin.fields.event_registration.user',
-            ], null, array(
-                'property' => 'username'
-            ))
+            ->add('user', null, ['label' => 'admin.fields.event_registration.user'])
             ->add('updatedAt', null, ['label' => 'admin.fields.event_registration.updated_at'])
         ;
     }
@@ -84,10 +80,7 @@ class EventRegistrationAdmin extends Admin
         $formMapper
             ->add('event', null, ['label' => 'admin.fields.event_registration.event'])
             ->add('confirmed', null, ['label' => 'admin.fields.event_registration.registered', 'required' => false])
-            ->add('user', 'sonata_type_model_autocomplete', [
-                'label' => 'admin.fields.event_registration.user',
-                'property' => 'username',
-            ])
+            ->add('user', null, ['label' => 'admin.fields.event_registration.user'])
             ->add('username', null, ['label' => 'admin.fields.event_registration.username'])
             ->add('email', null, ['label' => 'admin.fields.event_registration.email'])
             ->add('private', null, ['label' => 'admin.fields.event_registration.private', 'required' => false])

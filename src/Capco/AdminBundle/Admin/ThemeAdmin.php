@@ -50,10 +50,8 @@ class ThemeAdmin extends Admin
             ->add('updatedAt', null, array(
                 'label' => 'admin.fields.theme.updated_at',
             ))
-            ->add('Author', 'doctrine_orm_model_autocomplete', [
+            ->add('Author', null, array(
                 'label' => 'admin.fields.theme.author',
-            ], null, array(
-                'property' => 'username'
             ))
         ;
     }
@@ -121,10 +119,9 @@ class ThemeAdmin extends Admin
                 'label' => 'admin.fields.theme.title',
                 'required' => true,
             ))
-            ->add('Author', 'sonata_type_model_autocomplete', [
+            ->add('Author', null, array(
                 'label' => 'admin.fields.theme.author',
-                'property' => 'username',
-            ])
+            ))
             ->add('isEnabled', null, array(
                 'label' => 'admin.fields.theme.is_enabled',
                 'required' => false,

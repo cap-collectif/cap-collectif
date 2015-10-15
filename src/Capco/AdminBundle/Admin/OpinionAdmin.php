@@ -45,10 +45,8 @@ class OpinionAdmin extends Admin
             ->add('title', null, array(
                 'label' => 'admin.fields.opinion.title',
             ))
-            ->add('Author', 'doctrine_orm_model_autocomplete', [
+            ->add('Author', null, array(
                 'label' => 'admin.fields.opinion.author',
-            ], null, array(
-                'property' => 'username'
             ))
             ->add('step', null, array(
                 'label' => 'admin.fields.opinion.step',
@@ -156,10 +154,9 @@ class OpinionAdmin extends Admin
                 ->add('title', null, array(
                     'label' => 'admin.fields.opinion.title',
                 ))
-                ->add('Author', 'sonata_type_model_autocomplete', [
+                ->add('Author', 'sonata_type_model', array(
                     'label' => 'admin.fields.opinion.author',
-                    'property' => 'username',
-                ])
+                ))
                 ->add('position', null, array(
                     'label' => 'admin.fields.opinion.position',
                 ))

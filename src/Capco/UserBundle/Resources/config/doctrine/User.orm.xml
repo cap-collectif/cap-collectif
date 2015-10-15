@@ -12,10 +12,6 @@
             <generator strategy="AUTO" />
         </id>
 
-        <indexes>
-            <index name="username_idx" columns="username"/>
-            <index name="id_username_idx" columns="id,username"/>
-        </indexes>
 
         <field name="slug" column="slug" type="string" length="255" nullable="false">
             <gedmo:slug unique="true" style="default" updatable="true" separator="" fields="username" />

@@ -38,7 +38,7 @@ export default {
           logout: 'Déconnexion',
         },
         second: {
-          brand: 'Synthèse',
+          brand: 'Synthèse (Version beta)',
         },
         filter: {
           oldest: 'Les plus anciens',
@@ -102,7 +102,7 @@ export default {
           btn_submit: 'Diviser',
           help: {
             title: 'Information',
-            message: 'Veuillez sélectionner du texte pour créer une contribution.',
+            message: 'Veuillez sélectionner du texte dans le contenu pour créer une nouvelle contribution.',
           },
           create_button: 'Créer à partir d\'une sélection',
         },

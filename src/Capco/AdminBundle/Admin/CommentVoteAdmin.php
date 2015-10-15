@@ -27,10 +27,8 @@ class CommentVoteAdmin extends Admin
             ->add('comment', null, array(
                 'label' => 'admin.fields.comment_vote.comment',
             ))
-            ->add('user', 'doctrine_orm_model_autocomplete', [
+            ->add('user', null, array(
                 'label' => 'admin.fields.comment_vote.voter',
-            ], null, array(
-                'property' => 'username'
             ))
         ;
     }

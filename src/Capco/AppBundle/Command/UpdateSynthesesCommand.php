@@ -34,6 +34,7 @@ class UpdateSynthesesCommand extends ContainerAwareCommand
             $output->write('.');
             $synthesisHandler->createOrUpdateElementsFromSource($synthesis);
         }
+
         $output->writeln('');
 
         $output->writeln(count($syntheses).' syntheses updated');
