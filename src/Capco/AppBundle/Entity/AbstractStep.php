@@ -142,9 +142,9 @@ abstract class AbstractStep
     {
         if ($this->id) {
             return $this->getTitle();
-        } else {
-            return 'New step';
         }
+
+        return 'New step';
     }
 
     /**

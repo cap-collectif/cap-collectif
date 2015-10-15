@@ -1,0 +1,13 @@
+Capco\AppBundle\Entity\ConsultationStep:
+    exclusion_policy: ALL
+    properties:
+        id:
+            expose: true
+            type: integer
+            groups: [OpinionTypeDetails]
+    virtual_properties:
+        getConsultationId:
+            serialized_name: consultationId
+            groups: [OpinionTypeDetails]
+            type: integer
+

@@ -1,0 +1,8 @@
+Capco\AppBundle\Entity\AbstractStep:
+    exclusion_policy: ALL
+    properties:
+        id:
+            expose: true
+            type: integer
+            groups: [Opinions]
+

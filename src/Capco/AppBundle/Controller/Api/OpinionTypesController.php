@@ -38,7 +38,6 @@ class OpinionTypesController extends FOSRestController
         $context = SerializationContext::create()
             ->setGroups(['OpinionTypeDetails'])
             ->setSerializeNull(false)
-            // ->enableMaxDepthChecks()
         ;
 
         $view = $this->view(['type' => $opinionType], 200)

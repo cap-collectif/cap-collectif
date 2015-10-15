@@ -3,6 +3,8 @@ import CkeditorMixin from '../../../utils/CkeditorMixin';
 import DeepLinkStateMixin from '../../../utils/DeepLinkStateMixin';
 
 import OpinionLinkActions from '../../../actions/OpinionLinkActions';
+import OpinionTypeActions from '../../../actions/OpinionLinkActions';
+
 import FlashMessages from '../../Utils/FlashMessages';
 import OpinionLinkCreateButton from './OpinionLinkCreateButton';
 
@@ -32,7 +34,9 @@ const OpinionLinkForm = React.createClass({
       form: {
         title: '',
         body: '',
+        link: null,
       },
+      types: [],
       errors: {
         title: [],
         body: [],
@@ -41,6 +45,13 @@ const OpinionLinkForm = React.createClass({
   },
 
   componentDidMount() {
+    OpinionTypeActions
+      .getAvailableTypes()
+      .then((types) => {
+        console.log(types);
+        this.setState({'types': types});
+      });
+
     this.initializeCkeditor('body', 'form');
   },
 
@@ -48,7 +59,7 @@ const OpinionLinkForm = React.createClass({
     if (nextProps.isSubmitting === true) {
       if (this.isValid()) {
         OpinionLinkActions
-          .add(this.props.opinion.id, this.state.form)
+          .add(this.props.opinion.consultation.id, this.state.form)
           .then(() => {this.setState(this.getInitialState())})
         ;
         return;
