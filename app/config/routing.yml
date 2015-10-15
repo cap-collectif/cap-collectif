@@ -44,6 +44,11 @@ capco_api_opinions:
   type: rest
   prefix: /api
 
+capco_api_opinion_types:
+  resource: "@CapcoAppBundle/Controller/Api/OpinionTypesController.php"
+  type: rest
+  prefix: /api
+
 capco_api_arguments:
   resource: "@CapcoAppBundle/Controller/Api/ArgumentsController.php"
   type: rest

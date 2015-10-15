@@ -4,11 +4,11 @@ Capco\AppBundle\Entity\OpinionType:
         id:
             expose: true
             type: integer
-            groups: [Opinions, OpinionVersions]
+            groups: [Opinions, OpinionVersions, OpinionTypeDetails]
         title:
             expose: true
             type: string
-            groups: [Opinions, OpinionVersions]
+            groups: [Opinions, OpinionVersions, OpinionTypeDetails]
         subtitle:
             expose: true
             type: string
@@ -54,3 +54,8 @@ Capco\AppBundle\Entity\OpinionType:
             type: string
             serialized_name: votesThresholdHelpText
             groups: [Opinions, OpinionVersions]
+    virtual_properties:
+        getAvailableOpinionTypesToCreateLink:
+            serialized_name: availableOpinionTypesToCreateLink
+            groups: [OpinionTypeDetails]
+            type: ArrayCollection

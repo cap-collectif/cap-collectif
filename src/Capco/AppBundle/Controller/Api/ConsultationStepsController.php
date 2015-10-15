@@ -17,7 +17,6 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
-use Doctrine\Common\Collections\ArrayCollection;
 
 use FOS\RestBundle\Controller\FOSRestController;
 use FOS\RestBundle\Controller\Annotations\View;
@@ -46,23 +45,12 @@ class ConsultationStepsController extends FOSRestController
         }
 
         $consultationType = $step->getConsultationType();
-
         $link = $opinion->getLink();
-        $availablesOpinionTypes = new ArrayCollection();
 
-        if ($link) {
-            $linkOpinionType = $link->getOpinionType();
-            $parent = $linkOpinionType->getParent();
-            if ($parent) {
-                $availablesOpinionTypes = $parent->getChildren(true);
-            } else {
-                $availablesOpinionTypes = $consultationType->getOpinionTypes();
-            }
-        } else {
-            $availablesOpinionTypes = $this->get('capco.opinion_types.resolver')
-                                           ->getAllForConsultationType($consultationType)
-                                        ;
-        }
+        $availablesOpinionTypes = $link ?
+            $link->getOpinionType()->getAvailableOpinionTypesToCreateLink() :
+            $this->get('capco.opinion_types.resolver')->getAllForConsultationType($consultationType)
+        ;
 
         $user = $this->getUser();
         $opinion = (new Opinion())
