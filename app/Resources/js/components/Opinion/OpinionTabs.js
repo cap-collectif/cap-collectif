@@ -47,13 +47,6 @@ const OpinionTabs = React.createClass({
     return key;
   },
 
-  getDefaultKey() {
-    return this.isVersionable() ? 'versions' :
-      this.isCommentable() ? 'arguments' :
-      this.isSourceable() ? 'sources' :
-      this.isLinkable() ? 'links' : null;
-  },
-
   getCommentSystem() {
     const opinion = this.props.opinion;
     return opinion.parent ? opinion.parent.type.commentSystem : opinion.type.commentSystem;
@@ -94,7 +87,7 @@ const OpinionTabs = React.createClass({
   },
 
   renderLinksContent() {
-    return <OpinionLinksBox {...this.props}/>;
+    return <OpinionLinksBox {...this.props} />;
   },
 
   renderSourcesContent() {

@@ -1,35 +1,26 @@
 import AppDispatcher from '../dispatchers/AppDispatcher';
-import LoginStore from '../stores/LoginStore';
 import Fetcher from '../services/Fetcher';
 import {
-  RECEIVE_OPINION,
-  UPDATE_OPINION_SUCCESS,
-  UPDATE_OPINION_FAILURE,
-  CREATE_OPINION_VOTE,
-  DELETE_OPINION_VOTE,
-  RECEIVE_ARGUMENTS,
-  CREATE_ARGUMENT_SUCCESS,
-
-  CREATE_OPINION_VERSION_SUCCESS,
-  CREATE_OPINION_VERSION_FAILURE,
+  CREATE_OPINION_LINK_SUCCESS,
+  CREATE_OPINION_LINK_FAILURE,
   UPDATE_OPINION_VERSION_SUCCESS,
   UPDATE_OPINION_VERSION_FAILURE,
-} from '../constants/OpinionConstants';
+} from '../constants/OpinionLinkConstants';
 
 export default {
 
-  add: (opinion, data) => {
+  add: (consultation, step, data) => {
     return Fetcher
-    .post(`/opinions/${opinion}/versions`, data)
-    .then((version) => {
+    .post(`/consultations/${consultation}/steps/${step}/opinions`, data)
+    .then((link) => {
       AppDispatcher.dispatch({
-        actionType: CREATE_OPINION_VERSION_SUCCESS,
+        actionType: CREATE_OPINION_LINK_SUCCESS,
       });
-      return version.json();
+      return link.json();
     })
     .catch(() => {
       AppDispatcher.dispatch({
-        actionType: CREATE_OPINION_VERSION_FAILURE,
+        actionType: CREATE_OPINION_LINK_FAILURE,
       });
     });
   },

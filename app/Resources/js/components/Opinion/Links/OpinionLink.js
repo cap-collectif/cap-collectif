@@ -1,4 +1,3 @@
-import UserAvatar from '../../User/UserAvatar';
 import OpinionPreview from '../OpinionPreview';
 
 const Label = ReactBootstrap.Label;
@@ -24,7 +23,7 @@ const OpinionLink = React.createClass({
       <li className={classes} >
         <Row>
           <Col xs={12}>
-            <OpinionPreview opinion={this.props.link} />
+            <OpinionPreview opinion={this.props.link} showTypeLabel={true} />
           </Col>
         </Row>
       </li>

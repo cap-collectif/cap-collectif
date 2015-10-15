@@ -9,13 +9,8 @@ const OpinionLinkCreateInfos = React.createClass({
         </p>
       </div>
     );
-  }
+  },
 
 });
 
 export default OpinionLinkCreateInfos;
-
-
-
-
-

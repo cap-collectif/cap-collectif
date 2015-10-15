@@ -1,12 +1,6 @@
-import LoginStore from '../../../stores/LoginStore';
-import ValidatorMixin from '../../../utils/ValidatorMixin';
-import OpinionActions from '../../../actions/OpinionActions';
-import FlashMessages from '../../Utils/FlashMessages';
 import OpinionLinkCreateButton from './OpinionLinkCreateButton';
-
 import SubmitButton from '../../Form/SubmitButton';
 import CloseButton from '../../Form/CloseButton';
-
 import OpinionLinkCreateInfos from './OpinionLinkCreateInfos';
 import OpinionLinkForm from './OpinionLinkForm';
 
