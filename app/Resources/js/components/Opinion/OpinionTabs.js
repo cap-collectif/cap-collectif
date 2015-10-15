@@ -15,38 +15,31 @@ const OpinionTabs = React.createClass({
   },
   mixins: [ReactIntl.IntlMixin],
 
-  getInitialState() {
-    return {
-      key: this.getDefaultKey(),
-    };
-  },
-
   componentDidMount() {
     const scrollToAnchor = () => {
       const hash = window.location.hash;
       if (hash) {
-        let key = null;
-        if (hash.indexOf('arg') !== -1) {
-          key = 'arguments';
+        const element = document.querySelector(hash);
+        if (element) {
+          element.scrollIntoView(false);
         }
-        if (hash.indexOf('version') !== -1) {
-          key = 'versions';
-        }
-        if (hash.indexOf('source') !== -1) {
-          key = 'sources';
-        }
-        this.setState({key: key}, () => {
-          const element = document.querySelector(hash);
-          if (element) {
-            element.scrollIntoView(false);
-          }
-        });
-      } else {
-        window.scrollTo(0, 0);
       }
     };
-    scrollToAnchor();
-    window.onhashchange = scrollToAnchor;
+    setTimeout(scrollToAnchor, 20); // We use setTimeout to interact with DOM in componentDidMount (see React documentation)
+  },
+
+  getHashKey(hash) {
+    let key = null;
+    if (hash.indexOf('arg') !== -1) {
+      key = 'arguments';
+    }
+    if (hash.indexOf('version') !== -1) {
+      key = 'versions';
+    }
+    if (hash.indexOf('source') !== -1) {
+      key = 'sources';
+    }
+    return key;
   },
 
   getCommentSystem() {
@@ -61,9 +54,15 @@ const OpinionTabs = React.createClass({
   },
 
   getDefaultKey() {
+    const hash = window.location.hash;
+    if (hash) {
+      return this.getHashKey(hash);
+    }
+
     return this.isVersionable() ? 'versions' :
       this.isCommentable() ? 'arguments' :
-      this.isSourceable() ? 'sources' : null;
+      this.isSourceable() ? 'sources' : null
+    ;
   },
 
   renderArgumentsContent() {
@@ -86,7 +85,7 @@ const OpinionTabs = React.createClass({
 
     if (tabNumber > 1) {
       return (
-        <TabbedArea activeKey={this.state.key} onSelect={this.handleSelect} animation={false}>
+        <TabbedArea defaultActiveKey={this.getDefaultKey()} animation={false}>
           { this.isVersionable()
             ? <TabPane id="opinion__versions" className="opinion-tabs" eventKey={'versions'} tab={
                 <FormattedMessage message={this.getIntlMessage('global.versions')} num={opinion.versions_count} />
@@ -126,10 +125,6 @@ const OpinionTabs = React.createClass({
     }
 
     return null;
-  },
-
-  handleSelect(key) {
-    this.setState({key});
   },
 
   isSourceable() {

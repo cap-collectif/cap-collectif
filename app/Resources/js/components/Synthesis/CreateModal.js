@@ -44,7 +44,7 @@ const CreateModal = React.createClass({
     const expanded = {
       root: true,
     };
-    if (this.props.elements && this.props.selectedId && this.props.selectedId !== 'root') {
+    if (this.props.elements && this.props.selectedId !== 'root') {
       expanded[this.props.selectedId] = true;
       const element = this.getElementInTreeById(this.props.elements, this.props.selectedId);
       if (element) {
