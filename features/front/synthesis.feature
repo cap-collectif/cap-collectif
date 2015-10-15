@@ -276,7 +276,7 @@ Scenario: Admin wants to divide an element without selecting text
   And I wait 5 seconds
   And I click the ".division__create-element" element
   And I wait 5 seconds
-  Then I should see "VVeuillez sélectionner du texte dans le contenu pour créer une nouvelle contribution."
+  Then I should see "Veuillez sélectionner du texte pour créer une contribution."
 
 @javascript
 Scenario: Admin wants to create an element

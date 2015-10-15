@@ -182,9 +182,9 @@ class OpinionsController extends FOSRestController
      * @Get("/opinions/{id}/versions")
      * @ParamConverter("opinion", options={"mapping": {"id": "id"}})
      * @QueryParam(name="offset", requirements="[0-9.]+", default="0")
-     * @QueryParam(name="limit", requirements="[0-9.]+", nullable=true)
+     * @QueryParam(name="limit", requirements="[0-9.]+", default="10")
      * @QueryParam(name="filter", requirements="(old|last|votes|favorable|comments)", default="last")
-     * @View(statusCode=200, serializerGroups={"OpinionVersionPreviews", "UsersInfos"})
+     * @View(statusCode=200, serializerGroups={"OpinionVersions", "UsersInfos"})
      */
     public function cgetOpinionVersionsAction(Opinion $opinion, ParamFetcherInterface $paramFetcher)
     {
@@ -195,7 +195,7 @@ class OpinionsController extends FOSRestController
 
         $paginator = $this->getDoctrine()->getManager()
                     ->getRepository('CapcoAppBundle:OpinionVersion')
-                    ->getEnabledByOpinion($opinion, $filter, $trashed, $offset, $limit);
+                    ->getEnabledByOpinion($opinion, $offset, $limit, $filter, $trashed);
 
         $consultation = $opinion->getStep()->getConsultation();
 

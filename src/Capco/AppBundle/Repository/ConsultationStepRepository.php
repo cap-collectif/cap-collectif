@@ -129,6 +129,7 @@ class ConsultationStepRepository extends EntityRepository
     public function getOne($slug)
     {
         $qb = $this->getIsEnabledQueryBuilder()
+            ->addSelect('t')
             ->andWhere('cs.slug = :slug')
             ->setParameter('slug', $slug)
         ;

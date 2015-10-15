@@ -54,8 +54,10 @@ class PostAdmin extends Admin
             ->add('updatedAt', null, array(
                 'label' => 'admin.fields.blog_post.title',
             ))
-            ->add('Authors', null, array(
+            ->add('Authors', 'doctrine_orm_model_autocomplete', [
                 'label' => 'admin.fields.blog_post.authors',
+            ], null, array(
+                'property' => 'username'
             ))
         ;
     }
@@ -123,11 +125,12 @@ class PostAdmin extends Admin
             ->add('title', null, array(
                 'label' => 'admin.fields.blog_post.title',
             ))
-            ->add('Authors', null, array(
+            ->add('Authors', 'sonata_type_model_autocomplete', [
                 'label' => 'admin.fields.blog_post.authors',
+                'property' => 'username',
+                'multiple' => true,
                 'required' => false,
-                'by_reference' => false,
-            ))
+            ])
         ;
 
         if ($this->getConfigurationPool()->getContainer()->get('capco.toggle.manager')->isActive('themes')) {

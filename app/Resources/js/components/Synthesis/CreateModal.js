@@ -32,7 +32,7 @@ const CreateModal = React.createClass({
   },
 
   componentWillReceiveProps(nextProps) {
-    if (!this.props.selectedId || nextProps.selectedId !== this.props.selectedId) {
+    if (nextProps.selectedId !== this.props.selectedId) {
       this.setState({
         parent: this.getElementInTreeById(nextProps.elements, nextProps.selectedId),
         expanded: this.getExpandedBasedOnSelectedId(),
@@ -48,7 +48,7 @@ const CreateModal = React.createClass({
       expanded[this.props.selectedId] = true;
       const element = this.getElementInTreeById(this.props.elements, this.props.selectedId);
       if (element) {
-        element.path.split(',').map((id) => {
+        element.parents_ids.map((id) => {
           expanded[id] = true;
         });
       }
@@ -99,7 +99,7 @@ const CreateModal = React.createClass({
   renderParentFinder() {
     const parentId = this.state.parent ? this.state.parent.id : 'root';
     return (
-      <ElementsFinder synthesis={this.props.synthesis} elements={this.props.elements} type="all" expanded={this.state.expanded} selectedId={parentId} onSelect={this.setParent} onExpand={this.expandItem} />
+      <ElementsFinder synthesis={this.props.synthesis} elements={this.props.elements} expanded={this.state.expanded} selectedId={parentId} onSelect={this.setParent} onExpand={this.expandItem} />
     );
   },
 

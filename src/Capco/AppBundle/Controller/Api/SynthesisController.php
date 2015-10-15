@@ -135,12 +135,11 @@ class SynthesisController extends FOSRestController
      * )
      *
      * @Get("/syntheses/{id}")
-     * @ParamConverter("synthesis", options={"mapping": {"id": "id"}, "repository_method": "getOne", "map_method_signature": true})
      * @View(serializerGroups={"SynthesisDetails", "Elements"})
      */
-    public function getSynthesisAction(Synthesis $synthesis)
+    public function getSynthesisAction($id)
     {
-        return $synthesis;
+        return $this->get('capco.synthesis.synthesis_handler')->getSynthesis($id);
     }
 
     /**
@@ -157,7 +156,7 @@ class SynthesisController extends FOSRestController
      *
      * @Security("has_role('ROLE_ADMIN')")
      * @Put("/syntheses/{id}")
-     * @ParamConverter("synthesis", options={"mapping": {"id": "id"}, "repository_method": "getOne", "map_method_signature": true})
+     * @ParamConverter("synthesis", options={"mapping": {"id": "id"}})
      * @View(serializerGroups={"SynthesisDetails", "Elements"})
      */
     public function updateSynthesisAction(Request $request, Synthesis $synthesis)
@@ -208,7 +207,7 @@ class SynthesisController extends FOSRestController
      * )
      *
      * @Security("has_role('ROLE_ADMIN')")
-     * @ParamConverter("synthesis", options={"mapping": {"id": "id"}, "repository_method": "getOne", "map_method_signature": true})
+     * @ParamConverter("synthesis", options={"mapping": {"id": "id"}})
      * @QueryParam(name="type", nullable=true)
      * @QueryParam(name="offset", nullable=true)
      * @QueryParam(name="limit", nullable=true)
@@ -238,27 +237,25 @@ class SynthesisController extends FOSRestController
      *  }
      * )
      *
-     * @ParamConverter("synthesis", options={"mapping": {"id": "id"}, "repository_method": "getOne", "map_method_signature": true})
+     * @ParamConverter("synthesis", options={"mapping": {"id": "id"}})
      * @QueryParam(name="type", nullable=true, default="published")
-     * @QueryParam(name="depth", nullable=true, default=3)
-     * @QueryParam(name="parent", nullable=true, default=null)
      * @Get("/syntheses/{id}/elements/tree")
      */
     public function getSynthesisElementsTreeAction(ParamFetcherInterface $paramFetcher, Synthesis $synthesis)
     {
         $type = $paramFetcher->get('type');
-        $depth = $paramFetcher->get('depth');
-        $parent = $paramFetcher->get('parent');
-
-        /*if ($type !== 'published' && !$this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')) {
+        if ($type !== 'published' && !$this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')) {
             throw new AccessDeniedException();
-        }*/
-
-        $tree = $this->get('capco.synthesis.synthesis_element_handler')->getElementsTreeFromSynthesisByType($synthesis, $type, $parent, $depth);
+        }
+        $tree = $this->get('capco.synthesis.synthesis_element_handler')->getElementsFromSynthesisByType($synthesis, 'tree_'.$type);
 
         $view = $this->view($tree, Codes::HTTP_OK);
 
-        $view->setSerializationContext(SerializationContext::create()->setGroups(['ElementsTree']));
+        if ($type === 'all') {
+            $view->setSerializationContext(SerializationContext::create()->setGroups(array('ElementsList', 'ElementsTree', 'UserDetails')));
+        } else {
+            $view->setSerializationContext(SerializationContext::create()->setGroups(array('ElementsPublished', 'UserDetails')));
+        }
 
         return $view;
     }
@@ -277,7 +274,7 @@ class SynthesisController extends FOSRestController
      *  }
      * )
      *
-     * @ParamConverter("synthesis", options={"mapping": {"id": "id"}, "repository_method": "getOne", "map_method_signature": true})
+     * @ParamConverter("synthesis", options={"mapping": {"id": "id"}})
      * @QueryParam(name="type", nullable=true)
      * @Get("/syntheses/{id}/elements/count")
      * @View()
@@ -305,10 +302,11 @@ class SynthesisController extends FOSRestController
      * )
      *
      * @Get("/syntheses/{synthesis_id}/elements/{element_id}")
-     * @ParamConverter("element", options={"mapping": {"element_id": "id"}, "repository_method": "getOne", "map_method_signature": true})
-     * @View(serializerEnableMaxDepthChecks=true, serializerGroups={"ElementDetails", "UserDetails", "LogDetails"})
+     * @ParamConverter("synthesis", options={"mapping": {"synthesis_id": "id"}})
+     * @ParamConverter("element", options={"mapping": {"element_id": "id"}})
+     * @View(serializerGroups={"ElementDetails", "UserDetails", "LogDetails"})
      */
-    public function getSynthesisElementAction($synthesis_id, SynthesisElement $element)
+    public function getSynthesisElementAction(Synthesis $synthesis, SynthesisElement $element)
     {
         return $element;
     }
@@ -327,7 +325,7 @@ class SynthesisController extends FOSRestController
      *
      * @Security("has_role('ROLE_ADMIN')")
      * @Post("/syntheses/{id}/elements")
-     * @ParamConverter("synthesis", options={"mapping": {"id": "id"}, "repository_method": "getOne", "map_method_signature": true})
+     * @ParamConverter("synthesis", options={"mapping": {"id": "id"}})
      */
     public function createSynthesisElementAction(Request $request, Synthesis $synthesis)
     {
@@ -364,7 +362,7 @@ class SynthesisController extends FOSRestController
      *
      * @Security("has_role('ROLE_ADMIN')")
      * @Put("/syntheses/{synthesisId}/elements/{elementId}")
-     * @ParamConverter("synthesis", options={"mapping": {"synthesisId": "id"}, "repository_method": "getOne", "map_method_signature": true})
+     * @ParamConverter("synthesis", options={"mapping": {"synthesisId": "id"}})
      * @ParamConverter("element", options={"mapping": {"elementId": "id"}})
      * @View(serializerGroups={"ElementDetails", "UserDetails", "LogDetails"})
      */
@@ -398,7 +396,7 @@ class SynthesisController extends FOSRestController
      *
      * @Security("has_role('ROLE_ADMIN')")
      * @Get("/syntheses/{synthesis_id}/elements/{element_id}/history")
-     * @ParamConverter("synthesis", options={"mapping": {"synthesis_id": "id"}, "repository_method": "getOne", "map_method_signature": true})
+     * @ParamConverter("synthesis", options={"mapping": {"synthesis_id": "id"}})
      * @ParamConverter("element", options={"mapping": {"element_id": "id"}})
      * @View(serializerGroups={"Elements", "LogDetails"})
      */

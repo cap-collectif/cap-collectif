@@ -16,7 +16,7 @@ Capco\AppBundle\Entity\Opinion:
         OpinionType:
             expose: true
             serialized_name: type
-            groups: [Opinions, OpinionVersions, OpinionVersionPreviews]
+            groups: [Opinions, OpinionVersions]
         createdAt:
             expose: true
             type: DateTime

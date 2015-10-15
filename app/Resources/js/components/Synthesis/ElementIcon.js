@@ -17,7 +17,6 @@ const ElementIcon = React.createClass({
         <i className={classes}></i>
       );
     }
-    return null;
   },
 
 });

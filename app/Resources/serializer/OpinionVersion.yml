@@ -4,15 +4,15 @@ Capco\AppBundle\Entity\OpinionVersion:
         id:
             expose: true
             type: integer
-            groups: [OpinionVersions, OpinionVersionPreviews]
+            groups: [OpinionVersions]
         title:
             expose: true
             type: string
-            groups: [OpinionVersions, OpinionVersionPreviews]
+            groups: [OpinionVersions]
         slug:
             expose: true
             type: string
-            groups: [OpinionVersions, OpinionVersionPreviews]
+            groups: [OpinionVersions]
         body:
             expose: true
             type: string
@@ -23,37 +23,37 @@ Capco\AppBundle\Entity\OpinionVersion:
             groups: [OpinionVersions]
         parent:
             expose: true
-            groups: [OpinionVersions, OpinionVersionPreviews]
+            groups: [OpinionVersions]
         createdAt:
             expose: true
             type: DateTime
-            groups: [OpinionVersions, OpinionVersionPreviews]
+            groups: [OpinionVersions]
         updatedAt:
             expose: true
             type: DateTime
-            groups: [OpinionVersions, OpinionVersionPreviews]
+            groups: [OpinionVersions]
         voteCountNok:
             expose: true
             type: integer
             serialized_name: votes_nok
-            groups: [OpinionVersions, OpinionVersionPreviews]
+            groups: [OpinionVersions]
         voteCountOk:
             expose: true
             type: integer
             serialized_name: votes_ok
-            groups: [OpinionVersions, OpinionVersionPreviews]
+            groups: [OpinionVersions]
         voteCountMitige:
             expose: true
             type: integer
             serialized_name: votes_mitige
-            groups: [OpinionVersions, OpinionVersionPreviews]
+            groups: [OpinionVersions]
         arguments:
             expose: true
             groups: [OpinionVersions]
         argumentsCount:
             expose: true
             type: integer
-            groups: [OpinionVersions, OpinionVersionPreviews]
+            groups: [OpinionVersions]
         votes:
             expose: true
             groups: [OpinionVersions]
@@ -63,11 +63,11 @@ Capco\AppBundle\Entity\OpinionVersion:
         sourcesCount:
             expose: true
             type: integer
-            groups: [OpinionVersions, OpinionVersionPreviews]
+            groups: [OpinionVersions]
         author:
             expose: true
             type: Capco\UserBundle\Entity\User
-            groups: [OpinionVersions, UserMedias, OpinionVersionPreviews]
+            groups: [OpinionVersions, UserMedias]
         isTrashed:
             expose: true
             type: boolean
@@ -75,7 +75,7 @@ Capco\AppBundle\Entity\OpinionVersion:
         ranking:
             expose: true
             type: integer
-            groups: [OpinionVersions, OpinionVersionPreviews]
+            groups: [OpinionVersions]
     virtual_properties:
         canContribute:
             serialized_name: isContribuable
@@ -84,12 +84,12 @@ Capco\AppBundle\Entity\OpinionVersion:
         getVoteCountAll:
             serialized_name: votes_total
             type: integer
-            groups: [OpinionVersions, OpinionVersionPreviews]
+            groups: [OpinionVersions]
         getArgumentForCount:
             type: integer
             serialized_name: arguments_yes_count
-            groups: [OpinionVersions, OpinionVersionPreviews]
+            groups: [OpinionVersions]
         getArgumentAgainstCount:
             type: integer
             serialized_name: arguments_no_count
-            groups: [OpinionVersions, OpinionVersionPreviews]
+            groups: [OpinionVersions]

@@ -12,7 +12,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
  * Synthesis.
  *
  * @ORM\Table(name="synthesis")
- * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\Synthesis\SynthesisRepository")
+ * @ORM\Entity()
  * @ORM\HasLifecycleCallbacks()
  * @Gedmo\SoftDeleteable(fieldName="deletedAt")
  * @CapcoAssert\ConsultationStepExists()

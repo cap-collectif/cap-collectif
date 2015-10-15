@@ -40,8 +40,10 @@ class EventAdmin extends Admin
             ->add('consultations', null, array(
                 'label' => 'admin.fields.event.consultations',
             ))
-            ->add('Author', null, array(
+            ->add('Author', 'doctrine_orm_model_autocomplete', [
                 'label' => 'admin.fields.event.author',
+            ], null, array(
+                'property' => 'username'
             ))
             ->add('isEnabled', null, array(
                 'label' => 'admin.fields.event.is_enabled',
@@ -138,9 +140,10 @@ class EventAdmin extends Admin
                 'label' => 'admin.fields.event.body',
                 'config_name' => 'admin_editor',
             ))
-            ->add('Author', 'sonata_type_model', array(
+            ->add('Author', 'sonata_type_model_autocomplete', [
                 'label' => 'admin.fields.event.author',
-            ))
+                'property' => 'username',
+            ])
             ->add('startAt', 'sonata_type_datetime_picker', array(
                 'label' => 'admin.fields.event.start_at',
                 'format' => 'dd/MM/yyyy HH:mm',
