@@ -92,13 +92,12 @@ class OpinionVersionRepository extends EntityRepository
         return $qb->getQuery()->getResult();
     }
 
-    public function getEnabledByOpinion(Opinion $opinion, $offset = 0, $limit = 10, $filter = 'last', $trashed = false)
+    public function getEnabledByOpinion(Opinion $opinion, $filter = 'last', $trashed = false, $offset = 0, $limit = null)
     {
         $qb = $this->getIsEnabledQueryBuilder()
-            ->select('o', '(o.voteCountMitige + o.voteCountOk + o.voteCountNok) as HIDDEN vnb')
+            ->select('o', 'author', 'media', '(o.voteCountMitige + o.voteCountOk + o.voteCountNok) as HIDDEN vnb')
             ->leftJoin('o.author', 'author')
-            ->leftJoin('author.Media', 'm')
-            ->leftJoin('o.votes', 'v')
+            ->leftJoin('author.Media', 'media')
             ->andWhere('o.parent = :opinion')
             ->andWhere('o.isTrashed = :trashed')
             ->setParameter('opinion', $opinion)
@@ -126,9 +125,13 @@ class OpinionVersionRepository extends EntityRepository
             $qb->addOrderBy('o.updatedAt', 'DESC');
         }
 
-        $qb
-            ->setFirstResult($offset)
-            ->setMaxResults($limit);
+        if ($offset) {
+            $qb->setFirstResult($offset);
+        }
+
+        if ($limit) {
+            $qb->setMaxResults($limit);
+        }
 
         return new Paginator($qb);
     }

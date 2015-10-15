@@ -74,7 +74,8 @@
             {% endfor %}
 
         </div>
-        {% set userType = (form.vars.data.userType is null ? 'all' : form.vars.data.userType.slug) %}
+
+        {% set userType = (form.vars.data.userType is null ? 'all' : form.vars.data.userType) %}
 
         {% if form.vars.data.sort is not null %}
             {% set route, params = 'app_members_type_sorted', {'sort': form.vars.data.sort, 'userType': userType } %}
