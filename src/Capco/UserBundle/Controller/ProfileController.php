@@ -7,6 +7,8 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Capco\UserBundle\Entity\User;
 use Sonata\UserBundle\Controller\ProfileFOSUser1Controller as BaseController;
+use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\HttpFoundation\Response;
 
 /**
  * @Route("/profile")
@@ -47,7 +49,20 @@ class ProfileController extends BaseController
     }
 
     /**
-     * @Route("/user/{slug}", name="capco_user_profile_show_all")
+     * Deprecated route, in order to harmonise real user profile stuff urls
+     *
+     * @Route("/user/{slug}", name="capco_user_profile_show_all_old")
+     */
+    public function showUserOldAction(User $user)
+    {
+        return new RedirectResponse(
+            $this->generateUrl('capco_user_profile_show_all', [ 'slug' => $user->getSlug() ]),
+            Response::HTTP_MOVED_PERMANENTLY
+        );
+    }
+
+    /**
+     * @Route("/{slug}", name="capco_user_profile_show_all")
      * @Template("CapcoUserBundle:Profile:show.html.twig")
      */
     public function showUserAction(User $user)
