@@ -33,7 +33,7 @@ class ConsultationAdmin extends Admin
             ->add('Author', 'doctrine_orm_model_autocomplete', [
                 'label' => 'admin.fields.consultation.author',
             ], null, array(
-                'property' => 'username'
+                'property' => 'username',
             ))
         ;
 

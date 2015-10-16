@@ -18,7 +18,8 @@ class Version20151019103909 extends AbstractMigration
         // this up() migration is auto-generated, please modify it to your needs
         $this->abortIf($this->connection->getDatabasePlatform()->getName() != 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
-        $this->addSql('DROP INDEX slug_idx ON fos_user');
+        $this->addSql('ALTER TABLE opinion ADD connections_count INT NOT NULL');
+        $this->addSql('ALTER TABLE opinion_type ADD linkable TINYINT(1) NOT NULL');
     }
 
     /**
@@ -29,6 +30,7 @@ class Version20151019103909 extends AbstractMigration
         // this down() migration is auto-generated, please modify it to your needs
         $this->abortIf($this->connection->getDatabasePlatform()->getName() != 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
-        $this->addSql('CREATE UNIQUE INDEX slug_idx ON fos_user (slug)');
+        $this->addSql('ALTER TABLE opinion DROP connections_count');
+        $this->addSql('ALTER TABLE opinion_type DROP linkable');
     }
 }

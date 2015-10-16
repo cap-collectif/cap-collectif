@@ -16,19 +16,17 @@ const FormMixin = { // This will be easy to use as an higher-order Component
 
   validate(ref) {
     if (this.formValidationRules[ref]) {
-
       const value = this.state.form[ref];
       const errors = (new Validator(value, this.formValidationRules[ref])).getErrors();
 
-      let formErrors = this.state.errors;
+      const formErrors = this.state.errors;
       formErrors[ref] = errors;
       this.setState({errors: formErrors});
 
       return errors.length === 0;
     }
 
-    console.error(`Unkown reference to ${ref} in formValidationRules`);
-    return false;
+    throw `Unkown reference to ${ref} in formValidationRules`;
   },
 
   getFieldStyle(field) {

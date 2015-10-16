@@ -18,7 +18,7 @@ const OpinionLinkCreateButton = React.createClass({
         </Button>
       </LoginOverlay>
     );
-  }
+  },
 
 });
 

@@ -34,7 +34,7 @@ class OpinionVersionAdmin extends Admin
             ->add('author', 'doctrine_orm_model_autocomplete', [
                 'label' => 'admin.fields.opinion_version.author',
             ], null, array(
-                'property' => 'username'
+                'property' => 'username',
             ))
             ->add('parent', null, array(
                 'label' => 'admin.fields.opinion_version.parent',

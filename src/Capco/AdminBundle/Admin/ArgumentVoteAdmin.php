@@ -30,7 +30,7 @@ class ArgumentVoteAdmin extends Admin
             ->add('user', 'doctrine_orm_model_autocomplete', [
                 'label' => 'admin.fields.argument_vote.voter',
             ], null, array(
-                'property' => 'username'
+                'property' => 'username',
             ))
         ;
     }

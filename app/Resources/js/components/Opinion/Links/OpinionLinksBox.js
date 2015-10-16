@@ -19,8 +19,6 @@ const OpinionLinksBox = React.createClass({
       links: this.props.opinion.connections,
       isLoading: false,
       filter: 'last',
-      offset: 0,
-      limit: 50,
     };
   },
 

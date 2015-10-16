@@ -26,7 +26,7 @@ class SourceAdmin extends Admin
             ->add('Author', 'doctrine_orm_model_autocomplete', [
                 'label' => 'admin.fields.source.author',
             ], null, array(
-                'property' => 'username'
+                'property' => 'username',
             ))
             ->add('Opinion', null, array(
                 'label' => 'admin.fields.source.opinion',

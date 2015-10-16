@@ -205,4 +205,3 @@ Capco\AppBundle\Entity\Opinion:
         OpinionType: @opinionType6
         link: @opinion60
         position: 1
-

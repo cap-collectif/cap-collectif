@@ -29,7 +29,7 @@ class VideoAdmin extends Admin
             ->add('Author', 'doctrine_orm_model_autocomplete', [
                 'label' => 'admin.fields.video.author',
             ], null, array(
-                'property' => 'username'
+                'property' => 'username',
             ))
             ->add('isEnabled', null, array(
                 'label' => 'admin.fields.video.is_enabled',

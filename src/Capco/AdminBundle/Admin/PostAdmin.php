@@ -57,7 +57,7 @@ class PostAdmin extends Admin
             ->add('Authors', 'doctrine_orm_model_autocomplete', [
                 'label' => 'admin.fields.blog_post.authors',
             ], null, array(
-                'property' => 'username'
+                'property' => 'username',
             ))
         ;
     }

@@ -1,6 +1,6 @@
 import AppDispatcher from '../dispatchers/AppDispatcher';
 import Fetcher from '../services/Fetcher';
-import {CREATE_OPINION_LINK_SUCCESS, CREATE_OPINION_LINK_FAILURE,} from '../constants/OpinionLinkConstants';
+import {CREATE_OPINION_LINK_SUCCESS, CREATE_OPINION_LINK_FAILURE} from '../constants/OpinionLinkConstants';
 
 export default {
 

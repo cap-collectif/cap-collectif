@@ -381,12 +381,12 @@ class ConsultationStepExtractor
 
             $content = '';
             if (count($opinion->getAppendices()) > 0) {
-                $content .= '<p>' . $this->translator->trans(self::LABEL_CONTEXT, [], 'CapcoAppBundleSynthesis') . '</p>';
+                $content .= '<p>'.$this->translator->trans(self::LABEL_CONTEXT, [], 'CapcoAppBundleSynthesis').'</p>';
                 foreach ($opinion->getAppendices() as $app) {
-                    $content .= '<p>' . $app->getAppendixType()->getTitle() . '</p>';
+                    $content .= '<p>'.$app->getAppendixType()->getTitle().'</p>';
                     $content .= $app->getBody();
                 }
-                $content .= '<p>' . $this->translator->trans(self::LABEL_CONTENT, [], 'CapcoAppBundleSynthesis') . '</p>';
+                $content .= '<p>'.$this->translator->trans(self::LABEL_CONTENT, [], 'CapcoAppBundleSynthesis').'</p>';
             }
             $content .= $opinion->getBody();
 
@@ -421,9 +421,9 @@ class ConsultationStepExtractor
 
             $content = '';
             if ($version->getComment()) {
-                $content .= '<p>' . $this->translator->trans(self::LABEL_COMMENT, [], 'CapcoAppBundleSynthesis') . '</p>';
+                $content .= '<p>'.$this->translator->trans(self::LABEL_COMMENT, [], 'CapcoAppBundleSynthesis').'</p>';
                 $content .= $version->getComment();
-                $content .= '<p>' . $this->translator->trans(self::LABEL_CONTENT, [], 'CapcoAppBundleSynthesis') . '</p>';
+                $content .= '<p>'.$this->translator->trans(self::LABEL_CONTENT, [], 'CapcoAppBundleSynthesis').'</p>';
             }
             $content .= $version->getBody();
             $element->setBody($content);

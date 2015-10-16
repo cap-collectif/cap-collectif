@@ -29,7 +29,6 @@ use FOS\RestBundle\Util\Codes;
 
 class OpinionsController extends FOSRestController
 {
-
     /**
      * Get an opinion.
      *
@@ -721,7 +720,6 @@ class OpinionsController extends FOSRestController
         $this->getDoctrine()->getManager()->remove($vote);
         $this->getDoctrine()->getManager()->flush();
     }
-
 
     /**
      * Get all links of an opinion.

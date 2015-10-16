@@ -50,7 +50,7 @@ const CkeditorMixin = {
         return;
       }
 
-      let formData = this.state[stateName];
+      const formData = this.state[stateName];
       formData[ref] = evt.editor.getData();
       this.setState({[stateName]: formData});
     });

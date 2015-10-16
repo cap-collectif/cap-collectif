@@ -3,7 +3,6 @@
 namespace Capco\AppBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
-use Doctrine\ORM\Query;
 
 /**
  * AbstractVoteRepository.
@@ -11,9 +10,10 @@ use Doctrine\ORM\Query;
 class AbstractVoteRepository extends EntityRepository
 {
     /**
-     * Gets the history of votes for a certain related item
+     * Gets the history of votes for a certain related item.
      */
-    public function getHistoryFor($objectType, $object) {
+    public function getHistoryFor($objectType, $object)
+    {
         $qb = $this->getEntityManager()->createQueryBuilder()
             ->from(sprintf('Capco\\AppBundle\\Entity\\%sVote', ucfirst($objectType)), 'v')
             ->andWhere('v.confirmed = :confirmed')

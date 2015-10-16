@@ -4,8 +4,6 @@ namespace Capco\AppBundle\EventListener;
 
 use Doctrine\Common\EventSubscriber;
 use Doctrine\Common\Persistence\Event\LoadClassMetadataEventArgs;
-use Capco\AppBundle\Entity\Address;
-
 
 class DynamicRelationSubscriber implements EventSubscriber
 {
@@ -38,14 +36,11 @@ class DynamicRelationSubscriber implements EventSubscriber
             ->getNamingStrategy()
         ;
 
-        foreach ($this->traits as $trait => $params)
-        {
-            switch ($trait)
-            {
-                case "selflinkable":
+        foreach ($this->traits as $trait => $params) {
+            switch ($trait) {
+                case 'selflinkable':
                     // Check intersections between current class interfaces and interfaces to add dynamic relation
-                    if (count(array_intersect(class_implements($metadata->getName()), $params['interfaces'])) > 0)
-                    {
+                    if (count(array_intersect(class_implements($metadata->getName()), $params['interfaces'])) > 0) {
                         $metadata->mapOneToMany([
                             'targetEntity'  => $metadata->getName(),
                             'fieldName'     => 'connections',
@@ -62,7 +57,6 @@ class DynamicRelationSubscriber implements EventSubscriber
                     }
                     break;
             }
-
         }
     }
 }

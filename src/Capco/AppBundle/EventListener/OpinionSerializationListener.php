@@ -133,7 +133,7 @@ class OpinionSerializationListener implements EventSubscriberInterface
         if (isset($this->getIncludedGroups($event)['Opinions']) && $this->toggleManager->isActive('votes_evolution')) {
             $event->getVisitor()->addData(
                 'history', [
-                    'votes' => $this->voteRepository->getHistoryFor('opinion', $opinion)
+                    'votes' => $this->voteRepository->getHistoryFor('opinion', $opinion),
                 ]
             );
         }

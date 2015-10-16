@@ -20,7 +20,7 @@ const SubmitButton = React.createClass({
         }
       </Button>
     );
-  }
+  },
 
 });
 

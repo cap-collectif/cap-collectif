@@ -16,7 +16,6 @@ class OpinionType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-
         $builder
             ->add('title', 'text', ['required' => true])
             ->add('body', 'textarea', ['required' => true])

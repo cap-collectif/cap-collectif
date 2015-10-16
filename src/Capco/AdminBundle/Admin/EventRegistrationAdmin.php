@@ -33,7 +33,7 @@ class EventRegistrationAdmin extends Admin
             ->add('user', 'doctrine_orm_model_autocomplete', [
                 'label' => 'admin.fields.event_registration.user',
             ], null, array(
-                'property' => 'username'
+                'property' => 'username',
             ))
             ->add('updatedAt', null, ['label' => 'admin.fields.event_registration.updated_at'])
         ;

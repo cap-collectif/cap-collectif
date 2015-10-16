@@ -48,7 +48,7 @@ class OpinionAdmin extends Admin
             ->add('Author', 'doctrine_orm_model_autocomplete', [
                 'label' => 'admin.fields.opinion.author',
             ], null, array(
-                'property' => 'username'
+                'property' => 'username',
             ))
             ->add('step', null, array(
                 'label' => 'admin.fields.opinion.step',

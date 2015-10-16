@@ -27,7 +27,7 @@ class IdeaVoteAdmin extends Admin
             ->add('user', 'doctrine_orm_model_autocomplete', [
                 'label' => 'admin.fields.idea_vote.user',
             ], null, array(
-                'property' => 'username'
+                'property' => 'username',
             ))
             ->add('createdAt', null, array(
                 'label' => 'admin.fields.idea_vote.created_at',

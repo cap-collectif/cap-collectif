@@ -29,7 +29,7 @@ class OpinionVoteAdmin extends Admin
             ->add('user', 'doctrine_orm_model_autocomplete', [
                 'label' => 'admin.fields.opinion_vote.voter',
             ], null, array(
-                'property' => 'username'
+                'property' => 'username',
             ))
             ->add('value', null, array(
                 'label' => 'admin.fields.opinion_vote.value',

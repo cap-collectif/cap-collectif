@@ -5,7 +5,6 @@ namespace Capco\AppBundle\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
-
 use Capco\AppBundle\Entity\ViewModel\OpinionTypeViewModel;
 
 /**
@@ -724,6 +723,7 @@ class OpinionType
         if ($parent) {
             return $parent->getChildren(true);
         }
+
         return $this->getConsultationType()->getOpinionTypes();
     }
 
@@ -738,6 +738,7 @@ class OpinionType
             $opinionTypeViewModel->label = $opinionType->getTitle();
             $data[] = $opinionTypeViewModel;
         }
+
         return $data;
     }
 }

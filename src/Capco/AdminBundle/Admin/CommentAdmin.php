@@ -27,7 +27,7 @@ class CommentAdmin extends Admin
             ->add('Author', 'doctrine_orm_model_autocomplete', [
                 'label' => 'admin.fields.comment.author',
             ], null, array(
-                'property' => 'username'
+                'property' => 'username',
             ))
             ->add('authorName', null, array(
                 'label' => 'admin.fields.comment.author_name',

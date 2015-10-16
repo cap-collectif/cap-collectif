@@ -43,7 +43,7 @@ class EventAdmin extends Admin
             ->add('Author', 'doctrine_orm_model_autocomplete', [
                 'label' => 'admin.fields.event.author',
             ], null, array(
-                'property' => 'username'
+                'property' => 'username',
             ))
             ->add('isEnabled', null, array(
                 'label' => 'admin.fields.event.is_enabled',

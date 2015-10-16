@@ -18,7 +18,7 @@ export default class OpinionPreviewTitle extends React.Component {
           : null
         }
         {this.props.showTypeLabel
-          ? " "
+          ? ' '
           : null
         }
         {this.props.link

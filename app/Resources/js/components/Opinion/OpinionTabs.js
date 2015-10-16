@@ -71,6 +71,10 @@ const OpinionTabs = React.createClass({
     ;
   },
 
+  getType() {
+    return this.props.opinion.parent ? this.props.opinion.parent.type : this.props.opinion.type;
+  },
+
   renderArgumentsContent() {
     return <OpinionArgumentsBox {...this.props} />;
   },
@@ -142,11 +146,11 @@ const OpinionTabs = React.createClass({
             : null
           }
           { this.isLinkable()
-            ? <TabPane id="opinion__links" className="opinion-tabs" eventKey={'links'} tab={
+            ? <Tab id="opinion__links" className="opinion-tabs" eventKey={'links'} tab={
                 <FormattedMessage message={this.getIntlMessage('global.links')} num={opinion.connections_count} />
               }>
                 {this.renderLinksContent()}
-              </TabPane>
+              </Tab>
             : null
           }
         </TabbedArea>
@@ -167,10 +171,6 @@ const OpinionTabs = React.createClass({
     }
 
     return null;
-  },
-
-  getType() {
-    return this.props.opinion.parent ? this.props.opinion.parent.type : this.props.opinion.type;
   },
 
   isLinkable() {

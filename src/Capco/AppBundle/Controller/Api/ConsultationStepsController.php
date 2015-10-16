@@ -7,30 +7,18 @@ use Capco\AppBundle\Entity\Consultation;
 use Capco\AppBundle\Entity\ConsultationStep;
 use Capco\AppBundle\Entity\OpinionType;
 use Capco\AppBundle\Form\Api\OpinionType as OpinionForm;
-
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
-use Symfony\Component\Validator\ConstraintViolationListInterface;
-use Symfony\Component\Security\Core\Exception\AccessDeniedException;
-
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
-
-use Nelmio\ApiDocBundle\Annotation\ApiDoc;
-
 use FOS\RestBundle\Controller\FOSRestController;
 use FOS\RestBundle\Controller\Annotations\View;
 use FOS\RestBundle\Controller\Annotations\Get;
 use FOS\RestBundle\Controller\Annotations\Post;
-use FOS\RestBundle\Controller\Annotations\Put;
-use FOS\RestBundle\Controller\Annotations\Delete;
-use FOS\RestBundle\Controller\Annotations\QueryParam;
-use FOS\RestBundle\Request\ParamFetcherInterface;
 use FOS\RestBundle\Util\Codes;
 
 class ConsultationStepsController extends FOSRestController
 {
-
     /**
      * @Security("has_role('ROLE_USER')")
      * @Post("/consultations/{consultationId}/steps/{stepId}/opinions")
@@ -49,7 +37,6 @@ class ConsultationStepsController extends FOSRestController
             ->setAuthor($user)
             ->setStep($step)
             ->setIsEnabled(true);
-        ;
 
         $form = $this->createForm(new OpinionForm(), $opinion);
         $form->handleRequest($request);
@@ -61,7 +48,6 @@ class ConsultationStepsController extends FOSRestController
             ? $link->getOpinionType()->getAvailableOpinionTypesToCreateLink()
             : $this->get('capco.opinion_types.resolver')->getAllForConsultationType($consultationType)
         ;
-
 
         $opinionType = $opinion->getOpinionType();
 
@@ -108,5 +94,4 @@ class ConsultationStepsController extends FOSRestController
 
         return $this->view($form->getErrors(true), Codes::HTTP_BAD_REQUEST);
     }
-
 }

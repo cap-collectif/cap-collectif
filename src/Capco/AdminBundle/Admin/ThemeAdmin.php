@@ -53,7 +53,7 @@ class ThemeAdmin extends Admin
             ->add('Author', 'doctrine_orm_model_autocomplete', [
                 'label' => 'admin.fields.theme.author',
             ], null, array(
-                'property' => 'username'
+                'property' => 'username',
             ))
         ;
     }

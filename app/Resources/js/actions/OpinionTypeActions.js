@@ -1,4 +1,3 @@
-import AppDispatcher from '../dispatchers/AppDispatcher';
 import Fetcher from '../services/Fetcher';
 
 export default {
@@ -6,8 +5,8 @@ export default {
   getAvailableTypes: (type) => {
     return Fetcher
     .get(`/opinion_types/${type}`)
-    .then((type) => {
-      return type.availableLinkTypes;
+    .then((opinionType) => {
+      return opinionType.availableLinkTypes;
     });
   },
 

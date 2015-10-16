@@ -40,7 +40,7 @@ class IdeaAdmin extends Admin
             ->add('Author', 'doctrine_orm_model_autocomplete', [
                 'label' => 'admin.fields.idea.author',
             ], null, array(
-                'property' => 'username'
+                'property' => 'username',
             ))
             ->add('isEnabled', null, array(
                 'label' => 'admin.fields.idea.is_enabled',

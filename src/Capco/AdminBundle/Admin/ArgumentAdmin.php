@@ -32,7 +32,7 @@ class ArgumentAdmin extends Admin
             ->add('Author', 'doctrine_orm_model_autocomplete', [
                 'label' => 'admin.fields.argument.author',
             ], null, array(
-                'property' => 'username'
+                'property' => 'username',
             ))
             ->add('voteCount', null, array(
                 'label' => 'admin.fields.argument.vote_count',

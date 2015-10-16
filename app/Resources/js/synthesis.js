@@ -1,4 +1,4 @@
-import SynthesisBox from './components/Synthesis/SynthesisBox';
+// import SynthesisBox from './components/Synthesis/SynthesisBox';
 import IntlData from './translations/Synthesis/FR';
 import RouterContainer from './services/RouterContainer';
 import router from './router';

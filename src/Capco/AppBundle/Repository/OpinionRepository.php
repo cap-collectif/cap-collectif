@@ -76,7 +76,7 @@ class OpinionRepository extends EntityRepository
 
         if ($filter === 'old') {
             $qb->addOrderBy('connection.createdAt', 'ASC');
-        } else if ($filter === 'last') {
+        } elseif ($filter === 'last') {
             $qb->addOrderBy('connection.createdAt', 'DESC');
         }
 
