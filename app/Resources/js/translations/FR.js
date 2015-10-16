@@ -81,6 +81,21 @@ export default {
               hide: 'Masquer {title}.',
               show: 'Afficher {title}',
             },
+            constraints: {
+                body: 'Le contenu de la proposition doit faire au moins 2 caractères.',
+                title: 'Le titre de la proposition doit faire au moins 2 caractères.',
+            },
+            link: {
+                type: 'Type de proposition*',
+                help: {
+                    'type': 'Quel est le type de votre proposition ?',
+                    'title': 'Quel est l\'objet de votre proposition ?',
+                    'body': 'Rédigez votre proposition',
+                },
+                constraints: {
+                    type: 'Veuillez choisir un type pour soumettre une lisaison.',
+                },
+            },
             add_new_link: 'Ajouter une proposition liée',
             title: 'Titre*',
             title_help: 'Quel est l\'objet de votre proposition ?',

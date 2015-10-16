@@ -1,6 +1,6 @@
 import Validator from '../services/Validator';
 
-const FormMixin = { // This will be easy to use as an higher-order Component in React 0.14
+const FormMixin = { // This will be easy to use as an higher-order Component
 
   isValid() {
     let isValid = true;
@@ -27,7 +27,7 @@ const FormMixin = { // This will be easy to use as an higher-order Component in 
       return errors.length === 0;
     }
 
-    console.log(`Unkown reference to ${ref} in formValidationRules`);
+    console.error(`Unkown reference to ${ref} in formValidationRules`);
     return false;
   },
 

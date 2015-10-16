@@ -55,7 +55,7 @@ Capco\AppBundle\Entity\OpinionType:
             serialized_name: votesThresholdHelpText
             groups: [Opinions, OpinionVersions]
     virtual_properties:
-        getAvailableOpinionTypesToCreateLink:
-            serialized_name: availableOpinionTypesToCreateLink
+        getAvailableOpinionTypesToCreateLinkAsArray:
+            serialized_name: availableLinkTypes
             groups: [OpinionTypeDetails]
-            type: ArrayCollection
+            type: array

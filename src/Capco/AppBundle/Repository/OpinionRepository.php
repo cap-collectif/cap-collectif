@@ -5,11 +5,11 @@ namespace Capco\AppBundle\Repository;
 use Capco\AppBundle\Entity\Consultation;
 use Capco\AppBundle\Entity\ConsultationStep;
 use Capco\AppBundle\Entity\OpinionType;
+use Capco\AppBundle\Entity\Opinion;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\Query;
 use Doctrine\ORM\Tools\Pagination\Paginator;
-use Capco\AppBundle\Entity\Opinion;
 
 class OpinionRepository extends EntityRepository
 {
@@ -59,6 +59,26 @@ class OpinionRepository extends EntityRepository
             ->andWhere('o.id = :id')
             ->setParameter('id', $id)
         ;
+
+        return $qb->getQuery()->getOneOrNullResult();
+    }
+
+    public function getOneWithEnabledConnectionsOrdered($id, $filter = 'last')
+    {
+        $qb = $this->getIsEnabledQueryBuilder()
+            ->addSelect('connection')
+            ->leftJoin('o.connections', 'connection')
+            ->andWhere('connection.isEnabled = true')
+            ->andWhere('connection.isTrashed = false')
+            ->andWhere('o.id = :id')
+            ->setParameter('id', $id)
+        ;
+
+        if ($filter === 'old') {
+            $qb->addOrderBy('connection.createdAt', 'ASC');
+        } else if ($filter === 'last') {
+            $qb->addOrderBy('connection.createdAt', 'DESC');
+        }
 
         return $qb->getQuery()->getOneOrNullResult();
     }

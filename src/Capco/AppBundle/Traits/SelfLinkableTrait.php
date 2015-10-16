@@ -34,6 +34,13 @@ trait SelfLinkableTrait
         return $this->connections;
     }
 
+    public function setConnections($connections)
+    {
+        $this->connections = $connections;
+
+        return $this;
+    }
+
     public function addConnection(SelfLinkableInterface $connection)
     {
         if (!$this->connections->contains($connection)) {

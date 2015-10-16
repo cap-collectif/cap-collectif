@@ -1,78 +1,65 @@
 import FormMixin from '../../../utils/FormMixin';
 import CkeditorMixin from '../../../utils/CkeditorMixin';
 import DeepLinkStateMixin from '../../../utils/DeepLinkStateMixin';
-
 import OpinionLinkActions from '../../../actions/OpinionLinkActions';
-import OpinionTypeActions from '../../../actions/OpinionLinkActions';
-
 import FlashMessages from '../../Utils/FlashMessages';
-import OpinionLinkCreateButton from './OpinionLinkCreateButton';
 
 const Input = ReactBootstrap.Input;
 
 const OpinionLinkForm = React.createClass({
   propTypes: {
     opinion: React.PropTypes.object.isRequired,
+    availableTypes: React.PropTypes.array.isRequired,
     isSubmitting: React.PropTypes.bool.isRequired,
-    validationFailed: React.PropTypes.func.isRequired,
+    onValidationFailure: React.PropTypes.func.isRequired,
+    onSubmitSuccess: React.PropTypes.func.isRequired,
+    onSubmitFailure: React.PropTypes.func.isRequired,
   },
   mixins: [ReactIntl.IntlMixin, DeepLinkStateMixin, FormMixin, CkeditorMixin],
-  formValidationRules: {
-    title: {
-      min: {value: 2, message: 'source.constraints.title'},
-      notBlank: {message: 'source.constraints.title'},
-    },
-    body: {
-      min: {value: 2, message: 'source.constraints.body'},
-      notBlank: {message: 'source.constraints.body'},
-    },
-  },
 
   getInitialState() {
-    // add appendices
     return {
       form: {
         title: '',
         body: '',
-        link: null,
+        type: null,
+        link: this.props.opinion.id,
       },
-      types: [],
       errors: {
         title: [],
         body: [],
-      }
+      },
     };
   },
 
   componentDidMount() {
-    OpinionTypeActions
-      .getAvailableTypes()
-      .then((types) => {
-        console.log(types);
-        this.setState({'types': types});
-      });
-
     this.initializeCkeditor('body', 'form');
   },
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.isSubmitting === true) {
       if (this.isValid()) {
+        const step = this.props.opinion.step;
         OpinionLinkActions
-          .add(this.props.opinion.consultation.id, this.state.form)
-          .then(() => {this.setState(this.getInitialState())})
-        ;
+          .add(step.consultationId, step.id, this.state.form)
+          .then(() => {
+            this.setState(this.getInitialState());
+            this.props.onSubmitSuccess();
+          })
+          .catch(() => {
+            this.props.onSubmitFailure();
+          });
         return;
       }
 
-      this.props.validationFailed();
+      this.props.onValidationFailure();
     }
   },
 
   renderFormErrors(field) {
     const errors = this.getErrorsMessages(field);
     if (errors.length === 0) {
-       return null;
+      return null;
     }
     return <FlashMessages errors={errors} form={true} />;
   },
@@ -82,23 +69,41 @@ const OpinionLinkForm = React.createClass({
       <form id="opinion-links-form" ref="form">
 
         <Input
+          type="select"
+          valueLink={this.linkState('form.type')}
+          ref="type"
+          label={this.getIntlMessage('opinion.link.type')}
+          labelClassName="control-label h5"
+          groupClassName={this.getGroupStyle('type')}
+          help={this.renderFormErrors('type')}
+          bsStyle={this.getFieldStyle('type')}
+        >
+          <option value="" disabled selected>{this.getIntlMessage('global.select')}</option>
+          {
+            this.props.availableTypes.map((type) => {
+              return <option key={type.id} value={type.id}>{type.label}</option>;
+            })
+          }
+        </Input>
+
+        <Input
           type="text"
           valueLink={this.linkState('form.title')}
+          ref="title"
           label={this.getIntlMessage('opinion.title')}
           labelClassName="control-label h5"
           groupClassName={this.getGroupStyle('title')}
-          ref="title"
           help={this.renderFormErrors('title')}
           bsStyle={this.getFieldStyle('title')}
         />
 
         <Input
           type="textarea"
-          valueLink={null} // state is updated by CkeditorMixin
+          valueLink={null} // state is automatically updated by CkeditorMixin
+          ref="body"
           label={this.getIntlMessage('opinion.body')}
           labelClassName="control-label h5"
           groupClassName={this.getGroupStyle('body')}
-          ref="body"
           help={this.renderFormErrors('body')}
           bsStyle={this.getFieldStyle('body')}
         />
@@ -107,12 +112,19 @@ const OpinionLinkForm = React.createClass({
     );
   },
 
-  reload() {
-    this.setState(this.getInitialState());
-    location.reload(); // TODO when enough time
-    return true;
+  formValidationRules: {
+    type: {
+      notNull: {message: 'opinion.link.constraints.type'},
+    },
+    title: {
+      min: {value: 2, message: 'opinion.constraints.title'},
+      notBlank: {message: 'opinion.constraints.title'},
+    },
+    body: {
+      min: {value: 2, message: 'opinion.constraints.body'},
+      notBlank: {message: 'opinion.constraints.body'},
+    },
   },
-
 });
 
 export default OpinionLinkForm;

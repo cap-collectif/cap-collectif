@@ -12,13 +12,8 @@ const CloseButton = React.createClass({
         { this.getIntlMessage('global.cancel') }
       </Button>
     );
-  }
+  },
 
 });
 
 export default CloseButton;
-
-
-
-
-

@@ -44,14 +44,6 @@ class ConsultationStepsController extends FOSRestController
             throw new BadRequestHttpException($this->get('translator')->trans('consultation.error.no_contribute', [], 'CapcoAppBundle'));
         }
 
-        $consultationType = $step->getConsultationType();
-        $link = $opinion->getLink();
-
-        $availablesOpinionTypes = $link ?
-            $link->getOpinionType()->getAvailableOpinionTypesToCreateLink() :
-            $this->get('capco.opinion_types.resolver')->getAllForConsultationType($consultationType)
-        ;
-
         $user = $this->getUser();
         $opinion = (new Opinion())
             ->setAuthor($user)
@@ -62,13 +54,22 @@ class ConsultationStepsController extends FOSRestController
         $form = $this->createForm(new OpinionForm(), $opinion);
         $form->handleRequest($request);
 
+        $consultationType = $step->getConsultationType();
+        $link = $opinion->getLink();
+
+        $availablesOpinionTypes = $link
+            ? $link->getOpinionType()->getAvailableOpinionTypesToCreateLink()
+            : $this->get('capco.opinion_types.resolver')->getAllForConsultationType($consultationType)
+        ;
+
+
         $opinionType = $opinion->getOpinionType();
 
         if (!$opinionType->getIsEnabled()) {
             throw new BadRequestHttpException('This opinionType is not enabled.');
         }
 
-        if (!in_array($opinionType, $availablesOpinionTypes)) {
+        if (!in_array($opinionType, $availablesOpinionTypes->toArray())) {
             throw new BadRequestHttpException('This opinionType is not available.');
         }
 

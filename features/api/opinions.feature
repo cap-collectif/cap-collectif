@@ -202,3 +202,55 @@ Feature: Opinions
     }
     """
     Then the JSON response status code should be 201
+
+
+### Links
+
+
+    Scenario: API client wants to list links of an opinion
+    When I send a GET request to "/api/opinions/3/links"
+    Then the JSON response should match:
+    """
+    {
+      "links": [
+        {
+          "id": @integer@,
+          "title": @string@,
+
+          "created_at": "@string@.isDateTime()",
+          "updated_at": "@string@.isDateTime()",
+
+        "type": {
+          "id": @integer@,
+          "title": @string@,
+          "subtitle": @string@,
+          "voteWidgetType": @integer@,
+          "votesHelpText": @string@,
+          "commentSystem": @integer@,
+          "color": @string@,
+          "versionable": @boolean@,
+          "sourceable": @boolean@,
+          "votesThreshold": @integer@,
+          "votesThresholdHelpText": @string@
+        },
+
+        "arguments_count": @integer@,
+        "arguments_yes_count": @integer@,
+        "arguments_no_count": @integer@,
+        "arguments": @...@,
+
+        "sources_count": @integer@,
+        "sources": @...@,
+
+        "versions_count": @integer@,
+
+        "votes": @...@,
+        "votes_nok": @integer@,
+        "votes_ok": @integer@,
+        "votes_mitige": @integer@,
+        "votes_total": @integer@,
+        },
+        @...@
+      ]
+    }
+    """

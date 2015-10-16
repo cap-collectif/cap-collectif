@@ -31,7 +31,6 @@ class OpinionTypesController extends FOSRestController
      *
      * @Get("/opinion_types/{id}")
      * @ParamConverter("opinionType", options={"mapping": {"id": "id"}})
-     * @View(statusCode=200, serializerGroups={"OpinionTypeDetails"})
      */
     public function getOpinionTypeAction(OpinionType $opinionType)
     {
@@ -40,7 +39,7 @@ class OpinionTypesController extends FOSRestController
             ->setSerializeNull(false)
         ;
 
-        $view = $this->view(['type' => $opinionType], 200)
+        $view = $this->view($opinionType, 200)
             ->setSerializationContext($context)
         ;
 

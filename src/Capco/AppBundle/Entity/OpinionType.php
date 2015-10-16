@@ -6,6 +6,8 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 
+use Capco\AppBundle\Entity\ViewModel\OpinionTypeViewModel;
+
 /**
  * OpinionType.
  *
@@ -704,5 +706,19 @@ class OpinionType
             return $parent->getChildren(true);
         }
         return $this->getConsultationType()->getOpinionTypes();
+    }
+
+    // serializer seems to convert virtual_properties to an object
+    // so we force it as an array using this method...
+    public function getAvailableOpinionTypesToCreateLinkAsArray()
+    {
+        $data = [];
+        foreach ($this->getAvailableOpinionTypesToCreateLink() as $opinionType) {
+            $opinionTypeViewModel = new OpinionTypeViewModel();
+            $opinionTypeViewModel->id = $opinionType->getId();
+            $opinionTypeViewModel->label = $opinionType->getTitle();
+            $data[] = $opinionTypeViewModel;
+        }
+        return $data;
     }
 }

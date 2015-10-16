@@ -107,7 +107,7 @@ abstract class AbstractStep
      *
      * @ORM\OneToOne(targetEntity="Capco\AppBundle\Entity\ConsultationAbstractStep", mappedBy="step", orphanRemoval=true, cascade={"persist", "remove"})
      */
-    private $consultationAbstractStep;
+    protected $consultationAbstractStep;
 
     /**
      * @var string

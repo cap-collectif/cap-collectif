@@ -2,6 +2,8 @@ import OpinionLinkList from './OpinionLinkList';
 import OpinionLinkCreate from './OpinionLinkCreate';
 import Filter from '../../Utils/Filter';
 import Loader from '../../Utils/Loader';
+import OpinionActions from '../../../actions/OpinionActions';
+import OpinionLinkStore from '../../../stores/OpinionLinkStore';
 
 const Row = ReactBootstrap.Row;
 const Col = ReactBootstrap.Col;
@@ -22,17 +24,24 @@ const OpinionLinksBox = React.createClass({
     };
   },
 
+  componentWillMount() {
+    OpinionLinkStore.addChangeListener(this.onChange);
+  },
+
   componentDidUpdate(prevProps, prevState) {
     if (this.state.filter !== prevState.filter) {
-      this.loadLinksFromServer();
+      OpinionActions.loadLinks(this.props.opinion.id, this.state.filter);
     }
   },
 
-  handleFilterChange() {
+  componentWillUnmount() {
+    OpinionLinkStore.removeChangeListener(this.onChange);
+  },
+
+  onChange() {
     this.setState({
-      filter: $(React.findDOMNode(this.refs.filter)).val(),
-      isLoading: true,
-      links: [],
+      links: OpinionLinkStore.links,
+      isLoading: false,
     });
   },
 
@@ -44,7 +53,14 @@ const OpinionLinksBox = React.createClass({
             <OpinionLinkCreate {...this.props} />
           </Col>
           <Col xs={12} sm={6} md={6} className="block--first-mobile">
-            <Filter onChange={this.handleFilterChange} value={this.state.filter} />
+            {this.state.links.length > 1
+              ? <Filter
+                  onChange={this.handleFilterChange}
+                  value={this.state.filter}
+                  values={['last', 'old']}
+                />
+              : null
+            }
           </Col>
         </Row>
         {!this.state.isLoading
@@ -53,6 +69,14 @@ const OpinionLinksBox = React.createClass({
         }
       </div>
     );
+  },
+
+  handleFilterChange(event) {
+    this.setState({
+      filter: event.target.value,
+      isLoading: true,
+      links: [],
+    });
   },
 
 });

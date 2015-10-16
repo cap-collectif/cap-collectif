@@ -43,7 +43,6 @@ const CkeditorMixin = {
     });
 
     editor.on('change', (evt) => {
-
       if (!stateName) { // compatibility for old forms
         const diff = {};
         diff[ref] = evt.editor.getData();

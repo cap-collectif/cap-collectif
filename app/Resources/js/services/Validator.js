@@ -3,7 +3,6 @@ class Validator {
   constructor(value, rules) {
     this.value = value;
     this.rules = rules;
-    console.log('validate', value, rules);
   }
 
   getErrors() {

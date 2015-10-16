@@ -1,6 +1,5 @@
 import OpinionPreview from '../OpinionPreview';
 
-const Label = ReactBootstrap.Label;
 const Row = ReactBootstrap.Row;
 const Col = ReactBootstrap.Col;
 
@@ -23,7 +22,7 @@ const OpinionLink = React.createClass({
       <li className={classes} >
         <Row>
           <Col xs={12}>
-            <OpinionPreview opinion={this.props.link} showTypeLabel={true} />
+            <OpinionPreview opinion={link} showTypeLabel={true} />
           </Col>
         </Row>
       </li>

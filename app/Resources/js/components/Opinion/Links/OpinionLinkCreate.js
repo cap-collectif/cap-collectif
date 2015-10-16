@@ -3,6 +3,8 @@ import SubmitButton from '../../Form/SubmitButton';
 import CloseButton from '../../Form/CloseButton';
 import OpinionLinkCreateInfos from './OpinionLinkCreateInfos';
 import OpinionLinkForm from './OpinionLinkForm';
+import OpinionTypeActions from '../../../actions/OpinionTypeActions';
+import OpinionActions from '../../../actions/OpinionActions';
 
 const Modal = ReactBootstrap.Modal;
 
@@ -16,7 +18,16 @@ const OpinionLinkCreate = React.createClass({
     return {
       showModal: false,
       isSubmitting: false,
+      availableTypes: [],
     };
+  },
+
+  componentDidMount() {
+    OpinionTypeActions
+      .getAvailableTypes(this.props.opinion.type.id)
+      .then((availableTypes) => {
+        this.setState({'availableTypes': availableTypes});
+      });
   },
 
   render() {
@@ -43,6 +54,7 @@ const OpinionLinkCreate = React.createClass({
             <OpinionLinkCreateInfos />
             <OpinionLinkForm
               opinion={this.props.opinion}
+              availableTypes={this.state.availableTypes}
               isSubmitting={this.state.isSubmitting}
               onValidationFailure={this.handleFailure.bind(null, this)}
               onSubmitSuccess={this.handleSubmitSuccess.bind(null, this)}
@@ -80,6 +92,7 @@ const OpinionLinkCreate = React.createClass({
   handleSubmitSuccess() {
     this.close();
     this.stopSubmitting();
+    OpinionActions.loadLinks(this.props.opinion.id, 'last');
   },
 
 });

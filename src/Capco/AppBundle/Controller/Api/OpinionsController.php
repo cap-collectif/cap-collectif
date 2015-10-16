@@ -49,13 +49,13 @@ class OpinionsController extends FOSRestController
     public function getOpinionAction(Opinion $opinion)
     {
         $em = $this->get('doctrine.orm.entity_manager');
+        $repo = $em->getRepository('CapcoAppBundle:Opinion');
+        $id = $opinion->getId();
 
-        $opinionWithArguments = $em->getRepository('CapcoAppBundle:Opinion')
-            ->getWithArguments($opinion->getId());
-        $opinionWithSources = $em->getRepository('CapcoAppBundle:Opinion')
-            ->getWithSources($opinion->getId());
-        $opinionWithVotes = $em->getRepository('CapcoAppBundle:Opinion')
-            ->getWithVotes($opinion->getId(), 5);
+        $opinionWithArguments = $repo->getWithArguments($id);
+        $opinionWithSources = $repo->getWithSources($id);
+        $opinionWithVotes = $repo->getWithVotes($id, 5);
+        $opinionWithConnections = $repo->getOneWithEnabledConnectionsOrdered($id);
 
         if (is_object($opinionWithArguments)) {
             $opinion->setArguments($opinionWithArguments->getArguments());
@@ -67,6 +67,10 @@ class OpinionsController extends FOSRestController
 
         if (is_object($opinionWithVotes)) {
             $opinion->setVotes($opinionWithVotes->getVotes());
+        }
+
+        if (is_object($opinionWithConnections)) {
+            $opinion->setConnections($opinionWithConnections->getConnections());
         }
 
         $consultation = $opinion->getStep()->getConsultation();
@@ -716,5 +720,39 @@ class OpinionsController extends FOSRestController
         $version->decrementVoteCountByType($vote->getValue());
         $this->getDoctrine()->getManager()->remove($vote);
         $this->getDoctrine()->getManager()->flush();
+    }
+
+
+    /**
+     * Get all links of an opinion.
+     *
+     * @ApiDoc(
+     *  resource=true,
+     *  description="Get all links of an opinion",
+     *  statusCodes={
+     *    200 = "Returned when successful",
+     *    404 = "Returned when opinion not found",
+     *  }
+     * )
+     *
+     * @Get("/opinions/{id}/links")
+     * @QueryParam(name="filter", requirements="(old|last)", default="last")
+     * @View(statusCode=200, serializerGroups={"OpinionLinkPreviews", "UsersInfos"})
+     */
+    public function cgetOpinionLinksAction($id, ParamFetcherInterface $paramFetcher)
+    {
+        $filter = $paramFetcher->get('filter');
+
+        $em = $this->get('doctrine.orm.entity_manager');
+        $opinion = $em->getRepository('CapcoAppBundle:Opinion')
+                      ->getOneWithEnabledConnectionsOrdered($id, $filter)
+                    ;
+        if (!$opinion) {
+            throw $this->createNotFoundException('The opinion does not exist');
+        }
+
+        return [
+            'links' => $opinion->getConnections(),
+        ];
     }
 }

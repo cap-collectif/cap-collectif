@@ -10,15 +10,23 @@ const Filter = React.createClass({
   getDefaultProps() {
     return {
       values: ['popular', 'last', 'old'],
-    }
+    };
   },
 
   render() {
     return (
-      <select ref="filter" className="form-control pull-right" value={this.props.value} onChange={this.props.onChange}>
+      <select
+        className="form-control pull-right"
+        value={this.props.value}
+        onChange={this.props.onChange}
+      >
         {
           this.props.values.map((value) => {
-            <option value={value}>{this.getIntlMessage('global.filter_' + value)}</option>
+            return (
+              <option value={value}>
+                {this.getIntlMessage('global.filter_' + value)}
+              </option>
+            );
           })
         }
       </select>
