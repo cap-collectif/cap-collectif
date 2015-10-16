@@ -130,7 +130,7 @@ class OpinionSerializationListener implements EventSubscriberInterface
             'has_user_reported', $user === 'anon.' ? false : $opinion->userHasReport($user)
         );
 
-        if ($this->toggleManager->isActive('votes_evolution')) {
+        if (isset($this->getIncludedGroups($event)['Opinions']) && $this->toggleManager->isActive('votes_evolution')) {
             $event->getVisitor()->addData(
                 'history', [
                     'votes' => $this->voteRepository->getHistoryFor('opinion', $opinion)
@@ -141,5 +141,15 @@ class OpinionSerializationListener implements EventSubscriberInterface
 
     public function onPostOpinionType(ObjectEvent $event)
     {
+    }
+
+    protected function getIncludedGroups($event)
+    {
+        $exclusionStrategy = $event->getContext()->getExclusionStrategy();
+        $reflectionClass = new \ReflectionClass('JMS\Serializer\Exclusion\GroupsExclusionStrategy');
+        $reflectionProperty = $reflectionClass->getProperty('groups');
+        $reflectionProperty->setAccessible(true);
+
+        return $reflectionProperty->getValue($exclusionStrategy);
     }
 }
