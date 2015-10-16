@@ -90,9 +90,12 @@ const OpinionTabs = React.createClass({
   },
 
   render() {
-    const opinion = this.props.opinion;
+    console.log(this.isSourceable() + this.isCommentable() + this.isVersionable() + this.hasStatistics());
 
-    if (this.isSourceable() || this.isCommentable() || this.isVersionable()) {
+    if (this.isSourceable() + this.isCommentable() + this.isVersionable() + this.hasStatistics() > 1) {
+      // at least two tabs
+      const opinion = this.props.opinion;
+
       return (
         <TabbedArea defaultActiveKey={this.getDefaultKey()} animation={false}>
           { this.isVersionable()
@@ -105,7 +108,7 @@ const OpinionTabs = React.createClass({
           }
           { this.isCommentable()
             ? <Tab id="opinion__arguments" className="opinion-tabs" eventKey={'arguments'} title={
-                <FormattedMessage message={this.getArgumentsTrad()} num={this.props.opinion.arguments_count} />
+                <FormattedMessage message={this.getArgumentsTrad()} num={opinion.arguments_count} />
               }>
                 {this.renderArgumentsContent()}
               </Tab>
@@ -139,6 +142,9 @@ const OpinionTabs = React.createClass({
     }
     if (this.isCommentable()) {
       return this.renderArgumentsContent();
+    }
+    if (this.hasStatistics()) {
+      return this.renderStatisticsContent();
     }
 
     return null;
