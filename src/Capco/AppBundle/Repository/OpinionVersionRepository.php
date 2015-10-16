@@ -272,7 +272,23 @@ class OpinionVersionRepository extends EntityRepository
     protected function getIsEnabledQueryBuilder($alias = 'o')
     {
         return $this->createQueryBuilder($alias)
-                    ->andWhere($alias.'.enabled = true')
-                ;
+            ->andWhere($alias.'.enabled = true')
+        ;
+    }
+
+    public function getWithVotes($id, $limit = null)
+    {
+        $qb = $this->getIsEnabledQueryBuilder('o')
+            ->addSelect('vote')
+            ->innerJoin('o.votes', 'vote')
+            ->andWhere('o.id = :id')
+            ->setParameter('id', $id)
+        ;
+
+        if (null !== $limit) {
+            $qb->setMaxResults($limit);
+        }
+
+        return $qb->getQuery()->getOneOrNullResult();
     }
 }

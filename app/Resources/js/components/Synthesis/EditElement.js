@@ -1,5 +1,6 @@
 import SynthesisElementStore from '../../stores/SynthesisElementStore';
 import SynthesisElementActions from '../../actions/SynthesisElementActions';
+import FormattedText from '../../services/FormattedText';
 import Loader from '../Utils/Loader';
 import ElementTitle from './ElementTitle';
 import ElementBlock from './ElementBlock';
@@ -80,7 +81,9 @@ const EditElement = React.createClass({
               <div className="element box">
                 <ElementBlock element={element} />
               </div>
-              <div className="element__description box has-chart" dangerouslySetInnerHTML={{__html: element.body}} />
+              <div className="element__description box has-chart">
+                {FormattedText.strip(element.body)}
+              </div>
               {this.renderElementButtons()}
             </div>
           </div>
