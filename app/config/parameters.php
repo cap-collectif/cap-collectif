@@ -16,9 +16,9 @@ $container->setParameter('database_user',               set_var('database_user',
 $container->setParameter('database_password',           set_var('database_password', null));
 
 $container->setParameter('mailer_transport',            set_var('mailer_transport', 'smtp'));
-$container->setParameter('mailer_user',                 set_var('mailer_user', 'maxime@cap-collectif.com'));
+$container->setParameter('mailer_user',                 set_var('mailer_user', '***REMOVED***'));
 $container->setParameter('mailer_password',             set_var('mailer_password', '***REMOVED***'));
-$container->setParameter('mailer_host',                 set_var('mailer_host', '***REMOVED***'));
+$container->setParameter('mailer_host',                 set_var('mailer_host', 'in-v3.mailjet.com'));
 $container->setParameter('mailer_port',                 set_var('mailer_port', 587));
 
 $container->setParameter('mailer_service_user',         set_var('mailer_service_user', 'maxime@cap-collectif.com'));
@@ -51,7 +51,7 @@ $container->setParameter('jwt_token_ttl',               set_var('jwt_token_ttl',
 
 $container->setParameter('language_analyzer',           set_var('language_analyzer', 'french'));
 
-$container->setParameter('remember_secret',             set_var('remember_secret', '***REMOVED***'));
+$container->setParameter('remember_secret',           set_var('remember_secret', '***REMOVED***'));
 
 $container->setParameter('sonata.media.thumbnail.liip_imagine', 'Capco\MediaBundle\Thumbnail\LiipImagineThumbnail');
 

@@ -40,6 +40,7 @@ const createElementFromData = (synthesis, data, successMessage = 'common.success
     .then(() => {
       AppDispatcher.dispatch({
         actionType: CREATE_ELEMENT_SUCCESS,
+        element: data,
         message: successMessage,
       });
       return true;

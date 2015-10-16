@@ -1,122 +1,18 @@
+imports:
+    - { resource: services/listeners.yml }
+    - { resource: services/repositories.yml }
+    - { resource: services/resolvers.yml }
+    - { resource: services/twig.yml }
+    - { resource: services/validators.yml }
+
 parameters:
-  capco.site_parameter.repository.class: Capco\AppBundle\Repository\SiteParameterRepository
-  capco.menu_item.repository.class: Capco\AppBundle\Repository\MenuItemRepository
-  capco.menu_item.resolver.class: Capco\AppBundle\Manager\MenuItemResolver
-  capco.site_parameter.resolver.class: Capco\AppBundle\SiteParameter\Resolver
-  capco.twig_extension.site_parameter.class: Capco\AppBundle\Twig\SiteParameterExtension
-  capco.site_image.repository.class: Capco\AppBundle\Repository\SiteImageRepository
-  capco.site_image.resolver.class: Capco\AppBundle\SiteImage\Resolver
-  capco.twig_extension.site_image.class: Capco\AppBundle\Twig\SiteImageExtension
-  capco.twig_extension.menu_url.class: Capco\AppBundle\Twig\MenuLinkExtension
-  capco.twig_extension.feature_toggle.class: Capco\AppBundle\Twig\FeatureToggleExtension
   capco.notify.manager.class: Capco\AppBundle\Manager\Notify
   capco.toggle.manager.class: Capco\AppBundle\Toggle\Manager
-  capco.toggle.listener.request.class: Capco\AppBundle\Toggle\RequestListener
-  capco.blog.post.repository.class: Capco\AppBundle\Repository\PostRepository
-  capco.event.repository.class: Capco\AppBundle\Repository\EventRepository
-  capco.event.resolver.class: Capco\AppBundle\Resolver\EventResolver
-  capco.comment.resolver.class: Capco\AppBundle\Manager\CommentResolver
-  capco.twig.comment.class: Capco\AppBundle\Twig\CommentExtension
-  capco.site_color.repository.class: Capco\AppBundle\Repository\SiteColorRepository
-  capco.site_color.resolver.class: Capco\AppBundle\SiteColor\Resolver
-  capco.twig_extension.site_color.class: Capco\AppBundle\Twig\SiteColorExtension
-  capco.twig.default_avatar.class: Capco\AppBundle\Twig\DefaultAvatarExtension
-  capco.step.resolver.class: Capco\AppBundle\Resolver\StepResolver
-  capco.twig.steps_links.class: Capco\AppBundle\Twig\StepsLinksExtension
-  capco.video.repository.class: Capco\AppBundle\Repository\VideoRepository
-  capco.consultation.download.resolver.class: Capco\AppBundle\Resolver\ConsultationDownloadResolver
-  capco.twig.event_helper.class: Capco\AppBundle\Twig\EventExtension
-  capco.twig.idea_helper.class: Capco\AppBundle\Twig\IdeaExtension
-  capco.email_belongs_not.validator.class: Capco\AppBundle\Validator\Constraints\EmailDoesNotBelongToUserValidator
-  capco.section.repository.class: Capco\AppBundle\Repository\SectionRepository
-  capco.section.resolver.class: Capco\AppBundle\Resolver\SectionResolver
-  capco.twig.section_resolver.class: Capco\AppBundle\Twig\SectionExtension
-  capco.highlighted.repository.class: Capco\AppBundle\Repository\HighlightedContentRepository
-  capco.highlighted.resolver.class: Capco\AppBundle\Resolver\HighlightedContentResolver
-  capco.twig.highlighted_resolver.class: Capco\AppBundle\Twig\HighlightedContentExtension
-  capco.has_theme_if_activated.validator.class: Capco\AppBundle\Validator\Constraints\HasThemeIfActivatedValidator
   capco.help_extension.class: Capco\AppBundle\Form\Extension\HelpExtension
-  capco.vote.resolver.class: Capco\AppBundle\Resolver\VoteResolver
-  capco.twig.vote.class: Capco\AppBundle\Twig\VoteExtension
-  capco.end_after_start.validator.class: Capco\AppBundle\Validator\Constraints\EndAfterStartValidator
 
 services:
   import.csvtoarray:
     class: Capco\AppBundle\Helper\ConvertCsvToArray
-
-  capco.site_parameter.repository:
-    class: %capco.site_parameter.repository.class%
-    factory_service: doctrine.orm.default_entity_manager
-    factory_method: getRepository
-    arguments:
-      - Capco\AppBundle\Entity\SiteParameter
-
-  capco.site_parameter.resolver:
-    class: %capco.site_parameter.resolver.class%
-    arguments:
-      - @capco.site_parameter.repository
-      - @logger
-
-  capco.twig.site_parameter:
-    class: %capco.twig_extension.site_parameter.class%
-    arguments: [ @capco.site_parameter.resolver ]
-    tags:
-      - { name: twig.extension }
-
-  ## Site paramèters for Image
-  capco.site_image.repository:
-    class: %capco.site_image.repository.class%
-    factory_service: doctrine.orm.default_entity_manager
-    factory_method: getRepository
-    arguments:
-      - Capco\AppBundle\Entity\SiteImage
-
-  capco.site_image.resolver:
-    class: %capco.site_image.resolver.class%
-    arguments:
-      - @capco.site_image.repository
-      - @logger
-
-  capco.twig.site_image:
-    class: %capco.twig_extension.site_image.class%
-    arguments: [ @capco.site_image.resolver ]
-    tags:
-      - { name: twig.extension }
-
-  # default avatar
-  capco.twig.default_avatar:
-    class: %capco.twig.default_avatar.class%
-    arguments:
-      - @capco.site_image.resolver
-    tags:
-      - { name: twig.extension }
-
-  ## Site paramèters for colors
-  capco.site_color.repository:
-    class: %capco.site_color.repository.class%
-    factory_service: doctrine.orm.default_entity_manager
-    factory_method: getRepository
-    arguments:
-        - Capco\AppBundle\Entity\SiteColor
-
-  capco.site_color.resolver:
-    class: %capco.site_color.resolver.class%
-    arguments:
-      - @capco.site_color.repository
-      - @logger
-
-  capco.twig.site_color:
-    class: %capco.twig_extension.site_color.class%
-    arguments: [ @capco.site_color.resolver ]
-    tags:
-      - { name: twig.extension }
-
-  ## Menu URL
-  capco.twig.menu_url:
-    class: %capco.twig_extension.menu_url.class%
-    arguments: [ @router, @validator ]
-    tags:
-      - { name: twig.extension }
 
   capco.form.type_extension.media:
     class: Capco\AppBundle\Form\Extension\MediaTypeExtension
@@ -133,160 +29,11 @@ services:
     class:     %capco.toggle.manager.class%
     arguments: [@qandidate.toggle.manager, @qandidate.toggle.user_context_factory, "%redis_prefix%" ]
 
-  capco.toggle.listener.request:
-    class:     %capco.toggle.listener.request.class%
-    arguments: [@capco.toggle.manager, @translator, @capco.site_parameter.resolver, %shield_login%, %shield_pwd%]
-    tags:
-      - { name: kernel.event_listener, event: kernel.request, method: onKernelRequest }
-
-  capco.twig.feature_toggle:
-    class:     %capco.twig_extension.feature_toggle.class%
-    arguments: [@capco.toggle.manager]
-    tags:
-      - { name: twig.extension }
-
-  capco.blog.post.repository:
-      class:           "%capco.blog.post.repository.class%"
-      factory_service: doctrine.orm.entity_manager
-      factory_method:  getRepository
-      arguments:       ['CapcoAppBundle:Post']
-
-  capco.event.repository:
-    class:           "%capco.event.repository.class%"
-    factory_service: doctrine.orm.entity_manager
-    factory_method:  getRepository
-    arguments:       ['CapcoAppBundle:Event']
-
-  capco.event.resolver:
-    class: %capco.event.resolver.class%
-    arguments: [@capco.event.repository]
-
-  capco.contribution.resolver:
-    class: Capco\AppBundle\Resolver\ContributionResolver
-    arguments: [@capco.user.repository]
-
-  capco.user.repository:
-    class:           Capco\UserBundle\Repository\UserRepository
-    factory_service: doctrine.orm.entity_manager
-    factory_method:  getRepository
-    arguments:       ['CapcoUserBundle:User']
-
-  capco.video.repository:
-    class:           "%capco.video.repository.class%"
-    factory_service: doctrine.orm.entity_manager
-    factory_method:  getRepository
-    arguments:       ['CapcoAppBundle:Video']
-
-  capco.menu_item.repository:
-    class: %capco.menu_item.repository.class%
-    factory_service: doctrine.orm.default_entity_manager
-    factory_method: getRepository
-    arguments:
-      - Capco\AppBundle\Entity\MenuItem
-
-  capco.menu_item.resolver:
-    class: %capco.menu_item.resolver.class%
-    arguments: [@capco.menu_item.repository, @capco.toggle.manager]
-
-  capco.step.resolver:
-    class: %capco.step.resolver.class%
-    arguments: [@capco.url.resolver]
-
-  capco.comment.resolver:
-    class: %capco.comment.resolver.class%
-    arguments: [@doctrine.orm.entity_manager, @router, @capco.url.resolver]
-
-  capco.twig.comment:
-    class: %capco.twig.comment.class%
-    arguments: [@capco.comment.resolver]
-    tags:
-      - { name: twig.extension }
-
-  capco.twig.steps_links:
-    class:     %capco.twig.steps_links.class%
-    arguments: [@capco.step.resolver]
-    tags:
-      - { name: twig.extension }
-
-  capco.consultation.download.resolver:
-    class: %capco.consultation.download.resolver.class%
-    arguments: [@doctrine.orm.entity_manager, @templating, @translator]
-
   capco.event.helper:
     class: Capco\AppBundle\Helper\EventHelper
 
   capco.idea.helper:
     class: Capco\AppBundle\Helper\IdeaHelper
-
-  capco.unlisted_email.validator:
-    class: Capco\AppBundle\Validator\Constraints\HasUnlistedEmailValidator
-    arguments: [@doctrine.orm.entity_manager]
-    tags:
-      - { name: validator.constraint_validator, alias: unlisted_email.validator }
-
-  capco.already_vote.validator:
-    class: Capco\AppBundle\Validator\Constraints\DidNotAlreadyVoteEmailValidator
-    arguments: [@doctrine.orm.entity_manager]
-    tags:
-      - { name: validator.constraint_validator, alias: already_vote.validator }
-
-  capco.twig.event_helper:
-    class: %capco.twig.event_helper.class%
-    arguments: [@capco.event.helper]
-    tags:
-      - { name: twig.extension }
-
-  capco.twig.idea_helper:
-    class: %capco.twig.idea_helper.class%
-    arguments: [@capco.idea.helper]
-    tags:
-      - { name: twig.extension }
-
-  capco.email_belongs_not.validator:
-    class: %capco.email_belongs_not.validator.class%
-    arguments: [@fos_user.user_manager]
-    tags:
-      - { name: validator.constraint_validator, alias: email_belongs_not.validator }
-
-  capco.section.repository:
-    class: %capco.section.repository.class%
-    factory_service: doctrine.orm.default_entity_manager
-    factory_method: getRepository
-    arguments:
-      - Capco\AppBundle\Entity\Section
-
-  capco.highlighted.repository:
-    class: %capco.highlighted.repository.class%
-    factory_service: doctrine.orm.default_entity_manager
-    factory_method: getRepository
-    arguments:
-      - Capco\AppBundle\Entity\HighlightedContent
-
-  capco.section.resolver:
-    class: %capco.section.resolver.class%
-    arguments: [@capco.section.repository, @capco.toggle.manager]
-
-  capco.highlighted.resolver:
-    class: %capco.highlighted.resolver.class%
-    arguments: [@capco.highlighted.repository, @capco.toggle.manager]
-
-  capco.twig.section_resolver:
-    class: %capco.twig.section_resolver.class%
-    arguments: [@capco.section.resolver]
-    tags:
-      - { name: twig.extension }
-
-  capco.twig.highlighted_resolver:
-    class: %capco.twig.highlighted_resolver.class%
-    arguments: [@capco.highlighted.resolver]
-    tags:
-      - { name: twig.extension }
-
-  capco.has_theme_if_activated.validator:
-    class: %capco.has_theme_if_activated.validator.class%
-    arguments: [@capco.toggle.manager]
-    tags:
-      - { name: validator.constraint_validator, alias: has_theme_if_activated.validator }
 
   capco.help_extension:
     class: %capco.help_extension.class%
@@ -299,87 +46,15 @@ services:
     tags:
       - { name: "kernel.event_subscriber" }
 
-  capco.vote.resolver:
-    class: %capco.vote.resolver.class%
-    arguments: [@router, @capco.url.resolver]
-
-  capco.twig.vote:
-    class: %capco.twig.vote.class%
-    arguments: [@capco.vote.resolver]
-    tags:
-      - { name: twig.extension }
-
-  capco.end_after_start.validator:
-    class: %capco.end_after_start.validator.class%
-    tags:
-      - { name: validator.constraint_validator, alias: end_after_start.validator }
-
   capco.comment.subscriber:
     class: Capco\AppBundle\EventListener\CommentSubscriber
     tags:
       - { name: "kernel.event_subscriber" }
 
-  capco.consultation_type.repository:
-    class: Capco\AppBundle\Repository\ConsultationTypeRepository
-    factory_service: doctrine.orm.default_entity_manager
-    factory_method: getRepository
-    arguments:
-      - Capco\AppBundle\Entity\ConsultationType
-
-  capco.is_social_network_url.validator:
-    class: Capco\AppBundle\Validator\Constraints\IsSocialNetworkUrlValidator
-    tags:
-      - { name: validator.constraint_validator, alias: is_social_network_url.validator }
-
   capco.synthesis.log_manager:
     class: Capco\AppBundle\Manager\LogManager
     arguments: [@translator, @fos_user.user_manager, @doctrine.orm.entity_manager]
 
-  capco.serialization_listener:
-    class: Capco\AppBundle\EventListener\SerializationListener
-    arguments: [@capco.synthesis.log_manager, @sonata.media.twig.extension, @jms_serializer]
-    tags:
-      - { name: "jms_serializer.event_subscriber" }
-
-  capco.comment.serialization_listener:
-    class: Capco\AppBundle\EventListener\CommentSerializationListener
-    arguments: [@router, @security.token_storage]
-    scope: request
-    tags:
-      - { name: "jms_serializer.event_subscriber" }
-
-  capco.argument.serialization_listener:
-    class: Capco\AppBundle\EventListener\ArgumentSerializationListener
-    arguments: [@router, @security.token_storage]
-    scope: request
-    tags:
-      - { name: "jms_serializer.event_subscriber" }
-
-  capco.source.serialization_listener:
-    class: Capco\AppBundle\EventListener\SourceSerializationListener
-    arguments: [@router, @security.token_storage]
-    scope: request
-    tags:
-      - { name: "jms_serializer.event_subscriber" }
-
-  capco.opinion.serialization_listener:
-    class: Capco\AppBundle\EventListener\OpinionSerializationListener
-    arguments: [@router, @security.token_storage]
-    scope: request
-    tags:
-      - { name: "jms_serializer.event_subscriber" }
-
-  capco.user.serialization_listener:
-    class: Capco\AppBundle\EventListener\UserSerializationListener
-    arguments: [@router]
-    scope: request
-    tags:
-      - { name: "jms_serializer.event_subscriber" }
-
-  capco.synthesis.synthesis_listener:
-    class: Capco\AppBundle\EventListener\SynthesisLoggableListener
-    calls:
-      - [ setAnnotationReader, [ @annotation_reader ] ]
 
   capco.synthesis.synthesis_handler:
     class: Capco\AppBundle\Synthesis\Handler\SynthesisHandler
@@ -392,35 +67,3 @@ services:
   capco.synthesis.consultation_step_extractor:
     class: Capco\AppBundle\Synthesis\Extractor\ConsultationStepExtractor
     arguments: [@doctrine.orm.entity_manager, @translator, @router, @capco.opinion_types.resolver]
-
-  capco.search.resolver:
-    class: Capco\AppBundle\Resolver\SearchResolver
-    arguments: [@fos_elastica.index, @fos_elastica.elastica_to_model_transformer.collection.app]
-
-  capco.twig.url:
-    class: Capco\AppBundle\Twig\UrlExtension
-    arguments: [@capco.url.resolver]
-    tags:
-      - { name: twig.extension }
-
-  capco.opinion_type.repository:
-      class: Capco\AppBundle\Repository\OpinionTypeRepository
-      factory_service: doctrine.orm.default_entity_manager
-      factory_method: getRepository
-      arguments:
-        - Capco\AppBundle\Entity\OpinionType
-
-  capco.opinion.repository:
-        class: Capco\AppBundle\Repository\OpinionRepository
-        factory_service: doctrine.orm.default_entity_manager
-        factory_method: getRepository
-        arguments:
-          - Capco\AppBundle\Entity\Opinion
-
-  capco.opinion_types.resolver:
-      class: Capco\AppBundle\Resolver\OpinionTypesResolver
-      arguments: [@capco.opinion_type.repository, @capco.opinion.repository, @router]
-
-  capco.url.resolver:
-      class: Capco\AppBundle\Resolver\UrlResolver
-      arguments: [@router]

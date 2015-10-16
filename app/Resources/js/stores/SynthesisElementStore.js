@@ -178,6 +178,7 @@ class SynthesisElementStore extends BaseStore {
       case CREATE_ELEMENT_SUCCESS:
         this._resetMessages();
         this._messages.success.push(action.message);
+        this.addChildInTree(action.element);
         this._isProcessing = false;
         this.emitChange();
         break;
@@ -247,8 +248,6 @@ class SynthesisElementStore extends BaseStore {
     this._isInboxSync.archived = false;
     this._isInboxSync.published = false;
     this._isInboxSync.unpublished = false;
-    this._isInboxSync.publishedTree = false;
-    this._isInboxSync.allTree = false;
     this._isInboxSync.fromDivision = false;
     this._isCountSync = false;
   }
@@ -302,6 +301,19 @@ class SynthesisElementStore extends BaseStore {
     const parent = this.getElementInTreeById(tree, parentId);
     if (parent) {
       parent.children = children;
+    }
+  }
+
+  addElementInTree(child) {
+    const tree = this._elements.allTree;
+    const parentId = child.parent;
+    const parent = this.getElementInTreeById(tree, parentId);
+    if (parent) {
+      const children = parent.children;
+      children.push(child);
+      parent.children = children;
+    } else {
+      tree.push(child);
     }
   }
 

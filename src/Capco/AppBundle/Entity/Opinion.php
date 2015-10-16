@@ -868,4 +868,11 @@ class Opinion
             $this->OpinionType->removeOpinion($this);
         }
     }
+
+    public function setVotes($votes)
+    {
+        $this->votes = $votes;
+
+        return $this;
+    }
 }

@@ -23,6 +23,10 @@ class ConsultationStepExtractor
     const LABEL_SOURCES = 'synthesis.consultation_step.sources';
     const LABEL_VERSIONS = 'synthesis.consultation_step.versions';
 
+    const LABEL_CONTEXT = 'synthesis.consultation_step.context';
+    const LABEL_CONTENT = 'synthesis.consultation_step.content';
+    const LABEL_COMMENT = 'synthesis.consultation_step.comment';
+
     protected $em;
     protected $translator;
     protected $router;
@@ -90,7 +94,9 @@ class ConsultationStepExtractor
                 'step' => $this->consultationStep,
                 'OpinionType' => $ot,
             ]);
-            $this->createElementsFromOpinions($opinions, $elementFromOT);
+            if (count($opinions) > 0) {
+                $this->createElementsFromOpinions($opinions, $elementFromOT);
+            }
 
             //Create elements from opinion type children
             $this->createElementsFromOpinionTypes($ot->getChildren(), $elementFromOT);
@@ -372,7 +378,19 @@ class ConsultationStepExtractor
 
         if (!$element->getOriginalDivision()) {
             $element->setTitle($opinion->getTitle());
-            $element->setBody($opinion->getBody());
+
+            $content = '';
+            if (count($opinion->getAppendices()) > 0) {
+                $content .= '<p>' . $this->translator->trans(self::LABEL_CONTEXT, [], 'CapcoAppBundleSynthesis') . '</p>';
+                foreach ($opinion->getAppendices() as $app) {
+                    $content .= '<p>' . $app->getAppendixType()->getTitle() . '</p>';
+                    $content .= $app->getBody();
+                }
+                $content .= '<p>' . $this->translator->trans(self::LABEL_CONTENT, [], 'CapcoAppBundleSynthesis') . '</p>';
+            }
+            $content .= $opinion->getBody();
+
+            $element->setBody($content);
 
             // Set votes
             $votes = array();
@@ -400,7 +418,15 @@ class ConsultationStepExtractor
 
         if (!$element->getOriginalDivision()) {
             $element->setTitle($version->getTitle());
-            $element->setBody($version->getBody());
+
+            $content = '';
+            if ($version->getComment()) {
+                $content .= '<p>' . $this->translator->trans(self::LABEL_COMMENT, [], 'CapcoAppBundleSynthesis') . '</p>';
+                $content .= $version->getComment();
+                $content .= '<p>' . $this->translator->trans(self::LABEL_CONTENT, [], 'CapcoAppBundleSynthesis') . '</p>';
+            }
+            $content .= $version->getBody();
+            $element->setBody($content);
 
             // Set votes
             $votes = array();
