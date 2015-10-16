@@ -37,8 +37,10 @@ class IdeaAdmin extends Admin
             ->add('voteCount', null, array(
                 'label' => 'admin.fields.idea.vote_count',
             ))
-            ->add('Author', null, array(
+            ->add('Author', 'doctrine_orm_model_autocomplete', [
                 'label' => 'admin.fields.idea.author',
+            ], null, array(
+                'property' => 'username'
             ))
             ->add('isEnabled', null, array(
                 'label' => 'admin.fields.idea.is_enabled',
@@ -124,9 +126,10 @@ class IdeaAdmin extends Admin
                 'label' => 'admin.fields.idea.is_commentable',
                 'required' => false,
             ))
-            ->add('Author', 'sonata_type_model', array(
+            ->add('Author', 'sonata_type_model_autocomplete', [
                 'label' => 'admin.fields.idea.author',
-            ))
+                'property' => 'username',
+            ])
         ;
 
         if ($this->getConfigurationPool()->getContainer()->get('capco.toggle.manager')->isActive('themes')) {

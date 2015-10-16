@@ -23,8 +23,10 @@ class SourceAdmin extends Admin
             ->add('body', null, array(
                 'label' => 'admin.fields.source.body',
             ))
-            ->add('Author', null, array(
+            ->add('Author', 'doctrine_orm_model_autocomplete', [
                 'label' => 'admin.fields.source.author',
+            ], null, array(
+                'property' => 'username'
             ))
             ->add('Opinion', null, array(
                 'label' => 'admin.fields.source.opinion',
@@ -113,9 +115,10 @@ class SourceAdmin extends Admin
             ->add('body', null, array(
                 'label' => 'admin.fields.source.body',
             ))
-            ->add('Author', 'sonata_type_model', array(
+            ->add('Author', 'sonata_type_model_autocomplete', [
                 'label' => 'admin.fields.source.author',
-            ))
+                'property' => 'username',
+            ])
             ->add('Opinion', 'sonata_type_model', array(
                 'label' => 'admin.fields.source.opinion',
             ))

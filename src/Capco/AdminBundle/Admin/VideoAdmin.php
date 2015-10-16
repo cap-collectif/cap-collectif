@@ -26,8 +26,10 @@ class VideoAdmin extends Admin
             ->add('title', null, array(
                 'label' => 'admin.fields.video.title',
             ))
-            ->add('Author', null, array(
+            ->add('Author', 'doctrine_orm_model_autocomplete', [
                 'label' => 'admin.fields.video.author',
+            ], null, array(
+                'property' => 'username'
             ))
             ->add('isEnabled', null, array(
                 'label' => 'admin.fields.video.is_enabled',
@@ -53,9 +55,10 @@ class VideoAdmin extends Admin
             ->addIdentifier('title', null, array(
                 'label' => 'admin.fields.video.title',
             ))
-            ->add('Author', 'sonata_type_model', array(
+            ->add('Author', 'sonata_type_model_autocomplete', [
                 'label' => 'admin.fields.video.author',
-            ))
+                'property' => 'username',
+            ])
             ->add('isEnabled', null, array(
                 'label' => 'admin.fields.video.is_enabled',
                 'editable' => true,

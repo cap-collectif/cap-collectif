@@ -2,7 +2,9 @@
 
 namespace Capco\AdminBundle\Admin;
 
+use Capco\AppBundle\Entity\EventComment;
 use Capco\AppBundle\Entity\IdeaComment;
+use Capco\AppBundle\Entity\PostComment;
 use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
@@ -22,8 +24,10 @@ class CommentAdmin extends Admin
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
         $datagridMapper
-            ->add('Author', null, array(
+            ->add('Author', 'doctrine_orm_model_autocomplete', [
                 'label' => 'admin.fields.comment.author',
+            ], null, array(
+                'property' => 'username'
             ))
             ->add('authorName', null, array(
                 'label' => 'admin.fields.comment.author_name',
@@ -214,10 +218,11 @@ class CommentAdmin extends Admin
                 'label' => 'admin.fields.comment.body',
                 'attr' => array('rows' => 8),
             ))
-            ->add('Author', null, array(
+            ->add('Author', 'sonata_type_model_autocomplete', [
                 'label' => 'admin.fields.comment.author',
+                'property' => 'username',
                 'help' => 'admin.help.comment.author',
-            ))
+            ])
             ->add('authorName', null, array(
                 'label' => 'admin.fields.comment.author_name',
             ))

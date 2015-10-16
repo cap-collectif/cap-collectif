@@ -40,8 +40,10 @@ class ReportingAdmin extends Admin
             ->add('Comment', null, array(
                 'label' => 'admin.fields.reporting.comment',
             ))
-            ->add('Reporter', null, array(
+            ->add('Reporter', 'doctrine_orm_model_autocomplete', [
                 'label' => 'admin.fields.reporting.reporter',
+            ], null, array(
+                'property' => 'username'
             ))
             ->add('createdAt', null, array(
                 'label' => 'admin.fields.reporting.created_at',
