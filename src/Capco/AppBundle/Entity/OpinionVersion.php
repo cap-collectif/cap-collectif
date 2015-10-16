@@ -474,4 +474,11 @@ class OpinionVersion
 
         return $this;
     }
+
+    public function setVotes($votes)
+    {
+        $this->votes = $votes;
+
+        return $this;
+    }
 }
