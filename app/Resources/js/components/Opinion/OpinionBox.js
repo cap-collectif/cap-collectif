@@ -88,7 +88,7 @@ const OpinionBox = React.createClass({
                     helpText={this.getOpinionType().votesThresholdHelpText}/>
           : null}
         {this.renderUserAvatarVotes()}
-        <div><FormattedMessage message={this.getIntlMessage('global.votes')} num={opinion.votes.length}/></div>
+        <div><FormattedMessage message={this.getIntlMessage('global.votes')} num={opinion.votes_total}/></div>
       </div>
     );
   },
