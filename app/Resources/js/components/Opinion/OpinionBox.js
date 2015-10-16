@@ -48,12 +48,11 @@ const OpinionBox = React.createClass({
 
   renderUserAvatarVotes() {
     const opinion = this.props.opinion;
-    let votes = opinion.votes;
+    const votes = opinion.votes;
     let moreVotes = null;
 
-    if (opinion.votes.length > 5) {
-      votes = opinion.votes.slice(0, 5);
-      moreVotes = opinion.votes.length - 5;
+    if (opinion.votes_total > 5) {
+      moreVotes = opinion.votes_total - 5;
     }
 
     return (
