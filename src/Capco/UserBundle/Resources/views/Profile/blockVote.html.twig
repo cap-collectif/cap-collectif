@@ -1,17 +1,3 @@
-{% set label = null %}
-{% if vote.value is not defined %}
-    {% set value = 'votes.value.agree' | trans({}, 'CapcoAppBundle') %}
-    {% set label = '<span class="label label-success">' ~ value ~ '</span>' %}
-{% elseif vote.value == 0 %}
-    {% set value = 'votes.value.mitigated' | trans({}, 'CapcoAppBundle') %}
-    {% set label = '<span class="label label-warning">' ~ value ~ '</span>' %}
-{% elseif vote.value == 1 %}
-    {% set value = 'votes.value.agree' | trans({}, 'CapcoAppBundle') %}
-    {% set label = '<span class="label label-success">' ~ value ~ '</span>' %}
-{% elseif vote.value == -1 %}
-    {% set value = 'votes.value.disagree' | trans({}, 'CapcoAppBundle') %}
-    {% set label = '<span class="label label-danger">' ~ value ~ '</span>' %}
-{% endif %}
 <li class="opinion  opinion--vote {% if classes is defined %}{{ classes }}{% endif %}" id="vote-{{ vote.id }}">
     <div class="opinion__body">
         {% include 'CapcoUserBundle:Avatar:avatar.html.twig' with { 'user': vote.user, 'link_classes': 'pull-left'} only %}
@@ -22,7 +8,15 @@
                 <a href="{{ capco_vote_object_url(vote) }}">{{ capco_vote_object(vote) }}</a>
             </p>
             <p class="excerpt  opinion__date">{{ vote.updatedAt | localizeddate('long', 'short', app.request.locale) }}</p>
-            <p>{{ label | raw }}</p>
+            <p>
+                {% if vote.value is not defined or vote.value == 1 %}
+                    <span class="label label-success">{{ 'votes.value.agree' | trans({}, 'CapcoAppBundle') }}</span>
+                {% elseif vote.value == 0 %}
+                    <span class="label label-warning">{{ 'votes.value.mitigated' | trans({}, 'CapcoAppBundle') }}</span>
+                {% else %}
+                    <span class="label label-danger">{{ 'votes.value.disagree' | trans({}, 'CapcoAppBundle') }}</span>
+                {% endif %}
+            </p>
         </div>
     </div>
 </li>
