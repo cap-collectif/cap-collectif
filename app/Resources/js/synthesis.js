@@ -9,12 +9,12 @@ RouterContainer.set(router);
 AuthService
 .login()
 .then(() => {
-  /*if ($('#render-synthesis-view-box').length) {
+  if ($('#render-synthesis-view-box').length) {
     React.render(
       <SynthesisBox synthesis_id={$('#render-synthesis-view-box').data('synthesis')} mode="view" {...IntlData} />,
       document.getElementById('render-synthesis-view-box')
     );
-  }*/
+  }
 
   if ($('#render-synthesis-edit-box').length) {
     router.run((Handler, state) => {

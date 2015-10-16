@@ -21,7 +21,7 @@ const ViewBox = React.createClass({
   },
 
   componentDidMount() {
-    this.fetchRootElements();
+    this.loadRootElementsFromServer();
   },
 
   componentWillUnmount() {
@@ -29,7 +29,19 @@ const ViewBox = React.createClass({
   },
 
   onChange() {
-    this.fetchRootElements();
+    if (!SynthesisElementStore.isProcessing && SynthesisElementStore.isInboxSync.publishedTree) {
+      this.setState({
+        elements: SynthesisElementStore.elements,
+        isLoading: false,
+      });
+      return;
+    }
+
+    this.setState({
+      isLoading: true,
+    }, () => {
+      this.loadRootElementsFromServer();
+    });
   },
 
   renderElementsList() {
@@ -55,24 +67,6 @@ const ViewBox = React.createClass({
         {this.renderElementsList()}
       </div>
     );
-  },
-
-  fetchRootElements() {
-    if (!SynthesisElementStore.isProcessing) {
-      if (SynthesisElementStore.isInboxSync.publishedTree) {
-        this.setState({
-          elements: SynthesisElementStore.elements.publishedTree,
-          isLoading: false,
-        });
-        return;
-      }
-
-      this.setState({
-        isLoading: true,
-      }, () => {
-        this.loadRootElementsFromServer();
-      });
-    }
   },
 
   loadRootElementsFromServer() {

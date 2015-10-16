@@ -4,7 +4,6 @@ namespace spec\Capco\AppBundle\Synthesis\Handler;
 
 use Capco\AppBundle\Entity\Synthesis\Synthesis;
 use Capco\AppBundle\Entity\ConsultationStep;
-use Capco\AppBundle\Repository\Synthesis\SynthesisRepository;
 use Capco\AppBundle\Synthesis\Extractor\ConsultationStepExtractor;
 use PhpSpec\ObjectBehavior;
 use Doctrine\ORM\EntityManager;
@@ -51,10 +50,10 @@ class SynthesisHandlerSpec extends ObjectBehavior
         $this->updateSynthesis($synthesis)->shouldReturnAnInstanceOf('Capco\AppBundle\Entity\Synthesis\Synthesis');
     }
 
-    function it_can_get_a_synthesis(EntityManager $em, ConsultationStepExtractor $csExtractor, SynthesisRepository $repo, $id, Synthesis $synthesis)
+    function it_can_get_a_synthesis(EntityManager $em, ConsultationStepExtractor $csExtractor, EntityRepository $repo, $id, Synthesis $synthesis)
     {
         $em->getRepository('CapcoAppBundle:Synthesis\Synthesis')->willReturn($repo)->shouldBeCalled();
-        $repo->getOne($id)->willReturn($synthesis)->shouldBeCalled();
+        $repo->find($id)->willReturn($synthesis)->shouldBeCalled();
 
         $this->beConstructedWith($em, $csExtractor);
         $this->getSynthesis($id)->shouldReturnAnInstanceOf('Capco\AppBundle\Entity\Synthesis\Synthesis');

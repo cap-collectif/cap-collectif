@@ -10,27 +10,38 @@ Feature: Opinions Versions
     {
       "versions": [
         {
-          "votes_total": @integer@,
+          "id": @integer@,
+          "title": @string@,
+          "body": @string@,
+          "comment": @string@,
+          "created_at": "@string@.isDateTime()",
+          "updated_at": "@string@.isDateTime()",
+          "is_trashed": @boolean@,
+          "isContribuable": @boolean@,
+
+          "arguments": @...@,
           "arguments_yes_count": @integer@,
           "arguments_no_count": @integer@,
-          "id": @integer@,
+          "arguments_count": @integer@,
 
-          "author": {
-            "username": @string@,
-            "displayName": @string@,
-            "uniqueId": @string@,
-            "isAdmin": @boolean@,
-            "media": @...@,
-            "vip": @boolean@,
-            "_links": {
-              "profile": @string@,
-              "settings": @string@
-            }
-          },
+          "sources": @...@,
+          "sources_count": @integer@,
+
+          "votes": @...@,
+          "votes_nok": @integer@,
+          "votes_ok": @integer@,
+          "votes_mitige": @integer@,
+          "votes_total": @integer@,
 
           "parent": {
+            "isContribuable": @boolean@,
+            "id": @integer@,
+            "body": @string@,
+            "title": @string@,
             "type": {
-              "voteWidgetType": @integer@
+              "id": @integer@,
+              "title": @string@,
+              "color": @string@
             },
             "_links": {
               "show": @string@,
@@ -41,25 +52,25 @@ Feature: Opinions Versions
             "user_vote": @null@,
             "has_user_reported": @boolean@
           },
-
-          "sources_count": @integer@,
-          "arguments_count": @integer@,
-          "updated_at": "@string@.isDateTime()",
-          "ranking": @integer@,
-          "title": @string@,
-          "slug": @string@,
-          "created_at": "@string@.isDateTime()",
-          "votes_nok": @integer@,
-          "votes_ok": @integer@,
-          "votes_mitige": @integer@,
-
+          "author": {
+            "username": @string@,
+            "displayName": @string@,
+            "uniqueId": @string@,
+            "isAdmin": @boolean@,
+            "media": @...@,
+            "_links": {
+              "profile": @string@,
+              "settings": @string@
+            }
+          },
           "_links": {
             "show": @string@,
             "report": @string@
           },
-
           "user_vote": @null@,
-          "has_user_reported": @boolean@
+          "has_user_reported": @boolean@,
+
+          "ranking": @integer@
         },
         @...@
       ],
@@ -199,7 +210,7 @@ Feature: Opinions Versions
     """
     {
       "code": 400,
-      "message": "Bad Request",
+      "message": "Can't add a version to an uncontributable opinion.",
       "errors": @null@
     }
     """

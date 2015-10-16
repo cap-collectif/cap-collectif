@@ -2,14 +2,14 @@ Feature: Synthesis
 
 # View
 
-#@javascript
-#Scenario: Anonymous wants to see synthesis view
-#  Given I visited "consultation page" with:
-#    | consultationSlug   | strategie-technologique-de-l-etat-et-services-publics |
-#    | stepSlug           | collecte-des-avis-pour-une-meilleur-strategie         |
-#  And I follow "Synthèse"
-#  And I wait 5 seconds
-#  Then I should see 1 ".synthesis__view" elements
+@javascript
+Scenario: Anonymous wants to see synthesis view
+  Given I visited "consultation page" with:
+    | consultationSlug   | strategie-technologique-de-l-etat-et-services-publics |
+    | stepSlug           | collecte-des-avis-pour-une-meilleur-strategie         |
+  And I follow "Synthèse"
+  And I wait 5 seconds
+  Then I should see 1 ".synthesis__view" elements
 
 
 # Edition
@@ -46,7 +46,7 @@ Scenario: Admin wants to see new elements list
   And I follow "Synthèse"
   And I follow "Éditer"
   And I wait 5 seconds
-  Then I should see 15 ".element" elements
+  Then I should see 6 ".element" elements
 
 @javascript
 Scenario: Admin wants to see archived elements list
@@ -59,7 +59,7 @@ Scenario: Admin wants to see archived elements list
   And I wait 5 seconds
   And I follow "Traitées"
   And I wait 5 seconds
-  Then I should see 2 ".element" elements
+  Then I should see 11 ".element" elements
 
 @javascript
 Scenario: Admin wants to see published elements list
@@ -72,7 +72,7 @@ Scenario: Admin wants to see published elements list
   And I wait 5 seconds
   And I follow "Classées"
   And I wait 5 seconds
-  Then I should see 2 ".element" elements
+  Then I should see 11 ".element" elements
 
 @javascript
 Scenario: Admin wants to see unpublished elements list
@@ -100,18 +100,18 @@ Scenario: Admin wants to see all elements list
   And I wait 5 seconds
   Then I should see 15 ".element" elements
 
-#@javascript
-#Scenario: Admin wants to see elements tree
-#  Given I am logged in as admin
-#  And I visited "consultation page" with:
-#    | consultationSlug | strategie-technologique-de-l-etat-et-services-publics |
-#    | stepSlug         | collecte-des-avis-pour-une-meilleur-strategie         |
-#  And I follow "Synthèse"
-#  And I follow "Éditer"
-#  And I wait 5 seconds
-#  And I follow "Les contributions"
-#  And I wait 5 seconds
-#  Then I should see 2 ".synthesis__content .tree--level-0 > .tree__item" elements
+@javascript
+Scenario: Admin wants to see elements tree
+  Given I am logged in as admin
+  And I visited "consultation page" with:
+    | consultationSlug | strategie-technologique-de-l-etat-et-services-publics |
+    | stepSlug         | collecte-des-avis-pour-une-meilleur-strategie         |
+  And I follow "Synthèse"
+  And I follow "Éditer"
+  And I wait 5 seconds
+  And I follow "Les contributions"
+  And I wait 5 seconds
+  Then I should see 2 ".synthesis__content .tree--level-0 > .tree__item" elements
 
   # Element details
 
@@ -153,7 +153,7 @@ Scenario: Admin wants to ignore an element
   And I should see 11 ".element" element
   And I follow "Traitées"
   And I wait 5 seconds
-  Then I should see 12 ".element" element
+  Then I should see 15 ".element" element
 
 @javascript @database
 Scenario: Admin wants to publish an element without note, comment or parent
@@ -173,7 +173,11 @@ Scenario: Admin wants to publish an element without note, comment or parent
   And I should see "L'élément a été traité avec succès."
   And I follow "Traitées"
   And I wait 5 seconds
-  And I should see 3 ".element" element
+  And I should see 12 ".element" element
+  And I follow "Les contributions"
+  And I wait 5 seconds
+  And I should see 2 ".synthesis__content .tree--level-0 > .tree__item" elements
+  And I should see 1 ".synthesis__content .tree--level-1 > .tree__item" elements
 
 @javascript @database
 Scenario: Admin wants to publish an element with note
@@ -193,9 +197,14 @@ Scenario: Admin wants to publish an element with note
   And I click the "button[type='submit']" element
   And I wait 5 seconds
   And I should see "L'élément a été traité avec succès."
+  And I follow "Les contributions"
+  And I wait 5 seconds
+  And I should see 2 ".synthesis__content .tree--level-0 > .tree__item" elements
+  And I should see 1 ".synthesis__content .tree--level-1 > .tree__item" elements
+  And I should see 3 ".synthesis__content .tree--level-2 > .tree__item" elements
   And I follow "Traitées"
   And I wait 5 seconds
-  And I should see 3 ".element" element
+  And I should see 12 ".element" element
   And I follow "Opinion 52"
   And I wait 5 seconds
   And "#notation-star-1" element should have class "active"
@@ -224,7 +233,10 @@ Scenario: Admin wants to publish an element with parent
   And I should see "L'élément a été traité avec succès."
   And I follow "Traitées"
   And I wait 5 seconds
-  And I should see 3 ".element" element
+  And I should see 12 ".element" element
+  And I follow "Les contributions"
+  And I wait 5 seconds
+  And I should see 3 ".synthesis__content .tree--level-0 > .tree__item" elements
 
 @javascript @database
 Scenario: Admin wants to publish an element with comment
@@ -247,7 +259,7 @@ Scenario: Admin wants to publish an element with comment
   And I should see "L'élément a été traité avec succès."
   And I follow "Traitées"
   And I wait 5 seconds
-  And I should see 3 ".element" element
+  And I should see 12 ".element" element
 
 @javascript @dev
 Scenario: Admin wants to divide an element without selecting text
@@ -264,7 +276,7 @@ Scenario: Admin wants to divide an element without selecting text
   And I wait 5 seconds
   And I click the ".division__create-element" element
   And I wait 5 seconds
-  Then I should see "Veuillez sélectionner du texte dans le contenu pour créer une nouvelle contribution."
+  Then I should see "Veuillez sélectionner du texte pour créer une contribution."
 
 @javascript
 Scenario: Admin wants to create an element
@@ -285,6 +297,9 @@ Scenario: Admin wants to create an element
   And I click the "button[type='submit']" element
   And I wait 5 seconds
   Then I follow "Traitées"
+  And I wait 5 seconds
+  And I should see "Bisous" in the ".synthesis__content" element
+  And I follow "Les contributions"
   And I wait 5 seconds
   And I should see "Bisous" in the ".synthesis__content" element
 

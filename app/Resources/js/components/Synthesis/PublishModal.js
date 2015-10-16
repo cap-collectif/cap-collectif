@@ -23,9 +23,7 @@ const PublishModal = React.createClass({
       parent: this.props.element ? this.props.element.parent : null,
       comment: this.props.element ? this.props.element.comment : null,
       elements: [],
-      expanded: {
-        root: true,
-      },
+      expanded: this.getExpandedBasedOnElement(),
       isLoading: true,
     };
   },
@@ -41,7 +39,7 @@ const PublishModal = React.createClass({
   },
 
   componentDidMount() {
-    this.fetchElements();
+    this.loadElementsTreeFromServer();
   },
 
   componentWillReceiveProps(nextProps) {
@@ -62,23 +60,53 @@ const PublishModal = React.createClass({
   },
 
   onChange() {
-    this.fetchElements();
+    if (!SynthesisElementStore.isProcessing && SynthesisElementStore.isInboxSync.allTree) {
+      this.setState({
+        elements: SynthesisElementStore.elements.allTree,
+        expanded: SynthesisElementStore.expandedNavbarItems,
+        selectedId: SynthesisElementStore.selectedNavbarItem,
+        isLoading: false,
+      });
+      return;
+    }
+
+    this.setState({
+      isLoading: true,
+    }, () => {
+      this.loadElementsTreeFromServer();
+    });
   },
 
   getExpandedBasedOnElement() {
     const expanded = {
       root: true,
     };
-    const element = this.props.element;
-    if (this.state.elements && element && element.id !== 'root') {
-      expanded[element.id] = true;
+    if (this.props.elements && this.props.element && this.props.element !== 'root') {
+      expanded[this.props.element.id] = true;
+      const element = this.getElementInTreeById(this.props.elements, this.props.element.id);
       if (element) {
-        element.path.split(',').map((id) => {
+        element.parents_ids.map((id) => {
           expanded[id] = true;
         });
       }
     }
     return expanded;
+  },
+
+  getElementInTreeById(elements, id) {
+    for (let i = 0; i < elements.length; i++) {
+      const element = elements[i];
+      if (element.id === id) {
+        return element;
+      }
+      if (element.children.length > 0) {
+        const found = this.getElementInTreeById(element.children, id);
+        if (found) {
+          return found;
+        }
+      }
+    }
+    return null;
   },
 
   renderParent() {
@@ -95,7 +123,7 @@ const PublishModal = React.createClass({
   renderParentFinder() {
     const parentId = this.state.parent ? this.state.parent.id : 'root';
     return (
-      <ElementsFinder synthesis={this.props.synthesis} type="all" elements={this.state.elements} expanded={this.state.expanded} selectedId={parentId} onSelect={this.setParent} onExpand={this.expandItem} />
+      <ElementsFinder synthesis={this.props.synthesis} elements={this.state.elements} expanded={this.state.expanded} selectedId={parentId} onSelect={this.setParent} onExpand={this.expandItem} />
     );
   },
 
@@ -197,26 +225,6 @@ const PublishModal = React.createClass({
     this.setState({
       expanded: expanded,
     });
-  },
-
-  fetchElements() {
-    if (!SynthesisElementStore.isFetchingTree) {
-      if (SynthesisElementStore.isInboxSync.allTree) {
-        this.setState({
-          elements: SynthesisElementStore.elements.allTree,
-          expanded: SynthesisElementStore.expandedNavbarItems,
-          selectedId: SynthesisElementStore.selectedNavbarItem,
-          isLoading: false,
-        });
-        return;
-      }
-
-      this.setState({
-        isLoading: true,
-      }, () => {
-        this.loadElementsTreeFromServer();
-      });
-    }
   },
 
   loadElementsTreeFromServer() {

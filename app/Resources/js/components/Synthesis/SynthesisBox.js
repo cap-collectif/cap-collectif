@@ -7,7 +7,7 @@ import SynthesisElementStore from '../../stores/SynthesisElementStore';
 const SynthesisBox = React.createClass({
   propTypes: {
     mode: React.PropTypes.string,
-    synthesis_id: React.PropTypes.string.isRequired,
+    synthesis_id: React.PropTypes.string,
   },
   mixins: [ReactIntl.IntlMixin],
 
@@ -36,7 +36,7 @@ const SynthesisBox = React.createClass({
   onChange() {
     this.setState({
       messages: SynthesisElementStore.messages,
-     });
+    });
   },
 
   renderBoxMode() {

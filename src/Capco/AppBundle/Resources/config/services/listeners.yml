@@ -1,0 +1,59 @@
+parameters:
+  capco.toggle.listener.request.class: Capco\AppBundle\Toggle\RequestListener
+
+services:
+  capco.toggle.listener.request:
+    class:     %capco.toggle.listener.request.class%
+    arguments: [@capco.toggle.manager, @translator, @capco.site_parameter.resolver, %shield_login%, %shield_pwd%]
+    tags:
+      - { name: kernel.event_listener, event: kernel.request, method: onKernelRequest }
+
+  capco.serialization_listener:
+    class: Capco\AppBundle\EventListener\SerializationListener
+    arguments: [@capco.synthesis.log_manager, @sonata.media.twig.extension, @jms_serializer]
+    tags:
+      - { name: "jms_serializer.event_subscriber" }
+
+  capco.comment.serialization_listener:
+    class: Capco\AppBundle\EventListener\CommentSerializationListener
+    arguments: [@router, @security.token_storage]
+    scope: request
+    tags:
+      - { name: "jms_serializer.event_subscriber" }
+
+  capco.argument.serialization_listener:
+    class: Capco\AppBundle\EventListener\ArgumentSerializationListener
+    arguments: [@router, @security.token_storage]
+    scope: request
+    tags:
+      - { name: "jms_serializer.event_subscriber" }
+
+  capco.source.serialization_listener:
+    class: Capco\AppBundle\EventListener\SourceSerializationListener
+    arguments: [@router, @security.token_storage]
+    scope: request
+    tags:
+      - { name: "jms_serializer.event_subscriber" }
+
+  capco.opinion.serialization_listener:
+    class: Capco\AppBundle\EventListener\OpinionSerializationListener
+    arguments:
+      - @router
+      - @security.token_storage
+      - @capco.abstract_vote.repository
+      - @capco.toggle.manager
+    scope: request
+    tags:
+      - { name: "jms_serializer.event_subscriber" }
+
+  capco.user.serialization_listener:
+    class: Capco\AppBundle\EventListener\UserSerializationListener
+    arguments: [@router]
+    scope: request
+    tags:
+      - { name: "jms_serializer.event_subscriber" }
+
+  capco.synthesis.synthesis_listener:
+    class: Capco\AppBundle\EventListener\SynthesisLoggableListener
+    calls:
+      - [ setAnnotationReader, [ @annotation_reader ] ]

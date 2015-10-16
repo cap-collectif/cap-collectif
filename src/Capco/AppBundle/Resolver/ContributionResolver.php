@@ -77,7 +77,7 @@ class ContributionResolver
         uasort($contributors, function ($a, $b) { return $b['total'] - $a['total']; });
 
         if ($pagination && $page) {
-            $contributorsPage = array_slice($contributors, $pagination * $page - $pagination, $pagination, true);
+            $contributorsPage = array_slice($contributors, $pagination*$page - $pagination, $pagination, true);
 
             $users = $this->repository->findWithMediaByIds(array_keys($contributorsPage));
 
