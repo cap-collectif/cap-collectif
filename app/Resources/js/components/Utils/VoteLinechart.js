@@ -41,7 +41,7 @@ const VoteLinechart = React.createClass({
 
     $.each(this.props.history, function(i, row) {
       lines.push([
-        new Date(1000 * parseInt(row[0])),
+        new Date(1000 * parseInt(row[0], 10)),
         row[1],
         row[2],
         row[3],
@@ -50,7 +50,7 @@ const VoteLinechart = React.createClass({
 
     const options = {
       hAxis: {titleTextStyle: {color: '#333'}},
-      vAxis: {title: this.getIntlMessage('vote.votes'),  minValue: 0},
+      vAxis: {title: this.getIntlMessage('vote.votes'), minValue: 0},
       isStacked: true,
       colors: ['#d9534f', '#f0ad4e', '#5cb85c'],
       height: this.props.height,
