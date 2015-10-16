@@ -156,6 +156,13 @@ class OpinionType
     /**
      * @var bool
      *
+     * @ORM\Column(name="linkable", type="boolean")
+     */
+    private $linkable = false;
+
+    /**
+     * @var bool
+     *
      * @ORM\Column(name="sourceable", type="boolean")
      */
     private $sourceable = true;
@@ -541,6 +548,18 @@ class OpinionType
     public function setVersionable($versionable)
     {
         $this->versionable = $versionable;
+
+        return $this;
+    }
+
+    public function isLinkable()
+    {
+        return $this->linkable;
+    }
+
+    public function setLinkable($linkable)
+    {
+        $this->linkable = $linkable;
 
         return $this;
     }

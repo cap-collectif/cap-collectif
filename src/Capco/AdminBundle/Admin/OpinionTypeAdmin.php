@@ -124,6 +124,10 @@ class OpinionTypeAdmin extends Admin
                 'label' => 'admin.fields.opinion_type.versionable',
                 'required' => false,
             ))
+            ->add('linkable', null, array(
+                'label' => 'admin.fields.opinion_type.linkable',
+                'required' => false,
+            ))
             ->add('sourceable', null, array(
                 'label' => 'admin.fields.opinion_type.sourceable',
                 'required' => false,

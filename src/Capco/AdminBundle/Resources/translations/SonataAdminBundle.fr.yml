@@ -358,6 +358,7 @@ admin:
       title: Titre
       updated_at: Mise à jour
       versionable: Autoriser les modifications
+      linkable: Autoriser les liaisons
       vote_widget_type: Type de vote
       votes_help_text: Texte d'aide pour les votes
       votes_threshold: Seuil de votes

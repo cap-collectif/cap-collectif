@@ -103,7 +103,7 @@ const OpinionTabs = React.createClass({
   },
 
   render() {
-    if (this.isSourceable() + this.isCommentable() + this.isVersionable() + this.hasStatistics() > 1) {
+    if (this.isSourceable() + this.isCommentable() + this.isVersionable() + this.hasStatistics() + this.isLinkable() > 1) {
       // at least two tabs
       const opinion = this.props.opinion;
 
@@ -169,23 +169,22 @@ const OpinionTabs = React.createClass({
     return null;
   },
 
+  getType() {
+    return this.props.opinion.parent ? this.props.opinion.parent.type : this.props.opinion.type;
+  },
+
   isLinkable() {
-    return true;
+    const type = this.getType();
+    return type !== 'undefined' ? type.linkable : false;
   },
 
   isSourceable() {
-    const type = this.props.opinion.parent ? this.props.opinion.parent.type : this.props.opinion.type;
-    if (type !== 'undefined') {
-      return type.sourceable;
-    }
-    return false;
+    const type = this.getType();
+    return type !== 'undefined' ? type.sourceable : false;
   },
 
   isCommentable() {
-    if (this.getCommentSystem() === COMMENT_SYSTEM_SIMPLE || this.getCommentSystem() === COMMENT_SYSTEM_BOTH) {
-      return true;
-    }
-    return false;
+    return this.getCommentSystem() === COMMENT_SYSTEM_SIMPLE || this.getCommentSystem() === COMMENT_SYSTEM_BOTH;
   },
 
   isVersionable() {

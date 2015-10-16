@@ -22,7 +22,7 @@ const OpinionBody = React.createClass({
                 <p className="control-label h5">
                   {this.getIntlMessage('opinion.version_comment')}
                 </p>
-                <Well bsSize="small" >
+                <Well bsSize="small">
                   <div dangerouslySetInnerHTML={{__html: opinion.comment}} />
                 </Well>
               </div>

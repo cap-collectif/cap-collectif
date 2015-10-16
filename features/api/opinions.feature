@@ -27,6 +27,7 @@ Feature: Opinions
           "commentSystem": @integer@,
           "color": @string@,
           "versionable": @boolean@,
+          "linkable": @boolean@,
           "sourceable": @boolean@,
           "votesThreshold": @integer@,
           "votesThresholdHelpText": @string@
@@ -229,6 +230,7 @@ Feature: Opinions
           "commentSystem": @integer@,
           "color": @string@,
           "versionable": @boolean@,
+          "linkable": @boolean@,
           "sourceable": @boolean@,
           "votesThreshold": @integer@,
           "votesThresholdHelpText": @string@
