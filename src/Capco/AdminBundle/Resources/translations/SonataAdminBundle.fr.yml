@@ -593,6 +593,7 @@ capco:
     reporting: Signalement
     search: Rechercher sur le site
     versions: Modifications
+    votes_evolution: "Graphe d'évolution des votes"
 
 action_enable: Activer
 action_disable: Désactiver
