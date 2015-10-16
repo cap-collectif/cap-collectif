@@ -90,8 +90,6 @@ const OpinionTabs = React.createClass({
   },
 
   render() {
-    console.log(this.isSourceable() + this.isCommentable() + this.isVersionable() + this.hasStatistics());
-
     if (this.isSourceable() + this.isCommentable() + this.isVersionable() + this.hasStatistics() > 1) {
       // at least two tabs
       const opinion = this.props.opinion;
