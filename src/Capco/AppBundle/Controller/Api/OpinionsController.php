@@ -236,14 +236,6 @@ class OpinionsController extends FOSRestController
     {
         $consultation = $opinion->getStep()->getConsultation();
 
-        $votes = $this->get('doctrine.orm.entity_manager')
-            ->getRepository('CapcoAppBundle:OpinionVersion')
-            ->getWithVotes($version->getId(), 5);
-
-        if (is_object($votes)) {
-            $version->setVotes($votes->getVotes());
-        }
-
         return [
             'version' => $version,
             'rankingThreshold' => $consultation->getVersionsRankingThreshold(),
