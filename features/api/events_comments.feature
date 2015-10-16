@@ -175,7 +175,7 @@ Feature: Events comments
     """
     {
       "code": 404,
-      "message": "This parent comment is not linked to this event",
+      "message": "Not Found",
       "errors": @null@
     }
     """

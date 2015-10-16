@@ -44,7 +44,7 @@ class SynthesisHandler
 
     public function getSynthesis($id)
     {
-        if (!($synthesis = $this->em->getRepository('CapcoAppBundle:Synthesis\Synthesis')->find($id))) {
+        if (!($synthesis = $this->em->getRepository('CapcoAppBundle:Synthesis\Synthesis')->getOne($id))) {
             throw new NotFoundHttpException(sprintf('The resource \'%s\' was not found.', $id));
         }
 

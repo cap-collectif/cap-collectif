@@ -22,5 +22,8 @@ synthesis:
       pros: Arguments pour
       cons: Arguments contre
       simple: Avis
+    comment: Explication
+    content: Contenu
+    context: Éléments de contexte
     sources: Sources
     versions: Modifications

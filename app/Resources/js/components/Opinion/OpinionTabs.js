@@ -3,10 +3,9 @@ import {COMMENT_SYSTEM_SIMPLE, COMMENT_SYSTEM_BOTH} from '../../constants/Argume
 import OpinionArgumentsBox from './OpinionArgumentsBox';
 import OpinionVersionsBox from './OpinionVersionsBox';
 import OpinionSourcesBox from './OpinionSourcesBox';
-import VoteLinechart from '../Utils/VoteLinechart';
 
 const TabbedArea = ReactBootstrap.TabbedArea;
-const Tab = ReactBootstrap.Tab;
+const TabPane = ReactBootstrap.TabPane;
 const FormattedMessage = ReactIntl.FormattedMessage;
 
 const OpinionTabs = React.createClass({
@@ -39,9 +38,6 @@ const OpinionTabs = React.createClass({
     }
     if (hash.indexOf('source') !== -1) {
       key = 'sources';
-    }
-    if (hash.indexOf('evolution') !== -1) {
-      key = 'evolution';
     }
     return key;
   },
@@ -81,51 +77,37 @@ const OpinionTabs = React.createClass({
     return <OpinionSourcesBox {...this.props} />;
   },
 
-  renderStatisticsContent() {
-    const opinion = this.props.opinion;
-
-    return (
-      <VoteLinechart top={20} height={300} width={847} history={opinion.history.votes} />
-    );
-  },
-
   render() {
-    if (this.isSourceable() + this.isCommentable() + this.isVersionable() + this.hasStatistics() > 1) {
-      // at least two tabs
-      const opinion = this.props.opinion;
+    const opinion = this.props.opinion;
+    let tabNumber = this.isSourceable() ? 1 : 0;
+    tabNumber += this.isCommentable() ? 1 : 0;
+    tabNumber += this.isVersionable() ? 1 : 0;
 
+    if (tabNumber > 1) {
       return (
         <TabbedArea defaultActiveKey={this.getDefaultKey()} animation={false}>
           { this.isVersionable()
-            ? <Tab id="opinion__versions" className="opinion-tabs" eventKey={'versions'} title={
+            ? <TabPane id="opinion__versions" className="opinion-tabs" eventKey={'versions'} tab={
                 <FormattedMessage message={this.getIntlMessage('global.versions')} num={opinion.versions_count} />
               }>
                 {this.renderVersionsContent()}
-              </Tab>
+              </TabPane>
             : null
           }
           { this.isCommentable()
-            ? <Tab id="opinion__arguments" className="opinion-tabs" eventKey={'arguments'} title={
-                <FormattedMessage message={this.getArgumentsTrad()} num={opinion.arguments_count} />
+            ? <TabPane id="opinion__arguments" className="opinion-tabs" eventKey={'arguments'} tab={
+                <FormattedMessage message={this.getArgumentsTrad()} num={this.props.opinion.arguments_count} />
               }>
                 {this.renderArgumentsContent()}
-              </Tab>
+              </TabPane>
             : null
           }
           { this.isSourceable()
-            ? <Tab id="opinion__sources" className="opinion-tabs" eventKey={'sources'} title={
+            ? <TabPane id="opinion__sources" className="opinion-tabs" eventKey={'sources'} tab={
                 <FormattedMessage message={this.getIntlMessage('global.sources')} num={opinion.sources_count} />
               }>
                 {this.renderSourcesContent()}
-              </Tab>
-            : null
-          }
-          { this.hasStatistics()
-            ? <Tab id="opinion__evolution" className="opinion-tabs" eventKey={'evolution'} title={
-                <FormattedMessage message={this.getIntlMessage('global.votes_evolution')} />
-              }>
-                {this.renderStatisticsContent()}
-              </Tab>
+              </TabPane>
             : null
           }
         </TabbedArea>
@@ -140,9 +122,6 @@ const OpinionTabs = React.createClass({
     }
     if (this.isCommentable()) {
       return this.renderArgumentsContent();
-    }
-    if (this.hasStatistics()) {
-      return this.renderStatisticsContent();
     }
 
     return null;
@@ -170,10 +149,6 @@ const OpinionTabs = React.createClass({
 
   isVersion() {
     return !!this.props.opinion.parent;
-  },
-
-  hasStatistics() {
-    return !!this.props.opinion.history;
   },
 
 });

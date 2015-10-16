@@ -14,6 +14,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\Synthesis\SynthesisElementRepository")
  * @ORM\HasLifecycleCallbacks()
  * @Gedmo\Loggable()
+ * @Gedmo\Tree(type="materializedPath")
  * @Gedmo\SoftDeleteable(fieldName="deletedAt")
  */
 class SynthesisElement
@@ -91,7 +92,20 @@ class SynthesisElement
     private $division = null;
 
     /**
+     * @Gedmo\TreeLevel
+     * @ORM\Column(name="level", type="integer", nullable=true)
+     */
+    private $level;
+
+    /**
+     * @Gedmo\TreePath(appendId=true, startsWithSeparator=false, endsWithSeparator=false, separator="|")
+     * @ORM\Column(name="path", type="string", length=3000, nullable=true)
+     */
+    private $path;
+
+    /**
      * @var
+     * @Gedmo\TreeParent
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Synthesis\SynthesisElement", inversedBy="children", cascade={"persist"})
      * @Gedmo\Versioned
      * @ORM\JoinColumn(name="parent_id", referencedColumnName="id", nullable=true, onDelete="SET NULL")
@@ -101,6 +115,7 @@ class SynthesisElement
     /**
      * @var
      * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\Synthesis\SynthesisElement", mappedBy="parent", cascade={"persist"})
+     * @ORM\OrderBy({"createdAt" = "ASC"})
      */
     private $children;
 
@@ -115,6 +130,7 @@ class SynthesisElement
      * @var string
      *
      * @ORM\Column(name="title", type="string", length=255, nullable=true)
+     * @Gedmo\TreePathSource
      * @Gedmo\Versioned
      */
     private $title;
@@ -582,6 +598,22 @@ class SynthesisElement
         $this->linkedDataLastUpdate = $linkedDataLastUpdate;
     }
 
+    /**
+     * @return mixed
+     */
+    public function getLevel()
+    {
+        return $this->level;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPath()
+    {
+        return $this->path;
+    }
+
     //************************** Custom methods *****************************
 
     /**
@@ -592,28 +624,9 @@ class SynthesisElement
         return $this->linkedDataClass && $this->linkedDataId;
     }
 
-    public function getPublishedChildren()
+    public function getDecodedBody()
     {
-        $children = new ArrayCollection();
-        foreach ($this->children as $child) {
-            if ($child->isArchived() && $child->isPublished()) {
-                $children->add($child);
-            }
-        }
-
-        return $children;
-    }
-
-    public function getParentsIds()
-    {
-        $parentsId = [];
-        $element = $this;
-        while ($element->getParent()) {
-            $element = $element->getParent();
-            $parentsId[] = $element->getId();
-        }
-
-        return $parentsId;
+        return $this->body ? html_entity_decode($this->body, ENT_QUOTES) : null;
     }
 
     // ************************* Lifecycle ***********************************

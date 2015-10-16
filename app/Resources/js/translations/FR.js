@@ -129,8 +129,6 @@ export default {
             },
         },
         vote: {
-            date: 'Date',
-            votes: 'Votes',
             ok: 'D\'accord',
             mitige: 'Mitigé',
             nok: 'Pas d\'accord',
@@ -170,7 +168,6 @@ export default {
             sources: '{num, plural, =0{0 source} one{# source} other{# sources}}',
             simple_arguments: '{num, plural, =0{0 avis} one{# avis} other{# avis}}',
             arguments: '{num, plural, =0{0 argument} one{# argument} other{# arguments}}',
-            votes_evolution: 'évolution des votes',
             back: 'Retour',
             close: 'Fermer',
             content: 'Contenu',

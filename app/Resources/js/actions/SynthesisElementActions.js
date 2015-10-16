@@ -1,6 +1,6 @@
 import AppDispatcher from '../dispatchers/AppDispatcher';
 import Fetcher from '../services/Fetcher';
-import {RECEIVE_COUNT, RECEIVE_ELEMENTS, RECEIVE_ELEMENT, EXPAND_NAVBAR_ITEM, SELECT_NAVBAR_ITEM, CREATE_ELEMENT, ARCHIVE_ELEMENT, NOTE_ELEMENT, COMMENT_ELEMENT, MOVE_ELEMENT, DIVIDE_ELEMENT, UPDATE_ELEMENT_SUCCESS, UPDATE_ELEMENT_FAILURE, CREATE_ELEMENT_SUCCESS, CREATE_ELEMENT_FAILURE} from '../constants/SynthesisElementConstants';
+import {RECEIVE_COUNT, RECEIVE_ELEMENTS, RECEIVE_ELEMENTS_SUCCESS, RECEIVE_ELEMENTS_FAILURE, RECEIVE_ELEMENT, RECEIVE_ELEMENT_SUCCESS, RECEIVE_ELEMENT_FAILURE, EXPAND_NAVBAR_ITEM, SELECT_NAVBAR_ITEM, CREATE_ELEMENT, ARCHIVE_ELEMENT, NOTE_ELEMENT, COMMENT_ELEMENT, MOVE_ELEMENT, DIVIDE_ELEMENT, UPDATE_ELEMENT_SUCCESS, UPDATE_ELEMENT_FAILURE, CREATE_ELEMENT_SUCCESS, CREATE_ELEMENT_FAILURE, NAVBAR_DEPTH} from '../constants/SynthesisElementConstants';
 
 const idOf = (val) => {
   if (val === 'root') {
@@ -40,6 +40,7 @@ const createElementFromData = (synthesis, data, successMessage = 'common.success
     .then(() => {
       AppDispatcher.dispatch({
         actionType: CREATE_ELEMENT_SUCCESS,
+        element: data,
         message: successMessage,
       });
       return true;
@@ -48,6 +49,24 @@ const createElementFromData = (synthesis, data, successMessage = 'common.success
       AppDispatcher.dispatch({
         actionType: CREATE_ELEMENT_FAILURE,
         message: errorMessage,
+      });
+      return false;
+    });
+};
+
+const fetchElementById = (synthesis, element) => {
+  return Fetcher
+    .get(`/syntheses/${synthesis}/elements/${element}`)
+    .then((data) => {
+      AppDispatcher.dispatch({
+        actionType: RECEIVE_ELEMENT_SUCCESS,
+        element: data,
+      });
+      return true;
+    })
+    .catch(() => {
+      AppDispatcher.dispatch({
+        actionType: RECEIVE_ELEMENT_FAILURE,
       });
       return false;
     });
@@ -64,6 +83,64 @@ export default {
       data.parent = idOf(data.parent);
     }
     createElementFromData(synthesis, data, 'common.success.create_success', 'common.errors.create_error');
+  },
+
+  loadElementFromServer: (synthesis, element) => {
+    AppDispatcher.dispatch({
+      actionType: RECEIVE_ELEMENT,
+      elementId: element,
+    });
+    fetchElementById(synthesis, element);
+  },
+
+  loadElementsFromServer: (synthesis, type, offset, limit) => {
+    Fetcher
+      .get(`/syntheses/${synthesis}/elements?type=${type}&offset=${offset}&limit=${limit}`)
+      .then((data) => {
+        data.actionType = RECEIVE_ELEMENTS_SUCCESS;
+        data.type = type;
+        AppDispatcher.dispatch(data);
+        return true;
+      });
+  },
+
+  loadElementsTreeFromServer: (synthesis, type, parent = null) => {
+    AppDispatcher.dispatch({
+      actionType: RECEIVE_ELEMENTS,
+      type: type + 'Tree',
+    });
+    let url = `/syntheses/${synthesis}/elements/tree?type=${type}&depth=${NAVBAR_DEPTH}`;
+    url += parent ? `&parent=${parent}` : null;
+    Fetcher
+      .get(url)
+      .then((data) => {
+        AppDispatcher.dispatch({
+          actionType: RECEIVE_ELEMENTS_SUCCESS,
+          type: type + 'Tree',
+          elements: data,
+          parent: parent,
+        });
+        return true;
+      })
+      .catch(() => {
+        AppDispatcher.dispatch({
+          actionType: RECEIVE_ELEMENTS_FAILURE,
+          type: type + 'Tree',
+        });
+      });
+  },
+
+  loadElementsCountFromServer: (synthesis, type) => {
+    Fetcher
+      .get(`/syntheses/${synthesis}/elements/count?type=${type}`)
+      .then((data) => {
+        AppDispatcher.dispatch({
+          actionType: RECEIVE_COUNT,
+          type: type,
+          count: data.count,
+        });
+        return true;
+      });
   },
 
   archive: (synthesis, element, data) => {
@@ -101,53 +178,6 @@ export default {
       });
     }
     updateElementFromData(synthesis, element, data, 'common.success.archive_success', 'common.errors.archive_error');
-  },
-
-  loadElementFromServer: (synthesis, element) => {
-    Fetcher
-      .get(`/syntheses/${synthesis}/elements/${element}`)
-      .then((data) => {
-        AppDispatcher.dispatch({
-          actionType: RECEIVE_ELEMENT,
-          element: data,
-        });
-        return true;
-      });
-  },
-
-  loadElementsFromServer: (synthesis, type, offset, limit) => {
-    Fetcher
-      .get(`/syntheses/${synthesis}/elements?type=${type}&offset=${offset}&limit=${limit}`)
-      .then((data) => {
-        data.actionType = RECEIVE_ELEMENTS;
-        data.type = type;
-        AppDispatcher.dispatch(data);
-        return true;
-      });
-  },
-
-  loadElementsTreeFromServer: (synthesis, type) => {
-    Fetcher
-      .get(`/syntheses/${synthesis}/elements/tree?type=${type}`)
-      .then((data) => {
-        data.actionType = RECEIVE_ELEMENTS;
-        data.type = type + 'Tree';
-        AppDispatcher.dispatch(data);
-        return true;
-      });
-  },
-
-  loadElementsCountFromServer: (synthesis, type) => {
-    Fetcher
-      .get(`/syntheses/${synthesis}/elements/count?type=${type}`)
-      .then((data) => {
-        AppDispatcher.dispatch({
-          actionType: RECEIVE_COUNT,
-          type: type,
-          count: data.count,
-        });
-        return true;
-      });
   },
 
   expandNavbarItem(elementId, expanded) {

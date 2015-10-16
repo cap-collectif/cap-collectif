@@ -2,8 +2,6 @@
 
 namespace Capco\AppBundle\EventListener;
 
-use Capco\AppBundle\Repository\AbstractVoteRepository;
-use Capco\AppBundle\Toggle\Manager;
 use JMS\Serializer\EventDispatcher\EventSubscriberInterface;
 use JMS\Serializer\EventDispatcher\ObjectEvent;
 use Symfony\Component\Routing\RouterInterface;
@@ -11,12 +9,10 @@ use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInt
 
 class OpinionSerializationListener implements EventSubscriberInterface
 {
-    private $toggleManager;
-    private $tokenStorage;
     private $router;
-    private $voteRepository;
+    private $tokenStorage;
 
-    public function __construct(RouterInterface $router, TokenStorageInterface $tokenStorage, AbstractVoteRepository $voteRepository, Manager $toggleManager)
+    public function __construct(RouterInterface $router, TokenStorageInterface $tokenStorage)
     {
         if (getenv('SYMFONY_USE_SSL')) {
             $router->getContext()->setScheme('https');
@@ -24,8 +20,6 @@ class OpinionSerializationListener implements EventSubscriberInterface
 
         $this->router = $router;
         $this->tokenStorage = $tokenStorage;
-        $this->toggleManager = $toggleManager;
-        $this->voteRepository = $voteRepository;
     }
 
     public static function getSubscribedEvents()
@@ -129,14 +123,6 @@ class OpinionSerializationListener implements EventSubscriberInterface
         $event->getVisitor()->addData(
             'has_user_reported', $user === 'anon.' ? false : $opinion->userHasReport($user)
         );
-
-        if ($this->toggleManager->isActive('votes_evolution')) {
-            $event->getVisitor()->addData(
-                'history', [
-                    'votes' => $this->voteRepository->getHistoryFor('opinion', $opinion)
-                ]
-            );
-        }
     }
 
     public function onPostOpinionType(ObjectEvent $event)

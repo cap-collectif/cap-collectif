@@ -32,7 +32,7 @@ const SideMenu = React.createClass({
   },
 
   componentDidMount() {
-    this.loadElementsTreeFromServer();
+    this.fetchElements();
   },
 
   componentWillUnmount() {
@@ -41,21 +41,7 @@ const SideMenu = React.createClass({
   },
 
   onChange() {
-    if (!SynthesisElementStore.isProcessing && SynthesisElementStore.isInboxSync.allTree) {
-      this.setState({
-        navbarItems: SynthesisElementStore.elements.allTree,
-        expanded: SynthesisElementStore.expandedNavbarItems,
-        selectedId: SynthesisElementStore.selectedNavbarItem,
-        isLoading: false,
-      });
-      return;
-    }
-
-    this.setState({
-      isLoading: true,
-    }, () => {
-      this.loadElementsTreeFromServer();
-    });
+    this.fetchElements();
   },
 
   renderContributionsButton() {
@@ -78,6 +64,7 @@ const SideMenu = React.createClass({
         selectedId={this.state.selectedId}
         onExpand={this.toggleExpand}
         onSelect={this.selectItem}
+        type="all"
         itemClass="menu__link"
       />
     );
@@ -140,6 +127,26 @@ const SideMenu = React.createClass({
     this.setState({
       showCreateModal: value,
     });
+  },
+
+  fetchElements() {
+    if (!SynthesisElementStore.isFetchingTree) {
+      if (SynthesisElementStore.isInboxSync.allTree) {
+        this.setState({
+          navbarItems: SynthesisElementStore.elements.allTree,
+          expanded: SynthesisElementStore.expandedNavbarItems,
+          selectedId: SynthesisElementStore.selectedNavbarItem,
+          isLoading: false,
+        });
+        return;
+      }
+
+      this.setState({
+        isLoading: true,
+      }, () => {
+        this.loadElementsTreeFromServer();
+      });
+    }
   },
 
   loadElementsTreeFromServer() {
