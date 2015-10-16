@@ -48,8 +48,6 @@ const VoteLinechart = React.createClass({
       ]);
     });
 
-    console.log(lines);
-
     const options = {
       hAxis: {titleTextStyle: {color: '#333'}},
       vAxis: {title: this.getIntlMessage('vote.votes'),  minValue: 0},
