@@ -78,7 +78,7 @@ class OpinionSerializationListener implements EventSubscriberInterface
         );
 
         $event->getVisitor()->addData(
-            'user_vote', $user === 'anon.' ? null : $this->voteRepository->getByObjectUser('opinionVersion', $opinion, $user)
+            'user_vote', $user === 'anon.' ? null : $this->voteRepository->getByObjectUser('opinionVersion', $version, $user)
         );
 
         $event->getVisitor()->addData(
