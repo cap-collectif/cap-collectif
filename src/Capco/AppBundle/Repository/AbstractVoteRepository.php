@@ -90,6 +90,27 @@ class AbstractVoteRepository extends EntityRepository
             ->execute();
     }
 
+    public function getByObjectUser($objectType, $object, $user)
+    {
+        $qb = $this->getEntityManager()->createQueryBuilder()
+            ->from(sprintf('Capco\\AppBundle\\Entity\\%sVote', ucfirst($objectType)), 'v')
+            ->andWhere('v.confirmed = :confirmed')
+            ->setParameter('confirmed', true);
+
+        if (in_array($objectType, ['opinion', 'opinionVersion'])) {
+            $qb->addSelect('v.value')
+                ->andWhere(sprintf('v.%s = :object', $objectType))
+                ->andWhere('v.user = :user')
+                ->setParameter('user', $user)
+                ->setParameter('object', $object)
+            ;
+        }
+
+        $result = $qb->getQuery()->getOneOrNullResult();
+
+        return $result ? $result['value'] : null;
+    }
+
     protected function getIsConfirmedQueryBuilder()
     {
         return $this->createQueryBuilder('v')
