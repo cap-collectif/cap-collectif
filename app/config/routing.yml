@@ -61,6 +61,10 @@ capco_app:
     type:     annotation
     prefix:   /
 
+capco_profile_edit:
+    path:      /profile/edit-profile
+    defaults:  { _controller: SonataUserBundle:ProfileFOSUser1:editProfile }
+
 capco_user:
     resource: "@CapcoUserBundle/Controller/"
     type: annotation
