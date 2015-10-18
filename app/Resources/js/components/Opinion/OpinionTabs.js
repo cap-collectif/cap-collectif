@@ -74,7 +74,7 @@ const OpinionTabs = React.createClass({
   },
 
   renderVersionsContent() {
-    return <OpinionVersionsBox isReportingEnabled={this.props.isReportingEnabled} opinionId={this.props.opinion.id} opinionBody={this.props.opinion.body} />;
+    return <OpinionVersionsBox isReportingEnabled={this.props.isReportingEnabled} isContribuable={this.isContribuable()} opinionId={this.props.opinion.id} opinionBody={this.props.opinion.body} />;
   },
 
   renderSourcesContent() {
@@ -174,6 +174,10 @@ const OpinionTabs = React.createClass({
 
   hasStatistics() {
     return !!this.props.opinion.history;
+  },
+
+  isContribuable() {
+    return this.props.opinion.isContribuable;
   },
 
 });

@@ -17,6 +17,7 @@ const OpinionVersionForm = React.createClass({
     mode: React.PropTypes.string,
     className: React.PropTypes.string,
     style: React.PropTypes.object,
+    isContribuable: React.PropTypes.bool,
   },
   mixins: [ReactIntl.IntlMixin, React.addons.LinkedStateMixin, CkeditorMixin, ValidatorMixin],
 
@@ -24,6 +25,7 @@ const OpinionVersionForm = React.createClass({
     return {
       opinionBody: '',
       mode: 'create',
+      isContribuable: false,
       className: '',
       style: {},
     };
@@ -95,7 +97,7 @@ const OpinionVersionForm = React.createClass({
     }
     return (
       <div className={this.props.className} style={style}>
-        <LoginOverlay children={this.renderButton()} />
+        {this.isContribuable() ? <LoginOverlay children={this.renderButton()} /> : null}
         <Modal {...this.props}
           animation={false} show={this.state.showModal}
           onHide={this.close.bind(null, this)} bsSize="large" aria-labelledby="contained-modal-title-lg"
@@ -266,6 +268,10 @@ const OpinionVersionForm = React.createClass({
           this.setState({isSubmitting: false, submitted: false});
         });
     });
+  },
+
+  isContribuable() {
+    return this.props.isContribuable;
   },
 
 });
