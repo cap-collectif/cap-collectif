@@ -733,10 +733,12 @@ class OpinionType
     {
         $data = [];
         foreach ($this->getAvailableOpinionTypesToCreateLink() as $opinionType) {
-            $opinionTypeViewModel = new OpinionTypeViewModel();
-            $opinionTypeViewModel->id = $opinionType->getId();
-            $opinionTypeViewModel->label = $opinionType->getTitle();
-            $data[] = $opinionTypeViewModel;
+            if ($opinionType->getIsEnabled()) {
+                $opinionTypeViewModel = new OpinionTypeViewModel();
+                $opinionTypeViewModel->id = $opinionType->getId();
+                $opinionTypeViewModel->label = $opinionType->getTitle();
+                $data[] = $opinionTypeViewModel;
+            }
         }
 
         return $data;

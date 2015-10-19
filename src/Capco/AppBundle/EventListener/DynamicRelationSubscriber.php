@@ -45,11 +45,11 @@ class DynamicRelationSubscriber implements EventSubscriber
                         $metadata->mapManyToOne([
                             'targetEntity'  => $metadata->getName(),
                             'fieldName'     => 'link',
-                            'cascade'       => ['persist', 'remove'],
+                            'cascade'       => ['persist'],
                             'inversedBy'    => 'connections',
                             'joinColumns'   => [
                                 [
-                                    'onDelete'  => 'CASCADE',
+                                    'onDelete'  => 'SET NULL',
                                 ]
                             ],
                         ]);

@@ -198,6 +198,19 @@ class RecalculateCountersCommand extends ContainerAwareCommand
         )');
         $query->execute();
 
+        // Currently, you cannot update a table and select from the same table in a subquery.
+        $conn = $em->getConnection();
+        $conn->executeUpdate('UPDATE opinion AS o
+          JOIN
+          ( SELECT p1.id, COUNT(*) AS cnt
+            FROM opinion AS p1 JOIN opinion AS p2
+            ON p2.link_id = p1.id AND p2.enabled = 1 AND p2.trashed = 0
+            GROUP BY p1.id
+          ) AS g
+          ON g.id = o.id
+          SET o.connections_count = g.cnt'
+        );
+
         $query = $em->createQuery('update CapcoAppBundle:Opinion a set a.voteCountOk =
             (select count(ov.id) from CapcoAppBundle:OpinionVote ov where ov.opinion = a AND ov.confirmed = 1 AND ov.value = 1 group by ov.opinion)');
         $query->execute();

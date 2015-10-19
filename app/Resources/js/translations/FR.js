@@ -95,7 +95,9 @@ export default {
                 constraints: {
                     type: 'Veuillez choisir un type pour soumettre une proposition liée.',
                 },
+                infos: 'Merci d\'examiner les propositions existantes en premier lieu afin de ne pas soumettre de doublon. Vous pouvez voter pour celles existantes !',
                 info: 'Votre proposition sera liée à :',
+                opinion: 'Proposition liée :',
             },
             add_new_link: 'Ajouter une proposition liée',
             title: 'Titre*',

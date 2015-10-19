@@ -33,11 +33,33 @@ const OpinionBody = React.createClass({
       );
     }
 
+    if (this.hasLink()) {
+      return (
+        <div>
+          <div>
+            <p className="control-label h5">
+              {this.getIntlMessage('opinion.link.opinion')}
+              { ' ' }
+              <a href={this.props.opinion.link._links.show}>
+                {this.props.opinion.link.title}
+              </a>
+            </p>
+            <br />
+          </div>
+          <OpinionBodyDiffContent opinion={opinion} />
+        </div>
+      );
+    }
+
     return <OpinionBodyDiffContent opinion={opinion} />;
   },
 
   isVersion() {
-    return this.props.opinion.parent ? true : false;
+    return !!this.props.opinion.parent;
+  },
+
+  hasLink() {
+    return !!this.props.opinion.link;
   },
 
 });

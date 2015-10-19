@@ -9,7 +9,7 @@ const OpinionLinkCreateInfos = React.createClass({
       <div>
         <div className="modal-top bg-info">
           <p>
-            { this.getIntlMessage('source.infos') }
+            { this.getIntlMessage('opinion.link.infos') }
           </p>
         </div>
         <p>
