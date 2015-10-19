@@ -4,7 +4,7 @@ import CloseButton from '../../Form/CloseButton';
 import OpinionLinkCreateInfos from './OpinionLinkCreateInfos';
 import OpinionLinkForm from './OpinionLinkForm';
 import OpinionTypeActions from '../../../actions/OpinionTypeActions';
-import OpinionActions from '../../../actions/OpinionActions';
+import OpinionLinkActions from '../../../actions/OpinionLinkActions';
 
 const Modal = ReactBootstrap.Modal;
 
@@ -92,7 +92,7 @@ const OpinionLinkCreate = React.createClass({
   handleSubmitSuccess() {
     this.close();
     this.stopSubmitting();
-    OpinionActions.loadLinks(this.props.opinion.id, 'last');
+    OpinionLinkActions.load(this.props.opinion.id, 'last');
   },
 
 });

@@ -8,7 +8,6 @@ import {
   CREATE_OPINION_VOTE,
   DELETE_OPINION_VOTE,
   RECEIVE_ARGUMENTS,
-  RECEIVE_LINKS,
   CREATE_ARGUMENT_SUCCESS,
 
   CREATE_OPINION_VERSION_SUCCESS,
@@ -159,20 +158,6 @@ export default {
     .then(() => {
       return true;
     });
-  },
-
-  // Links
-
-  loadLinks: (opinion, filter) => {
-    return Fetcher
-      .get(`/opinions/${opinion}/links?filter=${filter}`)
-      .then((data) => {
-        AppDispatcher.dispatch({
-          actionType: RECEIVE_LINKS,
-          links: data.links,
-        });
-        return true;
-      });
   },
 
 };

@@ -1,6 +1,10 @@
 import AppDispatcher from '../dispatchers/AppDispatcher';
 import Fetcher from '../services/Fetcher';
-import {CREATE_OPINION_LINK_SUCCESS, CREATE_OPINION_LINK_FAILURE} from '../constants/OpinionLinkConstants';
+import {
+  CREATE_OPINION_LINK_SUCCESS,
+  CREATE_OPINION_LINK_FAILURE,
+  RECEIVE_LINKS,
+} from '../constants/OpinionLinkConstants';
 
 export default {
 
@@ -25,6 +29,18 @@ export default {
         actionType: CREATE_OPINION_LINK_FAILURE,
       });
     });
+  },
+
+  load: (opinion, filter) => {
+    return Fetcher
+      .get(`/opinions/${opinion}/links?filter=${filter}`)
+      .then((data) => {
+        AppDispatcher.dispatch({
+          actionType: RECEIVE_LINKS,
+          links: data.links,
+        });
+        return true;
+      });
   },
 
 };
