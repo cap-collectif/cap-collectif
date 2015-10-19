@@ -19,9 +19,9 @@ class DynamicRelationSubscriber implements EventSubscriber
      */
     public function getSubscribedEvents()
     {
-        return array(
-            Events::loadClassMetadata,
-        );
+        return [
+            'loadClassMetadata',
+        ];
     }
 
     /**

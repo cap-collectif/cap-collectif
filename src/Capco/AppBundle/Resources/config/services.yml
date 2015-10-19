@@ -18,6 +18,12 @@ services:
   import.csvtoarray:
     class: Capco\AppBundle\Helper\ConvertCsvToArray
 
+  capco.doctrine.subscriber.dynamic_relation:
+    class: Capco\AppBundle\EventListener\DynamicRelationSubscriber
+    tags:
+      - {name: doctrine.event_subscriber, event: loadClassMetadata}
+    arguments: ["%traits%"]
+
   capco.form.type_extension.media:
     class: Capco\AppBundle\Form\Extension\MediaTypeExtension
     tags:
