@@ -17,6 +17,27 @@ const OpinionSourceButtons = React.createClass({
     };
   },
 
+  hasVotedSince() {
+    return this.state.hasVoted && !this.props.source.has_user_voted;
+  },
+
+  vote() {
+    this.setState({hasVoted: true});
+    SourceActions.addVote(this.props.source.id);
+  },
+
+  deleteVote() {
+    this.setState({hasVoted: false});
+    SourceActions.deleteVote(this.props.source.id);
+  },
+
+  isTheUserTheAuthor() {
+    if (this.props.source.author === null || !LoginStore.isLoggedIn()) {
+      return false;
+    }
+    return LoginStore.user.uniqueId === this.props.source.author.uniqueId;
+  },
+
   renderVoteButton() {
     if (this.state.hasVoted) {
       return (
@@ -82,27 +103,6 @@ const OpinionSourceButtons = React.createClass({
         { this.renderEditButton() }
       </div>
     );
-  },
-
-  hasVotedSince() {
-    return this.state.hasVoted && !this.props.source.has_user_voted;
-  },
-
-  vote() {
-    this.setState({hasVoted: true});
-    SourceActions.addVote(this.props.source.id);
-  },
-
-  deleteVote() {
-    this.setState({hasVoted: false});
-    SourceActions.deleteVote(this.props.source.id);
-  },
-
-  isTheUserTheAuthor() {
-    if (this.props.source.author === null || !LoginStore.isLoggedIn()) {
-      return false;
-    }
-    return LoginStore.user.uniqueId === this.props.source.author.uniqueId;
   },
 
 });

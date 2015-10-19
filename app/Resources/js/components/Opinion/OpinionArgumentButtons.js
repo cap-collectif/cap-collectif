@@ -29,6 +29,23 @@ const OpinionArgumentButtons = React.createClass({
     return this.state.hasVoted !== this.props.argument.has_user_voted ? count + 1 : count;
   },
 
+  vote() {
+    this.setState({hasVoted: true});
+    ArgumentActions.addVote(this.props.argument.id);
+  },
+
+  deleteVote() {
+    this.setState({hasVoted: false});
+    ArgumentActions.deleteVote(this.props.argument.id);
+  },
+
+  isTheUserTheAuthor() {
+    if (this.props.argument.author === null || !LoginStore.isLoggedIn()) {
+      return false;
+    }
+    return LoginStore.user.uniqueId === this.props.argument.author.uniqueId;
+  },
+
   renderVoteButton() {
     if (this.state.hasVoted) {
       return (
@@ -97,24 +114,6 @@ const OpinionArgumentButtons = React.createClass({
       </div>
     );
   },
-
-  vote() {
-    this.setState({hasVoted: true});
-    ArgumentActions.addVote(this.props.argument.id);
-  },
-
-  deleteVote() {
-    this.setState({hasVoted: false});
-    ArgumentActions.deleteVote(this.props.argument.id);
-  },
-
-  isTheUserTheAuthor() {
-    if (this.props.argument.author === null || !LoginStore.isLoggedIn()) {
-      return false;
-    }
-    return LoginStore.user.uniqueId === this.props.argument.author.uniqueId;
-  },
-
 
 });
 

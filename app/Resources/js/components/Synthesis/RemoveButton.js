@@ -7,16 +7,16 @@ const RemoveButton = React.createClass({
   },
   mixins: [ReactIntl.IntlMixin],
 
+  click() {
+    this.props.onRemove(this.props.element);
+  },
+
   render() {
     return (
       <div className="element__action">
         <Button bsSize="large" type="button" className="element__action-remove" onClick={this.click.bind(null, this)}><i className="cap cap-delete-1-1"></i></Button>
       </div>
     );
-  },
-
-  click() {
-    this.props.onRemove(this.props.element);
   },
 
 });

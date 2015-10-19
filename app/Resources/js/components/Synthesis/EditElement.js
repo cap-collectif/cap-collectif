@@ -65,6 +65,27 @@ const EditElement = React.createClass({
     }
   },
 
+  togglePublishModal(value) {
+    this.setState({
+      showDivideModal: false,
+      showPublishModal: value,
+    });
+  },
+
+  toggleDivideModal(value) {
+    this.setState({
+      showPublishModal: false,
+      showDivideModal: value,
+    });
+  },
+
+  loadElementFromServer(id = this.props.params.element_id) {
+    SynthesisElementActions.loadElementFromServer(
+      this.props.synthesis.id,
+      id
+    );
+  },
+
   renderElementPanel() {
     const element = this.state.element;
     if (!this.state.isLoading && element) {
@@ -161,27 +182,6 @@ const EditElement = React.createClass({
         {this.renderPublishModal()}
         {this.renderDivideModal()}
       </div>
-    );
-  },
-
-  togglePublishModal(value) {
-    this.setState({
-      showDivideModal: false,
-      showPublishModal: value,
-    });
-  },
-
-  toggleDivideModal(value) {
-    this.setState({
-      showPublishModal: false,
-      showDivideModal: value,
-    });
-  },
-
-  loadElementFromServer(id = this.props.params.element_id) {
-    SynthesisElementActions.loadElementFromServer(
-      this.props.synthesis.id,
-      id
     );
   },
 

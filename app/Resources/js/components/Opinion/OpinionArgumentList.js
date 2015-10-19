@@ -52,6 +52,48 @@ const OpinionArgumentList = React.createClass({
     return this.props.type === 'no' ? 0 : 1;
   },
 
+  updateSelectedValue() {
+    this.setState({
+      filter: $(React.findDOMNode(this.refs.filter)).val(),
+      isLoading: true,
+      arguments: [],
+    });
+  },
+
+  loadArgumentsFromStore() {
+    if (!OpinionStore.isProcessing && OpinionStore.areArgumentsSync[this.getNumericType()]) {
+      const args = [];
+      OpinionStore.opinion.arguments.map((arg) => {
+        if (arg.type === this.getNumericType()) {
+          args.push(arg);
+        }
+      });
+      if (this.state.arguments.length > 0 && this.state.arguments.length !== args.length) {
+        this.setState({
+          filter: 'last',
+        });
+      }
+      this.setState({
+        arguments: args,
+        count: OpinionStore.opinion.arguments_count_ok,
+        isLoading: false,
+      });
+      return;
+    }
+
+    this.loadArguments();
+  },
+
+  loadArguments() {
+    this.setState({'isLoading': true});
+    const type = this.getNumericType();
+    OpinionActions.loadArguments(
+      this.props.opinion,
+      type,
+      this.state.filter
+    );
+  },
+
   renderFilter() {
     if (this.state.arguments.length > 1) {
       return (
@@ -101,48 +143,6 @@ const OpinionArgumentList = React.createClass({
           : <Loader />
         }
     </div>
-    );
-  },
-
-  updateSelectedValue() {
-    this.setState({
-      filter: $(React.findDOMNode(this.refs.filter)).val(),
-      isLoading: true,
-      arguments: [],
-    });
-  },
-
-  loadArgumentsFromStore() {
-    if (!OpinionStore.isProcessing && OpinionStore.areArgumentsSync[this.getNumericType()]) {
-      const args = [];
-      OpinionStore.opinion.arguments.map((arg) => {
-        if (arg.type === this.getNumericType()) {
-          args.push(arg);
-        }
-      });
-      if (this.state.arguments.length > 0 && this.state.arguments.length !== args.length) {
-        this.setState({
-          filter: 'last',
-        });
-      }
-      this.setState({
-        arguments: args,
-        count: OpinionStore.opinion.arguments_count_ok,
-        isLoading: false,
-      });
-      return;
-    }
-
-    this.loadArguments();
-  },
-
-  loadArguments() {
-    this.setState({'isLoading': true});
-    const type = this.getNumericType();
-    OpinionActions.loadArguments(
-      this.props.opinion,
-      type,
-      this.state.filter
     );
   },
 

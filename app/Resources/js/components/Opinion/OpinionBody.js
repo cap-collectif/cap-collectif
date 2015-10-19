@@ -9,6 +9,14 @@ const OpinionBody = React.createClass({
   },
   mixins: [ReactIntl.IntlMixin],
 
+  isVersion() {
+    return !!this.props.opinion.parent;
+  },
+
+  hasLink() {
+    return !!this.props.opinion.link;
+  },
+
   render() {
     const opinion = this.props.opinion;
 
@@ -52,14 +60,6 @@ const OpinionBody = React.createClass({
     }
 
     return <OpinionBodyDiffContent opinion={opinion} />;
-  },
-
-  isVersion() {
-    return !!this.props.opinion.parent;
-  },
-
-  hasLink() {
-    return !!this.props.opinion.link;
   },
 
 });

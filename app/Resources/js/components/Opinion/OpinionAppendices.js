@@ -6,6 +6,20 @@ const OpinionAppendices = React.createClass({
   },
   mixins: [ReactIntl.IntlMixin],
 
+  isVersion() {
+    return !!this.props.opinion.parent;
+  },
+
+  hasAppendices() {
+    const appendices = this.isVersion() ? this.props.opinion.parent.appendices : this.props.opinion.appendices;
+    if (!appendices) {
+      return false;
+    }
+    return appendices.some((app) => {
+      return !!app.body;
+    });
+  },
+
   render() {
     if (!this.hasAppendices()) {
       return null;
@@ -34,23 +48,6 @@ const OpinionAppendices = React.createClass({
         }
       </div>
     );
-  },
-
-  isVersion() {
-    return this.props.opinion.parent ? true : false;
-  },
-
-  hasAppendices() {
-    const appendices = this.isVersion() ? this.props.opinion.parent.appendices : this.props.opinion.appendices;
-    if (!appendices) {
-      return false;
-    }
-    return appendices.some( (app) => {
-      if (app.body) {
-        return true;
-      }
-      return false;
-    });
   },
 
 });

@@ -32,6 +32,25 @@ const Comment = React.createClass({
     };
   },
 
+  answer() {
+    this.setState({
+      answerFormShown: true,
+      answerFormFocus: true,
+    });
+  },
+
+  comment(data) {
+    data.parent = this.props.comment.id;
+    return CommentActions.create(this.props.uri, this.props.object, data);
+  },
+
+  isTheUserTheAuthor() {
+    if (this.props.comment.author === null || !LoginStore.isLoggedIn()) {
+      return false;
+    }
+    return LoginStore.user.uniqueId === this.props.comment.author.uniqueId;
+  },
+
   render() {
     const comment = this.props.comment;
     const classes = classNames({
@@ -73,32 +92,13 @@ const Comment = React.createClass({
               : null
             )}
             {(this.state.answerFormShown === true
-              ? <CommentForm comment={this.comment.bind(this)} focus={this.state.answerFormFocus} isAnswer={true}/>
+              ? <CommentForm comment={this.comment.bind(this)} focus={this.state.answerFormFocus} isAnswer />
               : null
             )}
           </div>
         </div>
       </li>
     );
-  },
-
-  comment(data) {
-    data.parent = this.props.comment.id;
-    return CommentActions.create(this.props.uri, this.props.object, data);
-  },
-
-  isTheUserTheAuthor() {
-    if (this.props.comment.author === null || !LoginStore.isLoggedIn()) {
-      return false;
-    }
-    return LoginStore.user.uniqueId === this.props.comment.author.uniqueId;
-  },
-
-  answer() {
-    this.setState({
-      answerFormShown: true,
-      answerFormFocus: true,
-    });
   },
 
 });

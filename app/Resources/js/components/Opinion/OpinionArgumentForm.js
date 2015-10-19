@@ -35,10 +35,40 @@ const OpinionArgumentForm = React.createClass({
     autosize(React.findDOMNode(this.refs.body).querySelector('textarea'));
   },
 
+  create() {
+    this.setState({submitted: true}, () => {
+      if (!this.isValid()) {
+        return;
+      }
+
+      this.setState({isSubmitting: true});
+
+      const data = {
+        body: this.state.body,
+        type: this.props.type === 'yes' || this.props.type === 'simple' ? 1 : 0,
+      };
+
+      OpinionActions
+        .addArgument(this.props.opinion, data)
+        .then(() => {
+          this.setState(this.getInitialState());
+          autosize.destroy(React.findDOMNode(this.refs.body));
+          return true;
+        })
+        .catch(() => {
+          this.setState({isSubmitting: false, submitted: false});
+        });
+    });
+  },
+
+  isVersion() {
+    return !!this.props.opinion.parent;
+  },
+
   renderFormErrors(field) {
     const errors = this.getErrorsMessages(field);
     if (errors.length > 0) {
-      return <FlashMessages errors={errors} form={true} />;
+      return <FlashMessages errors={errors} form />;
     }
     return null;
   },
@@ -83,36 +113,6 @@ const OpinionArgumentForm = React.createClass({
         </div>
       </div>
     );
-  },
-
-  create() {
-    this.setState({submitted: true}, () => {
-      if (!this.isValid()) {
-        return;
-      }
-
-      this.setState({isSubmitting: true});
-
-      const data = {
-        body: this.state.body,
-        type: this.props.type === 'yes' || this.props.type === 'simple' ? 1 : 0,
-      };
-
-      OpinionActions
-        .addArgument(this.props.opinion, data)
-        .then(() => {
-          this.setState(this.getInitialState());
-          autosize.destroy(React.findDOMNode(this.refs.body));
-          return true;
-        })
-        .catch(() => {
-          this.setState({isSubmitting: false, submitted: false});
-        });
-    });
-  },
-
-  isVersion() {
-    return this.props.opinion.parent ? true : false;
   },
 
 });

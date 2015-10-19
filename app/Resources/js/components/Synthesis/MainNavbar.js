@@ -71,7 +71,7 @@ const MainNavbar = React.createClass({
 
   render() {
     return (
-      <Navbar fixedTop fluid navExpanded={true} className="synthesis__main-navbar" brand={this.renderBrand()}>
+      <Navbar fixedTop fluid navExpanded className="synthesis__main-navbar" brand={this.renderBrand()}>
         <Nav navbar right>
           {this.renderNotifications()}
           {this.renderUser()}

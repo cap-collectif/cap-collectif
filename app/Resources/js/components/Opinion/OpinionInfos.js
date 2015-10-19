@@ -9,6 +9,10 @@ const OpinionInfos = React.createClass({
   },
   mixins: [ReactIntl.IntlMixin],
 
+  isVersion() {
+    return this.props.opinion.parent ? true : false;
+  },
+
   renderDate() {
     if (!Modernizr.intl) {
       return null;
@@ -97,10 +101,6 @@ const OpinionInfos = React.createClass({
         { this.renderRankingLabel() }
       </p>
     );
-  },
-
-  isVersion() {
-    return this.props.opinion.parent ? true : false;
   },
 
 });

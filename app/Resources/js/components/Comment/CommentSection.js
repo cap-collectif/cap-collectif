@@ -79,6 +79,45 @@ const CommentSection = React.createClass({
     });
   },
 
+  comment(data) {
+    return CommentActions.create(this.props.uri, this.props.object, data);
+  },
+
+  updateSelectedValue() {
+    this.setState({
+        filter: $(React.findDOMNode(this.refs.filter)).val(),
+        isLoading: true,
+        comments: [],
+    });
+  },
+
+  loadCommentsFromServer() {
+    CommentActions.loadFromServer(
+      this.props.uri,
+      this.props.object,
+      this.state.offset,
+      this.state.limit,
+      this.state.filter
+    );
+  },
+
+  resetLoadMoreButton() {
+    const loadMoreButton = React.findDOMNode(this.refs.loadMore);
+    if (loadMoreButton) {
+      $(loadMoreButton).button('reset');
+    }
+  },
+
+  loadMore() {
+    $(React.findDOMNode(this.refs.loadMore)).button('loading');
+    this.setState({
+        isLoadingMore: true,
+        limit: this.state.limit + MessagePagination,
+    }, () => {
+      this.loadCommentsFromServer();
+    });
+  },
+
   renderFilter() {
     if (this.state.count > 1) {
       return (
@@ -124,51 +163,12 @@ const CommentSection = React.createClass({
         )}
         <CommentList {...this.props}
           comments={this.state.comments}
-          root={true}
+          root
           isReportingEnabled={this.state.isReportingEnabled}
         />
         { this.renderLoadMore() }
       </div>
     );
-  },
-
-  comment(data) {
-    return CommentActions.create(this.props.uri, this.props.object, data);
-  },
-
-  updateSelectedValue() {
-    this.setState({
-        filter: $(React.findDOMNode(this.refs.filter)).val(),
-        isLoading: true,
-        comments: [],
-    });
-  },
-
-  loadCommentsFromServer() {
-    CommentActions.loadFromServer(
-      this.props.uri,
-      this.props.object,
-      this.state.offset,
-      this.state.limit,
-      this.state.filter
-    );
-  },
-
-  resetLoadMoreButton() {
-    const loadMoreButton = React.findDOMNode(this.refs.loadMore);
-    if (loadMoreButton) {
-      $(loadMoreButton).button('reset');
-    }
-  },
-
-  loadMore() {
-    $(React.findDOMNode(this.refs.loadMore)).button('loading');
-    this.setState({
-        isLoadingMore: true,
-        limit: this.state.limit + MessagePagination,
-    }, () => {
-      this.loadCommentsFromServer();
-    });
   },
 
 });

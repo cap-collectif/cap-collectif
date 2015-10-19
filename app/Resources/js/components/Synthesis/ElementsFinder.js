@@ -36,6 +36,23 @@ const ElementsFinder = React.createClass({
     }];
   },
 
+  toggleExpand(element) {
+    event.stopPropagation();
+    if (element.childrenCount !== element.children.length) {
+      SynthesisElementActions.loadElementsTreeFromServer(this.props.synthesis.id, this.props.type, element.id);
+    }
+    if (typeof this.props.onExpand === 'function') {
+      this.props.onExpand(element);
+    }
+    return false;
+  },
+
+  select(element) {
+    if (typeof this.props.onSelect === 'function') {
+      this.props.onSelect(element);
+    }
+  },
+
   renderTreeItems(elements, level, expanded = false) {
     if (expanded && elements) {
       return (
@@ -101,23 +118,6 @@ const ElementsFinder = React.createClass({
         {this.renderTree()}
       </div>
     );
-  },
-
-  toggleExpand(element) {
-    event.stopPropagation();
-    if (element.childrenCount !== element.children.length) {
-      SynthesisElementActions.loadElementsTreeFromServer(this.props.synthesis.id, this.props.type, element.id);
-    }
-    if (typeof this.props.onExpand === 'function') {
-      this.props.onExpand(element);
-    }
-    return false;
-  },
-
-  select(element) {
-    if (typeof this.props.onSelect === 'function') {
-      this.props.onSelect(element);
-    }
   },
 
 });

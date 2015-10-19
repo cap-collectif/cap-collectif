@@ -17,6 +17,12 @@ const PublishModal = React.createClass({
   },
   mixins: [ReactIntl.IntlMixin, ReactRouter.Navigation, React.addons.LinkedStateMixin],
 
+  getDefaultProps() {
+    return {
+      process: null,
+    };
+  },
+
   getInitialState() {
     const element = this.props.element;
     return {
@@ -29,12 +35,6 @@ const PublishModal = React.createClass({
         root: true,
       },
       isLoading: true,
-    };
-  },
-
-  getDefaultProps() {
-    return {
-      process: null,
     };
   },
 
@@ -84,90 +84,6 @@ const PublishModal = React.createClass({
     return expanded;
   },
 
-  renderTitle() {
-    return (
-      <div className="modal__action">
-        <h2 className="h4">
-          {' ' + this.getIntlMessage('edition.action.publish.field.title')}
-        </h2>
-          <Input type="text" id="publish_element_title" name="publish_element[title]" className="publish-element__title" valueLink={this.linkState('title')} />
-      </div>
-    );
-  },
-
-  renderParent() {
-    return (
-      <div className="modal__action">
-        <h2 className="h4">
-          {' ' + this.getIntlMessage('edition.action.publish.field.parent')}
-        </h2>
-        {this.renderParentFinder()}
-      </div>
-    );
-  },
-
-  renderParentFinder() {
-    const parentId = this.state.parent ? this.state.parent.id : 'root';
-    return (
-      <ElementsFinder synthesis={this.props.synthesis} type="all" elements={this.state.elements} expanded={this.state.expanded} selectedId={parentId} onSelect={this.setParent} onExpand={this.expandItem} />
-    );
-  },
-
-  renderNotation() {
-    return (
-      <div className="modal__action">
-        <h2 className="h4">
-          {' ' + this.getIntlMessage('edition.action.publish.field.notation')}
-          <span className="small excerpt action__title-right">{'\t' + this.getIntlMessage('edition.action.publish.optional')}</span>
-        </h2>
-        <NotationButtons notation={this.state.notation} onChange={this.setNotation} block={true} />
-        <p className="small excerpt action__help">{this.getIntlMessage('edition.action.publish.help.notation')}</p>
-      </div>
-    );
-  },
-
-  renderComment() {
-    return (
-      <div className="modal__action">
-        <h2 className="h4">
-          {' ' + this.getIntlMessage('edition.action.publish.field.comment')}
-          <span className="small excerpt action__title-right">{'\t' + this.getIntlMessage('edition.action.publish.optional')}</span>
-        </h2>
-        <form id="publish_element" name="publish_element">
-          <Input type="textarea" id="publish_element_comment" name="publish_element[comment]" className="publish-element__comment" valueLink={this.linkState('comment')} />
-        </form>
-      </div>
-    );
-  },
-
-  render() {
-    return (
-      <Modal show={this.props.show} onHide={this.hide} animation={false} dialogClassName="modal--publish">
-        <Modal.Header closeButton>
-          <Modal.Title>{this.getIntlMessage('edition.action.publish.title')}</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          {this.renderTitle()}
-          {this.renderParent()}
-          {this.renderNotation()}
-          {this.renderComment()}
-        </Modal.Body>
-        <Modal.Footer>
-          <Button type="button" onClick={this.hide.bind(null, this)}>{this.getIntlMessage('edition.action.publish.btn_cancel')}</Button>
-          <Button bsStyle="primary" type="submit" onClick={this.publish.bind(null, this)}>{this.getIntlMessage('edition.action.publish.btn_submit')}</Button>
-        </Modal.Footer>
-      </Modal>
-    );
-  },
-
-  show() {
-    this.props.toggle(true);
-  },
-
-  hide() {
-    this.props.toggle(false);
-  },
-
   setNotation(notation) {
     this.setState({
       notation: notation,
@@ -181,6 +97,14 @@ const PublishModal = React.createClass({
         parent: value,
       });
     }
+  },
+
+  hide() {
+    this.props.toggle(false);
+  },
+
+  show() {
+    this.props.toggle(true);
   },
 
   publish() {
@@ -240,6 +164,70 @@ const PublishModal = React.createClass({
     SynthesisElementActions.loadElementsTreeFromServer(
       this.props.synthesis.id,
       'all'
+    );
+  },
+
+  renderParent() {
+    return (
+      <div className="modal__action">
+        <h2 className="h4">
+          {' ' + this.getIntlMessage('edition.action.publish.parent.title')}
+        </h2>
+        {this.renderParentFinder()}
+      </div>
+    );
+  },
+
+  renderParentFinder() {
+    const parentId = this.state.parent ? this.state.parent.id : 'root';
+    return (
+      <ElementsFinder synthesis={this.props.synthesis} type="all" elements={this.state.elements} expanded={this.state.expanded} selectedId={parentId} onSelect={this.setParent} onExpand={this.expandItem} />
+    );
+  },
+
+  renderNotation() {
+    return (
+      <div className="modal__action">
+        <h2 className="h4">
+          {' ' + this.getIntlMessage('edition.action.publish.notation.title')}
+          <span className="small excerpt action__title-right">{'\t' + this.getIntlMessage('edition.action.publish.optional')}</span>
+        </h2>
+        <NotationButtons notation={this.state.notation} onChange={this.setNotation} block />
+        <p className="small excerpt action__help">{this.getIntlMessage('edition.action.publish.notation.help')}</p>
+      </div>
+    );
+  },
+
+  renderComment() {
+    return (
+      <div className="modal__action">
+        <h2 className="h4">
+          {' ' + this.getIntlMessage('edition.action.publish.comment.title')}
+          <span className="small excerpt action__title-right">{'\t' + this.getIntlMessage('edition.action.publish.optional')}</span>
+        </h2>
+        <form id="publish_element" name="publish_element">
+          <Input type="textarea" id="publish_element_comment" name="publish_element[comment]" className="publish-element__comment" valueLink={this.linkState('comment')} />
+        </form>
+      </div>
+    );
+  },
+
+  render() {
+    return (
+      <Modal show={this.props.show} onHide={this.hide} animation={false} dialogClassName="modal--publish">
+        <Modal.Header closeButton>
+          <Modal.Title>{this.getIntlMessage('edition.action.publish.title')}</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          {this.renderParent()}
+          {this.renderNotation()}
+          {this.renderComment()}
+        </Modal.Body>
+        <Modal.Footer>
+          <Button type="button" onClick={this.hide.bind(null, this)}>{this.getIntlMessage('edition.action.publish.btn_cancel')}</Button>
+          <Button bsStyle="primary" type="submit" onClick={this.publish.bind(null, this)}>{this.getIntlMessage('edition.action.publish.btn_submit')}</Button>
+        </Modal.Footer>
+      </Modal>
     );
   },
 

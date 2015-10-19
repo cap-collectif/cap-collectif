@@ -48,10 +48,62 @@ const OpinionSourceForm = React.createClass({
     );
   },
 
+  close() {
+    this.setState({showModal: false});
+  },
+
+  show() {
+    this.setState({showModal: true});
+  },
+
+  reload() {
+    this.setState(this.getInitialState());
+    location.reload(); // TODO when enough time
+    return true;
+  },
+
+  create() {
+    this.setState({submitted: true}, () => {
+      if (!this.isValid()) {
+        return;
+      }
+
+      this.setState({isSubmitting: true});
+
+      const data = {
+        link: this.state.link,
+        title: this.state.title,
+        body: this.state.body,
+        Category: parseInt(this.state.category, 10),
+      };
+
+      if (this.props.opinion && this.props.opinion.parent) {
+        OpinionActions
+        .addVersionSource(this.props.opinion.parent.id, this.props.opinion.id, data)
+        .then(() => {
+          this.reload();
+        })
+        .catch(() => {
+          this.setState({isSubmitting: false, submitted: false});
+        });
+        return;
+      }
+
+      OpinionActions
+      .addSource(this.props.opinion.id, data)
+      .then(() => {
+        this.reload();
+      })
+      .catch(() => {
+        this.setState({isSubmitting: false, submitted: false});
+      });
+    });
+  },
+
   renderFormErrors(field) {
     const errors = this.getErrorsMessages(field);
     if (errors.length > 0) {
-      return <FlashMessages errors={errors} form={true} />;
+      return <FlashMessages errors={errors} form />;
     }
     return null;
   },
@@ -168,58 +220,6 @@ const OpinionSourceForm = React.createClass({
         </Modal>
       </div>
     );
-  },
-
-  close() {
-    this.setState({showModal: false});
-  },
-
-  show() {
-    this.setState({showModal: true});
-  },
-
-  reload() {
-    this.setState(this.getInitialState());
-    location.reload(); // TODO when enough time
-    return true;
-  },
-
-  create() {
-    this.setState({submitted: true}, () => {
-      if (!this.isValid()) {
-        return;
-      }
-
-      this.setState({isSubmitting: true});
-
-      const data = {
-        link: this.state.link,
-        title: this.state.title,
-        body: this.state.body,
-        Category: parseInt(this.state.category, 10),
-      };
-
-      if (this.props.opinion && this.props.opinion.parent) {
-        OpinionActions
-        .addVersionSource(this.props.opinion.parent.id, this.props.opinion.id, data)
-        .then(() => {
-          this.reload();
-        })
-        .catch(() => {
-          this.setState({isSubmitting: false, submitted: false});
-        });
-        return;
-      }
-
-      OpinionActions
-      .addSource(this.props.opinion.id, data)
-      .then(() => {
-        this.reload();
-      })
-      .catch(() => {
-        this.setState({isSubmitting: false, submitted: false});
-      });
-    });
   },
 
 });

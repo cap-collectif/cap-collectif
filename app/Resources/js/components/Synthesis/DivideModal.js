@@ -53,10 +53,81 @@ const DivideModal = React.createClass({
       if (start !== end) {
         return obj.value.substring(start, end);
       }
-      return null;
     }
     return null;
   },
+  show() {
+    this.props.toggle(true);
+  },
+
+  hide() {
+    this.props.toggle(false);
+  },
+
+  togglePublishModal(value, element) {
+    this.setState({
+      currentElement: element,
+      showPublishModal: value,
+    });
+  },
+
+  selectText() {
+    const selectedText = this.getSelectedText(React.findDOMNode(this.refs.originalText));
+    this.setState({
+      selectedText: selectedText,
+    });
+  },
+
+  createFromSelection() {
+    const body = this.state.selectedText;
+    if (body && body !== '') {
+      const newElement = {
+        'title': null,
+        'body': body,
+        'archived': false,
+        'published': false,
+        'parent': this.props.element.parent,
+      };
+      this.addElement(newElement);
+      this.togglePublishModal(true, newElement);
+    }
+  },
+
+  processPublishedElement(element) {
+    this.removeElement(element);
+    this.addElement(element);
+  },
+
+  addElement(element) {
+    let newElements = this.state.newElements;
+    newElements = ArrayHelper.addElementToArray(newElements, element, 'body');
+    this.setState({
+      newElements: newElements,
+      selectedText: null,
+    });
+  },
+
+  removeElement(element) {
+    const newElements = this.state.newElements;
+    ArrayHelper.removeElementFromArray(newElements, element, 'body');
+    this.setState({
+      newElements: newElements,
+    });
+  },
+
+  divide() {
+    this.hide();
+    const data = {
+      'archived': true,
+      'published': false,
+      'division': {
+        'elements': this.state.newElements,
+      },
+    };
+    SynthesisElementActions.archive(this.props.synthesis.id, this.props.element.id, data);
+    this.transitionTo('inbox', {'type': 'new'});
+  },
+
 
   renderOriginalElementPanel() {
     const element = this.props.element;
@@ -129,7 +200,7 @@ const DivideModal = React.createClass({
 
   renderContent() {
     return (
-      <Grid fluid={true}>
+      <Grid fluid>
         <Row>
           <div className="row-height">
             {this.renderOriginalElementPanel()}
@@ -169,78 +240,6 @@ const DivideModal = React.createClass({
         {this.renderPublishModal()}
       </div>
     );
-  },
-
-  show() {
-    this.props.toggle(true);
-  },
-
-  hide() {
-    this.props.toggle(false);
-  },
-
-  togglePublishModal(value, element) {
-    this.setState({
-      currentElement: element,
-      showPublishModal: value,
-    });
-  },
-
-  selectText() {
-    const selectedText = this.getSelectedText(React.findDOMNode(this.refs.originalText));
-    this.setState({
-      selectedText: selectedText,
-    });
-  },
-
-  createFromSelection() {
-    const body = this.state.selectedText;
-    if (body && body !== '') {
-      const newElement = {
-        'title': null,
-        'body': body,
-        'archived': false,
-        'published': false,
-        'parent': this.props.element.parent,
-      };
-      this.addElement(newElement);
-      this.togglePublishModal(true, newElement);
-    }
-  },
-
-  processPublishedElement(element) {
-    this.removeElement(element);
-    this.addElement(element);
-  },
-
-  addElement(element) {
-    let newElements = this.state.newElements;
-    newElements = ArrayHelper.addElementToArray(newElements, element, 'body');
-    this.setState({
-      newElements: newElements,
-      selectedText: null,
-    });
-  },
-
-  removeElement(element) {
-    let newElements = this.state.newElements;
-    newElements = ArrayHelper.removeElementFromArray(newElements, element, 'body');
-    this.setState({
-      newElements: newElements,
-    });
-  },
-
-  divide() {
-    this.hide();
-    const data = {
-      'archived': true,
-      'published': false,
-      'division': {
-        'elements': this.state.newElements,
-      },
-    };
-    SynthesisElementActions.archive(this.props.synthesis.id, this.props.element.id, data);
-    this.transitionTo('inbox', {'type': 'new'});
   },
 
 });

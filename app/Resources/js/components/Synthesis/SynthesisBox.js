@@ -39,6 +39,16 @@ const SynthesisBox = React.createClass({
      });
   },
 
+  loadSynthesisFromServer() {
+    Fetcher
+      .get('/syntheses/' + this.props.synthesis_id)
+      .then((data) => {
+        this.setState({
+          'synthesis': data,
+        });
+      });
+  },
+
   renderBoxMode() {
     if (this.state.synthesis !== null) {
       if (this.props.mode === 'view') {
@@ -64,16 +74,6 @@ const SynthesisBox = React.createClass({
         { this.renderBoxMode() }
       </div>
     );
-  },
-
-  loadSynthesisFromServer() {
-    Fetcher
-      .get('/syntheses/' + this.props.synthesis_id)
-      .then((data) => {
-        this.setState({
-          'synthesis': data,
-        });
-      });
   },
 
 });

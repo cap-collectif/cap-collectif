@@ -56,12 +56,26 @@ const OpinionLinkForm = React.createClass({
     }
   },
 
+  formValidationRules: {
+    type: {
+      notNull: {message: 'opinion.link.constraints.type'},
+    },
+    title: {
+      min: {value: 2, message: 'opinion.constraints.title'},
+      notBlank: {message: 'opinion.constraints.title'},
+    },
+    body: {
+      min: {value: 2, message: 'opinion.constraints.body'},
+      notBlank: {message: 'opinion.constraints.body'},
+    },
+  },
+
   renderFormErrors(field) {
     const errors = this.getErrorsMessages(field);
     if (errors.length === 0) {
       return null;
     }
-    return <FlashMessages errors={errors} form={true} />;
+    return <FlashMessages errors={errors} form />;
   },
 
   render() {
@@ -112,19 +126,6 @@ const OpinionLinkForm = React.createClass({
     );
   },
 
-  formValidationRules: {
-    type: {
-      notNull: {message: 'opinion.link.constraints.type'},
-    },
-    title: {
-      min: {value: 2, message: 'opinion.constraints.title'},
-      notBlank: {message: 'opinion.constraints.title'},
-    },
-    body: {
-      min: {value: 2, message: 'opinion.constraints.body'},
-      notBlank: {message: 'opinion.constraints.body'},
-    },
-  },
 });
 
 export default OpinionLinkForm;

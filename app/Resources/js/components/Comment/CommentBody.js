@@ -12,34 +12,6 @@ const CommentBody = React.createClass({
     };
   },
 
-  renderReadMoreOrLess() {
-    if (this.textShouldBeTruncated() && !this.state.expanded) {
-      return <button className="btn-link" onClick={this.expand.bind(this, true)}>{this.getIntlMessage('global.read_more')}</button>;
-    }
-  },
-
-  renderTrashedLabel() {
-    if (this.props.comment.isTrashed) {
-      return (
-        <span className="label label-default">
-          { this.getIntlMessage('comment.trashed.label') }
-        </span>
-      );
-    }
-    return null;
-  },
-
-
-  render() {
-    return (
-      <div className="opinion__text">
-        { this.renderTrashedLabel() }
-        <AutoLinkText text={this.generateText()} />
-        { this.renderReadMoreOrLess() }
-      </div>
-    );
-  },
-
   textShouldBeTruncated() {
     return this.props.comment.body.length > 400;
   },
@@ -65,6 +37,33 @@ const CommentBody = React.createClass({
     this.setState({
       expanded: expanded,
     });
+  },
+
+  renderReadMoreOrLess() {
+    if (this.textShouldBeTruncated() && !this.state.expanded) {
+      return <button className="btn-link" onClick={this.expand.bind(this, true)}>{this.getIntlMessage('global.read_more')}</button>;
+    }
+  },
+
+  renderTrashedLabel() {
+    if (this.props.comment.isTrashed) {
+      return (
+        <span className="label label-default">
+          { this.getIntlMessage('comment.trashed.label') }
+        </span>
+      );
+    }
+    return null;
+  },
+
+  render() {
+    return (
+      <div className="opinion__text">
+        { this.renderTrashedLabel() }
+        <AutoLinkText text={this.generateText()} />
+        { this.renderReadMoreOrLess() }
+      </div>
+    );
   },
 
 });

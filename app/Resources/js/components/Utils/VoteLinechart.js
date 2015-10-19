@@ -25,10 +25,6 @@ const VoteLinechart = React.createClass({
     this.initChart();
   },
 
-  render() {
-    return <div className="opinion__history_chart" ref="linechart" />;
-  },
-
   initChart() {
     const AreaChart = google.visualization.AreaChart;
     const DataTable = google.visualization.arrayToDataTable;
@@ -39,7 +35,7 @@ const VoteLinechart = React.createClass({
       {type: 'number', label: this.getIntlMessage('vote.ok')},
     ]];
 
-    $.each(this.props.history, function(i, row) {
+    $.each(this.props.history, (i, row) => {
       lines.push([
         new Date(1000 * parseInt(row[0], 10)),
         row[1],
@@ -59,10 +55,14 @@ const VoteLinechart = React.createClass({
       theme: 'maximized',
     };
 
-    (new AreaChart(React.findDOMNode(this.refs.linechart))).draw(
-      new DataTable(lines), options
-    );
+    (new AreaChart(React.findDOMNode(this.refs.linechart)))
+      .draw(new DataTable(lines), options);
   },
+
+  render() {
+    return <div className="opinion__history_chart" ref="linechart" />;
+  },
+
 });
 
 export default VoteLinechart;

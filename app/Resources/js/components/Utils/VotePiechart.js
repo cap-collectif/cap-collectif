@@ -10,7 +10,6 @@ const VotePiechart = React.createClass({
   },
   mixins: [ReactIntl.IntlMixin],
 
-
   getDefaultProps() {
     return {
       height: undefined,
@@ -26,10 +25,6 @@ const VotePiechart = React.createClass({
 
   componentDidUpdate() {
     this.initChart();
-  },
-
-  render() {
-    return <div className="opinion__chart" ref="piechart" />;
   },
 
   initChart() {
@@ -56,6 +51,10 @@ const VotePiechart = React.createClass({
         width: this.props.width,
         backgroundColor: 'transparent',
       });
+  },
+
+  render() {
+    return <div className="opinion__chart" ref="piechart" />;
   },
 
 });

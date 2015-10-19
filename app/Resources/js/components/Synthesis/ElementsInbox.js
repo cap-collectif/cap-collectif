@@ -12,6 +12,12 @@ const ElementsInbox = React.createClass({
   },
   mixins: [ReactIntl.IntlMixin],
 
+  getDefaultProps() {
+    return {
+      params: {type: 'new'},
+    };
+  },
+
   getInitialState() {
     return {
       elements: [],
@@ -20,12 +26,6 @@ const ElementsInbox = React.createClass({
       isLoadingMore: false,
       offset: 0,
       limit: Pagination,
-    };
-  },
-
-  getDefaultProps() {
-    return {
-      params: {type: 'new'},
     };
   },
 
@@ -73,6 +73,33 @@ const ElementsInbox = React.createClass({
     }
   },
 
+  resetLoadMoreButton() {
+    const loadMoreButton = React.findDOMNode(this.refs.loadMore);
+    if (loadMoreButton) {
+      $(loadMoreButton).button('reset');
+    }
+  },
+
+  loadElementsByTypeFromServer(type = this.props.params.type) {
+    SynthesisElementActions.loadElementsFromServer(
+      this.props.synthesis.id,
+      type,
+      this.state.offset,
+      this.state.limit
+    );
+  },
+
+  loadMore() {
+    $(React.findDOMNode(this.refs.loadMore)).button('loading');
+    this.setState({
+      isLoadingMore: true,
+      limit: this.state.limit + Pagination,
+    }, () => {
+      this.loadElementsByTypeFromServer();
+    });
+  },
+
+
   renderList() {
     if (!this.state.isLoading) {
       if (this.state.elements.length > 0) {
@@ -107,32 +134,6 @@ const ElementsInbox = React.createClass({
         {this.renderLoadMore()}
       </div>
     );
-  },
-
-  resetLoadMoreButton() {
-    const loadMoreButton = React.findDOMNode(this.refs.loadMore);
-    if (loadMoreButton) {
-      $(loadMoreButton).button('reset');
-    }
-  },
-
-  loadElementsByTypeFromServer(type = this.props.params.type) {
-    SynthesisElementActions.loadElementsFromServer(
-      this.props.synthesis.id,
-      type,
-      this.state.offset,
-      this.state.limit
-    );
-  },
-
-  loadMore() {
-    $(React.findDOMNode(this.refs.loadMore)).button('loading');
-    this.setState({
-      isLoadingMore: true,
-      limit: this.state.limit + Pagination,
-    }, () => {
-      this.loadElementsByTypeFromServer();
-    });
   },
 
 });

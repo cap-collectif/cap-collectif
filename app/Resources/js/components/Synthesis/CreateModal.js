@@ -16,18 +16,18 @@ const CreateModal = React.createClass({
   },
   mixins: [ReactIntl.IntlMixin, ReactRouter.Navigation, React.addons.LinkedStateMixin],
 
+  getDefaultProps() {
+    return {
+      process: null,
+      selectedId: 'root',
+    };
+  },
+
   getInitialState() {
     return {
       name: null,
       parent: this.getElementInTreeById(this.props.elements, this.props.selectedId),
       expanded: this.getExpandedBasedOnSelectedId(),
-    };
-  },
-
-  getDefaultProps() {
-    return {
-      process: null,
-      selectedId: 'root',
     };
   },
 
@@ -71,6 +71,52 @@ const CreateModal = React.createClass({
       }
     }
     return null;
+  },
+
+  setName(event) {
+    this.setState({
+      name: event.target.value,
+    });
+  },
+
+  setParent(element) {
+    if (element) {
+      const value = element !== 'root' ? element : null;
+      this.setState({
+        parent: value,
+      });
+    }
+  },
+
+  expandItem(element) {
+    const expanded = this.state.expanded;
+    expanded[element.id] = this.state.expanded[element.id] ? false : true;
+    this.setState({
+      expanded: expanded,
+    });
+  },
+
+  show() {
+    this.props.toggle(true);
+  },
+
+  hide() {
+    this.props.toggle(false);
+  },
+
+  create() {
+    this.hide();
+    const element = {
+      'archived': true,
+      'published': true,
+      'title': this.state.name,
+      'parent': this.state.parent,
+    };
+    if (typeof this.props.process === 'function') {
+      this.props.process(element);
+      return;
+    }
+    SynthesisElementActions.create(this.props.synthesis.id, element);
   },
 
   renderName() {
@@ -119,52 +165,6 @@ const CreateModal = React.createClass({
       </Modal.Footer>
     </Modal>
     );
-  },
-
-  show() {
-    this.props.toggle(true);
-  },
-
-  hide() {
-    this.props.toggle(false);
-  },
-
-  expandItem(element) {
-    const expanded = this.state.expanded;
-    expanded[element.id] = this.state.expanded[element.id] ? false : true;
-    this.setState({
-      expanded: expanded,
-    });
-  },
-
-  setName(event) {
-    this.setState({
-      name: event.target.value,
-    });
-  },
-
-  setParent(element) {
-    if (element) {
-      const value = element !== 'root' ? element : null;
-      this.setState({
-        parent: value,
-      });
-    }
-  },
-
-  create() {
-    this.hide();
-    const element = {
-      'archived': true,
-      'published': true,
-      'title': this.state.name,
-      'parent': this.state.parent,
-    };
-    if (typeof this.props.process === 'function') {
-      this.props.process(element);
-      return;
-    }
-    SynthesisElementActions.create(this.props.synthesis.id, element);
   },
 
 });

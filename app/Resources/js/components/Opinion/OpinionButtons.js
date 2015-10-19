@@ -16,6 +16,48 @@ const OpinionButtons = React.createClass({
   },
   mixins: [ReactIntl.IntlMixin],
 
+  isVersion() {
+    return !!this.props.opinion.parent;
+  },
+
+  isContribuable() {
+    return this.isVersion() ? this.props.opinion.parent.isContribuable : this.props.opinion.isContribuable;
+  },
+
+  isCurrentVote(value) {
+    return value === this.props.opinion.user_vote;
+  },
+
+  vote(value) {
+    if (this.isVersion()) {
+      OpinionActions.vote({value: value}, this.props.opinion.id, this.props.opinion.parent.id);
+    } else {
+      OpinionActions.vote({value: value}, this.props.opinion.id);
+    }
+  },
+
+  deleteVote() {
+    if (this.isVersion()) {
+      OpinionActions.deleteVote(this.props.opinion.id, this.props.opinion.parent.id);
+    } else {
+      OpinionActions.deleteVote(this.props.opinion.id);
+    }
+  },
+
+  voteAction(value) {
+    if (!LoginStore.isLoggedIn()) {
+      return null;
+    }
+    return this.isCurrentVote(value) ? this.deleteVote() : this.vote(value);
+  },
+
+  isTheUserTheAuthor() {
+    if (this.props.opinion.author === null || !LoginStore.isLoggedIn()) {
+      return false;
+    }
+    return LoginStore.user.uniqueId === this.props.opinion.author.uniqueId;
+  },
+
   renderVoteButton(type) {
     const opinion = this.props.opinion;
     const voteType = this.isVersion() ? opinion.parent.type.voteWidgetType : opinion.type.voteWidgetType;
@@ -100,49 +142,6 @@ const OpinionButtons = React.createClass({
       </ButtonToolbar>
     );
   },
-
-  isVersion() {
-    return this.props.opinion.parent ? true : false;
-  },
-
-  isContribuable() {
-    return this.isVersion() ? this.props.opinion.parent.isContribuable : this.props.opinion.isContribuable;
-  },
-
-  isCurrentVote(value) {
-    return value === this.props.opinion.user_vote;
-  },
-
-  vote(value) {
-    if (this.isVersion()) {
-      OpinionActions.vote({value: value}, this.props.opinion.id, this.props.opinion.parent.id);
-    } else {
-      OpinionActions.vote({value: value}, this.props.opinion.id);
-    }
-  },
-
-  deleteVote() {
-    if (this.isVersion()) {
-      OpinionActions.deleteVote(this.props.opinion.id, this.props.opinion.parent.id);
-    } else {
-      OpinionActions.deleteVote(this.props.opinion.id);
-    }
-  },
-
-  voteAction(value) {
-    if (!LoginStore.isLoggedIn()) {
-      return null;
-    }
-    return this.isCurrentVote(value) ? this.deleteVote() : this.vote(value);
-  },
-
-  isTheUserTheAuthor() {
-    if (this.props.opinion.author === null || !LoginStore.isLoggedIn()) {
-      return false;
-    }
-    return LoginStore.user.uniqueId === this.props.opinion.author.uniqueId;
-  },
-
 
 });
 

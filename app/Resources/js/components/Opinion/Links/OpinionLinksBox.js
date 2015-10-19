@@ -43,6 +43,14 @@ const OpinionLinksBox = React.createClass({
     });
   },
 
+  handleFilterChange(event) {
+    this.setState({
+      filter: event.target.value,
+      isLoading: true,
+      links: [],
+    });
+  },
+
   render() {
     return (
       <div>
@@ -67,14 +75,6 @@ const OpinionLinksBox = React.createClass({
         }
       </div>
     );
-  },
-
-  handleFilterChange(event) {
-    this.setState({
-      filter: event.target.value,
-      isLoading: true,
-      links: [],
-    });
   },
 
 });

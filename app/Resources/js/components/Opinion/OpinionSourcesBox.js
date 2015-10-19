@@ -35,40 +35,6 @@ const OpinionSourcesBox = React.createClass({
     }
   },
 
-  renderFilter() {
-    if (this.state.sources.length > 1) {
-      return (
-        <select ref="filter" className="form-control pull-right" value={this.state.filter} onChange={() => this.updateSelectedValue()}>
-          <option value="popular">{this.getIntlMessage('global.filter_popular')}</option>
-          <option value="last">{this.getIntlMessage('global.filter_last')}</option>
-          <option value="old">{this.getIntlMessage('global.filter_old')}</option>
-        </select>
-      );
-    }
-  },
-
-  render() {
-    return (
-      <div>
-        {this.props.opinion.isContribuable
-          ? <Row>
-              <Col xs={12} sm={6} md={6}>
-                <OpinionSourceForm opinion={this.props.opinion} categories={this.state.categories} />
-              </Col>
-              <Col xs={12} sm={6} md={6}>
-                { this.renderFilter() }
-              </Col>
-            </Row>
-          : this.renderFilter()
-        }
-        {!this.state.isLoading
-          ? <OpinionSourceList isReportingEnabled={this.props.isReportingEnabled} sources={this.state.sources} />
-          : <Loader />
-        }
-      </div>
-    );
-  },
-
   updateSelectedValue() {
     this.setState({
       filter: $(React.findDOMNode(this.refs.filter)).val(),
@@ -107,6 +73,40 @@ const OpinionSourcesBox = React.createClass({
 
   isVersion() {
     return !!this.props.opinion.parent;
+  },
+
+  renderFilter() {
+    if (this.state.sources.length > 1) {
+      return (
+        <select ref="filter" className="form-control pull-right" value={this.state.filter} onChange={() => this.updateSelectedValue()}>
+          <option value="popular">{this.getIntlMessage('global.filter_popular')}</option>
+          <option value="last">{this.getIntlMessage('global.filter_last')}</option>
+          <option value="old">{this.getIntlMessage('global.filter_old')}</option>
+        </select>
+      );
+    }
+  },
+
+  render() {
+    return (
+      <div>
+        {this.props.opinion.isContribuable
+          ? <Row>
+              <Col xs={12} sm={6} md={6}>
+                <OpinionSourceForm opinion={this.props.opinion} categories={this.state.categories} />
+              </Col>
+              <Col xs={12} sm={6} md={6}>
+                { this.renderFilter() }
+              </Col>
+            </Row>
+          : this.renderFilter()
+        }
+        {!this.state.isLoading
+          ? <OpinionSourceList isReportingEnabled={this.props.isReportingEnabled} sources={this.state.sources} />
+          : <Loader />
+        }
+      </div>
+    );
   },
 
 });

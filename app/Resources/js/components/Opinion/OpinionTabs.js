@@ -53,10 +53,10 @@ const OpinionTabs = React.createClass({
   },
 
   getArgumentsTrad() {
-    if (this.getCommentSystem() === COMMENT_SYSTEM_BOTH) {
-      return this.getIntlMessage('global.arguments');
-    }
-    return this.getIntlMessage('global.simple_arguments');
+    return this.getCommentSystem() === COMMENT_SYSTEM_BOTH
+      ? this.getIntlMessage('global.arguments')
+      : this.getIntlMessage('global.simple_arguments')
+    ;
   },
 
   getDefaultKey() {
@@ -73,104 +73,6 @@ const OpinionTabs = React.createClass({
 
   getType() {
     return this.props.opinion.parent ? this.props.opinion.parent.type : this.props.opinion.type;
-  },
-
-  renderArgumentsContent() {
-    return <OpinionArgumentsBox {...this.props} />;
-  },
-
-  renderVersionsContent() {
-    return (
-      <OpinionVersionsBox
-        isReportingEnabled={this.props.isReportingEnabled}
-        isContribuable={this.isContribuable()}
-        opinionId={this.props.opinion.id}
-        opinionBody={this.props.opinion.body}
-      />
-    );
-  },
-
-  renderLinksContent() {
-    return <OpinionLinksBox {...this.props} />;
-  },
-
-  renderSourcesContent() {
-    return <OpinionSourcesBox {...this.props} />;
-  },
-
-  renderStatisticsContent() {
-    const opinion = this.props.opinion;
-
-    return (
-      <VoteLinechart top={20} height={300} width={847} history={opinion.history.votes} />
-    );
-  },
-
-  render() {
-    if (this.isSourceable() + this.isCommentable() + this.isVersionable() + this.hasStatistics() + this.isLinkable() > 1) {
-      // at least two tabs
-      const opinion = this.props.opinion;
-
-      return (
-        <TabbedArea defaultActiveKey={this.getDefaultKey()} animation={false}>
-          { this.isVersionable()
-            ? <Tab id="opinion__versions" className="opinion-tabs" eventKey={'versions'} title={
-                <FormattedMessage message={this.getIntlMessage('global.versions')} num={opinion.versions_count} />
-              }>
-                {this.renderVersionsContent()}
-              </Tab>
-            : null
-          }
-          { this.isCommentable()
-            ? <Tab id="opinion__arguments" className="opinion-tabs" eventKey={'arguments'} title={
-                <FormattedMessage message={this.getArgumentsTrad()} num={opinion.arguments_count} />
-              }>
-                {this.renderArgumentsContent()}
-              </Tab>
-            : null
-          }
-          { this.isSourceable()
-            ? <Tab id="opinion__sources" className="opinion-tabs" eventKey={'sources'} title={
-                <FormattedMessage message={this.getIntlMessage('global.sources')} num={opinion.sources_count} />
-              }>
-                {this.renderSourcesContent()}
-              </Tab>
-            : null
-          }
-          { this.hasStatistics()
-            ? <Tab id="opinion__evolution" className="opinion-tabs" eventKey={'evolution'} title={
-                <FormattedMessage message={this.getIntlMessage('global.votes_evolution')} />
-              }>
-                {this.renderStatisticsContent()}
-              </Tab>
-            : null
-          }
-          { this.isLinkable()
-            ? <Tab id="opinion__links" className="opinion-tabs" eventKey={'links'} tab={
-                <FormattedMessage message={this.getIntlMessage('global.links')} num={opinion.connections_count} />
-              }>
-                {this.renderLinksContent()}
-              </Tab>
-            : null
-          }
-        </TabbedArea>
-      );
-    }
-
-    if (this.isSourceable()) {
-      return this.renderSourcesContent();
-    }
-    if (this.isVersionable()) {
-      return this.renderVersionsContent();
-    }
-    if (this.isCommentable()) {
-      return this.renderArgumentsContent();
-    }
-    if (this.hasStatistics()) {
-      return this.renderStatisticsContent();
-    }
-
-    return null;
   },
 
   isLinkable() {
@@ -202,6 +104,89 @@ const OpinionTabs = React.createClass({
 
   isContribuable() {
     return this.props.opinion.isContribuable;
+  },
+
+  renderVersionsContent() {
+    return (
+      <OpinionVersionsBox
+        isReportingEnabled={this.props.isReportingEnabled}
+        isContribuable={this.isContribuable()}
+        opinionId={this.props.opinion.id}
+        opinionBody={this.props.opinion.body}
+      />
+    );
+  },
+
+  render() {
+    const opinion = this.props.opinion;
+
+    if (this.isSourceable() + this.isCommentable() + this.isVersionable() + this.hasStatistics() + this.isLinkable() > 1) {
+      // at least two tabs
+
+      return (
+        <TabbedArea defaultActiveKey={this.getDefaultKey()} animation={false}>
+          { this.isVersionable()
+            ? <Tab id="opinion__versions" className="opinion-tabs" eventKey={'versions'} title={
+                <FormattedMessage message={this.getIntlMessage('global.versions')} num={opinion.versions_count} />
+              }>
+                {this.renderVersionsContent()}
+              </Tab>
+            : null
+          }
+          { this.isCommentable()
+            ? <Tab id="opinion__arguments" className="opinion-tabs" eventKey={'arguments'} title={
+                <FormattedMessage message={this.getArgumentsTrad()} num={opinion.arguments_count} />
+              }>
+                <OpinionArgumentsBox {...this.props} />
+              </Tab>
+            : null
+          }
+          { this.isSourceable()
+            ? <Tab id="opinion__sources" className="opinion-tabs" eventKey={'sources'} title={
+                <FormattedMessage message={this.getIntlMessage('global.sources')} num={opinion.sources_count} />
+              }>
+                <OpinionSourcesBox {...this.props} />
+              </Tab>
+            : null
+          }
+          { this.hasStatistics()
+            ? <Tab id="opinion__evolution" className="opinion-tabs" eventKey={'evolution'} title={
+                <FormattedMessage message={this.getIntlMessage('global.votes_evolution')} />
+              }>
+                <VoteLinechart top={20} height={300} width={847} history={opinion.history.votes} />
+              </Tab>
+            : null
+          }
+          { this.isLinkable()
+            ? <Tab id="opinion__links" className="opinion-tabs" eventKey={'links'} tab={
+                <FormattedMessage message={this.getIntlMessage('global.links')} num={opinion.connections_count} />
+              }>
+                <OpinionLinksBox {...this.props} />
+              </Tab>
+            : null
+          }
+        </TabbedArea>
+      );
+    }
+
+    if (this.isSourceable()) {
+      return <OpinionSourcesBox {...this.props} />;
+    }
+    if (this.isVersionable()) {
+      return this.renderVersionsContent();
+    }
+    if (this.isCommentable()) {
+      return <OpinionArgumentsBox {...this.props} />;
+    }
+    if (this.hasStatistics()) {
+      return <VoteLinechart top={20} height={300} width={847} history={opinion.history.votes} />;
+    }
+
+    if (this.isLinkable()) {
+      return <OpinionLinksBox {...this.props} />;
+    }
+
+    return null;
   },
 
 });

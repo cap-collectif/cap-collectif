@@ -21,6 +21,28 @@ const IgnoreButton = React.createClass({
     this.hideConfirmModal();
   },
 
+  showConfirmModal() {
+    this.setState({
+      showConfirmModal: true,
+    });
+  },
+
+  hideConfirmModal() {
+    this.setState({
+      showConfirmModal: false,
+    });
+  },
+
+  ignore() {
+    this.hideConfirmModal();
+    const data = {
+      'archived': true,
+      'published': false,
+    };
+    SynthesisElementActions.archive(this.props.synthesis.id, this.props.element.id, data);
+    this.transitionTo('inbox', {'type': 'new'});
+  },
+
   renderConfirmButton() {
     return (
       <Button bsSize="large" type="button" className="element__action-ignore" onClick={this.showConfirmModal}>
@@ -55,28 +77,6 @@ const IgnoreButton = React.createClass({
         {this.renderConfirmModal()}
       </div>
     );
-  },
-
-  showConfirmModal() {
-    this.setState({
-      showConfirmModal: true,
-    });
-  },
-
-  hideConfirmModal() {
-    this.setState({
-      showConfirmModal: false,
-    });
-  },
-
-  ignore() {
-    this.hideConfirmModal();
-    const data = {
-      'archived': true,
-      'published': false,
-    };
-    SynthesisElementActions.archive(this.props.synthesis.id, this.props.element.id, data);
-    this.transitionTo('inbox', {'type': 'new'});
   },
 
 });

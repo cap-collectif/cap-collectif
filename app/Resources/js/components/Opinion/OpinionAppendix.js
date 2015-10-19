@@ -16,6 +16,12 @@ const OpinionAppendix = React.createClass({
     };
   },
 
+  toggle() {
+    this.setState({
+      expanded: !this.state.expanded,
+    });
+  },
+
   renderCaret() {
     if (this.state.expanded) {
       return <i className="cap cap-arrow-68"></i>;
@@ -63,14 +69,6 @@ const OpinionAppendix = React.createClass({
     );
   },
 
-  toggle() {
-    this.setState({
-      expanded: !this.state.expanded,
-    });
-  },
-
 });
 
 export default OpinionAppendix;
-
-

@@ -18,6 +18,12 @@ const NotationButtons = React.createClass({
     return classes;
   },
 
+  note(value) {
+    if (typeof this.props.onChange === 'function') {
+      this.props.onChange(value);
+    }
+  },
+
   render() {
     const classes = this.getNotationStarsClasses();
     return (
@@ -41,12 +47,6 @@ const NotationButtons = React.createClass({
         </Button>
       </div>
     );
-  },
-
-  note(value) {
-    if (typeof this.props.onChange === 'function') {
-      this.props.onChange(value);
-    }
   },
 
 });

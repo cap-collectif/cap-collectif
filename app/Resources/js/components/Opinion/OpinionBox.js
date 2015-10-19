@@ -39,6 +39,10 @@ const OpinionBox = React.createClass({
     ;
   },
 
+  isVersion() {
+    return this.props.opinion && this.props.opinion.parent ? true : false;
+  },
+
   renderVotesHelpText() {
     const helpText = this.getOpinionType().votesHelpText;
     if (helpText) {
@@ -152,11 +156,6 @@ const OpinionBox = React.createClass({
       </div>
     );
   },
-
-  isVersion() {
-    return this.props.opinion && this.props.opinion.parent ? true : false;
-  },
-
 
 });
 

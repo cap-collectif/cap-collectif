@@ -16,6 +16,12 @@ const CommentForm = React.createClass({
   },
   mixins: [ReactIntl.IntlMixin, React.addons.LinkedStateMixin, ValidatorMixin],
 
+  getDefaultProps() {
+    return {
+      isAnswer: false,
+    };
+  },
+
   getInitialState() {
     return {
       body: '',
@@ -72,10 +78,51 @@ const CommentForm = React.createClass({
     });
   },
 
+  expand(newState) {
+    if (!newState) {
+      const $block = $(React.findDOMNode(this.refs.commentBlock));
+      if (event.relatedTarget && ($(event.relatedTarget).is($block) || $block.has($(event.relatedTarget)).length)) {
+        return; // clicked on an element inside comment block
+      }
+      if (this.state.body.length === 0) {
+        this.setState({expanded: false, submitted: false});
+        return;
+      }
+    }
+    this.setState({'expanded': newState});
+  },
+
+  create() {
+    this.setState({submitted: true}, () => {
+      if (!this.isValid()) {
+        return;
+      }
+
+      this.setState({isSubmitting: true});
+
+      const data = {
+        body: this.state.body,
+      };
+      if (!LoginStore.isLoggedIn()) {
+        data.authorName = this.state.authorName;
+        data.authorEmail = this.state.authorEmail;
+      }
+
+      this.props.comment(data)
+      .then(() => {
+        this.setState(this.getInitialState());
+        autosize.destroy(React.findDOMNode(this.refs.body));
+      })
+      .catch(() => {
+        this.setState({isSubmitting: false, submitted: false});
+      });
+    });
+  },
+
   renderFormErrors(field) {
     const errors = this.getErrorsMessages(field);
     if (errors.length > 0) {
-      return <FlashMessages errors={errors} form={true} />;
+      return <FlashMessages errors={errors} form />;
     }
     return null;
   },
@@ -193,47 +240,6 @@ const CommentForm = React.createClass({
         </div>
       </div>
     );
-  },
-
-  expand(newState) {
-    if (!newState) {
-      const $block = $(React.findDOMNode(this.refs.commentBlock));
-      if (event.relatedTarget && ($(event.relatedTarget).is($block) || $block.has($(event.relatedTarget)).length)) {
-        return; // clicked on an element inside comment block
-      }
-      if (this.state.body.length === 0) {
-        this.setState({expanded: false, submitted: false});
-        return;
-      }
-    }
-    this.setState({'expanded': newState});
-  },
-
-  create() {
-    this.setState({submitted: true}, () => {
-      if (!this.isValid()) {
-        return;
-      }
-
-      this.setState({isSubmitting: true});
-
-      const data = {
-        body: this.state.body,
-      };
-      if (!LoginStore.isLoggedIn()) {
-        data.authorName = this.state.authorName;
-        data.authorEmail = this.state.authorEmail;
-      }
-
-      this.props.comment(data)
-      .then(() => {
-        this.setState(this.getInitialState());
-        autosize.destroy(React.findDOMNode(this.refs.body));
-      })
-      .catch(() => {
-        this.setState({isSubmitting: false, submitted: false});
-      });
-    });
   },
 
 });

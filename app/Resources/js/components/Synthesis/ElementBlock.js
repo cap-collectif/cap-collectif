@@ -62,7 +62,7 @@ const ElementBlock = React.createClass({
             {this.renderAuthor()} {this.renderDate()}
             <ElementNotation element={element} />
           </p>
-          <ElementTitle element={element} link={true} className="element__title" />
+          <ElementTitle element={element} link className="element__title" />
           <ElementBreadcrumb element={element} />
         </div>
         {this.renderStatus()}

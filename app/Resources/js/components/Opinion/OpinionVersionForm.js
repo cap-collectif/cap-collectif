@@ -66,10 +66,79 @@ const OpinionVersionForm = React.createClass({
     }
   },
 
+  close() {
+    this.setState({showModal: false});
+  },
+
+  show() {
+    this.setState({showModal: true});
+  },
+
+  create() {
+    this.setState({submitted: true}, () => {
+      if (!this.isValid()) {
+        return;
+      }
+
+      this.setState({isSubmitting: true});
+
+      const data = {
+        title: this.state.title,
+        body: this.state.body,
+        comment: this.state.comment,
+      };
+
+      OpinionActions
+      .createVersion(this.props.opinionId, data)
+      .then((version) => {
+        this.setState(this.getInitialState());
+        this.close();
+        window.location.href = window.location.href + '/versions/' + version.slug;
+        return true;
+      })
+      .catch(() => {
+        this.setState({isSubmitting: false, submitted: false});
+      });
+    });
+  },
+
+  update() {
+    this.setState({submitted: true}, () => {
+      if (!this.isValid()) {
+        return;
+      }
+
+      this.setState({isSubmitting: true});
+
+      const data = {
+        title: this.state.title,
+        body: this.state.body,
+        comment: this.state.comment,
+      };
+
+      OpinionActions
+        .updateVersion(this.props.opinionId, this.props.version.id, data)
+        .then(() => {
+          this.setState(this.getInitialState());
+          this.close();
+          location.reload(); // TODO when enough time
+          return true;
+        })
+        .catch(() => {
+          this.setState({isSubmitting: false, submitted: false});
+        });
+    });
+  },
+
+  isContribuable() {
+    return this.props.isContribuable;
+  },
+
+
   renderFormErrors(field) {
     const errors = this.getErrorsMessages(field);
     if (errors.length > 0) {
-      return <FlashMessages errors={errors} form={true} />;
+      return <FlashMessages errors={errors} form />;
     }
     return null;
   },
@@ -204,74 +273,6 @@ const OpinionVersionForm = React.createClass({
         </Modal>
       </div>
     );
-  },
-
-  close() {
-    this.setState({showModal: false});
-  },
-
-  show() {
-    this.setState({showModal: true});
-  },
-
-  create() {
-    this.setState({submitted: true}, () => {
-      if (!this.isValid()) {
-        return;
-      }
-
-      this.setState({isSubmitting: true});
-
-      const data = {
-        title: this.state.title,
-        body: this.state.body,
-        comment: this.state.comment,
-      };
-
-      OpinionActions
-      .createVersion(this.props.opinionId, data)
-      .then((version) => {
-        this.setState(this.getInitialState());
-        this.close();
-        window.location.href = window.location.href + '/versions/' + version.slug;
-        return true;
-      })
-      .catch(() => {
-        this.setState({isSubmitting: false, submitted: false});
-      });
-    });
-  },
-
-  update() {
-    this.setState({submitted: true}, () => {
-      if (!this.isValid()) {
-        return;
-      }
-
-      this.setState({isSubmitting: true});
-
-      const data = {
-        title: this.state.title,
-        body: this.state.body,
-        comment: this.state.comment,
-      };
-
-      OpinionActions
-        .updateVersion(this.props.opinionId, this.props.version.id, data)
-        .then(() => {
-          this.setState(this.getInitialState());
-          this.close();
-          location.reload(); // TODO when enough time
-          return true;
-        })
-        .catch(() => {
-          this.setState({isSubmitting: false, submitted: false});
-        });
-    });
-  },
-
-  isContribuable() {
-    return this.props.isContribuable;
   },
 
 });

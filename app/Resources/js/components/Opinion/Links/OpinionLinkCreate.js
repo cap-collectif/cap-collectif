@@ -30,6 +30,28 @@ const OpinionLinkCreate = React.createClass({
       });
   },
 
+  handleFailure() {
+    this.setState({isSubmitting: false});
+  },
+
+  handleSubmit() {
+    this.setState({isSubmitting: true});
+  },
+
+  close() {
+    this.setState({showModal: false});
+  },
+
+  show() {
+    this.setState({showModal: true});
+  },
+
+  handleSubmitSuccess() {
+    this.close();
+    this.setState({isSubmitting: false});
+    OpinionLinkActions.load(this.props.opinion.id, 'last');
+  },
+
   render() {
     if (!this.props.opinion.isContribuable) {
       return null;
@@ -71,28 +93,6 @@ const OpinionLinkCreate = React.createClass({
         </Modal>
       </div>
     );
-  },
-
-  handleFailure() {
-    this.setState({isSubmitting: false});
-  },
-
-  handleSubmit() {
-    this.setState({isSubmitting: true});
-  },
-
-  close() {
-    this.setState({showModal: false});
-  },
-
-  show() {
-    this.setState({showModal: true});
-  },
-
-  handleSubmitSuccess() {
-    this.close();
-    this.setState({isSubmitting: false});
-    OpinionLinkActions.load(this.props.opinion.id, 'last');
   },
 
 });

@@ -26,7 +26,7 @@ const FormMixin = { // This will be easy to use as an higher-order Component
       return errors.length === 0;
     }
 
-    throw `Unkown reference to ${ref} in formValidationRules`;
+    throw new Error(`Unkown reference to ${ref} in formValidationRules`);
   },
 
   getFieldStyle(field) {

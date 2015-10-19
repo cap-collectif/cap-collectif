@@ -49,7 +49,7 @@ const urlRegex = [
   '(?:' + urlSuffixRegex.source + ')?',  // match for path, query string, and/or hash anchor - optional
 ].join('');
 
-export default function(text='') {
+export default function(text = '') {
   const regex = new RegExp(urlRegex, 'gi');
   const matches = [];
 

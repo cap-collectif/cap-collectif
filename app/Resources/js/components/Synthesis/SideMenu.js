@@ -44,6 +44,58 @@ const SideMenu = React.createClass({
     this.fetchElements();
   },
 
+  toggleExpand(element) {
+    SynthesisElementActions.expandNavbarItem(element.id, !this.state.expanded[element.id]);
+  },
+
+  selectItem(element) {
+    SynthesisElementActions.selectNavbarItem(element.id);
+    if (element.id !== 'root') {
+      this.transitionTo('show_element', {'element_id': element.id});
+    }
+  },
+
+  showCreateModal() {
+    this.toggleCreateModal(true);
+  },
+
+  hideCreateModal() {
+    this.toggleCreateModal(false);
+  },
+
+  toggleCreateModal(value) {
+    this.setState({
+      showCreateModal: value,
+    });
+  },
+
+  fetchElements() {
+    if (!SynthesisElementStore.isFetchingTree) {
+      if (SynthesisElementStore.isInboxSync.allTree) {
+        this.setState({
+          navbarItems: SynthesisElementStore.elements.allTree,
+          expanded: SynthesisElementStore.expandedNavbarItems,
+          selectedId: SynthesisElementStore.selectedNavbarItem,
+          isLoading: false,
+        });
+        return;
+      }
+
+      this.setState({
+        isLoading: true,
+      }, () => {
+        this.loadElementsTreeFromServer();
+      });
+    }
+  },
+
+  loadElementsTreeFromServer() {
+    SynthesisElementActions.loadElementsTreeFromServer(
+      this.props.synthesis.id,
+      'all'
+    );
+  },
+
   renderContributionsButton() {
     return (
         <NavItemLink to="folder_manager" className="menu__link" bsStyle="link">
@@ -101,58 +153,6 @@ const SideMenu = React.createClass({
         </Nav>
         <CreateModal synthesis={this.props.synthesis} show={this.state.showCreateModal} toggle={this.toggleCreateModal} elements={this.state.navbarItems} selectedId={this.state.selectedId} />
       </div>
-    );
-  },
-
-  toggleExpand(element) {
-    SynthesisElementActions.expandNavbarItem(element.id, !this.state.expanded[element.id]);
-  },
-
-  selectItem(element) {
-    SynthesisElementActions.selectNavbarItem(element.id);
-    if (element.id !== 'root') {
-      this.transitionTo('show_element', {'element_id': element.id});
-    }
-  },
-
-  showCreateModal() {
-    this.toggleCreateModal(true);
-  },
-
-  hideCreateModal() {
-    this.toggleCreateModal(false);
-  },
-
-  toggleCreateModal(value) {
-    this.setState({
-      showCreateModal: value,
-    });
-  },
-
-  fetchElements() {
-    if (!SynthesisElementStore.isFetchingTree) {
-      if (SynthesisElementStore.isInboxSync.allTree) {
-        this.setState({
-          navbarItems: SynthesisElementStore.elements.allTree,
-          expanded: SynthesisElementStore.expandedNavbarItems,
-          selectedId: SynthesisElementStore.selectedNavbarItem,
-          isLoading: false,
-        });
-        return;
-      }
-
-      this.setState({
-        isLoading: true,
-      }, () => {
-        this.loadElementsTreeFromServer();
-      });
-    }
-  },
-
-  loadElementsTreeFromServer() {
-    SynthesisElementActions.loadElementsTreeFromServer(
-      this.props.synthesis.id,
-      'all'
     );
   },
 

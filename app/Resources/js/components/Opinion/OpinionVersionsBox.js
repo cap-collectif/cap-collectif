@@ -33,6 +33,29 @@ const OpinionVersionsBox = React.createClass({
     }
   },
 
+  updateSelectedValue() {
+    this.setState({
+      filter: $(React.findDOMNode(this.refs.filter)).val(),
+      isLoading: true,
+      versions: [],
+    });
+  },
+
+  loadVersionsFromServer() {
+    this.setState({'isLoading': true});
+
+    Fetcher
+    .get(`/opinions/${this.props.opinionId}/versions?offset=${this.state.offset}&filter=${this.state.filter}`)
+    .then((data) => {
+      this.setState({
+        'isLoading': false,
+        'versions': data.versions,
+        'rankingThreshold': data.rankingThreshold,
+      });
+      return true;
+    });
+  },
+
   renderFilter() {
     if (this.state.versions.length > 1) {
       return (
@@ -69,29 +92,6 @@ const OpinionVersionsBox = React.createClass({
         }
       </div>
     );
-  },
-
-  updateSelectedValue() {
-    this.setState({
-      filter: $(React.findDOMNode(this.refs.filter)).val(),
-      isLoading: true,
-      versions: [],
-    });
-  },
-
-  loadVersionsFromServer() {
-    this.setState({'isLoading': true});
-
-    Fetcher
-    .get(`/opinions/${this.props.opinionId}/versions?offset=${this.state.offset}&filter=${this.state.filter}`)
-    .then((data) => {
-      this.setState({
-        'isLoading': false,
-        'versions': data.versions,
-        'rankingThreshold': data.rankingThreshold,
-      });
-      return true;
-    });
   },
 
 });

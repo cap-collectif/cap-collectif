@@ -12,9 +12,16 @@ const OpinionBodyDiffModal = React.createClass({
   },
   mixins: [ReactIntl.IntlMixin],
 
-
   getInitialState() {
     return { showModal: false };
+  },
+
+  open() {
+    this.setState({ showModal: true });
+  },
+
+  close() {
+    this.setState({ showModal: false });
   },
 
   render() {
@@ -44,14 +51,6 @@ const OpinionBodyDiffModal = React.createClass({
         </Modal>
       </span>
     );
-  },
-
-  open() {
-    this.setState({ showModal: true });
-  },
-
-  close() {
-    this.setState({ showModal: false });
   },
 
 });

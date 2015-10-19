@@ -32,31 +32,6 @@ const ViewBox = React.createClass({
     this.fetchRootElements();
   },
 
-  renderElementsList() {
-    if (this.props.synthesis !== null && this.props.synthesis.enabled && this.state.elements.length > 0) {
-      return (
-        <ul className="synthesis__elements">
-          {
-            this.state.elements.map((element) => {
-              return (
-                <ViewElement key={element.id} element={element} synthesis={this.props.synthesis} />
-              );
-            })
-          }
-        </ul>
-      );
-    }
-  },
-
-  render() {
-    return (
-      <div className="synthesis__view">
-        <Loader show={this.state.isLoading} />
-        {this.renderElementsList()}
-      </div>
-    );
-  },
-
   fetchRootElements() {
     if (!SynthesisElementStore.isProcessing) {
       if (SynthesisElementStore.isInboxSync.publishedTree) {
@@ -79,6 +54,31 @@ const ViewBox = React.createClass({
     SynthesisElementActions.loadElementsTreeFromServer(
       this.props.synthesis.id,
       'published'
+    );
+  },
+
+  renderElementsList() {
+    if (this.props.synthesis !== null && this.props.synthesis.enabled && this.state.elements.length > 0) {
+      return (
+        <ul className="synthesis__elements">
+          {
+            this.state.elements.map((element) => {
+              return (
+                <ViewElement key={element.id} element={element} synthesis={this.props.synthesis} />
+              );
+            })
+          }
+        </ul>
+      );
+    }
+  },
+
+  render() {
+    return (
+      <div className="synthesis__view">
+        <Loader show={this.state.isLoading} />
+        {this.renderElementsList()}
+      </div>
     );
   },
 

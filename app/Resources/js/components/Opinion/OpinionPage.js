@@ -54,6 +54,13 @@ const OpinionPage = React.createClass({
     this.loadOpinion();
   },
 
+  loadOpinion() {
+    OpinionActions.loadOpinion(
+      this.props.opinionId,
+      this.props.versionId
+    );
+  },
+
   render() {
     return (
       <div className="has-chart">
@@ -68,13 +75,6 @@ const OpinionPage = React.createClass({
           : null
         }
       </div>
-    );
-  },
-
-  loadOpinion() {
-    OpinionActions.loadOpinion(
-      this.props.opinionId,
-      this.props.versionId
     );
   },
 
