@@ -30,17 +30,17 @@ class Version20150916123729 extends AbstractMigration implements ContainerAwareI
 
     public function postUp(Schema $schema)
     {
-        $em = $this->container->get('doctrine.orm.entity_manager');
-        $repo = $em->getRepository('CapcoAppBundle:OpinionType');
-        $opinionTypes = $repo->findAll();
-        foreach ($opinionTypes as $ot) {
-            if ($ot->getRoot() === null && $ot->getParent() === null) {
-                $this->connection->update('opinion_type', ['root' => $ot->getId()], ['id' => $ot->getId()]);
-            }
-        }
-        $repo->verify();
-        $repo->recover();
-        $em->flush();
+        // $em = $this->container->get('doctrine.orm.entity_manager');
+        // $repo = $em->getRepository('CapcoAppBundle:OpinionType');
+        // $opinionTypes = $repo->findAll();
+        // foreach ($opinionTypes as $ot) {
+        //     if ($ot->getRoot() === null && $ot->getParent() === null) {
+        //         $this->connection->update('opinion_type', ['root' => $ot->getId()], ['id' => $ot->getId()]);
+        //     }
+        // }
+        // $repo->verify();
+        // $repo->recover();
+        // $em->flush();
     }
 
 
