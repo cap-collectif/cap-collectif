@@ -1,8 +1,8 @@
 const OpinionLinkCreateInfos = React.createClass({
-  mixins: [ReactIntl.IntlMixin],
   propTypes: {
     opinion: React.PropTypes.object.isRequired,
   },
+  mixins: [ReactIntl.IntlMixin],
 
   render() {
     return (

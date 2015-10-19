@@ -91,7 +91,7 @@ const OpinionLinkCreate = React.createClass({
 
   handleSubmitSuccess() {
     this.close();
-    this.stopSubmitting();
+    this.setState({isSubmitting: false});
     OpinionLinkActions.load(this.props.opinion.id, 'last');
   },
 

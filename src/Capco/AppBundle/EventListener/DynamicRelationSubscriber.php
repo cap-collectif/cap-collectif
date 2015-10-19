@@ -48,7 +48,7 @@ class DynamicRelationSubscriber implements EventSubscriber
                             'cascade'       => ['persist', 'remove'],
                             'inversedBy'      => ['connections'],
                             'joinColumns'    => [[
-                                'onDelete'  => 'DELETE',
+                                'onDelete'  => 'CASCADE',
                             ]],
                         ]);
 

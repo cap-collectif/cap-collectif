@@ -2,7 +2,7 @@ import OpinionLinkList from './OpinionLinkList';
 import OpinionLinkCreate from './OpinionLinkCreate';
 import Filter from '../../Utils/Filter';
 import Loader from '../../Utils/Loader';
-import OpinionActions from '../../../actions/OpinionActions';
+import OpinionLinkActions from '../../../actions/OpinionLinkActions';
 import OpinionLinkStore from '../../../stores/OpinionLinkStore';
 
 const Row = ReactBootstrap.Row;
@@ -28,7 +28,7 @@ const OpinionLinksBox = React.createClass({
 
   componentDidUpdate(prevProps, prevState) {
     if (this.state.filter !== prevState.filter) {
-      OpinionActions.loadLinks(this.props.opinion.id, this.state.filter);
+      OpinionLinkActions.load(this.props.opinion.id, this.state.filter);
     }
   },
 

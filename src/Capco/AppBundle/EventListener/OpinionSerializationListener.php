@@ -146,6 +146,10 @@ class OpinionSerializationListener implements EventSubscriberInterface
     protected function getIncludedGroups($event)
     {
         $exclusionStrategy = $event->getContext()->getExclusionStrategy();
+        if (!$exclusionStrategy) {
+            return [];
+        }
+
         $reflectionClass = new \ReflectionClass('JMS\Serializer\Exclusion\GroupsExclusionStrategy');
         $reflectionProperty = $reflectionClass->getProperty('groups');
         $reflectionProperty->setAccessible(true);
