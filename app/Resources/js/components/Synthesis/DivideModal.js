@@ -223,8 +223,8 @@ const DivideModal = React.createClass({
   },
 
   removeElement(element) {
-    const newElements = this.state.newElements;
-    ArrayHelper.removeElementFromArray(newElements, element, 'body');
+    let newElements = this.state.newElements;
+    newElements = ArrayHelper.removeElementFromArray(newElements, element, 'body');
     this.setState({
       newElements: newElements,
     });

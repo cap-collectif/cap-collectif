@@ -1,6 +1,6 @@
 import AppDispatcher from '../dispatchers/AppDispatcher';
 import Fetcher from '../services/Fetcher';
-import {RECEIVE_COUNT, RECEIVE_ELEMENTS, RECEIVE_ELEMENTS_SUCCESS, RECEIVE_ELEMENTS_FAILURE, RECEIVE_ELEMENT, RECEIVE_ELEMENT_SUCCESS, RECEIVE_ELEMENT_FAILURE, EXPAND_NAVBAR_ITEM, SELECT_NAVBAR_ITEM, CREATE_ELEMENT, ARCHIVE_ELEMENT, NOTE_ELEMENT, COMMENT_ELEMENT, MOVE_ELEMENT, DIVIDE_ELEMENT, UPDATE_ELEMENT_SUCCESS, UPDATE_ELEMENT_FAILURE, CREATE_ELEMENT_SUCCESS, CREATE_ELEMENT_FAILURE, NAVBAR_DEPTH} from '../constants/SynthesisElementConstants';
+import {RECEIVE_COUNT, RECEIVE_ELEMENTS, RECEIVE_ELEMENTS_SUCCESS, RECEIVE_ELEMENTS_FAILURE, RECEIVE_ELEMENT, RECEIVE_ELEMENT_SUCCESS, RECEIVE_ELEMENT_FAILURE, EXPAND_NAVBAR_ITEM, SELECT_NAVBAR_ITEM, CREATE_ELEMENT, ARCHIVE_ELEMENT, NOTE_ELEMENT, COMMENT_ELEMENT, NAME_ELEMENT, MOVE_ELEMENT, DIVIDE_ELEMENT, UPDATE_ELEMENT_SUCCESS, UPDATE_ELEMENT_FAILURE, CREATE_ELEMENT_SUCCESS, CREATE_ELEMENT_FAILURE, NAVBAR_DEPTH} from '../constants/SynthesisElementConstants';
 
 const idOf = (val) => {
   if (val === 'root') {
@@ -162,6 +162,12 @@ export default {
         notation: data.notation,
       });
     }
+    if (data.title) {
+      AppDispatcher.dispatch({
+        actionType: NAME_ELEMENT,
+        title: data.title,
+      });
+    }
     if (data.comment) {
       AppDispatcher.dispatch({
         actionType: COMMENT_ELEMENT,
@@ -169,12 +175,12 @@ export default {
       });
     }
     if (data.division) {
+      data.division.elements.forEach((el, index) => {
+        data.division.elements[index].parent = idOf(el.parent);
+      });
       AppDispatcher.dispatch({
         actionType: DIVIDE_ELEMENT,
         division: data.division,
-      });
-      data.division.elements.forEach((el, index) => {
-        data.division.elements[index].parent = idOf(el.parent);
       });
     }
     updateElementFromData(synthesis, element, data, 'common.success.archive_success', 'common.errors.archive_error');

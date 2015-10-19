@@ -64,7 +64,10 @@ const ElementsFinder = React.createClass({
     return (
       <div id={'element-' + element.id} className={classes} onClick={this.select.bind(this, element)}>
         {this.renderItemCaret(element)}
-        <ElementIcon className="tree__item__icon" element={element} />
+        {element.id === 'root'
+          ? <ElementIcon className="tree__item__icon" element={element}/>
+          : null
+        }
         {this.renderItemTitle(element)}
       </div>
     );

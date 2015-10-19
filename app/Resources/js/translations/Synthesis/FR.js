@@ -81,20 +81,19 @@ export default {
           label: 'Gérer les dossiers',
         },
         publish: {
-          title: 'Classer...',
           btn_cancel: 'Annuler',
           btn_submit: 'Classer',
-          comment: {
-            title: 'Annoter',
+          help: {
+            notation: 'Sélectionner des étoiles pour noter.',
           },
-          notation: {
-            title: 'Noter',
-            help: 'Sélectionner des étoiles pour noter.',
+          field: {
+            comment: 'Annoter',
+            notation: 'Noter',
+            parent: 'Déplacer',
+            title: 'Titre',
           },
-          parent: {
-            title: 'Déplacer',
-          },
-          optional: 'facultatif',
+          optional: 'Facultatif',
+          title: 'Classer...',
         },
         divide: {
           title: 'Diviser la contribution',

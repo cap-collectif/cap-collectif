@@ -18,10 +18,12 @@ const PublishModal = React.createClass({
   mixins: [ReactIntl.IntlMixin, ReactRouter.Navigation, React.addons.LinkedStateMixin],
 
   getInitialState() {
+    const element = this.props.element;
     return {
-      notation: this.props.element ? this.props.element.notation : null,
-      parent: this.props.element ? this.props.element.parent : null,
-      comment: this.props.element ? this.props.element.comment : null,
+      notation: element ? element.notation : null,
+      parent: element ? element.parent : null,
+      comment: element ? element.comment : null,
+      title: element ? element.title : null,
       elements: [],
       expanded: {
         root: true,
@@ -51,6 +53,7 @@ const PublishModal = React.createClass({
           notation: nextProps.element.notation,
           parent: nextProps.element.parent,
           comment: nextProps.element.comment,
+          title: nextProps.element.title,
           expanded: this.getExpandedBasedOnElement(),
         });
       }
@@ -81,11 +84,22 @@ const PublishModal = React.createClass({
     return expanded;
   },
 
+  renderTitle() {
+    return (
+      <div className="modal__action">
+        <h2 className="h4">
+          {' ' + this.getIntlMessage('edition.action.publish.field.title')}
+        </h2>
+          <Input type="text" id="publish_element_title" name="publish_element[title]" className="publish-element__title" valueLink={this.linkState('title')} />
+      </div>
+    );
+  },
+
   renderParent() {
     return (
       <div className="modal__action">
         <h2 className="h4">
-          {' ' + this.getIntlMessage('edition.action.publish.parent.title')}
+          {' ' + this.getIntlMessage('edition.action.publish.field.parent')}
         </h2>
         {this.renderParentFinder()}
       </div>
@@ -103,11 +117,11 @@ const PublishModal = React.createClass({
     return (
       <div className="modal__action">
         <h2 className="h4">
-          {' ' + this.getIntlMessage('edition.action.publish.notation.title')}
+          {' ' + this.getIntlMessage('edition.action.publish.field.notation')}
           <span className="small excerpt action__title-right">{'\t' + this.getIntlMessage('edition.action.publish.optional')}</span>
         </h2>
         <NotationButtons notation={this.state.notation} onChange={this.setNotation} block={true} />
-        <p className="small excerpt action__help">{this.getIntlMessage('edition.action.publish.notation.help')}</p>
+        <p className="small excerpt action__help">{this.getIntlMessage('edition.action.publish.help.notation')}</p>
       </div>
     );
   },
@@ -116,7 +130,7 @@ const PublishModal = React.createClass({
     return (
       <div className="modal__action">
         <h2 className="h4">
-          {' ' + this.getIntlMessage('edition.action.publish.comment.title')}
+          {' ' + this.getIntlMessage('edition.action.publish.field.comment')}
           <span className="small excerpt action__title-right">{'\t' + this.getIntlMessage('edition.action.publish.optional')}</span>
         </h2>
         <form id="publish_element" name="publish_element">
@@ -133,6 +147,7 @@ const PublishModal = React.createClass({
           <Modal.Title>{this.getIntlMessage('edition.action.publish.title')}</Modal.Title>
         </Modal.Header>
         <Modal.Body>
+          {this.renderTitle()}
           {this.renderParent()}
           {this.renderNotation()}
           {this.renderComment()}
@@ -176,6 +191,7 @@ const PublishModal = React.createClass({
       'notation': this.state.notation ? this.state.notation : 0,
       'parent': this.state.parent,
       'comment': this.state.comment,
+      'title': this.state.title,
     };
     if (typeof this.props.process === 'function') {
       const element = this.props.element;
@@ -184,6 +200,7 @@ const PublishModal = React.createClass({
       element.notation = data.notation;
       element.parent = data.parent;
       element.comment = data.comment;
+      element.title = data.title;
       this.props.process(element);
       return;
     }

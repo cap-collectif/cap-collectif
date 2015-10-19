@@ -16,21 +16,32 @@ const ElementBreadcrumb = React.createClass({
 
   getElementBreadcrumbItems(element) {
     const items = [];
-    element.path.split('|').map((data) => {
-      const splitted = data.split('-');
-      const title = splitted.shift();
-      const id = splitted.join('-');
-      const item = {
-        'title': title ? title : null,
-        'id': id,
-      };
-      items.push(item);
+    if (element.path) {
+      element.path.split('|').map((data) => {
+        const splitted = data.split('-');
+        const title = splitted.shift();
+        const id = splitted.join('-');
+        const item = {
+          'title': title || null,
+          'id': id,
+        };
+        items.push(item);
+      });
+      return items;
+    }
+    items.push({
+      id: null,
+      title: '(...)',
     });
+    if (element.parent) {
+      items.push(element.parent);
+    }
+    items.push(element);
     return items;
   },
 
   renderLinkOrSpan(element) {
-    if (this.props.link) {
+    if (this.props.link && element.id) {
       return (
         <Link to={'/element/' + element.id} >
           <ElementTitle element={element} />

@@ -15,7 +15,7 @@ class DynamicRelationSubscriber implements EventSubscriber
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function getSubscribedEvents()
     {
@@ -41,7 +41,6 @@ class DynamicRelationSubscriber implements EventSubscriber
                 case 'selflinkable':
                     // Check intersections between current class interfaces and interfaces to add dynamic relation
                     if (count(array_intersect(class_implements($metadata->getName()), $params['interfaces'])) > 0) {
-
                         $metadata->mapManyToOne([
                             'targetEntity'  => $metadata->getName(),
                             'fieldName'     => 'link',
@@ -55,12 +54,11 @@ class DynamicRelationSubscriber implements EventSubscriber
                         ]);
 
                         $metadata->mapOneToMany([
-                            'targetEntity'  => $metadata->getName(),
-                            'fieldName'     => 'connections',
-                            'cascade'       => ['persist', 'remove'],
-                            'mappedBy'      => 'link',
+                            'targetEntity' => $metadata->getName(),
+                            'fieldName' => 'connections',
+                            'cascade' => ['persist', 'remove'],
+                            'mappedBy' => 'link',
                         ]);
-
                     }
                     break;
             }

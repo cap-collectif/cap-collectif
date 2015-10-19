@@ -1,4 +1,4 @@
-import {RECEIVE_COUNT, RECEIVE_ELEMENTS, RECEIVE_ELEMENTS_SUCCESS, RECEIVE_ELEMENTS_FAILURE, RECEIVE_ELEMENT, RECEIVE_ELEMENT_SUCCESS, RECEIVE_ELEMENT_FAILURE, EXPAND_NAVBAR_ITEM, SELECT_NAVBAR_ITEM, CREATE_ELEMENT, ARCHIVE_ELEMENT, NOTE_ELEMENT, COMMENT_ELEMENT, MOVE_ELEMENT, DIVIDE_ELEMENT, UPDATE_ELEMENT_SUCCESS, UPDATE_ELEMENT_FAILURE, CREATE_ELEMENT_SUCCESS, CREATE_ELEMENT_FAILURE} from '../constants/SynthesisElementConstants';
+import {RECEIVE_COUNT, RECEIVE_ELEMENTS, RECEIVE_ELEMENTS_SUCCESS, RECEIVE_ELEMENTS_FAILURE, RECEIVE_ELEMENT, RECEIVE_ELEMENT_SUCCESS, RECEIVE_ELEMENT_FAILURE, EXPAND_NAVBAR_ITEM, SELECT_NAVBAR_ITEM, CREATE_ELEMENT, ARCHIVE_ELEMENT, NOTE_ELEMENT, COMMENT_ELEMENT, NAME_ELEMENT, MOVE_ELEMENT, DIVIDE_ELEMENT, UPDATE_ELEMENT_SUCCESS, UPDATE_ELEMENT_FAILURE, CREATE_ELEMENT_SUCCESS, CREATE_ELEMENT_FAILURE} from '../constants/SynthesisElementConstants';
 import BaseStore from './BaseStore';
 import ArrayHelper from '../services/ArrayHelper';
 
@@ -147,8 +147,19 @@ class SynthesisElementStore extends BaseStore {
         this._resetMessages();
         this.emitChange();
         break;
+      case NAME_ELEMENT:
+        this._element.title = action.title;
+        const element = this.getElementInTreeById(this._elements.allTree, this._element.id);
+        if (element) {
+          element.title = action.title;
+        }
+        this._resetInboxSync();
+        this._isProcessing = true;
+        this._resetMessages();
+        this.emitChange();
+        break;
       case MOVE_ELEMENT:
-        this._element.parent = action.parent;
+        this.changeElementParent(action.parent);
         this._resetInboxSync();
         this._isProcessing = true;
         this._resetMessages();
@@ -156,6 +167,9 @@ class SynthesisElementStore extends BaseStore {
         break;
       case DIVIDE_ELEMENT:
         this._element.division = action.division;
+        action.division.elements.map((newElement) => {
+          this.addElementInTree(newElement);
+        });
         this._resetInboxSync();
         this._isProcessing = true;
         this._resetMessages();
@@ -178,7 +192,7 @@ class SynthesisElementStore extends BaseStore {
       case CREATE_ELEMENT_SUCCESS:
         this._resetMessages();
         this._messages.success.push(action.message);
-        this.addChildInTree(action.element);
+        this.addElementInTree(action.element);
         this._isProcessing = false;
         this.emitChange();
         break;
@@ -265,13 +279,40 @@ class SynthesisElementStore extends BaseStore {
     this._expandedNavbarItems = expanded;
   }
 
+  changeElementParent(parent) {
+    const element = this._element;
+    let tree = this._elements.allTree;
+    // Remove element from previous parent in tree
+    let prevParent = this._element.parent;
+    if (!prevParent) {
+      tree = ArrayHelper.removeElementFromArray(tree, element);
+    } else {
+      prevParent = this.getElementInTreeById(tree, this._element.parent.id);
+      if (prevParent) {
+        const prevChildren = prevParent.children;
+        prevParent.children = ArrayHelper.removeElementFromArray(prevChildren, element);
+        prevParent.childrenCount = prevParent.children.length;
+      }
+    }
+    // Add element to parent in tree
+    const parentInTree = this.getElementInTreeById(tree, parent.id);
+    if (parent.id === 'root') {
+      tree = ArrayHelper.addElementToArray(tree, element);
+    } else if (parentInTree) {
+      const children = parentInTree.children;
+      parentInTree.children = ArrayHelper.addElementToArray(children, element);
+      parentInTree.childrenCount = parentInTree.children.length;
+    }
+    this._element.parent = parent;
+  }
+
   getElementInTreeById(tree, id) {
     for (let i = 0; i < tree.length; i++) {
       const element = tree[i];
       if (element.id === id) {
         return element;
       }
-      if (element.children.length > 0) {
+      if (element.children && element.children.length > 0) {
         const found = this.getElementInTreeById(element.children, id);
         if (found) {
           return found;

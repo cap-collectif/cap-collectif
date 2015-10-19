@@ -23,6 +23,10 @@ Capco\AppBundle\Entity\Synthesis\SynthesisElement:
     path:
       expose: true
       groups: [ElementsTree, ElementsList, ElementDetails]
+    parent:
+      expose: true
+      groups: [ElementDetails]
+      max_depth: 1
     children:
       type: ArrayCollection<Capco\AppBundle\Entity\Synthesis\SynthesisElement>
       expose: true

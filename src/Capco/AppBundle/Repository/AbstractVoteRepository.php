@@ -38,7 +38,7 @@ class AbstractVoteRepository extends EntityRepository
 
         foreach ($votes as $i => $vote) {
             if (isset($counts[$vote['value']])) {
-                $counts[$vote['value']]++;
+                ++$counts[$vote['value']];
                 $counts['date'] = (new \DateTime($vote['updatedAt']))->getTimestamp();
                 $result[] = array_values($counts);
             }

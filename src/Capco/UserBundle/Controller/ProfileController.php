@@ -49,14 +49,14 @@ class ProfileController extends BaseController
     }
 
     /**
-     * Deprecated route, in order to harmonise real user profile stuff urls
+     * Deprecated route, in order to harmonise real user profile stuff urls.
      *
      * @Route("/user/{slug}", name="capco_user_profile_show_all_old")
      */
     public function showUserOldAction(User $user)
     {
         return new RedirectResponse(
-            $this->generateUrl('capco_user_profile_show_all', [ 'slug' => $user->getSlug() ]),
+            $this->generateUrl('capco_user_profile_show_all', ['slug' => $user->getSlug()]),
             Response::HTTP_MOVED_PERMANENTLY
         );
     }
