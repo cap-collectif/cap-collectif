@@ -103,7 +103,7 @@ export default {
             title: 'Titre*',
             title_help: 'Quel est l\'objet de votre proposition ?',
             body_help: 'Rédigez votre proposition',
-            body: 'Proposition',
+            body: 'Proposition*',
             type: 'Type de proposition*',
             type_help: 'Quel est le type de votre proposition ?',
             request: {
