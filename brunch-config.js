@@ -4,21 +4,18 @@ exports.config = {
   overrides: {
     production: {
       plugins: {
-        'fb-flo': {
-          'enabled': false
-        },
-        'eslint': {
-          'enabled': false
-        }
-      }
-    }
+        'fb-flo': {enabled: false},
+        'eslint': {enabled: false},
+        'sass': {enabled: false},
+      },
+    },
   },
   paths: {
-    'watched': ['app/Resources'],
-    'public': 'web'
+    watched: ['app/Resources'],
+    public: 'web',
   },
   conventions: {
-    'assets': /^app\/Resources\/assets/
+    assets: /^app\/Resources\/assets/,
   },
   files: {
     javascripts: {
@@ -85,21 +82,21 @@ exports.config = {
   },
   plugins: {
     babel: {
-      stage: 0
+      stage: 0,
     },
     sass: {
-      mode: 'native'
+      mode: 'native',
     },
     'fb-flo': {
       port: 8888,
     },
     cleancss: {
       keepSpecialComments: 0,
-      removeEmpty: true
+      removeEmpty: true,
     },
     uglify: {
       mangle: true,
-      compress: false
-    }
+      compress: false,
+    },
   }
 };
