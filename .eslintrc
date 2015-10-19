@@ -17,5 +17,8 @@
     "classNames": true,
     "Modernizr": true,
     "moment": true,
+  },
+  "rules": {
+    "no-nested-ternary": 0,
   }
 }
