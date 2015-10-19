@@ -36,7 +36,7 @@ const SynthesisBox = React.createClass({
   onChange() {
     this.setState({
       messages: SynthesisElementStore.messages,
-     });
+    });
   },
 
   loadSynthesisFromServer() {

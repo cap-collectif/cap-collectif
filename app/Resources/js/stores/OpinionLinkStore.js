@@ -11,11 +11,11 @@ class OpinionLinkStore extends BaseStore {
 
   _registerToActions(action) {
     switch (action.actionType) {
-      case RECEIVE_LINKS:
-        this._links = action.links;
-        this.emitChange();
-        break;
-      default: break;
+    case RECEIVE_LINKS:
+      this._links = action.links;
+      this.emitChange();
+      break;
+    default: break;
     }
   }
 

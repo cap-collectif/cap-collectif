@@ -8,7 +8,7 @@ const CommentBody = React.createClass({
 
   getInitialState() {
     return {
-       expanded: false,
+      expanded: false,
     };
   },
 

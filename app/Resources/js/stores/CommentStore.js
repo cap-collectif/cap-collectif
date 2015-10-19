@@ -19,28 +19,28 @@ class CommentStore extends BaseStore {
 
   _registerToActions(action) {
     switch (action.actionType) {
-      case RECEIVE_COMMENTS:
-        this._comments = action.comments;
-        this._commentsCount = action.comments_count;
-        this._commentsAndAnswersCount = action.comments_total;
-        this._commentsAndAnswersCount = action.comments_and_answers_count;
-        this._isReportingEnabled = action.is_reporting_enabled;
-        this._isSync = true;
-        this.emitChange();
-        break;
-      case CREATE_COMMENT_SUCCESS:
-        this._resetMessages();
-        this._messages.success.push(action.message);
-        this._isSync = false;
-        this.emitChange();
-        break;
-      case CREATE_COMMENT_FAILURE:
-        this._resetMessages();
-        this._messages.errors.push(action.message);
-        this.emitChange();
-        break;
-      default:
-        break;
+    case RECEIVE_COMMENTS:
+      this._comments = action.comments;
+      this._commentsCount = action.comments_count;
+      this._commentsAndAnswersCount = action.comments_total;
+      this._commentsAndAnswersCount = action.comments_and_answers_count;
+      this._isReportingEnabled = action.is_reporting_enabled;
+      this._isSync = true;
+      this.emitChange();
+      break;
+    case CREATE_COMMENT_SUCCESS:
+      this._resetMessages();
+      this._messages.success.push(action.message);
+      this._isSync = false;
+      this.emitChange();
+      break;
+    case CREATE_COMMENT_FAILURE:
+      this._resetMessages();
+      this._messages.errors.push(action.message);
+      this.emitChange();
+      break;
+    default:
+      break;
     }
   }
 

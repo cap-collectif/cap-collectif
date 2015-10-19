@@ -24,28 +24,23 @@ const charBeforeProtocolRelMatchRegex = /^(.)?\/\//;
 
 const urlRegex = [
   '(?:', // parens to cover match for protocol (optional), and domain
-    '(',  // *** Capturing group $1, for a protocol-prefixed url (ex: http://google.com)
-      protocolRegex.source,
-      domainNameRegex.source,
-    ')',
-
-    '|',
-
-    '(?:',  // non-capturing paren for a 'www.' prefixed url (ex: www.google.com)
-      '(.?//)?',  // *** Capturing group $2 for an optional protocol-relative URL. Must be at the beginning of the string or start with a non-word character
-      wwwRegex.source,
-      domainNameRegex.source,
-    ')',
-
-    '|',
-
-    '(?:',  // non-capturing paren for known a TLD url (ex: google.com)
-      '(.?//)?',  // *** Capturing group $3 for an optional protocol-relative URL. Must be at the beginning of the string or start with a non-word character
-      domainNameRegex.source,
-      tldRegex.source,
-    ')',
+  '(',  // *** Capturing group $1, for a protocol-prefixed url (ex: http://google.com)
+  protocolRegex.source,
+  domainNameRegex.source,
   ')',
-
+  '|',
+  '(?:',  // non-capturing paren for a 'www.' prefixed url (ex: www.google.com)
+  '(.?//)?',  // *** Capturing group $2 for an optional protocol-relative URL. Must be at the beginning of the string or start with a non-word character
+  wwwRegex.source,
+  domainNameRegex.source,
+  ')',
+  '|',
+  '(?:',  // non-capturing paren for known a TLD url (ex: google.com)
+  '(.?//)?',  // *** Capturing group $3 for an optional protocol-relative URL. Must be at the beginning of the string or start with a non-word character
+  domainNameRegex.source,
+  tldRegex.source,
+  ')',
+  ')',
   '(?:' + urlSuffixRegex.source + ')?',  // match for path, query string, and/or hash anchor - optional
 ].join('');
 

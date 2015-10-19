@@ -37,92 +37,92 @@ class OpinionStore extends BaseStore {
   _registerToActions(action) {
     let vote = {};
     switch (action.actionType) {
-      case RECEIVE_OPINION:
-        this._opinion = action.opinion;
-        this._rankingThreshold = action.rankingThreshold;
-        this._opinionTerm = action.opinionTerm;
-        this._isOpinionSync = true;
-        this.emitChange();
-        break;
-      case CREATE_OPINION_VOTE:
-        vote = {
-          user: action.user,
-          value: action.value,
-        };
-        if (this._opinion.user_vote !== null) {
-          this._opinion.votes = ArrayHelper.removeElementFromArray(this._opinion.votes, vote, 'user', 'uniqueId');
-          this._decreaseVoteCount(this._opinion.user_vote);
+    case RECEIVE_OPINION:
+      this._opinion = action.opinion;
+      this._rankingThreshold = action.rankingThreshold;
+      this._opinionTerm = action.opinionTerm;
+      this._isOpinionSync = true;
+      this.emitChange();
+      break;
+    case CREATE_OPINION_VOTE:
+      vote = {
+        user: action.user,
+        value: action.value,
+      };
+      if (this._opinion.user_vote !== null) {
+        this._opinion.votes = ArrayHelper.removeElementFromArray(this._opinion.votes, vote, 'user', 'uniqueId');
+        this._decreaseVoteCount(this._opinion.user_vote);
+      }
+      this._opinion.votes = ArrayHelper.addElementToArray(this._opinion.votes, vote, 'user', 'uniqueId');
+      this._increaseVoteCount(vote.value);
+      this._opinion.user_vote = vote.value;
+      this.emitChange();
+      break;
+    case DELETE_OPINION_VOTE:
+      if (this._opinion.user_vote !== null) {
+        vote = this._opinion.votes[ArrayHelper.getElementIndexFromArray(this._opinion.votes, {user: action.user}, 'user', 'uniqueId')];
+        this._opinion.votes = ArrayHelper.removeElementFromArray(this._opinion.votes, vote, 'user', 'uniqueId');
+        this._decreaseVoteCount(vote.value);
+      }
+      this._opinion.user_vote = null;
+      this.emitChange();
+      break;
+    case RECEIVE_ARGUMENTS:
+      const args = [];
+      this._opinion.arguments.map((arg) => {
+        if (arg.type !== action.type) {
+          args.push(arg);
         }
-        this._opinion.votes = ArrayHelper.addElementToArray(this._opinion.votes, vote, 'user', 'uniqueId');
-        this._increaseVoteCount(vote.value);
-        this._opinion.user_vote = vote.value;
-        this.emitChange();
-        break;
-      case DELETE_OPINION_VOTE:
-        if (this._opinion.user_vote !== null) {
-          vote = this._opinion.votes[ArrayHelper.getElementIndexFromArray(this._opinion.votes, {user: action.user}, 'user', 'uniqueId')];
-          this._opinion.votes = ArrayHelper.removeElementFromArray(this._opinion.votes, vote, 'user', 'uniqueId');
-          this._decreaseVoteCount(vote.value);
-        }
-        this._opinion.user_vote = null;
-        this.emitChange();
-        break;
-      case RECEIVE_ARGUMENTS:
-        const args = [];
-        this._opinion.arguments.map((arg) => {
-          if (arg.type !== action.type) {
-            args.push(arg);
-          }
-        });
-        this._opinion.arguments = args.concat(action.arguments);
-        if (action.type === 0) {
-          this._opinion.arguments_no_count = action.arguments.length;
-        } else if (action.type === 1) {
-          this._opinion.arguments_yes_count = action.arguments.length;
-        }
-        this._opinion.arguments_count = this._opinion.arguments_yes_count + this._opinion.arguments_no_count;
-        this._areArgumentsSync[action.type] = true;
-        this.emitChange();
-        break;
-      case CREATE_OPINION_VERSION_SUCCESS:
-        this._isProcessing = false;
-        this._resetArgumentsSync();
-        this._isOpinionSync = false;
-        break;
-      case CREATE_OPINION_VERSION_FAILURE:
-        this._isProcessing = false;
-        this._resetArgumentsSync();
-        this._isOpinionSync = false;
-        break;
-      case UPDATE_OPINION_VERSION_SUCCESS:
-        this._isProcessing = false;
-        this._resetArgumentsSync();
-        this._isOpinionSync = false;
-        break;
-      case UPDATE_OPINION_VERSION_FAILURE:
-        this._isProcessing = false;
-        this._resetArgumentsSync();
-        this._isOpinionSync = false;
-        break;
-      case CREATE_ARGUMENT_SUCCESS:
-        this._isProcessing = false;
-        this._areArgumentsSync[action.type] = false;
-        this.emitChange();
-        break;
-      case UPDATE_OPINION_SUCCESS:
-        this._resetMessages();
-        this._messages.success.push(action.message);
-        this._isProcessing = false;
-        this.emitChange();
-        break;
-      case UPDATE_OPINION_FAILURE:
-        this._messages.errors.push(action.message);
-        this._messages.success = [];
-        this._isProcessing = false;
-        this._isOpinionSync = true;
-        this.emitChange();
-        break;
-      default: break;
+      });
+      this._opinion.arguments = args.concat(action.arguments);
+      if (action.type === 0) {
+        this._opinion.arguments_no_count = action.arguments.length;
+      } else if (action.type === 1) {
+        this._opinion.arguments_yes_count = action.arguments.length;
+      }
+      this._opinion.arguments_count = this._opinion.arguments_yes_count + this._opinion.arguments_no_count;
+      this._areArgumentsSync[action.type] = true;
+      this.emitChange();
+      break;
+    case CREATE_OPINION_VERSION_SUCCESS:
+      this._isProcessing = false;
+      this._resetArgumentsSync();
+      this._isOpinionSync = false;
+      break;
+    case CREATE_OPINION_VERSION_FAILURE:
+      this._isProcessing = false;
+      this._resetArgumentsSync();
+      this._isOpinionSync = false;
+      break;
+    case UPDATE_OPINION_VERSION_SUCCESS:
+      this._isProcessing = false;
+      this._resetArgumentsSync();
+      this._isOpinionSync = false;
+      break;
+    case UPDATE_OPINION_VERSION_FAILURE:
+      this._isProcessing = false;
+      this._resetArgumentsSync();
+      this._isOpinionSync = false;
+      break;
+    case CREATE_ARGUMENT_SUCCESS:
+      this._isProcessing = false;
+      this._areArgumentsSync[action.type] = false;
+      this.emitChange();
+      break;
+    case UPDATE_OPINION_SUCCESS:
+      this._resetMessages();
+      this._messages.success.push(action.message);
+      this._isProcessing = false;
+      this.emitChange();
+      break;
+    case UPDATE_OPINION_FAILURE:
+      this._messages.errors.push(action.message);
+      this._messages.success = [];
+      this._isProcessing = false;
+      this._isOpinionSync = true;
+      this.emitChange();
+      break;
+    default: break;
     }
   }
 

@@ -21,6 +21,5 @@
   "rules": {
     "no-nested-ternary": 0,
     "id-length": 0,
-    "indent": 0,
   }
 }

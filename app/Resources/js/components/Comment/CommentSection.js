@@ -58,8 +58,7 @@ const CommentSection = React.createClass({
       messages: CommentStore.messages,
     });
     if (CommentStore.isSync) {
-      this.setState(
-      {
+      this.setState({
         countWithAnswers: CommentStore.countWithAnswers,
         count: CommentStore.count,
         isReportingEnabled: CommentStore.isReportingEnabled,
@@ -73,7 +72,7 @@ const CommentSection = React.createClass({
     }
 
     this.setState({
-        isLoading: true,
+      isLoading: true,
     }, () => {
       this.loadCommentsFromServer();
     });
@@ -85,9 +84,9 @@ const CommentSection = React.createClass({
 
   updateSelectedValue() {
     this.setState({
-        filter: $(React.findDOMNode(this.refs.filter)).val(),
-        isLoading: true,
-        comments: [],
+      filter: $(React.findDOMNode(this.refs.filter)).val(),
+      isLoading: true,
+      comments: [],
     });
   },
 
@@ -111,8 +110,8 @@ const CommentSection = React.createClass({
   loadMore() {
     $(React.findDOMNode(this.refs.loadMore)).button('loading');
     this.setState({
-        isLoadingMore: true,
-        limit: this.state.limit + MessagePagination,
+      isLoadingMore: true,
+      limit: this.state.limit + MessagePagination,
     }, () => {
       this.loadCommentsFromServer();
     });

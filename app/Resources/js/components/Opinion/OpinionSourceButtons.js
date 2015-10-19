@@ -55,7 +55,7 @@ const OpinionSourceButtons = React.createClass({
     );
   },
 
- renderReportButton() {
+  renderReportButton() {
     if (!this.isTheUserTheAuthor() && this.props.isReportingEnabled) {
       if (this.props.source.has_user_reported) {
         return (
