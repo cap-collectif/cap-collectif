@@ -51,7 +51,7 @@ const OpinionLinkCreate = React.createClass({
             </Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            <OpinionLinkCreateInfos />
+            <OpinionLinkCreateInfos opinion={this.props.opinion} />
             <OpinionLinkForm
               opinion={this.props.opinion}
               availableTypes={this.state.availableTypes}
