@@ -1,16 +1,6 @@
 'use strict';
 
 exports.config = {
-  overrides: {
-    production: {
-      plugins: {
-        off: ['eslint', 'fb-flo'],
-        eslint: {
-          enabled: false,
-        }
-      },
-    },
-  },
   paths: {
     watched: ['app/Resources'],
     public: 'web',
