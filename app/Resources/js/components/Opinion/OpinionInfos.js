@@ -10,7 +10,7 @@ const OpinionInfos = React.createClass({
   mixins: [ReactIntl.IntlMixin],
 
   isVersion() {
-    return this.props.opinion.parent ? true : false;
+    return !!this.props.opinion.parent;
   },
 
   renderDate() {
