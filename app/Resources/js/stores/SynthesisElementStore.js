@@ -149,8 +149,10 @@ class SynthesisElementStore extends BaseStore {
       this.emitChange();
       break;
     case NAME_ELEMENT:
-      this._element.title = action.title;
-      element = this.getElementInTreeById(this._elements.allTree, this._element.id);
+      element = this._element && action.elementId === this._element.id
+        ? this._element
+        : this.getElementInTreeById(this._elements.allTree, action.elementId)
+      ;
       if (element) {
         element.title = action.title;
       }
@@ -160,7 +162,7 @@ class SynthesisElementStore extends BaseStore {
       this.emitChange();
       break;
     case MOVE_ELEMENT:
-      this.changeElementParent(action.parent);
+      this.changeElementParent(action.parent, action.elementId);
       this._resetInboxSync();
       this._isProcessing = true;
       this._resetMessages();
@@ -280,15 +282,18 @@ class SynthesisElementStore extends BaseStore {
     this._expandedNavbarItems = expanded;
   }
 
-  changeElementParent(parent) {
-    const element = this._element;
+  changeElementParent(parent, elementId) {
+    const element = this._element && elementId === this._element.id
+      ? this._element
+      : this.getElementInTreeById(this._elements.allTree, elementId)
+    ;
     let tree = this._elements.allTree;
     // Remove element from previous parent in tree
-    let prevParent = this._element.parent;
+    let prevParent = element.parent;
     if (!prevParent) {
       tree = ArrayHelper.removeElementFromArray(tree, element);
     } else {
-      prevParent = this.getElementInTreeById(tree, this._element.parent.id);
+      prevParent = this.getElementInTreeById(tree, element.parent.id);
       if (prevParent) {
         const prevChildren = prevParent.children;
         prevParent.children = ArrayHelper.removeElementFromArray(prevChildren, element);
@@ -304,7 +309,7 @@ class SynthesisElementStore extends BaseStore {
       parentInTree.children = ArrayHelper.addElementToArray(children, element);
       parentInTree.childrenCount = parentInTree.children.length;
     }
-    this._element.parent = parent;
+    element.parent = parent;
   }
 
   getElementInTreeById(tree, id) {

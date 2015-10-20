@@ -5,6 +5,7 @@ import ElementIcon from './ElementIcon';
 import ElementTitle from './ElementTitle';
 import Loader from '../Utils/Loader';
 import IgnoreButton from './IgnoreButton';
+import UpdateButton from './UpdateButton';
 
 const FormattedMessage = ReactIntl.FormattedMessage;
 
@@ -51,18 +52,6 @@ const FolderManager = React.createClass({
     });
   },
 
-  showCreateModal() {
-    this.setState({
-      showCreateModal: true,
-    });
-  },
-
-  hideCreateModal() {
-    this.setState({
-      showCreateModal: false,
-    });
-  },
-
   fetchElements() {
     if (!SynthesisElementStore.isFetchingTree) {
       if (SynthesisElementStore.isInboxSync.allTree) {
@@ -89,10 +78,11 @@ const FolderManager = React.createClass({
     );
   },
 
-  renderIgnoreButton(element) {
+  renderButtons(element) {
     if (element.displayType === 'folder') {
       return (
         <div className="pull-right">
+          <UpdateButton synthesis={this.props.synthesis} element={element} />
           <IgnoreButton synthesis={this.props.synthesis} element={element}/>
         </div>
       );
@@ -139,7 +129,7 @@ const FolderManager = React.createClass({
     return (
       <div className="tree__item__content box">
         {this.renderItemCaret(element)}
-        {this.renderIgnoreButton(element)}
+        {this.renderButtons(element)}
         <ElementIcon className="tree__item__icon" element={element} />
         <ElementTitle element={element} className="tree__item__title" />
         <br/>

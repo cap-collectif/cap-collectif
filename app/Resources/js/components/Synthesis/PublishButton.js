@@ -14,7 +14,7 @@ const PublishButton = React.createClass({
   render() {
     return (
       <div className="element__action">
-        <Button bsSize="large" type="button" className="element__action-publish" onClick={this.click.bind(null, this)}><i className="cap cap-check-4"></i></Button>
+        <Button bsSize="large" type="button" className="element__action-publish" onClick={this.click.bind(null, this)}><i className="cap cap-tag-1"></i></Button>
       </div>
     );
   },

@@ -146,17 +146,20 @@ export default {
       });
   },
 
-  archive: (synthesis, element, data) => {
-    AppDispatcher.dispatch({
-      actionType: ARCHIVE_ELEMENT,
-      archived: data.archived,
-      published: data.published,
-      elementId: element,
-    });
+  update: (synthesis, element, data) => {
+    if (data.archived || data.published) {
+      AppDispatcher.dispatch({
+        actionType: ARCHIVE_ELEMENT,
+        archived: data.archived,
+        published: data.published,
+        elementId: element,
+      });
+    }
     if (data.parent) {
       AppDispatcher.dispatch({
         actionType: MOVE_ELEMENT,
         parent: data.parent,
+        elementId: element,
       });
       data.parent = idOf(data.parent);
     }
@@ -164,18 +167,21 @@ export default {
       AppDispatcher.dispatch({
         actionType: NOTE_ELEMENT,
         notation: data.notation,
+        elementId: element,
       });
     }
     if (data.title) {
       AppDispatcher.dispatch({
         actionType: NAME_ELEMENT,
         title: data.title,
+        elementId: element,
       });
     }
     if (data.comment) {
       AppDispatcher.dispatch({
         actionType: COMMENT_ELEMENT,
         comment: data.comment,
+        elementId: element,
       });
     }
     if (data.division) {
@@ -185,6 +191,7 @@ export default {
       AppDispatcher.dispatch({
         actionType: DIVIDE_ELEMENT,
         division: data.division,
+        elementId: element,
       });
     }
     updateElementFromData(synthesis, element, data, 'common.success.archive_success', 'common.errors.archive_error');

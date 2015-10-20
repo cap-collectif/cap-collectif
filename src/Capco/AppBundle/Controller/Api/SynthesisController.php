@@ -378,6 +378,7 @@ class SynthesisController extends FOSRestController
             $element,
             $synthesis
         );
+
         return $element;
     }
 

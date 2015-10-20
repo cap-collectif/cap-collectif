@@ -39,7 +39,7 @@ const IgnoreButton = React.createClass({
       'archived': true,
       'published': false,
     };
-    SynthesisElementActions.archive(this.props.synthesis.id, this.props.element.id, data);
+    SynthesisElementActions.update(this.props.synthesis.id, this.props.element.id, data);
     this.transitionTo('inbox', {'type': 'new'});
   },
 

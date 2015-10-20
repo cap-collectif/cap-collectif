@@ -42,14 +42,14 @@ class DynamicRelationSubscriber implements EventSubscriber
                     // Check intersections between current class interfaces and interfaces to add dynamic relation
                     if (count(array_intersect(class_implements($metadata->getName()), $params['interfaces'])) > 0) {
                         $metadata->mapManyToOne([
-                            'targetEntity'  => $metadata->getName(),
-                            'fieldName'     => 'link',
-                            'cascade'       => ['persist'],
-                            'inversedBy'    => 'connections',
-                            'joinColumns'   => [
+                            'targetEntity' => $metadata->getName(),
+                            'fieldName' => 'link',
+                            'cascade' => ['persist'],
+                            'inversedBy' => 'connections',
+                            'joinColumns' => [
                                 [
-                                    'onDelete'  => 'SET NULL',
-                                ]
+                                    'onDelete' => 'SET NULL',
+                                ],
                             ],
                         ]);
 

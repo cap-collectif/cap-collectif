@@ -95,6 +95,15 @@ export default {
           optional: 'Facultatif',
           title: 'Classer...',
         },
+        update: {
+          btn_cancel: 'Annuler',
+          btn_submit: 'Modifier',
+          field: {
+            parent: 'Déplacer',
+            title: 'Titre',
+          },
+          title: 'Modifier le dossier',
+        },
         divide: {
           title: 'Diviser la contribution',
           btn_cancel: 'Annuler',

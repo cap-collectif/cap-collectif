@@ -108,8 +108,8 @@ const DivideModal = React.createClass({
   },
 
   removeElement(element) {
-    const newElements = this.state.newElements;
-    ArrayHelper.removeElementFromArray(newElements, element, 'body');
+    let newElements = this.state.newElements;
+    newElements = ArrayHelper.removeElementFromArray(newElements, element, 'body');
     this.setState({
       newElements: newElements,
     });
@@ -124,7 +124,7 @@ const DivideModal = React.createClass({
         'elements': this.state.newElements,
       },
     };
-    SynthesisElementActions.archive(this.props.synthesis.id, this.props.element.id, data);
+    SynthesisElementActions.update(this.props.synthesis.id, this.props.element.id, data);
     this.transitionTo('inbox', {'type': 'new'});
   },
 

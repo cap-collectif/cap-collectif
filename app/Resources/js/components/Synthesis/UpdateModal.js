@@ -1,21 +1,20 @@
 import SynthesisElementActions from '../../actions/SynthesisElementActions';
 import SynthesisElementStore from '../../stores/SynthesisElementStore';
-import NotationButtons from './NotationButtons';
 import ElementsFinder from './ElementsFinder';
 
 const Button = ReactBootstrap.Button;
 const Modal = ReactBootstrap.Modal;
 const Input = ReactBootstrap.Input;
 
-const PublishModal = React.createClass({
+const UpdateModal = React.createClass({
   propTypes: {
-    synthesis: React.PropTypes.object,
-    element: React.PropTypes.object,
-    show: React.PropTypes.bool,
-    toggle: React.PropTypes.func,
+    synthesis: React.PropTypes.object.isRequired,
+    element: React.PropTypes.object.isRequired,
+    show: React.PropTypes.bool.isRequired,
+    toggle: React.PropTypes.func.isRequired,
     process: React.PropTypes.func,
   },
-  mixins: [ReactIntl.IntlMixin, ReactRouter.Navigation, React.addons.LinkedStateMixin],
+  mixins: [ReactIntl.IntlMixin, React.addons.LinkedStateMixin],
 
   getDefaultProps() {
     return {
@@ -26,9 +25,7 @@ const PublishModal = React.createClass({
   getInitialState() {
     const element = this.props.element;
     return {
-      notation: element ? element.notation : null,
       parent: element ? element.parent : null,
-      comment: element ? element.comment : null,
       title: element ? element.title : null,
       elements: [],
       expanded: {
@@ -50,9 +47,7 @@ const PublishModal = React.createClass({
     if (nextProps.element) {
       if (!this.props.element || this.props.element.id !== nextProps.element.id) {
         this.setState({
-          notation: nextProps.element.notation,
           parent: nextProps.element.parent,
-          comment: nextProps.element.comment,
           title: nextProps.element.title,
           expanded: this.getExpandedBasedOnElement(),
         });
@@ -84,12 +79,6 @@ const PublishModal = React.createClass({
     return expanded;
   },
 
-  setNotation(notation) {
-    this.setState({
-      notation: notation,
-    });
-  },
-
   setParent(element) {
     if (element) {
       const value = element !== 'root' ? element : null;
@@ -107,29 +96,20 @@ const PublishModal = React.createClass({
     this.props.toggle(true);
   },
 
-  publish() {
+  update() {
     this.hide();
     const data = {
-      'archived': true,
-      'published': true,
-      'notation': this.state.notation ? this.state.notation : 0,
       'parent': this.state.parent,
-      'comment': this.state.comment,
       'title': this.state.title,
     };
     if (typeof this.props.process === 'function') {
       const element = this.props.element;
-      element.archived = data.archived;
-      element.published = data.published;
-      element.notation = data.notation;
       element.parent = data.parent;
-      element.comment = data.comment;
       element.title = data.title;
       this.props.process(element);
       return;
     }
     SynthesisElementActions.update(this.props.synthesis.id, this.props.element.id, data);
-    this.transitionTo('inbox', {'type': 'new'});
   },
 
   expandItem(element) {
@@ -145,8 +125,6 @@ const PublishModal = React.createClass({
       if (SynthesisElementStore.isInboxSync.allTree) {
         this.setState({
           elements: SynthesisElementStore.elements.allTree,
-          expanded: SynthesisElementStore.expandedNavbarItems,
-          selectedId: SynthesisElementStore.selectedNavbarItem,
           isLoading: false,
         });
         return;
@@ -171,9 +149,9 @@ const PublishModal = React.createClass({
     return (
       <div className="modal__action">
         <h2 className="h4">
-          {' ' + this.getIntlMessage('edition.action.publish.field.title')}
+          {' ' + this.getIntlMessage('edition.action.update.field.title')}
         </h2>
-        <Input type="text" id="publish_element_title" name="publish_element[title]" className="publish-element__title" valueLink={this.linkState('title')} />
+        <Input type="text" id="update_element_title" name="update_element[title]" className="update-element__title" valueLink={this.linkState('title')} />
       </div>
     );
   },
@@ -182,7 +160,7 @@ const PublishModal = React.createClass({
     return (
       <div className="modal__action">
         <h2 className="h4">
-          {' ' + this.getIntlMessage('edition.action.publish.field.parent')}
+          {' ' + this.getIntlMessage('edition.action.update.field.parent')}
         </h2>
         {this.renderParentFinder()}
       </div>
@@ -200,52 +178,23 @@ const PublishModal = React.createClass({
         selectedId={parentId}
         onSelect={this.setParent}
         onExpand={this.expandItem}
-      />
-    );
-  },
-
-  renderNotation() {
-    return (
-      <div className="modal__action">
-        <h2 className="h4">
-          {' ' + this.getIntlMessage('edition.action.publish.field.notation')}
-          <span className="small excerpt action__title-right">{'\t' + this.getIntlMessage('edition.action.publish.optional')}</span>
-        </h2>
-        <NotationButtons notation={this.state.notation} onChange={this.setNotation} block />
-        <p className="small excerpt action__help">{this.getIntlMessage('edition.action.publish.help.notation')}</p>
-      </div>
-    );
-  },
-
-  renderComment() {
-    return (
-      <div className="modal__action">
-        <h2 className="h4">
-          {' ' + this.getIntlMessage('edition.action.publish.field.comment')}
-          <span className="small excerpt action__title-right">{'\t' + this.getIntlMessage('edition.action.publish.optional')}</span>
-        </h2>
-        <form id="publish_element" name="publish_element">
-          <Input type="textarea" id="publish_element_comment" name="publish_element[comment]" className="publish-element__comment" valueLink={this.linkState('comment')} />
-        </form>
-      </div>
+        />
     );
   },
 
   render() {
     return (
-      <Modal show={this.props.show} onHide={this.hide} animation={false} dialogClassName="modal--publish">
+      <Modal show={this.props.show} onHide={this.hide} animation={false} dialogClassName="modal--update">
         <Modal.Header closeButton>
-          <Modal.Title>{this.getIntlMessage('edition.action.publish.title')}</Modal.Title>
+          <Modal.Title>{this.getIntlMessage('edition.action.update.title')}</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           {this.renderTitle()}
           {this.renderParent()}
-          {this.renderNotation()}
-          {this.renderComment()}
         </Modal.Body>
         <Modal.Footer>
-          <Button type="button" onClick={this.hide.bind(null, this)}>{this.getIntlMessage('edition.action.publish.btn_cancel')}</Button>
-          <Button bsStyle="primary" type="submit" onClick={this.publish.bind(null, this)}>{this.getIntlMessage('edition.action.publish.btn_submit')}</Button>
+          <Button type="button" onClick={this.hide.bind(null, this)}>{this.getIntlMessage('edition.action.update.btn_cancel')}</Button>
+          <Button bsStyle="primary" type="submit" onClick={this.update.bind(null, this)}>{this.getIntlMessage('edition.action.update.btn_submit')}</Button>
         </Modal.Footer>
       </Modal>
     );
@@ -253,4 +202,4 @@ const PublishModal = React.createClass({
 
 });
 
-export default PublishModal;
+export default UpdateModal;
