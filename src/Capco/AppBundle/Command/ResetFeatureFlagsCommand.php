@@ -50,6 +50,7 @@ class ResetFeatureFlagsCommand extends ContainerAwareCommand
         $toggleManager->activate('reporting');
         $toggleManager->activate('search');
 
+        $toggleManager->deactivate('zipcode_at_register');
         $toggleManager->deactivate('shield_mode');
 
         $output->writeln('Feature flags reseted');
