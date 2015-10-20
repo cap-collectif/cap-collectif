@@ -141,9 +141,6 @@ const SideMenu = React.createClass({
   render() {
     return (
       <div className="synthesis__side-menu">
-        {/*<Nav stacked className="menu--fixed">
-          {this.renderContributionsButton()}
-        </Nav>*/}
         <div className="menu__tree">
           {this.renderTree()}
         </div>

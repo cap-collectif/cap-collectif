@@ -91,7 +91,6 @@ export default {
           type: 'Quel est le type de votre proposition ?',
           title: 'Quel est l\'objet de votre proposition ?',
           body: 'Rédigez votre proposition',
->>>>>>> fix indentation
         },
         constraints: {
           type: 'Veuillez choisir un type pour soumettre une proposition liée.',

@@ -4,9 +4,10 @@ exports.config = {
   overrides: {
     production: {
       plugins: {
-        'fb-flo': {enabled: false},
-        'eslint': {enabled: false},
-        'sass': {enabled: false},
+        off: ['eslint', 'fb-flo'],
+        eslint: {
+          enabled: false,
+        }
       },
     },
   },
