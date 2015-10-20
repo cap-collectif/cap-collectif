@@ -23,6 +23,10 @@ class RecalculateProjectsCommand extends ContainerAwareCommand
 
         // ********************************* User counters *************************************************
 
+        $query = $em->createQuery('update CapcoUserBundle:User u set u.projectsCount =
+            (select count(p.id) from CapcoAppBundle:Project p where p.Author = u AND p.isEnabled = 1 group by p.Author)');
+        $query->execute();
+
         $query = $em->createQuery('update CapcoUserBundle:User u set u.ideasCount =
             (select count(i.id) from CapcoAppBundle:Idea i where i.Author = u AND i.isEnabled = 1 group by i.Author)');
         $query->execute();

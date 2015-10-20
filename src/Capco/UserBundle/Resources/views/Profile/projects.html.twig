@@ -1,0 +1,12 @@
+{% if projects|length > 0 %}
+    <div class="row">
+        {% for project in projects %}
+            {% include 'CapcoAppBundle:Project:blockProject.html.twig' with {'project': project} only %}
+        {% endfor %}
+    </div>
+{% else %}
+    <div class="project__empty-block  text-center">
+        <p class="icon  cap-bubble-star-2"></p>
+        <p>{{ 'user.profile.show.no_projects'|trans({}, 'CapcoAppBundle') }}</p>
+    </div>
+{% endif %}

@@ -43,6 +43,30 @@ class ProjectRepository extends EntityRepository
     }
 
     /**
+     * Get projects by user.
+     *
+     * @param user
+     *
+     * @return mixed
+     */
+    public function getByUser($user)
+    {
+        $qb = $this->getIsEnabledQueryBuilder('p')
+            ->addSelect('a', 'm')
+            ->leftJoin('p.Author', 'a')
+            ->leftJoin('a.Media', 'm')
+            ->andWhere('p.Author = :user')
+            ->setParameter('user', $user)
+            ->orderBy('p.updatedAt', 'DESC')
+        ;
+
+        return $qb
+            ->getQuery()
+            ->execute();
+    }
+
+
+    /**
      * Get one by slug with steps, events and posts.
      *
      * @param $slug

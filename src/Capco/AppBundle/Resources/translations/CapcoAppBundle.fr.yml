@@ -727,6 +727,7 @@ user:
       opinions: Propositions
       opinions_versions: Modifications
       no_opinions: Il n'y a pas de propositions.
+      no_projects: Il n'y a pas de projets participatifs.
       no_opinions_versions: Il n'y a pas de modifications.
       ideas: Idées
       no_ideas: Il n'y a pas d'idées.
@@ -734,6 +735,7 @@ user:
       sources: Sources
       comments: Commentaires
       votes: Votes
+      projects: Projets participatifs
 
 #SonataUser errors
 "Bad credentials.": Email ou mot de passe incorrect

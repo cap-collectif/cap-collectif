@@ -144,6 +144,11 @@ class User extends BaseUser implements EncoderAwareInterface, SynthesisUserInter
     /**
      * @var int
      */
+    protected $projectsCount = 0;
+
+    /**
+     * @var int
+     */
     protected $sourcesCount = 0;
 
     /**
@@ -440,7 +445,7 @@ class User extends BaseUser implements EncoderAwareInterface, SynthesisUserInter
     }
 
     /**
-     * @param bool $is_terms_accepted
+     * @param bool $isTermsAccepted
      */
     public function setIsTermsAccepted($isTermsAccepted)
     {
@@ -568,6 +573,16 @@ class User extends BaseUser implements EncoderAwareInterface, SynthesisUserInter
     }
 
     /**
+     * Gets the value of projectsCount.
+     *
+     * @return int
+     */
+    public function getProjectsCount()
+    {
+        return $this->projectsCount;
+    }
+
+    /**
      * Gets the value of sourcesCount.
      *
      * @return int
@@ -661,6 +676,20 @@ class User extends BaseUser implements EncoderAwareInterface, SynthesisUserInter
     public function setArgumentsCount($argumentsCount)
     {
         $this->argumentsCount = $argumentsCount;
+
+        return $this;
+    }
+
+    /**
+     * Sets the value of projectsCount.
+     *
+     * @param int $projectsCount the sources count
+     *
+     * @return self
+     */
+    public function setProjectsCount($projectsCount)
+    {
+        $this->projectsCount = $projectsCount;
 
         return $this;
     }
