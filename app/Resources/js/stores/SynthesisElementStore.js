@@ -54,6 +54,7 @@ class SynthesisElementStore extends BaseStore {
   }
 
   _registerToActions(action) {
+    let element = null;
     switch (action.actionType) {
       case RECEIVE_COUNT:
         this._counts[action.type] = action.count;
@@ -90,9 +91,6 @@ class SynthesisElementStore extends BaseStore {
         }
         this._counts[action.type] = action.count;
         this._isInboxSync[action.type] = true;
-        if (action.type === 'allTree') {
-          this.updateSelectedId();
-        }
         this._isFetchingTree = false;
         this.emitChange();
         break;
@@ -116,21 +114,24 @@ class SynthesisElementStore extends BaseStore {
         break;
       case ARCHIVE_ELEMENT:
         this._resetMessages();
+        element = this._element && action.elementId === this._element.id ? this._element : null;
         // Update data
         // If we ignored an element, lists are not synced anymore
-        if (!action.published) {
+        if (action.published && element) {
+          this._elements.new = ArrayHelper.removeElementFromArray(this._elements.new, element);
+          this._counts.new = this._elements.new.length;
+          this.elements.archived = ArrayHelper.addElementToArray(this._elements.archived, element);
+          this._elements.published = ArrayHelper.addElementToArray(this._elements.published, element);
+          this._elements.unpublished = ArrayHelper.removeElementFromArray(this._elements.unpublished, element);
+        } else {
           this._isProcessing = true;
           this._resetInboxSync();
-        } else {
-          this._elements.new = ArrayHelper.removeElementFromArray(this._elements.new, this._element);
-          this._counts.new = this._elements.new.length;
-          this.elements.archived = ArrayHelper.addElementToArray(this._elements.archived, this._element);
-          this._elements.published = ArrayHelper.addElementToArray(this._elements.published, this._element);
-          this._elements.unpublished = ArrayHelper.removeElementFromArray(this._elements.unpublished, this._element);
         }
-        // Apply changes to element
-        this._element.archived = action.archived;
-        this._element.published = action.published;
+        if (this._element && action.elementId === this._element.id) {
+          // Apply changes to element
+          this._element.archived = action.archived;
+          this._element.published = action.published;
+        }
         this.emitChange();
         break;
       case NOTE_ELEMENT:
@@ -149,7 +150,7 @@ class SynthesisElementStore extends BaseStore {
         break;
       case NAME_ELEMENT:
         this._element.title = action.title;
-        const element = this.getElementInTreeById(this._elements.allTree, this._element.id);
+        element = this.getElementInTreeById(this._elements.allTree, this._element.id);
         if (element) {
           element.title = action.title;
         }
@@ -326,10 +327,10 @@ class SynthesisElementStore extends BaseStore {
     const items = [];
     element.path.split('|').map((data) => {
       const splitted = data.split('-');
-      const title = splitted.shift();
-      const id = splitted.join('-');
+      const title = splitted.slice(0, splitted.length - 5).join('-');
+      const id = splitted.slice(splitted.length - 5, splitted.length).join('-');
       const item = {
-        'title': title ? title : null,
+        'title': title || null,
         'id': id,
       };
       items.push(item);
@@ -342,19 +343,23 @@ class SynthesisElementStore extends BaseStore {
     const parent = this.getElementInTreeById(tree, parentId);
     if (parent) {
       parent.children = children;
+      parent.childrenCount = children.length;
     }
   }
 
   addElementInTree(child) {
     const tree = this._elements.allTree;
-    const parentId = child.parent;
-    const parent = this.getElementInTreeById(tree, parentId);
-    if (parent) {
-      const children = parent.children;
-      children.push(child);
-      parent.children = children;
-    } else {
+    const parent = child.parent;
+    if (!parent) {
       tree.push(child);
+    } else {
+      const parentInTree = this.getElementInTreeById(tree, parent.id);
+      if (parentInTree) {
+        const children = parentInTree.children;
+        children.push(child);
+        parentInTree.children = children;
+        parentInTree.childrenCount++;
+      }
     }
   }
 

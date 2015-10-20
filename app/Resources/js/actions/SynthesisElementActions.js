@@ -37,11 +37,14 @@ const updateElementFromData = (synthesis, element, data, successMessage = 'commo
 const createElementFromData = (synthesis, data, successMessage = 'common.success.update_success', errorMessage = 'common.errors.update_error') => {
   return Fetcher
     .post(`/syntheses/${synthesis}/elements`, data)
-    .then(() => {
-      AppDispatcher.dispatch({
-        actionType: CREATE_ELEMENT_SUCCESS,
-        element: data,
-        message: successMessage,
+    .then((response) => {
+      response.json().then((element) => {
+        AppDispatcher.dispatch({
+          actionType: CREATE_ELEMENT_SUCCESS,
+          element: element,
+          message: successMessage,
+        });
+        return true;
       });
       return true;
     })
@@ -148,6 +151,7 @@ export default {
       actionType: ARCHIVE_ELEMENT,
       archived: data.archived,
       published: data.published,
+      elementId: element,
     });
     if (data.parent) {
       AppDispatcher.dispatch({

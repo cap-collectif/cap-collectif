@@ -31,9 +31,8 @@ const ElementsFinder = React.createClass({
     return [{
       id: 'root',
       title: this.getIntlMessage('edition.finder.root'),
-      display_type: 'root',
+      displayType: 'root',
       children: this.props.elements,
-      parents_ids: [],
     }];
   },
 

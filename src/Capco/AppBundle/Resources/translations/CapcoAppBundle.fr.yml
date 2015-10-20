@@ -685,7 +685,6 @@ user:
     email: Adresse électronique *
     password: Mot de passe *
     user_type: Vous êtes :
-    zipcode: Code postal
     terms:
       label: "J'ai lu et j'accepte %cgu%."
     legal_text: "Les informations recueillies font l’objet d’un traitement informatique destiné au fonctionnement de la plateforme contributive. Le Conseil national du numérique est l’unique destinataire de ces données. Conformément à la loi « informatique et libertés » du 6 janvier 1978 modifiée en 2004, vous bénéficiez d’un droit d’accès et de rectification aux informations qui vous concernent, que vous pouvez exercer en vous adressant à %startlink%concertation@cnnumerique.fr%endlink%. Vous pouvez également, pour des motifs légitimes, vous opposer au traitement des données vous concernant."

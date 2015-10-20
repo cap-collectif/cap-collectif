@@ -629,6 +629,11 @@ class SynthesisElement
         return $this->body ? html_entity_decode($this->body, ENT_QUOTES) : null;
     }
 
+    public function getChildrenCount()
+    {
+        return count($this->children);
+    }
+
     // ************************* Lifecycle ***********************************
 
     /**

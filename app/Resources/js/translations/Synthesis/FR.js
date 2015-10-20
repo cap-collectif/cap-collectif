@@ -3,7 +3,7 @@ export default {
   messages: {
     common: {
       elements: {
-        nb: '{num, plural, =0{} one{# contribution} other{# contributions}}',
+        nb: '{num, plural, =0{# contribution} one{# contribution} other{# contributions}}',
         default_title: 'Contribution',
         no_source_date: 'Date non renseignée',
         more: 'Voir plus',

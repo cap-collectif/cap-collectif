@@ -8,6 +8,7 @@ use Capco\AppBundle\Entity\Synthesis\SynthesisElement;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\HttpFoundation\Request;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use FOS\RestBundle\Controller\FOSRestController;
@@ -136,7 +137,7 @@ class SynthesisController extends FOSRestController
      *
      * @Get("/syntheses/{id}")
      * @ParamConverter("synthesis", options={"mapping": {"id": "id"}, "repository_method": "getOne", "map_method_signature": true})
-     * @View(serializerGroups={"SynthesisDetails", "Elements"})
+     * @View(serializerEnableMaxDepthChecks=true, serializerGroups={"SynthesisDetails", "Elements"})
      */
     public function getSynthesisAction(Synthesis $synthesis)
     {
@@ -158,7 +159,7 @@ class SynthesisController extends FOSRestController
      * @Security("has_role('ROLE_ADMIN')")
      * @Put("/syntheses/{id}")
      * @ParamConverter("synthesis", options={"mapping": {"id": "id"}, "repository_method": "getOne", "map_method_signature": true})
-     * @View(serializerGroups={"SynthesisDetails", "Elements"})
+     * @View(serializerEnableMaxDepthChecks=true, serializerGroups={"SynthesisDetails", "Elements"})
      */
     public function updateSynthesisAction(Request $request, Synthesis $synthesis)
     {
@@ -186,7 +187,7 @@ class SynthesisController extends FOSRestController
      * )
      *
      * @Get("/syntheses/{id}/updated")
-     * @View(serializerGroups={"SynthesisDetails", "Elements"})
+     * @View(serializerEnableMaxDepthChecks=true, serializerGroups={"SynthesisDetails", "Elements"})
      */
     public function getUpdatedSynthesisAction($id)
     {
@@ -213,7 +214,7 @@ class SynthesisController extends FOSRestController
      * @QueryParam(name="offset", nullable=true)
      * @QueryParam(name="limit", nullable=true)
      * @Get("/syntheses/{id}/elements")
-     * @View(serializerGroups={"ElementsList", "UserDetails"})
+     * @View(serializerEnableMaxDepthChecks=true, serializerGroups={"ElementsList", "UserDetails"})
      */
     public function getSynthesisElementsAction(ParamFetcherInterface $paramFetcher, Synthesis $synthesis)
     {
@@ -225,13 +226,13 @@ class SynthesisController extends FOSRestController
     }
 
     /**
-     * Get published synthesis elements tree.
+     * Get synthesis elements tree.
      *
      * @return array|\Capco\AppBundle\Entity\Synthesis\SynthesisElement[]
      *
      * @ApiDoc(
      *  resource=true,
-     *  description="Get the tree of published elements of a synthesis",
+     *  description="Get the tree of elements of a synthesis",
      *  statusCodes={
      *    200 = "Syntheses element found",
      *    404 = "Synthesis not found",
@@ -243,6 +244,7 @@ class SynthesisController extends FOSRestController
      * @QueryParam(name="depth", nullable=true, default=3)
      * @QueryParam(name="parent", nullable=true, default=null)
      * @Get("/syntheses/{id}/elements/tree")
+     * @View(serializerEnableMaxDepthChecks=true, serializerGroups={"ElementsTree"})
      */
     public function getSynthesisElementsTreeAction(ParamFetcherInterface $paramFetcher, Synthesis $synthesis)
     {
@@ -256,11 +258,7 @@ class SynthesisController extends FOSRestController
 
         $tree = $this->get('capco.synthesis.synthesis_element_handler')->getElementsTreeFromSynthesisByType($synthesis, $type, $parent, $depth);
 
-        $view = $this->view($tree, Codes::HTTP_OK);
-
-        $view->setSerializationContext(SerializationContext::create()->setGroups(['ElementsTree']));
-
-        return $view;
+        return $tree;
     }
 
     /**
@@ -328,6 +326,7 @@ class SynthesisController extends FOSRestController
      * @Security("has_role('ROLE_ADMIN')")
      * @Post("/syntheses/{id}/elements")
      * @ParamConverter("synthesis", options={"mapping": {"id": "id"}, "repository_method": "getOne", "map_method_signature": true})
+     * @View(statusCode="201", serializerEnableMaxDepthChecks=true, serializerGroups={"ElementDetails", "UserDetails", "LogDetails"})
      */
     public function createSynthesisElementAction(Request $request, Synthesis $synthesis)
     {
@@ -335,19 +334,17 @@ class SynthesisController extends FOSRestController
         $form = $this->createForm(new SynthesisElementForm(false), $element);
         $form->submit($request->request->all(), false);
 
-        if ($form->isValid()) {
-            $element = $this->get('capco.synthesis.synthesis_element_handler')->createElementInSynthesis($element, $synthesis, $this->getUser());
-            $view = $this->view($element, Codes::HTTP_CREATED);
-            $view->setSerializationContext(SerializationContext::create()->setGroups(array('ElementDetails', 'UserDetails', 'LogDetails')));
-            $url = $this->generateUrl('get_synthesis_element', ['synthesis_id' => $synthesis->getId(), 'element_id' => $element->getId()], UrlGeneratorInterface::ABSOLUTE_URL);
-            $view->setHeader('Location', $url);
-
-            return $view;
+        if (!$form->isValid()) {
+            throw new BadRequestHttpException($form->getErrors(true));
         }
 
-        $view = $this->view($form->getErrors(true), Codes::HTTP_BAD_REQUEST);
+        $element = $this->get('capco.synthesis.synthesis_element_handler')->createElementInSynthesis(
+            $element,
+            $synthesis,
+            $this->getUser()
+        );
 
-        return $view;
+        return $element;
     }
 
     /**
@@ -366,22 +363,22 @@ class SynthesisController extends FOSRestController
      * @Put("/syntheses/{synthesisId}/elements/{elementId}")
      * @ParamConverter("synthesis", options={"mapping": {"synthesisId": "id"}, "repository_method": "getOne", "map_method_signature": true})
      * @ParamConverter("element", options={"mapping": {"elementId": "id"}})
-     * @View(serializerGroups={"ElementDetails", "UserDetails", "LogDetails"})
+     * @View(serializerEnableMaxDepthChecks=true, serializerGroups={"ElementDetails", "UserDetails", "LogDetails"})
      */
     public function updateSynthesisElementAction(Request $request, Synthesis $synthesis, SynthesisElement $element)
     {
         $form = $this->createForm(new SynthesisElementForm(true), $element);
         $form->submit($request->request->all(), false);
 
-        if ($form->isValid()) {
-            $element = $this->get('capco.synthesis.synthesis_element_handler')->updateElementInSynthesis($element, $synthesis);
-
-            return $element;
+        if (!$form->isValid()) {
+            throw new BadRequestHttpException($form->getErrors(true));
         }
 
-        $view = $this->view($form->getErrors(true), Codes::HTTP_BAD_REQUEST);
-
-        return $view;
+        $element = $this->get('capco.synthesis.synthesis_element_handler')->updateElementInSynthesis(
+            $element,
+            $synthesis
+        );
+        return $element;
     }
 
     /**

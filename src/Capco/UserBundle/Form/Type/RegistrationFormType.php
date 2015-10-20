@@ -22,37 +22,31 @@ class RegistrationFormType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         if ((null != $this->siteParameterResolver->getValue('signin.cgu.name')) && (null != $this->siteParameterResolver->getValue('signin.cgu.link'))) {
-            $builder->add('isTermsAccepted', 'checkbox', [
+            $builder->add('isTermsAccepted', 'checkbox', array(
                 'label' => null,
                 'required' => true,
-            ]);
+            ));
         } else {
-            $builder->add('isTermsAccepted', 'hidden', [
+            $builder->add('isTermsAccepted', 'hidden', array(
                 'data' => true,
                 'property_path' => 'isTermsAccepted',
-            ]);
+            ));
         }
 
         $builder
             ->remove('plainPassword')
-            ->add('plainPassword', 'password', [
+            ->add('plainPassword', 'password', array(
                 'translation_domain' => 'FOSUserBundle',
                 'label' => 'form.password',
-            ])
+            ))
         ;
 
         if ($this->toggleManager->isActive('user_type')) {
-            $builder->add('userType', null, [
+            $builder->add('userType', null, array(
                 'required' => false,
                 'empty_value' => 'form.no_type',
                 'translation_domain' => 'FOSUserBundle',
-            ]);
-        }
-
-        if ($this->toggleManager->isActive('zipcode_at_register')) {
-            $builder->add('zipcode', null, [
-                'required' => false,
-            ]);
+            ));
         }
     }
 

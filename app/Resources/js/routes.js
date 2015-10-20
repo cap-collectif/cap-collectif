@@ -1,6 +1,6 @@
 import SynthesisBox from './components/Synthesis/SynthesisBox';
 import ElementsInbox from './components/Synthesis/ElementsInbox';
-import ElementsTree from './components/Synthesis/ElementsTree';
+import FolderManager from './components/Synthesis/FolderManager';
 import EditElement from './components/Synthesis/EditElement';
 
 const Route = ReactRouter.Route;
@@ -26,7 +26,7 @@ export default (
       <DefaultRoute handler={RedirectToDefaultInbox} />
       <Route name="inbox" path=":type" handler={ElementsInbox} />
     </Route>
-    <Route name="tree" path="tree" handler={ElementsTree} />
+    <Route name="folder_manager" path="folder-manager" handler={FolderManager} />
     <Route name="show_element" path="element/:element_id" handler={EditElement} />
   </Route>
 );

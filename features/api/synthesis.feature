@@ -308,7 +308,7 @@ Feature: Synthesis
             }
           },
           "path": "Je suis un élément-43",
-          "display_type": "folder",
+          "displayType": "folder",
           "title": "Je suis un élément",
           "body": "blabla",
           "notation": 4,
@@ -368,7 +368,7 @@ Feature: Synthesis
             }
           },
           "path": "Je suis un élément-43",
-          "display_type": "folder",
+          "displayType": "folder",
           "title": "Je suis un élément",
           "body": "blabla",
           "notation": 4,
@@ -419,7 +419,7 @@ Feature: Synthesis
           "archived": true,
           "author": @null@,
           "path": "-44",
-          "display_type": "folder",
+          "displayType": "folder",
           "title": @null@,
           "body": "blabla",
           "notation": @null@,
@@ -471,7 +471,7 @@ Feature: Synthesis
           "archived": true,
           "author": @null@,
           "path": "-44",
-          "display_type": "folder",
+          "displayType": "folder",
           "title": @null@,
           "body": "blabla",
           "notation": @null@,
@@ -512,6 +512,7 @@ Feature: Synthesis
         "id": @string@,
         "level": 0,
         "path": @string@,
+        "displayType": "folder",
         "title": "Le problème constaté",
         "body": @string@,
         "childrenCount": 1,
@@ -521,6 +522,7 @@ Feature: Synthesis
         "id": @string@,
         "level": 0,
         "path": @string@,
+        "displayType": "folder",
         "title": "Les causes",
         "body": @string@,
         "childrenCount": 2,
@@ -541,6 +543,7 @@ Feature: Synthesis
         "id": @string@,
         "level": 0,
         "path": @string@,
+        "displayType": @string@,
         "title": @string@,
         "body": @string@,
         "childrenCount": @integer@,
@@ -549,6 +552,7 @@ Feature: Synthesis
             "id": @string@,
             "level": 1,
             "path": @string@,
+            "displayType": @string@,
             "title": @string@,
             "body": @string@,
             "childrenCount": @integer@,
@@ -568,6 +572,7 @@ Feature: Synthesis
     Then the JSON response should match:
     """
     {
+      "childrenCount": 0,
       "has_linked_data": false,
       "id": "43",
       "published": false,
@@ -593,7 +598,7 @@ Feature: Synthesis
       "path": "Je suis un élément-43",
       "parent": @...@,
       "children": [],
-      "display_type": "folder",
+      "displayType": "folder",
       "title": "Je suis un élément",
       "body": "blabla",
       "link": @null@,
@@ -648,6 +653,7 @@ Feature: Synthesis
     And the JSON response should match:
     """
     {
+      "childrenCount": 0,
       "has_linked_data": false,
       "id": @string@,
       "published": true,
@@ -659,7 +665,7 @@ Feature: Synthesis
       "division": @null@,
       "path": @string@,
       "children": [],
-      "display_type": "folder",
+      "displayType": "folder",
       "title": "Coucou, je suis un élément.",
       "body": "blabla",
       "link": @null@,
@@ -722,6 +728,7 @@ Feature: Synthesis
     And the JSON response should match:
     """
     {
+      "childrenCount": 0,
       "has_linked_data": false,
       "id": "43",
       "published": true,
@@ -747,7 +754,7 @@ Feature: Synthesis
       "path": "Je suis un élément-43",
       "parent": @...@,
       "children": [],
-      "display_type": "folder",
+      "displayType": "folder",
       "title": "Je suis un élément",
       "body": "blabla",
       "link": @null@,
@@ -855,7 +862,7 @@ Feature: Synthesis
   #           "division": @null@,
   #           "parent": @null@,
   #           "children": [],
-  #           "display_type": "folder",
+  #           "displayType": "folder",
   #           "title": "Coucou, je suis un élément.",
   #           "body": "blabla",
   #           "link": @null@,
@@ -872,7 +879,7 @@ Feature: Synthesis
   #     },
   #     "parent": @null@,
   #     "children": [],
-  #     "display_type": "folder",
+  #     "displayType": "folder",
   #     "title": "Je suis un élément",
   #     "body": "blabla",
   #     "link": @null@,

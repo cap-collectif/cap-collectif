@@ -33,6 +33,7 @@ Capco\AppBundle\Entity\Synthesis\SynthesisElement:
       groups: [ElementsTree, ElementDetails]
       max_depth: 2
     displayType:
+      serialized_name: displayType
       expose: true
       groups: [ElementsTree, ElementsList, ElementsPublished, ElementDetails]
     title:
@@ -63,6 +64,9 @@ Capco\AppBundle\Entity\Synthesis\SynthesisElement:
       expose: true
       groups: [ElementsTree, ElementDetails, ElementsPublished]
   virtual_properties:
+    getChildrenCount:
+      serialized_name: childrenCount
+      groups: [ElementsTree, ElementDetails]
     getDecodedBody:
       serialized_name: body
       groups: [ElementsTree, ElementsList, ElementDetails, ElementsPublished]

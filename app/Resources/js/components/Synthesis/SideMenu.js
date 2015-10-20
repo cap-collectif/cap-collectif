@@ -46,7 +46,7 @@ const SideMenu = React.createClass({
 
   renderContributionsButton() {
     return (
-        <NavItemLink to="tree" className="menu__link" bsStyle="link">
+        <NavItemLink to="folder_manager" className="menu__link" bsStyle="link">
           <i className="cap cap-baloon"></i> {this.getIntlMessage('edition.sideMenu.contributions')}
         </NavItemLink>
     );
@@ -80,7 +80,7 @@ const SideMenu = React.createClass({
 
   renderManageButton() {
     return (
-      <NavItemLink className="menu__link menu__action" to="tree">
+      <NavItemLink className="menu__link menu__action" to="folder_manager">
         <i className="cap cap-folder-edit"></i> {this.getIntlMessage('edition.action.manage.label')}
       </NavItemLink>
     );
