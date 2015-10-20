@@ -27,10 +27,9 @@ dependencies:
         - elasticsearch-1.7.0/bin/elasticsearch: {background: true}
         - npm install -g brunch
         - pip install fabric
-        - npm install
+        - npm install --production
         - bower install --config.interactive=false
         - composer install --prefer-dist --no-interaction --optimize-autoloader
-
 
 # This is not a real deployment we only update the code
 # because the 'infrastructure' folder which contains the
@@ -43,7 +42,7 @@ deployment:
             - "ssh capco@***REMOVED*** 'cd CapCollectif-DeploymentTools && fab deploy:preprod'"
 test:
     pre:
-        - fab build
+        - fab build:prod
         - SYMFONY_ENV=test php app/console server:run --router=app/config/router_test.php: {background: true}
 
     override:

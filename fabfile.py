@@ -9,16 +9,16 @@ from fabric.colors import red, green
 env.local_dir = env.real_fabfile[:-10]
 
 @task
-def build_deps():
+def build_deps(environment='dev'):
     with lcd(env.local_dir):
-        local('npm install')
+        local('npm install' + ('', ' --production')[environment == 'prod'])
         local('bower install --config.interactive=false')
         local('composer install --prefer-dist --no-interaction --optimize-autoloader')
 
 @task
-def build_front():
+def build_front(environment='dev'):
     with lcd(env.local_dir):
-        local('brunch build --production')
+        local('brunch build'+ ('', ' --production')[environment == 'prod'])
 
 @task
 def build_test_db():
@@ -69,6 +69,6 @@ def test():
         local('bin/behat -s front', capture=False)
 
 @task
-def build():
-    build_deps();
+def build(environment='dev'):
+    build_deps(environment);
     build_front();
