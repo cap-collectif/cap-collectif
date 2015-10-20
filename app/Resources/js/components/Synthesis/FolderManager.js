@@ -40,6 +40,55 @@ const FolderManager = React.createClass({
     this.fetchElements();
   },
 
+  toggleExpand(element) {
+    if (element.childrenCount !== element.children.length) {
+      SynthesisElementActions.loadElementsTreeFromServer(this.props.synthesis.id, 'all', element.id);
+    }
+    const expanded = this.state.expanded;
+    expanded[element.id] = this.state.expanded[element.id] ? false : true;
+    this.setState({
+      expanded: expanded,
+    });
+  },
+
+  showCreateModal() {
+    this.setState({
+      showCreateModal: true,
+    });
+  },
+
+  hideCreateModal() {
+    this.setState({
+      showCreateModal: false,
+    });
+  },
+
+  fetchElements() {
+    if (!SynthesisElementStore.isFetchingTree) {
+      if (SynthesisElementStore.isInboxSync.allTree) {
+        this.setState({
+          elements: SynthesisElementStore.elements.allTree,
+          expanded: SynthesisElementStore.expandedNavbarItems,
+          isLoading: false,
+        });
+        return;
+      }
+
+      this.setState({
+        isLoading: true,
+      }, () => {
+        this.loadElementsTreeFromServer();
+      });
+    }
+  },
+
+  loadElementsTreeFromServer() {
+    SynthesisElementActions.loadElementsTreeFromServer(
+      this.props.synthesis.id,
+      'all'
+    );
+  },
+
   renderIgnoreButton(element) {
     if (element.displayType === 'folder') {
       return (
@@ -110,55 +159,6 @@ const FolderManager = React.createClass({
         <Loader show={this.state.isLoading} />
         {this.renderTreeItems(this.state.elements, 0)}
       </div>
-    );
-  },
-
-  toggleExpand(element) {
-    if (element.childrenCount !== element.children.length) {
-      SynthesisElementActions.loadElementsTreeFromServer(this.props.synthesis.id, 'all', element.id);
-    }
-    const expanded = this.state.expanded;
-    expanded[element.id] = this.state.expanded[element.id] ? false : true;
-    this.setState({
-      expanded: expanded,
-    });
-  },
-
-  showCreateModal() {
-    this.setState({
-      showCreateModal: true,
-    });
-  },
-
-  hideCreateModal() {
-    this.setState({
-      showCreateModal: false,
-    });
-  },
-
-  fetchElements() {
-    if (!SynthesisElementStore.isFetchingTree) {
-      if (SynthesisElementStore.isInboxSync.allTree) {
-        this.setState({
-          elements: SynthesisElementStore.elements.allTree,
-          expanded: SynthesisElementStore.expandedNavbarItems,
-          isLoading: false,
-        });
-        return;
-      }
-
-      this.setState({
-        isLoading: true,
-      }, () => {
-        this.loadElementsTreeFromServer();
-      });
-    }
-  },
-
-  loadElementsTreeFromServer() {
-    SynthesisElementActions.loadElementsTreeFromServer(
-      this.props.synthesis.id,
-      'all'
     );
   },
 
