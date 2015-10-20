@@ -26,7 +26,7 @@ dependencies:
         - tar -xvf elasticsearch-1.7.0.tar.gz
         - elasticsearch-1.7.0/bin/elasticsearch: {background: true}
         - npm install -g brunch
-        - pip install fabric requests libsaas
+        - pip install fabric
         - npm install
         - bower install --config.interactive=false
         - composer install --prefer-dist --no-interaction --optimize-autoloader
@@ -51,5 +51,5 @@ test:
         - fab validate_test_schema
         - fab load_base_data
         - fab test
-        - fab circleci lint:pr=$CI_PULL_REQUEST
+        - fab lint
 
