@@ -145,7 +145,15 @@ const CreateModal = React.createClass({
   renderParentFinder() {
     const parentId = this.state.parent ? this.state.parent.id : 'root';
     return (
-      <ElementsFinder synthesis={this.props.synthesis} elements={this.props.elements} type="all" expanded={this.state.expanded} selectedId={parentId} onSelect={this.setParent} onExpand={this.expandItem} />
+      <ElementsFinder
+        synthesis={this.props.synthesis}
+        elements={this.props.elements}
+        type="notIgnored"
+        expanded={this.state.expanded}
+        selectedId={parentId}
+        onSelect={this.setParent}
+        onExpand={this.expandItem}
+      />
     );
   },
 

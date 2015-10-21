@@ -194,7 +194,7 @@ const PublishModal = React.createClass({
     return (
       <ElementsFinder
         synthesis={this.props.synthesis}
-        type="all"
+        type="notIgnored"
         elements={this.state.elements}
         expanded={this.state.expanded}
         selectedId={parentId}

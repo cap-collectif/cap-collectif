@@ -515,7 +515,7 @@ Feature: Synthesis
         "displayType": "folder",
         "title": "Le problème constaté",
         "body": @string@,
-        "childrenCount": 1,
+        "childrenCount": 0,
         "children": []
       },
       {
@@ -525,7 +525,7 @@ Feature: Synthesis
         "displayType": "folder",
         "title": "Les causes",
         "body": @string@,
-        "childrenCount": 2,
+        "childrenCount": 0,
         "children": []
       }
     ]

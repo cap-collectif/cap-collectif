@@ -116,7 +116,7 @@ const SideMenu = React.createClass({
         selectedId={this.state.selectedId}
         onExpand={this.toggleExpand}
         onSelect={this.selectItem}
-        type="all"
+        type="notIgnored"
         itemClass="menu__link"
       />
     );

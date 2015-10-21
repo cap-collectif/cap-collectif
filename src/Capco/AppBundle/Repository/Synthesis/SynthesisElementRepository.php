@@ -121,6 +121,30 @@ class SynthesisElementRepository extends MaterializedPathRepository
         return $qb;
     }
 
+    protected function getOnClauseForChildren($type, $alias = 'c')
+    {
+        switch ($type) {
+            case 'new':
+                return $alias.'.archived = 0';
+                break;
+            case 'unpublished':
+                return $alias.'.archived = 1 AND '.$alias.'.published = 0';
+                break;
+            case 'archived':
+                return $alias.'.archived = 1';
+                break;
+            case 'published':
+                return $alias.'.archived = 1 AND '.$alias.'.published = 1';
+                break;
+            case 'notIgnored':
+                return $alias.'.published = 1 OR '.$alias.'.archived = 0';
+                break;
+            default:
+                return '';
+                break;
+        }
+    }
+
     protected function addAndQueryCondition($qb, $field, $value)
     {
         if (in_array($field, self::$allowedFields)) {
@@ -241,7 +265,7 @@ class SynthesisElementRepository extends MaterializedPathRepository
         $path = $config['path'];
         $qb = $this->createQueryBuilder('se')
             ->select('se.id', 'se.level', 'se.path', 'se.displayType', 'se.title', 'se.body', 'COUNT(c.id) as childrenCount')
-            ->leftJoin('se.children', 'c')
+            ->leftJoin('se.children', 'c', 'WITH', $this->getOnClauseForChildren($type))
         ;
         $expr = '';
         $includeNodeExpr = '';
