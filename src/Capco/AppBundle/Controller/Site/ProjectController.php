@@ -97,9 +97,9 @@ class ProjectController extends Controller
     }
 
     /**
-     * @Route("/projets/{projectSlug}/project/{stepSlug}/opinions/{opinionTypeSlug}/{page}", name="app_project_show_opinions", requirements={"page" = "\d+"}, defaults={"page" = 1})
+     * @Route("/projects/{projectSlug}/project/{stepSlug}/opinions/{opinionTypeSlug}/{page}", name="app_project_show_opinions", requirements={"page" = "\d+"}, defaults={"page" = 1})
      * @Route("/consultations/{projectSlug}/consultation/{stepSlug}/opinions/{opinionTypeSlug}/{page}", name="app_consultation_show_opinions", requirements={"page" = "\d+"}, defaults={"page" = 1})
-     * @Route("/projets/{projectSlug}/project/{stepSlug}/opinions/{opinionTypeSlug}/{opinionsSort}/{page}", name="app_project_show_opinions_sorted", requirements={"page" = "\d+","opinionsSort" = "last|old|comments|favorable|votes|positions"}, defaults={"page" = 1})
+     * @Route("/projects/{projectSlug}/project/{stepSlug}/opinions/{opinionTypeSlug}/{opinionsSort}/{page}", name="app_project_show_opinions_sorted", requirements={"page" = "\d+","opinionsSort" = "last|old|comments|favorable|votes|positions"}, defaults={"page" = 1})
      * @Route("/consultations/{projectSlug}/consultation/{stepSlug}/opinions/{opinionTypeSlug}/{opinionsSort}/{page}", name="app_consultation_show_opinions_sorted", requirements={"page" = "\d+","opinionsSort" = "last|old|comments|favorable|votes|positions"}, defaults={"page" = 1})
      * @ParamConverter("project", class="CapcoAppBundle:Project", options={"mapping": {"projectSlug": "slug"}})
      * @ParamConverter("currentStep", class="CapcoAppBundle:ConsultationStep", options={"mapping": {"stepSlug": "slug"}})
@@ -157,7 +157,7 @@ class ProjectController extends Controller
     }
 
     /**
-     * @Route("/projets/{projectSlug}/trashed", name="app_project_show_trashed", defaults={"_feature_flags" = "project_trash"} )
+     * @Route("/projects/{projectSlug}/trashed", name="app_project_show_trashed", defaults={"_feature_flags" = "project_trash"} )
      * @Route("/consultations/{projectSlug}/trashed", name="app_consultation_show_trashed", defaults={"_feature_flags" = "project_trash"} )
      * @ParamConverter("project", class="CapcoAppBundle:Project", options={"mapping": {"projectSlug": "slug"}})
      * @Template("CapcoAppBundle:Project:show_trashed.html.twig")
@@ -230,7 +230,7 @@ class ProjectController extends Controller
     }
 
     /**
-     * @Route("/projets/{projectSlug}/events", name="app_project_show_events", defaults={"_feature_flags" = "calendar"})
+     * @Route("/projects/{projectSlug}/events", name="app_project_show_events", defaults={"_feature_flags" = "calendar"})
      * @Route("/consultations/{projectSlug}/events", name="app_consultation_show_events", defaults={"_feature_flags" = "calendar"})
      * @ParamConverter("project", class="CapcoAppBundle:Project", options={"mapping": {"projectSlug": "slug"}})
      * @Template("CapcoAppBundle:Project:show_events.html.twig")
@@ -252,7 +252,7 @@ class ProjectController extends Controller
     }
 
     /**
-     * @Route("/projets/{projectSlug}/posts/{page}", name="app_project_show_posts", requirements={"page" = "\d+"}, defaults={"_feature_flags" = "blog", "page" = 1} )
+     * @Route("/projects/{projectSlug}/posts/{page}", name="app_project_show_posts", requirements={"page" = "\d+"}, defaults={"_feature_flags" = "blog", "page" = 1} )
      * @Route("/consultations/{projectSlug}/posts/{page}", name="app_consultation_show_posts", requirements={"page" = "\d+"}, defaults={"_feature_flags" = "blog", "page" = 1} )
      * @ParamConverter("project", class="CapcoAppBundle:Project", options={"mapping": {"projectSlug": "slug"}})
      * @Template("CapcoAppBundle:Project:show_posts.html.twig")
@@ -288,7 +288,7 @@ class ProjectController extends Controller
     }
 
     /**
-     * @Route("/projets/{projectSlug}/participants/{page}", name="app_project_show_contributors", requirements={"page" = "\d+"}, defaults={"page" = 1} )
+     * @Route("/projects/{projectSlug}/participants/{page}", name="app_project_show_contributors", requirements={"page" = "\d+"}, defaults={"page" = 1} )
      * @Route("/consultations/{projectSlug}/participants/{page}", name="app_consultation_show_contributors", requirements={"page" = "\d+"}, defaults={"page" = 1} )
      * @ParamConverter("project", class="CapcoAppBundle:Project", options={"mapping": {"projectSlug": "slug"}})
      * @Template("CapcoAppBundle:Project:show_contributors.html.twig")
@@ -339,11 +339,11 @@ class ProjectController extends Controller
     }
 
     /**
-     * @Route("/projets/{page}", name="app_project", requirements={"page" = "\d+"}, defaults={"page" = 1} )
+     * @Route("/projects/{page}", name="app_project", requirements={"page" = "\d+"}, defaults={"page" = 1} )
      * @Route("/consultations/{page}", name="app_consultation", requirements={"page" = "\d+"}, defaults={"page" = 1} )
-     * @Route("/projets/{theme}/{sort}/{page}", name="app_project_search", requirements={"page" = "\d+"}, defaults={"page" = 1, "theme" = "all"} )
+     * @Route("/projects/{theme}/{sort}/{page}", name="app_project_search", requirements={"page" = "\d+"}, defaults={"page" = 1, "theme" = "all"} )
      * @Route("/consultations/{theme}/{sort}/{page}", name="app_consultation_search", requirements={"page" = "\d+"}, defaults={"page" = 1, "theme" = "all"} )
-     * @Route("/projets/{theme}/{sort}/{term}/{page}", name="app_project_search_term", requirements={"page" = "\d+"}, defaults={"page" = 1, "theme" = "all"} )
+     * @Route("/projects/{theme}/{sort}/{term}/{page}", name="app_project_search_term", requirements={"page" = "\d+"}, defaults={"page" = 1, "theme" = "all"} )
      * @Route("/consultations/{theme}/{sort}/{term}/{page}", name="app_consultation_search_term", requirements={"page" = "\d+"}, defaults={"page" = 1, "theme" = "all"} )
      * @Template("CapcoAppBundle:Project:index.html.twig")
      *
