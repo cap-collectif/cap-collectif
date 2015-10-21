@@ -33,6 +33,8 @@ default:
                 - Capco\AppBundle\Behat\ApiContext
                 - Capco\AppBundle\Behat\NavigationContext
             mink_session: default
+            filters:
+                tags: "~@synthesis"
         commands:
             paths: [ %paths.base%/features/commands ]
             contexts:

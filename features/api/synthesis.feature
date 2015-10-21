@@ -1,3 +1,4 @@
+@synthesis
 Feature: Synthesis
   As an API client
   I want to manage syntheses
