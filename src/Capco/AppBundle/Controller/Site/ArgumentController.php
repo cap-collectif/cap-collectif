@@ -15,7 +15,7 @@ use Symfony\Component\Form\Form;
 class ArgumentController extends Controller
 {
     /**
-     * @Route("/projets/{projectSlug}/projet/{stepSlug}/opinions/{opinionTypeSlug}/{opinionSlug}/arguments/{argumentId}/edit", name="app_project_edit_argument")
+     * @Route("/projects/{projectSlug}/consultation/{stepSlug}/opinions/{opinionTypeSlug}/{opinionSlug}/arguments/{argumentId}/edit", name="app_project_edit_argument")
      * @Route("/consultations/{projectSlug}/consultation/{stepSlug}/opinions/{opinionTypeSlug}/{opinionSlug}/arguments/{argumentId}/edit", name="app_consultation_edit_argument")
      * @Template("CapcoAppBundle:Argument:update.html.twig")
      *
@@ -83,7 +83,7 @@ class ArgumentController extends Controller
     }
 
     /**
-     * @Route("/projets/{projectSlug}/projet/{stepSlug}/opinions/{opinionTypeSlug}/{opinionSlug}/arguments/{argumentId}/delete", name="app_project_delete_argument")
+     * @Route("/projects/{projectSlug}/consultation/{stepSlug}/opinions/{opinionTypeSlug}/{opinionSlug}/arguments/{argumentId}/delete", name="app_project_delete_argument")
      * @Route("/consultations/{projectSlug}/consultation/{stepSlug}/opinions/{opinionTypeSlug}/{opinionSlug}/arguments/{argumentId}/delete", name="app_consultation_delete_argument")
      * @Template("CapcoAppBundle:Argument:delete.html.twig")
      *

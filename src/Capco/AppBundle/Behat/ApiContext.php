@@ -219,7 +219,7 @@ class ApiContext extends ApplicationContext
     /**
      * There is a synthesis with id base on consultation step.
      *
-     * @Given there is a synthesis with id :sid based on project step :csId
+     * @Given there is a synthesis with id :sid based on consultation step :csId
      */
     public function thereIsASynthesisBasedOnConsultationStep($sId, $csId)
     {
