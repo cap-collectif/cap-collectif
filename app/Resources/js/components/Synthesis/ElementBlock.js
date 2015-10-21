@@ -8,9 +8,16 @@ const FormattedDate = ReactIntl.FormattedDate;
 
 const ElementBlock = React.createClass({
   propTypes: {
-    element: React.PropTypes.object,
+    element: React.PropTypes.object.isRequired,
+    showBreadcrumb: React.PropTypes.bool,
   },
   mixins: [ReactIntl.IntlMixin],
+
+  getDefaultProps() {
+    return ({
+      showBreadcrumb: true,
+    });
+  },
 
   renderAuthor() {
     if (this.props.element.author) {
@@ -63,7 +70,11 @@ const ElementBlock = React.createClass({
             <ElementNotation element={element} />
           </p>
           <ElementTitle element={element} link className="element__title" />
-          <ElementBreadcrumb element={element} />
+          {
+            this.props.showBreadcrumb
+              ? <ElementBreadcrumb element={element} />
+              : null
+          }
         </div>
         {this.renderStatus()}
       </div>

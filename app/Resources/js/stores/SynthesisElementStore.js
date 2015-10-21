@@ -360,7 +360,7 @@ class SynthesisElementStore extends BaseStore {
   getDirectParentItem(element) {
     const parents = this.getParentItems(element);
     if (parents.length < 2) {
-      return null
+      return null;
     }
     return parents[parents.length - 2];
   }

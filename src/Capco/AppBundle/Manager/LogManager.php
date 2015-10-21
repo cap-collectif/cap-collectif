@@ -23,7 +23,10 @@ class LogManager
     public function getSentencesForLog(LogEntry $log)
     {
         $sentences = array();
-        $username = $this->userManager->findOneBy(array('slug' => $log->getUsername()));
+        $username = $log->getUsername()
+            ? $this->userManager->findOneBy(array('slug' => $log->getUsername()))
+            : null
+        ;
 
         // Update actions
         if ($log->getAction() === 'update') {

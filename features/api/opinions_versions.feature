@@ -199,7 +199,7 @@ Feature: Opinions Versions
     """
     {
       "code": 400,
-      "message": "Can't add a version to an uncontributable opinion.",
+      "message": "Bad Request",
       "errors": @null@
     }
     """

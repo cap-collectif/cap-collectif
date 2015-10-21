@@ -26,6 +26,21 @@ def build_test_db():
         local('php app/console doctrine:schema:update --force -e test')
 
 @task
+def migrate_test_db():
+    with lcd(env.local_dir):
+        local('php app/console doctrine:migration:migrate -n -e test')
+
+@task
+def load_base_data():
+    with lcd(env.local_dir):
+        local('php app/console capco:load-base-data --force -n -e test')
+
+@task
+def validate_test_schema():
+    with lcd(env.local_dir):
+        local('php app/console doctrine:schema:validate -e test')
+
+@task
 def reinit_data():
     with lcd(env.local_dir):
         local('php app/console capco:reinit --force')
@@ -56,7 +71,7 @@ def test():
 @task
 def build(environment='dev'):
     build_deps(environment);
-    build_front(environment);
+    build_front();
 
 @task
 def docker_import_bdd():

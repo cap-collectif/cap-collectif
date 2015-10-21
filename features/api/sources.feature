@@ -1,3 +1,4 @@
+@dev
 Feature: Sources
 
 ## Vote
@@ -32,7 +33,7 @@ Feature: Sources
     """
     {
       "code": 400,
-      "message": "You have not voted for this source.",
+      "message": "Bad Request",
       "errors": @null@
     }
     """

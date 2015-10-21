@@ -33,11 +33,6 @@ Feature: Opinions
           "votesThresholdHelpText": @string@
         },
 
-        "step": {
-          "id": @integer@,
-          "consultationId": @integer@
-        },
-
         "arguments_count": @integer@,
         "arguments_yes_count": @integer@,
         "arguments_no_count": @integer@,
@@ -214,33 +209,50 @@ Feature: Opinions
 
 
     Scenario: API client wants to list links of an opinion
-    When I send a GET request to "/api/opinions/60/links"
+    When I send a GET request to "/api/opinions/3/links"
     Then the JSON response should match:
     """
     {
       "links": [
         {
           "id": @integer@,
+          "title": @string@,
+
           "created_at": "@string@.isDateTime()",
           "updated_at": "@string@.isDateTime()",
-          "versions_count": @integer@,
-          "sources_count": @integer@,
-          "arguments_count": @integer@,
-          "author": @...@,
-          "type": @...@,
+
+        "type": {
+          "id": @integer@,
           "title": @string@,
-          "votes_nok": @integer@,
-          "votes_ok": @integer@,
-          "votes_mitige": @integer@,
-          "_links": {
-            "show": @string@,
-            "edit": @string@,
-            "report": @string@,
-            "type": @string@
-          },
-          "user_vote": @null@,
-          "has_user_reported": @boolean@
-        }
+          "subtitle": @string@,
+          "voteWidgetType": @integer@,
+          "votesHelpText": @string@,
+          "commentSystem": @integer@,
+          "color": @string@,
+          "versionable": @boolean@,
+          "linkable": @boolean@,
+          "sourceable": @boolean@,
+          "votesThreshold": @integer@,
+          "votesThresholdHelpText": @string@
+        },
+
+        "arguments_count": @integer@,
+        "arguments_yes_count": @integer@,
+        "arguments_no_count": @integer@,
+        "arguments": @...@,
+
+        "sources_count": @integer@,
+        "sources": @...@,
+
+        "versions_count": @integer@,
+
+        "votes": @...@,
+        "votes_nok": @integer@,
+        "votes_ok": @integer@,
+        "votes_mitige": @integer@,
+        "votes_total": @integer@,
+        },
+        @...@
       ]
     }
     """

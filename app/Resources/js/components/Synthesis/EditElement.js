@@ -3,6 +3,7 @@ import SynthesisElementActions from '../../actions/SynthesisElementActions';
 import Loader from '../Utils/Loader';
 import ElementTitle from './ElementTitle';
 import ElementBlock from './ElementBlock';
+import ElementsList from './ElementsList';
 import PublishButton from './PublishButton';
 import DivideButton from './DivideButton';
 import IgnoreButton from './IgnoreButton';
@@ -178,6 +179,10 @@ const EditElement = React.createClass({
       <div className="synthesis__element">
         <Loader show={this.state.isLoading} />
         {this.renderElementPanel()}
+        {!this.state.isLoading && this.state.element
+          ? <ElementsList elements={this.state.element.children} showBreadcrumb={false} />
+          : null
+        }
         {this.renderHistory()}
         {this.renderPublishModal()}
         {this.renderDivideModal()}
