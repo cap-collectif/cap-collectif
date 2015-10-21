@@ -98,7 +98,7 @@ class ProjectDownloadResolver
     public function getContent(ConsultationStep $consultationStep, $format)
     {
         if (null == $consultationStep) {
-            throw new NotFoundHttpException('Project step not found');
+            throw new NotFoundHttpException('Consultation step not found');
         }
 
         if (!$this->isFormatSupported($format)) {

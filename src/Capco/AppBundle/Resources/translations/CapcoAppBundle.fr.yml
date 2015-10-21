@@ -259,12 +259,12 @@ project:
       body: Choisissez le format du fichier :
       button: Format %format%
       cancel: Fermer
-      title: Exporter l'étape de projet "%title%"
+      title: Exporter l'étape de consultation "%title%"
     step: Étape %position% : "%title%"
   error:
-    not_exportable: Impossible de télécharger ce projet.
-    not_found: Projet introuvable.
-    no_contribute: Impossible de contribuer sur ce projet.
+    not_exportable: Impossible de télécharger cette étape de consultation.
+    not_found: Étape de consultation introuvable.
+    no_contribute: Impossible de contribuer sur cette étape de consultation.
   none: Aucun projet.
   opinion_term:
     opinion: Générique (proposition)

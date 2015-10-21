@@ -18,7 +18,7 @@ event_registration:
     email_belongs_to_user: Cette adresse électronique est déjà associée à un compte. Cliquez sur "M'inscrire avec mon compte" pour vous inscrire.
 
 project:
-  multiple_consultation_step: Il ne peut y avoir qu'une étape de consultation par projet.
+  multiple_consultation_steps: Il ne peut y avoir qu'une étape de consultation par projet.
 
 idea:
     vote:

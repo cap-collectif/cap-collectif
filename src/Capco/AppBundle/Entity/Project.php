@@ -813,15 +813,15 @@ class Project
 
     public function getAllConsultationSteps()
     {
-        $projects = array();
+        $consultationSteps = array();
 
         foreach ($this->steps as $step) {
             if ($step->getStep()->isConsultationStep()) {
-                $projects[] = $step;
+                $consultationSteps[] = $step;
             }
         }
 
-        return $projects;
+        return $consultationSteps;
     }
 
     // ************************** Lifecycle **************************************
