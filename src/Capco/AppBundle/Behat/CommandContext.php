@@ -9,6 +9,7 @@ use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\Console\Input\StringInput;
 use Symfony\Component\Console\Output\StreamOutput;
+use Symfony\Component\Console\Output\NullOutput;
 
 class CommandContext implements KernelAwareContext
 {
@@ -73,6 +74,8 @@ class CommandContext implements KernelAwareContext
         } else {
             $input = new StringInput($command);
         }
+
+        $input->setInteractive(false);
 
         $fp = tmpfile();
         $output = new StreamOutput($fp);

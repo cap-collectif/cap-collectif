@@ -82,6 +82,7 @@ Capco\AppBundle\Entity\OpinionType:
         defaultFilter: positions
         isEnabled: true
         versionable: true
+        linkable: true
         votesHelpText: <text(200)>
         votesThreshold: 5
         votesThresholdHelpText: <text(200)>

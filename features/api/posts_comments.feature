@@ -175,7 +175,7 @@ Feature: Posts comments
     """
     {
       "code": 404,
-      "message": "Not Found",
+      "message": "This parent comment is not linked to this post",
       "errors": @null@
     }
     """

@@ -34,13 +34,13 @@ Feature: Consultation Steps
   @database
   Scenario: logged in API client wants to add a linked opinion
     Given I am logged in to api as user
-    When I send a POST request to "/api/consultations/1/steps/4/opinions" with json:
+    When I send a POST request to "/api/consultations/5/steps/5/opinions" with json:
     """
     {
       "title": "Nouveau titre",
       "body": "Mes modifications blablabla",
       "link": 60,
-      "OpinionType": 16
+      "OpinionType": 9
     }
     """
     Then the JSON response status code should be 201
