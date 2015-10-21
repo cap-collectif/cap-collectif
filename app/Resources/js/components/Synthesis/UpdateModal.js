@@ -25,7 +25,7 @@ const UpdateModal = React.createClass({
   getInitialState() {
     const element = this.props.element;
     return {
-      parent: element ? element.parent : null,
+      parentId: this.getElementParentId(element),
       title: element ? element.title : null,
       elements: [],
       expanded: {
@@ -47,7 +47,7 @@ const UpdateModal = React.createClass({
     if (nextProps.element) {
       if (!this.props.element || this.props.element.id !== nextProps.element.id) {
         this.setState({
-          parent: nextProps.element.parent,
+          parentId: this.getElementParentId(nextProps.element),
           title: nextProps.element.title,
           expanded: this.getExpandedBasedOnElement(),
         });
@@ -61,6 +61,15 @@ const UpdateModal = React.createClass({
 
   onChange() {
     this.fetchElements();
+  },
+
+  getElementParentId() {
+    const parents = this.props.element.path.split('|');
+    if (parents.length < 2) {
+      return null;
+    }
+    const parent = parents[parents.length - 2].split('-');
+    return parent.slice(parent.length - 5, parent.length).join('-');
   },
 
   getExpandedBasedOnElement() {
@@ -81,9 +90,9 @@ const UpdateModal = React.createClass({
 
   setParent(element) {
     if (element) {
-      const value = element !== 'root' ? element : null;
+      const value = element !== 'root' ? element.id : null;
       this.setState({
-        parent: value,
+        parentId: value,
       });
     }
   },
@@ -99,7 +108,7 @@ const UpdateModal = React.createClass({
   update() {
     this.hide();
     const data = {
-      'parent': this.state.parent,
+      'parent': this.state.parentId,
       'title': this.state.title,
     };
     if (typeof this.props.process === 'function') {
@@ -168,7 +177,7 @@ const UpdateModal = React.createClass({
   },
 
   renderParentFinder() {
-    const parentId = this.state.parent ? this.state.parent.id : 'root';
+    const parentId = this.state.parentId || 'root';
     return (
       <ElementsFinder
         synthesis={this.props.synthesis}

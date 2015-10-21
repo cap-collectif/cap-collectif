@@ -57,7 +57,6 @@ const FolderManager = React.createClass({
       if (SynthesisElementStore.isInboxSync.notIgnoredTree) {
         this.setState({
           elements: SynthesisElementStore.elements.notIgnoredTree,
-          expanded: SynthesisElementStore.expandedNavbarItems,
           isLoading: false,
         });
         return;

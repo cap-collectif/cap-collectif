@@ -168,7 +168,8 @@ class SynthesisElementStore extends BaseStore {
       this.emitChange();
       break;
     case MOVE_ELEMENT:
-      this.changeElementParent(action.parent, action.elementId);
+      const parentId = typeof action.parent === 'object' ? action.parent.id : action.parent;
+      this.changeElementParent(parentId, action.elementId);
       this._resetInboxSync();
       this._isProcessing = true;
       this._resetMessages();
@@ -295,18 +296,18 @@ class SynthesisElementStore extends BaseStore {
     this._expandedNavbarItems = expanded;
   }
 
-  changeElementParent(parent, elementId) {
+  changeElementParent(parentId, elementId) {
     const element = this._element && elementId === this._element.id
       ? this._element
       : this.getElementInTreeById(this._elements.notIgnoredTree, elementId)
     ;
+    const prevParentId = element.parent ? element.parent.id : this.getDirectParentId(element);
     let tree = this._elements.notIgnoredTree;
     // Remove element from previous parent in tree
-    let prevParent = element.parent;
-    if (!prevParent) {
+    if (!prevParentId) {
       tree = ArrayHelper.removeElementFromArray(tree, element);
     } else {
-      prevParent = this.getElementInTreeById(tree, element.parent.id);
+      const prevParent = this.getElementInTreeById(tree, prevParentId);
       if (prevParent) {
         const prevChildren = prevParent.children;
         prevParent.children = ArrayHelper.removeElementFromArray(prevChildren, element);
@@ -314,8 +315,8 @@ class SynthesisElementStore extends BaseStore {
       }
     }
     // Add element to parent in tree
-    const parentInTree = this.getElementInTreeById(tree, parent.id);
-    if (parent.id === 'root') {
+    const parentInTree = this.getElementInTreeById(tree, parentId);
+    if (parentId === 'root') {
       tree = ArrayHelper.addElementToArray(tree, element);
     } else if (parentInTree) {
       const children = parentInTree.children;
@@ -354,6 +355,19 @@ class SynthesisElementStore extends BaseStore {
       items.push(item);
     });
     return items;
+  }
+
+  getDirectParentItem(element) {
+    const parents = this.getParentItems(element);
+    if (parents.length < 2) {
+      return null
+    }
+    return parents[parents.length - 2];
+  }
+
+  getDirectParentId(element) {
+    const parent = this.getDirectParentItem(element);
+    return parent ? parent.id : null;
   }
 
   updateTreeByTypeWithChildren(type, parentId, children) {
