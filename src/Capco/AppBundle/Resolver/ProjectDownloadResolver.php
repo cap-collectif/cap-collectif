@@ -95,9 +95,9 @@ class ProjectDownloadResolver
         ];
     }
 
-    public function getContent(ConsultationStep $ConsultationStep, $format)
+    public function getContent(ConsultationStep $consultationStep, $format)
     {
-        if (null == $ConsultationStep) {
+        if (null == $consultationStep) {
             throw new NotFoundHttpException('Project step not found');
         }
 
@@ -105,11 +105,11 @@ class ProjectDownloadResolver
             throw new \Exception('Wrong format');
         }
 
-        $data = $this->getData($ConsultationStep);
+        $data = $this->getData($consultationStep);
 
         $content = $this->templating->render('CapcoAppBundle:Project:download.xls.twig',
             array(
-                'title' => $ConsultationStep->getProject()->getTitle().'_'.$ConsultationStep->getTitle(),
+                'title' => $consultationStep->getProject()->getTitle().'_'.$consultationStep->getTitle(),
                 'format' => $format,
                 'sheets' => $this->sheets,
                 'headers' => $this->headers,
@@ -144,9 +144,9 @@ class ProjectDownloadResolver
 
     // ********************************** Generate data items **************************************
 
-    public function getData($ConsultationStep)
+    public function getData($consultationStep)
     {
-        $opinions = $this->em->getRepository('CapcoAppBundle:Opinion')->getEnabledByConsultationStep($ConsultationStep);
+        $opinions = $this->em->getRepository('CapcoAppBundle:Opinion')->getEnabledByConsultationStep($consultationStep);
         $this->getOpinionsData($opinions);
 
         return $this->data;
