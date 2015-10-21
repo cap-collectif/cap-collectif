@@ -1,4 +1,3 @@
-@dev
 Feature: Sources
 
 ## Vote

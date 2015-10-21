@@ -123,7 +123,7 @@ Feature: Arguments
     """
     {
       "code": 400,
-      "message": "Bad Request",
+      "message": "You have not voted for this argument.",
       "errors": @null@
     }
     """
