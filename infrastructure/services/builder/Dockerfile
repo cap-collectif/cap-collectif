@@ -38,4 +38,6 @@ COPY build.sh /usr/local/bin/capcobuild
 
 USER capco
 
+WORKDIR /capco
+
 CMD ["/usr/local/bin/capcobuild"]

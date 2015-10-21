@@ -1,0 +1,3 @@
+#!/bin/bash
+
+exec blackfire-agent -socket="unix:///var/run/blackfire/agent.sock" -log-level="4" -server-id="eeb5e6cc-acbd-4966-9c67-8d836b26b066" -server-token="***REMOVED***"
