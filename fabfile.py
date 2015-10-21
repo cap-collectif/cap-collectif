@@ -56,7 +56,7 @@ def test():
 @task
 def build(environment='dev'):
     build_deps(environment);
-    build_front();
+    build_front(environment);
 
 @task
 def docker_import_bdd():
