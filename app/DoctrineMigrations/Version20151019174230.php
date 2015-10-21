@@ -2,14 +2,25 @@
 
 namespace Application\Migrations;
 
+use Capco\AppBundle\Toggle\Manager;
 use Doctrine\DBAL\Migrations\AbstractMigration;
 use Doctrine\DBAL\Schema\Schema;
+use Symfony\Component\DependencyInjection\ContainerAwareInterface;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-class Version20151019174230 extends AbstractMigration
+class Version20151019174230 extends AbstractMigration implements ContainerAwareInterface
 {
+
+    private $container;
+
+    public function setContainer(ContainerInterface $container = null)
+    {
+        $this->container = $container;
+    }
+
     /**
      * @param Schema $schema
      */
@@ -20,6 +31,10 @@ class Version20151019174230 extends AbstractMigration
 
         $this->addSql('ALTER TABLE opinion DROP FOREIGN KEY FK_AB02B027ADA40271');
         $this->addSql('ALTER TABLE opinion ADD CONSTRAINT FK_AB02B027ADA40271 FOREIGN KEY (link_id) REFERENCES opinion (id) ON DELETE SET NULL');
+
+        $manager = $this->container->get('capco.toggle.manager');
+        $manager->isActive('consultations_form') ? $manager->activate('projects_form') : $manager->deactivate('projects_form');
+        $manager->isActive('consultation_trash') ? $manager->activate('project_trash') : $manager->deactivate('project_trash');
     }
 
     /**
@@ -32,5 +47,9 @@ class Version20151019174230 extends AbstractMigration
 
         $this->addSql('ALTER TABLE opinion DROP FOREIGN KEY FK_AB02B027ADA40271');
         $this->addSql('ALTER TABLE opinion ADD CONSTRAINT FK_AB02B027ADA40271 FOREIGN KEY (link_id) REFERENCES opinion (id)');
+
+        $manager = $this->container->get('capco.toggle.manager');
+        $manager->isActive('projects_form') ? $manager->activate('consultations_form') : $manager->deactivate('consultations_form');
+        $manager->isActive('project_trash') ? $manager->activate('consultation_trash') : $manager->deactivate('consultation_trash');
     }
 }

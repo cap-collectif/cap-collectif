@@ -76,7 +76,7 @@ admin:
     project:
       closed_at: Si le projet ne dure qu'une journée, renseignez la même date que pour la date de début.
       steps: |
-                Ajoutez ici les étapes postérieures ou antérieures à le projet (synthèse finale, présentation préliminaire...). L'étape correspondant à le projet elle-même sera créée automatiquement en fonction des dates renseignées.
+                Ajoutez ici les étapes postérieures ou antérieures au le projet (synthèse finale, présentation préliminaire...). L'étape correspondant au le projet elle-même sera créée automatiquement en fonction des dates renseignées.
                 Vous pouvez ajouter des étapes créées au préalable ou les ajouter ultérieurement via le menu de création d'étapes.
       video: |
             Entrez l'URL embed de la vidéo souhaitée. Ex: http://www.youtube.com/embed/wTcNtgA6gHs?autoplay=1<br/>
