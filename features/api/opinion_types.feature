@@ -9,8 +9,7 @@ Feature: Opinion Types Api
         {
           "id": @integer@,
           "label": @string@
-        },
-        @...@
+        }
       ],
       "id": 8,
       "title": @string@

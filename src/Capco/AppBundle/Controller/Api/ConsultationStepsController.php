@@ -55,7 +55,11 @@ class ConsultationStepsController extends FOSRestController
             throw new BadRequestHttpException('This opinionType is not enabled.');
         }
 
-        if (!in_array($opinionType, $availablesOpinionTypes->toArray())) {
+        if ($availablesOpinionTypes instanceof ArrayCollection) {
+            $availablesOpinionTypes = $availablesOpinionTypes->toArray();
+        }
+
+        if (!in_array($opinionType, $availablesOpinionTypes)) {
             throw new BadRequestHttpException('This opinionType is not available.');
         }
 
