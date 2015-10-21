@@ -12,10 +12,6 @@
     "repositories": [
         {
             "type": "vcs",
-            "url": "https://github.com/spyl94/SonataMediaBundle"
-        },
-        {
-            "type": "vcs",
             "url": "https://github.com/ArteGEIE/serializer"
         }
     ],
@@ -114,7 +110,7 @@
         "symfony-app-dir": "app",
         "symfony-web-dir": "web",
         "branch-alias": {
-            "dev-master": "2.5-dev"
+            "dev-master": "2.7-dev"
         }
     },
     "minimum-stability": "stable"
