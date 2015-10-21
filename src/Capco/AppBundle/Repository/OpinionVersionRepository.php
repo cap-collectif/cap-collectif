@@ -152,7 +152,7 @@ class OpinionVersionRepository extends EntityRepository
     }
 
     /**
-     * Get enabled opinions by project step.
+     * Get enabled opinions by consultation step.
      *
      * @param $step
      *
