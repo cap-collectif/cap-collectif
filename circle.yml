@@ -48,7 +48,6 @@ test:
     override:
         - fab migrate_test_db
         - fab validate_test_schema
-        - fab load_base_data
         - fab test
         - fab lint
 

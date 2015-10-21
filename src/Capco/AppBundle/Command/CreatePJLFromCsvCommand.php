@@ -22,6 +22,7 @@ use Capco\AppBundle\Entity\ConsultationStep;
 use Capco\AppBundle\Entity\ConsultationType;
 use Capco\AppBundle\Entity\OpinionModal;
 use Capco\AppBundle\Entity\MenuItem;
+use Symfony\Component\Console\Input\ArrayInput;
 
 class CreatePJLFromCsvCommand extends ContainerAwareCommand
 {
@@ -231,14 +232,18 @@ class CreatePJLFromCsvCommand extends ContainerAwareCommand
 
         foreach ($em->getRepository('CapcoMediaBundle:Media')->findAll() as $media) {
             $media->setEnabled(false);
-            // if ($media->getName() == 'Introduction') {
-            //     $media->setEnabled(true);
-            // }
         }
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
+        $this->getApplication()
+             ->find('capco:load-base-data')
+             ->run(new ArrayInput([
+                    'command' => 'capco:load-base-data',
+                    '--force' => true
+                ]), $output);
+
         $this->toggleFeatures();
         $this->generateDefaultContent();
         $this->generateMedias();
