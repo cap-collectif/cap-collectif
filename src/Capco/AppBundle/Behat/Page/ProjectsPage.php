@@ -12,5 +12,5 @@ class ProjectsPage extends Page
     /**
      * @var string
      */
-    protected $path = '/projets';
+    protected $path = '/projects';
 }

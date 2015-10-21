@@ -6,19 +6,19 @@ use Capco\AppBundle\Behat\PageTrait;
 use SensioLabs\Behat\PageObjectExtension\PageObject\Page;
 use SensioLabs\Behat\PageObjectExtension\PageObject\Exception\UnexpectedPageException;
 
-class ProjectPage extends Page
+class ConsultationPage extends Page
 {
     use PageTrait;
 
     /**
      * @var string
      */
-    protected $path = '/projets/{projectSlug}/projet/{stepSlug}';
+    protected $path = '/projects/{projectSlug}/consultation/{stepSlug}';
 
     protected $elements = array(
-        'Opinion nav bar' => '.project__nav',
+        'Opinion nav bar' => '.consultation__nav',
         'Opinion nav item' => array(
-            'css' => '.project__nav li',
+            'css' => '.consultation__nav li',
         ),
     );
 

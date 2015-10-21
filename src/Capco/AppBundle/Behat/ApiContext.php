@@ -217,11 +217,11 @@ class ApiContext extends ApplicationContext
     }
 
     /**
-     * There is a synthesis with id base on project step.
+     * There is a synthesis with id base on consultation step.
      *
      * @Given there is a synthesis with id :sid based on project step :csId
      */
-    public function thereIsASynthesisBasedOnProjectsStep($sId, $csId)
+    public function thereIsASynthesisBasedOnConsultationStep($sId, $csId)
     {
         $synthesis = $this->getEntityManager()->getRepository('CapcoAppBundle:Synthesis\Synthesis')->find($sId);
 
@@ -239,8 +239,8 @@ class ApiContext extends ApplicationContext
             $this->getEntityManager()->flush();
         }
 
-        $consultationStep = $this->getEntityManager()->getRepository('CapcoAppBundle:ProjectsStep')->find($csId);
-        $this->getService('capco.synthesis.synthesis_handler')->createSynthesisFromProjectsStep($synthesis, $consultationStep);
+        $consultationStep = $this->getEntityManager()->getRepository('CapcoAppBundle:ConsultationStep')->find($csId);
+        $this->getService('capco.synthesis.synthesis_handler')->createSynthesisFromConsultationStep($synthesis, $consultationStep);
     }
 
     /**
