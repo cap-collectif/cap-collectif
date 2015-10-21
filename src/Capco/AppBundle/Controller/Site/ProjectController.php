@@ -124,7 +124,7 @@ class ProjectController extends Controller
         $opinionTypesResolver = $this->get('capco.opinion_types.resolver');
 
         if (false == $opinionTypesResolver->stepAllowType($currentStep, $opinionType)) {
-            throw new NotFoundHttpException('This type does not exist for this project');
+            throw new NotFoundHttpException('This type does not exist for this consultation step');
         }
 
         $filter = $opinionsSort ? $opinionsSort : $opinionType->getDefaultFilter();
