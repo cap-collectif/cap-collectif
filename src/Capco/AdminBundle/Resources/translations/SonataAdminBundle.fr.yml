@@ -584,7 +584,7 @@ capco:
     login_gplus: Authentification avec Google+
     login_twitter: Authentification avec Twitter
     shield_mode: Protection du site par mot de passe
-    user_type: Demander le type de profil
+    user_type: Types de profil
     members_list: Liste des membres
     consultations_form: Filtrer et trier les consultations
     share_buttons: Boutons de partage
@@ -595,7 +595,6 @@ capco:
     search: Rechercher sur le site
     versions: Modifications
     votes_evolution: "Graphe d'évolution des votes"
-    zipcode_at_register: Demander le code postal
 
 action_enable: Activer
 action_disable: Désactiver

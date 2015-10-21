@@ -31,7 +31,6 @@ class Manager
         'consultation_trash',
         'idea_trash',
         'reporting',
-        'zipcode_at_register',
     );
 
     public function __construct(ToggleManager $toggleManager, ContextFactory $contextFactory, $prefix)

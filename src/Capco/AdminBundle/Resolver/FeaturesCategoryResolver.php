@@ -37,7 +37,7 @@ class FeaturesCategoryResolver
         ],
         'pages.registration' => [
             'conditions' => ['registration'],
-            'features' => ['user_type', 'zipcode_at_register'],
+            'features' => ['user_type'],
         ],
         'pages.members' => [
             'conditions' => ['members_list'],
