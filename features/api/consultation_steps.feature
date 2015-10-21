@@ -40,7 +40,7 @@ Feature: Consultation Steps
       "title": "Nouveau titre",
       "body": "Mes modifications blablabla",
       "link": 60,
-      "OpinionType": 8
+      "OpinionType": 7
     }
     """
     Then the JSON response status code should be 201

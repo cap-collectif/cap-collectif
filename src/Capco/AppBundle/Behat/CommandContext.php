@@ -75,18 +75,20 @@ class CommandContext implements KernelAwareContext
             $input = new StringInput($command);
         }
 
+        $input->setInteractive(false);
+
         $fp = tmpfile();
-        // $output = new StreamOutput($fp);
+        $output = new StreamOutput($fp);
 
-        $this->statusCode = $application->doRun($input, new NullOutput());
+        $this->statusCode = $application->doRun($input, $output);
 
-        // fseek($fp, 0);
-        // $output = '';
-        // while (!feof($fp)) {
-        //     $output = fread($fp, 4096);
-        // }
-        // fclose($fp);
+        fseek($fp, 0);
+        $output = '';
+        while (!feof($fp)) {
+            $output = fread($fp, 4096);
+        }
+        fclose($fp);
 
-        // $this->output = $output;
+        $this->output = $output;
     }
 }
