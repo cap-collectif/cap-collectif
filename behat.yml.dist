@@ -27,6 +27,8 @@ default:
                 - Capco\AppBundle\Behat\NavigationContext
             mink_session: default
             mink_javascript_session: javascript
+            filters:
+                tags: "~@synthesis" # For now we skip synthesis tests
         api:
             paths: [ %paths.base%/features/api ]
             contexts:
@@ -34,7 +36,7 @@ default:
                 - Capco\AppBundle\Behat\NavigationContext
             mink_session: default
             filters:
-                tags: "~@synthesis"
+                tags: "~@synthesis" # For now we skip synthesis tests
         commands:
             paths: [ %paths.base%/features/commands ]
             contexts:
