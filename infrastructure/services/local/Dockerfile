@@ -58,6 +58,15 @@ RUN addgroup --gid=1000 capco && \
 # Move mysql elsewhere because /var/lib/mysql will be a volume after build (see mysql/run)
 RUN mv /var/lib/mysql /var/lib/mysql_save
 
+# Install blackfire
+RUN wget https://packagecloud.io/gpg.key -O- -q | apt-key add - && \
+    echo "deb http://packages.blackfire.io/debian any main" | tee /etc/apt/sources.list.d/blackfire.list && \
+    apt-get update && \
+    apt-get install -y blackfire-agent blackfire-php && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /etc/apt/sources.list.d/* && \
+    mkdir -p /var/run/blackfire
+
 # Service
 COPY mysql/run                  /etc/service/mysql/run
 COPY nginx/run                  /etc/service/nginx/run
@@ -65,6 +74,7 @@ COPY php-fpm/run                /etc/service/php-fpm/run
 COPY redis/run                  /etc/service/redis/run
 COPY cron/run                   /etc/service/cron/run
 COPY elasticsearch/run          /etc/service/elasticsearch/run
+COPY blackfire/run              /etc/service/blackfire/run
 
 # Configuration
 COPY mysql/capco.cnf            /etc/mysql/conf.d/capco.cnf
@@ -77,10 +87,10 @@ COPY elasticsearch/capco.yml    /etc/elasticsearch/config/elasticsearch.yml
 
 COPY entrypoint.sh         /entrypoint.sh
 RUN chmod 755 /*.sh
-
+RUN chown -R mysql:mysql /var/lib/mysql_save
 USER capco
 
-VOLUME /var/www/web/media
+VOLUME /var/www/web/media/cache
 VOLUME /data
 VOLUME /etc/elasticsearch/data
 
