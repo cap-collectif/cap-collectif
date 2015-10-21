@@ -23,7 +23,7 @@ Capco\AppBundle\Entity\MenuItem:
 
   MenuItem3:
     title: Projets participatifs
-    link: projets
+    link: projects
     isEnabled: 1
     isDeletable: 0
     isFullyModifiable: 0
