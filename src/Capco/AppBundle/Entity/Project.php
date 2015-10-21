@@ -119,7 +119,7 @@ class Project
 
     /**
      * @var
-     * @ORM\ManyToMany(targetEntity="Capco\AppBundle\Entity\Theme", inversedBy="Projects", cascade={"persist"})
+     * @ORM\ManyToMany(targetEntity="Capco\AppBundle\Entity\Theme", inversedBy="projects", cascade={"persist"})
      * @ORM\JoinTable(name="theme_project")
      */
     private $Themes;

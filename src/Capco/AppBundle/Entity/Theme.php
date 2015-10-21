@@ -119,7 +119,7 @@ class Theme
      * @var
      * @ORM\ManyToMany(targetEntity="Capco\AppBundle\Entity\Project", mappedBy="Themes", cascade={"persist"})
      */
-    private $Projects;
+    private $projects;
 
     /**
      * @var
@@ -149,7 +149,7 @@ class Theme
 
     public function __construct()
     {
-        $this->Projects = new ArrayCollection();
+        $this->projects = new ArrayCollection();
         $this->Ideas = new ArrayCollection();
         $this->events = new ArrayCollection();
         $this->posts = new ArrayCollection();
@@ -344,27 +344,27 @@ class Theme
     }
 
     /**
-     * @param Capco\AppBundle\Entity\Project $Project
-     *
+     * @param Project $project
      * @return Theme
+     *
      */
-    public function addProject(Project $Project)
+    public function addProject(Project $project)
     {
-        if (!$this->Projects->contains($Project)) {
-            $this->Projects->add($Project);
+        if (!$this->projects->contains($project)) {
+            $this->projects->add($project);
         }
 
         return $this;
     }
 
     /**
-     * @param Project $Project
+     * @param Project $project
      *
      * @return $this
      */
-    public function removeProject(Project $Project)
+    public function removeProject(Project $project)
     {
-        $this->Projects->removeElement($Project);
+        $this->projects->removeElement($project);
 
         return $this;
     }
