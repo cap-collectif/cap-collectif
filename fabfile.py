@@ -60,4 +60,4 @@ def build(environment='dev'):
 
 @task
 def docker_import_bdd():
-    local('cat dump.sql | docker exec -i capcollectifsf2_application_1 /bin/bash -c "mysql -u root symfony"')
+    local('eval "$(docker-machine env capco)" && cat dump.sql | docker exec -i capcollectifsf2_application_1 /bin/bash -c "mysql -u root symfony"')
