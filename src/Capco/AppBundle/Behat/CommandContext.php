@@ -9,6 +9,7 @@ use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\Console\Input\StringInput;
 use Symfony\Component\Console\Output\StreamOutput;
+use Symfony\Component\Console\Output\NullOutput;
 
 class CommandContext implements KernelAwareContext
 {
@@ -75,17 +76,17 @@ class CommandContext implements KernelAwareContext
         }
 
         $fp = tmpfile();
-        $output = new StreamOutput($fp);
+        // $output = new StreamOutput($fp);
 
-        $this->statusCode = $application->doRun($input, $output);
+        $this->statusCode = $application->doRun($input, new NullOutput());
 
-        fseek($fp, 0);
-        $output = '';
-        while (!feof($fp)) {
-            $output = fread($fp, 4096);
-        }
-        fclose($fp);
+        // fseek($fp, 0);
+        // $output = '';
+        // while (!feof($fp)) {
+        //     $output = fread($fp, 4096);
+        // }
+        // fclose($fp);
 
-        $this->output = $output;
+        // $this->output = $output;
     }
 }

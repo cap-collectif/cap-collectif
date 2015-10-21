@@ -46,8 +46,6 @@ test:
         - SYMFONY_ENV=test php app/console server:run --router=app/config/router_test.php: {background: true}
 
     override:
-        - fab migrate_test_db
-        - fab validate_test_schema
         - fab test
         - fab lint
 
