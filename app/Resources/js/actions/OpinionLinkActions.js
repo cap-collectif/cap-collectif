@@ -8,7 +8,7 @@ import {
 
 export default {
 
-  add: (consultation, step, data) => {
+  add: (project, step, data) => {
     const tmpFixData = {
       OpinionType: data.type,
       title: data.title,
@@ -17,7 +17,7 @@ export default {
     };
 
     return Fetcher
-    .post(`/consultations/${consultation}/steps/${step}/opinions`, tmpFixData)
+    .post(`/projects/${project}/steps/${step}/opinions`, tmpFixData)
     .then((link) => {
       AppDispatcher.dispatch({
         actionType: CREATE_OPINION_LINK_SUCCESS,

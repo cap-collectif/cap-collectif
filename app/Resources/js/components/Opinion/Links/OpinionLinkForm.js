@@ -41,7 +41,7 @@ const OpinionLinkForm = React.createClass({
       if (this.isValid()) {
         const step = this.props.opinion.step;
         OpinionLinkActions
-          .add(step.consultationId, step.id, this.state.form)
+          .add(step.projectId, step.id, this.state.form)
           .then(() => {
             this.setState(this.getInitialState());
             this.props.onSubmitSuccess();
