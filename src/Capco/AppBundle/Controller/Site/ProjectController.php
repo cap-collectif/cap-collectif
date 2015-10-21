@@ -43,7 +43,7 @@ class ProjectController extends Controller
     // Page project
 
     /**
-     * @Route("/projets/{projectSlug}/projet/{stepSlug}", name="app_project_show")
+     * @Route("/projects/{projectSlug}/consultation/{stepSlug}", name="app_project_show")
      * @Route("/consultations/{projectSlug}/consultation/{stepSlug}", name="app_consultation_show")
      * @ParamConverter("project", class="CapcoAppBundle:Project", options={"mapping": {"projectSlug": "slug"}, "repository_method"="getOne"})
      * @ParamConverter("currentStep", class="CapcoAppBundle:ConsultationStep", options={"mapping": {"stepSlug": "slug"}, "method"="getOne"})
@@ -192,7 +192,7 @@ class ProjectController extends Controller
     }
 
     /**
-     * @Route("/projets/{projectSlug}/projet/{stepSlug}/download/{format}", name="app_project_download")
+     * @Route("/projects/{projectSlug}/consultation/{stepSlug}/download/{format}", name="app_project_download")
      * @Route("/consultations/{projectSlug}/consultation/{stepSlug}/download/{format}", name="app_consultation_download")
      * @ParamConverter("project", class="CapcoAppBundle:Project", options={"mapping": {"projectSlug": "slug"}})
      * @ParamConverter("step", class="CapcoAppBundle:ConsultationStep", options={"mapping": {"stepSlug": "slug"}})

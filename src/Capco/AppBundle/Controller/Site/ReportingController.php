@@ -20,7 +20,7 @@ use Symfony\Component\Form\Form;
 class ReportingController extends Controller
 {
     /**
-     * @Route("/projets/{projectSlug}/projet/{stepSlug}/opinions/{opinionTypeSlug}/{opinionSlug}/versions/{versionSlug}/report", name="app_report_opinion_version", defaults={"_feature_flags" = "reporting"})
+     * @Route("/projects/{projectSlug}/consultation/{stepSlug}/opinions/{opinionTypeSlug}/{opinionSlug}/versions/{versionSlug}/report", name="app_report_opinion_version", defaults={"_feature_flags" = "reporting"})
      * @Route("/consultations/{projectSlug}/consultation/{stepSlug}/opinions/{opinionTypeSlug}/{opinionSlug}/versions/{versionSlug}/report", name="app_report_opinion_version", defaults={"_feature_flags" = "reporting"})
      * @Template("CapcoAppBundle:Reporting:create.html.twig")
      */
@@ -82,7 +82,7 @@ class ReportingController extends Controller
     }
 
     /**
-     * @Route("/projets/{projectSlug}/projet/{stepSlug}/opinions/{opinionTypeSlug}/{opinionSlug}/report", name="app_report_opinion", defaults={"_feature_flags" = "reporting"})
+     * @Route("/projects/{projectSlug}/consultation/{stepSlug}/opinions/{opinionTypeSlug}/{opinionSlug}/report", name="app_report_opinion", defaults={"_feature_flags" = "reporting"})
      * @Route("/consultations/{projectSlug}/consultation/{stepSlug}/opinions/{opinionTypeSlug}/{opinionSlug}/report", name="app_report_opinion", defaults={"_feature_flags" = "reporting"})
      * @Template("CapcoAppBundle:Reporting:create.html.twig")
      *
@@ -150,7 +150,7 @@ class ReportingController extends Controller
     }
 
     /**
-     * @Route("/projets/{projectSlug}/projet/{stepSlug}/opinions/{opinionTypeSlug}/{opinionSlug}/sources/{sourceSlug}/report", name="app_report_source", defaults={"_feature_flags" = "reporting"})
+     * @Route("/projects/{projectSlug}/consultation/{stepSlug}/opinions/{opinionTypeSlug}/{opinionSlug}/sources/{sourceSlug}/report", name="app_report_source", defaults={"_feature_flags" = "reporting"})
      * @Route("/consultations/{projectSlug}/consultation/{stepSlug}/opinions/{opinionTypeSlug}/{opinionSlug}/sources/{sourceSlug}/report", name="app_report_source", defaults={"_feature_flags" = "reporting"})
      * @Template("CapcoAppBundle:Reporting:create.html.twig")
      *
@@ -214,7 +214,7 @@ class ReportingController extends Controller
     }
 
     /**
-     * @Route("/projets/{projectSlug}/projet/{stepSlug}/opinions/{opinionTypeSlug}/{opinionSlug}/arguments/{argumentId}/report", name="app_report_argument", defaults={"_feature_flags" = "reporting"})
+     * @Route("/projects/{projectSlug}/consultation/{stepSlug}/opinions/{opinionTypeSlug}/{opinionSlug}/arguments/{argumentId}/report", name="app_report_argument", defaults={"_feature_flags" = "reporting"})
      * @Route("/consultations/{projectSlug}/consultation/{stepSlug}/opinions/{opinionTypeSlug}/{opinionSlug}/arguments/{argumentId}/report", name="app_report_argument", defaults={"_feature_flags" = "reporting"})
      * @Template("CapcoAppBundle:Reporting:create.html.twig")
      *

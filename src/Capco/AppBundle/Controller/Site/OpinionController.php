@@ -19,7 +19,7 @@ use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 class OpinionController extends Controller
 {
     /**
-     * @Route("/projets/{projectSlug}/projet/{stepSlug}/opinions/{opinionTypeSlug}/{opinionSlug}/versions/{versionSlug}", name="app_project_show_opinion_version")
+     * @Route("/projects/{projectSlug}/consultation/{stepSlug}/opinions/{opinionTypeSlug}/{opinionSlug}/versions/{versionSlug}", name="app_project_show_opinion_version")
      * @Route("/consultations/{projectSlug}/consultation/{stepSlug}/opinions/{opinionTypeSlug}/{opinionSlug}/versions/{versionSlug}", name="app_consultation_show_opinion_version")
      * @Template("CapcoAppBundle:Opinion:show_version.html.twig")
      */
@@ -53,7 +53,7 @@ class OpinionController extends Controller
     }
 
     /**
-     * @Route("/projets/{projectSlug}/projet/{stepSlug}/opinions/{opinionTypeSlug}/add", name="app_project_new_opinion")
+     * @Route("/projects/{projectSlug}/consultation/{stepSlug}/opinions/{opinionTypeSlug}/add", name="app_project_new_opinion")
      * @Route("/consultations/{projectSlug}/consultation/{stepSlug}/opinions/{opinionTypeSlug}/add", name="app_consultation_new_opinion")
      * @ParamConverter("project", class="CapcoAppBundle:Project", options={"mapping": {"projectSlug": "slug"}})
      * @ParamConverter("currentStep", class="CapcoAppBundle:ConsultationStep", options={"mapping": {"stepSlug": "slug"}})
@@ -119,7 +119,7 @@ class OpinionController extends Controller
     }
 
     /**
-     * @Route("/projets/{projectSlug}/projet/{stepSlug}/opinions/{opinionTypeSlug}/{opinionSlug}/delete", name="app_project_delete_opinion")
+     * @Route("/projects/{projectSlug}/consultation/{stepSlug}/opinions/{opinionTypeSlug}/{opinionSlug}/delete", name="app_project_delete_opinion")
      * @Route("/consultations/{projectSlug}/consultation/{stepSlug}/opinions/{opinionTypeSlug}/{opinionSlug}/delete", name="app_consultation_delete_opinion")
      *
      * @param $projectSlug
@@ -188,7 +188,7 @@ class OpinionController extends Controller
     }
 
     /**
-     * @Route("/projets/{projectSlug}/projet/{stepSlug}/opinions/{opinionTypeSlug}/{opinionSlug}/edit", name="app_project_edit_opinion")
+     * @Route("/projects/{projectSlug}/consultation/{stepSlug}/opinions/{opinionTypeSlug}/{opinionSlug}/edit", name="app_project_edit_opinion")
      * @Route("/consultations/{projectSlug}/consultation/{stepSlug}/opinions/{opinionTypeSlug}/{opinionSlug}/edit", name="app_consultation_edit_opinion")
      * @Template("CapcoAppBundle:Opinion:update.html.twig")
      *
@@ -258,9 +258,9 @@ class OpinionController extends Controller
     /**
      * Page opinion.
      *
-     * @Route("/projets/{projectSlug}/projet/{stepSlug}/opinions/{opinionTypeSlug}/{opinionSlug}", name="app_project_show_opinion")
+     * @Route("/projects/{projectSlug}/consultation/{stepSlug}/opinions/{opinionTypeSlug}/{opinionSlug}", name="app_project_show_opinion")
      * @Route("/consultations/{projectSlug}/consultation/{stepSlug}/opinions/{opinionTypeSlug}/{opinionSlug}", name="app_consultation_show_opinion")
-     * @Route("/projets/{projectSlug}/projet/{stepSlug}/opinions/{opinionTypeSlug}/{opinionSlug}/sort_arguments/{argumentSort}", name="app_project_show_opinion_sortarguments", requirements={"argumentsSort" = "popularity|date"})
+     * @Route("/projects/{projectSlug}/consultation/{stepSlug}/opinions/{opinionTypeSlug}/{opinionSlug}/sort_arguments/{argumentSort}", name="app_project_show_opinion_sortarguments", requirements={"argumentsSort" = "popularity|date"})
      * @Route("/consultations/{projectSlug}/consultation/{stepSlug}/opinions/{opinionTypeSlug}/{opinionSlug}/sort_arguments/{argumentSort}", name="app_consultation_show_opinion_sortarguments", requirements={"argumentsSort" = "popularity|date"})
      *
      * @param $projectSlug

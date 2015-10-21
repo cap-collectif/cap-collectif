@@ -14,7 +14,7 @@ use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 class SourceController extends Controller
 {
     /**
-     * @Route("/projets/{projectSlug}/projet/{stepSlug}/opinions/{opinionTypeSlug}/{opinionSlug}/sources/{sourceSlug}/delete", name="app_delete_source")
+     * @Route("/projects/{projectSlug}/consultation/{stepSlug}/opinions/{opinionTypeSlug}/{opinionSlug}/sources/{sourceSlug}/delete", name="app_delete_source")
      * @Route("/consultations/{projectSlug}/consultation/{stepSlug}/opinions/{opinionTypeSlug}/{opinionSlug}/sources/{sourceSlug}/delete", name="app_delete_source")
      *
      * @param $projectSlug
@@ -82,7 +82,7 @@ class SourceController extends Controller
     }
 
     /**
-     * @Route("/projets/{projectSlug}/projet/{stepSlug}/opinions/{opinionTypeSlug}/{opinionSlug}/sources/{sourceSlug}/edit", name="app_edit_source")
+     * @Route("/projects/{projectSlug}/consultation/{stepSlug}/opinions/{opinionTypeSlug}/{opinionSlug}/sources/{sourceSlug}/edit", name="app_edit_source")
      * @Route("/consultations/{projectSlug}/consultation/{stepSlug}/opinions/{opinionTypeSlug}/{opinionSlug}/sources/{sourceSlug}/edit", name="app_edit_source")
      * @Template("CapcoAppBundle:Source:update.html.twig")
      *
