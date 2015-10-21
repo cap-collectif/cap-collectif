@@ -725,7 +725,7 @@ class OpinionType
             return $parent->getChildren(true);
         }
 
-        return $this->getConsultationType()->getOpinionTypes();
+        return $this->getConsultationStepType()->getOpinionTypes();
     }
 
     // serializer seems to convert virtual_properties to an object
