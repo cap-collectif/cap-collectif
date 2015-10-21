@@ -43,7 +43,7 @@ const FolderManager = React.createClass({
 
   toggleExpand(element) {
     if (element.childrenCount !== element.children.length) {
-      SynthesisElementActions.loadElementsTreeFromServer(this.props.synthesis.id, 'all', element.id);
+      SynthesisElementActions.loadElementsTreeFromServer(this.props.synthesis.id, 'notIgnored', element.id);
     }
     const expanded = this.state.expanded;
     expanded[element.id] = this.state.expanded[element.id] ? false : true;
@@ -54,9 +54,9 @@ const FolderManager = React.createClass({
 
   fetchElements() {
     if (!SynthesisElementStore.isFetchingTree) {
-      if (SynthesisElementStore.isInboxSync.allTree) {
+      if (SynthesisElementStore.isInboxSync.notIgnoredTree) {
         this.setState({
-          elements: SynthesisElementStore.elements.allTree,
+          elements: SynthesisElementStore.elements.notIgnoredTree,
           expanded: SynthesisElementStore.expandedNavbarItems,
           isLoading: false,
         });
@@ -74,7 +74,7 @@ const FolderManager = React.createClass({
   loadElementsTreeFromServer() {
     SynthesisElementActions.loadElementsTreeFromServer(
       this.props.synthesis.id,
-      'all'
+      'notIgnored'
     );
   },
 

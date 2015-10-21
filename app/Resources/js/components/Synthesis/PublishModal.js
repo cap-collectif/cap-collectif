@@ -9,10 +9,10 @@ const Input = ReactBootstrap.Input;
 
 const PublishModal = React.createClass({
   propTypes: {
-    synthesis: React.PropTypes.object,
-    element: React.PropTypes.object,
-    show: React.PropTypes.bool,
-    toggle: React.PropTypes.func,
+    synthesis: React.PropTypes.object.isRequired,
+    element: React.PropTypes.object.isRequired,
+    show: React.PropTypes.bool.isRequired,
+    toggle: React.PropTypes.func.isRequired,
     process: React.PropTypes.func,
   },
   mixins: [ReactIntl.IntlMixin, ReactRouter.Navigation, React.addons.LinkedStateMixin],
@@ -142,9 +142,9 @@ const PublishModal = React.createClass({
 
   fetchElements() {
     if (!SynthesisElementStore.isFetchingTree) {
-      if (SynthesisElementStore.isInboxSync.allTree) {
+      if (SynthesisElementStore.isInboxSync.notIgnoredTree) {
         this.setState({
-          elements: SynthesisElementStore.elements.allTree,
+          elements: SynthesisElementStore.elements.notIgnoredTree,
           expanded: SynthesisElementStore.expandedNavbarItems,
           selectedId: SynthesisElementStore.selectedNavbarItem,
           isLoading: false,
@@ -163,7 +163,7 @@ const PublishModal = React.createClass({
   loadElementsTreeFromServer() {
     SynthesisElementActions.loadElementsTreeFromServer(
       this.props.synthesis.id,
-      'all'
+      'notIgnored'
     );
   },
 
@@ -200,6 +200,7 @@ const PublishModal = React.createClass({
         selectedId={parentId}
         onSelect={this.setParent}
         onExpand={this.expandItem}
+        hiddenElementId={this.props.element.id}
       />
     );
   },

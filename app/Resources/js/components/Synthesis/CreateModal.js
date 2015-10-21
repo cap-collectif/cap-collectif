@@ -63,7 +63,7 @@ const CreateModal = React.createClass({
       if (element.id === id) {
         return element;
       }
-      if (element.children.length > 0) {
+      if (element.children && element.children.length > 0) {
         const found = this.getElementInTreeById(element.children, id);
         if (found) {
           return found;

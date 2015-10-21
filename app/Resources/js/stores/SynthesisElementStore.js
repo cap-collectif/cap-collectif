@@ -16,7 +16,7 @@ class SynthesisElementStore extends BaseStore {
       'unpublished': [],
       'all': [],
       'publishedTree': [],
-      'allTree': [],
+      'notIgnoredTree': [],
       'fromDivision': [],
     };
     this._counts = {
@@ -26,7 +26,7 @@ class SynthesisElementStore extends BaseStore {
       'unpublished': 0,
       'all': 0,
       'publishedTree': 0,
-      'allTree': 0,
+      'notIgnoredTree': 0,
       'fromDivision': 0,
     };
     this._expandedNavbarItems = {
@@ -44,7 +44,7 @@ class SynthesisElementStore extends BaseStore {
       'unpublished': false,
       'all': false,
       'publishedTree': false,
-      'allTree': false,
+      'notIgnoredTree': false,
       'fromDivision': false,
     };
     this._messages = {
@@ -114,7 +114,10 @@ class SynthesisElementStore extends BaseStore {
       break;
     case ARCHIVE_ELEMENT:
       this._resetMessages();
-      element = this._element && action.elementId === this._element.id ? this._element : null;
+      element = this._element && action.elementId === this._element.id
+        ? this._element
+        : this.getElementInTreeById(this._elements.notIgnoredTree, action.elementId)
+      ;
       // Update data
       // If we ignored an element, lists are not synced anymore
       if (action.published && element) {
@@ -124,6 +127,9 @@ class SynthesisElementStore extends BaseStore {
         this._elements.published = ArrayHelper.addElementToArray(this._elements.published, element);
         this._elements.unpublished = ArrayHelper.removeElementFromArray(this._elements.unpublished, element);
       } else {
+        if (element) {
+          this.removeElementFromTree(element);
+        }
         this._isProcessing = true;
         this._resetInboxSync();
       }
@@ -151,7 +157,7 @@ class SynthesisElementStore extends BaseStore {
     case NAME_ELEMENT:
       element = this._element && action.elementId === this._element.id
         ? this._element
-        : this.getElementInTreeById(this._elements.allTree, action.elementId)
+        : this.getElementInTreeById(this._elements.notIgnoredTree, action.elementId)
       ;
       if (element) {
         element.title = action.title;
@@ -173,6 +179,13 @@ class SynthesisElementStore extends BaseStore {
       action.division.elements.map((newElement) => {
         this.addElementInTree(newElement);
       });
+      element = this._element && action.elementId === this._element.id
+        ? this._element
+        : this.getElementInTreeById(this._elements.notIgnoredTree, action.elementId)
+      ;
+      if (element) {
+        this.removeElementFromTree(element);
+      }
       this._resetInboxSync();
       this._isProcessing = true;
       this._resetMessages();
@@ -273,7 +286,7 @@ class SynthesisElementStore extends BaseStore {
     this._selectedNavbarItem = selected;
     const expanded = this._expandedNavbarItems;
     expanded[selected] = true;
-    const element = this.getElementInTreeById(this._elements.allTree, selected);
+    const element = this.getElementInTreeById(this._elements.notIgnoredTree, selected);
     if (element) {
       this.getParentItems(element).map((parent) => {
         expanded[parent.id] = true;
@@ -285,9 +298,9 @@ class SynthesisElementStore extends BaseStore {
   changeElementParent(parent, elementId) {
     const element = this._element && elementId === this._element.id
       ? this._element
-      : this.getElementInTreeById(this._elements.allTree, elementId)
+      : this.getElementInTreeById(this._elements.notIgnoredTree, elementId)
     ;
-    let tree = this._elements.allTree;
+    let tree = this._elements.notIgnoredTree;
     // Remove element from previous parent in tree
     let prevParent = element.parent;
     if (!prevParent) {
@@ -353,15 +366,31 @@ class SynthesisElementStore extends BaseStore {
   }
 
   addElementInTree(child) {
-    const tree = this._elements.allTree;
+    let tree = this._elements.notIgnoredTree;
     const parent = child.parent;
     if (!parent) {
-      tree.push(child);
+      tree = ArrayHelper.addElementToArray(tree, child);
     } else {
       const parentInTree = this.getElementInTreeById(tree, parent.id);
       if (parentInTree) {
-        const children = parentInTree.children;
-        children.push(child);
+        let children = parentInTree.children;
+        children = ArrayHelper.addElementToArray(children, child);
+        parentInTree.children = children;
+        parentInTree.childrenCount++;
+      }
+    }
+  }
+
+  removeElementFromTree(child) {
+    let tree = this._elements.notIgnoredTree;
+    const parent = child.parent;
+    if (!parent) {
+      tree = ArrayHelper.removeElementFromArray(tree, child);
+    } else {
+      const parentInTree = this.getElementInTreeById(tree, parent.id);
+      if (parentInTree) {
+        let children = parentInTree.children;
+        children = ArrayHelper.removeElementFromArray(children, child);
         parentInTree.children = children;
         parentInTree.childrenCount++;
       }

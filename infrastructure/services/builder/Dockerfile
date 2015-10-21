@@ -4,7 +4,7 @@ MAINTAINER Bastien Jaillot <bjaillot@jolicode.com>
 
 # Install basic
 RUN apt-get update && \
-    apt-get install -y wget bzip2 git libpng-dev build-essential && \
+    apt-get install -y wget bzip2 git libpng-dev && \
 
     # Install nginx and php (fpm)
     echo "deb http://packages.dotdeb.org wheezy all" > /etc/apt/sources.list.d/dotdeb.list && \
@@ -20,10 +20,6 @@ RUN apt-get update && \
     # Clean
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
-
-# Install libsass
-RUN git clone https://github.com/sass/libsass.git && \
-    make -C libsass -j5 install
 
 # Update npm - Install gulp / bower
 RUN npm install -g npm && \
@@ -41,7 +37,5 @@ COPY capco.ini /etc/php5/cli/conf.d/capco.ini
 COPY build.sh /usr/local/bin/capcobuild
 
 USER capco
-
-WORKDIR /capco
 
 CMD ["/usr/local/bin/capcobuild"]

@@ -532,6 +532,39 @@ Feature: Synthesis
     """
 
   @database
+  Scenario: API client wants to get not ignored synthesis elements tree
+    Given I am logged in to api as admin
+    And there is a synthesis with id "48" based on consultation step 2
+    And I send a GET request to "/api/syntheses/48/elements/tree?type=notIgnored"
+    Then the JSON response should match:
+    """
+    [
+      {
+        "id": @string@,
+        "level": 0,
+        "path": @string@,
+        "displayType": @string@,
+        "title": @string@,
+        "body": @string@,
+        "childrenCount": @integer@,
+        "children": [
+          {
+            "id": @string@,
+            "level": 1,
+            "path": @string@,
+            "displayType": @string@,
+            "title": @string@,
+            "body": @string@,
+            "childrenCount": @integer@,
+            "children": [@...@]
+          }
+        ]
+      },
+      @...@
+    ]
+    """
+
+  @database
   Scenario: API client wants to get synthesis elements tree
     Given I am logged in to api as admin
     And there is a synthesis with id "48" based on consultation step 2

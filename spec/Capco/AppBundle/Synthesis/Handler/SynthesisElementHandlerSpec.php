@@ -37,9 +37,7 @@ class SynthesisElementHandlerSpec extends ObjectBehavior
         $paginator->count()->willReturn(17);
 
         $type = 'all';
-        $synthesisElementRepo->getWith([
-            'synthesis' => $synthesis
-        ], $offset, $limit)->willReturn($paginator)->shouldBeCalled();
+        $synthesisElementRepo->getWith($synthesis, $type, $offset, $limit)->willReturn($paginator)->shouldBeCalled();
         $this->getElementsFromSynthesisByType($synthesis, $type)->shouldBeArray();
 
     }
@@ -55,10 +53,7 @@ class SynthesisElementHandlerSpec extends ObjectBehavior
         $paginator->count()->willReturn(17);
 
         $type = 'new';
-        $synthesisElementRepo->getWith([
-            'synthesis' => $synthesis,
-            'archived' => false,
-        ], $offset, $limit)->willReturn($paginator)->shouldBeCalled();
+        $synthesisElementRepo->getWith($synthesis, $type, $offset, $limit)->willReturn($paginator)->shouldBeCalled();
         $this->getElementsFromSynthesisByType($synthesis, $type)->shouldBeArray();
 
     }
@@ -74,11 +69,7 @@ class SynthesisElementHandlerSpec extends ObjectBehavior
         $paginator->count()->willReturn(17);
 
         $type = 'unpublished';
-        $synthesisElementRepo->getWith([
-            'synthesis' => $synthesis,
-            'archived' => true,
-            'published' => false,
-        ], $offset, $limit)->willReturn($paginator)->shouldBeCalled();
+        $synthesisElementRepo->getWith($synthesis, $type, $offset, $limit)->willReturn($paginator)->shouldBeCalled();
         $this->getElementsFromSynthesisByType($synthesis, $type)->shouldBeArray();
 
     }
@@ -94,11 +85,7 @@ class SynthesisElementHandlerSpec extends ObjectBehavior
         $paginator->count()->willReturn(17);
 
         $type = 'published';
-        $synthesisElementRepo->getWith([
-            'synthesis' => $synthesis,
-            'archived' => true,
-            'published' => true,
-        ], $offset, $limit)->willReturn($paginator)->shouldBeCalled();
+        $synthesisElementRepo->getWith($synthesis, $type, $offset, $limit)->willReturn($paginator)->shouldBeCalled();
         $this->getElementsFromSynthesisByType($synthesis, $type)->shouldBeArray();
 
     }
@@ -114,10 +101,7 @@ class SynthesisElementHandlerSpec extends ObjectBehavior
         $paginator->count()->willReturn(17);
 
         $type = 'archived';
-        $synthesisElementRepo->getWith([
-            'synthesis' => $synthesis,
-            'archived' => true,
-        ], $offset, $limit)->willReturn($paginator)->shouldBeCalled();
+        $synthesisElementRepo->getWith($synthesis, $type, $offset, $limit)->willReturn($paginator)->shouldBeCalled();
         $this->getElementsFromSynthesisByType($synthesis, $type)->shouldBeArray();
 
     }
@@ -131,11 +115,7 @@ class SynthesisElementHandlerSpec extends ObjectBehavior
         $depth = 3;
         $type = 'published';
 
-        $synthesisElementRepo->getFormattedTree([
-            'synthesis' => $synthesis,
-            'archived' => true,
-            'published' => true,
-        ], $parentId, $depth)->shouldBeCalled()->willReturn(array());
+        $synthesisElementRepo->getFormattedTree($synthesis, $type, $parentId, $depth)->shouldBeCalled()->willReturn(array());
         $this->getElementsTreeFromSynthesisByType($synthesis, $type, $parentId, $depth)->shouldBeArray();
     }
 
@@ -148,9 +128,7 @@ class SynthesisElementHandlerSpec extends ObjectBehavior
         $depth = 3;
         $type = 'all';
 
-        $synthesisElementRepo->getFormattedTree([
-            'synthesis' => $synthesis,
-        ], $parentId, $depth)->willReturn(array())->shouldBeCalled();
+        $synthesisElementRepo->getFormattedTree($synthesis, $type, $parentId, $depth)->willReturn(array())->shouldBeCalled();
         $this->getElementsTreeFromSynthesisByType($synthesis, $type, $parentId, $depth)->shouldBeArray();
     }
 
@@ -160,9 +138,7 @@ class SynthesisElementHandlerSpec extends ObjectBehavior
         $this->beConstructedWith($em, $logManager);
 
         $type = 'all';
-        $synthesisElementRepo->countWith(array(
-            'synthesis' => $synthesis
-        ))->willReturn(2)->shouldBeCalled();
+        $synthesisElementRepo->countWith($synthesis, $type)->willReturn(2)->shouldBeCalled();
         $this->countElementsFromSynthesisByType($synthesis, $type)->shouldBeInteger();
     }
 
@@ -172,10 +148,7 @@ class SynthesisElementHandlerSpec extends ObjectBehavior
         $this->beConstructedWith($em, $logManager);
 
         $type = 'new';
-        $synthesisElementRepo->countWith(array(
-            'synthesis' => $synthesis,
-            'archived' => false,
-        ))->willReturn(1)->shouldBeCalled();
+        $synthesisElementRepo->countWith($synthesis, $type)->willReturn(1)->shouldBeCalled();
         $this->countElementsFromSynthesisByType($synthesis, $type)->shouldBeInteger();
     }
 
@@ -185,11 +158,7 @@ class SynthesisElementHandlerSpec extends ObjectBehavior
         $this->beConstructedWith($em, $logManager);
 
         $type = 'unpublished';
-        $synthesisElementRepo->countWith(array(
-            'synthesis' => $synthesis,
-            'archived' => true,
-            'published' => false,
-        ))->willReturn(0)->shouldBeCalled();
+        $synthesisElementRepo->countWith($synthesis, $type)->willReturn(0)->shouldBeCalled();
         $this->countElementsFromSynthesisByType($synthesis, $type)->shouldBeInteger();
     }
 
@@ -199,11 +168,7 @@ class SynthesisElementHandlerSpec extends ObjectBehavior
         $this->beConstructedWith($em, $logManager);
 
         $type = 'published';
-        $synthesisElementRepo->countWith(array(
-            'synthesis' => $synthesis,
-            'archived' => true,
-            'published' => true,
-        ))->willReturn(0)->shouldBeCalled();
+        $synthesisElementRepo->countWith($synthesis, $type)->willReturn(0)->shouldBeCalled();
         $this->countElementsFromSynthesisByType($synthesis, $type)->shouldBeInteger();
     }
 
@@ -213,10 +178,7 @@ class SynthesisElementHandlerSpec extends ObjectBehavior
         $this->beConstructedWith($em, $logManager);
 
         $type = 'archived';
-        $synthesisElementRepo->countWith(array(
-            'synthesis' => $synthesis,
-            'archived' => true,
-        ))->willReturn(5)->shouldBeCalled();
+        $synthesisElementRepo->countWith($synthesis, $type)->willReturn(5)->shouldBeCalled();
         $this->countElementsFromSynthesisByType($synthesis, $type)->shouldBeInteger();
     }
 

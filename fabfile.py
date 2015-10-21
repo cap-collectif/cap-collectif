@@ -72,7 +72,3 @@ def test():
 def build(environment='dev'):
     build_deps(environment);
     build_front();
-
-@task
-def docker_import_bdd():
-    local('$(boot2docker shellinit 2> /dev/null) && cat dump.sql | docker exec -i capcollectifsf2_application_1 /bin/bash -c "mysql -u root symfony"')

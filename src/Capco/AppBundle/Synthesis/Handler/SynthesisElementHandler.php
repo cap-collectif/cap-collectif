@@ -12,10 +12,10 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class SynthesisElementHandler
 {
+    protected static $types = ['all', 'archived', 'new', 'unpublished', 'published', 'notIgnored'];
+
     protected $em;
     protected $logManager;
-
-    protected static $types = ['all', 'archived', 'new', 'unpublished', 'published'];
 
     public function __construct(EntityManager $em, LogManager $logManager)
     {
@@ -23,42 +23,13 @@ class SynthesisElementHandler
         $this->logManager = $logManager;
     }
 
-    protected function getTypeConditions($type = null)
+    public function getElementsFromSynthesisByType($synthesis, $type = null, $offset = 0, $limit = null)
     {
         if ($type === null || !in_array($type, self::$types)) {
             throw new NotFoundHttpException();
         }
 
-        $conditions = [];
-        switch ($type) {
-            case 'all':
-                break;
-            case 'new':
-                $conditions['archived'] = false;
-                break;
-            case 'unpublished':
-                $conditions['archived'] = true;
-                $conditions['published'] = false;
-                break;
-            case 'archived':
-                $conditions['archived'] = true;
-                break;
-            case 'published':
-                $conditions['archived'] = true;
-                $conditions['published'] = true;
-                break;
-            default:
-                break;
-        }
-
-        return $conditions;
-    }
-
-    public function getElementsFromSynthesisByType($synthesis, $type = null, $offset = 0, $limit = null)
-    {
-        $values = array_merge(['synthesis' => $synthesis], $this->getTypeConditions($type));
-
-        $paginator = $this->em->getRepository('CapcoAppBundle:Synthesis\SynthesisElement')->getWith($values, $offset, $limit);
+        $paginator = $this->em->getRepository('CapcoAppBundle:Synthesis\SynthesisElement')->getWith($synthesis, $type, $offset, $limit);
 
         $elements = [];
         foreach ($paginator as $element) {
@@ -73,22 +44,26 @@ class SynthesisElementHandler
 
     public function getElementsTreeFromSynthesisByType($synthesis, $type = null, $parentId = null, $depth = null)
     {
-        $values = array_merge(['synthesis' => $synthesis], $this->getTypeConditions($type));
+        if ($type === null || !in_array($type, self::$types)) {
+            throw new NotFoundHttpException();
+        }
 
         $repo = $this->em
             ->getRepository('CapcoAppBundle:Synthesis\SynthesisElement')
         ;
 
-        $tree = $repo->getFormattedTree($values, $parentId, $depth);
+        $tree = $repo->getFormattedTree($synthesis, $type, $parentId, $depth);
 
         return $tree;
     }
 
     public function countElementsFromSynthesisByType($synthesis, $type = null)
     {
-        $values = array_merge(['synthesis' => $synthesis], $this->getTypeConditions($type));
+        if ($type === null || !in_array($type, self::$types)) {
+            throw new NotFoundHttpException();
+        }
 
-        return intval($this->em->getRepository('CapcoAppBundle:Synthesis\SynthesisElement')->countWith($values));
+        return intval($this->em->getRepository('CapcoAppBundle:Synthesis\SynthesisElement')->countWith($synthesis, $type));
     }
 
     public function createElementInSynthesis(SynthesisElement $element, Synthesis $synthesis, SynthesisUserInterface $user = null)
@@ -127,6 +102,7 @@ class SynthesisElementHandler
             $el->setSynthesis($synthesis);
             $el->setAuthor($element->getAuthor());
             $el->setLink($element->getLink());
+            $el->setDisplayType('contribution');
 
             $el->setLinkedDataClass($element->getLinkedDataClass());
             $el->setLinkedDataId($element->getLinkedDataId());

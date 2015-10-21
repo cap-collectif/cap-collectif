@@ -71,9 +71,9 @@ const SideMenu = React.createClass({
 
   fetchElements() {
     if (!SynthesisElementStore.isFetchingTree) {
-      if (SynthesisElementStore.isInboxSync.allTree) {
+      if (SynthesisElementStore.isInboxSync.notIgnoredTree) {
         this.setState({
-          navbarItems: SynthesisElementStore.elements.allTree,
+          navbarItems: SynthesisElementStore.elements.notIgnoredTree,
           expanded: SynthesisElementStore.expandedNavbarItems,
           selectedId: SynthesisElementStore.selectedNavbarItem,
           isLoading: false,
@@ -92,7 +92,7 @@ const SideMenu = React.createClass({
   loadElementsTreeFromServer() {
     SynthesisElementActions.loadElementsTreeFromServer(
       this.props.synthesis.id,
-      'all'
+      'notIgnored'
     );
   },
 

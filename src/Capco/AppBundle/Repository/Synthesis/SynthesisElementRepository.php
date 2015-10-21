@@ -18,13 +18,12 @@ class SynthesisElementRepository extends MaterializedPathRepository
      *
      * @return int
      */
-    public function countWith($values)
+    public function countWith($synthesis, $type)
     {
         $qb = $this->createQueryBuilder('se')
             ->select('COUNT(se.id)')
         ;
-
-        $qb = $this->addQueryConditions($qb, $values);
+        $qb = $this->addQueryConditionsForTypeAndSynthesis($qb, $type, $synthesis);
 
         return $qb
             ->getQuery()
@@ -36,7 +35,7 @@ class SynthesisElementRepository extends MaterializedPathRepository
      *
      * @return int
      */
-    public function getWith($values, $offset = 0, $limit = 10)
+    public function getWith($synthesis, $type, $offset = 0, $limit = 10)
     {
         $qb = $this->createQueryBuilder('se')
             ->addSelect('a', 'am')
@@ -44,7 +43,7 @@ class SynthesisElementRepository extends MaterializedPathRepository
             ->leftJoin('a.Media', 'am')
         ;
 
-        $qb = $this->addQueryConditions($qb, $values);
+        $qb = $this->addQueryConditionsForTypeAndSynthesis($qb, $type, $synthesis);
 
         $qb
             ->setFirstResult($offset)
@@ -90,18 +89,39 @@ class SynthesisElementRepository extends MaterializedPathRepository
      *
      * @return mixed
      */
-    protected function addQueryConditions($qb, $conditions)
+    protected function addQueryConditionsForTypeAndSynthesis($qb, $type, $synthesis)
     {
-        foreach ($conditions as $key => $value) {
-            if (in_array($key, self::$allowedFields)) {
-                $qb = $this->addQueryCondition($qb, $key, $value);
-            }
+        $qb = $this->addAndQueryCondition($qb, 'synthesis', $synthesis);
+
+        switch ($type) {
+            case 'new':
+                $qb = $this->addAndQueryCondition($qb, 'archived', false);
+                break;
+            case 'unpublished':
+                $qb = $this->addAndQueryCondition($qb, 'archived', true);
+                $qb = $this->addAndQueryCondition($qb, 'published', false);
+                break;
+            case 'archived':
+                $qb = $this->addAndQueryCondition($qb, 'archived', true);
+                break;
+            case 'published':
+                $qb = $this->addAndQueryCondition($qb, 'archived', true);
+                $qb = $this->addAndQueryCondition($qb, 'published', true);
+                break;
+            case 'notIgnored':
+                $qb->andWhere('se.published = :published OR se.archived = :notArchived')
+                    ->setParameter('published', true)
+                    ->setParameter('notArchived', false)
+                ;
+                break;
+            default:
+                break;
         }
 
         return $qb;
     }
 
-    protected function addQueryCondition($qb, $field, $value)
+    protected function addAndQueryCondition($qb, $field, $value)
     {
         if (in_array($field, self::$allowedFields)) {
             if ($value === null) {
@@ -123,10 +143,10 @@ class SynthesisElementRepository extends MaterializedPathRepository
      * Returns tree of elements depending on conditions, parent and depth.
      * Tree can be decorated with options.
      */
-    public function getFormattedTree($conditions = [], $parentId = null, $depth = null, $options = [])
+    public function getFormattedTree($synthesis, $type, $parentId = null, $depth = null, $options = [])
     {
         $parent = $parentId ? $this->find($parentId) : null;
-        $nodes = $this->getElementsHierarchy($conditions, $parent, $depth);
+        $nodes = $this->getElementsHierarchy($synthesis, $type, $parent, $depth);
 
         return $this->buildTree($nodes, $options);
     }
@@ -213,7 +233,7 @@ class SynthesisElementRepository extends MaterializedPathRepository
      * - return results as arrays with only a few fields
      * - add children count to each result.
      */
-    public function getElementsHierarchy($conditions = [], $parent = null, $depth = null, $includeNode = false)
+    public function getElementsHierarchy($synthesis, $type = 'published', $parent = null, $depth = null, $includeNode = false)
     {
         $meta = $this->getClassMetadata();
         $config = $this->listener->getConfiguration($this->_em, $meta->name);
@@ -261,7 +281,7 @@ class SynthesisElementRepository extends MaterializedPathRepository
             $qb->where('('.$expr.')');
         }
 
-        $qb = $this->addQueryConditions($qb, $conditions);
+        $qb = $this->addQueryConditionsForTypeAndSynthesis($qb, $type, $synthesis);
 
         if ($includeNodeExpr) {
             $qb->orWhere('('.$includeNodeExpr.')');

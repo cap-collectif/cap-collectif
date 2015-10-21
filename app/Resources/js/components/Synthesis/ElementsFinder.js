@@ -11,6 +11,7 @@ const ElementsFinder = React.createClass({
     expanded: React.PropTypes.object,
     onSelect: React.PropTypes.func,
     onExpand: React.PropTypes.func,
+    hiddenElementId: React.PropTypes.number,
   },
   mixins: [ReactIntl.IntlMixin],
 
@@ -23,7 +24,8 @@ const ElementsFinder = React.createClass({
       },
       onSelect: null,
       onExpand: null,
-      type: 'all',
+      type: 'notIgnored',
+      hiddenElementId: null,
     };
   },
 
@@ -59,12 +61,14 @@ const ElementsFinder = React.createClass({
         <ul className={'tree__list tree--level-' + level}>
           {
             elements.map((element) => {
-              return (
-                <li key={element.id} className="tree__item">
-                  {this.renderTreeItemContent(element)}
-                  {this.renderTreeItems(element.children, level + 1, this.props.expanded[element.id])}
-                </li>
-              );
+              if (!this.props.hiddenElementId || element.id !== this.props.hiddenElementId) {
+                return (
+                  <li key={element.id} className="tree__item">
+                    {this.renderTreeItemContent(element)}
+                    {this.renderTreeItems(element.children, level + 1, this.props.expanded[element.id])}
+                  </li>
+                );
+              }
             })
           }
         </ul>

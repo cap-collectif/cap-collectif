@@ -213,9 +213,17 @@ const DivideModal = React.createClass({
 
   renderPublishModal() {
     const element = this.state.currentElement;
-    return (
-      <PublishModal synthesis={this.props.synthesis} element={element} show={this.state.showPublishModal} toggle={this.togglePublishModal} process={this.processPublishedElement} />
-    );
+    if (element) {
+      return (
+        <PublishModal
+          synthesis={this.props.synthesis}
+          element={element}
+          show={this.state.showPublishModal}
+          toggle={this.togglePublishModal}
+          process={this.processPublishedElement}
+        />
+      );
+    }
   },
 
   render() {

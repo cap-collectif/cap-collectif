@@ -6,7 +6,7 @@ const idOf = (val) => {
   if (val === 'root') {
     return null;
   }
-  if (typeof val === 'object') {
+  if (val !== null && typeof val === 'object') {
     if (val.id === 'root') {
       return null;
     }

@@ -122,9 +122,9 @@ const UpdateModal = React.createClass({
 
   fetchElements() {
     if (!SynthesisElementStore.isFetchingTree) {
-      if (SynthesisElementStore.isInboxSync.allTree) {
+      if (SynthesisElementStore.isInboxSync.notIgnoredTree) {
         this.setState({
-          elements: SynthesisElementStore.elements.allTree,
+          elements: SynthesisElementStore.elements.notIgnoredTree,
           isLoading: false,
         });
         return;
@@ -141,7 +141,7 @@ const UpdateModal = React.createClass({
   loadElementsTreeFromServer() {
     SynthesisElementActions.loadElementsTreeFromServer(
       this.props.synthesis.id,
-      'all'
+      'notIgnored'
     );
   },
 
@@ -178,7 +178,8 @@ const UpdateModal = React.createClass({
         selectedId={parentId}
         onSelect={this.setParent}
         onExpand={this.expandItem}
-        />
+        hiddenElementId={this.props.element.id}
+      />
     );
   },
 
