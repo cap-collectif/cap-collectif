@@ -66,7 +66,7 @@ class ConsultationStepType
         if ($this->id) {
             return $this->getTitle();
         } else {
-            return 'New project type';
+            return 'New consultation step type';
         }
     }
 
