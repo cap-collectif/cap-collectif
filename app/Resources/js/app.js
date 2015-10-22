@@ -12,6 +12,7 @@ FeatureService.load();
 AuthService
 .login()
 .then(() => {
+
     // We enable React apps
     if ($('#render-idea-comments').length) {
         React.render(
@@ -41,6 +42,20 @@ AuthService
                 {...IntlData}
             />,
             document.getElementById('render-opinion')
+        );
+    }
+
+    if ($('#render-proposal-page').length) {
+        React.render(
+            <ProposalPage proposalId={$('#render-proposal-page').data('proposal')} />,
+            document.getElementById('render-proposal-page')
+        );
+    }
+
+    if ($('#render-collect-step-page').length) {
+        React.render(
+            <ProposalPage formId={$('#render-collect-step-page').data('form')} />,
+            document.getElementById('render-collect-step-page')
         );
     }
 

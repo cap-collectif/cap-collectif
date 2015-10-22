@@ -1,17 +1,10 @@
-const UserLink = React.createClass({
-  propTypes: {
-    user: React.PropTypes.object,
-  },
+export default class UserLink extends React.Component {
 
   render() {
-    if (this.props.user) {
-      return (
-        <a href={this.props.user._links.profile}>{this.props.user.displayName}</a>
-      );
-    }
-    return <span></span>;
-  },
+    return <a href={this.props.user._links.profile}>{this.props.user.displayName}</a>;
+  }
+}
 
-});
-
-export default UserLink;
+UserLink.propTypes = {
+  user: React.PropTypes.object.isRequired,
+};

@@ -30,48 +30,8 @@
 
 {% block body %}
 
-    <div class="container  container--custom">
-        {% include '@CapcoApp/Project/show_title.html.twig' %}
-    </div>
+    <div id="render-collect-step-page"></div>
 
-    <div class="container  container--custom">
-
-        {% if currentStep.isClosed %}
-            <div class="alert alert-info alert-dismissible  block" role="alert">
-                <p><strong>{{ 'project.show.alert.ended.title'|trans({}, 'CapcoAppBundle') }}</strong> {{ 'project.show.alert.ended.text'|trans({}, 'CapcoAppBundle') }}</p>
-            </div>
-        {% endif %}
-
-        {% if currentStep.isFuture %}
-            <div class="alert alert-info alert-dismissible  block" role="alert">
-                <p><strong>{{ 'project.show.alert.future.title'|trans({}, 'CapcoAppBundle') }}</strong> {{ 'project.show.alert.future.text'|trans({'%date%': '<strong>' ~ currentStep.startAt| localizeddate('long', 'none', app.request.locale) ~ '</strong>'}, 'CapcoAppBundle') | raw }}</p>
-            </div>
-        {% endif %}
-
-        <div class="row">
-            <div class="col-xs-12  col-sm-4  col-md-3  block--mobile">
-                {{ render(controller('CapcoAppBundle:Site/Project:showMeta', {'projectSlug': project.slug, 'currentStepSlug': currentStep.slug})) }}
-            </div>
-
-            <div class="col-xs-12  col-sm-8  col-md-9" id="details">
-                {% block content %}
-                    {% if currentStep.body is not null %}
-                        <p class="text-center opinion-type__title level--0">
-                            {{ 'project.show.meta.intro.title' | trans({}, 'CapcoAppBundle') }}
-                        </p>
-                        <div class="block  block--bordered">
-                            <div class="proposal  proposal--current  proposal--default">
-                                <div class="box">
-                                    <div class="more">{{ currentStep.body | raw }}</div>
-                                </div>
-                            </div>
-                        </div>
-                    {% endif %}
-                    {{ render(controller('CapcoAppBundle:Site/Project:showProposals', {'projectSlug': project.slug, 'currentStep': currentStep})) }}
-                {% endblock %}
-            </div> <!-- col-xs-12  col-sm-8  col-md-9 -->
-        </div> <!-- .row -->
-    </div>
 {% endblock %}
 
 {% block javascripts %}
@@ -88,4 +48,6 @@
         App.video('.fancybox');
         {% endif %}
     </script>
+
+
 {% endblock %}

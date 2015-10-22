@@ -1,0 +1,32 @@
+{% extends '@CapcoApp/base.html.twig' %}
+
+{% block canonical_link %}{{ url('app_proposal_show', {'slug': proposal.slug}) }}{% endblock %}
+
+{% block title %}
+    {{ parent() }} - {{ proposal.title }}
+{% endblock %}
+
+{% block jumbotron %}{% endblock %}
+
+{% block body %}
+    <div id="render-proposal-page" data-proposal="{{ proposal.id}}" />
+</div>
+
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script type="text/javascript">
+            App.makeSidebar({ // TODO -> go React
+                sidebar: '#sidebar',
+                container: '#sidebar-container',
+                hideable: '.sidebar-hideable',
+                toggle: '.sidebar-toggle',
+                overlay: '#sidebar-overlay'
+            });
+            App.hideableMessageAndCheckbox({
+                message: '.message-hideable-js',
+                checkbox: '.checkbox-hideable-js',
+            });
+    </script>
+{% endblock %}
