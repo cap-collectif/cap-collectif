@@ -101,6 +101,9 @@ class SynthesisController extends FOSRestController
      * @Security("has_role('ROLE_ADMIN')")
      * @Post("/syntheses/from-consultation-step/{id}")
      * @ParamConverter("consultationStep", options={"mapping": {"id": "id"}})
+     * @param Request $request
+     * @param ConsultationStep $consultationStep
+     * @return \FOS\RestBundle\View\View
      */
     public function createSynthesisFromConsultationStepAction(Request $request, ConsultationStep $consultationStep)
     {

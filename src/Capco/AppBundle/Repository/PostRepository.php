@@ -5,7 +5,7 @@ namespace Capco\AppBundle\Repository;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 use Capco\AppBundle\Entity\Theme;
-use Capco\AppBundle\Entity\Consultation;
+use Capco\AppBundle\Entity\Project;
 
 /**
  * PostRepository.
@@ -16,16 +16,16 @@ use Capco\AppBundle\Entity\Consultation;
 class PostRepository extends EntityRepository
 {
     /**
-     * Get posts depending on theme and consultation.
+     * Get posts depending on theme and project.
      *
      * @param $nbByPage
      * @param $page
      * @param null $themeSlug
-     * @param null $consultationSlug
+     * @param null $projectSlug
      *
      * @return array
      */
-    public function getSearchResults($nbByPage = 8, $page = 1, $themeSlug = null, $consultationSlug = null)
+    public function getSearchResults($nbByPage = 8, $page = 1, $themeSlug = null, $projectSlug = null)
     {
         if ((int) $page < 1) {
             throw new \InvalidArgumentException(sprintf(
@@ -39,7 +39,7 @@ class PostRepository extends EntityRepository
             ->leftJoin('p.Authors', 'a')
             ->leftJoin('p.Media', 'm')
             ->leftJoin('p.themes', 't', 'WITH', 't.isEnabled = :enabled')
-            ->leftJoin('p.consultations', 'c', 'WITH', 'c.isEnabled = :enabled')
+            ->leftJoin('p.projects', 'c', 'WITH', 'c.isEnabled = :enabled')
             ->setParameter('enabled', true)
             ->orderBy('p.publishedAt', 'DESC')
         ;
@@ -50,9 +50,9 @@ class PostRepository extends EntityRepository
             ;
         }
 
-        if ($consultationSlug !== null && $consultationSlug !== Consultation::FILTER_ALL) {
-            $qb->andWhere('c.slug = :consultation')
-                ->setParameter('consultation', $consultationSlug)
+        if ($projectSlug !== null && $projectSlug !== Project::FILTER_ALL) {
+            $qb->andWhere('c.slug = :project')
+                ->setParameter('project', $projectSlug)
             ;
         }
 
@@ -67,14 +67,14 @@ class PostRepository extends EntityRepository
     }
 
     /**
-     * Count posts depending on theme and consultation.
+     * Count posts depending on theme and project.
      *
      * @param null $themeSlug
-     * @param null $consultationSlug
+     * @param null $projectSlug
      *
      * @return array
      */
-    public function countSearchResults($themeSlug = null, $consultationSlug = null)
+    public function countSearchResults($themeSlug = null, $projectSlug = null)
     {
         $qb = $this->getIsPublishedQueryBuilder('p')
             ->select('COUNT(p.id)')
@@ -88,11 +88,11 @@ class PostRepository extends EntityRepository
             ;
         }
 
-        if ($consultationSlug !== null && $consultationSlug !== Consultation::FILTER_ALL) {
-            $qb->innerJoin('p.consultations', 'c', 'WITH', 'c.isEnabled = :cEnabled')
+        if ($projectSlug !== null && $projectSlug !== Project::FILTER_ALL) {
+            $qb->innerJoin('p.projects', 'c', 'WITH', 'c.isEnabled = :cEnabled')
                 ->setParameter('cEnabled', true)
-                ->andWhere('c.slug = :consultation')
-                ->setParameter('consultation', $consultationSlug)
+                ->andWhere('c.slug = :project')
+                ->setParameter('project', $projectSlug)
             ;
         }
 
@@ -116,7 +116,7 @@ class PostRepository extends EntityRepository
             ->addSelect('a', 'm', 'c', 't')
             ->leftJoin('p.Authors', 'a')
             ->leftJoin('p.Media', 'm')
-            ->leftJoin('p.consultations', 'c')
+            ->leftJoin('p.projects', 'c')
             ->leftJoin('p.themes', 't')
             ->addOrderBy('p.publishedAt', 'DESC')
         ;
@@ -135,24 +135,24 @@ class PostRepository extends EntityRepository
     }
 
     /**
-     * Get last posts by consultation.
+     * Get last posts by project.
      *
-     * @param $consultationSlug
+     * @param $projectSlug
      * @param int $limit
      * @param int $offset
      *
      * @return mixed
      */
-    public function getLastPublishedByConsultation($consultationSlug, $limit = 1, $offset = 0)
+    public function getLastPublishedByProject($projectSlug, $limit = 1, $offset = 0)
     {
         $qb = $this->getIsPublishedQueryBuilder()
             ->addSelect('a', 'm', 'c', 't')
             ->leftJoin('p.Authors', 'a')
             ->leftJoin('p.Media', 'm')
-            ->leftJoin('p.consultations', 'c')
+            ->leftJoin('p.projects', 'c')
             ->leftJoin('p.themes', 't')
-            ->andWhere('c.slug = :consultation')
-            ->setParameter('consultation', $consultationSlug)
+            ->andWhere('c.slug = :project')
+            ->setParameter('project', $projectSlug)
             ->addOrderBy('p.publishedAt', 'DESC')
         ;
 
@@ -182,7 +182,7 @@ class PostRepository extends EntityRepository
             ->leftJoin('a.Media', 'am')
             ->leftJoin('p.Media', 'm')
             ->leftJoin('p.themes', 't', 'WITH', 't.isEnabled = :tEnabled')
-            ->leftJoin('p.consultations', 'c', 'WITH', 'c.isEnabled = :cEnabled')
+            ->leftJoin('p.projects', 'c', 'WITH', 'c.isEnabled = :cEnabled')
             ->andWhere('p.slug = :slug')
             ->setParameter('tEnabled', true)
             ->setParameter('cEnabled', true)
@@ -200,7 +200,7 @@ class PostRepository extends EntityRepository
             ->leftJoin('p.Authors', 'a')
             ->leftJoin('p.Media', 'm')
             ->leftJoin('p.themes', 't')
-            ->leftJoin('p.consultations', 'c')
+            ->leftJoin('p.projects', 'c')
             ->orderBy('p.createdAt', 'DESC')
             ->addOrderBy('p.publishedAt', 'DESC')
             ->setMaxResults($count);

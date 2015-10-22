@@ -3,7 +3,6 @@
 namespace Capco\AppBundle\Controller\Site;
 
 use Capco\AppBundle\Entity\Argument;
-use Capco\AppBundle\Entity\Consultation;
 use Capco\AppBundle\Entity\Opinion;
 use Capco\AppBundle\Form\ArgumentType as ArgumentForm;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -16,11 +15,12 @@ use Symfony\Component\Form\Form;
 class ArgumentController extends Controller
 {
     /**
-     * @Route("/consultations/{consultationSlug}/consultation/{stepSlug}/opinions/{opinionTypeSlug}/{opinionSlug}/arguments/{argumentId}/edit", name="app_consultation_edit_argument")
+     * @Route("/projects/{projectSlug}/consultation/{stepSlug}/opinions/{opinionTypeSlug}/{opinionSlug}/arguments/{argumentId}/edit", name="app_project_edit_argument")
+     * @Route("/consultations/{projectSlug}/consultation/{stepSlug}/opinions/{opinionTypeSlug}/{opinionSlug}/arguments/{argumentId}/edit", name="app_consultation_edit_argument")
      * @Template("CapcoAppBundle:Argument:update.html.twig")
      *
      * @param $request
-     * @param $consultationSlug
+     * @param $projectSlug
      * @param $stepSlug
      * @param $opinionTypeSlug
      * @param $opinionSlug
@@ -28,7 +28,7 @@ class ArgumentController extends Controller
      *
      * @return array
      */
-    public function updateArgumentAction($consultationSlug, $stepSlug, $opinionTypeSlug, $opinionSlug, $argumentId, Request $request)
+    public function updateArgumentAction($projectSlug, $stepSlug, $opinionTypeSlug, $opinionSlug, $argumentId, Request $request)
     {
         if (false === $this->get('security.authorization_checker')->isGranted('ROLE_USER')) {
             throw new AccessDeniedException($this->get('translator')->trans('error.access_restricted', array(), 'CapcoAppBundle'));
@@ -47,7 +47,7 @@ class ArgumentController extends Controller
         $opinion = $argument->getLinkedOpinion();
         $opinionType = $opinion->getOpinionType();
         $currentStep = $opinion->getStep();
-        $consultation = $currentStep->getConsultation();
+        $project = $currentStep->getProject();
 
         $userCurrent = $this->getUser()->getId();
         $userPostArgument = $argument->getAuthor()->getId();
@@ -69,7 +69,7 @@ class ArgumentController extends Controller
 
                 $this->get('session')->getFlashBag()->add('success', $this->get('translator')->trans('argument.update.success'));
 
-                return $this->redirect($this->generateUrl('app_consultation_show_opinion', ['consultationSlug' => $consultation->getSlug(), 'stepSlug' => $currentStep->getSlug(), 'opinionTypeSlug' => $opinionType->getSlug(), 'opinionSlug' => $opinion->getSlug()]));
+                return $this->redirect($this->generateUrl('app_project_show_opinion', ['projectSlug' => $project->getSlug(), 'stepSlug' => $currentStep->getSlug(), 'opinionTypeSlug' => $opinionType->getSlug(), 'opinionSlug' => $opinion->getSlug()]));
             } else {
                 $this->get('session')->getFlashBag()->add('danger', $this->get('translator')->trans('argument.update.error'));
             }
@@ -83,11 +83,12 @@ class ArgumentController extends Controller
     }
 
     /**
-     * @Route("/consultations/{consultationSlug}/consultation/{stepSlug}/opinions/{opinionTypeSlug}/{opinionSlug}/arguments/{argumentId}/delete", name="app_consultation_delete_argument")
+     * @Route("/projects/{projectSlug}/consultation/{stepSlug}/opinions/{opinionTypeSlug}/{opinionSlug}/arguments/{argumentId}/delete", name="app_project_delete_argument")
+     * @Route("/consultations/{projectSlug}/consultation/{stepSlug}/opinions/{opinionTypeSlug}/{opinionSlug}/arguments/{argumentId}/delete", name="app_consultation_delete_argument")
      * @Template("CapcoAppBundle:Argument:delete.html.twig")
      *
      * @param $request
-     * @param $consultationSlug
+     * @param $projectSlug
      * @param $stepSlug
      * @param $opinionTypeSlug
      * @param $opinionSlug
@@ -95,7 +96,7 @@ class ArgumentController extends Controller
      *
      * @return array
      */
-    public function deleteArgumentAction($consultationSlug, $stepSlug, $opinionTypeSlug, $opinionSlug, $argumentId, Request $request)
+    public function deleteArgumentAction($projectSlug, $stepSlug, $opinionTypeSlug, $opinionSlug, $argumentId, Request $request)
     {
         if (false === $this->get('security.authorization_checker')->isGranted('ROLE_USER')) {
             throw new AccessDeniedException($this->get('translator')->trans('error.access_restricted', array(), 'CapcoAppBundle'));
@@ -114,7 +115,7 @@ class ArgumentController extends Controller
         $opinion = $argument->getLinkedOpinion();
         $opinionType = $opinion->getOpinionType();
         $currentStep = $opinion->getStep();
-        $consultation = $currentStep->getConsultation();
+        $project = $currentStep->getProject();
 
         $userCurrent = $this->getUser()->getId();
         $userPostArgument = $argument->getAuthor()->getId();
@@ -136,7 +137,7 @@ class ArgumentController extends Controller
 
                 $this->get('session')->getFlashBag()->add('info', $this->get('translator')->trans('argument.delete.success'));
 
-                return $this->redirect($this->generateUrl('app_consultation_show_opinion', ['consultationSlug' => $consultation->getSlug(), 'stepSlug' => $currentStep->getSlug(), 'opinionTypeSlug' => $opinionType->getSlug(), 'opinionSlug' => $opinion->getSlug()]));
+                return $this->redirect($this->generateUrl('app_project_show_opinion', ['projectSlug' => $project->getSlug(), 'stepSlug' => $currentStep->getSlug(), 'opinionTypeSlug' => $opinionType->getSlug(), 'opinionSlug' => $opinion->getSlug()]));
             } else {
                 $this->get('session')->getFlashBag()->add('danger', $this->get('translator')->trans('argument.delete.error'));
             }

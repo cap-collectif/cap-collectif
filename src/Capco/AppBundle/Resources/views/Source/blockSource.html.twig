@@ -11,7 +11,7 @@
             {% endif %}
         </h4>
         {% if profile is defined or trashed is defined %}
-            <p>{{ 'source.linked_proposition' | trans({}, 'CapcoAppBundle') }} <a href="{{ path('app_consultation_show_opinion', {'consultationSlug': consultation.slug, 'stepSlug': opinion.step.slug, 'opinionTypeSlug': opinionType.slug, 'opinionSlug': opinion.slug}) }}">{{ opinion.title }}</a></p>
+            <p>{{ 'source.linked_proposition' | trans({}, 'CapcoAppBundle') }} <a href="{{ path('app_project_show_opinion', {'projectSlug': project.slug, 'stepSlug': opinion.step.slug, 'opinionTypeSlug': opinionType.slug, 'opinionSlug': opinion.slug}) }}">{{ opinion.title }}</a></p>
         {% endif %}
         <p class="excerpt">
             {% if trashed is not defined and source.isTrashed %}<span class="label label-default" style="position: static">{{ 'opinion.show.trashed.label'|trans({}, 'CapcoAppBundle') }}</span> {% endif %}
@@ -26,12 +26,12 @@
                 {% if source.reports | length > 0 %}
                     <button disabled="disabled" class="btn btn-xs btn-dark-gray"><i class="cap cap-flag-1"></i> {{ 'source.report.reported'|trans({}, 'CapcoAppBundle') }}</button>
                 {% else %}
-                    <a href="{{ path('app_report_source' ,{'consultationSlug': consultation.slug, 'stepSlug': opinion.step.slug, 'opinionTypeSlug': opinionType.slug, 'opinionSlug': opinion.slug, 'sourceSlug': source.slug } ) }}" class="btn btn-xs btn-dark-gray  btn--outline"><i class="cap cap-flag-1"></i> {{ 'source.report.submit'|trans({}, 'CapcoAppBundle') }}</a>
+                    <a href="{{ path('app_report_source' ,{'projectSlug': project.slug, 'stepSlug': opinion.step.slug, 'opinionTypeSlug': opinionType.slug, 'opinionSlug': opinion.slug, 'sourceSlug': source.slug } ) }}" class="btn btn-xs btn-dark-gray  btn--outline"><i class="cap cap-flag-1"></i> {{ 'source.report.submit'|trans({}, 'CapcoAppBundle') }}</a>
                 {% endif %}
             {% endif %}
 
             {% if source.canContribute and app.user is not null and app.user == source.Author %}
-                <a href="{{ path('app_edit_source' ,{'consultationSlug': consultation.slug, 'stepSlug': opinion.step.slug, 'opinionTypeSlug': opinionType.slug, 'opinionSlug': opinion.slug, 'sourceSlug': source.slug} ) }}" class="btn  btn-dark-gray  btn--outline  btn-xs"><i class="cap cap-pencil-1"></i> {{ 'source.update.button'|trans({}, 'CapcoAppBundle') }}</a>
+                <a href="{{ path('app_edit_source' ,{'projectSlug': project.slug, 'stepSlug': opinion.step.slug, 'opinionTypeSlug': opinionType.slug, 'opinionSlug': opinion.slug, 'sourceSlug': source.slug} ) }}" class="btn  btn-dark-gray  btn--outline  btn-xs"><i class="cap cap-pencil-1"></i> {{ 'source.update.button'|trans({}, 'CapcoAppBundle') }}</a>
             {% endif %}
 
         {% else %}

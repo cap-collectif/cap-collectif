@@ -13,13 +13,13 @@ use Capco\AppBundle\Entity\Synthesis\Synthesis;
 use Capco\AppBundle\Entity\OpinionAppendix;
 use Capco\AppBundle\Entity\OpinionTypeAppendixType;
 use Capco\AppBundle\Entity\AppendixType;
-use Capco\AppBundle\Entity\Consultation;
-use Capco\AppBundle\Entity\ConsultationAbstractStep;
+use Capco\AppBundle\Entity\Project;
+use Capco\AppBundle\Entity\ProjectAbstractStep;
 use Capco\AppBundle\Entity\RankingStep;
 use Capco\AppBundle\Entity\SynthesisStep;
 use Capco\AppBundle\Entity\OtherStep;
 use Capco\AppBundle\Entity\ConsultationStep;
-use Capco\AppBundle\Entity\ConsultationType;
+use Capco\AppBundle\Entity\ConsultationStepType;
 use Capco\AppBundle\Entity\OpinionModal;
 use Capco\AppBundle\Entity\MenuItem;
 use Symfony\Component\Console\Input\ArrayInput;
@@ -138,9 +138,9 @@ class CreatePJLFromCsvCommand extends ContainerAwareCommand
         $toggleManager->deactivate('login_twitter');
         $toggleManager->activate('user_type');
         $toggleManager->activate('members_list');
-        $toggleManager->deactivate('consultations_form');
+        $toggleManager->deactivate('projects_form');
         $toggleManager->activate('share_buttons');
-        $toggleManager->activate('consultation_trash');
+        $toggleManager->activate('project_trash');
         $toggleManager->deactivate('idea_trash');
         $toggleManager->activate('reporting');
         $toggleManager->deactivate('shield_mode');
@@ -212,15 +212,15 @@ class CreatePJLFromCsvCommand extends ContainerAwareCommand
         }
 
         $em->getRepository('CapcoAppBundle:MenuItem')
-               ->findOneByTitle('Consultations')
+               ->findOneByTitle('Projets participatifs')
                ->setIsEnabled(false)
         ;
 
         $menuItem = new MenuItem();
-        $menuItem->setTitle('Consultation');
+        $menuItem->setTitle('Projet');
         $menuItem->setPosition(2);
         $menuItem->setMenu(1);
-        $menuItem->setLink('consultations/projet-de-loi-numerique/consultation/consultation');
+        $menuItem->setLink('projets/projet-de-loi-numerique/projet/projet');
 
         $em->persist($menuItem);
         $em->flush();
@@ -270,27 +270,27 @@ class CreatePJLFromCsvCommand extends ContainerAwareCommand
         $progress = new ProgressBar($output, count($opinionTypesData) + count($opinions) + count($motives) + count($modals));
         $progress->start();
 
-        $consultation = new Consultation();
-        $consultation->setAuthor($user);
-        $consultation->setTitle('Projet de loi numérique');
-        $consultation->setPublishedAt(new \DateTime());
-        $consultation->setOpinionsRankingThreshold(60);
-        $consultation->setVersionsRankingThreshold(60);
+        $project = new Project();
+        $project->setAuthor($user);
+        $project->setTitle('Projet de loi numérique');
+        $project->setPublishedAt(new \DateTime());
+        $project->setOpinionsRankingThreshold(60);
+        $project->setVersionsRankingThreshold(60);
 
-        $consultationAbsStep = new ConsultationAbstractStep();
-        $consultationAbsStep->setPosition(1);
+        $projectAbsStep = new ProjectAbstractStep();
+        $projectAbsStep->setPosition(1);
 
-        $classementAbsStep = new ConsultationAbstractStep();
+        $classementAbsStep = new ProjectAbstractStep();
         $classementAbsStep->setPosition(2);
 
-        $syntheseAbsStep = new ConsultationAbstractStep();
+        $syntheseAbsStep = new ProjectAbstractStep();
         $syntheseAbsStep->setPosition(3);
 
-        $otherAbsStep = new ConsultationAbstractStep();
+        $otherAbsStep = new ProjectAbstractStep();
         $otherAbsStep->setPosition(4);
 
         $consultationStep = new ConsultationStep();
-        $consultationStep->setTitle('Consultation');
+        $consultationStep->setTitle('Projet');
         $consultationStep->setStartAt((new \DateTime())->modify('-1 day'));
         $consultationStep->setEndAt((new \DateTime())->modify('+3 weeks'));
 
@@ -315,23 +315,23 @@ class CreatePJLFromCsvCommand extends ContainerAwareCommand
         $otherStep->setTitle('Projet de loi définitif');
         $otherStep->setStartAt(new \DateTime('2015-11-25 09:00:00'));
 
-        $consultationType = new ConsultationType();
-        $consultationType->setTitle('PJL');
+        $consultationStepType = new ConsultationStepType();
+        $consultationStepType->setTitle('PJL');
 
-        $consultationStep->setConsultationType($consultationType);
-        $consultationAbsStep->setStep($consultationStep);
+        $consultationStep->setConsultationStepType($consultationStepType);
+        $projectAbsStep->setStep($consultationStep);
 
         $classementAbsStep->setStep($classementStep);
         $syntheseAbsStep->setStep($syntheseStep);
         $otherAbsStep->setStep($otherStep);
 
-        $consultation->addStep($consultationAbsStep);
-        $consultation->addStep($classementAbsStep);
-        $consultation->addStep($syntheseAbsStep);
-        $consultation->addStep($otherAbsStep);
+        $project->addStep($projectAbsStep);
+        $project->addStep($classementAbsStep);
+        $project->addStep($syntheseAbsStep);
+        $project->addStep($otherAbsStep);
 
-        $em->persist($consultation);
-        $em->persist($consultationType);
+        $em->persist($project);
+        $em->persist($consultationStepType);
         $em->flush();
 
         $position = 0;
@@ -362,7 +362,7 @@ class CreatePJLFromCsvCommand extends ContainerAwareCommand
                 }
                 $opinionType->setParent($parent);
             } else {
-                $opinionType->setConsultationType($consultationType);
+                $opinionType->setConsultationStepType($consultationStepType);
             }
 
             $em->persist($opinionType);

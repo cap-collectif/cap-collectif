@@ -1,6 +1,6 @@
-{% extends '@CapcoApp/Consultation/show.html.twig' %}
+{% extends '@CapcoApp/Project/show.html.twig' %}
 
-{% block canonical_link %}{{ url('app_consultation_show_ranking', {'consultationSlug': consultation.slug, 'stepSlug': currentStep.slug}) }}{% endblock %}
+{% block canonical_link %}{{ url('app_project_show_ranking', {'projectSlug': project.slug, 'stepSlug': currentStep.slug}) }}{% endblock %}
 
 {% block title %}
     {{ parent() }} - {{ currentStep.title }}
@@ -11,14 +11,14 @@
 
 {% block body %}
     <div class="container  container--custom">
-        {% include '@CapcoApp/Consultation/show_title.html.twig' %}
+        {% include '@CapcoApp/Project/show_title.html.twig' %}
     </div>
 
     <div class="container  container--custom">
         <div class="row">
             <div class="col-xs-12  col-sm-4  col-md-3">
-                {{ render(controller('CapcoAppBundle:Site/Consultation:showMeta', {
-                        'consultationSlug': consultation.slug,
+                {{ render(controller('CapcoAppBundle:Site/Project:showMeta', {
+                        'projectSlug': project.slug,
                         'currentStepSlug': currentStep.slug,
                     }))
                 }}
@@ -35,7 +35,7 @@
 
                 <div id="opinions--ranking" class="anchor-offset  block  block--bordered">
 
-                    {% set opinionsLabel = consultation.opinionTerm == 0 ? 'consultation.ranking.opinions' : 'consultation.ranking.articles' %}
+                    {% set opinionsLabel = project.opinionTerm == 0 ? 'project.ranking.opinions' : 'project.ranking.articles' %}
                     <div class="opinion opinion--default">
                         <div class="opinion__header  opinion__header--mobile-centered">
                             <h2 class="pull-left  h4  opinion__header__title">
@@ -47,18 +47,18 @@
                     {% if (opinions|length > 0) %}
                         <ul class="media-list  opinion__list">
                             {% for opinion in opinions %}
-                                {% include 'CapcoAppBundle:Opinion:blockOpinion.html.twig' with {'opinion': opinion, 'opinionType': opinion.opinionType, 'showRanking': true, 'opinionTerm': consultation.opinionTerm} only %}
+                                {% include 'CapcoAppBundle:Opinion:blockOpinion.html.twig' with {'opinion': opinion, 'opinionType': opinion.opinionType, 'showRanking': true, 'opinionTerm': project.opinionTerm} only %}
                             {% endfor %}
                         </ul>
                         {% if opinions | length > nbOpinionsToDisplay  %}
                             <div class="opinion  opinion__footer  box">
-                                <a href="{{ path('app_consultation_show_opinions_ranking', {'consultationSlug': consultation.slug, 'stepSlug': currentStep.slug}) }}" class="text-center" style="display: block">
+                                <a href="{{ path('app_project_show_opinions_ranking', {'projectSlug': project.slug, 'stepSlug': currentStep.slug}) }}" class="text-center" style="display: block">
                                     {{ 'opinion.show.all'|trans({}, 'CapcoAppBundle') }}
                                 </a>
                             </div>
                         {% endif %}
                     {% else %}
-                        <div class="consultation__empty-block  text-center">
+                        <div class="project__empty-block  text-center">
                             <p class="icon  cap-bubble-attention-6"></p>
                             <p>{{ 'opinion.show.none'|trans({}, 'CapcoAppBundle') }}</p>
                         </div>
@@ -71,7 +71,7 @@
                         <div class="opinion opinion--default">
                             <div class="opinion__header  opinion__header--mobile-centered">
                                 <h2 class="pull-left  h4  opinion__header__title">
-                                    {{ 'consultation.ranking.versions' | transchoice(versions | length, {}, 'CapcoAppBundle')  }}
+                                    {{ 'project.ranking.versions' | transchoice(versions | length, {}, 'CapcoAppBundle')  }}
                                 </h2>
                             </div>
                         </div>
@@ -83,7 +83,7 @@
                         </ul>
                         {% if versions | length > nbVersionsToDisplay  %}
                             <div class="opinion  opinion__footer  box">
-                                <a href="{{ path('app_consultation_show_versions_ranking', {'consultationSlug': consultation.slug, 'stepSlug': currentStep.slug}) }}" class="text-center" style="display: block">
+                                <a href="{{ path('app_project_show_versions_ranking', {'projectSlug': project.slug, 'stepSlug': currentStep.slug}) }}" class="text-center" style="display: block">
                                     {{ 'opinion.show.all'|trans({}, 'CapcoAppBundle') }}
                                 </a>
                             </div>

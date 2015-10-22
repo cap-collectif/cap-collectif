@@ -2,7 +2,7 @@
 
 namespace Capco\UserBundle\Controller;
 
-use FOS\UserBundle\Controller\ChangePasswordController as BaseController;
+use Sonata\UserBundle\Controller\ChangePasswordFOSUser1Controller as BaseController;
 
 /**
  * Class ChangePasswordFOSUser1Controller.

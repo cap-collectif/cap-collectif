@@ -74,16 +74,16 @@
                         <div class="event__map  map-canvas  block" data-lat="{{ event.lat }}" data-lng="{{ event.lng }}"></div>
                     {% endif %}
 
-                    {% if event.consultations | length > 0 %}
+                    {% if event.projects | length > 0 %}
                         <div class="block">
                             <p>
-                                {% transchoice event.consultations | length from 'CapcoAppBundle' %}
-                                    event.show.consultations.title
+                                {% transchoice event.projects | length from 'CapcoAppBundle' %}
+                                    event.show.projects.title
                                 {% endtranschoice %}
                             </p>
                             <ul>
-                                {% for consultation in event.consultations %}
-                                    <li><a href="{{ consultation | capco_first_step_link }}">{{ consultation.title }}</a></li>
+                                {% for project in event.projects %}
+                                    <li><a href="{{ project | capco_first_step_link }}">{{ project.title }}</a></li>
                                 {% endfor %}
                             </ul>
                         </div>

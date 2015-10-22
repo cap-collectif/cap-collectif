@@ -35,7 +35,7 @@ Feature: Opinions
 
         "step": {
           "id": @integer@,
-          "consultationId": @integer@
+          "projectId": @integer@
         },
 
         "arguments_count": @integer@,

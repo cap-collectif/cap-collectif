@@ -17,12 +17,12 @@ class ArgumentRepository extends EntityRepository
     public function getRecentOrdered()
     {
         $qb = $this->createQueryBuilder('a')
-            ->select('a.id', 'a.createdAt', 'a.updatedAt', 'aut.username as author', 'a.isEnabled as published', 'a.isTrashed as trashed', 'c.title as consultation')
+            ->select('a.id', 'a.createdAt', 'a.updatedAt', 'aut.username as author', 'a.isEnabled as published', 'a.isTrashed as trashed', 'c.title as project')
             ->leftJoin('a.Author', 'aut')
             ->leftJoin('a.opinion', 'o')
             ->leftJoin('o.step', 's')
-            ->leftJoin('s.consultationAbstractStep', 'cas')
-            ->leftJoin('cas.consultation', 'c')
+            ->leftJoin('s.projectAbstractStep', 'cas')
+            ->leftJoin('cas.project', 'c')
             ->where('a.validated = :validated')
             ->setParameter('validated', false)
         ;
@@ -35,12 +35,12 @@ class ArgumentRepository extends EntityRepository
     public function getArrayById($id)
     {
         $qb = $this->createQueryBuilder('a')
-            ->select('a.id', 'a.createdAt', 'a.updatedAt', 'aut.username as author', 'a.isEnabled as published', 'a.isTrashed as trashed', 'a.body as body', 'c.title as consultation')
+            ->select('a.id', 'a.createdAt', 'a.updatedAt', 'aut.username as author', 'a.isEnabled as published', 'a.isTrashed as trashed', 'a.body as body', 'c.title as project')
             ->leftJoin('a.Author', 'aut')
             ->leftJoin('a.opinion', 'o')
             ->leftJoin('o.step', 's')
-            ->leftJoin('s.consultationAbstractStep', 'cas')
-            ->leftJoin('cas.consultation', 'c')
+            ->leftJoin('s.projectAbstractStep', 'cas')
+            ->leftJoin('cas.project', 'c')
             ->where('a.id = :id')
             ->setParameter('id', $id)
         ;
@@ -209,13 +209,13 @@ class ArgumentRepository extends EntityRepository
     }
 
     /**
-     * Get all trashed or unpublished arguments for consultation.
+     * Get all trashed or unpublished arguments for project.
      *
      * @param $step
      *
      * @return mixed
      */
-    public function getTrashedOrUnpublishedByConsultation($consultation)
+    public function getTrashedOrUnpublishedByProject($project)
     {
         return $this->createQueryBuilder('a')
             ->addSelect('o', 'v', 'aut', 'm')
@@ -224,11 +224,11 @@ class ArgumentRepository extends EntityRepository
             ->leftJoin('aut.Media', 'm')
             ->leftJoin('a.opinion', 'o')
             ->leftJoin('o.step', 's')
-            ->leftJoin('s.consultationAbstractStep', 'cas')
-            ->andWhere('cas.consultation = :consultation')
+            ->leftJoin('s.projectAbstractStep', 'cas')
+            ->andWhere('cas.project = :project')
             ->andWhere('a.isTrashed = :trashed')
             ->orWhere('a.isEnabled = :disabled')
-            ->setParameter('consultation', $consultation)
+            ->setParameter('project', $project)
             ->setParameter('trashed', true)
             ->setParameter('disabled', false)
             ->orderBy('a.trashedAt', 'DESC')
@@ -249,8 +249,8 @@ class ArgumentRepository extends EntityRepository
             ->select('COUNT(a) as TotalArguments')
             ->leftJoin('a.opinion', 'o')
             ->leftJoin('o.step', 's')
-            ->leftJoin('s.consultationAbstractStep', 'cas')
-            ->leftJoin('cas.consultation', 'c')
+            ->leftJoin('s.projectAbstractStep', 'cas')
+            ->leftJoin('cas.project', 'c')
             ->andWhere('a.Author = :author')
             ->andWhere('o.isEnabled = :enabled')
             ->andWhere('s.isEnabled = :enabled')
@@ -277,10 +277,10 @@ class ArgumentRepository extends EntityRepository
             ->addSelect('o')
             ->leftJoin('o.step', 's')
             ->addSelect('s')
-            ->leftJoin('s.consultationAbstractStep', 'cas')
+            ->leftJoin('s.projectAbstractStep', 'cas')
             ->addSelect('cas')
-            ->leftJoin('cas.consultation', 'c')
-            ->addSelect('c')
+            ->leftJoin('cas.project', 'p')
+            ->addSelect('p')
             ->leftJoin('o.Author', 'aut')
             ->addSelect('aut')
             ->leftJoin('aut.Media', 'm')
@@ -293,8 +293,8 @@ class ArgumentRepository extends EntityRepository
             ->setParameter('enabled', true)
             ->andWhere('s.isEnabled = :stepEnabled')
             ->setParameter('stepEnabled', true)
-            ->andWhere('c.isEnabled = :consultEnabled')
-            ->setParameter('consultEnabled', true)
+            ->andWhere('p.isEnabled = :projectEnabled')
+            ->setParameter('projectEnabled', true)
             ->getQuery()
             ->getResult();
     }

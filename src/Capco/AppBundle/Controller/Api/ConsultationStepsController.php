@@ -3,7 +3,7 @@
 namespace Capco\AppBundle\Controller\Api;
 
 use Capco\AppBundle\Entity\Opinion;
-use Capco\AppBundle\Entity\Consultation;
+use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\ConsultationStep;
 use Capco\AppBundle\Entity\OpinionType;
 use Capco\AppBundle\Form\Api\OpinionType as OpinionForm;
@@ -21,15 +21,19 @@ class ConsultationStepsController extends FOSRestController
 {
     /**
      * @Security("has_role('ROLE_USER')")
-     * @Post("/consultations/{consultationId}/steps/{stepId}/opinions")
-     * @ParamConverter("consultation", options={"mapping": {"consultationId": "id"}})
+     * @Post("/projects/{projectId}/steps/{stepId}/opinions")
+     * @ParamConverter("project", options={"mapping": {"projectId": "id"}})
      * @ParamConverter("step", options={"mapping": {"stepId": "id"}})
      * @View(statusCode=201, serializerGroups={})
+     * @param Request $request
+     * @param Project $project
+     * @param ConsultationStep $step
+     * @return \FOS\RestBundle\View\View
      */
-    public function postOpinionAction(Request $request, Consultation $consultation, ConsultationStep $step)
+    public function postOpinionAction(Request $request, Project $project, ConsultationStep $step)
     {
         if (!$step->canContribute()) {
-            throw new BadRequestHttpException($this->get('translator')->trans('consultation.error.no_contribute', [], 'CapcoAppBundle'));
+            throw new BadRequestHttpException($this->get('translator')->trans('project.error.no_contribute', [], 'CapcoAppBundle'));
         }
 
         $user = $this->getUser();
@@ -41,12 +45,12 @@ class ConsultationStepsController extends FOSRestController
         $form = $this->createForm(new OpinionForm(), $opinion);
         $form->handleRequest($request);
 
-        $consultationType = $step->getConsultationType();
+        $consultationStepType = $step->getConsultationStepType();
         $link = $opinion->getLink();
 
         $availablesOpinionTypes = $link
             ? $link->getOpinionType()->getAvailableOpinionTypesToCreateLink()
-            : $this->get('capco.opinion_types.resolver')->getAllForConsultationType($consultationType)
+            : $this->get('capco.opinion_types.resolver')->getAllForConsultationStepType($consultationStepType)
         ;
 
         $opinionType = $opinion->getOpinionType();

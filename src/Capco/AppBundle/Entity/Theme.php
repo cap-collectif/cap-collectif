@@ -117,9 +117,9 @@ class Theme
 
     /**
      * @var
-     * @ORM\ManyToMany(targetEntity="Capco\AppBundle\Entity\Consultation", mappedBy="Themes", cascade={"persist"})
+     * @ORM\ManyToMany(targetEntity="Capco\AppBundle\Entity\Project", mappedBy="Themes", cascade={"persist"})
      */
-    private $Consultations;
+    private $projects;
 
     /**
      * @var
@@ -149,7 +149,7 @@ class Theme
 
     public function __construct()
     {
-        $this->Consultations = new ArrayCollection();
+        $this->projects = new ArrayCollection();
         $this->Ideas = new ArrayCollection();
         $this->events = new ArrayCollection();
         $this->posts = new ArrayCollection();
@@ -338,33 +338,33 @@ class Theme
     /**
      * @return \Doctrine\Common\Collections\Collection
      */
-    public function getConsultations()
+    public function getProjects()
     {
-        return $this->Consultations;
+        return $this->projects;
     }
 
     /**
-     * @param Capco\AppBundle\Entity\Consultation $Consultation
-     *
+     * @param Project $project
      * @return Theme
+     *
      */
-    public function addConsultation(Consultation $Consultation)
+    public function addProject(Project $project)
     {
-        if (!$this->Consultations->contains($Consultation)) {
-            $this->Consultations->add($Consultation);
+        if (!$this->projects->contains($project)) {
+            $this->projects->add($project);
         }
 
         return $this;
     }
 
     /**
-     * @param Consultation $Consultation
+     * @param Project $project
      *
      * @return $this
      */
-    public function removeConsultation(Consultation $Consultation)
+    public function removeProject(Project $project)
     {
-        $this->Consultations->removeElement($Consultation);
+        $this->projects->removeElement($project);
 
         return $this;
     }
@@ -529,11 +529,11 @@ class Theme
         return $this->isEnabled;
     }
 
-    public function countEnabledConsultations()
+    public function countEnabledProjects()
     {
         $count = 0;
-        foreach ($this->Consultations as $consultation) {
-            if ($consultation->getIsEnabled()) {
+        foreach ($this->projects as $project) {
+            if ($project->getIsEnabled()) {
                 ++$count;
             }
         }

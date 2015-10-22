@@ -1,6 +1,6 @@
-{% extends '@CapcoApp/Consultation/show.html.twig' %}
+{% extends '@CapcoApp/Project/show.html.twig' %}
 
-{% block canonical_link %}{{ url('app_consultation_show_presentation', {'consultationSlug': consultation.slug, 'stepSlug': currentStep.slug}) }}{% endblock %}
+{% block canonical_link %}{{ url('app_project_show_presentation', {'projectSlug': project.slug, 'stepSlug': currentStep.slug}) }}{% endblock %}
 
 {% block title %}
     {{ parent() }} - {{ currentStep.title }}
@@ -11,14 +11,14 @@
 
 {% block body %}
     <div class="container  container--custom">
-        {% include '@CapcoApp/Consultation/show_title.html.twig' %}
+        {% include '@CapcoApp/Project/show_title.html.twig' %}
     </div>
 
     <div class="container  container--custom">
         <div class="row">
             <div class="col-xs-12  col-sm-4  col-md-3">
-                {{ render(controller('CapcoAppBundle:Site/Consultation:showMeta', {
-                        'consultationSlug': consultation.slug,
+                {{ render(controller('CapcoAppBundle:Site/Project:showMeta', {
+                        'projectSlug': project.slug,
                         'currentStepSlug': currentStep.slug,
                     }))
                 }}
@@ -30,8 +30,8 @@
                 <div class="block  block--bordered  box">
                     {{ currentStep.body | raw }}
 
-                    {% if consultation.consultationStepOpen and consultation.consultationStepOpen.canContribute %}
-                        <p><a class="btn  btn-primary" href="{{ path('app_consultation_show', {'consultationSlug': consultation.slug, 'stepSlug': consultation.consultationStepOpen.slug}) }}">{{ 'step.presentation.participe' | trans({}, 'CapcoAppBundle') }}</a></p>
+                    {% if project.ConsultationStepOpen and project.ConsultationStepOpen.canContribute %}
+                        <p><a class="btn  btn-primary" href="{{ path('app_project_show', {'projectSlug': project.slug, 'stepSlug': project.ConsultationStepOpen.slug}) }}">{{ 'step.presentation.participe' | trans({}, 'CapcoAppBundle') }}</a></p>
                     {% endif %}
                 </div>
 
@@ -44,7 +44,7 @@
                             {% endfor %}
                         </ul>
                         {% if nbPosts > 2 %}
-                            <a href="{{ path('app_consultation_show_posts', {'consultationSlug': consultation.slug}) }}" class="btn  btn-primary  btn--outline">{{ 'step.presentation.posts.see_all'|trans({}, 'CapcoAppBundle') }}</a>
+                            <a href="{{ path('app_project_show_posts', {'projectSlug': project.slug}) }}" class="btn  btn-primary  btn--outline">{{ 'step.presentation.posts.see_all'|trans({}, 'CapcoAppBundle') }}</a>
                         {% endif %}
                     </div>
                 {% endif %}
@@ -58,7 +58,7 @@
                             {% endfor %}
                         </div>
                         {% if nbEvents > 2 %}
-                            <a href="{{ path('app_consultation_show_events', {'consultationSlug': consultation.slug}) }}" class="btn  btn-primary  btn--outline">{{ 'step.presentation.events.see_all'|trans({}, 'CapcoAppBundle') }}</a>
+                            <a href="{{ path('app_project_show_events', {'projectSlug': project.slug}) }}" class="btn  btn-primary  btn--outline">{{ 'step.presentation.events.see_all'|trans({}, 'CapcoAppBundle') }}</a>
                         {% endif %}
                     </div>
                 {% endif %}
@@ -67,9 +67,9 @@
                     <h2 class="h2">{{ 'step.presentation.contributors.title'|trans({}, 'CapcoAppBundle') }}
                         <span class="small excerpt">{{ contributors|length }}</span>
                         {% if is_feature_enabled('share_buttons') %}
-                            <a class="btn btn-primary pull-right" href="mailto:?body={{ consultation | capco_first_step_link(true) | escape('url') }}" title="{{ 'share_button.share_on.email' | trans({}, 'CapcoAppBundle') }}">
+                            <a class="btn btn-primary pull-right" href="mailto:?body={{ project | capco_first_step_link(true) | escape('url') }}" title="{{ 'share_button.share_on.email' | trans({}, 'CapcoAppBundle') }}">
                                 <i class="cap cap-user-add-2"></i>
-                                {{ 'consultation.share_button' | trans({}, 'CapcoAppBundle') }}
+                                {{ 'project.share_button' | trans({}, 'CapcoAppBundle') }}
                             </a>
                         {% endif %}
                     </h2>
@@ -77,18 +77,18 @@
                         {% for contributor in contributors|slice(0,9) %}
                             {% include 'CapcoAppBundle:Default:user_thumbnail.html.twig' with {'user': contributor.user, 'contributions': contributor.total, 'col': 4} only %}
                         {% else %}
-                            {% if consultation.isOpen %}
-                                {{ 'consultation.contributors.participate' | trans({
-                                '%link%': '<a href="' ~ path('app_consultation_show', {'consultationSlug': consultation.slug, 'stepSlug': consultation.consultationStepOpen.slug}) ~'"">' ,
+                            {% if project.isOpen %}
+                                {{ 'project.contributors.participate' | trans({
+                                '%link%': '<a href="' ~ path('app_project_show', {'projectSlug': project.slug, 'stepSlug': project.ConsultationStepOpen.slug}) ~'"">' ,
                                 '%endlink%': '</a>'
                                 }, 'CapcoAppBundle') | raw }}
                             {% else %}
-                                {{ 'consultation.contributors.no' | trans({}, 'CapcoAppBundle')}}
+                                {{ 'project.contributors.no' | trans({}, 'CapcoAppBundle')}}
                             {% endif %}
                         {% endfor %}
                     </div>
                     {% if contributors|length > 9 %}
-                        <a href="{{ path('app_consultation_show_contributors', {'consultationSlug': consultation.slug}) }}" class="btn  btn-primary  btn--outline">
+                        <a href="{{ path('app_project_show_contributors', {'projectSlug': project.slug}) }}" class="btn  btn-primary  btn--outline">
                             {{ 'step.presentation.contributors.see_all'|trans({}, 'CapcoAppBundle') }}
                         </a>
                     {% endif %}

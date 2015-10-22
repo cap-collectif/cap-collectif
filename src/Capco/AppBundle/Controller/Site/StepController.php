@@ -2,7 +2,7 @@
 
 namespace Capco\AppBundle\Controller\Site;
 
-use Capco\AppBundle\Entity\Consultation;
+use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\OtherStep;
 use Capco\AppBundle\Entity\PresentationStep;
 use Capco\AppBundle\Entity\RankingStep;
@@ -18,63 +18,65 @@ use Doctrine\Common\Collections\ArrayCollection;
 class StepController extends Controller
 {
     /**
-     * @Route("/consultation/{consultationSlug}/step/{stepSlug}", name="app_consultation_show_step")
+     * @Route("/project/{projectSlug}/step/{stepSlug}", name="app_project_show_step")
+     * @Route("/consultation/{projectSlug}/step/{stepSlug}", name="app_consultation_show_step")
      * @Template("CapcoAppBundle:Step:show.html.twig")
      * @ParamConverter("step", class="CapcoAppBundle:OtherStep", options={"mapping": {"stepSlug": "slug"}})
      *
-     * @param $consultationSlug
+     * @param           $projectSlug
      * @param OtherStep $step
      *
      * @return array
      */
-    public function showStepAction($consultationSlug, OtherStep $step)
+    public function showStepAction($projectSlug, OtherStep $step)
     {
         if (!$step->canDisplay()) {
             throw new NotFoundHttpException();
         }
 
         $em = $this->getDoctrine()->getManager();
-        $consultation = $em->getRepository('CapcoAppBundle:Consultation')->getOne($consultationSlug);
-        if (!$consultation) {
+        $project = $em->getRepository('CapcoAppBundle:Project')->getOne($projectSlug);
+        if (!$project) {
             throw new NotFoundHttpException();
         }
 
         return [
-            'consultation' => $consultation,
+            'project' => $project,
             'currentStep' => $step,
         ];
     }
 
     /**
-     * @Route("/consultation/{consultationSlug}/presentation/{stepSlug}", name="app_consultation_show_presentation")
+     * @Route("/project/{projectSlug}/presentation/{stepSlug}", name="app_project_show_presentation")
+     * @Route("/consultation/{projectSlug}/presentation/{stepSlug}", name="app_consultation_show_presentation")
      * @Template("CapcoAppBundle:Step:presentation.html.twig")
      * @ParamConverter("step", class="CapcoAppBundle:PresentationStep", options={"mapping" = {"stepSlug": "slug"}})
      *
-     * @param $consultationSlug
+     * @param $projectSlug
      * @param PresentationStep $step
      *
      * @return array
      */
-    public function showPresentationAction($consultationSlug, PresentationStep $step)
+    public function showPresentationAction($projectSlug, PresentationStep $step)
     {
         if (!$step->canDisplay()) {
             throw new NotFoundHttpException();
         }
 
         $em = $this->getDoctrine()->getManager();
-        $consultation = $em->getRepository('CapcoAppBundle:Consultation')->getOne($consultationSlug);
-        if (!$consultation) {
+        $project = $em->getRepository('CapcoAppBundle:Project')->getOne($projectSlug);
+        if (!$project) {
             throw new NotFoundHttpException();
         }
-        $events = $this->get('capco.event.resolver')->getLastByConsultation($consultationSlug, 2);
-        $posts = $this->get('capco.blog.post.repository')->getLastPublishedByConsultation($consultationSlug, 2);
-        $nbEvents = $this->get('capco.event.resolver')->countEvents(null, null, $consultationSlug, null);
-        $nbPosts = $em->getRepository('CapcoAppBundle:Post')->countSearchResults(null, $consultationSlug);
+        $events = $this->get('capco.event.resolver')->getLastByProject($projectSlug, 2);
+        $posts = $this->get('capco.blog.post.repository')->getLastPublishedByProject($projectSlug, 2);
+        $nbEvents = $this->get('capco.event.resolver')->countEvents(null, null, $projectSlug, null);
+        $nbPosts = $em->getRepository('CapcoAppBundle:Post')->countSearchResults(null, $projectSlug);
 
-        $contributors = $this->get('capco.contribution.resolver')->getConsultationContributorsOrdered($consultation, 10, 1);
+        $contributors = $this->get('capco.contribution.resolver')->getProjectContributorsOrdered($project, 10, 1);
 
         return [
-            'consultation' => $consultation,
+            'project' => $project,
             'currentStep' => $step,
             'events' => $events,
             'posts' => $posts,
@@ -85,43 +87,44 @@ class StepController extends Controller
     }
 
     /**
-     * @Route("/consultation/{consultationSlug}/ranking/{stepSlug}", name="app_consultation_show_ranking")
+     * @Route("/project/{projectSlug}/ranking/{stepSlug}", name="app_project_show_ranking")
+     * @Route("/consultation/{projectSlug}/ranking/{stepSlug}", name="app_consultation_show_ranking")
      * @Template("CapcoAppBundle:Step:ranking.html.twig")
      * @ParamConverter("step", class="CapcoAppBundle:RankingStep", options={"mapping" = {"stepSlug": "slug"}})
      *
-     * @param $consultationSlug
+     * @param $projectSlug
      * @param RankingStep $step
      *
      * @return array
      */
-    public function showRankingAction($consultationSlug, RankingStep $step)
+    public function showRankingAction($projectSlug, RankingStep $step)
     {
         if (!$step->canDisplay()) {
             throw new NotFoundHttpException();
         }
 
         $em = $this->getDoctrine()->getManager();
-        $consultation = $em->getRepository('CapcoAppBundle:Consultation')->getOne($consultationSlug);
-        if (!$consultation) {
+        $project = $em->getRepository('CapcoAppBundle:Project')->getOne($projectSlug);
+        if (!$project) {
             throw new NotFoundHttpException();
         }
 
-        $excludedAuthor = !$consultation->getIncludeAuthorInRanking() ? $consultation->getAuthor()->getId() : null;
+        $excludedAuthor = !$project->getIncludeAuthorInRanking() ? $project->getAuthor()->getId() : null;
 
         $nbOpinionsToDisplay = $step->getNbOpinionsToDisplay() !== null ? $step->getNbOpinionsToDisplay() : 10;
         $opinions = $em
             ->getRepository('CapcoAppBundle:Opinion')
-            ->getEnabledByConsultation($consultation, $excludedAuthor, true, $nbOpinionsToDisplay)
+            ->getEnabledByProject($project, $excludedAuthor, true, $nbOpinionsToDisplay)
         ;
 
         $nbVersionsToDisplay = $step->getNbVersionsToDisplay() !== null ? $step->getNbVersionsToDisplay() : 10;
         $versions = $em
             ->getRepository('CapcoAppBundle:OpinionVersion')
-            ->getEnabledByConsultation($consultation, $excludedAuthor, true, $nbVersionsToDisplay)
+            ->getEnabledByProject($project, $excludedAuthor, true, $nbVersionsToDisplay)
         ;
 
         return [
-            'consultation' => $consultation,
+            'project' => $project,
             'currentStep' => $step,
             'opinions' => $opinions,
             'nbOpinionsToDisplay' => $nbOpinionsToDisplay,
@@ -131,36 +134,37 @@ class StepController extends Controller
     }
 
     /**
-     * @Route("/consultation/{consultationSlug}/ranking/{stepSlug}/opinions/{page}", name="app_consultation_show_opinions_ranking", requirements={"page" = "\d+"}, defaults={"page" = 1})
+     * @Route("/project/{projectSlug}/ranking/{stepSlug}/opinions/{page}", name="app_project_show_opinions_ranking", requirements={"page" = "\d+"}, defaults={"page" = 1})
+     * @Route("/consultation/{projectSlug}/ranking/{stepSlug}/opinions/{page}", name="app_consultation_show_opinions_ranking", requirements={"page" = "\d+"}, defaults={"page" = 1})
      * @Template("CapcoAppBundle:Step:opinions_ranking.html.twig")
      * @ParamConverter("step", class="CapcoAppBundle:RankingStep", options={"mapping" = {"stepSlug": "slug"}})
      *
-     * @param $consultationSlug
+     * @param $projectSlug
      * @param RankingStep $step
      *
      * @return array
      */
-    public function showOpinionsRankingAction($consultationSlug, RankingStep $step, $page = 1)
+    public function showOpinionsRankingAction($projectSlug, RankingStep $step, $page = 1)
     {
         if (!$step->canDisplay()) {
             throw new NotFoundHttpException();
         }
 
         $em = $this->getDoctrine()->getManager();
-        $consultation = $em->getRepository('CapcoAppBundle:Consultation')->getOne($consultationSlug);
-        if (!$consultation) {
+        $project = $em->getRepository('CapcoAppBundle:Project')->getOne($projectSlug);
+        if (!$project) {
             throw new NotFoundHttpException();
         }
 
-        $excludedAuthor = !$consultation->getIncludeAuthorInRanking() ? $consultation->getAuthor()->getId() : null;
+        $excludedAuthor = !$project->getIncludeAuthorInRanking() ? $project->getAuthor()->getId() : null;
 
         $opinions = $em
             ->getRepository('CapcoAppBundle:Opinion')
-            ->getEnabledByConsultation($consultation, $excludedAuthor, true, 10, $page)
+            ->getEnabledByProject($project, $excludedAuthor, true, 10, $page)
         ;
 
         return [
-            'consultation' => $consultation,
+            'project' => $project,
             'currentStep' => $step,
             'opinions' => $opinions,
             'page' => $page,
@@ -169,37 +173,38 @@ class StepController extends Controller
     }
 
     /**
-     * @Route("/consultation/{consultationSlug}/ranking/{stepSlug}/versions/{page}", name="app_consultation_show_versions_ranking", requirements={"page" = "\d+"}, defaults={"page" = 1})
+     * @Route("/project/{projectSlug}/ranking/{stepSlug}/versions/{page}", name="app_project_show_versions_ranking", requirements={"page" = "\d+"}, defaults={"page" = 1})
+     * @Route("/consultation/{projectSlug}/ranking/{stepSlug}/versions/{page}", name="app_consultation_show_versions_ranking", requirements={"page" = "\d+"}, defaults={"page" = 1})
      * @Template("CapcoAppBundle:Step:versions_ranking.html.twig")
      * @ParamConverter("step", class="CapcoAppBundle:RankingStep", options={"mapping" = {"stepSlug": "slug"}})
      *
-     * @param $consultationSlug
+     * @param $projectSlug
      * @param RankingStep $step
      * @param $page
      *
      * @return array
      */
-    public function showVersionsRankingAction($consultationSlug, RankingStep $step, $page = 1)
+    public function showVersionsRankingAction($projectSlug, RankingStep $step, $page = 1)
     {
         if (!$step->canDisplay()) {
             throw new NotFoundHttpException();
         }
 
         $em = $this->getDoctrine()->getManager();
-        $consultation = $em->getRepository('CapcoAppBundle:Consultation')->getOne($consultationSlug);
-        if (!$consultation) {
+        $project = $em->getRepository('CapcoAppBundle:Project')->getOne($projectSlug);
+        if (!$project) {
             throw new NotFoundHttpException();
         }
 
-        $excludedAuthor = !$consultation->getIncludeAuthorInRanking() ? $consultation->getAuthor()->getId() : null;
+        $excludedAuthor = !$project->getIncludeAuthorInRanking() ? $project->getAuthor()->getId() : null;
 
         $versions = $em
             ->getRepository('CapcoAppBundle:OpinionVersion')
-            ->getEnabledByConsultation($consultation, $excludedAuthor, true, 10, $page)
+            ->getEnabledByProject($project, $excludedAuthor, true, 10, $page)
         ;
 
         return [
-            'consultation' => $consultation,
+            'project' => $project,
             'currentStep' => $step,
             'versions' => $versions,
             'page' => $page,
@@ -208,44 +213,46 @@ class StepController extends Controller
     }
 
     /**
-     * @Route("/consultation/{consultationSlug}/synthesis/{stepSlug}", name="app_consultation_show_synthesis")
+     * @Route("/project/{projectSlug}/synthesis/{stepSlug}", name="app_project_show_synthesis")
+     * @Route("/consultation/{projectSlug}/synthesis/{stepSlug}", name="app_consultation_show_synthesis")
      * @Template("CapcoAppBundle:Step:synthesis.html.twig")
      * @ParamConverter("step", class="CapcoAppBundle:SynthesisStep", options={"mapping" = {"stepSlug": "slug"}})
      *
-     * @param $consultationSlug
+     * @param $projectSlug
      * @param SynthesisStep $step
      *
      * @return array
      */
-    public function showSynthesisAction($consultationSlug, SynthesisStep $step)
+    public function showSynthesisAction($projectSlug, SynthesisStep $step)
     {
         if (!$step->canDisplay()) {
             throw new NotFoundHttpException();
         }
 
         $em = $this->getDoctrine()->getManager();
-        $consultation = $em->getRepository('CapcoAppBundle:Consultation')->getOne($consultationSlug);
-        if (!$consultation) {
+        $project = $em->getRepository('CapcoAppBundle:Project')->getOne($projectSlug);
+        if (!$project) {
             throw new NotFoundHttpException();
         }
 
         return [
-            'consultation' => $consultation,
+            'project' => $project,
             'currentStep' => $step,
         ];
     }
 
     /**
-     * @Route("/consultation/{consultationSlug}/synthesis/{stepSlug}/edition", name="app_consultation_edit_synthesis")
+     * @Route("/project/{projectSlug}/synthesis/{stepSlug}/edition", name="app_project_edit_synthesis")
+     * @Route("/consultation/{projectSlug}/synthesis/{stepSlug}/edition", name="app_consultation_edit_synthesis")
      * @Template("CapcoAppBundle:Synthesis:main.html.twig")
      * @ParamConverter("step", class="CapcoAppBundle:SynthesisStep", options={"mapping" = {"stepSlug": "slug"}})
      *
-     * @param $consultationSlug
+     * @param $projectSlug
      * @param SynthesisStep $step
      *
      * @return array
      */
-    public function editSynthesisAction($consultationSlug, SynthesisStep $step)
+    public function editSynthesisAction($projectSlug, SynthesisStep $step)
     {
         if (!$step->canDisplay() || !$step->getSynthesis()) {
             throw new NotFoundHttpException();
@@ -256,13 +263,13 @@ class StepController extends Controller
         }
 
         $em = $this->getDoctrine()->getManager();
-        $consultation = $em->getRepository('CapcoAppBundle:Consultation')->getOne($consultationSlug);
-        if (!$consultation) {
+        $project = $em->getRepository('CapcoAppBundle:Project')->getOne($projectSlug);
+        if (!$project) {
             throw new NotFoundHttpException();
         }
 
         return [
-            'consultation' => $consultation,
+            'project' => $project,
             'currentStep' => $step,
         ];
     }

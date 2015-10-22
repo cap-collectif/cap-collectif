@@ -38,7 +38,7 @@
                                         {{ 'admin.fields.recent_contributions.author' | trans({}, 'SonataAdminBundle') }}
                                     </th>
                                     <th class="sonata-ba-list-field-header-text">
-                                        {{ 'admin.fields.recent_contributions.consultation' | trans({}, 'SonataAdminBundle') }}
+                                        {{ 'admin.fields.recent_contributions.project' | trans({}, 'SonataAdminBundle') }}
                                     </th>
                                     <th class="sonata-ba-list-field-header-boolean">
                                         {{ 'admin.fields.recent_contributions.published' | trans({}, 'SonataAdminBundle') }}
@@ -76,8 +76,8 @@
                                             {{ contribution['author'] }}
                                         </td>
                                         <td class="sonata-ba-list-field sonata-ba-list-field-text">
-                                            {% if contribution['consultation'] is defined %}
-                                                {{ contribution['consultation'] }}
+                                            {% if contribution['project'] is defined %}
+                                                {{ contribution['project'] }}
                                             {% else %}
                                                 N/A
                                             {% endif %}

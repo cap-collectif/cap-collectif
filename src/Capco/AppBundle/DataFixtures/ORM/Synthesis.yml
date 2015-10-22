@@ -1,11 +1,11 @@
 Capco\AppBundle\Entity\Synthesis\Synthesis:
     synthesis1:
-        consultationStep: @cstep2
+        ConsultationStep: @cstep2
         sourceType: consultation_step
         enabled: true
         editable: true
     synthesis2:
-        consultationStep: @cstep5
+        ConsultationStep: @cstep5
         sourceType: consultation_step
         enabled: true
         editable: true

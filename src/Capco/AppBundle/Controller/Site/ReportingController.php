@@ -4,7 +4,6 @@ namespace Capco\AppBundle\Controller\Site;
 
 use Capco\AppBundle\Entity\Argument;
 use Capco\AppBundle\Entity\AbstractComment;
-use Capco\AppBundle\Entity\Consultation;
 use Capco\AppBundle\Entity\Idea;
 use Capco\AppBundle\Entity\Opinion;
 use Capco\AppBundle\Entity\Reporting;
@@ -21,10 +20,11 @@ use Symfony\Component\Form\Form;
 class ReportingController extends Controller
 {
     /**
-     * @Route("/consultations/{consultationSlug}/consultation/{stepSlug}/opinions/{opinionTypeSlug}/{opinionSlug}/versions/{versionSlug}/report", name="app_report_opinion_version", defaults={"_feature_flags" = "reporting"})
+     * @Route("/projects/{projectSlug}/consultation/{stepSlug}/opinions/{opinionTypeSlug}/{opinionSlug}/versions/{versionSlug}/report", name="app_report_opinion_version", defaults={"_feature_flags" = "reporting"})
+     * @Route("/consultations/{projectSlug}/consultation/{stepSlug}/opinions/{opinionTypeSlug}/{opinionSlug}/versions/{versionSlug}/report", name="app_report_opinion_version", defaults={"_feature_flags" = "reporting"})
      * @Template("CapcoAppBundle:Reporting:create.html.twig")
      */
-    public function reportingOpinionVersionAction($consultationSlug, $stepSlug, $opinionTypeSlug, $opinionSlug, $versionSlug, Request $request)
+    public function reportingOpinionVersionAction($projectSlug, $stepSlug, $opinionTypeSlug, $opinionSlug, $versionSlug, Request $request)
     {
         if (false === $this->get('security.authorization_checker')->isGranted('ROLE_USER')) {
             throw new AccessDeniedException($this->get('translator')->trans('error.access_restricted', array(), 'CapcoAppBundle'));
@@ -43,7 +43,7 @@ class ReportingController extends Controller
 
         $opinionType = $opinion->getOpinionType();
         $currentStep = $opinion->getStep();
-        $consultation = $currentStep->getConsultation();
+        $project = $currentStep->getProject();
 
         $reporting = new Reporting();
         $form = $this->createForm(new ReportingType(), $reporting);
@@ -60,9 +60,9 @@ class ReportingController extends Controller
 
                 return $this->redirect(
                     $this->generateUrl(
-                        'app_consultation_show_opinion_version',
+                        'app_project_show_opinion_version',
                         [
-                            'consultationSlug' => $consultation->getSlug(),
+                            'projectSlug' => $project->getSlug(),
                             'stepSlug' => $currentStep->getSlug(),
                             'opinionTypeSlug' => $opinionType->getSlug(),
                             'opinionSlug' => $opinion->getSlug(),
@@ -82,18 +82,19 @@ class ReportingController extends Controller
     }
 
     /**
-     * @Route("/consultations/{consultationSlug}/consultation/{stepSlug}/opinions/{opinionTypeSlug}/{opinionSlug}/report", name="app_report_opinion", defaults={"_feature_flags" = "reporting"})
+     * @Route("/projects/{projectSlug}/consultation/{stepSlug}/opinions/{opinionTypeSlug}/{opinionSlug}/report", name="app_report_opinion", defaults={"_feature_flags" = "reporting"})
+     * @Route("/consultations/{projectSlug}/consultation/{stepSlug}/opinions/{opinionTypeSlug}/{opinionSlug}/report", name="app_report_opinion", defaults={"_feature_flags" = "reporting"})
      * @Template("CapcoAppBundle:Reporting:create.html.twig")
      *
      * @param $request
-     * @param $consultationSlug
+     * @param $projectSlug
      * @param $stepSlug
      * @param $opinionTypeSlug
      * @param $opinionSlug
      *
      * @return array
      */
-    public function reportingOpinionAction($consultationSlug, $stepSlug, $opinionTypeSlug, $opinionSlug, Request $request)
+    public function reportingOpinionAction($projectSlug, $stepSlug, $opinionTypeSlug, $opinionSlug, Request $request)
     {
         if (false === $this->get('security.authorization_checker')->isGranted('ROLE_USER')) {
             throw new AccessDeniedException($this->get('translator')->trans('error.access_restricted', array(), 'CapcoAppBundle'));
@@ -111,7 +112,7 @@ class ReportingController extends Controller
 
         $opinionType = $opinion->getOpinionType();
         $currentStep = $opinion->getStep();
-        $consultation = $currentStep->getConsultation();
+        $project = $currentStep->getProject();
 
         $reporting = new Reporting();
         $form = $this->createForm(new ReportingType(), $reporting);
@@ -128,9 +129,9 @@ class ReportingController extends Controller
 
                 return $this->redirect(
                     $this->generateUrl(
-                        'app_consultation_show_opinion',
+                        'app_project_show_opinion',
                         [
-                            'consultationSlug' => $consultation->getSlug(),
+                            'projectSlug' => $project->getSlug(),
                             'stepSlug' => $currentStep->getSlug(),
                             'opinionTypeSlug' => $opinionType->getSlug(),
                             'opinionSlug' => $opinion->getSlug(),
@@ -149,11 +150,12 @@ class ReportingController extends Controller
     }
 
     /**
-     * @Route("/consultations/{consultationSlug}/consultation/{stepSlug}/opinions/{opinionTypeSlug}/{opinionSlug}/sources/{sourceSlug}/report", name="app_report_source", defaults={"_feature_flags" = "reporting"})
+     * @Route("/projects/{projectSlug}/consultation/{stepSlug}/opinions/{opinionTypeSlug}/{opinionSlug}/sources/{sourceSlug}/report", name="app_report_source", defaults={"_feature_flags" = "reporting"})
+     * @Route("/consultations/{projectSlug}/consultation/{stepSlug}/opinions/{opinionTypeSlug}/{opinionSlug}/sources/{sourceSlug}/report", name="app_report_source", defaults={"_feature_flags" = "reporting"})
      * @Template("CapcoAppBundle:Reporting:create.html.twig")
      *
      * @param $request
-     * @param $consultationSlug
+     * @param $projectSlug
      * @param $stepSlug
      * @param $opinionTypeSlug
      * @param $sourceSlug
@@ -161,7 +163,7 @@ class ReportingController extends Controller
      *
      * @return array
      */
-    public function reportingSourceAction($consultationSlug, $opinionTypeSlug, $opinionSlug, $sourceSlug, Request $request)
+    public function reportingSourceAction($projectSlug, $opinionTypeSlug, $opinionSlug, $sourceSlug, Request $request)
     {
         if (false === $this->get('security.authorization_checker')->isGranted('ROLE_USER')) {
             throw new AccessDeniedException($this->get('translator')->trans('error.access_restricted', array(), 'CapcoAppBundle'));
@@ -180,7 +182,7 @@ class ReportingController extends Controller
         $opinion = $source->getLinkedOpinion();
         $opinionType = $opinion->getOpinionType();
         $currentStep = $opinion->getStep();
-        $consultation = $currentStep->getConsultation();
+        $project = $currentStep->getProject();
 
         $reporting = new Reporting();
         $form = $this->createForm(new ReportingType(), $reporting);
@@ -212,11 +214,12 @@ class ReportingController extends Controller
     }
 
     /**
-     * @Route("/consultations/{consultationSlug}/consultation/{stepSlug}/opinions/{opinionTypeSlug}/{opinionSlug}/arguments/{argumentId}/report", name="app_report_argument", defaults={"_feature_flags" = "reporting"})
+     * @Route("/projects/{projectSlug}/consultation/{stepSlug}/opinions/{opinionTypeSlug}/{opinionSlug}/arguments/{argumentId}/report", name="app_report_argument", defaults={"_feature_flags" = "reporting"})
+     * @Route("/consultations/{projectSlug}/consultation/{stepSlug}/opinions/{opinionTypeSlug}/{opinionSlug}/arguments/{argumentId}/report", name="app_report_argument", defaults={"_feature_flags" = "reporting"})
      * @Template("CapcoAppBundle:Reporting:create.html.twig")
      *
      * @param $request
-     * @param $consultationSlug
+     * @param $projectSlug
      * @param $stepSlug
      * @param $opinionTypeSlug
      * @param $argumentId
@@ -224,7 +227,7 @@ class ReportingController extends Controller
      *
      * @return array
      */
-    public function reportingArgumentAction($consultationSlug, $stepSlug, $opinionTypeSlug, $opinionSlug, $argumentId, Request $request)
+    public function reportingArgumentAction($projectSlug, $stepSlug, $opinionTypeSlug, $opinionSlug, $argumentId, Request $request)
     {
         if (false === $this->get('security.authorization_checker')->isGranted('ROLE_USER')) {
             throw new AccessDeniedException($this->get('translator')->trans('error.access_restricted', array(), 'CapcoAppBundle'));
@@ -243,7 +246,7 @@ class ReportingController extends Controller
         $opinion = $argument->getLinkedOpinion();
         $opinionType = $opinion->getOpinionType();
         $currentStep = $opinion->getStep();
-        $consultation = $currentStep->getConsultation();
+        $project = $currentStep->getProject();
 
         $reporting = new Reporting();
         $form = $this->createForm(new ReportingType(), $reporting);

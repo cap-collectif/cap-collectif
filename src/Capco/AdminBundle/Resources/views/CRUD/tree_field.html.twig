@@ -5,7 +5,7 @@
             <li class="sonata-ba-list-field" objectId="{{ element.id }}" >
                 <div class="sonata-tree__item"{% if depth < 2 %} data-treeview-toggled{% endif %}>
                     {% if element.__children | length > 0 %}<i class="fa fa-caret-right" data-treeview-toggler></i>{% endif %}
-                    <a class="sonata-tree__item__edit" href="{{ admin.generateUrl('edit', {'id': element.id, 'consultation_type_id': ctId }) }}">{{ element.title }}</a>
+                    <a class="sonata-tree__item__edit" href="{{ admin.generateUrl('edit', {'id': element.id, 'consultation_step_type_id': ctId }) }}">{{ element.title }}</a>
                 </div>
 
                 {% if element.__children | length %}
@@ -27,7 +27,7 @@
             <div class="sonata-tree__item" data-treeview-toggled>
                 {% if children | length > 0 %}<i class="fa fa-caret-right" data-treeview-toggler></i>{% endif %}
                 {{ form_widget(element, {'attr': {'class': 'hidden', 'checked': true}}) }}
-                <a class="sonata-tree__item__edit" href="{{ admin.generateUrl('edit', {'id': id, 'consultation_type_id': ctId }) }}">{{ label }}</a>
+                <a class="sonata-tree__item__edit" href="{{ admin.generateUrl('edit', {'id': id, 'consultation_step_type_id': ctId }) }}">{{ label }}</a>
             </div>
 
             {% if children | length %}

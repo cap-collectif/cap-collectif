@@ -312,15 +312,15 @@ class OpinionAdmin extends Admin
             throw new \Exception('Invalid opinion type.');
         }
 
-        $consultationType = $root->getConsultationType();
+        $consultationStepType = $root->getConsultationStepType();
 
         $qb = $this->getConfigurationPool()
             ->getContainer()
             ->get('doctrine.orm.entity_manager')
             ->getRepository('CapcoAppBundle:ConsultationStep')
             ->createQueryBuilder('cs')
-            ->where('cs.consultationType = ?0')
-            ->setParameter(0, $consultationType)
+            ->where('cs.consultationStepType = ?0')
+            ->setParameter(0, $consultationStepType)
         ;
 
         return $qb;

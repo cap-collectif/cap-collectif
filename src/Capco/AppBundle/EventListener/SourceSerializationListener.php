@@ -39,20 +39,20 @@ class SourceSerializationListener implements EventSubscriberInterface
         $opinion = $source->getLinkedOpinion();
         $opinionType = $opinion->getOpinionType();
         $step = $opinion->getStep();
-        $consultation = $step->getConsultationAbstractStep()->getConsultation();
+        $project = $step->getProjectAbstractStep()->getProject();
         $user = $this->tokenStorage->getToken()->getUser();
 
         $event->getVisitor()->addData(
             '_links', [
                 'edit' => $this->router->generate('app_edit_source', [
-                    'consultationSlug' => $consultation->getSlug(),
+                    'projectSlug' => $project->getSlug(),
                     'stepSlug' => $step->getSlug(),
                     'opinionTypeSlug' => $opinionType->getSlug(),
                     'opinionSlug' => $opinion->getSlug(),
                     'sourceSlug' => $source->getSlug(),
                 ], true),
                 'report' => $this->router->generate('app_report_source', [
-                    'consultationSlug' => $consultation->getSlug(),
+                    'projectSlug' => $project->getSlug(),
                     'stepSlug' => $step->getSlug(),
                     'opinionTypeSlug' => $opinionType->getSlug(),
                     'opinionSlug' => $opinion->getSlug(),

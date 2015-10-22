@@ -33,7 +33,7 @@ class Section
             'body' => false,
             'nbObjects' => true,
         ],
-        'consultations' => [
+        'projects' => [
             'title' => false,
             'teaser' => true,
             'body' => false,

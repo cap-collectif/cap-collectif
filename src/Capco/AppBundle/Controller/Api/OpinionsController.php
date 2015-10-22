@@ -72,12 +72,12 @@ class OpinionsController extends FOSRestController
             $opinion->setConnections($opinionWithConnections->getConnections());
         }
 
-        $consultation = $opinion->getStep()->getConsultation();
+        $project = $opinion->getStep()->getProject();
 
         return [
             'opinion' => $opinion,
-            'rankingThreshold' => $consultation->getOpinionsRankingThreshold(),
-            'opinionTerm' => $consultation->getOpinionTerm(),
+            'rankingThreshold' => $project->getOpinionsRankingThreshold(),
+            'opinionTerm' => $project->getOpinionTerm(),
         ];
     }
 
@@ -205,7 +205,7 @@ class OpinionsController extends FOSRestController
                     ->getRepository('CapcoAppBundle:OpinionVersion')
                     ->getEnabledByOpinion($opinion, $filter, $trashed, $offset, $limit);
 
-        $consultation = $opinion->getStep()->getConsultation();
+        $project = $opinion->getStep()->getProject();
 
         $versions = [];
         foreach ($paginator as $version) {
@@ -214,8 +214,8 @@ class OpinionsController extends FOSRestController
 
         return [
             'versions' => $versions,
-            'rankingThreshold' => $consultation->getVersionsRankingThreshold(),
-            'opinionTerm' => $consultation->getOpinionTerm(),
+            'rankingThreshold' => $project->getVersionsRankingThreshold(),
+            'opinionTerm' => $project->getOpinionTerm(),
         ];
     }
 
@@ -238,7 +238,7 @@ class OpinionsController extends FOSRestController
      */
     public function getOpinionVersionAction(Opinion $opinion, OpinionVersion $version)
     {
-        $consultation = $opinion->getStep()->getConsultation();
+        $project = $opinion->getStep()->getProject();
 
         $votes = $this->get('doctrine.orm.entity_manager')
             ->getRepository('CapcoAppBundle:OpinionVersion')
@@ -250,8 +250,8 @@ class OpinionsController extends FOSRestController
 
         return [
             'version' => $version,
-            'rankingThreshold' => $consultation->getVersionsRankingThreshold(),
-            'opinionTerm' => $consultation->getOpinionTerm(),
+            'rankingThreshold' => $project->getVersionsRankingThreshold(),
+            'opinionTerm' => $project->getOpinionTerm(),
         ];
     }
 

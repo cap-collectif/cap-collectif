@@ -30,12 +30,12 @@ sonata_admin:
                     - capco_admin.admin.video
                     - capco_admin.admin.page
                     - sonata.media.admin.media
-            admin.group.consultation:
+            admin.group.project:
                 items:
-                    - capco_admin.admin.consultation
+                    - capco_admin.admin.project
                     - capco_admin.admin.appendix_type
                     - capco_admin.admin.category
-                    - capco_admin.admin.consultation_type
+                    - capco_admin.admin.consultation_step_type
             sonata.admin.group.user:
                 items:
                     - sonata.user.admin.user
@@ -117,7 +117,7 @@ sonata_media:
                 small:          { width: 100, quality: 70 }
                 big:            { width: 500, quality: 70 }
                 blockHeader:    { width: 750, height: 500, quality: 70 }
-                consultation:   { width: 360, height: 240, quality: 70 }
+                project:        { width: 360, height: 240, quality: 70 }
                 form:           { height: 150, quality: 70 }
                 idea:           { height: 400, quality: 70 }
                 logo:           { height: 50, quality: 70 }

@@ -65,8 +65,8 @@
             {% include '@CapcoApp/Homepage/intro.html.twig' with {'section': section} only %}
         {% elseif section.type == 'videos' %}
             {{ render(controller('CapcoAppBundle:Site/Homepage:lastVideos', {'max': section.nbObjects, 'offset': 0, 'section': section})) }}
-        {% elseif section.type == 'consultations' %}
-            {{ render(controller('CapcoAppBundle:Site/Homepage:lastConsultations', {'max': section.nbObjects, 'offset': 0, 'section': section})) }}
+        {% elseif section.type == 'projects' %}
+            {{ render(controller('CapcoAppBundle:Site/Homepage:lastProjects', {'max': section.nbObjects, 'offset': 0, 'section': section})) }}
         {% elseif section.type == 'themes' %}
             {{ render(controller('CapcoAppBundle:Site/Homepage:lastThemes', {'max': section.nbObjects, 'offset': 0, 'section': section})) }}
         {% elseif section.type == 'ideas' %}

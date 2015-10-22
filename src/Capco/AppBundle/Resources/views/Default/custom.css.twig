@@ -125,15 +125,15 @@
         color: {{ btnPrimary | raw }};
     }
 
-    .consultation__infos li .value {
+    .project__infos li .value {
         color: {{ mainText | raw }};
     }
 
-    .consultation__infos > li > a:hover .category {
+    .project__infos > li > a:hover .category {
         color: {{ linkHover | raw }};
     }
 
-    .consultation__nav li.consultation__nav--primary.active a {
+    .project__nav li.project__nav--primary.active a {
         -moz-box-shadow: {{ btnPrimary | raw }} 0 -3px 0 {{ btnPrimary | raw }} inset;
         -webkit-box-shadow: {{ btnPrimary | raw }} 0 -3px 0 {{ btnPrimary | raw }} inset;
         box-shadow: 0 -3px 0 {{ btnPrimary | raw }} inset;
@@ -350,7 +350,7 @@
     {% endif %}
 
     {% if header2Bg is not null %}
-        .bg--consultation,
+        .bg--project,
         .bg--theme,
         .bg--post {
             background-color: {{ btnPrimary | raw }};

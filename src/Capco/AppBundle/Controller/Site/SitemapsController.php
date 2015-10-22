@@ -123,9 +123,9 @@ class SitemapsController extends Controller
             }
         }
 
-        // Consultations
+        // Projects
         $urls[] = array(
-            'loc' => $this->get('router')->generate('app_consultation'),
+            'loc' => $this->get('router')->generate('app_project'),
             'changefreq' => 'weekly',
             'priority' => '0.5',
         );
@@ -135,7 +135,7 @@ class SitemapsController extends Controller
         foreach ($em->getRepository('CapcoAppBundle:AbstractStep')->findBy(array(
             'isEnabled' => true,
         )) as $step) {
-            if ($step->getConsultation()->canDisplay()) {
+            if ($step->getProject()->canDisplay()) {
                 $urls[] = array(
                     'loc' => $stepResolver->getLink($step, false),
                     'priority' => '0.5',
@@ -151,7 +151,7 @@ class SitemapsController extends Controller
         )) as $opinion) {
             if ($opinion->canDisplay()) {
                 $urls[] = array(
-                    'loc' => $this->get('router')->generate('app_consultation_show_opinion', array('consultationSlug' => $opinion->getStep()->getConsultation()->getSlug(), 'stepSlug' => $opinion->getStep()->getSlug(), 'opinionTypeSlug' => $opinion->getOpinionType()->getSlug(), 'opinionSlug' => $opinion->getSlug())),
+                    'loc' => $this->get('router')->generate('app_project_show_opinion', array('projectSlug' => $opinion->getStep()->getProject()->getSlug(), 'stepSlug' => $opinion->getStep()->getSlug(), 'opinionTypeSlug' => $opinion->getOpinionType()->getSlug(), 'opinionSlug' => $opinion->getSlug())),
                     'priority' => '2.0',
                     'lastmod' => $opinion->getUpdatedAt()->format(\DateTime::W3C),
                     'changefreq' => 'hourly',

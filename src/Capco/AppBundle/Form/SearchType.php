@@ -23,7 +23,7 @@ class SearchType extends AbstractType
             'all' => 'search.form.types.all',
             'comment' => 'search.form.types.comments',
             'argument' => 'search.form.types.arguments',
-            'consultation' => 'search.form.types.consultations',
+            'project' => 'search.form.types.projects',
             'opinion' => 'search.form.types.opinions',
             'source' => 'search.form.types.sources',
         ];

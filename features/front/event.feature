@@ -13,19 +13,19 @@ Scenario: Anonymous wants to list archived events
   Then I should see 4 ".event" elements
 
 @javascript
-Scenario: Events can be filtered by consultations
+Scenario: Events can be filtered by projects
   Given I visited "events page"
-  And I select "Croissance, innovation, disruption" from "capco_app_event_search_consultation"
+  And I select "Croissance, innovation, disruption" from "capco_app_event_search_project"
   And I wait 5 seconds
   Then I should see 2 ".event" elements
   And I should see "Event with registrations"
   And I should see "Event without registrations"
 
 @javascript
-Scenario: Archived events can be filtered by consultations
+Scenario: Archived events can be filtered by projects
   Given I visited "events page"
   And I follow "Voir les évènements passés"
-  And I select "Croissance, innovation, disruption" from "capco_app_event_search_consultation"
+  And I select "Croissance, innovation, disruption" from "capco_app_event_search_project"
   And I wait 5 seconds
   Then I should see 1 ".event" elements
   And I should see "PHPTour2014"

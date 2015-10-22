@@ -1,0 +1,64 @@
+{% extends '@CapcoApp/Project/show.html.twig' %}
+
+{% block canonical_link %}{{ url('app_project_show_opinions', {'projectSlug': project.slug, 'stepSlug': currentStep.slug, 'opinionTypeSlug': opinionType.slug}) }}{% endblock %}
+
+{% block metaTags %}
+    <meta property="og:title" content="{{ project.title }} - {{ opinionType.title }}" />
+    <meta property="og:url" content="{{ url('app_project_show_opinions', {'projectSlug': project.slug, 'stepSlug': currentStep.slug, 'opinionTypeSlug': opinionType.slug}) }}" />
+    {% if currentStep is defined and currentStep.body %}
+        <meta property="og:description" content="{{ currentStep.body }}" />
+    {% endif %}
+    <meta property="og:type" content="opinions" />
+    {% if project.Cover %}
+        <meta property="og:image" content="{% path project.Cover, 'blockHeader' %}" />
+    {% endif %}
+    <meta property="article:author" content="{{ url('capco_user_profile_show_all', {'slug': project.Author.slug}) }}" />
+    <meta property="article:publisher" content="{{ url('capco_user_profile_show_all', {'slug': project.Author.slug}) }}" />
+{% endblock %}
+
+{% block content %}
+
+    <p id="back-button">
+        <a href="{{ path('app_project_show', {'projectSlug': project.slug, 'stepSlug': currentStep.slug})  }}" class="btn btn-default">
+            <i class="cap cap-arrow-1-1"></i> {{ 'project.show.global.title' | trans({}, 'CapcoAppBundle') }}
+        </a>
+    </p>
+
+    <p id="opinion-type--{{ opinionType.slug }}" class="anchor-offset text-center opinion-type__title level--0">
+        {{ opinionType.title }}<br>
+        <span class="small excerpt">{{ opinionType.subtitle }}</span>
+    </p>
+
+    <div id="opinions--{{ opinionType.slug }}" class="anchor-offset  block  block--bordered">
+        {% include 'CapcoAppBundle:Project:list_header.html.twig' with {
+            'project': project,
+            'currentStep': currentStep,
+            'opinionType': opinionType,
+            'opinions': opinions,
+            'opinions_count': opinions | length,
+            'opinionTerm': project.opinionTerm,
+            'opinionSortOrders': opinionSortOrders,
+        } only %}
+
+        {% if (opinions|length > 0) %}
+        <ul class="media-list  opinion__list">
+            {% for opinion in opinions %}
+                {% include 'CapcoAppBundle:Opinion:blockOpinion.html.twig' with {'opinion': opinion, 'opinionType': opinionType, 'opinionTerm': project.opinionTerm} only %}
+            {% endfor %}
+            </ul>
+        {% else %}
+            <div class="project__empty-block  text-center">
+                <p class="icon  cap-bubble-attention-6"></p>
+                <p>{{ 'opinion.show.none'|trans({}, 'CapcoAppBundle') }}</p>
+            </div>
+        {% endif %}
+    </div>
+
+    {% set params = {'projectSlug': project.slug, 'stepSlug': currentStep.slug, 'opinionTypeSlug': opinionType.slug } %}
+
+    {% if currentRoute == 'app_project_show_opinions_sorted' %}
+        {% set params = params | merge({'opinionsSort': opinionsSort }) %}
+    {% endif %}
+
+    {% include 'CapcoAppBundle:Block:pagination.html.twig' with {'current': page, 'nb': nbPage, 'route': currentRoute, 'params': params} only  %}
+{% endblock %}

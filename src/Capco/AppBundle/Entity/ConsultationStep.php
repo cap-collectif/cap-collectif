@@ -78,10 +78,10 @@ class ConsultationStep extends AbstractStep
 
     /**
      * @var
-     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\ConsultationType")
-     * @ORM\JoinColumn(name="consultation_type_id", onDelete="SET NULL", nullable=true)
+     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\ConsultationStepType")
+     * @ORM\JoinColumn(name="consultation_step_type_id", onDelete="SET NULL", nullable=true)
      */
-    private $consultationType;
+    private $consultationStepType;
 
     public function __construct()
     {
@@ -270,25 +270,25 @@ class ConsultationStep extends AbstractStep
     /**
      * @return mixed
      */
-    public function getConsultationType()
+    public function getConsultationStepType()
     {
-        return $this->consultationType;
+        return $this->consultationStepType;
     }
 
     /**
-     * @param mixed $consultationType
+     * @param mixed $consultationStepType
      */
-    public function setConsultationType($consultationType)
+    public function setConsultationStepType($consultationStepType)
     {
-        $this->consultationType = $consultationType;
+        $this->consultationStepType = $consultationStepType;
     }
 
     // **************************** Custom methods *******************************
 
-    public function getConsultationId()
+    public function getProjectId()
     {
-        return $this->consultationAbstractStep
-                    ->getConsultation()
+        return $this->projectAbstractStep
+                    ->getProject()
                     ->getId()
             ;
     }

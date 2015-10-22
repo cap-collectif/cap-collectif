@@ -31,9 +31,9 @@ class FeaturesCategoryResolver
             'conditions' => ['themes'],
             'features' => [],
         ],
-        'pages.consultations' => [
+        'pages.projects' => [
             'conditions' => [],
-            'features' => ['consultations_form', 'consultation_trash'],
+            'features' => ['projects_form', 'project_trash'],
         ],
         'pages.registration' => [
             'conditions' => ['registration'],

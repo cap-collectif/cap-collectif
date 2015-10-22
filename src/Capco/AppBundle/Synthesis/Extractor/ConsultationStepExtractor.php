@@ -64,8 +64,7 @@ class ConsultationStepExtractor
         $this->previousElements = $synthesis->getElements();
 
         // First we get the opinion types allowed by the consultation step
-        $opinionTypes = $consultationStep->getConsultationType()->getOpinionTypes();
-
+        $opinionTypes = $consultationStep->getConsultationStepType()->getOpinionTypes();
         // Then we start creating or updating the elements from these opinion types
         $this->createElementsFromOpinionTypes($opinionTypes);
 
@@ -85,7 +84,6 @@ class ConsultationStepExtractor
     public function createElementsFromOpinionTypes($opinionTypes, SynthesisElement $parent = null)
     {
         foreach ($opinionTypes as $ot) {
-
             // Create or update element from opinion type
             $elementFromOT = $this->getRelatedElement($ot, $parent);
 
@@ -210,6 +208,8 @@ class ConsultationStepExtractor
      *
      * @param $contribution
      * @param SynthesisElement $parent
+     *
+     * @return SynthesisElement|null
      */
     public function getRelatedElement($contribution, SynthesisElement $parent = null)
     {

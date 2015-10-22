@@ -158,10 +158,10 @@ class Event implements CommentableInterface
 
     /**
      * @var
-     * @ORM\ManyToMany(targetEntity="Capco\AppBundle\Entity\Consultation", inversedBy="events", cascade={"persist"})
-     * @ORM\JoinTable(name="consultation_event")
+     * @ORM\ManyToMany(targetEntity="Capco\AppBundle\Entity\Project", inversedBy="events", cascade={"persist"})
+     * @ORM\JoinTable(name="project_event")
      */
-    private $consultations;
+    private $projects;
 
     /**
      * @var
@@ -193,7 +193,7 @@ class Event implements CommentableInterface
         $this->comments = new ArrayCollection();
         $this->registrations = new ArrayCollection();
         $this->themes = new ArrayCollection();
-        $this->consultations = new ArrayCollection();
+        $this->projects = new ArrayCollection();
         $this->commentsCount = 0;
         $this->updatedAt = new \Datetime();
     }
@@ -352,43 +352,43 @@ class Event implements CommentableInterface
     }
 
     /**
-     * Get consultations.
+     * Get projects.
      *
      * @return \Doctrine\Common\Collections\Collection
      */
-    public function getConsultations()
+    public function getProjects()
     {
-        return $this->consultations;
+        return $this->projects;
     }
 
     /**
-     * Add consultation.
+     * Add project.
      *
-     * @param \Capco\AppBundle\Entity\Consultation $consultation
+     * @param \Capco\AppBundle\Entity\Project $project
      *
      * @return $this
      */
-    public function addConsultation(Consultation $consultation)
+    public function addProject(Project $project)
     {
-        if (!$this->consultations->contains($consultation)) {
-            $this->consultations->add($consultation);
+        if (!$this->projects->contains($project)) {
+            $this->projects->add($project);
         }
-        $consultation->addEvent($this);
+        $project->addEvent($this);
 
         return $this;
     }
 
     /**
-     * Remove consultation.
+     * Remove project.
      *
-     * @param \Capco\AppBundle\Entity\Consultation $consultation
+     * @param \Capco\AppBundle\Entity\Project $project
      *
      * @return $this
      */
-    public function removeConsultation(Consultation $consultation)
+    public function removeProject(Project $project)
     {
-        $this->consultations->removeElement($consultation);
-        $consultation->removeEvent($this);
+        $this->projects->removeElement($project);
+        $project->removeEvent($this);
 
         return $this;
     }
@@ -758,9 +758,9 @@ class Event implements CommentableInterface
             }
         }
 
-        if ($this->consultations->count() > 0) {
-            foreach ($this->consultations as $consultation) {
-                $consultation->removeEvent($this);
+        if ($this->projects->count() > 0) {
+            foreach ($this->projects as $project) {
+                $project->removeEvent($this);
             }
         }
     }

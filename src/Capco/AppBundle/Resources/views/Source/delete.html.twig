@@ -1,6 +1,6 @@
 {% extends '@CapcoApp/base.html.twig' %}
 
-{% block canonical_link %}{{ url('app_delete_source', {'consultationSlug': opinion.step.consultation.slug, 'stepSlug': opinion.step.slug, 'opinionTypeSlug': opinion.opinionType.slug, 'opinionSlug': opinion.slug, 'sourceSlug': source.slug}) }}{% endblock %}
+{% block canonical_link %}{{ url('app_delete_source', {'projectSlug': opinion.step.project.slug, 'stepSlug': opinion.step.slug, 'opinionTypeSlug': opinion.opinionType.slug, 'opinionSlug': opinion.slug, 'sourceSlug': source.slug}) }}{% endblock %}
 
 {% block title %}
     {{ parent() }} - {{ opinion.title }} - {{ 'source.delete.page_title'|trans({'%title%': source.title}, 'CapcoAppBundle') }}
@@ -32,7 +32,7 @@
                         </div>
                         <div class="dialog__footer  box">
                             <div class="pull-right">
-                                <a href="{{ path('app_consultation_show_opinion', {'consultationSlug': opinion.step.consultation.slug, 'stepSlug': opinion.step.slug, 'opinionTypeSlug': opinion.opinionType.slug, 'opinionSlug': opinion.slug}) }}" class="btn  btn-default">{{ 'source.delete.cancel'|trans({}, 'CapcoAppBundle') }}</a>
+                                <a href="{{ path('app_project_show_opinion', {'projectSlug': opinion.step.project.slug, 'stepSlug': opinion.step.slug, 'opinionTypeSlug': opinion.opinionType.slug, 'opinionSlug': opinion.slug}) }}" class="btn  btn-default">{{ 'source.delete.cancel'|trans({}, 'CapcoAppBundle') }}</a>
                                 <button type="submit" class="btn  btn-danger">{{ 'source.delete.submit'|trans({}, 'CapcoAppBundle') }}</button>
                             </div>
                         </div>

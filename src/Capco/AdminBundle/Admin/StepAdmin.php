@@ -16,19 +16,19 @@ class StepAdmin extends Admin
     public function getPersistentParameters()
     {
         $subject = $this->getSubject();
-        $consultationId = null;
+        $projectId = null;
 
-        if ($subject && $subject->getConsultation()) {
-            $consultation = $subject->getConsultation();
-            if ($consultation) {
-                $consultationId = $consultation->getId();
+        if ($subject && $subject->getProject()) {
+            $project = $subject->getProject();
+            if ($project) {
+                $projectId = $project->getId();
             }
         } else {
-            $consultationId = $this->getRequest()->get('consultation_id');
+            $projectId = $this->getRequest()->get('project_id');
         }
 
         return array(
-            'consultation_id' => $consultationId,
+            'project_id' => $projectId,
         );
     }
 
@@ -48,7 +48,7 @@ class StepAdmin extends Admin
     {
         $subject = $this->getSubject();
 
-        $consultationId = $this->getPersistentParameter('consultation_id');
+        $projectId = $this->getPersistentParameter('project_id');
 
         $formMapper
             ->add('title', null, array(
@@ -95,8 +95,8 @@ class StepAdmin extends Admin
                     'label' => 'admin.fields.step.body',
                     'required' => false,
                 ))
-                ->add('consultationType', 'sonata_type_model', array(
-                    'label' => 'admin.fields.consultation.consultation_type',
+                ->add('consultationStepType', 'sonata_type_model', array(
+                    'label' => 'admin.fields.project.consultation_step_type',
                     'required' => true,
                     'btn_add' => false,
                 ))
@@ -111,7 +111,7 @@ class StepAdmin extends Admin
                 ->add('synthesis', 'sonata_type_admin', array(
                         'label' => 'admin.fields.step.synthesis',
                         'required' => true,
-                ), ['link_parameters' => ['consultation_id']]
+                ), ['link_parameters' => ['project_id']]
             );
         } elseif ($subject instanceof RankingStep) {
             $formMapper->add('body', 'ckeditor', [

@@ -2,7 +2,7 @@
 
 namespace Capco\AppBundle\Repository;
 
-use Capco\AppBundle\Entity\Consultation;
+use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\Theme;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\QueryBuilder;
@@ -14,23 +14,23 @@ use Doctrine\ORM\Tools\Pagination\Paginator;
 class EventRepository extends EntityRepository
 {
     /**
-     * Get events depending on theme, consultation and search term, ordered by startAt criteria.
+     * Get events depending on theme, project and search term, ordered by startAt criteria.
      *
      * @param $archived
      * @param null $themeSlug
-     * @param null $consultationSlug
+     * @param null $projectSlug
      * @param null $term
      *
      * @return array
      */
-    public function getSearchResults($archived = null, $themeSlug = null, $consultationSlug = null, $term = null, $limit = null, $offset = null)
+    public function getSearchResults($archived = null, $themeSlug = null, $projectSlug = null, $term = null, $limit = null, $offset = null)
     {
         $qb = $this->getIsEnabledQueryBuilder()
             ->addSelect('a', 'm', 't', 'c')
             ->leftJoin('e.Author', 'a')
             ->leftJoin('a.Media', 'm')
             ->leftJoin('e.themes', 't', 'WITH', 't.isEnabled = :enabled')
-            ->leftJoin('e.consultations', 'c', 'WITH', 'c.isEnabled = :enabled')
+            ->leftJoin('e.projects', 'c', 'WITH', 'c.isEnabled = :enabled')
             ->setParameter('enabled', true)
             ->orderBy('e.startAt', 'ASC')
         ;
@@ -45,9 +45,9 @@ class EventRepository extends EntityRepository
             ;
         }
 
-        if ($consultationSlug !== null && $consultationSlug !== Consultation::FILTER_ALL) {
-            $qb->andWhere('c.slug = :consultation')
-                ->setParameter('consultation', $consultationSlug)
+        if ($projectSlug !== null && $projectSlug !== Project::FILTER_ALL) {
+            $qb->andWhere('c.slug = :project')
+                ->setParameter('project', $projectSlug)
             ;
         }
 
@@ -69,16 +69,16 @@ class EventRepository extends EntityRepository
     }
 
     /**
-     * Count events depending on theme, consultation and search term.
+     * Count events depending on theme, project and search term.
      *
      * @param $archived
      * @param null $themeSlug
-     * @param null $consultationSlug
+     * @param null $projectSlug
      * @param null $term
      *
      * @return array
      */
-    public function countSearchResults($archived = null, $themeSlug = null, $consultationSlug = null, $term = null)
+    public function countSearchResults($archived = null, $themeSlug = null, $projectSlug = null, $term = null)
     {
         $qb = $this->getIsEnabledQueryBuilder()
             ->select('COUNT(e.id)')
@@ -96,11 +96,11 @@ class EventRepository extends EntityRepository
             ;
         }
 
-        if ($consultationSlug !== null && $consultationSlug !== Consultation::FILTER_ALL) {
-            $qb->innerJoin('e.consultations', 'c', 'WITH', 'c.isEnabled = :cEnabled')
-                ->andWhere('c.slug = :consultation')
+        if ($projectSlug !== null && $projectSlug !== Project::FILTER_ALL) {
+            $qb->innerJoin('e.projects', 'c', 'WITH', 'c.isEnabled = :cEnabled')
+                ->andWhere('c.slug = :project')
                 ->setParameter('cEnabled', true)
-                ->setParameter('consultation', $consultationSlug)
+                ->setParameter('project', $projectSlug)
             ;
         }
 
@@ -131,7 +131,7 @@ class EventRepository extends EntityRepository
             ->leftJoin('e.Author', 'a')
             ->leftJoin('e.Media', 'media')
             ->leftJoin('e.themes', 't', 'WITH', 't.isEnabled = :tEnabled')
-            ->leftJoin('e.consultations', 'c', 'WITH', 'c.isEnabled = :cEnabled')
+            ->leftJoin('e.projects', 'c', 'WITH', 'c.isEnabled = :cEnabled')
             ->leftJoin('e.registrations', 'registration', 'WITH', 'registration.confirmed = true')
             ->andWhere('e.slug = :slug')
             ->setParameter('tEnabled', true)
@@ -158,7 +158,7 @@ class EventRepository extends EntityRepository
             ->addSelect('a', 't', 'media', 'c')
             ->leftJoin('e.Author', 'a')
             ->leftJoin('e.themes', 't')
-            ->leftJoin('e.consultations', 'c')
+            ->leftJoin('e.projects', 'c')
             ->leftJoin('e.Media', 'media')
             ->orderBy('e.startAt', 'ASC');
 
@@ -187,7 +187,7 @@ class EventRepository extends EntityRepository
         $qb = $this->getIsEnabledQueryBuilder()
             ->addSelect('a', 'media', 't', 'c')
             ->leftJoin('e.themes', 't')
-            ->leftJoin('e.consultations', 'c')
+            ->leftJoin('e.projects', 'c')
             ->leftJoin('e.Author', 'a')
             ->leftJoin('e.Media', 'media')
             ->andWhere('t.id = :theme')

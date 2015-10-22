@@ -10,7 +10,7 @@ use Doctrine\ORM\EntityRepository;
 class ConsultationStepRepository extends EntityRepository
 {
     /**
-     * Get last open consultation steps.
+     * Get last open project steps.
      *
      * @param int $limit
      * @param int $offset
@@ -21,15 +21,15 @@ class ConsultationStepRepository extends EntityRepository
     {
         $qb = $this->getIsEnabledQueryBuilder()
             ->addSelect('c', 'cas', 't', 'cov')
-            ->leftJoin('cs.consultationAbstractStep', 'cas')
-            ->leftJoin('cas.consultation', 'c')
+            ->leftJoin('cs.projectAbstractStep', 'cas')
+            ->leftJoin('cas.project', 'c')
             ->leftJoin('c.Themes', 't')
             ->leftJoin('c.Cover', 'cov')
             ->andWhere(':now BETWEEN cs.startAt AND cs.endAt')
             ->andWhere('c.isEnabled = :enabled')
             ->setParameter('now', new \DateTime())
             ->setParameter('enabled', true)
-            ->groupBy('cas.consultation')
+            ->groupBy('cas.project')
             ->addOrderBy('cs.endAt', 'DESC');
 
         if ($limit) {
@@ -46,7 +46,7 @@ class ConsultationStepRepository extends EntityRepository
     }
 
     /**
-     * Get last future consultation steps.
+     * Get last future project steps.
      *
      * @param int $limit
      * @param int $offset
@@ -57,15 +57,15 @@ class ConsultationStepRepository extends EntityRepository
     {
         $qb = $this->getIsEnabledQueryBuilder()
             ->addSelect('c', 'cas', 't', 'cov')
-            ->leftJoin('cs.consultationAbstractStep', 'cas')
-            ->leftJoin('cas.consultation', 'c')
+            ->leftJoin('cs.projectAbstractStep', 'cas')
+            ->leftJoin('cas.project', 'c')
             ->leftJoin('c.Themes', 't')
             ->leftJoin('c.Cover', 'cov')
             ->andWhere(':now < cs.startAt')
             ->andWhere('c.isEnabled = :enabled')
             ->setParameter('now', new \DateTime())
             ->setParameter('enabled', true)
-            ->groupBy('cas.consultation')
+            ->groupBy('cas.project')
             ->addOrderBy('cs.startAt', 'DESC');
 
         if ($limit) {
@@ -82,7 +82,7 @@ class ConsultationStepRepository extends EntityRepository
     }
 
     /**
-     * Get last closed consultation steps.
+     * Get last closed project steps.
      *
      * @param int $limit
      * @param int $offset
@@ -93,15 +93,15 @@ class ConsultationStepRepository extends EntityRepository
     {
         $qb = $this->getIsEnabledQueryBuilder()
             ->addSelect('c', 'cas', 't', 'cov')
-            ->leftJoin('cs.consultationAbstractStep', 'cas')
-            ->leftJoin('cas.consultation', 'c')
+            ->leftJoin('cs.projectAbstractStep', 'cas')
+            ->leftJoin('cas.project', 'c')
             ->leftJoin('c.Themes', 't')
             ->leftJoin('c.Cover', 'cov')
             ->andWhere(':now > cs.endAt')
             ->andWhere('c.isEnabled = :enabled')
             ->setParameter('now', new \DateTime())
             ->setParameter('enabled', true)
-            ->groupBy('cas.consultation')
+            ->groupBy('cas.project')
             ->addOrderBy('cs.startAt', 'ASC');
 
         if ($limit) {

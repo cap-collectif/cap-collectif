@@ -67,7 +67,7 @@ class CommentController extends Controller
 
         if ($request->getMethod() == 'POST') {
             if (false == $this->get('capco.comment.resolver')->canAddCommentOn($object)) {
-                throw new AccessDeniedException($this->get('translator')->trans('consultation.error.no_contribute', array(), 'CapcoAppBundle'));
+                throw new AccessDeniedException($this->get('translator')->trans('project.error.no_contribute', array(), 'CapcoAppBundle'));
             }
 
             $form->handleRequest($request);
