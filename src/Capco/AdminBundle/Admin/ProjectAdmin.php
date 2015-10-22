@@ -12,14 +12,16 @@ use Sonata\CoreBundle\Model\Metadata;
 
 class ProjectAdmin extends Admin
 {
-    protected $datagridValues = array(
+    protected $datagridValues = [
         '_sort_order' => 'ASC',
         '_sort_by' => 'title',
-    );
+    ];
 
-    protected $formOptions = array(
+    protected $formOptions = [
         'cascade_validation' => true,
-    );
+    ];
+
+    public $collectStep = null;
 
     /**
      * @param DatagridMapper $datagridMapper
@@ -132,10 +134,10 @@ class ProjectAdmin extends Admin
             ->with('admin.fields.project.group_meta',    ['class' => 'col-md-6'])->end()
             ->with('admin.fields.project.group_ranking', ['class' => 'col-md-6'])->end()
             ->with('admin.fields.project.group_steps',   ['class' => 'col-md-12'])->end()
-            ->end()
         ;
 
         $formMapper
+            ->tab('General')
             // Content
             ->with('admin.fields.project.group_content')
             ->add('title', null, array(
@@ -217,8 +219,10 @@ class ProjectAdmin extends Admin
                 'required' => false,
             ])
             ->end()
+            ->end()
 
             // Steps
+            ->tab('Steps')
             ->with('admin.fields.project.group_steps')
             ->add('steps', 'sonata_type_collection', array(
                 'label' => 'admin.fields.project.steps',
@@ -229,6 +233,8 @@ class ProjectAdmin extends Admin
                 'inline' => 'table',
                 'sortable' => 'position',
             ))
+            ->end()
+            ->end()
         ;
     }
 
@@ -239,29 +245,32 @@ class ProjectAdmin extends Admin
     {
         $subject = $this->getSubject();
 
+        $this->collectStep = $subject->getCurrentStep();
+
         $showMapper
-            ->add('title', null, array(
+            ->with('admin.fields.project.general', ['class' => 'col-md-3'])
+            ->add('title', null, [
                 'label' => 'admin.fields.project.title',
-            ))
-            ->add('isEnabled', 'boolean', array(
+            ])
+            ->add('isEnabled', 'boolean', [
                 'label' => 'admin.fields.project.is_enabled',
-            ))
-            ->add('exportable', null, array(
+            ])
+            ->add('exportable', null, [
                 'label' => 'admin.fields.project.exportable',
-            ))
-            ->add('publishedAt', null, array(
+            ])
+            ->add('publishedAt', null, [
                 'label' => 'admin.fields.project.published_at',
-            ))
-            ->add('Author', null, array(
+            ])
+            ->add('Author', null, [
                 'label' => 'admin.fields.project.author',
-            ))
-            ->add('Cover', null, array(
+            ])
+            ->add('Cover', null, [
                 'template' => 'CapcoAdminBundle:Project:cover_show_field.html.twig',
-                'label' => 'admin.fields.project.cover',
-            ))
-            ->add('video', null, array(
+                'label'    => 'admin.fields.project.cover'
+            ])
+            ->add('video', null, [
                 'label' => 'admin.fields.project.video',
-            ))
+            ])
         ;
 
         if ($this->getConfigurationPool()->getContainer()->get('capco.toggle.manager')->isActive('themes')) {
@@ -271,21 +280,21 @@ class ProjectAdmin extends Admin
         }
 
         $showMapper
-            ->add('steps', null, array(
+            ->add('steps', null, [
                 'label' => 'admin.fields.project.steps',
-            ))
-            ->add('events', null, array(
+            ])
+            ->add('events', null, [
                 'label' => 'admin.fields.project.events',
-            ))
-            ->add('posts', null, array(
-                'label' => 'admin.fields.project.posts',
-            ))
-            ->add('createdAt', null, array(
+            ])
+            ->add('posts', null, [
+                'label' => 'adminfields.project.posts',
+            ])
+            ->add('createdAt', null, [
                 'label' => 'admin.fields.project.created_at',
-            ))
-            ->add('updatedAt', null, array(
+            ])
+            ->add('updatedAt', null, [
                 'label' => 'admin.fields.project.updated_at',
-            ))
+            ])
             ->add('opinionsRankingThreshold', null, [
                 'label' => 'admin.fields.project.ranking.opinions_threshold',
             ])
@@ -295,7 +304,16 @@ class ProjectAdmin extends Admin
             ->add('includeAuthorInRanking', null, [
                 'label' => 'admin.fields.project.ranking.include_author',
             ])
+            ->end()
         ;
+
+        $showMapper
+            ->with('admin.fields.project.proposals', ['class' => 'col-md-9'])
+            ->add('proposals', null, [
+                'label'    => false,
+                'template' => 'CapcoAdminBundle:Project:proposals_show_field.html.twig',
+            ])
+            ->end();
     }
 
     // For mosaic view

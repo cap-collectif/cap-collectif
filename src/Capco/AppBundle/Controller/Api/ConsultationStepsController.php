@@ -6,6 +6,7 @@ use Capco\AppBundle\Entity\Opinion;
 use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\ConsultationStep;
 use Capco\AppBundle\Entity\OpinionType;
+use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Form\Api\OpinionType as OpinionForm;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
@@ -22,7 +23,6 @@ class ConsultationStepsController extends FOSRestController
     /**
      * @Security("has_role('ROLE_USER')")
      * @Post("/projects/{projectId}/steps/{stepId}/opinions")
-     * @Post("/consultations/{projectId}/steps/{stepId}/opinions")
      * @ParamConverter("project", options={"mapping": {"projectId": "id"}})
      * @ParamConverter("step", options={"mapping": {"stepId": "id"}})
      * @View(statusCode=201, serializerGroups={})

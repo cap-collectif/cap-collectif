@@ -6,3 +6,34 @@ Capco\AppBundle\Entity\Proposal:
         enabled: true
         isTrashed: false
         author: @user502
+        proposalForm: @proposalform1
+    proposal2:
+        title: Rénovation du gymnase
+        body: |
+             <text(100)>
+        enabled: true
+        rating: 4
+        annotation: Lancer l'appel d'offre
+        isTrashed: false
+        author: @user3
+        proposalForm: @proposalform1
+    proposal3:
+        title: Installation de bancs sur la place de Mairie
+        body: |
+             <text(100)>
+        enabled: true
+        rating: 3
+        annotation: Vérifier les normes de sécurité
+        isTrashed: false
+        author: @user5
+        proposalForm: @proposalform1
+    proposal4:
+        title: Plantation de tulipes dans les jardinière du parking de l'église
+        body: |
+             <text(100)>
+        enabled: true
+        rating: 1
+        annotation: Renvoyer l'idée à l'église
+        isTrashed: false
+        author: @user7
+        proposalForm: @proposalform1

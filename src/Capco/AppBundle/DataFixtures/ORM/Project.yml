@@ -44,4 +44,3 @@ Capco\AppBundle\Entity\Project:
         themes: [@theme3]
         publishedAt: <dateTimeBetween('-50 days', 'now')>
         exportable: true
-

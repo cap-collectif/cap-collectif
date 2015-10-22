@@ -4,3 +4,4 @@ Capco\AppBundle\Entity\Question:
         helpText: Décrivez l'importance de votre proposition avec un adjectif (ex: indispensable, souhaitable ...)
         questionChoices: []
         questionType: @questiontype1
+        proposalForm: @proposalform1

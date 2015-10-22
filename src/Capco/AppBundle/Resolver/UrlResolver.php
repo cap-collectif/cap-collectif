@@ -162,6 +162,8 @@ class UrlResolver
             return $this->router->generate('admin_capco_app_opinionversion_show', array('id' => $object->getId()), $absolute);
         }
 
+
+
         return '';
     }
 }

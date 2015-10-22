@@ -71,6 +71,14 @@ services:
         calls:
             - [ setTranslationDomain, [SonataAdminBundle]]
 
+    capco_admin.admin.proposal:
+        class: Capco\AdminBundle\Admin\ProposalAdmin
+        arguments: [~, Capco\AppBundle\Entity\Proposal, SonataAdminBundle:CRUD]
+        tags:
+            - {name: sonata.admin, manager_type: orm, group: admin.group.moderation, label: admin.label.proposal}
+        calls:
+            - [ setTranslationDomain, [SonataAdminBundle]]
+
     capco_admin.admin.footer_social_network:
         class: Capco\AdminBundle\Admin\FooterSocialNetworkAdmin
         arguments: [~, Capco\AppBundle\Entity\FooterSocialNetwork, SonataAdminBundle:CRUD]

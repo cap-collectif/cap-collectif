@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\Entity;
 
 use Capco\AppBundle\Model\CommentableInterface;
+use Capco\AppBundle\Resolver\ProposalResolver;
 use Capco\AppBundle\Traits\CommentableTrait;
 use Capco\AppBundle\Traits\EnableTrait;
 use Capco\AppBundle\Traits\TimestampableTrait;
@@ -30,6 +31,8 @@ class Proposal implements CommentableInterface
     use VotableTrait;
     use EnableTrait;
     use TrashableTrait;
+
+    public static $ratings = [1,2,3,4,5];
 
     /**
      * @var int
@@ -123,26 +126,23 @@ class Proposal implements CommentableInterface
      */
     private $proposalResponses;
 
+    protected $proposalResolver;
 
     /**
      * Constructor.
      */
     public function __construct()
     {
-        $this->votes         = new ArrayCollection();
-        $this->comments      = new ArrayCollection();
-        $this->voteCount     = 0;
-        $this->commentsCount = 0;
-        $this->updatedAt     = new \Datetime();
+        $this->votes            = new ArrayCollection();
+        $this->comments         = new ArrayCollection();
+        $this->voteCount        = 0;
+        $this->commentsCount    = 0;
+        $this->updatedAt        = new \Datetime();
     }
 
     public function __toString()
     {
-        if ($this->getId) {
-            return $this->getTitle();
-        } else {
-            return 'New proposal';
-        }
+        return $this->getTitle();
     }
 
 

@@ -830,7 +830,7 @@ class Project
      * @ORM\PreRemove
      */
     public function deleteProject()
-    {
+	{
         if ($this->themes->count() > 0) {
             foreach ($this->themes as $theme) {
                 $theme->removeProject($this);

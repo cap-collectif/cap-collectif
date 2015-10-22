@@ -16,6 +16,7 @@ parameters:
   capco.twig.section_resolver.class: Capco\AppBundle\Twig\SectionExtension
   capco.url.resolver.class: Capco\AppBundle\Resolver\UrlResolver
   capco.vote.resolver.class: Capco\AppBundle\Resolver\VoteResolver
+  capco.proposal.resolver.class: Capco\AppBundle\Resolver\ProposalResolver
 
 services:
   capco.comment.resolver:
@@ -95,3 +96,7 @@ services:
   capco.vote.resolver:
     class: %capco.vote.resolver.class%
     arguments: [@router, @capco.url.resolver]
+
+  capco.proposal.resolver:
+    class: %capco.proposal.resolver.class%
+    arguments: [@capco.url.resolver]

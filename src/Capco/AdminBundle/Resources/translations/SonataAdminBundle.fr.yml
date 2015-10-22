@@ -32,7 +32,8 @@ admin.label.highlighted: A la une
 admin.label.idea: Idées
 admin.label.menu_item: Navigation
 admin.label.newsletter_subscription: "Inscrits à la lettre d'information"
-admin.label.opinion: Propositions
+admin.label.proposal: Budget / Propositions
+admin.label.opinion: Consultation / Propositions
 admin.label.opinion_type: Éléments de structure
 admin.label.opinion_version: Modifications
 admin.label.page: Pages statiques
@@ -214,6 +215,17 @@ admin:
       trashed_opinion_count: Propositions dans la corbeille
       updated_at: Mise à jour
       video: Vidéo
+      general: Général
+      proposals: Propositions
+      proposals_table:
+        id: Id
+        title: Titre
+        author: Auteur
+        enabled: Publié
+        updatedAt: Date de mise à jour
+        yes: Oui
+        no: Non
+        actions: Actions
     project_abstractstep:
       position: Position
       steps: Étapes
@@ -400,6 +412,22 @@ admin:
       menu_items: Menus
       updated_at: Mise à jour
       created_at: Création
+    proposal:
+      group_publication: Options de publication
+      group_content: Proposition
+      title: Titre
+      body: Contenu
+      author: Auteur
+      rating: Note
+      annotation: Annotation
+      enabled: Publié
+      isTrashed: Dans la corbeille
+      trashedReason: Raison de la mise dans la corbeille
+      updated_at: Mise à jour
+      created_at: Création
+      help:
+        rating: Cette note ne sera pas visible sur le site.
+        annotation: Cette annotation ne sera pas visible sur le site.
     recent_contributions:
       actions: Actions
       author: Auteur

@@ -15,6 +15,7 @@ sonata_admin:
             admin.group.moderation:
                 items:
                     - capco_admin.admin.reporting
+                    - capco_admin.admin.proposal
                     - capco_admin.admin.opinion
                     - capco_admin.admin.opinion_version
                     - capco_admin.admin.argument

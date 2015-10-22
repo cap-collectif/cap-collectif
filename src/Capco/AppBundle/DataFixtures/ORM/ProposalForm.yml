@@ -3,5 +3,3 @@ Capco\AppBundle\Entity\ProposalForm:
         step: @collectstep1
         title: Collecte des propositions pour le budget 2016 de la Ville de Rennes
         description: <text(100)>
-        questions: [@question1]
-        proposals: [@proposal1]
