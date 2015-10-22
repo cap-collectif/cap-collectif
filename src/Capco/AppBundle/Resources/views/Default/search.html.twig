@@ -70,7 +70,8 @@
                     <ul class="search__results {% if nbPages > 1 %} block {% endif %}">
                         {% for result in results %}
                             {% set default_title = 'search.results.default_title' | trans({}, 'CapcoAppBundle') %}
-                            {% set type_label = 'search.results.type.' ~ result.result.hit['_type'] %}
+                            {% set type_label    = 'search.results.type.' ~ result.result.hit['_type'] %}
+
                             {% if result.result.hit['_type'] == 'user' %}
                                 {% set title = result.result.hit['highlight']['username'] is defined ? result.result.hit['highlight']['username'][0] : result.transformed.username %}
                             {% else %}
@@ -89,13 +90,21 @@
                                             {{ result.result.hit['_source']['updatedAt'] | localizeddate('medium', 'none', app.request.locale) }}
                                         </span>
                                 </h4>
-                                {% for key, highlights in result.result.hit['highlight'] if key != 'title' and key != 'username' %}
-                                    <p class="excerpt small">
-                                        {% for excerpt in highlights %}
-                                            {{ excerpt | raw }}...
-                                        {% endfor %}
-                                    </p>
-                                {% endfor %}
+                                {% if result.result.hit['highlight'] is defined %}
+                                    {% for key, highlights in result.result.hit['highlight'] if key != 'title' and key != 'username' %}
+                                        <p class="excerpt small">
+                                            {% for excerpt in highlights %}
+                                                {{ excerpt | raw }}...
+                                            {% endfor %}
+                                        </p>
+                                    {% endfor %}
+                                {% else %}
+                                    {% for key in ['title', 'body'] if attribute(result.transformed, key) is defined %}
+                                        <p class="excerpt small">
+                                            {{ attribute(result.transformed, key)|truncate(175) }}...
+                                        </p>
+                                    {% endfor %}
+                                {% endif %}
                             </li>
                         {% endfor %}
                     </ul>

@@ -34,36 +34,32 @@ class SearchResolver
      */
     public function searchAll($page, $term, $type = 'all', $sort = 'score')
     {
-        $results    = [];
-        $count      = 0;
         $from       = ($page - 1) * self::RESULT_PER_PAGE;
 
-        if ($term) {
+        if (!empty(trim($term))) {
             $termQuery = $this->getTermQuery($term);
             if ('all' !== $type) {
                 $query = new Query($this->getTypeFilteredQuery($type, $termQuery));
             } else {
                 $query = new Query($termQuery);
             }
-
-            if ($sort !== null && $sort !== 'score') {
-                $query->setSort($this->getSortSettings($sort));
-            }
-
-            $query->setHighlight($this->getHighlightSettings());
-
-            $query->setFrom($from);
-            $query->setSize(self::RESULT_PER_PAGE);
-
-            $resultSet = $this->index->search($query);
-            $count = $resultSet->getTotalHits();
-
-            if ($useTransformation) {
-                $results = $this->transformer->hybridTransform($resultSet->getResults());
-            } else {
-                $results = $resultSet->getResults();
-            }
+        } else {
+            $termQuery = new Query\MatchAll();
         }
+
+        if ($sort !== null && $sort !== 'score') {
+            $query->setSort($this->getSortSettings($sort));
+        }
+
+        $query->setHighlight($this->getHighlightSettings());
+
+        $query->setFrom($from);
+        $query->setSize(self::RESULT_PER_PAGE);
+
+        $resultSet = $this->index->search($query);
+        $count = $resultSet->getTotalHits();
+
+        $results = $this->transformer->hybridTransform($resultSet->getResults());
 
         return ['count' => $count, 'results' => $results, 'pages' => ceil($count / self::RESULT_PER_PAGE)];
     }
