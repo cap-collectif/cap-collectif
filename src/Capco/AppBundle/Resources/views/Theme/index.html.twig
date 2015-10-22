@@ -3,17 +3,6 @@
 {% block canonical_link %}{{ url('app_theme') }}{% endblock %}
 
 {% set title = capco_site_parameter_value('themes.jumbotron.title') %}
-{% set jumbotron_body = capco_site_parameter_value('themes.jumbotron.body') %}
-{% set content_body = capco_site_parameter_value('themes.content.body') %}
-
-{% block metaTags %}
-    {% include 'CapcoAppBundle:Default:meta.html.twig' with {
-        'title':       (title ?: 'theme.index.titles'|trans({}, 'CapcoAppBundle')),
-        'description': (jumbotron_body|striptags ?: content_body|striptags|truncate(250, true)),
-        'url':         url('app_theme')
-    } only %}
-{% endblock %}
-
 {% block title %}
     {% if null != title %}
         {{ parent() }} - {{ title }}
@@ -30,6 +19,7 @@
             {% else %}
                 <h1>{{ 'theme.index.titles'|trans({}, 'CapcoAppBundle') }}</h1>
             {% endif %}
+            {% set jumbotron_body = capco_site_parameter_value('themes.jumbotron.body') %}
             {% if null != jumbotron_body %}
                 {{ jumbotron_body|raw }}
             {% endif %}
@@ -40,6 +30,7 @@
 {% block body %}
 
     <div class="container  container--custom">
+        {% set content_body = capco_site_parameter_value('themes.content.body') %}
         {% if null != content_body %}
             {{ content_body|raw }}
         {% endif %}

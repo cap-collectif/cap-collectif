@@ -2,18 +2,6 @@
 
 {% block canonical_link %}{{ url('app_project_show_opinion', {'projectSlug': project.slug, 'stepSlug': currentStep.slug, 'opinionTypeSlug': opinionType.slug, 'opinionSlug': opinion.slug}) }}{% endblock %}
 
-{% block metaTags %}
-    {% set projectCover %}{% if project.Cover %}{% path project.Cover, 'blockHeader' %}{% endif %}{% endset %}
-    {% include 'CapcoAppBundle:Default:meta.html.twig' with {
-        'title':       opinion.title,
-        'description': opinion.body|striptags|truncate(250, true),
-        'url':         url('app_project_show_opinion', {'projectSlug': project.slug, 'stepSlug': currentStep.slug, 'opinionTypeSlug': opinionType.slug, 'opinionSlug': opinion.slug}),
-        'type':        'opinion',
-        'image':       projectCover,
-        'author':      url('capco_user_profile_show_all', {'slug': opinion.Author.slug})
-    } only %}
-{% endblock %}
-
 {% block title %}
     {{ parent() }} - {{ opinion.title }}
 {% endblock %}

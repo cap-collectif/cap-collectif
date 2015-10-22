@@ -2,14 +2,6 @@
 
 {% block canonical_link %}{{ url('app_page_show', {'slug': page.slug}) }}{% endblock %}
 
-{% block metaTags %}
-    {% include 'CapcoAppBundle:Default:meta.html.twig' with {
-        'title':       page.title,
-        'description': page.body|striptags|truncate(250, true),
-        'url':         url('app_page_show', {'slug': page.slug})
-    } only %}
-{% endblock %}
-
 {% block title %}
     {{ parent() }} - {{ page.title }}
 {% endblock %}

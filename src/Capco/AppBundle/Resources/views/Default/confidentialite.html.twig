@@ -3,13 +3,6 @@
 
 {% block canonical_link %}{{ url('app_confidentialite') }}{% endblock %}
 
-{% block metaTags %}
-    {% include 'CapcoAppBundle:Default:meta.html.twig' with {
-        'title': (title ?: 'confidentialite.title'|trans({}, 'CapcoAppBundle')),
-        'url':   url('app_confidentialite')
-    } only %}
-{% endblock %}
-
 {% block title %}
         {{ parent() }} - {{ 'confidentialite.title' | trans({}, 'CapcoAppBundle') }}
 {% endblock %}

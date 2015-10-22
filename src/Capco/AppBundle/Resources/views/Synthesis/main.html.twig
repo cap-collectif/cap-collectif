@@ -4,14 +4,6 @@
 
 {% block canonical_link %}{{ url('app_project_edit_synthesis', {'projectSlug': project.slug, 'stepSlug': currentStep.slug}) }}{% endblock %}
 
-{% block metaTags %}
-    {% include 'CapcoAppBundle:Default:meta.html.twig' with {
-        'title':       currentStep.title,
-        'description': currentStep.body|striptags|truncate(250, true),
-        'url':         url('app_project_edit_synthesis', {'projectSlug': project.slug, 'stepSlug': currentStep.slug}),
-    } only %}
-{% endblock %}
-
 {% block title %}
     {{ parent() }} - {{ currentStep.title }}
 {% endblock %}
