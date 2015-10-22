@@ -340,7 +340,7 @@ class Theme
      */
     public function getProjects()
     {
-        return $this->Projects;
+        return $this->projects;
     }
 
     /**
@@ -532,7 +532,7 @@ class Theme
     public function countEnabledProjects()
     {
         $count = 0;
-        foreach ($this->Projects as $project) {
+        foreach ($this->projects as $project) {
             if ($project->getIsEnabled()) {
                 ++$count;
             }

@@ -285,10 +285,10 @@ class ConsultationStep extends AbstractStep
 
     // **************************** Custom methods *******************************
 
-    public function getConsultationId()
+    public function getProjectId()
     {
-        return $this->consultationAbstractStep
-                    ->getConsultation()
+        return $this->projectAbstractStep
+                    ->getProject()
                     ->getId()
             ;
     }

@@ -1,4 +1,4 @@
-Feature: Projet
+Feature: Project
 
   Scenario: Can not sort or filter if feature projects_form is disabled
     Given I visited "projects page"
@@ -62,7 +62,7 @@ Feature: Projet
 
   Scenario: Project should contain allowed types only
     Given I am logged in as user
-    And I visited "project page" with:
+    And I visited "consultation page" with:
       | projectSlug   | strategie-technologique-de-l-etat-et-services-publics |
       | stepSlug      | collecte-des-avis-pour-une-meilleur-strategie         |
     Then I should see 4 "Opinion nav item" on current page
@@ -70,7 +70,7 @@ Feature: Projet
   Scenario: Presentation step should display correct number of element
     Given feature "calendar" is enabled
     And feature "blog" is enabled
-    And I visited "project page" with:
+    And I visited "consultation page" with:
       | projectSlug | croissance-innovation-disruption |
       | stepSlug    | collecte-des-avis                |
     And I follow "Présentation"
@@ -79,7 +79,7 @@ Feature: Projet
 
   Scenario: Events menu for project should display correct number of events
     Given feature "calendar" is enabled
-    And I visited "project page" with:
+    And I visited "consultation page" with:
       | projectSlug | croissance-innovation-disruption |
       | stepSlug    | collecte-des-avis                |
     And I follow "events_link"
@@ -87,53 +87,53 @@ Feature: Projet
 
   Scenario: Posts menu for project should display correct number of posts
     Given feature "blog" is enabled
-    And I visited "project page" with:
+    And I visited "consultation page" with:
       | projectSlug | croissance-innovation-disruption |
       | stepSlug    | collecte-des-avis                |
     And I follow "posts_link"
     And I should see 5 ".media--news" elements
 
   Scenario: Project header should display correct number of votes
-    Given I visited "project page" with:
+    Given I visited "consultation page" with:
       | projectSlug | croissance-innovation-disruption |
       | stepSlug    | collecte-des-avis                |
-    Then I should see "206 votes"
+    Then I should see "7 votes"
 
   @javascript
   Scenario: Project header should display correct number of contributions
-    Given I visited "project page" with:
+    Given I visited "consultation page" with:
       | projectSlug | croissance-innovation-disruption |
       | stepSlug    | collecte-des-avis                |
-    Then I should see "121 contributions"
+    Then I should see "124 contributions"
     And I hover over the "#contributions-counter-pill" element
     And I wait 5 seconds
     And I should see "23 propositions"
-    And I should see "68 arguments"
+    And I should see "71 arguments"
     And I should see "30 sources"
 
   Scenario: Project header should display correct number of participants
-    Given I visited "project page" with:
+    Given I visited "consultation page" with:
       | projectSlug | croissance-innovation-disruption |
       | stepSlug    | collecte-des-avis                |
     Then I should see "21 participants"
 
   Scenario: Can download a project in xslx format
     Given I visited "home page"
-    When I try to download "projets/croissance-innovation-disruption/projet/collecte-des-avis/download/xlsx"
+    When I try to download "projects/croissance-innovation-disruption/consultation/collecte-des-avis/download/xlsx"
     Then I should see in the header "Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
 
   Scenario: Can download a project in csv format
     Given I visited "home page"
-    When I try to download "projets/croissance-innovation-disruption/projet/collecte-des-avis/download/csv"
+    When I try to download "projects/croissance-innovation-disruption/consultation/collecte-des-avis/download/csv"
     Then I should see in the header "Content-Type: text/csv; charset=UTF-8"
 
   Scenario: Can download a project in xls format
     Given I visited "home page"
-    When I try to download "projets/croissance-innovation-disruption/projet/collecte-des-avis/download/xls"
+    When I try to download "projects/croissance-innovation-disruption/consultation/collecte-des-avis/download/xls"
     Then I should see in the header "Content-Type: application/vnd.ms-excel"
 
   Scenario: Can not have access to download if export is disabled
-    Given I visited "project page" with:
+    Given I visited "consultation page" with:
       | projectSlug   | strategie-technologique-de-l-etat-et-services-publics |
       | stepSlug      | collecte-des-avis-pour-une-meilleur-strategie         |
     Then I should not see "Exporter"
@@ -145,14 +145,14 @@ Feature: Projet
 
   Scenario: Can not access trash if feature is disabled
     Given I am logged in as user
-    And I visited "project page" with:
+    And I visited "consultation page" with:
       | projectSlug | croissance-innovation-disruption |
       | stepSlug    | collecte-des-avis                |
     Then I should not see "Corbeille"
 
   Scenario: Can not access trash if not logged in
     Given feature "project_trash" is enabled
-    And I visited "project page" with:
+    And I visited "consultation page" with:
       | projectSlug | croissance-innovation-disruption |
       | stepSlug    | collecte-des-avis                |
     When I follow "Corbeille"
@@ -161,7 +161,7 @@ Feature: Projet
   Scenario: Project trash display correct numbers of elements
     Given feature "project_trash" is enabled
     And I am logged in as user
-    And I visited "project page" with:
+    And I visited "consultation page" with:
       | projectSlug | croissance-innovation-disruption |
       | stepSlug    | collecte-des-avis                |
     When I follow "Corbeille"
@@ -169,7 +169,7 @@ Feature: Projet
     And I should see "132" in the "span.badge" element
 
   Scenario: I should not see opinion types menu when only one type is allowed
-    Given I visited "project page" with:
+    Given I visited "consultation page" with:
       | projectSlug | projet-vide |
       | stepSlug    | projet      |
     Then I should see 0 ".project__nav" on current page

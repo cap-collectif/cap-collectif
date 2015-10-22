@@ -21,7 +21,7 @@
                             {% for opinionSortOrderKey, opinionSortOrder in opinionSortOrders %}
                                 <li>
                                     <a
-                                        href="{{ path('app_consultation_show_opinions_sorted', {consultationSlug: consultation.slug, stepSlug: currentStep.slug, opinionTypeSlug: opinionType.slug, opinionsSort: opinionSortOrderKey}) }}"
+                                        href="{{ path('app_consultation_show_opinions_sorted', {projectSlug: project.slug, stepSlug: currentStep.slug, opinionTypeSlug: opinionType.slug, opinionsSort: opinionSortOrderKey}) }}"
                                         title="{{ 'opinion.sort.sort_by' | trans({'%name%': opinionType.title ~ ' - ' ~ opinionType.subtitle, '%sortOrder%': ('opinion.sort.' ~ opinionSortOrderKey) | trans({}, 'CapcoAppBundle')}, 'CapcoAppBundle') }}"
                                         >{{ opinionSortOrder | trans({}, 'CapcoAppBundle') }}</a>
                                 </li>

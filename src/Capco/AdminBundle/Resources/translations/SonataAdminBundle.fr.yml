@@ -406,7 +406,7 @@ admin:
       body: Contenu
       project: Projet
       created_at: Création
-      number: "{1} 1 contribution à traiter| ]1,Inf[ %count% contributions à traiter"
+      number: "[0, 1] %count% contribution à traiter| ]1,Inf[ %count% contributions à traiter"
       published: Publié
       show: Contribution à traiter
       title: Titre

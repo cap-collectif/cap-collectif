@@ -22,14 +22,13 @@ class ConsultationStepsController extends FOSRestController
     /**
      * @Security("has_role('ROLE_USER')")
      * @Post("/projects/{projectId}/steps/{stepId}/opinions")
-     * @Post("/consultations/{projectId}/steps/{stepId}/opinions")
      * @ParamConverter("project", options={"mapping": {"projectId": "id"}})
      * @ParamConverter("step", options={"mapping": {"stepId": "id"}})
      * @View(statusCode=201, serializerGroups={})
      * @param Request $request
      * @param Project $project
      * @param ConsultationStep $step
-     * @return \Capco\AppBundle\Entity\Argument|\FOS\RestBundle\View\View
+     * @return \FOS\RestBundle\View\View
      */
     public function postOpinionAction(Request $request, Project $project, ConsultationStep $step)
     {

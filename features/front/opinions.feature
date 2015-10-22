@@ -3,7 +3,7 @@ Feature: Opinions
   @database
   Scenario: Can create an opinion of contribuable type in opened project
     Given I am logged in as user
-    And I visited "project page" with:
+    And I visited "consultation page" with:
       | projectSlug | croissance-innovation-disruption |
       | stepSlug         | collecte-des-avis                |
     When I follow "btn-add--les-causes-1"
@@ -15,21 +15,21 @@ Feature: Opinions
 
   Scenario: Can not create an opinion of non-contribuable type
     Given I am logged in as user
-    And I visited "project page" with:
+    And I visited "consultation page" with:
       | projectSlug | croissance-innovation-disruption |
       | stepSlug         | collecte-des-avis                |
     Then I should not see "Proposer" in the "#opinions--le-probleme-constate-1" element
 
   Scenario: Can not create an opinion in closed project
     Given I am logged in as user
-    And I visited "project page" with:
+    And I visited "consultation page" with:
       | projectSlug   | strategie-technologique-de-l-etat-et-services-publics |
       | stepSlug           | collecte-des-avis-pour-une-meilleur-strategie         |
     Then I should see "Projet participatif terminé. La période de participation est maintenant terminée. Merci à tous d'avoir contribué."
     And I should not see "Proposer"
 
   Scenario: Can not create an opinion when not logged in
-    Given I visited "project page" with:
+    Given I visited "consultation page" with:
       | projectSlug | croissance-innovation-disruption |
       | stepSlug         | collecte-des-avis                |
     When I follow "btn-add--les-causes-1"

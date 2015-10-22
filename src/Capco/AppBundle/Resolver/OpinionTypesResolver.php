@@ -124,7 +124,7 @@ class OpinionTypesResolver
         }
 
         $allowed = false;
-        $opinionTypes = $this->getAllForConsultationStepType($ConsultationStepType);
+        $opinionTypes = $this->getAllForConsultationStepType($consultationStepType);
         foreach ($opinionTypes as $ot) {
             if ($ot->getId() === $opinionType->getId()) {
                 $allowed = true;

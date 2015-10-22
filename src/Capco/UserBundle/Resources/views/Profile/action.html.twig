@@ -7,10 +7,12 @@
             </div>
         </div>
         <ul class="settings__nav  nav nav-pills nav-stacked">
-            <li role="presentation" class="{% if app.request.attributes.get('_route') == 'fos_user_profile_edit' %}active{% endif %} ">
-                <a href="{{ path('fos_user_profile_edit') }}">{{ 'user.profile.edit.account' | trans({}, 'CapcoAppBundle') }}</a>
+            <li role="presentation" class="{% if app.request.attributes.get('_route') == 'capco_profile_edit' %}active{% endif %} ">
+                <a href="{{ path('capco_profile_edit') }}">{{ 'user.profile.edit.account' | trans({}, 'CapcoAppBundle') }}</a>
             </li>
-            <li role="presentation" class="{% if app.request.attributes.get('_route') == 'fos_user_change_password' %}active{% endif %} "><a href="{{ path('sonata_user_change_password') }}">{{ 'user.profile.edit.password' | trans({}, 'CapcoAppBundle') }}</a></li>
+            <li role="presentation" class="{% if app.request.attributes.get('_route') == 'fos_user_change_password' %}active{% endif %} ">
+                <a href="{{ path('fos_user_change_password') }}">{{ 'user.profile.edit.password' | trans({}, 'CapcoAppBundle') }}</a>
+            </li>
         </ul>
     </div>
 </div>

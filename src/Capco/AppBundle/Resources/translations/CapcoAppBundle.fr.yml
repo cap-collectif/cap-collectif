@@ -811,6 +811,7 @@ event:
   searchform:
     term: Terme
     theme: Thème
+    all_projects: Tous les projets
     project: Projet participatif
     search: Rechercher
     all_themes: Tous les thèmes
