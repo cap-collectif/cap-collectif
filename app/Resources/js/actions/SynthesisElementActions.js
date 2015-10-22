@@ -1,6 +1,5 @@
 import AppDispatcher from '../dispatchers/AppDispatcher';
 import Fetcher from '../services/Fetcher';
-import {DISMISS_MESSAGE} from '../constants/MessageConstants';
 import {RECEIVE_COUNT, RECEIVE_ELEMENTS, RECEIVE_ELEMENTS_SUCCESS, RECEIVE_ELEMENTS_FAILURE, RECEIVE_ELEMENT, RECEIVE_ELEMENT_SUCCESS, RECEIVE_ELEMENT_FAILURE, EXPAND_NAVBAR_ITEM, SELECT_NAVBAR_ITEM, CREATE_ELEMENT, ARCHIVE_ELEMENT, NOTE_ELEMENT, COMMENT_ELEMENT, NAME_ELEMENT, MOVE_ELEMENT, DIVIDE_ELEMENT, UPDATE_ELEMENT_SUCCESS, UPDATE_ELEMENT_FAILURE, CREATE_ELEMENT_SUCCESS, CREATE_ELEMENT_FAILURE, NAVBAR_DEPTH} from '../constants/SynthesisElementConstants';
 
 const idOf = (val) => {
@@ -210,14 +209,6 @@ export default {
     AppDispatcher.dispatch({
       actionType: SELECT_NAVBAR_ITEM,
       elementId: elementId,
-    });
-  },
-
-  dismissMessage(message, type) {
-    AppDispatcher.dispatch({
-      actionType: DISMISS_MESSAGE,
-      message: message,
-      type: type,
     });
   },
 
