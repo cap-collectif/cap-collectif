@@ -27,6 +27,7 @@ const UpdateModal = React.createClass({
     return {
       parentId: this.getElementParentId(element),
       title: element ? element.title : null,
+      description: element ? element.description : null,
       elements: [],
       expanded: {
         root: true,
@@ -49,6 +50,7 @@ const UpdateModal = React.createClass({
         this.setState({
           parentId: this.getElementParentId(nextProps.element),
           title: nextProps.element.title,
+          description: nextProps.element.description,
           expanded: this.getExpandedBasedOnElement(),
         });
       }
@@ -110,11 +112,13 @@ const UpdateModal = React.createClass({
     const data = {
       'parent': this.state.parentId,
       'title': this.state.title,
+      'description': this.state.description,
     };
     if (typeof this.props.process === 'function') {
       const element = this.props.element;
       element.parent = data.parent;
       element.title = data.title;
+      element.description = data.description;
       this.props.process(element);
       return;
     }
@@ -165,6 +169,17 @@ const UpdateModal = React.createClass({
     );
   },
 
+  renderDescription() {
+    return (
+      <div className="modal__action">
+        <h2 className="h4">
+          {' ' + this.getIntlMessage('edition.action.update.field.description')}
+        </h2>
+        <Input type="textarea" id="update_element_description" name="update_element[description]" className="update-element__description" valueLink={this.linkState('description')} />
+      </div>
+    );
+  },
+
   renderParent() {
     return (
       <div className="modal__action">
@@ -200,6 +215,7 @@ const UpdateModal = React.createClass({
         </Modal.Header>
         <Modal.Body>
           {this.renderTitle()}
+          {this.renderDescription()}
           {this.renderParent()}
         </Modal.Body>
         <Modal.Footer>

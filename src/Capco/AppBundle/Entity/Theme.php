@@ -35,6 +35,7 @@ class Theme
 
     /**
      * @var int
+     *
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
@@ -43,6 +44,7 @@ class Theme
 
     /**
      * @var string
+     *
      * @ORM\Column(name="title", type="string", length=255)
      * @Assert\NotNull()
      * @Assert\NotBlank()
@@ -50,7 +52,6 @@ class Theme
     private $title;
 
     /**
-     * @var string
      * @Gedmo\Slug(fields={"title"}, updatable=false)
      * @ORM\Column(length=255)
      */
@@ -58,18 +59,21 @@ class Theme
 
     /**
      * @var string
+     *
      * @ORM\Column(name="teaser", type="string", length=255, nullable=true)
      */
     private $teaser;
 
     /**
      * @var bool
+     *
      * @ORM\Column(name="is_enabled", type="boolean")
      */
     private $isEnabled = true;
 
     /**
      * @var int
+     *
      * @ORM\Column(name="position", type="integer")
      * @Assert\NotNull()
      */
@@ -77,18 +81,21 @@ class Theme
 
     /**
      * @var int
+     *
      * @ORM\Column(name="status", type="integer", nullable=true)
      */
     private $status;
 
     /**
      * @var string
+     *
      * @ORM\Column(name="body", type="text", nullable=true)
      */
     private $body;
 
     /**
      * @var
+     *
      * @ORM\ManyToOne(targetEntity="Capco\UserBundle\Entity\User")
      * @ORM\JoinColumn(name="author_id", referencedColumnName="id", onDelete="SET NULL")
      */
@@ -109,31 +116,31 @@ class Theme
     private $updatedAt;
 
     /**
-     * @var ArrayCollection
+     * @var
      * @ORM\ManyToMany(targetEntity="Capco\AppBundle\Entity\Project", mappedBy="themes", cascade={"persist"})
      */
     private $projects;
 
     /**
-     * @var ArrayCollection
+     * @var
      * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\Idea", mappedBy="theme", cascade={"persist", "remove"})
      */
     private $ideas;
 
     /**
-     * @var ArrayCollection
+     * @var
      * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\Proposal", mappedBy="theme", cascade={"persist", "remove"})
      */
     private $proposals;
 
     /**
-     * @var ArrayCollection
+     * @var
      * @ORM\ManyToMany(targetEntity="Capco\AppBundle\Entity\Event", mappedBy="themes", cascade={"persist"})
      */
     private $events;
 
     /**
-     * @var ArrayCollection
+     * @var
      * @ORM\ManyToMany(targetEntity="Capco\AppBundle\Entity\Post", mappedBy="themes", cascade={"persist"})
      */
     private $posts;

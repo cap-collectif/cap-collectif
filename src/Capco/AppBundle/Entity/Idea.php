@@ -24,9 +24,9 @@ class Idea implements CommentableInterface
     use ValidableTrait;
 
     public static $sortCriterias = [
-        'last'     => 'idea.sort.last',
-        'old'      => 'idea.sort.old',
-        'popular'  => 'idea.sort.popular',
+        'last' => 'idea.sort.last',
+        'old' => 'idea.sort.old',
+        'popular' => 'idea.sort.popular',
         'comments' => 'idea.sort.comments',
     ];
 
