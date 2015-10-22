@@ -53,6 +53,13 @@ class SearchResolver
             $query->setSort($this->getSortSettings($sort));
         }
 
+        if ('all' !== $type) {
+            $query = new Query($this->getTypeFilteredQuery($type, $termQuery));
+        } else {
+            $query = new Query($termQuery);
+        }
+
+        $query->setSort($this->getSortSettings($sort));
         $query->setHighlight($this->getHighlightSettings());
 
         $query->setFrom($from);
@@ -117,18 +124,18 @@ class SearchResolver
 
     protected function getSortSettings($sort)
     {
-        $term = null;
+        $term = '_score';
         if ($sort === 'date') {
             $term = 'updatedAt';
-        }
-        if ($term === null) {
-            return;
         }
 
         return [
             $term => [
                 'order' => 'desc',
             ],
+            'createdAt' => [
+                'order' => 'desc',
+            ]
         ];
     }
 
