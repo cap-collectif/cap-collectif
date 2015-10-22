@@ -3,7 +3,7 @@ import Comment from './Comment';
 const CommentList = React.createClass({
   propTypes: {
     root: React.PropTypes.bool,
-    comments: React.PropTypes.array,
+    comments: React.PropTypes.array.isRequired,
   },
   mixins: [ReactIntl.IntlMixin],
 
@@ -12,7 +12,7 @@ const CommentList = React.createClass({
       return <ul></ul>;
     }
 
-    const classes = React.addons.classSet({
+    const classes = classNames({
       'media-list': true,
       'opinion__list': true,
       'comment-answers': !this.props.root,
@@ -23,7 +23,14 @@ const CommentList = React.createClass({
         {
           this.props.comments.map((comment) => {
             if (comment.can_contribute) {
-              return <Comment {...this.props} key={comment.id} comment={comment} root={this.props.root} />;
+              return (
+                <Comment
+                  {...this.props}
+                  key={comment.id}
+                  comment={comment}
+                  root={this.props.root}
+                />
+              );
             }
             return null;
           })

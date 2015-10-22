@@ -10,7 +10,6 @@ const OpinionPage = React.createClass({
   propTypes: {
     opinionId: React.PropTypes.number.isRequired,
     versionId: React.PropTypes.number,
-    isReportingEnabled: React.PropTypes.bool.isRequired,
   },
   mixins: [ReactIntl.IntlMixin],
 

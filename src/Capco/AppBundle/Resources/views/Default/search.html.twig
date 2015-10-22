@@ -2,13 +2,6 @@
 
 {% block canonical_link %}{{ url('app_search') }}{% endblock %}
 
-{% block metaTags %}
-    {% include 'CapcoAppBundle:Default:meta.html.twig' with {
-        'title': 'search.title' | trans({}, 'CapcoAppBundle'),
-        'url':   url('app_search')
-    } only %}
-{% endblock %}
-
 {% block title %}
         {{ parent() }} - {{ 'search.title' | trans({}, 'CapcoAppBundle') }}
 {% endblock %}
@@ -26,7 +19,7 @@
 
         <div class="container  container--custom">
             {{ form_errors(form.term) }}
-            <div class="row">
+            <div clas="row">
                 <div class="col-xs-12 col-sm-9 col-md-6 input-group">
                     {{ form_widget(form.term) }}
                     <span class="input-group-btn">

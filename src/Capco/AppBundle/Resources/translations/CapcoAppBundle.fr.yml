@@ -749,7 +749,7 @@ blog:
     theme: Thème
     project: Projet participatif
     all_themes: Tous les thèmes
-    all_projects: Tous les projets
+    projects: Tous les projets
     no_result:  Aucun article ne correspond à ces critères de recherche.
   show:
     in_theme: dans

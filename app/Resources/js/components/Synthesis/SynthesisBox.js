@@ -3,7 +3,6 @@ import ViewBox from './ViewBox';
 import EditBox from './EditBox';
 import FlashMessages from '../Utils/FlashMessages';
 import SynthesisElementStore from '../../stores/SynthesisElementStore';
-import SynthesisElementActions from '../../actions/SynthesisElementActions';
 
 const SynthesisBox = React.createClass({
   propTypes: {
@@ -50,10 +49,6 @@ const SynthesisBox = React.createClass({
       });
   },
 
-  dismissMessage(message, type) {
-    SynthesisElementActions.dismissMessage(message, type);
-  },
-
   renderBoxMode() {
     if (this.state.synthesis !== null) {
       if (this.props.mode === 'view') {
@@ -75,11 +70,7 @@ const SynthesisBox = React.createClass({
   render() {
     return (
       <div className="synthesis__box" >
-        <FlashMessages
-          errors={this.state.messages.errors}
-          success={this.state.messages.success}
-          onDismissMessage={this.dismissMessage}
-        />
+        <FlashMessages errors={this.state.messages.errors} success={this.state.messages.success} />
         { this.renderBoxMode() }
       </div>
     );

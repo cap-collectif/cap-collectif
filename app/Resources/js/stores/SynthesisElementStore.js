@@ -1,6 +1,5 @@
 import {RECEIVE_COUNT, RECEIVE_ELEMENTS, RECEIVE_ELEMENTS_SUCCESS, RECEIVE_ELEMENTS_FAILURE, RECEIVE_ELEMENT, RECEIVE_ELEMENT_SUCCESS, RECEIVE_ELEMENT_FAILURE, EXPAND_NAVBAR_ITEM, SELECT_NAVBAR_ITEM, CREATE_ELEMENT, ARCHIVE_ELEMENT, NOTE_ELEMENT, COMMENT_ELEMENT, MOVE_ELEMENT, DIVIDE_ELEMENT, NAME_ELEMENT, UPDATE_ELEMENT_SUCCESS, UPDATE_ELEMENT_FAILURE, CREATE_ELEMENT_SUCCESS, CREATE_ELEMENT_FAILURE} from '../constants/SynthesisElementConstants';
 import BaseStore from './BaseStore';
-import {DISMISS_MESSAGE} from '../constants/MessageConstants';
 import ArrayHelper from '../services/ArrayHelper';
 
 class SynthesisElementStore extends BaseStore {
@@ -220,12 +219,6 @@ class SynthesisElementStore extends BaseStore {
       this._isProcessing = false;
       this._isElementSync = false;
       this._resetInboxSync();
-      this.emitChange();
-      break;
-    case DISMISS_MESSAGE:
-      this._messages[action.type] = this._messages[action.type].filter((message) => {
-        return message !== action.message;
-      });
       this.emitChange();
       break;
     default: break;

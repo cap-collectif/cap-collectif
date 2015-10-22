@@ -5,6 +5,7 @@ import LoginOverlay from '../Utils/LoginOverlay';
 import ShareButtonDropdown from '../Utils/ShareButtonDropdown';
 import LoginStore from '../../stores/LoginStore';
 import OpinionVersionForm from './OpinionVersionForm';
+import OpinionReportButton from './OpinionReportButton';
 
 const ButtonToolbar = ReactBootstrap.ButtonToolbar;
 const Button = ReactBootstrap.Button;
@@ -12,7 +13,6 @@ const Button = ReactBootstrap.Button;
 const OpinionButtons = React.createClass({
   propTypes: {
     opinion: React.PropTypes.object.isRequired,
-    isReportingEnabled: React.PropTypes.bool.isRequired,
   },
   mixins: [ReactIntl.IntlMixin],
 
@@ -114,21 +114,6 @@ const OpinionButtons = React.createClass({
     }
   },
 
-  renderReportButton() {
-    const reported = this.props.opinion.has_user_reported;
-    if (this.props.isReportingEnabled && !this.isTheUserTheAuthor()) {
-      return (
-        <Button
-          className="opinion__action--report pull-right btn--outline btn-dark-gray"
-          href={reported ? null : this.props.opinion._links.report} active={reported}>
-          <i className="cap cap-flag-1"></i>
-          { ' ' }
-          { reported ? this.getIntlMessage('global.report.reported') : this.getIntlMessage('global.report.submit') }
-        </Button>
-      );
-    }
-  },
-
   render() {
     const opinion = this.props.opinion;
     return (
@@ -137,7 +122,7 @@ const OpinionButtons = React.createClass({
         {this.isContribuable() ? <LoginOverlay children={ this.renderVoteButton('mitige') } /> : null}
         {this.isContribuable() ? <LoginOverlay children={ this.renderVoteButton('nok') } /> : null}
         {this.renderEditButton()}
-        {this.renderReportButton()}
+        <OpinionReportButton opinion={opinion} />
         <ShareButtonDropdown className="pull-right" title={opinion.title} url={opinion._links.show} />
       </ButtonToolbar>
     );
