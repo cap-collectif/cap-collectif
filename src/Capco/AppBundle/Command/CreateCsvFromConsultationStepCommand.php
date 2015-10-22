@@ -36,7 +36,7 @@ class CreateCsvFromConsultationStepCommand extends ContainerAwareCommand
             $filename = $cs->getProject()->getSlug().'_'.$cs->getSlug().'.csv';
             $path = $this->getContainer()->getParameter('kernel.root_dir');
             $fs->dumpFile($path.'/../web/media/'.$filename, $content);
-            $output->writeln('Export '.$filename.' have been created.');
+            $output->writeln('The export file "'.$filename.'" has been created.');
         }
     }
 }
