@@ -77,7 +77,14 @@ abstract class Comment implements VotableInterface
     protected $isEnabled = true;
 
     /**
-     * @var
+     * @var int
+     *
+     * @ORM\Column(name="vote_count", type="integer")
+     */
+    protected $voteCount = 0;
+
+    /**
+     * @var User
      *
      * @ORM\ManyToOne(targetEntity="Capco\UserBundle\Entity\User", inversedBy="comments")
      * @ORM\JoinColumn(name="author_id", referencedColumnName="id", onDelete="CASCADE", nullable=true)
@@ -243,6 +250,31 @@ abstract class Comment implements VotableInterface
 
     /**
      * @return mixed
+     * Get voteCount.
+     *
+     * @return int
+     */
+    public function getVoteCount()
+    {
+        return $this->voteCount;
+    }
+
+    /**
+     * Set voteCount.
+     *
+     * @param int $voteCount
+     *
+     * @return Argument
+     */
+    public function setVoteCount($voteCount)
+    {
+        $this->voteCount = $voteCount;
+
+        return $this;
+    }
+
+    /**
+     * @return User
      */
     public function getAuthor()
     {
@@ -250,7 +282,8 @@ abstract class Comment implements VotableInterface
     }
 
     /**
-     * @param mixed $Author
+     * @param User $Author
+     * @return $this
      */
     public function setAuthor($Author)
     {
