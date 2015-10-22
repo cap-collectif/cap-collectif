@@ -4,6 +4,7 @@ namespace Capco\AppBundle\Resolver;
 
 use Elastica\Index;
 use Elastica\Query;
+use Elastica\Query\AbstractQuery;
 use Elastica\Query\MultiMatch;
 use Elastica\Query\Filtered;
 use Elastica\Filter\Type;
@@ -43,6 +44,7 @@ class SearchResolver
             } else {
                 $query = new Query($termQuery);
             }
+            $termQuery = $this->getSearchQuery($term);
         } else {
             $termQuery = new Query\MatchAll();
         }
@@ -64,8 +66,13 @@ class SearchResolver
         return ['count' => $count, 'results' => $results, 'pages' => ceil($count / self::RESULT_PER_PAGE)];
     }
 
-    // get filtered query with type filter and term query
-    public function getTypeFilteredQuery($type, $termQuery)
+    /**
+     * get filtered query with type filter and term query
+     * @param string        $type
+     * @param AbstractQuery $termQuery
+     * @return Filtered
+     */
+    public function getTypeFilteredQuery($type, AbstractQuery $termQuery)
     {
         $typeFilter = new Type($type);
 
@@ -73,8 +80,10 @@ class SearchResolver
     }
 
     // get multi match query on term
-    protected function getTermQuery($term)
+    protected function getSearchQuery($term)
     {
+        $boolQuery = new Query\Bool();
+
         $termQuery = new MultiMatch();
         $termQuery->setQuery($term);
         $termQuery->setFields([
@@ -88,7 +97,22 @@ class SearchResolver
             'biography',
         ]);
 
-        return $termQuery;
+        $shouldQuery = new MultiMatch();
+        $shouldQuery->setQuery($term);
+        $shouldQuery->setFields([
+            'title.std',
+            'strippedBody.std',
+            'strippedObject.std',
+            'body.std',
+            'teaser.std',
+            'username.std',
+            'biography.std',
+        ]);
+
+        $boolQuery->addMust($termQuery);
+        $boolQuery->addShould($shouldQuery);
+
+        return $boolQuery;
     }
 
     protected function getSortSettings($sort)

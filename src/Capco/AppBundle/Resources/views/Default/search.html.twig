@@ -80,7 +80,7 @@
                             <li>
                                 <h4 class="h4 search-result__title">
                                         <span class="label label-default search-result__type">{{ type_label | trans({}, 'CapcoAppBundle') }}</span>
-                                        {% if result.transformed.isTrashed == true %}
+                                        {% if attribute(result.transformed, 'isTrashed') is defined and result.transformed.isTrashed == true %}
                                             <span class="label label-default">{{ 'comment.trashed.label' | trans({}, 'CapcoAppBundle') }}</span>
                                         {% endif %}
                                         <a class="search-result__link" href="{{ result.transformed | capco_url }}">
@@ -101,7 +101,7 @@
                                 {% else %}
                                     {% for key in ['title', 'body'] if attribute(result.transformed, key) is defined %}
                                         <p class="excerpt small">
-                                            {{ attribute(result.transformed, key)|truncate(175) }}...
+                                            {{ attribute(result.transformed, key)|striptags|truncate(175) }}
                                         </p>
                                     {% endfor %}
                                 {% endif %}
