@@ -19,7 +19,7 @@
 
 	<div class="container">
         <h2 class="h2">{{ 'error.contribute'|trans({}, 'CapcoAppBundle') }}</h2>
-        {{ render(controller('CapcoAppBundle:Site/Project:lastProjects', {'max': 4, 'offset': 0})) }}
+        {{ render(controller('CapcoAppBundle:Site/Consultation:lastConsultations', {'max': 4, 'offset': 0})) }}
     </div>
 
 {% endblock %}
