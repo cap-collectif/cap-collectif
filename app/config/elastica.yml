@@ -5,6 +5,9 @@ fos_elastica:
   indexes:
     app:
       index_name: app_prod
+      settings:
+        number_of_shards: 1
+        number_of_replicas: 0
       finder: ~
       types:
       # User
