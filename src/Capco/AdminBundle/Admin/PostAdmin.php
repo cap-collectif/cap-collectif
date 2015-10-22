@@ -33,8 +33,8 @@ class PostAdmin extends Admin
         }
 
         $datagridMapper
-            ->add('projects', null, array(
-                'label' => 'admin.fields.blog_post.projects',
+            ->add('consultations', null, array(
+                'label' => 'admin.fields.blog_post.consultations',
             ))
             ->add('body', null, array(
                 'label' => 'admin.fields.blog_post.body',
@@ -83,8 +83,8 @@ class PostAdmin extends Admin
         }
 
         $listMapper
-            ->add('projects', null, array(
-                'label' => 'admin.fields.blog_post.projects',
+            ->add('consultations', null, array(
+                'label' => 'admin.fields.blog_post.consultations',
             ))
             ->add('createdAt', null, array(
                 'label' => 'admin.fields.blog_post.created_at',
@@ -143,8 +143,8 @@ class PostAdmin extends Admin
         }
 
         $formMapper
-            ->add('projects', 'sonata_type_model', array(
-                'label' => 'admin.fields.blog_post.projects',
+            ->add('consultations', 'sonata_type_model', array(
+                'label' => 'admin.fields.blog_post.consultations',
                 'required' => false,
                 'multiple' => true,
                 'by_reference' => false,
@@ -202,8 +202,8 @@ class PostAdmin extends Admin
         }
 
         $showMapper
-            ->add('projects', null, array(
-                'label' => 'admin.fields.blog_post.projects',
+            ->add('consultations', null, array(
+                'label' => 'admin.fields.blog_post.consultations',
             ))
             ->add('abstract', null, array(
                 'label' => 'admin.fields.blog_post.abstract',

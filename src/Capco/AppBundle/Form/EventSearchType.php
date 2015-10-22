@@ -5,7 +5,7 @@ namespace Capco\AppBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Capco\AppBundle\Repository\ThemeRepository;
-use Capco\AppBundle\Repository\ProjectRepository;
+use Capco\AppBundle\Repository\ConsultationRepository;
 use Capco\AppBundle\Toggle\Manager;
 
 class EventSearchType extends AbstractType
@@ -53,18 +53,18 @@ class EventSearchType extends AbstractType
                 );
         }
 
-        $builder->add('project', 'entity', array(
+        $builder->add('consultation', 'entity', array(
             'required' => false,
-            'class' => 'CapcoAppBundle:Project',
+            'class' => 'CapcoAppBundle:Consultation',
             'property' => 'title',
-            'label' => 'event.searchform.project',
+            'label' => 'event.searchform.consultation',
             'translation_domain' => 'CapcoAppBundle',
-            'query_builder' => function (ProjectRepository $cr) {
+            'query_builder' => function (ConsultationRepository $cr) {
                 return $cr->createQueryBuilder('c')
                     ->where('c.isEnabled = :enabled')
                     ->setParameter('enabled', true);
             },
-            'empty_value' => 'event.searchform.all_projects',
+            'empty_value' => 'event.searchform.all_consultations',
             'attr' => array('onchange' => 'this.form.submit()'),
         ));
     }

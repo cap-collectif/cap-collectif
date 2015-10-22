@@ -18,11 +18,11 @@
 
         <div class="box">
             <h2 class="theme__title  h3"><a href="{{ path('app_theme_show', {'slug': theme.slug}) }}">{{ theme.title }}</a></h2>
-            {% set nbProjects = theme.countEnabledProjects() %}
+            {% set nbConsultations = theme.countEnabledConsultations() %}
             {% set nbIdeas = theme.countEnabledIdeas() %}
             <p class="excerpt">
-                {% transchoice nbProjects with {'%count%': nbProjects} from 'CapcoAppBundle' %}
-                theme.index.projects
+                {% transchoice nbConsultations with {'%count%': nbConsultations} from 'CapcoAppBundle' %}
+                theme.index.consultations
                 {% endtranschoice %}
                 {% if is_feature_enabled('ideas') %}
                     •

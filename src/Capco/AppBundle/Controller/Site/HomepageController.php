@@ -9,7 +9,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Capco\AppBundle\Entity\NewsletterSubscription;
 use Capco\AppBundle\Form\NewsletterSubscriptionType;
-use Capco\AppBundle\Entity\Project;
+use Capco\AppBundle\Entity\Consultation;
 
 class HomepageController extends Controller
 {
@@ -152,7 +152,7 @@ class HomepageController extends Controller
 
     /**
      * @Cache(expires="+1 minutes", maxage="60", smaxage="60", public="true")
-     * @Template("CapcoAppBundle:Homepage:lastProjects.html.twig")
+     * @Template("CapcoAppBundle:Homepage:lastConsultations.html.twig")
      *
      * @param int  $max
      * @param int  $offset
@@ -161,12 +161,12 @@ class HomepageController extends Controller
      *
      * @return array
      */
-    public function lastProjectsAction($max = 3, $offset = 0, $section = null, $alt = null)
+    public function lastConsultationsAction($max = 3, $offset = 0, $section = null, $alt = null)
     {
-        $projects = $this->getDoctrine()->getRepository('CapcoAppBundle:Project')->getLastPublished($max, $offset);
+        $consultations = $this->getDoctrine()->getRepository('CapcoAppBundle:Consultation')->getLastPublished($max, $offset);
 
         return [
-            'projects' => $projects,
+            'consultations' => $consultations,
             'section' => $section,
             'alt' => $alt,
         ];

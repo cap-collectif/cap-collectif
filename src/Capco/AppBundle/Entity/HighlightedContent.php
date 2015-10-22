@@ -14,7 +14,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\DiscriminatorMap({
  *  "post" = "HighlightedPost",
  *  "theme" = "HighlightedTheme",
- *  "project" = "HighlightedProject",
+ *  "consultation" = "HighlightedConsultation",
  *  "idea" = "HighlightedIdea",
  *  "event" = "HighlightedEvent"
  * })

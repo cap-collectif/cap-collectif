@@ -27,8 +27,8 @@ class UrlResolver
     public function generateOpinionRoute($object, $absolute)
     {
         if ($object instanceof Opinion) {
-            return $this->router->generate('app_project_show_opinion', [
-                'projectSlug' => $object->getStep()->getProject()->getSlug(),
+            return $this->router->generate('app_consultation_show_opinion', [
+                'consultationSlug' => $object->getStep()->getConsultation()->getSlug(),
                 'stepSlug' => $object->getStep()->getSlug(),
                 'opinionTypeSlug' => $object->getOpinionType()->getSlug(),
                 'opinionSlug' => $object->getSlug(),
@@ -38,8 +38,8 @@ class UrlResolver
         if ($object instanceof OpinionVersion) {
             $opinion = $object->getParent();
 
-            return $this->router->generate('app_project_show_opinion_version', [
-                'projectSlug' => $opinion->getStep()->getProject()->getSlug(),
+            return $this->router->generate('app_consultation_show_opinion_version', [
+                'consultationSlug' => $opinion->getStep()->getConsultation()->getSlug(),
                 'stepSlug' => $opinion->getStep()->getSlug(),
                 'opinionTypeSlug' => $opinion->getOpinionType()->getSlug(),
                 'opinionSlug' => $opinion->getSlug(),
@@ -53,19 +53,19 @@ class UrlResolver
     public function getStepUrl($step, $absolute = false)
     {
         if ($step->isConsultationStep()) {
-            return $this->router->generate('app_project_show', array('projectSlug' => $step->getProject()->getSlug(), 'stepSlug' => $step->getSlug()), $absolute);
+            return $this->router->generate('app_consultation_show', array('consultationSlug' => $step->getConsultation()->getSlug(), 'stepSlug' => $step->getSlug()), $absolute);
         }
         if ($step->isPresentationStep()) {
-            return $this->router->generate('app_project_show_presentation', array('projectSlug' => $step->getProject()->getSlug(), 'stepSlug' => $step->getSlug()), $absolute);
+            return $this->router->generate('app_consultation_show_presentation', array('consultationSlug' => $step->getConsultation()->getSlug(), 'stepSlug' => $step->getSlug()), $absolute);
         }
         if ($step->isOtherStep()) {
-            return $this->router->generate('app_project_show_step', array('projectSlug' => $step->getProject()->getSlug(), 'stepSlug' => $step->getSlug()), $absolute);
+            return $this->router->generate('app_consultation_show_step', array('consultationSlug' => $step->getConsultation()->getSlug(), 'stepSlug' => $step->getSlug()), $absolute);
         }
         if ($step->isSynthesisStep()) {
-            return $this->router->generate('app_project_show_synthesis', array('projectSlug' => $step->getProject()->getSlug(), 'stepSlug' => $step->getSlug()), $absolute);
+            return $this->router->generate('app_consultation_show_synthesis', array('consultationSlug' => $step->getConsultation()->getSlug(), 'stepSlug' => $step->getSlug()), $absolute);
         }
         if ($step->isRankingStep()) {
-            return $this->router->generate('app_project_show_ranking', array('projectSlug' => $step->getProject()->getSlug(), 'stepSlug' => $step->getSlug()), $absolute);
+            return $this->router->generate('app_consultation_show_ranking', array('consultationSlug' => $step->getConsultation()->getSlug(), 'stepSlug' => $step->getSlug()), $absolute);
         }
 
         return '';
@@ -120,8 +120,8 @@ class UrlResolver
 
         if ($object instanceof Argument || $object instanceof Source) {
             return $this->router
-                ->generate('app_project_show_trashed', [
-                    'projectSlug' => $object->getLinkedOpinion()->getStep()->getProject()->getSlug(),
+                ->generate('app_consultation_show_trashed', [
+                    'consultationSlug' => $object->getLinkedOpinion()->getStep()->getConsultation()->getSlug(),
                 ], $absolute)
             ;
         }

@@ -66,13 +66,13 @@ color:
     vip:
       bg: Couleur de fond des utilisateurs VIP
 
-projects:
+consultations:
   content:
     body: Description
   jumbotron:
     body: Accroche
     title: Titre
-  pagination: Nombre de projets participatifs par page
+  pagination: Nombre de consultations par page
 
 contact:
   content:

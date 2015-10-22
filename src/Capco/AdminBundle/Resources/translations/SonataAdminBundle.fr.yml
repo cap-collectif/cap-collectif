@@ -8,7 +8,7 @@ admin.global:
   unpublish: La contribution a bien été dépubliée.
 
 # Dashboard groups
-admin.group.project: Projets participatifs
+admin.group.consultation: Consultations
 admin.group.content: Contenus
 admin.group.moderation: Contributions
 admin.group.pages: Pages
@@ -21,9 +21,9 @@ admin.label.appendix_type: Éléments de contexte
 admin.label.argument: Arguments
 admin.label.category: Types de sources
 admin.label.comment: Commentaires
-admin.label.project: Projets participatifs
-admin.label.project_abstractstep: Étape d'un projet
-admin.label.consultation_step_type: Structure
+admin.label.consultation: Consultations
+admin.label.consultation_abstractstep: Étape d'une consultation
+admin.label.consultation_type: Structure
 admin.label.events: Évènements
 admin.label.event_registrations: Inscriptions à l'évènement
 admin.label.features: Fonctionnalités
@@ -52,7 +52,7 @@ admin.label.user_type: Types de profil
 admin.label.video: Vidéos
 
 admin.label.pages.blog: Actualités
-admin.label.pages.projects: Projets participatifs
+admin.label.pages.consultations: Consultations
 admin.label.pages.contact: Contact
 admin.label.pages.events: Évènements
 admin.label.pages.footer: Pied de page
@@ -73,10 +73,10 @@ admin.label.settings.shield_mode: Mode bouclier
 # Messages
 admin:
   help:
-    project:
-      closed_at: Si le projet ne dure qu'une journée, renseignez la même date que pour la date de début.
+    consultation:
+      closed_at: Si la consultation ne dure qu'une journée, renseignez la même date que pour la date de début.
       steps: |
-                Ajoutez ici les étapes postérieures ou antérieures au le projet (synthèse finale, présentation préliminaire...). L'étape correspondant au le projet elle-même sera créée automatiquement en fonction des dates renseignées.
+                Ajoutez ici les étapes postérieures ou antérieures à la consultation (synthèse finale, présentation préliminaire...). L'étape correspondant à la consultation elle-même sera créée automatiquement en fonction des dates renseignées.
                 Vous pouvez ajouter des étapes créées au préalable ou les ajouter ultérieurement via le menu de création d'étapes.
       video: |
             Entrez l'URL embed de la vidéo souhaitée. Ex: http://www.youtube.com/embed/wTcNtgA6gHs?autoplay=1<br/>
@@ -148,7 +148,7 @@ admin:
       is_published: Publié
       media: Photo
       themes: Thèmes
-      projects: Projets participatifs
+      consultations: Consultations
       is_commentable: Commentable
       comments_count: Nombre de commentaires
     category:
@@ -176,12 +176,12 @@ admin:
       comment: Commentaire
       voter: Votant
       created_at: Création
-    project:
+    consultation:
       argument_count: Arguments
       author: Auteur
       body: Introduction
       closed_at: Fermé
-      consultation_step_type: Structure
+      consultation_type: Structure
       cover: Image
       created_at: Création
       events: Évènements
@@ -214,11 +214,11 @@ admin:
       trashed_opinion_count: Propositions dans la corbeille
       updated_at: Mise à jour
       video: Vidéo
-    project_abstractstep:
+    consultation_abstractstep:
       position: Position
       steps: Étapes
       steps_add: Choisissez le type d'étape
-    consultation_step_type:
+    consultation_type:
       title: Titre
       opinion_types: Éléments de structure
       updated_at: Mise à jour
@@ -235,7 +235,7 @@ admin:
       updated_at: Mise à jour
       created_at: Création
       themes: Thèmes
-      projects: Projets participatifs
+      consultations: Consultations
       author: Auteur
       start_at: Commence
       end_at: Termine
@@ -268,7 +268,7 @@ admin:
       object: Contenu
       post: Article
       theme: Thème
-      project: Projet
+      consultation: Consultation
       idea: Idée
       event: Evènement
       position: Position
@@ -404,9 +404,9 @@ admin:
       actions: Actions
       author: Auteur
       body: Contenu
-      project: Projet
+      consultation: Consultation
       created_at: Création
-      number: "[0, 1] %count% contribution à traiter| ]1,Inf[ %count% contributions à traiter"
+      number: "{1} 1 contribution à traiter| ]1,Inf[ %count% contributions à traiter"
       published: Publié
       show: Contribution à traiter
       title: Titre
@@ -473,7 +473,7 @@ admin:
       trashed_reason: Raison de la mise à la corbeille
     step:
       body: Introduction
-      project: Projet
+      consultation: Consultation
       created_at: Création
       end_at: Termine
       is_enabled: Publié
@@ -496,7 +496,7 @@ admin:
       is_enabled: Publié
       teaser: Accroche
       body: Contexte
-      projects: Projets participatifs
+      consultations: Consultations
       events: Évènements
       posts: Articles
       ideas: Idées
@@ -506,7 +506,7 @@ admin:
       author: Auteur
       status: Statut
       ideas_count: Idées
-      projects_count: Projets participatifs
+      consultations_count: Consultations
       events_count: Évènements
       posts_count: Articles
       position: Position
@@ -586,10 +586,10 @@ capco:
     shield_mode: Protection du site par mot de passe
     user_type: Demander le type de profil
     members_list: Liste des membres
-    projects_form: Filtrer et trier les projets participatifs
+    consultations_form: Filtrer et trier les consultations
     share_buttons: Boutons de partage
     idea_creation: Soumettre une idée
-    project_trash: Corbeille des projets participatifs
+    consultation_trash: Corbeille des consultations
     idea_trash: Corbeille des idées
     reporting: Signalement
     search: Rechercher sur le site
@@ -642,7 +642,7 @@ highlighted_post: un article à la une
 highlighted_idea: une idée à la une
 highlighted_theme: un thème à la une
 highlighted_event: un évènement à la une
-highlighted_project: un projet à la une
+highlighted_consultation: une consultation à la une
 idea_comment: un commentaire sur une idée
 event_comment: un commentaire sur un évènement
 post_comment: un commentaire sur un article

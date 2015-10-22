@@ -17,7 +17,7 @@ error:
   to_previous_page: Retourner à la page précédente
   to_homepage: Aller à la page d'Accueil
   report: Reporter un problème
-  contribute: Profiez-en pour contribuer à un projet
+  contribute: Profiez-en pour contribuer à une consultation
   access_restricted: Accès interdit uax utilisateurs non identifiés.
 
 error:
@@ -43,8 +43,8 @@ homepage:
       email: Adresse email
   social:
     title: Suivre l'actualité sur les réseaux sociaux
-  projects:
-    last: Derniers projets
+  consultations:
+    last: Dernières consultations
   themes:
     last: Derniers thèmes
   ideas:
@@ -76,7 +76,7 @@ header:
 menu:
   homepage: Accueil
   themes: Thèmes
-  projects: Projets participatifs
+  consultations: Consultations
   ideas_box: Boîte à idées
   news: Actualités
   type:
@@ -180,7 +180,7 @@ theme:
     description: Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eos, perspiciatis, cupiditate.
     text_info: Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eos, perspiciatis, cupiditate. Nesciunt eos nam ullam iste iusto similique officia sit enim excepturi numquam natus, ab eum sint perspiciatis repudiandae dolorem.
     search: Rechercher
-    projects: "]-Inf, 0] Aucun projet | {1} 1 projet | ]1,Inf[ %count% projets"
+    consultations: "]-Inf, 0] Aucune consultation | {1} 1 consultation | ]1,Inf[ %count% consultations"
     ideas: "]-Inf, 0] Aucune idée | {1} 1 idée | ]1,Inf[ %count% idées"
     none: Aucun thème
   show:
@@ -196,11 +196,11 @@ theme:
   error:
     not_found: Thème introuvable.
 
-#Projet
-project:
-  title: Projets participatifs
-  see_all: Voir tous les projets
-  none: Aucun projet.
+#Consultation
+consultation:
+  title: Consultations
+  see_all: Voir toutes les consultations
+  none: Aucune consultation.
   show:
     alert:
       ended:
@@ -223,10 +223,10 @@ project:
       step:
         title: Étapes
     status:
-      opened: Projet ouvert
-      ended: Projet fermé
-      future: Projet à venir
-    remaining_days: "]-Inf, 0] Projet participatif terminé | {1} Dernier jour | ]1,Inf[ %count% jours restants"
+      opened: Consultation ouverte
+      ended: Consultation fermée
+      future: Consultation à venir
+    remaining_days: "]-Inf, 0] Consultation terminée | {1} Dernier jour | ]1,Inf[ %count% jours restants"
     opinions: "]-Inf, 0] Aucune opinion | {1} 1 opinion | ]1,Inf[ %count% opinions"
     arguments: "]-Inf, 0] Aucun argument | {1} 1 argument | ]1,Inf[ %count% arguments"
     votes: "]-Inf, 0] Aucun vote | {1} 1 vote | ]1,Inf[ %count% votes"
@@ -240,15 +240,15 @@ project:
       short_name: Corbeille
       none: Aucun élèment dans la corbeille
   searchform:
-    no_result:  Aucun projet ne correspond à ces critères de recherche.
+    no_result:  Aucune consultation ne correspond à ces critères de recherche.
     term: Terme
     sort: Trier :
     theme: Thème
     all_themes: Tous les thèmes
     search: Rechercher
   error:
-    not_found: Projet introuvable.
-    no_contribute: Impossible de contribuer sur ce projet.
+    not_found: Consultation introuvable.
+    no_contribute: Impossible de contribuer sur cette consultation.
 
 step:
   status:

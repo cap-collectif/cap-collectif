@@ -42,8 +42,8 @@
 
 
     <div class="container  container--custom">
-        <h2 class="h2">{{ 'theme.show.projects.title'|trans({}, 'CapcoAppBundle') }}</h2>
-        {{ render(controller('CapcoAppBundle:Site/Theme:lastProjects', {'theme': theme})) }}
+        <h2 class="h2">{{ 'theme.show.consultations.title'|trans({}, 'CapcoAppBundle') }}</h2>
+        {{ render(controller('CapcoAppBundle:Site/Theme:lastConsultations', {'theme': theme})) }}
     </div>
 
     {% if is_feature_enabled('ideas') %}

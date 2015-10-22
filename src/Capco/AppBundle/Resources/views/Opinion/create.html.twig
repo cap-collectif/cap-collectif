@@ -1,16 +1,16 @@
 {% extends '@CapcoApp/base.html.twig' %}
 
-{% block canonical_link %}{{ url('app_project_new_opinion', {'projectSlug': project.slug, 'stepSlug': currentStep.slug, 'opinionTypeSlug': opinionType.slug}) }}{% endblock %}
+{% block canonical_link %}{{ url('app_consultation_new_opinion', {'consultationSlug': consultation.slug, 'stepSlug': currentStep.slug, 'opinionTypeSlug': opinionType.slug}) }}{% endblock %}
 
 {% block title %}
-    {{ parent() }} - {{ project.title }} - {{ 'opinion.create.title'|trans({}, 'CapcoAppBundle') }}
+    {{ parent() }} - {{ consultation.title }} - {{ 'opinion.create.title'|trans({}, 'CapcoAppBundle') }}
 {% endblock %}
 
 {% block jumbotron %}
 {% endblock %}
 
 {% block body %}
-    {% set title = project.opinionTerm == 0 ? 'opinion.create.title' : 'opinion.create.article_title' %}
+    {% set title = consultation.opinionTerm == 0 ? 'opinion.create.title' : 'opinion.create.article_title' %}
     <div class="container  container--custom">
         <div class="row">
             <div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2">
@@ -38,7 +38,7 @@
                         </div>
                         <div class="dialog__footer  box">
                             <div class="pull-right">
-                                <a href="{{ path('app_project_show_opinions', {'projectSlug': project.slug, 'stepSlug': currentStep.slug, 'opinionTypeSlug': opinionType.slug}) }}" class="btn  btn-default">{{ 'opinion.create.cancel'|trans({}, 'CapcoAppBundle') }}</a>
+                                <a href="{{ path('app_consultation_show_opinions', {'consultationSlug': consultation.slug, 'stepSlug': currentStep.slug, 'opinionTypeSlug': opinionType.slug}) }}" class="btn  btn-default">{{ 'opinion.create.cancel'|trans({}, 'CapcoAppBundle') }}</a>
                                 <button type="submit" class="btn  btn-primary">{{ 'opinion.create.submit'|trans({}, 'CapcoAppBundle') }}</button>
                             </div>
                         </div>

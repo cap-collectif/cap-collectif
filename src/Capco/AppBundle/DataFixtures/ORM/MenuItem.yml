@@ -22,8 +22,8 @@ Capco\AppBundle\Entity\MenuItem:
     associatedFeatures: [themes]
 
   MenuItem3:
-    title: Projets participatifs
-    link: projects
+    title: Consultations
+    link: consultations
     isEnabled: 1
     isDeletable: 0
     isFullyModifiable: 0

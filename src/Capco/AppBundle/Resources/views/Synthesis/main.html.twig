@@ -2,7 +2,7 @@
 
 {% set page_class = "synthesis_page" %}
 
-{% block canonical_link %}{{ url('app_project_edit_synthesis', {'projectSlug': project.slug, 'stepSlug': currentStep.slug}) }}{% endblock %}
+{% block canonical_link %}{{ url('app_consultation_edit_synthesis', {'consultationSlug': consultation.slug, 'stepSlug': currentStep.slug}) }}{% endblock %}
 
 {% block title %}
     {{ parent() }} - {{ currentStep.title }}

@@ -33,7 +33,7 @@ error:
   to_previous_page: Retourner à la page précédente
   to_homepage: Aller à la page d'Accueil
   report: Reporter un problème
-  contribute: Profitez-en pour contribuer à un projet
+  contribute: Profitez-en pour contribuer à une consultation
   access_restricted: Accès interdit aux utilisateurs non identifiés.
   feature_not_enabled: "Cette fonction n'est pas activée, veuillez l'activer dans l'espace d'administration !"
 
@@ -51,8 +51,8 @@ homepage:
       email: Adresse email
     videos:
       title: Vidéos
-    projects:
-      title: Projets participatifs
+    consultations:
+      title: Consultations
     themes:
       title: Thèmes
     ideas:
@@ -91,7 +91,7 @@ header:
 menu:
   homepage: Accueil
   themes: Thèmes
-  projects: Projets participatifs
+  consultations: Consultations
   ideas_box: Boîte à idées
   news: Actualités
   type:
@@ -219,12 +219,12 @@ theme:
     description: Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eos, perspiciatis, cupiditate.
     text_info: Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eos, perspiciatis, cupiditate. Nesciunt eos nam ullam iste iusto similique officia sit enim excepturi numquam natus, ab eum sint perspiciatis repudiandae dolorem.
     search: Rechercher
-    projects: "]-Inf, 0] 0 projet | {1} 1 projet | ]1,Inf[ %count% projets"
+    consultations: "]-Inf, 0] 0 consultation | {1} 1 consultation | ]1,Inf[ %count% consultations"
     ideas: "]-Inf, 0] 0 idée | {1} 1 idée | ]1,Inf[ %count% idées"
     none: Aucun thème
   show:
-    projects:
-      title: Projets participatifs
+    consultations:
+      title: Consultations
     ideas:
       title: Idées
     body_title: Contexte
@@ -248,8 +248,8 @@ theme:
   error:
     not_found: Thème introuvable.
 
-#Projet
-project:
+#Consultation
+consultation:
   contributors:
     no: Il n'y a pas encore de participants pour le moment.
     participate: Soyez le premier à %link%participer%endlink%.
@@ -262,10 +262,10 @@ project:
       title: Exporter l'étape de consultation "%title%"
     step: Étape %position% : "%title%"
   error:
-    not_exportable: Impossible de télécharger cette étape de consultation.
-    not_found: Étape de consultation introuvable.
-    no_contribute: Impossible de contribuer sur cette étape de consultation.
-  none: Aucun projet.
+    not_exportable: Impossible de télécharger cette consultation.
+    not_found: Consultation introuvable.
+    no_contribute: Impossible de contribuer sur cette consultation.
+  none: Aucune consultation.
   opinion_term:
     opinion: Générique (proposition)
     article: Texte juridique (article)
@@ -275,21 +275,21 @@ project:
     versions: ]-Inf, 1] Classement des modifications | ]1,Inf[ Classement des %count% modifications
   searchform:
     all_themes: Tous les thèmes
-    no_result:  Aucun projet ne correspond à ces critères de recherche.
+    no_result:  Aucune consultation ne correspond à ces critères de recherche.
     search: Rechercher
     sort: Trier :
     term: Terme
     theme: Thème
-  see_all: Voir tous les projets
+  see_all: Voir toutes les consultations
   share_button: Inviter
   show:
     alert:
       ended:
         text: La période de participation est maintenant terminée. Merci à tous d'avoir contribué.
-        title: Projet participatif terminé.
+        title: Consultation terminée.
       future:
         text: La période de participation débutera le %date%.
-        title: Projet à venir.
+        title: Consultation à venir.
     arguments: "]-Inf, 1] %count% argument | ]1,Inf[ %count% arguments"
     arguments_no_nb: "]-Inf, 1] argument | ]1,Inf[ arguments"
     contributions_no_nb: "]-Inf, 1] contribution | ]1,Inf[ contributions"
@@ -330,7 +330,7 @@ project:
     opinions_no_nb: "]-Inf, 1] opinion | ]1,Inf[ opinions"
     posts:
       title: Actualités
-    remaining_days: "]-Inf, 0] Projet participatif terminé | {1} Dernier jour | ]1,Inf[ %count% jours restants"
+    remaining_days: "]-Inf, 0] Consultation terminée | {1} Dernier jour | ]1,Inf[ %count% jours restants"
     sources: "]-Inf, 1] %count% source | ]1,Inf[ %count% sources"
     versions: "]-Inf, 1] %count% modification | ]1,Inf[ %count% modifications"
     votes: "]-Inf, 1] %count% vote | ]1,Inf[ %count% votes"
@@ -343,7 +343,7 @@ project:
   sort:
     contributions_nb: Nombre de contributions
     published_at: Date de publication
-  title: Projets participatifs
+  title: Consultations
 
 step:
   presentation:
@@ -747,14 +747,14 @@ blog:
   none: "Il n'y a aucune actualité."
   searchform:
     theme: Thème
-    project: Projet participatif
+    consultation: Consultation
     all_themes: Tous les thèmes
-    projects: Tous les projets
+    all_consultations: Toutes les consultations
     no_result:  Aucun article ne correspond à ces critères de recherche.
   show:
     in_theme: dans
-    projects:
-      title: "]-Inf, 1] Projet participatif lié : | ]1,Inf[ Projets participatifs liés :"
+    consultations:
+      title: "]-Inf, 1] Consultation liée : | ]1,Inf[ Consultations liées :"
     comments: "]-Inf, 0] 0 commentaire | {1} 1 commentaire | ]1,Inf[ %count% commentaires"
 
 # Features
@@ -803,19 +803,18 @@ event:
     in_theme: dans
     on_date: le %date%
     comments: "]-Inf, 0] 0 commentaire | {1} 1 commentaire | ]1,Inf[ %count% commentaires"
-    projects:
-      title: "]-Inf, 1] Projet participatif lié : | ]1, Inf[ Projets participatifs liés :"
+    consultations:
+      title: "]-Inf, 1] Consultation liée : | ]1, Inf[ Consultations liées :"
   link_button: Inscription
   no_result:  Aucun évènement ne correspond à ces critères de recherche.
   and: et
   searchform:
     term: Terme
     theme: Thème
-    all_projects: Tous les projets
-    project: Projet participatif
+    consultation: Consultation
     search: Rechercher
     all_themes: Tous les thèmes
-    projects: Tous les projets
+    all_consultations: Toutes les consultations
 
 # event registration
 event_registration:
@@ -913,8 +912,8 @@ video:
     black: Noir
     white: Blanc
 
-# project download
-project_download:
+# consultation download
+consultation_download:
   sheets:
     published: Contenu publié
     unpublished: Contenu à la corbeille
@@ -1017,7 +1016,7 @@ search:
       ideas: Idées
       comments: Commentaires
       arguments: Arguments
-      projects: Projets participatifs
+      consultations: Consultations
       events: Évènements
       opinions: Propositions
       versions: Modifications
@@ -1041,7 +1040,7 @@ search:
       opinionVersion: Modification
       comment: Commentaire
       argument: Argument
-      project: Projet participatif
+      consultation: Consultation
       event: Évènement
       opinion: Proposition
       post: Article

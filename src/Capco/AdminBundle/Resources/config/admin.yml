@@ -43,7 +43,7 @@ services:
         class: Capco\AdminBundle\Admin\AppendixTypeAdmin
         arguments: [~, Capco\AppBundle\Entity\AppendixType, SonataAdminBundle:CRUD]
         tags:
-            - {name: sonata.admin, manager_type: orm, group: admin.group.project, label: admin.label.appendix_type}
+            - {name: sonata.admin, manager_type: orm, group: admin.group.consultation, label: admin.label.appendix_type}
         calls:
             - [ setTranslationDomain, [SonataAdminBundle]]
 
@@ -63,11 +63,11 @@ services:
         calls:
             - [ setTranslationDomain, [SonataAdminBundle]]
 
-    capco_admin.admin.project:
-        class: Capco\AdminBundle\Admin\ProjectAdmin
-        arguments: [~, Capco\AppBundle\Entity\Project, SonataAdminBundle:CRUD]
+    capco_admin.admin.consultation:
+        class: Capco\AdminBundle\Admin\ConsultationAdmin
+        arguments: [~, Capco\AppBundle\Entity\Consultation, SonataAdminBundle:CRUD]
         tags:
-            - {name: sonata.admin, manager_type: orm, group: admin.group.project, label: admin.label.project}
+            - {name: sonata.admin, manager_type: orm, group: admin.group.consultation, label: admin.label.consultation}
         calls:
             - [ setTranslationDomain, [SonataAdminBundle]]
 
@@ -107,7 +107,7 @@ services:
         class: Capco\AdminBundle\Admin\OpinionTypeAdmin
         arguments: [~, Capco\AppBundle\Entity\OpinionType, CapcoAdminBundle:OpinionType]
         tags:
-            - {name: sonata.admin, manager_type: orm, group: admin.group.project, label: admin.label.opinion_type}
+            - {name: sonata.admin, manager_type: orm, group: admin.group.consultation, label: admin.label.opinion_type}
         calls:
             - [ setTranslationDomain, [SonataAdminBundle]]
 
@@ -180,7 +180,7 @@ services:
         class: Capco\AdminBundle\Admin\CategoryAdmin
         arguments: [~, Capco\AppBundle\Entity\Category, SonataAdminBundle:CRUD]
         tags:
-            - {name: sonata.admin, manager_type: orm, group: admin.group.project, label: admin.label.category}
+            - {name: sonata.admin, manager_type: orm, group: admin.group.consultation, label: admin.label.category}
         calls:
             - [ setTranslationDomain, [SonataAdminBundle]]
 
@@ -241,11 +241,11 @@ services:
         calls:
             - [ setTranslationDomain, [SonataAdminBundle]]
 
-    capco_admin.admin.consultation_step_type:
-        class: Capco\AdminBundle\Admin\ConsultationStepTypeAdmin
-        arguments: [~, Capco\AppBundle\Entity\ConsultationStepType, SonataAdminBundle:CRUD]
+    capco_admin.admin.consultation_type:
+        class: Capco\AdminBundle\Admin\ConsultationTypeAdmin
+        arguments: [~, Capco\AppBundle\Entity\ConsultationType, SonataAdminBundle:CRUD]
         tags:
-            - {name: sonata.admin, manager_type: orm, group: admin.group.project, label: admin.label.consultation_step_type}
+            - {name: sonata.admin, manager_type: orm, group: admin.group.consultation, label: admin.label.consultation_type}
         calls:
             - [ setTranslationDomain, [SonataAdminBundle]]
 
@@ -273,13 +273,13 @@ services:
         calls:
             - [ setTranslationDomain, [SonataAdminBundle]]
             - [ setTemplate, [list, CapcoAdminBundle:HighlightedContent:list.html.twig]]
-            - [ setSubClasses, [{highlighted_post: Capco\AppBundle\Entity\HighlightedPost, highlighted_idea: Capco\AppBundle\Entity\HighlightedIdea, highlighted_theme: Capco\AppBundle\Entity\HighlightedTheme, highlighted_event: Capco\AppBundle\Entity\HighlightedEvent, highlighted_project: Capco\AppBundle\Entity\HighlightedProject}]]
+            - [ setSubClasses, [{highlighted_post: Capco\AppBundle\Entity\HighlightedPost, highlighted_idea: Capco\AppBundle\Entity\HighlightedIdea, highlighted_theme: Capco\AppBundle\Entity\HighlightedTheme, highlighted_event: Capco\AppBundle\Entity\HighlightedEvent, highlighted_consultation: Capco\AppBundle\Entity\HighlightedConsultation}]]
 
-    capco_admin.admin.project_abstractstep:
-        class: Capco\AdminBundle\Admin\ProjectAbstractStepAdmin
-        arguments: [~, Capco\AppBundle\Entity\ProjectAbstractStep, SonataAdminBundle:CRUD]
+    capco_admin.admin.consultation_abstractstep:
+        class: Capco\AdminBundle\Admin\ConsultationAbstractStepAdmin
+        arguments: [~, Capco\AppBundle\Entity\ConsultationAbstractStep, SonataAdminBundle:CRUD]
         tags:
-            - {name: sonata.admin, manager_type: orm, label: admin.label.project_abstractstep}
+            - {name: sonata.admin, manager_type: orm, label: admin.label.consultation_abstractstep}
 
     capco_admin.admin.synthesis:
         class: Capco\AdminBundle\Admin\SynthesisAdmin

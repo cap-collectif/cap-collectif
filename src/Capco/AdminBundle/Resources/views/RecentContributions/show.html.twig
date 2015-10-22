@@ -29,13 +29,13 @@
                                     {{ contribution['author'] }}
                                 </td>
                             </tr>
-                            {% if contribution['project'] is defined %}
+                            {% if contribution['consultation'] is defined %}
                                 <tr>
                                     <th>
-                                        {{ 'admin.fields.recent_contributions.project' | trans({}, 'SonataAdminBundle') }}
+                                        {{ 'admin.fields.recent_contributions.consultation' | trans({}, 'SonataAdminBundle') }}
                                     </th>
                                     <td class="sonata-ba-show-field sonata-ba-show-field-text">
-                                        {{ contribution['project'] }}
+                                        {{ contribution['consultation'] }}
                                     </td>
                                 </tr>
                             {% endif %}

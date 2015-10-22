@@ -1,6 +1,6 @@
 {% extends '@CapcoApp/base.html.twig' %}
 
-{% block canonical_link %}{{ url('app_new_source', {'projectSlug': opinion.step.project.slug, 'stepSlug': opinion.step.slug, 'opinionTypeSlug': opinion.opinionType.slug, 'opinionSlug': opinion.slug}) }}{% endblock %}
+{% block canonical_link %}{{ url('app_new_source', {'consultationSlug': opinion.step.consultation.slug, 'stepSlug': opinion.step.slug, 'opinionTypeSlug': opinion.opinionType.slug, 'opinionSlug': opinion.slug}) }}{% endblock %}
 
 {% block title %}
     {{ parent() }} - {{ opinion.title }} - {{ 'source.create.title'|trans({}, 'CapcoAppBundle') }}
@@ -42,7 +42,7 @@
                         </div>
                         <div class="dialog__footer  box">
                             <div class="pull-right">
-                                <a href="{{ path('app_project_show_opinion', {'projectSlug': opinion.step.project.slug, 'stepSlug': opinion.step.slug, 'opinionTypeSlug': opinion.opinionType.slug, 'opinionSlug': opinion.slug}) }}" class="btn  btn-default">{{ 'source.create.cancel'|trans({}, 'CapcoAppBundle') }}</a>
+                                <a href="{{ path('app_consultation_show_opinion', {'consultationSlug': opinion.step.consultation.slug, 'stepSlug': opinion.step.slug, 'opinionTypeSlug': opinion.opinionType.slug, 'opinionSlug': opinion.slug}) }}" class="btn  btn-default">{{ 'source.create.cancel'|trans({}, 'CapcoAppBundle') }}</a>
                                 <button type="submit" class="btn  btn-primary">{{ 'source.create.submit'|trans({}, 'CapcoAppBundle') }}</button>
                             </div>
                         </div>

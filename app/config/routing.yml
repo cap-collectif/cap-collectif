@@ -75,10 +75,6 @@ capco_profile_edit:
     path:      /profile/edit-profile
     defaults:  { _controller: SonataUserBundle:ProfileFOSUser1:editProfile }
 
-sonata_user_change_password:
-    resource: "@SonataUserBundle/Resources/config/routing/sonata_change_password_1.xml"
-    prefix: /profile
-
 capco_user:
     resource: "@CapcoUserBundle/Controller/"
     type: annotation
@@ -109,6 +105,10 @@ sonata_user_profile:
 sonata_user_register:
     resource: "@SonataUserBundle/Resources/config/routing/sonata_registration_1.xml"
     prefix: /register
+
+sonata_user_change_password:
+    resource: "@SonataUserBundle/Resources/config/routing/sonata_change_password_1.xml"
+    prefix: /profile
 
 sonata_user:
     resource: '@SonataUserBundle/Resources/config/routing/admin_security.xml'

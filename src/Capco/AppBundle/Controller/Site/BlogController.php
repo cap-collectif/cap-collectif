@@ -9,24 +9,24 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Capco\AppBundle\Form\PostSearchType;
 use Capco\AppBundle\Entity\Theme;
-use Capco\AppBundle\Entity\Project;
+use Capco\AppBundle\Entity\Consultation;
 
 class BlogController extends Controller
 {
     /**
      * @Route("/blog/{page}", name="app_blog", requirements={"page" = "\d+"}, defaults={"_feature_flags" = "blog", "page" = 1} )
      * @Route("/blog/filter/{theme}/{page}", name="app_blog_search_theme", requirements={"page" = "\d+"}, defaults={"page" = 1, "theme" = "all", "_feature_flags" = "blog"} )
-     * @Route("/blog/filter/{theme}/{project}/{page}", name="app_blog_search_project", requirements={"page" = "\d+"}, defaults={"page" = 1, "theme" = "all", "project" = "all", "_feature_flags" = "blog"} )
+     * @Route("/blog/filter/{theme}/{consultation}/{page}", name="app_blog_search_consultation", requirements={"page" = "\d+"}, defaults={"page" = 1, "theme" = "all", "consultation" = "all", "_feature_flags" = "blog"} )
      * @Template("CapcoAppBundle:Blog:index.html.twig")
      *
      * @param $request
      * @param $page
      * @param $theme
-     * @param $project
+     * @param $consultation
      *
      * @return array
      */
-    public function indexAction(Request $request, $page, $theme = null, $project = null)
+    public function indexAction(Request $request, $page, $theme = null, $consultation = null)
     {
         $em = $this->getDoctrine()->getManager();
         $currentUrl = $this->generateUrl('app_blog');
@@ -43,15 +43,15 @@ class BlogController extends Controller
                 // redirect to the results page (avoids reload alerts)
                 $data = $form->getData();
 
-                return $this->redirect($this->generateUrl('app_blog_search_project', array(
+                return $this->redirect($this->generateUrl('app_blog_search_consultation', array(
                     'theme' => array_key_exists('theme', $data) && $data['theme'] ? $data['theme']->getSlug() : Theme::FILTER_ALL,
-                    'project' => $data['project'] ? $data['project']->getSlug() : Project::FILTER_ALL,
+                    'consultation' => $data['consultation'] ? $data['consultation']->getSlug() : Consultation::FILTER_ALL,
                 )));
             }
         } else {
             $form->setData(array(
                 'theme' => $em->getRepository('CapcoAppBundle:Theme')->findOneBySlug($theme),
-                'project' => $em->getRepository('CapcoAppBundle:Project')->findOneBySlug($project),
+                'consultation' => $em->getRepository('CapcoAppBundle:Consultation')->findOneBySlug($consultation),
             ));
         }
 
@@ -61,7 +61,7 @@ class BlogController extends Controller
             $pagination,
             $page,
             $theme,
-            $project
+            $consultation
         );
 
         //Avoid division by 0 in nbPage calculation

@@ -1,23 +1,23 @@
-{% extends '@CapcoApp/Project/show.html.twig' %}
+{% extends '@CapcoApp/Consultation/show.html.twig' %}
 
-{% block canonical_link %}{{ url('app_project_show_step', {'projectSlug': project.slug, 'stepSlug': currentStep.slug}) }}{% endblock %}
+{% block canonical_link %}{{ url('app_consultation_show_step', {'consultationSlug': consultation.slug, 'stepSlug': currentStep.slug}) }}{% endblock %}
 
 {% block title %}
     {{ parent() }} - {{ currentStep.title }}
 {% endblock %}
 
 {% block jumbotron %}
-{% endblock %}project
+{% endblock %}
 
 {% block body %}
     <div class="container  container--custom">
-        {% include '@CapcoApp/Project/show_title.html.twig' %}
+        {% include '@CapcoApp/Consultation/show_title.html.twig' %}
     </div>
 
     <div class="container  container--custom">
         <div class="row">
             <div class="col-xs-12  col-sm-4  col-md-3">
-                {{ render(controller('CapcoAppBundle:Site/Project:showMeta', {'projectSlug': project.slug, 'currentStepSlug': currentStep.slug})) }}
+                {{ render(controller('CapcoAppBundle:Site/Consultation:showMeta', {'consultationSlug': consultation.slug, 'currentStepSlug': currentStep.slug})) }}
             </div>
 
             <div class="col-xs-12  col-sm-8  col-md-9" id="details">

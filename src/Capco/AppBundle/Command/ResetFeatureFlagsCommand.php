@@ -43,9 +43,9 @@ class ResetFeatureFlagsCommand extends ContainerAwareCommand
         $toggleManager->activate('login_twitter');
         $toggleManager->activate('user_type');
         $toggleManager->activate('members_list');
-        $toggleManager->activate('projects_form');
+        $toggleManager->activate('consultations_form');
         $toggleManager->activate('share_buttons');
-        $toggleManager->activate('project_trash');
+        $toggleManager->activate('consultation_trash');
         $toggleManager->activate('idea_trash');
         $toggleManager->activate('reporting');
         $toggleManager->activate('search');

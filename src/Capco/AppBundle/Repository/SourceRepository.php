@@ -133,13 +133,13 @@ class SourceRepository extends EntityRepository
     }
 
     /**
-     * Get all trashed or unpublished sources for project.
+     * Get all trashed or unpublished sources for consultation.
      *
      * @param $step
      *
      * @return mixed
      */
-    public function getTrashedOrUnpublishedByProject($project)
+    public function getTrashedOrUnpublishedByConsultation($consultation)
     {
         $qb = $this->createQueryBuilder('s')
             ->addSelect('ca', 'o', 'aut', 'm', 'media')
@@ -149,11 +149,11 @@ class SourceRepository extends EntityRepository
             ->leftJoin('aut.Media', 'm')
             ->leftJoin('s.Opinion', 'o')
             ->leftJoin('o.step', 'step')
-            ->leftJoin('step.projectAbstractStep', 'cas')
-            ->andWhere('cas.project = :project')
+            ->leftJoin('step.consultationAbstractStep', 'cas')
+            ->andWhere('cas.consultation = :consultation')
             ->andWhere('s.isTrashed = :trashed')
             ->orWhere('s.isEnabled = :disabled')
-            ->setParameter('project', $project)
+            ->setParameter('consultation', $consultation)
             ->setParameter('trashed', true)
             ->setParameter('disabled', false)
             ->orderBy('s.trashedAt', 'DESC');
@@ -190,7 +190,7 @@ class SourceRepository extends EntityRepository
     }
 
     /**
-     * Get enabled sources by project step.
+     * Get enabled sources by consultation step.
      *
      * @param $step
      *
@@ -228,8 +228,8 @@ class SourceRepository extends EntityRepository
             ->leftJoin('s.Media', 'media')
             ->leftJoin('s.Opinion', 'o')
             ->leftJoin('o.step', 'cs')
-            ->leftJoin('cs.projectAbstractStep', 'cas')
-            ->leftJoin('cas.project', 'c')
+            ->leftJoin('cs.consultationAbstractStep', 'cas')
+            ->leftJoin('cas.consultation', 'c')
             ->leftJoin('s.Author', 'aut')
             ->leftJoin('aut.Media', 'm')
             ->andWhere('s.Author = :author')
@@ -256,8 +256,8 @@ class SourceRepository extends EntityRepository
             ->select('COUNT(s) as TotalSources')
             ->leftJoin('s.Opinion', 'o')
             ->leftJoin('o.step', 'cs')
-            ->leftJoin('cs.projectAbstractStep', 'cas')
-            ->leftJoin('cas.project', 'c')
+            ->leftJoin('cs.consultationAbstractStep', 'cas')
+            ->leftJoin('cas.consultation', 'c')
             ->andWhere('o.isEnabled = :enabled')
             ->andWhere('cs.isEnabled = :enabled')
             ->andWhere('c.isEnabled = :enabled')

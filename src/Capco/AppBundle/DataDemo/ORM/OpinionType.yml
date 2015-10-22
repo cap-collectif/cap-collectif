@@ -6,7 +6,7 @@ Capco\AppBundle\Entity\OpinionType:
         color: red
         isEnabled: false
         defaultFilter: votes
-        consultationStepType: @defaultType
+        consultationType: @defaultType
     opinionType2:
         title: Les enjeux
         position: 2
@@ -14,7 +14,7 @@ Capco\AppBundle\Entity\OpinionType:
         color: bluedark
         isEnabled: true
         defaultFilter: votes
-        consultationStepType: @defaultType
+        consultationType: @defaultType
     opinionType3:
         title: Les causes
         position: 3
@@ -22,7 +22,7 @@ Capco\AppBundle\Entity\OpinionType:
         color: orange
         isEnabled: true
         defaultFilter: votes
-        consultationStepType: @defaultType
+        consultationType: @defaultType
     opinionType4:
         title: Les solutions
         position: 4
@@ -30,21 +30,21 @@ Capco\AppBundle\Entity\OpinionType:
         color: green
         isEnabled: true
         defaultFilter: votes
-        consultationStepType: @defaultType
+        consultationType: @defaultType
 
     opinionType5:
         title: Titre Ier
         subtitle: La circulation des données et du savoir
         position: 1
         isEnabled: false
-        consultationStepType: @pjlType
+        consultationType: @pjlType
         color: red
         defaultFilter: position
     opinionType6:
         title: Titre 2è
         position: 1
         isEnabled: false
-        consultationStepType: @pjlType
+        consultationType: @pjlType
         color: red
         defaultFilter: position
     opinionType7:

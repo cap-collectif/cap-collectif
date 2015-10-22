@@ -8,10 +8,10 @@ Capco\AppBundle\Entity\HighlightedTheme:
         position: 2
         theme: @theme1
 
-Capco\AppBundle\Entity\HighlightedProject:
-    highlightedProject1:
+Capco\AppBundle\Entity\HighlightedConsultation:
+    highlightedConsultation1:
         position: 3
-        project: @cs1
+        consultation: @cs1
 
 Capco\AppBundle\Entity\HighlightedIdea:
     highlightedIdea1:

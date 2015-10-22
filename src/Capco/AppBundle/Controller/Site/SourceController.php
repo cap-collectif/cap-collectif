@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\Controller\Site;
 
+use Capco\AppBundle\Entity\Consultation;
 use Capco\AppBundle\Entity\Opinion;
 use Capco\AppBundle\Entity\Source;
 use Capco\AppBundle\Form\SourcesType;
@@ -14,10 +15,9 @@ use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 class SourceController extends Controller
 {
     /**
-     * @Route("/projects/{projectSlug}/consultation/{stepSlug}/opinions/{opinionTypeSlug}/{opinionSlug}/sources/{sourceSlug}/delete", name="app_delete_source")
-     * @Route("/consultations/{projectSlug}/consultation/{stepSlug}/opinions/{opinionTypeSlug}/{opinionSlug}/sources/{sourceSlug}/delete", name="app_delete_source")
+     * @Route("/consultations/{consultationSlug}/consultation/{stepSlug}/opinions/{opinionTypeSlug}/{opinionSlug}/sources/{sourceSlug}/delete", name="app_delete_source")
      *
-     * @param $projectSlug
+     * @param consultationSlug
      * @param stepSlug
      * @param $opinionTypeSlug
      * @param $opinionSlug
@@ -27,7 +27,7 @@ class SourceController extends Controller
      *
      * @return array
      */
-    public function deleteSourceAction($projectSlug, $stepSlug, $opinionTypeSlug, $opinionSlug, $sourceSlug, Request $request)
+    public function deleteSourceAction($consultationSlug, $stepSlug, $opinionTypeSlug, $opinionSlug, $sourceSlug, Request $request)
     {
         if (false === $this->get('security.authorization_checker')->isGranted('ROLE_USER')) {
             throw new AccessDeniedException($this->get('translator')->trans('error.access_restricted', array(), 'CapcoAppBundle'));
@@ -46,7 +46,7 @@ class SourceController extends Controller
         $opinion = $source->getOpinion();
         $opinionType = $opinion->getOpinionType();
         $currentStep = $opinion->getStep();
-        $project = $currentStep->getProject();
+        $consultation = $currentStep->getConsultation();
 
         $userCurrent = $this->getUser()->getId();
         $userPostSource = $source->getAuthor()->getId();
@@ -68,7 +68,7 @@ class SourceController extends Controller
 
                 $this->get('session')->getFlashBag()->add('info', $this->get('translator')->trans('source.delete.success'));
 
-                return $this->redirect($this->generateUrl('app_project_show_opinion', ['projectSlug' => $project->getSlug(), 'stepSlug' => $currentStep->getSlug(), 'opinionTypeSlug' => $opinionType->getSlug(), 'opinionSlug' => $opinion->getSlug()]));
+                return $this->redirect($this->generateUrl('app_consultation_show_opinion', ['consultationSlug' => $consultation->getSlug(), 'stepSlug' => $currentStep->getSlug(), 'opinionTypeSlug' => $opinionType->getSlug(), 'opinionSlug' => $opinion->getSlug()]));
             } else {
                 $this->get('session')->getFlashBag()->add('danger', $this->get('translator')->trans('source.delete.error'));
             }
@@ -82,11 +82,10 @@ class SourceController extends Controller
     }
 
     /**
-     * @Route("/projects/{projectSlug}/consultation/{stepSlug}/opinions/{opinionTypeSlug}/{opinionSlug}/sources/{sourceSlug}/edit", name="app_edit_source")
-     * @Route("/consultations/{projectSlug}/consultation/{stepSlug}/opinions/{opinionTypeSlug}/{opinionSlug}/sources/{sourceSlug}/edit", name="app_edit_source")
+     * @Route("/consultations/{consultationSlug}/consultation/{stepSlug}/opinions/{opinionTypeSlug}/{opinionSlug}/sources/{sourceSlug}/edit", name="app_edit_source")
      * @Template("CapcoAppBundle:Source:update.html.twig")
      *
-     * @param $projectSlug
+     * @param consultationSlug
      * @param $stepSlug
      * @param $opinionTypeSlug
      * @param $opinionSlug
@@ -95,7 +94,7 @@ class SourceController extends Controller
      *
      * @return array
      */
-    public function updateSourceAction($projectSlug, $stepSlug, $opinionTypeSlug, $opinionSlug, $sourceSlug, Request $request)
+    public function updateSourceAction($consultationSlug, $stepSlug, $opinionTypeSlug, $opinionSlug, $sourceSlug, Request $request)
     {
         if (false === $this->get('security.authorization_checker')->isGranted('ROLE_USER')) {
             throw new AccessDeniedException($this->get('translator')->trans('error.access_restricted', array(), 'CapcoAppBundle'));
@@ -114,7 +113,7 @@ class SourceController extends Controller
         $opinion = $source->getLinkedOpinion();
         $opinionType = $opinion->getOpinionType();
         $currentStep = $opinion->getStep();
-        $project = $currentStep->getProject();
+        $consultation = $currentStep->getConsultation();
 
         $userCurrent = $this->getUser()->getId();
         $userPostSource = $source->getAuthor()->getId();
@@ -152,7 +151,7 @@ class SourceController extends Controller
 
                 $this->get('session')->getFlashBag()->add('success', $this->get('translator')->trans('source.update.success'));
 
-                return $this->redirect($this->generateUrl('app_project_show_opinion', ['projectSlug' => $project->getSlug(), 'stepSlug' => $currentStep->getSlug(), 'opinionTypeSlug' => $opinionType->getSlug(), 'opinionSlug' => $opinion->getSlug()]).'#source'.$source->getId());
+                return $this->redirect($this->generateUrl('app_consultation_show_opinion', ['consultationSlug' => $consultation->getSlug(), 'stepSlug' => $currentStep->getSlug(), 'opinionTypeSlug' => $opinionType->getSlug(), 'opinionSlug' => $opinion->getSlug()]).'#source'.$source->getId());
             } else {
                 $this->get('session')->getFlashBag()->add('danger', $this->get('translator')->trans('source.update.error'));
             }

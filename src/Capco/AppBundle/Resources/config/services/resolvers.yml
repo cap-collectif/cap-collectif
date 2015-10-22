@@ -1,6 +1,6 @@
 parameters:
   capco.comment.resolver.class: Capco\AppBundle\Manager\CommentResolver
-  capco.project.download.resolver.class: Capco\AppBundle\Resolver\ProjectDownloadResolver
+  capco.consultation.download.resolver.class: Capco\AppBundle\Resolver\ConsultationDownloadResolver
   capco.contribution.resolver.class: Capco\AppBundle\Resolver\ContributionResolver
   capco.event.resolver.class: Capco\AppBundle\Resolver\EventResolver
   capco.highlighted.resolver.class: Capco\AppBundle\Resolver\HighlightedContentResolver
@@ -22,8 +22,8 @@ services:
     class: %capco.comment.resolver.class%
     arguments: [@doctrine.orm.entity_manager, @router, @capco.url.resolver]
 
-  capco.project.download.resolver:
-    class: %capco.project.download.resolver.class%
+  capco.consultation.download.resolver:
+    class: %capco.consultation.download.resolver.class%
     arguments: [@doctrine.orm.entity_manager, @templating, @translator]
 
   capco.contribution.resolver:

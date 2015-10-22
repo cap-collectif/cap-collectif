@@ -203,7 +203,7 @@ class SiteParameter
      *
      * @param bool $isEnabled
      *
-     * @return Project
+     * @return Consultation
      */
     public function setIsEnabled($isEnabled)
     {

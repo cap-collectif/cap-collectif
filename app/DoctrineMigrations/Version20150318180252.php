@@ -40,6 +40,53 @@ class Version20150318180252 extends AbstractMigration implements ContainerAwareI
         $this->addSql('ALTER TABLE consultation_type_types ADD CONSTRAINT FK_69F48B0A35365590 FOREIGN KEY (opiniontype_id) REFERENCES opinion_type (id) ON DELETE CASCADE');
     }
 
+    public function postUp(Schema $schema)
+    {
+        $em = $this->container->get('doctrine.orm.entity_manager');
+
+        $query = $em->createQuery("SELECT ot.id FROM Capco\AppBundle\Entity\OpinionType ot");
+        $opinionTypes = $query->getArrayResult();
+
+        $query = $em->createQuery("SELECT ct.id FROM Capco\AppBundle\Entity\ConsultationType ct WHERE ct.title = :title");
+        $query->setParameter('title', 'Défaut');
+        $consultationType = $query->getOneOrNullResult();
+
+        // Create model
+
+        if (null == $consultationType) {
+            $date = (new \DateTime())->format('Y-m-d H:i:s');
+            $this->connection->insert('consultation_type', array(
+                'title' => 'Défaut',
+                'enabled' => true,
+                'created_at' => $date,
+                'updated_at' => $date,
+            ));
+            $consultationTypeId = $this->connection->lastInsertId();
+        } else {
+            $consultationTypeId = $consultationType['id'];
+        }
+
+        foreach ($opinionTypes as $type) {
+            $this->connection->insert('consultation_type_types', array(
+                'consultationtype_id' => $consultationTypeId,
+                'opiniontype_id' => $type['id'],
+            ));
+        }
+
+        // Add allowed types for consultation
+        $query = $em->createQuery("SELECT c.id FROM Capco\AppBundle\Entity\Consultation c");
+        $consultations = $query->getArrayResult();
+
+        foreach ($consultations as $consultation) {
+            foreach ($opinionTypes as $type) {
+                $this->connection->insert('consultation_types', array(
+                    'consultation_id' => $consultation['id'],
+                    'opiniontype_id' => $type['id'],
+                ));
+            }
+        }
+    }
+
     public function down(Schema $schema)
     {
         // this down() migration is auto-generated, please modify it to your needs

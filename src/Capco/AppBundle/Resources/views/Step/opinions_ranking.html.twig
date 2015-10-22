@@ -1,6 +1,6 @@
-{% extends '@CapcoApp/Project/show.html.twig' %}
+{% extends '@CapcoApp/Consultation/show.html.twig' %}
 
-{% block canonical_link %}{{ url('app_project_show_opinions_ranking', {'projectSlug': project.slug, 'stepSlug': currentStep.slug}) }}{% endblock %}
+{% block canonical_link %}{{ url('app_consultation_show_opinions_ranking', {'consultationSlug': consultation.slug, 'stepSlug': currentStep.slug}) }}{% endblock %}
 
 {% block title %}
     {{ parent() }} - {{ currentStep.title }}
@@ -11,14 +11,14 @@
 
 {% block body %}
     <div class="container  container--custom">
-        {% include '@CapcoApp/Project/show_title.html.twig' %}
+        {% include '@CapcoApp/Consultation/show_title.html.twig' %}
     </div>
 
     <div class="container  container--custom">
         <div class="row">
             <div class="col-xs-12  col-sm-4  col-md-3">
-                {{ render(controller('CapcoAppBundle:Site/Project:showMeta', {
-                        'projectSlug': project.slug,
+                {{ render(controller('CapcoAppBundle:Site/Consultation:showMeta', {
+                        'consultationSlug': consultation.slug,
                         'currentStepSlug': currentStep.slug,
                     }))
                 }}
@@ -27,14 +27,14 @@
             <div class="col-xs-12  col-sm-8  col-md-9" id="details">
 
                 <p id="back-button">
-                    <a href="{{ path('app_project_show_ranking', {'projectSlug': project.slug, 'stepSlug': currentStep.slug}) }}" class="btn btn-default">
-                        <i class="cap cap-arrow-1-1"></i> {{ 'project.show.global.title' | trans({}, 'CapcoAppBundle') }}
+                    <a href="{{ path('app_consultation_show_ranking', {'consultationSlug': consultation.slug, 'stepSlug': currentStep.slug}) }}" class="btn btn-default">
+                        <i class="cap cap-arrow-1-1"></i> {{ 'consultation.show.global.title' | trans({}, 'CapcoAppBundle') }}
                     </a>
                 </p>
 
                 <div id="opinions__ranking" class="anchor-offset  block  block--bordered">
 
-                    {% set opinionsLabel = project.opinionTerm == 0 ? 'project.ranking.opinions' : 'project.ranking.articles' %}
+                    {% set opinionsLabel = consultation.opinionTerm == 0 ? 'consultation.ranking.opinions' : 'consultation.ranking.articles' %}
                     <div class="opinion opinion--default">
                         <div class="opinion__header  opinion__header--mobile-centered">
                             <h2 class="pull-left  h4  opinion__header__title">
@@ -46,14 +46,14 @@
                     {% if opinions | length > 0 %}
                         <ul class="media-list  opinion__list">
                             {% for opinion in opinions %}
-                                {% include 'CapcoAppBundle:Opinion:blockOpinion.html.twig' with {'opinion': opinion, 'opinionType': opinion.opinionType, 'showRanking': true, 'opinionTerm': project.opinionTerm} only %}
+                                {% include 'CapcoAppBundle:Opinion:blockOpinion.html.twig' with {'opinion': opinion, 'opinionType': opinion.opinionType, 'showRanking': true, 'opinionTerm': consultation.opinionTerm} only %}
                             {% endfor %}
                         </ul>
                     {% endif %}
 
                 </div>
 
-                {% set route, params = 'app_project_show_opinions_ranking', {'projectSlug': project.slug, 'stepSlug': currentStep.slug} %}
+                {% set route, params = 'app_consultation_show_opinions_ranking', {'consultationSlug': consultation.slug, 'stepSlug': currentStep.slug} %}
 
                 {% include 'CapcoAppBundle:Block:pagination.html.twig' with {'current': page, 'nb': nbPage, 'route': route, 'params': params} only  %}
 

@@ -2,7 +2,7 @@
 
 namespace Capco\AppBundle\Resolver;
 
-use Capco\AppBundle\Entity\Project;
+use Capco\AppBundle\Entity\Consultation;
 use Capco\UserBundle\Repository\UserRepository;
 
 class ContributionResolver
@@ -15,19 +15,19 @@ class ContributionResolver
     }
 
     // Code may looks ugly but in fact it's highly optimized !
-    public function getProjectContributorsOrdered(Project $project, $pagination = 16, $page = 1)
+    public function getConsultationContributorsOrdered(Consultation $consultation, $pagination = 0, $page = 1)
     {
         // Fetch contributors
-        $sourcesContributors = $this->repository->findProjectSourceContributorsWithCount($project);
-        $argumentsContributors = $this->repository->findProjectArgumentContributorsWithCount($project);
-        $opinionsContributors = $this->repository->findProjectOpinionContributorsWithCount($project);
-        $versionsContributors = $this->repository->findProjectVersionContributorsWithCount($project);
+        $sourcesContributors = $this->repository->findConsultationSourceContributorsWithCount($consultation);
+        $argumentsContributors = $this->repository->findConsultationArgumentContributorsWithCount($consultation);
+        $opinionsContributors = $this->repository->findConsultationOpinionContributorsWithCount($consultation);
+        $versionsContributors = $this->repository->findConsultationVersionContributorsWithCount($consultation);
 
         // Fetch voters
-        $opinionsVoters = $this->repository->findProjectOpinionVotersWithCount($project);
-        $versionsVoters = $this->repository->findProjectVersionVotersWithCount($project);
-        $argumentsVoters = $this->repository->findProjectArgumentVotersWithCount($project);
-        $sourcesVoters = $this->repository->findProjectSourceVotersWithCount($project);
+        $opinionsVoters = $this->repository->findConsultationOpinionVotersWithCount($consultation);
+        $versionsVoters = $this->repository->findConsultationVersionVotersWithCount($consultation);
+        $argumentsVoters = $this->repository->findConsultationArgumentVotersWithCount($consultation);
+        $sourcesVoters = $this->repository->findConsultationSourceVotersWithCount($consultation);
 
         $contributors = [];
 
@@ -89,15 +89,15 @@ class ContributionResolver
         return $contributors;
     }
 
-    public function countProjectContributors(Project $project)
+    public function countConsultationContributors(Consultation $consultation)
     {
-        return count($this->getProjectContributorsOrdered($project));
+        return count($this->getConsultationContributorsOrdered($consultation));
     }
 
-    public function countProjectContributions(Project $project)
+    public function countConsultationContributions(Consultation $consultation)
     {
         $count = 0;
-        foreach ($project->getSteps() as $step) {
+        foreach ($consultation->getSteps() as $step) {
             if ($step->getStep()->isConsultationStep()) {
                 $count += $step->getStep()->getContributionsCount();
             }
@@ -106,10 +106,10 @@ class ContributionResolver
         return $count;
     }
 
-    public function countProjectVotes(Project $project)
+    public function countConsultationVotes(Consultation $consultation)
     {
         $count = 0;
-        foreach ($project->getSteps() as $step) {
+        foreach ($consultation->getSteps() as $step) {
             if ($step->getStep()->isConsultationStep()) {
                 foreach ($step->getStep()->getOpinions() as $opinion) {
                     $count += $opinion->getVoteCountAll();

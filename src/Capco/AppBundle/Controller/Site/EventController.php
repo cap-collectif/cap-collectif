@@ -2,7 +2,7 @@
 
 namespace Capco\AppBundle\Controller\Site;
 
-use Capco\AppBundle\Entity\Project;
+use Capco\AppBundle\Entity\Consultation;
 use Capco\AppBundle\Entity\Theme;
 use Capco\AppBundle\Form\EventSearchType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -19,18 +19,18 @@ class EventController extends Controller
     /**
      * @Route("/events", name="app_event", defaults={"_feature_flags" = "calendar"} )
      * @Route("/events/filter/{theme}", name="app_event_search_theme", defaults={"_feature_flags" = "calendar", "theme" = "all"} )
-     * @Route("/events/filter/{theme}/{project}", name="app_event_search_project", defaults={"_feature_flags" = "calendar", "theme" = "all", "project"="all"} )
-     * @Route("/events/filter/{theme}/{project}/{term}", name="app_event_search_term", defaults={"_feature_flags" = "calendar", "theme" = "all", "project"="all"} )
+     * @Route("/events/filter/{theme}/{consultation}", name="app_event_search_consultation", defaults={"_feature_flags" = "calendar", "theme" = "all", "consultation"="all"} )
+     * @Route("/events/filter/{theme}/{consultation}/{term}", name="app_event_search_term", defaults={"_feature_flags" = "calendar", "theme" = "all", "consultation"="all"} )
      * @Template("CapcoAppBundle:Event:index.html.twig")
      *
      * @param $request
      * @param $theme
-     * @param $project
+     * @param $consultation
      * @param $term
      *
      * @return array
      */
-    public function indexAction(Request $request, $theme = null, $project = null, $term = null)
+    public function indexAction(Request $request, $theme = null, $consultation = null, $term = null)
     {
         $em = $this->getDoctrine()->getManager();
         $currentUrl = $this->generateUrl('app_event');
@@ -48,20 +48,20 @@ class EventController extends Controller
 
                 return $this->redirect($this->generateUrl('app_event_search_term', array(
                     'theme' => array_key_exists('theme', $data) && $data['theme'] ? $data['theme']->getSlug() : Theme::FILTER_ALL,
-                    'project' => $data['project'] ? $data['project']->getSlug() : Project::FILTER_ALL,
+                    'consultation' => $data['consultation'] ? $data['consultation']->getSlug() : Consultation::FILTER_ALL,
                     'term' => $data['term'],
                 )));
             }
         } else {
             $form->setData(array(
                 'theme' => $em->getRepository('CapcoAppBundle:Theme')->findOneBySlug($theme),
-                'project' => $em->getRepository('CapcoAppBundle:Project')->findOneBySlug($project),
+                'consultation' => $em->getRepository('CapcoAppBundle:Consultation')->findOneBySlug($consultation),
                 'term' => $term,
             ));
         }
 
-        $groupedEvents = $this->get('capco.event.resolver')->getEventsGroupedByYearAndMonth(false, $theme, $project, $term);
-        $archivedEventsNb = $this->get('capco.event.resolver')->countEvents(true, $theme, $project, $term);
+        $groupedEvents = $this->get('capco.event.resolver')->getEventsGroupedByYearAndMonth(false, $theme, $consultation, $term);
+        $archivedEventsNb = $this->get('capco.event.resolver')->countEvents(true, $theme, $consultation, $term);
 
         return [
             'years' => $groupedEvents,
@@ -73,18 +73,18 @@ class EventController extends Controller
     /**
      * @Route("/events/archived", name="app_event_archived", defaults={"_feature_flags" = "calendar"} )
      * @Route("/events/archived/{theme}", name="app_event_archived_theme", defaults={"_feature_flags" = "calendar", "theme" = "all"} )
-     * @Route("/events/archived/{theme}/{project}", name="app_event_archived_project", defaults={"_feature_flags" = "calendar", "theme" = "all", "project"="all"} )
-     * @Route("/events/archived/{theme}/{project}/{term}", name="app_event_archived_term", defaults={"_feature_flags" = "calendar", "theme" = "all", "project"="all"} )
+     * @Route("/events/archived/{theme}/{consultation}", name="app_event_archived_consultation", defaults={"_feature_flags" = "calendar", "theme" = "all", "consultation"="all"} )
+     * @Route("/events/archived/{theme}/{consultation}/{term}", name="app_event_archived_term", defaults={"_feature_flags" = "calendar", "theme" = "all", "consultation"="all"} )
      * @Template("CapcoAppBundle:Event:show_archived.html.twig")
      *
      * @param $theme
-     * @param $project
+     * @param $consultation
      * @param $term
      * @param $request
      *
      * @return array
      */
-    public function showArchivedAction(Request $request, $theme = null, $project = null, $term = null)
+    public function showArchivedAction(Request $request, $theme = null, $consultation = null, $term = null)
     {
         $em = $this->getDoctrine()->getManager();
         $currentUrl = $this->generateUrl('app_event_archived');
@@ -102,19 +102,19 @@ class EventController extends Controller
 
                 return $this->redirect($this->generateUrl('app_event_archived_term', array(
                     'theme' => array_key_exists('theme', $data) && $data['theme'] ? $data['theme']->getSlug() : Theme::FILTER_ALL,
-                    'project' => $data['project'] ? $data['project']->getSlug() : Project::FILTER_ALL,
+                    'consultation' => $data['consultation'] ? $data['consultation']->getSlug() : Consultation::FILTER_ALL,
                     'term' => $data['term'],
                 )));
             }
         } else {
             $form->setData(array(
                 'theme' => $em->getRepository('CapcoAppBundle:Theme')->findOneBySlug($theme),
-                'project' => $em->getRepository('CapcoAppBundle:Project')->findOneBySlug($project),
+                'consultation' => $em->getRepository('CapcoAppBundle:Consultation')->findOneBySlug($consultation),
                 'term' => $term,
             ));
         }
 
-        $groupedEvents = $this->get('capco.event.resolver')->getEventsGroupedByYearAndMonth(true, $theme, $project, $term);
+        $groupedEvents = $this->get('capco.event.resolver')->getEventsGroupedByYearAndMonth(true, $theme, $consultation, $term);
 
         return [
             'years' => $groupedEvents,

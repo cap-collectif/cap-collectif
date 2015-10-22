@@ -1,7 +1,7 @@
 parameters:
   capco.abstract_vote.repository.class: Capco\AppBundle\Repository\AbstractVoteRepository
   capco.blog.post.repository.class: Capco\AppBundle\Repository\PostRepository
-  capco.consultation_step_type.repository.class: Capco\AppBundle\Repository\ConsultationStepTypeRepository
+  capco.consultation_type.repository.class: Capco\AppBundle\Repository\ConsultationTypeRepository
   capco.event.repository.class: Capco\AppBundle\Repository\EventRepository
   capco.highlighted.repository.class: Capco\AppBundle\Repository\HighlightedContentRepository
   capco.menu_item.repository.class: Capco\AppBundle\Repository\MenuItemRepository
@@ -27,12 +27,12 @@ services:
     factory_method:  getRepository
     arguments:       ['CapcoAppBundle:Post']
 
-  capco.consultation_step_type.repository:
-    class: %capco.consultation_step_type.repository.class%
+  capco.consultation_type.repository:
+    class: %capco.consultation_type.repository.class%
     factory_service: doctrine.orm.default_entity_manager
     factory_method: getRepository
     arguments:
-      - Capco\AppBundle\Entity\ConsultationStepType
+      - Capco\AppBundle\Entity\ConsultationType
 
   capco.event.repository:
     class:           "%capco.event.repository.class%"

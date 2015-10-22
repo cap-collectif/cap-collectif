@@ -103,7 +103,7 @@ class VideoAdmin extends Admin
             ->add('link', null, array(
                 'label' => 'admin.fields.video.link',
                 'required' => true,
-                'help' => 'admin.help.project.video',
+                'help' => 'admin.help.consultation.video',
                 'attr' => array(
                     'placeholder' => 'http://',
                 ),

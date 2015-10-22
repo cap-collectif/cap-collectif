@@ -1,6 +1,6 @@
 Capco\AppBundle\Entity\Opinion:
 
-# Project 1
+# Consultation 1
 
     opinion1:
         step: @cstep1
@@ -53,7 +53,7 @@ Capco\AppBundle\Entity\Opinion:
         Author: @user3
         OpinionType: @opinionType10
 
-# Project 2
+# Consultation 2
 
     opinion{6..40}:
         step: @cstep1
@@ -109,7 +109,7 @@ Capco\AppBundle\Entity\Opinion:
         Author: @user2
         OpinionType: @opinionType12
 
-# Project 3
+# Consultation 3
 
     opinion54:
         step: @cstep3
@@ -143,7 +143,7 @@ Capco\AppBundle\Entity\Opinion:
         OpinionType: @opinionType10
 
 
-# Project 5
+# Consultation 5
 
     opinion57:
         step: @cstep5

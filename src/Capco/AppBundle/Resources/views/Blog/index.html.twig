@@ -46,9 +46,9 @@
                     </div>
                 {% endif %}
                 <div class="col-xs-12  col-sm-3  col-md-3  col-lg-3 filter__down">
-                    {{ form_label(form.project, null, {'label_attr':{"class":"control-label  sr-only"} }) }}
-                    {{ form_errors(form.project) }}
-                    {{ form_widget(form.project, {'attr':{"class":"form-control"} }) }}
+                    {{ form_label(form.consultation, null, {'label_attr':{"class":"control-label  sr-only"} }) }}
+                    {{ form_errors(form.consultation) }}
+                    {{ form_widget(form.consultation, {'attr':{"class":"form-control"} }) }}
                 </div>
 
                 {{ form_end(form) }}
@@ -66,11 +66,11 @@
         {% endif %}
 
         {% set theme = (form.vars.data.theme is not null ? form.vars.data.theme.slug : 'all') %}
-        {% set project = (form.vars.data.project is not null ? form.vars.data.project.slug : 'all') %}
+        {% set consultation = (form.vars.data.consultation is not null ? form.vars.data.consultation.slug : 'all') %}
 
-        {% if theme != 'all' or project != 'all' %}
-            {% if project != 'all' %}
-                {% set route, params = 'app_blog_search_project', {'theme': theme, 'project': project } %}
+        {% if theme != 'all' or consultation != 'all' %}
+            {% if consultation != 'all' %}
+                {% set route, params = 'app_blog_search_consultation', {'theme': theme, 'consultation': consultation } %}
             {% else %}
                 {% set route, params = 'app_blog_search_theme', {'theme': theme } %}
             {% endif %}

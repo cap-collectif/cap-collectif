@@ -2,12 +2,12 @@
     <ul class="media-list  opinion__list">
         {% for source in sources %}
             <div class="block  block--bordered">
-                {% include 'CapcoAppBundle:Source:blockSource.html.twig' with {'source': source, 'opinion': source.opinion, 'opinionType': source.opinion.opinionType, 'project': source.opinion.step.project, 'profile': true } only %}
+                {% include 'CapcoAppBundle:Source:blockSource.html.twig' with {'source': source, 'opinion': source.opinion, 'opinionType': source.opinion.opinionType, 'consultation': source.opinion.step.consultation, 'profile': true } only %}
             </div>
         {% endfor %}
     </ul>
 {% else %}
-    <div class="project__empty-block  text-center">
+    <div class="consultation__empty-block  text-center">
         <p class="icon  cap-bubble-attention-6"></p>
         <p>{{ 'source.none'|trans({}, 'CapcoAppBundle') }}</p>
     </div>

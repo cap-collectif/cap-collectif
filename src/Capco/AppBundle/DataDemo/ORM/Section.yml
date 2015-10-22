@@ -27,9 +27,9 @@ Capco\AppBundle\Entity\Section:
         nbObjects: 3
         enabled: true
         associatedFeatures: []
-    SectionProjects:
-        type: projects
-        title: Projets participatifs
+    SectionConsultations:
+        type: consultations
+        title: Consultations
         position: 4
         teaser: null
         body: null

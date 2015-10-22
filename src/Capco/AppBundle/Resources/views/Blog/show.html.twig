@@ -24,16 +24,16 @@
             {{ post.body|raw | jolitypo() }}
         </div>
 
-        {% if post.projects | length > 0 %}
+        {% if post.consultations | length > 0 %}
             <div class="block">
                 <p>
-                    {% transchoice post.projects | length from 'CapcoAppBundle' %}
-                        blog.show.projects.title
+                    {% transchoice post.consultations | length from 'CapcoAppBundle' %}
+                        blog.show.consultations.title
                     {% endtranschoice %}
                 </p>
                 <ul>
-                    {% for project in post.projects %}
-                        <li><a href="{{ project | capco_first_step_link }}">{{ project.title }}</a></li>
+                    {% for consultation in post.consultations %}
+                        <li><a href="{{ consultation | capco_first_step_link }}">{{ consultation.title }}</a></li>
                     {% endfor %}
                 </ul>
             </div>

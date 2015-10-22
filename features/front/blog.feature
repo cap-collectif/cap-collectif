@@ -8,9 +8,9 @@ Scenario: Anonymous wants to list published posts
   Then I should see 8 ".media--news" elements
 
 @javascript
-Scenario: Posts can be filtered by projects
+Scenario: Posts can be filtered by consultations
   Given I visited "blog page"
-  And I select "Croissance, innovation, disruption" from "capco_app_search_blog_project"
+  And I select "Croissance, innovation, disruption" from "capco_app_search_blog_consultation"
   And I wait 5 seconds
   Then I should see 5 ".media--news" elements
   And I should see "Post 5"

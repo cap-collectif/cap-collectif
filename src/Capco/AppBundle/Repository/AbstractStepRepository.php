@@ -10,18 +10,18 @@ use Doctrine\ORM\EntityRepository;
 class AbstractStepRepository extends EntityRepository
 {
     /**
-     * Get steps by project.
+     * Get steps by consultation.
      *
      * @return array
      */
-    public function getByProject($slug)
+    public function getByConsultation($slug)
     {
         $qb = $this->getIsEnabledQueryBuilder()
             ->addSelect('c', 'cas')
-            ->leftJoin('s.projectAbstractStep', 'cas')
-            ->leftJoin('cas.project', 'c')
-            ->andWhere('c.slug = :project')
-            ->setParameter('project', $slug)
+            ->leftJoin('s.consultationAbstractStep', 'cas')
+            ->leftJoin('cas.consultation', 'c')
+            ->andWhere('c.slug = :consultation')
+            ->setParameter('consultation', $slug)
             ->addOrderBy('cas.position', 'DESC')
         ;
 

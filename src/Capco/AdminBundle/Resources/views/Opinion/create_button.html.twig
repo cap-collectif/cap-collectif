@@ -1,9 +1,9 @@
 {% if admin.hasRoute('create') and admin.isGranted('CREATE')%}
-    {% if consultationStepTypes | length > 0 %}
-        {% for consultationStepType, opinionTypes in consultationStepTypes %}
+    {% if consultationTypes | length > 0 %}
+        {% for consultationType, opinionTypes in consultationTypes %}
             <li>
                 <span class="dropdown-header">
-                    {{ consultationStepType }}
+                    {{ consultationType }}
                 </span>
             </li>
             {% for html in opinionTypes %}

@@ -8,14 +8,14 @@ Capco\AppBundle\Entity\OpinionType:
         votesHelpText: <text(200)>
         votesThreshold: 5
         votesThresholdHelpText: <text(200)>
-        consultationStepType: @typeAll
+        consultationType: @typeAll
     opinionType2:
         title: Les causes
         position: 2
         color: orange
         defaultFilter: votes
         isEnabled: true
-        consultationStepType: @typeAll
+        consultationType: @typeAll
     opinionType3:
         title: Les enjeux
         position: 3
@@ -23,14 +23,14 @@ Capco\AppBundle\Entity\OpinionType:
         defaultFilter: votes
         isEnabled: true
         sourceable: false
-        consultationStepType: @typeAll
+        consultationType: @typeAll
     opinionType4:
         title: Les solutions
         position: 4
         color: green
         defaultFilter: votes
         isEnabled: true
-        consultationStepType: @typeAll
+        consultationType: @typeAll
     opinionType5bis:
         title: Titre Ier
         subtitle: La circulation des données et du savoir
@@ -40,7 +40,7 @@ Capco\AppBundle\Entity\OpinionType:
         isEnabled: false
         versionable: false
         sourceable: false
-        consultationStepType: @typePJL
+        consultationType: @typePJL
     opinionType5ter:
         title: Chapitre Ier
         subtitle: Économie de la donnée
@@ -107,14 +107,14 @@ Capco\AppBundle\Entity\OpinionType:
         votesHelpText: <text(200)>
         votesThreshold: 5
         votesThresholdHelpText: <text(200)>
-        consultationStepType: @typeDefault
+        consultationType: @typeDefault
     opinionType9:
         title: Les causes
         position: 2
         color: orange
         defaultFilter: votes
         isEnabled: true
-        consultationStepType: @typeDefault
+        consultationType: @typeDefault
     opinionType10:
         title: Les enjeux
         position: 3
@@ -122,7 +122,7 @@ Capco\AppBundle\Entity\OpinionType:
         defaultFilter: votes
         isEnabled: true
         sourceable: false
-        consultationStepType: @typeDefault
+        consultationType: @typeDefault
     opinionType11:
         title: Le problème constaté
         position: 1
@@ -132,21 +132,21 @@ Capco\AppBundle\Entity\OpinionType:
         votesHelpText: <text(200)>
         votesThreshold: 5
         votesThresholdHelpText: <text(200)>
-        consultationStepType: @typeSimple
+        consultationType: @typeSimple
     opinionType12:
         title: Les causes
         position: 2
         color: orange
         defaultFilter: votes
         isEnabled: true
-        consultationStepType: @typeSimple
+        consultationType: @typeSimple
     opinionType13:
         title: Les causes
         position: 2
         color: orange
         defaultFilter: votes
         isEnabled: true
-        consultationStepType: @typeCauses
+        consultationType: @typeCauses
     opinionType{14...24}:
         title: Test<current()>
         position: 2

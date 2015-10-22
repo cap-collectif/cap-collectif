@@ -1,31 +1,31 @@
 Capco\MediaBundle\Entity\Media:
 
-    # projects
-    MediaProject1:
-        binaryContent: ../files/project-1.jpg
+    # consultations
+    MediaConsultation1:
+        binaryContent: ../files/consultation-1.jpg
         enabled:       true
         name:          Titre du média
         context:       @MediaContext1
 
-    MediaProject2:
-        binaryContent: ../files/project-2.jpg
+    MediaConsultation2:
+        binaryContent: ../files/consultation-2.jpg
         enabled:       true
         name:          Titre du média 2
         context:       @MediaContext1
 
-    MediaProject3:
-        binaryContent: ../files/project-3.jpg
+    MediaConsultation3:
+        binaryContent: ../files/consultation-3.jpg
         enabled:       true
         name:          Titre du média 2
         context:       @MediaContext1
 
-    MediaProjectImageVideo:
-        binaryContent: ../files/project-image-video.jpg
+    MediaConsultationImageVideo:
+        binaryContent: ../files/consultation-image-video.jpg
         enabled:       true
         name:          Titre du média 2
         context:       @MediaContext1
 
-    # projects
+    # consultations
     MediaIdea1:
         binaryContent: ../files/idea-1.jpg
         enabled:       true

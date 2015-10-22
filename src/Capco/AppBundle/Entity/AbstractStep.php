@@ -51,7 +51,7 @@ abstract class AbstractStep
      */
     public static $stepTypeLabels = [
         'presentation' => 'step.types.presentation',
-        'project' => 'step.types.project',
+        'consultation' => 'step.types.consultation',
         'other' => 'step.types.other',
         'synthesis' => 'step.types.synthesis',
         'ranking' => 'step.types.ranking',
@@ -105,9 +105,9 @@ abstract class AbstractStep
     /**
      * Needed by sonata admin.
      *
-     * @ORM\OneToOne(targetEntity="Capco\AppBundle\Entity\ProjectAbstractStep", mappedBy="step", orphanRemoval=true, cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity="Capco\AppBundle\Entity\ConsultationAbstractStep", mappedBy="step", orphanRemoval=true, cascade={"persist", "remove"})
      */
-    protected $projectAbstractStep;
+    protected $consultationAbstractStep;
 
     /**
      * @var string
@@ -272,17 +272,17 @@ abstract class AbstractStep
     /**
      * @return mixed
      */
-    public function getProjectAbstractStep()
+    public function getConsultationAbstractStep()
     {
-        return $this->projectAbstractStep;
+        return $this->consultationAbstractStep;
     }
 
     /**
-     * @param mixed $projectAbstractStep
+     * @param mixed $consultationAbstractStep
      */
-    public function setProjectAbstractStep($projectAbstractStep)
+    public function setConsultationAbstractStep($consultationAbstractStep)
     {
-        $this->projectAbstractStep = $projectAbstractStep;
+        $this->consultationAbstractStep = $consultationAbstractStep;
     }
 
     /**
@@ -326,14 +326,14 @@ abstract class AbstractStep
     // ************************* Custom methods *********************
 
     /**
-     * Get project.
+     * Get consultation.
      *
      * @return string
      */
-    public function getProject()
+    public function getConsultation()
     {
-        if ($this->projectAbstractStep) {
-            return $this->projectAbstractStep->getProject();
+        if ($this->consultationAbstractStep) {
+            return $this->consultationAbstractStep->getConsultation();
         }
 
         return;
@@ -344,7 +344,7 @@ abstract class AbstractStep
      */
     public function canDisplay()
     {
-        return $this->isEnabled && $this->getProject()->canDisplay();
+        return $this->isEnabled && $this->getConsultation()->canDisplay();
     }
 
     /**
@@ -352,7 +352,7 @@ abstract class AbstractStep
      */
     public function canContribute()
     {
-        return $this->getProject()->canContribute() && $this->isEnabled && $this->isOpen();
+        return $this->getConsultation()->canContribute() && $this->isEnabled && $this->isOpen();
     }
 
     public function getType()

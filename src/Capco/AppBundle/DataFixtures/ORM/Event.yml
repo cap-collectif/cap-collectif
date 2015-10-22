@@ -18,7 +18,7 @@ Capco\AppBundle\Entity\Event:
         registrationEnable: true
         lat: 45,7012741
         lng: 4,7959638
-        projects: [@cs1]
+        consultations: [@cs1]
         themes: [@theme1, @theme2]
     event2:
         title: PHPTour2014
@@ -38,7 +38,7 @@ Capco\AppBundle\Entity\Event:
         address: 11 Avenue George 5
         city: Paris
         link: http://www.phptour2014.fr
-        projects: [@cs1]
+        consultations: [@cs1]
         themes: [@theme1, @theme2]
     event3:
         title: Event without registrations
@@ -57,9 +57,9 @@ Capco\AppBundle\Entity\Event:
         Author: @user<numberBetween(1, 5)>
         address: 457 Rue de Picardie
         city: Bordeaux
-        Media: @MediaProject3
+        Media: @MediaConsultation3
         registrationEnable: true
-        projects: [@cs1]
+        consultations: [@cs1]
     event4:
         title: EventOnOneDay
         isEnabled: true

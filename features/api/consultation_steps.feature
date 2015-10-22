@@ -5,8 +5,8 @@ Feature: Consultation Steps
   ### As an Anonymous
 
   @database @security
-  Scenario: Anonymous API client wants to add an opinion
-    When I send a POST request to "/api/projects/1/steps/4/opinions"
+  Scenario: Anonymous API client wants to add a version
+    When I send a POST request to "/api/consultations/1/steps/4/opinions"
     Then the JSON response status code should be 401
     And the JSON response should match:
     """
@@ -21,7 +21,7 @@ Feature: Consultation Steps
   @database
   Scenario: logged in API client wants to add an opinion
     Given I am logged in to api as user
-    When I send a POST request to "/api/projects/1/steps/4/opinions" with json:
+    When I send a POST request to "/api/consultations/1/steps/4/opinions" with json:
     """
     {
       "title": "Nouveau titre",
@@ -34,7 +34,7 @@ Feature: Consultation Steps
   @database
   Scenario: logged in API client wants to add a linked opinion
     Given I am logged in to api as user
-    When I send a POST request to "/api/projects/5/steps/5/opinions" with json:
+    When I send a POST request to "/api/consultations/5/steps/5/opinions" with json:
     """
     {
       "title": "Nouveau titre",
@@ -48,7 +48,7 @@ Feature: Consultation Steps
   @database @security
   Scenario: logged in API client wants to add an opinion to a not enabled opinionType
     Given I am logged in to api as user
-    When I send a POST request to "/api/projects/1/steps/4/opinions" with json:
+    When I send a POST request to "/api/consultations/1/steps/4/opinions" with json:
     """
     {
       "title": "Nouveau titre",
@@ -69,7 +69,7 @@ Feature: Consultation Steps
   @database @security
   Scenario: logged in API client wants to add an opinion to an opinionType not available
     Given I am logged in to api as user
-    When I send a POST request to "/api/projects/1/steps/4/opinions" with json:
+    When I send a POST request to "/api/consultations/1/steps/4/opinions" with json:
     """
     {
       "title": "Nouveau titre",

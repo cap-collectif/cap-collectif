@@ -2,7 +2,7 @@
 
 namespace Capco\AppBundle\Repository;
 
-use Capco\AppBundle\Entity\Project;
+use Capco\AppBundle\Entity\Consultation;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 use Capco\AppBundle\Entity\Opinion;
@@ -31,13 +31,13 @@ class OpinionVersionRepository extends EntityRepository
     public function getRecentOrdered()
     {
         $qb = $this->createQueryBuilder('o')
-            ->select('o.id', 'o.title', 'o.createdAt', 'o.updatedAt', 'a.username as author', 'o.enabled as published', 'o.isTrashed as trashed', 'c.title as project')
+            ->select('o.id', 'o.title', 'o.createdAt', 'o.updatedAt', 'a.username as author', 'o.enabled as published', 'o.isTrashed as trashed', 'c.title as consultation')
             ->where('o.validated = :validated')
             ->leftJoin('o.author', 'a')
             ->leftJoin('o.parent', 'op')
             ->leftJoin('op.step', 's')
-            ->leftJoin('s.projectAbstractStep', 'cas')
-            ->leftJoin('cas.project', 'c')
+            ->leftJoin('s.consultationAbstractStep', 'cas')
+            ->leftJoin('cas.consultation', 'c')
             ->setParameter('validated', false)
         ;
 
@@ -49,12 +49,12 @@ class OpinionVersionRepository extends EntityRepository
     public function getArrayById($id)
     {
         $qb = $this->createQueryBuilder('o')
-            ->select('o.id', 'o.title', 'o.createdAt', 'o.updatedAt', 'a.username as author', 'o.enabled as published', 'o.isTrashed as trashed', 'CONCAT(CONCAT(o.comment, \'<hr>\'), o.body) as body', 'c.title as project')
+            ->select('o.id', 'o.title', 'o.createdAt', 'o.updatedAt', 'a.username as author', 'o.enabled as published', 'o.isTrashed as trashed', 'CONCAT(CONCAT(o.comment, \'<hr>\'), o.body) as body', 'c.title as consultation')
             ->leftJoin('o.author', 'a')
             ->leftJoin('o.parent', 'op')
             ->leftJoin('op.step', 's')
-            ->leftJoin('s.projectAbstractStep', 'cas')
-            ->leftJoin('cas.project', 'c')
+            ->leftJoin('s.consultationAbstractStep', 'cas')
+            ->leftJoin('cas.consultation', 'c')
             ->where('o.id = :id')
             ->setParameter('id', $id)
         ;
@@ -65,13 +65,13 @@ class OpinionVersionRepository extends EntityRepository
     }
 
     /**
-     * Get trashed or unpublished versions by project.
+     * Get trashed or unpublished versions by consultation.
      *
-     * @param $project
+     * @param $consultation
      *
      * @return array
      */
-    public function getTrashedOrUnpublishedByProject($project)
+    public function getTrashedOrUnpublishedByConsultation($consultation)
     {
         $qb = $this->createQueryBuilder('o')
             ->addSelect('op', 's', 'aut', 'm')
@@ -80,11 +80,11 @@ class OpinionVersionRepository extends EntityRepository
             ->leftJoin('o.author', 'aut')
             ->leftJoin('aut.Media', 'm')
             ->leftJoin('op.step', 's')
-            ->leftJoin('s.projectAbstractStep', 'cas')
-            ->andWhere('cas.project = :project')
+            ->leftJoin('s.consultationAbstractStep', 'cas')
+            ->andWhere('cas.consultation = :consultation')
             ->andWhere('o.isTrashed = :trashed')
             ->orWhere('o.enabled = :disabled')
-            ->setParameter('project', $project)
+            ->setParameter('consultation', $consultation)
             ->setParameter('trashed', true)
             ->setParameter('disabled', false)
             ->orderBy('o.trashedAt', 'DESC');
@@ -178,9 +178,9 @@ class OpinionVersionRepository extends EntityRepository
     }
 
     /**
-     * Get all versions in a project.
+     * Get all versions in a consultation.
      *
-     * @param $project
+     * @param $consultation
      * @param $excludedAuthor
      * @param $orderByRanking
      * @param $limit
@@ -188,7 +188,7 @@ class OpinionVersionRepository extends EntityRepository
      *
      * @return mixed
      */
-    public function getEnabledByProject($project, $excludedAuthor = null, $orderByRanking = false, $limit = null, $page = 1)
+    public function getEnabledByConsultation($consultation, $excludedAuthor = null, $orderByRanking = false, $limit = null, $page = 1)
     {
         $qb = $this->getIsEnabledQueryBuilder('ov')
             ->addSelect('o', 'ot', 's', 'aut', 'm')
@@ -197,10 +197,10 @@ class OpinionVersionRepository extends EntityRepository
             ->leftJoin('ov.author', 'aut')
             ->leftJoin('aut.Media', 'm')
             ->leftJoin('o.step', 's')
-            ->leftJoin('s.projectAbstractStep', 'cas')
-            ->andWhere('cas.project = :project')
+            ->leftJoin('s.consultationAbstractStep', 'cas')
+            ->andWhere('cas.consultation = :consultation')
             ->andWhere('ov.isTrashed = :trashed')
-            ->setParameter('project', $project)
+            ->setParameter('consultation', $consultation)
             ->setParameter('trashed', false)
         ;
 
@@ -235,23 +235,23 @@ class OpinionVersionRepository extends EntityRepository
     }
 
     /**
-     * Get all versions by project ordered by votesCountOk.
+     * Get all versions by consultation ordered by votesCountOk.
      *
-     * @param $project
+     * @param $consultation
      *
      * @return mixed
      */
-    public function getEnabledByProjectsOrderedByVotes(Project $project, $excludedAuthor = null)
+    public function getEnabledByConsultationsOrderedByVotes(Consultation $consultation, $excludedAuthor = null)
     {
         $qb = $this->getIsEnabledQueryBuilder('ov')
             ->innerJoin('ov.parent', 'o')
             ->innerJoin('o.step', 's')
-            ->innerJoin('s.projectAbstractStep', 'cas')
-            ->innerJoin('cas.project', 'c')
+            ->innerJoin('s.consultationAbstractStep', 'cas')
+            ->innerJoin('cas.consultation', 'c')
             ->andWhere('ov.isTrashed = :trashed')
-            ->andWhere('cas.project = :project')
+            ->andWhere('cas.consultation = :consultation')
             ->setParameter('trashed', false)
-            ->setParameter('project', $project)
+            ->setParameter('consultation', $consultation)
         ;
 
         if ($excludedAuthor !== null) {

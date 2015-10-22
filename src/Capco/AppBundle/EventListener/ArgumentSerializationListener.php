@@ -41,22 +41,22 @@ class ArgumentSerializationListener implements EventSubscriberInterface
         $opinion = $argument->getLinkedOpinion();
         $opinionType = $opinion->getOpinionType();
         $step = $opinion->getStep();
-        $project = $step->getProjectAbstractStep()->getProject();
+        $consultation = $step->getConsultationAbstractStep()->getConsultation();
         $user = $this->tokenStorage->getToken()->getUser();
 
         $showUrl = '';
 
         $parent = $argument->getParent();
         if ($parent instanceof Opinion) {
-            $showUrl = $this->router->generate('app_project_show_opinion', [
-                'projectSlug' => $project->getSlug(),
+            $showUrl = $this->router->generate('app_consultation_show_opinion', [
+                'consultationSlug' => $consultation->getSlug(),
                 'stepSlug' => $step->getSlug(),
                 'opinionTypeSlug' => $opinionType->getSlug(),
                 'opinionSlug' => $opinion->getSlug(),
             ], true).'#arg-'.$argument->getId();
         } elseif ($parent instanceof OpinionVersion) {
-            $showUrl = $this->router->generate('app_project_show_opinion_version', [
-                'projectSlug' => $project->getSlug(),
+            $showUrl = $this->router->generate('app_consultation_show_opinion_version', [
+                'consultationSlug' => $consultation->getSlug(),
                 'stepSlug' => $step->getSlug(),
                 'opinionTypeSlug' => $opinionType->getSlug(),
                 'opinionSlug' => $opinion->getSlug(),
@@ -67,15 +67,15 @@ class ArgumentSerializationListener implements EventSubscriberInterface
         $event->getVisitor()->addData(
             '_links', [
                 'show' => $showUrl,
-                'edit' => $this->router->generate('app_project_edit_argument', [
-                    'projectSlug' => $project->getSlug(),
+                'edit' => $this->router->generate('app_consultation_edit_argument', [
+                    'consultationSlug' => $consultation->getSlug(),
                     'stepSlug' => $step->getSlug(),
                     'opinionTypeSlug' => $opinionType->getSlug(),
                     'opinionSlug' => $opinion->getSlug(),
                     'argumentId' => $argument->getId(),
                 ], true),
                 'report' => $this->router->generate('app_report_argument', [
-                    'projectSlug' => $project->getSlug(),
+                    'consultationSlug' => $consultation->getSlug(),
                     'stepSlug' => $step->getSlug(),
                     'opinionTypeSlug' => $opinionType->getSlug(),
                     'opinionSlug' => $opinion->getSlug(),

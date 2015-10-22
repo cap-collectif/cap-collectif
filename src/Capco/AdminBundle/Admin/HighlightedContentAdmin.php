@@ -11,7 +11,7 @@ use Capco\AppBundle\Entity\HighlightedPost;
 use Capco\AppBundle\Entity\HighlightedEvent;
 use Capco\AppBundle\Entity\HighlightedTheme;
 use Capco\AppBundle\Entity\HighlightedIdea;
-use Capco\AppBundle\Entity\HighlightedProject;
+use Capco\AppBundle\Entity\HighlightedConsultation;
 
 class HighlightedContentAdmin extends Admin
 {
@@ -74,11 +74,11 @@ class HighlightedContentAdmin extends Admin
                     'class' => 'Capco\AppBundle\Entity\Post',
                 ))
             ;
-        } elseif ($subject instanceof HighlightedProject) {
+        } elseif ($subject instanceof HighlightedConsultation) {
             $formMapper
-                ->add('project', 'sonata_type_model', array(
-                    'label' => 'admin.fields.highlighted_content.project',
-                    'class' => 'Capco\AppBundle\Entity\Project',
+                ->add('consultation', 'sonata_type_model', array(
+                    'label' => 'admin.fields.highlighted_content.consultation',
+                    'class' => 'Capco\AppBundle\Entity\Consultation',
                 ))
             ;
         } elseif ($subject instanceof HighlightedIdea) {

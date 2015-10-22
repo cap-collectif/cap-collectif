@@ -52,7 +52,7 @@ class ThemeController extends Controller
 
         $pagination = $this->get('capco.site_parameter.resolver')->getValue('themes.pagination');
 
-        $themes = $em->getRepository('CapcoAppBundle:Theme')->getSearchResultsWithProjectsAndIdeas($pagination, $page, $term);
+        $themes = $em->getRepository('CapcoAppBundle:Theme')->getSearchResultsWithConsultationsAndIdeas($pagination, $page, $term);
 
         //Avoid division by 0 in nbPage calculation
         $nbPage = 1;
@@ -112,7 +112,7 @@ class ThemeController extends Controller
     }
 
     /**
-     * @Template("CapcoAppBundle:Theme:lastProjects.html.twig")
+     * @Template("CapcoAppBundle:Theme:lastConsultations.html.twig")
      *
      * @param $theme
      * @param int $max
@@ -120,17 +120,17 @@ class ThemeController extends Controller
      *
      * @return array
      */
-    public function lastProjectsAction($theme, $max = 8, $offset = 0)
+    public function lastConsultationsAction($theme, $max = 8, $offset = 0)
     {
         $em = $this->get('doctrine.orm.entity_manager');
-        $projects = $em->getRepository('CapcoAppBundle:Project')->getLastByTheme($theme->getId(), $max, $offset);
-        $nbProjects = $em->getRepository('CapcoAppBundle:Project')->countSearchResults($theme->getSlug());
+        $consultations = $em->getRepository('CapcoAppBundle:Consultation')->getLastByTheme($theme->getId(), $max, $offset);
+        $nbConsultations = $em->getRepository('CapcoAppBundle:Consultation')->countSearchResults($theme->getSlug());
 
         return [
-            'projects' => $projects,
+            'consultations' => $consultations,
             'theme' => $theme,
             'max' => $max,
-            'nbProjects' => $nbProjects,
+            'nbConsultations' => $nbConsultations,
         ];
     }
 }

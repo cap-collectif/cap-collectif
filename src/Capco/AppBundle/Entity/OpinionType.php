@@ -222,10 +222,10 @@ class OpinionType
     protected $children;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\ConsultationStepType", inversedBy="opinionTypes", cascade={"persist"})
-     * @ORM\JoinColumn(name="consultation_step_type_id", nullable=true, onDelete="CASCADE")
+     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\ConsultationType", inversedBy="opinionTypes", cascade={"persist"})
+     * @ORM\JoinColumn(name="consultation_type_id", nullable=true, onDelete="CASCADE")
      */
-    protected $consultationStepType;
+    protected $consultationType;
 
     public function __construct()
     {
@@ -692,18 +692,17 @@ class OpinionType
     /**
      * @return mixed
      */
-    public function getConsultationStepType()
+    public function getConsultationType()
     {
-        return $this->consultationStepType;
+        return $this->consultationType;
     }
 
     /**
-     * @param mixed $consultationStepType
-     * @return $this
+     * @param mixed $consultationType
      */
-    public function setConsultationStepType($consultationStepType)
+    public function setConsultationType($consultationType)
     {
-        $this->consultationStepType = $consultationStepType;
+        $this->consultationType = $consultationType;
 
         return $this;
     }
@@ -725,7 +724,7 @@ class OpinionType
             return $parent->getChildren(true);
         }
 
-        return $this->getConsultationStepType()->getOpinionTypes();
+        return $this->getConsultationType()->getOpinionTypes();
     }
 
     // serializer seems to convert virtual_properties to an object

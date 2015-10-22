@@ -2,7 +2,7 @@
 
 namespace Capco\AdminBundle\Admin;
 
-use Capco\AppBundle\Entity\ConsultationStepType;
+use Capco\AppBundle\Entity\ConsultationType;
 use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
@@ -14,13 +14,13 @@ class OpinionTypeAdmin extends Admin
     public function getPersistentParameters()
     {
         $subject = $this->getSubject();
-        $consultationStepTypeId = null;
-        $consultationStepTypeName = null;
+        $consultationTypeId = null;
+        $consultationTypeName = null;
 
         if ($this->hasParentFieldDescription() && $this->getParentFieldDescription()->getAdmin()->getSubject()) {
-            $consultationStepTypeId = $this->getParentFieldDescription()->getAdmin()->getSubject()->getId();
-        } elseif ($subject && $subject->getConsultationStepType()) {
-            $consultationStepTypeId = $subject->getConsultationStepType()->getId();
+            $consultationTypeId = $this->getParentFieldDescription()->getAdmin()->getSubject()->getId();
+        } elseif ($subject && $subject->getConsultationType()) {
+            $consultationTypeId = $subject->getConsultationType()->getId();
         } elseif ($subject && $subject->getRoot()) {
             $root = $this
                 ->getConfigurationPool()
@@ -30,19 +30,19 @@ class OpinionTypeAdmin extends Admin
                 ->find($subject->getRoot())
             ;
             if ($root) {
-                $consultationStepTypeId = $root->getConsultationStepType()->getId();
+                $consultationTypeId = $root->getConsultationType()->getId();
             }
         }
 
-        if ($consultationStepTypeId === null) {
-            $consultationStepTypeId = $this->getRequest()->get('consultation_step_type_id');
+        if ($consultationTypeId === null) {
+            $consultationTypeId = $this->getRequest()->get('consultation_type_id');
         }
 
-        $consultationStepTypeName = $this->getRequest()->get('consultation_step_type_name');
+        $consultationTypeName = $this->getRequest()->get('consultation_type_name');
 
         return array(
-            'consultation_step_type_id' => $consultationStepTypeId,
-            'consultation_step_type_name' => $consultationStepTypeName,
+            'consultation_type_id' => $consultationTypeId,
+            'consultation_type_name' => $consultationTypeName,
         );
     }
 
@@ -157,7 +157,7 @@ class OpinionTypeAdmin extends Admin
 
     private function createQueryForParent()
     {
-        $consultationStepTypeId = $this->getPersistentParameter('consultation_step_type_id');
+        $consultationTypeId = $this->getPersistentParameter('consultation_type_id');
 
         $qb = $this->getConfigurationPool()
             ->getContainer()
@@ -167,11 +167,11 @@ class OpinionTypeAdmin extends Admin
             ->where('ot.root IN (
                 SELECT ot2.id
                 FROM CapcoAppBundle:OpinionType ot2
-                LEFT JOIN ot2.consultationStepType ct
+                LEFT JOIN ot2.consultationType ct
                 WHERE ot2.parent IS NULL
                 AND ct.id = ?0
             )')
-            ->setParameter(0, $consultationStepTypeId)
+            ->setParameter(0, $consultationTypeId)
         ;
 
         if ($this->getSubject()->getId()) {
@@ -200,15 +200,20 @@ class OpinionTypeAdmin extends Admin
 
     public function prePersist($type)
     {
-        if (!$type->getParent() && !$type->getConsultationStepType()) {
-            $consultationStepTypeId = $this->getPersistentParameter('consultation_step_type_id');
-            if ($consultationStepTypeId !== null) {
-                $consultationStepType = $this->getConfigurationPool()
+        if (!$type->getParent() && !$type->getConsultationType()) {
+            $consultationTypeId = $this->getPersistentParameter('consultation_type_id');
+            if ($consultationTypeId !== null) {
+                $consultationType = $this->getConfigurationPool()
                     ->getContainer()
                     ->get('doctrine.orm.entity_manager')
-                    ->getRepository('CapcoAppBundle:ConsultationStepType')
-                    ->find($consultationStepTypeId);
-                $type->setConsultationStepType($consultationStepType);
+                    ->getRepository('CapcoAppBundle:ConsultationType')
+                    ->find($consultationTypeId);
+                $type->setConsultationType($consultationType);
+            } else {
+                $consultationType = new ConsultationType();
+                $title = $this->getPersistentParameter('consultation_type_name') ? $this->getPersistentParameter('consultation_type_name') : 'Défaut';
+                $consultationType->setTitle($title);
+                $type->setConsultationType($consultationType);
             }
         }
     }

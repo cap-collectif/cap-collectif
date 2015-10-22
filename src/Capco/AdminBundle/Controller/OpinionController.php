@@ -40,7 +40,7 @@ class OpinionController extends Controller
                 'form' => $formView,
                 'datagrid' => $datagrid,
                 'csrf_token' => $this->getCsrfToken('sonata.batch'),
-                'consultationStepTypes' => $this->getConsultationStepTypes(),
+                'consultationTypes' => $this->getConsultationTypes(),
             ),
             null,
             $request
@@ -176,7 +176,7 @@ class OpinionController extends Controller
                 'action' => 'create',
                 'form' => $view,
                 'object' => $object,
-                'consultationStepTypes' => $this->getConsultationStepTypes(),
+                'consultationTypes' => $this->getConsultationTypes(),
             ),
             null,
             $request
@@ -299,7 +299,7 @@ class OpinionController extends Controller
                 'action' => 'edit',
                 'form' => $view,
                 'object' => $object,
-                'consultationStepTypes' => $this->getConsultationStepTypes(),
+                'consultationTypes' => $this->getConsultationTypes(),
             ),
             null,
             $request
@@ -333,7 +333,7 @@ class OpinionController extends Controller
                 'action' => 'show',
                 'object' => $object,
                 'elements' => $this->admin->getShow(),
-                'consultationStepTypes' => $this->getConsultationStepTypes(),
+                'consultationTypes' => $this->getConsultationTypes(),
             ),
             null,
             $request
@@ -405,20 +405,20 @@ class OpinionController extends Controller
                 'object' => $object,
                 'action' => 'delete',
                 'csrf_token' => $this->getCsrfToken('sonata.delete'),
-                'consultationStepTypes' => $this->getConsultationStepTypes(),
+                'consultationTypes' => $this->getConsultationTypes(),
             ),
             null,
             $request
         );
     }
 
-    public function getConsultationStepTypes()
+    public function getConsultationTypes()
     {
         $opinionTypes = $this->get('doctrine.orm.entity_manager')
             ->getRepository('CapcoAppBundle:OpinionType')
             ->createQueryBuilder('ot')
-            ->leftJoin('ot.consultationStepType', 'ct')
-            ->where('ot.consultationStepType IS NOT NULL')
+            ->leftJoin('ot.consultationType', 'ct')
+            ->where('ot.consultationType IS NOT NULL')
             ->andWhere('ot.parent IS NULL')
             ->orderBy('ct.id', 'asc')
             ->getQuery()
@@ -429,11 +429,11 @@ class OpinionController extends Controller
             ->getRepository('CapcoAppBundle:OpinionType')
         ;
 
-        $consultationStepTypes = [];
+        $consultationTypes = [];
 
         foreach ($opinionTypes as $root) {
-            $ct = $root->getConsultationStepType()->getTitle();
-            $consultationStepTypes[$ct][] = $otRepo
+            $ct = $root->getConsultationType()->getTitle();
+            $consultationTypes[$ct][] = $otRepo
                 ->childrenHierarchy($root, false, [
                     'decorate' => true,
                     'rootOpen' => '',
@@ -457,7 +457,7 @@ class OpinionController extends Controller
             ;
         }
 
-        return $consultationStepTypes;
+        return $consultationTypes;
     }
 
     public function updateAppendicesForOpinion(Opinion $opinion)
