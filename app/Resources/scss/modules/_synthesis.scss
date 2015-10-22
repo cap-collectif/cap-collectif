@@ -711,3 +711,12 @@ $items-colors:
   padding-top: 50px;
   padding-bottom: 30px;
 }
+
+// Alerts
+.flashmessages .alert {
+  position: absolute;
+  top: 100px;
+  width: 100%;
+  z-index: 1004;
+  opacity: 0.95;
+}
