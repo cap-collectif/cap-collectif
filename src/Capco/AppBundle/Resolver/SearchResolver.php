@@ -11,6 +11,8 @@ use FOS\ElasticaBundle\Transformer\ElasticaToModelTransformerInterface;
 
 class SearchResolver
 {
+    const RESULT_PER_PAGE = 10;
+
     protected $index;
     protected $transformer;
 
@@ -20,12 +22,21 @@ class SearchResolver
         $this->transformer = $transformer;
     }
 
-    // search by term and type in elasticsearch
-    public function searchAll($size, $page, $term, $type = 'all', $sort = 'score', $useTransformation = true)
+    /**
+     * search by term and type in elasticsearch
+     *
+     * @param integer   $page
+     * @param string    $term
+     * @param string    $type
+     * @param string    $sort
+     *
+     * @return array
+     */
+    public function searchAll($page, $term, $type = 'all', $sort = 'score')
     {
-        $results = [];
-        $count = 0;
-        $from = ($page - 1) * $size;
+        $results    = [];
+        $count      = 0;
+        $from       = ($page - 1) * self::RESULT_PER_PAGE;
 
         if ($term) {
             $termQuery = $this->getTermQuery($term);
@@ -42,7 +53,7 @@ class SearchResolver
             $query->setHighlight($this->getHighlightSettings());
 
             $query->setFrom($from);
-            $query->setSize($size);
+            $query->setSize(self::RESULT_PER_PAGE);
 
             $resultSet = $this->index->search($query);
             $count = $resultSet->getTotalHits();
@@ -54,7 +65,7 @@ class SearchResolver
             }
         }
 
-        return ['count' => $count, 'results' => $results];
+        return ['count' => $count, 'results' => $results, 'pages' => ceil($count / self::RESULT_PER_PAGE)];
     }
 
     // get filtered query with type filter and term query

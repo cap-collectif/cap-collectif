@@ -22,15 +22,16 @@
 {% endblock %}
 
 {% block body %}
-    <form id="capco_app_search" name="capco_app_search" method="post">
-
-        <div class="container  container--custom">
+    <form id="capco_app_search" name="capco_app_search" method="get">
+        <div class="container container--custom">
             {{ form_errors(form.term) }}
             <div class="row">
                 <div class="col-xs-12 col-sm-9 col-md-6 input-group">
                     {{ form_widget(form.term) }}
                     <span class="input-group-btn">
-                        <button class="btn btn-primary" type="submit"><i class="cap cap-magnifier"></i><span class="sr-only">{{ 'search.form.submit' | trans({}, 'CapcoAppBundle') }}</span></button>
+                        <button class="btn btn-primary" type="submit"><i class="cap cap-magnifier"></i>
+                            <span class="sr-only">{{ 'search.form.submit' | trans({}, 'CapcoAppBundle') }}</span>
+                        </button>
                     </span>
                 </div>
             </div>
@@ -58,9 +59,7 @@
 
                 <div class="col-xs-12 col-sm-9">
                     <h2 class="h2 search__results-nb" style="margin-top: 0;">
-                        {% transchoice count with { '%count%': count} from 'CapcoAppBundle' %}
-                        search.results.title
-                        {% endtranschoice %}
+                        {% transchoice count with { '%count%': count} from 'CapcoAppBundle' %}search.results.title{% endtranschoice %}
                         <span class="pull-right">
                             {{ form_widget(form.sort) }}
                         </span>
@@ -101,8 +100,7 @@
                         {% endfor %}
                     </ul>
 
-                    {% set route, params =  'app_search', form.vars.data %}
-                    {% include 'CapcoAppBundle:Block:pagination.html.twig' with {'current': page, 'nb': nbPages, 'route': route, 'params': params} only  %}
+                    {% include 'CapcoAppBundle:Block:pagination.html.twig' with {'current': page, 'nb': nbPages, 'route': 'app_search', 'params': {q: q}} only  %}
                 </div>
 
             </div>
