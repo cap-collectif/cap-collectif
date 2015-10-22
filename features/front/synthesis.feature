@@ -46,7 +46,7 @@ Scenario: Admin wants to see new elements list
   And I follow "Synthèse"
   And I follow "Éditer"
   And I wait 5 seconds
-  Then I should see 15 ".element" elements
+  Then I should see 6 ".element" elements
 
 @javascript
 Scenario: Admin wants to see archived elements list
@@ -59,7 +59,7 @@ Scenario: Admin wants to see archived elements list
   And I wait 5 seconds
   And I follow "Traitées"
   And I wait 5 seconds
-  Then I should see 2 ".element" elements
+  Then I should see 11 ".element" elements
 
 @javascript
 Scenario: Admin wants to see published elements list
@@ -72,7 +72,7 @@ Scenario: Admin wants to see published elements list
   And I wait 5 seconds
   And I follow "Classées"
   And I wait 5 seconds
-  Then I should see 2 ".element" elements
+  Then I should see 11 ".element" elements
 
 @javascript
 Scenario: Admin wants to see unpublished elements list
@@ -153,7 +153,7 @@ Scenario: Admin wants to ignore an element
   And I should see 11 ".element" element
   And I follow "Traitées"
   And I wait 5 seconds
-  Then I should see 12 ".element" element
+  Then I should see 15 ".element" element
 
 @javascript @database
 Scenario: Admin wants to publish an element without note, comment or parent
@@ -173,7 +173,7 @@ Scenario: Admin wants to publish an element without note, comment or parent
   And I should see "L'élément a été traité avec succès."
   And I follow "Traitées"
   And I wait 5 seconds
-  And I should see 3 ".element" element
+  And I should see 12 ".element" element
 
 @javascript @database
 Scenario: Admin wants to publish an element with note
@@ -195,7 +195,7 @@ Scenario: Admin wants to publish an element with note
   And I should see "L'élément a été traité avec succès."
   And I follow "Traitées"
   And I wait 5 seconds
-  And I should see 3 ".element" element
+  And I should see 12 ".element" element
   And I follow "Opinion 52"
   And I wait 5 seconds
   And "#notation-star-1" element should have class "active"
@@ -224,7 +224,7 @@ Scenario: Admin wants to publish an element with parent
   And I should see "L'élément a été traité avec succès."
   And I follow "Traitées"
   And I wait 5 seconds
-  And I should see 3 ".element" element
+  And I should see 12 ".element" element
 
 @javascript @database
 Scenario: Admin wants to publish an element with comment
@@ -247,7 +247,7 @@ Scenario: Admin wants to publish an element with comment
   And I should see "L'élément a été traité avec succès."
   And I follow "Traitées"
   And I wait 5 seconds
-  And I should see 3 ".element" element
+  And I should see 12 ".element" element
 
 @javascript @dev
 Scenario: Admin wants to divide an element without selecting text

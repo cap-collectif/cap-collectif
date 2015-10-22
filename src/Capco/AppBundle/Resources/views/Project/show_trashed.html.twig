@@ -3,18 +3,18 @@
 {% block canonical_link %}{{ url('app_project_show_trashed', {'projectSlug': project.slug}) }}{% endblock %}
 
 {% block metaTags %}
-    {% set projectCover %}{% if project.Cover %}{% path project.Cover, 'blockHeader' %}{% endif %}{% endset %}
-    {% include 'CapcoAppBundle:Default:meta.html.twig' with {
-        'title':  project.title~' - '~('project.show.trashed.title' | trans({}, 'CapcoAppBundle')),
-        'url':    url('app_project_show_trashed', {'projectSlug': project.slug}),
-        'type':   'project',
-        'image':  projectCover,
-        'author': url('capco_user_profile_show_all', {'slug': project.Author.slug})
-    } only %}
+    <meta property="og:title" content="{{ project.title }} - Trash" />
+    <meta property="og:url" content="{{ url('app_project_show_trashed', {'projectSlug': project.slug}) }}" />
+    <meta property="og:type" content="project" />
+    {% if project.Cover %}
+        <meta property="og:image" content="{% path project.Cover, 'blockHeader' %}" />
+    {% endif %}
+    <meta property="article:author" content="{{ url('capco_user_profile_show_all', {'slug': project.Author.slug}) }}" />
+    <meta property="article:publisher" content="{{ url('capco_user_profile_show_all', {'slug': project.Author.slug}) }}" />
 {% endblock %}
 
 {% block title %}
-    {{ parent() }} - {{ project.title }} - {{ 'project.show.trashed.title' | trans({}, 'CapcoAppBundle') }}
+    {{ parent() }} - {{ 'project.show.trashed.title' | trans({}, 'CapcoAppBundle') }}
 {% endblock %}
 
 {% block body %}
