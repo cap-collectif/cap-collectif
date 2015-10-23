@@ -64,7 +64,7 @@ class ProposalsController extends FOSRestController
      *
      * @Get("/proposal_forms/{proposal_form_id}/proposals/{proposal_id}")
      * @ParamConverter("proposalForm", options={"mapping": {"proposal_form_id": "id"}, "repository_method": "getOne", "map_method_signature": true})
-     * @ParamConverter("proposal", options={"mapping": {"proposal_id": "id", "proposalForm": "proposalForm"}, "repository_method": "getOne", "map_method_signature": true})
+     * @ParamConverter("proposal", options={"mapping": {"proposal_id": "id"}, "repository_method": "getOne", "map_method_signature": true})
      * @View(statusCode=200, serializerGroups={"Proposals", "ProposalResponses", "UsersInfos", "UserMedias"})
      * @param ProposalForm $proposalForm
      * @param Proposal $proposal

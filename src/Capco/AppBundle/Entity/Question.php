@@ -109,7 +109,7 @@ class Question
      * @param string $helpText
      * @return Question
      */
-    public function setHelpTest($helpText)
+    public function setHelpText($helpText)
     {
         $this->helpText = $helpText;
 
@@ -121,7 +121,7 @@ class Question
      *
      * @return string 
      */
-    public function getHelpTest()
+    public function getHelpText()
     {
         return $this->helpText;
     }
@@ -137,7 +137,7 @@ class Question
     /**
      * @param ArrayCollection $questionChoices
      */
-    public function setQuestionReponses($questionChoices)
+    public function setQuestionChoices($questionChoices)
     {
         $this->questionChoices = $questionChoices;
     }

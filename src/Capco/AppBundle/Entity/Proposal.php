@@ -6,6 +6,7 @@ use Capco\AppBundle\Model\CommentableInterface;
 use Capco\AppBundle\Resolver\ProposalResolver;
 use Capco\AppBundle\Traits\CommentableTrait;
 use Capco\AppBundle\Traits\EnableTrait;
+use Capco\AppBundle\Traits\SluggableTitleTrait;
 use Capco\AppBundle\Traits\TimestampableTrait;
 use Capco\AppBundle\Traits\TrashableTrait;
 use Capco\AppBundle\Traits\VotableTrait;
@@ -23,7 +24,6 @@ use Capco\AppBundle\Validator\Constraints as CapcoAssert;
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\ProposalRepository")
  * @ORM\HasLifecycleCallbacks()
  */
-
 class Proposal implements CommentableInterface
 {
     use CommentableTrait;
@@ -31,8 +31,9 @@ class Proposal implements CommentableInterface
     use VotableTrait;
     use EnableTrait;
     use TrashableTrait;
+    use SluggableTitleTrait;
 
-    public static $ratings = [1,2,3,4,5];
+    public static $ratings = [1, 2, 3, 4, 5];
 
     /**
      * @var int
@@ -42,14 +43,6 @@ class Proposal implements CommentableInterface
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="title", type="string", length=100)
-     * @Assert\NotBlank()
-     */
-    private $title;
 
     /**
      * @var string
@@ -82,7 +75,7 @@ class Proposal implements CommentableInterface
 
     /**
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Theme", inversedBy="proposals", cascade={"persist"})
-     * @ORM\JoinColumn(name="theme_id", referencedColumnName="id", nullable=true)
+     * @ORM\JoinColumn(name="theme_id", referencedColumnName="id", nullable=true, onDelete="SET NULL")
      */
     private $theme = null;
 
@@ -98,7 +91,7 @@ class Proposal implements CommentableInterface
      * @var ProposalForm
      *
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\ProposalForm", inversedBy="proposals")
-     * @ORM\JoinColumn(name="proposal_form_id", referencedColumnName="id")
+     * @ORM\JoinColumn(name="proposal_form_id", referencedColumnName="id", onDelete="CASCADE")
      */
     protected $proposalForm;
 
@@ -126,23 +119,25 @@ class Proposal implements CommentableInterface
      */
     private $proposalResponses;
 
-    protected $proposalResolver;
-
     /**
      * Constructor.
      */
     public function __construct()
     {
-        $this->votes            = new ArrayCollection();
-        $this->comments         = new ArrayCollection();
-        $this->voteCount        = 0;
-        $this->commentsCount    = 0;
-        $this->updatedAt        = new \Datetime();
+        $this->votes         = new ArrayCollection();
+        $this->comments      = new ArrayCollection();
+        $this->voteCount     = 0;
+        $this->commentsCount = 0;
+        $this->updatedAt     = new \Datetime();
     }
 
     public function __toString()
     {
-        return $this->getTitle();
+        if ($this->getId()) {
+            return $this->getTitle();
+        } else {
+            return 'New proposal';
+        }
     }
 
 

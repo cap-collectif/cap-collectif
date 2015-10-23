@@ -6,7 +6,6 @@ use Capco\AppBundle\Entity\Opinion;
 use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\ConsultationStep;
 use Capco\AppBundle\Entity\OpinionType;
-use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Form\Api\OpinionType as OpinionForm;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;

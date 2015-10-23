@@ -287,7 +287,7 @@ class ProjectAdmin extends Admin
                 'label' => 'admin.fields.project.events',
             ])
             ->add('posts', null, [
-                'label' => 'adminfields.project.posts',
+                'label' => 'admin.fields.project.posts',
             ])
             ->add('createdAt', null, [
                 'label' => 'admin.fields.project.created_at',

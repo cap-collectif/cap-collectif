@@ -12,7 +12,7 @@ class Version20150427184111 extends AbstractMigration
 {
     protected $steps;
     protected $types;
-    protected $projectAbstractSteps;
+    protected $consultationAbstractSteps;
     protected $consultationTypeOpinionTypes;
     protected $opinions;
 
@@ -133,7 +133,7 @@ class Version20150427184111 extends AbstractMigration
     public function preDown(Schema $schema)
     {
         $this->steps = $this->connection->fetchAll('SELECT * FROM step');
-        $this->projectAbstractSteps = $this->connection->fetchAll('SELECT * FROM consultation_abstractstep');
+        $this->consultationAbstractSteps = $this->connection->fetchAll('SELECT * FROM consultation_abstractstep');
         $this->types = $this->connection->fetchAll('SELECT * FROM consultationstep_opiniontypes');
         $this->consultationTypeOpinionTypes = $this->connection->fetchAll('SELECT * FROM consultationtype_opiniontypes');
         $this->opinions = $this->connection->fetchAll('SELECT * FROM opinion');
@@ -147,7 +147,7 @@ class Version20150427184111 extends AbstractMigration
             }
         }
 
-        foreach ($this->projectAbstractSteps as &$cas) {
+        foreach ($this->consultationAbstractSteps as &$cas) {
             foreach ($this->steps as &$step) {
                 if ($step['id'] === $cas['step_id']) {
                     $step['consultation_id'] = $cas['consultation_id'];

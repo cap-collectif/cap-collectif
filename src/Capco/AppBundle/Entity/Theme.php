@@ -159,7 +159,7 @@ class Theme
     public function __construct()
     {
         $this->projects = new ArrayCollection();
-        $this->Ideas = new ArrayCollection();
+        $this->ideas = new ArrayCollection();
         $this->events = new ArrayCollection();
         $this->posts = new ArrayCollection();
         $this->updatedAt = new \Datetime();
@@ -449,7 +449,7 @@ class Theme
      */
     public function removeProposal(Proposal $proposal)
     {
-        $this->Proposals->removeElement($proposal);
+        $this->proposals->removeElement($proposal);
     }
 
     /**

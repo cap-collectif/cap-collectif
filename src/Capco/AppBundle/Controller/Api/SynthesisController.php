@@ -105,14 +105,14 @@ class SynthesisController extends FOSRestController
      * @param ConsultationStep $consultationStep
      * @return \FOS\RestBundle\View\View
      */
-    public function createSynthesisFromConsultationStepAction(Request $request, ConsultationStep $consulationStep)
+    public function createSynthesisFromConsultationStepAction(Request $request, ConsultationStep $consultationStep)
     {
         $synthesis = new Synthesis();
         $form = $this->createForm(new SynthesisForm(), $synthesis);
         $form->submit($request->request->all(), false);
 
         if ($form->isValid()) {
-            $synthesis = $this->get('capco.synthesis.synthesis_handler')->createSynthesisFromConsultationStep($synthesis, $consulationStep);
+            $synthesis = $this->get('capco.synthesis.synthesis_handler')->createSynthesisFromConsultationStep($synthesis, $consultationStep);
             $view = $this->view($synthesis, Codes::HTTP_CREATED);
             $view->setSerializationContext(SerializationContext::create()->setGroups(array('SynthesisDetails', 'Elements')));
             $url = $this->generateUrl('get_synthesis', ['id' => $synthesis->getId()], UrlGeneratorInterface::ABSOLUTE_URL);

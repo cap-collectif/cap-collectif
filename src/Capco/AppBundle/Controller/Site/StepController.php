@@ -88,7 +88,7 @@ class StepController extends Controller
     }
 
     /**
-     * @Route("/projet/{projectSlug}/collect/{stepSlug}", name="app_project_show_collect")
+     * @Route("/project/{projectSlug}/collect/{stepSlug}", name="app_project_show_collect")
      * @Route("/consultation/{consultationSlug}/collect/{stepSlug}", name="app_consultation_show_collect")
      * @Template("CapcoAppBundle:Step:collect.html.twig")
      * @ParamConverter("step", class="CapcoAppBundle:CollectStep", options={"mapping" = {"stepSlug": "slug"}})

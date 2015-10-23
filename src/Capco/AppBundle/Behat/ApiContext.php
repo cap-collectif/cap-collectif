@@ -239,8 +239,8 @@ class ApiContext extends ApplicationContext
             $this->getEntityManager()->flush();
         }
 
-        $ConsultationStep = $this->getEntityManager()->getRepository('CapcoAppBundle:ProjectsStep')->find($csId);
-        $this->getService('capco.synthesis.synthesis_handler')->createSynthesisFromProjectsStep($synthesis, $ConsultationStep);
+        $consultationStep = $this->getEntityManager()->getRepository('CapcoAppBundle:ProjectsStep')->find($csId);
+        $this->getService('capco.synthesis.synthesis_handler')->createSynthesisFromProjectsStep($synthesis, $consultationStep);
     }
 
     /**

@@ -83,10 +83,12 @@ class ProposalResponse
 
     /**
      * @param Proposal $proposal
+     * @return $this
      */
-    public function setProposal($proposal)
+    public function setProposal(Proposal $proposal)
     {
         $this->proposal = $proposal;
+        return $this;
     }
 
     /**
@@ -99,10 +101,12 @@ class ProposalResponse
 
     /**
      * @param Question $question
+     * @return $this
      */
     public function setQuestion($question)
     {
         $this->question = $question;
+        return $this;
     }
 
     /**

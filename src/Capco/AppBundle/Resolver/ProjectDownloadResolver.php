@@ -97,9 +97,9 @@ class ProjectDownloadResolver
         ];
     }
 
-    public function getContent(ConsultationStep $ConsultationStep, $format)
+    public function getContent(ConsultationStep $consultationStep, $format)
     {
-        if (null == $ConsultationStep) {
+        if (null == $consultationStep) {
             throw new NotFoundHttpException('Project step not found');
         }
 
@@ -107,7 +107,7 @@ class ProjectDownloadResolver
             throw new \Exception('Wrong format');
         }
 
-        $data = $this->getData($ConsultationStep);
+        $data = $this->getData($consultationStep);
 
         $content = $this->templating->render('CapcoAppBundle:Project:download.xls.twig',
             array(

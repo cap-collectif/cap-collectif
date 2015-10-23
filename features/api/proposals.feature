@@ -2,7 +2,7 @@ Feature: Proposal Restful Api
   As an API client
 
   Scenario: Anonymous API client wants to get one proposal from a ProposalForm
-    When I send a GET request to "/api/proposal_form/1/proposals/1"
+    When I send a GET request to "/api/proposal_forms/1/proposals/1"
     Then the JSON response should match:
 """
 {
@@ -66,20 +66,20 @@ Feature: Proposal Restful Api
 """
     Then the JSON response status code should be 201
 
-  @database
-  Scenario: logged in API client wants to edit a proposal
-    Given I am logged in to api as user
-    When I send a PUT request to "api/proposal_forms/1/proposals/1" with json:
-"""
-{
-  "title": "Acheter un sauna par personne pour Capco",
-  "body": "Avec tout le travail accompli, on mérite bien chacun un (petit) cadeau, donc on a choisi un sauna. JoliCode interdit"
-}
-"""
-    Then the JSON response status code should be 200
+#  @database
+#  Scenario: logged in API client wants to edit a proposal
+#    Given I am logged in to api as user
+#    When I send a PUT request to "api/proposal_forms/1/proposals/1" with json:
+#"""
+#{
+#  "title": "Acheter un sauna par personne pour Capco",
+#  "body": "Avec tout le travail accompli, on mérite bien chacun un (petit) cadeau, donc on a choisi un sauna. JoliCode interdit"
+#}
+#"""
+#    Then the JSON response status code should be 200
 
-  @database
-  Scenario: logged in API client wants to edit a proposal
-    Given I am logged in to api as user
-    When I send a DELETE request to "api/proposal_forms/1/proposals/1" with json:
-    Then the JSON response status code should be 200
+#  @database
+#  Scenario: logged in API client wants to edit a proposal
+#    Given I am logged in to api as user
+#    When I send a DELETE request to "api/proposal_forms/1/proposals/1" with json:
+#    Then the JSON response status code should be 200

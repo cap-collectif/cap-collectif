@@ -23,11 +23,6 @@ Capco\AppBundle\Entity\Proposal:
             type: Capco\AppBundle\Entity\ProposalResponse
             serialized_name: proposalResponses
             groups: [Proposals]
-        proposalForm:
-            expose: true
-            type: Capco\AppBundle\Entity\ProposalForm
-            serialized_name: proposalForm
-            groups: [Proposals]
         createdAt:
             expose: true
             type: DateTime

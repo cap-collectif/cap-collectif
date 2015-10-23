@@ -1,5 +1,5 @@
-{% set ConsultationSteps = object.allConsultationSteps %}
-{% if ConsultationSteps | length > 0 %}
+{% set consultationSteps = object.allConsultationSteps %}
+{% if consultationSteps | length > 0 %}
 
     {% if consultationSteps | length == 1 %}
         <a href="" class="btn btn-default btn-sm view_link" data-toggle="modal" data-target="#download-project-modal-{{ consultationSteps[0].step.id }}">
@@ -9,7 +9,7 @@
         <div style="position: relative;">
             <a class="btn btn-sm btn-default view_link sonata-ba-action dropdown-toggle" type="button" data-toggle="dropdown"><i class="cap cap-download-2"></i> {{ 'project.download.button' | trans({}, 'CapcoAppBundle') }} <span class="caret"></span></a>
             <ul class="dropdown-menu" role="menu" style="position: absolute; top: 100%;">
-                {% for cs in ConsultationSteps %}
+                {% for cs in consultationSteps %}
                     <li class="small">
                         <a data-toggle="modal" data-target="#download-project-modal-{{ cs.step.id }}">
                             {{ 'project.download.step' | trans({'%position%': cs.position, '%title%': cs.step.title}, 'CapcoAppBundle') }}

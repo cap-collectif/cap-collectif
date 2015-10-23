@@ -39,7 +39,7 @@ Capco\AppBundle\Entity\Project:
         versionsRankingThreshold: 20
     p6:
         title: Budget Participatif Rennes
-        Author: @user503
+        Author: @user502
         isEnabled: true
         themes: [@theme3]
         publishedAt: <dateTimeBetween('-50 days', 'now')>

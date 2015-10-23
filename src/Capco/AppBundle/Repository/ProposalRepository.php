@@ -32,16 +32,13 @@ class ProposalRepository extends EntityRepository
 
     /**
      * @param $id
-     * @param $proposalForm
      * @return mixed
      * @throws \Doctrine\ORM\NonUniqueResultException
      */
-    public function getOne($id, $proposalForm) {
+    public function getOne($id) {
         $qb = $this->getIsEnabledQueryBuilder()
             ->addSelect('pr')
             ->leftJoin('proposal.proposalResponses', 'pr')
-            ->andWhere('proposal.proposalForm = :proposalForm')
-            ->setParameter('proposalForm', $proposalForm)
             ->andWhere('proposal.id = :id')
             ->setParameter('id', $id)
         ;
