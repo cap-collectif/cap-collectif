@@ -14,11 +14,15 @@
     {% endif %}
     <meta property="article:author" content="{{ url('capco_user_profile_show_all', {'slug': project.Author.slug}) }}" />
     <meta property="article:publisher" content="{{ url('capco_user_profile_show_all', {'slug': project.Author.slug}) }}" />
-
 {% endblock %}
 
 {% block title %}
     {{ parent() }} - {{ project.title }}
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link href="{{ asset('js/fancybox/jquery.fancybox.css') }}" rel="stylesheet">
 {% endblock %}
 
 {% block jumbotron %}
@@ -26,35 +30,62 @@
 
 {% block body %}
 
-<div class="container  container--custom">
-    {% include '@CapcoApp/Project/show_title.html.twig' %}
-</div>
-
-<div class="container container--custom">
-    <div class="row">
-        <div class="col-xs-12 col-sm-4 col-md-3">
-            {{ render(controller('CapcoAppBundle:Site/Project:showMeta', {'projectSlug': project.slug, 'currentStepSlug': currentStep.slug})) }}
-        </div>
-
-        <div class="col-xs-12  col-sm-8  col-md-9" id="details">
-            <h2 class="h2">
-                {{ currentStep.proposalForm.proposals | length }} propositions
-                <span
-                    class="pull-right"
-                    id="render-collect-step-proposal-create"
-                    data-form='{{ form|escape }}'
-                >
-                </span>
-            </h2>
-            <div
-                id="render-collect-step-page"
-                data-form='{{ form|escape }}'
-                data-themes='{{ themes|escape }}'
-            >
-            </div>
-        </div>
+    <div class="container  container--custom">
+        {% include '@CapcoApp/Project/show_title.html.twig' %}
     </div>
-</div>
 
+    <div class="container  container--custom">
+
+        {% if currentStep.isClosed %}
+            <div class="alert alert-info alert-dismissible  block" role="alert">
+                <p><strong>{{ 'project.show.alert.ended.title'|trans({}, 'CapcoAppBundle') }}</strong> {{ 'project.show.alert.ended.text'|trans({}, 'CapcoAppBundle') }}</p>
+            </div>
+        {% endif %}
+
+        {% if currentStep.isFuture %}
+            <div class="alert alert-info alert-dismissible  block" role="alert">
+                <p><strong>{{ 'project.show.alert.future.title'|trans({}, 'CapcoAppBundle') }}</strong> {{ 'project.show.alert.future.text'|trans({'%date%': '<strong>' ~ currentStep.startAt| localizeddate('long', 'none', app.request.locale) ~ '</strong>'}, 'CapcoAppBundle') | raw }}</p>
+            </div>
+        {% endif %}
+
+        <div class="row">
+            <div class="col-xs-12  col-sm-4  col-md-3  block--mobile">
+                {{ render(controller('CapcoAppBundle:Site/Project:showMeta', {'projectSlug': project.slug, 'currentStepSlug': currentStep.slug})) }}
+            </div>
+
+            <div class="col-xs-12  col-sm-8  col-md-9" id="details">
+                {% block content %}
+                    {% if currentStep.body is not null %}
+                        <p class="text-center opinion-type__title level--0">
+                            {{ 'project.show.meta.intro.title' | trans({}, 'CapcoAppBundle') }}
+                        </p>
+                        <div class="block  block--bordered">
+                            <div class="proposal  proposal--current  proposal--default">
+                                <div class="box">
+                                    <div class="more">{{ currentStep.body | raw }}</div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endif %}
+                    {{ render(controller('CapcoAppBundle:Site/Project:showProposals', {'projectSlug': project.slug, 'currentStep': currentStep})) }}
+                {% endblock %}
+            </div> <!-- col-xs-12  col-sm-8  col-md-9 -->
+        </div> <!-- .row -->
+    </div>
 {% endblock %}
 
+{% block javascripts %}
+    {{ parent() }}
+    <script type="text/javascript">
+        App.pieChart();
+        App.customModal('.modal--custom');
+        $('.more').readmore({
+            collapsedHeight: 88,
+            moreLink: '<a class="text-center" href="#">{{ 'project.show.meta.read_more'|trans({}, 'CapcoAppBundle') }}</a>',
+            lessLink: '<a class="text-center" href="#">{{ 'project.show.meta.read_less'|trans({}, 'CapcoAppBundle') }}</a>'
+        });
+        {% if project.video %}
+        App.video('.fancybox');
+        {% endif %}
+    </script>
+{% endblock %}

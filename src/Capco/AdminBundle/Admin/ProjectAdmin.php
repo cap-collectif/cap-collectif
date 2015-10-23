@@ -244,7 +244,12 @@ class ProjectAdmin extends Admin
         $this->collectStep = $subject->getCurrentStep();
 
         $showMapper
-            ->with('admin.fields.project.general', ['class' => 'col-md-3'])
+            ->with('admin.fields.project.general',   ['class' => 'col-md-3'])->end()
+            ->with('admin.fields.project.proposals', ['class' => 'col-md-9'])->end()
+        ;
+
+        $showMapper
+            ->with('admin.fields.project.general')
             ->add('title', null, [
                 'label' => 'admin.fields.project.title',
             ])
@@ -304,7 +309,7 @@ class ProjectAdmin extends Admin
         ;
 
         $showMapper
-            ->with('admin.fields.project.proposals', ['class' => 'col-md-9'])
+            ->with('admin.fields.project.proposals')
             ->add('proposals', null, [
                 'label' => false,
                 'template' => 'CapcoAdminBundle:Project:proposals_show_field.html.twig',

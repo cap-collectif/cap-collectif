@@ -1,10 +1,17 @@
-export default class UserLink extends React.Component {
+const UserLink = React.createClass({
+  propTypes: {
+    user: React.PropTypes.object,
+  },
 
   render() {
-    return <a href={this.props.user._links.profile}>{this.props.user.displayName}</a>;
-  }
-}
+    if (this.props.user) {
+      return (
+        <a href={this.props.user._links.profile}>{this.props.user.displayName}</a>
+      );
+    }
+    return <span></span>;
+  },
 
-UserLink.propTypes = {
-  user: React.PropTypes.object.isRequired,
-};
+});
+
+export default UserLink;
