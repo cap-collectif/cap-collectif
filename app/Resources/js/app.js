@@ -5,9 +5,6 @@ import OpinionVersionsBox from './components/Opinion/OpinionVersionsBox';
 import OpinionSourcesBox from './components/Opinion/OpinionSourcesBox';
 import OpinionPage from './components/Opinion/OpinionPage';
 import AuthService from './services/AuthService';
-import FeatureService from './services/FeatureService';
-
-FeatureService.load();
 
 AuthService
 .login()
