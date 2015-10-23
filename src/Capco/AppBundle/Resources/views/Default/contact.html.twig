@@ -3,6 +3,17 @@
 
 {% block canonical_link %}{{ url('app_contact') }}{% endblock %}
 
+{% set teaser = capco_site_parameter_value('contact.jumbotron.body') %}
+{% set body = capco_site_parameter_value('contact.content.body') %}
+
+{% block metaTags %}
+    {% include 'CapcoAppBundle:Default:meta.html.twig' with {
+        'title':       'contact.title'|trans({}, 'CapcoAppBundle'),
+        'description': (teaser|striptags ?: body|striptags|truncate(250, true)),
+        'url':         url('app_contact')
+    } only %}
+{% endblock %}
+
 {% block title %}
         {{ parent() }} - {{ 'contact.title' | trans({}, 'CapcoAppBundle') }}
 {% endblock %}
@@ -11,7 +22,6 @@
     <div class="jumbotron  jumbotron--custom  jumbotron--bg-1  text-center">
         <div class="container">
             <h1>{{ 'contact.title' | trans({}, 'CapcoAppBundle') }}</h1>
-            {% set teaser = capco_site_parameter_value('contact.jumbotron.body') %}
             {%  if teaser != null %}
                 {{ teaser|raw }}
             {% endif %}
@@ -21,7 +31,6 @@
 
 {% block body %}
     <div class="container  container--custom">
-        {% set body = capco_site_parameter_value('contact.content.body') %}
         {%  if body != null %}
             {{ body|raw }}
         {% endif %}

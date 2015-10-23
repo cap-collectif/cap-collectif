@@ -80,8 +80,7 @@
         "guzzlehttp/guzzle": "~5.0",
         "coduo/php-matcher": "1.1.*",
         "jolicode/jolinotif": "^1.0",
-        "phpunit/phpunit": "@stable",
-        "pyrech/composer-changelogs": "^1.2"
+        "phpunit/phpunit": "@stable"
     },
     "scripts": {
         "post-root-package-install": [
