@@ -2,18 +2,12 @@
 
 {% block canonical_link %}{{ url('app_project_new_opinion', {'projectSlug': project.slug, 'stepSlug': currentStep.slug, 'opinionTypeSlug': opinionType.slug}) }}{% endblock %}
 
-{% block metaTags %}
-    {% include 'CapcoAppBundle:Default:meta.html.twig' with {
-    'title': project.title~' - '~('opinion.create.title'|trans({}, 'CapcoAppBundle')),
-    'url':   url('app_project_new_opinion', {'projectSlug': project.slug, 'stepSlug': currentStep.slug, 'opinionTypeSlug': opinionType.slug}),
-    } only %}
-{% endblock %}
-
 {% block title %}
     {{ parent() }} - {{ project.title }} - {{ 'opinion.create.title'|trans({}, 'CapcoAppBundle') }}
 {% endblock %}
 
-{% block jumbotron %}{% endblock %}
+{% block jumbotron %}
+{% endblock %}
 
 {% block body %}
     {% set title = project.opinionTerm == 0 ? 'opinion.create.title' : 'opinion.create.article_title' %}
