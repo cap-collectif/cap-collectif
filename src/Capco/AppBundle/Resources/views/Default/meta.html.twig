@@ -14,9 +14,11 @@
 {% endif %}
 
 {% if image is defined and image is not empty %}
-    <meta property="og:image" content="{{ asset(image, null, true) }}" />
+    {# used to cast Twig_Markup oject to string so we can apply absolute_url #}
+    {% set image = image ~ '' %}
+    <meta property="og:image" content="{{ absolute_url(image) }}" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:image" content="{{ asset(image, null, true) }}" />
+    <meta name="twitter:image" content="{{ absolute_url(image) }}" />
 {% endif %}
 
 <meta property="og:type" content="{{ type|default('website') }}" />
