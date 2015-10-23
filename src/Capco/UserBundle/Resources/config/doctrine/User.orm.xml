@@ -60,7 +60,7 @@
 
         <field name="address" column="address" type="string" length="255" nullable="true" />
         <field name="address2" column="address2" type="string" length="255" nullable="true" />
-        <field name="zipCode" column="zip_code" type="integer" nullable="true" />
+        <field name="zipCode" column="zip_code" type="string" length="10" nullable="true" />
         <field name="city" column="city" type="string" length="255" nullable="true" />
         <field name="neighborhood" column="neighborhood" type="string" length="255" nullable="true" />
 
