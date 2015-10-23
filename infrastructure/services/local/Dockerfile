@@ -21,10 +21,6 @@ RUN apt-get update && \
     sed -i 's/^\(dir .*\)$/# \1\ndir \/data/' /etc/redis/redis.conf && \
     sed -i 's/^\(logfile .*\)$/# \1/' /etc/redis/redis.conf && \
 
-    # Install node js and deps for npm install
-    wget https://deb.nodesource.com/setup -O- -q | bash - && \
-    apt-get install -y nodejs npm && \
-
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
@@ -43,7 +39,7 @@ RUN \
 ENV JAVA_HOME /usr/lib/jvm/java-8-oracle
 
 # Install elasticsearch.
-ENV ES_PKG_NAME elasticsearch-1.7.0
+ENV ES_PKG_NAME elasticsearch-1.7.3
 RUN \
   cd / && \
   wget https://download.elasticsearch.org/elasticsearch/elasticsearch/$ES_PKG_NAME.tar.gz && \
@@ -100,9 +96,9 @@ COPY varnish/capco.vcl          /etc/varnish/capco.vcl
 COPY entrypoint.sh         /entrypoint.sh
 RUN chmod 755 /*.sh
 RUN chown -R mysql:mysql /var/lib/mysql_save
+
 USER capco
 
-VOLUME /var/www/web/media/cache
 VOLUME /data
 VOLUME /etc/elasticsearch/data
 

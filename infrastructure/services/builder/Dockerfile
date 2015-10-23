@@ -33,9 +33,11 @@ RUN npm install -g npm && \
 RUN addgroup --gid=1000 capco && \
     adduser --system --uid=1000 --home /home/capco --shell /bin/bash capco
 
-# Install composer / drush
+# Install composer & tools
 RUN wget https://getcomposer.org/composer.phar -O- -q >> /usr/local/bin/composer && \
-    chmod +x /usr/local/bin/composer
+    wget http://get.sensiolabs.org/php-cs-fixer.phar -O- -q >> /usr/local/bin/php-cs-fixer && \
+    chmod +x /usr/local/bin/composer && \
+    chmod +x /usr/local/bin/php-cs-fixer
 
 COPY capco.ini /etc/php5/cli/conf.d/capco.ini
 COPY build.sh /usr/local/bin/build
