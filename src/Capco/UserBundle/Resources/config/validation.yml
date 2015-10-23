@@ -28,7 +28,7 @@ Capco\UserBundle\Entity\User:
     website:
       - Url: { groups: [profile] }
     zipCode:
-      - Length: { min: 0, max: 10, minMessage: user.register.invalid_zip_code, maxMessage: user.register.invalid_zip_code, groups: [profile] }
+      - Range: { min: 100, max: 99999, minMessage: user.register.invalid_zip_code, maxMessage: user.register.invalid_zip_code, invalidMessage: user.register.invalid_zip_code, groups: [profile] }
 
 Capco\UserBundle\Entity\UserType:
   constraints:

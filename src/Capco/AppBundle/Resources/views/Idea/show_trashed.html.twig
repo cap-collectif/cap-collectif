@@ -3,6 +3,16 @@
 {% block canonical_link %}{{ url('app_idea_trashed') }}{% endblock %}
 
 {% set title = capco_site_parameter_value('ideas.trashed.jumbotron.title') %}
+{% set content_body = capco_site_parameter_value('ideas.trashed.content.body') %}
+
+{% block metaTags %}
+    {% include 'CapcoAppBundle:Default:meta.html.twig' with {
+        'title':       (title ?: 'idea.trashed.jumbotron.title'|trans({}, 'CapcoAppBundle')),
+        'description': content_body|striptags|truncate(250, true),
+        'url':         url('app_idea_trashed')
+    } only %}
+{% endblock %}
+
 {% block title %}
     {% if null != title %}
         {{ parent() }} - {{ title }}
@@ -26,7 +36,6 @@
 {% block body %}
 
     <div class="container  container--custom">
-        {% set content_body = capco_site_parameter_value('ideas.trashed.content.body') %}
         {% if null != content_body %}
             {{ content_body|raw }}
         {% endif %}

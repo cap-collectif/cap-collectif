@@ -3,17 +3,19 @@
 {% block canonical_link %}{{ url('app_project_show_opinions', {'projectSlug': project.slug, 'stepSlug': currentStep.slug, 'opinionTypeSlug': opinionType.slug}) }}{% endblock %}
 
 {% block metaTags %}
-    <meta property="og:title" content="{{ project.title }} - {{ opinionType.title }}" />
-    <meta property="og:url" content="{{ url('app_project_show_opinions', {'projectSlug': project.slug, 'stepSlug': currentStep.slug, 'opinionTypeSlug': opinionType.slug}) }}" />
-    {% if currentStep is defined and currentStep.body %}
-        <meta property="og:description" content="{{ currentStep.body }}" />
-    {% endif %}
-    <meta property="og:type" content="opinions" />
-    {% if project.Cover %}
-        <meta property="og:image" content="{% path project.Cover, 'blockHeader' %}" />
-    {% endif %}
-    <meta property="article:author" content="{{ url('capco_user_profile_show_all', {'slug': project.Author.slug}) }}" />
-    <meta property="article:publisher" content="{{ url('capco_user_profile_show_all', {'slug': project.Author.slug}) }}" />
+    {% set projectCover %}{% if project.Cover %}{% path project.Cover, 'blockHeader' %}{% endif %}{% endset %}
+    {% include 'CapcoAppBundle:Default:meta.html.twig' with {
+        'title':       project.title~' - '~opinionType.title,
+        'description': currentStep.body|striptags|truncate(250, true),
+        'url':         url('app_project_show_opinions', {'projectSlug': project.slug, 'stepSlug': currentStep.slug, 'opinionTypeSlug': opinionType.slug}),
+        'type':        'opinions',
+        'image':       projectCover,
+        'author':      url('capco_user_profile_show_all', {'slug': project.Author.slug})
+    } only %}
+{% endblock %}
+
+{% block title %}
+    {{ parent() }} - {{ project.title }} - {{ opinionType.title }}
 {% endblock %}
 
 {% block content %}
