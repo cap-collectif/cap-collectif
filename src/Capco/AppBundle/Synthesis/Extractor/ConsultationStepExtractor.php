@@ -6,6 +6,7 @@ use Capco\AppBundle\Entity\OpinionType;
 use Capco\AppBundle\Entity\OpinionVersion;
 use Capco\AppBundle\Entity\Source;
 use Capco\AppBundle\Resolver\OpinionTypesResolver;
+use Capco\AppBundle\Resolver\UrlResolver;
 use Doctrine\ORM\EntityManager;
 use Capco\AppBundle\Entity\Synthesis\Synthesis;
 use Capco\AppBundle\Entity\Synthesis\SynthesisElement;
@@ -31,16 +32,18 @@ class ConsultationStepExtractor
     protected $translator;
     protected $router;
     protected $opinionTypesResolver;
+    protected $urlResolver;
     protected $synthesis;
     protected $consultationStep;
     protected $previousElements;
 
-    public function __construct(EntityManager $em, TranslatorInterface $translator, Router $router, OpinionTypesResolver $opinionTypeResolver)
+    public function __construct(EntityManager $em, TranslatorInterface $translator, Router $router, OpinionTypesResolver $opinionTypeResolver, UrlResolver $urlResolver)
     {
         $this->em = $em;
         $this->translator = $translator;
         $this->router = $router;
         $this->opinionTypesResolver = $opinionTypeResolver;
+        $this->urlResolver = $urlResolver;
     }
 
     // *********************************** Main method **********************************
@@ -277,6 +280,7 @@ class ConsultationStepExtractor
         $element->setLinkedDataId($contribution->getId());
         $element->setLinkedDataCreation($contribution->getCreatedAt());
         $element->setLinkedDataLastUpdate($contribution->getUpdatedAt());
+        $element->setLinkedDataUrl($this->urlResolver->getObjectUrl($contribution, true));
 
         if ($contribution instanceof OpinionType) {
             $element->setDisplayType('folder');
@@ -355,6 +359,7 @@ class ConsultationStepExtractor
         $element->setAuthor(null);
 
         $element->setTitle($opinionType->getTitle());
+        $element->setSubtitle($opinionType->getSubtitle());
         $element->setBody(null);
 
         // Set votes

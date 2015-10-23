@@ -1,4 +1,4 @@
-import {RECEIVE_COUNT, RECEIVE_ELEMENTS, RECEIVE_ELEMENTS_SUCCESS, RECEIVE_ELEMENTS_FAILURE, RECEIVE_ELEMENT, RECEIVE_ELEMENT_SUCCESS, RECEIVE_ELEMENT_FAILURE, EXPAND_NAVBAR_ITEM, SELECT_NAVBAR_ITEM, CREATE_ELEMENT, ARCHIVE_ELEMENT, NOTE_ELEMENT, COMMENT_ELEMENT, MOVE_ELEMENT, DIVIDE_ELEMENT, NAME_ELEMENT, UPDATE_ELEMENT_SUCCESS, UPDATE_ELEMENT_FAILURE, CREATE_ELEMENT_SUCCESS, CREATE_ELEMENT_FAILURE} from '../constants/SynthesisElementConstants';
+import {RECEIVE_COUNT, RECEIVE_ELEMENTS, RECEIVE_ELEMENTS_SUCCESS, RECEIVE_ELEMENTS_FAILURE, RECEIVE_ELEMENT, RECEIVE_ELEMENT_SUCCESS, RECEIVE_ELEMENT_FAILURE, EXPAND_TREE_ITEM, SELECT_NAV_ITEM, CREATE_ELEMENT, ARCHIVE_ELEMENT, NOTE_ELEMENT, COMMENT_ELEMENT, MOVE_ELEMENT, DIVIDE_ELEMENT, NAME_ELEMENT, UPDATE_ELEMENT_SUCCESS, UPDATE_ELEMENT_FAILURE, CREATE_ELEMENT_SUCCESS, CREATE_ELEMENT_FAILURE} from '../constants/SynthesisElementConstants';
 import BaseStore from './BaseStore';
 import {DISMISS_MESSAGE} from '../constants/MessageConstants';
 import ArrayHelper from '../services/ArrayHelper';
@@ -30,10 +30,15 @@ class SynthesisElementStore extends BaseStore {
       'notIgnoredTree': 0,
       'fromDivision': 0,
     };
-    this._expandedNavbarItems = {
-      root: true,
+    this._expandedItems = {
+      'nav': {
+        root: true,
+      },
+      'view': {
+        root: true,
+      },
     };
-    this._selectedNavbarItem = 'root';
+    this._selectedNavItem = 'root';
     this._isProcessing = false;
     this._isFetchingTree = false;
     this._isElementSync = false;
@@ -82,6 +87,7 @@ class SynthesisElementStore extends BaseStore {
       break;
     case RECEIVE_ELEMENTS:
       this._isFetchingTree = true;
+      this._isInboxSync[action.type] = false;
       this.emitChange();
       break;
     case RECEIVE_ELEMENTS_SUCCESS:
@@ -99,11 +105,11 @@ class SynthesisElementStore extends BaseStore {
       this._isFetchingTree = false;
       this.emitChange();
       break;
-    case EXPAND_NAVBAR_ITEM:
-      this._expandedNavbarItems[action.elementId] = action.expanded;
+    case EXPAND_TREE_ITEM:
+      this._expandedItems[action.type][action.elementId] = action.expanded;
       this.emitChange();
       break;
-    case SELECT_NAVBAR_ITEM:
+    case SELECT_NAV_ITEM:
       this.updateSelectedId(action.elementId);
       this.emitChange();
       break;
@@ -260,12 +266,12 @@ class SynthesisElementStore extends BaseStore {
     return this._elements;
   }
 
-  get expandedNavbarItems() {
-    return this._expandedNavbarItems;
+  get expandedItems() {
+    return this._expandedItems;
   }
 
-  get selectedNavbarItem() {
-    return this._selectedNavbarItem;
+  get selectedNavItem() {
+    return this._selectedNavItem;
   }
 
   get counts() {
@@ -292,7 +298,7 @@ class SynthesisElementStore extends BaseStore {
 
   updateSelectedId(selected = this._selectedNavbarItem) {
     this._selectedNavbarItem = selected;
-    const expanded = this._expandedNavbarItems;
+    const expanded = this._expandedItems.nav;
     expanded[selected] = true;
     const element = this.getElementInTreeById(this._elements.notIgnoredTree, selected);
     if (element) {
@@ -300,7 +306,7 @@ class SynthesisElementStore extends BaseStore {
         expanded[parent.id] = true;
       });
     }
-    this._expandedNavbarItems = expanded;
+    this._expandedItems.nav = expanded;
   }
 
   changeElementParent(parentId, elementId) {

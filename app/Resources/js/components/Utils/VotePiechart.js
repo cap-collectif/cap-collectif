@@ -54,7 +54,10 @@ const VotePiechart = React.createClass({
   },
 
   render() {
-    return <div className="opinion__chart" ref="piechart" />;
+    if (this.props.ok || this.props.mitige || this.props.nok) {
+      return <div className="opinion__chart" ref="piechart"/>;
+    }
+    return null;
   },
 
 });

@@ -1,7 +1,29 @@
 import AppDispatcher from '../dispatchers/AppDispatcher';
 import Fetcher from '../services/Fetcher';
+import {
+  RECEIVE_COUNT,
+  RECEIVE_ELEMENTS,
+  RECEIVE_ELEMENTS_SUCCESS,
+  RECEIVE_ELEMENTS_FAILURE,
+  RECEIVE_ELEMENT,
+  RECEIVE_ELEMENT_SUCCESS,
+  RECEIVE_ELEMENT_FAILURE,
+  EXPAND_TREE_ITEM,
+  SELECT_NAV_ITEM,
+  CREATE_ELEMENT,
+  ARCHIVE_ELEMENT,
+  NOTE_ELEMENT,
+  COMMENT_ELEMENT,
+  NAME_ELEMENT,
+  MOVE_ELEMENT,
+  DIVIDE_ELEMENT,
+  UPDATE_ELEMENT_SUCCESS,
+  UPDATE_ELEMENT_FAILURE,
+  CREATE_ELEMENT_SUCCESS,
+  CREATE_ELEMENT_FAILURE,
+  NAV_DEPTH,
+} from '../constants/SynthesisElementConstants';
 import {DISMISS_MESSAGE} from '../constants/MessageConstants';
-import {RECEIVE_COUNT, RECEIVE_ELEMENTS, RECEIVE_ELEMENTS_SUCCESS, RECEIVE_ELEMENTS_FAILURE, RECEIVE_ELEMENT, RECEIVE_ELEMENT_SUCCESS, RECEIVE_ELEMENT_FAILURE, EXPAND_NAVBAR_ITEM, SELECT_NAVBAR_ITEM, CREATE_ELEMENT, ARCHIVE_ELEMENT, NOTE_ELEMENT, COMMENT_ELEMENT, NAME_ELEMENT, MOVE_ELEMENT, DIVIDE_ELEMENT, UPDATE_ELEMENT_SUCCESS, UPDATE_ELEMENT_FAILURE, CREATE_ELEMENT_SUCCESS, CREATE_ELEMENT_FAILURE, NAVBAR_DEPTH} from '../constants/SynthesisElementConstants';
 
 const idOf = (val) => {
   if (val === 'root') {
@@ -113,8 +135,8 @@ export default {
       actionType: RECEIVE_ELEMENTS,
       type: type + 'Tree',
     });
-    let url = `/syntheses/${synthesis}/elements/tree?type=${type}&depth=${NAVBAR_DEPTH}`;
-    url += parent ? `&parent=${parent}` : null;
+    let url = `/syntheses/${synthesis}/elements/tree?type=${type}&depth=${NAV_DEPTH}`;
+    url += parent ? `&parent=${parent}` : '';
     Fetcher
       .get(url)
       .then((data) => {
@@ -126,11 +148,13 @@ export default {
         });
         return true;
       })
-      .catch(() => {
+      .catch((err) => {
+        console.log(err);
         AppDispatcher.dispatch({
           actionType: RECEIVE_ELEMENTS_FAILURE,
           type: type + 'Tree',
         });
+        return false;
       });
   },
 
@@ -198,17 +222,18 @@ export default {
     updateElementFromData(synthesis, element, data, 'common.success.archive_success', 'common.errors.archive_error');
   },
 
-  expandNavbarItem(elementId, expanded) {
+  expandTreeItem(type, elementId, expanded) {
     AppDispatcher.dispatch({
-      actionType: EXPAND_NAVBAR_ITEM,
+      actionType: EXPAND_TREE_ITEM,
       elementId: elementId,
       expanded: expanded,
+      type: type,
     });
   },
 
-  selectNavbarItem(elementId) {
+  selectNavItem(elementId) {
     AppDispatcher.dispatch({
-      actionType: SELECT_NAVBAR_ITEM,
+      actionType: SELECT_NAV_ITEM,
       elementId: elementId,
     });
   },

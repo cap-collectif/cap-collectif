@@ -6,7 +6,7 @@ const FlashMessages = React.createClass({
     success: React.PropTypes.array,
     style: React.PropTypes.object,
     form: React.PropTypes.bool,
-    onDismissMessage: React.PropTypes.function,
+    onDismissMessage: React.PropTypes.func,
   },
   mixins: [ReactIntl.IntlMixin],
 
@@ -21,7 +21,9 @@ const FlashMessages = React.createClass({
   },
 
   dismissMessage(message, type) {
-    this.props.onDismissMessage(message, type);
+    if (typeof this.props.onDismissMessage === 'function') {
+      this.props.onDismissMessage(message, type);
+    }
   },
 
   renderMessage(message, type) {
@@ -30,7 +32,7 @@ const FlashMessages = React.createClass({
         <Alert
           bsStyle={type}
           style={this.props.style}
-          onDismiss={this.dismissMessage.bind(null, message, type)}
+          onDismiss={typeof this.props.onDismissMessage === 'function' ? this.dismissMessage.bind(null, message, type) : null}
         >
           <p>{this.getIntlMessage(message)}</p>
         </Alert>

@@ -122,5 +122,14 @@ export default {
         },
       },
     },
+    vote: {
+      ok: 'D\'accord',
+      mitige: 'Mitigé',
+      nok: 'Pas d\'accord',
+      total: '{nb, plural, =0{# vote} one{# vote} other{# votes}}',
+    },
+    counter: {
+      contributions: '{nb, plural, =0{# contribution} one{# contribution} other{# contributions}}',
+    },
   },
 };
