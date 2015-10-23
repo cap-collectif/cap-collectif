@@ -6,5 +6,5 @@ php vendor/sensio/distribution-bundle/Sensio/Bundle/DistributionBundle/Resources
 
 # Brunch generation / Bower
 npm install
-bower install --config.interactive=false
+bower install --config.interactive=false --config.storage.cache=/home/capco/.cache/bower
 brunch build
