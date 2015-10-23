@@ -3,6 +3,22 @@
 
 {% block canonical_link %}{{ url('capco_user_profile_show_votes', {'slug': user.slug}) }}{% endblock %}
 
+{% block metaTags %}
+    {# OpenGraph doesn't support svg as image so no default avatar :'( #}
+    {% set userMedia %}{% if user.Media %}{% path user.Media, 'avatar' %}{% endif %}{% endset %}
+    {% include 'CapcoAppBundle:Default:meta.html.twig' with {
+        'title':       'user.profile.show.title'|trans({'%name%': user.username }, 'CapcoAppBundle')~' - '~'user.profile.show.propositions.votes.all'|trans({}, 'CapcoAppBundle'),
+        'description': user.biography,
+        'url':         url('capco_user_profile_show_votes', {'slug': user.slug}),
+        'type':        'profile',
+        'image':       userMedia
+    } only %}
+{% endblock %}
+
+{% block title %}
+    {{ parent() }} - {{ 'user.profile.show.title'|trans({'%name%': user.username }, 'CapcoAppBundle') }} - {{ 'user.profile.show.propositions.votes.all'|trans({}, 'CapcoAppBundle') }}
+{% endblock %}
+
 {% block title %}
     {{ parent() }} - {{ 'user.profile.show.title'|trans({'%name%': user.username }, 'CapcoAppBundle') }}
 {% endblock %}
