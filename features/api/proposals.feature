@@ -17,8 +17,8 @@ Feature: Proposal Restful Api
     "media": @...@,
     "vip": true,
     "_links": {
-      "profile": "http://127.0.0.1/profile/user/welcomattic",
-      "settings": "http://127.0.0.1/profile/edit-profile"
+      "profile": @string@,
+      "settings": @string@
     }
   },
   "created_at": "@string@.isDateTime()",

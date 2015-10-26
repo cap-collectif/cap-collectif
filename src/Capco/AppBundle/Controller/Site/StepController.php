@@ -92,20 +92,19 @@ class StepController extends Controller
      * @Route("/consultation/{consultationSlug}/collect/{stepSlug}", name="app_consultation_show_collect")
      * @Template("CapcoAppBundle:Step:collect.html.twig")
      * @ParamConverter("step", class="CapcoAppBundle:CollectStep", options={"mapping" = {"stepSlug": "slug"}})
+     * @ParamConverter("project", class="CapcoAppBundle:Project", options={"mapping" = {"projectSlug": "slug"}, "repository_method": "getOne", "map_method_signature": true})
      *
-     * @param $projectSlug
+     * @param Project $project
      * @param CollectStep $step
-     *
      * @return array
      */
-    public function showCollectAction($projectSlug, CollectStep $step)
+    public function showCollectAction(Project $project, CollectStep $step)
     {
         if (!$step->canDisplay()) {
             throw new NotFoundHttpException();
         }
 
         $em = $this->getDoctrine()->getManager();
-        $project = $em->getRepository('CapcoAppBundle:Project')->getOne($projectSlug);
         if (!$project) {
             throw new NotFoundHttpException();
         }
