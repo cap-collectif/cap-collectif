@@ -3,7 +3,6 @@ import CommentList from './CommentList';
 const CommentAnswers = React.createClass({
   propTypes: {
     comments: React.PropTypes.array,
-    isReportingEnabled: React.PropTypes.bool,
   },
   mixins: [ReactIntl.IntlMixin],
 
@@ -11,7 +10,7 @@ const CommentAnswers = React.createClass({
     if (this.props.comments) {
       return (
         <div>
-          <CommentList comments={this.props.comments} isReportingEnabled={this.props.isReportingEnabled} root={false}/>
+          <CommentList comments={this.props.comments} root={false}/>
         </div>
       );
     }

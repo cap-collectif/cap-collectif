@@ -13,7 +13,6 @@ const FormattedMessage = ReactIntl.FormattedMessage;
 const OpinionTabs = React.createClass({
   propTypes: {
     opinion: React.PropTypes.object.isRequired,
-    isReportingEnabled: React.PropTypes.bool.isRequired,
   },
   mixins: [ReactIntl.IntlMixin],
 
@@ -109,7 +108,6 @@ const OpinionTabs = React.createClass({
   renderVersionsContent() {
     return (
       <OpinionVersionsBox
-        isReportingEnabled={this.props.isReportingEnabled}
         isContribuable={this.isContribuable()}
         opinionId={this.props.opinion.id}
         opinionBody={this.props.opinion.body}

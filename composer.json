@@ -1,11 +1,12 @@
 {
-    "name": "capco/symfony2",
-    "license": "proprietary",
+    "name": "symfony/framework-standard-edition",
+    "license": "MIT",
     "type": "project",
-    "description": "Cap-Collectif Symfony2",
+    "description": "The \"Symfony Standard Edition\" distribution",
     "autoload": {
         "psr-0": {
-            "": "src/"
+            "": "src/",
+            "SymfonyStandard": "app/"
         }
     },
     "repositories": [
@@ -47,7 +48,7 @@
         "liip/imagine-bundle": "~0.9",
         "qandidate/toggle-bundle": "~0.1",
         "predis/predis": "^1.0",
-        "jolicode/jolitypo-bundle": "@stable",
+        "jolicode/jolitypo-bundle": "dev-master",
 
         "doctrine/doctrine-migrations-bundle": "~1.0",
         "willdurand/geocoder": "~3.0",
@@ -79,21 +80,26 @@
         "guzzlehttp/guzzle": "~5.0",
         "coduo/php-matcher": "1.1.*",
         "jolicode/jolinotif": "^1.0",
-        "phpunit/phpunit": "@stable",
-        "pyrech/composer-changelogs": "^1.2"
+        "phpunit/phpunit": "@stable"
     },
     "scripts": {
+        "post-root-package-install": [
+            "SymfonyStandard\\Composer::hookRootPackageInstall"
+        ],
         "post-install-cmd": [
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::buildBootstrap",
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::clearCache",
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installAssets",
-            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installRequirementsFile"
+            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installRequirementsFile",
+            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::removeSymfonyStandardFiles"
         ],
         "post-update-cmd": [
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::buildBootstrap",
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::clearCache",
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installAssets",
-            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installRequirementsFile"
+            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installAssets",
+            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installRequirementsFile",
+            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::removeSymfonyStandardFiles"
         ]
     },
     "config": {
@@ -102,7 +108,10 @@
     },
     "extra": {
         "symfony-app-dir": "app",
-        "symfony-web-dir": "web"
+        "symfony-web-dir": "web",
+        "branch-alias": {
+            "dev-master": "2.7-dev"
+        }
     },
     "minimum-stability": "stable"
 }

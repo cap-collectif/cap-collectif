@@ -35,9 +35,6 @@ builder:
     build: infrastructure/services/builder
     volumes:
         - .:/capco
-        - ~/.composer:/home/capco/.composer
-        - ~/.npm:/home/capco/.npm
-        - ~/.cache/bower:/home/capco/.cache/bower
 
 # behat:
 #     build: infrastructure/services/behat

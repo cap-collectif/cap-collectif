@@ -45,8 +45,6 @@ class SynthesisElementRepository extends MaterializedPathRepository
 
         $qb = $this->addQueryConditionsForTypeAndSynthesis($qb, $type, $synthesis);
 
-        $qb->orderBy('se.linkedDataLastUpdate', 'DESC');
-
         $qb
             ->setFirstResult($offset)
             ->setMaxResults($limit);

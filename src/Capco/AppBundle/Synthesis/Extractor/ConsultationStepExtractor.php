@@ -255,8 +255,8 @@ class ConsultationStepExtractor
         $folder = new SynthesisElement();
         $folder->setTitle($label);
         $folder->setDisplayType('folder');
-        $folder->setArchived(true);
-        $folder->setPublished(true);
+        $folder->setArchived(false);
+        $folder->setPublished(false);
         $folder->setParent($parent);
         $this->synthesis->addElement($folder);
 

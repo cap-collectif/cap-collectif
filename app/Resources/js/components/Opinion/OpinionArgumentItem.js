@@ -8,7 +8,6 @@ const FormattedDate = ReactIntl.FormattedDate;
 const OpinionArgumentItem = React.createClass({
   propTypes: {
     argument: React.PropTypes.object,
-    isReportingEnabled: React.PropTypes.bool.isRequired,
   },
   mixins: [ReactIntl.IntlMixin],
 
@@ -48,7 +47,9 @@ const OpinionArgumentItem = React.createClass({
           <p className="opinion__text">
             <AutoLinkText text={argument.body} />
           </p>
-          <OpinionArgumentButtons argument={argument} isReportingEnabled={this.props.isReportingEnabled} />
+          <OpinionArgumentButtons
+            argument={argument}
+          />
         </div>
       </li>
     );

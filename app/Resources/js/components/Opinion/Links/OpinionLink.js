@@ -6,7 +6,6 @@ const Col = ReactBootstrap.Col;
 const OpinionLink = React.createClass({
   propTypes: {
     link: React.PropTypes.object.isRequired,
-    isReportingEnabled: React.PropTypes.bool.isRequired,
   },
   mixins: [ReactIntl.IntlMixin],
 

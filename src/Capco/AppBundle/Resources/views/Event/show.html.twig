@@ -2,17 +2,6 @@
 
 {% block canonical_link %}{{ url('app_event_show', {'slug': event.slug}) }}{% endblock %}
 
-{% block metaTags %}
-    {% set eventMedia %}{% if event.Media %}{% path event.Media, 'idea' %}{% endif %}{% endset %}
-    {% include 'CapcoAppBundle:Default:meta.html.twig' with {
-        'title':       event.title,
-        'description': event.body|striptags|truncate(250, true),
-        'url':         url('app_event_show', {'slug': event.slug}),
-        'type':        'article',
-        'image':       eventMedia
-    } only %}
-{% endblock %}
-
 {% block title %}
     {{ parent() }} - {{ event.title }}
 {% endblock %}
@@ -22,7 +11,8 @@
     <link href="{{ asset('js/fancybox/jquery.fancybox.css') }}" rel="stylesheet">
 {% endblock %}
 
-{% block jumbotron %}{% endblock %}
+{% block jumbotron %}
+{% endblock %}
 
 {% block body %}
     <div id="sidebar-container">

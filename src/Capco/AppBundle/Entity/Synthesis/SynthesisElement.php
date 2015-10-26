@@ -607,29 +607,11 @@ class SynthesisElement
     }
 
     /**
-     * @param mixed $level
-     */
-    public function setLevel($level)
-    {
-        $this->level = $level;
-        return $this;
-    }
-
-    /**
      * @return mixed
      */
     public function getPath()
     {
         return $this->path;
-    }
-
-    /**
-     * @param mixed $path
-     */
-    public function setPath($path)
-    {
-        $this->path = $path;
-        return $this;
     }
 
     //************************** Custom methods *****************************

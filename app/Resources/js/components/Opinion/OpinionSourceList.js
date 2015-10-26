@@ -3,7 +3,6 @@ import OpinionSource from './OpinionSource';
 const OpinionSourceList = React.createClass({
   propTypes: {
     sources: React.PropTypes.array,
-    isReportingEnabled: React.PropTypes.bool.isRequired,
   },
   mixins: [ReactIntl.IntlMixin],
 
@@ -19,10 +18,16 @@ const OpinionSourceList = React.createClass({
     }
 
     return (
-      <ul id="sources-list" className="media-list" style={{ marginTop: '20px'}}>
+      <ul id="sources-list" className="media-list" style={{marginTop: '20px'}}>
         {
           this.props.sources.map((source) => {
-            return <OpinionSource {...this.props} key={source.id} source={source} />;
+            return (
+              <OpinionSource
+                {...this.props}
+                key={source.id}
+                source={source}
+              />
+            );
           })
         }
       </ul>

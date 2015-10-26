@@ -3,17 +3,16 @@
 {% block canonical_link %}{{ url('app_project_show_contributors', {'projectSlug': project.slug}) }}{% endblock %}
 
 {% block metaTags %}
-    {% set projectCover %}{% if project.Cover %}{% path project.Cover, 'blockHeader' %}{% endif %}{% endset %}
-    {% include 'CapcoAppBundle:Default:meta.html.twig' with {
-        'title':       project.title~' - '~('project.show.contributors.title'|trans({}, 'CapcoAppBundle')),
-        'url':         url('app_project_show_contributors', {'projectSlug': project.slug}),
-        'type':        'project',
-        'image':       projectCover
-    } only %}
+    <meta property="og:title" content="{{ project.title }} - Participants" />
+    <meta property="og:url" content="{{ url('app_project_show_contributors', {'projectSlug': project.slug}) }}" />
+    <meta property="og:type" content="project" />
+    {% if project.Cover %}
+        <meta property="og:image" content="{% path project.Cover, 'blockHeader' %}" />
+    {% endif %}
 {% endblock %}
 
 {% block title %}
-    {{ parent() }} - {{ project.title }} - {{ 'project.show.contributors.title' | trans({}, 'CapcoAppBundle') }}
+    {{ parent() }} - {{ 'project.show.contributors.title' | trans({}, 'CapcoAppBundle') }}
 {% endblock %}
 
 {% block body %}

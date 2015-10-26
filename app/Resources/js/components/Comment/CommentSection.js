@@ -22,7 +22,6 @@ const CommentSection = React.createClass({
       countWithAnswers: 0,
       count: 0,
       comments: [],
-      isReportingEnabled: true,
       isLoading: true,
       isLoadingMore: false,
       filter: 'last',
@@ -61,7 +60,6 @@ const CommentSection = React.createClass({
       this.setState({
         countWithAnswers: CommentStore.countWithAnswers,
         count: CommentStore.count,
-        isReportingEnabled: CommentStore.isReportingEnabled,
         comments: CommentStore.comments,
         isLoading: false,
         isLoadingMore: false,
@@ -163,7 +161,6 @@ const CommentSection = React.createClass({
         <CommentList {...this.props}
           comments={this.state.comments}
           root
-          isReportingEnabled={this.state.isReportingEnabled}
         />
         { this.renderLoadMore() }
       </div>
