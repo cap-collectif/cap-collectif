@@ -271,6 +271,24 @@ class StepController extends Controller
     }
 
     /**
+     * @Route("/project/{projectSlug}/collect/{stepSlug}", name="app_project_show_collect")
+     * @Template("CapcoAppBundle:Step:collect.html.twig")
+     * @ParamConverter("step", class="CapcoAppBundle:SynthesisStep", options={"mapping" = {"stepSlug": "slug"}})
+     * @ParamConverter("project", class="CapcoAppBundle:Project", options={"mapping" = {"project": "slug"}, "repository_method"= "getOne", "map_method_signature" = true})
+     */
+    public function showCollectStepAction(Project $project, SynthesisStep $step)
+    {
+        if (!$step->canDisplay()) {
+            throw new NotFoundHttpException();
+        }
+
+        return [
+            'project' => $project,
+            'currentStep' => $step,
+        ];
+    }
+
+    /**
      * @Route("/project/{projectSlug}/synthesis/{stepSlug}/edition", name="app_project_edit_synthesis")
      * @Route("/consultation/{projectSlug}/synthesis/{stepSlug}/edition", name="app_consultation_edit_synthesis")
      * @Template("CapcoAppBundle:Synthesis:main.html.twig")
