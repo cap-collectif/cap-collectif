@@ -43,7 +43,8 @@ Feature: Ideas comments
           "can_edit": @boolean@
         },
         @...@
-      ]
+      ],
+      "is_reporting_enabled": @boolean@
     }
     """
 
@@ -73,7 +74,8 @@ Feature: Ideas comments
           "has_user_voted": @boolean@,
           "can_edit": @boolean@
         }
-      ]
+      ],
+      "is_reporting_enabled": @boolean@
     }
     """
 
@@ -87,7 +89,8 @@ Feature: Ideas comments
       "comments":
       [
         @...@
-      ]
+      ],
+      "is_reporting_enabled": @boolean@
     }
     """
     And the comments should be ordered by popularity

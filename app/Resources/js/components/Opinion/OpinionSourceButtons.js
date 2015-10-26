@@ -1,13 +1,13 @@
 import SourceActions from '../../actions/SourceActions';
 import LoginStore from '../../stores/LoginStore';
 import LoginOverlay from '../Utils/LoginOverlay';
-import OpinionSourceReportButton from './OpinionSourceReportButton';
 
 const Button = ReactBootstrap.Button;
 
 const OpinionSourceButtons = React.createClass({
   propTypes: {
     source: React.PropTypes.object.isRequired,
+    isReportingEnabled: React.PropTypes.bool.isRequired,
   },
   mixins: [ReactIntl.IntlMixin],
 
@@ -55,6 +55,26 @@ const OpinionSourceButtons = React.createClass({
     );
   },
 
+  renderReportButton() {
+    if (!this.isTheUserTheAuthor() && this.props.isReportingEnabled) {
+      if (this.props.source.has_user_reported) {
+        return (
+          <Button bsSize="xsmall" className="source__btn--report btn-dark-gray active">
+            <i className="cap cap-flag-1"></i>
+            {this.getIntlMessage('global.report.reported')}
+          </Button>
+        );
+      }
+      return (
+        <Button href={this.props.source._links.report} bsSize="xsmall" className="source__btn--report btn-dark-gray btn--outline">
+          <i className="cap cap-flag-1"></i>
+          {this.getIntlMessage('global.report.submit')}
+        </Button>
+      );
+    }
+    return null;
+  },
+
   renderEditButton() {
     if (this.isTheUserTheAuthor() && this.props.source.isContribuable) {
       return (
@@ -79,7 +99,7 @@ const OpinionSourceButtons = React.createClass({
           { source.votes_count + (this.hasVotedSince() ? 1 : 0)}
         </span>
         { ' ' }
-        <OpinionSourceReportButton source={source} />
+        <LoginOverlay children={ this.renderReportButton() } />
         { this.renderEditButton() }
       </div>
     );

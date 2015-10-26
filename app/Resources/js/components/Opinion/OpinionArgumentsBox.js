@@ -9,6 +9,7 @@ const Col = ReactBootstrap.Col;
 const OpinionArgumentsBox = React.createClass({
   propTypes: {
     opinion: React.PropTypes.object.isRequired,
+    isReportingEnabled: React.PropTypes.bool.isRequired,
   },
   mixins: [ReactIntl.IntlMixin],
 

@@ -61,6 +61,7 @@ class PostsController extends FOSRestController
             'comments_and_answers_count' => intval($countWithAnswers),
             'comments_count' => count($paginator),
             'comments' => $comments,
+            'is_reporting_enabled' => $this->get('capco.toggle.manager')->isActive('reporting'),
         ];
     }
 

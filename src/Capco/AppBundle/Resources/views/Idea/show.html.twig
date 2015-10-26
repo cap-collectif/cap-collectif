@@ -2,12 +2,21 @@
 
 {% block canonical_link %}{{ url('app_idea_show', {'slug': idea.slug}) }}{% endblock %}
 
+{% block metaTags %}
+    {% set ideaMedia %}{% if idea.Media %}{% path idea.Media, 'idea' %}{% endif %}{% endset %}
+    {% include 'CapcoAppBundle:Default:meta.html.twig' with {
+        'title':       idea.title,
+        'description': idea.body|striptags|truncate(250, true),
+        'url':         url('app_idea_show', {'slug': idea.slug}),
+        'image':       ideaMedia,
+    } only %}
+{% endblock %}
+
 {% block title %}
     {{ parent() }} - {{ idea.title }}
 {% endblock %}
 
-{% block jumbotron %}
-{% endblock %}
+{% block jumbotron %}{% endblock %}
 
 {% block body %}
 <div id="sidebar-container">

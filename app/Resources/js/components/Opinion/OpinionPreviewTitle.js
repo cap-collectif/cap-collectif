@@ -34,4 +34,5 @@ OpinionPreviewTitle.propTypes = {
   link: React.PropTypes.bool.isRequired,
   opinion: React.PropTypes.object.isRequired,
   showTypeLabel: React.PropTypes.bool.isRequired,
+  type: React.PropTypes.object.isRequired,
 };

@@ -9,6 +9,7 @@ const Col = ReactBootstrap.Col;
 const OpinionSource = React.createClass({
   propTypes: {
     source: React.PropTypes.object,
+    isReportingEnabled: React.PropTypes.bool.isRequired,
   },
   mixins: [ReactIntl.IntlMixin],
 

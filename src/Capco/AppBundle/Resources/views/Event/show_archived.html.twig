@@ -2,6 +2,17 @@
 
 {% block canonical_link %}{{ url('app_event_archived') }}{% endblock %}
 
+{% set jumbotron_body = capco_site_parameter_value('events.jumbotron.body') %}
+{% set content_body = capco_site_parameter_value('events.content.body') %}
+
+{% block metaTags %}
+    {% include 'CapcoAppBundle:Default:meta.html.twig' with {
+        'title':       'event.archived'|trans({}, 'CapcoAppBundle'),
+        'description': (jumbotron_body|striptags ?: content_body|striptags|truncate(250, true)),
+        'url':         url('app_event_archived')
+    } only %}
+{% endblock %}
+
 {% block title %}
     {{ parent() }} - {{ 'event.archived'|trans({}, 'CapcoAppBundle') }}
 {% endblock %}
@@ -10,7 +21,6 @@
     <div class="jumbotron  jumbotron--custom  jumbotron--bg-1 text-center">
         <div class="container">
             <h1>{{ 'event.archived'|trans({}, 'CapcoAppBundle') }}</h1>
-            {% set jumbotron_body = capco_site_parameter_value('events.jumbotron.body') %}
             {% if null != jumbotron_body %}
                 {{ jumbotron_body|raw }}
             {% endif %}
@@ -21,7 +31,6 @@
 {% block body %}
 
     <div class="container  container--custom">
-        {% set content_body = capco_site_parameter_value('events.content.body') %}
         {% if null != content_body %}
             {{ content_body|raw }}
         {% endif %}
