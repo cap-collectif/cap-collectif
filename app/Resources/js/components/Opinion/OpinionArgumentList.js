@@ -13,6 +13,7 @@ const OpinionArgumentList = React.createClass({
   propTypes: {
     opinion: React.PropTypes.object.isRequired,
     type: React.PropTypes.string.isRequired,
+    isReportingEnabled: React.PropTypes.bool.isRequired,
   },
   mixins: [ReactIntl.IntlMixin, React.addons.LinkedStateMixin],
 

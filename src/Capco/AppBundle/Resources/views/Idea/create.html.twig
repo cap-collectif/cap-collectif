@@ -2,12 +2,18 @@
 
 {% block canonical_link %}{{ url('app_idea_create') }}{% endblock %}
 
+{% block metaTags %}
+    {% include 'CapcoAppBundle:Default:meta.html.twig' with {
+        'title': 'idea.create.title'|trans({}, 'CapcoAppBundle'),
+        'url':   url('app_idea_create'),
+    } only %}
+{% endblock %}
+
 {% block title %}
     {{ parent() }} - {{ 'idea.create.title'|trans({}, 'CapcoAppBundle') }}
 {% endblock %}
 
-{% block jumbotron %}
-{% endblock %}
+{% block jumbotron %}{% endblock %}
 
 {% block body %}
     <div class="container  container--custom">

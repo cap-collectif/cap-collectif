@@ -41,7 +41,7 @@ const OpinionAppendices = React.createClass({
           appendices.map((appendix, index) => {
             if (appendix.body) {
               return (
-                <OpinionAppendix key={index} appendix={appendix} expanded={index === 0} />
+                <OpinionAppendix appendix={appendix} expanded={index === 0} />
               );
             }
           })

@@ -45,7 +45,7 @@ Feature: Opinions
       | opinionTypeSlug  | solutions                        |
       | opinionSlug      | opinion-5                        |
     And I wait 5 seconds
-    When I follow "Signaler"
+    When I click the "#render-opinion .opinion__action--report" element
     And I wait 5 seconds
     And I fill in the following:
       | capco_app_reporting_status | 1                       |
@@ -102,7 +102,7 @@ Feature: Opinions
 #    And I wait 5 seconds
 #    Then I should see "Merci de confirmer la perte de vos votes pour continuer."
 
-  @javascript @dev
+  @javascript
   Scenario: Anonymous wants to see opinion appendix
     Given I visited "opinion page" with:
       | projectSlug | projet-de-loi-renseignement      |

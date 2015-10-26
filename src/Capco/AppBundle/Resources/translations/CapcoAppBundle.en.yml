@@ -522,6 +522,8 @@ user:
             published: a publié %startlink%une opinion%endlink%
             votes: "]-Inf, 0] Aucun vote | {1} 1 vote | ]1,Inf[ %count% votes"
             arguments: "]-Inf, 0] Aucun argument | {1} 1 argument | ]1,Inf[ %count% arguments"
+          opinions_versions:
+            title: Modifications
           problems:
             title: Problèmes
             published: a ajouté %startlink%un problème%endlink%
@@ -538,6 +540,8 @@ user:
           name: Idée
         sources:
           title: Sources
+      comments:
+        title: Commentaires
 
 #SonataUser errors
 "Bad credentials.": Username and/or password are invalid

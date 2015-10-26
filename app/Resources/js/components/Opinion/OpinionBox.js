@@ -17,6 +17,7 @@ const FormattedMessage = ReactIntl.FormattedMessage;
 const OpinionBox = React.createClass({
   propTypes: {
     opinion: React.PropTypes.object.isRequired,
+    isReportingEnabled: React.PropTypes.bool.isRequired,
     rankingThreshold: React.PropTypes.number,
     opinionTerm: React.PropTypes.number,
   },

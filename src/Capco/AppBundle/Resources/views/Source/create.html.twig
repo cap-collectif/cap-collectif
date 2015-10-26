@@ -2,12 +2,18 @@
 
 {% block canonical_link %}{{ url('app_new_source', {'projectSlug': opinion.step.project.slug, 'stepSlug': opinion.step.slug, 'opinionTypeSlug': opinion.opinionType.slug, 'opinionSlug': opinion.slug}) }}{% endblock %}
 
+{% block metaTags %}
+    {% include 'CapcoAppBundle:Default:meta.html.twig' with {
+        'title': opinion.title~' - '~('source.create.title'|trans({}, 'CapcoAppBundle')),
+        'url':   url('app_new_source', {'projectSlug': opinion.step.project.slug, 'stepSlug': opinion.step.slug, 'opinionTypeSlug': opinion.opinionType.slug, 'opinionSlug': opinion.slug}),
+    } only %}
+{% endblock %}
+
 {% block title %}
     {{ parent() }} - {{ opinion.title }} - {{ 'source.create.title'|trans({}, 'CapcoAppBundle') }}
 {% endblock %}
 
-{% block jumbotron %}
-{% endblock %}
+{% block jumbotron %}{% endblock %}
 
 {% block body %}
     <div class="container  container--custom">

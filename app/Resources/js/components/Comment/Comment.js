@@ -15,6 +15,7 @@ const Comment = React.createClass({
     object: React.PropTypes.number,
     comment: React.PropTypes.object,
     root: React.PropTypes.bool,
+    isReportingEnabled: React.PropTypes.bool,
   },
   mixins: [ReactIntl.IntlMixin],
 
@@ -68,29 +69,32 @@ const Comment = React.createClass({
           <div className="comment__buttons">
             <CommentVoteButton comment={comment} userIsAuthor={this.isTheUserTheAuthor()} />
             {' '}
-            {this.props.root
-              ? <a onClick={this.answer.bind(this)} className="btn btn-xs btn-dark-gray btn--outline">
+            {(this.props.root === true
+              ? <a onClick={ this.answer.bind(this) } className="btn btn-xs btn-dark-gray btn--outline">
                   <i className="cap-reply-mail-2"></i>
                   { ' ' }
                   { this.getIntlMessage('global.answer') }
                 </a>
               : null
-            }
+            )}
             {' '}
-            <CommentReport comment={comment} />
+            {(this.props.isReportingEnabled === true && !this.isTheUserTheAuthor()
+              ? <CommentReport comment={comment} />
+              : null
+            )}
             {' '}
             <CommentEdit comment={comment} />
             {' '}
           </div>
           <div className="comment-answers-block">
-            {this.props.root
-              ? <CommentAnswers comments={comment.answers} />
+            {(this.props.root === true
+              ? <CommentAnswers isReportingEnabled={this.props.isReportingEnabled} comments={comment.answers} />
               : null
-            }
-            {this.state.answerFormShown
+            )}
+            {(this.state.answerFormShown === true
               ? <CommentForm comment={this.comment.bind(this)} focus={this.state.answerFormFocus} isAnswer />
               : null
-            }
+            )}
           </div>
         </div>
       </li>
