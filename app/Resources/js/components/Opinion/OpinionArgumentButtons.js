@@ -2,13 +2,13 @@ import ArgumentActions from '../../actions/ArgumentActions';
 import LoginStore from '../../stores/LoginStore';
 import LoginOverlay from '../Utils/LoginOverlay';
 import ShareButtonDropdown from '../Utils/ShareButtonDropdown';
+import OpinionArgumentReportButton from './OpinionArgumentReportButton';
 
 const Button = ReactBootstrap.Button;
 
 const OpinionArgumentButtons = React.createClass({
   propTypes: {
     argument: React.PropTypes.object.isRequired,
-    isReportingEnabled: React.PropTypes.bool.isRequired,
   },
   mixins: [ReactIntl.IntlMixin],
 
@@ -63,26 +63,6 @@ const OpinionArgumentButtons = React.createClass({
     );
   },
 
-  renderReportButton() {
-    if (this.props.isReportingEnabled && !this.isTheUserTheAuthor()) {
-      const reported = this.props.argument.has_user_reported;
-      return (
-        <LoginOverlay children={
-          <Button
-            aria-labelledby={'arg-' + this.props.argument.id}
-            href={reported ? null : this.props.argument._links.report}
-            bsSize="xsmall"
-            active={reported}
-            className="btn-dark-gray btn--outline"
-          >
-            <i className="cap cap-flag-1"></i>
-            {reported ? this.getIntlMessage('global.report.reported') : this.getIntlMessage('global.report.submit')}
-          </Button>
-        } />
-      );
-    }
-  },
-
   renderEditButton() {
     if (this.props.argument.isContribuable && this.isTheUserTheAuthor()) {
       return (
@@ -105,7 +85,7 @@ const OpinionArgumentButtons = React.createClass({
           {this.getVoteCount()}
         </span>
         { ' ' }
-        { this.renderReportButton() }
+        <OpinionArgumentReportButton argument={this.props.argument} />
         { this.renderEditButton() }
         <ShareButtonDropdown
           url={this.props.argument._links.show}

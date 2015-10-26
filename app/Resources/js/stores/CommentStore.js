@@ -9,7 +9,6 @@ class CommentStore extends BaseStore {
     this._comments = [];
     this._commentsCount = 0;
     this._commentsAndAnswersCount = 0;
-    this._isReportingEnabled = true;
     this._isSync = true;
     this._messages = {
       errors: [],
@@ -24,7 +23,6 @@ class CommentStore extends BaseStore {
       this._commentsCount = action.comments_count;
       this._commentsAndAnswersCount = action.comments_total;
       this._commentsAndAnswersCount = action.comments_and_answers_count;
-      this._isReportingEnabled = action.is_reporting_enabled;
       this._isSync = true;
       this.emitChange();
       break;
@@ -46,10 +44,6 @@ class CommentStore extends BaseStore {
 
   get isSync() {
     return this._isSync;
-  }
-
-  get isReportingEnabled() {
-    return this._isReportingEnabled;
   }
 
   get comments() {

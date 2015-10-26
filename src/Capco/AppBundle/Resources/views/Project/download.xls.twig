@@ -1,5 +1,5 @@
 {% xlsdocument {
-    'created': "now" | localizeddate('long', 'short', locale),
+    'created': "now" | localizeddate('long', 'short', app.request.locale),
     'format': format,
     'title': title,
     'defaultStyle': {
@@ -22,7 +22,7 @@
                 {% for header in headers[sheet] %}
                     {% xlscell {'style': {'font': {'bold': true} } } %}
                         {% set label = 'project_download.label.' ~ header %}
-                        {{ label | trans({}, 'CapcoAppBundle') | raw }}
+                        {{ label | trans({}, 'CapcoAppBundle') }}
                     {% endxlscell %}
                 {% endfor %}
             {% endxlsrow %}

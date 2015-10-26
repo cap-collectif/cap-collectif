@@ -5,6 +5,9 @@ import OpinionVersionsBox from './components/Opinion/OpinionVersionsBox';
 import OpinionSourcesBox from './components/Opinion/OpinionSourcesBox';
 import OpinionPage from './components/Opinion/OpinionPage';
 import AuthService from './services/AuthService';
+import FeatureService from './services/FeatureService';
+
+FeatureService.load();
 
 AuthService
 .login()
@@ -35,7 +38,6 @@ AuthService
         React.render(
             <OpinionPage
                 opinionId={$('#render-opinion').data("opinion")}
-                isReportingEnabled={$('#render-opinion').data("reporting-enabled")}
                 {...IntlData}
             />,
             document.getElementById('render-opinion')
@@ -47,7 +49,6 @@ AuthService
             <OpinionPage
                 opinionId={$('#render-opinion-version').data('opinion')}
                 versionId={$('#render-opinion-version').data('version')}
-                isReportingEnabled={$('#render-opinion-version').data("reporting-enabled")}
                 {...IntlData}
             />,
             document.getElementById('render-opinion-version')

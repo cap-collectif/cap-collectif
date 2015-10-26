@@ -88,7 +88,6 @@ security:
               path: /logout
               target: /
             anonymous: true
-            context: user
 
     access_control:
         # URL of FOSUserBundle which need to be available to anonymous users

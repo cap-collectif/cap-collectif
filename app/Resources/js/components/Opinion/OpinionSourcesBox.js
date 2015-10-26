@@ -9,7 +9,6 @@ const Col = ReactBootstrap.Col;
 const OpinionSourcesBox = React.createClass({
   propTypes: {
     opinion: React.PropTypes.object.isRequired,
-    isReportingEnabled: React.PropTypes.bool.isRequired,
   },
   mixins: [ReactIntl.IntlMixin],
 
@@ -102,7 +101,7 @@ const OpinionSourcesBox = React.createClass({
           : this.renderFilter()
         }
         {!this.state.isLoading
-          ? <OpinionSourceList isReportingEnabled={this.props.isReportingEnabled} sources={this.state.sources} />
+          ? <OpinionSourceList sources={this.state.sources} />
           : <Loader />
         }
       </div>

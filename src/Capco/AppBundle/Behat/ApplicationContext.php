@@ -45,6 +45,17 @@ class ApplicationContext extends UserContext
     }
 
     /**
+     * @AfterScenario @javascript
+     */
+    public function clearLocalStorage()
+    {
+        $this->getSession()->getDriver()->evaluateScript(
+            "localStorage.clear();"
+        );
+    }
+
+
+    /**
      * @AfterSuite
      */
     public static function reinitFeatures()

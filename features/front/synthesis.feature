@@ -249,7 +249,7 @@ Scenario: Admin wants to publish an element with comment
   And I wait 5 seconds
   And I should see 12 ".element" element
 
-@javascript @dev
+@javascript
 Scenario: Admin wants to divide an element without selecting text
   Given I am logged in as admin
   And I visited "consultation page" with:

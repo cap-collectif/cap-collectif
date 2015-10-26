@@ -928,7 +928,6 @@ project_download:
     created: Création
     updated: Modification
     author: Auteur
-    author_id: Id de l'auteur
     score: Score
     total_votes: Total des votes
     votes_ok: Votes pour
@@ -943,12 +942,11 @@ project_download:
     trashed_date: Date de mise à la corbeille
     trashed_reason: Raison de la mise en corbeille
   values:
-    appendices:
-      title: Éléments de contexte
     non_applicable: n/a
     content_type:
       opinion: Proposition
       version: Modification
+      appendix: Élément de contexte
       argument: Argument
       simple_argument: Avis
       source: Source
