@@ -32,11 +32,11 @@ trait SluggableTitleTrait
 
     /**
      * @param string $title
+     * @return $this
      */
     public function setTitle($title)
     {
         $this->title = $title;
-
         return $this;
     }
 
@@ -50,11 +50,11 @@ trait SluggableTitleTrait
 
     /**
      * @param string $slug
+     * @return $this
      */
     public function setSlug($slug)
     {
         $this->slug = $slug;
-
         return $this;
     }
 }

@@ -5,11 +5,11 @@ Feature: Opinions
     Given I am logged in as user
     And I visited "consultation page" with:
       | projectSlug | croissance-innovation-disruption |
-      | stepSlug         | collecte-des-avis                |
+      | stepSlug    | collecte-des-avis                |
     When I follow "btn-add--les-causes-1"
     And I fill in the following:
-      | capco_app_opinion_title     | Titre                           |
-      | capco_app_opinion_body      | Description de ma proposition   |
+      | capco_app_opinion_title | Titre                           |
+      | capco_app_opinion_body  | Description de ma proposition   |
     And I press "Publier"
     Then I should see "Merci ! Votre proposition a bien été enregistrée."
 
@@ -17,21 +17,21 @@ Feature: Opinions
     Given I am logged in as user
     And I visited "consultation page" with:
       | projectSlug | croissance-innovation-disruption |
-      | stepSlug         | collecte-des-avis                |
+      | stepSlug    | collecte-des-avis                |
     Then I should not see "Proposer" in the "#opinions--le-probleme-constate-1" element
 
   Scenario: Can not create an opinion in closed project
     Given I am logged in as user
     And I visited "consultation page" with:
-      | projectSlug   | strategie-technologique-de-l-etat-et-services-publics |
-      | stepSlug           | collecte-des-avis-pour-une-meilleur-strategie         |
+      | projectSlug | strategie-technologique-de-l-etat-et-services-publics |
+      | stepSlug    | collecte-des-avis-pour-une-meilleur-strategie         |
     Then I should see "Projet participatif terminé. La période de participation est maintenant terminée. Merci à tous d'avoir contribué."
     And I should not see "Proposer"
 
   Scenario: Can not create an opinion when not logged in
     Given I visited "consultation page" with:
       | projectSlug | croissance-innovation-disruption |
-      | stepSlug         | collecte-des-avis                |
+      | stepSlug    | collecte-des-avis                |
     When I follow "btn-add--les-causes-1"
     Then I should see "Connection form" on "login page"
 
@@ -40,7 +40,7 @@ Feature: Opinions
     Given feature "reporting" is enabled
     And I am logged in as user
     And I visited "opinion page" with:
-      | projectSlug | croissance-innovation-disruption |
+      | projectSlug      | croissance-innovation-disruption |
       | stepSlug         | collecte-des-avis                |
       | opinionTypeSlug  | solutions                        |
       | opinionSlug      | opinion-5                        |

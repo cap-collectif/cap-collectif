@@ -114,7 +114,7 @@ Feature: Events comments
     When I send a POST request to "/api/events/3/comments" with json:
     """
     {
-      "parent": 223,
+      "parent": 225,
       "authorName": "Kéké",
       "authorEmail": "vivele94@gmail.com",
       "body": "Ma super réponse"
@@ -151,7 +151,7 @@ Feature: Events comments
     When I send a POST request to "/api/events/3/comments" with json:
     """
     {
-      "parent": 223,
+      "parent": 225,
       "body": "Oh oui j'ose :-P"
     }
     """

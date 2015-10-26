@@ -29,7 +29,7 @@
                     <div class="media-body">
                         <p class="media--aligned  excerpt"><a href="{{ path('capco_user_profile_show_all', {'slug': idea.Author.slug}) }}">{{ idea.Author.username }}</a>
                             {% if is_feature_enabled('themes') and idea.theme and idea.theme.canDisplay %}
-                                {{ 'idea.show.in_theme'|trans({}, 'CapcoAppBundle') }} <a href="{{ path('app_theme_show', {'slug': idea.Theme.slug}) }}">{{ idea.Theme.title }}</a>
+                                {{ 'idea.show.in_theme'|trans({}, 'CapcoAppBundle') }} <a href="{{ path('app_theme_show', {'slug': idea.theme.slug}) }}">{{ idea.theme.title }}</a>
                             {% endif %}
                             {{ 'idea.show.on_date'|trans({}, 'CapcoAppBundle') }} {{ idea.createdAt | localizeddate('long', 'none') }}
                             {% if idea.createdAt != idea.updatedAt %}

@@ -87,19 +87,17 @@ class ProposalsController extends FOSRestController
      *  }
      * )
      *
+     * @Security("has_role('ROLE_USER')")
      * @Post("/proposal_forms/{proposal_form_id}/proposals")
      * @ParamConverter("proposalForm", options={"mapping": {"proposal_form_id": "id"}, "repository_method": "getOne", "map_method_signature": true})
      * @View(statusCode=201, serializerGroups={"ProposalForms", "Proposals", "ProposalResponses", "UsersInfos", "UserMedias"})
      * @param Request $request
      * @param ProposalForm $proposalForm
      * @return Form
-     * @throws HttpException
      */
     public function postProposalAction(Request $request, ProposalForm $proposalForm)
     {
-        if (null === $user = $this->getUser()) {
-            throw new HttpException(401, "You have to be logged in to post a Proposal");
-        }
+        $user = $this->getUser();
 
         $proposal = (new Proposal())
             ->setAuthor($user)

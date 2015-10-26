@@ -61,7 +61,6 @@ class QuestionType
     public function setType($type)
     {
         $this->type = $type;
-
         return $this;
     }
 

@@ -61,7 +61,7 @@ Feature: Source
     And I wait 5 seconds
     And I go on the sources tab
     And The first source vote counter should be "1"
-    When I click the "#source-1 .source__btn--edit" element
+    When I click the "#source-35 .source__btn--edit" element
     And I wait 5 seconds
     And I check "capco_app_source_confirm"
     And I press "Modifier"
@@ -81,7 +81,7 @@ Feature: Source
       | opinionSlug      | opinion-2                        |
     And I wait 5 seconds
     And I go on the sources tab
-    When I click the "#source-1 .source__btn--edit" element
+    When I click the "#source-35 .source__btn--edit" element
     And I wait 5 seconds
     And I fill in the following:
       | capco_app_source_body      | Je modifie ma source !   |
@@ -99,5 +99,5 @@ Feature: Source
       | opinionSlug      | opinion-2                        |
     And I wait 5 seconds
     And I go on the sources tab
-    Then I should not see "Modifier" in the "#source-1" element
+    Then I should not see "Modifier" in the "#source-35" element
 

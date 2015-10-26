@@ -50,9 +50,11 @@ class QuestionChoice
 
     /**
      * @param Question $question
+     * @return $this
      */
-    public function setQuestion($question)
+    public function setQuestion(Question $question)
     {
         $this->question = $question;
+        return $this;
     }
 }

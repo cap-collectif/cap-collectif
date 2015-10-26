@@ -9,6 +9,7 @@ Feature: ProposalForm Restful Api
   "id": @integer@,
   "title": @string@,
   "description": @string@,
+  "questions": @...@,
   "created_at": "@string@.isDateTime()",
   "updated_at": "@string@.isDateTime()"
 }

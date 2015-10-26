@@ -2,7 +2,9 @@
 
 namespace Capco\AppBundle\Entity;
 
+use Capco\AppBundle\Traits\SluggableTitleTrait;
 use Capco\AppBundle\Traits\TimestampableTrait;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 
@@ -16,6 +18,7 @@ class ProposalForm
 {
 
     use TimestampableTrait;
+    use SluggableTitleTrait;
 
     /**
      * @var integer
@@ -25,13 +28,6 @@ class ProposalForm
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="title", type="string", length=255)
-     */
-    private $title;
 
     /**
      * @var string
@@ -90,29 +86,6 @@ class ProposalForm
     }
 
     /**
-     * Set title
-     *
-     * @param string $title
-     * @return ProposalForm
-     */
-    public function setTitle($title)
-    {
-        $this->title = $title;
-
-        return $this;
-    }
-
-    /**
-     * Get title
-     *
-     * @return string 
-     */
-    public function getTitle()
-    {
-        return $this->title;
-    }
-
-    /**
      * Set description
      *
      * @param string $description
@@ -121,7 +94,6 @@ class ProposalForm
     public function setDescription($description)
     {
         $this->description = $description;
-
         return $this;
     }
 
@@ -144,11 +116,13 @@ class ProposalForm
     }
 
     /**
-     * @param mixed $proposals
+     * @param ArrayCollection $proposals
+     * @return $this
      */
-    public function setProposals($proposals)
+    public function setProposals(ArrayCollection $proposals)
     {
         $this->proposals = $proposals;
+        return $this;
     }
 
     /**
@@ -161,10 +135,12 @@ class ProposalForm
 
     /**
      * @param ArrayCollection $questions
+     * @return $this
      */
-    public function setQuestions($questions)
+    public function setQuestions(ArrayCollection $questions)
     {
         $this->questions = $questions;
+        return $this;
     }
 
     /**
@@ -177,9 +153,11 @@ class ProposalForm
 
     /**
      * @param CollectStep $step
+     * @return $this
      */
     public function setStep($step)
     {
         $this->step = $step;
+        return $this;
     }
 }

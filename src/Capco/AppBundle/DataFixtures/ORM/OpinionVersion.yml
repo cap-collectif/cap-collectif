@@ -10,7 +10,7 @@ Capco\AppBundle\Entity\OpinionVersion:
         author: @user5
         parent: @opinion57
         comment: bououh
-
+        ranking: <numberBetween(1,5)>
     version2:
         title: Modification 2
         body: |
@@ -21,7 +21,7 @@ Capco\AppBundle\Entity\OpinionVersion:
         author: @user2
         parent: @opinion57
         comment: bououh
-
+        ranking: <numberBetween(1,5)>
     version3:
         title: Modification 3
         body: |
@@ -32,7 +32,7 @@ Capco\AppBundle\Entity\OpinionVersion:
         author: @user2
         parent: @opinion57
         comment: bououh
-
+        ranking: <numberBetween(1,5)>
     version{4...10}:
         title: Modification <current()>
         body: |
@@ -43,3 +43,4 @@ Capco\AppBundle\Entity\OpinionVersion:
         author: @user2
         parent: @opinion<numberBetween(57,59)>
         comment: Coeur avec les doigts !
+        ranking: <numberBetween(1,5)>

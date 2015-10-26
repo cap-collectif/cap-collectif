@@ -361,12 +361,13 @@ class Idea implements CommentableInterface
     }
 
     /**
-     * @param mixed $theme
+     * @param Theme $theme
      */
-    public function setTheme($theme)
+    public function setTheme(Theme $theme)
     {
         $this->theme = $theme;
         $theme->addIdea($this);
+        return $this;
     }
 
     /**

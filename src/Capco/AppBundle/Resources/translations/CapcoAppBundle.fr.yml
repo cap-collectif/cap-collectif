@@ -259,7 +259,7 @@ project:
       body: Choisissez le format du fichier :
       button: Format %format%
       cancel: Fermer
-      title: Exporter l'étape de projet "%title%"
+      title: Exporter l'étape de consultation "%title%"
     step: Étape %position% : "%title%"
   error:
     not_exportable: Impossible de télécharger cette étape de consultation.

@@ -139,9 +139,9 @@ Feature: Opinions
 ## Source
 
   ### List
-
+    @fail
     Scenario: API client wants to list sources of an opinion
-    When I send a GET request to "/api/opinions/3/sources"
+    When I send a GET request to "/api/opinions/2/sources"
     Then the JSON response should match:
     """
     {
@@ -212,7 +212,6 @@ Feature: Opinions
 
 ### Links
 
-
     Scenario: API client wants to list links of an opinion
     When I send a GET request to "/api/opinions/60/links"
     Then the JSON response should match:
@@ -240,7 +239,8 @@ Feature: Opinions
           },
           "user_vote": @null@,
           "has_user_reported": @boolean@
-        }
+        },
+        @...@
       ]
     }
     """

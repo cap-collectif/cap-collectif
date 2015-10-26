@@ -3,3 +3,7 @@ Capco\AppBundle\Entity\SourceVote:
         Source: @source1
         user: @user<numberBetween(1, 3)>
         confirmed: true
+    sourceVote2:
+        Source: @source35
+        user: @user<numberBetween(1, 3)>
+        confirmed: true

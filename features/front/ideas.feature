@@ -44,7 +44,7 @@ Scenario: Can create an idea when logged in
     | capco_appbundle_idea_title     | Titre                     |
     | capco_appbundle_idea_body      | Description de mon idée   |
     | capco_appbundle_idea_object    | Objectif de mon idée      |
-  And I select "Immobilier" from "capco_appbundle_idea_Theme"
+  And I select "Immobilier" from "capco_appbundle_idea_theme"
   And I press "Publier"
   Then I should see "Merci ! Votre idée a bien été enregistrée."
 

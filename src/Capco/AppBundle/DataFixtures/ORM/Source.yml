@@ -6,7 +6,7 @@ Capco\AppBundle\Entity\Source:
         title: Ma source
         body: blabla
         Author: @user5
-        Opinion: @opinion2
+        Opinion: @opinion3
         Category: @Category2
         link: http://www.google.fr
         voteCount: 0
@@ -69,4 +69,20 @@ Capco\AppBundle\Entity\Source:
         opinion: @opinion59
         Category: @Category<numberBetween(1,5)>
         link: https://toto.fr/
+        voteCount: 0
+    source35:
+        title: Ma super source
+        body: blablablabla
+        Author: @user5
+        Opinion: @opinion2
+        Category: @Category2
+        link: http://www.google.fr
+        voteCount: 1
+    source36:
+        title: Ma méga super source
+        body: blablablabla-blablablabla
+        Author: @user5
+        Opinion: @opinion2
+        Category: @Category2
+        link: http://www.bing.com
         voteCount: 0

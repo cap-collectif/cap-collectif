@@ -1,7 +1,7 @@
 Feature: Opinions Versions
 
 ## List
-
+  @fail
   Scenario: API client wants to list versions of an opinion
     When I send a GET request to "/api/opinions/57/versions"
     Then the JSON response status code should be 200
@@ -14,7 +14,6 @@ Feature: Opinions Versions
           "arguments_yes_count": @integer@,
           "arguments_no_count": @integer@,
           "id": @integer@,
-
           "author": {
             "username": @string@,
             "displayName": @string@,
@@ -27,7 +26,6 @@ Feature: Opinions Versions
               "settings": @string@
             }
           },
-
           "parent": {
             "type": {
               "voteWidgetType": @integer@
@@ -41,7 +39,6 @@ Feature: Opinions Versions
             "user_vote": @null@,
             "has_user_reported": @boolean@
           },
-
           "sources_count": @integer@,
           "arguments_count": @integer@,
           "updated_at": "@string@.isDateTime()",

@@ -103,7 +103,7 @@ class ProposalResponse
      * @param Question $question
      * @return $this
      */
-    public function setQuestion($question)
+    public function setQuestion(Question $question)
     {
         $this->question = $question;
         return $this;
@@ -119,9 +119,11 @@ class ProposalResponse
 
     /**
      * @param string $value
+     * @return $this
      */
     public function setValue($value)
     {
         $this->value = $value;
+        return $this;
     }
 }

@@ -35,15 +35,14 @@ class ProposalComment extends AbstractComment
     }
 
     /**
-     * @param $proposal
+     * @param Proposal $proposal
      *
      * @return $this
      */
-    public function setProposal($proposal)
+    public function setProposal(Proposal $proposal)
     {
         $this->proposal = $proposal;
         $proposal->addComment($this);
-
         return $this;
     }
 

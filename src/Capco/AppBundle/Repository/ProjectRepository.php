@@ -78,7 +78,7 @@ class ProjectRepository extends EntityRepository
     public function getOneBySlugWithStepsAndEventsAndPosts($slug)
     {
         $qb = $this->getIsEnabledQueryBuilder('p')
-            ->addSelect('t', 'pas', 's', 'pov', 'p', 'e')
+            ->addSelect('t', 'pas', 's', 'pov', 'pst', 'e')
             ->leftJoin('p.themes', 't')
             ->leftJoin('p.steps', 'pas')
             ->leftJoin('pas.step', 's')
@@ -90,7 +90,7 @@ class ProjectRepository extends EntityRepository
             ->setParameter('slug', $slug)
             ->setParameter('published', true)
             ->setParameter('enabled', true)
-            ->addOrderBy('p.publishedAt', 'DESC')
+            ->addOrderBy('pst.publishedAt', 'DESC')
             ->addOrderBy('e.startAt', 'DESC')
             ->addOrderBy('pas.position', 'ASC')
             ->addOrderBy('s.startAt', 'ASC')

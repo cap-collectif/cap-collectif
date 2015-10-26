@@ -295,7 +295,7 @@ class ConsultationStep extends AbstractStep
 
     public function getType()
     {
-        return 'consultation_step';
+        return 'consultation';
     }
 
     public function isConsultationStep()

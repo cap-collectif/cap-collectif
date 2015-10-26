@@ -370,13 +370,11 @@ class Theme
      * @param Project $project
      *
      * @return $this
-     * @internal param \Capco\AppBundle\Entity\Project $Project
      *
      */
     public function removeProject(Project $project)
     {
         $this->projects->removeElement($project);
-
         return $this;
     }
 

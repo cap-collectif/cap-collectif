@@ -29,21 +29,20 @@ class ProposalVote extends AbstractVote
     }
 
     /**
-     * @param $proposal
+     * @param Proposal $proposal
      *
      * @return $this
      */
-    public function setProposal($proposal)
+    public function setProposal(Proposal $proposal)
     {
         $this->proposal = $proposal;
         $proposal->addVote($this);
-
         return $this;
     }
 
     public function getRelatedEntity()
     {
-        return $this->Proposal;
+        return $this->proposal;
     }
 
     // *************************** Lifecycle **********************************

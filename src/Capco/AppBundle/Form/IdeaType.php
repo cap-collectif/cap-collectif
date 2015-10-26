@@ -31,7 +31,7 @@ class IdeaType extends AbstractType
         ;
 
         if ($this->toggleManager->isActive('themes')) {
-            $builder->add('Theme', null, array(
+            $builder->add('theme', null, array(
                 'label' => 'idea.form.theme',
                 'required' => true,
                 'empty_value' => 'idea.form.empty_theme',

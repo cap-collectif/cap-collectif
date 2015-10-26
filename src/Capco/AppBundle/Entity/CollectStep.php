@@ -32,7 +32,7 @@ class CollectStep extends AbstractStep
 
     public function getType()
     {
-        return 'collect_step';
+        return 'collect';
     }
 
     public function isCollectStep()

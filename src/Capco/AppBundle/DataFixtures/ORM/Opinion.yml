@@ -205,3 +205,16 @@ Capco\AppBundle\Entity\Opinion:
         OpinionType: @opinionType6
         link: @opinion60
         position: 1
+
+    opinion62:
+        step: @cstep5
+        title: Très lié à article
+        body: |
+             <p><text(100)></p>
+             <p><text(300)></p>
+        isEnabled: true
+        isTrashed: false
+        Author: @user2
+        OpinionType: @opinionType6
+        link: @opinion60
+        position: 1

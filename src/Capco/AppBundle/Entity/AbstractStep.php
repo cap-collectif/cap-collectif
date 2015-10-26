@@ -53,7 +53,7 @@ abstract class AbstractStep
      */
     public static $stepTypeLabels = [
         'presentation' => 'step.types.presentation',
-        'project' => 'step.types.project',
+        'consultation' => 'step.types.consultation',
         'other' => 'step.types.other',
         'synthesis' => 'step.types.synthesis',
         'ranking' => 'step.types.ranking',

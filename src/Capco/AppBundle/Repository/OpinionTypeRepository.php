@@ -70,7 +70,7 @@ class OpinionTypeRepository extends NestedTreeRepository
     }
 
     /**
-     * Get all opinionTypes with opinions count for project step.
+     * Get all opinionTypes with opinions count for consultation step.
      *
      * @param $step
      * @param $allowedTypes

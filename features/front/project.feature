@@ -27,7 +27,7 @@ Feature: Project
     And I visited "projects page"
     And I select "Transport" from "capco_app_search_project_theme"
     And I wait 5 seconds
-    Then I should see 3 ".thumbnail--custom" elements
+    Then I should see 4 ".thumbnail--custom" elements
     And I should see "Stratégie technologique de l'Etat et services publics"
     And I should see "Projet vide"
     And I should not see "Croissance, innovation, disruption"
@@ -41,7 +41,7 @@ Feature: Project
     And I wait 5 seconds
     And I select "Nombre de contributions" from "capco_app_search_project_sort"
     And I wait 5 seconds
-    Then I should see 3 ".thumbnail--custom" elements
+    Then I should see 4 ".thumbnail--custom" elements
     And I should see "Stratégie technologique de l'Etat et services publics"
     And I should see "Projet vide"
     And I should not see "Croissance, innovation, disruption"
@@ -97,19 +97,19 @@ Feature: Project
     Given I visited "consultation page" with:
       | projectSlug | croissance-innovation-disruption |
       | stepSlug    | collecte-des-avis                |
-    Then I should see "7 votes"
+    Then I should see "8 votes"
 
   @javascript
   Scenario: Project header should display correct number of contributions
     Given I visited "consultation page" with:
       | projectSlug | croissance-innovation-disruption |
       | stepSlug    | collecte-des-avis                |
-    Then I should see "124 contributions"
+    Then I should see "127 contributions"
     And I hover over the "#contributions-counter-pill" element
     And I wait 5 seconds
     And I should see "23 propositions"
-    And I should see "71 arguments"
-    And I should see "30 sources"
+    And I should see "72 arguments"
+    And I should see "32 sources"
 
   Scenario: Project header should display correct number of participants
     Given I visited "consultation page" with:

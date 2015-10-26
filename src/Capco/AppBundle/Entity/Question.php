@@ -2,7 +2,9 @@
 
 namespace Capco\AppBundle\Entity;
 
+use Capco\AppBundle\Traits\SluggableTitleTrait;
 use Capco\AppBundle\Traits\TimestampableTrait;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -15,6 +17,7 @@ class Question
 {
 
     use TimestampableTrait;
+    use SluggableTitleTrait;
 
     /**
      * @var integer
@@ -24,13 +27,6 @@ class Question
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="title", type="string", length=255)
-     */
-    private $title;
 
     /**
      * @var string
@@ -81,29 +77,6 @@ class Question
     }
 
     /**
-     * Set title
-     *
-     * @param string $title
-     * @return Question
-     */
-    public function setTitle($title)
-    {
-        $this->title = $title;
-
-        return $this;
-    }
-
-    /**
-     * Get title
-     *
-     * @return string 
-     */
-    public function getTitle()
-    {
-        return $this->title;
-    }
-
-    /**
      * Set helpText
      *
      * @param string $helpText
@@ -112,7 +85,6 @@ class Question
     public function setHelpText($helpText)
     {
         $this->helpText = $helpText;
-
         return $this;
     }
 
@@ -136,10 +108,12 @@ class Question
 
     /**
      * @param ArrayCollection $questionChoices
+     * @return $this
      */
     public function setQuestionChoices($questionChoices)
     {
         $this->questionChoices = $questionChoices;
+        return $this;
     }
 
     /**
@@ -152,10 +126,12 @@ class Question
 
     /**
      * @param ArrayCollection $proposalResponses
+     * @return $this
      */
     public function setProposalResponses($proposalResponses)
     {
         $this->proposalResponses = $proposalResponses;
+        return $this;
     }
 
     /**
@@ -168,10 +144,12 @@ class Question
 
     /**
      * @param ProposalForm $proposalForm
+     * @return $this
      */
-    public function setProposalForm($proposalForm)
+    public function setProposalForm(ProposalForm $proposalForm)
     {
         $this->proposalForm = $proposalForm;
+        return $this;
     }
 
     /**
@@ -184,9 +162,11 @@ class Question
 
     /**
      * @param QuestionType $questionType
+     * @return $this
      */
-    public function setQuestionType($questionType)
+    public function setQuestionType(QuestionType $questionType)
     {
         $this->questionType = $questionType;
+        return $this;
     }
 }

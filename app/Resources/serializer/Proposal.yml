@@ -21,7 +21,19 @@ Capco\AppBundle\Entity\Proposal:
         proposalReponses:
             expose: true
             type: Capco\AppBundle\Entity\ProposalResponse
-            serialized_name: proposalResponses
+            serialized_name: responses
+            groups: [Proposals]
+        votesCount:
+            expose: true
+            type: integer
+            groups: [Proposals]
+        commentsCount:
+            expose: true
+            type: integer
+            groups: [Proposals]
+        canContribute:
+            expose: true
+            type: boolean
             groups: [Proposals]
         createdAt:
             expose: true

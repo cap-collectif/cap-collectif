@@ -6,7 +6,7 @@ use Capco\AppBundle\Behat\PageTrait;
 use SensioLabs\Behat\PageObjectExtension\PageObject\Page;
 use SensioLabs\Behat\PageObjectExtension\PageObject\Exception\UnexpectedPageException;
 
-class ProjectPage extends Page
+class ConsultationPage extends Page
 {
     use PageTrait;
 

@@ -152,24 +152,6 @@ class Proposal implements CommentableInterface
     /**
      * @return string
      */
-    public function getTitle()
-    {
-        return $this->title;
-    }
-
-    /**
-     * @param string $title
-     * @return $this
-     */
-    public function setTitle($title)
-    {
-        $this->title = $title;
-        return $this;
-    }
-
-    /**
-     * @return string
-     */
     public function getBody()
     {
         return $this->body;
@@ -236,12 +218,12 @@ class Proposal implements CommentableInterface
     public function setTheme(Theme $theme)
     {
         $this->theme = $theme;
-        return $this;
         $theme->addProposal($this);
+        return $this;
     }
 
     /**
-     * @return mixed
+     * @return ArrayCollection
      */
     public function getVotes()
     {
@@ -249,7 +231,7 @@ class Proposal implements CommentableInterface
     }
 
     /**
-     * @param mixed $votes
+     * @param ArrayCollection $votes
      * @return $this
      */
     public function setVotes($votes)
@@ -288,7 +270,7 @@ class Proposal implements CommentableInterface
      * @param ProposalForm $proposalForm
      * @return $this
      */
-    public function setProposalForm($proposalForm)
+    public function setProposalForm(ProposalForm $proposalForm)
     {
         $this->proposalForm = $proposalForm;
         return $this;
@@ -316,7 +298,7 @@ class Proposal implements CommentableInterface
      */
     public function canDisplay()
     {
-        return $this->enabled && !$this->isTrashed && $this->getStep()->canContribute();;
+        return $this->enabled && !$this->isTrashed && $this->getStep()->canDisplay();
     }
 
     /**
@@ -324,7 +306,7 @@ class Proposal implements CommentableInterface
      */
     public function canContribute()
     {
-        return true;
+        return $this->enabled && !$this->isTrashed && $this->getStep()->canContribute();
     }
 
     /**

@@ -21,6 +21,7 @@ Feature: Proposal Restful Api
       "settings": @string@
     }
   },
+  "comments_count": @integer@,
   "created_at": "@string@.isDateTime()",
   "updated_at": "@string@.isDateTime()"
 }
@@ -43,10 +44,11 @@ Feature: Proposal Restful Api
       "media": @...@,
       "vip": true,
       "_links": {
-        "profile": "http://127.0.0.1/profile/user/welcomattic",
-        "settings": "http://127.0.0.1/profile/edit-profile"
+        "profile": @string@,
+        "settings": @string@
       }
     },
+    "comments_count": @integer@,
     "created_at": "@string@.isDateTime()",
     "updated_at": "@string@.isDateTime()"
   },

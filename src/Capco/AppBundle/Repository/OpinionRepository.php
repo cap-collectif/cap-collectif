@@ -310,15 +310,16 @@ class OpinionRepository extends EntityRepository
     }
 
     /**
-     * Get opinions by opinionType and project step.
+     * Get opinions by opinionType and consultation step.
      *
-     * @param $step
-     * @param $opinionType
+     * @param ConsultationStep $step
+     * @param $opinionTypeId
      * @param int $nbByPage
      * @param int $page
      *
+     * @param string $opinionsSort
      * @return Paginator
-     * @return mixed
+     * @internal param $opinionType
      */
     public function getByOpinionTypeAndConsultationStepOrdered(ConsultationStep $step, $opinionTypeId, $nbByPage = 10, $page = 1, $opinionsSort = 'last')
     {
@@ -394,7 +395,7 @@ class OpinionRepository extends EntityRepository
     }
 
     /**
-     * Get enabled opinions by project step.
+     * Get enabled opinions by consultation step.
      *
      * @param $step
      *
