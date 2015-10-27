@@ -28,6 +28,7 @@ class CommentSerializationListener implements EventSubscriberInterface
             ['event' => 'serializer.post_serialize', 'class' => 'Capco\AppBundle\Entity\IdeaComment', 'method' => 'onPostAbstractCommentSerialize'],
             ['event' => 'serializer.post_serialize', 'class' => 'Capco\AppBundle\Entity\PostComment', 'method' => 'onPostAbstractCommentSerialize'],
             ['event' => 'serializer.post_serialize', 'class' => 'Capco\AppBundle\Entity\EventComment', 'method' => 'onPostAbstractCommentSerialize'],
+            ['event' => 'serializer.post_serialize', 'class' => 'Capco\AppBundle\Entity\ProposalComment', 'method' => 'onPostAbstractCommentSerialize'],
         ];
     }
 

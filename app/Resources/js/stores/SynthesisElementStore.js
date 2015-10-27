@@ -161,19 +161,6 @@ class SynthesisElementStore extends BaseStore {
       this._resetMessages();
       this.emitChange();
       break;
-    case Actions.DESCRIBE_ELEMENT:
-      element = this._element && action.elementId === this._element.id
-        ? this._element
-        : this.getElementInTreeById(this._elements.notIgnoredTree, action.elementId)
-      ;
-      if (element) {
-        element.description = action.description;
-      }
-      this._resetInboxSync();
-      this._isProcessing = true;
-      this._resetMessages();
-      this.emitChange();
-      break;
     case Actions.NAME_ELEMENT:
       element = this._element && action.elementId === this._element.id
         ? this._element

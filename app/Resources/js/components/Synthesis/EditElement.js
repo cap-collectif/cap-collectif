@@ -87,17 +87,6 @@ const EditElement = React.createClass({
     );
   },
 
-  renderDescription() {
-    if (this.state.element && this.state.element.description) {
-      return (
-        <p className="element__description box">
-          {this.state.element.description}
-        </p>
-      );
-    }
-    return null;
-  },
-
   renderElementPanel() {
     const element = this.state.element;
     if (!this.state.isLoading && element) {
@@ -113,7 +102,6 @@ const EditElement = React.createClass({
               <div className="element box">
                 <ElementBlock element={element} />
               </div>
-              {this.renderDescription()}
               <div className="element__description box has-chart" dangerouslySetInnerHTML={{__html: element.body}} />
               {this.renderElementButtons()}
             </div>

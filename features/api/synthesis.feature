@@ -312,7 +312,6 @@ Feature: Synthesis
           "displayType": "folder",
           "title": "Je suis un élément",
           "body": "blabla",
-          "description": @null@,
           "notation": 4,
           "linked_data_creation": @null@,
           "_links": {
@@ -373,7 +372,6 @@ Feature: Synthesis
           "displayType": "folder",
           "title": "Je suis un élément",
           "body": "blabla",
-          "description": @null@,
           "notation": 4,
           "linked_data_creation": @null@,
           "_links": {
@@ -425,7 +423,6 @@ Feature: Synthesis
           "displayType": "folder",
           "title": @null@,
           "body": "blabla",
-          "description": @null@,
           "notation": @null@,
           "linked_data_creation": @null@,
           "_links": {
@@ -478,7 +475,6 @@ Feature: Synthesis
           "displayType": "folder",
           "title": @null@,
           "body": "blabla",
-          "description": @null@,
           "notation": @null@,
           "linked_data_creation": @null@,
           "_links": {
@@ -520,7 +516,6 @@ Feature: Synthesis
         "displayType": "folder",
         "title": "Le problème constaté",
         "body": @string@,
-        "description": @null@,
         "childrenCount": 0,
         "votes": [],
         "publishedChildrenCount": 0,
@@ -534,7 +529,6 @@ Feature: Synthesis
         "displayType": "folder",
         "title": "Les causes",
         "body": @string@,
-        "description": @null@,
         "childrenCount": 0,
         "votes": [],
         "publishedChildrenCount": 0,
@@ -559,7 +553,6 @@ Feature: Synthesis
         "displayType": @string@,
         "title": @string@,
         "body": @string@,
-        "description": @null@,
         "childrenCount": @integer@,
         "children": [
           {
@@ -569,7 +562,6 @@ Feature: Synthesis
             "displayType": @string@,
             "title": @string@,
             "body": @string@,
-            "description": @null@,
             "childrenCount": @integer@,
             "children": [@...@]
           }
@@ -594,7 +586,6 @@ Feature: Synthesis
         "displayType": @string@,
         "title": @string@,
         "body": @string@,
-        "description": @null@,
         "childrenCount": @integer@,
         "children": [
           {
@@ -604,7 +595,6 @@ Feature: Synthesis
             "displayType": @string@,
             "title": @string@,
             "body": @string@,
-            "description": @null@,
             "childrenCount": @integer@,
             "children": [@...@]
           }

@@ -20,7 +20,6 @@ class SynthesisElementType extends AbstractType
         $builder
             ->add('title', null, ['required' => false])
             ->add('body', null, ['required' => false])
-            ->add('description', null, ['required' => false])
             ->add('published', null, ['required' => false])
             ->add('archived', null, ['required' => false])
             ->add('notation', null, ['required' => false])

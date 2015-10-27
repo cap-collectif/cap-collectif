@@ -11,7 +11,6 @@ const ViewElement = React.createClass({
     element: React.PropTypes.object.isRequired,
     parent: React.PropTypes.object,
     settings: React.PropTypes.array.isRequired,
-    onExpandElement: React.PropTypes.func.isRequired,
   },
   mixins: [ReactIntl.IntlMixin],
 
@@ -28,7 +27,6 @@ const ViewElement = React.createClass({
   },
 
   toggleChildrenModal(value) {
-    this.props.onExpandElement(this.props.element);
     this.setState({
       showChildrenModal: value,
     });
@@ -104,12 +102,10 @@ const ViewElement = React.createClass({
     return null;
   },
 
-  renderDescription() {
-    if (this.props.element.description) {
+  renderElementBody() {
+    if (this.props.element.body) {
       return (
-        <p className="synthesis__element__description">
-          {this.props.element.description}
-        </p>
+        <div className="synthesis__element__body" dangerouslySetInnerHTML={{__html: this.props.element.body}} />
       );
     }
   },
@@ -158,7 +154,7 @@ const ViewElement = React.createClass({
         </div>
         {this.renderCounters()}
         {this.renderPieChart()}
-        {this.renderDescription()}
+        {this.renderElementBody()}
         <ChildrenModal elements={this.props.element.children} show={this.state.showChildrenModal} toggle={this.toggleChildrenModal} />
       </div>
     );
