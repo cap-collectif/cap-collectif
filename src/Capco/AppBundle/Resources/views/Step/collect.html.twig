@@ -21,11 +21,6 @@
     {{ parent() }} - {{ project.title }}
 {% endblock %}
 
-{% block stylesheets %}
-    {{ parent() }}
-    <link href="{{ asset('js/fancybox/jquery.fancybox.css') }}" rel="stylesheet">
-{% endblock %}
-
 {% block jumbotron %}
 {% endblock %}
 
@@ -43,44 +38,23 @@
 
         <div class="col-xs-12  col-sm-8  col-md-9" id="details">
             <h2 class="h2">
-                320 propositions
-                <div
+                {{ currentStep.proposalForm.proposals | length }} propositions
+                <span
+                    class="pull-right"
                     id="render-collect-step-proposal-create"
                     data-form='{{ form|escape }}'
                 >
-                </div>
+                </span>
             </h2>
-
-
             <div
                 id="render-collect-step-page"
                 data-form='{{ form|escape }}'
                 data-themes='{{ themes|escape }}'
             >
             </div>
-
-        </div> <!-- col-xs-12  col-sm-8  col-md-9 -->
-    </div> <!-- .row -->
+        </div>
+    </div>
 </div>
 
-
-
 {% endblock %}
 
-{% block javascripts %}
-    {{ parent() }}
-    <script type="text/javascript">
-        App.pieChart();
-        App.customModal('.modal--custom');
-        $('.more').readmore({
-            collapsedHeight: 88,
-            moreLink: '<a class="text-center" href="#">{{ 'project.show.meta.read_more'|trans({}, 'CapcoAppBundle') }}</a>',
-            lessLink: '<a class="text-center" href="#">{{ 'project.show.meta.read_less'|trans({}, 'CapcoAppBundle') }}</a>'
-        });
-        {% if project.video %}
-        App.video('.fancybox');
-        {% endif %}
-    </script>
-
-
-{% endblock %}

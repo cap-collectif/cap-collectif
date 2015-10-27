@@ -1,5 +1,5 @@
 import BaseStore from './BaseStore';
-import {RECEIVE_PROPOSALS} from '../constants/ProposalConstants';
+import {RECEIVE_PROPOSALS, RECEIVE_PROPOSAL} from '../constants/ProposalConstants';
 
 class ProposalStore extends BaseStore {
 
@@ -15,8 +15,8 @@ class ProposalStore extends BaseStore {
       this._proposals = action.proposals;
       this.emitChange();
       break;
-    case RECEIVE_PROPOSALS:
-      this._proposals = action.proposals;
+    case RECEIVE_PROPOSAL:
+      this._proposal = action.proposal;
       this.emitChange();
       break;
     default: break;
@@ -27,6 +27,9 @@ class ProposalStore extends BaseStore {
     return this._proposals;
   }
 
+  get proposal() {
+    return this._proposal;
+  }
 }
 
 export default new ProposalStore();

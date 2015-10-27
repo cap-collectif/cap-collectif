@@ -23,7 +23,11 @@ export default {
 
   load: (form, order = 'last', filters = {}, offset = 0, limit = -1) => {
     let url = `/proposal_forms/${form}/proposals?order=${order}&offset=${offset}&limit=${limit}`;
-    // TODO add filters
+    for (const filter in filters) {
+      if (filters.hasOwnProperty(filter)) {
+        url += `&${filter}=${filters[filter]}`;
+      }
+    }
 
     Fetcher
       .get(url)
@@ -42,7 +46,7 @@ export default {
       .then((data) => {
         AppDispatcher.dispatch({
           actionType: RECEIVE_PROPOSAL,
-          proposal: data.proposal,
+          proposal: data,
         });
         return true;
       });

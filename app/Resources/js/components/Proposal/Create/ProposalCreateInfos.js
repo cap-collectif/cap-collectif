@@ -6,7 +6,7 @@ const ProposalCreateInfos = React.createClass({
 
   render() {
     return (
-      <p>lol</p>
+      <p></p>
     );
   },
 

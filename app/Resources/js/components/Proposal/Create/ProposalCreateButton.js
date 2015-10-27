@@ -14,7 +14,7 @@ const ProposalCreateButton = React.createClass({
       <LoginOverlay>
         <Button id="proposal-form__add" bsStyle="primary" onClick={LoginStore.isLoggedIn() ? this.props.handleClick : null}>
           <i className="cap cap-add-1"></i>
-          { ' ' + this.getIntlMessage('proposal.add_new')}
+          { ' ' + this.getIntlMessage('proposal.add')}
         </Button>
       </LoginOverlay>
     );

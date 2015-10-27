@@ -13,11 +13,11 @@ const ProposalPageHeader = React.createClass({
       <div className="container--custom container--with-sidebar">
         <div className="block">
           <h2 className="h2">Description</h2>
-          <p>{proposal.content}</p>
+          <p>{proposal.body}</p>
         </div>
         <div className="block">
           <ShareButtonDropdown />
-          <Button className="pull-right no-float-mobile">Signaler</Button>
+          <Button>Signaler</Button>
         </div>
       </div>
     );

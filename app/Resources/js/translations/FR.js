@@ -156,8 +156,12 @@ export default {
     },
     proposal: {
       add_new: 'Proposer un projet',
+      add: 'Faire une proposition',
       count: '{num, plural, =0{0 projet} one{# projet} other{# projets}}',
+      title: 'Titre',
+      body: 'Proposition',
       vote: {
+        count: '{num, plural, =0{0 vote} one{# vote} other{# votes}}',
         name: 'Nom',
         email: 'Adresse électronique',
         body: 'Commentaire',

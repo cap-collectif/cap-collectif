@@ -8,6 +8,7 @@ import AuthService from './services/AuthService';
 import FeatureService from './services/FeatureService';
 import CollectStepPage from './components/Page/CollectStepPage';
 import ProposalPage from './components/Proposal/Page/ProposalPage';
+import ProposalPageHeader from './components/Proposal/Page/ProposalPageHeader';
 import ProposalCreate from './components/Proposal/Create/ProposalCreate';
 
 FeatureService.load();
@@ -50,7 +51,11 @@ AuthService
 
     if ($('#render-proposal-page').length) {
         React.render(
-            <ProposalPage proposalId={$('#render-proposal-page').data('proposal')} {...IntlData} />,
+            <ProposalPage
+                proposal={$('#render-proposal-page').data('proposal').proposal}
+                formId={$('#render-proposal-page').data('form')}
+                 {...IntlData}
+            />,
             document.getElementById('render-proposal-page')
         );
     }
@@ -69,6 +74,7 @@ AuthService
         React.render(
             <CollectStepPage
                 form={$('#render-collect-step-page').data('form').form}
+                themes={$('#render-collect-step-page').data('themes').themes}
                 {...IntlData}
             />,
             document.getElementById('render-collect-step-page')

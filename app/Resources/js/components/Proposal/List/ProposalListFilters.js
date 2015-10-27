@@ -13,7 +13,7 @@ const ProposalListFilters = React.createClass({
     id: React.PropTypes.number.isRequired,
     onChange: React.PropTypes.func.isRequired,
     localisation: React.PropTypes.array,
-    theme: React.PropTypes.array,
+    theme: React.PropTypes.array.isRequired,
     status: React.PropTypes.array,
     user_type: React.PropTypes.array,
   },
@@ -21,10 +21,9 @@ const ProposalListFilters = React.createClass({
 
   getDefaultProps() {
     return {
-      localisation: [{id: 1, label: 'ici'}, {id: 2, label: 'la bas'}],
-      theme: [{id: 1, label: 'ici'}, {id: 2, label: 'la bas'}],
-      status: [{id: 1, label: 'ici'}, {id: 2, label: 'la bas'}],
-      user_type: [{id: 1, label: 'ici'}, {id: 2, label: 'la bas'}],
+      localisation: [{id: 1, title: 'ici'}, {id: 2, title: 'la bas'}],
+      status: [{id: 1, title: 'ici'}, {id: 2, title: 'la bas'}],
+      user_type: [{id: 1, title: 'ici'}, {id: 2, title: 'la bas'}],
     };
   },
 
@@ -38,10 +37,10 @@ const ProposalListFilters = React.createClass({
   },
 
   componentDidUpdate(prevProps, prevState) {
-   if (prevState && prevState.order !== this.state.order || prevState.filters !== this.state.filters) {
-     this.reload();
-     this.props.onChange();
-   }
+    if (prevState && prevState.order !== this.state.order || prevState.filters !== this.state.filters) {
+      this.reload();
+      this.props.onChange();
+    }
   },
 
   handleOrderChange(order) {
@@ -51,7 +50,7 @@ const ProposalListFilters = React.createClass({
   handleFilterChange(filter) {
     const value = this.refs[filter].getValue();
     this.setState({
-      filters: React.addons.update(this.state.filters, {[filter]: {$set: value}})
+      filters: React.addons.update(this.state.filters, {[filter]: {$set: value}}),
     });
   },
 
@@ -70,7 +69,7 @@ const ProposalListFilters = React.createClass({
           {
             this.buttons.map((button) => {
               return (
-                <Button onClick={this.handleOrderChange.bind(this, button)}>
+                <Button active={this.state.order === button} onClick={this.handleOrderChange.bind(this, button)}>
                   {this.getIntlMessage('global.filter_' + button)}
                 </Button>
               );
@@ -85,28 +84,30 @@ const ProposalListFilters = React.createClass({
       </ButtonToolbar>
       <Collapse in={this.state.collapse}>
         <Row>
+          <br />
           {
             this.filters.map((filter) => {
-
               return (
-                <Input
-                  type="select"
-                  ref={filter}
-                  onChange={this.handleFilterChange.bind(this, filter)}
-                >
-                  <option value="" disabled selected>
-                    {this.getIntlMessage('global.select_' + filter)}
-                  </option>
-                  {
-                    this.props[filter].map((type) => {
-                      return (
-                        <option key={type.id} value={type.id}>
-                          {type.label}
-                        </option>
-                      );
-                    })
-                  }
-                </Input>
+                <Col xs={12} md={6}>
+                  <Input
+                    type="select"
+                    ref={filter}
+                    onChange={this.handleFilterChange.bind(this, filter)}
+                  >
+                    <option value="" disabled selected>
+                      {this.getIntlMessage('global.select_' + filter)}
+                    </option>
+                    {
+                      this.props[filter].map((type) => {
+                        return (
+                          <option key={type.id} value={type.id}>
+                            {type.title}
+                          </option>
+                        );
+                      })
+                    }
+                  </Input>
+                </Col>
               );
             })
           }

@@ -1,6 +1,6 @@
 {% extends '@CapcoApp/base.html.twig' %}
 
-{% block canonical_link %}{{ url('app_proposal_show', {'slug': proposal.slug}) }}{% endblock %}
+{% block canonical_link %}{{ '' }}{% endblock %}
 
 {% block title %}
     {{ parent() }} - {{ proposal.title }}
@@ -9,8 +9,8 @@
 {% block jumbotron %}{% endblock %}
 
 {% block body %}
-    <div id="render-proposal-page" data-proposal="{{ proposal.id}}" />
-</div>
+
+    <div id="render-proposal-page" data-proposal='{{ json|escape }}' data-form="{{ proposal.proposalForm.id}}" />
 
 {% endblock %}
 

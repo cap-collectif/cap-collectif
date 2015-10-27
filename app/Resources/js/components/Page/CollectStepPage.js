@@ -7,6 +7,7 @@ import Loader from '../Utils/Loader';
 const CollectStepPage = React.createClass({
   propTypes: {
     form: React.PropTypes.object.isRequired,
+    themes: React.PropTypes.array.isRequired,
   },
   mixins: [ReactIntl.IntlMixin],
 
@@ -49,6 +50,7 @@ const CollectStepPage = React.createClass({
       <div>
         <ProposalListFilters
           id={this.props.form.id}
+          theme={this.props.themes}
           onChange={() => this.handleFilterChange()}
         />
         <br />

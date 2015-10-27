@@ -44,10 +44,10 @@ const ProposalCreate = React.createClass({
   },
 
   render() {
-    if (!this.props.form.isContribuable) {
+/*    if (!this.props.form.isContribuable) {
       return null;
     }
-
+*/
     return (
       <div>
         <ProposalCreateButton handleClick={this.show.bind(null, this)} />
@@ -60,7 +60,7 @@ const ProposalCreate = React.createClass({
         >
           <Modal.Header closeButton>
             <Modal.Title id="contained-modal-title-lg">
-              { this.getIntlMessage('source.add') }
+              { this.getIntlMessage('proposal.add') }
             </Modal.Title>
           </Modal.Header>
           <Modal.Body>
