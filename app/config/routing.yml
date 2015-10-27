@@ -69,6 +69,11 @@ capco_api_themes:
   type: rest
   prefix: /api
 
+capco_api_statuses:
+  resource: "@CapcoAppBundle/Controller/Api/StatusesController.php"
+  type: rest
+  prefix: /api
+
 capco_api_arguments:
   resource: "@CapcoAppBundle/Controller/Api/ArgumentsController.php"
   type: rest

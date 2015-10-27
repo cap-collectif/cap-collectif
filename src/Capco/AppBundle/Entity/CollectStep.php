@@ -4,6 +4,8 @@ namespace Capco\AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use JMS\Serializer\Annotation as Serializer;
+use Capco\AppBundle\Entity\ProposalForm;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * Class CollectStep.
@@ -20,9 +22,22 @@ class CollectStep extends AbstractStep
      */
     private $proposalForm;
 
+    /**
+     * @var ArrayCollection
+     * @ManyToMany(targetEntity="Capco\AppBundle\Entity\Status")
+     * @JoinTable(
+     *     name="collect_step_statuses",
+     *     joinColumns={@JoinColumn(name="collect_step_id", referencedColumnName="id")},
+     *     inverseJoinColumns={@JoinColumn(name="status_id", referencedColumnName="id")}
+     * )
+     **/
+    private $statuses;
+
+
     public function __construct()
     {
         parent::__construct();
+        $this->statuses = new ArrayCollection();
     }
 
     // **************************** Custom methods *******************************
@@ -44,4 +59,13 @@ class CollectStep extends AbstractStep
     {
         return $this->proposalForm;
     }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getStatuses()
+    {
+        return $this->statuses;
+    }
+
 }
