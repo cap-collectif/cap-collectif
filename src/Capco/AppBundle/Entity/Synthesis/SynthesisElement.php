@@ -185,10 +185,10 @@ class SynthesisElement
     /**
      * @var int
      *
-     * @ORM\Column(name="total_children_count", type="integer")
+     * @ORM\Column(name="published_children_count", type="integer")
      * @Gedmo\Versioned
      */
-    private $totalChildrenCount = 0;
+    private $publishedChildrenCount = 0;
 
     /**
      * @var string
@@ -576,17 +576,17 @@ class SynthesisElement
     /**
      * @return int
      */
-    public function getTotalChildrenCount()
+    public function getPublishedChildrenCount()
     {
-        return $this->totalChildrenCount;
+        return $this->publishedChildrenCount;
     }
 
     /**
-     * @param int $totalChildrenCount
+     * @param int $publishedChildrenCount
      */
-    public function setTotalChildrenCount($totalChildrenCount)
+    public function setPublishedChildrenCount($publishedChildrenCount)
     {
-        $this->totalChildrenCount = $totalChildrenCount;
+        $this->publishedChildrenCount = $publishedChildrenCount;
 
         return $this;
     }

@@ -7,6 +7,8 @@ import SynthesisElementActions from '../../actions/SynthesisElementActions';
 
 import SynthesisDisplayRules from '../../services/SynthesisDisplayRules';
 
+const FormattedMessage = ReactIntl.FormattedMessage;
+
 const ViewTree = React.createClass({
   propTypes: {
     synthesis: React.PropTypes.object.isRequired,
@@ -79,6 +81,39 @@ const ViewTree = React.createClass({
     );
   },
 
+  renderCaret(element) {
+    const expanded = this.state.expanded[element.id] || false;
+    console.log(element.publishedChildrenCount);
+    if (element.publishedChildrenCount > 0 && element.childrenCount > 0) {
+      const classes = classNames({
+        'cap-arrow-67': expanded,
+        'cap-arrow-66': !expanded,
+        'pull-right': true,
+      });
+      return (
+        <div className="synthesis__element__readmore" onClick={this.toggleExpand.bind(null, element)}>
+          {
+            expanded
+            ? <span>
+                <FormattedMessage
+                  message={this.getIntlMessage('readmore.hide')}
+                  title={element.title}
+                />
+              </span>
+            : <span>
+                <FormattedMessage
+                  message={this.getIntlMessage('readmore.show')}
+                  title={element.title}
+                />
+              </span>
+          }
+          <i style={{marginLeft: '5px'}} className={classes}></i>
+        </div>
+      );
+    }
+    return null;
+  },
+
   renderTreeItems(elements, parent = null, expanded = false) {
     if (expanded && elements) {
       return (
@@ -92,10 +127,9 @@ const ViewTree = React.createClass({
                     element={element}
                     parent={parent}
                     settings={SynthesisDisplayRules.getMatchingSettingsForElement(element, this.state.settings)}
-                    expanded ={!!this.state.expanded[element.id]}
-                    onToggleExpand={this.toggleExpand}
                   />
                   {this.renderTreeItems(element.children, element, this.state.expanded[element.id])}
+                  {this.renderCaret(element)}
                 </li>
               );
             })

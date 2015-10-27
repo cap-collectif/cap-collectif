@@ -131,5 +131,9 @@ export default {
     counter: {
       contributions: '{nb, plural, =0{# contribution} one{# contribution} other{# contributions}}',
     },
+    readmore: {
+      show: 'Voir la synthèse de "{title}"',
+      hide: 'Masquer la synthèse de "{title}"',
+    },
   },
 };

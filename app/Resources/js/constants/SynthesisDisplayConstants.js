@@ -2,7 +2,8 @@ export default {
 
   ALLOWED_RULES: {
     style: ['fontSize', 'color', 'textAlign', 'fontWeight'],
-    display: ['author', 'piechart', 'counters', 'asProgressBar', 'childrenInModal']
+    containerStyle: ['borderTop', 'paddingTop'],
+    display: ['author', 'piechart', 'counters', 'asProgressBar', 'childrenInModal', 'subtitle'],
   },
 
   DISPLAY_SETTINGS: [
@@ -33,6 +34,11 @@ export default {
           name: 'textAlign',
           value: 'center',
         },
+        {
+          category: 'display',
+          name: 'subtitle',
+          value: 'true',
+        },
       ],
     },
     {
@@ -61,6 +67,11 @@ export default {
           category: 'style',
           name: 'textAlign',
           value: 'center',
+        },
+        {
+          category: 'display',
+          name: 'subtitle',
+          value: 'true',
         },
       ],
     },
@@ -91,6 +102,11 @@ export default {
           name: 'textAlign',
           value: 'center',
         },
+        {
+          category: 'display',
+          name: 'subtitle',
+          value: 'true',
+        },
       ],
     },
     {
@@ -114,6 +130,16 @@ export default {
           category: 'style',
           name: 'fontWeight',
           value: 'bold',
+        },
+        {
+          category: 'containerStyle',
+          name: 'borderTop',
+          value: '3px solid #dddddd',
+        },
+        {
+          category: 'containerStyle',
+          name: 'paddingTop',
+          value: '15px',
         },
         {
           category: 'display',

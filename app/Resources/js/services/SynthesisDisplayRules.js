@@ -32,7 +32,11 @@ class SynthesisDisplayRules {
   isRuleAllowed(rule) {
     const category = rule.category;
     const name = rule.name;
-    return ALLOWED_RULES[category].indexOf(name) > -1;
+    const allowed = ALLOWED_RULES[category].indexOf(name) > -1;
+    if (!allowed) {
+      console.log(name + ' rule is not allow in category ' + category + '. Allowed rules are :', ALLOWED_RULES[category]);
+    }
+    return allowed;
   }
 }
 

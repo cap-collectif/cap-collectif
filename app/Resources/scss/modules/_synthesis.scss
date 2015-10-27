@@ -733,6 +733,16 @@ $items-colors:
   .synthesis__element__votes {
     margin-bottom: 10px;
   }
+  .synthesis__element__readmore {
+    text-align: center;
+    border: 1px solid $border-color;
+    padding: 10px;
+    margin-bottom: 15px;
+    cursor: pointer;
+    &:hover {
+      background-color: $lightest-gray;
+    }
+  }
   .synthesis__element__bar {
     position: relative;
     border: 1px solid $border-color;

@@ -6,12 +6,12 @@ use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
-class RecalculateSynthesisCountersCommand extends ContainerAwareCommand
+class RecalculateSynthesesCountersCommand extends ContainerAwareCommand
 {
     protected function configure()
     {
         $this
-            ->setName('capco:recalculate-syntheses-counters')
+            ->setName('capco:syntheses:recalculate-counters')
             ->setDescription('Recalculate the syntheses counters')
         ;
     }
@@ -27,11 +27,18 @@ class RecalculateSynthesisCountersCommand extends ContainerAwareCommand
         ;
 
         foreach ($synthesisElements as $el) {
+
             $childCount = $em
                 ->getRepository('CapcoAppBundle:Synthesis\SynthesisElement')
-                ->childCount($el)
+                ->createQueryBuilder('se')
+                ->select('COUNT(se.id)')
+                ->where('se.published = 1 AND se.archived = 1')
+                ->andWhere('se.path LIKE :path')
+                ->setParameter('path', $el->getPath().'%')
+                ->getQuery()
+                ->getSingleScalarResult()
             ;
-            $el->setTotalChildrenCount($childCount);
+            $el->setPublishedChildrenCount($childCount);
         }
 
         $em->flush();

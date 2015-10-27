@@ -27,28 +27,32 @@ class Version20151026194744 extends AbstractMigration implements ContainerAwareI
         // this up() migration is auto-generated, please modify it to your needs
         $this->abortIf($this->connection->getDatabasePlatform()->getName() != 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
-        $this->addSql('ALTER TABLE synthesis_element ADD subtitle VARCHAR(255) DEFAULT NULL, ADD total_children_count INT NOT NULL, ADD linked_data_url VARCHAR(255) DEFAULT NULL');
+        $this->addSql('ALTER TABLE synthesis_element ADD subtitle VARCHAR(255) DEFAULT NULL, ADD published_children_count INT NOT NULL, ADD linked_data_url VARCHAR(255) DEFAULT NULL');
     }
 
     public function postUp(Schema $schema)
     {
-        $em = $this->container->get('doctrine.orm.entity_manager');
-        $elements = $em->getRepository('CapcoAppBundle:Synthesis\SynthesisElement')->findAll();
-        foreach ($elements as $el) {
-            $contribution = $em->getRepository($el->getLinkedDataClass())->find($el->getLinkedDataId());
-            $urlResolver = $this->container->get('capco.url.resolver');
-            $em->setLinkedDataUrl($urlResolver->getObjectUrl($contribution));
-            if ($contribution instanceof \Capco\AppBundle\Entity\OpinionType) {
-                $urlResolver->setSubtitle($contribution->getSubTitle());
-                $childrenCount = $em
-                    ->getRepository('CapcoAppBundle:Synthesis\SynthesisElement')
-                    ->childCount($el)
-                ;
-                $el->setTotalChildrenCount($childrenCount);
-            }
+        $elements = $this->connection->fetchAll('
+            SELECT se.id, se.linked_data_id, se.linked_data_class
+            FROM synthesis_element se
+            WHERE se.linked_data_class LIKE ?',
+            ['%OpinionType']
+        );
 
+        foreach ($elements as $el) {
+            $ot = $this->connection->fetchAll('
+                SELECT ot.id as id, ot.subtitle as subtitle
+                FROM opinion_type ot
+                WHERE ot.id = ?',
+                [$el['linked_data_id']]
+            );
+
+            $this->connection->update(
+                'synthesis_element',
+                ['subtitle' => $ot[0]['subtitle']],
+                ['id' => $el['id']]
+            );
         }
-        $em->flush();
     }
 
 

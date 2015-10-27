@@ -1,7 +1,4 @@
-import FormattedText from '../../services/FormattedText';
-
 import ElementTitle from './ElementTitle';
-import ElementCaret from './ElementCaret';
 import UserAvatar from '../User/UserAvatar';
 import VotePiechart from '../Utils/VotePiechart';
 
@@ -10,15 +7,14 @@ const FormattedMessage = ReactIntl.FormattedMessage;
 const ViewElement = React.createClass({
   propTypes: {
     element: React.PropTypes.object.isRequired,
-    parent: React.PropTypes.object.isRequired,
+    parent: React.PropTypes.object,
     settings: React.PropTypes.array.isRequired,
-    expanded: React.PropTypes.bool.isRequired,
-    onToggleExpand: React.PropTypes.func.isRequired,
   },
   mixins: [ReactIntl.IntlMixin],
 
   getDefaultProps() {
     return {
+      parent: null,
       onExpand: null,
     };
   },
@@ -34,11 +30,11 @@ const ViewElement = React.createClass({
     });
   },
 
-  buildStyle() {
+  buildStyle(category = 'style') {
     const style = {};
     this.props.settings.map((setting) => {
       setting.rules.map((rule) => {
-        if (rule.category === 'style') {
+        if (rule.category === category) {
           style[rule.name] = rule.value;
         }
       });
@@ -63,14 +59,14 @@ const ViewElement = React.createClass({
           <VotePiechart
             top={20}
             height={180}
-            ok={votes[1]}
-            nok={votes[-1]}
-            mitige={votes[0]}
+            ok={votes[1] || 0}
+            nok={votes[-1] || 0}
+            mitige={votes[0] || 0}
           />
           <p style={{textAlign: 'center'}}>
             <FormattedMessage
               message={this.getIntlMessage('vote.total')}
-              nb={votes[-1] + votes[0] + votes[1]}
+              nb={(votes[-1] || 0) + (votes[0] || 0) + (votes[1] || 0)}
             />
           </p>
         </div>
@@ -85,9 +81,20 @@ const ViewElement = React.createClass({
         <span className="synthesis__element__counters">
           <FormattedMessage
             message={this.getIntlMessage('counter.contributions')}
-            nb={this.props.element.totalChildrenCount}
+            nb={this.props.element.publishedChildrenCount}
           />
         </span>
+      );
+    }
+    return null;
+  },
+
+  renderSubtitle() {
+    if (this.getValueForDisplayRule('subtitle') && this.props.element.subtitle) {
+      return (
+        <p className="small excerpt">
+          {this.props.element.subtitle}
+        </p>
       );
     }
     return null;
@@ -102,16 +109,19 @@ const ViewElement = React.createClass({
   },
 
   renderAsProgressBar() {
-    const percentage = this.props.parent.totalChildrenCount / this.props.element.totalChildrenCount * 100;
-    return (
-      <div className="synthesis__element">
-        <div className="synthesis__element__bar">
-          <span className="synthesis__element__bar__value" style={{width: percentage + '%'}}>
-            <ElementTitle element={this.props.element} link={false} />
-          </span>
+    if (this.props.parent) {
+      const percentage = this.props.parent.publishedChildrenCount / this.props.element.publishedChildrenCount * 100;
+      return (
+        <div className="synthesis__element">
+          <div className="synthesis__element__bar">
+            <span className="synthesis__element__bar__value" style={{width: percentage + '%'}}>
+              <ElementTitle element={this.props.element} link={false}/>
+            </span>
+          </div>
         </div>
-      </div>
-    );
+      );
+    }
+    return null;
   },
 
   render() {
@@ -119,17 +129,12 @@ const ViewElement = React.createClass({
       return this.renderAsProgressBar();
     }
     return (
-      <div className="synthesis__element">
+      <div className="synthesis__element" style={this.buildStyle('containerStyle')}>
         {this.renderAuthor()}
-        <p style={this.buildStyle()}>
-          <ElementTitle element={this.props.element} link={false} />
-          <ElementCaret
-            element={this.props.element}
-            expanded={this.props.expanded}
-            onToggleExpand={this.props.onToggleExpand}
-            style={{marginLeft: '5px'}}
-          />
-        </p>
+        <div style={this.buildStyle()}>
+          <p><ElementTitle element={this.props.element} link={false} /></p>
+          {this.renderSubtitle()}
+        </div>
         {this.renderCounters()}
         {this.renderPieChart()}
         {this.renderElementBody()}
