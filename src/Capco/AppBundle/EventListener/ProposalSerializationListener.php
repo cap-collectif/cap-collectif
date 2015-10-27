@@ -33,7 +33,7 @@ class ProposalSerializationListener implements EventSubscriberInterface
         ];
     }
 
-    public function onPostArgument(ObjectEvent $event)
+    public function onPostProposal(ObjectEvent $event)
     {
         $proposal = $event->getObject();
         $step     = $proposal->getStep();
@@ -44,7 +44,7 @@ class ProposalSerializationListener implements EventSubscriberInterface
             'proposalId'  => $proposal->getId(),
             'projectSlug' => $project->getSlug(),
             'stepSlug'    => $step->getSlug()
-        ], true).'#proposal-'.$proposal->getId();
+        ], true);
 
         $event->getVisitor()->addData(
             '_links', [
