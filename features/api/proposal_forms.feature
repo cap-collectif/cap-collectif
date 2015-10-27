@@ -11,6 +11,7 @@ Feature: ProposalForm Restful Api
   "description": @string@,
   "questions": @...@,
   "created_at": "@string@.isDateTime()",
-  "updated_at": "@string@.isDateTime()"
+  "updated_at": "@string@.isDateTime()",
+  "isContribuable": @boolean@
 }
 """
