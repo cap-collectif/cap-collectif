@@ -1,7 +1,0 @@
-Capco\AppBundle\Entity\Status:
-    status1:
-        name: En cours
-    status2:
-        name: Approuvé
-    status3:
-        name: Rejeté

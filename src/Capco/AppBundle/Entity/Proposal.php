@@ -292,7 +292,7 @@ class Proposal implements CommentableInterface
      */
     public function getStep()
     {
-        return $this->proposalForm->getStep;
+        return $this->proposalForm->getStep();
     }
 
     // CommentableInterface methods implementation
