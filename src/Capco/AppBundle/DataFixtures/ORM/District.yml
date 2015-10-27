@@ -2,24 +2,24 @@ Capco\AppBundle\Entity\District:
     district1:
         name: Beauregard
     district2:
-            name: Nord Saint-Martin
+        name: Nord Saint-Martin
     district3:
-            name: Maurepas Patton
+        name: Maurepas Patton
     district4:
-            name: Beaulieu
+        name: Beaulieu
     district5:
-            name: La Touche
+        name: La Touche
     district6:
-            name: Centre
+        name: Centre
     district7:
-            name: Saint Hélier
+        name: Saint Hélier
     district8:
-            name: Sud Gare
+        name: Sud Gare
     district9:
-            name: Poterie
+        name: Poterie
     district10:
-            name: Le Blosne
+        name: Le Blosne
     district11:
-            name: Brequigny
+        name: Brequigny
     district12:
-            name: Cleunay
+        name: Cleunay

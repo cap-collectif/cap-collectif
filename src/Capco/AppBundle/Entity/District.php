@@ -31,7 +31,7 @@ class District
     /**
      * @var string
      *
-     * @ORM\Column(name="name", type="integer")
+     * @ORM\Column(name="name", type="string", length=100)
      */
     private $name;
 
