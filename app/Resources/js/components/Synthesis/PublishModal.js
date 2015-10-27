@@ -30,6 +30,7 @@ const PublishModal = React.createClass({
       parent: element ? element.parent : null,
       comment: element ? element.comment : null,
       title: element ? element.title : null,
+      description: element ? element.description : null,
       elements: [],
       expanded: {
         root: true,
@@ -54,6 +55,7 @@ const PublishModal = React.createClass({
           parent: nextProps.element.parent,
           comment: nextProps.element.comment,
           title: nextProps.element.title,
+          description: nextProps.element.description,
           expanded: this.getExpandedBasedOnElement(),
         });
       }
@@ -115,6 +117,7 @@ const PublishModal = React.createClass({
       'notation': this.state.notation ? this.state.notation : 0,
       'parent': this.state.parent,
       'comment': this.state.comment,
+      'description': this.state.description,
       'title': this.state.title,
     };
     if (typeof this.props.process === 'function') {
@@ -124,6 +127,7 @@ const PublishModal = React.createClass({
       element.notation = data.notation;
       element.parent = data.parent;
       element.comment = data.comment;
+      element.description = data.description;
       element.title = data.title;
       this.props.process(element);
       return;
@@ -232,6 +236,20 @@ const PublishModal = React.createClass({
     );
   },
 
+  renderDescription() {
+    return (
+      <div className="modal__action">
+        <h2 className="h4">
+          {' ' + this.getIntlMessage('edition.action.publish.field.description')}
+          <span className="small excerpt action__title-right">{'\t' + this.getIntlMessage('edition.action.publish.optional')}</span>
+        </h2>
+        <form id="publish_element" name="publish_element">
+          <Input type="textarea" id="publish_element_description" name="publish_element[description]" className="publish-element__description" valueLink={this.linkState('description')} />
+        </form>
+      </div>
+    );
+  },
+
   render() {
     return (
       <Modal show={this.props.show} onHide={this.hide} animation={false} dialogClassName="modal--publish">
@@ -240,6 +258,7 @@ const PublishModal = React.createClass({
         </Modal.Header>
         <Modal.Body>
           {this.renderTitle()}
+          {this.renderDescription()}
           {this.renderParent()}
           {this.renderNotation()}
           {this.renderComment()}

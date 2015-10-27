@@ -3,66 +3,10 @@
 namespace Capco\AppBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
-use Doctrine\ORM\Tools\Pagination\Paginator;
 
 /**
  * ProposalRepository.
  */
 class ProposalCommentRepository extends EntityRepository
 {
-
-    public function getEnabledByProposal($proposal, $offset = 0, $limit = 10, $filter = 'last')
-    {
-        $qb = $this->getIsEnabledQueryBuilder()
-            ->addSelect('aut', 'm', 'v', 'i', 'r', 'ans')
-            ->leftJoin('c.Author', 'aut')
-            ->leftJoin('aut.Media', 'm')
-            ->leftJoin('c.votes', 'v')
-            ->leftJoin('c.Reports', 'r')
-            ->leftJoin('c.proposal', 'i')
-            ->leftJoin('c.answers', 'ans')
-            ->andWhere('c.proposal = :proposal')
-            ->andWhere('c.parent is NULL')
-            ->andWhere('c.isTrashed = :notTrashed')
-            ->setParameter('proposal', $proposal)
-            ->setParameter('notTrashed', false)
-        ;
-
-        if ($filter === 'old') {
-            $qb->addOrderBy('c.updatedAt', 'ASC');
-        }
-
-        if ($filter === 'last') {
-            $qb->addOrderBy('c.updatedAt', 'DESC');
-        }
-
-        if ($filter === 'popular') {
-            $qb->addOrderBy('c.voteCount', 'DESC');
-        }
-
-        $qb
-            ->setFirstResult($offset)
-            ->setMaxResults($limit);
-
-        return new Paginator($qb);
-    }
-
-    public function countCommentsAndAnswersEnabledByproposal($proposal)
-    {
-        $qb = $this->getIsEnabledQueryBuilder()
-                   ->select('count(c.id)')
-                   ->andWhere('c.proposal = :proposal')
-                   ->andWhere('c.isTrashed = false')
-                   ->setParameter('proposal', $proposal)
-                ;
-
-        return $qb->getQuery()->getSingleScalarResult();
-    }
-
-    protected function getIsEnabledQueryBuilder()
-    {
-        return $this->createQueryBuilder('c')
-            ->andWhere('c.isEnabled = :isEnabled')
-            ->setParameter('isEnabled', true);
-    }
 }
