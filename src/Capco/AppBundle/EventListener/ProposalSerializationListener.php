@@ -28,7 +28,7 @@ class ProposalSerializationListener implements EventSubscriberInterface
             [
                 'event'  => 'serializer.post_serialize',
                 'class'  => 'Capco\AppBundle\Entity\Proposal',
-                'method' => 'onPostArgument',
+                'method' => 'onPostProposal',
             ],
         ];
     }
@@ -41,9 +41,9 @@ class ProposalSerializationListener implements EventSubscriberInterface
         $user     = $this->tokenStorage->getToken()->getUser();
 
         $showUrl = $this->router->generate('app_project_show_proposal', [
-            'proposalId'  => $proposal->getId(),
-            'projectSlug' => $project->getSlug(),
-            'stepSlug'    => $step->getSlug()
+            'proposalSlug' => $proposal->getSlug(),
+            'projectSlug'  => $project->getSlug(),
+            'stepSlug'     => $step->getSlug()
         ], true);
 
         $event->getVisitor()->addData(
@@ -53,7 +53,7 @@ class ProposalSerializationListener implements EventSubscriberInterface
         );
 
         $event->getVisitor()->addData(
-            'votes_count', $user === 'anon.' ? false : $proposal->getVoteCountOk()
+            'votes_count', $user === 'anon.' ? 0 : $proposal->getVoteCountOk()
         );
 
     }
