@@ -194,7 +194,7 @@ class SynthesisElementRepository extends MaterializedPathRepository
         if (count($nodes) > 0) {
             // Node Stack. Used to help building the hierarchy
             $stack = [];
-            // Array of ids, used to check if the element's parent is in the tre
+            // Array of ids, used to check if the element's parent is in the tree
             $idsStack = [];
             foreach ($nodes as $child) {
                 $item = $child;
@@ -246,9 +246,8 @@ class SynthesisElementRepository extends MaterializedPathRepository
             return;
         }
         $parent = explode('-', $splitted[count($splitted) - 2]);
-        array_shift($parent);
-
-        return implode('-', $parent);
+        $parent = implode('-', array_splice($parent, count($parent) - 5, count($parent)));
+        return $parent;
     }
 
     /**
