@@ -2,15 +2,14 @@ Feature: Synthesis
 
 # View
 
-#@javascript
-#Scenario: Anonymous wants to see synthesis view
-#  Given I visited "consultation page" with:
-#    | projectSlug        | strategie-technologique-de-l-etat-et-services-publics |
-#    | stepSlug           | collecte-des-avis-pour-une-meilleur-strategie         |
-#  And I follow "Synthèse"
-#  And I wait 5 seconds
-#  Then I should see 1 ".synthesis__view" elements
-
+@javascript
+Scenario: Anonymous wants to see synthesis view
+  Given I visited "consultation page" with:
+    | projectSlug        | strategie-technologique-de-l-etat-et-services-publics |
+    | stepSlug           | collecte-des-avis-pour-une-meilleur-strategie         |
+  And I follow "Synthèse"
+  And I wait 5 seconds
+  Then I should see 1 ".synthesis__view" elements
 
 # Edition
 
