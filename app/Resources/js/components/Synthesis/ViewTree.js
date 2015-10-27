@@ -82,6 +82,9 @@ const ViewTree = React.createClass({
   },
 
   renderCaret(element) {
+    if (SynthesisDisplayRules.getValueForRuleAndElement(element, this.state.settings, 'display', 'childrenInModal')) {
+      return null;
+    }
     const expanded = this.state.expanded[element.id] || false;
     if (element.publishedChildrenCount > 0 && element.childrenCount > 0) {
       const classes = classNames({
@@ -114,7 +117,7 @@ const ViewTree = React.createClass({
   },
 
   renderTreeItems(elements, parent = null, expanded = false) {
-    if (expanded && elements) {
+    if (expanded && elements && !SynthesisDisplayRules.getValueForRuleAndElement(parent, this.state.settings, 'display', 'childrenInModal')) {
       return (
         <ul className="synthesis__elements">
           {

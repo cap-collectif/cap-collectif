@@ -1,6 +1,7 @@
 import ElementTitle from './ElementTitle';
 import UserAvatar from '../User/UserAvatar';
 import VotePiechart from '../Utils/VotePiechart';
+import SynthesisDisplayRules from '../../services/SynthesisDisplayRules';
 
 const FormattedMessage = ReactIntl.FormattedMessage;
 
@@ -19,31 +20,8 @@ const ViewElement = React.createClass({
     };
   },
 
-  getValueForDisplayRule(name) {
-    return this.props.settings.some((setting) => {
-      return setting.rules.some((rule) => {
-        if (rule.category === 'display' && rule.name === name) {
-          return rule.value;
-        }
-        return false;
-      });
-    });
-  },
-
-  buildStyle(category = 'style') {
-    const style = {};
-    this.props.settings.map((setting) => {
-      setting.rules.map((rule) => {
-        if (rule.category === category) {
-          style[rule.name] = rule.value;
-        }
-      });
-    });
-    return style;
-  },
-
   renderAuthor() {
-    if (this.getValueForDisplayRule('author')) {
+    if (SynthesisDisplayRules.getValueForRule(this.props.settings, 'display', 'author')) {
       return (
         <UserAvatar user={this.props.element.author} />
       );
@@ -53,7 +31,7 @@ const ViewElement = React.createClass({
 
   renderPieChart() {
     const votes = this.props.element.votes;
-    if (this.getValueForDisplayRule('piechart')) {
+    if (SynthesisDisplayRules.getValueForRule(this.props.settings, 'display', 'piechart')) {
       return (
         <div className="synthesis__element__votes">
           <VotePiechart
@@ -76,7 +54,7 @@ const ViewElement = React.createClass({
   },
 
   renderCounters() {
-    if (this.getValueForDisplayRule('counters')) {
+    if (SynthesisDisplayRules.getValueForRule(this.props.settings, 'display', 'counters')) {
       return (
         <span className="synthesis__element__counters">
           <FormattedMessage
@@ -90,7 +68,7 @@ const ViewElement = React.createClass({
   },
 
   renderSubtitle() {
-    if (this.getValueForDisplayRule('subtitle') && this.props.element.subtitle) {
+    if (SynthesisDisplayRules.getValueForRule(this.props.settings, 'display', 'subtitle') && this.props.element.subtitle) {
       return (
         <p className="small excerpt">
           {this.props.element.subtitle}
@@ -101,8 +79,8 @@ const ViewElement = React.createClass({
   },
 
   renderPercentage() {
-    if (this.getValueForDisplayRule('percentage') && this.props.parent) {
-      const percentage = this.props.element.publishedChildrenCount / this.props.parent.publishedChildrenCount * 100;
+    if (SynthesisDisplayRules.getValueForRule(this.props.settings, 'display', 'percentage') && this.props.parent) {
+      const percentage = Math.round(this.props.element.publishedChildrenCount / this.props.parent.publishedChildrenCount * 100);
       return (
         <span className="small excerpt pull-right">
           {percentage}%
@@ -122,7 +100,7 @@ const ViewElement = React.createClass({
 
   renderAsProgressBar() {
     if (this.props.parent) {
-      const percentage = this.props.element.publishedChildrenCount / this.props.parent.publishedChildrenCount * 100;
+      const percentage = Math.round(this.props.element.publishedChildrenCount / this.props.parent.publishedChildrenCount * 100);
       return (
         <div className="synthesis__element">
           <div className="synthesis__element__bar">
@@ -136,13 +114,13 @@ const ViewElement = React.createClass({
   },
 
   render() {
-    if (this.getValueForDisplayRule('asProgressBar')) {
+    if (SynthesisDisplayRules.getValueForRule(this.props.settings, 'display', 'asProgressBar')) {
       return this.renderAsProgressBar();
     }
     return (
-      <div className="synthesis__element" style={this.buildStyle('containerStyle')}>
+      <div className="synthesis__element" style={SynthesisDisplayRules.buildStyle(this.props.settings, 'containerStyle')}>
         {this.renderAuthor()}
-        <div style={this.buildStyle()}>
+        <div style={SynthesisDisplayRules.buildStyle(this.props.settings)}>
           <p>
             <ElementTitle element={this.props.element} link={false} />
             {this.renderPercentage()}

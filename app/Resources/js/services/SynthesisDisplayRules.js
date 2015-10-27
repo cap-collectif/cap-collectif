@@ -38,6 +38,45 @@ class SynthesisDisplayRules {
     }
     return allowed;
   }
+
+  buildStyle(settings, category = 'style') {
+    const style = {};
+    settings.map((setting) => {
+      setting.rules.map((rule) => {
+        if (rule.category === category) {
+          style[rule.name] = rule.value;
+        }
+      });
+    });
+    return style;
+  }
+
+  getValueForRule(settings, category, name) {
+    return settings.some((setting) => {
+      return setting.rules.some((rule) => {
+        if (rule.category === category && rule.name === name) {
+          return rule.value;
+        }
+        return false;
+      });
+    });
+  }
+
+  getValueForRuleAndElement(element, allSettings, category, name) {
+    if (!element) {
+      return false;
+    }
+    const settings = this.getMatchingSettingsForElement(element, allSettings);
+    return settings.some((setting) => {
+      return setting.rules.some((rule) => {
+        if (rule.category === category && rule.name === name) {
+          return rule.value;
+        }
+        return false;
+      });
+    });
+  }
+
 }
 
 export default new SynthesisDisplayRules();
