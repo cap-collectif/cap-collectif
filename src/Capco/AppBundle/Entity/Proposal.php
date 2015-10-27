@@ -8,7 +8,7 @@ use Capco\AppBundle\Traits\EnableTrait;
 use Capco\AppBundle\Traits\SluggableTitleTrait;
 use Capco\AppBundle\Traits\TimestampableTrait;
 use Capco\AppBundle\Traits\TrashableTrait;
-use Capco\AppBundle\Traits\VotableOkTrait;
+use Capco\AppBundle\Traits\VotableTrait;
 use Capco\UserBundle\Entity\User;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
@@ -26,7 +26,7 @@ class Proposal implements CommentableInterface
 {
     use CommentableTrait;
     use TimestampableTrait;
-    use VotableOkTrait;
+    use VotableTrait;
     use EnableTrait;
     use TrashableTrait;
     use SluggableTitleTrait;
@@ -292,7 +292,7 @@ class Proposal implements CommentableInterface
      */
     public function getStep()
     {
-        return $this->proposalForm->getStep();
+        return $this->proposalForm->getStep;
     }
 
     // CommentableInterface methods implementation

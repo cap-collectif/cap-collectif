@@ -21,10 +21,6 @@ Feature: Proposal Restful Api
       "settings": @string@
     }
   },
-  "_links": {
-    "show": @string@
-  },
-  "votes_count": @integer@,
   "comments_count": @integer@,
   "created_at": "@string@.isDateTime()",
   "updated_at": "@string@.isDateTime()"
@@ -52,10 +48,6 @@ Feature: Proposal Restful Api
         "settings": @string@
       }
     },
-    "_links": {
-      "show": @string@
-    },
-    "votes_count": @integer@,
     "comments_count": @integer@,
     "created_at": "@string@.isDateTime()",
     "updated_at": "@string@.isDateTime()"

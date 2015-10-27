@@ -30,17 +30,19 @@ class ProposalRepository extends EntityRepository
     }
 
     /**
-     * @param $slug
+     * @param $id
+     *
      * @return mixed
      *
      * @throws \Doctrine\ORM\NonUniqueResultException
      */
-    public function getOne($slug) {
+    public function getOne($id)
+    {
         $qb = $this->getIsEnabledQueryBuilder()
             ->addSelect('pr')
             ->leftJoin('proposal.proposalResponses', 'pr')
-            ->andWhere('proposal.slug = :slug')
-            ->setParameter('slug', $slug)
+            ->andWhere('proposal.id = :id')
+            ->setParameter('id', $id)
         ;
 
         return $qb->getQuery()->getOneOrNullResult();

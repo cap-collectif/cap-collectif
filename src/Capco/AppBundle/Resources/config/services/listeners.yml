@@ -28,13 +28,6 @@ services:
     tags:
       - { name: "jms_serializer.event_subscriber" }
 
-  capco.proposal.serialization_listener:
-    class: Capco\AppBundle\EventListener\ProposalSerializationListener
-    arguments: [@router, @security.token_storage]
-    scope: request
-    tags:
-      - { name: "jms_serializer.event_subscriber" }
-
   capco.source.serialization_listener:
     class: Capco\AppBundle\EventListener\SourceSerializationListener
     arguments: [@router, @security.token_storage]

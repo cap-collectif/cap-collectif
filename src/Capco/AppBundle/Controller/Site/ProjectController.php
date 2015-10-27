@@ -60,6 +60,7 @@ class ProjectController extends Controller
         if (false === $currentStep->canDisplay()) {
             throw $this->createNotFoundException($this->get('translator')->trans('project.error.not_found', [], 'CapcoAppBundle'));
         }
+
         $nav = $this->get('capco.opinion_types.resolver')->getNavForStep($currentStep);
         $response = $this->render('CapcoAppBundle:Project:show.html.twig', [
             'project' => $project,
@@ -97,10 +98,10 @@ class ProjectController extends Controller
     }
 
     /**
-     * @Route("/projects/{projectSlug}/collect/{stepSlug}/proposals", name="app_project_show_proposals", requirements={"page" = "\d+"}, defaults={"page" = 1})
-     * @Route("/consultations/{projectSlug}/collect/{stepSlug}/proposals", name="app_consultation_show_proposals", requirements={"page" = "\d+"}, defaults={"page" = 1})
+     * @Route("/projects/{projectSlug}/consultation/{stepSlug}/propositions", name="app_project_show_proposals", requirements={"page" = "\d+"}, defaults={"page" = 1})
+     * @Route("/consultations/{projectSlug}/projet/{stepSlug}/propositions", name="app_consultation_show_proposals", requirements={"page" = "\d+"}, defaults={"page" = 1})
      * @ParamConverter("project", class="CapcoAppBundle:Project", options={"mapping": {"projectSlug": "slug"}})
-     * @Template("CapcoAppBundle:Project:show_proposals.html.twig")
+     * @Template("CapcoAppBundle:Consultation:show_proposals.html.twig")
      *
      * @param $project
      * @param $currentStep
@@ -121,10 +122,10 @@ class ProjectController extends Controller
     }
 
     /**
-     * @Route("/projects/{projectSlug}/consultation/{stepSlug}/types/{opinionTypeSlug}/{page}", name="app_project_show_opinions", requirements={"page" = "\d+"}, defaults={"page" = 1})
-     * @Route("/consultations/{projectSlug}/consultation/{stepSlug}/types/{opinionTypeSlug}/{page}", name="app_consultation_show_opinions", requirements={"page" = "\d+"}, defaults={"page" = 1})
-     * @Route("/projects/{projectSlug}/consultation/{stepSlug}/types/{opinionTypeSlug}/{opinionsSort}/{page}", name="app_project_show_opinions_sorted", requirements={"page" = "\d+","opinionsSort" = "last|old|comments|favorable|votes|positions"}, defaults={"page" = 1})
-     * @Route("/consultations/{projectSlug}/consultation/{stepSlug}/types/{opinionTypeSlug}/{opinionsSort}/{page}", name="app_consultation_show_opinions_sorted", requirements={"page" = "\d+","opinionsSort" = "last|old|comments|favorable|votes|positions"}, defaults={"page" = 1})
+     * @Route("/projects/{projectSlug}/consultation/{stepSlug}/opinions/{opinionTypeSlug}/{page}", name="app_project_show_opinions", requirements={"page" = "\d+"}, defaults={"page" = 1})
+     * @Route("/consultations/{projectSlug}/consultation/{stepSlug}/opinions/{opinionTypeSlug}/{page}", name="app_consultation_show_opinions", requirements={"page" = "\d+"}, defaults={"page" = 1})
+     * @Route("/projects/{projectSlug}/consultation/{stepSlug}/opinions/{opinionTypeSlug}/{opinionsSort}/{page}", name="app_project_show_opinions_sorted", requirements={"page" = "\d+","opinionsSort" = "last|old|comments|favorable|votes|positions"}, defaults={"page" = 1})
+     * @Route("/consultations/{projectSlug}/consultation/{stepSlug}/opinions/{opinionTypeSlug}/{opinionsSort}/{page}", name="app_consultation_show_opinions_sorted", requirements={"page" = "\d+","opinionsSort" = "last|old|comments|favorable|votes|positions"}, defaults={"page" = 1})
      * @ParamConverter("project", class="CapcoAppBundle:Project", options={"mapping": {"projectSlug": "slug"}})
      * @ParamConverter("currentStep", class="CapcoAppBundle:ConsultationStep", options={"mapping": {"stepSlug": "slug"}})
      * @ParamConverter("opinionType", class="CapcoAppBundle:OpinionType", options={"mapping": {"opinionTypeSlug": "slug"}})

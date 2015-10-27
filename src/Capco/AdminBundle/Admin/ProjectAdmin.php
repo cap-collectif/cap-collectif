@@ -137,6 +137,7 @@ class ProjectAdmin extends Admin
         ;
 
         $formMapper
+            ->tab('General')
             // Content
             ->with('admin.fields.project.group_content')
             ->add('title', null, array(
@@ -218,8 +219,10 @@ class ProjectAdmin extends Admin
                 'required' => false,
             ])
             ->end()
+            ->end()
 
             // Steps
+            ->tab('Steps')
             ->with('admin.fields.project.group_steps')
             ->add('steps', 'sonata_type_collection', array(
                 'label' => 'admin.fields.project.steps',
@@ -230,6 +233,7 @@ class ProjectAdmin extends Admin
                 'inline' => 'table',
                 'sortable' => 'position',
             ))
+            ->end()
             ->end()
         ;
     }
