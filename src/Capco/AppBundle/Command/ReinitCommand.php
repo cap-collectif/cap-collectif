@@ -143,17 +143,7 @@ class ReinitCommand extends ContainerAwareCommand
 
     protected function updateSyntheses(OutputInterface $output)
     {
-        $command = $this->getApplication()->find('capco:syntheses:update');
-        $input = new ArrayInput(['']);
-        $input->setInteractive(false);
-        $command->run($input, $output);
-
-        $command = $this->getApplication()->find('capco:syntheses:fix-urls');
-        $input = new ArrayInput(['']);
-        $input->setInteractive(false);
-        $command->run($input, $output);
-
-        $command = $this->getApplication()->find('capco:syntheses:recalculate-counters');
+        $command = $this->getApplication()->find('capco:update-syntheses');
         $input = new ArrayInput(['']);
         $input->setInteractive(false);
         $command->run($input, $output);

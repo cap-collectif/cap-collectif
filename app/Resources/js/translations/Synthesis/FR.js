@@ -39,7 +39,6 @@ export default {
         },
         second: {
           brand: 'Synthèse (Version beta)',
-          preview: 'Voir un aperçu',
         },
         filter: {
           oldest: 'Les plus anciens',
@@ -122,19 +121,6 @@ export default {
           btn_submit: 'Ignorer',
         },
       },
-    },
-    vote: {
-      ok: 'D\'accord',
-      mitige: 'Mitigé',
-      nok: 'Pas d\'accord',
-      total: '{nb, plural, =0{# vote} one{# vote} other{# votes}}',
-    },
-    counter: {
-      contributions: '{nb, plural, =0{# contribution} one{# contribution} other{# contributions}}',
-    },
-    readmore: {
-      show: 'Voir la synthèse de "{title}"',
-      hide: 'Masquer la synthèse de "{title}"',
     },
   },
 };

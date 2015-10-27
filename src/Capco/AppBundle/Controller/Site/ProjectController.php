@@ -60,7 +60,6 @@ class ProjectController extends Controller
         if (false === $currentStep->canDisplay()) {
             throw $this->createNotFoundException($this->get('translator')->trans('project.error.not_found', [], 'CapcoAppBundle'));
         }
-
         $nav = $this->get('capco.opinion_types.resolver')->getNavForStep($currentStep);
         $response = $this->render('CapcoAppBundle:Project:show.html.twig', [
             'project' => $project,

@@ -40,16 +40,16 @@
 
                 <div class="block  block--bordered  box">
                     {{ currentStep.body | raw }}
+
+                    {% if currentStep.synthesis == null %}
+                        <p class="excerpt">{{ 'synthesis.show.no_synthesis' | trans({}, 'CapcoAppBundle') }}</p>
+                    {% elseif not currentStep.synthesis.enabled %}
+                        <p class="excerpt">{{ 'synthesis.show.not_enabled' | trans({}, 'CapcoAppBundle') }}</p>
+                    {% else %}
+                        <div id="render-synthesis-view-box" data-synthesis="{{ currentStep.synthesis.id }}"></div>
+                    {% endif %}
+
                 </div>
-
-                {% if currentStep.synthesis == null %}
-                    <p class="excerpt">{{ 'synthesis.show.no_synthesis' | trans({}, 'CapcoAppBundle') }}</p>
-                {% elseif not currentStep.synthesis.enabled %}
-                    <p class="excerpt">{{ 'synthesis.show.not_enabled' | trans({}, 'CapcoAppBundle') }}</p>
-                {% else %}
-                    <div id="render-synthesis-view-box" data-synthesis="{{ currentStep.synthesis.id }}"></div>
-                {% endif %}
-
             </div> <!-- col-xs-12  col-sm-8  col-md-9 -->
         </div> <!-- .row -->
     </div>

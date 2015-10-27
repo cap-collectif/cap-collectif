@@ -1,4 +1,4 @@
-import * as Actions from '../constants/SynthesisElementActionsConstants';
+import {RECEIVE_COUNT, RECEIVE_ELEMENTS, RECEIVE_ELEMENTS_SUCCESS, RECEIVE_ELEMENTS_FAILURE, RECEIVE_ELEMENT, RECEIVE_ELEMENT_SUCCESS, RECEIVE_ELEMENT_FAILURE, EXPAND_NAVBAR_ITEM, SELECT_NAVBAR_ITEM, CREATE_ELEMENT, ARCHIVE_ELEMENT, NOTE_ELEMENT, COMMENT_ELEMENT, MOVE_ELEMENT, DIVIDE_ELEMENT, NAME_ELEMENT, UPDATE_ELEMENT_SUCCESS, UPDATE_ELEMENT_FAILURE, CREATE_ELEMENT_SUCCESS, CREATE_ELEMENT_FAILURE} from '../constants/SynthesisElementConstants';
 import BaseStore from './BaseStore';
 import {DISMISS_MESSAGE} from '../constants/MessageConstants';
 import ArrayHelper from '../services/ArrayHelper';
@@ -30,15 +30,10 @@ class SynthesisElementStore extends BaseStore {
       'notIgnoredTree': 0,
       'fromDivision': 0,
     };
-    this._expandedItems = {
-      'nav': {
-        root: true,
-      },
-      'view': {
-        root: true,
-      },
+    this._expandedNavbarItems = {
+      root: true,
     };
-    this._selectedNavItem = 'root';
+    this._selectedNavbarItem = 'root';
     this._isProcessing = false;
     this._isFetchingTree = false;
     this._isElementSync = false;
@@ -62,19 +57,19 @@ class SynthesisElementStore extends BaseStore {
   _registerToActions(action) {
     let element = null;
     switch (action.actionType) {
-    case Actions.RECEIVE_COUNT:
+    case RECEIVE_COUNT:
       this._counts[action.type] = action.count;
       this._isCountSync = true;
       this.emitChange();
       break;
-    case Actions.RECEIVE_ELEMENT:
+    case RECEIVE_ELEMENT:
       this._currentId = action.elementId;
       this._isElementSync = false;
       this._isProcessing = true;
       this.updateSelectedId(action.elementId);
       this.emitChange();
       break;
-    case Actions.RECEIVE_ELEMENT_SUCCESS:
+    case RECEIVE_ELEMENT_SUCCESS:
       if (action.element.id === this._currentId) {
         this._element = action.element;
         this._isElementSync = true;
@@ -82,15 +77,14 @@ class SynthesisElementStore extends BaseStore {
         this.emitChange();
       }
       break;
-    case Actions.RECEIVE_ELEMENT_FAILURE:
+    case RECEIVE_ELEMENT_FAILURE:
       this._isProcessing = false;
       break;
-    case Actions.RECEIVE_ELEMENTS:
+    case RECEIVE_ELEMENTS:
       this._isFetchingTree = true;
-      this._isInboxSync[action.type] = false;
       this.emitChange();
       break;
-    case Actions.RECEIVE_ELEMENTS_SUCCESS:
+    case RECEIVE_ELEMENTS_SUCCESS:
       if (!action.parent) {
         this._elements[action.type] = action.elements;
       } else {
@@ -101,25 +95,25 @@ class SynthesisElementStore extends BaseStore {
       this._isFetchingTree = false;
       this.emitChange();
       break;
-    case Actions.RECEIVE_ELEMENTS_FAILURE:
+    case RECEIVE_ELEMENTS_FAILURE:
       this._isFetchingTree = false;
       this.emitChange();
       break;
-    case Actions.EXPAND_TREE_ITEM:
-      this._expandedItems[action.type][action.elementId] = action.expanded;
+    case EXPAND_NAVBAR_ITEM:
+      this._expandedNavbarItems[action.elementId] = action.expanded;
       this.emitChange();
       break;
-    case Actions.SELECT_NAV_ITEM:
+    case SELECT_NAVBAR_ITEM:
       this.updateSelectedId(action.elementId);
       this.emitChange();
       break;
-    case Actions.CREATE_ELEMENT:
+    case CREATE_ELEMENT:
       this._resetInboxSync();
       this._isProcessing = true;
       this._resetMessages();
       this.emitChange();
       break;
-    case Actions.ARCHIVE_ELEMENT:
+    case ARCHIVE_ELEMENT:
       this._resetMessages();
       element = this._element && action.elementId === this._element.id
         ? this._element
@@ -147,21 +141,21 @@ class SynthesisElementStore extends BaseStore {
       }
       this.emitChange();
       break;
-    case Actions.NOTE_ELEMENT:
+    case NOTE_ELEMENT:
       this._element.notation = action.notation;
       this._resetInboxSync();
       this._isProcessing = true;
       this._resetMessages();
       this.emitChange();
       break;
-    case Actions.COMMENT_ELEMENT:
+    case COMMENT_ELEMENT:
       this._element.comment = action.comment;
       this._resetInboxSync();
       this._isProcessing = true;
       this._resetMessages();
       this.emitChange();
       break;
-    case Actions.NAME_ELEMENT:
+    case NAME_ELEMENT:
       element = this._element && action.elementId === this._element.id
         ? this._element
         : this.getElementInTreeById(this._elements.notIgnoredTree, action.elementId)
@@ -174,7 +168,7 @@ class SynthesisElementStore extends BaseStore {
       this._resetMessages();
       this.emitChange();
       break;
-    case Actions.MOVE_ELEMENT:
+    case MOVE_ELEMENT:
       const parentId = typeof action.parent === 'object' ? action.parent.id : action.parent;
       this.changeElementParent(parentId, action.elementId);
       this._resetInboxSync();
@@ -182,7 +176,7 @@ class SynthesisElementStore extends BaseStore {
       this._resetMessages();
       this.emitChange();
       break;
-    case Actions.DIVIDE_ELEMENT:
+    case DIVIDE_ELEMENT:
       this._element.division = action.division;
       action.division.elements.map((newElement) => {
         this.addElementInTree(newElement);
@@ -199,13 +193,13 @@ class SynthesisElementStore extends BaseStore {
       this._resetMessages();
       this.emitChange();
       break;
-    case Actions.UPDATE_ELEMENT_SUCCESS:
+    case UPDATE_ELEMENT_SUCCESS:
       this._resetMessages();
       this._messages.success.push(action.message);
       this._isProcessing = false;
       this.emitChange();
       break;
-    case Actions.UPDATE_ELEMENT_FAILURE:
+    case UPDATE_ELEMENT_FAILURE:
       this._messages.errors.push(action.message);
       this._messages.success = [];
       this._isProcessing = false;
@@ -213,14 +207,14 @@ class SynthesisElementStore extends BaseStore {
       this._resetInboxSync();
       this.emitChange();
       break;
-    case Actions.CREATE_ELEMENT_SUCCESS:
+    case CREATE_ELEMENT_SUCCESS:
       this._resetMessages();
       this._messages.success.push(action.message);
       this.addElementInTree(action.element);
       this._isProcessing = false;
       this.emitChange();
       break;
-    case Actions.CREATE_ELEMENT_FAILURE:
+    case CREATE_ELEMENT_FAILURE:
       this._messages.errors.push(action.message);
       this._messages.success = [];
       this._isProcessing = false;
@@ -266,12 +260,12 @@ class SynthesisElementStore extends BaseStore {
     return this._elements;
   }
 
-  get expandedItems() {
-    return this._expandedItems;
+  get expandedNavbarItems() {
+    return this._expandedNavbarItems;
   }
 
-  get selectedNavItem() {
-    return this._selectedNavItem;
+  get selectedNavbarItem() {
+    return this._selectedNavbarItem;
   }
 
   get counts() {
@@ -298,7 +292,7 @@ class SynthesisElementStore extends BaseStore {
 
   updateSelectedId(selected = this._selectedNavbarItem) {
     this._selectedNavbarItem = selected;
-    const expanded = this._expandedItems.nav;
+    const expanded = this._expandedNavbarItems;
     expanded[selected] = true;
     const element = this.getElementInTreeById(this._elements.notIgnoredTree, selected);
     if (element) {
@@ -306,7 +300,7 @@ class SynthesisElementStore extends BaseStore {
         expanded[parent.id] = true;
       });
     }
-    this._expandedItems.nav = expanded;
+    this._expandedNavbarItems = expanded;
   }
 
   changeElementParent(parentId, elementId) {
