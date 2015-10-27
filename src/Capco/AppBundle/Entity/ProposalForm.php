@@ -165,4 +165,20 @@ class ProposalForm
 
         return $this;
     }
+
+    /**
+     * @return bool
+     */
+    public function canDisplay()
+    {
+        return $this->getStep()->canDisplay();
+    }
+
+    /**
+     * @return bool
+     */
+    public function canContribute()
+    {
+        return $this->getStep()->canContribute();
+    }
 }

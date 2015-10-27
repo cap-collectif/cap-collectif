@@ -9,20 +9,20 @@ use Symfony\Component\Validator\Constraints as Assert;
 use Capco\AppBundle\Validator\Constraints as CapcoAssert;
 
 /**
- * District.
+ * Status.
  *
- * @ORM\Table(name="district")
- * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\DistrictRepository")
+ * @ORM\Table(name="status")
+ * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\StatusRepository")
  * @ORM\HasLifecycleCallbacks()
  */
-class District
+class Status
 {
     use TimestampableTrait;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="id", type="integer")
+     * @ORM\Column(name="id", type="integer", nullable=false)
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      */
@@ -31,19 +31,22 @@ class District
     /**
      * @var string
      *
-     * @ORM\Column(name="name", type="string", length=100)
+     * @ORM\Column(name="name", type="string")
+     * @Assert\NotBlank()
      */
     private $name;
 
     /**
      * @var \DateTime
-     *
      * @Gedmo\Timestampable(on="change", field={"name"})
-     * @ORM\Column(name="updated_at", type="datetime", nullable=true)
+     * @ORM\Column(name="updated_at", type="datetime")
      */
-    private $updatedAt;
+    protected $updatedAt;
 
 
+    /**
+     * Constructor.
+     */
     public function __construct()
     {
         $this->updatedAt = new \Datetime();
@@ -51,10 +54,10 @@ class District
 
     public function __toString()
     {
-        if ($this->id) {
+        if ($this->getId()) {
             return $this->getName();
         }
-        return 'New district';
+        return 'New status';
     }
 
     /**

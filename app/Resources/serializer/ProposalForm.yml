@@ -26,3 +26,8 @@ Capco\AppBundle\Entity\ProposalForm:
             expose: true
             type: DateTime
             groups: [ProposalForms]
+    virtual_properties:
+        canContribute:
+            serialized_name: isContribuable
+            type: boolean
+            groups: [ProposalForms]
