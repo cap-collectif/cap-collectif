@@ -5,7 +5,7 @@ Scenario: User wants to send a message via contact page
   When I fill in the following:
     | contact_name         | Mwa                                      |
     | contact_email        | rpz91300@msn.com                         |
-    | contact_message      | Hello ! Votre site il est trop swag ! ^^ Pourquoi vous m'avez pas invité au hackaton :'( ? Je suis votre plus grand fan ! |
+    | contact_message      | Hello ! Votre site il est trop swag ! ^^ |
   And I press "Envoyer"
   Then I should see "Merci ! Votre message a bien été envoyé."
 

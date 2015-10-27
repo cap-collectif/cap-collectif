@@ -269,9 +269,6 @@ class SynthesisElementRepository extends MaterializedPathRepository
             ->select('se.id', 'se.level', 'se.path', 'se.displayType', 'se.title', 'se.body', 'COUNT(c.id) as childrenCount')
             ->leftJoin('se.children', 'c', 'WITH', $this->getOnClauseForChildren($type))
         ;
-        if ($type === 'published') {
-            $qb->addSelect('se.votes', 'se.publishedChildrenCount', 'se.subtitle');
-        }
         $expr = '';
         $includeNodeExpr = '';
 
