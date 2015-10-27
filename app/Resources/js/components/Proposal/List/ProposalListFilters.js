@@ -19,14 +19,6 @@ const ProposalListFilters = React.createClass({
   },
   mixins: [ReactIntl.IntlMixin],
 
-  getDefaultProps() {
-    return {
-      localisation: [{id: 1, title: 'ici'}, {id: 2, title: 'la bas'}],
-      status: [{id: 1, title: 'ici'}, {id: 2, title: 'la bas'}],
-      user_type: [{id: 1, title: 'ici'}, {id: 2, title: 'la bas'}],
-    };
-  },
-
   getInitialState() {
     return {
       order: 'last',
