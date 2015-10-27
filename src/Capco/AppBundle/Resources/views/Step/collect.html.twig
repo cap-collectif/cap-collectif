@@ -31,7 +31,12 @@
 
 {% block body %}
 
-    <div id="render-collect-step-page"></div>
+    <div
+        id="render-collect-step-page"
+        data-form='{{ form|raw }}'
+        data-themes='{{ themes|raw }}'
+    >
+    </div>
 
 {% endblock %}
 

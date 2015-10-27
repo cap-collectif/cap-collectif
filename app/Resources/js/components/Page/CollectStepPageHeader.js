@@ -17,11 +17,11 @@ const CollectStepPageHeader = React.createClass({
           <Col xs={3}>
             <FormattedMessage
               message={this.getIntlMessage('proposal.count')}
-              num={this.props.form.projectsCount}
+              num={0}
             />
           </Col>
           <Col xs={3}>
-            <CreateProposal formId={this.props.form.id} />
+            <CreateProposal form={this.props.form} />
           </Col>
         </Row>
         <Row>

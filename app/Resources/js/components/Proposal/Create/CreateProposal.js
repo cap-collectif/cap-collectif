@@ -2,14 +2,14 @@ import ProposalCreateButton from './ProposalCreateButton';
 import SubmitButton from '../../Form/SubmitButton';
 import CloseButton from '../../Form/CloseButton';
 import ProposalCreateInfos from './ProposalCreateInfos';
-import ProposalForm from './ProposalForm';
+import ProposalForm from '../Form/ProposalForm';
 import ProposalActions from '../../../actions/ProposalActions';
 
 const Modal = ReactBootstrap.Modal;
 
 const ProposalCreate = React.createClass({
   propTypes: {
-    opinion: React.PropTypes.object.isRequired,
+    form: React.PropTypes.object.isRequired,
   },
   mixins: [ReactIntl.IntlMixin],
 
@@ -40,11 +40,11 @@ const ProposalCreate = React.createClass({
   handleSubmitSuccess() {
     this.close();
     this.setState({isSubmitting: false});
-    ProposalActions.load(this.props.opinion.id, 'last');
+    ProposalActions.load(this.props.form.id, 'last');
   },
 
   render() {
-    if (!this.props.opinion.isContribuable) {
+    if (!this.props.form.isContribuable) {
       return null;
     }
 
@@ -64,9 +64,9 @@ const ProposalCreate = React.createClass({
             </Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            <ProposalCreateInfos opinion={this.props.opinion} />
+            <ProposalCreateInfos form={this.props.form} />
             <ProposalForm
-              opinion={this.props.opinion}
+              form={this.props.form}
               availableTypes={this.state.availableTypes}
               isSubmitting={this.state.isSubmitting}
               onValidationFailure={this.handleFailure.bind(null, this)}

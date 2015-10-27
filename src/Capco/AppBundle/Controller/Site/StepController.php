@@ -14,6 +14,8 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
+use Doctrine\Common\Collections\ArrayCollection;
+use JMS\Serializer\SerializationContext;
 
 class StepController extends Controller
 {
@@ -272,20 +274,39 @@ class StepController extends Controller
 
     /**
      * @Route("/project/{projectSlug}/collect/{stepSlug}", name="app_project_show_collect")
-     * @Template("CapcoAppBundle:Step:collect.html.twig")
-     * @ParamConverter("step", class="CapcoAppBundle:SynthesisStep", options={"mapping" = {"stepSlug": "slug"}})
-     * @ParamConverter("project", class="CapcoAppBundle:Project", options={"mapping" = {"project": "slug"}, "repository_method"= "getOne", "map_method_signature" = true})
+     * @ParamConverter("project", class="CapcoAppBundle:Project", options={"mapping" = {"projectSlug": "slug"}, "repository_method"= "getOne", "map_method_signature" = true})
+     * @ParamConverter("step", class="CapcoAppBundle:CollectStep", options={"mapping" = {"stepSlug": "slug"}})
      */
-    public function showCollectStepAction(Project $project, SynthesisStep $step)
+    public function showCollectStepAction(Project $project, CollectStep $step)
     {
         if (!$step->canDisplay()) {
             throw new NotFoundHttpException();
         }
 
-        return [
+        $em = $this->getDoctrine()->getManager();
+        $serializer = $this->get('jms_serializer');
+
+        $themes = $serializer->serialize([
+            'themes' => $em->getRepository('CapcoAppBundle:Theme')->findAll(),
+        ], 'json', SerializationContext::create()->setGroups(['Themes']));
+
+        $form = $serializer->serialize([
+            'form' => $step->getProposalForm(),
+        ], 'json', SerializationContext::create()->setGroups(['ProposalForms', 'ProposalResponses', 'Questions']));
+
+        $response = $this->render('CapcoAppBundle:Step:collect.html.twig', [
             'project' => $project,
             'currentStep' => $step,
-        ];
+            'themes' => $themes,
+            'form' => $form,
+        ]);
+
+        if ($this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_ANONYMOUSLY')) {
+            $response->setPublic();
+            $response->setSharedMaxAge(60);
+        }
+
+        return $response;
     }
 
     /**

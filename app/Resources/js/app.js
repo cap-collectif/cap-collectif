@@ -6,6 +6,8 @@ import OpinionSourcesBox from './components/Opinion/OpinionSourcesBox';
 import OpinionPage from './components/Opinion/OpinionPage';
 import AuthService from './services/AuthService';
 import FeatureService from './services/FeatureService';
+import CollectStepPage from './components/Page/CollectStepPage';
+import ProposalPage from './components/Proposal/Page/ProposalPage';
 
 FeatureService.load();
 
@@ -47,14 +49,17 @@ AuthService
 
     if ($('#render-proposal-page').length) {
         React.render(
-            <ProposalPage proposalId={$('#render-proposal-page').data('proposal')} />,
+            <ProposalPage proposalId={$('#render-proposal-page').data('proposal')} {...IntlData} />,
             document.getElementById('render-proposal-page')
         );
     }
 
     if ($('#render-collect-step-page').length) {
         React.render(
-            <ProposalPage formId={$('#render-collect-step-page').data('form')} />,
+            <CollectStepPage
+                form={$('#render-collect-step-page').data('form')}
+                {...IntlData}
+            />,
             document.getElementById('render-collect-step-page')
         );
     }

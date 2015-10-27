@@ -1,6 +1,6 @@
 import ProposalVoteAnonymousForm from './ProposalVoteAnonymousForm';
-import ProposalVoteLoggenInForm from './ProposalVoteLoggenInForm';
-import LogginStore from '../../stores/LogginStore';
+import ProposalVoteLoggedInForm from './ProposalVoteLoggedInForm';
+import LoginStore from '../../../stores/LoginStore';
 
 const ProposalVoteForm = React.createClass({
   propTypes: {
@@ -13,8 +13,8 @@ const ProposalVoteForm = React.createClass({
   mixins: [ReactIntl.IntlMixin],
 
   render() {
-    if (LogginStore.isLoggedIn()) {
-      return <ProposalVoteLoggenInForm {...this.props} />;
+    if (LoginStore.isLoggedIn()) {
+      return <ProposalVoteLoggedInForm {...this.props} />;
     }
     return <ProposalVoteAnonymousForm {...this.props} />;
   },

@@ -1,4 +1,4 @@
-import ProposalPreview from '../ProposalPreview';
+import ProposalPreview from '../Preview/ProposalPreview';
 
 const ProposalList = React.createClass({
   propTypes: {

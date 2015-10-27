@@ -1,19 +1,18 @@
 import ProposalStore from '../../stores/ProposalStore';
 import ProposalActions from '../../actions/ProposalActions';
-import ProposalListFilters from '../Proposal/ProposalListFilters';
+import ProposalListFilters from '../Proposal/List/ProposalListFilters';
 import CollectStepPageHeader from './CollectStepPageHeader';
-import ProposalList from '../Proposal/ProposalList';
+import ProposalList from '../Proposal/List/ProposalList';
 import Loader from '../Utils/Loader';
 
 const CollectStepPage = React.createClass({
   propTypes: {
-    formId: React.PropTypes.number.isRequired,
+    form: React.PropTypes.object.isRequired,
   },
   mixins: [ReactIntl.IntlMixin],
 
   getInitialState() {
     return {
-      form: null,
       proposals: [],
       isLoading: true,
     };
@@ -24,6 +23,7 @@ const CollectStepPage = React.createClass({
   },
 
   componentDidMount() {
+    console.log(this.props, this.state);
     this.loadProposals();
   },
 
@@ -36,14 +36,14 @@ const CollectStepPage = React.createClass({
   },
 
   loadProposals() {
-    ProposalActions.load(this.props.formId);
+    ProposalActions.load(this.props.form.id);
   },
 
   render() {
     return (
       <div>
-        <CollectStepPageHeader form={this.props.form} />
-        <ProposalListFilters />
+        {/*<CollectStepPageHeader form={this.props.form} />*/}
+        {/*<ProposalListFilters />*/}
         <Loader show={this.state.isLoading}>
           <ProposalList proposals={this.state.proposals} />
         </Loader>
