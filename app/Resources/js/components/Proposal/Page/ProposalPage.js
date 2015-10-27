@@ -51,15 +51,15 @@ const ProposalPage = React.createClass({
           <Row>
             <Col xs={12} sm={proposal.canContribute ? 9 : 12}>
               <ProposalPageHeader proposal={proposal} />
-              <ProposalPageContent proposal={proposal} />
-              <ProposalPageVotes proposal={proposal} />
-              <ProposalPageComments formId={this.props.formId} id={proposal.id} />
+              {/* <ProposalPageContent proposal={proposal} /> */}
+              {/* <ProposalPageVotes proposal={proposal} /> */}
+              {/*<ProposalPageComments formId={this.props.formId} id={proposal.id} /> */}
             </Col>
             <div id="sidebar-overlay" />
-            {proposal.canContribute
+            {/*proposal.canContribute
               ? <ProposalVoteBox proposal={proposal} />
               : null
-            }
+            */}
           </Row>
         </Loader>
       </div>
