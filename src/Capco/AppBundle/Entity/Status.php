@@ -56,9 +56,8 @@ class Status
     {
         if ($this->getId()) {
             return $this->getName();
-        } else {
-            return 'New status';
         }
+        return 'New status';
     }
 
     /**
