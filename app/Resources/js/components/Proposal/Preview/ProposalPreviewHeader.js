@@ -1,4 +1,5 @@
 import UserAvatar from '../../User/UserAvatar';
+import UserLink from '../../User/UserLink';
 
 const ProposalPreviewHeader = React.createClass({
   propTypes: {
@@ -13,6 +14,9 @@ const ProposalPreviewHeader = React.createClass({
     return (
       <span className={classes}>
         <UserAvatar user={proposal.author} className="pull-left" />
+        <div className="opinion__data">
+          <UserLink user={proposal.author} />
+        </div>
       </span>
     );
   },

@@ -1,3 +1,5 @@
+import ProposalActions from '../../../actions/ProposalActions';
+
 const Button = ReactBootstrap.Button;
 const ButtonGroup = ReactBootstrap.ButtonGroup;
 const ButtonToolbar = ReactBootstrap.ButtonToolbar;
@@ -6,11 +8,10 @@ const Row = ReactBootstrap.Row;
 const Col = ReactBootstrap.Col;
 const Input = ReactBootstrap.Input;
 
-import ProposalActions from '../../../actions/ProposalActions';
-
 const ProposalListFilters = React.createClass({
   propTypes: {
-    formId: React.PropTypes.number.isRequired,
+    id: React.PropTypes.number.isRequired,
+    onChange: React.PropTypes.func.isRequired,
     localisation: React.PropTypes.array,
     theme: React.PropTypes.array,
     status: React.PropTypes.array,
@@ -36,18 +37,26 @@ const ProposalListFilters = React.createClass({
     };
   },
 
-  handleOrderChange(order) {
-    this.setState({order: order}, () => this.reload());
+  componentDidUpdate(prevProps, prevState) {
+   if (prevState && prevState.order !== this.state.order || prevState.filters !== this.state.filters) {
+     this.reload();
+     this.props.onChange();
+   }
   },
 
-  handleFilterChange(filter, value) {
-    const filters = this.state.filters;
-    filters[filter] = value;
-    this.setState({filters: filters}, () =>  this.reload());
+  handleOrderChange(order) {
+    this.setState({order: order});
+  },
+
+  handleFilterChange(filter) {
+    const value = this.refs[filter].getValue();
+    this.setState({
+      filters: React.addons.update(this.state.filters, {[filter]: {$set: value}})
+    });
   },
 
   reload() {
-    ProposalActions.load(this.props.formId, this.state.order, this.state.filters);
+    ProposalActions.load(this.props.id, this.state.order, this.state.filters);
   },
 
   buttons: ['last', 'old', 'popular', 'comments'],
@@ -61,7 +70,7 @@ const ProposalListFilters = React.createClass({
           {
             this.buttons.map((button) => {
               return (
-                <Button onClick={this.handleOrderChange(null, button)}>
+                <Button onClick={this.handleOrderChange.bind(this, button)}>
                   {this.getIntlMessage('global.filter_' + button)}
                 </Button>
               );
@@ -78,12 +87,12 @@ const ProposalListFilters = React.createClass({
         <Row>
           {
             this.filters.map((filter) => {
-                  // valueLink={this.linkState('filters.'+filter)}
 
               return (
                 <Input
                   type="select"
                   ref={filter}
+                  onChange={this.handleFilterChange.bind(this, filter)}
                 >
                   <option value="" disabled selected>
                     {this.getIntlMessage('global.select_' + filter)}

@@ -22,7 +22,7 @@ import {
 export default {
 
   load: (form, order = 'last', filters = {}, offset = 0, limit = -1) => {
-    let url = `proposal_forms/${form}/proposals?order=${order}&offset=${offset}&limit=${limit}`;
+    let url = `/proposal_forms/${form}/proposals?order=${order}&offset=${offset}&limit=${limit}`;
     // TODO add filters
 
     Fetcher
@@ -30,7 +30,7 @@ export default {
       .then((data) => {
         AppDispatcher.dispatch({
           actionType: RECEIVE_PROPOSALS,
-          proposals: data.proposals,
+          proposals: data,
         });
         return true;
       });
@@ -38,7 +38,7 @@ export default {
 
   getOne: (form, proposal) => {
     Fetcher
-      .get(`proposal_forms/${form}/proposals/${proposal}`)
+      .get(`/proposal_forms/${form}/proposals/${proposal}`)
       .then((data) => {
         AppDispatcher.dispatch({
           actionType: RECEIVE_PROPOSAL,
@@ -53,7 +53,7 @@ export default {
       actionType: CREATE_PROPOSAL_VOTE,
     });
     return Fetcher
-    .post(`proposal_forms/${form}/proposals/${proposal}/votes`, data)
+    .post(`/proposal_forms/${form}/proposals/${proposal}/votes`, data)
     .then(() => {
       AppDispatcher.dispatch({
         actionType: CREATE_PROPOSAL_VOTE_SUCCESS,
@@ -72,7 +72,7 @@ export default {
       actionType: DELETE_PROPOSAL_VOTE,
     });
     return Fetcher
-      .delete(`proposal_forms/${form}/proposals/${proposal}/votes`)
+      .delete(`/proposal_forms/${form}/proposals/${proposal}/votes`)
       .then(() => {
         AppDispatcher.dispatch({
           actionType: DELETE_PROPOSAL_VOTE_SUCCESS,
@@ -88,7 +88,7 @@ export default {
 
   loadComments: (form, proposal, filter, offset = 0, limit = -1) => {
     return Fetcher
-      .get(`proposal_forms/${form}/proposals/${proposal}/comments?filter=${filter}&offset=${offset}&limit=${limit}`)
+      .get(`/proposal_forms/${form}/proposals/${proposal}/comments?filter=${filter}&offset=${offset}&limit=${limit}`)
       .then((data) => {
         AppDispatcher.dispatch({
           actionType: RECEIVE_PROPOSAL_COMMENTS,
@@ -103,7 +103,7 @@ export default {
       actionType: CREATE_PROPOSAL_COMMENT,
     });
     return Fetcher
-      .post(`proposal_forms/${form}/proposals/${proposal}/comments`, data)
+      .post(`/proposal_forms/${form}/proposals/${proposal}/comments`, data)
       .then(() => {
         AppDispatcher.dispatch({
           actionType: CREATE_PROPOSAL_COMMENT_SUCCESS,

@@ -31,12 +31,39 @@
 
 {% block body %}
 
-    <div
-        id="render-collect-step-page"
-        data-form='{{ form|raw }}'
-        data-themes='{{ themes|raw }}'
-    >
-    </div>
+<div class="container  container--custom">
+    {% include '@CapcoApp/Project/show_title.html.twig' %}
+</div>
+
+<div class="container container--custom">
+    <div class="row">
+        <div class="col-xs-12 col-sm-4 col-md-3">
+            {{ render(controller('CapcoAppBundle:Site/Project:showMeta', {'projectSlug': project.slug, 'currentStepSlug': currentStep.slug})) }}
+        </div>
+
+        <div class="col-xs-12  col-sm-8  col-md-9" id="details">
+            <h2 class="h2">
+                320 propositions
+                <div
+                    id="render-collect-step-proposal-create"
+                    data-form='{{ form|escape }}'
+                >
+                </div>
+            </h2>
+
+
+            <div
+                id="render-collect-step-page"
+                data-form='{{ form|escape }}'
+                data-themes='{{ themes|escape }}'
+            >
+            </div>
+
+        </div> <!-- col-xs-12  col-sm-8  col-md-9 -->
+    </div> <!-- .row -->
+</div>
+
+
 
 {% endblock %}
 

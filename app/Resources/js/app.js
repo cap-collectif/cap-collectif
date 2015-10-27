@@ -8,6 +8,7 @@ import AuthService from './services/AuthService';
 import FeatureService from './services/FeatureService';
 import CollectStepPage from './components/Page/CollectStepPage';
 import ProposalPage from './components/Proposal/Page/ProposalPage';
+import ProposalCreate from './components/Proposal/Create/ProposalCreate';
 
 FeatureService.load();
 
@@ -54,10 +55,20 @@ AuthService
         );
     }
 
+    if ($('#render-collect-step-proposal-create').length) {
+        React.render(
+            <ProposalCreate
+                form={$('#render-collect-step-proposal-create').data('form').form}
+                {...IntlData}
+            />,
+            document.getElementById('render-collect-step-proposal-create')
+        );
+    }
+
     if ($('#render-collect-step-page').length) {
         React.render(
             <CollectStepPage
-                form={$('#render-collect-step-page').data('form')}
+                form={$('#render-collect-step-page').data('form').form}
                 {...IntlData}
             />,
             document.getElementById('render-collect-step-page')

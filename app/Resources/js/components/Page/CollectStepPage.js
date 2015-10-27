@@ -1,7 +1,6 @@
 import ProposalStore from '../../stores/ProposalStore';
 import ProposalActions from '../../actions/ProposalActions';
 import ProposalListFilters from '../Proposal/List/ProposalListFilters';
-import CollectStepPageHeader from './CollectStepPageHeader';
 import ProposalList from '../Proposal/List/ProposalList';
 import Loader from '../Utils/Loader';
 
@@ -23,7 +22,6 @@ const CollectStepPage = React.createClass({
   },
 
   componentDidMount() {
-    console.log(this.props, this.state);
     this.loadProposals();
   },
 
@@ -32,18 +30,28 @@ const CollectStepPage = React.createClass({
   },
 
   onChange() {
-    this.setState({proposals: ProposalStore.proposals});
+    this.setState({
+      proposals: ProposalStore.proposals,
+      isLoading: false,
+    });
   },
 
   loadProposals() {
     ProposalActions.load(this.props.form.id);
   },
 
+  handleFilterChange() {
+    this.setState({isLoading: true});
+  },
+
   render() {
     return (
       <div>
-        {/*<CollectStepPageHeader form={this.props.form} />*/}
-        {/*<ProposalListFilters />*/}
+        <ProposalListFilters
+          id={this.props.form.id}
+          onChange={() => this.handleFilterChange()}
+        />
+        <br />
         <Loader show={this.state.isLoading}>
           <ProposalList proposals={this.state.proposals} />
         </Loader>

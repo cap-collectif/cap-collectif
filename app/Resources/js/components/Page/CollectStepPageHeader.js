@@ -4,6 +4,7 @@ const Col = ReactBootstrap.Col;
 const Row = ReactBootstrap.Row;
 const FormattedMessage = ReactIntl.FormattedMessage;
 
+// Not used yet => twig
 const CollectStepPageHeader = React.createClass({
   propTypes: {
     form: React.PropTypes.object.isRequired,

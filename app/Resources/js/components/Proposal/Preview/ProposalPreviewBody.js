@@ -14,11 +14,15 @@ const ProposalPreviewBody = React.createClass({
 
     return (
       <div className={classes}>
-        <h2>
-          {proposal.title}
-        </h2>
+        <h3 className="opinion__title">
+          <a href={proposal._links || '#'}>{proposal.title}</a>
+        </h3>
         <div>
-          {proposal.body}
+          <ul>
+            <li>Thème</li>
+            <li>Localisation</li>
+            <li>Cout estimé</li>
+          </ul>
         </div>
         <Label>{proposal.status}</Label>
       </div>

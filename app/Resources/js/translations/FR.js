@@ -204,6 +204,7 @@ export default {
         reported: 'Signalé',
       },
       votes: '{num, plural, =0{0 vote} one{# vote} other{# votes}}',
+      comments: '{num, plural, =0{0 commentaire} one{# commentaire} other{# commentaires}}',
       versions: '{num, plural, =0{0 modification} one{# modification} other{# modifications}}',
       sources: '{num, plural, =0{0 source} one{# source} other{# sources}}',
       simple_arguments: '{num, plural, =0{0 avis} one{# avis} other{# avis}}',
