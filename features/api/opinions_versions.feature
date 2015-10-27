@@ -1,7 +1,7 @@
 Feature: Opinions Versions
 
 ## List
-  @fail
+
   Scenario: API client wants to list versions of an opinion
     When I send a GET request to "/api/opinions/57/versions"
     Then the JSON response status code should be 200

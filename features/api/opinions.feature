@@ -139,7 +139,7 @@ Feature: Opinions
 ## Source
 
   ### List
-    @fail
+
     Scenario: API client wants to list sources of an opinion
     When I send a GET request to "/api/opinions/2/sources"
     Then the JSON response should match:

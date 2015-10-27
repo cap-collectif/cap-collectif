@@ -24,6 +24,11 @@ capco_api_features:
   type: rest
   prefix: /api
 
+capco_api_districts:
+  resource: "@CapcoAppBundle/Controller/Api/DistrictsController.php"
+  type: rest
+  prefix: /api
+
 capco_api_users:
   resource: "@CapcoAppBundle/Controller/Api/UsersController.php"
   type: rest
