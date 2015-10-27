@@ -138,6 +138,14 @@ class SynthesisElement
     /**
      * @var string
      *
+     * @ORM\Column(name="subtitle", type="string", length=255, nullable=true)
+     * @Gedmo\Versioned
+     */
+    private $subtitle;
+
+    /**
+     * @var string
+     *
      * @ORM\Column(name="body", type="text", nullable=true)
      * @Gedmo\Versioned
      */
@@ -169,12 +177,18 @@ class SynthesisElement
     private $comment;
 
     /**
-     * @var int
-     *
      * @ORM\Column(name="votes", type="array", nullable=true)
      * @Gedmo\Versioned
      */
     private $votes;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="published_children_count", type="integer")
+     * @Gedmo\Versioned
+     */
+    private $publishedChildrenCount = 0;
 
     /**
      * @var string
@@ -202,6 +216,13 @@ class SynthesisElement
      * @ORM\Column(name="linked_data_creation", type="datetime", nullable=true)
      */
     private $linkedDataCreation = null;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="linked_data_url", type="string", length=255, nullable=true)
+     */
+    private $linkedDataUrl = null;
 
     public function __construct()
     {
@@ -425,6 +446,24 @@ class SynthesisElement
     /**
      * @return string
      */
+    public function getSubtitle()
+    {
+        return $this->subtitle;
+    }
+
+    /**
+     * @param string $subtitle
+     */
+    public function setSubtitle($subtitle)
+    {
+        $this->subtitle = $subtitle;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
     public function getBody()
     {
         return $this->body;
@@ -535,6 +574,24 @@ class SynthesisElement
     }
 
     /**
+     * @return int
+     */
+    public function getPublishedChildrenCount()
+    {
+        return $this->publishedChildrenCount;
+    }
+
+    /**
+     * @param int $publishedChildrenCount
+     */
+    public function setPublishedChildrenCount($publishedChildrenCount)
+    {
+        $this->publishedChildrenCount = $publishedChildrenCount;
+
+        return $this;
+    }
+
+    /**
      * @return string
      */
     public function getLinkedDataClass()
@@ -596,6 +653,24 @@ class SynthesisElement
     public function setLinkedDataLastUpdate($linkedDataLastUpdate)
     {
         $this->linkedDataLastUpdate = $linkedDataLastUpdate;
+    }
+
+    /**
+     * @return string
+     */
+    public function getLinkedDataUrl()
+    {
+        return $this->linkedDataUrl;
+    }
+
+    /**
+     * @param string $linkedDataUrl
+     */
+    public function setLinkedDataUrl($linkedDataUrl)
+    {
+        $this->linkedDataUrl = $linkedDataUrl;
+
+        return $this;
     }
 
     /**

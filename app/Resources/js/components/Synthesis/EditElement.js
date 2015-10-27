@@ -112,17 +112,10 @@ const EditElement = React.createClass({
   },
 
   renderElementButtons() {
-    if (this.state.element.displayType === 'contribution') {
-      return (
-        <div className="element__actions box text-center">
-          <PublishButton element={this.state.element} onModal={this.togglePublishModal} />
-          <DivideButton element={this.state.element} onModal={this.toggleDivideModal} />
-          <IgnoreButton synthesis={this.props.synthesis} element={this.state.element} />
-        </div>
-      );
-    }
     return (
       <div className="element__actions box text-center">
+        <PublishButton element={this.state.element} onModal={this.togglePublishModal} />
+        <DivideButton element={this.state.element} onModal={this.toggleDivideModal} />
         <IgnoreButton synthesis={this.props.synthesis} element={this.state.element} />
       </div>
     );

@@ -18,7 +18,7 @@ const SideMenu = React.createClass({
   getInitialState() {
     return {
       showCreateModal: false,
-      navbarItems: [],
+      navItems: [],
       selectedId: 'root',
       expanded: {
         root: true,
@@ -45,11 +45,11 @@ const SideMenu = React.createClass({
   },
 
   toggleExpand(element) {
-    SynthesisElementActions.expandNavbarItem(element.id, !this.state.expanded[element.id]);
+    SynthesisElementActions.expandTreeItem('nav', element.id, !this.state.expanded[element.id]);
   },
 
   selectItem(element) {
-    SynthesisElementActions.selectNavbarItem(element.id);
+    SynthesisElementActions.selectNavItem(element.id);
     if (element.id !== 'root') {
       this.transitionTo('show_element', {'element_id': element.id});
     }
@@ -73,9 +73,9 @@ const SideMenu = React.createClass({
     if (!SynthesisElementStore.isFetchingTree) {
       if (SynthesisElementStore.isInboxSync.notIgnoredTree) {
         this.setState({
-          navbarItems: SynthesisElementStore.elements.notIgnoredTree,
-          expanded: SynthesisElementStore.expandedNavbarItems,
-          selectedId: SynthesisElementStore.selectedNavbarItem,
+          navItems: SynthesisElementStore.elements.notIgnoredTree,
+          expanded: SynthesisElementStore.expandedItems.nav,
+          selectedId: SynthesisElementStore.selectedNavItem,
           isLoading: false,
         });
         return;
@@ -111,7 +111,7 @@ const SideMenu = React.createClass({
     return (
       <ElementsFinder
         synthesis={this.props.synthesis}
-        elements={this.state.navbarItems}
+        elements={this.state.navItems}
         expanded={this.state.expanded}
         selectedId={this.state.selectedId}
         onExpand={this.toggleExpand}
@@ -148,7 +148,7 @@ const SideMenu = React.createClass({
           {this.renderCreateButton()}
           {this.renderManageButton()}
         </Nav>
-        <CreateModal synthesis={this.props.synthesis} show={this.state.showCreateModal} toggle={this.toggleCreateModal} elements={this.state.navbarItems} selectedId={this.state.selectedId} />
+        <CreateModal synthesis={this.props.synthesis} show={this.state.showCreateModal} toggle={this.toggleCreateModal} elements={this.state.navItems} selectedId={this.state.selectedId} />
       </div>
     );
   },

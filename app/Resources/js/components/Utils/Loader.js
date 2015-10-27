@@ -1,12 +1,14 @@
 const Loader = React.createClass({
   propTypes: {
     show: React.PropTypes.bool,
+    children: React.PropTypes.node,
   },
   mixins: [ReactIntl.IntlMixin],
 
   getDefaultProps() {
     return {
       show: true,
+      children: null,
     };
   },
 
@@ -20,7 +22,7 @@ const Loader = React.createClass({
         </div>
       );
     }
-    return null;
+    return this.props.children;
   },
 
 });
