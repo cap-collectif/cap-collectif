@@ -11,7 +11,6 @@ const ViewElement = React.createClass({
     element: React.PropTypes.object.isRequired,
     parent: React.PropTypes.object,
     settings: React.PropTypes.array.isRequired,
-    onExpandElement: React.PropTypes.func.isRequired,
   },
   mixins: [ReactIntl.IntlMixin],
 
@@ -28,7 +27,6 @@ const ViewElement = React.createClass({
   },
 
   toggleChildrenModal(value) {
-    this.props.onExpandElement(this.props.element);
     this.setState({
       showChildrenModal: value,
     });
