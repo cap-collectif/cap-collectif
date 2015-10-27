@@ -4,8 +4,3 @@ Capco\AppBundle\Entity\OpinionVote:
       value: <numberBetween(-1, 1)>
       user: @user4
       confirmed: true
-    opinionVote{2...5}:
-      Opinion: @opinion57
-      value: <numberBetween(-1, 1)>
-      user: @user<current()>
-      confirmed: true

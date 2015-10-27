@@ -145,8 +145,8 @@ const PublishModal = React.createClass({
       if (SynthesisElementStore.isInboxSync.notIgnoredTree) {
         this.setState({
           elements: SynthesisElementStore.elements.notIgnoredTree,
-          expanded: SynthesisElementStore.expandedItems.nav,
-          selectedId: SynthesisElementStore.selectedNavItem,
+          expanded: SynthesisElementStore.expandedNavbarItems,
+          selectedId: SynthesisElementStore.selectedNavbarItem,
           isLoading: false,
         });
         return;

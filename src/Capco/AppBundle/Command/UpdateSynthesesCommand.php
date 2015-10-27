@@ -11,7 +11,7 @@ class UpdateSynthesesCommand extends ContainerAwareCommand
     protected function configure()
     {
         $this
-            ->setName('capco:syntheses:update')
+            ->setName('capco:update-syntheses')
             ->setDescription('Update the syntheses from their source data')
         ;
     }
