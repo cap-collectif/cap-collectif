@@ -39,6 +39,7 @@ export default {
         },
         second: {
           brand: 'Synthèse (Version beta)',
+          preview: 'Voir un aperçu',
         },
         filter: {
           oldest: 'Les plus anciens',

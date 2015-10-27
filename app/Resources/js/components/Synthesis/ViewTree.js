@@ -83,7 +83,6 @@ const ViewTree = React.createClass({
 
   renderCaret(element) {
     const expanded = this.state.expanded[element.id] || false;
-    console.log(element.publishedChildrenCount);
     if (element.publishedChildrenCount > 0 && element.childrenCount > 0) {
       const classes = classNames({
         'cap-arrow-67': expanded,

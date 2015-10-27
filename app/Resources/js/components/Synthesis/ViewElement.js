@@ -100,6 +100,18 @@ const ViewElement = React.createClass({
     return null;
   },
 
+  renderPercentage() {
+    if (this.getValueForDisplayRule('percentage') && this.props.parent) {
+      const percentage = this.props.element.publishedChildrenCount / this.props.parent.publishedChildrenCount * 100;
+      return (
+        <span className="small excerpt pull-right">
+          {percentage}%
+        </span>
+      );
+    }
+    return null;
+  },
+
   renderElementBody() {
     if (this.props.element.body) {
       return (
@@ -110,13 +122,12 @@ const ViewElement = React.createClass({
 
   renderAsProgressBar() {
     if (this.props.parent) {
-      const percentage = this.props.parent.publishedChildrenCount / this.props.element.publishedChildrenCount * 100;
+      const percentage = this.props.element.publishedChildrenCount / this.props.parent.publishedChildrenCount * 100;
       return (
         <div className="synthesis__element">
           <div className="synthesis__element__bar">
-            <span className="synthesis__element__bar__value" style={{width: percentage + '%'}}>
-              <ElementTitle element={this.props.element} link={false}/>
-            </span>
+            <span className="synthesis__element__bar__value" style={{width: percentage + '%'}} />
+            <ElementTitle className="element__title" element={this.props.element} link={false}/>
           </div>
         </div>
       );
@@ -132,7 +143,10 @@ const ViewElement = React.createClass({
       <div className="synthesis__element" style={this.buildStyle('containerStyle')}>
         {this.renderAuthor()}
         <div style={this.buildStyle()}>
-          <p><ElementTitle element={this.props.element} link={false} /></p>
+          <p>
+            <ElementTitle element={this.props.element} link={false} />
+            {this.renderPercentage()}
+          </p>
           {this.renderSubtitle()}
         </div>
         {this.renderCounters()}

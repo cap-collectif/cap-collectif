@@ -160,15 +160,5 @@ class ReinitCommand extends ContainerAwareCommand
         $input = new ArrayInput(['']);
         $input->setInteractive(false);
         $command->run($input, $output);
-
-        // Used to test synthesis view
-        $em = $this->getContainer()->get('doctrine.orm.entity_manager');
-        $elements = $em->getRepository('CapcoAppBundle:Synthesis\SynthesisElement')
-            ->findAll();
-        foreach ($elements as $el) {
-            $el->setArchived(true);
-            $el->setPublished(true);
-        }
-        $em->flush();
     }
 }

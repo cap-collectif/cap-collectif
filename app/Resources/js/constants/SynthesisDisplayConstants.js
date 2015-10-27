@@ -3,7 +3,7 @@ export default {
   ALLOWED_RULES: {
     style: ['fontSize', 'color', 'textAlign', 'fontWeight'],
     containerStyle: ['borderTop', 'paddingTop'],
-    display: ['author', 'piechart', 'counters', 'asProgressBar', 'childrenInModal', 'subtitle'],
+    display: ['author', 'piechart', 'counters', 'asProgressBar', 'childrenInModal', 'subtitle', 'percentage'],
   },
 
   DISPLAY_SETTINGS: [
@@ -134,7 +134,7 @@ export default {
         {
           category: 'containerStyle',
           name: 'borderTop',
-          value: '3px solid #dddddd',
+          value: '5px solid #dddddd',
         },
         {
           category: 'containerStyle',
@@ -179,6 +179,11 @@ export default {
           category: 'style',
           name: 'fontWeight',
           value: 'bold',
+        },
+        {
+          category: 'display',
+          name: 'percentage',
+          value: true,
         },
       ],
     },
