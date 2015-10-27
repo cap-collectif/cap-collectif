@@ -97,10 +97,10 @@ class ProjectController extends Controller
     }
 
     /**
-     * @Route("/projects/{projectSlug}/consultation/{stepSlug}/propositions", name="app_project_show_proposals", requirements={"page" = "\d+"}, defaults={"page" = 1})
-     * @Route("/consultations/{projectSlug}/projet/{stepSlug}/propositions", name="app_consultation_show_proposals", requirements={"page" = "\d+"}, defaults={"page" = 1})
+     * @Route("/projects/{projectSlug}/collect/{stepSlug}/proposals", name="app_project_show_proposals", requirements={"page" = "\d+"}, defaults={"page" = 1})
+     * @Route("/consultations/{projectSlug}/collect/{stepSlug}/proposals", name="app_consultation_show_proposals", requirements={"page" = "\d+"}, defaults={"page" = 1})
      * @ParamConverter("project", class="CapcoAppBundle:Project", options={"mapping": {"projectSlug": "slug"}})
-     * @Template("CapcoAppBundle:Consultation:show_proposals.html.twig")
+     * @Template("CapcoAppBundle:Project:show_proposals.html.twig")
      *
      * @param $project
      * @param $currentStep

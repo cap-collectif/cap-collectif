@@ -10,9 +10,8 @@ use Symfony\Component\HttpFoundation\Response;
 class ProposalController
 {
     /**
-     * @Route("/projects/{projectSlug}/collect/{stepSlug}/proposals/{proposalId}")
-     * @ParamConverter("proposal", options={"mapping": {"proposalId": "id"}, "repository_method": "getOne", "map_method_signature": true})
-     *
+     * @Route("/projects/{projectSlug}/collect/{stepSlug}/proposals/{proposalSlug}", name="app_project_show_proposal")
+     * @ParamConverter("proposal", options={"mapping": {"proposalSlug": "slug"}, "repository_method": "getOne", "map_method_signature": true})
      * @param Proposal $proposal
      *
      * @return Proposal
