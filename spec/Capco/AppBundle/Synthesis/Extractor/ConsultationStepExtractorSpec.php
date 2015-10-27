@@ -2,12 +2,14 @@
 
 namespace spec\Capco\AppBundle\Synthesis\Extractor;
 
+use Buzz\Util\Url;
 use Capco\AppBundle\Entity\ConsultationStepType;
 use Capco\AppBundle\Entity\OpinionType;
 use Capco\AppBundle\Entity\Source;
 use Capco\AppBundle\Entity\Synthesis\SynthesisDivision;
 use Capco\AppBundle\Repository\OpinionRepository;
 use Capco\AppBundle\Resolver\OpinionTypesResolver;
+use Capco\AppBundle\Resolver\UrlResolver;
 use Capco\UserBundle\Entity\User;
 use PhpSpec\ObjectBehavior;
 use Doctrine\ORM\EntityManager;
@@ -23,9 +25,9 @@ use Symfony\Bundle\FrameworkBundle\Routing\Router;
 
 class ConsultationStepExtractorSpec extends ObjectBehavior
 {
-    function let(EntityManager $em, TranslatorInterface $translator, Router $router, OpinionTypesResolver $opinionTypesResolver)
+    function let(EntityManager $em, TranslatorInterface $translator, Router $router, OpinionTypesResolver $opinionTypesResolver, UrlResolver $urlResolver)
     {
-        $this->beConstructedWith($em, $translator, $router, $opinionTypesResolver);
+        $this->beConstructedWith($em, $translator, $router, $opinionTypesResolver, $urlResolver);
     }
 
     function it_is_initializable()

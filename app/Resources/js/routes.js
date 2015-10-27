@@ -2,6 +2,7 @@ import SynthesisBox from './components/Synthesis/SynthesisBox';
 import ElementsInbox from './components/Synthesis/ElementsInbox';
 import FolderManager from './components/Synthesis/FolderManager';
 import EditElement from './components/Synthesis/EditElement';
+import ViewBox from './components/Synthesis/ViewBox';
 
 const Route = ReactRouter.Route;
 const DefaultRoute = ReactRouter.DefaultRoute;
@@ -28,5 +29,6 @@ export default (
     </Route>
     <Route name="folder_manager" path="folder-manager" handler={FolderManager} />
     <Route name="show_element" path="element/:element_id" handler={EditElement} />
+    <Route name="preview" path="preview" handler={ViewBox} />
   </Route>
 );

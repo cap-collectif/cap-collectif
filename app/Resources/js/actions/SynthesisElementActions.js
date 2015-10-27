@@ -1,7 +1,8 @@
 import AppDispatcher from '../dispatchers/AppDispatcher';
 import Fetcher from '../services/Fetcher';
+import * as Actions from '../constants/SynthesisElementActionsConstants';
+import {NAV_DEPTH} from '../constants/SynthesisElementConstants';
 import {DISMISS_MESSAGE} from '../constants/MessageConstants';
-import {RECEIVE_COUNT, RECEIVE_ELEMENTS, RECEIVE_ELEMENTS_SUCCESS, RECEIVE_ELEMENTS_FAILURE, RECEIVE_ELEMENT, RECEIVE_ELEMENT_SUCCESS, RECEIVE_ELEMENT_FAILURE, EXPAND_NAVBAR_ITEM, SELECT_NAVBAR_ITEM, CREATE_ELEMENT, ARCHIVE_ELEMENT, NOTE_ELEMENT, COMMENT_ELEMENT, NAME_ELEMENT, MOVE_ELEMENT, DIVIDE_ELEMENT, UPDATE_ELEMENT_SUCCESS, UPDATE_ELEMENT_FAILURE, CREATE_ELEMENT_SUCCESS, CREATE_ELEMENT_FAILURE, NAVBAR_DEPTH} from '../constants/SynthesisElementConstants';
 
 const idOf = (val) => {
   if (val === 'root') {
@@ -21,14 +22,14 @@ const updateElementFromData = (synthesis, element, data, successMessage = 'commo
     .put(`/syntheses/${synthesis}/elements/${element}`, data)
     .then(() => {
       AppDispatcher.dispatch({
-        actionType: UPDATE_ELEMENT_SUCCESS,
+        actionType: Actions.UPDATE_ELEMENT_SUCCESS,
         message: successMessage,
       });
       return true;
     })
     .catch(() => {
       AppDispatcher.dispatch({
-        actionType: UPDATE_ELEMENT_FAILURE,
+        actionType: Actions.UPDATE_ELEMENT_FAILURE,
         message: errorMessage,
       });
       return false;
@@ -41,7 +42,7 @@ const createElementFromData = (synthesis, data, successMessage = 'common.success
     .then((response) => {
       response.json().then((element) => {
         AppDispatcher.dispatch({
-          actionType: CREATE_ELEMENT_SUCCESS,
+          actionType: Actions.CREATE_ELEMENT_SUCCESS,
           element: element,
           message: successMessage,
         });
@@ -51,7 +52,7 @@ const createElementFromData = (synthesis, data, successMessage = 'common.success
     })
     .catch(() => {
       AppDispatcher.dispatch({
-        actionType: CREATE_ELEMENT_FAILURE,
+        actionType: Actions.CREATE_ELEMENT_FAILURE,
         message: errorMessage,
       });
       return false;
@@ -63,14 +64,14 @@ const fetchElementById = (synthesis, element) => {
     .get(`/syntheses/${synthesis}/elements/${element}`)
     .then((data) => {
       AppDispatcher.dispatch({
-        actionType: RECEIVE_ELEMENT_SUCCESS,
+        actionType: Actions.RECEIVE_ELEMENT_SUCCESS,
         element: data,
       });
       return true;
     })
     .catch(() => {
       AppDispatcher.dispatch({
-        actionType: RECEIVE_ELEMENT_FAILURE,
+        actionType: Actions.RECEIVE_ELEMENT_FAILURE,
       });
       return false;
     });
@@ -80,7 +81,7 @@ export default {
 
   create: (synthesis, data) => {
     AppDispatcher.dispatch({
-      actionType: CREATE_ELEMENT,
+      actionType: Actions.CREATE_ELEMENT,
       element: data,
     });
     if (data.parent) {
@@ -91,7 +92,7 @@ export default {
 
   loadElementFromServer: (synthesis, element) => {
     AppDispatcher.dispatch({
-      actionType: RECEIVE_ELEMENT,
+      actionType: Actions.RECEIVE_ELEMENT,
       elementId: element,
     });
     fetchElementById(synthesis, element);
@@ -101,7 +102,7 @@ export default {
     Fetcher
       .get(`/syntheses/${synthesis}/elements?type=${type}&offset=${offset}&limit=${limit}`)
       .then((data) => {
-        data.actionType = RECEIVE_ELEMENTS_SUCCESS;
+        data.actionType = Actions.RECEIVE_ELEMENTS_SUCCESS;
         data.type = type;
         AppDispatcher.dispatch(data);
         return true;
@@ -110,27 +111,29 @@ export default {
 
   loadElementsTreeFromServer: (synthesis, type, parent = null) => {
     AppDispatcher.dispatch({
-      actionType: RECEIVE_ELEMENTS,
+      actionType: Actions.RECEIVE_ELEMENTS,
       type: type + 'Tree',
     });
-    let url = `/syntheses/${synthesis}/elements/tree?type=${type}&depth=${NAVBAR_DEPTH}`;
-    url += parent ? `&parent=${parent}` : null;
+    let url = `/syntheses/${synthesis}/elements/tree?type=${type}&depth=${NAV_DEPTH}`;
+    url += parent ? `&parent=${parent}` : '';
     Fetcher
       .get(url)
       .then((data) => {
         AppDispatcher.dispatch({
-          actionType: RECEIVE_ELEMENTS_SUCCESS,
+          actionType: Actions.RECEIVE_ELEMENTS_SUCCESS,
           type: type + 'Tree',
           elements: data,
           parent: parent,
         });
         return true;
       })
-      .catch(() => {
+      .catch((err) => {
+        console.error(err);
         AppDispatcher.dispatch({
-          actionType: RECEIVE_ELEMENTS_FAILURE,
+          actionType: Actions.RECEIVE_ELEMENTS_FAILURE,
           type: type + 'Tree',
         });
+        return false;
       });
   },
 
@@ -139,7 +142,7 @@ export default {
       .get(`/syntheses/${synthesis}/elements/count?type=${type}`)
       .then((data) => {
         AppDispatcher.dispatch({
-          actionType: RECEIVE_COUNT,
+          actionType: Actions.RECEIVE_COUNT,
           type: type,
           count: data.count,
         });
@@ -150,7 +153,7 @@ export default {
   update: (synthesis, element, data) => {
     if (data.archived || data.published) {
       AppDispatcher.dispatch({
-        actionType: ARCHIVE_ELEMENT,
+        actionType: Actions.ARCHIVE_ELEMENT,
         archived: data.archived,
         published: data.published,
         elementId: element,
@@ -158,7 +161,7 @@ export default {
     }
     if (data.parent) {
       AppDispatcher.dispatch({
-        actionType: MOVE_ELEMENT,
+        actionType: Actions.MOVE_ELEMENT,
         parent: data.parent,
         elementId: element,
       });
@@ -166,21 +169,21 @@ export default {
     }
     if (data.notation) {
       AppDispatcher.dispatch({
-        actionType: NOTE_ELEMENT,
+        actionType: Actions.NOTE_ELEMENT,
         notation: data.notation,
         elementId: element,
       });
     }
     if (data.title) {
       AppDispatcher.dispatch({
-        actionType: NAME_ELEMENT,
+        actionType: Actions.NAME_ELEMENT,
         title: data.title,
         elementId: element,
       });
     }
     if (data.comment) {
       AppDispatcher.dispatch({
-        actionType: COMMENT_ELEMENT,
+        actionType: Actions.COMMENT_ELEMENT,
         comment: data.comment,
         elementId: element,
       });
@@ -190,7 +193,7 @@ export default {
         data.division.elements[index].parent = idOf(el.parent);
       });
       AppDispatcher.dispatch({
-        actionType: DIVIDE_ELEMENT,
+        actionType: Actions.DIVIDE_ELEMENT,
         division: data.division,
         elementId: element,
       });
@@ -198,17 +201,18 @@ export default {
     updateElementFromData(synthesis, element, data, 'common.success.archive_success', 'common.errors.archive_error');
   },
 
-  expandNavbarItem(elementId, expanded) {
+  expandTreeItem(type, elementId, expanded) {
     AppDispatcher.dispatch({
-      actionType: EXPAND_NAVBAR_ITEM,
+      actionType: Actions.EXPAND_TREE_ITEM,
       elementId: elementId,
       expanded: expanded,
+      type: type,
     });
   },
 
-  selectNavbarItem(elementId) {
+  selectNavItem(elementId) {
     AppDispatcher.dispatch({
-      actionType: SELECT_NAVBAR_ITEM,
+      actionType: Actions.SELECT_NAV_ITEM,
       elementId: elementId,
     });
   },

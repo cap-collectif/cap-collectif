@@ -1,8 +1,8 @@
 const VotePiechart = React.createClass({
   propTypes: {
-    ok: React.PropTypes.number.isRequired,
-    nok: React.PropTypes.number.isRequired,
-    mitige: React.PropTypes.number.isRequired,
+    ok: React.PropTypes.number,
+    nok: React.PropTypes.number,
+    mitige: React.PropTypes.number,
     height: React.PropTypes.number,
     width: React.PropTypes.number,
     top: React.PropTypes.number,
@@ -12,6 +12,9 @@ const VotePiechart = React.createClass({
 
   getDefaultProps() {
     return {
+      ok: 0,
+      nok: 0,
+      mitige: 0,
       height: undefined,
       width: undefined,
       top: 0,
@@ -54,7 +57,10 @@ const VotePiechart = React.createClass({
   },
 
   render() {
-    return <div className="opinion__chart" ref="piechart" />;
+    if (this.props.ok || this.props.mitige || this.props.nok) {
+      return <div className="opinion__chart" ref="piechart"/>;
+    }
+    return null;
   },
 
 });
