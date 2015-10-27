@@ -13,6 +13,7 @@ const ElementTitle = React.createClass({
     return {
       link: false,
       style: {},
+      className: '',
     };
   },
 
@@ -29,7 +30,7 @@ const ElementTitle = React.createClass({
   render() {
     if (this.props.link) {
       return (
-        <Link style={this.props.style} to={'/element/' + this.props.element.id} className={this.props.className}>{this.renderTitle()}</Link>
+        <Link style={this.props.style} to={`/element/${this.props.element.id}`} className={this.props.className}>{this.renderTitle()}</Link>
       );
     }
     return (

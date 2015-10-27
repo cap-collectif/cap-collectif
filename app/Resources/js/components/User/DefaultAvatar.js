@@ -1,19 +1,4 @@
-const svg = '';
-
-const DefaultAvatar = React.createClass({
-  propTypes: {
-    className: React.PropTypes.string,
-    size: React.PropTypes.number,
-
-  },
-
-  getDefaultProps() {
-    return {
-      className: 'img-circle avatar',
-      size: 45,
-    };
-  },
-
+export default class DefaultAvatar extends React.Component {
   render() {
     return (
       <svg
@@ -39,8 +24,16 @@ const DefaultAvatar = React.createClass({
         </g>
       </svg>
     );
-  },
+  }
 
-});
+}
 
-export default DefaultAvatar;
+DefaultAvatar.propTypes = {
+  className: React.PropTypes.string,
+  size: React.PropTypes.number,
+};
+
+DefaultAvatar.defaultProps = {
+  className: 'img-circle avatar',
+  size: 45,
+};

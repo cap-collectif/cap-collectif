@@ -52,7 +52,6 @@ const ViewTree = React.createClass({
     this.setState({
       settings: SynthesisStore.settings,
     });
-    return;
   },
 
   fetchElements() {
@@ -94,21 +93,19 @@ const ViewTree = React.createClass({
       });
       return (
         <div className="synthesis__element__readmore" onClick={this.toggleExpand.bind(null, element)}>
-          {
+          <span>
+            {
             expanded
-            ? <span>
-                <FormattedMessage
-                  message={this.getIntlMessage('readmore.hide')}
-                  title={element.title}
-                />
-              </span>
-            : <span>
-                <FormattedMessage
-                  message={this.getIntlMessage('readmore.show')}
-                  title={element.title}
-                />
-              </span>
-          }
+            ? <FormattedMessage
+                message={this.getIntlMessage('readmore.hide')}
+                title={element.title}
+              />
+            : <FormattedMessage
+                message={this.getIntlMessage('readmore.show')}
+                title={element.title}
+              />
+            }
+          </span>
           <i style={{marginLeft: '5px'}} className={classes}></i>
         </div>
       );
@@ -142,10 +139,15 @@ const ViewTree = React.createClass({
   },
 
   render() {
-    if (this.state.elements.length > 0) {
-      return this.renderTreeItems(this.state.elements, null, true);
-    }
-    return <Loader show={this.state.isLoading}/>;
+    return (
+      <Loader show={this.state.isLoading}>
+        {
+          this.state.elements.length > 0
+          ? this.renderTreeItems(this.state.elements, null, true)
+          : null
+        }
+      </Loader>
+    );
   },
 
 });

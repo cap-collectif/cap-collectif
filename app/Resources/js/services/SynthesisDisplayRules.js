@@ -34,7 +34,7 @@ class SynthesisDisplayRules {
     const name = rule.name;
     const allowed = ALLOWED_RULES[category].indexOf(name) > -1;
     if (!allowed) {
-      console.log(name + ' rule is not allow in category ' + category + '. Allowed rules are :', ALLOWED_RULES[category]);
+      console.warn(name + ' rule is not allow in category ' + category + '. Allowed rules are :', ALLOWED_RULES[category]);
     }
     return allowed;
   }

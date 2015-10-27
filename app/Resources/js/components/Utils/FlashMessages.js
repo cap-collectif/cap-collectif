@@ -20,19 +20,13 @@ const FlashMessages = React.createClass({
     };
   },
 
-  dismissMessage(message, type) {
-    if (typeof this.props.onDismissMessage === 'function') {
-      this.props.onDismissMessage(message, type);
-    }
-  },
-
   renderMessage(message, type) {
     if (!this.props.form) {
       return (
         <Alert
           bsStyle={type}
           style={this.props.style}
-          onDismiss={typeof this.props.onDismissMessage === 'function' ? this.dismissMessage.bind(null, message, type) : null}
+          onDismiss={this.props.onDismissMessage ? this.props.onDismissMessage.bind(null, message, type) : null}
         >
           <p>{this.getIntlMessage(message)}</p>
         </Alert>

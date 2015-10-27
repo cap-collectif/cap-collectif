@@ -16,7 +16,6 @@ const ViewElement = React.createClass({
   getDefaultProps() {
     return {
       parent: null,
-      onExpand: null,
     };
   },
 
