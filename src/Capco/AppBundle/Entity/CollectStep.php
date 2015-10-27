@@ -4,7 +4,6 @@ namespace Capco\AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use JMS\Serializer\Annotation as Serializer;
-use Capco\AppBundle\Entity\ProposalForm;
 use Doctrine\Common\Collections\ArrayCollection;
 
 /**
@@ -24,11 +23,11 @@ class CollectStep extends AbstractStep
 
     /**
      * @var ArrayCollection
-     * @ManyToMany(targetEntity="Capco\AppBundle\Entity\Status")
-     * @JoinTable(
+     * @ORM\ManyToMany(targetEntity="Capco\AppBundle\Entity\Status")
+     * @ORM\JoinTable(
      *     name="collect_step_statuses",
-     *     joinColumns={@JoinColumn(name="collect_step_id", referencedColumnName="id")},
-     *     inverseJoinColumns={@JoinColumn(name="status_id", referencedColumnName="id")}
+     *     joinColumns={@ORM\JoinColumn(name="collect_step_id", referencedColumnName="id")},
+     *     inverseJoinColumns={@ORM\JoinColumn(name="status_id", referencedColumnName="id")}
      * )
      **/
     private $statuses;
