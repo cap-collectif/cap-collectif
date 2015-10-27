@@ -6,6 +6,8 @@ const Row = ReactBootstrap.Row;
 const Col = ReactBootstrap.Col;
 const Input = ReactBootstrap.Input;
 
+import ProposalActions from '../../../actions/ProposalActions';
+
 const ProposalListFilters = React.createClass({
   propTypes: {
     formId: React.PropTypes.number.isRequired,
@@ -35,7 +37,17 @@ const ProposalListFilters = React.createClass({
   },
 
   handleOrderChange(order) {
-    this.setState({order: order});
+    this.setState({order: order}, () => this.reload());
+  },
+
+  handleFilterChange(filter, value) {
+    const filters = this.state.filters;
+    filters[filter] = value;
+    this.setState({filters: filters}, () =>  this.reload());
+  },
+
+  reload() {
+    ProposalActions.load(this.props.formId, this.state.order, this.state.filters);
   },
 
   buttons: ['last', 'old', 'popular', 'comments'],
@@ -57,7 +69,7 @@ const ProposalListFilters = React.createClass({
           }
         </ButtonGroup>
         <ButtonGroup>
-          <Button onClick={()=>this.setState({collapse: !this.state.collapse})}>
+          <Button onClick={()=> this.setState({collapse: !this.state.collapse})}>
             Filtres avancés
           </Button>
         </ButtonGroup>

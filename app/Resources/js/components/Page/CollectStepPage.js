@@ -24,7 +24,6 @@ const CollectStepPage = React.createClass({
   },
 
   componentDidMount() {
-    this.loadForm();
     this.loadProposals();
   },
 
@@ -33,18 +32,7 @@ const CollectStepPage = React.createClass({
   },
 
   onChange() {
-    // if (!OpinionStore.isProcessing && OpinionStore.isOpinionSync) {
-    //   this.setState({
-    //     opinion: OpinionStore.opinion,
-    //     rankingThreshold: OpinionStore.rankingThreshold,
-    //     opinionTerm: OpinionStore.opinionTerm,
-    //     isLoading: false,
-    //     messages: OpinionStore.messages,
-    //   });
-    //   return;
-    // }
-
-    // this.loadOpinion();
+    this.setState({proposals: ProposalStore.proposals});
   },
 
   loadProposals() {
@@ -54,7 +42,7 @@ const CollectStepPage = React.createClass({
   render() {
     return (
       <div>
-        <CollectStepPageHeader />
+        <CollectStepPageHeader form={this.props.form} />
         <ProposalListFilters />
         <Loader show={this.state.isLoading}>
           <ProposalList proposals={this.state.proposals} />

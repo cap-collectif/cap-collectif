@@ -12,6 +12,7 @@ const Col = ReactBootstrap.Col;
 
 const ProposalPage = React.createClass({
   propTypes: {
+    formId: React.PropTypes.number.isRequired,
     proposalId: React.PropTypes.number.isRequired,
   },
   mixins: [ReactIntl.IntlMixin],
@@ -28,7 +29,7 @@ const ProposalPage = React.createClass({
   },
 
   componentDidMount() {
-    this.loadProposal();
+    ProposalActions.getOne(this.props.formId, this.props.proposalId);
   },
 
   componentWillUnmount() {
@@ -38,11 +39,8 @@ const ProposalPage = React.createClass({
   onChange() {
     this.setState({
       proposal: ProposalStore.proposal,
+      isLoading: false,
     });
-  },
-
-  loadProposal() {
-    ProposalActions.getOne(this.props.proposalId);
   },
 
   render() {
@@ -53,9 +51,9 @@ const ProposalPage = React.createClass({
           <Row>
             <Col xs={12} sm={proposal.canContribute ? 9 : 12}>
               <ProposalPageHeader proposal={proposal} />
-              <ProposalPageContent proposal={proposal}/>
-              <ProposalPageVotes proposal={proposal}/>
-              <ProposalPageComments proposal={proposal}/>
+              <ProposalPageContent proposal={proposal} />
+              <ProposalPageVotes proposal={proposal} />
+              <ProposalPageComments formId={this.props.formId} id={proposal.id} />
             </Col>
             <div id="sidebar-overlay" />
             {proposal.canContribute
