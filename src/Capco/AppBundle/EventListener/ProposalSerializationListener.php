@@ -53,7 +53,7 @@ class ProposalSerializationListener implements EventSubscriberInterface
         );
 
         $event->getVisitor()->addData(
-            'votes_count', $user === 'anon.' ? false : $proposal->getVoteCountAll()
+            'votes_count', $user === 'anon.' ? false : $proposal->getVoteCountOk()
         );
 
     }
