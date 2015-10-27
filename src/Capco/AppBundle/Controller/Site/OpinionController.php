@@ -267,10 +267,11 @@ class OpinionController extends Controller
      * @param $stepSlug
      * @param $opinionTypeSlug
      * @param $opinionSlug
-     * @param Request $request
-     * @return array
+     * @param $request
+     * @param $argumentSort
      * @Template("CapcoAppBundle:Opinion:show.html.twig")
      *
+     * @return array
      */
     public function showOpinionAction($projectSlug, $stepSlug, $opinionTypeSlug, $opinionSlug, Request $request)
     {

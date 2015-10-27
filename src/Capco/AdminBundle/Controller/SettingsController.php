@@ -36,16 +36,16 @@ class SettingsController extends Controller
         ], ['position' => 'ASC']);
 
         $featuresCategoryResolver = $this->get('capco.admin.features_category_resolver');
-        $toggles                  = $featuresCategoryResolver->getTogglesByCategory($category);
-        $group                    = $featuresCategoryResolver->getGroupNameForCategory($category);
+        $toggles = $featuresCategoryResolver->getTogglesByCategory($category);
+        $group = $featuresCategoryResolver->getGroupNameForCategory($category);
 
         return array(
-            'admin_pool'          => $admin_pool,
-            'category'            => $category,
-            'parameters'          => $parameters,
-            'colors'              => $colors,
-            'images'              => $images,
-            'toggles'             => $toggles,
+            'admin_pool' => $admin_pool,
+            'category' => $category,
+            'parameters' => $parameters,
+            'colors' => $colors,
+            'images' => $images,
+            'toggles' => $toggles,
             'current_group_label' => $group,
         );
     }

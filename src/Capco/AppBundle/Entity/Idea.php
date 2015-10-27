@@ -367,6 +367,7 @@ class Idea implements CommentableInterface
     {
         $this->theme = $theme;
         $theme->addIdea($this);
+
         return $this;
     }
 

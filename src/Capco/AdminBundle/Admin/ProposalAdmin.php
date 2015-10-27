@@ -13,7 +13,7 @@ class ProposalAdmin extends Admin
 {
     protected $datagridValues = array(
         '_sort_order' => 'ASC',
-        '_sort_by'    => 'createAt',
+        '_sort_by' => 'createAt',
     );
 
     // Fields to be shown on create/edit forms
@@ -22,46 +22,46 @@ class ProposalAdmin extends Admin
         $formMapper
             ->with('admin.fields.proposal.group_content')
             ->add('title', null, [
-                'label'     => 'admin.fields.proposal.title',
+                'label' => 'admin.fields.proposal.title',
                 'read_only' => true,
-                'disabled'  => true,
+                'disabled' => true,
             ])
             ->add('body', 'ckeditor', [
-                'label'       => 'admin.fields.proposal.body',
+                'label' => 'admin.fields.proposal.body',
                 'config_name' => 'admin_editor',
-                'read_only'   => true,
-                'disabled'    => true,
+                'read_only' => true,
+                'disabled' => true,
             ])
             ->add('author', null, [
-                'label'      => 'admin.fields.proposal.author',
-                'required'   => true,
-                'read_only'  => true,
-                'disabled'   => true,
+                'label' => 'admin.fields.proposal.author',
+                'required' => true,
+                'read_only' => true,
+                'disabled' => true,
             ])
             ->add('rating', 'choice', [
-                'label'    => 'admin.fields.proposal.rating',
+                'label' => 'admin.fields.proposal.rating',
                 'required' => false,
-                'choices'  => Proposal::$ratings,
-                'help'     => 'admin.fields.proposal.help.rating',
+                'choices' => Proposal::$ratings,
+                'help' => 'admin.fields.proposal.help.rating',
             ])
             ->add('annotation', 'ckeditor', [
-                'label'    => 'admin.fields.proposal.annotation',
+                'label' => 'admin.fields.proposal.annotation',
                 'required' => false,
-                'help'     => 'admin.fields.proposal.help.annotation',
+                'help' => 'admin.fields.proposal.help.annotation',
             ])
             ->end()
 
             ->with('admin.fields.proposal.group_publication')
                 ->add('enabled', null, [
-                    'label'    => 'admin.fields.proposal.enabled',
+                    'label' => 'admin.fields.proposal.enabled',
                     'required' => false,
                 ])
                 ->add('isTrashed', null, [
-                    'label'    => 'admin.fields.proposal.isTrashed',
+                    'label' => 'admin.fields.proposal.isTrashed',
                     'required' => false,
                 ])
                 ->add('trashedReason', null, [
-                    'label'    => 'admin.fields.proposal.trashedReason',
+                    'label' => 'admin.fields.proposal.trashedReason',
                     'required' => false,
                 ])
             ->end()
@@ -95,7 +95,7 @@ class ProposalAdmin extends Admin
             ])
             ->add('enabled', null, [
                 'editable' => true,
-                'label'    => 'admin.fields.proposal.enabled',
+                'label' => 'admin.fields.proposal.enabled',
             ])
             ->add('isTrashed', null, [
                 'label' => 'admin.fields.proposal.isTrashed',
@@ -105,8 +105,8 @@ class ProposalAdmin extends Admin
             ])
             ->add('_action', 'actions', [
                 'actions' => [
-                    'show'   => [],
-                    'edit'   => [],
+                    'show' => [],
+                    'edit' => [],
                     'delete' => [],
                 ],
             ])

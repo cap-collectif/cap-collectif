@@ -7,18 +7,17 @@ use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
- * ProposalResponse
+ * ProposalResponse.
  *
  * @ORM\Table(name="proposal_response")
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\ProposalResponseRepository")
  */
 class ProposalResponse
 {
-
     use TimestampableTrait;
 
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
@@ -54,7 +53,6 @@ class ProposalResponse
      */
     protected $updatedAt;
 
-
     /**
      * Constructor.
      */
@@ -62,11 +60,11 @@ class ProposalResponse
     {
         $this->updatedAt = new \Datetime();
     }
-    
+
     /**
-     * Get id
+     * Get id.
      *
-     * @return integer 
+     * @return int
      */
     public function getId()
     {
@@ -83,11 +81,13 @@ class ProposalResponse
 
     /**
      * @param Proposal $proposal
+     *
      * @return $this
      */
     public function setProposal(Proposal $proposal)
     {
         $this->proposal = $proposal;
+
         return $this;
     }
 
@@ -101,11 +101,13 @@ class ProposalResponse
 
     /**
      * @param Question $question
+     *
      * @return $this
      */
     public function setQuestion(Question $question)
     {
         $this->question = $question;
+
         return $this;
     }
 
@@ -119,11 +121,13 @@ class ProposalResponse
 
     /**
      * @param string $value
+     *
      * @return $this
      */
     public function setValue($value)
     {
         $this->value = $value;
+
         return $this;
     }
 }

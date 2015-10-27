@@ -65,7 +65,6 @@ class ProjectRepository extends EntityRepository
             ->execute();
     }
 
-
     /**
      * Get one by slug with steps, events and posts.
      *

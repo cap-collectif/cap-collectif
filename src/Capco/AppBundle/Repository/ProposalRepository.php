@@ -10,14 +10,13 @@ use Doctrine\ORM\EntityRepository;
  */
 class ProposalRepository extends EntityRepository
 {
-
     public function getByProposalForm(ProposalForm $proposalForm)
     {
         return $this->getIsEnabledQueryBuilder()
             ->andWhere('proposal.proposalForm = :proposalForm')
             ->setParameter('proposalForm', $proposalForm);
     }
-    
+
     /**
      * @param string $alias
      *
@@ -32,10 +31,13 @@ class ProposalRepository extends EntityRepository
 
     /**
      * @param $id
+     *
      * @return mixed
+     *
      * @throws \Doctrine\ORM\NonUniqueResultException
      */
-    public function getOne($id) {
+    public function getOne($id)
+    {
         $qb = $this->getIsEnabledQueryBuilder()
             ->addSelect('pr')
             ->leftJoin('proposal.proposalResponses', 'pr')
@@ -45,6 +47,4 @@ class ProposalRepository extends EntityRepository
 
         return $qb->getQuery()->getOneOrNullResult();
     }
-
-
 }

@@ -6,12 +6,18 @@ const ElementsList = React.createClass({
   propTypes: {
     elements: React.PropTypes.array.isRequired,
     showBreadcrumb: React.PropTypes.bool,
+    showStatus: React.PropTypes.bool,
+    showNotation: React.PropTypes.bool,
+    hasLink: React.PropTypes.bool,
   },
   mixins: [ReactIntl.IntlMixin],
 
   getDefaultProps() {
     return ({
       showBreadcrumb: true,
+      showStatus: true,
+      showNotation: true,
+      hasLink: true,
     });
   },
 
@@ -24,7 +30,16 @@ const ElementsList = React.createClass({
       <Nav stacked className="synthesis__list">
         {
           this.props.elements.map((element) => {
-            return <ElementListItem key={element.id} element={element} showBreadcrumb={this.props.showBreadcrumb} />;
+            return (
+              <ElementListItem
+                key={element.id}
+                element={element}
+                showBreadcrumb={this.props.showBreadcrumb}
+                showStatus={this.props.showStatus}
+                showNotation={this.props.showNotation}
+                hasLink={this.props.hasLink}
+              />
+            );
           })
         }
       </Nav>

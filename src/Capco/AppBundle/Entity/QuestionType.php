@@ -5,28 +5,27 @@ namespace Capco\AppBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * QuestionType
+ * QuestionType.
  *
  * @ORM\Table(name="question_type")
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\QuestionTypeRepository")
  */
 class QuestionType
 {
-
-    const QUESTION_TYPE_SIMPLE_TEXT     = 0;
-    const QUESTION_TYPE_MULTILINE_TEXT  = 1;
-    const QUESTION_TYPE_FILE            = 2;
-    const QUESTION_TYPE_ADDRESS         = 3;
+    const QUESTION_TYPE_SIMPLE_TEXT = 0;
+    const QUESTION_TYPE_MULTILINE_TEXT = 1;
+    const QUESTION_TYPE_FILE = 2;
+    const QUESTION_TYPE_ADDRESS = 3;
 
     public static $questionTypes = [
-        self::QUESTION_TYPE_SIMPLE_TEXT    => 'question_type.types.simple_text',
+        self::QUESTION_TYPE_SIMPLE_TEXT => 'question_type.types.simple_text',
         self::QUESTION_TYPE_MULTILINE_TEXT => 'question_type.types.multiline_test',
-        self::QUESTION_TYPE_FILE           => 'question_type.types.file',
-        self::QUESTION_TYPE_ADDRESS        => 'question_type.types.address',
+        self::QUESTION_TYPE_FILE => 'question_type.types.file',
+        self::QUESTION_TYPE_ADDRESS => 'question_type.types.address',
     ];
 
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
@@ -41,11 +40,10 @@ class QuestionType
      */
     private $type;
 
-
     /**
-     * Get id
+     * Get id.
      *
-     * @return integer 
+     * @return int
      */
     public function getId()
     {
@@ -53,21 +51,23 @@ class QuestionType
     }
 
     /**
-     * Set type
+     * Set type.
      *
      * @param string $type
+     *
      * @return QuestionType
      */
     public function setType($type)
     {
         $this->type = $type;
+
         return $this;
     }
 
     /**
-     * Get type
+     * Get type.
      *
-     * @return string 
+     * @return string
      */
     public function getType()
     {

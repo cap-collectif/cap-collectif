@@ -25,9 +25,11 @@ class ConsultationStepsController extends FOSRestController
      * @ParamConverter("project", options={"mapping": {"projectId": "id"}})
      * @ParamConverter("step", options={"mapping": {"stepId": "id"}})
      * @View(statusCode=201, serializerGroups={})
-     * @param Request $request
-     * @param Project $project
+     *
+     * @param Request          $request
+     * @param Project          $project
      * @param ConsultationStep $step
+     *
      * @return \FOS\RestBundle\View\View
      */
     public function postOpinionAction(Request $request, Project $project, ConsultationStep $step)

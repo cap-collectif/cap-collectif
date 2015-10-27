@@ -9,19 +9,18 @@ use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
- * ProposalForm
+ * ProposalForm.
  *
  * @ORM\Table(name="proposal_form")
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\ProposalFormRepository")
  */
 class ProposalForm
 {
-
     use TimestampableTrait;
     use SluggableTitleTrait;
 
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
@@ -44,7 +43,6 @@ class ProposalForm
      **/
     private $step;
 
-
     /**
      * @var ArrayCollection
      *
@@ -66,7 +64,6 @@ class ProposalForm
      */
     protected $updatedAt;
 
-
     /**
      * Constructor.
      */
@@ -76,9 +73,9 @@ class ProposalForm
     }
 
     /**
-     * Get id
+     * Get id.
      *
-     * @return integer 
+     * @return int
      */
     public function getId()
     {
@@ -86,21 +83,23 @@ class ProposalForm
     }
 
     /**
-     * Set description
+     * Set description.
      *
      * @param string $description
+     *
      * @return ProposalForm
      */
     public function setDescription($description)
     {
         $this->description = $description;
+
         return $this;
     }
 
     /**
-     * Get description
+     * Get description.
      *
-     * @return string 
+     * @return string
      */
     public function getDescription()
     {
@@ -117,11 +116,13 @@ class ProposalForm
 
     /**
      * @param ArrayCollection $proposals
+     *
      * @return $this
      */
     public function setProposals(ArrayCollection $proposals)
     {
         $this->proposals = $proposals;
+
         return $this;
     }
 
@@ -135,11 +136,13 @@ class ProposalForm
 
     /**
      * @param ArrayCollection $questions
+     *
      * @return $this
      */
     public function setQuestions(ArrayCollection $questions)
     {
         $this->questions = $questions;
+
         return $this;
     }
 
@@ -153,11 +156,13 @@ class ProposalForm
 
     /**
      * @param CollectStep $step
+     *
      * @return $this
      */
     public function setStep($step)
     {
         $this->step = $step;
+
         return $this;
     }
 }

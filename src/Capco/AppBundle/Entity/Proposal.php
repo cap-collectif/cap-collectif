@@ -3,7 +3,6 @@
 namespace Capco\AppBundle\Entity;
 
 use Capco\AppBundle\Model\CommentableInterface;
-use Capco\AppBundle\Resolver\ProposalResolver;
 use Capco\AppBundle\Traits\CommentableTrait;
 use Capco\AppBundle\Traits\EnableTrait;
 use Capco\AppBundle\Traits\SluggableTitleTrait;
@@ -15,7 +14,6 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Validator\Constraints as Assert;
-use Capco\AppBundle\Validator\Constraints as CapcoAssert;
 
 /**
  * Proposal.
@@ -60,7 +58,7 @@ class Proposal implements CommentableInterface
     protected $updatedAt;
 
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="rating", type="integer", nullable=true)
      */
@@ -124,11 +122,11 @@ class Proposal implements CommentableInterface
      */
     public function __construct()
     {
-        $this->votes         = new ArrayCollection();
-        $this->comments      = new ArrayCollection();
-        $this->voteCount     = 0;
+        $this->votes = new ArrayCollection();
+        $this->comments = new ArrayCollection();
+        $this->voteCount = 0;
         $this->commentsCount = 0;
-        $this->updatedAt     = new \Datetime();
+        $this->updatedAt = new \Datetime();
     }
 
     public function __toString()
@@ -139,7 +137,6 @@ class Proposal implements CommentableInterface
             return 'New proposal';
         }
     }
-
 
     /**
      * @return int
@@ -159,11 +156,13 @@ class Proposal implements CommentableInterface
 
     /**
      * @param string $body
+     *
      * @return $this
      */
     public function setBody($body)
     {
         $this->body = $body;
+
         return $this;
     }
 
@@ -177,11 +176,13 @@ class Proposal implements CommentableInterface
 
     /**
      * @param int $rating
+     *
      * @return $this
      */
     public function setRating($rating)
     {
         $this->rating = $rating;
+
         return $this;
     }
 
@@ -195,11 +196,13 @@ class Proposal implements CommentableInterface
 
     /**
      * @param string $annotation
+     *
      * @return $this
      */
     public function setAnnotation($annotation)
     {
         $this->annotation = $annotation;
+
         return $this;
     }
 
@@ -213,12 +216,14 @@ class Proposal implements CommentableInterface
 
     /**
      * @param Theme $theme
+     *
      * @return $this
      */
     public function setTheme(Theme $theme)
     {
         $this->theme = $theme;
         $theme->addProposal($this);
+
         return $this;
     }
 
@@ -232,11 +237,13 @@ class Proposal implements CommentableInterface
 
     /**
      * @param ArrayCollection $votes
+     *
      * @return $this
      */
     public function setVotes($votes)
     {
         $this->votes = $votes;
+
         return $this;
     }
 
@@ -250,11 +257,13 @@ class Proposal implements CommentableInterface
 
     /**
      * @param User $author
+     *
      * @return $this
      */
     public function setAuthor(User $author)
     {
         $this->author = $author;
+
         return $this;
     }
 
@@ -268,11 +277,13 @@ class Proposal implements CommentableInterface
 
     /**
      * @param ProposalForm $proposalForm
+     *
      * @return $this
      */
     public function setProposalForm(ProposalForm $proposalForm)
     {
         $this->proposalForm = $proposalForm;
+
         return $this;
     }
 
@@ -319,11 +330,13 @@ class Proposal implements CommentableInterface
 
     /**
      * @param ArrayCollection $proposalResponses
+     *
      * @return $this
      */
     public function setProposalResponses($proposalResponses)
     {
         $this->proposalResponses = $proposalResponses;
+
         return $this;
     }
 }

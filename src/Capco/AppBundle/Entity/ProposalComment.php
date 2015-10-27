@@ -43,6 +43,7 @@ class ProposalComment extends AbstractComment
     {
         $this->proposal = $proposal;
         $proposal->addComment($this);
+
         return $this;
     }
 

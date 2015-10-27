@@ -241,7 +241,7 @@ class CreatePJLFromCsvCommand extends ContainerAwareCommand
              ->find('capco:load-base-data')
              ->run(new ArrayInput([
                     'command' => 'capco:load-base-data',
-                    '--force' => true
+                    '--force' => true,
                 ]), $output);
 
         $this->toggleFeatures();

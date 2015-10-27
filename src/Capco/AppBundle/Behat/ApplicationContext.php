@@ -50,10 +50,9 @@ class ApplicationContext extends UserContext
     public function clearLocalStorage()
     {
         $this->getSession()->getDriver()->evaluateScript(
-            "localStorage.clear();"
+            'localStorage.clear();'
         );
     }
-
 
     /**
      * @AfterSuite

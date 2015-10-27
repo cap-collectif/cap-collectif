@@ -137,6 +137,7 @@ class ProjectAdmin extends Admin
         ;
 
         $formMapper
+            ->tab('General')
             // Content
             ->with('admin.fields.project.group_content')
             ->add('title', null, array(
@@ -218,8 +219,10 @@ class ProjectAdmin extends Admin
                 'required' => false,
             ])
             ->end()
+            ->end()
 
             // Steps
+            ->tab('Steps')
             ->with('admin.fields.project.group_steps')
             ->add('steps', 'sonata_type_collection', array(
                 'label' => 'admin.fields.project.steps',
@@ -230,6 +233,7 @@ class ProjectAdmin extends Admin
                 'inline' => 'table',
                 'sortable' => 'position',
             ))
+            ->end()
             ->end()
         ;
     }
@@ -262,7 +266,7 @@ class ProjectAdmin extends Admin
             ])
             ->add('Cover', null, [
                 'template' => 'CapcoAdminBundle:Project:cover_show_field.html.twig',
-                'label'    => 'admin.fields.project.cover'
+                'label' => 'admin.fields.project.cover',
             ])
             ->add('video', null, [
                 'label' => 'admin.fields.project.video',
@@ -306,7 +310,7 @@ class ProjectAdmin extends Admin
         $showMapper
             ->with('admin.fields.project.proposals', ['class' => 'col-md-9'])
             ->add('proposals', null, [
-                'label'    => false,
+                'label' => false,
                 'template' => 'CapcoAdminBundle:Project:proposals_show_field.html.twig',
             ])
             ->end();

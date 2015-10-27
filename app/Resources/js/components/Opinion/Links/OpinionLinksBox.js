@@ -16,7 +16,7 @@ const OpinionLinksBox = React.createClass({
 
   getInitialState() {
     return {
-      links: this.props.opinion.connections || [],
+      links: this.props.opinion.connections,
       isLoading: false,
       filter: 'last',
     };

@@ -37,6 +37,7 @@ class ProposalVote extends AbstractVote
     {
         $this->proposal = $proposal;
         $proposal->addVote($this);
+
         return $this;
     }
 

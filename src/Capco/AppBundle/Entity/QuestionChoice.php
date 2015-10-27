@@ -5,7 +5,7 @@ namespace Capco\AppBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * QuestionChoice
+ * QuestionChoice.
  *
  * @ORM\Table(name="question_choice")
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\QuestionChoiceRepository")
@@ -13,7 +13,7 @@ use Doctrine\ORM\Mapping as ORM;
 class QuestionChoice
 {
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
@@ -29,11 +29,10 @@ class QuestionChoice
      */
     private $question;
 
-
     /**
-     * Get id
+     * Get id.
      *
-     * @return integer 
+     * @return int
      */
     public function getId()
     {
@@ -50,11 +49,13 @@ class QuestionChoice
 
     /**
      * @param Question $question
+     *
      * @return $this
      */
     public function setQuestion(Question $question)
     {
         $this->question = $question;
+
         return $this;
     }
 }

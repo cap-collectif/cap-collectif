@@ -18,6 +18,7 @@ class FeaturesController extends FOSRestController
         $response = $this->handleView($view);
         $response->setPublic();
         $response->setSharedMaxAge(60);
+
         return $response;
     }
 }

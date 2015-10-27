@@ -2,8 +2,6 @@
 
 namespace Capco\AppBundle\Resolver;
 
-use Capco\AppBundle\Entity\Proposals;
-
 class ProposalResolver
 {
     private $urlResolver;

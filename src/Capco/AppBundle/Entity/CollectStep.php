@@ -4,7 +4,6 @@ namespace Capco\AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use JMS\Serializer\Annotation as Serializer;
-use Capco\AppBundle\Entity\ProposalForm;
 
 /**
  * Class CollectStep.
@@ -15,13 +14,11 @@ use Capco\AppBundle\Entity\ProposalForm;
  */
 class CollectStep extends AbstractStep
 {
-
     /**
      * @var
      * @ORM\OneToOne(targetEntity="Capco\AppBundle\Entity\ProposalForm", mappedBy="step", cascade={"persist", "remove"}, orphanRemoval=true)
      */
     private $proposalForm;
-
 
     public function __construct()
     {
@@ -47,5 +44,4 @@ class CollectStep extends AbstractStep
     {
         return $this->proposalForm;
     }
-
 }

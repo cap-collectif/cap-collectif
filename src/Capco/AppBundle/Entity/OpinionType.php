@@ -699,6 +699,7 @@ class OpinionType
 
     /**
      * @param mixed $consultationStepType
+     *
      * @return $this
      */
     public function setConsultationStepType($consultationStepType)

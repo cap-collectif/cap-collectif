@@ -10,12 +10,18 @@ const ElementBlock = React.createClass({
   propTypes: {
     element: React.PropTypes.object.isRequired,
     showBreadcrumb: React.PropTypes.bool,
+    showStatus: React.PropTypes.bool,
+    showNotation: React.PropTypes.bool,
+    hasLink: React.PropTypes.bool,
   },
   mixins: [ReactIntl.IntlMixin],
 
   getDefaultProps() {
     return ({
       showBreadcrumb: true,
+      showStatus: true,
+      showNotation: true,
+      hasLink: true,
     });
   },
 
@@ -67,16 +73,24 @@ const ElementBlock = React.createClass({
         <div className="element__content">
           <p className="element__metadata">
             {this.renderAuthor()} {this.renderDate()}
-            <ElementNotation element={element} />
+            {
+              this.props.showNotation
+                ? <ElementNotation element={element} />
+                : null
+            }
           </p>
-          <ElementTitle element={element} link className="element__title" />
+          <ElementTitle element={element} link={this.props.hasLink} className="element__title" />
           {
             this.props.showBreadcrumb
               ? <ElementBreadcrumb element={element} />
               : null
           }
         </div>
-        {this.renderStatus()}
+        {
+          this.props.showStatus
+            ? this.renderStatus()
+            : null
+        }
       </div>
     );
   },

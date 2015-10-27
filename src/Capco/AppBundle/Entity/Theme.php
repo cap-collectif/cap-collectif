@@ -2,9 +2,6 @@
 
 namespace Capco\AppBundle\Entity;
 
-use Capco\AppBundle\Entity\Idea;
-use Capco\AppBundle\Entity\Proposal;
-use Capco\AppBundle\Entity\Project;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
@@ -354,8 +351,8 @@ class Theme
 
     /**
      * @param Project $project
-     * @return Theme
      *
+     * @return Theme
      */
     public function addProject(Project $project)
     {
@@ -370,11 +367,11 @@ class Theme
      * @param Project $project
      *
      * @return $this
-     *
      */
     public function removeProject(Project $project)
     {
         $this->projects->removeElement($project);
+
         return $this;
     }
 

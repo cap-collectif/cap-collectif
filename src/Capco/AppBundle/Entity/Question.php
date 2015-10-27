@@ -8,19 +8,18 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Question
+ * Question.
  *
  * @ORM\Table(name="question")
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\QuestionRepository")
  */
 class Question
 {
-
     use TimestampableTrait;
     use SluggableTitleTrait;
 
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
@@ -67,9 +66,9 @@ class Question
     private $proposalResponses;
 
     /**
-     * Get id
+     * Get id.
      *
-     * @return integer 
+     * @return int
      */
     public function getId()
     {
@@ -77,21 +76,23 @@ class Question
     }
 
     /**
-     * Set helpText
+     * Set helpText.
      *
      * @param string $helpText
+     *
      * @return Question
      */
     public function setHelpText($helpText)
     {
         $this->helpText = $helpText;
+
         return $this;
     }
 
     /**
-     * Get helpText
+     * Get helpText.
      *
-     * @return string 
+     * @return string
      */
     public function getHelpText()
     {
@@ -108,11 +109,13 @@ class Question
 
     /**
      * @param ArrayCollection $questionChoices
+     *
      * @return $this
      */
     public function setQuestionChoices($questionChoices)
     {
         $this->questionChoices = $questionChoices;
+
         return $this;
     }
 
@@ -126,11 +129,13 @@ class Question
 
     /**
      * @param ArrayCollection $proposalResponses
+     *
      * @return $this
      */
     public function setProposalResponses($proposalResponses)
     {
         $this->proposalResponses = $proposalResponses;
+
         return $this;
     }
 
@@ -144,11 +149,13 @@ class Question
 
     /**
      * @param ProposalForm $proposalForm
+     *
      * @return $this
      */
     public function setProposalForm(ProposalForm $proposalForm)
     {
         $this->proposalForm = $proposalForm;
+
         return $this;
     }
 
@@ -162,11 +169,13 @@ class Question
 
     /**
      * @param QuestionType $questionType
+     *
      * @return $this
      */
     public function setQuestionType(QuestionType $questionType)
     {
         $this->questionType = $questionType;
+
         return $this;
     }
 }

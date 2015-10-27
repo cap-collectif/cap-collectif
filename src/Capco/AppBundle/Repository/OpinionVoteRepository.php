@@ -11,7 +11,7 @@ use Doctrine\ORM\EntityRepository;
 class OpinionVoteRepository extends EntityRepository
 {
     /**
-     * Get enabled by consultation step
+     * Get enabled by consultation step.
      *
      * @param $step
      *

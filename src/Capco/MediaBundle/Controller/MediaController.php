@@ -3,7 +3,6 @@
 namespace Capco\MediaBundle\Controller;
 
 use Sonata\MediaBundle\Controller\MediaController as BaseController;
-
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -12,13 +11,13 @@ class MediaController extends BaseController
     /**
      * This action applies a given filter to a given image,
      * optionally saves the image and
-     * outputs it to the browser at the same time
+     * outputs it to the browser at the same time.
      *
      * Note by bjaillot: duplicate from BaseController::liipImagineFilterAction
      * where the initial preg_match only handle jpg
      *
-     * @param string  $path
-     * @param string  $filter
+     * @param string $path
+     * @param string $filter
      *
      * @return Response
      */
@@ -41,7 +40,7 @@ class MediaController extends BaseController
         }
 
         $provider = $this->getProvider($media);
-        $file     = $provider->getReferenceFile($media);
+        $file = $provider->getReferenceFile($media);
 
         // load the file content from the abstracted file system
         $tmpFile = sprintf('%s.%s', tempnam(sys_get_temp_dir(), 'sonata_media_liip_imagine'), $media->getExtension());

@@ -44,7 +44,7 @@ abstract class AbstractStep
      */
     public static $stepStatus = [
         'closed' => 'step.status.closed',
-        'open'   => 'step.status.open',
+        'open' => 'step.status.open',
         'future' => 'step.status.future',
     ];
 

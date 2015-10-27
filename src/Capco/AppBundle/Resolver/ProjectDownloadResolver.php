@@ -5,7 +5,6 @@ namespace Capco\AppBundle\Resolver;
 use Capco\AppBundle\Entity\Argument;
 use Capco\AppBundle\Entity\ConsultationStep;
 use Capco\AppBundle\Entity\Opinion;
-use Capco\AppBundle\Entity\OpinionAppendix;
 use Capco\AppBundle\Entity\OpinionType;
 use Capco\AppBundle\Entity\OpinionVersion;
 use Capco\AppBundle\Entity\Source;
@@ -438,10 +437,11 @@ class ProjectDownloadResolver
         if (count($opinion->getAppendices()) > 0) {
             $body .= "\n".$this->translator->trans('project_download.values.appendices.title', [], 'CapcoAppBundle');
             foreach ($opinion->getAppendices() as $app) {
-                $body .= "\n".$app->getAppendixType()->getTitle()." :";
+                $body .= "\n".$app->getAppendixType()->getTitle().' :';
                 $body .= "\n".$this->formatText($app->getBody());
             }
         }
+
         return $body;
     }
 
@@ -455,7 +455,7 @@ class ProjectDownloadResolver
             $parents[] = $current->getTitle();
         }
 
-        return implode (' - ', array_reverse($parents));
+        return implode(' - ', array_reverse($parents));
     }
 
     private function getSourceLink($source)

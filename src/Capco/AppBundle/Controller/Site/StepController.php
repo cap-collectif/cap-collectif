@@ -14,7 +14,6 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
-use Doctrine\Common\Collections\ArrayCollection;
 
 class StepController extends Controller
 {
@@ -94,8 +93,9 @@ class StepController extends Controller
      * @ParamConverter("step", class="CapcoAppBundle:CollectStep", options={"mapping" = {"stepSlug": "slug"}})
      * @ParamConverter("project", class="CapcoAppBundle:Project", options={"mapping" = {"projectSlug": "slug"}, "repository_method": "getOne", "map_method_signature": true})
      *
-     * @param Project $project
+     * @param Project     $project
      * @param CollectStep $step
+     *
      * @return array
      */
     public function showCollectAction(Project $project, CollectStep $step)
@@ -110,8 +110,8 @@ class StepController extends Controller
         }
 
         return [
-            'project'      => $project,
-            'currentStep'  => $step,
+            'project' => $project,
+            'currentStep' => $step,
         ];
     }
 
