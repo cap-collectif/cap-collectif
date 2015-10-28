@@ -84,8 +84,6 @@
             {{ render(controller('CapcoAppBundle:Site/Homepage:socialNetworks', {'section': section})) }}
         {% elseif section.type == 'custom' %}
             {% include '@CapcoApp/Homepage/custom_section.html.twig' with {'section': section} only %}
-        {% elseif section.type == 'budgets' %}
-            {{ render(controller('CapcoAppBundle:Site/Homepage:lastProposals', {'max': section.nbObjects, 'offset': 0, 'section': section})) }}
         {% elseif section.type == 'figures' %}
         {% endif %}
 

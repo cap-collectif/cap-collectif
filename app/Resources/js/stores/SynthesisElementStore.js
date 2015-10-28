@@ -19,7 +19,6 @@ class SynthesisElementStore extends BaseStore {
       'publishedTree': [],
       'notIgnoredTree': [],
       'fromDivision': [],
-      'search': [],
     };
     this._counts = {
       'new': 0,
@@ -30,7 +29,6 @@ class SynthesisElementStore extends BaseStore {
       'publishedTree': 0,
       'notIgnoredTree': 0,
       'fromDivision': 0,
-      'search': 0,
     };
     this._expandedItems = {
       'nav': {
@@ -54,7 +52,6 @@ class SynthesisElementStore extends BaseStore {
       'publishedTree': false,
       'notIgnoredTree': false,
       'fromDivision': false,
-      'search': false,
     };
     this._messages = {
       errors: [],
@@ -159,19 +156,6 @@ class SynthesisElementStore extends BaseStore {
       break;
     case Actions.COMMENT_ELEMENT:
       this._element.comment = action.comment;
-      this._resetInboxSync();
-      this._isProcessing = true;
-      this._resetMessages();
-      this.emitChange();
-      break;
-    case Actions.DESCRIBE_ELEMENT:
-      element = this._element && action.elementId === this._element.id
-        ? this._element
-        : this.getElementInTreeById(this._elements.notIgnoredTree, action.elementId)
-      ;
-      if (element) {
-        element.description = action.description;
-      }
       this._resetInboxSync();
       this._isProcessing = true;
       this._resetMessages();

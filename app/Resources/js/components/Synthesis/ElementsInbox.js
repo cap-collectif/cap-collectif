@@ -7,16 +7,14 @@ const Pagination = 15;
 
 const ElementsInbox = React.createClass({
   propTypes: {
-    synthesis: React.PropTypes.object.isRequired,
     params: React.PropTypes.object,
-    searchTerm: React.PropTypes.string,
+    synthesis: React.PropTypes.object,
   },
   mixins: [ReactIntl.IntlMixin],
 
   getDefaultProps() {
     return {
       params: {type: 'new'},
-      searchTerm: '',
     };
   },
 

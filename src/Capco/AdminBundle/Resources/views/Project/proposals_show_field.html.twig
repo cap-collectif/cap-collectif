@@ -3,7 +3,6 @@
     <th>{{ 'admin.fields.project.proposals_table.title'|trans({}, 'SonataAdminBundle') }}</th>
     <th>{{ 'admin.fields.project.proposals_table.author'|trans({}, 'SonataAdminBundle') }}</th>
     <th>{{ 'admin.fields.project.proposals_table.enabled'|trans({}, 'SonataAdminBundle') }}</th>
-    <th>{{ 'admin.fields.project.proposals_table.isTrashed'|trans({}, 'SonataAdminBundle') }}</th>
     <th>{{ 'admin.fields.project.proposals_table.updatedAt'|trans({}, 'SonataAdminBundle') }}</th>
     <th>{{ 'admin.fields.project.proposals_table.actions'|trans({}, 'SonataAdminBundle') }}</th>
 
@@ -14,15 +13,6 @@
             <td>
                 <label class="label label{% if proposal.enabled %}-success{% else %}-danger{% endif %}">
                     {% if proposal.enabled %}
-                        {{ 'admin.fields.project.proposals_table.yes'|trans({}, 'SonataAdminBundle') }}
-                    {% else %}
-                        {{ 'admin.fields.project.proposals_table.no'|trans({}, 'SonataAdminBundle') }}
-                    {% endif %}
-                </label>
-            </td>
-            <td>
-                <label class="label label{% if proposal.isTrashed %}-success{% else %}-danger{% endif %}">
-                    {% if proposal.isTrashed %}
                         {{ 'admin.fields.project.proposals_table.yes'|trans({}, 'SonataAdminBundle') }}
                     {% else %}
                         {{ 'admin.fields.project.proposals_table.no'|trans({}, 'SonataAdminBundle') }}
