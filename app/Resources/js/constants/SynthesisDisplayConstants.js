@@ -3,7 +3,7 @@ export default {
   ALLOWED_RULES: {
     style: ['fontSize', 'color', 'textAlign', 'fontWeight'],
     containerStyle: ['borderTop', 'paddingTop'],
-    display: ['author', 'piechart', 'counters', 'asProgressBar', 'childrenInModal', 'subtitle', 'percentage'],
+    display: ['author', 'piechart', 'counters', 'asProgressBar', 'childrenInModal', 'subtitle', 'percentage', 'expanded'],
   },
 
   DISPLAY_SETTINGS: [
@@ -39,6 +39,11 @@ export default {
           name: 'subtitle',
           value: 'true',
         },
+        {
+          category: 'display',
+          name: 'expanded',
+          value: 'true',
+        },
       ],
     },
     {
@@ -71,6 +76,11 @@ export default {
         {
           category: 'display',
           name: 'subtitle',
+          value: 'true',
+        },
+        {
+          category: 'display',
+          name: 'expanded',
           value: 'true',
         },
       ],
@@ -156,6 +166,11 @@ export default {
           name: 'counters',
           value: true,
         },
+        {
+          category: 'display',
+          name: 'expanded',
+          value: 'true',
+        },
       ],
     },
     {
@@ -184,6 +199,11 @@ export default {
           category: 'display',
           name: 'percentage',
           value: true,
+        },
+        {
+          category: 'display',
+          name: 'expanded',
+          value: 'true',
         },
       ],
     },

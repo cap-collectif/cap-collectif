@@ -222,6 +222,7 @@ admin:
         title: Titre
         author: Auteur
         enabled: Publié
+        isTrashed: Dans la corbeille
         updatedAt: Date de mise à jour
         yes: Oui
         no: Non

@@ -77,6 +77,9 @@ export default {
             label: 'Nom',
             placeholder: 'Nom du dossier',
           },
+          description: {
+            label: 'Description',
+          },
           parent: {
             label: 'Imbriquer sous',
           },
@@ -93,6 +96,7 @@ export default {
           },
           field: {
             comment: 'Annoter',
+            description: 'Description',
             notation: 'Noter',
             parent: 'Déplacer',
             title: 'Titre',
@@ -105,6 +109,7 @@ export default {
           btn_submit: 'Modifier',
           field: {
             parent: 'Déplacer',
+            description: 'Description',
             title: 'Titre',
           },
           title: 'Modifier le dossier',
