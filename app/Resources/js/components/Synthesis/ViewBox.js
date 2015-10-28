@@ -1,4 +1,5 @@
 import ViewTree from './ViewTree';
+import LoginStore from '../../stores/LoginStore';
 
 const ViewBox = React.createClass({
   propTypes: {
@@ -7,7 +8,7 @@ const ViewBox = React.createClass({
   mixins: [ReactIntl.IntlMixin],
 
   render() {
-    if (this.props.synthesis.enabled) {
+    if (this.props.synthesis.enabled || (LoginStore.user && LoginStore.user.vip)) {
       return (
         <div className="synthesis__view">
           <ViewTree synthesis={this.props.synthesis} />

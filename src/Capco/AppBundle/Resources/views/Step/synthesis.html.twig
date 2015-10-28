@@ -44,7 +44,7 @@
 
                 {% if currentStep.synthesis == null %}
                     <p class="excerpt">{{ 'synthesis.show.no_synthesis' | trans({}, 'CapcoAppBundle') }}</p>
-                {% elseif not currentStep.synthesis.enabled %}
+                {% elseif currentStep.synthesis.enabled == false and ( app.user == null or app.user.vip == false) %}
                     <p class="excerpt">{{ 'synthesis.show.not_enabled' | trans({}, 'CapcoAppBundle') }}</p>
                 {% else %}
                     <div id="render-synthesis-view-box" data-synthesis="{{ currentStep.synthesis.id }}"></div>
