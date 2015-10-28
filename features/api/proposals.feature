@@ -32,7 +32,7 @@ Feature: Proposal Restful Api
 """
 
   Scenario: Anonymous API client wants to get all proposals from a ProposalForm
-    When I send a GET request to "/api/proposal_forms/1/proposals?order=favorable&limit=1"
+    When I send a GET request to "/api/proposal_forms/1/proposals"
     Then the JSON response should match:
 """
 [
@@ -40,23 +40,29 @@ Feature: Proposal Restful Api
     "id": @integer@,
     "title": @string@,
     "body": @string@,
-    "author": @...@,
-    "_links": @...@,
+    "author": {
+      "username": "welcomattic",
+      "displayName": "welcomattic",
+      "uniqueId": "welcomattic",
+      "isAdmin": true,
+      "media": @...@,
+      "vip": true,
+      "_links": {
+        "profile": @string@,
+        "settings": @string@
+      }
+    },
+    "_links": {
+      "show": @string@
+    },
     "votes_count": @integer@,
     "comments_count": @integer@,
     "created_at": "@string@.isDateTime()",
     "updated_at": "@string@.isDateTime()"
-  }
+  },
+  @...@
 ]
 """
-
-  Scenario: Anonymous API client wants to get all proposals from a ProposalForm
-    When I send a GET request to "/api/proposal_forms/1/proposals?order=favorable&limit=1&theme=4"
-    Then the JSON response should match:
-"""
-[]
-"""
-
 
   @database
   Scenario: logged in API client wants to add a proposal

@@ -17,7 +17,6 @@ class ProposalType extends AbstractType
         $builder
             ->add('title', null, ['required' => true])
             ->add('body', null, ['required' => true])
-            ->add('theme', null, ['required' => true])
         ;
     }
 

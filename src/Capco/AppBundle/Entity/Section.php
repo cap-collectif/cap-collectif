@@ -75,11 +75,11 @@ class Section
             'body' => false,
             'nbObjects' => false,
         ],
-        'figures' => [
+        'budgets' => [
             'title' => true,
             'teaser' => true,
             'body' => false,
-            'nbObjects' => false,
+            'nbObjects' => true,
         ],
         'custom' => [
             'title' => true,
