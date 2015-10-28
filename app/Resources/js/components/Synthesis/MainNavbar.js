@@ -10,7 +10,19 @@ const Input = ReactBootstrap.Input;
 const Button = ReactBootstrap.Button;
 
 const MainNavbar = React.createClass({
-  mixins: [ReactIntl.IntlMixin],
+  mixins: [ReactIntl.IntlMixin, ReactRouter.Navigation, React.addons.LinkedStateMixin],
+
+  getInitialState() {
+    return {
+      searchTerm: '',
+    };
+  },
+
+  search() {
+    if (this.state.searchTerm !== '') {
+      this.transitionTo('search', {'term': this.state.searchTerm});
+    }
+  },
 
   renderBrand() {
     return (
@@ -21,10 +33,10 @@ const MainNavbar = React.createClass({
   },
 
   renderSearchForm() {
-    const searchButton = <Button style={{paddingTop: '7px'}} className="btn-gray" ><i className="cap cap-magnifier"></i></Button>;
+    const searchButton = <Button onClick={this.search.bind(null, this)} style={{paddingTop: '7px'}} className="btn-gray" ><i className="cap cap-magnifier"></i></Button>;
     return (
-      <form className="navbar-form navbar-right" style={{marginRight: '15px', paddingRight: 0}} >
-        <Input type="text" placeholder={this.getIntlMessage('edition.navbar.search')} buttonAfter={searchButton} />
+      <form className="navbar-form navbar-right" style={{marginRight: '15px', paddingRight: 0}} onSubmit={this.search.bind(null, this)} >
+        <Input type="text" placeholder={this.getIntlMessage('edition.navbar.search')} buttonAfter={searchButton} valueLink={this.linkState('searchTerm')} />
       </form>
     );
   },

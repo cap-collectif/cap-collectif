@@ -45,37 +45,4 @@ class ProposalRepository extends EntityRepository
 
         return $qb->getQuery()->getOneOrNullResult();
     }
-
-    /**
-     * Get last proposals.
-     *
-     * @param int $limit
-     * @param int $offset
-     *
-     * @return mixed
-     */
-    public function getLast($limit = 1, $offset = 0)
-    {
-        $qb = $this->getIsEnabledQueryBuilder()
-            ->select('proposal')
-            ->leftJoin('proposal.author', 'a')
-            ->leftJoin('a.Media', 'm')
-            ->leftJoin('proposal.theme', 't')
-            ->andWhere('proposal.isTrashed = :notTrashed')
-            ->setParameter('notTrashed', false)
-            ->addOrderBy('proposal.createdAt', 'DESC')
-            ->addGroupBy('proposal.id');
-
-        if ($limit) {
-            $qb->setMaxResults($limit);
-        }
-
-        if ($offset) {
-            $qb->setFirstResult($offset);
-        }
-
-        return $qb
-            ->getQuery()
-            ->execute();
-    }
 }
