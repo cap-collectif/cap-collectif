@@ -18,8 +18,15 @@ const ProposalPageHeader = React.createClass({
           <UserAvatar user={proposal.author} />
           <div className="media-body">
             <p className="media--aligned excerpt">
-              <UserLink user={proposal.author} /> dans <a href="/themes/environnement">Environnement</a>, le
-              { ' ' }
+              <UserLink user={proposal.author} />
+              {proposal.theme
+                ? { this.getIntlMessage('global.in') }
+                  { ' ' }
+                  <a href={proposal.theme._links.show}>{proposal.theme.title}</a>
+                :  null
+              }
+              { ', ' }
+              { this.getIntlMessage('global.the') }
               <FormattedDate
                 value={moment(proposal.created_at)}
                 day="numeric" month="long" year="numeric"
@@ -35,6 +42,9 @@ const ProposalPageHeader = React.createClass({
           <li>
             <div className="value">{proposal.comments_count}</div>
             <div className="excerpt category">commentaires</div>
+          </li>
+          <li>
+            {proposal.status}
           </li>
         </ul>
       </div>

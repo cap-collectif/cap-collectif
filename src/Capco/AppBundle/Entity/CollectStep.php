@@ -23,13 +23,7 @@ class CollectStep extends AbstractStep
     private $proposalForm;
 
     /**
-     * @var ArrayCollection
-     * @ORM\ManyToMany(targetEntity="Capco\AppBundle\Entity\Status")
-     * @ORM\JoinTable(
-     *     name="collect_step_statuses",
-     *     joinColumns={@ORM\JoinColumn(name="collect_step_id", referencedColumnName="id")},
-     *     inverseJoinColumns={@ORM\JoinColumn(name="status_id", referencedColumnName="id")}
-     * )
+     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\Status", mappedBy="step", cascade={"persist"})
      **/
     private $statuses;
 
@@ -37,6 +31,7 @@ class CollectStep extends AbstractStep
     public function __construct()
     {
         parent::__construct();
+
         $this->statuses = new ArrayCollection();
     }
 

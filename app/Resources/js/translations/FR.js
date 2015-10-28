@@ -235,6 +235,8 @@ export default {
       login: 'Connexion',
       comment: 'Commentaire',
       name: 'Nom ',
+      the: 'le',
+      in: 'dans',
       fullname: 'Nom complet *',
       hidden_email: 'Adresse électronique (cachée) *',
       advanced_filters: 'Filtres avancés',

@@ -9,6 +9,12 @@ Feature: Proposal Restful Api
   "id": @integer@,
   "title": @string@,
   "body": @string@,
+  "theme": {
+    "title": @string@,
+    "_links": {
+      "show": @string@
+    }
+  },
   "author": {
     "username": "welcomattic",
     "displayName": "welcomattic",
@@ -40,6 +46,7 @@ Feature: Proposal Restful Api
     "id": @integer@,
     "title": @string@,
     "body": @string@,
+    "theme": @...@,
     "author": @...@,
     "_links": @...@,
     "votes_count": @integer@,
@@ -51,7 +58,7 @@ Feature: Proposal Restful Api
 """
 
   Scenario: Anonymous API client wants to get all proposals from a ProposalForm
-    When I send a GET request to "/api/proposal_forms/1/proposals?order=favorable&limit=1&theme=4"
+    When I send a GET request to "/api/proposal_forms/1/proposals?theme=4"
     Then the JSON response should match:
 """
 []

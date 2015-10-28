@@ -152,6 +152,7 @@ class Theme
         $this->ideas = new ArrayCollection();
         $this->events = new ArrayCollection();
         $this->posts = new ArrayCollection();
+        $this->proposals = new ArrayCollection();
         $this->updatedAt = new \Datetime();
     }
 
@@ -159,9 +160,9 @@ class Theme
     {
         if ($this->id) {
             return $this->getTitle();
-        } else {
-            return 'New theme';
         }
+
+        return 'New theme';
     }
 
     /**

@@ -78,6 +78,18 @@ class Proposal implements CommentableInterface
     private $theme = null;
 
     /**
+     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\District", inversedBy="proposals", cascade={"persist"})
+     * @ORM\JoinColumn(name="district_id", referencedColumnName="id", nullable=true, onDelete="SET NULL")
+     */
+    private $district = null;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Status", cascade={"persist"})
+     * @ORM\JoinColumn(name="status_id", referencedColumnName="id", nullable=false)
+     */
+    private $status;
+
+    /**
      * @var string
      *
      * @ORM\ManyToOne(targetEntity="Capco\UserBundle\Entity\User", inversedBy="proposals")
@@ -92,13 +104,6 @@ class Proposal implements CommentableInterface
      * @ORM\JoinColumn(name="proposal_form_id", referencedColumnName="id", onDelete="CASCADE")
      */
     protected $proposalForm;
-
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="vote_count", type="integer")
-     */
-    private $voteCount = 0;
 
     /**
      * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\ProposalVote", mappedBy="proposal", cascade={"persist", "remove"}, orphanRemoval=true)
@@ -125,7 +130,6 @@ class Proposal implements CommentableInterface
         $this->votes = new ArrayCollection();
         $this->comments = new ArrayCollection();
         $this->proposalResponses = new ArrayCollection();
-        $this->voteCount = 0;
         $this->commentsCount = 0;
         $this->updatedAt = new \Datetime();
     }
@@ -134,9 +138,9 @@ class Proposal implements CommentableInterface
     {
         if ($this->getId()) {
             return $this->getTitle();
-        } else {
-            return 'New proposal';
         }
+
+        return 'New proposal';
     }
 
     /**
@@ -229,26 +233,6 @@ class Proposal implements CommentableInterface
     }
 
     /**
-     * @return ArrayCollection
-     */
-    public function getVotes()
-    {
-        return $this->votes;
-    }
-
-    /**
-     * @param ArrayCollection $votes
-     *
-     * @return $this
-     */
-    public function setVotes($votes)
-    {
-        $this->votes = $votes;
-
-        return $this;
-    }
-
-    /**
      * @return string
      */
     public function getAuthor()
@@ -328,7 +312,7 @@ class Proposal implements CommentableInterface
     {
         $this->proposalResponses->removeElement($proposalResponse);
     }
-    
+
     /**
      * @return ArrayCollection
      */

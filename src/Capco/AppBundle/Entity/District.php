@@ -7,6 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Validator\Constraints as Assert;
 use Capco\AppBundle\Validator\Constraints as CapcoAssert;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * District.
@@ -43,10 +44,16 @@ class District
      */
     private $updatedAt;
 
+    /**
+     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\Proposal", mappedBy="status", cascade={"persist", "remove"})
+     */
+    private $proposals;
+
 
     public function __construct()
     {
         $this->updatedAt = new \Datetime();
+        $this->proposals = new ArrayCollection();
     }
 
     public function __toString()
@@ -82,5 +89,35 @@ class District
         $this->name = $name;
         return $this;
     }
+
+    public function getProposals()
+    {
+        return $this->proposals;
+    }
+
+    /**
+     * Add proposal.
+     *
+     * @param Proposal $proposal
+     */
+    public function addProposal(Proposal $proposal)
+    {
+        if (!$this->proposals->contains($proposal)) {
+            $this->proposals[] = $proposal;
+        }
+
+        return $this;
+    }
+
+    /**
+     * Remove proposal.
+     *
+     * @param Proposal $proposal
+     */
+    public function removeProposal(Proposal $proposal)
+    {
+        $this->proposals->removeElement($proposal);
+    }
+
 
 }

@@ -1,7 +1,13 @@
 Capco\AppBundle\Entity\Status:
     status1:
         name: En cours
+        position: 0
+        step: @collectstep1
     status2:
         name: Approuvé
+        position: 1
+        step: @collectstep1
     status3:
         name: Rejeté
+        position: 2
+        step: @collectstep1

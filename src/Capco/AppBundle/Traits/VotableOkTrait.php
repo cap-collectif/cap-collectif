@@ -15,6 +15,18 @@ trait VotableOkTrait
      */
     protected $voteCountOk = 0;
 
+    public function getVotes()
+    {
+        return $this->votes;
+    }
+
+    public function setVotes(ArrayCollection $votes)
+    {
+        $this->votes = $votes;
+
+        return $this;
+    }
+
     public function incrementVoteOkCount()
     {
         ++$this->voteCountOk;

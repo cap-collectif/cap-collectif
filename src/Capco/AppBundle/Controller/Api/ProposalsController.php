@@ -189,6 +189,11 @@ class ProposalsController extends FOSRestController
      */
     public function postProposalCommentsAction(Request $request, ProposalForm $form, Proposal $proposal)
     {
+
+        if (!$proposal->canComment()) {
+            throw new BadRequestHttpException("Error Processing Request", 1);
+        }
+
         $user = $this->getUser();
 
         $comment = (new ProposalComment())
