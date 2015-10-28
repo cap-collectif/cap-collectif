@@ -122,6 +122,21 @@ class HomepageController extends Controller
 
     /**
      * @Cache(expires="+1 minutes", maxage="60", smaxage="60", public="true")
+     * @Template("CapcoAppBundle:Homepage:lastProposals.html.twig")
+     */
+    public function lastProposalsAction($max = 4, $offset = 0, $section = null, $alt = null)
+    {
+        $proposals = $this->getDoctrine()->getRepository('CapcoAppBundle:Proposal')->getLast($max, $offset);
+
+        return [
+            'proposals' => $proposals,
+            'section' => $section,
+            'alt' => $alt,
+        ];
+    }
+
+    /**
+     * @Cache(expires="+1 minutes", maxage="60", smaxage="60", public="true")
      * @Template("CapcoAppBundle:Homepage:lastThemes.html.twig")
      */
     public function lastThemesAction($max = 4, $offset = 0, $section = null, $alt = null)
@@ -167,6 +182,33 @@ class HomepageController extends Controller
 
         return [
             'projects' => $projects,
+            'section' => $section,
+            'alt' => $alt,
+        ];
+    }
+
+    /**
+     * @Cache(expires="+1 minutes", maxage="60", smaxage="60", public="true")
+     * @Template("CapcoAppBundle:Homepage:lastBudgets.html.twig")
+     *
+     * @param int  $max
+     * @param int  $offset
+     * @param null $section
+     * @param null $alt
+     *
+     * @return array
+     */
+    public function lastBudgetsAction($max = 3, $offset = 0, $section = null, $alt = null)
+    {
+        $collectSteps = $this->getDoctrine()->getRepository('CapcoAppBundle:CollectStep')->getLastEnabled($max, $offset);
+        $budgets = [];
+
+        foreach($collectSteps as $cs) {
+            $budgets[] = $cs->getProject();
+        }
+
+        return [
+            'budgets' => $budgets,
             'section' => $section,
             'alt' => $alt,
         ];

@@ -99,3 +99,12 @@ Capco\AppBundle\Entity\Section:
         nbObjects: null
         enabled: false
         associatedFeatures: []
+    SectionBudget:
+        type: budgets
+        title: Budget participatif
+        position: 11
+        teaser: null
+        body: null
+        nbObjects: null
+        enabled: true
+        associatedFeatures: []
