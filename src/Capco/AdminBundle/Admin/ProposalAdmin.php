@@ -98,7 +98,8 @@ class ProposalAdmin extends Admin
                 'label' => 'admin.fields.proposal.enabled',
             ])
             ->add('isTrashed', null, [
-                'label' => 'admin.fields.proposal.isTrashed',
+                'editable' => true,
+                'label'    => 'admin.fields.proposal.isTrashed',
             ])
             ->add('updatedAt', null, [
                 'label' => 'admin.fields.proposal.updated_at',
@@ -107,7 +108,6 @@ class ProposalAdmin extends Admin
                 'actions' => [
                     'show' => [],
                     'edit' => [],
-                    'delete' => [],
                 ],
             ])
         ;

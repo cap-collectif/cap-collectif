@@ -8,7 +8,7 @@ use Doctrine\DBAL\Schema\Schema;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-class Version20151027214936 extends AbstractMigration
+class Version20151016120919 extends AbstractMigration
 {
     /**
      * @param Schema $schema
@@ -18,7 +18,7 @@ class Version20151027214936 extends AbstractMigration
         // this up() migration is auto-generated, please modify it to your needs
         $this->abortIf($this->connection->getDatabasePlatform()->getName() != 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
-        $this->addSql('ALTER TABLE synthesis_element ADD description LONGTEXT DEFAULT NULL');
+        $this->addSql('ALTER TABLE proposal_response ADD updated_at DATETIME NOT NULL, ADD created_at DATETIME NOT NULL');
     }
 
     /**
@@ -29,6 +29,6 @@ class Version20151027214936 extends AbstractMigration
         // this down() migration is auto-generated, please modify it to your needs
         $this->abortIf($this->connection->getDatabasePlatform()->getName() != 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
-        $this->addSql('ALTER TABLE synthesis_element DROP description');
+        $this->addSql('ALTER TABLE proposal_response DROP updated_at, DROP created_at');
     }
 }
