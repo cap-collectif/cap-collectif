@@ -109,17 +109,6 @@ export default {
       });
   },
 
-  loadElementsByTermFromServer: (synthesis, term, offset, limit, type='all') => {
-    Fetcher
-      .get(`/syntheses/${synthesis}/elements?term=${term}&type=${type}&offset=${offset}&limit=${limit}`)
-      .then((data) => {
-        data.actionType = Actions.RECEIVE_ELEMENTS_SUCCESS;
-        data.type = 'search';
-        AppDispatcher.dispatch(data);
-        return true;
-      });
-  },
-
   loadElementsTreeFromServer: (synthesis, type, parent = null) => {
     AppDispatcher.dispatch({
       actionType: Actions.RECEIVE_ELEMENTS,
@@ -189,13 +178,6 @@ export default {
       AppDispatcher.dispatch({
         actionType: Actions.NAME_ELEMENT,
         title: data.title,
-        elementId: element,
-      });
-    }
-    if (data.description) {
-      AppDispatcher.dispatch({
-        actionType: Actions.DESCRIBE_ELEMENT,
-        description: data.description,
         elementId: element,
       });
     }

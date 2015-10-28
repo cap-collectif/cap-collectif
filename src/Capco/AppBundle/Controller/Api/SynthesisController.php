@@ -213,8 +213,8 @@ class SynthesisController extends FOSRestController
      *  }
      * )
      *
+     * @Security("has_role('ROLE_ADMIN')")
      * @ParamConverter("synthesis", options={"mapping": {"id": "id"}, "repository_method": "getOne", "map_method_signature": true})
-     * @QueryParam(name="term", nullable=true)
      * @QueryParam(name="type", nullable=true)
      * @QueryParam(name="offset", nullable=true)
      * @QueryParam(name="limit", nullable=true)
@@ -224,15 +224,10 @@ class SynthesisController extends FOSRestController
     public function getSynthesisElementsAction(ParamFetcherInterface $paramFetcher, Synthesis $synthesis)
     {
         $type = $paramFetcher->get('type');
-        $term = $paramFetcher->get('term');
         $offset = $paramFetcher->get('offset');
         $limit = $paramFetcher->get('limit');
 
-        if ($type !== 'published' && !$this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')) {
-            throw new AccessDeniedException();
-        }
-
-        return $this->get('capco.synthesis.synthesis_element_handler')->getElementsFromSynthesisByType($synthesis, $type, $term, $offset, $limit);
+        return $this->get('capco.synthesis.synthesis_element_handler')->getElementsFromSynthesisByType($synthesis, $type, $offset, $limit);
     }
 
     /**

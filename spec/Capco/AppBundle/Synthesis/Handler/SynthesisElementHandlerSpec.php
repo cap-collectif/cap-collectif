@@ -37,8 +37,7 @@ class SynthesisElementHandlerSpec extends ObjectBehavior
         $paginator->count()->willReturn(17);
 
         $type = 'all';
-        $term = null;
-        $synthesisElementRepo->getWith($synthesis, $type, $term, $offset, $limit)->willReturn($paginator)->shouldBeCalled();
+        $synthesisElementRepo->getWith($synthesis, $type, $offset, $limit)->willReturn($paginator)->shouldBeCalled();
         $this->getElementsFromSynthesisByType($synthesis, $type)->shouldBeArray();
 
     }
@@ -54,8 +53,7 @@ class SynthesisElementHandlerSpec extends ObjectBehavior
         $paginator->count()->willReturn(17);
 
         $type = 'new';
-        $term = null;
-        $synthesisElementRepo->getWith($synthesis, $type, $term, $offset, $limit)->willReturn($paginator)->shouldBeCalled();
+        $synthesisElementRepo->getWith($synthesis, $type, $offset, $limit)->willReturn($paginator)->shouldBeCalled();
         $this->getElementsFromSynthesisByType($synthesis, $type)->shouldBeArray();
 
     }
@@ -71,8 +69,7 @@ class SynthesisElementHandlerSpec extends ObjectBehavior
         $paginator->count()->willReturn(17);
 
         $type = 'unpublished';
-        $term = null;
-        $synthesisElementRepo->getWith($synthesis, $type, $term, $offset, $limit)->willReturn($paginator)->shouldBeCalled();
+        $synthesisElementRepo->getWith($synthesis, $type, $offset, $limit)->willReturn($paginator)->shouldBeCalled();
         $this->getElementsFromSynthesisByType($synthesis, $type)->shouldBeArray();
 
     }
@@ -88,8 +85,7 @@ class SynthesisElementHandlerSpec extends ObjectBehavior
         $paginator->count()->willReturn(17);
 
         $type = 'published';
-        $term = null;
-        $synthesisElementRepo->getWith($synthesis, $type, $term, $offset, $limit)->willReturn($paginator)->shouldBeCalled();
+        $synthesisElementRepo->getWith($synthesis, $type, $offset, $limit)->willReturn($paginator)->shouldBeCalled();
         $this->getElementsFromSynthesisByType($synthesis, $type)->shouldBeArray();
 
     }
@@ -105,8 +101,7 @@ class SynthesisElementHandlerSpec extends ObjectBehavior
         $paginator->count()->willReturn(17);
 
         $type = 'archived';
-        $term = null;
-        $synthesisElementRepo->getWith($synthesis, $type, $term, $offset, $limit)->willReturn($paginator)->shouldBeCalled();
+        $synthesisElementRepo->getWith($synthesis, $type, $offset, $limit)->willReturn($paginator)->shouldBeCalled();
         $this->getElementsFromSynthesisByType($synthesis, $type)->shouldBeArray();
 
     }

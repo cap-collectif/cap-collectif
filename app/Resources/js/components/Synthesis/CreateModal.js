@@ -28,7 +28,6 @@ const CreateModal = React.createClass({
       name: null,
       parent: this.getElementInTreeById(this.props.elements, this.props.selectedId),
       expanded: this.getExpandedBasedOnSelectedId(),
-      description: null,
     };
   },
 
@@ -80,12 +79,6 @@ const CreateModal = React.createClass({
     });
   },
 
-  setDescription(event) {
-    this.setState({
-      description: event.target.value,
-    });
-  },
-
   setParent(element) {
     if (element) {
       const value = element !== 'root' ? element : null;
@@ -108,10 +101,6 @@ const CreateModal = React.createClass({
   },
 
   hide() {
-    this.setState({
-      name: null,
-      description: null,
-    });
     this.props.toggle(false);
   },
 
@@ -121,7 +110,6 @@ const CreateModal = React.createClass({
       'archived': true,
       'published': true,
       'title': this.state.name,
-      'description': this.state.description,
       'parent': this.state.parent,
     };
     if (typeof this.props.process === 'function') {
@@ -138,17 +126,6 @@ const CreateModal = React.createClass({
           {' ' + this.getIntlMessage('edition.action.create.name.label')}
         </h2>
         <Input type="text" id="new_element_title" name="new_element[title]" className="new-element__title" placeholder={this.getIntlMessage('edition.action.create.name.placeholder')} valueLink={this.linkState('name')} />
-      </div>
-    );
-  },
-
-  renderDescription() {
-    return (
-      <div className="modal__action">
-        <h2 className="h4">
-          {' ' + this.getIntlMessage('edition.action.create.description.label')}
-        </h2>
-        <Input type="textarea" id="new_element_description" name="new_element[description]" className="new-element__title" valueLink={this.linkState('description')} />
       </div>
     );
   },
@@ -188,7 +165,6 @@ const CreateModal = React.createClass({
       </Modal.Header>
       <Modal.Body>
         {this.renderName()}
-        {this.renderDescription()}
         {this.renderParent()}
       </Modal.Body>
       <Modal.Footer>

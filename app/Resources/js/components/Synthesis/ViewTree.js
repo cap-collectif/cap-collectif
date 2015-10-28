@@ -80,18 +80,8 @@ const ViewTree = React.createClass({
     );
   },
 
-  isElementExpanded(element) {
-    if (!element) {
-      return true;
-    }
-    return SynthesisDisplayRules.getValueForRuleAndElement(element, this.state.settings, 'display', 'expanded') || this.state.expanded[element.id];
-  },
-
   renderCaret(element) {
     if (SynthesisDisplayRules.getValueForRuleAndElement(element, this.state.settings, 'display', 'childrenInModal')) {
-      return null;
-    }
-    if (SynthesisDisplayRules.getValueForRuleAndElement(element, this.state.settings, 'display', 'expanded')) {
       return null;
     }
     const expanded = this.state.expanded[element.id] || false;
@@ -99,20 +89,21 @@ const ViewTree = React.createClass({
       const classes = classNames({
         'cap-arrow-67': expanded,
         'cap-arrow-66': !expanded,
+        'pull-right': true,
       });
       return (
         <div className="synthesis__element__readmore" onClick={this.toggleExpand.bind(null, element)}>
           <span>
             {
-              expanded
-              ? <FormattedMessage
-                  message={this.getIntlMessage('readmore.hide')}
-                  title={element.title}
-                />
-              : <FormattedMessage
-                  message={this.getIntlMessage('readmore.show')}
-                  title={element.title}
-                />
+            expanded
+            ? <FormattedMessage
+                message={this.getIntlMessage('readmore.hide')}
+                title={element.title}
+              />
+            : <FormattedMessage
+                message={this.getIntlMessage('readmore.show')}
+                title={element.title}
+              />
             }
           </span>
           <i style={{marginLeft: '5px'}} className={classes}></i>
@@ -122,8 +113,8 @@ const ViewTree = React.createClass({
     return null;
   },
 
-  renderTreeItems(elements, parent = null) {
-    if (this.isElementExpanded(parent) && elements && !SynthesisDisplayRules.getValueForRuleAndElement(parent, this.state.settings, 'display', 'childrenInModal')) {
+  renderTreeItems(elements, parent = null, expanded = false) {
+    if (expanded && elements && !SynthesisDisplayRules.getValueForRuleAndElement(parent, this.state.settings, 'display', 'childrenInModal')) {
       return (
         <ul className="synthesis__elements">
           {
@@ -135,9 +126,8 @@ const ViewTree = React.createClass({
                     element={element}
                     parent={parent}
                     settings={SynthesisDisplayRules.getMatchingSettingsForElement(element, this.state.settings)}
-                    onExpandElement={this.toggleExpand.bind(null, element)}
                   />
-                  {this.renderTreeItems(element.children, element)}
+                  {this.renderTreeItems(element.children, element, this.state.expanded[element.id])}
                   {this.renderCaret(element)}
                 </li>
               );
@@ -153,7 +143,7 @@ const ViewTree = React.createClass({
       <Loader show={this.state.isLoading}>
         {
           this.state.elements.length > 0
-          ? this.renderTreeItems(this.state.elements, null)
+          ? this.renderTreeItems(this.state.elements, null, true)
           : null
         }
       </Loader>

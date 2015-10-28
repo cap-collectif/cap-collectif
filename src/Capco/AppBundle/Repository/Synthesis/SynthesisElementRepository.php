@@ -35,20 +35,13 @@ class SynthesisElementRepository extends MaterializedPathRepository
      *
      * @return int
      */
-    public function getWith($synthesis, $type, $term, $offset = 0, $limit = 10)
+    public function getWith($synthesis, $type, $offset = 0, $limit = 10)
     {
         $qb = $this->createQueryBuilder('se')
             ->addSelect('a', 'am')
             ->leftJoin('se.author', 'a')
             ->leftJoin('a.Media', 'am')
         ;
-
-        if ($term !== null) {
-            $qb
-                ->andWhere('se.title LIKE :term')
-                ->setParameter('term', '%'.$term.'%')
-            ;
-        }
 
         $qb = $this->addQueryConditionsForTypeAndSynthesis($qb, $type, $synthesis);
 
@@ -201,7 +194,7 @@ class SynthesisElementRepository extends MaterializedPathRepository
         if (count($nodes) > 0) {
             // Node Stack. Used to help building the hierarchy
             $stack = [];
-            // Array of ids, used to check if the element's parent is in the tree
+            // Array of ids, used to check if the element's parent is in the tre
             $idsStack = [];
             foreach ($nodes as $child) {
                 $item = $child;
@@ -253,8 +246,9 @@ class SynthesisElementRepository extends MaterializedPathRepository
             return;
         }
         $parent = explode('-', $splitted[count($splitted) - 2]);
-        $parent = implode('-', array_splice($parent, count($parent) - 5, count($parent)));
-        return $parent;
+        array_shift($parent);
+
+        return implode('-', $parent);
     }
 
     /**
@@ -272,7 +266,7 @@ class SynthesisElementRepository extends MaterializedPathRepository
         $separator = addcslashes($config['path_separator'], '%');
         $path = $config['path'];
         $qb = $this->createQueryBuilder('se')
-            ->select('se.id', 'se.level', 'se.path', 'se.displayType', 'se.title', 'se.body', 'se.description', 'COUNT(c.id) as childrenCount')
+            ->select('se.id', 'se.level', 'se.path', 'se.displayType', 'se.title', 'se.body', 'COUNT(c.id) as childrenCount')
             ->leftJoin('se.children', 'c', 'WITH', $this->getOnClauseForChildren($type))
         ;
         if ($type === 'published') {

@@ -19,6 +19,10 @@
     {{ parent() }} - {{ 'user.profile.show.title'|trans({'%name%': user.username }, 'CapcoAppBundle') }} - {{ 'user.profile.show.propositions.votes.all'|trans({}, 'CapcoAppBundle') }}
 {% endblock %}
 
+{% block title %}
+    {{ parent() }} - {{ 'user.profile.show.title'|trans({'%name%': user.username }, 'CapcoAppBundle') }}
+{% endblock %}
+
 {% block jumbotron %}{% endblock %}
 
 {% block fos_user_content %}
