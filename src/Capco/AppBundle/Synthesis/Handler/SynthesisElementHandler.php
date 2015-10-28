@@ -23,13 +23,17 @@ class SynthesisElementHandler
         $this->logManager = $logManager;
     }
 
-    public function getElementsFromSynthesisByType($synthesis, $type = null, $offset = 0, $limit = null)
+    public function getElementsFromSynthesisByType($synthesis, $type = null, $term = null, $offset = 0, $limit = null)
     {
         if ($type === null || !in_array($type, self::$types)) {
             throw new NotFoundHttpException();
         }
 
-        $paginator = $this->em->getRepository('CapcoAppBundle:Synthesis\SynthesisElement')->getWith($synthesis, $type, $offset, $limit);
+        $paginator = $this
+            ->em
+            ->getRepository('CapcoAppBundle:Synthesis\SynthesisElement')
+            ->getWith($synthesis, $type, $term, $offset, $limit)
+        ;
 
         $elements = [];
         foreach ($paginator as $element) {

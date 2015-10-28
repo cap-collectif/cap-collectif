@@ -35,13 +35,20 @@ class SynthesisElementRepository extends MaterializedPathRepository
      *
      * @return int
      */
-    public function getWith($synthesis, $type, $offset = 0, $limit = 10)
+    public function getWith($synthesis, $type, $term, $offset = 0, $limit = 10)
     {
         $qb = $this->createQueryBuilder('se')
             ->addSelect('a', 'am')
             ->leftJoin('se.author', 'a')
             ->leftJoin('a.Media', 'am')
         ;
+
+        if ($term !== null) {
+            $qb
+                ->andWhere('se.title LIKE :term')
+                ->setParameter('term', '%'.$term.'%')
+            ;
+        }
 
         $qb = $this->addQueryConditionsForTypeAndSynthesis($qb, $type, $synthesis);
 

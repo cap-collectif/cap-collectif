@@ -109,6 +109,17 @@ export default {
       });
   },
 
+  loadElementsByTermFromServer: (synthesis, term, offset, limit, type='all') => {
+    Fetcher
+      .get(`/syntheses/${synthesis}/elements?term=${term}&type=${type}&offset=${offset}&limit=${limit}`)
+      .then((data) => {
+        data.actionType = Actions.RECEIVE_ELEMENTS_SUCCESS;
+        data.type = 'search';
+        AppDispatcher.dispatch(data);
+        return true;
+      });
+  },
+
   loadElementsTreeFromServer: (synthesis, type, parent = null) => {
     AppDispatcher.dispatch({
       actionType: Actions.RECEIVE_ELEMENTS,

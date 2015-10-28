@@ -19,6 +19,7 @@ class SynthesisElementStore extends BaseStore {
       'publishedTree': [],
       'notIgnoredTree': [],
       'fromDivision': [],
+      'search': [],
     };
     this._counts = {
       'new': 0,
@@ -29,6 +30,7 @@ class SynthesisElementStore extends BaseStore {
       'publishedTree': 0,
       'notIgnoredTree': 0,
       'fromDivision': 0,
+      'search': 0,
     };
     this._expandedItems = {
       'nav': {
@@ -52,6 +54,7 @@ class SynthesisElementStore extends BaseStore {
       'publishedTree': false,
       'notIgnoredTree': false,
       'fromDivision': false,
+      'search': false,
     };
     this._messages = {
       errors: [],

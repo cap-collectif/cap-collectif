@@ -5,18 +5,16 @@ import SynthesisElementActions from '../../actions/SynthesisElementActions';
 
 const Pagination = 15;
 
-const ElementsInbox = React.createClass({
+const ElementsSearch = React.createClass({
   propTypes: {
     synthesis: React.PropTypes.object.isRequired,
     params: React.PropTypes.object,
-    searchTerm: React.PropTypes.string,
   },
   mixins: [ReactIntl.IntlMixin],
 
   getDefaultProps() {
     return {
-      params: {type: 'new'},
-      searchTerm: '',
+      params: {term: ''},
     };
   },
 
@@ -40,12 +38,12 @@ const ElementsInbox = React.createClass({
   },
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.params.type !== this.props.params.type) {
+    if (nextProps.params.term !== this.props.params.term) {
       this.setState({
         isLoading: true,
         limit: Pagination,
       }, () => {
-        this.loadElementsByTypeFromServer(nextProps.params.type);
+        this.loadElementsByTermFromServer(nextProps.params.term);
       });
     }
   },
@@ -56,10 +54,10 @@ const ElementsInbox = React.createClass({
 
   onChange() {
     if (!SynthesisElementStore.isProcessing) {
-      if (SynthesisElementStore.isInboxSync[this.props.params.type]) {
+      if (SynthesisElementStore.isInboxSync.search) {
         this.setState({
-          elements: SynthesisElementStore.elements[this.props.params.type],
-          count: SynthesisElementStore.counts[this.props.params.type],
+          elements: SynthesisElementStore.elements.search,
+          count: SynthesisElementStore.counts.search,
           isLoading: false,
           isLoadingMore: false,
         });
@@ -70,7 +68,7 @@ const ElementsInbox = React.createClass({
       this.setState({
         isLoading: true,
       }, () => {
-        this.loadElementsByTypeFromServer();
+        this.loadElementsByTermFromServer();
       });
     }
   },
@@ -82,10 +80,10 @@ const ElementsInbox = React.createClass({
     }
   },
 
-  loadElementsByTypeFromServer(type = this.props.params.type) {
-    SynthesisElementActions.loadElementsFromServer(
+  loadElementsByTermFromServer(term = this.props.params.term) {
+    SynthesisElementActions.loadElementsByTermFromServer(
       this.props.synthesis.id,
-      type,
+      term,
       this.state.offset,
       this.state.limit
     );
@@ -97,7 +95,7 @@ const ElementsInbox = React.createClass({
       isLoadingMore: true,
       limit: this.state.limit + Pagination,
     }, () => {
-      this.loadElementsByTypeFromServer();
+      this.loadElementsByTermFromServer();
     });
   },
 
@@ -140,4 +138,4 @@ const ElementsInbox = React.createClass({
 
 });
 
-export default ElementsInbox;
+export default ElementsSearch;
