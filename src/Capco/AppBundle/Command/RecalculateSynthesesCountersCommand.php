@@ -32,12 +32,27 @@ class RecalculateSynthesesCountersCommand extends ContainerAwareCommand
                 ->createQueryBuilder('se')
                 ->select('COUNT(se.id)')
                 ->where('se.published = 1 AND se.archived = 1')
+                ->andWhere('se.displayType = :displayType')
                 ->andWhere('se.path LIKE :path')
-                ->setParameter('path', $el->getPath().'%')
+                ->setParameter('displayType', 'contribution')
+                ->setParameter('path', $el->getPath().'|%')
                 ->getQuery()
                 ->getSingleScalarResult()
             ;
             $el->setPublishedChildrenCount($childCount);
+
+            /*$directPublishedChildren = $em
+                ->getRepository('CapcoAppBundle:Synthesis\SynthesisElement')
+                ->getElementsHierarchy($el->getSynthesis(), 'published', $el, 1, false)
+            ;
+            $score = 0;
+            foreach ($directPublishedChildren as $child) {
+                $votes = $child['votes'];
+                foreach ($votes as $index => $nb) {
+                    $score += $nb * $index;
+                }
+            }
+            $el->setVotesScore($score);*/
         }
 
         $em->flush();

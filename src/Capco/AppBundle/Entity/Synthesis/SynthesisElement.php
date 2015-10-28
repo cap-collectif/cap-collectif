@@ -199,6 +199,14 @@ class SynthesisElement
     private $publishedChildrenCount = 0;
 
     /**
+     * @var int
+     *
+     * @ORM\Column(name="votes_score", type="integer")
+     * @Gedmo\Versioned
+     */
+    private $votesScore = 0;
+
+    /**
      * @var string
      *
      * @ORM\Column(name="linked_data_class", type="string", length=255, nullable=true)
@@ -613,6 +621,24 @@ class SynthesisElement
     public function setPublishedChildrenCount($publishedChildrenCount)
     {
         $this->publishedChildrenCount = $publishedChildrenCount;
+
+        return $this;
+    }
+
+    /**
+     * @return int
+     */
+    public function getVotesScore()
+    {
+        return $this->votesScore;
+    }
+
+    /**
+     * @param int $votesScore
+     */
+    public function setVotesScore($votesScore)
+    {
+        $this->votesScore = $votesScore;
 
         return $this;
     }

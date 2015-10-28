@@ -5,6 +5,8 @@ import ChildrenModal from './ChildrenModal';
 import SynthesisDisplayRules from '../../services/SynthesisDisplayRules';
 
 const FormattedMessage = ReactIntl.FormattedMessage;
+const OverlayTrigger = ReactBootstrap.OverlayTrigger;
+const Tooltip = ReactBootstrap.Tooltip;
 
 const ViewElement = React.createClass({
   propTypes: {
@@ -95,10 +97,21 @@ const ViewElement = React.createClass({
   renderPercentage() {
     if (SynthesisDisplayRules.getValueForRule(this.props.settings, 'display', 'percentage') && this.props.parent) {
       const percentage = Math.round(this.props.element.publishedChildrenCount / this.props.parent.publishedChildrenCount * 100);
+      const tooltip = (
+        <Tooltip>
+          <FormattedMessage
+            message={this.getIntlMessage('percentage.tooltip')}
+            nb={this.props.element.publishedChildrenCount}
+            percentage={percentage}
+          />
+        </Tooltip>
+      );
       return (
-        <span className="small excerpt pull-right">
-          {percentage}%
-        </span>
+        <OverlayTrigger placement="top" overlay={tooltip}>
+          <span className="small excerpt pull-right">
+            {percentage}%
+          </span>
+        </OverlayTrigger>
       );
     }
     return null;
@@ -129,12 +142,23 @@ const ViewElement = React.createClass({
   renderAsProgressBar() {
     if (this.props.parent) {
       const percentage = Math.round(this.props.element.publishedChildrenCount / this.props.parent.publishedChildrenCount * 100);
+      const tooltip = (
+        <Tooltip>
+          <FormattedMessage
+            message={this.getIntlMessage('percentage.tooltip')}
+            nb={this.props.element.publishedChildrenCount}
+            percentage={percentage}
+            />
+        </Tooltip>
+      );
       return (
         <div className="synthesis__element">
-          <div className="synthesis__element__bar">
-            <span className="synthesis__element__bar__value" style={{width: percentage + '%'}} />
-            {this.renderTitle()}
-          </div>
+          <OverlayTrigger placement="top" overlay={tooltip}>
+            <div className="synthesis__element__bar">
+              <span className="synthesis__element__bar__value" style={{width: percentage + '%'}} />
+              {this.renderTitle()}
+            </div>
+          </OverlayTrigger>
         </div>
       );
     }

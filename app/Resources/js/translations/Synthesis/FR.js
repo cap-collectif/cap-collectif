@@ -145,5 +145,8 @@ export default {
       show: 'Voir la synthèse de "{title}"',
       hide: 'Masquer la synthèse de "{title}"',
     },
+    percentage: {
+      tooltip: '{nb, plural, =0{# élément} one{# élément} other{# éléments}} soit {percentage}%',
+    },
   },
 };

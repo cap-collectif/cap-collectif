@@ -109,7 +109,7 @@ export default {
       });
   },
 
-  loadElementsByTermFromServer: (synthesis, term, offset, limit, type='all') => {
+  loadElementsByTermFromServer: (synthesis, term, offset, limit, type = 'all') => {
     Fetcher
       .get(`/syntheses/${synthesis}/elements?term=${term}&type=${type}&offset=${offset}&limit=${limit}`)
       .then((data) => {

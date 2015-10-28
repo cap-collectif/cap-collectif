@@ -24,6 +24,12 @@ class ArrayHelper {
     }
     return els;
   }
+
+  sortArrayByField(els, field = 'title') {
+    return els.sort((el1, el2) => {
+      return el1[field] < el2[field] ? 1 : -1;
+    });
+  }
 }
 
 export default new ArrayHelper();

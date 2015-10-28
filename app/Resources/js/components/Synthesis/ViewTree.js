@@ -5,6 +5,8 @@ import SynthesisStore from '../../stores/SynthesisStore';
 import SynthesisElementStore from '../../stores/SynthesisElementStore';
 import SynthesisElementActions from '../../actions/SynthesisElementActions';
 
+import ArrayHelper from '../../services/ArrayHelper';
+
 import SynthesisDisplayRules from '../../services/SynthesisDisplayRules';
 
 const FormattedMessage = ReactIntl.FormattedMessage;
@@ -124,10 +126,15 @@ const ViewTree = React.createClass({
 
   renderTreeItems(elements, parent = null) {
     if (this.isElementExpanded(parent) && elements && !SynthesisDisplayRules.getValueForRuleAndElement(parent, this.state.settings, 'display', 'childrenInModal')) {
+      const orderedElements =
+        SynthesisDisplayRules.getValueForRuleAndElement(parent, this.state.settings, 'display', 'childrenOrdered')
+          ? ArrayHelper.sortArrayByField(elements, 'publishedChildrenCount')
+          : elements
+      ;
       return (
         <ul className="synthesis__elements">
           {
-            elements.map((element) => {
+            orderedElements.map((element) => {
               return (
                 <li>
                   <ViewElement

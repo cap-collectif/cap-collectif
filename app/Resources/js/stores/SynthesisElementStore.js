@@ -312,8 +312,8 @@ class SynthesisElementStore extends BaseStore {
     this._isCountSync = false;
   }
 
-  updateSelectedId(selected = this._selectedNavbarItem) {
-    this._selectedNavbarItem = selected;
+  updateSelectedId(selected = this._selectedNavItem) {
+    this._selectedNavItem = selected;
     const expanded = this._expandedItems.nav;
     expanded[selected] = true;
     const element = this.getElementInTreeById(this._elements.notIgnoredTree, selected);
