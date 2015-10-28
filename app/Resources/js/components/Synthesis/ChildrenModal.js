@@ -1,5 +1,4 @@
 import ElementsList from './ElementsList';
-import Loader from '../Utils/Loader';
 
 const Modal = ReactBootstrap.Modal;
 const Button = ReactBootstrap.Button;
@@ -11,18 +10,6 @@ const ChildrenModal = React.createClass({
     toggle: React.PropTypes.func.isRequired,
   },
   mixins: [ReactIntl.IntlMixin],
-
-  getInitialState() {
-    return {
-      isLoading: this.props.elements.length === 0,
-    };
-  },
-
-  componentWillReceiveProps(nextProps) {
-    this.setState({
-      isLoading: nextProps.elements.length === 0,
-    });
-  },
 
   show() {
     this.props.toggle(true);
@@ -39,15 +26,13 @@ const ChildrenModal = React.createClass({
         <Modal.Title>{this.getIntlMessage('view.childrenModal.title')}</Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <Loader show={this.state.isLoading}>
-          <ElementsList
-            elements={this.props.elements}
-            showBreadcrumb={false}
-            showStatus={false}
-            showNotation={false}
-            hasLink={false}
-          />
-        </Loader>
+        <ElementsList
+          elements={this.props.elements}
+          showBreadcrumb={false}
+          showStatus={false}
+          showNotation={false}
+          hasLink={false}
+        />
       </Modal.Body>
       <Modal.Footer>
         <Button type="button" bsStyle="primary" onClick={this.hide.bind(null, this)}>{this.getIntlMessage('view.childrenModal.close')}</Button>

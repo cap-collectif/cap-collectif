@@ -63,9 +63,6 @@ Capco\AppBundle\Entity\Synthesis\SynthesisElement:
     level:
       expose: true
       groups: [ElementsTree, ElementDetails, ElementsPublished]
-    description:
-      expose: true
-      groups: [ElementsTree, ElementsList, ElementDetails, ElementsPublished]
   virtual_properties:
     getChildrenCount:
       serialized_name: childrenCount
