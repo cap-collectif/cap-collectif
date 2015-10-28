@@ -181,6 +181,13 @@ export default {
         elementId: element,
       });
     }
+    if (data.description) {
+      AppDispatcher.dispatch({
+        actionType: Actions.DESCRIBE_ELEMENT,
+        description: data.description,
+        elementId: element,
+      });
+    }
     if (data.comment) {
       AppDispatcher.dispatch({
         actionType: Actions.COMMENT_ELEMENT,
