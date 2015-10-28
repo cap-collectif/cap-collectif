@@ -21,6 +21,8 @@ class ProjectAdmin extends Admin
         'cascade_validation' => true,
     ];
 
+    public $collectStep = null;
+
     /**
      * @param DatagridMapper $datagridMapper
      */
@@ -38,9 +40,9 @@ class ProjectAdmin extends Admin
         ;
 
         if ($this->getConfigurationPool()->getContainer()->get('capco.toggle.manager')->isActive('themes')) {
-            $datagridMapper->add('themes', null, [
+            $datagridMapper->add('themes', null, array(
                 'label' => 'admin.fields.project.themes',
-            ]);
+                ));
         }
 
         $datagridMapper
@@ -86,9 +88,9 @@ class ProjectAdmin extends Admin
             ->addIdentifier('title', null, [
                 'label' => 'admin.fields.project.title',
             ])
-            ->add('Author', 'sonata_type_model', [
+            ->add('Author', 'sonata_type_model', array(
                 'label' => 'admin.fields.project.author',
-            ])
+            ))
         ;
 
         if ($this->getConfigurationPool()->getContainer()->get('capco.toggle.manager')->isActive('themes')) {
@@ -137,68 +139,68 @@ class ProjectAdmin extends Admin
         $formMapper
             // Content
             ->with('admin.fields.project.group_content')
-            ->add('title', null, [
+            ->add('title', null, array(
                 'label' => 'admin.fields.project.title',
-            ])
+            ))
             ->add('Author', 'sonata_type_model_autocomplete', [
                 'label' => 'admin.fields.project.author',
                 'property' => 'username',
             ])
-            ->add('opinionTerm', 'choice', [
+            ->add('opinionTerm', 'choice', array(
                 'label' => 'admin.fields.project.opinion_term',
                 'choices' => Project::$opinionTermsLabels,
                 'translation_domain' => 'CapcoAppBundle',
-            ])
+            ))
             ->end()
 
             // Metadata
             ->with('admin.fields.project.group_meta')
-            ->add('isEnabled', null, [
+            ->add('isEnabled', null, array(
                 'label' => 'admin.fields.project.is_enabled',
                 'required' => false,
-            ])
-            ->add('exportable', null, [
+            ))
+            ->add('exportable', null, array(
                 'label' => 'admin.fields.project.exportable',
                 'required' => false,
-            ])
-            ->add('publishedAt', 'sonata_type_datetime_picker', [
+            ))
+            ->add('publishedAt', 'sonata_type_datetime_picker', array(
                 'label' => 'admin.fields.project.published_at',
                 'required' => true,
                 'format' => 'dd/MM/yyyy HH:mm',
-                'attr' => [
+                'attr' => array(
                     'data-date-format' => 'DD/MM/YYYY HH:mm',
-                ],
-            ])
+                ),
+            ))
         ;
 
         if ($this->getConfigurationPool()->getContainer()->get('capco.toggle.manager')->isActive('themes')) {
             $formMapper
-                ->add('themes', 'sonata_type_model', [
+                ->add('themes', 'sonata_type_model', array(
                 'label' => 'admin.fields.project.themes',
                 'required' => false,
                 'multiple' => true,
                 'by_reference' => false,
-            ]);
+            ));
         }
 
         $formMapper
-            ->add('Cover', 'sonata_type_model_list', [
+            ->add('Cover', 'sonata_type_model_list', array(
                 'required' => false,
                 'label' => 'admin.fields.project.cover',
-            ], [
-                'link_parameters' => [
+            ), array(
+                'link_parameters' => array(
                     'context' => 'default',
                     'hide_context' => true,
                     'provider' => 'sonata.media.provider.image',
-                ],
-            ])
-            ->add('video', null, [
+                ),
+            ))
+            ->add('video', null, array(
                 'label' => 'admin.fields.project.video',
                 'required' => false,
                 'help' => 'admin.help.project.video',
-                ], [
-                    'link_parameters' => ['context' => 'project'],
-            ])
+                ), array(
+                    'link_parameters' => array('context' => 'project'),
+            ))
             ->end()
 
             // Ranking
@@ -219,15 +221,15 @@ class ProjectAdmin extends Admin
 
             // Steps
             ->with('admin.fields.project.group_steps')
-            ->add('steps', 'sonata_type_collection', [
+            ->add('steps', 'sonata_type_collection', array(
                 'label' => 'admin.fields.project.steps',
                 'by_reference' => false,
                 'required' => false,
-            ], [
+            ), array(
                 'edit' => 'inline',
                 'inline' => 'table',
                 'sortable' => 'position',
-            ])
+            ))
             ->end()
         ;
     }
@@ -238,6 +240,8 @@ class ProjectAdmin extends Admin
     protected function configureShowFields(ShowMapper $showMapper)
     {
         $subject = $this->getSubject();
+
+        $this->collectStep = $subject->getCurrentStep();
 
         $showMapper
             ->with('admin.fields.project.general', ['class' => 'col-md-3'])

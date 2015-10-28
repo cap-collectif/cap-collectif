@@ -154,14 +154,6 @@ class SynthesisElement
     /**
      * @var string
      *
-     * @ORM\Column(name="description", type="text", nullable=true)
-     * @Gedmo\Versioned
-     */
-    private $description;
-
-    /**
-     * @var string
-     *
      * @ORM\Column(name="link", type="text", nullable=true)
      * @Gedmo\Versioned
      * @Assert\Url()
@@ -483,24 +475,6 @@ class SynthesisElement
     public function setBody($body)
     {
         $this->body = $body;
-    }
-
-    /**
-     * @return string
-     */
-    public function getDescription()
-    {
-        return $this->description;
-    }
-
-    /**
-     * @param string $description
-     */
-    public function setDescription($description)
-    {
-        $this->description = $description;
-
-        return $this;
     }
 
     /**

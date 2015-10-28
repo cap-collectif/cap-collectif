@@ -54,7 +54,7 @@ class ProposalComment extends AbstractComment
      */
     public function getRelatedObject()
     {
-        return $this->getProposal();
+        return $this->proposal;
     }
 
     /**

@@ -6,12 +6,17 @@ import OpinionSourcesBox from './components/Opinion/OpinionSourcesBox';
 import OpinionPage from './components/Opinion/OpinionPage';
 import AuthService from './services/AuthService';
 import FeatureService from './services/FeatureService';
+import CollectStepPage from './components/Page/CollectStepPage';
+import ProposalPage from './components/Proposal/Page/ProposalPage';
+import ProposalPageHeader from './components/Proposal/Page/ProposalPageHeader';
+import ProposalCreate from './components/Proposal/Create/ProposalCreate';
 
 FeatureService.load();
 
 AuthService
 .login()
 .then(() => {
+
     // We enable React apps
     if ($('#render-idea-comments').length) {
         React.render(
@@ -41,6 +46,40 @@ AuthService
                 {...IntlData}
             />,
             document.getElementById('render-opinion')
+        );
+    }
+
+    if ($('#render-proposal-page').length) {
+        React.render(
+            <ProposalPage
+                proposal={$('#render-proposal-page').data('proposal').proposal}
+                formId={$('#render-proposal-page').data('form')}
+                 {...IntlData}
+            />,
+            document.getElementById('render-proposal-page')
+        );
+    }
+
+    if ($('#render-collect-step-proposal-create').length) {
+        React.render(
+            <ProposalCreate
+                form={$('#render-collect-step-proposal-create').data('form').form}
+                themes={$('#render-collect-step-page').data('themes').themes}
+                {...IntlData}
+            />,
+            document.getElementById('render-collect-step-proposal-create')
+        );
+    }
+
+    if ($('#render-collect-step-page').length) {
+        React.render(
+            <CollectStepPage
+                form={$('#render-collect-step-page').data('form').form}
+                themes={$('#render-collect-step-page').data('themes').themes}
+                statuses={$('#render-collect-step-page').data('statuses').statuses}
+                {...IntlData}
+            />,
+            document.getElementById('render-collect-step-page')
         );
     }
 

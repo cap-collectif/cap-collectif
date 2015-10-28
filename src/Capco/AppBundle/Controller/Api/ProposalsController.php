@@ -4,6 +4,7 @@ namespace Capco\AppBundle\Controller\Api;
 
 use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\ProposalForm;
+use Capco\AppBundle\Entity\ProposalComment;
 use Capco\AppBundle\Form\ProposalType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\Form\Form;
@@ -14,32 +15,62 @@ use FOS\RestBundle\Controller\FOSRestController;
 use FOS\RestBundle\Controller\Annotations\View;
 use FOS\RestBundle\Controller\Annotations\Get;
 use FOS\RestBundle\Controller\Annotations\Post;
+use FOS\RestBundle\Controller\Annotations\Put;
+use FOS\RestBundle\Controller\Annotations\Delete;
+use FOS\RestBundle\Controller\Annotations\QueryParam;
+use FOS\RestBundle\Request\ParamFetcherInterface;
+use FOS\RestBundle\Util\Codes;
+use Capco\AppBundle\Form\CommentType;
+use Capco\AppBundle\Event\AbstractCommentChangedEvent;
+use Capco\AppBundle\CapcoAppBundleEvents;
 
 class ProposalsController extends FOSRestController
 {
     /**
-     * Get all proposals for a proposal form.
-     *
-     * @ApiDoc(
-     *  resource=true,
-     *  description="Get all proposals for a proposal form",
-     *  statusCodes={
-     *    200 = "Returned when successful",
-     *    404 = "Returned when opinion is not found",
-     *  }
-     * )
-     *
      * @Get("/proposal_forms/{proposal_form_id}/proposals")
      * @ParamConverter("proposalForm", options={"mapping": {"proposal_form_id": "id"}, "repository_method": "find", "map_method_signature": true})
+     * @QueryParam(name="offset", requirements="[0-9.]+", default="0")
+     * @QueryParam(name="limit", requirements="[0-9.]+", default="100")
+     * @QueryParam(name="order", requirements="(old|last|popular|comments)", default="last")
+     * @QueryParam(name="theme", nullable=true)
+     * @QueryParam(name="status", nullable=true)
      * @View(statusCode=200, serializerGroups={"Proposals", "ProposalResponses", "UsersInfos", "UserMedias"})
-     *
-     * @param ProposalForm $proposalForm
-     *
-     * @return array
      */
-    public function getProposalsAction(ProposalForm $proposalForm)
+    public function getProposalsAction(ProposalForm $proposalForm, ParamFetcherInterface $paramFetcher)
     {
-        return $proposalForm->getProposals();
+        $offset = $paramFetcher->get('offset');
+        $limit = $paramFetcher->get('limit');
+        $order = $paramFetcher->get('order');
+        $themeId = $paramFetcher->get('theme');
+        $statusId = $paramFetcher->get('status');
+
+        $em = $this->getDoctrine()->getManager();
+        $theme = null;
+        $status = null;
+
+        if ($themeId) {
+            $theme = $em->getRepository('CapcoAppBundle:Theme')->find($themeId);
+            if (!$theme) {
+                throw new \Exception('Wrong theme');
+            }
+        }
+
+        if ($statusId) {
+            $status = $em->getRepository('CapcoAppBundle:Status')->find($statusId);
+            if (!$status) {
+                throw new \Exception('Wrong status');
+            }
+        }
+
+        $paginator = $em->getRepository('CapcoAppBundle:Proposal')
+                        ->getEnabledByProposalForm($proposalForm, $offset, $limit, $order, $theme, $status);
+
+        $proposals = [];
+        foreach ($paginator as $proposal) {
+            $proposals[] = $proposal;
+        }
+
+        return $proposals;
     }
 
     /**
@@ -110,5 +141,87 @@ class ProposalsController extends FOSRestController
 
         $this->getDoctrine()->getManager()->persist($proposal);
         $this->getDoctrine()->getManager()->flush();
+
+        return $proposal;
     }
+
+
+    /**
+     * @Get("/proposal_forms/{form}/proposals/{proposal}/comments")
+     * @ParamConverter("form", options={"mapping": {"form": "id"}})
+     * @ParamConverter("proposal", options={"mapping": {"proposal": "id"}})
+     * @QueryParam(name="offset", requirements="[0-9.]+", default="0")
+     * @QueryParam(name="limit", requirements="[0-9.]+", default="10")
+     * @QueryParam(name="filter", requirements="(old|last|popular)", default="last")
+     * @View(serializerGroups={"Comments", "UsersInfos"})
+     */
+    public function getProposalCommentsAction(ProposalForm $form, Proposal $proposal, ParamFetcherInterface $paramFetcher)
+    {
+        $offset = $paramFetcher->get('offset');
+        $limit = $paramFetcher->get('limit');
+        $filter = $paramFetcher->get('filter');
+
+        $paginator = $this->getDoctrine()->getManager()
+                    ->getRepository('CapcoAppBundle:ProposalComment')
+                    ->getEnabledByProposal($proposal, $offset, $limit, $filter);
+
+        $comments = [];
+        foreach ($paginator as $comment) {
+            $comments[] = $comment;
+        }
+
+        $countWithAnswers = $this->getDoctrine()->getManager()
+                      ->getRepository('CapcoAppBundle:ProposalComment')
+                      ->countCommentsAndAnswersEnabledByProposal($proposal);
+
+        return [
+            'comments_and_answers_count' => intval($countWithAnswers),
+            'comments_count' => count($paginator),
+            'comments' => $comments,
+        ];
+    }
+
+    /**
+     * @Post("/proposal_forms/{form}/proposals/{proposal}/comments")
+     * @ParamConverter("form", options={"mapping": {"form": "id"}})
+     * @ParamConverter("proposal", options={"mapping": {"proposal": "id"}})
+     * @View(statusCode=201, serializerGroups={"Comments", "UsersInfos"})
+     */
+    public function postProposalCommentsAction(Request $request, ProposalForm $form, Proposal $proposal)
+    {
+        $user = $this->getUser();
+
+        $comment = (new ProposalComment())
+                    ->setAuthorIp($request->getClientIp())
+                    ->setAuthor($user)
+                    ->setProposal($proposal)
+                    ->setIsEnabled(true)
+                ;
+
+        $form = $this->createForm(new CommentType($user), $comment);
+        $form->handleRequest($request);
+
+        if (!$form->isValid()) {
+            return $form;
+        }
+
+        $parent = $comment->getParent();
+        if ($parent) {
+            if (!$parent instanceof ProposalComment || $proposal != $parent->getProposal()) {
+                throw $this->createNotFoundException('This parent comment is not linked to this proposal');
+            }
+            if ($parent->getParent() != null) {
+                throw new BadRequestHttpException('You can\'t answer the answer of a comment.');
+            }
+        }
+
+        $proposal->setCommentsCount($proposal->getCommentsCount() + 1);
+        $this->getDoctrine()->getManager()->persist($comment);
+        $this->getDoctrine()->getManager()->flush();
+        $this->get('event_dispatcher')->dispatch(
+            CapcoAppBundleEvents::ABSTRACT_COMMENT_CHANGED,
+            new AbstractCommentChangedEvent($comment, 'add')
+        );
+    }
+
 }
