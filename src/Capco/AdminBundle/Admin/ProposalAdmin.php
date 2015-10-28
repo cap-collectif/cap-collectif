@@ -23,20 +23,21 @@ class ProposalAdmin extends Admin
             ->with('admin.fields.proposal.group_content')
             ->add('title', null, [
                 'label' => 'admin.fields.proposal.title',
-                'read_only' => true,
-                'disabled' => true,
+                /*'read_only' => true,
+                'disabled' => true,*/
             ])
             ->add('body', 'ckeditor', [
                 'label' => 'admin.fields.proposal.body',
                 'config_name' => 'admin_editor',
-                'read_only' => true,
-                'disabled' => true,
+                /*'read_only' => true,
+                'disabled' => true,*/
             ])
-            ->add('author', null, [
+            ->add('author', 'sonata_type_model_autocomplete', [
                 'label' => 'admin.fields.proposal.author',
                 'required' => true,
-                'read_only' => true,
-                'disabled' => true,
+                'property' => 'username',
+                /*'read_only' => true,
+                'disabled' => true,*/
             ])
             ->add('rating', 'choice', [
                 'label' => 'admin.fields.proposal.rating',
