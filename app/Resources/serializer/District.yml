@@ -8,4 +8,4 @@ Capco\AppBundle\Entity\District:
         name:
             expose: true
             type: string
-            groups: [Districts]
+            groups: [Districts, Proposals]

@@ -1,4 +1,4 @@
-Capco\AppBundle\Entity\AbstractComment:
+Capco\AppBundle\Entity\Comment:
     exclusion_policy: ALL
     properties:
         id:
@@ -17,7 +17,7 @@ Capco\AppBundle\Entity\AbstractComment:
             expose: true
             type: DateTime
             groups: [Comments]
-        voteCount:
+        votesCount:
             expose: true
             type: integer
             groups: [Comments]

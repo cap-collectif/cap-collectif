@@ -2,6 +2,7 @@ import UserAvatar from '../../User/UserAvatar';
 import UserLink from '../../User/UserLink';
 
 const FormattedDate = ReactIntl.FormattedDate;
+const Label = ReactBootstrap.Label;
 
 const ProposalPageHeader = React.createClass({
   propTypes: {
@@ -20,10 +21,12 @@ const ProposalPageHeader = React.createClass({
             <p className="media--aligned excerpt">
               <UserLink user={proposal.author} />
               {proposal.theme
-                ? { this.getIntlMessage('global.in') }
-                  { ' ' }
-                  <a href={proposal.theme._links.show}>{proposal.theme.title}</a>
-                :  null
+                ? <span>
+                    { this.getIntlMessage('global.in') }
+                    { ' ' }
+                    <a href={proposal.theme._links.show}>{proposal.theme.title}</a>
+                  </span>
+                : null
               }
               { ', ' }
               { this.getIntlMessage('global.the') }
@@ -44,7 +47,8 @@ const ProposalPageHeader = React.createClass({
             <div className="excerpt category">commentaires</div>
           </li>
           <li>
-            {proposal.status}
+            <Label bsStyle={proposal.status.color}>{proposal.status.name}</Label>
+            {proposal.district.name}
           </li>
         </ul>
       </div>

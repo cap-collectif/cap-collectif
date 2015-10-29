@@ -35,7 +35,7 @@ class EventCommentRepository extends EntityRepository
         }
 
         if ($filter === 'popular') {
-            $qb->addOrderBy('c.voteCount', 'DESC');
+            $qb->addOrderBy('c.votesCount', 'DESC');
         }
 
         $qb

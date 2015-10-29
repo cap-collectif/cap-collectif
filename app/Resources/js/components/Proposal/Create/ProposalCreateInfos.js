@@ -6,7 +6,7 @@ const ProposalCreateInfos = React.createClass({
 
   render() {
     return (
-      <p></p>
+      <p>{this.getIntlMessage('proposal.create.infos')}</p>
     );
   },
 

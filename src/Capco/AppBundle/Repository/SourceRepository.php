@@ -68,7 +68,7 @@ class SourceRepository extends EntityRepository
         }
 
         if ($filter === 'popular') {
-            $qb->addOrderBy('s.voteCount', 'DESC');
+            $qb->addOrderBy('s.votesCount', 'DESC');
             $qb->addOrderBy('s.updatedAt', 'DESC');
         }
 
@@ -99,7 +99,7 @@ class SourceRepository extends EntityRepository
         }
 
         if ($filter === 'popular') {
-            $qb->addOrderBy('s.voteCount', 'DESC');
+            $qb->addOrderBy('s.votesCount', 'DESC');
             $qb->addOrderBy('s.updatedAt', 'DESC');
         }
 

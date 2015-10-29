@@ -8,4 +8,8 @@ Capco\AppBundle\Entity\Status:
         name:
             expose: true
             type: string
-            groups: [Statuses]
+            groups: [Statuses, Proposals]
+        color:
+            expose: true
+            type: string
+            groups: [Statuses, Proposals]

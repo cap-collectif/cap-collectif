@@ -29,7 +29,7 @@ export default {
       .then((data) => {
         AppDispatcher.dispatch({
           actionType: RECEIVE_PROPOSALS,
-          proposals: data,
+          proposals: data.proposals,
           order: order,
         });
         return true;

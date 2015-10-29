@@ -45,7 +45,7 @@ class District
     private $updatedAt;
 
     /**
-     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\Proposal", mappedBy="status", cascade={"persist", "remove"})
+     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\Proposal", mappedBy="district", cascade={"persist", "remove"})
      */
     private $proposals;
 

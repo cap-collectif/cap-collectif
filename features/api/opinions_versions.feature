@@ -10,10 +10,10 @@ Feature: Opinions Versions
     {
       "versions": [
         {
-          "votes_total": @integer@,
-          "arguments_yes_count": @integer@,
-          "arguments_no_count": @integer@,
           "id": @integer@,
+          "title": @string@,
+          "slug": @string@,
+
           "author": {
             "username": @string@,
             "displayName": @string@,
@@ -39,13 +39,19 @@ Feature: Opinions Versions
             "user_vote": @null@,
             "has_user_reported": @boolean@
           },
+
           "sources_count": @integer@,
+
           "arguments_count": @integer@,
-          "updated_at": "@string@.isDateTime()",
-          "ranking": @integer@,
-          "title": @string@,
-          "slug": @string@,
+          "arguments_yes_count": @integer@,
+          "arguments_no_count": @integer@,
+
           "created_at": "@string@.isDateTime()",
+          "updated_at": "@string@.isDateTime()",
+
+          "ranking": "expr(value === null || value > 0)",
+
+          "votes_total": @integer@,
           "votes_nok": @integer@,
           "votes_ok": @integer@,
           "votes_mitige": @integer@,

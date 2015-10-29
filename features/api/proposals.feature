@@ -27,13 +27,22 @@ Feature: Proposal Restful Api
       "settings": @string@
     }
   },
-  "_links": {
-    "show": @string@
+  "status": {
+    "name": @string@,
+    "color": @string@
   },
+  "district": {
+    "name": @string@
+  },
+  "votes": @array@,
   "votes_count": @integer@,
   "comments_count": @integer@,
+  "comments": @array@,
   "created_at": "@string@.isDateTime()",
-  "updated_at": "@string@.isDateTime()"
+  "updated_at": "@string@.isDateTime()",
+  "_links": {
+    "show": @string@
+  }
 }
 """
 
@@ -41,27 +50,34 @@ Feature: Proposal Restful Api
     When I send a GET request to "/api/proposal_forms/1/proposals?order=favorable&limit=1"
     Then the JSON response should match:
 """
-[
-  {
-    "id": @integer@,
-    "title": @string@,
-    "body": @string@,
-    "theme": @...@,
-    "author": @...@,
-    "_links": @...@,
-    "votes_count": @integer@,
-    "comments_count": @integer@,
-    "created_at": "@string@.isDateTime()",
-    "updated_at": "@string@.isDateTime()"
-  }
-]
+{
+  "proposals": [
+    {
+      "id": @integer@,
+      "title": @string@,
+      "body": @string@,
+      "theme": @...@,
+      "district": @...@,
+      "status": @...@,
+      "author": @...@,
+      "_links": @...@,
+      "votes": @array@,
+      "votes_count": @integer@,
+      "comments_count": @integer@,
+      "created_at": "@string@.isDateTime()",
+      "updated_at": "@string@.isDateTime()"
+    }
+  ]
+}
 """
 
   Scenario: Anonymous API client wants to get all proposals from a ProposalForm
     When I send a GET request to "/api/proposal_forms/1/proposals?theme=4"
     Then the JSON response should match:
 """
-[]
+{
+  "proposals": []
+}
 """
 
 
@@ -73,7 +89,8 @@ Feature: Proposal Restful Api
 {
   "title": "Acheter un sauna pour Capco",
   "body": "Avec tout le travail accompli, on mérite bien un (petit) cadeau, donc on a choisi un sauna. Attention JoliCode ne sera accepté que sur invitation !",
-  "theme": "1",
+  "theme": 1,
+  "district": 1,
   "proposalResponses": [
     {
       "value": "Mega important"

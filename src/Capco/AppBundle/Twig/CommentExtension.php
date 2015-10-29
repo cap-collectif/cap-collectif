@@ -2,7 +2,7 @@
 
 namespace Capco\AppBundle\Twig;
 
-use Capco\AppBundle\Entity\AbstractComment as Comment;
+use Capco\AppBundle\Entity\Comment;
 use Capco\AppBundle\Manager\CommentResolver;
 
 class CommentExtension extends \Twig_Extension

@@ -34,7 +34,7 @@ class IdeaAdmin extends Admin
         }
 
         $datagridMapper
-            ->add('voteCount', null, array(
+            ->add('votesCount', null, array(
                 'label' => 'admin.fields.idea.vote_count',
             ))
             ->add('Author', 'doctrine_orm_model_autocomplete', [
@@ -75,7 +75,7 @@ class IdeaAdmin extends Admin
         }
 
         $listMapper
-            ->add('voteCount', null, array(
+            ->add('votesCount', null, array(
                 'label' => 'admin.fields.idea.vote_count',
             ))
             ->add('commentsCount', null, array(
@@ -194,7 +194,7 @@ class IdeaAdmin extends Admin
         }
 
         $showMapper
-            ->add('voteCount', null, array(
+            ->add('votesCount', null, array(
                 'label' => 'admin.fields.idea.vote_count',
             ))
             ->add('Author', null, array(

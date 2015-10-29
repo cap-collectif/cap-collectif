@@ -2,7 +2,6 @@
 
 namespace Capco\AppBundle\Controller\Api;
 
-use Capco\AppBundle\Entity\AbstractComment;
 use FOS\RestBundle\Controller\FOSRestController;
 use FOS\RestBundle\Controller\Annotations\View;
 use FOS\RestBundle\Controller\Annotations\Get;
@@ -34,7 +33,7 @@ class CommentsController extends FOSRestController
         $to = $paramFetcher->get('to');
 
         $comments = $this->getDoctrine()->getManager()
-                    ->getRepository('CapcoAppBundle:AbstractComment')
+                    ->getRepository('CapcoAppBundle:Comment')
                     ->getEnabledWith($from, $to);
 
         return [

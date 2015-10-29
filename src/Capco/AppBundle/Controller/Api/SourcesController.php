@@ -47,7 +47,7 @@ class SourcesController extends FOSRestController
             ->setUser($user)
         ;
 
-        $source->setVoteCount($source->getVoteCount() + 1);
+        $source->incrementVotesCount();
         $this->getDoctrine()->getManager()->persist($vote);
         $this->getDoctrine()->getManager()->flush();
     }
@@ -72,7 +72,7 @@ class SourcesController extends FOSRestController
             throw new BadRequestHttpException('You have not voted for this source.');
         }
 
-        $source->setVoteCount($source->getVoteCount() - 1);
+        $source->decrementVotesCount();
         $this->getDoctrine()->getManager()->remove($vote);
         $this->getDoctrine()->getManager()->flush();
     }

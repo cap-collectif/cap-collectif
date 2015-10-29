@@ -250,12 +250,12 @@ services:
 
     capco_admin.admin.comment:
         class: Capco\AdminBundle\Admin\CommentAdmin
-        arguments: [~, Capco\AppBundle\Entity\AbstractComment, SonataAdminBundle:CRUD]
+        arguments: [~, Capco\AppBundle\Entity\Comment, SonataAdminBundle:CRUD]
         tags:
             - {name: sonata.admin, manager_type: orm, group: admin.group.moderation, label: admin.label.comment}
         calls:
             - [ setTranslationDomain, [SonataAdminBundle]]
-            - [setSubClasses, [{idea_comment: Capco\AppBundle\Entity\IdeaComment, event_comment: Capco\AppBundle\Entity\EventComment, post_comment: Capco\AppBundle\Entity\PostComment}]]
+            - [setSubClasses, [{idea_comment: Capco\AppBundle\Entity\IdeaComment, event_comment: Capco\AppBundle\Entity\EventComment, post_comment: Capco\AppBundle\Entity\PostComment, proposal_comment: Capco\AppBundle\Entity\ProposalComment}]]
 
     capco_admin.admin.comment_vote:
         class: Capco\AdminBundle\Admin\CommentVoteAdmin

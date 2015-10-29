@@ -7,7 +7,7 @@ use Capco\AppBundle\Entity\AbstractVote;
 use Capco\AppBundle\Entity\OpinionVote;
 
 use Doctrine\ORM\Mapping as ORM;
-use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 
 trait VotableOkNokMitigeTrait
 {
@@ -17,17 +17,17 @@ trait VotableOkNokMitigeTrait
     /**
      * @ORM\Column(name="vote_count_nok", type="integer")
      */
-    protected $voteCountNok = 0;
+    protected $votesCountNok = 0;
 
     /**
      * @ORM\Column(name="vote_count_ok", type="integer")
      */
-    protected $voteCountOk = 0;
+    protected $votesCountOk = 0;
 
     /**
      * @ORM\Column(name="vote_count_mitige", type="integer")
      */
-    protected $voteCountMitige = 0;
+    protected $votesCountMitige = 0;
 
 
     public function getVotes()
@@ -35,7 +35,7 @@ trait VotableOkNokMitigeTrait
         return $this->votes;
     }
 
-    public function setVotes(ArrayCollection $votes)
+    public function setVotes(Collection $votes)
     {
         $this->votes = $votes;
 
@@ -58,9 +58,9 @@ trait VotableOkNokMitigeTrait
         return $this;
     }
 
-    public function getVoteCountAll()
+    public function getVotesCountAll()
     {
-        return $this->voteCountNok + $this->voteCountOk + $this->voteCountMitige;
+        return $this->votesCountNok + $this->votesCountOk + $this->votesCountMitige;
     }
 
     public function getVoteValueByUser(User $user)
@@ -71,7 +71,7 @@ trait VotableOkNokMitigeTrait
             }
         }
 
-        return;
+        return null;
     }
 
     public function resetVotes()
@@ -79,71 +79,71 @@ trait VotableOkNokMitigeTrait
         foreach ($this->votes as $vote) {
             $this->removeVote($vote);
         }
-        $this->voteCountMitige = 0;
-        $this->voteCountNok = 0;
-        $this->voteCountOk = 0;
+        $this->votesCountMitige = 0;
+        $this->votesCountNok = 0;
+        $this->votesCountOk = 0;
 
         return $this;
     }
 
-    public function incrementVoteCountByType($value)
+    public function incrementVotesCountByType($value)
     {
         if ($value === OpinionVote::VOTE_OK) {
-            ++$this->voteCountOk;
+            ++$this->votesCountOk;
         }
         if ($value === OpinionVote::VOTE_NOK) {
-            ++$this->voteCountNok;
+            ++$this->votesCountNok;
         }
         if ($value === OpinionVote::VOTE_MITIGE) {
-            ++$this->voteCountMitige;
+            ++$this->votesCountMitige;
         }
     }
 
-    public function decrementVoteCountByType($value)
+    public function decrementVotesCountByType($value)
     {
         if ($value === OpinionVote::VOTE_OK) {
-            --$this->voteCountOk;
+            --$this->votesCountOk;
         }
         if ($value === OpinionVote::VOTE_NOK) {
-            --$this->voteCountNok;
+            --$this->votesCountNok;
         }
         if ($value === OpinionVote::VOTE_MITIGE) {
-            --$this->voteCountMitige;
+            --$this->votesCountMitige;
         }
     }
 
-    public function getVoteCountNok()
+    public function getVotesCountNok()
     {
-        return $this->voteCountNok;
+        return $this->votesCountNok;
     }
 
-    public function setVoteCountNok($voteCountNok)
+    public function setVotesCountNok($votesCountNok)
     {
-        $this->voteCountNok = $voteCountNok;
+        $this->votesCountNok = $votesCountNok;
 
         return $this;
     }
 
-    public function getVoteCountOk()
+    public function getVotesCountOk()
     {
-        return $this->voteCountOk;
+        return $this->votesCountOk;
     }
 
-    public function setVoteCountOk($voteCountOk)
+    public function setVotesCountOk($votesCountOk)
     {
-        $this->voteCountOk = $voteCountOk;
+        $this->votesCountOk = $votesCountOk;
 
         return $this;
     }
 
-    public function getVoteCountMitige()
+    public function getVotesCountMitige()
     {
-        return $this->voteCountMitige;
+        return $this->votesCountMitige;
     }
 
-    public function setVoteCountMitige($voteCountMitige)
+    public function setVotesCountMitige($votesCountMitige)
     {
-        $this->voteCountMitige = $voteCountMitige;
+        $this->votesCountMitige = $votesCountMitige;
 
         return $this;
     }

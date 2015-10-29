@@ -16,7 +16,7 @@ const ProposalPageVotes = React.createClass({
         <h2>
           <FormattedMessage
             message={this.getIntlMessage('proposal.vote.count')}
-            num={proposal.votesCount}
+            num={proposal.votes_count}
           />
         </h2>
         <Row>

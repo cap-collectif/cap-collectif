@@ -36,7 +36,7 @@
                 <input type="hidden" name="_csrf_token" value="{{ token }}">
             </form>
         {% endif %}
-        <span class="opinion__votes-nb">{{ comment.VoteCount }}</span>
+        <span class="opinion__votes-nb">{{ comment.votesCount }}</span>
 
         {% if is_feature_enabled('reporting') %}
             {% if comment.userHasReport(currentUser) %}

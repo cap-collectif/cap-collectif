@@ -25,14 +25,14 @@ class CommentSerializationListener implements EventSubscriberInterface
     public static function getSubscribedEvents()
     {
         return [
-            ['event' => 'serializer.post_serialize', 'class' => 'Capco\AppBundle\Entity\IdeaComment', 'method' => 'onPostAbstractCommentSerialize'],
-            ['event' => 'serializer.post_serialize', 'class' => 'Capco\AppBundle\Entity\PostComment', 'method' => 'onPostAbstractCommentSerialize'],
-            ['event' => 'serializer.post_serialize', 'class' => 'Capco\AppBundle\Entity\EventComment', 'method' => 'onPostAbstractCommentSerialize'],
-            ['event' => 'serializer.post_serialize', 'class' => 'Capco\AppBundle\Entity\ProposalComment', 'method' => 'onPostAbstractCommentSerialize'],
+            ['event' => 'serializer.post_serialize', 'class' => 'Capco\AppBundle\Entity\IdeaComment', 'method' => 'onPostCommentSerialize'],
+            ['event' => 'serializer.post_serialize', 'class' => 'Capco\AppBundle\Entity\PostComment', 'method' => 'onPostCommentSerialize'],
+            ['event' => 'serializer.post_serialize', 'class' => 'Capco\AppBundle\Entity\EventComment', 'method' => 'onPostCommentSerialize'],
+            ['event' => 'serializer.post_serialize', 'class' => 'Capco\AppBundle\Entity\ProposalComment', 'method' => 'onPostCommentSerialize'],
         ];
     }
 
-    public function onPostAbstractCommentSerialize(ObjectEvent $event)
+    public function onPostCommentSerialize(ObjectEvent $event)
     {
         $comment = $event->getObject();
         $event->getVisitor()->addData(

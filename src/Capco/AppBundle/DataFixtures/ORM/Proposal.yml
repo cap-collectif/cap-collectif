@@ -8,6 +8,7 @@ Capco\AppBundle\Entity\Proposal:
         author: @user502
         proposalForm: @proposalform1
         theme: @theme1
+        district: @district1
         status: @status1
     proposal2:
         title: Rénovation du gymnase
@@ -20,6 +21,7 @@ Capco\AppBundle\Entity\Proposal:
         author: @user3
         proposalForm: @proposalform1
         theme: @theme1
+        district: @district1
         status: @status1
     proposal3:
         title: Installation de bancs sur la place de Mairie
@@ -32,6 +34,7 @@ Capco\AppBundle\Entity\Proposal:
         author: @user5
         proposalForm: @proposalform1
         theme: @theme1
+        district: @district1
         status: @status1
     proposal4:
         title: Plantation de tulipes dans les jardinière du parking de l'église
@@ -44,4 +47,5 @@ Capco\AppBundle\Entity\Proposal:
         author: @user7
         proposalForm: @proposalform1
         theme: @theme1
+        district: @district1
         status: @status1

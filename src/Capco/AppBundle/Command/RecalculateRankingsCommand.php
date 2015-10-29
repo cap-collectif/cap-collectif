@@ -30,13 +30,13 @@ class RecalculateRankingsCommand extends ContainerAwareCommand
             // Opinions
             $opinions = $em->getRepository('CapcoAppBundle:Opinion')
                 ->getEnabledByProjectsOrderedByVotes($project, $excludedAuthor);
+
             $prevValue = null;
             $prevRanking = 1;
             foreach ($opinions as $key => $opinion) {
-                $ranking = $opinion->getVoteCountOk() === $prevValue ? $prevRanking : $key + 1;
+                $ranking = $opinion->getVotesCountOk() === $prevValue ? $prevRanking : $key + 1;
                 $opinion->setRanking($ranking);
-                $em->persist($opinion);
-                $prevValue = $opinion->getVoteCountOk();
+                $prevValue = $opinion->getVotesCountOk();
                 $prevRanking = $ranking;
             }
 
@@ -44,13 +44,13 @@ class RecalculateRankingsCommand extends ContainerAwareCommand
             $versions = $em->getRepository('CapcoAppBundle:OpinionVersion')
                 ->getEnabledByProjectsOrderedByVotes($project, $excludedAuthor)
             ;
+
             $prevValue = null;
             $prevRanking = 1;
             foreach ($versions as $key => $version) {
-                $ranking = $version->getVoteCountOk() === $prevValue ? $prevRanking : $key + 1;
+                $ranking = $version->getVotesCountOk() === $prevValue ? $prevRanking : $key + 1;
                 $version->setRanking($ranking);
-                $em->persist($version);
-                $prevValue = $version->getVoteCountOk();
+                $prevValue = $version->getVotesCountOk();
                 $prevRanking = $ranking;
             }
         }

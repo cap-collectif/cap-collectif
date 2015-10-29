@@ -4,6 +4,7 @@ namespace Capco\AppBundle\Entity;
 
 use Capco\AppBundle\Traits\TimestampableTrait;
 use Capco\AppBundle\Traits\PositionableTrait;
+use Capco\AppBundle\Traits\ColorableTrait;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -20,6 +21,7 @@ class Status
 {
     use TimestampableTrait;
     use PositionableTrait;
+    use ColorableTrait;
 
     /**
      * @var int

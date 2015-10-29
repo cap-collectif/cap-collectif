@@ -17,7 +17,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Capco\AppBundle\Event\AbstractVoteChangedEvent;
 use Capco\AppBundle\CapcoAppBundleEvents;
-use Capco\AppBundle\Event\AbstractCommentChangedEvent;
+use Capco\AppBundle\Event\CommentChangedEvent;
 
 class IdeaController extends Controller
 {
@@ -333,8 +333,8 @@ class IdeaController extends Controller
                         ;
                         $em->persist($comment);
                         $this->get('event_dispatcher')->dispatch(
-                            CapcoAppBundleEvents::ABSTRACT_COMMENT_CHANGED,
-                            new AbstractCommentChangedEvent($comment, 'add')
+                            CapcoAppBundleEvents::COMMENT_CHANGED,
+                            new CommentChangedEvent($comment, 'add')
                         );
                         $em->flush();
                     }

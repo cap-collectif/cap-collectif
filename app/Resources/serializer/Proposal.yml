@@ -46,6 +46,9 @@ Capco\AppBundle\Entity\Proposal:
         theme:
             expose: true
             groups: [Proposals]
+        district:
+            expose: true
+            groups: [Proposals]
         status:
             expose: true
             groups: [Proposals]

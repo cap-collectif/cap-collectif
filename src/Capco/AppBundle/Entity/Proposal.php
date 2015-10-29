@@ -10,6 +10,7 @@ use Capco\AppBundle\Traits\TimestampableTrait;
 use Capco\AppBundle\Traits\TrashableTrait;
 use Capco\AppBundle\Traits\VotableOkTrait;
 use Capco\UserBundle\Entity\User;
+use Capco\AppBundle\Entity\Interfaces\VotableInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
@@ -22,7 +23,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\ProposalRepository")
  * @ORM\HasLifecycleCallbacks()
  */
-class Proposal implements CommentableInterface
+class Proposal implements CommentableInterface, VotableInterface
 {
     use CommentableTrait;
     use TimestampableTrait;
@@ -207,6 +208,26 @@ class Proposal implements CommentableInterface
     }
 
     /**
+     * @return Status
+     */
+    public function getStatus()
+    {
+        return $this->status;
+    }
+
+    /**
+     * @param Status $status
+     *
+     * @return $this
+     */
+    public function setStatus(Status $status)
+    {
+        $this->status = $status;
+
+        return $this;
+    }
+
+    /**
      * @return Theme
      */
     public function getTheme()
@@ -226,6 +247,29 @@ class Proposal implements CommentableInterface
 
         return $this;
     }
+
+
+    /**
+     * @return District
+     */
+    public function getDistrict()
+    {
+        return $this->district;
+    }
+
+    /**
+     * @param District $district
+     *
+     * @return $this
+     */
+    public function setDistrict(District $district)
+    {
+        $this->district = $district;
+        $district->addProposal($this);
+
+        return $this;
+    }
+
 
     /**
      * @return string
@@ -344,7 +388,7 @@ class Proposal implements CommentableInterface
      */
     public function canDisplay()
     {
-        return $this->enabled && !$this->isTrashed && $this->getStep()->canDisplay();
+        return $this->enabled && !$this->isTrashed && $this->getCurrentStep()->canDisplay();
     }
 
     /**
@@ -352,6 +396,6 @@ class Proposal implements CommentableInterface
      */
     public function canContribute()
     {
-        return $this->enabled && !$this->isTrashed && $this->getStep()->canContribute();
+        return $this->enabled && !$this->isTrashed && $this->getCurrentStep()->canContribute();
     }
 }

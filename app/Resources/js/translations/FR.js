@@ -163,6 +163,10 @@ export default {
       body: 'Proposition',
       description: 'Description',
       theme: 'Theme',
+      district: 'Quartier',
+      create: {
+        infos: 'Attention, une fois validée, votre proposition ne pourra plus être modifiée. Merci de la relire avant de la soumettre.',
+      },
       vote: {
         count: '{num, plural, =0{0 vote} one{# vote} other{# votes}}',
         name: 'Nom',
@@ -246,10 +250,10 @@ export default {
       filter_last: 'Les plus récents',
       filter_old: 'Les plus anciens',
       filter_comments: 'Les plus commentés',
-      select_localisation: 'Localisation',
+      select_district: 'Quartier',
       select_theme: 'Thème',
       select_status: 'Statut',
-      select_user_type: 'Type de contributeur',
+      select_type: 'Type de contributeur',
       all_required: 'Tous les champs sont obligatoires.',
       read_more: 'Afficher la suite',
     },

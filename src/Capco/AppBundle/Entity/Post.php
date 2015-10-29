@@ -130,7 +130,6 @@ class Post implements CommentableInterface
         $this->comments = new ArrayCollection();
         $this->themes = new ArrayCollection();
         $this->projects = new ArrayCollection();
-        $this->voteCount = 0;
         $this->commentsCount = 0;
         $this->updatedAt = new \Datetime();
     }

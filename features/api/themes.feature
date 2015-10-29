@@ -8,7 +8,10 @@ Feature: Themes
 [
   {
     "id": @integer@,
-    "title": @string@
+    "title": @string@,
+    "_links": {
+      "show": @string@
+    }
   },
   @...@
 ]

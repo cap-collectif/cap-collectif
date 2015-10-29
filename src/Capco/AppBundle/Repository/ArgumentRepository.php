@@ -91,7 +91,7 @@ class ArgumentRepository extends EntityRepository
 
         if (null != $argumentSort) {
             if ($argumentSort == 'popular') {
-                $qb->orderBy('a.voteCount', 'DESC');
+                $qb->orderBy('a.votesCount', 'DESC');
             } elseif ($argumentSort == 'last') {
                 $qb->orderBy('a.updatedAt', 'DESC');
             } elseif ($argumentSort == 'old') {
@@ -146,7 +146,7 @@ class ArgumentRepository extends EntityRepository
 
         if (null != $argumentSort) {
             if ($argumentSort == 'popular') {
-                $qb->orderBy('a.voteCount', 'DESC');
+                $qb->orderBy('a.votesCount', 'DESC');
             } elseif ($argumentSort == 'last') {
                 $qb->orderBy('a.updatedAt', 'DESC');
             } elseif ($argumentSort == 'old') {
