@@ -33,6 +33,9 @@ admin.label.idea: Idées
 admin.label.menu_item: Navigation
 admin.label.newsletter_subscription: "Inscrits à la lettre d'information"
 admin.label.proposal: Budget / Propositions
+admin.label.proposal_form: Formulaire
+admin.label.question: Question
+admin.label.question_type: Type de question
 admin.label.opinion: Consultation / Propositions
 admin.label.opinion_type: Éléments de structure
 admin.label.opinion_version: Modifications
@@ -429,6 +432,23 @@ admin:
       help:
         rating: Cette note ne sera pas visible sur le site.
         annotation: Cette annotation ne sera pas visible sur le site.
+    proposal_form:
+      title: Titre
+      description: Description
+      questions: Questions
+      updated_at: Mise à jour
+      created_at: Création
+      group_general: Général
+      group_questions: Questions
+    question:
+      title: Titre
+      help_text: Texte d'aide
+      position: Position
+      updated_at: Mise à jour
+      created_at: Création
+      question_type: Type de question
+    question_type:
+      type: Type
     recent_contributions:
       actions: Actions
       author: Auteur
@@ -514,6 +534,10 @@ admin:
       title: Titre
       type: Type d'étape
       updated_at: Mise à jour
+      proposal_form: Formulaire
+      group_general: Général
+      group_form: Formulaire
+      no_proposal_form: Aucun formulaire
     synthesis:
       enabled: Publiée
       editable: Éditable

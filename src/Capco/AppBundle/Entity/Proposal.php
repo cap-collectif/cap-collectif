@@ -291,9 +291,16 @@ class Proposal implements CommentableInterface
     /**
      * @return CollectStep
      */
-    public function getStep()
+    public function getCurrentStep()
     {
-        return $this->proposalForm->getStep();
+        $currentStep = null;
+        // TODO: refacto to avoid the exponential increase of execution time based on the number of steps
+        foreach($this->getProposalForm()->getSteps() as $step) {
+            if ($step->getProposalForm()->getId() === $this->getProposalForm()->getId()) {
+                $currentStep = $step;
+            }
+        }
+        return $currentStep;
     }
 
     /**
