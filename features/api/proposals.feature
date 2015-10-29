@@ -58,7 +58,7 @@ Feature: Proposal Restful Api
 """
 
 
-  @database @post
+  @database
   Scenario: logged in API client wants to add a proposal
     Given I am logged in to api as user
     When I send a POST request to "/api/proposal_forms/1/proposals" with json:
