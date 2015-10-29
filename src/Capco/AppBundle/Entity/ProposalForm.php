@@ -36,11 +36,12 @@ class ProposalForm
     private $description;
 
     /**
-     * @var ArrayCollection
+     * @var CollectStep
      *
-     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\CollectStep", mappedBy="proposalForm", cascade={"persist", "remove"}, orphanRemoval=true)
+     * @ORM\OneToOne(targetEntity="Capco\AppBundle\Entity\CollectStep", inversedBy="proposalForm")
+     * @ORM\JoinColumn(name="step_id", referencedColumnName="id")
      **/
-    private $steps;
+    private $step;
 
     /**
      * @var ArrayCollection
@@ -52,7 +53,7 @@ class ProposalForm
     /**
      * @var ArrayCollection
      *
-     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\Question", mappedBy="proposalForm", cascade={"persist", "remove"}, orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\Question", mappedBy="proposalForm")
      */
     private $questions;
 
@@ -63,25 +64,13 @@ class ProposalForm
      */
     protected $updatedAt;
 
-
     /**
      * Constructor.
      */
     public function __construct()
     {
-        $this->questions = new ArrayCollection();
-        $this->steps     = new ArrayCollection();
         $this->updatedAt = new \Datetime();
     }
-
-    public function __toString()
-    {
-        if ($this->getId()) {
-            return $this->getTitle();
-        }
-        return 'New ProposalForm';
-    }
-
 
     /**
      * Get id.
@@ -150,77 +139,31 @@ class ProposalForm
      *
      * @return $this
      */
-    public function setQuestions($questions)
+    public function setQuestions(ArrayCollection $questions)
     {
-        foreach ($questions as $question) {
-            $question->setProposalForm($this);
-        }
         $this->questions = $questions;
-        return $this;
-    }
 
-    /**
-     * Add question.
-     *
-     * @param Question $question
-     * @return $this
-     */
-    public function addQuestion(Question $question)
-    {
-        if (!$this->questions->contains($question)) {
-            $this->questions->add($question);
-        }
-        $question->setProposalForm($this);
-
-        return $this;
-    }
-
-    /**
-     * Remove question.
-     *
-     * @param Question $question
-     * @return $this
-     */
-    public function removeQuestion(Question $question)
-    {
-        $this->questions->removeElement($question);
-        $question->setProposalForm(null);
-
-        return $this;
-    }
-
-    /**
-     * @return ArrayCollection
-     */
-    public function getSteps()
-    {
-        return $this->steps;
-    }
-
-    /**
-     * @param ArrayCollection $steps
-     *
-     * @return $this
-     */
-    public function setSteps(ArrayCollection $steps)
-    {
-        $this->steps = $steps;
         return $this;
     }
 
     /**
      * @return CollectStep
      */
-    public function getCurrentStep()
+    public function getStep()
     {
-        $currentStep = null;
-        // TODO: refacto to avoid the exponential increase of execution time based on the number of steps
-        foreach($this->getSteps() as $step) {
-            if ($step->getProposalForm()->getId() === $this->getId()) {
-                $currentStep = $step;
-            }
-        }
-        return $currentStep;
+        return $this->step;
+    }
+
+    /**
+     * @param CollectStep $step
+     *
+     * @return $this
+     */
+    public function setStep($step)
+    {
+        $this->step = $step;
+
+        return $this;
     }
 
     /**
@@ -228,7 +171,7 @@ class ProposalForm
      */
     public function canDisplay()
     {
-        return $this->getCurrentStep()->canDisplay();
+        return $this->getStep()->canDisplay();
     }
 
     /**
@@ -236,6 +179,6 @@ class ProposalForm
      */
     public function canContribute()
     {
-        return $this->getCurrentStep()->canContribute();
+        return $this->getStep()->canContribute();
     }
 }

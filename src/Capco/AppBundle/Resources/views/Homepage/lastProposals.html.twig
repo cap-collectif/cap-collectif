@@ -13,7 +13,7 @@
         {% endif %}
         <div class="row">
             {% for proposal in proposals %}
-                {% include '@CapcoApp/Proposal/blockProposal.html.twig' with {'proposal': proposal} only %}
+                {% include '@CapcoApp/Idea/blockProposal.html.twig' with {'proposal': proposal} only %}
             {% endfor %}
         </div>
         {#<a href="{{ path('app_project_show_proposals') }}" class="btn  btn-primary  btn--outline">{{ 'proposal.see_all'|trans({}, 'CapcoAppBundle') }}</a>#}

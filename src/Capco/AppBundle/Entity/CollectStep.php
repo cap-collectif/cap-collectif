@@ -16,9 +16,8 @@ use Doctrine\Common\Collections\ArrayCollection;
 class CollectStep extends AbstractStep
 {
     /**
-     * @var ProposalForm
-     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\ProposalForm", inversedBy="steps", cascade={"persist", "remove"})
-     * @ORM\JoinColumn(name="proposal_form_id", referencedColumnName="id", nullable=true, onDelete="SET NULL")
+     * @var
+     * @ORM\OneToOne(targetEntity="Capco\AppBundle\Entity\ProposalForm", mappedBy="step", cascade={"persist", "remove"}, orphanRemoval=true)
      */
     private $proposalForm;
 
@@ -58,16 +57,6 @@ class CollectStep extends AbstractStep
     public function getProposalForm()
     {
         return $this->proposalForm;
-    }
-
-    /**
-     * @param ProposalForm $proposalForm
-     * @return ArrayCollection
-     */
-    public function setProposalForm(ProposalForm $proposalForm)
-    {
-        $this->proposalForm = $proposalForm;
-        return $this;
     }
 
     /**
