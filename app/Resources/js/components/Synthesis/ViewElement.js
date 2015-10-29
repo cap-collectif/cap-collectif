@@ -36,20 +36,10 @@ const ViewElement = React.createClass({
     });
   },
 
-  openOriginalContribution() {
-    window.open(this.props.element.linkedDataUrl);
-    return false;
-  },
-
   renderAuthor() {
     if (SynthesisDisplayRules.getValueForRule(this.props.settings, 'display', 'author')) {
       return (
-        <div className="synthesis__element__author">
-          <UserAvatar className="pull-left" style={{marginRight: '15px', marginTop: '15px'}} />
-          <span>
-            {this.props.element.authorName}
-          </span>
-        </div>
+        <UserAvatar user={this.props.element.author} />
       );
     }
     return null;
@@ -82,22 +72,12 @@ const ViewElement = React.createClass({
   renderCounters() {
     if (SynthesisDisplayRules.getValueForRule(this.props.settings, 'display', 'counters')) {
       return (
-        <div className="synthesis__element__counters">
+        <span className="synthesis__element__counters">
           <FormattedMessage
             message={this.getIntlMessage('counter.contributions')}
             nb={this.props.element.publishedChildrenCount}
           />
-          {this.props.element.linkedDataUrl
-            ? <a
-                style={{marginLeft: '15px'}}
-                href={this.props.element.linkedDataUrl}
-                onClick={this.openOriginalContribution}
-              >
-                {this.getIntlMessage('counter.link')}
-              </a>
-            : null
-          }
-        </div>
+        </span>
       );
     }
     return null;
