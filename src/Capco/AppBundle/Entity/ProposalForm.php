@@ -209,11 +209,26 @@ class ProposalForm
     }
 
     /**
+     * @return CollectStep
+     */
+    public function getCurrentStep()
+    {
+        $currentStep = null;
+        // TODO: refacto to avoid the exponential increase of execution time based on the number of steps
+        foreach($this->getSteps() as $step) {
+            if ($step->getProposalForm()->getId() === $this->getId()) {
+                $currentStep = $step;
+            }
+        }
+        return $currentStep;
+    }
+
+    /**
      * @return bool
      */
     public function canDisplay()
     {
-        return true;
+        return $this->getCurrentStep()->canDisplay();
     }
 
     /**
@@ -221,6 +236,6 @@ class ProposalForm
      */
     public function canContribute()
     {
-        return true;
+        return $this->getCurrentStep()->canContribute();
     }
 }
