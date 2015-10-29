@@ -11,7 +11,7 @@
             </span>
         </div>
         <div class="media__content">
-            <h2 class="h4"><a href="{{ path('app_project_show_proposal', {'projectSlug': proposal.getCurrentStep.project.slug, 'proposalSlug': proposal.slug, 'stepSlug': proposal.getCurrentStep.slug}) }}">{{ proposal.title }}</a></h2>
+            <h2 class="h4"><a href="{{ path('app_project_show_proposal', {'projectSlug': proposal.getCurrentStep.project, 'proposalSlug': proposal.slug, 'stepSlug': proposal.getCurrentStep}) }}">{{ proposal.title }}</a></h2>
             <span class="excerpt small">
                 {% set votesCount = proposal.voteCountOk %}
                 {#{% set commentsCount = proposal.commentsCount %}#}
