@@ -141,7 +141,7 @@ const ViewElement = React.createClass({
 
   renderAsProgressBar() {
     if (this.props.parent) {
-      const percentage = Math.round(this.props.element.publishedChildrenCount / this.props.parent.publishedChildrenCount * 100);
+      const percentage = Math.round(this.props.element.publishedChildrenCount / this.props.parent.publishedParentChildrenCount * 100);
       const tooltip = (
         <Tooltip>
           <FormattedMessage

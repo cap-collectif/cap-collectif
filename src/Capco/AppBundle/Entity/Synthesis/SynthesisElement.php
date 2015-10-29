@@ -201,6 +201,14 @@ class SynthesisElement
     /**
      * @var int
      *
+     * @ORM\Column(name="published_parent_children_count", type="integer")
+     * @Gedmo\Versioned
+     */
+    private $publishedParentChildrenCount = 0;
+
+    /**
+     * @var int
+     *
      * @ORM\Column(name="votes_score", type="integer")
      * @Gedmo\Versioned
      */
@@ -621,6 +629,24 @@ class SynthesisElement
     public function setPublishedChildrenCount($publishedChildrenCount)
     {
         $this->publishedChildrenCount = $publishedChildrenCount;
+
+        return $this;
+    }
+
+    /**
+     * @return int
+     */
+    public function getPublishedParentChildrenCount()
+    {
+        return $this->publishedParentChildrenCount;
+    }
+
+    /**
+     * @param int $publishedParentChildrenCount
+     */
+    public function setPublishedParentChildrenCount($publishedParentChildrenCount)
+    {
+        $this->publishedParentChildrenCount = $publishedParentChildrenCount;
 
         return $this;
     }
