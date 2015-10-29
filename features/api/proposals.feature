@@ -58,20 +58,14 @@ Feature: Proposal Restful Api
 """
 
 
-  @database @post
+  @database
   Scenario: logged in API client wants to add a proposal
     Given I am logged in to api as user
     When I send a POST request to "/api/proposal_forms/1/proposals" with json:
 """
 {
   "title": "Acheter un sauna pour Capco",
-  "body": "Avec tout le travail accompli, on mérite bien un (petit) cadeau, donc on a choisi un sauna. Attention JoliCode ne sera accepté que sur invitation !",
-  "theme": "1",
-  "proposalResponses": [
-    {
-      "value": "Mega important"
-    }
-  ]
+  "body": "Avec tout le travail accompli, on mérite bien un (petit) cadeau, donc on a choisi un sauna. Attention JoliCode ne sera accepté que sur invitation !"
 }
 """
     Then the JSON response status code should be 201
