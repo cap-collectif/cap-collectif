@@ -209,6 +209,27 @@ class SynthesisElementRepository extends MaterializedPathRepository
                 if (array_key_exists($childrenCountIndex, $item)) {
                     $item[$childrenCountIndex] = intval($item[$childrenCountIndex]);
                 }
+                if (array_key_exists('publishedChildrenCount', $item)) {
+                    $item['publishedChildrenCount'] = intval($item['publishedChildrenCount']);
+                }
+                if (array_key_exists('publishedParentChildrenCount', $item)) {
+                    $item['publishedParentChildrenCount'] = intval($item['publishedParentChildrenCount']);
+                }
+                if (array_key_exists('childrenScore', $item)) {
+                    $item['childrenScore'] = intval($item['childrenScore']);
+                }
+                if (array_key_exists('parentChildrenScore', $item)) {
+                    $item['parentChildrenScore'] = intval($item['parentChildrenScore']);
+                }
+                if (array_key_exists('childrenElementsNb', $item)) {
+                    $item['childrenElementsNb'] = intval($item['childrenElementsNb']);
+                }
+                if (array_key_exists('parentChildrenElementsNb', $item)) {
+                    $item['parentChildrenElementsNb'] = intval($item['parentChildrenElementsNb']);
+                }
+                if (array_key_exists($childrenCountIndex, $item)) {
+                    $item[$childrenCountIndex] = intval($item[$childrenCountIndex]);
+                }
                 if (array_key_exists('body', $item)) {
                     $item['body'] = html_entity_decode($item['body'], ENT_QUOTES);
                 }
@@ -280,6 +301,10 @@ class SynthesisElementRepository extends MaterializedPathRepository
                 'se.votes',
                 'se.publishedChildrenCount',
                 'se.publishedParentChildrenCount',
+                'se.childrenScore',
+                'se.parentChildrenScore',
+                '(se.publishedChildrenCount + se.childrenScore) as childrenElementsNb',
+                '(se.publishedParentChildrenCount + se.parentChildrenScore) as parentChildrenElementsNb',
                 'se.linkedDataUrl',
                 'se.subtitle',
                 'a.username as authorName'

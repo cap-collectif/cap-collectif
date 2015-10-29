@@ -37,33 +37,46 @@ class RecalculateSynthesesCountersCommand extends ContainerAwareCommand
         $elements = [];
 
         foreach ($synthesisElements as $el) {
-            $childCount = $em
+            $publishedChildren = $em
                 ->getRepository('CapcoAppBundle:Synthesis\SynthesisElement')
                 ->createQueryBuilder('se')
-                ->select('COUNT(se.id)')
+                ->select('se.id', 'se.votes')
                 ->where('se.published = 1 AND se.archived = 1')
                 ->andWhere('se.displayType = :displayType')
                 ->andWhere('se.path LIKE :path')
                 ->setParameter('displayType', 'contribution')
                 ->setParameter('path', $el['path'].'|%')
                 ->getQuery()
-                ->getSingleScalarResult()
+                ->getArrayResult()
             ;
+
+            $childCount = count($publishedChildren);
+            $score = 0;
+
+            foreach ($publishedChildren as $child) {
+                $votes = $child['votes'];
+                foreach ($votes as $index => $nb) {
+                    $score += $nb * $index;
+                }
+            }
+
             $elements[$el['id']] = [];
             $elements[$el['id']]['count'] = $childCount;
+            $elements[$el['id']]['votesScore'] = $score;
             if ($el['level'] > 0 && $el['parent'] && array_key_exists($el['parent'], $elements)) {
                 $elements[$el['id']]['parentCount'] = $elements[$el['parent']]['count'];
+                $elements[$el['id']]['parentVotesScore'] = $elements[$el['parent']]['votesScore'];
                 $em->getConnection()->executeUpdate('
                     UPDATE synthesis_element se
-                    SET published_children_count = ?, published_parent_children_count = ?
+                    SET published_children_count = ?, published_parent_children_count = ?, children_score = ?, parent_children_score = ?
                     WHERE id = ?
-                ', [$childCount, $elements[$el['id']]['parentCount'], $el['id']]);
+                ', [$childCount, $elements[$el['id']]['parentCount'], $score, $elements[$el['id']]['parentVotesScore'], $el['id']]);
             } else {
                 $em->getConnection()->executeUpdate('
                     UPDATE synthesis_element se
-                    SET published_children_count = ?
+                    SET published_children_count = ?, children_score = ?
                     WHERE id = ?
-                ', [$childCount, $el['id']]);
+                ', [$childCount, $score, $el['id']]);
             }
             if ($el['parent'] && !array_key_exists($el['parent'], $elements)) {
                 $output->writeln('Element '.$el['id'].'\'s level should probably be fixed');

@@ -116,12 +116,15 @@ const ViewElement = React.createClass({
 
   renderPercentage() {
     if (SynthesisDisplayRules.getValueForRule(this.props.settings, 'display', 'percentage') && this.props.parent) {
-      const percentage = Math.round(this.props.element.publishedChildrenCount / this.props.parent.publishedChildrenCount * 100);
+      const percentage = Math.round(
+        (this.props.element.childrenElementsNb / this.props.parent.childrenElementsNb) * 1000
+      ) / 10;
       const tooltip = (
         <Tooltip>
           <FormattedMessage
             message={this.getIntlMessage('percentage.tooltip')}
-            nb={this.props.element.publishedChildrenCount}
+            contributions={this.props.element.publishedChildrenCount}
+            score={this.props.element.childrenScore}
             percentage={percentage}
           />
         </Tooltip>
@@ -161,12 +164,15 @@ const ViewElement = React.createClass({
 
   renderAsProgressBar() {
     if (this.props.parent) {
-      const percentage = Math.round(this.props.element.publishedChildrenCount / this.props.parent.publishedParentChildrenCount * 100);
+      const percentage = Math.round(
+        (this.props.element.childrenElementsNb / this.props.parent.parentChildrenElementsNb) * 1000
+      ) / 10;
       const tooltip = (
         <Tooltip>
           <FormattedMessage
             message={this.getIntlMessage('percentage.tooltip')}
-            nb={this.props.element.publishedChildrenCount}
+            contributions={this.props.element.publishedChildrenCount}
+            score={this.props.element.childrenScore}
             percentage={percentage}
             />
         </Tooltip>

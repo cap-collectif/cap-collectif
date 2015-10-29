@@ -147,7 +147,7 @@ export default {
       hide: 'Masquer la synthèse de "{title}"',
     },
     percentage: {
-      tooltip: '{nb, plural, =0{# élément} one{# élément} other{# éléments}} {percentage, plural, =0{} other{ soit #%}}',
+      tooltip: '{contributions, plural, =0{# élément} one{# élément} other{# éléments}} + {score, plural, =0{# vote} one{# vote} other{# votes}} soit {percentage}%',
     },
   },
 };

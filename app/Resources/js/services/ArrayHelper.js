@@ -27,10 +27,10 @@ class ArrayHelper {
 
   sortArrayByField(els, field = 'title', nsort = false, order = 'ASC') {
     return els.sort((el1, el2) => {
-      if (!el1[field]) {
+      if (el1[field] === 'undefined' || el1[field] === null) {
         return -1;
       }
-      if (!el2[field]) {
+      if (el2[field] === 'undefined' || el2[field] === null) {
         return 1;
       }
       if (order === 'ASC') {

@@ -209,10 +209,18 @@ class SynthesisElement
     /**
      * @var int
      *
-     * @ORM\Column(name="votes_score", type="integer")
+     * @ORM\Column(name="children_score", type="integer")
      * @Gedmo\Versioned
      */
-    private $votesScore = 0;
+    private $childrenScore = 0;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="parent_children_score", type="integer")
+     * @Gedmo\Versioned
+     */
+    private $parentChildrenScore = 0;
 
     /**
      * @var string
@@ -654,17 +662,35 @@ class SynthesisElement
     /**
      * @return int
      */
-    public function getVotesScore()
+    public function getChildrenScore()
     {
-        return $this->votesScore;
+        return $this->childrenScore;
     }
 
     /**
-     * @param int $votesScore
+     * @param int $childrenScore
      */
-    public function setVotesScore($votesScore)
+    public function setChildrenScore($childrenScore)
     {
-        $this->votesScore = $votesScore;
+        $this->childrenScore = $childrenScore;
+
+        return $this;
+    }
+
+    /**
+     * @return int
+     */
+    public function getParentChildrenScore()
+    {
+        return $this->parentChildrenScore;
+    }
+
+    /**
+     * @param int $parentChildrenScore
+     */
+    public function setParentChildrenScore($parentChildrenScore)
+    {
+        $this->parentChildrenScore = $parentChildrenScore;
 
         return $this;
     }
