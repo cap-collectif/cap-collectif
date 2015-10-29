@@ -21,10 +21,20 @@ class RecalculateSynthesesCountersCommand extends ContainerAwareCommand
         $container = $this->getContainer();
         $em = $container->get('doctrine.orm.entity_manager');
 
-        $synthesisElements = $em
+        $connection = $em->getConnection();
+
+        $query = $em
             ->getRepository('CapcoAppBundle:Synthesis\SynthesisElement')
-            ->findAll()
+            ->createQueryBuilder('se')
+            ->select('se.id as id', 'se.path as path', 'p.id as parent', 'se.level as level', 'se.votes as votes')
+            ->leftJoin('se.parent', 'p')
+            ->orderBy('se.level', 'ASC')
+            ->getQuery()
         ;
+
+        $synthesisElements = $query->getArrayResult();
+
+        $elements = [];
 
         foreach ($synthesisElements as $el) {
             $childCount = $em
@@ -35,27 +45,30 @@ class RecalculateSynthesesCountersCommand extends ContainerAwareCommand
                 ->andWhere('se.displayType = :displayType')
                 ->andWhere('se.path LIKE :path')
                 ->setParameter('displayType', 'contribution')
-                ->setParameter('path', $el->getPath().'|%')
+                ->setParameter('path', $el['path'].'|%')
                 ->getQuery()
                 ->getSingleScalarResult()
             ;
-            $el->setPublishedChildrenCount($childCount);
-
-            /*$directPublishedChildren = $em
-                ->getRepository('CapcoAppBundle:Synthesis\SynthesisElement')
-                ->getElementsHierarchy($el->getSynthesis(), 'published', $el, 1, false)
-            ;
-            $score = 0;
-            foreach ($directPublishedChildren as $child) {
-                $votes = $child['votes'];
-                foreach ($votes as $index => $nb) {
-                    $score += $nb * $index;
-                }
+            $elements[$el['id']] = [];
+            $elements[$el['id']]['count'] = $childCount;
+            if ($el['level'] > 0 && $el['parent'] && array_key_exists($el['parent'], $elements)) {
+                $elements[$el['id']]['parentCount'] = $elements[$el['parent']]['count'];
+                $em->getConnection()->executeUpdate('
+                    UPDATE synthesis_element se
+                    SET published_children_count = ?, published_parent_children_count = ?
+                    WHERE id = ?
+                ', [$childCount, $elements[$el['id']]['parentCount'], $el['id']]);
+            } else {
+                $em->getConnection()->executeUpdate('
+                    UPDATE synthesis_element se
+                    SET published_children_count = ?
+                    WHERE id = ?
+                ', [$childCount, $el['id']]);
             }
-            $el->setVotesScore($score);*/
+            if ($el['parent'] && !array_key_exists($el['parent'], $elements)) {
+                $output->writeln('Element '.$el['id'].'\'s level should probably be fixed');
+            }
         }
-
-        $em->flush();
 
         $output->writeln('Calculation completed');
     }
