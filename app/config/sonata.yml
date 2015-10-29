@@ -37,7 +37,6 @@ sonata_admin:
                     - capco_admin.admin.appendix_type
                     - capco_admin.admin.category
                     - capco_admin.admin.consultation_step_type
-                    - capco_admin.admin.proposal_form
             sonata.admin.group.user:
                 items:
                     - sonata.user.admin.user

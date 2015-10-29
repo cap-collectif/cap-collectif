@@ -18,6 +18,7 @@ class ProposalType extends AbstractType
             ->add('title', null, ['required' => true])
             ->add('body', null, ['required' => true])
             ->add('theme', null, ['required' => true])
+            ->add('proposalResponses', null, ['required' => false])
         ;
     }
 

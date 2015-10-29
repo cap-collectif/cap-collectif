@@ -2,7 +2,6 @@
 
 namespace Capco\AppBundle\Entity;
 
-use Capco\AppBundle\Traits\PositionableTrait;
 use Capco\AppBundle\Traits\SluggableTitleTrait;
 use Capco\AppBundle\Traits\TimestampableTrait;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -18,15 +17,6 @@ class Question
 {
     use TimestampableTrait;
     use SluggableTitleTrait;
-    use PositionableTrait;
-
-    const QUESTION_TYPE_SIMPLE_TEXT = 0;
-    const QUESTION_TYPE_MULTILINE_TEXT = 1;
-
-    public static $questionTypes = [
-        self::QUESTION_TYPE_SIMPLE_TEXT => 'question_type.types.simple_text',
-        self::QUESTION_TYPE_MULTILINE_TEXT => 'question_type.types.multiline_text',
-    ];
 
     /**
      * @var int
@@ -47,20 +37,23 @@ class Question
     /**
      * @var ProposalForm
      *
-     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\ProposalForm", inversedBy="questions", cascade={"persist", "remove"})
+     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\ProposalForm", inversedBy="questions")
      * @ORM\JoinColumn(name="proposal_form_id", referencedColumnName="id")
      */
     private $proposalForm;
 
     /**
-     * @var integer
+     * @var QuestionType
+     *
+     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\QuestionType")
+     * @ORM\JoinColumn(name="question_type_id", referencedColumnName="id")
      */
     private $questionType;
 
     /**
      * @var ArrayCollection
      *
-     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\QuestionChoice", mappedBy="question", cascade={"persist", "remove"})
+     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\QuestionChoice", mappedBy="question")
      * @ORM\JoinColumn(nullable=true)
      */
     protected $questionChoices;
@@ -71,16 +64,6 @@ class Question
      * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\ProposalResponse", mappedBy="question")
      */
     private $proposalResponses;
-
-
-    public function __toString()
-    {
-        if ($this->getId()) {
-            return $this->getTitle();
-        }
-        return 'New Question';
-    }
-
 
     /**
      * Get id.
@@ -169,14 +152,15 @@ class Question
      *
      * @return $this
      */
-    public function setProposalForm($proposalForm)
+    public function setProposalForm(ProposalForm $proposalForm)
     {
         $this->proposalForm = $proposalForm;
+
         return $this;
     }
 
     /**
-     * @return integer
+     * @return QuestionType
      */
     public function getQuestionType()
     {
@@ -184,11 +168,11 @@ class Question
     }
 
     /**
-     * @param integer $questionType
+     * @param QuestionType $questionType
      *
      * @return $this
      */
-    public function setQuestionType($questionType)
+    public function setQuestionType(QuestionType $questionType)
     {
         $this->questionType = $questionType;
 
