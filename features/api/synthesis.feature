@@ -525,7 +525,9 @@ Feature: Synthesis
         "votes": [],
         "publishedChildrenCount": 0,
         "publishedParentChildrenCount": 0,
+        "linkedDataUrl": @...@,
         "subtitle": @...@,
+        "authorName": @...@,
         "children": []
       },
       {
@@ -540,7 +542,9 @@ Feature: Synthesis
         "votes": [],
         "publishedChildrenCount": 0,
         "publishedParentChildrenCount": 0,
+        "linkedDataUrl": @...@,
         "subtitle": @...@,
+        "authorName": @...@,
         "children": []
       }
     ]

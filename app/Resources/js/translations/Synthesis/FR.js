@@ -140,13 +140,14 @@ export default {
     },
     counter: {
       contributions: '{nb, plural, =0{# contribution} one{# contribution} other{# contributions}}',
+      link: 'Voir la contribution initiale',
     },
     readmore: {
       show: 'Voir la synthèse de "{title}"',
       hide: 'Masquer la synthèse de "{title}"',
     },
     percentage: {
-      tooltip: '{nb, plural, =0{# élément} one{# élément} other{# éléments}} soit {percentage}%',
+      tooltip: '{nb, plural, =0{# élément} one{# élément} other{# éléments}} {percentage, plural, =0{} other{ soit #%}}',
     },
   },
 };
