@@ -127,9 +127,9 @@ const ViewTree = React.createClass({
   renderTreeItems(elements, parent = null) {
     if (this.isElementExpanded(parent) && elements && !SynthesisDisplayRules.getValueForRuleAndElement(parent, this.state.settings, 'display', 'childrenInModal')) {
       const orderedElements =
-        SynthesisDisplayRules.getValueForRuleAndElement(parent, this.state.settings, 'display', 'childrenOrdered')
+        SynthesisDisplayRules.getValueForRuleAndElement(parent, this.state.settings, 'display', 'childrenOrderedByCount')
           ? ArrayHelper.sortArrayByField(elements, 'publishedChildrenCount')
-          : elements
+          : ArrayHelper.sortArrayByField(elements, 'title')
       ;
       return (
         <ul className="synthesis__elements">

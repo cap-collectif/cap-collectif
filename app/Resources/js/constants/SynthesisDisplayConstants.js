@@ -3,7 +3,7 @@ export default {
   ALLOWED_RULES: {
     style: ['fontSize', 'color', 'textAlign', 'fontWeight'],
     containerStyle: ['borderTop', 'paddingTop'],
-    display: ['author', 'piechart', 'counters', 'asProgressBar', 'childrenInModal', 'subtitle', 'percentage', 'expanded', 'childrenOrdered'],
+    display: ['author', 'piechart', 'counters', 'asProgressBar', 'childrenInModal', 'subtitle', 'percentage', 'expanded', 'childrenOrderedByCount'],
   },
 
   DISPLAY_SETTINGS: [
@@ -173,7 +173,7 @@ export default {
         },
         {
           category: 'display',
-          name: 'childrenOrdered',
+          name: 'childrenOrderedByCount',
           value: 'true',
         },
       ],
@@ -212,7 +212,7 @@ export default {
         },
         {
           category: 'display',
-          name: 'childrenOrdered',
+          name: 'childrenOrderedByCount',
           value: 'true',
         },
       ],
