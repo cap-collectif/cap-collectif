@@ -106,11 +106,6 @@ class Proposal implements CommentableInterface
     protected $proposalForm;
 
     /**
-     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\ProposalVote", mappedBy="proposal", cascade={"persist", "remove"}, orphanRemoval=true)
-     */
-    private $votes;
-
-    /**
      * @var ArrayCollection
      * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\ProposalComment", mappedBy="proposal", cascade={"persist", "remove"})
      */

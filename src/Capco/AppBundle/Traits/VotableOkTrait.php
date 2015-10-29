@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\Traits;
 
 use Capco\AppBundle\Entity\OpinionVote;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 trait VotableOkTrait
@@ -14,6 +15,12 @@ trait VotableOkTrait
      * @ORM\Column(name="vote_count_ok", type="integer")
      */
     protected $voteCountOk = 0;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\ProposalVote", mappedBy="proposal", cascade={"persist", "remove"}, orphanRemoval=true)
+     */
+    private $votes;
+
 
     public function getVotes()
     {

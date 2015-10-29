@@ -13,6 +13,9 @@ parameters:
     selflinkable:
       interfaces:
         - Capco\AppBundle\Entity\Interfaces\SelfLinkableInterface
+    votable:
+      interfaces:
+        - Capco\AppBundle\Entity\Interfaces\VotableInterface
 
 services:
   import.csvtoarray:

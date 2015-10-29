@@ -97,7 +97,6 @@ class OpinionVersionVote extends AbstractVote
     public function setOpinionVersion(OpinionVersion $version)
     {
         $this->opinionVersion = $version;
-        // $this->opinionVersion->addVote($this);
 
         return $this;
     }
