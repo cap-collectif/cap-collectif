@@ -52,6 +52,7 @@ class StepAdmin extends Admin
         $projectId = $this->getPersistentParameter('project_id');
 
         $formMapper
+            ->with('admin.fields.step.group_general')
             ->add('title', null, array(
                 'label' => 'admin.fields.step.title',
                 'required' => true,
@@ -129,6 +130,21 @@ class StepAdmin extends Admin
                     'label' => 'admin.fields.step.nb_versions_to_display',
                     'required' => true,
                 ])
+            ;
+        }
+        $formMapper->end();
+
+        if ($subject instanceof CollectStep) {
+            $formMapper
+                ->with('admin.fields.step.group_form')
+                ->add('proposalForm', 'sonata_type_model', [
+                    'label'        => 'admin.fields.step.proposal_form',
+                    'by_reference' => false,
+                    'required'     => false,
+                    'btn_add'      => false,
+                    'empty_value'  => 'admin.fields.step.no_proposal_form',
+                ])
+                ->end()
             ;
         }
     }
