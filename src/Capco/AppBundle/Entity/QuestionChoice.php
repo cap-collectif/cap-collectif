@@ -24,7 +24,7 @@ class QuestionChoice
     /**
      * @var Question
      *
-     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Question", inversedBy="questionChoices", cascade={"persist", "remove"})
+     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Question", inversedBy="questionChoices")
      * @ORM\JoinColumn(name="question_id", referencedColumnName="id")
      */
     private $question;

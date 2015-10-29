@@ -521,13 +521,6 @@ argument:
     not_author: Vous ne pouvez pas modifier cet argument car vous n'en êtes pas l'auteur.
   count: "]-Inf, 0] 0 argument | {1} 1 argument | ]1,Inf[ %count% arguments"
 
-question_type:
-  types:
-    simple_text: Champ texte simple
-    multiline_text: Champ texte multi-lignes
-    file: Champ fichier
-    address: Champ texte adresse
-
 version:
   show:
     count: "]-Inf, 0] 0 modification | {1} 1 modification | ]1,Inf[ %count% modifications"

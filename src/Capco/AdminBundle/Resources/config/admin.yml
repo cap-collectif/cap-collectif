@@ -79,22 +79,6 @@ services:
         calls:
             - [ setTranslationDomain, [SonataAdminBundle]]
 
-    capco_admin.admin.proposal_form:
-        class: Capco\AdminBundle\Admin\ProposalFormAdmin
-        arguments: [~, Capco\AppBundle\Entity\ProposalForm, SonataAdminBundle:CRUD]
-        tags:
-            - {name: sonata.admin, manager_type: orm, group: admin.group.project, label: admin.label.proposal_form}
-        calls:
-            - [ setTranslationDomain, [SonataAdminBundle]]
-
-    capco_admin.admin.question:
-        class: Capco\AdminBundle\Admin\QuestionAdmin
-        arguments: [~, Capco\AppBundle\Entity\Question, SonataAdminBundle:CRUD]
-        tags:
-            - {name: sonata.admin, manager_type: orm, label: admin.label.question}
-        calls:
-            - [ setTranslationDomain, [SonataAdminBundle]]
-
     capco_admin.admin.footer_social_network:
         class: Capco\AdminBundle\Admin\FooterSocialNetworkAdmin
         arguments: [~, Capco\AppBundle\Entity\FooterSocialNetwork, SonataAdminBundle:CRUD]

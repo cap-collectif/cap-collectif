@@ -2,12 +2,11 @@
 
 namespace Capco\AppBundle\Form;
 
-use Capco\AppBundle\Entity\ProposalResponse;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
-class ProposalType extends AbstractType
+class ProposalResponseType extends AbstractType
 {
     /**
      * @param FormBuilderInterface $builder
@@ -16,21 +15,8 @@ class ProposalType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('title', null, [
+            ->add('value', null, [
                 'required' => true
-            ])
-            ->add('body', null, [
-                'required' => true
-            ])
-            ->add('theme', null, [
-                'required' => true
-            ])
-            ->add('proposalResponses', 'collection', [
-                'allow_add' => true,
-                'allow_delete' => false,
-                'by_reference' => false,
-                'type' => new ProposalResponseType(),
-                'required' => false,
             ])
         ;
     }
@@ -41,7 +27,7 @@ class ProposalType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => 'Capco\AppBundle\Entity\Proposal',
+            'data_class' => 'Capco\AppBundle\Entity\ProposalResponse',
             'csrf_protection' => false,
             'translation_domain' => 'CapcoAppBundle',
         ]);

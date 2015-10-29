@@ -124,6 +124,7 @@ class Proposal implements CommentableInterface
     {
         $this->votes = new ArrayCollection();
         $this->comments = new ArrayCollection();
+        $this->proposalResponses = new ArrayCollection();
         $this->voteCount = 0;
         $this->commentsCount = 0;
         $this->updatedAt = new \Datetime();
@@ -290,16 +291,57 @@ class Proposal implements CommentableInterface
     /**
      * @return CollectStep
      */
-    public function getCurrentStep()
+    public function getStep()
     {
-        $currentStep = null;
-        // TODO: refacto to avoid the exponential increase of execution time based on the number of steps
-        foreach($this->getProposalForm()->getSteps() as $step) {
-            if ($step->getProposalForm()->getId() === $this->getProposalForm()->getId()) {
-                $currentStep = $step;
-            }
+        return $this->proposalForm->getStep();
+    }
+
+    /**
+     * Add proposalResponse.
+     *
+     * @param ProposalResponse $proposalResponse
+     *
+     * @return Proposal
+     */
+    public function addProposalResponse(ProposalResponse $proposalResponse)
+    {
+        if (!$this->proposalResponses->contains($proposalResponse)) {
+            $this->proposalResponses[] = $proposalResponse;
         }
-        return $currentStep;
+
+        return $this;
+    }
+
+    /**
+     * Remove proposalResponse.
+     *
+     * @param ProposalResponse $proposalResponse
+     */
+    public function removeProposalResponse(ProposalResponse $proposalResponse)
+    {
+        $this->proposalResponses->removeElement($proposalResponse);
+    }
+    
+    /**
+     * @return ArrayCollection
+     */
+    public function getProposalResponses()
+    {
+        return $this->proposalResponses;
+    }
+
+    /**
+     * @param ArrayCollection $proposalResponses
+     *
+     * @return $this
+     */
+    public function setProposalResponses(ArrayCollection $proposalResponses)
+    {
+        $this->proposalResponses = $proposalResponses;
+        foreach($proposalResponses as $proposalResponse) {
+            $proposalResponse->setProposal($this);
+        }
+        return $this;
     }
 
     // CommentableInterface methods implementation
@@ -325,25 +367,5 @@ class Proposal implements CommentableInterface
     public function canContribute()
     {
         return $this->enabled && !$this->isTrashed && $this->getStep()->canContribute();
-    }
-
-    /**
-     * @return ArrayCollection
-     */
-    public function getProposalResponses()
-    {
-        return $this->proposalResponses;
-    }
-
-    /**
-     * @param ArrayCollection $proposalResponses
-     *
-     * @return $this
-     */
-    public function setProposalResponses($proposalResponses)
-    {
-        $this->proposalResponses = $proposalResponses;
-
-        return $this;
     }
 }

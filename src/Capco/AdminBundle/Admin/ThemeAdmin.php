@@ -32,10 +32,10 @@ class ThemeAdmin extends Admin
             ->add('isEnabled', null, array(
                 'label' => 'admin.fields.theme.is_enabled',
             ))
-            ->add('projects', null, array(
+            ->add('Projects', null, array(
                 'label' => 'admin.fields.theme.projects',
             ))
-            ->add('ideas', null, array(
+            ->add('Ideas', null, array(
                 'label' => 'admin.fields.theme.ideas',
             ))
             ->add('events', null, array(
@@ -190,10 +190,10 @@ class ThemeAdmin extends Admin
             ->add('Author', null, array(
                 'label' => 'admin.fields.theme.author',
             ))
-            ->add('projects', null, array(
+            ->add('Projects', null, array(
                 'label' => 'admin.fields.theme.projects',
             ))
-            ->add('ideas', null, array(
+            ->add('Ideas', null, array(
                 'label' => 'admin.fields.theme.ideas',
             ))
             ->add('events', null, array(
