@@ -428,6 +428,8 @@ admin:
       rating: Note
       theme: Thème
       no_theme: Aucun thème
+      status: Statut
+      no_status: Aucun statut
       district: Quartier
       no_district: Aucun quartier
       annotation: Annotation

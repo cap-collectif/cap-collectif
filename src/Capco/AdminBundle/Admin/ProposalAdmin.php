@@ -51,6 +51,12 @@ class ProposalAdmin extends Admin
                 'empty_value' => 'admin.fields.proposal.no_district',
                 'btn_add' => false,
             ])
+            ->add('status', 'sonata_type_model', [
+                'label' => 'admin.fields.proposal.status',
+                'required' => false,
+                'empty_value' => 'admin.fields.proposal.no_status',
+                'btn_add' => false,
+            ])
             ->add('rating', 'choice', [
                 'label' => 'admin.fields.proposal.rating',
                 'required' => false,
