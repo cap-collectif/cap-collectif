@@ -18,7 +18,7 @@ Capco\AppBundle\Entity\Proposal:
         rating: 4
         annotation: Lancer l'appel d'offre
         isTrashed: false
-        author: @user3
+        author: @user5
         proposalForm: @proposalform1
         theme: @theme1
         district: @district1
