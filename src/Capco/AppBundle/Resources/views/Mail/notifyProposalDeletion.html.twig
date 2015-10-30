@@ -1,8 +1,0 @@
-{% block body_text %}
-    {% autoescape false %}
-        <p>
-            {{ 'proposal_deletion.notification.body'|trans({'%title%': contribution.title}, 'CapcoAppBundle') | raw }}
-        </p>
-    {% endautoescape %}
-{% endblock %}
-{% block body_html %}{% endblock %}
