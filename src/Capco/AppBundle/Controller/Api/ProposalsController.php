@@ -5,7 +5,7 @@ namespace Capco\AppBundle\Controller\Api;
 use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\ProposalForm;
 use Capco\AppBundle\Entity\ProposalComment;
-use Capco\AppBundle\Event\ProposalDeletedEvent;
+use Capco\AppBundle\Event\ProposalEvent;
 use Capco\AppBundle\Form\ProposalType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\Form\Form;
@@ -24,6 +24,7 @@ use FOS\RestBundle\Util\Codes;
 use Capco\AppBundle\Form\CommentType;
 use Capco\AppBundle\Event\CommentChangedEvent;
 use Capco\AppBundle\CapcoAppBundleEvents;
+use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 
 class ProposalsController extends FOSRestController
 {
@@ -274,11 +275,15 @@ class ProposalsController extends FOSRestController
      *
      * @param ProposalForm $proposalForm
      * @param Proposal $proposal
+     * @return bool
      */
     public function deleteProposalAction(ProposalForm $proposalForm, Proposal $proposal)
     {
+        if ($this->getUser() !== $proposal->getAuthor()) {
+            throw new BadRequestHttpException('You are not the author of this proposal');
+        }
+
         $em = $this->getDoctrine()->getManager();
-        $proposal = $em->getRepository('CapcoAppBundle:Proposal')->find($proposal->getId());
 
         if (!$proposal) {
             throw $this->createNotFoundException('Proposal not found');
@@ -287,7 +292,7 @@ class ProposalsController extends FOSRestController
         $em->remove($proposal);
         $this->get('event_dispatcher')->dispatch(
             CapcoAppBundleEvents::PROPOSAL_DELETED,
-            new ProposalDeletedEvent($proposal, 'remove')
+            new ProposalEvent($proposal, 'remove')
         );
         $em->flush();
     }

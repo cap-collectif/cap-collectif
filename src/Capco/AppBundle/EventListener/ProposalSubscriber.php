@@ -6,7 +6,7 @@ use Capco\AppBundle\Manager\Notify;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Doctrine\ORM\EntityManager;
 use Capco\AppBundle\CapcoAppBundleEvents;
-use Capco\AppBundle\Event\ProposalDeletedEvent;
+use Capco\AppBundle\Event\ProposalEvent;
 
 class ProposalSubscriber implements EventSubscriberInterface
 {
@@ -25,7 +25,7 @@ class ProposalSubscriber implements EventSubscriberInterface
         ];
     }
 
-    public function onProposalDeleted(ProposalDeletedEvent $event)
+    public function onProposalDeleted(ProposalEvent $event)
     {
         $proposal = $event->getProposal();
         $action = $event->getAction();

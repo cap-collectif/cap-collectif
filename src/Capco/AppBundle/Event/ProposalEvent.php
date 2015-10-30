@@ -5,7 +5,7 @@ namespace Capco\AppBundle\Event;
 use Symfony\Component\EventDispatcher\Event;
 use Capco\AppBundle\Entity\Proposal;
 
-class ProposalDeletedEvent extends Event
+class ProposalEvent extends Event
 {
     protected $proposal;
     protected $action;
