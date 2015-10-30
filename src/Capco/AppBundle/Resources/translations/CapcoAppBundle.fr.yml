@@ -690,7 +690,7 @@ proposal_deletion:
       body: |
         Bonjour,
 
-        Une proposition vient d’être supprimer par %author% sur %sitename%.
+        Une proposition vient d’être supprimée par %author% sur %sitename%.
 
         Projet : %project%
         Étape : %step%
