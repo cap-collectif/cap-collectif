@@ -15,7 +15,7 @@ class CommentVote extends AbstractVote
     /**
      * @var
      *
-     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\AbstractComment", inversedBy="votes", cascade={"persist"})
+     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Comment", inversedBy="votes", cascade={"persist"})
      * @ORM\JoinColumn(name="comment_id", referencedColumnName="id")
      */
     private $comment;
@@ -33,7 +33,7 @@ class CommentVote extends AbstractVote
      *
      * @return $this
      */
-    public function setComment(AbstractComment $comment)
+    public function setComment(Comment $comment)
     {
         if (null != $comment) {
             $this->comment = $comment;

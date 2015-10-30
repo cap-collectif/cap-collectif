@@ -4,18 +4,18 @@ namespace Capco\AppBundle\EventListener;
 
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Capco\AppBundle\CapcoAppBundleEvents;
-use Capco\AppBundle\Event\AbstractCommentChangedEvent;
+use Capco\AppBundle\Event\CommentChangedEvent;
 
 class CommentSubscriber implements EventSubscriberInterface
 {
     public static function getSubscribedEvents()
     {
         return [
-            CapcoAppBundleEvents::ABSTRACT_COMMENT_CHANGED => 'onAbstractCommentChanged',
+            CapcoAppBundleEvents::COMMENT_CHANGED => 'onCommentChanged',
         ];
     }
 
-    public function onAbstractCommentChanged(AbstractCommentChangedEvent $event)
+    public function onCommentChanged(CommentChangedEvent $event)
     {
         $comment = $event->getComment();
         $action = $event->getAction();

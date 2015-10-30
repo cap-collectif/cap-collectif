@@ -34,7 +34,7 @@ class ProfileController extends BaseController
         $arguments = $doctrine->getRepository('CapcoAppBundle:Argument')->getByUser($user);
         $ideas = $doctrine->getRepository('CapcoAppBundle:Idea')->getByUser($user);
         $sources = $doctrine->getRepository('CapcoAppBundle:Source')->getByUser($user);
-        $comments = $doctrine->getRepository('CapcoAppBundle:AbstractComment')->getByUser($user);
+        $comments = $doctrine->getRepository('CapcoAppBundle:Comment')->getByUser($user);
         $votes = $doctrine->getRepository('CapcoAppBundle:AbstractVote')->getByUser($user);
 
         return [
@@ -76,7 +76,7 @@ class ProfileController extends BaseController
         $arguments = $doctrine->getRepository('CapcoAppBundle:Argument')->getByUser($user);
         $ideas = $doctrine->getRepository('CapcoAppBundle:Idea')->getByUser($user);
         $sources = $doctrine->getRepository('CapcoAppBundle:Source')->getByUser($user);
-        $comments = $doctrine->getRepository('CapcoAppBundle:AbstractComment')->getByUser($user);
+        $comments = $doctrine->getRepository('CapcoAppBundle:Comment')->getByUser($user);
         $votes = $doctrine->getRepository('CapcoAppBundle:AbstractVote')->getByUser($user);
 
         return [
@@ -191,7 +191,7 @@ class ProfileController extends BaseController
      */
     public function showCommentsAction(User $user)
     {
-        $comments = $this->getDoctrine()->getRepository('CapcoAppBundle:AbstractComment')->getByUser($user);
+        $comments = $this->getDoctrine()->getRepository('CapcoAppBundle:Comment')->getByUser($user);
 
         return array(
             'user' => $user,

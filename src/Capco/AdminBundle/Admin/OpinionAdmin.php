@@ -250,13 +250,13 @@ class OpinionAdmin extends Admin
                 'mapped' => false,
                 'template' => 'CapcoAdminBundle:Opinion:vote_count_show_field.html.twig',
             ))
-            ->add('voteCountOk', null, array(
+            ->add('votesCountOk', null, array(
                 'label' => 'admin.fields.opinion.vote_count_ok',
             ))
-            ->add('voteCountNok', null, array(
+            ->add('votesCountNok', null, array(
                 'label' => 'admin.fields.opinion.vote_count_nok',
             ))
-            ->add('voteCountMitige', null, array(
+            ->add('votesCountMitige', null, array(
                 'label' => 'admin.fields.opinion.vote_count_mitige',
             ))
             ->add('argumentsCount', null, array(

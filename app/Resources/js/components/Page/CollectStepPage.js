@@ -9,12 +9,14 @@ const CollectStepPage = React.createClass({
     form: React.PropTypes.object.isRequired,
     themes: React.PropTypes.array.isRequired,
     statuses: React.PropTypes.array.isRequired,
+    districts: React.PropTypes.array.isRequired,
+    types: React.PropTypes.array.isRequired,
   },
   mixins: [ReactIntl.IntlMixin],
 
   getInitialState() {
     return {
-      proposals: [],
+      proposals: ProposalStore.proposals,
       isLoading: true,
     };
   },
@@ -52,6 +54,8 @@ const CollectStepPage = React.createClass({
         <ProposalListFilters
           id={this.props.form.id}
           theme={this.props.themes}
+          district={this.props.districts}
+          type={this.props.types}
           status={this.props.statuses}
           onChange={() => this.handleFilterChange()}
         />

@@ -29,18 +29,11 @@ const ViewElement = React.createClass({
     };
   },
 
-  getPercentageTooltip(contributions, score, percentage) {
-    return (
-      <Tooltip>
-        <FormattedMessage
-          message={this.getIntlMessage('percentage.tooltip')}
-          contributions={contributions}
-          scoreSign={Math.sign(score) < 0 ? '-' : '+'}
-          score={Math.abs(score)}
-          percentage={percentage}
-          />
-      </Tooltip>
-    );
+  toggleChildrenModal(value) {
+    this.props.onExpandElement(this.props.element);
+    this.setState({
+      showChildrenModal: value,
+    });
   },
 
   openOriginalContribution() {
@@ -48,11 +41,18 @@ const ViewElement = React.createClass({
     return false;
   },
 
-  toggleChildrenModal(value) {
-    this.props.onExpandElement(this.props.element);
-    this.setState({
-      showChildrenModal: value,
-    });
+  getPercentageTooltip(contributions, score, percentage) {
+    return (
+      <Tooltip>
+        <FormattedMessage
+          message={this.getIntlMessage('percentage.tooltip')}
+          contributions={contributions}
+          scoreSign={Math.sign(score) < 0 ? "-" : "+"}
+          score={Math.abs(score)}
+          percentage={percentage}
+          />
+      </Tooltip>
+    );
   },
 
   renderAuthor() {
@@ -133,7 +133,7 @@ const ViewElement = React.createClass({
       let percentage = Math.round(
         (this.props.element.childrenElementsNb / this.props.parent.childrenElementsNb) * 1000
       ) / 10;
-      percentage = percentage > 0 ? percentage : 0;
+      percentage > 0 ? percentage : 0;
       const tooltip = this.getPercentageTooltip(
         this.props.element.publishedChildrenCount,
         this.props.element.childrenScore,

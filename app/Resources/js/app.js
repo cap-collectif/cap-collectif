@@ -64,7 +64,8 @@ AuthService
         React.render(
             <ProposalCreate
                 form={$('#render-collect-step-proposal-create').data('form').form}
-                themes={$('#render-collect-step-page').data('themes').themes}
+                themes={$('#render-collect-step-proposal-create').data('themes').themes}
+                districts={$('#render-collect-step-proposal-create').data('districts').districts}
                 {...IntlData}
             />,
             document.getElementById('render-collect-step-proposal-create')
@@ -76,6 +77,8 @@ AuthService
             <CollectStepPage
                 form={$('#render-collect-step-page').data('form').form}
                 themes={$('#render-collect-step-page').data('themes').themes}
+                districts={$('#render-collect-step-page').data('districts').districts}
+                types={$('#render-collect-step-page').data('types').types}
                 statuses={$('#render-collect-step-page').data('statuses').statuses}
                 {...IntlData}
             />,

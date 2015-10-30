@@ -11,8 +11,10 @@ use Capco\AppBundle\Traits\EnableTrait;
 use Capco\AppBundle\Traits\SluggableTitleTrait;
 use Capco\AppBundle\Traits\TimestampableTrait;
 use Capco\AppBundle\Traits\VotableTrait;
+use Capco\AppBundle\Traits\VotableOkNokMitigeTrait;
 use Capco\UserBundle\Entity\User;
 use Gedmo\Mapping\Annotation as Gedmo;
+use Capco\AppBundle\Entity\Interfaces\VotableInterface;
 
 /**
  * Opinion Version.
@@ -21,13 +23,13 @@ use Gedmo\Mapping\Annotation as Gedmo;
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\OpinionVersionRepository")
  * @ORM\HasLifecycleCallbacks()
  */
-class OpinionVersion
+class OpinionVersion implements VotableInterface
 {
     use TrashableTrait;
     use EnableTrait;
     use SluggableTitleTrait;
     use TimestampableTrait;
-    use VotableTrait;
+    use VotableOkNokMitigeTrait;
     use ValidableTrait;
 
     /**
@@ -84,11 +86,6 @@ class OpinionVersion
      * @ORM\Column(name="arguments_count", type="integer")
      */
     protected $argumentsCount = 0;
-
-    /**
-     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\OpinionVersionVote", mappedBy="opinionVersion", cascade={"persist", "remove"}, orphanRemoval=true)
-     */
-    protected $votes;
 
     /**
      * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\Reporting", mappedBy="opinionVersion", cascade={"persist", "remove"})
@@ -197,27 +194,6 @@ class OpinionVersion
     public function getParent()
     {
         return $this->parent;
-    }
-
-    public function getVotes()
-    {
-        return $this->votes;
-    }
-
-    public function addVote(OpinionVersionVote $vote)
-    {
-        if (!$this->votes->contains($vote)) {
-            $this->votes->add($vote);
-        }
-
-        return $this;
-    }
-
-    public function removeVote(OpinionVersionVote $vote)
-    {
-        $this->votes->removeElement($vote);
-
-        return $this;
     }
 
     /**
@@ -360,17 +336,6 @@ class OpinionVersion
 
     // ******************************* Custom methods **************************************
 
-    public function getVoteValueByUser(User $user)
-    {
-        foreach ($this->votes as $vote) {
-            if ($vote->getUser() === $user) {
-                return $vote->getValue();
-            }
-        }
-
-        return;
-    }
-
     public function userHasReport(User $user)
     {
         foreach ($this->reports as $report) {
@@ -460,25 +425,4 @@ class OpinionVersion
         return $this->enabled && !$this->isTrashed && $this->parent->isPublished();
     }
 
-    /**
-     * @return $this
-     */
-    public function resetVotes()
-    {
-        foreach ($this->votes as $vote) {
-            $this->removeVote($vote);
-        }
-        $this->voteCountMitige = 0;
-        $this->voteCountNok = 0;
-        $this->voteCountOk = 0;
-
-        return $this;
-    }
-
-    public function setVotes($votes)
-    {
-        $this->votes = $votes;
-
-        return $this;
-    }
 }

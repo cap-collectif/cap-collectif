@@ -14,6 +14,8 @@ const ProposalListFilters = React.createClass({
     id: React.PropTypes.number.isRequired,
     onChange: React.PropTypes.func.isRequired,
     theme: React.PropTypes.array.isRequired,
+    type: React.PropTypes.array.isRequired,
+    district: React.PropTypes.array.isRequired,
     status: React.PropTypes.array.isRequired,
   },
   mixins: [ReactIntl.IntlMixin],
@@ -62,7 +64,7 @@ const ProposalListFilters = React.createClass({
   },
 
   buttons: ['last', 'old', 'popular', 'comments'],
-  filters: ['theme', 'status'],
+  filters: ['theme', 'status', 'type', 'district'],
 
   render() {
     return (

@@ -399,9 +399,9 @@ class ConsultationStepExtractor
 
             // Set votes
             $votes = array();
-            $votes['-1'] = $opinion->getVoteCountNok();
-            $votes['0'] = $opinion->getVoteCountMitige();
-            $votes['1'] = $opinion->getVoteCountOk();
+            $votes['-1'] = $opinion->getVotesCountNok();
+            $votes['0'] = $opinion->getVotesCountMitige();
+            $votes['1'] = $opinion->getVotesCountOk();
             $element->setVotes($votes);
         }
 
@@ -435,9 +435,9 @@ class ConsultationStepExtractor
 
             // Set votes
             $votes = array();
-            $votes['-1'] = $version->getVoteCountNok();
-            $votes['0'] = $version->getVoteCountMitige();
-            $votes['1'] = $version->getVoteCountOk();
+            $votes['-1'] = $version->getVotesCountNok();
+            $votes['0'] = $version->getVotesCountMitige();
+            $votes['1'] = $version->getVotesCountOk();
             $element->setVotes($votes);
         }
 
@@ -470,7 +470,7 @@ class ConsultationStepExtractor
 
         // Set votes
         $votes = array();
-        $votes['1'] = $source->getVoteCount();
+        $votes['1'] = $source->getVotesCount();
         $element->setVotes($votes);
 
         return $element;
@@ -493,7 +493,7 @@ class ConsultationStepExtractor
 
         // Set votes
         $votes = array();
-        $votes['1'] = $argument->getVoteCount();
+        $votes['1'] = $argument->getVotesCount();
         $element->setVotes($votes);
 
         return $element;

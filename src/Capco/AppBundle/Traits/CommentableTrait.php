@@ -3,7 +3,7 @@
 namespace Capco\AppBundle\Traits;
 
 use Doctrine\ORM\Mapping as ORM;
-use Capco\AppBundle\Entity\AbstractComment;
+use Capco\AppBundle\Entity\Comment;
 
 trait CommentableTrait
 {
@@ -62,7 +62,7 @@ trait CommentableTrait
      *
      * @return $this
      */
-    public function addComment(AbstractComment $comment)
+    public function addComment(Comment $comment)
     {
         if (!$this->comments->contains($comment)) {
             $this->comments->add($comment);
@@ -76,7 +76,7 @@ trait CommentableTrait
      *
      * @return $this
      */
-    public function removeComment(AbstractComment $comment)
+    public function removeComment(Comment $comment)
     {
         $this->comments->removeElement($comment);
 

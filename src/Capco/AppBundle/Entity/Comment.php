@@ -9,11 +9,13 @@ use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Validator\Constraints as Assert;
 use Capco\AppBundle\Validator\Constraints as CapcoAssert;
+use Capco\AppBundle\Traits\VotableOkTrait;
+use Capco\AppBundle\Entity\Interfaces\VotableInterface;
 
 /**
- * Class AbstractComment.
+ * Class Comment.
  *
- * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\AbstractCommentRepository")
+ * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\CommentRepository")
  * @ORM\Table(name="comment")
  * @ORM\HasLifecycleCallbacks()
  * @ORM\InheritanceType("SINGLE_TABLE")
@@ -26,9 +28,10 @@ use Capco\AppBundle\Validator\Constraints as CapcoAssert;
  * })
  * @CapcoAssert\HasAuthor
  */
-abstract class AbstractComment
+abstract class Comment implements VotableInterface
 {
     use ValidableTrait;
+    use VotableOkTrait;
 
     public static $sortCriterias = [
         'date' => 'argument.sort.date',
@@ -74,13 +77,6 @@ abstract class AbstractComment
     protected $isEnabled = true;
 
     /**
-     * @var int
-     *
-     * @ORM\Column(name="vote_count", type="integer")
-     */
-    protected $voteCount = 0;
-
-    /**
      * @var
      *
      * @ORM\ManyToOne(targetEntity="Capco\UserBundle\Entity\User", inversedBy="comments")
@@ -89,15 +85,13 @@ abstract class AbstractComment
     protected $Author;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\AbstractComment", inversedBy="answers")
+     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Comment", inversedBy="answers")
      * @ORM\JoinColumn(name="parent_id", referencedColumnName="id", onDelete="CASCADE", nullable=true)
      */
     protected $parent;
 
     /**
-     * @var
-     *
-     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\AbstractComment", mappedBy="parent", cascade={"persist", "remove"}, orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\Comment", mappedBy="parent", cascade={"persist", "remove"}, orphanRemoval=true)
      */
     protected $answers;
 
@@ -123,13 +117,6 @@ abstract class AbstractComment
      * @Assert\Ip
      */
     protected $authorIp;
-
-    /**
-     * @var
-     *
-     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\CommentVote", mappedBy="comment", cascade={"persist", "remove"}, orphanRemoval=true)
-     */
-    protected $votes;
 
     /**
      * @var string
@@ -165,16 +152,15 @@ abstract class AbstractComment
         $this->answers = new ArrayCollection();
         $this->Reports = new ArrayCollection();
         $this->updatedAt = new \Datetime();
-        $this->voteCount = 0;
     }
 
     public function __toString()
     {
         if ($this->id) {
             return $this->getBodyExcerpt(50);
-        } else {
-            return 'New comment';
         }
+
+        return 'New comment';
     }
 
     /**
@@ -251,30 +237,6 @@ abstract class AbstractComment
     public function setIsEnabled($isEnabled)
     {
         $this->isEnabled = $isEnabled;
-
-        return $this;
-    }
-
-    /**
-     * Get voteCount.
-     *
-     * @return int
-     */
-    public function getVoteCount()
-    {
-        return $this->voteCount;
-    }
-
-    /**
-     * Set voteCount.
-     *
-     * @param int $voteCount
-     *
-     * @return Argument
-     */
-    public function setVoteCount($voteCount)
-    {
-        $this->voteCount = $voteCount;
 
         return $this;
     }
@@ -404,40 +366,6 @@ abstract class AbstractComment
     }
 
     /**
-     * @return ArrayCollection
-     */
-    public function getVotes()
-    {
-        return $this->votes;
-    }
-
-    /**
-     * @param $vote
-     *
-     * @return $this
-     */
-    public function addVote($vote)
-    {
-        if (!$this->votes->contains($vote)) {
-            $this->votes->add($vote);
-        }
-
-        return $this;
-    }
-
-    /**
-     * @param $vote
-     *
-     * @return $this
-     */
-    public function removeVote($vote)
-    {
-        $this->votes->removeElement($vote);
-
-        return $this;
-    }
-
-    /**
      * @return string
      */
     public function getReports()
@@ -555,37 +483,6 @@ abstract class AbstractComment
     public function getStrippedBody()
     {
         return strip_tags(html_entity_decode($this->body, ENT_QUOTES | ENT_HTML401, 'UTF-8'));
-    }
-
-    /**
-     * @return $this
-     */
-    public function resetVotes()
-    {
-        foreach ($this->votes as $vote) {
-            $vote->setConfirmed(false);
-        }
-        $this->voteCount = 0;
-
-        return $this;
-    }
-
-    /**
-     * @param User $user
-     *
-     * @return bool
-     */
-    public function userHasVote(User $user = null)
-    {
-        if ($user != null) {
-            foreach ($this->votes as $vote) {
-                if ($vote->getUser() == $user) {
-                    return true;
-                }
-            }
-        }
-
-        return false;
     }
 
     /**

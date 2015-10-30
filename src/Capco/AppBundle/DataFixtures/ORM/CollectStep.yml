@@ -4,5 +4,4 @@ Capco\AppBundle\Entity\CollectStep:
         body: <p><text(1000)></p>
         startAt: <dateTimeBetween('-40 days', 'now')>
         endAt: <dateTimeBetween('now', '+10 days')>
-        statuses: [@status1, @status2, @status3]
         proposalForm: @proposalform1

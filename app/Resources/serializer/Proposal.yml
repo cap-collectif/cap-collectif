@@ -43,3 +43,18 @@ Capco\AppBundle\Entity\Proposal:
             expose: true
             type: DateTime
             groups: [Proposals]
+        theme:
+            expose: true
+            groups: [Proposals]
+        district:
+            expose: true
+            groups: [Proposals]
+        status:
+            expose: true
+            groups: [Proposals]
+        comments:
+            expose: true
+            groups: [Proposals]
+        votes:
+            expose: true
+            groups: [Proposals]

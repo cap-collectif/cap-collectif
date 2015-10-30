@@ -82,7 +82,7 @@ class RecalculateCountersCommand extends ContainerAwareCommand
         $query->execute();
 
         $query = $em->createQuery('update CapcoUserBundle:User u set u.commentVotesCount =
-            (select count(cv.id) from CapcoAppBundle:CommentVote cv INNER JOIN CapcoAppBundle:AbstractComment c WITH cv.comment = c where cv.user = u AND cv.confirmed = 1 AND c.isEnabled = 1 group by cv.user)');
+            (select count(cv.id) from CapcoAppBundle:CommentVote cv INNER JOIN CapcoAppBundle:Comment c WITH cv.comment = c where cv.user = u AND cv.confirmed = 1 AND c.isEnabled = 1 group by cv.user)');
         $query->execute();
 
         $query = $em->createQuery('update CapcoUserBundle:User u set u.opinionVotesCount =
@@ -215,15 +215,15 @@ class RecalculateCountersCommand extends ContainerAwareCommand
           SET o.connections_count = g.cnt'
         );
 
-        $query = $em->createQuery('update CapcoAppBundle:Opinion a set a.voteCountOk =
+        $query = $em->createQuery('update CapcoAppBundle:Opinion a set a.votesCountOk =
             (select count(ov.id) from CapcoAppBundle:OpinionVote ov where ov.opinion = a AND ov.confirmed = 1 AND ov.value = 1 group by ov.opinion)');
         $query->execute();
 
-        $query = $em->createQuery('update CapcoAppBundle:Opinion a set a.voteCountMitige =
+        $query = $em->createQuery('update CapcoAppBundle:Opinion a set a.votesCountMitige =
             (select count(ov.id) from CapcoAppBundle:OpinionVote ov where ov.opinion = a AND ov.confirmed = 1 AND ov.value = 0 group by ov.opinion)');
         $query->execute();
 
-        $query = $em->createQuery('update CapcoAppBundle:Opinion a set a.voteCountNok =
+        $query = $em->createQuery('update CapcoAppBundle:Opinion a set a.votesCountNok =
             (select count(ov.id) from CapcoAppBundle:OpinionVote ov where ov.opinion = a AND ov.confirmed = 1 AND ov.value = -1 group by ov.opinion)');
         $query->execute();
 
@@ -243,41 +243,41 @@ class RecalculateCountersCommand extends ContainerAwareCommand
         )');
         $query->execute();
 
-        $query = $em->createQuery('update CapcoAppBundle:OpinionVersion ov set ov.voteCountOk =
+        $query = $em->createQuery('update CapcoAppBundle:OpinionVersion ov set ov.votesCountOk =
             (select count(ovv.id) from CapcoAppBundle:OpinionVersionVote ovv where ovv.opinionVersion = ov AND ovv.confirmed = 1 AND ovv.value = 1 group by ovv.opinionVersion)');
         $query->execute();
 
-        $query = $em->createQuery('update CapcoAppBundle:OpinionVersion ov set ov.voteCountMitige =
+        $query = $em->createQuery('update CapcoAppBundle:OpinionVersion ov set ov.votesCountMitige =
             (select count(ovv.id) from CapcoAppBundle:OpinionVersionVote ovv where ovv.opinionVersion = ov AND ovv.confirmed = 1 AND ovv.value = 0 group by ovv.opinionVersion)');
         $query->execute();
 
-        $query = $em->createQuery('update CapcoAppBundle:OpinionVersion ov set ov.voteCountNok =
+        $query = $em->createQuery('update CapcoAppBundle:OpinionVersion ov set ov.votesCountNok =
             (select count(ovv.id) from CapcoAppBundle:OpinionVersionVote ovv where ovv.opinionVersion = ov AND ovv.confirmed = 1 AND ovv.value = -1 group by ovv.opinionVersion)');
         $query->execute();
 
         // ************************************ Votes counters **********************************************
 
-        $query = $em->createQuery('update CapcoAppBundle:Argument a set a.voteCount =
+        $query = $em->createQuery('update CapcoAppBundle:Argument a set a.votesCount =
             (select count(av.id) from CapcoAppBundle:ArgumentVote av where av.argument = a AND av.confirmed = 1 group by av.argument)');
         $query->execute();
 
-        $query = $em->createQuery('update CapcoAppBundle:Source s set s.voteCount =
+        $query = $em->createQuery('update CapcoAppBundle:Source s set s.votesCount =
             (select count(sv.id) from CapcoAppBundle:SourceVote sv where sv.source = s AND sv.confirmed = 1 group by sv.source)');
         $query->execute();
 
-        $query = $em->createQuery('update CapcoAppBundle:Idea i set i.voteCount =
+        $query = $em->createQuery('update CapcoAppBundle:Idea i set i.votesCount =
             (select count(iv.id) from CapcoAppBundle:IdeaVote iv where iv.idea = i AND iv.confirmed = 1 group by iv.idea)');
         $query->execute();
 
-        $query = $em->createQuery('update CapcoAppBundle:IdeaComment c set c.voteCount =
+        $query = $em->createQuery('update CapcoAppBundle:IdeaComment c set c.votesCount =
             (select count(cv.id) from CapcoAppBundle:CommentVote cv where cv.comment = c AND cv.confirmed = 1 group by cv.comment)');
         $query->execute();
 
-        $query = $em->createQuery('update CapcoAppBundle:IdeaComment c set c.voteCount =
+        $query = $em->createQuery('update CapcoAppBundle:IdeaComment c set c.votesCount =
             (select count(cv.id) from CapcoAppBundle:CommentVote cv where cv.comment = c AND cv.confirmed = 1 group by cv.comment)');
         $query->execute();
 
-        $query = $em->createQuery('update CapcoAppBundle:EventComment c set c.voteCount =
+        $query = $em->createQuery('update CapcoAppBundle:EventComment c set c.votesCount =
             (select count(cv.id) from CapcoAppBundle:CommentVote cv where cv.comment = c AND cv.confirmed = 1 group by cv.comment)');
         $query->execute();
 

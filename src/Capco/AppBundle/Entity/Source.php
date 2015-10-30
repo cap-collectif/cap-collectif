@@ -8,6 +8,8 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Validator\Constraints as Assert;
+use Capco\AppBundle\Traits\VotableOkTrait;
+use Capco\AppBundle\Entity\Interfaces\VotableInterface;
 
 /**
  * Source.
@@ -16,7 +18,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\SourceRepository")
  * @ORM\HasLifecycleCallbacks()
  */
-class Source
+class Source implements VotableInterface
 {
     const TYPE_FOR = 1;
     const LINK = 0;
@@ -28,6 +30,7 @@ class Source
     ];
 
     use ValidableTrait;
+    use VotableOkTrait;
 
     /**
      * @var int
@@ -141,23 +144,9 @@ class Source
     /**
      * @var
      *
-     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\SourceVote", mappedBy="source", cascade={"persist", "remove"}, orphanRemoval=true)
-     */
-    private $votes;
-
-    /**
-     * @var
-     *
      * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\Reporting", mappedBy="Source", cascade={"persist", "remove"}, orphanRemoval=true)
      */
     private $Reports;
-
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="vote_count_source", type="integer")
-     */
-    private $voteCount = 0;
 
     /**
      * @var bool
@@ -185,7 +174,6 @@ class Source
         $this->type = self::LINK;
         $this->Reports = new ArrayCollection();
         $this->votes = new ArrayCollection();
-        $this->voteCount = 0;
         $this->updatedAt = new \DateTime();
     }
 
@@ -193,9 +181,9 @@ class Source
     {
         if ($this->id) {
             return $this->getTitle();
-        } else {
-            return 'New source';
         }
+
+        return 'New source';
     }
 
     /**
@@ -465,40 +453,6 @@ class Source
     }
 
     /**
-     * @return mixed
-     */
-    public function getVotes()
-    {
-        return $this->votes;
-    }
-
-    /**
-     * @param $vote
-     *
-     * @return $this
-     */
-    public function addVote($vote)
-    {
-        if (!$this->votes->contains($vote)) {
-            $this->votes->add($vote);
-        }
-
-        return $this;
-    }
-
-    /**
-     * @param $vote
-     *
-     * @return $this
-     */
-    public function removeVote($vote)
-    {
-        $this->votes->removeElement($vote);
-
-        return $this;
-    }
-
-    /**
      * @return string
      */
     public function getReports()
@@ -528,24 +482,6 @@ class Source
     public function removeReport(Reporting $report)
     {
         $this->Reports->removeElement($report);
-
-        return $this;
-    }
-
-    /**
-     * @return int
-     */
-    public function getVoteCount()
-    {
-        return $this->voteCount;
-    }
-
-    /**
-     * @param int $voteCount
-     */
-    public function setVoteCount($voteCount)
-    {
-        $this->voteCount = $voteCount;
 
         return $this;
     }
@@ -646,34 +582,6 @@ class Source
         }
 
         return $this->Opinion;
-    }
-
-    public function resetVotes()
-    {
-        foreach ($this->votes as $vote) {
-            $this->removeVote($vote);
-        }
-        $this->voteCount = 0;
-
-        return $this;
-    }
-
-    /**
-     * @param User $user
-     *
-     * @return bool
-     */
-    public function userHasVote(User $user = null)
-    {
-        if ($user != null) {
-            foreach ($this->votes as $vote) {
-                if ($vote->getUser() == $user && $vote->isConfirmed()) {
-                    return true;
-                }
-            }
-        }
-
-        return false;
     }
 
     /**

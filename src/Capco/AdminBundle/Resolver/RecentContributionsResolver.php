@@ -36,7 +36,7 @@ class RecentContributionsResolver
                 $result = $this->em->getRepository('CapcoAppBundle:Idea')->find($id);
                 break;
             case 'comment':
-                $result = $this->em->getRepository('CapcoAppBundle:AbstractComment')->find($id);
+                $result = $this->em->getRepository('CapcoAppBundle:Comment')->find($id);
                 break;
             default:
                 throw new NotFoundHttpException('Contribution not found for type '.$type.' and id '.$id);
@@ -66,7 +66,7 @@ class RecentContributionsResolver
                 $result = $this->em->getRepository('CapcoAppBundle:Idea')->getArrayById($id);
                 break;
             case 'comment':
-                $result = $this->em->getRepository('CapcoAppBundle:AbstractComment')->getArrayById($id);
+                $result = $this->em->getRepository('CapcoAppBundle:Comment')->getArrayById($id);
                 $result['title'] = 'Commentaire';
                 break;
             default:
@@ -122,7 +122,7 @@ class RecentContributionsResolver
         }
 
         $comments = $this->em
-            ->getRepository('CapcoAppBundle:AbstractComment')
+            ->getRepository('CapcoAppBundle:Comment')
             ->getRecentOrdered()
         ;
         foreach ($comments as $key => $comment) {

@@ -9,10 +9,11 @@ use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Validator\Constraints as Assert;
 use Capco\AppBundle\Traits\TrashableTrait;
 use Capco\AppBundle\Traits\SluggableTitleTrait;
-use Capco\AppBundle\Traits\VotableTrait;
+use Capco\AppBundle\Traits\VotableOkNokMitigeTrait;
 use Capco\AppBundle\Traits\SelfLinkableTrait;
 use Capco\UserBundle\Entity\User;
 use Capco\AppBundle\Entity\Interfaces\SelfLinkableInterface;
+use Capco\AppBundle\Entity\Interfaces\VotableInterface;
 
 /**
  * Opinion.
@@ -21,11 +22,11 @@ use Capco\AppBundle\Entity\Interfaces\SelfLinkableInterface;
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\OpinionRepository")
  * @ORM\HasLifecycleCallbacks()
  */
-class Opinion implements SelfLinkableInterface
+class Opinion implements SelfLinkableInterface, VotableInterface
 {
     use TrashableTrait;
     use SluggableTitleTrait;
-    use VotableTrait;
+    use VotableOkNokMitigeTrait;
     use ValidableTrait;
     use SelfLinkableTrait;
 
@@ -128,11 +129,6 @@ class Opinion implements SelfLinkableInterface
      * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\OpinionModal", mappedBy="opinion",  cascade={"persist", "remove"}, orphanRemoval=true)
      */
     protected $modals;
-
-    /**
-     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\OpinionVote", mappedBy="opinion", cascade={"persist", "remove"}, orphanRemoval=true)
-     */
-    protected $votes;
 
     /**
      * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\Reporting", mappedBy="Opinion", cascade={"persist", "remove"})
@@ -489,42 +485,6 @@ class Opinion implements SelfLinkableInterface
     }
 
     /**
-     * Get votes.
-     *
-     * @return string
-     */
-    public function getVotes()
-    {
-        return $this->votes;
-    }
-
-    /**
-     * @param OpinionVote $vote
-     *
-     * @return $this
-     */
-    public function addVote($vote)
-    {
-        if (!$this->votes->contains($vote)) {
-            $this->votes->add($vote);
-        }
-
-        return $this;
-    }
-
-    /**
-     * @param OpinionVote $vote
-     *
-     * @return $this
-     */
-    public function removeVote(OpinionVote $vote)
-    {
-        $this->votes->removeElement($vote);
-
-        return $this;
-    }
-
-    /**
      * @return string
      */
     public function getReports()
@@ -646,16 +606,6 @@ class Opinion implements SelfLinkableInterface
 
     // ******************************* Custom methods **************************************
 
-    public function getVoteValueByUser(User $user)
-    {
-        foreach ($this->votes as $vote) {
-            if ($vote->getUser() === $user && $vote->isConfirmed()) {
-                return $vote->getValue();
-            }
-        }
-
-        return;
-    }
 
     public function userHasReport(User $user)
     {
@@ -696,62 +646,6 @@ class Opinion implements SelfLinkableInterface
         }
 
         return $i;
-    }
-
-    /**
-     * Increase count for opinion Vote.
-     *
-     * @param $type
-     */
-    public function increaseVotesCount($type)
-    {
-        if ($type == OpinionVote::$voteTypes['ok']) {
-            ++$this->voteCountOk;
-
-            return;
-        }
-        if ($type == OpinionVote::$voteTypes['nok']) {
-            ++$this->voteCountNok;
-
-            return;
-        }
-        if ($type == OpinionVote::$voteTypes['mitige']) {
-            ++$this->voteCountMitige;
-        }
-    }
-
-    /**
-     * Decrease count for opinion Vote.
-     *
-     * @param $type
-     */
-    public function decreaseVotesCount($type)
-    {
-        if ($type == OpinionVote::$voteTypes['ok']) {
-            --$this->voteCountOk;
-
-            return;
-        }
-        if ($type == OpinionVote::$voteTypes['nok']) {
-            --$this->voteCountNok;
-
-            return;
-        }
-        if ($type == OpinionVote::$voteTypes['mitige']) {
-            --$this->voteCountMitige;
-        }
-    }
-
-    public function resetVotes()
-    {
-        foreach ($this->votes as $vote) {
-            $this->removeVote($vote);
-        }
-        $this->voteCountMitige = 0;
-        $this->voteCountNok = 0;
-        $this->voteCountOk = 0;
-
-        return $this;
     }
 
     /**
@@ -878,10 +772,4 @@ class Opinion implements SelfLinkableInterface
         }
     }
 
-    public function setVotes($votes)
-    {
-        $this->votes = $votes;
-
-        return $this;
-    }
 }

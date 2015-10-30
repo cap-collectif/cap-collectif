@@ -119,7 +119,7 @@ class ArgumentsController extends FOSRestController
             ->setUser($user)
         ;
 
-        $argument->setVoteCount($argument->getVoteCount() + 1);
+        $argument->incrementVotesCount();
         $this->getDoctrine()->getManager()->persist($vote);
         $this->getDoctrine()->getManager()->persist($argument);
         $this->getDoctrine()->getManager()->flush();
@@ -163,7 +163,7 @@ class ArgumentsController extends FOSRestController
             throw new BadRequestHttpException('You have not voted for this argument.');
         }
 
-        $argument->setVoteCount($argument->getVoteCount() - 1);
+        $argument->decrementVotesCount();
         $this->getDoctrine()->getManager()->remove($vote);
         $this->getDoctrine()->getManager()->flush();
     }

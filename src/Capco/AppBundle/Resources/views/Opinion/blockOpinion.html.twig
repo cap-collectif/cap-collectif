@@ -1,12 +1,12 @@
 {% set isVersion = isVersion is not defined ? false : isVersion %}
-{% set nbVotes = opinion.getVoteCountAll %}
+{% set nbVotes = opinion.getVotesCountAll %}
 {% set nbArguments = opinion.argumentsCount %}
 {% set nbSources = opinion.sourcesCount %}
 {% set nbVersions = isVersion ? null : opinion.versionsCount %}
 {% set top = isVersion ? opinion.parent.step.project.versionsRankingThreshold : opinion.step.project.opinionsRankingThreshold %}
 {% set showRanking = showRanking is defined ? showRanking : false %}
 {% set bodyCols = showRanking ? 'col-xs-11  col-sm-7  col-md-8  col-lg-9' : 'col-xs-12  col-sm-8  col-md-9  col-lg-10' %}
-<li class="opinion has-chart{% if opinion.author.isVip %} bg-vip{% endif %}" data-ok="{{ opinion.voteCountOk }}" data-nok="{{ opinion.voteCountNok }}" data-mitige="{{ opinion.voteCountMitige }}" data-pie-id="{{ opinion.id }}">
+<li class="opinion has-chart{% if opinion.author.isVip %} bg-vip{% endif %}" data-ok="{{ opinion.votesCountOk }}" data-nok="{{ opinion.votesCountNok }}" data-mitige="{{ opinion.votesCountMitige }}" data-pie-id="{{ opinion.id }}">
     <div class="row">
         {% if showRanking %}
             <div class="col-xs-1">

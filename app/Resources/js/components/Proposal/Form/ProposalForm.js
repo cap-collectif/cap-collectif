@@ -23,24 +23,41 @@ const ProposalForm = React.createClass({
         title: '',
         body: '',
         theme: this.props.themes[0].id,
+        district: this.props.districts[0].id,
+      },
+      custom: {
+
       },
       errors: {
         title: [],
         body: [],
         theme: [],
+        district: [],
       },
     };
   },
 
   componentDidMount() {
     this.initializeCkeditor('body', 'form');
+
+    this.props.form.questions.map((question) => {
+      this.initializeCkeditor('custom-' + question.id, 'custom');
+    });
+
   },
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.isSubmitting === true) {
       if (this.isValid()) {
+        const form = this.state.form;
+        const responses = [];
+        const custom = this.state.custom;
+        Object.keys(custom).map((key) => {
+          responses.push({value: custom[key]});
+        })
+        form.proposalResponses = responses;
         ProposalActions
-          .add(this.props.form.id, this.state.form)
+          .add(this.props.form.id, form)
           .then(() => {
             this.setState(this.getInitialState());
             this.props.onSubmitSuccess();
@@ -57,6 +74,9 @@ const ProposalForm = React.createClass({
 
   formValidationRules: {
     theme: {
+      notNull: {message: 'proposal.constraints.title'},
+    },
+    district: {
       notNull: {message: 'proposal.constraints.title'},
     },
     title: {
@@ -114,6 +134,27 @@ const ProposalForm = React.createClass({
         </Input>
 
         <Input
+          type="select"
+          ref="district"
+          valueLink={this.linkState('form.district')}
+          label={this.getIntlMessage('proposal.district')}
+          labelClassName="control-label h5"
+          groupClassName={this.getGroupStyle('district')}
+          help={this.renderFormErrors('district')}
+          bsStyle={this.getFieldStyle('district')}
+        >
+          {
+            this.props.districts.map((district) => {
+              return (
+                <option key={district.id} value={district.id}>
+                  {district.name}
+                </option>
+              );
+            })
+          }
+        </Input>
+
+        <Input
           type="textarea"
           valueLink={null} // state is automatically updated by CkeditorMixin
           ref="body"
@@ -123,6 +164,20 @@ const ProposalForm = React.createClass({
           help={this.renderFormErrors('body')}
           bsStyle={this.getFieldStyle('body')}
         />
+
+        {
+          this.props.form.questions.map((question) => {
+            return (
+              <Input
+                type="textarea"
+                valueLink={null} // state is automatically updated by CkeditorMixin
+                ref={'custom-' + question.id}
+                label={question.title}
+                labelClassName="control-label h5"
+              />
+            );
+          })
+        }
 
       </form>
     );

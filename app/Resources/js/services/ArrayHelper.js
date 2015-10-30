@@ -25,22 +25,13 @@ class ArrayHelper {
     return els;
   }
 
-  sortArrayByField(els, sortField = 'title', naturalSorting = false, sortOrder = 'ASC') {
-    let field = sortField;
-    let order = sortOrder;
-    let nsort = naturalSorting;
+  sortArrayByField(els, field = 'title', nsort = false, order = 'ASC') {
     return els.sort((el1, el2) => {
       if (el1[field] === 'undefined' || el1[field] === null) {
         return -1;
       }
       if (el2[field] === 'undefined' || el2[field] === null) {
         return 1;
-      }
-      // We never do want to sort contributions by children number
-      if (field === 'childrenElementsNb' && (el1.displayType === 'contribution')) {
-        field = 'title';
-        order = 'ASC';
-        nsort = true;
       }
       if (order === 'ASC') {
         return nsort ? this.naturalComparison(el1[field], el2[field]) : el1[field] > el2[field] ? 1 : -1;

@@ -168,13 +168,13 @@ class OpinionVersionAdmin extends Admin
             ->add('comment', null, array(
                 'label' => 'admin.fields.opinion_version.comment',
             ))
-            ->add('voteCountOk', null, array(
+            ->add('votesCountOk', null, array(
                 'label' => 'admin.fields.opinion_version.vote_count_ok',
             ))
-            ->add('voteCountNok', null, array(
+            ->add('votesCountNok', null, array(
                 'label' => 'admin.fields.opinion_version.vote_count_nok',
             ))
-            ->add('voteCountMitige', null, array(
+            ->add('votesCountMitige', null, array(
                 'label' => 'admin.fields.opinion_version.vote_count_mitige',
             ))
             ->add('argumentsCount', null, array(
