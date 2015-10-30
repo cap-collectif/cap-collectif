@@ -55,8 +55,8 @@ class RecalculateSynthesesCountersCommand extends ContainerAwareCommand
 
             foreach ($publishedChildren as $child) {
                 $votes = $child['votes'];
-                foreach ($votes as $index => $nb) {
-                    $score += $nb * $index;
+                foreach ($votes as $nb) {
+                    $score += $nb;
                 }
             }
 
