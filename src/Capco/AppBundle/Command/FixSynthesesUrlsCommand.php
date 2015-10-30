@@ -32,7 +32,7 @@ class FixSynthesesUrlsCommand extends ContainerAwareCommand
         foreach ($elements as $el) {
             $contribution = $em->getRepository($el->getLinkedDataClass())->find($el->getLinkedDataId());
             $urlResolver = $container->get('capco.url.resolver');
-            $el->setLinkedDataUrl($urlResolver->getObjectUrl($contribution, true));
+            $el->setLinkedDataUrl($urlResolver->getObjectUrl($contribution, false));
         }
         $em->flush();
 
