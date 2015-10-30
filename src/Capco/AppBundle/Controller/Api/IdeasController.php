@@ -9,7 +9,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Capco\AppBundle\Form\CommentType;
 use Capco\AppBundle\CapcoAppBundleEvents;
-use Capco\AppBundle\Event\CommentChangedEvent;
+use Capco\AppBundle\Event\AbstractCommentChangedEvent;
 use FOS\RestBundle\Controller\FOSRestController;
 use FOS\RestBundle\Controller\Annotations\View;
 use FOS\RestBundle\Controller\Annotations\Get;
@@ -142,13 +142,11 @@ class IdeasController extends FOSRestController
 
         $idea->setCommentsCount($idea->getCommentsCount() + 1);
         $this->getDoctrine()->getManager()->persist($comment);
-
-        $this->get('event_dispatcher')->dispatch(
-            CapcoAppBundleEvents::COMMENT_CHANGED,
-            new CommentChangedEvent($comment, 'add')
-        );
-
         $this->getDoctrine()->getManager()->flush();
+        $this->get('event_dispatcher')->dispatch(
+            CapcoAppBundleEvents::ABSTRACT_COMMENT_CHANGED,
+            new AbstractCommentChangedEvent($comment, 'add')
+        );
     }
 
     /**

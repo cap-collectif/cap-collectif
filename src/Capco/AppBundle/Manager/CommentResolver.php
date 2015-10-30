@@ -5,7 +5,7 @@ namespace Capco\AppBundle\Manager;
 use Capco\AppBundle\Entity\Event;
 use Capco\AppBundle\Entity\EventComment;
 use Capco\AppBundle\Entity\IdeaComment;
-use Capco\AppBundle\Entity\Comment;
+use Capco\AppBundle\Entity\AbstractComment as Comment;
 use Capco\AppBundle\Entity\Post;
 use Capco\AppBundle\Entity\PostComment;
 use Capco\AppBundle\Entity\Idea;

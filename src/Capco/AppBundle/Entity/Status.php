@@ -3,8 +3,6 @@
 namespace Capco\AppBundle\Entity;
 
 use Capco\AppBundle\Traits\TimestampableTrait;
-use Capco\AppBundle\Traits\PositionableTrait;
-use Capco\AppBundle\Traits\ColorableTrait;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -20,8 +18,6 @@ use Capco\AppBundle\Validator\Constraints as CapcoAssert;
 class Status
 {
     use TimestampableTrait;
-    use PositionableTrait;
-    use ColorableTrait;
 
     /**
      * @var int
@@ -47,11 +43,6 @@ class Status
      */
     protected $updatedAt;
 
-    /**
-     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\CollectStep", inversedBy="statuses", cascade={"persist"})
-     * @ORM\JoinColumn(name="step_id", referencedColumnName="id", onDelete="CASCADE", nullable=false)
-     */
-    private $step;
 
     /**
      * Constructor.
@@ -92,18 +83,6 @@ class Status
     public function setName($name)
     {
         $this->name = $name;
-        return $this;
-    }
-
-    public function getStep()
-    {
-        return $this->step;
-    }
-
-    public function setStep(CollectStep $step)
-    {
-        $this->step = $step;
-
         return $this;
     }
 

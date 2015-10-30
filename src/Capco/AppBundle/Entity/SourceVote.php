@@ -33,7 +33,7 @@ class SourceVote extends AbstractVote
      *
      * @return $this
      */
-    public function setSource(Source $source)
+    public function setSource($source)
     {
         $this->source = $source;
         $this->source->addVote($this);

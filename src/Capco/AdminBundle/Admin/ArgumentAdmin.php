@@ -34,7 +34,7 @@ class ArgumentAdmin extends Admin
             ], null, array(
                 'property' => 'username',
             ))
-            ->add('votesCount', null, array(
+            ->add('voteCount', null, array(
                 'label' => 'admin.fields.argument.vote_count',
             ))
             ->add('updatedAt', null, array(
@@ -72,7 +72,7 @@ class ArgumentAdmin extends Admin
             ->add('Author', 'sonata_type_model', array(
                 'label' => 'admin.fields.argument.author',
             ))
-            ->add('votesCount', null, array(
+            ->add('voteCount', null, array(
                 'label' => 'admin.fields.argument.vote_count',
             ))
             ->add('isEnabled', null, array(
@@ -158,7 +158,7 @@ class ArgumentAdmin extends Admin
             ->add('Author', null, array(
                 'label' => 'admin.fields.argument.author',
             ))
-            ->add('votesCount', null, array(
+            ->add('voteCount', null, array(
                 'label' => 'admin.fields.argument.vote_count',
             ))
             ->add('createdAt', null, array(

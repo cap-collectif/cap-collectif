@@ -3,97 +3,35 @@
 namespace Capco\AppBundle\Traits;
 
 use Capco\AppBundle\Entity\OpinionVote;
-use Capco\AppBundle\Entity\AbstractVote;
-use Capco\UserBundle\Entity\User;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 trait VotableOkTrait
 {
 
-    private $votes; // Dynamic Relation
-
     /**
-     * @ORM\Column(name="votes_count", type="integer")
+     * @var int
+     *
+     * @ORM\Column(name="vote_count_ok", type="integer")
      */
-    protected $votesCount = 0;
+    protected $voteCountOk = 0;
 
-    public function resetVotes()
+    public function incrementVoteOkCount()
     {
-        foreach ($this->votes as $vote) {
-            $this->removeVote($vote);
-        }
-        $this->votesCount = 0;
-
-        return $this;
+        ++$this->voteCountOk;
     }
 
-    public function userHasVote(User $user = null)
+    public function decrementVoteOkCount()
     {
-        if ($user != null) {
-            foreach ($this->votes as $vote) {
-                if ($vote->getUser() == $user && $vote->isConfirmed()) {
-                    return true;
-                }
-            }
-        }
-
-        return false;
+        --$this->voteCountOk;
     }
 
-    public function getVotes()
+    public function getVoteCountOk()
     {
-        return $this->votes;
+        return $this->voteCountOk;
     }
 
-    public function setVotes(Collection $votes)
+    public function setVoteCountOk($voteCountOk)
     {
-        $this->votes = $votes;
-
-        return $this;
-    }
-
-    public function addVote(AbstractVote $vote)
-    {
-        if (!$this->votes->contains($vote)) {
-            $this->votes->add($vote);
-        }
-
-        return $this;
-    }
-
-    public function removeVote(AbstractVote $vote)
-    {
-        $this->votes->removeElement($vote);
-
-        return $this;
-    }
-
-    public function incrementVotesCount()
-    {
-        ++$this->votesCount;
-
-        return $this;
-    }
-
-    public function decrementVotesCount()
-    {
-        if ($this->votesCount > 0) {
-            --$this->votesCount;
-        }
-
-        return $this;
-    }
-
-    public function getVotesCount()
-    {
-        return $this->votesCount;
-    }
-
-    public function setVotesCount($votesCount)
-    {
-        $this->votesCount = $votesCount;
-
-        return $this;
+        $this->voteCountOk = $voteCountOk;
     }
 }

@@ -286,14 +286,6 @@ class StepController extends Controller
         $em = $this->getDoctrine()->getManager();
         $serializer = $this->get('jms_serializer');
 
-        $types = $serializer->serialize([
-            'types' => $em->getRepository('CapcoUserBundle:UserType')->findAll(),
-        ], 'json', SerializationContext::create()->setGroups(['Default']));
-
-        $districts = $serializer->serialize([
-            'districts' => $em->getRepository('CapcoAppBundle:District')->findAll(),
-        ], 'json', SerializationContext::create()->setGroups(['Districts']));
-
         $themes = $serializer->serialize([
             'themes' => $em->getRepository('CapcoAppBundle:Theme')->findAll(),
         ], 'json', SerializationContext::create()->setGroups(['Themes']));
@@ -311,8 +303,6 @@ class StepController extends Controller
             'currentStep' => $step,
             'themes' => $themes,
             'statuses' => $statuses,
-            'districts' => $districts,
-            'types' => $types,
             'form' => $form,
         ]);
 

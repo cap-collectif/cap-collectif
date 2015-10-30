@@ -5,8 +5,6 @@ namespace Capco\AppBundle\Repository;
 use Capco\AppBundle\Entity\ProposalForm;
 use Capco\AppBundle\Entity\Theme;
 use Capco\AppBundle\Entity\Status;
-use Capco\AppBundle\Entity\District;
-use Capco\UserBundle\Entity\UserType;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 
@@ -22,10 +20,9 @@ class ProposalRepository extends EntityRepository
             ->setParameter('proposalForm', $proposalForm);
     }
 
-    public function getEnabledByProposalForm(ProposalForm $proposalForm, $offset = 0, $limit = 100, $order = 'last', Theme $theme = null, Status $status = null, District $district = null, UserType $type = null)
+    public function getEnabledByProposalForm(ProposalForm $proposalForm, $offset = 0, $limit = 100, $order = 'last',Theme $theme = null,Status $status = null)
     {
         $qb = $this->getIsEnabledQueryBuilder()
-            ->join('proposal.author', 'author')
             ->andWhere('proposal.proposalForm = :proposalForm')
             ->setParameter('proposalForm', $proposalForm)
         ;
@@ -35,20 +32,10 @@ class ProposalRepository extends EntityRepository
                ->setParameter('theme', $theme);
         }
 
-        if ($status) {
-            $qb->andWhere('proposal.status = :status')
-               ->setParameter('status', $status);
-        }
-
-        if ($district) {
-            $qb->andWhere('proposal.district = :district')
-               ->setParameter('district', $district);
-        }
-
-        if ($type) {
-            $qb->andWhere('author.userType = :type')
-               ->setParameter('type', $type);
-        }
+        // if ($status) {
+        //     $qb->andWhere('proposal.status = :status')
+        //        ->setParameter('status', $status);
+        // }
 
         if ($order === 'old') {
             $qb->addOrderBy('proposal.updatedAt', 'ASC');
@@ -59,7 +46,7 @@ class ProposalRepository extends EntityRepository
         }
 
         if ($order === 'popular') {
-            $qb->addOrderBy('proposal.votesCount', 'DESC');
+            $qb->addOrderBy('proposal.voteCount', 'DESC');
         }
 
         if ($order === 'comments') {

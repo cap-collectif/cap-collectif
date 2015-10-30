@@ -9,7 +9,6 @@ const ProposalPageHeader = React.createClass({
 
   render() {
     const proposal = this.props.proposal;
-    console.log(proposal);
     return (
       <div className="container--custom container--with-sidebar">
         <div className="block">
@@ -17,10 +16,7 @@ const ProposalPageHeader = React.createClass({
           <p>{proposal.body}</p>
         </div>
         <div className="block">
-          <ShareButtonDropdown
-            url={proposal._links.show}
-            title={proposal.title}
-          />
+          <ShareButtonDropdown />
           <Button>Signaler</Button>
         </div>
       </div>

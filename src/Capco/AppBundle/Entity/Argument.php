@@ -8,8 +8,6 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Validator\Constraints as Assert;
-use Capco\AppBundle\Traits\VotableOkTrait;
-use Capco\AppBundle\Entity\Interfaces\VotableInterface;
 
 /**
  * Argument.
@@ -18,10 +16,9 @@ use Capco\AppBundle\Entity\Interfaces\VotableInterface;
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\ArgumentRepository")
  * @ORM\HasLifecycleCallbacks()
  */
-class Argument implements VotableInterface
+class Argument
 {
     use ValidableTrait;
-    use VotableOkTrait;
 
     const TYPE_AGAINST = 0;
     const TYPE_FOR = 1;
@@ -86,6 +83,13 @@ class Argument implements VotableInterface
     /**
      * @var int
      *
+     * @ORM\Column(name="vote_count", type="integer")
+     */
+    private $voteCount = 0;
+
+    /**
+     * @var int
+     *
      * @ORM\Column(name="type", type="integer")
      */
     private $type = 1;
@@ -118,6 +122,11 @@ class Argument implements VotableInterface
     private $Author;
 
     /**
+     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\ArgumentVote", mappedBy="argument", cascade={"persist", "remove"}, orphanRemoval=true)
+     */
+    private $votes;
+
+    /**
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Opinion", inversedBy="arguments", cascade={"persist"})
      * @ORM\JoinColumn(name="opinion_id", referencedColumnName="id", onDelete="CASCADE")
      */
@@ -140,15 +149,16 @@ class Argument implements VotableInterface
         $this->votes = new ArrayCollection();
         $this->Reports = new ArrayCollection();
         $this->updatedAt = new \DateTime();
+        $this->voteCount = 0;
     }
 
     public function __toString()
     {
         if ($this->id) {
             return $this->getBodyExcerpt(50);
+        } else {
+            return 'New argument';
         }
-
-        return 'New argument';
     }
 
     /**
@@ -240,6 +250,30 @@ class Argument implements VotableInterface
     public function setIsEnabled($isEnabled)
     {
         $this->isEnabled = $isEnabled;
+
+        return $this;
+    }
+
+    /**
+     * Get voteCount.
+     *
+     * @return int
+     */
+    public function getVoteCount()
+    {
+        return $this->voteCount;
+    }
+
+    /**
+     * Set voteCount.
+     *
+     * @param int $voteCount
+     *
+     * @return Argument
+     */
+    public function setVoteCount($voteCount)
+    {
+        $this->voteCount = $voteCount;
 
         return $this;
     }
@@ -351,6 +385,40 @@ class Argument implements VotableInterface
     }
 
     /**
+     * @return ArrayCollection
+     */
+    public function getVotes()
+    {
+        return $this->votes;
+    }
+
+    /**
+     * @param $vote
+     *
+     * @return $this
+     */
+    public function addVote($vote)
+    {
+        if (!$this->votes->contains($vote)) {
+            $this->votes->add($vote);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @param $vote
+     *
+     * @return $this
+     */
+    public function removeVote($vote)
+    {
+        $this->votes->removeElement($vote);
+
+        return $this;
+    }
+
+    /**
      * @return mixed
      */
     public function getOpinion()
@@ -417,6 +485,36 @@ class Argument implements VotableInterface
 
     // ************************ Custom methods *********************************
 
+    /**
+     * @return $this
+     */
+    public function resetVotes()
+    {
+        foreach ($this->votes as $vote) {
+            $this->removeVote($vote);
+        }
+        $this->voteCount = 0;
+
+        return $this;
+    }
+
+    /**
+     * @param User $user
+     *
+     * @return bool
+     */
+    public function userHasVote(User $user = null)
+    {
+        if ($user != null) {
+            foreach ($this->votes as $vote) {
+                if ($vote->getUser() == $user && $vote->isConfirmed()) {
+                    return true;
+                }
+            }
+        }
+
+        return false;
+    }
 
     /**
      * @param User $user

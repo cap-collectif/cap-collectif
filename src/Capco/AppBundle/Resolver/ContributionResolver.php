@@ -112,20 +112,20 @@ class ContributionResolver
         foreach ($project->getSteps() as $step) {
             if ($step->getStep()->isConsultationStep()) {
                 foreach ($step->getStep()->getOpinions() as $opinion) {
-                    $count += $opinion->getVotesCountAll();
+                    $count += $opinion->getVoteCountAll();
                     foreach ($opinion->getArguments() as $argument) {
-                        $count += $argument->getVotesCount();
+                        $count += $argument->getVoteCount();
                     }
                     foreach ($opinion->getSources() as $source) {
-                        $count += $source->getVotesCount();
+                        $count += $source->getVoteCount();
                     }
                     foreach ($opinion->getVersions() as $version) {
-                        $count += $version->getVotesCountAll();
+                        $count += $version->getVoteCountAll();
                         foreach ($version->getArguments() as $argument) {
-                            $count += $argument->getVotesCount();
+                            $count += $argument->getVoteCount();
                         }
                         foreach ($version->getSources() as $source) {
-                            $count += $source->getVotesCount();
+                            $count += $source->getVoteCount();
                         }
                     }
                 }

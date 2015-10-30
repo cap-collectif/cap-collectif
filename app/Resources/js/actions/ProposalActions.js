@@ -12,6 +12,11 @@ import {
   DELETE_PROPOSAL_VOTE_SUCCESS,
   DELETE_PROPOSAL_VOTE_FAILURE,
 
+  RECEIVE_PROPOSAL_COMMENTS,
+
+  CREATE_PROPOSAL_COMMENT,
+  CREATE_PROPOSAL_COMMENT_SUCCESS,
+  CREATE_PROPOSAL_COMMENT_FAILURE,
 } from '../constants/ProposalConstants';
 
 export default {
@@ -29,7 +34,7 @@ export default {
       .then((data) => {
         AppDispatcher.dispatch({
           actionType: RECEIVE_PROPOSALS,
-          proposals: data.proposals,
+          proposals: data,
           order: order,
         });
         return true;
@@ -37,7 +42,8 @@ export default {
   },
 
   add: (form, data) => {
-    return Fetcher.post(`/proposal_forms/${form}/proposals`, data);
+    return Fetcher
+      .post(`/proposal_forms/${form}/proposals`, data);
   },
 
   getOne: (form, proposal) => {
@@ -86,6 +92,38 @@ export default {
       .catch(() => {
         AppDispatcher.dispatch({
           actionType: DELETE_PROPOSAL_VOTE_FAILURE,
+        });
+      });
+  },
+
+  loadComments: (form, proposal, filter, offset = 0, limit = -1) => {
+    return Fetcher
+      .get(`/proposal_forms/${form}/proposals/${proposal}/comments?filter=${filter}&offset=${offset}&limit=${limit}`)
+      .then((data) => {
+        AppDispatcher.dispatch({
+          actionType: RECEIVE_PROPOSAL_COMMENTS,
+          comments: data.comments,
+        });
+        return true;
+      });
+  },
+
+  addComment: (form, proposal, data) => {
+    AppDispatcher.dispatch({
+      actionType: CREATE_PROPOSAL_COMMENT,
+    });
+    return Fetcher
+      .post(`/proposal_forms/${form}/proposals/${proposal}/comments`, data)
+      .then(() => {
+        AppDispatcher.dispatch({
+          actionType: CREATE_PROPOSAL_COMMENT_SUCCESS,
+          type: data.type,
+        });
+        return true;
+      })
+      .catch(() => {
+        AppDispatcher.dispatch({
+          actionType: CREATE_PROPOSAL_COMMENT_FAILURE,
         });
       });
   },

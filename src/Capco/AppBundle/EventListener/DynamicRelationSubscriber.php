@@ -30,8 +30,8 @@ class DynamicRelationSubscriber implements EventSubscriber
     public function loadClassMetadata(LoadClassMetadataEventArgs $eventArgs)
     {
         $metadata = $eventArgs->getClassMetadata();
-        $em = $eventArgs->getEntityManager();
-        $namingStrategy = $em
+        $namingStrategy = $eventArgs
+            ->getEntityManager()
             ->getConfiguration()
             ->getNamingStrategy()
         ;
@@ -39,8 +39,8 @@ class DynamicRelationSubscriber implements EventSubscriber
         foreach ($this->traits as $trait => $params) {
             switch ($trait) {
                 case 'selflinkable':
+                    // Check intersections between current class interfaces and interfaces to add dynamic relation
                     if (count(array_intersect(class_implements($metadata->getName()), $params['interfaces'])) > 0) {
-
                         $metadata->mapManyToOne([
                             'targetEntity' => $metadata->getName(),
                             'fieldName' => 'link',
@@ -60,25 +60,7 @@ class DynamicRelationSubscriber implements EventSubscriber
                             'mappedBy' => 'link',
                         ]);
                     }
-                break;
-                case 'votable':
-                    if (count(array_intersect(class_implements($metadata->getName()), $params['interfaces'])) > 0) {
-
-                        if (array_key_exists('votes', $metadata->getReflectionProperties())) {
-                            break;
-                        }
-
-                        $fieldName = lcfirst(substr($metadata->getName(), strrpos($metadata->getName(), "\\") + 1));
-
-                        $metadata->mapOneToMany([
-                            'targetEntity' => $metadata->getName().'Vote',
-                            'fieldName' => 'votes',
-                            'cascade' => ['persist', 'remove'],
-                            'orphanRemoval' => true,
-                            'mappedBy' => $fieldName,
-                        ]);
-                    }
-                break;
+                    break;
             }
         }
     }

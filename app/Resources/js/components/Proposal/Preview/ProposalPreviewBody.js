@@ -19,21 +19,12 @@ const ProposalPreviewBody = React.createClass({
         </h3>
         <div>
           <ul>
-            {proposal.theme
-              ? <li>{proposal.theme.title}</li>
-              : null
-            }
-            {proposal.district
-              ? <li>{proposal.district.name}</li>
-              : null
-            }
-            {proposal.cost
-              ? <li>{proposal.cost}</li>
-              : null
-            }
+            <li>Thème</li>
+            <li>Localisation</li>
+            <li>Cout estimé</li>
           </ul>
         </div>
-        <Label bsStyle={proposal.status.color}>{proposal.status.name}</Label>
+        <Label>{proposal.status}</Label>
       </div>
     );
   },

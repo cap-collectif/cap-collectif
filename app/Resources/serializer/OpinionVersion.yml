@@ -32,17 +32,17 @@ Capco\AppBundle\Entity\OpinionVersion:
             expose: true
             type: DateTime
             groups: [OpinionVersions, OpinionVersionPreviews]
-        votesCountNok:
+        voteCountNok:
             expose: true
             type: integer
             serialized_name: votes_nok
             groups: [OpinionVersions, OpinionVersionPreviews]
-        votesCountOk:
+        voteCountOk:
             expose: true
             type: integer
             serialized_name: votes_ok
             groups: [OpinionVersions, OpinionVersionPreviews]
-        votesCountMitige:
+        voteCountMitige:
             expose: true
             type: integer
             serialized_name: votes_mitige
@@ -81,7 +81,7 @@ Capco\AppBundle\Entity\OpinionVersion:
             serialized_name: isContribuable
             type: boolean
             groups: [OpinionVersions]
-        getVotesCountAll:
+        getVoteCountAll:
             serialized_name: votes_total
             type: integer
             groups: [OpinionVersions, OpinionVersionPreviews]

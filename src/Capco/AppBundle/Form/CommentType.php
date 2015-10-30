@@ -72,7 +72,7 @@ class CommentType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'Capco\AppBundle\Entity\Comment',
+            'data_class' => 'Capco\AppBundle\Entity\AbstractComment',
             'csrf_protection' => false,
             'translation_domain' => 'CapcoAppBundle',
         ));

@@ -6,7 +6,7 @@ use Capco\AppBundle\Entity\AbstractStep;
 use Capco\AppBundle\Entity\Event;
 use Capco\AppBundle\Entity\Idea;
 use Capco\AppBundle\Entity\Argument;
-use Capco\AppBundle\Entity\Comment;
+use Capco\AppBundle\Entity\AbstractComment;
 use Capco\AppBundle\Entity\Opinion;
 use Capco\AppBundle\Entity\OpinionVersion;
 use Capco\AppBundle\Entity\Post;
@@ -96,7 +96,7 @@ class UrlResolver
             return $this->router->generate('app_event_show', ['slug' => $object->getSlug()], $absolute);
         }
 
-        if ($object instanceof Comment) {
+        if ($object instanceof AbstractComment) {
             return $this->getObjectUrl($object->getRelatedObject());
         }
 
@@ -150,7 +150,7 @@ class UrlResolver
             return $this->router->generate('admin_capco_app_argument_show', array('id' => $object->getId()), $absolute);
         }
 
-        if ($object instanceof Comment) {
+        if ($object instanceof AbstractComment) {
             return $this->getAdminObjectUrl($object->getRelatedEntity(), $absolute);
         }
 

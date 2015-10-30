@@ -17,7 +17,7 @@ Feature: Ideas comments
           "body": @string@,
           "created_at": "@string@.isDateTime()",
           "updated_at": "@string@.isDateTime()",
-          "votes_count": @integer@,
+          "vote_count": @integer@,
           "author": {
             "username": @string@,
             "displayName": @string@,
@@ -62,7 +62,7 @@ Feature: Ideas comments
           "body": @string@,
           "created_at": "@string@.isDateTime()",
           "updated_at": "@string@.isDateTime()",
-          "votes_count": @integer@,
+          "vote_count": @integer@,
           "author": @...@,
           "answers": @...@,
           "author_email": @null@,

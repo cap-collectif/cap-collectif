@@ -25,9 +25,6 @@ class ProposalType extends AbstractType
             ->add('theme', null, [
                 'required' => true
             ])
-            ->add('district', null, [
-                'required' => true
-            ])
             ->add('proposalResponses', 'collection', [
                 'allow_add' => true,
                 'allow_delete' => false,

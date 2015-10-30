@@ -21,7 +21,7 @@ use FOS\RestBundle\Controller\Annotations\QueryParam;
 use FOS\RestBundle\Request\ParamFetcherInterface;
 use FOS\RestBundle\Util\Codes;
 use Capco\AppBundle\Form\CommentType;
-use Capco\AppBundle\Event\CommentChangedEvent;
+use Capco\AppBundle\Event\AbstractCommentChangedEvent;
 use Capco\AppBundle\CapcoAppBundleEvents;
 
 class ProposalsController extends FOSRestController
@@ -34,8 +34,6 @@ class ProposalsController extends FOSRestController
      * @QueryParam(name="order", requirements="(old|last|popular|comments)", default="last")
      * @QueryParam(name="theme", nullable=true)
      * @QueryParam(name="status", nullable=true)
-     * @QueryParam(name="district", nullable=true)
-     * @QueryParam(name="type", nullable=true)
      * @View(statusCode=200, serializerGroups={"Proposals", "ProposalResponses", "UsersInfos", "UserMedias"})
      */
     public function getProposalsAction(ProposalForm $proposalForm, ParamFetcherInterface $paramFetcher)
@@ -45,14 +43,10 @@ class ProposalsController extends FOSRestController
         $order = $paramFetcher->get('order');
         $themeId = $paramFetcher->get('theme');
         $statusId = $paramFetcher->get('status');
-        $districtId = $paramFetcher->get('district');
-        $typeId = $paramFetcher->get('type');
 
         $em = $this->getDoctrine()->getManager();
         $theme = null;
         $status = null;
-        $district = null;
-        $type = null;
 
         if ($themeId) {
             $theme = $em->getRepository('CapcoAppBundle:Theme')->find($themeId);
@@ -68,29 +62,15 @@ class ProposalsController extends FOSRestController
             }
         }
 
-        if ($districtId) {
-            $district = $em->getRepository('CapcoAppBundle:District')->find($districtId);
-            if (!$district) {
-                throw new \Exception('Wrong district');
-            }
-        }
-
-        if ($typeId) {
-            $type = $em->getRepository('CapcoUserBundle:UserType')->find($typeId);
-            if (!$type) {
-                throw new \Exception('Wrong type');
-            }
-        }
-
         $paginator = $em->getRepository('CapcoAppBundle:Proposal')
-                        ->getEnabledByProposalForm($proposalForm, $offset, $limit, $order, $theme, $status, $district, $type);
+                        ->getEnabledByProposalForm($proposalForm, $offset, $limit, $order, $theme, $status);
 
         $proposals = [];
         foreach ($paginator as $proposal) {
             $proposals[] = $proposal;
         }
 
-        return ['proposals' => $proposals];
+        return $proposals;
     }
 
     /**
@@ -159,10 +139,6 @@ class ProposalsController extends FOSRestController
             return $form;
         }
 
-        $collectStep = $proposalForm->getCurrentStep();
-        $status = $collectStep->getStatuses()[0];
-        $proposal->setStatus($status);
-
         $this->getDoctrine()->getManager()->persist($proposal);
         $this->getDoctrine()->getManager()->flush();
 
@@ -213,11 +189,6 @@ class ProposalsController extends FOSRestController
      */
     public function postProposalCommentsAction(Request $request, ProposalForm $form, Proposal $proposal)
     {
-
-        if (!$proposal->canComment()) {
-            throw new BadRequestHttpException("Error Processing Request", 1);
-        }
-
         $user = $this->getUser();
 
         $comment = (new ProposalComment())
@@ -248,8 +219,8 @@ class ProposalsController extends FOSRestController
         $this->getDoctrine()->getManager()->persist($comment);
         $this->getDoctrine()->getManager()->flush();
         $this->get('event_dispatcher')->dispatch(
-            CapcoAppBundleEvents::COMMENT_CHANGED,
-            new CommentChangedEvent($comment, 'add')
+            CapcoAppBundleEvents::ABSTRACT_COMMENT_CHANGED,
+            new AbstractCommentChangedEvent($comment, 'add')
         );
     }
 

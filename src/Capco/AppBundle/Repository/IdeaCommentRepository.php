@@ -36,7 +36,7 @@ class IdeaCommentRepository extends EntityRepository
         }
 
         if ($filter === 'popular') {
-            $qb->addOrderBy('c.votesCount', 'DESC');
+            $qb->addOrderBy('c.voteCount', 'DESC');
         }
 
         $qb

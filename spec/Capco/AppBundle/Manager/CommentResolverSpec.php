@@ -6,7 +6,7 @@ use Capco\AppBundle\Entity\Event;
 use Capco\AppBundle\Entity\EventComment;
 use Capco\AppBundle\Entity\Idea;
 use Capco\AppBundle\Entity\IdeaComment;
-use Capco\AppBundle\Entity\Comment;
+use Capco\AppBundle\Entity\AbstractComment;
 use Capco\AppBundle\Repository\EventCommentRepository;
 use Capco\AppBundle\Repository\EventRepository;
 use Capco\AppBundle\Repository\IdeaCommentRepository;

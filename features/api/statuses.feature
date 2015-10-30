@@ -8,8 +8,7 @@ Feature: Statuses
 [
   {
     "id": @integer@,
-    "name": @string@,
-    "color": @string@
+    "name": @string@
   },
   @...@
 ]

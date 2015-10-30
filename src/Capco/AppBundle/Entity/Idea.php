@@ -10,8 +10,6 @@ use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Validator\Constraints as Assert;
 use Capco\AppBundle\Validator\Constraints as CapcoAssert;
-use Capco\AppBundle\Traits\VotableOkTrait;
-use Capco\AppBundle\Entity\Interfaces\VotableInterface;
 
 /**
  * Idea.
@@ -20,11 +18,10 @@ use Capco\AppBundle\Entity\Interfaces\VotableInterface;
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\IdeaRepository")
  * @ORM\HasLifecycleCallbacks()
  */
-class Idea implements CommentableInterface, VotableInterface
+class Idea implements CommentableInterface
 {
     use CommentableTrait;
     use ValidableTrait;
-    use VotableOkTrait;
 
     public static $sortCriterias = [
         'last'     => 'idea.sort.last',
@@ -105,6 +102,13 @@ class Idea implements CommentableInterface, VotableInterface
     private $updatedAt;
 
     /**
+     * @var int
+     *
+     * @ORM\Column(name="vote_count", type="integer")
+     */
+    private $voteCount = 0;
+
+    /**
      * @var bool
      *
      * @ORM\Column(name="is_trashed", type="boolean")
@@ -158,6 +162,12 @@ class Idea implements CommentableInterface, VotableInterface
 
     /**
      * @var
+     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\IdeaVote", mappedBy="idea", cascade={"persist", "remove"}, orphanRemoval=true)
+     */
+    private $votes;
+
+    /**
+     * @var
      * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\IdeaComment", mappedBy="Idea",  cascade={"persist", "remove"})
      */
     private $comments;
@@ -170,6 +180,7 @@ class Idea implements CommentableInterface, VotableInterface
         $this->votes = new ArrayCollection();
         $this->Reports = new ArrayCollection();
         $this->comments = new ArrayCollection();
+        $this->voteCount = 0;
         $this->commentsCount = 0;
         $this->updatedAt = new \Datetime();
     }
@@ -178,9 +189,9 @@ class Idea implements CommentableInterface, VotableInterface
     {
         if ($this->id) {
             return $this->getTitle();
+        } else {
+            return 'New idea';
         }
-
-        return 'New idea';
     }
 
     /**
@@ -315,6 +326,30 @@ class Idea implements CommentableInterface, VotableInterface
     public function getUpdatedAt()
     {
         return $this->updatedAt;
+    }
+
+    /**
+     * Set voteCount.
+     *
+     * @param int $voteCount
+     *
+     * @return Idea
+     */
+    public function setVoteCount($voteCount)
+    {
+        $this->voteCount = $voteCount;
+
+        return $this;
+    }
+
+    /**
+     * Get voteCount.
+     *
+     * @return int
+     */
+    public function getVoteCount()
+    {
+        return $this->voteCount;
     }
 
     /**
@@ -500,6 +535,52 @@ class Idea implements CommentableInterface, VotableInterface
         $this->Reports->removeElement($report);
 
         return $this;
+    }
+
+    public function resetVotes()
+    {
+        foreach ($this->votes as $vote) {
+            $vote->setConfirmed(false);
+        }
+        $this->voteCount = 0;
+    }
+
+    /**
+     * Add vote.
+     *
+     * @param \Capco\AppBundle\Entity\IdeaVote $vote
+     *
+     * @return Idea
+     */
+    public function addVote(\Capco\AppBundle\Entity\IdeaVote $vote)
+    {
+        if (!$this->votes->contains($vote)) {
+            $this->votes->add($vote);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @param \Capco\AppBundle\Entity\IdeaVote $vote
+     *
+     * @return $this
+     */
+    public function removeVote(\Capco\AppBundle\Entity\IdeaVote $vote)
+    {
+        $this->votes->removeElement($vote);
+
+        return $this;
+    }
+
+    /**
+     * Get votes.
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getVotes()
+    {
+        return $this->votes;
     }
 
     // **************** Custom methods ***************

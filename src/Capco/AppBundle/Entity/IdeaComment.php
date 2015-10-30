@@ -10,7 +10,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  *
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\IdeaCommentRepository")
  */
-class IdeaComment extends Comment
+class IdeaComment extends AbstractComment
 {
     /**
      * @var

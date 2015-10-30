@@ -140,7 +140,7 @@ class IdeaRepository extends EntityRepository
             ->leftJoin('i.theme', 't')
             ->andWhere('i.isTrashed = :notTrashed')
             ->setParameter('notTrashed', false)
-            ->addOrderBy('i.votesCount', 'DESC')
+            ->addOrderBy('i.voteCount', 'DESC')
             ->addGroupBy('i.id');
 
         if ($limit) {
@@ -231,12 +231,12 @@ class IdeaRepository extends EntityRepository
 
         if ($sort === 'last') {
             $qb->orderBy('i.updatedAt', 'DESC');
-            $qb->addOrderBy('i.votesCount', 'DESC');
+            $qb->addOrderBy('i.voteCount', 'DESC');
         } elseif ($sort === 'old') {
             $qb->orderBy('i.updatedAt', 'ASC');
-            $qb->addOrderBy('i.votesCount', 'DESC');
+            $qb->addOrderBy('i.voteCount', 'DESC');
         } elseif ($sort === 'popular') {
-            $qb->orderBy('i.votesCount', 'DESC');
+            $qb->orderBy('i.voteCount', 'DESC');
             $qb->addOrderBy('i.updatedAt', 'DESC');
         } elseif ($sort === 'comments') {
             $qb->orderBy('i.commentsCount', 'DESC');

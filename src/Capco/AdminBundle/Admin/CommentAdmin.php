@@ -35,7 +35,7 @@ class CommentAdmin extends Admin
             ->add('authorEmail', null, array(
                 'label' => 'admin.fields.comment.author_email',
             ))
-            ->add('votesCount', null, array(
+            ->add('voteCount', null, array(
                 'label' => 'admin.fields.comment.vote_count',
             ))
             ->add('updatedAt', null, array(
@@ -73,7 +73,7 @@ class CommentAdmin extends Admin
                 'mapped' => false,
 
             ))
-            ->add('votesCount', null, array(
+            ->add('voteCount', null, array(
                 'label' => 'admin.fields.comment.vote_count',
             ))
             ->add('isEnabled', null, array(
@@ -154,7 +154,7 @@ class CommentAdmin extends Admin
         }
 
         $showMapper
-            ->add('votesCount', null, array(
+            ->add('voteCount', null, array(
                 'label' => 'admin.fields.comment.vote_count',
             ))
             ->add('createdAt', null, array(

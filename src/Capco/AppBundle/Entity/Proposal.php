@@ -10,7 +10,6 @@ use Capco\AppBundle\Traits\TimestampableTrait;
 use Capco\AppBundle\Traits\TrashableTrait;
 use Capco\AppBundle\Traits\VotableOkTrait;
 use Capco\UserBundle\Entity\User;
-use Capco\AppBundle\Entity\Interfaces\VotableInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
@@ -23,7 +22,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\ProposalRepository")
  * @ORM\HasLifecycleCallbacks()
  */
-class Proposal implements CommentableInterface, VotableInterface
+class Proposal implements CommentableInterface
 {
     use CommentableTrait;
     use TimestampableTrait;
@@ -79,18 +78,6 @@ class Proposal implements CommentableInterface, VotableInterface
     private $theme = null;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\District", inversedBy="proposals", cascade={"persist"})
-     * @ORM\JoinColumn(name="district_id", referencedColumnName="id", nullable=true, onDelete="SET NULL")
-     */
-    private $district = null;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Status", cascade={"persist"})
-     * @ORM\JoinColumn(name="status_id", referencedColumnName="id", nullable=false)
-     */
-    private $status;
-
-    /**
      * @var string
      *
      * @ORM\ManyToOne(targetEntity="Capco\UserBundle\Entity\User", inversedBy="proposals")
@@ -105,6 +92,18 @@ class Proposal implements CommentableInterface, VotableInterface
      * @ORM\JoinColumn(name="proposal_form_id", referencedColumnName="id", onDelete="CASCADE")
      */
     protected $proposalForm;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="vote_count", type="integer")
+     */
+    private $voteCount = 0;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\ProposalVote", mappedBy="proposal", cascade={"persist", "remove"}, orphanRemoval=true)
+     */
+    private $votes;
 
     /**
      * @var ArrayCollection
@@ -126,6 +125,7 @@ class Proposal implements CommentableInterface, VotableInterface
         $this->votes = new ArrayCollection();
         $this->comments = new ArrayCollection();
         $this->proposalResponses = new ArrayCollection();
+        $this->voteCount = 0;
         $this->commentsCount = 0;
         $this->updatedAt = new \Datetime();
     }
@@ -134,9 +134,9 @@ class Proposal implements CommentableInterface, VotableInterface
     {
         if ($this->getId()) {
             return $this->getTitle();
+        } else {
+            return 'New proposal';
         }
-
-        return 'New proposal';
     }
 
     /**
@@ -208,26 +208,6 @@ class Proposal implements CommentableInterface, VotableInterface
     }
 
     /**
-     * @return Status
-     */
-    public function getStatus()
-    {
-        return $this->status;
-    }
-
-    /**
-     * @param Status $status
-     *
-     * @return $this
-     */
-    public function setStatus(Status $status)
-    {
-        $this->status = $status;
-
-        return $this;
-    }
-
-    /**
      * @return Theme
      */
     public function getTheme()
@@ -248,28 +228,25 @@ class Proposal implements CommentableInterface, VotableInterface
         return $this;
     }
 
-
     /**
-     * @return District
+     * @return ArrayCollection
      */
-    public function getDistrict()
+    public function getVotes()
     {
-        return $this->district;
+        return $this->votes;
     }
 
     /**
-     * @param District $district
+     * @param ArrayCollection $votes
      *
      * @return $this
      */
-    public function setDistrict(District $district)
+    public function setVotes($votes)
     {
-        $this->district = $district;
-        $district->addProposal($this);
+        $this->votes = $votes;
 
         return $this;
     }
-
 
     /**
      * @return string
@@ -351,7 +328,7 @@ class Proposal implements CommentableInterface, VotableInterface
     {
         $this->proposalResponses->removeElement($proposalResponse);
     }
-
+    
     /**
      * @return ArrayCollection
      */
@@ -388,7 +365,7 @@ class Proposal implements CommentableInterface, VotableInterface
      */
     public function canDisplay()
     {
-        return $this->enabled && !$this->isTrashed && $this->getCurrentStep()->canDisplay();
+        return $this->enabled && !$this->isTrashed && $this->getStep()->canDisplay();
     }
 
     /**
@@ -396,6 +373,6 @@ class Proposal implements CommentableInterface, VotableInterface
      */
     public function canContribute()
     {
-        return $this->enabled && !$this->isTrashed && $this->getCurrentStep()->canContribute();
+        return $this->enabled && !$this->isTrashed && $this->getStep()->canContribute();
     }
 }

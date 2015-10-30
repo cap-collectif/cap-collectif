@@ -11,7 +11,6 @@ const ProposalCreate = React.createClass({
   propTypes: {
     form: React.PropTypes.object.isRequired,
     themes: React.PropTypes.array.isRequired,
-    districts: React.PropTypes.array.isRequired,
   },
   mixins: [ReactIntl.IntlMixin],
 
@@ -69,11 +68,10 @@ const ProposalCreate = React.createClass({
             </Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            <ProposalCreateInfos />
+            <ProposalCreateInfos form={this.props.form} />
             <ProposalForm
               form={this.props.form}
               themes={this.props.themes}
-              districts={this.props.districts}
               isSubmitting={this.state.isSubmitting}
               onValidationFailure={this.handleValidationFailure.bind(null, this)}
               onSubmitSuccess={this.handleSubmitSuccess.bind(null, this)}

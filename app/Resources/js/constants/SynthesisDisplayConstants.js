@@ -3,7 +3,7 @@ export default {
   ALLOWED_RULES: {
     style: ['fontSize', 'color', 'textAlign', 'fontWeight'],
     containerStyle: ['borderTop', 'paddingTop'],
-    display: ['author', 'piechart', 'counters', 'asProgressBar', 'childrenInModal', 'subtitle', 'percentage', 'expanded', 'childrenOrderedByCount', 'noChildrenSorting'],
+    display: ['author', 'piechart', 'counters', 'asProgressBar', 'childrenInModal', 'subtitle', 'percentage', 'expanded', 'foldersOrderedByCount', 'noChildrenSorting'],
   },
 
   DISPLAY_SETTINGS: [
@@ -117,6 +117,11 @@ export default {
           name: 'subtitle',
           value: 'true',
         },
+        {
+          category: 'display',
+          name: 'foldersOrderedByCount',
+          value: 'true',
+        },
       ],
     },
     {
@@ -186,38 +191,17 @@ export default {
       ],
       rules: [
         {
-          category: 'style',
-          name: 'fontSize',
-          value: '16px',
-        },
-        {
-          category: 'style',
-          name: 'fontWeight',
-          value: 'bold',
-        },
-        {
-          category: 'containerStyle',
-          name: 'borderTop',
-          value: '5px solid #dddddd',
-        },
-        {
-          category: 'containerStyle',
-          name: 'paddingTop',
-          value: '15px',
+          category: 'display',
+          name: 'asProgressBar',
+          value: true,
         },
         {
           category: 'display',
           name: 'childrenInModal',
-          value: 'true',
-        },
-        {
-          category: 'display',
-          name: 'childrenOrderedByCount',
-          value: 'true',
+          value: true,
         },
       ],
     },
-
     {
       conditions: [
         {
@@ -252,7 +236,7 @@ export default {
         },
         {
           category: 'display',
-          name: 'childrenOrderedByCount',
+          name: 'foldersOrderedByCount',
           value: 'true',
         },
       ],

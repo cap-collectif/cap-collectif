@@ -30,7 +30,7 @@ Capco\AppBundle\Entity\Source:
             expose: true
             type: DateTime
             groups: [Opinions, OpinionVersions]
-        votesCount:
+        voteCount:
             expose: true
             type: integer
             serialized_name: votes_count

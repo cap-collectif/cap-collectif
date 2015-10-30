@@ -13,7 +13,7 @@
         <div class="media__content">
             <h2 class="h4"><a href="{{ path('app_idea_show', {'slug': idea.slug}) }}">{{ idea.title }}</a></h2>
             <span class="excerpt small">
-                {% set votesCount = idea.votesCount %}
+                {% set votesCount = idea.voteCount %}
                 {% set commentsCount = idea.commentsCount %}
                 {% transchoice votesCount with {'%count%': votesCount} from 'CapcoAppBundle' %}
                     idea.show.votes

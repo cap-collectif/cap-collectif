@@ -160,9 +160,9 @@ class ConsultationStepExtractorSpec extends ObjectBehavior
         $object->getAuthor()->willReturn($author)->shouldBeCalled();
         $object->getAppendices()->willReturn(null);
         $object->getUpdatedAt()->willReturn($date)->shouldBeCalled();
-        $object->getVotesCountOk()->willReturn(25)->shouldBeCalled();
-        $object->getVotesCountNok()->willReturn(25)->shouldBeCalled();
-        $object->getVotesCountMitige()->willReturn(25)->shouldBeCalled();
+        $object->getVoteCountOk()->willReturn(25)->shouldBeCalled();
+        $object->getVoteCountNok()->willReturn(25)->shouldBeCalled();
+        $object->getVoteCountMitige()->willReturn(25)->shouldBeCalled();
 
         $element->setLinkedDataLastUpdate($date)->shouldBeCalled();
         $element->getOriginalDivision()->willReturn(null)->shouldBeCalled();

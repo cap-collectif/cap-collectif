@@ -211,8 +211,8 @@ class OpinionRepository extends EntityRepository
         if ($orderByRanking) {
             $qb
                 ->orderBy('o.ranking', 'ASC')
-                ->addOrderBy('o.votesCountOk', 'DESC')
-                ->addOrderBy('o.votesCountNok', 'ASC')
+                ->addOrderBy('o.voteCountOk', 'DESC')
+                ->addOrderBy('o.voteCountNok', 'ASC')
                 ->addOrderBy('o.updatedAt', 'DESC')
             ;
         }
@@ -332,7 +332,7 @@ class OpinionRepository extends EntityRepository
         }
 
         $qb = $this->getIsEnabledQueryBuilder()
-            ->addSelect('ot', 'aut', 'm', '(o.votesCountMitige + o.votesCountOk + o.votesCountNok) as HIDDEN vnb')
+            ->addSelect('ot', 'aut', 'm', '(o.voteCountMitige + o.voteCountOk + o.voteCountNok) as HIDDEN vnb')
             ->leftJoin('o.OpinionType', 'ot')
             ->leftJoin('o.Author', 'aut')
             ->leftJoin('aut.Media', 'm')
@@ -348,13 +348,13 @@ class OpinionRepository extends EntityRepository
         if ($opinionsSort) {
             if ($opinionsSort == 'last') {
                 $qb->addOrderBy('o.updatedAt', 'DESC');
-                $qb->addOrderBy('o.votesCountOk', 'DESC');
+                $qb->addOrderBy('o.voteCountOk', 'DESC');
             } elseif ($opinionsSort == 'old') {
                 $qb->addOrderBy('o.updatedAt', 'ASC');
-                $qb->addOrderBy('o.votesCountOk', 'DESC');
+                $qb->addOrderBy('o.voteCountOk', 'DESC');
             } elseif ($opinionsSort == 'favorable') {
-                $qb->addOrderBy('o.votesCountOk', 'DESC');
-                $qb->addOrderBy('o.votesCountNok', 'ASC');
+                $qb->addOrderBy('o.voteCountOk', 'DESC');
+                $qb->addOrderBy('o.voteCountNok', 'ASC');
                 $qb->addOrderBy('o.updatedAt', 'DESC');
             } elseif ($opinionsSort == 'votes') {
                 $qb->addOrderBy('vnb', 'DESC');
@@ -450,7 +450,7 @@ class OpinionRepository extends EntityRepository
         }
 
         $qb
-            ->orderBy('o.votesCountOk', 'DESC')
+            ->orderBy('o.voteCountOk', 'DESC')
         ;
 
         return $qb->getQuery()->getResult();

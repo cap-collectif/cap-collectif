@@ -6,9 +6,9 @@ use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\Query;
 
 /**
- * CommentRepository.
+ * AbstractCommentRepository.
  */
-class CommentRepository extends EntityRepository
+class AbstractCommentRepository extends EntityRepository
 {
     public function getRecentOrdered()
     {

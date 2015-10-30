@@ -3,14 +3,14 @@
 namespace Capco\AppBundle\Event;
 
 use Symfony\Component\EventDispatcher\Event;
-use Capco\AppBundle\Entity\Comment;
+use Capco\AppBundle\Entity\AbstractComment;
 
-class CommentChangedEvent extends Event
+class AbstractCommentChangedEvent extends Event
 {
     protected $comment;
     protected $action;
 
-    public function __construct(Comment $comment, $action)
+    public function __construct(AbstractComment $comment, $action)
     {
         $this->comment = $comment;
         $this->action = $action;

@@ -347,8 +347,8 @@ class ApiContext extends ApplicationContext
     {
         $max = 100000;
         foreach ($this->response->json()['comments'] as $comment) {
-            \PHPUnit_Framework_Assert::assertGreaterThanOrEqual($comment['votes_count'], $max);
-            $max = $comment['votes_count'];
+            \PHPUnit_Framework_Assert::assertGreaterThanOrEqual($comment['vote_count'], $max);
+            $max = $comment['vote_count'];
         }
     }
 

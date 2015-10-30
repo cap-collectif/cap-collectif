@@ -6,7 +6,7 @@ use Capco\AppBundle\Entity\Event;
 use Capco\AppBundle\Entity\EventComment;
 use Capco\AppBundle\Form\CommentType;
 use Capco\AppBundle\CapcoAppBundleEvents;
-use Capco\AppBundle\Event\CommentChangedEvent;
+use Capco\AppBundle\Event\AbstractCommentChangedEvent;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\HttpFoundation\Request;
 use FOS\RestBundle\Controller\FOSRestController;
@@ -112,8 +112,8 @@ class EventsController extends FOSRestController
         $this->getDoctrine()->getManager()->persist($comment);
         $this->getDoctrine()->getManager()->flush();
         $this->get('event_dispatcher')->dispatch(
-            CapcoAppBundleEvents::COMMENT_CHANGED,
-            new CommentChangedEvent($comment, 'add')
+            CapcoAppBundleEvents::ABSTRACT_COMMENT_CHANGED,
+            new AbstractCommentChangedEvent($comment, 'add')
         );
     }
 }

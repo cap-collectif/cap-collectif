@@ -21,12 +21,6 @@ services:
     tags:
       - { name: "jms_serializer.event_subscriber" }
 
-  capco.theme.serialization_listener:
-    class: Capco\AppBundle\EventListener\ThemeSerializationListener
-    arguments: [@router]
-    tags:
-      - { name: "jms_serializer.event_subscriber" }
-
   capco.argument.serialization_listener:
     class: Capco\AppBundle\EventListener\ArgumentSerializationListener
     arguments: [@router, @security.token_storage]

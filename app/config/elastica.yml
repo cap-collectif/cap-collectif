@@ -103,7 +103,7 @@ fos_elastica:
             authorName: ~
           persistence:
             driver: orm
-            model: Capco\AppBundle\Entity\Comment
+            model: Capco\AppBundle\Entity\AbstractComment
             provider: ~
             listener: ~
             finder: ~

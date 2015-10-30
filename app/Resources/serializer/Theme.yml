@@ -8,4 +8,4 @@ Capco\AppBundle\Entity\Theme:
         title:
             expose: true
             type: string
-            groups: [Themes, Proposals]
+            groups: [Themes]

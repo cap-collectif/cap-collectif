@@ -116,8 +116,8 @@ class OpinionsController extends FOSRestController
                     ->findOneBy(['user' => $user, 'opinion' => $opinion]);
 
         if ($previousVote) {
-            $opinion->incrementVotesCountByType($vote->getValue());
-            $opinion->decrementVotesCountByType($previousVote->getValue());
+            $opinion->incrementVoteCountByType($vote->getValue());
+            $opinion->decrementVoteCountByType($previousVote->getValue());
 
             $previousVote->setValue($vote->getValue());
             $this->get('doctrine.orm.entity_manager')->flush();
@@ -131,7 +131,7 @@ class OpinionsController extends FOSRestController
             ->setUser($user)
         ;
 
-        $opinion->incrementVotesCountByType($vote->getValue());
+        $opinion->incrementVoteCountByType($vote->getValue());
         $this->get('doctrine.orm.entity_manager')->persist($vote);
         $this->get('doctrine.orm.entity_manager')->flush();
 
@@ -170,7 +170,7 @@ class OpinionsController extends FOSRestController
             throw new BadRequestHttpException('You have not voted for this opinion.');
         }
 
-        $opinion->decrementVotesCountByType($vote->getValue());
+        $opinion->decrementVoteCountByType($vote->getValue());
         $this->get('doctrine.orm.entity_manager')->remove($vote);
         $this->get('doctrine.orm.entity_manager')->flush();
     }
@@ -658,8 +658,8 @@ class OpinionsController extends FOSRestController
                     ->findOneBy(['user' => $user, 'opinionVersion' => $version]);
 
         if ($previousVote) {
-            $version->incrementVotesCountByType($vote->getValue());
-            $version->decrementVotesCountByType($previousVote->getValue());
+            $version->incrementVoteCountByType($vote->getValue());
+            $version->decrementVoteCountByType($previousVote->getValue());
 
             $previousVote->setValue($vote->getValue());
             $this->getDoctrine()->getManager()->flush();
@@ -673,7 +673,7 @@ class OpinionsController extends FOSRestController
             ->setUser($user)
         ;
 
-        $version->incrementVotesCountByType($vote->getValue());
+        $version->incrementVoteCountByType($vote->getValue());
         $this->getDoctrine()->getManager()->persist($vote);
         $this->getDoctrine()->getManager()->flush();
 
@@ -716,7 +716,7 @@ class OpinionsController extends FOSRestController
             throw new BadRequestHttpException('You have not voted for this opinion version.');
         }
 
-        $version->decrementVotesCountByType($vote->getValue());
+        $version->decrementVoteCountByType($vote->getValue());
         $this->getDoctrine()->getManager()->remove($vote);
         $this->getDoctrine()->getManager()->flush();
     }
