@@ -5,6 +5,7 @@ namespace Capco\AppBundle\Controller\Api;
 use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\ProposalForm;
 use Capco\AppBundle\Entity\ProposalComment;
+use Capco\AppBundle\Event\ProposalDeletedEvent;
 use Capco\AppBundle\Form\ProposalType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\Form\Form;
@@ -253,4 +254,41 @@ class ProposalsController extends FOSRestController
         );
     }
 
+    /**
+     * Delete a proposal.
+     *
+     * @ApiDoc(
+     *  resource=true,
+     *  description="Delete a proposal",
+     *  statusCodes={
+     *    200 = "Returned when successful",
+     *    404 = "Returned when proposal is not found",
+     *  }
+     * )
+     *
+     * @Security("has_role('ROLE_USER')")
+     * @Delete("/proposal_forms/{proposal_form_id}/proposals/{proposal_id}")
+     * @ParamConverter("proposalForm", options={"mapping": {"proposal_form_id": "id"}, "repository_method": "find", "map_method_signature": true})
+     * @ParamConverter("proposal", options={"mapping": {"proposal_id": "id"}, "repository_method": "find", "map_method_signature": true})
+     * @View(statusCode=204)
+     *
+     * @param ProposalForm $proposalForm
+     * @param Proposal $proposal
+     */
+    public function deleteProposalAction(ProposalForm $proposalForm, Proposal $proposal)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $proposal = $em->getRepository('CapcoAppBundle:Proposal')->find($proposal->getId());
+
+        if (!$proposal) {
+            throw $this->createNotFoundException('Proposal not found');
+        }
+
+        $em->remove($proposal);
+        $this->get('event_dispatcher')->dispatch(
+            CapcoAppBundleEvents::PROPOSAL_DELETED,
+            new ProposalDeletedEvent($proposal, 'remove')
+        );
+        $em->flush();
+    }
 }

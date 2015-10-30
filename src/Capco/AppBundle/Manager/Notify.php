@@ -65,22 +65,22 @@ class Notify implements MailerInterface
     public function sendConfirmationEmailMessage(UserInterface $user)
     {
         $template = $this->parameters['confirmation.template'];
-        $url = $this->router->generate('fos_user_registration_confirm', array('token' => $user->getConfirmationToken()), true);
-        $rendered = $this->templating->render($template, array(
+        $url = $this->router->generate('fos_user_registration_confirm', ['token' => $user->getConfirmationToken()], true);
+        $rendered = $this->templating->render($template, [
             'user' => $user,
             'confirmationUrl' => $url,
-        ));
+        ]);
         $this->sendFOSEmail($rendered, $user->getEmail());
     }
 
     public function sendResettingEmailMessage(UserInterface $user)
     {
         $template = $this->parameters['resetting.template'];
-        $url = $this->router->generate('fos_user_resetting_reset', array('token' => $user->getConfirmationToken()), true);
-        $rendered = $this->templating->render($template, array(
+        $url = $this->router->generate('fos_user_resetting_reset', ['token' => $user->getConfirmationToken()], true);
+        $rendered = $this->templating->render($template, [
             'user' => $user,
             'confirmationUrl' => $url,
-        ));
+        ]);
         $this->sendFOSEmail($rendered, $user->getEmail());
     }
 
@@ -113,13 +113,13 @@ class Notify implements MailerInterface
         if ($to) {
             $subject = $this->translator->trans(
                 'reporting.notification.subject',
-                array(
+                [
                     '%sitename%' => $this->resolver->getValue('global.site.fullname'),
-                ),
+                ],
                 'CapcoAppBundle'
             );
             $template = 'CapcoAppBundle:Mail:notifyReporting.html.twig';
-            $type = $this->translator->trans(Reporting::$statusesLabels[$report->getStatus()], array(), 'CapcoAppBundle');
+            $type = $this->translator->trans(Reporting::$statusesLabels[$report->getStatus()], [], 'CapcoAppBundle');
             $body = $this->templating->render(
                 $template,
                 [
@@ -149,6 +149,25 @@ class Notify implements MailerInterface
                 [
                     'contribution' => $contribution,
                     'trashUrl' => $this->urlResolver->getTrashedObjectUrl($contribution, true),
+                ]
+            );
+
+            $this->sendEmail($contribution->getAuthor()->getEmail(), $from, $from, $body, $subject);
+        }
+    }
+
+    public function notifyProposalDeletion($contribution)
+    {
+        $from = $this->resolver->getValue('admin.mail.notifications.receive_address');
+        if ($from && $contribution->getAuthor()) {
+            $subject = $this->translator->trans(
+                'proposal_deletion.notification.subject', [], 'CapcoAppBundle'
+            );
+            $template = 'CapcoAppBundle:Mail:notifyProposalDeletion.html.twig';
+            $body = $this->templating->render(
+                $template,
+                [
+                    'contribution' => $contribution,
                 ]
             );
 
