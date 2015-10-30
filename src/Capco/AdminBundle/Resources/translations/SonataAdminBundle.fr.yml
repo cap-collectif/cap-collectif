@@ -41,6 +41,7 @@ admin.label.opinion_type: Éléments de structure
 admin.label.opinion_version: Modifications
 admin.label.page: Pages statiques
 admin.label.post: Articles
+admin.label.district: Quartiers
 admin.label.recent_contributions: Contributions à traiter
 admin.label.recent_posts: "Derniers articles"
 admin.label.reporting: Signalements
@@ -239,6 +240,8 @@ admin:
       opinion_types: Éléments de structure
       updated_at: Mise à jour
       created_at: Création
+    district:
+      name: Nom
     event:
       group_event: Évènement
       group_meta: Métadonnées
@@ -423,6 +426,12 @@ admin:
       body: Contenu
       author: Auteur
       rating: Note
+      theme: Thème
+      no_theme: Aucun thème
+      status: Statut
+      no_status: Aucun statut
+      district: Quartier
+      no_district: Aucun quartier
       annotation: Annotation
       enabled: Publié
       isTrashed: Dans la corbeille
@@ -449,6 +458,10 @@ admin:
       question_type: Type de question
     question_type:
       type: Type
+    status:
+      name: Nom
+      color: Couleur
+      position: Position
     recent_contributions:
       actions: Actions
       author: Auteur
@@ -535,8 +548,10 @@ admin:
       type: Type d'étape
       updated_at: Mise à jour
       proposal_form: Formulaire
+      statuses: Statuts
       group_general: Général
       group_form: Formulaire
+      group_statuses: Statuts
       no_proposal_form: Aucun formulaire
     synthesis:
       enabled: Publiée
