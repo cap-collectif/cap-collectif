@@ -166,10 +166,6 @@ class ProposalsController extends FOSRestController
             return $form;
         }
 
-        $collectStep = $proposalForm->getCurrentStep();
-        $status = $collectStep->getStatuses()[0];
-        $proposal->setStatus($status);
-
         $this->getDoctrine()->getManager()->persist($proposal);
         $this->getDoctrine()->getManager()->flush();
 
