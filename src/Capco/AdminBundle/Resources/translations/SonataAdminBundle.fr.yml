@@ -426,6 +426,10 @@ admin:
       body: Contenu
       author: Auteur
       rating: Note
+      theme: Thème
+      no_theme: Aucun thème
+      district: Quartier
+      no_district: Aucun quartier
       annotation: Annotation
       enabled: Publié
       isTrashed: Dans la corbeille

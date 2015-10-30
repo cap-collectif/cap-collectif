@@ -39,6 +39,18 @@ class ProposalAdmin extends Admin
                 /*'read_only' => true,
                 'disabled' => true,*/
             ])
+            ->add('theme', 'sonata_type_model', [
+                'label' => 'admin.fields.proposal.theme',
+                'required' => false,
+                'empty_value' => 'admin.fields.proposal.no_theme',
+                'btn_add' => false,
+            ])
+            ->add('district', 'sonata_type_model', [
+                'label' => 'admin.fields.proposal.district',
+                'required' => false,
+                'empty_value' => 'admin.fields.proposal.no_district',
+                'btn_add' => false,
+            ])
             ->add('rating', 'choice', [
                 'label' => 'admin.fields.proposal.rating',
                 'required' => false,
