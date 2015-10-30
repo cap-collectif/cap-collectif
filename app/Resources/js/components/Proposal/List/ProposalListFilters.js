@@ -63,7 +63,7 @@ const ProposalListFilters = React.createClass({
     ProposalActions.load(this.props.id, this.state.order, this.state.filters);
   },
 
-  buttons: ['last', 'old', 'comments'],
+  buttons: ['last', 'old', 'popular', 'comments'],
   filters: ['theme', 'status', 'type', 'district'],
 
   render() {
@@ -99,7 +99,7 @@ const ProposalListFilters = React.createClass({
                     ref={filter}
                     onChange={this.handleFilterChange.bind(this, filter)}
                   >
-                    <option value="" selected>
+                    <option value="" disabled selected>
                       {this.getIntlMessage('global.select_' + filter)}
                     </option>
                     {

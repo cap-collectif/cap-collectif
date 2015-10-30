@@ -7,10 +7,6 @@ const ProposalPageHeader = React.createClass({
   },
   mixins: [ReactIntl.IntlMixin],
 
-  isTheAuthor() {
-    return false;
-  },
-
   render() {
     const proposal = this.props.proposal;
     console.log(proposal);
@@ -25,10 +21,7 @@ const ProposalPageHeader = React.createClass({
             url={proposal._links.show}
             title={proposal.title}
           />
-          {this.isTheAuthor()
-            ? <Button>Supprimer</Button>
-            : null
-          }
+          <Button>Signaler</Button>
         </div>
       </div>
     );

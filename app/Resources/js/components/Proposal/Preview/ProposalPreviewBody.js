@@ -13,30 +13,28 @@ const ProposalPreviewBody = React.createClass({
     });
 
     return (
-      <div className={classes} style={{clear: 'both', paddingTop: '5px'}}>
-        <h3 className="opinion__title" style={{marginTop: 0, height: '110px', wordBreak: 'break-word', overflow: 'hidden'}}>
+      <div className={classes}>
+        <h3 className="opinion__title">
           <a href={proposal._links.show}>{proposal.title}</a>
         </h3>
         <div>
-        {proposal.theme
-          ? <div style={{marginTop: 5}}>
-              <span>
-                <i className="cap cap-tag-1-1"></i>{proposal.theme.title}
-              </span>
-            </div>
-          : null
-        }
-        {proposal.district
-          ? <div style={{marginTop: 5}}>
-              <span>
-                <i className="cap cap-marker-1-1"></i>{proposal.district.name}
-              </span>
-            </div>
-          : null
-        }
+          <ul>
+            {proposal.theme
+              ? <li>{proposal.theme.title}</li>
+              : null
+            }
+            {proposal.district
+              ? <li>{proposal.district.name}</li>
+              : null
+            }
+            {proposal.cost
+              ? <li>{proposal.cost}</li>
+              : null
+            }
+          </ul>
+        </div>
+        <Label bsStyle={proposal.status.color}>{proposal.status.name}</Label>
       </div>
-      <Label bsStyle={proposal.status.color}>{proposal.status.name}</Label>
-    </div>
     );
   },
 

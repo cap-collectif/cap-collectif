@@ -112,8 +112,8 @@ Feature: Proposal Restful Api
 #"""
 #    Then the JSON response status code should be 200
 
-#  @database
-#  Scenario: logged in API client wants to edit a proposal
-#    Given I am logged in to api as user
-#    When I send a DELETE request to "api/proposal_forms/1/proposals/1" with json:
-#    Then the JSON response status code should be 200
+  @database
+  Scenario: logged in API client wants to remove a proposal
+    Given I am logged in to api as user
+    When I send a DELETE request to "api/proposal_forms/1/proposals/2"
+    Then the JSON response status code should be 204

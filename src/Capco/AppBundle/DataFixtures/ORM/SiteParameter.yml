@@ -188,9 +188,10 @@ Capco\AppBundle\Entity\SiteParameter:
     SiteParameter29:
         keyname: admin.mail.notifications.receive_address
         category: settings.notifications
-        value: coucou@coucou.com
+        value: dev@cap-collectif.com
         position: 1
         type: 4
+
     SiteParameter30:
         keyname: admin.mail.contact
         category: pages.contact

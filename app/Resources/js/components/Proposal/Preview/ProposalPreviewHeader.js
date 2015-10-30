@@ -13,8 +13,8 @@ const ProposalPreviewHeader = React.createClass({
 
     return (
       <span className={classes}>
-        <UserAvatar user={proposal.author} style={{marginRight: 15}} className="pull-left" />
-        <div className="opinion__data" style={{height: 50}}>
+        <UserAvatar user={proposal.author} className="pull-left" />
+        <div className="opinion__data">
           <UserLink user={proposal.author} />
         </div>
       </span>
