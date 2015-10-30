@@ -1,48 +1,50 @@
 <table class="table">
-    {% set proposals = admin.collectStep.proposalForm.proposals %}
-    <th>{{ 'admin.fields.project.proposals_table.title'|trans({}, 'SonataAdminBundle') }}</th>
-    <th>{{ 'admin.fields.project.proposals_table.author'|trans({}, 'SonataAdminBundle') }}</th>
-    <th>{{ 'admin.fields.project.proposals_table.enabled'|trans({}, 'SonataAdminBundle') }}</th>
-    <th>{{ 'admin.fields.project.proposals_table.isTrashed'|trans({}, 'SonataAdminBundle') }}</th>
-    <th>{{ 'admin.fields.project.proposals_table.updatedAt'|trans({}, 'SonataAdminBundle') }}</th>
-    <th>{{ 'admin.fields.project.proposals_table.actions'|trans({}, 'SonataAdminBundle') }}</th>
+    {% if admin.collectStep is not null %}
+        {% set proposals = admin.collectStep.proposalForm.proposals %}
+        <th>{{ 'admin.fields.project.proposals_table.title'|trans({}, 'SonataAdminBundle') }}</th>
+        <th>{{ 'admin.fields.project.proposals_table.author'|trans({}, 'SonataAdminBundle') }}</th>
+        <th>{{ 'admin.fields.project.proposals_table.enabled'|trans({}, 'SonataAdminBundle') }}</th>
+        <th>{{ 'admin.fields.project.proposals_table.isTrashed'|trans({}, 'SonataAdminBundle') }}</th>
+        <th>{{ 'admin.fields.project.proposals_table.updatedAt'|trans({}, 'SonataAdminBundle') }}</th>
+        <th>{{ 'admin.fields.project.proposals_table.actions'|trans({}, 'SonataAdminBundle') }}</th>
 
-    {% for proposal in proposals %}
-        <tr class="sonata-ba-view-container">
-            <td><a href="/admin/capco/app/proposal/{{ proposal.id }}/show">{{ proposal }}</a></td>
-            <td><a href="/admin/capco/user/user/{{ proposal.author.id }}/show">{{ proposal.author }}</a></td>
-            <td>
-                <label class="label label{% if proposal.enabled %}-success{% else %}-danger{% endif %}">
-                    {% if proposal.enabled %}
-                        {{ 'admin.fields.project.proposals_table.yes'|trans({}, 'SonataAdminBundle') }}
-                    {% else %}
-                        {{ 'admin.fields.project.proposals_table.no'|trans({}, 'SonataAdminBundle') }}
-                    {% endif %}
-                </label>
-            </td>
-            <td>
-                <label class="label label{% if proposal.isTrashed %}-success{% else %}-danger{% endif %}">
-                    {% if proposal.isTrashed %}
-                        {{ 'admin.fields.project.proposals_table.yes'|trans({}, 'SonataAdminBundle') }}
-                    {% else %}
-                        {{ 'admin.fields.project.proposals_table.no'|trans({}, 'SonataAdminBundle') }}
-                    {% endif %}
-                </label>
-            </td>
-            <td>
-                {{ proposal.updatedAt|date('d M Y H:m:i') }}
-            </td>
-            <td class="sonata-ba-list-field sonata-ba-list-field-actions col-md-4" objectid="{{ proposal.id }}">
-                <div class="btn-group">
-                    <a href="/admin/capco/app/proposal/{{ proposal.id }}/show" class="btn btn-sm btn-default view_link" title="{{ 'link_action_show'|trans({}, 'SonataAdminBundle') }}">
-                        <i class="glyphicon glyphicon-zoom-in"></i> {{ 'link_action_show'|trans({}, 'SonataAdminBundle') }}
-                    </a>
-                    <a href="/admin/capco/app/proposal/{{ proposal.id }}/edit" class="btn btn-sm btn-default edit_link" title="{{ 'link_action_edit'|trans({}, 'SonataAdminBundle') }}">
-                        <i class="glyphicon glyphicon-edit"></i> {{ 'link_action_edit'|trans({}, 'SonataAdminBundle') }}
-                    </a>
-                </div>
+        {% for proposal in proposals %}
+            <tr class="sonata-ba-view-container">
+                <td><a href="/admin/capco/app/proposal/{{ proposal.id }}/show">{{ proposal }}</a></td>
+                <td><a href="/admin/capco/user/user/{{ proposal.author.id }}/show">{{ proposal.author }}</a></td>
+                <td>
+                    <label class="label label{% if proposal.enabled %}-success{% else %}-danger{% endif %}">
+                        {% if proposal.enabled %}
+                            {{ 'admin.fields.project.proposals_table.yes'|trans({}, 'SonataAdminBundle') }}
+                        {% else %}
+                            {{ 'admin.fields.project.proposals_table.no'|trans({}, 'SonataAdminBundle') }}
+                        {% endif %}
+                    </label>
+                </td>
+                <td>
+                    <label class="label label{% if proposal.isTrashed %}-success{% else %}-danger{% endif %}">
+                        {% if proposal.isTrashed %}
+                            {{ 'admin.fields.project.proposals_table.yes'|trans({}, 'SonataAdminBundle') }}
+                        {% else %}
+                            {{ 'admin.fields.project.proposals_table.no'|trans({}, 'SonataAdminBundle') }}
+                        {% endif %}
+                    </label>
+                </td>
+                <td>
+                    {{ proposal.updatedAt|date('d M Y H:m:i') }}
+                </td>
+                <td class="sonata-ba-list-field sonata-ba-list-field-actions col-md-4" objectid="{{ proposal.id }}">
+                    <div class="btn-group">
+                        <a href="/admin/capco/app/proposal/{{ proposal.id }}/show" class="btn btn-sm btn-default view_link" title="{{ 'link_action_show'|trans({}, 'SonataAdminBundle') }}">
+                            <i class="glyphicon glyphicon-zoom-in"></i> {{ 'link_action_show'|trans({}, 'SonataAdminBundle') }}
+                        </a>
+                        <a href="/admin/capco/app/proposal/{{ proposal.id }}/edit" class="btn btn-sm btn-default edit_link" title="{{ 'link_action_edit'|trans({}, 'SonataAdminBundle') }}">
+                            <i class="glyphicon glyphicon-edit"></i> {{ 'link_action_edit'|trans({}, 'SonataAdminBundle') }}
+                        </a>
+                    </div>
 
-            </td>
-        </tr>
-    {% endfor %}
+                </td>
+            </tr>
+        {% endfor %}
+    {% endif %}
 </table>
