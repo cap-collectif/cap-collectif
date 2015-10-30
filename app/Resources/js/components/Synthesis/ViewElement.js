@@ -41,6 +41,20 @@ const ViewElement = React.createClass({
     return false;
   },
 
+  getPercentageTooltip(contributions, score, percentage) {
+    return (
+      <Tooltip>
+        <FormattedMessage
+          message={this.getIntlMessage('percentage.tooltip')}
+          contributions={contributions}
+          scoreSign={Math.sign(score) < 0 ? "-" : "+"}
+          score={Math.abs(score)}
+          percentage={percentage}
+          />
+      </Tooltip>
+    );
+  },
+
   renderAuthor() {
     if (SynthesisDisplayRules.getValueForRule(this.props.settings, 'display', 'author')) {
       return (
@@ -116,18 +130,14 @@ const ViewElement = React.createClass({
 
   renderPercentage() {
     if (SynthesisDisplayRules.getValueForRule(this.props.settings, 'display', 'percentage') && this.props.parent) {
-      const percentage = Math.round(
+      let percentage = Math.round(
         (this.props.element.childrenElementsNb / this.props.parent.childrenElementsNb) * 1000
       ) / 10;
-      const tooltip = (
-        <Tooltip>
-          <FormattedMessage
-            message={this.getIntlMessage('percentage.tooltip')}
-            contributions={this.props.element.publishedChildrenCount}
-            score={this.props.element.childrenScore}
-            percentage={percentage}
-          />
-        </Tooltip>
+      percentage > 0 ? percentage : 0;
+      const tooltip = this.getPercentageTooltip(
+        this.props.element.publishedChildrenCount,
+        this.props.element.childrenScore,
+        percentage
       );
       return (
         <OverlayTrigger placement="top" overlay={tooltip}>
@@ -164,18 +174,14 @@ const ViewElement = React.createClass({
 
   renderAsProgressBar() {
     if (this.props.parent) {
-      const percentage = Math.round(
+      let percentage = Math.round(
         (this.props.element.childrenElementsNb / this.props.parent.parentChildrenElementsNb) * 1000
       ) / 10;
-      const tooltip = (
-        <Tooltip>
-          <FormattedMessage
-            message={this.getIntlMessage('percentage.tooltip')}
-            contributions={this.props.element.publishedChildrenCount}
-            score={this.props.element.childrenScore}
-            percentage={percentage}
-            />
-        </Tooltip>
+      percentage = percentage > 0 ? percentage : 0;
+      const tooltip = this.getPercentageTooltip(
+        this.props.element.publishedChildrenCount,
+        this.props.element.childrenScore,
+        percentage
       );
       return (
         <div className="synthesis__element">
