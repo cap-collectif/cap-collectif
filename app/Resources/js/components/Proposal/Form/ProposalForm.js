@@ -10,6 +10,7 @@ const ProposalForm = React.createClass({
   propTypes: {
     form: React.PropTypes.object.isRequired,
     themes: React.PropTypes.array.isRequired,
+    districts: React.PropTypes.array.isRequired,
     isSubmitting: React.PropTypes.bool.isRequired,
     onValidationFailure: React.PropTypes.func.isRequired,
     onSubmitSuccess: React.PropTypes.func.isRequired,
@@ -25,9 +26,7 @@ const ProposalForm = React.createClass({
         theme: this.props.themes[0].id,
         district: this.props.districts[0].id,
       },
-      custom: {
-
-      },
+      custom: {},
       errors: {
         title: [],
         body: [],
@@ -43,7 +42,6 @@ const ProposalForm = React.createClass({
     this.props.form.questions.map((question) => {
       this.initializeCkeditor('custom-' + question.id, 'custom');
     });
-
   },
 
   componentWillReceiveProps(nextProps) {
@@ -54,7 +52,7 @@ const ProposalForm = React.createClass({
         const custom = this.state.custom;
         Object.keys(custom).map((key) => {
           responses.push({value: custom[key]});
-        })
+        });
         form.proposalResponses = responses;
         ProposalActions
           .add(this.props.form.id, form)
