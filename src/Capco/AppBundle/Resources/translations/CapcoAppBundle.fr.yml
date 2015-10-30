@@ -684,20 +684,6 @@ moderation:
       body: Bonjour,<br> nous avons le regret de vous informer que votre contribution "%title%" a été déplacée dans la corbeille pour le motif suivant :
       contribution: Voir votre contribution
 
-proposal_deletion:
-  notification:
-      subject: La contribution a été supprimée par son auteur
-      body: |
-        Bonjour,
-
-        Une proposition vient d’être supprimée par %author% sur %sitename%.
-
-        Projet : %project%
-        Étape : %step%
-
-        Contribution :
-        %content%
-
 reporting:
   create:
     title: Signaler un contenu

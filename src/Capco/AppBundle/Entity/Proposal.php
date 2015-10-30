@@ -14,7 +14,6 @@ use Capco\AppBundle\Entity\Interfaces\VotableInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
-use Gedmo\SoftDeleteable\Traits\SoftDeleteableEntity;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -23,7 +22,6 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Table(name="proposal")
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\ProposalRepository")
  * @ORM\HasLifecycleCallbacks()
- * @Gedmo\SoftDeleteable(fieldName="deletedAt")
  */
 class Proposal implements CommentableInterface, VotableInterface
 {
@@ -33,7 +31,6 @@ class Proposal implements CommentableInterface, VotableInterface
     use EnableTrait;
     use TrashableTrait;
     use SluggableTitleTrait;
-    use SoftDeleteableEntity;
 
     public static $ratings = [1, 2, 3, 4, 5];
 

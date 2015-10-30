@@ -37,6 +37,19 @@
         </div>
 
         <div class="col-xs-12  col-sm-8  col-md-9" id="details">
+            {% if currentStep.body is not null %}
+                <p class="text-center opinion-type__title level--0">
+                    {{ 'project.show.meta.intro.title' | trans({}, 'CapcoAppBundle') }}
+                </p>
+                <div class="block  block--bordered">
+                    <div class="opinion  opinion--current  opinion--default">
+                        <div class="box">
+                            <div class="more">{{ currentStep.body | raw }}</div>
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+
             <h2 class="h2">
                 {{ currentStep.proposalForm.proposals | length }} propositions
                 <span

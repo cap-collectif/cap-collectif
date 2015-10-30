@@ -64,12 +64,6 @@ services:
     tags:
       - { name: "kernel.event_subscriber" }
 
-  capco.proposal.subscriber:
-    class: Capco\AppBundle\EventListener\ProposalSubscriber
-    arguments: [@doctrine.orm.entity_manager, @capco.notify_manager]
-    tags:
-      - { name: "kernel.event_subscriber" }
-
   capco.synthesis.log_manager:
     class: Capco\AppBundle\Manager\LogManager
     arguments: [@translator, @fos_user.user_manager, @doctrine.orm.entity_manager]

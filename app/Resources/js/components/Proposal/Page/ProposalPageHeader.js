@@ -40,7 +40,7 @@ const ProposalPageHeader = React.createClass({
             </p>
           </div>
         </div>
-        <ul className="nav nav-pills consultation__infos">
+        <ul className="nav nav-pills project__infos">
           <li>
             <div className="value">{proposal.votes_count}</div>
             <div className="excerpt category">votes</div>
@@ -49,11 +49,16 @@ const ProposalPageHeader = React.createClass({
             <div className="value">{proposal.comments_count}</div>
             <div className="excerpt category">commentaires</div>
           </li>
-          <li>
-            <Label bsStyle={proposal.status.color}>{proposal.status.name}</Label>
-            {proposal.district.name}
+          <li style={{fontSize: 26, paddingTop: 5}}>
+            <Label bsSize="large" bsStyle={proposal.status.color}>{proposal.status.name}</Label>
           </li>
         </ul>
+        <div style={{marginTop: 15}}>
+          <span>
+            <i className="cap cap-marker-1-1"></i>{proposal.district.name}
+          </span>
+        </div>
+
       </div>
     );
   },

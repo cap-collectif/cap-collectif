@@ -15,11 +15,13 @@ const ProposalPreviewFooter = React.createClass({
     return (
       <div className={classes}>
         <span className="excerpt small">
+        {/*
           <FormattedMessage
             message={this.getIntlMessage('global.votes')}
             num={proposal.comments_count}
           />
           { ' • ' }
+        */}
           <FormattedMessage
             message={this.getIntlMessage('global.comments')}
             num={proposal.comments_count}

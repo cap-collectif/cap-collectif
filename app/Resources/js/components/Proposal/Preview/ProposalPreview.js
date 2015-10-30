@@ -22,7 +22,7 @@ const ProposalPreview = React.createClass({
 
     return (
       <Col componentClass="li" xs={12} sm={6} md={4} ld={2}>
-        <div className={classes}>
+        <div className={classes} style={{height: '300px'}}>
           <ProposalPreviewHeader proposal={proposal} />
           <ProposalPreviewBody proposal={proposal} />
           <ProposalPreviewFooter proposal={proposal} />
