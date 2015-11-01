@@ -25,6 +25,7 @@ use Capco\AppBundle\Form\CommentType;
 use Capco\AppBundle\Event\CommentChangedEvent;
 use Capco\AppBundle\CapcoAppBundleEvents;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
+use Capco\AppBundle\Entity\Status;
 
 class ProposalsController extends FOSRestController
 {
@@ -147,17 +148,20 @@ class ProposalsController extends FOSRestController
     public function postProposalAction(Request $request, ProposalForm $proposalForm)
     {
         $user = $this->getUser();
+        
+        $proposal = (new Proposal())
+            ->setAuthor($user)
+            ->setProposalForm($proposalForm)
+            ->setEnabled(true)
+        ;
 
         $defaultStatus = $this->getDoctrine()->getManager()
             ->getRepository('CapcoAppBundle:Status')
             ->findOneBy(['position' => '0']);
-
-        $proposal = (new Proposal())
-            ->setAuthor($user)
-            ->setProposalForm($proposalForm)
-            ->setStatus($defaultStatus)
-            ->setEnabled(true)
-        ;
+            
+        if ($defaultStatus) {
+            $proposal->setStatus($defaultStatus);
+        }
 
         $form = $this->createForm(new ProposalType(), $proposal);
         $form->handleRequest($request);
