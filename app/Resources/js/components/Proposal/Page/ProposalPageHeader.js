@@ -49,9 +49,12 @@ const ProposalPageHeader = React.createClass({
             <div className="value">{proposal.comments_count}</div>
             <div className="excerpt category">commentaires</div>
           </li>
-          <li style={{fontSize: 26, paddingTop: 5}}>
-            <Label bsSize="large" bsStyle={proposal.status.color}>{proposal.status.name}</Label>
-          </li>
+          {proposal.status
+            ? <li style={{fontSize: 26, paddingTop: 5}}>
+                <Label bsSize="large" bsStyle={proposal.status.color}>{proposal.status.name}</Label>
+              </li>
+            : null   
+          }
         </ul>
         <div style={{marginTop: 15}}>
           <span>

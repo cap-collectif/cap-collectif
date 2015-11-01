@@ -35,7 +35,10 @@ const ProposalPreviewBody = React.createClass({
           : null
         }
       </div>
-      <Label bsStyle={proposal.status.color}>{proposal.status.name}</Label>
+      {proposal.status
+          ? <Label bsStyle={proposal.status.color}>{proposal.status.name}</Label>
+          : null
+       }
     </div>
     );
   },
