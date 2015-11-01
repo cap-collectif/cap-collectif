@@ -20,7 +20,7 @@ class CollectStep extends AbstractStep
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\ProposalForm", inversedBy="steps", cascade={"persist", "remove"})
      * @ORM\JoinColumn(name="proposal_form_id", referencedColumnName="id", nullable=true, onDelete="SET NULL")
      */
-    private $proposalForm;
+    private $proposalForm = null;
 
     /**
      * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\Status", mappedBy="step", cascade={"persist"})
@@ -59,7 +59,7 @@ class CollectStep extends AbstractStep
      * @param ProposalForm $proposalForm
      * @return ArrayCollection
      */
-    public function setProposalForm(ProposalForm $proposalForm)
+    public function setProposalForm($proposalForm)
     {
         $this->proposalForm = $proposalForm;
         return $this;
@@ -71,6 +71,21 @@ class CollectStep extends AbstractStep
     public function getStatuses()
     {
         return $this->statuses;
+    }
+    
+    public function addStatus($status)
+    {
+        if (!$this->statuses->contains($status)) {
+            $this->statuses->add($status);
+        }
+        return $this;
+    }
+    
+    public function removeStatus($status)
+    {
+        $this->statuses->removeElement($status);
+
+        return $this;
     }
 
 }
