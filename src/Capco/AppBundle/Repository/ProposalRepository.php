@@ -72,6 +72,17 @@ class ProposalRepository extends EntityRepository
 
         return new Paginator($qb);
     }
+    
+    public function countEnabledForForm($form)
+    {
+        $qb = $this
+            ->getIsEnabledQueryBuilder()
+            ->select('COUNT(proposal.id) as proposalsCount')
+            ->andWhere('proposal.proposalForm = :form')
+            ->setParameter('form', $form)
+        ;
+        return $qb->getQuery()->getSingleScalarResult();
+    }
 
     /**
      * @param string $alias

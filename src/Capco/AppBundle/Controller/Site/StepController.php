@@ -89,35 +89,6 @@ class StepController extends Controller
     }
 
     /**
-     * @Route("/project/{projectSlug}/collect/{stepSlug}", name="app_project_show_collect")
-     * @Route("/consultation/{consultationSlug}/collect/{stepSlug}", name="app_consultation_show_collect")
-     * @Template("CapcoAppBundle:Step:collect.html.twig")
-     * @ParamConverter("step", class="CapcoAppBundle:CollectStep", options={"mapping" = {"stepSlug": "slug"}})
-     * @ParamConverter("project", class="CapcoAppBundle:Project", options={"mapping" = {"projectSlug": "slug"}, "repository_method": "getOne", "map_method_signature": true})
-     *
-     * @param Project     $project
-     * @param CollectStep $step
-     *
-     * @return array
-     */
-    public function showCollectAction(Project $project, CollectStep $step)
-    {
-        if (!$step->canDisplay()) {
-            throw new NotFoundHttpException();
-        }
-
-        $em = $this->getDoctrine()->getManager();
-        if (!$project) {
-            throw new NotFoundHttpException();
-        }
-
-        return [
-            'project' => $project,
-            'currentStep' => $step,
-        ];
-    }
-
-    /**
      * @Route("/project/{projectSlug}/ranking/{stepSlug}", name="app_project_show_ranking")
      * @Route("/consultation/{projectSlug}/ranking/{stepSlug}", name="app_consultation_show_ranking")
      * @Template("CapcoAppBundle:Step:ranking.html.twig")
@@ -285,6 +256,11 @@ class StepController extends Controller
 
         $em = $this->getDoctrine()->getManager();
         $serializer = $this->get('jms_serializer');
+        
+        $proposalsCount = $em
+            ->getRepository('CapcoAppBundle:Proposal')
+            ->countEnabledForForm($step->getProposalForm())
+        ;
 
         $types = $serializer->serialize([
             'types' => $em->getRepository('CapcoUserBundle:UserType')->findAll(),
@@ -309,6 +285,7 @@ class StepController extends Controller
         $response = $this->render('CapcoAppBundle:Step:collect.html.twig', [
             'project' => $project,
             'currentStep' => $step,
+            'proposalsCount' => $proposalsCount,
             'themes' => $themes,
             'statuses' => $statuses,
             'districts' => $districts,
