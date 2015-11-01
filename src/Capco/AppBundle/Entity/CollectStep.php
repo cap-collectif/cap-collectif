@@ -77,6 +77,7 @@ class CollectStep extends AbstractStep
     {
         if (!$this->statuses->contains($status)) {
             $this->statuses->add($status);
+            $status->setStep($this);
         }
         return $this;
     }
