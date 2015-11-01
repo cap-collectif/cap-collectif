@@ -241,7 +241,7 @@ class ProjectAdmin extends Admin
     {
         $subject = $this->getSubject();
 
-        if ($subject->getCurrentStep()->isCollectStep()) {
+        if ($subject && $subject->getCurrentStep() && $subject->getCurrentStep()->isCollectStep()) {
             $this->collectStep = $subject->getCurrentStep();
         }
 
