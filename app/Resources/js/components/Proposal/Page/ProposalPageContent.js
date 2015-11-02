@@ -18,7 +18,7 @@ const ProposalPageHeader = React.createClass({
       <div className="container--custom container--with-sidebar">
         <div className="block">
           <h2 className="h2">{ this.getIntlMessage('proposal.description') }</h2>
-          <p>{proposal.body}</p>
+          <div dangerouslySetInnerHTML={{__html: proposal.body}} />
         </div>
         <div className="block">
           <ShareButtonDropdown
