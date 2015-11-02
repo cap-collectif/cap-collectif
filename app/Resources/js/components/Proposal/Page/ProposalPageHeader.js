@@ -53,7 +53,7 @@ const ProposalPageHeader = React.createClass({
             ? <li style={{fontSize: 26, paddingTop: 5}}>
                 <Label bsSize="large" bsStyle={proposal.status.color}>{proposal.status.name}</Label>
               </li>
-            : null   
+            : null
           }
         </ul>
         <div style={{marginTop: 15}}>

@@ -35,7 +35,7 @@ const ViewElement = React.createClass({
         <FormattedMessage
           message={this.getIntlMessage('percentage.tooltip')}
           contributions={contributions}
-          scoreSign={Math.sign(score) < 0 ? '-' : '+'}
+          scoreSign={score < 0 ? '-' : '+'}
           score={Math.abs(score)}
           percentage={percentage}
           />
