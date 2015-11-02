@@ -47,8 +47,7 @@ Feature: Proposal Restful Api
     {
       "id": @integer@,
       "value": @string@
-    },
-    @...@
+    }
   ]
 }
 """
@@ -72,8 +71,7 @@ Feature: Proposal Restful Api
         {
           "id": @integer@,
           "value": @string@
-        },
-        @...@
+        }
       ],
       "votes": @array@,
       "votes_count": @integer@,
