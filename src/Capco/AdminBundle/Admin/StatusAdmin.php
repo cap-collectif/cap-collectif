@@ -23,7 +23,7 @@ class StatusAdmin extends Admin
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
-            ->add('position', 'integer', [
+            ->add('position', null, [
                 'label' => 'admin.fields.status.position',
             ])
             ->add('name', null, [

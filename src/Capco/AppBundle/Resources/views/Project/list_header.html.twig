@@ -11,11 +11,11 @@
             <div class="pull-right  opinion__header__filter">
                 {% if opinions_count > 1 %}
                     <div class="btn-group">
-                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" alt="{{ 'opinion.sort.label_sr' | trans({'%name%': opinionType.title ~ " " ~ opinionType.subtitle}, 'CapcoAppBundle') }}">
+                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             {% if opinionsSort is defined %}
                                 {{ 'opinion.sort.sorted_by' | trans({'%sortOrder%': ('opinion.sort.' ~ opinionsSort) | trans({}, 'CapcoAppBundle')}, 'CapcoAppBundle') }}
                             {% else %}
-                                {{ 'opinion.sort.label' | trans({}, 'CapcoAppBundle') }}
+                                {{ 'opinion.sort.label' | trans({'%name%': opinionType.subtitle}, 'CapcoAppBundle') }}
                             {% endif %}
                         <span class="caret"></span></button>
                         <ul class="dropdown-menu">
@@ -23,7 +23,7 @@
                                 <li>
                                     <a
                                         href="{{ path('app_consultation_show_opinions_sorted', {projectSlug: project.slug, stepSlug: currentStep.slug, opinionTypeSlug: opinionType.slug, opinionsSort: opinionSortOrderKey}) }}"
-                                        title="{{ 'opinion.sort.sort_by' | trans({'%name%': opinionType.title ~ ' ' ~ opinionType.subtitle, '%sortOrder%': ('opinion.sort.' ~ opinionSortOrderKey) | trans({}, 'CapcoAppBundle')}, 'CapcoAppBundle') }}"
+                                        title="{{ 'opinion.sort.sort_by' | trans({'%name%': opinionType.title ~ ' - ' ~ opinionType.subtitle, '%sortOrder%': ('opinion.sort.' ~ opinionSortOrderKey) | trans({}, 'CapcoAppBundle')}, 'CapcoAppBundle') }}"
                                         >{{ opinionSortOrder | trans({}, 'CapcoAppBundle') }}</a>
                                 </li>
                             {% endfor %}

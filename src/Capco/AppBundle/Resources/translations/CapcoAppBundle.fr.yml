@@ -670,8 +670,7 @@ opinion:
     votes: Les plus votés
     favorable: Les plus favorables
     comments: Les plus commentés
-    label: Trier par
-    label_sr: Trier "%name%" par
+    label: Trier "%name%" par
     sort_by: Trier "%name%" selon "%sortOrder%"
     sorted_by: Trié selon "%sortOrder%"
   error:
