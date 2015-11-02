@@ -18,7 +18,7 @@ class Version20151102111843 extends AbstractMigration
         // this up() migration is auto-generated, please modify it to your needs
         $this->abortIf($this->connection->getDatabasePlatform()->getName() != 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
-        $this->addSql('ALTER TABLE proposal_response ADD value VARCHAR(255) NOT NULL');
+        $this->addSql('ALTER TABLE proposal_response ADD value LONGTEXT NOT NULL');
     }
 
     /**

@@ -43,7 +43,7 @@ class ProposalResponse
 
     /**
      * @var string
-     * @ORM\Column(name="value", type="string")
+     * @ORM\Column(name="value", type="text")
      */
     private $value;
 
