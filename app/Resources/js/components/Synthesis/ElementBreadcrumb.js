@@ -1,5 +1,4 @@
 import ElementTitle from './ElementTitle';
-const Link = ReactRouter.Link;
 
 const ElementBreadcrumb = React.createClass({
   propTypes: {
@@ -10,7 +9,7 @@ const ElementBreadcrumb = React.createClass({
 
   getDefaultProps() {
     return {
-      link: true,
+      link: 'edition',
     };
   },
 
@@ -40,24 +39,11 @@ const ElementBreadcrumb = React.createClass({
     return items;
   },
 
-  renderLinkOrSpan(element) {
-    if (this.props.link && element.id) {
-      return (
-        <Link to={'/element/' + element.id} >
-          <ElementTitle element={element} />
-        </Link>
-      );
-    }
-    return (
-        <ElementTitle element={element} />
-    );
-  },
-
   renderBreadCrumbItem(element) {
     return (
       <span key={element.id} className="element__breadcrumb-item">
         <span className="element__breadcrumb-arrow"> > </span>
-        {this.renderLinkOrSpan(element)}
+        <ElementTitle element={element} link={this.props.link} />
       </span>
     );
   },
