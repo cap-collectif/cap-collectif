@@ -3,7 +3,7 @@ const Link = ReactRouter.Link;
 const ElementTitle = React.createClass({
   propTypes: {
     element: React.PropTypes.object,
-    link: React.PropTypes.bool,
+    link: React.PropTypes.string,
     className: React.PropTypes.string,
     style: React.PropTypes.object,
     onClick: React.PropTypes.func,
@@ -12,7 +12,7 @@ const ElementTitle = React.createClass({
 
   getDefaultProps() {
     return {
-      link: false,
+      link: 'none',
       style: {},
       className: '',
       onClick: null,
@@ -31,17 +31,24 @@ const ElementTitle = React.createClass({
 
   render() {
     const className = this.props.className + (this.props.onClick ? ' btn btn-link' : '');
-    if (!this.props.link) {
+    if (this.props.link === 'none') {
       return (
         <span style={this.props.style} className={className} onClick={this.props.onClick} >
           {this.renderTitle()}
         </span>
       );
     }
+    if (this.props.link === 'edition') {
+      return (
+        <Link style={this.props.style} to={`/element/${this.props.element.id}`} className={this.props.className}>
+          {this.renderTitle()}
+        </Link>
+      );
+    }
     return (
-      <Link style={this.props.style} to={`/element/${this.props.element.id}`} className={this.props.className}>
+      <a style={this.props.style} href={this.props.element.linkedDataUrl} className={this.props.className}>
         {this.renderTitle()}
-      </Link>
+      </a>
     );
   },
 

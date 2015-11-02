@@ -12,7 +12,7 @@ const ElementBlock = React.createClass({
     showBreadcrumb: React.PropTypes.bool,
     showStatus: React.PropTypes.bool,
     showNotation: React.PropTypes.bool,
-    hasLink: React.PropTypes.bool,
+    hasLink: React.PropTypes.string,
   },
   mixins: [ReactIntl.IntlMixin],
 
@@ -21,7 +21,7 @@ const ElementBlock = React.createClass({
       showBreadcrumb: true,
       showStatus: true,
       showNotation: true,
-      hasLink: true,
+      hasLink: 'edition',
     });
   },
 
