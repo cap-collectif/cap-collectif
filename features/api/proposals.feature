@@ -42,7 +42,8 @@ Feature: Proposal Restful Api
   "updated_at": "@string@.isDateTime()",
   "_links": {
     "show": @string@
-  }
+  },
+  "proposalResponses": @...@
 }
 """
 
@@ -61,6 +62,7 @@ Feature: Proposal Restful Api
       "status": @...@,
       "author": @...@,
       "_links": @...@,
+      "proposalResponses": @...@,
       "votes": @array@,
       "votes_count": @integer@,
       "comments_count": @integer@,
