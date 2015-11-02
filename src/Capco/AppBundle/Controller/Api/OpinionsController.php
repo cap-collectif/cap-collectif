@@ -568,7 +568,7 @@ class OpinionsController extends FOSRestController
             ->setUpdatedAt(new \Datetime())
         ;
 
-        $opinion->increaseArgumentsCount();
+        $opinion->setArgumentsCount($opinion->getArgumentsCount() + 1);
         $this->getDoctrine()->getManager()->persist($argument);
         $this->getDoctrine()->getManager()->flush();
     }
@@ -614,7 +614,7 @@ class OpinionsController extends FOSRestController
             ->setUpdatedAt(new \Datetime())
         ;
 
-        $version->increaseArgumentsCount();
+        $version->setArgumentsCount($version->getArgumentsCount() + 1);
         $this->getDoctrine()->getManager()->persist($argument);
         $this->getDoctrine()->getManager()->flush();
     }

@@ -425,16 +425,4 @@ class OpinionVersion implements VotableInterface
         return $this->enabled && !$this->isTrashed && $this->parent->isPublished();
     }
 
-    public function increaseArgumentsCount()
-    {
-        $this->argumentsCount++;
-        return $this;
-    }
-
-    public function decreaseArgumentsCount()
-    {
-        $this->argumentsCount--;
-        return $this;
-    }
-
 }
