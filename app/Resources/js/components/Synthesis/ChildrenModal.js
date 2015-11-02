@@ -45,8 +45,7 @@ const ChildrenModal = React.createClass({
             showBreadcrumb={false}
             showStatus={false}
             showNotation={false}
-            hasLink
-            linkType="original"
+            hasLink={false}
           />
         </Loader>
       </Modal.Body>

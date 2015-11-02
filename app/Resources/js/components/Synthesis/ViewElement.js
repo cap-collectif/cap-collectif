@@ -166,7 +166,7 @@ const ViewElement = React.createClass({
       <ElementTitle
         className="element__title"
         element={this.props.element}
-        hasLink={false}
+        link={false}
         style={SynthesisDisplayRules.buildStyle(this.props.settings)}
         onClick={childrenModal ? this.toggleChildrenModal.bind(null, true) : null}
       />
