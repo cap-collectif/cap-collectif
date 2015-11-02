@@ -159,7 +159,7 @@ class ProposalsController extends FOSRestController
             ->getRepository('CapcoAppBundle:Status')
             ->getByCollectStep($proposalForm->getCurrentStep());
 
-        if ($defaultStatuses) {
+        if ($defaultStatuses && !empty($defaultStatuses)) {
             $proposal->setStatus($defaultStatuses[0]);
         }
 
