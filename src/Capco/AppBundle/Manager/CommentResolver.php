@@ -94,7 +94,7 @@ class CommentResolver
     {
         $object = $this->getRelatedObject($comment);
 
-        return $this->urlResolver->getAdminUrlOfObject($object, $absolute);
+        return $this->urlResolver->getAdminObjectUrl($object, $absolute);
     }
 
     public function canShowCommentOn($object)

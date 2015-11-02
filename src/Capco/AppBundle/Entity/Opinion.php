@@ -757,18 +757,6 @@ class Opinion implements SelfLinkableInterface, VotableInterface
         return $cs === 1 || $cs === 2;
     }
 
-    public function increaseArgumentsCount()
-    {
-        $this->argumentsCount++;
-        return $this;
-    }
-
-    public function decreaseArgumentsCount()
-    {
-        $this->argumentsCount--;
-        return $this;
-    }
-
     // ******************* Lifecycle *********************************
 
     /**
