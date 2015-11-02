@@ -9,6 +9,7 @@ const ElementsList = React.createClass({
     showStatus: React.PropTypes.bool,
     showNotation: React.PropTypes.bool,
     hasLink: React.PropTypes.bool,
+    linkType: React.PropTypes.string,
   },
   mixins: [ReactIntl.IntlMixin],
 
@@ -18,6 +19,7 @@ const ElementsList = React.createClass({
       showStatus: true,
       showNotation: true,
       hasLink: true,
+      linkType: 'edition',
     });
   },
 
@@ -38,6 +40,7 @@ const ElementsList = React.createClass({
                 showStatus={this.props.showStatus}
                 showNotation={this.props.showNotation}
                 hasLink={this.props.hasLink}
+                linkType={this.props.linkType}
               />
             );
           })

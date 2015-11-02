@@ -2,7 +2,6 @@
 
 namespace Capco\AppBundle\Repository;
 
-use Capco\AppBundle\Entity\CollectStep;
 use Doctrine\ORM\EntityRepository;
 
 /**
@@ -13,16 +12,4 @@ use Doctrine\ORM\EntityRepository;
  */
 class StatusRepository extends EntityRepository
 {
-
-    public function getByCollectStep(CollectStep $step)
-    {
-        $qb = $this->createQueryBuilder('s')
-            ->where('s.step = :step')
-            ->setParameter('step', $step)
-            ->orderBy('s.position', 'ASC')
-        ;
-
-        return $qb->getQuery()->getResult();
-    }
-    
 }
