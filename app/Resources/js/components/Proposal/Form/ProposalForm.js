@@ -23,8 +23,8 @@ const ProposalForm = React.createClass({
       form: {
         title: '',
         body: '',
-        theme: this.props.themes[0].id,
-        district: this.props.districts[0].id,
+        theme: -1,
+        district: -1,
       },
       custom: {},
       errors: {
@@ -72,10 +72,10 @@ const ProposalForm = React.createClass({
 
   formValidationRules: {
     theme: {
-      notNull: {message: 'proposal.constraints.title'},
+      min: {value: 0, message: 'proposal.constraints.theme'},
     },
     district: {
-      notNull: {message: 'proposal.constraints.title'},
+      min: {value: 0, message: 'proposal.constraints.district'},
     },
     title: {
       min: {value: 2, message: 'proposal.constraints.title'},
@@ -103,7 +103,7 @@ const ProposalForm = React.createClass({
           type="text"
           valueLink={this.linkState('form.title')}
           ref="title"
-          label={this.getIntlMessage('proposal.title')}
+          label={this.getIntlMessage('proposal.title') + '*'}
           labelClassName="control-label h5"
           groupClassName={this.getGroupStyle('title')}
           help={this.renderFormErrors('title')}
@@ -114,12 +114,13 @@ const ProposalForm = React.createClass({
           type="select"
           ref="theme"
           valueLink={this.linkState('form.theme')}
-          label={this.getIntlMessage('proposal.theme')}
+          label={this.getIntlMessage('proposal.theme') + '*'}
           labelClassName="control-label h5"
           groupClassName={this.getGroupStyle('theme')}
           help={this.renderFormErrors('theme')}
           bsStyle={this.getFieldStyle('theme')}
         >
+          <option value={-1} disabled>{this.getIntlMessage('proposal.select.theme')}</option>
           {
             this.props.themes.map((theme) => {
               return (
@@ -135,12 +136,13 @@ const ProposalForm = React.createClass({
           type="select"
           ref="district"
           valueLink={this.linkState('form.district')}
-          label={this.getIntlMessage('proposal.district')}
+          label={this.getIntlMessage('proposal.district') + '*'}
           labelClassName="control-label h5"
           groupClassName={this.getGroupStyle('district')}
           help={this.renderFormErrors('district')}
           bsStyle={this.getFieldStyle('district')}
         >
+          <option value={-1} disabled>{this.getIntlMessage('proposal.select.district')}</option>
           {
             this.props.districts.map((district) => {
               return (
@@ -156,7 +158,7 @@ const ProposalForm = React.createClass({
           type="textarea"
           valueLink={null} // state is automatically updated by CkeditorMixin
           ref="body"
-          label={this.getIntlMessage('proposal.body')}
+          label={this.getIntlMessage('proposal.body') + '*'}
           labelClassName="control-label h5"
           groupClassName={this.getGroupStyle('body')}
           help={this.renderFormErrors('body')}
@@ -170,7 +172,7 @@ const ProposalForm = React.createClass({
                 type="textarea"
                 valueLink={null} // state is automatically updated by CkeditorMixin
                 ref={'custom-' + question.id}
-                label={question.title}
+                label={question.title + '*'}
                 labelClassName="control-label h5"
               />
             );

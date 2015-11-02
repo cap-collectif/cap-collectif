@@ -160,10 +160,20 @@ export default {
       add: 'Faire une proposition',
       count: '{num, plural, =0{0 projet} one{# projet} other{# projets}}',
       title: 'Titre',
-      body: 'Proposition',
+      body: 'Description',
       description: 'Description',
       theme: 'Theme',
       district: 'Quartier',
+      constraints: {
+        title: 'Le titre de la proposition doit faire au moins 2 caractères.',
+        body: 'La description de la proposition doit faire au moins 2 caractères.',
+        theme: 'Sélectionnez un thème',
+        district: 'Sélectionnez un quartier',
+      },
+      select: {
+        theme: 'Sélectionnez un thème',
+        district: 'Sélectionnez un quartier',
+      },
       create: {
         infos: 'Attention, une fois validée, votre proposition ne pourra plus être modifiée. Merci de la relire avant de la soumettre.',
       },

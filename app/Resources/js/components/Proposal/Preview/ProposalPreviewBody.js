@@ -1,4 +1,3 @@
-const Label = ReactBootstrap.Label;
 
 const ProposalPreviewBody = React.createClass({
   propTypes: {
@@ -14,31 +13,23 @@ const ProposalPreviewBody = React.createClass({
 
     return (
       <div className={classes} style={{clear: 'both', paddingTop: '5px'}}>
-        <h3 className="opinion__title" style={{marginTop: 0, height: '110px', wordBreak: 'break-word', overflow: 'hidden'}}>
+        <h2 className="h4" style={{marginTop: 0, height: '80px', wordBreak: 'break-word', overflow: 'hidden'}}>
           <a href={proposal._links.show}>{proposal.title}</a>
-        </h3>
+        </h2>
         <div>
         {proposal.theme
-          ? <div style={{marginTop: 5}}>
-              <span>
-                <i className="cap cap-tag-1-1"></i>{proposal.theme.title}
-              </span>
+          ? <div className="proposal__info">
+              <i className="cap cap-tag-1-1"></i>{proposal.theme.title}
             </div>
           : null
         }
         {proposal.district
-          ? <div style={{marginTop: 5}}>
-              <span>
-                <i className="cap cap-marker-1-1"></i>{proposal.district.name}
-              </span>
+          ? <div className="proposal__info">
+              <i className="cap cap-marker-1-1"></i>{proposal.district.name}
             </div>
           : null
         }
       </div>
-      {proposal.status
-          ? <Label bsStyle={proposal.status.color}>{proposal.status.name}</Label>
-          : null
-       }
     </div>
     );
   },

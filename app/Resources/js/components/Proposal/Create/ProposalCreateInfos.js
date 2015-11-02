@@ -1,12 +1,14 @@
 const ProposalCreateInfos = React.createClass({
-  propTypes: {
-    proposal: React.PropTypes.object.isRequired,
-  },
+  propTypes: {},
   mixins: [ReactIntl.IntlMixin],
 
   render() {
     return (
-      <p>{this.getIntlMessage('proposal.create.infos')}</p>
+      <div className="modal-top bg-warning">
+        <p>
+          { this.getIntlMessage('proposal.create.infos') }
+        </p>
+      </div>
     );
   },
 

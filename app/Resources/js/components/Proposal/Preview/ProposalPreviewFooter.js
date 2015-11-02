@@ -1,4 +1,5 @@
 const FormattedMessage = ReactIntl.FormattedMessage;
+const Label = ReactBootstrap.Label;
 
 const ProposalPreviewFooter = React.createClass({
   propTypes: {
@@ -14,7 +15,7 @@ const ProposalPreviewFooter = React.createClass({
 
     return (
       <div className={classes}>
-        <span className="excerpt small">
+        <div className="proposal__info">
         {/*
           <FormattedMessage
             message={this.getIntlMessage('global.votes')}
@@ -22,11 +23,16 @@ const ProposalPreviewFooter = React.createClass({
           />
           { ' • ' }
         */}
+          <i className="cap cap-baloon-1" />
           <FormattedMessage
             message={this.getIntlMessage('global.comments')}
             num={proposal.comments_count}
           />
-        </span>
+        </div>
+        {proposal.status
+            ? <Label style={{margin: '10px 0', padding: '5px 0', display: 'block'}} bsStyle={proposal.status.color}>{proposal.status.name}</Label>
+            : null
+         }
       </div>
     );
   },

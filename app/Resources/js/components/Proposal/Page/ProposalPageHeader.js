@@ -23,7 +23,7 @@ const ProposalPageHeader = React.createClass({
       <div className="container--custom container--with-sidebar">
         <h1 className="consultation__header__title h1">{proposal.title}</h1>
         <div className="media">
-          <UserAvatar user={proposal.author} />
+          <UserAvatar className="pull-left" user={proposal.author} />
           <div className="media-body">
             <p className="media--aligned excerpt">
               <FormattedMessage
@@ -41,10 +41,13 @@ const ProposalPageHeader = React.createClass({
           </div>
         </div>
         <ul className="nav nav-pills project__infos">
-          <li>
-            <div className="value">{proposal.votes_count}</div>
-            <div className="excerpt category">votes</div>
-          </li>
+          {proposal.votes_count > 0
+            ? <li>
+                <div className="value">{proposal.votes_count}</div>
+                <div className="excerpt category">votes</div>
+              </li>
+            : null
+          }
           <li>
             <div className="value">{proposal.comments_count}</div>
             <div className="excerpt category">commentaires</div>

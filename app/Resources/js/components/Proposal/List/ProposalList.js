@@ -1,5 +1,7 @@
 import ProposalPreview from '../Preview/ProposalPreview';
 
+const Row = ReactBootstrap.Row;
+
 const ProposalList = React.createClass({
   propTypes: {
     proposals: React.PropTypes.array.isRequired,
@@ -17,7 +19,7 @@ const ProposalList = React.createClass({
     });
 
     return (
-      <ul className={classes}>
+      <Row componentClass="ul" className={classes}>
         {
           this.props.proposals.map((proposal) => {
             return (
@@ -28,7 +30,7 @@ const ProposalList = React.createClass({
             );
           })
         }
-      </ul>
+      </Row>
     );
   },
 

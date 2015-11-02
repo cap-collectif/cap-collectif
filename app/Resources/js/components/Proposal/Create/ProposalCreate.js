@@ -49,13 +49,9 @@ const ProposalCreate = React.createClass({
   },
 
   render() {
-    if (!this.props.form.isContribuable) {
-      return null;
-    }
-
     return (
       <div>
-        <ProposalCreateButton handleClick={this.show.bind(null, this)} />
+        <ProposalCreateButton disabled={!this.props.form.isContribuable} handleClick={this.show.bind(null, this)} />
         <Modal
           animation={false}
           show={this.state.showModal}

@@ -12,12 +12,12 @@ const ProposalPreviewHeader = React.createClass({
     const classes = classNames({});
 
     return (
-      <span className={classes}>
-        <UserAvatar user={proposal.author} style={{marginRight: 15}} className="pull-left" />
-        <div className="opinion__data" style={{height: 50}}>
+      <div className={classes}>
+        <UserAvatar user={proposal.author} style={{marginRight: 10}} className="pull-left" />
+        <div className="opinion__data" style={{height: 40, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap'}}>
           <UserLink user={proposal.author} />
         </div>
-      </span>
+      </div>
     );
   },
 

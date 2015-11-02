@@ -108,7 +108,7 @@ const ElementsFinder = React.createClass({
 
   renderItemTitle(element) {
     return (
-      <ElementTitle element={element} className="tree__item__title" hasLink={false} />
+      <ElementTitle element={element} className="tree__item__title" link={false} />
     );
   },
 

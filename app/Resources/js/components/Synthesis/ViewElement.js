@@ -35,7 +35,7 @@ const ViewElement = React.createClass({
         <FormattedMessage
           message={this.getIntlMessage('percentage.tooltip')}
           contributions={contributions}
-          scoreSign={score < 0 ? '-' : '+'}
+          scoreSign={Math.sign(score) < 0 ? '-' : '+'}
           score={Math.abs(score)}
           percentage={percentage}
           />
@@ -166,7 +166,7 @@ const ViewElement = React.createClass({
       <ElementTitle
         className="element__title"
         element={this.props.element}
-        hasLink={false}
+        link={false}
         style={SynthesisDisplayRules.buildStyle(this.props.settings)}
         onClick={childrenModal ? this.toggleChildrenModal.bind(null, true) : null}
       />
