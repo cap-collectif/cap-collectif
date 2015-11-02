@@ -43,7 +43,7 @@ Feature: Proposal Restful Api
   "_links": {
     "show": @string@
   },
-  "proposalResponses":[
+  "responses":[
     {
       "id": @integer@,
       "value": @string@
@@ -68,7 +68,7 @@ Feature: Proposal Restful Api
       "status": @...@,
       "author": @...@,
       "_links": @...@,
-      "proposalResponses": [
+      "responses": [
         {
           "id": @integer@,
           "value": @string@
