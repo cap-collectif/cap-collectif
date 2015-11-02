@@ -132,6 +132,7 @@ class ArgumentController extends Controller
 
             if ($form->isValid()) {
                 $em = $this->getDoctrine()->getManager();
+                $opinion->decreaseArgumentsCount();
                 $em->remove($argument);
                 $em->flush();
 
