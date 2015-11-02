@@ -21,6 +21,7 @@ class ContributionResolver
         $sourcesContributors = $this->repository->findProjectSourceContributorsWithCount($project);
         $argumentsContributors = $this->repository->findProjectArgumentContributorsWithCount($project);
         $opinionsContributors = $this->repository->findProjectOpinionContributorsWithCount($project);
+        $proposalsContributors = $this->repository->findProjectProposalContributorsWithCount($project);
         $versionsContributors = $this->repository->findProjectVersionContributorsWithCount($project);
 
         // Fetch voters
@@ -41,6 +42,10 @@ class ContributionResolver
 
         foreach ($opinionsContributors as $opinionsContributor) {
             $contributors[$opinionsContributor['id']]['opinions'] = $opinionsContributor['opinions_count'];
+        }
+
+        foreach($proposalsContributors as $proposalsContributor) {
+            $contributors[$proposalsContributor['id']]['proposals'] = $proposalsContributor['proposals_count'];
         }
 
         foreach ($versionsContributors as $versionContributor) {
@@ -67,6 +72,7 @@ class ContributionResolver
             $contributor['total'] = isset($contributor['sources']) ? $contributor['sources'] : 0;
             $contributor['total'] += isset($contributor['arguments']) ? $contributor['arguments'] : 0;
             $contributor['total'] += isset($contributor['opinions']) ? $contributor['opinions'] : 0;
+            $contributor['total'] += isset($contributor['proposals']) ? $contributor['proposals'] : 0;
             $contributor['total'] += isset($contributor['versions']) ? $contributor['versions'] : 0;
             $contributor['total'] += isset($contributor['opinions_votes']) ? $contributor['opinions_votes'] : 0;
             $contributor['total'] += isset($contributor['versions_votes']) ? $contributor['versions_votes'] : 0;

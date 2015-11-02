@@ -24,7 +24,6 @@ class CollectStep extends AbstractStep
 
     /**
      * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\Status", mappedBy="step", cascade={"persist"})
-     * @ORM\OrderBy({"position" = "ASC"})
      **/
     private $statuses;
 
