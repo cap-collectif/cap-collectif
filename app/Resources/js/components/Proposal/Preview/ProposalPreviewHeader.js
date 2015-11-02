@@ -14,7 +14,7 @@ const ProposalPreviewHeader = React.createClass({
     return (
       <div className={classes}>
         <UserAvatar user={proposal.author} style={{marginRight: 10}} className="pull-left" />
-        <div className="opinion__data" style={{height: 40, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap'}}>
+        <div className="opinion__data" className="proposal__author">
           <UserLink user={proposal.author} />
         </div>
       </div>

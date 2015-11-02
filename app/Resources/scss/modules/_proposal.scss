@@ -9,3 +9,22 @@
   }
 }
 
+.proposal__title {
+  margin-top: 0;
+  height: 80px;
+  word-break: break-word;
+  overflow: hidden;
+}
+
+.proposal__status {
+  margin: 10px 0;
+  padding: 5px 0;
+  display: block;
+}
+
+.proposal__author {
+  height: 40px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}

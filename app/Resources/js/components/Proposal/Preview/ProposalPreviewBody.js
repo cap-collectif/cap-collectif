@@ -13,7 +13,7 @@ const ProposalPreviewBody = React.createClass({
 
     return (
       <div className={classes} style={{clear: 'both', paddingTop: '5px'}}>
-        <h2 className="h4" style={{marginTop: 0, height: '80px', wordBreak: 'break-word', overflow: 'hidden'}}>
+        <h2 className="h4 proposal__title">
           <a href={proposal._links.show}>{proposal.title}</a>
         </h2>
         <div>

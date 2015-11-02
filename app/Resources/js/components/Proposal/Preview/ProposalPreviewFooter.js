@@ -30,7 +30,7 @@ const ProposalPreviewFooter = React.createClass({
           />
         </div>
         {proposal.status
-            ? <Label style={{margin: '10px 0', padding: '5px 0', display: 'block'}} bsStyle={proposal.status.color}>{proposal.status.name}</Label>
+            ? <Label className="proposal__status" bsStyle={proposal.status.color}>{proposal.status.name}</Label>
             : null
          }
       </div>
