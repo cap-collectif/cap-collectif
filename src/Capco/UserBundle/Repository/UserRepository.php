@@ -65,22 +65,6 @@ class UserRepository extends EntityRepository
         return $qb->getQuery()->getResult();
     }
 
-    public function findProjectProposalContributorsWithCount(Project $project)
-    {
-        $qb = $this->createQueryBuilder('u')
-            ->select('u.id', 'count(distinct proposals) as proposals_count')
-            ->leftJoin('u.proposals', 'proposals', 'WITH', 'proposals.enabled = 1')
-            ->leftJoin('proposals.proposalForm', 'proposalForm')
-            ->leftJoin('proposalForm.steps', 'steps', 'WITH', 'steps.isEnabled = 1')
-            ->leftJoin('steps.projectAbstractStep', 'pas')
-            ->where('pas.project = :project')
-            ->groupBy('u.id')
-            ->setParameter('project', $project)
-        ;
-
-        return $qb->getQuery()->getResult();
-    }
-
     public function findProjectVersionContributorsWithCount(Project $project)
     {
         $qb = $this->createQueryBuilder('u')
