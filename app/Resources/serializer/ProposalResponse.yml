@@ -4,9 +4,9 @@ Capco\AppBundle\Entity\ProposalResponse:
         id:
             expose: true
             type: integer
-            groups: [Proposals, ProposalResponses]
-        proposal:
+            groups: [Proposals]
+        value:
             expose: true
-            type: Capco\AppBundle\Entity\Proposal
-            groups: [Proposals, ProposalResponses]
+            type: string
+            groups: [Proposals]
 
