@@ -56,23 +56,6 @@ class OpinionController extends Controller
             throw new AccessDeniedException();
         }
 
-        $class = new \ReflectionClass(
-            $this->admin->hasActiveSubClass() ? $this->admin->getActiveSubClass() : $this->admin->getClass()
-        );
-
-        if ($class->isAbstract()) {
-            return $this->render(
-                'SonataAdminBundle:CRUD:select_subclass.html.twig',
-                array(
-                    'base_template' => $this->getBaseTemplate(),
-                    'admin' => $this->admin,
-                    'action' => 'create',
-                ),
-                null,
-                $request
-            );
-        }
-
         $object = $this->admin->getNewInstance();
 
         $opinionType = null;
@@ -86,6 +69,10 @@ class OpinionController extends Controller
                 $object->setOpinionType($opinionType);
                 $object = $this->updateAppendicesForOpinion($object);
             }
+        }
+
+        if (!$opinionType) {
+            return new RedirectResponse($this->admin->generateUrl('list'));
         }
 
         $this->admin->setSubject($object);
@@ -158,10 +145,6 @@ class OpinionController extends Controller
                 // pick the preview template if the form was valid and preview was requested
                 $templateKey = 'preview';
                 $this->admin->getShow();
-            }
-        } else {
-            if (!$opinionType) {
-                return new RedirectResponse($this->admin->generateUrl('list'));
             }
         }
 
