@@ -1,5 +1,4 @@
 const FormattedMessage = ReactIntl.FormattedMessage;
-const Label = ReactBootstrap.Label;
 
 const ProposalPreviewFooter = React.createClass({
   propTypes: {
@@ -9,30 +8,29 @@ const ProposalPreviewFooter = React.createClass({
 
   render() {
     const proposal = this.props.proposal;
-    const classes = classNames({
-      'media__content': true,
-    });
+
+    const classes = 'proposal__status status--' + proposal.status.color;
 
     return (
-      <div className={classes}>
-        <div className="proposal__info">
-        {/*
-          <FormattedMessage
-            message={this.getIntlMessage('global.votes')}
-            num={proposal.comments_count}
-          />
-          { ' • ' }
-        */}
-          <i className="cap cap-baloon-1" />
-          <FormattedMessage
-            message={this.getIntlMessage('global.comments')}
-            num={proposal.comments_count}
-          />
+      <div className="proposal__footer">
+        <div className="proposal__counters">
+          <div className="proposal__counter">
+            <div className="proposal__counter__value" >
+              {proposal.comments_count}
+            </div>
+            <div className="proposal__counter__label" >
+              <FormattedMessage
+                message={this.getIntlMessage('comment.count_no_nb')}
+                count={proposal.comments_count}
+                />
+            </div>
+          </div>
         </div>
-        {proposal.status
-            ? <Label className="proposal__status" bsStyle={proposal.status.color}>{proposal.status.name}</Label>
+        {
+          proposal.status
+            ? <div className={classes}>{proposal.status.name}</div>
             : null
-         }
+        }
       </div>
     );
   },

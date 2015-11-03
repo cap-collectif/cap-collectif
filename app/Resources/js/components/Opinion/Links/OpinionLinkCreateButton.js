@@ -14,7 +14,7 @@ const OpinionLinkCreateButton = React.createClass({
       <LoginOverlay>
         <Button id="link-form__add" bsStyle="primary" onClick={LoginStore.isLoggedIn() ? this.props.handleClick : null}>
           <i className="cap cap-add-1"></i>
-          { ' ' + this.getIntlMessage('opinion.add_new_link')}
+          { ' ' + this.getIntlMessage('opinion.link.add_new')}
         </Button>
       </LoginOverlay>
     );
