@@ -1,12 +1,15 @@
 Capco\AppBundle\Entity\ProposalResponse:
-    exclusion_policy: ALL
-    properties:
-        id:
-            expose: true
-            type: integer
-            groups: [Proposals]
-        value:
-            expose: true
-            type: string
-            groups: [Proposals]
+  exclusion_policy: ALL
+  properties:
+    id:
+      expose: true
+      type: integer
+      groups: [Proposals]
+    value:
+      expose: true
+      type: string
+      groups: [Proposals]
+    question:
+      expose: true
+      groups: [Proposals]
 

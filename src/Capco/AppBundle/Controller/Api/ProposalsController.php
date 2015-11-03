@@ -148,6 +148,7 @@ class ProposalsController extends FOSRestController
     public function postProposalAction(Request $request, ProposalForm $proposalForm)
     {
         $user = $this->getUser();
+        $em = $this->get('doctrine.orm.entity_manager');
         
         $proposal = (new Proposal())
             ->setAuthor($user)
@@ -163,15 +164,15 @@ class ProposalsController extends FOSRestController
             $proposal->setStatus($defaultStatuses[0]);
         }
 
-        $form = $this->createForm(new ProposalType(), $proposal);
+        $form = $this->createForm(new ProposalType($em), $proposal);
         $form->handleRequest($request);
 
         if (!$form->isValid()) {
             return $form;
         }
 
-        $this->getDoctrine()->getManager()->persist($proposal);
-        $this->getDoctrine()->getManager()->flush();
+        $em->persist($proposal);
+        $em->flush();
 
         return $proposal;
     }

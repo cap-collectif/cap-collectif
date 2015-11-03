@@ -76,6 +76,7 @@ class Proposal implements CommentableInterface, VotableInterface
     private $annotation;
 
     /**
+     * @Assert\NotNull()
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Theme", inversedBy="proposals", cascade={"persist"})
      * @ORM\JoinColumn(name="theme_id", referencedColumnName="id", nullable=true, onDelete="SET NULL")
      */
@@ -96,6 +97,7 @@ class Proposal implements CommentableInterface, VotableInterface
     /**
      * @var string
      *
+     * @Assert\NotNull()
      * @ORM\ManyToOne(targetEntity="Capco\UserBundle\Entity\User", inversedBy="proposals")
      * @ORM\JoinColumn(name="author_id", referencedColumnName="id", onDelete="CASCADE")
      */
@@ -104,6 +106,7 @@ class Proposal implements CommentableInterface, VotableInterface
     /**
      * @var ProposalForm
      *
+     * @Assert\NotNull()
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\ProposalForm", inversedBy="proposals")
      * @ORM\JoinColumn(name="proposal_form_id", referencedColumnName="id", onDelete="CASCADE")
      */
@@ -340,6 +343,7 @@ class Proposal implements CommentableInterface, VotableInterface
     {
         if (!$this->proposalResponses->contains($proposalResponse)) {
             $this->proposalResponses[] = $proposalResponse;
+            $proposalResponse->setProposal($this);
         }
 
         return $this;

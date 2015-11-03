@@ -51,7 +51,11 @@ const ProposalForm = React.createClass({
         const responses = [];
         const custom = this.state.custom;
         Object.keys(custom).map((key) => {
-          responses.push({value: custom[key]});
+          const question = key.split('-')[1];
+          responses.push({
+            question: question,
+            value: custom[key],
+          });
         });
         form.proposalResponses = responses;
         ProposalActions

@@ -1,7 +1,8 @@
 Capco\AppBundle\Entity\Question:
-    question1:
-        title: Evaluez l'importance de votre proposition
-        helpText: Décrivez l'importance de votre proposition avec un adjectif (ex: indispensable, souhaitable ...)
-        questionChoices: []
-        proposalForm: @proposalform1
-        position: 1
+  question1:
+    title: Evaluez l'importance de votre proposition
+    helpText: Décrivez l'importance de votre proposition avec un adjectif (ex: indispensable, souhaitable ...)
+    questionChoices: []
+    proposalForm: @proposalform1
+    position: 1
+    questionType: 0

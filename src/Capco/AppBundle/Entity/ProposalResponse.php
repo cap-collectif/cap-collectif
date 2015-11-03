@@ -5,6 +5,7 @@ namespace Capco\AppBundle\Entity;
 use Capco\AppBundle\Traits\TimestampableTrait;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * ProposalResponse.
@@ -28,21 +29,24 @@ class ProposalResponse
     /**
      * @var Proposal
      *
+     * @Assert\NotNull()
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Proposal", inversedBy="proposalResponses", cascade={"persist"})
-     * @ORM\JoinColumn(name="proposal_id", referencedColumnName="id", onDelete="CASCADE")
+     * @ORM\JoinColumn(name="proposal_id", referencedColumnName="id", onDelete="CASCADE", nullable=false)
      */
     private $proposal;
 
     /**
      * @var Question
      *
+     * @Assert\NotNull()
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Question", inversedBy="proposalResponses", cascade={"persist"})
-     * @ORM\JoinColumn(name="question_id", referencedColumnName="id", onDelete="CASCADE")
+     * @ORM\JoinColumn(name="question_id", referencedColumnName="id", onDelete="CASCADE", nullable=false)
      */
     private $question;
 
     /**
      * @var string
+     * @Assert\NotBlank()
      * @ORM\Column(name="value", type="text")
      */
     private $value;

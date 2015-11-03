@@ -7,6 +7,7 @@ use Capco\AppBundle\Traits\SluggableTitleTrait;
 use Capco\AppBundle\Traits\TimestampableTrait;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Question.
@@ -47,13 +48,17 @@ class Question
     /**
      * @var ProposalForm
      *
+     * @Assert\NotNull()
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\ProposalForm", inversedBy="questions", cascade={"persist", "remove"})
-     * @ORM\JoinColumn(name="proposal_form_id", referencedColumnName="id")
+     * @ORM\JoinColumn(name="proposal_form_id", referencedColumnName="id", nullable=false)
      */
     private $proposalForm;
 
     /**
      * @var integer
+     * @Assert\NotNull()
+     * @Assert\Choice(choices={0, 1})
+     * @ORM\Column(name="questionType", type="integer")
      */
     private $questionType;
 

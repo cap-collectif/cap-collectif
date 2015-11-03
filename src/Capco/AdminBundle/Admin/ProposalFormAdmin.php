@@ -69,7 +69,7 @@ class ProposalFormAdmin extends Admin
         unset($this->listModes['mosaic']);
 
         $listMapper
-            ->add('title', null, [
+            ->addIdentifier('title', null, [
                 'label' => 'admin.fields.proposal_form.title',
             ])
             ->add('updatedAt', null, [

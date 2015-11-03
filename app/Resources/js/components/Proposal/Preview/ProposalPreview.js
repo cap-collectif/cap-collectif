@@ -21,7 +21,7 @@ const ProposalPreview = React.createClass({
     });
 
     return (
-      <Col componentClass="li" xs={12} sm={6} md={4} ld={2}>
+      <Col componentClass="li" xs={12} sm={6} md={4} >
         <div className={classes}>
           <ProposalPreviewHeader proposal={proposal} />
           <ProposalPreviewBody proposal={proposal} />
