@@ -45,8 +45,11 @@ Feature: Proposal Restful Api
   },
   "responses":[
     {
-      "id": @integer@,
-      "value": @string@
+      "value": @string@,
+      "question": {
+        "questionType": @number@,
+        "title": @string@
+      }
     }
   ]
 }
@@ -105,6 +108,7 @@ Feature: Proposal Restful Api
   "district": 1,
   "proposalResponses": [
     {
+      "question": 1,
       "value": "Mega important"
     }
   ]
