@@ -111,6 +111,10 @@ class FeaturesCategoryResolver
             }
         }
 
+        if ($category === 'settings.modules' && getenv('SYMFONY_LOGIN_NOUS_CITOYENS_ALLOWED') === 'true') {
+            $toggles['login_nous_citoyens'] = $this->manager->isActive('login_nous_citoyens');
+        }
+
         return $toggles;
     }
 

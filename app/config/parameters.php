@@ -37,6 +37,8 @@ $container->setParameter('google_app_id',               set_var('google_app_id',
 $container->setParameter('google_app_secret',           set_var('google_app_secret', '***REMOVED***'));
 $container->setParameter('twitter_app_id',              set_var('twitter_app_id', '***REMOVED***'));
 $container->setParameter('twitter_app_secret',          set_var('twitter_app_secret', '***REMOVED***'));
+$container->setParameter('nous_citoyens_app_id',        set_var('nous_citoyens_app_id', 'xxx'));
+$container->setParameter('nous_citoyens_app_secret',    set_var('nous_citoyens_app_secret', 'xxx'));
 
 $container->setParameter('redis_prefix',                set_var('redis_prefix', 'capco'));
 $container->setParameter('shield_login',                set_var('shield_login', '***REMOVED***'));

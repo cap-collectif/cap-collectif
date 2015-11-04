@@ -22,6 +22,7 @@ class Manager
         'login_facebook',
         'login_gplus',
         'login_twitter',
+        'login_nous_citoyens',
         'shield_mode',
         'user_type',
         'members_list',
