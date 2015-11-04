@@ -108,7 +108,7 @@ class Opinion implements SelfLinkableInterface, VotableInterface
 
     /**
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\ConsultationStep", inversedBy="opinions", cascade={"persist"})
-     * @ORM\JoinColumn(name="step_id", referencedColumnName="id")
+     * @ORM\JoinColumn(name="step_id", referencedColumnName="id", nullable=true)
      * @Assert\NotNull()
      */
     private $step;
@@ -155,12 +155,6 @@ class Opinion implements SelfLinkableInterface, VotableInterface
      * @ORM\Column(name="ranking", type="integer", nullable=true)
      */
     protected $ranking = null;
-
-    /**
-     * @ORM\OneToOne(targetEntity="Capco\AppBundle\Entity\OpinionAnswer", cascade={"persist", "remove"})
-     * @ORM\JoinColumn(name="answer_id", referencedColumnName="id", nullable=true)
-     */
-    protected $answer;
 
     public function __construct()
     {
@@ -606,24 +600,6 @@ class Opinion implements SelfLinkableInterface, VotableInterface
     public function setRanking($ranking)
     {
         $this->ranking = $ranking;
-
-        return $this;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getAnswer()
-    {
-        return $this->answer;
-    }
-
-    /**
-     * @param mixed $answer
-     */
-    public function setAnswer($answer)
-    {
-        $this->answer = $answer;
 
         return $this;
     }

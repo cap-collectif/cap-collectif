@@ -37,7 +37,6 @@ admin.label.proposal_form: Formulaire
 admin.label.question: Question
 admin.label.question_type: Type de question
 admin.label.opinion: Consultation / Propositions
-admin.label.opinion_answer: Réponse aux propositions
 admin.label.opinion_type: Éléments de structure
 admin.label.opinion_version: Modifications
 admin.label.page: Pages statiques
@@ -337,8 +336,6 @@ admin:
       group_content: Proposition
       group_appendices: Contexte
       group_publication: Options de publication
-      group_answer: Réponse officielle
-      answer: Réponse officielle
       appendices: Éléments de contexte
       title: Titre
       author: Auteur
@@ -360,10 +357,6 @@ admin:
       source_count: Sources
       pinned: Épinglé
       pinned_long: Épinglé en haut de la liste
-    opinion_answer:
-      author: Auteur
-      body: Contenu
-      title: Titre
     opinion_type:
       appendices: Éléments de contexte
       color: Couleur
@@ -394,14 +387,12 @@ admin:
       appendix_type: Élément de contexte
       appendix_type_add: Ajouter
     opinion_version:
-      answer: Réponse officielle
       argument_count: Arguments
       author: Auteur
       body: Contenu
       created_at: Création
       comment: Explication
       group_content: Contenu
-      group_answer: Réponse officielle
       group_publication: Options de publication
       is_enabled: Publié
       is_trashed: Dans la corbeille
@@ -429,10 +420,8 @@ admin:
       updated_at: Mise à jour
       created_at: Création
     proposal:
-      group_answer: Réponse officielle
       group_publication: Options de publication
       group_content: Proposition
-      answer: Réponse officielle
       title: Titre
       body: Contenu
       author: Auteur

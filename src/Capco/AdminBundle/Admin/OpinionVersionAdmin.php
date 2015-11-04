@@ -103,7 +103,6 @@ class OpinionVersionAdmin extends Admin
         $formMapper
             ->with('admin.fields.opinion_version.group_content', array('class' => 'col-md-12'))->end()
             ->with('admin.fields.opinion_version.group_publication', array('class' => 'col-md-12'))->end()
-            ->with('admin.fields.opinion_version.group_answer', array('class' => 'col-md-12'))->end()
             ->end()
         ;
 
@@ -142,14 +141,6 @@ class OpinionVersionAdmin extends Admin
                 ->add('trashedReason', null, array(
                     'label' => 'admin.fields.opinion_version.trashed_reason',
                 ))
-            ->end()
-
-            // Answer
-            ->with('admin.fields.opinion_version.group_answer')
-            ->add('answer', 'sonata_type_model', array(
-                'label' => 'admin.fields.opinion.answer',
-                'required' => false,
-            ))
             ->end()
         ;
     }

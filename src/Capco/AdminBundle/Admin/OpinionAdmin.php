@@ -147,7 +147,6 @@ class OpinionAdmin extends Admin
             ->with('admin.fields.opinion.group_content', array('class' => 'col-md-12'))->end()
             ->with('admin.fields.opinion.group_appendices', array('class' => 'col-md-12 '.$classname))->end()
             ->with('admin.fields.opinion.group_publication', array('class' => 'col-md-12'))->end()
-            ->with('admin.fields.opinion.group_answer', array('class' => 'col-md-12'))->end()
             ->end()
         ;
 
@@ -204,14 +203,6 @@ class OpinionAdmin extends Admin
                 ->add('trashedReason', null, array(
                     'label' => 'admin.fields.opinion.trashed_reason',
                 ))
-            ->end()
-
-            // Answer
-            ->with('admin.fields.opinion.group_answer')
-            ->add('answer', 'sonata_type_model', array(
-                'label' => 'admin.fields.opinion.answer',
-                'required' => false,
-            ))
             ->end()
         ;
     }
