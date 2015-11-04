@@ -769,7 +769,6 @@ user:
       facebook: Se connecter avec Facebook
       gplus: Se connecter avec Google+
       twitter: Se connecter avec Twitter
-      nouscitoyens: Se connecter avec Nous Citoyens
     or: ou
     submit: Se connecter
     popover:
@@ -1045,6 +1044,7 @@ project_download:
     updated: Modification
     author: Auteur
     author_id: Id de l'auteur
+    user_type: Type de profil
     score: Score
     total_votes: Total des votes
     votes_ok: Votes pour

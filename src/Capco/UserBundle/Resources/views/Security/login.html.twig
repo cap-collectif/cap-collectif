@@ -39,10 +39,6 @@
                         {% if is_feature_enabled('login_twitter') %}
                             <a href="{{ path('hwi_oauth_service_redirect', {'service': 'twitter' }) }}" title="Sign in with Twitter" class="btn  login__social-btn  login__social-btn--twitter">{{ 'user.login.social.twitter'|trans({}, 'CapcoAppBundle') }}</a>
                         {% endif %}
-
-                        {% if is_feature_enabled('login_nous_citoyens') %}
-                            <a href="{{ path('hwi_oauth_service_redirect', {'service': 'nous_citoyens' }) }}" title="Sign in with Nous Cityens" class="btn  login__social-btn  login__social-btn--nouscitoyens">{{ 'user.login.social.nouscitoyens'|trans({}, 'CapcoAppBundle') }}</a>
-                        {% endif %}
                     </div>
 
                     <p class="p--centered"><span>{{ 'user.register.or'|trans({}, 'CapcoAppBundle') }}</span></p>

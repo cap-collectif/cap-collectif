@@ -50,9 +50,6 @@ class User extends BaseUser implements EncoderAwareInterface, SynthesisUserInter
      */
     protected $facebook_access_token;
 
-    protected $nous_citoyens_id;
-    protected $nous_citoyens_access_token;
-
     /**
      * @var int
      */
@@ -365,18 +362,6 @@ class User extends BaseUser implements EncoderAwareInterface, SynthesisUserInter
     public function getTwitterAccessToken()
     {
         return $this->twitter_access_token;
-    }
-
-    public function setNous_citoyensId($nous_citoyens_id)
-    {
-        $this->nous_citoyens_id = $nous_citoyens_id;
-
-        return $this;
-    }
-
-    public function setNous_citoyensAccessToken($nous_citoyens_access_token)
-    {
-        $this->nous_citoyens_access_token = $nous_citoyens_access_token;
     }
 
     /**

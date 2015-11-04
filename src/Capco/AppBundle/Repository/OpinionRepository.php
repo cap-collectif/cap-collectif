@@ -405,9 +405,10 @@ class OpinionRepository extends EntityRepository
     public function getEnabledByConsultationStep($step)
     {
         $qb = $this->getIsEnabledQueryBuilder('o')
-            ->addSelect('ot', 'aut', 'app', 'args', 'argsAuthor')
+            ->addSelect('ot', 'aut', 'ut', 'app', 'args', 'argsAuthor')
             ->leftJoin('o.OpinionType', 'ot')
             ->leftJoin('o.Author', 'aut')
+            ->leftJoin('aut.userType', 'ut')
             ->leftJoin('o.appendices', 'app')
             ->leftJoin('o.arguments', 'args')
             ->leftJoin('args.Author', 'argsAuthor')

@@ -6,6 +6,7 @@
 /web/js/*
 /web/media/*
 /web/uploads/*
+/web/export/*
 
 /app/bootstrap.php.cache
 /app/cache/*

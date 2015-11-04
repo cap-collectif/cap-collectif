@@ -12,10 +12,6 @@
         {
             "type": "vcs",
             "url": "https://github.com/ArteGEIE/serializer"
-        },
-        {
-            "type": "vcs",
-            "url": "https://github.com/spyl94/HWIOAuthBundle"
         }
     ],
     "require": {
@@ -47,7 +43,7 @@
         "sonata-project/exporter": "~1.4",
         "sonata-project/classification-bundle": "~2.2@dev",
 
-        "hwi/oauth-bundle": "dev-master#ad277911727621e09626b6ee494821a7b835c172",
+        "hwi/oauth-bundle": "~0.4@dev",
         "liip/imagine-bundle": "~0.9",
         "qandidate/toggle-bundle": "~0.1",
         "predis/predis": "^1.0",

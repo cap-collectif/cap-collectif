@@ -19,9 +19,10 @@ class SourceRepository extends EntityRepository
     public function getRecentOrdered()
     {
         $qb = $this->createQueryBuilder('s')
-            ->select('s.id', 's.title', 's.createdAt', 's.updatedAt', 'a.username as author', 's.isEnabled as published', 's.isTrashed as trashed')
+            ->select('s.id', 's.title', 's.createdAt', 's.updatedAt', 'a.username as author', 'ut.name as userType', 's.isEnabled as published', 's.isTrashed as trashed')
             ->where('s.validated = :validated')
             ->leftJoin('s.Author', 'a')
+            ->leftJoin('a.userType', 'ut')
             ->setParameter('validated', false)
         ;
 

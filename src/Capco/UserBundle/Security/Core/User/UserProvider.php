@@ -44,13 +44,11 @@ class UserProvider extends FOSUBUserProvider
     public function loadUserByOAuthUserResponse(UserResponseInterface $response)
     {
         $email = $response->getEmail() ? $response->getEmail() : 'twitter_'.$response->getUsername();
-        $username = $response->getNickname() ? $response->getNickname() : $response->getFirstname() . ' ' . $response->getLastname();
         $user = $this->userManager->findUserByEmail($email);
-
 
         if (null === $user) {
             $user = $this->userManager->createUser();
-            $user->setUsername($username);
+            $user->setUsername($response->getNickname());
             $user->setEmail($email);
             $user->setPlainPassword(self::random_string(20));
             $user->setEnabled(true);

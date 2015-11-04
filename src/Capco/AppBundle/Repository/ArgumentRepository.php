@@ -17,8 +17,9 @@ class ArgumentRepository extends EntityRepository
     public function getRecentOrdered()
     {
         $qb = $this->createQueryBuilder('a')
-            ->select('a.id', 'a.createdAt', 'a.updatedAt', 'aut.username as author', 'a.isEnabled as published', 'a.isTrashed as trashed', 'c.title as project')
+            ->select('a.id', 'a.createdAt', 'a.updatedAt', 'aut.username as author', 'ut.name as userType', 'a.isEnabled as published', 'a.isTrashed as trashed', 'c.title as project')
             ->leftJoin('a.Author', 'aut')
+            ->leftJoin('aut.userType', 'ut')
             ->leftJoin('a.opinion', 'o')
             ->leftJoin('o.step', 's')
             ->leftJoin('s.projectAbstractStep', 'cas')

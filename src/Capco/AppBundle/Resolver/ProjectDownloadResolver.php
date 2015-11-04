@@ -36,6 +36,7 @@ class ProjectDownloadResolver
         'published' => array(
             'author',
             'author_id',
+            'user_type',
             'created',
             'updated',
             'title',
@@ -57,6 +58,7 @@ class ProjectDownloadResolver
         'unpublished' => array(
             'author',
             'author_id',
+            'user_type',
             'created',
             'updated',
             'title',
@@ -181,10 +183,6 @@ class ProjectDownloadResolver
         foreach ($opinions as $opinion) {
             if ($opinion->getIsEnabled()) {
                 $this->addItemToData($this->getOpinionItem($opinion), $opinion->isPublished());
-                $this->getVersionsData($opinion->getVersions());
-                $this->getArgumentsData($opinion->getArguments());
-                $this->getSourcesData($opinion->getSources());
-                $this->getVotesData($opinion->getVotes());
             }
         }
     }
@@ -242,6 +240,7 @@ class ProjectDownloadResolver
             'updated' => $opinion->getUpdatedAt() != $opinion->getCreatedAt() ? $this->dateToString($opinion->getUpdatedAt()) : null,
             'author' => $opinion->getAuthor()->getUsername(),
             'author_id' => $opinion->getAuthor()->getId(),
+            'user_type' => $opinion->getAuthor()->getUserType() ? $opinion->getAuthor()->getUserType()->getName() : '',
             'score' => $this->calculateScore($opinion->getVotesCountOk(), $opinion->getVotesCountMitige(), $opinion->getVotesCountNok()),
             'total_votes' => $opinion->getVotesCountAll(),
             'votes_ok' => $opinion->getVotesCountOk(),
@@ -272,6 +271,7 @@ class ProjectDownloadResolver
             'updated' => $version->getUpdatedAt() != $version->getCreatedAt() ? $this->dateToString($version->getUpdatedAt()) : null,
             'author' => $version->getAuthor()->getUsername(),
             'author_id' => $version->getAuthor()->getId(),
+            'user_type' => $version->getAuthor()->getUserType() ? $version->getAuthor()->getUserType()->getName() : '',
             'score' => $this->calculateScore($version->getVotesCountOk(), $version->getVotesCountMitige(), $opinion->getVotesCountNok()),
             'total_votes' => $version->getVotesCountAll(),
             'votes_ok' => $version->getVotesCountOk(),
@@ -313,6 +313,7 @@ class ProjectDownloadResolver
             'updated' => $argument->getUpdatedAt() != $argument->getCreatedAt() ? $this->dateToString($argument->getUpdatedAt()) : null,
             'author' => $argument->getAuthor()->getUsername(),
             'author_id' => $argument->getAuthor()->getId(),
+            'user_type' => $argument->getAuthor()->getUserType() ? $argument->getAuthor()->getUserType()->getName() : '',
             'score' => $this->calculateScore($argument->getVotesCount(), 0, 0),
             'total_votes' => $argument->getVotesCount(),
             'votes_ok' => $argument->getVotesCount(),
@@ -349,6 +350,7 @@ class ProjectDownloadResolver
             'updated' => $source->getUpdatedAt() != $source->getCreatedAt() ? $this->dateToString($source->getUpdatedAt()) : null,
             'author' => $source->getAuthor()->getUsername(),
             'author_id' => $source->getAuthor()->getId(),
+            'user_type' => $source->getAuthor()->getUserType() ? $source->getAuthor()->getUserType()->getName() : '',
             'score' => $this->calculateScore($source->getVotesCount(), 0, 0),
             'total_votes' => $source->getVotesCount(),
             'votes_ok' => $source->getVotesCount(),
@@ -377,6 +379,7 @@ class ProjectDownloadResolver
             'updated' => $this->translator->trans('project_download.values.non_applicable', array(), 'CapcoAppBundle'),
             'author' => $vote->getUser()->getUsername(),
             'author_id' => $vote->getUser()->getId(),
+            'user_type' => $vote->getUser()->getUserType() ? $vote->getUser()->getUserType()->getName() : '',
             'score' => $this->translator->trans('project_download.values.non_applicable', array(), 'CapcoAppBundle'),
             'total_votes' => $this->translator->trans('project_download.values.non_applicable', array(), 'CapcoAppBundle'),
             'votes_ok' => $this->translator->trans('project_download.values.non_applicable', array(), 'CapcoAppBundle'),

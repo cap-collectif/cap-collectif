@@ -20,8 +20,9 @@ class OpinionVoteRepository extends EntityRepository
     public function getEnabledByConsultationStep(ConsultationStep $step)
     {
         $qb = $this->getIsConfirmedQueryBuilder()
-            ->addSelect('u', 'o')
+            ->addSelect('u', 'ut', 'o')
             ->leftJoin('v.user', 'u')
+            ->leftJoin('u.userType', 'ut')
             ->leftJoin('v.opinion', 'o')
             ->andWhere('o.step = :step')
             ->setParameter('step', $step)

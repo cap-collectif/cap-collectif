@@ -177,9 +177,6 @@ google_login:
 twitter_login:
     path: /login/check-twitter
 
-nous_citoyens_login:
-    path: /login/check-nous-citoyens
-
 api_login_check:
     path: /api/login_check
 
