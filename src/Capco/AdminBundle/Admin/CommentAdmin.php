@@ -222,6 +222,7 @@ class CommentAdmin extends Admin
                 'label' => 'admin.fields.comment.author',
                 'property' => 'username',
                 'help' => 'admin.help.comment.author',
+                'required' => false,
             ])
             ->add('authorName', null, array(
                 'label' => 'admin.fields.comment.author_name',
