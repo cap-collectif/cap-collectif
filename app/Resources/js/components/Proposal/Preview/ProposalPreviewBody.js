@@ -1,5 +1,3 @@
-const FormattedMessage = ReactIntl.FormattedMessage;
-
 const ProposalPreviewBody = React.createClass({
   propTypes: {
     proposal: React.PropTypes.object.isRequired,
