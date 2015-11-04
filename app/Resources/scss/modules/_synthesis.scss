@@ -763,21 +763,20 @@ $items-colors:
   .synthesis__element__bar {
     position: relative;
     border: 1px solid $border-color;
-    background: $white;
-    height: 50px;
+    padding: 5px 0;
     .synthesis__element__bar__value {
+      position: absolute;
+      top: 0;
+      left: 0;
       display: block;
       height: 100%;
       background-color: $light-gray;
-      position: relative;
-      overflow: hidden;
     }
     .element__title {
-      position: absolute;
-      top: 5px;
-      left: 5px;
-      height: 40px;
-      overflow: hidden;
+      position: relative;
+      z-index: 1000;
+      white-space: normal;
+      text-align: left;
     }
   }
 }
