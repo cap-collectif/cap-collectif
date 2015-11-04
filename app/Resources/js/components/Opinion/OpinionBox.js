@@ -152,6 +152,16 @@ const OpinionBox = React.createClass({
           </div>
           {this.renderVotes()}
         </div>
+        {this.props.opinion.answerBody
+          ? <div className="opinion__answer" id="answer">
+              {this.props.opinion.answerTitle
+                ? <p className="h4" style={{marginTop: '0'}}>{opinion.answerTitle}</p>
+                : null
+              }
+              <div dangerouslySetInnerHTML={{__html: opinion.answerBody}} />
+            </div>
+          : null
+        }
       </div>
     );
   },

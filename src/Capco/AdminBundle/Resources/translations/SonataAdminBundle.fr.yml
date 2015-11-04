@@ -336,8 +336,11 @@ admin:
       group_content: Proposition
       group_appendices: Contexte
       group_publication: Options de publication
+      group_answer: Réponse officielle
       appendices: Éléments de contexte
       title: Titre
+      answer_title: Titre
+      answer_body: Contenu
       author: Auteur
       body: Contenu
       step: Étape

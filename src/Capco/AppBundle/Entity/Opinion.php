@@ -156,6 +156,16 @@ class Opinion implements SelfLinkableInterface, VotableInterface
      */
     protected $ranking = null;
 
+    /**
+     * @ORM\Column(name="answer_title", type="string", nullable=true)
+     */
+    protected $answerTitle;
+
+    /**
+     * @ORM\Column(name="answer_body", type="text", nullable=true)
+     */
+    protected $answerBody;
+
     public function __construct()
     {
         $this->votes = new ArrayCollection();
@@ -600,6 +610,42 @@ class Opinion implements SelfLinkableInterface, VotableInterface
     public function setRanking($ranking)
     {
         $this->ranking = $ranking;
+
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getAnswerTitle()
+    {
+        return $this->answerTitle;
+    }
+
+    /**
+     * @param mixed $answerTitle
+     */
+    public function setAnswerTitle($answerTitle)
+    {
+        $this->answerTitle = $answerTitle;
+
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getAnswerBody()
+    {
+        return $this->answerBody;
+    }
+
+    /**
+     * @param mixed $answerBody
+     */
+    public function setAnswerBody($answerBody)
+    {
+        $this->answerBody = $answerBody;
 
         return $this;
     }

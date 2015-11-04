@@ -102,6 +102,16 @@ Capco\AppBundle\Entity\Opinion:
         step:
             expose: true
             groups: [Opinions]
+        answerTitle:
+            expose: true
+            type: string
+            groups: [Opinions, OpinionVersions]
+            serialized_name: answerTitle
+        answerBody:
+            expose: true
+            type: string
+            groups: [Opinions, OpinionVersions]
+            serialized_name: answerBody
     virtual_properties:
         canContribute:
             serialized_name: isContribuable
