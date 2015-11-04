@@ -114,5 +114,5 @@ Capco\AppBundle\Entity\Event:
         isEnabled: <boolean(80)>
         body: <text(1000)>
         startAt: <dateTimeBetween('-40 days', '-10 days')>
-        endAt: <dateTimeBetween('+10 days', '+40 days')>
+        endAt: <dateTimeBetween('now', '+40 days')>
         Author: @user<numberBetween(1, 5)>

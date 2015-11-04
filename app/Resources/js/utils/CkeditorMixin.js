@@ -3,6 +3,7 @@ const CkeditorMixin = {
   initializeCkeditor(ref, stateName = false) {
     CKEDITOR.basePath = '/js/ckeditor/';
     const ckeditorConfig = {
+      contentsCss: CKEDITOR.basePath + 'contents.css',
       removePlugins: 'elementspath',
       toolbar: [
         ['Undo', 'Redo'],
@@ -14,7 +15,7 @@ const CkeditorMixin = {
         ['Maximize'],
       ],
       language: 'fr',
-      skin: 'bootstrapck',
+      skin: 'minimalist',
       extraPlugins: 'autolink,autogrow',
       extraAllowedContent: 'a[!href,_src,target,class]; br',
       autoParagraph: false,
