@@ -76,6 +76,7 @@ security:
                     facebook: "/login/check-facebook"
                     google:   "/login/check-google"
                     twitter:  "/login/check-twitter"
+                    nous_citoyens:  "/login/check-nous-citoyens"
                 login_path: /login
                 oauth_user_provider:
                     service: my_user_provider
