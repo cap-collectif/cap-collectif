@@ -7,6 +7,7 @@ use Capco\AppBundle\Traits\TimestampableTrait;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * ProposalForm.
@@ -36,11 +37,10 @@ class ProposalForm
     private $description;
 
     /**
-     * @var ArrayCollection
-     *
-     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\CollectStep", mappedBy="proposalForm", cascade={"persist", "remove"}, orphanRemoval=true)
-     **/
-    private $steps;
+     * @ORM\OneToOne(targetEntity="Capco\AppBundle\Entity\CollectStep", inversedBy="proposalForm", cascade={"persist", "remove"}, orphanRemoval=true)
+     * @ORM\JoinColumn(name="step_id", referencedColumnName="id", nullable=true, onDelete="CASCADE")
+     */
+    private $step;
 
     /**
      * @var ArrayCollection
@@ -70,7 +70,6 @@ class ProposalForm
     public function __construct()
     {
         $this->questions = new ArrayCollection();
-        $this->steps     = new ArrayCollection();
         $this->updatedAt = new \Datetime();
     }
 
@@ -190,37 +189,21 @@ class ProposalForm
     }
 
     /**
-     * @return ArrayCollection
+     * @return mixed
      */
-    public function getSteps()
+    public function getStep()
     {
-        return $this->steps;
+        return $this->step;
     }
 
     /**
-     * @param ArrayCollection $steps
-     *
-     * @return $this
+     * @param mixed $step
      */
-    public function setSteps(ArrayCollection $steps)
+    public function setStep(CollectStep $step = null)
     {
-        $this->steps = $steps;
+        $this->step = $step;
+
         return $this;
-    }
-
-    /**
-     * @return CollectStep
-     */
-    public function getCurrentStep()
-    {
-        $currentStep = null;
-        // TODO: refacto to avoid the exponential increase of execution time based on the number of steps
-        foreach($this->getSteps() as $step) {
-            if ($step->getProposalForm()->getId() === $this->getId()) {
-                $currentStep = $step;
-            }
-        }
-        return $currentStep;
     }
 
     /**
@@ -228,7 +211,7 @@ class ProposalForm
      */
     public function canDisplay()
     {
-        return $this->getCurrentStep()->canDisplay();
+        return $this->getStep()->canDisplay();
     }
 
     /**
@@ -236,6 +219,6 @@ class ProposalForm
      */
     public function canContribute()
     {
-        return $this->getCurrentStep()->canContribute();
+        return $this->getStep()->canContribute();
     }
 }

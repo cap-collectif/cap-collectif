@@ -21,9 +21,7 @@ $statuses:
 
 .proposal__title {
   margin-top: 0;
-  margin-bottom: 0;
-  line-height: 1.2em;
-  max-height: 87px;
+  max-height: 78px;
   word-break: break-word;
   overflow: hidden;
 }
@@ -50,14 +48,10 @@ $statuses:
 }
 
 .proposal__footer .proposal__status {
+  padding: 8px 0;
   text-align: center;
-  padding: 5px;
   margin: 0;
   color: $white;
-  height: 32px;
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
 
   @each $status in $statuses {
     $name: nth($status, 1);

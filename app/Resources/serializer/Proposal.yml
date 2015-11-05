@@ -57,6 +57,3 @@ Capco\AppBundle\Entity\Proposal:
         votes:
             expose: true
             groups: [Proposals]
-        answer:
-            expose: true
-            groups: [Proposals]

@@ -3,7 +3,6 @@
 namespace Capco\AppBundle\Entity;
 
 use Capco\AppBundle\Model\CommentableInterface;
-use Capco\AppBundle\Traits\AnswerableTrait;
 use Capco\AppBundle\Traits\CommentableTrait;
 use Capco\AppBundle\Traits\EnableTrait;
 use Capco\AppBundle\Traits\SluggableTitleTrait;
@@ -35,7 +34,6 @@ class Proposal implements CommentableInterface, VotableInterface
     use TrashableTrait;
     use SluggableTitleTrait;
     use SoftDeleteableEntity;
-    use AnswerableTrait;
 
     public static $ratings = [1, 2, 3, 4, 5];
 
@@ -322,16 +320,9 @@ class Proposal implements CommentableInterface, VotableInterface
     /**
      * @return CollectStep
      */
-    public function getCurrentStep()
+    public function getStep()
     {
-        $currentStep = null;
-        // TODO: refacto to avoid the exponential increase of execution time based on the number of steps
-        foreach($this->getProposalForm()->getSteps() as $step) {
-            if ($step->getProposalForm()->getId() === $this->getProposalForm()->getId()) {
-                $currentStep = $step;
-            }
-        }
-        return $currentStep;
+        return $this->proposalForm ? $this->proposalForm->getStep() : null;
     }
 
     /**
@@ -397,7 +388,7 @@ class Proposal implements CommentableInterface, VotableInterface
      */
     public function canDisplay()
     {
-        return $this->enabled && !$this->isTrashed && $this->getCurrentStep()->canDisplay();
+        return $this->enabled && !$this->isTrashed && $this->getStep()->canDisplay();
     }
 
     /**
@@ -405,6 +396,6 @@ class Proposal implements CommentableInterface, VotableInterface
      */
     public function canContribute()
     {
-        return $this->enabled && !$this->isTrashed && $this->getCurrentStep()->canContribute();
+        return $this->enabled && !$this->isTrashed && $this->getStep()->canContribute();
     }
 }
