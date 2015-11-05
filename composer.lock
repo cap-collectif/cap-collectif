@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "befced15eb87848b069a98919b0154ed",
-    "content-hash": "e450448f3742c5e83171356d7ca28371",
+    "hash": "a19813e2b682fc515f95257c89ece9d1",
+    "content-hash": "04e5d4fe0d34775ca56719807f266ec6",
     "packages": [
         {
             "name": "behat/transliterator",
@@ -1770,12 +1770,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/spyl94/HWIOAuthBundle.git",
-                "reference": "560c5d6072c5b279eee12b275085995faa082f56"
+                "reference": "879e6dd2e9746de749e150a4846bc76a7c435f54"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spyl94/HWIOAuthBundle/zipball/7b26e8b87945f825bb5df29691ee72e12cf97894",
-                "reference": "560c5d6072c5b279eee12b275085995faa082f56",
+                "url": "https://api.github.com/repos/spyl94/HWIOAuthBundle/zipball/879e6dd2e9746de749e150a4846bc76a7c435f54",
+                "reference": "879e6dd2e9746de749e150a4846bc76a7c435f54",
                 "shasum": ""
             },
             "require": {
@@ -1888,7 +1888,7 @@
             "support": {
                 "source": "https://github.com/spyl94/HWIOAuthBundle/tree/master"
             },
-            "time": "2015-11-03 10:20:27"
+            "time": "2015-11-05 09:45:53"
         },
         {
             "name": "igorw/get-in",
@@ -3943,7 +3943,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sonata-project/SonataAdminBundle/zipball/6b0323c2486c3fc2a316bcfd16800506780e09db",
+                "url": "https://api.github.com/repos/sonata-project/SonataAdminBundle/zipball/54d4e2a5e3ad2c277b733f70aae4e5acdd2cc701",
                 "reference": "6b0323c2486c3fc2a316bcfd16800506780e09db",
                 "shasum": ""
             },
@@ -4294,7 +4294,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sonata-project/SonataDatagridBundle/zipball/62eb30561331468514a9e36215922c55597f67bb",
+                "url": "https://api.github.com/repos/sonata-project/SonataDatagridBundle/zipball/88d12865c186ac4822fb8c3462db278f96c90678",
                 "reference": "62eb30561331468514a9e36215922c55597f67bb",
                 "shasum": ""
             },
@@ -4400,7 +4400,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sonata-project/SonataDoctrineORMAdminBundle/zipball/c7ae6b07e93f49f14cbe1a5cc2231f49d97f947c",
+                "url": "https://api.github.com/repos/sonata-project/SonataDoctrineORMAdminBundle/zipball/46848176976b222765e67d213feb433ebe85bb58",
                 "reference": "c7ae6b07e93f49f14cbe1a5cc2231f49d97f947c",
                 "shasum": ""
             },
@@ -4706,7 +4706,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sonata-project/SonataMediaBundle/zipball/27202a1acdd03f426e63dc2b25b019e490569fd5",
+                "url": "https://api.github.com/repos/sonata-project/SonataMediaBundle/zipball/1cc799eda0fa7dc0fb01045cb36747e89b4bffcf",
                 "reference": "5b7da8ae4ef7cbaad971094b6d6a07dcfe67dd34",
                 "shasum": ""
             },

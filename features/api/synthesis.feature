@@ -314,7 +314,7 @@ Feature: Synthesis
           "body": "blabla",
           "description": @null@,
           "notation": 4,
-          "linkedDataCreation": @null@,
+          "linked_data_creation": @null@,
           "_links": {
             "self": { "href": "/api/syntheses/42/elements/43" },
             "history": { "href": "/api/syntheses/42/elements/43/history" }
@@ -375,7 +375,7 @@ Feature: Synthesis
           "body": "blabla",
           "description": @null@,
           "notation": 4,
-          "linkedDataCreation": @null@,
+          "linked_data_creation": @null@,
           "_links": {
             "self": { "href": "/api/syntheses/42/elements/43" },
             "history": { "href": "/api/syntheses/42/elements/43/history" }
@@ -427,7 +427,7 @@ Feature: Synthesis
           "body": "blabla",
           "description": @null@,
           "notation": @null@,
-          "linkedDataCreation": @null@,
+          "linked_data_creation": @null@,
           "_links": {
             "self": { "href": "/api/syntheses/42/elements/44" },
             "history": { "href": "/api/syntheses/42/elements/44/history" }
@@ -480,7 +480,7 @@ Feature: Synthesis
           "body": "blabla",
           "description": @null@,
           "notation": @null@,
-          "linkedDataCreation": @null@,
+          "linked_data_creation": @null@,
           "_links": {
             "self": { "href": "/api/syntheses/42/elements/44" },
             "history": { "href": "/api/syntheses/42/elements/44/history" }
@@ -669,7 +669,7 @@ Feature: Synthesis
       "notation": 4,
       "comment": @null@,
       "votes": {"-1": 21, "0":12, "1": 43},
-      "linkedDataCreation": @null@,
+      "linked_data_creation": @null@,
       "logs": [
         {
           "id": @integer@,
@@ -736,7 +736,7 @@ Feature: Synthesis
       "notation": 5,
       "comment": @null@,
       "votes": [],
-      "linkedDataCreation": @null@,
+      "linked_data_creation": @null@,
       "logs": @...@,
       "_links": {
         "self": { "href": "@string@.startsWith('/api/syntheses/42/elements/')" },
@@ -825,7 +825,7 @@ Feature: Synthesis
       "notation": 2,
       "comment": "Cet argument est vraiment nul !",
       "votes": {"-1": 21, "0":12, "1": 43},
-      "linkedDataCreation": @null@,
+      "linked_data_creation": @null@,
       "logs": @...@,
       "_links": {
         "self": { "href": "/api/syntheses/42/elements/43" },
@@ -932,7 +932,7 @@ Feature: Synthesis
   #           "link": @null@,
   #           "notation": 5,
   #           "votes": [],
-  #           "linkedDataCreation": @null@,
+  #           "linked_data_creation": @null@,
   #           "_links": {
   #             "self": { "href": "/api/syntheses/42/elements/43" },
   #             "history": { "href": "/api/syntheses/42/elements/43/history" }
@@ -950,7 +950,7 @@ Feature: Synthesis
   #     "notation": @null@,
   #     "comment": @null@,
   #     "votes": {"-1": 21, "0":12, "1": 43},
-  #     "linkedDataCreation": @null@,
+  #     "linked_data_creation": @null@,
   #     "logs": @...@,
   #     "_links": {
   #       "self": { "href": "/api/syntheses/42/elements/43" },

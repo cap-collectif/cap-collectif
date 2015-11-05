@@ -54,7 +54,6 @@ Capco\AppBundle\Entity\Synthesis\SynthesisElement:
     linkedDataCreation:
       expose: true
       groups: [ElementsList, ElementsPublished, ElementDetails]
-      serialized_name: linkedDataCreation
     originalDivision:
       expose: true
       groups: [ElementDetails]
