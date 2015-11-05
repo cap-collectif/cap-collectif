@@ -16,24 +16,31 @@ class Version20151103115632 extends AbstractMigration
             ->connection
             ->fetchAll('SELECT id, created_at FROM proposal_response');
         foreach ($responses as $response) {
-            $proposal = $this
+            $proposals = $this
                 ->connection
                 ->fetchAll('SELECT id, proposal_form_id FROM proposal WHERE created_at = ?',
                     [$response['created_at']]
-                )[0]
+                )
             ;
-            $question = $this
-                ->connection
-                ->fetchAll('SELECT id FROM question WHERE proposal_form_id = ?',
-                    [$proposal['proposal_form_id']]
-                )[0]
-            ;
-            $this->connection->update('proposal_response', [
-                'proposal_id' => $proposal['id'],
-                'question_id' => $question['id']
-            ], [
-               'id' => $response['id'],
-            ]);
+            if (count($proposals) > 0) {
+                $proposal = $proposals[0];
+                $question = $this
+                    ->connection
+                    ->fetchAll(
+                        'SELECT id FROM question WHERE proposal_form_id = ?',
+                        [$proposal['proposal_form_id']]
+                    )[0];
+                $this->connection->update(
+                    'proposal_response',
+                    [
+                        'proposal_id' => $proposal['id'],
+                        'question_id' => $question['id']
+                    ],
+                    [
+                        'id' => $response['id'],
+                    ]
+                );
+            }
         }
     }
 
