@@ -16,6 +16,10 @@ class ProposalAdmin extends Admin
         '_sort_by' => 'createAt',
     );
 
+    protected $formOptions = array(
+        'cascade_validation' => true,
+    );
+
     // Fields to be shown on create/edit forms
     protected function configureFormFields(FormMapper $formMapper)
     {
@@ -83,6 +87,15 @@ class ProposalAdmin extends Admin
                     'label' => 'admin.fields.proposal.trashedReason',
                     'required' => false,
                 ])
+            ->end()
+
+            // Answer
+            ->with('admin.fields.proposal.group_answer')
+            ->add('answer', 'sonata_type_model_list', array(
+                'label' => 'admin.fields.proposal.answer',
+                'btn_list' => false,
+                'required' => false,
+            ))
             ->end()
         ;
     }

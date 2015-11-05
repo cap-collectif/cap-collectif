@@ -11,6 +11,7 @@ Capco\AppBundle\Entity\OpinionVersion:
         parent: @opinion57
         comment: bououh
         ranking: <numberBetween(1,5)>
+        answer: @answer2
     version2:
         title: Modification 2
         body: |

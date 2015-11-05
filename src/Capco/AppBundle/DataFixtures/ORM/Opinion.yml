@@ -192,6 +192,7 @@ Capco\AppBundle\Entity\Opinion:
         Author: @user2
         OpinionType: @opinionType6
         position: 1
+        answer: @answer1
 
     opinion61:
         step: @cstep5

@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\Entity;
 
 use Capco\AppBundle\Model\CommentableInterface;
+use Capco\AppBundle\Traits\AnswerableTrait;
 use Capco\AppBundle\Traits\CommentableTrait;
 use Capco\AppBundle\Traits\EnableTrait;
 use Capco\AppBundle\Traits\SluggableTitleTrait;
@@ -34,6 +35,7 @@ class Proposal implements CommentableInterface, VotableInterface
     use TrashableTrait;
     use SluggableTitleTrait;
     use SoftDeleteableEntity;
+    use AnswerableTrait;
 
     public static $ratings = [1, 2, 3, 4, 5];
 
