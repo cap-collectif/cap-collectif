@@ -7,13 +7,20 @@ Feature: Proposal Restful Api
 """
 {
   "id": @integer@,
-  "title": @string@,
   "body": @string@,
+  "updated_at": "@string@.isDateTime()",
   "theme": {
     "title": @string@,
     "_links": {
       "show": @string@
     }
+  },
+  "district": {
+    "name": @string@
+  },
+  "status": {
+    "name": @string@,
+    "color": @string@
   },
   "author": {
     "username": "welcomattic",
@@ -27,31 +34,29 @@ Feature: Proposal Restful Api
       "settings": @string@
     }
   },
-  "status": {
-    "name": @string@,
-    "color": @string@
-  },
-  "district": {
-    "name": @string@
-  },
-  "votes": @array@,
-  "votes_count": @integer@,
-  "comments_count": @integer@,
   "comments": @array@,
-  "created_at": "@string@.isDateTime()",
-  "updated_at": "@string@.isDateTime()",
-  "_links": {
-    "show": @string@
-  },
   "responses":[
     {
-      "value": @string@,
       "question": {
         "questionType": @number@,
         "title": @string@
-      }
+      },
+      "value": @string@
     }
-  ]
+  ],
+  "comments_count": @integer@,
+  "created_at": "@string@.isDateTime()",
+  "votes": @array@,
+  "votes_count": @integer@,
+  "title": @string@,
+  "answer": {
+    "title": "Réponse du gouvernement à la proposition",
+    "body": @string@,
+    "author": @...@
+  },
+  "_links": {
+    "show": @string@
+  }
 }
 """
 

@@ -610,14 +610,3 @@ svg.avatar {
   margin-top: -60px;
   visibility: hidden;
 }
-
-@media print {
-  * {
-    -webkit-print-color-adjust:exact;
-    print-color-adjust: exact;
-  }
-
-  a[href]:after {
-    content: none;
-  }
-}

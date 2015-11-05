@@ -11,7 +11,7 @@ trait SluggableTitleTrait
     /**
      * @var string
      *
-     * @ORM\Column(name="title", type="string", length=255)
+     * @ORM\Column(name="title", type="string", length=255, nullable=false)
      * @Assert\NotBlank()
      */
     protected $title;

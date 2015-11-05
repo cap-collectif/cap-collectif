@@ -28,6 +28,9 @@ Capco\AppBundle\Entity\OpinionVersion:
             expose: true
             type: DateTime
             groups: [OpinionVersions, OpinionVersionPreviews]
+        answer:
+            expose: true
+            groups: [OpinionVersions]
         updatedAt:
             expose: true
             type: DateTime
