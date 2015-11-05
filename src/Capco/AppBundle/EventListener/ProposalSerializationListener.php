@@ -36,7 +36,7 @@ class ProposalSerializationListener implements EventSubscriberInterface
     public function onPostProposal(ObjectEvent $event)
     {
         $proposal = $event->getObject();
-        $step     = $proposal->getCurrentStep();
+        $step     = $proposal->getStep();
         $project  = $step->getProjectAbstractStep()->getProject();
         $user     = $this->tokenStorage->getToken()->getUser();
 

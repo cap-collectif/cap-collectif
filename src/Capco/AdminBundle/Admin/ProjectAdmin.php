@@ -21,8 +21,6 @@ class ProjectAdmin extends Admin
         'cascade_validation' => true,
     ];
 
-    public $collectStep = null;
-
     /**
      * @param DatagridMapper $datagridMapper
      */
@@ -240,10 +238,6 @@ class ProjectAdmin extends Admin
     protected function configureShowFields(ShowMapper $showMapper)
     {
         $subject = $this->getSubject();
-
-        if ($subject && $subject->getCurrentStep() && $subject->getCurrentStep()->isCollectStep()) {
-            $this->collectStep = $subject->getCurrentStep();
-        }
 
         $showMapper
             ->with('admin.fields.project.general',   ['class' => 'col-md-3'])->end()

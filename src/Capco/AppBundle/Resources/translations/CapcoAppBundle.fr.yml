@@ -233,7 +233,8 @@ proposal:
     none: Aucune proposition dans la corbeille
   show:
     voted: Vous avez voté
-    votes: "]-Inf, 0] Aucun vote | {1} 1 vote | ]1,Inf[ %count% votes"
+    votes: "]-Inf, 1] %count% vote | ]1,Inf[ %count% votes"
+    comments: "]-Inf, 1] %count% commentaire | ]1,Inf[ %count% commentaires"
     share: Partager
     report: Signaler
     edit: Modifier

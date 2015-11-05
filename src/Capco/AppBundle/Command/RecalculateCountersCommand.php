@@ -269,15 +269,7 @@ class RecalculateCountersCommand extends ContainerAwareCommand
             (select count(iv.id) from CapcoAppBundle:IdeaVote iv where iv.idea = i AND iv.confirmed = 1 group by iv.idea)');
         $query->execute();
 
-        $query = $em->createQuery('update CapcoAppBundle:IdeaComment c set c.votesCount =
-            (select count(cv.id) from CapcoAppBundle:CommentVote cv where cv.comment = c AND cv.confirmed = 1 group by cv.comment)');
-        $query->execute();
-
-        $query = $em->createQuery('update CapcoAppBundle:IdeaComment c set c.votesCount =
-            (select count(cv.id) from CapcoAppBundle:CommentVote cv where cv.comment = c AND cv.confirmed = 1 group by cv.comment)');
-        $query->execute();
-
-        $query = $em->createQuery('update CapcoAppBundle:EventComment c set c.votesCount =
+        $query = $em->createQuery('update CapcoAppBundle:Comment c set c.votesCount =
             (select count(cv.id) from CapcoAppBundle:CommentVote cv where cv.comment = c AND cv.confirmed = 1 group by cv.comment)');
         $query->execute();
 
@@ -293,6 +285,10 @@ class RecalculateCountersCommand extends ContainerAwareCommand
 
         $query = $em->createQuery('update CapcoAppBundle:Event e set e.commentsCount =
             (select count(ec.id) from CapcoAppBundle:EventComment ec where ec.Event = e AND ec.isEnabled = 1 AND ec.isTrashed = 0 GROUP BY ec.Event)');
+        $query->execute();
+
+        $query = $em->createQuery('update CapcoAppBundle:Proposal p set p.commentsCount =
+            (select count(pc.id) from CapcoAppBundle:ProposalComment pc where pc.proposal = p AND pc.isEnabled = 1 AND pc.isTrashed = 0 GROUP BY pc.proposal)');
         $query->execute();
 
         $output->writeln('Calculation completed');

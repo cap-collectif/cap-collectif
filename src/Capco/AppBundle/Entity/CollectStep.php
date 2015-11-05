@@ -17,8 +17,7 @@ class CollectStep extends AbstractStep
 {
     /**
      * @var ProposalForm
-     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\ProposalForm", inversedBy="steps", cascade={"persist", "remove"})
-     * @ORM\JoinColumn(name="proposal_form_id", referencedColumnName="id", nullable=true, onDelete="SET NULL")
+     * @ORM\OneToOne(targetEntity="Capco\AppBundle\Entity\ProposalForm", mappedBy="step", cascade={"persist", "remove"})
      */
     private $proposalForm = null;
 

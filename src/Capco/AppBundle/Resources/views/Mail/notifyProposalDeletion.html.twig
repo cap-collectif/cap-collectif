@@ -4,8 +4,8 @@
             {{ 'proposal_deletion.notification.body'|trans({
                 '%author%': contribution.author,
                 '%sitename%': capco_site_parameter_value('global.site.fullname'),
-                '%project%': contribution.getCurrentStep.project.title,
-                '%step%': contribution.getCurrentStep.title,
+                '%project%': contribution.step.project.title,
+                '%step%': contribution.step.title,
                 '%content%': contribution.body,
             }, 'CapcoAppBundle') | raw }}
         </p>

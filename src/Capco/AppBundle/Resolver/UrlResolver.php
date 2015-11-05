@@ -10,6 +10,7 @@ use Capco\AppBundle\Entity\Comment;
 use Capco\AppBundle\Entity\Opinion;
 use Capco\AppBundle\Entity\OpinionVersion;
 use Capco\AppBundle\Entity\Post;
+use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\Source;
 use Capco\AppBundle\Entity\Theme;
 use Capco\UserBundle\Entity\User;
@@ -24,7 +25,7 @@ class UrlResolver
         $this->router = $router;
     }
 
-    public function generateOpinionRoute($object, $absolute)
+    public function generateOpinionOrProposalRoute($object, $absolute)
     {
         if ($object instanceof Opinion) {
             return $this->router->generate('app_project_show_opinion', [
@@ -44,6 +45,14 @@ class UrlResolver
                 'opinionTypeSlug' => $opinion->getOpinionType()->getSlug(),
                 'opinionSlug' => $opinion->getSlug(),
                 'versionSlug' => $object->getSlug(),
+            ], $absolute);
+        }
+
+        if ($object instanceof Proposal) {
+            return $this->router->generate('app_project_show_proposal', [
+                'projectSlug' => $object->getStep()->getProject()->getSlug(),
+                'stepSlug' => $object->getStep()->getSlug(),
+                'proposalSlug' => $object->getSlug(),
             ], $absolute);
         }
 
@@ -85,7 +94,7 @@ class UrlResolver
         }
 
         if ($object instanceof Argument || $object instanceof Source) {
-            return $this->generateOpinionRoute($object->getParent(), $absolute);
+            return $this->generateOpinionOrProposalRoute($object->getParent(), $absolute);
         }
 
         if ($object instanceof AbstractStep) {
@@ -108,7 +117,7 @@ class UrlResolver
             return $this->router->generate('capco_user_profile_show_all', ['slug' => $object->getSlug()], $absolute);
         }
 
-        if (false !== $url = $this->generateOpinionRoute($object, $absolute)) {
+        if (false !== $url = $this->generateOpinionOrProposalRoute($object, $absolute)) {
             return $url;
         }
 
@@ -129,7 +138,7 @@ class UrlResolver
             ;
         }
 
-        if (false !== $url = $this->generateOpinionRoute($object, $absolute)) {
+        if (false !== $url = $this->generateOpinionOrProposalRoute($object, $absolute)) {
             return $url;
         }
 
@@ -160,6 +169,10 @@ class UrlResolver
 
         if ($object instanceof OpinionVersion) {
             return $this->router->generate('admin_capco_app_opinionversion_show', array('id' => $object->getId()), $absolute);
+        }
+
+        if ($object instanceof Proposal) {
+            return $this->router->generate('admin_capco_app_proposal_show', array('id' => $object->getId()), $absolute);
         }
 
         return '';

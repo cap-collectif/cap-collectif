@@ -139,6 +139,7 @@ class StepAdmin extends Admin
                 ->with('admin.fields.step.group_form', ['class' => 'col-md-6'])
                 ->add('proposalForm', 'sonata_type_model', [
                     'label'        => 'admin.fields.step.proposal_form',
+                    'query'        => $this->createQueryForProposalForms(),
                     'by_reference' => false,
                     'required'     => false,
                     'btn_add'      => false,
@@ -158,6 +159,21 @@ class StepAdmin extends Admin
                 ->end()
             ;
         }
+    }
+
+    private function createQueryForProposalForms()
+    {
+        $subject = $this->getSubject()->getId() ? $this->getSubject() : null;
+        $qb = $this->getConfigurationPool()
+            ->getContainer()
+            ->get('doctrine.orm.entity_manager')
+            ->getRepository('CapcoAppBundle:ProposalForm')
+            ->createQueryBuilder('f')
+            ->where('f.step IS NULL OR f.step = :step')
+            ->setParameter('step', $subject)
+        ;
+
+        return $qb->getQuery();
     }
 
     protected function configureRoutes(RouteCollection $collection)
