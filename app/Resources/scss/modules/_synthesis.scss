@@ -780,3 +780,9 @@ $items-colors:
     }
   }
 }
+
+@media print {
+  .synthesis__element__bar__value {
+    background-color: $light-gray !important;
+  }
+}

@@ -2,7 +2,6 @@
 
 namespace Capco\AppBundle\Entity;
 
-use Capco\AppBundle\Traits\AnswerableTrait;
 use Capco\AppBundle\Traits\ValidableTrait;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
@@ -30,7 +29,6 @@ class Opinion implements SelfLinkableInterface, VotableInterface
     use VotableOkNokMitigeTrait;
     use ValidableTrait;
     use SelfLinkableTrait;
-    use AnswerableTrait;
 
     public static $sortCriterias = [
         'positions' => 'opinion.sort.positions',
@@ -110,7 +108,7 @@ class Opinion implements SelfLinkableInterface, VotableInterface
 
     /**
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\ConsultationStep", inversedBy="opinions", cascade={"persist"})
-     * @ORM\JoinColumn(name="step_id", referencedColumnName="id")
+     * @ORM\JoinColumn(name="step_id", referencedColumnName="id", nullable=true)
      * @Assert\NotNull()
      */
     private $step;

@@ -336,11 +336,3 @@ services:
             - {name: sonata.admin, manager_type: orm, group: admin.group.moderation, label: admin.label.opinion_version}
         calls:
             - [ setTranslationDomain, [SonataAdminBundle]]
-
-    capco_admin.admin.answer:
-        class: Capco\AdminBundle\Admin\AnswerAdmin
-        arguments: [~, Capco\AppBundle\Entity\Answer, SonataAdminBundle:CRUD]
-        tags:
-            - {name: sonata.admin, manager_type: orm, group: admin.group.moderation, label: admin.label.answer}
-        calls:
-            - [ setTranslationDomain, [SonataAdminBundle]]

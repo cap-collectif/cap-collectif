@@ -10,7 +10,6 @@ Capco\AppBundle\Entity\Proposal:
         theme: @theme1
         district: @district1
         status: @status1
-        answer: @answer3
     proposal2:
         title: Rénovation du gymnase
         body: |

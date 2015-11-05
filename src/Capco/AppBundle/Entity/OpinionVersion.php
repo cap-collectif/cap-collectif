@@ -2,7 +2,6 @@
 
 namespace Capco\AppBundle\Entity;
 
-use Capco\AppBundle\Traits\AnswerableTrait;
 use Capco\AppBundle\Traits\ValidableTrait;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -32,7 +31,6 @@ class OpinionVersion implements VotableInterface
     use TimestampableTrait;
     use VotableOkNokMitigeTrait;
     use ValidableTrait;
-    use AnswerableTrait;
 
     /**
      * @var int

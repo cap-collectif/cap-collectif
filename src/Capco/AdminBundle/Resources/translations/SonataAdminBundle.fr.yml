@@ -1,12 +1,11 @@
 #Global
 admin.global:
-  add: Ajouter
+  validate: La contribution a bien été validée.
   delete: Supprimer
   list_mode: Liste
   trash: La contribution a bien été mise à la corbeille.
   tree_mode: Arboresence
   unpublish: La contribution a bien été dépubliée.
-  validate: La contribution a bien été validée.
 
 # Dashboard groups
 admin.group.project: Projets participatifs
@@ -17,7 +16,6 @@ admin.group.parameters: Réglages
 sonata.admin.group.user: Utilisateurs
 
 # Dashboard names
-admin.label.answer: Réponse aux propositions
 admin.label.appendix: Éléments de contexte
 admin.label.appendix_type: Éléments de contexte
 admin.label.argument: Arguments
@@ -120,10 +118,6 @@ admin:
 
 
   fields:
-    answer:
-      author: Auteur
-      body: Contenu
-      title: Titre
     appendix:
       opinion: Proposition
       body: Contenu
@@ -342,8 +336,6 @@ admin:
       group_content: Proposition
       group_appendices: Contexte
       group_publication: Options de publication
-      group_answer: Réponse officielle
-      answer: Réponse officielle
       appendices: Éléments de contexte
       title: Titre
       author: Auteur
@@ -395,14 +387,12 @@ admin:
       appendix_type: Élément de contexte
       appendix_type_add: Ajouter
     opinion_version:
-      answer: Réponse officielle
       argument_count: Arguments
       author: Auteur
       body: Contenu
       created_at: Création
       comment: Explication
       group_content: Contenu
-      group_answer: Réponse officielle
       group_publication: Options de publication
       is_enabled: Publié
       is_trashed: Dans la corbeille
@@ -430,10 +420,8 @@ admin:
       updated_at: Mise à jour
       created_at: Création
     proposal:
-      group_answer: Réponse officielle
       group_publication: Options de publication
       group_content: Proposition
-      answer: Réponse officielle
       title: Titre
       body: Contenu
       author: Auteur
@@ -724,12 +712,10 @@ highlighted_idea: une idée à la une
 highlighted_theme: un thème à la une
 highlighted_event: un évènement à la une
 highlighted_project: un projet à la une
-
 idea_comment: un commentaire sur une idée
 event_comment: un commentaire sur un évènement
 post_comment: un commentaire sur un article
 proposal_comment: un commentaire sur une proposition
-
 other_step: Autre étape
 collect_step: Étape de collecte
 consultation_step: Étape de consultation
