@@ -13,7 +13,6 @@ const ProposalPageHeader = React.createClass({
 
   render() {
     const proposal = this.props.proposal;
-    console.log(proposal);
     return (
       <div className="container--custom container--with-sidebar">
         <div className="block">

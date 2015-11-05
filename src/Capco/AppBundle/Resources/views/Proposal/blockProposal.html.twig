@@ -11,18 +11,17 @@
             </span>
         </div>
         <div class="media__content">
-            <h2 class="h4"><a href="{{ path('app_project_show_proposal', {'projectSlug': proposal.step.project.slug, 'proposalSlug': proposal.slug, 'stepSlug': proposal.step.slug}) }}">{{ proposal.title }}</a></h2>
+            <h2 class="h4"><a href="{{ path('app_project_show_proposal', {'projectSlug': proposal.getCurrentStep.project.slug, 'proposalSlug': proposal.slug, 'stepSlug': proposal.getCurrentStep.slug}) }}">{{ proposal.title }}</a></h2>
             <span class="excerpt small">
                 {% set votesCount = proposal.votesCount %}
-                {% set commentsCount = proposal.commentsCount %}
                 {#{% set commentsCount = proposal.commentsCount %}#}
                 {% transchoice votesCount with {'%count%': votesCount} from 'CapcoAppBundle' %}
-                    proposal.show.votes
+                proposal.show.votes
                 {% endtranschoice %}
                 •
-                {% transchoice commentsCount with {'%count%': commentsCount} from 'CapcoAppBundle' %}
-                    proposal.show.comments
-                {% endtranschoice %}
+                {#{% transchoice commentsCount with {'%count%': commentsCount} from 'CapcoAppBundle' %}
+                proposal.show.comments
+                {% endtranschoice %}#}
             </span>
             {% if proposal.isTrashed %}<span class="label label-default">{{ 'opinion.show.trashed.label'|trans({}, 'CapcoAppBundle') }}</span> {% endif %}
         </div>

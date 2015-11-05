@@ -1,6 +1,7 @@
 Capco\AppBundle\Entity\CollectStep:
-  collectstep1:
-    title: Collecte des propositions
-    body: <p><text(1000)></p>
-    startAt: <dateTimeBetween('-40 days', 'now')>
-    endAt: <dateTimeBetween('now', '+10 days')>
+    collectstep1:
+        title: Collecte des propositions
+        body: <p><text(1000)></p>
+        startAt: <dateTimeBetween('-40 days', 'now')>
+        endAt: <dateTimeBetween('now', '+10 days')>
+        proposalForm: @proposalform1

@@ -41,21 +41,16 @@ const ProposalPageHeader = React.createClass({
           </div>
         </div>
         <ul className="nav nav-pills project__infos">
-          {/* proposal.votes_count > 0
+          {proposal.votes_count > 0
             ? <li>
                 <div className="value">{proposal.votes_count}</div>
                 <div className="excerpt category">votes</div>
               </li>
             : null
-          */}
+          }
           <li>
             <div className="value">{proposal.comments_count}</div>
-            <div className="excerpt category">
-              <FormattedMessage
-              message={this.getIntlMessage('comment.count_no_nb')}
-              count={proposal.comments_count}
-              />
-            </div>
+            <div className="excerpt category">commentaires</div>
           </li>
           {proposal.status
             ? <li style={{fontSize: 26, paddingTop: 5}}>
