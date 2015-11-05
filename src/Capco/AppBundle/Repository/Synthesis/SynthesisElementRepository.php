@@ -307,7 +307,8 @@ class SynthesisElementRepository extends MaterializedPathRepository
                 '(se.publishedParentChildrenCount + se.parentChildrenScore) as parentChildrenElementsNb',
                 'se.linkedDataUrl',
                 'se.subtitle',
-                'a.username as authorName'
+                'a.username as authorName',
+                'se.linkedDataCreation'
             )->leftJoin('se.author', 'a');
         }
         $expr = '';

@@ -58,11 +58,8 @@ const ElementBlock = React.createClass({
     if (!Modernizr.intl) {
       return this.getIntlMessage('common.elements.no_source_date');
     }
-    if (this.props.element.has_linked_data) {
-      if (this.props.element.linked_data_creation) {
-        return <FormattedDate value={moment(this.props.element.linked_data_creation)} day="numeric" month="long" year="numeric" />;
-      }
-      return this.getIntlMessage('common.elements.no_source_date');
+    if (this.props.element.linkedDataCreation) {
+      return <FormattedDate value={moment(this.props.element.linkedDataCreation)} day="numeric" month="long" year="numeric" />;
     }
     return <FormattedDate value={moment(this.props.element.updated_at)} day="numeric" month="long" year="numeric" />;
   },
