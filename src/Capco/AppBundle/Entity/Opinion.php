@@ -108,7 +108,7 @@ class Opinion implements SelfLinkableInterface, VotableInterface
 
     /**
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\ConsultationStep", inversedBy="opinions", cascade={"persist"})
-     * @ORM\JoinColumn(name="step_id", referencedColumnName="id", nullable=true)
+     * @ORM\JoinColumn(name="step_id", referencedColumnName="id")
      * @Assert\NotNull()
      */
     private $step;
@@ -157,14 +157,10 @@ class Opinion implements SelfLinkableInterface, VotableInterface
     protected $ranking = null;
 
     /**
-     * @ORM\Column(name="answer_title", type="string", nullable=true)
+     * @ORM\OneToOne(targetEntity="Capco\AppBundle\Entity\OpinionAnswer", cascade={"persist", "remove"})
+     * @ORM\JoinColumn(name="answer_id", referencedColumnName="id", nullable=true)
      */
-    protected $answerTitle;
-
-    /**
-     * @ORM\Column(name="answer_body", type="text", nullable=true)
-     */
-    protected $answerBody;
+    protected $answer;
 
     public function __construct()
     {
@@ -617,35 +613,17 @@ class Opinion implements SelfLinkableInterface, VotableInterface
     /**
      * @return mixed
      */
-    public function getAnswerTitle()
+    public function getAnswer()
     {
-        return $this->answerTitle;
+        return $this->answer;
     }
 
     /**
-     * @param mixed $answerTitle
+     * @param mixed $answer
      */
-    public function setAnswerTitle($answerTitle)
+    public function setAnswer($answer)
     {
-        $this->answerTitle = $answerTitle;
-
-        return $this;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getAnswerBody()
-    {
-        return $this->answerBody;
-    }
-
-    /**
-     * @param mixed $answerBody
-     */
-    public function setAnswerBody($answerBody)
-    {
-        $this->answerBody = $answerBody;
+        $this->answer = $answer;
 
         return $this;
     }

@@ -104,6 +104,12 @@ class OpinionVersion implements VotableInterface
      */
     protected $ranking = null;
 
+    /**
+     * @ORM\OneToOne(targetEntity="Capco\AppBundle\Entity\OpinionAnswer", cascade={"persist", "remove"})
+     * @ORM\JoinColumn(name="answer_id", referencedColumnName="id", nullable=true)
+     */
+    protected $answer;
+
     public function __construct()
     {
         $this->updatedAt = new \DateTime();
@@ -326,6 +332,24 @@ class OpinionVersion implements VotableInterface
     public function setRanking($ranking)
     {
         $this->ranking = $ranking;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getAnswer()
+    {
+        return $this->answer;
+    }
+
+    /**
+     * @param mixed $answer
+     */
+    public function setAnswer($answer)
+    {
+        $this->answer = $answer;
+
+        return $this;
     }
 
     // Used by elasticsearch for indexing

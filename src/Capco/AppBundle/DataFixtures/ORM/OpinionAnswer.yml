@@ -1,0 +1,5 @@
+Capco\AppBundle\Entity\OpinionAnswer:
+  opinionAnswer1:
+    title: Réponse du gouvernement
+    body: <p><text(300)></p>
+    author: @user5

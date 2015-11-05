@@ -208,13 +208,8 @@ class OpinionAdmin extends Admin
 
             // Answer
             ->with('admin.fields.opinion.group_answer')
-            ->add('answerTitle', null, array(
-                'label' => 'admin.fields.opinion.answer_title',
-                'required' => false,
-            ))
-            ->add('answerBody', 'ckeditor', array(
-                'label' => 'admin.fields.opinion.answer_body',
-                'config_name' => 'admin_editor',
+            ->add('answer', 'sonata_type_model', array(
+                'label' => 'admin.fields.opinion.answer',
                 'required' => false,
             ))
             ->end()
