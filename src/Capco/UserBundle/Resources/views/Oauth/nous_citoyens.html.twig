@@ -1,0 +1,12 @@
+<form method="post" action="{{ url }}" name="nousCitoyens">
+  {% for key, param in params %}
+      <input type="hidden" name="{{ key }}" value="{{ param }}">
+  {% endfor %}
+  <a
+    onclick="nousCitoyens.submit()"
+    style="margin-top: 10px"
+    class="btn login__social-btn login__social-btn--nouscitoyens"
+  >
+    {{ 'user.login.social.nouscitoyens'|trans({}, 'CapcoAppBundle') }}
+  </a>
+</form>

@@ -41,7 +41,7 @@
                         {% endif %}
 
                         {% if is_feature_enabled('login_nous_citoyens') %}
-                            <a href="{{ path('hwi_oauth_service_redirect', {'service': 'nous_citoyens' }) }}" title="Sign in with Nous Cityens" class="btn  login__social-btn  login__social-btn--nouscitoyens">{{ 'user.login.social.nouscitoyens'|trans({}, 'CapcoAppBundle') }}</a>
+                            {{ render(controller('CapcoUserBundle:OauthConnect:nousCitoyens')) }}
                         {% endif %}
                     </div>
 
