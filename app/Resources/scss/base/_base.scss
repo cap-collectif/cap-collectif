@@ -349,6 +349,10 @@ a.excerpt {
   li {
     float: left;
   }
+
+  li > span {
+    cursor: pointer;
+  }
 }
 
 .pagination {

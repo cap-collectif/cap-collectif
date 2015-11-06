@@ -22,7 +22,7 @@ class ProposalRepository extends EntityRepository
             ->setParameter('proposalForm', $proposalForm);
     }
 
-    public function getEnabledByProposalForm(ProposalForm $proposalForm, $offset = 0, $limit = 100, $order = 'last', Theme $theme = null, Status $status = null, District $district = null, UserType $type = null)
+    public function getEnabledByProposalForm(ProposalForm $proposalForm, $first = 0, $offset = 100, $order = 'last', Theme $theme = null, Status $status = null, District $district = null, UserType $type = null)
     {
         $qb = $this->getIsEnabledQueryBuilder()
             ->join('proposal.author', 'author')
@@ -67,8 +67,9 @@ class ProposalRepository extends EntityRepository
         }
 
         $qb
-            ->setFirstResult($offset)
-            ->setMaxResults($limit);
+            ->setFirstResult($first)
+            ->setMaxResults($offset)
+        ;
 
         return new Paginator($qb);
     }
