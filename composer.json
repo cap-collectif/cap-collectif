@@ -47,7 +47,7 @@
         "sonata-project/exporter": "~1.4",
         "sonata-project/classification-bundle": "~2.2@dev",
 
-        "hwi/oauth-bundle": "dev-master#879e6dd2e9746de749e150a4846bc76a7c435f54",
+        "hwi/oauth-bundle": "dev-master#4d7e7a02d18bb8ba59bada20cfb49a1b9ec0df84",
         "liip/imagine-bundle": "~0.9",
         "qandidate/toggle-bundle": "~0.1",
         "predis/predis": "^1.0",
