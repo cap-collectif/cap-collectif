@@ -109,6 +109,8 @@ class OauthConnectController extends ConnectController
         $property = $reflection->getProperty('options');
         $property->setAccessible(true);
         $url = $property->getValue($ro)['authorization_url'];
+        $router = $this->container->get('router');
+        $router->getContext()->setScheme('http');
 
         $params = [
             "grant_type"    => "authorization_code",
@@ -116,7 +118,7 @@ class OauthConnectController extends ConnectController
             // pas du tout secure mais bon on peut pas redirect
             // sur une route en POST... en plus cette route a aucune raison d'avoir besoin du secret...
             "client_secret" => $this->getParameter('nous_citoyens_app_secret'),
-            "redirect_uri"  => $this->container->get('router')->generate('nous_citoyens_login', [], true),
+            "redirect_uri"  => $router->generate('nous_citoyens_login', [], true),
             "state"         => "123",
             "response_type" => "code",
         ];
