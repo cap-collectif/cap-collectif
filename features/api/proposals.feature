@@ -68,27 +68,24 @@ Feature: Proposal Restful Api
   "proposals": [
     {
       "id": @integer@,
-      "title": @string@,
       "body": @string@,
+      "updated_at": "@string@.isDateTime()",
       "theme": @...@,
       "district": @...@,
       "status": @...@,
       "author": @...@,
-      "_links": @...@,
-      "responses": [
-        {
-          "id": @integer@,
-          "value": @string@
-        }
-      ],
-      "votes": @array@,
-      "votes_count": @integer@,
+      "comments": @array@,
+      "responses": @array@,
       "comments_count": @integer@,
       "created_at": "@string@.isDateTime()",
-      "updated_at": "@string@.isDateTime()"
+      "votes": @array@,
+      "votes_count": @integer@,
+      "title": @string@,
+      "answer": @null@,
+      "_links": @...@
     }
   ],
-  "count": "4"
+  "count": 4
 }
 """
 
