@@ -93,8 +93,12 @@ class UrlResolver
             return $this->router->generate('app_blog_show', ['slug' => $object->getSlug()], $absolute);
         }
 
-        if ($object instanceof Argument || $object instanceof Source) {
-            return $this->generateOpinionOrProposalRoute($object->getParent(), $absolute);
+        if ($object instanceof Argument) {
+            return $this->generateOpinionOrProposalRoute($object->getParent(), $absolute) . '#arg-' . $object->getId();
+        }
+
+        if ($object instanceof Source) {
+            return $this->generateOpinionOrProposalRoute($object->getParent(), $absolute) . '#source-' . $object->getId();
         }
 
         if ($object instanceof AbstractStep) {
