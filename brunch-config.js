@@ -40,6 +40,8 @@ exports.config = {
           'bower_components/react-intl/dist/locale-data/fr.js',
           'bower_components/autosize/dist/autosize.js',
 
+          'bower_components/quill/dist/quill.js',
+
           'bower_components/jsdiff/diff.js',
 
           'app/Resources/js/jsapi.js',
@@ -79,6 +81,7 @@ exports.config = {
     }
   },
   plugins: {
+    off: ['eslint-brunch'],
     babel: {
       stage: 0,
     },

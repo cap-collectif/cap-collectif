@@ -5,6 +5,7 @@ import ProposalActions from '../../../actions/ProposalActions';
 import FlashMessages from '../../Utils/FlashMessages';
 import ArrayHelper from '../../../services/ArrayHelper';
 import Input from '../../Form/Input';
+import QuillEditor from '../../Form/QuillEditor';
 
 const ProposalForm = React.createClass({
   propTypes: {
@@ -56,8 +57,6 @@ const ProposalForm = React.createClass({
   },
 
   componentDidMount() {
-    this.initializeCkeditor('body', 'form');
-
     this.props.form.questions.map((question) => {
       const ref = 'custom-' + question.id;
       this.initializeCkeditor(ref, 'custom');
@@ -211,6 +210,11 @@ const ProposalForm = React.createClass({
           }
         </Input>
 
+        <QuillEditor
+          id="body"
+          valueLink={this.linkState('form.body')}
+        />
+{/*
         <Input
           type="textarea"
           ref="body"
@@ -220,8 +224,8 @@ const ProposalForm = React.createClass({
           errors={this.renderFormErrors('body')}
           bsStyle={this.getFieldStyle('body')}
         />
-
-        {
+*/}
+        {/*
           this.props.form.questions.map((question) => {
             const ref = 'custom-' + question.id;
             return (
@@ -237,7 +241,7 @@ const ProposalForm = React.createClass({
               />
             );
           })
-        }
+        */}
 
       </form>
     );
