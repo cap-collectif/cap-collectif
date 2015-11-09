@@ -32,8 +32,8 @@ class ProposalsController extends FOSRestController
     /**
      * @Get("/proposal_forms/{proposal_form_id}/proposals")
      * @ParamConverter("proposalForm", options={"mapping": {"proposal_form_id": "id"}, "repository_method": "find", "map_method_signature": true})
-     * @QueryParam(name="offset", requirements="[0-9.]+", default="0")
-     * @QueryParam(name="limit", requirements="[0-9.]+", default="100")
+     * @QueryParam(name="first", requirements="[0-9.]+", default="0")
+     * @QueryParam(name="offset", requirements="[0-9.]+", default="100")
      * @QueryParam(name="order", requirements="(old|last|popular|comments)", default="last")
      * @QueryParam(name="theme", nullable=true)
      * @QueryParam(name="status", nullable=true)
@@ -43,8 +43,8 @@ class ProposalsController extends FOSRestController
      */
     public function getProposalsAction(ProposalForm $proposalForm, ParamFetcherInterface $paramFetcher)
     {
-        $offset = $paramFetcher->get('offset');
-        $limit = $paramFetcher->get('limit');
+        $first = intval($paramFetcher->get('first'));
+        $offset = intval($paramFetcher->get('offset'));
         $order = $paramFetcher->get('order');
         $themeId = $paramFetcher->get('theme');
         $statusId = $paramFetcher->get('status');
@@ -85,15 +85,20 @@ class ProposalsController extends FOSRestController
             }
         }
 
-        $paginator = $em->getRepository('CapcoAppBundle:Proposal')
-                        ->getEnabledByProposalForm($proposalForm, $offset, $limit, $order, $theme, $status, $district, $type);
+        $paginator = $em
+            ->getRepository('CapcoAppBundle:Proposal')
+            ->getEnabledByProposalForm($proposalForm, $first, $offset, $order, $theme, $status, $district, $type)
+        ;
 
         $proposals = [];
         foreach ($paginator as $proposal) {
             $proposals[] = $proposal;
         }
 
-        return ['proposals' => $proposals];
+        return [
+            'proposals' => $proposals,
+            'count' => count($paginator),
+        ];
     }
 
     /**
