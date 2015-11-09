@@ -28,7 +28,7 @@
         <div class="row">
             <div class="col-lg-4  col-lg-offset-4  col-md-6  col-md-offset-3  col-sm-8  col-sm-offset-2  col-xs-12">
 
-                {% if has_feature_enabled(['login_facebook', 'login_gplus']) %}
+                {% if has_feature_enabled(['login_facebook', 'login_gplus', 'login_twitter', 'login_nous_citoyens']) %}
                     <div>
                         {% if is_feature_enabled('login_facebook') %}
                             <a href="{{ path('hwi_oauth_service_redirect', {'service': 'facebook' }) }}" title="Sign in with Facebook" class="btn  login__social-btn  login__social-btn--facebook">{{ 'user.login.social.facebook'|trans({}, 'CapcoAppBundle') }}</a>
