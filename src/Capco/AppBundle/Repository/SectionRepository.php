@@ -17,6 +17,10 @@ class SectionRepository extends EntityRepository implements PositionableReposito
     public function getAllOrderedByPosition()
     {
         $qb = $this->createQueryBuilder('s')
+            ->addSelect('step', 'pas', 'project')
+            ->leftJoin('s.step', 'step')
+            ->leftJoin('step.projectAbstractStep', 'pas')
+            ->leftJoin('pas.project', 'project')
             ->orderBy('s.position', 'ASC');
 
         return $qb
@@ -32,6 +36,10 @@ class SectionRepository extends EntityRepository implements PositionableReposito
     public function getEnabledOrderedByPosition()
     {
         $qb = $this->getIsEnabledQueryBuilder()
+            ->addSelect('step', 'pas', 'project')
+            ->leftJoin('s.step', 'step')
+            ->leftJoin('step.projectAbstractStep', 'pas')
+            ->leftJoin('pas.project', 'project')
             ->orderBy('s.position', 'ASC');
 
         return $qb

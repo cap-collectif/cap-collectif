@@ -3,7 +3,7 @@
         {% if null != section.title %}
             <h2 class="h2">{{ section.title }}</h2>
         {% else %}
-            <h2 class="h2">{{ 'homepage.events.title' | trans({}, 'CapcoAppBundle') }}</h2>
+            <h2 class="h2">{{ 'homepage.section.events' | trans({}, 'CapcoAppBundle') }}</h2>
         {% endif %}
         {% if null != section.teaser %}
             <p class="block">{{ section.teaser }}</p>

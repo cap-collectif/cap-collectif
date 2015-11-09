@@ -511,6 +511,7 @@ admin:
       enabled: Publié
       created_at: Création
       updated_at: Mise à jour
+      collect_step: Étape de collecte
     site_image:
       title: Description
       media: Image

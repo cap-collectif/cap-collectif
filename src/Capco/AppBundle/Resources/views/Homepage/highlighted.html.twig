@@ -1,6 +1,10 @@
 {% if highlighteds | length > 0 %}
     <div class="container container--custom">
-        <h2 class="h2">{{ section.title }}</h2>
+        {% if null != section.title %}
+            <h2 class="h2">{{ section.title }}</h2>
+        {% else %}
+            <h2 class="h2">{{ 'homepage.section.highlighted' | trans({}, 'CapcoAppBundle') }}</h2>
+        {% endif %}
         <div class="row">
             <div class="col-md-8">
                 <div id="carousel-highlighted" class="carousel vertical slide" data-ride="carousel" data-interval="false">
