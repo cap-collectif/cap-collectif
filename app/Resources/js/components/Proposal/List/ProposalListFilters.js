@@ -23,7 +23,7 @@ const ProposalListFilters = React.createClass({
   getInitialState() {
     return {
       order: ProposalStore.order,
-      filters: ProposalStore.filters,
+      filters: {},
       isLoading: true,
       collapse: false,
     };
@@ -45,24 +45,22 @@ const ProposalListFilters = React.createClass({
   },
 
   onChange() {
-    this.setState({
-      order: ProposalStore.order,
-      filters: ProposalStore.filters,
-    });
+    this.setState({order: ProposalStore.order});
   },
 
   handleOrderChange(order) {
-    ProposalActions.changeOrder(order);
+    this.setState({order: order});
   },
 
   handleFilterChange(filter) {
     const value = this.refs[filter].getValue();
-    ProposalActions.changeFilterValue(filter, value);
-    this.reload();
+    this.setState({
+      filters: React.addons.update(this.state.filters, {[filter]: {$set: value}}),
+    });
   },
 
   reload() {
-    ProposalActions.load(this.props.id);
+    ProposalActions.load(this.props.id, this.state.order, this.state.filters);
   },
 
   buttons: ['last', 'old', 'comments'],

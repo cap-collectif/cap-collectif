@@ -1,6 +1,5 @@
 import AppDispatcher from '../dispatchers/AppDispatcher';
 import Fetcher from '../services/Fetcher';
-import ProposalStore from '../stores/ProposalStore';
 import {
   RECEIVE_PROPOSAL,
   RECEIVE_PROPOSALS,
@@ -13,22 +12,12 @@ import {
   DELETE_PROPOSAL_VOTE_SUCCESS,
   DELETE_PROPOSAL_VOTE_FAILURE,
 
-  CHANGE_PAGE,
-  CHANGE_ORDER,
-  CHANGE_FILTERS,
-  PROPOSAL_PAGINATION,
-
 } from '../constants/ProposalConstants';
 
 export default {
 
-  load: (form) => {
-    const page = ProposalStore.currentPage;
-    const order = ProposalStore.order;
-    const filters = ProposalStore.filters;
-    const first = page ? PROPOSAL_PAGINATION * (page - 1) : 0;
-    const offset = page ? PROPOSAL_PAGINATION : 100;
-    let url = `/proposal_forms/${form}/proposals?order=${order}&first=${first}&offset=${offset}`;
+  load: (form, order = 'last', filters = {}, offset = 0, limit = -1) => {
+    let url = `/proposal_forms/${form}/proposals?order=${order}&offset=${offset}&limit=${limit}`;
     for (const filter in filters) {
       if (filters.hasOwnProperty(filter)) {
         url += `&${filter}=${filters[filter]}`;
@@ -41,32 +30,10 @@ export default {
         AppDispatcher.dispatch({
           actionType: RECEIVE_PROPOSALS,
           proposals: data.proposals,
-          count: data.count,
+          order: order,
         });
         return true;
       });
-  },
-
-  changePage: (page) => {
-    AppDispatcher.dispatch({
-      actionType: CHANGE_PAGE,
-      page: page,
-    });
-  },
-
-  changeOrder: (order) => {
-    AppDispatcher.dispatch({
-      actionType: CHANGE_ORDER,
-      order: order,
-    });
-  },
-
-  changeFilterValue: (filter, value) => {
-    AppDispatcher.dispatch({
-      actionType: CHANGE_FILTERS,
-      filter: filter,
-      value: value,
-    });
   },
 
   add: (form, data) => {

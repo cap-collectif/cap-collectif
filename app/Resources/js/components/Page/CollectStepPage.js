@@ -1,10 +1,8 @@
 import ProposalStore from '../../stores/ProposalStore';
 import ProposalActions from '../../actions/ProposalActions';
-import {PROPOSAL_PAGINATION} from '../../constants/ProposalConstants';
 import ProposalListFilters from '../Proposal/List/ProposalListFilters';
 import ProposalList from '../Proposal/List/ProposalList';
 import Loader from '../Utils/Loader';
-import Pagination from '../Utils/Pagination';
 
 const CollectStepPage = React.createClass({
   propTypes: {
@@ -19,8 +17,6 @@ const CollectStepPage = React.createClass({
   getInitialState() {
     return {
       proposals: ProposalStore.proposals,
-      proposalsCount: ProposalStore.proposalsCount,
-      currentPage: ProposalStore.currentPage,
       isLoading: true,
     };
   },
@@ -33,12 +29,6 @@ const CollectStepPage = React.createClass({
     this.loadProposals();
   },
 
-  componentDidUpdate(prevProps, prevState) {
-    if (prevState && (prevState.currentPage !== this.state.currentPage)) {
-      this.loadProposals();
-    }
-  },
-
   componentWillUnmount() {
     ProposalStore.removeChangeListener(this.onChange);
   },
@@ -46,8 +36,6 @@ const CollectStepPage = React.createClass({
   onChange() {
     this.setState({
       proposals: ProposalStore.proposals,
-      proposalsCount: ProposalStore.proposalsCount,
-      currentPage: ProposalStore.currentPage,
       isLoading: false,
     });
   },
@@ -56,17 +44,11 @@ const CollectStepPage = React.createClass({
     ProposalActions.load(this.props.form.id);
   },
 
-  handleFilterOrOrderChange() {
+  handleFilterChange() {
     this.setState({isLoading: true});
-  },
-
-  selectPage(newPage) {
-    this.setState({isLoading: true});
-    ProposalActions.changePage(newPage);
   },
 
   render() {
-    const nbPages = Math.ceil(this.state.proposalsCount / PROPOSAL_PAGINATION);
     return (
       <div>
         <ProposalListFilters
@@ -75,22 +57,11 @@ const CollectStepPage = React.createClass({
           district={this.props.districts}
           type={this.props.types}
           status={this.props.statuses}
-          onChange={() => this.handleFilterOrOrderChange()}
+          onChange={() => this.handleFilterChange()}
         />
         <br />
         <Loader show={this.state.isLoading}>
-          <div>
-            <ProposalList proposals={this.state.proposals} />
-            {
-              nbPages > 1
-              ? <Pagination
-                  current={this.state.currentPage}
-                  nbPages={nbPages}
-                  onChange={this.selectPage}
-                />
-              : null
-            }
-          </div>
+          <ProposalList proposals={this.state.proposals} />
         </Loader>
       </div>
     );

@@ -61,31 +61,33 @@ Feature: Proposal Restful Api
 """
 
   Scenario: Anonymous API client wants to get all proposals from a ProposalForm
-    When I send a GET request to "/api/proposal_forms/1/proposals?order=favorable&offset=1"
+    When I send a GET request to "/api/proposal_forms/1/proposals?order=favorable&limit=1"
     Then the JSON response should match:
 """
 {
   "proposals": [
     {
       "id": @integer@,
+      "title": @string@,
       "body": @string@,
-      "updated_at": "@string@.isDateTime()",
       "theme": @...@,
       "district": @...@,
       "status": @...@,
       "author": @...@,
-      "comments": @array@,
-      "responses": @array@,
-      "comments_count": @integer@,
-      "created_at": "@string@.isDateTime()",
+      "_links": @...@,
+      "responses": [
+        {
+          "id": @integer@,
+          "value": @string@
+        }
+      ],
       "votes": @array@,
       "votes_count": @integer@,
-      "title": @string@,
-      "answer": @null@,
-      "_links": @...@
+      "comments_count": @integer@,
+      "created_at": "@string@.isDateTime()",
+      "updated_at": "@string@.isDateTime()"
     }
-  ],
-  "count": 4
+  ]
 }
 """
 
@@ -94,8 +96,7 @@ Feature: Proposal Restful Api
     Then the JSON response should match:
 """
 {
-  "proposals": [],
-  "count": 0
+  "proposals": []
 }
 """
 

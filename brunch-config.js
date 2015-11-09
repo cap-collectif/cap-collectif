@@ -1,6 +1,13 @@
 'use strict';
 
 exports.config = {
+  overrides: {
+    production: {
+      plugins: {
+        off: ['eslint-brunch'],
+      }
+    }
+  },
   paths: {
     watched: ['app/Resources'],
     public: 'web',
