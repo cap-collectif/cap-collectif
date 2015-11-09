@@ -54,6 +54,16 @@ class Validator {
           errors.push(this.rules[rule].message);
         }
         break;
+      case 'minValue':
+        if (!this.minValue(this.rules[rule].value)) {
+          errors.push(this.rules[rule].message);
+        }
+        break;
+      case 'maxValue':
+        if (!this.maxValue(this.rules[rule].value)) {
+          errors.push(this.rules[rule].message);
+        }
+        break;
       default:
         throw new Error('The rule ' + rule + ' does not exist in Validator.');
       }
@@ -97,6 +107,14 @@ class Validator {
 
   isTrue() {
     return !!this.value;
+  }
+
+  minValue(value) {
+    return !this.value || this.value >= value;
+  }
+
+  maxValue(value) {
+    return !this.value || this.value <= value;
   }
 
 }

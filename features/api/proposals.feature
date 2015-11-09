@@ -10,12 +10,14 @@ Feature: Proposal Restful Api
   "body": @string@,
   "updated_at": "@string@.isDateTime()",
   "theme": {
+    "id": @integer@,
     "title": @string@,
     "_links": {
       "show": @string@
     }
   },
   "district": {
+    "id": @integer@,
     "name": @string@
   },
   "status": {
@@ -38,6 +40,7 @@ Feature: Proposal Restful Api
   "responses":[
     {
       "question": {
+        "id": @integer@,
         "questionType": @number@,
         "title": @string@
       },

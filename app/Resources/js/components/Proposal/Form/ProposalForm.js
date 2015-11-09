@@ -3,6 +3,7 @@ import CkeditorMixin from '../../../utils/CkeditorMixin';
 import DeepLinkStateMixin from '../../../utils/DeepLinkStateMixin';
 import ProposalActions from '../../../actions/ProposalActions';
 import FlashMessages from '../../Utils/FlashMessages';
+import ArrayHelper from '../../../services/ArrayHelper';
 
 const Input = ReactBootstrap.Input;
 
@@ -15,18 +16,37 @@ const ProposalForm = React.createClass({
     onValidationFailure: React.PropTypes.func.isRequired,
     onSubmitSuccess: React.PropTypes.func.isRequired,
     onSubmitFailure: React.PropTypes.func.isRequired,
+    mode: React.PropTypes.string,
+    proposal: React.PropTypes.object,
   },
   mixins: [ReactIntl.IntlMixin, DeepLinkStateMixin, FormMixin, CkeditorMixin],
+
+  getDefaultProps() {
+    return {
+      mode: "create",
+      proposal: {
+        title: '',
+        body: '',
+        theme: {
+          id: -1,
+        },
+        district: {
+          id: -1,
+        },
+        responses: [],
+      },
+    }
+  },
 
   getInitialState() {
     return {
       form: {
-        title: '',
-        body: '',
-        theme: -1,
-        district: -1,
+        title: this.props.proposal.title,
+        body: this.props.proposal.body,
+        theme: this.props.proposal.theme.id,
+        district: this.props.proposal.district.id,
       },
-      custom: {},
+      custom: this.getInitialFormAnswers(),
       errors: {
         title: [],
         body: [],
@@ -34,6 +54,27 @@ const ProposalForm = React.createClass({
         district: [],
       },
     };
+  },
+
+  getInitialFormAnswers() {
+    const custom = {};
+    this.props.form.questions.map((question) => {
+      custom['custom-' + question.id] = this.getProposalResponseForQuestion(question.id);
+    });
+    return custom;
+  },
+
+  getProposalResponseForQuestion(id) {
+    const index = ArrayHelper.getElementIndexFromArray(
+      this.props.proposal.responses,
+      {question: {id: id}},
+      'question',
+      'id'
+    );
+    if (index > -1) {
+      return this.props.proposal.responses[index]['value'];
+    }
+    return '';
   },
 
   componentDidMount() {
@@ -58,6 +99,18 @@ const ProposalForm = React.createClass({
           });
         });
         form.proposalResponses = responses;
+        if (this.props.mode === "edit") {
+          ProposalActions
+            .update(this.props.form.id, this.props.proposal.id, form)
+            .then(() => {
+              this.setState(this.getInitialState());
+              this.props.onSubmitSuccess();
+            })
+            .catch(() => {
+              this.props.onSubmitFailure();
+            });
+          return;
+        }
         ProposalActions
           .add(this.props.form.id, form)
           .then(() => {
@@ -76,10 +129,10 @@ const ProposalForm = React.createClass({
 
   formValidationRules: {
     theme: {
-      min: {value: 0, message: 'proposal.constraints.theme'},
+      minValue: {value: 0, message: 'proposal.constraints.theme'},
     },
     district: {
-      min: {value: 0, message: 'proposal.constraints.district'},
+      minValue: {value: 0, message: 'proposal.constraints.district'},
     },
     title: {
       min: {value: 2, message: 'proposal.constraints.title'},
@@ -160,7 +213,7 @@ const ProposalForm = React.createClass({
 
         <Input
           type="textarea"
-          valueLink={null} // state is automatically updated by CkeditorMixin
+          valueLink={this.linkState('form.body')} // state is automatically updated by CkeditorMixin
           ref="body"
           label={this.getIntlMessage('proposal.body') + '*'}
           labelClassName="control-label h5"
@@ -174,7 +227,7 @@ const ProposalForm = React.createClass({
             return (
               <Input
                 type="textarea"
-                valueLink={null} // state is automatically updated by CkeditorMixin
+                valueLink={this.linkState('custom.custom-' + question.id)} // state is automatically updated by CkeditorMixin
                 ref={'custom-' + question.id}
                 label={question.title + '*'}
                 labelClassName="control-label h5"

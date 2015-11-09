@@ -267,6 +267,56 @@ class ProposalsController extends FOSRestController
     }
 
     /**
+     * Update a proposal.
+     *
+     * @ApiDoc(
+     *  resource=true,
+     *  description="Update a proposal",
+     *  statusCodes={
+     *    200 = "Returned when successful",
+     *    404 = "Returned when proposal is not found",
+     *  }
+     * )
+     *
+     * @Security("has_role('ROLE_USER')")
+     * @Put("/proposal_forms/{proposal_form_id}/proposals/{proposal_id}")
+     * @ParamConverter("proposalForm", options={"mapping": {"proposal_form_id": "id"}, "repository_method": "find", "map_method_signature": true})
+     * @ParamConverter("proposal", options={"mapping": {"proposal_id": "id"}, "repository_method": "find", "map_method_signature": true})
+     * @View(statusCode=204)
+     *
+     * @param ProposalForm $proposalForm
+     * @param Proposal $proposal
+     * @return bool
+     */
+    public function putProposalAction(Request $request, ProposalForm $proposalForm, Proposal $proposal)
+    {
+        if (!$proposal->canContribute()) {
+            throw new BadRequestHttpException("You are not the author of this proposal.");
+        }
+
+        $user = $this->getUser();
+        if ($user !== $proposal->getAuthor()) {
+            throw new AccessDeniedException();
+        }
+
+        $em = $this->get('doctrine.orm.entity_manager');
+
+        $form = $this->createForm(new ProposalType($em), $proposal);
+        $form->submit($request->request->all(), false);
+
+        if ($form->isValid()) {
+            $em->persist($proposal);
+            $em->flush();
+
+            return $proposal;
+        }
+
+        $view = $this->view($form->getErrors(true), Codes::HTTP_BAD_REQUEST);
+
+        return $view;
+    }
+
+    /**
      * Delete a proposal.
      *
      * @ApiDoc(

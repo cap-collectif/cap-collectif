@@ -10,8 +10,10 @@ const Col = ReactBootstrap.Col;
 
 const ProposalPage = React.createClass({
   propTypes: {
-    formId: React.PropTypes.number.isRequired,
+    form: React.PropTypes.object.isRequired,
     proposal: React.PropTypes.object.isRequired,
+    themes: React.PropTypes.array.isRequired,
+    districts: React.PropTypes.array.isRequired,
   },
   mixins: [ReactIntl.IntlMixin],
 
@@ -21,11 +23,16 @@ const ProposalPage = React.createClass({
       <div id="sidebar-container" className="container sidebar__container">
         <Row>
           <Col xs={12}>
-            <ProposalPageHeader proposal={proposal} />
+            <ProposalPageHeader
+              proposal={this.props.proposal}
+              form={this.props.form}
+              themes={this.props.themes}
+              districts={this.props.districts}
+            />
             <ProposalPageAnswer proposal={proposal} />
             <ProposalPageContent proposal={proposal} />
             {/* <ProposalPageVotes proposal={proposal} /> */}
-            <ProposalPageComments formId={this.props.formId} id={proposal.id} />
+            <ProposalPageComments form={this.props.form} id={proposal.id} />
           </Col>
           {/* <div id="sidebar-overlay" /> */}
           {/* proposal.canContribute

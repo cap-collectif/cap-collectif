@@ -23,17 +23,40 @@ class ProposalController extends Controller
      */
     public function showProposalAction(Project $project, CollectStep $currentStep, Proposal $proposal)
     {
+        $em = $this->getDoctrine()->getManager();
         $serializer = $this->get('jms_serializer');
 
-        $json = $serializer->serialize([
+        $proposalJson = $serializer->serialize([
             'proposal' => $proposal,
         ], 'json', SerializationContext::create()->setGroups(["Proposals", "ProposalResponses", "UsersInfos", "UserMedias"]));
 
-        return [
+        $districts = $serializer->serialize([
+            'districts' => $em->getRepository('CapcoAppBundle:District')->findAll(),
+        ], 'json', SerializationContext::create()->setGroups(['Districts']));
+
+        $themes = $serializer->serialize([
+            'themes' => $em->getRepository('CapcoAppBundle:Theme')->findAll(),
+        ], 'json', SerializationContext::create()->setGroups(['Themes']));
+
+        $form = $serializer->serialize([
+            'form' => $currentStep->getProposalForm(),
+        ], 'json', SerializationContext::create()->setGroups(['ProposalForms', 'ProposalResponses', 'Questions']));
+
+        $response = $this->render('CapcoAppBundle:Proposal:show.html.twig', [
             'project' => $project,
             'currentStep' => $currentStep,
-            'proposal' => $proposal,
-            'json' => $json,
-        ];
+            'proposalTitle' => $proposal->getTitle(),
+            'proposal' => $proposalJson,
+            'themes' => $themes,
+            'districts' => $districts,
+            'form' => $form,
+        ]);
+
+        if ($this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_ANONYMOUSLY')) {
+            $response->setPublic();
+            $response->setSharedMaxAge(60);
+        }
+
+        return $response;
     }
 }

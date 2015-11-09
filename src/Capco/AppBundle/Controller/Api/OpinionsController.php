@@ -326,7 +326,7 @@ class OpinionsController extends FOSRestController
     public function putOpinionVersionAction(Request $request, Opinion $opinion, OpinionVersion $opinionVersion)
     {
         if (!$opinion->canContribute()) {
-            throw new BadRequestHttpException("Can't add a version to an uncontributable opinion.");
+            throw new BadRequestHttpException("Can't update a version of an uncontributable opinion.");
         }
 
         $user = $this->getUser();

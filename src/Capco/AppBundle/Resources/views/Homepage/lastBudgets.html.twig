@@ -1,9 +1,9 @@
-{% if events|length > 0 %}
+{% if budgets|length > 0 %}
     <div class="container  container--custom">
         {% if null != section.title %}
             <h2 class="h2">{{ section.title }}</h2>
         {% else %}
-            <h2 class="h2">{{ 'homepage.events.title' | trans({}, 'CapcoAppBundle') }}</h2>
+            <h2 class="h2">{{ 'homepage.projects.title' | trans({}, 'CapcoAppBundle') }}</h2>
         {% endif %}
         {% if null != section.teaser %}
             <p class="block">{{ section.teaser }}</p>
@@ -12,10 +12,10 @@
             <p>{{ section.body | raw }}</p>
         {% endif %}
         <div class="row">
-            {% for event in events %}
-                {% include '@CapcoApp/Event/blockEvent.html.twig' with {'event': event} only %}
+            {% for budget in budgets %}
+                {% include '@CapcoApp/Project/blockProject.html.twig' with {'project': budget} only %}
             {% endfor %}
         </div>
-        <a href="{{ path('app_event') }}" class="btn  btn-primary  btn--outline">{{ 'event.see_all'|trans({}, 'CapcoAppBundle') }}</a>
+        <a href="{{ path('app_project') }}" class="btn  btn-primary  btn--outline">{{ 'budget.see_all'|trans({}, 'CapcoAppBundle') }}</a>
     </div>
 {% endif %}

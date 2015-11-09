@@ -167,9 +167,6 @@ export default {
         title: 'Le titre de la proposition doit faire au moins 2 caractères.',
       },
       count: '{num, plural, =0{0 projet} one{# projet} other{# projets}}',
-      create: {
-        infos: 'Attention, une fois validée, votre proposition ne pourra plus être modifiée. Merci de la relire avant de la soumettre.',
-      },
       description: 'Description',
       district: 'Quartier',
       empty: 'Aucune proposition',

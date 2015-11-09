@@ -2,7 +2,6 @@
 
 namespace Capco\AppBundle\Repository;
 
-use Capco\AppBundle\Entity\CollectStep;
 use Capco\AppBundle\Entity\ProposalForm;
 use Capco\AppBundle\Entity\Theme;
 use Capco\AppBundle\Entity\Status;
@@ -132,8 +131,7 @@ class ProposalRepository extends EntityRepository
             ->leftJoin('proposal.theme', 't')
             ->andWhere('proposal.isTrashed = :notTrashed')
             ->setParameter('notTrashed', false)
-            ->orderBy('proposal.commentsCount', 'DESC')
-            ->addOrderBy('proposal.updatedAt', 'DESC')
+            ->addOrderBy('proposal.createdAt', 'DESC')
             ->addGroupBy('proposal.id');
 
         $qb->setMaxResults($limit);
@@ -141,40 +139,6 @@ class ProposalRepository extends EntityRepository
 
         return $qb
             ->getQuery()
-            ->execute()
-        ;
-    }
-
-    /**
-     * Get last proposals.
-     *
-     * @param int $limit
-     * @param int $offset
-     *
-     * @return mixed
-     */
-    public function getLastByStep($limit = 1, $offset = 0, CollectStep $step)
-    {
-        $qb = $this->getIsEnabledQueryBuilder()
-            ->select('proposal')
-            ->leftJoin('proposal.author', 'a')
-            ->leftJoin('a.Media', 'm')
-            ->leftJoin('proposal.theme', 't')
-            ->leftJoin('proposal.proposalForm', 'f')
-            ->andWhere('f.step = :step')
-            ->andWhere('proposal.isTrashed = :notTrashed')
-            ->setParameter('notTrashed', false)
-            ->setParameter('step', $step)
-            ->orderBy('proposal.commentsCount', 'DESC')
-            ->addOrderBy('proposal.updatedAt', 'DESC')
-            ->addGroupBy('proposal.id');
-
-        $qb->setMaxResults($limit);
-        $qb->setFirstResult($offset);
-
-        return $qb
-            ->getQuery()
-            ->execute()
-        ;
+            ->execute();
     }
 }

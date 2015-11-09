@@ -3,7 +3,7 @@ import CommentSection from '../../Comment/CommentSection';
 const ProposalPageComments = React.createClass({
   propTypes: {
     id: React.PropTypes.number.isRequired,
-    formId: React.PropTypes.number.isRequired,
+    form: React.PropTypes.object.isRequired,
   },
   mixins: [ReactIntl.IntlMixin],
 
@@ -11,7 +11,7 @@ const ProposalPageComments = React.createClass({
     return (
       <div className="container--custom container--with-sidebar">
         <CommentSection
-          uri={`proposal_forms/${this.props.formId}/proposals`}
+          uri={`proposal_forms/${this.props.form.id}/proposals`}
           object={this.props.id}
         />
       </div>

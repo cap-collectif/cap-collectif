@@ -53,7 +53,9 @@ AuthService
         React.render(
             <ProposalPage
                 proposal={$('#render-proposal-page').data('proposal').proposal}
-                formId={$('#render-proposal-page').data('form')}
+                form={$('#render-proposal-page').data('form').form}
+                themes={$('#render-proposal-page').data('themes').themes}
+                districts={$('#render-proposal-page').data('districts').districts}
                  {...IntlData}
             />,
             document.getElementById('render-proposal-page')

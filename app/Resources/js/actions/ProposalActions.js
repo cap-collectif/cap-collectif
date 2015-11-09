@@ -73,6 +73,10 @@ export default {
     return Fetcher.post(`/proposal_forms/${form}/proposals`, data);
   },
 
+  update: (form, proposal, data) => {
+    return Fetcher.put(`/proposal_forms/${form}/proposals/${proposal}`, data);
+  },
+
   getOne: (form, proposal) => {
     Fetcher
       .get(`/proposal_forms/${form}/proposals/${proposal}`)

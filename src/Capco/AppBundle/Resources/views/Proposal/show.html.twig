@@ -3,14 +3,19 @@
 {% block canonical_link %}{{ '' }}{% endblock %}
 
 {% block title %}
-    {{ parent() }} - {{ proposal.title }}
+    {{ parent() }} - {{ proposalTitle }}
 {% endblock %}
 
 {% block jumbotron %}{% endblock %}
 
 {% block body %}
 
-    <div id="render-proposal-page" data-proposal='{{ json|escape }}' data-form="{{ proposal.proposalForm.id}}" />
+    <div id="render-proposal-page"
+         data-proposal='{{ proposal|escape }}'
+         data-form='{{ form|escape }}'
+         data-themes='{{ themes|escape }}'
+         data-districts='{{ districts|escape }}'
+    />
 
 {% endblock %}
 

@@ -4,7 +4,7 @@ Capco\AppBundle\Entity\District:
         id:
             expose: true
             type: integer
-            groups: [Districts]
+            groups: [Districts, Proposals]
         name:
             expose: true
             type: string
