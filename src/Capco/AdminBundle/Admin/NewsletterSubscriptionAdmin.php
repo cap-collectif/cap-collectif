@@ -11,10 +11,10 @@ use Sonata\AdminBundle\Route\RouteCollection;
 
 class NewsletterSubscriptionAdmin extends Admin
 {
-    protected $datagridValues = array(
+    protected $datagridValues = [
         '_sort_order' => 'ASC',
         '_sort_by' => 'email',
-    );
+    ];
 
     /**
      * @param DatagridMapper $datagridMapper

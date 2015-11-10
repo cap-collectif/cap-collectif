@@ -27,14 +27,14 @@ class OpinionAdmin extends Admin
         );
     }
 
-    protected $datagridValues = array(
+    protected $datagridValues = [
         '_sort_order' => 'ASC',
         '_sort_by' => 'title',
-    );
+    ];
 
-    protected $formOptions = array(
+    protected $formOptions = [
         'cascade_validation' => true,
-    );
+    ];
 
     /**
      * @param DatagridMapper $datagridMapper
@@ -368,7 +368,7 @@ class OpinionAdmin extends Admin
 
     protected function configureRoutes(RouteCollection $collection)
     {
-        $collection->clearExcept(array('list', 'show', 'create', 'edit', 'delete'));
+        $collection->clearExcept(array('list', 'show', 'create', 'edit', 'delete', 'export'));
     }
 
     public function getBatchActions()

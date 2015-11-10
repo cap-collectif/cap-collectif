@@ -14,10 +14,10 @@ use Sonata\CoreBundle\Model\Metadata;
 
 class EventAdmin extends Admin
 {
-    protected $datagridValues = array(
+    protected $datagridValues = [
         '_sort_order' => 'DESC',
-        '_sort_by' => 'createdAt',
-    );
+        '_sort_by' => 'updatedAt',
+    ];
 
     /**
      * @param DatagridMapper $datagridMapper

@@ -10,10 +10,10 @@ use Sonata\AdminBundle\Route\RouteCollection;
 
 class ArgumentVoteAdmin extends Admin
 {
-    protected $datagridValues = array(
+    protected $datagridValues = [
         '_sort_order' => 'ASC',
-        '_sort_by' => 'title',
-    );
+        '_sort_by' => 'argument.title',
+    ];
 
     /**
      * @param DatagridMapper $datagridMapper

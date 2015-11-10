@@ -12,10 +12,10 @@ use Capco\AppBundle\Entity\Argument;
 
 class ArgumentAdmin extends Admin
 {
-    protected $datagridValues = array(
-        '_sort_order' => 'ASC',
-        '_sort_by' => 'opinion.title',
-    );
+    protected $datagridValues = [
+        '_sort_order' => 'DESC',
+        '_sort_by' => 'updatedAt',
+    ];
 
     /**
      * @param DatagridMapper $datagridMapper

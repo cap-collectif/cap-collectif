@@ -12,10 +12,10 @@ use Capco\AppBundle\Entity\OpinionVote;
 
 class OpinionVoteAdmin extends Admin
 {
-    protected $datagridValues = array(
+    protected $datagridValues = [
         '_sort_order' => 'ASC',
         '_sort_by' => 'opinion.title',
-    );
+    ];
 
     /**
      * @param DatagridMapper $datagridMapper

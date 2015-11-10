@@ -12,10 +12,10 @@ use Sonata\CoreBundle\Model\Metadata;
 
 class ThemeAdmin extends Admin
 {
-    protected $datagridValues = array(
+    protected $datagridValues = [
         '_sort_order' => 'ASC',
         '_sort_by' => 'position',
-    );
+    ];
 
     /**
      * @param DatagridMapper $datagridMapper

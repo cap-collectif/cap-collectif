@@ -9,6 +9,11 @@ use Sonata\AdminBundle\Route\RouteCollection;
 
 class SynthesisAdmin extends Admin
 {
+    protected $datagridValues = [
+        '_sort_order' => 'DESC',
+        '_sort_by' => 'enabled',
+    ];
+
     /**
      * @param FormMapper $formMapper
      */

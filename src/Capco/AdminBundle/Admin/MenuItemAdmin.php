@@ -12,10 +12,10 @@ use Sonata\AdminBundle\Route\RouteCollection;
 
 class MenuItemAdmin extends Admin
 {
-    protected $datagridValues = array(
+    protected $datagridValues = [
         '_sort_order' => 'ASC',
         '_sort_by' => 'menu',
-    );
+    ];
 
     public function createQuery($context = 'list')
     {

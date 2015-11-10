@@ -10,10 +10,10 @@ use Sonata\AdminBundle\Route\RouteCollection;
 
 class CommentVoteAdmin extends Admin
 {
-    protected $datagridValues = array(
-        '_sort_order' => 'ASC',
-        '_sort_by' => 'title',
-    );
+    protected $datagridValues = [
+        '_sort_order' => 'DESC',
+        '_sort_by' => 'createdAt',
+    ];
 
     /**
      * @param DatagridMapper $datagridMapper

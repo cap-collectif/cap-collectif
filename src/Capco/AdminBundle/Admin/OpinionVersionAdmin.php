@@ -11,10 +11,10 @@ use Sonata\AdminBundle\Route\RouteCollection;
 
 class OpinionVersionAdmin extends Admin
 {
-    protected $datagridValues = array(
+    protected $datagridValues = [
         '_sort_order' => 'ASC',
-        '_sort_by' => 'position',
-    );
+        '_sort_by' => 'title',
+    ];
 
     /**
      * @param DatagridMapper $datagridMapper

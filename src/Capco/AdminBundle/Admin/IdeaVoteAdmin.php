@@ -10,10 +10,10 @@ use Sonata\AdminBundle\Route\RouteCollection;
 
 class IdeaVoteAdmin extends Admin
 {
-    protected $datagridValues = array(
+    protected $datagridValues = [
         '_sort_order' => 'ASC',
         '_sort_by' => 'idea.title',
-    );
+    ];
 
     /**
      * @param DatagridMapper $datagridMapper

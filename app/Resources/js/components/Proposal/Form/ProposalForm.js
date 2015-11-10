@@ -4,7 +4,8 @@ import DeepLinkStateMixin from '../../../utils/DeepLinkStateMixin';
 import ProposalActions from '../../../actions/ProposalActions';
 import FlashMessages from '../../Utils/FlashMessages';
 import ArrayHelper from '../../../services/ArrayHelper';
-import Input from '../../Form/Input';
+
+const Input = ReactBootstrap.Input;
 
 const ProposalForm = React.createClass({
   propTypes: {
@@ -55,6 +56,27 @@ const ProposalForm = React.createClass({
     };
   },
 
+  getInitialFormAnswers() {
+    const custom = {};
+    this.props.form.questions.map((question) => {
+      custom['custom-' + question.id] = this.getProposalResponseForQuestion(question.id);
+    });
+    return custom;
+  },
+
+  getProposalResponseForQuestion(id) {
+    const index = ArrayHelper.getElementIndexFromArray(
+      this.props.proposal.responses,
+      {question: {id: id}},
+      'question',
+      'id'
+    );
+    if (index > -1) {
+      return this.props.proposal.responses[index].value;
+    }
+    return '';
+  },
+
   componentDidMount() {
     this.initializeCkeditor('body', 'form');
 
@@ -103,27 +125,6 @@ const ProposalForm = React.createClass({
 
       this.props.onValidationFailure();
     }
-  },
-
-  getInitialFormAnswers() {
-    const custom = {};
-    this.props.form.questions.map((question) => {
-      custom['custom-' + question.id] = this.getProposalResponseForQuestion(question.id);
-    });
-    return custom;
-  },
-
-  getProposalResponseForQuestion(id) {
-    const index = ArrayHelper.getElementIndexFromArray(
-      this.props.proposal.responses,
-      {question: {id: id}},
-      'question',
-      'id'
-    );
-    if (index > -1) {
-      return this.props.proposal.responses[index].value;
-    }
-    return '';
   },
 
   formValidationRules: {
@@ -223,24 +224,14 @@ const ProposalForm = React.createClass({
 
         {
           this.props.form.questions.map((question) => {
-            const ref = 'custom-' + question.id;
             return (
-              <div className={'form-group ' + this.getGroupStyle(ref)}>
-                <label htmlFor={ref} className="control-label h5">
-                  {question.title + ' *'}
-                </label>
-                { question.helpText
-                  ? <span className="help-block">
-                      {question.helpText}
-                    </span>
-                  : null
-                }
-                <Input
-                  type="textarea"
-                  valueLink={this.linkState('custom.' + ref)} // state is automatically updated by CkeditorMixin
-                  ref={ref}
-                />
-              </div>
+              <Input
+                type="textarea"
+                valueLink={this.linkState('custom.custom-' + question.id)} // state is automatically updated by CkeditorMixin
+                ref={'custom-' + question.id}
+                label={question.title + '*'}
+                labelClassName="control-label h5"
+              />
             );
           })
         }

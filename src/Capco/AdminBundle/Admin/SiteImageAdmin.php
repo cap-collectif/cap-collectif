@@ -9,6 +9,11 @@ use Sonata\CoreBundle\Model\Metadata;
 
 class SiteImageAdmin extends Admin
 {
+    protected $datagridValues = [
+        '_sort_order' => 'ASC',
+        '_sort_by' => 'isEnabled',
+    ];
+
     /**
      * @param FormMapper $formMapper
      */
