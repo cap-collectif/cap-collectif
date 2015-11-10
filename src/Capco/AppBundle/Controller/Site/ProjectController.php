@@ -4,7 +4,6 @@ namespace Capco\AppBundle\Controller\Site;
 
 use Capco\AppBundle\Entity\Argument;
 use Capco\AppBundle\Entity\Project;
-use Capco\AppBundle\Entity\CollectStep;
 use Capco\AppBundle\Entity\Opinion;
 use Capco\AppBundle\Entity\OpinionType;
 use Capco\AppBundle\Entity\Theme;

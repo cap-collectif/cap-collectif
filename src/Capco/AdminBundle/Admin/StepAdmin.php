@@ -138,22 +138,22 @@ class StepAdmin extends Admin
             $formMapper
                 ->with('admin.fields.step.group_form', ['class' => 'col-md-6'])
                 ->add('proposalForm', 'sonata_type_model', [
-                    'label'        => 'admin.fields.step.proposal_form',
-                    'query'        => $this->createQueryForProposalForms(),
+                    'label' => 'admin.fields.step.proposal_form',
+                    'query' => $this->createQueryForProposalForms(),
                     'by_reference' => false,
-                    'required'     => false,
-                    'btn_add'      => false,
-                    'empty_value'  => 'admin.fields.step.no_proposal_form',
+                    'required' => false,
+                    'btn_add' => false,
+                    'empty_value' => 'admin.fields.step.no_proposal_form',
                 ])
                 ->end()
                 ->with('admin.fields.step.group_statuses', ['class' => 'col-md-6'])
                 ->add('statuses', 'sonata_type_collection', [
-                    'label'        => 'admin.fields.step.statuses',
+                    'label' => 'admin.fields.step.statuses',
                     'by_reference' => false,
-                    'required'     => false,
+                    'required' => false,
                 ], [
-                    'edit'     => 'inline',
-                    'inline'   => 'table',
+                    'edit' => 'inline',
+                    'inline' => 'table',
                     'sortable' => 'position',
                 ])
                 ->end()

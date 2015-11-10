@@ -34,5 +34,4 @@ class ProposalSubscriber implements EventSubscriberInterface
             $this->notifier->notifyProposalDeletion($proposal);
         }
     }
-
 }

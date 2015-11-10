@@ -55,7 +55,7 @@ class Question
     private $proposalForm;
 
     /**
-     * @var integer
+     * @var int
      * @Assert\NotNull()
      * @Assert\Choice(choices={0, 1})
      * @ORM\Column(name="questionType", type="integer")
@@ -77,15 +77,14 @@ class Question
      */
     private $proposalResponses;
 
-
     public function __toString()
     {
         if ($this->getId()) {
             return $this->getTitle();
         }
+
         return 'New Question';
     }
-
 
     /**
      * Get id.
@@ -177,11 +176,12 @@ class Question
     public function setProposalForm($proposalForm)
     {
         $this->proposalForm = $proposalForm;
+
         return $this;
     }
 
     /**
-     * @return integer
+     * @return int
      */
     public function getQuestionType()
     {
@@ -189,7 +189,7 @@ class Question
     }
 
     /**
-     * @param integer $questionType
+     * @param int $questionType
      *
      * @return $this
      */

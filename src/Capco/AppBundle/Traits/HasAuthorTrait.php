@@ -4,7 +4,6 @@ namespace Capco\AppBundle\Traits;
 
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Validator\Constraints as Assert;
 
 trait HasAuthorTrait
 {

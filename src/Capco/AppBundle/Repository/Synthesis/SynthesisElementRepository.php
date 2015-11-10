@@ -275,6 +275,7 @@ class SynthesisElementRepository extends MaterializedPathRepository
         }
         $parent = explode('-', $splitted[count($splitted) - 2]);
         $parent = implode('-', array_splice($parent, count($parent) - 5, count($parent)));
+
         return $parent;
     }
 

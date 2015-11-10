@@ -44,7 +44,7 @@ class ContributionResolver
             $contributors[$opinionsContributor['id']]['opinions'] = $opinionsContributor['opinions_count'];
         }
 
-        foreach($proposalsContributors as $proposalsContributor) {
+        foreach ($proposalsContributors as $proposalsContributor) {
             $contributors[$proposalsContributor['id']]['proposals'] = $proposalsContributor['proposals_count'];
         }
 

@@ -2,7 +2,6 @@
 
 namespace Capco\AdminBundle\Admin;
 
-use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\Question;
 use Capco\AppBundle\Entity\QuestionType;
 use Sonata\AdminBundle\Admin\Admin;
@@ -19,7 +18,7 @@ class QuestionAdmin extends Admin
     );
 
     protected $formOptions = array(
-        'cascade_validation' => true
+        'cascade_validation' => true,
     );
 
     // Fields to be shown on create/edit forms
@@ -30,18 +29,18 @@ class QuestionAdmin extends Admin
                 'label' => 'admin.fields.question.position',
             ])
             ->add('title', null, [
-                'label'    => 'admin.fields.question.title',
+                'label' => 'admin.fields.question.title',
                 'required' => true,
             ])
             ->add('helpText', null, [
-                'label'    => 'admin.fields.question.help_text',
+                'label' => 'admin.fields.question.help_text',
                 'required' => true,
             ])
             ->add('questionType', 'choice', array(
-                'label'              => 'admin.fields.question.question_type',
-                'choices'            => Question::$questionTypes,
+                'label' => 'admin.fields.question.question_type',
+                'choices' => Question::$questionTypes,
                 'translation_domain' => 'CapcoAppBundle',
-                'required'           => true,
+                'required' => true,
             ))
         ;
     }

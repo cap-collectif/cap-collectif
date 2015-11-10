@@ -7,7 +7,6 @@ use Capco\AppBundle\Traits\TimestampableTrait;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Validator\Constraints as Assert;
-use Capco\UserBundle\Entity\User;
 
 /**
  * Answer.
@@ -115,5 +114,4 @@ class Answer
 
         return $this;
     }
-
 }

@@ -113,14 +113,14 @@ class OauthConnectController extends ConnectController
         $router->getContext()->setScheme('http');
 
         $params = [
-            "grant_type"    => "authorization_code",
-            "client_id"     => $this->getParameter('nous_citoyens_app_id'),
+            'grant_type' => 'authorization_code',
+            'client_id' => $this->getParameter('nous_citoyens_app_id'),
             // pas du tout secure mais bon on peut pas redirect
             // sur une route en POST... en plus cette route a aucune raison d'avoir besoin du secret...
-            "client_secret" => $this->getParameter('nous_citoyens_app_secret'),
-            "redirect_uri"  => $router->generate('nous_citoyens_login', [], true),
-            "state"         => "123",
-            "response_type" => "code",
+            'client_secret' => $this->getParameter('nous_citoyens_app_secret'),
+            'redirect_uri' => $router->generate('nous_citoyens_login', [], true),
+            'state' => '123',
+            'response_type' => 'code',
         ];
 
         return $this->render('CapcoUserBundle:Oauth:nous_citoyens.html.twig', [

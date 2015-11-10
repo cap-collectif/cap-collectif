@@ -94,11 +94,11 @@ class UrlResolver
         }
 
         if ($object instanceof Argument) {
-            return $this->generateOpinionOrProposalRoute($object->getParent(), $absolute) . '#arg-' . $object->getId();
+            return $this->generateOpinionOrProposalRoute($object->getParent(), $absolute).'#arg-'.$object->getId();
         }
 
         if ($object instanceof Source) {
-            return $this->generateOpinionOrProposalRoute($object->getParent(), $absolute) . '#source-' . $object->getId();
+            return $this->generateOpinionOrProposalRoute($object->getParent(), $absolute).'#source-'.$object->getId();
         }
 
         if ($object instanceof AbstractStep) {

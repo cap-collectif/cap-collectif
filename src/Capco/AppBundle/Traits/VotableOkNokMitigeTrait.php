@@ -5,13 +5,11 @@ namespace Capco\AppBundle\Traits;
 use Capco\UserBundle\Entity\User;
 use Capco\AppBundle\Entity\AbstractVote;
 use Capco\AppBundle\Entity\OpinionVote;
-
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\Collection;
 
 trait VotableOkNokMitigeTrait
 {
-
     protected $votes; // Dynamic relation
 
     /**
@@ -28,7 +26,6 @@ trait VotableOkNokMitigeTrait
      * @ORM\Column(name="vote_count_mitige", type="integer")
      */
     protected $votesCountMitige = 0;
-
 
     public function getVotes()
     {
@@ -71,7 +68,7 @@ trait VotableOkNokMitigeTrait
             }
         }
 
-        return null;
+        return;
     }
 
     public function resetVotes()

@@ -2,7 +2,6 @@
 
 namespace Capco\AppBundle\Traits;
 
-use Capco\AppBundle\Entity\OpinionVote;
 use Capco\AppBundle\Entity\AbstractVote;
 use Capco\UserBundle\Entity\User;
 use Doctrine\Common\Collections\Collection;
@@ -10,7 +9,6 @@ use Doctrine\ORM\Mapping as ORM;
 
 trait VotableOkTrait
 {
-
     private $votes; // Dynamic Relation
 
     /**

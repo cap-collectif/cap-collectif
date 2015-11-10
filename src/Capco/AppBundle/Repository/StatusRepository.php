@@ -13,7 +13,6 @@ use Doctrine\ORM\EntityRepository;
  */
 class StatusRepository extends EntityRepository
 {
-
     public function getByCollectStep(CollectStep $step)
     {
         $qb = $this->createQueryBuilder('s')
@@ -24,5 +23,4 @@ class StatusRepository extends EntityRepository
 
         return $qb->getQuery()->getResult();
     }
-    
 }

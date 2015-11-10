@@ -8,7 +8,6 @@ use Capco\AppBundle\Traits\ColorableTrait;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Validator\Constraints as Assert;
-use Capco\AppBundle\Validator\Constraints as CapcoAssert;
 
 /**
  * Status.
@@ -66,6 +65,7 @@ class Status
         if ($this->getId()) {
             return $this->getName();
         }
+
         return 'New status';
     }
 
@@ -87,11 +87,13 @@ class Status
 
     /**
      * @param string $name
+     *
      * @return $this
      */
     public function setName($name)
     {
         $this->name = $name;
+
         return $this;
     }
 
@@ -106,5 +108,4 @@ class Status
 
         return $this;
     }
-
 }

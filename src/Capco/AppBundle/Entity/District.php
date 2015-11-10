@@ -5,8 +5,6 @@ namespace Capco\AppBundle\Entity;
 use Capco\AppBundle\Traits\TimestampableTrait;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
-use Symfony\Component\Validator\Constraints as Assert;
-use Capco\AppBundle\Validator\Constraints as CapcoAssert;
 use Doctrine\Common\Collections\ArrayCollection;
 
 /**
@@ -49,7 +47,6 @@ class District
      */
     private $proposals;
 
-
     public function __construct()
     {
         $this->updatedAt = new \Datetime();
@@ -61,6 +58,7 @@ class District
         if ($this->id) {
             return $this->getName();
         }
+
         return 'New district';
     }
 
@@ -82,11 +80,13 @@ class District
 
     /**
      * @param string $name
+     *
      * @return $this
      */
     public function setName($name)
     {
         $this->name = $name;
+
         return $this;
     }
 
@@ -118,6 +118,4 @@ class District
     {
         $this->proposals->removeElement($proposal);
     }
-
-
 }

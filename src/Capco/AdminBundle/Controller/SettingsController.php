@@ -37,7 +37,6 @@ class SettingsController extends Controller
 
         $featuresCategoryResolver = $this->get('capco.admin.features_category_resolver');
 
-
         $toggles = $featuresCategoryResolver->getTogglesByCategory($category);
         $group = $featuresCategoryResolver->getGroupNameForCategory($category);
 

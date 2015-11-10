@@ -154,7 +154,7 @@ class ProposalsController extends FOSRestController
     {
         $user = $this->getUser();
         $em = $this->get('doctrine.orm.entity_manager');
-        
+
         $proposal = (new Proposal())
             ->setAuthor($user)
             ->setProposalForm($proposalForm)
@@ -181,7 +181,6 @@ class ProposalsController extends FOSRestController
 
         return $proposal;
     }
-
 
     /**
      * @Get("/proposal_forms/{form}/proposals/{proposal}/comments")
@@ -226,9 +225,8 @@ class ProposalsController extends FOSRestController
      */
     public function postProposalCommentsAction(Request $request, ProposalForm $form, Proposal $proposal)
     {
-
         if (!$proposal->canComment()) {
-            throw new BadRequestHttpException("Error Processing Request", 1);
+            throw new BadRequestHttpException('Error Processing Request', 1);
         }
 
         $user = $this->getUser();
@@ -285,13 +283,14 @@ class ProposalsController extends FOSRestController
      * @View(statusCode=204)
      *
      * @param ProposalForm $proposalForm
-     * @param Proposal $proposal
+     * @param Proposal     $proposal
+     *
      * @return bool
      */
     public function putProposalAction(Request $request, ProposalForm $proposalForm, Proposal $proposal)
     {
         if (!$proposal->canContribute()) {
-            throw new BadRequestHttpException("You are not the author of this proposal.");
+            throw new BadRequestHttpException('You are not the author of this proposal.');
         }
 
         $user = $this->getUser();
@@ -335,7 +334,8 @@ class ProposalsController extends FOSRestController
      * @View(statusCode=204)
      *
      * @param ProposalForm $proposalForm
-     * @param Proposal $proposal
+     * @param Proposal     $proposal
+     *
      * @return bool
      */
     public function deleteProposalAction(ProposalForm $proposalForm, Proposal $proposal)

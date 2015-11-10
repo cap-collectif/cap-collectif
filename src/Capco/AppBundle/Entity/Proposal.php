@@ -256,7 +256,6 @@ class Proposal implements CommentableInterface, VotableInterface
         return $this;
     }
 
-
     /**
      * @return District
      */
@@ -277,7 +276,6 @@ class Proposal implements CommentableInterface, VotableInterface
 
         return $this;
     }
-
 
     /**
      * @return string
@@ -370,9 +368,10 @@ class Proposal implements CommentableInterface, VotableInterface
     public function setProposalResponses(ArrayCollection $proposalResponses)
     {
         $this->proposalResponses = $proposalResponses;
-        foreach($proposalResponses as $proposalResponse) {
+        foreach ($proposalResponses as $proposalResponse) {
             $proposalResponse->setProposal($this);
         }
+
         return $this;
     }
 

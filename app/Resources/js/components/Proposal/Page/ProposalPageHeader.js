@@ -1,4 +1,3 @@
-import LoginStore from '../../../stores/LoginStore';
 import UserAvatar from '../../User/UserAvatar';
 import UserLink from '../../User/UserLink';
 import ProposalEditModal from '../Edit/ProposalEditModal';
@@ -20,7 +19,7 @@ const ProposalPageHeader = React.createClass({
   getInitialState() {
     return {
       showEditModal: false,
-    }
+    };
   },
 
   toggleEditModal(value) {

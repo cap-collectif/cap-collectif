@@ -165,7 +165,7 @@ class SectionAdmin extends Admin
             $formMapper->add('step', 'sonata_type_model', [
                 'label' => 'admin.fields.section.collect_step',
                 'required' => true,
-                'query' => $this->createQueryForCollectSteps()
+                'query' => $this->createQueryForCollectSteps(),
             ]);
         }
     }

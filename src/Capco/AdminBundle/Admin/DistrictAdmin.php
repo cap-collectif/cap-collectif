@@ -16,7 +16,7 @@ class DistrictAdmin extends Admin
     );
 
     protected $formOptions = array(
-        'cascade_validation' => true
+        'cascade_validation' => true,
     );
 
     // Fields to be shown on create/edit forms
@@ -24,7 +24,7 @@ class DistrictAdmin extends Admin
     {
         $formMapper
             ->add('name', null, [
-                'label'    => 'admin.fields.district.name',
+                'label' => 'admin.fields.district.name',
                 'required' => true,
             ])
         ;
@@ -38,7 +38,7 @@ class DistrictAdmin extends Admin
     {
         $showMapper
             ->add('name', null, [
-                'label'    => 'admin.fields.district.name',
+                'label' => 'admin.fields.district.name',
             ])
         ;
     }
@@ -51,7 +51,7 @@ class DistrictAdmin extends Admin
     {
         $datagridMapper
             ->add('name', null, [
-                'label'    => 'admin.fields.district.name',
+                'label' => 'admin.fields.district.name',
             ])
         ;
     }
@@ -64,7 +64,7 @@ class DistrictAdmin extends Admin
     {
         $listMapper
             ->add('name', null, [
-                'label'    => 'admin.fields.district.name',
+                'label' => 'admin.fields.district.name',
             ])
             ->add('_action', 'actions', [
                 'actions' => [

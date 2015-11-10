@@ -761,13 +761,15 @@ class Opinion implements SelfLinkableInterface, VotableInterface
 
     public function increaseArgumentsCount()
     {
-        $this->argumentsCount++;
+        ++$this->argumentsCount;
+
         return $this;
     }
 
     public function decreaseArgumentsCount()
     {
-        $this->argumentsCount--;
+        --$this->argumentsCount;
+
         return $this;
     }
 
@@ -785,5 +787,4 @@ class Opinion implements SelfLinkableInterface, VotableInterface
             $this->OpinionType->removeOpinion($this);
         }
     }
-
 }

@@ -10,7 +10,6 @@ use Doctrine\ORM\Tools\Pagination\Paginator;
  */
 class ProposalCommentRepository extends EntityRepository
 {
-
     public function getEnabledByProposal($proposal, $offset = 0, $limit = 10, $filter = 'last')
     {
         $qb = $this->getIsEnabledQueryBuilder()

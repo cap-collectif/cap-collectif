@@ -1,7 +1,6 @@
 import SubmitButton from '../../Form/SubmitButton';
 import CloseButton from '../../Form/CloseButton';
 import ProposalForm from '../Form/ProposalForm';
-import ProposalActions from '../../../actions/ProposalActions';
 
 const Modal = ReactBootstrap.Modal;
 

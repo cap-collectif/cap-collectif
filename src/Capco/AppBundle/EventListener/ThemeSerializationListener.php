@@ -2,12 +2,9 @@
 
 namespace Capco\AppBundle\EventListener;
 
-use Capco\AppBundle\Repository\AbstractVoteRepository;
-use Capco\AppBundle\Toggle\Manager;
 use JMS\Serializer\EventDispatcher\EventSubscriberInterface;
 use JMS\Serializer\EventDispatcher\ObjectEvent;
 use Symfony\Component\Routing\RouterInterface;
-use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
 class ThemeSerializationListener implements EventSubscriberInterface
 {

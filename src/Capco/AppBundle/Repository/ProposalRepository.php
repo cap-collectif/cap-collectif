@@ -74,7 +74,7 @@ class ProposalRepository extends EntityRepository
 
         return new Paginator($qb);
     }
-    
+
     public function countEnabledForForm($form)
     {
         $qb = $this
@@ -83,6 +83,7 @@ class ProposalRepository extends EntityRepository
             ->andWhere('proposal.proposalForm = :form')
             ->setParameter('form', $form)
         ;
+
         return $qb->getQuery()->getSingleScalarResult();
     }
 
@@ -100,11 +101,13 @@ class ProposalRepository extends EntityRepository
 
     /**
      * @param $slug
+     *
      * @return mixed
      *
      * @throws \Doctrine\ORM\NonUniqueResultException
      */
-    public function getOne($slug) {
+    public function getOne($slug)
+    {
         $qb = $this->getIsEnabledQueryBuilder()
             ->addSelect('pr')
             ->leftJoin('proposal.proposalResponses', 'pr')

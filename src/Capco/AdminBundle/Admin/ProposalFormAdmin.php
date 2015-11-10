@@ -2,7 +2,6 @@
 
 namespace Capco\AdminBundle\Admin;
 
-use Capco\AppBundle\Entity\Proposal;
 use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
@@ -17,7 +16,7 @@ class ProposalFormAdmin extends Admin
     );
 
     protected $formOptions = array(
-        'cascade_validation' => true
+        'cascade_validation' => true,
     );
 
     // Fields to be shown on create/edit forms
@@ -29,7 +28,7 @@ class ProposalFormAdmin extends Admin
                 'label' => 'admin.fields.proposal_form.title',
             ])
             ->add('description', 'ckeditor', [
-                'label'       => 'admin.fields.proposal_form.description',
+                'label' => 'admin.fields.proposal_form.description',
                 'config_name' => 'admin_editor',
             ])
             ->end()
@@ -38,12 +37,12 @@ class ProposalFormAdmin extends Admin
         $formMapper
             ->with('admin.fields.proposal_form.group_questions')
             ->add('questions', 'sonata_type_collection', [
-                'label'        => 'admin.fields.proposal_form.questions',
+                'label' => 'admin.fields.proposal_form.questions',
                 'by_reference' => false,
-                'required'     => false,
+                'required' => false,
             ], [
-                'edit'     => 'inline',
-                'inline'   => 'table',
+                'edit' => 'inline',
+                'inline' => 'table',
                 'sortable' => 'position',
             ])
             ->end()

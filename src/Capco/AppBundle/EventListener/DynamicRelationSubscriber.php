@@ -40,7 +40,6 @@ class DynamicRelationSubscriber implements EventSubscriber
             switch ($trait) {
                 case 'selflinkable':
                     if (count(array_intersect(class_implements($metadata->getName()), $params['interfaces'])) > 0) {
-
                         $metadata->mapManyToOne([
                             'targetEntity' => $metadata->getName(),
                             'fieldName' => 'link',
@@ -63,12 +62,11 @@ class DynamicRelationSubscriber implements EventSubscriber
                 break;
                 case 'votable':
                     if (count(array_intersect(class_implements($metadata->getName()), $params['interfaces'])) > 0) {
-
                         if (array_key_exists('votes', $metadata->getReflectionProperties())) {
                             break;
                         }
 
-                        $fieldName = lcfirst(substr($metadata->getName(), strrpos($metadata->getName(), "\\") + 1));
+                        $fieldName = lcfirst(substr($metadata->getName(), strrpos($metadata->getName(), '\\') + 1));
 
                         $metadata->mapOneToMany([
                             'targetEntity' => $metadata->getName().'Vote',

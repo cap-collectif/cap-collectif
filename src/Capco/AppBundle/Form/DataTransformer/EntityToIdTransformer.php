@@ -19,8 +19,8 @@ class EntityToIdTransformer implements DataTransformerInterface
 
     public function transform($entity)
     {
-        if (null === $entity ||!$entity instanceof $this->entityClass) {
-            return null;
+        if (null === $entity || !$entity instanceof $this->entityClass) {
+            return;
         }
 
         return $entity->getId();
@@ -32,7 +32,7 @@ class EntityToIdTransformer implements DataTransformerInterface
             throw new TransformationFailedException();
         }
 
-        $entity = $this->em->getRepository($this->entityRepository)->findOneBy(array("id" => $id));
+        $entity = $this->em->getRepository($this->entityRepository)->findOneBy(array('id' => $id));
 
         if (null === $entity) {
             throw new TransformationFailedException(sprintf(
@@ -54,5 +54,4 @@ class EntityToIdTransformer implements DataTransformerInterface
     {
         $this->entityRepository = $entityRepository;
     }
-
 }

@@ -7,7 +7,6 @@ use Capco\AppBundle\Traits\TimestampableTrait;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
-use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * ProposalForm.
@@ -63,7 +62,6 @@ class ProposalForm
      */
     protected $updatedAt;
 
-
     /**
      * Constructor.
      */
@@ -78,9 +76,9 @@ class ProposalForm
         if ($this->getId()) {
             return $this->getTitle();
         }
+
         return 'New ProposalForm';
     }
-
 
     /**
      * Get id.
@@ -155,6 +153,7 @@ class ProposalForm
             $question->setProposalForm($this);
         }
         $this->questions = $questions;
+
         return $this;
     }
 
@@ -162,6 +161,7 @@ class ProposalForm
      * Add question.
      *
      * @param Question $question
+     *
      * @return $this
      */
     public function addQuestion(Question $question)
@@ -178,6 +178,7 @@ class ProposalForm
      * Remove question.
      *
      * @param Question $question
+     *
      * @return $this
      */
     public function removeQuestion(Question $question)

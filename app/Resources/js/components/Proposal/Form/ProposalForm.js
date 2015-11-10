@@ -23,7 +23,7 @@ const ProposalForm = React.createClass({
 
   getDefaultProps() {
     return {
-      mode: "create",
+      mode: 'create',
       proposal: {
         title: '',
         body: '',
@@ -35,7 +35,7 @@ const ProposalForm = React.createClass({
         },
         responses: [],
       },
-    }
+    };
   },
 
   getInitialState() {
@@ -72,7 +72,7 @@ const ProposalForm = React.createClass({
       'id'
     );
     if (index > -1) {
-      return this.props.proposal.responses[index]['value'];
+      return this.props.proposal.responses[index].value;
     }
     return '';
   },
@@ -99,7 +99,7 @@ const ProposalForm = React.createClass({
           });
         });
         form.proposalResponses = responses;
-        if (this.props.mode === "edit") {
+        if (this.props.mode === 'edit') {
           ProposalActions
             .update(this.props.form.id, this.props.proposal.id, form)
             .then(() => {

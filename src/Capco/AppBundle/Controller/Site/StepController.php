@@ -14,7 +14,6 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
-use Doctrine\Common\Collections\ArrayCollection;
 use JMS\Serializer\SerializationContext;
 
 class StepController extends Controller
@@ -256,7 +255,7 @@ class StepController extends Controller
 
         $em = $this->getDoctrine()->getManager();
         $serializer = $this->get('jms_serializer');
-        
+
         $proposalsCount = $em
             ->getRepository('CapcoAppBundle:Proposal')
             ->countEnabledForForm($step->getProposalForm())

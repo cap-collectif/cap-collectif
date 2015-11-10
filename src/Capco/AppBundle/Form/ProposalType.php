@@ -2,7 +2,6 @@
 
 namespace Capco\AppBundle\Form;
 
-use Capco\AppBundle\Entity\ProposalResponse;
 use Doctrine\ORM\EntityManager;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -25,16 +24,16 @@ class ProposalType extends AbstractType
     {
         $builder
             ->add('title', null, [
-                'required' => true
+                'required' => true,
             ])
             ->add('body', null, [
-                'required' => true
+                'required' => true,
             ])
             ->add('theme', null, [
-                'required' => true
+                'required' => true,
             ])
             ->add('district', null, [
-                'required' => true
+                'required' => true,
             ])
             ->add('proposalResponses', 'collection', [
                 'allow_add' => true,

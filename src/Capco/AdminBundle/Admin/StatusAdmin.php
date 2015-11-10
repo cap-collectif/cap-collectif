@@ -16,7 +16,7 @@ class StatusAdmin extends Admin
     );
 
     protected $formOptions = array(
-        'cascade_validation' => true
+        'cascade_validation' => true,
     );
 
     // Fields to be shown on create/edit forms
@@ -27,11 +27,11 @@ class StatusAdmin extends Admin
                 'label' => 'admin.fields.status.position',
             ])
             ->add('name', null, [
-                'label'    => 'admin.fields.status.name',
+                'label' => 'admin.fields.status.name',
                 'required' => true,
             ])
             ->add('color', null, [
-                'label'    => 'admin.fields.status.color',
+                'label' => 'admin.fields.status.color',
                 'required' => true,
             ])
         ;

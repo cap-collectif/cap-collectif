@@ -1,7 +1,5 @@
 import LoginStore from '../../../stores/LoginStore';
 
-const Button = ReactBootstrap.Button;
-
 const ProposalEditButton = React.createClass({
   propTypes: {
     author: React.PropTypes.object,
@@ -16,7 +14,7 @@ const ProposalEditButton = React.createClass({
       author: null,
       hasWrapper: false,
       wrapperClassName: '',
-    }
+    };
   },
 
   isTheUserTheAuthor() {

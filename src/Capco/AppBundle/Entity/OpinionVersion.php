@@ -11,7 +11,6 @@ use Capco\AppBundle\Traits\TrashableTrait;
 use Capco\AppBundle\Traits\EnableTrait;
 use Capco\AppBundle\Traits\SluggableTitleTrait;
 use Capco\AppBundle\Traits\TimestampableTrait;
-use Capco\AppBundle\Traits\VotableTrait;
 use Capco\AppBundle\Traits\VotableOkNokMitigeTrait;
 use Capco\UserBundle\Entity\User;
 use Gedmo\Mapping\Annotation as Gedmo;
@@ -429,14 +428,15 @@ class OpinionVersion implements VotableInterface
 
     public function increaseArgumentsCount()
     {
-        $this->argumentsCount++;
+        ++$this->argumentsCount;
+
         return $this;
     }
 
     public function decreaseArgumentsCount()
     {
-        $this->argumentsCount--;
+        --$this->argumentsCount;
+
         return $this;
     }
-
 }

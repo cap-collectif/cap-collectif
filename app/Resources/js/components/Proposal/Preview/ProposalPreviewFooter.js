@@ -22,7 +22,7 @@ const ProposalPreviewFooter = React.createClass({
               <FormattedMessage
                 message={this.getIntlMessage('comment.count_no_nb')}
                 count={proposal.comments_count}
-                />
+              />
             </div>
           </div>
         </div>

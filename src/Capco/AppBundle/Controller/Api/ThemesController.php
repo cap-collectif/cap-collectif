@@ -6,13 +6,6 @@ use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 use FOS\RestBundle\Controller\FOSRestController;
 use FOS\RestBundle\Controller\Annotations\View;
 use FOS\RestBundle\Controller\Annotations\Get;
-use FOS\RestBundle\Controller\Annotations\Post;
-use FOS\RestBundle\Controller\Annotations\Put;
-use FOS\RestBundle\Controller\Annotations\Delete;
-use FOS\RestBundle\Controller\Annotations\QueryParam;
-use FOS\RestBundle\Request\ParamFetcherInterface;
-use FOS\RestBundle\Util\Codes;
-use Symfony\Component\HttpFoundation\Request;
 
 class ThemesController extends FOSRestController
 {
@@ -30,6 +23,7 @@ class ThemesController extends FOSRestController
      *
      * @Get("/themes")
      * @View(statusCode=200, serializerGroups={"Themes"})
+     *
      * @return array
      */
     public function getThemesAction()

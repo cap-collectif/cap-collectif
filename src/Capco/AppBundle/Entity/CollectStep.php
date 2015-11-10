@@ -27,7 +27,6 @@ class CollectStep extends AbstractStep
      **/
     private $statuses;
 
-
     public function __construct()
     {
         parent::__construct();
@@ -57,11 +56,13 @@ class CollectStep extends AbstractStep
 
     /**
      * @param ProposalForm $proposalForm
+     *
      * @return ArrayCollection
      */
     public function setProposalForm($proposalForm)
     {
         $this->proposalForm = $proposalForm;
+
         return $this;
     }
 
@@ -72,21 +73,21 @@ class CollectStep extends AbstractStep
     {
         return $this->statuses;
     }
-    
+
     public function addStatus($status)
     {
         if (!$this->statuses->contains($status)) {
             $this->statuses->add($status);
             $status->setStep($this);
         }
+
         return $this;
     }
-    
+
     public function removeStatus($status)
     {
         $this->statuses->removeElement($status);
 
         return $this;
     }
-
 }

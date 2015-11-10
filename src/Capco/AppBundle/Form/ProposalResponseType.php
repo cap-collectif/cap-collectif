@@ -5,7 +5,6 @@ namespace Capco\AppBundle\Form;
 use Capco\AppBundle\Form\DataTransformer\EntityToIdTransformer;
 use Doctrine\ORM\EntityManager;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\CallbackTransformer;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 

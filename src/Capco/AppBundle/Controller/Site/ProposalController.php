@@ -7,7 +7,6 @@ use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\CollectStep;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
-use Symfony\Component\HttpFoundation\Response;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use JMS\Serializer\SerializationContext;
@@ -28,7 +27,7 @@ class ProposalController extends Controller
 
         $proposalJson = $serializer->serialize([
             'proposal' => $proposal,
-        ], 'json', SerializationContext::create()->setGroups(["Proposals", "ProposalResponses", "UsersInfos", "UserMedias"]));
+        ], 'json', SerializationContext::create()->setGroups(['Proposals', 'ProposalResponses', 'UsersInfos', 'UserMedias']));
 
         $districts = $serializer->serialize([
             'districts' => $em->getRepository('CapcoAppBundle:District')->findAll(),
