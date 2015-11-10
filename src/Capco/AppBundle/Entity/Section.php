@@ -75,7 +75,7 @@ class Section
             'body' => false,
             'nbObjects' => false,
         ],
-        'budgets' => [
+        'proposals' => [
             'title' => true,
             'teaser' => true,
             'body' => false,
@@ -170,6 +170,12 @@ class Section
      * @ORM\Column(name="associated_features", type="simple_array", nullable=true)
      */
     private $associatedFeatures;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\AbstractStep")
+     * @ORM\JoinColumn(name="step_id", referencedColumnName="id", onDelete="SET NULL", nullable=true)
+     */
+    protected $step;
 
     public function __construct()
     {
@@ -336,6 +342,24 @@ class Section
     public function setAssociatedFeatures($associatedFeatures)
     {
         $this->associatedFeatures = $associatedFeatures;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getStep()
+    {
+        return $this->step;
+    }
+
+    /**
+     * @param mixed $step
+     */
+    public function setStep(AbstractStep $step = null)
+    {
+        $this->step = $step;
+
+        return $this;
     }
 
     // ************************* Custom methods ***********************************

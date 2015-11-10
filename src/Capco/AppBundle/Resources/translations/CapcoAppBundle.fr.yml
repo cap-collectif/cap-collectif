@@ -39,6 +39,14 @@ error:
 
 # Homepage
 homepage:
+  blog:
+    title: Actualités
+  events:
+    title: Évènements
+  highlighted:
+    title: À la une
+  ideas:
+    title: Idées
   newsletter:
     title: Lettre d'information
     description: Inscrivez vous à la lettre d'information pour rester informé de l'actualité.
@@ -49,22 +57,16 @@ homepage:
     invalid: Veuillez entrer une adresse email valide.
     form:
       email: Adresse email
-    videos:
-      title: Vidéos
-    projects:
-      title: Projets participatifs
-    themes:
-      title: Thèmes
-    ideas:
-      title: Idées
-    blog:
-      title: Actualités
-    events:
-      title: Évènements
-    newsletter:
-      title: Lettre d'information
-    social_networks:
-      title: Restez à l'écoute
+  projects:
+    title: Projets participatifs
+  proposals:
+    title: Propositions
+  social_networks:
+    title: Restez à l'écoute
+  themes:
+    title: Thèmes
+  videos:
+    title: Vidéos
 
 # Page contact
 contact:
@@ -234,7 +236,7 @@ proposal:
   show:
     voted: Vous avez voté
     votes: "]-Inf, 1] %count% vote | ]1,Inf[ %count% votes"
-    comments: "]-Inf, 1] %count% commentaire | ]1,Inf[ %count% commentaires"
+    comments: "]-Inf, 1] commentaire | ]1,Inf[ commentaires"
     share: Partager
     report: Signaler
     edit: Modifier

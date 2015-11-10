@@ -11,11 +11,10 @@ const ProposalPreviewHeader = React.createClass({
 
   render() {
     const proposal = this.props.proposal;
-    const classes = classNames({});
 
     return (
-      <div className={classes}>
-        <UserAvatar user={proposal.author} style={{marginRight: 10}} className="pull-left" />
+      <div>
+        <UserAvatar user={proposal.author} className="pull-left proposal__avatar" />
         <div className="proposal__author">
           <UserLink user={proposal.author} />
           <p className="excerpt small">
