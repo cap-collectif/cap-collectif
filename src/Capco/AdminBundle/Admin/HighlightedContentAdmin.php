@@ -15,10 +15,10 @@ use Capco\AppBundle\Entity\HighlightedProject;
 
 class HighlightedContentAdmin extends Admin
 {
-    protected $datagridValues = [
+    protected $datagridValues = array(
         '_sort_order' => 'ASC',
         '_sort_by' => 'position',
-    ];
+    );
 
     /**
      * @param ListMapper $listMapper

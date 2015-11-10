@@ -14,7 +14,7 @@ const EditButton = React.createClass({
       author: null,
       hasWrapper: false,
       wrapperClassName: '',
-    }
+    };
   },
 
   isTheUserTheAuthor() {

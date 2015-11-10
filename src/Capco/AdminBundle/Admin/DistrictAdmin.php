@@ -10,10 +10,10 @@ use Sonata\AdminBundle\Show\ShowMapper;
 
 class DistrictAdmin extends Admin
 {
-    protected $datagridValues = [
+    protected $datagridValues = array(
         '_sort_order' => 'ASC',
-        '_sort_by' => 'name',
-    ];
+        '_sort_by' => 'createdAt',
+    );
 
     protected $formOptions = array(
         'cascade_validation' => true,

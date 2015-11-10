@@ -12,10 +12,10 @@ use Sonata\CoreBundle\Model\Metadata;
 
 class VideoAdmin extends Admin
 {
-    protected $datagridValues = [
-        '_sort_order' => 'ASC',
-        '_sort_by' => 'title',
-    ];
+    protected $datagridValues = array(
+        '_sort_order' => 'DESC',
+        '_sort_by' => 'createdAt',
+    );
 
     /**
      * @param DatagridMapper $datagridMapper

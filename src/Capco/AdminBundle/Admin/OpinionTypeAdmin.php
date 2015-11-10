@@ -11,11 +11,6 @@ use Capco\AppBundle\Entity\Opinion;
 
 class OpinionTypeAdmin extends Admin
 {
-    protected $datagridValues = [
-        '_sort_order' => 'ASC',
-        '_sort_by' => 'title',
-    ];
-
     public function getPersistentParameters()
     {
         $subject = $this->getSubject();

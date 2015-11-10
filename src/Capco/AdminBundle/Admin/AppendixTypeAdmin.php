@@ -14,10 +14,10 @@ class AppendixTypeAdmin extends Admin
         'cascade_validation' => true,
     );
 
-    protected $datagridValues = [
+    protected $datagridValues = array(
         '_sort_order' => 'ASC',
         '_sort_by' => 'title',
-    ];
+    );
 
     /**
      * @param DatagridMapper $datagridMapper

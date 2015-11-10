@@ -10,10 +10,10 @@ use Sonata\AdminBundle\Show\ShowMapper;
 
 class UserTypeAdmin extends Admin
 {
-    protected $datagridValues = [
+    protected $datagridValues = array(
         '_sort_order' => 'ASC',
         '_sort_by' => 'name',
-    ];
+    );
 
     /**
      * @param DatagridMapper $datagridMapper

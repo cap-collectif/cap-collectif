@@ -12,10 +12,10 @@ use Sonata\AdminBundle\Show\ShowMapper;
 
 class QuestionAdmin extends Admin
 {
-    protected $datagridValues = [
+    protected $datagridValues = array(
         '_sort_order' => 'ASC',
-        '_sort_by' => 'position',
-    ];
+        '_sort_by' => 'createdAt',
+    );
 
     protected $formOptions = array(
         'cascade_validation' => true,

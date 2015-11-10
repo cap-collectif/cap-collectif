@@ -33,10 +33,10 @@ class StepAdmin extends Admin
         );
     }
 
-    protected $datagridValues = [
+    protected $datagridValues = array(
         '_sort_order' => 'ASC',
         '_sort_by' => 'title',
-    ];
+    );
 
     protected $formOptions = array(
         'cascade_validation' => true,

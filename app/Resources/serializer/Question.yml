@@ -15,6 +15,7 @@ Capco\AppBundle\Entity\Question:
       serialized_name: questionType
       groups: [Questions, Proposals]
     helpText:
+      serialized_name: helpText
       expose: true
       type: string
       groups: [Questions]

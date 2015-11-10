@@ -4,8 +4,7 @@ import DeepLinkStateMixin from '../../../utils/DeepLinkStateMixin';
 import ProposalActions from '../../../actions/ProposalActions';
 import FlashMessages from '../../Utils/FlashMessages';
 import ArrayHelper from '../../../services/ArrayHelper';
-
-const Input = ReactBootstrap.Input;
+import Input from '../../Form/Input';
 
 const ProposalForm = React.createClass({
   propTypes: {
@@ -56,32 +55,15 @@ const ProposalForm = React.createClass({
     };
   },
 
-  getInitialFormAnswers() {
-    const custom = {};
-    this.props.form.questions.map((question) => {
-      custom['custom-' + question.id] = this.getProposalResponseForQuestion(question.id);
-    });
-    return custom;
-  },
-
-  getProposalResponseForQuestion(id) {
-    const index = ArrayHelper.getElementIndexFromArray(
-      this.props.proposal.responses,
-      {question: {id: id}},
-      'question',
-      'id'
-    );
-    if (index > -1) {
-      return this.props.proposal.responses[index].value;
-    }
-    return '';
-  },
-
   componentDidMount() {
     this.initializeCkeditor('body', 'form');
 
     this.props.form.questions.map((question) => {
-      this.initializeCkeditor('custom-' + question.id, 'custom');
+      const ref = 'custom-' + question.id;
+      this.initializeCkeditor(ref, 'custom');
+      this.formValidationRules[ref] = {
+        notBlank: {message: 'global.constraints.notBlank'},
+      };
     });
   },
 
@@ -127,6 +109,27 @@ const ProposalForm = React.createClass({
     }
   },
 
+  getInitialFormAnswers() {
+    const custom = {};
+    this.props.form.questions.map((question) => {
+      custom['custom-' + question.id] = this.getProposalResponseForQuestion(question.id);
+    });
+    return custom;
+  },
+
+  getProposalResponseForQuestion(id) {
+    const index = ArrayHelper.getElementIndexFromArray(
+      this.props.proposal.responses,
+      {question: {id: id}},
+      'question',
+      'id'
+    );
+    if (index > -1) {
+      return this.props.proposal.responses[index].value;
+    }
+    return '';
+  },
+
   formValidationRules: {
     theme: {
       minValue: {value: 0, message: 'proposal.constraints.theme'},
@@ -158,12 +161,11 @@ const ProposalForm = React.createClass({
 
         <Input
           type="text"
-          valueLink={this.linkState('form.title')}
           ref="title"
+          valueLink={this.linkState('form.title')}
           label={this.getIntlMessage('proposal.title') + '*'}
-          labelClassName="control-label h5"
           groupClassName={this.getGroupStyle('title')}
-          help={this.renderFormErrors('title')}
+          errors={this.renderFormErrors('title')}
           bsStyle={this.getFieldStyle('title')}
         />
 
@@ -172,9 +174,8 @@ const ProposalForm = React.createClass({
           ref="theme"
           valueLink={this.linkState('form.theme')}
           label={this.getIntlMessage('proposal.theme') + '*'}
-          labelClassName="control-label h5"
           groupClassName={this.getGroupStyle('theme')}
-          help={this.renderFormErrors('theme')}
+          errors={this.renderFormErrors('theme')}
           bsStyle={this.getFieldStyle('theme')}
         >
           <option value={-1} disabled>{this.getIntlMessage('proposal.select.theme')}</option>
@@ -194,9 +195,8 @@ const ProposalForm = React.createClass({
           ref="district"
           valueLink={this.linkState('form.district')}
           label={this.getIntlMessage('proposal.district') + '*'}
-          labelClassName="control-label h5"
           groupClassName={this.getGroupStyle('district')}
-          help={this.renderFormErrors('district')}
+          errors={this.renderFormErrors('district')}
           bsStyle={this.getFieldStyle('district')}
         >
           <option value={-1} disabled>{this.getIntlMessage('proposal.select.district')}</option>
@@ -213,24 +213,27 @@ const ProposalForm = React.createClass({
 
         <Input
           type="textarea"
-          valueLink={this.linkState('form.body')} // state is automatically updated by CkeditorMixin
           ref="body"
+          valueLink={this.linkState('form.body')} // state is automatically updated by CkeditorMixin
           label={this.getIntlMessage('proposal.body') + '*'}
-          labelClassName="control-label h5"
           groupClassName={this.getGroupStyle('body')}
-          help={this.renderFormErrors('body')}
+          errors={this.renderFormErrors('body')}
           bsStyle={this.getFieldStyle('body')}
         />
 
         {
           this.props.form.questions.map((question) => {
+            const ref = 'custom-' + question.id;
             return (
               <Input
                 type="textarea"
-                valueLink={this.linkState('custom.custom-' + question.id)} // state is automatically updated by CkeditorMixin
-                ref={'custom-' + question.id}
-                label={question.title + '*'}
-                labelClassName="control-label h5"
+                ref={ref}
+                valueLink={this.linkState('custom.' + ref)} // state is automatically updated by CkeditorMixin
+                label={question.title + ' *'}
+                help={question.helpText}
+                groupClassName={this.getGroupStyle(ref)}
+                errors={this.renderFormErrors(ref)}
+                bsStyle={this.getFieldStyle(ref)}
               />
             );
           })

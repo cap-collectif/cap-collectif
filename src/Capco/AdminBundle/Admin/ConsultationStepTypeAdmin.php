@@ -10,10 +10,10 @@ use Sonata\AdminBundle\Show\ShowMapper;
 
 class ConsultationStepTypeAdmin extends Admin
 {
-    protected $datagridValues = [
+    protected $datagridValues = array(
         '_sort_order' => 'ASC',
         '_sort_by' => 'title',
-    ];
+    );
 
     /**
      * @param DatagridMapper $datagridMapper

@@ -11,10 +11,10 @@ use Capco\AppBundle\Entity\FooterSocialNetwork;
 
 class FooterSocialNetworkAdmin extends Admin
 {
-    protected $datagridValues = [
+    protected $datagridValues = array(
         '_sort_order' => 'ASC',
         '_sort_by' => 'title',
-    ];
+    );
 
     /**
      * @param DatagridMapper $datagridMapper

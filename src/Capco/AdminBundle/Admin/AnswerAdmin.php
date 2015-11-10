@@ -12,11 +12,6 @@ class AnswerAdmin extends Admin
         'cascade_validation' => true,
     );
 
-    protected $datagridValues = [
-        '_sort_order' => 'ASC',
-        '_sort_by' => 'title',
-    ];
-
     /**
      * @param FormMapper $formMapper
      */

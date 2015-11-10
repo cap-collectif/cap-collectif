@@ -12,11 +12,6 @@ class ProjectAbstractStepAdmin extends Admin
         'cascade_validation' => true,
     ];
 
-    protected $datagridValues = [
-        '_sort_order' => 'ASC',
-        '_sort_by' => 'position',
-    ];
-
     protected $translationDomain = 'SonataAdminBundle';
 
     /**

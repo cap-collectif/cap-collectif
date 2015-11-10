@@ -16,7 +16,7 @@ const FormMixin = { // This will be easy to use as an higher-order Component
 
   validate(ref) {
     if (this.formValidationRules[ref]) {
-      const value = this.state.form[ref];
+      const value = this.state.custom && this.state.custom[ref] !== undefined ? this.state.custom[ref] : this.state.form[ref];
       const errors = (new Validator(value, this.formValidationRules[ref])).getErrors();
 
       const formErrors = this.state.errors;

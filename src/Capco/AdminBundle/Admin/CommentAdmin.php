@@ -13,10 +13,10 @@ use Sonata\AdminBundle\Show\ShowMapper;
 
 class CommentAdmin extends Admin
 {
-    protected $datagridValues = [
-        '_sort_order' => 'DESC',
+    protected $datagridValues = array(
+        '_sort_order' => 'ASC',
         '_sort_by' => 'updatedAt',
-    ];
+    );
 
     /**
      * @param DatagridMapper $datagridMapper
