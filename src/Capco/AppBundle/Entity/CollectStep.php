@@ -22,7 +22,7 @@ class CollectStep extends AbstractStep
     private $proposalForm = null;
 
     /**
-     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\Status", mappedBy="step", cascade={"persist"})
+     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\Status", mappedBy="step", cascade={"persist"}, orphanRemoval=true)
      * @ORM\OrderBy({"position" = "ASC"})
      **/
     private $statuses;
