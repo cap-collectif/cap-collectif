@@ -16,6 +16,7 @@
     "document": true,
     "classNames": true,
     "Modernizr": true,
+    "Quill": true,
     "moment": true,
   },
   "rules": {

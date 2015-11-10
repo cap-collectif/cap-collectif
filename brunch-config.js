@@ -73,6 +73,8 @@ exports.config = {
         'css/style.css' : [
           'bower_components/bootstrap/assets/stylesheets/bootstrap.scss',
           'bower_components/css-spinners/css/spinners.css',
+          'bower_components/quill/dist/quill.base.css',
+          'bower_components/quill/dist/quill.snow.css',
           'app/Resources/scss/style.scss'
         ],
         'css/jquery.minicolors.css' : ['bower_components/jquery-minicolors/jquery.minicolors.css'],
@@ -81,7 +83,6 @@ exports.config = {
     }
   },
   plugins: {
-    off: ['eslint-brunch'],
     babel: {
       stage: 0,
     },

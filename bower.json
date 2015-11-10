@@ -43,6 +43,13 @@
     "react": "0.13.3"
   },
   "overrides": {
+    "quill": {
+      "main": [
+        "dist/quill.js",
+        "dist/quill.base.css",
+        "dist/quill.snow.css"
+      ]
+    },
     "fancybox": {
       "main": "source/jquery.fancybox.pack.js"
     },

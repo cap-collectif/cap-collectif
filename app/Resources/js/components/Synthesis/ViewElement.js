@@ -38,7 +38,7 @@ const ViewElement = React.createClass({
           scoreSign={score < 0 ? '-' : '+'}
           score={Math.abs(score)}
           percentage={percentage}
-          />
+        />
       </Tooltip>
     );
   },

@@ -49,15 +49,27 @@ const OpinionArgumentButtons = React.createClass({
   renderVoteButton() {
     if (this.state.hasVoted) {
       return (
-        <Button aria-labelledby={'arg-' + this.props.argument.id} disabled={!this.props.argument.isContribuable} className="argument__btn--vote" bsStyle="danger" bsSize="xsmall"
-                onClick={!LoginStore.isLoggedIn() ? null : this.deleteVote.bind(null, this)}>
+        <Button
+          aria-labelledby={'arg-' + this.props.argument.id}
+          disabled={!this.props.argument.isContribuable}
+          className="argument__btn--vote"
+          bsStyle="danger"
+          bsSize="xsmall"
+          onClick={!LoginStore.isLoggedIn() ? null : this.deleteVote.bind(null, this)}
+        >
           { this.getIntlMessage('vote.cancel') }
         </Button>
       );
     }
     return (
-      <Button aria-labelledby={'arg-' + this.props.argument.id} disabled={!this.props.argument.isContribuable} bsStyle="success" bsSize="xsmall" className="argument__btn--vote btn--outline"
-              onClick={!LoginStore.isLoggedIn() ? null : this.vote.bind(null, this)}>
+      <Button
+        aria-labelledby={'arg-' + this.props.argument.id}
+        disabled={!this.props.argument.isContribuable}
+        bsStyle="success"
+        bsSize="xsmall"
+        className="argument__btn--vote btn--outline"
+        onClick={!LoginStore.isLoggedIn() ? null : this.vote.bind(null, this)}
+      >
         <i className="cap-hand-like-2"></i> { this.getIntlMessage('vote.ok') }
       </Button>
     );
@@ -66,7 +78,12 @@ const OpinionArgumentButtons = React.createClass({
   renderEditButton() {
     if (this.props.argument.isContribuable && this.isTheUserTheAuthor()) {
       return (
-        <Button aria-labelledby={'arg-' + this.props.argument.id} href={this.props.argument._links.edit} bsSize="xsmall" className="argument__btn--edit btn-dark-gray btn--outline">
+        <Button
+          aria-labelledby={'arg-' + this.props.argument.id}
+          href={this.props.argument._links.edit}
+          bsSize="xsmall"
+          className="argument__btn--edit btn-dark-gray btn--outline"
+        >
           <i className="cap cap-pencil-1"></i>
           {this.getIntlMessage('global.edit')}
         </Button>
@@ -90,7 +107,7 @@ const OpinionArgumentButtons = React.createClass({
         <ShareButtonDropdown
           url={this.props.argument._links.show}
           className="btn-xs btn--outline"
-         />
+        />
       </div>
     );
   },
