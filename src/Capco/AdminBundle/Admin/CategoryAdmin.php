@@ -10,6 +10,7 @@ use Sonata\AdminBundle\Show\ShowMapper;
 
 class CategoryAdmin extends Admin
 {
+
     protected $datagridValues = [
         '_sort_order' => 'ASC',
         '_sort_by' => 'title',
