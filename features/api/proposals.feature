@@ -138,5 +138,5 @@ Feature: Proposal Restful Api
   @database
   Scenario: logged in API client wants to remove a proposal
     Given I am logged in to api as user
-    When I send a DELETE request to "api/proposal_forms/1/proposals/2"
+    When I send a DELETE request to "api/proposal_forms/1/proposals/3"
     Then the JSON response status code should be 204

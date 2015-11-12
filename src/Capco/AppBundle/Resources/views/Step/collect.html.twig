@@ -51,7 +51,7 @@
             {% endif %}
 
             <h2 class="h2">
-                {{ proposalsCount }} propositions
+                {{ 'proposal.index.count' |transchoice(proposalsCount, {'%count%': proposalsCount}, 'CapcoAppBundle') }}
                 <span
                     class="pull-right"
                     id="render-collect-step-proposal-create"
