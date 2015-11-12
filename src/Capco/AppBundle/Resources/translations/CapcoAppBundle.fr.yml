@@ -241,7 +241,6 @@ proposal:
     report: Signaler
     edit: Modifier
     in_theme: dans
-    no_status: Aucun statut
     on_date: le
     trashed:
       label: Dans la corbeille
@@ -852,7 +851,6 @@ user:
       comments: Commentaires
       votes: Votes
       projects: Projets participatifs
-      proposals: Propositions
 
 #SonataUser errors
 "Bad credentials.": Email ou mot de passe incorrect

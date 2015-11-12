@@ -31,10 +31,6 @@ class RecalculateCountersCommand extends ContainerAwareCommand
             (select count(i.id) from CapcoAppBundle:Idea i where i.Author = u AND i.isEnabled = 1 group by i.Author)');
         $query->execute();
 
-        $query = $em->createQuery('update CapcoUserBundle:User u set u.proposalsCount =
-            (select count(p.id) from CapcoAppBundle:Proposal p where p.author = u AND p.enabled = 1 group by p.author)');
-        $query->execute();
-
         $query = $em->createQuery('update CapcoUserBundle:User u set u.opinionsCount =
             (select count(o.id) from CapcoAppBundle:Opinion o INNER JOIN CapcoAppBundle:ConsultationStep cs WITH o.step = cs where o.Author = u AND o.isEnabled = 1 AND cs.isEnabled = 1 group by o.Author)');
         $query->execute();
