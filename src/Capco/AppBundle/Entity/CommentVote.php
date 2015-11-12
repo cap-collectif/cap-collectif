@@ -16,7 +16,7 @@ class CommentVote extends AbstractVote
      * @var
      *
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Comment", inversedBy="votes", cascade={"persist"})
-     * @ORM\JoinColumn(name="comment_id", referencedColumnName="id")
+     * @ORM\JoinColumn(name="comment_id", referencedColumnName="id", onDelete="CASCADE")
      */
     private $comment;
 

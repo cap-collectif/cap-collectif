@@ -8,7 +8,6 @@ use Sonata\AdminBundle\Route\RouteCollection;
 
 class OpinionAppendixAdmin extends Admin
 {
-
     protected $datagridValues = [
         '_sort_order' => 'ASC',
         '_sort_by' => 'type',
