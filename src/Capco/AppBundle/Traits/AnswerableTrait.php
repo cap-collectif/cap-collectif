@@ -8,8 +8,8 @@ use Capco\AppBundle\Entity\Answer;
 trait AnswerableTrait
 {
     /**
-     * @ORM\OneToOne(targetEntity="Answer", cascade={"persist", "remove"}, orphanRemoval=true)
-     * @ORM\JoinColumn(name="answer_id", referencedColumnName="id", nullable=true, onDelete="SET NULL")
+     * @ORM\OneToOne(targetEntity="Answer", cascade={"persist", "remove"})
+     * @ORM\JoinColumn(name="answer_id", referencedColumnName="id", nullable=true)
      */
     protected $answer;
 

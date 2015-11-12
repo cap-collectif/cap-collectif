@@ -167,6 +167,11 @@ class User extends BaseUser implements EncoderAwareInterface, SynthesisUserInter
     /**
      * @var int
      */
+    protected $proposalsCount = 0;
+
+    /**
+     * @var int
+     */
     protected $opinionsCount = 0;
 
     /**
@@ -692,6 +697,24 @@ class User extends BaseUser implements EncoderAwareInterface, SynthesisUserInter
     }
 
     /**
+     * @return int
+     */
+    public function getProposalsCount()
+    {
+        return $this->proposalsCount;
+    }
+
+    /**
+     * @param int $proposalsCount
+     */
+    public function setProposalsCount($proposalsCount)
+    {
+        $this->proposalsCount = $proposalsCount;
+
+        return $this;
+    }
+
+    /**
      * Sets the value of argumentsCount.
      *
      * @param int $argumentsCount the arguments count
@@ -946,7 +969,7 @@ class User extends BaseUser implements EncoderAwareInterface, SynthesisUserInter
 
     public function getContributionsCount()
     {
-        return $this->sourcesCount + $this->ideasCount + $this->argumentsCount + $this->opinionsCount + $this->opinionVersionsCount + $this->getCommentsCount();
+        return $this->sourcesCount + $this->ideasCount + $this->argumentsCount + $this->opinionsCount + $this->opinionVersionsCount + $this->getCommentsCount() + $this->getProposalsCount();
     }
 
     public function getVotesCount()

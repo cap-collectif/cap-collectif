@@ -8,6 +8,7 @@ use Capco\AppBundle\Entity\Theme;
 use Capco\AppBundle\Entity\Status;
 use Capco\AppBundle\Entity\District;
 use Capco\UserBundle\Entity\UserType;
+use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 
@@ -16,11 +17,19 @@ use Doctrine\ORM\Tools\Pagination\Paginator;
  */
 class ProposalRepository extends EntityRepository
 {
-    public function getByProposalForm(ProposalForm $proposalForm)
+    public function getByUser(User $user)
     {
-        return $this->getIsEnabledQueryBuilder()
-            ->andWhere('proposal.proposalForm = :proposalForm')
-            ->setParameter('proposalForm', $proposalForm);
+        $qb = $this->getIsEnabledQueryBuilder()
+            ->addSelect('district', 'status', 'form', 'step')
+            ->leftJoin('proposal.district', 'district')
+            ->leftJoin('proposal.status', 'status')
+            ->leftJoin('proposal.proposalForm', 'form')
+            ->leftJoin('form.step', 'step')
+            ->andWhere('proposal.author = :author')
+            ->setParameter('author', $user)
+        ;
+
+        return $qb->getQuery()->getResult();
     }
 
     public function getEnabledByProposalForm(ProposalForm $proposalForm, $first = 0, $offset = 100, $order = 'last', Theme $theme = null, Status $status = null, District $district = null, UserType $type = null)

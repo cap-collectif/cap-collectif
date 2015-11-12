@@ -33,6 +33,7 @@ class ProfileController extends BaseController
         $versions = $doctrine->getRepository('CapcoAppBundle:OpinionVersion')->getByUser($user);
         $arguments = $doctrine->getRepository('CapcoAppBundle:Argument')->getByUser($user);
         $ideas = $doctrine->getRepository('CapcoAppBundle:Idea')->getByUser($user);
+        $proposals = $doctrine->getRepository('CapcoAppBundle:Proposal')->getByUser($user);
         $sources = $doctrine->getRepository('CapcoAppBundle:Source')->getByUser($user);
         $comments = $doctrine->getRepository('CapcoAppBundle:Comment')->getByUser($user);
         $votes = $doctrine->getRepository('CapcoAppBundle:AbstractVote')->getByUser($user);
@@ -44,24 +45,12 @@ class ProfileController extends BaseController
             'versions' => $versions,
             'arguments' => $arguments,
             'ideas' => $ideas,
+            'proposals' => $proposals,
             'sources' => $sources,
             'comments' => $comments,
             'votes' => $votes,
             'argumentsLabels' => Argument::$argumentTypesLabels,
         ];
-    }
-
-    /**
-     * Deprecated route, in order to harmonise real user profile stuff urls.
-     *
-     * @Route("/user/{slug}", name="capco_user_profile_show_all_old")
-     */
-    public function showUserOldAction(User $user)
-    {
-        return new RedirectResponse(
-            $this->generateUrl('capco_user_profile_show_all', ['slug' => $user->getSlug()]),
-            Response::HTTP_MOVED_PERMANENTLY
-        );
     }
 
     /**
@@ -75,6 +64,7 @@ class ProfileController extends BaseController
         $versions = $doctrine->getRepository('CapcoAppBundle:OpinionVersion')->getByUser($user);
         $arguments = $doctrine->getRepository('CapcoAppBundle:Argument')->getByUser($user);
         $ideas = $doctrine->getRepository('CapcoAppBundle:Idea')->getByUser($user);
+        $proposals = $doctrine->getRepository('CapcoAppBundle:Proposal')->getByUser($user);
         $sources = $doctrine->getRepository('CapcoAppBundle:Source')->getByUser($user);
         $comments = $doctrine->getRepository('CapcoAppBundle:Comment')->getByUser($user);
         $votes = $doctrine->getRepository('CapcoAppBundle:AbstractVote')->getByUser($user);
@@ -85,6 +75,7 @@ class ProfileController extends BaseController
             'versions' => $versions,
             'arguments' => $arguments,
             'ideas' => $ideas,
+            'proposals' => $proposals,
             'sources' => $sources,
             'comments' => $comments,
             'votes' => $votes,
@@ -139,6 +130,24 @@ class ProfileController extends BaseController
         return [
             'user' => $user,
             'versions' => $versions,
+        ];
+    }
+
+    /**
+     * @Route("/{slug}/proposals", name="capco_user_profile_show_proposals")
+     * @Template("CapcoUserBundle:Profile:showUserProposals.html.twig")
+     *
+     * @param User $user
+     *
+     * @return array
+     */
+    public function showProposalsAction(User $user)
+    {
+        $proposals = $this->getDoctrine()->getRepository('CapcoAppBundle:Proposal')->getByUser($user);
+
+        return [
+            'user' => $user,
+            'proposals' => $proposals,
         ];
     }
 
@@ -210,6 +219,19 @@ class ProfileController extends BaseController
         return array(
             'user' => $user,
             'votes' => $votes,
+        );
+    }
+
+    /**
+     * Deprecated route, in order to harmonise real user profile stuff urls.
+     *
+     * @Route("/user/{slug}", name="capco_user_profile_show_all_old")
+     */
+    public function showUserOldAction(User $user)
+    {
+        return new RedirectResponse(
+            $this->generateUrl('capco_user_profile_show_all', ['slug' => $user->getSlug()]),
+            Response::HTTP_MOVED_PERMANENTLY
         );
     }
 }

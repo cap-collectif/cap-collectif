@@ -45,6 +45,11 @@
         {% include '@CapcoUser/Profile/sources.html.twig' %}
     </div>
 
+    <div class="container container--custom">
+        <h2>{{ 'user.profile.show.proposals' | trans({}, 'CapcoAppBundle') }}</h2>
+        {% include '@CapcoUser/Profile/proposals.html.twig' %}
+    </div>
+
     {% if is_feature_enabled('ideas') %}
         <div class="container container--custom">
             <h2>{{ 'user.profile.show.ideas' | trans({}, 'CapcoAppBundle') }}</h2>

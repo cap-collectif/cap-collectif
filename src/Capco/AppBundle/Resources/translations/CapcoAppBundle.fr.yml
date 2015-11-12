@@ -241,6 +241,7 @@ proposal:
     report: Signaler
     edit: Modifier
     in_theme: dans
+    no_status: Aucun statut
     on_date: le
     trashed:
       label: Dans la corbeille
@@ -832,25 +833,27 @@ user:
       no_user_type: Sélectionnez une valeur
       user_type: Type de profil
     show:
-      jumbotron: Compte
-      title: Profil de %name%
-      since: Inscrit depuis le
-      gplus: Google+
-      facebook: Facebook
-      twitter: Twitter
       all: Contributions
+      arguments: Arguments
+      comments: Commentaires
+      facebook: Facebook
+      gplus: Google+
+      ideas: Idées
+      jumbotron: Compte
+      no_ideas: Il n'y a pas d'idées.
+      no_opinions: Il n'y a pas de propositions.
+      no_opinions_versions: Il n'y a pas de modifications.
+      no_projects: Il n'y a pas de projets participatifs.
+      no_proposals: Il n'y a pas de projets
       opinions: Propositions
       opinions_versions: Modifications
-      no_opinions: Il n'y a pas de propositions.
-      no_projects: Il n'y a pas de projets participatifs.
-      no_opinions_versions: Il n'y a pas de modifications.
-      ideas: Idées
-      no_ideas: Il n'y a pas d'idées.
-      arguments: Arguments
-      sources: Sources
-      comments: Commentaires
-      votes: Votes
       projects: Projets participatifs
+      proposals: Projets
+      since: Inscrit depuis le
+      sources: Sources
+      title: Profil de %name%
+      twitter: Twitter
+      votes: Votes
 
 #SonataUser errors
 "Bad credentials.": Email ou mot de passe incorrect

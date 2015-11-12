@@ -73,6 +73,18 @@
                         <p class="profile__value__number">{{ user.argumentsCount }}</p>
                     </a>
                 </li>
+                <li class="profile__value {% if app.request.attributes.get('_route') == 'capco_user_profile_show_sources' %}active{% endif %}">
+                    <a href="{{ path('capco_user_profile_show_sources', {'slug': user.slug}) }}">
+                        <h2 class="h5 excerpt  profile__value__label">{{ 'user.profile.show.sources'|trans({}, 'CapcoAppBundle') }}</h2>
+                        <p class="profile__value__number">{{ user.sourcesCount }}</p>
+                    </a>
+                </li>
+                <li class="profile__value {% if app.request.attributes.get('_route') == 'capco_user_profile_show_proposals' %}active{% endif %}">
+                    <a href="{{ path('capco_user_profile_show_proposals', {'slug': user.slug}) }}">
+                        <h2 class="h5 excerpt  profile__value__label">{{ 'user.profile.show.proposals'|trans({}, 'CapcoAppBundle') }}</h2>
+                        <p class="profile__value__number">{{ user.proposalsCount }}</p>
+                    </a>
+                </li>
                 {% if is_feature_enabled('ideas') %}
                     <li class="profile__value {% if app.request.attributes.get('_route') == 'capco_user_profile_show_ideas' %}active{% endif %}">
                         <a href="{{ path('capco_user_profile_show_ideas', {'slug': user.slug}) }}">
@@ -81,12 +93,6 @@
                         </a>
                     </li>
                 {% endif %}
-                <li class="profile__value {% if app.request.attributes.get('_route') == 'capco_user_profile_show_sources' %}active{% endif %}">
-                    <a href="{{ path('capco_user_profile_show_sources', {'slug': user.slug}) }}">
-                        <h2 class="h5 excerpt  profile__value__label">{{ 'user.profile.show.sources'|trans({}, 'CapcoAppBundle') }}</h2>
-                        <p class="profile__value__number">{{ user.sourcesCount }}</p>
-                    </a>
-                </li>
                 {% if is_feature_enabled('ideas') or is_feature_enabled('calendar') or is_feature_enabled('blog') %}
                 <li class="profile__value {% if app.request.attributes.get('_route') == 'capco_user_profile_show_comments' %}active{% endif %}">
                     <a href="{{ path('capco_user_profile_show_comments', {'slug': user.slug}) }}">
