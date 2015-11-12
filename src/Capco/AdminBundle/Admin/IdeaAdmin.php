@@ -28,7 +28,7 @@ class IdeaAdmin extends Admin
         ;
 
         if ($this->getConfigurationPool()->getContainer()->get('capco.toggle.manager')->isActive('themes')) {
-            $datagridMapper->add('Theme', null, array(
+            $datagridMapper->add('theme', null, array(
                 'label' => 'admin.fields.idea.theme',
             ));
         }
@@ -69,7 +69,7 @@ class IdeaAdmin extends Admin
         ;
 
         if ($this->getConfigurationPool()->getContainer()->get('capco.toggle.manager')->isActive('themes')) {
-            $listMapper->add('Theme', null, array(
+            $listMapper->add('theme', null, array(
                 'label' => 'admin.fields.idea.theme',
             ));
         }
@@ -133,7 +133,7 @@ class IdeaAdmin extends Admin
         ;
 
         if ($this->getConfigurationPool()->getContainer()->get('capco.toggle.manager')->isActive('themes')) {
-            $formMapper->add('Theme', 'sonata_type_model', array(
+            $formMapper->add('theme', 'sonata_type_model', array(
                 'label' => 'admin.fields.idea.theme',
                 'required' => true,
             ));
@@ -188,7 +188,7 @@ class IdeaAdmin extends Admin
             ));
 
         if ($this->getConfigurationPool()->getContainer()->get('capco.toggle.manager')->isActive('themes')) {
-            $showMapper->add('Theme', null, array(
+            $showMapper->add('theme', null, array(
                 'label' => 'admin.fields.idea.theme',
             ));
         }

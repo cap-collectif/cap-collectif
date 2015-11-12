@@ -50,7 +50,7 @@ class Question
      *
      * @Assert\NotNull()
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\ProposalForm", inversedBy="questions", cascade={"persist", "remove"})
-     * @ORM\JoinColumn(name="proposal_form_id", referencedColumnName="id", nullable=false, onDelete="CASCADE")
+     * @ORM\JoinColumn(name="proposal_form_id", referencedColumnName="id", nullable=false)
      */
     private $proposalForm;
 
