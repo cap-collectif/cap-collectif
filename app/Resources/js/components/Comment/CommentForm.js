@@ -2,8 +2,8 @@ import UserAvatar from '../User/UserAvatar';
 import LoginStore from '../../stores/LoginStore';
 import FlashMessages from '../Utils/FlashMessages';
 import ValidatorMixin from '../../utils/ValidatorMixin';
+import Input from '../Form/Input';
 
-const Input = ReactBootstrap.Input;
 const Row = ReactBootstrap.Row;
 const Col = ReactBootstrap.Col;
 const Button = ReactBootstrap.Button;
@@ -130,69 +130,65 @@ const CommentForm = React.createClass({
   renderAnonymous() {
     if (!LoginStore.isLoggedIn()) {
       return (
-          <div>
-              <Row>
-                  <Col sm={12} md={6}>
-                      <p>{ this.getIntlMessage('comment.with_my_account') }</p>
-                      <a className="btn btn-primary" href={window.location.protocol + '//' + window.location.host + '/login'} >
-                         { this.getIntlMessage('global.login') }
-                      </a>
-                      <h5>{ this.getIntlMessage('comment.why_create_account') }</h5>
-                      <ul className="excerpt small">
-                          <li>
-                              { this.getIntlMessage('comment.create_account_reason_1') }
-                          </li>
-                          <li>
-                              { this.getIntlMessage('comment.create_account_reason_2') }
-                          </li>
-                          <li>
-                              { this.getIntlMessage('comment.create_account_reason_3') }
-                          </li>
-                      </ul>
-                  </Col>
-                  <Col sm={12} md={6}>
-                      <p>{ this.getIntlMessage('comment.without_account') }</p>
-                    <div className={'form-group ' + this.getGroupStyle('authorName')}>
-                          <label htmlFor="authorName" className="control-label h5">
-                              { this.getIntlMessage('global.fullname') }
-                          </label>
-                          <span className="help-block">
-                            { this.getIntlMessage('comment.public_name') }
-                          </span>
-                          <Input valueLink={this.linkState('authorName')}
-                                 type="text" ref="authorName" id="authorName"
-                                 name="authorName" className="form-control"
-                                 bsStyle={this.getFieldStyle('authorName')}
-                          />
-                          {this.renderFormErrors('authorName')}
-                      </div>
-                    <div className={'form-group ' + this.getGroupStyle('authorEmail')}>
-                          <label htmlFor="authorEmail" className="control-label h5">
-                              { this.getIntlMessage('global.hidden_email') }
-                          </label>
-                          <span className="help-block">
-                            { this.getIntlMessage('comment.email_info') }
-                          </span>
-                          <Input valueLink={this.linkState('authorEmail')}
-                                 type="email" ref="authorEmail" id="authorEmail"
-                                 name="authorEmail" className="form-control"
-                                 bsStyle={this.getFieldStyle('authorEmail')}
-                          />
-                          {this.renderFormErrors('authorEmail')}
-                      </div>
-                      <Button ref="anonymousComment"
-                              disabled={this.state.isSubmitting}
-                              onClick={this.state.isSubmitting ? null : this.create.bind(null, this)}
-                              bsStyle="primary"
-                        >
-                        {this.state.isSubmitting
-                          ? this.getIntlMessage('global.loading')
-                          : this.getIntlMessage('comment.submit')
-                        }
-                      </Button>
-                  </Col>
-              </Row>
-          </div>
+        <div>
+          <Row>
+            <Col sm={12} md={6}>
+              <p>{ this.getIntlMessage('comment.with_my_account') }</p>
+              <a className="btn btn-primary" href={window.location.protocol + '//' + window.location.host + '/login'} >
+                { this.getIntlMessage('global.login') }
+              </a>
+              <h5>{ this.getIntlMessage('comment.why_create_account') }</h5>
+              <ul className="excerpt small">
+                <li>
+                  { this.getIntlMessage('comment.create_account_reason_1') }
+                </li>
+                <li>
+                  { this.getIntlMessage('comment.create_account_reason_2') }
+                </li>
+                <li>
+                  { this.getIntlMessage('comment.create_account_reason_3') }
+                </li>
+              </ul>
+            </Col>
+              <Col sm={12} md={6}>
+                <p>{ this.getIntlMessage('comment.without_account') }</p>
+                <Input
+                  type="text"
+                  ref="authorName"
+                  id="authorName"
+                  name="authorName"
+                  valueLink={this.linkState('authorName')}
+                  label={ this.getIntlMessage('global.fullname') }
+                  help={ this.getIntlMessage('comment.public_name') }
+                  groupClassName={this.getGroupStyle('authorName')}
+                  errors={this.renderFormErrors('authorName')}
+                  bsStyle={this.getFieldStyle('authorName')}
+                />
+                <Input
+                  type="email"
+                  ref="authorEmail"
+                  id="authorEmail"
+                  name="authorEmail"
+                  valueLink={this.linkState('authorEmail')}
+                  label={ this.getIntlMessage('global.hidden_email') }
+                  help={ this.getIntlMessage('comment.email_info') }
+                  groupClassName={this.getGroupStyle('authorEmail')}
+                  errors={this.renderFormErrors('authorEmail')}
+                  bsStyle={this.getFieldStyle('authorEmail')}
+                />
+                <Button ref="anonymousComment"
+                  disabled={this.state.isSubmitting}
+                  onClick={this.state.isSubmitting ? null : this.create.bind(null, this)}
+                  bsStyle="primary"
+                >
+                  {this.state.isSubmitting
+                    ? this.getIntlMessage('global.loading')
+                    : this.getIntlMessage('comment.submit')
+                  }
+                </Button>
+              </Col>
+          </Row>
+        </div>
       );
     }
   },
@@ -224,17 +220,18 @@ const CommentForm = React.createClass({
         <UserAvatar user={LoginStore.user} className="pull-left" />
         <div className="opinion__data" ref="commentBlock" onBlur={this.expand.bind(this, false)}>
           <form ref="form">
-            <div className={'form-group ' + this.getGroupStyle('body')}>
-              <Input valueLink={this.linkState('body')}
-                type="textarea"
-                name="body"
-                onFocus={this.expand.bind(this, true)}
-                placeholder={this.getIntlMessage('comment.write')}
-                ref="body" rows="2" className="form-control"
-                bsStyle={this.getFieldStyle('body')}
-              />
-              {this.renderFormErrors('body')}
-            </div>
+            <Input
+              type="textarea"
+              name="body"
+              ref="body"
+              valueLink={this.linkState('body')}
+              rows="2"
+              onFocus={this.expand.bind(this, true)}
+              placeholder={this.getIntlMessage('comment.write')}
+              groupClassName={this.getGroupStyle('body')}
+              errors={this.renderFormErrors('body')}
+              bsStyle={this.getFieldStyle('body')}
+            />
             { this.renderCommentButton() }
           </form>
         </div>

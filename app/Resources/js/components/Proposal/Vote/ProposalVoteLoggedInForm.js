@@ -2,8 +2,7 @@ import FormMixin from '../../../utils/FormMixin';
 import DeepLinkStateMixin from '../../../utils/DeepLinkStateMixin';
 import ProposalActions from '../../../actions/ProposalActions';
 import FlashMessages from '../../Utils/FlashMessages';
-
-const Input = ReactBootstrap.Input;
+import Input from '../../Form/Input';
 
 const ProposalVoteLoggedInForm = React.createClass({
   propTypes: {
@@ -71,9 +70,8 @@ const ProposalVoteLoggedInForm = React.createClass({
           valueLink={'form.body'}
           ref="body"
           label={this.getIntlMessage('proposal.body')}
-          labelClassName="control-label h5"
           groupClassName={this.getGroupStyle('body')}
-          help={this.renderFormErrors('body')}
+          errors={this.renderFormErrors('body')}
           bsStyle={this.getFieldStyle('body')}
         />
 
@@ -82,9 +80,8 @@ const ProposalVoteLoggedInForm = React.createClass({
           valueLink={'form.private'}
           ref="private"
           label={this.getIntlMessage('proposal.private')}
-          labelClassName="control-label h5"
           groupClassName={this.getGroupStyle('private')}
-          help={this.renderFormErrors('private')}
+          errors={this.renderFormErrors('private')}
           bsStyle={this.getFieldStyle('private')}
         />
 

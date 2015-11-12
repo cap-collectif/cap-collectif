@@ -2,8 +2,7 @@ import FormMixin from '../../../utils/FormMixin';
 import DeepLinkStateMixin from '../../../utils/DeepLinkStateMixin';
 import ProposalActions from '../../../actions/ProposalActions';
 import FlashMessages from '../../Utils/FlashMessages';
-
-const Input = ReactBootstrap.Input;
+import Input from '../../Form/Input';
 
 const ProposalVoteAnonymousForm = React.createClass({
   propTypes: {
@@ -83,9 +82,8 @@ const ProposalVoteAnonymousForm = React.createClass({
           valueLink={this.linkState('form.name')}
           ref="name"
           label={this.getIntlMessage('proposal.name')}
-          labelClassName="control-label h5"
           groupClassName={this.getGroupStyle('name')}
-          help={this.renderFormErrors('name')}
+          errors={this.renderFormErrors('name')}
           bsStyle={this.getFieldStyle('name')}
         />
 
@@ -94,9 +92,8 @@ const ProposalVoteAnonymousForm = React.createClass({
           valueLink={this.linkState('form.email')}
           ref="email"
           label={this.getIntlMessage('proposal.email')}
-          labelClassName="control-label h5"
           groupClassName={this.getGroupStyle('email')}
-          help={this.renderFormErrors('email')}
+          errors={this.renderFormErrors('email')}
           bsStyle={this.getFieldStyle('email')}
         />
 
@@ -105,9 +102,8 @@ const ProposalVoteAnonymousForm = React.createClass({
           valueLink={'form.body'}
           ref="body"
           label={this.getIntlMessage('proposal.body')}
-          labelClassName="control-label h5"
           groupClassName={this.getGroupStyle('body')}
-          help={this.renderFormErrors('body')}
+          errors={this.renderFormErrors('body')}
           bsStyle={this.getFieldStyle('body')}
         />
 
@@ -116,9 +112,8 @@ const ProposalVoteAnonymousForm = React.createClass({
           valueLink={'form.private'}
           ref="private"
           label={this.getIntlMessage('proposal.private')}
-          labelClassName="control-label h5"
           groupClassName={this.getGroupStyle('private')}
-          help={this.renderFormErrors('private')}
+          errors={this.renderFormErrors('private')}
           bsStyle={this.getFieldStyle('private')}
         />
 

@@ -3,9 +3,9 @@ import ValidatorMixin from '../../utils/ValidatorMixin';
 import OpinionActions from '../../actions/OpinionActions';
 import LoginOverlay from '../Utils/LoginOverlay';
 import FlashMessages from '../Utils/FlashMessages';
+import Input from '../Form/Input';
 
 const Button = ReactBootstrap.Button;
-const Input = ReactBootstrap.Input;
 const Modal = ReactBootstrap.Modal;
 
 const OpinionSourceForm = React.createClass({
@@ -139,67 +139,55 @@ const OpinionSourceForm = React.createClass({
               </p>
             </div>
             <form id="source-form" ref="form">
-              <div className={'form-group ' + this.getGroupStyle('title')}>
-                <label htmlFor="sourceTitle" className="control-label h5">
-                  {this.getIntlMessage('source.title')}
-                </label>
-                <Input
-                  ref="title"
-                  type="text"
-                  name="sourceTitle"
-                  bsStyle={this.getFieldStyle('title')}
-                  valueLink={this.linkState('title')}
-                />
-                {this.renderFormErrors('title')}
-              </div>
-              <div className={'form-group ' + this.getGroupStyle('category')}>
-                <label htmlFor="sourceCategory" className="control-label h5">
-                  {this.getIntlMessage('source.type')}
-                </label>
-                <Input
-                  ref="category"
-                  type="select"
-                  name="sourceCategory"
-                  bsStyle={this.getFieldStyle('category')}
-                  valueLink={this.linkState('category')}
-                >
-                  <option value="" disabled selected>{this.getIntlMessage('global.select')}</option>
-                  {
-                    this.props.categories.map((category) => {
-                      return <option key={category.id} value={category.id}>{category.title}</option>;
-                    })
-                  }
-                </Input>
-                {this.renderFormErrors('category')}
-              </div>
-              <div className={'form-group ' + this.getGroupStyle('link')}>
-                <label htmlFor="sourceLink" className="control-label h5">
-                  {this.getIntlMessage('source.link')}
-                </label>
-                <Input
-                  ref="link"
-                  type="text"
-                  name="sourceLink"
-                  bsStyle={this.getFieldStyle('link')}
-                  valueLink={this.linkState('link')}
-                  placeholder="http://"
-                />
-                {this.renderFormErrors('link')}
-              </div>
-              <div className={'form-group ' + this.getGroupStyle('body')}>
-                <label htmlFor="sourceBody" className="control-label h5">
-                  {this.getIntlMessage('source.body')}
-                </label>
-                <Input
-                  ref="body"
-                  type="textarea"
-                  name="sourceBody"
-                  rows="10" cols="80"
-                  bsStyle={this.getFieldStyle('body')}
-                  valueLink={this.linkState('body')}
-                />
-                {this.renderFormErrors('body')}
-              </div>
+              <Input
+                ref="title"
+                type="text"
+                name="sourceTitle"
+                bsStyle={this.getFieldStyle('title')}
+                groupClassName={this.getGroupStyle('title')}
+                valueLink={this.linkState('title')}
+                label={this.getIntlMessage('source.title')}
+                errors={this.renderFormErrors('title')}
+              />
+              <Input
+                ref="category"
+                type="select"
+                name="sourceCategory"
+                label={this.getIntlMessage('source.type')}
+                bsStyle={this.getFieldStyle('category')}
+                groupClassName={this.getGroupStyle('category')}
+                valueLink={this.linkState('category')}
+                errors={this.renderFormErrors('category')}
+              >
+                <option value="" disabled selected>{this.getIntlMessage('global.select')}</option>
+                {
+                  this.props.categories.map((category) => {
+                    return <option key={category.id} value={category.id}>{category.title}</option>;
+                  })
+                }
+              </Input>
+              <Input
+                ref="link"
+                type="text"
+                name="sourceLink"
+                label={this.getIntlMessage('source.link')}
+                bsStyle={this.getFieldStyle('link')}
+                groupClassName={this.getGroupStyle('link')}
+                valueLink={this.linkState('link')}
+                errors={this.renderFormErrors('link')}
+                placeholder="http://"
+              />
+              <Input
+                ref="body"
+                type="textarea"
+                name="sourceBody"
+                rows="10" cols="80"
+                label={this.getIntlMessage('source.body')}
+                groupClassName={this.getGroupStyle('body')}
+                bsStyle={this.getFieldStyle('body')}
+                valueLink={this.linkState('body')}
+                errors={this.renderFormErrors('body')}
+              />
             </form>
           </Modal.Body>
           <Modal.Footer>

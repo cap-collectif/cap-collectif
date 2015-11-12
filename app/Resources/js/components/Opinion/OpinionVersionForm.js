@@ -4,10 +4,10 @@ import OpinionActions from '../../actions/OpinionActions';
 import LoginOverlay from '../Utils/LoginOverlay';
 import CkeditorMixin from '../../utils/CkeditorMixin';
 import FlashMessages from '../Utils/FlashMessages';
+import Input from '../Form/Input';
 
 const Modal = ReactBootstrap.Modal;
 const Button = ReactBootstrap.Button;
-const Input = ReactBootstrap.Input;
 
 const OpinionVersionForm = React.createClass({
   propTypes: {
@@ -185,65 +185,51 @@ const OpinionVersionForm = React.createClass({
             <form ref="form">
               { this.props.mode === 'edit'
                 ? <div className="alert alert-warning edit-confirm-alert">
-                    <div className={'form-group ' + this.getGroupStyle('confirm')}>
-                      <Input
-                        ref="confirm"
-                        name="confirm"
-                        type="checkbox"
-                        bsStyle={this.getFieldStyle('confirm')}
-                        label={this.getIntlMessage('opinion.version.confirm')}
-                      />
-                      {this.renderFormErrors('confirm')}
-                    </div>
+                    <Input
+                      ref="confirm"
+                      name="confirm"
+                      type="checkbox"
+                      bsStyle={this.getFieldStyle('confirm')}
+                      groupClassName={this.getGroupStyle('confirm')}
+                      label={this.getIntlMessage('opinion.version.confirm')}
+                      errors={this.renderFormErrors('confirm')}
+                    />
                   </div>
                 : null
               }
-              <div className={'form-group ' + this.getGroupStyle('title')}>
-                <label htmlFor="title" className="control-label h5">
-                  {this.getIntlMessage('opinion.version.title')}
-                </label>
-                <Input
-                  ref="title"
-                  name="title"
-                  type="text"
-                  bsStyle={this.getFieldStyle('title')}
-                  valueLink={this.linkState('title')}
-                />
-                {this.renderFormErrors('title')}
-              </div>
-              <div className={'form-group ' + this.getGroupStyle('body')}>
-                <label htmlFor="body" className="control-label h5">
-                  {this.getIntlMessage('opinion.version.body')}
-                </label>
-                <span className="help-block">
-                  {this.getIntlMessage('opinion.version.body_helper')}
-                </span>
-                <Input
-                  type="textarea"
-                  name="body"
-                  ref="body"
-                  rows="10" cols="80"
-                  bsStyle={this.getFieldStyle('body')}
-                  valueLink={this.linkState('body')}
-                />
-                {this.renderFormErrors('body')}
-              </div>
-              <div className={'form-group ' + this.getGroupStyle('comment')}>
-                <label htmlFor="comment" className="control-label h5">
-                  {this.getIntlMessage('opinion.version.comment')}
-                </label>
-                <span className="help-block">
-                  {this.getIntlMessage('opinion.version.comment_helper')}
-                </span>
-                <Input
-                  type="textarea"
-                  ref="comment"
-                  rows="10" cols="80"
-                  bsStyle={this.getFieldStyle('comment')}
-                  valueLink={this.linkState('comment')}
-                />
-                {this.renderFormErrors('comment')}
-              </div>
+              <Input
+                ref="title"
+                name="title"
+                type="text"
+                label={this.getIntlMessage('opinion.version.title')}
+                groupClassName={this.getGroupStyle('title')}
+                bsStyle={this.getFieldStyle('title')}
+                valueLink={this.linkState('title')}
+                errors={this.renderFormErrors('title')}
+              />
+              <Input
+                type="textarea"
+                name="body"
+                ref="body"
+                rows="10" cols="80"
+                label={this.getIntlMessage('opinion.version.body')}
+                help={this.getIntlMessage('opinion.version.body_helper')}
+                groupClassName={this.getGroupStyle('body')}
+                bsStyle={this.getFieldStyle('body')}
+                valueLink={this.linkState('body')}
+                errors={this.renderFormErrors('body')}
+              />
+              <Input
+                type="textarea"
+                ref="comment"
+                rows="10" cols="80"
+                label={this.getIntlMessage('opinion.version.comment')}
+                help={this.getIntlMessage('opinion.version.comment_helper')}
+                groupClassName={this.getGroupStyle('comment')}
+                bsStyle={this.getFieldStyle('comment')}
+                valueLink={this.linkState('comment')}
+                errors={this.renderFormErrors('comment')}
+              />
             </form>
           </Modal.Body>
           <Modal.Footer>
