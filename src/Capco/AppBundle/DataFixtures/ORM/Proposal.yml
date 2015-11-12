@@ -49,7 +49,6 @@ Capco\AppBundle\Entity\Proposal:
         proposalForm: @proposalform1
         theme: @theme1
         district: @district1
-        status: @status1
     proposal5:
         title: Proposition à la corbeille
         body: |
