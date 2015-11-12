@@ -11,10 +11,10 @@ use Sonata\CoreBundle\Model\Metadata;
 
 class PostAdmin extends Admin
 {
-    protected $datagridValues = array(
+    protected $datagridValues = [
         '_sort_order' => 'DESC',
         '_sort_by' => 'createdAt',
-    );
+    ];
 
     /**
      * @param DatagridMapper $datagridMapper

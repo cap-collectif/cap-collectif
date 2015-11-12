@@ -23,6 +23,11 @@ class UserAdmin extends BaseAdmin
         'ROLE_ADMIN' => 'roles.admin',
     ];
 
+    protected $datagridValues = [
+        '_sort_order' => 'ASC',
+        '_sort_by' => 'username',
+    ];
+
     public function getFormBuilder()
     {
         $this->formOptions['data_class'] = $this->getClass();

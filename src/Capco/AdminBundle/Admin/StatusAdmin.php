@@ -10,10 +10,10 @@ use Sonata\AdminBundle\Show\ShowMapper;
 
 class StatusAdmin extends Admin
 {
-    protected $datagridValues = array(
+    protected $datagridValues = [
         '_sort_order' => 'ASC',
-        '_sort_by' => 'createdAt',
-    );
+        '_sort_by' => 'position',
+    ];
 
     protected $formOptions = array(
         'cascade_validation' => true,

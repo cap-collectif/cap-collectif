@@ -11,10 +11,10 @@ use Capco\AppBundle\Entity\Reporting;
 
 class ReportingAdmin extends Admin
 {
-    protected $datagridValues = array(
+    protected $datagridValues = [
         '_sort_order' => 'ASC',
         '_sort_by' => 'isArchived',
-    );
+    ];
 
     /**
      * @param DatagridMapper $datagridMapper

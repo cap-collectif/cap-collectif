@@ -11,6 +11,11 @@ use Sonata\AdminBundle\Show\ShowMapper;
 
 class EventRegistrationAdmin extends Admin
 {
+    protected $datagridValues = [
+        '_sort_order' => 'ASC',
+        '_sort_by' => 'event.title',
+    ];
+
     public function getPersistentParameters()
     {
         if (!$this->getRequest()) {

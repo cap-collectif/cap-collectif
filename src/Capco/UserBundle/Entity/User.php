@@ -367,6 +367,16 @@ class User extends BaseUser implements EncoderAwareInterface, SynthesisUserInter
         return $this->twitter_access_token;
     }
 
+    public function getNousCitoyensId()
+    {
+        return $this->nous_citoyens_id;
+    }
+
+    public function getNousCitoyensAccessToken()
+    {
+        return $this->nous_citoyens_access_token;
+    }
+
     public function setNous_citoyensId($nous_citoyens_id)
     {
         $this->nous_citoyens_id = $nous_citoyens_id;

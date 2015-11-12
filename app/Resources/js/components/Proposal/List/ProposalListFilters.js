@@ -1,6 +1,5 @@
 import ProposalActions from '../../../actions/ProposalActions';
 import ProposalStore from '../../../stores/ProposalStore';
-import Input from '../../Form/Input';
 
 const Button = ReactBootstrap.Button;
 const ButtonGroup = ReactBootstrap.ButtonGroup;
@@ -8,6 +7,7 @@ const ButtonToolbar = ReactBootstrap.ButtonToolbar;
 const Collapse = ReactBootstrap.Collapse;
 const Row = ReactBootstrap.Row;
 const Col = ReactBootstrap.Col;
+const Input = ReactBootstrap.Input;
 
 const ProposalListFilters = React.createClass({
   propTypes: {
