@@ -3,9 +3,9 @@ import OpinionActions from '../../actions/OpinionActions';
 import LoginOverlay from '../Utils/LoginOverlay';
 import ValidatorMixin from '../../utils/ValidatorMixin';
 import FlashMessages from '../Utils/FlashMessages';
-import Input from '../Form/Input';
 
 const Button = ReactBootstrap.Button;
+const Input = ReactBootstrap.Input;
 
 const OpinionArgumentForm = React.createClass({
   propTypes: {
@@ -78,22 +78,24 @@ const OpinionArgumentForm = React.createClass({
       <div className="opinion__body box">
         <div className="opinion__data">
           <form id={'argument-form--' + this.props.type} ref="form">
-            <LoginOverlay>
-              <Input
-                id={'arguments-body-' + this.props.type}
-                type="textarea"
-                rows="2"
-                name="body"
-                ref="body"
-                valueLink={this.linkState('body')}
-                label={this.getIntlMessage('argument.' + this.props.type + '.add')}
-                placeholder={this.getIntlMessage('argument.' + this.props.type + '.add')}
-                bsStyle={this.getFieldStyle('body')}
-                groupClassName={this.getGroupStyle('body')}
-                labelClassName="h5 sr-only"
-                errors={this.renderFormErrors('body')}
-              />
-            </LoginOverlay>
+            <LoginOverlay children={
+              <div className={'form-group ' + this.getGroupStyle('body')}>
+                <label htmlFor={'arguments-body-' + this.props.type} className="control-label h5 sr-only">
+                  {this.getIntlMessage('argument.' + this.props.type + '.add')}
+                </label>
+                <Input
+                  id={'arguments-body-' + this.props.type}
+                  type="textarea"
+                  rows="2"
+                  name="body"
+                  ref="body"
+                  bsStyle={this.getFieldStyle('body')}
+                  valueLink={this.linkState('body')}
+                  placeholder={this.getIntlMessage('argument.' + this.props.type + '.add')}
+                />
+                {this.renderFormErrors('body')}
+              </div>
+            } />
             {LoginStore.isLoggedIn()
               ? <Button
                   disabled={this.state.isSubmitting}

@@ -1,6 +1,6 @@
-import LoginStore from '../../stores/LoginStore';
+import LoginStore from '../../../stores/LoginStore';
 
-const EditButton = React.createClass({
+const ProposalEditButton = React.createClass({
   propTypes: {
     author: React.PropTypes.object,
     onClick: React.PropTypes.func.isRequired,
@@ -14,7 +14,7 @@ const EditButton = React.createClass({
       author: null,
       hasWrapper: false,
       wrapperClassName: '',
-    }
+    };
   },
 
   isTheUserTheAuthor() {
@@ -47,4 +47,4 @@ const EditButton = React.createClass({
 
 });
 
-export default EditButton;
+export default ProposalEditButton;

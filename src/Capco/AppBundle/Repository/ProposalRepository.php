@@ -52,11 +52,11 @@ class ProposalRepository extends EntityRepository
         }
 
         if ($order === 'old') {
-            $qb->addOrderBy('proposal.createdAt', 'ASC');
+            $qb->addOrderBy('proposal.updatedAt', 'ASC');
         }
 
         if ($order === 'last') {
-            $qb->addOrderBy('proposal.createdAt', 'DESC');
+            $qb->addOrderBy('proposal.updatedAt', 'DESC');
         }
 
         if ($order === 'popular') {
@@ -136,7 +136,7 @@ class ProposalRepository extends EntityRepository
             ->andWhere('proposal.isTrashed = :notTrashed')
             ->setParameter('notTrashed', false)
             ->orderBy('proposal.commentsCount', 'DESC')
-            ->addOrderBy('proposal.createdAt', 'DESC')
+            ->addOrderBy('proposal.updatedAt', 'DESC')
             ->addGroupBy('proposal.id');
 
         $qb->setMaxResults($limit);
@@ -169,7 +169,7 @@ class ProposalRepository extends EntityRepository
             ->setParameter('notTrashed', false)
             ->setParameter('step', $step)
             ->orderBy('proposal.commentsCount', 'DESC')
-            ->addOrderBy('proposal.createdAt', 'DESC')
+            ->addOrderBy('proposal.updatedAt', 'DESC')
             ->addGroupBy('proposal.id');
 
         $qb->setMaxResults($limit);

@@ -63,7 +63,7 @@
                         {% endtranschoice %}
                     </h4>
                     {% for key, comment in object.comments %}
-                        <a href="{{ path('admin_capco_app_abstractcomment_edit', {id: comment.id}) }}">#{{ key + 1 }}</a>
+                        <a href="{{ path('admin_capco_app_comment_edit', {id: comment.id}) }}">#{{ key + 1 }}</a>
                         {% if not loop.last %},{% endif %}
                     {% endfor %}
                 {% endif %}

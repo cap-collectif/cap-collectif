@@ -229,9 +229,6 @@ export default {
       back: 'Retour',
       cancel: 'Annuler',
       close: 'Fermer',
-      constraints: {
-        notBlank: 'Cette valeur ne doit pas être vide',
-      },
       content: 'Contenu',
       comment: 'Commentaire',
       comments: '{num, plural, =0{0 commentaire} one{# commentaire} other{# commentaires}}',

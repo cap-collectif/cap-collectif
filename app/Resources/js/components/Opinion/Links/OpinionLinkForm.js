@@ -3,7 +3,8 @@ import CkeditorMixin from '../../../utils/CkeditorMixin';
 import DeepLinkStateMixin from '../../../utils/DeepLinkStateMixin';
 import OpinionLinkActions from '../../../actions/OpinionLinkActions';
 import FlashMessages from '../../Utils/FlashMessages';
-import Input from '../../Form/Input';
+
+const Input = ReactBootstrap.Input;
 
 const OpinionLinkForm = React.createClass({
   propTypes: {
@@ -80,14 +81,16 @@ const OpinionLinkForm = React.createClass({
   render() {
     return (
       <form id="opinion-links-form" ref="form">
+
         <Input
           type="select"
           valueLink={this.linkState('form.type')}
           ref="type"
           label={this.getIntlMessage('opinion.link.type')}
-          bsStyle={this.getFieldStyle('type')}
+          labelClassName="control-label h5"
           groupClassName={this.getGroupStyle('type')}
-          errors={this.renderFormErrors('type')}
+          help={this.renderFormErrors('type')}
+          bsStyle={this.getFieldStyle('type')}
         >
           <option value="" disabled selected>{this.getIntlMessage('global.select')}</option>
           {
@@ -102,8 +105,9 @@ const OpinionLinkForm = React.createClass({
           valueLink={this.linkState('form.title')}
           ref="title"
           label={this.getIntlMessage('opinion.title')}
+          labelClassName="control-label h5"
           groupClassName={this.getGroupStyle('title')}
-          errors={this.renderFormErrors('title')}
+          help={this.renderFormErrors('title')}
           bsStyle={this.getFieldStyle('title')}
         />
 
@@ -112,8 +116,9 @@ const OpinionLinkForm = React.createClass({
           valueLink={null} // state is automatically updated by CkeditorMixin
           ref="body"
           label={this.getIntlMessage('opinion.body')}
+          labelClassName="control-label h5"
           groupClassName={this.getGroupStyle('body')}
-          errors={this.renderFormErrors('body')}
+          help={this.renderFormErrors('body')}
           bsStyle={this.getFieldStyle('body')}
         />
 
