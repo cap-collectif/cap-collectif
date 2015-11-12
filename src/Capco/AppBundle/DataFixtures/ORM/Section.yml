@@ -122,7 +122,7 @@ Capco\AppBundle\Entity\Section:
         position: 11
         teaser: null
         body: null
-        nbObjects: 8
+        nbObjects: 4
         enabled: true
         associatedFeatures: []
         step: @collectstep1

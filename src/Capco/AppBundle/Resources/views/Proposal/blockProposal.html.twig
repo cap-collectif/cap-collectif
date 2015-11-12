@@ -13,27 +13,12 @@
                 </div>
             </div>
             <div class="proposal__body" >
-                {% if proposal.enabled == false %}
-                    <p>
-                        <span class="label label-default" style="position: static">
-                            {{ 'proposal.show.disabled.label'|trans({}, 'CapcoAppBundle') }}
-                        </span>
-                    </p>
-                {% else %}
-                    <h2 class="h4 proposal__title">
-                        <a href={{ path('app_project_show_proposal', {'projectSlug': proposal.step.project.slug, 'proposalSlug': proposal.slug, 'stepSlug': proposal.step.slug}) }}>
-                            {{ proposal.title }}
-                        </a>
-                    </h2>
-                {% endif %}
+                <h2 class="h4 proposal__title">
+                    <a href={{ path('app_project_show_proposal', {'projectSlug': proposal.step.project.slug, 'proposalSlug': proposal.slug, 'stepSlug': proposal.step.slug}) }}>
+                        {{ proposal.title }}
+                    </a>
+                </h2>
                 <div class="proposal__infos">
-                    {% if proposal.isTrashed %}
-                        <div class="proposal__info">
-                            <span class="label label-default" style="position: static; margin-right: 5px">
-                                {{ 'proposal.show.trashed.label'|trans({}, 'CapcoAppBundle') }}
-                            </span>
-                        </div>
-                    {% endif %}
                     {% if proposal.theme is not null %}
                         <div class="proposal__info">
                             <i class="cap cap-tag-1-1"></i>{{ proposal.theme.title }}

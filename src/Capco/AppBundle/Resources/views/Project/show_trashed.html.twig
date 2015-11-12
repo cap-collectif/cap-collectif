@@ -29,7 +29,7 @@
             </div>
 
             <div class="col-xs-12  col-sm-8  col-md-9" id="details">
-                {% set trashedNb = (arguments|length + opinions|length + versions|length + sources|length + proposals|length) %}
+                {% set trashedNb = (arguments|length + opinions|length + versions|length + sources|length) %}
                 <div class="block  block--bordered">
                     <div class="opinion  opinion--gray opinion--default">
                         <div class="opinion__header  opinion__header--mobile-centered">
@@ -71,13 +71,6 @@
                         {% endif %}
                     </ul>
                 </div>
-                {% if proposals|length > 0 %}
-                    <div class="row">
-                        {% for proposal in proposals %}
-                            {% include 'CapcoAppBundle:Proposal:blockProposal.html.twig' with {'proposal': proposal } only %}
-                        {% endfor %}
-                    </div>
-                {% endif %}
             </div> <!-- col-xs-12  col-sm-8  col-md-9 -->
         </div> <!-- .row -->
     </div>

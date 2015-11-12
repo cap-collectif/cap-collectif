@@ -50,27 +50,3 @@ Capco\AppBundle\Entity\Proposal:
         theme: @theme1
         district: @district1
         status: @status1
-    proposal5:
-        title: Proposition à la corbeille
-        body: |
-             <text(100)>
-        enabled: true
-        isTrashed: true
-        rating: 1
-        author: @user7
-        proposalForm: @proposalform1
-        theme: @theme1
-        district: @district1
-        status: @status1
-    proposal6:
-        title: Proposition dépubliée
-        body: |
-             <text(100)>
-        enabled: false
-        isTrashed: false
-        rating: 3
-        author: @user4
-        proposalForm: @proposalform1
-        theme: @theme2
-        district: @district3
-        status: @status1

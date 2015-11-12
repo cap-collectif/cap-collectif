@@ -238,7 +238,7 @@ class OpinionRepository extends EntityRepository
      *
      * @return array
      */
-    public function getTrashedOrUnpublishedByProject(Project $project)
+    public function getTrashedOrUnpublishedByProject($project)
     {
         $qb = $this->createQueryBuilder('o')
             ->addSelect('ot', 's', 'aut', 'm')
@@ -246,9 +246,10 @@ class OpinionRepository extends EntityRepository
             ->leftJoin('o.Author', 'aut')
             ->leftJoin('aut.Media', 'm')
             ->leftJoin('o.step', 's')
-            ->leftJoin('s.projectAbstractStep', 'pas')
-            ->andWhere('pas.project = :project')
-            ->andWhere('o.isTrashed = :trashed OR o.isEnabled = :disabled')
+            ->leftJoin('s.projectAbstractStep', 'cas')
+            ->andWhere('cas.project = :project')
+            ->andWhere('o.isTrashed = :trashed')
+            ->orWhere('o.isEnabled = :disabled')
             ->setParameter('project', $project)
             ->setParameter('trashed', true)
             ->setParameter('disabled', false)

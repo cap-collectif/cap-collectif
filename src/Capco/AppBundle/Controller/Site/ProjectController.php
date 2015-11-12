@@ -175,14 +175,10 @@ class ProjectController extends Controller
             throw new AccessDeniedException($this->get('translator')->trans('error.access_restricted', [], 'CapcoAppBundle'));
         }
 
-        $em = $this->get('doctrine.orm.entity_manager');
-
-        $opinions = $em->getRepository('CapcoAppBundle:Opinion')->getTrashedOrUnpublishedByProject($project);
-        $versions = $em->getRepository('CapcoAppBundle:OpinionVersion')->getTrashedOrUnpublishedByProject($project);
-        $arguments = $em->getRepository('CapcoAppBundle:Argument')->getTrashedOrUnpublishedByProject($project);
-        $sources = $em->getRepository('CapcoAppBundle:Source')->getTrashedOrUnpublishedByProject($project);
-
-        $proposals = $em->getRepository('CapcoAppBundle:Proposal')->getTrashedOrUnpublishedByProject($project);
+        $opinions = $this->getDoctrine()->getRepository('CapcoAppBundle:Opinion')->getTrashedOrUnpublishedByProject($project);
+        $versions = $this->getDoctrine()->getRepository('CapcoAppBundle:OpinionVersion')->getTrashedOrUnpublishedByProject($project);
+        $arguments = $this->getDoctrine()->getRepository('CapcoAppBundle:Argument')->getTrashedOrUnpublishedByProject($project);
+        $sources = $this->getDoctrine()->getRepository('CapcoAppBundle:Source')->getTrashedOrUnpublishedByProject($project);
 
         return [
             'project' => $project,
@@ -190,7 +186,6 @@ class ProjectController extends Controller
             'versions' => $versions,
             'arguments' => $arguments,
             'sources' => $sources,
-            'proposals' => $proposals,
             'argumentsLabels' => Argument::$argumentTypesLabels,
         ];
     }

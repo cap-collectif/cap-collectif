@@ -36,9 +36,7 @@ class ProposalRepository extends EntityRepository
     {
         $qb = $this->getIsEnabledQueryBuilder()
             ->join('proposal.author', 'author')
-            ->andWhere('proposal.isTrashed = :notTrashed')
             ->andWhere('proposal.proposalForm = :proposalForm')
-            ->setParameter('notTrashed', false)
             ->setParameter('proposalForm', $proposalForm)
         ;
 
@@ -91,10 +89,8 @@ class ProposalRepository extends EntityRepository
         $qb = $this
             ->getIsEnabledQueryBuilder()
             ->select('COUNT(proposal.id) as proposalsCount')
-            ->andWhere('proposal.isTrashed = :notTrashed')
-            ->andWhere('proposal.proposalForm = :proposalForm')
-            ->setParameter('notTrashed', false)
-            ->setParameter('proposalForm', $form)
+            ->andWhere('proposal.proposalForm = :form')
+            ->setParameter('form', $form)
         ;
 
         return $qb->getQuery()->getSingleScalarResult();
@@ -192,31 +188,5 @@ class ProposalRepository extends EntityRepository
             ->getQuery()
             ->execute()
         ;
-    }
-
-    /**
-     * Get all trashed or unpublished proposals.
-     *
-     * @param $project
-     *
-     * @return array
-     */
-    public function getTrashedOrUnpublishedByProject($project)
-    {
-        $qb = $this->createQueryBuilder('p')
-            ->addSelect('f', 's', 'aut', 'm')
-            ->leftJoin('p.author', 'aut')
-            ->leftJoin('aut.Media', 'm')
-            ->leftJoin('p.proposalForm', 'f')
-            ->leftJoin('f.step', 's')
-            ->leftJoin('s.projectAbstractStep', 'pas')
-            ->andWhere('pas.project = :project')
-            ->andWhere('p.isTrashed = :trashed OR p.enabled = :disabled')
-            ->setParameter('project', $project)
-            ->setParameter('trashed', true)
-            ->setParameter('disabled', false)
-            ->orderBy('p.trashedAt', 'DESC');
-
-        return $qb->getQuery()->getResult();
     }
 }
