@@ -213,17 +213,21 @@ const ProposalForm = React.createClass({
         label={this.getIntlMessage('proposal.body') + '*'}
         labelClassName="h5"
         groupClassName={this.getGroupStyle('body')}
-        help={this.renderFormErrors('body')}
+        errors={this.renderFormErrors('body')}
         valueLink={this.linkState('form.body')}
       />
 
       {
         this.props.form.questions.map((question) => {
+          const key = 'custom-' + question.id;
           return (
             <Editor
               label={question.title + '*'}
               labelClassName="h5"
-              valueLink={this.linkState('custom.' + question.id)}
+              groupClassName={this.getGroupStyle(key)}
+              valueLink={this.linkState('custom.' + key)}
+              help={question.helpText}
+              errors={this.renderFormErrors(key)}
             />
           );
         })
