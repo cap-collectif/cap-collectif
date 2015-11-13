@@ -23,14 +23,14 @@ const ProposalPage = React.createClass({
       <div id="sidebar-container" className="container sidebar__container">
         <Row>
           <Col xs={12}>
-            <ProposalPageHeader proposal={this.props.proposal} />
-            <ProposalPageAnswer proposal={proposal} />
-            <ProposalPageContent
-              proposal={proposal}
+            <ProposalPageHeader
+              proposal={this.props.proposal}
               form={this.props.form}
               themes={this.props.themes}
               districts={this.props.districts}
             />
+            <ProposalPageAnswer proposal={proposal} />
+            <ProposalPageContent proposal={proposal} />
             {/* <ProposalPageVotes proposal={proposal} /> */}
             <ProposalPageComments form={this.props.form} id={proposal.id} />
           </Col>

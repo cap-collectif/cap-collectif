@@ -1,31 +1,14 @@
 import ShareButtonDropdown from '../../Utils/ShareButtonDropdown';
-import ProposalEditModal from '../Edit/ProposalEditModal';
-import ProposalDeleteModal from '../Delete/ProposalDeleteModal';
-import EditButton from '../../Form/EditButton';
-import DeleteButton from '../../Form/DeleteButton';
+const Button = ReactBootstrap.Button;
 
 const ProposalPageHeader = React.createClass({
   propTypes: {
     proposal: React.PropTypes.object.isRequired,
-    form: React.PropTypes.object.isRequired,
-    themes: React.PropTypes.array.isRequired,
-    districts: React.PropTypes.array.isRequired,
   },
   mixins: [ReactIntl.IntlMixin],
 
-  getInitialState() {
-    return {
-      showEditModal: false,
-      showDeleteModal: false,
-    };
-  },
-
-  toggleEditModal(value) {
-    this.setState({showEditModal: value});
-  },
-
-  toggleDeleteModal(value) {
-    this.setState({showDeleteModal: value});
+  isTheAuthor() {
+    return false;
   },
 
   render() {
@@ -51,34 +34,11 @@ const ProposalPageHeader = React.createClass({
             url={proposal._links.show}
             title={proposal.title}
           />
-          <div className="pull-right">
-            <EditButton
-              author={this.props.proposal.author}
-              onClick={this.toggleEditModal.bind(null, true)}
-              editable={this.props.form.isContribuable}
-            />
-            <DeleteButton
-              author={this.props.proposal.author}
-              onClick={this.toggleDeleteModal.bind(null, true)}
-              style={{marginLeft: '15px'}}
-              deletable={this.props.form.isContribuable}
-            />
-          </div>
+          {this.isTheAuthor()
+            ? <Button>Supprimer</Button>
+            : null
+          }
         </div>
-        <ProposalEditModal
-          proposal={this.props.proposal}
-          form={this.props.form}
-          themes={this.props.themes}
-          districts={this.props.districts}
-          show={this.state.showEditModal}
-          onToggleModal={this.toggleEditModal}
-        />
-        <ProposalDeleteModal
-          proposal={this.props.proposal}
-          form={this.props.form}
-          show={this.state.showDeleteModal}
-          onToggleModal={this.toggleDeleteModal}
-        />
       </div>
     );
   },

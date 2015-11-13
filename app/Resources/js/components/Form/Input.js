@@ -39,10 +39,10 @@ export default class Input extends ReactBootstrap.Input {
 }
 
 Input.PropTypes = {
-  errors: React.PropTypes.node,
+  errors: React.PropTypes.node
 };
 
 Input.defaultProps = {
   errors: null,
   labelClassName: 'h5',
-};
+}

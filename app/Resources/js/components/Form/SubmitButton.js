@@ -4,28 +4,19 @@ const SubmitButton = React.createClass({
   propTypes: {
     onSubmit: React.PropTypes.func.isRequired,
     isSubmitting: React.PropTypes.bool.isRequired,
-    label: React.PropTypes.string,
-    bsStyle: React.PropTypes.string,
   },
   mixins: [ReactIntl.IntlMixin],
-
-  getDefaultProps() {
-    return {
-      label: 'global.publish',
-      bsStyle: 'primary',
-    };
-  },
 
   render() {
     return (
       <Button
         disabled={this.props.isSubmitting}
         onClick={!this.props.isSubmitting ? this.props.onSubmit : null}
-        bsStyle={this.props.bsStyle}
+        bsStyle="primary"
       >
         {this.props.isSubmitting
           ? this.getIntlMessage('global.loading')
-          : this.getIntlMessage(this.props.label)
+          : this.getIntlMessage('global.publish')
         }
       </Button>
     );

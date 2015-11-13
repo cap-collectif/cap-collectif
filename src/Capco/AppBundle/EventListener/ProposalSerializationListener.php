@@ -46,15 +46,9 @@ class ProposalSerializationListener implements EventSubscriberInterface
             'stepSlug' => $step->getSlug(),
         ], true);
 
-        $indexUrl = $this->router->generate('app_project_show_collect', [
-            'projectSlug' => $project->getSlug(),
-            'stepSlug' => $step->getSlug(),
-        ], true);
-
         $event->getVisitor()->addData(
             '_links', [
                 'show' => $showUrl,
-                'index' => $indexUrl,
             ]
         );
     }

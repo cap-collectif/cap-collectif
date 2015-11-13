@@ -125,14 +125,8 @@ const OpinionSourceForm = React.createClass({
     return (
       <div>
         <LoginOverlay children={this.renderCreateButton()} />
-        <Modal
-          {...this.props}
-          animation={false}
-          show={this.state.showModal}
-          onHide={this.close.bind(null, this)}
-          bsSize="large"
-          aria-labelledby="contained-modal-title-lg"
-        >
+        <Modal {...this.props} animation={false} show={this.state.showModal} onHide={this.close.bind(null, this)}
+               bsSize="large" aria-labelledby="contained-modal-title-lg">
           <Modal.Header closeButton>
             <Modal.Title id="contained-modal-title-lg">
               { this.getIntlMessage('source.add') }

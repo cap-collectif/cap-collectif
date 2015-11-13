@@ -4,23 +4,17 @@ const EditButton = React.createClass({
   propTypes: {
     author: React.PropTypes.object,
     onClick: React.PropTypes.func.isRequired,
-    className: React.PropTypes.string,
-    style: React.PropTypes.object,
-    editable: React.PropTypes.bool,
+    hasWrapper: React.PropTypes.bool,
+    wrapperClassName: React.PropTypes.string,
   },
   mixins: [ReactIntl.IntlMixin],
 
   getDefaultProps() {
     return {
       author: null,
-      className: '',
-      style: null,
-      editable: true,
+      hasWrapper: false,
+      wrapperClassName: '',
     };
-  },
-
-  isEditable() {
-    return this.props.editable && this.isTheUserTheAuthor();
   },
 
   isTheUserTheAuthor() {
@@ -30,23 +24,23 @@ const EditButton = React.createClass({
     return LoginStore.user.uniqueId === this.props.author.uniqueId;
   },
 
-  render() {
-    if (this.isEditable()) {
-      let classes = {
-        'btn': true,
-        'btn-dark-gray': true,
-        'btn--outline': true,
-      };
+  renderButton() {
+    return (
+      <span className="btn btn-dark-gray btn--outline" onClick={() => this.props.onClick()}>
+          <i className="cap cap-pencil-1"></i>
+        { ' ' + this.getIntlMessage('global.edit')}
+        </span>
+    );
+  },
 
-      return (
-        <span
-          style={this.props.style} className={classNames(classes, this.props.className)}
-          onClick={() => this.props.onClick()}
-        >
-            <i className="cap cap-pencil-1"></i>
-          { ' ' + this.getIntlMessage('global.edit')}
+  render() {
+    if (this.isTheUserTheAuthor()) {
+      return this.props.hasWrapper
+        ? <span className={this.props.wrapperClassName} >
+            {this.renderButton()}
           </span>
-      );
+        : this.renderButton()
+      ;
     }
     return null;
   },

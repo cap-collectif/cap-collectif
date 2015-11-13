@@ -167,9 +167,6 @@ export default {
         title: 'Le titre de la proposition doit faire au moins 2 caractères.',
       },
       count: '{num, plural, =0{0 projet} one{# projet} other{# projets}}',
-      delete: {
-        confirm: 'Voulez-vous vraiment supprimer la proposition "{title}" ?',
-      },
       description: 'Description',
       district: 'Quartier',
       empty: 'Aucune proposition',
@@ -224,25 +221,6 @@ export default {
       mail: 'Email',
       twitter: 'Twitter',
     },
-    editor: {
-      url: 'Visiter l\'URL',
-      size: {
-        small: 'Petit',
-        normal: 'Normal',
-        large: 'Grand',
-      },
-      list: 'Liste ordonnée',
-      bullet: 'Liste',
-      align: {
-        title: 'Aligner',
-        left: 'Gauche',
-        center: 'Centrer',
-        right: 'Droite',
-        justify: 'Justifier',
-      },
-      link: 'Lien',
-      image: 'Image',
-    },
     global: {
       advanced_filters: 'Filtres avancés',
       all_required: 'Tous les champs sont obligatoires.',
@@ -250,12 +228,7 @@ export default {
       arguments: '{num, plural, =0{0 argument} one{# argument} other{# arguments}}',
       back: 'Retour',
       cancel: 'Annuler',
-      insert: 'Insérer',
-      done: 'Terminé',
-      remove: 'Supprimer',
-      change: 'Changer',
       close: 'Fermer',
-      preview: 'Aperçu',
       constraints: {
         notBlank: 'Cette valeur ne doit pas être vide',
       },

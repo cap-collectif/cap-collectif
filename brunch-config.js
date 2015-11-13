@@ -40,8 +40,6 @@ exports.config = {
           'bower_components/react-intl/dist/locale-data/fr.js',
           'bower_components/autosize/dist/autosize.js',
 
-          'bower_components/quill/dist/quill.js',
-
           'bower_components/jsdiff/diff.js',
 
           'app/Resources/js/jsapi.js',
@@ -73,8 +71,6 @@ exports.config = {
         'css/style.css' : [
           'bower_components/bootstrap/assets/stylesheets/bootstrap.scss',
           'bower_components/css-spinners/css/spinners.css',
-          'bower_components/quill/dist/quill.base.css',
-          'bower_components/quill/dist/quill.snow.css',
           'app/Resources/scss/style.scss'
         ],
         'css/jquery.minicolors.css' : ['bower_components/jquery-minicolors/jquery.minicolors.css'],

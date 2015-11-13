@@ -41,25 +41,15 @@ const OpinionSourceButtons = React.createClass({
   renderVoteButton() {
     if (this.state.hasVoted) {
       return (
-        <Button
-          disabled={!this.props.source.isContribuable}
-          className="source__btn--vote"
-          bsStyle="danger"
-          bsSize="xsmall"
-          onClick={!LoginStore.isLoggedIn() ? null : this.deleteVote.bind(null, this)}
-        >
+        <Button disabled={!this.props.source.isContribuable} className="source__btn--vote" bsStyle="danger" bsSize="xsmall"
+                onClick={!LoginStore.isLoggedIn() ? null : this.deleteVote.bind(null, this)}>
           { this.getIntlMessage('vote.cancel') }
         </Button>
       );
     }
     return (
-      <Button
-        disabled={!this.props.source.isContribuable}
-        bsStyle="success"
-        bsSize="xsmall"
-        className="source__btn--vote btn--outline"
-        onClick={!LoginStore.isLoggedIn() ? null : this.vote.bind(null, this)}
-      >
+      <Button disabled={!this.props.source.isContribuable} bsStyle="success" bsSize="xsmall" className="source__btn--vote btn--outline"
+              onClick={!LoginStore.isLoggedIn() ? null : this.vote.bind(null, this)}>
         <i className="cap-hand-like-2"></i> { this.getIntlMessage('vote.ok') }
       </Button>
     );
