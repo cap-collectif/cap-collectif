@@ -125,6 +125,14 @@ class Reporting
     private $Comment;
 
     /**
+     * @var
+     *
+     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Proposal", inversedBy="reports", cascade={"persist"})
+     * @ORM\JoinColumn(name="proposal_id", referencedColumnName="id", onDelete="CASCADE")
+     */
+    private $proposal;
+
+    /**
      * @var bool
      *
      * @ORM\Column(name="is_archived", type="boolean")
@@ -330,6 +338,25 @@ class Reporting
     }
 
     /**
+     * @return mixed
+     */
+    public function getProposal()
+    {
+        return $this->proposal;
+    }
+
+    /**
+     * @param mixed $proposal
+     */
+    public function setProposal($proposal)
+    {
+        $this->proposal = $proposal;
+        $proposal->addReport($this);
+
+        return $this;
+    }
+
+    /**
      * @return bool
      */
     public function getIsArchived()
@@ -361,6 +388,8 @@ class Reporting
             return $this->Comment;
         } elseif ($this->opinionVersion != null) {
             return $this->opinionVersion;
+        } elseif ($this->proposal != null) {
+            return $this->proposal;
         }
 
         return;
@@ -391,6 +420,10 @@ class Reporting
 
         if ($this->Comment != null) {
             $this->Comment->removeReport($this);
+        }
+
+        if ($this->proposal != null) {
+            $this->proposal->removeReport($this);
         }
     }
 }

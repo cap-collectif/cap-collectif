@@ -214,8 +214,18 @@ idea:
 
 # Proposal
 proposal:
+  create:
+    button: Soumettre une proposition
+    cancel: Annuler
+    error: Erreur, impossible de créer une proposition.
+    submit: Publier
+    success: Merci ! Votre proposition a bien été enregistrée.
+    title: Soumettre une proposition
+  error:
+    not_found: Proposition introuvable.
   index:
     count: "]-Inf, 1] %count% proposition | ]1,Inf[ %count% propositions"
+  none: Il n'y a pas de proposition.
   see_all: Voir toutes les propositions
   show:
     comments: "]-Inf, 1] commentaire | ]1,Inf[ commentaires"
@@ -239,14 +249,6 @@ proposal:
     jumbotron:
       title: Corbeille des propositions
     none: Aucune proposition dans la corbeille
-  create:
-    button: Soumettre une proposition
-    title: Soumettre une proposition
-    submit: Publier
-    cancel: Annuler
-    text: Merci d'examiner les propositions existantes en premier lieu afin de ne pas soumettre de doublon. Vous pouvez voter pour celles existantes !
-    success: Merci ! Votre proposition a bien été enregistrée.
-    error: Erreur, impossible de créer une proposition.
   update:
     delete: Supprimer
     cancel: Annuler
@@ -256,43 +258,6 @@ proposal:
     alert: Attention ! En modifiant votre proposition, vous perdrez les votes qui lui sont associés.
     success: Merci ! Votre proposition a bien été modifiée.
     error: Erreur, votre proposition n'a pas pu être modifiée.
-  delete:
-    title: Supprimer une proposition
-    text: Êtes-vous certain de vouloir supprimer le contenu ?
-    cancel: Annuler
-    submit: Supprimer
-    success: Votre proposition a bien été supprimée.
-    error: Erreur, impossible de supprimer la proposition.
-  form:
-    title: Titre
-    body: Contenu
-    theme: Thème
-    media: Image
-  vote:
-    submit: Voter
-    delete: Annuler mon vote
-    add:
-      success: Merci ! Votre vote a bien été pris en compte.
-    delete:
-      success: Votre vote a bien été supprimé.
-  report:
-    submit: Signaler
-    reported: Signalé
-  searchform:
-    term: Terme
-    theme: Thème
-    search: Rechercher
-    sort: 'Trier :'
-    all_themes: Tous les thèmes
-    no_result:  Aucune proposition ne correspond à ces critères de recherche.
-  sort:
-    created_at: Date de création
-    popularity: Popularité
-  none: Il n' y a pas de proposition.
-  error:
-    no_contribute: Impossible de contribuer sur cette proposition.
-    not_author: Impossible de modifier cette proposition car vous n'en êtes pas l'auteur.
-    not_found: Proposition introuvable.
 
 #Theme
 theme:

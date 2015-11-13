@@ -127,11 +127,17 @@ class Proposal implements CommentableInterface, VotableInterface
     private $proposalResponses;
 
     /**
+     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\Reporting", mappedBy="proposal", cascade={"persist", "remove"}, orphanRemoval=true)
+     */
+    protected $reports;
+
+    /**
      * Constructor.
      */
     public function __construct()
     {
         $this->votes = new ArrayCollection();
+        $this->reports = new ArrayCollection();
         $this->comments = new ArrayCollection();
         $this->proposalResponses = new ArrayCollection();
         $this->commentsCount = 0;
@@ -375,6 +381,40 @@ class Proposal implements CommentableInterface, VotableInterface
         return $this;
     }
 
+    /**
+     * @return string
+     */
+    public function getReports()
+    {
+        return $this->reports;
+    }
+
+    /**
+     * @param Reporting $report
+     *
+     * @return $this
+     */
+    public function addReport(Reporting $report)
+    {
+        if (!$this->reports->contains($report)) {
+            $this->reports->add($report);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @param Reporting $report
+     *
+     * @return $this
+     */
+    public function removeReport(Reporting $report)
+    {
+        $this->reports->removeElement($report);
+
+        return $this;
+    }
+
     // CommentableInterface methods implementation
     /**
      * @return string
@@ -398,5 +438,16 @@ class Proposal implements CommentableInterface, VotableInterface
     public function canContribute()
     {
         return $this->enabled && !$this->isTrashed && $this->getStep()->canContribute();
+    }
+
+    public function userHasReport(User $user)
+    {
+        foreach ($this->reports as $report) {
+            if ($report->getReporter() == $user) {
+                return true;
+            }
+        }
+
+        return false;
     }
 }

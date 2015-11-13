@@ -378,4 +378,68 @@ class ReportingController extends Controller
             'form' => $form->createView(),
         ];
     }
+
+    /**
+     * @Route("/projects/{projectSlug}/collect/{stepSlug}/proposals/{proposalSlug}/report", name="app_report_proposal", defaults={"_feature_flags" = "reporting"})
+     * @Template("CapcoAppBundle:Reporting:create.html.twig")
+     *
+     * @param $request
+     * @param $projectSlug
+     * @param $stepSlug
+     * @param $proposalSlug
+     *
+     * @return array
+     */
+    public function reportingProposalAction($projectSlug, $stepSlug, $proposalSlug, Request $request)
+    {
+        if (false === $this->get('security.authorization_checker')->isGranted('ROLE_USER')) {
+            throw new AccessDeniedException($this->get('translator')->trans('error.access_restricted', array(), 'CapcoAppBundle'));
+        }
+
+        $proposal = $this->getDoctrine()->getRepository('CapcoAppBundle:Proposal')->getOneBySlug($proposalSlug);
+
+        if ($proposal == null) {
+            throw $this->createNotFoundException($this->get('translator')->trans('proposal.error.not_found', array(), 'CapcoAppBundle'));
+        }
+
+        if (false == $proposal->canDisplay()) {
+            throw new AccessDeniedException();
+        }
+
+        $currentStep = $proposal->getForm()->getStep();
+        $project = $currentStep->getProject();
+
+        $reporting = new Reporting();
+        $form = $this->createForm(new ReportingType(), $reporting);
+
+        if ($request->getMethod() == 'POST') {
+            if ($form->handleRequest($request)->isValid()) {
+                $em = $this->getDoctrine()->getManager();
+                $reporting->setProposal($proposal);
+                $reporting->setReporter($this->getUser());
+                $this->get('capco.notify_manager')->sendNotifyMessage($reporting);
+                $em->persist($reporting);
+                $em->flush();
+                $this->get('session')->getFlashBag()->add('success', $this->get('translator')->trans('reporting.success'));
+
+                return $this->redirect(
+                    $this->generateUrl(
+                        'app_project_show_proposal',
+                        [
+                            'projectSlug' => $project->getSlug(),
+                            'stepSlug' => $currentStep->getSlug(),
+                            'proposalSlug' => $proposal->getSlug(),
+                        ]
+                    )
+                );
+            } else {
+                $this->get('session')->getFlashBag()->add('danger', $this->get('translator')->trans('reporting.error'));
+            }
+        }
+
+        return [
+            'proposal' => $proposal,
+            'form' => $form->createView(),
+        ];
+    }
 }
