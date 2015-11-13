@@ -104,6 +104,7 @@ const OpinionLinkForm = React.createClass({
         />
 
         <Editor
+          valueLink={this.linkState('form.body')}
           label={this.getIntlMessage('opinion.body')}
           groupClassName={this.getGroupStyle('body')}
           errors={this.renderFormErrors('body')}

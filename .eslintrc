@@ -19,7 +19,6 @@
     "Quill": true,
     "moment": true,
   },
-  "fix": true,
   "rules": {
     "no-nested-ternary": 0,
     "id-length": 0,
