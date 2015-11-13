@@ -1,12 +1,11 @@
 import LoginStore from '../../stores/LoginStore';
 
-const EditButton = React.createClass({
+const DeleteButton = React.createClass({
   propTypes: {
     author: React.PropTypes.object,
     onClick: React.PropTypes.func.isRequired,
     className: React.PropTypes.string,
     style: React.PropTypes.object,
-    editable: React.PropTypes.bool,
   },
   mixins: [ReactIntl.IntlMixin],
 
@@ -15,12 +14,11 @@ const EditButton = React.createClass({
       author: null,
       className: '',
       style: null,
-      editable: true,
     };
   },
 
-  isEditable() {
-    return this.props.editable && this.isTheUserTheAuthor();
+  isDeletable() {
+    return this.isTheUserTheAuthor();
   },
 
   isTheUserTheAuthor() {
@@ -31,20 +29,21 @@ const EditButton = React.createClass({
   },
 
   render() {
-    if (this.isEditable()) {
-      let classes = {
+    if (this.isDeletable()) {
+      const classes = {
         'btn': true,
-        'btn-dark-gray': true,
+        'btn-danger': true,
         'btn--outline': true,
       };
+      classes[this.props.className] = true;
 
       return (
         <span
-          style={this.props.style} className={classNames(classes, this.props.className)}
+          style={this.props.style} className={classNames(classes)}
           onClick={() => this.props.onClick()}
         >
-            <i className="cap cap-pencil-1"></i>
-          { ' ' + this.getIntlMessage('global.edit')}
+            <i className="cap cap-bin-2"></i>
+          { ' ' + this.getIntlMessage('global.remove')}
           </span>
       );
     }
@@ -53,4 +52,4 @@ const EditButton = React.createClass({
 
 });
 
-export default EditButton;
+export default DeleteButton;

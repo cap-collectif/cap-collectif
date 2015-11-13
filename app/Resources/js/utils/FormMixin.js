@@ -29,6 +29,13 @@ const FormMixin = { // This will be easy to use as an higher-order Component
     throw new Error(`Unkown reference to ${ref} in formValidationRules`);
   },
 
+  getFieldStyle(field) {
+    return this.getErrorsMessages(field).length > 0 ?
+      'warning' : this.props.isSubmitting ?
+      'success' : ''
+    ;
+  },
+
   getGroupStyle(field) {
     return this.getErrorsMessages(field).length > 0 ?
       'has-warning' : this.props.isSubmitting ?

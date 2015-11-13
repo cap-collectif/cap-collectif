@@ -5,6 +5,7 @@ import OpinionActions from '../../actions/OpinionActions';
 import LoginOverlay from '../Utils/LoginOverlay';
 import FlashMessages from '../Utils/FlashMessages';
 import Input from '../Form/Input';
+import Editor from '../Form/Editor';
 
 const Modal = ReactBootstrap.Modal;
 const Button = ReactBootstrap.Button;
@@ -202,6 +203,7 @@ const OpinionVersionForm = React.createClass({
                     <Input
                       name="confirm"
                       type="checkbox"
+                      bsStyle={this.getFieldStyle('confirm')}
                       groupClassName={this.getGroupStyle('confirm')}
                       label={this.getIntlMessage('opinion.version.confirm')}
                       errors={this.renderFormErrors('confirm')}
@@ -216,12 +218,12 @@ const OpinionVersionForm = React.createClass({
                 type="text"
                 label={this.getIntlMessage('opinion.version.title')}
                 groupClassName={this.getGroupStyle('title')}
+                bsStyle={this.getFieldStyle('title')}
                 valueLink={this.linkState('form.title')}
                 errors={this.renderFormErrors('title')}
               />
 
-              <Input
-                type="editor"
+              <Editor
                 label={this.getIntlMessage('opinion.version.body')}
                 groupClassName={this.getGroupStyle('body')}
                 help={this.getIntlMessage('opinion.version.body_helper')}
@@ -229,8 +231,7 @@ const OpinionVersionForm = React.createClass({
                 errors={this.renderFormErrors('body')}
               />
 
-              <Input
-                type="editor"
+              <Editor
                 label={this.getIntlMessage('opinion.version.comment')}
                 groupClassName={this.getGroupStyle('comment')}
                 help={this.getIntlMessage('opinion.version.comment_helper')}
