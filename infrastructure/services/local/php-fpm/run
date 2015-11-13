@@ -9,6 +9,7 @@ cd       /var/www
 
 mkdir -p /var/www/app/cache
 mkdir -p /var/www/app/logs
+mkdir -p /var/www/web/media/cache
 chown -R capco:capco /var/www/app/cache
 chown -R capco:capco /var/www/app/logs
 chown -R capco:capco /var/www/web/media
@@ -20,12 +21,12 @@ if [ "$RESULT" != "0" ]; then
     php app/console doctrine:database:create --env=dev --if-not-exists
     php app/console doctrine:migrations:migrate --env=dev --no-interaction
     php app/console doctrine:fixtures:load --env=dev --no-interaction
-    php app/console cache:warmup --env=dev --no-debug
 else
     php app/console doctrine:migrations:migrate --env=dev --no-interaction
-    php app/console cache:warmup --env=dev --no-debug
 fi
 
+php app/console doctrine:cache:clear-metadata --env=dev --no-debug
+php app/console cache:warmup --env=dev --no-debug
 php app/console assets:install --symlink
 
 EOF

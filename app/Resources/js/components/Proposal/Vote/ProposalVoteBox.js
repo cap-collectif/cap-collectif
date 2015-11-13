@@ -45,7 +45,7 @@ const ProposalVoteBox = React.createClass({
               onValidationFailure={this.handleFailure.bind(null, this)}
               onSubmitSuccess={this.handleSubmitSuccess.bind(null, this)}
               onSubmitFailure={this.handleFailure.bind(null, this)}
-            />
+             />
           </div>
           <SubmitButton
             isSubmitting={this.state.isSubmitting}

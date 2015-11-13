@@ -1,10 +1,10 @@
 import FormMixin from '../../../utils/FormMixin';
+import CkeditorMixin from '../../../utils/CkeditorMixin';
 import DeepLinkStateMixin from '../../../utils/DeepLinkStateMixin';
 import ProposalActions from '../../../actions/ProposalActions';
 import FlashMessages from '../../Utils/FlashMessages';
 import ArrayHelper from '../../../services/ArrayHelper';
 import Input from '../../Form/Input';
-import Editor from '../../Form/Editor';
 
 const ProposalForm = React.createClass({
   propTypes: {
@@ -18,7 +18,7 @@ const ProposalForm = React.createClass({
     mode: React.PropTypes.string,
     proposal: React.PropTypes.object,
   },
-  mixins: [ReactIntl.IntlMixin, DeepLinkStateMixin, FormMixin],
+  mixins: [ReactIntl.IntlMixin, DeepLinkStateMixin, FormMixin, CkeditorMixin],
 
   getDefaultProps() {
     return {
@@ -56,14 +56,16 @@ const ProposalForm = React.createClass({
   },
 
   componentDidMount() {
+    this.initializeCkeditor('body', 'form');
+
     this.props.form.questions.map((question) => {
       const ref = 'custom-' + question.id;
+      this.initializeCkeditor(ref, 'custom');
       this.formValidationRules[ref] = {
         notBlank: {message: 'global.constraints.notBlank'},
       };
     });
   },
-
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.isSubmitting === true) {
@@ -207,31 +209,35 @@ const ProposalForm = React.createClass({
               );
             })
           }
-      </Input>
+        </Input>
 
-      <Editor
-        label={this.getIntlMessage('proposal.body') + '*'}
-        labelClassName="h5"
-        groupClassName={this.getGroupStyle('body')}
-        errors={this.renderFormErrors('body')}
-        valueLink={this.linkState('form.body')}
-      />
+        <Input
+          type="textarea"
+          ref="body"
+          valueLink={this.linkState('form.body')} // state is automatically updated by CkeditorMixin
+          label={this.getIntlMessage('proposal.body') + '*'}
+          groupClassName={this.getGroupStyle('body')}
+          errors={this.renderFormErrors('body')}
+          bsStyle={this.getFieldStyle('body')}
+        />
 
-      {
-        this.props.form.questions.map((question) => {
-          const key = 'custom-' + question.id;
-          return (
-            <Editor
-              label={question.title + '*'}
-              labelClassName="h5"
-              groupClassName={this.getGroupStyle(key)}
-              valueLink={this.linkState('custom.' + key)}
-              help={question.helpText}
-              errors={this.renderFormErrors(key)}
-            />
-          );
-        })
-      }
+        {
+          this.props.form.questions.map((question) => {
+            const ref = 'custom-' + question.id;
+            return (
+              <Input
+                type="textarea"
+                ref={ref}
+                valueLink={this.linkState('custom.' + ref)} // state is automatically updated by CkeditorMixin
+                label={question.title + ' *'}
+                help={question.helpText}
+                groupClassName={this.getGroupStyle(ref)}
+                errors={this.renderFormErrors(ref)}
+                bsStyle={this.getFieldStyle(ref)}
+              />
+            );
+          })
+        }
 
       </form>
     );

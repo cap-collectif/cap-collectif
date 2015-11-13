@@ -27,19 +27,16 @@ const OpinionBodyDiffModal = React.createClass({
   render() {
     return (
       <span>
-        <OverlayTrigger
-          placement="top"
-          overlay={
-            <Tooltip placement="top" className="in">
-              {this.getIntlMessage('opinion.diff.tooltip')}
-            </Tooltip>
-          }
-        >
-          <a onClick={() => this.open()}>
+        <OverlayTrigger placement="top" overlay={
+          <Tooltip placement="top" className="in">
+            {this.getIntlMessage('opinion.diff.tooltip')}
+          </Tooltip>
+        }>
+          <a onClick={this.open.bind(null, this)}>
             {this.props.link}
           </a>
         </OverlayTrigger>
-        <Modal show={this.state.showModal} onHide={() => this.close()}>
+        <Modal show={this.state.showModal} onHide={this.close.bind(null, this)}>
           <Modal.Header closeButton>
             <Modal.Title>{this.props.modal.title}</Modal.Title>
           </Modal.Header>
@@ -49,7 +46,7 @@ const OpinionBodyDiffModal = React.createClass({
             <div dangerouslySetInnerHTML={{__html: CustomDiff.prettyDiff(this.props.modal.before, this.props.modal.after) }} />
           </Modal.Body>
           <Modal.Footer>
-            <Button bsStyle="primary" onClick={() => this.close()}>{this.getIntlMessage('global.close')}</Button>
+            <Button bsStyle="primary" onClick={this.close}>{this.getIntlMessage('global.close')}</Button>
           </Modal.Footer>
         </Modal>
       </span>
