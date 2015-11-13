@@ -17,7 +17,7 @@ const CommentInfos = React.createClass({
             value={moment(this.props.comment.created_at)}
             day="numeric" month="long" year="numeric"
             hour="numeric" minute="numeric"
-         />
+        />
       </span>
     );
   },
@@ -40,7 +40,7 @@ const CommentInfos = React.createClass({
             value={moment(this.props.comment.updated_at)}
             day="numeric" month="long" year="numeric"
             hour="numeric" minute="numeric"
-         />
+        />
       </span>
     );
   },

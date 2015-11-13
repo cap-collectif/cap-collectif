@@ -44,7 +44,9 @@ const OpinionReportButton = React.createClass({
         <LoginOverlay>
           <Button
             className="opinion__action--report pull-right btn--outline btn-dark-gray"
-            href={reported ? null : this.props.opinion._links.report} active={reported}>
+            href={reported ? null : this.props.opinion._links.report}
+            active={reported}
+          >
             <i className="cap cap-flag-1"></i>
             { ' ' }
             { reported ? this.getIntlMessage('global.report.reported') : this.getIntlMessage('global.report.submit') }

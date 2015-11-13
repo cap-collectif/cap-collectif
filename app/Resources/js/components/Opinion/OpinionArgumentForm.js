@@ -88,9 +88,8 @@ const OpinionArgumentForm = React.createClass({
                 valueLink={this.linkState('body')}
                 label={this.getIntlMessage('argument.' + this.props.type + '.add')}
                 placeholder={this.getIntlMessage('argument.' + this.props.type + '.add')}
-                bsStyle={this.getFieldStyle('body')}
                 groupClassName={this.getGroupStyle('body')}
-                labelClassName="h5 sr-only"
+                labelClassName="sr-only"
                 errors={this.renderFormErrors('body')}
               />
             </LoginOverlay>

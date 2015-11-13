@@ -76,8 +76,13 @@ const OpinionBox = React.createClass({
   renderPieChart() {
     const opinion = this.props.opinion;
     return (
-      <VotePiechart top={20} height={180} ok={opinion.votes_ok} nok={opinion.votes_nok}
-                          mitige={opinion.votes_mitige}/>
+      <VotePiechart
+        top={20}
+        height={180}
+        ok={opinion.votes_ok}
+        nok={opinion.votes_nok}
+        mitige={opinion.votes_mitige}
+      />
     );
   },
 
@@ -85,12 +90,18 @@ const OpinionBox = React.createClass({
     const opinion = this.props.opinion;
     return (
       <div>
-        {this.getOpinionType().votesThreshold ?
-          <VotesBar max={this.getOpinionType().votesThreshold} value={opinion.votes_ok}
-                    helpText={this.getOpinionType().votesThresholdHelpText}/>
-          : null}
+        {this.getOpinionType().votesThreshold
+          ? <VotesBar
+              max={this.getOpinionType().votesThreshold}
+              value={opinion.votes_ok}
+              helpText={this.getOpinionType().votesThresholdHelpText}
+            />
+          : null
+        }
         {this.renderUserAvatarVotes()}
-        <div><FormattedMessage message={this.getIntlMessage('global.votes')} num={opinion.votes_total}/></div>
+        <div>
+          <FormattedMessage message={this.getIntlMessage('global.votes')} num={opinion.votes_total}/>
+        </div>
       </div>
     );
   },

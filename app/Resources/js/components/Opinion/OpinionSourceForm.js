@@ -125,8 +125,14 @@ const OpinionSourceForm = React.createClass({
     return (
       <div>
         <LoginOverlay children={this.renderCreateButton()} />
-        <Modal {...this.props} animation={false} show={this.state.showModal} onHide={this.close.bind(null, this)}
-               bsSize="large" aria-labelledby="contained-modal-title-lg">
+        <Modal
+          {...this.props}
+          animation={false}
+          show={this.state.showModal}
+          onHide={this.close.bind(null, this)}
+          bsSize="large"
+          aria-labelledby="contained-modal-title-lg"
+        >
           <Modal.Header closeButton>
             <Modal.Title id="contained-modal-title-lg">
               { this.getIntlMessage('source.add') }
@@ -143,7 +149,6 @@ const OpinionSourceForm = React.createClass({
                 ref="title"
                 type="text"
                 name="sourceTitle"
-                bsStyle={this.getFieldStyle('title')}
                 groupClassName={this.getGroupStyle('title')}
                 valueLink={this.linkState('title')}
                 label={this.getIntlMessage('source.title')}
@@ -154,7 +159,6 @@ const OpinionSourceForm = React.createClass({
                 type="select"
                 name="sourceCategory"
                 label={this.getIntlMessage('source.type')}
-                bsStyle={this.getFieldStyle('category')}
                 groupClassName={this.getGroupStyle('category')}
                 valueLink={this.linkState('category')}
                 errors={this.renderFormErrors('category')}
@@ -171,7 +175,6 @@ const OpinionSourceForm = React.createClass({
                 type="text"
                 name="sourceLink"
                 label={this.getIntlMessage('source.link')}
-                bsStyle={this.getFieldStyle('link')}
                 groupClassName={this.getGroupStyle('link')}
                 valueLink={this.linkState('link')}
                 errors={this.renderFormErrors('link')}
@@ -184,7 +187,6 @@ const OpinionSourceForm = React.createClass({
                 rows="10" cols="80"
                 label={this.getIntlMessage('source.body')}
                 groupClassName={this.getGroupStyle('body')}
-                bsStyle={this.getFieldStyle('body')}
                 valueLink={this.linkState('body')}
                 errors={this.renderFormErrors('body')}
               />

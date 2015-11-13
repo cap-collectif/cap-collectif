@@ -22,7 +22,7 @@ const OpinionArgumentItem = React.createClass({
           value={moment(argument.created_at)}
           day="numeric" month="long" year="numeric"
           hour="numeric" minute="numeric"
-          />
+        />
       </p>
     );
   },

@@ -1,5 +1,4 @@
 import FormMixin from '../../../utils/FormMixin';
-import CkeditorMixin from '../../../utils/CkeditorMixin';
 import DeepLinkStateMixin from '../../../utils/DeepLinkStateMixin';
 import ProposalActions from '../../../actions/ProposalActions';
 import FlashMessages from '../../Utils/FlashMessages';
@@ -18,7 +17,7 @@ const ProposalForm = React.createClass({
     mode: React.PropTypes.string,
     proposal: React.PropTypes.object,
   },
-  mixins: [ReactIntl.IntlMixin, DeepLinkStateMixin, FormMixin, CkeditorMixin],
+  mixins: [ReactIntl.IntlMixin, DeepLinkStateMixin, FormMixin],
 
   getDefaultProps() {
     return {
@@ -56,16 +55,14 @@ const ProposalForm = React.createClass({
   },
 
   componentDidMount() {
-    this.initializeCkeditor('body', 'form');
-
     this.props.form.questions.map((question) => {
       const ref = 'custom-' + question.id;
-      this.initializeCkeditor(ref, 'custom');
       this.formValidationRules[ref] = {
         notBlank: {message: 'global.constraints.notBlank'},
       };
     });
   },
+
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.isSubmitting === true) {
@@ -166,7 +163,6 @@ const ProposalForm = React.createClass({
           label={this.getIntlMessage('proposal.title') + '*'}
           groupClassName={this.getGroupStyle('title')}
           errors={this.renderFormErrors('title')}
-          bsStyle={this.getFieldStyle('title')}
         />
 
         <Input
@@ -176,7 +172,6 @@ const ProposalForm = React.createClass({
           label={this.getIntlMessage('proposal.theme') + '*'}
           groupClassName={this.getGroupStyle('theme')}
           errors={this.renderFormErrors('theme')}
-          bsStyle={this.getFieldStyle('theme')}
         >
           <option value={-1} disabled>{this.getIntlMessage('proposal.select.theme')}</option>
           {
@@ -197,7 +192,6 @@ const ProposalForm = React.createClass({
           label={this.getIntlMessage('proposal.district') + '*'}
           groupClassName={this.getGroupStyle('district')}
           errors={this.renderFormErrors('district')}
-          bsStyle={this.getFieldStyle('district')}
         >
           <option value={-1} disabled>{this.getIntlMessage('proposal.select.district')}</option>
           {
@@ -209,35 +203,31 @@ const ProposalForm = React.createClass({
               );
             })
           }
-        </Input>
+      </Input>
 
-        <Input
-          type="textarea"
-          ref="body"
-          valueLink={this.linkState('form.body')} // state is automatically updated by CkeditorMixin
-          label={this.getIntlMessage('proposal.body') + '*'}
-          groupClassName={this.getGroupStyle('body')}
-          errors={this.renderFormErrors('body')}
-          bsStyle={this.getFieldStyle('body')}
-        />
+      <Input
+        type="editor"
+        label={this.getIntlMessage('proposal.body') + '*'}
+        groupClassName={this.getGroupStyle('body')}
+        errors={this.renderFormErrors('body')}
+        valueLink={this.linkState('form.body')}
+      />
 
-        {
-          this.props.form.questions.map((question) => {
-            const ref = 'custom-' + question.id;
-            return (
-              <Input
-                type="textarea"
-                ref={ref}
-                valueLink={this.linkState('custom.' + ref)} // state is automatically updated by CkeditorMixin
-                label={question.title + ' *'}
-                help={question.helpText}
-                groupClassName={this.getGroupStyle(ref)}
-                errors={this.renderFormErrors(ref)}
-                bsStyle={this.getFieldStyle(ref)}
-              />
-            );
-          })
-        }
+      {
+        this.props.form.questions.map((question) => {
+          const key = 'custom-' + question.id;
+          return (
+            <Input
+              type="editor"
+              label={question.title + '*'}
+              groupClassName={this.getGroupStyle(key)}
+              valueLink={this.linkState('custom.' + key)}
+              help={question.helpText}
+              errors={this.renderFormErrors(key)}
+            />
+          );
+        })
+      }
 
       </form>
     );
