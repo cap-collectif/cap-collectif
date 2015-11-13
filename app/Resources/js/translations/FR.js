@@ -167,6 +167,9 @@ export default {
         title: 'Le titre de la proposition doit faire au moins 2 caractères.',
       },
       count: '{num, plural, =0{0 projet} one{# projet} other{# projets}}',
+      delete: {
+        confirm: 'Voulez-vous vraiment supprimer la proposition "{title}" ?',
+      },
       description: 'Description',
       district: 'Quartier',
       empty: 'Aucune proposition',

@@ -291,7 +291,7 @@ class ProposalsController extends FOSRestController
     public function putProposalAction(Request $request, ProposalForm $proposalForm, Proposal $proposal)
     {
         if (!$proposal->canContribute()) {
-            throw new BadRequestHttpException('You are not the author of this proposal.');
+            throw new BadRequestHttpException('This proposal is no longer editable.');
         }
 
         $user = $this->getUser();
@@ -352,10 +352,13 @@ class ProposalsController extends FOSRestController
         }
 
         $em->remove($proposal);
+        $em->flush();
+
         $this->get('event_dispatcher')->dispatch(
             CapcoAppBundleEvents::PROPOSAL_DELETED,
             new ProposalEvent($proposal, 'remove')
         );
-        $em->flush();
+
+        return [];
     }
 }

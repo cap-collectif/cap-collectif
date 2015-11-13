@@ -1,7 +1,5 @@
 import UserAvatar from '../../User/UserAvatar';
 import UserLink from '../../User/UserLink';
-import ProposalEditModal from '../Edit/ProposalEditModal';
-import EditButton from '../../Form/EditButton';
 
 const FormattedDate = ReactIntl.FormattedDate;
 const FormattedMessage = ReactIntl.FormattedMessage;
@@ -10,21 +8,8 @@ const Label = ReactBootstrap.Label;
 const ProposalPageHeader = React.createClass({
   propTypes: {
     proposal: React.PropTypes.object.isRequired,
-    form: React.PropTypes.object.isRequired,
-    themes: React.PropTypes.array.isRequired,
-    districts: React.PropTypes.array.isRequired,
   },
   mixins: [ReactIntl.IntlMixin],
-
-  getInitialState() {
-    return {
-      showEditModal: false,
-    };
-  },
-
-  toggleEditModal(value) {
-    this.setState({showEditModal: value});
-  },
 
   render() {
     const proposal = this.props.proposal;
@@ -51,12 +36,6 @@ const ProposalPageHeader = React.createClass({
                   </a>
                 }
                 createdDate={createdDate}
-              />
-              <EditButton
-                author={this.props.proposal.author}
-                onClick={this.toggleEditModal.bind(null, true)}
-                hasWrapper
-                wrapperClassName="pull-right"
               />
             </p>
           </div>
@@ -90,14 +69,6 @@ const ProposalPageHeader = React.createClass({
             <i className="cap cap-marker-1-1"></i>{proposal.district.name}
           </span>
         </div>
-        <ProposalEditModal
-          proposal={this.props.proposal}
-          form={this.props.form}
-          themes={this.props.themes}
-          districts={this.props.districts}
-          show={this.state.showEditModal}
-          onToggleModal={this.toggleEditModal}
-        />
       </div>
     );
   },
