@@ -14,10 +14,6 @@ class ProposalSerializationListener implements EventSubscriberInterface
 
     public function __construct(RouterInterface $router, TokenStorageInterface $tokenStorage)
     {
-        if (getenv('SYMFONY_USE_SSL')) {
-            $router->getContext()->setScheme('https');
-        }
-
         $this->router = $router;
         $this->tokenStorage = $tokenStorage;
     }
@@ -46,15 +42,9 @@ class ProposalSerializationListener implements EventSubscriberInterface
             'stepSlug' => $step->getSlug(),
         ], true);
 
-        $indexUrl = $this->router->generate('app_project_show_collect', [
-            'projectSlug' => $project->getSlug(),
-            'stepSlug' => $step->getSlug(),
-        ], true);
-
         $event->getVisitor()->addData(
             '_links', [
                 'show' => $showUrl,
-                'index' => $indexUrl,
             ]
         );
     }

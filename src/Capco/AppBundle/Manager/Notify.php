@@ -46,13 +46,6 @@ class Notify implements MailerInterface
         ;
     }
 
-    public function sendInternalEmail($body, $subject, $contentType = 'text/html') {
-        $to = $this->resolver->getValue('admin.mail.notifications.receive_address');
-        $fromAdress = $this->resolver->getValue('admin.mail.notifications.send_address');
-        $fromName = $this->resolver->getValue('admin.mail.notifications.send_name');
-        $this->sendServiceEmail($to, $fromAdress, $fromName, $body, $subject, $contentType);
-    }
-
     public function sendServiceEmail($to, $fromAddress, $fromName, $body, $subject, $contentType = 'text/html')
     {
         if ($to && $fromAddress) {
@@ -145,7 +138,7 @@ class Notify implements MailerInterface
 
     public function notifyModeration($contribution)
     {
-        $from = $this->resolver->getValue('admin.mail.notifications.send_address');
+        $from = $this->resolver->getValue('admin.mail.notifications.receive_address');
         if ($from && $contribution->getAuthor()) {
             $subject = $this->translator->trans(
                 'moderation.notification.subject', [], 'CapcoAppBundle'
@@ -165,7 +158,8 @@ class Notify implements MailerInterface
 
     public function notifyProposalDeletion($contribution)
     {
-        if ($contribution) {
+        $from = $this->resolver->getValue('admin.mail.notifications.receive_address');
+        if ($from && $contribution->getAuthor()) {
             $subject = $this->translator->trans(
                 'proposal_deletion.notification.subject', [], 'CapcoAppBundle'
             );
@@ -177,7 +171,7 @@ class Notify implements MailerInterface
                 ]
             );
 
-            $this->sendInternalEmail($body, $subject);
+            $this->sendEmail($contribution->getAuthor()->getEmail(), $from, $from, $body, $subject);
         }
     }
 }

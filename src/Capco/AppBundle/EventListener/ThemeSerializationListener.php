@@ -12,10 +12,6 @@ class ThemeSerializationListener implements EventSubscriberInterface
 
     public function __construct(RouterInterface $router)
     {
-        if (getenv('SYMFONY_USE_SSL')) {
-            $router->getContext()->setScheme('https');
-        }
-
         $this->router = $router;
     }
 

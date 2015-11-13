@@ -77,10 +77,6 @@ export default {
     return Fetcher.put(`/proposal_forms/${form}/proposals/${proposal}`, data);
   },
 
-  delete: (form, proposal) => {
-    return Fetcher.delete(`/proposal_forms/${form}/proposals/${proposal}`);
-  },
-
   getOne: (form, proposal) => {
     Fetcher
       .get(`/proposal_forms/${form}/proposals/${proposal}`)

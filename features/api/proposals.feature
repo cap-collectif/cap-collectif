@@ -58,8 +58,7 @@ Feature: Proposal Restful Api
     "author": @...@
   },
   "_links": {
-    "show": @string@,
-    "index": @string@
+    "show": @string@
   }
 }
 """

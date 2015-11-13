@@ -1,3 +1,5 @@
+import Editor from './Editor';
+
 export default class Input extends ReactBootstrap.Input {
 
   renderErrors() {
@@ -9,6 +11,14 @@ export default class Input extends ReactBootstrap.Input {
         )
       : null
     ;
+  }
+
+  renderInput() {
+    if (this.props.type && this.props.type === 'editor') {
+      return <Editor valueLink={this.props.valueLink} />;
+    }
+
+    return super.renderInput();
   }
 
   renderChildren() {

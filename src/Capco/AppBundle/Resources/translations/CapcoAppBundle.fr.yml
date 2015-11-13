@@ -682,19 +682,17 @@ moderation:
 
 proposal_deletion:
   notification:
-      subject: Une proposition a été supprimée par son auteur.
+      subject: La contribution a été supprimée par son auteur
       body: |
-        <p>Bonjour,</p>
-        <p>La proposition "%title%" vient d’être supprimée par son auteur sur %sitename%.</p>
-        <p><strong>Informations complémentaires :</strong></p>
-        <ul>
-          <li>Projet : %project%</li>
-          <li>Étape : %step%</li>
-          <li>Titre : %title%</li>
-          <li>Auteur : %author%</li>
-          <li>Contenu :</li>
-        </ul>
-        <div>%content%</div>
+        Bonjour,
+
+        Une proposition vient d’être supprimée par %author% sur %sitename%.
+
+        Projet : %project%
+        Étape : %step%
+
+        Contribution :
+        %content%
 
 reporting:
   create:

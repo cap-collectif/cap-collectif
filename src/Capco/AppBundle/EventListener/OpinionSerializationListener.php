@@ -18,10 +18,6 @@ class OpinionSerializationListener implements EventSubscriberInterface
 
     public function __construct(RouterInterface $router, TokenStorageInterface $tokenStorage, AbstractVoteRepository $voteRepository, Manager $toggleManager)
     {
-        if (getenv('SYMFONY_USE_SSL')) {
-            $router->getContext()->setScheme('https');
-        }
-
         $this->router = $router;
         $this->tokenStorage = $tokenStorage;
         $this->toggleManager = $toggleManager;
