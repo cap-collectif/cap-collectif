@@ -27,7 +27,7 @@ const Editor = React.createClass({
           template: `
             <input class="input" type="textbox">
             <div class="preview">
-              <span>Preview</span>
+              <span>${this.getIntlMessage('global.preview')}</span>
             </div>
             <a href="javascript:;" class="cancel">${this.getIntlMessage('global.cancel')}</a>
             <a href="javascript:;" class="insert">${this.getIntlMessage('global.insert')}</a>`,

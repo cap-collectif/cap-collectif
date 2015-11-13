@@ -252,6 +252,7 @@ export default {
       remove: 'Supprimer',
       change: 'Changer',
       close: 'Fermer',
+      preview: 'Aperçu',
       constraints: {
         notBlank: 'Cette valeur ne doit pas être vide',
       },
