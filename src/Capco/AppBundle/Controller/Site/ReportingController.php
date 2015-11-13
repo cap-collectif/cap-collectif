@@ -14,6 +14,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Symfony\Component\Form\Form;
@@ -382,6 +383,7 @@ class ReportingController extends Controller
 
     /**
      * @Route("/projects/{projectSlug}/collect/{stepSlug}/proposals/{proposalSlug}/report", name="app_report_proposal", defaults={"_feature_flags" = "reporting"})
+     * @Security("has_role('ROLE_USER')")
      * @ParamConverter("proposal", options={"mapping": {"proposalSlug": "slug"}})
      * @Template("CapcoAppBundle:Reporting:create.html.twig")
      *
@@ -394,14 +396,6 @@ class ReportingController extends Controller
      */
     public function reportingProposalAction($projectSlug, $stepSlug, Proposal $proposal, Request $request)
     {
-        if (false === $this->get('security.authorization_checker')->isGranted('ROLE_USER')) {
-            throw new AccessDeniedException($this->get('translator')->trans('error.access_restricted', array(), 'CapcoAppBundle'));
-        }
-
-        if ($proposal == null) {
-            throw $this->createNotFoundException($this->get('translator')->trans('proposal.error.not_found', array(), 'CapcoAppBundle'));
-        }
-
         if (false == $proposal->canDisplay()) {
             throw new AccessDeniedException();
         }

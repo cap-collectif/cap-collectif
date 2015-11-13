@@ -281,7 +281,7 @@ class ProposalsController extends FOSRestController
      * @Put("/proposal_forms/{proposal_form_id}/proposals/{proposal_id}")
      * @ParamConverter("proposalForm", options={"mapping": {"proposal_form_id": "id"}, "repository_method": "find", "map_method_signature": true})
      * @ParamConverter("proposal", options={"mapping": {"proposal_id": "id"}, "repository_method": "find", "map_method_signature": true})
-     * @View(statusCode=204)
+     * @View(statusCode=200)
      *
      * @param ProposalForm $proposalForm
      * @param Proposal     $proposal
