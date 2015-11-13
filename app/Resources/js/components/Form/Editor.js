@@ -51,7 +51,7 @@ const Editor = React.createClass({
 
   render() {
     return (
-      <div style={{border: '1px solid #ccc', margin: 'auto', position: 'relative'}}>
+      <div className="editor">
         <QuillToolbar ref="toolbar" />
         <div ref="editor" style={{position: 'static'}} />
       </div>

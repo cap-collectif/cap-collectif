@@ -163,7 +163,6 @@ const ProposalForm = React.createClass({
           label={this.getIntlMessage('proposal.title') + '*'}
           groupClassName={this.getGroupStyle('title')}
           errors={this.renderFormErrors('title')}
-          bsStyle={this.getFieldStyle('title')}
         />
 
         <Input
@@ -173,7 +172,6 @@ const ProposalForm = React.createClass({
           label={this.getIntlMessage('proposal.theme') + '*'}
           groupClassName={this.getGroupStyle('theme')}
           errors={this.renderFormErrors('theme')}
-          bsStyle={this.getFieldStyle('theme')}
         >
           <option value={-1} disabled>{this.getIntlMessage('proposal.select.theme')}</option>
           {
@@ -194,7 +192,6 @@ const ProposalForm = React.createClass({
           label={this.getIntlMessage('proposal.district') + '*'}
           groupClassName={this.getGroupStyle('district')}
           errors={this.renderFormErrors('district')}
-          bsStyle={this.getFieldStyle('district')}
         >
           <option value={-1} disabled>{this.getIntlMessage('proposal.select.district')}</option>
           {
@@ -213,7 +210,6 @@ const ProposalForm = React.createClass({
         label={this.getIntlMessage('proposal.body') + '*'}
         groupClassName={this.getGroupStyle('body')}
         errors={this.renderFormErrors('body')}
-        bsStyle={this.getFieldStyle('body')}
         valueLink={this.linkState('form.body')}
       />
 
@@ -226,7 +222,6 @@ const ProposalForm = React.createClass({
               label={question.title + '*'}
               groupClassName={this.getGroupStyle(key)}
               valueLink={this.linkState('custom.' + key)}
-              bsStyle={this.getFieldStyle('body')}
               help={question.helpText}
               errors={this.renderFormErrors(key)}
             />

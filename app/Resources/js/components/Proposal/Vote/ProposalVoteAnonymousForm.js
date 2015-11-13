@@ -84,7 +84,6 @@ const ProposalVoteAnonymousForm = React.createClass({
           label={this.getIntlMessage('proposal.name')}
           groupClassName={this.getGroupStyle('name')}
           errors={this.renderFormErrors('name')}
-          bsStyle={this.getFieldStyle('name')}
         />
 
         <Input
@@ -94,7 +93,6 @@ const ProposalVoteAnonymousForm = React.createClass({
           label={this.getIntlMessage('proposal.email')}
           groupClassName={this.getGroupStyle('email')}
           errors={this.renderFormErrors('email')}
-          bsStyle={this.getFieldStyle('email')}
         />
 
         <Input
@@ -104,7 +102,6 @@ const ProposalVoteAnonymousForm = React.createClass({
           label={this.getIntlMessage('proposal.body')}
           groupClassName={this.getGroupStyle('body')}
           errors={this.renderFormErrors('body')}
-          bsStyle={this.getFieldStyle('body')}
         />
 
         <Input
@@ -114,7 +111,6 @@ const ProposalVoteAnonymousForm = React.createClass({
           label={this.getIntlMessage('proposal.private')}
           groupClassName={this.getGroupStyle('private')}
           errors={this.renderFormErrors('private')}
-          bsStyle={this.getFieldStyle('private')}
         />
 
       </form>
