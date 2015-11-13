@@ -36,12 +36,20 @@
     "jsdiff": "~1.4.0",
     "bootstrap-sass": "~3.3.5",
     "moment": "~2.10.6",
-    "react-router-bootstrap": "v0.18.1"
+    "react-router-bootstrap": "v0.18.1",
+    "quill": "~0.20.0"
   },
   "resolutions": {
     "react": "0.13.3"
   },
   "overrides": {
+    "quill": {
+      "main": [
+        "dist/quill.js",
+        "dist/quill.base.css",
+        "dist/quill.snow.css"
+      ]
+    },
     "fancybox": {
       "main": "source/jquery.fancybox.pack.js"
     },

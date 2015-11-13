@@ -23,7 +23,7 @@ const OpinionInfos = React.createClass({
             value={moment(this.props.opinion.created_at)}
             day="numeric" month="long" year="numeric"
             hour="numeric" minute="numeric"
-         />
+        />
       </span>
     );
   },
@@ -71,17 +71,17 @@ const OpinionInfos = React.createClass({
           <i className="cap cap-trophy"></i>
           {this.isVersion()
             ? <FormattedMessage
-            message={this.getIntlMessage('opinion.ranking.versions')}
-            max={this.props.rankingThreshold}
-            />
+                message={this.getIntlMessage('opinion.ranking.versions')}
+                max={this.props.rankingThreshold}
+              />
             : this.props.opinionTerm === 0
               ? <FormattedMessage
-                message={this.getIntlMessage('opinion.ranking.opinions')}
-                max={this.props.rankingThreshold}
+                  message={this.getIntlMessage('opinion.ranking.opinions')}
+                  max={this.props.rankingThreshold}
                 />
               : <FormattedMessage
-                message={this.getIntlMessage('opinion.ranking.articles')}
-                max={this.props.rankingThreshold}
+                  message={this.getIntlMessage('opinion.ranking.articles')}
+                  max={this.props.rankingThreshold}
                 />
           }
         </span>

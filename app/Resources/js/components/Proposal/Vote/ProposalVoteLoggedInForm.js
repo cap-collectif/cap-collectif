@@ -72,7 +72,6 @@ const ProposalVoteLoggedInForm = React.createClass({
           label={this.getIntlMessage('proposal.body')}
           groupClassName={this.getGroupStyle('body')}
           errors={this.renderFormErrors('body')}
-          bsStyle={this.getFieldStyle('body')}
         />
 
         <Input
@@ -82,7 +81,6 @@ const ProposalVoteLoggedInForm = React.createClass({
           label={this.getIntlMessage('proposal.private')}
           groupClassName={this.getGroupStyle('private')}
           errors={this.renderFormErrors('private')}
-          bsStyle={this.getFieldStyle('private')}
         />
 
       </form>
