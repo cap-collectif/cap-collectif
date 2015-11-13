@@ -3,6 +3,7 @@ import DeepLinkStateMixin from '../../../utils/DeepLinkStateMixin';
 import OpinionLinkActions from '../../../actions/OpinionLinkActions';
 import FlashMessages from '../../Utils/FlashMessages';
 import Input from '../../Form/Input';
+import Editor from '../../Form/Editor';
 
 const OpinionLinkForm = React.createClass({
   propTypes: {
@@ -80,6 +81,7 @@ const OpinionLinkForm = React.createClass({
           valueLink={this.linkState('form.type')}
           ref="type"
           label={this.getIntlMessage('opinion.link.type')}
+          bsStyle={this.getFieldStyle('type')}
           groupClassName={this.getGroupStyle('type')}
           errors={this.renderFormErrors('type')}
         >
@@ -98,14 +100,15 @@ const OpinionLinkForm = React.createClass({
           label={this.getIntlMessage('opinion.title')}
           groupClassName={this.getGroupStyle('title')}
           errors={this.renderFormErrors('title')}
+          bsStyle={this.getFieldStyle('title')}
         />
 
-        <Input
-          type="editor"
+        <Editor
           valueLink={this.linkState('form.body')}
           label={this.getIntlMessage('opinion.body')}
           groupClassName={this.getGroupStyle('body')}
           errors={this.renderFormErrors('body')}
+          bsStyle={this.getFieldStyle('body')}
         />
 
       </form>

@@ -162,6 +162,7 @@ const CommentForm = React.createClass({
                   help={ this.getIntlMessage('comment.public_name') }
                   groupClassName={this.getGroupStyle('authorName')}
                   errors={this.renderFormErrors('authorName')}
+                  bsStyle={this.getFieldStyle('authorName')}
                 />
                 <Input
                   type="email"
@@ -173,6 +174,7 @@ const CommentForm = React.createClass({
                   help={ this.getIntlMessage('comment.email_info') }
                   groupClassName={this.getGroupStyle('authorEmail')}
                   errors={this.renderFormErrors('authorEmail')}
+                  bsStyle={this.getFieldStyle('authorEmail')}
                 />
                 <Button ref="anonymousComment"
                   disabled={this.state.isSubmitting}
@@ -228,6 +230,7 @@ const CommentForm = React.createClass({
               placeholder={this.getIntlMessage('comment.write')}
               groupClassName={this.getGroupStyle('body')}
               errors={this.renderFormErrors('body')}
+              bsStyle={this.getFieldStyle('body')}
             />
             { this.renderCommentButton() }
           </form>

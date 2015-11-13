@@ -4,6 +4,7 @@ import ProposalActions from '../../../actions/ProposalActions';
 import FlashMessages from '../../Utils/FlashMessages';
 import ArrayHelper from '../../../services/ArrayHelper';
 import Input from '../../Form/Input';
+import Editor from '../../Form/Editor';
 
 const ProposalForm = React.createClass({
   propTypes: {
@@ -163,6 +164,7 @@ const ProposalForm = React.createClass({
           label={this.getIntlMessage('proposal.title') + '*'}
           groupClassName={this.getGroupStyle('title')}
           errors={this.renderFormErrors('title')}
+          bsStyle={this.getFieldStyle('title')}
         />
 
         <Input
@@ -172,6 +174,7 @@ const ProposalForm = React.createClass({
           label={this.getIntlMessage('proposal.theme') + '*'}
           groupClassName={this.getGroupStyle('theme')}
           errors={this.renderFormErrors('theme')}
+          bsStyle={this.getFieldStyle('theme')}
         >
           <option value={-1} disabled>{this.getIntlMessage('proposal.select.theme')}</option>
           {
@@ -192,6 +195,7 @@ const ProposalForm = React.createClass({
           label={this.getIntlMessage('proposal.district') + '*'}
           groupClassName={this.getGroupStyle('district')}
           errors={this.renderFormErrors('district')}
+          bsStyle={this.getFieldStyle('district')}
         >
           <option value={-1} disabled>{this.getIntlMessage('proposal.select.district')}</option>
           {
@@ -205,9 +209,9 @@ const ProposalForm = React.createClass({
           }
       </Input>
 
-      <Input
-        type="editor"
+      <Editor
         label={this.getIntlMessage('proposal.body') + '*'}
+        labelClassName="h5"
         groupClassName={this.getGroupStyle('body')}
         errors={this.renderFormErrors('body')}
         valueLink={this.linkState('form.body')}
@@ -217,9 +221,9 @@ const ProposalForm = React.createClass({
         this.props.form.questions.map((question) => {
           const key = 'custom-' + question.id;
           return (
-            <Input
-              type="editor"
+            <Editor
               label={question.title + '*'}
+              labelClassName="h5"
               groupClassName={this.getGroupStyle(key)}
               valueLink={this.linkState('custom.' + key)}
               help={question.helpText}
