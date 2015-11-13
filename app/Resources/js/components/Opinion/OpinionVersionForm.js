@@ -1,10 +1,11 @@
 import LoginStore from '../../stores/LoginStore';
-import ValidatorMixin from '../../utils/ValidatorMixin';
+import FormMixin from '../../utils/FormMixin';
+import DeepLinkStateMixin from '../../utils/DeepLinkStateMixin';
 import OpinionActions from '../../actions/OpinionActions';
 import LoginOverlay from '../Utils/LoginOverlay';
-import CkeditorMixin from '../../utils/CkeditorMixin';
 import FlashMessages from '../Utils/FlashMessages';
 import Input from '../Form/Input';
+import Editor from '../Form/Editor';
 
 const Modal = ReactBootstrap.Modal;
 const Button = ReactBootstrap.Button;
@@ -19,7 +20,7 @@ const OpinionVersionForm = React.createClass({
     style: React.PropTypes.object,
     isContribuable: React.PropTypes.bool,
   },
-  mixins: [ReactIntl.IntlMixin, React.addons.LinkedStateMixin, CkeditorMixin, ValidatorMixin],
+  mixins: [ReactIntl.IntlMixin, DeepLinkStateMixin, FormMixin],
 
   getDefaultProps() {
     return {
@@ -33,36 +34,31 @@ const OpinionVersionForm = React.createClass({
 
   getInitialState() {
     return {
-      title: this.props.version ? this.props.version.title : '',
-      body: this.props.version ? this.props.version.body : this.props.opinionBody,
-      comment: this.props.version ? this.props.version.comment : null,
+      form: {
+        title: this.props.version ? this.props.version.title : '',
+        body: this.props.version ? this.props.version.body : this.props.opinionBody,
+        comment: this.props.version ? this.props.version.comment : null,
+      },
+      errors: {
+        title: [],
+        body: [],
+        comment: [],
+        confirm: [],
+      },
       showModal: false,
       isSubmitting: false,
     };
   },
 
   componentDidMount() {
-    const constraints = {
-      title: {
-        notBlank: {message: 'opinion.version.title_error'},
-        min: {value: 2, message: 'opinion.version.title_error'},
-      },
-      body: {
-        notEqual: {value: this.props.opinionBody, message: 'opinion.version.body_error'},
-      },
+    this.formValidationRules.body = {
+      notEqual: {value: this.props.opinionBody, message: 'opinion.version.body_error'},
     };
+
     if (this.props.mode === 'edit') {
-      constraints.confirm = {
+      this.formValidationRules.confirm = {
         isTrue: {message: 'opinion.version.confirm_error'},
       };
-    }
-    this.initForm('form', constraints);
-  },
-
-  componentDidUpdate(prevProps, prevState) {
-    if (this.state.showModal && !prevState.showModal) {
-      this.initializeCkeditor('body');
-      this.initializeCkeditor('comment');
     }
   },
 
@@ -75,21 +71,17 @@ const OpinionVersionForm = React.createClass({
   },
 
   create() {
-    this.setState({submitted: true}, () => {
+    this.setState({
+      submitted: true,
+    }, () => {
       if (!this.isValid()) {
         return;
       }
 
       this.setState({isSubmitting: true});
 
-      const data = {
-        title: this.state.title,
-        body: this.state.body,
-        comment: this.state.comment,
-      };
-
       OpinionActions
-      .createVersion(this.props.opinionId, data)
+      .createVersion(this.props.opinionId, this.state.form)
       .then((version) => {
         this.setState(this.getInitialState());
         this.close();
@@ -111,9 +103,9 @@ const OpinionVersionForm = React.createClass({
       this.setState({isSubmitting: true});
 
       const data = {
-        title: this.state.title,
-        body: this.state.body,
-        comment: this.state.comment,
+        title: this.state.form.title,
+        body: this.state.form.body,
+        comment: this.state.form.comment,
       };
 
       OpinionActions
@@ -135,6 +127,24 @@ const OpinionVersionForm = React.createClass({
   },
 
 
+  handleSubmit() {
+    if (this.state.isSubmitting) {
+      return;
+    }
+    if (this.props.mode === 'create') {
+      this.create();
+      return;
+    }
+    this.update();
+  },
+
+  formValidationRules: {
+    title: {
+      notBlank: {message: 'opinion.version.title_error'},
+      min: {value: 2, message: 'opinion.version.title_error'},
+    },
+  },
+
   renderFormErrors(field) {
     const errors = this.getErrorsMessages(field);
     if (errors.length > 0) {
@@ -146,14 +156,14 @@ const OpinionVersionForm = React.createClass({
   renderButton() {
     if (this.props.mode === 'create') {
       return (
-        <Button bsStyle="primary" onClick={LoginStore.isLoggedIn() ? this.show.bind(null, this) : null}>
+        <Button bsStyle="primary" onClick={LoginStore.isLoggedIn() ? () => this.show() : null}>
           <i className="cap cap-add-1"></i>
           { ' ' + this.getIntlMessage('opinion.add_new_version')}
         </Button>
       );
     }
     return (
-      <Button className="opinion__action--edit pull-right btn--outline btn-dark-gray" onClick={this.show.bind(null, this)}>
+      <Button className="opinion__action--edit pull-right btn--outline btn-dark-gray" onClick={() => this.show()}>
         <i className="cap cap-pencil-1"></i> {this.getIntlMessage('global.edit')}
       </Button>
     );
@@ -167,9 +177,13 @@ const OpinionVersionForm = React.createClass({
     return (
       <div className={this.props.className} style={style}>
         {this.isContribuable() ? <LoginOverlay children={this.renderButton()} /> : null}
-        <Modal {...this.props}
-          animation={false} show={this.state.showModal}
-          onHide={this.close.bind(null, this)} bsSize="large" aria-labelledby="contained-modal-title-lg"
+        <Modal
+          {...this.props}
+          animation={false}
+          show={this.state.showModal}
+          onHide={this.close.bind(null, this)}
+          bsSize="large"
+          aria-labelledby="contained-modal-title-lg"
         >
           <Modal.Header closeButton>
             <Modal.Title id="contained-modal-title-lg">
@@ -182,69 +196,58 @@ const OpinionVersionForm = React.createClass({
                 { this.getIntlMessage('opinion.add_new_version_infos') }
               </p>
             </div>
-            <form ref="form">
+            <form>
+
               { this.props.mode === 'edit'
                 ? <div className="alert alert-warning edit-confirm-alert">
                     <Input
-                      ref="confirm"
                       name="confirm"
                       type="checkbox"
                       bsStyle={this.getFieldStyle('confirm')}
                       groupClassName={this.getGroupStyle('confirm')}
                       label={this.getIntlMessage('opinion.version.confirm')}
                       errors={this.renderFormErrors('confirm')}
+                      checkedLink={this.linkState('form.confirm')}
                     />
                   </div>
                 : null
               }
+
               <Input
-                ref="title"
                 name="title"
                 type="text"
                 label={this.getIntlMessage('opinion.version.title')}
                 groupClassName={this.getGroupStyle('title')}
                 bsStyle={this.getFieldStyle('title')}
-                valueLink={this.linkState('title')}
+                valueLink={this.linkState('form.title')}
                 errors={this.renderFormErrors('title')}
               />
-              <Input
-                type="textarea"
-                name="body"
-                ref="body"
-                rows="10" cols="80"
+
+              <Editor
                 label={this.getIntlMessage('opinion.version.body')}
-                help={this.getIntlMessage('opinion.version.body_helper')}
                 groupClassName={this.getGroupStyle('body')}
-                bsStyle={this.getFieldStyle('body')}
-                valueLink={this.linkState('body')}
+                help={this.getIntlMessage('opinion.version.body_helper')}
+                valueLink={this.linkState('form.body')}
                 errors={this.renderFormErrors('body')}
               />
-              <Input
-                type="textarea"
-                ref="comment"
-                rows="10" cols="80"
+
+              <Editor
                 label={this.getIntlMessage('opinion.version.comment')}
-                help={this.getIntlMessage('opinion.version.comment_helper')}
                 groupClassName={this.getGroupStyle('comment')}
-                bsStyle={this.getFieldStyle('comment')}
-                valueLink={this.linkState('comment')}
+                help={this.getIntlMessage('opinion.version.comment_helper')}
+                valueLink={this.linkState('form.comment')}
                 errors={this.renderFormErrors('comment')}
               />
+
             </form>
           </Modal.Body>
           <Modal.Footer>
-            <Button onClick={this.close.bind(null, this)}>
+            <Button onClick={() => this.close()}>
               {this.getIntlMessage('global.cancel')}
             </Button>
             <Button
               disabled={this.state.isSubmitting}
-              onClick={this.state.isSubmitting
-                ? null
-                : (this.props.mode === 'create'
-                  ? this.create.bind(null, this)
-                  : this.update.bind(null, this)
-                )
-              }
+              onClick={() => this.handleSubmit()}
               bsStyle="primary"
             >
               {this.state.isSubmitting

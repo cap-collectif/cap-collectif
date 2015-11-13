@@ -136,7 +136,7 @@ const FolderManager = React.createClass({
           <FormattedMessage
             message={this.getIntlMessage('common.elements.nb')}
             num={element.childrenCount}
-            />
+          />
         </span>
       </div>
     );
