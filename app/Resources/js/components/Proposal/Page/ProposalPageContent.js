@@ -3,6 +3,7 @@ import ProposalEditModal from '../Edit/ProposalEditModal';
 import ProposalDeleteModal from '../Delete/ProposalDeleteModal';
 import EditButton from '../../Form/EditButton';
 import DeleteButton from '../../Form/DeleteButton';
+import ReportButton from '../../Form/ReportButton';
 
 const ProposalPageHeader = React.createClass({
   propTypes: {
@@ -50,6 +51,12 @@ const ProposalPageHeader = React.createClass({
           <ShareButtonDropdown
             url={proposal._links.show}
             title={proposal.title}
+          />
+          <ReportButton
+            author={proposal.author}
+            url={proposal._links.report}
+            hasReported={proposal.hasUserReported}
+            style={{marginLeft: '15px'}}
           />
           <div className="pull-right">
             <EditButton

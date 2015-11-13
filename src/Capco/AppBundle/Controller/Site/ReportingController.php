@@ -6,6 +6,7 @@ use Capco\AppBundle\Entity\Argument;
 use Capco\AppBundle\Entity\Comment;
 use Capco\AppBundle\Entity\Idea;
 use Capco\AppBundle\Entity\Opinion;
+use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\Reporting;
 use Capco\AppBundle\Entity\Source;
 use Capco\AppBundle\Form\ReportingType;
@@ -381,6 +382,7 @@ class ReportingController extends Controller
 
     /**
      * @Route("/projects/{projectSlug}/collect/{stepSlug}/proposals/{proposalSlug}/report", name="app_report_proposal", defaults={"_feature_flags" = "reporting"})
+     * @ParamConverter("proposal", options={"mapping": {"proposalSlug": "slug"}})
      * @Template("CapcoAppBundle:Reporting:create.html.twig")
      *
      * @param $request
@@ -390,13 +392,11 @@ class ReportingController extends Controller
      *
      * @return array
      */
-    public function reportingProposalAction($projectSlug, $stepSlug, $proposalSlug, Request $request)
+    public function reportingProposalAction($projectSlug, $stepSlug, Proposal $proposal, Request $request)
     {
         if (false === $this->get('security.authorization_checker')->isGranted('ROLE_USER')) {
             throw new AccessDeniedException($this->get('translator')->trans('error.access_restricted', array(), 'CapcoAppBundle'));
         }
-
-        $proposal = $this->getDoctrine()->getRepository('CapcoAppBundle:Proposal')->getOneBySlug($proposalSlug);
 
         if ($proposal == null) {
             throw $this->createNotFoundException($this->get('translator')->trans('proposal.error.not_found', array(), 'CapcoAppBundle'));
@@ -406,7 +406,7 @@ class ReportingController extends Controller
             throw new AccessDeniedException();
         }
 
-        $currentStep = $proposal->getForm()->getStep();
+        $currentStep = $proposal->getProposalForm()->getStep();
         $project = $currentStep->getProject();
 
         $reporting = new Reporting();

@@ -41,6 +41,11 @@ class ProposalSerializationListener implements EventSubscriberInterface
             'projectSlug' => $project->getSlug(),
             'stepSlug' => $step->getSlug(),
         ], true);
+        $reportUrl = $this->router->generate('app_report_proposal', [
+            'projectSlug' => $project->getSlug(),
+            'stepSlug' => $step->getSlug(),
+            'proposalSlug' => $proposal->getSlug(),
+        ], true);
 
         $indexUrl = $this->router->generate('app_project_show_collect', [
             'projectSlug' => $project->getSlug(),
@@ -51,7 +56,12 @@ class ProposalSerializationListener implements EventSubscriberInterface
             '_links', [
                 'show' => $showUrl,
                 'index' => $indexUrl,
+                'report' => $reportUrl,
             ]
+        );
+
+        $event->getVisitor()->addData(
+            'hasUserReported', $user === 'anon.' ? false : $proposal->userHasReport($user)
         );
     }
 }

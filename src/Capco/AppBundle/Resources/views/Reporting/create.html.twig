@@ -32,6 +32,8 @@
                                     <a href="{{ path('app_idea_show', {'slug': idea.slug}) }}" class="btn  btn-default">{{ 'reporting.create.cancel'|trans({}, 'CapcoAppBundle') }}</a>
                                 {% elseif comment is defined %}
                                     <a href="{{ capco_comment_object_url(comment) }}" class="btn  btn-default">{{ 'reporting.create.cancel'|trans({}, 'CapcoAppBundle') }}</a>
+                                {% elseif proposal is defined %}
+                                    <a href="{{ path('app_project_show_proposal', {'projectSlug': proposal.proposalForm.step.project.slug, 'stepSlug': proposal.proposalForm.step.slug, 'proposalSlug': proposal.slug}) }}" class="btn btn-default">{{ 'reporting.create.cancel'|trans({}, 'CapcoAppBundle') }}</a>
                                 {% else %}
                                     <a href="{{ path('app_project_show_opinion', {'projectSlug': opinion.step.project.slug, 'stepSlug': opinion.step.slug, 'opinionTypeSlug': opinion.opinionType.slug, 'opinionSlug': opinion.slug}) }}" class="btn  btn-default">{{ 'reporting.create.cancel'|trans({}, 'CapcoAppBundle') }}</a>
                                 {% endif %}
