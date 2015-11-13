@@ -4,7 +4,6 @@ import ProposalActions from '../../../actions/ProposalActions';
 import FlashMessages from '../../Utils/FlashMessages';
 import ArrayHelper from '../../../services/ArrayHelper';
 import Input from '../../Form/Input';
-import Editor from '../../Form/Editor';
 
 const ProposalForm = React.createClass({
   propTypes: {
@@ -209,11 +208,12 @@ const ProposalForm = React.createClass({
           }
       </Input>
 
-      <Editor
+      <Input
+        type="editor"
         label={this.getIntlMessage('proposal.body') + '*'}
-        labelClassName="h5"
         groupClassName={this.getGroupStyle('body')}
         errors={this.renderFormErrors('body')}
+        bsStyle={this.getFieldStyle('body')}
         valueLink={this.linkState('form.body')}
       />
 
@@ -221,11 +221,12 @@ const ProposalForm = React.createClass({
         this.props.form.questions.map((question) => {
           const key = 'custom-' + question.id;
           return (
-            <Editor
+            <Input
+              type="editor"
               label={question.title + '*'}
-              labelClassName="h5"
               groupClassName={this.getGroupStyle(key)}
               valueLink={this.linkState('custom.' + key)}
+              bsStyle={this.getFieldStyle('body')}
               help={question.helpText}
               errors={this.renderFormErrors(key)}
             />

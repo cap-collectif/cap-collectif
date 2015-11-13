@@ -51,16 +51,6 @@ RUN \
   rm -f $ES_PKG_NAME.tar.gz && \
   mv /$ES_PKG_NAME /etc/elasticsearch
 
-# Install varnish
-RUN apt-get update && \
-    apt-get install -y wget apt-transport-https && \
-    wget https://repo.varnish-cache.org/debian/GPG-key.txt -O- -q | apt-key add - && \
-    echo "deb https://repo.varnish-cache.org/debian/ wheezy varnish-4.0" >> /etc/apt/sources.list.d/varnish-cache.list && \
-    apt-get update && \
-    apt-get install -y varnish && \
-    apt-get clean && \
-    rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
-
 # Install fake user 1000
 RUN addgroup --gid=1000 capco && \
     adduser --system --uid=1000 --home /home/capco --shell /bin/bash capco
@@ -85,7 +75,6 @@ COPY redis/run                  /etc/service/redis/run
 COPY cron/run                   /etc/service/cron/run
 COPY elasticsearch/run          /etc/service/elasticsearch/run
 COPY blackfire/run              /etc/service/blackfire/run
-COPY varnish/run                /etc/service/varnish/run
 
 # Configuration
 COPY mysql/capco.cnf            /etc/mysql/conf.d/capco.cnf
@@ -95,7 +84,6 @@ COPY php-fpm/capco.ini          /etc/php5/fpm/conf.d/capco.ini
 COPY php-fpm/capco.ini          /etc/php5/cli/conf.d/capco.ini
 COPY cron/crontab               /etc/cron.d/crontab
 COPY elasticsearch/capco.yml    /etc/elasticsearch/config/elasticsearch.yml
-COPY varnish/capco.vcl          /etc/varnish/capco.vcl
 
 COPY entrypoint.sh         /entrypoint.sh
 RUN chmod 755 /*.sh

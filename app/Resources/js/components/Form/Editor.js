@@ -2,22 +2,9 @@ import QuillToolbar from './QuillToolbar';
 
 const Editor = React.createClass({
   propTypes: {
-    label: React.PropTypes.string.isRequired,
-    help: React.PropTypes.node,
-    errors: React.PropTypes.node,
-    labelClassName: React.PropTypes.string,
-    groupClassName: React.PropTypes.string,
     valueLink: React.PropTypes.object.isRequired,
   },
   mixins: [ReactIntl.IntlMixin],
-
-  getDefaultProps() {
-    return {
-      labelClassName: '',
-      groupClassName: '',
-      help: null,
-    };
-  },
 
   componentDidMount() {
     this._editor = new Quill(React.findDOMNode(this.refs.editor), {
@@ -64,20 +51,9 @@ const Editor = React.createClass({
 
   render() {
     return (
-      <div className={'form-group ' + this.props.groupClassName}>
-        <label className={'control-label ' + this.props.labelClassName}>
-          <span>{this.props.label}</span>
-        </label>
-        <span className="help-block">
-          { this.props.help }
-        </span>
-        <div style={{border: '1px solid #ccc', margin: 'auto'}}>
-          <QuillToolbar ref="toolbar" />
-          <div ref="editor" />
-        </div>
-        <span>
-          { this.props.errors }
-        </span>
+      <div style={{border: '1px solid #ccc', margin: 'auto', position: 'relative'}}>
+        <QuillToolbar ref="toolbar" />
+        <div ref="editor" style={{position: 'static'}} />
       </div>
     );
   },

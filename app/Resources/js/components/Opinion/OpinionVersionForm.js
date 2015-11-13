@@ -5,7 +5,6 @@ import OpinionActions from '../../actions/OpinionActions';
 import LoginOverlay from '../Utils/LoginOverlay';
 import FlashMessages from '../Utils/FlashMessages';
 import Input from '../Form/Input';
-import Editor from '../Form/Editor';
 
 const Modal = ReactBootstrap.Modal;
 const Button = ReactBootstrap.Button;
@@ -223,17 +222,21 @@ const OpinionVersionForm = React.createClass({
                 errors={this.renderFormErrors('title')}
               />
 
-              <Editor
+              <Input
+                type="editor"
                 label={this.getIntlMessage('opinion.version.body')}
                 groupClassName={this.getGroupStyle('body')}
+                bsStyle={this.getFieldStyle('body')}
                 help={this.getIntlMessage('opinion.version.body_helper')}
                 valueLink={this.linkState('form.body')}
                 errors={this.renderFormErrors('body')}
               />
 
-              <Editor
+              <Input
+                type="editor"
                 label={this.getIntlMessage('opinion.version.comment')}
                 groupClassName={this.getGroupStyle('comment')}
+                bsStyle={this.getFieldStyle('comment')}
                 help={this.getIntlMessage('opinion.version.comment_helper')}
                 valueLink={this.linkState('form.comment')}
                 errors={this.renderFormErrors('comment')}
