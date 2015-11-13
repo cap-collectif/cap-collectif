@@ -1,4 +1,5 @@
 import FormMixin from '../../../utils/FormMixin';
+import CkeditorMixin from '../../../utils/CkeditorMixin';
 import DeepLinkStateMixin from '../../../utils/DeepLinkStateMixin';
 import OpinionLinkActions from '../../../actions/OpinionLinkActions';
 import FlashMessages from '../../Utils/FlashMessages';
@@ -13,7 +14,7 @@ const OpinionLinkForm = React.createClass({
     onSubmitSuccess: React.PropTypes.func.isRequired,
     onSubmitFailure: React.PropTypes.func.isRequired,
   },
-  mixins: [ReactIntl.IntlMixin, DeepLinkStateMixin, FormMixin],
+  mixins: [ReactIntl.IntlMixin, DeepLinkStateMixin, FormMixin, CkeditorMixin],
 
   getInitialState() {
     return {
@@ -28,6 +29,10 @@ const OpinionLinkForm = React.createClass({
         body: [],
       },
     };
+  },
+
+  componentDidMount() {
+    this.initializeCkeditor('body', 'form');
   },
 
   componentWillReceiveProps(nextProps) {
@@ -80,6 +85,7 @@ const OpinionLinkForm = React.createClass({
           valueLink={this.linkState('form.type')}
           ref="type"
           label={this.getIntlMessage('opinion.link.type')}
+          bsStyle={this.getFieldStyle('type')}
           groupClassName={this.getGroupStyle('type')}
           errors={this.renderFormErrors('type')}
         >
@@ -98,14 +104,17 @@ const OpinionLinkForm = React.createClass({
           label={this.getIntlMessage('opinion.title')}
           groupClassName={this.getGroupStyle('title')}
           errors={this.renderFormErrors('title')}
+          bsStyle={this.getFieldStyle('title')}
         />
 
         <Input
-          type="editor"
-          valueLink={this.linkState('form.body')}
+          type="textarea"
+          valueLink={null} // state is automatically updated by CkeditorMixin
+          ref="body"
           label={this.getIntlMessage('opinion.body')}
           groupClassName={this.getGroupStyle('body')}
           errors={this.renderFormErrors('body')}
+          bsStyle={this.getFieldStyle('body')}
         />
 
       </form>

@@ -124,56 +124,41 @@ const OpinionTabs = React.createClass({
       return (
         <TabbedArea defaultActiveKey={this.getDefaultKey()} animation={false}>
           { this.isVersionable()
-            ? <Tab
-                id="opinion__versions"
-                className="opinion-tabs"
-                eventKey={'versions'}
-                title={<FormattedMessage message={this.getIntlMessage('global.versions')} num={opinion.versions_count} />}
-              >
+            ? <Tab id="opinion__versions" className="opinion-tabs" eventKey={'versions'} title={
+                <FormattedMessage message={this.getIntlMessage('global.versions')} num={opinion.versions_count} />
+              }>
                 {this.renderVersionsContent()}
               </Tab>
             : null
           }
           { this.isCommentable()
-            ? <Tab
-                id="opinion__arguments"
-                className="opinion-tabs"
-                eventKey={'arguments'}
-                title={<FormattedMessage message={this.getArgumentsTrad()} num={opinion.arguments_count} />}
-              >
+            ? <Tab id="opinion__arguments" className="opinion-tabs" eventKey={'arguments'} title={
+                <FormattedMessage message={this.getArgumentsTrad()} num={opinion.arguments_count} />
+              }>
                 <OpinionArgumentsBox {...this.props} />
               </Tab>
             : null
           }
           { this.isSourceable()
-            ? <Tab
-                id="opinion__sources"
-                className="opinion-tabs"
-                eventKey={'sources'}
-                title={<FormattedMessage message={this.getIntlMessage('global.sources')} num={opinion.sources_count} />}
-              >
+            ? <Tab id="opinion__sources" className="opinion-tabs" eventKey={'sources'} title={
+                <FormattedMessage message={this.getIntlMessage('global.sources')} num={opinion.sources_count} />
+              }>
                 <OpinionSourcesBox {...this.props} />
               </Tab>
             : null
           }
           { this.hasStatistics()
-            ? <Tab
-                id="opinion__evolution"
-                className="opinion-tabs"
-                eventKey={'evolution'}
-                title={<FormattedMessage message={this.getIntlMessage('global.votes_evolution')} />}
-              >
+            ? <Tab id="opinion__evolution" className="opinion-tabs" eventKey={'evolution'} title={
+                <FormattedMessage message={this.getIntlMessage('global.votes_evolution')} />
+              }>
                 <VoteLinechart top={20} height={300} width={847} history={opinion.history.votes} />
               </Tab>
             : null
           }
           { this.isLinkable()
-            ? <Tab
-                id="opinion__links"
-                className="opinion-tabs"
-                eventKey={'links'}
-                tab={<FormattedMessage message={this.getIntlMessage('global.links')} num={opinion.connections_count} />}
-              >
+            ? <Tab id="opinion__links" className="opinion-tabs" eventKey={'links'} tab={
+                <FormattedMessage message={this.getIntlMessage('global.links')} num={opinion.connections_count} />
+              }>
                 <OpinionLinksBox {...this.props} />
               </Tab>
             : null

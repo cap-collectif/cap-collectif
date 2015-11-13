@@ -36,11 +36,6 @@ Hack form button - radio check
   color: $excerpt;
 }
 
-.editor {
-  border: 1px solid #ccc;
-  position: relative;
-}
-
 .has-warning {
 
   .form-control {
@@ -60,15 +55,9 @@ Hack form button - radio check
     color: $excerpt;
   }
 
-  .editor {
-    border: 1px solid $warning-text;;
-  }
-
   input[type="checkbox"] + span {
     color: $warning-text;
   }
-
-
 }
 
 .has-success {
@@ -79,10 +68,6 @@ Hack form button - radio check
   .control-label,
   .error-block {
     color: $success-text;
-  }
-
-  .editor {
-    border: 1px solid $success-text;;
   }
 
   .help-block {

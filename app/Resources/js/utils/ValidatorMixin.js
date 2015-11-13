@@ -63,6 +63,10 @@ const ValidatorMixin = {
     return false;
   },
 
+  getFieldStyle(field) {
+    return this.getErrorsMessages(field).length > 0 ? 'warning' : this.state.submitted ? 'success' : '';
+  },
+
   getGroupStyle(field) {
     return this.getErrorsMessages(field).length > 0 ? 'has-warning' : this.state.submitted ? 'has-success' : '';
   },
