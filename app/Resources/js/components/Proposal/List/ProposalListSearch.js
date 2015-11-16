@@ -1,4 +1,5 @@
-import SearchActions from '../../../actions/SearchActions';
+import ProposalActions from '../../../actions/ProposalActions';
+import ProposalStore from '../../../stores/ProposalStore';
 import Input from '../../Form/Input';
 
 const Button = ReactBootstrap.Button;
@@ -21,7 +22,7 @@ const ProposalListSearch = React.createClass({
     const length = value.length;
 
     if (length > 0) {
-      SearchActions.getSearch(value, 'score', 'proposal', 1, 50);
+      ProposalActions.load('form', this.props.form.id, value);
     }
   },
 

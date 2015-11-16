@@ -35,8 +35,6 @@ fos_elastica:
             groups: [UsersInfos, Proposals]
           _all: { enabled: false }
           mappings:
-            id:
-              type: long
             slug:
               index: not_analyzed
             username:
@@ -100,6 +98,12 @@ fos_elastica:
                 std: { type: string, analyzer: standard }
             slug:
               index: not_analyzed
+            publishedAt:
+              type: date
+            createdAt:
+              type: date
+            updatedAt:
+              type: date
             Author:
               type: nested
               properties:
@@ -239,8 +243,6 @@ fos_elastica:
           serializer:
             groups: [Proposals]
           mappings:
-            id:
-              type: long
             title:
               analyzer: %language_analyzer%
               index_options: offsets
@@ -253,8 +255,6 @@ fos_elastica:
               index_options: offsets
               fields:
                 std: { type: string, analyzer: standard }
-            slug:
-              index: not_analyzed
             author:
               type: nested
               properties:
@@ -334,6 +334,10 @@ fos_elastica:
               index_options: offsets
               fields:
                 std: { type: string, analyzer: standard }
+            updatedAt:
+              type: date
+            createdAt:
+              type: date
             Author:
               type: nested
               properties:
@@ -465,8 +469,6 @@ fos_elastica:
             groups: [Themes, Proposals]
           _all: { enabled: false }
           mappings:
-            id:
-              type: long
             title:
               analyzer: %language_analyzer%
               index_options: offsets
