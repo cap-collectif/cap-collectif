@@ -52,9 +52,6 @@ Feature: Proposal Restful Api
     "votes": @array@,
     "votes_count": @integer@,
     "title": @string@,
-    "isTrashed": @boolean@,
-    "enabled": @boolean@,
-    "trashedReason": @...@,
     "answer": {
       "title": "Réponse du gouvernement à la proposition",
       "body": @string@,
