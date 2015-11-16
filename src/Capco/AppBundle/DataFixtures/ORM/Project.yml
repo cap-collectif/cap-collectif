@@ -1,46 +1,47 @@
 Capco\AppBundle\Entity\Project:
-    p1:
-        title: Croissance, innovation, disruption
-        Author: @user4
-        Cover: @MediaProject1
-        video: 'http://www.youtube.com/embed/A3PDXmYoF5U?autoplay=1'
-        themes: [@theme1, @theme2]
-        publishedAt: <dateTimeBetween('-50 days', 'now')>
-        exportable: true
-        opinionsRankingThreshold: 60
-        versionsRankingThreshold: 20
-    p2:
-        title: Stratégie technologique de l'Etat et services publics
-        Author: @user4
-        Cover: @MediaProject2
-        video: 'http://www.youtube.com/embed/wTcNtgA6gHs?autoplay=1'
-        themes: [@theme1, @theme3]
-        publishedAt: <dateTimeBetween('-50 days', 'now')>
-    p3:
-        title: Transformation numérique des relations
-        isEnabled: false
-        Author: @user4
-        themes: [@theme2, @theme3]
-    p4:
-        title: Projet vide
-        isEnabled: true
-        Author: @user4
-        themes: [@theme2, @theme3]
-        publishedAt: <dateTimeBetween('+1 days', '+10 days')>
-    p5:
-        title: Projet de loi Renseignement
-        Author: @user2
-        Cover: @MediaProject2
-        video: 'http://www.youtube.com/embed/wTcNtgA6gHs?autoplay=1'
-        themes: [@theme1, @theme3]
-        publishedAt: <dateTimeBetween('-50 days', 'now')>
-        exportable: true
-        opinionsRankingThreshold: 60
-        versionsRankingThreshold: 20
-    p6:
-        title: Budget Participatif Rennes
-        Author: @user502
-        isEnabled: true
-        themes: [@theme3]
-        publishedAt: <dateTimeBetween('-50 days', 'now')>
-        exportable: true
+  p1:
+    title: Croissance, innovation, disruption
+    Author: @user4
+    Cover: @MediaProject1
+    video: 'http://www.youtube.com/embed/A3PDXmYoF5U?autoplay=1'
+    themes: [@theme1, @theme2]
+    publishedAt: <dateTimeBetween('-50 days', 'now')>
+    exportable: true
+    opinionsRankingThreshold: 60
+    versionsRankingThreshold: 20
+  p2:
+    title: Stratégie technologique de l'Etat et services publics
+    Author: @user4
+    Cover: @MediaProject2
+    video: 'http://www.youtube.com/embed/wTcNtgA6gHs?autoplay=1'
+    themes: [@theme1, @theme3]
+    publishedAt: <dateTimeBetween('-50 days', 'now')>
+  p3:
+    title: Transformation numérique des relations
+    isEnabled: false
+    Author: @user4
+    themes: [@theme2, @theme3]
+  p4:
+    title: Projet vide
+    isEnabled: true
+    Author: @user4
+    themes: [@theme2, @theme3]
+    publishedAt: <dateTimeBetween('+1 days', '+10 days')>
+  p5:
+    title: Projet de loi Renseignement
+    Author: @user2
+    Cover: @MediaProject2
+    video: 'http://www.youtube.com/embed/wTcNtgA6gHs?autoplay=1'
+    themes: [@theme1, @theme3]
+    publishedAt: <dateTimeBetween('-50 days', 'now')>
+    exportable: true
+    opinionsRankingThreshold: 60
+    versionsRankingThreshold: 20
+  p6:
+    title: Budget Participatif Rennes
+    Author: @user502
+    isEnabled: true
+    themes: [@theme3]
+    exportable: true
+    publishedAt: <dateTimeBetween('-50 days', 'now')>
+    exportable: true

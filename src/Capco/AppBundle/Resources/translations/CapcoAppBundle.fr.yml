@@ -999,54 +999,56 @@ project_download:
     published: Contenu publié
     unpublished: Contenu à la corbeille
   label:
-    title: Titre
-    content_type: Type de contenu
-    category: Catégorie
-    related_object: Lié à :
-    content: Contenu
-    link: Lien
-    created: Création
-    updated: Modification
+    arguments_nok: Arguments contre
+    arguments_ok: Arguments pour
     author: Auteur
     author_id: Id de l'auteur
-    user_type: Type de profil
-    score: Score
-    total_votes: Total des votes
-    votes_ok: Votes pour
-    votes_mitigated: Votes mitigés
-    votes_nok: Votes contre
-    sources: Sources
-    total_arguments: Total des arguments
-    arguments_ok: Arguments pour
-    arguments_nok: Arguments contre
+    category: Catégorie
+    content: Contenu
+    content_type: Type de contenu
+    created: Création
     enabled: Publié
+    link: Lien
+    related_object: Lié à :
+    score: Score
+    sources: Sources
+    status: Statut
+    theme: Thème
+    title: Titre
+    total_arguments: Total des arguments
+    total_votes: Total des votes
     trashed: Corbeille
     trashed_date: Date de mise à la corbeille
     trashed_reason: Raison de la mise en corbeille
+    updated: Modification
+    user_type: Type de profil
+    votes_mitigated: Votes mitigés
+    votes_nok: Votes contre
+    votes_ok: Votes pour
   values:
     appendices:
       title: Éléments de contexte
-    non_applicable: n/a
     content_type:
-      opinion: Proposition
-      version: Modification
       argument: Argument
+      opinion: Proposition
       simple_argument: Avis
       source: Source
+      version: Modification
       vote: Vote
     link:
       media: Fichier
-    yes: Pour
     no: Contre
-    votes:
-      nok: Contre
-      mitige: Mitigé
-      ok: Pour
+    non_applicable: n/a
     related:
-      opinion: Proposition "%name%"
-      version: Modification "%name%"
-      source: Source "%name%"
       argument: Argument "%id%"
+      opinion: Proposition "%name%"
+      source: Source "%name%"
+      version: Modification "%name%"
+    yes: Pour
+    votes:
+      mitige: Mitigé
+      nok: Contre
+      ok: Pour
 
 votes:
   none: Il n'y a pas de votes.
