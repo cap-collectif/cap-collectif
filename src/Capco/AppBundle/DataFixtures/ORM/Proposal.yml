@@ -61,7 +61,6 @@ Capco\AppBundle\Entity\Proposal:
         theme: @theme1
         district: @district1
         status: @status1
-        trashedReason: "Pub"
     proposal6:
         title: Proposition dépubliée
         body: |

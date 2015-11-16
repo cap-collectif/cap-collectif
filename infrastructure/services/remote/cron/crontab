@@ -1,3 +1,5 @@
 * * * * * php /var/www/app/console capco:recalculate-counters --env=prod
 * * * * * php /var/www/app/console capco:recalculate-projects-counters --env=prod
+* * * * * php /var/www/app/console capco:recalculate-rankings --env=prod
+* * * * * php /var/www/app/console capco:syntheses:update --env=prod
 # Don't remove the empty line at the end of this file. It is required to run the cron job
