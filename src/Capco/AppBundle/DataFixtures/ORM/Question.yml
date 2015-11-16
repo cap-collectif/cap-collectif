@@ -6,10 +6,3 @@ Capco\AppBundle\Entity\Question:
     proposalForm: @proposalform1
     position: 1
     questionType: 0
-  question2:
-    title: Evaluez le coût de votre proposition
-    helpText: Décrivez dans les grandes lignes le budget de votre proposition
-    questionChoices: []
-    proposalForm: @proposalform1
-    position: 2
-    questionType: 0
