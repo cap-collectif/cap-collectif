@@ -1,6 +1,8 @@
 import ProposalActions from '../../../actions/ProposalActions';
 import ProposalStore from '../../../stores/ProposalStore';
+import ProposalListSearch from '../List/ProposalListSearch';
 import Input from '../../Form/Input';
+
 
 const Button = ReactBootstrap.Button;
 const ButtonGroup = ReactBootstrap.ButtonGroup;
@@ -95,6 +97,7 @@ const ProposalListFilters = React.createClass({
             { this.getIntlMessage('global.advanced_filters') }
           </Button>
         </ButtonGroup>
+        <ProposalListSearch value={'search terms'} />
       </ButtonToolbar>
       <Collapse in={this.state.collapse}>
         <Row>
