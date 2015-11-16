@@ -130,12 +130,40 @@ fos_elastica:
           serializer:
             groups: [Proposals]
           mappings:
+            id:
+              type: long
             title:
               analyzer: %language_analyzer%
               index_options: offsets
+            slug:
+              index: not_analyzed
             strippedBody:
               analyzer: %language_analyzer%
               index_options: offsets
+            createdAt:
+              type: date
+            updatedAt:
+              type: date
+            Author:
+              type: object
+              properties:
+                slug:
+                  index: not_analyzed
+            district:
+              type: object
+              properties:
+                name:
+                  index: not_analyzed
+            status:
+              type: object
+              properties:
+                name:
+                  index: not_analyzed
+            theme:
+              type: object
+              properties:
+                title:
+                  index: not_analyzed
           persistence:
             driver: orm
             model: Capco\AppBundle\Entity\Proposal
@@ -147,9 +175,15 @@ fos_elastica:
           serializer:
             groups: [Districts, Proposals]
           mappings:
+            id:
+              type: long
             name:
               analyzer: %language_analyzer%
               index_options: offsets
+            createdAt:
+              type: date
+            updatedAt:
+              type: date
           persistence:
             driver: orm
             model: Capco\AppBundle\Entity\District
@@ -161,9 +195,15 @@ fos_elastica:
           serializer:
             groups: [Statuses, Proposals]
           mappings:
+            id:
+              type: long
             name:
               analyzer: %language_analyzer%
               index_options: offsets
+            createdAt:
+              type: date
+            updatedAt:
+              type: date
           persistence:
             driver: orm
             model: Capco\AppBundle\Entity\Status
@@ -251,6 +291,7 @@ fos_elastica:
           serializer:
             groups: [Themes, Proposals]
           mappings:
+<<<<<<< e791cb012d4447305999b4236d67a3ff4b27e3fa
             title:
               analyzer: %language_analyzer%
               index_options: offsets
@@ -260,6 +301,31 @@ fos_elastica:
             strippedBody:
               analyzer: %language_analyzer%
               index_options: offsets
+||||||| merged common ancestors
+            id:
+              type: long
+            title:
+              analyzer: %language_analyzer%
+              index_options: offsets
+            slug:
+              index: not_analyzed
+            teaser:
+              analyzer: %language_analyzer%
+              index_options: offsets
+            strippedBody:
+              analyzer: %language_analyzer%
+              index_options: offsets
+            Author:
+              type: object
+              properties:
+                slug:
+                  index: not_analyzed
+            createdAt:
+              type: date
+            updatedAt:
+              type: date
+=======
+>>>>>>> [ci skip] search engine for proposals
           persistence:
             driver: orm
             model: Capco\AppBundle\Entity\Theme

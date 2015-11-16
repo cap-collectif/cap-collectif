@@ -99,6 +99,11 @@ capco_api_categories:
   type: rest
   prefix: /api
 
+capco_api_search:
+  resource: "@CapcoAppBundle/Controller/Api/SearchController.php"
+  type: annotation
+  prefix: /api
+
 # App
 
 capco_app:

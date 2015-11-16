@@ -250,6 +250,7 @@ export default {
     },
     global: {
       advanced_filters: 'Filtres avancés',
+      proposal_search: 'Rechercher une proposition',
       all_required: 'Tous les champs sont obligatoires.',
       answer: 'Répondre',
       arguments: '{num, plural, =0{0 argument} one{# argument} other{# arguments}}',
