@@ -7,14 +7,9 @@
                     <a href="{{ path('capco_user_profile_show_all', {'slug': proposal.Author.slug}) }}">
                         {{ proposal.Author.username }}
                     </a>
-                    <p class="excerpt small proposal__date">
+                    <p class="excerpt small">
                         {{ proposal.createdAt | localizeddate('long', 'none') }}
                     </p>
-                    {% if proposal.updatedAt != proposal.createdAt %}
-                        <span class="small excerpt proposal__date">
-                            {{ 'proposal.edited_on' | trans({'%updated%': proposal.updatedAt | localizeddate('long', 'none')}, 'CapcoAppBundle') }}
-                        </span>
-                    {% endif %}
                 </div>
             </div>
             <div class="proposal__body" >

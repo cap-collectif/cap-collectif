@@ -811,17 +811,18 @@ class Project
         return;
     }
 
-    public function getAllConsultationSteps()
+    public function getExportableSteps()
     {
-        $consultationSteps = array();
+        $steps = [];
 
-        foreach ($this->steps as $step) {
-            if ($step->getStep()->isConsultationStep()) {
-                $consultationSteps[] = $step;
+        foreach ($this->steps as $pas) {
+            $step = $pas->getStep();
+            if ($step->isConsultationStep() || $step->isCollectStep()) {
+                $steps[] = $pas;
             }
         }
 
-        return $consultationSteps;
+        return $steps;
     }
 
     // ************************** Lifecycle **************************************

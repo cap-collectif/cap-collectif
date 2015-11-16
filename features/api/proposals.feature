@@ -45,7 +45,8 @@ Feature: Proposal Restful Api
           "title": @string@
         },
         "value": @string@
-      }
+      },
+      @...@
     ],
     "comments_count": @integer@,
     "created_at": "@string@.isDateTime()",

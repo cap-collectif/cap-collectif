@@ -199,15 +199,15 @@ class ProjectController extends Controller
      * @Route("/projects/{projectSlug}/consultation/{stepSlug}/download/{format}", name="app_project_download")
      * @Route("/consultations/{projectSlug}/consultation/{stepSlug}/download/{format}", name="app_consultation_download")
      * @ParamConverter("project", class="CapcoAppBundle:Project", options={"mapping": {"projectSlug": "slug"}})
-     * @ParamConverter("step", class="CapcoAppBundle:ConsultationStep", options={"mapping": {"stepSlug": "slug"}})
+     * @ParamConverter("step", class="CapcoAppBundle:AbstractStep", options={"mapping": {"stepSlug": "slug"}})
      *
      * @param Project          $project
-     * @param ConsultationStep $step
+     * @param AbstractStep $step
      * @param $format
      *
      * @return Response $response
      */
-    public function downloadAction($project, $step, $format)
+    public function downloadAction(Project $project, AbstractStep $step, $format)
     {
         if (!$project || !$step) {
             throw $this->createNotFoundException($this->get('translator')->trans('project.error.not_found', [], 'CapcoAppBundle'));

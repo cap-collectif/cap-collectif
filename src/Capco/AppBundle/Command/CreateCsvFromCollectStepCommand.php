@@ -7,13 +7,13 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Filesystem\Filesystem;
 
-class CreateCsvFromConsultationStepCommand extends ContainerAwareCommand
+class CreateCsvFromCollectStepCommand extends ContainerAwareCommand
 {
     protected function configure()
     {
         $this
-            ->setName('capco:export:consultation')
-            ->setDescription('Create csv file from consultation step data')
+            ->setName('capco:export:collect')
+            ->setDescription('Create csv file from collect step data')
         ;
     }
 
@@ -23,7 +23,7 @@ class CreateCsvFromConsultationStepCommand extends ContainerAwareCommand
 
         $steps = $this->getContainer()
             ->get('doctrine.orm.entity_manager')
-            ->getRepository('CapcoAppBundle:ConsultationStep')
+            ->getRepository('CapcoAppBundle:CollectStep')
             ->findAll()
         ;
 
