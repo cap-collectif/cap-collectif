@@ -183,6 +183,11 @@ export default {
       },
       theme: 'Theme',
       title: 'Titre',
+      trashed: {
+        label: 'Proposition dans la corbeille.',
+        motive: 'Motif : {motive}',
+        no_motive: 'Non spécifié',
+      },
       vote: {
         body: 'Commentaire',
         body_placeholder: 'Pourquoi soutenez-vous ce projet ? (optionnel)',
