@@ -25,7 +25,7 @@ services:
 
   capco.project.download.resolver:
     class: %capco.project.download.resolver.class%
-    arguments: [@doctrine.orm.entity_manager, @templating, @translator]
+    arguments: [@doctrine.orm.entity_manager, @templating, @translator, @capco.url.resolver]
 
   capco.contribution.resolver:
     class: %capco.contribution.resolver.class%
