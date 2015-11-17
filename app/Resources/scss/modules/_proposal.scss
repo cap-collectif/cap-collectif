@@ -8,7 +8,7 @@ $statuses:
 ;
 
 .proposal__author {
-  height: 40px;
+  height: 60px;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -92,4 +92,8 @@ $statuses:
 
 .proposal__avatar {
   margin-right: 10px;
+}
+
+.proposal__author .proposal__date {
+  margin-bottom: 0;
 }

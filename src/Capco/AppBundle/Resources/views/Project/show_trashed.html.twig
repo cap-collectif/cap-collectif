@@ -60,7 +60,7 @@
                         {% endif %}
                         {% if sources|length > 0 %}
                             {% for source in sources %}
-                                {% include 'CapcoAppBundle:Source:blockSource.html.twig' with {'source': source, 'opinion': source.linkedOpinion, 'opinionType': source.linkedOpinion.opinionType, 'project': project } only %}
+                                {% include 'CapcoAppBundle:Source:blockSource.html.twig' with {'source': source, 'opinion': source.opinion, 'opinionType': source.opinion.opinionType, 'project': project } only %}
                             {% endfor %}
                         {% endif %}
                         {% else %}

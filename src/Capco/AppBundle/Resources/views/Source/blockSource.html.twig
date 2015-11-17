@@ -10,22 +10,12 @@
                 <a rel="nofollow" href="{{ source.link }}" class="external-link">{{ source.title }}</a>
             {% endif %}
         </h4>
-        {% if profile is defined %}
+        {% if profile is defined or trashed is defined %}
             <p>{{ 'source.linked_proposition' | trans({}, 'CapcoAppBundle') }} <a href="{{ path('app_project_show_opinion', {'projectSlug': project.slug, 'stepSlug': opinion.step.slug, 'opinionTypeSlug': opinionType.slug, 'opinionSlug': opinion.slug}) }}">{{ opinion.title }}</a></p>
         {% endif %}
         <p class="excerpt">
-            {% if source.isTrashed %}
-                <span class="label label-default" style="position: static; margin-right: 5px;">
-                    {{ 'opinion.show.trashed.label'|trans({}, 'CapcoAppBundle') }}
-                </span>
-            {% endif %}
-            {% if source.isEnabled == false %}
-                <span class="label label-default" style="position: static; margin-right: 5px;">
-                    {{ 'opinion.show.disabled.label'|trans({}, 'CapcoAppBundle') }}
-                </span>
-            {% else %}
-                {{ source.body }}
-            {% endif %}
+            {% if trashed is not defined and source.isTrashed %}<span class="label label-default" style="position: static">{{ 'opinion.show.trashed.label'|trans({}, 'CapcoAppBundle') }}</span> {% endif %}
+            {{ source.body }}
         </p>
 
         {% if trashed is not defined %}

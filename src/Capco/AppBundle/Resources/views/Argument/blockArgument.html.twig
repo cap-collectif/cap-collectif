@@ -1,4 +1,4 @@
-{% set opinion = argument.linkedOpinion %}
+{% set opinion = argument.opinion %}
 {% set project = opinion.step.project %}
 {% set opinionType = opinion.opinionType %}
 <li class="opinion  opinion--argument {% if argument.author.isVip %}bg-vip{% endif %}{% if classes is defined %} {{ classes }}{% endif %}" id="arg-{{ argument.id }}">
@@ -24,11 +24,11 @@
         </div>
         <p class="opinion__text more" style="max-height: 115px; overflow: hidden; width: 100%">
             {% if argument.isEnabled == false %}
-                <span class="label label-default" style="position: static; margin-right: 5px">
+                <span class="label label-default" style="position: static">
                     {{ 'opinion.show.disabled.label'|trans({}, 'CapcoAppBundle') }}
                 </span>
             {% elseif argument.isTrashed %}
-                <span class="label label-default" style="position: static; margin-right: 5px">
+                <span class="label label-default" style="position: static">
                     {{ 'opinion.show.trashed.label'|trans({}, 'CapcoAppBundle') }}
                 </span>
             {% endif %}

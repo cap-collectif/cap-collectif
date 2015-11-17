@@ -1,4 +1,5 @@
-<div class="col-xs-12  col-sm-4  col-md-3">
+{% set colClasses = colClasses is defined ? colClasses : "col-xs-12 col-sm-6 col-md-4" %}
+<div class="{{colClasses}}" >
     <div class="block  block--bordered proposal__preview">
         <div class="box {% if proposal.author.isVip %}bg-vip{% endif %}">
             <div>
@@ -7,9 +8,14 @@
                     <a href="{{ path('capco_user_profile_show_all', {'slug': proposal.Author.slug}) }}">
                         {{ proposal.Author.username }}
                     </a>
-                    <p class="excerpt small">
+                    <p class="excerpt small proposal__date">
                         {{ proposal.createdAt | localizeddate('long', 'none') }}
                     </p>
+                    {% if proposal.updatedAt != proposal.createdAt %}
+                        <span class="small excerpt proposal__date">
+                            {{ 'proposal.edited_on' | trans({'%updated%': proposal.updatedAt | localizeddate('long', 'none')}, 'CapcoAppBundle') }}
+                        </span>
+                    {% endif %}
                 </div>
             </div>
             <div class="proposal__body" >
@@ -66,7 +72,7 @@
                 </div>
             {% else %}
                 <div class="proposal__status status--default">
-                    {{ 'proposal.show.no_status' }}
+                    {{ 'proposal.show.no_status' | trans({}, 'CapcoAppBundle') }}
                 </div>
             {% endif %}
         </div>
