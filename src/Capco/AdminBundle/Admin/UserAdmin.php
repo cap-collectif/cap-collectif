@@ -241,45 +241,28 @@ class UserAdmin extends BaseAdmin
                 ->add('enabled', null, array('required' => false))
                 ->add('credentialsExpired', null, array('required' => false))
                 ->end()
-            ;
-            if ($currentUser->hasRole('ROLE_SUPER_ADMIN')) {
-                $formMapper
-                    ->with('Roles')
-                    ->add('vip', null, [
+
+                // Roles
+                ->with('Roles')
+                ->add('vip', null, [
+                    'required' => false,
+                ])
+                ->add(
+                    'realRoles',
+                    'sonata_security_roles',
+                    [
+                        'expanded' => true,
+                        'multiple' => true,
                         'required' => false,
-                    ])
-                    ->add(
-                        'realRoles',
-                        'sonata_security_roles',
-                        array(
-                            'expanded' => true,
-                            'multiple' => true,
-                            'required' => false,
-                            'translation_domain' => 'SonataUserBundle',
-                            'choices' => $this->rolesLabels,
-                        )
-                    )
-                    ->end()
-                ;
-            } else {
-                $formMapper
-                    ->with('Roles')
-                    ->add(
-                        'realRoles',
-                        'sonata_security_roles',
-                        array(
-                            'label' => 'form.label_roles',
-                            'expanded' => true,
-                            'multiple' => true,
-                            'required' => false,
-                            'translation_domain' => 'SonataUserBundle',
-                            'choices' => $this->rolesLabelsNoSuper,
-                        )
-                    )
-                    ->end()
-                ;
-            }
-            $formMapper
+                        'translation_domain' => 'SonataUserBundle',
+                        'choices' => $currentUser->hasRole('ROLE_SUPER_ADMIN')
+                            ? $this->rolesLabels
+                            : $this->rolesLabelsNoSuper
+                        ,
+                    ]
+                )
+                ->end()
+
                 ->with('Keys')
                 ->add('token', null, array('required' => false))
                 ->add('twoStepVerificationCode', null, array('required' => false))
