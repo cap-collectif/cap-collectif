@@ -234,7 +234,7 @@ class Proposal implements CommentableInterface, VotableInterface
      *
      * @return $this
      */
-    public function setStatus(Status $status)
+    public function setStatus(Status $status = null)
     {
         $this->status = $status;
 
