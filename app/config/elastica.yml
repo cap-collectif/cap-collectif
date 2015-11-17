@@ -1,6 +1,7 @@
 fos_elastica:
   clients:
     default: { host: localhost, port: 9200 }
+  serializer: ~
   indexes:
     app:
       index_name: app_prod
@@ -9,21 +10,8 @@ fos_elastica:
       # User
         user:
           indexable_callback: isEnabled
-          mappings:
-            id:
-              type: long
-            slug:
-              index: not_analyzed
-            username:
-              analyzer: %language_analyzer%
-              index_options: offsets
-            biography:
-              analyzer: %language_analyzer%
-              index_options: offsets
-            createdAt:
-              type: date
-            updatedAt:
-              type: date
+          serializer:
+            groups: [UsersInfos, Proposals]
           persistence:
             driver: orm
             model: Capco\UserBundle\Entity\User
@@ -85,22 +73,8 @@ fos_elastica:
         # Comment
         comment:
           indexable_callback: getIsEnabled
-          mappings:
-            id:
-              type: long
-            strippedBody:
-              analyzer: %language_analyzer%
-              index_options: offsets
-            createdAt:
-              type: date
-            updatedAt:
-              type: date
-            Author:
-              type: object
-              properties:
-                slug:
-                  index: not_analyzed
-            authorName: ~
+          serializer:
+            groups: [Comments, Proposals]
           persistence:
             driver: orm
             model: Capco\AppBundle\Entity\Comment
@@ -169,6 +143,37 @@ fos_elastica:
           persistence:
             driver: orm
             model: Capco\AppBundle\Entity\Idea
+            provider: ~
+            listener: ~
+            finder: ~
+        # Proposal
+        proposal:
+          indexable_callback: isEnabled
+          serializer:
+            groups: [Proposals]
+          persistence:
+            driver: orm
+            model: Capco\AppBundle\Entity\Proposal
+            provider: ~
+            listener: ~
+            finder: ~
+        # District
+        district:
+          serializer:
+            groups: [Districts, Proposals]
+          persistence:
+            driver: orm
+            model: Capco\AppBundle\Entity\District
+            provider: ~
+            listener: ~
+            finder: ~
+        # Status
+        status:
+          serializer:
+            groups: [Status, Proposals]
+          persistence:
+            driver: orm
+            model: Capco\AppBundle\Entity\Status
             provider: ~
             listener: ~
             finder: ~
@@ -296,29 +301,8 @@ fos_elastica:
         # Theme
         theme:
           indexable_callback: getIsEnabled
-          mappings:
-            id:
-              type: long
-            title:
-              analyzer: %language_analyzer%
-              index_options: offsets
-            slug:
-              index: not_analyzed
-            teaser:
-              analyzer: %language_analyzer%
-              index_options: offsets
-            strippedBody:
-              analyzer: %language_analyzer%
-              index_options: offsets
-            Author:
-              type: object
-              properties:
-                slug:
-                  index: not_analyzed
-            createdAt:
-              type: date
-            updatedAt:
-              type: date
+          serializer:
+            groups: [Themes, Proposals]
           persistence:
             driver: orm
             model: Capco\AppBundle\Entity\Theme
