@@ -1,4 +1,5 @@
-<div class="col-xs-12  col-sm-4  col-md-3">
+{% set colClasses = colClasses is defined ? colClasses : "col-xs-12 col-sm-6 col-md-4" %}
+<div class="{{colClasses}}" >
     <div class="block  block--bordered proposal__preview">
         <div class="box {% if proposal.author.isVip %}bg-vip{% endif %}">
             <div>
@@ -66,7 +67,7 @@
                 </div>
             {% else %}
                 <div class="proposal__status status--default">
-                    {{ 'proposal.show.no_status' }}
+                    {{ 'proposal.show.no_status' | trans({}, 'CapcoAppBundle') }}
                 </div>
             {% endif %}
         </div>

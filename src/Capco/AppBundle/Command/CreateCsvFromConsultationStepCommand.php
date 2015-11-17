@@ -12,7 +12,7 @@ class CreateCsvFromConsultationStepCommand extends ContainerAwareCommand
     protected function configure()
     {
         $this
-            ->setName('capco:export:consultation')
+            ->setName('capco:create-csv-from-consultation')
             ->setDescription('Create csv file from consultation step data')
         ;
     }

@@ -87,7 +87,7 @@ class ProposalsController extends FOSRestController
 
         $paginator = $em
             ->getRepository('CapcoAppBundle:Proposal')
-            ->getPublishedByProposalForm($proposalForm, $first, $offset, $order, $theme, $status, $district, $type)
+            ->getEnabledByProposalForm($proposalForm, $first, $offset, $order, $theme, $status, $district, $type)
         ;
 
         $proposals = [];
