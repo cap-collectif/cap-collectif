@@ -9,18 +9,17 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 class SearchController extends Controller
 {
     /**
-     * @Route("/search/{terms}/{sort}/{type}/{page}", name="api_search", requirements={"page" = "\d+"}, defaults={"page" = 1, "_feature_flags" = "search"})
-     * @param $terms
-     * @param $sort
-     * @param $type
-     * @param $page
+     * @Route("/search/{terms}/{sort}/{type}/{page}/{pagination}", name="api_search", requirements={"page" = "\d+"}, defaults={"page" = 1, "_feature_flags" = "search"})
+     * @param string $terms
+     * @param string $sort
+     * @param string $type
+     * @param int $page
+     * @param int $pagination
      *
      * @return JsonResponse
      */
-    public function searchAction($terms = '', $sort = 'score', $type = 'all', $page = 1)
+    public function searchAction($terms = '', $sort = 'score', $type = 'all', $page = 1, $pagination = 10)
     {
-        $pagination = 10;
-
         $searchResults = $this->container->get('capco.search.resolver')->searchAll($pagination, $page, $terms, $type, $sort, false);
 
         $count = $searchResults['count'];

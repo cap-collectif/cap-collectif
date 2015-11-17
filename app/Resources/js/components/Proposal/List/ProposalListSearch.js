@@ -9,7 +9,10 @@ const ProposalListSearch = React.createClass({
   propTypes: {
     id: React.PropTypes.number.isRequired,
   },
-  mixins: [ReactIntl.IntlMixin, React.addons.LinkedStateMixin],
+  mixins: [
+    ReactIntl.IntlMixin,
+    React.addons.LinkedStateMixin
+  ],
 
   getInitialState() {
     return {
@@ -18,22 +21,18 @@ const ProposalListSearch = React.createClass({
     };
   },
 
+  handleSubmit() {
+    const value = this._input.getValue();
+    const length = value.length;
+
+    if (length > 0) {
+      SearchActions.getSearch(value, 'score', 'proposal', 1, 50);
+    }
+  },
+
   renderSearchButton() {
-    const handleSubmit = () => {
-      let value = this._input.getValue();
-      const length = value.length;
-
-      if (length > 0) {
-        this.setState({
-          value: value
-        });
-
-        SearchActions.getSearch(value, 'score', 'proposal');
-      }
-    };
-
     return (
-      <Button onClick={handleSubmit}>
+      <Button onClick={this.handleSubmit}>
         <i className="cap cap-magnifier"></i>
       </Button>
     )
@@ -46,6 +45,7 @@ const ProposalListSearch = React.createClass({
         ref={(c) => this._input = c}
         placeholder={this.getIntlMessage('global.proposal_search')}
         buttonAfter={this.renderSearchButton(this.handleSubmit)}
+        valueLink={this.linkState('value')}
         groupClassName="proposal-search-input pull-right"
         >
       </Input>
