@@ -1,7 +1,7 @@
 fos_elastica:
   clients:
     default: { host: localhost, port: 9200 }
-  serializer:
+  serializer: ~
   indexes:
     app:
       index_name: app_prod
@@ -11,14 +11,22 @@ fos_elastica:
         user:
           indexable_callback: isEnabled
           serializer:
-            groups: [UsersInfos]
+            groups: [UsersInfos, Proposals]
           mappings:
+            id:
+              type: long
+            slug:
+              index: not_analyzed
             username:
               analyzer: %language_analyzer%
               index_options: offsets
             biography:
               analyzer: %language_analyzer%
               index_options: offsets
+            createdAt:
+              type: date
+            updatedAt:
+              type: date
           persistence:
             driver: orm
             model: Capco\UserBundle\Entity\User
@@ -59,11 +67,23 @@ fos_elastica:
         comment:
           indexable_callback: getIsEnabled
           serializer:
-            groups: [Comments]
+            groups: [Comments, Proposals]
           mappings:
+            id:
+              type: long
             strippedBody:
               analyzer: %language_analyzer%
               index_options: offsets
+            createdAt:
+              type: date
+            updatedAt:
+              type: date
+            Author:
+              type: object
+              properties:
+                slug:
+                  index: not_analyzed
+            authorName: ~
           persistence:
             driver: orm
             model: Capco\AppBundle\Entity\Comment
@@ -291,17 +311,6 @@ fos_elastica:
           serializer:
             groups: [Themes, Proposals]
           mappings:
-<<<<<<< e791cb012d4447305999b4236d67a3ff4b27e3fa
-            title:
-              analyzer: %language_analyzer%
-              index_options: offsets
-            teaser:
-              analyzer: %language_analyzer%
-              index_options: offsets
-            strippedBody:
-              analyzer: %language_analyzer%
-              index_options: offsets
-||||||| merged common ancestors
             id:
               type: long
             title:
@@ -324,8 +333,6 @@ fos_elastica:
               type: date
             updatedAt:
               type: date
-=======
->>>>>>> [ci skip] search engine for proposals
           persistence:
             driver: orm
             model: Capco\AppBundle\Entity\Theme
