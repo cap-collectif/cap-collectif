@@ -1,13 +1,5 @@
 Capco\AppBundle\Entity\ProposalResponse:
-  proposalresponse1:
-    question: @question1
-    proposal: @proposal1
-    value: souhaitable
-  proposalresponse2:
-    question: @question2
-    proposal: @proposal1
-    value: 250 000 €
-  proposalresponse3:
-    question: @question1
-    proposal: @proposal2
-    value: souhaitable
+    proposalresponse1:
+        question: @question1
+        proposal: @proposal1
+        value: souhaitable

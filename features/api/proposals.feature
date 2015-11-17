@@ -45,14 +45,16 @@ Feature: Proposal Restful Api
           "title": @string@
         },
         "value": @string@
-      },
-      @...@
+      }
     ],
     "comments_count": @integer@,
     "created_at": "@string@.isDateTime()",
     "votes": @array@,
     "votes_count": @integer@,
     "title": @string@,
+    "isTrashed": @boolean@,
+    "enabled": @boolean@,
+    "trashedReason": @...@,
     "answer": {
       "title": "Réponse du gouvernement à la proposition",
       "body": @string@,

@@ -16,7 +16,13 @@ const ProposalPageHeader = React.createClass({
     const createdDate = (
       <FormattedDate
        value={moment(proposal.created_at)}
-       day="numeric" month="long" year="numeric"
+       day="numeric" month="long" year="numeric" hour="numeric" minute="numeric"
+      />
+    );
+    const updatedDate = (
+      <FormattedDate
+        value={moment(proposal.updated_at)}
+        day="numeric" month="long" year="numeric" hour="numeric" minute="numeric"
       />
     );
     return (
@@ -37,6 +43,17 @@ const ProposalPageHeader = React.createClass({
                 }
                 createdDate={createdDate}
               />
+              {
+                (moment(proposal.updated_at).diff(proposal.created_at, 'seconds') > 1)
+                ? <span>
+                    {' • '}
+                    <FormattedMessage
+                      message={this.getIntlMessage('global.edited_on')}
+                      updated={updatedDate}
+                    />
+                  </span>
+                : null
+              }
             </p>
           </div>
         </div>
