@@ -88,11 +88,12 @@ class ProjectDownloadResolver
     protected $collectHeaders = [
         'published' => [
             'title',
-            'content',
             'author',
             'author_id',
             'user_type',
+            'content',
             'theme',
+            'district',
             'status',
             'created',
             'updated',
@@ -100,11 +101,12 @@ class ProjectDownloadResolver
         ],
         'unpublished' => [
             'title',
-            'content',
             'author',
             'author_id',
             'user_type',
+            'content',
             'theme',
+            'district',
             'status',
             'created',
             'updated',
@@ -314,6 +316,7 @@ class ProjectDownloadResolver
             'trashed_date' => $this->dateToString($proposal->getTrashedAt()),
             'trashed_reason' => $proposal->getTrashedReason(),
             'theme' => $proposal->getTheme() ? $proposal->getTheme()->getTitle() : '',
+            'district' => $proposal->getDistrict() ? $proposal->getDistrict()->getName() : '',
             'status' => $proposal->getStatus() ? $proposal->getStatus()->getName() : '',
         ];
     }
