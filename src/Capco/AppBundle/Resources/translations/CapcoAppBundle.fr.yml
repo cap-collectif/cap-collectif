@@ -221,6 +221,7 @@ proposal:
     submit: Publier
     success: Merci ! Votre proposition a bien été enregistrée.
     title: Soumettre une proposition
+  edited_on: Édité le %updated%
   error:
     not_found: Proposition introuvable.
   index:
