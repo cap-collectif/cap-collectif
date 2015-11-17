@@ -20,9 +20,10 @@ class ProposalRepository extends EntityRepository
     public function getByUser(User $user)
     {
         $qb = $this->getIsEnabledQueryBuilder()
-            ->addSelect('district', 'status', 'form', 'step')
+            ->addSelect('district', 'status', 'theme', 'form', 'step')
             ->leftJoin('proposal.district', 'district')
             ->leftJoin('proposal.status', 'status')
+            ->leftJoin('proposal.theme', 'theme')
             ->leftJoin('proposal.proposalForm', 'form')
             ->leftJoin('form.step', 'step')
             ->andWhere('proposal.author = :author')
@@ -32,10 +33,15 @@ class ProposalRepository extends EntityRepository
         return $qb->getQuery()->getResult();
     }
 
-    public function getEnabledByProposalForm(ProposalForm $proposalForm, $first = 0, $offset = 100, $order = 'last', Theme $theme = null, Status $status = null, District $district = null, UserType $type = null)
+    public function getPublishedByProposalForm(ProposalForm $proposalForm, $first = 0, $offset = 100, $order = 'last', Theme $theme = null, Status $status = null, District $district = null, UserType $type = null)
     {
         $qb = $this->getIsEnabledQueryBuilder()
-            ->join('proposal.author', 'author')
+            ->addSelect('author', 'amedia', 'theme', 'status', 'district')
+            ->leftJoin('proposal.author', 'author')
+            ->leftJoin('author.Media', 'amedia')
+            ->leftJoin('proposal.theme', 'theme')
+            ->leftJoin('proposal.district', 'district')
+            ->leftJoin('proposal.status', 'status')
             ->andWhere('proposal.isTrashed = :notTrashed')
             ->andWhere('proposal.proposalForm = :proposalForm')
             ->setParameter('notTrashed', false)
@@ -122,8 +128,14 @@ class ProposalRepository extends EntityRepository
     public function getOne($slug)
     {
         $qb = $this->getIsEnabledQueryBuilder()
-            ->addSelect('pr')
-            ->leftJoin('proposal.proposalResponses', 'pr')
+            ->addSelect('author', 'amedia', 'theme', 'status', 'district', 'responses', 'questions')
+            ->leftJoin('proposal.author', 'author')
+            ->leftJoin('author.Media', 'amedia')
+            ->leftJoin('proposal.theme', 'theme')
+            ->leftJoin('proposal.status', 'status')
+            ->leftJoin('proposal.district', 'district')
+            ->leftJoin('proposal.proposalResponses', 'responses')
+            ->leftJoin('responses.question', 'questions')
             ->andWhere('proposal.slug = :slug')
             ->setParameter('slug', $slug)
         ;
@@ -142,10 +154,12 @@ class ProposalRepository extends EntityRepository
     public function getLast($limit = 1, $offset = 0)
     {
         $qb = $this->getIsEnabledQueryBuilder()
-            ->select('proposal')
-            ->leftJoin('proposal.author', 'a')
-            ->leftJoin('a.Media', 'm')
-            ->leftJoin('proposal.theme', 't')
+            ->addSelect('author', 'amedia', 'theme', 'status', 'district')
+            ->leftJoin('proposal.author', 'author')
+            ->leftJoin('author.Media', 'amedia')
+            ->leftJoin('proposal.theme', 'theme')
+            ->leftJoin('proposal.status', 'status')
+            ->leftJoin('proposal.district', 'district')
             ->andWhere('proposal.isTrashed = :notTrashed')
             ->setParameter('notTrashed', false)
             ->orderBy('proposal.commentsCount', 'DESC')
@@ -172,10 +186,12 @@ class ProposalRepository extends EntityRepository
     public function getLastByStep($limit = 1, $offset = 0, CollectStep $step)
     {
         $qb = $this->getIsEnabledQueryBuilder()
-            ->select('proposal')
-            ->leftJoin('proposal.author', 'a')
-            ->leftJoin('a.Media', 'm')
-            ->leftJoin('proposal.theme', 't')
+            ->addSelect('author', 'amedia', 'theme', 'status', 'district')
+            ->leftJoin('proposal.author', 'author')
+            ->leftJoin('author.Media', 'amedia')
+            ->leftJoin('proposal.theme', 'theme')
+            ->leftJoin('proposal.status', 'status')
+            ->leftJoin('proposal.district', 'district')
             ->leftJoin('proposal.proposalForm', 'f')
             ->andWhere('f.step = :step')
             ->andWhere('proposal.isTrashed = :notTrashed')
@@ -204,9 +220,12 @@ class ProposalRepository extends EntityRepository
     public function getTrashedOrUnpublishedByProject($project)
     {
         $qb = $this->createQueryBuilder('p')
-            ->addSelect('f', 's', 'aut', 'm')
+            ->addSelect('f', 's', 'aut', 'm', 'theme', 'status', 'district')
             ->leftJoin('p.author', 'aut')
             ->leftJoin('aut.Media', 'm')
+            ->leftJoin('p.theme', 'theme')
+            ->leftJoin('p.status', 'status')
+            ->leftJoin('p.district', 'district')
             ->leftJoin('p.proposalForm', 'f')
             ->leftJoin('f.step', 's')
             ->leftJoin('s.projectAbstractStep', 'pas')
@@ -218,5 +237,24 @@ class ProposalRepository extends EntityRepository
             ->orderBy('p.trashedAt', 'DESC');
 
         return $qb->getQuery()->getResult();
+    }
+
+    public function getEnabledByProposalForm(ProposalForm $proposalForm)
+    {
+        $qb = $this->getIsEnabledQueryBuilder()
+            ->addSelect('author', 'amedia', 'theme', 'status', 'district', 'responses', 'questions')
+            ->leftJoin('proposal.author', 'author')
+            ->leftJoin('author.Media', 'amedia')
+            ->leftJoin('proposal.theme', 'theme')
+            ->leftJoin('proposal.district', 'district')
+            ->leftJoin('proposal.status', 'status')
+            ->leftJoin('proposal.proposalResponses', 'responses')
+            ->leftJoin('responses.question', 'questions')
+            ->andWhere('proposal.proposalForm = :proposalForm')
+            ->setParameter('proposalForm', $proposalForm)
+        ;
+
+        return $qb->getQuery()->getResult();
+
     }
 }

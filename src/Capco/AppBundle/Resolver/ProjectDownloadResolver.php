@@ -2,11 +2,14 @@
 
 namespace Capco\AppBundle\Resolver;
 
+use Capco\AppBundle\Entity\AbstractStep;
 use Capco\AppBundle\Entity\Argument;
+use Capco\AppBundle\Entity\CollectStep;
 use Capco\AppBundle\Entity\ConsultationStep;
 use Capco\AppBundle\Entity\Opinion;
 use Capco\AppBundle\Entity\OpinionType;
 use Capco\AppBundle\Entity\OpinionVersion;
+use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\Source;
 use Doctrine\ORM\EntityManager;
 use Symfony\Bundle\TwigBundle\TwigEngine;
@@ -15,25 +18,25 @@ use Symfony\Component\Translation\TranslatorInterface;
 
 class ProjectDownloadResolver
 {
-    protected $acceptedFormats = array(
+    protected $acceptedFormats = [
         'xls',
         'xlsx',
         'csv',
-    );
+    ];
 
-    protected $contentTypes = array(
+    protected $contentTypes = [
         'xls' => 'application/vnd.ms-excel',
         'xlsx' => 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
         'csv' => 'text/csv',
-    );
+    ];
 
-    protected $sheets = array(
+    protected $sheets = [
         'published',
         'unpublished',
-    );
+    ];
 
-    protected $headers = array(
-        'published' => array(
+    protected $consultationHeaders = [
+        'published' => [
             'author',
             'author_id',
             'user_type',
@@ -54,8 +57,8 @@ class ProjectDownloadResolver
             'total_arguments',
             'arguments_ok',
             'arguments_nok',
-        ),
-        'unpublished' => array(
+        ],
+        'unpublished' => [
             'author',
             'author_id',
             'user_type',
@@ -79,46 +82,93 @@ class ProjectDownloadResolver
             'trashed',
             'trashed_date',
             'trashed_reason',
-        ),
-    );
+        ],
+    ];
+
+    protected $collectHeaders = [
+        'published' => [
+            'id',
+            'title',
+            'author',
+            'author_id',
+            'user_type',
+            'content',
+            'theme',
+            'district',
+            'status',
+            'created',
+            'updated',
+            'link',
+        ],
+        'unpublished' => [
+            'id',
+            'title',
+            'author',
+            'author_id',
+            'user_type',
+            'content',
+            'theme',
+            'district',
+            'status',
+            'created',
+            'updated',
+            'link',
+            'trashed',
+            'trashed_date',
+            'trashed_reason',
+        ],
+    ];
 
     protected $em;
     protected $templating;
     protected $translator;
+    protected $urlResolver;
     protected $data;
 
-    public function __construct(EntityManager $em, TwigEngine $templating, TranslatorInterface $translator)
+    public function __construct(EntityManager $em, TwigEngine $templating, TranslatorInterface $translator, UrlResolver $urlResolver)
     {
         $this->em = $em;
         $this->templating = $templating;
         $this->translator = $translator;
+        $this->urlResolver = $urlResolver;
         $this->data = [
             'published' => [],
             'unpublished' => [],
         ];
     }
 
-    public function getContent(ConsultationStep $consultationStep, $format)
+    public function getContent(AbstractStep $step, $format)
     {
-        if (null == $consultationStep) {
-            throw new NotFoundHttpException('Consultation step not found');
+        if (null == $step) {
+            throw new NotFoundHttpException('Step not found');
         }
 
         if (!$this->isFormatSupported($format)) {
             throw new \Exception('Wrong format');
         }
 
-        $data = $this->getData($consultationStep);
+        $data = [];
+        $headers = [];
+
+        if ($step instanceof ConsultationStep) {
+            $data = $this->getConsultationStepData($step);
+            $headers = $this->consultationHeaders;
+        } elseif ($step instanceof CollectStep) {
+            $data = $this->getCollectStepData($step);
+            $headers = $this->collectHeaders;
+        } else {
+            throw new \Exception('Step must be of type collect or consultation');
+        }
 
         $content = $this->templating->render('CapcoAppBundle:Project:download.xls.twig',
-            array(
-                'title' => $consultationStep->getProject()->getTitle().'_'.$consultationStep->getTitle(),
+            [
+                'title' => $step->getProject()->getTitle().'_'.$step->getTitle(),
                 'format' => $format,
                 'sheets' => $this->sheets,
-                'headers' => $this->headers,
+                'headers' => $headers,
                 'data' => $data,
                 'locale' => $this->translator->getLocale(),
-            )
+            ]
         );
 
         return $content;
@@ -148,7 +198,7 @@ class ProjectDownloadResolver
 
     // ********************************** Generate data items **************************************
 
-    public function getData($consultationStep)
+    public function getConsultationStepData(ConsultationStep $consultationStep)
     {
         $this->data = [
             'published' => [],
@@ -176,6 +226,32 @@ class ProjectDownloadResolver
         $this->getSourcesData($sources);
 
         return $this->data;
+    }
+
+    public function getCollectStepData(CollectStep $collectStep)
+    {
+        $this->data = [
+            'published' => [],
+            'unpublished' => [],
+        ];
+
+        // Proposals
+        $proposals = $this->em
+            ->getRepository('CapcoAppBundle:Proposal')
+            ->getEnabledByProposalForm($collectStep->getProposalForm(), 0, null);
+
+        $this->getProposalsData($proposals);
+
+        return $this->data;
+    }
+
+    public function getProposalsData($proposals)
+    {
+        foreach ($proposals as $proposal) {
+            if ($proposal->isEnabled()) {
+                $this->addItemToData($this->getProposalItem($proposal), !$proposal->getIsTrashed());
+            }
+        }
     }
 
     public function getOpinionsData($opinions)
@@ -227,9 +303,30 @@ class ProjectDownloadResolver
 
     // *************************** Generate items *******************************************
 
+    private function getProposalItem(Proposal $proposal)
+    {
+        return $item = [
+            'id' => $proposal->getId(),
+            'title' => $proposal->getTitle(),
+            'content' => $this->getProposalContent($proposal),
+            'link' => $this->urlResolver->getObjectUrl($proposal, true),
+            'created' => $this->dateToString($proposal->getCreatedAt()),
+            'updated' => $proposal->getUpdatedAt() != $proposal->getCreatedAt() ? $this->dateToString($proposal->getUpdatedAt()) : null,
+            'author' => $proposal->getAuthor()->getUsername(),
+            'author_id' => $proposal->getAuthor()->getId(),
+            'user_type' => $proposal->getAuthor()->getUserType() ? $proposal->getAuthor()->getUserType()->getName() : '',
+            'trashed' => $this->booleanToString($proposal->getIsTrashed()),
+            'trashed_date' => $this->dateToString($proposal->getTrashedAt()),
+            'trashed_reason' => $proposal->getTrashedReason(),
+            'theme' => $proposal->getTheme() ? $proposal->getTheme()->getTitle() : '',
+            'district' => $proposal->getDistrict() ? $proposal->getDistrict()->getName() : '',
+            'status' => $proposal->getStatus() ? $proposal->getStatus()->getName() : '',
+        ];
+    }
+
     private function getOpinionItem(Opinion $opinion)
     {
-        return $item = array(
+        return $item = [
             'title' => $opinion->getTitle(),
             'content_type' => $this->translator->trans('project_download.values.content_type.opinion', array(), 'CapcoAppBundle'),
             'related_object' => $this->translator->trans('project_download.values.non_applicable', array(), 'CapcoAppBundle'),
@@ -253,14 +350,14 @@ class ProjectDownloadResolver
             'trashed' => $this->booleanToString($opinion->getIsTrashed()),
             'trashed_date' => $this->dateToString($opinion->getTrashedAt()),
             'trashed_reason' => $opinion->getTrashedReason(),
-        );
+        ];
     }
 
     private function getOpinionVersionItem(OpinionVersion $version)
     {
         $opinion = $version->getParent();
 
-        return $item = array(
+        return $item = [
             'title' => $version->getTitle(),
             'content_type' => $this->translator->trans('project_download.values.content_type.version', array(), 'CapcoAppBundle'),
             'related_object' => $this->translator->trans('project_download.values.related.opinion', array('%name%' => $opinion->getTitle()), 'CapcoAppBundle'),
@@ -284,7 +381,7 @@ class ProjectDownloadResolver
             'trashed' => $this->booleanToString($version->getIsTrashed()),
             'trashed_date' => $this->dateToString($version->getTrashedAt()),
             'trashed_reason' => $version->getTrashedReason(),
-        );
+        ];
     }
 
     private function getArgumentItem(Argument $argument)
@@ -302,7 +399,7 @@ class ProjectDownloadResolver
             ? $this->translator->trans('project_download.values.related.version', array('%name%' => $parent->getTitle()), 'CapcoAppBundle')
             : $this->translator->trans('project_download.values.related.opinion', array('%name%' => $parent->getTitle()), 'CapcoAppBundle')
         ;
-        $item = array(
+        $item = [
             'title' => $this->translator->trans('project_download.values.non_applicable', array(), 'CapcoAppBundle'),
             'content_type' => $contentType,
             'category' => $category,
@@ -326,7 +423,7 @@ class ProjectDownloadResolver
             'trashed' => $this->booleanToString($argument->getIsTrashed()),
             'trashed_date' => $this->dateToString($argument->getTrashedAt()),
             'trashed_reason' => $argument->getTrashedReason(),
-        );
+        ];
 
         return $item;
     }
@@ -339,7 +436,7 @@ class ProjectDownloadResolver
             : $this->translator->trans('project_download.values.related.opinion', array('%name%' => $parent->getTitle()), 'CapcoAppBundle')
         ;
 
-        return $item = array(
+        return $item = [
             'title' => $source->getTitle(),
             'content_type' => $this->translator->trans('project_download.values.content_type.source', array(), 'CapcoAppBundle'),
             'category' => $source->getCategory(),
@@ -363,12 +460,12 @@ class ProjectDownloadResolver
             'trashed' => $this->booleanToString($source->getIsTrashed()),
             'trashed_date' => $this->dateToString($source->getTrashedAt()),
             'trashed_reason' => $source->getTrashedReason(),
-        );
+        ];
     }
 
     private function getVoteItem($vote)
     {
-        return $item = array(
+        return $item = [
             'title' => $this->translator->trans('project_download.values.non_applicable', array(), 'CapcoAppBundle'),
             'content_type' => $this->translator->trans('project_download.values.content_type.vote', array(), 'CapcoAppBundle'),
             'related_object' => $this->getVoteObject($vote),
@@ -392,7 +489,7 @@ class ProjectDownloadResolver
             'trashed' => $this->translator->trans('project_download.values.non_applicable', array(), 'CapcoAppBundle'),
             'trashed_date' => $this->translator->trans('project_download.values.non_applicable', array(), 'CapcoAppBundle'),
             'trashed_reason' => $this->translator->trans('project_download.values.non_applicable', array(), 'CapcoAppBundle'),
-        );
+        ];
     }
 
     private function getVoteValue($vote)
@@ -443,6 +540,17 @@ class ProjectDownloadResolver
                 $body .= "\n".$app->getAppendixType()->getTitle().' :';
                 $body .= "\n".$this->formatText($app->getBody());
             }
+        }
+
+        return $body;
+    }
+
+    private function getProposalContent(Proposal $proposal)
+    {
+        $body = $this->formatText(html_entity_decode($proposal->getBody()));
+        foreach ($proposal->getProposalResponses() as $response) {
+            $body .= "\n\n".$response->getQuestion()->getTitle().' :';
+            $body .= "\n".$this->formatText($response->getValue());
         }
 
         return $body;
