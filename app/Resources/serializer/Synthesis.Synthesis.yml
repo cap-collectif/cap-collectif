@@ -11,7 +11,7 @@ Capco\AppBundle\Entity\Synthesis\Synthesis:
       expose: true
       groups: [SynthesisDetails]
     consultationStep:
-      type: Capco\AppBundle\Entity\Steps\ConsultationStep
+      type: Capco\AppBundle\Entity\ConsultationStep
     elements:
       type: ArrayCollection<Capco\AppBundle\Entity\Synthesis\SynthesisElement>
       expose: true

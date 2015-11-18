@@ -16,28 +16,9 @@ class ProposalAdmin extends Admin
         '_sort_by' => 'title',
     ];
 
-    protected $formOptions = [
+    protected $formOptions = array(
         'cascade_validation' => true,
-    ];
-
-    public function getPersistentParameters()
-    {
-        $subject = $this->getSubject();
-        $projectId = null;
-
-        if ($subject && $subject->getId()) {
-            $project = $subject->getStep()->getProject();
-            if ($project) {
-                $projectId = $project->getId();
-            }
-        } else {
-            $projectId = $this->getRequest()->get('projectId');
-        }
-
-        return [
-            'projectId' => $projectId,
-        ];
-    }
+    );
 
     // Fields to be shown on create/edit forms
     protected function configureFormFields(FormMapper $formMapper)
@@ -46,15 +27,21 @@ class ProposalAdmin extends Admin
             ->with('admin.fields.proposal.group_content')
             ->add('title', null, [
                 'label' => 'admin.fields.proposal.title',
+                /*'read_only' => true,
+                'disabled' => true,*/
             ])
             ->add('body', 'ckeditor', [
                 'label' => 'admin.fields.proposal.body',
                 'config_name' => 'admin_editor',
+                /*'read_only' => true,
+                'disabled' => true,*/
             ])
             ->add('author', 'sonata_type_model_autocomplete', [
                 'label' => 'admin.fields.proposal.author',
                 'required' => true,
                 'property' => 'username',
+                /*'read_only' => true,
+                'disabled' => true,*/
             ])
             ->add('theme', 'sonata_type_model', [
                 'label' => 'admin.fields.proposal.theme',
@@ -103,29 +90,30 @@ class ProposalAdmin extends Admin
             ->end()
 
             // Answer
-            ->with('admin.fields.proposal.group_selection')
-            ->add('answer', 'sonata_type_model_list', [
+            ->with('admin.fields.proposal.group_answer')
+            ->add('answer', 'sonata_type_model_list', array(
                 'label' => 'admin.fields.proposal.answer',
                 'btn_list' => false,
                 'required' => false,
+            ))
+            ->end()
+        ;
+    }
+
+    // Fields to be shown on filter forms
+    protected function configureDatagridFilters(DatagridMapper $datagridMapper)
+    {
+        $datagridMapper
+            ->add('title', null, [
+                'label' => 'admin.fields.proposal.title',
+            ])
+            ->add('enabled', null, [
+                'label' => 'admin.fields.proposal.enabled',
+            ])
+            ->add('updatedAt', null, [
+                'label' => 'admin.fields.proposal.updated_at',
             ])
         ;
-
-        $projectId = $this->getPersistentParameter('projectId');
-        if ($projectId) {
-            $formMapper
-                ->add('selectionSteps', 'sonata_type_model', [
-                    'label' => 'admin.fields.proposal.selection_steps',
-                    'query' => $this->createQueryForSelectionSteps(),
-                    'btn_add' => false,
-                    'by_reference' => false,
-                    'required' => false,
-                    'multiple' => true,
-                ])
-            ;
-        }
-
-        $formMapper->end();
     }
 
     // Fields to be shown on lists
@@ -157,34 +145,6 @@ class ProposalAdmin extends Admin
         ;
     }
 
-    // Fields to be shown on filter forms
-    protected function configureDatagridFilters(DatagridMapper $datagridMapper)
-    {
-        $datagridMapper
-            ->add('title', null, [
-                'label' => 'admin.fields.proposal.title',
-            ])
-            ->add('enabled', null, [
-                'label' => 'admin.fields.proposal.enabled',
-            ])
-            ->add('isTrashed', null, [
-                'label' => 'admin.fields.proposal.isTrashed',
-            ])
-            ->add('updatedAt', null, [
-                'label' => 'admin.fields.proposal.updated_at',
-            ])
-            ->add('status', null, [
-                'label' => 'admin.fields.proposal.status',
-            ])
-            ->add('proposalForm.step', null, [
-                'label' => 'admin.fields.proposal.step',
-            ])
-            ->add('proposalForm.step.projectAbstractStep.project', null, [
-                'label' => 'admin.fields.proposal.project',
-            ])
-        ;
-    }
-
     /**
      * @param ShowMapper $showMapper
      */
@@ -207,26 +167,5 @@ class ProposalAdmin extends Admin
                 'label' => 'admin.fields.proposal.created_at',
             ])
         ;
-    }
-
-    private function createQueryForSelectionSteps()
-    {
-        $projectId = $this->getPersistentParameter('projectId');
-        if (!$projectId) {
-            return;
-        }
-
-        $qb = $this->getConfigurationPool()
-            ->getContainer()
-            ->get('doctrine.orm.entity_manager')
-            ->getRepository('CapcoAppBundle:Steps\SelectionStep')
-            ->createQueryBuilder('ss')
-            ->leftJoin('ss.projectAbstractStep', 'pas')
-            ->leftJoin('pas.project', 'p')
-            ->andWhere('p.id = :projectId')
-            ->setParameter('projectId', $projectId)
-        ;
-
-        return $qb->getQuery();
     }
 }

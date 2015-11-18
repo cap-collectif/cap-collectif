@@ -46,8 +46,7 @@ class Notify implements MailerInterface
         ;
     }
 
-    public function sendInternalEmail($body, $subject, $contentType = 'text/html')
-    {
+    public function sendInternalEmail($body, $subject, $contentType = 'text/html') {
         $to = $this->resolver->getValue('admin.mail.notifications.receive_address');
         $fromAdress = $this->resolver->getValue('admin.mail.notifications.send_address');
         $fromName = $this->resolver->getValue('admin.mail.notifications.send_name');

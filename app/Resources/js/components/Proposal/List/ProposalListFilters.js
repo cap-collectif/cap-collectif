@@ -12,7 +12,6 @@ const Col = ReactBootstrap.Col;
 const ProposalListFilters = React.createClass({
   propTypes: {
     id: React.PropTypes.number.isRequired,
-    fetchFrom: React.PropTypes.string,
     onChange: React.PropTypes.func.isRequired,
     theme: React.PropTypes.array.isRequired,
     type: React.PropTypes.array.isRequired,
@@ -20,12 +19,6 @@ const ProposalListFilters = React.createClass({
     status: React.PropTypes.array.isRequired,
   },
   mixins: [ReactIntl.IntlMixin],
-
-  getDefaultProps() {
-    return {
-      fetchFrom: 'form',
-    };
-  },
 
   getInitialState() {
     return {
@@ -69,7 +62,7 @@ const ProposalListFilters = React.createClass({
   },
 
   reload() {
-    ProposalActions.load(this.props.fetchFrom, this.props.id);
+    ProposalActions.load(this.props.id);
   },
 
   buttons: ['last', 'old', 'comments'],

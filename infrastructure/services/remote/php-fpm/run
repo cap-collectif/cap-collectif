@@ -10,24 +10,27 @@ chown -R capco:capco /var/www/app/cache
 chown -R capco:capco /var/www/app/logs
 chown -R capco:capco /var/www/web/media
 
+# Configure New Relic
 sed -i 's/newrelic.appname = "PHP Application"/newrelic.appname = '"$NR_INSTALL_NAME"'/' /etc/php5/fpm/conf.d/newrelic.ini
 sed -i 's/newrelic.license = "REPLACE_WITH_REAL_KEY"/newrelic.license = '***REMOVED***'/' /etc/php5/fpm/conf.d/newrelic.ini
 
+# Wait till mysql is booted
+while ! mysqladmin ping --host=127.0.0.1 --silent; do sleep 1; done
+
 su capco <<'EOF'
-sleep 10
 cd       /var/www
 RESULT=`php app/console doctrine:migrations:status --env=prod 2>&1 | grep -o "Unknown database" | wc -l`
 if [ "$RESULT" != "0" ]; then
     php app/console doctrine:database:create --env=prod --if-not-exists
-    php app/console doctrine:migrations:migrate --env=prod --no-interaction
+    php app/console doctrine:schema:create --env=prod --no-interaction
+    php app/console doctrine:migrations:version --add --env=prod --no-interaction --range-from 0 --range-to $(php app/console doctrine:migrations:latest --env=prod --no-interaction)
     php app/console capco:load-base-data --force --env=prod --no-interaction
-    php app/console fos:elastica:populate --env=prod
 else
     php app/console doctrine:migrations:migrate --env=prod --no-interaction
 fi
 
-php app/console cache:clear --env=prod --no-debug
-php app/console assets:install --symlink
+php app/console assets:install --symlink --env=prod --no-interaction
+php app/console fos:elastica:populate --env=prod &
 
 EOF
 

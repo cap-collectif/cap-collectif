@@ -1,4 +1,4 @@
-Capco\AppBundle\Entity\Steps\SynthesisStep:
+Capco\AppBundle\Entity\SynthesisStep:
     sstep1:
         title: Synthèse
         body: Voici la synthèse

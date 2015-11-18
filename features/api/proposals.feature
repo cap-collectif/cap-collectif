@@ -104,27 +104,8 @@ Feature: Proposal Restful Api
     Then the JSON response should match:
   """
   {
-    "proposals": [
-      {
-        "id": @integer@,
-        "body": @string@,
-        "updated_at": "@string@.isDateTime()",
-        "theme": @...@,
-        "district": @...@,
-        "status": @...@,
-        "author": @...@,
-        "comments": @array@,
-        "responses": @array@,
-        "comments_count": @integer@,
-        "created_at": "@string@.isDateTime()",
-        "votes": @array@,
-        "votes_count": @integer@,
-        "title": @string@,
-        "answer": @null@,
-        "_links": @...@
-      }
-    ],
-    "count": 1
+    "proposals": [],
+    "count": 0
   }
   """
 
@@ -152,7 +133,7 @@ Feature: Proposal Restful Api
   @database
   Scenario: logged in API client wants to edit a proposal
     Given I am logged in to api as user
-    When I send a PUT request to "api/proposal_forms/1/proposals/2" with json:
+    When I send a PUT request to "api/proposal_forms/1/proposals/3" with json:
     """
     {
       "title": "Acheter un sauna par personne pour Capco",
@@ -164,5 +145,5 @@ Feature: Proposal Restful Api
   @database
   Scenario: logged in API client wants to remove a proposal
     Given I am logged in to api as user
-    When I send a DELETE request to "api/proposal_forms/1/proposals/2"
+    When I send a DELETE request to "api/proposal_forms/1/proposals/3"
     Then the JSON response status code should be 204

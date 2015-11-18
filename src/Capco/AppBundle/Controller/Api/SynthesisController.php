@@ -2,7 +2,7 @@
 
 namespace Capco\AppBundle\Controller\Api;
 
-use Capco\AppBundle\Entity\Steps\ConsultationStep;
+use Capco\AppBundle\Entity\ConsultationStep;
 use Capco\AppBundle\Entity\Synthesis\Synthesis;
 use Capco\AppBundle\Entity\Synthesis\SynthesisElement;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
