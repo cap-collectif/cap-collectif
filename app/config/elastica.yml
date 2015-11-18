@@ -1,7 +1,7 @@
 fos_elastica:
   clients:
     default: { host: localhost, port: 9200 }
-  serializer: ~
+  serializer:
   indexes:
     app:
       index_name: app_prod
@@ -161,6 +161,34 @@ fos_elastica:
           persistence:
             driver: orm
             model: Capco\AppBundle\Entity\Proposal
+            provider: ~
+            listener: ~
+            finder: ~
+        # Question
+        question:
+          serializer:
+            groups: [Proposals, Questions]
+          mappings:
+            title:
+              analyzer: %language_analyzer%
+              index_options: offsets
+          persistence:
+            driver: orm
+            model: Capco\AppBundle\Entity\Question
+            provider: ~
+            listener: ~
+            finder: ~
+        # ProposalResponse
+        proposalresponse:
+          serializer:
+            groups: [Proposals]
+          mappings:
+            value:
+              analyzer: %language_analyzer%
+              index_options: offsets
+          persistence:
+            driver: orm
+            model: Capco\AppBundle\Entity\ProposalResponse
             provider: ~
             listener: ~
             finder: ~
