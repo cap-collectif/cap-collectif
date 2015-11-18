@@ -11,7 +11,14 @@ fos_elastica:
         user:
           indexable_callback: isEnabled
           serializer:
-            groups: [UsersInfos, Proposals]
+            groups: [UsersInfos]
+          mappings:
+            username:
+              analyzer: %language_analyzer%
+              index_options: offsets
+            biography:
+              analyzer: %language_analyzer%
+              index_options: offsets
           persistence:
             driver: orm
             model: Capco\UserBundle\Entity\User
@@ -21,21 +28,12 @@ fos_elastica:
         # Argument
         argument:
           indexable_callback: getIsEnabled
+          serializer:
+            groups: [Opinions, OpinionVersions]
           mappings:
-            id:
-              type: long
             body:
               analyzer: %language_analyzer%
               index_options: offsets
-            createdAt:
-              type: date
-            updatedAt:
-              type: date
-            Author:
-              type: object
-              properties:
-                slug:
-                  index: not_analyzed
           persistence:
             driver: orm
             model: Capco\AppBundle\Entity\Argument
@@ -45,25 +43,12 @@ fos_elastica:
         # Project
         project:
           indexable_callback: getIsEnabled
+          serializer:
+            groups: [Opinions, OpinionVersions]
           mappings:
-            id:
-              type: long
             title:
               analyzer: %language_analyzer%
               index_options: offsets
-            slug:
-              index: not_analyzed
-            publishedAt:
-              type: date
-            createdAt:
-              type: date
-            updatedAt:
-              type: date
-            Author:
-              type: object
-              properties:
-                slug:
-                  index: not_analyzed
           persistence:
             driver: orm
             model: Capco\AppBundle\Entity\Project
@@ -74,40 +59,44 @@ fos_elastica:
         comment:
           indexable_callback: getIsEnabled
           serializer:
-            groups: [Comments, Proposals]
+            groups: [Comments]
+          mappings:
+            strippedBody:
+              analyzer: %language_analyzer%
+              index_options: offsets
           persistence:
             driver: orm
             model: Capco\AppBundle\Entity\Comment
             provider: ~
             listener: ~
             finder: ~
-        # Event
-        event:
+        # consultation_step
+        consultation_step:
           indexable_callback: getIsEnabled
+          serializer:
+            groups: [ConsultationSteps]
           mappings:
-            id:
-              type: long
             title:
               analyzer: %language_analyzer%
               index_options: offsets
-            slug:
-              index: not_analyzed
+          persistence:
+            driver: orm
+            model: Capco\AppBundle\Entity\ConsultationStep
+            provider: ~
+            listener: ~
+            finder: ~
+        # Event
+        event:
+          indexable_callback: getIsEnabled
+          serializer:
+            groups: [Events]
+          mappings:
+            title:
+              analyzer: %language_analyzer%
+              index_options: offsets
             strippedBody:
               analyzer: %language_analyzer%
               index_options: offsets
-            createdAt:
-              type: date
-            updatedAt:
-              type: date
-            startAt:
-              type: date
-            endAt:
-              type: date
-            Author:
-              type: object
-              properties:
-                slug:
-                  index: not_analyzed
           persistence:
             driver: orm
             model: Capco\AppBundle\Entity\Event
@@ -117,29 +106,18 @@ fos_elastica:
         # Idea
         idea:
           indexable_callback: getIsEnabled
+          serializer:
+            groups: [Ideas]
           mappings:
-            id:
-              type: long
             title:
               analyzer: %language_analyzer%
               index_options: offsets
-            slug:
-              index: not_analyzed
             strippedBody:
               analyzer: %language_analyzer%
               index_options: offsets
             strippedObject:
               analyzer: %language_analyzer%
               index_options: offsets
-            createdAt:
-              type: date
-            updatedAt:
-              type: date
-            Author:
-              type: object
-              properties:
-                slug:
-                  index: not_analyzed
           persistence:
             driver: orm
             model: Capco\AppBundle\Entity\Idea
@@ -164,38 +142,14 @@ fos_elastica:
             provider: ~
             listener: ~
             finder: ~
-        # Question
-        question:
-          serializer:
-            groups: [Proposals, Questions]
-          mappings:
-            title:
-              analyzer: %language_analyzer%
-              index_options: offsets
-          persistence:
-            driver: orm
-            model: Capco\AppBundle\Entity\Question
-            provider: ~
-            listener: ~
-            finder: ~
-        # ProposalResponse
-        proposalresponse:
-          serializer:
-            groups: [Proposals]
-          mappings:
-            value:
-              analyzer: %language_analyzer%
-              index_options: offsets
-          persistence:
-            driver: orm
-            model: Capco\AppBundle\Entity\ProposalResponse
-            provider: ~
-            listener: ~
-            finder: ~
         # District
         district:
           serializer:
             groups: [Districts, Proposals]
+          mappings:
+            name:
+              analyzer: %language_analyzer%
+              index_options: offsets
           persistence:
             driver: orm
             model: Capco\AppBundle\Entity\District
@@ -205,7 +159,11 @@ fos_elastica:
         # Status
         status:
           serializer:
-            groups: [Status, Proposals]
+            groups: [Statuses, Proposals]
+          mappings:
+            name:
+              analyzer: %language_analyzer%
+              index_options: offsets
           persistence:
             driver: orm
             model: Capco\AppBundle\Entity\Status
@@ -215,26 +173,15 @@ fos_elastica:
         # Opinion
         opinion:
           indexable_callback: getIsEnabled
+          serializer:
+            groups: [Opinions]
           mappings:
-            id:
-              type: long
             title:
               analyzer: %language_analyzer%
               index_options: offsets
-            slug:
-              index: not_analyzed
             strippedBody:
               analyzer: %language_analyzer%
               index_options: offsets
-            updatedAt:
-              type: date
-            createdAt:
-              type: date
-            Author:
-              type: object
-              properties:
-                slug:
-                  index: not_analyzed
           persistence:
             driver: orm
             model: Capco\AppBundle\Entity\Opinion
@@ -244,26 +191,15 @@ fos_elastica:
         # OpinionVersion
         opinionVersion:
           indexable_callback: isEnabled
+          serializer:
+            groups: [OpinionVersions]
           mappings:
-            id:
-              type: long
             title:
               analyzer: %language_analyzer%
               index_options: offsets
-            slug:
-              index: not_analyzed
             strippedBody:
               analyzer: %language_analyzer%
               index_options: offsets
-            updatedAt:
-              type: date
-            createdAt:
-              type: date
-            author:
-              type: object
-              properties:
-                slug:
-                  index: not_analyzed
           persistence:
             driver: orm
             model: Capco\AppBundle\Entity\OpinionVersion
@@ -273,31 +209,18 @@ fos_elastica:
         # Post
         post:
           indexable_callback: getIsPublished
+          serializer:
+            groups: [Posts]
           mappings:
-            id:
-              type: long
             title:
               analyzer: %language_analyzer%
               index_options: offsets
             abstract:
               analyzer: %language_analyzer%
               index_options: offsets
-            slug:
-              index: not_analyzed
             strippedBody:
               analyzer: %language_analyzer%
               index_options: offsets
-            createdAt:
-              type: date
-            updatedAt:
-              type: date
-            publishedAt:
-              type: date
-            Authors:
-              type: nested
-              properties:
-                slug:
-                  index: not_analyzed
           persistence:
             driver: orm
             model: Capco\AppBundle\Entity\Post
@@ -307,26 +230,15 @@ fos_elastica:
         # Source
         source:
           indexable_callback: getIsEnabled
+          serializer:
+            groups: [Opinions]
           mappings:
-            id:
-              type: long
             title:
               analyzer: %language_analyzer%
               index_options: offsets
-            slug:
-              index: not_analyzed
             body:
               analyzer: %language_analyzer%
               index_options: offsets
-            createdAt:
-              type: date
-            updatedAt:
-              type: date
-            Author:
-              type: object
-              properties:
-                slug:
-                  index: not_analyzed
           persistence:
             driver: orm
             model: Capco\AppBundle\Entity\Source
@@ -338,9 +250,29 @@ fos_elastica:
           indexable_callback: getIsEnabled
           serializer:
             groups: [Themes, Proposals]
+          mappings:
+            title:
+              analyzer: %language_analyzer%
+              index_options: offsets
+            teaser:
+              analyzer: %language_analyzer%
+              index_options: offsets
+            strippedBody:
+              analyzer: %language_analyzer%
+              index_options: offsets
           persistence:
             driver: orm
             model: Capco\AppBundle\Entity\Theme
+            provider: ~
+            listener: ~
+            finder: ~
+        # ProjectAbstractStep
+        projectabstractstep:
+          serializer:
+            groups: [ProjectAbstractSteps]
+          persistence:
+            driver: orm
+            model: Capco\AppBundle\Entity\ProjectAbstractStep
             provider: ~
             listener: ~
             finder: ~
