@@ -24,36 +24,36 @@ class PostSearchType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         if ($this->toggleManager->isActive('themes')) {
-            $builder->add('theme', 'entity', [
-                'required'           => false,
-                'class'              => 'CapcoAppBundle:Theme',
-                'property'           => 'title',
-                'label'              => 'blog.searchform.theme',
+            $builder->add('theme', 'entity', array(
+                'required' => false,
+                'class' => 'CapcoAppBundle:Theme',
+                'property' => 'title',
+                'label' => 'blog.searchform.theme',
                 'translation_domain' => 'CapcoAppBundle',
-                'query_builder'      => function (ThemeRepository $tr) {
+                'query_builder' => function (ThemeRepository $tr) {
                     return $tr->createQueryBuilder('t')
                         ->where('t.isEnabled = :enabled')
                         ->setParameter('enabled', true);
                 },
                 'empty_value' => 'blog.searchform.all_themes',
-                'attr'        => ['onchange' => 'this.form.submit()'],
-            ]);
+                'attr' => array('onchange' => 'this.form.submit()'),
+            ));
         }
 
-        $builder->add('project', 'entity', [
-            'required'           => false,
-            'class'              => 'CapcoAppBundle:Project',
-            'property'           => 'title',
-            'label'              => 'blog.searchform.project',
+        $builder->add('project', 'entity', array(
+            'required' => false,
+            'class' => 'CapcoAppBundle:Project',
+            'property' => 'title',
+            'label' => 'blog.searchform.project',
             'translation_domain' => 'CapcoAppBundle',
-            'query_builder'      => function (ProjectRepository $cr) {
+            'query_builder' => function (ProjectRepository $cr) {
                 return $cr->createQueryBuilder('c')
                     ->where('c.isEnabled = :enabled')
                     ->setParameter('enabled', true);
             },
             'empty_value' => 'blog.searchform.all_projects',
-            'attr'        => ['onchange' => 'this.form.submit()'],
-        ]);
+            'attr' => array('onchange' => 'this.form.submit()'),
+        ));
     }
 
     /**

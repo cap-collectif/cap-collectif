@@ -75,9 +75,9 @@ class OpinionsController extends FOSRestController
         $project = $opinion->getStep()->getProject();
 
         return [
-            'opinion'          => $opinion,
+            'opinion' => $opinion,
             'rankingThreshold' => $project->getOpinionsRankingThreshold(),
-            'opinionTerm'      => $project->getOpinionTerm(),
+            'opinionTerm' => $project->getOpinionTerm(),
         ];
     }
 
@@ -213,9 +213,9 @@ class OpinionsController extends FOSRestController
         }
 
         return [
-            'versions'         => $versions,
+            'versions' => $versions,
             'rankingThreshold' => $project->getVersionsRankingThreshold(),
-            'opinionTerm'      => $project->getOpinionTerm(),
+            'opinionTerm' => $project->getOpinionTerm(),
         ];
     }
 
@@ -249,9 +249,9 @@ class OpinionsController extends FOSRestController
         }
 
         return [
-            'version'          => $version,
+            'version' => $version,
             'rankingThreshold' => $project->getVersionsRankingThreshold(),
-            'opinionTerm'      => $project->getOpinionTerm(),
+            'opinionTerm' => $project->getOpinionTerm(),
         ];
     }
 

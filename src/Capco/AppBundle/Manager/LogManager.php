@@ -22,9 +22,9 @@ class LogManager
 
     public function getSentencesForLog(LogEntry $log)
     {
-        $sentences = [];
+        $sentences = array();
         $username = $log->getUsername()
-            ? $this->userManager->findOneBy(['slug' => $log->getUsername()])
+            ? $this->userManager->findOneBy(array('slug' => $log->getUsername()))
             : null
         ;
 
@@ -74,8 +74,8 @@ class LogManager
     {
         $transBase = 'synthesis.logs.sentence.';
 
-        return $this->translator->trans($transBase.$action, [
+        return $this->translator->trans($transBase.$action, array(
             '%author%' => $username,
-        ], 'CapcoAppBundleSynthesis');
+        ), 'CapcoAppBundleSynthesis');
     }
 }

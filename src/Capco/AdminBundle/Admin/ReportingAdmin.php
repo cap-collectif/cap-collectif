@@ -13,7 +13,7 @@ class ReportingAdmin extends Admin
 {
     protected $datagridValues = [
         '_sort_order' => 'ASC',
-        '_sort_by'    => 'isArchived',
+        '_sort_by' => 'isArchived',
     ];
 
     /**
@@ -22,35 +22,35 @@ class ReportingAdmin extends Admin
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
         $datagridMapper
-            ->add('status', null, [
+            ->add('status', null, array(
                 'label' => 'admin.fields.reporting.status',
-            ])
-            ->add('Opinion', null, [
+            ))
+            ->add('Opinion', null, array(
                 'label' => 'admin.fields.reporting.opinion',
-            ])
-            ->add('Source', null, [
+            ))
+            ->add('Source', null, array(
                 'label' => 'admin.fields.reporting.source',
-            ])
-            ->add('Argument', null, [
+            ))
+            ->add('Argument', null, array(
                 'label' => 'admin.fields.reporting.argument',
-            ])
-            ->add('Idea', null, [
+            ))
+            ->add('Idea', null, array(
                 'label' => 'admin.fields.reporting.idea',
-            ])
-            ->add('Comment', null, [
+            ))
+            ->add('Comment', null, array(
                 'label' => 'admin.fields.reporting.comment',
-            ])
+            ))
             ->add('Reporter', 'doctrine_orm_model_autocomplete', [
                 'label' => 'admin.fields.reporting.reporter',
-            ], null, [
+            ], null, array(
                 'property' => 'username',
-            ])
-            ->add('createdAt', null, [
+            ))
+            ->add('createdAt', null, array(
                 'label' => 'admin.fields.reporting.created_at',
-            ])
-            ->add('isArchived', null, [
+            ))
+            ->add('isArchived', null, array(
                 'label' => 'admin.fields.reporting.is_archived',
-            ])
+            ))
         ;
     }
 
@@ -62,36 +62,36 @@ class ReportingAdmin extends Admin
         unset($this->listModes['mosaic']);
 
         $listMapper
-            ->addIdentifier('object', null, [
-                'label'    => 'admin.fields.reporting.object',
+            ->addIdentifier('object', null, array(
+                'label' => 'admin.fields.reporting.object',
                 'template' => 'CapcoAdminBundle:Reporting:object_list_field.html.twig',
-                'mapped'   => false,
-            ])
-            ->add('type', null, [
-                'label'    => 'admin.fields.reporting.type',
+                'mapped' => false,
+            ))
+            ->add('type', null, array(
+                'label' => 'admin.fields.reporting.type',
                 'template' => 'CapcoAdminBundle:Reporting:type_list_field.html.twig',
-                'mapped'   => false,
-            ])
-            ->add('status', null, [
-                'label'        => 'admin.fields.reporting.status',
-                'template'     => 'CapcoAdminBundle:Reporting:status_list_field.html.twig',
+                'mapped' => false,
+            ))
+            ->add('status', null, array(
+                'label' => 'admin.fields.reporting.status',
+                'template' => 'CapcoAdminBundle:Reporting:status_list_field.html.twig',
                 'statusLabels' => Reporting::$statusesLabels,
-            ])
-            ->add('isArchived', null, [
-                'label'    => 'admin.fields.reporting.is_archived',
+            ))
+            ->add('isArchived', null, array(
+                'label' => 'admin.fields.reporting.is_archived',
                 'editable' => true,
-            ])
-            ->add('Reporter', null, [
+            ))
+            ->add('Reporter', null, array(
                 'label' => 'admin.fields.reporting.reporter',
-            ])
-            ->add('createdAt', null, [
+            ))
+            ->add('createdAt', null, array(
                 'label' => 'admin.fields.reporting.created_at',
-            ])
-            ->add('_action', 'actions', [
-                'actions' => [
-                    'show' => [],
-                ],
-            ])
+            ))
+            ->add('_action', 'actions', array(
+                'actions' => array(
+                    'show' => array(),
+                ),
+            ))
         ;
     }
 
@@ -101,34 +101,34 @@ class ReportingAdmin extends Admin
     protected function configureShowFields(ShowMapper $showMapper)
     {
         $showMapper
-            ->add('object', null, [
-                'label'    => 'admin.fields.reporting.object',
+            ->add('object', null, array(
+                'label' => 'admin.fields.reporting.object',
                 'template' => 'CapcoAdminBundle:Reporting:object_show_field.html.twig',
-                'mapped'   => false,
-            ])
-            ->add('type', null, [
-                'label'    => 'admin.fields.reporting.type',
+                'mapped' => false,
+            ))
+            ->add('type', null, array(
+                'label' => 'admin.fields.reporting.type',
                 'template' => 'CapcoAdminBundle:Reporting:type_show_field.html.twig',
-                'mapped'   => false,
-            ])
-            ->add('status', null, [
-                'label'        => 'admin.fields.reporting.status',
-                'template'     => 'CapcoAdminBundle:Reporting:status_show_field.html.twig',
+                'mapped' => false,
+            ))
+            ->add('status', null, array(
+                'label' => 'admin.fields.reporting.status',
+                'template' => 'CapcoAdminBundle:Reporting:status_show_field.html.twig',
                 'statusLabels' => Reporting::$statusesLabels,
-            ])
+            ))
             ->add('body', null, [
                 'label' => 'admin.fields.reporting.body',
             ])
-            ->add('isArchived', null, [
-                'label'    => 'admin.fields.reporting.is_archived',
+            ->add('isArchived', null, array(
+                'label' => 'admin.fields.reporting.is_archived',
                 'editable' => true,
-            ])
-            ->add('Reporter', null, [
+            ))
+            ->add('Reporter', null, array(
                 'label' => 'admin.fields.reporting.reporter',
-            ])
-            ->add('createdAt', null, [
+            ))
+            ->add('createdAt', null, array(
                 'label' => 'admin.fields.reporting.created_at',
-            ])
+            ))
         ;
     }
 
@@ -144,9 +144,9 @@ class ReportingAdmin extends Admin
 
     public function getFeatures()
     {
-        return [
+        return array(
             'reporting',
-        ];
+        );
     }
 
     public function getTemplate($name)

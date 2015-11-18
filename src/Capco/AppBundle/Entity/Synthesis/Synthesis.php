@@ -24,7 +24,7 @@ class Synthesis
 
     public static $sourceTypesLabels = [
         self::SOURCE_TYPE_CONSULTATION => 'synthesis.source_types.consultation_step',
-        self::SOURCE_TYPE_NONE         => 'synthesis.source_types.none',
+        self::SOURCE_TYPE_NONE => 'synthesis.source_types.none',
     ];
 
     /**

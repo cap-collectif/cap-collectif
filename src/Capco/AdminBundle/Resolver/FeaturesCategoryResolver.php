@@ -6,76 +6,76 @@ use Capco\AppBundle\Toggle\Manager;
 
 class FeaturesCategoryResolver
 {
-    protected static $categories = [
+    protected static $categories = array(
         'pages.homepage' => [
             'conditions' => [],
-            'features'   => [],
+            'features' => [],
         ],
         'pages.blog' => [
             'conditions' => ['blog'],
-            'features'   => [],
+            'features' => [],
         ],
         'pages.events' => [
             'conditions' => ['calendar'],
-            'features'   => [],
+            'features' => [],
         ],
         'pages.ideas' => [
             'conditions' => ['ideas'],
-            'features'   => ['idea_creation'],
+            'features' => ['idea_creation'],
         ],
         'pages.ideas_trash' => [
             'conditions' => ['ideas'],
-            'features'   => ['idea_trash'],
+            'features' => ['idea_trash'],
         ],
         'pages.themes' => [
             'conditions' => ['themes'],
-            'features'   => [],
+            'features' => [],
         ],
         'pages.projects' => [
             'conditions' => [],
-            'features'   => ['projects_form', 'project_trash'],
+            'features' => ['projects_form', 'project_trash'],
         ],
         'pages.registration' => [
             'conditions' => ['registration'],
-            'features'   => ['user_type', 'zipcode_at_register'],
+            'features' => ['user_type', 'zipcode_at_register'],
         ],
         'pages.members' => [
             'conditions' => ['members_list'],
-            'features'   => [],
+            'features' => [],
         ],
         'pages.login' => [
             'conditions' => [],
-            'features'   => [],
+            'features' => [],
         ],
         'pages.contact' => [
             'conditions' => [],
-            'features'   => [],
+            'features' => [],
         ],
         'pages.footer' => [
             'conditions' => [],
-            'features'   => [],
+            'features' => [],
         ],
         'settings.global' => [
             'conditions' => [],
-            'features'   => [],
+            'features' => [],
         ],
         'settings.modules' => [
             'conditions' => [],
-            'features'   => ['blog', 'calendar', 'ideas', 'versions', 'themes', 'registration', 'members_list', 'reporting', 'newsletter', 'share_buttons', 'login_facebook', 'login_gplus', 'login_twitter', 'search', 'votes_evolution'],
+            'features' => ['blog', 'calendar', 'ideas', 'versions', 'themes', 'registration', 'members_list', 'reporting', 'newsletter', 'share_buttons', 'login_facebook', 'login_gplus', 'login_twitter', 'search', 'votes_evolution'],
         ],
         'settings.notifications' => [
             'conditions' => [],
-            'features'   => [],
+            'features' => [],
         ],
         'settings.shield_mode' => [
             'conditions' => [],
-            'features'   => ['shield_mode'],
+            'features' => ['shield_mode'],
         ],
         'settings.appearance' => [
             'conditions' => [],
-            'features'   => [],
+            'features' => [],
         ],
-    ];
+    );
 
     protected $manager;
 

@@ -259,7 +259,7 @@ class SynthesisElement
     public function __construct()
     {
         $this->updatedAt = new \DateTime();
-        $this->votes = [];
+        $this->votes = array();
         $this->children = new ArrayCollection();
         $this->displayType = 'folder';
     }
@@ -844,7 +844,7 @@ class SynthesisElement
             $this->updatedAt = new \DateTime();
         }
         if ($this->votes === null) {
-            $this->votes = [];
+            $this->votes = array();
         }
         if ($this->children === null) {
             $this->children = new ArrayCollection();

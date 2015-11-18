@@ -65,7 +65,3 @@ def docker_import_bdd():
 @task
 def runner():
     local('docker exec -ti capcollectifsf2_application_1 bash')
-
-@task
-def csfixer():
-    local('php-cs-fixer fix . --config=sf23 --fixers=short_array_syntax,align_double_arrow,unalign_equals -v', capture=False)

@@ -17,13 +17,13 @@ use Capco\AppBundle\Entity\ViewModel\OpinionTypeViewModel;
 class OpinionType
 {
     public static $colorsType = [
-        'red'      => 'opinion_type.colors.red',
-        'green'    => 'opinion_type.colors.green',
-        'blue'     => 'opinion_type.colors.blue',
-        'orange'   => 'opinion_type.colors.orange',
+        'red' => 'opinion_type.colors.red',
+        'green' => 'opinion_type.colors.green',
+        'blue' => 'opinion_type.colors.blue',
+        'orange' => 'opinion_type.colors.orange',
         'bluedark' => 'opinion_type.colors.bluedark',
-        'white'    => 'opinion_type.colors.white',
-        'default'  => 'opinion_type.colors.default',
+        'white' => 'opinion_type.colors.white',
+        'default' => 'opinion_type.colors.default',
     ];
 
     const VOTE_WIDGET_DISABLED = 0;
@@ -32,8 +32,8 @@ class OpinionType
 
     public static $voteWidgetLabels = [
         self::VOTE_WIDGET_DISABLED => 'opinion_type.widget_type.disabled',
-        self::VOTE_WIDGET_OK       => 'opinion_type.widget_type.ok',
-        self::VOTE_WIDGET_BOTH     => 'opinion_type.widget_type.both',
+        self::VOTE_WIDGET_OK => 'opinion_type.widget_type.ok',
+        self::VOTE_WIDGET_BOTH => 'opinion_type.widget_type.both',
     ];
 
     const COMMENT_SYSTEM_DISABLED = 0;
@@ -42,8 +42,8 @@ class OpinionType
 
     public static $commentSystemLabels = [
         self::COMMENT_SYSTEM_DISABLED => 'opinion_type.comment_system.disabled',
-        self::COMMENT_SYSTEM_OK       => 'opinion_type.comment_system.ok',
-        self::COMMENT_SYSTEM_BOTH     => 'opinion_type.comment_system.both',
+        self::COMMENT_SYSTEM_OK => 'opinion_type.comment_system.ok',
+        self::COMMENT_SYSTEM_BOTH => 'opinion_type.comment_system.both',
     ];
 
     /**

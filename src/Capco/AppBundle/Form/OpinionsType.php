@@ -24,27 +24,27 @@ class OpinionsType extends AbstractType
     {
         if ($this->action === 'edit') {
             $builder
-                ->add('confirm', 'checkbox', [
-                    'mapped'      => false,
-                    'label'       => 'opinion.form.confirm',
-                    'required'    => true,
+                ->add('confirm', 'checkbox', array(
+                    'mapped' => false,
+                    'label' => 'opinion.form.confirm',
+                    'required' => true,
                     'constraints' => [new True(['message' => 'opinion.votes_not_confirmed'])],
-                ])
+                ))
             ;
         }
 
         $builder
-            ->add('title', 'text', [
-                'label'    => 'opinion.form.title',
+            ->add('title', 'text', array(
+                'label' => 'opinion.form.title',
                 'required' => true,
-            ])
-            ->add('body', 'ckeditor', [
-                'label'       => 'opinion.form.body',
-                'required'    => true,
+            ))
+            ->add('body', 'ckeditor', array(
+                'label' => 'opinion.form.body',
+                'required' => true,
                 'config_name' => 'user_editor',
-            ])
+            ))
             ->add('appendices', 'collection', [
-                'type'  => new AppendixType(),
+                'type' => new AppendixType(),
                 'label' => false,
             ])
         ;
@@ -55,12 +55,12 @@ class OpinionsType extends AbstractType
      */
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
-        $resolver->setDefaults([
-            'data_class'         => 'Capco\AppBundle\Entity\Opinion',
-            'csrf_protection'    => true,
-            'csrf_field_name'    => '_token',
+        $resolver->setDefaults(array(
+            'data_class' => 'Capco\AppBundle\Entity\Opinion',
+            'csrf_protection' => true,
+            'csrf_field_name' => '_token',
             'translation_domain' => 'CapcoAppBundle',
-        ]);
+        ));
     }
 
     /**

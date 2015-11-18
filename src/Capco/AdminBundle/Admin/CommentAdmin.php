@@ -15,7 +15,7 @@ class CommentAdmin extends Admin
 {
     protected $datagridValues = [
         '_sort_order' => 'DESC',
-        '_sort_by'    => 'updatedAt',
+        '_sort_by' => 'updatedAt',
     ];
 
     /**
@@ -26,27 +26,27 @@ class CommentAdmin extends Admin
         $datagridMapper
             ->add('Author', 'doctrine_orm_model_autocomplete', [
                 'label' => 'admin.fields.comment.author',
-            ], null, [
+            ], null, array(
                 'property' => 'username',
-            ])
-            ->add('authorName', null, [
+            ))
+            ->add('authorName', null, array(
                 'label' => 'admin.fields.comment.author_name',
-            ])
-            ->add('authorEmail', null, [
+            ))
+            ->add('authorEmail', null, array(
                 'label' => 'admin.fields.comment.author_email',
-            ])
-            ->add('votesCount', null, [
+            ))
+            ->add('votesCount', null, array(
                 'label' => 'admin.fields.comment.vote_count',
-            ])
-            ->add('updatedAt', null, [
+            ))
+            ->add('updatedAt', null, array(
                 'label' => 'admin.fields.comment.updated_at',
-            ])
-            ->add('isEnabled', null, [
+            ))
+            ->add('isEnabled', null, array(
                 'label' => 'admin.fields.comment.is_enabled',
-            ])
-            ->add('isTrashed', null, [
+            ))
+            ->add('isTrashed', null, array(
                 'label' => 'admin.fields.comment.is_trashed',
-            ])
+            ))
         ;
     }
 
@@ -58,42 +58,42 @@ class CommentAdmin extends Admin
         unset($this->listModes['mosaic']);
 
         $listMapper
-            ->addIdentifier('body', null, [
-                'label'    => 'admin.fields.comment.body',
+            ->addIdentifier('body', null, array(
+                'label' => 'admin.fields.comment.body',
                 'template' => 'CapcoAdminBundle:Comment:body_list_field.html.twig',
-            ])
-            ->add('object', null, [
-                'label'    => 'admin.fields.comment.object',
+            ))
+            ->add('object', null, array(
+                'label' => 'admin.fields.comment.object',
                 'template' => 'CapcoAdminBundle:Comment:object_list_field.html.twig',
-                'mapped'   => false,
-            ])
-            ->add('Author', 'sonata_type_model', [
-                'label'    => 'admin.fields.comment.author',
+                'mapped' => false,
+            ))
+            ->add('Author', 'sonata_type_model', array(
+                'label' => 'admin.fields.comment.author',
                 'template' => 'CapcoAdminBundle:Comment:author_list_field.html.twig',
-                'mapped'   => false,
+                'mapped' => false,
 
-            ])
-            ->add('votesCount', null, [
+            ))
+            ->add('votesCount', null, array(
                 'label' => 'admin.fields.comment.vote_count',
-            ])
-            ->add('isEnabled', null, [
+            ))
+            ->add('isEnabled', null, array(
                 'editable' => true,
-                'label'    => 'admin.fields.comment.is_enabled',
-            ])
-            ->add('isTrashed', null, [
+                'label' => 'admin.fields.comment.is_enabled',
+            ))
+            ->add('isTrashed', null, array(
                 'editable' => true,
-                'label'    => 'admin.fields.comment.is_trashed',
-            ])
-            ->add('updatedAt', 'datetime', [
+                'label' => 'admin.fields.comment.is_trashed',
+            ))
+            ->add('updatedAt', 'datetime', array(
                 'label' => 'admin.fields.comment.updated_at',
-            ])
-            ->add('_action', 'actions', [
-                'actions' => [
-                    'show'   => [],
-                    'edit'   => [],
-                    'delete' => [],
-                ],
-            ])
+            ))
+            ->add('_action', 'actions', array(
+                'actions' => array(
+                    'show' => array(),
+                    'edit' => array(),
+                    'delete' => array(),
+                ),
+            ))
         ;
     }
 
@@ -106,79 +106,79 @@ class CommentAdmin extends Admin
 
         if ($subject instanceof IdeaComment) {
             $showMapper
-                ->add('idea', 'sonata_type_model', [
+                ->add('idea', 'sonata_type_model', array(
                     'label' => 'admin.fields.comment.idea',
                     'class' => 'Capco\AppBundle\Entity\Idea',
-                ])
+                ))
             ;
         } elseif ($subject instanceof EventComment) {
             $showMapper
-                ->add('event', 'sonata_type_model', [
+                ->add('event', 'sonata_type_model', array(
                     'label' => 'admin.fields.comment.idea',
                     'class' => 'Capco\AppBundle\Entity\Event',
-                ])
+                ))
             ;
         } elseif ($subject instanceof PostComment) {
             $showMapper
-                ->add('post', 'sonata_type_model', [
+                ->add('post', 'sonata_type_model', array(
                     'label' => 'admin.fields.comment.idea',
                     'class' => 'Capco\AppBundle\Entity\Post',
-                ])
+                ))
             ;
         }
 
         $showMapper
-            ->add('body', null, [
+            ->add('body', null, array(
                 'label' => 'admin.fields.comment.body',
-            ])
+            ))
         ;
 
         if (null != $subject->getAuthor()) {
             $showMapper
-                ->add('Author', null, [
+                ->add('Author', null, array(
                     'label' => 'admin.fields.comment.author',
-                ])
+                ))
             ;
         } else {
             $showMapper
-                ->add('authorName', null, [
+                ->add('authorName', null, array(
                     'label' => 'admin.fields.comment.author_name',
-                ])
-                ->add('authorEmail', null, [
+                ))
+                ->add('authorEmail', null, array(
                     'label' => 'admin.fields.comment.author_email',
-                ])
-                ->add('authorIp', null, [
+                ))
+                ->add('authorIp', null, array(
                     'label' => 'admin.fields.comment.author_ip',
-                ])
+                ))
             ;
         }
 
         $showMapper
-            ->add('votesCount', null, [
+            ->add('votesCount', null, array(
                 'label' => 'admin.fields.comment.vote_count',
-            ])
-            ->add('createdAt', null, [
+            ))
+            ->add('createdAt', null, array(
                 'label' => 'admin.fields.comment.created_at',
-            ])
-            ->add('updatedAt', null, [
+            ))
+            ->add('updatedAt', null, array(
                 'label' => 'admin.fields.comment.updated_at',
-            ])
-            ->add('isEnabled', null, [
+            ))
+            ->add('isEnabled', null, array(
                 'label' => 'admin.fields.comment.is_enabled',
-            ])
-            ->add('isTrashed', null, [
+            ))
+            ->add('isTrashed', null, array(
                 'label' => 'admin.fields.comment.is_trashed',
-            ])
+            ))
         ;
 
         if ($subject->getIsTrashed()) {
             $showMapper
-                ->add('trashedAt', null, [
+                ->add('trashedAt', null, array(
                     'label' => 'admin.fields.comment.trashed_at',
-                ])
-                ->add('trashedReason', null, [
+                ))
+                ->add('trashedReason', null, array(
                     'label' => 'admin.fields.comment.trashed_reason',
-                ])
+                ))
             ;
         }
     }
@@ -192,55 +192,55 @@ class CommentAdmin extends Admin
 
         if ($subject instanceof IdeaComment) {
             $formMapper
-                ->add('idea', 'sonata_type_model', [
+                ->add('idea', 'sonata_type_model', array(
                     'label' => 'admin.fields.comment.idea',
                     'class' => 'Capco\AppBundle\Entity\Idea',
-                ])
+                ))
             ;
         } elseif ($subject instanceof EventComment) {
             $formMapper
-                ->add('event', 'sonata_type_model', [
+                ->add('event', 'sonata_type_model', array(
                     'label' => 'admin.fields.comment.idea',
                     'class' => 'Capco\AppBundle\Entity\Event',
-                ])
+                ))
             ;
         } elseif ($subject instanceof PostComment) {
             $formMapper
-                ->add('post', 'sonata_type_model', [
+                ->add('post', 'sonata_type_model', array(
                     'label' => 'admin.fields.comment.idea',
                     'class' => 'Capco\AppBundle\Entity\Post',
-                ])
+                ))
             ;
         }
 
         $formMapper
-            ->add('body', null, [
+            ->add('body', null, array(
                 'label' => 'admin.fields.comment.body',
-                'attr'  => ['rows' => 8],
-            ])
+                'attr' => array('rows' => 8),
+            ))
             ->add('Author', 'sonata_type_model_autocomplete', [
-                'label'    => 'admin.fields.comment.author',
+                'label' => 'admin.fields.comment.author',
                 'property' => 'username',
-                'help'     => 'admin.help.comment.author',
+                'help' => 'admin.help.comment.author',
                 'required' => false,
             ])
-            ->add('authorName', null, [
+            ->add('authorName', null, array(
                 'label' => 'admin.fields.comment.author_name',
-            ])
-            ->add('authorEmail', null, [
+            ))
+            ->add('authorEmail', null, array(
                 'label' => 'admin.fields.comment.author_email',
-            ])
-            ->add('isEnabled', null, [
-                'label'    => 'admin.fields.comment.is_enabled',
+            ))
+            ->add('isEnabled', null, array(
+                'label' => 'admin.fields.comment.is_enabled',
                 'required' => false,
-            ])
-            ->add('isTrashed', null, [
-                'label'    => 'admin.fields.comment.is_trashed',
+            ))
+            ->add('isTrashed', null, array(
+                'label' => 'admin.fields.comment.is_trashed',
                 'required' => false,
-            ])
-            ->add('trashedReason', null, [
+            ))
+            ->add('trashedReason', null, array(
                 'label' => 'admin.fields.comment.trashed_reason',
-            ])
+            ))
         ;
     }
 }

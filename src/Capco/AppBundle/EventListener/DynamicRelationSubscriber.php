@@ -42,10 +42,10 @@ class DynamicRelationSubscriber implements EventSubscriber
                     if (count(array_intersect(class_implements($metadata->getName()), $params['interfaces'])) > 0) {
                         $metadata->mapManyToOne([
                             'targetEntity' => $metadata->getName(),
-                            'fieldName'    => 'link',
-                            'cascade'      => ['persist'],
-                            'inversedBy'   => 'connections',
-                            'joinColumns'  => [
+                            'fieldName' => 'link',
+                            'cascade' => ['persist'],
+                            'inversedBy' => 'connections',
+                            'joinColumns' => [
                                 [
                                     'onDelete' => 'SET NULL',
                                 ],
@@ -54,9 +54,9 @@ class DynamicRelationSubscriber implements EventSubscriber
 
                         $metadata->mapOneToMany([
                             'targetEntity' => $metadata->getName(),
-                            'fieldName'    => 'connections',
-                            'cascade'      => ['persist'],
-                            'mappedBy'     => 'link',
+                            'fieldName' => 'connections',
+                            'cascade' => ['persist'],
+                            'mappedBy' => 'link',
                         ]);
                     }
                 break;
@@ -69,11 +69,11 @@ class DynamicRelationSubscriber implements EventSubscriber
                         $fieldName = lcfirst(substr($metadata->getName(), strrpos($metadata->getName(), '\\') + 1));
 
                         $metadata->mapOneToMany([
-                            'targetEntity'  => $metadata->getName().'Vote',
-                            'fieldName'     => 'votes',
-                            'cascade'       => ['persist', 'remove'],
+                            'targetEntity' => $metadata->getName().'Vote',
+                            'fieldName' => 'votes',
+                            'cascade' => ['persist', 'remove'],
                             'orphanRemoval' => true,
-                            'mappedBy'      => $fieldName,
+                            'mappedBy' => $fieldName,
                         ]);
                     }
                 break;

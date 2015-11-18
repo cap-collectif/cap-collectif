@@ -25,10 +25,10 @@ class FeatureToggleExtension extends \Twig_Extension
 
     public function getFunctions()
     {
-        return [
-            new \Twig_SimpleFunction('is_feature_enabled', [$this, 'getIsFeatureEnabled']),
-            new \Twig_SimpleFunction('has_feature_enabled', [$this, 'getHasFeatureEnabled']),
-       ];
+        return array(
+            new \Twig_SimpleFunction('is_feature_enabled', array($this, 'getIsFeatureEnabled')),
+            new \Twig_SimpleFunction('has_feature_enabled', array($this, 'getHasFeatureEnabled')),
+       );
     }
 
     public function getIsFeatureEnabled($flag)

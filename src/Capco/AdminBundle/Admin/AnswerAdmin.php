@@ -8,13 +8,13 @@ use Sonata\AdminBundle\Route\RouteCollection;
 
 class AnswerAdmin extends Admin
 {
-    protected $formOptions = [
+    protected $formOptions = array(
         'cascade_validation' => true,
-    ];
+    );
 
     protected $datagridValues = [
         '_sort_order' => 'ASC',
-        '_sort_by'    => 'title',
+        '_sort_by' => 'title',
     ];
 
     /**
@@ -23,26 +23,26 @@ class AnswerAdmin extends Admin
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
-            ->add('title', null, [
-                'label'    => 'admin.fields.answer.title',
+            ->add('title', null, array(
+                'label' => 'admin.fields.answer.title',
                 'required' => false,
-            ])
+            ))
             ->add('author', 'sonata_type_model_autocomplete', [
-                'label'    => 'admin.fields.answer.author',
+                'label' => 'admin.fields.answer.author',
                 'property' => 'username',
                 'required' => true,
             ])
-            ->add('body', 'ckeditor', [
-                'label'       => 'admin.fields.answer.body',
+            ->add('body', 'ckeditor', array(
+                'label' => 'admin.fields.answer.body',
                 'config_name' => 'admin_editor',
-                'required'    => true,
-            ])
+                'required' => true,
+            ))
         ;
     }
 
     protected function configureRoutes(RouteCollection $collection)
     {
-        $collection->clearExcept(['create', 'edit', 'delete']);
+        $collection->clearExcept(array('create', 'edit', 'delete'));
     }
 
     public function getBatchActions()

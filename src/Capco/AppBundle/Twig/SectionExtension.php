@@ -28,10 +28,10 @@ class SectionExtension extends \Twig_Extension
      */
     public function getFilters()
     {
-        return [
-            new \Twig_SimpleFilter('capco_is_first_section', [$this, 'isFirstSection']),
-            new \Twig_SimpleFilter('capco_is_last_section', [$this, 'isLastSection']),
-        ];
+        return array(
+            new \Twig_SimpleFilter('capco_is_first_section', array($this, 'isFirstSection')),
+            new \Twig_SimpleFilter('capco_is_last_section', array($this, 'isLastSection')),
+        );
     }
 
     public function isFirstSection($section)

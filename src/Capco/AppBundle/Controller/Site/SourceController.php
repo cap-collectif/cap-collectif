@@ -30,17 +30,17 @@ class SourceController extends Controller
     public function deleteSourceAction($projectSlug, $stepSlug, $opinionTypeSlug, $opinionSlug, $sourceSlug, Request $request)
     {
         if (false === $this->get('security.authorization_checker')->isGranted('ROLE_USER')) {
-            throw new AccessDeniedException($this->get('translator')->trans('error.access_restricted', [], 'CapcoAppBundle'));
+            throw new AccessDeniedException($this->get('translator')->trans('error.access_restricted', array(), 'CapcoAppBundle'));
         }
 
         $source = $this->getDoctrine()->getRepository('CapcoAppBundle:Source')->getOneBySlug($sourceSlug);
 
         if (null == $source) {
-            throw $this->createNotFoundException($this->get('translator')->trans('source.error.not_found', [], 'CapcoAppBundle'));
+            throw $this->createNotFoundException($this->get('translator')->trans('source.error.not_found', array(), 'CapcoAppBundle'));
         }
 
         if (false == $source->canContribute()) {
-            throw new AccessDeniedException($this->get('translator')->trans('source.error.no_contribute', [], 'CapcoAppBundle'));
+            throw new AccessDeniedException($this->get('translator')->trans('source.error.no_contribute', array(), 'CapcoAppBundle'));
         }
 
         $opinion = $source->getOpinion();
@@ -52,7 +52,7 @@ class SourceController extends Controller
         $userPostSource = $source->getAuthor()->getId();
 
         if ($userCurrent !== $userPostSource) {
-            throw new AccessDeniedException($this->get('translator')->trans('source.error.not_author', [], 'CapcoAppBundle'));
+            throw new AccessDeniedException($this->get('translator')->trans('source.error.not_author', array(), 'CapcoAppBundle'));
         }
 
         //Champ CSRF
@@ -74,11 +74,11 @@ class SourceController extends Controller
             }
         }
 
-        return [
+        return array(
             'opinion' => $opinion,
-            'source'  => $source,
-            'form'    => $form->createView(),
-        ];
+            'source' => $source,
+            'form' => $form->createView(),
+        );
     }
 
     /**
@@ -98,17 +98,17 @@ class SourceController extends Controller
     public function updateSourceAction($projectSlug, $stepSlug, $opinionTypeSlug, $opinionSlug, $sourceSlug, Request $request)
     {
         if (false === $this->get('security.authorization_checker')->isGranted('ROLE_USER')) {
-            throw new AccessDeniedException($this->get('translator')->trans('error.access_restricted', [], 'CapcoAppBundle'));
+            throw new AccessDeniedException($this->get('translator')->trans('error.access_restricted', array(), 'CapcoAppBundle'));
         }
 
         $source = $this->getDoctrine()->getRepository('CapcoAppBundle:Source')->getOneBySlug($sourceSlug);
 
         if ($source == null) {
-            throw $this->createNotFoundException($this->get('translator')->trans('source.error.not_found', [], 'CapcoAppBundle'));
+            throw $this->createNotFoundException($this->get('translator')->trans('source.error.not_found', array(), 'CapcoAppBundle'));
         }
 
         if (false == $source->canContribute()) {
-            throw new AccessDeniedException($this->get('translator')->trans('source.error.no_contribute', [], 'CapcoAppBundle'));
+            throw new AccessDeniedException($this->get('translator')->trans('source.error.no_contribute', array(), 'CapcoAppBundle'));
         }
 
         $opinion = $source->getLinkedOpinion();
@@ -120,7 +120,7 @@ class SourceController extends Controller
         $userPostSource = $source->getAuthor()->getId();
 
         if ($userCurrent !== $userPostSource) {
-            throw new AccessDeniedException($this->get('translator')->trans('source.error.not_author', [], 'CapcoAppBundle'));
+            throw new AccessDeniedException($this->get('translator')->trans('source.error.not_author', array(), 'CapcoAppBundle'));
         }
 
         $form = $this->createForm(new SourcesType('edit'), $source);
@@ -137,7 +137,7 @@ class SourceController extends Controller
                 if ($type === 0) {
                     $source->setMedia(null);
                     $mediaManager = $this->container->get('sonata.media.manager.media');
-                    $media = $mediaManager->findOneBy(['id' => $source->getMedia()]);
+                    $media = $mediaManager->findOneBy(array('id' => $source->getMedia()));
                     if (null != $media) {
                         $provider = $this->get($media->getProviderName());
                         $provider->removeThumbnails($media);
@@ -159,9 +159,9 @@ class SourceController extends Controller
         }
 
         return [
-            'opinion'      => $opinion,
-            'source'       => $source,
-            'form'         => $form->createView(),
+            'opinion' => $opinion,
+            'source' => $source,
+            'form' => $form->createView(),
             'buttonActive' => $form->get('type')->getData(),
         ];
     }

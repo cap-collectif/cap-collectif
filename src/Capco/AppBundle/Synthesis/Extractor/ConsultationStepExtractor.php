@@ -92,7 +92,7 @@ class ConsultationStepExtractor
 
             // Create elements from opinions
             $opinions = $this->em->getRepository('CapcoAppBundle:Opinion')->findBy([
-                'step'        => $this->consultationStep,
+                'step' => $this->consultationStep,
                 'OpinionType' => $ot,
             ]);
             if (count($opinions) > 0) {
@@ -398,7 +398,7 @@ class ConsultationStepExtractor
             $element->setBody($content);
 
             // Set votes
-            $votes = [];
+            $votes = array();
             $votes['-1'] = $opinion->getVotesCountNok();
             $votes['0'] = $opinion->getVotesCountMitige();
             $votes['1'] = $opinion->getVotesCountOk();
@@ -434,7 +434,7 @@ class ConsultationStepExtractor
             $element->setBody($content);
 
             // Set votes
-            $votes = [];
+            $votes = array();
             $votes['-1'] = $version->getVotesCountNok();
             $votes['0'] = $version->getVotesCountMitige();
             $votes['1'] = $version->getVotesCountOk();
@@ -469,7 +469,7 @@ class ConsultationStepExtractor
         }
 
         // Set votes
-        $votes = [];
+        $votes = array();
         $votes['1'] = $source->getVotesCount();
         $element->setVotes($votes);
 
@@ -492,7 +492,7 @@ class ConsultationStepExtractor
         $element->setBody($argument->getBody());
 
         // Set votes
-        $votes = [];
+        $votes = array();
         $votes['1'] = $argument->getVotesCount();
         $element->setVotes($votes);
 

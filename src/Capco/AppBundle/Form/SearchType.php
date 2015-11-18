@@ -20,12 +20,12 @@ class SearchType extends AbstractType
     private function generateChoices()
     {
         $choices = [
-            'all'      => 'search.form.types.all',
-            'comment'  => 'search.form.types.comments',
+            'all' => 'search.form.types.all',
+            'comment' => 'search.form.types.comments',
             'argument' => 'search.form.types.arguments',
-            'project'  => 'search.form.types.projects',
-            'opinion'  => 'search.form.types.opinions',
-            'source'   => 'search.form.types.sources',
+            'project' => 'search.form.types.projects',
+            'opinion' => 'search.form.types.opinions',
+            'source' => 'search.form.types.sources',
         ];
 
         if ($this->toggleManager->isActive('versions')) {
@@ -60,29 +60,29 @@ class SearchType extends AbstractType
 
         $builder
             ->add('term', 'text', [
-                'required'           => true,
-                'label'              => 'search.form.label.term',
+                'required' => true,
+                'label' => 'search.form.label.term',
                 'translation_domain' => 'CapcoAppBundle',
-                'constraints'        => [new NotBlank(['message' => 'search.no_term'])],
-                'attr'               => ['placeholder' => 'search.form.placeholder.term'],
+                'constraints' => [new NotBlank(['message' => 'search.no_term'])],
+                'attr' => ['placeholder' => 'search.form.placeholder.term'],
             ])
-            ->add('type', 'choice', [
-                'required'           => false,
+            ->add('type', 'choice', array(
+                'required' => false,
                 'translation_domain' => 'CapcoAppBundle',
-                'empty_value'        => false,
-                'expanded'           => true,
-                'choices'            => $choices,
-            ])
-            ->add('sort', 'choice', [
-                'required'           => false,
+                'empty_value' => false,
+                'expanded' => true,
+                'choices' => $choices,
+            ))
+            ->add('sort', 'choice', array(
+                'required' => false,
                 'translation_domain' => 'CapcoAppBundle',
-                'empty_value'        => false,
-                'choices'            => [
+                'empty_value' => false,
+                'choices' => [
                     'score' => 'search.form.sort.score',
-                    'date'  => 'search.form.sort.date',
+                    'date' => 'search.form.sort.date',
                 ],
-                'attr' => ['onchange' => 'this.form.submit()'],
-            ])
+                'attr' => array('onchange' => 'this.form.submit()'),
+            ))
         ;
     }
 
@@ -91,10 +91,10 @@ class SearchType extends AbstractType
      */
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
-        $resolver->setDefaults([
-            'csrf_protection'    => false,
+        $resolver->setDefaults(array(
+            'csrf_protection' => false,
             'translation_domain' => 'CapcoAppBundle',
-        ]);
+        ));
     }
 
     /**

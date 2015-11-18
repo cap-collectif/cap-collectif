@@ -64,11 +64,11 @@ class RequestListener
 
         // Disabled feature flag on requested url
         $flagsAttributes = $request->attributes->get('_feature_flags');
-        $flags = $flagsAttributes ? explode(',', $flagsAttributes) : [];
+        $flags = $flagsAttributes ? explode(',', $flagsAttributes) : array();
 
         foreach ($flags as $flag) {
             if (null !== $flag && !$this->manager->isActive($flag)) {
-                $message = $this->translator->trans('error.feature_not_enabled', [], 'CapcoAppBundle');
+                $message = $this->translator->trans('error.feature_not_enabled', array(), 'CapcoAppBundle');
                 throw new NotFoundHttpException($message);
             }
         }

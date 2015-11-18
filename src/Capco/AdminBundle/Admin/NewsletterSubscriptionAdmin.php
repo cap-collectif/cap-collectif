@@ -13,7 +13,7 @@ class NewsletterSubscriptionAdmin extends Admin
 {
     protected $datagridValues = [
         '_sort_order' => 'ASC',
-        '_sort_by'    => 'email',
+        '_sort_by' => 'email',
     ];
 
     /**
@@ -22,15 +22,15 @@ class NewsletterSubscriptionAdmin extends Admin
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
         $datagridMapper
-            ->add('email', null, [
+            ->add('email', null, array(
                 'label' => 'admin.fields.newsletter_subscription.email',
-            ])
-            ->add('isEnabled', null, [
+            ))
+            ->add('isEnabled', null, array(
                 'label' => 'admin.fields.newsletter_subscription.is_enabled',
-            ])
-            ->add('createdAt', null, [
+            ))
+            ->add('createdAt', null, array(
                 'label' => 'admin.fields.newsletter_subscription.created_at',
-            ])
+            ))
         ;
     }
 
@@ -42,23 +42,23 @@ class NewsletterSubscriptionAdmin extends Admin
         unset($this->listModes['mosaic']);
 
         $listMapper
-            ->addIdentifier('email', null, [
+            ->addIdentifier('email', null, array(
                 'label' => 'admin.fields.newsletter_subscription.email',
-            ])
-            ->add('isEnabled', null, [
+            ))
+            ->add('isEnabled', null, array(
                 'editable' => true,
-                'label'    => 'admin.fields.newsletter_subscription.is_enabled',
-            ])
-            ->add('createdAt', null, [
+                'label' => 'admin.fields.newsletter_subscription.is_enabled',
+            ))
+            ->add('createdAt', null, array(
                 'label' => 'admin.fields.newsletter_subscription.created_at',
-            ])
-            ->add('_action', 'actions', [
-                'actions' => [
-                    'show'   => [],
-                    'edit'   => [],
-                    'delete' => [],
-                ],
-            ])
+            ))
+            ->add('_action', 'actions', array(
+                'actions' => array(
+                    'show' => array(),
+                    'edit' => array(),
+                    'delete' => array(),
+                ),
+            ))
         ;
     }
 
@@ -68,13 +68,13 @@ class NewsletterSubscriptionAdmin extends Admin
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
-            ->add('email', null, [
+            ->add('email', null, array(
                 'label' => 'admin.fields.newsletter_subscription.email',
-            ])
-            ->add('isEnabled', null, [
-                'label'    => 'admin.fields.newsletter_subscription.is_enabled',
+            ))
+            ->add('isEnabled', null, array(
+                'label' => 'admin.fields.newsletter_subscription.is_enabled',
                 'required' => false,
-            ])
+            ))
         ;
     }
 
@@ -84,16 +84,16 @@ class NewsletterSubscriptionAdmin extends Admin
     protected function configureShowFields(ShowMapper $showMapper)
     {
         $showMapper
-            ->add('email', null, [
+            ->add('email', null, array(
                 'label' => 'admin.fields.newsletter_subscription.email',
-            ])
-            ->add('isEnabled', null, [
+            ))
+            ->add('isEnabled', null, array(
                 'editable' => true,
-                'label'    => 'admin.fields.newsletter_subscription.is_enabled',
-            ])
-            ->add('createdAt', null, [
+                'label' => 'admin.fields.newsletter_subscription.is_enabled',
+            ))
+            ->add('createdAt', null, array(
                 'label' => 'admin.fields.newsletter_subscription.created_at',
-            ])
+            ))
         ;
     }
 
@@ -103,8 +103,8 @@ class NewsletterSubscriptionAdmin extends Admin
 
     public function getFeatures()
     {
-        return [
+        return array(
             'newsletter',
-        ];
+        );
     }
 }

@@ -21,7 +21,7 @@ class ResettingFOSUser1Controller extends BaseController
         $errors = $this->container->get('validator')->validate($email, new EmailConstraint());
 
         if (count($errors) > 0) {
-            return $this->container->get('templating')->renderResponse('FOSUserBundle:Resetting:request.html.'.$this->getEngine(), ['invalid_email' => $email]);
+            return $this->container->get('templating')->renderResponse('FOSUserBundle:Resetting:request.html.'.$this->getEngine(), array('invalid_email' => $email));
         }
 
         /** @var $user UserInterface */
@@ -54,8 +54,8 @@ class ResettingFOSUser1Controller extends BaseController
         $email = $session->get(static::SESSION_EMAIL);
         $session->remove(static::SESSION_EMAIL);
 
-        return $this->container->get('templating')->renderResponse('FOSUserBundle:Resetting:checkEmail.html.'.$this->getEngine(), [
+        return $this->container->get('templating')->renderResponse('FOSUserBundle:Resetting:checkEmail.html.'.$this->getEngine(), array(
             'email' => $email,
-        ]);
+        ));
     }
 }

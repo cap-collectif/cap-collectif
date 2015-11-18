@@ -12,7 +12,7 @@ class IdeaVoteAdmin extends Admin
 {
     protected $datagridValues = [
         '_sort_order' => 'ASC',
-        '_sort_by'    => 'idea.title',
+        '_sort_by' => 'idea.title',
     ];
 
     /**
@@ -21,17 +21,17 @@ class IdeaVoteAdmin extends Admin
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
         $datagridMapper
-            ->add('idea', null, [
+            ->add('idea', null, array(
                 'label' => 'admin.fields.idea_vote.idea',
-            ])
+            ))
             ->add('user', 'doctrine_orm_model_autocomplete', [
                 'label' => 'admin.fields.idea_vote.user',
-            ], null, [
+            ], null, array(
                 'property' => 'username',
-            ])
-            ->add('createdAt', null, [
+            ))
+            ->add('createdAt', null, array(
                 'label' => 'admin.fields.idea_vote.created_at',
-            ])
+            ))
         ;
     }
 
@@ -46,15 +46,15 @@ class IdeaVoteAdmin extends Admin
             ->add('confirmed', null, [
                 'label' => 'admin.fields.idea_vote.confirmed',
             ])
-            ->add('idea', 'sonata_type_model', [
+            ->add('idea', 'sonata_type_model', array(
                 'label' => 'admin.fields.idea_vote.idea',
-            ])
+            ))
             ->add('private', null, [
                   'label' => 'admin.fields.idea_vote.private',
             ])
-            ->add('user', 'sonata_type_model', [
+            ->add('user', 'sonata_type_model', array(
                 'label' => 'admin.fields.idea_vote.user',
-            ])
+            ))
             ->add('username', null, [
                 'label' => 'admin.fields.idea_vote.username',
             ])
@@ -64,16 +64,16 @@ class IdeaVoteAdmin extends Admin
             ->add('ipAdress', null, [
                 'label' => 'admin.fields.idea_vote.ip',
             ])
-            ->add('createdAt', null, [
+            ->add('createdAt', null, array(
                 'label' => 'admin.fields.idea_vote.created_at',
-            ])
-            ->add('_action', 'actions', [
-                'actions' => [
-                    'show'   => [],
-                    'edit'   => [],
-                    'delete' => [],
-                ],
-            ])
+            ))
+            ->add('_action', 'actions', array(
+                'actions' => array(
+                    'show' => array(),
+                    'edit' => array(),
+                    'delete' => array(),
+                ),
+            ))
         ;
     }
 
@@ -83,15 +83,15 @@ class IdeaVoteAdmin extends Admin
     protected function configureShowFields(ShowMapper $showMapper)
     {
         $showMapper
-            ->add('idea', 'sonata_type_model', [
+            ->add('idea', 'sonata_type_model', array(
                     'label' => 'admin.fields.idea_vote.idea',
-            ])
-            ->add('user', 'sonata_type_model', [
+            ))
+            ->add('user', 'sonata_type_model', array(
                     'label' => 'admin.fields.idea_vote.user',
-            ])
-            ->add('createdAt', null, [
+            ))
+            ->add('createdAt', null, array(
                     'label' => 'admin.fields.idea_vote.created_at',
-            ])
+            ))
         ;
     }
 
@@ -104,8 +104,8 @@ class IdeaVoteAdmin extends Admin
 
     public function getFeatures()
     {
-        return [
+        return array(
             'ideas',
-        ];
+        );
     }
 }

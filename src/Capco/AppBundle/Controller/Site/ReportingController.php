@@ -29,18 +29,18 @@ class ReportingController extends Controller
     public function reportingOpinionVersionAction($projectSlug, $stepSlug, $opinionTypeSlug, $opinionSlug, $versionSlug, Request $request)
     {
         if (false === $this->get('security.authorization_checker')->isGranted('ROLE_USER')) {
-            throw new AccessDeniedException($this->get('translator')->trans('error.access_restricted', [], 'CapcoAppBundle'));
+            throw new AccessDeniedException($this->get('translator')->trans('error.access_restricted', array(), 'CapcoAppBundle'));
         }
 
         $opinion = $this->getDoctrine()->getRepository('CapcoAppBundle:Opinion')->getOneBySlug($opinionSlug);
         $version = $this->getDoctrine()->getRepository('CapcoAppBundle:OpinionVersion')->findOneBySlug($versionSlug);
 
         if ($version == null) {
-            throw $this->createNotFoundException($this->get('translator')->trans('opinion.error.not_found', [], 'CapcoAppBundle'));
+            throw $this->createNotFoundException($this->get('translator')->trans('opinion.error.not_found', array(), 'CapcoAppBundle'));
         }
 
         if (false == $opinion->canDisplay()) {
-            throw new AccessDeniedException($this->get('translator')->trans('opinion.error.no_contribute', [], 'CapcoAppBundle'));
+            throw new AccessDeniedException($this->get('translator')->trans('opinion.error.no_contribute', array(), 'CapcoAppBundle'));
         }
 
         $opinionType = $opinion->getOpinionType();
@@ -64,11 +64,11 @@ class ReportingController extends Controller
                     $this->generateUrl(
                         'app_project_show_opinion_version',
                         [
-                            'projectSlug'     => $project->getSlug(),
-                            'stepSlug'        => $currentStep->getSlug(),
+                            'projectSlug' => $project->getSlug(),
+                            'stepSlug' => $currentStep->getSlug(),
                             'opinionTypeSlug' => $opinionType->getSlug(),
-                            'opinionSlug'     => $opinion->getSlug(),
-                            'versionSlug'     => $version->getSlug(),
+                            'opinionSlug' => $opinion->getSlug(),
+                            'versionSlug' => $version->getSlug(),
                         ]
                     )
                 );
@@ -79,7 +79,7 @@ class ReportingController extends Controller
 
         return [
             'opinion' => $opinion,
-            'form'    => $form->createView(),
+            'form' => $form->createView(),
         ];
     }
 
@@ -99,17 +99,17 @@ class ReportingController extends Controller
     public function reportingOpinionAction($projectSlug, $stepSlug, $opinionTypeSlug, $opinionSlug, Request $request)
     {
         if (false === $this->get('security.authorization_checker')->isGranted('ROLE_USER')) {
-            throw new AccessDeniedException($this->get('translator')->trans('error.access_restricted', [], 'CapcoAppBundle'));
+            throw new AccessDeniedException($this->get('translator')->trans('error.access_restricted', array(), 'CapcoAppBundle'));
         }
 
         $opinion = $this->getDoctrine()->getRepository('CapcoAppBundle:Opinion')->getOneBySlug($opinionSlug);
 
         if ($opinion == null) {
-            throw $this->createNotFoundException($this->get('translator')->trans('opinion.error.not_found', [], 'CapcoAppBundle'));
+            throw $this->createNotFoundException($this->get('translator')->trans('opinion.error.not_found', array(), 'CapcoAppBundle'));
         }
 
         if (false == $opinion->canDisplay()) {
-            throw new AccessDeniedException($this->get('translator')->trans('opinion.error.no_contribute', [], 'CapcoAppBundle'));
+            throw new AccessDeniedException($this->get('translator')->trans('opinion.error.no_contribute', array(), 'CapcoAppBundle'));
         }
 
         $opinionType = $opinion->getOpinionType();
@@ -133,10 +133,10 @@ class ReportingController extends Controller
                     $this->generateUrl(
                         'app_project_show_opinion',
                         [
-                            'projectSlug'     => $project->getSlug(),
-                            'stepSlug'        => $currentStep->getSlug(),
+                            'projectSlug' => $project->getSlug(),
+                            'stepSlug' => $currentStep->getSlug(),
                             'opinionTypeSlug' => $opinionType->getSlug(),
-                            'opinionSlug'     => $opinion->getSlug(),
+                            'opinionSlug' => $opinion->getSlug(),
                         ]
                     )
                 );
@@ -147,7 +147,7 @@ class ReportingController extends Controller
 
         return [
             'opinion' => $opinion,
-            'form'    => $form->createView(),
+            'form' => $form->createView(),
         ];
     }
 
@@ -168,17 +168,17 @@ class ReportingController extends Controller
     public function reportingSourceAction($projectSlug, $opinionTypeSlug, $opinionSlug, $sourceSlug, Request $request)
     {
         if (false === $this->get('security.authorization_checker')->isGranted('ROLE_USER')) {
-            throw new AccessDeniedException($this->get('translator')->trans('error.access_restricted', [], 'CapcoAppBundle'));
+            throw new AccessDeniedException($this->get('translator')->trans('error.access_restricted', array(), 'CapcoAppBundle'));
         }
 
         $source = $this->getDoctrine()->getRepository('CapcoAppBundle:Source')->getOneBySlug($sourceSlug);
 
         if ($source == null) {
-            throw $this->createNotFoundException($this->get('translator')->trans('source.error.not_found', [], 'CapcoAppBundle'));
+            throw $this->createNotFoundException($this->get('translator')->trans('source.error.not_found', array(), 'CapcoAppBundle'));
         }
 
         if (false == $source->canDisplay()) {
-            throw new AccessDeniedException($this->get('translator')->trans('source.error.no_contribute', [], 'CapcoAppBundle'));
+            throw new AccessDeniedException($this->get('translator')->trans('source.error.no_contribute', array(), 'CapcoAppBundle'));
         }
 
         $opinion = $source->getLinkedOpinion();
@@ -211,7 +211,7 @@ class ReportingController extends Controller
 
         return [
             'opinion' => $opinion,
-            'form'    => $form->createView(),
+            'form' => $form->createView(),
         ];
     }
 
@@ -232,17 +232,17 @@ class ReportingController extends Controller
     public function reportingArgumentAction($projectSlug, $stepSlug, $opinionTypeSlug, $opinionSlug, $argumentId, Request $request)
     {
         if (false === $this->get('security.authorization_checker')->isGranted('ROLE_USER')) {
-            throw new AccessDeniedException($this->get('translator')->trans('error.access_restricted', [], 'CapcoAppBundle'));
+            throw new AccessDeniedException($this->get('translator')->trans('error.access_restricted', array(), 'CapcoAppBundle'));
         }
 
         $argument = $this->getDoctrine()->getRepository('CapcoAppBundle:Argument')->getOneById($argumentId);
 
         if ($argument == null) {
-            throw $this->createNotFoundException($this->get('translator')->trans('argument.error.not_found', [], 'CapcoAppBundle'));
+            throw $this->createNotFoundException($this->get('translator')->trans('argument.error.not_found', array(), 'CapcoAppBundle'));
         }
 
         if (false == $argument->canDisplay()) {
-            throw new AccessDeniedException($this->get('translator')->trans('argument.error.no_contribute', [], 'CapcoAppBundle'));
+            throw new AccessDeniedException($this->get('translator')->trans('argument.error.no_contribute', array(), 'CapcoAppBundle'));
         }
 
         $opinion = $argument->getLinkedOpinion();
@@ -275,7 +275,7 @@ class ReportingController extends Controller
 
         return [
             'opinion' => $opinion,
-            'form'    => $form->createView(),
+            'form' => $form->createView(),
         ];
     }
 
@@ -292,11 +292,11 @@ class ReportingController extends Controller
     public function reportingIdeaAction(Idea $idea, Request $request)
     {
         if (!$this->get('security.context')->isGranted('ROLE_USER')) {
-            throw new AccessDeniedException($this->get('translator')->trans('error.access_restricted', [], 'CapcoAppBundle'));
+            throw new AccessDeniedException($this->get('translator')->trans('error.access_restricted', array(), 'CapcoAppBundle'));
         }
 
         if (false == $idea->canDisplay()) {
-            throw new AccessDeniedException($this->get('translator')->trans('idea.error.no_contribute', [], 'CapcoAppBundle'));
+            throw new AccessDeniedException($this->get('translator')->trans('idea.error.no_contribute', array(), 'CapcoAppBundle'));
         }
 
         $reporting = new Reporting();
@@ -314,7 +314,7 @@ class ReportingController extends Controller
                 $em->flush();
                 $this->get('session')->getFlashBag()->add('success', $this->get('translator')->trans('reporting.success'));
 
-                return $this->redirect($this->generateUrl('app_idea_show', ['slug' => $idea->getSlug()]));
+                return $this->redirect($this->generateUrl('app_idea_show', array('slug' => $idea->getSlug())));
             } else {
                 $this->get('session')->getFlashBag()->add('danger', $this->get('translator')->trans('reporting.error'));
             }
@@ -339,17 +339,17 @@ class ReportingController extends Controller
     public function reportingCommentAction(Comment $comment, Request $request)
     {
         if (!$this->get('security.context')->isGranted('ROLE_USER')) {
-            throw new AccessDeniedException($this->get('translator')->trans('error.access_restricted', [], 'CapcoAppBundle'));
+            throw new AccessDeniedException($this->get('translator')->trans('error.access_restricted', array(), 'CapcoAppBundle'));
         }
 
         if (false == $comment->canDisplay()) {
-            throw new AccessDeniedException($this->get('translator')->trans('comment.error.no_contribute', [], 'CapcoAppBundle'));
+            throw new AccessDeniedException($this->get('translator')->trans('comment.error.no_contribute', array(), 'CapcoAppBundle'));
         }
 
         $user = $this->getUser();
 
         if ($comment->userHasReport($user)) {
-            throw new AccessDeniedException($this->get('translator')->trans('comment.error.already_reported', [], 'CapcoAppBundle'));
+            throw new AccessDeniedException($this->get('translator')->trans('comment.error.already_reported', array(), 'CapcoAppBundle'));
         }
 
         $reporting = new Reporting();
@@ -377,7 +377,7 @@ class ReportingController extends Controller
 
         return [
             'comment' => $comment,
-            'form'    => $form->createView(),
+            'form' => $form->createView(),
         ];
     }
 
@@ -420,8 +420,8 @@ class ReportingController extends Controller
                     $this->generateUrl(
                         'app_project_show_proposal',
                         [
-                            'projectSlug'  => $project->getSlug(),
-                            'stepSlug'     => $currentStep->getSlug(),
+                            'projectSlug' => $project->getSlug(),
+                            'stepSlug' => $currentStep->getSlug(),
                             'proposalSlug' => $proposal->getSlug(),
                         ]
                     )
@@ -433,7 +433,7 @@ class ReportingController extends Controller
 
         return [
             'proposal' => $proposal,
-            'form'     => $form->createView(),
+            'form' => $form->createView(),
         ];
     }
 }

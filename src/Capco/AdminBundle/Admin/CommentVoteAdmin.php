@@ -12,7 +12,7 @@ class CommentVoteAdmin extends Admin
 {
     protected $datagridValues = [
         '_sort_order' => 'DESC',
-        '_sort_by'    => 'createdAt',
+        '_sort_by' => 'createdAt',
     ];
 
     /**
@@ -21,17 +21,17 @@ class CommentVoteAdmin extends Admin
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
         $datagridMapper
-            ->add('createdAt', null, [
+            ->add('createdAt', null, array(
                 'label' => 'admin.fields.comment_vote.created_at',
-            ])
-            ->add('comment', null, [
+            ))
+            ->add('comment', null, array(
                 'label' => 'admin.fields.comment_vote.comment',
-            ])
+            ))
             ->add('user', 'doctrine_orm_model_autocomplete', [
                 'label' => 'admin.fields.comment_vote.voter',
-            ], null, [
+            ], null, array(
                 'property' => 'username',
-            ])
+            ))
         ;
     }
 
@@ -43,35 +43,35 @@ class CommentVoteAdmin extends Admin
         unset($this->listModes['mosaic']);
 
         $listMapper
-            ->add('comment', 'sonata_type_model', [
+            ->add('comment', 'sonata_type_model', array(
                 'label' => 'admin.fields.comment_vote.comment',
-            ])
-            ->add('user', 'sonata_type_model', [
+            ))
+            ->add('user', 'sonata_type_model', array(
                 'label' => 'admin.fields.comment_vote.voter',
-            ])
-            ->add('createdAt', null, [
+            ))
+            ->add('createdAt', null, array(
                 'label' => 'admin.fields.comment_vote.created_at',
-            ])
-            ->add('_action', 'actions', [
-                'actions' => [
-                    'show' => [],
-                ],
-            ])
+            ))
+            ->add('_action', 'actions', array(
+                'actions' => array(
+                    'show' => array(),
+                ),
+            ))
         ;
     }
 
     protected function configureShowFields(ShowMapper $showMapper)
     {
         $showMapper
-            ->add('comment', 'sonata_type_model', [
+            ->add('comment', 'sonata_type_model', array(
                 'label' => 'admin.fields.comment_vote.comment',
-            ])
-            ->add('user', 'sonata_type_model', [
+            ))
+            ->add('user', 'sonata_type_model', array(
                 'label' => 'admin.fields.comment_vote.voter',
-            ])
-            ->add('createdAt', null, [
+            ))
+            ->add('createdAt', null, array(
                 'label' => 'admin.fields.comment_vote.created_at',
-            ])
+            ))
         ;
     }
 
