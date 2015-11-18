@@ -1,6 +1,6 @@
 <?php
 
-namespace Capco\AppBundle\Entity;
+namespace Capco\AppBundle\Entity\Steps;
 
 use Capco\AppBundle\Traits\DateHelperTrait;
 use Doctrine\ORM\Mapping as ORM;
@@ -24,15 +24,17 @@ use JMS\Serializer\Annotation as Serializer;
  *      "collect"       = "CollectStep",
  *      "synthesis"     = "SynthesisStep",
  *      "ranking"       = "RankingStep",
+ *      "selection"     = "SelectionStep",
  * })
  * @Serializer\ExclusionPolicy("all")
  * @Serializer\Discriminator(field = "step_type", map = {
- *      "consultation" = "Capco\AppBundle\Entity\ConsultationStep",
- *      "presentation" = "Capco\AppBundle\Entity\PresentationStep",
- *      "other"        = "Capco\AppBundle\Entity\OtherStep",
- *      "collect"      = "Capco\AppBundle\Entity\CollectStep",
- *      "synthesis"    = "Capco\AppBundle\Entity\SynthesisStep",
- *      "ranking"      = "Capco\AppBundle\Entity\RankingStep",
+ *      "consultation" = "Capco\AppBundle\Entity\Steps\ConsultationStep",
+ *      "presentation" = "Capco\AppBundle\Entity\Steps\PresentationStep",
+ *      "other"        = "Capco\AppBundle\Entity\Steps\OtherStep",
+ *      "collect"      = "Capco\AppBundle\Entity\Steps\CollectStep",
+ *      "synthesis"    = "Capco\AppBundle\Entity\Steps\SynthesisStep",
+ *      "ranking"      = "Capco\AppBundle\Entity\Steps\RankingStep",
+ *      "selection"      = "Capco\AppBundle\Entity\Steps\SelectionStep",
  * })
  */
 abstract class AbstractStep
@@ -57,6 +59,7 @@ abstract class AbstractStep
         'other' => 'step.types.other',
         'synthesis' => 'step.types.synthesis',
         'ranking' => 'step.types.ranking',
+        'selection' => 'step.types.selection',
     ];
 
     /**
@@ -107,7 +110,7 @@ abstract class AbstractStep
     /**
      * Needed by sonata admin.
      *
-     * @ORM\OneToOne(targetEntity="Capco\AppBundle\Entity\ProjectAbstractStep", mappedBy="step", orphanRemoval=true, cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity="Capco\AppBundle\Entity\Steps\ProjectAbstractStep", mappedBy="step", orphanRemoval=true, cascade={"persist", "remove"})
      */
     protected $projectAbstractStep;
 
@@ -388,6 +391,11 @@ abstract class AbstractStep
     }
 
     public function isCollectStep()
+    {
+        return false;
+    }
+
+    public function isSelectionStep()
     {
         return false;
     }

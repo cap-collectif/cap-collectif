@@ -1,6 +1,6 @@
 <?php
 
-namespace Capco\AppBundle\Entity;
+namespace Capco\AppBundle\Entity\Steps;
 
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -78,7 +78,7 @@ class ConsultationStep extends AbstractStep
 
     /**
      * @var
-     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\ConsultationStepType")
+     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Steps\ConsultationStepType")
      * @ORM\JoinColumn(name="consultation_step_type_id", onDelete="SET NULL", nullable=true)
      */
     private $consultationStepType;

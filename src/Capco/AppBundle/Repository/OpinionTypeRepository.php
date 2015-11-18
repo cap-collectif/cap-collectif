@@ -2,7 +2,7 @@
 
 namespace Capco\AppBundle\Repository;
 
-use Capco\AppBundle\Entity\ConsultationStep;
+use Capco\AppBundle\Entity\Steps\ConsultationStep;
 use Gedmo\Tree\Entity\Repository\NestedTreeRepository;
 
 /**

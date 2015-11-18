@@ -1,4 +1,4 @@
-Capco\AppBundle\Entity\OtherStep:
+Capco\AppBundle\Entity\Steps\OtherStep:
     ostep1:
         title: Proposition
         isEnabled: true

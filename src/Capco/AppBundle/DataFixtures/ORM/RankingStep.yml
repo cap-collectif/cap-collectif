@@ -1,4 +1,4 @@
-Capco\AppBundle\Entity\RankingStep:
+Capco\AppBundle\Entity\Steps\RankingStep:
     rstep1:
         title: Classement des propositions et modifications
         isEnabled: true

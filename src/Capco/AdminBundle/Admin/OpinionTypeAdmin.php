@@ -2,7 +2,7 @@
 
 namespace Capco\AdminBundle\Admin;
 
-use Capco\AppBundle\Entity\ConsultationStepType;
+use Capco\AppBundle\Entity\Steps\ConsultationStepType;
 use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
@@ -211,7 +211,7 @@ class OpinionTypeAdmin extends Admin
                 $consultationStepType = $this->getConfigurationPool()
                     ->getContainer()
                     ->get('doctrine.orm.entity_manager')
-                    ->getRepository('CapcoAppBundle:ConsultationStepType')
+                    ->getRepository('CapcoAppBundle:Steps\ConsultationStepType')
                     ->find($consultationStepTypeId);
                 $type->setConsultationStepType($consultationStepType);
             }

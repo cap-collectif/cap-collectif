@@ -6,7 +6,7 @@ use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 
 use Capco\AppBundle\Entity\OpinionType;
-use Capco\AppBundle\Entity\ConsultationStepType;
+use Capco\AppBundle\Entity\Steps\ConsultationStepType;
 
 class OpinionTypeSpec extends ObjectBehavior
 {

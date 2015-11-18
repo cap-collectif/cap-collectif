@@ -3,11 +3,12 @@
 namespace Capco\AppBundle\Controller\Site;
 
 use Capco\AppBundle\Entity\Project;
-use Capco\AppBundle\Entity\CollectStep;
-use Capco\AppBundle\Entity\OtherStep;
-use Capco\AppBundle\Entity\PresentationStep;
-use Capco\AppBundle\Entity\RankingStep;
-use Capco\AppBundle\Entity\SynthesisStep;
+use Capco\AppBundle\Entity\Steps\CollectStep;
+use Capco\AppBundle\Entity\Steps\OtherStep;
+use Capco\AppBundle\Entity\Steps\PresentationStep;
+use Capco\AppBundle\Entity\Steps\RankingStep;
+use Capco\AppBundle\Entity\Steps\SelectionStep;
+use Capco\AppBundle\Entity\Steps\SynthesisStep;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
@@ -22,7 +23,7 @@ class StepController extends Controller
      * @Route("/project/{projectSlug}/step/{stepSlug}", name="app_project_show_step")
      * @Route("/consultation/{projectSlug}/step/{stepSlug}", name="app_consultation_show_step")
      * @Template("CapcoAppBundle:Step:show.html.twig")
-     * @ParamConverter("step", class="CapcoAppBundle:OtherStep", options={"mapping": {"stepSlug": "slug"}})
+     * @ParamConverter("step", class="CapcoAppBundle:Steps\OtherStep", options={"mapping": {"stepSlug": "slug"}})
      *
      * @param           $projectSlug
      * @param OtherStep $step
@@ -51,7 +52,7 @@ class StepController extends Controller
      * @Route("/project/{projectSlug}/presentation/{stepSlug}", name="app_project_show_presentation")
      * @Route("/consultation/{projectSlug}/presentation/{stepSlug}", name="app_consultation_show_presentation")
      * @Template("CapcoAppBundle:Step:presentation.html.twig")
-     * @ParamConverter("step", class="CapcoAppBundle:PresentationStep", options={"mapping" = {"stepSlug": "slug"}})
+     * @ParamConverter("step", class="CapcoAppBundle:Steps\PresentationStep", options={"mapping" = {"stepSlug": "slug"}})
      *
      * @param $projectSlug
      * @param PresentationStep $step
@@ -91,7 +92,7 @@ class StepController extends Controller
      * @Route("/project/{projectSlug}/ranking/{stepSlug}", name="app_project_show_ranking")
      * @Route("/consultation/{projectSlug}/ranking/{stepSlug}", name="app_consultation_show_ranking")
      * @Template("CapcoAppBundle:Step:ranking.html.twig")
-     * @ParamConverter("step", class="CapcoAppBundle:RankingStep", options={"mapping" = {"stepSlug": "slug"}})
+     * @ParamConverter("step", class="CapcoAppBundle:Steps\RankingStep", options={"mapping" = {"stepSlug": "slug"}})
      *
      * @param $projectSlug
      * @param RankingStep $step
@@ -138,7 +139,7 @@ class StepController extends Controller
      * @Route("/project/{projectSlug}/ranking/{stepSlug}/opinions/{page}", name="app_project_show_opinions_ranking", requirements={"page" = "\d+"}, defaults={"page" = 1})
      * @Route("/consultation/{projectSlug}/ranking/{stepSlug}/opinions/{page}", name="app_consultation_show_opinions_ranking", requirements={"page" = "\d+"}, defaults={"page" = 1})
      * @Template("CapcoAppBundle:Step:opinions_ranking.html.twig")
-     * @ParamConverter("step", class="CapcoAppBundle:RankingStep", options={"mapping" = {"stepSlug": "slug"}})
+     * @ParamConverter("step", class="CapcoAppBundle:Steps\RankingStep", options={"mapping" = {"stepSlug": "slug"}})
      *
      * @param $projectSlug
      * @param RankingStep $step
@@ -177,7 +178,7 @@ class StepController extends Controller
      * @Route("/project/{projectSlug}/ranking/{stepSlug}/versions/{page}", name="app_project_show_versions_ranking", requirements={"page" = "\d+"}, defaults={"page" = 1})
      * @Route("/consultation/{projectSlug}/ranking/{stepSlug}/versions/{page}", name="app_consultation_show_versions_ranking", requirements={"page" = "\d+"}, defaults={"page" = 1})
      * @Template("CapcoAppBundle:Step:versions_ranking.html.twig")
-     * @ParamConverter("step", class="CapcoAppBundle:RankingStep", options={"mapping" = {"stepSlug": "slug"}})
+     * @ParamConverter("step", class="CapcoAppBundle:Steps\RankingStep", options={"mapping" = {"stepSlug": "slug"}})
      *
      * @param $projectSlug
      * @param RankingStep $step
@@ -217,7 +218,7 @@ class StepController extends Controller
      * @Route("/project/{projectSlug}/synthesis/{stepSlug}", name="app_project_show_synthesis")
      * @Route("/consultation/{projectSlug}/synthesis/{stepSlug}", name="app_consultation_show_synthesis")
      * @Template("CapcoAppBundle:Step:synthesis.html.twig")
-     * @ParamConverter("step", class="CapcoAppBundle:SynthesisStep", options={"mapping" = {"stepSlug": "slug"}})
+     * @ParamConverter("step", class="CapcoAppBundle:Steps\SynthesisStep", options={"mapping" = {"stepSlug": "slug"}})
      *
      * @param $projectSlug
      * @param SynthesisStep $step
@@ -245,7 +246,7 @@ class StepController extends Controller
     /**
      * @Route("/project/{projectSlug}/collect/{stepSlug}", name="app_project_show_collect")
      * @ParamConverter("project", class="CapcoAppBundle:Project", options={"mapping" = {"projectSlug": "slug"}, "repository_method"= "getOne", "map_method_signature" = true})
-     * @ParamConverter("step", class="CapcoAppBundle:CollectStep", options={"mapping" = {"stepSlug": "slug"}})
+     * @ParamConverter("step", class="CapcoAppBundle:Steps\CollectStep", options={"mapping" = {"stepSlug": "slug"}})
      */
     public function showCollectStepAction(Project $project, CollectStep $step)
     {
@@ -258,7 +259,7 @@ class StepController extends Controller
 
         $proposalsCount = $em
             ->getRepository('CapcoAppBundle:Proposal')
-            ->countEnabledForForm($step->getProposalForm())
+            ->countPublishedForForm($step->getProposalForm())
         ;
 
         $types = $serializer->serialize([
@@ -301,10 +302,64 @@ class StepController extends Controller
     }
 
     /**
+     * @Route("/project/{projectSlug}/selection/{stepSlug}", name="app_project_show_selection")
+     * @ParamConverter("project", class="CapcoAppBundle:Project", options={"mapping" = {"projectSlug": "slug"}, "repository_method"= "getOne", "map_method_signature" = true})
+     * @ParamConverter("step", class="CapcoAppBundle:Steps\SelectionStep", options={"mapping" = {"stepSlug": "slug"}})
+     */
+    public function showSelectionStepAction(Project $project, SelectionStep $step)
+    {
+        if (!$step->canDisplay()) {
+            throw new NotFoundHttpException();
+        }
+
+        $em = $this->getDoctrine()->getManager();
+        $serializer = $this->get('jms_serializer');
+
+        $proposalsCount = $em
+            ->getRepository('CapcoAppBundle:Proposal')
+            ->countPublishedForSelectionStep($step)
+        ;
+
+        $types = $serializer->serialize([
+            'types' => $em->getRepository('CapcoUserBundle:UserType')->findAll(),
+        ], 'json', SerializationContext::create()->setGroups(['Default']));
+
+        $districts = $serializer->serialize([
+            'districts' => $em->getRepository('CapcoAppBundle:District')->findAll(),
+        ], 'json', SerializationContext::create()->setGroups(['Districts']));
+
+        $themes = $serializer->serialize([
+            'themes' => $em->getRepository('CapcoAppBundle:Theme')->findAll(),
+        ], 'json', SerializationContext::create()->setGroups(['Themes']));
+
+        $statuses = $serializer->serialize([
+            'statuses' => $em->getRepository('CapcoAppBundle:Status')->getByProject($project),
+        ], 'json', SerializationContext::create()->setGroups(['Statuses']));
+
+        $response = $this->render('CapcoAppBundle:Step:selection.html.twig', [
+            'project' => $project,
+            'currentStep' => $step,
+            'proposalsCount' => $proposalsCount,
+            'themes' => $themes,
+            'statuses' => $statuses,
+            'districts' => $districts,
+            'types' => $types,
+            'votable' => $step->isVotable(),
+        ]);
+
+        if ($this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_ANONYMOUSLY')) {
+            $response->setPublic();
+            $response->setSharedMaxAge(60);
+        }
+
+        return $response;
+    }
+
+    /**
      * @Route("/project/{projectSlug}/synthesis/{stepSlug}/edition", name="app_project_edit_synthesis")
      * @Route("/consultation/{projectSlug}/synthesis/{stepSlug}/edition", name="app_consultation_edit_synthesis")
      * @Template("CapcoAppBundle:Synthesis:main.html.twig")
-     * @ParamConverter("step", class="CapcoAppBundle:SynthesisStep", options={"mapping" = {"stepSlug": "slug"}})
+     * @ParamConverter("step", class="CapcoAppBundle:Steps\SynthesisStep", options={"mapping" = {"stepSlug": "slug"}})
      *
      * @param $projectSlug
      * @param SynthesisStep $step

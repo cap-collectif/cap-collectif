@@ -1,4 +1,4 @@
-Capco\AppBundle\Entity\ConsultationStep:
+Capco\AppBundle\Entity\Steps\ConsultationStep:
     exclusion_policy: ALL
     virtual_properties:
         getProjectId:

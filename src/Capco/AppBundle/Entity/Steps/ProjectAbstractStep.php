@@ -1,11 +1,12 @@
 <?php
 
-namespace Capco\AppBundle\Entity;
+namespace Capco\AppBundle\Entity\Steps;
 
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Validator\Constraints as Assert;
 use Capco\AppBundle\Traits\PositionableTrait;
+use Capco\AppBundle\Entity\Project;
 
 /**
  * Class ProjectAbstractStep
@@ -34,7 +35,7 @@ class ProjectAbstractStep
     protected $project;
 
     /**
-     * @ORM\OneToOne(targetEntity="Capco\AppBundle\Entity\AbstractStep", inversedBy="projectAbstractStep", cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity="Capco\AppBundle\Entity\Steps\AbstractStep", inversedBy="projectAbstractStep", cascade={"persist", "remove"})
      * @ORM\JoinColumn(name="step_id", referencedColumnName="id", nullable=false, onDelete="CASCADE")
      * @Assert\NotNull()
      **/
@@ -86,7 +87,7 @@ class ProjectAbstractStep
     /**
      * Set step.
      *
-     * @param \Capco\AppBundle\Entity\AbstractStep $step
+     * @param \Capco\AppBundle\Entity\Steps\AbstractStep $step
      *
      * @return ProjectAbstractStep
      */
@@ -100,7 +101,7 @@ class ProjectAbstractStep
     /**
      * Get step.
      *
-     * @return \Capco\AppBundle\Entity\AbstractStep
+     * @return \Capco\AppBundle\Entity\Steps\AbstractStep
      */
     public function getStep()
     {

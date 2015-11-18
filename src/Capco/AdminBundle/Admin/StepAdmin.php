@@ -2,18 +2,33 @@
 
 namespace Capco\AdminBundle\Admin;
 
-use Capco\AppBundle\Entity\CollectStep;
+use Capco\AppBundle\Entity\Steps\CollectStep;
 use Sonata\AdminBundle\Admin\Admin;
+use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Form\FormMapper;
-use Capco\AppBundle\Entity\OtherStep;
-use Capco\AppBundle\Entity\ConsultationStep;
-use Capco\AppBundle\Entity\PresentationStep;
-use Capco\AppBundle\Entity\SynthesisStep;
-use Capco\AppBundle\Entity\RankingStep;
+use Capco\AppBundle\Entity\Steps\OtherStep;
+use Capco\AppBundle\Entity\Steps\ConsultationStep;
+use Capco\AppBundle\Entity\Steps\PresentationStep;
+use Capco\AppBundle\Entity\Steps\SynthesisStep;
+use Capco\AppBundle\Entity\Steps\RankingStep;
+use Capco\AppBundle\Entity\Steps\SelectionStep;
 use Sonata\AdminBundle\Route\RouteCollection;
 
 class StepAdmin extends Admin
 {
+    public function getNewInstance()
+    {
+        $subClass = $this->getRequest()->query->get('subclass');
+        // Workaround for proposals autocompletion
+        $subClass = $subClass ? $subClass : 'selection_step';
+        $object = $this->getModelManager()->getModelInstance($this->getSubClass($subClass));
+        foreach ($this->getExtensions() as $extension) {
+            $extension->alterNewInstance($this, $object);
+        }
+
+        return $object;
+    }
+
     public function getPersistentParameters()
     {
         $subject = $this->getSubject();
@@ -25,12 +40,12 @@ class StepAdmin extends Admin
                 $projectId = $project->getId();
             }
         } else {
-            $projectId = $this->getRequest()->get('project_id');
+            $projectId = $this->getRequest()->get('projectId');
         }
 
-        return array(
-            'project_id' => $projectId,
-        );
+        return [
+            'projectId' => $projectId,
+        ];
     }
 
     protected $datagridValues = [
@@ -38,9 +53,18 @@ class StepAdmin extends Admin
         '_sort_by' => 'title',
     ];
 
-    protected $formOptions = array(
+    protected $formOptions = [
         'cascade_validation' => true,
-    );
+    ];
+
+    protected function configureDatagridFilters(DatagridMapper $filter)
+    {
+        $filter
+            ->add('title', null, [
+                'label' => 'admin.fields.step.title',
+            ])
+        ;
+    }
 
     /**
      * @param FormMapper $formMapper
@@ -49,71 +73,71 @@ class StepAdmin extends Admin
     {
         $subject = $this->getSubject();
 
-        $projectId = $this->getPersistentParameter('project_id');
+        $projectId = $this->getPersistentParameter('projectId');
 
         $formMapper
             ->with('admin.fields.step.group_general')
-            ->add('title', null, array(
+            ->add('title', null, [
                 'label' => 'admin.fields.step.title',
                 'required' => true,
-            ))
+            ])
         ;
 
         $formMapper
-            ->add('isEnabled', null, array(
+            ->add('isEnabled', null, [
                 'label' => 'admin.fields.step.is_enabled',
                 'required' => false,
-            ))
-            ->add('startAt', 'sonata_type_datetime_picker', array(
+            ])
+            ->add('startAt', 'sonata_type_datetime_picker', [
                 'label' => 'admin.fields.step.start_at',
                 'format' => 'dd/MM/yyyy HH:mm',
-                'attr' => array(
+                'attr' => [
                     'data-date-format' => 'DD/MM/YYYY HH:mm',
-                ),
+                ],
                 'required' => false,
-            ))
-            ->add('endAt', 'sonata_type_datetime_picker', array(
+            ])
+            ->add('endAt', 'sonata_type_datetime_picker', [
                 'label' => 'admin.fields.step.end_at',
                 'format' => 'dd/MM/yyyy HH:mm',
-                'attr' => array(
+                'attr' => [
                     'data-date-format' => 'DD/MM/YYYY HH:mm',
-                ),
+                ],
                 'required' => false,
-            ))
+            ])
         ;
 
         if ($subject instanceof PresentationStep || $subject instanceof OtherStep || $subject instanceof CollectStep) {
             $formMapper
-                ->add('body', 'ckeditor', array(
+                ->add('body', 'ckeditor', [
                     'config_name' => 'admin_editor',
                     'label' => 'admin.fields.step.body',
                     'required' => false,
-                ))
+                ])
             ;
         } elseif ($subject instanceof ConsultationStep) {
             $formMapper
-                ->add('body', 'ckeditor', array(
+                ->add('body', 'ckeditor', [
                     'config_name' => 'admin_editor',
                     'label' => 'admin.fields.step.body',
                     'required' => false,
-                ))
-                ->add('consultationStepType', 'sonata_type_model', array(
+                ])
+                ->add('consultationStepType', 'sonata_type_model', [
                     'label' => 'admin.fields.project.consultation_step_type',
                     'required' => true,
                     'btn_add' => false,
-                ))
+                ])
             ;
         } elseif ($subject instanceof SynthesisStep) {
             $formMapper
-                ->add('body', 'ckeditor', array(
+                ->add('body', 'ckeditor', [
                     'config_name' => 'admin_editor',
                     'label' => 'admin.fields.step.body',
                     'required' => false,
-                ))
-                ->add('synthesis', 'sonata_type_admin', array(
+                ])
+                ->add('synthesis', 'sonata_type_admin', [
                         'label' => 'admin.fields.step.synthesis',
                         'required' => true,
-                ), ['link_parameters' => ['project_id']]
+                ], ['link_parameters' => ['projectId']]
             );
         } elseif ($subject instanceof RankingStep) {
             $formMapper
@@ -129,6 +153,30 @@ class StepAdmin extends Admin
                 ->add('nbVersionsToDisplay', null, [
                     'label' => 'admin.fields.step.nb_versions_to_display',
                     'required' => true,
+                ])
+            ;
+        } elseif ($subject instanceof SelectionStep) {
+            $formMapper
+                ->add('body', 'ckeditor', [
+                    'config_name' => 'admin_editor',
+                    'label' => 'admin.fields.step.body',
+                    'required' => false,
+                ])
+                ->add('proposals', 'sonata_type_model_autocomplete', [
+                    'label' => 'admin.fields.step.proposals',
+                    'required' => false,
+                    'property' => 'title',
+                    'multiple' => true,
+                    'route' => [
+                        'name' => 'capco_admin_proposals_autocomplete',
+                        'parameters' => [
+                            'projectId' => $projectId,
+                            '_sonata_admin' => $this->getCode(),
+                        ],
+                    ],
+                ])
+                ->add('votable', null, [
+                    'label' => 'admin.fields.step.votable',
                 ])
             ;
         }
@@ -176,9 +224,33 @@ class StepAdmin extends Admin
         return $qb->getQuery();
     }
 
+    private function createQueryBuilderForProposals()
+    {
+        $projectId = $this->getPersistentParameter('projectId');
+        if ($projectId) {
+            $qb = $this->getConfigurationPool()
+                ->getContainer()
+                ->get('doctrine.orm.entity_manager')
+                ->getRepository('CapcoAppBundle:Proposal')
+                ->createQueryBuilder('p')
+                ->leftJoin('p.proposalForm', 'f')
+                ->leftJoin('f.step', 's')
+                ->leftJoin('s.projectAbstractStep', 'pas')
+                ->leftJoin('pas.project', 'pr')
+                ->where('pr.id = :projectId')
+                ->andWhere('p.enabled = 1 AND p.isTrashed = 0')
+                ->setParameter('projectId', $projectId)
+            ;
+
+            return $qb;
+        }
+
+        return;
+    }
+
     protected function configureRoutes(RouteCollection $collection)
     {
-        $collection->clearExcept(array('create', 'edit', 'delete'));
+        $collection->clearExcept(['create', 'edit', 'delete']);
     }
 
     public function prePersist($step)
