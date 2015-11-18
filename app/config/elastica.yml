@@ -32,7 +32,7 @@ fos_elastica:
         user:
           indexable_callback: isEnabled
           serializer:
-            groups: [UsersInfos, Proposals]
+            groups: [UsersInfos]
           _all: { enabled: false }
           mappings:
             slug:
@@ -47,10 +47,6 @@ fos_elastica:
               index_options: offsets
               fields:
                 std: { type: string, analyzer: standard }
-            createdAt:
-              type: date
-            updatedAt:
-              type: date
           persistence:
             driver: orm
             model: Capco\UserBundle\Entity\User
@@ -119,7 +115,7 @@ fos_elastica:
         comment:
           indexable_callback: getIsEnabled
           serializer:
-            groups: [Comments, Proposals]
+            groups: [Comments]
           _all: { enabled: false }
           mappings:
             body:
@@ -155,7 +151,7 @@ fos_elastica:
               index_options: offsets
           persistence:
             driver: orm
-            model: Capco\AppBundle\Entity\Steps\ConsultationStep
+            model: Capco\AppBundle\Entity\ConsultationStep
             provider: ~
             listener: ~
             finder: ~
