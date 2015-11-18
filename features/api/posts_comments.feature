@@ -111,10 +111,10 @@ Feature: Posts comments
 
   @database
   Scenario: Anonymous API client wants to add an answer to a comment
-    When I send a POST request to "/api/posts/1/comments" with json:
+    When I send a POST request to "/api/posts/3/comments" with json:
     """
     {
-      "parent": 153,
+      "parent": 264,
       "authorName": "Kéké",
       "authorEmail": "vivele94@gmail.com",
       "body": "Ma super réponse"
@@ -148,10 +148,10 @@ Feature: Posts comments
   @database
   Scenario: logged in API client wants to add an answer to a comment
     Given I am logged in to api as user
-    When I send a POST request to "/api/posts/1/comments" with json:
+    When I send a POST request to "/api/posts/3/comments" with json:
     """
     {
-      "parent": 153,
+      "parent": 264,
       "body": "Oh oui j'ose :-P"
     }
     """
