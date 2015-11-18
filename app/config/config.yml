@@ -226,7 +226,7 @@ ivory_ck_editor:
         admin_editor:
             toolbar: admin_toolbar
             language: fr
-            skin: minimalist
+            skin: bootstrapck
             extraPlugins: oembed,btgrid,autolink,autogrow
             extraAllowedContent: "a[!href,_src,target,class]"
             filebrowserBrowseRoute: admin_capco_media_media_browser
