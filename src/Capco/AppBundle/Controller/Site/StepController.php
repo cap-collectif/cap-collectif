@@ -344,7 +344,6 @@ class StepController extends Controller
             'statuses' => $statuses,
             'districts' => $districts,
             'types' => $types,
-            'votable' => $step->isVotable(),
         ]);
 
         if ($this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_ANONYMOUSLY')) {

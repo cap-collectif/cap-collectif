@@ -14,7 +14,7 @@ use Doctrine\ORM\Mapping as ORM;
 class SelectionStep extends AbstractStep
 {
     /**
-     * @var
+     * @var \Doctrine\Common\Collections\ArrayCollection
      * @ORM\ManyToMany(targetEntity="Capco\AppBundle\Entity\Proposal", inversedBy="selectionSteps", cascade={"persist"})
      * @ORM\JoinTable(name="selectionstep_proposal")
      */

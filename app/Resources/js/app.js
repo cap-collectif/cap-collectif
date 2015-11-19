@@ -1,8 +1,5 @@
-/*eslint-disable */
-import IntlData from './translations/FR'
+import IntlData from './translations/FR';
 import CommentSection from './components/Comment/CommentSection';
-import OpinionVersionsBox from './components/Opinion/OpinionVersionsBox';
-import OpinionSourcesBox from './components/Opinion/OpinionSourcesBox';
 import OpinionPage from './components/Opinion/OpinionPage';
 import AuthService from './services/AuthService';
 import FeatureService from './services/FeatureService';
@@ -15,25 +12,24 @@ FeatureService.load();
 AuthService
   .login()
   .then(() => {
-
     // We enable React apps
     if ($('#render-idea-comments').length) {
       React.render(
-        <CommentSection uri="ideas" object={$('#render-idea-comments').data("idea")} {...IntlData} />,
+        <CommentSection uri="ideas" object={$('#render-idea-comments').data('idea')} {...IntlData} />,
         document.getElementById('render-idea-comments')
       );
     }
 
     if ($('#render-post-comments').length) {
       React.render(
-        <CommentSection uri="posts" object={$('#render-post-comments').data("post")} {...IntlData} />,
+        <CommentSection uri="posts" object={$('#render-post-comments').data('post')} {...IntlData} />,
         document.getElementById('render-post-comments')
       );
     }
 
     if ($('#render-event-comments').length) {
       React.render(
-        <CommentSection uri="events" object={$('#render-event-comments').data("event")} {...IntlData} />,
+        <CommentSection uri="events" object={$('#render-event-comments').data('event')} {...IntlData} />,
         document.getElementById('render-event-comments')
       );
     }
@@ -41,9 +37,9 @@ AuthService
     if ($('#render-opinion').length) {
       React.render(
         <OpinionPage
-          opinionId={$('#render-opinion').data("opinion")}
+          opinionId={$('#render-opinion').data('opinion')}
           {...IntlData}
-          />,
+        />,
         document.getElementById('render-opinion')
       );
     }
@@ -56,7 +52,7 @@ AuthService
           themes={$('#render-proposal-page').data('themes').themes}
           districts={$('#render-proposal-page').data('districts').districts}
           {...IntlData}
-          />,
+        />,
         document.getElementById('render-proposal-page')
       );
     }
@@ -71,7 +67,7 @@ AuthService
           types={$('#render-collect-step-page').data('types').types}
           statuses={$('#render-collect-step-page').data('statuses').statuses}
           {...IntlData}
-          />,
+        />,
         document.getElementById('render-collect-step-page')
       );
     }
@@ -87,7 +83,7 @@ AuthService
           types={$('#render-selection-step-page').data('types').types}
           statuses={$('#render-selection-step-page').data('statuses').statuses}
           {...IntlData}
-          />,
+        />,
         document.getElementById('render-selection-step-page')
       );
     }
@@ -98,31 +94,30 @@ AuthService
           opinionId={$('#render-opinion-version').data('opinion')}
           versionId={$('#render-opinion-version').data('version')}
           {...IntlData}
-          />,
+        />,
         document.getElementById('render-opinion-version')
       );
     }
   });
 
 // Our global App for symfony
-var App = function ($) {
+const App = (($) => {
+  const equalheight = (container) => {
+    let currentTallest = 0;
+    let currentRowStart = 0;
+    const rowDivs = [];
+    let $el;
+    let topPosition = 0;
 
-  var equalheight = function (container) {
-    var currentTallest = 0;
-    var currentRowStart = 0;
-    var rowDivs = [];
-    var $el;
-    var topPosition = 0;
-
-    $(container).each(function () {
+    $(container).each(() => {
       $el = $(this);
       $($el).height('auto');
       topPosition = $el.position().top;
 
       if ($(window).width() > 767) {
-        var currentDiv = 0;
+        let currentDiv = 0;
 
-        if (currentRowStart != topPosition) {
+        if (currentRowStart !== topPosition) {
           for (currentDiv = 0; currentDiv < rowDivs.length; currentDiv++) {
             rowDivs[currentDiv].height(currentTallest);
           }
@@ -139,98 +134,101 @@ var App = function ($) {
         }
       }
     });
-
   };
 
-  var resized = function (el) {
-    var $el = $(el);
+  const resized = (el) => {
+    const $el = $(el);
 
-    $(window).resize(function () {
+    $(window).resize(() => {
       equalheight($el);
     });
   };
 
-  var customModal = function (el) {
-    var $el = $(el);
+  const customModal = (el) => {
+    const $el = $(el);
 
-    $el.appendTo("body");
+    $el.appendTo('body');
   };
 
-  var pieChart = function () {
-    if (typeof(google) != "undefined") {
-      google.load("visualization", "1", {packages: ["corechart"]});
-      google.setOnLoadCallback(function () {
+  const pieChart = () => {
+    if (typeof(google) !== 'undefined') {
+      google.load('visualization', '1', {packages: ['corechart']});
+      google.setOnLoadCallback(() => {
         $('.has-chart').googleCharts();
       });
     }
   };
 
-  var video = function (el) {
-    var $el = $(el);
-    $el.on("click", function () {
+  const video = (el) => {
+    const $el = $(el);
+    $el.on('click', () => {
       $.fancybox({
         href: this.href,
-        type: $(this).data("type"),
+        type: $(this).data('type'),
         padding: 0,
         margin: 50,
         maxWidth: 1280,
         maxHeight: 720,
         fitToView: false,
         width: '90%',
-        height: '90%'
+        height: '90%',
       }); // fancybox
-      return false
+      return false;
     }); // on
   };
 
-  var checkButton = function (el) {
-    var $el = $(el);
+  const checkButton = (el) => {
+    const $el = $(el);
 
-    $($el).on('change', function () {
-      var test = $(this).val();
-      test == 0 ? $(".block_link").toggle() : $(".block_link").hide();
-      test == 1 ? $(".block_media").toggle() : $(".block_media").hide();
+    $($el).on('change', () => {
+      const test = $(this).val();
+      if (test === 0) {
+        $('.block_media').hide();
+        $('.block_link').toggle();
+      } else if (test === 1) {
+        $('.block_media').toggle();
+        $('.block_link').hide();
+      }
     });
   };
 
-  var externalLinks = function () {
-    $(document).on('click', '.external-link', function (e) {
+  const externalLinks = () => {
+    $(document).on('click', '.external-link', () => {
       window.open($(this).attr('href'));
       return false;
     });
   };
 
-  var showMap = function (container) {
-    var $mapCanvas = $(container);
-    $mapCanvas.each(function () {
+  const showMap = (container) =>{
+    const $mapCanvas = $(container);
+    $mapCanvas.each(() => {
       // Map
-      var mapOptions = {
+      const mapOptions = {
         center: new google.maps.LatLng($(this).attr('data-lat'), $(this).attr('data-lng')),
         zoom: 15,
-        mapTypeId: google.maps.MapTypeId.ROADMAP
-      }
-      var map = new google.maps.Map(this, mapOptions);
+        mapTypeId: google.maps.MapTypeId.ROADMAP,
+      };
+      const map = new google.maps.Map(this, mapOptions);
 
       // Marker
-      var marker = new google.maps.Marker({
+      const marker = new google.maps.Marker({
         position: new google.maps.LatLng($(this).attr('data-lat'), $(this).attr('data-lng')),
-        map: map
       });
+      marker.setMap(map);
     });
   };
 
-  var navbarAutocollapse = function (label) {
-    $('#navbar-content').append($("#navbar-content li.hideshow ul").html());
+  const navbarAutocollapse = (label) => {
+    $('#navbar-content').append($('#navbar-content li.hideshow ul').html());
     $('#navbar-content li.hideshow').remove();
 
-    if (window.matchMedia("(min-width: 768px)").matches) {
-
-      const occupiedWidth = $(".navbar-header").width() + $(".navbar-right").width() + 80;
-      const maxWidth = $("#main-navbar > .container").width() - occupiedWidth;
+    if (window.matchMedia('(min-width: 768px)').matches) {
+      const occupiedWidth = $('.navbar-header').width() + $('.navbar-right').width() + 80;
+      const maxWidth = $('#main-navbar > .container').width() - occupiedWidth;
       let menuHtml = '';
 
       let width = 0;
-      $('#navbar-content').children().each(function () {
+      $('#navbar-content').children().each(() => {
         width += $(this).outerWidth(true);
         if (maxWidth < width) {
           // Get outer html of children element
@@ -246,62 +244,62 @@ var App = function ($) {
         + '</li>'
       );
 
-      $("#navbar-content li.hideshow").on("click", ".dropdown-menu", function (e) {
-        $(this).parent().is(".open") && e.stopPropagation();
+      $('#navbar-content li.hideshow').on('click', '.dropdown-menu', (e) => {
+        if ($(this).parent().is('.open')) {
+          e.stopPropagation();
+        }
       });
 
       if (menuHtml === '') {
-        $("#navbar-content li.hideshow").hide();
+        $('#navbar-content li.hideshow').hide();
       } else {
-        $("#navbar-content li.hideshow").show();
+        $('#navbar-content li.hideshow').show();
       }
     }
-
   };
 
-  var initPopovers = function (triggers, options) {
-    var $triggers = $(triggers);
+  const initPopovers = (triggers, options) => {
+    const $triggers = $(triggers);
     $triggers.attr('tabindex', '0');
-    $triggers.popover(options).on('click', function (e) {
+    $triggers.popover(options).on('click', (e) => {
       e.preventDefault();
       e.stopPropagation();
     });
   };
 
-  var makeSidebar = function (options) {
-
+  const makeSidebar = (options) => {
     // Fix containers
-    var containers = options['container'] + ' .container';
-    $(options['container']).addClass('container  sidebar__container');
+    const containers = options.container + ' .container';
+    $(options.container).addClass('container  sidebar__container');
     $(containers).removeClass('container  container--thinner').addClass('container--with-sidebar');
 
     // Handle small screens
-    $(options['toggle']).on('click', function () {
-      $(options['hideable']).toggleClass('sidebar-hidden-small');
-      $(options['overlay']).toggleClass('sidebar__darkened-overlay');
-    })
+    $(options.toggle).on('click', () => {
+      $(options.hideable).toggleClass('sidebar-hidden-small');
+      $(options.overlay).toggleClass('sidebar__darkened-overlay');
+    });
   };
 
-  var carousel = function () {
-    $('.carousel-sidenav li').on('click', function (e) {
+  const carousel = () => {
+    $('.carousel-sidenav li').on('click', (e) => {
       e.preventDefault();
-      $('.carousel-sidenav li').each(function () {
+      $('.carousel-sidenav li').each(() => {
         $(this).removeClass('active');
-      })
+      });
       $(this).addClass('active');
     });
   };
 
-  var hideableMessageAndCheckbox = function (options) {
-    var messageDiv = options['message'];
-    var messageField = messageDiv + ' textarea';
-    var checkboxDiv = options['checkbox'];
-    var checkboxField = checkboxDiv + ' input[type="checkbox"]';
-    var oldVal = null;
+  const hideableMessageAndCheckbox = (options) => {
+    const messageDiv = options.message;
+    const messageField = messageDiv + ' textarea';
+    const checkboxDiv = options.checkbox;
+    const checkboxField = checkboxDiv + ' input[type="checkbox"]';
+    let oldVal = null;
 
-    $(messageField).on('change keyup paste', function () {
-      var currentVal = $(this).val();
-      if (currentVal == oldVal) {
+    $(messageField).on('change keyup paste', () => {
+      const currentVal = $(this).val();
+      if (currentVal === oldVal) {
         return;
       }
       oldVal = currentVal;
@@ -312,7 +310,7 @@ var App = function ($) {
       $(checkboxDiv).removeClass('hidden');
     });
 
-    $(checkboxField).on('change', function () {
+    $(checkboxField).on('change', () => {
       if ($(this).prop('checked')) {
         $(messageDiv).addClass('hidden');
         return;
@@ -321,12 +319,12 @@ var App = function ($) {
     });
   };
 
-  var skipLinks = function () {
-    $('.js-skip-links a').on('focus', function () {
+  const skipLinks = () => {
+    $('.js-skip-links a').on('focus', () => {
       $('.js-skip-links').addClass('active');
       $('body').css('margin-top', $('.js-skip-links').height());
     });
-    $('.js-skip-links a').on('blur', function () {
+    $('.js-skip-links a').on('blur', () => {
       $('.js-skip-links').removeClass('active');
       $('body').css('margin-top', '0');
     });
@@ -346,9 +344,8 @@ var App = function ($) {
     carousel: carousel,
     hideableMessageAndCheckbox: hideableMessageAndCheckbox,
     customModal: customModal,
-    skipLinks: skipLinks
+    skipLinks: skipLinks,
   };
-
-}(jQuery);
+})(jQuery);
 
 export default App;

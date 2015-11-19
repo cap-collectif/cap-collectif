@@ -442,7 +442,7 @@ class Project
     /**
      * Add step.
      *
-     * @param \Capco\AppBundle\Entity\Steps\ProjectAbstractStep $step
+     * @param ProjectAbstractStep $step
      *
      * @return Project
      */
@@ -457,7 +457,7 @@ class Project
     /**
      * Remove step.
      *
-     * @param \Capco\AppBundle\Entity\Steps\ProjectAbstractStep $step
+     * @param ProjectAbstractStep $step
      *
      * @return $this
      */

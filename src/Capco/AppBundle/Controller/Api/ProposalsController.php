@@ -26,6 +26,7 @@ use Capco\AppBundle\Event\CommentChangedEvent;
 use Capco\AppBundle\CapcoAppBundleEvents;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Capco\AppBundle\Entity\Status;
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 class ProposalsController extends FOSRestController
 {
