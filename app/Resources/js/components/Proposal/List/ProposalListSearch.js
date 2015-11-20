@@ -47,7 +47,7 @@ const ProposalListSearch = React.createClass({
         buttonAfter={this.renderSearchButton(this.handleSubmit)}
         valueLink={this.linkState('value')}
         groupClassName="proposal-search-input pull-right"
-        >
+      >
       </Input>
     )
   }

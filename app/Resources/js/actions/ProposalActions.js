@@ -1,5 +1,6 @@
 import AppDispatcher from '../dispatchers/AppDispatcher';
 import Fetcher from '../services/Fetcher';
+import LocalStorageService from '../services/LocalStorageService';
 import ProposalStore from '../stores/ProposalStore';
 import {
   RECEIVE_PROPOSAL,
@@ -79,6 +80,19 @@ export default {
   },
 
   changeFilterValue: (filter, value) => {
+    const data = LocalStorageService.get('proposals_filters');
+    if (data === null || data.filters === null) {
+      LocalStorageService.set('proposals_filters', {
+        filters: {
+          [filter]: {value},
+        }
+      });
+    } else {
+      let filters = data.filters;
+      filters[filter].value = value;
+      LocalStorageService.set('proposals_filters', {filters});
+    }
+
     AppDispatcher.dispatch({
       actionType: CHANGE_FILTERS,
       filter: filter,

@@ -14,7 +14,7 @@ class LocalStorageService {
   }
 
   get(key) {
-    return JSON.parse(localStorage.getItem(key)).data;
+    return JSON.parse(localStorage.getItem(key)) ? JSON.parse(localStorage.getItem(key)).data : null;
   }
 
   set(key, data) {

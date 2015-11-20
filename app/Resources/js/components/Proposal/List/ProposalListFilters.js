@@ -1,13 +1,13 @@
 import ProposalActions from '../../../actions/ProposalActions';
 import ProposalStore from '../../../stores/ProposalStore';
 import ProposalListSearch from '../List/ProposalListSearch';
+import LocalStorageService from '../../../services/LocalStorageService';
 import Input from '../../Form/Input';
 
 
 const Button = ReactBootstrap.Button;
 const ButtonGroup = ReactBootstrap.ButtonGroup;
 const ButtonToolbar = ReactBootstrap.ButtonToolbar;
-const Collapse = ReactBootstrap.Collapse;
 const Row = ReactBootstrap.Row;
 const Col = ReactBootstrap.Col;
 
@@ -32,9 +32,8 @@ const ProposalListFilters = React.createClass({
   getInitialState() {
     return {
       order: ProposalStore.order,
-      filters: ProposalStore.filters,
+      filters: LocalStorageService.get('proposals_filters') || ProposalStore.filters,
       isLoading: true,
-      collapse: false,
     };
   },
 
@@ -92,44 +91,36 @@ const ProposalListFilters = React.createClass({
             })
           }
         </ButtonGroup>
-        <ButtonGroup>
-          <Button onClick={()=> this.setState({collapse: !this.state.collapse})}>
-            { this.getIntlMessage('global.advanced_filters') }
-          </Button>
-        </ButtonGroup>
         <ProposalListSearch value={'search terms'} />
       </ButtonToolbar>
-      <Collapse in={this.state.collapse}>
-        <Row>
-          <br />
-          {
-            this.filters.map((filter) => {
-              return (
-                <Col xs={12} md={6}>
-                  <Input
-                    type="select"
-                    ref={filter}
-                    onChange={this.handleFilterChange.bind(this, filter)}
-                  >
-                    <option value="" selected>
-                      {this.getIntlMessage('global.select_' + filter)}
-                    </option>
-                    {
-                      this.props[filter].map((type) => {
-                        return (
-                          <option key={type.id} value={type.id}>
-                            {type.title || type.name}
-                          </option>
-                        );
-                      })
-                    }
-                  </Input>
-                </Col>
-              );
-            })
-          }
-        </Row>
-      </Collapse>
+      <Row>
+        {
+          this.filters.map((filter) => {
+            return (
+              <Col xs={12} md={6}>
+                <Input
+                  type="select"
+                  ref={filter}
+                  onChange={this.handleFilterChange.bind(this, filter)}
+                >
+                  <option value="" selected>
+                    {this.getIntlMessage('global.select_' + filter)}
+                  </option>
+                  {
+                    this.props[filter].map((type) => {
+                      return (
+                        <option key={type.id} value={type.id}>
+                          {type.title || type.name}
+                        </option>
+                      );
+                    })
+                  }
+                </Input>
+              </Col>
+            );
+          })
+        }
+      </Row>
     </div>
     );
   },
