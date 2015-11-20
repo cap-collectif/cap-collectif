@@ -10,7 +10,7 @@ class OpinionAppendixAdmin extends Admin
 {
     protected $datagridValues = [
         '_sort_order' => 'ASC',
-        '_sort_by'    => 'type',
+        '_sort_by' => 'type',
     ];
 
     /**
@@ -21,28 +21,28 @@ class OpinionAppendixAdmin extends Admin
         $subject = $this->getSubject();
 
         $formMapper
-            ->add('type', 'text', [
-                'label'  => 'admin.fields.appendix.type',
+            ->add('type', 'text', array(
+                'label' => 'admin.fields.appendix.type',
                 'mapped' => false,
-                'data'   => $subject->getAppendixType(),
-                'attr'   => [
+                'data' => $subject->getAppendixType(),
+                'attr' => [
                     'read-only' => true,
-                    'disabled'  => true,
+                    'disabled' => true,
                 ],
-            ])
+            ))
             ->add('appendixType', 'hidden', [
                 'property_path' => 'appendixType.id',
             ])
-            ->add('body', 'ckeditor', [
-                'label'       => 'admin.fields.appendix.body',
+            ->add('body', 'ckeditor', array(
+                'label' => 'admin.fields.appendix.body',
                 'config_name' => 'admin_editor',
-                'required'    => false,
-            ])
+                'required' => false,
+            ))
         ;
     }
 
     protected function configureRoutes(RouteCollection $collection)
     {
-        $collection->clearExcept(['create', 'delete', 'edit']);
+        $collection->clearExcept(array('create', 'delete', 'edit'));
     }
 }

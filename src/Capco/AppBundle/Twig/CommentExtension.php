@@ -26,13 +26,13 @@ class CommentExtension extends \Twig_Extension
 
     public function getFunctions()
     {
-        return [
-            new \Twig_SimpleFunction('capco_comment_can_show', [$this, 'canShowCommentOnObject']),
-            new \Twig_SimpleFunction('capco_comment_can_add', [$this, 'canAddCommentOnObject']),
-            new \Twig_SimpleFunction('capco_comment_object_url', [$this, 'getRelatedObjectUrl']),
-            new \Twig_SimpleFunction('capco_comment_object', [$this, 'getRelatedObject']),
-            new \Twig_SimpleFunction('capco_comment_object_admin_url', [$this, 'getRelatedObjectAdminUrl']),
-        ];
+        return array(
+            new \Twig_SimpleFunction('capco_comment_can_show', array($this, 'canShowCommentOnObject')),
+            new \Twig_SimpleFunction('capco_comment_can_add', array($this, 'canAddCommentOnObject')),
+            new \Twig_SimpleFunction('capco_comment_object_url', array($this, 'getRelatedObjectUrl')),
+            new \Twig_SimpleFunction('capco_comment_object', array($this, 'getRelatedObject')),
+            new \Twig_SimpleFunction('capco_comment_object_admin_url', array($this, 'getRelatedObjectAdminUrl')),
+        );
     }
 
     public function getRelatedObjectUrl(Comment $comment, $absolute = false)

@@ -28,18 +28,18 @@ class OpinionSerializationListener implements EventSubscriberInterface
     {
         return [
             [
-                'event'  => 'serializer.post_serialize',
-                'class'  => 'Capco\AppBundle\Entity\OpinionVersion',
+                'event' => 'serializer.post_serialize',
+                'class' => 'Capco\AppBundle\Entity\OpinionVersion',
                 'method' => 'onPostOpinionVersion',
             ],
             [
-                'event'  => 'serializer.post_serialize',
-                'class'  => 'Capco\AppBundle\Entity\Opinion',
+                'event' => 'serializer.post_serialize',
+                'class' => 'Capco\AppBundle\Entity\Opinion',
                 'method' => 'onPostOpinion',
             ],
             [
-                'event'  => 'serializer.post_serialize',
-                'class'  => 'Capco\AppBundle\Entity\OpinionType',
+                'event' => 'serializer.post_serialize',
+                'class' => 'Capco\AppBundle\Entity\OpinionType',
                 'method' => 'onPostOpinionType',
             ],
         ];
@@ -56,19 +56,19 @@ class OpinionSerializationListener implements EventSubscriberInterface
 
         $event->getVisitor()->addData(
             '_links', [
-                'show'                => $this->router->generate('app_project_show_opinion_version', [
-                    'projectSlug'     => $project->getSlug(),
-                    'stepSlug'        => $step->getSlug(),
+                'show' => $this->router->generate('app_project_show_opinion_version', [
+                    'projectSlug' => $project->getSlug(),
+                    'stepSlug' => $step->getSlug(),
                     'opinionTypeSlug' => $opinionType->getSlug(),
-                    'opinionSlug'     => $opinion->getSlug(),
-                    'versionSlug'     => $version->getSlug(),
+                    'opinionSlug' => $opinion->getSlug(),
+                    'versionSlug' => $version->getSlug(),
                 ], true),
-                'report'              => $this->router->generate('app_report_opinion_version', [
-                    'projectSlug'     => $project->getSlug(),
-                    'stepSlug'        => $step->getSlug(),
+                'report' => $this->router->generate('app_report_opinion_version', [
+                    'projectSlug' => $project->getSlug(),
+                    'stepSlug' => $step->getSlug(),
                     'opinionTypeSlug' => $opinionType->getSlug(),
-                    'opinionSlug'     => $opinion->getSlug(),
-                    'versionSlug'     => $version->getSlug(),
+                    'opinionSlug' => $opinion->getSlug(),
+                    'versionSlug' => $version->getSlug(),
                 ], true),
             ]
         );
@@ -92,27 +92,27 @@ class OpinionSerializationListener implements EventSubscriberInterface
 
         $event->getVisitor()->addData(
             '_links', [
-                'show'                => $this->router->generate('app_project_show_opinion', [
-                    'projectSlug'     => $project->getSlug(),
-                    'stepSlug'        => $step->getSlug(),
+                'show' => $this->router->generate('app_project_show_opinion', [
+                    'projectSlug' => $project->getSlug(),
+                    'stepSlug' => $step->getSlug(),
                     'opinionTypeSlug' => $opinionType->getSlug(),
-                    'opinionSlug'     => $opinion->getSlug(),
+                    'opinionSlug' => $opinion->getSlug(),
                 ], true),
-                'edit'                => $this->router->generate('app_project_edit_opinion', [
-                    'projectSlug'     => $project->getSlug(),
-                    'stepSlug'        => $step->getSlug(),
+                'edit' => $this->router->generate('app_project_edit_opinion', [
+                    'projectSlug' => $project->getSlug(),
+                    'stepSlug' => $step->getSlug(),
                     'opinionTypeSlug' => $opinionType->getSlug(),
-                    'opinionSlug'     => $opinion->getSlug(),
+                    'opinionSlug' => $opinion->getSlug(),
                 ], true),
-                'report'              => $this->router->generate('app_report_opinion', [
-                    'projectSlug'     => $project->getSlug(),
-                    'stepSlug'        => $step->getSlug(),
+                'report' => $this->router->generate('app_report_opinion', [
+                    'projectSlug' => $project->getSlug(),
+                    'stepSlug' => $step->getSlug(),
                     'opinionTypeSlug' => $opinionType->getSlug(),
-                    'opinionSlug'     => $opinion->getSlug(),
+                    'opinionSlug' => $opinion->getSlug(),
                 ], true),
-                'type'                => $this->router->generate('app_project_show_opinions', [
-                    'projectSlug'     => $project->getSlug(),
-                    'stepSlug'        => $step->getSlug(),
+                'type' => $this->router->generate('app_project_show_opinions', [
+                    'projectSlug' => $project->getSlug(),
+                    'stepSlug' => $step->getSlug(),
                     'opinionTypeSlug' => $opinionType->getSlug(),
                 ], true),
             ]

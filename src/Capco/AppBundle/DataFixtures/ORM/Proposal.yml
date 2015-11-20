@@ -36,7 +36,7 @@ Capco\AppBundle\Entity\Proposal:
     rating: 3
     annotation: Vérifier les normes de sécurité
     isTrashed: false
-    author: @user502
+    author: @user5
     proposalForm: @proposalform1
     theme: @theme1
     district: @district4

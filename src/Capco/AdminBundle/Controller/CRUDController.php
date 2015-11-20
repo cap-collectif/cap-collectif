@@ -78,7 +78,7 @@ class CRUDController extends Controller
         }
 
         if (mb_strlen($searchText, 'UTF-8') < $minimumInputLength) {
-            return new JsonResponse(['status' => 'KO', 'message' => 'Too short search string.'], 403);
+            return new JsonResponse(array('status' => 'KO', 'message' => 'Too short search string.'), 403);
         }
 
         $targetAdmin->setPersistFilters(false);
@@ -123,7 +123,7 @@ class CRUDController extends Controller
 
         $pager = $datagrid->getPager();
 
-        $items = [];
+        $items = array();
         $results = $pager->getResults();
 
         foreach ($results as $entity) {
@@ -138,17 +138,17 @@ class CRUDController extends Controller
                 $label = $resultMetadata->getTitle();
             }
 
-            $items[] = [
-                'id'    => $admin->id($entity),
+            $items[] = array(
+                'id' => $admin->id($entity),
                 'label' => $label,
-            ];
+            );
         }
 
-        return new JsonResponse([
+        return new JsonResponse(array(
             'status' => 'OK',
-            'more'   => !$pager->isLastPage(),
-            'items'  => $items,
-        ]);
+            'more' => !$pager->isLastPage(),
+            'items' => $items,
+        ));
     }
 
     /**

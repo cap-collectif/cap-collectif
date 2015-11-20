@@ -35,13 +35,13 @@ class OpinionController extends Controller
 
         return $this->render(
             $this->admin->getTemplate('list'),
-            [
-                'action'                => 'list',
-                'form'                  => $formView,
-                'datagrid'              => $datagrid,
-                'csrf_token'            => $this->getCsrfToken('sonata.batch'),
+            array(
+                'action' => 'list',
+                'form' => $formView,
+                'datagrid' => $datagrid,
+                'csrf_token' => $this->getCsrfToken('sonata.batch'),
                 'consultationStepTypes' => $this->getConsultationStepTypes(),
-            ],
+            ),
             null,
             $request
         );
@@ -101,12 +101,12 @@ class OpinionController extends Controller
 
                     if ($this->isXmlHttpRequest($request)) {
                         return $this->renderJson(
-                            [
-                                'result'   => 'ok',
+                            array(
+                                'result' => 'ok',
                                 'objectId' => $this->admin->getNormalizedIdentifier($object),
-                            ],
+                            ),
                             200,
-                            [],
+                            array(),
                             $request
                         );
                     }
@@ -115,7 +115,7 @@ class OpinionController extends Controller
                         'sonata_flash_success',
                         $this->admin->trans(
                             'flash_create_success',
-                            ['%name%' => $this->escapeHtml($this->admin->toString($object))],
+                            array('%name%' => $this->escapeHtml($this->admin->toString($object))),
                             'SonataAdminBundle'
                         )
                     );
@@ -136,7 +136,7 @@ class OpinionController extends Controller
                         'sonata_flash_error',
                         $this->admin->trans(
                             'flash_create_error',
-                            ['%name%' => $this->escapeHtml($this->admin->toString($object))],
+                            array('%name%' => $this->escapeHtml($this->admin->toString($object))),
                             'SonataAdminBundle'
                         )
                     );
@@ -155,12 +155,12 @@ class OpinionController extends Controller
 
         return $this->render(
             $this->admin->getTemplate($templateKey),
-            [
-                'action'                => 'create',
-                'form'                  => $view,
-                'object'                => $object,
+            array(
+                'action' => 'create',
+                'form' => $view,
+                'object' => $object,
                 'consultationStepTypes' => $this->getConsultationStepTypes(),
-            ],
+            ),
             null,
             $request
         );
@@ -210,13 +210,13 @@ class OpinionController extends Controller
 
                     if ($this->isXmlHttpRequest($request)) {
                         return $this->renderJson(
-                            [
-                                'result'     => 'ok',
-                                'objectId'   => $this->admin->getNormalizedIdentifier($object),
+                            array(
+                                'result' => 'ok',
+                                'objectId' => $this->admin->getNormalizedIdentifier($object),
                                 'objectName' => $this->escapeHtml($this->admin->toString($object)),
-                            ],
+                            ),
                             200,
-                            [],
+                            array(),
                             $request
                         );
                     }
@@ -225,7 +225,7 @@ class OpinionController extends Controller
                         'sonata_flash_success',
                         $this->admin->trans(
                             'flash_edit_success',
-                            ['%name%' => $this->escapeHtml($this->admin->toString($object))],
+                            array('%name%' => $this->escapeHtml($this->admin->toString($object))),
                             'SonataAdminBundle'
                         )
                     );
@@ -241,11 +241,11 @@ class OpinionController extends Controller
                         'sonata_flash_error',
                         $this->admin->trans(
                             'flash_lock_error',
-                            [
-                                '%name%'       => $this->escapeHtml($this->admin->toString($object)),
+                            array(
+                                '%name%' => $this->escapeHtml($this->admin->toString($object)),
                                 '%link_start%' => '<a href="'.$this->admin->generateObjectUrl('edit', $object).'">',
-                                '%link_end%'   => '</a>',
-                            ],
+                                '%link_end%' => '</a>',
+                            ),
                             'SonataAdminBundle'
                         )
                     );
@@ -259,7 +259,7 @@ class OpinionController extends Controller
                         'sonata_flash_error',
                         $this->admin->trans(
                             'flash_edit_error',
-                            ['%name%' => $this->escapeHtml($this->admin->toString($object))],
+                            array('%name%' => $this->escapeHtml($this->admin->toString($object))),
                             'SonataAdminBundle'
                         )
                     );
@@ -278,12 +278,12 @@ class OpinionController extends Controller
 
         return $this->render(
             $this->admin->getTemplate($templateKey),
-            [
-                'action'                => 'edit',
-                'form'                  => $view,
-                'object'                => $object,
+            array(
+                'action' => 'edit',
+                'form' => $view,
+                'object' => $object,
                 'consultationStepTypes' => $this->getConsultationStepTypes(),
-            ],
+            ),
             null,
             $request
         );
@@ -312,12 +312,12 @@ class OpinionController extends Controller
 
         return $this->render(
             $this->admin->getTemplate('show'),
-            [
-                'action'                => 'show',
-                'object'                => $object,
-                'elements'              => $this->admin->getShow(),
+            array(
+                'action' => 'show',
+                'object' => $object,
+                'elements' => $this->admin->getShow(),
                 'consultationStepTypes' => $this->getConsultationStepTypes(),
-            ],
+            ),
             null,
             $request
         );
@@ -351,14 +351,14 @@ class OpinionController extends Controller
                 $this->admin->delete($object);
 
                 if ($this->isXmlHttpRequest($request)) {
-                    return $this->renderJson(['result' => 'ok'], 200, [], $request);
+                    return $this->renderJson(array('result' => 'ok'), 200, array(), $request);
                 }
 
                 $this->addFlash(
                     'sonata_flash_success',
                     $this->admin->trans(
                         'flash_delete_success',
-                        ['%name%' => $this->escapeHtml($objectName)],
+                        array('%name%' => $this->escapeHtml($objectName)),
                         'SonataAdminBundle'
                     )
                 );
@@ -366,14 +366,14 @@ class OpinionController extends Controller
                 $this->handleModelManagerException($e);
 
                 if ($this->isXmlHttpRequest($request)) {
-                    return $this->renderJson(['result' => 'error'], 200, [], $request);
+                    return $this->renderJson(array('result' => 'error'), 200, array(), $request);
                 }
 
                 $this->addFlash(
                     'sonata_flash_error',
                     $this->admin->trans(
                         'flash_delete_error',
-                        ['%name%' => $this->escapeHtml($objectName)],
+                        array('%name%' => $this->escapeHtml($objectName)),
                         'SonataAdminBundle'
                     )
                 );
@@ -384,12 +384,12 @@ class OpinionController extends Controller
 
         return $this->render(
             $this->admin->getTemplate('delete'),
-            [
-                'object'                => $object,
-                'action'                => 'delete',
-                'csrf_token'            => $this->getCsrfToken('sonata.delete'),
+            array(
+                'object' => $object,
+                'action' => 'delete',
+                'csrf_token' => $this->getCsrfToken('sonata.delete'),
                 'consultationStepTypes' => $this->getConsultationStepTypes(),
-            ],
+            ),
             null,
             $request
         );
@@ -418,9 +418,9 @@ class OpinionController extends Controller
             $ct = $root->getConsultationStepType()->getTitle();
             $consultationStepTypes[$ct][] = $otRepo
                 ->childrenHierarchy($root, false, [
-                    'decorate'      => true,
-                    'rootOpen'      => '',
-                    'rootClose'     => '',
+                    'decorate' => true,
+                    'rootOpen' => '',
+                    'rootClose' => '',
                     'nodeDecorator' => function ($node) {
                         $url = $this->admin->generateUrl('create', ['opinion_type' => $node['id']]);
                         $levelIndicator = ' ';
@@ -449,7 +449,7 @@ class OpinionController extends Controller
             ->getRepository('CapcoAppBundle:OpinionTypeAppendixType')
             ->findBy(
                 ['opinionType' => $opinion->getOpinionType()],
-                ['position'    => 'ASC']
+                ['position' => 'ASC']
         );
         $newAppendices = new ArrayCollection();
         $currentAppendices = $opinion->getAppendices();

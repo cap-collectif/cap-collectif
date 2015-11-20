@@ -18,7 +18,7 @@ class HasThemeIfActivatedValidator extends ConstraintValidator
     public function validate($object, Constraint $constraint)
     {
         if ($this->toggleManager->isActive('themes') && null == $object) {
-            $this->context->addViolation($constraint->message, []);
+            $this->context->addViolation($constraint->message, array());
         }
     }
 }

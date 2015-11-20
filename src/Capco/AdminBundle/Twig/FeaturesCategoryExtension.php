@@ -15,12 +15,12 @@ class FeaturesCategoryExtension extends \Twig_Extension
 
     public function getFunctions()
     {
-        return [
-            new \Twig_SimpleFunction('is_category_enabled', [$this, 'isCategoryEnabled']),
-            new \Twig_SimpleFunction('is_admin_enabled', [$this, 'isAdminEnabled']),
-            new \Twig_SimpleFunction('get_enabled_pages_categories', [$this, 'getEnabledPagesCategories']),
-            new \Twig_SimpleFunction('get_enabled_settings_categories', [$this, 'getEnabledSettingsCategories']),
-        ];
+        return array(
+            new \Twig_SimpleFunction('is_category_enabled', array($this, 'isCategoryEnabled')),
+            new \Twig_SimpleFunction('is_admin_enabled', array($this, 'isAdminEnabled')),
+            new \Twig_SimpleFunction('get_enabled_pages_categories', array($this, 'getEnabledPagesCategories')),
+            new \Twig_SimpleFunction('get_enabled_settings_categories', array($this, 'getEnabledSettingsCategories')),
+        );
     }
 
     /**

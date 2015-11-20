@@ -13,18 +13,18 @@ class EventRegistrationAdmin extends Admin
 {
     protected $datagridValues = [
         '_sort_order' => 'ASC',
-        '_sort_by'    => 'event.title',
+        '_sort_by' => 'event.title',
     ];
 
     public function getPersistentParameters()
     {
         if (!$this->getRequest()) {
-            return [];
+            return array();
         }
 
-        return [
+        return array(
             'event' => $this->getRequest()->get('event'),
-        ];
+        );
     }
 
     /**
@@ -37,9 +37,9 @@ class EventRegistrationAdmin extends Admin
             ->add('confirmed', null, ['label' => 'admin.fields.event_registration.registered', 'required' => false])
             ->add('user', 'doctrine_orm_model_autocomplete', [
                 'label' => 'admin.fields.event_registration.user',
-            ], null, [
+            ], null, array(
                 'property' => 'username',
-            ])
+            ))
             ->add('updatedAt', null, ['label' => 'admin.fields.event_registration.updated_at'])
         ;
     }
@@ -52,32 +52,32 @@ class EventRegistrationAdmin extends Admin
         unset($this->listModes['mosaic']);
 
         $listMapper
-            ->add('confirmed', null, [
-                'label'    => 'admin.fields.event_registration.registered',
+            ->add('confirmed', null, array(
+                'label' => 'admin.fields.event_registration.registered',
                 'editable' => true,
-            ])
-            ->add('user', null, [
+            ))
+            ->add('user', null, array(
                 'label' => 'admin.fields.event_registration.user',
-            ])
-            ->add('username', null, [
+            ))
+            ->add('username', null, array(
                 'label' => 'admin.fields.event_registration.username',
-            ])
-            ->add('email', null, [
+            ))
+            ->add('email', null, array(
                 'label' => 'admin.fields.event_registration.email',
-            ])
-            ->add('private', null, [
+            ))
+            ->add('private', null, array(
                 'label' => 'admin.fields.event_registration.private',
-            ])
-            ->add('updatedAt', null, [
+            ))
+            ->add('updatedAt', null, array(
                 'label' => 'admin.fields.event_registration.updated_at',
-            ])
-            ->add('_action', 'actions', [
-                'actions' => [
-                    'show'   => [],
-                    'edit'   => [],
-                    'delete' => [],
-                ],
-            ])
+            ))
+            ->add('_action', 'actions', array(
+                'actions' => array(
+                    'show' => array(),
+                    'edit' => array(),
+                    'delete' => array(),
+                ),
+            ))
         ;
     }
 
@@ -90,7 +90,7 @@ class EventRegistrationAdmin extends Admin
             ->add('event', null, ['label' => 'admin.fields.event_registration.event'])
             ->add('confirmed', null, ['label' => 'admin.fields.event_registration.registered', 'required' => false])
             ->add('user', 'sonata_type_model_autocomplete', [
-                'label'    => 'admin.fields.event_registration.user',
+                'label' => 'admin.fields.event_registration.user',
                 'property' => 'username',
             ])
             ->add('username', null, ['label' => 'admin.fields.event_registration.username'])

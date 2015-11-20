@@ -25,9 +25,9 @@ class DefaultAvatarExtension extends \Twig_Extension
 
     public function getFilters()
     {
-        return [
-            new \Twig_SimpleFilter('capco_default_avatar', [$this, 'getDefaultAvatarIfNull']),
-        ];
+        return array(
+            new \Twig_SimpleFilter('capco_default_avatar', array($this, 'getDefaultAvatarIfNull')),
+        );
     }
 
     public function getDefaultAvatarIfNull($media)

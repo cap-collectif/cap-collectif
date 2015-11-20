@@ -12,12 +12,12 @@ class StatusAdmin extends Admin
 {
     protected $datagridValues = [
         '_sort_order' => 'ASC',
-        '_sort_by'    => 'position',
+        '_sort_by' => 'position',
     ];
 
-    protected $formOptions = [
+    protected $formOptions = array(
         'cascade_validation' => true,
-    ];
+    );
 
     // Fields to be shown on create/edit forms
     protected function configureFormFields(FormMapper $formMapper)
@@ -27,11 +27,11 @@ class StatusAdmin extends Admin
                 'label' => 'admin.fields.status.position',
             ])
             ->add('name', null, [
-                'label'    => 'admin.fields.status.name',
+                'label' => 'admin.fields.status.name',
                 'required' => true,
             ])
             ->add('color', null, [
-                'label'    => 'admin.fields.status.color',
+                'label' => 'admin.fields.status.color',
                 'required' => true,
             ])
         ;

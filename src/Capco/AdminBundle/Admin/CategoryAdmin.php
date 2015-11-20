@@ -12,7 +12,7 @@ class CategoryAdmin extends Admin
 {
     protected $datagridValues = [
         '_sort_order' => 'ASC',
-        '_sort_by'    => 'title',
+        '_sort_by' => 'title',
     ];
 
     /**
@@ -21,19 +21,19 @@ class CategoryAdmin extends Admin
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
         $datagridMapper
-            ->add('title', null, [
+            ->add('title', null, array(
                 'label' => 'admin.fields.category.title',
-            ])
-            ->add('Sources', null, [
+            ))
+            ->add('Sources', null, array(
                 'label' => 'admin.fields.category.sources',
-            ])
-            ->add('isEnabled', null, [
+            ))
+            ->add('isEnabled', null, array(
                 'editable' => true,
-                'label'    => 'admin.fields.category.is_enabled',
-            ])
-            ->add('createdAt', null, [
+                'label' => 'admin.fields.category.is_enabled',
+            ))
+            ->add('createdAt', null, array(
                 'label' => 'admin.fields.category.created_at',
-            ])
+            ))
         ;
     }
 
@@ -45,23 +45,23 @@ class CategoryAdmin extends Admin
         unset($this->listModes['mosaic']);
 
         $listMapper
-            ->addIdentifier('title', null, [
+            ->addIdentifier('title', null, array(
                 'label' => 'admin.fields.category.title',
-            ])
-            ->add('isEnabled', null, [
+            ))
+            ->add('isEnabled', null, array(
                 'editable' => true,
-                'label'    => 'admin.fields.category.is_enabled',
-            ])
-            ->add('updatedAt', null, [
+                'label' => 'admin.fields.category.is_enabled',
+            ))
+            ->add('updatedAt', null, array(
                 'label' => 'admin.fields.category.updated_at',
-            ])
-            ->add('_action', 'actions', [
-                'actions' => [
-                    'show'   => [],
-                    'edit'   => [],
-                    'delete' => [],
-                ],
-            ])
+            ))
+            ->add('_action', 'actions', array(
+                'actions' => array(
+                    'show' => array(),
+                    'edit' => array(),
+                    'delete' => array(),
+                ),
+            ))
         ;
     }
 
@@ -71,13 +71,13 @@ class CategoryAdmin extends Admin
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
-            ->add('title', null, [
+            ->add('title', null, array(
                 'label' => 'admin.fields.category.title',
-            ])
-            ->add('isEnabled', null, [
-                'label'    => 'admin.fields.category.is_enabled',
+            ))
+            ->add('isEnabled', null, array(
+                'label' => 'admin.fields.category.is_enabled',
                 'required' => false,
-            ])
+            ))
         ;
     }
 
@@ -87,19 +87,19 @@ class CategoryAdmin extends Admin
     protected function configureShowFields(ShowMapper $showMapper)
     {
         $showMapper
-            ->add('title', null, [
+            ->add('title', null, array(
                 'label' => 'admin.fields.category.title',
-            ])
-            ->add('isEnabled', null, [
+            ))
+            ->add('isEnabled', null, array(
                 'editable' => true,
-                'label'    => 'admin.fields.category.is_enabled',
-            ])
-            ->add('updatedAt', null, [
+                'label' => 'admin.fields.category.is_enabled',
+            ))
+            ->add('updatedAt', null, array(
                 'label' => 'admin.fields.category.updated_at',
-            ])
-            ->add('createdAt', null, [
+            ))
+            ->add('createdAt', null, array(
                 'label' => 'admin.fields.category.created_at',
-            ])
+            ))
         ;
     }
 }

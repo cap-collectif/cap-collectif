@@ -25,10 +25,10 @@ class EventExtension extends \Twig_Extension
 
     public function getFilters()
     {
-        return [
-            new \Twig_SimpleFilter('capco_event_registration_possible', [$this, 'isRegistrationPossible']),
-            new \Twig_SimpleFilter('capco_event_user_registered', [$this, 'isRegistered']),
-        ];
+        return array(
+            new \Twig_SimpleFilter('capco_event_registration_possible', array($this, 'isRegistrationPossible')),
+            new \Twig_SimpleFilter('capco_event_user_registered', array($this, 'isRegistered')),
+        );
     }
 
     public function isRegistrationPossible($event)

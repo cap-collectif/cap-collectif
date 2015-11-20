@@ -57,7 +57,7 @@ class Loader
     public function __construct($loaders, LoggerInterface $logger = null)
     {
         $this->loaders = $loaders;
-        $this->processors = [];
+        $this->processors = array();
         $this->logger = $logger;
         $this->references = new ArrayCollection();
     }
@@ -71,7 +71,7 @@ class Loader
 
         $this->persister = new Doctrine($this->objectManager);
 
-        $newReferences = [];
+        $newReferences = array();
         foreach ($this->references as $name => $reference) {
             // Don't merge value objects, e.g. Doctrine embeddables
             if ($this->hasIdentity($reference)) {
@@ -99,7 +99,7 @@ class Loader
         $loader = $this->getLoader('yaml');
         $loader->setProviders($this->providers);
 
-        $objects = [];
+        $objects = array();
         foreach ($files as $file) {
             $set = $loader->load($file);
             $set = $this->persist($set);
@@ -124,7 +124,7 @@ class Loader
         }
 
         // remove processors when file is loaded
-        $this->processors = [];
+        $this->processors = array();
     }
 
     /**

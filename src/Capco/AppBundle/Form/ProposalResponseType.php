@@ -44,8 +44,8 @@ class ProposalResponseType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults([
-            'data_class'         => 'Capco\AppBundle\Entity\ProposalResponse',
-            'csrf_protection'    => false,
+            'data_class' => 'Capco\AppBundle\Entity\ProposalResponse',
+            'csrf_protection' => false,
             'translation_domain' => 'CapcoAppBundle',
             'cascade_validation' => true,
         ]);

@@ -23,11 +23,11 @@ class User extends BaseUser implements EncoderAwareInterface, SynthesisUserInter
 
     public static $sortOrder = [
         'activity' => self::SORT_ORDER_CONTRIBUTIONS_COUNT,
-        'date'     => self::SORT_ORDER_CREATED_AT,
+        'date' => self::SORT_ORDER_CREATED_AT,
     ];
     public static $sortOrderLabels = [
         'activity' => 'user.index.sort.activity',
-        'date'     => 'user.index.sort.date',
+        'date' => 'user.index.sort.date',
     ];
 
     /**
@@ -237,7 +237,7 @@ class User extends BaseUser implements EncoderAwareInterface, SynthesisUserInter
         parent::__construct();
 
         $this->encoder = $encoder;
-        $this->roles = ['ROLE_USER'];
+        $this->roles = array('ROLE_USER');
         $this->opinions = new ArrayCollection();
         $this->opinionVersions = new ArrayCollection();
         $this->ideas = new ArrayCollection();
@@ -960,11 +960,11 @@ class User extends BaseUser implements EncoderAwareInterface, SynthesisUserInter
 
     public static function getGenderList()
     {
-        return [
+        return array(
             UserInterface::GENDER_UNKNOWN => 'gender.unknown',
-            UserInterface::GENDER_FEMALE  => 'gender.female',
-            UserInterface::GENDER_MALE    => 'gender.male',
-        ];
+            UserInterface::GENDER_FEMALE => 'gender.female',
+            UserInterface::GENDER_MALE => 'gender.male',
+        );
     }
 
     public function getContributionsCount()

@@ -13,7 +13,7 @@ class IdeaAdmin extends Admin
 {
     protected $datagridValues = [
         '_sort_order' => 'ASC',
-        '_sort_by'    => 'title',
+        '_sort_by' => 'title',
     ];
 
     /**
@@ -22,38 +22,38 @@ class IdeaAdmin extends Admin
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
         $datagridMapper
-            ->add('title', null, [
+            ->add('title', null, array(
                 'label' => 'admin.fields.idea.title',
-            ])
+            ))
         ;
 
         if ($this->getConfigurationPool()->getContainer()->get('capco.toggle.manager')->isActive('themes')) {
-            $datagridMapper->add('theme', null, [
+            $datagridMapper->add('theme', null, array(
                 'label' => 'admin.fields.idea.theme',
-            ]);
+            ));
         }
 
         $datagridMapper
-            ->add('votesCount', null, [
+            ->add('votesCount', null, array(
                 'label' => 'admin.fields.idea.vote_count',
-            ])
+            ))
             ->add('Author', 'doctrine_orm_model_autocomplete', [
                 'label' => 'admin.fields.idea.author',
-            ], null, [
+            ], null, array(
                 'property' => 'username',
-            ])
-            ->add('isEnabled', null, [
+            ))
+            ->add('isEnabled', null, array(
                 'label' => 'admin.fields.idea.is_enabled',
-            ])
-            ->add('isTrashed', null, [
+            ))
+            ->add('isTrashed', null, array(
                 'label' => 'admin.fields.idea.is_trashed',
-            ])
-            ->add('isCommentable', null, [
+            ))
+            ->add('isCommentable', null, array(
                 'label' => 'admin.fields.idea.is_commentable',
-            ])
-            ->add('updatedAt', null, [
+            ))
+            ->add('updatedAt', null, array(
                 'label' => 'admin.fields.idea.updated_at',
-            ])
+            ))
         ;
     }
 
@@ -63,49 +63,49 @@ class IdeaAdmin extends Admin
     protected function configureListFields(ListMapper $listMapper)
     {
         $listMapper
-            ->addIdentifier('title', null, [
+            ->addIdentifier('title', null, array(
                 'label' => 'admin.fields.idea.title',
-            ])
+            ))
         ;
 
         if ($this->getConfigurationPool()->getContainer()->get('capco.toggle.manager')->isActive('themes')) {
-            $listMapper->add('theme', null, [
+            $listMapper->add('theme', null, array(
                 'label' => 'admin.fields.idea.theme',
-            ]);
+            ));
         }
 
         $listMapper
-            ->add('votesCount', null, [
+            ->add('votesCount', null, array(
                 'label' => 'admin.fields.idea.vote_count',
-            ])
-            ->add('commentsCount', null, [
+            ))
+            ->add('commentsCount', null, array(
                 'label' => 'admin.fields.idea.comments_count',
-            ])
-            ->add('Author', 'sonata_type_model', [
+            ))
+            ->add('Author', 'sonata_type_model', array(
                 'label' => 'admin.fields.idea.author',
-            ])
-            ->add('isEnabled', null, [
-                'label'    => 'admin.fields.idea.is_enabled',
+            ))
+            ->add('isEnabled', null, array(
+                'label' => 'admin.fields.idea.is_enabled',
                 'editable' => true,
-            ])
-            ->add('isTrashed', null, [
-                'label'    => 'admin.fields.idea.is_trashed',
+            ))
+            ->add('isTrashed', null, array(
+                'label' => 'admin.fields.idea.is_trashed',
                 'editable' => true,
-            ])
-            ->add('isCommentable', null, [
-                'label'    => 'admin.fields.idea.is_commentable',
+            ))
+            ->add('isCommentable', null, array(
+                'label' => 'admin.fields.idea.is_commentable',
                 'editable' => true,
-            ])
-            ->add('updatedAt', null, [
+            ))
+            ->add('updatedAt', null, array(
                 'label' => 'admin.fields.idea.updated_at',
-            ])
-            ->add('_action', 'actions', [
-                'actions' => [
-                    'show'   => [],
-                    'edit'   => [],
-                    'delete' => [],
-                ],
-            ])
+            ))
+            ->add('_action', 'actions', array(
+                'actions' => array(
+                    'show' => array(),
+                    'edit' => array(),
+                    'delete' => array(),
+                ),
+            ))
         ;
     }
 
@@ -115,57 +115,57 @@ class IdeaAdmin extends Admin
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
-            ->add('title', null, [
+            ->add('title', null, array(
                 'label' => 'admin.fields.idea.title',
-            ])
-            ->add('isEnabled', null, [
-                'label'    => 'admin.fields.idea.is_enabled',
+            ))
+            ->add('isEnabled', null, array(
+                'label' => 'admin.fields.idea.is_enabled',
                 'required' => false,
-            ])
-            ->add('isCommentable', null, [
-                'label'    => 'admin.fields.idea.is_commentable',
+            ))
+            ->add('isCommentable', null, array(
+                'label' => 'admin.fields.idea.is_commentable',
                 'required' => false,
-            ])
+            ))
             ->add('Author', 'sonata_type_model_autocomplete', [
-                'label'    => 'admin.fields.idea.author',
+                'label' => 'admin.fields.idea.author',
                 'property' => 'username',
             ])
         ;
 
         if ($this->getConfigurationPool()->getContainer()->get('capco.toggle.manager')->isActive('themes')) {
-            $formMapper->add('theme', 'sonata_type_model', [
-                'label'    => 'admin.fields.idea.theme',
+            $formMapper->add('theme', 'sonata_type_model', array(
+                'label' => 'admin.fields.idea.theme',
                 'required' => true,
-            ]);
+            ));
         }
 
         $formMapper
-            ->add('object', 'ckeditor', [
-                'label'       => 'admin.fields.idea.object',
+            ->add('object', 'ckeditor', array(
+                'label' => 'admin.fields.idea.object',
                 'config_name' => 'admin_editor',
-            ])
-            ->add('body', 'ckeditor', [
-                'label'       => 'admin.fields.idea.body',
+            ))
+            ->add('body', 'ckeditor', array(
+                'label' => 'admin.fields.idea.body',
                 'config_name' => 'admin_editor',
-            ])
-            ->add('Media', 'sonata_type_model_list', [
-                'label'    => 'admin.fields.idea.media',
+            ))
+            ->add('Media', 'sonata_type_model_list', array(
+                'label' => 'admin.fields.idea.media',
                 'required' => false,
-            ], [
-                'link_parameters' => [
-                    'context'      => 'default',
+            ), array(
+                'link_parameters' => array(
+                    'context' => 'default',
                     'hide_context' => true,
-                    'provider'     => 'sonata.media.provider.image',
-                ],
-            ])
-            ->add('isTrashed', null, [
-                'label'    => 'admin.fields.idea.is_trashed',
+                    'provider' => 'sonata.media.provider.image',
+                ),
+            ))
+            ->add('isTrashed', null, array(
+                'label' => 'admin.fields.idea.is_trashed',
                 'required' => false,
-            ])
-            ->add('trashedReason', null, [
-                'label'    => 'admin.fields.idea.trashed_reason',
+            ))
+            ->add('trashedReason', null, array(
+                'label' => 'admin.fields.idea.trashed_reason',
                 'required' => false,
-            ])
+            ))
         ;
     }
 
@@ -177,62 +177,62 @@ class IdeaAdmin extends Admin
         $subject = $this->getSubject();
 
         $showMapper
-            ->add('title', null, [
+            ->add('title', null, array(
                 'label' => 'admin.fields.idea.title',
-            ])
-            ->add('object', null, [
+            ))
+            ->add('object', null, array(
                 'label' => 'admin.fields.idea.object',
-            ])
-            ->add('body', null, [
+            ))
+            ->add('body', null, array(
                 'label' => 'admin.fields.idea.body',
-            ]);
+            ));
 
         if ($this->getConfigurationPool()->getContainer()->get('capco.toggle.manager')->isActive('themes')) {
-            $showMapper->add('theme', null, [
+            $showMapper->add('theme', null, array(
                 'label' => 'admin.fields.idea.theme',
-            ]);
+            ));
         }
 
         $showMapper
-            ->add('votesCount', null, [
+            ->add('votesCount', null, array(
                 'label' => 'admin.fields.idea.vote_count',
-            ])
-            ->add('Author', null, [
+            ))
+            ->add('Author', null, array(
                 'label' => 'admin.fields.idea.author',
-            ])
-            ->add('Media', 'sonata_media_type', [
+            ))
+            ->add('Media', 'sonata_media_type', array(
                 'template' => 'CapcoAdminBundle:Idea:media_show_field.html.twig',
                 'provider' => 'sonata.media.provider.image',
-                'label'    => 'admin.fields.idea.media',
-            ])
-            ->add('isEnabled', null, [
+                'label' => 'admin.fields.idea.media',
+            ))
+            ->add('isEnabled', null, array(
                 'label' => 'admin.fields.idea.is_enabled',
-            ])
-            ->add('isCommentable', null, [
+            ))
+            ->add('isCommentable', null, array(
                 'label' => 'admin.fields.idea.is_commentable',
-            ])
-            ->add('commentsCount', null, [
+            ))
+            ->add('commentsCount', null, array(
                 'label' => 'admin.fields.idea.comments_count',
-            ])
-            ->add('updatedAt', null, [
+            ))
+            ->add('updatedAt', null, array(
                 'label' => 'admin.fields.idea.updated_at',
-            ])
-            ->add('createdAt', null, [
+            ))
+            ->add('createdAt', null, array(
                 'label' => 'admin.fields.idea.created_at',
-            ])
-            ->add('isTrashed', null, [
+            ))
+            ->add('isTrashed', null, array(
                 'label' => 'admin.fields.idea.is_trashed',
-            ])
+            ))
         ;
 
         if ($subject->getIsTrashed()) {
             $showMapper
-                ->add('trashedAt', null, [
+                ->add('trashedAt', null, array(
                     'label' => 'admin.fields.idea.trashed_at',
-                ])
-                ->add('trashedReason', null, [
+                ))
+                ->add('trashedReason', null, array(
                     'label' => 'admin.fields.idea.trashed_reason',
-                ])
+                ))
             ;
         }
     }
@@ -254,8 +254,8 @@ class IdeaAdmin extends Admin
 
     public function getFeatures()
     {
-        return [
+        return array(
             'ideas',
-        ];
+        );
     }
 }

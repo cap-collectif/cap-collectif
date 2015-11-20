@@ -13,9 +13,9 @@ class MediaTypeExtension extends AbstractTypeExtension
      */
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
-        $resolver->setDefaults([
+        $resolver->setDefaults(array(
             'show_unlink' => true,
-        ]);
+        ));
     }
 
     /**
@@ -24,27 +24,27 @@ class MediaTypeExtension extends AbstractTypeExtension
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         if (!$options['show_unlink']) {
-            $builder->add('unlink', 'hidden', [
-                'mapped'   => false,
-                'data'     => false,
+            $builder->add('unlink', 'hidden', array(
+                'mapped' => false,
+                'data' => false,
                 'required' => false,
-                ])
+                ))
             ;
         } else {
-            $builder->add('unlink', 'checkbox', [
-                'label'              => 'media.form.unlink',
+            $builder->add('unlink', 'checkbox', array(
+                'label' => 'media.form.unlink',
                 'translation_domain' => 'CapcoAppBundle',
-                'mapped'             => false,
-                'data'               => false,
-                'required'           => false,
-            ]);
+                'mapped' => false,
+                'data' => false,
+                'required' => false,
+            ));
         }
         $builder
-            ->add('binaryContent', 'file', [
-                'label'              => 'media.form.binary_content',
+            ->add('binaryContent', 'file', array(
+                'label' => 'media.form.binary_content',
                 'translation_domain' => 'CapcoAppBundle',
-                'required'           => false,
-            ])
+                'required' => false,
+            ))
             ->remove('contentType')
         ;
     }

@@ -19,16 +19,16 @@ class StepController extends CRUDController
     public function retrieveProposalsAutocompleteItemsAction(Request $request, $projectId = null)
     {
         if (!$projectId) {
-            return new JsonResponse([
+            return new JsonResponse(array(
                 'status' => 'OK',
-                'more'   => false,
-                'items'  => [],
-            ]);
+                'more' => false,
+                'items' => [],
+            ));
         }
 
         return $this->retrieveAutocompleteItems($request, [
-            'enabled'                                          => 1,
-            'isTrashed'                                        => 2,
+            'enabled' => 1,
+            'isTrashed' => 2,
             'proposalForm__step__projectAbstractStep__project' => $projectId,
         ]);
     }

@@ -25,48 +25,48 @@ class IdeaType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('title', 'text', [
+            ->add('title', 'text', array(
                 'label' => 'idea.form.title',
-            ])
+            ))
         ;
 
         if ($this->toggleManager->isActive('themes')) {
-            $builder->add('theme', null, [
-                'label'         => 'idea.form.theme',
-                'required'      => true,
-                'empty_value'   => 'idea.form.empty_theme',
+            $builder->add('theme', null, array(
+                'label' => 'idea.form.theme',
+                'required' => true,
+                'empty_value' => 'idea.form.empty_theme',
                 'query_builder' => function (ThemeRepository $tr) {
                     return $tr->createQueryBuilder('t')
                         ->where('t.isEnabled = :enabled')
                         ->setParameter('enabled', true);
                 },
-            ]);
+            ));
         }
 
         $builder
-            ->add('body', 'ckeditor', [
-                'label'       => 'idea.form.body',
+            ->add('body', 'ckeditor', array(
+                'label' => 'idea.form.body',
                 'config_name' => 'user_editor',
-            ])
-            ->add('object', 'ckeditor', [
-                'label'       => 'idea.form.object',
+            ))
+            ->add('object', 'ckeditor', array(
+                'label' => 'idea.form.object',
                 'config_name' => 'user_editor',
-            ])
-            ->add('url', 'url', [
-                'label'            => 'idea.form.url',
-                'required'         => false,
+            ))
+            ->add('url', 'url', array(
+                'label' => 'idea.form.url',
+                'required' => false,
                 'default_protocol' => 'http',
-                'help'             => 'idea.form.url_help',
-                'attr'             => [
+                'help' => 'idea.form.url_help',
+                'attr' => [
                     'placeholder' => 'http://',
                 ],
-            ])
-            ->add('media', 'sonata_media_type', [
-                'label'    => 'idea.form.media',
+            ))
+            ->add('media', 'sonata_media_type', array(
+                'label' => 'idea.form.media',
                 'provider' => 'sonata.media.provider.image',
-                'context'  => 'default',
+                'context' => 'default',
                 'required' => false,
-            ])
+            ))
         ;
     }
 
@@ -75,12 +75,12 @@ class IdeaType extends AbstractType
      */
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
-        $resolver->setDefaults([
-            'data_class'         => 'Capco\AppBundle\Entity\Idea',
-            'csrf_protection'    => true,
-            'csrf_field_name'    => '_token',
+        $resolver->setDefaults(array(
+            'data_class' => 'Capco\AppBundle\Entity\Idea',
+            'csrf_protection' => true,
+            'csrf_field_name' => '_token',
             'translation_domain' => 'CapcoAppBundle',
-        ]);
+        ));
     }
 
     /**

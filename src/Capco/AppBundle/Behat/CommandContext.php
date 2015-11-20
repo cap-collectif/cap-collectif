@@ -68,7 +68,7 @@ class CommandContext implements KernelAwareContext
         $application = new Application($this->kernel);
 
         if (count($parameters) > 0) {
-            $arguments = array_merge(['command' => $command], $parameters);
+            $arguments = array_merge(array('command' => $command), $parameters);
             $input = new ArrayInput($arguments);
         } else {
             $input = new StringInput($command);

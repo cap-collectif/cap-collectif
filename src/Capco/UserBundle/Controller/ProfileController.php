@@ -39,17 +39,17 @@ class ProfileController extends BaseController
         $votes = $doctrine->getRepository('CapcoAppBundle:AbstractVote')->getByUser($user);
 
         return [
-            'user'                         => $user,
-            'projects'                     => $projects,
+            'user' => $user,
+            'projects' => $projects,
             'opinionTypesWithUserOpinions' => $opinionTypesWithUserOpinions,
-            'versions'                     => $versions,
-            'arguments'                    => $arguments,
-            'ideas'                        => $ideas,
-            'proposals'                    => $proposals,
-            'sources'                      => $sources,
-            'comments'                     => $comments,
-            'votes'                        => $votes,
-            'argumentsLabels'              => Argument::$argumentTypesLabels,
+            'versions' => $versions,
+            'arguments' => $arguments,
+            'ideas' => $ideas,
+            'proposals' => $proposals,
+            'sources' => $sources,
+            'comments' => $comments,
+            'votes' => $votes,
+            'argumentsLabels' => Argument::$argumentTypesLabels,
         ];
     }
 
@@ -70,16 +70,16 @@ class ProfileController extends BaseController
         $votes = $doctrine->getRepository('CapcoAppBundle:AbstractVote')->getByUser($user);
 
         return [
-            'user'                         => $user,
+            'user' => $user,
             'opinionTypesWithUserOpinions' => $opinionTypesWithUserOpinions,
-            'versions'                     => $versions,
-            'arguments'                    => $arguments,
-            'ideas'                        => $ideas,
-            'proposals'                    => $proposals,
-            'sources'                      => $sources,
-            'comments'                     => $comments,
-            'votes'                        => $votes,
-            'argumentsLabels'              => Argument::$argumentTypesLabels,
+            'versions' => $versions,
+            'arguments' => $arguments,
+            'ideas' => $ideas,
+            'proposals' => $proposals,
+            'sources' => $sources,
+            'comments' => $comments,
+            'votes' => $votes,
+            'argumentsLabels' => Argument::$argumentTypesLabels,
         ];
     }
 
@@ -96,7 +96,7 @@ class ProfileController extends BaseController
         $projects = $this->getDoctrine()->getRepository('CapcoAppBundle:Project')->getByUser($user);
 
         return [
-            'user'     => $user,
+            'user' => $user,
             'projects' => $projects,
         ];
     }
@@ -114,7 +114,7 @@ class ProfileController extends BaseController
         $opinionTypesWithUserOpinions = $this->getDoctrine()->getRepository('CapcoAppBundle:OpinionType')->getByUser($user);
 
         return [
-            'user'                         => $user,
+            'user' => $user,
             'opinionTypesWithUserOpinions' => $opinionTypesWithUserOpinions,
         ];
     }
@@ -128,7 +128,7 @@ class ProfileController extends BaseController
         $versions = $this->getDoctrine()->getRepository('CapcoAppBundle:OpinionVersion')->getByUser($user);
 
         return [
-            'user'     => $user,
+            'user' => $user,
             'versions' => $versions,
         ];
     }
@@ -146,7 +146,7 @@ class ProfileController extends BaseController
         $proposals = $this->getDoctrine()->getRepository('CapcoAppBundle:Proposal')->getByUser($user);
 
         return [
-            'user'      => $user,
+            'user' => $user,
             'proposals' => $proposals,
         ];
     }
@@ -159,11 +159,11 @@ class ProfileController extends BaseController
     {
         $arguments = $this->getDoctrine()->getRepository('CapcoAppBundle:Argument')->getByUser($user);
 
-        return [
-            'user'            => $user,
-            'arguments'       => $arguments,
+        return array(
+            'user' => $user,
+            'arguments' => $arguments,
             'argumentsLabels' => Argument::$argumentTypesLabels,
-        ];
+        );
     }
 
     /**
@@ -174,10 +174,10 @@ class ProfileController extends BaseController
     {
         $ideas = $this->getDoctrine()->getRepository('CapcoAppBundle:Idea')->getByUser($user);
 
-        return [
-            'user'  => $user,
+        return array(
+            'user' => $user,
             'ideas' => $ideas,
-        ];
+        );
     }
 
     /**
@@ -188,10 +188,10 @@ class ProfileController extends BaseController
     {
         $sources = $this->getDoctrine()->getRepository('CapcoAppBundle:Source')->getByUser($user);
 
-        return [
-            'user'    => $user,
+        return array(
+            'user' => $user,
             'sources' => $sources,
-        ];
+        );
     }
 
     /**
@@ -202,10 +202,10 @@ class ProfileController extends BaseController
     {
         $comments = $this->getDoctrine()->getRepository('CapcoAppBundle:Comment')->getByUser($user);
 
-        return [
-            'user'     => $user,
+        return array(
+            'user' => $user,
             'comments' => $comments,
-        ];
+        );
     }
 
     /**
@@ -216,10 +216,10 @@ class ProfileController extends BaseController
     {
         $votes = $this->getDoctrine()->getRepository('CapcoAppBundle:AbstractVote')->getByUser($user);
 
-        return [
-            'user'  => $user,
+        return array(
+            'user' => $user,
             'votes' => $votes,
-        ];
+        );
     }
 
     /**

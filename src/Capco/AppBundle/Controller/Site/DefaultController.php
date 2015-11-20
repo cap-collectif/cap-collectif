@@ -36,7 +36,7 @@ class DefaultController extends Controller
                     return $this->redirect($this->generateUrl('app_homepage'));
                 }
 
-                $subject = $this->get('translator')->trans('contact.email.subject', ['%sitename%' => $this->get('capco.site_parameter.resolver')->getValue('global.site.fullname'), '%sender%' => $data['name']], 'CapcoAppBundle');
+                $subject = $this->get('translator')->trans('contact.email.subject', array('%sitename%' => $this->get('capco.site_parameter.resolver')->getValue('global.site.fullname'), '%sender%' => $data['name']), 'CapcoAppBundle');
 
                 $message = \Swift_Message::newInstance()
                     ->setTo($adminEmail)
@@ -78,7 +78,7 @@ class DefaultController extends Controller
 
         return [
             'socialNetworks' => $socialNetworks,
-            'footerLinks'    => $footerLinks,
+            'footerLinks' => $footerLinks,
         ];
     }
 
@@ -91,7 +91,7 @@ class DefaultController extends Controller
         $headerLinks = $this->get('capco.menu_item.resolver')->getEnabledMenuItemsWithChildren(MenuItem::TYPE_HEADER);
 
         return [
-            'pathInfo'    => $pathInfo,
+            'pathInfo' => $pathInfo,
             'headerLinks' => $headerLinks,
         ];
     }
@@ -114,7 +114,7 @@ class DefaultController extends Controller
 
         return new JsonResponse([
             'token' => $token,
-            'user'  => $userData,
+            'user' => $userData,
         ]);
     }
 }

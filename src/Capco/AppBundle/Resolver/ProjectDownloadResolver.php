@@ -25,9 +25,9 @@ class ProjectDownloadResolver
     ];
 
     protected $contentTypes = [
-        'xls'  => 'application/vnd.ms-excel',
+        'xls' => 'application/vnd.ms-excel',
         'xlsx' => 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
-        'csv'  => 'text/csv',
+        'csv' => 'text/csv',
     ];
 
     protected $sheets = [
@@ -132,7 +132,7 @@ class ProjectDownloadResolver
         $this->translator = $translator;
         $this->urlResolver = $urlResolver;
         $this->data = [
-            'published'   => [],
+            'published' => [],
             'unpublished' => [],
         ];
     }
@@ -162,12 +162,12 @@ class ProjectDownloadResolver
 
         $content = $this->templating->render('CapcoAppBundle:Project:download.xls.twig',
             [
-                'title'   => $step->getProject()->getTitle().'_'.$step->getTitle(),
-                'format'  => $format,
-                'sheets'  => $this->sheets,
+                'title' => $step->getProject()->getTitle().'_'.$step->getTitle(),
+                'format' => $format,
+                'sheets' => $this->sheets,
                 'headers' => $headers,
-                'data'    => $data,
-                'locale'  => $this->translator->getLocale(),
+                'data' => $data,
+                'locale' => $this->translator->getLocale(),
             ]
         );
 
@@ -201,7 +201,7 @@ class ProjectDownloadResolver
     public function getConsultationStepData(ConsultationStep $consultationStep)
     {
         $this->data = [
-            'published'   => [],
+            'published' => [],
             'unpublished' => [],
         ];
 
@@ -231,7 +231,7 @@ class ProjectDownloadResolver
     public function getCollectStepData(CollectStep $collectStep)
     {
         $this->data = [
-            'published'   => [],
+            'published' => [],
             'unpublished' => [],
         ];
 
@@ -306,50 +306,50 @@ class ProjectDownloadResolver
     private function getProposalItem(Proposal $proposal)
     {
         return $item = [
-            'id'             => $proposal->getId(),
-            'title'          => $proposal->getTitle(),
-            'content'        => $this->getProposalContent($proposal),
-            'link'           => $this->urlResolver->getObjectUrl($proposal, true),
-            'created'        => $this->dateToString($proposal->getCreatedAt()),
-            'updated'        => $proposal->getUpdatedAt() != $proposal->getCreatedAt() ? $this->dateToString($proposal->getUpdatedAt()) : null,
-            'author'         => $proposal->getAuthor()->getUsername(),
-            'author_id'      => $proposal->getAuthor()->getId(),
-            'user_type'      => $proposal->getAuthor()->getUserType() ? $proposal->getAuthor()->getUserType()->getName() : '',
-            'trashed'        => $this->booleanToString($proposal->getIsTrashed()),
-            'trashed_date'   => $this->dateToString($proposal->getTrashedAt()),
+            'id' => $proposal->getId(),
+            'title' => $proposal->getTitle(),
+            'content' => $this->getProposalContent($proposal),
+            'link' => $this->urlResolver->getObjectUrl($proposal, true),
+            'created' => $this->dateToString($proposal->getCreatedAt()),
+            'updated' => $proposal->getUpdatedAt() != $proposal->getCreatedAt() ? $this->dateToString($proposal->getUpdatedAt()) : null,
+            'author' => $proposal->getAuthor()->getUsername(),
+            'author_id' => $proposal->getAuthor()->getId(),
+            'user_type' => $proposal->getAuthor()->getUserType() ? $proposal->getAuthor()->getUserType()->getName() : '',
+            'trashed' => $this->booleanToString($proposal->getIsTrashed()),
+            'trashed_date' => $this->dateToString($proposal->getTrashedAt()),
             'trashed_reason' => $proposal->getTrashedReason(),
-            'theme'          => $proposal->getTheme() ? $proposal->getTheme()->getTitle() : '',
-            'district'       => $proposal->getDistrict() ? $proposal->getDistrict()->getName() : '',
-            'status'         => $proposal->getStatus() ? $proposal->getStatus()->getName() : '',
+            'theme' => $proposal->getTheme() ? $proposal->getTheme()->getTitle() : '',
+            'district' => $proposal->getDistrict() ? $proposal->getDistrict()->getName() : '',
+            'status' => $proposal->getStatus() ? $proposal->getStatus()->getName() : '',
         ];
     }
 
     private function getOpinionItem(Opinion $opinion)
     {
         return $item = [
-            'title'           => $opinion->getTitle(),
-            'content_type'    => $this->translator->trans('project_download.values.content_type.opinion', [], 'CapcoAppBundle'),
-            'related_object'  => $this->translator->trans('project_download.values.non_applicable', [], 'CapcoAppBundle'),
-            'category'        => $this->getOpinionParents($opinion),
-            'content'         => $this->getOpinionContent($opinion),
-            'link'            => $this->translator->trans('project_download.values.non_applicable', [], 'CapcoAppBundle'),
-            'created'         => $this->dateToString($opinion->getCreatedAt()),
-            'updated'         => $opinion->getUpdatedAt() != $opinion->getCreatedAt() ? $this->dateToString($opinion->getUpdatedAt()) : null,
-            'author'          => $opinion->getAuthor()->getUsername(),
-            'author_id'       => $opinion->getAuthor()->getId(),
-            'user_type'       => $opinion->getAuthor()->getUserType() ? $opinion->getAuthor()->getUserType()->getName() : '',
-            'score'           => $this->calculateScore($opinion->getVotesCountOk(), $opinion->getVotesCountMitige(), $opinion->getVotesCountNok()),
-            'total_votes'     => $opinion->getVotesCountAll(),
-            'votes_ok'        => $opinion->getVotesCountOk(),
+            'title' => $opinion->getTitle(),
+            'content_type' => $this->translator->trans('project_download.values.content_type.opinion', array(), 'CapcoAppBundle'),
+            'related_object' => $this->translator->trans('project_download.values.non_applicable', array(), 'CapcoAppBundle'),
+            'category' => $this->getOpinionParents($opinion),
+            'content' => $this->getOpinionContent($opinion),
+            'link' => $this->translator->trans('project_download.values.non_applicable', array(), 'CapcoAppBundle'),
+            'created' => $this->dateToString($opinion->getCreatedAt()),
+            'updated' => $opinion->getUpdatedAt() != $opinion->getCreatedAt() ? $this->dateToString($opinion->getUpdatedAt()) : null,
+            'author' => $opinion->getAuthor()->getUsername(),
+            'author_id' => $opinion->getAuthor()->getId(),
+            'user_type' => $opinion->getAuthor()->getUserType() ? $opinion->getAuthor()->getUserType()->getName() : '',
+            'score' => $this->calculateScore($opinion->getVotesCountOk(), $opinion->getVotesCountMitige(), $opinion->getVotesCountNok()),
+            'total_votes' => $opinion->getVotesCountAll(),
+            'votes_ok' => $opinion->getVotesCountOk(),
             'votes_mitigated' => $opinion->getVotesCountMitige(),
-            'votes_nok'       => $opinion->getVotesCountNok(),
-            'sources'         => $opinion->getSourcesCount(),
+            'votes_nok' => $opinion->getVotesCountNok(),
+            'sources' => $opinion->getSourcesCount(),
             'total_arguments' => $opinion->getArgumentsCount(),
-            'arguments_ok'    => $opinion->getArgumentsCountByType('yes'),
-            'arguments_nok'   => $opinion->getArgumentsCountByType('no'),
-            'trashed'         => $this->booleanToString($opinion->getIsTrashed()),
-            'trashed_date'    => $this->dateToString($opinion->getTrashedAt()),
-            'trashed_reason'  => $opinion->getTrashedReason(),
+            'arguments_ok' => $opinion->getArgumentsCountByType('yes'),
+            'arguments_nok' => $opinion->getArgumentsCountByType('no'),
+            'trashed' => $this->booleanToString($opinion->getIsTrashed()),
+            'trashed_date' => $this->dateToString($opinion->getTrashedAt()),
+            'trashed_reason' => $opinion->getTrashedReason(),
         ];
     }
 
@@ -358,29 +358,29 @@ class ProjectDownloadResolver
         $opinion = $version->getParent();
 
         return $item = [
-            'title'           => $version->getTitle(),
-            'content_type'    => $this->translator->trans('project_download.values.content_type.version', [], 'CapcoAppBundle'),
-            'related_object'  => $this->translator->trans('project_download.values.related.opinion', ['%name%' => $opinion->getTitle()], 'CapcoAppBundle'),
-            'category'        => $this->getOpinionParents($opinion),
-            'content'         => $this->formatText($version->getBody()),
-            'link'            => $this->translator->trans('project_download.values.non_applicable', [], 'CapcoAppBundle'),
-            'created'         => $this->dateToString($version->getCreatedAt()),
-            'updated'         => $version->getUpdatedAt() != $version->getCreatedAt() ? $this->dateToString($version->getUpdatedAt()) : null,
-            'author'          => $version->getAuthor()->getUsername(),
-            'author_id'       => $version->getAuthor()->getId(),
-            'user_type'       => $version->getAuthor()->getUserType() ? $version->getAuthor()->getUserType()->getName() : '',
-            'score'           => $this->calculateScore($version->getVotesCountOk(), $version->getVotesCountMitige(), $opinion->getVotesCountNok()),
-            'total_votes'     => $version->getVotesCountAll(),
-            'votes_ok'        => $version->getVotesCountOk(),
+            'title' => $version->getTitle(),
+            'content_type' => $this->translator->trans('project_download.values.content_type.version', array(), 'CapcoAppBundle'),
+            'related_object' => $this->translator->trans('project_download.values.related.opinion', array('%name%' => $opinion->getTitle()), 'CapcoAppBundle'),
+            'category' => $this->getOpinionParents($opinion),
+            'content' => $this->formatText($version->getBody()),
+            'link' => $this->translator->trans('project_download.values.non_applicable', array(), 'CapcoAppBundle'),
+            'created' => $this->dateToString($version->getCreatedAt()),
+            'updated' => $version->getUpdatedAt() != $version->getCreatedAt() ? $this->dateToString($version->getUpdatedAt()) : null,
+            'author' => $version->getAuthor()->getUsername(),
+            'author_id' => $version->getAuthor()->getId(),
+            'user_type' => $version->getAuthor()->getUserType() ? $version->getAuthor()->getUserType()->getName() : '',
+            'score' => $this->calculateScore($version->getVotesCountOk(), $version->getVotesCountMitige(), $opinion->getVotesCountNok()),
+            'total_votes' => $version->getVotesCountAll(),
+            'votes_ok' => $version->getVotesCountOk(),
             'votes_mitigated' => $version->getVotesCountMitige(),
-            'votes_nok'       => $version->getVotesCountNok(),
-            'sources'         => $version->getSourcesCount(),
+            'votes_nok' => $version->getVotesCountNok(),
+            'sources' => $version->getSourcesCount(),
             'total_arguments' => $version->getArgumentsCount(),
-            'arguments_ok'    => $version->getArgumentsCountByType('yes'),
-            'arguments_nok'   => $version->getArgumentsCountByType('no'),
-            'trashed'         => $this->booleanToString($version->getIsTrashed()),
-            'trashed_date'    => $this->dateToString($version->getTrashedAt()),
-            'trashed_reason'  => $version->getTrashedReason(),
+            'arguments_ok' => $version->getArgumentsCountByType('yes'),
+            'arguments_nok' => $version->getArgumentsCountByType('no'),
+            'trashed' => $this->booleanToString($version->getIsTrashed()),
+            'trashed_date' => $this->dateToString($version->getTrashedAt()),
+            'trashed_reason' => $version->getTrashedReason(),
         ];
     }
 
@@ -388,41 +388,41 @@ class ProjectDownloadResolver
     {
         $parent = $argument->getOpinion() ? $argument->getOpinion() : $argument->getOpinionVersion();
         $contentType = $parent->getCommentSystem() === OpinionType::COMMENT_SYSTEM_OK
-            ? $this->translator->trans('project_download.values.content_type.simple_argument', [], 'CapcoAppBundle')
-            : $this->translator->trans('project_download.values.content_type.argument', [], 'CapcoAppBundle')
+            ? $this->translator->trans('project_download.values.content_type.simple_argument', array(), 'CapcoAppBundle')
+            : $this->translator->trans('project_download.values.content_type.argument', array(), 'CapcoAppBundle')
         ;
         $category = $parent->getCommentSystem() === OpinionType::COMMENT_SYSTEM_OK
-            ? $this->translator->trans('project_download.values.non_applicable', [], 'CapcoAppBundle')
-            : $this->translator->trans(Argument::$argumentTypesLabels[$argument->getType()], [], 'CapcoAppBundle')
+            ? $this->translator->trans('project_download.values.non_applicable', array(), 'CapcoAppBundle')
+            : $this->translator->trans(Argument::$argumentTypesLabels[$argument->getType()], array(), 'CapcoAppBundle')
         ;
         $relatedObject = $argument->getOpinionVersion()
-            ? $this->translator->trans('project_download.values.related.version', ['%name%' => $parent->getTitle()], 'CapcoAppBundle')
-            : $this->translator->trans('project_download.values.related.opinion', ['%name%' => $parent->getTitle()], 'CapcoAppBundle')
+            ? $this->translator->trans('project_download.values.related.version', array('%name%' => $parent->getTitle()), 'CapcoAppBundle')
+            : $this->translator->trans('project_download.values.related.opinion', array('%name%' => $parent->getTitle()), 'CapcoAppBundle')
         ;
         $item = [
-            'title'           => $this->translator->trans('project_download.values.non_applicable', [], 'CapcoAppBundle'),
-            'content_type'    => $contentType,
-            'category'        => $category,
-            'related_object'  => $relatedObject,
-            'content'         => $this->formatText($argument->getBody()),
-            'link'            => $this->translator->trans('project_download.values.non_applicable', [], 'CapcoAppBundle'),
-            'created'         => $this->dateToString($argument->getCreatedAt()),
-            'updated'         => $argument->getUpdatedAt() != $argument->getCreatedAt() ? $this->dateToString($argument->getUpdatedAt()) : null,
-            'author'          => $argument->getAuthor()->getUsername(),
-            'author_id'       => $argument->getAuthor()->getId(),
-            'user_type'       => $argument->getAuthor()->getUserType() ? $argument->getAuthor()->getUserType()->getName() : '',
-            'score'           => $this->calculateScore($argument->getVotesCount(), 0, 0),
-            'total_votes'     => $argument->getVotesCount(),
-            'votes_ok'        => $argument->getVotesCount(),
-            'votes_mitigated' => $this->translator->trans('project_download.values.non_applicable', [], 'CapcoAppBundle'),
-            'votes_nok'       => $this->translator->trans('project_download.values.non_applicable', [], 'CapcoAppBundle'),
-            'sources'         => $this->translator->trans('project_download.values.non_applicable', [], 'CapcoAppBundle'),
-            'total_arguments' => $this->translator->trans('project_download.values.non_applicable', [], 'CapcoAppBundle'),
-            'arguments_ok'    => $this->translator->trans('project_download.values.non_applicable', [], 'CapcoAppBundle'),
-            'arguments_nok'   => $this->translator->trans('project_download.values.non_applicable', [], 'CapcoAppBundle'),
-            'trashed'         => $this->booleanToString($argument->getIsTrashed()),
-            'trashed_date'    => $this->dateToString($argument->getTrashedAt()),
-            'trashed_reason'  => $argument->getTrashedReason(),
+            'title' => $this->translator->trans('project_download.values.non_applicable', array(), 'CapcoAppBundle'),
+            'content_type' => $contentType,
+            'category' => $category,
+            'related_object' => $relatedObject,
+            'content' => $this->formatText($argument->getBody()),
+            'link' => $this->translator->trans('project_download.values.non_applicable', array(), 'CapcoAppBundle'),
+            'created' => $this->dateToString($argument->getCreatedAt()),
+            'updated' => $argument->getUpdatedAt() != $argument->getCreatedAt() ? $this->dateToString($argument->getUpdatedAt()) : null,
+            'author' => $argument->getAuthor()->getUsername(),
+            'author_id' => $argument->getAuthor()->getId(),
+            'user_type' => $argument->getAuthor()->getUserType() ? $argument->getAuthor()->getUserType()->getName() : '',
+            'score' => $this->calculateScore($argument->getVotesCount(), 0, 0),
+            'total_votes' => $argument->getVotesCount(),
+            'votes_ok' => $argument->getVotesCount(),
+            'votes_mitigated' => $this->translator->trans('project_download.values.non_applicable', array(), 'CapcoAppBundle'),
+            'votes_nok' => $this->translator->trans('project_download.values.non_applicable', array(), 'CapcoAppBundle'),
+            'sources' => $this->translator->trans('project_download.values.non_applicable', array(), 'CapcoAppBundle'),
+            'total_arguments' => $this->translator->trans('project_download.values.non_applicable', array(), 'CapcoAppBundle'),
+            'arguments_ok' => $this->translator->trans('project_download.values.non_applicable', array(), 'CapcoAppBundle'),
+            'arguments_nok' => $this->translator->trans('project_download.values.non_applicable', array(), 'CapcoAppBundle'),
+            'trashed' => $this->booleanToString($argument->getIsTrashed()),
+            'trashed_date' => $this->dateToString($argument->getTrashedAt()),
+            'trashed_reason' => $argument->getTrashedReason(),
         ];
 
         return $item;
@@ -432,63 +432,63 @@ class ProjectDownloadResolver
     {
         $parent = $source->getOpinion() ? $source->getOpinion() : $source->getOpinionVersion();
         $relatedObject = $source->getOpinionVersion()
-            ? $this->translator->trans('project_download.values.related.version', ['%name%' => $parent->getTitle()], 'CapcoAppBundle')
-            : $this->translator->trans('project_download.values.related.opinion', ['%name%' => $parent->getTitle()], 'CapcoAppBundle')
+            ? $this->translator->trans('project_download.values.related.version', array('%name%' => $parent->getTitle()), 'CapcoAppBundle')
+            : $this->translator->trans('project_download.values.related.opinion', array('%name%' => $parent->getTitle()), 'CapcoAppBundle')
         ;
 
         return $item = [
-            'title'           => $source->getTitle(),
-            'content_type'    => $this->translator->trans('project_download.values.content_type.source', [], 'CapcoAppBundle'),
-            'category'        => $source->getCategory(),
-            'related_object'  => $relatedObject,
-            'content'         => $this->formatText($source->getBody()),
-            'link'            => $this->getSourceLink($source),
-            'created'         => $this->dateToString($source->getCreatedAt()),
-            'updated'         => $source->getUpdatedAt() != $source->getCreatedAt() ? $this->dateToString($source->getUpdatedAt()) : null,
-            'author'          => $source->getAuthor()->getUsername(),
-            'author_id'       => $source->getAuthor()->getId(),
-            'user_type'       => $source->getAuthor()->getUserType() ? $source->getAuthor()->getUserType()->getName() : '',
-            'score'           => $this->calculateScore($source->getVotesCount(), 0, 0),
-            'total_votes'     => $source->getVotesCount(),
-            'votes_ok'        => $source->getVotesCount(),
-            'votes_mitigated' => $this->translator->trans('project_download.values.non_applicable', [], 'CapcoAppBundle'),
-            'votes_nok'       => $this->translator->trans('project_download.values.non_applicable', [], 'CapcoAppBundle'),
-            'sources'         => $this->translator->trans('project_download.values.non_applicable', [], 'CapcoAppBundle'),
-            'total_arguments' => $this->translator->trans('project_download.values.non_applicable', [], 'CapcoAppBundle'),
-            'arguments_ok'    => $this->translator->trans('project_download.values.non_applicable', [], 'CapcoAppBundle'),
-            'arguments_nok'   => $this->translator->trans('project_download.values.non_applicable', [], 'CapcoAppBundle'),
-            'trashed'         => $this->booleanToString($source->getIsTrashed()),
-            'trashed_date'    => $this->dateToString($source->getTrashedAt()),
-            'trashed_reason'  => $source->getTrashedReason(),
+            'title' => $source->getTitle(),
+            'content_type' => $this->translator->trans('project_download.values.content_type.source', array(), 'CapcoAppBundle'),
+            'category' => $source->getCategory(),
+            'related_object' => $relatedObject,
+            'content' => $this->formatText($source->getBody()),
+            'link' => $this->getSourceLink($source),
+            'created' => $this->dateToString($source->getCreatedAt()),
+            'updated' => $source->getUpdatedAt() != $source->getCreatedAt() ? $this->dateToString($source->getUpdatedAt()) : null,
+            'author' => $source->getAuthor()->getUsername(),
+            'author_id' => $source->getAuthor()->getId(),
+            'user_type' => $source->getAuthor()->getUserType() ? $source->getAuthor()->getUserType()->getName() : '',
+            'score' => $this->calculateScore($source->getVotesCount(), 0, 0),
+            'total_votes' => $source->getVotesCount(),
+            'votes_ok' => $source->getVotesCount(),
+            'votes_mitigated' => $this->translator->trans('project_download.values.non_applicable', array(), 'CapcoAppBundle'),
+            'votes_nok' => $this->translator->trans('project_download.values.non_applicable', array(), 'CapcoAppBundle'),
+            'sources' => $this->translator->trans('project_download.values.non_applicable', array(), 'CapcoAppBundle'),
+            'total_arguments' => $this->translator->trans('project_download.values.non_applicable', array(), 'CapcoAppBundle'),
+            'arguments_ok' => $this->translator->trans('project_download.values.non_applicable', array(), 'CapcoAppBundle'),
+            'arguments_nok' => $this->translator->trans('project_download.values.non_applicable', array(), 'CapcoAppBundle'),
+            'trashed' => $this->booleanToString($source->getIsTrashed()),
+            'trashed_date' => $this->dateToString($source->getTrashedAt()),
+            'trashed_reason' => $source->getTrashedReason(),
         ];
     }
 
     private function getVoteItem($vote)
     {
         return $item = [
-            'title'           => $this->translator->trans('project_download.values.non_applicable', [], 'CapcoAppBundle'),
-            'content_type'    => $this->translator->trans('project_download.values.content_type.vote', [], 'CapcoAppBundle'),
-            'related_object'  => $this->getVoteObject($vote),
-            'category'        => $this->getVoteValue($vote),
-            'content'         => $this->translator->trans('project_download.values.non_applicable', [], 'CapcoAppBundle'),
-            'link'            => $this->translator->trans('project_download.values.non_applicable', [], 'CapcoAppBundle'),
-            'created'         => $this->dateToString($vote->getUpdatedAt()),
-            'updated'         => $this->translator->trans('project_download.values.non_applicable', [], 'CapcoAppBundle'),
-            'author'          => $vote->getUser()->getUsername(),
-            'author_id'       => $vote->getUser()->getId(),
-            'user_type'       => $vote->getUser()->getUserType() ? $vote->getUser()->getUserType()->getName() : '',
-            'score'           => $this->translator->trans('project_download.values.non_applicable', [], 'CapcoAppBundle'),
-            'total_votes'     => $this->translator->trans('project_download.values.non_applicable', [], 'CapcoAppBundle'),
-            'votes_ok'        => $this->translator->trans('project_download.values.non_applicable', [], 'CapcoAppBundle'),
-            'votes_mitigated' => $this->translator->trans('project_download.values.non_applicable', [], 'CapcoAppBundle'),
-            'votes_nok'       => $this->translator->trans('project_download.values.non_applicable', [], 'CapcoAppBundle'),
-            'sources'         => $this->translator->trans('project_download.values.non_applicable', [], 'CapcoAppBundle'),
-            'total_arguments' => $this->translator->trans('project_download.values.non_applicable', [], 'CapcoAppBundle'),
-            'arguments_ok'    => $this->translator->trans('project_download.values.non_applicable', [], 'CapcoAppBundle'),
-            'arguments_nok'   => $this->translator->trans('project_download.values.non_applicable', [], 'CapcoAppBundle'),
-            'trashed'         => $this->translator->trans('project_download.values.non_applicable', [], 'CapcoAppBundle'),
-            'trashed_date'    => $this->translator->trans('project_download.values.non_applicable', [], 'CapcoAppBundle'),
-            'trashed_reason'  => $this->translator->trans('project_download.values.non_applicable', [], 'CapcoAppBundle'),
+            'title' => $this->translator->trans('project_download.values.non_applicable', array(), 'CapcoAppBundle'),
+            'content_type' => $this->translator->trans('project_download.values.content_type.vote', array(), 'CapcoAppBundle'),
+            'related_object' => $this->getVoteObject($vote),
+            'category' => $this->getVoteValue($vote),
+            'content' => $this->translator->trans('project_download.values.non_applicable', array(), 'CapcoAppBundle'),
+            'link' => $this->translator->trans('project_download.values.non_applicable', array(), 'CapcoAppBundle'),
+            'created' => $this->dateToString($vote->getUpdatedAt()),
+            'updated' => $this->translator->trans('project_download.values.non_applicable', array(), 'CapcoAppBundle'),
+            'author' => $vote->getUser()->getUsername(),
+            'author_id' => $vote->getUser()->getId(),
+            'user_type' => $vote->getUser()->getUserType() ? $vote->getUser()->getUserType()->getName() : '',
+            'score' => $this->translator->trans('project_download.values.non_applicable', array(), 'CapcoAppBundle'),
+            'total_votes' => $this->translator->trans('project_download.values.non_applicable', array(), 'CapcoAppBundle'),
+            'votes_ok' => $this->translator->trans('project_download.values.non_applicable', array(), 'CapcoAppBundle'),
+            'votes_mitigated' => $this->translator->trans('project_download.values.non_applicable', array(), 'CapcoAppBundle'),
+            'votes_nok' => $this->translator->trans('project_download.values.non_applicable', array(), 'CapcoAppBundle'),
+            'sources' => $this->translator->trans('project_download.values.non_applicable', array(), 'CapcoAppBundle'),
+            'total_arguments' => $this->translator->trans('project_download.values.non_applicable', array(), 'CapcoAppBundle'),
+            'arguments_ok' => $this->translator->trans('project_download.values.non_applicable', array(), 'CapcoAppBundle'),
+            'arguments_nok' => $this->translator->trans('project_download.values.non_applicable', array(), 'CapcoAppBundle'),
+            'trashed' => $this->translator->trans('project_download.values.non_applicable', array(), 'CapcoAppBundle'),
+            'trashed_date' => $this->translator->trans('project_download.values.non_applicable', array(), 'CapcoAppBundle'),
+            'trashed_reason' => $this->translator->trans('project_download.values.non_applicable', array(), 'CapcoAppBundle'),
         ];
     }
 
@@ -496,33 +496,33 @@ class ProjectDownloadResolver
     {
         if (method_exists($vote, 'getValue')) {
             if ($vote->getValue() == -1) {
-                return $this->translator->trans('project_download.values.votes.nok', [], 'CapcoAppBundle');
+                return $this->translator->trans('project_download.values.votes.nok', array(), 'CapcoAppBundle');
             }
             if ($vote->getValue() == 0) {
-                return $this->translator->trans('project_download.values.votes.mitige', [], 'CapcoAppBundle');
+                return $this->translator->trans('project_download.values.votes.mitige', array(), 'CapcoAppBundle');
             }
             if ($vote->getValue() == 1) {
-                return $this->translator->trans('project_download.values.votes.ok', [], 'CapcoAppBundle');
+                return $this->translator->trans('project_download.values.votes.ok', array(), 'CapcoAppBundle');
             }
         }
 
-        return $this->translator->trans('project_download.values.votes.ok', [], 'CapcoAppBundle');
+        return $this->translator->trans('project_download.values.votes.ok', array(), 'CapcoAppBundle');
     }
 
     private function getVoteObject($vote)
     {
         $object = $vote->getRelatedEntity();
         if ($object instanceof Opinion) {
-            return $this->translator->trans('project_download.values.related.opinion', ['%name%' => $object->getTitle()], 'CapcoAppBundle');
+            return $this->translator->trans('project_download.values.related.opinion', array('%name%' => $object->getTitle()), 'CapcoAppBundle');
         }
         if ($object instanceof OpinionVersion) {
-            return $this->translator->trans('project_download.values.related.version', ['%name%' => $object->getTitle()], 'CapcoAppBundle');
+            return $this->translator->trans('project_download.values.related.version', array('%name%' => $object->getTitle()), 'CapcoAppBundle');
         }
         if ($object instanceof Argument) {
-            return $this->translator->trans('project_download.values.related.argument', ['%id%' => $object->getId()], 'CapcoAppBundle');
+            return $this->translator->trans('project_download.values.related.argument', array('%id%' => $object->getId()), 'CapcoAppBundle');
         }
         if ($object instanceof Source) {
-            return $this->translator->trans('project_download.values.related.source', ['%name%' => $object->getTitle()], 'CapcoAppBundle');
+            return $this->translator->trans('project_download.values.related.source', array('%name%' => $object->getTitle()), 'CapcoAppBundle');
         }
     }
 
@@ -575,7 +575,7 @@ class ProjectDownloadResolver
             return $source->getLink();
         }
         if (null != $source->getMedia()) {
-            return $this->translator->trans('project_download.values.link.media', [], 'CapcoAppBundle');
+            return $this->translator->trans('project_download.values.link.media', array(), 'CapcoAppBundle');
         }
 
         return '';
@@ -584,10 +584,10 @@ class ProjectDownloadResolver
     private function booleanToString($boolean)
     {
         if ($boolean) {
-            return $this->translator->trans('project_download.values.yes', [], 'CapcoAppBundle');
+            return $this->translator->trans('project_download.values.yes', array(), 'CapcoAppBundle');
         }
 
-        return $this->translator->trans('project_download.values.no', [], 'CapcoAppBundle');
+        return $this->translator->trans('project_download.values.no', array(), 'CapcoAppBundle');
     }
 
     private function dateToString($date)

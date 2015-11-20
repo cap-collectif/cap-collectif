@@ -32,7 +32,7 @@ class EntityToIdTransformer implements DataTransformerInterface
             throw new TransformationFailedException();
         }
 
-        $entity = $this->em->getRepository($this->entityRepository)->findOneBy(['id' => $id]);
+        $entity = $this->em->getRepository($this->entityRepository)->findOneBy(array('id' => $id));
 
         if (null === $entity) {
             throw new TransformationFailedException(sprintf(
