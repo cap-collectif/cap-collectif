@@ -29,8 +29,9 @@ else
     php app/console doctrine:migrations:migrate --env=prod --no-interaction
 fi
 
-php app/console assets:install --symlink --env=prod --no-interaction
-php app/console fos:elastica:populate --env=prod &
+php app/console cache:warmup --env=prod --no-interaction &
+php app/console assets:install --symlink --env=prod --no-interaction &
+php app/console fos:elastica:populate --env=prod --no-interaction &
 
 EOF
 
