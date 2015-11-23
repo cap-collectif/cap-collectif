@@ -25,7 +25,7 @@ dependencies:
         - wget https://download.elastic.co/elasticsearch/elasticsearch/elasticsearch-1.7.0.tar.gz
         - tar -xvf elasticsearch-1.7.0.tar.gz
         - elasticsearch-1.7.0/bin/elasticsearch: {background: true}
-        - npm install -g brunch
+        - npm install -g brunch@1
         - pip install fabric
         - npm install --production
         - bower install --config.interactive=false
