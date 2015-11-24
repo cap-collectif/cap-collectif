@@ -1,4 +1,4 @@
-Capco\AppBundle\Entity\ConsultationStepType:
+Capco\AppBundle\Entity\Steps\ConsultationStepType:
     defaultType:
         title: Résolution de problèmes
     pjlType:

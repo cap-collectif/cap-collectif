@@ -27,7 +27,7 @@ RUN git clone https://github.com/sass/libsass.git && \
 
 # Update npm - Install gulp / bower
 RUN npm install -g npm && \
-    npm install -g bower brunch@1
+    npm install -g bower brunch
 
 # Install fake user 1000
 RUN addgroup --gid=1000 capco && \
@@ -38,10 +38,10 @@ RUN wget https://getcomposer.org/composer.phar -O- -q >> /usr/local/bin/composer
     chmod +x /usr/local/bin/composer
 
 COPY capco.ini /etc/php5/cli/conf.d/capco.ini
-COPY build.sh /usr/local/bin/build
+COPY build.sh /usr/local/bin/capcobuild
 
 USER capco
 
 WORKDIR /capco
 
-CMD ["/usr/local/bin/build"]
+CMD ["/usr/local/bin/capcobuild"]

@@ -3,7 +3,7 @@
 namespace Capco\AppBundle\Controller\Site;
 
 use Capco\AppBundle\Entity\Project;
-use Capco\AppBundle\Entity\ConsultationStep;
+use Capco\AppBundle\Entity\Steps\ConsultationStep;
 use Capco\AppBundle\Entity\Opinion;
 use Capco\AppBundle\Entity\OpinionType;
 use Capco\AppBundle\Entity\OpinionAppendix;
@@ -36,7 +36,7 @@ class OpinionController extends Controller
         $currentStep = $opinion->getStep();
         $sources = $this->getDoctrine()->getRepository('CapcoAppBundle:Source')->getByOpinionJoinUserReports($opinion, $this->getUser());
 
-        $steps = $this->getDoctrine()->getRepository('CapcoAppBundle:AbstractStep')->getByProject($projectSlug);
+        $steps = $this->getDoctrine()->getRepository('CapcoAppBundle:Steps\AbstractStep')->getByProject($projectSlug);
 
         $nav = $this->get('capco.opinion_types.resolver')->getNavForStep($currentStep);
 
@@ -56,7 +56,7 @@ class OpinionController extends Controller
      * @Route("/projects/{projectSlug}/consultation/{stepSlug}/opinions/{opinionTypeSlug}/add", name="app_project_new_opinion")
      * @Route("/consultations/{projectSlug}/consultation/{stepSlug}/opinions/{opinionTypeSlug}/add", name="app_consultation_new_opinion")
      * @ParamConverter("project", class="CapcoAppBundle:Project", options={"mapping": {"projectSlug": "slug"}})
-     * @ParamConverter("currentStep", class="CapcoAppBundle:ConsultationStep", options={"mapping": {"stepSlug": "slug"}})
+     * @ParamConverter("currentStep", class="CapcoAppBundle:Steps\ConsultationStep", options={"mapping": {"stepSlug": "slug"}})
      * @ParamConverter("opinionType", class="CapcoAppBundle:OpinionType", options={"mapping": {"opinionTypeSlug": "slug"}})
      *
      * @param $opinionType
@@ -283,7 +283,7 @@ class OpinionController extends Controller
         $currentUrl = $this->generateUrl('app_project_show_opinion', ['projectSlug' => $projectSlug, 'stepSlug' => $stepSlug, 'opinionTypeSlug' => $opinionTypeSlug, 'opinionSlug' => $opinionSlug]);
         $currentStep = $opinion->getStep();
 
-        $steps = $this->getDoctrine()->getRepository('CapcoAppBundle:AbstractStep')->getByProject($projectSlug);
+        $steps = $this->getDoctrine()->getRepository('CapcoAppBundle:Steps\AbstractStep')->getByProject($projectSlug);
 
         $nav = $this->get('capco.opinion_types.resolver')->getNavForStep($currentStep);
 

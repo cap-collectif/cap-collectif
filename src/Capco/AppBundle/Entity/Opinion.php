@@ -109,7 +109,7 @@ class Opinion implements SelfLinkableInterface, VotableInterface
     private $OpinionType;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\ConsultationStep", inversedBy="opinions", cascade={"persist"})
+     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Steps\ConsultationStep", inversedBy="opinions", cascade={"persist"})
      * @ORM\JoinColumn(name="step_id", referencedColumnName="id")
      * @Assert\NotNull()
      */
