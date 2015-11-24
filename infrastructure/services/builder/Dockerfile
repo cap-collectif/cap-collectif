@@ -27,7 +27,7 @@ RUN git clone https://github.com/sass/libsass.git && \
 
 # Update npm - Install gulp / bower
 RUN npm install -g npm && \
-    npm install -g bower brunch
+    npm install -g bower brunch@1
 
 # Install fake user 1000
 RUN addgroup --gid=1000 capco && \
