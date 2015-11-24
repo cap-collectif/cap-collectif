@@ -25,6 +25,7 @@ builder:
         - ~/.composer:/home/capco/.composer
         - ~/.npm:/home/capco/.npm
         - ~/.cache/bower:/home/capco/.cache/bower
+    command: echo "Use 'docker-compose run builder build' to build deps"
 
 # behat:
 #     build: infrastructure/services/behat
