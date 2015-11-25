@@ -17,7 +17,7 @@
 /vendor/
 /bin/
 /composer.phar
-
+.eslintcache
 
 # Configuration files
 app/config/parameters.ini
